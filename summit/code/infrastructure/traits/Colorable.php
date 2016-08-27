@@ -20,7 +20,9 @@ trait Colorable
     public function FormattedColor()
     {
         $color = $this->getField('Color');
-         if (strpos($color,'#') === false) {
+        if(empty($color))
+            $color = 'f0f0ee';
+        if (strpos($color,'#') === false) {
             $color = '#'.$color;
         }
         return $color;

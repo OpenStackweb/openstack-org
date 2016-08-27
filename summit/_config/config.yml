@@ -20,6 +20,7 @@ PresentationSpeaker:
   extensions:
     - JSONable
     - SummitEntity
+    - SummitSpeakerOpenGraphObjectExtension
 PresentationTopic:
   extensions:
     - JSONable
@@ -29,6 +30,7 @@ SummitPresentationComment:
     - JSONable
 Summit:
   extensions:
+    - SummitAdminUI
     - JSONable
     - SummitEntity
   random_voting_list_count: 100
@@ -44,6 +46,7 @@ Presentation:
     - Sluggable
     - JSONable
     - SummitEntity
+    - SummitEventOpenGraphObjectExtension
   status_options:
     - Received
     - In community voting
@@ -60,6 +63,7 @@ SummitAttendee:
 SummitEvent:
   extensions:
     - SummitEntity
+    - SummitEventOpenGraphObjectExtension
 SummitEventFeedback:
   extensions:
     - SummitEntity
@@ -72,6 +76,7 @@ PresentationMaterial:
 SummitAbstractLocation:
   extensions:
     - SummitEntity
+    - SummitLocationOpenGraphObjectExtension
 SummitType:
   extensions:
     - SummitEntity
@@ -87,3 +92,27 @@ SummitLocationMap:
 SummitLocationImage:
   extensions:
     - SummitEntity
+SummitVenueFloor:
+  extensions:
+    - SummitEntity
+Injector:
+    RSVPTextBoxUIBuilder:
+      class: RSVPTextBoxQuestionTemplateUIBuilder
+    RSVPMemberEmailUIBuilder:
+      class: RSVPTextBoxQuestionTemplateUIBuilder
+    RSVPMemberFirstNameUIBuilder:
+      class: RSVPTextBoxQuestionTemplateUIBuilder
+    RSVPMemberLastNameUIBuilder:
+      class: RSVPTextBoxQuestionTemplateUIBuilder
+    RSVPTextAreaUIBuilder:
+        class: RSVPTextAreaQuestionTemplateUIBuilder
+    RSVPCheckBoxUIBuilder:
+        class: RSVPCheckBoxQuestionTemplateUIBuilder
+    RSVPCheckBoxListUIBuilder:
+        class: RSVPCheckBoxListQuestionTemplateUIBuilder
+    RSVPRadioButtonListUIBuilder:
+        class: RSVPRadioButtonListQuestionTemplateUIBuilder
+    RSVPComboBoxUIBuilder:
+        class: RSVPDropDownQuestionTemplateUIBuilder
+    RSVPLiteralUIBuilder:
+      class: RSVPLiteralQuestionTemplateUIBuilder

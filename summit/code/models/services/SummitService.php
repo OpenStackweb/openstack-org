@@ -30,17 +30,22 @@ final class SummitService implements ISummitService
      * @var ISummitAssistanceRepository
      */
     private $assistance_repository;
-
     /**
      * @var ISpeakerRepository
      */
     private $speaker_repository;
-
     /**
      * @var IMemberRepository
      */
     private $member_repository;
-
+    /**
+     * @var IReportRepository
+     */
+    private $report_repository;
+    /**
+     * @var ISummitRegistrationPromoCodeRepository
+     */
+    private $promocode_repository;
     /**
      * @var ISpeakerRegistrationRequestManager
      */
@@ -58,6 +63,8 @@ final class SummitService implements ISummitService
         ISummitAssistanceRepository $assistance_repository,
         ISpeakerRepository $speaker_repository,
         IMemberRepository $member_repository,
+        IReportRepository $report_repository,
+        ISummitRegistrationPromoCodeRepository $promocode_repository,
         ISpeakerRegistrationRequestManager $speaker_registration_request_manager,
         ITransactionManager $tx_service
     )
@@ -68,6 +75,8 @@ final class SummitService implements ISummitService
         $this->assistance_repository                = $assistance_repository;
         $this->speaker_repository                   = $speaker_repository;
         $this->member_repository                    = $member_repository;
+        $this->report_repository                    = $report_repository;
+        $this->promocode_repository                 = $promocode_repository;
         $this->speaker_registration_request_manager = $speaker_registration_request_manager;
         $this->tx_service                           = $tx_service;
     }
@@ -214,15 +223,15 @@ final class SummitService implements ISummitService
             }
 
             $event->SummitID         = $summit->getIdentifier();
-            $event->Title            = $event_data['title'];
-            $event->RSVPLink         = $event_data['rsvp_link'];
+            $event->Title            = html_entity_decode($event_data['title']);
+            $event->RSVPLink         = html_entity_decode($event_data['rsvp_link']);
             $event->HeadCount        = intval($event_data['headcount']);
-            $event->ShortDescription = $event_data['short_description'];
+            $event->ShortDescription = html_entity_decode($event_data['short_description']);
             $event->setStartDate($event_data['start_date']);
             $event->setEndDate($event_data['end_date']);
             $event->AllowFeedBack    = $event_data['allow_feedback'];
             $event->LocationID       = intval($event_data['location_id']);
-            $event->TypeID           = intval($event_data['event_type']);
+            $event->TypeID           = $event_type_id;
 
             $summit_types = ($event_data['summit_type']) ? $event_data['summit_type'] : array();
             $event->AllowedSummitTypes()->setByIDList($summit_types);
@@ -270,28 +279,32 @@ final class SummitService implements ISummitService
                     if(is_null($member)) throw new NotFoundEntityException('Member', sprintf(' member id %s', $member_id));
                     $speaker = new PresentationSpeaker();
                     $speaker->FirstName = $member->FirstName;
-                    $speaker->LastName = $member->Surname;
-                    $speaker->MemberID = $member->ID;
+                    $speaker->LastName  = $member->Surname;
+                    $speaker->MemberID  = $member->ID;
                     $speaker->write();
                 }
 
                 $speaker_ids[] = $speaker->ID;
+                $event->ModeratorID = 0;
             }
 
             $event->Speakers()->setByIDList($speaker_ids);
 
-            if($event->Type()->Type == 'Keynotes')
+            if($event->Type()->Type == 'Keynotes' || $event->Type()->Type == 'Panel')
             {
                 if(!isset($event_data['moderator']))
                     throw new EntityValidationException('moderator is required!');
+
                 $moderator    = $event_data['moderator'];
+
                 if(!isset($moderator['member_id']) || !isset($moderator['speaker_id']))
                     throw new EntityValidationException('missing parameter on moderator!');
 
                 $speaker_id = intval($moderator['speaker_id']);
                 $member_id  = intval($moderator['member_id']);
-                $moderator    = $speaker_id > 0 ? PresentationSpeaker::get()->byID($speaker_id):null;
-                $moderator    = is_null($moderator) && $member_id > 0 ? PresentationSpeaker::get()->filter('MemberID', $member_id)->first() : null;
+                $moderator  = $speaker_id > 0 ? PresentationSpeaker::get()->byID($speaker_id):null;
+                $moderator  = is_null($moderator) && $member_id > 0 ? PresentationSpeaker::get()->filter('MemberID', $member_id)->first() : $moderator;
+
                 if (is_null($moderator)) {
                     $member  = Member::get()->byID($member_id);
                     if(is_null($member)) throw new NotFoundEntityException('Member', sprintf(' member id %s', $member_id));
@@ -308,9 +321,40 @@ final class SummitService implements ISummitService
             if(is_null($track)) throw new NotFoundEntityException('Track');
 
             $event->CategoryID = $track->ID;
-            $event->AttendeesExpectedLearnt = $event_data['expect_learn'];
+            $event->AttendeesExpectedLearnt = html_entity_decode($event_data['expect_learn']);
+            $event->Level = $event_data['level'];
         }
         return $event;
+    }
+
+
+    /**
+     * @param ISummitEvent $event
+     * @param SummitEventType $type
+     * @return bool
+     */
+    public static function checkEventType(ISummitEvent $event, SummitEventType $type)
+    {
+        if($event->isPresentation() ){
+            return self::IsPresentationEventType($type->Type);
+        }
+        return self::IsSummitEventType($type->Type);
+    }
+
+    /**
+     * @param string $type
+     * @return bool
+     */
+    public static function IsPresentationEventType($type){
+        return ($type === 'Presentation' || $type === 'Keynotes' || $type === 'Panel');
+    }
+
+    /**
+     * @param string $type
+     * @return bool
+     */
+    public static function IsSummitEventType($type){
+        return !self::IsPresentationEventType($type);
     }
 
     /**
@@ -336,6 +380,13 @@ final class SummitService implements ISummitService
             if(intval($event->SummitID) !== intval($summit->getIdentifier()))
                 throw new EntityValidationException('event doest not belongs to summit');
 
+            $event_type_id = intval($event_data['event_type']);
+            $event_type    = SummitEventType::get()->byID($event_type_id);
+            if(is_null($event_type)) throw new NotFoundEntityException('EventType');
+
+            if(!self::checkEventType($event, $event_type))
+                throw new EntityValidationException('Invalid event type!');
+
             $start_date = $event_data['start_date'];
             $end_date   = $event_data['end_date'];
             if(!empty($start_date) || !empty($end_date))
@@ -349,14 +400,15 @@ final class SummitService implements ISummitService
                     throw new EntityValidationException('Start Date should be inside Summit Duration!');
             }
 
-            $event->Title            = $event_data['title'];
-            $event->RSVPLink         = $event_data['rsvp_link'];
+            $event->Title            = html_entity_decode($event_data['title']);
+            $event->RSVPLink         = html_entity_decode($event_data['rsvp_link']);
             $event->HeadCount        = intval($event_data['headcount']);
-            $event->ShortDescription = $event_data['short_description'];
+            $event->ShortDescription = html_entity_decode($event_data['short_description']);
             $event->setStartDate($event_data['start_date']);
             $event->setEndDate($event_data['end_date']);
             $event->AllowFeedBack    = $event_data['allow_feedback'];
             $event->LocationID       = intval($event_data['location_id']);
+            $event->TypeID           = $event_type_id;
 
             $summit_types = ($event_data['summit_type']) ? $event_data['summit_type'] : array();
             $event->AllowedSummitTypes()->setByIDList($summit_types);
@@ -568,41 +620,40 @@ final class SummitService implements ISummitService
      */
     public function updateAssistance(ISummit $summit, array $data)
     {
-        $assistance_repository = $this->assistance_repository;
-        $this->tx_service->transaction(function() use($summit, $data, $assistance_repository){
+        $speaker_repository    = $this->speaker_repository;
+
+        $this->tx_service->transaction(function() use($summit, $data, $speaker_repository){
 
             foreach ($data as $assistance_data) {
-                if(!isset($assistance_data['id']))
-                    throw new EntityValidationException('missing required param: id');
 
-                $assistance_id = intval($assistance_data['id']);
-                $assistance = $assistance_repository->getById($assistance_id);
+                $speaker_id    = isset($assistance_data['speaker_id']) ? intval($assistance_data['speaker_id']) : 0;
 
+                if(!$speaker_id)
+                    throw new EntityValidationException('speaker_id param is missing!');
+
+                $speaker = $speaker_repository->getById($speaker_id);
+
+                if(is_null($speaker))
+                    throw new NotFoundEntityException('Speaker');
+
+                $assistance = $speaker->getAssistanceFor($summit->getIdentifier());
                 if(is_null($assistance))
-                    throw new NotFoundEntityException('Speaker Assistance', sprintf('id %s', $assistance_id));
+                {
+                    $assistance = $speaker->createAssistanceFor($summit->getIdentifier());
+                    $assistance->write();
+                }
 
-                if(intval($assistance->SummitID) !== intval($summit->getIdentifier()))
-                    throw new EntityValidationException('speaker assistance doest not belong to summit');
-
-                $assistance->OnSitePhoneNumber = $assistance_data['phone'];
+                $assistance->OnSitePhoneNumber   = $assistance_data['phone'];
                 $assistance->RegisteredForSummit = $assistance_data['registered'];
-                $assistance->CheckedIn = $assistance_data['checked_in'];
+                $assistance->CheckedIn           = $assistance_data['checked_in'];
 
                 $assistance->write();
 
-                if (isset($assistance_data['promo_code'])) {
-                    $promo_code = SummitRegistrationPromoCode::get("SummitRegistrationPromoCode")
-                        ->leftJoin("SpeakerSummitRegistrationPromoCode","SpeakerSummitRegistrationPromoCode.ID = SummitRegistrationPromoCode.ID")
-                        ->where("SpeakerSummitRegistrationPromoCode.SpeakerID = {$assistance->SpeakerID} AND SummitRegistrationPromoCode.SummitID = {$assistance->SummitID}")
-                        ->first();
-
-                    $promo_code->Code = $assistance_data['promo_code'];
-                    $promo_code->write();
+                if (isset($assistance_data['promo_code']) && !empty($assistance_data['promo_code'])) {
+                    $code = $speaker->registerSummitPromoCodeByValue($assistance_data['promo_code'], $summit);
+                    $code->write();
                 }
-
-
             }
-
         });
     }
 
@@ -638,6 +689,65 @@ final class SummitService implements ISummitService
 
     /**
      * @param ISummit $summit
+     * @param $data
+     */
+    public function updateVideoDisplay(ISummit $summit, $data)
+    {
+        $event_repository = $this->event_repository;
+        $this_var = $this;
+
+        $this->tx_service->transaction(function () use ($this_var, $summit, $data, $event_repository) {
+            foreach ($data as $event_data) {
+                if (!isset($event_data['id']))
+                    throw new EntityValidationException('missing required param: id');
+
+                $event_id = intval($event_data['id']);
+                $event = $event_repository->getById($event_id);
+
+                if (is_null($event))
+                    throw new NotFoundEntityException('Summit Event', sprintf('id %s', $event_id));
+
+                if (intval($event->SummitID) !== intval($summit->getIdentifier()))
+                    throw new EntityValidationException('event doest not belongs to summit');
+
+                foreach ($event->Materials()->filter('ClassName','PresentationVideo') as $video) {
+                    $video->DisplayOnSite = intval($event_data['display_video']);
+                    $video->write();
+                }
+
+            }
+        });
+    }
+
+    /**
+     * @param $report_name
+     * @param $data
+     */
+    public function updateReportConfig($report_name, $data)
+    {
+        $report_repository = $this->report_repository;
+        $this_var = $this;
+
+        $report = $this->tx_service->transaction(function () use ($this_var, $report_name, $data, $report_repository) {
+            if (!$report_name)
+                throw new EntityValidationException('missing required param: report_name');
+
+            $report = $report_repository->getByName($report_name);
+
+            if (is_null($report)) {
+                $report = new SummitReport();
+                $report->Name = $report_name;
+            }
+
+            $report->setConfigByName($data['config_name'],$data['config_value']);
+
+            $report->write();
+            return $report;
+        });
+    }
+
+    /**
+     * @param ISummit $summit
      * @param array $speaker_data
      * @return IPresentationSpeaker
      */
@@ -655,11 +765,12 @@ final class SummitService implements ISummitService
             $speaker   = PresentationSpeaker::create();
             $member_id = 0;
             if(!isset($speaker_data['email']) && !isset($speaker_data['member_id']))
-                throw new EntityValidationException
-                ("you mus provide an email or a member_id in order to create a speaker!");
+                throw
+                new EntityValidationException
+                ("you must provide an email or a member_id in order to create a speaker!");
 
             if(isset($speaker_data['member_id']) && intval($speaker_data['member_id']) > 0){
-                $member_id = intval($speaker_data['member_id']);
+                $member_id   = intval($speaker_data['member_id']);
                 $old_speaker = $speaker_repository->getByMemberID($member_id);
                 if(!is_null($old_speaker))
                     throw new EntityValidationException
@@ -679,6 +790,7 @@ final class SummitService implements ISummitService
             $speaker->TwitterName    = trim($speaker_data['irc_name']);
             $speaker->MemberID       = $member_id;
             $speaker->CreatedFromAPI = true;
+            $speaker_repository->add($speaker);
             $speaker->write();
 
             if($member_id === 0 && isset($speaker_data['email'])){
@@ -687,6 +799,7 @@ final class SummitService implements ISummitService
                 if(is_null($member)){
                     // we need to create a registration request
                     $request = $speaker_registration_request_manager->register($speaker, $email);
+                    $request->SpeakerID = $speaker->ID;
                     $request->write();
                     $speaker->RegistrationRequestID = $request->ID;
                     $speaker->write();
@@ -710,10 +823,7 @@ final class SummitService implements ISummitService
 
             $onsite_phone = trim($speaker_data['onsite_phone']);
             if(!empty($onsite_phone)) {
-                $summit_assistance = PresentationSpeakerSummitAssistanceConfirmationRequest::create();
-                $summit_assistance->SummitID = $summit->getIdentifier();
-                $summit_assistance->SpeakerID = $speaker->ID;
-                $summit_assistance->write();
+                $summit_assistance = $speaker->createAssistanceFor($summit->getIdentifier());
                 $summit_assistance->OnSitePhoneNumber = $onsite_phone;
                 $summit_assistance->write();
             }
@@ -740,7 +850,7 @@ final class SummitService implements ISummitService
             if($member_id > 0)
             {
                 $old_speaker = $speaker_repository->getByMemberID($member_id);
-                if($old_speaker->getIdentifier() !== $speaker_id)
+                if($old_speaker && $old_speaker->getIdentifier() !== $speaker_id)
                     throw new EntityValidationException
                     (
                         sprintf
@@ -750,12 +860,15 @@ final class SummitService implements ISummitService
                         )
                     );
             }
+
             $speaker->Title       = trim($speaker_data['title']);
             $speaker->FirstName   = trim($speaker_data['first_name']);
             $speaker->LastName    = trim($speaker_data['last_name']);
             $speaker->Bio         = trim($speaker_data['bio']);
             $speaker->IRCHandle   = trim($speaker_data['twitter_name']);
             $speaker->TwitterName = trim($speaker_data['irc_name']);
+            $speaker->PhotoID     = ($speaker_data['picture_id'] != 0) ? intval($speaker_data['picture_id']) : $speaker->PhotoID;
+
             if($speaker->MemberID > 0  && $member_id == 0)
                 throw new EntityValidationException
                 (
@@ -764,20 +877,309 @@ final class SummitService implements ISummitService
 
             $speaker->MemberID    = $member_id;
 
+            // set email
+            if ($speaker->MemberID > 0) {
+                $speaker->Member()->Email = trim($speaker_data['email']);
+                $speaker->Member()->write();
+            } else {
+                $speaker->RegistrationRequest()->Email = trim($speaker_data['email']);
+                $speaker->RegistrationRequest()->write();
+            }
+
             $onsite_phone = trim($speaker_data['onsite_phone']);
+            $reg_code     = trim($speaker_data['reg_code']);
+
             if(!empty($onsite_phone)) {
                 $summit_assistance = $speaker->getAssistanceFor($summit->getIdentifier());
                 if(is_null($summit_assistance)){
-                    $summit_assistance = PresentationSpeakerSummitAssistanceConfirmationRequest::create();
-                    $summit_assistance->SummitID = $summit->getIdentifier();
-                    $summit_assistance->SpeakerID = $speaker_id;
-                    $summit_assistance->write();
+                    $summit_assistance = $speaker->createAssistanceFor($summit->getIdentifier());
                 }
                 $summit_assistance->OnSitePhoneNumber = $onsite_phone;
                 $summit_assistance->write();
             }
+
+            if(!empty($reg_code)){
+               $speaker->registerSummitPromoCodeByValue($reg_code, $summit);
+            }
             return $speaker;
 
+        });
+    }
+
+    /**
+     * @param ISummit $summit
+     * @param $speaker_id
+     * @param $tmp_file
+     * @return BetterImage
+     */
+    public function uploadSpeakerPic(ISummit $summit, $speaker_id, $tmp_file)
+    {
+        $speaker_repository = $this->speaker_repository;
+
+        return $this->tx_service->transaction(function () use ($summit, $speaker_id, $tmp_file, $speaker_repository) {
+            $speaker_id = intval($speaker_id);
+            $speaker    = $speaker_repository->getById($speaker_id);
+            if(is_null($speaker)) throw new NotFoundEntityException('PresentationSpeaker');
+
+            $image = new BetterImage();
+            $upload = new Upload();
+            $validator = new Upload_Validator();
+            $validator->setAllowedExtensions(array('png','jpg','jpeg','gif'));
+            $validator->setAllowedMaxFileSize(800*1024); // 300Kb
+            $upload->setValidator($validator);
+
+            if (!$upload->loadIntoFile($tmp_file,$image,'profile-images')) {
+                throw new EntityValidationException($upload->getErrors());
+            }
+
+            $image->write();
+
+            return $image;
+
+        });
+    }
+
+    /**
+     * @param ISummit $summit
+     * @param array $promocode_data
+     * @return ISummitRegistrationPromoCode
+     */
+    public function createPromoCode(ISummit $summit, array $promocode_data)
+    {
+        $promocode_repository                 = $this->promocode_repository;
+        $promocode_factory                    = new SummitRegistrationPromoCodeFactory();
+
+        return $this->tx_service->transaction(function () use
+        (
+            $summit, $promocode_data , $promocode_repository, $promocode_factory
+        ) {
+
+            $codes = explode(',',$promocode_data['code']);
+            foreach ($codes as $code) {
+                // check if code already exists
+                $code_obj = $promocode_repository->getByCode($summit->getIdentifier(),$code);
+                if ($code_obj) {
+                    throw new EntityValidationException("Code ".$code." already exists.");
+                }
+
+                $promocode_data['code'] = $code;
+                $promocode = $promocode_factory->buildPromoCode($promocode_data,$summit->getIdentifier());
+
+                $promocode->write();
+            }
+
+            return $promocode;
+        });
+    }
+
+    /**
+     * @param ISummit $summit
+     * @param array $promocode_data
+     * @return ISummitRegistrationPromoCode
+     */
+    public function updatePromoCode(ISummit $summit, array $promocode_data)
+    {
+        $promocode_repository   = $this->promocode_repository;
+        $promocode_factory      = new SummitRegistrationPromoCodeFactory();
+
+        return $this->tx_service->transaction(function () use ($summit, $promocode_data, $promocode_factory, $promocode_repository) {
+            $code_id    = trim($promocode_data['code_id']);
+            $promocode  = $promocode_repository->getById($code_id);
+            if(is_null($promocode)) throw new NotFoundEntityException('PromoCode');
+
+            $promocode = $promocode_factory->populatePromoCode($summit->getIdentifier(),$promocode_data,$promocode);
+            $promocode->write();
+
+            return $promocode;
+
+        });
+    }
+
+    /**
+     * @param ISummit $summit
+     * @param array $data
+     * @return ISummitRegistrationPromoCode
+     */
+    public function setMultiPromoCodes(ISummit $summit, array $data)
+    {
+        $promocode_repository                 = $this->promocode_repository;
+        $promocode_factory                    = new SummitRegistrationPromoCodeFactory();
+
+        return $this->tx_service->transaction(function() use($summit, $data , $promocode_repository, $promocode_factory) {
+            $codes = array();
+
+            // first we get the matching codes
+            if (isset($data['use_codes']) && $data['use_codes']) {
+                $codes = $promocode_repository->getFreeByTypeAndSummit
+                    (
+                        $summit->getIdentifier(),
+                        $data['code_type'],
+                        $data['code_prefix'],
+                        $data['company_id'],
+                        $data['code_qty']
+                    )->toArray();
+            }
+
+            // complete number of codes requested with new ones
+            $diff = $data['code_qty'] - count($codes);
+            if ($diff > 0) {
+                for ($i=1;$i <= $diff; $i++) {
+                    $prefix = (!empty($data['code_prefix'])) ? trim($data['code_prefix']) : substr($data['code_type'],0,3);
+                    $code_string = $prefix.'_'.random_string(6);
+
+                    if ($promocode_repository->getByCode($summit->getIdentifier(),$code_string)) {
+                        $i--; //redo
+                    } else {
+                        $data['code'] = $code_string;
+                        $promocode = $promocode_factory->buildPromoCode($data,$summit->getIdentifier());
+                        $promocode->write();
+                        $codes[] = $promocode;
+                    }
+                }
+            }
+
+            // Now assign members to these codes
+            if ($data['code_type'] == 'ALTERNATE' || $data['code_type'] == 'ACCEPTED') {
+                $owners = (isset($data['speakers'])) ? explode(',',$data['speakers']) : array();
+            } else {
+                $owners = (isset($data['members'])) ? explode(',',$data['members']) : array();
+            }
+
+            if(count($owners) > 0) {
+                foreach ($codes as $code) {
+                    $owner_id = array_pop($owners);
+                    if ($owner_id) {
+                        if ($code->ClassName == 'SpeakerSummitRegistrationPromoCode') {
+                            $code->SpeakerID = $owner_id;
+                        } else {
+                            $code->OwnerID = $owner_id;
+                        }
+
+                        $code->write();
+                    }
+                }
+            }
+
+            return $codes;
+        });
+    }
+
+    /**
+     * @param ISummit $summit
+     * @param int $code_id
+     * @return ISummitRegistrationPromoCode
+     */
+    public function sendEmailPromoCode(ISummit $summit, $code_id)
+    {
+        $promocode_repository   = $this->promocode_repository;
+
+        return $this->tx_service->transaction(function () use ($summit, $code_id, $promocode_repository) {
+            $promocode  = $promocode_repository->getById($code_id);
+            if(is_null($promocode)) throw new NotFoundEntityException('PromoCode');
+            $member = null;
+
+            if($promocode->ClassName == 'SpeakerSummitRegistrationPromoCode' && $promocode->Speaker()->exists() && $promocode->Speaker()->Member()->exists()) {
+                $member = $promocode->Speaker()->Member();
+            }
+
+            if($promocode->ClassName == 'MemberSummitRegistrationPromoCode' && $promocode->Owner()->exists()) {
+                $member = $promocode->Owner();
+            }
+
+            if(is_null($member))
+                throw new EntityValidationException('owner is null for this promo code!');
+
+            if (!$promocode->EmailSent) {
+
+                $promocode->setEmailSent(1);
+                $promocode->write();
+
+                $params = array
+                (
+                    'Member'    => $member,
+                    'Summit'    => $summit,
+                    'PromoCode' => $promocode
+                );
+
+                $sender = new MemberPromoCodeEmailSender();
+                $sender->send($params);
+            }
+
+            return $promocode;
+
+        });
+    }
+
+    /**
+     * @param ISummit $summit
+     * @param ISummit $speaker_1
+     * @param ISummit $speaker_2
+     * @param array $data
+     * @return array $changes
+     */
+    public function mergeSpeakers(ISummit $summit, $speaker_id_1, $speaker_id_2, array $data)
+    {
+        $speaker_repository = $this->speaker_repository;
+
+        $changes = $this->tx_service->transaction(function () use ($summit, $data, $speaker_id_1, $speaker_id_2, $speaker_repository) {
+
+            $speaker_1 = $speaker_repository->getById($speaker_id_1);
+            $speaker_2 = $speaker_repository->getById($speaker_id_2);
+            if(is_null($speaker_1) || is_null($speaker_2)) throw new NotFoundEntityException('PresentationSpeaker');
+
+            $changes = array();
+
+            foreach ($data as $field => $speaker_id) {
+
+                if ($speaker_1->ID != $speaker_id) {
+                    if ($field == 'Email') {
+                        if ($speaker_1->RegistrationRequest()->Exists()) {
+                            $speaker_1->RegistrationRequest()->Email = $speaker_2->RegistrationRequest()->Email;
+                        } else {
+                            $speaker_1->RegistrationRequestID = $speaker_2->RegistrationRequestID;
+                        }
+                    } elseif (is_callable(array($speaker_1, $field)) && $speaker_1->hasMethod($field)){
+                        $speaker_1->$field()->setByIDList($speaker_2->$field()->getIDList());
+                    } else {
+                        $speaker_1->$field = $speaker_2->$field;
+                    }
+
+                    $changes[] = $field;
+                }
+            }
+
+            $speaker_1->write();
+
+            return $changes;
+
+        });
+
+        // DELETE SPEAKER 2 (had to take it out the transaction to work)
+        $speaker_2 = $speaker_repository->getById($speaker_id_2);
+        $speaker_2->delete();
+
+        return $changes;
+
+    }
+
+    /**
+     * @param ISummit $summit
+     * @param array $data
+     */
+    public function updateBulkPresentations(ISummit $summit, array $data)
+    {
+        $event_repository = $this->event_repository;
+
+        $this->tx_service->transaction(function() use($summit, $data, $event_repository){
+
+            foreach($data as $presentation) {
+                $event = $event_repository->getById($presentation['id']);
+                if(is_null($event)) throw new NotFoundEntityException('SummitEvent');
+                if(intval($event->SummitID) !== $summit->getIdentifier()) throw new EntityValidationException('SummitEvent does not belong to Summit!');
+
+                $event->Title = $presentation['title'];
+                $event->write();
+            }
         });
     }
 

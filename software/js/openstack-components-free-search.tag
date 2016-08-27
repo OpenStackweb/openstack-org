@@ -1,7 +1,7 @@
 <openstack-components-free-search>
 
     <div class="col-sm-4 col-xs-6 all-projects-search-wrapper">
-        <input type="search" placeholder="Enter a keyword" id="all-projects-search" onkeyup={ doFreeTextSearch }>
+        <input type="search" placeholder={ ss.i18n._t('Software.ENTER_KEYWORD','Enter a keyword') } id="all-projects-search" onkeyup={ doFreeTextSearch }>
         <i class="fa fa-search"></i>
     </div>
 

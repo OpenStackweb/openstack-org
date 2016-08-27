@@ -4,7 +4,7 @@
 	background-size: cover; 
 }
 .learn-hero .intro-message > h1 {
-	margin-bottom: 20px;
+	margin: 90px 0 0;
 }
 .learn-intro {
 	text-align: center;
@@ -35,6 +35,9 @@ i.learn-icon {
 }
 img.learn-superuser-icon {
 	max-width: 95px;
+}
+img.learn-coa-icon {
+	max-width: 60px;
 }
 .learn-single h2 {
 	font-weight: 400;

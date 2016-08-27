@@ -27,6 +27,7 @@
     color: white;
     position: relative;
     cursor: pointer;
+    text-align: center;
 }
 
 .venue .image {
@@ -50,6 +51,8 @@
     position: absolute;
     top: 33%;
     width: 100%;
+    text-shadow: 2px 2px black;
+    z-index: 999;
 }
 
 .venue .title {
@@ -76,4 +79,35 @@
 
 .venue .carousel-control.right {
     right: 10%;
+}
+
+.gm-style-iw {
+    text-align: center;
+}
+
+.floor .floor_header {
+    height: 100px;
+    background-color: #84798c;
+    color: white;
+    position: relative;
+    cursor: pointer;
+    text-align: center;
+}
+
+.floor-accordion {
+    display: none;
+}
+
+.floor_image {
+    height: 200px;
+    text-align: center;
+    display: none;
+}
+
+.floor_image img{
+    height: 200px;
+}
+
+.slide{
+    display: none !important;
 }

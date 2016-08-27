@@ -1,0 +1,116 @@
+/*Security Page*/
+.intro-header.security {
+  background: url(/themes/openstack/images/security/hero-bkgd-security.jpg) no-repeat right center;
+  background-size: cover;
+  position: relative; }
+  .intro-header.security a.photo-credit {
+    bottom: 70px; }
+
+@media (max-width: 767px) {
+  .intro-header.security .intro-message {
+    padding-top: 30px;
+    padding-bottom: 0; }
+  .intro-header.security a.photo-credit {
+    bottom: 68px; }
+  .intro-header.security .download-container {
+    margin-bottom: 50px;
+    width: 95%; } }
+
+.security-intro {
+  background-color: #edf2f7;
+  padding: 60px 0 90px; }
+
+.badge-promo-row {
+  background: #D1A603;
+  padding: 60px 0 40px;
+  text-align: center; }
+  .badge-promo-row h2 {
+    color: white;
+    margin: 0 0 40px;
+    text-align: center; }
+  .badge-promo-row a {
+    color: white;
+    text-decoration: underline; }
+  .badge-promo-row p {
+    color: white; }
+  .badge-promo-row hr {
+    width: 40%;
+    border-color: white;
+    opacity: 0.7;
+    margin: 30px auto; }
+
+.security-icons {
+  background-color: white;
+  padding: 30px 0 60px;
+  color: #2A4E68;
+  text-align: center; }
+  .security-icons .single {
+    padding: 20px 2% 10px; }
+  .security-icons h3 {
+    font-size: 1.65em;
+    margin: 0 auto 0px;
+    min-height: 55px;
+    line-height: 1.2em; }
+  .security-icons i {
+    color: #30739C;
+    margin-bottom: 20px; }
+  .security-icons p {
+    color: #bluehover;
+    margin: auto;
+    font-size: 1em; }
+  .security-icons a.blue-btn {
+    background-color: #2A4E68;
+    display: block;
+    max-width: 300px;
+    margin: 40px auto 30px; }
+
+.security-highlights {
+  padding: 60px 0 30px; }
+  .security-highlights .security-highlights-lists ul {
+    margin: 0; }
+    .security-highlights .security-highlights-lists ul li {
+      margin-bottom: 10px; }
+
+.security-action-wrapper {
+  text-align: center;
+  padding: 50px 0 90px;
+  background: white;
+  border-top: 1px solid #edf2f7; }
+  .security-action-wrapper p {
+    text-align: center;
+    color: #2A4E68; }
+  .security-action-wrapper a.security-action-btn {
+    display: block;
+    max-width: 300px;
+    background: #DA422F;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 4px;
+    margin: 30px auto 0; }
+    .security-action-wrapper a.security-action-btn i {
+      margin-right: 5px;
+      font-size: 1.2em; }
+    .security-action-wrapper a.security-action-btn:hover {
+      background: #A51B1B;
+      text-decoration: none; }
+
+.featured-wrapper.security {
+  background-color: #edf2f7; }
+  .featured-wrapper.security .video-wrapper .play-button {
+    text-align: center;
+    top: 28%; }
+    .featured-wrapper.security .video-wrapper .play-button img {
+      max-width: 80px;
+      padding: 10px;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 4px; }
+  .featured-wrapper.security .video-wrapper:hover .play-button {
+    display: block; }
+    .featured-wrapper.security .video-wrapper:hover .play-button img {
+      background: #1d99de; }
+
+.sub-text {
+  text-align: center;
+  margin-bottom: 30px; }
+
+/*End security Page*/

@@ -32,6 +32,11 @@ interface ISummitEvent extends IEntity
     /**
      * @return string
      */
+    public function getRSVPLink();
+
+    /**
+     * @return string
+     */
     public function getDescription();
 
     /**
@@ -99,6 +104,11 @@ interface ISummitEvent extends IEntity
     public function getFeedback();
 
     /**
+     * @return ISummitEventFeedBack
+     */
+    public function getCurrentMemberFeedback();
+
+    /**
      * @param ISummitEventFeedBack $feedback
      * @return void
      */
@@ -123,4 +133,24 @@ interface ISummitEvent extends IEntity
      * @return void
      */
     public function unPublish();
+
+    /**
+     * @return bool
+     */
+    public function isPresentation();
+
+    /**
+     * @return string
+     */
+    public function getDayLabel();
+
+    /**
+     * @return bool
+     */
+    public function hasRSVPTemplate();
+
+    /**
+     * @return bool
+     */
+    public function allowSpeakers();
 }

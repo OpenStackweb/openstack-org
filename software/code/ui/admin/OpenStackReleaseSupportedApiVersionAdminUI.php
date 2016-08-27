@@ -59,11 +59,18 @@ JS;
         //kludge; get parent id from url....
         $url = preg_split('/\//', $_REQUEST['url']);
         $release_id = (int)$url[8];
-        $ddl = new DropdownField('OpenStackComponentID', 'OpenStack Component',
-            OpenStackComponent::get()->filter('SupportsVersioning',
-                true)->innerJoin('OpenStackRelease_OpenStackComponents',
-                "OpenStackRelease_OpenStackComponents.OpenStackComponentID = OpenStackComponent.ID AND OpenStackReleaseID = {$release_id} ")->map('ID',
-                'CodeName'));
+
+        //components
+        $components = OpenStackComponent::get()->filter('SupportsVersioning',true)
+            ->innerJoin('OpenStackRelease_OpenStackComponents',"OpenStackRelease_OpenStackComponents.OpenStackComponentID = OpenStackComponent.ID AND OpenStackReleaseID = {$release_id} ");
+
+        $components_source = array();
+        foreach($components as $comp)
+        {
+            $components_source[$comp->ID] = sprintf('%s (%s)', $comp->Name, $comp->CodeName);
+        }
+
+        $ddl = new DropdownField('OpenStackComponentID', 'OpenStack Component', $components_source);
         $ddl->setEmptyString('--Select A OS Component--');
         $ddl->addExtraClass('ddl-os-component-id');
         $fields->insertBefore($ddl, 'ApiVersionID');

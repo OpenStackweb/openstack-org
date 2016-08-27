@@ -297,6 +297,8 @@ final class UnitOfWork {
 					$key = spl_object_hash($target);
 					unset($this->new_entities_identity_map[$key]);
 					unset($this->update_entities_identity_map[$key]);
+					if(is_null($target))
+						throw new InvalidArgumentException;
 					$target->write();
 				}
 
@@ -314,12 +316,16 @@ final class UnitOfWork {
 		}
 
 		foreach($this->new_entities_identity_map as $key => $entity){
+            if(is_null($entity))
+                throw new InvalidArgumentException;
 			$entity->write();
 		}
 
 		foreach($this->update_entities_identity_map as $key => $entity){
 			//is marked for deletion, skip
 			if(array_key_exists($key,$this->delete_entities_identity_map)) continue;
+            if(is_null($entity))
+                throw new InvalidArgumentException;
 			//is not changed, skip ...
 			if(!$entity->isChanged()) continue;
 			$entity->write();
@@ -348,6 +354,8 @@ final class UnitOfWork {
 					//get changed ones
 					$to_update = $collection->getDirties();
 					foreach($to_update as $entity){
+                        if(is_null($entity))
+                            throw new InvalidArgumentException;
 						$entity->write();
 					}
 				}
@@ -417,6 +425,8 @@ final class UnitOfWork {
 					//get changed ones
 					$to_update = $collection->getDirties();
 					foreach($to_update as $entity){
+                        if(is_null($entity))
+                            throw new InvalidArgumentException;
 						$entity->write();
 					}
 				}
@@ -426,6 +436,8 @@ final class UnitOfWork {
 		// Entity deletions come last and need to be in reverse commit order
 		$this->delete_entities_identity_map = array_reverse($this->delete_entities_identity_map, true);
 		foreach($this->delete_entities_identity_map as $key => $entity){
+            if(is_null($entity))
+                throw new InvalidArgumentException;
 			$entity->delete();
 		}
 

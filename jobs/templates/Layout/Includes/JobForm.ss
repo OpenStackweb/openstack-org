@@ -36,6 +36,21 @@
                     $Fields.dataFieldByName(description)
                 </div>
             </div>
+            <div class="field text " id="is_coa_needed">
+                <div class="middleColumn">
+                    $Fields.fieldByName(is_coa_needed).FieldHolder
+                </div>
+            </div>
+            <div class="field text " id="job_type">
+                <div class="middleColumn">
+                    $Fields.fieldByName(job_type).FieldHolder
+                </div>
+            </div>
+            <div class="field text " id="company">
+                <div class="middleColumn">
+                    $Fields.fieldByName(company).FieldHolder
+                </div>
+            </div>
             <div class="field text " id="instructions">
                 <label for="$FormName_instructions" class="left">Instructions To Apply</label>
 
@@ -48,13 +63,6 @@
 
                 <div class="middleColumn">
                     $Fields.dataFieldByName(expiration_date)
-                </div>
-            </div>
-            <div class="field text " id="company_name">
-                <label for="$FormName_company_name" class="left">Company</label>
-
-                <div class="middleColumn">
-                    $Fields.dataFieldByName(company_name)
                 </div>
             </div>
         </div>

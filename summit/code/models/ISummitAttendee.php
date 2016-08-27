@@ -86,4 +86,17 @@ interface ISummitAttendee extends IEntity
      */
     public function setShareContactInfo($must_share);
 
+    /**
+     * @param ISummitEvent $event
+     * @return string
+     */
+    public function getGoogleCalEventId(ISummitEvent $event);
+
+    /**
+     * @param ISummitEvent $event
+     * @param int $google_event_id
+     * @return string
+     */
+    public function setGoogleCalEventId(ISummitEvent $event, $google_event_id);
+
 }

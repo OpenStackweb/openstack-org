@@ -75,6 +75,21 @@ class OpenStackRelease
         'Caveats'                  => 'OpenStackComponentReleaseCaveat',
     );
 
+
+    protected function onBeforeDelete() {
+        parent::onBeforeDelete();
+        foreach($this->SupportedApiVersions() as $item){
+            $item->delete();
+        }
+        foreach($this->SampleConfigurationTypes() as $item){
+            $item->delete();
+        }
+        foreach($this->Caveats() as $item){
+            $item->delete();
+        }
+        $this->OpenStackComponents()->removeAll();
+    }
+
     /**
      * @return int
      */
@@ -261,6 +276,11 @@ class OpenStackRelease
     public function getStatus()
     {
         return $this->getField('Status');
+    }
+
+    public function getStatusI18n()
+    {
+    	return _t('Software.RELEASE_STATUS_'.strtoupper($this->Status), $this->Status);
     }
 
     /**

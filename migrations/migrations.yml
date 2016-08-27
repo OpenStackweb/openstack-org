@@ -20,5 +20,23 @@ migrations:
   - PresentationAllowFeedbackMigration
   - ClearOlderIngestTaskMigration
   - RemoveNullMembersMigration
-  - VideoPresentationMigration
   - RemoveSummitDeprecatedColumnsMigration
+  - UpdateSummitLocationImagesMigration
+  - MemberLegacyMembersMigration
+  - ChangePremiseForPremisesMigration
+  - SummitSecondBreakoutEmailMigration
+  - CreateUserCommitteeGroupMigration
+  - AddUsersToFoundationStaffMigration
+  - SummitAttendeeDropIndexMigration
+  - VideoPresentationMigration
+  - NewsChangeNewsDatesToCentral
+  - SummitMaxAllowedSubmissionTaskMigration
+  - SummitPresentationTypeMigration
+  - PopulateOrganizationalRoleAndActiveInvolvement
+  - TrackChairMigration
+  - UninstallTranslatableMigration
+  - FixSummitEventTypesMigration
+  - SetEmailedFlagForSpeakerPromoCodesMigration
+  - RemoveOwnerIDColumnPromoCodesMigration
+  - MoveJobPage2JonMigration
+  - DefaultJobTypesSeeding

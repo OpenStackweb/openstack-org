@@ -35,6 +35,8 @@ class OpenStackComponentRelatedContent  extends DataObject
         $fields = new FieldList();
         $fields->add(new TextField('Title', 'Title'));
         $fields->add(new TextField('Url', 'Url'));
+        $this->extend('updateCMSFields', $fields);
+        
         return $fields;
     }
 }

@@ -22,6 +22,13 @@ interface ISummitEventRepository extends IEntityRepository
     public function searchBySummitAndTerm(ISummit $summit, $term);
 
     /**
+     * @param ISummit $summit
+     * @param string $term
+     * @return ISummitEvent[]
+     */
+    public function searchBySummitTermAndHasRSVP(ISummit $summit, $term);
+
+    /**
      * @param $summit_id
      * @param int $event_type
      * @param int $page

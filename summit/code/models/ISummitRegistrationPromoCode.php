@@ -25,14 +25,17 @@ interface ISummitRegistrationPromoCode extends IEntity
     public function getSummit();
 
     /**
-     * @return ICommunityMember
+     * @return array
      */
-    public function getOwner();
+    static public function getTypes();
 
-    /**
-     * @param ICommunityMember $owner
-     * @return $this
-     */
-    public function assignOwner(ICommunityMember $owner);
+    public function setCode($code);
 
+    public function setSummit($summit_id);
+
+    public function setEmailSent($email_sent);
+
+    public function setRedeemed($redeemed);
+
+    public function setSource($source);
 }

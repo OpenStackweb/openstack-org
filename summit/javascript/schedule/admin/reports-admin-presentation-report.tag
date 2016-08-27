@@ -13,7 +13,6 @@
                 <tr>
                     <th class="sortable" data-sort="presentation" data-dir="ASC">Presentation</th>
                     <th class="center_text">Published</th>
-                    <th>Status</th>
                     <th>Track</th>
                     <th class="sortable sorted" data-sort="start_date" data-dir="ASC">Start Date<i class="fa fa-caret-up"></i></th>
                     <th>Location</th>
@@ -30,10 +29,9 @@
                 </tr>
             </thead>
             <tbody>
-                <tr each={ presentation, i in presentations } data-id="{ presentation.assistance_id }">
+                <tr each={ presentation, i in presentations } data-speaker-id="{ presentation.speaker_id }">
                     <td>{ presentation.title }</td>
                     <td class="center_text"><i class={ fa: true, fa-check: presentation.published, fa-times: !presentation.published } ></i></td>
-                    <td>{ presentation.status }</td>
                     <td>{ presentation.track }</td>
                     <td>{ presentation.start_date }</td>
                     <td>{ presentation.location }</td>
@@ -81,15 +79,16 @@
             var sort = $('.sorted').data('sort');
             var sort_dir = $('.sorted').data('dir');
             var term = $('#search-term').val();
+            var filter = $('#status-filter').val();
 
             $.getJSON('api/v1/summits/'+self.summit_id+'/reports/presentation_report',
-                {page:page, items: self.page_data.limit, sort: sort, sort_dir: sort_dir, term: term},
+                {page:page, items: self.page_data.limit, sort: sort, sort_dir: sort_dir, term: term, filter: filter},
                 function(data){
                     self.presentations = data.data;
                     self.page_data.page = page;
-                    self.page_data.total = data.total;
+                    self.page_data.total = parseInt(data.total);
 
-                    var total_pages = Math.ceil(self.page_data.total / self.page_data.limit);
+                    var total_pages = (self.page_data.total) ? Math.ceil(self.page_data.total / self.page_data.limit) : 1;
                     var options = {
                         bootstrapMajorVersion:3,
                         currentPage: self.page_data.page ,
@@ -111,19 +110,18 @@
         self.dispatcher.on(self.dispatcher.SAVE_PRESENTATION_REPORT,function(report) {
             var request = [];
             $('.changed').each(function(){
-                var id = $(this).data('id');
-                var phone = $('.phone',this).val();
+                var speaker_id = $(this).data('speaker-id');
+                var phone      = $('.phone',this).val();
                 var promo_code = $('.promo_code',this).val();
                 var registered = $('.registered',this).attr('checked') ? 1 : 0;
                 var checked_in = $('.checked_in',this).attr('checked') ? 1 : 0;
-
-                request.push({id: id, phone: phone, promo_code: promo_code, registered: registered, checked_in: checked_in});
+                request.push({speaker_id: speaker_id, phone: phone, promo_code: promo_code, registered: registered, checked_in: checked_in});
             });
 
             if (request.length) {
                 $.ajax({
                     type: 'PUT',
-                    url: 'api/v1/summits/'+self.summit_id+'/reports/save_report/'+report,
+                    url: 'api/v1/summits/'+self.summit_id+'/reports/'+report,
                     data: JSON.stringify(request),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json"
@@ -144,6 +142,12 @@
 
         self.dispatcher.on(self.dispatcher.GET_PRESENTATION_REPORT,function() {
             self.getReport(1);
+        });
+
+        self.dispatcher.on(self.dispatcher.EXPORT_PRESENTATION_REPORT,function() {
+            var sort     = $('.sorted').data('sort');
+            var sort_dir = $('.sorted').data('dir');
+            window.open('api/v1/summits/'+self.summit_id+'/reports/export/presentation_report?sort='+sort+'&sort_dir='+sort_dir, '_blank');
         });
 
     </script>

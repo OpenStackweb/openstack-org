@@ -26,11 +26,10 @@
                 <select id="select_venue" name="select_venue" style="width: 80%">
                     <option hidden value=''>-- Select A Venue --</option>
                     <option value="0">TBA</option>
-                    <option value="{ id }" title="{ getLocationOptionTitle(class_name) }" each={ summit.locations } class="{ getLocationOptionCSSClass(class_name) }">{ name }</option>
+                    <option value="{ id }" title="{ getLocationOptionTitle(class_name) }" each={ summit.locations } data-venue-name="{ name }" class="{ getLocationOptionCSSClass(class_name) }">{ name }</option>
                 </select>
             </div>
         </div>
-
         <!-- Empty Spots Modal -->
         <div id="empty_spots_modal" class="modal fade" role="dialog">
             <div class="modal-dialog">
@@ -79,16 +78,15 @@
         </div>
 
         <script>
-                this.summit     = opts.summit;
-                this.day        = '';
+                this.summit      = opts.summit;
+                this.day         = '';
                 this.location_id = '';
-                this.time = '';
-                this.event_id = '';
-                this.query = '';
-                this.dispatcher = opts.dispatcher;
-                var self        = this;
-
-
+                this.time        = '';
+                this.event_id    = '';
+                this.query       = '';
+                this.dispatcher  = opts.dispatcher;
+                this.api         = opts.api;
+                var self         = this;
 
                 this.on('updated', function(){
                     self.updateFilters();
@@ -100,12 +98,12 @@
                     self.doFilter();
                 };
 
-
                 this.on('mount', function(){
                     $(function() {
                         $('#select_day').change(function(e){
                             self.resetFilters();
                             self.buildHash();
+                            self.dispatcher.publishedEventsDayChanged(self.summit.id, self.day);
                             //self.doFilter();
                         });
 
@@ -147,11 +145,8 @@
 
                         self.setFromHash();
                         self.doFilter();
-
                     });
-
                 });
-
 
                 doFilter() {
                     if (self.query) {
@@ -159,7 +154,6 @@
                     } else {
                         if(self.day === '' || self.location_id === '') return;
                         $('body').ajax_loader();
-
                         self.dispatcher.publishedEventsFilterChanged(self.summit.id, self.day ,self.location_id);
                     }
                 }
@@ -232,7 +226,6 @@
                     self.event_id = '';
                     self.time = '';
                     self.query = '';
-
                     if(!$.isEmptyObject(hash)){
                         for(var key in hash) {
                             var value = hash[key];
@@ -240,6 +233,7 @@
                             switch(key) {
                                 case 'day':
                                     self.day = value;
+                                    self.dispatcher.publishedEventsDayChanged(self.summit.id, self.day);
                                     break;
                                 case 'venue':
                                     self.location_id = value;
@@ -256,7 +250,6 @@
                             }
                         }
                     }
-
                     self.updateFilters();
                 }
 
@@ -298,7 +291,6 @@
 
                     self.setFromHash();
                     //self.doFilter();
-
                 });
 
                 getLocationOptionCSSClass(class_name) {
@@ -334,6 +326,15 @@
                         break;
                     }
                 }
+
+                self.api.on(self.api.RETRIEVED_LOCATIONS_BY_DAY, function(data){
+
+                    $.each(data.locations, function(idx, location){
+                        var option = $('#select_venue option[value="'+location.id+'"]');
+                        option.text(option.attr('data-venue-name')+' ('+location.events_count+')');
+                    });
+                    $('#select_venue').trigger("chosen:updated");
+                });
 
         </script>
 </schedule-admin-view-published-filters>

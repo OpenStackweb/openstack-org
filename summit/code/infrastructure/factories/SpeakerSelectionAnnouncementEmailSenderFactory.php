@@ -23,29 +23,29 @@ final class SpeakerSelectionAnnouncementEmailSenderFactory implements ISpeakerSe
     public function build(ISummit $summit, IPresentationSpeaker $speaker)
     {
 
-        $has_approved  = $speaker->hasApprovedPresentations($summit->getIdentifier());
+        $has_published = $speaker->hasPublishedPresentations($summit->getIdentifier());
         $has_rejected  = $speaker->hasRejectedPresentations($summit->getIdentifier());
         $has_alternate = $speaker->hasAlternatePresentations($summit->getIdentifier());
 
-        if($has_approved && !$has_rejected && !$has_alternate)
+        if($has_published && !$has_rejected && !$has_alternate)
             return new PresentationSpeakerAcceptedAnnouncementEmailSender;
 
-        if(!$has_approved && !$has_rejected && $has_alternate)
+        if(!$has_published && !$has_rejected && $has_alternate)
             return new PresentationSpeakerAlternateAnnouncementEmailSender;
 
-        if(!$has_approved && $has_rejected && !$has_alternate)
+        if(!$has_published && $has_rejected && !$has_alternate)
             return new PresentationSpeakerRejectedAnnouncementEmailSender;
 
-        if($has_approved && !$has_rejected && $has_alternate)
+        if($has_published && !$has_rejected && $has_alternate)
             return new PresentationSpeakerAcceptedAlternateAnnouncementEmailSender;
 
-        if($has_approved && $has_rejected && !$has_alternate)
+        if($has_published && $has_rejected && !$has_alternate)
             return new PresentationSpeakerAcceptedRejectedAnnouncementEmailSender;
 
-        if(!$has_approved && $has_rejected && $has_alternate)
+        if(!$has_published && $has_rejected && $has_alternate)
             return new PresentationSpeakerAlternateRejectedAnnouncementEmailSender;
 
-        if($has_approved && $has_rejected && $has_alternate)
+        if($has_published && $has_rejected && $has_alternate)
             return new PresentationSpeakerAcceptedAlternateAnnouncementEmailSender;
 
         return null;

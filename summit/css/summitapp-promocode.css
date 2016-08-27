@@ -1,0 +1,22 @@
+.bootstrap-tagsinput {
+    width: 100% !important;
+}
+
+#add-promocode {
+    text-decoration: none;
+    color: white;
+}
+
+#code_type {
+    height: 33px;
+    border-color: rgba(128, 128, 128, 0.38);
+    border-radius: 4px;
+}
+
+a.btn-default {
+    color: #333;
+}
+
+a.btn-danger {
+    color:white;
+}

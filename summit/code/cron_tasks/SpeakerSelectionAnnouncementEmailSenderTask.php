@@ -52,6 +52,7 @@ final class SpeakerSelectionAnnouncementEmailSenderTask extends CronTask
         catch(Exception $ex)
         {
             SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            echo sprintf("there was an error %s", $ex->getMessage()).PHP_EOL;
         }
     }
 }

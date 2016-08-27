@@ -16,7 +16,10 @@ class SummitRegistrationPromoCode extends DataObject implements ISummitRegistrat
 {
     private static $db = array
     (
-        'Code' => 'Varchar(255)',
+        'Code'      => 'Varchar(255)',
+        'EmailSent' => 'Boolean',
+        'Redeemed'  => 'Boolean',
+        'Source'    => "Enum('CSV,ADMIN','CSV')",
     );
 
     private static $summary_fields = array (
@@ -24,12 +27,12 @@ class SummitRegistrationPromoCode extends DataObject implements ISummitRegistrat
     );
 
     private static $has_one = array(
-        'Summit' => 'Summit',
-        'Owner'  => 'Member'
+        'Summit'  => 'Summit',
+        'Creator' => 'Member',
     );
 
     private static $indexes = array(
-        'SummitID_Code_Owner' => array('type'=>'unique', 'value'=>'SummitID,Code, OwnerID')
+        'SummitID_Code' => array('type'=>'unique', 'value'=>'SummitID,Code')
     );
 
     /**
@@ -57,19 +60,49 @@ class SummitRegistrationPromoCode extends DataObject implements ISummitRegistrat
     }
 
     /**
-     * @return ICommunityMember
+     * @return array()
      */
-    public function getOwner()
+    static public function getTypes()
     {
-        return AssociationFactory::getInstance()->getMany2OneAssociation($this,'Owner')->getTarget();
+        $speaker_types = singleton('SpeakerSummitRegistrationPromoCode')->dbObject('Type')->enumValues();
+        $member_types = singleton('MemberSummitRegistrationPromoCode')->dbObject('Type')->enumValues();
+        $types = array_merge($speaker_types,$member_types);
+
+        $type_list = new ArrayList();
+        foreach($types as $type) {
+            $type_list->push(new ArrayData(array('Type' => $type)));
+        }
+
+        return $type_list;
     }
 
-    /**
-     * @param ICommunityMember $owner
-     * @return $this
-     */
-    public function assignOwner(ICommunityMember $owner)
+    public function setCode($code)
     {
-        AssociationFactory::getInstance()->getMany2OneAssociation($this,'Owner')->setTarget($owner);
+        $this->setField('Code',$code);
+    }
+
+    public function setSummit($summit_id)
+    {
+        $this->SummitID = $summit_id;
+    }
+
+    public function setEmailSent($email_sent)
+    {
+        $this->setField('EmailSent',$email_sent);
+    }
+
+    public function setRedeemed($redeemed)
+    {
+        $this->setField('Redeemed',$redeemed);
+    }
+
+    public function setSource($source)
+    {
+        $this->setField('Source',$source);
+    }
+
+    public function setCreator($member)
+    {
+        $this->CreatorID = $member->ID;
     }
 }

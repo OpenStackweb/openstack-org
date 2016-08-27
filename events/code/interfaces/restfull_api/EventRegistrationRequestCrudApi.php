@@ -36,16 +36,7 @@ final class EventRegistrationRequestCrudApi
 
 	public function __construct(){
 		parent::__construct();
-		$google_geo_coding_api_key     = null;
-		$google_geo_coding_client_id   = null;
-		$google_geo_coding_private_key = null;
-		if(defined('GOOGLE_GEO_CODING_API_KEY')){
-			$google_geo_coding_api_key = GOOGLE_GEO_CODING_API_KEY;
-		}
-		else if (defined('GOOGLE_GEO_CODING_CLIENT_ID') && defined('GOOGLE_GEO_CODING_PRIVATE_KEY')){
-			$google_geo_coding_client_id   = GOOGLE_GEO_CODING_CLIENT_ID;
-			$google_geo_coding_private_key = GOOGLE_GEO_CODING_PRIVATE_KEY;
-		}
+
 		$this->repository = new SapphireEventRegistrationRequestRepository;
 		$this->event_registration_request_manager = new EventRegistrationRequestManager(
 			$this->repository,
@@ -54,10 +45,8 @@ final class EventRegistrationRequestCrudApi
 			new GoogleGeoCodingService(
 				new SapphireGeoCodingQueryRepository,
 				new UtilFactory,
-				SapphireTransactionManager::getInstance(),
-				$google_geo_coding_api_key,
-				$google_geo_coding_client_id,
-				$google_geo_coding_private_key),
+				SapphireTransactionManager::getInstance()
+			),
 			new SapphireEventPublishingService,
 			new EventValidatorFactory,
 			SapphireTransactionManager::getInstance()

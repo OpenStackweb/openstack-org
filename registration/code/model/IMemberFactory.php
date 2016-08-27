@@ -19,4 +19,10 @@ interface IMemberFactory
      * @return Member
      */
     public function build(array $data);
+
+    /**
+     * @param array $data
+     * @return Member
+     */
+    public function buildReduced(array $data);
 }

@@ -29,7 +29,7 @@ final class FoundationMember
     (
         'RevocationNotifications' => 'FoundationMemberRevocationNotification',
         'Votes'                   => 'Vote',
-        'SummitRegistrationCodes' => 'SummitRegistrationPromoCode',
+        'SummitRegistrationCodes' => 'MemberSummitRegistrationPromoCode',
     );
 
     private static $defaults = array
@@ -341,7 +341,7 @@ final class FoundationMember
      * @param bool $show
      * @return void
      */
-    public function showDupesOnProfile($show)
+    public function updateShowDupesOnProfile($show)
     {
         $this->owner->setField('ShowDupesOnProfile', $show);
     }
@@ -354,32 +354,4 @@ final class FoundationMember
         return $this->owner->getField('ShowDupesOnProfile');
     }
 
-    /**
-     * @param int $summit_id
-     * @return bool
-     */
-    public function hasPromoRegistrationCode($summit_id)
-    {
-        $code = $this->getPromoCodeForSummit($summit_id);
-        return !is_null($code);
-    }
-
-    /**
-     * @param int $summit_id
-     * @return ISummitRegistrationPromoCode
-     */
-    public function getPromoCodeForSummit($summit_id)
-    {
-        return $this->owner->SummitRegistrationCodes()->filter('SummitID',$summit_id)->first();
-    }
-
-    /**
-     * @param ISummitRegistrationPromoCode $promo_code
-     * @return $this
-     */
-    public function registerPromoCode(ISummitRegistrationPromoCode $promo_code)
-    {
-        $promo_code->assignOwner($this->owner);
-        return $this;
-    }
 }

@@ -5,6 +5,8 @@ After: 'framework/*'
 Injector:
   ManyManyList:
     class: ObservableManyManyList
+  ForeignKey:
+    class: NullAbleForeignKey
   TimeField:
     class: ClockTimePickerField
   HasManyList:

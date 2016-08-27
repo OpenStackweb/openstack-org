@@ -100,12 +100,12 @@ final class Consultants_Controller extends AbstractController
             }
 
             if (!empty($service)) {
-                $query->addAlias(QueryAlias::create('ConsultantServiceOfferedType'));
+                $query->addAlias(QueryAlias::create('ServicesOffered'));
                 $query->addAndCondition(QueryCriteria::like("ConsultantServiceOfferedType.Type", $service));
             }
 
             if (is_array($location) && !empty($location[0])) {
-                $query->addAlias(QueryAlias::create('Office'));
+                $query->addAlias(QueryAlias::create('Offices'));
                 $query->addAndCondition(QueryCriteria::like("Office.City", $location[0]));
             }
 

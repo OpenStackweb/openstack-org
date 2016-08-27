@@ -1,71 +1,87 @@
 <div class="container jobPosting"  id="{$ID}">
     <div class="row">
-        <% if RecentJob %>
-            <p class="type"><span class="label">Type: </span>New!</p>
-        <% else %>
-            <p class="type"><span class="label">Type: </span></p>
-        <% end_if %>
-    </div>
-    <div class="row">
-        <div class="col-md-8">
-            <ul class="details">
-                <li class="title">
-                    <span class="label">Job Title: </span>
-                    <a rel="nofollow" target="_blank" href="/community/jobs/view/$ID/$TitleForUrl" class="jobTitle">$Title</a>
-                </li>
-                <li class="employer">
-                    <span class="label">Employer: </span>at <strong>$JobCompany</strong>
-                </li>
-            </ul>
-        </div>
-        <div class="col-md-3 postDate">
-            <p><span class="label">Date Posted: </span>$JobPostedDate.format(F) $JobPostedDate.format(d)</p>
-        </div>
-    </div>
-    <% if FormattedLocation %>
-        <div class="row">
-            <div class="col-md-12">
-                <ul class="location">
-                    <li>
-                        <span class="label">Location: </span>
-                        $FormattedLocation
-                    </li>
-                </ul>
+        <div class="col-sm-11">        
+            <div class="dateField">
+                <div>
+                    <% if RecentJob %>
+                        <div class="newBox">
+                            <h5>NEW</h5>
+                        </div>
+                    <% end_if %>
+                </div>
+                <div class="publishedDate">
+                    <h5>Published on $PostedDate.format(F) $PostedDate.format(d)</h5>
+                </div>
             </div>
         </div>
-    <% end_if %>
-
-    <a href="" class="jobExpand btn btn-default btn-xs">more</a>
-
-    <div class="row jobDescription" style="display:none">
-        <div class="col-md-12">
+    </div>
+    <div class="row">
+        <div class="col-sm-11">       
+            <div class="detail_title">
+                <a rel="nofollow" target="_blank" href="/community/jobs/view/$ID/$Slug" class="jobTitle job_title_hold">$Title</a>                
+            </div>
+        </div>
+        <div class="col-sm-1">
+            <% if IsCOANeeded %>
+                <img id="coa" src="https://www.openstack.org/themes/openstack/images/coa/coa-badge.svg">
+            <% end_if %>            
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-11">    
+            <div class="jobBasics-2">
+                    <div class="glyphicon glyphicon-briefcase"></div>
+                        $CompanyName
+                    <div class="glyphicon glyphicon-map-marker"></div>
+                    <% if FormattedLocation %>
+                        $FormattedLocation
+                    <% end_if %>     
+            </div>
+        </div>
+        <div class="col-sm-1">            
+                <a href="" class="jobExpand">
+                    <div id="moreInfoButton">
+                        <h5>More Info</h5>                       
+                    </div>
+                </a>
+        </div>
+    </div>
+    <div class="row jobDescription">
+        <div class="col-md-11">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-11">
                     <div style="max-width:1000px">
-                        $Content
+                        $Description
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-11">
                     <div style="max-width: 1000px">
-                        $JobInstructions2Apply
+                        $Instructions2Apply
                     </div>
                 </div>
             </div>
             <br>
-            <div class="row">
-                <div class="col-md-2">
-                    <div class="moreInfo">
-                        <span class="label">More information: </span>$MoreInfoLink
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="moreInfo">
-                        <span class="label">Job page: </span>
-                        <a rel="nofollow" target="_blank" href="/community/jobs/view/$ID/$TitleForUrl">Permalink to this job</a>
-                    </div>
-                </div>
+            <div class="row">                
+                <div class="col-md-3">
+                    <a rel="nofollow" target="_blank" href="/community/jobs/view/$ID/$Slug">
+                        <div class="button2">                            
+                            <div class="glyphicon glyphicon-plus"></div>
+                            <h5>Read full description</h5>
+                        </div>
+                    </a>
+                </div> 
+                <div class="col-md-3">
+                    <% if MoreInfoLink %>
+                        <a rel="nofollow" target="_blank" href="$MoreInfoLink">
+                            <div class="button3">                            
+                                <div class="glyphicon glyphicon-share-alt"></div>
+                                <h5>Apply Now</h5>
+                            </div>
+                        </a>
+                    <% end_if %>
+                </div>                
             </div>
         </div>
     </div>

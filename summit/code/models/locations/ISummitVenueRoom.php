@@ -23,4 +23,9 @@ interface ISummitVenueRoom extends ISummitLocation
      * @return bool
      */
     public function isFull();
+
+    /**
+     * @return IRoomMetricType[]
+     */
+    public function getMetricTypes();
 }

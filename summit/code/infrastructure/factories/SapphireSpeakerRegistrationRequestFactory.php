@@ -39,13 +39,7 @@ final class SapphireSpeakerRegistrationRequestFactory
         $request->IsConfirmed = false;
         $request->SpeakerID   = $speaker->getIdentifier();
         $request->ProposerID  = Member::currentUserID();
-
-        $already_exists = false;
-        do {
-            $token          = $request->generateConfirmationToken();
-            $already_exists = $this->repository->existsConfirmationToken($token);
-        } while($already_exists);
-
+        $request->generateConfirmationToken();
         return $request;
     }
 }

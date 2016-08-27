@@ -1,0 +1,187 @@
+/* Analysts Landing */
+.analysts-hero {
+  background: url("/themes/openstack/images/analysts/analysts-hero.jpg") no-repeat center left;
+  background-size: cover;
+  padding: 60px 0 60px; }
+  .analysts-hero h1 {
+    color: white;
+    margin: 0; }
+  .analysts-hero .carousel {
+    height: 250px; }
+    .analysts-hero .carousel .carousel-inner {
+      height: 250px; }
+      .analysts-hero .carousel .carousel-inner .carousel-caption {
+        top: 25px;
+        right: 10%;
+        left: 10%;
+        font-size: 22px; }
+        .analysts-hero .carousel .carousel-inner .carousel-caption .attribute {
+          font-size: 14px;
+          font-weight: 300;
+          margin-top: 30px; }
+          .analysts-hero .carousel .carousel-inner .carousel-caption .attribute a {
+            color: white;
+            text-decoration: underline; }
+        .analysts-hero .carousel .carousel-inner .carousel-caption:before, .analysts-hero .carousel .carousel-inner .carousel-caption:after {
+          color: #edf2f7;
+          font-size: 4em;
+          position: absolute;
+          top: -20px;
+          font-family: Georgia, serif;
+          font-weight: normal;
+          opacity: 0.6; }
+        .analysts-hero .carousel .carousel-inner .carousel-caption:before {
+          content: open-quote;
+          left: -20px; }
+        .analysts-hero .carousel .carousel-inner .carousel-caption:after {
+          content: close-quote;
+          right: -20px; }
+      .analysts-hero .carousel .carousel-inner .item {
+        height: 250px;
+        background: transparent; }
+
+@media (max-width: 767px) {
+  .analysts-hero .carousel {
+    height: 250px; }
+    .analysts-hero .carousel .carousel-inner {
+      height: 250px; }
+      .analysts-hero .carousel .carousel-inner .carousel-caption {
+        font-size: 18px;
+        right: 5%;
+        left: 5%; }
+      .analysts-hero .carousel .carousel-inner .item {
+        height: 250px; } }
+
+@media (max-width: 500px) {
+  .analysts-hero .carousel {
+    height: 300px; }
+    .analysts-hero .carousel .carousel-inner {
+      height: 300px; }
+      .analysts-hero .carousel .carousel-inner .carousel-caption {
+        font-size: 18px;
+        right: 5%;
+        left: 5%; }
+      .analysts-hero .carousel .carousel-inner .item {
+        height: 300px; } }
+
+.analysts-videos {
+  padding: 60px 0;
+  text-align: center; }
+  .analysts-videos h2 {
+    text-align: center;
+    margin-bottom: 50px; }
+  .analysts-videos .video-wrapper .video-img-wrapper {
+    position: relative; }
+    .analysts-videos .video-wrapper .video-img-wrapper img {
+      width: 100%;
+      height: auto; }
+    .analysts-videos .video-wrapper .video-img-wrapper:before {
+      position: absolute;
+      top: 50%;
+      margin-top: -35px;
+      left: 50%;
+      margin-left: -40px;
+      content: "\F144";
+      font-family: FontAwesome;
+      font-size: 50px;
+      margin-right: 5px;
+      padding: 8px 20px;
+      border-radius: 4px;
+      line-height: 1;
+      color: #fff;
+      z-index: 110;
+      background: rgba(0, 0, 0, 0.5); }
+    .analysts-videos .video-wrapper .video-img-wrapper:hover:before {
+      background: rgba(0, 0, 0, 0.9);
+      -webkit-transition: background 0.3s;
+              transition: background 0.3s; }
+  .analysts-videos .video-wrapper .gallery-title {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 10px;
+    text-align: left; }
+  .analysts-videos .video-wrapper .gallery-subtitle {
+    color: #2a4e68;
+    font-weight: 400;
+    font-size: 9pt;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: 2em;
+    text-align: left; }
+
+.analysts-mid {
+  background: #edf2f7;
+  padding: 60px 0;
+  text-align: center; }
+  .analysts-mid h2 {
+    text-align: center;
+    margin-bottom: 50px; }
+
+.analysts-list {
+  background: #edf2f7;
+  padding: 60px 0;
+  text-align: center; 
+  margin-bottom: -50px;
+}
+  .analysts-list h2 {
+    text-align: center;
+    margin-bottom: 30px; }
+  .analysts-list h4 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #2A4E68; }
+  .analysts-list .analysts-list-single {
+    text-align: center;
+    border-bottom: 1px solid #D4DCE5;
+    padding: 40px 0; }
+    .analysts-list .analysts-list-single a {
+      text-decoration: underline; }
+    .analysts-list .analysts-list-single .analysts-links {
+      margin-top: 10px; }
+    .analysts-list .analysts-list-single.double {
+      text-align: left; }
+      .analysts-list .analysts-list-single.double .right {
+        text-align: right; }
+    .analysts-list .analysts-list-single:last-of-type {
+      border-bottom: 0; }
+  .analysts-list blockquote {
+    font-family: Georgia, serif;
+    font-weight: normal;
+    font-size: 1.2em;
+    border: none;
+    position: relative;
+    color: #2A4E68;
+    text-align: center;
+    width: 80%;
+    margin: 0 auto; }
+  .analysts-list blockquote:before,
+  .analysts-list blockquote:after {
+    color: #D4DCE5;
+    font-size: 4em;
+    position: absolute;
+    top: -30px; }
+  .analysts-list blockquote:before {
+    content: open-quote;
+    left: -10px; }
+  .analysts-list blockquote:after {
+    content: close-quote;
+    right: -10px; }
+  .analysts-list .testimonial-attribute {
+    text-align: center;
+    font-size: 0.9em;
+    color: #30739C;
+    margin-top: 8px; }
+
+@media (max-width: 767px) {
+  .analysts-list .analysts-list-single .analysts-links {
+    margin-top: 30px; }
+  .analysts-list .analysts-list-single.double {
+    text-align: center; }
+    .analysts-list .analysts-list-single.double .right {
+      text-align: center; }
+  .analysts-list .testimonial-attribute {
+    margin-bottom: 40px; } }

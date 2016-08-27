@@ -13,13 +13,14 @@
  **/
 
 PublisherSubscriberManager::getInstance()->subscribe(ISummitEntityEvent::UpdatedEntity, function($entity){
+    $metadata = '';
 
     $summit_id = isset($_REQUEST['SummitID']) ? intval($_REQUEST['SummitID']) : $entity->getField("SummitID");
     if(is_null($summit_id) || $summit_id == 0) $summit_id = Summit::ActiveSummitID();
     if($entity instanceof PresentationMaterial){
         $summit_id = $entity->Presentation()->SummitID;
     }
-    $metadata = '';
+    $entity_class_name = $entity->ClassName;
 
     if($entity instanceof SummitEvent)
     {
@@ -36,10 +37,37 @@ PublisherSubscriberManager::getInstance()->subscribe(ISummitEntityEvent::Updated
             // just record the published state at the moment of the update
             $metadata = json_encode( array ( 'pub_new' => intval($entity->Published)));
         }
+        if(!$entity->Published)
+        {
+            // clean attendees schedules
+            DB::query("DELETE SummitAttendee_Schedule FROM SummitAttendee_Schedule WHERE SummitEventID = {$entity->ID};");
+        }
+    }
+
+    if($entity instanceof SummitVenueFloor){
+        $metadata = json_encode(array('venue_id' => intval($entity->VenueID)));
+    }
+
+    if($entity instanceof PresentationMaterial){
+        $metadata = json_encode(array('presentation_id' => intval($entity->PresentationID)));
+    }
+
+    if($entity instanceof SummitVenueRoom){
+        $fields = $entity->getChangedFields(true);
+        if(isset($fields['FloorID']))
+        {
+            $floor_old         = intval($fields['FloorID']['before']);
+            $floor_new         = intval($fields['FloorID']['after']);
+            $metadata          = json_encode( array ( 'floor_old' => $floor_old, 'floor_new' => $floor_new));
+        }
+    }
+
+    if($entity instanceof SummitLocationImage || $entity instanceof SummitLocationMap){
+        $metadata = json_encode(array('location_id' => intval($entity->Location)));
     }
 
     $event                  = new SummitEntityEvent();
-    $event->EntityClassName = $entity->ClassName;
+    $event->EntityClassName = $entity_class_name;
     $event->EntityID        = $entity->ID;
     $event->Type            = 'UPDATE';
     $event->OwnerID         = Member::currentUserID();
@@ -50,17 +78,29 @@ PublisherSubscriberManager::getInstance()->subscribe(ISummitEntityEvent::Updated
 
 PublisherSubscriberManager::getInstance()->subscribe(ISummitEntityEvent::InsertedEntity, function($entity){
 
+    $metadata = '';
     $summit_id = isset($_REQUEST['SummitID']) ? intval($_REQUEST['SummitID']) : $entity->getField("SummitID");
     if(is_null($summit_id) || $summit_id == 0) $summit_id = Summit::ActiveSummitID();
     if($entity instanceof PresentationMaterial){
         $summit_id = $entity->Presentation()->SummitID;
     }
-    $metadata = '';
 
     if($entity instanceof SummitEvent)
     {
         $pub_new  = intval($entity->Published);
         $metadata = json_encode( array ('pub_new' => $pub_new));
+    }
+
+    if($entity instanceof SummitVenueFloor){
+        $metadata = json_encode(array('venue_id' => intval($entity->VenueID)));
+    }
+
+    if($entity instanceof SummitLocationImage || $entity instanceof SummitLocationMap){
+        $metadata = json_encode(array('location_id' => intval($entity->Location)));
+    }
+
+    if($entity instanceof PresentationMaterial){
+        $metadata = json_encode(array('presentation_id' => intval($entity->PresentationID)));
     }
 
     $event                  = new SummitEntityEvent();
@@ -75,12 +115,31 @@ PublisherSubscriberManager::getInstance()->subscribe(ISummitEntityEvent::Inserte
 
 PublisherSubscriberManager::getInstance()->subscribe(ISummitEntityEvent::DeletedEntity, function($entity){
 
+    $metadata = '';
     $summit_id = isset($_REQUEST['SummitID']) ? intval($_REQUEST['SummitID']) : $entity->getField("SummitID");
     if(is_null($summit_id) || $summit_id == 0) $summit_id = Summit::ActiveSummitID();
-    if($entity instanceof PresentationMaterial){
+    if($entity instanceof PresentationMaterial)
+    {
         $summit_id = $entity->Presentation()->SummitID;
     }
-    $metadata = '';
+    if($entity instanceof SummitEvent)
+    {
+        // clean attendees schedules
+        DB::query("DELETE SummitAttendee_Schedule FROM SummitAttendee_Schedule WHERE SummitEventID = {$entity->ID};");
+    }
+
+    if($entity instanceof SummitVenueFloor){
+        $metadata = json_encode(array('venue_id' => intval($entity->VenueID)));
+    }
+
+    if($entity instanceof SummitLocationImage || $entity instanceof SummitLocationMap){
+        $metadata = json_encode(array('location_id' => intval($entity->Location)));
+    }
+
+    if($entity instanceof PresentationMaterial){
+        $metadata = json_encode(array('presentation_id' => intval($entity->PresentationID)));
+    }
+
     $event                  = new SummitEntityEvent();
     $event->EntityClassName = $entity->ClassName;
     $event->EntityID        = $entity->ID;
@@ -171,7 +230,7 @@ PublisherSubscriberManager::getInstance()->subscribe('manymanylist_added_item', 
         $event->Type     = 'INSERT';
         $event->OwnerID  = Member::currentUserID();
         $event->SummitID = $presentation->SummitID;
-        $event->Metadata = json_encode( array('presentation_id' => $presentation_id ));
+        $event->Metadata = json_encode( array('event_id' => $presentation_id ));
         $event->write();
     }
     if($item instanceof SummitType && $list->getJoinTable() === 'SummitEvent_AllowedSummitTypes')
@@ -256,7 +315,7 @@ PublisherSubscriberManager::getInstance()->subscribe('manymanylist_removed_item'
         $event->Type     = 'DELETE';
         $event->OwnerID  = Member::currentUserID();
         $event->SummitID = $presentation->SummitID;
-        $event->Metadata = json_encode( array('presentation_id' => $presentation_id ));
+        $event->Metadata = json_encode( array('event_id' => $presentation_id ));
         $event->write();
     }
     if($item instanceof SummitType && $list->getJoinTable() === 'SummitEvent_AllowedSummitTypes')
@@ -292,7 +351,6 @@ PublisherSubscriberManager::getInstance()->subscribe('manymanylist_removed_item'
     }
 });
 
-define('MAX_SUMMIT_ALLOWED_PER_USER', 3);
 define('SUMMIT_ATTENDEE_CREATE_MEMBERSHIP_INVITATION_EMAIL_TEMPLATE', 'summit-attendee-create-membership-invitation');
 define('SUMMIT_ATTENDEE_CREATED_EMAIL_TEMPLATE', 'summit-attendee-created');
 
@@ -307,3 +365,11 @@ define('PRESENTATION_SPEAKER_ACCEPTED_ALTERNATE_EMAIL','presentation-speaker-acc
 define('PRESENTATION_SPEAKER_REJECTED_EMAIL', 'presentation-speaker-rejected-only');
 define('PRESENTATION_SPEAKER_NOTIFICATION_ACCEPTANCE_EMAIL_FROM', 'speakersupport@openstack.org');
 define('PRESENTATION_SPEAKER_NOTIFICATION_ACCEPTANCE_SUMMIT_SUPPORT', 'summit@openstack.org');
+define('MEMBER_PROMO_CODE_EMAIL', 'member-promo-code');
+define('MEMBER_NOTIFICATION_PROMO_CODE_EMAIL_FROM', 'speakersupport@openstack.org');
+
+
+// Second Break Out Email Templates
+define('PRESENTATION_SPEAKER_CREATE_MEMBERSHIP_EMAIL', 'presentation-speaker-create-membership-email');
+define('PRESENTATION_SPEAKER_CONFIRM_SUMMIT_ASSISTANCE_EMAIL', 'presentation-speaker-confirm-summit-assistance-ema');
+define('PRESENTATION_SPEAKER_SUMMIT_REMINDER_EMAIL', 'presentation-speaker-summit-reminder-email');

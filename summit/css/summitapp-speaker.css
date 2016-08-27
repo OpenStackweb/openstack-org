@@ -26,8 +26,8 @@
 }
 
 .speaker_name {
-    font-size: 42px;
-    color: white;
+    font-size: 30px;
+    color: #666;
     margin-top: 30px;
     margin-bottom: 10px;
 }
@@ -38,13 +38,9 @@
 }
 
 .speaker_pic {
-    width: 150px;
+    width: 120px;
     float: left;
     margin: 0 15px 15px 0;
-}
-
-.global-search-div {
-    top: -47px;
 }
 
 .section1 {
@@ -94,8 +90,7 @@
     margin-bottom: 30px;
 }
 
-.speaker-photo-big
-{
-    width: 140px;
-    height: 140px;
+.big-pic {
+    width: 120px !important;
+    height: 120px !important;
 }

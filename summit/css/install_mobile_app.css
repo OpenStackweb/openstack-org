@@ -1,0 +1,45 @@
+.btn-action{
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+#install-app-overlay {
+    position:absolute;
+    width:100%;
+    height:auto;
+    top:0;
+    left:0;
+    color:#fff;
+    background:darkslategray;
+    display:none;
+    text-align:center;
+    position: fixed;
+    padding-bottom: 5%;
+}
+
+#install-app-overlay h3{
+    color: white;
+    font-weight: bold;
+}
+
+#install-app-overlay .btn-continue{
+    position: relative;
+}
+
+#install-app-overlay .summit-hero-logo {
+    margin: 5px;
+    margin-left:10px;
+    width: 65px;
+    height: 65px;
+}
+
+#install-app-overlay .header-col{
+    float:left;
+    padding-left: 10px;
+}
+
+#install-app-overlay .header-col.right{
+    float: right;
+    position: relative;
+    left:-5%;
+}

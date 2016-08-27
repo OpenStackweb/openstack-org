@@ -58,13 +58,15 @@ class SummitPushNotificationManager
             foreach($list as $notification)
             {
                 if(empty($notification->Message)) continue;
-                $message  = array
-                (
-                    "data" => array
-                    (
-                        'alert' => $notification->Message
-                    )
-                );
+                $message  = [
+
+                    "data" => [
+                        'alert'     => $notification->Message,
+                        'id'        => intval($notification->ID),
+                        'summit_id' => intval($notification->SummitID),
+                        'type'      => $notification->Channel,
+                    ]
+                ];
                 // Push to speakers
                 try
                 {
@@ -75,12 +77,12 @@ class SummitPushNotificationManager
                         {
                             $message['channels'] = ['speakers'];
                         }
-                        break;
+                            break;
                         case 'ATTENDEES':
                         {
                             $message['channels'] = ['attendees'];
                         }
-                        break;
+                            break;
                         case 'MEMBERS':
                         {
                             $recipients = array();
@@ -91,17 +93,29 @@ class SummitPushNotificationManager
                             }
                             $message['channels'] = $recipients;
                         }
-                        break;
+                            break;
                         case 'SUMMIT':
                         {
                             $message['channels'] = ['su_'.$notification->SummitID];
                         }
-                        break;
-                        case 'ALL':
+                            break;
+                        case 'EVENT':
+                        {
+                            $data           = $message['data'];
+                            $extra_data     = [
+                                'event_id' => $notification->EventID,
+                                'title'    => $notification->Event()->getTitle(),
+                            ];
+
+                            $message['data']     = array_merge($data, $extra_data);
+                            $message['channels'] = ['evt_'.$notification->EventID];
+                        }
+                            break;
+                        case 'EVERYONE':
                         {
                             $message['where'] = ParseInstallation::query();
                         }
-                        break;
+                            break;
                     }
                     ParsePush::send($message);
                     $notification->sent();

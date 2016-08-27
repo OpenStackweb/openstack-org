@@ -10,27 +10,28 @@
 
 
 
-    <!-- Begin Page Content -->
+        <!-- Begin Page Content -->
         <div class="intro-header enterprise-booklet">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 col-md-push-2">
-                    <div class="intro-message">
-                        <h5>FEATURED</h5>
-                        <h1>Recommendations from the enterprise community</h1>
-                        <!-- <h3>OpenStack is a driving force in Enterprise software</h3> -->
-                        <p>
-                            Current OpenStack users—from small startups to global enterprise—built a booklet of use cases and planning tips with the IT executive in mind. Their experience can help you get started with OpenStack. 
-                        </p>
-                        <p>
-                            <a href="#" class="lrg-btn" data-toggle="modal" data-target="#downloadModal">Get their insights now</a>
-                        </p>
+            <div class="mid-overlay">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 col-md-push-2">
+                            <div class="intro-message">
+                                <div class="foundation-report-title">OpenStack Foundation Report</div>
+                                <h1>OpenStack: The Path To Cloud</h1>
+                                <!-- <h3>OpenStack is a driving force in Enterprise software</h3> -->
+                                <p>
+                                    Considerations and recommendations for businesses adopting cloud technology
+                                </p>
+                                <p>
+                                    <a href="#" class="path-options-btn" data-toggle="modal" data-target="#BookletModalHero">Get the recommendations now</a>
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <!-- /.container -->
             </div>
-
-        </div>
-        <!-- /.container -->
     </div>
     <!-- /.intro-header -->
     <div class="content-section-a why-ues-wrapper">
@@ -65,22 +66,60 @@
             </div>
         </div>
     </div>
-    <!-- Forrester promo -->
-<div class="content-section-b forrester-promo-row">
+    <div class="lf-security-promo">
         <div class="container">
             <div class="row">
-                <div class="col-sm-3">
-                    <h3>
-                        OPENSTACK IS READY<br/>ARE YOU?
-                    </h3>
+                <div class="col-sm-3 center">
+                    <img class="security-badge" src="//openstack.org/themes/openstack/images/security/badge.png" alt="">
                 </div>
-                <div class="col-sm-5">
+                <div class="col-sm-9">
+                    <h2>OpenStack security experts answer your questions</h2>
                     <p>
-                    “Notable Fortune 100 enterprises like BMW, Disney, and Walmart have irrefutably proven that OpenStack is viable for production environments.“
+                        The Security Project team lives and breathes cloud security and answers the most frequently asked questions from enterprises and technologists. The Linux Foundation's Core Infrastructure Initiative has validated OpenStack passes 100% of the best practices for open source security, quality and stability and has issued its Best Practices badge.
+                    </p>
+                    <p>
+                        <a href="/software/security/" class="security-promo-btn">Learn More <i class="fa fa-chevron-circle-right"></i></a>
                     </p>
                 </div>
-                <div class="col-sm-4">
-                    <a href="/enterprise/forrester-report/" class="marketplace-btn">Read The Forrester Report <i class="fa fa-chevron-right"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="booklets-section">
+        <div class="container">
+            <div class="row section-title-center"> 
+                <div class="col-sm-12 booklets-intro">
+                    <h1>Recommendations from the enterprise community</h1>
+                    <p>
+                        Current OpenStack users and community members built two guidebooks with enterprises in mind. 
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 left">
+                    <div class="booklets-wrapper">
+                        <div class="booklets-top">
+                            <p>
+                                <strong>OpenStack: A Business Perspective</strong>
+                                Offers IT executives a view into use cases and economic factors to examine when considering OpenStack.
+                            </p>
+                        </div>
+                        <p> 
+                            <a href="#" class="booklets-btn"  data-toggle="modal" data-target="#businessPersepctivesModal">Download now <i class="fa fa-cloud-download"></i></a>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="booklets-wrapper">
+                        <div class="booklets-top">
+                            <p>
+                                <strong>OpenStack: The Path to Cloud</strong>
+                                Provides enterprise architects insights on planning an OpenStack cloud, including selecting the right model, forming your team, choosing workloads, and implementation from proof-of-concept through production.
+                            </p>
+                        </div>
+                        <p>
+                            <a href="#" class="booklets-btn" data-toggle="modal" data-target="#BookletModalHero">Download now <i class="fa fa-cloud-download"></i></a>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -131,6 +170,26 @@
                </div>
            </div>
        </div>
+    </div>
+    <!-- Forrester promo -->
+    <div class="content-section-b forrester-promo-row">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <h3>
+                        OPENSTACK IS READY<br/>ARE YOU?
+                    </h3>
+                </div>
+                <div class="col-sm-5">
+                    <p>
+                    “Notable Fortune 100 enterprises like BMW, Disney, and Walmart have irrefutably proven that OpenStack is viable for production environments.“
+                    </p>
+                </div>
+                <div class="col-sm-4">
+                    <a href="/enterprise/forrester-report/" class="marketplace-btn">Read The Forrester Report <i class="fa fa-chevron-right"></i></a>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="content-section-a">
         <div class="container">
@@ -313,12 +372,12 @@
 
     <!-- End Marketplace and Events -->
 
-    <!-- Download Modal -->
-    <div class="modal fade" id="downloadModal">
+    <!-- Business Perspectives Modal -->
+    <div class="modal fade" id="businessPersepctivesModal">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
             <h4 class="modal-title">OpenStack: A Business Perspective</h4>
           </div>
           <div class="modal-body">
@@ -334,8 +393,45 @@
           </div>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
+    </div>
+
+      <!-- Hero Booklet Modal -->
+    <div class="modal fade" id="BookletModalHero">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title">OpenStack: The Path To Cloud</h4>
+          </div>
+          <div class="modal-body">
+            <p class="download-text">
+                Read the recommendations for IT architects planning an OpenStack cloud. Learn from seasoned community members to make the best decisions about cloud for your business.
+            </p>
+            <ul class="booklets-list">
+                <li>
+                    <a href="//openstack.org/assets/path-to-cloud/OpenStack-6x9Booklet-online.pdf" taget="_blank">View the book online</a>
+                </li>
+                <li>
+                    <a href="//openstack.org/assets/path-to-cloud/The-Path-to-Cloud.epub" taget="_blank">Read the ebook on your phone, tablet, computer or e-reader</a>
+                </li>
+                <li>
+                    <a href="//openstack.org/assets/path-to-cloud/The-Path-to-Cloud.mobi" taget="_blank">Read the ebook on your Kindle</a>
+                </li>
+                <li>
+                    <a href="http://www.amazon.com/dp/1532709404" taget="_blank">Order a paperback from Amazon</a>
+                </li>
+            </ul>
+            <div class="tip">
+                <strong><i class="fa fa-info-circle"></i>TIP:</strong> 
+                <a href="http://www.amazon.com/gp/sendtokindle/email" target="_blank">how to open documents on your Kindle</a>
+            </div>
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-    <!-- End Download Modal -->
+    <!-- End Hero Booklet Modal -->
 
 
       <!-- Hero Video Modal -->

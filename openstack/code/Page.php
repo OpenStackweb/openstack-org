@@ -18,10 +18,13 @@ class Page extends SiteTree
     private static $db = array(
         'IncludeJquery' => 'Boolean',
         'PageJavaScript' => 'Text',
-        'IncludeShadowBox' => 'Boolean'
+        'IncludeShadowBox' => 'Boolean',
+        'MetaTitle' => 'Varchar(255)',
     );
 
-    private static $has_one = array();
+    private static $has_one = array(
+        'MetaImage' => 'BetterImage'
+    );
 
     public function InPast($fieldname)
     {
@@ -41,6 +44,11 @@ class Page extends SiteTree
     function getCMSFields()
     {
         $fields = parent::getCMSFields();
+
+
+        // metadata
+        $fields->fieldByName('Root.Main.Metadata')->push(new UploadField("MetaImage",$this->fieldLabel('MetaImage')));
+        $fields->fieldByName('Root.Main.Metadata')->push(new TextField("MetaTitle",$this->fieldLabel('MetaTitle')));
 
 
         $fields->addFieldToTab('Root.Settings', new TextField ('PageCSS', 'Custom CSS File For This Page (must be in CSS directory)'));
@@ -203,6 +211,29 @@ class Page extends SiteTree
         }
     }
 
+    public function removeExtension($extension){
+        if($this->hasExtension($extension))
+             unset($this->extension_instances[$extension]);
+    }
+
+    public static $default_image = '/themes/openstack/images/openstack-logo-full.png';
+
+    public function getOGImage()
+    {
+        if ($this->hasField('MetaImage') && $this->MetaImage()->Exists())
+            return $this->MetaImage()->getURL();
+        return Director::absoluteURL(self::$default_image);
+    }
+
+    public function getOGTitle()
+    {
+        if($this->hasField('MetaTitle')) {
+            $title = trim($this->MetaTitle);
+            if(!empty($title)) return $title;
+        }
+
+        return $this->Title." &raquo; OpenStack Open Source Cloud Computing Software";
+    }
 }
 
 class Page_Controller extends ContentController
@@ -335,7 +366,6 @@ class Page_Controller extends ContentController
     public function init()
     {
         parent::init();
-
         // Summit Landing Page Redirects
         // Looks to see if ?source is set and redirects to either English or Chinese landing page
         // based on the source
@@ -514,5 +544,11 @@ class Page_Controller extends ContentController
         $response->addHeader('Content-Type', 'application/javascript');
         $response->setBody($jsonp);
         return $response;
+    }
+
+    public function MetaTags()
+    {
+        $tags = parent::MetaTags(false);
+        return $tags;
     }
 }

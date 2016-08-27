@@ -15,7 +15,7 @@
     if (hash != '') {
         var filter = hash.substring(1).toLowerCase().replace(/_/g, ' ');;
         var $evenstLink = $('.event-type-link').filter(function() {
-            if ($(this).data('type').toLowerCase() == filter) {
+            if ($(this).data('type').toString().toLowerCase() == filter) {
                 return true;
             }
             return false;
@@ -47,10 +47,10 @@ function showUpcomingEvents($evenstLink) {
     $('.event-type-link').removeClass('event-type-selected');
     $evenstLink.addClass('event-type-selected')
 
-    if (filter.toLowerCase() == 'all') {
+    if (filter.toString().toLowerCase() == 'all') {
         $('#upcoming-events .single-event').show();
     }
-    else if (filter.toLowerCase() == 'other') {
+    else if (filter.toString().toLowerCase() == 'other') {
         $('#upcoming-events .single-event').hide();
         $('#upcoming-events .single-event[data-type=""]').show();
     }
@@ -59,7 +59,7 @@ function showUpcomingEvents($evenstLink) {
         $('#upcoming-events .single-event[data-type="' + filter + '"]').show();
     }
 
-    window.location.hash = filter.toLowerCase().replace(/ /g, '_');
+    window.location.hash = filter.toString().toLowerCase().replace(/ /g, '_');
 
 }
 

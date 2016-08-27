@@ -54,6 +54,8 @@ label.error {
     position:relative;
     background: none;
     padding: 0;
+    color: red;
+    font-size: 12px;
 }
 
 .error {

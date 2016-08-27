@@ -11,21 +11,6 @@
             </div>
         </div>
     </div>
-<%--
-    <% if PopularTerms %>
-        <div class="row cloud-tags">
-            <ul id="tags_list">
-                <% loop PopularTerms %>
-                    <li data-hits="{$Hits}" data-term="{$Term}">
-                        <a href="{$Top.Link(global-search)}?t={$Term.JS}" Title="Search for {$Term.JS}">
-                            <span class="label label-default tag-cloud" style="background-color: hsl(0, 0%, {$Opacity}%);font-size: {$FontSize}px;">$Term</span>
-                        </a>
-                    </li>
-                <% end_loop %>
-            </ul>
-        </div>
-    <% end_if %>
---%>
     <% if SpeakerResults && SpeakerResults.Count %>
     <div class="container">
         <div class="col-md-12">
@@ -38,8 +23,8 @@
                 <div class="col-xs-4 col-md-4">
                     <div class="row speaker-result">
                         <div class="col-md-4">
-                            <a href="{$Top.Link(speaker)}/{$ID}">
-                                <img src="{$ProfilePhoto}" class="img-circle big-profile-pic" alt="{$Name}">
+                            <a href="{$Top.Link(speakers)}/{$ID}">
+                                <img src="{$ProfilePhoto(100)}" class="img-circle big-profile-pic" alt="{$Name}">
                             </a>
                         </div>
                         <div class="col-md-8 result-speaker-name-div">
@@ -48,7 +33,7 @@
                                     <a href="{$Top.Link(speakers)}/{$ID}">$Name</a>
                                 </div>
                             </div>
-                            <div class="row speaker-position-row"><div class="col-md-12">{$CurrentPosition}</div></div>
+                            <div class="row speaker-position-row"><div class="col-md-12">{$getTitleNice()}</div></div>
                         </div>
                     </div>
                 </div>
@@ -67,7 +52,12 @@
                 <script type="application/javascript">
                     var summit =
                         {
-                            id:   $Top.Summit.ID,
+                            id:   $Summit.ID,
+                            link: "{$Summit.Link.JS}",
+                            schedule_link: "{$Summit.getScheduleLink.JS}",
+                            track_list_link: "{$Summit.getTrackListLink.JS}",
+                            title: "{$Summit.Title.JS}",
+                            year: "{$Summit.getSummitYear().JS}",
                             dates : [],
                             events: [],
                             summit_types: {},
@@ -77,11 +67,13 @@
                             locations : {},
                             tags: {},
                             tracks : {},
+                            category_groups: {},
                             presentation_levels: {},
-                            current_user: null
+                            current_user: null,
+                            should_show_venues: <% if $Summit.ShouldShowVenues %>true<% else %>false<% end_if %>
                         };
 
-                    <% if CurrentMember && CurrentMember.isAttendee($Top.Summit.ID) %>
+                    <% if $CurrentMember && $CurrentMember.isAttendee($Top.Summit.ID) %>
                         <% with CurrentMember %>
                         summit.current_user = { id: {$ID}, first_name: '{$FirstName.JS}', last_name: '{$Surname.JS}' };
                         <% end_with %>
@@ -92,8 +84,8 @@
                      {
                          id: {$ID},
                          name : "{$Name.JS}",
-                         profile_pic : "{$ProfilePhoto.JS}",
-                         position : "{$CurrentPosition.JS}",
+                         profile_pic : "{$ProfilePhoto(60).JS}",
+                         position : "{$TitleNice.JS}",
                      };
                     <% end_loop %>
 
@@ -113,7 +105,7 @@
                     };
                     <% end_loop %>
 
-                    <% loop $Top.Summit.Categories %>
+                    <% loop $Top.Summit.getCategories %>
                     summit.tracks[{$ID}] =
                     {
                         id: {$ID},
@@ -135,8 +127,6 @@
                         color : "{$Color}",
                     };
                     <% end_loop %>
-
-
                     <% loop $Top.Summit.Types %>
                     summit.summit_types[{$ID}] =
                     {
@@ -191,6 +181,7 @@
                                     allow_feedback  : {$AllowFeedBack},
                                     location_id     : {$LocationID},
                                     type_id         : {$TypeID},
+                                    rsvp_link       : "{$RSVPLink.JS}",
                                     sponsors_id     : [<% loop Sponsors %>{$ID},<% end_loop %>],
                                     tags_id         : [<% loop Tags %>{$ID},<% end_loop %>],
                                     summit_types_id : [<% loop AllowedSummitTypes %>{$ID},<% end_loop %>],
@@ -200,7 +191,7 @@
                                     track_id : {$CategoryID},
                                     level : '{$Level}',
                                     <% end_if %>
-                                    <% if $Top.isEventOnMySchedule($ID) %>
+                                    <% if $CurrentMember && $CurrentMember.isOnMySchedule($ID) %>
                                     own      : true,
                                     <% else %>
                                     own      : false,

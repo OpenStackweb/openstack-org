@@ -21,7 +21,7 @@ class SurveyReportGraph extends DataObject {
     (
         'Name'  => 'VarChar(255)',
         'Label' => 'VarChar(255)',
-        'Type'  => "Enum('pie,bars,area','pie')",
+        'Type'  => "Enum('pie,bars,multibars','pie')",
         'Order' => 'Int',
     );
 

@@ -24,7 +24,6 @@
 
         this.on('mount', function(){
             self.release_id =  $('#openstack_releases').val();
-            console.log(self.release_id);
         });
 
         getCurrentRelease() {

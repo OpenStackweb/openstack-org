@@ -23,6 +23,7 @@ class ConsultantsDirectoryPage extends MarketPlaceDirectoryPage
  */
 class ConsultantsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Controller {
 
+	use GoogleMapLibs;
 
 	static $allowed_actions = array(
         'getCurrentOfficesLocationsJson','handleIndex',
@@ -64,15 +65,12 @@ class ConsultantsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Contr
 		Requirements::customScript("jQuery(document).ready(function($) {
             $('#consulting','.marketplace-nav').addClass('current');
         });");
+
 		Requirements::css("themes/openstack/css/chosen.css", "screen,projection");
 
-		Requirements::javascript(Director::protocol()."maps.googleapis.com/maps/api/js?sensor=false");
+        $this->InitGoogleMapLibs();
 
         Requirements::combine_files('marketplace_consultants_directory_page.js', array(
-            "marketplace/code/ui/frontend/js/markerclusterer.js",
-            "marketplace/code/ui/frontend/js/oms.min.js",
-            "marketplace/code/ui/frontend/js/infobubble-compiled.js",
-            "marketplace/code/ui/frontend/js/google.maps.jquery.js",
             "themes/openstack/javascript/chosen.jquery.min.js",
             "marketplace/code/ui/frontend/js/consultants.directory.page.js"
         ));
@@ -83,17 +81,6 @@ class ConsultantsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Contr
 		$this->region_repository           = new SapphireRegionRepository;
 		$this->consultants_locations_query = new ConsultantsOfficesLocationsQueryHandler;
 		$this->consultants_service_query   = new ConsultantsServicesQueryHandler;
-
-		$google_geo_coding_api_key     = null;
-		$google_geo_coding_client_id   = null;
-		$google_geo_coding_private_key = null;
-		if(defined('GOOGLE_GEO_CODING_API_KEY')){
-			$google_geo_coding_api_key = GOOGLE_GEO_CODING_API_KEY;
-		}
-		else if (defined('GOOGLE_GEO_CODING_CLIENT_ID') && defined('GOOGLE_GEO_CODING_PRIVATE_KEY')){
-			$google_geo_coding_client_id   = GOOGLE_GEO_CODING_CLIENT_ID;
-			$google_geo_coding_private_key = GOOGLE_GEO_CODING_PRIVATE_KEY;
-		}
 
 		$this->manager = new ConsultantManager (
 			$this->consultant_repository,
@@ -117,10 +104,8 @@ class ConsultantsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Contr
 			new GoogleGeoCodingService(
 				new SapphireGeoCodingQueryRepository,
 				new UtilFactory,
-				SapphireTransactionManager::getInstance(),
-				$google_geo_coding_api_key,
-				$google_geo_coding_client_id,
-				$google_geo_coding_private_key),
+				SapphireTransactionManager::getInstance()
+			),
 			null,
 			new SessionCacheService,
 			SapphireTransactionManager::getInstance()
@@ -149,7 +134,7 @@ class ConsultantsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Contr
 			$query               = new QueryObject();
 			$query->addAndCondition(QueryCriteria::equal('Slug',$slug));
 			$consultant          = $this->consultant_repository->getBy($query);
-			if(!$consultant) throw new NotFoundEntityException('Consultant','by slug');
+			if(!$consultant || !$consultant->Active) throw new NotFoundEntityException('Consultant','by slug');
 			if($consultant->getCompany()->URLSegment != $company_url_segment) throw new NotFoundEntityException('','');
             // we need this for reviews.
             $this->company_service_ID = $consultant->getIdentifier();

@@ -1,0 +1,20 @@
+{
+  "name": "Google Maps Module",
+  "description": "Google Maps Module For SS",
+  "keywords": [
+    "GoogleMaps"
+  ],
+  "license": "APACHE 2.0",
+  "authors": [
+    "Sebastian Marcet <smarcet@gmail.com>"
+  ],
+  "ignore": [
+
+  ],
+  "dependencies": {
+    "jquery": "*",
+    "jquery-migrate": "1.2.1",
+    "js-marker-clusterer" : "*",
+    "OverlappingMarkerSpiderfier": "*"
+  }
+}

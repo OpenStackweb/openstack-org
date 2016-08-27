@@ -1,0 +1,13 @@
+---
+Name: registration_module
+After: 'framework/*','cms/*', 'openstack/*'
+---
+Member:
+  extensions:
+    - MemberDecorator
+SecurityAdmin:
+  extensions:
+    - SecurityAdminDecorator
+SiteConfig:
+  extensions:
+    - CustomSiteConfigRegistration

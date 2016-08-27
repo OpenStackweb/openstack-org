@@ -22,7 +22,8 @@ class SummitVenue extends SummitGeoLocatedLocation implements ISummitVenue
 
     private static $has_many = array
     (
-        'Rooms' => 'SummitVenueRoom',
+        'Rooms'  => 'SummitVenueRoom',
+        'Floors' => 'SummitVenueFloor',
     );
 
     private static $has_one = array
@@ -41,6 +42,17 @@ class SummitVenue extends SummitGeoLocatedLocation implements ISummitVenue
     (
     );
 
+    protected function onBeforeDelete()
+    {
+        parent::onBeforeDelete();
+        foreach($this->Floors() as $e){
+            $e->delete();
+        }
+
+        foreach($this->Rooms() as $e){
+            $e->delete();
+        }
+    }
 
     /**
      * @return bool
@@ -84,18 +96,28 @@ class SummitVenue extends SummitGeoLocatedLocation implements ISummitVenue
         $gridField = new GridField('Rooms', 'Rooms', $this->Rooms(), $config);
         $f->addFieldToTab('Root.Rooms', $gridField);
 
+        $config = GridFieldConfig_RecordEditor::create();
+        $gridField = new GridField('Floors', 'Floors', $this->Floors(), $config);
+        $f->addFieldToTab('Root.Floors', $gridField);
+        $_REQUEST['VenueID'] = $this->ID;
         return $f;
     }
 
     public function getTypeName()
     {
-        return 'Venue';
+        return self::TypeName;
     }
 
     public function inferLocationType()
     {
-        return 'Internal';
+        return self::LocationType;
     }
 
+    const TypeName     = 'Venue';
+    const LocationType = 'Internal';
+
+    public function getLink() {
+        return parent::getLink().'/#venue='.$this->ID;
+    }
 
 }

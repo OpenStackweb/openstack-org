@@ -14,53 +14,81 @@
  **/
 class PresentationSlide extends PresentationMaterial
 {
-    private static $db = array
-    (
+    /**
+     * @var array
+     */
+    private static $db = [
         'Link' => 'Text',
-    );
+    ];
 
-    private static $has_many = array
-    (
-    );
 
-    private static $defaults = array
-    (
-    );
-
-    private static $many_many = array
-    (
-    );
-
-    static $many_many_extraFields = array(
-    );
-
-    private static $has_one = array
-    (
+    /**
+     * @var array
+     */
+    private static $has_one = [
         'Slide' => 'File'
-    );
+    ];
 
-    private static $summary_fields = array
-    (
-    );
 
-    private static $searchable_fields = array
-    (
-    );
-
+    /**
+     * @return FieldList
+     */
     public function getCMSFields()
     {
         $f = parent::getCMSFields();
-        $f->addFieldToTab('Root.Main', new TextField('Link','Slide Link'));
-        $f->addFieldToTab('Root.Main', $upload = new UploadField('Slide','Slide File'));
-        $upload->setAllowedMaxFileNumber(1);
+        $f->addFieldToTab('Root.Main', new TextField('Link', 'Slide Link'));
+        $f->addFieldToTab('Root.Main', $upload_field = new UploadField('Slide', 'Slide File'));
+        $upload_field->setAllowedMaxFileNumber(1);
+        $upload_field->getValidator()->setAllowedMaxFileSize(array('*' => 5 * 1024 * 1024));
+        $upload_field->setFolderName(sprintf('summits/%s/presentations/%s/slides/', $_REQUEST['SummitID'], $_REQUEST['SummitEventID']));
         return $f;
     }
 
-    public function getSlideUrl() {
-        if ($this->Link) {
+    /**
+     * @return mixed
+     */
+    public function getSlideUrl()
+    {
+        if ($this->Link)
             return $this->Link;
-        } else {
+        if($this->Slide()->exists())
             return $this->Slide()->URL;
+        return null;
+    }
+
+    /**
+     * @return bool
+     */
+    public function IsLink()
+    {
+        return !empty($this->Link);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function IsUpload()
+    {
+        return $this->Slide()->exists();
+    }
+
+    /**
+     * @return ValidationResult
+     */
+    protected function validate()
+    {
+        $valid = parent::validate();
+
+        if (!$valid->valid()) {
+            return $valid;
         }
+
+        $link = trim($this->getSlideUrl());
+
+        if (empty($link)) {
+            return $valid->error('you must set a link or upload a file!');
+        }
+
+        return $valid;
     }
 }

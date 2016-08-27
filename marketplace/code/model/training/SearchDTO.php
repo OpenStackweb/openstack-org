@@ -14,7 +14,7 @@
 /**
  * Class SearchDTO
  */
-final class  SearchDTO {
+final class SearchDTO {
 	/**
 	 * @var string
 	 */
@@ -24,13 +24,18 @@ final class  SearchDTO {
 	 */
 	private $value;
 
-	/**
-	 * @param string $label
-	 * @param string $value
-	 */
-	public function __construct($label, $value){
+    private $id;
+
+    /**
+     * SearchDTO constructor.
+     * @param $label
+     * @param $value
+     * @param null $id
+     */
+	public function __construct($label, $value, $id = null){
 		$this->label = $label;
 		$this->value = $value;
+        $this->id    = $id;
 	}
 
 	/**
@@ -46,5 +51,12 @@ final class  SearchDTO {
 	public function getValue(){
 		return $this->value;
 	}
+
+    /**
+     * @return string
+     */
+    public function getId(){
+        return $this->id;
+    }
 
 } 

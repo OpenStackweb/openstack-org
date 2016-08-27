@@ -185,22 +185,25 @@
                     // height correction
                     if((ui.size.height % (self.minute_pixels * self.step)) > 0 ) {
                         var aux_h = 0;
-                        do{ aux_h += (self.minute_pixels * self.step);}while(aux_h < ui.size.height);
+                        do{ aux_h += (self.minute_pixels * self.step); }while(aux_h < ui.size.height);
                         ui.size.height = aux_h;
                     }
+
                     var size         = ui.size;
                     var pos          = element.offset();
                     var bottom       = pos.top + size.height;
                     var minutes      = Math.ceil( parseInt(size.height) / self.minute_pixels);
+                    console.log('event id '+id+' minutes '+minutes);
+
                     var overlapped   = false;
                     var container    = null;
                     var original_h   = ui.originalSize.height;
                     ui.size.width    = ui.originalSize.width = self.slot_width;
                     ui.position.left = ui.originalPosition.left;
 
-                    console.log('position top ' + pos.top + ' height ' + size.height + ' bottom ' + bottom+' original_h '+original_h);
+                    console.log('position top ' + pos.top + ' height ' + size.height + ' bottom ' + bottom+' original_h '+ original_h);
 
-                    // look for the current slot container that holds the begining of the current event
+                    // look for the current slot container that holds the begin of the current event
                     $('.time-slot-container').each(function(){
                         var top       = $(this).offset().top;
                         var bottom    = parseInt(top) + (self.minute_pixels * self.interval);
@@ -214,6 +217,7 @@
                     var day        = self.published_store.currentDay();
                     var start_hour = container.attr('data-time');
                     var start_time = moment(day+' '+start_hour, 'YYYY-MM-DD HH:mm');
+                    console.log(' got container with start time '+start_hour);
                     // calculate delta minutes...
                     if(pos.top > container.offset().top) {
                        var delta_minutes = Math.floor(( pos.top - container.offset().top) / self.minute_pixels);
@@ -224,17 +228,19 @@
                     var end_time   = start_time.clone().add('m', minutes);
                     // check if we overlap with some former event ...
                     var overlapped_id = null;
+
                     for(var id2 in self.published_store.all())
                     {
                         if(parseInt(id2) === parseInt(id)) continue;
                         var event2      = self.published_store.get(id2);
                         var start_time2 = event2.start_datetime;
                         var end_time2   = event2.end_datetime;
-                        if(start_time.isSameOrBefore(end_time2) && end_time.isSameOrAfter(start_time2)) {
+
+                        if(start_time.isBefore(end_time2) && end_time.isAfter(start_time2)) {
 
                             overlapped    = true;
                             overlapped_id = parseInt(id2);
-                            console.log('overlapped id '+overlapped_id+' !!!');
+                            console.log('overlapped with event id '+overlapped_id+' !!!');
                             break;
                         }
                     }

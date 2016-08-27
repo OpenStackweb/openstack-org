@@ -25,7 +25,8 @@ final class CSVReader {
 	 * @param string $filename
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct($filename){
+	public function __construct($filename = null){
+		if(is_null($filename)) return;
 		if(!file_exists($filename))
 			throw new InvalidArgumentException;
 		$this->file_handle = fopen($filename, "r");
@@ -33,8 +34,33 @@ final class CSVReader {
 			throw new InvalidArgumentException;
 	}
 
+    /**
+     * @param string $content
+     * @return array
+     */
+    public static function load($content)
+    {
+        $data    = str_getcsv($content,"\n"  );
+        $lines   = array();
+        $header  = array();
+        $idx     = 0;
+        foreach($data as $row)
+        {
+            $row = str_getcsv($row, ",");
+            ++$idx;
+            if($idx === 1) { $header = $row; continue;}
+            $line  = array();
+            for($i=0; $i < count($header); $i++){
+                $line[$header[$i]] = trim($row[$i]);
+            }
+            $lines[] = $line;
+
+        } //parse the items in rows
+        return $lines;
+    }
+
 	function __destruct() {
-		fclose($this->file_handle);
+        if($this->file_handle) fclose($this->file_handle);
 	}
 
 	/**

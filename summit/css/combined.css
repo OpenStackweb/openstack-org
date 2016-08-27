@@ -109,7 +109,7 @@ body.summit-landing-body {
 
 .landing-action {
   display: block;
-  margin-top: 20px; }
+  margin: 20px 0; }
 
 a.register-btn-lrg, .register-btn-lrg {
   border-radius: 2px;
@@ -149,6 +149,24 @@ a.register-btn-lrg.soon:hover, .register-btn-lrg.soon:hover {
   background: transparent;
   color: white;
   cursor: default; }
+
+.future-sponsor-wrapper {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 30px;
+  margin: 30px 5% 20px;
+  border-radius: 4px;
+}
+.future-sponsor-wrapper h3 {
+  margin-top: 0;
+  font-size: 1.4em;
+  color: white;
+}
+.future-sponsor-wrapper .register-btn-lrg {
+  background: #29abe2;
+}
+.future-sponsor-wrapper .register-btn-lrg:hover {
+  background: #30739C;
+}
 
 .summit-landing-bottom {
   padding-bottom: 80px; }
@@ -192,11 +210,12 @@ a.single-summit {
   display: block;
   position: relative; }
 
-a.single-summit:hover {
-  text-decoration: none; }
+a.single-summit:hover, a.single-summit:focus {
+  text-decoration: none; 
+}
 
 a.past-summit::after {
-  background: url('/themes/openstack/static/images/home/tokyo-square.jpg') no-repeat center center;
+  background: url('/summit/images/barcelona/austin-square.jpg') no-repeat center center;
   content: "";
   opacity: 0.3;
   top: 0;
@@ -210,7 +229,7 @@ a.current-summit {
   padding-top: 10px; }
 
 a.current-summit::after {
-  background: url('/themes/openstack/static/images/home/austin-wide.jpg') no-repeat center center;
+  background: url('/summit/images/barcelona/barcelona-wide.jpg') no-repeat center center;
   content: "";
   opacity: 0.8;
   top: 0;
@@ -224,7 +243,7 @@ a.current-summit:hover:after {
   opacity: 1; }
 
 a.future-summit::after {
-  background: url('/themes/openstack/static/images/home/barcelona-square.jpg') no-repeat center center;
+  background: url('/summit/images/barcelona/boston-square.jpg') no-repeat center center;
   content: "";
   opacity: 0.3;
   top: 0;
@@ -235,7 +254,7 @@ a.future-summit::after {
   z-index: -1; }
 
 a.past-summit:hover:after, a.future-summit:hover:after {
-  opacity: 0.5; }
+  opacity: 0.8; }
 
 @media (max-width: 767px) {
   a.single-summit::after {
@@ -365,6 +384,18 @@ a.past-summit:hover:after, a.future-summit:hover:after {
   padding: 7px;
   margin: 0;
 }
+
+.summit-hero-wrapper .landing-action .btn-download-apps {
+    height: 38px;
+    padding: 7px;
+    margin: 0 10px 0 0;
+    text-transform: uppercase;
+    font-size: 1.1em;
+    font-weight: 400;
+    border-radius: 2px;
+    border: 1px solid transparent;
+}
+
 .summit-hero-wrapper .landing-action .register-btn-lrg.inactive {
     width: 325px;
 }
@@ -896,6 +927,59 @@ footer {
   max-width: 100%;
   margin-bottom: 40px; }
 
+#download-app-modal .modal-dialog {
+    width: 50%;
+    max-width: 700px;
+}
+
+@media (max-width: 900px) {
+    #download-app-modal .modal-dialog {
+        width: 100%;
+    }
+}
+
+#download-app-modal .modal-content{
+    background-color: #2A4E68;
+    color: white;
+    text-align: center;
+}
+
+#download-app-modal .col-phones {
+    padding: 0;
+}
+
+#download-app-modal .col-buttons {
+    padding-left: 0;
+    padding-right: 30px;
+}
+
+#download-app-modal .cell-phone-img{
+    padding-top: 20px;
+    width: 100%;
+    height: 100%;
+}
+
+#download-app-modal .os-logo{
+    margin-top: 60px;
+    width: 100%;
+    height: 100%;
+}
+
+#download-app-modal .download-label{
+    text-transform: uppercase;
+    font-size: 12px;
+    padding: 40px 10px 15px 10px;
+}
+
+#download-app-modal .os-img{
+    width: 75%;
+}
+
+#download-app-modal .android-img{
+    padding-top: 3px;
+    width: 75%;
+}
+
 /*Photo Row*/
 .photo-row-wrapper {
   width: 100%;
@@ -982,6 +1066,15 @@ footer {
   text-align: center;
   padding: 70px 0;
   background: url('/themes/openstack/static/images/barcelona/barcelona-bkgd-lrg.jpg') no-repeat right top;
+  background-size: cover; 
+  overflow: scroll;}
+.tokyo-landing-wrapper.boston {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding: 70px 0;
+  background: url('/themes/openstack/static/images/boston/boston-bkgd.jpg') no-repeat right top;
   background-size: cover; 
   overflow: scroll;}
 
@@ -1083,7 +1176,7 @@ a.white-link {
 .summit-date {
   background: none;
   font-size: 25px;
-  margin-top: 30px;
+  margin: 20px 0;
   color: white; }
 
 .summit-date span {
@@ -1253,7 +1346,24 @@ a.current-summit-link {
   margin-left: -20px;
   margin-right: -20px;
   padding: 0px 20px;
-  border-bottom: 1px solid #CCCCCC; }
+  border-bottom: 1px solid #CCCCCC;
+}
+
+.confirm-block {
+    padding: 20px 20px 10px 20px;
+}
+
+.confirm-block label {
+    margin-bottom: 0px;
+}
+
+.confirm-item {
+    padding-bottom:10px;
+}
+
+.confirm-actions {
+    padding-top: 20px;
+}
 
 .panel-note {
   padding: 0px 10px;
@@ -1333,6 +1443,10 @@ h3.user-name {
   margin-top: 0px;
   margin-bottom: 20px; }
 
+#category_options .category-label {
+    margin-top : 0px;
+}
+
 /* review presentation */
 .review-presentation h3 {
   background-color: #F8F9FD;
@@ -1387,7 +1501,7 @@ i.collapse-voting-nav {
   top: 0;
   bottom: 0;
   transition: all 0.5s ease-in-out;
-  z-index: 1;
+  z-index: 100;
   padding: 40px; }
 
 .openVotingNav .voting-sidebar {
@@ -1912,7 +2026,7 @@ p#ForgotPassword {
 /*End Voting For Presentations*/
 /*Sponsor Page*/
 .sponsor-page-wrapper {
-  padding-top: 0;
+  padding: 10px 0 30px;
   text-align: center; }
 
 .sponsor-wrapper {
@@ -2006,7 +2120,7 @@ p#ForgotPassword {
 .sponsor-list h5.section-title {
   margin: 40px 0 60px; }
 
-.sponsor-logo {
+.company-logo {
   max-width: 100%;
   margin: 20px 0; }
 

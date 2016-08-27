@@ -7,6 +7,9 @@ After:
 RegistrationPage_Controller:
   dependencies:
     MemberManager: '%$MemberManager'
+EditProfilePage_Controller:
+  dependencies:
+    MemberManager: '%$MemberManager'
 MemberVerificationController:
   dependencies:
     MemberManager: '%$MemberManager'
@@ -26,4 +29,5 @@ Injector:
       4: '%$GroupFactory'
       5: '%$AffiliationFactory'
       6: '%$OrgFactory'
-      7: '%$TransactionManager'
+      7: '%$SpeakerRegistrationRequestManager'
+      8: '%$TransactionManager'

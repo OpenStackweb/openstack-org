@@ -41,7 +41,17 @@ class EnterpriseWorkloadPage_Controller extends Page_Controller {
 
         });");
 
-    } 
+    }
+
+    public function getEnterpriseEvents($limit = 3)
+    {
+        return EventPage::get()->filter('EventCategory','Enterprise')->sort('EventStartDate')->limit($limit);
+    }
+
+    public function getSummitEvent()
+    {
+        return EventPage::get()->where("IsSummit = 1 AND EventStartDate > NOW()")->sort('EventStartDate')->first();
+    }
 }
  
 ?>

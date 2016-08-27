@@ -7,7 +7,7 @@
             <div class="col-lg-9 col-md-9">
                 <div class="presentation-main-panel">
                     <div class="main-panel-section">
-                        <h2><% if $Presentation.Speakers %>Presentation Speakers<% else %>Add your first
+                        <h2><% if $Presentation.Speakers %>Presentation Speakers<% else %>Add a
                             speaker<% end_if %></h2>
                     </div>
 
@@ -20,6 +20,25 @@
                             </div>
                         </div>
                     </div>
+                    <% if $Presentation.Moderator %>
+                        <h3>Moderator for this presentation</h3>
+                        <table class="table">
+                            <tbody>
+                                <% with $Presentation.Moderator %>
+                                <tr>
+                                    <td class="item-name"><i class="fa fa-user"></i><a
+                                            href="$EditLink($Top.Presentation.ID)">$Name</a></td>
+                                    <td class="action">
+                                        <% if $Top.Presentation.CanRemoveSpeakers %>
+                                            <a class='delete-speaker'
+                                               href="$DeleteLink($Top.Presentation.ID)">Remove</a>
+                                        <% end_if %>
+                                    </td>
+                                </tr>
+                                <% end_with %>
+                            </tbody>
+                        </table>
+                    <% end_if %>
 
                     <% if $Presentation.Speakers %>
                         <h3>Speakers included in this presentation</h3>

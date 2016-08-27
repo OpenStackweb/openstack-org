@@ -5,24 +5,303 @@
 /* @group jobs */
 
 #jobs h1 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 34px;
+}
+
+.row .jumbotron {
+    background-color: #2A4E68;
+    width: 100%;
+    border-radius: 0;
+}
+
+.jobHeader h1 {
+    color: #fff;
+    overflow: auto;
+   
+}
+
+.jobheader h2 {
+    color: #fff;
+    text-align: center;
+}
+
+.jumbotron h5 {
+    text-align: center;
+    color: #fff;
     margin-bottom: 30px;
 }
 
-.postJob a {
-    display: block;
-    float: right;
-    background-color: #e2f4dc;
+.postButton a {
+    background: #DA422F;
+    padding: 10px 25px;
+    border-radius: 4px;
+    color: #fff;
     text-align: center;
-    padding: 4px;
-    padding-left: 15px;
-    padding-right: 15px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    color: #1d6006;
-    font-size: 1em;
-    text-shadow: 0 1px 0 rgba(255,255,255,.8);
+    margin-left: auto;
+    margin-right: auto;    
+}
+
+div.postButton a:hover {
+    background-color: #A51B1B;
     text-decoration: none;
 }
+
+h2 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 300;
+}
+
+.postEvent {
+    background: #2A4E68;
+}
+
+.postEvent {
+  float: left;
+  width: 100%;
+  padding: 30px 5%;
+  background: #F4F5F8;
+  margin: 20px 0 10px;
+  text-align: center; 
+}
+
+.form-control {
+    border-radius: 0px;
+    border: 1px solid black;    
+}
+
+.form-control-feedback { /* adjust glyphicon to vertical center */
+    line-height: 30px;
+}
+
+.form-group {
+    max-width: 10em;
+    bottom: 20px;
+}
+
+.btn {
+    border-radius: 0px;
+    border: 1px solid black;
+}
+
+.col-sm-2, .col-sm-offset-3 {
+    padding-bottom: 0px;
+}
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #30739C;
+}
+
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #30739C;
+   opacity:  1;
+}
+
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #30739C;
+   opacity:  1;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    #30739C;
+}
+
+.dropdown {
+    position: static;
+}
+
+.button1 {
+  background-color: #2A4E68;
+  color: white;
+  border: 2px solid white;
+  border-radius: 3px;
+  display: inline-block;  
+}
+
+.button1 + .glyphicon {
+  position: absolute;
+  right: 0;
+  display: inline-block;
+  margin: 15px;  
+}
+
+.glyphicon-arrow-left {
+    margin-left: 10px;
+    display: inline-block;
+    font-size: 12px;
+}
+
+.button1 h5 {
+    margin: 9px 15px;
+    display: inline-block;
+}
+
+div.button1:hover {
+    background-color: #0C1722;
+}
+
+.backbutton, .button1 {
+    float: right;
+}
+
+.button2 {
+  background-color: #30739C;
+  color: white;
+  border-radius: 3px;
+  display: inline-block; 
+  height: 40px; 
+}
+
+.button2 + .glyphicon {
+  position: absolute;
+  display: inline-block;
+  margin: 15px;  
+}
+
+.button3 + .glyphicon {
+  position: absolute;
+  display: inline-block;
+  margin: 15px;  
+}
+
+.glyphicon-share-alt,  .glyphicon-plus {
+    margin-left: 10px;
+    display: inline-block;
+    font-size: 12px;
+}
+
+.button2 h5 {
+    margin: 12px 20px 15px 5px;
+    display: inline-block;
+    color: white;
+}
+
+.glyphicon-chevron-down {
+    font-size: 8px;
+}
+
+.jobBasics-2 .glyphicon-map-marker {
+    padding-left: 10px;
+}
+
+div.button2:hover {
+    background-color: #2A4E68;
+}
+
+input:hover {
+    background-color: #E6E6E6;
+}
+
+.button3 {
+  background-color: white;
+  color: #30739C;
+  border: 2px solid #30739C;
+  border-radius: 3px;
+  display: inline-block; 
+  vertical-align: bottom;
+  height: 40px;
+}
+
+.button3 h5 {
+    margin: 10px 20px 15px 5px;
+    display: inline-block;
+    color: #30739C;
+}
+
+div.button3:hover {
+    background-color: #2A4E68;
+    color: white;
+}
+
+div.button3:hover h5 {
+    color: white;
+}
+
+
+.descriptionButtons {
+    display: inline-block;
+    position: relative;
+}
+
+#apply {
+    padding-bottom: 0;
+}
+
+.detail_title {
+    margin-bottom: 25px;
+    margin-top: 20px;
+    vertical-align: baseline;
+}
+
+.job_title {
+    color: rgb(42, 78, 104);
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 320;
+    height: 34px;
+    line-height: 34px;
+}
+
+div.newBox h5 {
+    background-color: #DC1722;
+    color: white;
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+    font-size: 10px;
+    display: inline-block;
+    padding: 3px 6px;
+}
+
+.dateField {
+    display: inline-block;
+}
+
+.newBox {
+    display: inline-block;
+}
+
+.publishedDate {
+    display: inline-block;
+
+    padding-left: 8px;
+    color: black;
+}
+
+div.publishedDate h5 {
+    color: black;
+}
+
+.jobBasics {
+    float: right;
+}
+.jobBasics-2 {
+    float: left;
+}
+
+#coa { /* OpenStack certified admnistrator logo properties */
+    width:5em;
+    height:5em;
+}
+
+.job_title_hold { /* Job list page job title but has hover issue*/
+    font-size: 25px;
+    pointer-events: none;
+}
+
+#moreInfoButton h5 {
+    color: #30739C;
+    text-decoration: none;
+}
+
+#moreInfoButton h5:hover {
+    color: #2A4E68;
+    text-decoration: none;
+    pointer-events: none;
+}
+
+/* Original Jobs page CSS rulesets below here */
 
 p.type {
     display: block;
@@ -38,11 +317,6 @@ p.type {
     padding-top: 10px;
     margin-bottom: 10px;
     border-color: #c5e2ea;
-}
-
-body#jobs h2 {
-    color: #cf2f19;
-    font-size: 16px;
 }
 
 .jobPosting ul.details {
@@ -89,8 +363,6 @@ ul.location li{
     font-weight: normal !important ;
 }
 
-
-
 body.postJobInfo {
     background-color: white;
     background-image: none;
@@ -108,28 +380,19 @@ body.postJobInfo {
     border-top: 1px dotted #c5e2ea;
 }
 
-
-
 div.jobDescription{
     font-weight: normal !important ;
 }
 
-.detail_title {
-    text-align: center;
-    margin-bottom: 25px;
-    margin-top: 20px;
-    vertical-align: baseline;
+.glyphicon-remove  {
+   left: auto;
+   right: 20px;
 }
 
-.job_title {
-    color: rgb(42, 78, 104);
-    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-    font-size: 34px;
-    font-style: normal;
-    font-weight: 300;
-    height: 34px;
-    letter-spacing: -2.58400011062622px;
-    line-height: 34px;
+.empty-job-list{
+   padding-top: 8%;
+   text-align: center;
 }
+
 
 /* @end */

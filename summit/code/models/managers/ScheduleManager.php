@@ -44,6 +44,11 @@ final class ScheduleManager
     private $attendee_repository;
 
     /**
+     * @var IEntityRepository
+     */
+    private $rsvp_repository;
+
+    /**
      * @var ITransactionManager
      */
     private $tx_manager;
@@ -63,6 +68,7 @@ final class ScheduleManager
         IEntityRepository $eventfeedback_repository,
         IEventFeedbackFactory $eventfeedback_factory,
         IEntityRepository $attendee_repository,
+        IEntityRepository $rsvp_repository,
         ITransactionManager $tx_manager
     ) {
         $this->summitevent_repository = $summitevent_repository;
@@ -70,6 +76,7 @@ final class ScheduleManager
         $this->eventfeedback_repository = $eventfeedback_repository;
         $this->eventfeedback_factory = $eventfeedback_factory;
         $this->attendee_repository = $attendee_repository;
+        $this->rsvp_repository = $rsvp_repository;
         $this->tx_manager = $tx_manager;
     }
 
@@ -222,9 +229,133 @@ final class ScheduleManager
                 throw new NotFoundEntityException('Attendee', '');
             }
 
-            $feedback  = $eventfeedback_factory->buildEventFeedback($data);
-            return $eventfeedback_repository->add($feedback);
+            $feedback = $eventfeedback_repository->getFeedback($data['event_id'],$member_id);
+            if ($feedback) {
+                $feedback->Rate = $data['rating'];
+                $feedback->Note = $data['comment'];
+                $feedback->write();
+            } else {
+                $feedback  = $eventfeedback_factory->buildEventFeedback($data);
+                $eventfeedback_repository->add($feedback);
+            }
+
+            return $feedback;
         });
     }
 
+    /**
+     * @param $member_id
+     * @param $event_id
+     * @return mixed
+     */
+    public function saveSynchId($member_id, $event_id, $target, $cal_event_id)
+    {
+
+        $this_var               = $this;
+        $summitevent_repository = $this->summitevent_repository;
+        $attendee_repository    = $this->attendee_repository;
+
+        return $this->tx_manager->transaction(function () use (
+            $this_var,
+            $member_id,
+            $event_id,
+            $target,
+            $cal_event_id,
+            $attendee_repository,
+            $summitevent_repository
+        ) {
+
+            $event = $summitevent_repository->getById($event_id);
+            if (!$event) {
+                throw new NotFoundEntityException('Event', sprintf('id %s', $event_id));
+            }
+
+            $attendee = $attendee_repository->getByMemberAndSummit($member_id, $event->Summit()->getIdentifier());
+
+            if (!$attendee) {
+                throw new NotFoundEntityException('Attendee', sprintf('id %s', $event_id));
+            }
+
+            if ($target == 'google')
+                $attendee->setGoogleCalEventId($event, $cal_event_id);
+
+            return $cal_event_id;
+        });
+    }
+
+    /**
+     * @param $data
+     * @return mixed
+     */
+    public function addRSVP($data)
+    {
+        $rsvp_repository        = $this->rsvp_repository;
+        $attendee_repository    = $this->attendee_repository;
+        $summitevent_repository = $this->summitevent_repository;
+
+        return $this->tx_manager->transaction(function () use (
+            $data,
+            $attendee_repository,
+            $rsvp_repository,
+            $summitevent_repository
+        ) {
+
+            $member_id = intval($data['member_id']);
+            $summit_id = intval($data['summit_id']);
+            $event_id  = intval($data['event_id']);
+            $event     = $summitevent_repository->getById($event_id);
+
+            if (!$event) {
+                throw new NotFoundEntityException('Event', '');
+            }
+
+            if (!$event->RSVPTemplate()) {
+                throw new EntityValidationException('RSVPTemplate not set');
+            }
+
+            $rsvp = $rsvp_repository->getByEventAndSubmitter($event_id, $member_id);
+
+            if (!$rsvp) {
+                $rsvp = new RSVP();
+                $rsvp->EventID       = $event_id;
+                $rsvp->SubmittedByID = $member_id;
+            }
+
+            foreach ($event->RSVPTemplate()->getQuestions() as $q)
+            {
+                $question_name = $q->name();
+
+                if ($q instanceof RSVPDropDownQuestionTemplate) {
+                    $question_name = ($q->IsMultiSelect) ? $q->name().'[]' : $question_name;
+                } else if ($q instanceof RSVPCheckBoxListQuestionTemplate) {
+                    $question_name = $q->name().'[]';
+                }
+
+                if (isset($data[$question_name]))
+                {
+                    if (!$rsvp || !$answer = $rsvp->findAnswerByQuestion($q)) {
+                        $answer = new RSVPAnswer();
+                    }
+
+                    $answer_value = $data[$question_name];
+
+                    if(is_array($answer_value) ){
+                        $answer_value = str_replace('{comma}', ',', $answer_value);
+                        $answer->Value = implode(',', $answer_value);
+                    }
+                    else{
+                        $answer->Value = $answer_value;
+                    }
+                    $answer->QuestionID = $q->getIdentifier();
+                    $answer->write();
+
+                    $rsvp->addAnswer($answer);
+                }
+            }
+
+            $rsvp->write();
+
+            return $rsvp;
+        });
+    }
 } 

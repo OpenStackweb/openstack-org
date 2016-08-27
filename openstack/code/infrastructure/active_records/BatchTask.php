@@ -127,7 +127,7 @@ final class BatchTask
         $last     = $this->getCurrentPage();
         $max_page = (int)ceil(($count/$page_size) + 1);
         $current  = $last + 1;
-
+        $this->setField('TotalRecords', $count);
         if($current > $max_page) $current = 1;
         $this->setField('CurrentPage', $current);
         return $this;

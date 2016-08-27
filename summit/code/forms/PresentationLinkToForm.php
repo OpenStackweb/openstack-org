@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2014 Openstack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,60 +12,88 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-class PresentationLinkToForm extends Form {
+class PresentationLinkToForm extends Form
+{
+    /**
+     * @var SummitEvent
+     */
+    protected $presentation;
 
-   function __construct($controller, $name) {
+    /**
+     * PresentationLinkToForm constructor.
+     * @param Controller $controller
+     * @param string $name
+     * @param SummitEvent $presentation
+     */
+    public function __construct($controller, $name, SummitEvent $presentation)
+    {
+        $this->presentation = $presentation;
+        
+        $fields = FieldList::create(
+            TextField::create('Link', 'Link (URL) for your online presentation:')
+        );
 
-            $LinkField = new TextField('HostedMediaURL','Link (URL) for your online presentation:');
+        $actions = FieldList::create(
+            FormAction::create('saveLink', 'Save Link')
+        );
+        
+        $validator = RequiredFields::create(['Link']);        
 
-             $fields = new FieldList(
-                     $LinkField
-             );
-             $actions = new FieldList(
-                     new FormAction('saveLink', 'Save Link')
-             );
-             $validator = new RequiredFields(array('HostedMediaURL'));
+        parent::__construct($controller, $name, $fields, $actions, $validator);
 
-             parent::__construct($controller, $name, $fields, $actions, $validator);
+        $material = $presentation->MaterialType('PresentationSlide');
 
-     }
+        if($material) {
+        	$this->loadDataFrom($material);	
+        }        
+    }
 
-     function forTemplate() {
-        return $this->renderWith(array(
-           $this->class,
-           'Form'
-        ));
-     }
+    /**
+     * @return HTMLText
+     */
+    public function forTemplate()
+    {
+        return $this->renderWith([
+            $this->class,
+            'Form'
+        ]);
+    }
 
-     function saveLink($data, $form) {
+    /**
+     * @param $data
+     * @param Form $form
+     * @return bool|SS_HTTPResponse
+     */
+    public function saveLink($data, Form $form)
+    {
+        $url = $data['Link'];
 
-       $url = $data['HostedMediaURL'];
-
-       $EventID = Session::get('UploadMedia.PresentationID');
-       if($EventID) $Event  = VideoPresentation::get()->byID($EventID);
-       
         // Attach a protocol if needed
-        if(substr($url,0,7) != 'http://' && substr($url,0,8) != 'https://') $url = 'http://'.$url;
-
-        if(!filter_var($url, FILTER_VALIDATE_URL))
-        {
-            $form->sessionMessage('That does not appear to be a valid URL','bad'); 
-            return $this->controller()->redirectBack(); 
-        } elseif(!$Event) {
-            $data["HasError"] = TRUE;
-            return $this->controller()->Customise($data);
-        } else {
-            $Event->HostedMediaURL = $url;
-            $Event->MediaType = 'URL';
-            $Event->write();
-            Session::set('UploadMedia.Success', TRUE);
-            Session::set('UploadMedia.URL', $url);
-            Session::set('UploadMedia.Type', 'URL');
-
-	        Controller::curr()->redirect($form->controller()->link().'Success');
-
+        if (substr($url, 0, 7) != 'http://' && substr($url, 0, 8) != 'https://') {
+            $url = 'http://' . $url;
         }
 
-     }
+        if (!filter_var($url, FILTER_VALIDATE_URL)) {
+            $form->sessionMessage('That does not appear to be a valid URL', 'bad');
+
+            return $this->Controller()->redirectBack();
+        }
+
+    	$material = PresentationSlide::create();
+    	$material->Link = $url;
+    	$material->write();
+		$this->presentation->Materials()->filter([
+			'ClassName' => 'PresentationSlide'
+		])->removeAll();
+    	
+    	$this->presentation->Materials()->add($material);
+    	$token = SecurityToken::inst()->getValue();
+
+        return $this->Controller()->redirect(Controller::join_links(
+    		$this->Controller()->Link(),
+    		'success',
+    		"?key={$token}&material={$material->ID}"
+        ));
+    }
 
 }

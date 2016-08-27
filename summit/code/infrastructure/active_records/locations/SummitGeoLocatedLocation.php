@@ -50,6 +50,17 @@ class SummitGeoLocatedLocation extends SummitAbstractLocation implements ISummit
     (
     );
 
+    protected function onBeforeDelete()
+    {
+        parent::onBeforeDelete();
+        foreach($this->Maps() as $e){
+            $e->delete();
+        }
+        foreach($this->Images() as $e){
+            $e->delete();
+        }
+    }
+
     /**
      * @return string
      */
@@ -204,7 +215,7 @@ class SummitGeoLocatedLocation extends SummitAbstractLocation implements ISummit
             $f->addFieldToTab('Root.Maps', $gridField);
 
             $config = GridFieldConfig_RecordEditor::create();
-            $gridField = new GridField('Images', 'Images', $this->Images(), $config);
+            $gridField = new GridField('Images', 'Images', $this->getPictures(), $config);
             $config->addComponent($sort = new GridFieldSortableRows('Order'));
             $f->addFieldToTab('Root.Images', $gridField);
         }
@@ -225,11 +236,35 @@ class SummitGeoLocatedLocation extends SummitAbstractLocation implements ISummit
         return $urls;
     }
 
-    public function getFirstImage() {
-        return ($this->Images()->count()) ? $this->Images()->sort('Order')->first()->Picture() : '';
+    /**
+     * @return SummitLocationImage[]
+     */
+    public function getPictures() {
+        return $this->Images()->filter('ClassName', 'SummitLocationImage' )->sort('Order');
+    }
+
+    /**
+     * @return SummitLocationImage
+     */
+    public function getFirstPicture() {
+        return ($this->getPictures()->count()) ? $this->getPictures()->first()->Picture() : '';
     }
 
     public function getVenue() {
         return $this;
     }
+
+    public function getTypeName()
+    {
+        return self::TypeName;
+    }
+
+    public function inferLocationType()
+    {
+        return self::LocationType;
+    }
+
+    const TypeName     = 'SummitGeoLocatedLocation';
+    const LocationType = 'None';
+
 }

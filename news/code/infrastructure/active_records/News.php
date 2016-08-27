@@ -56,7 +56,7 @@ final class News extends DataObject implements INews
     );
 
     static $many_many = array(
-        'Tags' => 'Tag',
+        'Tags' => 'NewsTag',
     );
 
     public static $indexes = array(
@@ -76,7 +76,7 @@ final class News extends DataObject implements INews
 
     public function formatDate()
     {
-        return date('M d, g:i a', strtotime($this->DateEmbargo));
+        return $this->getDateEmbargoCentral('M d, g:i a');
     }
 
     /**
@@ -93,10 +93,9 @@ final class News extends DataObject implements INews
         $this->Country = $info->getCountry();
         $this->Body = $info->getBody();
         $this->BodyHtmlFree = strip_tags($info->getBody());
-        $this->Date = $info->getDate();
         $this->Link = $info->getLink();
-        $this->DateEmbargo = $info->getDateEmbargo();
-        $this->DateExpire = $info->getDateExpire();
+        $this->setDateEmbargoInGMT($info->getDateEmbargo());
+        $this->setDateExpireInGMT($info->getDateExpire());
         $this->IsLandscape = $info->getIsLandscape();
     }
 
@@ -109,10 +108,10 @@ final class News extends DataObject implements INews
         $tags = explode(',', $tags);
 
         foreach ($tags as $tag_name) {
-            $tag = Tag::get("Tag","Tag = '".$tag_name."'")->first();
+            $tag = NewsTag::get("NewsTag","Tag = '".$tag_name."'")->first();
 
             if (!$tag) {
-                $tag = new Tag();
+                $tag = new NewsTag();
                 $tag->Tag = $tag_name;
                 $tag->write();
             }
@@ -173,7 +172,7 @@ final class News extends DataObject implements INews
         return trim($tags_csv, ",");
     }
 
-    public function addTag(ITag $tag)
+    public function addTag(INewsTag $tag)
     {
         AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'Tags')->add($tag);
     }
@@ -300,7 +299,7 @@ final class News extends DataObject implements INews
 
     public function formattedDate()
     {
-        return date('M jS Y', strtotime($this->DateEmbargo));
+        return $this->getDateEmbargoCentral('M jS Y');
     }
 
     public function shortenText($text, $chars)
@@ -316,6 +315,50 @@ final class News extends DataObject implements INews
 
     public function deleteArticle() {
         $this->Deleted = true;
+    }
+
+    public function getDateEmbargoCentral($format='Y-m-d H:i:s') {
+        $date_embargo = $this->DateEmbargo;
+
+        if ($date_embargo) {
+            $date_embargo_gmt = new DateTime($date_embargo, new DateTimeZone('GMT'));
+            $date_embargo_central = $date_embargo_gmt->setTimezone(new DateTimeZone('America/Chicago'));
+            $date_embargo = $date_embargo_central->format($format);
+        }
+
+        return $date_embargo;
+    }
+
+    public function setDateEmbargoInGMT($date_embargo) {
+        if ($date_embargo) {
+            $date_embargo_central = new DateTime($date_embargo, new DateTimeZone('America/Chicago'));
+            $date_embargo_gmt = $date_embargo_central->setTimezone(new DateTimeZone('GMT'));
+            $date_embargo = $date_embargo_gmt->format('Y-m-d H:i:s');
+        }
+
+        $this->DateEmbargo = $date_embargo;
+    }
+
+    public function getDateExpireCentral($format='Y-m-d H:i:s') {
+        $date_expire = $this->DateExpire;
+
+        if ($date_expire) {
+            $date_expire_gmt = new DateTime($date_expire, new DateTimeZone('GMT'));
+            $date_expire_central = $date_expire_gmt->setTimezone(new DateTimeZone('America/Chicago'));
+            $date_expire = $date_expire_central->format($format);
+        }
+
+        return $date_expire;
+    }
+
+    public function setDateExpireInGMT($date_expire) {
+        if ($date_expire) {
+            $date_expire_central = new DateTime($date_expire, new DateTimeZone('America/Chicago'));
+            $date_expire_gmt = $date_expire_central->setTimezone(new DateTimeZone('GMT'));
+            $date_expire = $date_expire_gmt->format('Y-m-d H:i:s');
+        }
+
+        $this->DateExpire = $date_expire;
     }
 
 

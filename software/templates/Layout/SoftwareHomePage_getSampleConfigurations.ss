@@ -104,9 +104,9 @@
 
         <div class="sample-configs-tip">
             <div class="close-tip"><i class="fa fa-times"></i></div>
-            <h5><i class="fa fa-question-circle"></i>What are sample configurations?</h5>
+            <h5><i class="fa fa-question-circle"></i><%t Software.WHAT_ARE_SAMPLES 'What are sample configurations?' %></h5>
             <p>
-                Think of these as curated playlists of OpenStack configurations. These sample configurations are based on OpenStack case studies and real-world reference architectures across industries and workloads. Each configuration will give you a good idea of which core and optional projects can be used for different environments.
+                <%t Software.WHAT_ARE_SAMPLES_ANSWER 'Think of these as curated playlists of OpenStack configurations. These sample configurations are based on OpenStack case studies and real-world reference architectures across industries and workloads. Each configuration will give you a good idea of which core and optional projects can be used for different environments.' %>
             </p>
         </div>
 

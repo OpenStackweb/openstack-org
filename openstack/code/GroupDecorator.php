@@ -20,6 +20,12 @@ class SecurityAdminExtension extends Extension{
 
 class GroupDecorator extends DataExtension {
 
+    private static $many_many_extraFields = array(
+        'Members' => array(
+            'SortOrder' => "Int"
+        ),
+    );
+
     function updateCMSFields(FieldList $fields) {
 
         $fields->removeFieldFromTab('Root.Members','Members');
@@ -63,8 +69,21 @@ class GroupDecorator extends DataExtension {
             )
         );
 
-	    $config = GridFieldConfig_RelationEditor::create(10);
-	    $config->getComponentByType('GridFieldDetailForm')->setFields($detailFormFields);
+        // make table sortable for foundation-staff and supporting-cast
+        if ($this->owner->Code == 'openstack-foundation-staff' || $this->owner->Code == 'supporting-cast') {
+            $config = GridFieldConfig_RelationEditor::create(10);
+            $config->getComponentByType('GridFieldDetailForm')->setFields($detailFormFields);
+            $sort = new GridFieldSortableRows('SortOrder');
+            $config->addComponent($sort);
+            $config->removeComponentsByType('GridFieldPageCount');
+            $config->removeComponentsByType('GridFieldPaginator');
+            $dataColumns = $config->getComponentByType('GridFieldDataColumns');
+            $dataColumns->setDisplayFields(array('SortOrder' => 'Order', 'FirstName' => 'Name', 'Surname' => 'Surname', 'Email' => 'Email'));
+        } else {
+            $config = GridFieldConfig_RelationEditor::create(10);
+            $config->getComponentByType('GridFieldDetailForm')->setFields($detailFormFields);
+        }
+
 	    $manager = new GridField('Members','Members',$this->owner->Members(),$config);
 
         $fields->addFieldToTab('Root.Members',$manager);

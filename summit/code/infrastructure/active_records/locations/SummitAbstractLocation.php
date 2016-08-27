@@ -51,8 +51,16 @@ class SummitAbstractLocation extends DataObject implements ISummitLocation
 
     public function getTypeName()
     {
-        return 'SummitLocation';
+        return self::TypeName;
     }
+
+    public function inferLocationType()
+    {
+        return self::LocationType;
+    }
+
+    const TypeName     = 'SummitLocation';
+    const LocationType = 'None';
 
     public function overridesBlackouts()
     {
@@ -95,12 +103,31 @@ class SummitAbstractLocation extends DataObject implements ISummitLocation
         $f->addFieldToTab('Root.Main', new HtmlEditorField('Description','Description'));
 
         $f->addFieldToTab('Root.Main', new HiddenField('SummitID','SummitID'));
+        if($this->ID > 0){
+            if($this instanceof SummitVenueRoom)
+                $_REQUEST['RoomID'] = $this->ID;
+            else
+                $_REQUEST['LocationID'] = $this->ID;
+        }
         return $f;
     }
 
-    public function inferLocationType()
+    /**
+     * @return ValidationResult
+     */
+    protected function validate()
     {
-        return 'None';
+
+        $valid = parent::validate();
+        if (!$valid->valid()) {
+            return $valid;
+        }
+        $name = trim($this->Name);
+        if (empty($name)) {
+            return $valid->error('Name is required!');
+        }
+
+        return $valid;
     }
 
     public function onBeforeWrite()
@@ -125,4 +152,14 @@ class SummitAbstractLocation extends DataObject implements ISummitLocation
         return Permission::check("ADMIN") || Permission::check("ADMIN_SUMMIT_APP") || Permission::check("ADMIN_SUMMIT_APP_SCHEDULE");
     }
 
+    public function getLink() {
+        return $this->Summit()->Link.'venues';
+    }
+
+    protected function onBeforeDelete()
+    {
+        parent::onBeforeDelete();
+        //remove locations from all events
+        DB::query("UPDATE SummitEvent SET LocationID = 0 WHERE LocationID = {$this->ID} AND SummitID = {$this->SummitID};");
+    }
 }

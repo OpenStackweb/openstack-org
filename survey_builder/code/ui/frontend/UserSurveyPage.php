@@ -122,4 +122,5 @@ class UserSurveyPage_Controller extends SurveyPage_Controller
     {
         return $this->customise(array('BackURL' => $this->request->requestVar('BackURL')))->renderWith(array('UserSurveyPage_LandingPage', 'Page'));
     }
+
 }

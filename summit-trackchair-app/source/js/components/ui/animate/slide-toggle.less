@@ -1,0 +1,13 @@
+.animate-slide-toggle {
+	transition-property: max-height;
+	transition-duration: .5s;	
+
+	&.closed {
+		max-height:0;	
+		overflow-y: hidden;		
+	}
+	&.open {
+		max-height: 500px; /* approximate max height */		
+		overflow-y:visible;
+	}
+}

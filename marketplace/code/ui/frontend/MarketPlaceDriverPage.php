@@ -31,14 +31,14 @@ final class MarketPlaceDriverPage_Controller extends MarketPlaceDirectoryPage_Co
 
     public static function DriverTable($project = null){
         if ($project) {
-            return Driver::get()->filter('Project',$project);
+            return Driver::get()->filter(array('Project' => $project, 'Active' => 1));
         }
 
-        return Driver::get();
+        return Driver::get()->filter('Active', 1);
     }
 
     public function getProjects() {
-        return GroupedList::create(Driver::get()->sort('Project'))->GroupedBy('Project');
+        return GroupedList::create(Driver::get()->filter('Active', 1)->sort('Project'))->GroupedBy('Project');
     }
 
 }

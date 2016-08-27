@@ -27,20 +27,24 @@
                             </div>
                         </div>
                         <div class="row events">
-                            <div class="col-lg-6">
-                               <a href="http://openstack.org/summit/austin-2016/" class="featured-event-link">
-                                    <img class="event-logo paris" src="//openstack.org/themes/openstack/images/enterprise/legacy/summit-event-logo.png" alt="OpenStack Summit in Austin">
-                                    <span>OpenStack Summit</span>
-                                    <span>April 25-29, 2016 in Austin</span>
+                            <div class="col-lg-6 events-col">
+                                <% with EnterpriseEvents(1).First %>
+                                <a href="$EventLink" class="featured-event-link lrg">
+                                    <img class="event-logo paris" src="$EventSponsorLogoUrl" alt="$Title">
+                                    <span>$Title</span>
+                                    <span>$formatDateRange() in $EventLocation</span>
                                 </a>
+                                <% end_with %>
                             </div>
                             <div class="vert-line"></div>
-                            <div class="col-lg-6">
-                                <a href="http://openstack.org//barcelona-2016/" class="featured-event-link">
-                                    <img class="event-logo paris" src="//openstack.org/themes/openstack/images/enterprise/legacy/summit-event-logo.png" alt="OpenStack Summit in Barcelona">
+                            <div class="col-lg-6 events-col">
+                                <% with SummitEvent %>
+                                <a href="$EventLink" class="featured-event-link">
+                                    <img class="event-logo paris" src="$EventSponsorLogoUrl" alt="OpenStack Summit in $EventLocation">
                                     <span>OpenStack Summit</span>
-                                    <span>October 24-28, 2016 in Barcelona</span>
+                                    <span>$formatDateRange() in $EventLocation</span>
                                 </a>
+                                <% end_with %>
                             </div>
                         </div>
                         <div class="row more-events">
@@ -50,9 +54,9 @@
                                 </div>
                                 <div class="col-lg-9">
                                     <ul>
-                                        <li><a href="http://containerevent.com/" target="_blank">Container World</a>, February 16-18, 2016 in Santa Clara, California</li>
-                                        <li><a href="http://www.bigtelecomevent.com/events/big-telecom-event/event-summary-31b6b86b2fa3432ab89ab7db084ab675.aspx" target="_blank">Big Telecom</a>, May 24-25, 2016 in Austin, TX</li>
-                                        <li><a href="http://www.gartner.com/events/na/catalyst" target="_blank">Gartner Catalyst</a>, August 15-18, 2016 in San Diego, California</li>
+                                        <% loop EnterpriseEvents(3) %>
+                                        <li><a href="$EventLink" target="_blank">$Title</a>, $formatDateRange() in $EventLocation</li>
+                                        <% end_loop %>
                                     </ul>
                                 </div>
                         </div>

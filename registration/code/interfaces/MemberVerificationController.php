@@ -38,9 +38,13 @@ final class MemberVerificationController extends AbstractController
 
     static $allowed_actions = array(
         'VerifyMemberEmail',
+        'resendMemberVerificationEmail',
+        'MemberVerificationEmailForm',
+        'SendMemberVerificationEmail',
     );
 
     static $url_handlers = array(
+        'GET resend'  => 'ResendMemberVerificationEmail',
         'GET $TOKEN!' => 'VerifyMemberEmail',
     );
 
@@ -84,6 +88,44 @@ final class MemberVerificationController extends AbstractController
         catch (Exception $ex) {
             SS_Log::log($ex, SS_Log::ERR);
             return $this->renderWith(array('MemberVerification_error', 'Page'));
+        }
+    }
+
+    public function resendMemberVerificationEmail(SS_HTTPRequest $request){
+        return $this->renderWith(array('MemberVerification_resend', 'Page'));
+    }
+
+    public function MemberVerificationEmailForm()
+    {
+        return new MemberVerificationEmailForm($this, 'MemberVerificationEmailForm');
+    }
+
+    //Save profile
+    function SendMemberVerificationEmail($data, $form)
+    {
+        try {
+            if (!isset($data['Email'])) throw new EntityValidationException('Missing Email!');
+            $email = trim($data['Email']);
+            $this->member_manager->resendEmailVerification($email,  new MemberRegistrationSenderService);
+            return $this->renderWith(array('MemberVerification_resendOK', 'Page'), array('Email' => $email));
+        }
+        catch(EntityValidationException $ex1){
+            Form::messageForForm($form->FormName() ,$ex1->getMessage(), 'bad');
+            //Return back to form
+            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
+            return $this->redirectBack();
+        }
+        catch(NotFoundEntityException $ex2){
+            Form::messageForForm($form->FormName(), "There was an error with your request, please contact your admin.", 'bad');
+            //Return back to form
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->redirectBack();
+        }
+        catch(Exception $ex){
+            Form::messageForForm($form->FormName(), "There was an error with your request, please contact your admin.", 'bad');
+            //Return back to form
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->redirectBack();
         }
     }
 }

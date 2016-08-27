@@ -1,0 +1,10 @@
+---
+Name: openstack-core-translations
+---
+Fluent:
+  data_exclude: 
+    - '/.*/'
+SiteTree:
+  translate:
+    - Title
+    - Content

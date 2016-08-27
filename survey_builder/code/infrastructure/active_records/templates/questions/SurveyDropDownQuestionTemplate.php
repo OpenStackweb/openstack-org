@@ -85,15 +85,16 @@ class SurveyDropDownQuestionTemplate extends SurveyMultiValueQuestionTemplate im
        if(!$this->isCountrySelector())
             return parent::getValues();
 
-       $extra_options = array
-       (
-               'Worldwide' => 'Worldwide',
-               'Prefer not to say' => 'Prefer not to say',
-               'Too many to list' => 'Too many to list',
-       );
+        $extra_options = [
+
+            'Worldwide' => 'Worldwide',
+            'Prefer not to say' => 'Prefer not to say',
+            'Too many to list' => 'Too many to list',
+        ];
 
        $options = array_merge($extra_options, CountryCodes::$iso_3166_countryCodes);
-       $res = array();
+       $res     = array();
+
        foreach($options as $k => $v)
        {
            array_push($res, new ArrayData
@@ -108,6 +109,32 @@ class SurveyDropDownQuestionTemplate extends SurveyMultiValueQuestionTemplate im
            );
        }
        return $res;
+    }
+
+    /**
+     * @param int $id
+     * @return IQuestionValueTemplate
+     */
+    public function getValueById($id)
+    {
+        $res = parent::getValueById($id);
+        if($this->isCountrySelector()){
+            $extra_options = [
+
+                'Worldwide' => 'Worldwide',
+                'Prefer not to say' => 'Prefer not to say',
+                'Too many to list' => 'Too many to list',
+            ];
+
+            $options = array_merge($extra_options, CountryCodes::$iso_3166_countryCodes);
+            if(isset($options[$id])) {
+                $label = $options[$id];
+                $res   = new SurveyQuestionValueTemplate();
+                $res->Value = $id;
+                $res->Label = $label;
+            }
+        }
+        return $res;
     }
 
 }

@@ -25,6 +25,10 @@ interface IJob extends IEntity {
 	 */
 	public function locations();
 
+    /**
+     * @param IJobLocation $location
+     * @return mixed
+     */
 	public function addLocation(IJobLocation $location);
 
 	/**
@@ -36,4 +40,9 @@ interface IJob extends IEntity {
 	 * @return void
 	 */
 	public function clearLocations();
+
+    /**
+     * @return boolean
+     */
+    public function isCOANeeded();
 }

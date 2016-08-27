@@ -1,19 +1,19 @@
 <schedule-event>
-    <div if={ show } id="event_{ id }" class="row event-row">
+    <div id="event_{ id }" class="row event-row">
         <div class="col-sm-12">
-            <div class="row main-event-content" style="border-left: 3px solid { eventColor(category_group_ids) }" data-event-id="{ id }">
+            <div class="row main-event-content" style="border-left: 3px solid { eventColor(category_group_ids, type_id) }" data-event-id="{ id }">
                 <div class="event-content">
                     <div class="row row_location">
-                        <div class="col-sm-2 col-time">
+                        <div class="col-sm-3 col-time">
                             <i class="fa fa-clock-o icon-clock"></i>
                             <span if={ show_date }>{ date_nice }</span>
                             &nbsp;<span>{ start_time }</span>-<span>{ end_time }</span>
                         </div>
-                        <div class="col-sm-7 col-location">
+                        <div class="col-sm-6 col-location">
                             <div if={ summit.should_show_venues } >
                                 <i class="fa fa-map-marker icon-map"></i>
                                 &nbsp;
-                                <a class="search-link" if={ summit.locations[location_id] } href="{ summit.link+'venues/#venue='+ summit.locations[location_id].venue_id }">
+                                <a class="search-link" if={ summit.locations[location_id] } href="{ summit.locations[location_id].link }">
                                     { locationName(location_id) }
                                 </a>
                                 <span if={ !summit.locations[location_id] }> { locationName(location_id) } </span>
@@ -21,12 +21,12 @@
                         </div>
                         <div class="col-sm-3 my-schedule-container" if={ parent.summit.current_user !== null } >
                             <span if={ !own } onclick={ addToMySchedule } title="add to my schedule" class="icon-event-action">
-                                <i class="fa fa-plus-circle icon-foreign-event" ></i>
-                                My&nbsp;calendar
+                                <i class="fa fa-plus-circle icon-foreign-event myschedule-icon" ></i>
+                                My&nbsp;schedule
                             </span>
                             <span if={ own } onclick={ removeFromMySchedule } title="remove from my schedule" class="icon-event-action">
-                                <i class="fa fa-check-circle icon-own-event"></i>
-                                My&nbsp;calendar
+                                <i class="fa fa-check-circle icon-own-event myschedule-icon"></i>
+                                My&nbsp;schedule
                             </span>
                         </div>
                     </div>
@@ -53,65 +53,6 @@
                 </div>
             </div>
             <div class="row event-details" id="event_details_{ id }" style="display:none;">
-                <div class="row">
-                    <div class="col-sm-8">
-                        <div class="bio-row">
-                            <raw content="{ abstract }"/>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div data-speaker-id={ speaker_id } class="row speaker-row" each={ speaker_id in speakers_id }>
-                            <div class="speaker-name-row">
-                                <div class="col-sm-12">
-                                    <div class="speaker-photo-left">
-                                        <a href={ parent.base_url+'speakers/'+ this.speaker_id } class="profile-pic-wrapper" style="background-image: url('{ summit.speakers[speaker_id].profile_pic }')">
-                                        </a>
-                                    </div>
-                                    <div class="speaker-name-right">
-                                        <a href={ parent.base_url+'speakers/'+ this.speaker_id }>
-                                            { summit.speakers[speaker_id].name }
-                                        </a>
-                                        <div class="speaker-company">
-                                            { summit.speakers[speaker_id].position }
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                            <div class="space-row">
-                                &nbsp;
-                            </div>
-                            <div class="level-row" if={ level }>
-                                <div class="col-sm-12 col-level-content">
-                                    <i class="fa fa-signal level-icon"></i>
-                                    <span>Level:</span>
-                                    <span class="presentation-level'">
-                                        <a class="search-link" title="Search Presentation Level" href="{ parent.search_url+'?t='+level }">{ level }</a>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="tags-row" if={ tags_id.length > 0 }>
-                                <div class="col-sm-12 col-tags-content">
-                                    <i class="fa fa-tags"></i>
-                                    <span>Tags:</span>
-                                    <span each={ tag_id, i in tags_id } title="Search Tag" class="tag">
-                                        <a class="search-link" href="{ parent.search_url+'?t='+summit.tags[tag_id].name.replace(/ /g,'+') }">{ summit.tags[tag_id].name+ ( (i < parent.tags_id.length - 1) ? ', ':'' ) }</a>
-                                        &nbsp;
-                                    </span>
-                                </div>
-                            </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="event-btn">
-                            <a href="{ parent.base_url+'events/'+ id }" class="btn btn-primary btn-md active btn-warning btn-go-event" role="button">EVENT DETAILS</a>
-                        </div>
-                        <div class="event-btn" if={ rsvp_link != null && rsvp_link != ''}>
-                            <a href={ rsvp_link } class="btn btn-primary btn-md active btn-warning btn-rsvp-event" target="_blank" role="button">RSVP to this Event</a>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -126,22 +67,41 @@
     var self                      = this;
 
     this.on('mount', function(){
-
+    console.log("this.summit.should_show_venues "+this.summit.should_show_venues.should_show_venues);
     // show event details handler (jquery)
     $(document).off("click", ".main-event-content").on( "click", ".main-event-content", function(e) {
 
-            if($(e.target).hasClass('icon-event-action')){
+            if($(e.target).is('.icon-event-action, .myschedule-icon')){
                 return false;
             }
 
             if($(e.target).hasClass('search-link')) return true;
 
-            var event_id = $(e.currentTarget).attr('data-event-id');
-            var detail   = $('#event_details_'+event_id);
-
+            var event_id  = $(e.currentTarget).attr('data-event-id');
+            var detail    = $('#event_details_'+event_id);
+            var must_load = !detail.hasClass('loaded');
             if ( detail.is( ":hidden" ) ) {
-                detail.slideDown( "slow" );
-            } else {
+                    detail.slideDown( "slow" );
+                    if(must_load){
+                        detail.html('loading ...');
+                        var url =  self.parent.base_url+'events/'+ event_id+'/html'
+                        $.ajax({
+                        type: 'GET',
+                        url:  url,
+                        timeout:60000,
+                        //ifModified: true,
+                        //contentType: "application/json; charset=utf-8",
+                        success: function (data, textStatus, jqXHR) {
+                            detail.html(data);
+                            detail.addClass('loaded');
+                        }
+                        }).fail(function (jqXHR, textStatus, errorThrown) {
+                            alert('there was an error, please contact your administrator');
+                        });
+                    }
+            }
+            else
+            {
                 detail.slideUp( "slow" );
             }
             e.preventDefault();
@@ -153,16 +113,10 @@
     locationName(location_id) {
         var location = self.summit.locations[location_id];
         if (typeof location == 'undefined') return 'TBA';
-        if(location.class_name === 'SummitVenueRoom') {
-        var room = location;
-            location = self.summit.locations[room.venue_id];
-            return location.name+' - '+room.name;
-        }
-        return location.name;
+        else return location.name_nice;
     }
 
     sponsorNames(sponsors_id) {
-
         var sponsors = '';
         for(var id of sponsors_id)
         {
@@ -182,11 +136,10 @@
         return false;
     }
 
-    eventColor(category_group_ids){
+    eventColor(category_group_ids, type_id) {
         if(category_group_ids.length == 0){
-            return self.default_event_color;
+            return self.summit.event_types[type_id].color
         }
-
         return self.summit.category_groups[category_group_ids[0]].color;
     }
 
@@ -201,13 +154,21 @@
     //EVENTS
 
     addToMySchedule(e) {
-        self.parent.clicked_event[e.item.id] = e.item;
+        e.preventUpdate = true;
+        this.own        = true;
+        e.item.own      = true;
         self.schedule_api.addEvent2MySchedule(self.summit.id, e.item.id);
+        self.update();
+        self.parent.applyFilters();
     }
 
     removeFromMySchedule(e) {
-        self.parent.clicked_event[e.item.id] = e.item;
+        e.preventUpdate = true;
+        this.own        = false;
+        e.item.own      = false;
         self.schedule_api.removeEventFromMySchedule(self.summit.id, e.item.id);
+        self.update();
+        self.parent.applyFilters();
     }
 
     </script>

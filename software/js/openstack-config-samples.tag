@@ -1,3 +1,4 @@
+require('./t.tag');
 <openstack-config-samples>
         <div class="row">
             <div class="col-sm-12 sample-configs-wrapper">
@@ -15,11 +16,11 @@
             </p>
             <!--
             <p>
-                    <strong>Curated by:</strong> <a href="community/members/profile/{ current_config.curator.id }" target="_blank"> { current_config.curator.name }</a> - { current_config.curator.position }
+                    <strong><t entity="Software.CURATED_BY">Curated by</t>:</strong> <a href="community/members/profile/{ current_config.curator.id }" target="_blank"> { current_config.curator.name }</a> - { current_config.curator.position }
             </p>
             -->
             <p if={ current_config.description !== null &&  current_config.description !=='' }>
-               <a class="more-about-config" href="#">More about this configuration [+]</a>
+               <a class="more-about-config" href="#"><t entity="Software.MORE_ABOUT_CONFIG">More about this configuration</t> [+]</a>
             </p>
             <div class="more-sample-config" if={ current_config.description !== null &&  current_config.description !=='' }>
                 { current_config.description }
@@ -29,7 +30,12 @@
         </div>
         <div class="row">
             <div class="col-sm-12">
-                 <p class="service-section-title"><strong>Core Services</strong> included in this configuration ({ current_config.core_components.length } of { release_core_component_count })</p>
+                 <p class="service-section-title">
+                 	<t entity="Software.CORE_SERVICES_INCLUDED">
+                 		<strong>Core Services</strong> included in this configuration
+                 	</t>
+                 	({ current_config.core_components.length } <t entity="Openstack.RANGE_OF">of</t> { release_core_component_count })
+                 </p>
             </div>
         </div>
         <div class="row">
@@ -58,29 +64,31 @@
                 { adoption }%
                 </div>
                 <div class="core-stat-title">
-                Adoption
+                	<t entity="Software.ADOPTION">Adoption</t>
                 </div>
                 </div>
                 <div class="col-sm-4 col-xs-4">
                 <div class="core-stat-graphic">
-                { maturity_points } <span>of</span> { this.max_maturity_points }
+                { maturity_points } <span><t entity="Openstack.RANGE_OF">of</t></span> { this.max_maturity_points }
                 </div>
                 <div class="core-stat-title">
-                Maturity
+                	<t entity="Software.MATURITY">Maturity</t>
                 </div>
                 </div>
                 <div class="col-sm-4 col-xs-4">
                 <div class="core-stat-graphic">
-                { age} <span>yrs</span>
+                { age} <span><t entity="Software.YEARS_ABBR">yrs</t></span>
                 </div>
                 <div class="core-stat-title">
-                Age
+                	<t entity="Software.AGE">Age</t>
                 </div>
                 </div>
                 </div>
                 </div>
                 <div class="core-bottom">
-                    <a class="core-service-btn" href="#" onclick={ onComponentDetails }>More Details</a>
+                    <a class="core-service-btn" href="#" onclick={ onComponentDetails }>
+                    	<t entity="Software.MORE_DETAILS">More Details</t>
+                    </a>
                 </div>
                 </div>
             </div>
@@ -109,7 +117,7 @@
                 { adoption }%
                 </div>
                 <div class="core-stat-title">
-                Adoption
+                	<t entity="Software.ADOPTION">Adoption</t>
                 </div>
                 </div>
                 <div class="col-sm-4 col-xs-4">
@@ -117,28 +125,35 @@
                 { maturity_points } <span>of</span> { this.max_maturity_points }
                 </div>
                 <div class="core-stat-title">
-                Maturity
+                	<t entity="Software.MATURITY">Maturity</t>
                 </div>
                 </div>
                 <div class="col-sm-4 col-xs-4">
                 <div class="core-stat-graphic">
-                { age} <span>yrs</span>
+                { age} <span><t entity="Software.YEARS_ABBR">yrs</t></span>
                 </div>
                 <div class="core-stat-title">
-                Age
+                	<t entity="Software.AGE">Age</t>
                 </div>
                 </div>
                 </div>
                 </div>
                 <div class="core-bottom">
-                <a class="core-service-btn" href="#" onclick={ onComponentDetails }>More Details</a>
+                <a class="core-service-btn" href="#" onclick={ onComponentDetails }><t entity="Software.MORE_DETAILS">More Details</t></a>
                 </div>
                 </div>
                 </div>
         </div>
         <div class="row" if={ current_config.optional_components.length >0 }>
             <div class="col-sm-12">
-               <p class="service-section-title"><strong>Optional Services</strong> included in this configuration ({ current_config.optional_components.length } <span>of</span> { release_optional_component_count })</p>
+               <p class="service-section-title">
+               		<t entity="Software.OPTIONAL_SERVICES_INCLUDED">
+               			<strong>Optional Services</strong> included in this configuration
+               		</t>
+               		({ current_config.optional_components.length } 
+               		<span><t entity="Openstack.RANGE_OF">of</t></span> 
+               		{ release_optional_component_count })
+               	</p>
             </div>
         </div>
         <div class="row" if={ current_config.optional_components.length > 0 }>
@@ -148,12 +163,12 @@
             </div><table class="table">
             <thead>
             <tr>
-                <th>Name</th>
-                <th>Service</th>
-                <th>Maturity <a href="#" id='sort-maturity' onclick={ sortMaturity }><i class="fa fa-sort"></i></a></th>
-                <th>Age <a href="#" id='sort-age' onclick={ sortAge }><i class="fa fa-sort"></i></a></th>
-                <th>Adoption <a href="#" id='sort-adoption' onclick={ sortAdoption }><i class="fa fa-sort"></i></a></th>
-                <th>Details</th>
+                <th><t entity="Software.NAME">Name</t></th>
+                <th><t entity="Software.SERVICE">Service</t></th>
+                <th><t entity="Software.MATURITY">Maturity</t> <a href="#" id='sort-maturity' onclick={ sortMaturity }><i class="fa fa-sort"></i></a></th>
+                <th><t entity="Software.AGE">Age</t> <a href="#" id='sort-age' onclick={ sortAge }><i class="fa fa-sort"></i></a></th>
+                <th><t entity="Software.ADOPTION">Adoption</t> <a href="#" id='sort-adoption' onclick={ sortAdoption }><i class="fa fa-sort"></i></a></th>
+                <th><t entity="Software.DETAILS">Details</t></th>
             </tr>
             </thead>
             <tbody>
@@ -163,7 +178,7 @@
                 <td><div class="service-stat-pill { maturity_points >= 0  && maturity_points <= 1 ? 'red': (maturity_points > 1  && maturity_points <= 3 ? 'orange' : 'green') }">{ maturity_points } <span>of</span> { this.max_maturity_points }</div></td>
                 <td><div>{ age } Yrs</div></td>
                 <td><div>{ adoption } %</div></td>
-                <td><a href="#" onclick={ onComponentDetails }>More Details</a></td>
+                <td><a href="#" onclick={ onComponentDetails }><t entity="Software.MORE_DETAILS">More Details</t></a></td>
                 </tr>
             </tbody>
             </table>
@@ -172,7 +187,11 @@
         </div>
         <div class="row" if={ current_config.related_notes.length >0 }>
             <div class="col-sm-12">
-                <p class="service-section-title"><strong>Related Content</strong></p>
+                <p class="service-section-title">
+                	<strong>
+                		<t entity="Software.RELATED_CONTENT">Related Content</t>
+                	</strong>
+                </p>
             </div>
         </div>
         <div class="row" if={ current_config.related_notes.length >0 }>

@@ -35,6 +35,11 @@ interface ISummit extends IEntity
     public function getEndDate();
 
     /**
+     * @return string
+     */
+    public function getScheduleLink();
+
+    /**
      * @return DateTime
      */
     public function getStartShowingVenuesDate();
@@ -124,6 +129,11 @@ interface ISummit extends IEntity
      * @return ISummitVenue[]
      */
     public function getVenues();
+
+    /**
+     * @return ISummitVenue[]
+     */
+    public function getPrimaryVenues();
 
     /**
      * @return ISummitVenue
@@ -219,4 +229,87 @@ interface ISummit extends IEntity
      * @return bool
      */
     public function isSelectionOver();
+
+    /**
+     * @param mixed|null $day
+     * @param int|null $location
+     * @return SummitEvent[]
+     * @throws Exception
+     */
+    public function getSchedule($day = null, $location = null);
+
+    /**
+     * @param mixed|null $level
+     * @return SummitEvent[]
+     * @throws Exception
+     */
+    public function getScheduleByLevel($level = null);
+
+    /**
+     * @param int|null $track
+     * @return SummitEvent[]
+     * @throws Exception
+     */
+    public function getScheduleByTrack($track = null);
+
+    /**
+     * @param string $day
+     * @return bool
+     */
+    public function isDayBelongs($day);
+
+    /**
+     * @param string $day
+     * @param SummitAbstractLocation $location
+     * @return int
+     */
+    public function getPublishedEventsCountByDateLocation($day, SummitAbstractLocation $location);
+
+    /**
+     * @param $value
+     * @param $format
+     * @return null|string
+     */
+    public function convertDateFromUTC2TimeZone($value, $format);
+
+    /**
+     * @param $value
+     * @param $format
+     * @return null|string
+     */
+    public function convertDateFromTimeZone2UTC($value, $format);
+
+    /**
+     * @return PresentationCategory[]
+     */
+    public function getCategories();
+
+    /**
+     * @return PrivatePresentationCategoryGroup[]
+     */
+    public function getPrivateCategoryGroups();
+
+    /**
+     * @return PresentationCategory[]
+     */
+    public function getPublicCategories();
+
+    /**
+     * @param PresentationCategory $category
+     * @return bool
+     */
+    public function isPublicCategory(PresentationCategory $category);
+
+    /**
+     * @param PresentationCategory $category
+     * @return bool
+     */
+    public function isPrivateCategory(PresentationCategory $category);
+
+    /**
+     * @param PresentationCategory $category
+     * @return null|PrivatePresentationCategoryGroup
+     */
+    public function getPrivateGroupFor(PresentationCategory $category);
+
 }

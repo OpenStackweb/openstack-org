@@ -5,11 +5,14 @@
  */
 class SpeakerForm extends BootstrapForm
 {
+    /**
+     * @var ISummit
+     */
+    private $summit;
 
-    public function __construct($controller, $name, $actions)
+    public function __construct($controller, $name, $actions, ISummit $summit)
     {
-        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
-        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
+        $this->summit = $summit;
 
         parent::__construct(
             $controller, 
@@ -19,67 +22,45 @@ class SpeakerForm extends BootstrapForm
             $this->getSpeakerValidator()
         );
 
-        $script = <<<JS
-          var form_validator_{$this->FormName()} = null;
-          (function( $ ){
+        $form_id = $this->FormName();
 
-                $(document).ready(function(){
-                    form_validator_{$this->FormName()} = $('#{$this->FormName()}').validate(
-                    {
-                        ignore:[],
-                        highlight: function(element) {
-                            $(element).closest('.form-group').addClass('has-error');
-                        },
-                        unhighlight: function(element) {
-                            $(element).closest('.form-group').removeClass('has-error');
-                        },
-                        errorElement: 'span',
-                        errorClass: 'help-block',
-                        errorPlacement: function(error, element) {
-                            if(element.parent('.input-group').length) {
-                                error.insertAfter(element.parent());
-                            } else {
-                                error.insertAfter(element);
-                            }
-                        },
-                       invalidHandler: function(form, validator) {
-                            if (!validator.numberOfInvalids())
-                                return;
-                            var element = $(validator.errorList[0].element);
-                            if(!element.is(":visible")){
-                                element = element.parent();
-                            }
+        Requirements::customScript("var form_id = '{$form_id}';");
+        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
+        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
+        Requirements::javascript('themes/openstack/javascript/chosen.jquery.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/typeahead.js/dist/typeahead.bundle.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js');
+        Requirements::javascript('summit/javascript/speaker-form.js');
 
-                            $('html, body').animate({
-                                scrollTop: element.offset().top
-                            }, 2000);
-                        },
-                    });
+        Requirements::css('themes/openstack/bower_assets/chosen/chosen.min.css');
+        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.css');
+        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css');
+        Requirements::css('summit/css/speaker-form.css');
 
-                     $("#SpeakerForm_BioForm_CountriesToTravel").chosen({width: '100%'});
-                });
-                // End of closure.
-        }(jQuery ));
-JS;
-        Requirements::customScript($script);
     }
 
     protected function getSpeakerFields()
     {
+        $organizational_roles = SpeakerOrganizationalRole::get()->where('IsDefault',1)->map('ID','Role');
+        $organizational_roles->push(0,'Other');
+
         $fields =  FieldList::create()
             ->text('FirstName',"Speaker's first name")
                 ->configure()
                     ->setAttribute('autofocus','TRUE')
                 ->end()            
             ->text('LastName', "Speaker's last name")
-            ->text('Title', "Speaker's title")
+            ->text('Title', "Speaker's title (100 char max)")
+                ->configure()
+                    ->setMaxLength(100)
+                ->end()
             ->dropdown('Country', 'Country of Residence', CountryCodes::$iso_3166_countryCodes)
                 ->configure()
                      ->setEmptyString('-- Select One --')
                 ->end()
             ->tinyMCEEditor('Bio',"Speaker's Bio")
                 ->configure()
-                    ->setRows(25)
+                    ->setRows(12)
                     ->setRequired(true)
                 ->end()
             ->text('IRCHandle','IRC Handle (optional)')
@@ -100,31 +81,10 @@ JS;
                     ->setMaxFilesize(1)
                 ->end()
             ->bootstrapIgnore('Photo')
-            ->literal('SpokenLanguagesTitle','<h3>Spoken Languages ( Up to 5)</h3>')
-            ->text('Language[1]','#1')
-            ->text('Language[2]','#2')
-            ->text('Language[3]','#3')
-            ->text('Language[4]','#4')
-            ->text('Language[5]','#5')
-            ->literal('ExpertiseTitle','<h3>Areas of Expertise ( Up to 5)</h3>')
-            ->text('Expertise[1]','#1')
-            ->text('Expertise[2]','#2')
-            ->text('Expertise[3]','#3')
-            ->text('Expertise[4]','#4')
-            ->text('Expertise[5]','#5')
-            ->literal('PresentationTitle','<h3>Links To Previous Presentations ( Up to 5)</h3>')
-            ->text('PresentationLink[1]','Link #1')
-            ->text('PresentationTitle[1]','Title #1')
-            ->text('PresentationLink[2]','Link #2')
-            ->text('PresentationTitle[2]','Title #2')
-            ->text('PresentationLink[3]','Link #3')
-            ->text('PresentationTitle[3]','Title #3')
-            ->text('PresentationLink[4]','Link #4')
-            ->text('PresentationTitle[4]','Title #4')
-            ->text('PresentationLink[5]','Link #5')
-            ->text('PresentationTitle[5]','Title #5')
-            ->literal('RecordingAndPublishingLegalAgreement',sprintf('Speakers agree that OpenStack Foundation may record and publish their talks presented during the %s OpenStack Summit. If you submit a proposal on behalf of a speaker, you represent to OpenStack Foundation that you have the authority to submit the proposal on the speaker’s behalf and agree to the recording and publication of their presentation.', Summit::ActiveSummit()->Title))
-            ->header('Want to be in the Speakers\' Bureau?')
+            ->literal('DisclaimerTitle','<hr><label>Disclaimer</label>')
+            ->literal('RecordingAndPublishingLegalAgreement',sprintf('<div class="disclaimer">Speakers agree that OpenStack Foundation may record and publish their talks presented during the %s OpenStack Summit. If you submit a proposal on behalf of a speaker, you represent to OpenStack Foundation that you have the authority to submit the proposal on the speaker’s behalf and agree to the recording and publication of their presentation.</div>',$this->summit->Title))
+            ->literal('BureauTitle','<label>Want to be in the Speakers\' Bureau?</label>')
+            ->literal('BureauText','<div class="bureau-text">In addition to the OpenStack Summit, we regularly recruit speakers for OpenStack community events around the world. If you would like to be considered for more speaking opportunities, please indicate your interest in being listed in the speaker’s bureau and complete the below questions so event organizers can learn more about you.</div>')
             ->checkbox('AvailableForBureau', "I'd like to be in the speaker bureau")
                 ->configure()
                     ->addExtraClass('bureau-checkbox')
@@ -133,10 +93,58 @@ JS;
                 ->configure()
                     ->addExtraClass('bureau-checkbox')
                 ->end()
-            ->checkbox('FundedTravel', 'My Company would be willing to fund my travel to events')
+            ->literal('SpokenLanguagesTitle','<hr><label>Spoken Languages ( Up to 5)</label>')
+            ->text('Language','')
                 ->configure()
-                    ->addExtraClass('bureau-checkbox')
+                    ->addHolderClass('nolabel')
                 ->end()
+            ->literal('ExpertiseTitle','<label>Areas of Expertise ( Up to 5)</label>')
+            ->text('Expertise','')
+                ->configure()
+                    ->addHolderClass('nolabel')
+                ->end()
+            ->literal('PresentationTitle','<label>Links To Previous Presentations ( Up to 5)</label><br>')
+            ->text('PresentationLink[1]','Link')
+                ->configure()
+                    ->addHolderClass('col-md-6')
+                ->end()
+            ->text('PresentationTitle[1]','Title')
+                ->configure()
+                    ->addHolderClass('col-md-6')
+                ->end()
+            ->text('PresentationLink[2]','')
+                ->configure()
+                    ->addHolderClass('col-md-6 nolabel')
+                ->end()
+            ->text('PresentationTitle[2]','')
+                ->configure()
+                    ->addHolderClass('col-md-6 nolabel')
+                ->end()
+            ->text('PresentationLink[3]','')
+                ->configure()
+                    ->addHolderClass('col-md-6 nolabel')
+                ->end()
+            ->text('PresentationTitle[3]','')
+                ->configure()
+                    ->addHolderClass('col-md-6 nolabel')
+                ->end()
+            ->text('PresentationLink[4]','')
+                ->configure()
+                    ->addHolderClass('col-md-6 nolabel')
+                ->end()
+            ->text('PresentationTitle[4]','')
+                ->configure()
+                    ->addHolderClass('col-md-6 nolabel')
+                ->end()
+            ->text('PresentationLink[5]','')
+                ->configure()
+                    ->addHolderClass('col-md-6 nolabel')
+                ->end()
+            ->text('PresentationTitle[5]','')
+                ->configure()
+                    ->addHolderClass('col-md-6 nolabel')
+                ->end()
+            ->literal('HR','<div class="clearfix"></div><hr>')
              ->optionset('WillingToTravel', 'I am willing to travel to events:', array(
                     1 => 'Yes',
                     0 => 'No'
@@ -145,15 +153,25 @@ JS;
                 ->configure()
                     ->addExtraClass('countries-to-travel')
                 ->end()
-            ->tinyMCEEditor('Notes',"Notes")
+            ->checkbox('FundedTravel', 'My Company would be willing to fund my travel to events')
                 ->configure()
-                    ->setRows(10)
-                ->end();
+                    ->addExtraClass('bureau-checkbox')
+                ->end()
+            ->checkboxset('OrganizationalRole','What is your current Organizational Role at your company? (check all that apply):',$organizational_roles)
+            ->text('OtherOrganizationalRole','Please specify your role:')
+                ->configure()
+                    ->displayIf('OrganizationalRole')
+                        ->hasCheckedOption(0)
+                    ->end()
+                ->end()
+            ->literal('HR','<hr>')
+            ->hidden('HasChanged',0);
+
         return $fields;
     }
 
     public function getSpeakerValidator() {
-        return RequiredFields::create('FirstName','LastName','Title', 'RecordingAndPublishingLegalAgreement', 'Language[1]','Expertise[1]','WillingToTravel','Bio');
+        return RequiredFields::create('FirstName','LastName','Title', 'RecordingAndPublishingLegalAgreement', 'Language','Expertise','WillingToTravel','Bio');
     }
 
     public function loadDataFrom($data, $mergeStrategy = 0, $fieldList = null)
@@ -173,17 +191,8 @@ JS;
             if(empty($speaker->TwitterName))  $this->fields->fieldByName('TwitterName')->setValue($speaker->Member()->TwitterName);
         }
 
-        foreach ($speaker->AreasOfExpertise() as $key => $expertise)
-        {
-            if ($key > 4) break;
-            $this->fields->fieldByName('Expertise['.($key+1).']')->setValue($expertise->Expertise);
-        }
-
-        foreach ($speaker->Languages() as $key => $language)
-        {
-            if ($key > 4) break;
-            $this->fields->fieldByName('Language['.($key+1).']')->setValue($language->Language);
-        }
+        $this->fields->fieldByName('Expertise')->setValue(implode(',',$speaker->AreasOfExpertise()->map('ID','Expertise')->toArray()));
+        $this->fields->fieldByName('Language')->setValue(implode(',',$speaker->Languages()->map('ID','Language')->toArray()));
 
         $country_array = array();
         foreach ($speaker->TravelPreferences() as $pref_country) {
@@ -194,6 +203,17 @@ JS;
             $this->fields->fieldByName('PresentationLink['.($key+1).']')->setValue($presentation->LinkUrl);
             $this->fields->fieldByName('PresentationTitle['.($key+1).']')->setValue($presentation->Title);
         }
+
+        $role_ids = array();
+        foreach ($speaker->OrganizationalRoles() as $role) {
+            if($role->IsDefault) {
+                $role_ids[] = $role->ID;
+            } else { //add other
+                $role_ids[] = 0;
+                $this->fields->fieldByName('OtherOrganizationalRole')->setValue($role->Role);
+            }
+        }
+        $this->fields->fieldByName('OrganizationalRole')->setValue($role_ids);
 
         $countries_2_travel = $this->fields->fieldByName('CountriesToTravel');
         if(!is_null($countries_2_travel))
@@ -215,52 +235,95 @@ JS;
 
         $speaker = $dataObject;
 
-        $speaker->AreasOfExpertise()->removeAll();
-        for($i = 1 ; $i <= 5 ; $i++ ){
-            $field = $this->fields->fieldByName("Expertise[{$i}]");
-            if(is_null($field)) continue;
-            $val = $field->Value();
-            if(empty($val)) continue;
-            $speaker->AreasOfExpertise()->add( SpeakerExpertise::create(array('Expertise' => trim($val))));
-        }
+        $expertise_csv   = $this->fields->fieldByName("Expertise")->Value();
+        $expertise_array = explode(',',$expertise_csv);
+        $exp_ids = array();
+        if ($expertise_array) {
+            foreach ($expertise_array as $expertise) {
+                if(empty($expertise)) continue;
+                $expertise  = Convert::raw2sql(trim($expertise));
+                if (!$anexp = $speaker->AreasOfExpertise()->find('Expertise', $expertise)) {
+                    $anexp = SpeakerExpertise::create(array('Expertise' => $expertise));
+                }
 
-        $speaker->Languages()->removeAll();
-        for($i = 1 ; $i <= 5 ; $i++ ){
-            $field = $this->fields->fieldByName("Language[{$i}]");
-            if(is_null($field)) continue;
-            $val = $field->Value();
-            if(empty($val)) continue;
-            $speaker->Languages()->add( SpeakerLanguage::create(array('Language' => trim($val))));
+                $anexp->write();
+                $exp_ids[] = $anexp->ID;
+            }
         }
+        $speaker->AreasOfExpertise()->setByIdList($exp_ids);
 
-        $speaker->OtherPresentationLinks()->removeAll();
+        $language_csv = $this->fields->fieldByName("Language")->Value();
+        $language_array = explode(',',$language_csv);
+        $lang_ids = array();
+        if ($language_array) {
+            foreach ($language_array as $language) {
+                if(empty($language)) continue;
+                $language = Convert::raw2sql(trim($language));
+                if (!$alang = $speaker->Languages()->find('Language',$language)) {
+                    $alang = SpeakerLanguage::create(array('Language' => $language));
+                }
+
+                $alang->write();
+                $lang_ids[] = $alang->ID;
+            }
+        }
+        $speaker->Languages()->setByIdList($lang_ids);
+
+        $link_ids = array();
         for($i = 1 ; $i <= 5 ; $i++ ){
             $link = $this->fields->fieldByName("PresentationLink[{$i}]");
             $title = $this->fields->fieldByName("PresentationTitle[{$i}]");
             if(is_null($link)) continue;
-            $link_val   = $link->Value();
-            $title_val   = (is_null($title)) ? '' : $title->Value();
-            if(empty($link_val)) continue;
+            $link_val  = Convert::raw2sql(trim($link->Value()));
 
-            $speaker->OtherPresentationLinks()->add( SpeakerPresentationLink::create(array(
-                'LinkUrl' => trim($link_val),
-                'Title' => trim($title_val))
-            ));
+            if(empty($link_val)) continue;
+            $title_val = (is_null($title)) ? '' : Convert::raw2sql(trim($title->Value()));
+
+            if (!$alink = $speaker->OtherPresentationLinks()->find('LinkUrl',$link_val)) {
+                $alink = SpeakerPresentationLink::create(array('LinkUrl' => $link_val, 'Title' => $title_val));
+            } else {
+                $alink->Title = $title_val;
+            }
+
+            $alink->write();
+            $link_ids[] = $alink->ID;
         }
+        $speaker->OtherPresentationLinks()->setByIdList($link_ids);
+
+
+        $roles = $this->fields->fieldByName("OrganizationalRole")->Value();
+        if ($roles && in_array(0,$roles)) { // 0 is the id for Other
+            $other_role = $this->fields->fieldByName("OtherOrganizationalRole")->Value();
+            $other_role = Convert::raw2sql(trim($other_role));
+            $new_role   = SpeakerOrganizationalRole::get()->where("Role = '$other_role' ")->first();
+            if (!$new_role) {
+                $new_role = new SpeakerOrganizationalRole(array('Role' => $other_role, 'IsDefault' => 0));
+                $new_role->write();
+            }
+            array_pop($roles);
+            $roles[] = $new_role->ID;
+        }
+        $speaker->OrganizationalRoles()->setByIdList($roles);
 
         $countries_2_travel = $this->fields->fieldByName('CountriesToTravel');
-
-        if(!is_null($countries_2_travel))
-        {
-            $speaker->TravelPreferences()->removeAll();
+        $country_ids = array();
+        if(!is_null($countries_2_travel)) {
             $country_array  = $countries_2_travel->Value();
-            foreach($country_array as $country_name)
-            {
-                $speaker->TravelPreferences()->add(SpeakerTravelPreference::create(array(
-                    'Country' => $country_name
-                )));
+            if ($country_array) {
+                foreach($country_array as $country_name)
+                {
+                    $country_name = Convert::raw2sql(trim($country_name));
+                    if (!$acountry = $speaker->TravelPreferences()->find('Country',$country_name)) {
+                        $acountry = SpeakerTravelPreference::create(array('Country' => $country_name));
+                    }
+
+                    $acountry->write();
+                    $country_ids[] = $acountry->ID;
+                }
             }
         }
+        $speaker->TravelPreferences()->setByIdList($country_ids);
+
     }
 
 }

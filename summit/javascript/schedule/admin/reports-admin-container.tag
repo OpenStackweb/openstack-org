@@ -10,13 +10,23 @@
                 <option value="speaker_report"> Speaker Report </option>
                 <option value="presentation_report" selected> Presentation Report </option>
                 <option value="room_report"> Speakers Per Room </option>
+                <option value="video_report"> Video Output List </option>
+                <option value="rsvp_report"> RSVP Report </option>
             </select>
         </div>
-        <div class="col-md-4">
-            <button class="btn btn-primary" id="export-report" onclick={ exportReport } >Export CSV</button>
+        <div class="col-md-2">
+            <button class="btn btn-primary" id="export-report" onclick={ exportReport } >Export</button>
             <button class="btn btn-success" id="save-report" onclick={ saveReport } >Save</button>
         </div>
-        <div class="col-md-4" if={report == 'presentation_report'}>
+        <div class="col-md-2" if={report == 'presentation_report' || report == 'speaker_report'}>
+            <select id="status-filter" class="form-control" onchange={ searchReport }>
+                <option value="all">All</option>
+                <option value="hide_confirmed">Hide Confirmed</option>
+                <option value="hide_registered">Hide Registered</option>
+                <option value="hide_both">Hide Both</option>
+            </select>
+        </div>
+        <div class="col-md-4" if={report == 'presentation_report' || report == 'rsvp_report'}>
             <div class="input-group" style="width: 100%;">
                 <input data-rule-required="true" data-rule-minlength="3" type="text" id="search-term" class="form-control input-global-search" placeholder="Search Speaker or Presentation">
                 <span class="input-group-btn" style="width: 5%;">
@@ -30,20 +40,25 @@
     </div>
     <br>
 
-    <reports-admin-speaker-report if={report == 'speaker_report'} page_limit="{ limit }" summit_id="{ summit_id }" dispatcher="{ dispatcher }"></reports-admin-speaker-report>
-    <reports-admin-presentation-report if={report == 'presentation_report'} page_limit="{ limit }" summit_id="{ summit_id }" dispatcher="{ dispatcher }"></reports-admin-presentation-report>
-    <reports-admin-room-report if={report == 'room_report'} summit_id="{ summit_id }" dispatcher="{ dispatcher }"></reports-admin-room-report>
+    <reports-admin-speaker-report if={ report == 'speaker_report' } page_limit="{ limit }" summit_id="{ summit_id }" dispatcher="{ dispatcher }"></reports-admin-speaker-report>
+    <reports-admin-presentation-report if={ report == 'presentation_report' } page_limit="{ limit }" summit_id="{ summit_id }" dispatcher="{ dispatcher }"></reports-admin-presentation-report>
+    <reports-admin-room-report if={ report == 'room_report' } summit_id="{ summit_id }" locations="{ locations }" dispatcher="{ dispatcher }"></reports-admin-room-report>
+    <reports-admin-video-report if={ report == 'video_report' } summit_id="{ summit_id }" locations="{ locations }" tracks="{ tracks }" dispatcher="{ dispatcher }"></reports-admin-video-report>
+    <reports-admin-rsvp-report if={ report == 'rsvp_report' } page_limit="{ limit }" summit_id="{ summit_id }" dispatcher="{ dispatcher }"></reports-admin-rsvp-report>
 
     <script>
         this.report     = opts.report;
         this.dispatcher = opts.dispatcher;
         this.summit_id  = opts.summit_id;
         this.limit      = opts.limit;
+        this.locations  = opts.locations;
+        this.tracks     = opts.tracks;
         var self        = this;
 
         this.on('mount', function() {
             $("#report_select").change(function(){
                 self.report = $(this).val();
+                console.log('selected report '+self.report);
                 self.update();
             });
 
@@ -57,28 +72,18 @@
 
         saveReport(e) {
             var report = $('#report_select').val();
-            e.preventUpdate = true;
+            if (typeof(e) !== 'undefined') {
+                e.preventUpdate = true;
+            }
             self.dispatcher.saveReport(report);
         }
 
-        exportReport() {
+        exportReport(e) {
             var report = $('#report_select').val();
-            var sort = $('.sorted').data('sort');
-            var sort_dir = $('.sorted').data('dir');
-            $('body').ajax_loader();
-
-            $.get('api/v1/summits/'+self.summit_id+'/reports/export/'+report,
-                {sort:sort, sort_dir:sort_dir},
-                function(csv){
-                    $('body').ajax_loader('stop');
-                    var uri = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
-                    var download_link = document.createElement('a');
-                    download_link.href = uri;
-                    download_link.download = report+".csv";
-                    document.body.appendChild(download_link);
-                    download_link.click();
-                    document.body.removeChild(download_link);
-            });
+            if (typeof(e) !== 'undefined') {
+                e.preventUpdate = true;
+            }
+            self.dispatcher.exportReport(report);
         }
 
         toggleSort(elem) {

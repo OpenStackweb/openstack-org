@@ -22,10 +22,13 @@ final class JobForm extends HoneyPotForm {
 
 		$fields->push($title =new TextField('title','Title'));
 		$fields->push($url = new TextField('url','Url'));
-		$fields->push($description = new HtmlEditorField('description','Description'));
-		$fields->push($instructions =new HtmlEditorField('instructions','Instructions To Apply'));
+        $fields->push(new CheckboxField('is_coa_needed','Is COA needed?'));
+        $fields->push($ddl_type = new DropdownField('job_type','Job Type', JobType::get()->sort("Type")->map("ID", "Type")));
+        $ddl_type->setEmptyString("--SELECT A JOB TYPE --");
+		$fields->push($description  = new HtmlEditorField('description','Description'));
+		$fields->push($instructions = new HtmlEditorField('instructions','Instructions To Apply'));
 		$fields->push($expiration_date = new TextField('expiration_date','Expiration Date'));
-		$fields->push($company = new TextField('company_name','Company'));
+		$fields->push($company = new CompanyField('company','Company'));
 
 		$title->addExtraClass('job_control');
 		$url->addExtraClass('job_control');
@@ -33,7 +36,6 @@ final class JobForm extends HoneyPotForm {
 		$instructions->addExtraClass('job_control');
 		$expiration_date->addExtraClass('job_control');
 		$company->addExtraClass('job_control');
-
 
 		//location
 

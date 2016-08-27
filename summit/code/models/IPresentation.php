@@ -65,4 +65,45 @@ interface IPresentation extends ISummitEvent
      * @return $this
      */
     public function markReceived();
+
+    /**
+     * @return int
+     */
+    public function getProgress();
+
+    /**
+     * @param int $progress
+     * @throws EntityValidationException
+     * @return $this
+     */
+    public function setProgress($progress);
+
+    /**
+     * @return $this
+     */
+    public function setComplete();
+
+    /**
+     * @return void
+     */
+    public function unsetModerator();
+
+    /**
+     * @param IPresentationSpeaker $speaker
+     * @return bool
+     */
+    public function isModerator(IPresentationSpeaker $speaker);
+
+    /**
+     * @param IPresentationSpeaker $speaker
+     * @return void
+     */
+    public function removeSpeaker(IPresentationSpeaker $speaker);
+
+    /**
+     * @param ITrackQuestionTemplate $question
+     * @return ITrackAnswer
+     */
+    public function findAnswerByQuestion(ITrackQuestionTemplate $question);
+
 }

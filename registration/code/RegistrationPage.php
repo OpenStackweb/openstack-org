@@ -26,6 +26,7 @@ class RegistrationPage_Controller extends Page_Controller
         'MobileRegistrationForm',
         'MobileRegistrationPage',
         'results',
+        'CheckEmail'
     );
 
     private static $url_handlers = array (
@@ -53,6 +54,17 @@ class RegistrationPage_Controller extends Page_Controller
         $this->member_manager = $manager;
     }
 
+    public function CheckEmail()
+    {
+        $email = $this->request->getVar('Email');
+        //Check for existing member email address
+        $res = true;
+        if ($member = Member::get()->filter('Email', Convert::raw2sql($email))->first()) {
+            $res = false;
+        }
+        echo json_encode($res);
+    }
+
     function init()
     {
         parent::init();
@@ -61,7 +73,6 @@ class RegistrationPage_Controller extends Page_Controller
 
         $css_files =  array(
             "themes/openstack/css/chosen.css",
-            "registration/css/affiliations.css",
             'registration/css/registration.page.css',
         );
 
@@ -72,17 +83,19 @@ class RegistrationPage_Controller extends Page_Controller
         Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
         Requirements::javascript(THIRDPARTY_DIR . '/jquery-ui/jquery-ui.js');
 
-        Requirements::combine_files('registration.js', array(
+        $js_scripts = array(
             "themes/openstack/javascript/jquery.ui.datepicker.validation.package-1.0.1/jquery.ui.datepicker.validation.js",
             "themes/openstack/javascript/jquery.validate.custom.methods.js",
             "themes/openstack/javascript/chosen.jquery.min.js",
             "themes/openstack/javascript/pure.min.js",
             "themes/openstack/javascript/jquery.serialize.js",
             "themes/openstack/javascript/jquery.cleanform.js",
-            "registration/javascript/affiliations.js",
             "registration/javascript/registration.page.js",
             "themes/openstack/javascript/tag-it.js"
-        ));
+        );
+        foreach($js_scripts as $js)
+            Requirements::javascript($js);
+
     }
 
     //Generate the registration form
@@ -207,7 +220,7 @@ class RegistrationPage_Controller extends Page_Controller
 
             Session::set("FormInfo.{$form->FormName()}.data", $data);
             $profile_page = EditProfilePage::get()->first();
-            $member = $this->member_manager->register($data, $profile_page, new MemberRegistrationSenderService);
+            $member = $this->member_manager->register($data, new MemberRegistrationSenderService);
             //Get profile page
             if (!is_null($profile_page)) {
                 //Redirect to profile page with success message
@@ -303,7 +316,7 @@ class RegistrationPage_Controller extends Page_Controller
 
             Session::set("FormInfo.{$form->FormName()}.data", $data);
             $profile_page = EditProfilePage::get()->first();
-            $member = $this->member_manager->registerMobile($data, $profile_page, new MemberRegistrationSenderService);
+            $member = $this->member_manager->registerMobile($data, new MemberRegistrationSenderService);
             //Get profile page
             if (!is_null($profile_page)) {
                 //Redirect to profile page with success message

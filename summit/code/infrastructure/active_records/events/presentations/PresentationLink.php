@@ -22,10 +22,29 @@ class PresentationLink extends PresentationMaterial
     public function getCMSFields()
     {
         $f = parent::getCMSFields();
-        $f->removeByName('Name');
         $f->removeByName('Description');
         $f->removeByName('Featured');
         $f->addFieldToTab('Root.Main', new TextField('Link','Link'));
         return $f;
+    }
+
+    /**
+     * @return ValidationResult
+     */
+    protected function validate()
+    {
+        $result = ValidationResult::create();
+
+
+        $link = trim($this->Link);
+
+        if (empty($link)) {
+            return $result->error('you must set an url for Presentation Link!');
+        }
+
+        if(filter_var($link, FILTER_VALIDATE_URL) === false)
+            return $result->error('you must set a valid url for Presentation Link!');
+
+        return $result;
     }
 }

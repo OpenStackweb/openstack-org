@@ -1,32 +1,26 @@
-<div class="span-24 last">
-    <div class="span-4">
-        <div class="photo">$ProfilePhoto(100)</div>
-        <p>
-            <% if TwitterName %>
-            <a target="_blank" href="https://twitter.com/{$TwitterName}">
-                <img width="25" height="25" src="/themes/openstack/images/icons/icon_twitter.png">
-            </a>
-            <% end_if %>
-            <% if LinkedInProfile %>
-            <a href="http://linkedin.com/in/{$LinkedInProfile}">
-                <img width="25" height="25" src="/themes/openstack/images/icons/icon_linkedin.png">
-            </a>
-            <% end_if %>
-            <a href="/community/members{$Link}{$ID}">
-                <img width="25" height="25" src="/themes/openstack/images/icons/icon_openstack.png">
-            </a>
-        </p>
-    </div>
-    <div class="span-20 last">
-        <h3>$FullName</h3>
-        <div class="span-2"></div>
-        <div class="span-18 last"></div>
-        <div class="span-2"></div>
-        <div class="span-18 last"></div>
-        <div class="span-2"><strong>Bio</strong></div>
-        <div class="span-18 last">
-            $Bio
-            <p>&nbsp;</p>
+<hr>
+<div class="row">
+    <div class="col-sm-2 staff-photo-wrapper">
+        <div class="photo">
+            $ProfilePhoto
         </div>
+        <% if TwitterName %>
+        <a class="staff-twitter" target="_blank" href="https://twitter.com/{$TwitterName}"></a>
+        <% end_if %>
+        <% if LinkedInProfile %>
+        <a class="staff-linkedin" href="http://linkedin.com/in/{$LinkedInProfile}"></a>
+        <% end_if %>
+        <a class="staff-openstack" href="/community/members{$Link}{$ID}"></a>
+    </div>
+    <div class="col-sm-10 staff-text-wrapper">
+        <h3>$FullName</h3>
+        <% if CurrentJobTitle %>
+            <h5>Job Title</h5>
+            <div>$CurrentJobTitle&nbsp;</div>
+        <% end_if %>
+        <% if Bio %>
+            <h5>Bio</h5>
+            <div>$Bio&nbsp;</div>
+        <% end_if %>
     </div>
 </div>

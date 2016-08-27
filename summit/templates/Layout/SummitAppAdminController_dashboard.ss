@@ -29,6 +29,11 @@
         </div>
         <div class="row">
             <div class="col-md-12">
+                <span><h2 class="text-left"><i class="fa fa-calendar-plus-o"></i>&nbsp;Submitted Events&nbsp;$Summit.Events.Count</h2></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
                 <span><h2 class="text-left"><i class="fa fa-calendar-check-o"></i>&nbsp;Published Events&nbsp;$Summit.PublishedEvents.Count</h2></span>
             </div>
         </div>

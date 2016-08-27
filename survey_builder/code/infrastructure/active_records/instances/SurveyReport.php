@@ -76,7 +76,7 @@ class SurveyReport extends DataObject {
             $options = array();
 
             foreach ($filter->Question()->getValues() as $option) {
-                $options[] = $option->Value;
+                $options[] = array('id' => $option->ID, 'value' => $option->Value);
             }
 
             $filters[] = array(

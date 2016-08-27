@@ -45,19 +45,23 @@ $(document).ready(function(){
 
     $('#event_type').change(function(){
        var val = $(this).find("option:selected").text();
-        if (val == 'Presentation' || val == 'Keynotes' ) {
+        if (val == 'Presentation' || val == 'Keynotes' || val == 'Panel' ) {
            $('.speakers_container').show();
            $('.track_container').show();
+           $('.level_container').show();
            $('#allow_feedback').attr("checked","checked");
-           if(val == 'Keynotes')
+           if(val == 'Keynotes' || val == 'Panel')
                $('.moderator_container').show();
            else
                $('.moderator_container').hide();
+           $('#expect_learn_container').show();
        }
        else {
+           $('#expect_learn_container').hide();
            $('.speakers_container').hide();
            $('.moderator_container').hide();
            $('.track_container').hide();
+           $('.level_container').hide();
            $('#allow_feedback').removeAttr("checked");
        }
     });
@@ -92,9 +96,21 @@ $(document).ready(function(){
         ]
     });
 
+    var speakers_emails = [];
     $.each(speakers, function(index, value) {
         $('#speakers').tagsinput('add', value);
+        speakers_emails.push(value.email);
     });
+
+    var email_href = $('#email-speakers').attr('href')+speakers_emails.join();
+    email_href += '?cc=speakersupport@openstack.org';
+    $('#email-speakers').attr('href',email_href);
+
+    $("#speakers").bind("paste", function(e){
+        // access the clipboard using the api
+        var pastedData = e.originalEvent.clipboardData.getData('text');
+        alert(pastedData);
+    } );
 
     // tags autocomplete
 
@@ -213,6 +229,10 @@ $(document).ready(function(){
 
     var form = $('#edit-event-form');
 
+    jQuery.validator.addMethod("no_rel_urls", function(value, element) {
+        return this.optional(element) || !(/(?=.*href\s*=\s*"(?!http))/.test(value));
+    }, "We don't allow relative urls in the text.");
+
     //validation
     form_validator = form.validate({
         onfocusout: false,
@@ -220,22 +240,27 @@ $(document).ready(function(){
         ignore: [],
         rules: {
             title: {required: true},
-            short_description: {required: true},
+            short_description: {required: true, no_rel_urls: true},
+            expect_learn: {no_rel_urls: true},
             rsvp_link: { url : true },
             headcount: { number: true },
             event_type: { required: true },
             summit_type: { required: true },
+            level: { required: function(){
+                var event_type = $('#event_type').find("option:selected").text();
+                return event_type === 'Presentation' || event_type === 'Keynotes' || event_type === 'Panel';
+            }},
             track: { required: function(){
                 var event_type = $('#event_type').find("option:selected").text();
-                return event_type === 'Presentation' || event_type === 'Keynotes';
+                return event_type === 'Presentation' || event_type === 'Keynotes' || event_type === 'Panel';
             }},
             speakers: { required: function(){
                 var event_type = $('#event_type').find("option:selected").text();
-                return event_type === 'Presentation' || event_type === 'Keynotes';
+                return event_type === 'Presentation' || event_type === 'Keynotes' || event_type === 'Panel';
             }},
             moderator :{ required: function(){
                 var event_type = $('#event_type').find("option:selected").text();
-                return event_type === 'Keynotes';
+                return (event_type === 'Keynotes' || event_type === 'Panel') ;
             }},
             location: { required: function(){
                 var published = $('#published').val();
@@ -357,6 +382,7 @@ $(document).ready(function(){
             end_date: $('#end_date').val(),
             event_type: $('#event_type').val(),
             summit_type: $('#summit_type').val(),
+            level: $('#level').val(),
             track: $('#track').val(),
             allow_feedback: ($('#allow_feedback').prop('checked')) ? 1 : 0,
             tags: $('#tags').val(),

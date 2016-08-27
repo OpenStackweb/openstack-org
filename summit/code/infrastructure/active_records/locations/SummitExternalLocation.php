@@ -14,8 +14,28 @@
  **/
 class SummitExternalLocation extends SummitGeoLocatedLocation
 {
+    public function getTypeName()
+    {
+        return self::TypeName;
+    }
+
     public function inferLocationType()
     {
-        return 'External';
+        return self::LocationType;
+    }
+
+    const TypeName     = 'SummitExternalLocation';
+    const LocationType = 'External';
+
+    private static $db = array
+    (
+        'Capacity' => 'Int',
+    );
+
+    public function getCMSFields()
+    {
+        $f = parent::getCMSFields();
+        $f->addFieldToTab('Root.Main', new TextField('Capacity', 'Capacity'));
+        return $f;
     }
 }

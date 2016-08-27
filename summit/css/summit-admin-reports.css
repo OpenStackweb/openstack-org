@@ -22,3 +22,19 @@ th .fa {
 #page-content-wrapper {
     min-width: 83%;
 }
+
+#event_type {
+    margin-bottom: 15px;
+}
+
+.venues_col .chosen-choices {
+    padding: 7px;
+    border-radius: 4px;
+    border-color: lightgray;
+    background-image: none;
+}
+
+#start_date, #end_date {
+    display: inline;
+    width: 40%;
+}

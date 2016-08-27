@@ -22,5 +22,6 @@ jQuery(document).ready(function($){
         return false;
     });
 
-    $('.api-coverage').capabilities_meter({coverages:coverages});
+    if (typeof(coverages) != 'undefined')
+        $('.api-coverage').capabilities_meter({coverages:coverages});
 });

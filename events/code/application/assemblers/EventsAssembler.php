@@ -48,6 +48,7 @@ final class EventsAssembler {
         $main_info                     = $event->getMainInfo();
         $res['title']                  = $main_info->getTitle();
         $res['url']                    = $main_info->getUrl();
+        $res['logo_url']               = $event->getLogoUrl();
         $res['label']                  = $main_info->getLabel();
         $res['category']               = $main_info->getCategory();
         $res['location']               = $event->getLocation();

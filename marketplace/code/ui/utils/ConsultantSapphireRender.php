@@ -5,7 +5,7 @@
  */
 final class ConsultantSapphireRender
 {
-
+    use GoogleMapLibs;
     /**
      * @var IConsultant
      */
@@ -24,11 +24,8 @@ final class ConsultantSapphireRender
 
     public function draw()
     {
-        Requirements::javascript(Director::protocol()."maps.googleapis.com/maps/api/js?sensor=false");
-        Requirements::javascript("marketplace/code/ui/frontend/js/markerclusterer.js");
-        Requirements::javascript("marketplace/code/ui/frontend/js/oms.min.js");
-        Requirements::javascript("marketplace/code/ui/frontend/js/infobubble-compiled.js");
-        Requirements::javascript("marketplace/code/ui/frontend/js/google.maps.jquery.js");
+        $this->InitGoogleMapLibs();
+
         Requirements::css("marketplace/code/ui/frontend/css/marketplace.css");
         Requirements::javascript("marketplace/code/ui/frontend/js/consultant.page.js");
 
@@ -51,11 +48,11 @@ final class ConsultantSapphireRender
             }
         }
         return Controller::curr()->Customise(
-            array(
-                'Consultant' => $this->consultant,
-                'Services' => new ArrayList(array_values($unique_services)),
-                'Regions' => new ArrayList(array_values($unique_regions)),
-            )
+        [
+            'Consultant' => $this->consultant,
+            'Services'   => new ArrayList(array_values($unique_services)),
+            'Regions'   => new ArrayList(array_values($unique_regions)),
+        ]
         )->renderWith(array('ConsultantsDirectoryPage_pdf'));
     }
 } 

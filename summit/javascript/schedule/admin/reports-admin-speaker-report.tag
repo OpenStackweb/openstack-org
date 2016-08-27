@@ -25,8 +25,8 @@
                 </tr>
             </thead>
             <tbody>
-                <tr each={ speaker, i in speakers } data-id="{ speaker.id }">
-                    <td>{ speaker.speaker_id }</td>
+                <tr each={ speaker, i in speakers }>
+                    <td class="speaker-id">{ speaker.speaker_id }</td>
                     <td>{ speaker.member_id }</td>
                     <td>{ speaker.name }</td>
                     <td>{ speaker.email }</td>
@@ -70,15 +70,16 @@
             $('body').ajax_loader();
             var sort = $('.sorted').data('sort');
             var sort_dir = $('.sorted').data('dir');
+            var filter = $('#status-filter').val();
 
             $.getJSON('api/v1/summits/'+self.summit_id+'/reports/speaker_report',
-                {page:page, items:self.page_data.limit, sort:sort, sort_dir:sort_dir},
+                {page:page, items:self.page_data.limit, sort:sort, sort_dir:sort_dir, filter:filter},
                 function(data){
                     self.speakers = data.data;
                     self.page_data.page = page;
-                    self.page_data.total = data.total;
+                    self.page_data.total = parseInt(data.total);
 
-                    var total_pages = Math.ceil(self.page_data.total / self.page_data.limit);
+                    var total_pages = (self.page_data.total) ? Math.ceil(self.page_data.total / self.page_data.limit) : 1;
                     var options = {
                         bootstrapMajorVersion:3,
                         currentPage: self.page_data.page ,
@@ -100,18 +101,18 @@
         self.dispatcher.on(self.dispatcher.SAVE_SPEAKER_REPORT,function(report) {
             var request = [];
             $('.changed').each(function(){
-                var id = $(this).data('id');
-                var phone = $('.phone',this).val();
+                var speaker_id = $('.speaker-id',this).text();
+                var phone      = $('.phone',this).val();
                 var registered = $('.registered',this).attr('checked') ? 1 : 0;
                 var checked_in = $('.checked_in',this).attr('checked') ? 1 : 0;
 
-                request.push({id: id, phone: phone, registered: registered, checked_in: checked_in});
+                request.push({speaker_id: speaker_id, phone: phone, registered: registered, checked_in: checked_in});
             });
 
             if (request.length) {
                 $.ajax({
                     type: 'PUT',
-                    url: 'api/v1/summits/'+self.summit_id+'/reports/save_report/'+report,
+                    url: 'api/v1/summits/'+self.summit_id+'/reports/'+report,
                     data: JSON.stringify(request),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json"
@@ -128,6 +129,16 @@
                     }
                 });
             }
+        });
+
+        self.dispatcher.on(self.dispatcher.EXPORT_SPEAKER_REPORT,function() {
+            var sort     = $('.sorted').data('sort');
+            var sort_dir = $('.sorted').data('dir');
+            window.open('api/v1/summits/'+self.summit_id+'/reports/export/speaker_report?sort='+sort+'&sort_dir='+sort_dir, '_blank');
+        });
+
+        self.dispatcher.on(self.dispatcher.GET_SPEAKER_REPORT,function() {
+            self.getReport(1);
         });
 
 

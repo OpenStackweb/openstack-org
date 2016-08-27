@@ -27,8 +27,11 @@ final class ValidatorService implements IValidator {
 	protected $implicitRules    = array('Required', 'RequiredWith', 'RequiredWithAll', 'RequiredWithout', 'RequiredWithoutAll', 'RequiredIf', 'Accepted');
 
 	/**
-	 * @param array $values
-	 * @param array $rules
+	 * ValidatorService constructor.
+	 * @param $data
+	 * @param $rules
+	 * @param array $messages
+	 * @param array $customAttributes
 	 */
 	private function __construct($data, $rules, $messages = array(), $customAttributes = array()){
 		$this->customMessages   = $messages;
@@ -199,10 +202,9 @@ final class ValidatorService implements IValidator {
 	protected function addError($attribute, $rule, $parameters)
 	{
 		$message = $this->getMessage($attribute, $rule);
-
 		$message = $this->doReplacements($message, $attribute, $rule, $parameters);
 
-		array_push($this->messages,array('attribute'=>$attribute,'message'=>$message));
+        $this->messages[] = ['attribute' => $attribute, 'message' => $message];
 	}
 
 	protected function getMessage($attribute, $rule)
@@ -227,6 +229,43 @@ final class ValidatorService implements IValidator {
 		return $this->getInlineMessage(
 			$attribute, $lowerRule, $this->fallbackMessages
 		) ?: $key;
+	}
+
+    /**
+     * Require a certain number of parameters to be present.
+     *
+     * @param  int    $count
+     * @param  array  $parameters
+     * @param  string  $rule
+     * @return void
+     *
+     * @throws \InvalidArgumentException
+     */
+    protected function requireParameterCount($count, $parameters, $rule)
+    {
+        if (count($parameters) < $count) {
+            throw new InvalidArgumentException("Validation rule $rule requires at least $count parameters.");
+        }
+    }
+
+	/**
+	 * Validate that an attribute exists when another attribute has a given value.
+	 *
+	 * @param  string  $attribute
+	 * @param  mixed   $value
+	 * @param  mixed   $parameters
+	 * @return bool
+	 */
+	protected function validateRequiredIf($attribute, $value, $parameters)
+	{
+		$this->requireParameterCount(2, $parameters, 'required_if');
+
+		if ($parameters[1] == array_get($this->data, $parameters[0]))
+		{
+			return $this->validateRequired($attribute, $value);
+		}
+
+		return true;
 	}
 
 	protected function doReplacements($message, $attribute, $rule, $parameters)

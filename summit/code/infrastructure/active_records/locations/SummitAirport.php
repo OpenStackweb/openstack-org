@@ -42,8 +42,16 @@ class SummitAirport extends SummitExternalLocation implements ISummitAirport
 
     public function getTypeName()
     {
-        return 'Airport';
+        return self::TypeName;
     }
+
+    public function inferLocationType()
+    {
+        return self::LocationType;
+    }
+
+    const TypeName     = 'Airport';
+    const LocationType = 'None';
     /**
      * @return string
      */

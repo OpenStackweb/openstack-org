@@ -1,0 +1,226 @@
+
+/*COA landing*/
+.coa-hero {
+    background-size: cover;
+    padding: 60px 0 60px;
+    color: white; }
+.coa-hero h1 {
+    color: white;
+    text-align: left;
+    margin: 0 0 30px; }
+.coa-hero hr {
+    border-color: rgba(255, 255, 255, 0.3);
+    max-width: 400px;
+    margin-left: 0; }
+.coa-hero .coa-badge-top {
+    max-height: 250px;
+    margin-top: 15px; }
+.coa-hero .coa-action-top h5 {
+    color: white;
+    margin-bottom: 15px; }
+.coa-hero .coa-action-top a.coa-action-btn {
+    background: #C71A28;
+    color: white;
+    padding: 10px 20px;
+    display: block;
+    max-width: 225px;
+    text-align: center;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-weight: 600; }
+.coa-hero .coa-action-top a.coa-action-btn i {
+    margin-left: 10px;
+    font-size: 14px; }
+.coa-hero .coa-action-top a.coa-action-btn:hover {
+    background: #A51B1B;
+    text-decoration: none; }
+
+@media (max-width: 767px) {
+    .coa-hero {
+        text-align: center; }
+    .coa-hero .coa-badge-top {
+        max-height: 150px;
+        margin-top: 0;
+        margin-bottom: 10px; }
+    .coa-hero h1 {
+        text-align: center; }
+    .coa-hero hr {
+        margin-left: auto; }
+    .coa-hero a.coa-action-btn {
+        margin: 0 auto; } }
+
+.coa-points {
+    padding: 90px 0;
+    text-align: center; }
+.coa-points i {
+    color: #248EC7; }
+.coa-points h3 {
+    font-size: 20px;
+    color: #2A4E68;
+    margin: 20px 0; }
+.coa-points .coa-point-description {
+    max-width: 80%;
+    margin: 0 auto; }
+
+.coa-partners {
+    background: #edf2f7;
+    padding: 60px 0; }
+.coa-partners a {
+    text-decoration: underline; }
+.coa-partners-row-wrapper {
+    background: white;
+    border-radius: 4px;
+    padding: 20px;
+    margin: 10px 0;
+}
+.coa-partners .coa-partners-row {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-align: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center; }
+.coa-partners .coa-partner-logo {
+    text-align: center;
+}
+.coa-partners .coa-partner-logo img {
+    max-width: 100%;
+    max-height: 80px;
+}
+
+@media (max-width: 767px) {
+    .coa-partners .coa-partner-logo {
+        max-width: 100%;
+    }
+/*    .coa-partners .coa-partners-row .coa-partner-logo img {
+        max-width: 100%; }*/
+    }
+a.coa-already-registered {
+    color: white;
+    text-decoration: underline;
+    display: inline-block;
+    margin-top: 10px;;
+}
+.coa-exam-details {
+    padding: 90px 0; }
+.coa-exam-details .coa-details-action {
+    text-align: center;
+    margin: 60px 0 0;
+    padding: 30px;
+    border-radius: 4px;
+    background: #edf2f7; }
+.coa-exam-details .coa-details-action .left {
+    border-right: 1px solid #D4DCE5; }
+.coa-exam-details .coa-details-action .coa-action-bottom {
+    padding: 0 20px; }
+.coa-exam-details .coa-details-action a.coa-details-btn {
+    background: #30739C;
+    color: white;
+    border-radius: 4px;
+    padding: 10px 20px;
+    display: block;
+    max-width: 275px;
+    margin: 20px auto 0; }
+.coa-exam-details .coa-details-action a.coa-details-btn i {
+    margin-left: 10px; }
+.coa-exam-details .coa-details-action a.coa-details-btn:hover, .coa-exam-details .coa-details-action a.coa-details-btn:focus {
+    text-decoration: none;
+    background: #2A4E68; }
+.coa-exam-details .coa-details-action a.coa-details-btn.red {
+    background: #C71A28; }
+.coa-exam-details .coa-details-action a.coa-details-btn.red:hover, .coa-exam-details .coa-details-action a.coa-details-btn.red:focus {
+    background: #A51B1B; }
+.coa-exam-details .coa-details-action .coa-action-bottom a.coa-already-registered {
+    color: #333;
+}
+
+@media (max-width: 767px) {
+    .coa-exam-details .coa-details-action {
+        margin: 60px 0 0; }
+    .coa-exam-details .coa-details-action .left {
+        border-right: 0;
+        border-bottom: 1px solid #D4DCE5;
+        padding-bottom: 20px;
+        margin-bottom: 20px; } }
+h5.section-title {
+  color: #2A4E68;
+  font-weight: 600;
+  text-transform: capitalize;
+  border-bottom: 1px solid #dae5ee;
+  padding-bottom: 20px;
+  margin: 50px 0 30px; }
+.coa-actions-section {
+    background: #148AC8;
+    padding: 60px 0 40px;
+    width: 100%;
+    color: white;
+    margin-top: -40px;
+}
+.coa-actions-section h2 {
+    color: white;
+}
+.coa-action-single {
+    text-align: center;
+}
+.coa-action-single a.coa-action-btn {
+    background: transparent;
+    border: 2px solid white;
+    border-radius: 4px;
+    color: white;
+    text-transform: uppercase;
+    display: inline-block;
+    padding: 15px 10px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+@media (max-width: 767px) {
+    .coa-action-single {
+        margin-bottom: 40px;
+    }
+    .coa-action-single a.coa-action-btn {
+        max-width: 300px;
+    }
+}
+.coa-action-single a.coa-action-btn:hover, .coa-action-single a.coa-action-btn:focus {
+    background: rgba(255,255,255,0.4);
+    text-decoration: none;
+    color: white;
+}
+.coa-action-single a:visited {
+    color: white;
+}
+.coa-started-btn {
+    background: transparent;
+    border: 2px solid white;
+    border-radius: 4px;
+    color: white;
+    text-transform: uppercase;
+    display: inline-block;
+    margin: 30px 0 20px;
+    padding: 10px 40px;
+}
+a.coa-started-btn:hover, a.coa-started-btn:focus {
+    background: rgba(255,255,255,0.4);
+    text-decoration: none;
+    color: white;
+}
+a.coa-started-btn:visited {
+    color: white;
+}
+.coa-started-btn i {
+    margin-left: 10px;
+    font-size: 1.5em;
+}

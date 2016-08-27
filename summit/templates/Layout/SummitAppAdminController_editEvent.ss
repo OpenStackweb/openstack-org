@@ -28,9 +28,9 @@
                 <label for="short_description">Short Description/Abstract</label>
                 <textarea id="short_description" name="short_description" class="form-control">{$Event.ShortDescription}</textarea>
             </div>
-            <div class="form-group">
-                <label for="expect_learn">What can attendees expect to learn?</label>
-                <textarea id="expect_learn" name="expect_learn" class="form-control">{$Event.AttendeesExpectedLearnt}</textarea>
+            <div class="form-group" id="expect_learn_container" style="display: none;">
+                    <label for="expect_learn">What can attendees expect to learn?</label>
+                    <textarea id="expect_learn" name="expect_learn" class="form-control">{$Event.AttendeesExpectedLearnt}</textarea>
             </div>
             <div class="form-group">
                 <label for="headcount">Head Count</label>
@@ -85,10 +85,22 @@
                 <div class="row">
                     <div class="col-md-3">
                         <label for="event_type">Event Type</label>
-                        <select <% if $Top.Event %>disabled="disabled"<% end_if %> class="form-control" id="event_type" name="event_type">
+                        <select class="form-control" id="event_type" name="event_type">
                             <option value="">-- Select a Type --</option>
                             <% loop Summit.EventTypes() %>
-                                <option value="$ID" <% if $Top.Event.Type.ID == $ID %>selected<% end_if %> >$Type</option>
+                                <% if $Top.Event %>
+                                    <% if $Top.Event.isPresentation() %>
+                                        <% if $Top.IsPresentationEventType($Type) %>
+                                            <option value="$ID" <% if $Top.Event.Type.ID == $ID %>selected<% end_if %> >$Type</option>
+                                        <% end_if %>
+                                    <% else %>
+                                        <% if  $Top.IsSummitEventType($Type) %>
+                                            <option value="$ID" <% if $Top.Event.Type.ID == $ID %>selected<% end_if %> >$Type</option>
+                                        <% end_if %>
+                                    <% end_if %>
+                                <% else %>
+                                    <option value="$ID" >$Type</option>
+                                <% end_if %>
                             <% end_loop %>
                         </select>
                     </div>
@@ -96,7 +108,7 @@
                         <label for="summit_type">Summit Type</label>
                         <select class="form-control" id="summit_type" name="summit_type" multiple>
                             <% loop Summit.Types() %>
-                                <option value="$ID" <% if $Top.Event.isAllowedSummitType($Title) %> selected <% end_if %>>$Title</option>
+                                <option value="$ID" <% if $Top.Event.isAllowedSummitType($ID) %> selected <% end_if %>>$Title</option>
                             <% end_loop %>
                         </select>
                     </div>
@@ -104,12 +116,26 @@
                         <label for="track">Track</label>
                         <select class="form-control" id="track" name="track">
                             <option value="">-- Select a Track --</option>
-                            <% loop Summit.Categories() %>
+                            <% loop Summit.getCategories %>
                                 <option value="$ID" <% if $Top.Event.isPresentation() && $Top.Event.CategoryID == $ID %> selected <% end_if %>>$Title</option>
                             <% end_loop %>
                         </select>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3 level_container" style="display:none;">
+                        <label for="level">Level</label>
+                        <select class="form-control" id="level" name="level">
+                            <option value="">-- Select a Level --</option>
+                            <option value="N/A" <% if $Top.Event.isPresentation() && $Top.Event.Level == N/A %> selected <% end_if %>>N/A</option>
+                            <option value="Beginner" <% if $Top.Event.isPresentation() && $Top.Event.Level == Beginner %> selected <% end_if %>>Beginner</option>
+                            <option value="Intermediate" <% if $Top.Event.isPresentation() && $Top.Event.Level == Intermediate %> selected <% end_if %>>Intermediate</option>
+                            <option value="Advanced" <% if $Top.Event.isPresentation() && $Top.Event.Level == Advanced %> selected <% end_if %>>Advanced</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div classs="row">
+                    <div class="col-md-12">
                         <label>Feedback</label>
                         <div class="checkbox">
                             <label> <input id="allow_feedback" name="allow_feedback" type="checkbox" <% if $Event.AllowFeedBack %> checked <% end_if %>> Allow Feedback </label>
@@ -143,9 +169,12 @@
 
             <div class="form-group speakers_container" style="display:none;">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-10">
                         <label for="speakers">Speakers</label><br>
                         <input id="speakers" name="speakers"/>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="mailto:" id="email-speakers" class="btn btn-default" target="_blank">Contact</a>
                     </div>
                 </div>
             </div>
@@ -193,6 +222,7 @@
             <% if $Event.isPublished() %>
                 <button id="btn_unpublish" class="btn btn-primary btn-danger">UnPublish</button>
                 <a href="{$Top.Link()}/{$Summit.ID}/events/schedule/#day={$Event.StartDate.Format('Y-m-d')}&venue={$Event.LocationID}&event={$Event.ID}" class="btn btn-default">Go to Calendar</a>
+                <a href="{$Event.getLink(show)}" class="btn btn-default" target="_blank">View Event</a>
             <% end_if %>
         </form>
     </div>
@@ -215,17 +245,19 @@
         <% end_if %>
 
         $(document).ready(function(){
-        $("#location").chosen();
-        $("#event_type").chosen();
-        <% if $Top.Event %>
-        <% if $Top.Event.Type.Type == 'Presentation' || $Top.Event.Type.Type == 'Keynotes' %>
-        $('.speakers_container').show();
-        $('.track_container').show();
-        <% end_if %>
-        <% if $Top.Event.Type.Type == 'Keynotes' %>
-        $('.moderator_container').show();
-        <% end_if %>
-        <% end_if %>
+            $("#location").chosen();
+            $("#event_type").chosen();
+            <% if $Top.Event %>
+                <% if $Top.Event.Type.Type == 'Presentation' || $Top.Event.Type.Type == 'Keynotes' || $Top.Event.Type.Type == 'Panel' %>
+                    $('.speakers_container').show();
+                    $('.track_container').show();
+                    $('.level_container').show();
+                    $('#expect_learn_container').show();
+                <% end_if %>
+                <% if $Top.Event.Type.Type == 'Keynotes' || $Top.Event.Type.Type == 'Panel' %>
+                    $('.moderator_container').show();
+                <% end_if %>
+            <% end_if %>
         });
     </script>
 

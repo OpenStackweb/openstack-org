@@ -7,8 +7,6 @@ var query_template = 'releases/@RELEASE_ID/components';
 
 api.load_components_by_release = function(release_id, term, adoption, maturity, age, sort, sort_dir)
 {
-    console.log('release id '+release_id+' - term '+term+' - adoption '+ adoption+ ' - maturity '+maturity+' - age ' +age );
-
     var url = api_base_url+'/'+ query_template.replace('@RELEASE_ID', release_id)+'?';
 
     var filters = '';
@@ -43,4 +41,4 @@ api.load_components_by_release = function(release_id, term, adoption, maturity, 
 
 }
 
-module.exports = api;
+export default api;

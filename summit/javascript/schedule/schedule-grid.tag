@@ -4,17 +4,12 @@
 </raw>
 
 <schedule-grid>
-    <schedule-grid-nav month={ month } ></schedule-grid-nav>
+    <schedule-grid-nav month={ month } schedule_filters={ schedule_filters } ></schedule-grid-nav>
     <div>
         <div id="events-container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <a href="{ host }{ summit.link }call-for-speakers/track-list" target="_blank">Learn more about the { summit.title } Summit { summit.year } Tracks</a>
-                </div>
-            </div>
             <schedule-main-filters summit="{ summit }" schedule_filters={ schedule_filters } base_url={ base_url }></schedule-main-filters>
-            <schedule-grid-events summit="{ summit }" default_event_color={ default_event_color } search_url={ search_url } schedule_filters={ schedule_filters } base_url={ base_url } schedule_api={ schedule_api }></schedule-grid-events>
-    </div>
+            <schedule-grid-events summit="{ summit }" default_event_color={ default_event_color } search_url={ search_url } schedule_filters={ schedule_filters } base_url={ base_url } schedule_api={ schedule_api } ></schedule-grid-events>
+        </div>
 
     <script>
 

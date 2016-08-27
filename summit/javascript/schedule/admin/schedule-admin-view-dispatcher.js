@@ -10,6 +10,7 @@ function ScheduleAdminViewDispatcher() {
     this.UNPUBLISHED_EVENT                 = 'UNPUBLISHED_EVENT';
     this.UNPUBLISHED_EVENTS_PAGE_CHANGED   = 'UNPUBLISHED_EVENTS_PAGE_CHANGED';
     this.UNPUBLISHED_EVENTS_SOURCE_CHANGED = 'UNPUBLISHED_EVENTS_SOURCE_CHANGED';
+    this.PUBLISHED_EVENTS_DAY_CHANGE       = 'PUBLISHED_EVENTS_DAY_CHANGE';
 
     this.publishEvent = function(event_id)
     {
@@ -48,6 +49,11 @@ function ScheduleAdminViewDispatcher() {
     this.publishedEventsDeepLink = function ()
     {
         this.trigger(this.PUBLISHED_EVENTS_DEEP_LINK);
+    }
+
+    this.publishedEventsDayChanged = function(summit_id, day)
+    {
+        this.trigger(this.PUBLISHED_EVENTS_DAY_CHANGE, summit_id ,day);
     }
 }
 

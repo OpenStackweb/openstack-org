@@ -21,17 +21,6 @@ DataObject::add_extension('SiteConfig', 'CustomSiteConfig');
 i18n::set_locale('en_US');
 
 //Turn on Silverstripe Translation
-Object::add_extension('SiteTree', 'Translatable');
-Object::add_extension('SiteConfig', 'Translatable');
-
-Translatable::set_allowed_locales(array(
-	'en_US',
-	'de_DE',
-	'es_ES',
-    'ja_JP'
-));
-
-//Turn on Silverstripe Translation
 
 // Search index for Orgs
 Object::add_extension('Org', 'AutocompleteOrgDecorator');
@@ -40,14 +29,16 @@ Object::add_extension('Org', 'AutocompleteOrgDecorator');
 
 if(Director::isLive()) Director::forceSSL(array('/^Security/','/^profile/',
 	'/^join/','/^user-survey/','/^summit/','/^news-manage/',
-	'/^vote-vancouver/'));
+	'/^vote-vancouver/','/^admin/'));
 
 
 // Email errors and warnings
 
 global $email_log;
 
-SS_Log::add_writer(new SS_LogFileWriter(Director::baseFolder() . '/logs/site.log'), SS_Log::ERR);
+if(Director::isDev()) {
+    SS_Log::add_writer(new SS_LogFileWriter(Director::baseFolder() . '/logs/site.log'), SS_Log::ERR);
+}
 
 $email_log_writer = new Custom_SS_LogEmailWriter($email_log);
 $email_log_writer->setFormatter(new SS_CustomLogErrorEmailFormatter());

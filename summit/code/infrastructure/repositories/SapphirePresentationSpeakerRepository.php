@@ -14,11 +14,321 @@
  **/
 final class SapphirePresentationSpeakerRepository extends SapphireRepository implements ISpeakerRepository
 {
-
     public function __construct()
     {
         parent::__construct(new PresentationSpeaker);
     }
+
+    /**
+     * @param string $term
+     * @param int $limit
+     * @return array;
+     */
+    public function searchByTerm($term, $limit = 10)
+    {
+
+        $term       = trim($term);
+        $term_split = explode(' ',$term);
+        $first_name = $term;
+        $last_name1 = $term;
+        $last_name2 = '';
+
+        if(count($term_split) == 2)
+        {
+            $first_name  = trim($term_split[0]);
+            $last_name2  = trim($term_split[1]);
+        }
+
+        $member_sql = <<<SQL
+SELECT
+CONCAT(M.ID,'_',IFNULL(PS.ID , 0)) AS unique_id,
+M.ID AS member_id ,
+M.ID AS id, CONCAT(M.FirstName,' ',M.Surname,' (',IFNULL(M.Email , PSR.Email),')') AS name,
+M.FirstName AS firstname,
+M.Surname AS surname,
+IFNULL(PS.ID , 0) AS speaker_id,
+IFNULL(M.Email , PSR.Email) AS email
+FROM Member AS M
+LEFT JOIN PresentationSpeaker AS PS ON PS.MemberID = M.ID
+LEFT JOIN SpeakerRegistrationRequest AS PSR ON PSR.SpeakerID = PS.ID
+SQL;
+
+        $speakers_sql = <<<SQL
+SELECT
+CONCAT(PS.MemberID,'_',IFNULL(PS.ID , 0)) AS unique_id,
+PS.MemberID AS member_id ,
+PS.ID AS id, CONCAT(PS.FirstName ,' ',PS.LastName,' (', PSR.Email, ')') AS name,
+PS.FirstName AS firstname,
+PS.LastName  AS surname,
+PS.ID  AS speaker_id,
+PSR.Email AS email
+FROM PresentationSpeaker AS PS
+INNER JOIN SpeakerRegistrationRequest AS PSR ON PSR.ID = PS.RegistrationRequestID
+SQL;
+
+        $member_conditions = array(
+            "combined" => "M.FirstName LIKE '{$first_name}%' AND M.Surname LIKE '{$last_name2}%' ",
+            "single"   => array(
+                "M.FirstName LIKE '{$first_name}%'",
+                "M.Surname   LIKE '{$last_name1}%'",
+                "M.Email LIKE '{$first_name}%'",
+                "M.ID LIKE '{$first_name}%'",
+            ),
+
+        );
+
+        $speakers_conditions = array(
+            "combined" => "PS.FirstName LIKE '{$first_name}%' AND PS.LastName LIKE '{$last_name2}%' ",
+            "single"   => array(
+                "PS.FirstName LIKE '{$first_name}%'",
+                "PS.LastName   LIKE '{$last_name1}%'",
+                "PSR.Email LIKE '{$first_name}%'",
+            ),
+        );
+
+        $query = '';
+
+        foreach($member_conditions as $type => $condition){
+            if(!empty($first_name) && !empty($last_name2) && $type =='combined')
+            {
+                $query .= $member_sql . ' WHERE ' . $condition;
+                $query .= ' UNION ';
+            }
+            if($type == 'single' && empty($last_name2) ) {
+                foreach($condition as $c) {
+                    $query .= $member_sql . ' WHERE ' . $c;
+                    $query .= ' UNION ';
+                }
+            }
+        }
+
+        foreach($speakers_conditions as $type => $condition){
+            if(!empty($first_name) && !empty($last_name2) && $type =='combined')
+            {
+                $query .= $speakers_sql . ' WHERE ' . $condition;
+                $query .= ' UNION ';
+            }
+            if($type == 'single' && empty($last_name2) ) {
+                foreach($condition as $c) {
+                    $query .= $speakers_sql . ' WHERE ' . $c;
+                    $query .= ' UNION ';
+                }
+            }
+        }
+        $query = substr($query,0, strlen($query) - strlen(' UNION '));
+        $query .= " ORDER BY `name` LIMIT 0, {$limit};";
+        $res = DB::query($query);
+        $data = array();
+        foreach ($res as $row) {
+
+            $data[] = array
+            (
+                'unique_id'  => $row['unique_id'],
+                'member_id'  => $row['member_id'],
+                'name'       => $row['name'],
+                'firstname'  => $row['firstname'],
+                'surname'    => $row['surname'],
+                'speaker_id' => $row['speaker_id'],
+                'email'      => $row['email'],
+            );
+        }
+        return $data;
+    }
+
+    /**
+     * @param string $term
+     * @param int $limit
+     * @return array;
+     */
+    public function searchSpeakersOnlyByTerm($term, $limit = 10)
+    {
+
+        $term       = trim($term);
+        $term_split = explode(' ',$term);
+        $first_name = $term;
+        $last_name1 = $term;
+        $last_name2 = '';
+
+        if(count($term_split) == 2)
+        {
+            $first_name  = trim($term_split[0]);
+            $last_name2  = trim($term_split[1]);
+        }
+
+        $speakers_sql = <<<SQL
+SELECT
+PS.ID  AS speaker_id,
+CONCAT(COALESCE(PS.FirstName,'*null*'),' ',COALESCE(PS.LastName,'*null*'),' (', COALESCE(IF(PSR.Email IS NOT NULL, PSR.Email, M.Email),'*no-email*'), ')') AS name,
+PS.FirstName AS firstname,
+PS.LastName  AS surname,
+IF(PSR.Email IS NOT NULL, PSR.Email, M.Email) AS email
+FROM PresentationSpeaker AS PS
+LEFT JOIN SpeakerRegistrationRequest AS PSR ON PSR.ID = PS.RegistrationRequestID
+LEFT JOIN Member AS M ON M.ID = PS.MemberID
+SQL;
+
+
+        $speakers_conditions = array(
+            "combined" => "PS.FirstName LIKE '{$first_name}%' AND PS.LastName LIKE '{$last_name2}%' ",
+            "single"   => array(
+                "PS.FirstName LIKE '{$first_name}%'",
+                "PS.LastName   LIKE '{$last_name1}%'",
+                "PSR.Email LIKE '{$first_name}%'",
+            ),
+        );
+
+        $query = '';
+
+
+        foreach($speakers_conditions as $type => $condition){
+            if(!empty($first_name) && !empty($last_name2) && $type =='combined')
+            {
+                $query .= $speakers_sql . ' WHERE ' . $condition;
+                $query .= ' UNION ';
+            }
+            if($type == 'single' && empty($last_name2) ) {
+                foreach($condition as $c) {
+                    $query .= $speakers_sql . ' WHERE ' . $c;
+                    $query .= ' UNION ';
+                }
+            }
+        }
+        $query = substr($query,0, strlen($query) - strlen(' UNION '));
+        $query .= " ORDER BY `name` LIMIT 0, {$limit};";
+        $res = DB::query($query);
+        $data = array();
+        foreach ($res as $row) {
+
+            $data[] = array
+            (
+                'speaker_id' => intval($row['speaker_id']),
+                'name'       => $row['name'],
+            );
+        }
+        return $data;
+    }
+
+    /**
+     * @param string $term
+     * @param int $limit
+     * @return array;
+     */
+    public function searchByTermActive($term, $limit = 10)
+    {
+
+        $term       = trim($term);
+        $term_split = explode(' ',$term);
+        $first_name = $term;
+        $last_name1 = $term;
+        $last_name2 = '';
+
+        if(count($term_split) == 2)
+        {
+            $first_name  = trim($term_split[0]);
+            $last_name2  = trim($term_split[1]);
+        }
+
+        $member_sql = <<<SQL
+SELECT
+CONCAT(M.ID,'_',IFNULL(PS.ID , 0)) AS unique_id,
+M.ID AS member_id ,
+M.ID AS id, CONCAT(M.FirstName,' ',M.Surname,' (',IFNULL(M.Email , PSR.Email),')') AS name,
+M.FirstName AS firstname,
+M.Surname AS surname,
+IFNULL(PS.ID , 0) AS speaker_id,
+IFNULL(M.Email , PSR.Email) AS email
+FROM Member AS M
+LEFT JOIN PresentationSpeaker AS PS ON PS.MemberID = M.ID
+LEFT JOIN SpeakerRegistrationRequest AS PSR ON PSR.SpeakerID = PS.ID
+INNER JOIN (SELECT MemberID FROM Group_Members WHERE GroupID = 5 OR GroupID = 29 OR GroupID = 8) AS G ON G.MemberID = M.ID
+SQL;
+
+        $speakers_sql = <<<SQL
+SELECT
+CONCAT(PS.MemberID,'_',IFNULL(PS.ID , 0)) AS unique_id,
+PS.MemberID AS member_id ,
+PS.ID AS id, CONCAT(PS.FirstName ,' ',PS.LastName,' (', PSR.Email, ')') AS name,
+PS.FirstName AS firstname,
+PS.LastName  AS surname,
+PS.ID  AS speaker_id,
+PSR.Email AS email
+FROM PresentationSpeaker AS PS
+INNER JOIN SpeakerRegistrationRequest AS PSR ON PSR.ID = PS.RegistrationRequestID
+INNER JOIN (SELECT MemberID FROM Group_Members WHERE GroupID = 5 OR GroupID = 29 OR GroupID = 8) AS G ON G.MemberID = PS.MemberID
+INNER JOIN Member AS M ON M.ID = PS.MemberID AND M.Active = 1 
+SQL;
+
+        $member_conditions = array(
+            "combined" => "M.FirstName LIKE '{$first_name}%' AND M.Surname LIKE '{$last_name2}%' ",
+            "single"   => array(
+                "M.FirstName LIKE '{$first_name}%'",
+                "M.Surname   LIKE '{$last_name1}%'",
+                "M.Email LIKE '{$first_name}%'",
+                "M.ID LIKE '{$first_name}%'",
+            ),
+
+        );
+
+        $speakers_conditions = array(
+            "combined" => "PS.FirstName LIKE '{$first_name}%' AND PS.LastName LIKE '{$last_name2}%' ",
+            "single"   => array(
+                "PS.FirstName LIKE '{$first_name}%'",
+                "PS.LastName   LIKE '{$last_name1}%'",
+                "PSR.Email LIKE '{$first_name}%'",
+            ),
+        );
+
+        $query = '';
+
+        foreach($member_conditions as $type => $condition){
+            if(!empty($first_name) && !empty($last_name2) && $type =='combined')
+            {
+                $query .= $member_sql . ' WHERE ' . $condition;
+                $query .= ' AND M.Active=1';
+                $query .= ' UNION ';
+            }
+            if($type == 'single' && empty($last_name2) ) {
+                foreach($condition as $c) {
+                    $query .= $member_sql . ' WHERE ' . $c;
+                    $query .= ' AND M.Active=1';
+                    $query .= ' UNION ';
+                }
+            }
+        }
+
+        foreach($speakers_conditions as $type => $condition){
+            if(!empty($first_name) && !empty($last_name2) && $type =='combined')
+            {
+                $query .= $speakers_sql . ' WHERE ' . $condition;
+                $query .= ' UNION ';
+            }
+            if($type == 'single' && empty($last_name2) ) {
+                foreach($condition as $c) {
+                    $query .= $speakers_sql . ' WHERE ' . $c;
+                    $query .= ' UNION ';
+                }
+            }
+        }
+        $query = substr($query,0, strlen($query) - strlen(' UNION '));
+        $query .= " ORDER BY `name` LIMIT 0, {$limit};";
+        $res = DB::query($query);
+        $data = array();
+        foreach ($res as $row) {
+
+            $data[] = array
+            (
+                'unique_id'  => $row['unique_id'],
+                'member_id'  => $row['member_id'],
+                'name'       => $row['name'],
+                'firstname'  => $row['firstname'],
+                'surname'    => $row['surname'],
+                'speaker_id' => $row['speaker_id'],
+                'email'      => $row['email'],
+            );
+        }
+        return $data;
+    }
+
     /**
      * @param ISummit $summit
      * @param string $term
@@ -70,18 +380,8 @@ SQL;
         return $speakers;
     }
 
-    /**
-     * @param ISummit $summit
-     * @param int $page
-     * @param int $page_size
-     * @param string $term
-     * @param string $sort_by
-     * @param string $sort_dir
-     * @return array
-     */
-    public function getBySummit(ISummit $summit, $page= 1, $page_size = 10, $term = '', $sort_by = 'id', $sort_dir = 'asc')
-    {
 
+    private function buildSpeakersSearchParams($page= 1, $page_size = 10, $term = '', $sort_by = 'id', $sort_dir = 'asc'){
         $offset = ($page - 1 ) * $page_size;
         $sort  = '';
         $where = '';
@@ -101,8 +401,15 @@ SQL;
                 $sort = ' ORDER BY Email '.strtoupper($sort_dir);
                 break;
         }
+        return array($offset, $sort, $where);
+    }
 
-        $query_count = <<<SQL
+    /**
+     * @param string $where
+     * @return string
+     */
+    private function buildSearchSpeakersBaseCountSQLQuery($where){
+        $sql = <<<SQL
         SELECT COUNT(FullName) AS QTY FROM
         (
             SELECT
@@ -110,7 +417,52 @@ SQL;
             FROM PresentationSpeaker
             LEFT JOIN Member ON Member.ID = PresentationSpeaker.MemberID
             LEFT JOIN SpeakerRegistrationRequest ON SpeakerRegistrationRequest.SpeakerID = PresentationSpeaker.ID
-            WHERE EXISTS
+            {$where}
+        ) AS P;
+SQL;
+        return $sql;
+    }
+
+    /**
+     * @param string $where
+     * @param string $sort
+     * @param string $offset
+     * @param string $page_size
+     * @return string
+     */
+    private function buildSearchSpeakersBaseSQLQuery($where, $sort,$offset ,$page_size){
+
+        $sql =<<<SQL
+    SELECT DISTINCT PresentationSpeaker.*,
+IFNULL(CONCAT(PresentationSpeaker.FirstName,' ', PresentationSpeaker.LastName), CONCAT(Member.FirstName,' ', Member.Surname)) AS FullName,
+IFNULL(Member.Email, SpeakerRegistrationRequest.Email) AS Email
+FROM PresentationSpeaker
+LEFT JOIN Member ON Member.ID = PresentationSpeaker.MemberID
+LEFT JOIN SpeakerRegistrationRequest ON SpeakerRegistrationRequest.SpeakerID = PresentationSpeaker.ID
+ {$where}
+ {$sort} LIMIT {$offset}, {$page_size}
+SQL;
+        return $sql;
+    }
+
+    /**
+     * Gets all speakers that belongs to given summit , those are the ones that has at least a
+     * Presentation on the give summit
+     * @param ISummit $summit
+     * @param int $page
+     * @param int $page_size
+     * @param string $term
+     * @param string $sort_by
+     * @param string $sort_dir
+     * @return array
+     */
+    public function searchBySummitPaginated(ISummit $summit, $page= 1, $page_size = 10, $term = '', $sort_by = 'id', $sort_dir = 'asc')
+    {
+
+        list($offset, $sort, $where_having) = $this->buildSpeakersSearchParams($page, $page_size, $term, $sort_by, $sort_dir);
+
+        $where = <<<SQL
+      WHERE EXISTS
             (
                 SELECT 1 FROM SummitEvent
                 INNER JOIN Presentation ON Presentation.ID = SummitEvent.ID
@@ -118,29 +470,87 @@ SQL;
                 WHERE SummitEvent.SummitID = {$summit->ID}
                 AND Presentation_Speakers.PresentationSpeakerID  = PresentationSpeaker.ID
             )
-            {$where}
-        ) AS P;
-SQL;
-        $query = <<<SQL
-SELECT DISTINCT PresentationSpeaker.*,
-IFNULL(CONCAT(PresentationSpeaker.FirstName,' ', PresentationSpeaker.LastName), CONCAT(Member.FirstName,' ', Member.Surname)) AS FullName,
-IFNULL(Member.Email, SpeakerRegistrationRequest.Email) AS Email
-FROM PresentationSpeaker
-LEFT JOIN Member ON Member.ID = PresentationSpeaker.MemberID
-LEFT JOIN SpeakerRegistrationRequest ON SpeakerRegistrationRequest.SpeakerID = PresentationSpeaker.ID
-WHERE
-EXISTS
-(
-	SELECT 1 FROM SummitEvent
-    INNER JOIN Presentation ON Presentation.ID = SummitEvent.ID
-    INNER JOIN Presentation_Speakers ON Presentation_Speakers.PresentationID = Presentation.ID
-    WHERE SummitEvent.SummitID = {$summit->ID}
-    AND Presentation_Speakers.PresentationSpeakerID  = PresentationSpeaker.ID
-)
-{$where}
-{$sort} LIMIT {$offset}, {$page_size};
+            {$where_having}
 SQL;
 
+        $query_count = $this->buildSearchSpeakersBaseCountSQLQuery($where);
+        $query       = $this->buildSearchSpeakersBaseSQLQuery($where, $sort, $offset, $page_size);
+
+
+        $count_res = DB::query($query_count)->first();
+        $res       = DB::query($query);
+        $count     = intval($count_res['QTY']);
+        $data      = array();
+
+        foreach($res as $row)
+        {
+            array_push($data, new PresentationSpeaker($row));
+        }
+
+        return array($page, $page_size, $count, $data);
+    }
+
+    /**
+     * Gets all speakers that belongs to given summit , those are the ones that has at least a
+     * Published Presentation on the give summit
+     * @param ISummit $summit
+     * @param int $page
+     * @param int $page_size
+     * @param string $term
+     * @param string $sort_by
+     * @param string $sort_dir
+     * @return array
+     */
+    public function searchBySummitSchedulePaginated(ISummit $summit, $page= 1, $page_size = 10, $term = '', $sort_by = 'id', $sort_dir = 'asc')
+    {
+
+        list($offset, $sort, $where_having) = $this->buildSpeakersSearchParams($page, $page_size, $term, $sort_by, $sort_dir);
+
+        $where = <<<SQL
+      WHERE EXISTS
+            (
+                SELECT 1 FROM SummitEvent
+                INNER JOIN Presentation ON Presentation.ID = SummitEvent.ID
+                INNER JOIN Presentation_Speakers ON Presentation_Speakers.PresentationID = Presentation.ID
+                WHERE SummitEvent.SummitID = {$summit->ID}
+                AND Presentation_Speakers.PresentationSpeakerID  = PresentationSpeaker.ID
+                AND SummitEvent.Published = 1
+            )
+            {$where_having}
+SQL;
+
+        $query_count = $this->buildSearchSpeakersBaseCountSQLQuery($where);
+        $query       = $this->buildSearchSpeakersBaseSQLQuery($where, $sort, $offset, $page_size);
+
+
+        $count_res = DB::query($query_count)->first();
+        $res       = DB::query($query);
+        $count     = intval($count_res['QTY']);
+        $data      = array();
+
+        foreach($res as $row)
+        {
+            array_push($data, new PresentationSpeaker($row));
+        }
+
+        return array($page, $page_size, $count, $data);
+    }
+
+
+    /**
+     * @param int $page
+     * @param int $page_size
+     * @param string $term
+     * @param string $sort_by
+     * @param string $sort_dir
+     * @return array
+     */
+    public function searchByTermPaginated($page= 1, $page_size = 10, $term = '', $sort_by = 'id', $sort_dir = 'asc'){
+
+        list($offset, $sort, $where_having) = $this->buildSpeakersSearchParams($page, $page_size, $term, $sort_by, $sort_dir);
+
+        $query_count = $this->buildSearchSpeakersBaseCountSQLQuery($where_having);
+        $query       = $this->buildSearchSpeakersBaseSQLQuery($where_having, $sort, $offset, $page_size);
 
         $count_res = DB::query($query_count)->first();
         $res       = DB::query($query);
@@ -150,7 +560,6 @@ SQL;
         {
             array_push($data, new PresentationSpeaker($row));
         }
-
         return array($page, $page_size, $count, $data);
     }
 
@@ -162,4 +571,43 @@ SQL;
     {
         return PresentationSpeaker::get()->filter('MemberID', $member_id)->first();
     }
+
+
+    /**
+     * @param string $email
+     * @return IPresentationSpeaker
+     */
+    public function getByEmail($email)
+    {
+        $speaker = PresentationSpeaker::get()
+            ->filter(array(
+                'Member.Email' => $email,
+            ))->first();
+
+        if (is_null($speaker)) {
+            $speaker = PresentationSpeaker::get()
+                ->filter(array(
+                    'Member.SecondEmail' => $email,
+                ))->first();
+        }
+
+        if (is_null($speaker)) {
+            $speaker = PresentationSpeaker::get()
+                ->filter(array(
+                    'Member.ThirdEmail' => $email,
+                ))->first();
+        }
+
+        if (is_null($speaker)) {
+            $registration_request = SpeakerRegistrationRequest::get()->filter(array(
+                'Email' => $email,
+                'IsConfirmed' => 0,
+            ))->first();
+            if(!is_null($registration_request))
+                $speaker = $registration_request->Speaker();
+        }
+
+        return $speaker;
+    }
+
 }

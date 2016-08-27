@@ -25,4 +25,10 @@ interface ISoftwareManager
      * @return array
      */
     public function getComponents(IOpenStackRelease $release , $term = '', $adoption = 0, $maturity = 0, $age = 0, $sort = '', $sort_dir = '');
+
+    /**
+     * @param IOpenStackRelease $release
+     * @return IOpenStackRelease
+     */
+    public function cloneRelease(IOpenStackRelease $release);
 }

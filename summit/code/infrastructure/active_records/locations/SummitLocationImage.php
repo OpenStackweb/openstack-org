@@ -23,8 +23,8 @@ class SummitLocationImage extends DataObject
 
     private static $summary_fields = array
     (
-        'Name'  => 'Name',
-        'Thumbnail'=>'Thumbnail',
+        'Name'      => 'Name',
+        'Thumbnail' => 'Thumbnail',
     );
 
     private static $has_one = array
@@ -53,7 +53,6 @@ class SummitLocationImage extends DataObject
         return null;
     }
 
-
     public function getCMSFields()
     {
         $f = new FieldList();
@@ -63,7 +62,8 @@ class SummitLocationImage extends DataObject
 
         $map_field = new UploadField('Picture','Picture');
         $map_field->setAllowedMaxFileNumber(1);
-        $map_field->setFolderName(sprintf('summits/%s/locations/images/', $this->Location()->SummitID));
+        $map_field->setFolderName(sprintf('summits/%s/locations/%s/images/', $_REQUEST['SummitID'], $_REQUEST['LocationID']));
+        $map_field->getValidator()->setAllowedMaxFileSize(array('*' => 500 * 1024));
 
         $f->add($map_field );
 

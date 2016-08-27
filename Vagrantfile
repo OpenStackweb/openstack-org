@@ -17,10 +17,8 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  #config.vm.box = "ubuntu/trusty64"
-  #config.vm.box_url = "https://atlas.hashicorp.com/ubuntu/trusty64"	
-  config.vm.box = "ubuntu/vivid64"
-  config.vm.box_url = "https://atlas.hashicorp.com/ubuntu/vivid64"	
+  config.vm.box = "ubuntu/trusty64"
+  config.vm.box_url = "https://atlas.hashicorp.com/ubuntu/trusty64"	
   config.vm.hostname = "local.openstack.org"
 
   # Create a private network, which allows host-only access to the machine
@@ -51,19 +49,28 @@ Vagrant.configure(2) do |config|
 
   # use https://github.com/oscar-stack/vagrant-hosts
   # vagrant plugin install vagrant-hosts
-  config.vm.provision :hosts do |provisioner|
+  config.vm.provision "hostsetup", type:"hosts" do |provisioner|
         provisioner.add_host '127.0.0.1', ['local.openstack.org']
   end
 
-  config.vm.provision :shell, :path => "scripts/bootstrap.sh"
+  config.vm.provision "bootstrap", type:"shell" do |s|
+    s.path = "scripts/bootstrap.sh"
+  end
 
-  config.vm.provision :puppet do |puppet|
+  config.vm.provision "puppetbuild", type: "puppet" do |puppet|
         puppet.manifests_path = "puppet"
         puppet.manifest_file = "site.pp"
         puppet.hiera_config_path = "puppet/hiera/hiera.yaml"
         puppet.working_directory = "/etc/puppet/data"
-        # puppet.options = "--verbose --debug"
+        #puppet.options = "--verbose --debug"
   end
   
-  config.vm.provision :shell, :path => "scripts/postdeployment.sh"
+  config.vm.provision "postbuild", type:"shell" do |s|
+    s.path = "scripts/postdeployment.sh"
+  end
+
+  config.vm.provision "update", type:"shell", run: "always" do |s|
+      s.path = "scripts/updatedeployment.sh"
+    end
+
 end

@@ -45,7 +45,9 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
     (
         'Schedule' => array
         (
-            'IsCheckedIn' => "Boolean",
+            'IsCheckedIn' => 'Boolean',
+            'GoogleCalEventId' => 'Varchar',
+            'AppleCalEventId' => 'Varchar'
         ),
     );
 
@@ -64,7 +66,7 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
 
     static $indexes = array
     (
-        'Summit_Member' =>  array('type'=>'unique', 'value'=>'SummitID,MemberID'),
+        //'Summit_Member' =>  array('type'=>'unique', 'value'=>'SummitID,MemberID'),
     );
 
     private static $searchable_fields = array
@@ -78,10 +80,7 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
             $t->delete();
 
         $schedule = $this->getManyManyComponents('Schedule');
-        foreach( $schedule as $s)
-        {
-            $schedule->remove($s);
-        }
+        $schedule->removeAll();
     }
 
     public function TicketsCount()
@@ -216,7 +215,7 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
             $rootTab = new TabSet("Root", $tabMain = new Tab('Main'))
         );
 
-        $f->addFieldToTab('Root.Main', new HiddenField('SummitID','SummitID'));
+        $f->addFieldToTab('Root.Main',  new DropdownField('SummitID','Summit', Summit::get()->map('ID', 'Title')));
         $f->addFieldsToTab('Root.Main', new CheckboxField('SharedContactInfo', 'Allow Shared Contact Info?'));
         $f->addFieldsToTab('Root.Main', new CheckboxField('SummitHallCheckedIn', 'Is SummitHall checked In?'));
         $f->addFieldsToTab('Root.Main', $checked_in_date = new DatetimeField('SummitHallCheckedInDate', 'SummitHall checked In Date'));
@@ -246,6 +245,26 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
             $f->addFieldToTab('Root.Tickets', $gridField);
         }
         return $f;
+    }
+
+    protected function validate()
+    {
+
+        $valid = parent::validate();
+        if (!$valid->valid()) {
+            return $valid;
+        }
+        if (intval($this->MemberID) == 0) {
+            return $valid->error('Member is required!');
+        }
+        if (intval($this->SummitID) == 0) {
+            return $valid->error('Summit is required!');
+        }
+        $old_ones = intval(SummitAttendee::get()->filter(array('MemberID' => $this->MemberID , 'SummitID' => $this->SummitID))->where(" ID <> {$this->ID} ")->count());
+        if($old_ones > 0){
+            return $valid->error(sprintf('There is already an attendee for member %s on summit %s!', $this->MemberID, $this->SummitID));
+        }
+        return $valid;
     }
 
     public function getAllowedSchedule()
@@ -324,4 +343,30 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
         $this->setField('SharedContactInfo', $must_share);
         return $this;
     }
+
+    /**
+     * @param ISummitEvent $event
+     * @return string
+     */
+    public function getGoogleCalEventId(ISummitEvent $event)
+    {
+        $event_extra_fields = $this->Schedule()->getExtraData('SummitEvent',$event->getIdentifier());
+        return $event_extra_fields['GoogleCalEventId'];
+    }
+
+    /**
+     * @param ISummitEvent $event
+     * @param int $google_event_id
+     * @return string
+     */
+    public function setGoogleCalEventId(ISummitEvent $event, $google_event_id)
+    {
+        AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'Schedule')->updateExtraFields
+        (
+            $event,
+            array('GoogleCalEventId' => $google_event_id)
+        );
+    }
+
+
 }

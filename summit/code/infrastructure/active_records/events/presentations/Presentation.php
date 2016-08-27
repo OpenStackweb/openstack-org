@@ -12,32 +12,119 @@ class Presentation extends SummitEvent implements IPresentation
      */
     const PHASE_NEW = 0;
 
-
     /**
      * Defines the phase where a presenation has been given a summary,
      * but no speakers have been added
      */
     const PHASE_SUMMARY = 1;
 
+    /**
+     * defines a phase where a presentation has a tags
+     */
+    const PHASE_TAGS = 2;
 
     /**
-     * Deinfes a phase where a presentation has a summary and speakers
+     * defines a phase where a presentation has a summary and speakers
      */
-    const PHASE_SPEAKERS = 2;
+    const PHASE_SPEAKERS = 3;
 
 
     /**
      * Defines a phase where a presentation has been submitted successfully
      */
-    const PHASE_COMPLETE = 3;
+    const PHASE_COMPLETE = 4;
 
-
+    /**
+     *
+     */
     const STATUS_RECEIVED = 'Received';
 
+    /**
+     * @param $progress
+     * @return bool
+     */
+    public static function isValidProgressState($progress)
+    {
+        $valid = array(
+            self::PHASE_NEW,
+            self::PHASE_SUMMARY,
+            self::PHASE_TAGS,
+            self::PHASE_SPEAKERS,
+            self::PHASE_COMPLETE
+        );
+        return in_array($progress, $valid);
+    }
 
+    public static function apply_search_query(DataList $list, $keyword)
+    {
+        $k = Convert::raw2sql($keyword);
+        return $list
+            ->leftJoin(
+                "Presentation_Speakers",
+                "Presentation_Speakers.PresentationID = Presentation.ID"
+            )
+            ->leftJoin(
+                "PresentationSpeaker",
+                "Speaker.ID = Presentation_Speakers.PresentationSpeakerID",
+                "Speaker"
+            )
+            ->leftJoin(
+                "PresentationSpeaker",
+                "Moderator.ID = Presentation.ModeratorID",
+                "Moderator"
+            )
+            ->where("
+                  	SummitEvent.Title LIKE '%{$k}%'
+                  	OR SummitEvent.Description LIKE '%{$k}%'
+                  	OR SummitEvent.ShortDescription LIKE '%{$k}%'
+                    OR (CONCAT_WS(' ', Speaker.FirstName, Speaker.LastName)) LIKE '%{$k}%'
+                    OR (CONCAT_WS(' ', Moderator.FirstName, Moderator.LastName)) LIKE '%{$k}%'
+                ");
+    }
+
+    /**
+     * @return int
+     */
+    public function getProgress()
+    {
+        return intval($this->getField('Progress'));
+    }
+
+    /**
+     * @param int $progress
+     * @return $this
+     * @throws EntityValidationException
+     */
+    public function setProgress($progress)
+    {
+        if (!self::isValidProgressState($progress)) {
+            throw new EntityValidationException('invalid presentation progress');
+        }
+
+        if ($this->getProgress() < $progress) {
+            $this->setField('Progress', $progress);
+            $this->write();
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setComplete()
+    {
+        $this->Progress = self::PHASE_COMPLETE;
+        $this->write();
+        return $this;
+    }
+
+    /**
+     * @var array
+     */
     private static $db = array
     (
-        'Level'                   => "Enum('Beginner,Intermediate,Advanced')",
+        'Level'                   => "Enum('Beginner,Intermediate,Advanced,N/A')",
         'Status'                  => 'Varchar',
         'OtherTopic'              => 'Varchar',
         'Progress'                => 'Int',
@@ -45,31 +132,43 @@ class Presentation extends SummitEvent implements IPresentation
         'BeenEmailed'             => 'Boolean',
         'ProblemAddressed'        => 'HTMLText',
         'AttendeesExpectedLearnt' => 'HTMLText',
-        'SelectionMotive'         => 'HTMLText',
-        'Legacy'		  => 'Boolean'
+        'Legacy'                  => 'Boolean'
     );
 
+    /**
+     * @var array
+     */
     private static $defaults = array
     (
         'TrackChairGivenOrder' => 0,
         'AllowFeedBack' => 1
     );
 
+    /**
+     * @var array
+     */
     private static $has_many = array
     (
-        'Votes'            => 'PresentationVote',
+        'Votes'          => 'PresentationVote',
         // this is related to track chairs app
-        'Comments'         => 'SummitPresentationComment',
-        'ChangeRequests'   => 'SummitCategoryChange',
-        'Materials'        => 'PresentationMaterial',
+        'Comments'       => 'SummitPresentationComment',
+        'ChangeRequests' => 'SummitCategoryChange',
+        'Materials'      => 'PresentationMaterial',
+        'ExtraAnswers'   => 'TrackAnswer',
     );
 
+    /**
+     * @var array
+     */
     private static $many_many = array
     (
         'Speakers' => 'PresentationSpeaker',
         'Topics'   => 'PresentationTopic',
     );
 
+    /**
+     * @var array
+     */
     static $many_many_extraFields = array(
         'Speakers' => array
         (
@@ -77,50 +176,100 @@ class Presentation extends SummitEvent implements IPresentation
         ),
     );
 
+    /**
+     * @var array
+     */
     private static $has_one = array
     (
-        'Creator'   => 'Member',
-        'Category'  => 'PresentationCategory',
+        'Creator' => 'Member',
+        'Category' => 'PresentationCategory',
         'Moderator' => 'PresentationSpeaker',
     );
 
+    /**
+     * @var array
+     */
     private static $summary_fields = array
     (
-        'Created'          => 'Created',
-        'Title'            => 'Event Title',
+        'Created' => 'Created',
+        'Title' => 'Event Title',
         'SummitTypesLabel' => 'Summit Types',
-        'Level'            => 'Level',
-        'SelectionStatus'  => 'Status',
+        'Level' => 'Level',
+        'SelectionStatus' => 'Status',
     );
 
-    public function onBeforeWrite() {
-       parent::onBeforeWrite();
-       $this->assignEventType();
+    /**
+     *
+     */
+    public function onBeforeWrite()
+    {
+        parent::onBeforeWrite();
+        if (!$this->TypeID)
+            $this->assignEventType();
     }
 
-    private function assignEventType()
+    protected function onBeforeDelete()
+    {
+        parent::onBeforeDelete();
+        foreach($this->Votes() as $e){
+            $e->delete();
+        }
+        foreach($this->Comments() as $e){
+            $e->delete();
+        }
+        foreach($this->ChangeRequests() as $e){
+            $e->delete();
+        }
+        foreach($this->Materials() as $e){
+            $e->delete();
+        }
+        $this->Topics()->removeAll();
+        $this->Speakers()->removeAll();
+    }
+
+    /**
+     *
+     */
+    public function assignEventType($type="Presentation")
     {
         $summit_id = intval($this->SummitID);
-        if($summit_id > 0 && intval($this->TypeID) === 0) {
+        if ($summit_id > 0 && intval($this->TypeID) === 0) {
             Summit::seedBasicEventTypes($summit_id);
-            $event_type   = SummitEventType::get()->filter(array('Type'=>'Presentation', 'SummitID'=>$summit_id))->first();
+            $event_type = PresentationType::get()->filter(array(
+                'Type' => $type,
+                'SummitID' => $summit_id
+            ))->first();
             $this->TypeID = $event_type->ID;
         }
     }
 
+    /**
+     * @return string
+     */
     public function getTypeName()
     {
-        return 'Presentation';
+        return $this->Type()->Type;
     }
 
     /**
-     * Gets a link to the presentation
-     *
-     * @return  string
+     * @param string $type
+     * @return null|string
      */
-    public function Link()
+    public function getLink($type ='voting')
     {
-        return PresentationPage::get()->filter('SummitID', $this->SummitID)->first()->Link('show/'.$this->ID);
+        if($type=='voting'){
+            $page = PresentationPage::get()->filter('SummitID', $this->SummitID)->first();
+            if(!is_null($page)) {
+                return $page->Link('show/' . $this->ID);
+            }
+        }
+        if($type=='show') {
+            $page = SummitAppSchedPage::get()->filter('SummitID', $this->SummitID)->first();
+            if ($page) {
+                return $page->getAbsoluteLiveLink(false) . 'events/' . $this->getIdentifier() . '/' . $this->getTitleForUrl();
+            }
+        }
+        return null;
     }
 
     /**
@@ -130,8 +279,8 @@ class Presentation extends SummitEvent implements IPresentation
      */
     public function EditLink()
     {
-        if($page = PresentationPage::get()->filter('SummitID', $this->SummitID)->first()) {
-            return Controller::join_links($page->Link(),'manage', $this->ID, 'summary');
+        if ($page = PresentationPage::get()->filter('SummitID', $this->SummitID)->first()) {
+            return Controller::join_links($page->Link(), 'manage', $this->ID, 'summary');
         }
     }
 
@@ -142,8 +291,8 @@ class Presentation extends SummitEvent implements IPresentation
      */
     public function EditTagsLink()
     {
-        if($page = PresentationPage::get()->filter('SummitID', $this->SummitID)->first()) {
-            return Controller::join_links($page->Link(),'manage', $this->ID, 'tags');
+        if ($page = PresentationPage::get()->filter('SummitID', $this->SummitID)->first()) {
+            return Controller::join_links($page->Link(), 'manage', $this->ID, 'tags');
         }
     }
 
@@ -153,9 +302,10 @@ class Presentation extends SummitEvent implements IPresentation
      *
      * @return  string
      */
-    public function PreviewLink() {
-        if($page = PresentationPage::get()->filter('SummitID', $this->SummitID)->first()) {
-            return Controller::join_links($page->Link(),'manage', $this->ID, 'preview');
+    public function PreviewLink()
+    {
+        if ($page = PresentationPage::get()->filter('SummitID', $this->SummitID)->first()) {
+            return Controller::join_links($page->Link(), 'manage', $this->ID, 'preview');
         }
     }
 
@@ -165,9 +315,10 @@ class Presentation extends SummitEvent implements IPresentation
      *
      * @return  string
      */
-    public function EditSpeakersLink() {
-        if($page = PresentationPage::get()->filter('SummitID', $this->SummitID)->first()) {
-            return Controller::join_links($page->Link(),'manage', $this->ID, 'speakers');
+    public function EditSpeakersLink()
+    {
+        if ($page = PresentationPage::get()->filter('SummitID', $this->SummitID)->first()) {
+            return Controller::join_links($page->Link(), 'manage', $this->ID, 'speakers');
         }
     }
 
@@ -176,13 +327,18 @@ class Presentation extends SummitEvent implements IPresentation
      *
      * @return  string
      */
-    public function DeleteLink() {
-        if($page = PresentationPage::get()->filter('SummitID', $this->SummitID)->first()) {
-            return Controller::join_links($page->Link(),'manage', $this->ID, 'delete','?t='.SecurityToken::inst()->getValue());
+    public function DeleteLink()
+    {
+        if ($page = PresentationPage::get()->filter('SummitID', $this->SummitID)->first()) {
+            return Controller::join_links($page->Link(), 'manage', $this->ID, 'delete',
+                '?t=' . SecurityToken::inst()->getValue());
         }
     }
 
 
+    /**
+     * @return HTMLText
+     */
     public function PreviewHTML()
     {
         $template = new SSViewer('PresentationPreview');
@@ -193,29 +349,14 @@ class Presentation extends SummitEvent implements IPresentation
     }
 
 
-    /**
-     * Determines if a track chair can assign this presentation to a seleciton list
-     *
-     * @return boolean
-     */
-
-    public function canAssign() {
-
-        // see if they have either of the appropiate permissions
-        if(!Permission::check('TRACK_CHAIR')) return false;
-
-        // see if they are a chair of this particular track
-        $IsTrackChair = $this->Category()->TrackChairs('MemberID = '.Member::currentUser()->ID);
-        if ($IsTrackChair->Count() != 0) return TRUE;
-
-    }
 
     /**
      * Determines if the user can create a presentation
      *
      * @return  boolean
      */
-    public function canCreate($member = null) {
+    public function canCreate($member = null)
+    {
         return Member::currentUser();
     }
 
@@ -225,8 +366,12 @@ class Presentation extends SummitEvent implements IPresentation
      *
      * @return  boolean
      */
-    public function canDelete($member = null) {
-        return Permission::check("ADMIN") || Permission::check("ADMIN_SUMMIT_APP") || Permission::check("ADMIN_SUMMIT_APP_SCHEDULE") || $this->CreatorID == Member::currentUserID();
+    public function canDelete($member = null)
+    {
+        return Permission::check("ADMIN")
+        || Permission::check("ADMIN_SUMMIT_APP")
+        || Permission::check("ADMIN_SUMMIT_APP_SCHEDULE")
+        || $this->CreatorID == Member::currentUserID();
     }
 
 
@@ -235,62 +380,9 @@ class Presentation extends SummitEvent implements IPresentation
      * @param  Member $member
      * @return boolean         [description]
      */
-    public function canRemoveSpeakers($member = null) {
-        return true;
-    }
-
-
-    /**
-     * Sets a vote for this presentation by the current user
-     *
-     * @param  $vote int
-     */
-    public function setUserVote($vote) {
-        $v = $this->Votes()->filter('MemberID', Member::currentUserID())->first() ?: PresentationVote::create();
-        $v->MemberID = Member::currentUserID();
-        $v->PresentationID = $this->ID;
-        $v->Vote = $vote;
-        $v->write();
-    }
-
-
-    /**
-     * Gets the vote on this presentation by the current user
-     * @return int
-     */
-    public function getUserVote()
+    public function canRemoveSpeakers($member = null)
     {
-        return $this->Votes()->filter(array(
-            'MemberID' => Member::currentUserID()
-        ))->first();
-    }
-
-
-    public function CalcTotalPoints() {
-        $sqlQuery = new SQLQuery(
-            "SUM(Vote)",
-            "PresentationVote",
-            "PresentationID = ".$this->ID
-        );
-        return $sqlQuery->execute()->value();
-    }
-
-    public function CalcVoteCount() {
-        $sqlQuery = new SQLQuery(
-            "COUNT(ID)",
-            "PresentationVote",
-            "PresentationID = ".$this->ID
-        );
-        return $sqlQuery->execute()->value();
-    }
-
-    public function CalcVoteAverage() {
-        $sqlQuery = new SQLQuery(
-            "AVG(Vote)",
-            "PresentationVote",
-            "PresentationID = ".$this->ID
-        );
-        return round($sqlQuery->execute()->value(), 2);
+        return true;
     }
 
     /**
@@ -305,208 +397,70 @@ class Presentation extends SummitEvent implements IPresentation
         return $this->Progress == self::PHASE_NEW;
     }
 
+    /**
+     * @return bool
+     */
     public function creatorIsSpeaker()
     {
         $c = $this->Speakers()->filter(array(
             'MemberID' => $this->CreatorID
         ));
-        if ($c->count()) return true;
+        if ($c->count()) {
+            return true;
+        }
     }
 
+    /**
+     * @return mixed
+     */
     public function creatorBeenEmailed()
     {
         return $this->BeenEmailed;
     }
 
-    public function clearBeenEmailed() {
+    /**
+     * @throws ValidationException
+     * @throws null
+     */
+    public function clearBeenEmailed()
+    {
         $this->BeenEmailed = false;
         $this->write();
     }
 
-    /**
-     * Used by the track chair app to allow comments on presentations.
-     * Comments are only displayed in the track chair interface.
-     **/
-
-    public function addComment($commentBody, $MemberID, $is_category_change_suggestion = false) {
-        $comment = new SummitPresentationComment();
-        $comment->Body = $commentBody;
-        $comment->CommenterID = $MemberID;
-        $comment->PresentationID = $this->ID;
-        $comment->IsCategoryChangeSuggestion = $is_category_change_suggestion;
-        $comment->write();
-    }
 
     /**
-     * Used by the track chair app to allow chairs to add a presentation to a personal list.
-     **/
-
-    public function assignToIndividualList() {
-
-
-        // Check permissions of user on talk
-        if ($this->CanAssign()) {
-
-            $MySelections = SummitSelectedPresentationList::getMemberList($this->CategoryID);
-
-
-            // See if the presentation has already been assigned
-            $AlreadyAssigned = $MySelections->SummitSelectedPresentations('PresentationID = ' . $this->ID);
-
-
-            if ($AlreadyAssigned->count() == 0) {
-
-                // Find the higest order value assigned up to this point
-                $HighestOrderInList =  $MySelections
-                    ->SummitSelectedPresentations()
-                    ->sort('Order DESC')
-                    ->first()
-                    ->Order;
-
-                $SelectedPresentation = new SummitSelectedPresentation();
-                $SelectedPresentation->SummitSelectedPresentationListID = $MySelections->ID;
-                $SelectedPresentation->PresentationID = $this->ID;
-                $SelectedPresentation->MemberID = Member::currentUser()->ID;
-                // Place at bottom of list
-                $SelectedPresentation->Order = $HighestOrderInList + 1;
-                $SelectedPresentation->write();
-            }
-        }
-    }
-
-    /**
-     * Used by the track chair app to allow chairs to remove a presentation from a personal list.
-     **/
-
-    public function removeFromIndividualList() {
-
-
-        // Check permissions of user on talk
-        if ($this->CanAssign()) {
-
-            $MySelections = SummitSelectedPresentationList::getMemberList($this->CategoryID);
-
-            // See if the presentation has already been assigned
-            $AlreadyAssigned = $MySelections->SummitSelectedPresentations('PresentationID = ' . $this->ID)->first();
-
-            if (!is_null($AlreadyAssigned)) {
-                $AlreadyAssigned->delete();
-            }
-        }
-    }
-
-
-    /**
-     * Used by the track chair app to allow chairs to add a presentation to a group list.
-     **/
-
-    public function assignToGroupList() {
-
-
-        // Check permissions of user on talk
-        if ($this->CanAssign()) {
-
-            $GroupList = SummitSelectedPresentationList::get()
-                ->filter(array(
-                    'CategoryID' => $this->CategoryID,
-                    'ListType' => 'Group'
-                ))
-                ->first();
-
-            // See if the presentation has already been assigned
-            $AlreadyAssigned = $GroupList->SummitSelectedPresentations('PresentationID = ' . $this->ID);
-
-
-            if ($AlreadyAssigned->count() == 0) {
-
-                // Find the higest order value assigned up to this point
-                $HighestOrderInList =  $GroupList
-                    ->SummitSelectedPresentations()
-                    ->sort('Order DESC')
-                    ->first()
-                    ->Order;
-
-                $SelectedPresentation = new SummitSelectedPresentation();
-                $SelectedPresentation->SummitSelectedPresentationListID = $GroupList->ID;
-                $SelectedPresentation->PresentationID = $this->ID;
-                $SelectedPresentation->MemberID = Member::currentUser()->ID;
-                // Place at bottom of list
-                $SelectedPresentation->Order = $HighestOrderInList + 1;
-                $SelectedPresentation->write();
-            }
-        }
-    }
-
-    /**
-     * Used by the track chair app to allow chairs to remove a presentation from a group list.
-     **/
-
-    public function removeFromGroupList() {
-
-
-        // Check permissions of user on talk
-        if ($this->CanAssign()) {
-
-            $GroupList = SummitSelectedPresentationList::get()
-                ->filter(array(
-                    'CategoryID' => $this->CategoryID,
-                    'ListType' => 'Group'
-                ))
-                ->first();
-
-
-            // See if the presentation has already been assigned
-            $AlreadyAssigned = $GroupList->SummitSelectedPresentations('PresentationID = ' . $this->ID)->first();
-
-            if ($AlreadyAssigned->exists()) {
-                $AlreadyAssigned->delete();
-            }
-        }
-    }
-
-    /**
-     * Used by the track chair app see if the presentation has been selected by currently logged in member.
-     **/
-
-    public function isSelected() {
-
-        $memID = Member::currentUserID();
-
-
-        $selected = SummitSelectedPresentation::get()
-            ->leftJoin("SummitSelectedPresentationList", "SummitSelectedPresentationList.ID = SummitSelectedPresentation.SummitSelectedPresentationListID")
-            ->where("PresentationID={$this->ID} and SummitSelectedPresentation.MemberID={$memID} 
-                     AND ListType='Individual'");
-
-        if ($selected->count()) return true;
-
-    }
-
+     * @return ArrayList
+     */
     public static function getLevels()
     {
         $res  = singleton('Presentation')->dbObject('Level')->enumValues();
         $list = new ArrayList();
-        foreach($res as $k => $v)
-        {
-            $list->add(new ArrayData(array('Level'=> $v)));
+        foreach ($res as $k => $v) {
+            $list->add(new ArrayData(array('Level' => $v)));
         }
         return $list;
     }
 
+    /**
+     * @return ArrayList
+     */
     public static function getStatusOptions()
     {
         $statuses = singleton('Presentation')->config()->status_options;
         $list = new ArrayList();
-        foreach($statuses as $k => $v)
-        {
-            $list->add(new ArrayData(array('Status'=> $v)));
+        foreach ($statuses as $k => $v) {
+            $list->add(new ArrayData(array('Status' => $v)));
         }
         return $list;
     }
 
+    /**
+     * @return FieldList
+     */
     public function getCMSFields()
     {
-        $summit_id = isset($_REQUEST['SummitID']) ?  $_REQUEST['SummitID'] : $this->SummitID;
+        $summit_id = isset($_REQUEST['SummitID']) ? $_REQUEST['SummitID'] : $this->SummitID;
 
         $f = parent::getCMSFields();
         $f->removeByName('TypeID');
@@ -519,7 +473,6 @@ class Presentation extends SummitEvent implements IPresentation
             ->text('OtherTopic', 'Other topic')
             ->htmleditor('ProblemAddressed', 'What is the problem or use case you’re addressing in this session?')
             ->htmleditor('AttendeesExpectedLearnt', 'What should attendees expect to learn?')
-            ->htmleditor('SelectionMotive', 'Why should this session be selected?')
             ->tab('Preview')
             ->literal('preview', sprintf(
                 '<iframe width="%s" height="%s" frameborder="0" src="%s"></iframe>',
@@ -528,17 +481,18 @@ class Presentation extends SummitEvent implements IPresentation
                 Director::absoluteBaseURL() . $this->PreviewLink()
             ));
 
-        $f->addFieldToTab('Root.Main', $ddl_type = new DropdownField('TypeID', 'Event Type', SummitEventType::get()->filter
-        (
-            array
+        $f->addFieldToTab('Root.Main',
+            $ddl_type = new DropdownField('TypeID', 'Event Type', SummitEventType::get()->filter
             (
-                'SummitID' => $summit_id,
-            )
-        )->where(" Type ='Presentation' OR Type ='Keynotes' ")->map('ID','Type')));
+                array
+                (
+                    'SummitID' => $summit_id,
+                )
+            )->where(" Type ='Presentation' OR Type ='Keynotes' OR Type ='Panel' ")->map('ID', 'Type')));
 
         $ddl_type->setEmptyString('-- Select a Presentation Type --');
 
-        if($this->ID > 0) {
+        if ($this->ID > 0) {
             // speakers
             $config = new GridFieldConfig_RelationEditor(100);
             $config->removeComponentsByType('GridFieldAddNewButton');
@@ -547,7 +501,8 @@ class Presentation extends SummitEvent implements IPresentation
             $config->getComponentByType('GridFieldAddExistingAutocompleter')->setResultsFormat('$Name - $Member.Email')->setSearchList($this->getAllowedSpeakers());
             // moderator
 
-            $f->addFieldToTab('Root.Speakers', $ddl_moderator = new DropdownField('ModeratorID', 'Moderator', $this->Speakers()->map('ID', 'Name')));
+            $f->addFieldToTab('Root.Speakers',
+                $ddl_moderator = new DropdownField('ModeratorID', 'Moderator', $this->Speakers()->map('ID', 'Name')));
             $ddl_moderator->setEmptyString('-- Select a Moderator --');
 
 
@@ -560,7 +515,7 @@ class Presentation extends SummitEvent implements IPresentation
                 (
                     'PresentationVideo' => 'Video',
                     'PresentationSlide' => 'Slide',
-                    'PresentationLink'  => 'Link',
+                    'PresentationLink' => 'Link',
                 )
             );
             $config->addComponent($multi_class_selector);
@@ -571,89 +526,57 @@ class Presentation extends SummitEvent implements IPresentation
         return $f;
     }
 
+    /**
+     * @return DataList
+     */
     private function getAllowedSpeakers()
     {
         return PresentationSpeaker::get();
     }
-    /**
-     * Used by the track chair app see if the presentation has been selected by the group.
-     **/
 
-    public function isGroupSelected() {
+    public function getSpeakersAndModerators()
+    {
+        $result       = [];
+        $moderator_id = 0;
+        if($this->Moderator()->exists()) {
+            $result[]     = $this->Moderator();
+            $moderator_id = $this->Moderator()->ID;
+        }
 
-        $memID = Member::currentUserID();
+    	$result =  array_merge($result, $this->Speakers()->filter('ID:ExactMatch:not', $moderator_id)->toArray() ) ;
 
-
-        $selected = SummitSelectedPresentation::get()
-            ->leftJoin("SummitSelectedPresentationList", "SummitSelectedPresentationList.ID = SummitSelectedPresentation.SummitSelectedPresentationListID")
-            ->where("PresentationID={$this->ID} AND ListType='Group'");
-
-        if ($selected->count()) return true;
-
+    	return new ArrayList($result);
     }
 
     /**
-     * Used by the track chair app see if the presentation has been selected by anyone at all.
-     * TODO: refactor to combine with isSelected() by passing optional memberID
-     **/
-
-    public function isSelectedByAnyone() {
-
-        $selected = SummitSelectedPresentation::get()
-            ->where("PresentationID={$this->ID}");
-
-        if ($selected->count()) return true;
-
+     * @return bool
+     */
+    public function allowSpeakers()
+    {
+        return true;
     }
 
     /**
-     * Used by the track chair app see if the presentation was moved to this category.
-     **/
+     * @param $type
+     * @return mixed
+     */
+    public function MaterialType($type)
+    {
+        $materials = $this->Materials();
+        if ($materials->exists()) {
+            return $materials->filter('ClassName', $type)->first();
+        }
 
-    public function movedToThisCategory() {
-        $completedMove = $this->ChangeRequests()->filter(array(
-            'NewCategoryID' => $this->CategoryID,
-            'Done' => TRUE
-        ));
-        if ($completedMove->count()) return true;
+        return false;
     }
 
-    public function SelectionStatus() {
-
-        $Selections = SummitSelectedPresentation::get()
-            ->leftJoin('SummitSelectedPresentationList','SummitSelectedPresentation.SummitSelectedPresentationListID = SummitSelectedPresentationList.ID')
-            ->filter(array(
-                'PresentationID' => $this->ID,
-                'ListType' => 'Group'
-            ));
-
-        // Error out if a talk has more than one selection
-        if($Selections && $Selections->count() > 1) user_error('There cannot be more than one instance of this talk selected. Talk ID '.$this->ID);
-
-        $Selection = NULL;
-        if ($Selections) $Selection = $Selections->first();
-
-        // Error out if the category of presentation does not match category of selection
-        if($Selection && $this->CategoryID != $Selection->SummitSelectedPresentationList()->Category()->ID)
-            user_error('The selection category does not match the presentation category. Presentation ID '.$this->ID);
-
-
-        If (!$Selection) {
-            return IPresentation::SelectionStatus_Unaccepted;
-        }
-        elseif ($Selection->Order <= $this->Category()->SessionCount)
-        {
-            return IPresentation::SelectionStatus_Accepted;
-        }
-        else
-        {
-            return IPresentation::SelectionStatus_Alternate;
-        }
-    }
-
+    /**
+     * @return ValidationResult
+     */
     protected function validate()
     {
-        $this->assignEventType();
+        if (!$this->TypeID)
+            $this->assignEventType();
 
         $valid = parent::validate();
 
@@ -661,27 +584,27 @@ class Presentation extends SummitEvent implements IPresentation
             return $valid;
         }
 
-        $summit_id  = isset($_REQUEST['SummitID']) ?  $_REQUEST['SummitID'] : $this->SummitID;
-        $summit     = Summit::get()->byID($summit_id);
+        $summit_id = isset($_REQUEST['SummitID']) ? $_REQUEST['SummitID'] : $this->SummitID;
+        $summit = Summit::get()->byID($summit_id);
 
         // validate that each speakers is assigned one time at one location
-        $start_date      = $summit->convertDateFromTimeZone2UTC( $this->getStartDate());
-        $end_date        = $summit->convertDateFromTimeZone2UTC( $this->getEndDate() );
+        $start_date = $summit->convertDateFromTimeZone2UTC($this->getStartDate());
+        $end_date = $summit->convertDateFromTimeZone2UTC($this->getEndDate());
 
         $presentation_id = $this->getIdentifier();
-        $location_id     = $this->LocationID;
-        $speakers_id     = array();
+        $location_id = $this->LocationID;
+        $speakers_id = array();
 
-        $speakers        = $this->Speakers();
-        foreach($speakers as $speaker)
-        {
+        $speakers = $this->Speakers();
+        foreach ($speakers as $speaker) {
             array_push($speakers_id, $speaker->ID);
         }
 
         $speakers_id = implode(', ', $speakers_id);
 
-        if(empty($start_date) || empty($end_date) || empty($speakers_id))
+        if (empty($start_date) || empty($end_date) || empty($speakers_id)) {
             return $valid;
+        }
 
         $query = <<<SQL
 SELECT COUNT(P.ID) FROM Presentation P
@@ -699,31 +622,69 @@ EXISTS
 	PresentationID = P.ID
 );
 SQL;
-
-
         $qty = intval(DB::query($query)->value());
 
-        if($qty > 0)
-        {
+        if ($qty > 0) {
             return $valid->error('There is a speaker assigned to another presentation on that date/time range !');
         }
         return $valid;
     }
 
 
-    public function getSpeakers() {
-        return AssociationFactory::getInstance()->getMany2ManyAssociation($this,'Speakers');
+    /**
+     * @return bool|PersistentCollection
+     * @throws Exception
+     */
+    public function getSpeakers()
+    {
+        return AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'Speakers');
     }
 
-    public function getTopics() {
-        return AssociationFactory::getInstance()->getMany2ManyAssociation($this,'Topics');
+    /**
+     * @return bool
+     * @throws Exception
+     */
+    public function maxSpeakersReached()
+    {
+        return ($this->Type()->getMaxSpeakers() == $this->Speakers()->count());
+    }
+
+    /**
+     * @return bool
+     * @throws Exception
+     */
+    public function maxModeratorsReached()
+    {
+        $max_moderators = $this->Type()->getMaxModerators();
+        $moderator_count = ($this->Moderator()->exists() ? 1 : 0);
+        return ($max_moderators == $moderator_count);
+    }
+
+    /**
+     * @return string
+     */
+    public function getSpeakersCSV()
+    {
+        return implode(', ', array_map(function ($s) {
+            return $s->getName();
+        }, $this->getSpeakersAndModerators()->toArray()));
+    }
+
+    /**
+     * @return bool|PersistentCollection
+     * @throws Exception
+     */
+    public function getTopics()
+    {
+        return AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'Topics');
     }
 
     /**
      * @param Member $member
      * @return boolean
      */
-    public function canView($member = null) {
+    public function canView($member = null)
+    {
         return Permission::check("ADMIN") || Permission::check("ADMIN_SUMMIT_APP") || Permission::check("ADMIN_SUMMIT_APP_SCHEDULE");
     }
 
@@ -731,13 +692,17 @@ SQL;
      * @param Member $member
      * @return boolean
      */
-    public function canEdit($member = null) {
+    public function canEdit($member = null)
+    {
         $res = Permission::check("ADMIN") || Permission::check("ADMIN_SUMMIT_APP") || Permission::check("ADMIN_SUMMIT_APP_SCHEDULE");
-        if($res) return $res;
+        if ($res) {
+            return $res;
+        }
 
         return
-            (Member::currentUser() && Member::currentUser()->IsSpeaker($this)) ||
-            Member::currentUserID() == $this->CreatorID;
+            ( Member::currentUser() && Member::currentUser()->IsSpeaker($this) ) ||
+            Member::currentUserID() == $this->CreatorID ||
+            ( Member::currentUser() && Member::currentUser()->getSpeakerProfile() && $this->ModeratorID == Member::currentUser()->getSpeakerProfile()->ID );
     }
 
     /**
@@ -748,47 +713,74 @@ SQL;
     {
         $validation_result = $this->validate();
 
-        if(!$validation_result->valid())
-        {
+        if (!$validation_result->valid()) {
             throw new EntityValidationException($validation_result->messageList());
         }
 
-        if(empty($this->Title)) {
+        if (empty($this->Title)) {
             throw new EntityValidationException('Title is Mandatory!');
         }
 
-        if(empty($this->ShortDescription))
-        {
+        if (empty($this->ShortDescription)) {
             throw new EntityValidationException('ShortDescription is mandatory!');
         }
 
-        if(empty($this->ProblemAddressed))
-        {
-            throw new EntityValidationException('ProblemAddressed is mandatory!');
-        }
-
-        if(empty($this->AttendeesExpectedLearnt))
-        {
-            throw new EntityValidationException('AttendeesExpectedLearnt is mandatory!');
-        }
-
-        if(empty($this->SelectionMotive))
-        {
-            throw new EntityValidationException('SelectionMotive is mandatory!');
-        }
-
-        if(empty($this->Level))
-        {
+        if (empty($this->Level)) {
             throw new EntityValidationException('Level is mandatory!');
         }
 
         $this->Status = self::STATUS_RECEIVED;
 
-        if ($this->Progress < self::PHASE_COMPLETE) {
-            $this->Progress = self::PHASE_COMPLETE;
-        }
-
+        $this->setComplete();
 
         return $this;
+    }
+
+    public function unsetModerator(){
+        $this->ModeratorID = null;
+    }
+
+    /**
+     * @param IPresentationSpeaker $speaker
+     * @return bool
+     */
+    public function isModerator(IPresentationSpeaker $speaker)
+    {
+       return $this->isModeratorByID($speaker->getIdentifier());
+    }
+
+    /**
+     * @param int $speaker_id
+     * @return bool
+     */
+    public function isModeratorByID($speaker_id)
+    {
+        return intval($this->ModeratorID) === intval($speaker_id);
+    }
+
+    /**
+     * @param IPresentationSpeaker $speaker
+     * @return void
+     */
+    public function removeSpeaker(IPresentationSpeaker $speaker)
+    {
+        $this->getSpeakers()->remove($speaker);
+    }
+
+    /**
+     * @param ITrackQuestionTemplate $question
+     * @return ITrackAnswer
+     */
+    public function findAnswerByQuestion(ITrackQuestionTemplate $question)
+    {
+        foreach ($this->ExtraAnswers() as $answer) {
+            if($answer->question()->getIdentifier() === $question->getIdentifier()) {
+                if (!is_null($answer)) {
+                    return $answer;
+                }
+            }
+        }
+
+        return null;
     }
 }

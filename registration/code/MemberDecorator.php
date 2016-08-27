@@ -16,8 +16,8 @@ class MemberDecorator extends DataExtension
 {
     private static $db = array
     (
-        'SecondEmail'            => 'Text',
-        'ThirdEmail'             => 'Text',
+        'SecondEmail'            => 'Varchar(254)', // See RFC 5321, Section 4.5.3.1.3. (256 minus the < and > character)
+        'ThirdEmail'             => 'Varchar(254)', // See RFC 5321, Section 4.5.3.1.3. (256 minus the < and > character)
         'HasBeenEmailed'         => 'Boolean',
         'ShirtSize'              => "Enum('Extra Small, Small, Medium, Large, XL, XXL')",
         'StatementOfInterest'    => 'Text',
@@ -45,6 +45,7 @@ class MemberDecorator extends DataExtension
         'EmailVerified'          => 'Boolean',
         'EmailVerifiedTokenHash' => 'Text',
         'EmailVerifiedDate'      => 'SS_Datetime',
+        'LegacyMember'           => 'Boolean',
     );
 
     private static $defaults = array
@@ -52,6 +53,16 @@ class MemberDecorator extends DataExtension
         'SubscribedToNewsletter' => true,
         'DisplayOnSite'          => false,
         'Active'                 => true,
+        'LegacyMember'           => false,
+    );
+
+    private static $indexes = array
+    (
+        'SecondEmail'       => array('type' => 'index', 'value' => 'SecondEmail'),
+        'ThirdEmail'        => array('type' => 'index', 'value' => 'ThirdEmail'),
+        'FirstName'         => array('type' => 'index', 'value' => 'FirstName'),
+        'Surname'           => array('type' => 'index', 'value' => 'Surname'),
+        'FirstName_Surname' => array('type' => 'index', 'value' => 'FirstName,Surname'),
     );
 
     private static $has_one = array
@@ -87,6 +98,19 @@ class MemberDecorator extends DataExtension
         if(Controller::has_curr())
             $deleted->FromUrl = Controller::curr()->getRequest()->getURL(true);
         $deleted->write();
+
+        if($this->owner->Speaker()->exists()) $this->owner->Speaker()->delete();
+        if($this->owner->Photo()->exists()) $this->owner->Photo()->delete();
+
+        foreach($this->owner->LegalAgreements() as $e){
+            $e->delete();
+        }
+
+        foreach($this->owner->Affiliations() as $e){
+            $e->delete();
+        }
+
+        $this->owner->ManagedCompanies()->removeAll();
     }
 
     public function setOwner($owner, $ownerBaseClass = null)
@@ -118,6 +142,10 @@ class MemberDecorator extends DataExtension
         if(!$this->owner->Active)
         {
             $result->error('Your account has been disabled');
+        }
+        if(!$this->owner->EmailVerified)
+        {
+            $result->error('Your account is not verfied, please verify your email');
         }
         return $result;
     }
@@ -358,12 +386,17 @@ class MemberDecorator extends DataExtension
 
     public function getCurrentJobTitle()
     {
-        $a = $this->getCurrentAffiliation();
-        if (!is_null($a)) {
-            return empty($a->JobTitle) ? $this->owner->JobTitle : $a->JobTitle;
+        $job_title = '';
+        if (!empty($this->owner->JobTitle)) {
+            $job_title = $this->owner->JobTitle;
+        } else {
+            $a = $this->getCurrentAffiliation();
+            if (!is_null($a) && !empty($a->JobTitle)) {
+                $job_title = $a->JobTitle;
+            }
         }
 
-        return $this->owner->JobTitle;
+        return $job_title;
     }
 
     public function getCurrentRole()

@@ -26,6 +26,71 @@ interface IPresentationSpeaker extends IEntity
     const AnnouncementEmailAlternateRejected = 'ALTERNATE_REJECTED';
 
     /**
+     * @return  string
+     */
+    public function getName();
+
+    /**
+     * @return  string
+     */
+    public function getCountryName();
+
+    /**
+     * @return  string
+     */
+    public function getCurrentPosition();
+
+    /**
+     * @return  string
+     */
+    public function getTitleNice();
+
+    /**
+     * Gets a link to edit this record
+     *
+     * @return  string
+     */
+    public function EditLink($presentationID);
+
+    /**
+     * Gets a link to delete this presentation
+     *
+     * @return  string
+     */
+    public function DeleteLink($presentationID);
+
+    /**
+     * Gets a link to the speaker's review page, as seen in the email. Auto authenticates.
+     * @param Int $presentationID
+     * @return string
+     */
+    public function ReviewLink($presentationID);
+
+    /**
+     * @param null|int $summit_id
+     * @return mixed
+     */
+    public function AllPresentations($summit_id = null);
+
+    /**
+     * @param null|int $summit_id
+     * @return mixed
+     */
+    public function MyPresentations($summit_id = null);
+
+    /**
+     * @param null|int $summit_id
+     * @return mixed
+     */
+    public function OtherPresentations($summit_id = null);
+
+    /**
+     * @param null|int $summit_id
+     * @return mixed
+     */
+    public function getPresentationsCount($summit_id = null);
+
+   /**
      * @return bool
      */
     public function isPendingOfRegistration();
@@ -46,6 +111,12 @@ interface IPresentationSpeaker extends IEntity
      * @return bool
      */
     public function announcementEmailAlreadySent($summit_id);
+
+    /**
+     * @param int $summit_id
+     * @return bool
+     */
+    public function breakoutEmailAlreadySent($summit_id);
 
     /**
      * @param int $summit_id
@@ -71,6 +142,12 @@ interface IPresentationSpeaker extends IEntity
      * @return bool
      */
     public function hasApprovedPresentations($summit_id = null);
+
+    /**
+     * @param int $summit_id
+     * @return bool
+     */
+    public function hasPublishedPresentations($summit_id = null);
 
     /**
      * @param int $summit_id
@@ -109,4 +186,98 @@ interface IPresentationSpeaker extends IEntity
      * @return string
      */
     public function getOnSitePhoneFor($summit_id);
+
+    /***
+     * @param int $summit_id
+     * @param string $type
+     * @return $this|void
+     * @throws Exception
+     */
+    public function registerBreakOutSent($summit_id, $type);
+
+    /**
+     * @param null|int $summit_id
+     * @return mixed
+     */
+    public function PublishedPresentations($summit_id = null);
+
+    /**
+     * @param int $summit_id
+     * @return bool
+     */
+    public function hasAssistanceFor($summit_id);
+
+    /**
+     * @param int $summit_id
+     * @return PresentationSpeakerSummitAssistanceConfirmationRequest
+     */
+    public function createAssistanceFor($summit_id);
+
+    /**
+     * Resets the confirmation request if exists and its not confirmed yet
+     * otherwise exception
+     * @param int $summit_id
+     * @return string
+     * @throws Exception
+     * @throws ValidationException
+     * @throws null
+     */
+    public function resetConfirmationLink($summit_id);
+
+    /**
+     * @param int $summit_id
+     * @return bool
+     */
+    public function hasConfirmedAssistanceFor($summit_id);
+
+    /**
+     * @return bool
+     */
+    public function membershipCreateEmailAlreadySent();
+
+    /**
+     * @return $this
+     * @throws Exception
+     */
+    public function registerCreateMembershipSent();
+
+    /**
+     * @return bool
+     */
+    public function hasPendingRegistrationRequest();
+
+    /**
+     * @param $promo_code_value
+     * @param ISummit $summit
+     * @return ISpeakerSummitRegistrationPromoCode
+     * @throws EntityValidationException
+     * @throws ValidationException
+     */
+    public function registerSummitPromoCodeByValue($promo_code_value, ISummit $summit);
+
+    /**
+     * @param ISummit $summit
+     * @return DataList
+     */
+    public function getPublicCategoryPresentationsBySummit(ISummit $summit);
+
+    /**
+     * @param ISummit $summit
+     * @return DataList
+     */
+    public function getPublicCategoryOwnedPresentationsBySummit(ISummit $summit);
+
+    /**
+     * @param ISummit $summit
+     * @param PrivatePresentationCategoryGroup $private_group
+     * @return DataList
+     */
+    public function getPrivateCategoryPresentationsBySummit(ISummit $summit, PrivatePresentationCategoryGroup $private_group);
+
+    /**
+     * @param ISummit $summit
+     * @param PrivatePresentationCategoryGroup $private_group
+     * @return DataList
+     */
+    public function getPrivateCategoryOwnedPresentationsBySummit(ISummit $summit, PrivatePresentationCategoryGroup $private_group);
 }

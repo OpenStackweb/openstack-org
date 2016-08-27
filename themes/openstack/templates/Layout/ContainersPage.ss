@@ -105,6 +105,25 @@
         </div>
     </div>
 
+    <!-- Video -->
+    <div class="container-video-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2>What app developers were saying at the Austin Summit</h2>
+                    <p>
+                        OpenStack is the is programmable platform that gives users access to bare metal, VMs and containers. The March 2016 user survey indicated that 70% of OpenStack users are interested in containers, and at the OpenStack Summit Austin, users including Time Warner Cable, Lithium technologies and LivePerson spoke about how their teams are working with container technologies like Kubernetes and Mesos. To further build the community of app developers, hackathons are being held to provide access to OpenStack resources, and the winning team from the first app hackathon in Taipei shared a demo how its app measures muscle movement on top of an OpenStack cloud.
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <iframe src="https://www.youtube.com/embed/PwOB_y__AKY?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Quote -->
     <div class="content-section-a testimonial-row">
         <div class="container"> 
@@ -178,16 +197,16 @@
                     </p>
                 </div>
                 <div class="col-sm-5ths">
-                    <a href="https://www.openstack.org/summit/tokyo-2015/videos/presentation/openstack-magnum-containers-as-a-service" target="_blank">
+                    <a href="//www.openstack.org/assets/containers/LivePerson.pdf" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="/themes/openstack/images/play-button.png">
+                            <img src="/themes/openstack/images/read.png">
                         </div>
-                        <img class="video-image" src="/themes/openstack/images/containers/featured-3.jpg" alt="OpenStack Magnum - Containers-as-a-Service">
+                        <img class="video-image" src="/themes/openstack/images/containers/featured-3.jpg" alt="Containers and Cloud: Exploring the OpenStack Opportunity with LivePerson">
                     </div>
                     </a> 
                     <p class="video-title">
-                        OpenStack Magnum - Containers-as-a-Service
+                        Containers and Cloud: Exploring the OpenStack Opportunity with LivePerson
                     </p>
                 </div>
                 <div class="col-sm-5ths">
@@ -204,7 +223,7 @@
                     </p>
                 </div>
                <div class="col-sm-5ths">
-                    <a href="https://www.openstack.org/blog/2015/07/google-bringing-container-expertise-to-openstack/" target="_blank">
+                    <a href="//www.openstack.org/blog/2015/07/google-bringing-container-expertise-to-openstack/" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
                             <img src="/themes/openstack/images/read.png">
@@ -225,22 +244,19 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-8">
-                    <h3>Learn more about Containers at the OpenStack Summit Austin</h3>
+                    <h3>From the Summit to your browser: Everything you need to know about containers and OpenStack</h3>
                     <p>
-                        Join us in Austin for content and workshops devoted to working with OpenStack and container management. Hear from application developers and users who are building and deploying applications using Kubernetes and Docker on OpenStack clouds on April 27 and 28.
-                    </p>
-                    <p>
-                        <a href="//www.openstack.org/summit/austin-2016/categories/" target="_blank">Learn more about the container and application developer content planned for the Austin Summit</a>
+                        At the Austin Summit, there were dozens of sessions covering the latest updates around containers, including use cases from Ancestry.com, Time Warner Cable and LivePerson, as well as OpenStack project updates from Magnum, Kuryr and Murano.
                     </p>
                 </div>
                 <div class="col-sm-4">
                     <div class="containers-summit-right">
                         <img class="containers-summit-logo" src="/themes/openstack/static/images/summit-logo-small.svg" onerror="this.onerror=null; this.src=/themes/openstack/static/images/summit-logo-small.png" alt="OpenStack Summit">
-                        <div class="containers-summit-dates">
-                            April 25-29 in Austin, TX
-                        </div>
+<!--                         <div class="containers-summit-dates">
+                            October 25-28 in Barcelona
+                        </div> -->
                         <div class="containers-summit-register-btn">
-                            <a href="https://openstacksummit2016austin.eventbrite.com/" class="nfv-summit-btn" target="_blank">Register Now <i class="fa fa-chevron-right"></i></a>
+                            <a href="//www.openstack.org/videos" class="nfv-summit-btn" target="_blank">Stream the sessions now <i class="fa fa-chevron-right"></i></a>
                         </div>
                     </div>
                 </div>

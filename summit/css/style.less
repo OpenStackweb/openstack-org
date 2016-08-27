@@ -28,3 +28,20 @@
 		}		
 	}	
 }
+
+.autocomplete-input {
+	position:relative;
+	.autocomplete-results {
+		position:absolute;
+		z-index:100;
+		ul li {
+			list-style:none;
+			a {
+				display:block;
+				&:hover {
+					background: #eee;
+				}
+			}
+		}
+	}
+}

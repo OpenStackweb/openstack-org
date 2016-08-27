@@ -31,4 +31,6 @@ interface ISpeakerSummitRegistrationPromoCode extends ISummitRegistrationPromoCo
      * @return $this
      */
     public function assignSpeaker(IPresentationSpeaker $speaker);
+
+    public function setType($type);
 }

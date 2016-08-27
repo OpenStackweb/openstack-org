@@ -27,7 +27,7 @@ implements IJobRegistrationRequest {
 		'CompanyName'         => 'Varchar(255)',
 		'Description'         => 'HTMLText',
 		'Instructions2Apply'  => 'HTMLText',
-		'ExpirationDate'      => 'Date',
+		'ExpirationDate'      => 'SS_Datetime',
 		//contact
 		'PointOfContactName'  => 'Varchar(100)',
 		'PointOfContactEmail' => 'Varchar(100)',
@@ -40,18 +40,24 @@ implements IJobRegistrationRequest {
 		'City'                => 'Varchar(100)',
 		'State'               => 'Varchar(50)',
 		'Country'             => 'Varchar(50)',
+        'IsCOANeeded'         => 'Boolean',
 	);
 
 	private static $has_one = array(
 		'Member'  => 'Member',
 		'Company' => 'Company',
+        'Type'    => 'JobType',
 	);
 
+    private static $defaults = array(
+        "isRejected"  => 0,
+        "IsCOANeeded" => 0,
+    );
 
-	static $has_many = array(
+    static $has_many = array
+    (
 		'Locations'  => 'JobLocation',
 	);
-
 
 	static $indexes = array(
 
@@ -65,7 +71,7 @@ implements IJobRegistrationRequest {
 		if(empty($this->ExpirationDate)){
 			$expiration_date = new DateTime;
 			$expiration_date->add(new DateInterval('P2M'));
-			$this->ExpirationDate = $expiration_date->format('Y-m-d');
+			$this->ExpirationDate = $expiration_date->format('Y-m-d H:i:s');
 		}
 	}
 	/**
@@ -122,11 +128,15 @@ implements IJobRegistrationRequest {
 		$this->Description        = $info->getDescription();
 		$this->Instructions2Apply = $info->getInstructions();
 		$this->LocationType       = $info->getLocationType();
-		if($info->getCompany()->ID > 0)
-			$this->CompanyID          = $info->getCompany()->ID;
-		else
-			$this->CompanyName        = $info->getCompany()->Name;
+        $this->IsCOANeeded        = $info->isCoaNeeded();
+        $this->TypeID             = intval($info->getType());
+    	$this->CompanyID       = $info->getCompany()->ID;
+		$this->CompanyName     = $info->getCompany()->Name;
 	}
+
+	public function getCompanyName(){
+	    return intval($this->CompanyID) > 0 ? $this->Company()->Name : $this->getField('CompanyName');
+    }
 
 	/**
 	 * @param IJobLocation $location
@@ -150,9 +160,23 @@ implements IJobRegistrationRequest {
 	 */
 	function getMainInfo()
 	{
-		$company = $this->Company();
-		$company->Name = $this->CompanyName;
-		return new JobMainInfo($this->Title, $company,$this->Url, $this->Description, $this->Instructions2Apply, $this->LocationType, new DateTime($this->ExpirationDate));
+		$company       = $this->Company();
+
+        if($this->CompanyID == 0)
+		    $company->Name = $this->CompanyName;
+
+		return new JobMainInfo
+        (
+            $this->Title,
+            $this->IsCOANeeded,
+            $this->TypeID,
+            $company,
+            $this->Url,
+            $this->Description,
+            $this->Instructions2Apply,
+            $this->LocationType,
+            new DateTime($this->ExpirationDate)
+        );
 	}
 
 	/**

@@ -1,49 +1,63 @@
 <schedule-main-filters>
     <div class="row all-events-filter-row">
-        <div class="col-xs-9 all-events-filter-link">
+        <div class="col-md-6 col-xs-12 all-events-filter-link">
             <div class="col-filter-btn">
                 <i title="" data-placement="right" data-toggle="tooltip" id="toggle-all-events-filters" class="fa fa-filter" data-original-title="Toggle Advanced Filters"></i>
             </div>
             <div class="col-filter-title">
-                <span>Calendar Search Filters</span>
-            </div>
-            <div class="">
-                <button if={ summit.current_user !== null } type="button" class="btn btn-primary pull-left switch_schedule full"><span class="glyphicon glyphicon-calendar"></span>&nbsp;<span class="content">Switch to My Schedule</span></button>
+                <span>Schedule&nbsp;Filters</span>
+                <a onclick={ clearFilters } id="clear-filters">CLEAR&nbsp;FILTERS&nbsp;<i class="fa fa-times"></i></a>
             </div>
         </div>
-        <div class="col-xs-3 login-container" if={ summit.current_user == null }>
-            <form id="MemberLoginForm_LoginForm" action="Security/login?BackURL={ base_url  }" method="post" enctype="application/x-www-form-urlencoded">
-                <input type="hidden" name="fragment" id="fragment"/>
-                <div class="Actions">
-                    <input class="action btn btn-default" type="submit" name="action_dologin" value="Log in" title="Log in"/>
-                </div>
-            </form>
+        <div class="col-md-5 col-xs-12">
+            <div class="col-view-all-schedule">
+                <form action="{ base_url+'mine/' }" method="POST" if={ mine }>
+                    <input type="hidden" name="goback" value="1" />
+                    <button type="submit" class="btn btn-default view-all-schedule">View&nbsp;/&nbsp;Print&nbsp;My&nbsp;Schedule</button>
+                </form>
+                <form action="{ base_url+'full/' }" method="POST" if={ !mine }>
+                    <input type="hidden" name="goback" value="1" />
+                    <button type="submit" class="btn btn-default view-all-schedule">View&nbsp;/&nbsp;Print&nbsp;Full&nbsp;Schedule</button>
+                </form>
+            </div>
+            <div class="col-switch-schedule">
+                <button if={ summit.current_user !== null } type="button" class="btn btn-primary pull-right switch_schedule full">
+                    <span class="glyphicon glyphicon-calendar"></span>&nbsp;<span class="content">Switch&nbsp;to&nbsp;My&nbsp;Schedule</span>
+                </button>
+            </div>
         </div>
     </div>
+    <div class="rsvp-note" if={ summit.current_user !== null }>
+        Please note that adding an item to "My Schedule" does not guarantee a seat in the presentation.
+        Rooms fill up fast, so get there early. Some events require an RSVP and, in those cases, you will see a link to RSVP to the event.
+    </div>
    <div id="all-events-filter-wrapper" class="row">
+        <div class="col-sm-12">
+            <a href="{ summit.track_list_link }" target="_blank">Learn more about the { summit.title } Summit Categories and Tracks.</a>
+        </div>
         <div class="col-sm-15 col-xs-12 single-filter-wrapper first">
-            <select id="ddl_summit_types" name="ddl_summit_types" data-placeholder="Summit Type"  multiple="multiple">
-                <option each={ id, obj in summit.summit_types } data-color="{ obj.color }" value="{ id }">{ obj.name }</option>
+            <select id="ddl_track_groups" name="ddl_track_groups" data-placeholder="Summit Categories" size="5"  multiple="multiple">
+                <option each={ track_group_id, idx in summit.category_group_ids } value="{ track_group_id }">{ summit.category_groups[track_group_id].name }</option>
              </select>
         </div>
-        <div class="col-sm-15 col-xs-12 single-filter-wrapper">
-            <select id="ddl_event_types" name="ddl_event_types" data-placeholder="Event Type"  multiple="multiple">
-                <option each={ id, obj in summit.event_types } value="{ id }">{ obj.type }</option>
+         <div class="col-sm-15 col-xs-12 single-filter-wrapper">
+            <select id="ddl_tracks" data-placeholder="Tracks"  multiple="multiple" style="overflow-y: scroll;">
+                <option each={ track_id, idx in summit.track_ids } value="{ track_id }">{ summit.tracks[track_id].name }</option>
             </select>
         </div>
         <div class="col-sm-15 col-xs-12 single-filter-wrapper">
-            <select id="ddl_tracks" data-placeholder="Presentation Tracks"  multiple="multiple">
-                <option each={ id, obj in summit.tracks } value="{ id }">{ obj.name }</option>
+            <select id="ddl_event_types" name="ddl_event_types" data-placeholder="Event Types" size="7" multiple="multiple">
+                <option each={ event_type_id, idx in summit.event_type_ids } value="{ event_type_id }">{ summit.event_types[event_type_id].type }</option>
             </select>
         </div>
         <div class="col-sm-15 col-xs-12 single-filter-wrapper">
-            <select id="ddl_levels" data-placeholder="Presentation Levels"  multiple="multiple">
+            <select id="ddl_levels" data-placeholder="Presentation Level"  multiple="multiple">
                 <option each={ id, obj in summit.presentation_levels } value="{ id }">{ obj.level }</option>
             </select>
         </div>
         <div class="col-sm-15 col-xs-12 single-filter-wrapper">
-            <select id="ddl_tags" data-placeholder="Tags"  multiple="multiple">
-                <option each={ id, obj in summit.tags } value="{ id }">{ obj.name }</option>
+            <select id="ddl_tags" data-placeholder="Tags"  multiple="multiple" style="overflow-y: scroll;">
+                <option each={ tag_id, idx in summit.tag_ids } value="{ tag_id }">{ summit.tags[tag_id].name }</option>
             </select>
         </div>
     </div>
@@ -52,12 +66,13 @@
 
         this.summit           = opts.summit;
         this.schedule_filters = opts.schedule_filters;
+        this.calendar_synch   = opts.calendar_synch;
         this.atomic_filtering = false;
         this.base_url         = opts.base_url;
+        this.mine             = false;
         var self              = this;
 
         this.on('mount', function(){
-
             // Tooltips
             if(!('ontouchstart' in window)) {
                 $('[data-toggle="tooltip"]').tooltip();
@@ -66,33 +81,61 @@
             $('#toggle-all-events-filters').click(function(event) {
                 if ( $('#all-events-filter-wrapper').is( ":hidden" ) ) {
                     $('#all-events-filter-wrapper').slideDown( "slow" );
+                    $('#clear-filters').show();
                 } else {
                     $('#all-events-filter-wrapper').slideUp( "slow" );
+                    $('#clear-filters').hide();
                 }
                 $(this).toggleClass('active');
                 event.preventDefault();
             });
 
-            $('#ddl_summit_types').chosen({  width: '100%'});
+            $('#ddl_track_groups').chosen({  width: '100%'});
             $('#ddl_event_types').chosen({  width: '100%'});
             $('#ddl_tracks').chosen({  width: '100%'});
             $('#ddl_tags').chosen({ width: '100%'});
             $('#ddl_levels').chosen({ width: '100%'});
 
-            $('#ddl_summit_types').change(function(e, params){
-                if(!self.atomic_filtering)
-                    self.doFilter();
-                var choices = $('.search-choice','#ddl_summit_types_chosen');
+            $('#ddl_track_groups').change(function(e, params){
+
+                var choices          = $('.search-choice','#ddl_track_groups_chosen');
+                var filtered_tracks  = [];
+                var selected_groups  = $('#ddl_track_groups').val();
+                //clear current track filter
+                $('#ddl_tracks').val('').trigger('chosen:updated');
+                $(window).url_fragment('setParam','tracks', '');
+                window.location.hash = $(window).url_fragment('serialize');
+                $("#ddl_tracks option").show();
+
                 if(choices.length > 0){
                     choices.each(function(index, e){
-                        var a      = $('.search-choice-close', $(this));
-                        var idx    = $(a).attr('data-option-array-index');
-                        var option = $("#ddl_summit_types option")[parseInt(idx)];
-                        var color  = $(option).attr('data-color');
+                        var a            = $('.search-choice-close', $(this));
+                        var idx          = $(a).attr('data-option-array-index');
+                        var option       = $("#ddl_track_groups option")[parseInt(idx)];
+                        var color        = $(option).attr('data-color');
                         $(this).css('background-color', color);
                         $(this).css('background-image','none');
                     });
                 }
+
+                // get the groups
+                if(selected_groups != null)
+                    $.each(selected_groups, function(index, group_id){
+                           var group        = self.summit.category_groups[group_id];
+                           filtered_tracks  = filtered_tracks.concat(group.tracks);
+                    });
+
+                if(filtered_tracks.length > 0){
+                    $.each(self.summit.tracks, function(index, track){
+                        if(filtered_tracks.indexOf(track.id) < 0)
+                            $('#ddl_tracks').children("option[value="+track.id+"]").hide();
+                     });
+                }
+
+                $('#ddl_tracks').trigger('chosen:updated');
+
+                 if(!self.atomic_filtering)
+                    self.doFilter();
             });
 
             $('#ddl_event_types').change(function(e, params){
@@ -116,19 +159,21 @@
             });
 
             $('.switch_schedule').click(function(e){
-                var mine = false;
                 if ($(this).hasClass('full'))
                 {
-                    mine = true;
+                    self.mine = true;
                     $('.content', this).text('Switch to Full Schedule');
                 }
                 else
                 {
+                    self.mine = false;
                     $('.content', this).text('Switch to My Schedule');
                 }
                 $(this).toggleClass('full');
                 if(!self.atomic_filtering)
                     self.doFilter();
+
+                self.update();
             });
 
             var hash = $(window).url_fragment('getParams');
@@ -143,9 +188,9 @@
                     var ddl    = null;
 
                     switch(key) {
-                        case 'summit_types':
+                        case 'track_groups':
                         {
-                            ddl = $('#ddl_summit_types');
+                            ddl = $('#ddl_track_groups');
                         }
                         break;
                         case 'event_types':
@@ -185,7 +230,7 @@
             var own    = this.summit.current_user !== null && $('.switch_schedule').hasClass('full') === false;
             var filters =
             {
-                summit_types : $('#ddl_summit_types').val(),
+                track_groups : $('#ddl_track_groups').val(),
                 event_types  : $('#ddl_event_types').val(),
                 tracks       : $('#ddl_tracks').val(),
                 tags         : $('#ddl_tags').val(),
@@ -193,7 +238,7 @@
                 own          : own
             };
 
-            $(window).url_fragment('setParam','summit_types', filters.summit_types);
+            $(window).url_fragment('setParam','track_groups', filters.track_groups);
             $(window).url_fragment('setParam','event_types', filters.event_types);
             $(window).url_fragment('setParam','tracks', filters.tracks);
             $(window).url_fragment('setParam','tags', filters.tags);
@@ -202,6 +247,26 @@
 
             self.schedule_filters.publishFiltersChanged(filters);
         }
+
+        clearFilters() {
+            $('#ddl_track_groups').val('').trigger("chosen:updated");
+            $('#ddl_event_types').val('').trigger("chosen:updated");
+            $('#ddl_tracks').val('').trigger("chosen:updated");
+            $('#ddl_tags').val('').trigger("chosen:updated");
+            $('#ddl_levels').val('').trigger("chosen:updated");
+            self.doFilter();
+        }
+
+        this.schedule_filters.on('scheduleToggleFilters', function(hide){
+            if (hide) {
+                $('.all-events-filter-link').fadeOut();
+                $('#all-events-filter-wrapper').slideUp();
+                $('#toggle-all-events-filters').removeClass('active');
+                self.clearFilters();
+            } else {
+                $('.all-events-filter-link').fadeIn();
+            }
+        });
 
     </script>
 </schedule-main-filters>

@@ -30,10 +30,10 @@ class PresentationMemberExtension extends DataExtension
      */
     public function getRandomisedPresentations($category_id = null, $summit = null) {
         $mid = Member::currentUserID();
-        if(!$summit) $summit = Summit::get_active();
-        $priority = $this->owner->VotingList();        
+        if(!$summit) $summit = Summit::get_active();        
+        $priority = $this->owner->VotingList();
 
-        if(!$priority->exists() || $priority->SummitID !== $summit->ID) {
+        if(!$priority->exists() || $priority->SummitID != $summit->ID) {        	
         	$priority = PresentationRandomVotingList::get()->filter(
         		'SummitID', 
         		$summit->ID
@@ -43,6 +43,7 @@ class PresentationMemberExtension extends DataExtension
         	if(!$priority) {
         		return false;        	
         	}
+
         	$this->owner->VotingListID = $priority->ID;
         	$this->owner->write();
         }
@@ -50,13 +51,7 @@ class PresentationMemberExtension extends DataExtension
         $list = $priority->getPriorityList();
         if(!count($list)) return false;
         
-        $presentations =  Presentation::get()
-                ->innerJoin('PresentationCategory', 'PresentationCategory.ID = Presentation.CategoryID')
-                ->where("SummitEvent.Title IS NOT NULL")
-                ->where("SummitEvent.Title <> '' ")
-                ->where("PresentationCategory.VotingVisible = 1 ")                
-                ->filter('Presentation.Status', 'Received')
-                ->filter('SummitID', $summit->ID)
+        $presentations = $summit->VoteablePresentations()
                 ->sort("FIND_IN_SET(Presentation.ID, '".implode(',', $list)."')");
 
         if(!empty($category_id) && intval($category_id) > 0) {

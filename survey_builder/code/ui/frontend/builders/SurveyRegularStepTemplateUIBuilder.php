@@ -52,7 +52,7 @@ class SurveyRegularStepTemplateUIBuilder implements ISurveyStepUIBuilder
             $fields->add(new LiteralField('hr', '<hr/>'));
 
         foreach ($step->template()->getQuestions() as $q) {
-
+            if ($q->isHidden()) continue;
             $type          = $q->Type();
             $builder_class = $type.'UIBuilder';
             // @ISurveyQuestionTemplateUIBuilder

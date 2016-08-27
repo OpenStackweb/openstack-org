@@ -267,4 +267,18 @@ jQuery(document).ready(function($){
 
         $('#speakersExportAlert').addClass('hidden');
     });
+
+    // Export Speakers Submissions
+    $('#speakersSubmissionsExport').submit(function() {
+        var ext = $(document.activeElement).data('ext');
+        $('#ext').val(ext);
+
+        if ($('.submit-filter:checked').length == 0) {
+            $('#speakersExportAlert').removeClass('hidden');
+            $(window).scrollTop(0);
+            return false;
+        }
+
+        $('#speakersExportAlert').addClass('hidden');
+    });
 });

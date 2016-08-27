@@ -47,6 +47,11 @@ interface ISurveyQuestionTemplate extends IEntity {
      */
     public function isVisible();
 
+    /**
+     * @return bool
+     */
+    public function isHidden();
+
 
     /**
      * @return ISurveyQuestionTemplate[]

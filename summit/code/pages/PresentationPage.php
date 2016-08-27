@@ -2,6 +2,7 @@
 
 /**
  * Class PresentationPage
+ * Call for Speakers
  */
 class PresentationPage extends SummitPage
 {
@@ -68,11 +69,33 @@ class PresentationPage_Controller extends SummitPage_Controller
     private $speaker_registration_request_manager;
 
     /**
+     * @var IPresentationManager
+     */
+    private $presentation_manager;
+
+    /**
      * @return ISpeakerRegistrationRequestManager
      */
     public function getSpeakerRegistrationRequestManager()
     {
         return $this->speaker_registration_request_manager;
+    }
+
+    /**
+     * @return IPresentationManager
+     */
+    public function getPresentationManager()
+    {
+        return $this->presentation_manager;
+    }
+
+    /**
+     * @param IPresentationManager $presentation_manager
+     * @return void
+     */
+    public function setPresentationManager(IPresentationManager $presentation_manager)
+    {
+        $this->presentation_manager = $presentation_manager;
     }
 
     /**
@@ -109,6 +132,72 @@ class PresentationPage_Controller extends SummitPage_Controller
     }
 
     /**
+     * @var ISpeakerManager
+     */
+    private $speaker_manager;
+
+    /**
+     * @return ISpeakerManager
+     */
+    public function getSpeakerManager()
+    {
+        return $this->speaker_manager;
+    }
+
+    /**
+     * @param ISpeakerManager $speaker_manager
+     * @return void
+     */
+    public function setSpeakerManager(ISpeakerManager $speaker_manager)
+    {
+        $this->speaker_manager = $speaker_manager;
+    }
+
+    /**
+     * @var ISpeakerRepository
+     */
+    private $speaker_repository;
+
+    /**
+     * @return ISpeakerRepository
+     */
+    public function getSpeakerRepository()
+    {
+        return $this->speaker_repository;
+    }
+
+    /**
+     * @param ISpeakerRepository $speaker_repository
+     * @return void
+     */
+    public function setSpeakerRepository(ISpeakerRepository $speaker_repository)
+    {
+        $this->speaker_repository = $speaker_repository;
+    }
+
+    /**
+     * @var IMemberRepository
+     */
+    private $member_repository;
+
+    /**
+     * @return IMemberRepository
+     */
+    public function getMemberRepository()
+    {
+        return $this->member_repository;
+    }
+
+    /**
+     * @param IMemberRepository $member_repository
+     * @return void
+     */
+    public function setMemberRepository(IMemberRepository $member_repository)
+    {
+        $this->member_repository = $member_repository;
+    }
+
+    /**
      * Check for auth tokens
      * @return mixed
      */
@@ -132,40 +221,39 @@ class PresentationPage_Controller extends SummitPage_Controller
             $speaker_registration_token = $this->request->getVar(SpeakerRegistrationRequest::ConfirmationTokenParamName);
 
             if (!is_null($speaker_registration_token)) {
+                // send it to SummitSecurity Controller to complete speaker registration
                 $request = $this->speaker_registration_request_repository->getByConfirmationToken($speaker_registration_token);
 
                 if (is_null($request) || $request->alreadyConfirmed()) {
-                    return SummitSecurity::permission_failure($this);
+                    return $this->httpError(404);
                 }
 
                 // redirect to register member speaker
                 $url = Controller::join_links(Director::baseURL(), 'summit-login', 'registration');
-
-                return $this->redirect($url . '?BackURL=' . urlencode($this->request->getURL()) . '&' . SpeakerRegistrationRequest::ConfirmationTokenParamName . '=' . $speaker_registration_token);
+                Session::set(SpeakerRegistrationRequest::ConfirmationTokenParamName, $speaker_registration_token);
+                Session::set('BackURL', $this->request->getURL());
+                return $this->redirect($url);
             }
 
             return SummitSecurity::permission_failure($this);
         }
 
-        $speaker = Member::currentUser()->getSpeakerProfile();
+        $this->speaker_manager->ensureSpeakerProfile(Member::currentUser());
 
-        if (!$speaker) {
-            $speaker = PresentationSpeaker::create
-            (
-                array
-                (
-                    'MemberID' => Member::currentUserID(),
-                    'FirstName' => Member::currentUser()->FirstName,
-                    'LastName' => Member::currentUser()->Surname
-                )
-            );
-            $speaker->write();
-        }
     }
 
-    public function MaxAllowedPresentations()
-    {
-        return MAX_SUMMIT_ALLOWED_PER_USER;
+    // template helper methods
+
+    public function isCallForSpeakerOpen(){
+        return $this->presentation_manager->isCallForSpeakerOpen($this->Summit(), Member::currentUser()->getSpeakerProfile());
+    }
+
+    public function isPresentationSubmissionAllowed(){
+        return $this->presentation_manager->isPresentationSubmissionAllowedFor(Member::currentUser()->getSpeakerProfile(), $this->Summit());
+    }
+
+    public function canEditPresentation($presentation_id){
+        return $this->presentation_manager->canEditPresentation($presentation_id, Member::currentUser()->getSpeakerProfile());
     }
 
     /**
@@ -179,32 +267,26 @@ class PresentationPage_Controller extends SummitPage_Controller
 
         $summit = $this->Summit();
 
-        if (is_null($summit) || $summit->ID == 0 || !$summit->isPresentationEditionAllowed()) {
-            return $this->httpError(403, 'Call for speaker closed!');
-        }
-
-        if ($r->param('PresentationID') === 'new')
+        if (is_null($summit) ||
+            !$summit->exists()||
+            !$this->presentation_manager->isPresentationEditionAllowed(Member::currentUser(), $summit)
+        )
         {
-
-            if(Member::currentUser()->getSpeakerProfile()->hasReachPresentationLimitBy($summit->ID))
-                return $this->httpError(403, "You reached presentations submissions limit");
-
-            $presentation = Presentation::create();
-            $presentation->SummitID  = $summit->ID;
-            $presentation->CreatorID = Member::currentUserID();
-            $presentation->write();
-            return $this->redirect($presentation->EditLink());
+            $r->setUrl($this->Link());//clean up dir parts so we could redirect without 404
+            return $this->redirect($this->Link(), 301);
         }
-        else
-        {
-            $presentation = Presentation::get()->byID($r->param('PresentationID'));
-        }
+
+        $presentation_id = Convert::raw2sql($r->param('PresentationID'));
+
+        $presentation = $presentation_id=== 'new' ?
+            Presentation::create() :
+            Presentation::get()->byID($presentation_id);
 
         if (!$presentation) {
             return $this->httpError(404);
         }
 
-        if ($presentation->isInDB() && !$presentation->canEdit()) {
+        if ($presentation->isInDB() && !$this->canEditPresentation($presentation->ID)) {
             return $this->httpError(403, "You can't edit this presentation");
         }
 
@@ -217,14 +299,11 @@ class PresentationPage_Controller extends SummitPage_Controller
         return $request->handleRequest($r, DataModel::inst());
     }
 
-
     public function vote(SS_HTTPRequest $r)
     {
         Requirements::clear();
-
         return $this;
     }
-
 
     /**
      * Action that shows user's presentations
@@ -263,7 +342,8 @@ class PresentationPage_Controller extends SummitPage_Controller
         $form = SpeakerForm::create(
             $this,
             "BioForm",
-            FieldList::create(FormAction::create('doSaveBio', 'Save'))
+            FieldList::create(FormAction::create('doSaveBio', 'Save')),
+            $this->Summit()
         );
 
         // add affiliations to my speaker
@@ -307,7 +387,6 @@ class PresentationPage_Controller extends SummitPage_Controller
         return Member::currentUser()->getRandomisedPresentations();
     }
 
-
     /**
      * Gets all the presentations that this user has voted on
      * @return  DataList
@@ -317,7 +396,6 @@ class PresentationPage_Controller extends SummitPage_Controller
         return Member::currentUser()->getVotedPresentations();
     }
 
-
     /**
      * The link to create a new presentation
      * @return  string
@@ -326,7 +404,6 @@ class PresentationPage_Controller extends SummitPage_Controller
     {
         return Controller::join_links($this->Link(), 'manage', 'new', 'edit');
     }
-
 
     /**
      * The form used to vote on a presentation
@@ -358,12 +435,7 @@ class PresentationPage_Controller extends SummitPage_Controller
      */
     public function doVote($data, $form)
     {
-        $presentation = $this->getPresentationFromRequest();
-        $presentation->setUserVote($data['Vote']);
-
-
-        Member::currentUser()->removePresentation($data['PresentationID']);
-
+        $this->presentation_manager->voteFor($this->getPresentationFromRequest(), Member::currentUser(), $data['Vote']);
         return $this->redirect($this->Link());
     }
 
@@ -399,6 +471,8 @@ class PresentationPage_Controller extends SummitPage_Controller
 class PresentationPage_ManageRequest extends RequestHandler
 {
 
+    use RestfulJsonApiResponses;
+
     private static $allowed_actions = array(
         'summary',
         'tags',
@@ -415,13 +489,15 @@ class PresentationPage_ManageRequest extends RequestHandler
         'success',
         'speakers',
         'preview',
+        'searchSpeaker',
      );
 
 
-    private static $url_handlers = array(
+    private static $url_handlers = array
+    (
+        'speakers/search'     => 'searchSpeaker',
         'speaker/$SpeakerID!' => 'handleSpeaker'
     );
-
 
     /**
      * @var  PresentationPage_Controller The parent controller
@@ -436,15 +512,15 @@ class PresentationPage_ManageRequest extends RequestHandler
 
 
     /**
-     * Constructor for the request handler
-     * @param   $presentation The Presentation object being updated
-     * @param   $parent The parent PresentationPage_Controller object
+     * PresentationPage_ManageRequest constructor.
+     * @param Presentation $presentation
+     * @param PresentationPage_Controller $parent
      */
     public function __construct(Presentation $presentation, PresentationPage_Controller $parent)
     {
         parent::__construct();
         $this->presentation = $presentation;
-        $this->parent = $parent;
+        $this->parent       = $parent;
     }
 
     /**
@@ -455,7 +531,6 @@ class PresentationPage_ManageRequest extends RequestHandler
         return $this->parent->Summit();
     }
 
-
     /**
      * Helper for redirect back. Needed for validator.
      * @return SS_HTTPResponse
@@ -464,7 +539,6 @@ class PresentationPage_ManageRequest extends RequestHandler
     {
         return $this->parent->redirectBack();
     }
-
 
     /**
      * Accesses the parent controller
@@ -475,7 +549,6 @@ class PresentationPage_ManageRequest extends RequestHandler
         return $this->parent;
     }
 
-
     /**
      * Gets the presentation
      * @return Presentation
@@ -485,7 +558,6 @@ class PresentationPage_ManageRequest extends RequestHandler
         return $this->presentation;
     }
 
-
     /**
      * Determines if the controller is in "create" mode
      * @return  boolean
@@ -494,7 +566,6 @@ class PresentationPage_ManageRequest extends RequestHandler
     {
         return $this->presentation->isNew();
     }
-
 
     /**
      * Creates a link to this controller
@@ -532,7 +603,8 @@ class PresentationPage_ManageRequest extends RequestHandler
             return $this->httpError(404, 'Speaker not found');
         }
 
-        if ($speaker->isInDB() && !$speaker->Presentations()->byID($this->presentation->ID)) {
+        if ($speaker->isInDB() &&
+           (!$speaker->Presentations()->byID($this->presentation->ID) && $this->presentation->ModeratorID != $speaker->ID)) {
             return $this->httpError(403, 'That speaker is not part of this presentation');
         }
 
@@ -541,6 +613,18 @@ class PresentationPage_ManageRequest extends RequestHandler
         return $request->handleRequest($r, DataModel::inst());
     }
 
+    public function searchSpeaker(SS_HTTPRequest $request){
+
+        if(!$this->checkOwnAjaxRequest())
+            return $this->forbiddenError();
+
+        if(!Member::currentUser())
+            return $this->permissionFailure();
+
+        $term = Convert::raw2sql($request->getVar('term'));
+        $data = $this->parent->getSpeakerManager()->getSpeakerByTerm($term, true);
+        return $this->ok($data);
+    }
 
     /**
      * Default controller action. Forwards to the main edit page for a presentation
@@ -551,7 +635,6 @@ class PresentationPage_ManageRequest extends RequestHandler
     {
         return $this->parent->redirect($this->Link('summary'));
     }
-
 
     /**
      * Controller action that handles the main page for creating or editing
@@ -565,7 +648,6 @@ class PresentationPage_ManageRequest extends RequestHandler
             'Presentation' => $this->presentation
         ))->renderWith(array('PresentationPage_summary', 'PresentationPage'), $this->parent);
     }
-
 
     /**
      * Controller action that handles the list of speakers for the presentation
@@ -594,17 +676,29 @@ class PresentationPage_ManageRequest extends RequestHandler
      */
     public function delete(SS_HTTPRequest $r)
     {
-        if (!SecurityToken::inst()->check($r->getVar('t'))) {
-            return $this->httpError(403, "Security token doesn't match.");
-        }
-
-        if ($this->presentation->canDelete()) {
-            $this->presentation->delete();
-
+        try
+        {
+            if (!SecurityToken::inst()->check($r->getVar('t')))
+                throw new Exception("Security token doesn't match.");
+            $presentation_id = intval($r->param('PresentationID'));
+            $this->getParent()->getPresentationManager()->removePresentation($presentation_id);
             return $this->parent->redirect($this->parent->Link());
         }
-
-        return $this->httpError(403, 'You cannot delete this presentation');
+        catch(NotFoundEntityException $ex1)
+        {
+            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
+            return $this->httpError(404, 'Presentation does not exists');
+        }
+        catch(EntityValidationException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->httpError(412, $ex2->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->httpError(403, 'You cannot delete this presentation');
+        }
     }
 
 
@@ -621,7 +715,6 @@ class PresentationPage_ManageRequest extends RequestHandler
         ))->renderWith(array('PresentationPage_confirm', 'PresentationPage'), $this->parent);
     }
 
-
     /**
      * Generates a preview iframe of the presentation
      * @param  SS_HTTPRequest $r
@@ -634,7 +727,6 @@ class PresentationPage_ManageRequest extends RequestHandler
         ))->renderWith('PresentationPage_previewiframe');
     }
 
-
     /**
      * Controller action that handles the "success" page
      * @param   $r SS_HTTPRequest
@@ -642,49 +734,21 @@ class PresentationPage_ManageRequest extends RequestHandler
      */
     public function success(SS_HTTPRequest $r)
     {
-        try {
-            $speakers = $this->presentation->Speakers()->exclude(array(
-                'MemberID' => $this->presentation->CreatorID
-            ));
-
-            $this->presentation->markReceived()->write();
-
-            foreach ($speakers as $speaker) {
-
-                $e = Email::create()
-                    ->setTo($speaker->getEmail())
-                    ->setUserTemplate('presentation-speaker-notification')
-                    ->populateTemplate(array(
-                        'RecipientMember' => $speaker->Member(),
-                        'Presentation' => $this->presentation,
-                        'Speaker' => $speaker,
-                        'Creator' => $this->presentation->Creator(),
-                        'EditLink' => Director::makeRelative($speaker->EditLink($this->presentation->ID)),
-                        'ReviewLink' => Director::makeRelative($speaker->ReviewLink($this->presentation->ID)),
-                        'PasswordLink' => Director::absoluteBaseURL() . '/lostpassword',
-                        'Link' => Director::absoluteBaseURL() . Director::makeRelative($this->presentation->EditLink()),
-                    ))
-                    ->send();
-            }
-
-            // Email the creator
-            Email::create()
-                ->setTo($this->presentation->Creator()->Email)
-                ->setUserTemplate('presentation-creator-notification')
-                ->populateTemplate(array(
-                    'Creator' => $this->presentation->Creator(),
-                    'Summit' => $this->presentation->Summit(),
-                    'Link' => Director::absoluteBaseURL() . Director::makeRelative($this->presentation->EditLink()),
-                    'PasswordLink' => Director::absoluteBaseURL() . '/lostpassword'
-                ))
-                ->send();
-
+        try
+        {
+            $this->getParent()->getPresentationManager()->completePresentation
+            (
+                $this->presentation,
+                new PresentationSpeakerNotificationEmailMessageSender,
+                new PresentationCreatorNotificationEmailMessageSender,
+                new PresentationModeratorNotificationEmailMessageSender
+            );
             return $this->renderWith(array('PresentationPage_success', 'PresentationPage'), $this->parent);
         }
         catch(EntityValidationException $ex1)
         {
-            SS_Log::log($ex1->getMessage(), SS_Log::ERR);
-            Form::messageForForm('PresentationForm_PresentationForm', $ex1->getMessages(),'bad');
+            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
+            Form::messageForForm('PresentationForm_PresentationForm', $ex1,'bad');
             return Controller::curr()->redirect($this->presentation->EditLink());
         }
         catch(Exception $ex){
@@ -706,8 +770,11 @@ class PresentationPage_ManageRequest extends RequestHandler
             "PresentationForm",
             FieldList::create
             (
-                FormAction::create('savePresentationSummary', 'Save and continue')
-            )
+                FormAction::create('savePresentationSummary', 'Save and continue')->addExtraClass('btn-primary')
+            ),
+            $this->Summit(),
+            $this->parent->getPresentationManager(),
+            $this->presentation
         );
 
         if ($data = Session::get("FormInfo.{$form->FormName()}.data")) {
@@ -715,18 +782,16 @@ class PresentationPage_ManageRequest extends RequestHandler
             return $form;
         }
 
-        // ugh...
-        if ($this->presentation->OtherTopic && !$this->presentation->CategoryID) {
-            $this->presentation->CategoryID = 'other';
-        }
-
-        return $form->loadDataFrom($this->presentation);
-
+        return ($this->presentation->exists())? $form->loadDataFrom($this->presentation):$form;
     }
 
     public function PresentationTagsForm()
     {
-        $fields = FieldList::create()->tagmanager('Tags', 'Tags');
+        $fields = FieldList::create();
+        $tag_field = new TagManagerField('Tags', 'Tags');
+        $tag_field->setCategory($this->presentation->Category());
+        $fields->add($tag_field);
+
         $form   = new BootstrapForm($this, 'PresentationTagsForm', $fields ,
             FieldList::create(
                 FormAction::create('savePresentationTags', 'Save')
@@ -738,64 +803,90 @@ class PresentationPage_ManageRequest extends RequestHandler
         return $form->loadDataFrom($this->presentation);
     }
 
-
     /**
      * Creates the speaker add/edit form
      * @return  Form
      */
     public function AddSpeakerForm()
     {
+        Requirements::css('themes/openstack/bower_assets/jquery-ui/themes/ui-lightness/jquery-ui.min.css');
+        Requirements::javascript('themes/openstack/bower_assets/jquery-ui/jquery-ui.min.js');
+        Requirements::customScript(sprintf("var speaker_search_url = '%s/%s'; ", $this->Link('speakers'), 'search'));
+        Requirements::javascript('summit/javascript/AddSpeakerForm.js');
+
         $summit = $this->Summit();
+        $max_speakers_reached = $this->presentation->maxSpeakersReached();
+        $max_moderators_reached = $this->presentation->maxModeratorsReached();
+        $speaker_type = (!$max_moderators_reached) ? 'Moderator' : 'Speaker';
+        $presentation_type = $this->presentation->getTypeName();
 
         $fields = FieldList::create(
             LiteralField::create('SpeakerNote',
-                '<p class="at-least-one">Each presentation needs at least one speaker.</p>'),
+                '<p class="at-least-one">Each '.$presentation_type.' needs at least one '.$speaker_type.'.</p>'),
             OptionsetField::create('SpeakerType', '', array(
-                'Me' => 'Add yourself as a speaker to this presentation',
+                'Me'   => 'Add yourself as a '.$speaker_type.' to this '.$presentation_type,
                 'Else' => 'Add someone else'
             ))->setValue('Me'),
             LiteralField::create('LegalMe', sprintf('
-            <div id="legal-me" style="display: none;">
-             <label>
-                Speakers agree that OpenStack Foundation may record and publish their talks presented during the %s OpenStack Summit. If you submit a proposal on behalf of a speaker, you represent to OpenStack Foundation that you have the authority to submit the proposal on the speaker’s behalf and agree to the recording and publication of their presentation.
-            </label>
-            </div>', $summit->Title)),
-            EmailField::create('EmailAddress',
-                "To add another person as a speaker, you will need their email address. (*)")
+                <div id="legal-me" style="display: none;">
+                 <label>
+                    '.$speaker_type.'s agree that OpenStack Foundation may record and publish their talks presented during the %s OpenStack Summit. If you submit a proposal on behalf of a speaker, you represent to OpenStack Foundation that you have the authority to submit the proposal on the speaker’s behalf and agree to the recording and publication of their presentation.
+                </label>
+                </div>', $summit->Title)),
+            TextField::create('EmailAddress',
+                "To add another person as a ".$speaker_type.", you will need their first name, last name or email address. (*)")
                 ->displayIf('SpeakerType')
                 ->isEqualTo('Else')
                 ->end(),
+            HiddenField::create('SpeakerId','SpeakerId'),
+            HiddenField::create('MemberId','MemberId'),
             LiteralField::create('LegalOther', sprintf('
-            <div id="legal-other" style="display: none;">
-             <label>
-                Speakers agree that OpenStack Foundation may record and publish their talks presented during the %s OpenStack Summit. If you submit a proposal on behalf of a speaker, you represent to OpenStack Foundation that you have the authority to submit the proposal on the speaker’s behalf and agree to the recording and publication of their presentation.
-            </label>
-            </div>', $summit->Title))
-
+                <div id="legal-other" style="display: none;">
+                 <label>
+                    '.$speaker_type.'s agree that OpenStack Foundation may record and publish their talks presented during the %s OpenStack Summit. If you submit a proposal on behalf of a speaker, you represent to OpenStack Foundation that you have the authority to submit the proposal on the speaker’s behalf and agree to the recording and publication of their presentation.
+                </label>
+                </div>', $summit->Title)
+            )
         );
 
         $validator = RequiredFields::create();
 
-        if ($this->presentation->Speakers()->exists()) {
-            $fields->insertBefore(
-                LiteralField::create('MoreSpeakers', '<h3 class="more-speakers">Any more speakers to add?</h3>'),
-                'SpeakerNote'
-            );
-            $fields->removeField('SpeakerNote');
-            $actions = FieldList::create(
-                FormAction::create('doAddSpeaker', '<i class="fa fa-plus fa-start"></i> Add another speaker'),
-                FormAction::create('doFinishSpeaker', 'Done adding speakers <i class="fa fa-arrow-right fa-end"></i>')
-            );
-            if (Member::currentUser()->IsSpeaker($this->presentation)) {
-                $fields->replaceField('SpeakerType', HiddenField::create('SpeakerType', '', 'Else'));
-                $fields->field('EmailAddress')
-                    ->setTitle('Enter the email address of your next speaker (*)')
-                    ->setDisplayLogicCriteria(null);
+        if (Member::currentUser()->IsSpeaker($this->presentation)
+        || $this->presentation->ModeratorID == Member::currentUser()->getSpeakerProfile()->ID) {
+            $fields->replaceField('SpeakerType', HiddenField::create('SpeakerType', '', 'Else'));
+            $fields->field('EmailAddress')
+                ->setTitle('Enter the first name, last name or email address of your '.$speaker_type.' (*)')
+                ->setDisplayLogicCriteria(null);
+        }
 
+        if ($this->presentation->Speakers()->exists() && $max_moderators_reached) {
+            if (!$max_speakers_reached) {
+                $fields->insertBefore(
+                    LiteralField::create('MoreSpeakers', '<h3 class="more-speakers">Any more speakers to add?</h3>'),
+                    'SpeakerNote'
+                );
+                $fields->removeField('SpeakerNote');
+
+                $actions = FieldList::create(
+                    FormAction::create('doAddSpeaker', '<i class="fa fa-plus fa-start"></i> Add another speaker'),
+                    FormAction::create('doFinishSpeaker', 'Done adding speakers <i class="fa fa-arrow-right fa-end"></i>')
+                );
+            } else {
+                $fields->insertBefore(
+                    LiteralField::create('LimitSpeakers', '<h3 class="limit-speakers">You have reached the maximum of speakers.</h3>'),
+                    'SpeakerNote'
+                );
+                $fields->removeField('SpeakerNote');
+                $fields->removeField('EmailAddress');
+                $fields->removeField('SpeakerType');
+                $actions = FieldList::create(
+                    FormAction::create('doFinishSpeaker', 'Done adding speakers <i class="fa fa-arrow-right fa-end"></i>')
+                );
             }
         } else {
+            $action_text = 'Add '.(($speaker_type == 'speaker') ? 'first ' : 'a ').$speaker_type;
             $actions = FieldList::create(
-                FormAction::create('doAddSpeaker', '<i class="fa fa-plus fa-start"></i> Add first speaker')
+                FormAction::create('doAddSpeaker', '<i class="fa fa-plus fa-start"></i> '.$action_text)
             );
         }
 
@@ -808,7 +899,6 @@ class PresentationPage_ManageRequest extends RequestHandler
         );
     }
 
-
     /**
      * Handles the form submission for saving the first step of the presentation
      * create or edit
@@ -819,102 +909,79 @@ class PresentationPage_ManageRequest extends RequestHandler
     public function savePresentationSummary($data, $form)
     {
 
-        Session::set("FormInfo.{$form->FormName()}.data", $data);
+        try
+        {
+            Session::set("FormInfo.{$form->FormName()}.data", $data);
 
-        // This should never happen
-        if (!isset($data['CategoryID'])) {
-            $form->sessionMessage('Please choose a topic from the list, or specify a custom topic in the Other Topic field.', 'bad');
+            $rules = array
+            (
+                'Title'                   => 'required|max:100',
+                'TypeID'                  => 'required',
+                'Level'                   => 'required|text',
+                'ShortDescription'        => 'required',
+                'CategoryID'              => 'required|text'
+            );
+
+            $messages = array
+            (
+                'Title.required'                   => ':attribute is required.',
+                'Title.max'                        => ':attribute must be less than 100 characters long.',
+                'TypeID.required'                  => ':attribute is required.',
+                'Level.required'                   => ':attribute is required.',
+                'ShortDescription.required'        => ':attribute is required.',
+                'CategoryID.required'              => 'Please choose a category group and then a category.'
+            );
+
+            $validator = ValidatorService::make($data, $rules, $messages);
+
+            if($validator->fails()){
+                throw new EntityValidationException($validator->messages());
+            }
+
+            $this->presentation = !$this->presentation->exists() ?
+                $this->parent->getPresentationManager()->registerPresentationOn
+                (
+                    $this->getParent()->Summit(),
+                    Member::currentUser(),
+                    $data
+                )
+                :
+                $this->parent->getPresentationManager()->updatePresentationSummary($this->presentation, $data);
+
+            Session::clear("FormInfo.{$form->FormName()}.data");
+
+            // next step
+            return $this->parent->redirect($this->Link('tags'));
+        }
+        catch(EntityValidationException $ex1){
+            $form->sessionMessage($ex1->getMessage(), 'bad');
+            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
             return $this->redirectBack();
         }
-
-        if (!$data['CategoryID'] && !$data['OtherTopic']) {
-            $form->sessionMessage('Please choose a topic from the list, or specify a custom topic in the Other Topic field.', 'bad');
+        catch(NotFoundEntityException $ex2){
+            $form->sessionMessage('There was an error with your request.', 'bad');
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
             return $this->redirectBack();
         }
-        if ($data['CategoryID'] == 'other' && !$data['OtherTopic']) {
-            $form->sessionMessage('Please specify a topic.', 'bad');
+        catch(Exception $ex){
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            $form->sessionMessage('There was an error with your request.', 'bad');
             return $this->redirectBack();
         }
-
-        $new = $this->presentation->isNew();
-
-        $form->saveInto($this->presentation);
-
-        if ($new) {
-            $this->presentation->CreatorID = Member::currentUserID();
-        }
-
-        // assign this presentation to current summit
-        $currentSummit = $this->getParent()->Summit();
-        if ($currentSummit) {
-            $this->presentation->SummitID = $currentSummit->ID;
-        }
-
-
-        $this->presentation->write();
-
-        Session::clear("FormInfo.{$form->FormName()}.data");
-
-        $form->sessionMessage('Your changes have been saved.', 'good');
-
-        return $this->parent->redirect($this->Link('tags'));
     }
-
 
     public function savePresentationTags($data, $form)
     {
         Session::set("FormInfo.{$form->FormName()}.data", $data);
 
-        $new = $this->presentation->isNew();
-        $this->presentation->Progress = Presentation::PHASE_SUMMARY;
-        /*$tags = $form->Fields()->fieldByName('Tags');
-        if(!is_null($tags) && isset($data['Tags'])) $tags->setValue($data['Tags']);*/
+        $this->presentation->setProgress(Presentation::PHASE_TAGS);
         $form->saveInto($this->presentation);
         $this->presentation->write();
 
         Session::clear("FormInfo.{$form->FormName()}.data");
 
-        if ($new) {
-            return $this->parent->redirect($this->Link('speakers'));
-        }
-
-        $form->sessionMessage('Your changes have been saved.', 'good');
-
-        return $this->redirectBack();
-    }
-
-
-    private function getSpeaker($email)
-    {
-        $speaker = PresentationSpeaker::get()
-            ->filter(array(
-                'Member.Email' => $email,
-            ))->first();
-
-        if (is_null($speaker)) {
-            $speaker = PresentationSpeaker::get()
-                ->filter(array(
-                    'Member.SecondEmail' => $email,
-                ))->first();
-        }
-
-        if (is_null($speaker)) {
-            $speaker = PresentationSpeaker::get()
-                ->filter(array(
-                    'Member.ThirdEmail' => $email,
-                ))->first();
-        }
-
-        if (is_null($speaker)) {
-            $registration_request = SpeakerRegistrationRequest::get()->filter(array(
-                'Email' => $email,
-                'IsConfirmed' => 0,
-            ))->first();
-            if(!is_null($registration_request))
-                $speaker = $registration_request->Speaker();
-        }
-
-        return $speaker;
+        // next step
+        return $this->parent->redirect($this->Link('speakers'));
     }
 
     /**
@@ -926,71 +993,93 @@ class PresentationPage_ManageRequest extends RequestHandler
      */
     public function doAddSpeaker($data, $form)
     {
-        $me    = $data['SpeakerType'] == 'Me';
-        $email = $me ? Member::currentUser()->Email : $data['EmailAddress'];
 
-        if (!$email) {
-            $form->sessionMessage('Please specify an email address', 'bad');
-            return $this->redirectBack();
-        }
-
-        $speaker = $this->getSpeaker($email);
-
-        if (!$speaker) {
-
-            $speaker = PresentationSpeaker::create();
-
-            if ($me) {
-                $member = Member::currentUser();
-                $speaker->MemberID = $member->ID;
-            } else {
-                // look for the member..
-                $member = Member::get()->filter('Email', $email)->first();
-                if (!$member) {
-                    $speaker->MemberID = 0;
-                    $speaker->write();
-                    $request = $this->getParent()->getSpeakerRegistrationRequestManager()->register($speaker, $email);
-                    $speaker->RegistrationRequestID = $request->getIdentifier();
-                } else {
-                    $member->addToGroupByCode('speakers');
-                    $speaker->MemberID = $member->ID;
-                    $member->write();
-                }
-            }
-        }
-
-        // i am adding other speaker than me
-        if(!$me && $speaker->hasReachPresentationLimitBy($this->Summit()->ID))
+        try
         {
-            $form->sessionMessage(sprintf("You reached the maximun allowed # of presentations (%s) for speaker %s (%s)", MAX_SUMMIT_ALLOWED_PER_USER, $speaker->getName(), $email), 'bad');
+            $me    = Convert::raw2sql($data['SpeakerType']) == 'Me';
+            $email = $me ? Member::currentUser()->Email : Convert::raw2sql($data['EmailAddress']);
+
+            $rules = array
+            (
+                'SpeakerType'           => 'required',
+                'EmailAddress'          => 'sometimes|required_if:SpeakerType,Else',
+            );
+
+            $messages = array
+            (
+                'SpeakerType.required'     => ':attribute is required.',
+                'EmailAddress.sometimes'   => 'Please specify an email address.',
+                'EmailAddress.required_if' => 'Please specify an email address.',
+            );
+
+            $member_id          = intval($data['MemberId']);
+            $speaker_id         = intval($data['SpeakerId']);
+            $provided_email     = !filter_var($email, FILTER_VALIDATE_EMAIL) === false;
+
+            $validator          = ValidatorService::make($data, $rules, $messages);
+            $member_repository  = $this->getParent()->getMemberRepository();
+            $speaker_repository = $this->getParent()->getSpeakerRepository();
+
+
+            if($validator->fails()){
+                throw new EntityValidationException($validator->messages());
+            }
+
+            if($member_id === 0 && $speaker_id === 0 && !$provided_email)
+                throw new EntityValidationException('Please specify an email address.');
+
+            $member  = $me ? Member::currentUser() : $member_repository->getById($member_id);
+            if(is_null($member) && $provided_email)
+                $member = $member_repository->findByEmail($email);
+            $speaker    = $speaker_repository->getById($speaker_id);
+
+            $speaker = $this->getParent()->getPresentationManager()->addSpeakerByEmailTo
+            (
+                $this->presentation,
+                $email,
+                $member,
+                $speaker
+            );
+
+            return $this->parent->redirect
+            (
+                Controller::join_links
+                (
+                    $this->Link(),
+                    'speaker',
+                    $speaker->getIdentifier()
+                )
+            );
+        }
+        catch(EntityValidationException $ex1)
+        {
+            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
+            $form->sessionMessage($ex1->getMessage(), 'bad');
             return $this->redirectBack();
         }
-
-        $speaker->Presentations()->add($this->presentation->ID);
-        $speaker->write();
-
-        return $this->parent->redirect(Controller::join_links(
-            $this->Link(),
-            'speaker',
-            $speaker->ID
-        ));
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            $form->sessionMessage('There was an error with your request.', 'bad');
+            return $this->redirectBack();
+        }
     }
-
 
     /**
      * Handles the form submission for completing the "Add speakers" module
-     * @param   $data array
-     * @param   $form Form
+     *
+     * @param $data
+     * @param $form
+     * @return SS_HTTPResponse
+     * @throws ValidationException
+     * @throws null
      */
     public function doFinishSpeaker($data, $form)
     {
-        if ($this->presentation->Progress < Presentation::PHASE_SUMMARY) {
-            return $this->parent->redirect($this->Link());
+        if ($this->presentation->getProgress() < Presentation::PHASE_SUMMARY) {
+            return $this->parent->redirect($this->Link('summary'));
         } else {
-            if ($this->presentation->Progress < Presentation::PHASE_SPEAKERS) {
-                $this->presentation->Progress = Presentation::PHASE_SPEAKERS;
-                $this->presentation->write();
-            }
+            $this->presentation->setProgress(Presentation::PHASE_SPEAKERS);
         }
 
         return $this->parent->redirect($this->Link('confirm'));
@@ -1021,18 +1110,15 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
         'review'
     );
 
-
     /**
      * @var  Speaker The speaker being updated
      */
-    protected $speaker;
 
 
     /**
      * @var  PresentationPage_ManageRequest The parent controller
      */
     protected $parent;
-
 
     /**
      * Constructor for the request
@@ -1043,9 +1129,8 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
     {
         parent::__construct();
         $this->speaker = $speaker;
-        $this->parent = $parent;
+        $this->parent  = $parent;
     }
-
 
     /**
      * Helper for redirect back. Needed for validator.
@@ -1055,7 +1140,6 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
     {
         return $this->parent->getParent()->redirectBack();
     }
-
 
     /**
      * Creates a link to this controller
@@ -1071,7 +1155,6 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
             $action
         );
     }
-
 
     /**
      * Default action for the controller. Forwards to an edit view
@@ -1108,14 +1191,24 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
             return $this->httpError(403, "Security token doesn't match.");
         }
 
-        $p = $this->parent->getPresentation();
-        if ($p->canRemoveSpeakers()) {
-            $p->Speakers()->remove($this->speaker);
+        try {
 
+            $this->parent->parent->getPresentationManager()->removeSpeakerFrom
+            (
+                $this->parent->getPresentation(),
+                $this->speaker
+            );
             return $this->parent->getParent()->redirect($this->parent->Link('speakers'));
         }
+        catch(EntityValidationException $ex1){
+            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
+            $this->httpError(403, 'You cannot remove speakers from this presentation');
+        }
+        catch(Exception $ex){
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            $this->httpError(403, 'You cannot remove speakers from this presentation');
+        }
 
-        return $this->httpError(403, 'You cannot remove speakers from this presentation');
     }
 
 
@@ -1177,18 +1270,20 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
             $this->speaker->FirstName = $this->speaker->Member()->FirstName;
         }
 
-        if (!$this->speaker->Surname)
+        if (!$this->speaker->LastName)
         {
-            $this->speaker->Surname = $this->speaker->Member()->Surname;
+            $this->speaker->LastName = $this->speaker->Member()->Surname;
         }
 
         $speaker_form = SpeakerForm::create
         (
             $this,
             "EditSpeakerForm",
-            FieldList::create(
+            FieldList::create
+            (
                 FormAction::create('doSaveSpeaker', 'Save speaker details')
-            )
+            ),
+            $this->parent->Summit()
         )
         ->loadDataFrom($this->speaker);
 
@@ -1281,11 +1376,29 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
     public function doSaveSpeaker($data, $form)
     {
         $form->saveInto($this->speaker);
+
+        $changed_fields = $this->speaker->getChangedFields(true,2);
         $this->speaker->write();
+
+        if ((!empty($changed_fields) || $this->speaker->HasChanged == 1) && !$this->isMe()) {
+            $current_user = Member::currentUser();
+            $subject = "Attn: Your OpenStack Member Profile has been updated";
+            $body = "A Presentation owner, ".$current_user->getName()." has just updated your Speaker Bio.
+                Please double check https://www.openstack.org/profile/speaker to ensure everything looks as expected.
+                If you find a problem with your bio, please send an email to speakersupport@openstack.org and we'll take a look right away.<br><br>
+                Thank you,<br>
+                OpenStack Speaker Support";
+
+            $email = EmailFactory::getInstance()->buildEmail(null, $this->speaker->getEmail(), $subject, $body);
+            $email->send();
+        }
+
         $member = $this->speaker->Member();
         if (($member->ID > 0 && $member->getSummitState('BUREAU_SEEN', $this->parent->Summit())) || !$this->isMe()) {
             return $this->parent->getParent()->redirect($this->parent->Link('speakers'));
         }
+
+        // Why an if that results in the same return ? ^^^^
 
         return $this->parent->getParent()->redirect($this->parent->Link('speakers'));
     }

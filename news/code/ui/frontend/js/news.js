@@ -11,17 +11,7 @@
  * limitations under the License.
  **/
 jQuery(document).ready(function($){
-    $('.slider').bxSlider({
-        auto: true,
-        autoControls: true,
-        buildPager: function(num){
-            return $('ul.slider li').eq(num+1).data('label');
-        }
+    $('#news-slider').carousel({
+       interval: 20000
     });
-
-    $('.featured').bxSlider({
-        captions: true
-    });
-
-    Shadowbox.init();
 });

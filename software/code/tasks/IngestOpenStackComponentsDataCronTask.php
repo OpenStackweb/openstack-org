@@ -23,40 +23,70 @@ use Symfony\Component\Yaml\Exception\ParseException;
 final class IngestOpenStackComponentsDataCronTask extends CronTask
 {
     /**
+     * @var ITransactionManager
+     */
+    private $tx_manager;
+    /**
+     * @var HttpClient
+     */
+    private $client;
+    /**
+     * IngestOpenStackComponentsDataCronTask constructor.
+     * @param ITransactionManager $tx_manager
+     */
+    public function __construct(ITransactionManager $tx_manager)
+    {   parent::__construct();
+        $this->tx_manager = $tx_manager;
+
+        $this->client     = new HttpClient([
+            'defaults' => [
+                'timeout' => 60,
+                'allow_redirects' => false,
+                'verify' => true
+            ]
+        ]);
+    }
+
+    /**
      * @return void
      */
     public function run()
     {
-        $releases = OpenStackRelease::get()->where(" Name <> 'Trunk' ")->sort('ReleaseDate', 'DESC');
-        DB::query('DELETE FROM OpenStackComponentReleaseCaveat;');
-        $this->processProjects();
-
-        foreach($releases as $release)
-        {
-            $this->getProductionUseStatus($release);
-            $this->getInstallationGuideStatus($release);
-            $this->getSDKSupport($release);
-            $this->getQualityOfPackages($release);
-            $this->calculateMaturityPoints($release);
-            $this->getStackAnalytics($release);
-        }
+        $start = time();
+        $this->tx_manager->transaction(function(){
+            $releases = OpenStackRelease::get()->where(" Name <> 'Trunk' ")->sort('ReleaseDate', 'DESC');
+            DB::query('DELETE FROM OpenStackComponentReleaseCaveat;');
+            $this->processProjects();
+            foreach($releases as $release)
+            {
+                error_log(sprintf('processing release %s ...', $release->Name));
+                $this->getProductionUseStatus($release);
+                $this->getInstallationGuideStatus($release);
+                $this->getSDKSupport($release);
+                $this->getQualityOfPackages($release);
+                $this->calculateMaturityPoints($release);
+                $this->getStackAnalytics($release);
+            }
+        });
+        $delta = time() - $start;
+        error_log(sprintf('task took %s seconds to run.',$delta));
+        $this->client = null;
     }
 
     private function processProjects()
     {
         $url = "https://raw.githubusercontent.com/openstack/governance/master/reference/projects.yaml";
-        $client   = new HttpClient;
 
         try
         {
-            $response = $client->get
+            $response = $this->client->get
             (
                 $url
             );
         }
-        catch(HttpException $ex)
+        catch (Exception $ex)
         {
-            return;
+            SS_Log::log($ex->getMessage(), SS_Log::WARN);
         }
 
         if(is_null($response)) return;
@@ -127,11 +157,12 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                 $deliverables = isset($info['deliverables']) ? $info['deliverables'] : array();
                 $service_info = isset($deliverables[$project_name]) ? $deliverables[$project_name] : array();
                 $service_tags = isset($service_info['tags']) ? $service_info['tags'] : array();
+
                 foreach($service_tags as $tag)
                 {
                     if($tag === "type:service" )
                         $is_service = true;
-                    if($tag === "release:has-stable-branches" )
+                    if($tag === "stable:follows-policy" )
                         $has_stable_branches = true;
                     if($tag === "release:cycle-with-milestones" )
                         $release_milestones = true;
@@ -170,6 +201,7 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
 
                 if(!is_null($ptl_member))
                     $component->LatestReleasePTLID = $ptl_member->ID;
+
                 $component->write();
             }
         } catch (ParseException $e) {
@@ -181,18 +213,17 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
     {
 
         $template_url = '%s/%s/ops-docs-install-guide.json';
-        $client   = new HttpClient;
 
         try
         {
-            $response = $client->get
+            $response = $this->client->get
             (
                 sprintf($template_url, OpsTagsTeamRepositoryUrl, strtolower($release->Name))
             );
         }
-        catch(HttpException $ex)
+        catch (Exception $ex)
         {
-            return;
+            SS_Log::log($ex->getMessage(), SS_Log::WARN);
         }
 
         if(is_null($response)) return;
@@ -239,18 +270,17 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
     {
 
         $template_url = '%s/%s/ops-production-use.json';
-        $client   = new HttpClient;
 
         try
         {
-            $response = $client->get
+            $response = $this->client->get
             (
                 sprintf($template_url, OpsTagsTeamRepositoryUrl, strtolower($release->Name))
             );
         }
-        catch(HttpException $ex)
+        catch (Exception $ex)
         {
-            return;
+            SS_Log::log($ex->getMessage(), SS_Log::WARN);
         }
 
         if(is_null($response)) return;
@@ -344,20 +374,19 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
 
     private function getSDKSupport(OpenStackRelease $release)
     {
-        $client        = new HttpClient;
         $components    = $release->OpenStackComponents();
         $template_url  = '%s/%s/ops-sdk-support.json';
 
         try
         {
-            $response = $client->get
+            $response = $this->client->get
             (
                 sprintf($template_url, OpsTagsTeamRepositoryUrl, strtolower($release->Name))
             );
         }
-        catch(HttpException $ex)
+        catch (Exception $ex)
         {
-            return;
+            SS_Log::log($ex->getMessage(), SS_Log::WARN);
         }
 
         if(is_null($response)) return;
@@ -401,20 +430,19 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
 
     private function getQualityOfPackages(OpenStackRelease $release)
     {
-        $client        = new HttpClient;
         $components    = $release->OpenStackComponents();
         $template_url  = '%s/%s/ops-packaged.json';
 
         try
         {
-            $response = $client->get
+            $response = $this->client->get
             (
                 sprintf($template_url, OpsTagsTeamRepositoryUrl, strtolower($release->Name))
             );
         }
-        catch(HttpException $ex)
+        catch (Exception $ex)
         {
-            return;
+            SS_Log::log($ex->getMessage(), SS_Log::WARN);
         }
 
         if(is_null($response)) return;
@@ -461,7 +489,6 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
         $company_contrib_url_template   = "http://stackalytics.com/api/1.0/stats/companies?module=%s-group&release=%s";
         $engineers_contrib_url_template = "http://stackalytics.com/api/1.0/stats/engineers?module=%s-group&release=%s";
 
-        $client        = new HttpClient;
         $components    = $release->OpenStackComponents();
 
 
@@ -474,13 +501,14 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
 
             try
             {
-                $response = $client->get
+                $response = $this->client->get
                 (
                     sprintf($timeline_stats_url_template, strtolower($c->CodeName), strtolower($release->Name))
                 );
             }
-            catch (HttpException $ex)
+            catch (Exception $ex)
             {
+                SS_Log::log($ex->getMessage(), SS_Log::WARN);
             }
 
             if (!is_null($response) && $response->getStatusCode() === 200) {
@@ -496,13 +524,14 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
 
             try
             {
-                $response = $client->get
+                $response = $this->client->get
                 (
                     sprintf($company_contrib_url_template, strtolower($c->CodeName), strtolower($release->Name))
                 );
             }
-            catch (HttpException $ex)
+            catch (Exception $ex)
             {
+                SS_Log::log($ex->getMessage(), SS_Log::WARN);
             }
 
             if (!is_null($response) && $response->getStatusCode() === 200) {
@@ -518,13 +547,14 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
 
             try
             {
-                $response = $client->get
+                $response = $this->client->get
                 (
                     sprintf($engineers_contrib_url_template, strtolower($c->CodeName), strtolower($release->Name))
                 );
             }
-            catch (HttpException $ex)
+            catch (Exception $ex)
             {
+                SS_Log::log($ex->getMessage(), SS_Log::WARN);
             }
 
             if (!is_null($response) && $response->getStatusCode() === 200)

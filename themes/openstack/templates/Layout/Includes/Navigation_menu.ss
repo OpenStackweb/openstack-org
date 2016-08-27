@@ -5,6 +5,7 @@
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/project-navigator/">Project Navigator</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/sample-configs/">Sample Configs</a></li>
         <li role="presentation" class="divider"></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/security/">Security</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/start/">Get Started</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/roadmap/">Roadmap</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/latest-release/">Latest Release</a></li>
@@ -17,7 +18,7 @@
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}user-stories/">Overview</a></li>
         <li role="presentation" class="divider"></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}enterprise/">OpenStack in the Enterprise</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}appdev/">Application Developers</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}appdev/">App Developers & ISVs</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="//superuser.openstack.org/">Superuser Magazine</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}surveys/landing">User Survey</a></li>
     </ul>
@@ -46,17 +47,20 @@
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/events/">Overview</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}summit/">The OpenStack Summit</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/events/openstackdays">OpenStack Days</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/events/openstackhackathons">OpenStack App Hackathons</a></li>
     </ul>
 </li>
 <li>
     <a href="{$BaseHref}learn/" class="drop" id="dropdownMenuLearn">Learn <i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
     <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuEvents">
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}marketplace/training/">Training</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="//superuser.openstack.org">Superuser Magazine</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}coa/">Get Certified</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="//ask.openstack.org">Ask a Technical Question</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="//superuser.openstack.org">Superuser Magazine</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}videos/">Summit Videos</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}analysts/">Analyst Reports</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}news/">News</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}blog/">Blog</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}summit/tokyo-2015/summit-videos/">Summit Videos</a></li>
     </ul>
 </li>
 <li>

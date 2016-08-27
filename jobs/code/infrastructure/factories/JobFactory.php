@@ -39,12 +39,24 @@ final class JobFactory implements IJobFactory {
 	 * @return JobMainInfo
 	 */
 	public function buildJobMainInfo(array $data){
+        $is_coa_needed = isset($data['is_coa_needed']) ? intval(@$data['is_coa_needed']): false;
+        $type          = trim($data['job_type']);
 		$company_id    = isset($data['company_id']) ? intval(@$data['company_id']):0;
-		$company_name  = trim(@$data['company_name']);
-		$company       = new Company;
+		$company_name  = trim(@$data['company']);
+    	$company       = new Company;
 		$company->Name = $company_name;
 		$company->ID   = $company_id;
-		return new JobMainInfo(trim($data['title']),$company, trim($data['url']), trim($data['description']), trim($data['instructions']), trim($data['location_type']));
+		return new JobMainInfo
+        (
+            trim($data['title']),
+            $is_coa_needed,
+            $type,
+            $company,
+            trim($data['url']),
+            trim($data['description']),
+            trim($data['instructions']),
+            trim($data['location_type'])
+        );
 	}
 
 	/**
@@ -96,16 +108,22 @@ final class JobFactory implements IJobFactory {
 	 * @return IJob
 	 */
 	public function buildJob(IJobRegistrationRequest $request){
-		$job                        = new JobPage;
-		$job->JobPostedDate         = $request->PostDate;
-		$job->JobCompany            = $request->CompanyName;
-		$job->JobCompany            = $request->CompanyName;
-		$job->ExpirationDate        = $request->ExpirationDate;
-		$job->Content               = $request->Description;
-		$job->Title                 = $request->Title;
-		$job->JobMoreInfoLink       = $request->Url;
-		$job->JobInstructions2Apply = $request->Instructions2Apply;
-		$job->LocationType          = $request->LocationType;
+		$job                         = new Job;
+		$job->PostedDate             = $request->PostDate;
+		// company name logic
+        $job->CompanyID              = intval($request->CompanyID);
+        if($job->CompanyID == 0)
+            $job->CompanyName = intval($request->CompanyName);
+
+		$job->ExpirationDate         = $request->ExpirationDate;
+		$job->Description            = $request->Description;
+		$job->Title                  = $request->Title;
+		$job->MoreInfoLink           = $request->Url;
+		$job->Instructions2Apply     = $request->Instructions2Apply;
+		$job->LocationType           = $request->LocationType;
+        $job->IsCOANeeded            = $request->IsCOANeeded;
+        $job->TypeID                 = $request->TypeID;
+        //locations
 		foreach($request->getLocations() as $location)
 			$job->addLocation($location);
 		return $job;

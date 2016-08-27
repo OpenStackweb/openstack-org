@@ -15,6 +15,27 @@
 interface ISpeakerRepository extends IEntityRepository
 {
     /**
+     * @param string $term
+     * @param int $limit
+     * @return array
+     */
+    public function searchByTerm($term, $limit = 10);
+
+    /**
+     * @param string $term
+     * @param int $limit
+     * @return array;
+     */
+    public function searchSpeakersOnlyByTerm($term, $limit = 10);
+
+/**
+     * @param string $term
+     * @param int $limit
+     * @return array
+     */
+    public function searchByTermActive($term, $limit = 10);
+
+    /**
      * @param ISummit $summit
      * @param string $term
      * @return IPresentationSpeaker[]
@@ -22,6 +43,8 @@ interface ISpeakerRepository extends IEntityRepository
     public function searchBySummitAndTerm(ISummit $summit, $term);
 
     /**
+     * Gets all speakers that belongs to given summit , those are the ones that has at least a
+     * Presentation on the give summit
      * @param ISummit $summit
      * @param int $page
      * @param int $page_size
@@ -30,11 +53,40 @@ interface ISpeakerRepository extends IEntityRepository
      * @param string $sort_dir
      * @return array
      */
-    public function getBySummit(ISummit $summit, $page= 1, $page_size = 10, $term = '', $sort_by = 'id', $sort_dir = 'asc');
+    public function searchBySummitPaginated(ISummit $summit, $page= 1, $page_size = 10, $term = '', $sort_by = 'id', $sort_dir = 'asc');
+
+    /**
+     * Gets all speakers that belongs to given summit , those are the ones that has at least a
+     * Published Presentation on the give summit
+     * @param ISummit $summit
+     * @param int $page
+     * @param int $page_size
+     * @param string $term
+     * @param string $sort_by
+     * @param string $sort_dir
+     * @return array
+     */
+    public function searchBySummitSchedulePaginated(ISummit $summit, $page= 1, $page_size = 10, $term = '', $sort_by = 'id', $sort_dir = 'asc');
+
+    /**
+     * @param int $page
+     * @param int $page_size
+     * @param string $term
+     * @param string $sort_by
+     * @param string $sort_dir
+     * @return array
+     */
+    public function searchByTermPaginated($page= 1, $page_size = 10, $term = '', $sort_by = 'id', $sort_dir = 'asc');
 
     /**
      * @param int $member_id
      * @return IPresentationSpeaker
      */
     public function getByMemberID($member_id);
+
+    /**
+     * @param string $email
+     * @return IPresentationSpeaker
+     */
+    public function getByEmail($email);
 }

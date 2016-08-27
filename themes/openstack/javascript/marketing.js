@@ -44,4 +44,21 @@
 			$(this).parent().parent().fadeOut();
 			return false;
 		})
+
+        $('.modal').on('hide.bs.modal', function () {
+            var iframe_id = $(this).data('section')+'_iframe_'+$(this).data('video_id');
+            toggleVideo(iframe_id,'stopVideo');
+        });
+
+        $('.modal').on('show.bs.modal', function () {
+            var iframe_id = $(this).data('section')+'_iframe_'+$(this).data('video_id');
+            toggleVideo(iframe_id,'playVideo');
+        });
 	});
+
+function toggleVideo(iframe_id,func) {
+    var iframe = $('#'+iframe_id)[0].contentWindow;
+    iframe.postMessage('{"event":"command","func":"' + func + '","args":""}','*');
+}
+
+

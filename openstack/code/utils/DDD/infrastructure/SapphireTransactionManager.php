@@ -119,7 +119,6 @@ final class SapphireTransactionManager implements ITransactionManager
             $this->rollBack();
             throw $ex;
         }
-
         return $result;
     }
 }

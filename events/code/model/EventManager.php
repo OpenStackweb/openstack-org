@@ -108,6 +108,7 @@ final class EventManager {
             $event->registerMainInfo($factory->buildEventMainInfo($data));
             $event->registerLocation($data['location'],$data['continent']);
             $event->registerDuration($factory->buildEventDuration($data));
+            $event->registerLogoUrl($data['logo_url']);
 		});
 	}
 
@@ -133,6 +134,7 @@ final class EventManager {
             $event->registerMainInfo($factory->buildEventMainInfo($data));
             $event->registerLocation($data['location'],$data['continent']);
             $event->registerDuration($factory->buildEventDuration($data));
+            $event->registerLogoUrl($data['logo_url']);
 
             $repository->add($event);
 
@@ -240,10 +242,12 @@ final class EventManager {
             $event_start_date = DateTime::createFromFormat(DateTime::ISO8601, $item->startDate);
             $event_end_date = DateTime::createFromFormat(DateTime::ISO8601, $item->endDate);
             $event_duration = new EventDuration($event_start_date,$event_end_date);
+            $continent = $this->getContinentFromLocation($item->location);
+
             $event = new EventPage();
             $event->registerMainInfo($event_main_info);
             $event->registerDuration($event_duration);
-            $event->registerLocation($item->location);
+            $event->registerLocation($item->location, $continent);
             $event->ExternalSourceId = explode(' ', $item->guid)[0];
             $events_array->push($event);
         }
@@ -281,4 +285,26 @@ final class EventManager {
         }
         return $array;
     }
+
+    /**
+     * @param string $location
+     * @return string
+     */
+    function getContinentFromLocation($location) {
+        $loc_array = explode(',',$location);
+        $country_code = (count($loc_array)) ? trim(end($loc_array)) : '';
+        if ($country_code) {
+            $sqlQuery = new SQLQuery();
+            $sqlQuery->setFrom("Continent");
+            $sqlQuery->selectField("Name");
+            $sqlQuery->addLeftJoin("Continent_Countries","Continent_Countries.ContinentID = Continent.ID");
+            $sqlQuery->addWhere("Continent_Countries.CountryCode = '$country_code'");
+            $continent = $sqlQuery->execute()->first();
+            if ($continent) {
+                return $continent['Name'];
+            }
+        }
+        return '';
+    }
+
 } 

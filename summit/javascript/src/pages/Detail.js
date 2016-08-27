@@ -76,7 +76,7 @@ var Detail = React.createClass({displayName: 'Detail',
         	}
         	{!pres.can_vote &&
         		<div style={{clear:'both'}} className="vote-login">
-        			Think this presentation should be included in the Tokyo Summit? Login to vote.<br/>
+        			Think this presentation should be included in the Barcelona Summit? Login to vote.<br/>
         			<a className="btn btn-default" href={ "/Security/login?BackURL=/vote-for-speakers/show/" + pres.id }>I already have an account</a>  <a href={ "/summit-login/login?BackURL=/vote-for-speakers/show/" + pres.id } className="btn btn-default">Sign up now</a>
         		</div>
         	}
@@ -136,7 +136,7 @@ var Detail = React.createClass({displayName: 'Detail',
         	}
         	{!pres.can_vote &&
         		<div style={{clear:'both'}} className="vote-login">
-        			Think this presentation should be included in the Tokyo Summit? Login to vote.<br/>
+        			Think this presentation should be included in the Barcelona Summit? Login to vote.<br/>
         			<a className="btn btn-default" href={ "/Security/login?BackURL=/vote-for-speakers/show/" + pres.id }>I already have an account</a>  <a href={ "/summit-login/login?BackURL=/vote-for-speakers/show/" + pres.id } className="btn btn-default">Sign up now</a>
         		</div>
         	}

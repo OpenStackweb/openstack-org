@@ -109,6 +109,12 @@
 
     <h2>Deployments / Deployment Survey</h2>
     <ul>
+        <li>Surveys Data</li>
+        <ul>
+            <li><a href="$Link(SurveyBuilderListSurveys)">View Deployment Survey</a></li>
+            <li><a href="$Link(SurveyBuilderListDeployments)">View Deployments</a></li>
+        </ul>
+
         <li>Statistics</li>
             <ul>
                 <li><a href="/sangria/ViewSurveysStatisticsSurveyBuilder">Deployment Survey Stats</a></li>
@@ -167,19 +173,15 @@
 
     <h2>Speakers</h2>
     <ul>
-        <li><a href="/sangria/ViewSpeakingSubmissions">View Speaking Submissions</a></li>
-        <li><a href="$Link(ExportSpeakersData)">Speakers Users</a></li>
+        <%-- <li><a href="/sangria/ViewSpeakingSubmissions">View Speaking Submissions</a></li> --%>
+        <%-- <li><a href="$Link(ExportSpeakersData)">Speakers Users</a></li> --%>
+        <li><a href="$Link(ExportSpeakersSubmissions)">Export Speakers Submissions</a></li>
     </ul>
 
     <h2>DB Cleanup</h2>
     <ul>
         <li><a href="/sangria/StandardizeOrgNames" id="stand_orgs">Standardize Organizations</a></li>
     </ul>
-
-    <h2>Summit Imports/Exports</h2>
-        <ul>
-            <li><a href="/trackchairs/api/v1/export/schedule/" >Export Schedule</a></li>
-            <li><a href="/trackchairs/api/v1/export/speakers/" >Export Speakers</a></li>
-            <li><a href="/trackchairs/api/v1/export/speaker-worksheet/" >Export Speaker Worksheet</a></li>
-        </ul>
 </div>
+<br>
+<br>

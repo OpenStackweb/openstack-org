@@ -4,49 +4,57 @@
 </raw>
 
 <speakers-list>
-        <div class="row">
+    <div class="row">
         <div class="col-md-6" style="margin:0  0 20px 0;">
-        <div class="input-group" style="width: 100%;">
-        <input data-rule-required="true" data-rule-minlength="3" type="text" id="speakers_search_term" class="form-control input-global-search" placeholder="Search by Name">
-        <span class="input-group-btn" style="width: 5%;">
-        <button class="btn btn-default btn-global-search" id="search_speakers"><i class="fa fa-search"></i></button>
-        <button class="btn btn-default btn-global-search-clear" onclick="{ clearClicked }">
-        <i class="fa fa-times"></i>
-        </button>
-        </span>
+            <div class="input-group" style="width: 100%;">
+                <input data-rule-required="true" data-rule-minlength="3" type="text" id="speakers_search_term" class="form-control input-global-search" placeholder="Search by Name">
+                <span class="input-group-btn" style="width: 5%;">
+                    <button class="btn btn-default btn-global-search" id="search_speakers"><i class="fa fa-search"></i></button>
+                    <button class="btn btn-default btn-global-search-clear" onclick="{ clearClicked }">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </span>
+            </div>
         </div>
-        </div>
-        </div>
+    </div>
 
-        <div class="panel panel-default">
+    <div class="panel panel-default" if={ page_data.total_items > 0 }>
         <div class="panel-heading">Speakers ({ page_data.total_items })</div>
 
         <table id="speakers-table" class="table">
-        <thead>
-        <tr>
-        <th><a title="sort by Speaker Id" style="cursor:pointer;" onclick="{ sortBy }" data-field='id' data-dir='asc'>Id</a></th>
-        <th><a title="sort by Speaker FullName" style="cursor:pointer;" onclick="{ sortBy }" data-field='fullname' data-dir='asc'>FullName</a></th>
-        <th><a title="sort by Email" style="cursor:pointer;" onclick="{ sortBy }" data-field='email' data-dir='asc'>Email</a></th>
-        <th>Member Id</th>
-        <th>Summit On Site Phone</th>
-        <th>&nbsp;</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr each={ speaker, i in speakers }>
-        <td>{ speaker.id }</td>
-        <td>{ speaker.name }</td>
-        <td>{ speaker.email }</td>
-        <td>{ speaker.member_id }</td>
-        <td>{ speaker.onsite_phone }</td>
-        <td><a href="{ parent.edit_link+'/'+speaker.id }" class="btn btn-default btn-sm active" role="button">Edit</a></td>
-        </tr>
-        </tbody>
+            <thead>
+                <tr>
+                    <th><a title="sort by Speaker Id" style="cursor:pointer;" onclick="{ sortBy }" data-field='id' data-dir='asc'>Id</a></th>
+                    <th><a title="sort by Speaker FullName" style="cursor:pointer;" onclick="{ sortBy }" data-field='fullname' data-dir='asc'>FullName</a></th>
+                    <th><a title="sort by Email" style="cursor:pointer;" onclick="{ sortBy }" data-field='email' data-dir='asc'>Email</a></th>
+                    <th>Member Id</th>
+                    <th>Registration Code</th>
+                    <th>Summit On Site Phone</th>
+                    <th># Presentations</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr each={ speaker, i in speakers }>
+                    <td>{ speaker.id }</td>
+                    <td>{ speaker.name }</td>
+                    <td>{ speaker.email }</td>
+                    <td>{ speaker.member_id }</td>
+                    <td>{ speaker.registration_code }</td>
+                    <td>{ speaker.onsite_phone }</td>
+                    <td>{ speaker.presentation_count }</td>
+                    <td><a href="{ parent.edit_link+'/'+speaker.id }" class="btn btn-default btn-sm active" role="button">Edit</a></td>
+                </tr>
+            </tbody>
         </table>
-        </div>
-        <nav>
-        <ul id="speakers-pager" class="pagination"></ul>
-        </nav>
+    </div>
+    <div class="panel panel-default" if={ page_data.total_items == 0 }>
+        <span class="no_speakers_msg"> No Speakers found.</span>
+    </div>
+
+    <nav>
+    <ul id="speakers-pager" class="pagination"></ul>
+    </nav>
 
         <script>
 
@@ -102,6 +110,7 @@
                     self.page_data.page        = data.page;
                     self.page_data.total_items = data.count;
                     self.total_pages           = self.page_data.total_items > 0 ? Math.ceil(self.page_data.total_items / self.page_data.limit): 0;
+
                     if(self.speakers .length > 0){
                         var options = {
                             bootstrapMajorVersion:3,

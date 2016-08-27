@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" $OGNS>
 
 <head>
     <% include Head %>
     <% include Analytics %>
     $FBTrackingCode
     $TwitterTrackingCode
+    <link rel="stylesheet" type="text/css" href="/themes/openstack/static/css/tooltipster.css" />
 </head>
 
 <body>
@@ -92,6 +93,8 @@
 
     <% end_if %>
 
+    <% include DownloadAppModal %>
+
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -176,5 +179,14 @@
 </div>
     <% include Quantcast %>
 </body>
+
+<script type="text/javascript" src="/themes/openstack/static/js/jquery.tooltipster.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.tracks-tooltip').tooltipster({
+            maxWidth: '300'
+        });
+    });
+</script>
 
 </html>

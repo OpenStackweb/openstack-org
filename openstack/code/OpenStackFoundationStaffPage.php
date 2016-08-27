@@ -17,7 +17,11 @@ class OpenStackFoundationStaffPage extends Page{
     static $can_be_root  = false;
     static $default_parent='OneColumn';
     static $allowed_children = "none";
-    static $db = array();
+    static $db = array(
+        'ExtraFoundation' => 'HTMLText',
+        'ExtraSupporting' => 'HTMLText',
+        'ExtraFooter' => 'HTMLText',
+    );
 
     static $defaults = array(
         "IncludeJquery" => 1,
@@ -26,7 +30,9 @@ class OpenStackFoundationStaffPage extends Page{
 
     function getCMSFields() {
         $fields = parent::getCMSFields();
-        // remove unneeded fields
+        $fields->addFieldsToTab('Root.Main', new HtmlEditorField('ExtraFoundation', 'Extra Foundation Staff'));
+        $fields->addFieldsToTab('Root.Main', new HtmlEditorField('ExtraSupporting', 'Extra Supporting Cast'));
+        $fields->addFieldsToTab('Root.Main', new HtmlEditorField('ExtraFooter', 'Extra Footer'));
         return $fields;
     }
 }

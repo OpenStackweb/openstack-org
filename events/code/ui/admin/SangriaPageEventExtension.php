@@ -67,10 +67,10 @@ final class SangriaPageEventExtension extends Extension {
     public function FeaturedEventForm() {
         $fields = new FieldList;
         //main info
-        $events = EventPage::get('EventPage',"EventCategory = 'OpenStack Days'");
+        $events = EventPage::get('EventPage',"EventCategory = 'OpenStack Days'")->sort('EventStartDate','DESC');
         $options = array();
         foreach($events as $event) {
-            $options[$event->ID] = $event->Title;
+            $options[$event->ID] = $event->Title.' - '.$event->formatDateRange();
         }
 
         $fields->push(new DropdownField('EventID','Event',$options));

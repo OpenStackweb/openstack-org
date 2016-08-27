@@ -1,3 +1,4 @@
+require('./t.tag');
 <core-service-box>
     <div class="col-md-4 col-sm-6">
     <div class="core-services-single-full">
@@ -24,7 +25,7 @@
     { adoption } %
     </div>
     <div class="core-stat-title">
-    Adoption
+    <t entity="Software.ADOPTION">ADOPTION</t>
     </div>
     </div>
     <div class="col-sm-4 col-xs-4">
@@ -32,7 +33,7 @@
     { maturity_points } <span>of</span> { parent.max_maturity_points }
     </div>
     <div class="core-stat-title">
-    Maturity
+    <t entity="Software.MATURITY">MATURITY</t>
     </div>
     </div>
     <div class="col-sm-4 col-xs-4">
@@ -40,13 +41,15 @@
     { age } <span>yrs</span>
     </div>
     <div class="core-stat-title">
-    Age
+    <t entity="Software.AGE">AGE</t>
     </div>
     </div>
     </div>
     </div>
     <div class="core-bottom">
-    <a class="core-service-btn" href="#" onclick={ coreServiceDetails }>More Details</a>
+    <a class="core-service-btn" href="#" onclick={ coreServiceDetails }>
+    	<t entity="Software.MORE_DETAILS">More Details</t>
+    </a>
     </div>
     </div>
     </div>

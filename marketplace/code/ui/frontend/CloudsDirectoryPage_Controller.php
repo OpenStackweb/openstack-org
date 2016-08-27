@@ -16,6 +16,8 @@
  */
 abstract class CloudsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Controller {
 
+	use GoogleMapLibs;
+
 	private static $allowed_actions = array('handleIndex');
 
 	/**
@@ -148,13 +150,9 @@ abstract class CloudsDirectoryPage_Controller extends MarketPlaceDirectoryPage_C
 
 		Requirements::css("themes/openstack/css/chosen.css", "screen,projection");
 
-		Requirements::javascript(Director::protocol()."maps.googleapis.com/maps/api/js?sensor=false");
+		$this->InitGoogleMapLibs();
 
         Requirements::combine_files('marketplace_clouds_directory_page.js', array(
-            "marketplace/code/ui/frontend/js/markerclusterer.js",
-            "marketplace/code/ui/frontend/js/oms.min.js",
-            "marketplace/code/ui/frontend/js/infobubble-compiled.js",
-            "marketplace/code/ui/frontend/js/google.maps.jquery.js",
             "themes/openstack/javascript/chosen.jquery.min.js",
             "marketplace/code/ui/frontend/js/clouds.directory.page.js",
         ));
@@ -163,18 +161,6 @@ abstract class CloudsDirectoryPage_Controller extends MarketPlaceDirectoryPage_C
 
 		$this->cloud_repository          = $this->buildCloudRepository();
 		$this->pricing_schema_repository = new SapphirePricingSchemaRepository;
-
-		//google geo coding settings
-		$google_geo_coding_api_key     = null;
-		$google_geo_coding_client_id   = null;
-		$google_geo_coding_private_key = null;
-		if(defined('GOOGLE_GEO_CODING_API_KEY')){
-			$google_geo_coding_api_key = GOOGLE_GEO_CODING_API_KEY;
-		}
-		else if (defined('GOOGLE_GEO_CODING_CLIENT_ID') && defined('GOOGLE_GEO_CODING_PRIVATE_KEY')){
-			$google_geo_coding_client_id   = GOOGLE_GEO_CODING_CLIENT_ID;
-			$google_geo_coding_private_key = GOOGLE_GEO_CODING_PRIVATE_KEY;
-		}
 
 		$this->manager = $this->buildCloudManager(
 			$this->cloud_repository,
@@ -198,10 +184,8 @@ abstract class CloudsDirectoryPage_Controller extends MarketPlaceDirectoryPage_C
 			new GoogleGeoCodingService(
 				new SapphireGeoCodingQueryRepository,
 				new UtilFactory,
-				SapphireTransactionManager::getInstance(),
-				$google_geo_coding_api_key,
-				$google_geo_coding_client_id,
-				$google_geo_coding_private_key),
+				SapphireTransactionManager::getInstance()
+            ),
 			null,
 			new SessionCacheService,
 			SapphireTransactionManager::getInstance()

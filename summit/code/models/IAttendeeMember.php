@@ -35,4 +35,10 @@ interface IAttendeeMember extends IEntity
      * @return ISummitAttendee|null
      */
     public function getUpcomingSummitAttendee();
+
+    /**
+     * @param int $event_id
+     * @return string
+     */
+    public function getGoogleCalEventId($event_id);
 }

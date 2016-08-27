@@ -91,6 +91,18 @@ interface ISummitService
 
     /**
      * @param ISummit $summit
+     * @param $data
+     */
+    public function updateVideoDisplay(ISummit $summit, $data);
+
+    /**
+     * @param $report_name
+     * @param $data
+     */
+    public function updateReportConfig($report_name, $data);
+
+    /**
+     * @param ISummit $summit
      * @param array $speaker_data
      * @return IPresentationSpeaker
      */
@@ -102,5 +114,57 @@ interface ISummitService
      * @return IPresentationSpeaker
      */
     public function updateSpeaker(ISummit $summit, array $speaker_data);
+
+    /**
+     * @param ISummit $summit
+     * @param $speaker_id
+     * @param $tmp_file
+     * @return BetterImage
+     */
+    public function uploadSpeakerPic(ISummit $summit, $speaker_id, $tmp_file);
+
+    /**
+     * @param ISummit $summit
+     * @param array $promocode_data
+     * @return ISummitRegistrationPromoCode
+     */
+    public function createPromoCode(ISummit $summit, array $promocode_data);
+
+    /**
+     * @param ISummit $summit
+     * @param array $promocode_data
+     * @return ISummitRegistrationPromoCode
+     */
+    public function updatePromoCode(ISummit $summit, array $promocode_data);
+
+    /**
+     * @param ISummit $summit
+     * @param array $data
+     * @return ISummitRegistrationPromoCode
+     */
+    public function setMultiPromoCodes(ISummit $summit, array $data);
+
+    /**
+     * @param ISummit $summit
+     * @param int $code_id
+     * @return ISummitRegistrationPromoCode
+     */
+    public function sendEmailPromoCode(ISummit $summit, $code_id);
+
+    /**
+     * @param ISummit $summit
+     * @param ISummit $speaker_1
+     * @param ISummit $speaker_2
+     * @param array $data
+     * @return array $changes
+     */
+    public function mergeSpeakers(ISummit $summit, $speaker_1, $speaker_2,array $data);
+
+    /**
+     * @param ISummit $summit
+     * @param array $data
+     */
+    public function updateBulkPresentations(ISummit $summit, array $data);
+
 
 }

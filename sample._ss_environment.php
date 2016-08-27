@@ -88,7 +88,7 @@ define('CCLA_TEAM_INVITATION_EMAIL_FROM','');
 define('CCLA_DEBUG_EMAIL','');
 
 
-define('GOOGLE_GEO_CODING_API_KEY','');
+
 //get a key from https://github.com/settings/applications#personal-access-tokens
 define('GITHUB_API_OAUTH2TOKEN','');
 
@@ -117,6 +117,30 @@ define('REJECTED_PURCHASE_ORDER_EMAIL_SUBJECT','Your OpenStack Sponsorship Packa
 define('PARSE_APP_ID','');
 define('PARSE_REST_KEY','');
 define('PARSE_MASTER_KEY','');
+
+// COA
+define('COA_FILE_API_BASE_URL','');
+define('COA_FILE_API_BASE_USER','');
+define('COA_FILE_API_BASE_PASS','');
+
+// GOOGLE API KEYS
+// get from https://console.cloud.google.com/home/dashboard
+// browser key to use Google Maps JavaScript API
+define('GOOGLE_MAP_KEY', '');
+// server key to use Google Maps Geocoding API
+define('GOOGLE_GEO_CODING_API_KEY','');
+
+// OAUTH 2.0 Client ID to use Google Calendar API
+define('GAPI_CLIENT','');
+
+// APP LINKS
+// http://applinks.org/documentation/
+define('APP_LINKS_IOS_APP_STORE_ID','');
+define('APP_LINKS_IOS_APP_NAME','');
+define('APP_LINKS_IOS_APP_CUSTOM_SCHEMA','');
+define('APP_LINKS_ANDROID_PACKAGE','');
+define('APP_LINKS_ANDROID_APP_NAME','');
+define('APP_LINKS_ANDROID_APP_CUSTOM_SCHEMA','');
 
 global $_FILE_TO_URL_MAPPING;
 $_FILE_TO_URL_MAPPING[''] = '';

@@ -13,8 +13,6 @@ colorpicker/
 colorpicker
 cms/
 cms
-translatable/
-translatable
 vendor/
 .htaccess
 debug.log
@@ -81,4 +79,10 @@ keys.dev.pub
 keys.tags.pub
 trait-loader/
 gridfieldextensions/
+fluent/
 *.bundle.js
+opengraph/
+translatable/
+.DS_Store
+silverstripe-green/
+silverstripe-serialised-dbfields/

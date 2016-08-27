@@ -51,50 +51,65 @@ class SurveyReportSection extends DataObject {
 
         foreach ($this->Graphs()->sort('Order') as $graph) {
             $values = array();
-            $total = 0;
             $extra_label = '';
 
             $answers = $repository->getByQuestionAndFilters($graph->Question()->ID, $filters);
+            $total_answers = $answers['total'];
+            $answers = $answers['answers'];
 
             foreach ($answers as $answer) {
-                if (!$answer['Value']) continue;
+                if (!$answer) continue;
 
-                $answer_text = $answer['Value'];
-                // NPS mapping
-                if ($graph->Question()->Name == 'NetPromoter') {
-                    if ($answer_text < 7) {
-                        $answer_text = 'Detractor';
-                    } else if ($answer_text < 9) {
-                        $answer_text = 'Neutral';
-                    } else {
-                        $answer_text = 'Promoter';
-                    }
+                if ($graph->Question()->ClassName == 'SurveyRadioButtonMatrixTemplateQuestion') {
 
+                    $col = $answer->col;
+                    $row = $answer->row;
 
+                    if (!isset($values[$row]))
+                        $values[$row] = array();
+
+                    if (!isset($values[$row][$col]))
+                        $values[$row][$col] = 0;
+
+                    $values[$row][$col]++;
+                } else {
+                    if (!isset($values[$answer]))
+                        $values[$answer] = 0;
+
+                    $values[$answer]++;
                 }
-                // end NPS mapping
-                if (!isset($values[$answer_text]))
-                    $values[$answer_text] = 0;
-
-                $values[$answer_text]++;
-                $total++;
             }
 
             if ($graph->Question()->Name == 'NetPromoter') {
-                $promoter_perc = round(($values['Promoter'] / $total) * 100);
-                $detractor_perc = round(($values['Detractor'] / $total) * 100);
+                $promoter_perc = round(($values['Promoter'] / $total_answers) * 100);
+                $detractor_perc = round(($values['Detractor'] / $total_answers) * 100);
                 $extra_label = 'NPS: '.($promoter_perc - $detractor_perc).'%';
             }
 
             //sort results
             arsort($values);
 
+            // hide answers if less than 10
+            if ($total_answers <= 10) {
+                $values = array();
+                $total_answers = 0;
+            }
+
+            if($graph->Type == 'pie' && count($values) > 10) {
+                $other_values = array_slice($values,13);
+                $values = array_slice($values,0,12);
+                $values['Other'] = 0;
+                foreach ($other_values as $val) {
+                    $values['Other'] += $val;
+                }
+            }
+
             $questions[] = array(
                 'ID'         => $graph->Question()->ID,
                 'Graph'      => $graph->Type,
                 'Title'      => $graph->Label,
                 'Values'     => $values,
-                'Total'      => $total,
+                'Total'      => $total_answers,
                 'ExtraLabel' => $extra_label,
             );
         }

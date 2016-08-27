@@ -34,7 +34,7 @@
                                 Find online and location specific trainings for all levels of expertise from the OpenStack Marketplace.
                             </p>
                             <a href="//www.openstack.org/marketplace/training/" class="learn-btn">
-                                Go To Training <i class="fa fa-chevron-right"></i>
+                                Go to Training <i class="fa fa-chevron-right"></i>
                             </a>
                         </div>
                     </div>
@@ -42,13 +42,13 @@
                     <!-- Single Learn Element -->
                     <div class="col-sm-6">
                         <div class="learn-single">
-                        <img class="learn-superuser-icon" src="/themes/openstack/images/learn/superuser-icon.svg" onerror="this.onerror=null; this.src=/themes/openstack/images/learn/superuser-icon.svg" alt="OpenStack Superuser Magazine">
-                            <h2>Superuser Magazine</h2>
+                        	<img class="learn-coa-icon" src="/assets/learn/COA-learn-icon.svg" onerror="this.onerror=null; this.src=/assets/learn/COA-learn-icon.svg" alt="Certified OpenStack Administrator">
+                            <h2>Get Certified</h2>
                             <p>
-                                With topics ranging from how-tos, case studies, organizational culture and more, this publication will give you the tools needed to become a Superuser.
+                                Register for the COA exam, the first professional certification offered by the OpenStack Foundation.
                             </p>
-                            <a href="//superuser.openstack.org" class="learn-btn">
-                                Go To Superuser <i class="fa fa-chevron-right"></i>
+                            <a href="https://www.openstack.org/coa" class="learn-btn">
+                                Go to COA <i class="fa fa-chevron-right"></i>
                             </a>
                         </div>
                     </div>
@@ -58,13 +58,13 @@
                     <!-- Single Learn Element -->
                     <div class="col-sm-6">
                         <div class="learn-single">
-                            <i class="fa fa-comments learn-icon"></i>
-                            <h2>Ask OpenStack</h2>
+                        <img class="learn-superuser-icon" src="/themes/openstack/images/learn/superuser-icon.svg" onerror="this.onerror=null; this.src=/themes/openstack/images/learn/superuser-icon.svg" alt="OpenStack Superuser Magazine">
+                            <h2>Superuser Magazine</h2>
                             <p>
-                                Dig deep into the the world of OpenStack through the eyes of those who operate and develop OpenStack, ask, find and answer OpenStack specific questions her.
+                                With topics ranging from how-tos, case studies, organizational culture and more, this publication will give you the tools needed to become a Superuser.
                             </p>
-                            <a href="//ask.openstack.org" class="learn-btn">
-                                Go To Ask OpenStack <i class="fa fa-chevron-right"></i>
+                            <a href="//superuser.openstack.org" class="learn-btn">
+                                Go to Superuser <i class="fa fa-chevron-right"></i>
                             </a>
                         </div>
                     </div>
@@ -72,13 +72,43 @@
                     <!-- Single Learn Element -->
                     <div class="col-sm-6">
                         <div class="learn-single">
-                            <i class="fa fa-newspaper-o learn-icon"></i>
-                            <h2>News</h2>
+                            <i class="fa fa-comments learn-icon"></i>
+                            <h2>Ask OpenStack</h2>
                             <p>
-                                Read about the latest happenings in the OpenStack ecosystem. The news section features news from around the community and the OpenStack Foundation.
+                                Dig deep into the the world of OpenStack through the eyes of those who operate and develop OpenStack. Ask, find and answer OpenStack specific questions here.
                             </p>
-                            <a href="https://www.openstack.org/news" class="learn-btn">
-                                Go To News <i class="fa fa-chevron-right"></i>
+                            <a href="//ask.openstack.org" class="learn-btn">
+                                Go to Ask OpenStack <i class="fa fa-chevron-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- End Single Learn Element -->
+                </div>
+                <div class="row">
+                    <!-- Single Learn Element -->
+                    <div class="col-sm-6">
+                        <div class="learn-single">
+                            <i class="fa fa-play-circle learn-icon"></i>
+                            <h2>Summit Videos</h2>
+                            <p>
+                                Did you know almost every session at an OpenStack Summit is recorded and shared for the world to see? They are and you can find them here!
+                            </p>
+                            <a href="https://www.openstack.org/summit/tokyo-2015/summit-videos" class="learn-btn">
+                                Go to Summit Videos <i class="fa fa-chevron-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- End Single Learn Element -->
+                    <!-- Single Learn Element -->
+                    <div class="col-sm-6">
+                        <div class="learn-single">
+                            <i class="fa fa-line-chart learn-icon"></i>
+                            <h2>Analyst Reports</h2>
+                            <p>
+                                Find the latest research and insights from leading technology analysts on the power of OpenStack’s cloud services.
+                            </p>
+                            <a href="https://www.openstack.org/analysts" class="learn-btn">
+                                Go to Analyst Reports <i class="fa fa-chevron-right"></i>
                             </a>
                         </div>
                     </div>
@@ -94,7 +124,7 @@
                                 The OpenStack blog is an ever-changing wealth of information, highlighting everything from technical committee updates to events and weekly community newsletters.
                             </p>
                             <a href="https://www.openstack.org/blog" class="learn-btn">
-                                Go To The Blog <i class="fa fa-chevron-right"></i>
+                                Go to the Blog <i class="fa fa-chevron-right"></i>
                             </a>
                         </div>
                     </div>
@@ -102,13 +132,13 @@
                     <!-- Single Learn Element -->
                     <div class="col-sm-6">
                         <div class="learn-single">
-                            <i class="fa fa-play-circle learn-icon"></i>
-                            <h2>Summit Videos</h2>
+                            <i class="fa fa-newspaper-o learn-icon"></i>
+                            <h2>News</h2>
                             <p>
-                                Did you know almost every session at an OpenStack Summit is recordning and shared for the world to see? They are and you can find them here!
+                                Read about the latest happenings in the OpenStack ecosystem. The news section features news from around the community and the OpenStack Foundation.
                             </p>
-                            <a href="https://www.openstack.org/summit/tokyo-2015/summit-videos" class="learn-btn">
-                                Go To Summit Videos <i class="fa fa-chevron-right"></i>
+                            <a href="https://www.openstack.org/news" class="learn-btn">
+                                Go to the News Page <i class="fa fa-chevron-right"></i>
                             </a>
                         </div>
                     </div>

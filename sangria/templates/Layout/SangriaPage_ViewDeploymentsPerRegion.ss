@@ -12,16 +12,14 @@
                 <ul style="list-style: none">
                     <% loop DeploymentsPerContinent %>
                         <li>
-                            <a href="{$Top.Link(ViewDeploymentsPerRegion)}?continent={$continent_id}">$continent ($count
-                                )</a>
+                            <a href="{$Top.Link(ViewDeploymentsPerRegion)}?continent={$continent_id}">$continent ($count)</a>
                             <ul style="list-style: none">
                                 <% loop $Top.DeploymentsPerContinentCountry($continent_id) %>
                                     <li>
                                         <script type="application/javascript">
                                             countries_with_deployment["{$country}"] = {code:"{$country}" , name : "{$country_name}", deployments: {$count} };
                                         </script>
-                                        <a href="{$Top.Link(ViewDeploymentsPerRegion)}?country={$country}">$country_name
-                                            ($count)</a>
+                                        <a href="{$Top.Link(ViewDeploymentsPerRegion)}?country={$country}">$country_name ($count)</a>
                                     </li>
                                 <% end_loop %>
                             </ul>

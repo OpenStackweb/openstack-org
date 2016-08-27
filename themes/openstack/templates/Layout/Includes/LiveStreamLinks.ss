@@ -1,8 +1,8 @@
     <div class="livestream-links">
             <ul>
-                <li><a href="/summit/vancouver-2015/download-the-summit-app/">Get the app</a></li>
-                <li><a href="/summit/vancouver-2015/schedule/">Full Schedule</a></li>
-                <li><a href="/summit/vancouver-2015/summit-videos/">All Videos</a></li>
-                <li><a href="/summit/vancouver-2015/sponsors/">Sponsors</a></li>
+                <li><a href="/summit/austin-2016/mobile-apps/">Get the app</a></li>
+                <li><a href="/summit/austin-2016/summit-schedule/">Full Schedule</a></li>
+                <li><a href="/videos/">All Videos</a></li>
+                <li><a href="/summit/austin-2016/sponsors/">Sponsors</a></li>
             </ul>
         </div>

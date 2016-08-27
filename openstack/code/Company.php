@@ -473,7 +473,7 @@ class Company extends DataObject implements PermissionProvider,IEntity
         if (isset($img) && Director::fileExists($img->Filename) && $img->exists()) {
             $img = $img->SetWidth(100);
 
-            return "<img alt='{$this->Name}_sidebar_logo' src='{$img->getURL()}' class='sidebar-logo-company sponsor-logo'/>";
+            return "<img alt='{$this->Name}_sidebar_logo' src='{$img->getURL()}' class='sidebar-logo-company company-logo'/>";
         }
 
         return 'missing';
@@ -484,7 +484,7 @@ class Company extends DataObject implements PermissionProvider,IEntity
         $img = $this->Logo();
         $img = $img->SetWidth($width);
         if (isset($img) && Director::fileExists($img->Filename) && $img->exists()) {
-            return "<img alt='{$this->Name}_small_logo' src='{$img->getURL()}' class='small-logo-company sponsor-logo'/>";
+            return "<img alt='{$this->Name}_small_logo' src='{$img->getURL()}' class='small-logo-company company-logo'/>";
         }
 
         return 'missing';
@@ -497,10 +497,23 @@ class Company extends DataObject implements PermissionProvider,IEntity
         if (isset($img) && Director::fileExists($img->Filename) && $img->exists()) {
             $img = $img->SetWidth(210);
 
-            return "<img alt='{$this->Name}_medium_logo' src='{$img->getURL()}' class='medium-logo-company sponsor-logo'/>";
+            return "<img alt='{$this->Name}_medium_logo' src='{$img->getURL()}' class='medium-logo-company company-logo'/>";
         }
 
         return 'missing';
+    }
+
+    public function MediumLogoUrl()
+    {
+        $img = $this->BigLogo();
+        $img = $img->exists() ? $img : $this->Logo();
+        if (isset($img) && Director::fileExists($img->Filename) && $img->exists()) {
+            $img = $img->SetWidth(210);
+
+            return $img->getURL();
+        }
+
+        return '#';
     }
 
     public function LargeLogoPreview()
@@ -510,7 +523,7 @@ class Company extends DataObject implements PermissionProvider,IEntity
         if (isset($img) && Director::fileExists($img->Filename) && $img->exists()) {
             $img = $img->SetWidth(300);
 
-            return "<img alt='{$this->Name}_large_logo' src='{$img->getURL()}' class='large-logo-company sponsor-logo'/>";
+            return "<img alt='{$this->Name}_large_logo' src='{$img->getURL()}' class='large-logo-company company-logo'/>";
         }
 
         return 'missing';
@@ -542,7 +555,7 @@ class Company extends DataObject implements PermissionProvider,IEntity
         if (isset($img) && Director::fileExists($img->Filename) && $img->exists()) {
             $img = $img->SetWidth(300);
 
-            return "<img alt='{$this->Name}_big_logo' src='{$img->getURL()}' class='big-logo-company sponsor-logo'/>";
+            return "<img alt='{$this->Name}_big_logo' src='{$img->getURL()}' class='big-logo-company company-logo'/>";
         }
 
         return 'missing';
@@ -644,5 +657,20 @@ class Company extends DataObject implements PermissionProvider,IEntity
         }
 
         return null;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCOAPartner(){
+        foreach (COALandingPage::get() as $coa_page) { // we check all coa pages as there are duplicates (Students)
+            if (is_null($coa_page)) continue;
+            if ($coa_page->TrainingPartners()->count() == 0) continue;
+
+            if (intval($coa_page->TrainingPartners()->filter('CompanyID', $this->ID)->count()) > 0)
+                return true;
+        }
+
+        return false;
     }
 }

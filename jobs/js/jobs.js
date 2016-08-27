@@ -13,7 +13,10 @@
 
 (function( $ ){
     var refresh_interval = 30000;
-    var xhr = null;
+    var xhr              = null;
+    var sort_by          = null;
+    var type             = null;
+    var keywords         = null;
 
     $(document).ready(function($){
 
@@ -43,14 +46,59 @@
             return false;
         });
 
+        $("#ddl-menu-sort").on('click', 'li a', function(){
+            $("#sort_by").html($(this).text()+' <span class="caret"></span>');
+            sort_by = $(this).attr('data-sort-by');
+            refresh_jobs();
+        });
+
+        $("#ddl-menu-types").on('click', 'li a', function(){
+            $("#filter_by_type").html($(this).text()+' <span class="caret"></span>');
+            type = $(this).attr('data-type-id');
+            refresh_jobs();
+        });
+
+        $(document).on('click', '.search-btn',function(){
+            keywords = $('#txt-keywords').val();
+            $('.clear-btn').show();
+            refresh_jobs();
+        });
+
+        $(document).on('click', '.clear-btn',function(){
+            $('#txt-keywords').val('');
+            keywords = '';
+            $('.clear-btn').hide();
+            refresh_jobs();
+        });
+
+        $('#txt-keywords').on('keypress', function (e) {
+            if(e.which === 13){
+                keywords = $('#txt-keywords').val();
+                $('.clear-btn').show();
+                refresh_jobs();
+            }
+        });
+
         setInterval(refresh_jobs, refresh_interval);
+
     })
 
     function refresh_jobs() {
         if(xhr!=null) return;
 
-        var foundation = (typeof($.QueryString['foundation']) != "undefined") ? 1 : 0;
-        var url = 'api/v1/jobs/list?foundation='+foundation;
+        var url = 'api/v1/jobs/list';
+
+        if(type != null){
+            url += (url.indexOf('?') > 0?'&':'?')+'type_id='+type;
+        }
+
+        if(keywords != null && keywords != ''){
+            url += (url.indexOf('?') > 0?'&':'?') +  'kw='+keywords;
+        }
+
+        if(sort_by != null){
+            url += (url.indexOf('?') > 0?'&':'?')+'sort_by='+sort_by;
+        }
 
         xhr = $.ajax({
             type: "GET",
@@ -58,7 +106,8 @@
             success: function(result){
 
                 $('.jobPosting','.job_list').remove();
-                $('.job_list').append(result);
+                if(result == '') result='<div class="empty-job-list"><p>There are no jobs matching your criterias!</p></div>';
+                $('.job_list').html(result);
 
                 if (document.location.hash && document.location.hash != '#none') {
                     var opened_job_id = document.location.hash.substring(1);

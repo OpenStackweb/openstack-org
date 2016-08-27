@@ -16,6 +16,7 @@
                 <% loop $Summit.Attendees.Limit(20) %>
                     attendees.push(
                     {
+                        id: "{$ID}",
                         member_id : "{$Member.ID}",
                         name : "{$Member.FullName.JS}",
                         email : "{$Member.Email.JS}",

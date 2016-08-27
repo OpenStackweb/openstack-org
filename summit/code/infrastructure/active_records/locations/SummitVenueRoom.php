@@ -17,28 +17,35 @@ class SummitVenueRoom extends SummitAbstractLocation implements ISummitVenueRoom
 
     private static $db = array
     (
-        'Capacity' => 'Int',
+        'Capacity'          => 'Int',
         'OverrideBlackouts' => 'Boolean',
     );
 
     private static $has_many = array
     (
+        'Metrics' => 'RoomMetricType'
     );
 
     private static $has_one = array
     (
-        'Venue' => 'SummitVenue'
+        'Venue' => 'SummitVenue',
+        'Floor' => 'SummitVenueFloor',
+        'Image' => 'BetterImage',
     );
 
     public function getFullName()
     {
-        return sprintf('%s - %s', $this->Venue()->Name, $this->Name);
+        if ($this->Floor()->exists())
+            return sprintf('%s - %s - %s', $this->Floor()->Venue()->Name, $this->Floor()->Name, $this->Name);
+        else
+            return sprintf('%s - %s', $this->Venue()->Name, $this->Name);
     }
 
     private static $summary_fields = array
     (
         'Name',
         'Capacity',
+        'FloorName',
         'OverrideBlackouts',
     );
 
@@ -65,23 +72,75 @@ class SummitVenueRoom extends SummitAbstractLocation implements ISummitVenueRoom
         return $this->OverrideBlackouts;
     }
 
+    public function getFloorName(){
+        return $this->Floor()->exists()?$this->Floor()->getFullName() : 'NOT SET';
+    }
+
     public function getCMSFields()
     {
         $f = parent::getCMSFields();
+        // hack
+        $this->SummitID = $_REQUEST['SummitID'];
+        $this->VenueID  = $_REQUEST['VenueID'];
         $f->addFieldToTab('Root.Main', new NumericField('Capacity','Capacity'));
         $f->addFieldToTab('Root.Main', new CheckboxField('OverrideBlackouts','Overrides Blackouts'));
         $f->addFieldToTab('Root.Main', new HiddenField('VenueID','VenueID'));
-        // hack
-        $this->SummitID = $_REQUEST['SummitID'];
+        $f->addFieldToTab('Root.Main', $ddl_floor = new DropdownField('FloorID','Floor', SummitVenueFloor::get()->filter('VenueID', $this->VenueID )->map("ID", "FullName")));
+        $ddl_floor->setEmptyString("-- SELECT A FLOOR --");
+        $f->addFieldToTab('Root.Main', $upload_field = new UploadField('Image','Map'));
+        $upload_field->setAllowedMaxFileNumber(1);
+        $upload_field->setFolderName(sprintf('summits/%s/locations/%s/rooms/', $_REQUEST['SummitID'], $_REQUEST['LocationID']));
+        $upload_field->getValidator()->setAllowedMaxFileSize(array('*' => 512 * 1024));
+
+        if($this->ID > 0){
+            $config    = GridFieldConfig_RecordEditor::create();
+            $gridField = new GridField('Metrics', 'Metrics', $this->Metrics(), $config);
+            $f->addFieldToTab('Root.Main', $gridField);
+        }
         return $f;
+    }
+
+    /**
+     * @return ValidationResult
+     */
+    protected function validate()
+    {
+
+        $valid = parent::validate();
+        if (!$valid->valid()) {
+            return $valid;
+        }
+
+        return $valid;
     }
 
     public function getTypeName()
     {
-        return 'VenueRoom';
+        return self::TypeName;
     }
+
+    public function inferLocationType()
+    {
+        return self::LocationType;
+    }
+
+    const TypeName     = 'VenueRoom';
+    const LocationType = 'Internal';
 
     public function getVenue() {
         return $this->Venue();
+    }
+
+    public function getLink() {
+        return parent::getLink().'/#room='.$this->ID;
+    }
+
+
+    /**
+     * @return IRoomMetricType[]
+     */
+    public function getMetricTypes()
+    {
+        return AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Metrics')->toArray();
     }
 }

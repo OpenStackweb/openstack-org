@@ -14,11 +14,7 @@
 /**
  * Class JobManager
  */
-final class JobManager {
-	/**
-	 * @var IEntityRepository
-	 */
-	private $repository;
+final class JobManager implements IJobManager {
 	/**
 	 * @var IJobsValidationFactory
 	 */
@@ -79,7 +75,7 @@ final class JobManager {
 
         $job =  $this->tx_manager->transaction(function() use ($id, $jobs_repository){
             $job = $jobs_repository->getById($id);
-            if(!$job) throw new NotFoundEntityException('JobPage',sprintf('id %s',$id ));
+            if(!$job) throw new NotFoundEntityException('Job',sprintf('id %s',$id ));
             $job->toggleFoundation();
 
             return $job;
@@ -87,32 +83,6 @@ final class JobManager {
 
 
         return $job;
-    }
-
-    /**
-     * @param array $data
-     * @return IJob
-     */
-    public function registerJob(array $data){
-        /*$validator_factory = $this->validator_factory;
-        $factory           = $this->factory;
-        $repository        = $this->repository ;
-        return $this->tx_manager->transaction(function() use($data, $repository, $factory, $validator_factory){
-            $validator = $validator_factory->buildValidatorForJobRegistration($data);
-            if ($validator->fails()) {
-                throw new EntityValidationException($validator->messages());
-            }
-            $new_registration_request = $factory->buildJobRegistrationRequest(
-                $factory->buildJobMainInfo($data),
-                $factory->buildJobLocations($data),
-                $factory->buildJobPointOfContact($data)
-            );
-            $current_user = Member::currentUser();
-            if($current_user){
-                $new_registration_request->registerUser($current_user);
-            }
-            $repository->add($new_registration_request);
-        });*/
     }
 
     /**
@@ -131,7 +101,7 @@ final class JobManager {
 
             $job = $repository->getById(intval($data['id']));
             if(!$job)
-                throw new NotFoundEntityException('JobPage',sprintf('id %s',$data['id'] ));
+                throw new NotFoundEntityException('Job',sprintf('id %s',$data['id'] ));
 
             $job->registerMainInfo($factory->buildJobMainInfo($data));
             $locations = $factory->buildJobLocations($data);
@@ -145,17 +115,15 @@ final class JobManager {
 
     /**
      * @param $id
-     * @return IJob
+     * @return void
      */
     public function deleteJob($id){
         $jobs_repository = $this->jobs_repository;
 
-        $job =  $this->tx_manager->transaction(function() use ($id, $jobs_repository){
+        $this->tx_manager->transaction(function() use ($id, $jobs_repository){
             $job = $jobs_repository->getById($id);
             $jobs_repository->delete($job);
-
         });
-
     }
 
     /**
@@ -164,29 +132,32 @@ final class JobManager {
      */
     public function addJob(array $data){
 
-        $this_var           = $this;
         $validator_factory  = $this->validator_factory;
         $repository         = $this->jobs_repository;
         $factory            = $this->factory;
 
-        return  $this->tx_manager->transaction(function() use ($this_var,$factory, $validator_factory, $data, $repository){
+        return  $this->tx_manager->transaction(function() use ($factory, $validator_factory, $data, $repository){
+
             $validator = $validator_factory->buildValidatorForJob($data);
+
             if ($validator->fails()) {
                 throw new EntityValidationException($validator->messages());
             }
 
-            $job = new JobPage();
+            $job = new Job();
 
             $job->registerMainInfo($factory->buildJobMainInfo($data));
             $job->registerPostedDate($data['posted_date']);
             $locations = $factory->buildJobLocations($data);
+
             $job->clearLocations();
+
             foreach($locations as $location)
                 $job->addLocation($location);
 
-            $job_id = $repository->add($job);
+            $repository->add($job);
 
-            return $job_id;
+            return $job;
         });
     }
 } 

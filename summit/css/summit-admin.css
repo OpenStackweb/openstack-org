@@ -22,6 +22,14 @@
     text-align: center;
 }
 
+.btn-default {
+    color: #333 !important;
+}
+
+.btn-success {
+    color: white !important;
+}
+
 /* DIRECTORY */
 
 #create_summit .form-group {
@@ -84,13 +92,13 @@
 
 .unpublished-container .unpublished-events-list-container {
     height: 100%;
-    margin-top: 20px;
 }
 
 .unpublished-container .unpublished-events-list {
     overflow-y: auto;
-    height: 75%;
+    height: 74%;
     position: relative;
+    margin-bottom: 0px;
 }
 
 .unpublished-events-list::-webkit-scrollbar {
@@ -107,7 +115,7 @@
 }
 
 .unpublished-container .items_per_page {
-    margin: 10px 0;
+    margin: 0 0 10px 0;
     float:  right;
     width: 20%;
 }
@@ -122,7 +130,7 @@
 }
 
 #unpublished-events-pager {
-    margin: 10px 0 20px 0;
+    margin: 0 0 20px 0;
 }
 
 /* SCHEDULE RESULTS */

@@ -200,6 +200,6 @@ class MarketPlaceDirectoryPage_Controller extends MarketPlacePage_Controller {
     private function sort_reviews($a,$b)
     {
         if ($a->Created==$b->Created) return 0;
-        return ($a->Created<$b->Created)?-1:1;
+        return (strtotime($a->Created) < strtotime($b->Created)) ? 1 : -1;
     }
 }

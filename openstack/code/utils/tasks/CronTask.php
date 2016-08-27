@@ -33,6 +33,15 @@ abstract class CronTask extends CliController {
         return LOCK_DIR . strtolower(get_class($this)) .LOCK_SUFFIX;;
     }
 
+    public function index() {
+        foreach(ClassInfo::subclassesFor($this->class) as $subclass) {
+            echo $subclass . "\n";
+            $task = $subclass::create();
+            $task->init();
+            $task->process();
+        }
+    }
+
     protected function unlock() {
 
         $lock_file = $this->getLockFile();

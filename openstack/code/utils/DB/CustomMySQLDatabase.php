@@ -20,6 +20,23 @@ class CustomMySQLDatabase extends MySQLDatabase
         $this->query('SET AUTOCOMMIT=1;');
     }
 
+    /**
+     * Return a int type-formatted string
+     *
+     * @param array $values Contains a tokenised list of info about this data type
+     * @return string
+     */
+    public function int($values){
+        //For reference, this is what typically gets passed to this function:
+        //$parts=Array('datatype'=>'int', 'precision'=>11, 'null'=>'not null', 'default'=>(int)$this->default);
+        //DB::requireField($this->tableName, $this->name, "int(11) not null default '{$this->defaultVal}'");
+        $precision = isset($values['precision']) ? intval($values['precision']): 11;
+        $nullable  = isset($values['null']) ? ( $values['null'] === 'null' ? 'NULL':'NOT NULL'): 'NOT NULL';
+        $default   = isset($values['default'])? ( is_null($values['default'])? 'NULL': intval($values['default'])): 'NULL';
+        $field     = sprintf("int(%s) %s default %s",$precision, $nullable ,$default );
+        return $field;
+    }
+
     public function databaseError($msg, $errorLevel = E_USER_ERROR)
     {
         // try to extract and format query

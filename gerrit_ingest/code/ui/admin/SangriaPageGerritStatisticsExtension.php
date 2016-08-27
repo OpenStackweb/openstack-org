@@ -14,6 +14,8 @@
 
 class SangriaPageGerritStatisticsExtension extends Extension {
 
+    use GoogleMapLibs;
+
     public function onBeforeInit(){
         Config::inst()->update(get_class($this), 'allowed_actions', array('GerritStatisticsReport'));
         Config::inst()->update(get_class($this->owner), 'allowed_actions', array('GerritStatisticsReport'));
@@ -33,17 +35,12 @@ class SangriaPageGerritStatisticsExtension extends Extension {
             Requirements::javascript('themes/openstack/javascript/jquery.js');
         }
 
-        Requirements::javascript('themes/openstack/javascript/jquery-migrate-1.2.1.min.js');
 
+        Requirements::javascript('themes/openstack/javascript/jquery-migrate-1.2.1.min.js');
         Requirements::javascript("themes/openstack/javascript/jquery.cookie.js");
         Requirements::javascript("themes/openstack/javascript/bootstrap.min.js");
-        Requirements::css('themes/openstack/css/bootstrap.min.css');
-        Requirements::javascript(Director::protocol()."maps.googleapis.com/maps/api/js?sensor=false");
+        $this->InitGoogleMapLibs();
         Requirements::javascript("marketplace/code/ui/admin/js/utils.js");
-        Requirements::javascript("marketplace/code/ui/frontend/js/markerclusterer.js");
-        Requirements::javascript("marketplace/code/ui/frontend/js/oms.min.js");
-        Requirements::javascript("marketplace/code/ui/frontend/js/infobubble-compiled.js");
-        Requirements::javascript("marketplace/code/ui/frontend/js/google.maps.jquery.js");
         Requirements::javascript('themes/openstack/javascript/Chart.js');
         Requirements::javascript("gerrit_ingest/js/sangria.page.gerrit.statistics.report.js");
         Requirements::css('gerrit_ingest/css/sangria.page.gerrit.statistics.report.css');

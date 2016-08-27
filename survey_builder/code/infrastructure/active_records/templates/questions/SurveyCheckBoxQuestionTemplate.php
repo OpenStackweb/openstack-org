@@ -42,4 +42,20 @@ class SurveyCheckBoxQuestionTemplate
     public function Type(){
         return 'CheckBox';
     }
+
+    public function JSONValues(){
+        $values = [];
+
+        $values[] = [
+            'id'    => 1,
+            'label' => 'True',
+        ];
+
+        $values[] = [
+            'id'    => 0,
+            'label' => 'False',
+        ];
+
+        return json_encode($values);
+    }
 }

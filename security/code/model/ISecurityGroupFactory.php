@@ -16,6 +16,8 @@ interface ISecurityGroupFactory
 {
     const UsersGroupCode = 'users';
 
+    const SpeakersGroupCode = 'speakers';
+
     /**
      * @param string$code
      * @param null|string $title

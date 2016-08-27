@@ -9,6 +9,8 @@ module.exports = {
     "summit/javascript/summit-highlights":"./summit/javascript/summit-highlights.js",
     "summit/javascript/schedule/schedule":"./summit/javascript/schedule/schedule.js",
     "summit/javascript/schedule/event-detail":"./summit/javascript/schedule/event-detail.js",
+    "summit/javascript/schedule/my-schedule-view":"./summit/javascript/schedule/my-schedule-view.js",
+    "summit/javascript/schedule/full-schedule-view":"./summit/javascript/schedule/full-schedule-view.js",
     "summit/javascript/schedule/share-buttons":"./summit/javascript/schedule/share-buttons.js",
     "summit/javascript/forms/tagmanagerfield/tagmanagerfield":"./summit/javascript/forms/tagmanagerfield/tagmanagerfield.js",
     "summit/javascript/schedule/event-list":"./summit/javascript/schedule/event-list.js",
@@ -17,6 +19,8 @@ module.exports = {
     "summit/javascript/schedule/admin/reports-admin-view":"./summit/javascript/schedule/admin/reports-admin-view.js",
     "survey_builder/js/report/survey-report-view":"./survey_builder/js/report/survey-report-view.js",
     "summit/javascript/schedule/admin/speakers-admin-view":"./summit/javascript/schedule/admin/speakers-admin-view.js",
+    "summit/javascript/schedule/admin/promocode-admin-view":"./summit/javascript/schedule/admin/promocode-admin-view.js",
+    "summit/javascript/schedule/admin/events-bulk-view":"./summit/javascript/schedule/admin/events-bulk-view.js"
   },
   output: {
     path: __dirname ,
@@ -37,6 +41,7 @@ module.exports = {
   ],
   module: {
     loaders: [
+      { test: /\.js$/, loader: 'babel?presets[]=es2015', exclude: /(node_modules|bower_components)/ },
       { test: /\.tag$/, loader: 'tag' },
       { test: /\.css$/, loader: "style!css" },
       { test: /\.less$/, loader: 'style!css!less' },

@@ -1,0 +1,57 @@
+---
+Name: 'jobs-injection'
+---
+JobHolder_Controller:
+  dependencies:
+    JobRepository: '%$JobRepository'
+JobPage_Controller:
+  dependencies:
+    JobManager: '%$JobManager'
+JobRegistrationRequestPage_Controller:
+  dependencies:
+    JobRegistrationRequestManager: '%$JobRegistrationRequestManager'
+Injector:
+  JobRepository:
+    class: SapphireJobRepository
+  JobRegistrationRequestRepository:
+    class: SapphireJobRegistrationRequestRepository
+  JobAlertEmailRepository:
+    class: SapphireJobAlertEmailRepository
+  JobFactory:
+    class: JobFactory
+  JobsValidationFactory:
+    class: JobsValidationFactory
+  JobPublishingService:
+    class: SapphireJobPublishingService
+  CompaniesNamesQueryHandler:
+    class: CompaniesNamesQueryHandler
+  JobRegistrationRequestManager:
+    constructor:
+      0: '%$JobRegistrationRequestRepository'
+      1: '%$JobRepository'
+      2: '%$JobAlertEmailRepository'
+      3: '%$JobFactory'
+      4: '%$JobsValidationFactory'
+      5: '%$JobPublishingService'
+      6: '%$TransactionManager'
+  JobRegistrationRequestCrudApi:
+    constructor:
+      0: '%$JobRegistrationRequestManager'
+      1: '%$JobRegistrationRequestRepository'
+      2: '%$CompaniesNamesQueryHandler'
+  JobManager:
+    constructor:
+      0: '%$JobRepository'
+      1: '%$JobAlertEmailRepository'
+      2: '%$JobFactory'
+      3: '%$JobsValidationFactory'
+      4: '%$JobPublishingService'
+      5: '%$TransactionManager'
+  JobCrudApi:
+    constructor:
+      0: '%$JobRepository'
+      1: '%$JobManager'
+  SangriaPageJobsExtension:
+    constructor:
+      0: '%$JobRegistrationRequestRepository'
+      1: '%$JobRepository'

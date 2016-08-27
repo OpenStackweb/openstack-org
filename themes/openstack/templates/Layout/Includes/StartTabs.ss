@@ -1,7 +1,7 @@
 <% require themedCSS(starttabs) %>	
 <% require themedCSS(start) %>
 
-	<h1>How To Get Started With OpenStack</h1>
+	<h1><%t Openstack.HOW_TO_GET_STARTED 'How To Get Started With OpenStack' %></h1>
 
 	$StartOverview
 

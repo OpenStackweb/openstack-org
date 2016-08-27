@@ -13,11 +13,13 @@
                             You MUST push "CONFIRM MY SUBMISSION" to complete the process.</p>
                     </div>
                     <% include PresentationPreview Presentation=$Presentation %>
-                    <div>
+                    <div class="row confirm-actions">
+                        <div class="col-md-12">
                         <p><a class="btn btn-primary" href="$SuccessLink">Confirm my submission <i
                                 class="fa fa-arrow-right fa-end"></i></a>&nbsp;<a class="btn btn-primary"
                                                                                   href="$Presentation.EditLink">Make
                             changes</a></p>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -18,36 +18,53 @@
 
 .global-search-div {
     position: relative;
-    top: -40px;
+    top: 0px;
     float: right;
     width: 420px;
 }
 
+.global-search-container {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+
 .global-search-div input {
-    font-family: Montserrat, Sans-serif;
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+}
+
+.schedule-title-wrapper {
+    padding: 20px 0;
+}
+
+.col-main-title h1 {
+    margin: 0;
+    line-height: 1.5;
 }
 
 .title_box {
-    background-color:#132539;
+    /*background-color:#132539;*/
     padding: 30px 0;
 }
 
 .col1 {
     float: left;
-    width: 60%;
+    width: 55%;
 }
 
 .col2 {
     float: right;
-    width: 30%;
+    width: 40%;
+    background-color: #eaeaea;
+    padding: 20px;
 }
 
 .title {
-    margin-bottom: 10px;
+    color: #2A4E68;
+    font-size: 24px;
+    margin: 0;
+    line-height: 1.5;
     text-align: left;
-    color: white;
-    font-size: 42px;
-    float: left;
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 }
 
 .actions {
@@ -55,22 +72,21 @@
     width: 200px;
 }
 
-.subtitle {
-    font-size: 15px;
-    clear: both;
+.track, .track a {
+    font-size: 16px;
+    color: #777;
+    margin: 0px 0px 35px 0;
 }
 
-.subtitle a {
-    color: grey;
-    text-decoration: none;
-}
-
-.subtitle a:hover {
+.track a:hover {
     text-decoration: underline;
 }
 
+.back {
+    text-align: right;
+}
+
 .section1 {
-    padding-top: 30px;
     padding-bottom: 30px;
     color: #4C4C4C;
     /*border-bottom: 1px solid grey;*/
@@ -80,6 +96,10 @@
     font-size: 20px;
 }
 
+.expected-learnt div {
+    font-weight: bold;
+}
+
 .info {
 
 }
@@ -87,6 +107,7 @@
 .info_item {
     clear: both;
     margin-bottom: 15px;
+    min-height: 20px;
 }
 
 .info_item_icon {
@@ -104,6 +125,11 @@
     line-height: 23px;
     position: relative;
     left: -2px;
+    font-size: 1.6em;
+}
+
+.icon-map {
+    font-size: 1.6em;
 }
 
 .icon-level {
@@ -111,6 +137,11 @@
     overflow: hidden;
     position: relative;
     top: -10px;
+}
+
+.info_item_text {
+    float: left;
+    width: 90%;
 }
 
 .btn-rsvp-event
@@ -143,16 +174,14 @@
 }
 
 .description {
-    font-family: "Helvetica",sans-serif;
-    font-size: 18px !important;
-    font-weight: 400 !important;
+    color: #2A4E68;
+    font-family: Helvetica,Sans-serif;
+    font-size: 1em;
+    font-weight: 400;
 }
 
 .logo {
     text-align: center;
-    margin-top: 35px;
-    min-height: 280px;
-    background-color: #F5F5F5;
 }
 
 .multi_logo {
@@ -180,10 +209,6 @@
 }
 
 .speaker_box {
-    background-color: #EEEEEE;
-    border-bottom: 1px solid #C2C2C2;
-    border-top: 1px solid #C2C2C2;
-    padding-bottom: 30px;
     color: #4C4C4C;
 }
 
@@ -198,13 +223,9 @@
     margin-left: 15px;
 }
 
-.speaker_info {
-    padding-top: 8px;
-}
-
 .speaker_name {
     margin:0;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
 }
 
@@ -214,12 +235,12 @@
 
 .speaker_job_title {
     color: #AAAAAA;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .speaker_bio {
     margin-top: 10px;
-    font-size: 14px;
+    font-size: 12px;
     font-family: "Helvetica",sans-serif;
 }
 
@@ -302,8 +323,23 @@
     color:#5BC86B;
 }
 
-.speaker-photo
-{
-    width: 120px;
-    height: 120px;
+.speaker-photo-left {    
+    float: left;
+    padding-right: 15px;
+    padding-bottom: 20px;
+}
+
+a.profile-pic-wrapper {
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    border-radius: 50%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #fff;
+}
+
+.error {
+    color: red;
 }

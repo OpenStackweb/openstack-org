@@ -1,0 +1,9 @@
+.or_div {
+    text-align: center;
+    padding: 15px 0 5px 0;
+    width: 30%;
+}
+
+.member_container, .company_container, .addressee_container {
+    display: none;
+}

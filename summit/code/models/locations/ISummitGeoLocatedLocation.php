@@ -69,4 +69,14 @@ interface ISummitGeoLocatedLocation extends ISummitLocation
      * @return string[]
      */
     public function getMapsUrls();
+
+    /**
+     * @return SummitLocationImage[]
+     */
+    public function getPictures();
+
+    /**
+     * @return SummitLocationImage
+     */
+    public function getFirstPicture();
 }

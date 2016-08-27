@@ -20,6 +20,11 @@ final class SummitAppAdminController extends Controller implements PermissionPro
      */
     private $event_repository;
     /**
+     * @var ISummitRegistrationPromoCodeRepository
+     */
+    private $promocode_repository;
+
+    /**
      * Return a map of permission codes to add to the dropdown shown in the Security section of the CMS.
      * array(
      *   'VIEW_SITE' => 'View the site',
@@ -84,6 +89,7 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         Requirements::javascript('themes/openstack/javascript/jquery.serialize.js');
 
         $this->event_repository = new SapphireSummitEventRepository();
+        $this->promocode_repository = new SapphireSummitRegistrationPromoCodeRepository();
     }
 
     private static $url_segment = 'summit-admin';
@@ -105,7 +111,14 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         'scheduleView',
         'scheduleViewEditBulkAction',
         'speakers',
-        'editSpeaker'
+        'editSpeaker',
+        'promocodes',
+        'editPromoCode',
+        'promocodes_sponsors',
+        'editPromoCodeSponsor',
+        'promocodes_bulk',
+        'speakers_merge',
+        'events_bulk',
     );
 
     private static $url_handlers = array
@@ -118,13 +131,20 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         '$SummitID!/events/unpublished'                              => 'pendingEvents',
         '$SummitID!/events/presentation-lists/$PresentationListId!'  => 'editPresentationList',
         '$SummitID!/events/presentation-lists'                       => 'presentationLists',
+        '$SummitID!/events/bulk'                                     => 'events_bulk',
         '$SummitID!/events/$EventID'                                 => 'editEvent',
         '$SummitID!/tickets'                                         => 'ticketTypes',
         '$SummitID!/attendees/$AttendeeID!'                          => 'editAttendee',
         '$SummitID!/attendees'                                       => 'attendees',
         '$SummitID!/edit'                                            => 'editSummit',
+        '$SummitID!/speakers/merge'                                  => 'speakers_merge',
         '$SummitID!/speakers/$SpeakerID!'                            => 'editSpeaker',
         '$SummitID!/speakers'                                        => 'speakers',
+        '$SummitID!/promocodes/sponsors/$SponsorID!'                 => 'editPromoCodeSponsor',
+        '$SummitID!/promocodes/sponsors'                             => 'promocodes_sponsors',
+        '$SummitID!/promocodes/bulk'                                 => 'promocodes_bulk',
+        '$SummitID!/promocodes/$Code!'                               => 'editPromoCode',
+        '$SummitID!/promocodes'                                      => 'promocodes',
     );
 
     /**
@@ -438,6 +458,8 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         Requirements::javascript('themes/openstack/javascript/bootstrap-paginator/src/bootstrap-paginator.js');
         Requirements::javascript('themes/openstack/bower_assets/sweetalert/dist/sweetalert.min.js');
         Requirements::javascript('themes/openstack/javascript/jquery-ajax-loader.js');
+        Requirements::javascript('summit/javascript/summit-admin-schedule.js');
+
         $summit_id = intval($request->param('SummitID'));
         $summit    = Summit::get()->byID($summit_id);
         if(is_null($summit) || $summit->ID <= 0) return $this->httpError(404);
@@ -523,6 +545,7 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         Requirements::css('summit/css/simple-sidebar.css');
         Requirements::css('summit/css/summit-admin-reports.css');
         Requirements::css('themes/openstack/bower_assets/sweetalert/dist/sweetalert.css');
+        Requirements::css('themes/openstack/bower_assets/jquery-ui/themes/smoothness/jquery-ui.css');
         Requirements::javascript('themes/openstack/bower_assets/sweetalert/dist/sweetalert.min.js');
         Requirements::javascript('summit/javascript/simple-sidebar.js');
         Requirements::javascript('themes/openstack/javascript/bootstrap-paginator/src/bootstrap-paginator.js');
@@ -578,6 +601,43 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         );
     }
 
+    public function speakers_merge(SS_HTTPRequest $request)
+    {
+        $summit_id = intval($request->param('SummitID'));
+
+        $summit = Summit::get()->byID($summit_id);
+
+        Requirements::css('summit/css/simple-sidebar.css');
+        // tag inputes
+        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.css');
+        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css');
+        Requirements::css('themes/openstack/bower_assets/sweetalert/dist/sweetalert.css');
+        Requirements::css('summit/css/summit-admin-speaker-merge.css');
+
+        Requirements::javascript('summit/javascript/simple-sidebar.js');
+        Requirements::javascript('themes/openstack/javascript/bootstrap-paginator/src/bootstrap-paginator.js');
+        Requirements::javascript('themes/openstack/javascript/urlfragment.jquery.js');
+        Requirements::javascript('themes/openstack/javascript/jquery-ajax-loader.js');
+        Requirements::javascript('themes/openstack/bower_assets/sweetalert/dist/sweetalert.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/additional-methods.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/typeahead.js/dist/typeahead.bundle.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js');
+        Requirements::javascript('themes/openstack/javascript/jquery.cleanform.js');
+        Requirements::javascript('summit/javascript/summit-admin-speaker-merge.js');
+
+        return $this->getViewer('speakers_merge')->process
+            (
+                $this->customise
+                    (
+                        array
+                        (
+                            'Summit' => $summit,
+                        )
+                    )
+            );
+    }
+
     public function editSpeaker(SS_HTTPRequest $request)
     {
         $summit_id  = intval($request->param('SummitID'));
@@ -586,6 +646,7 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         $speaker    = PresentationSpeaker::get()->byID($speaker_id);
 
         Requirements::css('summit/css/simple-sidebar.css');
+        Requirements::css('summit/css/summit-admin-edit-speaker.css');
         Requirements::css('themes/openstack/bower_assets/chosen/chosen.min.css');
         Requirements::css('themes/openstack/bower_assets/sweetalert/dist/sweetalert.css');
         // tag input
@@ -612,6 +673,241 @@ final class SummitAppAdminController extends Controller implements PermissionPro
                 )
             )
         );
+    }
+
+    /**
+     * @param string $type
+     * @return bool
+     */
+    public function IsPresentationEventType($type){
+        return SummitService::IsPresentationEventType($type);
+    }
+
+    /**
+     * @param string $type
+     * @return bool
+     */
+    public function IsSummitEventType($type){
+        return SummitService::IsSummitEventType($type);
+    }
+
+    public function Time(){
+        return time();
+    }
+
+    public function promocodes(SS_HTTPRequest $request)
+    {
+        $summit_id = intval($request->param('SummitID'));
+
+        $summit = Summit::get()->byID($summit_id);
+        $promocode_types = SummitRegistrationPromoCode::getTypes();
+
+        Requirements::css('summit/css/simple-sidebar.css');
+        // tag inputes
+        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.css');
+        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css');
+        Requirements::css('themes/openstack/bower_assets/sweetalert/dist/sweetalert.css');
+        Requirements::css('summit/css/summitapp-promocode.css');
+
+        Requirements::javascript('summit/javascript/simple-sidebar.js');
+        Requirements::javascript('themes/openstack/javascript/bootstrap-paginator/src/bootstrap-paginator.js');
+        Requirements::javascript('themes/openstack/javascript/urlfragment.jquery.js');
+        Requirements::javascript('themes/openstack/javascript/jquery-ajax-loader.js');
+        Requirements::javascript('themes/openstack/bower_assets/sweetalert/dist/sweetalert.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/additional-methods.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/typeahead.js/dist/typeahead.bundle.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js');
+        Requirements::javascript('themes/openstack/javascript/jquery.cleanform.js');
+        Requirements::javascript('summit/javascript/summitapp-promocode.js');
+
+        return $this->getViewer('promocodes')->process
+            (
+                $this->customise
+                    (
+                        array
+                        (
+                            'Summit' => $summit,
+                            'CodeTypes' => $promocode_types,
+                        )
+                    )
+            );
+    }
+
+    public function editPromoCode(SS_HTTPRequest $request)
+    {
+        $summit_id  = intval($request->param('SummitID'));
+        $summit     = Summit::get()->byID($summit_id);
+        $code       = $request->param('Code');
+        $promo_code = $this->promocode_repository->getByCode($summit_id, $code);
+        $promocode_types = SummitRegistrationPromoCode::getTypes();
+
+        Requirements::css('summit/css/simple-sidebar.css');
+        Requirements::css('summit/css/summit-admin-edit-promocode.css');
+        Requirements::css('themes/openstack/bower_assets/chosen/chosen.min.css');
+        Requirements::css('themes/openstack/bower_assets/sweetalert/dist/sweetalert.css');
+        Requirements::css('themes/openstack/bower_assets/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
+        // tag input
+        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.css');
+        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css');
+        Requirements::javascript('themes/openstack/bower_assets/sweetalert/dist/sweetalert.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/additional-methods.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/chosen/chosen.jquery.min.js');
+        Requirements::javascript('summit/javascript/simple-sidebar.js');
+        Requirements::javascript('//tinymce.cachefly.net/4.3/tinymce.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/typeahead.js/dist/typeahead.bundle.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js');
+        Requirements::javascript('summit/javascript/summitapp-editpromocode.js');
+
+        return $this->getViewer('editPromoCode')->process
+            (
+                $this->customise
+                    (
+                        array
+                        (
+                            'Summit'         => $summit,
+                            'PromoCode'      => $promo_code,
+                            'PromoCodeTypes' => $promocode_types,
+                        )
+                    )
+            );
+    }
+
+    public function promocodes_sponsors(SS_HTTPRequest $request)
+    {
+        $summit_id = intval($request->param('SummitID'));
+        $summit = Summit::get()->byID($summit_id);
+        $promocodes = $this->promocode_repository->getGroupedBySponsor($summit_id);
+
+        Requirements::css('summit/css/simple-sidebar.css');
+        // tag inputes
+        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.css');
+        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css');
+        Requirements::css('themes/openstack/bower_assets/sweetalert/dist/sweetalert.css');
+        Requirements::css('summit/css/summitapp-promocode.css');
+
+        Requirements::javascript('summit/javascript/simple-sidebar.js');
+        Requirements::javascript('themes/openstack/javascript/bootstrap-paginator/src/bootstrap-paginator.js');
+        Requirements::javascript('themes/openstack/javascript/urlfragment.jquery.js');
+        Requirements::javascript('themes/openstack/javascript/jquery-ajax-loader.js');
+        Requirements::javascript('themes/openstack/bower_assets/sweetalert/dist/sweetalert.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/additional-methods.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/typeahead.js/dist/typeahead.bundle.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js');
+        Requirements::javascript('themes/openstack/javascript/jquery.cleanform.js');
+        Requirements::javascript('summit/javascript/summitapp-promocode.js');
+
+        return $this->getViewer('promocodes_sponsors')->process
+            (
+                $this->customise
+                    (
+                        array
+                        (
+                            'Summit' => $summit,
+                            'PromoCodes' => $promocodes,
+                        )
+                    )
+            );
+    }
+
+    public function editPromoCodeSponsor(SS_HTTPRequest $request)
+    {
+        $summit_id  = intval($request->param('SummitID'));
+        $summit     = Summit::get()->byID($summit_id);
+        $sponsor_id = $request->param('SponsorID');
+        $sponsor    = (is_numeric($sponsor_id)) ? Company::get_by_id('Company',$sponsor_id) : null;
+        $promocodes = (is_numeric($sponsor_id)) ? $this->promocode_repository->getBySponsor($summit_id, $sponsor_id) : array();
+
+        Requirements::css('summit/css/simple-sidebar.css');
+        Requirements::css('summit/css/summit-admin-edit-promocode.css');
+        Requirements::css('themes/openstack/bower_assets/chosen/chosen.min.css');
+        Requirements::css('themes/openstack/bower_assets/sweetalert/dist/sweetalert.css');
+        Requirements::css('themes/openstack/bower_assets/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
+        // tag input
+        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.css');
+        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css');
+        Requirements::javascript('themes/openstack/bower_assets/sweetalert/dist/sweetalert.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/additional-methods.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/chosen/chosen.jquery.min.js');
+        Requirements::javascript('summit/javascript/simple-sidebar.js');
+        Requirements::javascript('//tinymce.cachefly.net/4.3/tinymce.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/typeahead.js/dist/typeahead.bundle.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js');
+        Requirements::javascript('summit/javascript/summitapp-editpromocode-sponsor.js');
+
+        return $this->getViewer('editPromoCodeSponsor')->process
+            (
+                $this->customise
+                    (
+                        array
+                        (
+                            'Summit'         => $summit,
+                            'PromoCodes'     => $promocodes,
+                            'Sponsor'        => $sponsor,
+                        )
+                    )
+            );
+    }
+
+    public function promocodes_bulk(SS_HTTPRequest $request)
+    {
+        $summit_id  = intval($request->param('SummitID'));
+        $summit     = Summit::get()->byID($summit_id);
+        $promocode_types = SummitRegistrationPromoCode::getTypes();
+
+        Requirements::css('summit/css/simple-sidebar.css');
+        Requirements::css('summit/css/summit-admin-promocodes-bulk.css');
+        Requirements::css('themes/openstack/bower_assets/chosen/chosen.min.css');
+        Requirements::css('themes/openstack/bower_assets/sweetalert/dist/sweetalert.css');
+        Requirements::css('themes/openstack/bower_assets/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
+        // tag input
+        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.css');
+        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css');
+        Requirements::javascript('themes/openstack/bower_assets/sweetalert/dist/sweetalert.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/additional-methods.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/chosen/chosen.jquery.min.js');
+        Requirements::javascript('summit/javascript/simple-sidebar.js');
+        Requirements::javascript('//tinymce.cachefly.net/4.3/tinymce.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/typeahead.js/dist/typeahead.bundle.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js');
+        Requirements::javascript('summit/javascript/summitapp-promocodes-bulk.js');
+
+        return $this->getViewer('promocodes_bulk')->process
+            (
+                $this->customise(array(
+                    'Summit' => $summit,
+                    'CodeTypes' => $promocode_types
+                ))
+            );
+    }
+
+    public function events_bulk(SS_HTTPRequest $request)
+    {
+        $summit_id = intval($request->param('SummitID'));
+        $summit = Summit::get()->byID($summit_id);
+
+        Requirements::css('summit/css/simple-sidebar.css');
+        Requirements::css('themes/openstack/bower_assets/sweetalert/dist/sweetalert.css');
+        Requirements::css('themes/openstack/bower_assets/jquery-ui/themes/smoothness/jquery-ui.css');
+        Requirements::javascript('themes/openstack/bower_assets/sweetalert/dist/sweetalert.min.js');
+        Requirements::javascript('summit/javascript/simple-sidebar.js');
+        Requirements::javascript('themes/openstack/javascript/bootstrap-paginator/src/bootstrap-paginator.js');
+        Requirements::javascript('themes/openstack/javascript/jquery-ajax-loader.js');
+
+        return $this->getViewer('events_bulk')->process
+            (
+                $this->customise
+                    (
+                        array
+                        (
+                            'Summit' => $summit,
+                        )
+                    )
+            );
     }
 
 }

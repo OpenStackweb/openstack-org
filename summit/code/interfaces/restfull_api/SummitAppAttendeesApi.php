@@ -78,6 +78,7 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
 
     static $url_handlers = array(
         'GET '                                               => 'getAttendees',
+        'GET $ATTENDEE_ID!/schedule'                         => 'getSchedule',
         'PUT $ATTENDEE_ID!/tickets/$TICKET_ID!/reassign'     => 'reassignTicket',
         'GET $ATTENDEE_ID!/tickets/$TICKET_ID!'              => 'getTicketData',
         'PUT $ATTENDEE_ID!'                                  => 'updateAttendee',
@@ -88,6 +89,7 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
         'updateAttendee',
         'reassignTicket',
         'getTicketData',
+        'getSchedule',
     );
 
     public function getAttendees(SS_HTTPRequest $request){
@@ -113,7 +115,8 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
                     'email'         => $attendee->Member->Email,
                     'ticket_bought' => $attendee->Tickets()->TicketBoughtDate,
                     'checked_in'    => $attendee->SummitHallCheckedIn,
-                    'link'          => 'summit-admin/'.$summit_id.'/attendees/'.$attendee->ID
+                    'link'          => 'summit-admin/'.$summit_id.'/attendees/'.$attendee->ID,
+                    'schedule'      => $attendee->Schedule()->toNestedArray()
                 );
             }
 
@@ -210,6 +213,40 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
         {
             SS_Log::log($ex2->getMessage(), SS_Log::WARN);
             return $this->notFound($ex2->getMessages());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    public function getSchedule(SS_HTTPRequest $request){
+        try
+        {
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $summit       = Summit::get_by_id('Summit',$summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+
+            $attendee_id  = intval($request->param('ATTENDEE_ID'));
+            $attendee     = SummitAttendee::get_by_id('SummitAttendee',$attendee_id);
+            if(is_null($attendee)) throw new NotFoundEntityException('SummitAttendee', sprintf(' id %s', $attendee_id));
+
+            $events_array = array();
+            foreach ($attendee->Schedule() as $event) {
+                $events_array[] = array(
+                    'title'    => $event->Title,
+                    'location' => $event->getLocationNameNice(),
+                    'time'     => $event->getDateNice()
+
+                );
+            }
+            return $this->ok($events_array);
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
         }
         catch(Exception $ex)
         {

@@ -1,0 +1,74 @@
+Summit:
+  Tokyo:
+    Title: Tokyo
+  Paris:
+    Title: Paris
+  Vancouver:
+    Title: Vancouver
+
+PresentationSpeaker:
+  Dylan:
+    FirstName: Dylan
+    LastName: McKay
+  Brandon:
+    FirstName: Brandon
+    LastName: Walsh
+  Kelly:
+    FirstName: Kelly
+    LastName: Taylor
+
+PresentationCategory:
+  Networking:
+    Title: Networking
+  Cloud:
+    Title: Cloud
+
+Presentation:
+  Presentation1:
+    Title: Joe Presentation 1 
+    Speakers: =>PresentationSpeaker.Brandon,=>PresentationSpeaker.Dylan
+    Summit: =>Summit.Tokyo
+    Category: =>PresentationCategory.Networking
+  Presentation2:
+    Title: Cloud Presentation 2
+    Speakers: =>PresentationSpeaker.Dylan
+    Summit: =>Summit.Tokyo
+    Category: =>PresentationCategory.Networking
+  Presentation3:
+    Title: Presentation 3
+    Speakers: =>PresentationSpeaker.Kelly
+    Summit: =>Summit.Tokyo
+    Category: =>PresentationCategory.Cloud
+  Presentation4:
+    Title: Presentation 4
+    Speakers: =>PresentationSpeaker.Kelly,=>PresentationSpeaker.Brandon
+    Summit: =>Summit.Tokyo
+    Category: =>PresentationCategory.Cloud
+
+
+PresentationVideo:
+  Video1:
+    Presentation: =>Presentation.Presentation1
+    DateUploaded: 2016-03-03
+  Video2:
+    Presentation: =>Presentation.Presentation2
+    DateUploaded: 2016-02-02
+  Video3:
+    Presentation: =>Presentation.Presentation3
+    DateUploaded: 2016-01-01
+  HighlightVideo1:
+    Presentation: =>Presentation.Presentation4
+    DateUploaded: 2015-10-10
+    Highlighted: 1
+  HighlightVideo2:
+    Presentation: =>Presentation.Presentation2
+    DateUploaded: 2015-11-11
+    Highlighted: 1
+  FeaturedVideo:
+    Presentation: =>Presentation.Presentation1
+    DateUploaded: 2015-12-12
+    Featured: 1
+
+SummitVideoApp:
+  App:
+    Title: Summit video app

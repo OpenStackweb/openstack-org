@@ -14,6 +14,8 @@
  **/
 class SummitEvent extends DataObject implements ISummitEvent
 {
+    use SummitEntityMetaTagGenerator;
+
     private static $db = array
     (
         'Title'            => 'Text',
@@ -31,7 +33,8 @@ class SummitEvent extends DataObject implements ISummitEvent
 
     private static $has_many = array
     (
-        'Feedback' => 'SummitEventFeedback',
+        'Feedback'        => 'SummitEventFeedback',
+        'RSVPSubmissions' => 'RSVP',
     );
 
     private static $defaults = array
@@ -52,9 +55,10 @@ class SummitEvent extends DataObject implements ISummitEvent
 
     private static $has_one = array
     (
-        'Location' => 'SummitAbstractLocation',
-        'Summit'   => 'Summit',
-        'Type'     => 'SummitEventType',
+        'Location'     => 'SummitAbstractLocation',
+        'Summit'       => 'Summit',
+        'Type'         => 'SummitEventType',
+        'RSVPTemplate' => 'RSVPTemplate',
     );
 
     private static $summary_fields = array
@@ -67,6 +71,39 @@ class SummitEvent extends DataObject implements ISummitEvent
         'Type.Type'              => 'Event Type',
     );
 
+    protected function onBeforeDelete()
+    {
+        parent::onBeforeDelete();
+        foreach($this->Feedback() as $e){
+            $e->delete();
+        }
+        foreach($this->RSVPSubmissions() as $e){
+            $e->delete();
+        }
+        $this->AllowedSummitTypes()->removeAll();
+        $this->Sponsors()->removeAll();
+        $this->Tags()->removeAll();
+        $this->Attendees()->removeAll();
+    }
+
+    public function getTitle()
+    {
+        return html_entity_decode($this->getField('Title'));
+    }
+
+    public function getRSVPLink()
+    {
+        return html_entity_decode($this->getField('RSVPLink'));
+    }
+
+    public function getFormattedTitle(){
+        return sprintf("%s (%s)", $this->getTitle(), $this->Type()->Type);
+    }
+
+    public function getTitleAndTime(){
+        return sprintf("%s (%s - %s)", $this->getTitle(), $this->getStartDateNice(), $this->getEndDateNice());
+    }
+
     public function SummitTypesLabel()
     {
         $label =  '';
@@ -74,6 +111,22 @@ class SummitEvent extends DataObject implements ISummitEvent
             $label .= $st->Title. ' ';
         if(empty($label)) $label = 'NOT SET';
         return $label;
+    }
+
+    public function getShortDescription(){
+        $val = $this->getField('ShortDescription');
+        if(empty($val)){
+            $val = $this->getField('Description');
+        }
+        return $val;
+    }
+
+    public function getDescription(){
+        $val = $this->getField('Description');
+        if(empty($val)){
+            $val = $this->getField('ShortDescription');
+        }
+        return $val;
     }
 
     private static $searchable_fields = array
@@ -95,12 +148,25 @@ class SummitEvent extends DataObject implements ISummitEvent
         return (int)$this->getField('ID');
     }
 
+    /**
+     * @return bool
+     */
     public function isPresentation() {
         return $this instanceof Presentation;
     }
 
-    public function getLink() {
-        return $this->Summit()->Link.'schedule/events/'.$this->getIdentifier().'/'.$this->getTitleForUrl();
+    public function getLink($type ='show') {
+        if($type == 'show') {
+            $page = SummitAppSchedPage::get()->filter('SummitID', $this->SummitID)->first();
+            if ($page) {
+                return $page->getAbsoluteLiveLink(false) . 'events/' . $this->getIdentifier() . '/' . $this->getTitleForUrl();
+            }
+        }
+        return null;
+    }
+
+    public function Link() {
+        return $this->getLink();
     }
 
     public function getAvgRate() {
@@ -112,9 +178,7 @@ class SummitEvent extends DataObject implements ISummitEvent
     }
 
     public function getTitleForUrl() {
-        $lcase_title = strtolower(trim($this->Title));
-        $title_for_url = str_replace(' ','-',$lcase_title);
-        return $title_for_url;
+        return singleton('SiteTree')->generateURLSegment($this->Title);
     }
 
     public function getLocationName()
@@ -131,6 +195,15 @@ class SummitEvent extends DataObject implements ISummitEvent
         if($this->Location()->ID > 0)
         {
             return $this->Location()->getFullName();
+        }
+        return 'TBD';
+    }
+
+    public function getLocationCapacity()
+    {
+        if($this->Location()->ID > 0 && $this->Location()->Capacity)
+        {
+            return $this->Location()->Capacity;
         }
         return 'TBD';
     }
@@ -158,14 +231,6 @@ class SummitEvent extends DataObject implements ISummitEvent
 
         $date_nice = date('l, F j, g:ia',strtotime($start_date)).'-'.date('g:ia',strtotime($end_date));
         return $date_nice;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->getField('Description');
     }
 
     /**
@@ -205,10 +270,10 @@ class SummitEvent extends DataObject implements ISummitEvent
         return AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'AllowedSummitTypes')->toArray();
     }
 
-    public function isAllowedSummitType($summit_type_name) {
+    public function isAllowedSummitType($summit_type_id) {
         $allowed_summits = $this->getAllowedSummitTypes();
         foreach ($allowed_summits as $summit_type) {
-            if ($summit_type->Title == $summit_type_name) return 1;
+            if ($summit_type->ID == $summit_type_id) return 1;
         }
 
         return 0;
@@ -228,6 +293,15 @@ class SummitEvent extends DataObject implements ISummitEvent
     public function getFeedback()
     {
         return $this->Feedback()->filter('ClassName','SummitEventFeedback');
+    }
+
+    /**
+     * @return ISummitEventFeedBack
+     */
+    public function getCurrentMemberFeedback()
+    {
+        $member = Member::currentUser();
+        return $this->Feedback()->where('OwnerID = '.$member->ID)->filter('ClassName','SummitEventFeedback')->first();
     }
 
     /**
@@ -301,6 +375,15 @@ class SummitEvent extends DataObject implements ISummitEvent
 
     public function getCMSFields()
     {
+
+        Requirements::customScript("
+        jQuery( document ).ready(function() {
+            jQuery('body').on('change','#Form_ItemEditForm_RSVPTemplateID',
+                function(){
+                    jQuery('#Form_ItemEditForm_action_save').click();
+                }
+            );
+        });");
 
         $summit_id = isset($_REQUEST['SummitID']) ?  $_REQUEST['SummitID'] : $this->SummitID;
 
@@ -392,6 +475,29 @@ class SummitEvent extends DataObject implements ISummitEvent
             $config->addComponent(new GridFieldAjaxRefresh(1000, false));
             $feedback = new GridField('Feedback', 'Feedback', $this->Feedback(), $config);
             $f->addFieldToTab('Root.Feedback', $feedback);
+
+            // rsvp
+            $rsvp_template = new DropdownField('RSVPTemplateID','Select a Template',RSVPTemplate::get()->map());
+            $rsvp_template->setEmptyString('-- View All Templates --');
+            $f->addFieldToTab('Root.RSVP', $rsvp_template);
+
+            if ($this->RSVPTemplate()->exists()) {
+                $config = new GridFieldConfig_RecordEditor(100);
+                $config->removeComponentsByType('GridFieldAddNewButton');
+                $config->addComponent(new GridFieldAjaxRefresh(1000, false));
+                $rsvps = new GridField('RSVPSubmissions', 'RSVP Submissions', $this->RSVPSubmissions(), $config);
+                $f->addFieldToTab('Root.RSVP', $rsvps);
+            } else {
+                $f->addFieldToTab('Root.RSVP', LiteralField::create('AddNew','Or add a new one'));
+                $config = new GridFieldConfig_RecordEditor(100);
+                $rsvp_templates = new GridField('RSVPTemplates', 'RSVP Templates', RSVPTemplate::get(), $config);
+                $f->addFieldToTab('Root.RSVP', $rsvp_templates);
+            }
+
+
+        }
+        if($this->ID > 0){
+            $_REQUEST['SummitEventID'] = $this->ID;
         }
         return $f;
     }
@@ -575,6 +681,13 @@ SQL;
         return $date->format('Y-m-d');
     }
 
+    public function getDayLabel()
+    {
+        $date = new DateTime($this->getStartDate());
+
+        return $date->format('l j');
+    }
+
     public function getEndDateYMD()
     {
         $date = new DateTime($this->getEndDate());
@@ -647,5 +760,20 @@ SQL;
     {
         $res = DB::query("SELECT COUNT(ID) AS QTY FROM SummitAttendee_Schedule WHERE SummitEventID = {$this->ID};")->first();
         return intval($res['QTY']);
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasRSVPTemplate(){
+        return $this->RSVPTemplateID > 0 ;
+    }
+
+    /**
+     * @return bool
+     */
+    public function allowSpeakers()
+    {
+        return false;
     }
 }

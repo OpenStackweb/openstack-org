@@ -24,6 +24,21 @@ class SpeakerSummitRegistrationPromoCode extends SummitRegistrationPromoCode imp
         'Speaker' => 'PresentationSpeaker',
     );
 
+    public function validate() {
+        $result = parent::validate();
+        $promocode_repository = new SapphireSummitRegistrationPromoCodeRepository();
+
+        if ($this->SpeakerID) {
+            $has_code_assigned = $promocode_repository->getBySpeaker($this->Summit()->getIdentifier(),$this->Speaker()->getIdentifier());
+            foreach($has_code_assigned as $code_taken) {
+                if ($code_taken->ID != $this->ID)
+                    $result->error(sprintf('Speaker already assigned to another promo code: %s', $code_taken->Code));
+            }
+        }
+
+        return $result;
+    }
+
     /**
      * @return string
      */
@@ -48,5 +63,10 @@ class SpeakerSummitRegistrationPromoCode extends SummitRegistrationPromoCode imp
     {
         $this->SpeakerID = $speaker->getIdentifier();
         AssociationFactory::getInstance()->getMany2OneAssociation($this,'Speaker')->setTarget($speaker);
+    }
+
+    public function setType($type)
+    {
+        $this->setField('Type',$type);
     }
 }

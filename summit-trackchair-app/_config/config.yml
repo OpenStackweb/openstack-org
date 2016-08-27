@@ -1,0 +1,17 @@
+---
+Name: summit-trackchair-app
+---
+Director:
+  rules:
+    'trackchairs/api/v1': 'TrackChairAPI'
+TrackChairAPI:
+  default_page_size: 50
+Presentation:
+  extensions:
+    - PresentationTrackChairFeatures
+## What is the order for a presentation marked "pass"
+SummitSelectedPresentation:
+  weight_select: 2
+  weight_maybe: 1
+  weight_pass: -1
+

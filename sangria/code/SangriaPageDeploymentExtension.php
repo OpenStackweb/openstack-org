@@ -17,6 +17,7 @@
  */
 final class SangriaPageDeploymentExtension extends Extension
 {
+    use GoogleMapLibs;
 
     public function onBeforeInit()
     {
@@ -24,8 +25,6 @@ final class SangriaPageDeploymentExtension extends Extension
             'ViewDeploymentStatistics',
             'ViewDeploymentSurveyStatistics',
             'ViewDeploymentDetails',
-            'DeploymentDetails',
-            'SurveyDetails',
             'AddNewDeployment',
             'AddUserStory',
             'ViewDeploymentsPerRegion',
@@ -38,8 +37,6 @@ final class SangriaPageDeploymentExtension extends Extension
             'ViewDeploymentStatistics',
             'ViewDeploymentSurveyStatistics',
             'ViewDeploymentDetails',
-            'DeploymentDetails',
-            'SurveyDetails',
             'AddNewDeployment',
             'AddUserStory',
             'ViewDeploymentsPerRegion',
@@ -56,97 +53,6 @@ final class SangriaPageDeploymentExtension extends Extension
         Session::clear("ViewDeploymentStatistics_survey_range");
         Session::clear("ViewDeploymentsPerRegion_survey_range");
         Session::clear("global_survey_range");
-    }
-
-    function DeploymentDetails()
-    {
-        $params = $this->owner->request->allParams();
-        $deployment_id = intval(Convert::raw2sql($params["ID"]));
-
-        $range = Session::get("global_survey_range");
-        //get survey version
-        if (!empty($range) && intval($range) > 0 ) {
-            $deployment = Survey::get()->byID($deployment_id);
-            if ($deployment->ClassName === 'EntitySurvey') {
-                $deployment = EntitySurvey::get()->byID($deployment_id);
-            }
-        } else {
-            $deployment = Deployment::get()->byID($deployment_id);
-        }
-
-        if ($deployment) {
-            $back_url = $this->owner->request->getVar('BackUrl');
-            if (empty($back_url)) {
-                $back_url = $this->owner->Link("ViewDeploymentDetails");
-            }
-            if ($deployment instanceof Survey) {
-                $details_template = 'SangriaPage_SurveyBuilderSurveyDetails';
-                $data = array
-                (
-                    "Survey" => $deployment,
-                    "BackUrl" => $back_url
-                );
-            } else {
-                $details_template = $deployment->getSurveyType() == SurveyType::OLD ? "SangriaPage_DeploymentDetailsOld" : "SangriaPage_DeploymentDetails";
-                $data = array
-                (
-                    "Deployment" => $deployment,
-                    "BackUrl" => $back_url
-                );
-            }
-
-            return $this->owner->Customise
-            (
-                $data
-            )->renderWith(array($details_template, 'SangriaPage', 'SangriaPage'));
-        }
-
-        return $this->owner->httpError(404, 'Sorry that Deployment could not be found!.');
-    }
-
-    function SurveyDetails()
-    {
-        $params = $this->owner->request->allParams();
-        $deployment_id = intval(Convert::raw2sql($params["ID"]));;
-        $range = Session::get("global_survey_range");
-        //get survey version
-        if (!empty($range) && intval($range) > 0 ) {
-            $survey = Survey::get()->byID($deployment_id);
-            if ($survey->ClassName === 'EntitySurvey') {
-                $survey = EntitySurvey::get()->byID($deployment_id);
-            }
-        } else {
-            $survey = DeploymentSurvey::get()->byID($deployment_id);
-        }
-
-        if ($survey) {
-            $back_url = $this->owner->request->getVar('BackUrl');
-            if ($survey instanceof Survey) {
-                $details_template = 'SangriaPage_SurveyBuilderSurveyDetails';
-                $data = array
-                (
-                    "Survey" => $survey,
-                    "BackUrl" => $back_url
-                );
-            } else {
-                $details_template = $survey->getSurveyType() == SurveyType::OLD ? "SangriaPage_SurveyDetailsOld" : "SangriaPage_SurveyDetails";
-                $data = array
-                (
-                    "Survey" => $survey,
-                    "BackUrl" => $back_url
-                );
-            }
-            if (empty($back_url)) {
-                $back_url = "#";
-            }
-
-            return $this->owner->Customise
-            (
-                $data
-            )->renderWith(array($details_template, 'SangriaPage', 'SangriaPage'));
-        }
-
-        return $this->owner->httpError(404, 'Sorry that Survey could not be found!.');
     }
 
     // Deployment Survey data
@@ -756,12 +662,9 @@ final class SangriaPageDeploymentExtension extends Extension
 
         $continent = intval(Convert::raw2sql(Controller::curr()->request->getVar('continent')));
         $country = Convert::raw2sql(Controller::curr()->request->getVar('country'));
-        Requirements::javascript(Director::protocol() . "maps.googleapis.com/maps/api/js?sensor=false");
         Requirements::javascript("marketplace/code/ui/admin/js/utils.js");
-        Requirements::javascript("marketplace/code/ui/frontend/js/markerclusterer.js");
-        Requirements::javascript("marketplace/code/ui/frontend/js/oms.min.js");
-        Requirements::javascript("marketplace/code/ui/frontend/js/infobubble-compiled.js");
-        Requirements::javascript("marketplace/code/ui/frontend/js/google.maps.jquery.js");
+
+        $this->InitGoogleMapLibs();
 
         if (!empty($continent)) {
             $continent_name = DB::query("SELECT Name from Continent where ID = {$continent}")->value();
@@ -931,15 +834,12 @@ SQL;
             $entity = new $row['ClassName']($row);
             $list->push(
                 new ArrayData
-                (
-                    array
-                    (
-                        'ID' => $entity->ID,
-                        'Country' => $entity->ClassName === 'Deployment' ? $entity->Country : $row['Country'],
-                        'Label' => $entity->ClassName === 'Deployment' ? sprintf("%s - %s", $entity->Label,
-                            $entity->DeploymentType) : $entity->getFriendlyName(),
-                    )
-                )
+                ([
+                    'ID'      => $entity->ID,
+                    'Country' => $entity->Country,
+                    'Label'   => sprintf("%s - %s", $entity->getOrganization() ,$entity->getFriendlyName())
+
+                ])
             );
         }
 
@@ -1104,13 +1004,8 @@ SQL;
 
         $continent = intval(Convert::raw2sql(Controller::curr()->request->getVar('continent')));
         $country = Convert::raw2sql(Controller::curr()->request->getVar('country'));
-        Requirements::javascript(Director::protocol() . "maps.googleapis.com/maps/api/js?sensor=false");
         Requirements::javascript("marketplace/code/ui/admin/js/utils.js");
-        Requirements::javascript("marketplace/code/ui/frontend/js/markerclusterer.js");
-        Requirements::javascript("marketplace/code/ui/frontend/js/oms.min.js");
-        Requirements::javascript("marketplace/code/ui/frontend/js/infobubble-compiled.js");
-        Requirements::javascript("marketplace/code/ui/frontend/js/google.maps.jquery.js");
-
+        $this->InitGoogleMapLibs();
         $template_id = self::getSurveyRange('ViewDeploymentSurveysPerRegion');
 
         if (!empty($continent)) {
@@ -1348,14 +1243,9 @@ SQL;
         $continent = intval(Convert::raw2sql(Controller::curr()->request->getVar('continent')));
         $country = Convert::raw2sql(Controller::curr()->request->getVar('country'));
 
-        Requirements::javascript(Director::protocol() . "maps.googleapis.com/maps/api/js?sensor=false");
         Requirements::javascript("marketplace/code/ui/admin/js/utils.js");
-        Requirements::javascript("marketplace/code/ui/frontend/js/markerclusterer.js");
-        Requirements::javascript("marketplace/code/ui/frontend/js/oms.min.js");
-        Requirements::javascript("marketplace/code/ui/frontend/js/infobubble-compiled.js");
-        Requirements::javascript("marketplace/code/ui/frontend/js/google.maps.jquery.js");
+        $this->InitGoogleMapLibs();
         Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
-
 
         if (!empty($continent)) {
             $continent_name = DB::query("SELECT Name from Continent where ID = {$continent}")->value();

@@ -37,8 +37,10 @@ final class PresentationSpeakerAcceptedRejectedAnnouncementEmailSender implement
 
         $email = EmailFactory::getInstance()->buildEmail(PRESENTATION_SPEAKER_NOTIFICATION_ACCEPTANCE_EMAIL_FROM, $speaker->getEmail());
 
-        $schedule_page = SummitAppSchedPage::get()->filter('SummitID', $summit->ID)->first();
-        if(is_null($schedule_page)) throw new Exception('Summit Schedule page does not exists!');
+        $schedule_page = SummitAppSchedPage::getBy($summit);
+
+        if(is_null($schedule_page))
+            throw new Exception('Summit Schedule page does not exists!');
 
         $email->setUserTemplate(PRESENTATION_SPEAKER_ACCEPTED_REJECTED_EMAIL)->populateTemplate(
             array

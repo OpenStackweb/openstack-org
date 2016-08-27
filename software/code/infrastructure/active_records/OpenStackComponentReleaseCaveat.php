@@ -31,4 +31,9 @@ final class OpenStackComponentReleaseCaveat extends DataObject
         'Component' => 'OpenStackComponent',
     );
 
+    public function getTypeI18n() 
+    {
+    	return _t('Software.RELEASE_CAVEAT_TYPE_'.strtoupper($this->Type), $this->Type);
+    }
+
 }

@@ -106,6 +106,11 @@ class SummitPage extends Page
             return 'link';
         }
     }
+
+    public function getOGImage()
+    {
+        return Director::absoluteURL('/summit/images/summit-logo.png');
+    }
 }
 
 
@@ -269,4 +274,11 @@ class SummitPage_Controller extends Page_Controller
             return 'link';
         }
     }
+
+    public function MetaTags()
+    {
+        $tags = parent::MetaTags();
+        return $tags;
+    }
+
 }

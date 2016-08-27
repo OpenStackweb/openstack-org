@@ -1,5 +1,5 @@
 </div>
-<h1>OpenStack Survey Report</h1>
+<h1>OpenStack Survey Report - BETA</h1>
 
 <div class="container">
     <div class="report_templates_container">

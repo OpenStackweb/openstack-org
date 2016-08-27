@@ -63,7 +63,7 @@
             question_container.addClass('hidden');
             question_container.find('*').addClass('hidden');
             //clean controls
-            question_container.find('input').val('');
+            question_container.find("input[type='text']").val('');
             question_container.find('select').val('');
             question_container.find("input[type='radio']").prop('checked', false);
             question_container.find("input[type='checkbox']").prop('checked', false);

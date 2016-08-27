@@ -21,24 +21,22 @@ final class SummitAttendeeInfoForm extends BootstrapForm
             array
             (
                 $t1 = new TextField('ExternalOrderId', 'Eventbrite Order #'),
-                $checkbox = new CheckboxField('SharedContactInfo', 'Allow to share contact info?')
             )
         );
 
         $t1->setAttribute('placeholder', 'Enter your Eventbrite order #');
         $t1->addExtraClass('event-brite-order-number');
+        $actions   = new FieldList();
+        $validator = null;
 
-        $attendees = Session::get('attendees');
-
-        if(count($attendees) > 0)
+        if(count(Session::get('attendees')) > 0) // we have and order in process .. then select the attenders
         {
             $t1->setValue(Session::get('ExternalOrderId'));
             $t1->setReadonly(true);
-            $checkbox->setValue(intval(Session::get('SharedContactInfo')) === 1);
 
             $fields->add(new LiteralField('ctrl1','Current Order has following registered attendees, please select one:'));
             $options = array();
-            foreach($attendees as $attendee)
+            foreach(Session::get('attendees') as $attendee)
             {
                 $ticket_external_id = intval($attendee['ticket_class_id']);
                 $ticket_type = SummitTicketType::get()->filter('ExternalId', $ticket_external_id)->first();
@@ -54,22 +52,20 @@ final class SummitAttendeeInfoForm extends BootstrapForm
             $actions = new FieldList
             (
                 $btn_clear = new FormAction('clearSummitAttendeeInfo', 'Clear'),
-                $btn = new FormAction('saveSummitAttendeeInfo', 'Done')
+                $btn       = new FormAction('saveSummitAttendeeInfo', 'Done')
             );
 
             $btn->addExtraClass('btn btn-default active');
             $btn_clear->addExtraClass('btn btn-danger active');
         }
-        else {
 
-
+        if(!Member::currentUser()->getCurrentSummitAttendee()){
             $validator = new RequiredFields(array('ExternalOrderId'));
             // Create action
             $actions = new FieldList
             (
                 $btn = new FormAction('saveSummitAttendeeInfo', 'Get Order')
             );
-
             $btn->addExtraClass('btn btn-default active');
         }
 
@@ -83,25 +79,15 @@ final class SummitAttendeeInfoForm extends BootstrapForm
 
         if($data && $data instanceof SummitAttendee && $data->ID > 0)
         {
+            // if we have an attendee then show the form on readonly mode ...
             $ticket = $data->Tickets()->first();
-            $chk = $this->fields->fieldByName('SharedContactInfo');
             $this->fields->insertAfter($t1 = new TextField('TicketBoughtDate', 'Ticket Bought Date', $ticket->TicketBoughtDate),'ExternalOrderId');
             $t2 = $this->fields->fieldByName('ExternalOrderId');
             $t2->setValue($ticket->ExternalOrderId);
             $this->fields->insertAfter($t3 = new TextField('TicketType', 'Ticket Type', $ticket->TicketType()->Name), 'TicketBoughtDate');
-            $chk->setValue(intval($data->SharedContactInfo) === 1);
             $t1->setReadonly(true);
             $t2->setReadonly(true);
             $t3->setReadonly(true);
-
-            $checkbox = $this->getField('SharedContactInfo');
-
-            if(!is_null($checkbox))
-                $checkbox->setValue(intval($data->SharedContactInfo) === 1);
-
-            $btn = $this->Actions()->first();
-            if(!is_null($btn))
-                $btn->setTitle('Save');
         }
 
     }

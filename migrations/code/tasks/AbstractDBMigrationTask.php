@@ -14,36 +14,80 @@
  **/
 class AbstractDBMigrationTask extends MigrationTask
 {
+    /**
+     * @var string
+     */
     protected $title;
-
+    /**
+     * @var string
+     */
     protected $description;
 
-    function up()
+    public function run($request)
     {
-        echo sprintf("starting migration # %s ...", $this->title).PHP_EOL;
-        //check if migration already had ran ...
-        $migration = Migration::get()->filter('Name', $this->title)->first();
-
-        if (!$migration) {
-
-            set_time_limit(0);
-
-            $this->doUp();
-            $migration = new Migration();
-            $migration->Name = $this->title;
-            $migration->Description = $this->description;
-            $migration->Write();
-            echo sprintf("ending migration # %s ...", $this->title).PHP_EOL;
-        }
-        else
-        {
-            echo sprintf("migration # %s already ran !...", $this->title).PHP_EOL;
+        if ($request->getVar('Direction') == 'down') {
+            $this->down();
+        } else {
+            $this->up();
         }
     }
 
+    function up()
+    {
+        SapphireTransactionManager::getInstance()->transaction(function(){
+
+            echo sprintf("starting migration # %s ...", $this->title).PHP_EOL;
+            //check if migration already had ran ...
+            $migration = Migration::get()->filter('Name', $this->title)->first();
+
+            if (!$migration) {
+
+                set_time_limit(0);
+
+$title = Convert::raw2sql($this->title);
+$description = Convert::raw2sql($this->description);
+
+$sql = <<<SQL
+INSERT INTO `Migration`
+(
+    `Created`,
+    `LastEdited`,
+    `Name`,
+    `Description`
+)
+VALUES
+(
+    NOW(),
+    NOW(),
+    '$title',
+    '$description'
+);
+SQL;
+
+                $this->doUp();
+                DB::query($sql);
+                echo sprintf("ending migration # %s ...", $this->title).PHP_EOL;
+            }
+            else
+            {
+                echo sprintf("migration # %s already ran !...", $this->title).PHP_EOL;
+            }
+
+        });
+    }
+
+
+
     function down()
     {
-        $this->doDown();
+        SapphireTransactionManager::getInstance()->transaction(function(){
+
+            echo sprintf("downgrading migration # %s ...", $this->title).PHP_EOL;
+            Migration::get()->filter('Name', $this->title)->removeAll();
+            $this->doDown();
+
+        });
+
     }
 
     public function doUp(){}

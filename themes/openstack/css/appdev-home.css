@@ -266,4 +266,30 @@ i.appdev-try-icon {
   width: 100%;
   color: #2A4E68; }
 
+/*ISV promo*/
+.isv-promo {
+  text-align: center;
+  padding: 40px 0;
+  color: white;
+  background: #30739C; }
+  .isv-promo h1 {
+    text-align: center;
+    margin: 0 0 20px;
+    color: white; }
+  .isv-promo a.isv-promo-btn {
+    display: inline-block;
+    color: white;
+    border: 2px solid white;
+    background: transparent;
+    padding: 10px 25px;
+    border-radius: 4px;
+    margin-top: 20px; }
+    .isv-promo a.isv-promo-btn i {
+      margin-left: 10px; }
+    .isv-promo a.isv-promo-btn:hover, .isv-promo a.isv-promo-btn:focus {
+      background: rgba(255, 255, 255, 0.3);
+      text-decoration: none; }
+
+/*End ISV promo*/
+
 /*End App Dev Home Page*/

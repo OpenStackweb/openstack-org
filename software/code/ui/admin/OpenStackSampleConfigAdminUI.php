@@ -16,9 +16,10 @@ class OpenStackSampleConfigAdminUI extends DataExtension
 {
     private static $summary_fields = array
     (
-        'Title' => 'Title',
-        'Type.Type' => 'Type',
-        'Curator.Email' => 'Curator',
+        'Title'          => 'Title',
+        'Type.Type'      => 'Type',
+        'Release.Name'   => 'Release',
+        'Curator.Email'  => 'Curator',
     );
 
     /**

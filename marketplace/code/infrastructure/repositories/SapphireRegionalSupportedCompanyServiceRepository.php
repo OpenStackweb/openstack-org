@@ -70,17 +70,15 @@ abstract class SapphireRegionalSupportedCompanyServiceRepository
             }
         }
 
-        $inner_joins = $query->getAlias(QueryAlias::INNER);
-        $left_joins = $query->getAlias(QueryAlias::LEFT);
-
         //build query for data object
         $class = $this->entity_class;
-        $do = $class::get()->where($filter)->sort($query->getOrder())->limit($limit, $offset);
-        foreach ($inner_joins as $table => $on) {
-            $do = $do->innerJoin($table, $on);
+        $do    = $class::get()->where($filter)->sort($query->getOrder())->limit($limit, $offset);
+
+        foreach ($query->getAlias(QueryAlias::INNER) as $spec) {
+            $do = $do->innerJoin($spec->getTable(), $spec->getCondition(), $spec->getAlias());
         }
-        foreach ($left_joins as $table => $on) {
-            $do = $do->leftJoin($table, $on);
+        foreach ($query->getAlias(QueryAlias::LEFT) as $spec) {
+            $do = $do->leftJoin($spec->getTable(), $spec->getCondition(), $spec->getAlias());
         }
 
         if (is_null($do)) return array(array(), 0);

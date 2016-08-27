@@ -258,10 +258,7 @@ class SpeakerListPage_Controller extends Page_Controller
 
     function AvailableTravelCountries()
     {
-        $query = DB::Query("SELECT DISTINCT C.Name FROM Countries AS C
-                            LEFT JOIN SpeakerTravelPreference AS STP ON STP.Country = C.Code
-                            RIGHT JOIN PresentationSpeaker AS PS ON PS.ID = STP.SpeakerID
-                            WHERE PS.AvailableForBureau = 1");
+        $query = DB::Query("SELECT Name FROM Countries");
 
         $country_list = array();
         foreach ($query as $country) {

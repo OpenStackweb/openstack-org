@@ -44,4 +44,10 @@ final class SummitEntityEvent extends DataObject
     public function canCreate($member = null) {
         return false;
     }
+
+    protected function onBeforeWrite() {
+        parent::onBeforeWrite();
+        $now_utc       = new DateTime();
+        $this->Created = $now_utc->format('Y-m-d H:i:s');
+    }
 }

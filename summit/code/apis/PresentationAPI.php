@@ -1,11 +1,10 @@
 <?php 
 
-class PresentationAPI extends Controller {
+class PresentationAPI extends Controller implements PermissionProvider {
 
 
 	private static $url_handlers = array (
 		'summit/$ID' => 'handleSummit',
-		'POST presentation/sched/$SchedID!' => 'handleSchedUpdate',
 		'presentation/$ID' => 'handleManagePresentation',		
 		'GET ' => 'handleGetAllPresentations',
 
@@ -16,7 +15,6 @@ class PresentationAPI extends Controller {
 		'handleSummit',
 		'handleManagePresentation',
 		'handleGetAllPresentations',
-		'handleSchedUpdate'
 	);
 
 
@@ -25,7 +23,7 @@ class PresentationAPI extends Controller {
 	);
 
 
-	public function init() {
+	public function init() {		
 		parent::init();		
 		$this->checkAuthenticationToken(false);
 	}
@@ -46,7 +44,7 @@ class PresentationAPI extends Controller {
 		$data['status'] = $summit->getStatus();
 		$data['categories'] = array ();
 
-		foreach($summit->Categories() as $c) {
+		foreach($summit->getCategories() as $c) {
 			$data['categories'][] = $c->toJSON();
 		}
 		
@@ -126,36 +124,14 @@ class PresentationAPI extends Controller {
 			return $request->handleRequest($r, DataModel::inst());
 		}
 
-		return $this->httpError(404);
+		return $this->httpError(404, "Presentation " . $r->param('ID') . " not found");
 	}
 
 
-
-	public function handleSchedUpdate(SS_HTTPRequest $r) {		
-
-		if(!Member::currentUser()) {			
-			return $this->httpError(403);
-		}
-
-		$schedID = $r->param('SchedID');
-		$presentation = VideoPresentation::get_by_event_key($schedID);
-
-		if(!$presentation) {
-			$presentation = VideoPresentation::create(array(
-				'event_key' => $schedID
-			));
-
-		}
-
-		// Only allow one writeable property here
-		if($youTube = $r->postVar('youtubeid')) {
-			$presentation->YouTubeID = $youTube;
-			$presentation->write();
-
-			return new SS_HTTPResponse("OK", 200);			
-		}
-
-		return $this->httpError(400, "You must provide a youtubeid parameter in the POST request");
+	public function providePermissions () {
+		return array (
+			'VIDEO_UPLOADER' => 'Upload videos through the presentation API'
+		);
 	}
 }
 
@@ -166,13 +142,13 @@ class PresentationAPI_PresentationRequest extends RequestHandler {
 	private static $url_handlers = array (
 		'GET ' => 'index',
 		'POST vote' => 'handleVote',
-		'PUT view' => 'handleView',
+		'POST video' => 'handleApplyVideo'
 	);
 
 
 	private static $allowed_actions = array (
 		'handleVote',
-		'handleView'
+		'handleApplyVideo'
 	);
 
 
@@ -236,10 +212,35 @@ class PresentationAPI_PresentationRequest extends RequestHandler {
 	}
 
 
-	public function handleView(SS_HTTPRequest $r) {
-		$this->presentation->Views++;
-		$this->presentation->write();
-		
-		return new SS_HTTPResponse(null, 200);
+	public function handleApplyVideo(SS_HTTPRequest $r) {		
+		if(!Permission::check('VIDEO_UPLOADER')) {
+			return $this->httpError(403, 'You do not have permission to use this method');
+		}
+
+		// Only allow one writeable property here
+		if($youTube = $r->postVar('youtubeid')) {
+			$video = $this->presentation->Materials()
+							->filter('ClassName', 'PresentationVideo')
+							->first();
+			if(!$video) {
+				$video = PresentationVideo::create();					
+			}
+
+			$dateUTC = $this->presentation->Summit()->convertDateFromTimeZone2UTC(
+				SS_DateTime::now()->Rfc2822()
+			);
+			
+			$video->PresentationID = $this->presentation->ID;
+			$video->DateUploaded = $dateUTC;
+			$video->Name = $this->presentation->Title;
+			$video->DisplayOnSite = true;
+			$video->YouTubeID = $youTube;
+			$video->write();
+
+			return new SS_HTTPResponse("OK", 200);			
+		}
+
+		return $this->httpError(400, "You must provide a youtubeid parameter in the POST request");
 	}
+
 }

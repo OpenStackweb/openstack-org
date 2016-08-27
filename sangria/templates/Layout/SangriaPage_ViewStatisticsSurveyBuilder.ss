@@ -13,7 +13,13 @@
     </div>
     <div class="row">
         <div class="col-md-12 survey_builder_questions_values_statistics_filters">
-            <h2>{$Top.SurveyBuilderLabelSubmitted} &mdash; {$Top.SurveyBuilderSurveyCount} total</h2>
+            <h2>
+                {$Top.SurveyBuilderLabelSubmitted} &mdash;
+                {$Top.SurveyBuilderSurveyCount} total
+                <% if $SurveyBuilderDeploymentCompanyList %>
+                    &mdash; <a href="" data-toggle="modal" data-target="#companiesModal">view companies</a>
+                <% end_if %>
+            </h2>
             $DateFilters
             $RenderCurrentFilters
             <% if $RenderCurrentFilters %>
@@ -39,6 +45,24 @@
                 <strong>Warning!</strong> You must set some question to show on Admin CMS.
             </div>
         <% end_if %>
+        </div>
+    </div>
+</div>
+
+<div id="companiesModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Companies</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                <% loop $SurveyBuilderDeploymentCompanyList %>
+                    <div class="col-md-4">$Company</div>
+                <% end_loop %>
+                </div>
+            </div>
         </div>
     </div>
 </div>

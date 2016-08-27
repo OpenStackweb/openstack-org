@@ -80,6 +80,7 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
     static $url_handlers = array(
         'POST '                       => 'createEvent',
         'PUT bulk'                    => 'updateBulkEvents',
+        'PUT bulk_presentations'      => 'updateBulkPresentations',
         'PUT publish/bulk'            => 'updateAndPublishBulkEvents',
         'PUT $EVENT_ID!/publish'      => 'publishEvent',
         'PUT $EVENT_ID!'              => 'updateEvent',
@@ -97,6 +98,7 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
         'updateBulkEvents',
         'updateAndPublishBulkEvents',
         'unPublishBulkEvents',
+        'updateBulkPresentations',
     );
 
     public function getUnpublishedEventsBySource(SS_HTTPRequest $request) {
@@ -186,7 +188,8 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
                     'data'        => $events,
                     'page'        => $page,
                     'page_size'   => $page_size,
-                    'total_pages' => $total_pages
+                    'total_pages' => $total_pages,
+                    'total'       => $count,
                 )
             );
         }
@@ -270,7 +273,15 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
             $summit = $this->summit_repository->getById($summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
 
-            $event = $this->summit_service->createEvent($summit, $event_data);
+            $event = $this->summit_service->createEvent
+            (
+                $summit,
+                HTMLCleanner::cleanData
+                    (
+                        $event_data,
+                        array('title', 'rsvp_link', 'short_description', 'expect_learn')
+                    )
+            );
 
             return $this->ok($event->toMap());
         }
@@ -303,7 +314,15 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
             $summit = $this->summit_repository->getById($summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
 
-            $event = $this->summit_service->updateEvent($summit, $event_data);
+            $event = $this->summit_service->updateEvent
+            (
+                $summit,
+                HTMLCleanner::cleanData
+                (
+                    $event_data,
+                    array('title', 'rsvp_link', 'short_description', 'expect_learn')
+                )
+            );
 
             return $this->ok($event->toMap());
         }
@@ -392,6 +411,35 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
             $data = $this->getJsonRequest();
             $this->summit_service->unPublishBulkEvents($summit, $data);
+            return $this->ok();
+        }
+        catch(EntityValidationException $ex1)
+        {
+            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
+            return $this->validationError($ex1->getMessages());
+        }
+        catch(NotFoundEntityException $ex3)
+        {
+            SS_Log::log($ex3->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex3->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    public function updateBulkPresentations(SS_HTTPRequest $request)
+    {
+        try
+        {
+            if(!$this->isJson()) return $this->validationError(array('invalid content type!'));
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $summit = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+            $data = $this->getJsonRequest();
+            $this->summit_service->updateBulkPresentations($summit, $data);
             return $this->ok();
         }
         catch(EntityValidationException $ex1)

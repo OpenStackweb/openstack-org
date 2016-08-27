@@ -481,3 +481,24 @@ if ( ! function_exists('digit_to_word'))
         }
     }
 }
+
+if ( ! function_exists('random_string'))
+{
+    /**
+     * Returns a random string
+     *
+     * @param  integer  $length
+     * @return string
+     */
+    function random_string($length)
+    {
+        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+
+        $string = '';
+        for ($i = 0; $i < $length; $i++) {
+            $string .= $characters[rand(0, strlen($characters) - 1)];
+        }
+
+        return $string;
+    }
+}

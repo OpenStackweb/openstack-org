@@ -5,7 +5,7 @@
                 <div class="logo-area">
                     <span style="background-color: #{$Company.CompanyColor}" class="color-bar"></span>
                     <a href="$TrainingLink{$Company.URLSegment}/$ID" >
-                        $Company.SmallLogoPreview(150)
+                        <img alt='{$Company.Name}_small_logo' src='{$Company.Logo().getURL()}' class='small-logo-company company-logo'/>
                     </a>
                 </div>
             </div>
@@ -41,6 +41,9 @@
                         <% end_loop %>
                     </tbody></table>
                 <a style="background-color: #{$Company.CompanyColor}" href="$TrainingLink{$Company.URLSegment}/$ID" class="details-button">Details</a>
+                <% if $Company.isCOAPartner %>
+                    <img class="coa-partner-badge" src="/themes/openstack/images/coa/coa-badge.jpg" title="COA Training Partner" alt="COA Training Partner">
+                <% end_if %>
             </div>
         </div>
     </div>

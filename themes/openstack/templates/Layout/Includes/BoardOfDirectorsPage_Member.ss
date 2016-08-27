@@ -18,9 +18,13 @@
             <h5>Type of Director</h5>
             <div>$TypeOfDirector&nbsp;</div>
         <% end_if %>
+        <% if CurrentCompanies %>
             <h5>Company</h5>
             <div>$CurrentCompanies&nbsp;</div>
+        <% end_if %>
+        <% if Bio %>
             <h5>Bio</h5>
             <div>$Bio&nbsp;</div>
+        <% end_if %>
     </div>
 </div>

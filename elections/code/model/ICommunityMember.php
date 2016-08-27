@@ -109,28 +109,11 @@ interface ICommunityMember extends IEntity
      * @param bool $show
      * @return void
      */
-    public function showDupesOnProfile($show);
+    public function updateShowDupesOnProfile($show);
 
     /**
      * @return bool
      */
     public function shouldShowDupesOnProfile();
 
-    /**
-     * @param int $summit_id
-     * @return bool
-     */
-    public function hasPromoRegistrationCode($summit_id);
-
-    /**
-     * @param int $summit_id
-     * @return ISummitRegistrationPromoCode
-     */
-    public function getPromoCodeForSummit($summit_id);
-
-    /**
-     * @param ISummitRegistrationPromoCode $promo_code
-     * @return $this
-     */
-    public function registerPromoCode(ISummitRegistrationPromoCode $promo_code);
 }

@@ -14,8 +14,7 @@
 /**
  * Class JobsValidationFactory
  */
-final class JobsValidationFactory
-	implements IJobsValidationFactory{
+final class JobsValidationFactory implements IJobsValidationFactory{
 
 	/**
 	 * @param array $data
@@ -28,14 +27,17 @@ final class JobsValidationFactory
 			'url'                    => 'required',
 			'description'            => 'required|htmltext',
 			'instructions'           => 'required|htmltext',
-			'company_name'           => 'required|text',
-			'point_of_contact_name'  => 'required|text',
+			'company'                => 'required|text',
+            'point_of_contact_name'  => 'required|text',
 			'point_of_contact_email' => 'required|email',
+            'job_type'               => 'required|text',
 		);
 
 		$messages = array(
 			'title.required'                  => ':attribute is required',
 			'title.text'                      => ':attribute should be valid text.',
+            'job_type.required'               => ':attribute is required',
+            'job_type.text'                   => ':attribute should be valid text.',
 			'title.max'                       => ':attribute should have less than 100 chars.',
 			'url.required'                    => ':attribute is required',
 			'point_of_contact_name.required'  => ':attribute is required',
@@ -46,8 +48,8 @@ final class JobsValidationFactory
 			'description.text'                => ':attribute should be valid text.',
 			'instructions.required'           => ':attribute is required',
 			'instructions.htmltext'           => ':attribute should be valid text.',
-			'company_name.required'           => ':attribute is required',
-			'company_name.htmltext'           => ':attribute should be valid text.',
+			'company.required'                => ':attribute is required',
+			'company.text'                    => ':attribute should be valid text.',
 		);
 
 		return ValidatorService::make($data, $rules, $messages);
@@ -59,14 +61,14 @@ final class JobsValidationFactory
 	 */
 	public function buildValidatorForJobRejection(array $data){
 		$rules = array(
-			'send_rejection_email' => 'required|boolean',
-			'custom_reject_message' => 'sometimes|text'
+			'send_rejection_email'  => 'required|boolean',
+			'custom_reject_message' => 'sometimes|htmltext'
 		);
 
 		$messages = array(
-			'send_rejection_email.required' => ':attribute is required',
-			'send_rejection_email.boolean' => ':attribute should be valid boolean.',
-			'custom_reject_message.text' => ':attribute should be valid text.'
+			'send_rejection_email.required'  => ':attribute is required',
+			'send_rejection_email.boolean'   => ':attribute should be valid boolean.',
+			'custom_reject_message.htmltext' => ':attribute should be valid text.'
 		);
 
 		return ValidatorService::make($data, $rules, $messages);
@@ -83,7 +85,8 @@ final class JobsValidationFactory
             'url'                    => 'required',
             'description'            => 'required|htmltext',
             'instructions'           => 'required|htmltext',
-            'company_name'           => 'required|text',
+            'company'                => 'required|text',
+            'job_type'               => 'required|text',
         );
 
         $messages = array(
@@ -95,8 +98,10 @@ final class JobsValidationFactory
             'description.text'                => ':attribute should be valid text.',
             'instructions.required'           => ':attribute is required',
             'instructions.htmltext'           => ':attribute should be valid text.',
-            'company_name.required'           => ':attribute is required',
-            'company_name.htmltext'           => ':attribute should be valid text.',
+            'company.required'                => ':attribute is required',
+            'company.text'                    => ':attribute should be valid text.',
+            'job_type.required'               => ':attribute is required',
+            'job_type.text'                   => ':attribute should be valid text.',
         );
 
         return ValidatorService::make($data, $rules, $messages);
