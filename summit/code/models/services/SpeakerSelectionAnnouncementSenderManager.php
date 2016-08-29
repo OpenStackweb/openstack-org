@@ -66,7 +66,7 @@ final class SpeakerSelectionAnnouncementSenderManager implements ISpeakerSelecti
         $this->promo_code_repository   = $promo_code_repository;
     }
 
-    public function send(ISummit $current_summit, $batch_size){
+    public function sendSpeakers(ISummit $current_summit, $batch_size){
 
         $speaker_repository    = $this->speaker_repository;
         $sender_factory        = $this->sender_factory;
@@ -119,13 +119,13 @@ final class SpeakerSelectionAnnouncementSenderManager implements ISpeakerSelecti
 
                     if ($speaker->announcementEmailAlreadySent($current_summit->ID)) continue;
 
-                    $sender_service = $sender_factory->build($current_summit, $speaker);
+                    $sender_service = $sender_factory->build($current_summit, $speaker, IPresentationSpeaker::RoleSpeaker);
                     // get registration code
                     if (is_null($sender_service)) continue;
 
                     $code = null;
 
-                    if ($speaker->hasPublishedPresentations($current_summit->getIdentifier())) //get approved code
+                    if ($speaker->hasPublishedPresentations($current_summit->getIdentifier(), IPresentationSpeaker::RoleSpeaker )) //get approved code
                     {
                         $code = $promo_code_repository->getNextAvailableByType
                         (
@@ -135,7 +135,7 @@ final class SpeakerSelectionAnnouncementSenderManager implements ISpeakerSelecti
                         );
                         if (is_null($code)) throw new Exception('not available promo code!!!');
                     }
-                    else if ($speaker->hasAlternatePresentations($current_summit->getIdentifier())) // get alternate code
+                    else if ($speaker->hasAlternatePresentations($current_summit->getIdentifier(), IPresentationSpeaker::RoleSpeaker)) // get alternate code
                     {
                         $code = $promo_code_repository->getNextAvailableByType
                         (
@@ -149,7 +149,8 @@ final class SpeakerSelectionAnnouncementSenderManager implements ISpeakerSelecti
                     $params = array
                     (
                         'Speaker' => $speaker,
-                        'Summit'  => $current_summit
+                        'Summit'  => $current_summit,
+                        "Role"    => IPresentationSpeaker::RoleSpeaker
                     );
 
                     if (!is_null($code)) {
@@ -174,4 +175,117 @@ final class SpeakerSelectionAnnouncementSenderManager implements ISpeakerSelecti
         });
     }
 
+    /**
+     * @param ISummit $current_summit
+     * @param int $batch_size
+     * @return void
+     */
+    public function sendModerators(ISummit $current_summit, $batch_size)
+    {
+        $speaker_repository    = $this->speaker_repository;
+        $sender_factory        = $this->sender_factory;
+        $promo_code_repository = $this->promo_code_repository;
+        $batch_repository      = $this->batch_repository;
+        $batch_task_factory    = $this->batch_task_factory;
+
+        return $this->tx_manager->transaction(function() use
+        (
+            $current_summit,
+            $batch_size,
+            $speaker_repository,
+            $sender_factory,
+            $promo_code_repository,
+            $batch_repository,
+            $batch_task_factory
+        )
+        {
+            try {
+
+                $page      = 1;
+                $page_size = $batch_size;
+                $task      = $batch_repository->findByName(self::TaskName.'_MODERATORS_'.$current_summit->getIdentifier());
+
+                if (is_null($task)) {
+                    //create task
+                    $task = $batch_task_factory->buildBatchTask(self::TaskName.'_MODERATORS_'.$current_summit->getIdentifier(), 0, $page);
+                    $batch_repository->add($task);
+                }
+
+                $page = $task->getCurrentPage();
+                echo "Processing Page " . $page . PHP_EOL;
+                // get speakers with not email sent for this current summit
+
+                list($page, $page_size, $count, $moderators) = $speaker_repository->searchModeratorsBySummitPaginated
+                (
+                    $current_summit,
+                    $page,
+                    $page_size
+                );
+
+                $speakers_notified = 0;
+
+                foreach ($moderators as $moderator) {
+
+                    if (!$moderator instanceof IPresentationSpeaker) continue;
+                    // we need an email for this speaker ...
+                    $email = $moderator->getEmail();
+                    if (empty($email)) continue;
+
+                    if ($moderator->announcementEmailAlreadySent($current_summit->ID)) continue;
+
+                    $sender_service = $sender_factory->build($current_summit, $moderator, IPresentationSpeaker::RoleModerator);
+                    // get registration code
+                    if (is_null($sender_service)) continue;
+
+                    $code = null;
+
+                    if ($moderator->hasPublishedPresentations($current_summit->getIdentifier(), IPresentationSpeaker::RoleModerator)) //get approved code
+                    {
+                        $code = $promo_code_repository->getNextAvailableByType
+                        (
+                            $current_summit,
+                            ISpeakerSummitRegistrationPromoCode::TypeAccepted,
+                            $batch_size
+                        );
+                        if (is_null($code)) throw new Exception('not available promo code!!!');
+                    }
+                    else if ($moderator->hasAlternatePresentations($current_summit->getIdentifier(), IPresentationSpeaker::RoleModerator)) // get alternate code
+                    {
+                        $code = $promo_code_repository->getNextAvailableByType
+                        (
+                            $current_summit,
+                            ISpeakerSummitRegistrationPromoCode::TypeAlternate,
+                            $batch_size
+                        );
+                        if (is_null($code)) throw new Exception('not available alternate promo code!!!');
+                    }
+
+                    $params = array
+                    (
+                        'Speaker' => $moderator,
+                        'Summit'  => $current_summit,
+                        "Role"    => IPresentationSpeaker::RoleModerator
+                    );
+
+                    if (!is_null($code)) {
+                        $moderator->registerSummitPromoCode($code);
+                        $code->setEmailSent(true);
+                        $code->write();
+                        $params['PromoCode'] = $code;
+                    }
+
+                    $sender_service->send($params);
+                    ++$speakers_notified;
+                }
+                $task->updatePage($count, $page_size);
+                $task->write();
+                return $speakers_notified;
+            }
+            catch(Exception $ex)
+            {
+                SS_Log::log($ex->getMessage(), SS_Log::ERR);
+                throw $ex;
+            }
+        });
+    }
 }

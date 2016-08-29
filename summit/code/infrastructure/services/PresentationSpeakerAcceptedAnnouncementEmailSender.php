@@ -26,6 +26,7 @@ final class PresentationSpeakerAcceptedAnnouncementEmailSender implements IMessa
 
         $summit     = $subject['Summit'];
         $speaker    = $subject['Speaker'];
+        $role       = $subject['Role'];
         $promo_code = $subject['PromoCode'];
 
         if(!$speaker instanceof IPresentationSpeaker) return;
@@ -47,6 +48,7 @@ final class PresentationSpeakerAcceptedAnnouncementEmailSender implements IMessa
             array
             (
                 'Speaker'              => $speaker,
+                'Role'                 => $role,
                 'ConfirmationLink'     => $speaker->getSpeakerConfirmationLink($summit->ID),
                 'PromoCode'            => $promo_code->getCode(),
                 'Summit'               => $summit,

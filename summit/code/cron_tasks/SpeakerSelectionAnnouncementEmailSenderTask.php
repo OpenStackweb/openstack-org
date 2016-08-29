@@ -43,10 +43,12 @@ final class SpeakerSelectionAnnouncementEmailSenderTask extends CronTask
             if (!$manager instanceof ISpeakerSelectionAnnouncementSenderManager) {
                 return;
             }
+            $processed1  = 0;
+            //$processed1  = $manager->sendSpeakers($summit, $batch_size);
+            $processed2  = $manager->sendModerators($summit, $batch_size);
 
-            $processed = $manager->send($summit, $batch_size);
             $finish_time = time() - $init_time;
-            echo 'processed records ' . $processed. ' - time elapsed : '.$finish_time. ' seconds.';
+            echo 'processed records (speakers) ' . $processed1.' processed records (moderators) ' . $processed2. ' - time elapsed : '.$finish_time. ' seconds.'.PHP_EOL;
 
         }
         catch(Exception $ex)

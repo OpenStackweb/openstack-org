@@ -25,6 +25,7 @@ final class PresentationSpeakerRejectedAnnouncementEmailSender implements IMessa
         if(!isset($subject['Summit'])  || !isset($subject['Speaker'])) return;
         $summit  = $subject['Summit'];
         $speaker = $subject['Speaker'];
+        $role    = $subject['Role'];
         if(!$speaker instanceof IPresentationSpeaker) return;
         if(!$summit instanceof ISummit) return;
 
@@ -39,6 +40,7 @@ final class PresentationSpeakerRejectedAnnouncementEmailSender implements IMessa
             array
             (
                 'Speaker' => $speaker,
+                'Role'    => $role,
                 'Summit'  => $summit,
             )
         )

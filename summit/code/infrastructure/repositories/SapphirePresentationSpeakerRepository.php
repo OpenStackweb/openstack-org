@@ -491,6 +491,46 @@ SQL;
     }
 
     /**
+     * @param ISummit $summit
+     * @param int $page
+     * @param int $page_size
+     * @param string $term
+     * @param string $sort_by
+     * @param string $sort_dir
+     * @return array
+     */
+    public function searchModeratorsBySummitPaginated(ISummit $summit, $page= 1, $page_size = 10, $term = '', $sort_by = 'id', $sort_dir = 'asc'){
+        list($offset, $sort, $where_having) = $this->buildSpeakersSearchParams($page, $page_size, $term, $sort_by, $sort_dir);
+
+        $where = <<<SQL
+      WHERE EXISTS
+            (
+                SELECT 1 FROM SummitEvent
+                INNER JOIN Presentation ON Presentation.ID = SummitEvent.ID
+                WHERE SummitEvent.SummitID = {$summit->ID}
+                AND Presentation.ModeratorID  = PresentationSpeaker.ID
+            )
+            {$where_having}
+SQL;
+
+        $query_count = $this->buildSearchSpeakersBaseCountSQLQuery($where);
+        $query       = $this->buildSearchSpeakersBaseSQLQuery($where, $sort, $offset, $page_size);
+
+
+        $count_res = DB::query($query_count)->first();
+        $res       = DB::query($query);
+        $count     = intval($count_res['QTY']);
+        $data      = array();
+
+        foreach($res as $row)
+        {
+            array_push($data, new PresentationSpeaker($row));
+        }
+
+        return array($page, $page_size, $count, $data);
+    }
+
+    /**
      * Gets all speakers that belongs to given summit , those are the ones that has at least a
      * Published Presentation on the give summit
      * @param ISummit $summit

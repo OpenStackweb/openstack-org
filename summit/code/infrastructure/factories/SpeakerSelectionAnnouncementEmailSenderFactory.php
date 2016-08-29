@@ -17,15 +17,16 @@ final class SpeakerSelectionAnnouncementEmailSenderFactory implements ISpeakerSe
     /**
      * @param ISummit $summit
      * @param IPresentationSpeaker $speaker
+     * @param string $role
      * @return PresentationSpeakerAcceptedAnnouncementEmailSender
      * @throws Exception
      */
-    public function build(ISummit $summit, IPresentationSpeaker $speaker)
+    public function build(ISummit $summit, IPresentationSpeaker $speaker, $role = IPresentationSpeaker::RoleSpeaker)
     {
 
-        $has_published = $speaker->hasPublishedPresentations($summit->getIdentifier());
-        $has_rejected  = $speaker->hasRejectedPresentations($summit->getIdentifier());
-        $has_alternate = $speaker->hasAlternatePresentations($summit->getIdentifier());
+        $has_published = $speaker->hasPublishedPresentations($summit->getIdentifier(), $role);
+        $has_rejected  = $speaker->hasRejectedPresentations($summit->getIdentifier(), $role);
+        $has_alternate = $speaker->hasAlternatePresentations($summit->getIdentifier(), $role);
 
         if($has_published && !$has_rejected && !$has_alternate)
             return new PresentationSpeakerAcceptedAnnouncementEmailSender;

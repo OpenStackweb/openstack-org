@@ -18,12 +18,14 @@
 interface IPresentationSpeaker extends IEntity
 {
 
-    const AnnouncementEmailAccepted = 'ACCEPTED';
-    const AnnouncementEmailRejected = 'REJECTED';
-    const AnnouncementEmailAlternate = 'ALTERNATE';
+    const AnnouncementEmailAccepted          = 'ACCEPTED';
+    const AnnouncementEmailRejected          = 'REJECTED';
+    const AnnouncementEmailAlternate         = 'ALTERNATE';
     const AnnouncementEmailAcceptedAlternate = 'ACCEPTED_ALTERNATE';
-    const AnnouncementEmailAcceptedRejected = 'ACCEPTED_REJECTED';
+    const AnnouncementEmailAcceptedRejected  = 'ACCEPTED_REJECTED';
     const AnnouncementEmailAlternateRejected = 'ALTERNATE_REJECTED';
+    const RoleSpeaker                        = 'SPEAKER';
+    const RoleModerator                      = 'MODERATOR';
 
     /**
      * @return  string
@@ -133,27 +135,31 @@ interface IPresentationSpeaker extends IEntity
 
     /**
      * @param int $summit_id
+     * @param string $role
      * @return bool
      */
-    public function hasRejectedPresentations($summit_id = null);
+    public function hasRejectedPresentations($summit_id = null,  $role = IPresentationSpeaker::RoleSpeaker);
 
     /**
      * @param int $summit_id
+     * @param string $role
      * @return bool
      */
-    public function hasApprovedPresentations($summit_id = null);
+    public function hasApprovedPresentations($summit_id = null,  $role = IPresentationSpeaker::RoleSpeaker);
 
     /**
      * @param int $summit_id
+     * @param string $role
      * @return bool
      */
-    public function hasPublishedPresentations($summit_id = null);
+    public function hasPublishedPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker);
 
     /**
      * @param int $summit_id
+     * @param string $role
      * @return bool
      */
-    public function hasAlternatePresentations($summit_id = null);
+    public function hasAlternatePresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker);
 
     /**
      * @param ISpeakerSummitRegistrationPromoCode $promo_code
@@ -195,11 +201,6 @@ interface IPresentationSpeaker extends IEntity
      */
     public function registerBreakOutSent($summit_id, $type);
 
-    /**
-     * @param null|int $summit_id
-     * @return mixed
-     */
-    public function PublishedPresentations($summit_id = null);
 
     /**
      * @param int $summit_id
@@ -280,4 +281,32 @@ interface IPresentationSpeaker extends IEntity
      * @return DataList
      */
     public function getPrivateCategoryOwnedPresentationsBySummit(ISummit $summit, PrivatePresentationCategoryGroup $private_group);
+
+    /**
+     * @param null|int $summit_id
+     * @param string $role
+     * @return ArrayList|bool
+     */
+    public function UnacceptedPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker);
+
+    /**
+     * @param null|int $summit_id
+     * @param string $role
+     * @return ArrayList|bool
+     */
+    public function AcceptedPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker);
+
+    /**
+     * @param null $summit_id
+     * @param string $role
+     * @return ArrayList|bool
+     */
+    public function AlternatePresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker);
+
+    /**
+     * @param null|int $summit_id
+     * @param string $role
+     * @return mixed
+     */
+    public function PublishedPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker);
 }

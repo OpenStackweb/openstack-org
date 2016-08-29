@@ -298,15 +298,26 @@ class PresentationSpeaker extends DataObject
         ]);
     }
 
-
-    public function PublishedPresentations($summit_id = null)
+    /**
+     * @param null $summit_id
+     * @param string $role
+     * @return bool|DataList
+     */
+    public function PublishedPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker)
     {
         $summit = !$summit_id ? Summit::get_active() : Summit::get()->byID($summit_id);
         if (!$summit) return false;
 
-        return $this->Presentations()->filter([
+        if($role == IPresentationSpeaker::RoleSpeaker)
+            return $this->Presentations()->filter([
+                'SummitID'  => $summit->ID,
+                'Published' => 1
+            ]);
+
+        return Presentation::get()->filter([
             'SummitID'  => $summit->ID,
-            'Published' => 1
+            'Published' => 1,
+            'ModeratorID' => $this->ID
         ]);
     }
 
@@ -464,12 +475,19 @@ class PresentationSpeaker extends DataObject
         return $acceptedPresentations;
     }
 
-    public function AcceptedPresentations($summit_id = null)
+    /**
+     * @param null|int $summit_id
+     * @param string $role
+     * @return ArrayList|bool
+     */
+    public function AcceptedPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker)
     {
         $acceptedPresentations = new ArrayList();
         $summit = !$summit_id ? Summit::get_active() : Summit::get()->byID($summit_id);
         if (!$summit) return false;
-        $presentations = $this->Presentations()->filter('SummitEvent.SummitID', $summit->ID);
+        $presentations = $role == IPresentationSpeaker::RoleSpeaker ?
+            $this->Presentations()->filter('SummitEvent.SummitID', $summit->ID):
+            Presentation::get()->filter(['SummitEvent.SummitID' => $summit->ID, 'ModeratorID' => $this->ID]);
 
         $presentations_hash = [];
         foreach ($presentations as $p) {
@@ -483,12 +501,22 @@ class PresentationSpeaker extends DataObject
         return $acceptedPresentations;
     }
 
-    public function UnacceptedPresentations($summit_id = null)
+    /**
+     * @param null|int $summit_id
+     * @param string $role
+     * @return ArrayList|bool
+     */
+    public function UnacceptedPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker)
     {
         $unacceptedPresentations = new ArrayList();
-        $summit = !$summit_id ? Summit::get_active() : Summit::get()->byID($summit_id);
+        $summit                  = !$summit_id ? Summit::get_active() : Summit::get()->byID($summit_id);
+
         if (!$summit) return false;
-        $presentations = $this->Presentations()->filter('SummitEvent.SummitID', $summit->ID);
+
+        $presentations = $role == IPresentationSpeaker::RoleSpeaker ?
+            $this->Presentations()->filter('SummitEvent.SummitID', $summit->ID):
+            Presentation::get()->filter(['SummitEvent.SummitID' => $summit->ID, 'ModeratorID' => $this->ID]);
+
         foreach ($presentations as $p) {
             if ($p->SelectionStatus() == IPresentation::SelectionStatus_Unaccepted && !$p->isPublished()) {
                 $unacceptedPresentations->push($p);
@@ -498,12 +526,21 @@ class PresentationSpeaker extends DataObject
         return $unacceptedPresentations;
     }
 
-    public function AlternatePresentations($summit_id = null)
+    /**
+     * @param null $summit_id
+     * @param string $role
+     * @return ArrayList|bool
+     */
+    public function AlternatePresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker)
     {
         $alternatePresentations = new ArrayList();
         $summit = is_null($summit_id) ? Summit::get_active() : Summit::get()->byID($summit_id);
         if (is_null($summit)) return false;
-        $presentations = $this->Presentations()->filter('SummitEvent.SummitID', $summit->ID);
+
+        $presentations = $role == IPresentationSpeaker::RoleSpeaker ?
+            $this->Presentations()->filter('SummitEvent.SummitID', $summit->ID):
+            Presentation::get()->filter(['SummitEvent.SummitID' => $summit->ID, 'ModeratorID' => $this->ID]);
+
         foreach ($presentations as $p) {
             if ($p->SelectionStatus() == IPresentation::SelectionStatus_Alternate && !$p->isPublished()) {
                 $alternatePresentations->push($p);
@@ -655,29 +692,32 @@ class PresentationSpeaker extends DataObject
 
     /**
      * @param int $summit_id
+     * @param string $role
      * @return bool
      */
-    public function hasRejectedPresentations($summit_id = null)
+    public function hasRejectedPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker)
     {
-        return $this->UnacceptedPresentations($summit_id)->count() > 0;
+        return $this->UnacceptedPresentations($summit_id, $role)->count() > 0;
     }
 
     /**
      * @param int $summit_id
+     * @param string $role
      * @return bool
      */
-    public function hasApprovedPresentations($summit_id = null)
+    public function hasApprovedPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker)
     {
-        return $this->AcceptedPresentations($summit_id)->count() > 0;
+        return $this->AcceptedPresentations($summit_id, $role)->count() > 0;
     }
 
     /**
      * @param int $summit_id
+     ** @param string $role
      * @return bool
      */
-    public function hasAlternatePresentations($summit_id = null)
+    public function hasAlternatePresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker)
     {
-        return $this->AlternatePresentations($summit_id)->count() > 0;
+        return $this->AlternatePresentations($summit_id, $role)->count() > 0;
     }
 
     /**
@@ -983,10 +1023,12 @@ class PresentationSpeaker extends DataObject
 
     /**
      * @param int $summit_id
+     * @param string $role
      * @return bool
      */
-    public function hasPublishedPresentations($summit_id = null)
+    public function hasPublishedPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker)
     {
-        return $this->PublishedPresentations($summit_id)->count() > 0;
+        return $this->PublishedPresentations($summit_id, $role)->count() > 0;
     }
+
 }

@@ -26,6 +26,7 @@ final class PresentationSpeakerAcceptedAlternateAnnouncementEmailSender implemen
         $summit     = $subject['Summit'];
         $speaker    = $subject['Speaker'];
         $promo_code = $subject['PromoCode'];
+        $role       = $subject['Role'];
         if(!$speaker instanceof IPresentationSpeaker) return;
         if(!$summit instanceof ISummit) return;
         if(!$promo_code instanceof SpeakerSummitRegistrationPromoCode) return;
@@ -44,6 +45,7 @@ final class PresentationSpeakerAcceptedAlternateAnnouncementEmailSender implemen
             array
             (
                 'Speaker'              => $speaker,
+                'Role'                 => $role,
                 'ConfirmationLink'     => $speaker->getSpeakerConfirmationLink($summit->ID),
                 'PromoCode'            => $promo_code->getCode(),
                 'Summit'               => $summit,

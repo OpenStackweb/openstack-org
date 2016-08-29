@@ -89,4 +89,15 @@ interface ISpeakerRepository extends IEntityRepository
      * @return IPresentationSpeaker
      */
     public function getByEmail($email);
+
+    /**
+     * @param ISummit $summit
+     * @param int $page
+     * @param int $page_size
+     * @param string $term
+     * @param string $sort_by
+     * @param string $sort_dir
+     * @return array
+     */
+    public function searchModeratorsBySummitPaginated(ISummit $summit, $page= 1, $page_size = 10, $term = '', $sort_by = 'id', $sort_dir = 'asc');
 }

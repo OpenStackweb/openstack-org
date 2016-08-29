@@ -25,6 +25,7 @@ final class PresentationSpeakerAlternateAnnouncementEmailSender implements IMess
         if(!isset($subject['Summit'])  || !isset($subject['Speaker']) || !isset($subject['PromoCode']) ) return;
         $summit     = $subject['Summit'];
         $speaker    = $subject['Speaker'];
+        $role       = $subject['Role'];
         $promo_code = $subject['PromoCode'];
         if(!$speaker instanceof IPresentationSpeaker) return;
         if(!$summit instanceof ISummit) return;
@@ -44,6 +45,7 @@ final class PresentationSpeakerAlternateAnnouncementEmailSender implements IMess
             array
             (
                 'Speaker'              => $speaker,
+                'Role'                 => $role,
                 'ConfirmationLink'     => $speaker->getSpeakerConfirmationLink($summit->ID),
                 'PromoCode'            => $promo_code->getCode(),
                 'Summit'               => $summit,

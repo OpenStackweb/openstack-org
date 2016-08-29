@@ -19,6 +19,13 @@ interface ISpeakerSelectionAnnouncementSenderManager
      * @param int $batch_size
      * @return void
      */
-    public function send(ISummit $current_summit, $batch_size);
+    public function sendSpeakers(ISummit $current_summit, $batch_size);
+
+    /**
+     * @param ISummit $current_summit
+     * @param int $batch_size
+     * @return void
+     */
+    public function sendModerators(ISummit $current_summit, $batch_size);
 
 }

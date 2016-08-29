@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-final class PresentationSpeakerAcceptedRejectedAnnouncementEmailSender implements IMessageSenderService
+final class phpPresentationSpeakerAcceptedRejectedAnnouncementEmailSender implements IMessageSenderService
 {
 
     /**
@@ -25,6 +25,7 @@ final class PresentationSpeakerAcceptedRejectedAnnouncementEmailSender implement
         if(!isset($subject['Summit'])  || !isset($subject['Speaker']) || !isset($subject['PromoCode']) ) return;
         $summit     = $subject['Summit'];
         $speaker    = $subject['Speaker'];
+        $role       = $subject['Role'];
         $promo_code = $subject['PromoCode'];
         if(!$speaker instanceof IPresentationSpeaker) return;
         if(!$summit instanceof ISummit) return;
@@ -46,6 +47,7 @@ final class PresentationSpeakerAcceptedRejectedAnnouncementEmailSender implement
             array
             (
                 'Speaker'              => $speaker,
+                'Role'                 => $role,
                 'ConfirmationLink'     => $speaker->getSpeakerConfirmationLink($summit->ID),
                 'PromoCode'            => $promo_code->getCode(),
                 'Summit'               => $summit,
