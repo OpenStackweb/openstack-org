@@ -87,19 +87,19 @@ final class SapphireJobRepository extends SapphireRepository implements IJobRepo
         if(!empty($sort_by)){
             switch(strtolower($sort_by)){
                 case 'coa':
-                    $query->addOrder(QueryOrder::asc('IsCOANeeded'));
+                    $query = $query->addOrder(QueryOrder::desc('IsCOANeeded'));
                     break;
                 case 'foundation':
-                    $query->addOrder(QueryOrder::asc('IsFoundationJob'));
+                    $query = $query->addOrder(QueryOrder::desc('IsFoundationJob'));
                     break;
                 case 'company':
-                    $query->addOrder(QueryOrder::asc('CompanyName'));
+                    $query = $query->addOrder(QueryOrder::asc('CompanyName'));
                     break;
                 case 'posted':
-                    $query->addOrder(QueryOrder::asc('PostedDate'));
+                    $query = $query->addOrder(QueryOrder::desc('PostedDate'));
                     break;
                 case 'location':
-                    $query->addOrder(QueryOrder::asc('LocationType'));
+                    $query = $query->addOrder(QueryOrder::asc('LocationType'));
                     break;
             }
         }
