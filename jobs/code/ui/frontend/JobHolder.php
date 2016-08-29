@@ -93,24 +93,37 @@ final class JobHolder_Controller extends Page_Controller {
 		return '#';
 	}
 
+	function JobListLink(){
+        $page = JobHolder::get()->first();
+        if($page){
+            return $page->getAbsoluteLiveLink(false);
+        }
+        return '#';
+    }
+
 	function getJobTypes(){
 	    return JobType::get()->sort('Type');
     }
 
     function JobDetailsPage() {
         $job_id = intval($this->request->param('JOB_ID'));
-        $job = Job::get()->byID($job_id);
-        if($job)
-            return $this->renderWith(array('JobDetail','Page'),$job);
+        $job    = Job::get()->byID($job_id);
+
+        if($job) {
+            if(!empty($job->MoreInfoLink))
+                $job->FormattedMoreInfoLink = $this->getViewInfoLink($job->MoreInfoLink);
+            return $this->renderWith(array('JobDetail', 'Page'), ['Job' => $job]);
+        }
+
         return $this->httpError(404, 'Sorry that Job could not be found!.');
     }
 
     function getViewInfoLink($info_link){
         if(filter_var($info_link, FILTER_VALIDATE_EMAIL)) {
-            return '<a rel="nofollow" href="mailto:'.$info_link.'" >More About This Job</a>';
+            return "mailto:".$info_link;
         }
         if(filter_var($info_link, FILTER_VALIDATE_URL)) {
-            return '<a rel="nofollow" href="' . $info_link . '" target="_blank" >More About This Job</a>';
+            return $info_link;
         }
         return '';
     }

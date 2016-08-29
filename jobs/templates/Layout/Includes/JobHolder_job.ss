@@ -23,7 +23,7 @@
         </div>
         <div class="col-sm-1">
             <% if IsCOANeeded %>
-                <img id="coa" src="https://www.openstack.org/themes/openstack/images/coa/coa-badge.svg">
+                <img id="coa" src="themes/openstack/images/coa/coa-badge.svg">
             <% end_if %>            
         </div>
     </div>
@@ -74,7 +74,7 @@
                 </div> 
                 <div class="col-md-3">
                     <% if MoreInfoLink %>
-                        <a rel="nofollow" target="_blank" href="$MoreInfoLink">
+                        <a rel="nofollow" target="_blank" href="$FormattedMoreInfoLink">
                             <div class="button3">                            
                                 <div class="glyphicon glyphicon-share-alt"></div>
                                 <h5>Apply Now</h5>

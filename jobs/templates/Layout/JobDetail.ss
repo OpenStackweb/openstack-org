@@ -6,7 +6,7 @@
                     <h1>OpenStack Job Board</h1>
                 </div>
                 <div class="col-sm-3 col-sm-offset-3 backButton">
-                    <a href="$PostJobLink">
+                    <a href="$JobListLink">
                         <div class="button1" type="button">                            
                             <div class="glyphicon glyphicon-arrow-left"></div>
                             <h5>Back to Job List</h5>
@@ -19,13 +19,17 @@
 </div>
 
 
-
+<% with Job %>
 <div class="">
     <div class="col-sm-8">
         <div class="row">
             <div class="dateField">
                 <div class="newBox">
-                    <h5>NEW</h5>
+                    <% if RecentJob %>
+                        <div class="newBox">
+                            <h5>NEW</h5>
+                        </div>
+                    <% end_if %>
                 </div>
                 <div class="publishedDate">
                     <h5>Published on $PostedDate.format(F) $PostedDate.format(d)</h5>
@@ -53,12 +57,12 @@
                 <% end_if %>
             </p>
              <p>
-                <img id="coa" src="https://www.openstack.org/themes/openstack/images/coa/coa-badge.svg">
+                 <% if IsCOANeeded %>
+                    <img id="coa" src="themes/openstack/images/coa/coa-badge.svg">
+                 <% end_if %>
             </p>
-           
         </div>
 
-                    
         <div class="row">
             <div class="col-md-12">
                 <div class="row">
@@ -78,10 +82,11 @@
                 <div class="row">
                     
                 </div>
-        </div>       
+        </div>
+        <% if FormattedMoreInfoLink %>
         <div class="row">        
                 <div class="col-sm-3">
-                    <a href="">
+                    <a rel="nofollow"  target="_blank" href="$FormattedMoreInfoLink">
                         <div class="button2" type="button">                            
                             <div class="glyphicon glyphicon-share-alt"></div>
                             <h5>Apply Now</h5>
@@ -90,5 +95,7 @@
                 </div>
             </div>
         </div>
+        <% end_if %>
     </div>
 </div>
+<% end_with %>

@@ -17,4 +17,10 @@ final class JobType extends DataObject
     private static $db = array(
         'Type' => 'Varchar(255)',
     );
+
+    private static $summary_fields = array
+    (
+        'ID'   => 'ID',
+        'Type' => 'Type',
+    );
 }
