@@ -15,11 +15,12 @@
             <!-- Start Category -->
             <div class="col-sm-6">
                 <div class="session-wrapper" id="containers">
-                    <h3>Architecture & Operations</h3>
+                    <h3>
+                        <a href="http://www.openstack.org/summit/barcelona-2016/summit-schedule/#day=2016-10-25&track_groups=15">
+                            <span class="dot ops"></span>Architecture & Operations
+                        </a>
+                    </h3>
                     <div class="session-list-tracks">
-                        <div class="session-tracks-title">
-                            <a href="http://www.openstack.org/summit/barcelona-2016/summit-schedule/#day=2016-10-25&track_groups=15">View on Summit Schedule</a>
-                        </div>
                         <ul>
                             <li class="tracks-tooltip" title="If you are a cloud architect or involved in planning your cloud strategy, this track will discuss popular reference architectures, configuration options, workload optimization, and architecture show and tell, where experienced users will share their architectures and experiences.">Architectural Decisions</li>
                             <li class="tracks-tooltip" title="Sharing knowledge and best practices is a core value for the OpenStack community. In the track, you’ll hear directly from fellow cloud architects and operators who will share their stories from the trenches, proven architecture diagrams, and lessons learned.">Operations War Stories</li>
@@ -44,18 +45,19 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <a href="#" class="all-sessions-btn">See All Sessions <i class="fa fa-chevron-right"></i></a> -->
+                    <a href="http://www.openstack.org/summit/barcelona-2016/summit-schedule/#day=2016-10-25&track_groups=15" class="all-sessions-btn">View On Summit Schedule <i class="fa fa-chevron-right"></i></a>
                 </div>
             </div>
             <!-- End Category -->
             <!-- Start Category -->
             <div class="col-sm-6">
                 <div class="session-wrapper" id="arch">
-                    <h3>Business & Strategy</h3>
+                    <h3>
+                        <a href="http://www.openstack.org/summit/barcelona-2016/summit-schedule/#day=2016-10-25&track_groups=14">
+                            <span class="dot bus"></span>Business & Strategy
+                        </a>
+                    </h3>
                     <div class="session-list-tracks">
-                        <div class="session-tracks-title">
-                            <a href="http://www.openstack.org/summit/barcelona-2016/summit-schedule/#day=2016-10-25&track_groups=14">View on Summit Schedule</a>
-                        </div>
                         <ul>
                             
                             
@@ -79,7 +81,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <a href="#" class="all-sessions-btn">See All Sessions <i class="fa fa-chevron-right"></i></a> -->
+                    <a href="http://www.openstack.org/summit/barcelona-2016/summit-schedule/#day=2016-10-25&track_groups=14" class="all-sessions-btn">View On Summit Schedule <i class="fa fa-chevron-right"></i></a>
                 </div>
             </div>
             <!-- End Category -->
@@ -91,11 +93,12 @@
             <!-- Start Category -->
             <div class="col-sm-6">
                 <div class="session-wrapper" id="telecom">
-                    <h3>Developers</h3>
+                    <h3>
+                        <a href="http://www.openstack.org/summit/barcelona-2016/summit-schedule/#day=2016-10-25&track_groups=16">
+                            <span class="dot dev"></span>Developers
+                        </a>
+                    </h3>
                     <div class="session-list-tracks">
-                        <div class="session-tracks-title">
-                            <a href="http://www.openstack.org/summit/barcelona-2016/summit-schedule/#day=2016-10-25&track_groups=16">View on Summit Schedule</a>
-                        </div>
                         <ul>
                             <li class="tracks-tooltip" title="Big Data collection and analysis is a common use case for OpenStack infrastructure. In this track, you'll learn about specific reference architectures and use cases, along with updates on relevant OpenStack projects like Sahara, which rapidly provisions Hadoop or Spark clusters for big data analysis.">Big Data</li>
                             <li class="tracks-tooltip" title="A large community of application developers and ecosystem of development tools is growing around OpenStack. This track will be for users who are building and deploying applications on OpenStack clouds, and cover topics like automating and managing application deployment, application software configuration, SDKs, tools, PaaS and big data.">Cloud App Development</li>
@@ -115,18 +118,19 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <a href="#" class="all-sessions-btn">See All Sessions <i class="fa fa-chevron-right"></i></a> -->
+                    <a href="http://www.openstack.org/summit/barcelona-2016/summit-schedule/#day=2016-10-25&track_groups=16" class="all-sessions-btn">View On Summit Schedule <i class="fa fa-chevron-right"></i></a>
                 </div>
             </div>
             <!-- End Category -->
             <!-- Start Category -->
             <div class="col-sm-6">
                 <div class="session-wrapper" id="keynotes">
-                    <h3>OpenStack Academy</h3>
+                    <h3>
+                        <a href="http://www.openstack.org/summit/barcelona-2016/summit-schedule/#day=2016-10-25&track_groups=12">
+                            <span class="dot aca"></span>OpenStack Academy
+                        </a>
+                    </h3>
                     <div class="session-list-tracks">
-                        <div class="session-tracks-title">
-                            <a href="http://www.openstack.org/summit/barcelona-2016/summit-schedule/#day=2016-10-25&track_groups=12">View on Summit Schedule</a>
-                        </div>
                         <ul>
                             <li class="tracks-tooltip" title="Intensive training courses will be run and offered free of charge to registered Summit attendees by leading training companies in the OpenStack ecosystem. RSVP is required and we’ll just be requesting a small deposit to reserve your spot, which is refundable upon completion of the course. Bring your laptop.">Full Day Intensive Trainings*</li>
                             <li class="tracks-tooltip" title="Hands-on Workshops offer a window into OpenStack training for operators and application developers. Sessions are typically 90 minutes and require RSVP and some prep work. Bring your laptop and walk away with OpenStack skills.">Hands-On Workshops</li>
@@ -142,7 +146,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <a href="#" class="all-sessions-btn">See All Sessions <i class="fa fa-chevron-right"></i></a> -->
+                    <a href="http://www.openstack.org/summit/barcelona-2016/summit-schedule/#day=2016-10-25&track_groups=12" class="all-sessions-btn">View On Summit Schedule <i class="fa fa-chevron-right"></i></a>
                 </div>
             </div>
             <!-- End Category -->
@@ -153,11 +157,12 @@
            <!-- Start Category -->
             <div class="col-sm-6">
                 <div class="session-wrapper">
-                    <h3>Community Collaboration</h3>
+                    <h3>
+                        <a href="http://www.openstack.org/summit/barcelona-2016/summit-schedule/#day=2016-10-25&track_groups=13">
+                            <span class="dot com"></span>Community Collaboration
+                        </a>
+                    </h3>
                     <div class="session-list-tracks">
-                        <div class="session-tracks-title">
-                            <a href="http://www.openstack.org/summit/barcelona-2016/summit-schedule/#day=2016-10-25&track_groups=13">View on Summit Schedule</a>
-                        </div>
                         <ul>
                             <li class="tracks-tooltip" title="BoFs are not presentations or working sessions; they provide a chance for the community to gather informally around a specific topic. Topics should be non-commercial and relevant for the OpenStack community.">Birds of a Feather*</li>
                             <li class="tracks-tooltip" title="OpenStack is a large, diverse community with more than 75 user groups around the world. In the community building track, user group leaders will share their experiences growing and maturing their local groups, community leaders will discuss new tools and metrics, and we'll shine a spotlight on end user and contributing organizations who have experienced a significant internal culture change as participants of the OpenStack community.">Community Building</li>
@@ -176,15 +181,17 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <a href="#" class="all-sessions-btn">See All Sessions <i class="fa fa-chevron-right"></i></a> -->
+                    <a href="http://www.openstack.org/summit/barcelona-2016/summit-schedule/#day=2016-10-25&track_groups=13" class="all-sessions-btn">View On Summit Schedule <i class="fa fa-chevron-right"></i></a>
                 </div>
             </div>
             <!-- End Category -->
             <div class="col-sm-6">
             </div>
         </div>
-        <div class="row session-list-row">
-            <p>* Note: these are not selected though the Call for Presentations process</p>
+        <div class="row">
+            <div class="col-sm-12">
+                <p>* Note: these are not selected though the Call for Presentations process</p>
+            </div>
         </div>
         <!-- Full track definitions -->
         <div class="row">

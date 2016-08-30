@@ -3706,6 +3706,35 @@ a.hotel-landing-select-btn {
   margin-bottom: 5px;
   border-bottom: 1px solid #D4DCE5; }
 
+.session-wrapper h3 a {
+  color: #2A4E68;
+}
+
+.session-wrapper h3 a span.dot {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #333;
+  display: inline-block;
+  margin: 0 10px -3px 2px;
+}
+
+.session-wrapper h3 a span.dot.ops {
+  background: #18C0E4;
+}
+.session-wrapper h3 a span.dot.bus {
+  background: #E79837;
+}
+.session-wrapper h3 a span.dot.dev {
+  background: #9aa0b5;
+}
+.session-wrapper h3 a span.dot.aca {
+  background: #f75466;
+}
+.session-wrapper h3 a span.dot.com {
+  background: #5244c0;
+}
+
 .session-tracks-title {
   font-size: 0.75em;
   text-transform: uppercase;
@@ -3774,17 +3803,20 @@ a.view-all-tracks-link:after {
   margin-bottom: 15px; }
 
 a.all-sessions-btn {
-  display: block;
-  max-width: 180px;
-  margin-top: 20px;
+  display: inline-block;
+  margin-top: 15px;
   text-align: center;
   color: white;
   padding: 10px 20px;
   background: #29abe2;
   border-radius: 4px; }
-  a.all-sessions-btn:hover {
+  a.all-sessions-btn:hover, a.all-sessions-btn:focus {
     text-decoration: none;
     background: #30739C; }
+
+a.all-sessions-btn i {
+  margin-left: 5px;
+}
 
 .sessions-chart {
   margin: 10px 0 30px;
