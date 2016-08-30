@@ -18,17 +18,19 @@ class SummitEvent extends DataObject implements ISummitEvent
 
     private static $db = array
     (
-        'Title'            => 'Text',
-        'Description'      => 'HTMLText',
-        'ShortDescription' => 'HTMLText',
-        'StartDate'        => 'SS_Datetime',
-        'EndDate'          => 'SS_Datetime',
-        'Published'        => 'Boolean',
-        'PublishedDate'    => 'SS_Datetime',
-        'AllowFeedBack'    => 'Boolean',
-        'AvgFeedbackRate'  => 'Float',
-        'RSVPLink'         => 'Text',
-        'HeadCount'        => 'Int',
+        'Title'                     => 'Text',
+        'Description'               => 'HTMLText',
+        'ShortDescription'          => 'HTMLText',
+        'StartDate'                 => 'SS_Datetime',
+        'EndDate'                   => 'SS_Datetime',
+        'Published'                 => 'Boolean',
+        'PublishedDate'             => 'SS_Datetime',
+        'AllowFeedBack'             => 'Boolean',
+        'AvgFeedbackRate'           => 'Float',
+        'HeadCount'                 => 'Int',
+        'RSVPLink'                  => 'Text',
+        'RSVPMaxUserNumber'         => 'Int',
+        'RSVPMaxUserWaitListNumber' => 'Int',
     );
 
     private static $has_many = array
@@ -55,10 +57,10 @@ class SummitEvent extends DataObject implements ISummitEvent
 
     private static $has_one = array
     (
-        'Location'     => 'SummitAbstractLocation',
-        'Summit'       => 'Summit',
-        'Type'         => 'SummitEventType',
-        'RSVPTemplate' => 'RSVPTemplate',
+        'Location'          => 'SummitAbstractLocation',
+        'Summit'            => 'Summit',
+        'Type'              => 'SummitEventType',
+        'RSVPTemplate'      => 'RSVPTemplate',
     );
 
     private static $summary_fields = array
@@ -94,6 +96,12 @@ class SummitEvent extends DataObject implements ISummitEvent
     public function getRSVPLink()
     {
         return html_entity_decode($this->getField('RSVPLink'));
+    }
+
+    public function getRSVPURL($absolute = true)
+    {
+        return $this->hasRSVPTemplate() ?
+            $this->getLink('show', $absolute).'/rsvp': $this->getRSVPLink();
     }
 
     public function getFormattedTitle(){
@@ -155,11 +163,18 @@ class SummitEvent extends DataObject implements ISummitEvent
         return $this instanceof Presentation;
     }
 
-    public function getLink($type ='show') {
+    /**
+     * @param string $type
+     * @param bool $absolute
+     * @return null|string
+     */
+    public function getLink($type ='show', $absolute = true) {
         if($type == 'show') {
             $page = SummitAppSchedPage::get()->filter('SummitID', $this->SummitID)->first();
             if ($page) {
-                return $page->getAbsoluteLiveLink(false) . 'events/' . $this->getIdentifier() . '/' . $this->getTitleForUrl();
+                if($absolute)
+                    return $page->getAbsoluteLiveLink(false) . 'events/' . $this->getIdentifier() . '/' . $this->getTitleForUrl();
+                return $page->RelativeLink(false) . 'events/' . $this->getIdentifier() . '/' . $this->getTitleForUrl();
             }
         }
         return null;
@@ -396,6 +411,7 @@ class SummitEvent extends DataObject implements ISummitEvent
         $f->addFieldToTab('Root.Main', new HtmlEditorField('Description','Description'));
         $f->addFieldToTab('Root.Main', new HtmlEditorField('ShortDescription','Abstract'));
         $f->addFieldToTab('Root.Main', new TextField('HeadCount','HeadCount'));
+
         $f->tag('Tags', 'Tags', Tag::get(), $this->Tags())->configure()
         ->setTitleField('Tag')
         ->end();
@@ -410,7 +426,7 @@ class SummitEvent extends DataObject implements ISummitEvent
         $date->setConfig('dateformat', 'dd/MM/yyyy');
 
         $f->addFieldsToTab('Root.Main', new ReadonlyField('AvgFeedbackRate', 'AvgFeedbackRate'));
-        $f->addFieldsToTab('Root.Main', new TextField('RSVPLink', 'RSVP Link'));
+
         $locations = SummitAbstractLocation::get()
             ->filter('SummitID', $summit_id )
             ->filter('ClassName', array('SummitVenue', 'SummitVenueRoom', 'SummitExternalLocation') );
@@ -477,29 +493,62 @@ class SummitEvent extends DataObject implements ISummitEvent
             $f->addFieldToTab('Root.Feedback', $feedback);
 
             // rsvp
-            $rsvp_template = new DropdownField('RSVPTemplateID','Select a Template',RSVPTemplate::get()->map());
+
+            $f->addFieldsToTab('Root.RSVP', new TextField('RSVPLink', 'RSVP External Link'));
+
+            $rsvp_template = new DropdownField('RSVPTemplateID','Select a Template', RSVPTemplate::get()->filter('SummitID', $summit_id)->map());
             $rsvp_template->setEmptyString('-- View All Templates --');
+            $f->addFieldToTab('Root.RSVP', LiteralField::create('AddNew','Or add a new custom RSVP Configuration'));
+            $f->addFieldToTab('Root.RSVP', $rsvp_template);
+            $f->addFieldToTab('Root.RSVP', new NumericField('RSVPMaxUserNumber', 'Max # Number'));
+            $f->addFieldToTab('Root.RSVP', new NumericField('RSVPMaxUserWaitListNumber', 'Max # Wait List'));
             $f->addFieldToTab('Root.RSVP', $rsvp_template);
 
             if ($this->RSVPTemplate()->exists()) {
+
                 $config = new GridFieldConfig_RecordEditor(100);
                 $config->removeComponentsByType('GridFieldAddNewButton');
                 $config->addComponent(new GridFieldAjaxRefresh(1000, false));
                 $rsvps = new GridField('RSVPSubmissions', 'RSVP Submissions', $this->RSVPSubmissions(), $config);
                 $f->addFieldToTab('Root.RSVP', $rsvps);
-            } else {
-                $f->addFieldToTab('Root.RSVP', LiteralField::create('AddNew','Or add a new one'));
-                $config = new GridFieldConfig_RecordEditor(100);
-                $rsvp_templates = new GridField('RSVPTemplates', 'RSVP Templates', RSVPTemplate::get(), $config);
-                $f->addFieldToTab('Root.RSVP', $rsvp_templates);
             }
 
-
         }
+
         if($this->ID > 0){
             $_REQUEST['SummitEventID'] = $this->ID;
         }
+
         return $f;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCurrentRSVPSubmissionSeatType(){
+        $count_regular = $this->RSVPSubmissions()->filter('SeatType', IRSVP::SeatTypeRegular )->count();
+        if($count_regular < intval($this->RSVPMaxUserNumber)) return IRSVP::SeatTypeRegular;
+        $count_wait = $this->RSVPSubmissions()->filter('SeatType', IRSVP::SeatTypeWaitList )->count();
+        if($count_wait < intval($this->RSVPMaxUserWaitListNumber)) return IRSVP::SeatTypeWaitList;
+        return 'FULL';
+    }
+
+    /**
+     * @param string $seat_type
+     * @return bool
+     */
+    public function couldAddSeatType($seat_type){
+        switch($seat_type){
+            case IRSVP::SeatTypeRegular: {
+                $count_regular = $this->RSVPSubmissions()->filter('SeatType', IRSVP::SeatTypeRegular)->count();
+                return $count_regular < intval($this->RSVPMaxUserNumber);
+            }
+            case IRSVP::SeatTypeWaitList: {
+                $count_wait = $this->RSVPSubmissions()->filter('SeatType', IRSVP::SeatTypeWaitList)->count();
+                return $count_wait < intval($this->RSVPMaxUserWaitListNumber);
+            }
+        }
+        return false;
     }
 
     public function publish()
@@ -775,5 +824,14 @@ SQL;
     public function allowSpeakers()
     {
         return false;
+    }
+
+    /**
+     * @param string $seat_type
+     * @return int
+     */
+    public function getCurrentSeatsCountByType($seat_type)
+    {
+        return $this->RSVPSubmissions()->filter('SeatType', $seat_type)->count();
     }
 }

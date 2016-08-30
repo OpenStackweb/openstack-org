@@ -39,12 +39,12 @@ final class ScheduleManager
     private $eventfeedback_factory;
 
     /**
-     * @var IEntityRepository
+     * @var ISummitAttendeeRepository
      */
     private $attendee_repository;
 
     /**
-     * @var IEntityRepository
+     * @var IRSVPRepository
      */
     private $rsvp_repository;
 
@@ -59,7 +59,8 @@ final class ScheduleManager
      * @param IEntityRepository $summitpresentation_repository
      * @param IEntityRepository $eventfeedback_repository
      * @param IEventFeedbackFactory $eventfeedback_factory
-     * @param IEntityRepository $attendee_repository
+     * @param ISummitAttendeeRepository $attendee_repository
+     * @param IRSVPRepository $rsvp_repository
      * @param ITransactionManager $tx_manager
      */
     public function __construct(
@@ -67,17 +68,17 @@ final class ScheduleManager
         IEntityRepository $summitpresentation_repository,
         IEntityRepository $eventfeedback_repository,
         IEventFeedbackFactory $eventfeedback_factory,
-        IEntityRepository $attendee_repository,
-        IEntityRepository $rsvp_repository,
+        ISummitAttendeeRepository $attendee_repository,
+        IRSVPRepository $rsvp_repository,
         ITransactionManager $tx_manager
     ) {
-        $this->summitevent_repository = $summitevent_repository;
+        $this->summitevent_repository        = $summitevent_repository;
         $this->summitpresentation_repository = $summitpresentation_repository;
-        $this->eventfeedback_repository = $eventfeedback_repository;
-        $this->eventfeedback_factory = $eventfeedback_factory;
-        $this->attendee_repository = $attendee_repository;
-        $this->rsvp_repository = $rsvp_repository;
-        $this->tx_manager = $tx_manager;
+        $this->eventfeedback_repository      = $eventfeedback_repository;
+        $this->eventfeedback_factory         = $eventfeedback_factory;
+        $this->attendee_repository           = $attendee_repository;
+        $this->rsvp_repository               = $rsvp_repository;
+        $this->tx_manager                    = $tx_manager;
     }
 
 
@@ -285,9 +286,10 @@ final class ScheduleManager
 
     /**
      * @param $data
+     * @param IMessageSenderService $sender_service
      * @return mixed
      */
-    public function addRSVP($data)
+    public function addRSVP($data, IMessageSenderService $sender_service)
     {
         $rsvp_repository        = $this->rsvp_repository;
         $attendee_repository    = $this->attendee_repository;
@@ -297,13 +299,24 @@ final class ScheduleManager
             $data,
             $attendee_repository,
             $rsvp_repository,
-            $summitevent_repository
+            $summitevent_repository,
+            $sender_service
         ) {
 
-            $member_id = intval($data['member_id']);
-            $summit_id = intval($data['summit_id']);
-            $event_id  = intval($data['event_id']);
-            $event     = $summitevent_repository->getById($event_id);
+            $member_id       = intval($data['member_id']);
+            $summit_id       = intval($data['summit_id']);
+            $event_id        = intval($data['event_id']);
+            $seat_type       = $data['seat_type'];
+
+            if(empty($seat_type))
+                throw new EntityValidationException("invalid seat type!");
+
+            $event           = $summitevent_repository->getById($event_id);
+            $summit_attendee = $attendee_repository->getByMemberAndSummit(intval($member_id), intval($summit_id));
+
+            if(is_null($summit_attendee)){
+                throw new EntityValidationException(sprintf("there is no any attendee for member %s and summit %s", $member_id, $summit_id));
+            }
 
             if (!$event) {
                 throw new NotFoundEntityException('Event', '');
@@ -313,13 +326,40 @@ final class ScheduleManager
                 throw new EntityValidationException('RSVPTemplate not set');
             }
 
-            $rsvp = $rsvp_repository->getByEventAndSubmitter($event_id, $member_id);
-
-            if (!$rsvp) {
-                $rsvp = new RSVP();
-                $rsvp->EventID       = $event_id;
-                $rsvp->SubmittedByID = $member_id;
+            // add to schedule the RSVP event
+            if(!$summit_attendee->isScheduled($event_id)){
+                $summit_attendee->addToSchedule($event);
             }
+
+            $old_rsvp = $rsvp_repository->getByEventAndAttendee($event_id, $summit_attendee->getIdentifier());
+            if(!is_null($old_rsvp))
+                throw new EntityValidationException
+                (
+                    sprintf
+                    (
+                        "attendee %s already submitted an rsvp for event %s on summit %s",
+                        $summit_attendee->getIdentifier(),
+                        $event_id,
+                        $summit_id
+                    )
+                );
+
+            $rsvp                = new RSVP();
+            $rsvp->EventID       = $event_id;
+            $rsvp->SubmittedByID = $summit_attendee->getIdentifier();
+            $rsvp->SeatType      = $event->getCurrentRSVPSubmissionSeatType();
+
+            if(!$event->couldAddSeatType($rsvp->SeatType))
+                throw new EntityValidationException
+                (
+                    sprintf
+                    (
+                        "you reach the limit of rsvp items for current event %s ( regular seats %s - wait list seats %s)",
+                        $event_id,
+                        $event->getCurrentSeatsCountByType(IRSVP::SeatTypeRegular),
+                        $event->getCurrentSeatsCountByType(IRSVP::SeatTypeWaitList)
+                    )
+                );
 
             foreach ($event->RSVPTemplate()->getQuestions() as $q)
             {
@@ -351,6 +391,11 @@ final class ScheduleManager
 
                     $rsvp->addAnswer($answer);
                 }
+            }
+
+            if(!is_null($sender_service)){
+                $rsvp->BeenEmailed = true;
+                $sender_service->send(['Event' => $event, 'Attendee' => $summit_attendee]);
             }
 
             $rsvp->write();

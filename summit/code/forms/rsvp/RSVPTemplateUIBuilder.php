@@ -44,9 +44,11 @@ class RSVPTemplateUIBuilder implements IRSVPUIBuilder
         $validator = null;
 
         if ($rsvp)
-        $fields->add(new HiddenField('rsvp_id', 'rsvp_id', $rsvp->getIdentifier()));
+            $fields->add(new HiddenField('rsvp_id', 'rsvp_id', $rsvp->getIdentifier()));
+
         $fields->add(new HiddenField('event_id', 'event_id', $event->getIdentifier()));
         $fields->add(new HiddenField('summit_id', 'summit_id', $event->Summit()->getIdentifier()));
+        $fields->add(new HiddenField('seat_type', 'seat_type', $event->getCurrentRSVPSubmissionSeatType()));
 
         $fields->add(new LiteralField('hr','<hr>'));
 

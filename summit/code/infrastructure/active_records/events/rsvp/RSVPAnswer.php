@@ -24,6 +24,13 @@ class RSVPAnswer extends DataObject implements IRSVPAnswer
 
     );
 
+    private static $summary_fields = array
+    (
+        'ID'                       => 'ID',
+        'Question.Name'            => 'Question',
+        'Value'                    => 'Value',
+    );
+
     static $has_one = array(
         'Question' => 'RSVPQuestionTemplate',
         'RSVP'     => 'RSVP',
@@ -79,6 +86,7 @@ class RSVPAnswer extends DataObject implements IRSVPAnswer
         $question = $this->Question();
         if($question instanceof RSVPMultiValueQuestionTemplate)
         {
+            $res = explode(',', $res);
             $aux = '';
             foreach($res as $v){
                 $value = $question->getValueById(intval($v));

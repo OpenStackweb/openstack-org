@@ -25,6 +25,7 @@ class RSVPTemplate extends DataObject implements IRSVPTemplate {
     static $has_one = array
     (
         'CreatedBy' => 'Member',
+        'Summit'    => 'Summit',
     );
 
     static $belongs_to = array();
@@ -34,7 +35,6 @@ class RSVPTemplate extends DataObject implements IRSVPTemplate {
     static $has_many = array
     (
         'Questions'  => 'RSVPQuestionTemplate',
-        'Event'      => 'SummitEvent',
     );
 
     private static $defaults = array
@@ -51,7 +51,7 @@ class RSVPTemplate extends DataObject implements IRSVPTemplate {
         $fields->addFieldToTab('Root.Main',new TextField('Title','Title'));
         $fields->addFieldToTab('Root.Main',new CheckboxField('Enabled','Is Enabled'));
         $fields->addFieldToTab('Root.Main',new HiddenField('CreatedByID','CreatedByID', Member::currentUserID()));
-
+        $fields->addFieldToTab('Root.Main',new HiddenField('SummitID','SummitID'));
         //questions
         if($this->ID > 0)
         {

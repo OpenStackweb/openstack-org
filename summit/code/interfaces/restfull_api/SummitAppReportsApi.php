@@ -86,12 +86,12 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
     static $url_handlers = array
     (
         'PUT $REPORT!'              => 'updateReport',
+        'GET export/$REPORT!'       => 'exportReport',
         'GET speaker_report'        => 'getSpeakerReport',
         'GET room_report'           => 'getRoomReport',
         'GET presentation_report'   => 'getPresentationReport',
         'GET video_report'          => 'getVideoReport',
         'GET rsvp_report'           => 'getRsvpReport',
-        'GET export/$REPORT!'       => 'exportReport',
     );
 
     static $allowed_actions = array(
@@ -401,8 +401,8 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
                             }
                             $results['data'][] = array(
                                 'rsvp_id'   => intval($rsvp->ID),
-                                'name'      => $rsvp->SubmittedBy()->getFullName(),
-                                'email'     => $rsvp->SubmittedBy()->getEmail(),
+                                'name'      => $rsvp->SubmittedBy()->getMember()->getFullName(),
+                                'email'     => $rsvp->SubmittedBy()->getMember()->getEmail(),
                                 'other'     => $other,
                             );
                         }

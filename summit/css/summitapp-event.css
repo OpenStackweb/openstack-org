@@ -343,3 +343,12 @@ a.profile-pic-wrapper {
 .error {
     color: red;
 }
+
+.col-rsvp{
+    padding-top: 5%;
+}
+
+.info_item {
+    float: left;
+    display: inline-block;
+}

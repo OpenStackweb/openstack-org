@@ -843,10 +843,14 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
      */
     public function rsvpEvent(){
         try {
+
             $data      = $this->getJsonRequest();
             $event_id  = (int)$this->request->param('EventID');
             $summit_id = (int)$this->request->param('SUMMIT_ID');
             $member_id = Member::CurrentUserID();
+
+            if($member_id <= 0)
+                return $this->forbiddenError();
 
             if (!$data) return $this->serverError();
 
@@ -855,6 +859,7 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
 
             if(strtolower($summit_id) === 'current')
                 $summit = Summit::ActiveSummit();
+
 
             if(is_null($summit))
                 return $this->notFound('summit not found!');
@@ -872,7 +877,7 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
             $data['event_id']  = $event_id;
             $data['member_id'] = $member_id;
 
-            return $this->created($this->schedule_manager->addRSVP($data));
+            return $this->created($this->schedule_manager->addRSVP($data, new SummitAttendeeRSVPEmailSender));
 
         }
         catch(EntityValidationException $ex1){

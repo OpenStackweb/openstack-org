@@ -145,6 +145,7 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
     }
 
     /**
+     * @param int $event_id
      * @return bool
      */
     public function isScheduled($event_id)
@@ -368,5 +369,14 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
         );
     }
 
-
+    /*
+     * @param int $event_id
+     * @return bool
+     */
+    public function hasRSVPSubmission($event_id)
+    {
+        $event = SummitEvent::get()->byID($event_id);
+        if(!$event) return false;
+        return $event->RSVPSubmissions()->filter('SubmittedByID', $this->ID)->count() > 0;
+    }
 }

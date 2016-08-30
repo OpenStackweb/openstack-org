@@ -328,6 +328,13 @@ final class SummitAdminUI extends DataExtension
             $config->addComponent(new GridFieldAjaxRefresh(1000, false));
             $gridField = new GridField('TrackChairs', 'TrackChairs', $this->owner->TrackChairs(), $config);
             $f->addFieldToTab('Root.TrackChairs', $gridField);
+
+            //RSVP templates
+
+            $config = GridFieldConfig_RecordEditor::create(40);
+            $config->addComponent(new GridFieldAjaxRefresh(1000, false));
+            $gridField = new GridField('RSVPTemplates', 'RSVPTemplates', $this->owner->RSVPTemplates(), $config);
+            $f->addFieldToTab('Root.RSVPTemplates', $gridField);
         }
     }
 

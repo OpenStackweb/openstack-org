@@ -199,9 +199,25 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         Requirements::css("summit/css/summitapp-event.css");
         Requirements::javascript("summit/javascript/schedule/event-detail-page.js");
 
-        $event  = $this->getSummitEntity($request);
-        if (is_null($event) || !$event->isPublished() || !$event->hasRSVPTemplate()) {
+        $event     = $this->getSummitEntity($request);
+
+        if(is_null($event) ||
+            !$event->isPublished() ||
+            !$event->hasRSVPTemplate()) {
             return $this->httpError(404, 'Sorry that event could not be found');
+        }
+
+        if (!Member::currentUser()){
+            return $this->redirect('Security/login?BackURL='.$event->getRSVPURL(false));
+        }
+
+        if(!Member::currentUser()->isAttendee($event->SummitID)){
+            return $this->redirect('profile/attendeeInfoRegistration');
+        }
+
+        if(Member::currentUser()->getSummitAttendee($event->SummitID)->hasRSVPSubmission($event->getIdentifier()))
+        {
+            return $this->redirect($event->getLink('show'));
         }
 
         $token = Session::get(self::EventShareByEmailTokenKey);
@@ -258,7 +274,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
     {
         $event          = $this->event_repository->getById($event_id);
         $rsvp_template  = $event->RSVPTemplate();
-        $rsvp           = $this->rsvp_repository->getByEventAndSubmitter($event_id,Member::currentUserID());
+        $rsvp           = $this->rsvp_repository->getByEventAndAttendee($event_id,Member::currentUserID());
         $builder        = new RSVPTemplateUIBuilder();
         $form           = $builder->build($rsvp_template, $rsvp, $event);
         return $form;

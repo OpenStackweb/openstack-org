@@ -87,3 +87,4 @@ translatable/
 silverstripe-green/
 silverstripe-serialised-dbfields/
 autocomplete/
+.DS_Store

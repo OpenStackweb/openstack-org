@@ -7,8 +7,7 @@ function addToMySchedule(summit_id,event_id){
         url:  url,
         contentType: "application/json; charset=utf-8",
         success: function (data) {
-            $('#remove_from_my_schedule').show();
-            $('#add_to_my_schedule').hide();
+            setAdded2MySchedule();
         }
     });
 }
@@ -21,8 +20,17 @@ function removeFromMySchedule(summit_id,event_id){
         url:  url,
         contentType: "application/json; charset=utf-8",
         success: function (data) {
-            $('#remove_from_my_schedule').hide();
-            $('#add_to_my_schedule').show();
+            setRemovedFromMySchedule();
         }
     });
+}
+
+function setAdded2MySchedule(){
+    $('#remove_from_my_schedule').show();
+    $('#add_to_my_schedule').hide();
+}
+
+function setRemovedFromMySchedule(){
+    $('#remove_from_my_schedule').hide();
+    $('#add_to_my_schedule').show();
 }

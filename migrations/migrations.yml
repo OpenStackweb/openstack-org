@@ -40,3 +40,4 @@ migrations:
   - RemoveOwnerIDColumnPromoCodesMigration
   - MoveJobPage2JonMigration
   - DefaultJobTypesSeeding
+  - RSVPEmailSeeding

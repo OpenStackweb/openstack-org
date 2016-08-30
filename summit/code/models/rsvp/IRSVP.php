@@ -17,6 +17,8 @@
  */
 interface IRSVP extends IEntity {
 
+    const SeatTypeRegular  = 'Regular';
+    const SeatTypeWaitList = 'WaitList';
     /**
      * @return IAnswer[]
      */

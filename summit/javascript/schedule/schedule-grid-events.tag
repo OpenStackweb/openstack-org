@@ -215,6 +215,7 @@
             if(self.summit.current_user !== null ){
                 // MY SCHEDULE
                 event_directives['i.myschedule-icon@class+']             = function(arg){ return arg.item.own ? ' icon-own-event':' icon-foreign-event'; };
+                event_directives['span.icon-event-action@id']            = function(arg){ return 'event_myschedule_action_'+arg.item.id};
                 event_directives['span.icon-event-action@title']         = function(arg){ return arg.item.own ? 'remove from my schedule':'add to my schedule'; };
                 event_directives['span.icon-event-action@data-event-id'] = function(arg){
                     var item = arg.item;

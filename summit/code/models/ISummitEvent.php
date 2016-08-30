@@ -153,4 +153,23 @@ interface ISummitEvent extends IEntity
      * @return bool
      */
     public function allowSpeakers();
+
+    /**
+     * @return string
+     */
+    public function getCurrentRSVPSubmissionSeatType();
+
+    /**
+     * @param string $seat_type
+     * @return bool
+     */
+    public function couldAddSeatType($seat_type);
+
+    /**
+     * @param string $seat_type
+     * @return int
+     */
+    public function getCurrentSeatsCountByType($seat_type);
+
+
 }

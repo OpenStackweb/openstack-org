@@ -15,25 +15,27 @@
 /**
  * Class RSVP
  */
-class RSVP extends DataObject implements IRSVP
+final class RSVP extends DataObject implements IRSVP
 {
 
     static $db = array
     (
         'BeenEmailed' => 'Boolean',
+        'SeatType'    => "Enum('Regular,WaitList','Regular')",
     );
 
     static $indexes = array();
 
     static $has_one = array
     (
-        'SubmittedBy'  => 'Member',
+        'SubmittedBy'  => 'SummitAttendee',
         'Event'        => 'SummitEvent',
     );
 
     static $many_many = array();
 
-    static $has_many = array(
+    static $has_many = array
+    (
         'Answers' => 'RSVPAnswer',
     );
 
@@ -45,10 +47,11 @@ class RSVP extends DataObject implements IRSVP
 
     private static $summary_fields = array
     (
-        'ID'                      => 'ID',
-        'Created'                 => 'Created',
-        'SubmittedBy.Email'       => 'SubmittedBy',
-        'Event.RSVPTemplate.Name' => 'Name',
+        'ID'                       => 'ID',
+        'SeatType'                 => 'Seat Type',
+        'Created'                  => 'Created',
+        'SubmittedBy.Member.Email' => 'SubmittedBy',
+        'Event.RSVPTemplate.Title' => 'RSVP Template',
     );
 
     /**
@@ -146,8 +149,13 @@ class RSVP extends DataObject implements IRSVP
             $rootTab = new TabSet("Root", $tabMain = new Tab('Main'))
         );
 
-        //$fields->addFieldsToTab('Root.Main', new HiddenField('TemplateID', 'TemplateID'));
-        //$fields->addFieldsToTab('Root.Main', new ReadonlyField('SubmitteddByEmail','SubmittedBy', $this->SubmittedBy()->Email));
+        $fields->addFieldsToTab('Root.Main', new HiddenField('EventID', 'EventID'));
+
+        $config = new GridFieldConfig_RecordViewer(50);
+        $config->removeComponentsByType('GridFieldAddNewButton');
+        $config->addComponent(new GridFieldAjaxRefresh(1000, false));
+        $answers = new GridField('Answers', 'Answers', $this->Answers(), $config);
+        $fields->addFieldToTab('Root.Main', $answers);
 
         return $fields;
     }

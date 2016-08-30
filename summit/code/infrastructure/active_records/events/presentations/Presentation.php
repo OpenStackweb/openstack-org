@@ -253,9 +253,10 @@ class Presentation extends SummitEvent implements IPresentation
 
     /**
      * @param string $type
+     * @param bool $absolute
      * @return null|string
      */
-    public function getLink($type ='voting')
+    public function getLink($type ='voting', $absolute = true)
     {
         if($type=='voting'){
             $page = PresentationPage::get()->filter('SummitID', $this->SummitID)->first();
@@ -266,7 +267,9 @@ class Presentation extends SummitEvent implements IPresentation
         if($type=='show') {
             $page = SummitAppSchedPage::get()->filter('SummitID', $this->SummitID)->first();
             if ($page) {
-                return $page->getAbsoluteLiveLink(false) . 'events/' . $this->getIdentifier() . '/' . $this->getTitleForUrl();
+                if($absolute)
+                    return $page->getAbsoluteLiveLink(false) . 'events/' . $this->getIdentifier() . '/' . $this->getTitleForUrl();
+                return $page->RelativeLink(false) . 'events/' . $this->getIdentifier() . '/' . $this->getTitleForUrl();
             }
         }
         return null;

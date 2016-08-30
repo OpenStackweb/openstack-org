@@ -67,6 +67,7 @@ final class Summit extends DataObject implements ISummit
         'TrackChairs'                  => 'SummitTrackChair',
         'RandomVotingLists'            => 'PresentationRandomVotingList',
         'SummitAssistances'            => 'PresentationSpeakerSummitAssistanceConfirmationRequest',
+        'RSVPTemplates'                => 'RSVPTemplate',
     );
 
     /**
@@ -1013,14 +1014,15 @@ final class Summit extends DataObject implements ISummit
             array('Presentation', 'Keynotes', 'Hand-on Labs', 'Lunch & Breaks', 'Evening Events'));
     }
 
+    /**
+     * @return bool
+     */
     public function isAttendee()
     {
         $current_user = Member::currentUser();
 
         return ($current_user) ? $current_user->isAttendee($this->getIdentifier()) : false;
     }
-
-
 
     public function getDates()
     {

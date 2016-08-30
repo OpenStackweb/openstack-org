@@ -367,7 +367,8 @@ define('PRESENTATION_SPEAKER_NOTIFICATION_ACCEPTANCE_EMAIL_FROM', 'speakersuppor
 define('PRESENTATION_SPEAKER_NOTIFICATION_ACCEPTANCE_SUMMIT_SUPPORT', 'summit@openstack.org');
 define('MEMBER_PROMO_CODE_EMAIL', 'member-promo-code');
 define('MEMBER_NOTIFICATION_PROMO_CODE_EMAIL_FROM', 'speakersupport@openstack.org');
-
+define('SUMMIT_ATTENDEE_RSVP_EMAIL','summit-attendee-rsvp');
+define('SUMMIT_ATTENDEE_RSVP_EMAIL_FROM','summit@openstack.org');
 
 // Second Break Out Email Templates
 define('PRESENTATION_SPEAKER_CREATE_MEMBERSHIP_EMAIL', 'presentation-speaker-create-membership-email');

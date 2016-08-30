@@ -59,27 +59,6 @@
         <div class="event-btn">
             <a href="{$Event.getLink(show)}" class="btn btn-primary btn-md active btn-warning btn-go-event" role="button">EVENT DETAILS</a>
         </div>
-        <% if Event.RSVPTemplate.Exists() %>
-        <div class="info_item">
-            <button type="button" class="btn btn-primary btn-md active btn-warning btn-rsvp-event" data-toggle="modal" data-target="#rsvpModal_{$Event.ID}">RSVP to this Event</button>
-        </div>
-        <div id="rsvpModal_{$Event.ID}" class="modal fade" role="dialog">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">RSVP</h4>
-              </div>
-              <div class="modal-body">
-                $RSVPForm($Event.ID)
-              </div>
-            </div>
-          </div>
-        </div>
-        <% else_if Event.RSVPLink %>
-        <div class="event-btn">
-            <a href="{$Event.RSVPLink}" class="btn btn-primary btn-md active btn-warning btn-rsvp-event" target="_blank" role="button">RSVP to this Event</a>
-        </div>
-        <% end_if %>
+        <% include SummitAppEvent_RSVPButton Event=$Event %>
     </div>
 </div>

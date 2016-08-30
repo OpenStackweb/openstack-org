@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2015 OpenStack Foundation
+ * Copyright 2016 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,20 +12,20 @@
  * limitations under the License.
  **/
 
-interface IRSVPRepository extends IEntityRepository {
+class RSVPEventConfiguration extends DataObject
+{
+    static $db = array
+    (
+        'MaxUserNumber'         => 'Int',
+        'MaxUserWaitListNumber' => 'Int',
+    );
 
-    /**
-     * @param int $event_id
-     * @param int $attendee_id
-     * @return IRSVP|null
-     */
-    public function getByEventAndAttendee($event_id, $attendee_id);
+    static $indexes = array ();
 
-    /**
-     * @param int $event_id
-     * @param int $page
-     * @param int $page_size
-     * @return IRSVP|null
-     */
-    public function getByEventPaged($event_id, $page, $page_size);
+    static $has_one = array
+    (
+        'SummitEvent' => 'SummitEvent',
+        'Template'    => 'SummitEvent',
+    );
+
 }

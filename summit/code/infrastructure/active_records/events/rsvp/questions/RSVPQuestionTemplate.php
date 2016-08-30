@@ -212,7 +212,7 @@ class RSVPQuestionTemplate
 
         if($this->ID > 0 ){
             //depends on
-            $config = GridFieldConfig_RelationEditor::create();
+            /*$config = GridFieldConfig_RelationEditor::create();
             $config->removeComponentsByType('GridFieldEditButton');
             $config->removeComponentsByType('GridFieldAddNewButton');
 
@@ -237,7 +237,7 @@ class RSVPQuestionTemplate
 
             $gridField = new GridField('DependsOn', 'Depends On Questions (Visibility)', $depends, $config);
 
-            $fields->add($gridField);
+            $fields->add($gridField);*/
         }
 
         return $fields;
@@ -288,10 +288,10 @@ class RSVPQuestionTemplate
                 )
                 {
 
-                    $value_ids     = $_REQUEST["Values_{$question->ID}"];
-                    $operator      = $_REQUEST["Operator_{$question->ID}"];
-                    $visibility    = $_REQUEST["Visibility_{$question->ID}"];
-                    $initial_value = $_REQUEST["DefaultValue_{$question->ID}"];
+                    $value_ids        = $_REQUEST["Values_{$question->ID}"];
+                    $operator         = $_REQUEST["Operator_{$question->ID}"];
+                    $visibility       = $_REQUEST["Visibility_{$question->ID}"];
+                    $initial_value    = $_REQUEST["DefaultValue_{$question->ID}"];
                     $boolean_operator = $_REQUEST["BooleanOperatorOnValues_{$question->ID}"];
 
                     if (is_array($value_ids) && count($value_ids) > 0) {

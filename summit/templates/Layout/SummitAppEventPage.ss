@@ -39,13 +39,13 @@
             <% if $Event.Summit.isAttendee() %>
                 <div class="info_item">
                     <div id="remove_from_my_schedule" <% if not CurrentMember.isOnMySchedule($Event.ID) %> style="display:none" <% end_if %>>
-                        <span onclick="removeFromMySchedule({$Event.Summit.ID},{$Event.ID})" title="remove from my schedule" class="icon-event-action">
+                        <span id="icon-event-action-{$Event.ID}-remove" onclick="removeFromMySchedule({$Event.Summit.ID},{$Event.ID})" title="remove from my schedule" class="icon-event-action">
                             <i class="fa fa-2x fa-check-circle icon-own-event"></i>
                             My&nbsp;calendar
                         </span>
                     </div>
                     <div id="add_to_my_schedule" <% if CurrentMember.isOnMySchedule($Event.ID) %> style="display:none" <% end_if %>>
-                        <span onclick="addToMySchedule({$Event.Summit.ID},{$Event.ID})" title="add to my schedule" class="icon-event-action">
+                        <span id="icon-event-action-{$Event.ID}-add"onclick="addToMySchedule({$Event.Summit.ID},{$Event.ID})" title="add to my schedule" class="icon-event-action">
                             <i class="fa fa-2x fa-plus-circle icon-foreign-event" ></i>
                             My&nbsp;calendar
                         </span>
@@ -95,30 +95,7 @@
             </div>
             <% end_if %>
             <div class="clearfix"></div>
-
-            <% if Event.RSVPTemplate.Exists() %>
-            <div class="info_item">
-                <button type="button" class="btn btn-primary btn-md active btn-warning btn-rsvp-event" data-toggle="modal" data-target="#rsvpModal_{$Event.ID}">RSVP to this Event</button>
-            </div>
-            <div id="rsvpModal_{$Event.ID}" class="modal fade" role="dialog">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">RSVP</h4>
-                  </div>
-                  <div class="modal-body">
-                    $RSVPForm($Event.ID)
-                  </div>
-                </div>
-              </div>
-            </div>
-            <% else_if Event.RSVPLink %>
-            <div class="info_item">
-                <a href="{$Event.RSVPLink}" class="btn btn-primary btn-md active btn-warning btn-rsvp-event" target="_blank" role="button">RSVP to this Event</a>
-            </div>
-            <% end_if %>
-
+            <% include SummitAppEvent_RSVPButton Event=$Event %>
             <% if Event.Sponsors %>
             <div class="logo">
                 <% loop Event.Sponsors %>

@@ -38,7 +38,7 @@
                     room: "{$getLocationNameNice.JS}",
                     total: $Attendees.Count(),
                     capacity: "{$LocationCapacity}",
-                    rsvp: "{$RSVPLink}"
+                    rsvp: "{$RSVPURL}"
                 });
             <% end_loop %>
 

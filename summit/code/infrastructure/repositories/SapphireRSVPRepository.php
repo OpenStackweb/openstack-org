@@ -25,14 +25,14 @@ class SapphireRSVPRepository
 
     /**
      * @param int $event_id
-     * @param int $submitter_id
+     * @param int $attendee_id
      * @return IRSVP|null
      */
-    public function getByEventAndSubmitter($event_id, $submitter_id)
+    public function getByEventAndAttendee($event_id, $attendee_id)
     {
         $query = new QueryObject();
         $query->addAndCondition(QueryCriteria::equal('EventID', $event_id));
-        $query->addAndCondition(QueryCriteria::equal('SubmittedByID', $submitter_id));
+        $query->addAndCondition(QueryCriteria::equal('SubmittedByID', $attendee_id));
         return $this->getBy($query);
     }
 

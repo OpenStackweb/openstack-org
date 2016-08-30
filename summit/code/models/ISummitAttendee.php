@@ -74,6 +74,12 @@ interface ISummitAttendee extends IEntity
     public function addToSchedule(ISummitEvent $summit_event);
 
     /**
+     * @param int $event_id
+     * @return bool
+     */
+    public function isScheduled($event_id);
+
+    /**
      * @return void
      */
     public function clearSchedule();
@@ -98,5 +104,11 @@ interface ISummitAttendee extends IEntity
      * @return string
      */
     public function setGoogleCalEventId(ISummitEvent $event, $google_event_id);
+
+    /*
+     * @param int $event_id
+     * @return bool
+     */
+    public function hasRSVPSubmission($event_id);
 
 }
