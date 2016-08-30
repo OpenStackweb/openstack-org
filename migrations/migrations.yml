@@ -41,3 +41,4 @@ migrations:
   - MoveJobPage2JonMigration
   - DefaultJobTypesSeeding
   - RSVPEmailSeeding
+  - SummitVideoProcessingMigration

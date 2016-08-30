@@ -29,12 +29,19 @@ In `summit-video-app/_config/config.yml`:
 </thead>
 <tbody>
 <tr><td>default_speaker_limit</td><td>Number of speakers returned by default</td><td>20</td></tr>
-<tr><td>popular_video_view_threshold</td><td>Number of views a video needs to be in the "popular" section</td><td>10</td></tr>
 <tr><td>popular_video_limit</td><td>Number of popular videos</td><td>10</td></tr>
 <tr><td>video_poll_interval</td><td>Frequency, in milliseconds, that the app passively refreshes state</td><td>15000</td></tr>
-<tr><td>video_view_throttle</td><td>How long, in seconds, a user has to wait before adding a view the same video</td><td>10</td></tr>
+<tr><td>video_view_staleness</td><td>How old, in seconds, a video has to be before it will ask YouTube for its up-to-date view count</td><td>3600</td></tr>
+<tr><td>abandon_unprocessed_videos_after</td><td>How long a video has to be stuck in "processing" before the task forgets about it and stops trying</td><td>86400</td></tr>: 
 </tbody>
 </table>
+
+## Tasks
+
+There are two cron tasks that should be run at short intervals:
+
+* `SummitVideoProcessingTask`: Checks all videos marked "processing" and gets their current status from YouTube, updating them to "processed" if appropriate. Unprocessed videos are hidden from the site.
+* `SummitVideoViewTask`: Gets the most popular videos from YouTube and updates their view count in the local database. This is to maintain an accurate "popular videos" section.
 
 ## Deprecations
 
@@ -63,9 +70,11 @@ Client side tests for Redux stores, reducers, and actions:
 
 `npm run test`
 
-Integration and unit tests for `PresentationVideo` and `SummitVideoApp_Controller`:
+Integration and unit tests for `PresentationVideo`, `SummitVideoApp_Controller`, and the two tasks
 
 `framework/sake dev/tests/SummitVideoAppTest`
+`framework/sake dev/tests/SummitVideoTasksTest`
+
 
 
 ## API endpoints

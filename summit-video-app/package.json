@@ -2,7 +2,7 @@
   "name": "react-redux-silverstripe",
   "version": "0.0.1",
   "scripts": {
-    "start": "node server.js",
+    "start": "webpack-dashboard -- node server.js",
     "build": "NODE_ENV=production webpack",
     "test": "mocha source/js/tests --compilers js:babel-core/register --recursive"
   },
@@ -63,6 +63,7 @@
     "svgo-loader": "^1.1.0",
     "url-loader": "^0.5.6",
     "webpack": "^1.12.13",
+    "webpack-dashboard": "^0.1.8",
     "webpack-dev-server": "^1.14.1"
   }
 }

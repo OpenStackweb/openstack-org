@@ -7,6 +7,23 @@ class SummitVideoAppBackend
 {
 
     /**
+     * A YouTube API service
+     * @var SummitVideoYouTubeService
+     */
+    protected $youTube;
+
+
+    /**
+     * SummitVideoAppBackend constructor.
+     * @param $youtube
+     */
+    public function __construct($youtube)
+    {
+        $this->youTube = $youtube;
+    }
+
+
+    /**
      * @param array $params
      * @return array
      */
@@ -18,7 +35,10 @@ class SummitVideoAppBackend
         $defaultLimit = SummitVideoApp::config()->default_video_limit;
 
         $videos = PresentationVideo::get()
-            ->filter('DisplayOnSite', true)
+            ->filter([
+                'DisplayOnSite' => true,
+                'Processed' => true
+            ])
             ->sort('DateUploaded', 'DESC');
 
         if (isset($params['summit'])) {
@@ -43,11 +63,7 @@ class SummitVideoAppBackend
                 }
             } else {
                 if (isset($params['popular'])) {
-                    $views = SummitVideoApp::config()->popular_video_view_threshold;
-                    $videos = $videos->filter([
-                        'Views:GreaterThan' => $views
-                    ])
-                        ->sort('Views DESC');
+                    $videos = $videos->sort('Views DESC');
                 } else {
                     if (isset($params['highlighted'])) {
                         $videos = $videos->filter([
@@ -85,12 +101,12 @@ class SummitVideoAppBackend
                                 'Presentation.Title:PartialMatch' => $search
                             ])
                                 ->limit($defaultLimit)
-                                ->sort('Views DESC, DateUploaded DESC');
+                                ->sort('DateUploaded DESC');
                             $topicVideos = $videos->filter([
                                 'PresentationCategory.Title:PartialMatch' => $search
                             ])
                                 ->limit($defaultLimit)
-                                ->sort('Views DESC, DateUploaded DESC');
+                                ->sort('DateUploaded DESC');
 
                             $response = [
                                 'results' => [
@@ -150,7 +166,8 @@ class SummitVideoAppBackend
         $video = PresentationVideo::get()
             ->filter([
                 'Featured' => true,
-                'DisplayOnSite' => true
+                'DisplayOnSite' => true,
+                'Processed' => true
             ])
             ->first();
 
@@ -164,7 +181,10 @@ class SummitVideoAppBackend
     public function getLatestVideo()
     {
         $video = PresentationVideo::get()
-            ->filter('DisplayOnSite', true)
+            ->filter([
+                'DisplayOnSite' => true,
+                'Processed' => true
+            ])
             ->sort('DateUploaded DESC')
             ->first();
 
@@ -243,18 +263,46 @@ class SummitVideoAppBackend
     {
         $video = PresentationVideo::get()->filter([
             'Presentation.Slug' => $id,
-            'DisplayOnSite' => true
+            'DisplayOnSite' => true,
+            'Processed' => true
         ])->first();
 
         if (!$video) {
             $video = PresentationVideo::get()
                 ->filter([
                     'ID' => $id,
-                    'DisplayOnSite' => true
+                    'DisplayOnSite' => true,
+                    'Processed' => true
                 ])->first();
         }
 
         if ($video) {
+            $cutoff = time() - SummitVideoApp::config()->video_view_staleness;
+            $videoStaleness = strtotime($video->ViewsLastUpdated);
+            // Refresh the views if they're not of acceptable staleness
+            if (!$video->ViewsLastUpdated || $videoStaleness < $cutoff) {
+                // Set the last updated regardless of the outcome, so we don't get
+                // unthrottled failures.
+                $video->ViewsLastUpdated = SS_DateTime::now()->Rfc2822();
+
+                try {
+                    $response = $this->youTube->getVideoStatsById($video->YouTubeID);
+                    if ($response) {
+                        $data = Convert::json2array($response->getBody()->getContents());
+                        if (!empty($data['items'])) {
+                            $videoData = $data['items'][0];
+                            $video->Views = $videoData['statistics']['viewCount'];
+                        }
+                    }
+
+                } catch (Exception $e) {
+                    SS_Log::log("Summit video app tried to get video {$video->YouTubeID}: {$e->getMessage()}",
+                        SS_Log::ERR);
+                }
+
+                $video->write();
+            }
+
             $json = $this->createVideoJSON($video);
             $json['description'] = $video->Presentation()->ShortDescription ?: $video->Presentation()->Description;
 
@@ -315,6 +363,7 @@ class SummitVideoAppBackend
             'dates' => $s->getSummitDateRange(),
             'videoCount' => PresentationVideo::get()->filter([
                 'DisplayOnSite' => true,
+                'Processed' => true,
                 'PresentationID' => $s->Presentations()->column('ID')
             ])->count(),
             'imageURL' => ($image && $image->exists() && Director::fileExists($image->Filename)) ?

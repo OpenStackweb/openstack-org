@@ -1,23 +1,40 @@
 <?php
 
-class SummitVideoAdmin extends ModelAdmin {
+/**
+ * Class SummitVideoAdmin
+ */
+class SummitVideoAdmin extends ModelAdmin
+{
 
-	private static $managed_models = [
-		'PresentationVideo'
-	];
+    /**
+     * @var array
+     */
+    private static $managed_models = [
+        'PresentationVideo'
+    ];
 
-	private static $url_segment = 'summit-videos';
+    /**
+     * @var string
+     */
+    private static $url_segment = 'summit-videos';
 
-	private static $menu_title = 'Summit Videos';
+    /**
+     * @var string
+     */
+    private static $menu_title = 'Summit Videos';
 
-	public function getList () {
-		$list = parent::getList();
-		
-		return $list->sort([
-			'Featured DESC',
-			'Highlighted DESC',
-			'DateUploaded DESC',
-			'LastEdited DESC'
-		]);
-	}
+    /**
+     * @return mixed
+     */
+    public function getList()
+    {
+        $list = parent::getList();
+
+        return $list->sort([
+            'Featured DESC',
+            'Highlighted DESC',
+            'DateUploaded DESC',
+            'LastEdited DESC'
+        ]);
+    }
 }

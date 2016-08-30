@@ -2,17 +2,42 @@
 Name: summit-video-app
 ---
 SummitVideoApp:
+  
   # Number of videos returned in a response by default
   default_video_limit: 50
+  
   # Number of speakers returned by default
   default_speaker_limit: 20
-  # Number of views a video needs to be in the "popular" section
-  popular_video_view_threshold: 10
+    
   # Number of popular videos
   popular_video_limit: 10
-  # Frequency, in milliseconds, that the app passively refreshes state
   
+  # Frequency, in milliseconds, that the app passively refreshes state
   ## Throttled down for post-summit
   video_poll_interval: 999999
-  # How long a user has to wait before adding a view to the same video
-  video_view_throttle: 10
+
+  # On detail view, how frequently should the YouTube API be called to get a fresh view?
+  # If a video is viewed 100 times a second, we don't want an API call for each one. Allow
+  # some staleness to prevent that.
+  video_view_staleness: 3600
+  # How long can a video remain in the "unprocessed" phase before we give up on it? (seconds)
+  abandon_unprocessed_videos_after: 86400  
+
+Injector:
+  SummitVideoHTTPClient:
+    class: GuzzleHttp\Client
+    constructor:
+      0:
+        base_url: https://www.googleapis.com/youtube/v3/
+  SummitVideoYouTubeService:
+    constructor:
+      0: %$SummitVideoHTTPClient
+  SummitVideoViewTask:
+    constructor:
+      0: %$SummitVideoYouTubeService
+  SummitVideoProcessingTask:
+    constructor:
+      0: %$SummitVideoYouTubeService
+  SummitVideoAppBackend:
+    constructor:
+      0: %$SummitVideoYouTubeService

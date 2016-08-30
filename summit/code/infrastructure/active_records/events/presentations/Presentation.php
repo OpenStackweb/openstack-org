@@ -546,8 +546,15 @@ class Presentation extends SummitEvent implements IPresentation
             $moderator_id = $this->Moderator()->ID;
         }
 
-    	$result =  array_merge($result, $this->Speakers()->filter('ID:ExactMatch:not', $moderator_id)->toArray() ) ;
-
+        if($this->Speakers()->exists()) {
+			$result =  array_merge(
+				$result, 
+				$this->Speakers()->exclude([
+					'ID' => $moderator_id
+				])->toArray()
+			);        	
+        }
+    	
     	return new ArrayList($result);
     }
 

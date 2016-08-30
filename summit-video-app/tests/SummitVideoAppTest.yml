@@ -49,25 +49,73 @@ Presentation:
 PresentationVideo:
   Video1:
     Presentation: =>Presentation.Presentation1
-    DateUploaded: 2016-03-03
+    DateUploaded: '2016-03-03 00:00:00'
+    YouTubeID: 1
+    Processed: 1
+    DisplayOnSite: 1
   Video2:
     Presentation: =>Presentation.Presentation2
-    DateUploaded: 2016-02-02
+    DateUploaded: '2016-03-03 00:00:00'
+    YouTubeID: 2
+    Processed: 1
+    DisplayOnSite: 1
   Video3:
     Presentation: =>Presentation.Presentation3
-    DateUploaded: 2016-01-01
+    DateUploaded: '2016-03-03 00:00:00'
+    YouTubeID: 3
+    Processed: 1
+    DisplayOnSite: 1
   HighlightVideo1:
     Presentation: =>Presentation.Presentation4
-    DateUploaded: 2015-10-10
+    DateUploaded: '2016-03-03 00:00:00'    
     Highlighted: 1
+    YouTubeID: 4
+    Processed: 1
+    DisplayOnSite: 1
   HighlightVideo2:
     Presentation: =>Presentation.Presentation2
-    DateUploaded: 2015-11-11
+    DateUploaded: '2016-03-03 00:00:00'    
     Highlighted: 1
+    YouTubeID: 5
+    Processed: 1
+    DisplayOnSite: 1
   FeaturedVideo:
     Presentation: =>Presentation.Presentation1
-    DateUploaded: 2015-12-12
+    DateUploaded: '2016-03-03 00:00:00'
     Featured: 1
+    YouTubeID: 6
+    Processed: 1
+    DisplayOnSite: 1
+  Video7:
+    DateUploaded: '2016-03-03 00:00:00'    
+    YouTubeID: 7
+    Processed: 1
+    DisplayOnSite: 1
+  Video8:
+    DateUploaded: '2016-03-03 00:00:00'    
+    YouTubeID: 8
+    Processed: 1
+    DisplayOnSite: 1
+  Video9:
+    DateUploaded: '2016-03-03 00:00:00'    
+    YouTubeID: 9
+    Processed: 1
+    DisplayOnSite: 1
+  Video10:
+    DateUploaded: '2016-03-03 00:00:00'  
+    YouTubeID: 10
+    Processed: 1
+    DisplayOnSite: 1
+  Video11:
+    DateUploaded: '2016-03-03 00:00:00'
+    YouTubeID: 11
+    Processed: 1
+    DisplayOnSite: 1
+  Video12:
+    DateUploaded: '2016-03-03 00:00:00'    
+    YouTubeID: 12
+    Processed: 1
+    DisplayOnSite: 1
 
 SummitVideoApp:
   App:

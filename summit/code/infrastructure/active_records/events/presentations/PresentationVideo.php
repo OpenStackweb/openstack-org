@@ -21,7 +21,9 @@ class PresentationVideo extends PresentationMaterial
         'YouTubeID'    => 'Text',
         'DateUploaded' => 'SS_DateTime',
         'Highlighted'  => 'Boolean',
-        'Views'        => 'Int'
+        'Views'        => 'Int',
+        'ViewsLastUpdated' => 'SS_DateTime',
+        'Processed'    => 'Boolean'
     );
 
     private static $defaults = array(
@@ -57,6 +59,7 @@ class PresentationVideo extends PresentationMaterial
 		$f->addFieldToTab('Root.Main', new CheckboxField('Highlighted'),'Description');
 		$f->addFieldToTab('Root.Main', new ReadonlyField('Views'),'Description');
 		$f->addFieldToTab('Root.Main', new TextField('YouTubeID','YouTube ID'),'Description');
+		$f->addFieldToTab('Root.Main', new CheckboxField('Processed'), 'Description');
 		$f->addFieldToTab('Root.Main', new ReadonlyField('DateUploaded'));
         $f->addFieldToTab('Root.Main', new ReadonlyField('Views'));
 		$f->addFieldToTab('Root.Main', new ReadonlyField('PresentationTitle', 'Presentation title', $this->Presentation()->Title));
@@ -122,6 +125,7 @@ class PresentationVideo extends PresentationMaterial
 	{
 		return $this->Presentation()->getSpeakersCSV();
 	}
+
 
     protected function onBeforeWrite() {
         parent::onBeforeWrite();

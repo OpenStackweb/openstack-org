@@ -69,6 +69,10 @@ class VideoDetail extends React.Component {
                                     </RouterLink>
                                 </div>
                                 }
+								<div className="detail-panel-section">		
+									<h5 className="section-title">Views</h5>									      		
+									{Number(video.views).toLocaleString()}		
+								</div>                                
                                 {video.slides &&
                                     <div className="detail-panel-section">
                                         <h5 className="section-title">Slides</h5>
