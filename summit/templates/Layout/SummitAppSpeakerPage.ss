@@ -178,7 +178,42 @@
                             <% end_if %>
                         <% end_loop %>
 
-                       <% loop PublishedPresentations($Top.Summit.ID) %>
+                        <% loop PublishedPresentations($Top.Summit.ID, 'MODERATOR') %>
+                        summit.events.push(
+                                {
+                                    id              : {$ID},
+                                    title           : "{$Title.JS}",
+                                    description     : "{$Description.JS}",
+                                    abstract        : "{$ShortDescription.JS}",
+                                    date_nice       : "{$StartDate().Format(D j)}",
+                                    short_desc      : "{$getShortDescription(600).JS}",
+                                    start_datetime  : "{$StartDate}",
+                                    end_datetime    : "{$EndDate}",
+                                    start_time      : "{$StartTime}",
+                                    end_time        : "{$EndTime}",
+                                    allow_feedback  : {$AllowFeedBack},
+                                    location_id     : {$LocationID},
+                                    type_id         : {$TypeID},
+                                    sponsors_id     : [<% loop Sponsors %>{$ID},<% end_loop %>],
+                                    tags_id         : [<% loop Tags %>{$ID},<% end_loop %>],
+                                    summit_types_id : [<% loop AllowedSummitTypes %>{$ID},<% end_loop %>],
+                                    <% if ClassName == Presentation %>
+                                        moderator_id: {$ModeratorID},
+                                        speakers_id : [<% loop Speakers %>{$ID},<% end_loop %>],
+                                        track_id : {$CategoryID},
+                                        level : '{$Level}',
+                                    <% end_if %>
+                                    <% if CurrentMember && CurrentMember.isOnMySchedule($ID) %>
+                                        own      : true,
+                                    <% else %>
+                                        own      : false,
+                                    <% end_if %>
+                                    favorite : false,
+                                    show : true
+                                }
+                        );
+                        <% end_loop %>
+                       <% loop PublishedPresentations($Top.Summit.ID, 'SPEAKER') %>
                             summit.events.push(
                                     {
                                         id              : {$ID},

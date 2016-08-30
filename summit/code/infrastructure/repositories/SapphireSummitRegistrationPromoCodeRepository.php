@@ -38,8 +38,7 @@ class SapphireSummitRegistrationPromoCodeRepository
 SELECT 
 SPC.ID,
 PC.ClassName,
-SP.FirstName AS FirstName,
-SP.LastName AS LastName,
+CONCAT(SP.FirstName, ' ',SP.LastName) AS FullName,
 IFNULL(SPRR.Email, SM.Email) AS Email,
 SPC.SpeakerID AS OwnerID,
 SPC.Type,
@@ -53,15 +52,14 @@ NULL AS Sponsor
 FROM SummitRegistrationPromoCode PC 
 INNER JOIN Member AS C ON C.ID = PC.CreatorID
 INNER JOIN SpeakerSummitRegistrationPromoCode SPC ON SPC.ID = PC.ID
-LEFT  JOIN PresentationSpeaker SP ON SP.ID = SPC.SpeakerID
-LEFT  JOIN SpeakerRegistrationRequest SPRR ON SPRR.SpeakerID = SP.ID
-LEFT  JOIN Member SM ON SM.ID = SP.MemberID 
+LEFT JOIN PresentationSpeaker SP ON SP.ID = SPC.SpeakerID
+LEFT JOIN SpeakerRegistrationRequest SPRR ON SPRR.SpeakerID = SP.ID
+LEFT JOIN Member SM ON SM.ID = SP.MemberID 
 WHERE SummitID = {$summit_id} AND PC.ClassName = 'SpeakerSummitRegistrationPromoCode'
 UNION
 SELECT MC.ID,
 PC.ClassName,
-IFNULL(O.FirstName,MC.FirstName) AS FirstName,
-IFNULL(O.Surname,MC.LastName) AS LastName,
+CONCAT(IFNULL(O.FirstName,MC.FirstName), ' ',IFNULL(O.Surname,MC.LastName)) AS FullName,
 IFNULL(O.Email,MC.Email) AS Email, 
 MC.OwnerID,
 MC.Type,
@@ -80,8 +78,7 @@ WHERE SummitID = {$summit_id} AND PC.ClassName = 'MemberSummitRegistrationPromoC
 UNION
 SELECT MC.ID,
 PC.ClassName,
-IFNULL(O.FirstName,MC.FirstName) AS FirstName,
-IFNULL(O.Surname,MC.LastName) AS LastName,
+CONCAT(IFNULL(O.FirstName,MC.FirstName), ' ',IFNULL(O.Surname,MC.LastName)) AS FullName,
 IFNULL(O.Email,MC.Email) AS Email, 
 MC.OwnerID,
 MC.Type,
@@ -125,9 +122,7 @@ SQL;
         if (!empty($term)) {
 
             if(!empty($where)) $where .= ' AND ';
-            $where .= " (`Code` LIKE '%{$term}%' OR FirstName LIKE '%{$term}%' OR LastName LIKE '%{$term}%'
-                        OR Email LIKE '%{$term}%'
-                        OR CreatorEmail LIKE '%{$term}%'";
+            $where .= " (`Code` COLLATE UTF8_GENERAL_CI LIKE '%{$term}%' OR FullName COLLATE UTF8_GENERAL_CI LIKE '%{$term}%' OR Email COLLATE UTF8_GENERAL_CI LIKE '%{$term}%' OR CreatorEmail COLLATE UTF8_GENERAL_CI LIKE '%{$term}%'";
 
             if (is_int($term))
                 $where .= " OR OwnerID = '{$term}'";
@@ -157,7 +152,7 @@ SQL;
                 'source'      => $code['CreatorEmail'],
                 'type'        => $code['Type'],
                 'sponsor'     => $code['Sponsor'],
-                'owner'       => sprintf("%s %s", $code['FirstName'], $code['LastName']),
+                'owner'       => $code['FullName'],
                 'owner_email' => $code['Email'],
             ];
 
