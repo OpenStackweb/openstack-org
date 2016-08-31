@@ -47,13 +47,13 @@
                <li><a href="https://spousetivities.ticketleap.com/openstack-summit-2016-barcelona/" target="_blank"><i class="fa fa-bicycle"></i>Spousetivities</a></li>
                <!--<li><a href="/summit/barcelona-2016/mobile-apps/"><i class="fa fa-mobile"></i>Mobile Apps</a></li> -->
             </ul>
-            <div class="schedule-square">
+            <!-- <div class="schedule-square">
                 <h3><i class="fa fa-calendar"></i>Schedule</h3>
                 <p>
                     Get a glimpse into the wealth of speakers, topics and sessions happening at OpenStack Summit Barcelona.
                 </p>
                 <a href="#" class="btn outline-btn">Coming Soon</a>
-            </div>
+            </div> -->
         </div>
         </div>
     </div>
