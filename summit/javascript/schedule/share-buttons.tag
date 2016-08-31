@@ -60,7 +60,7 @@
         }
 
         shareTwitter(e) {
-            window.open('https://twitter.com/intent/tweet?text=Check out this summit event: '+self.share_info.url, 'mywin','left=50,top=50,width=600,height=260,toolbar=1,resizable=0');
+            window.open('https://twitter.com/intent/tweet?text=Check out this summit event: '+self.share_info.event_url, 'mywin','left=50,top=50,width=600,height=260,toolbar=1,resizable=0');
             return false;
         }
 
