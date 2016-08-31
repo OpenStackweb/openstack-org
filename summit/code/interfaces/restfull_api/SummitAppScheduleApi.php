@@ -15,7 +15,8 @@
 /**
  * Class SummitAppScheduleApi
  */
-final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
+final class SummitAppScheduleApi extends AbstractRestfulJsonApi
+{
 
     /**
      * @var IEntityRepository
@@ -57,12 +58,12 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
     {
         parent::__construct();
         // TODO: set by IOC
-        $this->securityToken                 = new SecurityToken();
-        $this->summit_repository             = new SapphireSummitRepository;
-        $this->summitevent_repository        = new SapphireSummitEventRepository();
+        $this->securityToken = new SecurityToken();
+        $this->summit_repository = new SapphireSummitRepository;
+        $this->summitevent_repository = new SapphireSummitEventRepository();
         $this->summitpresentation_repository = new SapphireSummitPresentationRepository();
-        $this->eventfeedback_repository      = new SapphireEventFeedbackRepository();
-        $this->attendee_repository           = new SapphireSummitAttendeeRepository();
+        $this->eventfeedback_repository = new SapphireEventFeedbackRepository();
+        $this->attendee_repository = new SapphireSummitAttendeeRepository();
 
         $this->schedule_manager = new ScheduleManager($this->summitevent_repository, $this->summitpresentation_repository,
             $this->eventfeedback_repository, new EventFeedbackFactory(),
@@ -72,37 +73,43 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
 
     }
 
-    protected function isApiCall(){
+    protected function isApiCall()
+    {
         $request = $this->getRequest();
-        if(is_null($request)) return false;
+        if (is_null($request)) return false;
         return true;
     }
 
     /**
      * @return bool
      */
-    protected function authorize(){
+    protected function authorize()
+    {
+        $request = $this->getRequest();
+        if (!strstr(strtolower($request->getURL()), "schedule/export/ics") === false) return true;
         return $this->checkOwnAjaxRequest();
     }
 
-    protected function authenticate() {
+    protected function authenticate()
+    {
         return true;
     }
 
     static $url_handlers = array(
-        'GET '                                          => 'getScheduleByDay',
-        'GET level'                                     => 'getScheduleByLevel',
-        'GET track'                                     => 'getScheduleByTrack',
-        'GET search'                                    => 'getSearchResults',
-        'GET empty_spots'                               => 'getEmptySpots',
-        'GET full'                                      => 'getFullSchedule',
-        'PUT $EventID!/synch/google/$CalEventID!'       => 'synchEvent',
-        'PUT $EventID!/rsvp'                            => 'rsvpEvent',
-        'PUT $EventID!'                                 => 'addToSchedule',
-        'DELETE $EventID!/synch/google'                 => 'unSynchEvent',
-        'DELETE $EventID!'                              => 'removeFromSchedule',
-        'POST $EventID!/feedback'                       => 'addFeedback',
-        'POST $EventID!/share'                          => 'shareEmail',
+        'GET ' => 'getScheduleByDay',
+        'GET level' => 'getScheduleByLevel',
+        'GET track' => 'getScheduleByTrack',
+        'GET search' => 'getSearchResults',
+        'GET export/ics' => 'ExportEventToICS',
+        'GET empty_spots' => 'getEmptySpots',
+        'GET full' => 'getFullSchedule',
+        'PUT $EventID!/synch/google/$CalEventID!' => 'synchEvent',
+        'PUT $EventID!/rsvp' => 'rsvpEvent',
+        'PUT $EventID!' => 'addToSchedule',
+        'DELETE $EventID!/synch/google' => 'unSynchEvent',
+        'DELETE $EventID!' => 'removeFromSchedule',
+        'POST $EventID!/feedback' => 'addFeedback',
+        'POST $EventID!/share' => 'shareEmail',
     );
 
     static $allowed_actions = array(
@@ -119,195 +126,191 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         'synchEvent',
         'unSynchEvent',
         'rsvpEvent',
+        'ExportEventToICS',
     );
 
-    protected function getCacheKey(SS_HTTPRequest $request){
-        $key    = parent::getCacheKey($request);
-        $key   .= '.'.Member::currentUserID();
+    protected function getCacheKey(SS_HTTPRequest $request)
+    {
+        $key = parent::getCacheKey($request);
+        $key .= '.' . Member::currentUserID();
         return $key;
     }
 
     public function getScheduleByTrack(SS_HTTPRequest $request)
     {
-        $query_string        = $request->getVars();
-        $summit_id           = intval($request->param('SUMMIT_ID'));
-        $track               = isset($query_string['track']) ? Convert::raw2sql($query_string['track']) : null;
-        $cache               = isset($query_string['cache']) ? (bool)Convert::raw2sql($query_string['cache']) : true;
-        $summit              = null;
+        $query_string = $request->getVars();
+        $summit_id = intval($request->param('SUMMIT_ID'));
+        $track = isset($query_string['track']) ? Convert::raw2sql($query_string['track']) : null;
+        $cache = isset($query_string['cache']) ? (bool)Convert::raw2sql($query_string['cache']) : true;
+        $summit = null;
 
         $member = Member::currentUser();
-        $cache  = ($cache && !is_null($member) && $member->isAttendee($summit_id)) ? false: $cache;
+        $cache = ($cache && !is_null($member) && $member->isAttendee($summit_id)) ? false : $cache;
 
-        if($cache && $response = $this->loadJSONResponseFromCache($request)) {
+        if ($cache && $response = $this->loadJSONResponseFromCache($request)) {
             return $response;
         }
 
-        if(intval($summit_id) > 0)
+        if (intval($summit_id) > 0)
             $summit = $this->summit_repository->getById(intval($summit_id));
-        if(strtolower($summit_id) === 'current')
+        if (strtolower($summit_id) === 'current')
             $summit = Summit::ActiveSummit();
 
-        if(is_null($summit))
+        if (is_null($summit))
             return $this->notFound('summit not found!');
 
-        $schedule  = $summit->getScheduleByTrack($track);
+        $schedule = $summit->getScheduleByTrack($track);
         $events = $this->normalizeEvents($schedule, $summit);
 
-        $data = array( 'track' => $track, 'events' => $events);
+        $data = array('track' => $track, 'events' => $events);
         return $this->saveJSONResponseToCache($request, $data)->ok($data);
     }
 
     public function getScheduleByLevel(SS_HTTPRequest $request)
     {
-        $query_string        = $request->getVars();
-        $summit_id           = intval($request->param('SUMMIT_ID'));
-        $level               = isset($query_string['level']) ? Convert::raw2sql($query_string['level']) : null;
-        $cache               = isset($query_string['cache']) ? (bool)Convert::raw2sql($query_string['cache']) : true;
-        $summit              = null;
+        $query_string = $request->getVars();
+        $summit_id = intval($request->param('SUMMIT_ID'));
+        $level = isset($query_string['level']) ? Convert::raw2sql($query_string['level']) : null;
+        $cache = isset($query_string['cache']) ? (bool)Convert::raw2sql($query_string['cache']) : true;
+        $summit = null;
 
         $member = Member::currentUser();
-        $cache  = ($cache && !is_null($member) && $member->isAttendee($summit_id)) ? false: $cache;
+        $cache = ($cache && !is_null($member) && $member->isAttendee($summit_id)) ? false : $cache;
 
-        if($cache && $response = $this->loadJSONResponseFromCache($request)) {
+        if ($cache && $response = $this->loadJSONResponseFromCache($request)) {
             return $response;
         }
 
-        if(intval($summit_id) > 0)
+        if (intval($summit_id) > 0)
             $summit = $this->summit_repository->getById(intval($summit_id));
-        if(strtolower($summit_id) === 'current')
+        if (strtolower($summit_id) === 'current')
             $summit = Summit::ActiveSummit();
 
-        if(is_null($summit))
+        if (is_null($summit))
             return $this->notFound('summit not found!');
 
-        $schedule  = $summit->getScheduleByLevel($level);
+        $schedule = $summit->getScheduleByLevel($level);
         $events = $this->normalizeEvents($schedule, $summit);
 
-        $data = array( 'level' => $level, 'events' => $events);
+        $data = array('level' => $level, 'events' => $events);
         return $this->saveJSONResponseToCache($request, $data)->ok($data);
     }
 
     public function getScheduleByDay(SS_HTTPRequest $request)
     {
-        $query_string        = $request->getVars();
-        $summit_id           = intval($request->param('SUMMIT_ID'));
-        $day                 = isset($query_string['day']) ? Convert::raw2sql($query_string['day']) : null;
-        $location            = isset($query_string['location']) ? intval(Convert::raw2sql($query_string['location'])) : null;
-        $inc_blackouts       = isset($query_string['blackouts']) ? intval(Convert::raw2sql($query_string['blackouts'])) : null;
-        $cache               = isset($query_string['cache']) ? (bool)Convert::raw2sql($query_string['cache']) : true;
-        $summit              = null;
+        $query_string = $request->getVars();
+        $summit_id = intval($request->param('SUMMIT_ID'));
+        $day = isset($query_string['day']) ? Convert::raw2sql($query_string['day']) : null;
+        $location = isset($query_string['location']) ? intval(Convert::raw2sql($query_string['location'])) : null;
+        $inc_blackouts = isset($query_string['blackouts']) ? intval(Convert::raw2sql($query_string['blackouts'])) : null;
+        $cache = isset($query_string['cache']) ? (bool)Convert::raw2sql($query_string['cache']) : true;
+        $summit = null;
 
-        $member              = Member::currentUser();
-        $update_schedule     = !is_null($member) && $member->isAttendee($summit_id);
+        $member = Member::currentUser();
+        $update_schedule = !is_null($member) && $member->isAttendee($summit_id);
 
         // SANTI: if we cache the result then we don't get the events recently added to my schedule
         $cache = false;
 
-        if($cache && $data = $this->loadRAWResponseFromCache($request)) {
-            if($update_schedule)
-            {
+        if ($cache && $data = $this->loadRAWResponseFromCache($request)) {
+            if ($update_schedule) {
                 // update my schedule state
                 $events = $data['events'];
-                foreach($events as $idx => $e)
-                {
-                    $own          =  $member->isOnMySchedule(intval($e['id']));
-                    $e['own']     = $own;
-                    $events[$idx] =  $e;
+                foreach ($events as $idx => $e) {
+                    $own = $member->isOnMySchedule(intval($e['id']));
+                    $e['own'] = $own;
+                    $events[$idx] = $e;
                 }
                 $data['events'] = $events;
             }
             return $this->ok($data);
         }
 
-        if(intval($summit_id) > 0)
+        if (intval($summit_id) > 0)
             $summit = $this->summit_repository->getById(intval($summit_id));
-        if(strtolower($summit_id) === 'current')
+        if (strtolower($summit_id) === 'current')
             $summit = Summit::ActiveSummit();
 
-        if(is_null($summit))
+        if (is_null($summit))
             return $this->notFound('summit not found!');
 
-        $schedule  = $summit->getSchedule($day, $location);
-        $blackouts = ($inc_blackouts) ? $summit->getBlackouts($day,$location) : new ArrayList();
+        $schedule = $summit->getSchedule($day, $location);
+        $blackouts = ($inc_blackouts) ? $summit->getBlackouts($day, $location) : new ArrayList();
 
         $schedule->merge($blackouts);
 
         $events = $this->normalizeEvents($schedule, $summit);
 
-        $data = array( 'day' => $day, 'events' => $events);
+        $data = array('day' => $day, 'events' => $events);
         return $this->saveJSONResponseToCache($request, $data)->ok($data);
     }
 
-    public function normalizeEvents($schedule, $summit) {
-        $events         = array();
+    public function normalizeEvents($schedule, $summit)
+    {
+        $events = array();
         $current_member = Member::currentUser();
-        $is_attendee    = is_null($current_member)? false: $current_member->isAttendee($summit->ID);
+        $is_attendee = is_null($current_member) ? false : $current_member->isAttendee($summit->ID);
 
-        foreach($schedule->toArray() as $e)
-        {
+        foreach ($schedule->toArray() as $e) {
             $entry = array
             (
-                'id'                       => intval($e->ID),
-                'title'                    => $e->Title,
-                'description'              => $e->Description,
-                'class_name'               => $e->ClassName,
-                'abstract'                 => $e->ShortDescription,
-                'start_datetime'           => $e->StartDate,
-                'end_datetime'             => $e->EndDate,
-                'start_time'               => $e->StartTime,
-                'end_time'                 => $e->EndTime,
-                'date_nice'                => date('D j',strtotime($e->StartDate)),
-                'allow_feedback'           => $e->AllowFeedBack,
-                'location_id'              => intval($e->LocationID),
-                'type_id'                  => intval($e->TypeID),
-                'rsvp_link'                => $e->RSVPLink,
-                'sponsors_id'              => array(),
-                'summit_types_id'          => array(),
-                'category_group_ids'       => array(),
-                'tags_id'                  => array(),
-                'own'                      => is_null($current_member) || !$is_attendee ? false : $current_member->isOnMySchedule($e->ID),
-                'gcal_id'                  => is_null($current_member) || !$is_attendee ? false : $current_member->getGoogleCalEventId($e->ID),
-                'favorite'                 => false,
-                'show'                     => true,
-                'headcount'                => intval($e->HeadCount),
+                'id' => intval($e->ID),
+                'title' => $e->Title,
+                'description' => $e->Description,
+                'class_name' => $e->ClassName,
+                'abstract' => $e->ShortDescription,
+                'start_datetime' => $e->StartDate,
+                'end_datetime' => $e->EndDate,
+                'start_time' => $e->StartTime,
+                'end_time' => $e->EndTime,
+                'date_nice' => date('D j', strtotime($e->StartDate)),
+                'allow_feedback' => $e->AllowFeedBack,
+                'location_id' => intval($e->LocationID),
+                'type_id' => intval($e->TypeID),
+                'rsvp_link' => $e->RSVPLink,
+                'sponsors_id' => array(),
+                'summit_types_id' => array(),
+                'category_group_ids' => array(),
+                'tags_id' => array(),
+                'own' => is_null($current_member) || !$is_attendee ? false : $current_member->isOnMySchedule($e->ID),
+                'gcal_id' => is_null($current_member) || !$is_attendee ? false : $current_member->getGoogleCalEventId($e->ID),
+                'favorite' => false,
+                'show' => true,
+                'headcount' => intval($e->HeadCount),
+                'summit_id' => intval($summit->ID),
+                'time_zone_id' => $summit->getTimeZoneName(),
                 'attendees_schedule_count' => $e->AttendeesScheduleCount()
             );
 
-            foreach($e->Tags() as $t)
-            {
+            foreach ($e->Tags() as $t) {
                 array_push($entry['tags_id'], intval($t->ID));
             }
 
-            foreach($e->AllowedSummitTypes() as $t)
-            {
+            foreach ($e->AllowedSummitTypes() as $t) {
                 array_push($entry['summit_types_id'], intval($t->ID));
             }
 
-            if($e instanceof Presentation && $e->Category()->exists())
-            {
+            if ($e instanceof Presentation && $e->Category()->exists()) {
                 foreach ($e->Category()->getCategoryGroups() as $group) {
                     array_push($entry['category_group_ids'], intval($group->ID));
                 }
             }
 
-            foreach($e->Sponsors() as $e)
-            {
+            foreach ($e->Sponsors() as $e) {
                 array_push($entry['sponsors_id'], intval($e->ID));
             }
 
-            if($e instanceof Presentation)
-            {
+            if ($e instanceof Presentation) {
                 $speakers = array();
-                foreach($e->Speakers() as $s)
-                {
+                foreach ($e->Speakers() as $s) {
                     array_push($speakers, intval($s->ID));
                 }
 
-                $entry['speakers_id']  = $speakers;
+                $entry['speakers_id'] = $speakers;
                 $entry['moderator_id'] = intval($e->ModeratorID);
-                $entry['track_id']     = intval($e->CategoryID);
-                $entry['level']        = $e->Level;
-                $entry['status']       = $e->SelectionStatus();
+                $entry['track_id'] = intval($e->CategoryID);
+                $entry['level'] = $e->Level;
+                $entry['status'] = $e->SelectionStatus();
             }
             array_push($events, $entry);
         };
@@ -315,122 +318,117 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         return $events;
     }
 
-    public function getSearchResults(SS_HTTPRequest $request) {
+    public function getSearchResults(SS_HTTPRequest $request)
+    {
 
-        $query_string        = $request->getVars();
-        $summit_id           = intval($request->param('SUMMIT_ID'));
-        $term                = isset($query_string['term']) ? Convert::raw2sql($query_string['term']) : null;
-        $summit              = null;
+        $query_string = $request->getVars();
+        $summit_id = intval($request->param('SUMMIT_ID'));
+        $term = isset($query_string['term']) ? Convert::raw2sql($query_string['term']) : null;
+        $summit = null;
 
-        if(intval($summit_id) > 0)
+        if (intval($summit_id) > 0)
             $summit = $this->summit_repository->getById(intval($summit_id));
-        if(strtolower($summit_id) === 'current')
+        if (strtolower($summit_id) === 'current')
             $summit = Summit::ActiveSummit();
 
-        if(is_null($summit))
+        if (is_null($summit))
             return $this->notFound('summit not found!');
 
-        $events         = array();
+        $events = array();
         $current_member = Member::currentUser();
-        $is_attendee    = is_null($current_member)? false: $current_member->isAttendee($summit->ID);
-        foreach($this->summitevent_repository->searchBySummitAndTerm($summit,$term) as $e)
-        {
+        $is_attendee = is_null($current_member) ? false : $current_member->isAttendee($summit->ID);
+        foreach ($this->summitevent_repository->searchBySummitAndTerm($summit, $term) as $e) {
             $entry = array
             (
-                'id'                 => $e->ID,
-                'title'              => $e->Title,
-                'description'        => $e->Description,
-                'short_desc'         => $e->ShortDescription,
-                'start_date'         => date('Y-m-d',strtotime($e->StartDate)),
-                'start_datetime'     => $e->StartDate,
-                'end_datetime'       => $e->EndDate,
-                'start_time'         => $e->StartTime,
-                'end_time'           => $e->EndTime,
-                'allow_feedback'     => $e->AllowFeedBack,
-                'location_id'        => $e->LocationID,
-                'type_id'            => $e->TypeID,
-                'sponsors_id'        => array(),
-                'summit_types_id'    => array(),
+                'id' => $e->ID,
+                'title' => $e->Title,
+                'description' => $e->Description,
+                'short_desc' => $e->ShortDescription,
+                'start_date' => date('Y-m-d', strtotime($e->StartDate)),
+                'start_datetime' => $e->StartDate,
+                'end_datetime' => $e->EndDate,
+                'start_time' => $e->StartTime,
+                'end_time' => $e->EndTime,
+                'allow_feedback' => $e->AllowFeedBack,
+                'location_id' => $e->LocationID,
+                'type_id' => $e->TypeID,
+                'sponsors_id' => array(),
+                'summit_types_id' => array(),
                 'category_group_ids' => array(),
-                'tags_id'            => array(),
-                'own'                => is_null($current_member) || !$is_attendee ? false : $current_member->isOnMySchedule($e->ID),
-                'favorite'           => false,
-                'show'               => true
+                'tags_id' => array(),
+                'own' => is_null($current_member) || !$is_attendee ? false : $current_member->isOnMySchedule($e->ID),
+                'favorite' => false,
+                'show' => true
             );
 
-            foreach($e->Tags() as $t)
-            {
+            foreach ($e->Tags() as $t) {
                 array_push($entry['tags_id'], $t->ID);
             }
 
-            foreach($e->AllowedSummitTypes() as $t)
-            {
+            foreach ($e->AllowedSummitTypes() as $t) {
                 array_push($entry['summit_types_id'], $t->ID);
             }
 
             if ($e->isPresentation()) {
-                if($e->Category())
-                {
+                if ($e->Category()) {
                     foreach ($e->Category()->getCategoryGroups() as $group) {
                         array_push($entry['category_group_ids'], $group->ID);
                     }
                 }
             }
 
-            foreach($e->Sponsors() as $e)
-            {
+            foreach ($e->Sponsors() as $e) {
                 array_push($entry['sponsors_id'], $e->ID);
             }
 
-            if($e instanceof Presentation)
-            {
+            if ($e instanceof Presentation) {
                 $speakers = array();
-                foreach($e->Speakers() as $s)
-                {
+                foreach ($e->Speakers() as $s) {
                     array_push($speakers, $s->ID);
                 }
 
-                $entry['speakers_id']  = $speakers;
+                $entry['speakers_id'] = $speakers;
                 $entry['moderator_id'] = $e->ModeratorID;
-                $entry['track_id']     = $e->CategoryID;
-                $entry['level']        = $e->Level;
+                $entry['track_id'] = $e->CategoryID;
+                $entry['level'] = $e->Level;
             }
             array_push($events, $entry);
         };
         return $this->ok(array('events' => $events));
     }
 
-    public function getEmptySpots(SS_HTTPRequest $request) {
+    public function getEmptySpots(SS_HTTPRequest $request)
+    {
 
-        $query_string        = $request->getVars();
-        $summit_id           = intval($request->param('SUMMIT_ID'));
-        $days                = isset($query_string['days']) ? json_decode($query_string['days']) : null;
-        $start_time          = isset($query_string['start_time']) ? $query_string['start_time'] : '07:00:00';
-        $end_time            = isset($query_string['end_time']) ? $query_string['end_time'] : '22:00:00';
-        $locations           = isset($query_string['locations']) ? json_decode($query_string['locations']) : null;
-        $length              = isset($query_string['length']) ? intval($query_string['length']) : 0;
-        $summit              = null;
+        $query_string = $request->getVars();
+        $summit_id = intval($request->param('SUMMIT_ID'));
+        $days = isset($query_string['days']) ? json_decode($query_string['days']) : null;
+        $start_time = isset($query_string['start_time']) ? $query_string['start_time'] : '07:00:00';
+        $end_time = isset($query_string['end_time']) ? $query_string['end_time'] : '22:00:00';
+        $locations = isset($query_string['locations']) ? json_decode($query_string['locations']) : null;
+        $length = isset($query_string['length']) ? intval($query_string['length']) : 0;
+        $summit = null;
 
-        if(intval($summit_id) > 0)
+        if (intval($summit_id) > 0)
             $summit = $this->summit_repository->getById(intval($summit_id));
-        if(strtolower($summit_id) === 'current')
+        if (strtolower($summit_id) === 'current')
             $summit = Summit::ActiveSummit();
 
-        if(is_null($summit))
+        if (is_null($summit))
             return $this->notFound('summit not found!');
 
         if (empty($days) || empty($locations) || empty($length))
             return $this->validationError('Parameters missing.');
 
-        $events = $this->summitevent_repository->getPublishedByTimeAndVenue($summit,$days,$start_time,$end_time,$locations);
+        $events = $this->summitevent_repository->getPublishedByTimeAndVenue($summit, $days, $start_time, $end_time, $locations);
         $empty_spots = array();
         $control = array();
         $previous_event = $previous_end_date = $previous_event_day = $previous_event_time = null;
 
         if ($events) {
-            foreach($events as $event) {
+            foreach ($events as $event) {
                 $event_start_date = $event->getStartDate();
-                $event_day        = date('Y-m-d',strtotime($event_start_date));
+                $event_day = date('Y-m-d', strtotime($event_start_date));
 
                 $control[$event_day][$event->LocationID] = true; //control array to see what days and locations had no events at all
 
@@ -441,51 +439,51 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
                     $previous_time = $start_time;
 
                     // if it is the first event of the room/day, add empty spot between last event and top limit
-                    $end_limit = $previous_event_day.' '.$end_time;
+                    $end_limit = $previous_event_day . ' ' . $end_time;
                     $unix_time = strtotime($previous_end_date);
                     $empty_space = strtotime($end_limit) - $unix_time;
                     if ($empty_space >= $length) {
                         $empty_spots[] = array(
                             'location_id' => $previous_event->LocationID,
-                            'day'         => $previous_event_day,
-                            'time'        => $previous_event_time,
-                            'gap'         => gmdate('G:i', $empty_space),
-                            'unix_time'   => $unix_time
+                            'day' => $previous_event_day,
+                            'time' => $previous_event_time,
+                            'gap' => gmdate('G:i', $empty_space),
+                            'unix_time' => $unix_time
                         );
                     }
                 } else {
                     $previous_time = $previous_event_time;
                 }
 
-                $unix_time = strtotime($event_day.' '.$previous_time);
+                $unix_time = strtotime($event_day . ' ' . $previous_time);
                 $empty_space = strtotime($event_start_date) - $unix_time;
                 if ($empty_space >= $length) {
                     $empty_spots[] = array(
                         'location_id' => $event->LocationID,
-                        'day'         => $event_day,
-                        'time'        => $previous_time,
-                        'gap'         => gmdate('G:i', $empty_space),
-                        'unix_time'   => $unix_time
+                        'day' => $event_day,
+                        'time' => $previous_time,
+                        'gap' => gmdate('G:i', $empty_space),
+                        'unix_time' => $unix_time
                     );
                 }
 
-                $previous_event      = $event;
-                $previous_end_date   = $previous_event->getEndDate();
-                $previous_event_day  = date('Y-m-d',strtotime($previous_end_date));
-                $previous_event_time = date('H:i',strtotime($previous_end_date));
+                $previous_event = $event;
+                $previous_end_date = $previous_event->getEndDate();
+                $previous_event_day = date('Y-m-d', strtotime($previous_end_date));
+                $previous_event_time = date('H:i', strtotime($previous_end_date));
             }
 
             // check the empty space between the last event on the list and the top limit
-            $end_limit = $previous_event_day.' '.$end_time;
+            $end_limit = $previous_event_day . ' ' . $end_time;
             $unix_time = strtotime($previous_end_date);
             $empty_space = strtotime($end_limit) - $unix_time;
             if ($empty_space >= $length) {
                 $empty_spots[] = array(
                     'location_id' => $previous_event->LocationID,
-                    'day'         => $previous_event_day,
-                    'time'        => $previous_event_time,
-                    'gap'         => gmdate('G:i', $empty_space),
-                    'unix_time'   => $unix_time
+                    'day' => $previous_event_day,
+                    'time' => $previous_event_time,
+                    'gap' => gmdate('G:i', $empty_space),
+                    'unix_time' => $unix_time
                 );
             }
         }
@@ -494,14 +492,14 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         $full_gap = strtotime($end_time) - strtotime($start_time);
         foreach ($days as $day) {
             foreach ($locations as $loc) {
-                if (!array_key_exists($day,$control) || !array_key_exists($loc,$control[$day])) {
+                if (!array_key_exists($day, $control) || !array_key_exists($loc, $control[$day])) {
                     // we add this location and day
                     $empty_spots[] = array(
                         'location_id' => $loc,
-                        'day'         => $day,
-                        'time'        => $start_time,
-                        'gap'         => gmdate('G:i', $full_gap),
-                        'unix_time'   => strtotime($day.' '.$start_time)
+                        'day' => $day,
+                        'time' => $start_time,
+                        'gap' => gmdate('G:i', $full_gap),
+                        'unix_time' => strtotime($day . ' ' . $start_time)
                     );
                 }
             }
@@ -522,70 +520,66 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         return $this->ok(array('empty_spots' => $empty_spots));
     }
 
-    public function addToSchedule() {
-        try{
+    public function addToSchedule()
+    {
+        try {
             $summit_id = (int)$this->request->param('SUMMIT_ID');
-            $event_id  = (int)$this->request->param('EventID');
-            $member    = Member::currentUser();
+            $event_id = (int)$this->request->param('EventID');
+            $member = Member::currentUser();
 
-            if(is_null($member)) return $this->permissionFailure();
+            if (is_null($member)) return $this->permissionFailure();
 
-            if(intval($summit_id) > 0)
+            if (intval($summit_id) > 0)
                 $summit = $this->summit_repository->getById(intval($summit_id));
-            if(strtolower($summit_id) === 'current')
+            if (strtolower($summit_id) === 'current')
                 $summit = Summit::ActiveSummit();
 
-            if(is_null($summit))
+            if (is_null($summit))
                 return $this->notFound('summit not found!');
 
             $this->schedule_manager->addEventToSchedule(Member::currentUserID(), $event_id);
 
             return $this->ok();
-        }
-        catch(EntityValidationException $ex1){
-            SS_Log::log($ex1,SS_Log::WARN);
+        } catch (EntityValidationException $ex1) {
+            SS_Log::log($ex1, SS_Log::WARN);
             return $this->validationError($ex1->getMessages());
-        }
-        catch(NotFoundEntityException $ex2){
-            SS_Log::log($ex2,SS_Log::WARN);
+        } catch (NotFoundEntityException $ex2) {
+            SS_Log::log($ex2, SS_Log::WARN);
             return $this->notFound($ex2->getMessage());
-        }
-        catch(Exception $ex){
-            SS_Log::log($ex,SS_Log::ERR);
+        } catch (Exception $ex) {
+            SS_Log::log($ex, SS_Log::ERR);
             return $this->serverError();
         }
     }
 
-    public function removeFromSchedule() {
-        try{
+    public function removeFromSchedule()
+    {
+        try {
             $summit_id = (int)$this->request->param('SUMMIT_ID');
-            $event_id  = (int)$this->request->param('EventID');
-            $member    = Member::currentUser();
+            $event_id = (int)$this->request->param('EventID');
+            $member = Member::currentUser();
 
-            if(is_null($member)) return $this->permissionFailure();
+            if (is_null($member)) return $this->permissionFailure();
 
-            if(intval($summit_id) > 0)
+            if (intval($summit_id) > 0)
                 $summit = $this->summit_repository->getById(intval($summit_id));
 
-            if(strtolower($summit_id) === 'current')
+            if (strtolower($summit_id) === 'current')
                 $summit = Summit::ActiveSummit();
 
-            if(is_null($summit))
+            if (is_null($summit))
                 return $this->notFound('summit not found!');
 
             $this->schedule_manager->removeEventFromSchedule(Member::currentUserID(), $event_id);
             return $this->ok();
-        }
-        catch(EntityValidationException $ex1){
-            SS_Log::log($ex1,SS_Log::WARN);
+        } catch (EntityValidationException $ex1) {
+            SS_Log::log($ex1, SS_Log::WARN);
             return $this->validationError($ex1->getMessages());
-        }
-        catch(NotFoundEntityException $ex2){
-            SS_Log::log($ex2,SS_Log::WARN);
+        } catch (NotFoundEntityException $ex2) {
+            SS_Log::log($ex2, SS_Log::WARN);
             return $this->notFound($ex2->getMessage());
-        }
-        catch(Exception $ex){
-            SS_Log::log($ex,SS_Log::ERR);
+        } catch (Exception $ex) {
+            SS_Log::log($ex, SS_Log::ERR);
             return $this->serverError();
         }
     }
@@ -593,64 +587,64 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
     /**
      * @return SS_HTTPResponse
      */
-    public function addFeedback(){
+    public function addFeedback()
+    {
         try {
-            $data      = $this->getJsonRequest();
-            $event_id  = (int)$this->request->param('EventID');
+            $data = $this->getJsonRequest();
+            $event_id = (int)$this->request->param('EventID');
             $summit_id = (int)$this->request->param('SUMMIT_ID');
             $member_id = Member::CurrentUserID();
 
             if (!$data) return $this->serverError();
 
-            if(intval($summit_id) > 0)
+            if (intval($summit_id) > 0)
                 $summit = $this->summit_repository->getById(intval($summit_id));
 
-            if(strtolower($summit_id) === 'current')
+            if (strtolower($summit_id) === 'current')
                 $summit = Summit::ActiveSummit();
 
-            if(is_null($summit))
+            if (is_null($summit))
                 return $this->notFound('summit not found!');
 
-            if(intval($event_id) > 0)
+            if (intval($event_id) > 0)
                 $event = $this->summitevent_repository->getById(intval($event_id));
 
-            if(is_null($event))
+            if (is_null($event))
                 return $this->notFound('event not found!');
 
-            else if($event->getSummit()->getIdentifier() != intval($summit_id))
+            else if ($event->getSummit()->getIdentifier() != intval($summit_id))
                 return $this->notFound('event not found in current summit');
 
             $data['summit_id'] = $summit->ID;
-            $data['event_id']  = $event_id;
+            $data['event_id'] = $event_id;
             $data['member_id'] = $member_id;
 
             return $this->created($this->schedule_manager->addFeedback($data));
 
-        }
-        catch(EntityValidationException $ex1){
-            SS_Log::log($ex1,SS_Log::WARN);
+        } catch (EntityValidationException $ex1) {
+            SS_Log::log($ex1, SS_Log::WARN);
             return $this->validationError($ex1->getMessages());
-        }
-        catch(NotFoundEntityException $ex2){
-            SS_Log::log($ex2,SS_Log::WARN);
+        } catch (NotFoundEntityException $ex2) {
+            SS_Log::log($ex2, SS_Log::WARN);
             return $this->notFound($ex2->getMessage());
-        }
-        catch(Exception $ex){
-            SS_Log::log($ex,SS_Log::ERR);
+        } catch (Exception $ex) {
+            SS_Log::log($ex, SS_Log::ERR);
             return $this->serverError();
         }
     }
 
     const MaxEventShareByEmailPerSession = 5;
+
     /**
      * @return SS_HTTPResponse
      */
-    public function shareEmail(SS_HTTPRequest $request){
+    public function shareEmail(SS_HTTPRequest $request)
+    {
 
         try {
-            $event_id     = intval($request->param('EventID'));
-            $event        = $this->summitevent_repository->getById($event_id) ;
-            if(is_null($event))
+            $event_id = intval($request->param('EventID'));
+            $event = $this->summitevent_repository->getById($event_id);
+            if (is_null($event))
                 throw new NotFoundEntityException('SummitEvent', sprintf(' id %s', $event_id));
 
             $data = $this->getJsonRequest();
@@ -660,29 +654,29 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
                 throw new EntityValidationException('Please enter From and To email addresses.');
             }
 
-            if(filter_var($data['from'], FILTER_VALIDATE_EMAIL) === false)
+            if (filter_var($data['from'], FILTER_VALIDATE_EMAIL) === false)
                 throw new EntityValidationException('from is invalid email address');
 
-            if(filter_var($data['to'], FILTER_VALIDATE_EMAIL) === false)
+            if (filter_var($data['to'], FILTER_VALIDATE_EMAIL) === false)
                 throw new EntityValidationException('to is invalid email address');
 
             if (!$data['token'])
                 throw new EntityValidationException('session lost');
 
-            $token       = Session::get(SummitAppSchedPage_Controller::EventShareByEmailTokenKey);
+            $token = Session::get(SummitAppSchedPage_Controller::EventShareByEmailTokenKey);
             $token_count = Session::get(SummitAppSchedPage_Controller::EventShareByEmailCountKey);
 
 
-            if ($data['token'] != $token ) {
+            if ($data['token'] != $token) {
                 throw new EntityValidationException('session lost');
             }
 
-            if($token_count > self::MaxEventShareByEmailPerSession){
+            if ($token_count > self::MaxEventShareByEmailPerSession) {
                 throw new EntityValidationException('you reach your limit of emails per event per session');
             }
 
-            $subject = 'Fwd: '.$event->Title;
-            $body = $event->Title.'<br>'.$event->ShortDescription.'<br><br>Check it out: '.$event->getLink();
+            $subject = 'Fwd: ' . $event->Title;
+            $body = $event->Title . '<br>' . $event->ShortDescription . '<br><br>Check it out: ' . $event->getLink();
 
             $email = EmailFactory::getInstance()->buildEmail($data['from'], $data['to'], $subject, $body);
             $email->send();
@@ -690,45 +684,42 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
             Session::set(SummitAppSchedPage_Controller::EventShareByEmailCountKey, $token_count);
             return $this->ok();
 
-        }
-        catch(EntityValidationException $ex1){
+        } catch (EntityValidationException $ex1) {
             SS_Log::log($ex1, SS_Log::WARN);
             return $this->validationError($ex1->getMessages());
-        }
-        catch(NotFoundEntityException $ex2){
+        } catch (NotFoundEntityException $ex2) {
             SS_Log::log($ex2, SS_Log::WARN);
             return $this->notFound($ex2->getMessages());
-        }
-        catch(Exception $ex){
-            SS_Log::log($ex,SS_Log::ERR);
+        } catch (Exception $ex) {
+            SS_Log::log($ex, SS_Log::ERR);
             return $this->serverError();
         }
     }
 
     public function getFullSchedule(SS_HTTPRequest $request)
     {
-        $query_string        = $request->getVars();
-        $summit_id           = intval($request->param('SUMMIT_ID'));
-        $sort                = isset($query_string['sort']) ? Convert::raw2sql($query_string['sort']) : null;
-        $cache               = isset($query_string['cache']) ? (bool)Convert::raw2sql($query_string['cache']) : true;
-        $summit              = null;
+        $query_string = $request->getVars();
+        $summit_id = intval($request->param('SUMMIT_ID'));
+        $sort = isset($query_string['sort']) ? Convert::raw2sql($query_string['sort']) : null;
+        $cache = isset($query_string['cache']) ? (bool)Convert::raw2sql($query_string['cache']) : true;
+        $summit = null;
 
         $member = Member::currentUser();
-        $cache  = ($cache && !is_null($member) && $member->isAttendee($summit_id)) ? false: $cache;
+        $cache = ($cache && !is_null($member) && $member->isAttendee($summit_id)) ? false : $cache;
 
-        if($cache && $response = $this->loadJSONResponseFromCache($request)) {
+        if ($cache && $response = $this->loadJSONResponseFromCache($request)) {
             return $response;
         }
 
-        if(intval($summit_id) > 0)
+        if (intval($summit_id) > 0)
             $summit = $this->summit_repository->getById(intval($summit_id));
-        if(strtolower($summit_id) === 'current')
+        if (strtolower($summit_id) === 'current')
             $summit = Summit::ActiveSummit();
 
-        if(is_null($summit))
+        if (is_null($summit))
             return $this->notFound('summit not found!');
 
-        $schedule  = $summit->getSchedule();
+        $schedule = $summit->getSchedule();
         $events = array();
         $index = '';
         $sort_list = false;
@@ -740,7 +731,9 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
                     $index = $event->getDayLabel();
                     break;
                 case 'track':
-                    if (!$event->isPresentation() || !$event->Category() || !$event->Category()->Title) {continue 2;}
+                    if (!$event->isPresentation() || !$event->Category() || !$event->Category()->Title) {
+                        continue 2;
+                    }
                     $index = $event->Category()->Title;
                     $sort_list = true;
                     break;
@@ -753,7 +746,7 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
             if (!isset($events[$index])) $events[$index] = array();
 
             $events[$index][] = array(
-                'id' =>  $event->ID,
+                'id' => $event->ID,
                 'start_time' => $event->getStartTime(),
                 'end_time' => $event->getEndTime(),
                 'title' => $event->Title,
@@ -769,71 +762,68 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
         return $this->saveJSONResponseToCache($request, $events)->ok($events);
     }
 
-    public function synchEvent() {
-        try{
-            $summit_id      = (int)$this->request->param('SUMMIT_ID');
-            $event_id       = (int)$this->request->param('EventID');
-            $cal_event_id   = $this->request->param('CalEventID');
-            $member    = Member::currentUser();
+    public function synchEvent()
+    {
+        try {
+            $summit_id = (int)$this->request->param('SUMMIT_ID');
+            $event_id = (int)$this->request->param('EventID');
+            $cal_event_id = $this->request->param('CalEventID');
+            $member = Member::currentUser();
 
-            if(is_null($member)) return $this->permissionFailure();
+            if (is_null($member)) return $this->permissionFailure();
 
-            if(intval($summit_id) > 0)
+            if (intval($summit_id) > 0)
                 $summit = $this->summit_repository->getById(intval($summit_id));
-            if(strtolower($summit_id) === 'current')
+
+            if (strtolower($summit_id) === 'current')
                 $summit = Summit::ActiveSummit();
 
-            if(is_null($summit))
+            if (is_null($summit))
                 return $this->notFound('summit not found!');
 
             $this->schedule_manager->saveSynchId(Member::currentUserID(), $event_id, 'google', $cal_event_id);
 
             return $this->ok($cal_event_id);
-        }
-        catch(EntityValidationException $ex1){
-            SS_Log::log($ex1,SS_Log::WARN);
+        } catch (EntityValidationException $ex1) {
+            SS_Log::log($ex1, SS_Log::WARN);
             return $this->validationError($ex1->getMessages());
-        }
-        catch(NotFoundEntityException $ex2){
-            SS_Log::log($ex2,SS_Log::WARN);
+        } catch (NotFoundEntityException $ex2) {
+            SS_Log::log($ex2, SS_Log::WARN);
             return $this->notFound($ex2->getMessage());
-        }
-        catch(Exception $ex){
-            SS_Log::log($ex,SS_Log::ERR);
+        } catch (Exception $ex) {
+            SS_Log::log($ex, SS_Log::ERR);
             return $this->serverError();
         }
     }
 
-    public function unSynchEvent() {
-        try{
-            $summit_id      = (int)$this->request->param('SUMMIT_ID');
-            $event_id       = (int)$this->request->param('EventID');
-            $member    = Member::currentUser();
+    public function unSynchEvent()
+    {
+        try {
+            $summit_id = (int)$this->request->param('SUMMIT_ID');
+            $event_id = (int)$this->request->param('EventID');
+            $member = Member::currentUser();
 
-            if(is_null($member)) return $this->permissionFailure();
+            if (is_null($member)) return $this->permissionFailure();
 
-            if(intval($summit_id) > 0)
+            if (intval($summit_id) > 0)
                 $summit = $this->summit_repository->getById(intval($summit_id));
-            if(strtolower($summit_id) === 'current')
+            if (strtolower($summit_id) === 'current')
                 $summit = Summit::ActiveSummit();
 
-            if(is_null($summit))
+            if (is_null($summit))
                 return $this->notFound('summit not found!');
 
             $this->schedule_manager->saveSynchId(Member::currentUserID(), $event_id, 'google', '');
 
             return $this->ok();
-        }
-        catch(EntityValidationException $ex1){
-            SS_Log::log($ex1,SS_Log::WARN);
+        } catch (EntityValidationException $ex1) {
+            SS_Log::log($ex1, SS_Log::WARN);
             return $this->validationError($ex1->getMessages());
-        }
-        catch(NotFoundEntityException $ex2){
-            SS_Log::log($ex2,SS_Log::WARN);
+        } catch (NotFoundEntityException $ex2) {
+            SS_Log::log($ex2, SS_Log::WARN);
             return $this->notFound($ex2->getMessage());
-        }
-        catch(Exception $ex){
-            SS_Log::log($ex,SS_Log::ERR);
+        } catch (Exception $ex) {
+            SS_Log::log($ex, SS_Log::ERR);
             return $this->serverError();
         }
     }
@@ -841,55 +831,109 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi {
     /**
      * @return SS_HTTPResponse
      */
-    public function rsvpEvent(){
+    public function rsvpEvent()
+    {
         try {
 
-            $data      = $this->getJsonRequest();
-            $event_id  = (int)$this->request->param('EventID');
+            $data = $this->getJsonRequest();
+            $event_id = (int)$this->request->param('EventID');
             $summit_id = (int)$this->request->param('SUMMIT_ID');
             $member_id = Member::CurrentUserID();
 
-            if($member_id <= 0)
+            if ($member_id <= 0)
                 return $this->forbiddenError();
 
             if (!$data) return $this->serverError();
 
-            if(intval($summit_id) > 0)
+            if (intval($summit_id) > 0)
                 $summit = $this->summit_repository->getById(intval($summit_id));
 
-            if(strtolower($summit_id) === 'current')
+            if (strtolower($summit_id) === 'current')
                 $summit = Summit::ActiveSummit();
 
 
-            if(is_null($summit))
+            if (is_null($summit))
                 return $this->notFound('summit not found!');
 
-            if(intval($event_id) > 0)
+            if (intval($event_id) > 0)
                 $event = $this->summitevent_repository->getById(intval($event_id));
 
-            if(is_null($event))
+            if (is_null($event))
                 return $this->notFound('event not found!');
 
-            else if($event->getSummit()->getIdentifier() != intval($summit_id))
+            else if ($event->getSummit()->getIdentifier() != intval($summit_id))
                 return $this->notFound('event not found in current summit');
 
             $data['summit_id'] = $summit->ID;
-            $data['event_id']  = $event_id;
+            $data['event_id'] = $event_id;
             $data['member_id'] = $member_id;
 
             return $this->created($this->schedule_manager->addRSVP($data, new SummitAttendeeRSVPEmailSender));
 
-        }
-        catch(EntityValidationException $ex1){
-            SS_Log::log($ex1,SS_Log::WARN);
+        } catch (EntityValidationException $ex1) {
+            SS_Log::log($ex1, SS_Log::WARN);
             return $this->validationError($ex1->getMessages());
-        }
-        catch(NotFoundEntityException $ex2){
-            SS_Log::log($ex2,SS_Log::WARN);
+        } catch (NotFoundEntityException $ex2) {
+            SS_Log::log($ex2, SS_Log::WARN);
             return $this->notFound($ex2->getMessage());
+        } catch (Exception $ex) {
+            SS_Log::log($ex, SS_Log::ERR);
+            return $this->serverError();
         }
-        catch(Exception $ex){
-            SS_Log::log($ex,SS_Log::ERR);
+    }
+
+    /*
+     *
+     */
+    public function ExportEventToICS(SS_HTTPRequest $request)
+    {
+        try {
+
+            $event_ids = $request->getVar('events_id');
+            if (is_null($event_ids)) return $this->validationError("missing events_id param");
+
+            $event_ids = explode(',', $event_ids);
+
+            $ical = "BEGIN:VCALENDAR
+PRODID:-//hacksw/handcal//NONSGML v1.0//EN
+VERSION:2.0
+CALSCALE:GREGORIAN
+METHOD:PUBLISH".PHP_EOL;
+
+            foreach ($event_ids as $event_id) {
+                $event = $this->summitevent_repository->getById($event_id);
+                if (is_null($event))
+                    throw new NotFoundEntityException('SummitEvent', sprintf(' id %s', $event_id));
+
+                if (!$event->isPublished())
+                    throw new EntityValidationException(sprintf("event id %s does not belongs to schedule!", $event->getIdentifier()));
+
+                $ical.= "BEGIN:VEVENT".PHP_EOL.
+                "UID:" . md5(uniqid(mt_rand(), true)) . "event".PHP_EOL.
+                "DTSTAMP:" . gmdate('Ymd') . 'T' . gmdate('His') . "Z".PHP_EOL.
+                "DTSTART:" . date('Ymd', strtotime($event->getField('StartDate'))) . "T" . date('His', strtotime($event->getField('StartDate'))) . "Z".PHP_EOL.
+                "DTEND:" . date('Ymd', strtotime($event->getField('EndDate'))) . "T" . date('His', strtotime($event->getField('EndDate'))) . "Z".PHP_EOL.
+                "SUMMARY:" . $event->Title .PHP_EOL.
+                "DESCRIPTION:" . strip_tags($event->ShortDescription) .PHP_EOL.
+                "X-ALT-DESC:" . $event->ShortDescription.PHP_EOL.
+                "END:VEVENT".PHP_EOL;
+            }
+
+            $ical .= "END:VCALENDAR";
+            //set correct content-type-header
+            header('Content-type: text/calendar; charset=utf-8');
+            header('Content-Disposition: inline; filename=event-' . implode('-',$event_ids) . '.ics');
+            echo $ical;
+            exit();
+
+        } catch (EntityValidationException $ex1) {
+            SS_Log::log($ex1, SS_Log::WARN);
+            return $this->validationError($ex1->getMessages());
+        } catch (NotFoundEntityException $ex2) {
+            SS_Log::log($ex2, SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        } catch (Exception $ex) {
+            SS_Log::log($ex, SS_Log::ERR);
             return $this->serverError();
         }
     }

@@ -379,7 +379,7 @@ a.navbar-brand.navbar-brand-month
     color:#CDCDCD;
 }
 
-.my-schedule-container, .gcal-synch-container
+.my-schedule-container, .synch-container
 {
     text-align: right;
 }
@@ -830,4 +830,43 @@ h2.subtitle {
     padding: 0;
     margin: 0;
     margin-top: 9%;
+}
+
+.col-sync-calendar{
+    margin:0;
+    padding: 0;
+    padding-top: 1%;
+}
+
+.col-log-in{
+    margin:0;
+    padding: 0;
+    padding-top: 1%;
+}
+
+.col-sync-calendar-own {
+    margin:0;
+    padding: 0;
+    width: auto;
+    float: right;
+    padding-right: 15px;
+}
+
+.col-sync-calendar-own .btn-default{
+    height: 38px;
+}
+
+.col-sync-calendar-own .dropdown-toggle{
+    height: 38px;
+}
+
+
+.icon-unsync-event
+{
+    color:#CDCDCD;
+}
+
+.icon-sync-event
+{
+    color:#5BC86B;
 }

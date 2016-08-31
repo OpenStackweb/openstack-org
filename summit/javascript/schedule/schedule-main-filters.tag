@@ -1,6 +1,6 @@
 <schedule-main-filters>
     <div class="row all-events-filter-row">
-        <div class="col-md-6 col-xs-12 all-events-filter-link">
+        <div class="col-md-4 col-xs-12 all-events-filter-link">
             <div class="col-filter-btn">
                 <i title="" data-placement="right" data-toggle="tooltip" id="toggle-all-events-filters" class="fa fa-filter" data-original-title="Toggle Advanced Filters"></i>
             </div>
@@ -9,7 +9,8 @@
                 <a onclick={ clearFilters } id="clear-filters">CLEAR&nbsp;FILTERS&nbsp;<i class="fa fa-times"></i></a>
             </div>
         </div>
-        <div class="col-md-5 col-xs-12">
+        <div class="col-md-7 col-xs-12">
+
             <div class="col-view-all-schedule">
                 <form action="{ base_url+'mine/' }" method="POST" if={ mine }>
                     <input type="hidden" name="goback" value="1" />
@@ -20,6 +21,21 @@
                     <button type="submit" class="btn btn-default view-all-schedule">View&nbsp;/&nbsp;Print&nbsp;Full&nbsp;Schedule</button>
                 </form>
             </div>
+              <div class="col-sync-calendar-own" if={ mine }>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default">Sync to Calendar</button>
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a data-target="#" class="link-google-sync" id="link_google_sync"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>&nbsp;Google&nbsp;sync</a></li>
+                                    <li><a data-target="#" class="link-google-unsync" id="link_google_unsync"><i class="fa fa-calendar-times-o" aria-hidden="true"></i>&nbsp;Google&nbsp;unsync</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a data-target="#" class="link-export-ics" id="link_export_ics"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>&nbsp;Export&nbsp;ICS</a></li>
+                                </ul>
+                             </div>
+                        </div>
             <div class="col-switch-schedule">
                 <button if={ summit.current_user !== null } type="button" class="btn btn-primary pull-right switch_schedule full">
                     <span class="glyphicon glyphicon-calendar"></span>&nbsp;<span class="content">Switch&nbsp;to&nbsp;My&nbsp;Schedule</span>
@@ -227,7 +243,7 @@
         });
 
         doFilter() {
-            var own    = this.summit.current_user !== null && $('.switch_schedule').hasClass('full') === false;
+            var own     = this.summit.current_user !== null && $('.switch_schedule').hasClass('full') === false;
             var filters =
             {
                 track_groups : $('#ddl_track_groups').val(),

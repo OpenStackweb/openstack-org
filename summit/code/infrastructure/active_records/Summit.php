@@ -606,6 +606,18 @@ final class Summit extends DataObject implements ISummit
     }
 
     /**
+     * @return null|string
+     */
+    public function getTimeZoneName(){
+        $time_zone_id = $this->TimeZone;
+        if (empty($time_zone_id)) {
+            return null;
+        }
+        $time_zone_list = timezone_identifiers_list();
+        return isset($time_zone_list[$time_zone_id]) ? $time_zone_list[$time_zone_id]:null;
+    }
+
+    /**
      * @param $value
      * @param $format
      * @return null|string

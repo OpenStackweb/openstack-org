@@ -40,6 +40,7 @@
         this.events             = opts.events;
         this.summit_id          = opts.summit_id;
         this.should_show_venues = opts.should_show_venues
+        this.is_logged_user     = opts.is_logged_user;
         this.view               = 'days';
         this.base_url           = opts.base_url;
         var self                = this;

@@ -21,7 +21,9 @@
         var self                      = this;
 
         this.on('mount', function(){
-            $(document).off("click", ".main-event-content").on( "click", ".icon-event-action", function(e) {
+
+            $(document).off("click", ".icon-event-action").on( "click", ".icon-event-action", function(e) {
+                console.log('my schedule pressed ...');
                 var event_id = $(this).data('event-id');
                 var event    = self.dic_events[event_id];
                 if($(this).hasClass('foreign')){
@@ -45,10 +47,100 @@
                     return false;
                 }
             });
+
+            $(document).on('click', '#link_google_sync', function() {
+                console.log('clicked link_google_sync');
+                var selected_checkboxes  = $('.select-event-chk:checkbox:checked');
+                if(selected_checkboxes.length == 0){
+                    sweetAlert("Oops...", "you must select at least one event!", "error");
+                    return true;
+                }
+
+                var selected_events = [];
+                selected_checkboxes.each(function(){
+                    var event_id = $(this).data('event-id');
+                    var event    = self.dic_events[event_id];
+                    if(event.gcal_id != '' && event.gcal_id != null){
+                        sweetAlert("Oops...", "you selected one or more events that are already synched!", "error");
+                        return true;
+                    }
+                    selected_events.push(event);
+                });
+
+                if(!GoogleCalendarApi.isAuthorized()){
+                    GoogleCalendarApi.doUserAuth(function(){
+                        GoogleCalendarApi.addEvents(selected_events, self.addEventCallback);
+                        selected_checkboxes.prop( "checked", false );
+                    });
+                    return true;
+                }
+                GoogleCalendarApi.addEvents(selected_events, self.addEventCallback);
+                selected_checkboxes.prop( "checked", false );
+                return true;
+            });
+
+             $(document).on('click', '#link_google_unsync', function() {
+                console.log('clicked link_google_unsync');
+                var selected_checkboxes  = $('.select-event-chk:checkbox:checked');
+                if(selected_checkboxes.length == 0){
+                    sweetAlert("Oops...", "you must select at least one event!", "error");
+                    return true;
+                }
+
+                var selected_events = [];
+                selected_checkboxes.each(function(){
+                    var event_id = $(this).data('event-id');
+                    var event    = self.dic_events[event_id];
+                    if(event.gcal_id == '' || event.gcal_id == null){
+                        sweetAlert("Oops...", "you selected one or more events that are not synched!", "error");
+                        return true;
+                    }
+                    selected_events.push(event);
+                });
+
+                if(!GoogleCalendarApi.isAuthorized()){
+                    GoogleCalendarApi.doUserAuth(function(){
+                        GoogleCalendarApi.removeEvents(selected_events, self.removeEventCallback);
+                         selected_checkboxes.prop( "checked", false );
+                    });
+                    return true;
+                }
+                GoogleCalendarApi.removeEvents(selected_events, self.removeEventCallback);
+                selected_checkboxes.prop( "checked", false );
+                return true;
+            });
+
+            $(document).on('click', '#link_export_ics', function() {
+                console.log('clicked link_export_ics');
+                var selected_checkboxes  = $('.select-event-chk:checkbox:checked');
+                if(selected_checkboxes.length == 0){
+                    sweetAlert("Oops...", "you must select at least one event!", "error");
+                    return true;
+                }
+                var selected_events = [];
+                selected_checkboxes.each(function(){
+                    var event_id = $(this).data('event-id');
+                    selected_events.push(event_id);
+                });
+                var url = 'api/v1/summits/@SUMMIT_ID/schedule/export/ics';
+                url     = url.replace('@SUMMIT_ID', self.summit.id)+'?events_id='+selected_events.join();
+
+                window.open(url,"", "width=0,height=0,menubar=no,location=no,resizable=no,scrollbars=no,status=no");
+                return true;
+            });
+
             // show event details handler (jquery)
             $(document).off("click", ".main-event-content").on( "click", ".main-event-content", function(e) {
 
-                if($(e.target).is('.icon-event-action, .myschedule-icon')){
+               if($(e.target).is('.icon-event-action, .myschedule-icon')){
+                    return false;
+               }
+
+                if($(e.target).is('.synch-container, .select-event-chk')){
+                    return true;
+                }
+
+                if($(e.target).is('.synch-container, .sync-icon')){
                     return false;
                 }
 
@@ -86,26 +178,60 @@
                 return false;
             });
 
-            $(document).off("click",".gcal-synch").on("click",".gcal-synch", function(e){
+            $(document).off("click",".sync-icon").on("click",".sync-icon", function(e){
                 e.preventDefault();
                 e.stopPropagation();
 
-                var event_id = $(e.currentTarget).parents('.main-event-content').attr('data-event-id');
-                var event    = self.dic_events[event_id];
-                event.location = self.getSummitLocation(event);
+                var event_id    = $(e.currentTarget).parents('.main-event-content').attr('data-event-id');
+                var event       = self.dic_events[event_id];
+                event.location  = self.getSummitLocation(event);
+                selected_events = [event];
 
-                if($(this).hasClass('foreign')){
-                    // synch with google cal
-                    self.schedule_api.googleCalSynch(self.summit.id, event);
-                    return false;
+                if($(this).hasClass('icon-sync-event')){
+                    // check auth
+                    if(!GoogleCalendarApi.isAuthorized()){
+                            GoogleCalendarApi.doUserAuth(function(){
+                                GoogleCalendarApi.removeEvents(selected_events, self.removeEventCallback);
+                            });
+                            return false;
+                    }
+                    GoogleCalendarApi.removeEvents(selected_events, self.removeEventCallback);
                 }
-                if($(this).hasClass('own')){
-                    // unsynch with google
-                    self.schedule_api.googleCalUnSynch(self.summit.id, event);
-                    return false;
+                if($(this).hasClass('icon-unsync-event')){
+                    // check auth
+                    if(!GoogleCalendarApi.isAuthorized()){
+                        GoogleCalendarApi.doUserAuth(function(){
+                            GoogleCalendarApi.addEvents(selected_events, self.addEventCallback);
+                        });
+                        return false;
+                     }
+                     GoogleCalendarApi.addEvents(selected_events, self.addEventCallback);
                 }
+                return false;
             });
 
+        });
+
+        addEventCallback(response, event){
+            event.gcal_id = response.result.id;
+            console.log(" event.id "+event.id+" cal id "+response.result.id);
+            self.schedule_api.googleCalSynch(event);
+        }
+
+        removeEventCallback(response, event){
+            self.schedule_api.googleCalUnSynch(event);
+        }
+
+        this.schedule_api.on('googleEventSynchSaved', function(event){
+            var container    = $('.icon-event-synched[data-event-id="'+event.id+'"]');
+            var synch_button = $('.sync-icon',container);
+            if (synch_button.hasClass('icon-unsync-event')) {
+                synch_button.removeClass('icon-unsync-event').addClass('icon-sync-event');
+                synch_button.attr('title','Syncronized');
+                return;
+            }
+            synch_button.removeClass('icon-sync-event').addClass('icon-unsync-event');
+            synch_button.attr('title','Unsyncronized');
         });
 
         this.schedule_api.on('beforeEventsRetrieved', function(){
@@ -118,19 +244,15 @@
 
             var myschedule_container = self.summit.current_user !== null ? '<div class="col-sm-3 my-schedule-container">'+
             '<span class="icon-event-action">'+
-            '<i class="fa fa-plus-circle myschedule-icon"></i>&nbsp;My&nbsp;schedule</span>'+
+            '<i class="fa fa-plus-circle myschedule-icon"></i>&nbsp;My&nbsp;schedule'+
+            '</span>'+
             '</div>' : '';
 
-            var cal_synch_container = self.summit.current_user !== null ? '<div class="col-md-2 gcal-synch-container">'+
-            '<div class="btn-group">'+
-            '<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'+
-            'Synch to Cal'+
-            '</button>'+
-            '<div class="dropdown-menu">'+
-            '<a class="dropdown-item gcal-synch" href="#"><i class="fa fa-check-circle gcal-icon"></i>&nbsp;Google&nbsp;synch</a><br>'+
-            '<a class="dropdown-item export_event search-link" href="">Export&nbsp;ICS</a>'+
-            '</div>'+
-            '</div>'+
+            var cal_synch_container = self.summit.current_user !== null ? '<div style="display:none" class="col-md-2 synch-container">'+
+            '<span class="icon-event-synched">'+
+            '<i class="fa fa-refresh sync-icon" title="" aria-hidden="true"></i>&nbsp;Sync&nbsp;'+
+            '</span>'+
+            '<input type="checkbox" title="select event" class="select-event-chk"/>'+
             '</div>' : '';
 
             var event_template = $(
@@ -215,24 +337,21 @@
             if(self.summit.current_user !== null ){
                 // MY SCHEDULE
                 event_directives['i.myschedule-icon@class+']             = function(arg){ return arg.item.own ? ' icon-own-event':' icon-foreign-event'; };
-                event_directives['span.icon-event-action@id']            = function(arg){ return 'event_myschedule_action_'+arg.item.id};
+                event_directives['span.icon-event-action@id']            = function(arg){ return 'event_myschedule_action_'+arg.item.id; };
                 event_directives['span.icon-event-action@title']         = function(arg){ return arg.item.own ? 'remove from my schedule':'add to my schedule'; };
                 event_directives['span.icon-event-action@data-event-id'] = function(arg){
-                    var item = arg.item;
-                    self.dic_events[item.id] = item;
-                    return item.id;
-                };
-                // GOOGLE CALENDAR SYNCH
-                event_directives['i.gcal-icon@class+']              = function(arg){ return arg.item.gcal_id ? ' icon-own-event':' icon-foreign-event'; };
-                event_directives['a.gcal-synch@title']              = function(arg){ return arg.item.gcal_id ? 'unsynch from google calendar':'synch with google calendar'; };
-                event_directives['a.gcal-synch@data-event-id']      = function(arg){ return arg.item.id; };
+                                                                                               var item = arg.item;
+                                                                                               self.dic_events[item.id] = item;
+                                                                                               return item.id;
+                                                                                        };
+                event_directives['span.icon-event-action@class+']        = function(arg){ return arg.item.own ? ' own':' foreign'; };
 
-                event_directives['a.gcal-synch@class+']             = function(arg){ return arg.item.gcal_id ? ' own':' foreign'; };
-                event_directives['span.icon-event-action@class+']   = function(arg){ return arg.item.own ? ' own':' foreign'; };
-                event_directives['a.export_event@href']             = function(arg){
-                                                                        var event_id = +arg.item.id;
-                                                                        return self.parent.base_url+'events/'+event_id+'/export_ics';
-                                                                      };
+                // GOOGLE CALENDAR SYNCH
+                event_directives['i.sync-icon@title']                    = function(arg){ return arg.item.gcal_id != ''  && arg.item.gcal_id != null ? 'Syncronized':'Unsyncronized'; };
+                event_directives['i.sync-icon@class+']                   = function(arg){ return arg.item.gcal_id != ''  && arg.item.gcal_id != null ? ' icon-sync-event':' icon-unsync-event'; };
+                event_directives['span.icon-event-synched@data-event-id']= function(arg){ return arg.item.id; };
+                event_directives['input.select-event-chk@id']            = function(arg){ return 'select_event_chk_'+ arg.item.id; };
+                event_directives['input.select-event-chk@data-event-id'] = function(arg){ return arg.item.id; };
             }
 
             var directives = {
@@ -250,18 +369,6 @@
         this.schedule_filters.on('scheduleFiltersChanged', function(filters){
             self.current_filter = filters;
             self.applyFilters();
-        });
-
-        this.schedule_api.on('googleEventSynchSaved', function(event_id, cal_event_id){
-            self.dic_events[event_id].gcal_id = cal_event_id;
-            var synch_button = $('.gcal-synch[data-event-id="'+event_id+'"]');
-            if (synch_button.hasClass('foreign')) {
-                synch_button.removeClass('foreign').addClass('own');
-                $('.gcal-icon',synch_button).removeClass('icon-foreign-event').addClass('icon-own-event');
-            } else {
-                synch_button.removeClass('own').addClass('foreign');
-                $('.gcal-icon',synch_button).removeClass('icon-own-event').addClass('icon-foreign-event');
-            }
         });
 
         isFilterEmpty() {
@@ -300,7 +407,14 @@
 
         applyFilters(){
             $('.event-row').show();
+            // show select checkbox only if my schedule
+            if(self.current_filter.own)
+                $('.synch-container').show();
+            else
+            $('.synch-container').hide();
+
             if(!self.isFilterEmpty()){
+
                     for(var e of self.events){
                         var show = true;
                         //track groups
@@ -330,22 +444,6 @@
                         $('#event_'+e.id).show();
                     }
             }
-        }
-
-        serializeObject(form) {
-            var o = {};
-            var a = form.serializeArray();
-            $.each(a, function() {
-                if (o[this.name] !== undefined) {
-                    if (!o[this.name].push) {
-                        o[this.name] = [o[this.name]];
-                    }
-                    o[this.name].push(this.value || '');
-                } else {
-                    o[this.name] = this.value || '';
-                }
-            });
-            return o;
         }
 
      </script>
