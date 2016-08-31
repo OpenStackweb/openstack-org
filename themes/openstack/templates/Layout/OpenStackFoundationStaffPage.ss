@@ -1,7 +1,7 @@
 <h1>The OpenStack Foundation</h1>
 $Content
 <% if OpenStackFoundationStaffMembers %>
-    <h2 class="span-24 last">Open Stack Foundation Staff</h2>
+    <h2 class="span-24 last">OpenStack Foundation Staff</h2>
     <% loop OpenStackFoundationStaffMembers %>
           <% include OpenStackFoundationStaffPage_Member %>
     <% end_loop %>
