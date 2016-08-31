@@ -8,15 +8,17 @@
 
     <div class="presentation-app-body">
         <div class="container">
-            <h1>Would you like to speak at the OpenStack Summit?</h1>
+            <h1>Call for Presentations is over. What now?</h1>
 
-            <p>Here are three steps you should take as a potential speaker:</p>
+            <p>Do you fall into one of these categories?</p>
 
             <ul class="submit-steps">
-                <li><span>1</span> <a href="summit/barcelona-2016/categories/" target="_blank">Review the list of Summit Categories &amp; Tracks.</a></li>
-                <li><span>2</span> <a href="#process">Learn about the selection process.</a></li>
-                <li><span>3</span> <a href="#submit">Submit your session proposal below. (Limit of 3 per speaker)</a></li>
+                <li><span>1</span> Interested in submitting an abstract for a 10 min. TechTalk via #vBrownBag.</a></li>
+                <li><span>2</span> A Summit sponsored speaker or demo theater presenter that was invited to submit an abstract.</li>
+                <li><span>3</span> A leader of a Working Group or BoF that was invited to submit a proposal.</li>
             </ul>
+            
+            <p>If you fall into one of these categories, please log in below.</p>
 
             <hr/>
             <a id="submit"></a>
