@@ -69,9 +69,6 @@ gridfieldajaxrefresh/*
 gridfieldajaxrefresh
 reports/
 siteconfig/
-gridfieldextensions/*
-gridfieldajaxrefresh/*
-gridfieldajaxrefresh
 *bundle.js
 .vagrant/
 puppet/certs/ssl_certs
@@ -87,4 +84,3 @@ translatable/
 silverstripe-green/
 silverstripe-serialised-dbfields/
 autocomplete/
-.DS_Store
