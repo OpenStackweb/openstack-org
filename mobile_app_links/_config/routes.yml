@@ -1,0 +1,7 @@
+---
+Name: mobile_app_links
+After: 'framework/routes#coreroutes'
+---
+Director:
+  rules:
+    '.well-known': 'MobileAppLinksController'
