@@ -99,10 +99,7 @@
                     Getting all team members together throughout the year allows them to build the amount of shared understandings and trust that is necessary to successfully cooperate and achieve team objectives over the next 6 months.
                 </p>
                 <p>
-                    From a return on investment perspective, 10 contributors sent to the event will be a lot more productive than 11 contributors not sent to the event -- the cost of sending contributors to these events is offset by the boost in productivity and team alignment they gain for the next 6 months.
-                </p>
-                <p>
-                    Compared to other Foundation events, the PTG’s are organized in cost-effective locations and closer to the center of mass of contributors, in order to keep the cost of sending contributors there under control.
+                    PTG’s are organized in cost-effective transportation hubs in order to minimize the expense of sending contributors. At the same time, we aim to maximize the ability of contributors to work through their project objectives in an environment that is focused towards work and productivity.
                 </p>
             </div>
         </div>
