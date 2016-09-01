@@ -34,10 +34,7 @@ var GoogleCalendarApi = (function () {
     }
 
     function loadCalendarApi() {
-        gapi.client.load('calendar', 'v3');
-        if(authCallback != null){
-            authCallback();
-        }
+        gapi.client.load('calendar', 'v3', authCallback);
         console.log('google calendar api v3 loaded!');
     }
 
@@ -54,16 +51,16 @@ var GoogleCalendarApi = (function () {
 
     my.checkAuth = function () {
         console.log('GoogleCalendarApi.checkAuth');
-        gapi.auth.authorize(
-            {
+        gapi.auth.authorize({
                 'client_id': this.client_id,
                 'scope': scopes.join(' '),
-                'immediate': true
-            }, handleAuthResult);
+                'immediate': true},
+        handleAuthResult);
     };
 
     my.doUserAuth = function(callback){
         authCallback = callback;
+        var self     = this;
         swal({
             title: "Google Calendar Auth",
             text: "Authorize access to Google Calendar API ?",
@@ -73,9 +70,11 @@ var GoogleCalendarApi = (function () {
             confirmButtonColor: "#DD6B55",
             confirmButtonText: "Authorize",
         }).then(function() {
-            gapi.auth.authorize(
-                {client_id: this.client_id, scope: scopes.join(' '), immediate: false},
-                handleAuthResult);
+            gapi.auth.authorize({
+                client_id: self.client_id,
+                scope: scopes.join(' '),
+                immediate: false
+            },handleAuthResult);
             return false;
         });
     }

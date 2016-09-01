@@ -21,11 +21,14 @@
         var self                      = this;
 
         this.on('mount', function(){
-
+            // add/remove to my schedule
             $(document).off("click", ".icon-event-action").on( "click", ".icon-event-action", function(e) {
-                console.log('my schedule pressed ...');
+
+                console.log('my schedule icon pressed ...');
+
                 var event_id = $(this).data('event-id');
                 var event    = self.dic_events[event_id];
+
                 if($(this).hasClass('foreign')){
                     // add to my schedule
                     self.schedule_api.addEvent2MySchedule(self.summit.id, event.id);
@@ -37,13 +40,18 @@
                     return false;
                 }
                 if($(this).hasClass('own')){
-                    // add to my schedule
+                    // remove to my schedule
                     self.schedule_api.removeEventFromMySchedule(self.summit.id, event.id);
                     $(this).removeClass('own');
                     event.own  = false;
                     $('.myschedule-icon',$(this)).removeClass('icon-own-event');
                     $('.myschedule-icon',$(this)).addClass('icon-foreign-event');
                     $(this).addClass('foreign');
+                    //check if we are on my schedule view
+                    if(self.current_filter.own){
+                        //fade animation
+                        $('#event_'+event_id).fadeOut({ duration: 1000, queue: false }).slideUp(200);
+                    }
                     return false;
                 }
             });

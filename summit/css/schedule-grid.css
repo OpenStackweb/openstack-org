@@ -234,10 +234,11 @@ i.collapse-nav {
     border: none;
     border-radius: 4px;
     margin: 0;
+    height: 53px;
 }
 
 .view-select-container {
-    padding: 15px;
+    padding: 1.1%;
 }
 
 .track-nav-container {
