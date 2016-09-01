@@ -116,12 +116,13 @@
                 <p>
                     Most questions can be answered by reading the <a href="../PTGfaq/">PTG FAQs</a>. Still more questions? Email <a href="mailto:ptg@openstack.org">ptg@openstack.org</a> or add your email below to be kept up to date with the latest about Project Teams Gathering.
                 </p>
-                <form class="form-inline ptg-form">
+                <script type="text/javascript" src="https://app.e2ma.net/app2/audience/tts_signup_refresh/1821066/dc3896463a1fcdd2f57f993be48d29f6/1771360/"></script><div id="load_check" class="signup_form_message" >This form needs Javascript to display, which your browser doesn't support. <a href="https://app.e2ma.net/app2/audience/signup/1821066/1771360/"> Sign up here</a> instead </div><script type="text/javascript">signupFormObj.drawForm();</script>
+                <!-- <form class="form-inline ptg-form">
                     <div class="form-group">
                         <input type="email" class="ptg-input" placeholder="email address">
                     </div>
                     <button type="submit" class="btn inline-btn">Submit</button>
-                </form>
+                </form>-->
             </div>
         </div>
     </div>
