@@ -711,6 +711,13 @@ SQL;
         return $summit->convertDateFromUTC2TimeZone($value);
     }
 
+    /**
+     * @return string
+     */
+    public function getStartDateUTC(){
+        return  $this->getField('StartDate');
+    }
+
     public function getStartTime()
     {
         $date = new Datetime($this->getStartDate());
@@ -754,6 +761,14 @@ SQL;
         if(is_null($summit)) throw new InvalidArgumentException('summit not found!');
         $value = $this->getField('EndDate');
         return $summit->convertDateFromUTC2TimeZone($value);
+    }
+
+    /**
+     * @return string
+     */
+    public function getEndDateUTC()
+    {
+        return $this->getField('EndDate');
     }
 
     public function getEndTime()

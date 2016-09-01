@@ -21,21 +21,24 @@
                     <button type="submit" class="btn btn-default view-all-schedule">View&nbsp;/&nbsp;Print&nbsp;Full&nbsp;Schedule</button>
                 </form>
             </div>
-              <div class="col-sync-calendar-own" if={ mine }>
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-default">Sync to Calendar</button>
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="caret"></span>
-                                <span class="sr-only">Toggle Dropdown</span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a data-target="#" class="link-google-sync" id="link_google_sync"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>&nbsp;Google&nbsp;sync</a></li>
-                                    <li><a data-target="#" class="link-google-unsync" id="link_google_unsync"><i class="fa fa-calendar-times-o" aria-hidden="true"></i>&nbsp;Google&nbsp;unsync</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a data-target="#" class="link-export-ics" id="link_export_ics"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>&nbsp;Export&nbsp;ICS</a></li>
-                                </ul>
-                             </div>
-                        </div>
+            <div class="col-select-all-calendar-own" if={ mine }>
+                <input type="checkbox" id="chk_select_all" title="select/unselect all events"/>
+            </div>
+            <div class="col-sync-calendar-own" if={ mine }>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default">Sync to Calendar</button>
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a data-target="#" class="link-google-sync" id="link_google_sync"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>&nbsp;Google&nbsp;sync</a></li>
+                        <li><a data-target="#" class="link-google-unsync" id="link_google_unsync"><i class="fa fa-calendar-times-o" aria-hidden="true"></i>&nbsp;Google&nbsp;unsync</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a data-target="#" class="link-export-ics" id="link_export_ics"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>&nbsp;Export&nbsp;ICS</a></li>
+                    </ul>
+                </div>
+            </div>
             <div class="col-switch-schedule">
                 <button if={ summit.current_user !== null } type="button" class="btn btn-primary pull-right switch_schedule full">
                     <span class="glyphicon glyphicon-calendar"></span>&nbsp;<span class="content">Switch&nbsp;to&nbsp;My&nbsp;Schedule</span>
@@ -104,6 +107,12 @@
                 }
                 $(this).toggleClass('active');
                 event.preventDefault();
+            });
+
+            $(document).on('click', '#chk_select_all' , function(){
+                var visible_checkboxes = $(".select-event-chk:visible");
+                console.log('checked '+visible_checkboxes.length+' events');
+                visible_checkboxes.prop('checked', $(this).is(':checked'));
             });
 
             $('#ddl_track_groups').chosen({  width: '100%'});

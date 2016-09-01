@@ -95,37 +95,39 @@ var GoogleCalendarApi = (function () {
 
         if(event.gcal_id != '' && event.gcal_id != null) return;
 
-        var cal_event = {
-            'summary': event.title,
-            'location': event.location,
-            'description': $(event.abstract).text(),
-            'start': {
-                'dateTime': event.start_datetime.replace(' ', 'T'),
-                'timeZone': event.time_zone_id
-            },
-            'end': {
-                'dateTime': event.end_datetime.replace(' ', 'T'), //'2016-05-15T14:00:00-07:00'
-                'timeZone': event.time_zone_id
-            },
-            'reminders': {
-                'useDefault': false,
-                'overrides': [
-                    {'method': 'email', 'minutes': 24 * 60},
-                    {'method': 'popup', 'minutes': 10}
-                ]
-            }
-        };
+        setTimeout(function(){
+            var cal_event = {
+                'summary': event.title,
+                'location': event.location,
+                'description': $(event.abstract).text(),
+                'start': {
+                    'dateTime': event.start_datetime.replace(' ', 'T'),
+                    'timeZone': event.time_zone_id
+                },
+                'end': {
+                    'dateTime': event.end_datetime.replace(' ', 'T'), //'2016-05-15T14:00:00-07:00'
+                    'timeZone': event.time_zone_id
+                },
+                'reminders': {
+                    'useDefault': false,
+                    'overrides': [
+                        {'method': 'email', 'minutes': 24 * 60},
+                        {'method': 'popup', 'minutes': 10}
+                    ]
+                }
+            };
 
-        gapi.client.calendar.events.insert({
-            'calendarId': 'primary',
-            'resource': cal_event
-        }).then(function(response) {
-            if(callback != null){
-                callback(response, event);
-            }
-        }, function(reason) {
-            console.log('Error: ' + reason.result.error.message);
-        });
+            gapi.client.calendar.events.insert({
+                'calendarId': 'primary',
+                'resource': cal_event
+            }).then(function(response) {
+                if(callback != null){
+                    callback(response, event);
+                }
+            }, function(reason) {
+                console.log('Error: ' + reason.result.error.message);
+            });
+        }, 500);
     };
 
     my.removeEvents = function(events, callback){
@@ -141,17 +143,18 @@ var GoogleCalendarApi = (function () {
             console.log('you must be authorized to add events!');
             return;
         }
-
-        gapi.client.calendar.events.delete({
-            'calendarId': 'primary',
-            'eventId': event.gcal_id
-        }).then(function (response) {
-            if (callback != null) {
-                callback(response, event);
-            }
-        }, function (reason) {
-            console.log('Error: ' + reason.result.error.message);
-        });
+        setTimeout(function(){
+            gapi.client.calendar.events.delete({
+                'calendarId': 'primary',
+                'eventId': event.gcal_id
+            }).then(function (response) {
+                if (callback != null) {
+                    callback(response, event);
+                }
+            }, function (reason) {
+                console.log('Error: ' + reason.result.error.message);
+            });
+        }, 500);
     };
 
     return my;

@@ -49,6 +49,7 @@
             });
 
             $(document).on('click', '#link_google_sync', function() {
+
                 console.log('clicked link_google_sync');
                 var selected_checkboxes  = $('.select-event-chk:checkbox:checked');
                 if(selected_checkboxes.length == 0){

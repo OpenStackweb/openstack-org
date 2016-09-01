@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-
+use \Eluceo\iCal\Component\Calendar;
 /**
  * Class SummitAppScheduleApi
  */
@@ -893,13 +893,8 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi
             if (is_null($event_ids)) return $this->validationError("missing events_id param");
 
             $event_ids = explode(',', $event_ids);
-
-            $ical = "BEGIN:VCALENDAR
-PRODID:-//hacksw/handcal//NONSGML v1.0//EN
-VERSION:2.0
-CALSCALE:GREGORIAN
-METHOD:PUBLISH".PHP_EOL;
-
+            // https://www.ietf.org/rfc/rfc2445.txt
+            $vCalendar = new Calendar('www.openstack.org');
             foreach ($event_ids as $event_id) {
                 $event = $this->summitevent_repository->getById($event_id);
                 if (is_null($event))
@@ -907,24 +902,29 @@ METHOD:PUBLISH".PHP_EOL;
 
                 if (!$event->isPublished())
                     throw new EntityValidationException(sprintf("event id %s does not belongs to schedule!", $event->getIdentifier()));
-
-                $ical.= "BEGIN:VEVENT".PHP_EOL.
-                "UID:" . md5(uniqid(mt_rand(), true)) . "event".PHP_EOL.
-                "DTSTAMP:" . gmdate('Ymd') . 'T' . gmdate('His') . "Z".PHP_EOL.
-                "DTSTART:" . date('Ymd', strtotime($event->getField('StartDate'))) . "T" . date('His', strtotime($event->getField('StartDate'))) . "Z".PHP_EOL.
-                "DTEND:" . date('Ymd', strtotime($event->getField('EndDate'))) . "T" . date('His', strtotime($event->getField('EndDate'))) . "Z".PHP_EOL.
-                "SUMMARY:" . $event->Title .PHP_EOL.
-                "DESCRIPTION:" . strip_tags($event->ShortDescription) .PHP_EOL.
-                "X-ALT-DESC:" . $event->ShortDescription.PHP_EOL.
-                "END:VEVENT".PHP_EOL;
+                $vEvent = new \Eluceo\iCal\Component\Event(md5(uniqid(mt_rand(), true)) . "event");
+                $vEvent
+                    ->setCreated(new \DateTime())
+                    ->setDtStart(new \DateTime($event->getStartDateUTC()))
+                    ->setDtEnd(new \DateTime($event->getEndDateUTC()))
+                    ->setNoTime(false)
+                    ->setSummary( $event->Title )
+                    ->setDescription(strip_tags($event->ShortDescription))
+                    ->setDescriptionHTML($event->ShortDescription);
+                if($event->getLocation()){
+                    $location = $event->getLocation();
+                    $venue    = $location;
+                    if($location->getTypeName() == SummitVenueRoom::TypeName){
+                        $venue = $location->getVenue();
+                    }
+                    $vEvent->setLocation($location->getFullName(), $location->getFullName(), sprintf("%s;%s", $venue->getLat(), $venue->getLng()));
+                }
+                $vCalendar->addComponent($vEvent);
             }
-
-            $ical .= "END:VCALENDAR";
-            //set correct content-type-header
-            header('Content-type: text/calendar; charset=utf-8');
-            header('Content-Disposition: inline; filename=event-' . implode('-',$event_ids) . '.ics');
-            echo $ical;
-            exit();
+            $response = new SS_HTTPResponse($vCalendar->render(), 200);
+            $response->addHeader("Content-type","text/calendar; charset=utf-8");
+            $response->addHeader("Content-Disposition","inline; filename=event-" . implode('-',$event_ids) . ".ics");
+            return $response;
 
         } catch (EntityValidationException $ex1) {
             SS_Log::log($ex1, SS_Log::WARN);

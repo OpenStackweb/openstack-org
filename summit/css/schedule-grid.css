@@ -852,6 +852,16 @@ h2.subtitle {
     padding-right: 15px;
 }
 
+.col-select-all-calendar-own {
+    margin:0;
+    padding: 0;
+    width: auto;
+    float: right;
+    padding-right: 15px;
+    padding-top: 10px;
+}
+
+
 .col-sync-calendar-own .btn-default{
     height: 38px;
 }
