@@ -1,0 +1,107 @@
+/*PTG landing*/
+.ptg-hero {
+  text-align: center;
+  padding: 60px 0 60px;
+  background: #248EC7;
+  color: white; }
+  .ptg-hero h4 {
+    margin: 0;
+    text-transform: uppercase;
+    font-size: 1em;
+    font-weight: 700; }
+  .ptg-hero h1 {
+    margin-top: 5px;
+    color: white; }
+  .ptg-hero p strong {
+    display: block;
+    font-weight: 600; }
+  .ptg-hero hr {
+    margin-top: 60px;
+    margin-bottom: 0; }
+
+.ptg-body {
+  padding: 10px 0 60px; }
+  .ptg-body .col-sm-6 {
+    padding: 0 40px; }
+  .ptg-body h2 {
+    font-size: 1.6em;
+    margin: 40px 0 10px; }
+  .ptg-body .ptg-who {
+    background: #edf2f7;
+    padding: 60px 0;
+    margin: 60px 0 30px; }
+    .ptg-body .ptg-who .who-icons {
+      text-align: center; }
+    .ptg-body .ptg-who i {
+      font-size: 55px; }
+      .ptg-body .ptg-who i.fa-check-circle {
+        color: #7ED321; }
+      .ptg-body .ptg-who i.fa-times-circle {
+        color: #BE342B; }
+    .ptg-body .ptg-who h2 {
+      text-align: center;
+      margin: 10px 0 30px; }
+    .ptg-body .ptg-who .who-group {
+      text-align: left;
+      padding: 5px 20px;
+      background: #2A4E68;
+      color: white;
+      text-transform: uppercase;
+      font-size: 0.9em;
+      font-weight: 300;
+      display: inline-block;
+      margin: 20px 0 10px; }
+      .ptg-body .ptg-who .who-group.first {
+        margin-top: 0; }
+    .ptg-body .ptg-who p {
+      text-align: left; }
+
+@media (max-width: 767px) {
+  .ptg-body .ptg-who .col-sm-6 {
+    padding: 0 15px; }
+  .ptg-body i.fa-times-circle {
+    margin-top: 30px; } }
+
+img.ptg-release-timeline {
+  max-width: 100%; }
+
+.ptg-cta {
+  background: #248EC7;
+  padding: 40px 0px 70px;
+  color: white;
+  text-align: center; 
+  margin-bottom: -50px;}
+  .ptg-cta h2 {
+    text-align: center;
+    color: white; }
+  .ptg-cta a {
+    color: white;
+    text-decoration: underline; }
+  .ptg-cta p {
+    color: white; }
+  .ptg-cta form.ptg-form {
+    margin-top: 25px;
+    vertical-align: middle; }
+  .ptg-cta input.ptg-input {
+    padding: 10px;
+    border-radius: 4px;
+    min-width: 350px;
+    border: 1px solid white;
+    margin-right: 10px;
+    text-transform: uppercase;
+    color: #30739C; }
+    .ptg-cta input.ptg-input:focus {
+      outline: 0; }
+  .ptg-cta button.inline-btn {
+    display: inline-block;
+    margin: -1px 0 0 0;
+    padding: 10px;
+    border: 1px solid white;
+    border-radius: 4px;
+    background: transparent;
+    text-transform: uppercase; }
+    .ptg-cta button.inline-btn:hover, .ptg-cta button.inline-btn:focus {
+      background: #30739C;
+      border-color: #30739C;
+      color: white;
+      outline: 0; }
