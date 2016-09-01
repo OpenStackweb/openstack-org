@@ -82,7 +82,10 @@ img.ptg-release-timeline {
   .ptg-cta form.ptg-form {
     margin-top: 25px;
     vertical-align: middle; }
-  .ptg-cta input.ptg-input {
+  .e2ma_signup_form_label, .e2ma_signup_form_required_footnote {
+    visibility:hidden;
+  }
+  .ptg-cta input.ptg-input, .e2ma_signup_form_element input {
     padding: 10px;
     border-radius: 4px;
     min-width: 350px;
@@ -90,9 +93,9 @@ img.ptg-release-timeline {
     margin-right: 10px;
     text-transform: uppercase;
     color: #30739C; }
-    .ptg-cta input.ptg-input:focus {
+    .ptg-cta input.ptg-input:focus, .e2ma_signup_form_element:focus input {
       outline: 0; }
-  .ptg-cta button.inline-btn {
+  .ptg-cta button.inline-btn, .e2ma_signup_form_button{
     display: inline-block;
     margin: -1px 0 0 0;
     padding: 10px;
@@ -100,8 +103,9 @@ img.ptg-release-timeline {
     border-radius: 4px;
     background: transparent;
     text-transform: uppercase; }
-    .ptg-cta button.inline-btn:hover, .ptg-cta button.inline-btn:focus {
+    .ptg-cta button.inline-btn:hover, .ptg-cta button.inline-btn:focus, .e2ma_signup_form_button:hover, .e2ma_signup_form_button:focus {
       background: #30739C;
       border-color: #30739C;
       color: white;
       outline: 0; }
+
