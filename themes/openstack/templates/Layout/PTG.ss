@@ -43,7 +43,7 @@
                 </p>
                 <p>
                     <a href="/images/ptg/ptg-release-timeline.png" target="_blank">
-                        <img class="ptg-release-timeline" src="private-assets/themes/openstack/images/summit-ptg-timeline-revised.png" alt="Project Teams Gathering vs Design Summit">
+                        <img class="ptg-release-timeline" src="/themes/openstack/images/summit-ptg-timeline-revised.png" alt="Project Teams Gathering vs Design Summit">
                     </a>
                 </p>
             </div>
