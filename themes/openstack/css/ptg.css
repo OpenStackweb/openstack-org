@@ -82,8 +82,11 @@ img.ptg-release-timeline {
   .ptg-cta form.ptg-form {
     margin-top: 25px;
     vertical-align: middle; }
-  .e2ma_signup_form_label, .e2ma_signup_form_required_footnote {
-    visibility:hidden;
+  .e2ma_signup_form_label, .e2ma_signup_form_required_footnote, #e2ma_signup_reset_button {
+    display: none;
+  }
+  .e2ma_signup_form_button_row, .e2ma_signup_form_row, .e2ma_signup_form_element {
+    display: inline-block;
   }
   .ptg-cta input.ptg-input, .e2ma_signup_form_element input {
     padding: 10px;
