@@ -111,7 +111,7 @@ final class SummitAdminUI extends DataExtension
         $f->addFieldToTab('Root.Dates', $date = new DatetimeField('RegistrationEndDate', "When does registration end?"));
         $date->getDateField()->setConfig('showcalendar', true);
         $date->getDateField()->setConfig('dateformat', 'dd/MM/yyyy');
-        $f->addFieldToTab('Root.Dates', $date = new DateField('ScheduleDefaultStartDate', "Which start date to show on schedule page?"));
+        $f->addFieldToTab('Root.Dates', $date = new DateField('ScheduleDefaultStartDate', "Default Start Date to show on schedule page?"));
         $date->setConfig('showcalendar', true);
         $date->setConfig('dateformat', 'dd/MM/yyyy');
 
