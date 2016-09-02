@@ -116,9 +116,10 @@
                         token: "{$Token}",
                         event_id: {$Event.ID},
                         event_title: "{$Event.Title}",
-                        event_url: "{$AbsoluteLink}events/{$Event.ID}",
+                        event_url: "{$Event.getLink(show)}",
                         event_description: "{$Event.Description.JS}",
                         event_pic_url: "{$Event.getOGImage}",
+                        tweet: '<%t Summit.TweetText %>'
                     };
                 </script>
                 <share-buttons share_info="{ share_info }"></share-buttons>

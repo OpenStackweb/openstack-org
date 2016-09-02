@@ -2,3 +2,4 @@ en:
   Summit:
     RegistrationLine1: 'Hello {member_name}! Registration for the OpenStack Summit <strong>{summit_name}</strong> is now open <a class="alert-link" href="{summit_registration_link}">Register here</a>.'
     RegistrationLine2: 'Already registered as a Summit Attendee? Please complete your Attendee Registration by going <a href="{confirm_order_link}" class="alert-link">here</a> and adding your Eventbrite Order #.'
+    TweetText: 'Check out this %23OpenStack session I’m attending at the %23OpenStackSummit!'
