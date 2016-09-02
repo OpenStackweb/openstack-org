@@ -60,10 +60,11 @@
         var self               = this;
 
         this.on('mount', function(){
-            var filter_day = $(window).url_fragment('getParam','day');
+
+            var filter_day   = $(window).url_fragment('getParam','day');
             var filter_level = $(window).url_fragment('getParam','level');
             var filter_track = $(window).url_fragment('getParam','track');
-            self.view = 'days';
+            self.view        = 'days';
 
             if(filter_day === null && filter_level === null && filter_track === null){
                 var now    = new Date();
