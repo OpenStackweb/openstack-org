@@ -7,9 +7,9 @@
                 <h4>The First</h4>
                 <h1>Project Team Gatherings</h1>
                 <p>
-                    The first Project Team Gatherings (PTG) will be held in the U.S. late February or early March 2017.
+                    The first Project Teams Gathering (PTG) will be held in Atlanta, Feb 20-24, 2017.
                     <strong>
-                        More information on dates and location to come in August 2016.
+                        More information on registration, location, and hotel discounts coming soon.
                     </strong>
                 </p>
             </div>
