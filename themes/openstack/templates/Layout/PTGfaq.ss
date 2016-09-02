@@ -1,11 +1,12 @@
 </div>
 
+    <!-- Begin Page Content -->
  <div class="ptg-hero">
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
                 <h4>The First</h4>
-                <h1>Project Team Gatherings</h1>
+                <h1>Project Teams Gathering</h1>
                 <p>
                     The first Project Teams Gathering (PTG) will be held in Atlanta, Feb 20-24, 2017.
                     <strong>
