@@ -38,6 +38,7 @@ final class Summit extends DataObject implements ISummit
         'TimeZone'                    => 'Text',
         'StartShowingVenuesDate'      => 'SS_Datetime',
         'MaxSubmissionAllowedPerUser' => 'Int',
+        'ScheduleDefaultStartDate'    => 'Date'
     );
 
     private static $defaults = array
@@ -816,6 +817,13 @@ final class Summit extends DataObject implements ISummit
         AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Locations', $query)->removeAll();
     }
 
+    public function ScheduleDefaultDate(){
+        //'2016-10-26'
+        $date = $this->getField('ScheduleDefaultStartDate');
+        if(empty($date)) return $this->getBeginDateYMD();
+        $date = new DateTime($date);
+        return $date->format('Y-m-d');
+    }
 
     protected function validate()
     {
@@ -840,14 +848,16 @@ final class Summit extends DataObject implements ISummit
             return $valid->error('Time Zone is required!');
         }
 
-        $start_date = $this->SummitBeginDate;
-        $end_date = $this->SummitEndDate;
+        $start_date                = $this->SummitBeginDate;
+        $end_date                  = $this->SummitEndDate;
         $start_showing_venues_date = $this->StartShowingVenuesDate;
+        $default_schedule_date     = $this->ScheduleDefaultStartDate;
 
         if (!is_null($start_date) && !is_null($end_date)) {
-            $start_date = new DateTime($start_date);
-            $end_date = new DateTime($end_date);
+            $start_date                = new DateTime($start_date);
+            $end_date                  = new DateTime($end_date);
             $start_showing_venues_date = new DateTime($start_showing_venues_date);
+            $default_schedule_date     = new DateTime($default_schedule_date);
 
             if ($start_date > $end_date) {
                 return $valid->error('End Date must be greather than Start Date');
@@ -858,10 +868,16 @@ final class Summit extends DataObject implements ISummit
                     return $valid->error('StartShowingVenuesDate should be lower than SummitBeginDate');
                 }
             }
+
+            if(!is_null($default_schedule_date)){
+                if ($default_schedule_date < $start_date || $default_schedule_date > $end_date) {
+                    return $valid->error('ScheduleDefaultStartDate should be between Summit Start/End Date');
+                }
+            }
         }
 
         $start_date = $this->RegistrationBeginDate;
-        $end_date = $this->RegistrationEndDate;
+        $end_date   = $this->RegistrationEndDate;
 
         if (!is_null($start_date) && !is_null($end_date)) {
             $start_date = new DateTime($start_date);

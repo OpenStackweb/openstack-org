@@ -110,6 +110,8 @@
         });
 
         chooseDefaultDate() {
+            var filter_day = self.summit.schedule_default_day;
+            /*
             var filter_day = Object.keys(self.summit.dates)[0];
             for (adate in self.summit.dates) {
                 var date_obj = self.summit.dates[adate];
@@ -117,8 +119,8 @@
                     filter_day = adate;
                     break;
                 }
-            }
-
+            }*/
+            console.log('default day '+ filter_day);
             return filter_day;
         }
 

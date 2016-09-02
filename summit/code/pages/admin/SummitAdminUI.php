@@ -78,43 +78,44 @@ final class SummitAdminUI extends DataExtension
 
         $f->addFieldToTab('Root.Dates', $date = new DatetimeField('SummitBeginDate', "When does the summit begin?"));
         $date->getDateField()->setConfig('showcalendar', true);
-        $date->setConfig('dateformat', 'dd/MM/yyyy');
+        $date->getDateField()->setConfig('dateformat', 'dd/MM/yyyy');
         $f->addFieldToTab('Root.Dates', $date = new DatetimeField('SummitEndDate', "When does the summit end?"));
         $date->getDateField()->setConfig('showcalendar', true);
-        $date->setConfig('dateformat', 'dd/MM/yyyy');
+        $date->getDateField()->setConfig('dateformat', 'dd/MM/yyyy');
         $f->addFieldToTab('Root.Dates', $date = new DatetimeField('StartShowingVenuesDate', "When do you begin showing venues?"));
         $date->getDateField()->setConfig('showcalendar', true);
-        $date->setConfig('dateformat', 'dd/MM/yyyy');
+        $date->getDateField()->setConfig('dateformat', 'dd/MM/yyyy');
 
         $f->addFieldToTab('Root.Dates', $date = new DatetimeField('SubmissionBeginDate', "When do submissions begin?"));
         $date->getDateField()->setConfig('showcalendar', true);
-        $date->setConfig('dateformat', 'dd/MM/yyyy');
+        $date->getDateField()->setConfig('dateformat', 'dd/MM/yyyy');
         $f->addFieldToTab('Root.Dates', $date = new DatetimeField('SubmissionEndDate', "When do submissions end?"));
         $date->getDateField()->setConfig('showcalendar', true);
-        $date->setConfig('dateformat', 'dd/MM/yyyy');
+        $date->getDateField()->setConfig('dateformat', 'dd/MM/yyyy');
 
         $f->addFieldToTab('Root.Dates', $date = new DatetimeField('VotingBeginDate', "When does voting begin?"));
         $date->getDateField()->setConfig('showcalendar', true);
-        $date->setConfig('dateformat', 'dd/MM/yyyy');
+        $date->getDateField()->setConfig('dateformat', 'dd/MM/yyyy');
         $f->addFieldToTab('Root.Dates', $date = new DatetimeField('VotingEndDate', "When does voting end?"));
         $date->getDateField()->setConfig('showcalendar', true);
-        $date->setConfig('dateformat', 'dd/MM/yyyy');
+        $date->getDateField()->setConfig('dateformat', 'dd/MM/yyyy');
         $f->addFieldToTab('Root.Dates', $date = new DatetimeField('SelectionBeginDate', "When do selections begin?"));
         $date->getDateField()->setConfig('showcalendar', true);
-        $date->setConfig('dateformat', 'dd/MM/yyyy');
+        $date->getDateField()->setConfig('dateformat', 'dd/MM/yyyy');
         $f->addFieldToTab('Root.Dates', $date = new DatetimeField('SelectionEndDate', "When do selections end?"));
         $date->getDateField()->setConfig('showcalendar', true);
-        $date->setConfig('dateformat', 'dd/MM/yyyy');
+        $date->getDateField()->setConfig('dateformat', 'dd/MM/yyyy');
         $f->addFieldToTab('Root.Dates', $date = new DatetimeField('RegistrationBeginDate', "When does registration begin?"));
         $date->getDateField()->setConfig('showcalendar', true);
-        $date->setConfig('dateformat', 'dd/MM/yyyy');
+        $date->getDateField()->setConfig('dateformat', 'dd/MM/yyyy');
         $f->addFieldToTab('Root.Dates', $date = new DatetimeField('RegistrationEndDate', "When does registration end?"));
         $date->getDateField()->setConfig('showcalendar', true);
+        $date->getDateField()->setConfig('dateformat', 'dd/MM/yyyy');
+        $f->addFieldToTab('Root.Dates', $date = new DateField('ScheduleDefaultStartDate', "Which start date to show on schedule page?"));
+        $date->setConfig('showcalendar', true);
         $date->setConfig('dateformat', 'dd/MM/yyyy');
 
-
-        $f->addFieldsToTab('Root.Main',
-            new NumericField('MaxSubmissionAllowedPerUser', 'Max. Submission Allowed Per User'));
+        $f->addFieldsToTab('Root.Main', new NumericField('MaxSubmissionAllowedPerUser', 'Max. Submission Allowed Per User'));
 
         $logo_field = new UploadField('Logo', 'Logo');
         $logo_field->setAllowedMaxFileNumber(1);
