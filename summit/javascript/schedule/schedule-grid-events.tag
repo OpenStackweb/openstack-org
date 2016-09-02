@@ -239,6 +239,7 @@
                 synch_button.attr('title','Syncronized');
                 return;
             }
+            event.gcal_id = '';
             synch_button.removeClass('icon-sync-event').addClass('icon-unsync-event');
             synch_button.attr('title','Unsyncronized');
         });
@@ -259,7 +260,7 @@
 
             var cal_synch_container = self.summit.current_user !== null ? '<div style="display:none" class="col-md-2 synch-container">'+
             '<span class="icon-event-synched">'+
-            '<i class="fa fa-refresh sync-icon" title="" aria-hidden="true"></i>&nbsp;Sync&nbsp;'+
+            '<i class="fa fa-refresh sync-icon" title="" style="cursor:pointer" aria-hidden="true"></i>&nbsp;Sync&nbsp;'+
             '</span>'+
             '<input type="checkbox" title="select event" class="select-event-chk"/>'+
             '</div>' : '';

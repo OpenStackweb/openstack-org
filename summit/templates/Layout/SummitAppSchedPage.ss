@@ -173,18 +173,22 @@
     </div>
     <% if CurrentMember %>
         <% if not CurrentMember.isAttendee($Summit.ID)  %>
-            <div class="alert alert-success alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <p><%t Summit.RegistrationLine1 member_name=$CurrentMember.FullName summit_name=$Top.Summit.Title summit_registration_link=$Top.Summit.RegistrationLink %></p>
-                <p><%t Summit.RegistrationLine2 confirm_order_link=$Top.ProfileAttendeeRegistrationLink %></p>
-            </div>
-        <% else %>
-            <div class="row">
-                <div class="col-xs-12 logout-container">
-                    <a class="action btn btn-default" id="login-button" href="/Security/logout/?BackURL={$Top.Link}">Log Out</a>
-                </div>
-            </div>
+            <script>
+                $(function(){
+                    swal({
+                        type: 'info',
+                        html:
+                        '<p><%t Summit.RegistrationLine1 member_name=$CurrentMember.FullName summit_name=$Top.Summit.Title summit_registration_link=$Top.Summit.RegistrationLink %></p>'+
+                        '<p><%t Summit.RegistrationLine2 confirm_order_link=$Top.ProfileAttendeeRegistrationLink %></p>',
+                    });
+                });
+            </script>
         <% end_if %>
+        <div class="row">
+            <div class="col-xs-12 logout-container">
+                <a class="action btn btn-default" id="login-button" href="/Security/logout/?BackURL={$Top.Link}"><i class="fa fa-sign-out" aria-hidden="true"></i>Log Out</a>
+            </div>
+         </div>
     <% else %>
         <div class="row">
             <div class="col-xs-12 login-container">

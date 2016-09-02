@@ -1,2 +1,4 @@
 require('./schedule-my-schedule.tag');
-riot.mount('schedule-my-schedule');
+var schedule_api     = require('./schedule-api.js');
+
+riot.mount('schedule-my-schedule', { schedule_api: schedule_api });

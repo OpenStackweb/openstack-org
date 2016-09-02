@@ -126,7 +126,7 @@ var GoogleCalendarApi = (function () {
             }, function(reason) {
                 console.log('Error: ' + reason.result.error.message);
             });
-        }, 500);
+        }, 600);
     };
 
     my.removeEvents = function(events, callback){
@@ -153,7 +153,7 @@ var GoogleCalendarApi = (function () {
             }, function (reason) {
                 console.log('Error: ' + reason.result.error.message);
             });
-        }, 500);
+        }, 600);
     };
 
     return my;

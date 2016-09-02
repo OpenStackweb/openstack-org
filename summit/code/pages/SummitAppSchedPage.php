@@ -282,9 +282,16 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         $member    = Member::currentUser();
         $goback    = $request->getHeader('Referer') && trim($request->getHeader('Referer'),'/') == trim(Director::absoluteURL($this->Link()),'/')? '1':'';
 
-        if (is_null($this->Summit())) return $this->httpError(404, 'Sorry, summit not found');
+        if (is_null($this->Summit()))
+            return $this->httpError(404, 'Sorry, summit not found');
 
-        if(is_null($member) || !$member->isAttendee($this->Summit()->ID)) return $this->httpError(401, 'You need to login to access your schedule.');
+        if(is_null($member)){
+            return $this->redirect('Security/login?BackURL='.$this->Link('mine'));
+        }
+
+        if(!$member->isAttendee($this->Summit()->ID)){
+            return $this->redirect($this->Link());
+        }
 
         $my_schedule = $member->getSummitAttendee($this->Summit()->ID)->Schedule()->sort(array('StartDate'=>'ASC','Location.Name' => 'ASC'));
 
