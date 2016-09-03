@@ -134,7 +134,7 @@ For a clean installation
     ```
 * This will create a virtual machine with a local mysql sql using the purged dump located here http://219ce3a47922f82273e7-ab6defd935ab43e677f8278246e07e36.r82.cf1.rackcdn.com/dbdump-current.zip
     
-* Site is hosted on nginx under hostheader "local.openstack.org", your local path (site root) is mapped to /var/www/local.openstac.org on guest machine (VM). VM ip is set to "192.168.33.10" so after vm installation you must add following entry to your host file
+* Site is hosted on nginx under hostheader "local.openstack.org", your local path (site root) is mapped to /var/www/local.openstack.org on guest machine (VM). VM ip is set to "192.168.33.10" so after vm installation you must add following entry to your host file
 
    ```
    192.168.33.10 local.openstack.org
