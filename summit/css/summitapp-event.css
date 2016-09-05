@@ -20,7 +20,7 @@
     position: relative;
     top: 0px;
     float: right;
-    width: 420px;
+    width: 100%;
 }
 
 .global-search-container {
@@ -44,18 +44,6 @@
 .title_box {
     /*background-color:#132539;*/
     padding: 30px 0;
-}
-
-.col1 {
-    float: left;
-    width: 55%;
-}
-
-.col2 {
-    float: right;
-    width: 40%;
-    background-color: #eaeaea;
-    padding: 20px;
 }
 
 .title {
@@ -101,7 +89,8 @@
 }
 
 .info {
-
+    background-color: #eaeaea;
+    padding: 20px;
 }
 
 .info_item {
