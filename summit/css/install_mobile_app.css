@@ -17,6 +17,11 @@
     padding-bottom: 5%;
 }
 
+.mobile-message p {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
 #install-app-overlay h3{
     color: white;
     font-weight: bold;

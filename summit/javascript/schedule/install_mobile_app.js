@@ -51,7 +51,7 @@
                 '<i title="continue navigating the website" class="fa fa-times btn-continue" aria-hidden="true"></i>' +
                 '</div>'+
                 '</div>'+
-                '<div class="row">'+
+                '<div class="row mobile-message">'+
                 '<p>Would you prefer to view this in the OpenStack Summit App?</p>' +
                 '</div>'+
                 '<div class="row">';
