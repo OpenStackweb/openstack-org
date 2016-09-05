@@ -38,7 +38,7 @@ final class Summit extends DataObject implements ISummit
         'TimeZone'                    => 'Text',
         'StartShowingVenuesDate'      => 'SS_Datetime',
         'MaxSubmissionAllowedPerUser' => 'Int',
-        'ScheduleDefaultStartDate'    => 'Date'
+        'ScheduleDefaultStartDate'    => 'SS_Datetime'
     );
 
     private static $defaults = array
