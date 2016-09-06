@@ -46,6 +46,7 @@
 .section1 {
     border-bottom: 1px solid #C2C2C2;
     color: #4C4C4C;
+    padding-bottom: 5%;
 }
 
 .speaker_bio {
@@ -93,4 +94,13 @@
 .big-pic {
     width: 120px !important;
     height: 120px !important;
+}
+
+.social_icon, .social-item{
+    padding: 0;
+}
+
+.social-row{
+    padding-bottom: 1%;
+    padding-top: 1%;
 }

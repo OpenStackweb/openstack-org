@@ -234,7 +234,7 @@ i.collapse-nav {
     border: none;
     border-radius: 4px;
     margin: 0;
-    height: 53px;
+    height: auto;
 }
 
 .view-select-container {
