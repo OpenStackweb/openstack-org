@@ -40,14 +40,14 @@
             <div class="col-md-6 col-xs-12 info">
                 <% if CurrentMember %>
                     <% if $Event.Summit.isAttendee() %>
-                       <div class="info_item">
-                            <div id="remove_from_my_schedule" <% if not CurrentMember.isOnMySchedule($Event.ID) %> style="display:none" <% end_if %>>
+                       <div class="row info_item">
+                            <div class="col-md-12 col-xs-12" id="remove_from_my_schedule" <% if not CurrentMember.isOnMySchedule($Event.ID) %> style="display:none" <% end_if %>>
                                 <span id="icon-event-action-{$Event.ID}-remove" onclick="removeFromMySchedule({$Event.Summit.ID},{$Event.ID})" title="remove from my schedule" class="icon-event-action">
                                     <i class="fa fa-2x fa-check-circle icon-own-event"></i>
                                     My&nbsp;calendar
                                 </span>
                             </div>
-                            <div id="add_to_my_schedule" <% if CurrentMember.isOnMySchedule($Event.ID) %> style="display:none" <% end_if %>>
+                            <div class="col-md-12 col-xs-12" id="add_to_my_schedule" <% if CurrentMember.isOnMySchedule($Event.ID) %> style="display:none" <% end_if %>>
                                 <span id="icon-event-action-{$Event.ID}-add"onclick="addToMySchedule({$Event.Summit.ID},{$Event.ID})" title="add to my schedule" class="icon-event-action">
                                     <i class="fa fa-2x fa-plus-circle icon-foreign-event" ></i>
                                     My&nbsp;calendar
@@ -62,34 +62,34 @@
                         </div>
                     <% end_if %>
                 <% end_if %>
-                <div class="info_item">
-                    <div class="info_item_icon"><i class="fa fa-clock-o icon-clock"></i></div>
-                    <div class="info_item_text">$Event.DateNice()</div>
+                <div class="row info_item">
+                    <div class="col-md-2 col-xs-2 info_item_icon"><i class="fa fa-clock-o icon-clock"></i></div>
+                    <div class="col-md-10 col-xs-10 info_item_text">$Event.DateNice()</div>
                 </div>
                 <% if Event.Summit.ShouldShowVenues %>
-                    <div class="info_item">
-                        <div class="info_item_icon"><i class="fa fa-map-marker icon-map"></i></div>
-                        <div class="info_item_text">
+                    <div class="row info_item">
+                        <div class="col-md-2 col-xs-2 info_item_icon"><i class="fa fa-map-marker icon-map"></i></div>
+                        <div class="col-md-10 col-xs-10 info_item_text">
                             <a href="{$Event.Summit.Link}venues/#venue={$Event.Location.Venue().ID}" > $Event.LocationNameNice() </a>
                         </div>
                     </div>
                 <% end_if %>
                 <% if $Event.isPresentation %>
-                    <div class="info_item">
-                        <div class="info_item_icon"><i class="fa fa-2x fa-signal icon-level"></i></div>
-                        <div class="info_item_text">Level: $Event.Level</div>
+                    <div class="row info_item">
+                        <div class="col-md-2 col-xs-2 info_item_icon"><i class="fa fa-2x fa-signal icon-level"></i></div>
+                        <div class="col-md-10 col-xs-10 info_item_text">Level: $Event.Level</div>
                     </div>
                 <% end_if %>
                 <% if Event.isAllowedSummitType("DESIGN") == 1 %>
-                    <div class="info_item">
-                        <div class="info_item_icon"><img style="height:15px" src="/summit/images/summitapp/credential.png" /></div>
-                        <div class="info_item_text">Design Summit Credential</div>
+                    <div class="row info_item">
+                        <div class="col-md-2 col-xs-2 info_item_icon"><img style="height:15px" src="/summit/images/summitapp/credential.png" /></div>
+                        <div class="col-md-10 col-xs-10 info_item_text">Design Summit Credential</div>
                     </div>
                 <% end_if %>
                 <% if $Event.Tags %>
-                    <div class="info_item">
-                        <div class="info_item_icon"><i class="fa fa-tags"></i></div>
-                        <div class="info_item_text">
+                    <div class="row info_item">
+                        <div class="col-md-2 col-xs-2 info_item_icon"><i class="fa fa-tags"></i></div>
+                        <div class="col-md-10 col-xs-10 info_item_text">
                             Tags:
                             <% loop $Event.Tags %>
                                 <a href="$Top.Link(global-search)?t={$Tag}">$Tag</a>
