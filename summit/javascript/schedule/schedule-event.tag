@@ -36,17 +36,17 @@
                         </div>
                     </div>
                     <div class="row" if={ sponsors_id.length > 0 }>
-                        <div class="col-md-12 col-sponsors">
+                        <div class="col-md-12 col-xs-12 col-sponsors">
                             Sponsored by { sponsorNames(sponsors_id) }
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-8 col-track">
+                        <div class="col-xs-7 col-track">
                             <span if={ track_id} class="track">
                                 <a class="search-link" title="Search Track" href="{ parent.search_url+'?t='+trackName().replace(/ /g,'+') }">{ trackName() }</a>
                             </span>
                         </div>
-                        <div class="col-xs-4 event-type-col">
+                        <div class="col-xs-5 event-type-col">
                             <a class="search-link" title="Search Event Type" href="{ parent.search_url+'?t='+summit.event_types[type_id].type.replace(/ /g,'+') }">{ summit.event_types[type_id].type }</a>
                         </div>
                     </div>

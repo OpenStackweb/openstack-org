@@ -385,6 +385,13 @@ a.navbar-brand.navbar-brand-month
     text-align: right;
 }
 
+
+@media all and (max-width: 768px){
+    .my-schedule-container, .synch-container {
+        text-align: left;
+    }
+}
+
 .speaker-name-row a
 {
     color: #4a4a4a;
@@ -880,4 +887,8 @@ h2.subtitle {
 .icon-sync-event
 {
     color:#5BC86B;
+}
+
+.col-track{
+    padding-right: 0;
 }
