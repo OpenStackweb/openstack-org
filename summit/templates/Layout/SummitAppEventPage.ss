@@ -40,18 +40,18 @@
             <div class="col-md-6 col-xs-12 info">
                 <% if CurrentMember %>
                     <% if $Event.Summit.isAttendee() %>
-                        <div class="info_item">
+                       <div class="info_item">
                             <div id="remove_from_my_schedule" <% if not CurrentMember.isOnMySchedule($Event.ID) %> style="display:none" <% end_if %>>
-                        <span id="icon-event-action-{$Event.ID}-remove" onclick="removeFromMySchedule({$Event.Summit.ID},{$Event.ID})" title="remove from my schedule" class="icon-event-action">
-                            <i class="fa fa-2x fa-check-circle icon-own-event"></i>
-                            My&nbsp;calendar
-                        </span>
+                                <span id="icon-event-action-{$Event.ID}-remove" onclick="removeFromMySchedule({$Event.Summit.ID},{$Event.ID})" title="remove from my schedule" class="icon-event-action">
+                                    <i class="fa fa-2x fa-check-circle icon-own-event"></i>
+                                    My&nbsp;calendar
+                                </span>
                             </div>
                             <div id="add_to_my_schedule" <% if CurrentMember.isOnMySchedule($Event.ID) %> style="display:none" <% end_if %>>
-                        <span id="icon-event-action-{$Event.ID}-add"onclick="addToMySchedule({$Event.Summit.ID},{$Event.ID})" title="add to my schedule" class="icon-event-action">
-                            <i class="fa fa-2x fa-plus-circle icon-foreign-event" ></i>
-                            My&nbsp;calendar
-                        </span>
+                                <span id="icon-event-action-{$Event.ID}-add"onclick="addToMySchedule({$Event.Summit.ID},{$Event.ID})" title="add to my schedule" class="icon-event-action">
+                                    <i class="fa fa-2x fa-plus-circle icon-foreign-event" ></i>
+                                    My&nbsp;calendar
+                                </span>
                             </div>
                         </div>
                     <% else %>
