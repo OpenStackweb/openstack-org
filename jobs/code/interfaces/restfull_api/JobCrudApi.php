@@ -219,9 +219,9 @@ final class JobCrudApi extends AbstractRestfulJsonApi {
      */
     public function getJobList(SS_HTTPRequest $request){
         try{
-            /*$output = $this->loadRAWResponseFromCache($request);
+            $output = $this->loadRAWResponseFromCache($request);
 
-            if(!is_null($output)) return $output;*/
+            if(!is_null($output)) return $output;
 
             $output = '';
             $kw      = $request->getVar('kw');
@@ -232,7 +232,7 @@ final class JobCrudApi extends AbstractRestfulJsonApi {
             foreach ($jobs as $job) {
                 $output .= $job->renderWith('JobHolder_job');
             }
-            //$this->saveRAWResponseToCache($request, $output);
+            $this->saveRAWResponseToCache($request, $output);
             return $output;
         }
         catch(NotFoundEntityException $ex1){
