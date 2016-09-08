@@ -61,10 +61,11 @@ final class SapphireSummitAttendeeRepository extends SapphireRepository implemen
 
         $list = SummitAttendee::get()->leftJoin("Member","Member.ID = SummitAttendee.MemberID")->where($where_clause);
 
+        $count = count($list);
         $offset = ($page - 1 ) * $page_size;
         $data   = $list->limit($page_size, $offset);
 
-        return $data;
+        return array($data, $count);
     }
 
     /**

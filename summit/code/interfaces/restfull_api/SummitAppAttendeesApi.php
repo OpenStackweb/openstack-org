@@ -103,7 +103,7 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
             $summit       = $this->summit_repository->getById($summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
 
-            $attendees = $this->summitattendee_repository->findAttendeesBySummit($search_term,$page,$page_size,$summit_id);
+            list($attendees,$count) = $this->summitattendee_repository->findAttendeesBySummit($search_term,$page,$page_size,$summit_id);
 
             $attendees_array = array();
 
@@ -120,7 +120,7 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
                 );
             }
 
-           return $this->ok($attendees_array);
+           return $this->ok(array('attendees' => $attendees_array, 'count' => $count));
         }
         catch(NotFoundEntityException $ex2)
         {
@@ -233,12 +233,17 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
             if(is_null($attendee)) throw new NotFoundEntityException('SummitAttendee', sprintf(' id %s', $attendee_id));
 
             $events_array = array();
-            foreach ($attendee->Schedule() as $event) {
+            $events = $attendee->Schedule()->sort('StartDate');
+            foreach ($events as $event) {
+                $event_start_unix = strtotime($event->getStartDateUTC());
+                $event_end_unix = strtotime($event->getEndDateUTC());
+                $current_event = (time() > $event_start_unix && time() < $event_end_unix);
+
                 $events_array[] = array(
                     'title'    => $event->Title,
                     'location' => $event->getLocationNameNice(),
-                    'time'     => $event->getDateNice()
-
+                    'time'     => $event->getDateNice(),
+                    'current_event' => $current_event
                 );
             }
             return $this->ok($events_array);

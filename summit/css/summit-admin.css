@@ -176,6 +176,10 @@
     cursor: pointer;
 }
 
+.current_event {
+    background-color: lightblue;
+}
+
 /* EDIT ATTENDEES */
 
 .edit-attendee-wrapper {

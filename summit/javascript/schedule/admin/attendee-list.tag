@@ -83,6 +83,7 @@
                 totalPages: total_pages,
                 numberOfPages: 10,
                 onPageChanged: function(e,oldPage,newPage){
+                    var search_term = $('#attendees_search_term').val();
                     self.getAttendees(newPage,search_term);
                 }
             }
@@ -105,8 +106,20 @@
             $('body').ajax_loader();
 
             $.getJSON('api/v1/summits/'+self.summit_id+'/attendees',{page:page, items:self.page_data.limit, term: search_term},function(data){
-                self.attendees = data;
+                self.attendees = data.attendees;
                 self.page_data.page = page;
+                self.page_data.total_items = data.count;
+
+                var total_pages = (data.count > 0) ? Math.ceil(self.page_data.total_items / self.page_data.limit) : 1;
+
+                var options = {
+                    currentPage: page ,
+                    totalPages: total_pages,
+                    numberOfPages: 10
+                }
+
+                $('#attendees-pager').bootstrapPaginator(options);
+
                 self.update();
                 $('body').ajax_loader('stop');
             });
@@ -122,7 +135,8 @@
             $.getJSON('api/v1/summits/'+self.summit_id+'/attendees/'+attendee_id+'/schedule',{},function(data){
                 var schedule_html = '<table class="table"><thead><tr><th>Event</th><th>Place</th><th>Time</th></thead><tbody>';
                 $.each(data,function(idx,val){
-                    schedule_html += '<tr><td>'+val.title+'</td>';
+                    schedule_html += (val.current_event) ? '<tr class="current_event">' : '<tr>';
+                    schedule_html += '<td>'+val.title+'</td>';
                     schedule_html += '<td>'+val.location+'</td>';
                     schedule_html += '<td>'+val.time+'</td></tr>';
                 })
