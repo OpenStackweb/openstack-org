@@ -130,7 +130,7 @@
                         var share_info =
                         {
                             fb_app_name: "OpenStack",
-                            fb_app_id : "{$Top.FacebookAppID}",
+                            fb_app_id : "{$SiteConfig.getOGApplicationID()}",
                             token: "{$Token}",
                             event_id: {$Event.ID},
                             event_title: "{$Event.Title}",

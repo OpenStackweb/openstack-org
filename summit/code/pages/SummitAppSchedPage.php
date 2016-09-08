@@ -147,10 +147,6 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
 
     }
 
-    public function getFacebookAppID(){
-        return FB_APP_ID;
-    }
-
     const EventShareByEmailTokenKey = 'SummitAppEventPageShareEmail.Token';
     const EventShareByEmailCountKey = 'SummitAppEventPageShareEmail.Count';
 
@@ -169,6 +165,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
             return $this->buildOnlyMetaTagsResponse($event->MetaTags());
         }
 
+        Requirements::block("summit/css/schedule-grid.css");
         Requirements::block("summit/css/schedule-grid.css");
         Requirements::css("summit/css/summitapp-event.css");
         Requirements::javascript("summit/javascript/schedule/event-detail-page.js");
