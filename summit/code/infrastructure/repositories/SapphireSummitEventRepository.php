@@ -85,10 +85,31 @@ class SapphireSummitEventRepository extends SapphireRepository implements ISummi
                 WHERE E.SummitID = {$summit_id} AND E.Published = 1
                 AND EXISTS
                 (
-                    SELECT P.ID, CONCAT(S.FirstName,' ',S.LastName) AS SpeakerFullName  From Presentation P
+                    SELECT P.ID From Presentation P
                     INNER JOIN Presentation_Speakers PS ON PS.PresentationID = P.ID
                     INNER JOIN PresentationSpeaker S ON S.ID = PS.PresentationSpeakerID
-                    WHERE P.ID = E.ID AND S.ID = '{$term}'
+                    LEFT JOIN Member M ON M.ID = S.MemberID
+                    WHERE P.ID = E.ID AND (S.ID = '{$term}' OR M.Email LIKE '{$term}')
+                )
+            UNION SELECT DISTINCT E.* FROM SummitEvent E
+                WHERE E.SummitID = {$summit_id} AND E.Published = 1
+                AND EXISTS
+                (
+                    SELECT P.ID, CONCAT(S.FirstName,' ',S.LastName) AS SpeakerFullName  From Presentation P
+                    INNER JOIN PresentationSpeaker S ON S.ID = P.ModeratorID
+                    LEFT JOIN Member M ON M.ID = S.MemberID
+                    WHERE P.ID = E.ID AND (S.ID = '{$term}' OR M.Email LIKE '{$term}')
+                )
+            UNION SELECT DISTINCT E.* FROM SummitEvent E
+                WHERE E.SummitID = {$summit_id} AND E.Published = 1
+                AND EXISTS
+                (
+                    SELECT P.ID, CONCAT(S.FirstName,' ',S.LastName) AS SpeakerFullName  From Presentation P
+                    INNER JOIN PresentationSpeaker S ON S.ID = P.ModeratorID
+                    WHERE P.ID = E.ID
+                    HAVING
+                        SpeakerFullName LIKE '%{$term}%'
+                        OR SOUNDEX(SpeakerFullName) = SOUNDEX('{$term}')
                 )
 SQL;
 
