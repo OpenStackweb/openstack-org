@@ -15,11 +15,12 @@
     text-align:center;
     position: fixed;
     padding-bottom: 5%;
+    z-index: 10;
 }
 
 .mobile-message p {
-    padding-left: 10%;
-    padding-right: 10%;
+    width: 80%;
+    margin: 5px auto;
 }
 
 #install-app-overlay h3{
