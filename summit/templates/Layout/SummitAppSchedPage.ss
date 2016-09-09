@@ -209,10 +209,4 @@
 </div>
 <div id="fb-root"></div>
 <script src="summit/javascript/schedule/schedule.bundle.js?t={$Top.getTime}" type="application/javascript"></script>
-
-<%-- GOOGLE CALENDAR --%>
-<script src="summit/javascript/schedule/google-calendar.js" type="application/javascript"></script>
-<script type="application/javascript">
-    GoogleCalendarApi.setClientId('{$Top.getGoogleAPIClient()}');
-</script>
-<script src="https://apis.google.com/js/client.js?onload=checkAuth" type="application/javascript"></script>
+<% include GoogleCalendar GoogleCalendarClientID=$Top.GoogleCalendarClientID %>

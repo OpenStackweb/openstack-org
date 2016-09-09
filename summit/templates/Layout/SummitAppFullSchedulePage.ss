@@ -78,3 +78,4 @@
 
 
 <script src="summit/javascript/schedule/full-schedule-view.bundle.js" type="application/javascript"></script>
+<% include GoogleCalendar GoogleCalendarClientID=$Top.GoogleCalendarClientID %>

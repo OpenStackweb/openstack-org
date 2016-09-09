@@ -593,7 +593,10 @@ APP_LINKS;
         return $this->getViewer('index')->process($this);
     }
 
-    public function getGoogleAPIClient() {
+    /**
+     * @return string
+     */
+    public function getGoogleCalendarClientID() {
         return GAPI_CLIENT;
     }
 }
