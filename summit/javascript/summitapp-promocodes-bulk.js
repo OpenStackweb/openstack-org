@@ -77,7 +77,8 @@ $(document).ready(function(){
             {
                 name: 'members_source',
                 displayKey: 'name',
-                source: members_source
+                source: members_source,
+                limit: 100
             }
         ]
     });
@@ -87,7 +88,7 @@ $(document).ready(function(){
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
         queryTokenizer: Bloodhound.tokenizers.whitespace,
         remote: {
-            url: 'api/v1/summits/'+summit_id+'/speakers/%QUERY',
+            url: 'api/v1/summits/'+summit_id+'/speakers/only/%QUERY',
             wildcard: '%QUERY'
         }
     });
@@ -106,7 +107,8 @@ $(document).ready(function(){
             {
                 name: 'speakers_source',
                 displayKey: 'name',
-                source: speakers_source
+                source: speakers_source,
+                limit: 100
             }
         ]
     });
