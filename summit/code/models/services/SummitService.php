@@ -1076,18 +1076,33 @@ final class SummitService implements ISummitService
         return $this->tx_service->transaction(function () use ($summit, $code_id, $promocode_repository) {
             $promocode  = $promocode_repository->getById($code_id);
             if(is_null($promocode)) throw new NotFoundEntityException('PromoCode');
-            $member = null;
+            $email = '';
+            $name = '';
 
-            if($promocode->ClassName == 'SpeakerSummitRegistrationPromoCode' && $promocode->Speaker()->exists() && $promocode->Speaker()->Member()->exists()) {
-                $member = $promocode->Speaker()->Member();
+            if($promocode->ClassName == 'SpeakerSummitRegistrationPromoCode' && $promocode->Speaker()->exists() ){
+                $name = $promocode->Speaker()->getName();
+                if ($promocode->Speaker()->Member()->exists()) {
+                    $email = $promocode->Speaker()->Member()->getEmail();
+                } elseif ($promocode->Speaker()->RegistrationRequest()->exists()) {
+                    $email = $promocode->Speaker()->RegistrationRequest()->Email;
+                }
             }
 
-            if($promocode->ClassName == 'MemberSummitRegistrationPromoCode' && $promocode->Owner()->exists()) {
-                $member = $promocode->Owner();
+            if($promocode->ClassName == 'MemberSummitRegistrationPromoCode') {
+                if ($promocode->Owner()->exists()) {
+                    $email = $promocode->Owner()->getEmail();
+                    $name = $promocode->Owner()->getName();
+                } elseif (!empty($promocode->Email) && !empty($promocode->FirstName)) {
+                    $email = $promocode->Email;
+                    $name = $promocode->FirstName.' '.$promocode->LastName;
+                }
             }
 
-            if(is_null($member))
-                throw new EntityValidationException('owner is null for this promo code!');
+            if(empty($email))
+                throw new EntityValidationException('cannot find email address for the promocode owner!');
+
+            if(empty($name))
+                throw new EntityValidationException('cannot find name for the promocode owner!');
 
             if (!$promocode->EmailSent) {
 
@@ -1096,7 +1111,8 @@ final class SummitService implements ISummitService
 
                 $params = array
                 (
-                    'Member'    => $member,
+                    'Name'      => $name,
+                    'Email'     => $email,
                     'Summit'    => $summit,
                     'PromoCode' => $promocode
                 );

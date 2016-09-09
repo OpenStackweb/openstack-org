@@ -22,12 +22,13 @@ final class MemberPromoCodeEmailSender implements IMessageSenderService
     public function send($subject)
     {
         if(!is_array($subject)) return;
-        if(!isset($subject['Summit'])  || !isset($subject['Member']) || !isset($subject['PromoCode']) ) return;
-        $summit     = $subject['Summit'];
-        $member     = $subject['Member'];
-        $promo_code = $subject['PromoCode'];
+        if(!isset($subject['Summit'])  || !isset($subject['Name']) || !isset($subject['Email']) || !isset($subject['PromoCode']) ) return;
 
-        if(!$member instanceof Member) return;
+        $summit        = $subject['Summit'];
+        $name          = $subject['Name'];
+        $email_address = $subject['Email'];
+        $promo_code    = $subject['PromoCode'];
+
         if(!$summit instanceof ISummit) return;
         if(!$promo_code instanceof SummitRegistrationPromoCode) return;
 
@@ -35,7 +36,7 @@ final class MemberPromoCodeEmailSender implements IMessageSenderService
         $email = PermamailTemplate::get()->filter('Identifier', MEMBER_PROMO_CODE_EMAIL)->first();
         if(is_null($email)) throw new Exception(sprintf('Email Template %s does not exists on DB!', MEMBER_PROMO_CODE_EMAIL));
 
-        $email = EmailFactory::getInstance()->buildEmail(MEMBER_NOTIFICATION_PROMO_CODE_EMAIL_FROM, $member->getEmail());
+        $email = EmailFactory::getInstance()->buildEmail(MEMBER_NOTIFICATION_PROMO_CODE_EMAIL_FROM, $email_address);
 
         $schedule_page = SummitAppSchedPage::get()->filter('SummitID', $summit->ID)->first();
         if(is_null($schedule_page)) throw new Exception('Summit Schedule page does not exists!');
@@ -43,7 +44,7 @@ final class MemberPromoCodeEmailSender implements IMessageSenderService
         $email->setUserTemplate(MEMBER_PROMO_CODE_EMAIL)->populateTemplate(
             array
             (
-                'Member'               => $member,
+                'Name'                 => $name,
                 'PromoCode'            => $promo_code->getCode(),
                 'Summit'               => $summit,
                 'ScheduleMainPageLink' => $schedule_page->getAbsoluteLiveLink(false),

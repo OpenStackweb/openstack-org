@@ -103,9 +103,16 @@
         var speaker = {};
         var company = {};
         var code = "{$PromoCode.Code.JS}";
+        var speaker_email = '';
 
         <% if $PromoCode.Speaker %>
-            speaker = {speaker_id : "{$PromoCode.Speaker.ID}", name : "{$PromoCode.Speaker.FirstName.JS} {$PromoCode.Speaker.LastName.JS} ({$PromoCode.Speaker.Member.Email})"};
+            <% if $PromoCode.Speaker.Member.Email %>
+                speaker_email = "{$PromoCode.Speaker.Member.Email.JS}";
+            <% else %>
+                speaker_email = "{$PromoCode.Speaker.RegistrationRequest.Email.JS}";
+            <% end_if %>
+
+            speaker = {speaker_id : "{$PromoCode.Speaker.ID}", name : "{$PromoCode.Speaker.FirstName.JS} {$PromoCode.Speaker.LastName.JS} ("+speaker_email+")"};
         <% end_if %>
         <% if $PromoCode.Owner %>
             owner = {id : "{$PromoCode.Owner.ID}", name : "{$PromoCode.Owner.FirstName.JS} {$PromoCode.Owner.LastName.JS} ({$PromoCode.Owner.Email})"};
