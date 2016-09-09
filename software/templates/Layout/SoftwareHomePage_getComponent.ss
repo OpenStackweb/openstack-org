@@ -101,7 +101,7 @@
                                     </td>
                                     <td>
                                         <% if $Component.HasInstallationGuide %>
-                                            <a href="https://github.com/openstack/ops-tags-team/blob/master/descriptions/ops-docs-install-guide.rst"><%t Software.VIEW_INSTALL_GUIDE 'View Install Guide' %></a>
+                                            <a href="http://docs.openstack.org/{$Top.CurrentRelease.Slug}/" target="_blank"><%t Software.VIEW_INSTALL_GUIDE 'View the install guide' %></a>
                                         <% else %>
                                             &nbsp;
                                         <% end_if %>
