@@ -113,7 +113,10 @@ class SummitAppSpeakersApi extends AbstractRestfulJsonApi {
     public function getSpeakersOnlyByTerm(SS_HTTPRequest $request){
         try
         {
-            $term         = Convert::raw2sql($request->param('TERM'));
+            //$term         = Convert::raw2sql($request->param('TERM'));
+            // need to do this so you can search the '+' sign if not SS will just decode '+' as space
+            $url_pieces = explode('/', $_SERVER["QUERY_STRING"]);
+            $term = array_pop($url_pieces);
             $summit_id    = intval($request->param('SUMMIT_ID'));
             $summit       = Summit::get_by_id('Summit',$summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
