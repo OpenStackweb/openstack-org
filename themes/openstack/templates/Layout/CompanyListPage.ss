@@ -94,6 +94,16 @@
 					</div>
 					<p class="center">OpenStack Innovation Center</p>
 			</div>
+			<div class="col-sm-2 col-xs-6">
+	                <a href="/foundation/companies/profile/internap ">
+	                	<div class="img-wrapper">
+							
+								<img src="/assets/Uploads/_resampled/SetWidth138-internap.png" alt="internap.png">
+							
+						</div>
+						<p class="center">Internap </p>
+			</a>
+			</div>
 		</div>
 
 		<!-- Corporate & Startup Members -->
