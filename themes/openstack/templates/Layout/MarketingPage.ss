@@ -8,7 +8,7 @@
     <div class="software-tab-wrapper">
         <div class="container">
             <ul class="nav nav-tabs project-tabs">
-                <li class="nav-item tab-get_involved">
+                <li class="nav-item tab-get_involved active">
                     <a href="#get_involved" class="nav-link" data-toggle="tab" role="tab">GET INVOLVED</a>
                 </li>
                 <li class="nav-item tab-events">
@@ -23,14 +23,14 @@
                 <li class="nav-item tab-graphics">
                     <a href="#graphics" class="nav-link" data-toggle="tab" role="tab">GRAPHICS & VIDEO</a>
                 </li>
-                <li class="nav-item tab-promote_product active">
+                <li class="nav-item tab-promote_product">
                     <a href="#promote_product" class="nav-link" data-toggle="tab" role="tab">PROMOTE YOUR PRODUCT</a>
                 </li>
             </ul>
         </div>
     </div>
     <div class="tab-content">
-        <div id="get_involved" class="tab-pane fade in tab-page involved" role="tabpanel">
+        <div id="get_involved" class="tab-pane fade in tab-page active involved" role="tabpanel">
             <div class="container">
                 <div class="inline-images">
                     <% loop InvolvedImages() %>
@@ -213,7 +213,7 @@
                 </ul>
             </div>
         </div>
-        <div id="promote_product" class="tab-pane fade in active tab-page" role="tabpanel">
+        <div id="promote_product" class="tab-pane fade in tab-page" role="tabpanel">
             <div class="container">
                 <div class="tab-header">$PromoteProductIntroText</div>
                 <div class="row ">
