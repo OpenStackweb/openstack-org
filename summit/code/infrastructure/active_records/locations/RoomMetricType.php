@@ -129,8 +129,8 @@ final class RoomMetricType extends DataObject implements IRoomMetricType
     public function addSample($value, $time_stamp)
     {
         $sample            = new RoomMetricSampleData();
-        $sample->Value     = $value;
-        $sample->TimeStamp = $time_stamp;
+        $sample->Value     = floatval($value);
+        $sample->TimeStamp = intval($time_stamp);
         AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Samples')->add($sample);
     }
 

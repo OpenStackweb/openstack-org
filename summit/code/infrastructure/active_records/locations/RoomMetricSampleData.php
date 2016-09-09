@@ -19,7 +19,7 @@ final class RoomMetricSampleData extends DataObject implements IEntity
 {
     private static $db = array
     (
-        'Value'     => 'Text',
+        'Value'     => 'Double',
         'TimeStamp' => 'Int',
     );
 
