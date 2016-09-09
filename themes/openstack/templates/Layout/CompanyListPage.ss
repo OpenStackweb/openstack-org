@@ -91,6 +91,7 @@
 			</div>
 			<div class="col-sm-2 col-xs-6">
 					<div class="img-wrapper">
+						<img src="/assets/companies/main_logo/OSIC-lg.jpg" alt="OpenStack Innovation Center" width="138">
 					</div>
 					<p class="center">OpenStack Innovation Center</p>
 			</div>
