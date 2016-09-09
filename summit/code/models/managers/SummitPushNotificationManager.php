@@ -77,12 +77,12 @@ class SummitPushNotificationManager
                         {
                             $message['channels'] = ['speakers'];
                         }
-                            break;
+                        break;
                         case 'ATTENDEES':
                         {
                             $message['channels'] = ['attendees'];
                         }
-                            break;
+                        break;
                         case 'MEMBERS':
                         {
                             $recipients = array();
@@ -93,12 +93,12 @@ class SummitPushNotificationManager
                             }
                             $message['channels'] = $recipients;
                         }
-                            break;
+                        break;
                         case 'SUMMIT':
                         {
                             $message['channels'] = ['su_'.$notification->SummitID];
                         }
-                            break;
+                        break;
                         case 'EVENT':
                         {
                             $data           = $message['data'];
@@ -110,12 +110,22 @@ class SummitPushNotificationManager
                             $message['data']     = array_merge($data, $extra_data);
                             $message['channels'] = ['evt_'.$notification->EventID];
                         }
-                            break;
+                        break;
                         case 'EVERYONE':
                         {
                             $message['where'] = ParseInstallation::query();
                         }
-                            break;
+                        break;
+                        case 'GROUP':
+                        {
+                            $recipients = array();
+                            foreach($notification->Group()->Members() as $m)
+                            {
+                                array_push($recipients, 'me_'.$m->ID);
+                            }
+                            $message['channels'] = $recipients;
+                        }
+                        break;
                     }
                     ParsePush::send($message);
                     $notification->sent();

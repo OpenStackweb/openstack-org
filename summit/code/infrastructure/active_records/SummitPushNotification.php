@@ -17,7 +17,7 @@ final class SummitPushNotification extends CustomDataObject implements IEntity
     private static $db = array
     (
         'Message'  => 'Text',
-        'Channel'  => "Enum('EVERYONE, SPEAKERS, ATTENDEES, MEMBERS, SUMMIT, EVENT', 'EVERYONE')",
+        'Channel'  => "Enum('EVERYONE, SPEAKERS, ATTENDEES, MEMBERS, SUMMIT, EVENT, GROUP', 'EVERYONE')",
         'IsSent'   => 'Boolean',
         'SentDate' => 'SS_Datetime',
     );
@@ -31,11 +31,12 @@ final class SummitPushNotification extends CustomDataObject implements IEntity
         'Summit'    => 'Summit',
         'Owner'     => 'Member',
         'Event'     => 'SummitEvent',
+        'Group'     => 'Group',
     );
 
     private static $many_many = array
     (
-        'Recipients' => 'Member',
+        'Recipients'     => 'Member',
     );
 
     private static $indexes = array(
@@ -55,6 +56,7 @@ final class SummitPushNotification extends CustomDataObject implements IEntity
         $f->addFieldToTab('Root.Main', $txt = new TextareaField('Message','Message'));
         $txt->setAttribute('required','true');
         $f->addFieldToTab('Root.Main', $ddl_channel = new DropdownField('Channel','Channel', singleton('SummitPushNotification')->dbObject('Channel')->enumValues()));
+
         $f->addFieldToTab('Root.Main',
             $ddl_events  = new DropdownField
             (
@@ -68,13 +70,26 @@ final class SummitPushNotification extends CustomDataObject implements IEntity
                     ]
                 )->sort('Title', 'ASC')->Map('ID','FormattedTitle'))
         );
+
+        $f->addFieldToTab('Root.Main',
+            $ddl_groups  = new DropdownField
+            (
+                'GroupID',
+                'Group',
+                Group::get()->sort('Title', 'ASC')->Map('ID','Title'))
+        );
+
         $f->addFieldToTab('Root.Main', new HiddenField('SummitID','SummitID'));
 
         $ddl_channel->setEmptyString('--SELECT A CHANNEL--');
         $ddl_channel->setAttribute('required','true');
 
-        $ddl_events->setEmptyString('--SELECT A EVENT--');
+        $ddl_events->setEmptyString('--SELECT AN EVENT--');
         $ddl_events->addExtraClass('hidden');
+
+        $ddl_groups->setEmptyString('--SELECT A GROUP--');
+        $ddl_groups->addExtraClass('hidden');
+
         $config = GridFieldConfig_RelationEditor::create(50);
         $config->removeComponentsByType('GridFieldAddExistingAutocompleter');
         $config->removeComponentsByType('GridFieldAddNewButton');
@@ -124,7 +139,10 @@ final class SummitPushNotification extends CustomDataObject implements IEntity
             return $valid->error('You must set at least one recipient for MEMBERS channel.');
 
         if($this->Channel === 'EVENT' && $this->EventID == 0)
-            return $valid->error('You must set at least one Published for EVENT channel.');
+            return $valid->error('You must set at least one Published Event for EVENT channel.');
+
+        if($this->Channel === 'GROUP' && $this->GroupID == 0)
+            return $valid->error('You must set at least one group for GROUP channel.');
 
         return $valid;
     }

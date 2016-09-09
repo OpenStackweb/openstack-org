@@ -23,6 +23,7 @@
         function showUI(){
             showEvents();
             showMembers();
+            showGroups();
         }
 
         function showEvents(){
@@ -31,6 +32,14 @@
                 return;
             }
             $('#EventID').hide();
+        }
+
+        function showGroups(){
+            if($('#Form_ItemEditForm_Channel').val() == 'GROUP') {
+                $('#GroupID').show();
+                return;
+            }
+            $('#GroupID').hide();
         }
 
         function showMembers () {
@@ -53,8 +62,7 @@
                 return false;
             }
             if(channel != 'MEMBERS'){
-                var confirm = window.confirm('Are you sure?. You would be sending this push notification to several users ( '+channel+' )');
-                return confirm;
+                return window.confirm('Are you sure?. You would be sending this push notification to several users ( '+channel+' )');
             }
             return true;
         }

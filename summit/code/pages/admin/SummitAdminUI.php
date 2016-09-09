@@ -305,10 +305,11 @@ final class SummitAdminUI extends DataExtension
             $config->getComponentByType('GridFieldDataColumns')->setDisplayFields
             (
                 array(
-                    'Channel' => 'Channel',
-                    'Message' => 'Message',
+                    'Channel'        => 'Channel',
+                    'Message'        => 'Message',
                     'Owner.FullName' => 'Owner',
-                    'IsSent' => 'Is Sent?'
+                    'IsSent'         => 'Is Sent?',
+                    'SentDate'       => 'Sent Date',
                 )
             );
             $gridField = new GridField('Notifications', 'Notifications', $this->owner->Notifications(), $config);
