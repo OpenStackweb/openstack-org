@@ -13,7 +13,7 @@
     "bower": "1.7.2",
     "webpack": "1.12.11",
     "riot": "2.3.13",
-	"riotgear": "2.1.3",
+    "riotgear": "2.1.3",
     "riotcontrol": "0.0.3",
     "tag-loader": "0.3.0",    
     "css-loader": "0.23.1",
@@ -27,7 +27,9 @@
     "sortablejs": "1.4.2",
     "style-loader": "0.13.0",
     "tag-loader": "0.3.0",
-    "xhr2": "0.1.3"
+    "xhr2": "0.1.3",
+    "has-flag": "2.0.0", 
+    "amdefine": "1.0.0"	
   },
   "license": "Apache-2.0"
 }
