@@ -1171,8 +1171,7 @@ final class SummitService implements ISummitService
         });
 
         // DELETE SPEAKER 2 (had to take it out the transaction to work)
-        $speaker_2 = $speaker_repository->getById($speaker_id_2);
-        $speaker_2->delete();
+        DataObject::delete_by_id('PresentationSpeaker',$speaker_id_2);
 
         return $changes;
 
