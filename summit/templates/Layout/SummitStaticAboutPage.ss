@@ -39,6 +39,7 @@
         <div class="col-lg-3 col-md-4 col-sm-4">
             <ul class="help-me-menu">
                <!-- <li><a href="#"><i class="fa fa-calendar"></i>Summit Schedule</a></li>-->
+               <li><a href="/summit/barcelona-2016/openstack-academy/"><i class="fa fa-bicycle"></i>OpenStack Academy</a></li>
                <li><a href="/summit/barcelona-2016/barcelona-and-travel/#visa"><i class="fa fa-globe"></i>Visa Info</a></li>
                 <li><a href="/summit/barcelona-2016/code-of-conduct/"><i class="fa fa-users"></i>Code Of Conduct</a></li>
                <li><a href="/summit/barcelona-2016/barcelona-and-travel/#hotels"><i class="fa fa-hotel"></i>Hotels & Airport</a></li>
@@ -183,7 +184,7 @@
                     Get a glimpse into the wealth of speakers, topics and sessions happening at OpenStack Summit Barcelona.
                 </p>
                 <p>
-                    <a href="#" class="btn outline-btn">Coming Soon</a>
+                    <a href="/summit/barcelona-2016/summit-schedule/" class="btn outline-btn">View Now</a>
                 </p>
             </div>
         </div>
