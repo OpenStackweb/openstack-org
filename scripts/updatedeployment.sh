@@ -6,6 +6,7 @@ sake dev/build;
 sake dev/tasks/DBMigrateTask;
 sudo npm install;
 sudo bower install --allow-root --config.interactive=false;
+sudo webpack;
 chown vagrant:www-data -R /home/vagrant/node_modules;
 chown vagrant:www-data -R /home/vagrant/bower_modules;
 chown vagrant:www-data -R /var/www/local.openstack.org/vendor;

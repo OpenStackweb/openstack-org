@@ -12,6 +12,8 @@ $main_packages = [
   'git',
   'geoip-bin',
   'sendmail',
+  'mysql-client-5.6',
+  'mysql-client-core-5.6',
   'mysql-server-5.6',
   'zip',
   'unzip',
