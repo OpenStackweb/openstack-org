@@ -1,11 +1,13 @@
 #!/bin/bash -xe
+echo “running update deployment …”;
 cd /var/www/local.openstack.org;
-sudo php composer.phar update --ignore-platform-reqs;
+sudo php composer.phar update --ignore-platform-reqs --prefer-dist;
 #run ss tasks
 sake dev/build;
 sake dev/tasks/DBMigrateTask;
 sudo npm install;
-sudo bower install --allow-root --config.interactive=false;
+#sudo bower cache clean;
+sudo bower install --allow-root config.interactive=false;
 sudo webpack;
 chown vagrant:www-data -R /home/vagrant/node_modules;
 chown vagrant:www-data -R /home/vagrant/bower_modules;

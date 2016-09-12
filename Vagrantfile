@@ -24,7 +24,7 @@ Vagrant.configure(2) do |config|
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
   config.vm.network "private_network", ip: "192.168.33.10"
-  # Create a public network, which generally matched to bridged network.
+  # Create a public network, 	which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
   # your network.
   # config.vm.network "public_network"
@@ -35,7 +35,7 @@ Vagrant.configure(2) do |config|
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
     config.vm.synced_folder("puppet/hiera", "/etc/puppet/data")
-    config.vm.synced_folder("puppet/certs", "/etc/ssl_certs")
+    config.vm.synced_folder("puppet/certs", "/etc/ssl_certs")	
     config.vm.synced_folder("puppet", "/etc/puppet/modules/site")
     config.vm.synced_folder ".", "/var/www/local.openstack.org", create: true, owner: "vagrant", group: "www-data", mount_options: ["dmode=777,fmode=777"]
   # Provider-specific configuration so you can fine-tune various
@@ -45,6 +45,7 @@ Vagrant.configure(2) do |config|
   config.vm.provider "virtualbox" do |vb|
         vb.memory = "4096"
         vb.name   = "local.openstack.org"
+	 vb.cpus   	= 2
   end
 
   # use https://github.com/oscar-stack/vagrant-hosts

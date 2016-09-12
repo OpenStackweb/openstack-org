@@ -5,7 +5,9 @@ curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -;
 sudo apt-get install -y nodejs;
 sudo npm cache clean;
 #install webpack and bower at global level
+echo “installing webpack globally …”;
 npm install -g webpack;
+echo “installing bower globally …”;
 npm install -g bower;
 # update php.ini settings
 upload_max_filesize=240M
@@ -38,6 +40,7 @@ php composer-setup.php
 php -r "unlink('composer-setup.php');"
 # create local folder for ss cache
 mkdir -p silverstripe-cache;
-sudo php composer.phar install --ignore-platform-reqs;
+sudo php composer.phar install --ignore-platform-reqs --prefer-dist;
 sudo ./framework/sake installsake;
+
 
