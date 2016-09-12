@@ -51,6 +51,8 @@ define('SCHED_TOOLS_EMAIL_FROM','');
 define('CALL_4_SPEAKERS_FROM_EMAIL','');
 //used on marketplace reviews module.
 define('MARKETPLACE_REVIEWS_EMAIL_TO','');
+//used on marketplace admin.
+define('MARKETPLACE_ADMIN_UPDATE_EMAIL_TO','');
 
 define('DEPLOYMENT_SURVEY_THANK_U_FROM_EMAIL','');
 //used on openstack/code/FeedbackForm.php (submitFeedback - ln 46)

@@ -314,6 +314,15 @@ abstract class CompanyServiceManager
             $updateCollections->setAccessible(true);
             $updateCollections->invoke($this_var, $company_service, $data);
 
+            // send notification to admins
+            $username = Member::currentUser()->getName();
+            $email_subject = "Update on ".$company_service->getName();
+            $email_body = $company_service->getName()." was just updated by ".$username.".
+                          Please go <a href='https://openstack.org/marketplaceadmin/'>here</a> to review the data.
+                          <br><br>Thank you,<br>Marketplace Admin";
+            $email = EmailFactory::getInstance()->buildEmail('noreply@openstack.org', MARKETPLACE_ADMIN_UPDATE_EMAIL_TO, $email_subject, $email_body);
+            $email->send();
+
             return $company_service;
         });
 
