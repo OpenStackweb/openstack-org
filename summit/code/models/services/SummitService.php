@@ -1166,12 +1166,12 @@ final class SummitService implements ISummitService
 
             $speaker_1->write();
 
+            // DELETE SPEAKER 2
+            $speaker_2->delete();
+
             return $changes;
 
         });
-
-        // DELETE SPEAKER 2 (had to take it out the transaction to work)
-        DataObject::delete_by_id('PresentationSpeaker',$speaker_id_2);
 
         return $changes;
 
