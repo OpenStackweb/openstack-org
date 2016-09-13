@@ -66,7 +66,7 @@
             $("#search-term").keydown(function (e) {
                 if (e.keyCode == 13) {
                     self.searchReport();
-                }
+                } 
             });
 
         });
