@@ -134,7 +134,8 @@
         self.dispatcher.on(self.dispatcher.EXPORT_SPEAKER_REPORT,function() {
             var sort     = $('.sorted').data('sort');
             var sort_dir = $('.sorted').data('dir');
-            window.open('api/v1/summits/'+self.summit_id+'/reports/export/speaker_report?sort='+sort+'&sort_dir='+sort_dir, '_blank');
+            var filter = $('#status-filter').val();
+            window.open('api/v1/summits/'+self.summit_id+'/reports/export/speaker_report?filter='+filter+'&sort='+sort+'&sort_dir='+sort_dir, '_blank');
         });
 
         self.dispatcher.on(self.dispatcher.GET_SPEAKER_REPORT,function() {

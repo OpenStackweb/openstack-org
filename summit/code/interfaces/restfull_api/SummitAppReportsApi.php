@@ -386,25 +386,28 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
 
             $events  = $this->event_repository->searchBySummitTermAndHasRSVP($summit,$search_term);
 
-            $results = array('event_count' => 0, 'data' => array());
+            $results = array('event_count' => 0, 'data' => array(), 'headers' => array());
             if (count($events)) {
                 if (count($events) == 1) {
                     $results['event_count'] = 1;
                     $event = array_pop($events);
                     list($rsvps,$total) = $this->rsvp_repository->getByEventPaged($event->ID,$page,$page_size);
+                    $rsvp_array_template = array();
+                    foreach ($event->RSVPTemplate()->Questions()->sort('Order') as $question) {
+                        if ($question->Label) {
+                            $rsvp_array_template[$question->Label] = '';
+                            $results['headers'][] = $question->Label;
+                        }
+                    }
 
                     if (count($rsvps)) {
                         foreach($rsvps as $rsvp) {
-                            $other = '';
+                            $rsvp_array = $rsvp_array_template;
                             foreach ($rsvp->Answers() as $answer) {
-                                $other .= $answer->Question()->Label.': '.$answer->getFormattedAnswer().'<br>';
+                                $rsvp_array[$answer->Question()->Label] = $answer->getFormattedAnswer();
                             }
-                            $results['data'][] = array(
-                                'rsvp_id'   => intval($rsvp->ID),
-                                'name'      => $rsvp->SubmittedBy()->getMember()->getFullName(),
-                                'email'     => $rsvp->SubmittedBy()->getMember()->getEmail(),
-                                'other'     => $other,
-                            );
+
+                            $results['data'][] = $rsvp_array;
                         }
                     }
                     $results['event'] = array(
@@ -469,7 +472,6 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
                     $filename = "speaker_report-" . date('Ymd') . "." . $ext;
                     $delimiter = ($ext == 'xls') ? "\t" : ",";
                     return CSVExporter::getInstance()->export($filename, $results, $delimiter);
-                    break;
                     break;
                 case 'room_report' :
                     $filename = "room_report-" . date('Ymd') . ".xlsx";
@@ -574,10 +576,45 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
 
                     header('Content-type: application/vnd.ms-excel');
                     header('Content-Disposition: attachment; filename="'.$filename.'"');
-
                     $objWriter->save('php://output');
 
                     return;
+                    break;
+                case 'rsvp_report' :
+                    $search_term = (isset($query_string['term'])) ? Convert::raw2sql($query_string['term']) : '';
+                    $events  = $this->event_repository->searchBySummitTermAndHasRSVP($summit,$search_term);
+
+                    if (count($events)) {
+                        if (count($events) == 1) {
+                            $results = array();
+                            $event = array_pop($events);
+                            list($rsvps,$total) = $this->rsvp_repository->getByEventPaged($event->ID,null,null);
+                            $rsvp_array_template = array();
+                            foreach ($event->RSVPTemplate()->Questions()->sort('Order') as $question) {
+                                if ($question->Label) {
+                                    $rsvp_array_template[$question->Label] = '';
+                                }
+                            }
+
+                            if (count($rsvps)) {
+                                foreach($rsvps as $rsvp) {
+                                    $rsvp_array = $rsvp_array_template;
+
+                                    foreach ($rsvp->Answers() as $answer) {
+                                        $rsvp_array[$answer->Question()->Label] = $answer->getFormattedAnswer();
+                                    }
+
+                                    $results[] = $rsvp_array;
+                                }
+                            }
+
+                            $filename = "rsvp_report-" . date('Ymd') . "." . $ext;
+                            $delimiter = ($ext == 'xls') ? "\t" : ",";
+                            return CSVExporter::getInstance()->export($filename, $results, $delimiter);
+                        }
+                    }
+
+                    return $this->notFound();
                     break;
             }
             return $this->notFound();

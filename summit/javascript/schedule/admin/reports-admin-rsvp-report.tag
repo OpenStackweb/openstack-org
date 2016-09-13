@@ -18,16 +18,12 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Attendee</th>
-                    <th>Email</th>
-                    <th>Other</th>
+                    <th each={ header in headers }>{ header }</th>
                 </tr>
             </thead>
             <tbody>
                 <tr each={ rsvp, i in rsvps }>
-                    <td>{ rsvp.name }</td>
-                    <td>{ rsvp.email }</td>
-                    <td><raw content={ rsvp.other }></raw></td>
+                    <td each={ label, value in rsvp }>{ value }</td>
                 </tr>
             </tbody>
         </table>
@@ -41,6 +37,7 @@
         this.page_data       = {total: 1, limit: opts.page_limit, page: 1};
         this.summit_id       = opts.summit_id;
         this.rsvps           = [];
+        this.headers         = [];
         this.events          = [];
         this.event_id        = 0;
         this.event_count     = 0;
@@ -67,6 +64,7 @@
                         self.rsvps = data.data;
                         self.event = data.event;
                         self.page_data.total = parseInt(data.total);
+                        self.headers = data.headers;
                     } else if (data.event_count > 1) {
                         self.events = data.data;
                     }
@@ -97,7 +95,8 @@
         });
 
         self.dispatcher.on(self.dispatcher.EXPORT_RSVP_REPORT,function() {
-            window.open('api/v1/summits/'+self.summit_id+'/reports/export/rsvp_report', '_blank');
+            var term = $('#search-term').val();
+            window.open('api/v1/summits/'+self.summit_id+'/reports/export/rsvp_report?term='+term, '_blank');
         });
 
     </script>
