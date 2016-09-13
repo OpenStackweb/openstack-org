@@ -16,9 +16,9 @@
  * Class GerritChangeStatus
  */
 final class GerritChangeStatus {
-    const _NEW = 'new';
-    const _SUBMITTED = 'submitted';
-    const _MERGED = 'merged';
-    const _ABANDONED = 'abandoned';
-    const _DRAFT = "draft";
+    const _NEW        = 'new';
+    const _SUBMITTED  = 'submitted';
+    const _MERGED     = 'merged';
+    const _ABANDONED  = 'abandoned';
+    const _DRAFT      = "draft";
 }

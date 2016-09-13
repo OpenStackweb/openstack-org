@@ -72,6 +72,8 @@ final class DupesMembers_Controller extends AbstractController {
     {
         parent::init();
         Page_Controller::AddRequirements();
+        Requirements::css('themes/openstack/bower_assets/sweetalert2/dist/sweetalert2.min.css');
+        Requirements::javascript('themes/openstack/bower_assets/sweetalert2/dist/sweetalert2.min.js');
         Requirements::javascript("marketplace/code/ui/admin/js/utils.js");
     }
     /**
@@ -96,7 +98,7 @@ final class DupesMembers_Controller extends AbstractController {
             }
 
             $any_account_has_gerrit = $request->getDupeAccount()->isGerritUser() || $request->getPrimaryAccount()->isGerritUser();
-            $any_account_has_gerrit = $any_account_has_gerrit?'true':'false';
+            $any_account_has_gerrit = $any_account_has_gerrit? 'true' : 'false';
 
             Requirements::customScript('var any_account_has_gerrit = '.$any_account_has_gerrit.';');
             Requirements::javascript('dupe_members/javascript/dupe.members.merge.action.js');

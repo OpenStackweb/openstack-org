@@ -23,7 +23,7 @@ function ajaxError(jqXHR, textStatus, errorThrown){
             displayErrorMessage('validation error', msg);
         }
         else
-            displayErrorMessage('server error',response.error);
+            displayErrorMessage('server error', response.error);
     }
     else if(HTTP_status==409){
         displayErrorMessage('validation error','Entity Already exists!');

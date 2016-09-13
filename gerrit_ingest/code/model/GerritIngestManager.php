@@ -23,12 +23,7 @@ final class GerritIngestManager {
     private $gerrit_api;
 
     /**
-     * @var IBatchTaskRepository
-     */
-    private $batch_repository;
-
-    /**
-     * @var ICLAMemberRepository
+     * @var IGerritUserRepository
      */
     private $member_repository;
 
@@ -38,95 +33,100 @@ final class GerritIngestManager {
     private $tx_manager;
 
     /**
-     * @var IBatchTaskFactory
-     */
-    private $batch_task_factory;
-
-    const PullCommitsFromGerritTask = 'PullCommitsFromGerritTask';
-
-    /**
-     * @param IGerritAPI           $gerrit_api
-     * @param IBatchTaskRepository $batch_repository
-     * @param ICLAMemberRepository $member_repository
-     * @param IBatchTaskFactory    $batch_task_factory
-     * @param ITransactionManager  $tx_manager
+     * GerritIngestManager constructor.
+     * @param IGerritAPI $gerrit_api
+     * @param IGerritUserRepository $member_repository
+     * @param ITransactionManager $tx_manager
      */
     public function __construct(IGerritAPI $gerrit_api,
-                                IBatchTaskRepository $batch_repository,
-                                ICLAMemberRepository $member_repository,
-                                IBatchTaskFactory    $batch_task_factory,
+                                IGerritUserRepository $member_repository,
                                 ITransactionManager  $tx_manager){
 
         $this->gerrit_api         = $gerrit_api;
-        $this->batch_repository   = $batch_repository;
         $this->member_repository  = $member_repository;
-        $this->batch_task_factory = $batch_task_factory;
         $this->tx_manager         = $tx_manager;
     }
 
+    const CommitsPageSize  = 250;
 
-    public function processCommits($batch_size){
-        $batch_repository   = $this->batch_repository;
-        $member_repository  = $this->member_repository;
-        $gerrit_api         = $this->gerrit_api;
-        $batch_task_factory = $this->batch_task_factory;
+    public function processCommits(){
 
-        return $this->tx_manager->transaction(function() use($batch_size, $member_repository, $batch_repository, $gerrit_api, $batch_task_factory) {
 
-            $task = $batch_repository->findByName(GerritIngestManager::PullCommitsFromGerritTask);
+        $member_repository               = $this->member_repository;
+        $gerrit_api                      = $this->gerrit_api;
+        list($total_size, $gerrit_users) = $member_repository->getAllGerritUsersByPage(1, PHP_INT_MAX);
+        $pages                           = array_chunk($gerrit_users, self::CommitsPageSize);
+        $processed                       = 0;
+        echo sprintf("** we found %s gerrit user pages to process ...", count($pages)) . PHP_EOL;
+        $page_nbr = 1;
+        foreach($pages as $gerrit_user_page) {
+            echo "*********************************************************". PHP_EOL;
+            echo sprintf("** processing page nbr %s  ...", $page_nbr) . PHP_EOL;
+            echo "*********************************************************". PHP_EOL;
+            ++$page_nbr;
+            $processed += $this->tx_manager->transaction(function () use ($member_repository, $gerrit_api, $gerrit_user_page) {
 
-            $last_index      = 0;
-            $members         = array();
-            $updated_members = 0;
+                $updated_members = 0;
 
-            if($task){
-                $last_index = $task->lastRecordProcessed();
-                list($members, $total_size) = $member_repository->getAllICLAMembers($last_index, $batch_size);
-                if($task->lastRecordProcessed() >= $total_size) $task->initialize($total_size);
-            }
-            else{
-                list($members,$total_size) = $member_repository->getAllICLAMembers($last_index, $batch_size);
-                $task = $batch_task_factory->buildBatchTask(GerritIngestManager::PullCommitsFromGerritTask, $total_size);
-                $batch_repository->add($task);
-            }
+                foreach ($gerrit_user_page as $gerrit_user) {
+                    $more_changes = false;
+                    $initial_commits_count = $gerrit_user->Commits()->count();
+                    $start = $initial_commits_count > 0 ? $initial_commits_count : 0;
+                    echo sprintf("gerrit user %s (%s) , initial commits %s .", $gerrit_user->Email, $gerrit_user->AccountID, $initial_commits_count) . PHP_EOL;
+                    $page_counter = 0;
 
-            foreach($members as $member){
-                $more_changes = false;
-                $start_point  = null;
-                do {
-                    $changes = $gerrit_api->getUserCommits($member->getGerritId(), GerritChangeStatus::_MERGED, 250, $start_point);
-                    if (!is_null($changes) && is_array($changes) && count($changes) > 0) {
-                        $count = count($changes);
-                        $last  = $changes[$count - 1];
-                        $more_changes = isset($last['_more_changes'])?$last['_more_changes']:false;
-                        $start_point = ($more_changes)?$last['_sortkey']:null;
+                    do {
 
-                        foreach($changes as $change){
-                            $db_change = GerritChangeInfo::get()->filter(array('ChangeId' => $change['change_id']))->first();
-                            if(!$db_change){
-                                $db_change = new GerritChangeInfo();
-                                $db_change->kind = @$change['kind'];
-                                $db_change->FormattedChangeId = @$change['id'];
-                                $db_change->ProjectName = @$change['project'];
-                                $db_change->Branch = @$change['branch'];
-                                $db_change->Topic = @$change['topic'];
-                                $db_change->ChangeId = @$change['change_id'];
-                                $db_change->Subject = @$change['subject'];
-                                $db_change->Status = @$change['status'];
-                                $created_date = explode('.',@$change['created']);
-                                $updated_date = explode('.',@$change['updated']);
-                                $db_change->CreatedDate = DateTime::createFromFormat('Y-m-d H:i:s', $created_date[0])->getTimestamp();
-                                $db_change->UpdatedDate = DateTime::createFromFormat('Y-m-d H:i:s', $updated_date[0])->getTimestamp();
-                                $db_change->MemberID  = $member->getIdentifier();
-                                $db_change->write();
+                        echo sprintf("processing start %s for gerrit user %s (%s)", $start, $gerrit_user->Email, $gerrit_user->AccountID) . PHP_EOL;
+                        $changes = $gerrit_api->getUserCommits($gerrit_user->AccountID, GerritChangeStatus::_MERGED, self::CommitsPageSize, $start);
+                        if (!is_null($changes) && is_array($changes) && count($changes) > 0) {
+                            $count = count($changes);
+                            $last = $changes[$count - 1];
+                            echo sprintf("gerrit user %s (%s), has commits %s to process.", $gerrit_user->Email, $gerrit_user->AccountID, $count) . PHP_EOL;
+                            /*
+                             * If the n query parameter is supplied and additional changes exist that match the query beyond
+                             * the end, the last change object has a _more_changes: true JSON field set.
+                             * The S or start query parameter can be supplied to skip a number of changes from the list.
+                             */
+                            $more_changes = isset($last['_more_changes']) ? $last['_more_changes'] : false;
+                            ++$page_counter;
+
+                            if ($more_changes) {
+                                $start += $count;
+                                echo sprintf("gerrit user %s (%s), has more pending commits to process , new start %s.", $gerrit_user->Email, $gerrit_user->AccountID, $start) . PHP_EOL;
+                            }
+
+                            foreach ($changes as $change) {
+                                $db_change = GerritChangeInfo::get()->filter(array('ChangeId' => $change['change_id']))->first();
+                                if (!$db_change) {
+                                    $db_change = new GerritChangeInfo();
+                                    $db_change->kind = @$change['kind'];
+                                    $db_change->FormattedChangeId = @$change['id'];
+                                    $db_change->ProjectName = @$change['project'];
+                                    $db_change->Branch = @$change['branch'];
+                                    $db_change->Topic = @$change['topic'];
+                                    $db_change->ChangeId = @$change['change_id'];
+                                    $db_change->Subject = @$change['subject'];
+                                    $db_change->Status = @$change['status'];
+                                    $created_date = explode('.', @$change['created']);
+                                    $updated_date = explode('.', @$change['updated']);
+                                    $db_change->CreatedDate = DateTime::createFromFormat('Y-m-d H:i:s', $created_date[0])->getTimestamp();
+                                    $db_change->UpdatedDate = DateTime::createFromFormat('Y-m-d H:i:s', $updated_date[0])->getTimestamp();
+                                    $db_change->OwnerID = $gerrit_user->ID;
+
+                                    $db_change->write();
+                                }
                             }
                         }
-                    }
-                }while($more_changes);
-                ++$updated_members;
-                $task->updateLastRecord();
-            }
-            return $updated_members;
-        });
+                        else{
+                            echo sprintf("** gerrit user %s (%s) does not has available commits this time!", $gerrit_user->Email, $gerrit_user->AccountID) . PHP_EOL;
+                        }
+                    } while ($more_changes);
+                    ++$updated_members;
+                }
+                return $updated_members;
+            });
+        }
+        return $processed;
     }
 }

@@ -11,11 +11,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-//decorators
-Object::add_extension('Member', 'ICLAMemberDecorator');
-Object::add_extension('Company', 'ICLACompanyDecorator');
-Object::add_extension('SangriaPage_Controller', 'SangriaPageICLACompaniesExtension');
-Object::add_extension('EditProfilePage_Controller', 'EditProfilePageICLAExtension');
 
 PublisherSubscriberManager::getInstance()->subscribe('new_user_registered', function($member_id){
     //check if user has pending invitations

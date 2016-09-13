@@ -15,7 +15,7 @@ var gerrit_id_action = false;
 
 jQuery(document).ready(function ($) {
 
-    var fields = ['gerrit_id', 'first_name', 'surname', 'email', 'second_email', 'third_email', 'shirt_size',
+    var fields = [ 'first_name', 'surname', 'email', 'second_email', 'third_email', 'shirt_size',
         'statement_interest', 'bio', 'food_preference', 'other_food', 'irc_handle', 'twitter_name',
         'linkedin_profile', 'projects', 'other_project', 'address', 'suburb', 'state', 'postcode',
         'country', 'city', 'gender', 'photo'];
@@ -27,22 +27,6 @@ jQuery(document).ready(function ($) {
             var radio     = $(this);
             var field     = radio.attr('name');
             var member_id = radio.attr('data-member-id');
-            //gerrit id is tied to primary email account
-            if(field == 'gerrit_id'){
-                if(!primary_email_action) {
-                    if (!window.confirm('If you change your gerrit id, also would change your primary mail address, do you agree with that?')) {
-                        e.preventDefault();
-                        return false;
-                    }
-                    else {
-                        gerrit_id_action = true;
-                        //change primary email address also
-                        var radio_email = $('#email_' + member_id, '#merge_table');
-                        radio_email.prop("checked", true).trigger("click");
-                    }
-                }
-                primary_email_action = false;
-            }
             if(field == 'email'){
                 if(any_account_has_gerrit) {
                     if (!gerrit_id_action) {
@@ -64,11 +48,18 @@ jQuery(document).ready(function ($) {
         });
     }
 
-
     $('.merge').click(function (e) {
         e.preventDefault();
         var btn = $(this);
-        if (window.confirm('This is not a reversible action. Are you sure?')) {
+
+        swal({
+            title: 'Are you sure?',
+            text: 'This is not a reversible action. Are you sure?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, merge it!',
+            cancelButtonText: 'No',
+        }).then(function() {
 
             var merge_result = {};
 
@@ -94,14 +85,18 @@ jQuery(document).ready(function ($) {
                 data: JSON.stringify(merge_result),
                 contentType: "application/json; charset=utf-8",
                 success: function (data, textStatus, jqXHR) {
-                    alert('You have been merged your duplicate account successfully. Thank you.');
+                    swal(
+                        'About your request',
+                        'You have been merged your duplicate account successfully. Thank you.',
+                        'success'
+                    );
                     window.location = '/';
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     ajaxError(jqXHR, textStatus, errorThrown);
                 }
             });
-        }
+        });
         return false;
     });
 });

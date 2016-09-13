@@ -19,33 +19,11 @@ interface ICLAMember extends IEntity {
 	const CCLAGroupSlug      = 'ccla-admin';
 	const CCLAPermissionSlug = 'CCLA_ADMIN';
 
-	/**
-	 * @return string
-	 */
-	public function getGerritId();
-
     /**
      * @return bool
      */
     public function isGerritUser();
 
-	/**
-	 * @return DateTime
-	 */
-	public function getLastCommitedDate();
-
-
-	/**
-	 * @param int $gerrit_id
-	 * @return void
-	 */
-	public function signICLA($gerrit_id);
-
-	/**
-	 * @param DateTime $date
-	 * @return void
-	 */
-	public function updateLastCommitedDate(DateTime $date);
 
 	/**
 	 * @return bool
@@ -62,11 +40,4 @@ interface ICLAMember extends IEntity {
 	 */
 	public function hasSignedCLA();
 
-    /**
-     * @param string         $gerrit_id
-     * @param string         $gerrit_user
-     * @param DateTime $last_commited_date
-     * @return void
-     */
-    public function updateGerritUser($gerrit_id, $gerrit_user, DateTime $last_commited_date);
 }

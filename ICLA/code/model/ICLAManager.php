@@ -16,22 +16,13 @@
  */
 final class ICLAManager {
 
-	const ICLAGroupTaskName = 'ICLAGroupTask';
-
-	const UpdateLastCommittedDateTaskName = 'UpdateLastCommittedDateTask';
-
 	/**
 	 * @var IGerritAPI
 	 */
 	private $gerrit_api;
 
 	/**
-	 * @var IBatchTaskRepository
-	 */
-	private $batch_repository;
-
-	/**
-	 * @var ICLAMemberRepository
+	 * @var IGerritUserRepository
 	 */
 	private $member_repository;
 
@@ -40,126 +31,68 @@ final class ICLAManager {
 	 */
 	private $tx_manager;
 
-	/**
-	 * @var IBatchTaskFactory
-	 */
-	private $batch_task_factory;
 
 	/**
 	 * @param IGerritAPI           $gerrit_api
-	 * @param IBatchTaskRepository $batch_repository
-	 * @param ICLAMemberRepository $member_repository
-	 * @param IBatchTaskFactory    $batch_task_factory
+	 * @param IGerritUserRepository $member_repository
 	 * @param ITransactionManager  $tx_manager
 	 */
 	public function __construct(IGerritAPI $gerrit_api,
-	                            IBatchTaskRepository $batch_repository,
-	                            ICLAMemberRepository $member_repository,
-	                            IBatchTaskFactory    $batch_task_factory,
+                                IGerritUserRepository $member_repository,
 								ITransactionManager  $tx_manager){
 
 		$this->gerrit_api         = $gerrit_api;
-		$this->batch_repository   = $batch_repository;
 		$this->member_repository  = $member_repository;
-		$this->batch_task_factory = $batch_task_factory;
 		$this->tx_manager         = $tx_manager;
 	}
 
 	/**
 	 * @param string $icla_group_id
-	 * @param int $batch_size
 	 * @return int
 	 */
-	public function processICLAGroup($icla_group_id, $batch_size){
+	public function processICLAGroup($icla_group_id){
 
-		$batch_repository   = $this->batch_repository;
+
 		$member_repository  = $this->member_repository;
 		$gerrit_api         = $this->gerrit_api;
-		$batch_task_factory = $this->batch_task_factory;
 
-		return $this->tx_manager->transaction(function() use($icla_group_id, $batch_size, $member_repository, $batch_repository, $gerrit_api, $batch_task_factory) {
 
-			$task                  = $batch_repository->findByName(ICLAManager::ICLAGroupTaskName);
-			$members_ids_on_icla   = $member_repository->getAllGerritIds();
+		return $this->tx_manager->transaction(function() use($icla_group_id, $member_repository,  $gerrit_api) {
+
 			// query gerrit service
 			$icla_members_response = $gerrit_api->listAllMembersFromGroup($icla_group_id);
 			$icla_members_count    = count($icla_members_response);
 
 			if($icla_members_count === 0) return; //nothing to process...
 
-			if(!$task){
-				$task = $batch_task_factory->buildBatchTask(ICLAManager::ICLAGroupTaskName, $icla_members_count);
-				$batch_repository->add($task);
-				$task->updateResponse(json_encode($icla_members_response));
-			}
-			else {
-				if($icla_members_count == count(json_decode($task->lastResponse(), true))) return;//nothing to process..
-				$task->initialize($icla_members_count);
-				$task->updateResponse(json_encode($icla_members_response));
-			}
 
-			$updated_members = 0;
+			$gerrit_users           = 0;
+         	foreach($icla_members_response as $gerrit_info){
 
-			for($i = 0; $i < $batch_size && ( ($task->lastRecordProcessed()) < $task->totalRecords() ); $i++){
-
-				$index       = $task->lastRecordProcessed();
-				$gerrit_info = $icla_members_response[$index];
 				$email       = @$gerrit_info['email'];
-				$gerrit_id   = @$gerrit_info['_account_id'];
+				$account_id  = @$gerrit_info['_account_id'];
 
-				if(!empty($email) && !empty($gerrit_id) ){
-					if(!array_key_exists($gerrit_id, $members_ids_on_icla)){
+				if(!empty($email) && !empty($account_id) ){
 						$member = $member_repository->findByEmail($email);
 						if($member){
-							$member->signICLA($gerrit_id);
-							++$updated_members;
+							if(is_null($member->addGerritUser($account_id, $email))) continue;
+                            ++$gerrit_users;
 						}
-					}
+						else{
+						    // we dont have a member associated with it :/
+                            // check by account id
+                            if(!is_null($member_repository->getGerritUserByAccountId($account_id))) continue;
+                            $gerrit_user             = new GerritUser();
+                            $gerrit_user->AccountID  = $account_id;
+                            $gerrit_user->Email      = $email;
+                            $gerrit_user->write();
+                            ++$gerrit_users;
+                        }
+
 				}
-				$task->updateLastRecord();
 			}
 
-			return $updated_members;
+			return $gerrit_users;
 		});
 	}
-
-
-	public function updateLastCommittedDate($batch_size){
-
-		$batch_repository   = $this->batch_repository;
-		$member_repository  = $this->member_repository;
-		$gerrit_api         = $this->gerrit_api;
-		$batch_task_factory = $this->batch_task_factory;
-
-		return $this->tx_manager->transaction(function() use($batch_size, $member_repository, $batch_repository, $gerrit_api, $batch_task_factory) {
-
-			$task = $batch_repository->findByName(ICLAManager::UpdateLastCommittedDateTaskName);
-
-			$last_index      = 0;
-			$members         = array();
-			$updated_members = 0;
-
-			if($task){
-				$last_index = $task->lastRecordProcessed();
-				list($members,$total_size) = $member_repository->getAllICLAMembers($last_index, $batch_size);
-				if($task->lastRecordProcessed() >= $total_size) $task->initialize($total_size);
-			}
-			else{
-				list($members,$total_size) = $member_repository->getAllICLAMembers($last_index, $batch_size);
-				$task = $batch_task_factory->buildBatchTask(ICLAManager::UpdateLastCommittedDateTaskName, $total_size);
-				$batch_repository->add($task);
-			}
-
-			foreach($members as $member){
-				$last_commit_date = $gerrit_api->getUserLastCommit($member->getGerritId());
-				if(!is_null($last_commit_date) && $last_commit_date){
-					$member->updateLastCommitedDate($last_commit_date);
-					++$updated_members;
-				}
-				$task->updateLastRecord();
-			}
-
-			return $updated_members;
-		});
-	}
-} 
+}

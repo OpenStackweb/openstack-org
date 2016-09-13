@@ -65,9 +65,6 @@ final class DeletedDupeMember
         'City'=>'Varchar(64)',
         'Gender'=>'Varchar(32)',
         'TypeOfDirector' => 'Text',
-        'CLASigned' => 'Boolean',
-        'LastCodeCommit' => 'SS_Datetime',
-        'GerritID' => 'Text'
     );
 
     /**

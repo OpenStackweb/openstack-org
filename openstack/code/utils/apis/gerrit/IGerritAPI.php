@@ -22,15 +22,11 @@ interface IGerritAPI {
 	public function listAllMembersFromGroup($group_id);
 
 	/**
-	 * @param string $gerrit_user_id
-	 * @return DateTime
-	 */
-	public function getUserLastCommit($gerrit_user_id);
-
-	/**
-	 * @param string $gerrit_user_id
-	 * @param string $status
-	 * @return array
-	 */
-	public function getUserCommits($gerrit_user_id, $status, $batch_size = 500, $sort_key_after = null);
+     * @param string $gerrit_user_id
+     * @param string $status
+     * @param int $batch_size
+     * @param int|null $start
+     * @return mixed
+     */
+	public function getUserCommits($gerrit_user_id, $status, $batch_size = 500, $start = null);
 } 

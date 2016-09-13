@@ -27,21 +27,6 @@ final class SapphireCLAMemberRepository
         parent::__construct($entity);
     }
 
-    /***
-     * @return int[]
-     */
-    function getAllGerritIds()
-    {
-        $gerrit_ids = DB::query('SELECT GerritID FROM Member WHERE GerritID IS NOT NULL;');
-        $res = array();
-        foreach ($gerrit_ids as $id) {
-            $gerrit_id = (string)$id['GerritID'];
-            $res[$gerrit_id] = $gerrit_id;
-        }
-
-        return $res;
-    }
-
     /**
      * @param int $offset
      * @param int $limit
@@ -49,10 +34,7 @@ final class SapphireCLAMemberRepository
      */
     function getAllICLAMembers($offset, $limit)
     {
-        $query = new QueryObject;
-        $query->addAndCondition(QueryCriteria::equal('CLASigned', true));
-
-        return $this->getAll($query, $offset, $limit);
+        return $this->getAllICLAMembersByFilter($offset, $limit);
     }
 
     /**
@@ -63,11 +45,7 @@ final class SapphireCLAMemberRepository
      */
     function getAllIClaMembersByEmail($email, $offset, $limit)
     {
-        $query = new QueryObject;
-        $query->addAndCondition(QueryCriteria::equal('CLASigned', true));
-        $query->addAndCondition(QueryCriteria::like('Email', $email));
-
-        return $this->getAll($query, $offset, $limit);
+        return $this->getAllICLAMembersByFilter($offset, $limit , ["Email" => $email]);
     }
 
     /**
@@ -78,11 +56,7 @@ final class SapphireCLAMemberRepository
      */
     function getAllIClaMembersByFirstName($first_name, $offset, $limit)
     {
-        $query = new QueryObject;
-        $query->addAndCondition(QueryCriteria::equal('CLASigned', true));
-        $query->addAndCondition(QueryCriteria::like('FirstName', $first_name));
-
-        return $this->getAll($query, $offset, $limit);
+        return $this->getAllICLAMembersByFilter($offset, $limit , ["FirstName" => $first_name]);
     }
 
     /**
@@ -93,12 +67,32 @@ final class SapphireCLAMemberRepository
      */
     function getAllIClaMembersByLastName($last_name, $offset, $limit)
     {
-        $query = new QueryObject;
-        $query->addAndCondition(QueryCriteria::equal('CLASigned', true));
-        $query->addAndCondition(QueryCriteria::like('Surname', $last_name));
-
-        return $this->getAll($query, $offset, $limit);
+        return $this->getAllICLAMembersByFilter($offset, $limit , ["Surname" => $last_name]);
     }
 
+    private function getAllICLAMembersByFilter($offset, $limit, array $filters = []){
 
+        $base_query = <<<SQL
+FROM Member WHERE EXISTS (SELECT ID FROM GerritUser WHERE GerritUser.MemberID = Member.ID)
+SQL;
+
+        $extra_where = '';
+        if(count($filters) > 0){
+            foreach ($filters as $key => $val){
+                $extra_where .= " AND {$key} LIKE '%{$val}%' ";
+            }
+        }
+
+        $query_count  = DB::query("SELECT COUNT(ID) AS QTY {$base_query} {$extra_where};");
+        $total        = intval($query_count->column('QTY')[0]);
+        $query_select = DB::query("SELECT * {$base_query} {$extra_where} LIMIT {$limit} OFFSET {$offset};");
+
+        $res = [];
+
+        foreach ($query_select as $row){
+            $res[] = new Member($row);
+        }
+
+        return [$res, $total];
+    }
 }

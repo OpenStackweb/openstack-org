@@ -1,0 +1,18 @@
+---
+Name: 'icla-injection'
+After: 'framework/*','cms/*', 'openstack/*'
+---
+SangriaPage_Controller:
+  extensions:
+    - SangriaPageICLACompaniesExtension
+EditProfilePage_Controller:
+  extensions:
+    - EditProfilePageICLAExtension
+Member:
+  extensions:
+    - ICLAMemberDecorator
+Company:
+  extensions:
+    - ICLACompanyDecorator
+
+

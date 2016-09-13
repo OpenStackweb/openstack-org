@@ -42,3 +42,4 @@ migrations:
   - DefaultJobTypesSeeding
   - RSVPEmailSeeding
   - SummitVideoProcessingMigration
+  - UpdateGerritUsersMigration

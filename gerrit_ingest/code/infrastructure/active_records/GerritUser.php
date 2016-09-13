@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2014 Openstack Foundation
+ * Copyright 2016 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -11,23 +11,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+
 /**
- * Class PullCLAFromGerritTask
+ * Class GerritUser
  */
-final class PullCLAFromGerritTask extends CronTask {
+final class GerritUser extends DataObject
+{
+    static $db = array
+    (
+        'AccountID'      => 'Text',
+        'Email'          => 'Text',
+    );
 
-	function run(){
+    static $has_one = array(
+        'Member' => 'Member',
+    );
 
-		$manager = new ICLAManager (
-			new GerritAPI(GERRIT_BASE_URL, GERRIT_USER, GERRIT_PASSWORD),
-			new SapphireBatchTaskRepository,
-			new SapphireCLAMemberRepository,
-			new BatchTaskFactory,
-			SapphireTransactionManager::getInstance()
-		);
+    static $has_many = array(
+        'Commits' => 'GerritChangeInfo'
+    );
 
-		$members_updated = $manager->processICLAGroup(ICLA_GROUP_ID, PULL_ICLA_DATA_FROM_GERRIT_BATCH_SIZE);
-
-		echo $members_updated;
-	}
-} 
+}

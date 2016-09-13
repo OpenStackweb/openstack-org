@@ -221,7 +221,7 @@ final class SangriaPageExportDataExtension extends Extension
             return $this->owner->httpError('412', 'missing required param ext');
 
         $fields = $params['fields'];
-        $ext = $params['ext'];
+        $ext    = $params['ext'];
 
         $sanitized_fields = array();
 
@@ -241,11 +241,12 @@ final class SangriaPageExportDataExtension extends Extension
 
         $sql = <<< SQL
 		SELECT {$sanitized_fields}
+		, GROUP_CONCAT(DISTINCT U.AccountID, ' | ') AS GerritIds
 		, GROUP_CONCAT(G.Code, ' | ') AS Groups
 		FROM Member M
 		LEFT JOIN Group_Members GM on GM.MemberID = M.ID
 		LEFT JOIN `Group` G  on G.ID = GM.GroupID
-		WHERE GerritID IS NOT NULL
+		INNER JOIN GerritUser U ON U.MemberID = M.ID
 		GROUP BY M.ID
 		ORDER BY M.SurName, M.FirstName;
 SQL;
@@ -294,8 +295,10 @@ SQL;
 		   M.Surname,
 	       M.Email,
 		   COALESCE(NULLIF(M.SecondEmail , ''), 'N/A') AS Secondary_Email ,
-	       M.GerritID,
-	       COALESCE(NULLIF(M.LastCodeCommit, ''), 'N/A') AS LastCodeCommitDate,
+	       GROUP_CONCAT(DISTINCT U.AccountID, '|') AS GerritIds,  
+	       (
+SELECT UpdatedDate FROM GerritChangeInfo WHERE OwnerID IN (SELECT ID FROM GerritUser WHERE MemberID = M.ID)
+ORDER BY UpdatedDate DESC LIMIT 0,1) AS LastCodeCommitDate,
 		   g.Code as Member_Status,
 		   CASE g.Code WHEN 'foundation-members' THEN (SELECT LA.Created FROM LegalAgreement LA WHERE LA.MemberID =  M.ID and LA.LegalDocumentPageID = 422 LIMIT 1) ELSE 'N/A'END AS FoundationMemberJoinDate,
 		   CASE g.Code WHEN 'foundation-members' THEN 'N/A' ELSE ( SELECT ActionDate FROM FoundationMemberRevocationNotification WHERE RecipientID = M.ID AND Action = 'Revoked' LIMIT 1) END AS DateMemberStatusChanged ,
@@ -305,12 +308,13 @@ SQL;
 		LEFT JOIN Org O on O.ID = A.OrganizationID
 		INNER JOIN Group_Members gm on gm.MemberID = M.ID
 		INNER JOIN `Group` g on g.ID = gm.GroupID and ( g.Code = 'foundation-members' or g.Code = 'community-members')
-		WHERE GerritID IS NOT NULL AND g.Code IN ('{$sanitized_filters}')
+		INNER JOIN GerritUser U ON U.MemberID = M.ID
+		WHERE g.Code IN ('{$sanitized_filters}')
 		GROUP BY M.ID;
 SQL;
 
         $res = DB::query($sql);
-        $fields = array('FirstName', 'Surname', 'Email', 'Secondary_Email', 'GerritID', 'LastCodeCommitDate', 'Member_Status', 'FoundationMemberJoinDate', 'DateMemberStatusChanged', 'Company_Affiliations');
+        $fields = array('FirstName', 'Surname', 'Email', 'Secondary_Email', 'GerritIds', 'LastCodeCommitDate', 'Member_Status', 'FoundationMemberJoinDate', 'DateMemberStatusChanged', 'Company_Affiliations');
         $data = array();
 
         foreach ($res as $row) {

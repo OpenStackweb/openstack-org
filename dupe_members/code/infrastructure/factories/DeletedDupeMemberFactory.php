@@ -62,9 +62,6 @@ final class DeletedDupeMemberFactory
         $deleted->City = $member->City;
         $deleted->Gender = $member->Gender;
         $deleted->TypeOfDirector = $member->TypeOfDirector;
-        $deleted->CLASigned = $member->CLASigned;
-        $deleted->LastCodeCommit = $member->LastCodeCommit;
-        $deleted->GerritID = $member->GerritID;
         return $deleted;
     }
 }

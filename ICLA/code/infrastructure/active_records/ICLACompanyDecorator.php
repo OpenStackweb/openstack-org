@@ -28,11 +28,9 @@ class ICLACompanyDecorator
 		'CCLASigned' => FALSE,
 	);
 
-
 	private static $has_many = array(
 		'Teams' => 'Team'
 	);
-
 
 	/**
 	 * @return void

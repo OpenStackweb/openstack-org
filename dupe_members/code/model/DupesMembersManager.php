@@ -288,11 +288,9 @@ final class DupesMembersManager {
             $request->doConfirmation($token);
             //merge data
             //we cant change email at this stage, we need to delete the dup account first...
-            if(isset($merge_data['gerrit_id'])){
-                $current_account->updateGerritUser($merge_data['gerrit_id'], $current_account->getEmail(),
-                    ($dupe_account->getGerritId() == $merge_data['gerrit_id'])? $dupe_account->getLastCommitedDate(): $current_account->getLastCommitedDate()
-                );
-            }
+            // merge gerrit users
+            foreach($dupe_account->GerritUsers() as $gerrit_user)
+                $current_account->addGerritUser($gerrit_user->AccountID, $gerrit_user->Email);
 
             if(isset($merge_data['first_name']) && isset($merge_data['surname']) ){
                 $current_account->updateCompleteName($merge_data['first_name'], $merge_data['surname'] );

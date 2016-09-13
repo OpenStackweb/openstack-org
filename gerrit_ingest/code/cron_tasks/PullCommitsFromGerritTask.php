@@ -18,23 +18,17 @@
 final class PullCommitsFromGerritTask extends CronTask  {
 
     function run(){
-
-        $batch_size = PullCommitsFromGerritTaskBatchSize;
-        if(isset($_GET['batch_size'])){
-            $batch_size = intval(trim(Convert::raw2sql($_GET['batch_size'])));
-            echo sprintf('batch_size set to %s', $batch_size);
-        }
+        $init_time  = time();
 
         $manager = new GerritIngestManager (
             new GerritAPI(GERRIT_BASE_URL, GERRIT_USER, GERRIT_PASSWORD),
-            new SapphireBatchTaskRepository,
-            new SapphireCLAMemberRepository,
-            new BatchTaskFactory,
+            new SapphireGerritUserRepository,
             SapphireTransactionManager::getInstance()
         );
 
-        $members_updated = $manager->processCommits($batch_size);
+        $processed = $manager->processCommits();
 
-        echo $members_updated;
+        $finish_time = time() - $init_time;
+        echo 'processed records ' . $processed. ' - time elapsed : '.$finish_time. ' seconds.'.PHP_EOL;
     }
 }

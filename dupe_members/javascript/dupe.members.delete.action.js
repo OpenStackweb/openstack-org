@@ -15,7 +15,15 @@ jQuery(document).ready(function($) {
     $('#btn-keep').click(function(e){
         e.preventDefault();
         var btn = $(this);
-        if(window.confirm('Are you sure?')){
+
+        swal({
+            title: 'Are you sure?',
+            text: 'You will keep this member account!',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, keep it!',
+            cancelButtonText: 'No',
+        }).then(function() {
             var token = btn.attr('data-token');
             $.ajax({
                 async:true,
@@ -23,14 +31,19 @@ jQuery(document).ready(function($) {
                 url: 'api/v1/dupes-members/'+token+'/account',
                 dataType: "json",
                 success: function (data,textStatus,jqXHR) {
-                    alert('You decided to keep  your duplicate account. Thank you.');
+                    swal(
+                        'About your request',
+                        'You decided to keep  your duplicate account. Thank you.',
+                        'success'
+                    );
                     window.location = '/';
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     ajaxError( jqXHR, textStatus, errorThrown);
                 }
             });
-        }
+        });
+
         return false;
     });
 
@@ -38,7 +51,15 @@ jQuery(document).ready(function($) {
     $('#btn-merge').click(function(e){
         e.preventDefault();
         var btn = $(this);
-        if(window.confirm('Are you sure?')){
+
+        swal({
+            title: 'Are you sure?',
+            text: 'You will merge this member account!',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, merge it!',
+            cancelButtonText: 'No, keep it',
+        }).then(function() {
             var token = btn.attr('data-token');
             $.ajax({
                 async:true,
@@ -46,14 +67,19 @@ jQuery(document).ready(function($) {
                 url: 'api/v1/dupes-members/'+token+'/account',
                 dataType: "json",
                 success: function (data,textStatus,jqXHR) {
-                   alert('An email will be sent to your duplicate account email with the merge instructions, please follow them. Thank you.');
-                   window.location = '/';
+                    swal(
+                        'About your request',
+                        'An email will be sent to your duplicate account email with the merge instructions, please follow them. Thank you.',
+                        'success'
+                    );
+                    window.location = '/';
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     ajaxError( jqXHR, textStatus, errorThrown);
                 }
             });
-        }
+        });
+
         return false;
     });
 
@@ -61,7 +87,14 @@ jQuery(document).ready(function($) {
     $('#btn-delete').click(function(e){
         e.preventDefault();
         var btn = $(this);
-        if(window.confirm('This will delete your duplicate account and its not a reversible action. Are you sure?')){
+        swal({
+            title: 'Are you sure?',
+            text: 'This will delete your duplicate account and its not a reversible action. Are you sure?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, keep it',
+        }).then(function() {
             var token = btn.attr('data-token');
             $.ajax({
                 async:true,
@@ -69,14 +102,19 @@ jQuery(document).ready(function($) {
                 url: 'api/v1/dupes-members/'+token+'/account',
                 dataType: "json",
                 success: function (data,textStatus,jqXHR) {
-                    alert('You have been deleted your duplicate account successfully. Thank you.');
+                    alert();
+                    swal(
+                        'About your request',
+                        'You have been deleted your duplicate account successfully. Thank you.',
+                        'success'
+                    );
                     window.location = '/';
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     ajaxError( jqXHR, textStatus, errorThrown);
                 }
             });
-        }
+        });
         return false;
     });
 });

@@ -12,9 +12,10 @@
  * limitations under the License.
  **/
 interface ITransactionManager {
-	/**
-	 * @param callable $callback
-	 * @return mixed
-	 */
+
+    /**
+     * @param Closure $callback
+     * @return mixed
+     */
 	public function transaction(Closure $callback);
 } 

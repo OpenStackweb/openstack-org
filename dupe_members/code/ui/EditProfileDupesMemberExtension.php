@@ -58,6 +58,8 @@ final class EditProfileDupesMemberExtension extends Extension {
         if($qty > 0){
 
             Requirements::css('dupe_members/css/edit.profile.dupes.member.extension.css');
+            Requirements::css('themes/openstack/bower_assets/sweetalert2/dist/sweetalert2.min.css');
+            Requirements::javascript('themes/openstack/bower_assets/sweetalert2/dist/sweetalert2.min.js');
             Requirements::javascript('marketplace/code/ui/admin/js/utils.js');
             Requirements::javascript('dupe_members/javascript/edit.profile.dupes.member.extension.js');
 

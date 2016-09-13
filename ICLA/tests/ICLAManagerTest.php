@@ -23,9 +23,7 @@ final class ICLAManagerTest extends SapphireTest {
 
 		$manager = new ICLAManager (
 			new GerritAPI('https://review.openstack.org', 'smarcet', ''),
-			new SapphireBatchTaskRepository,
 			new SapphireCLAMemberRepository,
-			new BatchTaskFactory,
 			SapphireTransactionManager::getInstance()
 		);
 
@@ -39,9 +37,7 @@ final class ICLAManagerTest extends SapphireTest {
 
 		$manager = new ICLAManager (
 			new GerritAPI('https://review.openstack.org', 'smarcet', 'TwxKcgZurLX6'),
-			new SapphireBatchTaskRepository,
 			new SapphireCLAMemberRepository,
-			new BatchTaskFactory,
 			SapphireTransactionManager::getInstance()
 		);
 

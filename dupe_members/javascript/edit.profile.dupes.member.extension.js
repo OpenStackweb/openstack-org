@@ -16,7 +16,15 @@ jQuery(document).ready(function($) {
     $('.dupes-member-delete-account').click(function(e){
         e.preventDefault();
         var btn = $(this);
-        if(window.confirm('Are you sure?')){
+
+        swal({
+            title: 'Are you sure?',
+            text: 'You will not be able to recover this member account!',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, keep it',
+        }).then(function() {
             var member_id = btn.attr('data-id');
             $.ajax({
                 async:true,
@@ -28,14 +36,18 @@ jQuery(document).ready(function($) {
                         var li = $(this);
                         checkEmptyWarning(li);
                         li.remove();
-                        window.alert('Your request to delete the duplicate account has been sent to the email address on file for that account. If we do not receive a response for the delete request within 48 hours, we will restore the alert until it is dismissed from your account');
+                        swal(
+                            'About your request',
+                            'Your request to delete the duplicate account has been sent to the email address on file for that account. If we do not receive a response for the delete request within 48 hours, we will restore the alert until it is dismissed from your account',
+                            'success'
+                        );
                     });
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     ajaxError( jqXHR, textStatus, errorThrown);
                 }
             });
-        }
+        });
         return false;
     });
 
@@ -43,7 +55,14 @@ jQuery(document).ready(function($) {
     $('.dupes-member-merge-account').click(function(e){
         e.preventDefault();
         var btn = $(this);
-        if(window.confirm('Are you sure?')){
+        swal({
+            title: 'Are you sure?',
+            text: 'Are you sure?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, merge it!',
+            cancelButtonText: 'No, keep it',
+        }).then(function() {
             var member_id = btn.attr('data-id');
             $.ajax({
                 async:true,
@@ -55,19 +74,30 @@ jQuery(document).ready(function($) {
                         var li = $(this);
                         checkEmptyWarning(li);
                         li.remove();
-                        window.alert('Your request to merge the duplicate account has been sent to the email address on file for that account. If we do not receive a response for the merge request within 48 hours, we will restore the alert until it is dismissed from your account');
+                        swal(
+                            'About your request',
+                            'Your request to merge the duplicate account has been sent to the email address on file for that account. If we do not receive a response for the merge request within 48 hours, we will restore the alert until it is dismissed from your account',
+                            'success'
+                        );
                     });
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     ajaxError( jqXHR, textStatus, errorThrown);
                 }
             });
-        }
+        });
         return false;
     });
 
     $("#dupes-dismiss").click(function(e){
-        if(window.confirm('Do you want to dismiss this warning?')){
+        swal({
+            title: 'Are you sure?',
+            text: 'Do you want to dismiss this warning?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, dismiss it!',
+            cancelButtonText: 'No, keep it',
+        }).then(function() {
             $.ajax({
                 async:true,
                 type: 'PATCH',
@@ -80,14 +110,21 @@ jQuery(document).ready(function($) {
                     ajaxError( jqXHR, textStatus, errorThrown);
                 }
             });
-        }
+        });
     });
 
     // not my account
     $('.dupes-member-not-my-account').click(function(e){
         e.preventDefault();
         var btn = $(this);
-        if(window.confirm('Are you sure?')){
+        swal({
+            title: 'Are you sure?',
+            text: 'Are you sure?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, keep it',
+        }).then(function() {
             var foreign_id = btn.attr('data-id');
             $.ajax({
                 async:true,
@@ -105,7 +142,7 @@ jQuery(document).ready(function($) {
                     ajaxError( jqXHR, textStatus, errorThrown);
                 }
             });
-        }
+        });
         return false;
     });
 });

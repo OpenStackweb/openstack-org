@@ -11,10 +11,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+/**
+ * Class PullCLAFromGerritTask
+ */
+final class PullCLAFromGerritTask extends CronTask {
 
-class GerritMember extends DataExtension {
+	function run(){
 
-    private static $has_many = array(
-        'Commits' => 'GerritChangeInfo'
-    );
-}
+		$manager = new ICLAManager (
+			new GerritAPI(GERRIT_BASE_URL, GERRIT_USER, GERRIT_PASSWORD),
+			new SapphireGerritUserRepository,
+			SapphireTransactionManager::getInstance()
+		);
+
+		$members_updated = $manager->processICLAGroup(ICLA_GROUP_ID);
+
+		echo sprintf("Gerrit Users Processed %s .", $members_updated).PHP_EOL;
+	}
+} 

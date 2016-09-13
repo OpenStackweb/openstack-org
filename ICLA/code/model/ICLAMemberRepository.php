@@ -17,11 +17,6 @@
  */
 interface ICLAMemberRepository extends IMemberRepository
 {
-    /***
-     * @return int[]
-     */
-    function getAllGerritIds();
-
     /**
      * @param int $offset
      * @param int $limit

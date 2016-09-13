@@ -36,7 +36,7 @@ class GerritChangeInfo extends DataObject {
     );
 
     static private $has_one = array(
-        'Member' => 'Member'
+        'Owner' => 'GerritUser'
     );
 
 }

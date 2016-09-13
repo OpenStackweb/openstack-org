@@ -11,5 +11,4 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-define ('PullCommitsFromGerritTaskBatchSize', 1000);
-Object::add_extension('SangriaPage_Controller', 'SangriaPageGerritStatisticsExtension');
+

@@ -15,7 +15,6 @@
  * Class GerritAPI
  */
 final class GerritAPI
-	extends AbstractRestfulServiceRequestor
 	implements IGerritAPI  {
 
 	/**
@@ -51,47 +50,95 @@ final class GerritAPI
 	 */
 	public function listAllMembersFromGroup($group_id){
 		$url  = sprintf("%s/a/groups/%s/members", $this->domain, $group_id);
-		$json = $this->fixGerritJsonResponse($this->doRequest($url, $this->user, $this->password));
+		$json = $this->fixGerritJsonResponse($this->request('GET', $url));
 		if(strtolower($json)==='unauthorized')
 			throw new UnauthorizedRestfullAPIException($json);
 
 		return json_decode($json, true);
 	}
 
-	/**
-	 * @param string $gerrit_user_id
-	 * @return DateTime
-	 */
-	public function getUserLastCommit($gerrit_user_id){
-		$url  = sprintf("%s/changes/?q=status:merged+owner:%s&n=1", $this->domain, $gerrit_user_id);
-		$json = $this->fixGerritJsonResponse($this->doRequest($url));
-		$response = json_decode($json, true);
-		if(is_array($response) && count($response) > 0){
-			$response = $response[0];
-			$last_committed_date = $response['updated'];
-			$last_committed_date = explode('.',$last_committed_date);
-			if(is_array($last_committed_date) && count($last_committed_date) > 0){
-				return DateTime::createFromFormat('Y-m-d H:i:s', $last_committed_date[0]);
-			}
-		}
-		return null;
-	}
+    /**
+     * @param string $method
+     * @param string $url
+     * @param string|null $query
+     * @return string
+     * @throws EntityValidationException
+     */
+	private function request($method, $url, $query = null){
+        try {
+            $client   = new \GuzzleHttp\Client(
+                [
+                    'defaults'            => [
+                        'timeout'         => 60,
+                        'allow_redirects' => false,
+                        'verify'          => true
+                    ]
+                ]
+            );
+
+            $options  = [
+                'auth' => [
+                    $this->user,
+                    $this->password,
+                    "Digest"
+                ]
+            ];
+
+            if(!empty($query)){
+                $options['query'] = $query;
+            }
+
+            $request  = $client->createRequest($method, $url , $options);
+
+            $response = $client->send($request);
+
+            if($response->getStatusCode() == 200)
+                return $response->getBody()->getContents();
+
+            throw new Exception();
+
+        } catch (Exception $ex) {
+            SS_Log::log($ex, SS_Log::ERR);
+            throw new EntityValidationException
+            (
+                [
+                    ['message' => 'server error']
+                ]
+            );
+        }
+    }
+
 
 	private function fixGerritJsonResponse($json){
 		$json = str_replace(")]}'",'',$json);
 		return $json;
 	}
 
-	/**
-	 * @param string $gerrit_user_id
-	 * @param string $status
-	 * @return array
-	 */
-	public function getUserCommits($gerrit_user_id, $status, $batch_size = 500, $sort_key_after = null)
+    /**
+     * @param string $gerrit_user_id
+     * @param string $status
+     * @param int $batch_size
+     * @param null $start
+     * @return mixed|null
+     */
+	public function getUserCommits($gerrit_user_id, $status, $batch_size = 500, $start = null)
 	{
-		$start_from    = (!is_null($sort_key_after))?'&N='.$sort_key_after:'';
-		$url  = sprintf("%s/changes/?q=status:%s+owner:%s&n=%s%s", $this->domain,$status, $gerrit_user_id,  $batch_size, $start_from);
-		$json = $this->fixGerritJsonResponse($this->doRequest($url));
+	    $query         =[
+
+            //'q' => sprintf("status:%s+owner:%s", $status, $gerrit_user_id),
+            //'n' => $batch_size
+            'q' => sprintf("owner:%s status:%s", $gerrit_user_id, $status),
+            'n' => intval($batch_size)
+        ];
+
+        if(!is_null($start)){
+            // The S or start query parameter can be supplied to skip a number of changes from the list.
+            $query['S'] = $start;
+        }
+
+		$url           = sprintf("%s/a/changes/", $this->domain);
+		$json          = $this->fixGerritJsonResponse($this->request('GET', $url, $query));
+
 		$response = json_decode($json, true);
 		if(is_array($response) && count($response) > 0){
 			return $response;

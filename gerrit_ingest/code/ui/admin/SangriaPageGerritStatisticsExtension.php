@@ -55,8 +55,8 @@ class SangriaPageGerritStatisticsExtension extends Extension {
 
         $sql = <<< SQL
 SELECT C.Commits, M.Email
-FROM ( SELECT COUNT(ID) Commits , MemberId FROM GerritChangeInfo WHERE {$date_filter} GROUP BY MemberID) AS C
-INNER JOIN Member M on M.ID = C.MemberId
+FROM ( SELECT COUNT(ID) Commits , OwnerID FROM GerritChangeInfo WHERE {$date_filter} GROUP BY OwnerID) AS C
+INNER JOIN GerritUser M on M.ID = C.OwnerID
 ORDER BY C.Commits DESC
 SQL;
 
@@ -75,7 +75,9 @@ SQL;
         $date_filter = SangriaPage_Controller::$date_filter_query;
 
         $sql = <<< SQL
-SELECT COUNT(C.ID) AS Commits , M.Country FROM GerritChangeInfo C INNER JOIN Member M on M.ID = C.MemberId
+SELECT COUNT(C.ID) AS Commits , IFNULL(M.Country, 'N/A') AS Country FROM GerritChangeInfo C 
+INNER JOIN GerritUser U on U.ID = C.OwnerID
+LEFT JOIN Member M on M.ID = U.MemberID
 WHERE {$date_filter}
 GROUP BY M.Country ORDER BY Commits DESC;
 SQL;
@@ -113,8 +115,8 @@ SQL;
 
         $sql = <<< SQL
 SELECT COUNT(M.ID)
-FROM ( SELECT COUNT(ID) Commits , MemberId FROM GerritChangeInfo WHERE {$date_filter} GROUP BY MemberID) AS C
-INNER JOIN Member M on M.ID = C.MemberId;
+FROM ( SELECT COUNT(ID) Commits , OwnerID FROM GerritChangeInfo WHERE {$date_filter} GROUP BY OwnerID) AS C
+INNER JOIN GerritUser M on M.ID = C.OwnerID;
 SQL;
 
         $res = DB::query($sql);

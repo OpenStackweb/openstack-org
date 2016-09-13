@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2014 Openstack Foundation
+ * Copyright 2016 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -11,23 +11,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-/**
- * Class UpdateLastCommittedDateTask
- */
-final class UpdateLastCommittedDateTask extends CronTask {
 
-	function run(){
+interface IGerritUserRepository extends IMemberRepository
+{
+    /**
+     * @param int $page_nbr
+     * @param int $page_size
+     * @return array
+     */
+    function getAllGerritUsersByPage($page_nbr = 1, $page_size = 100);
 
-		$manager = new ICLAManager (
-			new GerritAPI(GERRIT_BASE_URL, GERRIT_USER, GERRIT_PASSWORD),
-			new SapphireBatchTaskRepository,
-			new SapphireCLAMemberRepository,
-			new BatchTaskFactory,
-			SapphireTransactionManager::getInstance()
-		);
-
-		$members_updated = $manager->updateLastCommittedDate(PULL_LAST_COMMITTED_DATA_FROM_GERRIT_BATCH_SIZE);
-
-		echo $members_updated;
-	}
+    /**
+     * @param string $account_id
+     * @return GerritUser
+     */
+    function getGerritUserByAccountId($account_id);
 }

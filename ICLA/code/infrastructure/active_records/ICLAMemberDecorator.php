@@ -22,59 +22,42 @@ final class ICLAMemberDecorator
 
 	//Add extra database fields
 
-
 	private static $db = array(
-		'CLASigned' => 'Boolean',
-		'LastCodeCommit' => 'SS_Datetime',
-		'GerritID' => 'Text',
 	);
 
 	private static $defaults = array(
-		'CLASigned' => FALSE,
+
 	);
 
+    private static $has_many = array(
+        'GerritUsers' => 'GerritUser'
+    );
 
 	private static $belongs_many_many = array(
 		'Teams' => 'Team'
 	);
 
-
-	/**
-	 * @return string
-	 */
-	public function getGerritId()
-	{
-		return (string)$this->owner->getField('GerritID');
-	}
-
+    /**
+     * @return bool
+     */
     public function isGerritUser(){
-        return $this->getGerritId()!='';
+        return $this->owner->GerritUsers()->count() > 0;
     }
 
-    public function updateGerritUser($gerrit_id, $gerrit_user, DateTime $last_commited_date){
-        $this->owner->setField('GerritID',$gerrit_id);
-        $this->owner->setField('Email', $gerrit_user);
-        $this->owner->setField('CLASigned',true);
-        $this->updateLastCommitedDate($last_commited_date);
+    /**
+     * @param string $gerrit_id
+     * @param string $email
+     * @return GerritUser|null
+     */
+    public function addGerritUser($gerrit_id, $email){
+        if($this->owner->GerritUsers()->filter('AccountID', $gerrit_id)->count() != 0) return null;
+        $gerrit_user             = new GerritUser();
+        $gerrit_user->AccountID  = $gerrit_id;
+        $gerrit_user->Email      = $email;
+        $gerrit_user->write();
+        $this->owner->GerritUsers()->add($gerrit_user);
+        return $gerrit_user;
     }
-
-	/**
-	 * @return DateTime
-	 */
-	public function getLastCommitedDate()
-	{
-		return new DateTime($this->owner->getField('LastCodeCommit'));
-	}
-
-	/**
-	 * @param int $gerrit_id
-	 * @return void
-	 */
-	public function signICLA($gerrit_id)
-	{
-		$this->owner->setField('GerritID',$gerrit_id);
-		$this->owner->setField('CLASigned',true);
-	}
 
 	/**
 	 * @return int
@@ -83,16 +66,6 @@ final class ICLAMemberDecorator
 	{
 		return (int)$this->owner->getField('ID');
 	}
-
-	/**
-	 * @param DateTime $date
-	 * @return void
-	 */
-	public function updateLastCommitedDate(DateTime $date)
-	{
-		$this->owner->setField('LastCodeCommit', $date->getTimestamp() );
-	}
-
 
 	function getAdminPermissionSet(array &$res){
 
@@ -164,6 +137,14 @@ final class ICLAMemberDecorator
 	 */
 	public function hasSignedCLA()
 	{
-		return (bool)$this->owner->getField('CLASigned');
+		return $this->isGerritUser();
 	}
+
+    public function onBeforeDelete()
+    {
+        foreach($this->owner->GerritUsers() as $gerritUser)
+        {
+            $gerritUser->delete();
+        }
+    }
 }

@@ -1,0 +1,7 @@
+---
+Name: 'gerrit-ingest-injection'
+After: 'framework/*','cms/*', 'openstack/*'
+---
+SangriaPage_Controller:
+  extensions:
+    - SangriaPageGerritStatisticsExtension

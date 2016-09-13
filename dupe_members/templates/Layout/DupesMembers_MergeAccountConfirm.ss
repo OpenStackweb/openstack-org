@@ -41,12 +41,9 @@
     <td>
         <% if currentRequestAnyAccountHasGerrit %>
             <% with CurrentAccount %>
-                <div class="checkbox">
-                    <label>
-                        <input id="gerrit_id_{$ID}" type="radio" class="gerrit_id" name="gerrit_id" data-member-id="{$ID}"
-                               value="<% if isGerritUser %>$getGerritId<% else %>0<% end_if %>" checked><% if isGerritUser %>$getGerritId<% else %>NOT SET<% end_if %>
-                    </label>
-                </div>
+              <% loop GerritUsers %>
+                  <span>$AccountID&nbsp;</span>
+              <% end_loop %>
             <% end_with %>
         <% else %>
             <div class="checkbox">
@@ -57,12 +54,9 @@
     <td>
         <% if currentRequestAnyAccountHasGerrit %>
         <% with DupeAccount %>
-                <div class="checkbox">
-                    <label>
-                        <input id="gerrit_id_{$ID}" type="radio" class="gerrit_id" name="gerrit_id" data-member-id="{$ID}"
-                               value="<% if isGerritUser %>$getGerritId<% else %>0<% end_if %>" ><% if isGerritUser %>$getGerritId<% else %>NOT SET<% end_if %>
-                    </label>
-                </div>
+            <% loop GerritUsers %>
+                <span>$AccountID&nbsp;</span>
+            <% end_loop %>
         <% end_with %>
         <% else %>
             <div class="checkbox">
