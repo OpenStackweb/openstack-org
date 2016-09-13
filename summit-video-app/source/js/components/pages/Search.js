@@ -36,7 +36,7 @@ class Search extends React.Component {
 						</div>
 					</div>
 				</div>
-				{() => {
+				{(() => {
 
 					if(this.props.loading || !this.props.videos) {
 						return <Loader />
@@ -45,8 +45,7 @@ class Search extends React.Component {
 					const {
 						titleMatches,
 						speakerMatches,
-						topicMatches,
-                        summitMatches
+						topicMatches
 					} = this.props.videos;
 
 					if(activeTab === 'titleMatches') {
@@ -73,16 +72,7 @@ class Search extends React.Component {
 							 />
 						);						
 					}
-                    if(activeTab === 'summitMatches') {
-						return (
-							<VideoPanel
-								title={`Videos matching summit "${term}"`}
-								videos={summitMatches}
-							 />
-						);
-					}
-
-				}()}
+				})()}
 			</div>
 		);
 	}

@@ -3,4 +3,4 @@
 <script type="text/javascript">
 	window.VideoAppConfig = $JSONConfig;
 </script>
-<% include Page_Scripts %>
+$WebpackJS('/summit-video-app/production', '/js/main.js')

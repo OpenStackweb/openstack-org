@@ -32,7 +32,7 @@ const Table = (props) => {
 				return (
 				<TableHeading 
 					onSort={props.onSort}
-					sortDir={() => {
+					sortDir={(() => {
 						if(col.props.columnKey && (col.props.columnKey === props.sortCol)) {
 							return props.sortDir;
 						}
@@ -40,7 +40,7 @@ const Table = (props) => {
 							return props.sortDir;
 						}
 						return null
-					}()}					
+					})()}					
 					sortable={col.props.sortable}
 					sortFunc={col.props.sortFunc}
 					columnIndex={i}
