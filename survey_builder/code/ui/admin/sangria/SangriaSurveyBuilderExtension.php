@@ -93,7 +93,7 @@ final class SangriaSurveyBuilderExtension extends Extension
         $vars = $request->getVars();
         if (isset($vars['url'])) unset($vars['url']);
         $vars['order'] = $field;
-        $vars['dir'] = $this->getSurveyListSortDir();
+        $vars['dir']   = $this->getSurveyListSortDir();
         return http_build_query($vars);
     }
 
@@ -119,11 +119,12 @@ final class SangriaSurveyBuilderExtension extends Extension
         list($templates, $count) = $this->survey_template_repository->getAll($query_templates, 0, PHP_INT_MAX);
 
         $page = intval($request->getVar('page'));
+
         $survey_template_id = intval($request->getVar('survey_template_id'));
-        $question_id = intval($request->getVar('question_id'));
-        $question_value = Convert::raw2sql($request->getVar('question_value'));
-        $question_value2 = Convert::raw2sql($request->getVar('question_value2'));
-        $question_value = !empty($question_value) ? $question_value : $question_value2;
+        $question_id        = intval($request->getVar('question_id'));
+        $question_value     = Convert::raw2sql($request->getVar('question_value'));
+        $question_value2    = Convert::raw2sql($request->getVar('question_value2'));
+        $question_value     = !empty($question_value) ? $question_value : $question_value2;
 
         $order = Convert::raw2sql($request->getVar('order'));
         $order_dir = Convert::raw2sql($request->getVar('dir'));
@@ -133,8 +134,9 @@ final class SangriaSurveyBuilderExtension extends Extension
 
         $sort_fields =
             [
-                'id' => 'ID',
-                'created' => 'Created'
+                'id'      => 'ID',
+                'created' => 'Created',
+                'updated' => 'LastEdited'
             ];
 
         $query_surveys = new QueryObject(new Survey);

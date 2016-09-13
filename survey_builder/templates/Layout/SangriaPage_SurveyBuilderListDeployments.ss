@@ -6,6 +6,7 @@
     <tr>
         <th><a href="$Top.Link(SurveyBuilderListDeployments)?$Top.getOrderLink(id)" title="order by Id">Id<i class="fa fa-fw fa-sort"></i></a></th>
         <th><a href="$Top.Link(SurveyBuilderListDeployments)?$Top.getOrderLink(created)" title="order by Created Date">Created<i class="fa fa-fw fa-sort"></i></a></th>
+        <th><a href="$Top.Link(SurveyBuilderListDeployments)?$Top.getOrderLink(updated)" title="order by Update Date">Last Edited<i class="fa fa-fw fa-sort"></i></a></th>
         <th>Created By</th>
         <th>Label</th>
         <th>Current Step</th>
@@ -18,6 +19,7 @@
         <tr>
             <td>$ID</td>
             <td>$Created</td>
+            <td>$LastEdited</td>
             <td>$CreatedBy.Email</td>
             <td>$getAnswerFor(Label)</td>
             <td>$CurrentStep.Template.Name</td>
