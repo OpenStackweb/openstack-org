@@ -1,4 +1,4 @@
-import 'babel/polyfill';
+import 'babel-polyfill';
 import 'array.prototype.move';
 import 'array.prototype.find';
 import 'array.prototype.findindex';

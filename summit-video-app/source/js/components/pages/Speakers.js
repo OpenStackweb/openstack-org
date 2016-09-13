@@ -63,7 +63,7 @@ class Speakers extends React.Component {
 							</div>						
 						</div>
 					</div>
-					{() => {
+					{(() => {
 						if(this.props.loading && !this.props.speakers.length) {
 							return <Loader />
 						}
@@ -91,7 +91,7 @@ class Speakers extends React.Component {
 
 							</div>
 						);
-					}()}
+					})()}
 				</div>
 			</div>
 		);		

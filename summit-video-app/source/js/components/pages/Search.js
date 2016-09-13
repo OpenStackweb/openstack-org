@@ -36,7 +36,7 @@ class Search extends React.Component {
 						</div>
 					</div>
 				</div>
-				{() => {
+				{(() => {
 
 					if(this.props.loading || !this.props.videos) {
 						return <Loader />
@@ -72,7 +72,7 @@ class Search extends React.Component {
 							 />
 						);						
 					}
-				}()}
+				})()}
 			</div>
 		);
 	}

@@ -50,7 +50,7 @@ This module should deprecate the `VideoPresentation` table.
 ## Contributing
 
 * Run `$ npm install` in the `source/` directory
-* Run `$ npm run start` in the `source/` directory to start the Webpack dev server
+* Run `$ npm run serve summit-video-app` in the webroot to start the Webpack dev server
 
 In dev mode, the Javascript and CSS assets will be loaded from the local webpack dev server instead of the web server.  This provides hot reloads of CSS and Javascript, meaning most of the time, reloading the browser is unnecessary. Further, changes to React components will hot reload in the browser and persist their state.
 
@@ -62,7 +62,7 @@ All assets that will be shipped to production, including images, need to be decl
 
 To run a production build:
 
-`npm run build`
+`npm run build summit-video-app`
 
 ## Tests
 

@@ -8,9 +8,7 @@
     <title>Track Chairs App | OpenStack.org</title>
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,300,500,700">
-	<% if not $WebpackDevServer %>
-	    <link rel="stylesheet" type="text/css" href="/summit-trackchair-app/production/css/main.css">
-	<% end_if %>
+	$WebpackCSS('/summit-trackchair-app/production/css/main.css')	
 
 </head>
 
@@ -19,10 +17,6 @@
     <script type="text/javascript">
         window.TrackChairAppConfig = $JSONConfig;
     </script>
-	<% if $WebpackDevServer %>
-	    <script type="text/javascript" src="http://127.0.0.1:3000/production/js/main.js"></script>
-	<% else %>
-		<script type="text/javascript" src="/summit-trackchair-app/production/js/main.js"></script>    
-	<% end_if %>
+    $WebpackJS('/summit-trackchair-app/production', '/js/main.js')
    </body>
 </html>

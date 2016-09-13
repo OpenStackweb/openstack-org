@@ -22,10 +22,8 @@
       <!--[if lt IE 9]>
       <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-      <![endif]-->
-      <% if not $WebpackDevServer %>
-      <link rel="stylesheet" type="text/css" href="summit-voting-app/production/css/main.css">
-      <% end_if %>
+      <![endif]-->      
+      $WebpackCSS('summit-voting-app/production/css/main.css')      
       <!-- Page-specific CSS -->
       <% include Analytics %>
    </head>
@@ -78,11 +76,7 @@
                   <script type="text/javascript">
                   	window.VotingAppConfig = $JSONConfig;
                   </script>
-				<% if $WebpackDevServer %>
-				    <script type="text/javascript" src="http://127.0.0.1:3000/production/js/main.js"></script>
-				<% else %>
-					<script type="text/javascript" src="summit-voting-app/production/js/main.js"></script>    
-				<% end_if %>                  
+				  $WebpackJS('/summit-voting-app/production', '/js/main.js')
                </div>
             </div>
             <!-- End Page Content -->
