@@ -34,4 +34,9 @@ interface ITrackAnswer extends IEntity
      * @return string
      */
     public function getFormattedAnswer();
+
+    /**
+     * @return string
+     */
+    public function getQuestionField($disabled = false);
 }

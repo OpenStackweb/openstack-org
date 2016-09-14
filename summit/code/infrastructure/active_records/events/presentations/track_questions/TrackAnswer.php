@@ -91,4 +91,18 @@ class TrackAnswer extends DataObject implements ITrackAnswer
         }
         return $res;
     }
+
+    /**
+     * @return string
+     */
+    public function getQuestionField($disabled = false)
+    {
+        $type = $this->Question()->Type();
+        $builder_class = $type.'QuestionTemplateUIBuilder';
+        $builder = Injector::inst()->create($builder_class);
+        $field   = $builder->build($this->Question(), $this);
+        $field->addHolderClass('track-question');
+        $field->setDisabled($disabled);
+        return $field->Field();
+    }
 }

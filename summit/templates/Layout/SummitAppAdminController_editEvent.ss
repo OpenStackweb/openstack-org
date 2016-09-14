@@ -133,14 +133,21 @@
                     </div>
                 </div>
             </div>
+            <% if $Top.Event.ExtraAnswers() %>
+            <hr>
             <div class="form-group">
-                <div classs="row">
-                    <div class="col-md-12">
-                        <label>Feedback</label>
-                        <div class="checkbox">
-                            <label> <input id="allow_feedback" name="allow_feedback" type="checkbox" <% if $Event.AllowFeedBack %> checked <% end_if %>> Allow Feedback </label>
-                        </div>
-                    </div>
+                <label>Track Questions</label><br>
+                <% loop $Top.Event.ExtraAnswers() %>
+                    $Question().Label
+                    $getQuestionField(true)
+                <% end_loop %>
+            </div>
+            <hr>
+            <% end_if %>
+            <div class="form-group">
+                <label>Feedback</label>
+                <div class="checkbox">
+                    <label> <input id="allow_feedback" name="allow_feedback" type="checkbox" <% if $Event.AllowFeedBack %> checked <% end_if %>> Allow Feedback </label>
                 </div>
             </div>
             <div class="form-group">
