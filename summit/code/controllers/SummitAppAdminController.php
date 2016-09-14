@@ -403,7 +403,7 @@ final class SummitAppAdminController extends Controller implements PermissionPro
                 (
                     'Summit'   => $summit,
                     'Event'    => $event,
-                    'Tab'      => (($event) ? 3 : 4),
+                    'Tab'      => (($event) ? 'schedule' : 'edit_event'),
                 )
             )
         );
