@@ -20,7 +20,8 @@ module.exports = {
     "survey_builder/js/report/survey-report-view":"./survey_builder/js/report/survey-report-view.js",
     "summit/javascript/schedule/admin/speakers-admin-view":"./summit/javascript/schedule/admin/speakers-admin-view.js",
     "summit/javascript/schedule/admin/promocode-admin-view":"./summit/javascript/schedule/admin/promocode-admin-view.js",
-    "summit/javascript/schedule/admin/events-bulk-view":"./summit/javascript/schedule/admin/events-bulk-view.js"
+    "summit/javascript/schedule/admin/events-bulk-view":"./summit/javascript/schedule/admin/events-bulk-view.js",
+    "summit/javascript/schedule/admin/room-metrics-view":"./summit/javascript/schedule/admin/room-metrics-view.js",
   },
   output: {
     path: __dirname ,

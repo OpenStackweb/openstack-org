@@ -32,6 +32,13 @@
     </li>
     <li <% if $Active == 'reports' %> class="active" <% end_if %>>
         <a href="$AdminLink/$SummitID/reports"><span class="fa-stack fa-lg pull-left"><i class="fa fa-list fa-stack-1x "></i></span>Reports</a>
+        <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+            <li <% if $Active == 'room_metrics' %> class="active" <% end_if %>>
+                <a href="$AdminLink/$SummitID/room_metrics">
+                    <span class="fa-stack pull-left"><i class="fa fa-chevron-right fa-stack-1x" style="padding-top: 5px;"></i></span>Room Metrics
+                </a>
+            </li>
+        </ul>
     </li>
     <li <% if $Active == 'promocodes' %> class="active" <% end_if %>>
         <a href="$AdminLink/$SummitID/promocodes"><span class="fa-stack fa-lg pull-left"><i class="fa fa-ticket fa-stack-1x "></i></span>Promo Codes</a>

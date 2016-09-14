@@ -316,4 +316,22 @@ SQL;
 
         return $events;
     }
+
+    /**
+     * @param int $summit_id
+     * @return array
+     */
+    public function getCurrentPublished($summit_id)
+    {
+        $summit     = Summit::get()->byID($summit_id);
+        if(is_null($summit)) throw new InvalidArgumentException('summit not found!');
+
+        $current_date = gmdate('d/m/Y H:i:s');
+
+        $list      = SummitEvent::get()
+            ->filter( array('SummitID' => $summit_id, 'Published' => 1 ))
+            ->where("StartDate < '{$current_date}' AND EndDate > '{$current_date}'");
+
+        return $list->toArray();
+    }
 }

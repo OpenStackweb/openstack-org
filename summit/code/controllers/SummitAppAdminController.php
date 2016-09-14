@@ -927,6 +927,8 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         Requirements::javascript('themes/openstack/javascript/jquery-ajax-loader.js');
         Requirements::javascript('summit/javascript/jquery.tabletoCSV.js');
 
+        $current_events = $this->event_repository->getCurrentPublished($summit_id);
+
         return $this->getViewer('room_metrics')->process
             (
                 $this->customise
@@ -934,6 +936,7 @@ final class SummitAppAdminController extends Controller implements PermissionPro
                         array
                         (
                             'Summit' => $summit,
+                            'Events' => $current_events,
                         )
                     )
             );
