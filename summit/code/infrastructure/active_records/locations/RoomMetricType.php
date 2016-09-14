@@ -17,6 +17,7 @@ final class RoomMetricType extends DataObject implements IRoomMetricType
     private static $db = array
     (
         'Type'     => 'Enum(array("Persons","CO2","Temperature","Humidity"), "Persons")',
+        'Unit'     => 'Enum(array("units","ppm","°F","%"), "units")',
         'Endpoint' => 'Text',
     );
 
@@ -77,6 +78,21 @@ final class RoomMetricType extends DataObject implements IRoomMetricType
             return $valid->error('Type is required!');
         }
 
+        switch($type) {
+            case 'Persons':
+                $this->Unit = 'units';
+                break;
+            case 'CO2':
+                $this->Unit = 'ppm';
+                break;
+            case 'Temperature':
+                $this->Unit = '°F';
+                break;
+            case 'Humidity':
+                $this->Unit = '%';
+                break;
+        }
+
         $endpoint = trim($this->Endpoint);
         if (empty($endpoint)) {
             return $valid->error('Endpoint URL is required!');
@@ -103,6 +119,14 @@ final class RoomMetricType extends DataObject implements IRoomMetricType
     public function getType()
     {
         return $this->getField('Type');
+    }
+
+    /**
+     * @return string
+     */
+    public function getUnit()
+    {
+        return $this->getField('Unit');
     }
 
     /**

@@ -119,6 +119,7 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         'promocodes_bulk',
         'speakers_merge',
         'events_bulk',
+        'room_metrics',
     );
 
     private static $url_handlers = array
@@ -145,6 +146,7 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         '$SummitID!/promocodes/bulk'                                 => 'promocodes_bulk',
         '$SummitID!/promocodes/$Code!'                               => 'editPromoCode',
         '$SummitID!/promocodes'                                      => 'promocodes',
+        '$SummitID!/room_metrics'                                    => 'room_metrics',
     );
 
     /**
@@ -899,6 +901,33 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         Requirements::javascript('themes/openstack/javascript/jquery-ajax-loader.js');
 
         return $this->getViewer('events_bulk')->process
+            (
+                $this->customise
+                    (
+                        array
+                        (
+                            'Summit' => $summit,
+                        )
+                    )
+            );
+    }
+
+    public function room_metrics(SS_HTTPRequest $request)
+    {
+        $summit_id = intval($request->param('SummitID'));
+        $summit = Summit::get()->byID($summit_id);
+
+        Requirements::css('summit/css/simple-sidebar.css');
+        Requirements::css('summit/css/summit-admin-reports.css');
+        Requirements::css('themes/openstack/bower_assets/sweetalert/dist/sweetalert.css');
+        Requirements::css('themes/openstack/bower_assets/jquery-ui/themes/smoothness/jquery-ui.css');
+        Requirements::javascript('themes/openstack/bower_assets/sweetalert/dist/sweetalert.min.js');
+        Requirements::javascript('summit/javascript/simple-sidebar.js');
+        Requirements::javascript('themes/openstack/javascript/bootstrap-paginator/src/bootstrap-paginator.js');
+        Requirements::javascript('themes/openstack/javascript/jquery-ajax-loader.js');
+        Requirements::javascript('summit/javascript/jquery.tabletoCSV.js');
+
+        return $this->getViewer('room_metrics')->process
             (
                 $this->customise
                     (

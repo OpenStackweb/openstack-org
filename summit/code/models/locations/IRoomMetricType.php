@@ -22,6 +22,11 @@ interface IRoomMetricType extends IEntity
     /**
      * @return string
      */
+    public function getUnit();
+
+    /**
+     * @return string
+     */
     public function getEndpointUrl();
 
     /**
