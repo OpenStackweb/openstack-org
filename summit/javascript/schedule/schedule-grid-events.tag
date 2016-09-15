@@ -344,7 +344,13 @@
 
             if(self.summit.should_show_venues){
                  event_directives['a.venue-search-link'] = function(arg){ return self.getSummitLocation(arg.item);};
-                 event_directives['a.venue-search-link@href'] = function(arg){ return self.summit.locations[arg.item.location_id].link;};
+                 event_directives['a.venue-search-link@href'] = function(arg){
+                    if (arg.item.location_id) {
+                        return self.summit.locations[arg.item.location_id].link;
+                    } else {
+                        return '/summit/barcelona-2016/venues';
+                    }
+                 };
             }
 
             if(self.summit.current_user !== null ){
