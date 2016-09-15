@@ -328,10 +328,10 @@ SQL;
 
         $current_date = gmdate('d/m/Y H:i:s');
 
-        $list      = SummitEvent::get()
+        $list = SummitEvent::get()
             ->filter( array('SummitID' => $summit_id, 'Published' => 1 ))
             ->where("StartDate < '{$current_date}' AND EndDate > '{$current_date}'");
 
-        return $list->toArray();
+        return $list;
     }
 }

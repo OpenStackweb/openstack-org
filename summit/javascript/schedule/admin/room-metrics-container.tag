@@ -19,9 +19,12 @@
     </div>
     <br>
 
+    <room-metrics-chart each={ event in events } event="{ event }"></room-metrics-chart>
+
     <script>
         this.dispatcher = opts.dispatcher;
         this.summit_id  = opts.summit_id;
+        this.events     = opts.events;
         var self        = this;
 
         this.on('mount', function() {

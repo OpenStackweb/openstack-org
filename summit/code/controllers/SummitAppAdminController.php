@@ -918,16 +918,20 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         $summit = Summit::get()->byID($summit_id);
 
         Requirements::css('summit/css/simple-sidebar.css');
-        Requirements::css('summit/css/summit-admin-reports.css');
+        Requirements::css('summit/css/summit-admin-room-metrics.css');
         Requirements::css('themes/openstack/bower_assets/sweetalert/dist/sweetalert.css');
         Requirements::css('themes/openstack/bower_assets/jquery-ui/themes/smoothness/jquery-ui.css');
+        Requirements::css("themes/openstack/bower_assets/jqplot-bower/dist/jquery.jqplot.min.css");
+        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/jquery.jqplot.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.canvasTextRenderer.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.canvasAxisLabelRenderer.min.js");
+        
         Requirements::javascript('themes/openstack/bower_assets/sweetalert/dist/sweetalert.min.js');
         Requirements::javascript('summit/javascript/simple-sidebar.js');
-        Requirements::javascript('themes/openstack/javascript/bootstrap-paginator/src/bootstrap-paginator.js');
         Requirements::javascript('themes/openstack/javascript/jquery-ajax-loader.js');
-        Requirements::javascript('summit/javascript/jquery.tabletoCSV.js');
 
         $current_events = $this->event_repository->getCurrentPublished($summit_id);
+        $current_events = SummitEvent::get()->where("ID = 14960");
 
         return $this->getViewer('room_metrics')->process
             (

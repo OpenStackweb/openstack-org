@@ -14,6 +14,7 @@
 
         <script type="application/javascript">
             var events = [];
+            <% if $Events %>
             <% loop $Events %>
                 events.push({
                     id: $ID,
@@ -22,6 +23,7 @@
                     capacity: "{$getLocationCapacity()}",
                 });
             <% end_loop %>
+            <% end_if %>
 
         </script>
         <room-metrics-container summit_id="{ $Summit.ID }" events="{ events }" ></room-metrics-container>
