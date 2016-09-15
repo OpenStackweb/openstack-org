@@ -43,3 +43,4 @@ migrations:
   - RSVPEmailSeeding
   - SummitVideoProcessingMigration
   - UpdateGerritUsersMigration
+  - UpdateGerritCommitsMigration
