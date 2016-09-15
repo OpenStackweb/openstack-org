@@ -15,14 +15,18 @@
 
     $(document).ready(function() {
 
-        var is_mobile  = bowser.mobile ||  bowser.tablet;
-        var is_ios     = bowser.ios;
-        var is_android = bowser.android;
-
-        if (is_mobile &&
-            (typeof $("meta[property='al:android:url']").attr("content") != "undefined" || typeof $("meta[property='al:ios:url']").attr("content") != "undefined")){
+        var is_mobile       = bowser.mobile ||  bowser.tablet;
+        var is_ios          = bowser.ios;
+        var is_android      = bowser.android;
+        var os_version      = bowser.os_version;
+        var browser_version = bowser.version;
+        var compare_safari_version = is_ios ? bowser.compareVersions([browser_version, '9']): 0;
+        console.log('os_version '+os_version+' browser_version '+browser_version);
+        console.log('compare '+ compare_safari_version);
+        var has_meta_app_links = (typeof $("meta[property='al:android:url']").attr("content") != "undefined" || typeof $("meta[property='al:ios:url']").attr("content") != "undefined");
+        if (is_mobile && has_meta_app_links){
             var os = is_android ? 'Android' : 'IOS';
-
+            if(is_ios && compare_safari_version >=0 ) return;
             $('<div></div>')
                 .attr('id','install-app-overlay')
                 .css('opacity',.9)
@@ -98,7 +102,7 @@
         $(document).on('click', '#btn-launch', function() {
             $.cookie('install_mobile_app_action', 'launch', { expires: 7 });
             if (is_ios){
-                window.location = 'http://itunes.apple.com/app/id'+$("meta[property='al:ios:app_store_id']").attr("content");
+                window.location = $("meta[property='al:ios:url']").attr("content");
             }
             else
             {
