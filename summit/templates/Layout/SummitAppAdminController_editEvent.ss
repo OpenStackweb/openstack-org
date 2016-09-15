@@ -136,10 +136,15 @@
             <% if $Top.Event.ExtraAnswers() %>
             <hr>
             <div class="form-group">
-                <label>Track Questions</label><br>
+                <label>Track Questions</label>
                 <% loop $Top.Event.ExtraAnswers() %>
-                    $Question().Label
-                    $getQuestionField(true)
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6">
+                            $Question().Label
+                            $getQuestionField(true)
+                        </div>
+                    </div>
                 <% end_loop %>
             </div>
             <hr>
