@@ -93,7 +93,7 @@
         };
         <% end_loop %>
 
-        <% loop $Summit.CategoryGroups.Filter("ClassName", "PresentationCategoryGroup").Sort(Name, ASC)  %>
+        <% loop $Summit.CategoryGroups.Sort(Name, ASC)  %>
         summit.category_groups[{$ID}] =
         {
            name : "{$Name.JS}",
