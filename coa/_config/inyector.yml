@@ -4,11 +4,17 @@ Name: 'coa-injection'
 Injector:
   COAFileApi:
     class: COAFileApi
+  ExamFactory:
+    class: CertifiedOpenStackAdministratorExamFactory
+  ExamRepository:
+    class: SapphireCOAExamRepository
   COAManager:
     constructor:
       0: '%$MemberRepository'
-      1: '%$COAFileApi'
-      2: '%$TransactionManager'
+      1: '%$ExamRepository'
+      2: '%$ExamFactory'
+      3: '%$COAFileApi'
+      4: '%$TransactionManager'
   IngestCOAFilesTask:
     constructor:
       0: '%$COAManager'

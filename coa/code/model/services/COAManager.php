@@ -34,16 +34,29 @@ final class COAManager implements ICOAManager
      */
     private $coa_file_api;
 
+    /**
+     * @var ICertifiedOpenStackAdministratorExamRepository
+     */
+    private $exam_repository;
+
+    /**
+     * @var ICertifiedOpenStackAdministratorExamFactory
+     */
+    private $factory;
 
     public function __construct
     (
         IMemberRepository $member_repository,
+        ICertifiedOpenStackAdministratorExamRepository $exam_repository,
+        ICertifiedOpenStackAdministratorExamFactory $factory,
         ICOAFileApi $coa_file_api,
         ITransactionManager $tx_manager
     )
     {
         $this->member_repository = $member_repository;
+        $this->exam_repository   = $exam_repository;
         $this->coa_file_api      = $coa_file_api;
+        $this->factory           = $factory;
         $this->tx_manager        = $tx_manager;
     }
 
@@ -54,10 +67,13 @@ final class COAManager implements ICOAManager
     {
         $coa_file_api      = $this->coa_file_api;
         $member_repository = $this->member_repository;
+        $exam_repository   = $this->exam_repository;
+        $factory           = $this->factory;
 
-        return $this->tx_manager->transaction(function() use($coa_file_api, $member_repository) {
+        return $this->tx_manager->transaction(function() use($coa_file_api, $member_repository, $exam_repository, $factory) {
             try {
-                $files = $coa_file_api->getFilesList();
+
+                $files           = $coa_file_api->getFilesList();
                 $processed_files = 0;
 
                 foreach ($files as $file_info) {
@@ -67,30 +83,57 @@ final class COAManager implements ICOAManager
                     $rows = CSVReader::load($content);
 
                     foreach ($rows as $row) {
-                        $email                     = $row['open_stack_id'];
                         $exam_ext_id               = $row['candidate_exam_id'];
+                        $modified_date             = $row['candidate_exam_date_modified'];
+                        // this groups all candidate exams attempts together ...
+                        $track_id                  = $row['certification_track_status_id'];
+                        $track_id_modified_date    = $row['certification_track_status_date_modified'];
+                        $candidate_name            = $row['candidate_exam_name'];
+                        $candidate_fname           = $row['first_name'];
+                        $candidate_lname           = $row['last_name'];
+                        $email                     = $row['open_stack_id'];
+                        $exam_expiration_date      = $row['exam_expiration_date'];
                         $status                    = $row['exam_status'];
                         $pass_date                 = $row['pass_fail_date_c'];
                         $cert_nbr                  = $row['certification_number'];
                         $code                      = $row['exam_code'];
-                        $modified_date             = $row['candidate_exam_date_modified'];
-                        $exam_expiration_date      = $row['exam_expiration_date'];
-                        $cert_exam_expiration_date = $row['certificate_expiration_date'];
                         $cert_status               = $row['certification_status'];
+                        $cert_exam_expiration_date = $row['certificate_expiration_date'];
 
-                        if(empty($email)) continue;
-                        $member = $member_repository->findByEmail($email);
+                        $member = null;
+                        // first attempt, try to find member by email ...
+                        if(!empty($email)){
+                            $member = $member_repository->findByEmail($email);
+                        }
+
+                        // second attempt, try to find member by former exams
+                        if(is_null($member)){
+                            // possible a retake ? check by $track_id
+                            $former_exams = $exam_repository->getByTrackId($track_id);
+                            foreach($former_exams as $former_exam){
+                                if($former_exam->hasOwner()) {
+                                    $member = $former_exam->Owner();
+                                    break;
+                                }
+                            }
+                        }
+                        // we werent able to find member ... skip it
                         if (is_null($member)) continue;
+                        // try to find if we have a former exam ...
                         $exam = $member->getExamByExternalId($exam_ext_id);
+
                         if (is_null($exam))
                         {
-                            //create exam
-                            $exam             = CertifiedOpenStackAdministratorExam::create();
-                            $exam->OwnerID    = $member->ID;
-                            $exam->ExternalID = $exam_ext_id;
+                            $exam = $factory->build($member, $exam_ext_id);
                         }
+
                         $exam->setState
                         (
+                            $track_id,
+                            $track_id_modified_date,
+                            $candidate_name,
+                            $candidate_fname,
+                            $candidate_lname,
                             $status,
                             $modified_date,
                             $exam_expiration_date,

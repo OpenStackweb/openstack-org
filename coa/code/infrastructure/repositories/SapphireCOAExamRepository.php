@@ -14,12 +14,17 @@
 /**
  * Class SapphireCOAExamRepository
  */
-final class SapphireCOAExamRepository extends SapphireRepository {
+final class SapphireCOAExamRepository extends SapphireRepository implements ICertifiedOpenStackAdministratorExamRepository{
 
 	public function __construct(){
 		parent::__construct(new CertifiedOpenStackAdministratorExam());
 	}
 
+    /**
+     * @param $cert
+     * @param $last_name
+     * @return DataList
+     */
     public function getByCertAndLastName($cert, $last_name) {
         return CertifiedOpenStackAdministratorExam::get()
             ->leftJoin("Member","CertifiedOpenStackAdministratorExam.OwnerID = Member.ID")
@@ -31,4 +36,15 @@ final class SapphireCOAExamRepository extends SapphireRepository {
                     );
     }
 
+    /**
+     * @param string $track_id
+     * @return ICertifiedOpenStackAdministratorExam[]
+     */
+    public function getByTrackId($track_id)
+    {
+        return CertifiedOpenStackAdministratorExam::get()
+            ->filter('TrackID', $track_id)
+            ->sort('TrackModifiedDate', 'ASC')
+            ->toArray();
+    }
 }

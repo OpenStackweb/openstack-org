@@ -15,6 +15,11 @@
 interface ICertifiedOpenStackAdministratorExam extends IEntity
 {
     /**
+     * @param string $track_id
+     * @param string $track_id_modified_date
+     * @param string $candidate_name
+     * @param string $candidate_fname
+     * @param string $candidate_lname
      * @param string $status
      * @param string $modified_date
      * @param string $exam_expiration_date
@@ -26,7 +31,7 @@ interface ICertifiedOpenStackAdministratorExam extends IEntity
      * @return $this
      * @throws EntityValidationException
      */
-    public function setState($status, $modified_date, $exam_expiration_date, $pass_date,$code, $cert_nbr, $cert_expiration_date, $cert_status);
+    public function setState($track_id, $track_id_modified_date, $candidate_name, $candidate_fname, $candidate_lname, $status, $modified_date, $exam_expiration_date, $pass_date,$code, $cert_nbr,$cert_expiration_date, $cert_status);
 
     /**
      * @param string $status
@@ -38,4 +43,9 @@ interface ICertifiedOpenStackAdministratorExam extends IEntity
      * @return COACertification
      */
     public function getCertification();
+
+    /**
+     * @return bool
+     */
+    public function hasOwner();
 }
