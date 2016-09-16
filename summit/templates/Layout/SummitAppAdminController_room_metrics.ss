@@ -21,6 +21,8 @@
                     title: "{$getTitleAndTime().JS}",
                     location: "{$getLocationNameNice().JS}",
                     capacity: "{$getLocationCapacity()}",
+                    start_time: "{$getStartTime().JS}",
+                    end_time: "{$getEndTime().JS}"
                 });
             <% end_loop %>
             <% end_if %>

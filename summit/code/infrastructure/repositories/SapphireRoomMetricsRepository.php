@@ -26,14 +26,17 @@ class SapphireRoomMetricsRepository
     /**
      * @param int $event_id
      * @param int $attendee_id
+     * @param string $time_offset
      * @return IRSVP|null
      */
-    public function getByRoomAndDate($room_id, $start_date, $end_date)
+    public function getByRoomAndDate($room_id, $start_date, $end_date, $time_offset = 0)
     {
+        $offset = ($time_offset) ? ' AND RoomMetricSampleData.TimeStamp > '.strtotime($time_offset) : '';
         $metrics = RoomMetricSampleData::get()
             ->leftJoin("RoomMetricType","RoomMetricType.ID = RoomMetricSampleData.TypeID")
-            ->where("RoomMetricType.RoomID = $room_id
-                     AND RoomMetricSampleData.TimeStamp BETWEEN ".strtotime($start_date)." AND ".strtotime($end_date));
+            ->where("RoomMetricType.RoomID = $room_id ".$offset."
+                     AND RoomMetricSampleData.TimeStamp BETWEEN ".strtotime($start_date)." AND ".strtotime($end_date))
+            ->sort('RoomMetricSampleData.TimeStamp','ASC');
 
         return $metrics;
     }

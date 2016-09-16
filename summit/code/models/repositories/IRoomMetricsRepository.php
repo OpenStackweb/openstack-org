@@ -17,8 +17,9 @@ interface IRoomMetricsRepository extends IEntityRepository
     /**
      * @param int $event_id
      * @param int $attendee_id
+     * @param string $time_offset
      * @return IRSVP|null
      */
-    public function getByRoomAndDate($room_id, $start_date, $end_date);
+    public function getByRoomAndDate($room_id, $start_date, $end_date, $time_offset);
 
 }

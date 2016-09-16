@@ -647,17 +647,21 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
             $summit       = $this->summit_repository->getById($summit_id);
             $event_id     = intval($request->param('EVENT_ID'));
             $event        = $this->event_repository->getById($event_id);
+            $time_offset  = $request->getVar('offset');
 
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
             if(is_null($event)) throw new NotFoundEntityException('Event', sprintf(' id %s', $event_id));
 
-            $metrics = $this->room_metrics_repository->getByRoomAndDate($event->LocationID, $event->StartDate, $event->EndDate);
+            $time_offset = $summit->convertDateFromTimeZone2UTC($event->getBeginDateYMD().' '.$time_offset);
+
+            $metrics = $this->room_metrics_repository->getByRoomAndDate($event->LocationID, $event->getStartDateUTC(), $event->getEndDateUTC(), $time_offset)->limit(10);
             $metrics_array = array();
 
             foreach ($metrics as $metric) {
                 $type = $metric->Type()->Type;
                 $unit = $metric->Type()->Unit;
-                $data = array($metric->TimeStamp, $metric->Value);
+                $time = $summit->convertDateFromUTC2TimeZone(date('H:i:s',$metric->TimeStamp),'g:iA');
+                $data = array($time, $metric->Value);
 
                 if (!isset($metrics_array[$type]))
                     $metrics_array[$type] = array('type' => $type, 'unit' => $unit, 'metrics' => array());
