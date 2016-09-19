@@ -13,9 +13,6 @@
  * limitations under the License.
  **/
 use GuzzleHttp\Client as HttpClient;
-use \GuzzleHttp\Exception\ClientException as HttpException;
-use Symfony\Component\Yaml\Parser;
-use Symfony\Component\Yaml\Exception\ParseException;
 
 /**
  * Class IngestOpenStackComponentsDataCronTask
@@ -59,7 +56,7 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
             $this->processProjects();
             foreach($releases as $release)
             {
-                error_log(sprintf('processing release %s ...', $release->Name));
+                echo sprintf('processing release %s ...', $release->Name).PHP_EOL;
                 $this->getProductionUseStatus($release);
                 $this->getInstallationGuideStatus($release);
                 $this->getSDKSupport($release);
@@ -69,14 +66,14 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
             }
         });
         $delta = time() - $start;
-        error_log(sprintf('task took %s seconds to run.',$delta));
+        echo sprintf('task took %s seconds to run.',$delta).PHP_EOL;
         $this->client = null;
     }
 
     private function processProjects()
     {
-        $url = "https://raw.githubusercontent.com/openstack/governance/master/reference/projects.yaml";
-
+        $url      = "https://raw.githubusercontent.com/openstack/governance/master/reference/projects.yaml";
+        $response = null;
         try
         {
             $response = $this->client->get
@@ -86,31 +83,39 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
         }
         catch (Exception $ex)
         {
+            echo $ex->getMessage().PHP_EOL;
             SS_Log::log($ex->getMessage(), SS_Log::WARN);
         }
 
         if(is_null($response)) return;
+
         if($response->getStatusCode() != 200) return;
         $body =  $response->getBody();
         if(is_null($body)) return;
         $content = $body->getContents();
         if(empty($content)) return;
 
-        $yaml = new Parser();
-
         try {
-            $projects = $yaml->parse($content);
+
+            $projects = Spyc::YAMLLoadString($content);
 
             foreach($projects as $project_name => $info)
             {
                 $component    = OpenStackComponent::get()->filter('CodeName', ucfirst($project_name))->first();
+                if(is_null($component)){
+                    $component    = OpenStackComponent::get()->filter('Name', ucfirst($project_name))->first();
+                }
+                echo sprintf('processing component %s', $project_name).PHP_EOL;
+                if(is_null($component)){
+                    echo sprintf('component %s not found!', $project_name).PHP_EOL;
+                    continue;
+                }
 
-                if(is_null($component)) continue;
-
-                $ptl          = isset($info['ptl']) ? $info['ptl'] : null;
-                $wiki         = isset($info['url']) ? $info['url'] : null;
-                $tags         = isset($info['tags']) ? $info['tags'] : array();
+                $ptl          = isset($info['ptl']) ? $info['ptl']   : null;
+                $wiki         = isset($info['url']) ? $info['url']   : null;
+                $tags         = isset($info['tags']) ? $info['tags'] : [];
                 $ptl_member   = null;
+
                 if(!empty($ptl))
                 {
                     if(is_array($ptl) && isset($ptl['name']))
@@ -125,25 +130,39 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                         $fname = $ptl_names[0];
                         $lname = $ptl_names[1];
                     }
-                    $ptl_member  = Member::get()->filter
-                    (
-                        array
+                    $email = isset($ptl['email']) ? trim($ptl['email']) : null;
+                    echo sprintf('PTL %s %s (%s)', $fname, $lname, $email).PHP_EOL;
+                    if(!empty($email)){
+                        $ptl_member = Member::get()->filter
                         (
-                            'FirstName' => $fname,
-                            'Surname'   => $lname,
-                        )
-                    )->first();
+                            array
+                            (
+                                'Email' => $email,
+                            )
+                        )->first();
+                    }
+
+                    if(is_null($ptl_member)) {
+                        $ptl_member = Member::get()->filter
+                        (
+                            array
+                            (
+                                'FirstName' => $fname,
+                                'Surname'   => $lname,
+                            )
+                        )->first();
+                    }
                 }
 
-                $team_diverse_affiliation = false;
-                $is_service               = false;
-                $has_stable_branches      = false;
-                $tc_approved_release      = false;
-                $release_milestones       = false;
-                $release_intermediary     = false;
-                $release_independent      = false;
-                $starter_kit              = false;
-                $vulnerability_managed    = false;
+                $team_diverse_affiliation     = false;
+                $is_service                   = false;
+                $has_stable_branches          = false;
+                $tc_approved_release          = false;
+                $release_milestones           = false;
+                $release_intermediary         = false;
+                $release_independent          = false;
+                $starter_kit                  = false;
+                $vulnerability_managed        = false;
                 $follows_standard_deprecation = false;
                 $supports_upgrade             = false;
                 $supports_rolling_upgrade     = false;
@@ -184,8 +203,6 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                         $supports_rolling_upgrade = true;
                 }
 
-                if(!$is_service) continue;
-
                 $component->HasStableBranches            = $has_stable_branches;
                 $component->WikiUrl                      = $wiki;
                 $component->TCApprovedRelease            = $tc_approved_release;
@@ -199,12 +216,16 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                 $component->SupportsUpgrade              = $supports_upgrade;
                 $component->SupportsRollingUpgrade       = $supports_rolling_upgrade;
 
-                if(!is_null($ptl_member))
+                if(!is_null($ptl_member)) {
+                    echo sprintf('setting PTL %s %s (%s) to Component %s', $ptl_member->FirstName, $ptl_member->Surname, $ptl_member->Email, $component->Name).PHP_EOL;
                     $component->LatestReleasePTLID = $ptl_member->ID;
+                }
 
                 $component->write();
             }
-        } catch (ParseException $e) {
+        } catch (Exception $ex) {
+            echo $ex->getMessage().PHP_EOL;
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
             return;
         }
     }
@@ -213,7 +234,7 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
     {
 
         $template_url = '%s/%s/ops-docs-install-guide.json';
-
+        $response     = null;
         try
         {
             $response = $this->client->get
@@ -270,7 +291,7 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
     {
 
         $template_url = '%s/%s/ops-production-use.json';
-
+        $response     = null;
         try
         {
             $response = $this->client->get
@@ -376,7 +397,7 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
     {
         $components    = $release->OpenStackComponents();
         $template_url  = '%s/%s/ops-sdk-support.json';
-
+        $response      = null;
         try
         {
             $response = $this->client->get
@@ -432,7 +453,7 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
     {
         $components    = $release->OpenStackComponents();
         $template_url  = '%s/%s/ops-packaged.json';
-
+        $response      = null;
         try
         {
             $response = $this->client->get
