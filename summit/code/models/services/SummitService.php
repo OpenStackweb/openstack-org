@@ -756,10 +756,12 @@ final class SummitService implements ISummitService
         $speaker_repository                   = $this->speaker_repository;
         $member_repository                    = $this->member_repository;
         $speaker_registration_request_manager = $this->speaker_registration_request_manager;
+        $speaker_creation_email_sender        = new PresentationSpeakerCreationEmailMessageSender;
 
         return $this->tx_service->transaction(function () use
         (
-            $summit, $speaker_data, $speaker_repository, $member_repository , $speaker_registration_request_manager
+            $summit, $speaker_data, $speaker_repository, $member_repository , $speaker_registration_request_manager,
+            $speaker_creation_email_sender
         ) {
 
             $speaker   = PresentationSpeaker::create();
@@ -803,6 +805,8 @@ final class SummitService implements ISummitService
                     $request->write();
                     $speaker->RegistrationRequestID = $request->ID;
                     $speaker->write();
+                    // send email to speaker so he can register as a member
+                    $speaker_creation_email_sender->send(['Speaker' => $speaker]);
                 }
                 else
                 {

@@ -225,6 +225,26 @@ class PresentationSpeaker extends DataObject
         return $this->linkTo($presentationID, $action);
     }
 
+    /**
+     * Gets a link to speaker bio form
+     *
+     * @return  string
+     */
+    public function BioLink()
+    {
+        $action = 'bio';
+        if ($this->isPendingOfRegistration()) {
+            $action .= '?' . SpeakerRegistrationRequest::ConfirmationTokenParamName . '=' . $this->RegistrationRequest()->getToken();
+        }
+
+        if ($page = PresentationPage::get()->filter('SummitID', Summit::get_active()->getIdentifier())->first()) {
+            return Controller::join_links(
+                $page->Link(),
+                $action
+            );
+        }
+    }
+
 
     public function getCMSFields()
     {

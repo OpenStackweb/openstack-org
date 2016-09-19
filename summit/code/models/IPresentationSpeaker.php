@@ -69,6 +69,13 @@ interface IPresentationSpeaker extends IEntity
     public function ReviewLink($presentationID);
 
     /**
+     * Gets a link to speaker bio form
+     *
+     * @return  string
+     */
+    public function BioLink();
+
+    /**
      * @param null|int $summit_id
      * @return mixed
      */
