@@ -39,7 +39,7 @@ final class SummitService implements ISummitService
      */
     private $member_repository;
     /**
-     * @var IReportRepository
+     * @var ISummitReportRepository
      */
     private $report_repository;
     /**
@@ -63,7 +63,7 @@ final class SummitService implements ISummitService
         ISummitAssistanceRepository $assistance_repository,
         ISpeakerRepository $speaker_repository,
         IMemberRepository $member_repository,
-        IReportRepository $report_repository,
+        ISummitReportRepository $report_repository,
         ISummitRegistrationPromoCodeRepository $promocode_repository,
         ISpeakerRegistrationRequestManager $speaker_registration_request_manager,
         ITransactionManager $tx_service
