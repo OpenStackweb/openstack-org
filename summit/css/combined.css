@@ -330,7 +330,8 @@ a.past-summit:hover:after, a.future-summit:hover:after {
   overflow: hidden; }
 
 .summit-hero-wrapper.condensed {
-  background: url('/assets/Uploads/austin-bkgd-lrg.jpg') no-repeat bottom center; }
+  min-height: 100px;
+}
 
 @media (max-width: 767px) {
   .summit-hero-wrapper {
@@ -426,11 +427,13 @@ a.past-summit:hover:after, a.future-summit:hover:after {
   margin: 0 auto; }
 
 .summit-hero-wrapper.condensed .inner-countdown-wrapper {
-  top: 20px; }
+    position: relative;
+    float: right; 
+  }
 
-@media (max-width: 767px) {
+/*@media (max-width: 767px) {
   .summit-hero-wrapper .inner-countdown-wrapper {
-    top: 20px; } }
+    top: 20px; } }*/
 
 .summit-hero-wrapper.condensed .inner-countdown-wrapper .countdown span {
   display: table-cell;
@@ -485,11 +488,14 @@ a.past-summit:hover:after, a.future-summit:hover:after {
   width: 150px; }
 
 .summit-hero-wrapper.condensed .summit-hero-logo {
-  margin: 20px 0 0 100px; }
+    position: relative;
+    float: left;
+    margin: 10px 0 0 0;
+}
 
 @media (max-width: 980px) {
   .summit-hero-wrapper.condensed .summit-hero-logo {
-    margin: 20px 0 30px; } }
+    margin: 0; } }*/
 
 @media (max-width: 767px) {
   .summit-hero-wrapper .summit-hero-logo {
@@ -571,10 +577,10 @@ a.past-summit:hover:after, a.future-summit:hover:after {
   color: white; }
 
 i.collapse-nav {
-  color: #4279B0;
+  color: #eee;
   position: absolute;
   right: 5%;
-  top: 30px;
+  top: 25px;
   display: none;
   transition: all 0.5s ease-in-out; }
 

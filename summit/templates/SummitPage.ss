@@ -15,24 +15,11 @@
         <div class="container">
             <div class="row">
                 <% with $Summit %>
-                    <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="col-sm-12">
                         <a href="/summit">
-                            <img class="summit-hero-logo" src="/summit/images/summit-logo-small.svg" onerror="this.onerror=null; this.src='/summit/images/summit-logo-small.png'" alt="OpenStack Summit">
+                            <img class="summit-hero-logo" src="/themes/openstack/static/images/summit-logo-small-white.svg" alt="OpenStack Summit">
                         </a>
-                        <h2>
-                            $DateLabel
-                        </h2>
-                        <h1>
-                            $Title
-                        </h1>
-                        <div class="landing-action">
-                            <% if $RegistrationLink %>
-                                <a href="{$RegistrationLink}" class="btn register-btn-lrg">Register Now</a>
-                            <% end_if %>
-                            <% if $ComingSoonBtnText %>
-                                <button class="btn register-btn-lrg soon" href="#">{$ComingSoonBtnText}</button>
-                            <% end_if %>
-                        </div>
+
                         <% if IsUpComing %>
                             <div class="inner-countdown-wrapper">
                                 <div class="countdown">
@@ -55,8 +42,40 @@
                             </div>
                         <% end_if %>
                     </div>
-                <% end_with %>
             </div>
+                    <div class="row">
+                        <div class="col-sm-10 col-sm-push-1">
+                            <h2>
+                                The Must-Attend
+                            </h2>
+                            <h1>
+                                Cloud Computing Event
+                            </h1>
+                            <div class="summit-hero-postcard">
+                                <p>
+                                    Join the movement behind the most widely deployed open source cloud platform. Whether you are pursuing a private, hybrid or multi-cloud approach, the OpenStack Summit is the place to network, skill up and plan your cloud strategy.
+                                </p>
+                                <div class="landing-action">
+                                    <% if $RegistrationLink %>
+                                        <a href="{$RegistrationLink}" class="btn register-btn-lrg">Register Now</a>
+                                    <% end_if %>
+                                    <% if $ComingSoonBtnText %>
+                                        <button class="btn register-btn-lrg soon" href="#">{$ComingSoonBtnText}</button>
+                                    <% end_if %>
+                                </div>
+                                <div class="landing-date">
+                                    <div class="left">
+                                        $Title
+                                    </div>
+                                    <div class="right">
+                                        $DateLabel
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>          
+
+                <% end_with %>
             <a href="#" class="open-panel"><i class="fa fa-bars fa-2x collapse-nav"></i></a>
         </div>
         <div class="hero-tab-wrapper">
@@ -66,17 +85,32 @@
         </div>
         <% if $SummitImage %><a href="#" class="photo-credit" data-toggle="tooltip" data-placement="left" title="{$SummitImage.Attribution}"><i class="fa fa-info-circle"></i></a><% end_if %>
     </div>
+
     <div class="mobile-city-date">
         <% with $Summit %>
-            <h2>$DateLabel</h2>
-            <h1>$Title</h1>
-
-            <% if $RegistrationLink %>
-                <a href="{$RegistrationLink}" class="btn register-btn-lrg">Register Now</a>
-            <% end_if %>
-            <% if $ComingSoonBtnText %>
-                <button class="btn register-btn-lrg soon" href="#">{$ComingSoonBtnText}</button>
-            <% end_if %>
+        <h2>The Must-Attend</h2>
+        <h1>Cloud Computing Event</h1>
+        <div class="summit-hero-postcard">
+            <p>
+                Join the movement behind the most widely deployed open source cloud platform. Whether you are pursuing a private, hybrid or multi-cloud approach, the OpenStack Summit is the place to network, skill up and plan your cloud strategy.
+            </p>
+            <div class="landing-action">
+                <% if $RegistrationLink %>
+                    <a href="{$RegistrationLink}" class="btn register-btn-lrg">Register Now</a>
+                <% end_if %>
+                <% if $ComingSoonBtnText %>
+                    <button class="btn register-btn-lrg soon" href="#">{$ComingSoonBtnText}</button>
+                <% end_if %>
+            </div>
+            <div class="landing-date">
+                <div class="left">
+                    $Title
+                </div>
+                <div class="right">
+                    $DateLabel
+                </div>
+            </div>
+        </div>
         <% end_with %>
     </div>
     <div id="wrap">

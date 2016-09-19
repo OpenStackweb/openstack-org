@@ -321,9 +321,6 @@ a.future-summit:hover:after {
   width: 100%;
   overflow: hidden; }
 
-.summit-hero-wrapper.condensed {
-  background: url("/themes/openstack/static/images/summit-vancouver-bkgd.jpg") no-repeat center center; }
-
 @media (max-width: 767px) {
   .summit-hero-wrapper {
     background: url("/themes/openstack/static/images/summit-vancouver-bkgd.jpg") no-repeat center center; } }
@@ -471,13 +468,6 @@ a.future-summit:hover:after {
   margin: 50px auto 50px;
   width: 150px; }
 
-.summit-hero-wrapper.condensed .summit-hero-logo {
-  margin: 20px 0 0 100px; }
-
-@media (max-width: 980px) {
-  .summit-hero-wrapper.condensed .summit-hero-logo {
-    margin: 20px 0 30px; } }
-
 @media (max-width: 767px) {
   .summit-hero-wrapper .summit-hero-logo {
     float: left;
@@ -553,7 +543,7 @@ a.future-summit:hover:after {
   color: white; }
 
 i.collapse-nav {
-  color: #4279B0;
+  color: #eee;
   position: absolute;
   right: 5%;
   top: 30px;
@@ -1253,6 +1243,294 @@ a.current-summit-link {
     width: 100%; } }
 
 /*End Seven column setup*/
+
+/*BCN Redesign*/
+.summit-hero-wrapper {
+  background: url("/themes/openstack/static/images/bcn-redesign/hero-bkgd.png") no-repeat center center;
+  background-size: cover; }
+  .summit-hero-wrapper h1 {
+    color: white;
+    text-transform: none;
+    font-weight: 700;
+    font-size: 4em;
+    margin: 0;
+    letter-spacing: 0px;
+    text-shadow: 2px 2px 0px #2B4D67; }
+  .summit-hero-wrapper h2 {
+    margin: 90px 0 0;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 0px #2B4D67; }
+  .summit-hero-wrapper .landing-action {
+    margin-top: 15px; }
+    .summit-hero-wrapper .landing-action a.register-btn-lrg {
+      padding: 12px 30px;
+      line-height: 1; }
+  .summit-hero-wrapper .summit-hero-logo {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    margin: 0; }
+  .summit-hero-wrapper .inner-countdown-wrapper {
+    position: absolute;
+    left: auto;
+    top: 20px;
+    right: 0;
+    text-align: center; }
+    .summit-hero-wrapper .inner-countdown-wrapper .countdown span {
+      border-color: rgba(255, 255, 255, 0.4); }
+  .summit-hero-wrapper .summit-hero-postcard {
+    background: rgba(0, 73, 116, 0.7);
+    border-radius: 6px;
+    margin-top: 30px;
+    margin-bottom: -30px;
+    padding-top: 30px; }
+    .summit-hero-wrapper.condensed .summit-hero-postcard {
+      display: none;
+    }
+    .summit-hero-wrapper .summit-hero-postcard p {
+      color: white;
+      margin: 0 60px;
+      font-size: 1.1em;
+      line-height: 1.5em;
+      font-weight: 300; }
+    .summit-hero-wrapper .summit-hero-postcard .landing-date {
+      width: 100%;
+      border-top: 1px solid rgba(81, 175, 228, 0.36);
+      margin: 20px 0 0;
+      padding: 15px 60px 20px; }
+      .summit-hero-wrapper .summit-hero-postcard .landing-date .left, .summit-hero-wrapper .summit-hero-postcard .landing-date .right {
+        color: white;
+        font-size: 1.5em;
+        width: 50%; }
+      .summit-hero-wrapper .summit-hero-postcard .landing-date .left {
+        float: left;
+        text-align: right;
+        padding-right: 30px; }
+      .summit-hero-wrapper .summit-hero-postcard .landing-date .right {
+        display: inline-block;
+        text-align: left;
+        border-left: 1px solid rgba(81, 175, 228, 0.36);
+        padding-left: 30px; }
+
+@media (min-width: 768px) and (max-width: 992px) {
+  .summit-hero-wrapper .summit-hero-postcard {
+    margin-bottom: 15px; } }
+
+@media (max-width: 767px) {
+  .summit-hero-wrapper {
+    height: 80px; }
+    .summit-hero-wrapper .summit-hero-logo {
+      width: 115px;
+      left: 20px; }
+    .summit-hero-wrapper .summit-hero-postcard {
+      display: none; }
+  .mobile-city-date .summit-hero-postcard {
+    margin-top: 10px; }
+    .mobile-city-date .summit-hero-postcard p {
+      font-size: 1.1em;
+      line-height: 1.5em;
+      font-weight: 300; }
+    .mobile-city-date .summit-hero-postcard .landing-action {
+      margin-bottom: 15px; }
+    .mobile-city-date .summit-hero-postcard .landing-date {
+      width: 100%;
+      padding: 15px 60px 20px; }
+      .mobile-city-date .summit-hero-postcard .landing-date .left, .mobile-city-date .summit-hero-postcard .landing-date .right {
+        color: #30739C;
+        font-size: 1.5em;
+        width: 50%; }
+      .mobile-city-date .summit-hero-postcard .landing-date .left {
+        float: left;
+        text-align: right;
+        padding-right: 30px; }
+      .mobile-city-date .summit-hero-postcard .landing-date .right {
+        display: inline-block;
+        text-align: left;
+        border-left: 1px solid rgba(81, 175, 228, 0.36);
+        padding-left: 30px; } }
+
+.blue-title {
+  background: #29abe2;
+  color: white;
+  font-weight: 400;
+  font-size: 1.1em;
+  padding: 10px 20px;
+  display: inline-block;
+  margin-bottom: 15px; }
+
+.who-section-wrapper .who-section {
+  background: #333;
+  width: 100%;
+  min-height: 325px;
+  border-radius: 4px;
+  position: relative;
+  margin-bottom: 40px; }
+  .who-section-wrapper .who-section.it {
+    background: url("/themes/openstack/static/images/bcn-redesign/it-bkgd.png") no-repeat center center;
+    background-size: cover; }
+  .who-section-wrapper .who-section.cloud {
+    background: url("/themes/openstack/static/images/bcn-redesign/cloud-bkgd.png") no-repeat center center;
+    background-size: cover; }
+  .who-section-wrapper .who-section.app {
+    background: url("/themes/openstack/static/images/bcn-redesign/app-bkgd.png") no-repeat center center;
+    background-size: cover; }
+  .who-section-wrapper .who-section .content {
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 30px 20px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px; }
+    .who-section-wrapper .who-section .content h5 {
+      color: white;
+      font-weight: 600;
+      margin: 0 0 15px; }
+    .who-section-wrapper .who-section .content p {
+      text-align: center;
+      color: white;
+      font-size: 1em;
+      font-weight: 300;
+      line-height: 1.5em; }
+
+a.who-section-cta {
+  width: 100%;
+  display: block;
+  text-align: center;
+  text-decoration: underline; }
+  a.who-section-cta:hover, a.who-section-cta:focus {
+    color: #2A4E68; }
+
+@media (max-width: 767px) {
+  a.who-section-cta {
+    margin-bottom: 40px; } }
+
+.summit-users-wrapper {
+  padding: 70px 0;
+  text-align: center;
+  position: relative; }
+  .summit-users-wrapper h2 {
+    margin: 0 0 60px;
+    text-align: center; }
+  .summit-users-wrapper .summit-user-section {
+    text-align: center;
+    margin-bottom: 60px; }
+    .summit-users-wrapper .summit-user-section img.summit-user-image {
+      border-radius: 50%;
+      width: 150px;
+      height: 150px;
+      margin-bottom: 20px; }
+    .summit-users-wrapper .summit-user-section .name {
+      font-weight: 600;
+      text-transform: uppercase; }
+    .summit-users-wrapper .summit-user-section .title {
+      font-style: italic;
+      margin-bottom: 10px; }
+  .summit-users-wrapper:after {
+    top: 100%;
+    left: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: transparent;
+    border-color: transparent transparent #edf2f7 #edf2f7;
+    border-width: 36px;
+    margin-left: -36px;
+    margin-top: -3px;
+    -webkit-transform-origin: 0 0;
+            transform-origin: 0 0;
+    -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+    box-shadow: -3px 3px 3px 0 rgba(0, 0, 0, 0.3); }
+
+.summit-gallery-section {
+  background: url("/themes/openstack/static/images/bcn-redesign/gallery-bkgd.jpg") no-repeat center center;
+  background-size: cover;
+  height: 375px; }
+  .summit-gallery-section .gallery-content {
+    margin-top: 150px;
+    text-align: center; }
+    .summit-gallery-section .gallery-content a.register-btn-lrg {
+      box-shadow: 2px 3px 3px 3px rgba(0, 0, 0, 0.5);
+      padding: 15px 70px;
+      font-size: 1.4em;
+      font-weight: 600; }
+
+.academy-wrapper {
+  padding: 60px 0;
+  text-align: center; }
+  .academy-wrapper h2 {
+    text-align: center;
+    margin: 0 0 60px; }
+  .academy-wrapper .academy-section {
+    text-align: center;
+    margin-bottom: 30px; }
+    .academy-wrapper .academy-section i {
+      color: #4295D1;
+      font-size: 5.5em;
+      margin-bottom: 10px; }
+    .academy-wrapper .academy-section p {
+      font-size: 0.95em;
+      padding: 0 10%; }
+  .academy-wrapper a.academy-cta {
+    background: #DA422F;
+    color: white;
+    text-align: center;
+    margin: 20px auto 0;
+    border-radius: 4px;
+    padding: 10px 20px; }
+    .academy-wrapper a.academy-cta:hover, .academy-wrapper a.academy-cta:focus {
+      text-decoration: none;
+      background: #A51B1B; }
+
+@media (max-width: 767px) {
+  .academy-wrapper .academy-section i {
+    font-size: 3em; }
+  .academy-wrapper .academy-section p {
+    padding: 0; } }
+
+.summit-more-wrapper {
+  padding-bottom: 90px; }
+  .summit-more-wrapper .single-summit-stats {
+    width: 48%; }
+  .summit-more-wrapper iframe {
+    margin-top: 30px;
+    width: 100%;
+    height: 275px; }
+
+@media (min-width: 768px) and (max-width: 990px) {
+  .summit-more-wrapper .about-video-wrapper {
+    display: inline-block;
+    width: 45%;
+    margin: 20px auto; }
+    .summit-more-wrapper .about-video-wrapper iframe {
+      height: 205px; } }
+
+.register-promo-wrapper {
+  background: #DA422F;
+  color: white;
+  text-align: center;
+  padding: 30px 0;
+  margin-bottom: -60px; }
+  .register-promo-wrapper h2 {
+    text-align: center;
+    color: white;
+    margin-bottom: 20px; }
+  .register-promo-wrapper a.btn {
+    background: #A51B1B;
+    color: white;
+    border-radius: 4px;
+    padding: 15px 20px;
+    min-width: 330px;
+    margin: 30px auto; }
+/*End BCN Redesign*/
+
 /* Presentation App */
 .presentation-app-header {
   border-bottom: 1px solid #CCCCCC; }
@@ -3310,6 +3588,29 @@ h3.recap-title {
   .about-summit .register-btn-lrg {
     margin-bottom: 20px; } }
 
+.about-summit.with-arrow {
+  position: relative;
+}
+
+.about-summit.with-arrow:after {
+    top: 100%;
+    left: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: transparent;
+    border-color: transparent transparent #fff #fff;
+    border-width: 36px;
+    margin-left: -36px;
+    margin-top: -3px;
+    -webkit-transform-origin: 0 0;
+            transform-origin: 0 0;
+    -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+    box-shadow: -3px 3px 3px 0 rgba(0, 0, 0, 0.3); }
 .two-summits {
   text-align: center; }
 
