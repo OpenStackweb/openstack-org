@@ -24,8 +24,8 @@ class CompanyEditForm extends BootstrapForm
                 new TextField ('URL', 'Company Web Address (URL)'),
                 new LiteralField('Break', '<p></p>'),
                 new LiteralField('Break', '<hr/>'),
-                $big_logo   = new CustomUploadField('BigLogo', 'Large Company Logo'),
-	            $small_logo = new CustomUploadField('Logo', 'Small Company Logo'),
+                $big_logo   = new FileAttachmentField('BigLogo', 'Large Company Logo'),
+	            $small_logo = new FileAttachmentField('Logo', 'Small Company Logo'),
                 new LiteralField('Break', '<p></p>'),
                 new LiteralField('Break', '<hr/>'),
                 new TextField('Industry', 'Industry (less than 4 Words)'),
@@ -49,15 +49,15 @@ class CompanyEditForm extends BootstrapForm
 	        $big_logo_validator = new Upload_Image_Validator();
 	        $big_logo_validator->setAllowedExtensions(array('jpg','png','jpeg'));
 	        $big_logo_validator->setAllowedMaxImageWidth(500);
-	        $big_logo->setAllowedExtensions(array('jpg','png','jpeg'));
-	        //$big_logo->setView('grid');
+	        $big_logo->setAcceptedFiles(array('jpg','png','jpeg'));
+	        $big_logo->setView('grid');
 	        $big_logo->setFolderName('companies/main_logo');
 	        $big_logo->setValidator($big_logo_validator);
             $small_logo_validator = new Upload_Image_Validator();
 	        $small_logo_validator->setAllowedExtensions(array('jpg','png','jpeg'));
 	        $small_logo_validator->setAllowedMaxImageWidth(200);
-	        $small_logo->setAllowedExtensions(array('jpg','png','jpeg'));
-	        //$small_logo->setView('grid');
+	        $small_logo->setAcceptedFiles(array('jpg','png','jpeg'));
+	        $small_logo->setView('grid');
 	        $small_logo->setFolderName('companies/main_logo');
 	        $small_logo->setValidator($small_logo_validator);
 
