@@ -26,7 +26,7 @@
                                 <h2>You Can Also Find Us At Our Upcoming Enterprise Events</h2>
                             </div>
                         </div>
-                        <!--<div class="row events">
+                        <div class="row events">
                             <div class="col-lg-6 events-col">
                                 <% with EnterpriseEvents(1).First %>
                                 <a href="$EventLink" class="featured-event-link lrg">
@@ -43,25 +43,6 @@
                                     <img class="event-logo paris" src="$EventSponsorLogoUrl" alt="OpenStack Summit in $EventLocation">
                                     <span>OpenStack Summit</span>
                                     <span>$formatDateRange() in $EventLocation</span>
-                                </a>
-                                <% end_with %>
-                            </div>
-                        </div>-->
-                        <div class="row events">
-                            <div class="col-lg-6 events-col">
-                                <a href="/summit/barcelona-2016/" class="featured-event-link lrg">
-                                    <img class="event-logo paris" src="//openstack.org/themes/openstack/images/enterprise/legacy/summit-event-logo.png" alt="$Title">
-                                    <span>OpenStack Summit</span>
-                                    <span>October 25-28, 2016 in Barcelona, Spain</span>
-                                </a>
-                            </div>
-                            <div class="vert-line"></div>
-                            <div class="col-lg-6 events-col">
-                                <% with SummitEvent %>
-                                <a href="$EventLink" class="featured-event-link">
-                                    <img class="event-logo paris" src="//openstack.org/themes/openstack/images/enterprise/legacy/summit-event-logo.png" alt="OpenStack Summit in $EventLocation">
-                                    <span>OpenStack Summit</span>
-                                    <span>May 8-12, 2017 in Boston, Massachusetts</span>
                                 </a>
                                 <% end_with %>
                             </div>

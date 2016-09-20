@@ -46,7 +46,13 @@ class EnterpriseHomePage_Controller extends Page_Controller {
 
     public function getEnterpriseEvents($limit = 3)
     {
-        return EventPage::get()->filter('EventCategory','Enterprise')->sort('EventStartDate')->limit($limit);
+        $next_summit = $this->getSummitEvent();
+        $filter = array("EventEndDate:GreaterThan" => date('Y-m-d H:i:s'), "ID:not" => $next_summit->ID);
+        return EventPage::get()
+            ->where("EventCategory IN('Enterprise','Summit')")
+            ->filter($filter)
+            ->sort('EventStartDate')
+            ->limit($limit);
     }
 
     public function getSummitEvent()
