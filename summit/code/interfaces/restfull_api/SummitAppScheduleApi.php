@@ -911,13 +911,17 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi
                     ->setSummary( $event->Title )
                     ->setDescription(strip_tags($event->ShortDescription))
                     ->setDescriptionHTML($event->ShortDescription);
-                if($event->getLocation()){
-                    $location = $event->getLocation();
-                    $venue    = $location;
+
+                if($location = $event->getLocation()){
+                    $venue = $location;
+                    $geo = null;
                     if($location->getTypeName() == SummitVenueRoom::TypeName){
                         $venue = $location->getVenue();
                     }
-                    $vEvent->setLocation($location->getFullName(), $location->getFullName(), sprintf("%s;%s", $venue->getLat(), $venue->getLng()));
+                    if (is_a($venue,'SummitGeoLocatedLocation')) {
+                        $geo = sprintf("%s;%s", $venue->getLat(), $venue->getLng());
+                    }
+                    $vEvent->setLocation($location->getFullName(), $location->getFullName(), $geo);
                 }
                 $vCalendar->addComponent($vEvent);
             }
