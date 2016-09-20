@@ -129,7 +129,7 @@ a.testimonial-link {
 .summit-promo {
   width: 100%; }
   .summit-promo.nfv {
-    background: url('/themes/openstack/images/nfv/nfv-summit-bkgd.jpg') no-repeat center center;
+    background: url('/assets/Uploads/hero-bkgd.png') no-repeat center center;
     background-size: cover;
     padding: 60px 0 80px; 
     margin-bottom: -50px;
@@ -157,19 +157,20 @@ a.testimonial-link {
   text-transform: uppercase;
   display: block;
   font-weight: 700; }
+
 .summit-promo.nfv .nfv-summit-right .nfv-summit-register-btn a {
   display: block;
   text-align: center;
   max-width: 80%;
   margin: 10px auto;
-  background: #29abe2;
+  background: #DA422F;
   color: white;
   padding: 10px 20px;
   border-radius: 4px; }
 .summit-promo.nfv .nfv-summit-right .nfv-summit-register-btn a i {
   margin-left: 5px; }
 .summit-promo.nfv .nfv-summit-right .nfv-summit-register-btn a:hover {
-  background: #30739C;
+  background: #A51B1B;
   text-decoration: none; }
 
 @media (max-width: 767px) {

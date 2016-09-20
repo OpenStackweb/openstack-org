@@ -246,17 +246,17 @@
                 <div class="col-sm-8">
                     <h3>From the Summit to your browser: Everything you need to know about containers and OpenStack</h3>
                     <p>
-                        At the Austin Summit, there were dozens of sessions covering the latest updates around containers, including use cases from Ancestry.com, Time Warner Cable and LivePerson, as well as OpenStack project updates from Magnum, Kuryr and Murano.
+                        At the Barcelona Summit, there will be dozens of sessions covering the latest updates around containers, including use cases as well as OpenStack project updates from Magnum, Kuryr and Murano.
                     </p>
                 </div>
                 <div class="col-sm-4">
                     <div class="containers-summit-right">
-                        <img class="containers-summit-logo" src="/themes/openstack/static/images/summit-logo-small.svg" onerror="this.onerror=null; this.src=/themes/openstack/static/images/summit-logo-small.png" alt="OpenStack Summit">
-<!--                         <div class="containers-summit-dates">
-                            October 25-28 in Barcelona
-                        </div> -->
+                        <img class="containers-summit-logo" src="/themes/openstack/static/images/summit-logo-small-white.svg" alt="OpenStack Summit">
+                        <div class="containers-summit-dates">
+                            October 25-28 in Barcelona, Spain
+                        </div>
                         <div class="containers-summit-register-btn">
-                            <a href="//www.openstack.org/videos" class="nfv-summit-btn" target="_blank">Stream the sessions now <i class="fa fa-chevron-right"></i></a>
+                            <a href="//www.openstack.org/summit/barcelona-2016/summit-schedule/#track=81" class="nfv-summit-btn" target="_blank">View Container Sessions <i class="fa fa-chevron-right"></i></a>
                         </div>
                     </div>
                 </div>

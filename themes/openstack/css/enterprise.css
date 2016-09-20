@@ -1587,7 +1587,7 @@ img.global-figures-chart {
   .summit-promo p {
     color: white; }
   .summit-promo.containers {
-    background: url('/themes/openstack/images/nfv/nfv-summit-bkgd.jpg') no-repeat center center;
+    background: url('/assets/Uploads/hero-bkgd.png') no-repeat center center;
     background-size: cover;
     padding: 60px 0 80px; 
     margin-bottom: -50px;
@@ -1646,14 +1646,14 @@ img.global-figures-chart {
   text-align: center;
   max-width: 80%;
   margin: 10px auto;
-  background: #29abe2;
+  background: #DA422F;
   color: white;
   padding: 10px 20px;
   border-radius: 4px; }
 .summit-promo.containers .containers-summit-right .containers-summit-register-btn a i {
   margin-left: 5px; }
 .summit-promo.containers .containers-summit-right .containers-summit-register-btn a:hover {
-  background: #30739C;
+  background: #A51B1B;
   text-decoration: none; }
 
 @media (max-width: 767px) {

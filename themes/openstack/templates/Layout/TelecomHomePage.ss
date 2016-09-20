@@ -216,17 +216,17 @@
                 <div class="col-sm-8">
                     <h3>From the Summit to your browser: Everything you need to know about OpenStack and NFV</h3>
                     <p>
-                        Developers and global telecoms who are actively shaping NFV in the open source community gathered at the Austin Summit to discuss use cases, project requirements and next steps.
+                        Developers and global telecoms who are actively shaping NFV in the open source community are gathering at the Barcelona Summit to discuss use cases, project requirements and next steps.
                     </p>
                 </div>
                 <div class="col-sm-4">
                     <div class="nfv-summit-right">
-                        <img class="nfv-summit-logo" src="/themes/openstack/static/images/summit-logo-small.svg" onerror="this.onerror=null; this.src=/themes/openstack/static/images/summit-logo-small.png" alt="OpenStack Summit">
-<!--                         <div class="nfv-summit-dates">
-                            April 25-29 in Austin, TX
-                        </div> -->
+                        <img class="nfv-summit-logo" src="/themes/openstack/static/images/summit-logo-small-white.svg" alt="OpenStack Summit">
+                        <div class="nfv-summit-dates">
+                            October 25-28 in Barcelona, Spain
+                        </div>
                         <div class="nfv-summit-register-btn">
-                            <a href="https://www.openstack.org/videos/search?search=NFV" class="nfv-summit-btn" target="_blank">Stream the sessions now <i class="fa fa-chevron-right"></i></a>
+                            <a href="//www.openstack.org/summit/barcelona-2016/summit-schedule/#track=77" class="nfv-summit-btn" target="_blank">See NFV Sessions <i class="fa fa-chevron-right"></i></a>
                         </div>
                     </div>
                 </div>
