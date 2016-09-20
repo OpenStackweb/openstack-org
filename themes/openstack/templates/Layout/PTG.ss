@@ -46,6 +46,13 @@
                         <img class="ptg-release-timeline" src="/themes/openstack/images/summit-ptg-timeline-revised.png" alt="Project Teams Gathering vs Design Summit">
                     </a>
                 </p>
+                <h2>Hotel & Travel</h2>
+                <p>
+                    We've negotiated discounted rates for hotel rooms adjacent to the PTG venue. Use the following link to access to book, modify, or cancel a reservation from September 14, 2016 to February 28, 2017.
+                </p>
+                <p>
+                    <a class="btn btn-primary" style="color: white;" href="https://www.starwoodmeeting.com/events/start.action?id=1609140999&key=381BF4AA" target="_blank">Book Your Room</a>
+                </p>
             </div>
         </div>
     </div>
