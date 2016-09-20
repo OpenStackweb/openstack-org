@@ -805,8 +805,6 @@ final class SummitService implements ISummitService
                     $request->write();
                     $speaker->RegistrationRequestID = $request->ID;
                     $speaker->write();
-                    // send email to speaker so he can register as a member
-                    $speaker_creation_email_sender->send(['Speaker' => $speaker]);
                 }
                 else
                 {
@@ -824,6 +822,9 @@ final class SummitService implements ISummitService
                     $speaker->write();
                 }
             }
+
+            // send email to speaker so he can register as a member
+            $speaker_creation_email_sender->send(['Speaker' => $speaker]);
 
             $onsite_phone = trim($speaker_data['onsite_phone']);
             if(!empty($onsite_phone)) {
