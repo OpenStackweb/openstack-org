@@ -28,6 +28,7 @@
                     <th>Member Id</th>
                     <th>FullName</th>
                     <th>Email</th>
+                    <th>EventBriteID</th>
                     <th>Bought Date</th>
                     <th>Checked In?</th>
                     <th>&nbsp;</th>
@@ -38,11 +39,12 @@
                     <td>{ attendee.member_id }</td>
                     <td>{ attendee.name }</td>
                     <td>{ attendee.email }</td>
+                    <td>{ attendee.eventbrite_id }</td>
                     <td>{ attendee.ticket_bought }</td>
                     <td>{ attendee.checked_in }</td>
                     <td>
                         <a href="{ attendee.link }" class="btn btn-default btn-sm" role="button">Edit</a>
-                        <button class="btn btn-success btn-sm" onclick={ openSchedule }>Schedule</button>
+                        <button class="btn btn-primary btn-sm" onclick={ openSchedule }>Schedule</button>
                     </td>
                 </tr>
             </tbody>
@@ -100,6 +102,7 @@
                     $('#search_attendees').click();
                 }
             });
+
         });
 
         getAttendees(page,search_term) {

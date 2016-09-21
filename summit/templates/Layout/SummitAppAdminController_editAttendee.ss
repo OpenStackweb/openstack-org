@@ -181,8 +181,10 @@
         var member = {};
         var company = {};
         <% if $Attendee.Member %>
-        member = {id : "{$Attendee.MemberID}", name : "{$Attendee.Member.FirstName.JS} {$Attendee.Member.Surname.JS} ({$Attendee.Member.ID})"};
-        company = {id : "{$Attendee.Member.currentAffiliation.OrganizationID}", name : "{$Attendee.Member.currentAffiliation.Organization.Name}"};
+            member = {id : "{$Attendee.MemberID}", name : "{$Attendee.Member.FirstName.JS} {$Attendee.Member.Surname.JS} ({$Attendee.Member.ID})"};
+            <% if $Attendee.Member.currentAffiliation %>
+                company = {id : "{$Attendee.Member.currentAffiliation.OrganizationID}", name : "{$Attendee.Member.currentAffiliation.Organization.Name}"};
+            <% end_if %>
         <% end_if %>
     </script>
 

@@ -47,6 +47,13 @@ interface ISummitService
      * @param array $attendee_data
      * @return mixed
      */
+    public function addAttendee(ISummit $summit, array $attendee_data);
+
+    /**
+     * @param ISummit $summit
+     * @param array $attendee_data
+     * @return mixed
+     */
     public function updateAttendee(ISummit $summit, array $attendee_data);
 
     /**

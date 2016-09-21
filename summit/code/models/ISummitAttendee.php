@@ -111,4 +111,16 @@ interface ISummitAttendee extends IEntity
      */
     public function hasRSVPSubmission($event_id);
 
+    /**
+     * @return string
+     * @throws Exception
+     */
+    public function getTicketIDs();
+
+    /**
+     * @return string
+     * @throws Exception
+     */
+    public function getBoughtDate($format = 'M j Y h:ia');
+
 }

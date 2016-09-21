@@ -436,6 +436,35 @@ final class SummitService implements ISummitService
      * @param array $attendee_data
      * @return mixed
      */
+    public function addAttendee(ISummit $summit, array $attendee_data)
+    {
+        $attendee_repository = $this->attendee_repository;
+        $member_repository = $this->member_repository;
+
+        return $this->tx_service->transaction(function() use($summit, $attendee_data, $attendee_repository, $member_repository){
+            $member_id = intval($attendee_data['member_id']);
+            $member = $member_repository->getById($member_id);
+            if (is_null($member))
+                throw new NotFoundEntityException('Member', sprintf('id %s', $member_id));
+
+            $attendee = $attendee_repository->getByMemberAndSummit($member_id,$summit->getIdentifier());
+            if ($attendee)
+                throw new EntityValidationException('This member is already assigned to another attendee');
+
+            $attendee = new SummitAttendee();
+            $attendee->MemberID = $member_id;
+            $attendee->SummitID = $summit->getIdentifier();
+            $attendee->write();
+
+            return $attendee;
+        });
+    }
+
+    /**
+     * @param ISummit $summit
+     * @param array $attendee_data
+     * @return mixed
+     */
     public function updateAttendee(ISummit $summit, array $attendee_data)
     {
         $attendee_repository = $this->attendee_repository;

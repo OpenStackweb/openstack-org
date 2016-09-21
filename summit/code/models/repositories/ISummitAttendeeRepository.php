@@ -21,4 +21,13 @@ interface ISummitAttendeeRepository extends IEntityRepository
      */
     public function getByMemberAndSummit($member_id, $summit_id);
 
+    /**
+     * @param string $search_term
+     * @param int $page
+     * @param int $page_size
+     * @param int $summit_id
+     * @return array
+     */
+    public function findAttendeesBySummit($search_term, $page, $page_size, $summit_id);
+
 }

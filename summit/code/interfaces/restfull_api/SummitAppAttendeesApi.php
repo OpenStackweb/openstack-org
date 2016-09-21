@@ -82,6 +82,7 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
         'PUT $ATTENDEE_ID!/tickets/$TICKET_ID!/reassign'     => 'reassignTicket',
         'GET $ATTENDEE_ID!/tickets/$TICKET_ID!'              => 'getTicketData',
         'PUT $ATTENDEE_ID!'                                  => 'updateAttendee',
+        'POST '                                              => 'addAttendee',
     );
 
     static $allowed_actions = array(
@@ -90,6 +91,7 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
         'reassignTicket',
         'getTicketData',
         'getSchedule',
+        'addAttendee',
     );
 
     public function getAttendees(SS_HTTPRequest $request){
@@ -113,7 +115,8 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
                     'member_id'     => $attendee->MemberID,
                     'name'          => $attendee->Member->FullName,
                     'email'         => $attendee->Member->Email,
-                    'ticket_bought' => $attendee->Tickets()->TicketBoughtDate,
+                    'eventbrite_id' => $attendee->getTicketIDs(),
+                    'ticket_bought' => $attendee->getBoughtDate(),
                     'checked_in'    => $attendee->SummitHallCheckedIn,
                     'link'          => 'summit-admin/'.$summit_id.'/attendees/'.$attendee->ID,
                     'schedule'      => $attendee->Schedule()->toNestedArray()
@@ -126,6 +129,35 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
         {
             SS_Log::log($ex2->getMessage(), SS_Log::WARN);
             return $this->notFound($ex2->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    public function addAttendee(SS_HTTPRequest $request)
+    {
+        try
+        {
+            if(!$this->isJson()) return $this->validationError(array('invalid content type!'));
+            $summit_id     = intval($request->param('SUMMIT_ID'));
+            $attendee_data = $this->getJsonRequest();
+            $summit = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+            $this->summit_service->addAttendee($summit, $attendee_data);
+            return $this->ok();
+        }
+        catch(EntityValidationException $ex1)
+        {
+            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
+            return $this->validationError($ex1->getMessages());
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessages());
         }
         catch(Exception $ex)
         {

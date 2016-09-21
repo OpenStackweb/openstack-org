@@ -56,10 +56,15 @@ final class SapphireSummitAttendeeRepository extends SapphireRepository implemen
         if (!empty($search_term)) {
             $where_clause .=   "AND (Member.FirstName LIKE '{$search_term}%'
                                 OR Member.Surname LIKE '{$search_term}%'
-                                OR CONCAT(Member.FirstName,' ',Member.Surname) LIKE '{$search_term}%') ";
+                                OR CONCAT(Member.FirstName,' ',Member.Surname) LIKE '{$search_term}%'
+                                OR SummitAttendeeTicket.ExternalOrderId = '{$search_term}'
+                                OR Member.Email LIKE '{$search_term}%' ) ";
         }
 
-        $list = SummitAttendee::get()->leftJoin("Member","Member.ID = SummitAttendee.MemberID")->where($where_clause);
+        $list = SummitAttendee::get()
+            ->leftJoin("Member","Member.ID = SummitAttendee.MemberID")
+            ->leftJoin("SummitAttendeeTicket","SummitAttendeeTicket.OwnerID = SummitAttendee.ID")
+            ->where($where_clause)->distinct(true);
 
         $count = count($list);
         $offset = ($page - 1 ) * $page_size;
