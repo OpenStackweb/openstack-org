@@ -136,9 +136,10 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         // browser detection
         Requirements::javascript('themes/openstack/bower_assets/bowser/src/bowser.js');
         Requirements::javascript('themes/openstack/bower_assets/sweetalert2/dist/sweetalert2.min.js');
-        Requirements::javascript('summit/javascript/schedule/install_mobile_app.js');
         Requirements::javascript('themes/openstack/javascript/jquery.serialize.js');
         Requirements::javascript('themes/openstack/javascript/jquery.cleanform.js');
+        Requirements::javascript('themes/openstack/bower_assets/urijs/src/URI.min.js');
+        Requirements::javascript('summit/javascript/schedule/install_mobile_app.js');
         Requirements::javascript('summit/javascript/forms/rsvp.form.js');
 
     }
