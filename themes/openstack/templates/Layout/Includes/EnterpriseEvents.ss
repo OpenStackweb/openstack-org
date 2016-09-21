@@ -32,7 +32,7 @@
                                 <a href="$EventLink" class="featured-event-link">
                                     <img class="event-logo paris" src="$EventSponsorLogoUrl" alt="OpenStack Summit in $EventLocation">
                                     <span>OpenStack Summit</span>
-                                    <span>$formatDateRange() in $EventLocation</span>
+                                    <span>$formatDateRange() in $EventLocation</span> 
                                 </a>
                                 <% end_with %>
                             </div>

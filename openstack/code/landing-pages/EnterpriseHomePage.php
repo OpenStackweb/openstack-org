@@ -64,6 +64,7 @@ class EnterpriseHomePage_Controller extends Page_Controller {
             ->filter($filter)
             ->sort('EventStartDate')
             ->limit($limit);
+
     }
 
     public function getSummitEvent()
