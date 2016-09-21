@@ -312,7 +312,11 @@ final class SummitAdminUI extends DataExtension
                     'SentDate'       => 'Sent Date',
                 )
             );
+            $config->getComponentByType('GridFieldDetailForm')->setItemRequestClass('GridFieldDetailFormPushNotification');
+
             $gridField = new GridField('Notifications', 'Notifications', $this->owner->Notifications(), $config);
+
+
             $f->addFieldToTab('Root.PushNotifications', $gridField);
 
             //entity events

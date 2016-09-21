@@ -1,19 +1,19 @@
 (function($) {
     $.entwine("ss", function($) {
 
-        $("#Form_ItemEditForm_Channel").entwine({
+        $("#Form_ItemEditForm_Channel", $('form.push-notification')).entwine({
             onmatch: showUI,
             onchange: showUI
         });
 
-        $('#Form_ItemEditForm_action_save').entwine({
+        $('#Form_ItemEditForm_action_save', $('form.push-notification')).entwine({
             onclick: function(evt){
                 var save = doSave();
                 if(save) this._super(evt);
             }
         });
 
-        $('#Form_ItemEditForm_action_doSaveAndQuit').entwine({
+        $('#Form_ItemEditForm_action_doSaveAndQuit', $('form.push-notification')).entwine({
             onclick: function(evt){
                 var save = doSave();
                 if(save) this._super(evt);

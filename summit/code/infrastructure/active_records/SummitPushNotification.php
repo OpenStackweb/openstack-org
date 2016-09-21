@@ -102,6 +102,11 @@ final class SummitPushNotification extends CustomDataObject implements IEntity
     }
 
 
+    public function getCMSActions(){
+        $actions = parent::getCMSActions();
+        return $actions;
+    }
+
     public function sent()
     {
         if($this->isAlreadySent()) throw new EntityValidationException('Push notification already sent!.');
