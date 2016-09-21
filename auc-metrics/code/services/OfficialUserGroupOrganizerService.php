@@ -34,7 +34,7 @@ class OfficialUserGroupOrganizerService extends BaseService implements MetricSer
             );
         }
 
-        $csvPath = "https://groups.openstack.org/reports/group-contact-report/csv?token=" . GROUP_CONTACT_REPORT_TOKEN;
+        $csvPath = "https://groups.openstack.org/reports/group-contact-report/csv?token=" . GROUP_CONTACT_REPORT_TOKEN . "&status=official";
 
         $client = $this->getHTTPClient();
         $response = $client->get($csvPath);
