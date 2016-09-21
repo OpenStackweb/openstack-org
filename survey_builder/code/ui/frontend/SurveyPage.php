@@ -499,8 +499,10 @@ class SurveyPage_Controller extends Page_Controller
             {
                 //check if its a entity survey from a team that i belong
                 $current_member = Member::currentUser();
-                $this->current_entity_survey = $current_member->TeamEntitySurveys()->filter('EntitySurveyID',
-                    $entity_survey_id)->first();
+                $this->current_entity_survey = $current_member
+                                               ->TeamEntitySurveys()
+                                               ->filter('EntitySurveyID', $entity_survey_id)
+                                               ->first();
             }
 
             if (is_null($this->current_entity_survey))
@@ -514,8 +516,9 @@ class SurveyPage_Controller extends Page_Controller
             // check substep variable
             if (empty($sub_step))
             {
-                // is not set, redirect to current steo uri
-                return $this->redirect($request->getUrl() . '/' . $entity_step_template->title());
+                // is not set, redirect to first step uri
+                $steps = $this->current_entity_survey->getSteps();
+                return $this->redirect($request->getUrl() . '/' . $steps[0]->template()->title());
             }
             else
             {
