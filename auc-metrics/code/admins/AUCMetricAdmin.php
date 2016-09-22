@@ -10,6 +10,14 @@ class AUCMetricAdmin extends ModelAdmin
 		'AUCMetric'
 	];
 
+	public function getExportFields() {
+		return [
+			'FoundationMemberID' => 'FoundationMemberID',
+			'Identifier' => 'Identifier',
+			'Expires' => 'Expires'
+		];
+	}
+
 	public function getList() {
 		$list = AUCMetric::get()
 			->sort([
