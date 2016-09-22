@@ -47,3 +47,7 @@ php composer.phar dump-autoload --optimize
     php /var/www/openstack/framework/cli-script.php dev/build flush=1
    ```
 * Restart apache
+
+## Flush the site cash
+
+visit http://your-site.example.org/?flush to clean the site cache after a template change.
