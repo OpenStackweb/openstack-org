@@ -65,7 +65,7 @@
     <div class="row">
       <div class="col-sm-4 col-sm-push-1">
         <div class="summit-user-section">
-          <img src="https://www.openstack.org/assets/barcelona-summit/featured-speakers/annilai.jpg" alt="Anni Lai" class="summit-user-image">
+          <img src="//www.openstack.org/assets/barcelona-summit/featured-speakers/annilai.jpg" alt="Anni Lai" class="summit-user-image">
           <div class="name">Anni Lai</div>
           <div class="title">Head of Global Business Development, Huawei</div>
           <div class="description">
@@ -75,7 +75,7 @@
       </div>
       <div class="col-sm-4 col-sm-push-3">
         <div class="summit-user-section">
-          <img src="https://www.openstack.org/assets/barcelona-summit/featured-speakers/fernandoalvarezgomez.jpg" alt="Fernando Álvarez Gómez" class="summit-user-image">
+          <img src="//www.openstack.org/assets/barcelona-summit/featured-speakers/fernandoalvarezgomez.jpg" alt="Fernando Álvarez Gómez" class="summit-user-image">
           <div class="name">Fernando Álvarez Gómez</div>
           <div class="title">Cloud Computing Engineer, BBVA</div>
           <div class="description">
@@ -87,7 +87,7 @@
     <div class="row">
       <div class="col-sm-4 col-sm-push-1">
         <div class="summit-user-section">
-          <img src="https://www.openstack.org/assets/barcelona-summit/featured-speakers/meganrossetti.jpg" alt="Megan Rossetti" class="summit-user-image">
+          <img src="//www.openstack.org/assets/barcelona-summit/featured-speakers/meganrossetti.jpg" alt="Megan Rossetti" class="summit-user-image">
           <div class="name">Megan Rossetti</div>
           <div class="title">OpenStack Operations, Walmart</div>
           <div class="description">
@@ -97,7 +97,7 @@
       </div>
       <div class="col-sm-4 col-sm-push-3">
         <div class="summit-user-section">
-          <img src="https://www.openstack.org/assets/barcelona-summit/featured-speakers/haoli.jpg" alt="Hao Li" class="summit-user-image">
+          <img src="//www.openstack.org/assets/barcelona-summit/featured-speakers/haoli.jpg" alt="Hao Li" class="summit-user-image">
           <div class="name">Hao Li</div>
           <div class="title">Senior Engineer, China Mobile</div>
           <div class="description">
@@ -109,7 +109,7 @@
     <div class="row">
       <div class="col-sm-4 col-sm-push-1">
         <div class="summit-user-section">
-          <img src="https://www.openstack.org/assets/barcelona-summit/featured-speakers/guaravgupta.jpg" alt="Gaurav Gupta" class="summit-user-image">
+          <img src="//www.openstack.org/assets/barcelona-summit/featured-speakers/guaravgupta.jpg" alt="Gaurav Gupta" class="summit-user-image">
           <div class="name">Gaurav Gupta</div>
           <div class="title">VP of Engineering, Snapdeal</div>
           <div class="description">
@@ -119,7 +119,7 @@
       </div>
       <div class="col-sm-4 col-sm-push-3">
         <div class="summit-user-section">
-          <img src="https://www.openstack.org/assets/barcelona-summit/featured-speakers/sarahnovotny.jpg" alt="Sarah Novotny" class="summit-user-image">
+          <img src="//www.openstack.org/assets/barcelona-summit/featured-speakers/sarahnovotny.jpg" alt="Sarah Novotny" class="summit-user-image">
           <div class="name">Sarah Novotny</div>
           <div class="title">Program Manager of Kubernetes Community, Google</div>
           <div class="description">
