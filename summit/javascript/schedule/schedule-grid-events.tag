@@ -6,6 +6,11 @@
             <p>* There are not events that match your search criteria. </p>
         </div>
     </div>
+    <div class="row" id="no_events_msg" style="display:none;margin-top: 25px;">
+        <div class="col-md-12">
+            <p>* The combination of filters you have selected resulted in no matching events. Please adjust the filters or try different search parameters.</p>
+        </div>
+    </div>
     <script>
 
         this.summit                   = opts.summit;
@@ -18,6 +23,7 @@
         this.default_event_color      = opts.default_event_color;
         this.current_filter           = null;
         this.show_date                = false;
+        this.day_selected             = '';
         var self                      = this;
 
         this.on('mount', function(){
@@ -250,6 +256,7 @@
 
         this.schedule_api.on('eventsRetrieved',function(data) {
             self.show_date    = data.show_date;
+            self.day_selected = data.day_selected;
             self.events       = data.events;
 
             var myschedule_container = self.summit.current_user !== null ? '<div class="col-sm-3 my-schedule-container">'+
@@ -273,7 +280,10 @@
                 '<div class="event-content">'+
                 '<div class="row row_location">'+
                 '<div class="col-sm-3 col-time">'+
-                '<i class="fa fa-clock-o icon-clock"></i><span class="event-date"></span>&nbsp;<span class="start-time"></span>-<span class="end-time"></span></div>'+
+                '<i class="fa fa-clock-o icon-clock">'+
+                '</i><span class="event-date"></span>&nbsp;'+
+                '<span class="start-time" data-epoch=""></span>-<span class="end-time"></span>'+
+                '</div>'+
                 '<div class="col-sm-6 col-location">'+
                 '<div>'+
                 ( (self.summit.should_show_venues)? '<i class="fa fa-map-marker icon-map"></i>&nbsp;<a class="search-link venue-search-link"></a>' : '')+
@@ -340,6 +350,7 @@
             }
 
             event_directives['span.start-time'] =  'event.start_time';
+            event_directives['span.start-time@data-epoch'] = 'event.start_epoch',
             event_directives['span.end-time']   =  'event.end_time';
 
             if(self.summit.should_show_venues){
@@ -381,6 +392,7 @@
 
             var html = event_template.render(data.events, directives);
             $('#events-inner-container').html(html);
+            self.scrollToTime();
             self.applyFilters();
             window.setTimeout(function(){$('#events-container').ajax_loader('stop');}, 1000);
         });
@@ -425,43 +437,71 @@
         }
 
         applyFilters(){
+            var event_count = 0;
+
             $('.event-row').show();
             // show select checkbox only if my schedule
             if(self.current_filter.own)
                 $('.synch-container').show();
             else
-            $('.synch-container').hide();
+                $('.synch-container').hide();
 
             if(!self.isFilterEmpty()){
+                for(var e of self.events){
+                    var show = true;
+                    //track groups
+                    if(!self.isTrackGroupsFilterEmpty())
+                        show &= e.hasOwnProperty('track_id') ? self.current_filter.track_groups.some(function(v) { return self.summit.category_groups[parseInt(v)].tracks.indexOf(parseInt(e.track_id)) != -1; }) : false;
+                    if(!show){ $('#event_'+e.id).hide(); continue;}
+                    //eventypes
+                    if(!self.isEventTypesFilterEmpty())
+                        show &= self.current_filter.event_types.indexOf(e.type_id.toString()) > -1;
+                    if(!show){ $('#event_'+e.id).hide(); continue;}
+                    //tracks
+                    if(!self.isTracksFilterEmpty())
+                        show &=  e.hasOwnProperty('track_id') ? self.current_filter.tracks.indexOf(e.track_id.toString()) > -1 : false;
+                    if(!show){ $('#event_'+e.id).hide(); continue;}
+                    //level
+                    if(!self.isLevelsFilterEmpty())
+                        show &= e.hasOwnProperty('level') ? self.current_filter.levels.indexOf(e.level.toString()) > -1 : false;
+                    if(!show){ $('#event_'+e.id).hide(); continue;}
+                    //tags
+                    if(!self.isTagsFilterEmpty())
+                        show &= e.tags_id.some(function(v) { return self.current_filter.tags.indexOf(v.toString()) != -1; });
+                    if(!show){ $('#event_'+e.id).hide(); continue;}
+                    //my schedule
+                    if(self.current_filter.own)
+                        show &= e.own;
+                    if(!show){ $('#event_'+e.id).hide(); continue;}
 
-                    for(var e of self.events){
-                        var show = true;
-                        //track groups
-                        if(!self.isTrackGroupsFilterEmpty())
-                            show &= e.hasOwnProperty('track_id') ? self.current_filter.track_groups.some(function(v) { return self.summit.category_groups[parseInt(v)].tracks.indexOf(parseInt(e.track_id)) != -1; }) : false;
-                        if(!show){ $('#event_'+e.id).hide(); continue;}
-                        //eventypes
-                        if(!self.isEventTypesFilterEmpty())
-                            show &= self.current_filter.event_types.indexOf(e.type_id.toString()) > -1;
-                        if(!show){ $('#event_'+e.id).hide(); continue;}
-                        //tracks
-                        if(!self.isTracksFilterEmpty())
-                            show &=  e.hasOwnProperty('track_id') ? self.current_filter.tracks.indexOf(e.track_id.toString()) > -1 : false;
-                        if(!show){ $('#event_'+e.id).hide(); continue;}
-                        //level
-                        if(!self.isLevelsFilterEmpty())
-                            show &= e.hasOwnProperty('level') ? self.current_filter.levels.indexOf(e.level.toString()) > -1 : false;
-                        if(!show){ $('#event_'+e.id).hide(); continue;}
-                        //tags
-                        if(!self.isTagsFilterEmpty())
-                            show &= e.tags_id.some(function(v) { return self.current_filter.tags.indexOf(v.toString()) != -1; });
-                        if(!show){ $('#event_'+e.id).hide(); continue;}
-                        //my schedule
-                        if(self.current_filter.own)
-                            show &= e.own;
-                        if(!show){ $('#event_'+e.id).hide(); continue;}
-                        $('#event_'+e.id).show();
-                    }
+                    $('#event_'+e.id).show();
+                    event_count++;
+                }
+            }
+
+            if(event_count == 0) {
+                $('#no_events_msg').show();
+            } else {
+                $('#no_events_msg').hide();
+            }
+        }
+
+        scrollToTime() {
+            var d = new Date();
+            var month = d.getMonth()+1;
+            var day = d.getDate();
+            var date = d.getFullYear() + '-' + (month<10 ? '0' : '') + month + '-' + (day<10 ? '0' : '') + day;
+
+            if (date == self.day_selected) {
+                var current_event = $('.start-time[data-epoch]').filter(function () {
+                    return $(this).data('epoch') >= ($.now()/1000);
+                }).last();
+
+                if (current_event) {
+                    $('html, body').animate({
+                        scrollTop: current_event.parents('.event-row').offset().top
+                    }, 2000);
+                }
             }
         }
 

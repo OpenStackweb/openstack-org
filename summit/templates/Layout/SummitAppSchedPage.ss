@@ -94,20 +94,22 @@
         <% end_loop %>
 
         <% loop $Summit.CategoryGroups.Sort(Name, ASC)  %>
-        summit.category_groups[{$ID}] =
-        {
-           name : "{$Name.JS}",
-           description : "{$Description.JS}",
-           color : "{$FormattedColor}",
-           tracks: [
-                   <% loop Categories %>
-                       <% if hasEventsPublished %>
-                            $ID,
-                       <% end_if %>
-                   <% end_loop %>
-           ],
-        };
-        summit.category_group_ids.push($ID);
+            <% if hasEventsPublished %>
+            summit.category_groups[{$ID}] =
+            {
+               name : "{$Name.JS}",
+               description : "{$Description.JS}",
+               color : "{$FormattedColor}",
+               tracks: [
+                       <% loop Categories %>
+                           <% if hasEventsPublished %>
+                                $ID,
+                           <% end_if %>
+                       <% end_loop %>
+               ],
+            };
+            summit.category_group_ids.push($ID);
+            <% end_if %>
         <% end_loop %>
 
         <% loop $Summit.Locations %>

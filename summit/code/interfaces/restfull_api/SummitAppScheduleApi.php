@@ -259,6 +259,7 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi
                 'description' => $e->Description,
                 'class_name' => $e->ClassName,
                 'abstract' => $e->ShortDescription,
+                'start_epoch' => strtotime($e->StartDate),
                 'start_datetime' => $e->StartDate,
                 'end_datetime' => $e->EndDate,
                 'start_time' => $e->StartTime,

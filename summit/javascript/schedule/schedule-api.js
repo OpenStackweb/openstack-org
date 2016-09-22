@@ -12,6 +12,7 @@ schedule_api.getEventByDay = function (summit_id, day)
         dataType:'json',
         success: function (data, textStatus, jqXHR) {
             data.show_date = false;
+            data.day_selected = day;
             schedule_api.trigger('eventsRetrieved', data);
         }
     }).fail(function (jqXHR, textStatus, errorThrown) {

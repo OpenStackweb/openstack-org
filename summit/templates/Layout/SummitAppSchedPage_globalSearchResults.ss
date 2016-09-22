@@ -11,36 +11,6 @@
             </div>
         </div>
     </div>
-    <% if SpeakerResults && SpeakerResults.Count %>
-    <div class="container">
-        <div class="col-md-12">
-            <h2 class="subtitle" >Speaker Matches</h2>
-        </div>
-    </div>
-    <div class="row people-results">
-        <div class="container">
-            <% loop SpeakerResults %>
-                <div class="col-xs-4 col-md-4">
-                    <div class="row speaker-result">
-                        <div class="col-md-4">
-                            <a href="{$Top.Link(speakers)}/{$ID}">
-                                <img src="{$ProfilePhoto(100)}" class="img-circle big-profile-pic" alt="{$Name}">
-                            </a>
-                        </div>
-                        <div class="col-md-8 result-speaker-name-div">
-                            <div class="row speaker-name-row">
-                                <div class="col-md-12">
-                                    <a href="{$Top.Link(speakers)}/{$ID}">$Name</a>
-                                </div>
-                            </div>
-                            <div class="row speaker-position-row"><div class="col-md-12">{$getTitleNice()}</div></div>
-                        </div>
-                    </div>
-                </div>
-            <% end_loop %>
-        </div>
-    </div>
-    <% end_if %>
 
     <% if EventResults && EventResults.Count %>
     <div class="row">
@@ -206,6 +176,37 @@
                 <event-list summit="{ summit }" default_event_color={'#757575'} search_url="{$Top.Link(global-search)}" base_url="{$Top.Link}" ></event-list>
 
             </div>
+        </div>
+    </div>
+    <% end_if %>
+
+    <% if SpeakerResults && SpeakerResults.Count %>
+    <div class="container">
+        <div class="col-md-12">
+            <h2 class="subtitle" >Speaker Matches</h2>
+        </div>
+    </div>
+    <div class="row people-results">
+        <div class="container">
+            <% loop SpeakerResults %>
+                <div class="col-xs-4 col-md-4">
+                    <div class="row speaker-result">
+                        <div class="col-md-4">
+                            <a href="{$Top.Link(speakers)}/{$ID}">
+                                <img src="{$ProfilePhoto(100)}" class="img-circle big-profile-pic" alt="{$Name}">
+                            </a>
+                        </div>
+                        <div class="col-md-8 result-speaker-name-div">
+                            <div class="row speaker-name-row">
+                                <div class="col-md-12">
+                                    <a href="{$Top.Link(speakers)}/{$ID}">$Name</a>
+                                </div>
+                            </div>
+                            <div class="row speaker-position-row"><div class="col-md-12">{$getTitleNice()}</div></div>
+                        </div>
+                    </div>
+                </div>
+            <% end_loop %>
         </div>
     </div>
     <% end_if %>

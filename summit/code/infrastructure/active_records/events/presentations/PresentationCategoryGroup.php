@@ -134,4 +134,13 @@ class PresentationCategoryGroup extends DataObject
         return $valid;
     }
 
+    public function hasEventsPublished(){
+        foreach($this->Categories() as $category) {
+            $published_events = Presentation::get()->filter(["SummitID" => $this->SummitID, "Published" => 1 , "CategoryID" => $category->ID])->count();
+            if ($published_events)
+                return true;
+        }
+        return false;
+    }
+
 }
