@@ -29,7 +29,7 @@
   .ptg-body .ptg-who {
     background: #edf2f7;
     padding: 60px 0;
-    margin: 60px 0 30px; }
+    margin: 0 0 30px; }
     .ptg-body .ptg-who .who-icons {
       text-align: center; }
     .ptg-body .ptg-who i {
@@ -64,7 +64,32 @@
 
 img.ptg-release-timeline {
   max-width: 100%; }
-
+.ptg-hotel-wrapper {
+  background: #30739C;
+  padding: 40px 0;
+  text-align: center;
+}
+.ptg-hotel-wrapper i.fa-hotel {
+  color: white;
+  margin-bottom: 20px;
+}
+.ptg-hotel-wrapper h2 {
+  color: white;
+  margin-top: 0;
+  text-align: center;
+}
+.ptg-hotel-wrapper p {
+  color: white;
+  text-align: center;
+}
+.ptg-hotel-wrapper a.hotel-btn {
+  color: white;
+  border: 1px solid white;
+  border-radius: 4px;
+  background: transparent;
+  display: inline-block;
+  margin-top: 15px;
+}
 .ptg-cta {
   background: #248EC7;
   padding: 40px 0px 70px;

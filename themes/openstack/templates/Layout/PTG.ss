@@ -10,7 +10,7 @@
                 <p>
                     The first Project Teams Gathering (PTG) will be held in Atlanta, Feb 20-24, 2017.
                     <strong>
-                        More information on registration, location, and hotel discounts coming soon.
+                        More information on registration coming soon. <a href="/ptg#hotels" style="text-decoration: underline; color: white;">Hotel discounts available now.</a>
                     </strong>
                 </p>
             </div>
@@ -43,16 +43,25 @@
                 </p>
                 <p>
                     <a href="/images/ptg/ptg-release-timeline.png" target="_blank">
-                        <img class="ptg-release-timeline" src="/themes/openstack/images/summit-ptg-timeline-revised.png" alt="Project Teams Gathering vs Design Summit">
+                        <img class="ptg-release-timeline" src="//openstack.org/themes/openstack/images/summit-ptg-timeline-revised.png" alt="Project Teams Gathering vs Design Summit">
                     </a>
                 </p>
-                <h2>Hotel & Travel</h2>
-                <p>
-                    We've negotiated discounted rates for hotel rooms adjacent to the PTG venue. Use the following link to access to book, modify, or cancel a reservation from September 14, 2016 to February 28, 2017.
-                </p>
-                <p>
-                    <a class="btn btn-primary" style="color: white;" href="https://www.starwoodmeeting.com/events/start.action?id=1609140999&key=381BF4AA" target="_blank">Book Your Room</a>
-                </p>
+            </div>
+        </div>
+    </div>
+    <div class="ptg-hotel-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-sm-push-2">
+                    <i class="fa fa-hotel fa-4x"></i>
+                    <h2 id="hotels">Hotel & Travel</h2>
+                    <p>
+                        We've negotiated discounted rates for hotel rooms adjacent to the PTG venue. Use the following link to access to book, modify, or cancel a reservation from September 14, 2016 to February 28, 2017.
+                    </p>
+                    <p>
+                        <a class="btn btn-primary hotel-btn" href="https://www.starwoodmeeting.com/events/start.action?id=1609140999&key=381BF4AA" target="_blank">Book Your Room</a>
+                    </p>
+                </div>
             </div>
         </div>
     </div>
