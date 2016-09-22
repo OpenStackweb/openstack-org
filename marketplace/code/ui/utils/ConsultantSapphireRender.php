@@ -36,7 +36,7 @@ final class ConsultantSapphireRender
 
     public function pdf()
     {
-        $services = $this->consultant->getServicesOffered();
+        $services = $this->consultant->ServicesOffered()->toArray();
         $unique_services = array();
         $unique_regions = array();
         foreach ($services as $service) {

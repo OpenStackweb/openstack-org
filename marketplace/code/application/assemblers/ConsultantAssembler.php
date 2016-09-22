@@ -49,11 +49,12 @@ final class ConsultantAssembler {
 		}
 		//services offered
 		$services_offered = array();
-		foreach($consultant->getServicesOffered() as $offered_service){
+		foreach($consultant->ServicesOffered()->toArray() as $offered_service){
 			if(!array_key_exists($offered_service->getIdentifier(),$services_offered))
 				$services_offered[$offered_service->getIdentifier()] = array();
 			array_push($services_offered[$offered_service->getIdentifier()],$offered_service->getRegionId());
 		}
+
 		$res['services_offered'] = array();
 		foreach($services_offered as $id => $regions){
 			$aux = array('id'=>$id,'regions'=>$regions);

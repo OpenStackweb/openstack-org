@@ -25,7 +25,7 @@
             </tbody>
         </table>
 
-        <h2>Regions where services offered</h2>
+        <h2>Regions with local offices</h2>
         <p>Check all that apply</p>
             <table style="border: 1px solid #ccc; border-collapse:collapse;clear:both;max-width:99%"  width="100%" >
             <thead>

@@ -207,7 +207,7 @@ final class Consultant
      */
     public function setServicesAndRegions(SapphireRegionRepository $region_repository)
     {
-        $services = $this->getServicesOffered();
+        $services = $this->ServicesOffered()->toArray();
         $unique_services = array();
         $unique_regions = array();
         foreach ($services as $service) {
