@@ -11,6 +11,7 @@ class AUCMetricAdmin extends ModelAdmin
 	];
 
 	public function getExportFields() {
+		
 		return [
 			'FoundationMemberID' => 'FoundationMemberID',
 			'Identifier' => 'Identifier',
