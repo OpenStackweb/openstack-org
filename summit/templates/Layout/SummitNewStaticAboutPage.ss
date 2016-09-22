@@ -123,7 +123,7 @@
           <div class="name">Sarah Novotny</div>
           <div class="title">Program Manager of Kubernetes Community, Google</div>
           <div class="description">
-            Sarah will co-present how several OpenStack projects, Magnum and Kuryr leverage containers to more efficiently use resources, deploy faster, and improve overall consistency. 
+            Sarah Novotny will co-present how several OpenStack projects, Magnum and Kuryr leverage containers to more efficiently use resources, deploy faster, and improve overall consistency. 
           </div>
         </div>
       </div>
