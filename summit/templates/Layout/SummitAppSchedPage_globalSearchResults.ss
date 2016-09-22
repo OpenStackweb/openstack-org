@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-xs-12 col-main-title search-header">
             <div class="row">
-                <div class="col-xs-12"><h1>Search Result</h1></div>
+                <div class="col-xs-12"><h1 style="text-align:left;">Search Result</h1></div>
             </div>
             <div class="row">
                 <div class="col-xs-12">
