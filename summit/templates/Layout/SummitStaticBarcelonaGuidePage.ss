@@ -2,6 +2,9 @@
 	<div class="row">
 		<div class="col-sm-8 col-sm-push-2 guide-header">
 			<h1>Local's Guide To Barcelona</h1>	
+			<p style="margin: -5px 0 15px;">
+				Before you travel, make sure to <a href="/summit/barcelona-2016/travel/travel-tips/">check out these pro tips</a>!
+			</p>
 		</div>
 	</div>
 </div>
