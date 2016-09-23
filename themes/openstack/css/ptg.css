@@ -136,4 +136,14 @@ img.ptg-release-timeline {
       border-color: #30739C;
       color: white;
       outline: 0; }
+      
+  #thankyou {
+    text-decoration: none;
+    padding-top: 25px;
+  }
+  #thankyou h3 {
+    color: white;
+    text-align: center;
+    font-weight: 300;
+  }
 
