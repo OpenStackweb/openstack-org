@@ -43,6 +43,8 @@ Injector:
     class: SapphireRSVPRepository
   MetricsRepository:
       class: SapphireRoomMetricsRepository
+  CategoryRepository:
+        class: SapphirePresentationCategoryRepository
   SpeakerRegistrationRequestFactory:
     class: SapphireSpeakerRegistrationRequestFactory
     constructor:
@@ -88,7 +90,9 @@ Injector:
         3: '%$RSVPRepository'
         4: '%$EventRepository'
         5: '%$MetricsRepository'
-        6: '%$SummitService'
+        6: '%$CategoryRepository'
+        7: '%$PresentationRepository'
+        8: '%$SummitService'
   SummitAppEventsApi:
     constructor:
       0: '%$SummitRepository'

@@ -46,6 +46,16 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
     private $room_metrics_repository;
 
     /**
+     * @var IEntityRepository
+     */
+    private $category_repository;
+
+    /**
+     * @var IEntityRepository
+     */
+    private $presentation_repository;
+
+    /**
      * @var ISummitService
      */
     private $summit_service;
@@ -58,6 +68,8 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
         IRSVPRepository $rsvp_repository,
         ISummitEventRepository $event_repository,
         IRoomMetricsRepository $room_metrics_repository,
+        IPresentationCategoryRepository $category_repository,
+        ISummitPresentationRepository $presentation_repository,
         ISummitService $summit_service
     )
     {
@@ -68,6 +80,8 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
         $this->rsvp_repository               = $rsvp_repository;
         $this->event_repository              = $event_repository;
         $this->room_metrics_repository       = $room_metrics_repository;
+        $this->category_repository           = $category_repository;
+        $this->presentation_repository       = $presentation_repository;
         $this->summit_service                = $summit_service;
     }
 
@@ -100,6 +114,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
         'GET presentation_report'    => 'getPresentationReport',
         'GET video_report'           => 'getVideoReport',
         'GET rsvp_report'            => 'getRsvpReport',
+        'GET track_questions_report' => 'getTrackQuestionsReport',
     );
 
     static $allowed_actions = array(
@@ -111,6 +126,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
         'updateReport',
         'getRsvpReport',
         'getRoomMetrics',
+        'getTrackQuestionsReport',
     );
 
     public function getSpeakerReport(SS_HTTPRequest $request){
@@ -432,6 +448,77 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
                             'event_id' => intval($event->ID),
                             'title'    => $event->getTitle(),
                             'date'     => $event->getDateNice(),
+                        );
+                    }
+                }
+            }
+
+            return $this->ok($results);
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $ex->getMessage();
+        }
+    }
+
+    public function getTrackQuestionsReport(SS_HTTPRequest $request){
+        try
+        {
+            $query_string = $request->getVars();
+            $page         = (isset($query_string['page'])) ? Convert::raw2sql($query_string['page']) : '';
+            $page_size    = (isset($query_string['items'])) ? Convert::raw2sql($query_string['items']) : '';
+            $search_term  = (isset($query_string['term'])) ? Convert::raw2sql($query_string['term']) : '';
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $summit       = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+
+            $tracks  = $this->category_repository->searchBySummitAndHasExtraQuestions($summit_id,$search_term);
+
+            $results = array('track_count' => 0, 'data' => array(), 'headers' => array('ID','Presentation'));
+            if (count($tracks)) {
+                if (count($tracks) == 1) {
+                    $results['track_count'] = 1;
+                    $track = array_pop($tracks);
+                    list($presentations,$total) = $this->presentation_repository->getByCategoryPaged($track->ID,$page,$page_size);
+                    $presentation_array_template = array('ID' => 0, 'Presentation' => '');
+
+                    foreach ($track->ExtraQuestions() as $question) {
+                        if ($question->Label) {
+                            $presentation_array_template[$question->Label] = '';
+                            $results['headers'][] = $question->Label;
+                        }
+                    }
+
+                    if (count($presentations)) {
+                        foreach($presentations as $presentation) {
+                            $presentation_array = $presentation_array_template;
+                            $presentation_array['ID'] = $presentation->ID;
+                            $presentation_array['Presentation'] = $presentation->Title;
+
+                            foreach ($presentation->ExtraAnswers() as $answer) {
+                                $presentation_array[$answer->Question()->Label] = $answer->getFormattedAnswer();
+                            }
+
+                            $results['data'][] = $presentation_array;
+                        }
+                    }
+                    $results['track'] = array(
+                        'track_id' => intval($track->ID),
+                        'title'    => $track->getTitle(),
+                    );
+                    $results['total'] = $total;
+                } else {
+                    $results['track_count'] = count($tracks);
+                    foreach($tracks as $track) {
+                        $results['data'][] = array(
+                            'track_id' => intval($track->ID),
+                            'title'    => $track->getTitle(),
                         );
                     }
                 }

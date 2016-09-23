@@ -258,4 +258,16 @@ SQL;
 
         return array($page, $page_size, $count,  $data);
     }
+
+    /**
+     * @param int $track_id
+     * @param int $page
+     * @param int $page_size
+     * @return IPresentation[]
+     */
+    public function getByCategoryPaged($track_id, $page, $page_size)
+    {
+        $offset = ($page-1) * $page_size;
+        return Presentation::get()->filter('CategoryID', $track_id)->limit($page_size, $offset);
+    }
 }

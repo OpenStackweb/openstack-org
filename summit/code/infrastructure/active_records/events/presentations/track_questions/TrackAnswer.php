@@ -79,6 +79,7 @@ class TrackAnswer extends DataObject implements ITrackAnswer
         $question = $this->Question();
         if($question instanceof TrackMultiValueQuestionTemplate)
         {
+            $res = explode(',', $res);
             $aux = '';
             foreach($res as $v){
                 $value = $question->getValueById(intval($v));

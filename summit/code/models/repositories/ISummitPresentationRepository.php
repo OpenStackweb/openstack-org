@@ -46,4 +46,11 @@ interface ISummitPresentationRepository extends ISummitEventRepository
      */
     public function getUnpublishedBySummitAndTrack($summit_id, $track = null, $status = null, $search_term = null,  $page = 1 ,$page_size = 10,  $order = null);
 
+    /**
+     * @param int $track_id
+     * @param int $page
+     * @param int $page_size
+     * @return IPresentation[]
+     */
+    public function getByCategoryPaged($track_id, $page, $page_size);
 }
