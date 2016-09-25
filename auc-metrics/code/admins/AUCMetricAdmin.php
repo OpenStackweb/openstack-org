@@ -14,6 +14,10 @@ class AUCMetricAdmin extends ModelAdmin
 		
 		return [
 			'FoundationMemberID' => 'FoundationMemberID',
+			'FoundationMember.Name' => 'Member name',
+			'FoundationMember.Email' => 'Member email',
+			'FoundationMember.SecondEmail' => 'Member email (2)',
+			'FoundationMember.ThirdEmail' => 'Member email (3)',
 			'Identifier' => 'Identifier',
 			'Expires' => 'Expires'
 		];
