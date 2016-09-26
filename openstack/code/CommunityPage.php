@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2014 Openstack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,44 +12,64 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-	class CommunityPage extends Page {
-		static $db = array(
-		      'TopSection' => 'HTMLText'
-		);
-		static $has_one = array(
-	     );
+class CommunityPage extends Page
+{
+    static $db = array(
+        'TopSection' => 'HTMLText'
+    );
+    static $has_one = array();
 
-	 	function getCMSFields() {
-	    	$fields = parent::getCMSFields();
-	    	$fields->addFieldToTab('Root.Main', new HTMLEditorField('TopSection','Top Section'), 'Content');
-	    	$fields->renameField("Content", "Middle Area");
+    function getCMSFields()
+    {
+        $fields = parent::getCMSFields();
+        $fields->addFieldToTab('Root.Main', new HTMLEditorField('TopSection', 'Top Section'), 'Content');
+        $fields->renameField("Content", "Middle Area");
 
-	    	return $fields;
-	 	}  
+        return $fields;
+    }
 
-	}
+}
 
-	class CommunityPage_Controller extends Page_Controller {
+class CommunityPage_Controller extends Page_Controller
+{
 
-		function init() {
-			parent::init();
-       	}
-		
-		function DeveloperActivityFeed(){ 
-	   		$data = file_get_contents('http://www.openstack.org/feeds/developer-activity.php');
-	   		return $data;
-		}
-		
-		function PullFeed(){ 
-			   		$data = file_get_contents('http://www.openstack.org/simplepie/flickr.php'); 
-			   		return $data;
-		}
-		
-		function CompanyCount() {
-			$Count = Company::get()->filter('DisplayOnSite',true)->count();
-			// Round down to nearest multiple of 5
-			$Count = round(($Count-2.5)/5)*5;
-			return $Count;
-		}
-				
-	}
+    private static $allowed_actions = array(
+        'getGroupsMap',
+    );
+
+    static $url_handlers = array
+    (
+        'groups/map' => 'getGroupsMap',
+    );
+
+    function init()
+    {
+        parent::init();
+    }
+
+    function getGroupsMap(SS_HTTPRequest $request){
+        $data = file_get_contents('https://groups.openstack.org/map');
+        return $data;
+    }
+
+    function DeveloperActivityFeed()
+    {
+        $data = file_get_contents('http://www.openstack.org/feeds/developer-activity.php');
+        return $data;
+    }
+
+    function PullFeed()
+    {
+        $data = file_get_contents('http://www.openstack.org/simplepie/flickr.php');
+        return $data;
+    }
+
+    function CompanyCount()
+    {
+        $Count = Company::get()->filter('DisplayOnSite', true)->count();
+        // Round down to nearest multiple of 5
+        $Count = round(($Count - 2.5) / 5) * 5;
+        return $Count;
+    }
+
+}

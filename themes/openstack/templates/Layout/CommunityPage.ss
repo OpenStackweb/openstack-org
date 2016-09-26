@@ -17,7 +17,7 @@
 		</div>
 		<div class="col-lg-6 col-md-6 col-sm-6 last googleMap">
 			<h2>OpenStack Worldwide Meetup Groups</h2>
-			<iframe scrolling="no" src="https://groups.openstack.org/map" frameborder="no" height="350" width="550"></iframe>
+			<iframe scrolling="no" src="{$Top.Link(groups/map)}" frameborder="no" height="350" width="550"></iframe>
 		</div>
 	</div>
 
