@@ -108,12 +108,12 @@
     </p>
     <p>
         Products must comply with one of the two most recent guidelines approved by the OpenStack Foundation Board of Directors.
-        These versions are numbered based on the date when they were approved, such as "2015.07"for the version approved in July, 2015.
+        These versions are numbered based on the date when they were approved, such as "2016.08"for the version approved in August, 2016.
     </p>
     <p>
         The two most recent versions approved by the board are
-        "<a title="2015.07 DefCore Capabilities" href="http://git.openstack.org/cgit/openstack/defcore/tree/2015.07.json" target="_blank">2015.07</a>"
-        and "<a title="Defcore 2016.01 Guideline" href="http://git.openstack.org/cgit/openstack/defcore/tree/2016.01.json">2016.01</a>". These 
+        "<a title="2016.01 DefCore Capabilities" href="http://git.openstack.org/cgit/openstack/defcore/tree/2016.01.json" target="_blank">2016.01</a>"
+        and "<a title="Defcore 2016.08 Guideline" href="http://git.openstack.org/cgit/openstack/defcore/tree/2016.08.json">2016.08</a>". These
         two guidelines cover four OpenStack releases: Icehouse, Juno, Kilo, and Liberty.
         The list of required capabilities (with must-pass tests) and designated code sections are published on
         <a title="OpenStack DefCore Repository" href="http://git.openstack.org/cgit/openstack/defcore/tree/" target="_blank">git.openstack.org</a>&nbsp;
