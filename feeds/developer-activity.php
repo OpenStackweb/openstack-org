@@ -11,11 +11,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-// Include SimplePie
-// Located in the parent directory
-include_once('SimplePieAutoloader.php');
-include_once('idn/idna_convert.class.php');
 
+require __DIR__ . '/../vendor/autoload.php';
 
 function GetContentBetween($StringToParse,$StartMarker,$EndMarker) {
 
@@ -44,7 +41,7 @@ function GetContentBetween($StringToParse,$StartMarker,$EndMarker) {
  
 // We'll process this feed with all of the default options.
 $feed = new SimplePie();
- 
+$feed->set_cache_location('/tmp');
 // Set which feed to process.
 $feed->set_feed_url('feed://feeds.launchpad.net/openstack/revisions.atom');
  

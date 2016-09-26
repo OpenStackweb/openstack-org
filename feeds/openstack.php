@@ -11,14 +11,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-// Include SimplePie
-// Located in the parent directory
-include_once('SimplePieAutoloader.php');
-include_once('idn/idna_convert.class.php');
+require __DIR__ . '/../vendor/autoload.php';
  
 // We'll process this feed with all of the default options.
 $feed = new SimplePie();
- 
+$feed->set_cache_location('/tmp');
 // Set which feed to process.
 $feed->set_feed_url('http://pipes.yahoo.com/pipes/pipe.run?_id=7479b77882a68cdf5a7143374b51cf30&_render=rss');
  
