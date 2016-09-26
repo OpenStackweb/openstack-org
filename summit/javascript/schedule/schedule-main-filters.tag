@@ -69,7 +69,7 @@
                 <option each={ track_id, idx in summit.track_ids } value="{ track_id }">{ summit.tracks[track_id].name }</option>
             </select>
         </div>
-        <div class="col-sm-15 col-xs-12 single-filter-wrapper">
+        <div class="col-sm-15 col-xs-12 single-filter-wrapper" style="display:none;">
             <select id="ddl_event_types" name="ddl_event_types" data-placeholder="Event Types" size="7" multiple="multiple">
                 <option each={ event_type_id, idx in summit.event_type_ids } value="{ event_type_id }">{ summit.event_types[event_type_id].type }</option>
             </select>
