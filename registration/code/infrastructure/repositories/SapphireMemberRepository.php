@@ -78,7 +78,7 @@ class SapphireMemberRepository extends SapphireRepository implements IMemberRepo
     public function getByEmailVerificationToken($email_verification_token)
     {
         $member = Member::get()
-            ->filter('EmailVerifiedTokenHash', MemberDecorator::HashConfirmationToken($email_verification_token) )
+            ->filter('EmailVerifiedTokenHash', OpenStackMember::HashConfirmationToken($email_verification_token) )
             ->first();
         if(!is_null($member))
             UnitOfWork::getInstance()->scheduleForUpdate($member);

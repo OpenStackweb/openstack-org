@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-class MemberDecorator extends DataExtension
+class OpenStackMember extends DataExtension
 {
     private static $db = array
     (
@@ -266,7 +266,7 @@ class MemberDecorator extends DataExtension
         $res = array('ADD_COMPANY', 'DELETE_COMPANY', 'EDIT_COMPANY', 'MANAGE_COMPANY_PROFILE', 'MANAGE_COMPANY_LOGOS');
         if ($this->owner->getExtensionInstances()) {
             foreach ($this->owner->getExtensionInstances() as $instance) {
-                if (method_exists($instance, 'getAdminPermissionSet') && !($instance instanceof MemberDecorator)) {
+                if (method_exists($instance, 'getAdminPermissionSet') && !($instance instanceof OpenStackMember)) {
                     $instance->setOwner($this->owner);
                     $value = $instance->getAdminPermissionSet($res);
                     if ($value !== null) {

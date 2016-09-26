@@ -75,9 +75,13 @@ final class OpenStackIdCommon {
             $member->login();
             return Controller::curr()->redirect($back_url);
         }
-        else{
-            return Controller::curr()->redirect('/Security/login?BackURL='.$back_url);
-        }
+
+        return
+            Controller::curr()->customise(
+            [
+                    'LoginUrl' => '/Security/login?BackURL='.$back_url,
+                    'Member'   => $member
+            ])->renderWith(['RegistrationPage_success', 'Page']);
     }
 
     public static function doLogin($back_url = ''){

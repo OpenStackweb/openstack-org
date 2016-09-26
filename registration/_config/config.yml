@@ -4,7 +4,7 @@ After: 'framework/*','cms/*', 'openstack/*'
 ---
 Member:
   extensions:
-    - MemberDecorator
+    - OpenStackMember
 SecurityAdmin:
   extensions:
     - SecurityAdminDecorator

@@ -69,11 +69,13 @@ final class SurveyRegistrationForm extends Form
              if (!is_null($profile_page)) {
                  //Redirect to profile page with success message
                  Session::clear("FormInfo.{$form->FormName()}.data");
-                 $request  = Controller::curr()->getRequest();
-                 $back_url = $request->postVar('BackURL');
-                 $link     = $profile_page->Link('?success=1');
-                 if(!empty($back_url)) $link .= "&BackURL=".$back_url;
-                 return OpenStackIdCommon::loginMember($member, $link);
+
+                 $request         = Controller::curr()->getRequest();
+                 $former_back_url = $request->postVar('BackURL');
+                 $back_url        = $profile_page->Link('?success=1');
+
+                 if(!empty($former_back_url)) $back_url .= "&BackURL=".$former_back_url;
+                 return OpenStackIdCommon::loginMember($member, $back_url);
              }
          }
          catch(EntityValidationException $ex1){
