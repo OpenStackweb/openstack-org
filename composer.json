@@ -42,8 +42,7 @@
     "unclecheese/silverstripe-green": "dev-master",
     "eluceo/ical": "^0.10.1",
     "mustangostang/spyc": "0.5.1",
-    "simplepie/simplepie": "1.4.2",
-    "mso/idna-convert": "1.1.0"
+    "simplepie/simplepie": "1.4.2"
   },
   "require-dev": {
     "phpunit/PHPUnit": "~3.7@stable",
