@@ -8,21 +8,21 @@
                     <h2>
                         Open source software for creating private and public clouds.
                     </h2>
-                    <p>OpenStack software controls large pools of compute, storage, and networking resources throughout a datacenter, managed through a <a href="/software/openstack-dashboard/">dashboard</a> or via the <a href="http://developer.openstack.org">OpenStack API</a>. OpenStack works with <a href="//openstack.org/marketplace/drivers/">popular enterprise and open source technologies</a> making it ideal for heterogeneous infrastructure.</p>
+                    <p>OpenStack software controls large pools of compute, storage, and networking resources throughout a datacenter, managed through a <a href="/software/openstack-dashboard/">dashboard</a> or via the <a href="http://developer.openstack.org">OpenStack API</a>. OpenStack works with <a href="/marketplace/drivers/">popular enterprise and open source technologies</a> making it ideal for heterogeneous infrastructure.</p>
 
-					<p><a href="//openstack.org/user-stories/">Hundreds of the world’s largest brands</a> rely on OpenStack to run their businesses every day, reducing costs and helping them move faster. OpenStack has a strong <a href="//openstack.org/foundation/companies/">ecosystem</a>, and users seeking commercial support can choose from different OpenStack-powered products and services in the <a href="//openstack.org/marketplace/">Marketplace.</a></p>
+					<p><a href="/user-stories/">Hundreds of the world’s largest brands</a> rely on OpenStack to run their businesses every day, reducing costs and helping them move faster. OpenStack has a strong <a href="/foundation/companies/">ecosystem</a>, and users seeking commercial support can choose from different OpenStack-powered products and services in the <a href="/marketplace/">Marketplace.</a></p>
 
-					<p>The software is built by a <a href="//openstack.org/community/">thriving community</a> of developers, in collaboration with users, and is designed in the open at our <a href="//openstack.org/summit/">Summits</a>.</p>
+					<p>The software is built by a <a href="/community/">thriving community</a> of developers, in collaboration with users, and is designed in the open at our <a href="/summit/">Summits</a>.</p>
                     
                     <div class="btn-wrapper">
-                        <a href="http://openstack.org/software/" class="overview-btn left-btn">How It Works <i class="fa fa-arrow-circle-o-right"></i></a>
-                        <a href="http://openstack.org/software/start/" class="overview-btn right-btn">Get The Software <i class="fa fa-arrow-circle-o-down"></i></a>
+                        <a href="/software/" class="overview-btn left-btn">How It Works <i class="fa fa-arrow-circle-o-right"></i></a>
+                        <a href="/software/start/" class="overview-btn right-btn">Get The Software <i class="fa fa-arrow-circle-o-down"></i></a>
                     </div>
                     <div class="release-text">Latest Release: <a href="/software/mitaka/">Mitaka</a> (April 2016)</div>
                 </div>
                 <div class="col-lg-6 col-sm-12 overview-right">
                     <img class="img-responsive control-cloud-graphic" src="/themes/openstack/images/control-your-cloud.svg" onerror="this.onerror=null; this.src=/images/control-your-cloud.png" alt="OpenStack Cloud Software">
-                    <a href="//www.youtube.com/watch?v=N90ufYN0B6U?autoplay=1" target="_blank" class="demo-link">Watch a Demo of the Dashboard <i class="fa fa-play-circle-o"></i></a>
+                    <a href="http://www.youtube.com/watch?v=N90ufYN0B6U?autoplay=1" target="_blank" class="demo-link">Watch a Demo of the Dashboard <i class="fa fa-play-circle-o"></i></a>
                 </div>
             </div>
 
@@ -57,7 +57,7 @@
                     </div>
                 </div>
                 <div class="col-lg-12 col-sm-12 customers-action">
-                    <a href="http://openstack.org/user-stories/" class="customer-btn">Read More User Stories</a>
+                    <a href="/user-stories/" class="customer-btn">Read More User Stories</a>
                 </div>
             </div>
         </div>
@@ -78,7 +78,7 @@
                         The OpenStack project is a global collaboration of developers and cloud computing technologists producing the open standard cloud computing platform for both public and private clouds. Backed by a vibrant community of developers and some of the biggest names in the industry.
                     </p>
                     <p>
-                        <a href="http://www.openstack.org/community/" class="community-btn">Get Involved <i class="fa fa-play-circle"></i></a>
+                        <a href="/community/" class="community-btn">Get Involved <i class="fa fa-play-circle"></i></a>
                     </p>
                 </div>
             </div>
@@ -97,7 +97,7 @@
                 </div>
                 <div class="col-lg-6 col-sm-6 news-wrapper">
                     <h2>News <a href="/news">See More News <i class="fa fa-caret-right"></i></h2>
-                    <a href="//openstack.org/telecoms-and-nfv/"><img class="news-ad" src="/themes/openstack/images/homepage/nfv-homepage-banner.jpg"></a>
+                    <a href="/telecoms-and-nfv/"><img class="news-ad" src="/themes/openstack/images/homepage/nfv-homepage-banner.jpg"></a>
                     
                        <% loop NewsItems %>
                             <!-- News Item -->
@@ -118,4 +118,5 @@
             </div>
         </div>
     </div>
+   
     <!-- End News Section -->
