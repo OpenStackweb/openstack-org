@@ -17,7 +17,7 @@ jQuery(document).ready(function($){
 
     var location_filter = $('#location-term');
     if(location_filter.length > 0 ){
-        if (location_filter.find('option[text="-- Select a City--"]').length == 0) {
+        if ($('#location-term option:contains("-- Select a City--")').length == 0) {
             location_filter.prepend("<option value='' selected='selected'>-- Select a City--</option>");
         }
         location_filter.chosen({disable_search_threshold: 3, width:400});
@@ -28,7 +28,7 @@ jQuery(document).ready(function($){
 
     var level_filter = $('#level-term');
     if(level_filter.length > 0){
-        if (level_filter.find('option[text="-- Select a Level--"]').length == 0) {
+        if ($('#level-term option:contains("-- Select a Level--")').length == 0) {
             level_filter.prepend("<option value='' selected='selected'>-- Select a Level--</option>");
         }
         level_filter.chosen({disable_search_threshold: 3, width:200});
@@ -39,7 +39,7 @@ jQuery(document).ready(function($){
 
     var company_filter = $('#company-term');
     if(company_filter.length > 0){
-        if (company_filter.find('option[text="-- Select a Company--"]').length == 0) {
+        if ($('#company-term option:contains("-- Select a Company--")').length == 0) {
             company_filter.prepend("<option value='' selected='selected'>-- Select a Company--</option>");
         }
         company_filter.chosen({disable_search_threshold: 3, width:200});
