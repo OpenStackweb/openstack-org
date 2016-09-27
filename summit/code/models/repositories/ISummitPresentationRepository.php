@@ -53,4 +53,39 @@ interface ISummitPresentationRepository extends ISummitEventRepository
      * @return IPresentation[]
      */
     public function getByCategoryPaged($track_id, $page, $page_size);
+
+    /**
+     * @param int $summit_id
+     * @param string $date
+     * @param string $tracks
+     * @param string $venues
+     * @param string $start_date
+     * @param string $end_date
+     * @param string $search_term
+     * @return array
+     */
+    public function getPresentationMaterialBySummitAndDay($summit_id, $date, $tracks = 'all', $venues = 'all', $start_date, $end_date, $search_term);
+
+    /**
+     * @param int $summit_id
+     * @param int $page
+     * @param int $page_size
+     * @param string $sort
+     * @param string $sort_dir
+     * @param string $search_term
+     * @param string $filter
+     * @return IPresentation[]
+     */
+    public function getPresentationsAndSpeakersBySummit($summit_id, $page, $page_size, $sort, $sort_dir, $search_term, $filter);
+
+    /**
+     * @param int $summit_id
+     * @param int $page
+     * @param int $page_size
+     * @param string $sort
+     * @param string $sort_dir
+     * @param string $search_term
+     * @return IPresentation[]
+     */
+    public function searchByCompanyPaged($summit_id,$page,$page_size,$sort,$sort_dir,$search_term);
 }

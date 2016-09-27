@@ -270,4 +270,246 @@ SQL;
         $offset = ($page-1) * $page_size;
         return Presentation::get()->filter('CategoryID', $track_id)->limit($page_size, $offset);
     }
+
+    /**
+     * @param int $summit_id
+     * @param int $page
+     * @param int $page_size
+     * @param string $sort
+     * @param string $sort_dir
+     * @param string $search_term
+     * @param string $filter
+     * @return IPresentation[]
+     */
+    public function getPresentationsAndSpeakersBySummit($summit_id, $page, $page_size, $sort, $sort_dir, $search_term, $filter)
+    {
+
+        $query_body = <<<SQL
+
+FROM SummitEvent AS E
+INNER JOIN Presentation ON Presentation.ID = E.ID
+INNER JOIN Presentation_Speakers ON Presentation_Speakers.PresentationID = Presentation.ID
+INNER JOIN PresentationSpeaker AS S ON S.ID = Presentation_Speakers.PresentationSpeakerID
+INNER JOIN PresentationCategory  ON PresentationCategory.ID = Presentation.CategoryID
+LEFT JOIN Member ON Member.ID = S.MemberID
+LEFT JOIN SpeakerRegistrationRequest ON SpeakerRegistrationRequest.SpeakerID = S.ID
+LEFT JOIN PresentationSpeakerSummitAssistanceConfirmationRequest AS ACR ON ACR.SpeakerID = S.ID AND ACR.SummitID = {$summit_id}
+LEFT JOIN SummitAbstractLocation AS L ON L.ID = E.LocationID
+LEFT JOIN (
+    SELECT Type, Code, SpeakerID FROM SpeakerSummitRegistrationPromoCode
+    INNER JOIN SummitRegistrationPromoCode ON SummitRegistrationPromoCode.ID = SpeakerSummitRegistrationPromoCode.ID
+    AND SummitRegistrationPromoCode.SummitID = $summit_id
+) AS PromoCodes ON PromoCodes.SpeakerID = S.ID
+WHERE
+E.SummitID = {$summit_id}
+AND E.Published = 1
+
+SQL;
+
+
+        if ($search_term) {
+            $query_body .= " AND (E.Title LIKE '%{$search_term}%' OR S.FirstName LIKE '%{$search_term}%'
+                            OR S.LastName LIKE '%{$search_term}%' OR CONCAT(S.FirstName,' ',S.LastName) LIKE '%{$search_term}%')";
+        }
+
+        if ($filter != 'all') {
+            if ($filter == 'hide_confirmed')
+                $query_body .= " AND ACR.IsConfirmed = 0";
+            else if ($filter == 'hide_registered')
+                $query_body .= " AND ACR.RegisteredForSummit = 0";
+            else if ($filter == 'hide_both')
+                $query_body .= " AND ACR.IsConfirmed = 0 AND ACR.RegisteredForSummit = 0";
+        }
+
+        $query_count = "SELECT COUNT(*) ";
+
+        $query = <<<SQL
+        SELECT
+        E.Title AS presentation,
+        E.Published AS published,
+        PresentationCategory.Title AS track,
+        E.StartDate AS start_date,
+        L.Name AS location,
+        S.ID AS speaker_id,
+        Member.ID AS member_id,
+       IFNULL(CONCAT(Member.FirstName ,' ',Member.Surname), CONCAT(S.FirstName ,' ',S.LastName)) AS name,
+        IFNULL(Member.Email, SpeakerRegistrationRequest.Email) AS email,
+        PromoCodes.Type AS code_type,
+        PromoCodes.Code AS promo_code,
+        ACR.IsConfirmed AS confirmed,
+        ACR.RegisteredForSummit AS registered,
+        ACR.CheckedIn AS checked_in,
+        ACR.OnSitePhoneNumber AS phone,
+        E.ID AS presentation_id,
+        ACR.ID AS assistance_id
+SQL;
+
+        $query .= $query_body." ORDER BY {$sort} {$sort_dir}";
+        $query_count .= $query_body;
+
+        if ($page && $page_size) {
+            $offset = ($page - 1 ) * $page_size;
+            $query .= " LIMIT {$offset}, {$page_size}";
+        }
+
+        $data = DB::query($query);
+        $total = DB::query($query_count)->value();
+        $result = array('Total' => $total, 'Data' => $data);
+        return $result;
+    }
+
+
+    /**
+     * @param int $summit_id
+     * @param string $date
+     * @param string $tracks
+     * @param string $venues
+     * @param string $start_date
+     * @param string $end_date
+     * @param string $search_term
+     * @return array
+     */
+    public function getPresentationMaterialBySummitAndDay($summit_id, $date, $tracks = 'all', $venues = 'all', $start_date, $end_date, $search_term)
+    {
+
+        $query = <<<SQL
+SELECT E.ID AS id ,
+0 AS date,
+0 AS time,
+E.StartDate AS start_date,
+E.EndDate AS end_date,
+GROUP_CONCAT(DISTINCT(CONCAT(S.FirstName,' ',S.LastName))) AS speakers,
+GROUP_CONCAT(DISTINCT(T.Tag)) AS tags,
+E.Title AS event,
+E.ShortDescription AS description,
+L.Name AS room,
+L2.Name AS venue,
+PM.DisplayOnSite as display,
+PV.YouTubeID as youtube_id
+FROM SummitEvent AS E
+LEFT JOIN Presentation AS P ON P.ID = E.ID
+LEFT JOIN Presentation_Speakers AS PS ON PS.PresentationID = P.ID
+LEFT JOIN PresentationSpeaker AS S ON S.ID = PS.PresentationSpeakerID
+LEFT JOIN SummitEvent_Tags AS ET ON ET.SummitEventID = E.ID
+LEFT JOIN Tag AS T ON T.ID = ET.TagID
+LEFT JOIN SummitAbstractLocation AS L ON L.ID = E.LocationID
+LEFT JOIN SummitVenueRoom AS R ON R.ID = L.ID
+LEFT JOIN SummitAbstractLocation AS L2 ON L2.ID = R.VenueID
+LEFT JOIN PresentationMaterial AS PM ON P.ID = PM.PresentationID
+LEFT JOIN PresentationVideo AS PV ON PM.ID = PV.ID
+LEFT JOIN SummitEvent_Tags AS ETag ON E.ID = ETag.SummitEventID
+LEFT JOIN Tag ON Tag.ID = ETag.TagID
+WHERE DATE(E.StartDate) = '{$date}' AND E.SummitID = {$summit_id}
+AND E.ClassName = 'Presentation' AND PM.ClassName = 'PresentationVideo'
+SQL;
+
+        if ($tracks) {
+            $query .= <<<SQL
+ AND P.CategoryID IN ( {$tracks} )
+SQL;
+        }
+
+        if ($venues) {
+            $query .= <<<SQL
+ AND E.LocationID IN ( {$venues} )
+SQL;
+        }
+
+        if ($start_date) {
+            $query .= <<<SQL
+ AND DATE(E.StartDate) >= '$start_date'
+SQL;
+        }
+
+        if ($end_date) {
+            $query .= <<<SQL
+ AND DATE(E.EndDate) <= '$end_date'
+SQL;
+        }
+
+        if ($search_term) {
+            $query .= <<<SQL
+ AND (E.Title LIKE '%$search_term%' OR E.ShortDescription LIKE '%$search_term%' OR Tag.Tag LIKE '%$search_term%' )
+SQL;
+        }
+
+        $query .= <<<SQL
+ GROUP BY E.ID
+SQL;
+
+        return DB::query($query);
+    }
+
+    /**
+     * @param int $summit_id
+     * @param int $page
+     * @param int $page_size
+     * @param string $sort
+     * @param string $sort_dir
+     * @param string $search_term
+     * @return IPresentation[]
+     */
+    public function searchByCompanyPaged($summit_id,$page,$page_size,$sort,$sort_dir,$search_term)
+    {
+        $status_received = Presentation::STATUS_RECEIVED;
+        $query_body = <<<SQL
+            FROM SummitEvent AS E
+            INNER JOIN Presentation AS P ON E.ID = P.ID
+            INNER JOIN PresentationCategory AS PC ON P.CategoryID = PC.ID
+            INNER JOIN Presentation_Speakers AS PS ON PS.PresentationID = P.ID
+            INNER JOIN PresentationSpeaker AS S ON PS.PresentationSpeakerID = S.ID
+            LEFT JOIN SpeakerRegistrationRequest AS SR ON SR.SpeakerID = S.ID
+            INNER JOIN Member AS M ON M.ID = S.MemberID
+            INNER JOIN Affiliation AS A ON A.MemberID=M.ID
+            INNER JOIN Org ON Org.ID = A.OrganizationID
+            WHERE E.SummitID = {$summit_id} AND E.Title IS NOT NULL
+            AND P.Status='{$status_received}' AND E.LocationID <> 0 AND A.Current = 1
+SQL;
+
+        if ($search_term) {
+            $query_body .= " AND (E.Title LIKE '%{$search_term}%' OR S.FirstName LIKE '%{$search_term}%'
+                            OR S.LastName LIKE '%{$search_term}%' OR CONCAT(S.FirstName,' ',S.LastName) LIKE '%{$search_term}%'
+                            OR PC.Title LIKE '%{$search_term}%' OR M.Email LIKE '%{$search_term}%' OR Org.Name LIKE '%{$search_term}%'
+                            OR SR.Email LIKE '%{$search_term}%'
+                            OR EXISTS (
+                                SELECT * FROM SummitEvent_Tags
+                                LEFT JOIN Tag ON Tag.ID = SummitEvent_Tags.TagID
+                                WHERE SummitEventID = P.ID AND Tag.Tag LIKE '%{$search_term}%'
+                                )
+                            )";
+        }
+
+        $query_body .= " GROUP BY P.ID, S.ID, Org.ID ";
+
+        $query_count = "SELECT COUNT(*) FROM (SELECT P.ID ";
+
+        $query = <<<SQL
+        SELECT
+        P.ID AS presentation_id,
+        CONCAT('https://www.openstack.org/summit/barcelona-2016/summit-schedule/events/',P.ID,'/') AS url ,
+        E.Title AS title,
+        E.ShortDescription AS description,
+        PC.Title AS track,
+        S.FirstName AS first_name,
+        S.LastName AS last_name,
+        M.Email AS email,
+        Org.Name AS company
+SQL;
+
+        $query .= $query_body." ORDER BY {$sort} {$sort_dir}";
+        $query_count .= $query_body." ) AS Q1";
+
+        if ($page && $page_size) {
+            $offset = ($page - 1 ) * $page_size;
+            $query .= " LIMIT {$offset}, {$page_size}";
+        }
+
+        $data = array();
+        foreach (DB::query($query) as $row) {
+            $data[] = $row;
+        }
+        $total = DB::query($query_count)->value();
+        $result = array('Total' => $total, 'Data' => $data);
+        return $result;
+    }
 }

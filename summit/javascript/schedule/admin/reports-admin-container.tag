@@ -13,11 +13,12 @@
                 <option value="video_report"> Video Output List </option>
                 <option value="rsvp_report"> RSVP Report </option>
                 <option value="track_questions_report"> Track Questions Report </option>
+                <option value="presentations_company_report"> Presentations by Company </option>
             </select>
         </div>
         <div class="col-md-2">
-            <button class="btn btn-primary" id="export-report" if={ show_save } onclick={ exportReport } >Export</button>
-            <button class="btn btn-success" id="save-report" if={ show_export } onclick={ saveReport } >Save</button>
+            <button class="btn btn-primary" id="export-report" if={ show_export } onclick={ exportReport } >Export</button>
+            <button class="btn btn-success" id="save-report" if={ show_save } onclick={ saveReport } >Save</button>
         </div>
         <div class="col-md-2" if={ show_status_filter }>
             <select id="status-filter" class="form-control" onchange={ searchReport }>
@@ -29,7 +30,7 @@
         </div>
         <div class="col-md-4" if={ show_search }>
             <div class="input-group" style="width: 100%;">
-                <input data-rule-required="true" data-rule-minlength="3" type="text" id="search-term" class="form-control input-global-search" placeholder="Search Speaker or Presentation">
+                <input data-rule-required="true" data-rule-minlength="3" type="text" id="search-term" class="form-control input-global-search" placeholder="Search...">
                 <span class="input-group-btn" style="width: 5%;">
                     <button class="btn btn-default btn-global-search" onclick={ searchReport }><i class="fa fa-search"></i></button>
                     <button class="btn btn-default btn-global-search-clear" onclick={ clearSearch }>
@@ -47,6 +48,7 @@
     <reports-admin-video-report if={ report == 'video_report' } summit_id="{ summit_id }" locations="{ locations }" tracks="{ tracks }" dispatcher="{ dispatcher }"></reports-admin-video-report>
     <reports-admin-rsvp-report if={ report == 'rsvp_report' } page_limit="{ limit }" summit_id="{ summit_id }" dispatcher="{ dispatcher }"></reports-admin-rsvp-report>
     <reports-admin-track-questions-report if={ report == 'track_questions_report' } page_limit="{ limit }" summit_id="{ summit_id }" dispatcher="{ dispatcher }"></reports-admin-track-questions-report>
+    <reports-admin-presentations-company-report if={ report == 'presentations_company_report' } page_limit="{ limit }" summit_id="{ summit_id }" dispatcher="{ dispatcher }"></reports-admin-presentations-company-report>
 
     <script>
         this.report             = opts.report;
@@ -147,6 +149,10 @@
                     break;
                 case 'video_report':
                     self.show_save = true;
+                    self.show_export = true;
+                    break;
+                case 'presentations_company_report':
+                    self.show_search = true;
                     self.show_export = true;
                     break;
             }
