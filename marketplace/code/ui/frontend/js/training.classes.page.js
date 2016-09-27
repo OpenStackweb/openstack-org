@@ -17,7 +17,9 @@ jQuery(document).ready(function($){
 
     var location_filter = $('#location-term');
     if(location_filter.length > 0 ){
-        location_filter.prepend("<option value='' selected='selected'>-- Select a City--</option>");
+        if (location_filter.find('option[text="-- Select a City--"]').length == 0) {
+            location_filter.prepend("<option value='' selected='selected'>-- Select a City--</option>");
+        }
         location_filter.chosen({disable_search_threshold: 3, width:400});
         location_filter.change(function () {
             filter_list(true);
@@ -26,18 +28,22 @@ jQuery(document).ready(function($){
 
     var level_filter = $('#level-term');
     if(level_filter.length > 0){
-        level_filter.prepend("<option value='' selected='selected'>-- Select a Level--</option>");
+        if (level_filter.find('option[text="-- Select a Level--"]').length == 0) {
+            level_filter.prepend("<option value='' selected='selected'>-- Select a Level--</option>");
+        }
         level_filter.chosen({disable_search_threshold: 3, width:200});
         level_filter.change(function () {
             filter_list(true);
         });
     }
 
-    var level_filter = $('#company-term');
-    if(level_filter.length > 0){
-        level_filter.prepend("<option value='' selected='selected'>-- Select a Company--</option>");
-        level_filter.chosen({disable_search_threshold: 3, width:200});
-        level_filter.change(function () {
+    var company_filter = $('#company-term');
+    if(company_filter.length > 0){
+        if (company_filter.find('option[text="-- Select a Company--"]').length == 0) {
+            company_filter.prepend("<option value='' selected='selected'>-- Select a Company--</option>");
+        }
+        company_filter.chosen({disable_search_threshold: 3, width:200});
+        company_filter.change(function () {
             filter_list(true);
         });
     }
