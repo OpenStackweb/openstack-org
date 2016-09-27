@@ -43,6 +43,7 @@
 			</div>
 		<div class="col-lg-3 col-md-4 col-sm-4">
       <ul class="help-me-menu">
+          <li><a href="/summit/barcelona-2016/mobile-apps/"><i class="fa fa-mobile"></i>Download the Summit Mobile Apps</a></li>
           <li><a href="/summit/barcelona-2016/openstack-academy/"><i class="fa fa-graduation-cap"></i>OpenStack Academy</a></li>
           <li><a href="/summit/barcelona-2016/barcelona-and-travel/#visa"><i class="fa fa-globe"></i>Visa Info</a></li>
           <li><a href="/summit/barcelona-2016/code-of-conduct/"><i class="fa fa-users"></i>Code Of Conduct</a></li>
