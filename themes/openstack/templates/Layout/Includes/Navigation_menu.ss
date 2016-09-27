@@ -19,7 +19,7 @@
         <li role="presentation" class="divider"></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}enterprise/">OpenStack in the Enterprise</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}appdev/">App Developers & ISVs</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="//superuser.openstack.org/">Superuser Magazine</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="http://superuser.openstack.org/">Superuser Magazine</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}surveys/landing">User Survey</a></li>
     </ul>
 </li>
@@ -55,8 +55,8 @@
     <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuEvents">
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}marketplace/training/">Training</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}coa/">Get Certified</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="//ask.openstack.org">Ask a Technical Question</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="//superuser.openstack.org">Superuser Magazine</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="http://ask.openstack.org">Ask a Technical Question</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="http://superuser.openstack.org">Superuser Magazine</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}videos/">Summit Videos</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}analysts/">Analyst Reports</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}news/">News</a></li>
