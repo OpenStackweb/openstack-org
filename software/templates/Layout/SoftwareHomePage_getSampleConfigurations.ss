@@ -18,6 +18,7 @@
             id: $ID,
             type: '{$Type}',
             is_default: $IsDefault,
+            slug: '{$TypeSlug}',
             configurations : [
                     <% loop SampleConfigurations %>
                     {

@@ -9,7 +9,7 @@
         <div class="sample-configs-slider">
         <ul class="sample-configs-subnav">
             <li class="sample_config_type" each={ configuration_types_menu_list } id="{ 'sample_config_type_'+id }" >
-                <a id="{ 'sample_config_type_link_'+id }" href="#" data-id="{ id }" onclick={ selectedConfigSampleType }>{ type }</a>
+                <a id="{ 'sample_config_type_link_'+id }" data-slug="{ slug }" href="#" data-id="{ id }" onclick={ selectedConfigSampleType }>{ type }</a>
             </li>
         </ul>
         </div>
@@ -31,19 +31,36 @@
         this.on('mount', function(){
 
             $( document ).ready(function() {
-                if(self.default_configuration_type !== null) {
-                     $('#sample_config_type_link_'+ self.default_configuration_type).trigger('click');
-                }
+
+                self.handleDeepLink();
             });
 
         });
 
         selectedConfigSampleType(e) {
-            var type_id = e.item.id;
-            console.log('config type selected '+type_id);
+            self.clickConfigSampleType(e.item.id);
+        }
+
+        clickConfigSampleType(id) {
+            var slug = $('#sample_config_type_link_'+ id).data('slug');
+            console.log('config type selected '+id);
             $('.sample_config_type').removeClass('active');
-            $('#sample_config_type_'+type_id).addClass('active');
-            self.ctrl.trigger('selected-config-sample-type', type_id);
+            $('#sample_config_type_'+id).addClass('active');
+            $(window).url_fragment('setParam','type', slug);
+            window.location.hash = $(window).url_fragment('serialize');
+            self.ctrl.trigger('selected-config-sample-type', id);
+        }
+
+        handleDeepLink() {
+            var hash = $(window).url_fragment('getParams');
+            if(!$.isEmptyObject(hash) && ('type' in hash) ) {
+                var tab = hash['type'];
+                if ($('*[data-slug="'+tab+'"]').length) {
+                    self.clickConfigSampleType($('*[data-slug="'+tab+'"]').data('id'))
+                }
+            } else if(self.default_configuration_type !== null) {
+                self.clickConfigSampleType(self.default_configuration_type)
+            }
         }
 
         module.exports = this.ctrl;

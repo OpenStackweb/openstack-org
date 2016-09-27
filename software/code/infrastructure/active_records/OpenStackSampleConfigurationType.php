@@ -51,4 +51,14 @@ class OpenStackSampleConfigurationType extends DataObject
     {
         return $this->SampleConfigurations()->filter('isDefault', true)->first();
     }
+
+    public function getTypeSlug()
+    {
+        $slug = str_replace(' /','',strtolower($this->Type));
+        if (strpos($slug,' ') !== false) {
+            $slug = str_replace(' ','-',$slug);
+        }
+
+        return $slug;
+    }
 }

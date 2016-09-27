@@ -108,8 +108,6 @@ class SoftwareHomePage_Controller extends Page_Controller
         Requirements::css("software/css/software.css");
         Requirements::javascript("themes/openstack/bower_assets/webui-popover/dist/jquery.webui-popover.min.js");
         Requirements::javascript("software/js/software.js");
-
-
     }
 
     public function index()
@@ -318,6 +316,9 @@ class SoftwareHomePage_Controller extends Page_Controller
     {
         $release = $this->getDefaultRelease();
         if(is_null($release)) return 'Default Release not set!';
+
+        Requirements::javascript('themes/openstack/javascript/urlfragment.jquery.js');
+
         return $this->render
         (
             array
