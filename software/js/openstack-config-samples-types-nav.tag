@@ -31,7 +31,6 @@
         this.on('mount', function(){
 
             $( document ).ready(function() {
-
                 self.handleDeepLink();
             });
 
@@ -46,17 +45,15 @@
             console.log('config type selected '+id);
             $('.sample_config_type').removeClass('active');
             $('#sample_config_type_'+id).addClass('active');
-            $(window).url_fragment('setParam','type', slug);
-            window.location.hash = $(window).url_fragment('serialize');
+            window.location.hash = slug;
             self.ctrl.trigger('selected-config-sample-type', id);
         }
 
         handleDeepLink() {
-            var hash = $(window).url_fragment('getParams');
-            if(!$.isEmptyObject(hash) && ('type' in hash) ) {
-                var tab = hash['type'];
-                if ($('*[data-slug="'+tab+'"]').length) {
-                    self.clickConfigSampleType($('*[data-slug="'+tab+'"]').data('id'))
+            var hash = window.location.hash.replace('#', '');
+            if(!$.isEmptyObject(hash) ) {
+                if ($('*[data-slug="'+hash+'"]').length) {
+                    self.clickConfigSampleType($('*[data-slug="'+hash+'"]').data('id'))
                 }
             } else if(self.default_configuration_type !== null) {
                 self.clickConfigSampleType(self.default_configuration_type)
