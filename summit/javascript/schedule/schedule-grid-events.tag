@@ -484,13 +484,14 @@
                     $('#event_'+e.id).show();
                     event_count++;
                 }
+
+                if(event_count == 0) {
+                    $('#no_events_msg').show();
+                } else {
+                    $('#no_events_msg').hide();
+                }
             }
 
-            if(event_count == 0) {
-                $('#no_events_msg').show();
-            } else {
-                $('#no_events_msg').hide();
-            }
         }
 
         scrollToTime() {
