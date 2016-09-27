@@ -7,13 +7,13 @@
     <div class="row">
         <div class="col-md-4">
             <select id="report_select" class="form-control" >
-                <option value="speaker_report"> Speaker Report </option>
                 <option value="presentation_report" selected> Presentation Report </option>
-                <option value="room_report"> Speakers Per Room </option>
-                <option value="video_report"> Video Output List </option>
-                <option value="rsvp_report"> RSVP Report </option>
-                <option value="track_questions_report"> Track Questions Report </option>
                 <option value="presentations_company_report"> Presentations by Company </option>
+                <option value="rsvp_report"> RSVP Report </option>
+                <option value="room_report"> Speakers Per Room </option>
+                <option value="speaker_report"> Speaker Report </option>
+                <option value="track_questions_report"> Track Questions Report </option>
+                <option value="video_report"> Video Output List </option>
             </select>
         </div>
         <div class="col-md-2">
