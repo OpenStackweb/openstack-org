@@ -27,7 +27,7 @@ jQuery(document).ready(function($){
     });
 
     $('#service-term').prepend("<option value='' selected='selected'>-- Select a Service--</option>");
-    $('#service-term').chosen({disable_search_threshold: 3});
+    $('#service-term').chosen({disable_search_threshold: 3, width:'auto'});
     $('#service-term').change(function () {
         $('.filter-label').trigger("click");
     });

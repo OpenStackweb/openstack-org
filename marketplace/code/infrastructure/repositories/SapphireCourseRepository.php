@@ -102,7 +102,7 @@ class SapphireCourseRepository
 
         if (!is_null($level) && strlen($level) > 0) {
             $level = Convert::raw2sql($level);
-            $filter = " AND lv.Level LIKE '%{$level}%' COLLATE utf8_general_ci ";
+            $filter .= " AND lv.Level LIKE '%{$level}%' COLLATE utf8_general_ci ";
         }
 
         $sql = <<< SQL

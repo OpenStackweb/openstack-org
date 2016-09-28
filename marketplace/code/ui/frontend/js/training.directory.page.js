@@ -31,8 +31,9 @@ jQuery(document).ready(function($){
 
         var location_filter = $('#location-term');
         if(location_filter.length > 0 ){
-            location_filter.prepend("<option value='' selected='selected'>-- Select a City--</option>");
-            location_filter.chosen({disable_search_threshold: 3, width:400});
+            var selected = (location_filter.find(':selected').length) ? '' : 'selected';
+            location_filter.prepend("<option value='' "+selected+" >-- Select a City--</option>");
+            location_filter.chosen({disable_search_threshold: 3, width:'auto'});
             location_filter.change(function () {
                 $('.filter-label').trigger("click");
             });
@@ -40,8 +41,9 @@ jQuery(document).ready(function($){
 
         var level_filter = $('#level-term');
         if(level_filter.length > 0){
-            level_filter.prepend("<option value='' selected='selected'>-- Select a Level--</option>");
-            level_filter.chosen({disable_search_threshold: 3, width:200});
+            var selected = (location_filter.find(':selected').length) ? '' : 'selected';
+            level_filter.prepend("<option value='' "+selected+" >-- Select a Level--</option>");
+            level_filter.chosen({disable_search_threshold: 3, width:'auto'});
             level_filter.change(function () {
                 $('.filter-label').trigger("click");
             });
@@ -58,6 +60,12 @@ jQuery(document).ready(function($){
 
             if(last_filter_request!=null)
                 last_filter_request.abort();
+
+            var topic = (params.topic_term == '') ? 'all' : params.topic_term;
+            var location = (params.location_term == '') ? 'all' : params.location_term;
+            var level = (params.level_term == '') ? 'all' : params.level_term;
+            var state = '/marketplace/training/'+location+'/'+level+'/'+topic;
+            history.pushState(null, null, state);
 
             last_filter_request = $.ajax({
                     type:        "POST",

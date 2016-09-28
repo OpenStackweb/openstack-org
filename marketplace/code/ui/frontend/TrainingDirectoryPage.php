@@ -26,11 +26,12 @@ class TrainingDirectoryPage extends MarketPlaceDirectoryPage
 class TrainingDirectoryPage_Controller extends MarketPlaceDirectoryPage_Controller
 {
 
-    private static $allowed_actions = array('classes', 'handleIndex');
+    private static $allowed_actions = array('classes', 'handleIndex', 'handleFilter');
 
     static $url_handlers = array(
         'classes' => 'classes',
-        '$Company!/$Slug' => 'handleIndex'
+        'profile/$Company!/$Slug' => 'handleIndex',
+        '$Loc/$Level/$Keyword' => 'handleFilter',
     );
 
     /**
@@ -93,7 +94,12 @@ class TrainingDirectoryPage_Controller extends MarketPlaceDirectoryPage_Controll
      */
     public function getTrainings()
     {
-        return $this->training_facade->getTrainings();
+        $params = $this->request->allParams();
+        $location = ($params['Loc'] == 'all') ? '' : $params['Loc'];
+        $level = ($params['Level'] == 'all') ? '' : $params['Level'];
+        $keyword = ($params['Keyword'] == 'all') ? '' : $params['Keyword'];
+
+        return $this->training_facade->getTrainings($keyword, $location, $level);
     }
 
     public function handleIndex()
@@ -103,6 +109,13 @@ class TrainingDirectoryPage_Controller extends MarketPlaceDirectoryPage_Controll
             //render instance ...
             return $this->training();
         }
+    }
+
+    public function handleFilter()
+    {
+        $keyword = $this->request->param('Keyword');
+        $keyword_val = ($keyword == 'all') ? '' : $keyword;
+        return $this->getViewer('')->process($this->customise(array('Keyword' => $keyword_val)));
     }
 
     public function training()
@@ -142,12 +155,13 @@ class TrainingDirectoryPage_Controller extends MarketPlaceDirectoryPage_Controll
 
     public function LocationCombo()
     {
+        $location = $this->request->param('Loc');
         $source = array(0 => 'Virtual Courses');
         $result = $this->course_location_query->handle(new OpenStackImplementationNamesQuerySpecification(DateTimeUtils::getCurrentDate()));
         foreach ($result->getResult() as $dto) {
             $source[$dto->getValue()] = $dto->getValue();
         }
-        $ddl = new DropdownField('location-term', $title = null, $source);
+        $ddl = new DropdownField('location-term', $title = null, $source, $location);
         $ddl->setEmptyString('-- Show All --');
 
         return $ddl;
@@ -155,12 +169,13 @@ class TrainingDirectoryPage_Controller extends MarketPlaceDirectoryPage_Controll
 
     public function LevelCombo()
     {
+        $level = $this->request->param('Level');
         $source = array();
         $result = $this->course_level_query->handle(new OpenStackImplementationNamesQuerySpecification(''));
         foreach ($result->getResult() as $dto) {
             $source[$dto->getValue()] = $dto->getValue();
         }
-        $ddl = new DropdownField('level-term', $title = null, $source);
+        $ddl = new DropdownField('level-term', $title = null, $source, $level);
         $ddl->setEmptyString('-- Show All --');
 
         return $ddl;
@@ -186,4 +201,5 @@ class TrainingDirectoryPage_Controller extends MarketPlaceDirectoryPage_Controll
 
         return $this->renderWith(array('TrainingDirectoryPage_classes', 'TrainingDirectoryPage', 'MarketPlacePage'));
     }
+
 }

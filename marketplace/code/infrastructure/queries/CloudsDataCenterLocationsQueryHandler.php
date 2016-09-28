@@ -58,7 +58,7 @@ abstract class CloudsDataCenterLocationsQueryHandler implements ICloudsDataCente
 		WHERE CompanyService.ClassName = '{$class_name}'
 		{$filter}
 		GROUP BY City,Country,State
-		ORDER BY City,State, Country ASC
+		ORDER BY Country,State,City
 
 SQL;
 		$results = DB::query($sql);

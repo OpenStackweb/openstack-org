@@ -45,7 +45,7 @@ final class TrainingCoursesLocationQueryHandler implements IQueryHandler {
         WHERE CompanyService.Active = 1 AND TrainingCourseSchedule.City NOT LIKE '%Virtual%' AND TrainingCourseSchedule.City NOT LIKE '%Online%'
         {$date_filter}
         GROUP BY TrainingCourseSchedule.City, TrainingCourseSchedule.State, TrainingCourseSchedule.Country
-        ORDER BY TrainingCourseSchedule.City, TrainingCourseSchedule.State, TrainingCourseSchedule.Country ASC;
+        ORDER BY TrainingCourseSchedule.Country, TrainingCourseSchedule.State, TrainingCourseSchedule.City;
 SQL;
 		$results   = DB::query($sql);
 		$locations = array();

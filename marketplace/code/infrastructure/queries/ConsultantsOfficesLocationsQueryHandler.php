@@ -48,6 +48,7 @@ final class ConsultantsOfficesLocationsQueryHandler implements IConsultantsOffic
         SELECT City,State,Country FROM Office
 		{$filter}
 		GROUP BY City,State,Country
+		ORDER BY Country,State,City
 
 SQL;
 		$results = DB::query($sql);

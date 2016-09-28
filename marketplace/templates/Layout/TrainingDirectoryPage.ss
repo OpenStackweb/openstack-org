@@ -12,16 +12,16 @@
 <div class="grey-bar">
     <div class="container">
         <p class="filter-label">Filter Courses</p>
-        <input type="text" id="topic-term" placeholder="ANY TOPIC" name="topic-term">
+        <input type="text" id="topic-term" placeholder="ANY TOPIC" name="topic-term" value="{$Keyword}">
         $LocationCombo
         $LevelCombo
     </div>
 </div>
 <div class='container'>
     <div id="training-list" class="col-sm-8">
-        <% if Trainings %>
-            <% loop Trainings %>
-                <% include TrainingDirectoryPage_CompanyTraining TrainingLink=$Top.Link%>
+        <% if Trainings() %>
+            <% loop Trainings() %>
+                <% include TrainingDirectoryPage_CompanyTraining TrainingLink=$Top.Link(profile) %>
             <% end_loop %>
         <% end_if %>
     </div>
