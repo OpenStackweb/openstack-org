@@ -181,7 +181,7 @@
             var end_date = $('#end_date').val();
             var search_term = $('#search_term').val();
 
-            window.open('api/v1/summits/'+self.summit_id+'/reports/export/video_report?tracks='+tracks+'&venues='+venues+'&start_date='+start_date+'&end_date='+end_date+'&search_term='+search_term, '_blank');
+            window.open('api/v1/summits/'+self.summit_id+'/reports/export/video_report?tracks='+tracks+'&venues='+venues+'&start_date='+start_date+'&end_date='+end_date+'&term='+search_term, '_blank');
         });
 
         getLocationOptionCSSClass(class_name) {

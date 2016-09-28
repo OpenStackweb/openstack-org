@@ -403,13 +403,13 @@ WHERE DATE(E.StartDate) = '{$date}' AND E.SummitID = {$summit_id}
 AND E.ClassName = 'Presentation' AND PM.ClassName = 'PresentationVideo'
 SQL;
 
-        if ($tracks) {
+        if ($tracks && $tracks != 'all') {
             $query .= <<<SQL
  AND P.CategoryID IN ( {$tracks} )
 SQL;
         }
 
-        if ($venues) {
+        if ($venues && $venues != 'all') {
             $query .= <<<SQL
  AND E.LocationID IN ( {$venues} )
 SQL;
