@@ -77,15 +77,30 @@ var loaders = [
   	loaders: ['json-loader']
   },
   {
+    test: /\.module\.css$/,
+    loader: styleLoader('css-loader?modules!' + autoPrefixLoader())
+  },
+  {
+    test: /\.module\.less/,
+    loader: styleLoader('css-loader?modules!' + autoPrefixLoader() + '!less-loader')
+  },
+  {
+    test: /\.module\.scss/,
+    loader: styleLoader('css-loader?modules!' + autoPrefixLoader() + '!sass-loader')
+  },
+  {
     test: /\.css$/,
+    exclude: /\.module\.css$/,
     loader: styleLoader('css-loader!' + autoPrefixLoader())
   },
   {
     test: /\.less/,
+    exclude: /\.module\.less/,
     loader: styleLoader('css-loader!' + autoPrefixLoader() + '!less-loader')
   },
   {
     test: /\.scss/,
+    exclude: /\.module\.scss/,
     loader: styleLoader('css-loader!' + autoPrefixLoader() + '!sass-loader')
   },
   {
@@ -109,6 +124,10 @@ var loaders = [
 module.exports = {
 
   module: {loaders},
-  plugins: PRODUCTION ? plugins.concat(productionPlugins) : plugins.concat(devPlugins)
-
+  plugins: PRODUCTION ? plugins.concat(productionPlugins) : plugins.concat(devPlugins),
+  resolve: {
+  	alias: {
+  		'ui-core': path.join(__dirname, '../ui')
+  	}
+  }
 };

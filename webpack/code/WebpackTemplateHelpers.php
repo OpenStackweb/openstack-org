@@ -11,7 +11,9 @@ class WebpackTemplateHelpers implements TemplateGlobalProvider
         return [
             'WebpackJS',
             'WebpackCSS',
-            'WebpackDevServer'
+            'WebpackDevServer',
+            'LoadComponent',
+            'RenderComponent'
         ];
     }
 
@@ -52,5 +54,29 @@ class WebpackTemplateHelpers implements TemplateGlobalProvider
 				$filename
 			));
     	}
+    }
+
+
+    public static function LoadComponent($component, $module = null)
+    {
+    	if(!$module) {
+    		$module = Injector::inst()->get('ViewableData')->ThemeDir();
+    	}
+
+    	Requirements::javascript($module.'/ui/production/commons.chunk.js');
+    	Requirements::javascript($module.'/ui/production/js/'.$component.'.bundle.js');
+    }
+
+
+    public static function RenderComponent($component, $module = null)
+    {
+    	self::LoadComponent($component, $module);
+
+    	$ret = DBField::create_field(
+    		'HTMLText', 
+    		sprintf('<div data-component="%s"></div>', $component)
+    	);
+
+    	return $ret;
     }
 }

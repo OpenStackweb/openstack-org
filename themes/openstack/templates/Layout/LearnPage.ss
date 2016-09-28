@@ -20,6 +20,7 @@
                 <p>
                     Looking for resources to learn more about using or developing OpenStack, finding out what's happening in the community, or watching experts talk OpenStack? This is your place.
                 </p>
+                $RenderComponent('AwesomeButton')
             </div>
         </div>
         <div class="row">

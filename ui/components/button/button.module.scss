@@ -1,0 +1,11 @@
+.button {
+	background: blue;
+	color:white;
+	&.disabled {
+		background:#ccc;
+		color:#999;
+	}
+	&.active {
+		border:1px solid red;
+	}
+}

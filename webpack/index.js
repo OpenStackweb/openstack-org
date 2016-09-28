@@ -39,6 +39,11 @@ try {
 const moduleConfig = require(configPath);
 const config = Object.assign({}, baseConfig, moduleConfig);
 
+// merge plugins
+if(Array.isArray(moduleConfig.plugins)) {
+	config.plugins = baseConfig.plugins.concat(moduleConfig.plugins);
+}
+
 // Set the paths relative to root
 let newEntries = {};	
 iterate(config.entry, (bundleFile, paths) => {
