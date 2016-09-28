@@ -316,4 +316,10 @@ interface IPresentationSpeaker extends IEntity
      * @return mixed
      */
     public function PublishedPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker);
+
+    /**
+     * @param null|int $summit_id
+     * @return mixed
+     */
+    public function AllPublishedPresentations($summit_id = null);
 }

@@ -939,7 +939,7 @@ class PresentationSpeaker extends DataObject
      */
     public function breakoutEmailAlreadySent($summit_id)
     {
-        $count1 = intval($this->AnnouncementSummitEmails()->filter('SummitID', $summit_id)->filter('AnnouncementEmailTypeSent', 'SECOND_BREAKOUT_REMAINDER')->count());
+        $count1 = intval($this->AnnouncementSummitEmails()->filter('SummitID', $summit_id)->filter('AnnouncementEmailTypeSent', 'SECOND_BREAKOUT_REMINDER')->count());
         $count2 = intval($this->AnnouncementSummitEmails()->filter('SummitID', $summit_id)->filter('AnnouncementEmailTypeSent', 'SECOND_BREAKOUT_REGISTER')->count());
         return $count1 > 0 || $count2 > 0;
     }
@@ -1051,4 +1051,22 @@ class PresentationSpeaker extends DataObject
         return $this->PublishedPresentations($summit_id, $role)->count() > 0;
     }
 
+    /**
+     * @param null|int $summit_id
+     * @return mixed
+     */
+    public function AllPublishedPresentations($summit_id = null)
+    {
+        $res           = [];
+        $p_speaker     = $this->PublishedPresentations($summit_id, IPresentationSpeaker::RoleSpeaker);
+        $p_moderator   = $this->PublishedPresentations($summit_id, IPresentationSpeaker::RoleModerator);
+        $merge         = array_merge($p_speaker->toArray(), $p_moderator->toArray());
+        $already_added = [];
+        foreach($merge as $p){
+            if(isset($already_added[$p->ID])) continue;
+            $res[]                 = $p;
+            $already_added[$p->ID] = $p->ID;
+        }
+        return new ArrayList($res);
+    }
 }

@@ -181,8 +181,8 @@ class Presentation extends SummitEvent implements IPresentation
      */
     private static $has_one = array
     (
-        'Creator' => 'Member',
-        'Category' => 'PresentationCategory',
+        'Creator'   => 'Member',
+        'Category'  => 'PresentationCategory',
         'Moderator' => 'PresentationSpeaker',
     );
 

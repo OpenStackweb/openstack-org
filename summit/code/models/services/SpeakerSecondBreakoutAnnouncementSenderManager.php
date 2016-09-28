@@ -141,7 +141,7 @@ final class SpeakerSecondBreakoutAnnouncementSenderManager implements ISpeakerSe
                      * they still need the email, just not the part with the code. Probably a slightly altered verbiage as well
                      */
                     $code           = null;
-                    $presentations  = $speaker->PublishedPresentations($current_summit->getIdentifier());
+                    $presentations  = $speaker->AllPublishedPresentations($current_summit->getIdentifier());
 
                     if(intval($presentations->Count()) === 1){
                         if(in_array($presentations->first()->Category()->Title, $not_allowed_categories) ) continue;
@@ -172,7 +172,7 @@ final class SpeakerSecondBreakoutAnnouncementSenderManager implements ISpeakerSe
                         }
                         $params['PromoCode'] = $speaker->getSummitPromoCode($current_summit->getIdentifier());
                     }
-
+                    echo sprintf("sending email to %s", $speaker->getEmail()).PHP_EOL;
                     $sender_service->send($params);
                     ++$speakers_notified;
                 }
@@ -184,6 +184,7 @@ final class SpeakerSecondBreakoutAnnouncementSenderManager implements ISpeakerSe
             catch(Exception $ex)
             {
                 SS_Log::log($ex->getMessage(), SS_Log::ERR);
+                echo $ex->getMessage().PHP_EOL;
                 throw $ex;
             }
         });

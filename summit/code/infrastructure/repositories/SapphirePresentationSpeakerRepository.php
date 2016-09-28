@@ -547,15 +547,27 @@ SQL;
         list($offset, $sort, $where_having) = $this->buildSpeakersSearchParams($page, $page_size, $term, $sort_by, $sort_dir);
 
         $where = <<<SQL
-      WHERE EXISTS
-            (
-                SELECT 1 FROM SummitEvent
-                INNER JOIN Presentation ON Presentation.ID = SummitEvent.ID
-                INNER JOIN Presentation_Speakers ON Presentation_Speakers.PresentationID = Presentation.ID
-                WHERE SummitEvent.SummitID = {$summit->ID}
-                AND Presentation_Speakers.PresentationSpeakerID  = PresentationSpeaker.ID
-                AND SummitEvent.Published = 1
-            )
+               WHERE 
+               (
+                   EXISTS
+                    (
+                        SELECT 1 FROM SummitEvent
+                        INNER JOIN Presentation ON Presentation.ID = SummitEvent.ID
+                        INNER JOIN Presentation_Speakers ON Presentation_Speakers.PresentationID = Presentation.ID
+                        WHERE SummitEvent.SummitID = {$summit->ID}
+                        AND SummitEvent.Published = 1
+                        AND Presentation_Speakers.PresentationSpeakerID  = PresentationSpeaker.ID
+                    )
+                    OR 
+                    EXISTS
+                    (
+                        SELECT 1 FROM SummitEvent
+                        INNER JOIN Presentation ON Presentation.ID = SummitEvent.ID
+                        WHERE SummitEvent.SummitID   = {$summit->ID}
+                        AND Presentation.ModeratorID = PresentationSpeaker.ID
+                        AND SummitEvent.Published = 1
+                    )
+              )
             {$where_having}
 SQL;
 
