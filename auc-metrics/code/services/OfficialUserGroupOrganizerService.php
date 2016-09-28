@@ -68,10 +68,7 @@ class OfficialUserGroupOrganizerService extends BaseService implements MetricSer
         ]);
 
         $this->results = ResultList::create();
-        $i = 0;
         foreach ($parser as $row) {
-        	$i++;
-        	echo "$i \n";
             $email = $row['Email'];
             $member = Member::get()->filterAny([
                 'Email' => $email,
@@ -80,7 +77,6 @@ class OfficialUserGroupOrganizerService extends BaseService implements MetricSer
             ])->first();
 
             if ($member) {
-            	echo $member->Email ."\n";
                 $this->results->push(Result::create($member));
             } else {
                 $this->logError("Member with email " . $row['Email'] . " not found");
