@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-final class SpeakerSecondBreakoutEmailSenderTask  extends CronTask
+final class SpeakerSecondBreakoutEmailSenderTask extends CronTask
 {
     /**
      * @return void
@@ -22,8 +22,8 @@ final class SpeakerSecondBreakoutEmailSenderTask  extends CronTask
         try
         {
             $batch_size = 100;
-            $init_time = time();
-            $summit    = null;
+            $init_time  = time();
+            $summit     = null;
 
             if (isset($_GET['batch_size']))
             {

@@ -98,14 +98,16 @@ final class SpeakerSecondBreakoutAnnouncementSenderManager implements ISpeakerSe
             $not_allowed_categories
         )
         {
+            $summit_id = $current_summit->getIdentifier();
+
             try {
                 $page      = 1;
                 $page_size = $batch_size;
-                $task      = $batch_repository->findByName(self::TaskName);
+                $task      = $batch_repository->findByName(self::TaskName.$summit_id);
 
                 if (is_null($task)) {
                     //create task
-                    $task = $batch_task_factory->buildBatchTask(self::TaskName, 0, $page);
+                    $task = $batch_task_factory->buildBatchTask(self::TaskName.$summit_id, 0, $page);
                     $batch_repository->add($task);
                 }
 
