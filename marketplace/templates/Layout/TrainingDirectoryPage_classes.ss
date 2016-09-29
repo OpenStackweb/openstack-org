@@ -37,7 +37,7 @@
                             </div>
                         </div>
                         <div class="col-md-8">
-                            <h4><a href="$Top.Link{$BookMark}" class="outbound-link">$CourseName</a></h4>
+                            <h4><a href="$Top.Link(profile)/{$BookMark}" class="outbound-link">$CourseName</a></h4>
                             $CompanyName
                             <p class="date-block">
                                 <span class="month">$StartDateMonth</span>

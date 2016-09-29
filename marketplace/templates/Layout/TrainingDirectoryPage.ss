@@ -53,7 +53,7 @@
                     <span class="day">$StartDateDay</span>
                 </p>
                 <p>
-                    <a href="$Top.Link{$BookMark}" class="outbound-link">$CourseName</a><br>
+                    <a href="$Top.Link(profile)/{$BookMark}" class="outbound-link">$CourseName</a><br>
                     $City
                 </p>
             </li>
