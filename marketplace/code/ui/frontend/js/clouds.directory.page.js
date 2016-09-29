@@ -26,12 +26,15 @@ jQuery(document).ready(function($){
         }
     });
 
-    $('#service-term').prepend("<option value='' selected='selected'>-- Select a Service--</option>");
+    var selected = ($('#service-term').find(':selected').length) ? '' : 'selected';
+    $('#service-term').prepend("<option value='' "+selected+">-- Select a Service--</option>");
     $('#service-term').chosen({disable_search_threshold: 3, width:'auto'});
     $('#service-term').change(function () {
         $('.filter-label').trigger("click");
     });
-    $('#location-term').prepend("<option value='' selected='selected'>-- Select a Location--</option>");
+
+    selected = ($('#location-term').find(':selected').length) ? '' : 'selected';
+    $('#location-term').prepend("<option value='' "+selected+">-- Select a Location--</option>");
     $('#location-term').chosen({disable_search_threshold: 3, width:'auto'});
     $('#location-term').change(function () {
         $('.filter-label').trigger("click");
@@ -48,6 +51,12 @@ jQuery(document).ready(function($){
 
         if(last_filter_request!=null)
             last_filter_request.abort();
+
+        var name_term = (params.name_term == '') ? 'all' : params.name_term;
+        var service_term = (params.service_term == '') ? 'all' : params.service_term;
+        var location_term = (params.location_term == '') ? 'all' : params.location_term;
+        var state = '/marketplace/'+cloud_type+'/'+location_term+'/'+service_term+'/'+name_term;
+        history.pushState(null, null, state);
 
         $('#map').slideUp('slow');
         $('#show-map').show();
@@ -93,4 +102,9 @@ jQuery(document).ready(function($){
                 place.city+', '+place.country+' DataCenter</a>'
         }
     });
+
+    //if preselected filters run ajax
+    if ($('#name-term').val() || $('#service-term').val() || $('#location-term').val()) {
+        $('.filter-label').trigger("click");
+    }
 });

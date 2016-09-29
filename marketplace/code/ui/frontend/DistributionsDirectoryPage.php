@@ -22,11 +22,12 @@ class DistributionsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Con
 {
 
     private static $allowed_actions = array(
-        'handleIndex',
+        'handleIndex','handleFilter'
     );
 
     static $url_handlers = array(
         '$Type!/$Company!/$Slug!' => 'handleIndex',
+        '$Service!/$Keyword!' => 'handleFilter',
     );
 
     /**
@@ -144,6 +145,13 @@ class DistributionsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Con
         }
     }
 
+    public function handleFilter()
+    {
+        $keyword = $this->request->param('Keyword');
+        $keyword_val = ($keyword == 'all') ? '' : $keyword;
+        return $this->getViewer('')->process($this->customise(array('Keyword' => $keyword_val)));
+    }
+
 
     public function getImplementations()
     {
@@ -207,13 +215,14 @@ class DistributionsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Con
 
     public function ServicesCombo()
     {
+        $service = $this->request->param('Service');
         $source = array();
         $result = $this->implementations_services_query->handle(new OpenStackImplementationNamesQuerySpecification(''));
         foreach ($result->getResult() as $dto) {
             $source[$dto->getValue()] = $dto->getValue();
         }
 
-        $ddl = new DropdownField('service-term"', $title = null, $source);
+        $ddl = new DropdownField('service-term"', $title = null, $source, $service);
         $ddl->setEmptyString('-- Show All --');
 
         return $ddl;

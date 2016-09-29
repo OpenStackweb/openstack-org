@@ -18,7 +18,7 @@ abstract class CloudsDirectoryPage_Controller extends MarketPlaceDirectoryPage_C
 
 	use GoogleMapLibs;
 
-	private static $allowed_actions = array('handleIndex');
+	private static $allowed_actions = array('handleIndex','handleFilter');
 
 	/**
 	 * @var IOpenStackImplementationRepository
@@ -36,6 +36,7 @@ abstract class CloudsDirectoryPage_Controller extends MarketPlaceDirectoryPage_C
 	protected $manager;
 
 	static $url_handlers = array(
+        '$Loc!/$Service!/$Keyword!' => 'handleFilter',
 		'$Company!/$Slug!' => 'handleIndex',
 	);
 
@@ -203,6 +204,13 @@ abstract class CloudsDirectoryPage_Controller extends MarketPlaceDirectoryPage_C
 		}
 	}
 
+    public function handleFilter()
+    {
+        $keyword = $this->request->param('Keyword');
+        $keyword_val = ($keyword == 'all') ? '' : $keyword;
+        return $this->getViewer('')->process($this->customise(array('Keyword' => $keyword_val)));
+    }
+
 	abstract function renderCloud();
 
 	public function getClouds(){
@@ -262,22 +270,24 @@ abstract class CloudsDirectoryPage_Controller extends MarketPlaceDirectoryPage_C
 
 	public function ServicesCombo(){
 		$source = array();
+        $service = $this->request->param('Service');
 		$result = $this->clouds_services_query->handle(new OpenStackImplementationNamesQuerySpecification(''));
 		foreach($result->getResult() as $dto){
 			$source[$dto->getValue()] =  $dto->getValue();
 		}
-		$ddl = new DropdownField('service-term"',$title=null,$source,$value='');
+		$ddl = new DropdownField('service-term"',$title=null,$source,$service);
 		$ddl->setEmptyString('-- Show All --');
 		return $ddl;
 	}
 
 	public function LocationCombo(){
+        $location = $this->request->param('Loc');
 		$source = array();
 		$result = $this->clouds_locations_query->handle(new OpenStackImplementationNamesQuerySpecification(''));
 		foreach($result->getResult() as $dto){
 			$source[$dto->getValue()] =  $dto->getValue();
 		}
-		$ddl = new DropdownField('location-term"',$title = null,$source,$value='');
+		$ddl = new DropdownField('location-term"',$title = null,$source,$location);
 		$ddl->setEmptyString('-- Show All --');
 		return $ddl;
 	}

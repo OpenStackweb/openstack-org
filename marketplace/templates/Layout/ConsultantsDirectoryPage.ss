@@ -1,7 +1,7 @@
 <div class="grey-bar">
     <div class="container">
         <p class="filter-label">Filter Consultants</p>
-        <input type="text" placeholder="ANY NAME"     name="name-term"     id="name-term">
+        <input type="text" placeholder="ANY NAME" name="name-term" id="name-term" value="{$Keyword}">
         $ServicesCombo
         $LocationCombo
     </div>

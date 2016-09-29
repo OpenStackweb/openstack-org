@@ -26,7 +26,8 @@ jQuery(document).ready(function($){
             }
     });
 
-    $('#service-term').prepend("<option value='' selected='selected'>-- Select a Service--</option>");
+    var selected = ($('#service-term').find(':selected').length) ? '' : 'selected';
+    $('#service-term').prepend("<option value='' "+selected+">-- Select a Service--</option>");
     $('#service-term').chosen({disable_search_threshold: 3, width:'auto'});
     $('#service-term').change(function () {
         $('.filter-label').trigger("click");
@@ -41,6 +42,11 @@ jQuery(document).ready(function($){
         }
         if(last_filter_request!=null)
             last_filter_request.abort();
+
+        var name_term = (params.name_term == '') ? 'all' : params.name_term;
+        var service_term = (params.service_term == '') ? 'all' : params.service_term;
+        var state = '/marketplace/distros/'+service_term+'/'+name_term;
+        history.pushState(null, null, state);
 
         last_filter_request = $.ajax(
             {
@@ -61,5 +67,10 @@ jQuery(document).ready(function($){
             }
         );
     });
+
+    //if preselected filters run ajax
+    if ($('#name-term').val() || $('#service-term').val()) {
+        $('.filter-label').trigger("click");
+    }
 
 });
