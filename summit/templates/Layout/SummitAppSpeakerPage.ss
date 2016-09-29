@@ -1,4 +1,5 @@
 <div class="container-fluid">
+    <% cached 'frontend_schedule_speaker_page_page', $Speaker.ID, $Speaker.LastEdited %>
     <% with Speaker %>
     <div class="container">
         <div class="row schedule-title-wrapper">
@@ -286,6 +287,7 @@
         </div>
     </div>
     <% end_with %>
+    <% end_cached %>
 </div>
 
 <script src="summit/javascript/schedule/schedule.bundle.js" type="application/javascript"></script>
