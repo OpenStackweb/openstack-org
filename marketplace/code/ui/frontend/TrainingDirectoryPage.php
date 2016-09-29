@@ -30,8 +30,8 @@ class TrainingDirectoryPage_Controller extends MarketPlaceDirectoryPage_Controll
 
     static $url_handlers = array(
         'classes' => 'classes',
-        'profile/$Company!/$Slug' => 'handleIndex',
-        '$Loc/$Level/$Keyword' => 'handleFilter',
+        '$Loc!/$Level!/$Keyword!' => 'handleFilter',
+        '$Company!/$Slug' => 'handleIndex',
     );
 
     /**
@@ -95,9 +95,9 @@ class TrainingDirectoryPage_Controller extends MarketPlaceDirectoryPage_Controll
     public function getTrainings()
     {
         $params = $this->request->allParams();
-        $location = ($params['Loc'] == 'all') ? '' : $params['Loc'];
-        $level = ($params['Level'] == 'all') ? '' : $params['Level'];
-        $keyword = ($params['Keyword'] == 'all') ? '' : $params['Keyword'];
+        $location = (!isset($params['Loc']) || $params['Loc'] == 'all') ? '' : $params['Loc'];
+        $level = (!isset($params['Level']) || $params['Level'] == 'all') ? '' : $params['Level'];
+        $keyword = (!isset($params['Keyword']) || $params['Keyword'] == 'all') ? '' : $params['Keyword'];
 
         return $this->training_facade->getTrainings($keyword, $location, $level);
     }

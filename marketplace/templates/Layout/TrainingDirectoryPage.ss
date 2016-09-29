@@ -21,7 +21,7 @@
     <div id="training-list" class="col-sm-8">
         <% if Trainings() %>
             <% loop Trainings() %>
-                <% include TrainingDirectoryPage_CompanyTraining TrainingLink=$Top.Link(profile) %>
+                <% include TrainingDirectoryPage_CompanyTraining TrainingLink=$Top.Link %>
             <% end_loop %>
         <% end_if %>
     </div>
@@ -53,7 +53,7 @@
                     <span class="day">$StartDateDay</span>
                 </p>
                 <p>
-                    <a href="$Top.Link(profile)/{$BookMark}" class="outbound-link">$CourseName</a><br>
+                    <a href="{$Top.Link}{$BookMark}" class="outbound-link">$CourseName</a><br>
                     $City
                 </p>
             </li>
