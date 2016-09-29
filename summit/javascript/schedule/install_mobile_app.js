@@ -15,21 +15,21 @@
 
     $(document).ready(function() {
 
-        var is_mobile          = bowser.mobile ||  bowser.tablet;
-        var is_ios             = bowser.ios;
-        var is_android         = bowser.android;
-        var os_version         = bowser.osversion;
-        var browser_version    = bowser.version;
-        var current_url        = window.location.href;
-        var compare_os_version = is_ios ? bowser.compareVersions([os_version, '9']): 0;
-        var uri                = URI(current_url);
+        var is_mobile              = bowser.mobile ||  bowser.tablet;
+        var is_ios                 = bowser.ios;
+        var is_android             = bowser.android;
+        var os_version             = bowser.osversion;
+        var browser_version        = bowser.version;
+        var current_url            = window.location.href;
+        var compare_safari_version = is_ios ? bowser.compareVersions([browser_version, '9']): 0
+        var uri                    = URI(current_url);
 
         console.log('os_version '+os_version+' browser_version '+browser_version);
-        console.log('compare '+ compare_os_version);
+        console.log('compare '+ compare_safari_version);
         var has_meta_app_links = (typeof $("meta[property='al:android:url']").attr("content") != "undefined" || typeof $("meta[property='al:ios:url']").attr("content") != "undefined");
         if (is_mobile && has_meta_app_links){
             var os = is_android ? 'Android' : 'IOS';
-            if(is_ios && compare_os_version >=0 ) return;
+            if(is_ios && compare_safari_version >=0 ) return;
             // check if we are on RSVP page
             console.log('uri path '+uri.path());
             if(uri.path().indexOf('/rsvp') !== -1 ) return;
