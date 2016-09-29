@@ -4,6 +4,7 @@
         <input type="text" placeholder="ANY NAME" name="name-term" id="name-term" value="{$Keyword}">
         $ServicesCombo
         $LocationCombo
+        $RegionCombo
     </div>
 </div>
 <script type="text/javascript" >

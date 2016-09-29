@@ -31,7 +31,7 @@ jQuery(document).ready(function($){
 
         var location_filter = $('#location-term');
         if(location_filter.length > 0 ){
-            var selected = (location_filter.find(':selected').length) ? '' : 'selected';
+            var selected = (location_filter.val()) ? '' : 'selected';
             location_filter.prepend("<option value='' "+selected+" >-- Select a City--</option>");
             location_filter.chosen({disable_search_threshold: 3, width:'auto'});
             location_filter.change(function () {
@@ -41,7 +41,7 @@ jQuery(document).ready(function($){
 
         var level_filter = $('#level-term');
         if(level_filter.length > 0){
-            var selected = (location_filter.find(':selected').length) ? '' : 'selected';
+            var selected = (location_filter.val()) ? '' : 'selected';
             level_filter.prepend("<option value='' "+selected+" >-- Select a Level--</option>");
             level_filter.chosen({disable_search_threshold: 3, width:'auto'});
             level_filter.change(function () {

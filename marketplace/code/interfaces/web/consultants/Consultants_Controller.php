@@ -87,6 +87,7 @@ final class Consultants_Controller extends AbstractController
             $location = @explode(',', @$search_params['location_term']);
             $name = @$search_params['name_term'];
             $service = @$search_params['service_term'];
+            $region = @$search_params['region_term'];
 
             if (!empty($name)) {
                 $query->addAndCondition(
@@ -99,9 +100,14 @@ final class Consultants_Controller extends AbstractController
                 );
             }
 
-            if (!empty($service)) {
+            if (!empty($service) || !empty($region)) {
                 $query->addAlias(QueryAlias::create('ServicesOffered'));
-                $query->addAndCondition(QueryCriteria::like("ConsultantServiceOfferedType.Type", $service));
+                if (!empty($service)) {
+                    $query->addAndCondition(QueryCriteria::like("ConsultantServiceOfferedType.Type", $service));
+                }
+                if (!empty($region)) {
+                    $query->addAndCondition(QueryCriteria::id("Consultant_ServicesOffered.RegionID", $region));
+                }
             }
 
             if (is_array($location) && !empty($location[0])) {

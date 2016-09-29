@@ -26,14 +26,14 @@ jQuery(document).ready(function($){
         }
     });
 
-    var selected = ($('#service-term').find(':selected').length) ? '' : 'selected';
+    var selected = ($('#service-term').val()) ? '' : 'selected';
     $('#service-term').prepend("<option value='' "+selected+">-- Select a Service--</option>");
     $('#service-term').chosen({disable_search_threshold: 3, width:'auto'});
     $('#service-term').change(function () {
         $('.filter-label').trigger("click");
     });
 
-    selected = ($('#location-term').find(':selected').length) ? '' : 'selected';
+    selected = ($('#location-term').val()) ? '' : 'selected';
     $('#location-term').prepend("<option value='' "+selected+">-- Select a Location--</option>");
     $('#location-term').chosen({disable_search_threshold: 3, width:'auto'});
     $('#location-term').change(function () {

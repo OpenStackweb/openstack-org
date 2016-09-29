@@ -26,17 +26,24 @@ jQuery(document).ready(function($){
             }
     });
 
-    var selected = ($('#service-term').find(':selected').length) ? '' : 'selected';
+    var selected = ($('#service-term').val()) ? '' : 'selected';
     $('#service-term').prepend("<option value='' "+selected+">-- Select a Service--</option>");
     $('#service-term').chosen({disable_search_threshold: 3, width:'auto'});
     $('#service-term').change(function () {
         $('.filter-label').trigger("click");
     });
 
-    selected = ($('#location-term').find(':selected').length) ? '' : 'selected';
+    selected = ($('#location-term').val()) ? '' : 'selected';
     $('#location-term').prepend("<option value='' "+selected+">-- Select a Location--</option>");
     $('#location-term').chosen({disable_search_threshold: 3, width:'auto'});
     $('#location-term').change(function () {
+        $('.filter-label').trigger("click");
+    });
+
+    selected = ($('#region-term').val()) ? '' : 'selected';
+    $('#region-term').prepend("<option value='' "+selected+">-- Select a Region--</option>");
+    $('#region-term').chosen({disable_search_threshold: 3, width:'auto'});
+    $('#region-term').change(function () {
         $('.filter-label').trigger("click");
     });
 
@@ -46,7 +53,8 @@ jQuery(document).ready(function($){
         var params = {
             name_term     : $('#name-term').val(),
             service_term  : $('#service-term').val(),
-            location_term : $('#location-term').val()
+            location_term : $('#location-term').val(),
+            region_term   : $('#region-term').val()
         }
         if(last_filter_request!=null)
             last_filter_request.abort();
@@ -54,7 +62,8 @@ jQuery(document).ready(function($){
         var name_term = (params.name_term == '') ? 'all' : params.name_term;
         var service_term = (params.service_term == '') ? 'all' : params.service_term;
         var location_term = (params.location_term == '') ? 'all' : params.location_term;
-        var state = '/marketplace/consulting/'+location_term+'/'+service_term+'/'+name_term;
+        var region_term = (params.region_term == '') ? 'all' : params.region_term;
+        var state = '/marketplace/consulting/'+location_term+'/'+service_term+'/'+name_term+'/'+region_term;
         history.pushState(null, null, state);
 
         $('#map').slideUp('slow');
@@ -104,7 +113,7 @@ jQuery(document).ready(function($){
     });
 
     //if preselected filters run ajax
-    if ($('#name-term').val() || $('#service-term').val() || $('#location-term').val()) {
+    if ($('#name-term').val() || $('#service-term').val() || $('#location-term').val() || $('#region-term').val()) {
         $('.filter-label').trigger("click");
     }
 

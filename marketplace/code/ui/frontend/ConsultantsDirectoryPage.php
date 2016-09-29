@@ -47,8 +47,13 @@ class ConsultantsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Contr
 	 */
 	private $consultants_service_query;
 
+    /**
+     * @var IConsultantsServicesRegionsQueryHandler
+     */
+    private $consultants_regions_query;
+
 	static $url_handlers = array(
-        '$Loc!/$Service!/$Keyword!' => 'handleFilter',
+        '$Loc!/$Service!/$Keyword!/$Region!' => 'handleFilter',
 		'$Company!/$Slug!' => 'handleIndex',
 	);
 
@@ -82,8 +87,9 @@ class ConsultantsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Contr
 		$this->region_repository           = new SapphireRegionRepository;
 		$this->consultants_locations_query = new ConsultantsOfficesLocationsQueryHandler;
 		$this->consultants_service_query   = new ConsultantsServicesQueryHandler;
+        $this->consultants_regions_query   = new ConsultantsServicesRegionsQueryHandler;
 
-		$this->manager = new ConsultantManager (
+        $this->manager = new ConsultantManager (
 			$this->consultant_repository,
 			new SapphireMarketPlaceVideoTypeRepository,
 			new SapphireMarketPlaceTypeRepository,
@@ -264,4 +270,16 @@ class ConsultantsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Contr
 		$ddl->setEmptyString('-- Show All --');
 		return $ddl;
 	}
+
+    public function RegionCombo(){
+        $source = array();
+        $region = $this->request->param('Region');
+        $result = $this->consultants_regions_query->handle(new OpenStackImplementationNamesQuerySpecification(''));
+        foreach($result->getResult() as $dto){
+            $source[$dto->getValue()] =  $dto->getLabel();
+        }
+        $ddl = new DropdownField('region-term"',$title = null,$source,$region);
+        $ddl->setEmptyString('-- Show All --');
+        return $ddl;
+    }
 }
