@@ -17,7 +17,7 @@ class ActiveUserCommitteeWorkingGroupsService extends BaseService implements Met
 
     public function getMetricIdentifier()
     {
-        return "ACITIVE_MEMBER_UC_WORKING_GROUP";
+        return "ACTIVE_MEMBER_UC_WORKING_GROUP";
     }
 
 
