@@ -43,11 +43,6 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
     /**
      * @var IEntityRepository
      */
-    private $room_metrics_repository;
-
-    /**
-     * @var IEntityRepository
-     */
     private $category_repository;
 
     /**
@@ -67,7 +62,6 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
         ISummitReportRepository $report_repository,
         IRSVPRepository $rsvp_repository,
         ISummitEventRepository $event_repository,
-        IRoomMetricsRepository $room_metrics_repository,
         IPresentationCategoryRepository $category_repository,
         ISummitPresentationRepository $presentation_repository,
         ISummitService $summit_service
@@ -79,7 +73,6 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
         $this->report_repository             = $report_repository;
         $this->rsvp_repository               = $rsvp_repository;
         $this->event_repository              = $event_repository;
-        $this->room_metrics_repository       = $room_metrics_repository;
         $this->category_repository           = $category_repository;
         $this->presentation_repository       = $presentation_repository;
         $this->summit_service                = $summit_service;

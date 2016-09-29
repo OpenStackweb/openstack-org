@@ -100,7 +100,6 @@ Injector:
           2: '%$SummitReportRepository'
           3: '%$RSVPRepository'
           4: '%$EventRepository'
-          5: '%$MetricsRepository'
           6: '%$CategoryRepository'
           7: '%$PresentationRepository'
           8: '%$SummitService'
