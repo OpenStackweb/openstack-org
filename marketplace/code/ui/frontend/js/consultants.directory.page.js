@@ -59,11 +59,7 @@ jQuery(document).ready(function($){
         if(last_filter_request!=null)
             last_filter_request.abort();
 
-        var name_term = (params.name_term == '') ? 'all' : params.name_term;
-        var service_term = (params.service_term == '') ? 'all' : params.service_term;
-        var location_term = (params.location_term == '') ? 'all' : params.location_term;
-        var region_term = (params.region_term == '') ? 'all' : params.region_term;
-        var state = '/marketplace/consulting/'+location_term+'/'+service_term+'/'+name_term+'/'+region_term;
+        var state = '/marketplace/consulting/'+params.location_term+'/'+params.service_term+'/'+params.name_term+'/'+params.region_term;
         history.pushState(null, null, state);
 
         $('#map').slideUp('slow');

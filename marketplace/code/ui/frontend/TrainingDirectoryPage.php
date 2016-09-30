@@ -95,9 +95,9 @@ class TrainingDirectoryPage_Controller extends MarketPlaceDirectoryPage_Controll
     public function getTrainings()
     {
         $params = $this->request->allParams();
-        $location = (!isset($params['Loc']) || $params['Loc'] == 'all') ? '' : $params['Loc'];
-        $level = (!isset($params['Level']) || $params['Level'] == 'all') ? '' : $params['Level'];
-        $keyword = (!isset($params['Keyword']) || $params['Keyword'] == 'all') ? '' : $params['Keyword'];
+        $location = (!isset($params['Loc'])) ? '' : $params['Loc'];
+        $level = (!isset($params['Level'])) ? '' : $params['Level'];
+        $keyword = (!isset($params['Keyword'])) ? '' : $params['Keyword'];
 
         return $this->training_facade->getTrainings($keyword, $location, $level);
     }
