@@ -61,7 +61,10 @@ jQuery(document).ready(function($){
             if(last_filter_request!=null)
                 last_filter_request.abort();
 
-            var state = '/marketplace/training/'+params.level_term+'/'+params.location_term+'/'+params.topic_term;
+            var topic = (params.topic_term == '') ? 'all' : params.topic_term;
+            var location = (params.location_term == '') ? 'all' : params.location_term;
+            var level = (params.level_term == '') ? 'all' : params.level_term;
+            var state = '/marketplace/training/'+location+'/'+level+'/'+topic;
             history.pushState(null, null, state);
 
             last_filter_request = $.ajax({

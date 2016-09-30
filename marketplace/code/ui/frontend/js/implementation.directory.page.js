@@ -43,7 +43,9 @@ jQuery(document).ready(function($){
         if(last_filter_request!=null)
             last_filter_request.abort();
 
-        var state = '/marketplace/distros/'+params.service_term+'/'+params.name_term;
+        var name_term = (params.name_term == '') ? 'all' : params.name_term;
+        var service = (params.service_term == '') ? 'all' : params.service_term;
+        var state = '/marketplace/distros/'+service+'/'+name_term;
         history.pushState(null, null, state);
 
         last_filter_request = $.ajax(

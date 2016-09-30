@@ -52,7 +52,10 @@ jQuery(document).ready(function($){
         if(last_filter_request!=null)
             last_filter_request.abort();
 
-        var state = '/marketplace/'+cloud_type+'/'+params.location_term+'/'+params.service_term+'/'+params.name_term;
+        var name_term = (params.name_term == '') ? 'all' : params.name_term;
+        var location = (params.location_term == '') ? 'all' : params.location_term;
+        var service = (params.service_term == '') ? 'all' : params.service_term;
+        var state = '/marketplace/'+cloud_type+'/'+location+'/'+service+'/'+name_term;
         history.pushState(null, null, state);
 
         $('#map').slideUp('slow');
