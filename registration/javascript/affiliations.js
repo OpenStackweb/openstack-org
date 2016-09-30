@@ -311,6 +311,7 @@
     //helper functions
 
     function LoadAffiliationData(dlg ,affiliation){
+        $("#JobTitle", dlg).val(affiliation.JobTitle);
         $("#OrgName", dlg).val(affiliation.OrgName);
         $("#StartDate", dlg).val(affiliation.StartDate);
         if(affiliation.EndDate!='')

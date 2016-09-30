@@ -8,6 +8,9 @@
             <div class="modal-body">
                 <form id="edit-affiliation-form" name="edit-affiliation-form">
                     <div class="form-group">
+                        <input type="text" class="form-control" id="JobTitle" name="JobTitle" placeholder="Job Title">
+                    </div>
+                    <div class="form-group">
                         <input type="text" class="form-control" id="OrgName" name="OrgName" placeholder="Organization">
                     </div>
                     <div class="form-group">

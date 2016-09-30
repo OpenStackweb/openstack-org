@@ -12,9 +12,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+
 class AffiliationController extends Page_Controller
 {
-
 
     static $allowed_actions = array(
         'SaveAffiliation',
@@ -69,6 +69,7 @@ class AffiliationController extends Page_Controller
         $config->set('CSS.AllowedProperties', array());
         $purifier = new HTMLPurifier($config);
         $dbAffiliation->OrganizationID = $org->ID;
+        $dbAffiliation->JobTitle       = $newAffiliation->JobTitle;
         $dbAffiliation->MemberID       = $CurrentMember->ID;
         $dbAffiliation->StartDate      = $newAffiliation->StartDate;
         $dbAffiliation->EndDate        = !empty($newAffiliation->EndDate) ? $newAffiliation->EndDate : null;
@@ -85,7 +86,7 @@ class AffiliationController extends Page_Controller
         if ($CurrentMember = Member::currentUser()) {
             $affiliations = array();
 
-            $results = DB::query("SELECT A.ID,A.StartDate,A.EndDate,O.Name AS OrgName
+            $results = DB::query("SELECT A.ID,A.StartDate,A.EndDate,O.Name AS OrgName,JobTitle
                                   FROM Affiliation A
                                   INNER JOIN Org O on O.ID=A.OrganizationID
                                   WHERE A.MemberID = {$CurrentMember->ID} ORDER BY A.StartDate ASC, A.EndDate ASC");
@@ -95,6 +96,7 @@ class AffiliationController extends Page_Controller
                     $record = $results->nextRecord();
                     array_push($affiliations, array(
                         "Id" => $record['ID'],
+                        "JobTitle" => $record['JobTitle'],
                         "OrgName" => $record['OrgName'],
                         "EndDate" => is_null($record['EndDate']) ? '' : $record['EndDate'],
                         "StartDate" => $record['StartDate'],
@@ -115,7 +117,7 @@ class AffiliationController extends Page_Controller
             $affilliation_id = $params["ID"];
             $affilliation_id = Convert::raw2sql($affilliation_id);
 
-            $results = DB::query("SELECT A.ID,A.StartDate,A.EndDate,A.JobTitle,A.Role,A.Current,O.Name AS OrgName
+            $results = DB::query("SELECT A.ID,A.StartDate,A.EndDate,A.JobTitle,A.Role,A.Current,O.Name AS OrgName,JobTitle
                                   FROM Affiliation A
                                   INNER JOIN Org O on O.ID=A.OrganizationID
                                   WHERE A.ID = {$affilliation_id} ");
@@ -123,6 +125,7 @@ class AffiliationController extends Page_Controller
                 $affiliationDB = $results->nextRecord();
                 $affiliation = new StdClass;
                 $affiliation->Id = $affiliationDB['ID'];
+                $affiliation->JobTitle = $affiliationDB['JobTitle'];
                 $affiliation->OrgName = $affiliationDB['OrgName'];
                 $affiliation->StartDate = $affiliationDB['StartDate'];
                 $affiliation->EndDate = is_null($affiliationDB['EndDate']) ? '' : $affiliationDB['EndDate'];
