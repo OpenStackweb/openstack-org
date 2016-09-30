@@ -117,7 +117,7 @@ class AffiliationController extends Page_Controller
             $affilliation_id = $params["ID"];
             $affilliation_id = Convert::raw2sql($affilliation_id);
 
-            $results = DB::query("SELECT A.ID,A.StartDate,A.EndDate,A.JobTitle,A.Role,A.Current,O.Name AS OrgName,JobTitle
+            $results = DB::query("SELECT A.ID,A.StartDate,A.EndDate,A.JobTitle,A.Role,A.Current,O.Name AS OrgName
                                   FROM Affiliation A
                                   INNER JOIN Org O on O.ID=A.OrganizationID
                                   WHERE A.ID = {$affilliation_id} ");
@@ -129,7 +129,6 @@ class AffiliationController extends Page_Controller
                 $affiliation->OrgName = $affiliationDB['OrgName'];
                 $affiliation->StartDate = $affiliationDB['StartDate'];
                 $affiliation->EndDate = is_null($affiliationDB['EndDate']) ? '' : $affiliationDB['EndDate'];
-                //$affiliation->JobTitle = $affiliationDB['JobTitle'];
                 //$affiliation->Role = $affiliationDB['Role'];
                 $affiliation->Current = $affiliationDB['Current'];
                 echo json_encode($affiliation);
