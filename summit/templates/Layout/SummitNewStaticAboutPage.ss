@@ -50,6 +50,7 @@
           <li><a href="/summit/barcelona-2016/barcelona-and-travel/#hotels"><i class="fa fa-hotel"></i>Hotels &amp; Airport</a></li>
           <li><a href="/summit/barcelona-2016/guide-to-barcelona/"><i class="fa fa-compass"></i>Guide to Barcelona</a></li>
           <li><a href="/summit/barcelona-2016/travel-tips/"><i class="fa fa-map-signs"></i>Travel Tips</a></li>
+	  <li><a href="/summit/barcelona-2016/summit-map"><i class="fa fa-map-globe"></i>Summit Campus Maps</a></li>
           <li><a href="https://spousetivities.ticketleap.com/openstack-summit-2016-barcelona/" target="_blank"><i class="fa fa-bicycle"></i>Spousetivities</a></li>
       </ul>
 		</div>
