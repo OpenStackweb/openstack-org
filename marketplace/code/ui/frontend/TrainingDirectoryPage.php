@@ -30,7 +30,7 @@ class TrainingDirectoryPage_Controller extends MarketPlaceDirectoryPage_Controll
 
     static $url_handlers = array(
         'classes' => 'classes',
-        '$Loc!/$Level!/$Keyword!' => 'handleFilter',
+        'f/$Loc/$Level/$Keyword' => 'handleFilter',
         '$Company!/$Slug' => 'handleIndex',
     );
 
@@ -114,7 +114,7 @@ class TrainingDirectoryPage_Controller extends MarketPlaceDirectoryPage_Controll
     public function handleFilter()
     {
         $keyword = $this->request->param('Keyword');
-        $keyword_val = ($keyword == 'all') ? '' : $keyword;
+        $keyword_val = ($keyword == 'a') ? '' : $keyword;
         return $this->getViewer('')->process($this->customise(array('Keyword' => $keyword_val)));
     }
 

@@ -61,10 +61,17 @@ jQuery(document).ready(function($){
             if(last_filter_request!=null)
                 last_filter_request.abort();
 
-            var topic = (params.topic_term == '') ? 'all' : params.topic_term;
-            var location = (params.location_term == '') ? 'all' : params.location_term;
-            var level = (params.level_term == '') ? 'all' : params.level_term;
-            var state = '/marketplace/training/'+location+'/'+level+'/'+topic;
+            var topic = (params.topic_term == '') ? 'a' : params.topic_term;
+            var location = (params.location_term == '') ? 'a' : params.location_term;
+            var level = (params.level_term == '') ? 'a' : params.level_term;
+            var state = '/marketplace/training';
+            if (params.topic_term){
+                state += '/f/'+location+'/'+level+'/'+topic;
+            } else if (params.level_term){
+                state += '/f/'+location+'/'+level;
+            } else if (params.location_term){
+                state += '/f/'+location;
+            }
             history.pushState(null, null, state);
 
             last_filter_request = $.ajax({
