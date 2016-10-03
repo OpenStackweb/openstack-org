@@ -49,7 +49,7 @@ class MarketingCollateral extends DataObject {
         $image->setValidator($image_validator);
         $fields->push($image);
 
-        $files = new UploadField('CollateralFiles','Files');
+        $files = new UploadField('CollateralFiles','Files', $this->CollateralFiles());
         $files->setFolderName('marketing');
         $fields->push($files);
 
@@ -60,6 +60,30 @@ class MarketingCollateral extends DataObject {
         $fields->push(new HiddenField('ParentPageID','ParentPageID'));
 
         return $fields;
+    }
+
+    function getCollateralFilesGrouped() {
+        $result_array = array();
+        foreach ($this->CollateralFiles() as $file) {
+            if($file->Group) {
+                if (!isset($result_array[$file->Group])) {
+                    $result_array[$file->Group] = array();
+                }
+                $result_array[$file->Group][] = $file;
+
+            } else {
+                $result_array['single'][] = $file;
+            }
+        }
+
+        $result = ArrayList::create();
+        foreach ($result_array as $group => $items)
+        {
+            $group_list = new ArrayData(array('Group' => $group, 'GroupID' => str_replace(' ','_',$group), 'Items' => new ArrayList($items)));
+            $result->push($group_list);
+        }
+
+        return $result;
     }
 
 }

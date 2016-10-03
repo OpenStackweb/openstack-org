@@ -175,7 +175,7 @@ class MarketingPage_Controller extends Page_Controller{
         ");
     }
 
-    function getStickers() {
+    function getStickersGrouped() {
         $result_array = array();
         foreach ($this->Stickers() as $sticker) {
             if($sticker->GroupName) {
@@ -186,6 +186,54 @@ class MarketingPage_Controller extends Page_Controller{
 
             } else {
                 $result_array['single'][] = $sticker;
+            }
+        }
+
+        $result = ArrayList::create();
+        foreach ($result_array as $group => $items)
+        {
+            $group_list = new ArrayData(array('Group' => $group, 'GroupID' => str_replace(' ','_',$group), 'Items' => new ArrayList($items)));
+            $result->push($group_list);
+        }
+
+        return $result;
+    }
+
+    function getTShirtsGrouped() {
+        $result_array = array();
+        foreach ($this->TShirts() as $shirt) {
+            if($shirt->GroupName) {
+                if (!isset($result_array[$shirt->GroupName])) {
+                    $result_array[$shirt->GroupName] = array();
+                }
+                $result_array[$shirt->GroupName][] = $shirt;
+
+            } else {
+                $result_array['single'][] = $shirt;
+            }
+        }
+
+        $result = ArrayList::create();
+        foreach ($result_array as $group => $items)
+        {
+            $group_list = new ArrayData(array('Group' => $group, 'GroupID' => str_replace(' ','_',$group), 'Items' => new ArrayList($items)));
+            $result->push($group_list);
+        }
+
+        return $result;
+    }
+
+    function getBannersGrouped() {
+        $result_array = array();
+        foreach ($this->Banners() as $banner) {
+            if($banner->GroupName) {
+                if (!isset($result_array[$banner->GroupName])) {
+                    $result_array[$banner->GroupName] = array();
+                }
+                $result_array[$banner->GroupName][] = $banner;
+
+            } else {
+                $result_array['single'][] = $banner;
             }
         }
 

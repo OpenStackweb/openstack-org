@@ -37,13 +37,7 @@
             }
 			return false;
 		});
-		$('body').click(function(e) {
-			$('.folder-contents').fadeOut();
-		});
-		$('.close').click(function(e) {
-			$(this).parent().parent().fadeOut();
-			return false;
-		})
+
 
         $('.video_modal').on('hide.bs.modal', function () {
             var iframe_id = $(this).data('section')+'_iframe_'+$(this).data('video_id');

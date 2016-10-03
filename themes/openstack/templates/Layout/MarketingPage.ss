@@ -75,13 +75,46 @@
                             </h3>
                             <div class="small-descr">$Description</div>
                             <span class="hr"></span>
-                            <% loop $CollateralFiles %>
-                            <div class="row item_row">
-                                <div class="col-md-8 left-info">$Title</div>
-                                <div class="col-md-4">
-                                    <a href="$Link()" target="_blank" class="download">DOWNLOAD</a>
+                            <% loop $getCollateralFilesGrouped() %>
+                            <% if $Group == 'single' %>
+                                <% loop $Items %>
+                                    <div class="row item_row">
+                                        <div class="col-md-8 left-info">$Title</div>
+                                        <div class="col-md-4">
+                                            <a href="$Link()" target="_blank" class="download">DOWNLOAD</a>
+                                        </div>
+                                    </div>
+                                <% end_loop %>
+                            <% else %>
+                                <div class="row item_row">
+                                    <div class="col-md-8 left-info">$Group</div>
+                                    <div class="col-md-4">
+                                        <a class="download" href="#" data-toggle="modal" data-target="#{$GroupID}_modal">View All ($Items.Count())</a>
+                                    </div>
+                                    <div class="modal fade" id="{$GroupID}_modal" role="dialog" >
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                                    <h4 class="modal-title">$Group ($Items.Count())</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <ul class="content-list">
+                                                        <% loop $Items %>
+                                                        <div class="row item_row">
+                                                            <div class="col-md-8 left-info">$Title</div>
+                                                            <div class="col-md-4">
+                                                                <a href="$Link()" target="_blank" class="download">DOWNLOAD</a>
+                                                            </div>
+                                                        </div>
+                                                        <% end_loop %>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            <% end_if %>
                             <% end_loop %>
                             <% loop $CollateralLinks %>
                             <div class="row item_row">
@@ -162,67 +195,24 @@
                 <div class="tab-header">$GraphicsIntroText</div>
                 <h3 class="blue-title">Sticker Files</h3>
                 <ul class="content-list">
-                    <% loop $getStickers() %>
-                        <% if $Group == 'single' %>
-                            <% loop $Items %>
-                                <li>
-                                    $Thumbnail.getTag()
-                                    <p>$Label</p>
-                                    <a class="download" href="$Doc.Link()" target="_blank">Download</a>
-                                </li>
-                            <% end_loop %>
-                        <% else %>
-                            <li>
-                                $Items.First().Thumbnail.getTag()
-                                <p>$Group</p>
-                                <a class="download" href="#" data-toggle="modal" data-target="#{$GroupID}_modal">View All ($Items.Count())</a>
-                                <div class="modal fade" id="{$GroupID}_modal" role="dialog" >
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                                                <h4 class="modal-title">$Group ($Items.Count())</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <ul class="content-list">
-                                                    <% loop $Items %>
-                                                    <li>
-                                                        $Thumbnail.getTag()
-                                                        <p>$Label</p>
-                                                        <a class="download" href="$Doc.Link()" target="_blank">Download</a>
-                                                    </li>
-                                                    <% end_loop %>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        <% end_if %>
+                    <% loop $getStickersGrouped() %>
+                        <% include MarketingPage_GroupedItems %>
                     <% end_loop %>
                 </ul>
                 <span class="hr"></span>
 
                 <h3 class="blue-title">T-Shirt Files</h3>
                 <ul class="content-list">
-                    <% loop $TShirts() %>
-                    <li>
-                        $Thumbnail.getTag()
-                        <p>$Label</p>
-                        <a class="download" href="$Doc.Link()" target="_blank">Download</a>
-                    </li>
+                    <% loop $getTShirtsGrouped() %>
+                        <% include MarketingPage_GroupedItems %>
                     <% end_loop %>
                 </ul>
                 <span class="hr"></span>
 
                 <h3 class="blue-title">Banner & Poster Files</h3>
                 <ul class="content-list">
-                    <% loop $Banners() %>
-                    <li>
-                        $Thumbnail.getTag()
-                        <p>$Label</p>
-                        <a class="download" href="$Doc.Link()" target="_blank">Download</a>
-                    </li>
+                    <% loop $BannersGrouped() %>
+                        <% include MarketingPage_GroupedItems %>
                     <% end_loop %>
                 </ul>
                 <span class="hr"></span>
