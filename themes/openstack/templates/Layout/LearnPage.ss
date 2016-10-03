@@ -33,7 +33,7 @@
                             <p>
                                 Find online and location specific trainings for all levels of expertise from the OpenStack Marketplace.
                             </p>
-                            <a href="//www.openstack.org/marketplace/training/" class="learn-btn">
+                            <a href="/marketplace/training/" class="learn-btn">
                                 Go to Training <i class="fa fa-chevron-right"></i>
                             </a>
                         </div>
@@ -47,7 +47,7 @@
                             <p>
                                 Register for the COA exam, the first professional certification offered by the OpenStack Foundation.
                             </p>
-                            <a href="https://www.openstack.org/coa" class="learn-btn">
+                            <a href="/coa" class="learn-btn">
                                 Go to COA <i class="fa fa-chevron-right"></i>
                             </a>
                         </div>
@@ -63,7 +63,7 @@
                             <p>
                                 With topics ranging from how-tos, case studies, organizational culture and more, this publication will give you the tools needed to become a Superuser.
                             </p>
-                            <a href="//superuser.openstack.org" class="learn-btn">
+                            <a href="http://superuser.openstack.org" class="learn-btn">
                                 Go to Superuser <i class="fa fa-chevron-right"></i>
                             </a>
                         </div>
@@ -77,7 +77,7 @@
                             <p>
                                 Dig deep into the the world of OpenStack through the eyes of those who operate and develop OpenStack. Ask, find and answer OpenStack specific questions here.
                             </p>
-                            <a href="//ask.openstack.org" class="learn-btn">
+                            <a href="http://ask.openstack.org" class="learn-btn">
                                 Go to Ask OpenStack <i class="fa fa-chevron-right"></i>
                             </a>
                         </div>
@@ -93,7 +93,7 @@
                             <p>
                                 Did you know almost every session at an OpenStack Summit is recorded and shared for the world to see? They are and you can find them here!
                             </p>
-                            <a href="https://www.openstack.org/summit/tokyo-2015/summit-videos" class="learn-btn">
+                            <a href="/videos" class="learn-btn">
                                 Go to Summit Videos <i class="fa fa-chevron-right"></i>
                             </a>
                         </div>
@@ -107,7 +107,7 @@
                             <p>
                                 Find the latest research and insights from leading technology analysts on the power of OpenStack’s cloud services.
                             </p>
-                            <a href="https://www.openstack.org/analysts" class="learn-btn">
+                            <a href="/analysts" class="learn-btn">
                                 Go to Analyst Reports <i class="fa fa-chevron-right"></i>
                             </a>
                         </div>
@@ -123,7 +123,7 @@
                             <p>
                                 The OpenStack blog is an ever-changing wealth of information, highlighting everything from technical committee updates to events and weekly community newsletters.
                             </p>
-                            <a href="https://www.openstack.org/blog" class="learn-btn">
+                            <a href="/blog" class="learn-btn">
                                 Go to the Blog <i class="fa fa-chevron-right"></i>
                             </a>
                         </div>
@@ -137,7 +137,7 @@
                             <p>
                                 Read about the latest happenings in the OpenStack ecosystem. The news section features news from around the community and the OpenStack Foundation.
                             </p>
-                            <a href="https://www.openstack.org/news" class="learn-btn">
+                            <a href="/news" class="learn-btn">
                                 Go to the News Page <i class="fa fa-chevron-right"></i>
                             </a>
                         </div>
