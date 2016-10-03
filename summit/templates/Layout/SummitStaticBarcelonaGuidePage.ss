@@ -887,11 +887,11 @@
 			La Roca Village
 		</div>
 		<div class="col-sm-4">
-			Passeig de Gràcia, 6, 08007 Barcelona, Spain
+			s/n, 08430 Santa Agnès de Malanyanes, Barcelona, España
 		</div>
 		<div class="col-sm-4">
 			<a href="https://www.larocavillage.com/en/home/" target="_blank">Website</a> |
-			<a href="https://goo.gl/maps/Zc4UmJd2D6k" target="_blank">Map</a>
+			<a href="https://goo.gl/maps/gE3eNY9yM8n" target="_blank">Map</a>
 		</div>
 	</div>
 	<div class="row guide-listing">
