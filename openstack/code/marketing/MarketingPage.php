@@ -192,7 +192,7 @@ class MarketingPage_Controller extends Page_Controller{
         $result = ArrayList::create();
         foreach ($result_array as $group => $items)
         {
-            $group_list = new ArrayData(array('Group' => $group, 'Items' => new ArrayList($items)));
+            $group_list = new ArrayData(array('Group' => $group, 'GroupID' => str_replace(' ','_',$group), 'Items' => new ArrayList($items)));
             $result->push($group_list);
         }
 

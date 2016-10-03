@@ -175,8 +175,8 @@
                             <li>
                                 $Items.First().Thumbnail.getTag()
                                 <p>$Group</p>
-                                <a class="download" href="#" data-toggle="modal" data-target="#{$Group}_modal">View All ($Items.Count())</a>
-                                <div class="modal fade" id="{$Group}_modal" role="dialog" >
+                                <a class="download" href="#" data-toggle="modal" data-target="#{$GroupID}_modal">View All ($Items.Count())</a>
+                                <div class="modal fade" id="{$GroupID}_modal" role="dialog" >
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
