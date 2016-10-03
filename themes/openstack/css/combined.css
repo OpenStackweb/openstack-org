@@ -2137,6 +2137,14 @@ img.deploy-compatible {
 img.icehouse-video {
   max-width: 100%; }
 
+h1.release {
+  text-align: left;
+}
+
+.rightLogo {
+
+}
+
 .documentation {
   margin-top: 50px;
   text-align: center;
@@ -2149,7 +2157,9 @@ img.icehouse-video {
   background: #30739C;
   color: #edf2f7;
   margin: 0 8px;
-  border-radius: 4px; }
+  border-radius: 4px;
+  display: inline-block; 
+  }
 
 .documentation a:hover {
   text-decoration: none;
@@ -2157,9 +2167,12 @@ img.icehouse-video {
 
 @media (max-width: 767px) {
   .documentation a {
-    padding: 5px 10px;
-    margin: 0 5px;
-    font-size: 12px; } }
+    padding: 10px;
+    margin: 5px;
+    font-size: 14px;
+    display: block; 
+    } 
+    }
 
 /*End Sofware Page*/
 /*Marketplace Page*/
