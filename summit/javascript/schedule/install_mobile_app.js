@@ -18,21 +18,28 @@
         var is_mobile              = bowser.mobile ||  bowser.tablet;
         var is_ios                 = bowser.ios;
         var is_android             = bowser.android;
+        var is_safari              = bowser.safari
         var os_version             = bowser.osversion;
         var browser_version        = bowser.version;
         var current_url            = window.location.href;
-        var compare_safari_version = is_ios ? bowser.compareVersions([browser_version, '9']): 0
+        var compare_os_version     = is_ios ? bowser.compareVersions([os_version, '9']): 0
         var uri                    = URI(current_url);
 
-        console.log('os_version '+os_version+' browser_version '+browser_version);
-        console.log('compare '+ compare_safari_version);
         var has_meta_app_links = (typeof $("meta[property='al:android:url']").attr("content") != "undefined" || typeof $("meta[property='al:ios:url']").attr("content") != "undefined");
         if (is_mobile && has_meta_app_links){
             var os = is_android ? 'Android' : 'IOS';
-            if(is_ios && compare_safari_version >=0 ) return;
-            // check if we are on RSVP page
+            // ios and safari and ios >= 9 dont show anything
+            if(is_ios && is_safari && compare_os_version >=0 ) return;
+            // check if we are on RSVP page, dont show it
             console.log('uri path '+uri.path());
             if(uri.path().indexOf('/rsvp') !== -1 ) return;
+
+            var install_mobile_app_action = $.cookie('install_mobile_app_action');
+            var show_download_button      = typeof install_mobile_app_action == 'undefined';
+            // on ios && safari and ios <= 8 do not show download button
+            if(is_ios && is_safari && compare_os_version < 0)
+                show_download_button = false
+
             $('<div></div>')
                 .attr('id','install-app-overlay')
                 .css('opacity',.9)
@@ -45,7 +52,7 @@
                     },800);
                 }).appendTo('body');
 
-            var install_mobile_app_action = $.cookie('install_mobile_app_action');
+
 
             var install_dialog_html =
                 '<div class="row">'+
@@ -66,7 +73,7 @@
                 '</div>'+
                 '<div class="row">';
 
-            if (typeof install_mobile_app_action == 'undefined') {
+            if (show_download_button) {
                 install_dialog_html +=
                     '<button type="button" id="btn-download" title="Download it" class="btn btn-action btn-success btn-xs">Download for ' + os + '</button>' +
                     '<button type="button" id="btn-launch" title="Launch it" class="btn btn-action btn-success btn-xs">Already Installed? Launch It</button>';
