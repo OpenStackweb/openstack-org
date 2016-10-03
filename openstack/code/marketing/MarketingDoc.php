@@ -15,6 +15,7 @@ class MarketingDoc extends DataObject {
 
     private static $db = array(
         'Label'     => 'Varchar(255)',
+        'GroupName' => 'Varchar(255)',
         'SortOrder' => 'Int',
     );
 
@@ -45,6 +46,7 @@ class MarketingDoc extends DataObject {
         $doc->getValidator()->setAllowedMaxFileSize(40*1024*1024);
 
         $fields->push(new TextField('Label'));
+        $fields->push(new TextField('GroupName','Group (leave this empty if singular)'));
         $fields->push(new TextField('SortOrder'));
         $fields->push($doc);
         $fields->push($image);

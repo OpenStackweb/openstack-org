@@ -175,4 +175,28 @@ class MarketingPage_Controller extends Page_Controller{
         ");
     }
 
+    function getStickers() {
+        $result_array = array();
+        foreach ($this->Stickers() as $sticker) {
+            if($sticker->GroupName) {
+                if (!isset($result_array[$sticker->GroupName])) {
+                    $result_array[$sticker->GroupName] = array();
+                }
+                $result_array[$sticker->GroupName][] = $sticker;
+
+            } else {
+                $result_array['single'][] = $sticker;
+            }
+        }
+
+        $result = ArrayList::create();
+        foreach ($result_array as $group => $items)
+        {
+            $group_list = new ArrayData(array('Group' => $group, 'Items' => new ArrayList($items)));
+            $result->push($group_list);
+        }
+
+        return $result;
+    }
+
 }

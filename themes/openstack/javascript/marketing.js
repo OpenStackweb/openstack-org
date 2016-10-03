@@ -45,12 +45,12 @@
 			return false;
 		})
 
-        $('.modal').on('hide.bs.modal', function () {
+        $('.video_modal').on('hide.bs.modal', function () {
             var iframe_id = $(this).data('section')+'_iframe_'+$(this).data('video_id');
             toggleVideo(iframe_id,'stopVideo');
         });
 
-        $('.modal').on('show.bs.modal', function () {
+        $('.video_modal').on('show.bs.modal', function () {
             var iframe_id = $(this).data('section')+'_iframe_'+$(this).data('video_id');
             toggleVideo(iframe_id,'playVideo');
         });

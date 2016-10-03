@@ -76,16 +76,20 @@
                             <div class="small-descr">$Description</div>
                             <span class="hr"></span>
                             <% loop $CollateralFiles %>
-                            <p>
-                                <span class="left-info">$Title</span>
-                                <a href="$Link()" target="_blank" class="download">DOWNLOAD</a>
-                            </p>
+                            <div class="row item_row">
+                                <div class="col-md-8 left-info">$Title</div>
+                                <div class="col-md-4">
+                                    <a href="$Link()" target="_blank" class="download">DOWNLOAD</a>
+                                </div>
+                            </div>
                             <% end_loop %>
                             <% loop $CollateralLinks %>
-                            <p>
-                                <span class="left-info">$Title</span>
-                                <a href="$Link" target="_blank" class="download">DOWNLOAD</a>
-                            </p>
+                            <div class="row item_row">
+                                <div class="col-md-8 left-info">$Title</div>
+                                <div class="col-md-4">
+                                    <a href="$Link()" target="_blank" class="download">DOWNLOAD</a>
+                                </div>
+                            </div>
                             <% end_loop %>
                         </div>
                     </div>
@@ -158,19 +162,43 @@
                 <div class="tab-header">$GraphicsIntroText</div>
                 <h3 class="blue-title">Sticker Files</h3>
                 <ul class="content-list">
-                    <!--If this is a group-->
-                    <li>
-                        <img src="/assets/marketing/OpenStackStickerThumbnail.png" alt="OpenStackStickerThumbnail">
-                        <p>T-Shirt contest winners</p>
-                        <a class="download" href="#" data-toggle="modal" data-target="#groupingModal">View All (5)</a>
-                    </li>
-                    <!--End group UI-->
-                    <% loop $Stickers() %>
-                    <li>
-                        $Thumbnail.getTag()
-                        <p>$Label</p>
-                        <a class="download" href="$Doc.Link()" target="_blank">Download</a>
-                    </li>
+                    <% loop $getStickers() %>
+                        <% if $Group == 'single' %>
+                            <% loop $Items %>
+                                <li>
+                                    $Thumbnail.getTag()
+                                    <p>$Label</p>
+                                    <a class="download" href="$Doc.Link()" target="_blank">Download</a>
+                                </li>
+                            <% end_loop %>
+                        <% else %>
+                            <li>
+                                $Items.First().Thumbnail.getTag()
+                                <p>$Group</p>
+                                <a class="download" href="#" data-toggle="modal" data-target="#{$Group}_modal">View All ($Items.Count())</a>
+                                <div class="modal fade" id="{$Group}_modal" role="dialog" >
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                                <h4 class="modal-title">$Group ($Items.Count())</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <ul class="content-list">
+                                                    <% loop $Items %>
+                                                    <li>
+                                                        $Thumbnail.getTag()
+                                                        <p>$Label</p>
+                                                        <a class="download" href="$Doc.Link()" target="_blank">Download</a>
+                                                    </li>
+                                                    <% end_loop %>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        <% end_if %>
                     <% end_loop %>
                 </ul>
                 <span class="hr"></span>
@@ -206,7 +234,7 @@
                         <img src="$getThumbnailUrl()" width="245" height="135"/>
                         <p>$Caption</p>
                         <a class="download" href="#graphics_modal_{$YoutubeID}" data-toggle="modal" >Watch</a>
-                        <div id="graphics_modal_{$YoutubeID}" data-video_id="{$YoutubeID}" data-section="graphics" class="modal fade">
+                        <div id="graphics_modal_{$YoutubeID}" data-video_id="{$YoutubeID}" data-section="graphics" class="modal fade video_modal">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-body">
@@ -219,46 +247,6 @@
                     <% end_loop %>
                 </ul>
             </div>
-
-            <!--Grouping modal UI-->
-                <div class="modal fade" id="groupingModal" tabindex="-1" role="dialog" aria-labelledby="groupingModal">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                        <h4 class="modal-title">T-Shirt contest winners (5)</h4>
-                    </div>
-                    <div class="modal-body">
-                        <ul class="content-list">
-                            <li>
-                                <img src="/assets/marketing/OpenStackStickerSheetThumbnail.png" alt="OpenStackStickerSheetThumbnail">
-                                <p>OpenStack Sticker Sheet</p>
-                                <a class="download" href="/assets/marketing/Sticker-Sheet.pdf" target="_blank">Download</a>
-                            </li>
-                            <li>
-                                <img src="/assets/marketing/OpenStackStickerSheetThumbnail.png" alt="OpenStackStickerSheetThumbnail">
-                                <p>OpenStack Sticker Sheet</p>
-                                <a class="download" href="/assets/marketing/Sticker-Sheet.pdf" target="_blank">Download</a>
-                            </li>
-                            <li>
-                                <img src="/assets/marketing/OpenStackStickerSheetThumbnail.png" alt="OpenStackStickerSheetThumbnail">
-                                <p>OpenStack Sticker Sheet</p>
-                                <a class="download" href="/assets/marketing/Sticker-Sheet.pdf" target="_blank">Download</a>
-                            </li>
-                            <li>
-                                <img src="/assets/marketing/OpenStackStickerSheetThumbnail.png" alt="OpenStackStickerSheetThumbnail">
-                                <p>OpenStack Sticker Sheet</p>
-                                <a class="download" href="/assets/marketing/Sticker-Sheet.pdf" target="_blank">Download</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="modal-footer">
-                    </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-                </div>
-            <!--End grouping modal UI-->
-
         </div>
         <div id="promote_product" class="tab-pane fade in tab-page" role="tabpanel">
             <div class="container">

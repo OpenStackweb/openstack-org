@@ -96,6 +96,9 @@
     color: #555;
     font-size: 12px;
 }
+.item_row {
+    margin-bottom: 10px;
+}
 a.red-button{
     background-color: #be342b;
     border-radius: 4px;
