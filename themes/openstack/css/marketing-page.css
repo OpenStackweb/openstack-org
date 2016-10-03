@@ -496,6 +496,14 @@ span.soon{
 .slider-container{
     padding: 0px;
 }
+#groupingModal .modal-header {
+    border-bottom: 0;
+    padding: 15px 15px 0;
+}
+#groupingModal .modal-footer {
+    border-top: 0;
+    padding: 0;
+}
 @media (max-width: 480px){
     .slider-container{
         padding: 0 35px;

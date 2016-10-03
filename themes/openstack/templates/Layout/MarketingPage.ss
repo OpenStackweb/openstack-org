@@ -158,9 +158,16 @@
                 <div class="tab-header">$GraphicsIntroText</div>
                 <h3 class="blue-title">Sticker Files</h3>
                 <ul class="content-list">
+                    <!--If this is a group-->
+                    <li>
+                        <img src="/assets/marketing/OpenStackStickerThumbnail.png" alt="OpenStackStickerThumbnail">
+                        <p>T-Shirt contest winners</p>
+                        <a class="download" href="#" data-toggle="modal" data-target="#groupingModal">View All (5)</a>
+                    </li>
+                    <!--End group UI-->
                     <% loop $Stickers() %>
                     <li>
-                        $Thumbnail.getTag();
+                        $Thumbnail.getTag()
                         <p>$Label</p>
                         <a class="download" href="$Doc.Link()" target="_blank">Download</a>
                     </li>
@@ -172,7 +179,7 @@
                 <ul class="content-list">
                     <% loop $TShirts() %>
                     <li>
-                        $Thumbnail.getTag();
+                        $Thumbnail.getTag()
                         <p>$Label</p>
                         <a class="download" href="$Doc.Link()" target="_blank">Download</a>
                     </li>
@@ -184,7 +191,7 @@
                 <ul class="content-list">
                     <% loop $Banners() %>
                     <li>
-                        $Thumbnail.getTag();
+                        $Thumbnail.getTag()
                         <p>$Label</p>
                         <a class="download" href="$Doc.Link()" target="_blank">Download</a>
                     </li>
@@ -212,6 +219,46 @@
                     <% end_loop %>
                 </ul>
             </div>
+
+            <!--Grouping modal UI-->
+                <div class="modal fade" id="groupingModal" tabindex="-1" role="dialog" aria-labelledby="groupingModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title">T-Shirt contest winners (5)</h4>
+                    </div>
+                    <div class="modal-body">
+                        <ul class="content-list">
+                            <li>
+                                <img src="/assets/marketing/OpenStackStickerSheetThumbnail.png" alt="OpenStackStickerSheetThumbnail">
+                                <p>OpenStack Sticker Sheet</p>
+                                <a class="download" href="/assets/marketing/Sticker-Sheet.pdf" target="_blank">Download</a>
+                            </li>
+                            <li>
+                                <img src="/assets/marketing/OpenStackStickerSheetThumbnail.png" alt="OpenStackStickerSheetThumbnail">
+                                <p>OpenStack Sticker Sheet</p>
+                                <a class="download" href="/assets/marketing/Sticker-Sheet.pdf" target="_blank">Download</a>
+                            </li>
+                            <li>
+                                <img src="/assets/marketing/OpenStackStickerSheetThumbnail.png" alt="OpenStackStickerSheetThumbnail">
+                                <p>OpenStack Sticker Sheet</p>
+                                <a class="download" href="/assets/marketing/Sticker-Sheet.pdf" target="_blank">Download</a>
+                            </li>
+                            <li>
+                                <img src="/assets/marketing/OpenStackStickerSheetThumbnail.png" alt="OpenStackStickerSheetThumbnail">
+                                <p>OpenStack Sticker Sheet</p>
+                                <a class="download" href="/assets/marketing/Sticker-Sheet.pdf" target="_blank">Download</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+                </div>
+            <!--End grouping modal UI-->
+
         </div>
         <div id="promote_product" class="tab-pane fade in tab-page" role="tabpanel">
             <div class="container">
