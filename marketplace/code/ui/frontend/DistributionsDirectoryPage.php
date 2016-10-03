@@ -26,8 +26,8 @@ class DistributionsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Con
     );
 
     static $url_handlers = array(
+        'f/$Service/$Keyword' => 'handleFilter',
         '$Type!/$Company!/$Slug!' => 'handleIndex',
-        '$Service!/$Keyword!' => 'handleFilter',
     );
 
     /**
@@ -148,7 +148,7 @@ class DistributionsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Con
     public function handleFilter()
     {
         $keyword = $this->request->param('Keyword');
-        $keyword_val = ($keyword == 'all') ? '' : $keyword;
+        $keyword_val = ($keyword == 'a') ? '' : $keyword;
         return $this->getViewer('')->process($this->customise(array('Keyword' => $keyword_val)));
     }
 

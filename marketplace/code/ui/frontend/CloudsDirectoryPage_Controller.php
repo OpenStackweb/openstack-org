@@ -36,7 +36,7 @@ abstract class CloudsDirectoryPage_Controller extends MarketPlaceDirectoryPage_C
 	protected $manager;
 
 	static $url_handlers = array(
-        '$Loc!/$Service!/$Keyword!' => 'handleFilter',
+        'f/$Loc/$Service/$Keyword' => 'handleFilter',
 		'$Company!/$Slug!' => 'handleIndex',
 	);
 
@@ -207,7 +207,7 @@ abstract class CloudsDirectoryPage_Controller extends MarketPlaceDirectoryPage_C
     public function handleFilter()
     {
         $keyword = $this->request->param('Keyword');
-        $keyword_val = ($keyword == 'all') ? '' : $keyword;
+        $keyword_val = ($keyword == 'a') ? '' : $keyword;
         return $this->getViewer('')->process($this->customise(array('Keyword' => $keyword_val)));
     }
 

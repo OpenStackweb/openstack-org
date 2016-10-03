@@ -52,10 +52,17 @@ jQuery(document).ready(function($){
         if(last_filter_request!=null)
             last_filter_request.abort();
 
-        var name_term = (params.name_term == '') ? 'all' : params.name_term;
-        var location = (params.location_term == '') ? 'all' : params.location_term;
-        var service = (params.service_term == '') ? 'all' : params.service_term;
-        var state = '/marketplace/'+cloud_type+'/'+location+'/'+service+'/'+name_term;
+        var name_term = (params.name_term == '') ? 'a' : params.name_term;
+        var location = (params.location_term == '') ? 'a' : params.location_term;
+        var service = (params.service_term == '') ? 'a' : params.service_term;
+        var state = '/marketplace/'+cloud_type;
+        if (params.name_term){
+            state += '/f/'+location+'/'+service+'/'+name_term;
+        } else if (params.service_term){
+            state += '/f/'+location+'/'+service;
+        } else if (params.location_term){
+            state += '/f/'+location;
+        }
         history.pushState(null, null, state);
 
         $('#map').slideUp('slow');

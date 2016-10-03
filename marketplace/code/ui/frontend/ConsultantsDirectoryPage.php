@@ -53,7 +53,7 @@ class ConsultantsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Contr
     private $consultants_regions_query;
 
 	static $url_handlers = array(
-        '$Loc!/$Service!/$Keyword!/$Region!' => 'handleFilter',
+        'f/$Loc/$Service/$Keyword/$Region' => 'handleFilter',
 		'$Company!/$Slug!' => 'handleIndex',
 	);
 
@@ -131,7 +131,7 @@ class ConsultantsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Contr
     public function handleFilter()
     {
         $keyword = $this->request->param('Keyword');
-        $keyword_val = ($keyword == 'all') ? '' : $keyword;
+        $keyword_val = ($keyword == 'a') ? '' : $keyword;
         return $this->getViewer('')->process($this->customise(array('Keyword' => $keyword_val)));
     }
 

@@ -59,11 +59,21 @@ jQuery(document).ready(function($){
         if(last_filter_request!=null)
             last_filter_request.abort();
 
-        var topic = (params.topic_term == '') ? 'all' : params.topic_term;
-        var location = (params.location_term == '') ? 'all' : params.location_term;
-        var level = (params.level_term == '') ? 'all' : params.level_term;
-        var region = (params.region_term == '') ? 'all' : params.region_term;
-        var state = '/marketplace/consulting/'+location+'/'+level+'/'+topic+'/'+region;
+        var topic = (params.name_term == '') ? 'a' : params.name_term;
+        var location = (params.location_term == '') ? 'a' : params.location_term;
+        var service = (params.service_term == '') ? 'a' : params.service_term;
+        var region = (params.region_term == '') ? 'a' : params.region_term;
+
+        var state = '/marketplace/consulting';
+        if (params.region_term){
+            state += '/f/'+location+'/'+service+'/'+topic+'/'+region;
+        } else if (params.name_term){
+            state += '/f/'+location+'/'+service+'/'+topic;
+        } else if (params.service_term){
+            state += '/f/'+location+'/'+service;
+        } else if (params.location_term){
+            state += '/f/'+location;
+        }
         history.pushState(null, null, state);
 
         $('#map').slideUp('slow');
