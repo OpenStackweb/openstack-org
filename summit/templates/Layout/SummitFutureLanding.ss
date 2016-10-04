@@ -18,6 +18,9 @@
                        <br>
                        More details coming soon...
                     </div>
+                <div> 
+                  <a href="//openstack.org/assets/boston-summit/Boston-Sponsorship-Prospectus.pdf" class="btn register-btn-lrg" style="margin: 10px;">Download The Prospectus<i class="fa fa-cloud-download"></i></a> 
+                </div> 
                 <div class="landing-social">
                     <a target="_blank" class="social-icons landing-twitter" onclick="return windowpop(this.href, 545, 433)" href="http://twitter.com/share?text=The May 2017 OpenStack Summit will be in Boston&url=http://openstack.org/summit/boston-2017/"></a>
                     <a target="_blank" class="social-icons landing-facebook" onclick="return windowpop(this.href, 545, 433)" 
