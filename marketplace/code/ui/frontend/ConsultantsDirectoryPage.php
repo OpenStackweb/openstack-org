@@ -276,7 +276,7 @@ class ConsultantsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Contr
         $region = $this->request->param('Region');
         $result = $this->consultants_regions_query->handle(new OpenStackImplementationNamesQuerySpecification(''));
         foreach($result->getResult() as $dto){
-            $source[$dto->getValue()] =  $dto->getLabel();
+            $source[$dto->getLabel()] =  $dto->getLabel();
         }
         $ddl = new DropdownField('region-term"',$title = null,$source,$region);
         $ddl->setEmptyString('-- Show All --');

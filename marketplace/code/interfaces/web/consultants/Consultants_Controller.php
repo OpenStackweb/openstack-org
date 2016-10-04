@@ -106,7 +106,8 @@ final class Consultants_Controller extends AbstractController
                     $query->addAndCondition(QueryCriteria::like("ConsultantServiceOfferedType.Type", $service));
                 }
                 if (!empty($region)) {
-                    $query->addAndCondition(QueryCriteria::id("Consultant_ServicesOffered.RegionID", $region));
+                    $region_id = Region::get()->filter('Name',$region)->first()->ID;
+                    $query->addAndCondition(QueryCriteria::id("Consultant_ServicesOffered.RegionID", $region_id));
                 }
             }
 
