@@ -122,6 +122,11 @@
                     </div>
                 </div>
             </div>
+            <div class="row section-end"> 
+                <div class="col-sm-12 booklets-end">
+                  <p>Or, purchase both as a single paperback book, the <a href="https://www.amazon.com/dp/1536868337/" target="_blank">OpenStack Strategy &amp; Planning Guide</a>!</p>
+                </div>
+          </div>
         </div>
     </div>
     <div class="featured-use-case-wrapper light-blue">

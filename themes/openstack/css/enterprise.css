@@ -272,6 +272,15 @@ a.marketplace-btn:hover {
   top: 50%;
   left: 100%; }
 
+  .section-end {
+    margin-top: 30px;
+  }
+
+.booklets-section .booklets-end a, a:visited, a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
 @media (max-width: 767px) {
   .section-title-center h4.above::before {
     width: 30px; }
