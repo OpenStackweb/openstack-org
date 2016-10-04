@@ -42,7 +42,7 @@
                     You can see how this plays out in the timeline below.
                 </p>
                 <p>
-                    <a href="/images/ptg/ptg-release-timeline.png" target="_blank">
+                    <a href="//openstack.org/themes/openstack/images/summit-ptg-timeline-revised.png" target="_blank">
                         <img class="ptg-release-timeline" src="//openstack.org/themes/openstack/images/summit-ptg-timeline-revised.png" alt="Project Teams Gathering vs Design Summit">
                     </a>
                 </p>
