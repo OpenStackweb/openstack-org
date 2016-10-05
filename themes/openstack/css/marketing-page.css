@@ -120,6 +120,9 @@ a.red-button{
 .tab-page .row img{
     max-width: 100%;
     width: 100%;
+    max-height: 125px;
+    margin: 0 auto;
+    display: block;
 }
 .row .pd-8{
     padding: 8px;
