@@ -111,14 +111,14 @@
     <ul>
         <li>Surveys Data</li>
         <ul>
-            <li><a href="$Link(SurveyBuilderListSurveys)">View Deployment Survey</a></li>
-            <li><a href="$Link(SurveyBuilderListDeployments)">View Deployments</a></li>
+            <li><a href="$Link(SurveyBuilderListSurveys)">Full Survey</a></li>
+            <li><a href="$Link(SurveyBuilderListDeployments)">Deployment Data Only</a></li>
         </ul>
 
         <li>Statistics</li>
             <ul>
-                <li><a href="/sangria/ViewSurveysStatisticsSurveyBuilder">Deployment Survey Stats</a></li>
-                <li><a href="/sangria/ViewDeploymentStatisticsSurveyBuilder">Deployment Stats</a></li>
+                <li><a href="/sangria/ViewSurveysStatisticsSurveyBuilder">Full Survey Stats</a></li>
+                <li><a href="/sangria/ViewDeploymentStatisticsSurveyBuilder">Deployment Only Stats</a></li>
             </ul>
         <li>Export Data</li>
             <ul>

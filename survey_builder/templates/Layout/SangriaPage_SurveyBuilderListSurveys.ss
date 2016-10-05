@@ -5,7 +5,7 @@
     <thead>
         <tr>
             <th><a href="$Top.Link(SurveyBuilderListSurveys)?$Top.getOrderLink(id)" title="order by Id">Id<i class="fa fa-fw fa-sort"></i></a></th>
-            <th><a href="$Top.Link(SurveyBuilderListSurveys)?$Top.getOrderLink(created)" title="order by Created Date">Created<i class="fa fa-fw fa-sort"></i></a></th>
+            <th><a href="$Top.Link(SurveyBuilderListSurveys)?$Top.getOrderLink(updated)" title="order by Updated Date">Updated<i class="fa fa-fw fa-sort"></i></a></th>
             <th>Created By</th>
             <th>Organization</th>
             <th>Current Step</th>
@@ -18,7 +18,7 @@
     <% loop $Surveys %>
         <tr>
             <td>$ID</td>
-            <td>$Created</td>
+            <td>$LastEdited</td>
             <td>$CreatedBy.Email</td>
             <td>$getAnswerFor(Organization)</td>
             <td>$CurrentStep.Template.Name</td>
