@@ -15,8 +15,8 @@
                     <div class="col-sm-6">
                      $IntroText
                     </div>
-                    <div class="col-sm-6"><a rel="shadowbox" href="//www.youtube.com/v/N90ufYN0B6U"><img class="icehouse-video" title="" src="assets/software/mitaka/demo-screenshot.jpg" alt="Mitaka Demo" /></a>
-                        <h4>Mitaka OpenStack Overview (4:15)</h4>
+                    <div class="col-sm-6"><a rel="shadowbox" href="//www.youtube.com/v/z6ftW7fUdp4"><img class="icehouse-video" title="" src="assets/software/newton/newton-video-thumb.png" alt="Newton Demo" /></a>
+                        <h4>Newton OpenStack Overview (4:02)</h4>
                     </div>
                 </div>
             </div>
