@@ -12,17 +12,18 @@
    font-weight: 300;
    color: #edf2f7 ; }
 .appdev-download-row a.container-download-btn {
-   background: #2A4E68 ;
+   background: #2A4E68;
    color: white;
    padding: 15px;
    width: 100%;
    border-radius: 4px;
    display: block;
-   margin-top: 20px; }
+   margin-top: 10px;
+   }
  .appdev-download-row a.container-download-btn i {
    margin-left: 5px; }
 .appdev-download-row a.container-download-btn:hover {
-   background: #0C1722 ;
+   background: #0C1722;
    text-decoration: none; }
 .foundation-report-title {
   font-size: 1.1em;
@@ -56,12 +57,16 @@
     padding: 0; }
     .intro-header.nfv .intro-message h1 {
       text-align: center;
-      margin-bottom: 20px;
-      font-size: 2.5em; }
+      margin-bottom: 15px;
+      font-weight: 600;
+      font-size: 2em; 
+      }
     .intro-header.nfv .intro-message p {
       text-align: center;
-      font-size: 1.3em;
-      font-weight: 300; }
+      font-size: 2em;
+      font-weight: 300;
+      line-height: 1.1; 
+      }
 
 .appdev-download-row.nfv p {
   font-weight: 400; }

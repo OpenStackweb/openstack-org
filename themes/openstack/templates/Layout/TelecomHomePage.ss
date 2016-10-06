@@ -11,12 +11,10 @@
                 <div class="row">
                     <div class="col-lg-10 col-lg-push-1 col-md-10 col-md-push-1 col-sm-12">
                         <div class="intro-message">
-                            <div class="foundation-report-title">
-                                OpenStack Foundation Report
-                            </div>
-                            <h1>Accelerating NFV Delivery with OpenStack</h1>
+                            <h1>
+                                86% of global telecoms report OpenStack important to their success</h1>
                             <p>
-                                For global telecoms, Network Functions Virtualization brings agility and cost savings 
+                                Network Functions Virtualization, Internet of Things and 5G emerge as leading use cases. 
                             </p>
                         </div>
                     </div>
@@ -31,18 +29,21 @@
             <div class="row">
                 <div class="col-md-8 col-sm-7">
                     <p>
-                        Telecoms and network operators face disruptive market change, but expensive, inflexible networking appliances prevent them from rolling out new services quickly. That’s why a consortium of industry leaders collaborated on a new, software-driven approach to agile network management called Network Functions Virtualization (NFV). 
+                        A survey recently conducted by Heavy Reading reveals that 85.8 percent of telecom respondents consider OpenStack to be important to their success. The survey, commissioned by the OpenStack Foundation, explores current usage and adoption plans of communications service providers (CSPs).
                     </p>
                     <p>
-                        Now many global telecoms are working to make OpenStack the best infrastructure platform for NFV. This paper describes NFV, its business value, and how OpenStack supports NFV. It details specific projects, use cases, and the experience of major carriers and enterprises including AT&T, Verizon, NTT Group, SK Telecom, Deutsche Telekom, and Bloomberg.
+                        More than 60 percent of telecoms already using or currently testing new use cases with OpenStack for Network Functions Virtualization (NFV), citing benefits such as offering new services more quickly, faster data center virtualization, and lower operating and software costs. Telecoms also identified Internet of Things (40 percent in production) and 5G (30 percent in production) as major use cases.
                     </p>
                     <p>
-                        Although NFV is in its infancy, NFV on OpenStack offers an agile, scalable, and rapidly maturing platform with compelling technical and business benefits for telecommunications providers and large enterprises.
+                        Attend the webinar hosted by Heavy Reading senior analyst Roz Roseboro on Nov. 9 for a deep dive into the results and additional analysis on key findings from the survey.
                     </p>
                 </div>
                 <div class="col-md-3 col-sm-4 center">
-                    <i class="fa fa-file-pdf-o fa-5x nfv-download-icon"></i>
-                    <a href="#" class="container-download-btn" data-toggle="modal" data-target="#downloadModal">Download Now <i class="fa fa-chevron-right"></i></a>
+                    <i class="fa fa-tv fa-5x nfv-download-icon"></i>
+                    <p style="margin-top: 20px;">
+                        <em>November 9th at 11AM CST</em>
+                    </p>
+                    <a href="https://openstack.webex.com/openstack/j.php?MTID=mfff8e38e764285c77dbe76d68d2228ca" class="container-download-btn">REGISTER FOR THE WEBINAR <i class="fa fa-chevron-right"></i></a>
                 </div>
             </div>
         </div>
