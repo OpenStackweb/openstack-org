@@ -19,12 +19,13 @@ class SangriaPageSurveyBuilderStatisticsExtension extends Extension
         Config::inst()->update(get_class($this), 'allowed_actions', array(
             'ViewDeploymentStatisticsSurveyBuilder',
             'ViewSurveysStatisticsSurveyBuilder',
-
+            'exportQuestion',
         ));
 
         Config::inst()->update(get_class($this->owner), 'allowed_actions', array(
             'ViewDeploymentStatisticsSurveyBuilder',
             'ViewSurveysStatisticsSurveyBuilder',
+            'exportQuestion',
         ));
     }
 
@@ -373,11 +374,27 @@ SQL;
         $to            = $request->requestVar('To');
         $template_id   = intval($request->requestVar('survey_template_id'));
 
-        if ($template_id != 0)
-        {
-            Session::set(sprintf("SurveyBuilder.%sStatistics.TemplateId", $class_name), $template_id);
-            Session::clear(sprintf("SurveyBuilder.%sStatistics.Filters", $class_name));
-            Session::clear(sprintf("SurveyBuilder.%sStatistics.Filters_Questions", $class_name));
+        if (empty($template_id)) {
+            $template = $this->SurveyBuilderSurveyTemplates($class_name)->last();
+            $template_id = $template->ID;
+        }
+
+        Session::set(sprintf("SurveyBuilder.%sStatistics.TemplateId", $class_name), $template_id);
+        Session::clear(sprintf("SurveyBuilder.%sStatistics.Filters", $class_name));
+        Session::clear(sprintf("SurveyBuilder.%sStatistics.Filters_Questions", $class_name));
+
+        if (empty($from) || empty($to)) {
+            $template = SurveyTemplate::get()->byID(intval($template_id));
+
+            if ($class_name === 'EntitySurveyTemplate') {
+                $template = $template->Parent();
+            }
+
+            $from = date('Y/m/d H:i', strtotime($template->StartDate));
+            $to = date('Y/m/d H:i', strtotime($template->EndDate));
+            $query_str = sprintf("?From=%s&To=%s", $from, $to);
+
+            return Controller::curr()->redirect(Controller::curr()->Link($action) . $query_str);
         }
 
         if (!empty($clear_filters)) {
@@ -529,7 +546,7 @@ SQL;
         $percent            = ($div == 0) ? 0 : ($count/ ($div )) * 100;
         $percent            = sprintf ("%.2f", $percent);
 
-        return '( '.$percent.' % )';
+        return $percent.'%';
     }
 
     public function SurveyBuilderCountAnswers($question_id, $value_id)
@@ -580,5 +597,32 @@ SQL;
         $query = is_int($value_id) ? $query_int : $query_str;
 
         return DB::query($query)->value();
+    }
+
+    public function exportQuestion(SS_HTTPRequest $request)
+    {
+        $qid           = intval($request->requestVar('qid'));
+
+        $template = $this->getCurrentSelectedSurveyTemplate();
+        $question = $template->getQuestionById($qid);
+        $results_array = array(array($question->Label));
+        $column_labels = array(' ');
+
+        foreach($question->Columns() as $column) {
+            $column_labels[] = $column->Label;
+        }
+        $results_array[] = $column_labels;
+
+        foreach($question->Rows() as $row) {
+            $rows_array = array($row->Label);
+            foreach($row->Columns() as $row_column) {
+                $rows_array[] = $this->SurveyBuilderMatrixCountAnswers($qid,$row->ID, $row_column->ID);
+            }
+            $results_array[] = $rows_array;
+        }
+
+
+
+        return CSVExporter::getInstance()->export('export_table.csv', $results_array, ',');
     }
 }

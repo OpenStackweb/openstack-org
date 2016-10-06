@@ -138,4 +138,17 @@ a.releaseButton:active {
     margin-top: 0;
 }
 
+.sub-header {
+    padding:0;
+    margin:0;
+    height: 20px;
+}
+
+.sub-header th{
+    padding-top:0 !important;
+    padding-bottom:0 !important;
+    margin:0;
+    height: 20px;
+}
+
 /* @end */
