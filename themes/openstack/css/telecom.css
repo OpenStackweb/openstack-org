@@ -28,14 +28,14 @@
 .foundation-report-title {
   font-size: 1.1em;
   font-weight: 300;
-  margin: 0 0 15px;
+  margin: 0 0 20px;
   position: relative;
   display: inline-block; }
 .foundation-report-title:before, .foundation-report-title:after {
   content: "";
   position: absolute;
-  border-bottom: 1px solid white;
-  top: 13px;
+  border-bottom: 1px solid #2A4E68;
+  top: 10px;
   width: 80px; }
 .foundation-report-title:before {
   right: 100%;
@@ -101,9 +101,11 @@ a.testimonial-link {
 .nfv-action-wrapper {
   text-align: center;
   padding: 60px 0 60px;
-  background: #edf2f7; }
+  background-color: #edf2f7; }
   .nfv-action-wrapper h1 {
-    margin: 0 0 25px; }
+    margin: 0 0 25px;
+    font-weight: 300; 
+    }
   .nfv-action-wrapper p {
     text-align: center;
     color: #2A4E68; }

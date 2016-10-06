@@ -29,10 +29,10 @@
             <div class="row">
                 <div class="col-md-8 col-sm-7">
                     <p>
-                        A survey recently conducted by Heavy Reading reveals that 85.8 percent of telecom respondents consider OpenStack to be important to their success. The survey, commissioned by the OpenStack Foundation, explores current usage and adoption plans of communications service providers (CSPs).
+                        A survey recently conducted by Heavy Reading reveals that 85.8 percent of telecom respondents consider OpenStack to be essential or important to their success. The survey, commissioned by the OpenStack Foundation, explores current usage and adoption plans of communications service providers (CSPs).
                     </p>
                     <p>
-                        More than 60 percent of telecoms already using or currently testing new use cases with OpenStack for Network Functions Virtualization (NFV), citing benefits such as offering new services more quickly, faster data center virtualization, and lower operating and software costs. Telecoms also identified Internet of Things (40 percent in production) and 5G (30 percent in production) as major use cases.
+                        More than 60 percent of telecoms are already using or currently testing new use cases with OpenStack for Network Functions Virtualization (NFV), citing benefits such as offering new services more quickly, faster data center virtualization, and lower operating and software costs. Telecoms also identified Internet of Things (40 percent in production) and 5G (30 percent in production) as major use cases.
                     </p>
                     <p>
                         Attend the webinar hosted by Heavy Reading senior analyst Roz Roseboro on Nov. 9 for a deep dive into the results and additional analysis on key findings from the survey.
@@ -95,6 +95,25 @@
         </div>
     </div>
 
+    <!-- Action Section -->
+    <div class="nfv-action-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-push-2">
+                    <div class="foundation-report-title"> 
+                        OpenStack Foundation Report 
+                    </div> 
+                    <h1>Accelerating NFV Delivery with OpenStack</h1>
+                    <p>
+                        Read <em>Accelerating NFV Delivery with OpenStack</em>, a report created by the OpenStack Foundation in collaboration with six global communications companies, to learn more about Network Functions Virtualization.
+                    </p>
+                    <a class="appdev-marketplace-btn" href="#" data-toggle="modal" data-target="#downloadModal">Download Now <i class="fa fa-chevron-circle-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Action Section -->
+
     <div class="testimonial-row appdev nfv">
         <div class="container"> 
             <div class="row">
@@ -114,21 +133,6 @@
     <div class="sponsor-bkgd">
         <div class="fixed-image nfv"></div>
     </div>
-
-    <!-- Action Section -->
-    <div class="content-section-a nfv-action-wrapper">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-push-2">
-                    <p>
-                        Read <em>Accelerating NFV Delivery with OpenStack</em>, a report created by the OpenStack Foundation in collaboration with six global communications companies, to learn more about Network Functions Virtualization.
-                    </p>
-                    <a class="appdev-marketplace-btn" href="#" data-toggle="modal" data-target="#downloadModal">Download Now <i class="fa fa-chevron-circle-right"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Action Section -->
 
     <!-- Featured Content -->
 
