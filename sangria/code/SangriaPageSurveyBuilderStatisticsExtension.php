@@ -296,6 +296,84 @@ SQL;
         return $this->total_count;
     }
 
+    private $matrix_count_by_question = array();
+
+    public function SurveyBuilderSurveyCountByQuestion($question_id)
+    {
+
+        if(isset($this->matrix_count_by_question[$question_id])) return $this->matrix_count_by_question[$question_id];
+
+        $template = $this->getCurrentSelectedSurveyTemplate();
+
+        if (is_null($template))
+        {
+            return 0;
+        }
+
+        $question = $template->getQuestionById($question_id);
+        if(is_null($question)) return 0;
+
+        $dependencies = $question->getDependsOn();
+
+        if(count($dependencies) == 0) return $this->SurveyBuilderSurveyCount();
+        $dependencies_sql = <<<SQL
+       AND EXISTS
+       (
+          SELECT COUNT(A.ID) AS DependenciesAnswers
+          FROM SurveyAnswer A
+          INNER JOIN SurveyStep STP ON STP.ID = A.StepID
+          INNER JOIN Survey S ON S.ID         = STP.SurveyID
+          WHERE
+          S.ID = I.ID 
+          AND S.IsTest = 0 AND (
+SQL;
+
+        $index_dep = 0;
+        foreach($dependencies as $dependency){
+            $question_id      = $dependency->ID;
+            $visibility       = $dependency->Visibility;
+            $operator         = $dependency->Operator;
+            $value_id         = $dependency->ValueID;
+            $boolean_operator = $dependency->BooleanOperatorOnValues;
+            $dependencies_sql .= sprintf("( A.QuestionID = %s  AND A.Value = '%s' )", $question_id, $value_id);
+
+            if(count($dependencies) - 1 > $index_dep)   $dependencies_sql .= sprintf(" %s ", $boolean_operator);
+            ++$index_dep;
+        }
+
+        $dependencies_sql .= "  ) GROUP BY S.ID ) ";
+        $class_name    = $this->getCurrentSelectedSurveyClassName();
+
+        $filters_where = $this->generateFilters();
+
+        $query = <<<SQL
+    SELECT COUNT(I.ID) FROM Survey I
+    WHERE
+    I.TemplateID = $template->ID AND I.ClassName = '{$class_name}' AND I.IsTest = 0
+    AND EXISTS
+    (
+        SELECT COUNT(A.ID) AS AnsweredMandatoryQuestionCount
+        FROM SurveyAnswer A
+        INNER JOIN SurveyStep STP ON STP.ID = A.StepID
+        INNER JOIN Survey S ON S.ID = STP.SurveyID
+        WHERE
+        S.ID = I.ID AND S.IsTest = 0 AND
+        A.QuestionID IN
+        (
+            SELECT Q.ID FROM SurveyQuestionTemplate Q
+            INNER JOIN SurveyStepTemplate STP ON STP.ID = Q.StepID AND STP.SurveyTemplateID = $template->ID
+            WHERE Q.Mandatory = 1 AND NOT EXISTS ( SELECT ID FROM SurveyQuestionTemplate_DependsOn DP WHERE SurveyQuestionTemplateID = Q.ID )
+        )
+        GROUP BY S.ID
+    )
+    {$dependencies_sql}
+    {$filters_where};
+SQL;
+
+        $this->matrix_count_by_question[$question_id] =  intval(DB::query($query)->value());
+        return $this->matrix_count_by_question[$question_id];
+    }
+
     public function SurveyBuilderDeploymentCompanyList()
     {
         $template = $this->getCurrentSelectedSurveyTemplate();
@@ -511,9 +589,15 @@ SQL;
         if(isset($this->matrix_dont_answered[$question_id])) return $this->matrix_dont_answered[$question_id];
 
         $template     = $this->getCurrentSelectedSurveyTemplate();
+        $question     = $template->getQuestionById($question_id);
         $filter_where = $this->generateFilters('S');
-        // total of survey that answered this question
-        $query = <<<SQL
+        $dependencies = $question->getDependsOn();
+
+        if(count($dependencies) == 0 && $question->isMandatory() && !$question->isHidden()) return 0;
+
+        if(count($dependencies) == 0) {
+            // total of survey that answered this question
+            $query = <<<SQL
         SELECT COUNT(ID) FROM
         (
             SELECT S.ID FROM SurveyAnswer A
@@ -531,6 +615,55 @@ SQL;
             GROUP BY S.ID
         ) DONT_ANSWERED_QUESTION_N;
 SQL;
+        }
+        else{
+
+            $dependencies_sql = <<<SQL
+       AND EXISTS
+       (
+          SELECT COUNT(A.ID) AS DependenciesAnswers
+          FROM SurveyAnswer A
+          INNER JOIN SurveyStep STP ON STP.ID = A.StepID
+          INNER JOIN Survey S2 ON S2.ID       = STP.SurveyID
+          WHERE
+          S2.ID = S.ID 
+          AND S.IsTest = 0 AND (
+SQL;
+
+            $index_dep = 0;
+            foreach($dependencies as $dependency){
+                $question_id      = $dependency->ID;
+                $visibility       = $dependency->Visibility;
+                $operator         = $dependency->Operator;
+                $value_id         = $dependency->ValueID;
+                $boolean_operator = $dependency->BooleanOperatorOnValues;
+                $dependencies_sql .= sprintf("( A.QuestionID = %s  AND A.Value = '%s' )", $question_id, $value_id);
+
+                if(count($dependencies) - 1 > $index_dep)   $dependencies_sql .= sprintf(" %s ", $boolean_operator);
+                ++$index_dep;
+            }
+            $dependencies_sql .= " )  GROUP BY S.ID ) ";
+
+            $query = <<<SQL
+        SELECT COUNT(ID) FROM
+        (
+            SELECT S.ID FROM SurveyAnswer A
+            INNER JOIN SurveyStep STP ON STP.ID = A.StepID
+            INNER JOIN Survey S ON S.ID = STP.SurveyID
+            WHERE
+            S.TemplateID = {$template->ID} AND S.IsTest = 0 AND
+            NOT EXISTS
+            (
+                SELECT A1.ID FROM SurveyAnswer A1
+                INNER JOIN SurveyStep STP1 ON STP1.ID = A1.StepID
+                INNER JOIN Survey S1 ON S1.ID = STP1.SurveyID WHERE A1.QuestionID = {$question_id} AND S1.ID = S.ID
+            )
+            {$dependencies_sql}
+            {$filter_where}
+            GROUP BY S.ID
+        ) DONT_ANSWERED_QUESTION_N;
+SQL;
+        }
 
         $this->matrix_dont_answered[$question_id]   = intval(DB::query($query)->value());
 
@@ -540,7 +673,7 @@ SQL;
     public function SurveyBuilderMatrixPercentAnswers($question_id, $row_id, $column_id)
     {
         $count              = $this->SurveyBuilderMatrixCountAnswers($question_id, $row_id, $column_id);
-        $total_count        = $this->SurveyBuilderSurveyCount();
+        $total_count        = $this->SurveyBuilderSurveyCountByQuestion($question_id);
         $count_dont_answers = $this->getDontAnsweredCount($question_id);
         $div                = $total_count - $count_dont_answers;
         $percent            = ($div == 0) ? 0 : ($count/ ($div )) * 100;

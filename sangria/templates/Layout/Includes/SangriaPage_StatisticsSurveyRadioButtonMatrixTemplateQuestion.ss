@@ -48,4 +48,6 @@
             <% end_loop %>
         </tbody>
     </table>
+
+    <p>N =  $Top.ParentPage.SurveyBuilderSurveyCountByQuestion($Top.QuestionID)</p>
 </div>
