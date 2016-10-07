@@ -111,27 +111,45 @@
                         <% if ClassName == SummitVenue || ClassName == SummitExternalLocation %>
                             summit.locations[{$ID}] =
                             {
-                                class_name : "{$ClassName}",
-                                name       : "{$Name.JS}",
+                                class_name  : "{$ClassName}",
+                                name        : "{$Name.JS}",
+                                name_nice   : "{$Name.JS}",
                                 description : "{$Description.JS}",
-                                address_1 : "{$Address1.JS}",
-                                address_2 : "{$Address2.JS}",
-                                city : "{$City}",
-                                state : "{$State}",
-                                country : "{$Country}",
-                                lng : '{$Lng}',
-                                lat : '{$Lat}',
+                                address_1   : "{$Address1.JS}",
+                                address_2   : "{$Address2.JS}",
+                                city        : "{$City}",
+                                state       : "{$State}",
+                                country     : "{$Country}",
+                                lng         : '{$Lng}',
+                                lat         : '{$Lat}',
+                                venue_id    : {$Venue.ID},
+                                link        : "{$Link.JS}",
                             };
                             <% if ClassName == SummitVenue %>
+                            <% loop Rooms %>
+                                summit.locations[{$ID}] =
+                                {
+                                    class_name : "{$ClassName}",
+                                    name       : "{$Name.JS}",
+                                    name_nice  : "{$FullName.JS}",
+                                    capacity   : {$Capacity},
+                                    venue_id   : {$VenueID},
+                                    link       : "{$Link.JS}",
+                                };
+                            <% end_loop %>
+                            <% loop Floors %>
                                 <% loop Rooms %>
                                     summit.locations[{$ID}] =
                                     {
                                         class_name : "{$ClassName}",
                                         name       : "{$Name.JS}",
+                                        name_nice  : "{$FullName.JS}",
                                         capacity   : {$Capacity},
-                                        venue_id   : {$VenueID},
+                                        venue_id   : {$Up.VenueID},
+                                        link       : "{$Link.JS}",
                                     };
                                 <% end_loop %>
+                            <% end_loop %>
                             <% end_if %>
                         <% end_if %>
                     <% end_loop %>
