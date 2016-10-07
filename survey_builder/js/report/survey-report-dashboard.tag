@@ -92,6 +92,7 @@
                         var array_data = [];
                         for (var sublabel in cat) {
                             var first_word = sublabel.split(' ')[0];
+                            first_word = first_word.split('(')[0];
                             if ($.inArray(first_word,ticks) < 0) {
                                 ticks.push(first_word);
                             }
@@ -101,6 +102,7 @@
                     }
 
                     var plot1 = $.jqplot(graph_id, data, {
+                        height: 400,
                         stackSeries: true,
                         legend: {
                             show: true,
@@ -123,6 +125,10 @@
                             xaxis: {
                                 renderer: $.jqplot.CategoryAxisRenderer,
                                 ticks: ticks
+                            },
+                            yaxis: {
+                                numberTicks:10,
+                                tickInterval: 30
                             }
                         },
                         highlighter: { show: false }

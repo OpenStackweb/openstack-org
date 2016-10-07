@@ -57,20 +57,23 @@ class SurveyReportSection extends DataObject {
             $total_answers = $answers['total'];
             $answers = $answers['answers'];
 
+            if ($graph->Question()->ClassName == 'SurveyRadioButtonMatrixTemplateQuestion') {
+                //fill up template
+                $row_values_array = array();
+                foreach ($graph->Question()->Rows() as $row_value) {
+                    $row_values_array[$row_value->Value] = 0;
+                }
+                foreach ($graph->Question()->Columns() as $col_value) {
+                    $values[$col_value->Value] = $row_values_array;
+                }
+            }
+
             foreach ($answers as $answer) {
                 if (!$answer) continue;
 
                 if ($graph->Question()->ClassName == 'SurveyRadioButtonMatrixTemplateQuestion') {
-
                     $col = $answer->col;
                     $row = $answer->row;
-
-                    if (!isset($values[$row]))
-                        $values[$row] = array();
-
-                    if (!isset($values[$row][$col]))
-                        $values[$row][$col] = 0;
-
                     $values[$row][$col]++;
                 } else {
                     if (!isset($values[$answer]))
@@ -87,7 +90,7 @@ class SurveyReportSection extends DataObject {
             }
 
             //sort results
-            arsort($values);
+            //arsort($values);
 
             // hide answers if less than 10
             if ($total_answers <= 10) {
