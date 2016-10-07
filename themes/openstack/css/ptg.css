@@ -185,6 +185,11 @@ img.ptg-release-timeline {
     margin-right: 10px;
     text-transform: uppercase;
     color: #30739C; }
+    @media (max-width: 767px) {
+      .ptg-cta input.ptg-input, .e2ma_signup_form_element input {
+        min-width: 250px;
+      }
+    }
     .ptg-cta input.ptg-input:focus, .e2ma_signup_form_element:focus input {
       outline: 0; }
   .ptg-cta button.inline-btn, .e2ma_signup_form_button{
