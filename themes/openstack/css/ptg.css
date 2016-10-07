@@ -1,8 +1,9 @@
 /*PTG landing*/
 .ptg-hero {
   text-align: center;
-  padding: 60px 0 60px;
-  background: #248EC7;
+  padding: 20px 20px 100px;
+  background: #248EC7 url("/themes/openstack/static/images/ptg/ptg-bkgd.jpg") center center no-repeat;
+  background-size: cover;
   color: white; }
   .ptg-hero h4 {
     margin: 0;
@@ -19,6 +20,67 @@
     margin-top: 60px;
     margin-bottom: 0; }
 
+.ptg-logo {
+  max-width: 250px; }
+
+.ptg-hero-intro {
+  background: rgba(0,72,123,0.90);
+  padding: 20px;
+  border-radius: 4px;
+  margin-top: 20px; }
+  .ptg-hero-intro p {
+    margin: 0; }
+  .ptg-hero-intro a {
+    color: white;
+    text-decoration: underline;
+     }
+  a.ptg-register-btn {
+    border-radius: 4px;
+    background: #E22235;
+    padding: 10px 60px;
+    color: white;
+    display: inline-block;
+    text-decoration: none;
+    margin-top: 15px;
+  }
+  a.ptg-register-btn:hover, a.ptg-register-btn:focus {
+    background: #B71D2C;
+  }
+
+ul#ptg-tabs {
+  text-align: center;
+  background: rgba(0,72,123,0.90);
+  padding: 15px;
+  margin: -70px 0 0; }
+  ul#ptg-tabs > li {
+    float: none;
+    display: inline-block;
+    zoom: 1; }
+    ul#ptg-tabs > li a {
+      text-transform: uppercase;
+      font-weight: 500;
+      border: 0;
+      padding: 10px 30px;
+      color: #96C9E5; }
+      ul#ptg-tabs > li a:hover, ul#ptg-tabs > li a:focus {
+        background: 0;
+        border: 0;
+        color: white; }
+    ul#ptg-tabs > li.active > a {
+      color: white;
+      background: 0;
+      border: 0;
+      font-weight: 600; }
+
+@media (max-width: 550px) {
+  ul#ptg-tabs {
+    margin-top: -67px;
+    padding: 15px 0; 
+    }
+    ul#ptg-tabs > li > a {
+      font-size: 0.9em;
+      padding: 10px; } }
+
 .ptg-body {
   padding: 10px 0 60px; }
   .ptg-body .col-sm-6 {
@@ -29,7 +91,7 @@
   .ptg-body .ptg-who {
     background: #edf2f7;
     padding: 60px 0;
-    margin: 0 0 30px; }
+    margin: 40px 0 30px; }
     .ptg-body .ptg-who .who-icons {
       text-align: center; }
     .ptg-body .ptg-who i {
@@ -95,7 +157,9 @@ img.ptg-release-timeline {
   padding: 40px 0px 70px;
   color: white;
   text-align: center; 
-  margin-bottom: -50px;}
+  margin-bottom: -50px;
+  margin-top: 50px;
+  }
   .ptg-cta h2 {
     text-align: center;
     color: white; }
@@ -138,12 +202,15 @@ img.ptg-release-timeline {
       outline: 0; }
       
   #thankyou {
-    text-decoration: none;
-    padding-top: 25px;
+    padding-top: 10px;
+    border-top: 1px solid white;
+    margin-top: 25px;
   }
   #thankyou h3 {
     color: white;
     text-align: center;
-    font-weight: 300;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1.3em;
   }
 
