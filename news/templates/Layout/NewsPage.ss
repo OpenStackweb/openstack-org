@@ -80,7 +80,7 @@
                 <div class="sendgrid-subscription-widget" data-token="tKWLGalJp7SuomZ06awtOEUDVCRyJIzHw6y5mNMWa0Qp7GmM2v7jRcBRkxGCR0oI1XxQh1qSfv1CFfzbMoIFHg%3D%3D"></div>
                 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?"http":"https";if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://s3.amazonaws.com/subscription-cdn/0.2/widget.min.js";fjs.parentNode.insertBefore(js,fjs);}}(document, "script", "sendgrid-subscription-widget-js");</script>
                 <hr>
-                <h3>Foundation News</h3>
+                <h3>OpenStack in the News</h3>
                 <div class="featured-links">
                     <a href="http://superuser.openstack.org">SuperUser</a> | <a href="news/archived">Archived News</a>
                 </div>

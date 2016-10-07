@@ -62,7 +62,7 @@
                 <i class="fa fa-area-chart fa-4x"></i>
                 <h3>Performance-Based</h3>
                 <p class="coa-point-description">
-                    Test your skills and problem solving in the command line and Horizon dashboard
+                    Test your skills and problem solving in the command line and Horizon dashboard, based on the OpenStack Liberty version
                 </p>
             </div>
             <div class="col-sm-4">
