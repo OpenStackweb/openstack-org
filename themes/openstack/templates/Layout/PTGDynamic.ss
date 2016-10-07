@@ -6,7 +6,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
-                  <img class="ptg-logo" src="/themes/openstack/static/images/ptg/ptg-logo.png" alt="">
+                  <img class="ptg-logo" src="/themes/openstack/static/images/ptg/PTG-logo.png" alt="">
                 </div>
             </div>
             <div class="row">
