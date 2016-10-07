@@ -3,6 +3,7 @@
         $Label
         (<a href="$Top.ParentPage.Link(exportQuestion)?qid={$Top.QuestionID}{$Top.ParentPage.SurveyBuilderDateFilterQueryString}" class="export_table" >export</a>)
     </h3>
+    <p>N =  $Top.ParentPage.SurveyBuilderSurveyCountByQuestion($Top.QuestionID)</p>
     <table class="table" >
         <thead style="width: 100%">
             <tr>
@@ -48,6 +49,4 @@
             <% end_loop %>
         </tbody>
     </table>
-
-    <p>N =  $Top.ParentPage.SurveyBuilderSurveyCountByQuestion($Top.QuestionID)</p>
 </div>
