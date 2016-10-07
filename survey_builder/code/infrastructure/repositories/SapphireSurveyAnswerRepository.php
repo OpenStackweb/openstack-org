@@ -19,9 +19,6 @@ class SapphireAnswerSurveyRepository
     extends SapphireRepository
     implements ISurveyAnswerRepository {
 
-    private $matrix_count_by_question = array();
-    private $total_count = 0;
-
     public function __construct(){
         parent::__construct(new SurveyAnswer());
     }
@@ -149,8 +146,6 @@ class SapphireAnswerSurveyRepository
 
     public function SurveyBuilderSurveyCount($template, $filters)
     {
-        if($this->total_count > 0 ) return $this->total_count;
-
         $filter_query = $this->getFiltersQuery($filters,$template,'I');
 
         $query = "SELECT COUNT(I.ID) FROM Survey I";
@@ -183,16 +178,11 @@ class SapphireAnswerSurveyRepository
                 ){$filter_query};
         ";
 
-        $this->total_count = intval(DB::query($query)->value());
-
-        return $this->total_count;
+        return intval(DB::query($query)->value());
     }
 
     public function SurveyBuilderSurveyCountByQuestion($question_id, $template, $filters)
     {
-
-        if(isset($this->matrix_count_by_question[$question_id])) return $this->matrix_count_by_question[$question_id];
-
         $filter_query = $this->getFiltersQuery($filters,$template,'I');
 
         $question = $template->getQuestionById($question_id);
@@ -256,8 +246,7 @@ class SapphireAnswerSurveyRepository
             {$filter_query};
         ";
 
-        $this->matrix_count_by_question[$question_id] =  intval(DB::query($query)->value());
-        return $this->matrix_count_by_question[$question_id];
+        return intval(DB::query($query)->value());
     }
 
 }
