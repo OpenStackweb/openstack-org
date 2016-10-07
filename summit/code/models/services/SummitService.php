@@ -240,6 +240,11 @@ final class SummitService implements ISummitService
             $sponsors = ($event_data['sponsors']) ? explode(',',$event_data['sponsors']) : array();
             $event->Sponsors()->setByIDList($sponsors);
 
+            if ($event instanceof Presentation) {
+                $event->Status = 'Received';
+                $event->Progress = 4;
+            }
+
             self::updatePresentation($event, $event_data);
 
             $must_publish= (bool)$event_data['publish'];
