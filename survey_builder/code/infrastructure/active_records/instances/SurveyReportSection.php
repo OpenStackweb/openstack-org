@@ -86,7 +86,7 @@ class SurveyReportSection extends DataObject {
             if ($graph->Question()->Name == 'NetPromoter') {
                 $promoter_perc = round(($values['Promoter'] / $total_answers) * 100);
                 $detractor_perc = round(($values['Detractor'] / $total_answers) * 100);
-                $extra_label = 'NPS: '.($promoter_perc - $detractor_perc).'%';
+                $extra_label = 'NPS: '.($promoter_perc - $detractor_perc);
             }
 
             //sort results
