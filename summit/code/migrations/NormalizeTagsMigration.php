@@ -43,6 +43,8 @@ class NormalizeTagsMigration extends AbstractDBMigrationTask
                 DB::query("DELETE Tag FROM Tag WHERE ID = {$tag_id}; ");
             }
         }
+
+        DB::query("UPDATE Tag SET Tag = TRIM(Tag);");
     }
 
     function doDown()
