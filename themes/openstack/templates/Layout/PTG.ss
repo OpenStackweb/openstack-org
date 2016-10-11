@@ -131,9 +131,15 @@
                 </p>
                 <script type="text/javascript">
                     $(document).ready(function() {
-                        if (window.location.hash) {
+                        // sign up form
+                        $('#e2ma_signup').submit(function(){
+                            localStorage['ptg_signed_up'] = 1;
+                        });
+
+                        if (localStorage['ptg_signed_up']) {
                             $("#formShow").hide();
                             $("#thankyou").show();
+                            localStorage.removeItem('ptg_signed_up');
                         } else {
                             $("#thankyou").hide();
                         };
