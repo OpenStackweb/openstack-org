@@ -455,25 +455,12 @@ SQL;
         if (empty($template_id)) {
             $template = $this->SurveyBuilderSurveyTemplates($class_name)->last();
             $template_id = $template->ID;
+        } else {
+            Session::clear(sprintf("SurveyBuilder.%sStatistics.Filters", $class_name));
+            Session::clear(sprintf("SurveyBuilder.%sStatistics.Filters_Questions", $class_name));
         }
 
         Session::set(sprintf("SurveyBuilder.%sStatistics.TemplateId", $class_name), $template_id);
-        Session::clear(sprintf("SurveyBuilder.%sStatistics.Filters", $class_name));
-        Session::clear(sprintf("SurveyBuilder.%sStatistics.Filters_Questions", $class_name));
-
-        if (empty($from) || empty($to)) {
-            $template = SurveyTemplate::get()->byID(intval($template_id));
-
-            if ($class_name === 'EntitySurveyTemplate') {
-                $template = $template->Parent();
-            }
-
-            $from = date('Y/m/d H:i', strtotime($template->StartDate));
-            $to = date('Y/m/d H:i', strtotime($template->EndDate));
-            $query_str = sprintf("?From=%s&To=%s", $from, $to);
-
-            return Controller::curr()->redirect(Controller::curr()->Link($action) . $query_str);
-        }
 
         if (!empty($clear_filters)) {
             Session::clear(sprintf("SurveyBuilder.%sStatistics.Filters", $class_name));
@@ -481,6 +468,20 @@ SQL;
 
             return Controller::curr()->redirect(Controller::curr()->Link($action));
         } else {
+            if (empty($from) || empty($to)) {
+                $template = SurveyTemplate::get()->byID(intval($template_id));
+
+                if ($class_name === 'EntitySurveyTemplate') {
+                    $template = $template->Parent();
+                }
+
+                $from = date('Y/m/d H:i', strtotime($template->StartDate));
+                $to = date('Y/m/d H:i', strtotime($template->EndDate));
+                $query_str = sprintf("?From=%s&To=%s", $from, $to);
+
+                return Controller::curr()->redirect(Controller::curr()->Link($action) . $query_str);
+            }
+
             if (!empty($qid) && !empty($vid)) {
                 $qid = intval($qid);
                 $vid = is_int($vid) ? intval($vid) : $vid;
