@@ -188,6 +188,18 @@ class SapphireAnswerSurveyRepository
         $question = $template->getQuestionById($question_id);
         if(is_null($question)) return 0;
 
+        $has_answers_sql = <<<SQL
+       AND EXISTS
+       (
+          SELECT COUNT(A.ID) AS Answers
+          FROM SurveyAnswer A
+          INNER JOIN SurveyStep STP ON STP.ID = A.StepID
+          INNER JOIN Survey S ON S.ID = STP.SurveyID
+          WHERE S.ID = I.ID AND S.IsTest = 0 AND A.QuestionID = $question_id
+          GROUP BY S.ID
+       )
+SQL;
+
         $dependencies = $question->getDependsOn();
 
         if(count($dependencies) == 0) return $this->SurveyBuilderSurveyCount($template, $filters);
@@ -242,6 +254,7 @@ class SapphireAnswerSurveyRepository
                 )
                 GROUP BY S.ID
             )
+            {$has_answers_sql}
             {$dependencies_sql}
             {$filter_query};
         ";
