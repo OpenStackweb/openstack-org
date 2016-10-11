@@ -22,19 +22,17 @@ class NormalizeTagsMigration extends AbstractDBMigrationTask
     {
         global $database;
 
-        $rows_duplicates = DB::query("SELECT Tag, COUNT(ID) from Tag 
-GROUP BY Tag.Tag
-HAVING COUNT(Tag.ID) > 1
-ORDER BY Tag.Tag;");
+        $rows_duplicates = DB::query("SELECT UPPER(TRIM(Tag)) AS Tag, COUNT(*) FROM Tag GROUP BY UPPER(TRIM(Tag)) HAVING COUNT(*) > 1");
 
         foreach ($rows_duplicates as $row_tag_dup) {
             $tag = $row_tag_dup['Tag'];
             if(empty(trim($tag))) continue;
             // get dup tags
 
-            $tags     = DB::query("SELECT * from Tag WHERE Tag = '{$tag}' ;");
+            $tags     = DB::query("SELECT * from Tag WHERE UPPER(TRIM(Tag)) = UPPER(TRIM('{$tag}')) ;");
             $root_tag = $tags->first();
             $root_id  = $root_tag['ID'];
+
             foreach ($tags as $tag) {
 
                 $tag_id = intval($tag['ID']);
