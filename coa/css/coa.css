@@ -224,3 +224,18 @@ a.coa-started-btn:visited {
     margin-left: 10px;
     font-size: 1.5em;
 }
+.coa-current-release {
+    background: #edf2f7;
+    border-radius: 4px;
+    padding: 30px 5px 40px;
+    text-align: center;
+}
+.coa-current-release .title {
+    color: #30739C;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+.coa-current-release img.logo {
+    width: 165px;
+    max-width: 90%;
+}

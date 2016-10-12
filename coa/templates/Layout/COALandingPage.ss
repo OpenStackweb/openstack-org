@@ -124,7 +124,19 @@
         <div class="row">
             <div class="col-sm-12" id="coa-details">
                 <h2>Exam Details</h2>
-                $Top.ExamDetails
+                <div class="row">
+                    <div class="col-sm-8">
+                        $Top.ExamDetails
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="coa-current-release">
+                            <div class="title">
+                                OpenStack release being tested
+                            </div>
+                            <img src="/themes/openstack/static/images/coa/liberty-logo.png" alt="" class="logo">
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-sm-6">
                         <h5 class="section-title"> What does the exam cost?</h5>
