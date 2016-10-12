@@ -124,14 +124,14 @@
         You'll note that the "Platform" program technical requirements are essentially the combination of "Compute" and "Object Storage" requirements.
     </p>
 
-    <h4>
+    <!-- <h4>
         Version
         <select id="interop_version">
             <% loop getInteropProgramVersions() %>
             <option value="$ID">$Name</option>
             <% end_loop %>
         </select>
-    </h4>
+    </h4> -->
 
     <!-- $getCapabilitiesTable() -->
 
