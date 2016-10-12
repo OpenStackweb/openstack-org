@@ -1,5 +1,5 @@
 <!-- Begin Page Content -->
-<div class="coa-hero" style="background: url('{$Top.HeroImageUrl}') no-repeat center left;">
+<div class="coa-hero" style="background-image: url('{$Top.HeroImageUrl}');">
     <div class="container">
         <div class="row">
             <div class="col-sm-4 center">

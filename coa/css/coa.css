@@ -2,6 +2,8 @@
 /*COA landing*/
 .coa-hero {
     background-size: cover;
+    background-position: center left;
+    background-repeat: no-repeat;
     padding: 60px 0 60px;
     color: white; }
 .coa-hero h1 {
