@@ -133,7 +133,7 @@
         </select>
     </h4>
 
-    $getCapabilitiesTable()
+    <!-- $getCapabilitiesTable() -->
 
     <h4>How to Run the Tests</h4>
     <p>
