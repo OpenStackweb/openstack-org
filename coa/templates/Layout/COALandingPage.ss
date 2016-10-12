@@ -123,9 +123,9 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12" id="coa-details">
-                <h2>Exam Details</h2>
                 <div class="row">
                     <div class="col-sm-8">
+                        <h2>Exam Details</h2>
                         $Top.ExamDetails
                     </div>
                     <div class="col-sm-4">
