@@ -18,8 +18,8 @@
 from datetime import datetime
 from datetime import timedelta
 import operator
+import optparse
 import os
-import sys
 
 meeting_mappings = {
 'uc': 'user_committee',
@@ -123,7 +123,7 @@ def print_meet_stats(meeting_data):
                                                    user[1]["lines_said"])
 
 
-def print_eligible_usernames(meeting_data, num_meetings=1, lines_said=1):
+def print_eligible_usernames(meeting_data, num_meetings=1, lines_said=1, human=False):
     user_aggregate = {}
     for meeting_name in meeting_data.keys():
         for user_tuple in meeting_data[meeting_name].items():
@@ -132,22 +132,47 @@ def print_eligible_usernames(meeting_data, num_meetings=1, lines_said=1):
             else:
                 user_aggregate[user_tuple[0]]["lines_said"] += user_tuple[1]["lines_said"]
                 user_aggregate[user_tuple[0]]["attendance_count"] += user_tuple[1]["attendance_count"]
-
-    print "\n OVERALL STATS \n=====================================\n"
+    if human:
+        print "\n OVERALL STATS \n=====================================\n"
     sorted_users = sorted(user_aggregate.items(), reverse=True,
                           key=operator.itemgetter(1))
     for user in sorted_users:
         if user[1]["attendance_count"] >= num_meetings or user[1]["lines_said"] >= lines_said:
-            print "{: <20} {: <20} {: <20}".format(user[0],
-                                                   user[1]["attendance_count"],
-                                                   user[1]["lines_said"])
+            if human:
+                print "{: <20} {: <20} {: <20}".format(user[0],
+                                                       user[1]["attendance_count"],
+                                                       user[1]["lines_said"])
+            else:
+                print "{},{},{}".format(user[0],
+                                                       user[1]["attendance_count"],
+                                                       user[1]["lines_said"])
 
 
 def main():
-    meeting_data = get_recent_meets(sys.argv[1], 183)
+    optparser = optparse.OptionParser()
+    optparser.add_option(
+        '--human', help='If set, output results in human-readable format',
+        default=False, action="store_true")
+    optparser.add_option(
+        '-d', '--datadir', help='Where meeting data lives',
+        default='./eavesdrop.openstack.org/meetings')
+    optparser.add_option(
+        '-t', '--days', help='Validity of attendance in days',
+        type="int", default=183)
+    optparser.add_option(
+        '-n', '--nummeetings', help='Required number of meetings',
+        type="int", default=2)
+    optparser.add_option(
+        '-l', '--linessaid', help='Required number of line said',
+        type="int", default=10)
+    options, args = optparser.parse_args()
+
+    meeting_data = get_recent_meets(options.datadir, options.days)
     meeting_aggregate = get_meeting_aggregates(meeting_data)
-    print_meet_stats(meeting_aggregate)
-    print_eligible_usernames(meeting_aggregate, 2, 10)
+    if options.human:
+        print_meet_stats(meeting_aggregate)
+    print_eligible_usernames(meeting_aggregate, options.nummeetings,
+                             options.linessaid, options.human)
 
 if __name__ == "__main__":
     main()

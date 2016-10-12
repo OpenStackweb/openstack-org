@@ -14,6 +14,7 @@ class ActiveUserCommitteeWorkingGroupsService extends BaseService implements Met
 {
 
     use ProcessCreator;
+    use ParserCreator;
 
     public function getMetricIdentifier()
     {
@@ -34,7 +35,7 @@ class ActiveUserCommitteeWorkingGroupsService extends BaseService implements Met
             'auc-metrics',
             'meeting-data'
         );
-
+        
         @mkdir($outputDir, 0755, true);
 
         $collectionDir = Controller::join_links(
@@ -55,7 +56,6 @@ class ActiveUserCommitteeWorkingGroupsService extends BaseService implements Met
 
         while($process->isRunning()) {}
 
-        // executes after the command finishes
         if (!$process->isSuccessful()) {
             throw new ProcessFailedException($process);
         }
@@ -63,7 +63,7 @@ class ActiveUserCommitteeWorkingGroupsService extends BaseService implements Met
         $execPath = Controller::join_links(
             BASE_PATH,
             AUC_METRICS_DIR,
-            'lib/uc-recognition/tools/get_active_wg_members.py ' . $collectionDir
+            'lib/uc-recognition/tools/get_active_wg_members.py --datadir=' . $collectionDir
         );
 
         $process = $this->getProcess($execPath);
@@ -72,24 +72,34 @@ class ActiveUserCommitteeWorkingGroupsService extends BaseService implements Met
         while ($process->isRunning()) {
         }
 
-        // executes after the command finishes
         if (!$process->isSuccessful()) {
             throw new ProcessFailedException($process);
         }
 
         $output = $process->getOutput();
-        $parts = explode('OVERALL STATS', $output);
-        $parts = preg_split("/((\r?\n)|(\r\n?))/", $parts[1]);
+        
+        $fileData = explode(PHP_EOL, $output);
+        $fileData[0] = "'Username','AttendanceCount','LinesSaid'";
+        $csvPath = Controller::join_links(
+        	$outputDir,
+        	'results.csv'
+        );
+
+        file_put_contents($csvPath, implode(PHP_EOL, $fileData));
+
+        $parser = $this->getParser($csvPath);
+        $parser->mapColumns([
+            'Username' => 'Username',
+            'AttendanceCount' => 'AttendanceCount',
+            'LinesSaid' => 'LinesSaid'
+        ]);
+
         $this->results = ResultList::create();
 
-        foreach ($parts as $line) {
-            preg_match('/^([^=\s]+)\s+([0-9]+)\s+([0-9]+)\s*$/', $parts[1], $matches);
-            if (!$matches) {
-                continue;
-            }
-            $nickname = trim($matches[1]);
-            $attendanceCount = trim($matches[2]);
-            $linesSaid = trim($matches[3]);
+        foreach ($parser as $row) {
+            $nickname = $row['Username'];
+            $attendanceCount = $row['AttendanceCount'];
+            $linesSaid = $row['LinesSaid'];
 
             $member = Member::get()->filter('IRCHandle', $nickname)->first();
             if ($member) {
@@ -100,7 +110,6 @@ class ActiveUserCommitteeWorkingGroupsService extends BaseService implements Met
             } else {
                 $this->logError("No member with nickname {$nickname}");
             }
-
         }
     }
 }
