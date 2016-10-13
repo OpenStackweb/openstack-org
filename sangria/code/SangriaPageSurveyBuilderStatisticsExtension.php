@@ -313,45 +313,33 @@ SQL;
         $question = $template->getQuestionById($question_id);
         if(is_null($question)) return 0;
 
-        $has_answers_sql = <<<SQL
-       AND EXISTS
-       (
-          SELECT COUNT(A.ID) AS Answers
-          FROM SurveyAnswer A
-          INNER JOIN SurveyStep STP ON STP.ID = A.StepID
-          INNER JOIN Survey S ON S.ID = STP.SurveyID
-          WHERE S.ID = I.ID AND S.IsTest = 0 AND A.QuestionID = $question_id
-          GROUP BY S.ID
-       )
-SQL;
-
         $dependencies = $question->getDependsOn();
-
-        if(count($dependencies) == 0) return $this->SurveyBuilderSurveyCount();
-        $dependencies_sql = <<<SQL
-       AND EXISTS
-       (
-          SELECT COUNT(A.ID) AS DependenciesAnswers
-          FROM SurveyAnswer A
-          INNER JOIN SurveyStep STP ON STP.ID = A.StepID
-          INNER JOIN Survey S ON S.ID = STP.SurveyID
-          WHERE S.ID = I.ID AND S.IsTest = 0 AND (
+        $dependencies_sql = "";
+        if(count($dependencies)) {
+            $dependencies_sql = <<<SQL
+               AND EXISTS
+               (
+                  SELECT COUNT(A.ID) AS DependenciesAnswers
+                  FROM SurveyAnswer A
+                  INNER JOIN SurveyStep STP ON STP.ID = A.StepID
+                  INNER JOIN Survey S ON S.ID = STP.SurveyID
+                  WHERE S.ID = I.ID AND S.IsTest = 0 AND (
 SQL;
 
-        $index_dep = 0;
-        foreach($dependencies as $dependency){
-            $question_id      = $dependency->ID;
-            $visibility       = $dependency->Visibility;
-            $operator         = $dependency->Operator;
-            $value_id         = $dependency->ValueID;
-            $boolean_operator = $dependency->BooleanOperatorOnValues;
-            $dependencies_sql .= sprintf("( A.QuestionID = %s  AND A.Value = '%s' )", $question_id, $value_id);
+            $index_dep = 0;
+            foreach($dependencies as $dependency){
+                $question_id      = $dependency->ID;
+                $value_id         = $dependency->ValueID;
+                $boolean_operator = $dependency->BooleanOperatorOnValues;
+                $dependencies_sql .= sprintf("( A.QuestionID = %s  AND A.Value = '%s' )", $question_id, $value_id);
 
-            if(count($dependencies) - 1 > $index_dep)   $dependencies_sql .= sprintf(" %s ", $boolean_operator);
-            ++$index_dep;
+                if(count($dependencies) - 1 > $index_dep)   $dependencies_sql .= sprintf(" %s ", $boolean_operator);
+                ++$index_dep;
+            }
+
+            $dependencies_sql .= "  ) GROUP BY S.ID ) ";
         }
 
-        $dependencies_sql .= "  ) GROUP BY S.ID ) ";
         $class_name    = $this->getCurrentSelectedSurveyClassName();
 
         $filters_where = $this->generateFilters();
@@ -376,7 +364,14 @@ SQL;
         )
         GROUP BY S.ID
     )
-    {$has_answers_sql}
+    AND EXISTS
+    (
+        SELECT A.ID AS Answers
+        FROM SurveyAnswer A
+        INNER JOIN SurveyStep STP ON STP.ID = A.StepID
+        INNER JOIN Survey S ON S.ID = STP.SurveyID
+        WHERE S.ID = I.ID AND S.IsTest = 0 AND A.QuestionID = $question_id AND A.`Value` IS NOT NULL
+    )
     {$dependencies_sql}
     {$filters_where};
 SQL;

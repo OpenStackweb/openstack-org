@@ -149,7 +149,10 @@
                         seriesDefaults:{
                             renderer:$.jqplot.BarRenderer,
                             rendererOptions: {fillToZero: true},
-                            pointLabels: { show: true }
+                            pointLabels: {
+                                show: true,
+                                formatString: '%s%'
+                            }
                         },
                         axesDefaults: {
                             tickRenderer: $.jqplot.CanvasAxisTickRenderer ,

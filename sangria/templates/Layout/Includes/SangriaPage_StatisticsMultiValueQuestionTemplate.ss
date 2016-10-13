@@ -1,5 +1,6 @@
 <div class="col-md-4">
     <h3>$Label</h3>
+    <p>N =  $Top.ParentPage.SurveyBuilderSurveyCountByQuestion($Top.QuestionID)</p>
     <table class="table">
         <tbody style="display: block; height: 325px; overflow-y: auto">
             <% loop getFormattedValues %>

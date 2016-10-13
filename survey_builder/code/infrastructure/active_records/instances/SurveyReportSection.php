@@ -107,6 +107,13 @@ class SurveyReportSection extends DataObject {
                 }
             }
 
+            // all bar graphs are shown as percentage
+            if($graph->Type == 'bars') {
+                foreach ($values as $key => $val) {
+                    $values[$key] = round(($val / $total_answers) * 100);
+                }
+            }
+
             $questions[] = array(
                 'ID'         => $graph->Question()->ID,
                 'Graph'      => $graph->Type,

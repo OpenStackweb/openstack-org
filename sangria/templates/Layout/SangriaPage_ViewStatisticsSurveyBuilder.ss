@@ -35,7 +35,7 @@
                     <% if $ClassName == 'SurveyRadioButtonMatrixTemplateQuestion' %>
                         <% include SangriaPage_StatisticsSurveyRadioButtonMatrixTemplateQuestion ParentPage=$Top, QuestionID=$ID %>
                     <% else %>
-                        <% include SangriaPage_StatisticsMultiValueQuestionTemplate ParentPage=$Top %>
+                        <% include SangriaPage_StatisticsMultiValueQuestionTemplate ParentPage=$Top, QuestionID=$ID %>
                     <% end_if %>
                 <% end_loop %>
             </div>
