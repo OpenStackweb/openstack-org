@@ -112,7 +112,11 @@
                         seriesDefaults:{
                             renderer:$.jqplot.BarRenderer,
                             rendererOptions: {fillToZero: true},
-                            pointLabels: { show: true }
+                            pointLabels: {
+                                show: true,
+                                formatString: '%s%',
+                                hideZeros: true
+                            }
                         },
                         axesDefaults: {
                             tickRenderer: $.jqplot.CanvasAxisTickRenderer ,
@@ -127,8 +131,9 @@
                                 ticks: ticks
                             },
                             yaxis: {
-                                numberTicks:10,
-                                tickInterval: 30
+                                min:0,
+                                max:100,
+                                tickInterval: 10
                             }
                         },
                         highlighter: { show: false }

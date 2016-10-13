@@ -114,6 +114,14 @@ class SurveyReportSection extends DataObject {
                 }
             }
 
+            if($graph->Type == 'multibars') {
+                foreach ($values as $key => $val) {
+                    foreach ($val as $key2 => $val2) {
+                        $values[$key][$key2] = round(($val2 / $total_answers) * 100);
+                    }
+                }
+            }
+
             $questions[] = array(
                 'ID'         => $graph->Question()->ID,
                 'Graph'      => $graph->Type,
