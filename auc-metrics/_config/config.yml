@@ -10,12 +10,12 @@ Injector:
     class: GuzzleHttp\Client
   AUCMetricTask:
     constructor:
-      #0: %$OpenStack\AUC\OfficialUserGroupOrganizerService
+      0: %$OpenStack\AUC\OfficialUserGroupOrganizerService
       1: %$OpenStack\AUC\ActiveUserCommitteeWorkingGroupsService
-      #2: %$OpenStack\AUC\TrackChairService
-      #3: %$OpenStack\AUC\ActiveModeratorService
-      #4: %$OpenStack\AUC\SuperuserService
-      #5: %$OpenStack\AUC\ActiveCommitterService
+      2: %$OpenStack\AUC\TrackChairService
+      3: %$OpenStack\AUC\ActiveModeratorService
+      4: %$OpenStack\AUC\SuperuserService
+      5: %$OpenStack\AUC\ActiveCommitterService
 
 Member:
   extensions:
