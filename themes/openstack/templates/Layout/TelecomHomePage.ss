@@ -43,7 +43,7 @@
                     <p style="margin-top: 20px;">
                         <em>November 9th at 11AM CST</em>
                     </p>
-                    <a href="https://openstack.webex.com/openstack/j.php?MTID=mfff8e38e764285c77dbe76d68d2228ca" class="container-download-btn">REGISTER FOR THE WEBINAR <i class="fa fa-chevron-right"></i></a>
+                    <a href="https://openstack.webex.com/openstack/onstage/g.php?MTID=eb84841cf3caf119e8587b0e303f4e3a2" class="container-download-btn">REGISTER FOR THE WEBINAR <i class="fa fa-chevron-right"></i></a>
                 </div>
             </div>
         </div>
