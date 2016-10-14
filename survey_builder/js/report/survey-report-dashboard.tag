@@ -20,6 +20,7 @@
             </div>
             <div if={ question.Total == 0 }>
                 There is no data available for a sample size this small.
+                (<a href="" onclick="return false" data-toggle="tooltip" data-placement="top" title="We require a minimum of 10 responses before we reveal a sample set in order to provide a degree of anonymity for the survey participants.">?</a>)
             </div>
         </div>
         <div class="clearfix"></div>
@@ -41,6 +42,8 @@
                     }
                 }
             }
+
+            $('[data-toggle="tooltip"]').tooltip();
         });
 
         self.api.on(self.api.REPORT_RETRIEVED, function(data)
@@ -184,26 +187,46 @@
 
             doc.setFont("times","normal");
             doc.setTextColor(42, 78, 104);
+            doc.setDrawColor(42, 78, 104);
 
             doc.setFontSize(22);
-            doc.text(25, 35, self.section.Name);
+            doc.text(25, 30, self.section.Name);
+            doc.line(25, 35, 185, 35);
 
             doc.setFontSize(14);
             var desc = $('.section_desc').text();
             var split_desc = (desc.length > 60) ? doc.splitTextToSize(desc, 160) : desc;
             doc.text(25, 45, split_desc );
 
+            var graph_count = $('.graph_box').length;
+            var pos_x,pos_y,height,width,ratio,page_height,page_width;
 
-            html2canvas($("#dashboard"), {
-                onrendered: function(canvas) {
-                    var imgData = canvas.toDataURL("image/jpeg",1.0);
-                    var height = Math.round($("#dashboard").outerHeight() * 0.26);
-                    var width = Math.round($("#dashboard").outerWidth() * 0.26);
-                    var ratio = 160 / width;
-                    height = Math.round(height * ratio);
-                    doc.addImage(imgData, 'JPEG', 25, 90, 160, height);
-                    doc.save(self.section.Name+'.pdf');
-                },
+            $('.graph_box').each(function(idx,element){
+                html2canvas($(element), {
+                    onrendered: function(canvas) {
+                        page_height = doc.internal.pageSize.height;
+                        page_width = doc.internal.pageSize.width;
+                        pos_x = 25;
+                        pos_y = (graph_count == $('.graph_box').length) ? 50 : pos_y + height + 10;
+                        var page_width_wom = page_width - (pos_x * 2); // page width without margins
+                        height = Math.round($(element).outerHeight() * 0.26);
+                        width = Math.round($(element).outerWidth() * 0.26);
+
+                        if (width > page_width_wom) {
+                            ratio = page_width_wom / width;
+                            width = page_width_wom;
+                            height = Math.round(height * ratio);
+                        }
+
+                        if ((pos_y + height) > page_height) {
+                            doc.addPage();
+                            pos_y = 30; // Restart height position
+                        }
+                        var imgData = canvas.toDataURL("image/jpeg",1.0);
+                        doc.addImage(imgData, 'JPEG', pos_x, pos_y, width, height);
+                        if (!--graph_count) doc.save(self.section.Name+'.pdf');
+                    },
+                });
             });
 
 

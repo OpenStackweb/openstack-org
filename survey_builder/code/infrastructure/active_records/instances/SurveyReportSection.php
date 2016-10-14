@@ -57,6 +57,7 @@ class SurveyReportSection extends DataObject {
             $total_answers = $answers['total'];
             $answers = $answers['answers'];
 
+            // set labels for multibars
             if ($graph->Question()->ClassName == 'SurveyRadioButtonMatrixTemplateQuestion') {
                 //fill up template
                 $row_values_array = array();
@@ -66,61 +67,74 @@ class SurveyReportSection extends DataObject {
                 foreach ($graph->Question()->Columns() as $col_value) {
                     $values[$col_value->Value] = $row_values_array;
                 }
-            }
-
-            foreach ($answers as $answer) {
-                if (!$answer) continue;
-
-                if ($graph->Question()->ClassName == 'SurveyRadioButtonMatrixTemplateQuestion') {
-                    $col = $answer->col;
-                    $row = $answer->row;
-                    $values[$row][$col]++;
+            } else {
+                if ($graph->Question()->Name == 'NetPromoter') {
+                    $values = array('Detractor' => 0, 'Neutral' => 0, 'Promoter' => 0);
                 } else {
-                    if (!isset($values[$answer]))
-                        $values[$answer] = 0;
-
-                    $values[$answer]++;
-                }
-            }
-
-            if ($graph->Question()->Name == 'NetPromoter') {
-                $promoter_perc = round(($values['Promoter'] / $total_answers) * 100);
-                $detractor_perc = round(($values['Detractor'] / $total_answers) * 100);
-                $extra_label = 'NPS: '.($promoter_perc - $detractor_perc);
-            }
-
-            //sort results
-            //arsort($values);
-
-            // hide answers if less than 10
-            if ($total_answers <= 10) {
-                $values = array();
-                $total_answers = 0;
-            }
-
-            if($graph->Type == 'pie' && count($values) > 10) {
-                $other_values = array_slice($values,13);
-                $values = array_slice($values,0,12);
-                $values['Other'] = 0;
-                foreach ($other_values as $val) {
-                    $values['Other'] += $val;
-                }
-            }
-
-            // all bar graphs are shown as percentage
-            if($graph->Type == 'bars') {
-                foreach ($values as $key => $val) {
-                    $values[$key] = round(($val / $total_answers) * 100);
-                }
-            }
-
-            if($graph->Type == 'multibars') {
-                foreach ($values as $key => $val) {
-                    foreach ($val as $key2 => $val2) {
-                        $values[$key][$key2] = round(($val2 / $total_answers) * 100);
+                    foreach ($graph->Question()->Values() as $value_temp) {
+                        $values[$value_temp->Value] = 0;
                     }
                 }
             }
+
+            if (count($answers)) {
+                foreach ($answers as $answer) {
+                    if (!$answer) continue;
+
+                    if ($graph->Question()->ClassName == 'SurveyRadioButtonMatrixTemplateQuestion') {
+                        $col = $answer->col;
+                        $row = $answer->row;
+                        $values[$row][$col]++;
+                    } else {
+                        if (!isset($values[$answer]))
+                            $values[$answer] = 0;
+
+                        $values[$answer]++;
+                    }
+                }
+
+                if ($graph->Question()->Name == 'NetPromoter') {
+                    $promoter_perc = round(($values['Promoter'] / $total_answers) * 100);
+                    $detractor_perc = round(($values['Detractor'] / $total_answers) * 100);
+                    $extra_label = 'NPS: '.($promoter_perc - $detractor_perc);
+                }
+
+                // hide answers if less than 10
+                if ($total_answers < 10) {
+                    $values = array();
+                    $total_answers = 0;
+                }
+
+                if($graph->Type == 'pie' || $graph->Type == 'bars') {
+                    //sort results
+                    arsort($values);
+                }
+
+                if($graph->Type == 'pie' && count($values) > 10) {
+                    $other_values = array_slice($values,13);
+                    $values = array_slice($values,0,12);
+                    $values['Other'] = 0;
+                    foreach ($other_values as $val) {
+                        $values['Other'] += $val;
+                    }
+                }
+
+                // all bar graphs are shown as percentage
+                if($graph->Type == 'bars') {
+                    foreach ($values as $key => $val) {
+                        $values[$key] = round(($val / $total_answers) * 100);
+                    }
+                }
+
+                if($graph->Type == 'multibars') {
+                    foreach ($values as $key => $val) {
+                        foreach ($val as $key2 => $val2) {
+                            $values[$key][$key2] = round(($val2 / $total_answers) * 100);
+                        }
+                    }
+                }
+            }
+
 
             $questions[] = array(
                 'ID'         => $graph->Question()->ID,

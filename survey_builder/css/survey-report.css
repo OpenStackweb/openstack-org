@@ -116,6 +116,7 @@ body {
     border: 2px solid #edf2f7;
     padding: 10px;
     margin-bottom: 20px;
+    background-color: #FFFFFF;
 }
 
 .graph_title {
@@ -149,4 +150,8 @@ div.jqplot-table-legend-swatch {
     border: none;
     width: 10px;
     height: 10px;
+}
+
+.tooltip {
+    background: none !important;
 }
