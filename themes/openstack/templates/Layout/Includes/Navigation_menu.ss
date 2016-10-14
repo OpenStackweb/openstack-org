@@ -46,6 +46,7 @@
     <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuEvents">
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/events/">Overview</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}summit/">The OpenStack Summit</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}ptg/">Project Teams Gathering</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/events/openstackdays">OpenStack Days</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/events/openstackhackathons">OpenStack App Hackathons</a></li>
     </ul>
