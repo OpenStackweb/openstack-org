@@ -34,48 +34,19 @@
             </div>
         </div>
     </div>
-    <h1>Get Started</h1>
-    <% if not $Top.SurveyTemplate.isVoid && not $CurrentMember %>
-        <div class="row">
-            <div class="col-lg-6">
-                <h3>Already have an OpenStack Foundation login?</h3>
-                <div class="survey-login-wrapper">
-                    <form id="MemberLoginForm_LoginForm" action="Security/login?BackURL={$Link}" method="post"
-                          enctype="application/x-www-form-urlencoded">
-                        <div class="Actions">
-                            <input class="action" id="MemberLoginForm_LoginForm_action_dologin" type="submit"
-                                   name="action_dologin" value="Log in" title="Log in"/>
-                            <p id="ForgotPassword"><a href="Security/lostpassword">I've lost my password</a></p>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <h3>Don't have a login? Start here.</h3>
-                <div class="survey-login-wrapper">
-                    $RegisterForm
-                </div>
-            </div>
-        </div>
-    <% else %>
-     <div class="row">
-            <div class="col-lg-12" style="text-align: center">
-                <a href="$Top.Link" title="Start Survey!" class="roundedButton">Start Survey!</a>
-            </div>
-        </div>
-    <% end_if %>
     <div class="row">
         <div class="col-lg-12">
             <h3>See the OpenStack community’s opinions, adoption and technology choices</h3>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
             <p>
-                Read more from the seventh survey of OpenStack users since April 2013, with a goal of better understanding attitudes, organizational profiles, use cases, and technology choices across the community’s various deployment stages and sizes.
+                Read more from the eighth survey of OpenStack users since April 2013, with a goal of better understanding attitudes, organizational profiles, use cases, and technology choices across the community’s various deployment stages and sizes. This round of the survey offers highlights only, including a selection of charts most widely used by the community, and focuses only on deployments.
             </p>
             <p>
-                <a class="roundedButton" href="http://www.openstack.org/assets/survey/April-2016-User-Survey-Report.pdf" target="_blank">Download the April 2016 Report</a>
+                <a class="roundedButton" href="http://www.openstack.org/assets/survey/October-2016-User-Survey-Report.pdf" target="_blank">Download the October 2016 highlights report</a>
+                <a class="roundedButton" href="http://www.openstack.org/assets/survey/April-2016-User-Survey-Report.pdf" target="_blank">Download the full April 2016 Report</a>
+            </p>
+            <h3>Be your own data scientist</h3>
+            <p>
+                Uncover your own findings by digging into the User Survey data from the past year with a <a href="/analytics">new analysis tool</a> available to the OpenStack community. Apply multiple filters to virtually every quantitative question from the user survey.
             </p>
         </div>
     </div>
@@ -83,9 +54,12 @@
         <div class="col-lg-12">
             <h3>Survey Assets</h3>
             <p>
-            <ul><li><a href="http://www.amazon.com/dp/1532707053/" target="_blank">Order a print copy here</a></li>
-            <li><a href="https://www.youtube.com/watch?v=lmu5r7BCY_U&feature=youtu.be" target="_blank">Video</a></li>
-            <li><a href="https://www.dropbox.com/s/8sxfm5bt57kgeys/User%20Survey%20overview%20web.pptx?dl=0" target="_blank">Slide deck</a></li>
+            <ul>
+                <li><a href="" target="_blank">See a video overview of the October 2016 report</a></li>
+                <li><a href="" target="_blank">Slide deck of the October 2016 highlights report</a></li>
+                <li><a href="http://www.amazon.com/dp/1532707053/" target="_blank">Order a print copy of the April 2016 full report</a></li>
+                <li><a href="https://www.youtube.com/watch?v=lmu5r7BCY_U&feature=youtu.be" target="_blank">Video overview of the April 2016 full report</a></li>
+                <li><a href="https://www.dropbox.com/s/8sxfm5bt57kgeys/User%20Survey%20overview%20web.pptx?dl=0" target="_blank">Slide deck of the April 2016 full report</a></li>
             </ul>
             </p>
             <h3>See prior surveys</h3>
@@ -135,9 +109,38 @@
     <% end_if %>
     <% if  $LoginPageContent %>
      $LoginPageContent
-        <hr/>
     <% end_if %>
-
+    
+    <h1>Get Started</h1>
+    <% if not $Top.SurveyTemplate.isVoid && not $CurrentMember %>
+        <div class="row">
+            <div class="col-lg-6">
+                <h3>Already have an OpenStack Foundation login?</h3>
+                <div class="survey-login-wrapper">
+                    <form id="MemberLoginForm_LoginForm" action="Security/login?BackURL={$Link}" method="post"
+                          enctype="application/x-www-form-urlencoded">
+                        <div class="Actions">
+                            <input class="action" id="MemberLoginForm_LoginForm_action_dologin" type="submit"
+                                   name="action_dologin" value="Log in" title="Log in"/>
+                            <p id="ForgotPassword"><a href="Security/lostpassword">I've lost my password</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <h3>Don't have a login? Start here.</h3>
+                <div class="survey-login-wrapper">
+                    $RegisterForm
+                </div>
+            </div>
+        </div>
+    <% else %>
+     <div class="row">
+            <div class="col-lg-12" style="text-align: center">
+                <a href="$Top.Link" title="Start Survey!" class="roundedButton">Start Survey!</a>
+            </div>
+        </div>
+    <% end_if %>
     <script>
         $(function () {
             var param = $('#fragment');
