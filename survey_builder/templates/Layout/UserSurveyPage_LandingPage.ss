@@ -55,7 +55,7 @@
             <h3>Survey Assets</h3>
             <p>
             <ul>
-                <!--<li><a href="" target="_blank">See a video overview of the October 2016 report</a></li>-->
+                <li><a href="https://www.youtube.com/watch?v=HFCLdh2rsbs&feature=youtu.be" target="_blank">See a video overview of the October 2016 report</a></li>
                 <li><a href="/assets/survey/October2016SurveyReport.pdf" target="_blank">Slide deck of the October 2016 highlights report</a></li>
                 <li><a href="http://www.amazon.com/dp/1532707053/" target="_blank">Order a print copy of the April 2016 full report</a></li>
                 <li><a href="https://www.youtube.com/watch?v=lmu5r7BCY_U&feature=youtu.be" target="_blank">Video overview of the April 2016 full report</a></li>
