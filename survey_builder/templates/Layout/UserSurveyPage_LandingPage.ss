@@ -41,8 +41,8 @@
                 Read more from the eighth survey of OpenStack users since April 2013, with a goal of better understanding attitudes, organizational profiles, use cases, and technology choices across the community’s various deployment stages and sizes. This round of the survey offers highlights only, including a selection of charts most widely used by the community, and focuses only on deployments.
             </p>
             <p>
-                <a class="roundedButton" href="http://www.openstack.org/assets/survey/October-2016-User-Survey-Report.pdf" target="_blank">Download the October 2016 highlights report</a>
-                <a class="roundedButton" href="http://www.openstack.org/assets/survey/April-2016-User-Survey-Report.pdf" target="_blank">Download the full April 2016 Report</a>
+                <a class="roundedButton" href="/assets/survey/October2016SurveyReport.pdf" target="_blank">Download the October 2016 highlights report</a>
+                <a class="roundedButton" href="/assets/survey/April-2016-User-Survey-Report.pdf" target="_blank">Download the full April 2016 Report</a>
             </p>
             <h3>Be your own data scientist</h3>
             <p>
