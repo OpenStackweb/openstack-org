@@ -6,7 +6,7 @@
 <events-bulk-presentation-list>
 
     <div class="panel panel-default">
-        <div class="panel-heading">Unpublished Presentations ({ page_data.total })</div>
+        <div class="panel-heading">Published Presentations ({ page_data.total })</div>
 
         <table class="table">
             <thead>
@@ -57,7 +57,7 @@
             $('body').ajax_loader();
             var term = $('#search-term').val();
 
-            $.getJSON('api/v1/summits/'+self.summit_id+'/events/unpublished/presentations',
+            $.getJSON('api/v1/summits/'+self.summit_id+'/events/published/presentations',
                 {page:page, page_size: self.page_data.limit, search_term: term, expand: 'speakers'},
                 function(data){
                     self.presentations = data.data;

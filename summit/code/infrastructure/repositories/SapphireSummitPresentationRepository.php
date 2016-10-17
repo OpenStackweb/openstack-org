@@ -25,6 +25,9 @@ final class SapphireSummitPresentationRepository extends SapphireSummitEventRepo
 
     /**
      * @param int $summit_id
+     * @param string $event_type
+     * @param string $status
+     * @param string $search_term
      * @param int $page
      * @param int $page_size
      * @param array $order
@@ -32,7 +35,38 @@ final class SapphireSummitPresentationRepository extends SapphireSummitEventRepo
      */
     public function getUnpublishedBySummit($summit_id, $event_type = null, $status = null, $search_term = null, $page = 1, $page_size = 10, $order = null)
     {
-        $filter = array('SummitID' => $summit_id, 'Published' => 0);
+        return $this->getEventsBySummitPaged($summit_id, $event_type, $status, 0, $search_term, $page, $page_size, $order);
+    }
+
+    /**
+     * @param int $summit_id
+     * @param string $event_type
+     * @param string $status
+     * @param string $search_term
+     * @param int $page
+     * @param int $page_size
+     * @param array $order
+     * @return array
+     */
+    public function getPublishedBySummit($summit_id, $event_type = null, $status = null, $search_term = null, $page = 1, $page_size = 10, $order = null)
+    {
+        return $this->getEventsBySummitPaged($summit_id, $event_type, $status, 1, $search_term, $page, $page_size, $order);
+    }
+
+    /**
+     * @param int $summit_id
+     * @param string $event_type
+     * @param string $status
+     * @param int $published
+     * @param string $search_term
+     * @param int $page
+     * @param int $page_size
+     * @param array $order
+     * @return array
+     */
+    public function getEventsBySummitPaged($summit_id, $event_type = null, $status = null, $published, $search_term = null, $page = 1, $page_size = 10, $order = null)
+    {
+        $filter = array('SummitID' => $summit_id, 'Published' => $published);
         if(is_null($order)) $order = 'SummitEvent.Created';
 
         $where_clause = "SummitEvent.Title IS NOT NULL AND SummitEvent.Title <>'' AND (SummitEventType.Type IN ('Presentation','Panel')) ";
@@ -49,16 +83,16 @@ final class SapphireSummitPresentationRepository extends SapphireSummitEventRepo
         $filter['Status'] = Presentation::STATUS_RECEIVED;
 
         $list      = Presentation::get()
-                        ->leftJoin('Presentation_Speakers','Presentation_Speakers.PresentationID = Presentation.ID')
-                        ->leftJoin('PresentationSpeaker','Presentation_Speakers.PresentationSpeakerID = PS.ID','PS')
-                        ->leftJoin('PresentationSpeaker','Presentation.ModeratorID = PS2.ID','PS2')
-                        ->leftJoin('Member','M.ID = PS.MemberID','M')
-                        ->leftJoin('Member','M2.ID = PS2.MemberID','M2')
-                        ->leftJoin('SpeakerRegistrationRequest','SRR.SpeakerID = PS.ID','SRR')
-                        ->leftJoin("SummitEventType","SummitEventType.ID = SummitEvent.TypeID")
-                        ->filter($filter)
-                        ->where($where_clause)
-                        ->sort("TRIM({$order})");
+            ->leftJoin('Presentation_Speakers','Presentation_Speakers.PresentationID = Presentation.ID')
+            ->leftJoin('PresentationSpeaker','Presentation_Speakers.PresentationSpeakerID = PS.ID','PS')
+            ->leftJoin('PresentationSpeaker','Presentation.ModeratorID = PS2.ID','PS2')
+            ->leftJoin('Member','M.ID = PS.MemberID','M')
+            ->leftJoin('Member','M2.ID = PS2.MemberID','M2')
+            ->leftJoin('SpeakerRegistrationRequest','SRR.SpeakerID = PS.ID','SRR')
+            ->leftJoin("SummitEventType","SummitEventType.ID = SummitEvent.TypeID")
+            ->filter($filter)
+            ->where($where_clause)
+            ->sort("TRIM({$order})");
 
         $count     = intval($list->count());
         if ($page_size) {
@@ -70,6 +104,7 @@ final class SapphireSummitPresentationRepository extends SapphireSummitEventRepo
 
         return array($page, $page_size, $count, $data);
     }
+
 
     /**
      * @param int $summit_id

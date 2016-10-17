@@ -85,12 +85,14 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
         'PUT $EVENT_ID!/publish'      => 'publishEvent',
         'PUT $EVENT_ID!'              => 'updateEvent',
         'GET unpublished/$Source!'    => 'getUnpublishedEventsBySource',
+        'GET published/$Source!'      => 'getPublishedEventsBySource',
         'DELETE unpublish/bulk'       => 'unPublishBulkEvents',
         'DELETE $EVENT_ID!/unpublish' => 'unPublishEvent',
     );
 
     static $allowed_actions = array(
         'getUnpublishedEventsBySource',
+        'getPublishedEventsBySource',
         'publishEvent',
         'unPublishEvent',
         'createEvent',
@@ -142,6 +144,89 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
                     list($page, $page_size, $count, $data) = $this->summitevent_repository->getUnpublishedBySummit($summit_id, $event_type_id, $search_term, $page,$page_size, $order);
                 }
                 break;
+            }
+
+            $events = array();
+            foreach ($data as $e)
+            {
+                $entry = array
+                (
+                    'id'          => intval($e->ID),
+                    'title'       => $e->Title,
+                    'description' => !empty($e->Description)? $e->Description : $e->ShortDescription,
+                    'type_id'     => intval($e->TypeID),
+                    'class_name'  => $e->ClassName,
+                );
+
+                if ($e instanceof Presentation)
+                {
+                    $speakers = array();
+                    if(!empty($expand) && strstr($expand, 'speakers')!== false)
+                    {
+                        foreach ($e->Speakers() as $s) {
+                            array_push($speakers, array('id' => intval($s->ID), 'name' => $s->getName()));
+                        }
+                        $entry['speakers'] = $speakers;
+                    }
+                    else {
+                        foreach ($e->Speakers() as $s) {
+                            array_push($speakers, $s->ID);
+                        }
+                        $entry['speakers_id'] = $speakers;
+                    }
+                    $entry['moderator_id'] = intval($e->ModeratorID);
+                    $entry['track_id']     = intval($e->CategoryID);
+                    $entry['level']        = $e->Level;
+                    $entry['status']       = $e->SelectionStatus();
+                }
+                array_push($events, $entry);
+            }
+
+            $total_pages = ($page_size) ? ceil($count/$page_size) : 1;
+
+            return $this->ok(
+                array
+                (
+                    'data'        => $events,
+                    'page'        => $page,
+                    'page_size'   => $page_size,
+                    'total_pages' => $total_pages,
+                    'total'       => $count,
+                )
+            );
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    public function getPublishedEventsBySource(SS_HTTPRequest $request) {
+        try {
+            $query_string = $request->getVars();
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $source       = strtolower(Convert::raw2sql($request->param('Source')));
+            $valid_sources = array('tracks', 'track_list', 'presentations', 'events');
+
+            if(!in_array($source, $valid_sources)) return $this->validationError(array('invalid requested source'));
+
+            $search_term   = isset($query_string['search_term']) ? Convert::raw2sql($query_string['search_term']) : null;
+            $status        = isset($query_string['status']) ? Convert::raw2sql($query_string['status']) : null;
+            $track_list_id = isset($query_string['track_list_id']) ? intval($query_string['track_list_id']) : null;
+            $track_id      = isset($query_string['track_id']) ? intval($query_string['track_id']) : null;
+            $event_type_id = isset($query_string['event_type_id']) ? intval($query_string['event_type_id']) : null;
+            $page          = isset($query_string['page']) ? intval($query_string['page']) : 1;
+            $page_size     = isset($query_string['page_size']) ? intval($query_string['page_size']) : 10;
+            $order         = isset($query_string['order']) ? Convert::raw2sql($query_string['order']) : null;
+            $expand        = isset($query_string['expand']) ? Convert::raw2sql($query_string['expand']) : null;
+
+            switch ($source)
+            {
+                case 'presentations':
+                {
+                    list($page, $page_size, $count, $data) = $this->summitpresentation_repository->getPublishedBySummit($summit_id, null, $status, $search_term, $page,$page_size, $order);
+                }
             }
 
             $events = array();
