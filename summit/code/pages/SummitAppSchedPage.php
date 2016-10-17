@@ -357,6 +357,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         try {
             $html2pdf = new HTML2PDF('P', 'A4', 'en', true, 'UTF-8', array(15, 5, 15, 5));
             $html2pdf->setTestIsImage(false);
+            $html2pdf->setTestTdInOnePage(false);
             $html2pdf->WriteHTML($html_outer);
 
             //clean output buffer
@@ -433,6 +434,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         try {
             $html2pdf = new HTML2PDF('P', 'A4', 'en', true, 'UTF-8', array(15, 5, 15, 5));
             $html2pdf->setTestIsImage(false);
+            $html2pdf->setTestTdInOnePage(false);
             $html2pdf->WriteHTML($html_outer);
 
             //clean output buffer
