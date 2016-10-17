@@ -7,6 +7,12 @@
                 <span><i class="fa fa-chevron-circle-right"></i></span>
             </div>
         </div>
+        <div class="section_container">
+            <br>
+            <div class="section" data-section-id="1">
+                <a href="/analytics/faq">Analytics FAQ</a>
+            </div>
+        </div>
         <div class="pdf_container">
             <div class="pdf_button">
             <span>DOWNLOAD AS PDF</span>
