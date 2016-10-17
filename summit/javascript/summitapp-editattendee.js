@@ -71,12 +71,14 @@ $(document).ready(function(){
                 $('.no_speaker').show();
             }
 
+            $('#aff_title').val('');
             $('#aff_company').tagsinput('removeAll');
             $('#aff_from').val('');
             $('#aff_to').val('');
             $('#aff_current').attr('checked',false);
             
             if (data.affiliation) {
+                $('#aff_title').val(data.affiliation.Title);
                 $('#aff_company').tagsinput('add', data.affiliation.Company);
                 $('#aff_from').val(data.affiliation.StartDate);
                 $('#aff_to').val(data.affiliation.EndDate);
@@ -139,6 +141,38 @@ $(document).ready(function(){
         menubar:    false
     });
 
+    $('.del-ticket').click(function(ev){
+        ev.preventDefault();
+        var ticket_id = $(this).data('ticket');
+        var summit_id   = $('#summit_id').val();
+        var attendee_id = $('#attendee_id').val();
+        var element = $(this);
+
+        swal({
+            title: "Are you sure?",
+            text: "Ticket will be left unassigned!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete it!"
+        }, function(){
+            $.ajax({
+                type: 'DELETE',
+                url:  'api/v1/summits/'+summit_id+'/attendees/'+attendee_id+'/tickets/'+ticket_id,
+                dataType:'json',
+                success: function (data, textStatus, jqXHR) {
+                    element.parent('div').remove();
+                }
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                swal("Couldn't delete.",'There was an error, please contact your administrator','warning');
+            });
+        });
+
+        return false;
+
+    });
+
+
     $('.ticket').click(function(){
         var summit_id   = $('#summit_id').val();
         var attendee_id = $('#attendee_id').val();
@@ -189,6 +223,7 @@ $(document).ready(function(){
 
         var request = {
             member: $('#member').val(),
+            aff_title: $('#aff_title').val(),
             aff_company: $('#aff_company').val(),
             aff_from: $('#aff_from').val(),
             aff_to: $('#aff_to').val(),
@@ -245,6 +280,40 @@ $(document).ready(function(){
         } else {
             reassignTicket();
         }
+    });
+
+    $('#add_ticket').click(function(){
+        var summit_id   = $('#summit_id').val();
+        var attendee_id = $('#attendee_id').val();
+
+        if (!$('#add-ticket-id').val()) {
+            $('#add-ticket-id').addClass('error');
+            return false;
+        }
+
+        var url = 'api/v1/summits/'+summit_id+'/attendees/'+attendee_id+'/tickets/';
+
+        var request = {
+            external_id: $('#add-ticket-id').val(),
+            external_attendee_id: $('#add-ticket-attendee').val()
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: JSON.stringify(request),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        }).done(function() {
+            location.reload();
+        }).fail(function(jqXHR) {
+            var responseCode = jqXHR.status;
+            if(responseCode == 412) {
+                var response = $.parseJSON(jqXHR.responseText);
+                swal('Validation error', response.messages[0].message, 'warning');
+            }
+        });
+
     });
 
     function reassignTicket() {

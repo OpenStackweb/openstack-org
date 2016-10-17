@@ -31,21 +31,26 @@
             <div class="form-group">
                 <div class="row affiliation" <% if not $Attendee.Member %> style="display:none" <% end_if %>>
                     <div class="col-md-3">
+                        <label for="aff_title">Title</label><br>
+                        <input id="aff_title" class="form-control" value="{$Attendee.Member.currentAffiliation.JobTitle}"/>
+                    </div>
+                    <div class="col-md-3">
                         <label for="aff_company">Company</label><br>
-                        <input id="aff_company" />
+                        <input id="aff_company" class="form-control" />
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <label>From</label><br>
-                        <input id="aff_from" value="{$Attendee.Member.currentAffiliation.StartDate}" />
+                        <input id="aff_from" class="form-control" value="{$Attendee.Member.currentAffiliation.StartDate}" />
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <label>To</label><br>
-                        <input id="aff_to" value="{$Attendee.Member.currentAffiliation.EndDate}" />
+                        <input id="aff_to" class="form-control" value="{$Attendee.Member.currentAffiliation.EndDate}" />
                     </div>
-                    <div class="col-md-3 company_container">
+                    <div class="col-md-2 company_container">
                         <br>
                         <div class="checkbox">
-                            <label> <input id="aff_current" type="checkbox" <% if $Attendee.Member.currentAffiliation.Current %> checked <% end_if %>> Current </label>
+                            <input id="aff_current" type="checkbox" <% if $Attendee.Member.currentAffiliation.Current %> checked <% end_if %>>
+                            <label for="aff_current"> Current </label>
                         </div>
                     </div>
                 </div>
@@ -60,12 +65,14 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="checkbox">
-                            <label> <input id="share_info" type="checkbox" <% if $Attendee.SharedContactInfo %> checked <% end_if %>> Shared Contact Info </label>
+                            <input id="share_info" type="checkbox" <% if $Attendee.SharedContactInfo %> checked <% end_if %>>
+                            <label for="share_info"> Shared Contact Info </label>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="checkbox">
-                            <label> <input id="checked_in" type="checkbox" <% if $Attendee.SummitHallCheckedIn %> checked <% end_if %>> Checked In </label>
+                            <input id="checked_in" type="checkbox" <% if $Attendee.SummitHallCheckedIn %> checked <% end_if %>>
+                            <label for="checked_in"> Checked In </label>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -82,11 +89,19 @@
                         <label>Tickets</label><br>
                         <% if $Attendee.Tickets %>
                             <% loop $Attendee.Tickets %>
-                                <a href="" class="ticket" data-toggle="modal" data-target="#ticket-modal" data-ticket="{$ID}">$ExternalOrderId </a>
+                                <div class="btn-group btn-group-xs ticket-btn">
+                                    <a href="" class="ticket btn btn-default" data-toggle="modal" data-target="#ticket-modal" data-ticket="{$ID}">
+                                        $ExternalOrderId
+                                    </a>
+                                    <a href="" class="del-ticket btn btn-danger" data-ticket="{$ID}">
+                                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                    </a>
+                                </div>
                             <% end_loop %>
-                        <% else %>
-                            <i>None</i>
                         <% end_if %>
+                        <a href="" id="add-ticket-btn" class="btn btn-default btn-xs" data-toggle="modal" data-target="#add-ticket-modal">
+                            Add Ticket
+                        </a>
                     </div>
                 </div>
             </div>
@@ -100,15 +115,15 @@
                     <div class="row">
                         <div class="col-md-4">
                             <label>Title</label>
-                            <input id="title" value="$Attendee.Member.Speaker.Title" />
+                            <input id="title" class="form-control" value="$Attendee.Member.Speaker.Title" />
                         </div>
                         <div class="col-md-4">
                             <label>First Name</label>
-                            <input id="first_name" value="$Attendee.Member.Speaker.FirstName" />
+                            <input id="first_name" class="form-control" value="$Attendee.Member.Speaker.FirstName" />
                         </div>
                         <div class="col-md-4">
                             <label>Last Name</label>
-                            <input id="last_name" value="$Attendee.Member.Speaker.LastName" />
+                            <input id="last_name" class="form-control" value="$Attendee.Member.Speaker.LastName" />
                         </div>
                     </div>
                 </div>
@@ -176,6 +191,32 @@
             </div>
         </div>
     </div>
+
+    <div id="add-ticket-modal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">New Ticket</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label>External ID</label><br>
+                                <input id="add-ticket-id" class="form-control"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label>External Attendee ID</label><br>
+                                <input id="add-ticket-attendee" class="form-control"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="add_ticket" type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     <script type="text/javascript">
         var member = {};

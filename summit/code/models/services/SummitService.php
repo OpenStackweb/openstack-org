@@ -516,6 +516,7 @@ final class SummitService implements ISummitService
                 }
 
                 $current_affiliation->OrganizationID =  $attendee_data['aff_company'];
+                $current_affiliation->JobTitle =  $attendee_data['aff_title'];
                 $current_affiliation->StartDate =  $attendee_data['aff_from'];
                 $current_affiliation->EndDate =  $attendee_data['aff_to'];
                 $current_affiliation->Current =  $attendee_data['aff_current'];
@@ -543,34 +544,76 @@ final class SummitService implements ISummitService
             if(!$ticket_id)
                 throw new EntityValidationException('missing required param: id');
 
-            $attendee = $attendee_repository->getByMemberAndSummit($member_id,$summit->getIdentifier());
             $ticket = SummitAttendeeTicket::get_by_id('SummitAttendeeTicket',$ticket_id);
-            $previous_owner = $ticket->Owner();
 
+            if (!$member_id) {
+                $ticket->OwnerID = 0;
+                $ticket->write();
+            } else {
+                $attendee = $attendee_repository->getByMemberAndSummit($member_id,$summit->getIdentifier());
+                $previous_owner = $ticket->Owner();
 
-            if ($attendee) {
-                if ($attendee->Tickets()->count() > 0) {
-                    throw new EntityValidationException('This member is already assigned to another tix');
+                if ($attendee) {
+                    if ($attendee->Tickets()->count() > 0) {
+                        throw new EntityValidationException('This member is already assigned to another tix');
+                    } else {
+                        $previous_owner->Tickets()->remove($ticket);
+                        $attendee->Tickets()->add($ticket);
+                    }
                 } else {
                     $previous_owner->Tickets()->remove($ticket);
+
+                    $attendee = new SummitAttendee();
+                    $attendee->MemberID = $member_id;
+                    $attendee->SummitID = $summit->getIdentifier();
+
                     $attendee->Tickets()->add($ticket);
                 }
-            } else {
-                $previous_owner->Tickets()->remove($ticket);
 
-                $attendee = new SummitAttendee();
-                $attendee->MemberID = $member_id;
-                $attendee->SummitID = $summit->getIdentifier();
+                $attendee->write();
 
-                $attendee->Tickets()->add($ticket);
+                // if the attendee has no more tickets we delete it
+                if ($previous_owner->Tickets()->count() == 0) {
+                    $previous_owner->delete();
+                }
+
+                return $attendee;
             }
 
-            $attendee->write();
 
-            // if the attendee has no more tickets we delete it
-            if ($previous_owner->Tickets()->count() == 0) {
-                $previous_owner->delete();
-            }
+
+
+        });
+    }
+
+    /**
+     * @param ISummit $summit
+     * @param $attendee_id
+     * @param $data
+     * @return mixed
+     */
+    public function addAttendeeTicket(ISummit $summit, $attendee_id, $data)
+    {
+        $attendee_repository = $this->attendee_repository;
+
+        return $this->tx_service->transaction(function() use($summit, $attendee_id, $data, $attendee_repository){
+
+            if(!$attendee_id)
+                throw new EntityValidationException('missing required param: attendee id');
+
+            if (!isset($data['external_id']))
+                throw new EntityValidationException('missing required param: external id');
+
+            $existing_ticket = SummitAttendeeTicket::get()->where("ExternalOrderId = '".$data['external_id']."'")->first();
+            if ($existing_ticket)
+                throw new EntityValidationException('External Order ID already exists, please choose another one.');
+
+            $ticket = new SummitAttendeeTicket();
+            $ticket->ExternalOrderId = $data['external_id'];
+            $ticket->ExternalAttendeeId = $data['external_attendee_id'];
+
+            $attendee = $attendee_repository->getById($attendee_id);
+            $attendee->Tickets()->add($ticket);
 
             return $attendee;
         });

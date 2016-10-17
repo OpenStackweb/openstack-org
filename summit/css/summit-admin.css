@@ -26,6 +26,10 @@
     color: #333 !important;
 }
 
+.btn-danger {
+    color: #FFF !important;
+}
+
 .btn-success {
     color: white !important;
 }
@@ -178,6 +182,10 @@
 
 .current_event {
     background-color: lightblue;
+}
+
+.ticket-btn {
+    margin-right: 10px;
 }
 
 /* EDIT ATTENDEES */

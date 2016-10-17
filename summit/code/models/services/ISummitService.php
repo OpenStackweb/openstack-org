@@ -66,6 +66,14 @@ interface ISummitService
 
     /**
      * @param ISummit $summit
+     * @param $attendee_id
+     * @param $data
+     * @return mixed
+     */
+    public function addAttendeeTicket(ISummit $summit, $attendee_id, $data);
+
+    /**
+     * @param ISummit $summit
      * @param array $data
      */
     public function updateAndPublishBulkEvents(ISummit $summit, array $data);
