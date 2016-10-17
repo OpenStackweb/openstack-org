@@ -28,8 +28,6 @@
         var has_meta_app_links = (typeof $("meta[property='al:android:url']").attr("content") != "undefined" || typeof $("meta[property='al:ios:url']").attr("content") != "undefined");
         if (is_mobile && has_meta_app_links){
             var os = is_android ? 'Android' : 'IOS';
-            // ios and safari and ios >= 9 dont show anything
-            if(is_ios && is_safari && compare_os_version >=0 ) return;
             // check if we are on RSVP page, dont show it
             console.log('uri path '+uri.path());
             if(uri.path().indexOf('/rsvp') !== -1 ) return;

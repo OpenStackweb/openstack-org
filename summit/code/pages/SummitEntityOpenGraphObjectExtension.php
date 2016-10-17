@@ -17,7 +17,6 @@ final class AppLinkIOSMetadataBuilder
 {
     public static function buildAppLinksMetaTags(&$tags, $url_path){
         // IOS
-        $tags .= sprintf('<meta name="apple-itunes-app" content="app-id=%s, app-argument=%s://%s"/>', APP_LINKS_IOS_APP_STORE_ID, APP_LINKS_IOS_APP_CUSTOM_SCHEMA, $url_path).PHP_EOL;
         $tags .= sprintf('<meta property="al:ios:app_store_id" content="%s" />', APP_LINKS_IOS_APP_STORE_ID).PHP_EOL;
         $tags .= sprintf('<meta property="al:ios:app_name" content="%s" />', APP_LINKS_IOS_APP_NAME).PHP_EOL;
         $tags .= sprintf('<meta property="al:ios:url" content="%s://%s" />', APP_LINKS_IOS_APP_CUSTOM_SCHEMA, $url_path).PHP_EOL;
