@@ -601,7 +601,7 @@ final class SummitService implements ISummitService
             if(!$attendee_id)
                 throw new EntityValidationException('missing required param: attendee id');
 
-            if (!isset($data['external_id']))
+            if (!isset($data['external_id']) && !empty($data['external_id']))
                 throw new EntityValidationException('missing required param: external id');
 
             $existing_ticket = SummitAttendeeTicket::get()->where("ExternalOrderId = '".$data['external_id']."'")->first();
@@ -611,6 +611,7 @@ final class SummitService implements ISummitService
             $ticket = new SummitAttendeeTicket();
             $ticket->ExternalOrderId = $data['external_id'];
             $ticket->ExternalAttendeeId = $data['external_attendee_id'];
+            $ticket->TicketTypeID = $data['ticket_type_id'];
             $ticket->write();
 
             $attendee = $attendee_repository->getById($attendee_id);

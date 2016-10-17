@@ -170,8 +170,8 @@
                             <div id="ticket-external-attendee"></div>
                         </div>
                         <div class="col-md-4">
-                            <label>Bought Date</label><br>
-                            <div id="ticket-bought-date"></div>
+                            <label>Ticket Type</label><br>
+                            <div id="ticket-type"></div>
                         </div>
                     </div>
                     <br>
@@ -208,6 +208,14 @@
                             <div class="col-md-4">
                                 <label>EventBrite Attendee ID</label><br>
                                 <input id="add-ticket-attendee" class="form-control"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label>Ticket Type</label><br>
+                                <select id="add-ticket-type" class="form-control">
+                                <% loop $Summit.SummitTicketTypes() %>
+                                    <option value="{$ID}"> $Name </option>
+                                <% end_loop %>
+                                </select>
                             </div>
                         </div>
                     </div>

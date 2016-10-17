@@ -179,7 +179,7 @@ $(document).ready(function(){
         var ticket_id = $(this).data('ticket');
         $.getJSON('api/v1/summits/'+summit_id+'/attendees/'+attendee_id+'/tickets/'+ticket_id, {}, function(data){
             $('#ticket-external').html(data.ExternalOrderId);
-            $('#ticket-bought-date').html(data.TicketBoughtDate);
+            $('#ticket-type').html(data.TicketTypeName);
             $('#ticket-external-attendee').html(data.ExternalAttendeeId);
             $('#ticket_id').val(data.ID);
 
@@ -295,7 +295,8 @@ $(document).ready(function(){
 
         var request = {
             external_id: $('#add-ticket-id').val(),
-            external_attendee_id: $('#add-ticket-attendee').val()
+            external_attendee_id: $('#add-ticket-attendee').val(),
+            ticket_type_id: $('#add-ticket-type').val()
         };
 
         $.ajax({

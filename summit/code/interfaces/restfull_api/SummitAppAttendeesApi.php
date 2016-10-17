@@ -212,7 +212,9 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
             $ticket       = SummitAttendeeTicket::get_by_id('SummitAttendeeTicket',$ticket_id);
             if(is_null($ticket)) throw new NotFoundEntityException('SummitAttendeeTicket', sprintf(' id %s', $ticket_id));
 
-            return $this->ok($ticket->toMap());
+            $ticket_array = $ticket->toMap();
+            $ticket_array['TicketTypeName'] = $ticket->TicketType()->Name;
+            return $this->ok($ticket_array);
         }
         catch(NotFoundEntityException $ex2)
         {
