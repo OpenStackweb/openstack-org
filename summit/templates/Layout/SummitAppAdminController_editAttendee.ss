@@ -86,7 +86,7 @@
             <div class="form-group">
                 <div class="row">
                     <div class="col-md-12">
-                        <label>Tickets</label><br>
+                        <label>Tickets </label> ( EventBrite Order# )<br>
                         <% if $Attendee.Tickets %>
                             <% loop $Attendee.Tickets %>
                                 <div class="btn-group btn-group-xs ticket-btn">
@@ -162,11 +162,11 @@
                     <input type="hidden" id="ticket_id" />
                     <div class="row">
                         <div class="col-md-4">
-                            <label>External ID</label><br>
+                            <label>EventBrite Order#</label><br>
                             <div id="ticket-external"></div>
                         </div>
                         <div class="col-md-4">
-                            <label>External Attendee ID</label><br>
+                            <label>EventBrite Attendee ID</label><br>
                             <div id="ticket-external-attendee"></div>
                         </div>
                         <div class="col-md-4">
@@ -202,11 +202,11 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-4">
-                                <label>External ID</label><br>
+                                <label>EventBrite Order#</label><br>
                                 <input id="add-ticket-id" class="form-control"/>
                             </div>
                             <div class="col-md-4">
-                                <label>External Attendee ID</label><br>
+                                <label>EventBrite Attendee ID</label><br>
                                 <input id="add-ticket-attendee" class="form-control"/>
                             </div>
                         </div>
