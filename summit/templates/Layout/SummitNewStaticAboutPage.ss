@@ -43,14 +43,15 @@
 			</div>
 		<div class="col-lg-3 col-md-4 col-sm-4">
       <ul class="help-me-menu">
-          <li><a href="/summit/barcelona-2016/mobile-apps/"><i class="fa fa-mobile"></i>Download the Summit Mobile Apps</a></li>
+          <li><a href="/summit/barcelona-2016/mobile-apps/"><i class="fa fa-mobile"></i>Mobile App Schedule</a></li>
           <li><a href="/summit/barcelona-2016/openstack-academy/"><i class="fa fa-graduation-cap"></i>OpenStack Academy</a></li>
           <li><a href="/summit/barcelona-2016/barcelona-and-travel/#visa"><i class="fa fa-globe"></i>Visa Info</a></li>
           <li><a href="/summit/barcelona-2016/code-of-conduct/"><i class="fa fa-users"></i>Code Of Conduct</a></li>
           <li><a href="/summit/barcelona-2016/barcelona-and-travel/#hotels"><i class="fa fa-hotel"></i>Hotels &amp; Airport</a></li>
           <li><a href="/summit/barcelona-2016/guide-to-barcelona/"><i class="fa fa-compass"></i>Guide to Barcelona</a></li>
           <li><a href="/summit/barcelona-2016/travel-tips/"><i class="fa fa-map-signs"></i>Travel Tips</a></li>
-	  <li><a href="/summit/barcelona-2016/summit-map"><i class="fa fa-map-globe"></i>Summit Campus Maps</a></li>
+          <li><a href="/summit/barcelona-2016/summit-map"><i class="fa fa-globe"></i>Summit Campus Maps</a></li>
+          <li><a href="/summit/barcelona-2016/lunch-menus"><i class="fa fa-cutlery"></i>Lunch Options & Menus</a></li>
           <li><a href="https://spousetivities.ticketleap.com/openstack-summit-2016-barcelona/" target="_blank"><i class="fa fa-bicycle"></i>Spousetivities</a></li>
       </ul>
 		</div>
