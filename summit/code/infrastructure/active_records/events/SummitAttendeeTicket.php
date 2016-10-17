@@ -41,6 +41,14 @@ final class SummitAttendeeTicket extends DataObject implements ISummitAttendeeTi
     public function getCMSFields()
     {
 
+        $summit_id = isset($_REQUEST['SummitID']) ? intval($_REQUEST['SummitID']) : 0;
+
+        if(empty($summit_id))
+        {
+            $summit_id =  $this->Owner()->exists() ? $this->Owner()->SummitID : Summit::get_active()->ID;
+        }
+
+
         $f = new FieldList
         (
             $rootTab = new TabSet("Root", $tabMain = new Tab('Main'))
@@ -55,12 +63,6 @@ final class SummitAttendeeTicket extends DataObject implements ISummitAttendeeTi
 
         $f->addFieldsToTab('Root.Main', $date = new DatetimeField('TicketChangedDate', 'Changed Date'));
         $date->getDateField()->setConfig('showcalendar', true);
-        $summit_id = $_REQUEST['SummitID'];
-
-        if(empty($summit_id))
-        {
-            $summit_id =  $this->Owner()->exists() ? $this->Owner()->SummitID : Summit::get_active()->ID;
-        }
 
         $f->addFieldsToTab('Root.Main', $ddl = new DropdownField('TicketTypeID', 'Ticket Type', SummitTicketType::get()->filter('SummitID', $summit_id)->map("ID","Name")));
         return $f;
