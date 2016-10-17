@@ -611,6 +611,7 @@ final class SummitService implements ISummitService
             $ticket = new SummitAttendeeTicket();
             $ticket->ExternalOrderId = $data['external_id'];
             $ticket->ExternalAttendeeId = $data['external_attendee_id'];
+            $ticket->write();
 
             $attendee = $attendee_repository->getById($attendee_id);
             $attendee->Tickets()->add($ticket);
