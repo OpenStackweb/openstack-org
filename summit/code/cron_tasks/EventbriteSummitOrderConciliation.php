@@ -25,7 +25,7 @@ class EventbriteSummitOrderConciliation extends CronTask
 
         if (!isset($_GET['summit_external_id']))
         {
-            echo "you must provide a summit_external_id!".PHP_EO;
+            echo "you must provide a summit_external_id!".PHP_EOL;
             return -1;
         }
 

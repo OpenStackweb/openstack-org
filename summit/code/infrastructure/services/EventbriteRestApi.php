@@ -81,7 +81,7 @@ final class EventbriteRestApi implements IEventbriteRestApi
      */
     public function getOrdersBySummit(ISummit $summit, $page = 1){
         $event_id = $summit->getExternalEventId();
-        $url      = sprintf('%s/event/%s/orders', self::BaseUrl, $event_id);
+        $url      = sprintf('%s/events/%s/orders', self::BaseUrl, $event_id);
         return $this->getEntity($url, ['expand' => 'attendees', 'status' => 'active', 'page' => intval($page), ]);
     }
 
