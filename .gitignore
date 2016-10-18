@@ -29,7 +29,6 @@ silverstripe-cache/
 .settings/
 .idea/
 #composer
-composer.lock
 composer.phar
 backup_scripts/cron-backup-config.php
 logs/
