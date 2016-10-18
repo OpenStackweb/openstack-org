@@ -1482,4 +1482,12 @@ SQL;
         }
         return null;
     }
+
+    /**
+     * @return string
+     */
+    public function getExternalEventId()
+    {
+        return $this->getField("ExternalEventId");
+    }
 }

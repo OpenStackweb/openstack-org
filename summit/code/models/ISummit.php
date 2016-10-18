@@ -312,4 +312,9 @@ interface ISummit extends IEntity
      */
     public function getPrivateGroupFor(PresentationCategory $category);
 
+    /**
+     * @return string
+     */
+    public function getExternalEventId();
+
 }

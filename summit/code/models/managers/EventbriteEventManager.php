@@ -66,14 +66,14 @@ final class EventbriteEventManager implements IEventbriteEventManager
         ISummitRepository $summit_repository,
         ITransactionManager $tx_manager
     ) {
-        $this->repository = $repository;
-        $this->factory = $factory;
-        $this->api = $api;
-        $this->member_repository = $member_repository;
-        $this->attendee_factory = $attendee_factory;
+        $this->repository          = $repository;
+        $this->factory             = $factory;
+        $this->api                 = $api;
+        $this->member_repository   = $member_repository;
+        $this->attendee_factory    = $attendee_factory;
         $this->attendee_repository = $attendee_repository;
-        $this->summit_repository = $summit_repository;
-        $this->tx_manager = $tx_manager;
+        $this->summit_repository   = $summit_repository;
+        $this->tx_manager          = $tx_manager;
 
         $this->api->setCredentials(array('token' => EVENTBRITE_PERSONAL_OAUTH2_TOKEN));
     }
@@ -137,8 +137,8 @@ final class EventbriteEventManager implements IEventbriteEventManager
                 $json_data = $api->getEntity($event->getApiUrl(), array('expand' => 'attendees'));
                 if (isset($json_data['attendees']))
                 {
-                    $order_date = $json_data['created'];
-                    $status     = $json_data['status'];
+                    $order_date       = $json_data['created'];
+                    $status           = $json_data['status'];
 
                     if($status === 'placed')
                     {
@@ -211,6 +211,13 @@ final class EventbriteEventManager implements IEventbriteEventManager
                             $attendee->addTicket($ticket);
                             $attendee_repository->add($attendee);
                         }
+
+                        $external_summit    = $json_data['event'];
+                        $external_summit_id = $external_summit['id'];
+                        // associate the corresponding summit
+                        $summit             = $summit_repository->getByExternalEventId($external_summit_id);
+                        if(is_null(!$summit))
+                            $event->SummitID = $summit->getIdentifier();
                     }
                 }
                 $event->markAsProcessed($status);
@@ -288,18 +295,29 @@ final class EventbriteEventManager implements IEventbriteEventManager
             ))->first();
 
             if(!is_null($old_ticket)) {
-                if ($old_ticket->OwnerID > 0)
-                        throw new EntityValidationException
+                if ($old_ticket->OwnerID > 0) {
+                    // save intent and throw the exception
+
+                    $redeem_error = new RedeemTicketError();
+                    $redeem_error->ExternalOrderId    = $external_order_id;
+                    $redeem_error->ExternalAttendeeId = $external_attendee_id;
+                    $redeem_error->OriginatorID       = $member->ID;
+                    $redeem_error->OriginalOwnerID    = $old_ticket->OwnerID;
+                    $redeem_error->OriginalTicketID   = $old_ticket->ID;
+                    $redeem_error->write();
+
+                    throw new EntityValidationException
+                    (
+                        sprintf
                         (
-                            sprintf
-                            (
-                                'Ticket already redeem external_order_id %s - external_attendee_id %s - old attendee id %s - current member id %s !',
-                                $external_order_id,
-                                $external_attendee_id,
-                                $old_ticket->OwnerID,
-                                $member->ID
-                            )
-                        );
+                            'Ticket already redeem external_order_id %s - external_attendee_id %s - old attendee id %s - current member id %s !',
+                            $external_order_id,
+                            $external_attendee_id,
+                            $old_ticket->OwnerID,
+                            $member->ID
+                        )
+                    );
+                }
                 $old_ticket->delete();
             }
 
