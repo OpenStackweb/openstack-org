@@ -66,3 +66,7 @@ input.error{
     margin:0 3px;
     vertical-align: top;
 }
+
+table {
+    width: auto !important;
+}

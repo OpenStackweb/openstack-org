@@ -522,6 +522,29 @@ SQL;
     {
         $this->clearStatisticsSurveyBuilderSessionData('SurveyTemplate');
 
+        Requirements::css("themes/openstack/bower_assets/jqplot-bower/dist/jquery.jqplot.min.css");
+        //jqplot and plugins ...
+        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/jquery.jqplot.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.canvasAxisTickRenderer.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.dateAxisRenderer.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.cursor.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.categoryAxisRenderer.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.canvasTextRenderer.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.canvasOverlay.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.enhancedLegendRenderer.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.json2.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.logAxisRenderer.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.pointLabels.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.trendline.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.barRenderer.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.pieRenderer.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.bubbleRenderer.js");
+        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.canvasAxisLabelRenderer.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.highlighter.min.js");
+
+        Requirements::javascript('sangria/code/js/survey.deployment.stat.builder.js');
+
+
         return $this->ViewStatisticsSurveyBuilder($request, 'ViewDeploymentStatisticsSurveyBuilder',
             'EntitySurveyTemplate');
     }
@@ -764,5 +787,96 @@ SQL;
 
 
         return CSVExporter::getInstance()->export('export_table.csv', $results_array, ',');
+    }
+
+    public function getProjectsUsedCombined()
+    {
+
+        $template_id = Session::get("SurveyBuilder.EntitySurveyTemplateStatistics.TemplateId");
+        $filters_where = $this->generateFilters();
+
+        $pu_questions_query = " SELECT QT.ID FROM SurveyQuestionTemplate QT
+                                LEFT JOIN SurveyStepTemplate ST ON ST.ID = QT.StepID
+                                WHERE ST.SurveyTemplateID = {$template_id} AND (QT.Name = 'ProjectsUsed' OR QT.Name = 'ProjectsUsedPoC')";
+
+        $pu_question_ids = DB::query($pu_questions_query)->column();
+
+        $answers_query = "  SELECT ANS.`Value` FROM SurveyAnswer ANS
+                            INNER JOIN SurveyStep STP ON STP.ID = ANS.StepID
+                            INNER JOIN Survey I ON I.ID = STP.SurveyID
+                            WHERE I.IsTest = 0 AND ANS.QuestionID IN (".implode(',',$pu_question_ids).")
+                            AND ANS.`Value` IS NOT NULL {$filters_where}";
+
+        $answers = DB::query($answers_query);
+
+        //die($answers_query);
+
+        $question_values = SurveyQuestionValueTemplate::get()
+                            ->where("OwnerID IN (".implode(',',$pu_question_ids).")")
+                            ->map('ID','Value')->toArray();
+
+        // set question labels
+        $values = array();
+        $row_values_array = array();
+        $total_answers = 0;
+
+        foreach ($pu_question_ids as $pu_question_id) {
+            $pu_question = SurveyRadioButtonMatrixTemplateQuestion::get_by_id('SurveyRadioButtonMatrixTemplateQuestion',$pu_question_id);
+            foreach ($pu_question->Rows() as $row_value) {
+                $row_values_array[$row_value->Value] = 0;
+            }
+            foreach ($pu_question->Columns() as $col_value) {
+                $values[$col_value->Value] = $row_values_array;
+            }
+
+            // calculate total answers
+            $total_answers +=  $this->SurveyBuilderSurveyCountByQuestion($pu_question_id);
+        }
+
+        // count answers
+        foreach($answers as $answer) {
+            $multi_answer = explode(',',$answer['Value']);
+            foreach($multi_answer as $single_answer) {
+                if (!$single_answer) continue;
+
+                $matrix = explode(':',$single_answer);
+                $col = $matrix[0];
+                $row = $matrix[1];
+                if (!$col || !$row) continue;
+
+                $row_value = $question_values[$row];
+                $col_value = $question_values[$col];
+                $values[$row_value][$col_value]++;
+            }
+        }
+
+        foreach ($values as $key => $val) {
+            foreach ($val as $key2 => $val2) {
+                $values[$key][$key2] = round(($val2 / $total_answers) * 100);
+            }
+        }
+
+        return json_encode($values);
+    }
+
+    public function getProjectsUsedCombinedCount()
+    {
+
+        $template_id = Session::get("SurveyBuilder.EntitySurveyTemplateStatistics.TemplateId");
+        $filters = Session::get("SurveyBuilder.EntitySurveyTemplateStatistics.Filters");
+        $questions_filters = Session::get("SurveyBuilder.EntitySurveyTemplateStatistics.Filters_Questions");
+
+        $pu_questions_query = " SELECT QT.ID FROM SurveyQuestionTemplate QT
+                                LEFT JOIN SurveyStepTemplate ST ON ST.ID = QT.StepID
+                                WHERE ST.SurveyTemplateID = {$template_id} AND (QT.Name = 'ProjectsUsed' OR QT.Name = 'ProjectsUsedPoC')";
+
+        $pu_question_ids = DB::query($pu_questions_query)->column();
+
+        $total_answers = 0;
+        foreach ($pu_question_ids as $pu_question_id) {
+            $total_answers +=  $this->SurveyBuilderSurveyCountByQuestion($pu_question_id);
+        }
+
+        return $total_answers;
     }
 }
