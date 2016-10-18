@@ -163,6 +163,17 @@ class EditProfilePageSummitAttendeeExtension extends Extension
                     $form->sessionMessage('Your registration request was successfully processed!', "good");
                     return $this->owner->redirect($this->owner->Link('attendeeInfoRegistration'));
                 }
+                catch(RedeemTicketException $ex1)
+                {
+                    Session::clear('attendees');
+                    Session::clear('ExternalOrderId');
+                    SS_Log::log($ex1->getMessage(), SS_Log::WARN);
+                    $error = $ex1->getRedeemTicketError();
+                    if(!is_null($error))
+                        $error->write();
+                    $form->sessionMessage('Your request can not be processed, please contact your administrator', "bad");
+                    return $this->owner->redirect($this->owner->Link('attendeeInfoRegistration'));
+                }
                 catch(Exception $ex)
                 {
                     Session::clear('attendees');
