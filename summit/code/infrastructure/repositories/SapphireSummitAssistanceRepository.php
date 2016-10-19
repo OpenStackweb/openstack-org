@@ -121,12 +121,12 @@ LEFT JOIN Presentation AS P ON P.ID = E.ID
 LEFT JOIN PresentationCategory AS PC ON P.CategoryID = PC.ID
 LEFT JOIN Presentation_Speakers AS PS ON PS.PresentationID = P.ID
 LEFT JOIN PresentationSpeakerSummitAssistanceConfirmationRequest AS SA ON PS.PresentationSpeakerID = SA.SpeakerID AND SA.SummitID = {$summit_id}
-LEFT JOIN SummitAbstractLocation AS L ON L.ID = E.LocationID
+INNER JOIN SummitAbstractLocation AS L ON L.ID = E.LocationID
 LEFT JOIN SummitVenueRoom AS R ON R.ID = L.ID
 LEFT JOIN SummitAbstractLocation AS L2 ON L2.ID = R.VenueID
 LEFT JOIN SummitAttendee_Schedule AS A ON A.SummitEventID = E.ID
 LEFT JOIN PresentationSpeaker AS S ON S.ID = PS.PresentationSpeakerID
-WHERE DATE(E.StartDate) = '{$date}' AND E.SummitID = {$summit_id}
+WHERE E.Published = 1 AND DATE(E.StartDate) = '{$date}' AND E.SummitID = {$summit_id}
 SQL;
         if ($event_type == 'presentation') {
             $query .= <<<SQL
