@@ -58,7 +58,7 @@ class SurveyReportSection extends DataObject {
             $answers = $answers['answers'];
 
             // set labels for multibars
-            if ($graph->Question()->ClassName == 'SurveyRadioButtonMatrixTemplateQuestion') {
+            if ($graph->Type == 'multibars') {
                 //fill up template
                 $row_values_array = array();
                 foreach ($graph->Question()->Rows() as $row_value) {
@@ -81,55 +81,52 @@ class SurveyReportSection extends DataObject {
                 foreach ($answers as $answer) {
                     if (!$answer) continue;
 
-                    if ($graph->Question()->ClassName == 'SurveyRadioButtonMatrixTemplateQuestion') {
+                    if ($graph->Type == 'multibars') {
                         $col = $answer->col;
                         $row = $answer->row;
+                        if (!isset($values[$row]) || !isset($values[$row][$col])) continue;
                         $values[$row][$col]++;
                     } else {
-                        if (!isset($values[$answer]))
-                            $values[$answer] = 0;
-
+                        if (!isset($values[$answer])) continue;
                         $values[$answer]++;
                     }
-                }
-
-                if ($graph->Question()->Name == 'NetPromoter') {
-                    $promoter_perc = round(($values['Promoter'] / $total_answers) * 100);
-                    $detractor_perc = round(($values['Detractor'] / $total_answers) * 100);
-                    $extra_label = 'NPS: '.($promoter_perc - $detractor_perc);
                 }
 
                 // hide answers if less than 10
                 if ($total_answers < 10) {
                     $values = array();
                     $total_answers = 0;
-                }
+                } else {
+                    if ($graph->Type == 'multibars') {
+                        // show as percentage
+                        foreach ($values as $key => $val) {
+                            foreach ($val as $key2 => $val2) {
+                                $values[$key][$key2] = round(($val2 / $total_answers) * 100);
+                            }
+                        }
+                    } else if ($graph->Type == 'bars') {
+                        // show as percentage
+                        foreach ($values as $key => $val) {
+                            $values[$key] = round(($val / $total_answers) * 100);
+                        }
+                    }  else if ($graph->Type == 'pie') {
+                        // extra label for net promoter
+                        if ($graph->Question()->Name == 'NetPromoter') {
+                            $promoter_perc = round(($values['Promoter'] / $total_answers) * 100);
+                            $detractor_perc = round(($values['Detractor'] / $total_answers) * 100);
+                            $extra_label = 'NPS: '.($promoter_perc - $detractor_perc);
+                        }
 
-                if($graph->Type == 'pie' || $graph->Type == 'bars') {
-                    //sort results
-                    arsort($values);
-                }
+                        arsort($values);
 
-                if($graph->Type == 'pie' && count($values) > 10) {
-                    $other_values = array_slice($values,13);
-                    $values = array_slice($values,0,12);
-                    $values['Other'] = 0;
-                    foreach ($other_values as $val) {
-                        $values['Other'] += $val;
-                    }
-                }
-
-                // all bar graphs are shown as percentage
-                if($graph->Type == 'bars') {
-                    foreach ($values as $key => $val) {
-                        $values[$key] = round(($val / $total_answers) * 100);
-                    }
-                }
-
-                if($graph->Type == 'multibars') {
-                    foreach ($values as $key => $val) {
-                        foreach ($val as $key2 => $val2) {
-                            $values[$key][$key2] = round(($val2 / $total_answers) * 100);
+                        // group lower values into 'Other' tag
+                        if(count($values) > 10) {
+                            $other_values = array_slice($values,13);
+                            $values = array_slice($values,0,12);
+                            $values['Other'] = 0;
+                            foreach ($other_values as $val) {
+                                $values['Other'] += $val;
+                            }
                         }
                     }
                 }
