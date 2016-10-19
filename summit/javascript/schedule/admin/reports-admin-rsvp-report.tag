@@ -18,12 +18,14 @@
         <table class="table">
             <thead>
                 <tr>
+                    <th>Attendee</th>
                     <th each={ header in headers }>{ header }</th>
                 </tr>
             </thead>
             <tbody>
                 <tr each={ rsvp, i in rsvps }>
-                    <td each={ label, value in rsvp }>{ value }</td>
+                    <td><a href="{ parent.base_url }/attendees/{ rsvp.attendee_id }">{ rsvp.attendee_id }</a></td>
+                    <td each={ label, value in rsvp.rsvp }>{ value }</td>
                 </tr>
             </tbody>
         </table>
@@ -36,6 +38,7 @@
         this.dispatcher      = opts.dispatcher;
         this.page_data       = {total: 1, limit: opts.page_limit, page: 1};
         this.summit_id       = opts.summit_id;
+        this.base_url        = opts.base_url;
         this.rsvps           = [];
         this.headers         = [];
         this.events          = [];

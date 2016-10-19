@@ -83,10 +83,10 @@
                     </div>
                 </div>
             </div>
+            <label>Tickets </label> ( EventBrite Order# )<br>
             <div class="form-group">
                 <div class="row">
                     <div class="col-md-12">
-                        <label>Tickets </label> ( EventBrite Order# )<br>
                         <% if $Attendee.Tickets %>
                             <% loop $Attendee.Tickets %>
                                 <div class="btn-group btn-group-xs ticket-btn">
@@ -102,6 +102,42 @@
                         <a href="" id="add-ticket-btn" class="btn btn-default btn-xs" data-toggle="modal" data-target="#add-ticket-modal">
                             Add Ticket
                         </a>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <label> RSVPs </label><br>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-12">
+                        <% if $Attendee.RSVPs() %>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Event</th>
+                                    <th>Created</th>
+                                    <th>Seat</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% loop $Attendee.RSVPs() %>
+                                    <tr>
+                                        <td>$Event.Title</td>
+                                        <td>$Created</td>
+                                        <td>$SeatType</td>
+                                        <td>
+                                            <a href="" class="del-rsvp btn btn-xs btn-danger" data-rsvp="{$ID}">
+                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <% end_loop %>
+                            </tbody>
+                        </table>
+                        <% else %>
+                            <i>No RSVPs</i>
+                        <% end_if %>
                     </div>
                 </div>
             </div>

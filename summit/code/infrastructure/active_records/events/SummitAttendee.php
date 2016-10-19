@@ -25,6 +25,7 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
     private static $has_many = array
     (
         'Tickets' => 'SummitAttendeeTicket',
+        'RSVPs'   => 'RSVP',
     );
 
     private static $defaults = array

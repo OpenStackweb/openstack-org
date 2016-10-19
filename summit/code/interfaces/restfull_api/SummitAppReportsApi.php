@@ -435,9 +435,9 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
 
                     if (count($rsvps)) {
                         foreach($rsvps as $rsvp) {
-                            $rsvp_array = $rsvp_array_template;
+                            $rsvp_array = array('attendee_id' => $rsvp->SubmittedBy()->ID, 'rsvp' => $rsvp_array_template);
                             foreach ($rsvp->Answers() as $answer) {
-                                $rsvp_array[$answer->Question()->Label] = $answer->getFormattedAnswer();
+                                $rsvp_array['rsvp'][$answer->Question()->Label] = $answer->getFormattedAnswer();
                             }
 
                             $results['data'][] = $rsvp_array;

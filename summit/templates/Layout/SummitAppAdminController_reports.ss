@@ -44,7 +44,7 @@
             <% end_loop %>
 
         </script>
-        <reports-admin-container report="presentation_report" limit="40" summit_id="{ $Summit.ID }" locations="{ locations }" tracks="{ tracks }"></reports-admin-container>
+        <reports-admin-container report="presentation_report" limit="40" base_url="{$Top.Link}/{$Summit.ID}" summit_id="{$Summit.ID}" locations="{ locations }" tracks="{ tracks }"></reports-admin-container>
 
     </div>
 </div>

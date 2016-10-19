@@ -82,6 +82,7 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
         'PUT $ATTENDEE_ID!/tickets/$TICKET_ID!/reassign'     => 'reassignTicket',
         'GET $ATTENDEE_ID!/tickets/$TICKET_ID!'              => 'getTicketData',
         'DELETE $ATTENDEE_ID!/tickets/$TICKET_ID!'           => 'removeTicket',
+        'DELETE $ATTENDEE_ID!/rsvp/$RSVP_ID!'                => 'removeRSVP',
         'PUT $ATTENDEE_ID!'                                  => 'updateAttendee',
         'POST $ATTENDEE_ID!/tickets'                         => 'addTicket',
         'POST '                                              => 'addAttendee',
@@ -96,6 +97,7 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
         'addAttendee',
         'removeTicket',
         'addTicket',
+        'removeRSVP',
     );
 
     public function getAttendees(SS_HTTPRequest $request){
@@ -347,6 +349,32 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
         {
             SS_Log::log($ex1->getMessage(), SS_Log::WARN);
             return $this->validationError($ex1->getMessages());
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessages());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    public function removeRSVP(SS_HTTPRequest $request)
+    {
+        try
+        {
+            $summit_id     = intval($request->param('SUMMIT_ID'));
+            $rsvp_id   = intval($request->param('RSVP_ID'));
+
+            $summit = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+
+            RSVP::delete_by_id('RSVP',$rsvp_id);
+
+            return $this->ok();
         }
         catch(NotFoundEntityException $ex2)
         {

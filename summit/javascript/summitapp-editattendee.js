@@ -141,6 +141,37 @@ $(document).ready(function(){
         menubar:    false
     });
 
+    $('.del-rsvp').click(function(ev){
+        ev.preventDefault();
+        var rsvp_id = $(this).data('rsvp');
+        var summit_id   = $('#summit_id').val();
+        var attendee_id = $('#attendee_id').val();
+        var element = $(this);
+
+        swal({
+            title: "Are you sure?",
+            text: "You can't roll back this, once deleted its gone forever.",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete it!"
+        }, function(){
+            $.ajax({
+                type: 'DELETE',
+                url:  'api/v1/summits/'+summit_id+'/attendees/'+attendee_id+'/rsvp/'+rsvp_id,
+                dataType:'json',
+                success: function (data, textStatus, jqXHR) {
+                    element.parents('tr').first().remove();
+                }
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                swal("Couldn't delete.",'There was an error, please contact your administrator','warning');
+            });
+        });
+
+        return false;
+
+    });
+
     $('.del-ticket').click(function(ev){
         ev.preventDefault();
         var ticket_id = $(this).data('ticket');
@@ -171,7 +202,6 @@ $(document).ready(function(){
         return false;
 
     });
-
 
     $('.ticket').click(function(){
         var summit_id   = $('#summit_id').val();
