@@ -17,6 +17,7 @@
  */
 class Survey extends DataObject implements ISurvey
 {
+    const SurveyTestersGroupSlug = 'survey-testers';
 
     static $db = array
     (
@@ -62,6 +63,14 @@ class Survey extends DataObject implements ISurvey
         'EntitiesSurveys.Count'     => '# Deployments',
         'IsTest'                    => 'Is Test ?'
     );
+
+    protected function onBeforeWrite()
+    {
+        parent::onBeforeWrite();
+        if ($this->CreatedBy()->inGroup(Survey::SurveyTestersGroupSlug)) {
+            $this->IsTest = true;
+        }
+    }
 
     protected function onAfterWrite()
     {
