@@ -307,9 +307,8 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
             $data = $report_data['Data'];
             $results = array();
             foreach ($data as $row) {
-                $row['start_date'] = $summit->convertDateFromUTC2TimeZone($row['start_date'],'m/d/Y g:ia');
-                unset($row['presentation_id']);
-                unset($row['assistance_id']);
+                $row['Start_Date'] = $summit->convertDateFromUTC2TimeZone($row['Start_Date'],'m/d/Y g:ia');
+                unset($row['Assistance_id']);
                 array_push($results, $row);
             }
             $filename = "presentations_report-" . date('Ymd') . "." . $ext;

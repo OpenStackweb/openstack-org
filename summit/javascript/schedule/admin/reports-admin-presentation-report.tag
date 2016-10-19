@@ -11,6 +11,7 @@
         <table class="table">
             <thead>
                 <tr>
+                    <th>ID</th>
                     <th class="sortable" data-sort="presentation" data-dir="ASC">Presentation</th>
                     <th class="center_text">Published</th>
                     <th>Track</th>
@@ -30,6 +31,7 @@
             </thead>
             <tbody>
                 <tr each={ presentation, i in presentations } data-speaker-id="{ presentation.speaker_id }">
+                    <td>{ presentation.presentation_id }</td>
                     <td>{ presentation.title }</td>
                     <td class="center_text"><i class={ fa: true, fa-check: presentation.published, fa-times: !presentation.published } ></i></td>
                     <td>{ presentation.track }</td>

@@ -372,23 +372,23 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
             foreach($presentations['Data'] as $presentation) {
 
                 $presentation_array[] = array(
-                    'presentation_id' => $presentation['presentation_id'],
-                    'assistance_id'   => $presentation['assistance_id'],
-                    'title'           => $presentation['presentation'],
-                    'published'       => $presentation['published'],
-                    'track'           => $presentation['track'],
-                    'start_date'      => $summit->convertDateFromUTC2TimeZone($presentation['start_date'],'m/d/Y g:ia'),
-                    'location'        => $presentation['location'],
-                    'speaker_id'      => $presentation['speaker_id'],
-                    'member_id'       => $presentation['member_id'],
-                    'name'            => $presentation['name'],
-                    'email'           => $presentation['email'],
-                    'phone'           => $presentation['phone'],
-                    'code_type'       => $presentation['code_type'],
-                    'promo_code'      => $presentation['promo_code'],
-                    'confirmed'       => intVal($presentation['confirmed']),
-                    'registered'      => intVal($presentation['registered']),
-                    'checked_in'      => intVal($presentation['checked_in'])
+                    'presentation_id' => $presentation['P_ID'],
+                    'assistance_id'   => $presentation['Assistance_id'],
+                    'title'           => $presentation['Presentation'],
+                    'published'       => $presentation['Published'],
+                    'track'           => $presentation['Track'],
+                    'start_date'      => $summit->convertDateFromUTC2TimeZone($presentation['Start_Date'],'m/d/Y g:ia'),
+                    'location'        => $presentation['Location'],
+                    'speaker_id'      => $presentation['Speaker_id'],
+                    'member_id'       => $presentation['Member_id'],
+                    'name'            => $presentation['Name'],
+                    'email'           => $presentation['Email'],
+                    'phone'           => $presentation['Phone'],
+                    'code_type'       => $presentation['Type'],
+                    'promo_code'      => $presentation['Code'],
+                    'confirmed'       => intVal($presentation['Confirmed']),
+                    'registered'      => intVal($presentation['Registered']),
+                    'checked_in'      => intVal($presentation['Checked_in'])
                 );
             }
 

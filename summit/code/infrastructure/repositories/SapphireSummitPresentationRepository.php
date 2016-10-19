@@ -360,23 +360,23 @@ SQL;
 
         $query = <<<SQL
         SELECT
-        E.Title AS presentation,
-        E.Published AS published,
-        PresentationCategory.Title AS track,
-        E.StartDate AS start_date,
-        L.Name AS location,
-        S.ID AS speaker_id,
-        Member.ID AS member_id,
-       IFNULL(CONCAT(Member.FirstName ,' ',Member.Surname), CONCAT(S.FirstName ,' ',S.LastName)) AS name,
-        IFNULL(Member.Email, SpeakerRegistrationRequest.Email) AS email,
-        PromoCodes.Type AS code_type,
-        PromoCodes.Code AS promo_code,
-        ACR.IsConfirmed AS confirmed,
-        ACR.RegisteredForSummit AS registered,
-        ACR.CheckedIn AS checked_in,
-        ACR.OnSitePhoneNumber AS phone,
-        E.ID AS presentation_id,
-        ACR.ID AS assistance_id
+        E.ID AS P_ID,
+        E.Title AS Presentation,
+        E.Published AS Published,
+        PresentationCategory.Title AS Track,
+        E.StartDate AS Start_Date,
+        L.Name AS Location,
+        S.ID AS Speaker_id,
+        Member.ID AS Member_id,
+       IFNULL(CONCAT(Member.FirstName ,' ',Member.Surname), CONCAT(S.FirstName ,' ',S.LastName)) AS Name,
+        IFNULL(Member.Email, SpeakerRegistrationRequest.Email) AS Email,
+        PromoCodes.Code AS Code,
+        PromoCodes.Type AS Type,
+        ACR.IsConfirmed AS Confirmed,
+        ACR.RegisteredForSummit AS Registered,
+        ACR.CheckedIn AS Checked_in,
+        ACR.OnSitePhoneNumber AS Phone,
+        ACR.ID AS Assistance_id
 SQL;
 
         $query .= $query_body." ORDER BY {$sort} {$sort_dir}";
