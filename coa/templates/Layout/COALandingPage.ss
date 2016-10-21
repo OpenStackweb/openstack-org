@@ -10,14 +10,19 @@
                 $Top.BannerText
                 <hr>
                 <div class="coa-action-top">
-                    <a href="/coa#coa-get-started" class="coa-action-btn">How To Get Started <i class="fa fa-chevron-right"></i></a>
+                    <% if $HideHowGetStarted == 0 %>
+                    <a href="/coa#coa-get-started" class="coa-action-btn">$GetStartedLabel <i class="fa fa-chevron-right"></i></a>
+                    <% end_if %>
+                    <% if $HideFee == 0 %>
                     <span class="coa-already-registered">Exam Fee: $Top.ExamCost</span> &nbsp; | &nbsp;
                     <a href="/coa#coa-details" class="coa-already-registered">Pricing & Exam Details</a>
+                    <% end_if %>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<% if $HidePurchaseExam == 0 %>
 <div class="coa-actions-section">
     <div class="container">
         <div class="row">
@@ -48,6 +53,8 @@
         </div>
     </div>
 </div>
+<% end_if %>
+<% if $HideVirtualExam == 0 %>
 <div class="coa-points">
     <div class="container">
         <div class="row">
@@ -75,6 +82,7 @@
         </div>
     </div>
 </div>
+<% end_if %>
 <% if $Top.TrainingPartners %>
 <div class="coa-partners">
     <div class="container">
@@ -106,6 +114,7 @@
     </div>
 </div>
 <% end_if %>
+<% if $HideHowGetStarted == 0 %>
 <div class="coa-actions-section">
     <div class="container">
         <div class="row">
@@ -119,6 +128,7 @@
         </div>
     </div>
 </div>
+<% end_if %>
 <div class="coa-exam-details">
     <div class="container">
         <div class="row">

@@ -19,11 +19,13 @@
 class COALandingPage extends Page
 {
     static $db = array(
-        'BannerTitle'           => 'Text',
+        'BannerTitle'            => 'Text',
         'BannerText'             => 'HTMLText',
         'ExamDetails'            => 'HTMLText',
         'HandBookLink'           => 'Text',
         'GetStartedURL'          => 'Text',
+        'GetStartedLabel'        => 'Text',
+        'HideFee'                => 'Boolean',
         'AlreadyRegisteredURL'   => 'Text',
         'ExamCost'               => 'Text',
         'ExamFormat'             => 'HTMLText',
@@ -35,6 +37,9 @@ class COALandingPage extends Page
         'ExamLanguage'           => 'HTMLText',
         'ExamHowLongSchedule'    => 'HTMLText',
         'GetStartedText'         => 'HTMLText',
+        'HidePurchaseExam'       => 'Boolean',
+        'HideVirtualExam'        => 'Boolean',
+        'HideHowGetStarted'      => 'Boolean',
     );
 
     static $has_one = array
@@ -186,6 +191,14 @@ HTML;
         return $html;
     }
 
+    public function getGetStartedLabel(){
+        $html = $this->getField('GetStartedLabel');
+        if(empty($html)){
+            $html = "How To Get Started";
+        }
+        return $html;
+    }
+
     public function getAlreadyRegisteredURL(){
         $html = $this->getField('AlreadyRegisteredURL');
         if(empty($html)){
@@ -218,11 +231,21 @@ HTML;
 
         $fields->removeByName('Content');
 
+        $fields->addFieldToTab('Root.Main', new LiteralField('HideSections','<label>Hide Sections</label><hr>'));
+        $fields->addFieldToTab('Root.Main', new CheckboxField('HideFee','Hide Exam Fee and Pricing'));
+        $fields->addFieldToTab('Root.Main', new CheckboxField('HidePurchaseExam','Hide Purchase Exam Section'));
+        $fields->addFieldToTab('Root.Main', new CheckboxField('HideVirtualExam','Hide Virtual Exam Section'));
+        $fields->addFieldToTab('Root.Main', new CheckboxField('HideHowGetStarted','Hide How to get started Section'));
+
         $fields->addFieldToTab('Root.Main', new TextField('BannerTitle', 'Banner Title'));
-        $fields->addFieldToTab('Root.Main', new HtmlEditorField('BannerText', 'Banner Text'));
-        $fields->addFieldToTab('Root.Main', new HtmlEditorField('GetStartedText', 'How to Get Started'));
+        $fields->addFieldToTab('Root.Main', $banner_html = new HtmlEditorField('BannerText', 'Banner Text'));
+        $banner_html->setRows(5);
+        $fields->addFieldToTab('Root.Main', $how_html = new HtmlEditorField('GetStartedText', 'How to Get Started'));
+        $how_html->setRows(5);
         $fields->addFieldToTab('Root.Main', new TextField('HandBookLink', 'HandBook Link'));
         $fields->addFieldToTab('Root.Main', new TextField('GetStartedURL', 'Get Started URL'));
+        $fields->addFieldToTab('Root.Main', new TextField('GetStartedLabel', 'Get Started Label'));
+
         $fields->addFieldToTab('Root.Main', new TextField('AlreadyRegisteredURL', 'Already Registered URL'));
         // exam details
         $fields->addFieldToTab('Root.ExamDetails', $html_details = new HtmlEditorField('ExamDetails', 'Details Title'));
