@@ -225,15 +225,24 @@ HTML;
         $fields->addFieldToTab('Root.Main', new TextField('GetStartedURL', 'Get Started URL'));
         $fields->addFieldToTab('Root.Main', new TextField('AlreadyRegisteredURL', 'Already Registered URL'));
         // exam details
-        $fields->addFieldToTab('Root.ExamDetails', new HtmlEditorField('ExamDetails', 'Details Title'));
+        $fields->addFieldToTab('Root.ExamDetails', $html_details = new HtmlEditorField('ExamDetails', 'Details Title'));
+        $html_details->setRows(5);
         $fields->addFieldToTab('Root.ExamDetails', new TextField('ExamCost', 'Cost (include currency sign)'));
         $fields->addFieldToTab('Root.ExamDetails', new TextField('ExamDuration', 'Duration ( include time unit)'));
-        $fields->addFieldToTab('Root.ExamDetails', new HtmlEditorField('ExamFormat', 'Format'));
-        $fields->addFieldToTab('Root.ExamDetails', new HtmlEditorField('ExamIDRequirements', 'ID Requirements'));
-        $fields->addFieldToTab('Root.ExamDetails', new HtmlEditorField('ExamSystemRequirements', 'System Requirements'));
-        $fields->addFieldToTab('Root.ExamDetails', new HtmlEditorField('ExamScoring', 'Scoring'));
-        $fields->addFieldToTab('Root.ExamDetails', new HtmlEditorField('ExamLanguage', 'Language'));
-        $fields->addFieldToTab('Root.ExamDetails', new HtmlEditorField('ExamHowLongSchedule', 'How long do I have to schedule my exam?'));
+        $fields->addFieldToTab('Root.ExamDetails', $html_format = new HtmlEditorField('ExamFormat', 'Format'));
+        $html_format->setRows(5);
+        $fields->addFieldToTab('Root.ExamDetails', $html_req = new HtmlEditorField('ExamIDRequirements', 'ID Requirements'));
+        $html_req->setRows(5);
+        $fields->addFieldToTab('Root.ExamDetails', $html_system = new HtmlEditorField('ExamSystemRequirements', 'System Requirements'));
+        $html_system->setRows(5);
+        $fields->addFieldToTab('Root.ExamDetails', $html_score = new HtmlEditorField('ExamScoring', 'Scoring'));
+        $html_score->setRows(5);
+        $fields->addFieldToTab('Root.ExamDetails', $html_lang = new HtmlEditorField('ExamLanguage', 'Language'));
+        $html_lang->setRows(5);
+        $fields->addFieldToTab('Root.ExamDetails', $html_duration = new HtmlEditorField('ExamHowLongSchedule', 'How long do I have to schedule my exam?'));
+        $html_duration->setRows(5);
+        $fields->addFieldToTab('Root.ExamDetails', $html_retake = new HtmlEditorField('ExamRetake', 'Retake'));
+        $html_retake->setRows(5);
 
         if ($this->ID > 0) {
 
