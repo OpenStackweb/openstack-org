@@ -11,11 +11,13 @@
                 <hr>
                 <div class="coa-action-top">
                     <% if $HideHowGetStarted == 0 %>
-                    <a href="/coa#coa-get-started" class="coa-action-btn">$GetStartedLabel <i class="fa fa-chevron-right"></i></a>
+                        <a href="/coa#coa-get-started" class="coa-action-btn">$GetStartedLabel <i class="fa fa-chevron-right"></i></a>
+                    <% else %>
+                        <a href="{$Top.Link(get-started)}" class="coa-action-btn">$GetStartedLabel <i class="fa fa-chevron-right"></i></a>
                     <% end_if %>
                     <% if $HideFee == 0 %>
-                    <span class="coa-already-registered">Exam Fee: $Top.ExamCost</span> &nbsp; | &nbsp;
-                    <a href="/coa#coa-details" class="coa-already-registered">Pricing & Exam Details</a>
+                        <span class="coa-already-registered">Exam Fee: $Top.ExamCost</span> &nbsp; | &nbsp;
+                        <a href="/coa#coa-details" class="coa-already-registered">Pricing & Exam Details</a>
                     <% end_if %>
                 </div>
             </div>
