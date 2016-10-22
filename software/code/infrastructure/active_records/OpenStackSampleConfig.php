@@ -26,6 +26,11 @@ final class OpenStackSampleConfig extends DataObject
         'Order'       => 'Int',
     );
 
+    public function getSummaryToJson(){
+        $field = $this->getField('Summary');
+        return json_encode($field);
+    }
+
     private static $has_one = array
     (
         "Curator" => "Member",

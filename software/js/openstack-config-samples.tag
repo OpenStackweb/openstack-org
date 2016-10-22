@@ -1,4 +1,5 @@
 require('./t.tag');
+require('./raw.tag');
 <openstack-config-samples>
         <div class="row">
             <div class="col-sm-12 sample-configs-wrapper">
@@ -12,7 +13,7 @@ require('./t.tag');
             </div>
             <h3>{ current_config.title }</h3>
             <p>
-                { current_config.summary }
+                <span id="summary"></span>
             </p>
             <!--
             <p>
@@ -223,6 +224,7 @@ require('./t.tag');
                       self.configurations = type.configurations;
                       self.current_config = type.configurations[0];
                       $('#config_button_'+self.current_config.id).addClass('active');
+                      $('#summary').html(self.current_config.summary);
                       self.update();
                 });
             });

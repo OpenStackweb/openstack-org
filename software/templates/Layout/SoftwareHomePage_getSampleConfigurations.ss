@@ -25,7 +25,7 @@
                         id: $ID,
                         is_default: $IsDefault,
                         title: '{$Title}',
-                        summary : '{$JS_val(Summary)}',
+                        summary : {$SummaryToJson},
                         description : '{$JS_val(Description)}',
                         curator: {
                             id: $Curator.ID,
