@@ -45,3 +45,4 @@ migrations:
   - UpdateGerritUsersMigration
   - UpdateGerritCommitsMigration
   - NormalizeTagsMigration
+  - FixEventBriteEventTable

@@ -16,7 +16,7 @@ class EventbriteEvent extends DataObject implements IEventbriteEvent
 {
     private static $db = array
     (
-        'ExternalOrderId'     => "Enum('ORDER_PLACED,EVENT_ADDED, EVENT_UPDATE, NONE','NONE')",
+        'EventType'     => "Enum('ORDER_PLACED,EVENT_ADDED, EVENT_UPDATE, NONE','NONE')",
         'ApiUrl'        => 'Varchar(512)',
         'Processed'     => 'Boolean',
         'ProcessedDate' => 'SS_DateTime',
