@@ -23,7 +23,7 @@
         </span>
       </div>
       <div class="user-stories-video-wrapper">
-        <iframe class="user-stories-hero-video" src="https://www.youtube.com/embed/jdSs8HFgfgo?rel=0&amp;showinfo=0&autoplay=0" frameborder="0" allowfullscreen></iframe>
+        <iframe class="user-stories-hero-video" src="https://www.youtube.com/embed/5EWnmg3OUsk?rel=0&amp;showinfo=0&autoplay=0" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
   </div>
