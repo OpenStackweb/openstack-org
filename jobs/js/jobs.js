@@ -125,11 +125,9 @@
                 $(document).on('click','.jobExpand' , expandJobDetail);
 
                 if (document.location.hash && document.location.hash != '') {
-                    var opened_job_id = document.location.hash.substring(1);
+                    var opened_job_id  = document.location.hash.substring(1);
                     $('.jobDescription' , '#'+opened_job_id).show();
                     $('.jobExpand','#' + opened_job_id).html('less');
-                } else {
-                    $('.jobDescription').hide();
                 }
 
                 xhr = null;

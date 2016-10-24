@@ -41,7 +41,7 @@
         <div class="col-sm-1">            
                 <a href="#" class="jobExpand" data-id="{$ID}">
                     <div id="moreInfoButton">
-                        <h5>More Info</h5>                       
+                        <h5>More info</h5>
                     </div>
                 </a>
         </div>
