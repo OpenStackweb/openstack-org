@@ -6,69 +6,66 @@
 <div class="span-13 assestsArea">
 	
 	<div class="assestBox">
-		<h2>Full Color Logo (RGB version for digital media)</h2>
+		<h2>Full Color Horizontal</h2>
 		<div class="span-4">
-			<img src="/assets/openstack-logo/R/openstack-cloud-software-vertical-web.png" style="width:140px;" />
-		</div>
-		<div class="span-9 last">
-			<p>Use this logo web content or slides.</p>
-			<a href="/assets/openstack-logo/R/openstack-cloud-software-vertical-web.png" class="button">Small PNG File</a> &nbsp; &nbsp;  <a href="/assets/openstack-logo/R/openstack-cloud-software-vertical-large.png" class="button">Large PNG File</a>
-		</div>
-	</div>
-	
-	<hr />
-
-	<div class="assestBox">
-		<h2>Full Color Logo (CMYK version for print)</h2>
-		<div class="span-4">
-			<img src="/assets/openstack-logo/R/openstack-cloud-software-vertical-web.png" style="width:140px;" />
-		</div>
-		<div class="span-9 last">
-			<p>Use this version for items to be printed.</p>
-			<a href="/assets/openstack-logo/R/openstack-cloud-software-vertical-cmyk.pdf" class="button">PDF Version</a> &nbsp; &nbsp;  <a href="/assets/openstack-logo/R/openstack-cloud-software-vertical-cmyk.eps.zip" class="button">EPS Version</a>
-		</div>
-	</div>
-	
-	<hr />
-	
-	<div class="assestBox">
-		<h2>One Color Logo (for print or screenprint)</h2>
-		<div class="span-4">
-            <img src="/assets/openstack-logo/R/openstack-one-color.png" style="width:140px;" />
-		</div>
-		<div class="span-9 last">
-			<p>This is a good option for screen printing or other one-color applications.</p>
-			<a href="/assets/openstack-logo/R/openstack-one-color.pdf" class="button">PDF Version</a> &nbsp; &nbsp;  <a href="/assets/openstack-logo/R/openstack-one-color.eps.zip" class="button">EPS Version</a>
-		</div>
-	</div>
-	
-	<hr />
-	
-	<div class="assestBox">
-		<h2>One Color Logo #2 (alternate for print or screenprint)</h2>
-		<div class="span-4">
-            <img src="/assets/openstack-logo/R/openstack-one-color-alt.png" style="width:140px;" />
+            		<img src="/assets/openstack-logo/2016R/OpenStack-Logo-Horizontal.png" style="width:140px;" />
 		</div>
 		<div class="span-9 last">
 			<p>Another good option for screen printing or other one-color applications.</p>
-			<a href="/assets/openstack-logo/R/openstack-one-color-alt.pdf" class="button">PDF Version</a> &nbsp; &nbsp;  <a href="/assets/openstack-logo/R/openstack-one-color-alt.eps.zip" class="button">EPS Version</a>
+			<a href="/assets/openstack-logo/2016R/OpenStack-Logo-Horizontal.ai" class="button">AI Version</a> &nbsp; &nbsp;  <a href="/assets/openstack-logo/2016R/OpenStack-Logo-Horizontal.eps.zip" class="button">EPS Version</a>
 		</div>
 	</div>	
+	
+	<hr />
+	
+	<div class="assestBox">
+		<h2>Full Color Vertical</h2>
+		<div class="span-4">
+            		<img src="/assets/openstack-logo/2016R/OpenStack-Logo-Vertical.png" style="width:140px;" />
+		</div>
+		<div class="span-9 last">
+			<p>Another good option for screen printing or other one-color applications.</p>
+			<a href="/assets/openstack-logo/2016R/OpenStack-Logo-Vertical.ai" class="button">AI Version</a> &nbsp; &nbsp;  <a href="/assets/openstack-logo/2016R/OpenStack-Logo-Vertical.eps.zip" class="button">EPS Version</a>
+		</div>
+	</div>	
+	
+	<hr />
+	
+	<div class="assestBox">
+		<h2>Full Color Vertical Black</h2>
+		<div class="span-4">
+            		<img src="/assets/openstack-logo/2016R/OpenStack-Logo-Vertical-Black.png" style="width:140px;" />
+		</div>
+		<div class="span-9 last">
+			<p>Another good option for screen printing or other one-color applications.</p>
+			<a href="/assets/openstack-logo/2016R/OpenStack-Logo-Vertical-Black.ai" class="button">AI Version</a> &nbsp; &nbsp;  <a href="/assets/openstack-logo/2016R/OpenStack-Logo-Vertical-Black.eps.zip" class="button">EPS Version</a>
+		</div>
+	</div>	
+	
+	<hr />
+	
+	<div class="assestBox">
+		<h2>One Color Logo Mark - Red</h2>
+		<div class="span-4">
+			<img src="/assets/openstack-logo/2016R/OpenStack-Logo-Mark.png" style="width:140px;" />
+		</div>
+		<div class="span-9 last">
+			<p>Use this version for items to be printed.</p>
+			<a href="/assets/openstack-logo/2016R/OpenStack-Logo-Mark.ai" class="button">AI Version</a> &nbsp;&nbsp; <a href="/assets/openstack-logo/2016R/OpenStack-Logo-Mark.eps.zip" class="button">EPS Version</a>
+		</div>
+	</div>
+	
+	<hr />
+	
+	<div class="assestBox">
+		<h2>One Color Logo Mark - B&W</h2>
+		<div class="span-4">
+            		<img src="/assets/openstack-logo/2016R/OpenStack-Logo-Vertical-Black.png" style="width:140px;" />
+		</div>
+		<div class="span-9 last">
+			<a href="/assets/openstack-logo/2016R/OpenStack-Logo-Vertical-Black.ai" class="button">AI Version</a> &nbsp; &nbsp;  <a href="https://www.openstack.org/assets/openstack-logo/2016R/OpenStack-Logo-Vertical-Black.eps.zip" class="button">EPS Version</a>
+		</div>
+	</div>
 				
-</div>
-
-<div class="prepend-2 span-9 last">
-	<h2>Logo Size &amp; Clear Space</h2>
-	<img src="/themes/openstack/images/downloadpage/openstack-logo-size-graphic-learn-more.png" />
-	<h2>Usage Guidelines</h2>
-	<ul>
-		<li>Avoid using Brand Assets in a way that suggests approval, sponsorship, or endorsement by OpenStack.</li>
-		<li>Don't present a Brand Asset in a way that makes it the most distinctive or prominent feature on your web page, printed material, or other content.</li>
-		<li>Don't use OpenStack’s Brand Assets in a way that is deceptive, harmful, obscene, or otherwise objectionable to OpenStack.</li>
-		<li>You must keep sufficient space around our Brand Assets so they appear clean and uncluttered.</li>
-		<li>You may not combine our Brand Assets, or elements of our Brand Assets, with your own name or mark or generic terms.</li>
-		<li>Do not use trademarks, logos, or other content that is confusingly similar to the Brand Assets.</li>
-		<li>Please use the &#0153; attribution symbol with our Brand Assets.</li>
-	</ul>
 </div>
 
