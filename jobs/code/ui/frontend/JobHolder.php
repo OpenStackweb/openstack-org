@@ -72,12 +72,12 @@ final class JobHolder_Controller extends Page_Controller {
         $output     = '';
         $request    = Controller::curr()->getRequest();
         $foundation = ($request->requestVar('foundation'));
-        $jobs = $this->repository->getDateSortedJobs($foundation);
+        $jobs       = $this->repository->getDateSortedJobs($foundation);
 
         foreach ($jobs as $job) {
                 $output .= $job->renderWith('JobHolder_job',
                     [
-                        'FormattedMoreInfoLink' => $this->getViewInfoLink($job->MoreInfoLink)
+                        'FormattedMoreInfoLink' => JobHolder_Controller::getViewInfoLink($job->MoreInfoLink)
                     ]
             );
         }
@@ -111,14 +111,14 @@ final class JobHolder_Controller extends Page_Controller {
 
         if($job) {
             if(!empty($job->MoreInfoLink))
-                $job->FormattedMoreInfoLink = $this->getViewInfoLink($job->MoreInfoLink);
+                $job->FormattedMoreInfoLink = JobHolder_Controller::getViewInfoLink($job->MoreInfoLink);
             return $this->renderWith(array('JobDetail', 'Page'), ['Job' => $job]);
         }
 
         return $this->httpError(404, 'Sorry that Job could not be found!.');
     }
 
-    function getViewInfoLink($info_link){
+    public static function getViewInfoLink($info_link){
         if(filter_var($info_link, FILTER_VALIDATE_EMAIL)) {
             return "mailto:".$info_link;
         }

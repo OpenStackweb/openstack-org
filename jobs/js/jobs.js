@@ -45,7 +45,7 @@
     }
 
     function showJobDetail(job_id){
-        $('.jobDescription','#' + job_id).slideDown();
+        $('.jobDescription','#' + job_id).show();
         $('.jobDescription','#' + job_id).addClass('is_visible');
         $('.jobExpand','#' + job_id).html('less');
     }

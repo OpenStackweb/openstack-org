@@ -97,6 +97,7 @@ final class SapphireJobRepository extends SapphireRepository implements IJobRepo
                     break;
                 case 'posted':
                     $query = $query->addOrder(QueryOrder::desc('PostedDate'));
+                    $query = $query->addOrder(QueryOrder::desc('ID'));
                     break;
                 case 'location':
                     $query = $query->addOrder(QueryOrder::asc('LocationType'));

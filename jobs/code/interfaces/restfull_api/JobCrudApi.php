@@ -226,11 +226,15 @@ final class JobCrudApi extends AbstractRestfulJsonApi {
             $output = '';
             $kw      = $request->getVar('kw');
             $type_id = $request->getVar('type_id');
-            $sort_by = $request->getVar('sort_by');
+            $sort_by = !empty($request->getVar('sort_by'))? $request->getVar('sort_by') : 'posted';
+
             $jobs    = $this->repository->getJobsByKeywordTypeAndSortedBy($kw, $type_id, $sort_by);
 
             foreach ($jobs as $job) {
-                $output .= $job->renderWith('JobHolder_job');
+                $output .= $job->renderWith('JobHolder_job',
+                    [
+                        'FormattedMoreInfoLink' => JobHolder_Controller::getViewInfoLink($job->MoreInfoLink)
+                    ]);
             }
             $this->saveRAWResponseToCache($request, $output);
             return $output;

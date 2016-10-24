@@ -39,7 +39,7 @@
             </div>
         </div>
         <div class="col-sm-1">            
-                <a href="#" class="jobExpand" data-id="{$ID}">
+                <a href="#" rel="nofollow" class="jobExpand" data-id="{$ID}">
                     <div id="moreInfoButton">
                         <h5>More info</h5>
                     </div>
@@ -73,8 +73,8 @@
                     </a>
                 </div> 
                 <div class="col-md-3">
-                    <% if MoreInfoLink %>
-                        <a rel="nofollow" target="_blank" href="$FormattedMoreInfoLink">
+                    <% if FormattedMoreInfoLink %>
+                        <a rel="nofollow" target="_blank" href="{$FormattedMoreInfoLink}">
                             <div class="button3">                            
                                 <div class="glyphicon glyphicon-share-alt"></div>
                                 <h5>Apply Now</h5>
