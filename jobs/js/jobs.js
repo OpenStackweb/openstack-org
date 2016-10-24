@@ -30,9 +30,9 @@
         }
 
         // toggles the job descriptions
-        $('.jobExpand').live('click',function() {
+        $(document).on('click','.jobExpand' ,function() {
             var parent_div = $(this).closest('div.jobPosting');
-
+            console.log("click more info");
             if (parent_div.find('div.jobDescription').is(":visible")) {
                 document.location.hash = 'none';
                 $(this).html('more');
