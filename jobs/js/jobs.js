@@ -41,10 +41,10 @@
 
             if (is_visible) {
                 document.location.hash = 'none';
-                $(this).html('more');
+                $(this).html('More info');
             } else {
                 document.location.hash = job_id;
-                $(this).html('less');
+                $(this).html('Less');
             }
 
             detail_div.toggleClass('is_visible');
