@@ -1,4 +1,4 @@
-<div class="container jobPosting"  id="{$ID}">
+<div class="container jobPosting" id="{$ID}">
     <div class="row">
         <div class="col-sm-11">        
             <div class="dateField">
@@ -39,7 +39,7 @@
             </div>
         </div>
         <div class="col-sm-1">            
-                <a href="" class="jobExpand">
+                <a href="#" class="jobExpand" data-id="{$ID}">
                     <div id="moreInfoButton">
                         <h5>More Info</h5>                       
                     </div>

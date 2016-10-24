@@ -30,18 +30,27 @@
         }
 
         // toggles the job descriptions
-        $(document).on('click','.jobExpand' ,function() {
-            var parent_div = $(this).closest('div.jobPosting');
-            console.log("click more info");
-            if (parent_div.find('div.jobDescription').is(":visible")) {
+        $(document).on('click','.jobExpand' ,function(event) {
+            var job_id     = $(this).data('id');
+            var parent_div = $('#'+job_id);
+
+            console.log("clicked job id "+ job_id);
+            var detail_div = parent_div.find('div.jobDescription');
+
+            var is_visible = detail_div.hasClass('is_visible');
+
+            if (is_visible) {
                 document.location.hash = 'none';
                 $(this).html('more');
             } else {
-                document.location.hash = parent_div.attr('id');
+                document.location.hash = job_id;
                 $(this).html('less');
             }
 
+            detail_div.toggleClass('is_visible');
+            // show/ hide details
             parent_div.find('div.jobDescription').slideToggle(400);
+            event.preventDefault();
 
             return false;
         });
