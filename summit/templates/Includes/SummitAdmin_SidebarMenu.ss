@@ -4,6 +4,13 @@
     </li>
     <li <% if $Active == 'attendees' %> class="active" <% end_if %>>
         <a href="$AdminLink/$SummitID/attendees"><span class="fa-stack fa-lg pull-left"><i class="fa fa-users fa-stack-1x "></i></span>Attendees</a>
+        <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+            <li <% if $Active == 'attendees_match' %> class="active" <% end_if %>>
+                <a href="$AdminLink/$SummitID/attendees/match">
+                    <span class="fa-stack pull-left"><i class="fa fa-chevron-right fa-stack-1x" style="padding-top: 5px;"></i></span>Match
+                </a>
+            </li>
+        </ul>
     </li>
     <li <% if $Active == 'schedule' %> class="active" <% end_if %>>
         <a href="$AdminLink/$SummitID/events/schedule"><span class="fa-stack fa-lg pull-left"><i class="fa fa-calendar fa-stack-1x "></i></span>Schedule</a>

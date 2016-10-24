@@ -23,6 +23,10 @@ final class SummitAppAdminController extends Controller implements PermissionPro
      * @var ISummitRegistrationPromoCodeRepository
      */
     private $promocode_repository;
+    /**
+     * @var IEventbriteAttendeeRepository
+     */
+    private $eventbrite_attendee_repository;
 
     /**
      * Return a map of permission codes to add to the dropdown shown in the Security section of the CMS.
@@ -90,6 +94,7 @@ final class SummitAppAdminController extends Controller implements PermissionPro
 
         $this->event_repository = new SapphireSummitEventRepository();
         $this->promocode_repository = new SapphireSummitRegistrationPromoCodeRepository();
+        $this->eventbrite_attendee_repository = new SapphireEventbriteAttendeeRepository();
     }
 
     private static $url_segment = 'summit-admin';
@@ -106,6 +111,7 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         'editPresentationList',
         'ticketTypes',
         'attendees',
+        'attendees_match',
         'editAttendee',
         'editSummit',
         'scheduleView',
@@ -135,6 +141,7 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         '$SummitID!/events/bulk'                                     => 'events_bulk',
         '$SummitID!/events/$EventID'                                 => 'editEvent',
         '$SummitID!/tickets'                                         => 'ticketTypes',
+        '$SummitID!/attendees/match'                                 => 'attendees_match',
         '$SummitID!/attendees/$AttendeeID!'                          => 'editAttendee',
         '$SummitID!/attendees'                                       => 'attendees',
         '$SummitID!/edit'                                            => 'editSummit',
@@ -349,6 +356,46 @@ final class SummitAppAdminController extends Controller implements PermissionPro
                 )
             )
         );
+    }
+
+    public function attendees_match(SS_HTTPRequest $request)
+    {
+        $summit_id = intval($request->param('SummitID'));
+        $summit = Summit::get()->byID($summit_id);
+
+        Requirements::css('summit/css/simple-sidebar.css');
+        // tag inputes
+        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.css');
+        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css');
+        Requirements::css('themes/openstack/bower_assets/sweetalert/dist/sweetalert.css');
+        //Requirements::css('summit/css/summit-admin-speaker-merge.css');
+
+        Requirements::javascript('summit/javascript/simple-sidebar.js');
+        Requirements::javascript('themes/openstack/javascript/bootstrap-paginator/src/bootstrap-paginator.js');
+        Requirements::javascript('themes/openstack/javascript/urlfragment.jquery.js');
+        Requirements::javascript('themes/openstack/javascript/jquery-ajax-loader.js');
+        Requirements::javascript('themes/openstack/bower_assets/sweetalert/dist/sweetalert.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/additional-methods.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/typeahead.js/dist/typeahead.bundle.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js');
+        Requirements::javascript('themes/openstack/javascript/jquery.cleanform.js');
+        //Requirements::javascript('summit/javascript/summit-admin-speaker-merge.js');
+
+        $orphan_attendees = $this->eventbrite_attendee_repository->getUnmatchedPaged(1,20);
+
+        return $this->getViewer('attendees_match')->process
+            (
+                $this->customise
+                    (
+                        array
+                        (
+                            'Summit' => $summit,
+                            'Attendees' => $orphan_attendees,
+                            'TotalAttendees' => $this->eventbrite_attendee_repository->getUnmatchedCount()
+                        )
+                    )
+            );
     }
 
     public function editAttendee(SS_HTTPRequest $request)
