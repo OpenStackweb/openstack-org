@@ -244,7 +244,9 @@ a.user-story-square {
   padding: 0;
   background: url("/themes/openstack/images/banner-bg.jpg") no-repeat center center;
   background-size: cover;
-  min-height: 350px; }
+  min-height: 350px;
+  margin-bottom: -50px; 
+  }
 
 .marketplace-column {
   background: #2e729a;
@@ -326,10 +328,15 @@ li.hosted-cloud {
   text-align: center;
   background: #284d68 url("/themes/openstack/images/blue-arrow.png") 90% 50% no-repeat;
   float: right;
-  text-transform: capitalize; }
+  text-transform: capitalize;
+  color: white; 
+  }
 
 .marketplace-btn.blue:hover {
-  background: #132F45 url("/themes/openstack/images/blue-arrow-hover.png") 90% 50% no-repeat; }
+  background: #132F45 url("/themes/openstack/images/blue-arrow-hover.png") 90% 50% no-repeat;
+  color: white;
+  text-decoration: none; 
+  }
 
 @media (max-width: 767px) {
   .marketplace-btn.blue {
