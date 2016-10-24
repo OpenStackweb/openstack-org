@@ -8,7 +8,7 @@
 	<div class="assestBox">
 		<h2>Full Color Horizontal</h2>
 		<div class="span-4">
-            		<img src="/assets/openstack-logo/2016R/OpenStack-Logo-Horizontal.png" style="width:140px;" />
+            		<img src="/assets/openstack-logo/2016R/OpenStack-Logo-Horizontal.png" style="width:300px;" />
 		</div>
 		<div class="span-9 last">
 			<p>Another good option for screen printing or other one-color applications.</p>
@@ -21,7 +21,7 @@
 	<div class="assestBox">
 		<h2>Full Color Vertical</h2>
 		<div class="span-4">
-            		<img src="/assets/openstack-logo/2016R/OpenStack-Logo-Vertical.png" style="width:140px;" />
+            		<img src="/assets/openstack-logo/2016R/OpenStack-Logo-Vertical.png" style="width:300px;" />
 		</div>
 		<div class="span-9 last">
 			<p>Another good option for screen printing or other one-color applications.</p>
@@ -34,7 +34,7 @@
 	<div class="assestBox">
 		<h2>Full Color Vertical Black</h2>
 		<div class="span-4">
-            		<img src="/assets/openstack-logo/2016R/OpenStack-Logo-Vertical-Black.png" style="width:140px;" />
+            		<img src="/assets/openstack-logo/2016R/OpenStack-Logo-Vertical-Black.png" style="width:300px;" />
 		</div>
 		<div class="span-9 last">
 			<p>Another good option for screen printing or other one-color applications.</p>
@@ -47,7 +47,7 @@
 	<div class="assestBox">
 		<h2>One Color Logo Mark - Red</h2>
 		<div class="span-4">
-			<img src="/assets/openstack-logo/2016R/OpenStack-Logo-Mark.png" style="width:140px;" />
+			<img src="/assets/openstack-logo/2016R/OpenStack-Logo-Mark.png" style="width:300px;" />
 		</div>
 		<div class="span-9 last">
 			<p>Use this version for items to be printed.</p>
@@ -60,7 +60,7 @@
 	<div class="assestBox">
 		<h2>One Color Logo Mark - B&W</h2>
 		<div class="span-4">
-            		<img src="/assets/openstack-logo/2016R/OpenStack-Logo-Vertical-Black.png" style="width:140px;" />
+            		<img src="/assets/openstack-logo/2016R/OpenStack-Logo-Vertical-Black.png" style="width:300px;" />
 		</div>
 		<div class="span-9 last">
 			<a href="/assets/openstack-logo/2016R/OpenStack-Logo-Vertical-Black.ai" class="button">AI Version</a> &nbsp; &nbsp;  <a href="https://www.openstack.org/assets/openstack-logo/2016R/OpenStack-Logo-Vertical-Black.eps.zip" class="button">EPS Version</a>
