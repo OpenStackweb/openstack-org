@@ -77,7 +77,7 @@
             The same Apple designers who meticulously craft and refine iPhone also create these cases. The silicone form fits snugly over the volume buttons, Sleep/Wake button, curves of iPhone 6s Plus or iPhone 6 Plus without adding bulk. The soft microfiber lining on the inside helps.
           </div>
         </div>-->
-        <a href="#" target="_blank" class="swag-image-wrapper">
+        <a href="https://www.stickermule.com/marketplace/15757-i-heart-openstack" target="_blank" class="swag-image-wrapper">
           <img src="/themes/openstack/images/swag-store/items/i_heart_o-sticker.png" alt="" class="swag-photo">
         </a>
         <div class="div">
@@ -85,22 +85,22 @@
             <strong>$4</strong>
           </div>
           <div class="swag-action">
-            <a href="#" target="_blank">Buy on StickerMule <i class="fa fa-external-link"></i></a>
+            <a href="https://www.stickermule.com/marketplace/15757-i-heart-openstack" target="_blank">Buy on StickerMule <i class="fa fa-external-link"></i></a>
           </div>
         </div>
       </div>
       <!--End Item-->
       <!--Start Item-->
-      <div class="col-sm-6 swag-item">
+      <!--<div class="col-sm-6 swag-item">
         <div class="swag-title">
           "Women of OpenStack" woman's tee
-        </div>
+        </div>-->
         <!--<div class="swag-description-wrapper">
           <div class="swag-description">
             Utility messenger bag in canvas featuring swiveling shoulder strap, dedicated padded computer compartment, and removable ID holder. Custom OpenStack print inside.
           </div>
         </div>-->
-        <a href="#" target="_blank" class="swag-image-wrapper">
+        <!--<a href="#" target="_blank" class="swag-image-wrapper">
           <img src="/themes/openstack/images/swag-store/items/woo-red-shirt.png" alt="" class="swag-photo">
         </a>
         <div class="div">
@@ -111,7 +111,7 @@
             <a href="#" target="_blank">Buy on CafePress <i class="fa fa-external-link"></i></a>
           </div>
         </div>
-      </div>
+      </div>-->
       <!--End Item-->
       <!--Start Item-->
       <div class="col-sm-6 swag-item">
@@ -160,16 +160,16 @@
       </div>
       <!--End Item-->
       <!--Start Item-->
-      <div class="col-sm-6 swag-item">
+      <!--<div class="col-sm-6 swag-item">
         <div class="swag-title">
           Trucker hat
-        </div>
+        </div>-->
         <!--<div class="swag-description-wrapper">
           <div class="swag-description">
             The same Apple designers who meticulously craft and refine iPhone also create these cases. The silicone form fits snugly over the volume buttons, Sleep/Wake button, curves of iPhone 6s Plus or iPhone 6 Plus without adding bulk. The soft microfiber lining on the inside helps.
           </div>
         </div>-->
-        <a href="#" target="_blank" class="swag-image-wrapper">
+        <!--<a href="#" target="_blank" class="swag-image-wrapper">
           <img src="/themes/openstack/images/swag-store/items/trucker-hat.png" alt="" class="swag-photo">
         </a>
         <div class="div">
@@ -180,19 +180,19 @@
             <a href="#" target="_blank">Buy on CafePress <i class="fa fa-external-link"></i></a>
           </div>
         </div>
-      </div>
+      </div>-->
       <!--End Item-->
       <!--Start Item-->
-      <div class="col-sm-6 swag-item">
+      <!--<div class="col-sm-6 swag-item">
         <div class="swag-title">
           Thermos can cooler
-        </div>
+        </div>-->
         <!--<div class="swag-description-wrapper">
           <div class="swag-description">
             Utility messenger bag in canvas featuring swiveling shoulder strap, dedicated padded computer compartment, and removable ID holder. Custom OpenStack print inside.
           </div>
         </div>-->
-        <a href="#" target="_blank" class="swag-image-wrapper">
+        <!--<a href="#" target="_blank" class="swag-image-wrapper">
           <img src="/themes/openstack/images/swag-store/items/coozie.png" alt="" class="swag-photo">
         </a>
         <div class="div">
@@ -203,7 +203,7 @@
             <a href="#" target="_blank">Buy on CafePress <i class="fa fa-external-link"></i></a>
           </div>
         </div>
-      </div>
+      </div>-->
       <!--End Item-->
       <!--Start Item-->
       <div class="col-sm-6 swag-item">
