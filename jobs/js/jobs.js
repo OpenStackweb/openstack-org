@@ -130,7 +130,7 @@
                     if(parseInt(opened_job_id) > 0) {
                         $('.jobDescription','#' + opened_job_id).slideDown();
                         $('.jobDescription','#' + opened_job_id).addClass('is_visible');
-                        $('.jobExpand','#' + opened_job_id).html('less');
+                        $('.jobExpand','#' + opened_job_id).html('Less');
                     }
                 }
 

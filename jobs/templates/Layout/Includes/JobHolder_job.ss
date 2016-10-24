@@ -46,7 +46,7 @@
                 </a>
         </div>
     </div>
-    <div class="row jobDescription">
+    <div class="row jobDescription" style="display:none;">
         <div class="col-md-11">
             <div class="row">
                 <div class="col-md-11">
