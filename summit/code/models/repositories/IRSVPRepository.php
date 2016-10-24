@@ -28,4 +28,11 @@ interface IRSVPRepository extends IEntityRepository {
      * @return IRSVP|null
      */
     public function getByEventPaged($event_id, $page, $page_size);
+
+    /**
+     * @param int $event_id
+     * @param string $seat_type
+     * @return IRSVP[]
+     */
+    public function getByEventAndType($event_id, $seat_type = null);
 }

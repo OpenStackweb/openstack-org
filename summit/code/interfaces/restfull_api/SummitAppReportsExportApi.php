@@ -340,81 +340,68 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
             $events  = $this->event_repository->searchBySummitTermAndHasRSVP($summit,$search_term);
 
             if (count($events)) {
-                if (count($events) == 1) {
-                    $results = array();
-                    $event = array_pop($events);
+
+                $objPHPExcel = new PHPExcel();
+                $objPHPExcel->getProperties()->setCreator("OpenStack");
+                $objPHPExcel->getProperties()->setTitle("RSVP per Event Report");
+
+                foreach($events as $event) {
+                    $room_cap = ($event->Location() && $event->Location()->is_a('SummitVenueRoom')) ? $event->Location()->Capacity : 0;
+                    list($regulars,$reg_count) = $this->rsvp_repository->getByEventAndType($event->ID, 'Regular');
+                    list($waitlists,$wait_count) = $this->rsvp_repository->getByEventAndType($event->ID, 'WaitList');
                     list($rsvps,$total) = $this->rsvp_repository->getByEventPaged($event->ID,null,null);
                     $rsvp_array_template = array();
+                    $headers = array();
+
+                    $active_sheet = $objPHPExcel->createSheet();
+                    $active_sheet->setTitle('Event '.$event->Location());
+
                     foreach ($event->RSVPTemplate()->Questions()->sort('Order') as $question) {
                         if ($question->Label) {
                             $rsvp_array_template[$question->Label] = '';
+                            $headers[] = $question->Label;
                         }
                     }
+                    $headers[] = 'Seat Type';
+
+                    $active_sheet->setCellValue('A1', $event->getTitleAndTime());
+                    $active_sheet->mergeCells('A1:K1');
+                    $active_sheet->setCellValue('A3', 'Room Total:');
+                    $active_sheet->setCellValue('B3', $room_cap);
+                    $active_sheet->setCellValue('A4', 'RSVP #:');
+                    $active_sheet->setCellValue('B4', $reg_count);
+                    $active_sheet->setCellValue('C4', 'WaitList #:');
+                    $active_sheet->setCellValue('D4', $wait_count);
+
+                    $active_sheet->fromArray($headers, NULL, 'A6');
+                    $active_sheet->getStyle("A6:K6")->getFont()->setBold(true);
 
                     if (count($rsvps)) {
-                        foreach($rsvps as $rsvp) {
+                        foreach($rsvps as $key => $rsvp) {
+                            $row = $key + 7;
                             $rsvp_array = $rsvp_array_template;
 
                             foreach ($rsvp->Answers() as $answer) {
                                 $rsvp_array[$answer->Question()->Label] = $answer->getFormattedAnswer();
                             }
 
-                            $results[] = $rsvp_array;
+                            $rsvp_array['Seat Type'] = $rsvp->SeatType;
+
+                            $active_sheet->fromArray($rsvp_array, NULL, 'A'.$row);
                         }
                     }
-
-                    $filename = "rsvp_report-" . date('Ymd') . "." . $ext;
-                    $delimiter = ($ext == 'xls') ? "\t" : ",";
-                    return CSVExporter::getInstance()->export($filename, $results, $delimiter);
-                } else if (count($events) > 1) {
-                    $filename = "rsvp_report-" . date('Ymd') . ".xlsx";
-                    $objPHPExcel = new PHPExcel();
-                    $objPHPExcel->getProperties()->setCreator("OpenStack");
-                    $objPHPExcel->getProperties()->setTitle("RSVP per Event Report");
-
-                    foreach($events as $event) {
-                        list($rsvps,$total) = $this->rsvp_repository->getByEventPaged($event->ID,null,null);
-                        $rsvp_array_template = array();
-                        $headers = array();
-
-                        $active_sheet = $objPHPExcel->createSheet();
-                        $active_sheet->setTitle('Event '.$event->ID);
-
-                        foreach ($event->RSVPTemplate()->Questions()->sort('Order') as $question) {
-                            if ($question->Label) {
-                                $rsvp_array_template[$question->Label] = '';
-                                $headers[] = $question->Label;
-                            }
-                        }
-
-                        $active_sheet->setCellValue('A1', $event->getTitle());
-                        $active_sheet->mergeCells('A1:K1');
-                        $active_sheet->fromArray($headers, NULL, 'A3');
-                        $active_sheet->getStyle("A3:K3")->getFont()->setBold(true);
-
-                        if (count($rsvps)) {
-                            foreach($rsvps as $key => $rsvp) {
-                                $row = $key + 4;
-                                $rsvp_array = $rsvp_array_template;
-
-                                foreach ($rsvp->Answers() as $answer) {
-                                    $rsvp_array[$answer->Question()->Label] = $answer->getFormattedAnswer();
-                                }
-
-                                $active_sheet->fromArray($rsvp_array, NULL, 'A'.$row);
-                            }
-                        }
-                    }
-
-                    $objPHPExcel->removeSheetByIndex(0);
-                    $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
-
-                    header('Content-type: application/vnd.ms-excel');
-                    header('Content-Disposition: attachment; filename="'.$filename.'"');
-                    $objWriter->save('php://output');
-
-                    return;
                 }
+
+                $filename = (count($events) == 1) ?  $event->getTitleForUrl()."-".date('Ymd').".xlsx" : "rsvp_report-" . date('Ymd') . ".xlsx";
+
+                $objPHPExcel->removeSheetByIndex(0);
+                $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
+
+                header('Content-type: application/vnd.ms-excel');
+                header('Content-Disposition: attachment; filename="'.$filename.'"');
+                $objWriter->save('php://output');
+
+                return;
             }
 
             return $this->notFound();

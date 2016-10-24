@@ -49,4 +49,21 @@ class SapphireRSVPRepository
         $offset = ($page-1) * $page_size;
         return $this->getAll($query, $offset, $page_size);
     }
+
+    /**
+     * @param int $event_id
+     * @param string $seat_type
+     * @return IRSVP[]
+     */
+    public function getByEventAndType($event_id, $seat_type = null)
+    {
+        $query = new QueryObject();
+        $query->addAndCondition(QueryCriteria::equal('EventID', $event_id));
+        if ($seat_type) {
+            $query->addAndCondition(QueryCriteria::equal('SeatType', $seat_type));
+        }
+
+        return $this->getAll($query);
+    }
+
 }

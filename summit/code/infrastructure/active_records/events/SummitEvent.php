@@ -109,7 +109,7 @@ class SummitEvent extends DataObject implements ISummitEvent
     }
 
     public function getTitleAndTime(){
-        return sprintf("%s (%s - %s)", $this->getTitle(), $this->getStartDateNice(), $this->getEndDateNice());
+        return sprintf("%s (%s)", $this->getTitle(), $this->getDateNice());
     }
 
     public function SummitTypesLabel()
