@@ -18,42 +18,46 @@
     var type             = null;
     var keywords         = null;
 
+    function expandJobDetail(event) {
+        var job_id     = $(this).data('id');
+        var parent_div = $('#'+job_id);
+
+        console.log("clicked job id "+ job_id);
+
+        var detail_div = parent_div.find('div.jobDescription');
+
+        var is_visible = detail_div.hasClass('is_visible');
+
+        if (is_visible) {
+            document.location.hash = '';
+            $(this).html('More info');
+        } else {
+            document.location.hash = job_id;
+            $(this).html('Less');
+        }
+
+        detail_div.toggleClass('is_visible');
+        // show/ hide details
+        parent_div.find('div.jobDescription').slideToggle(400);
+        event.preventDefault();
+
+        return false;
+    }
+
     $(document).ready(function($){
 
         //hide job descriptions
         $('.jobDescription').hide();
 
-        if(document.location.hash && document.location.hash != '#none') {
+        if(document.location.hash && document.location.hash != '') {
             var opened_job_id = document.location.hash.substring(1);
             $('.jobDescription','#' + opened_job_id).slideDown();
+            $('.jobDescription','#' + opened_job_id).addClass('is_visible');
             $('.jobExpand','#' + opened_job_id).html('less');
         }
 
         // toggles the job descriptions
-        $(document).on('click','.jobExpand' ,function(event) {
-            var job_id     = $(this).data('id');
-            var parent_div = $('#'+job_id);
-
-            console.log("clicked job id "+ job_id);
-            var detail_div = parent_div.find('div.jobDescription');
-
-            var is_visible = detail_div.hasClass('is_visible');
-
-            if (is_visible) {
-                document.location.hash = 'none';
-                $(this).html('More info');
-            } else {
-                document.location.hash = job_id;
-                $(this).html('Less');
-            }
-
-            detail_div.toggleClass('is_visible');
-            // show/ hide details
-            parent_div.find('div.jobDescription').slideToggle(400);
-            event.preventDefault();
-
-            return false;
-        });
+        $(document).on('click','.jobExpand' , expandJobDetail);
 
         $("#ddl-menu-sort").on('click', 'li a', function(){
             $("#sort_by").html($(this).text()+' <span class="caret"></span>');
@@ -113,12 +117,14 @@
             type: "GET",
             url: url,
             success: function(result){
-
+                $(document).off('click','.jobExpand' , expandJobDetail);
                 $('.jobPosting','.job_list').remove();
                 if(result == '') result='<div class="empty-job-list"><p>There are no jobs matching your criterias!</p></div>';
                 $('.job_list').html(result);
+                // toggles the job descriptions
+                $(document).on('click','.jobExpand' , expandJobDetail);
 
-                if (document.location.hash && document.location.hash != '#none') {
+                if (document.location.hash && document.location.hash != '') {
                     var opened_job_id = document.location.hash.substring(1);
                     $('.jobDescription' , '#'+opened_job_id).show();
                     $('.jobExpand','#' + opened_job_id).html('less');
