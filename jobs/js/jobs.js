@@ -126,10 +126,11 @@
 
                 if (document.location.hash && document.location.hash != '') {
                     var opened_job_id  = document.location.hash.substring(1);
-                    console.log("opened_job_id"+opened_job_id);
+                    console.log("opened_job_id "+opened_job_id);
                     if(parseInt(opened_job_id) > 0) {
-                        $('.jobDescription', '#' + opened_job_id).show();
-                        $('.jobExpand', '#' + opened_job_id).html('Less');
+                        $('.jobDescription','#' + opened_job_id).slideDown();
+                        $('.jobDescription','#' + opened_job_id).addClass('is_visible');
+                        $('.jobExpand','#' + opened_job_id).html('less');
                     }
                 }
 
