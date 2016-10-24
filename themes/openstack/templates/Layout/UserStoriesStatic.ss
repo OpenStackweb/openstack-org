@@ -23,7 +23,7 @@
         </span>
       </div>
       <div class="user-stories-video-wrapper">
-        <iframe class="user-stories-hero-video" src="https://www.youtube.com/embed/jdSs8HFgfgo?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+        <iframe class="user-stories-hero-video" src="https://www.youtube.com/embed/jdSs8HFgfgo?rel=0&amp;showinfo=0&autoplay=0" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
   </div>
@@ -320,6 +320,7 @@
 <script>
   $("#user-stories-video-trigger").click(function () {
     $('.user-stories-video-wrapper').addClass('on');
+    $("iframe.user-stories-hero-video").attr("src", $("iframe.user-stories-hero-video").attr("src").replace("autoplay=0", "autoplay=1"));
     $(this).addClass('off');
     event.preventDefault();
   });

@@ -242,7 +242,7 @@ a.user-story-square {
 /*Marketplace and Events*/
 .banner {
   padding: 0;
-  background: url("/images/banner-bg.jpg") no-repeat center center;
+  background: url("/themes/openstack/images/banner-bg.jpg") no-repeat center center;
   background-size: cover;
   min-height: 350px; }
 
@@ -299,37 +299,37 @@ a.user-story-square {
   padding: 15px 2% 15px 50px; }
 
 li.training {
-  background: url("/images/training-icon.png") 0% 50% no-repeat; }
+  background: url("/themes/openstack/images/training-icon.png") 0% 50% no-repeat; }
 
 li.distros {
-  background: url("/images/distros-icon.png") 0% 50% no-repeat; }
+  background: url("/themes/openstack/images/distros-icon.png") 0% 50% no-repeat; }
 
 li.consulting {
-  background: url("/images/consulting-icon.png") 0% 50% no-repeat; }
+  background: url("/themes/openstack/images/consulting-icon.png") 0% 50% no-repeat; }
 
 li.public-cloud {
-  background: url("/images/public-cloud-icon.png") 0% 50% no-repeat; }
+  background: url("/themes/openstack/images/public-cloud-icon.png") 0% 50% no-repeat; }
 
 li.drivers {
-  background: url("/images/drivers-icon.png") 0% 50% no-repeat; }
+  background: url("/themes/openstack/images/drivers-icon.png") 0% 50% no-repeat; }
 
 .marketplace-column ul li.hosted-cloud {
   padding: 5px 2% 15px 50px; }
 
 li.hosted-cloud {
-  background: url("/images/hosted-cloud-icon.png") 0% 30% no-repeat; }
+  background: url("/themes/openstack/images/hosted-cloud-icon.png") 0% 30% no-repeat; }
 
 .marketplace-btn.blue {
   width: 100%;
   padding: 20px 22% 20px 8%;
   font-size: 20px;
   text-align: center;
-  background: #284d68 url("/images/blue-arrow.png") 90% 50% no-repeat;
+  background: #284d68 url("/themes/openstack/images/blue-arrow.png") 90% 50% no-repeat;
   float: right;
   text-transform: capitalize; }
 
 .marketplace-btn.blue:hover {
-  background: #132F45 url("/images/blue-arrow-hover.png") 90% 50% no-repeat; }
+  background: #132F45 url("/themes/openstack/images/blue-arrow-hover.png") 90% 50% no-repeat; }
 
 @media (max-width: 767px) {
   .marketplace-btn.blue {
