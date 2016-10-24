@@ -44,16 +44,20 @@
         return false;
     }
 
+    function showJobDetail(job_id){
+        $('.jobDescription','#' + job_id).slideDown();
+        $('.jobDescription','#' + job_id).addClass('is_visible');
+        $('.jobExpand','#' + job_id).html('less');
+    }
+
     $(document).ready(function($){
 
         //hide job descriptions
         $('.jobDescription').hide();
 
         if(document.location.hash && document.location.hash != '') {
-            var opened_job_id = document.location.hash.substring(1);
-            $('.jobDescription','#' + opened_job_id).slideDown();
-            $('.jobDescription','#' + opened_job_id).addClass('is_visible');
-            $('.jobExpand','#' + opened_job_id).html('less');
+            var job_id = document.location.hash.substring(1);
+            if(parseInt(job_id) > 0) showJobDetail(job_id);
         }
 
         // toggles the job descriptions
@@ -125,13 +129,8 @@
                 $(document).on('click','.jobExpand' , expandJobDetail);
 
                 if (document.location.hash && document.location.hash != '') {
-                    var opened_job_id  = document.location.hash.substring(1);
-                    console.log("opened_job_id "+opened_job_id);
-                    if(parseInt(opened_job_id) > 0) {
-                        $('.jobDescription','#' + opened_job_id).slideDown();
-                        $('.jobDescription','#' + opened_job_id).addClass('is_visible');
-                        $('.jobExpand','#' + opened_job_id).html('Less');
-                    }
+                    var job_id  = document.location.hash.substring(1);
+                    if(parseInt(job_id) > 0) showJobDetail(job_id);
                 }
 
                 xhr = null;
