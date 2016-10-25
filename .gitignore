@@ -84,3 +84,6 @@ silverstripe-green/
 silverstripe-serialised-dbfields/
 autocomplete
 Thumbs.db
+config.json
+auth.json
+autocomplete/

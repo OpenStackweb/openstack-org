@@ -45,7 +45,7 @@ Vagrant.configure(2) do |config|
   config.vm.provider "virtualbox" do |vb|
         vb.memory = "4096"
         vb.name   = "local.openstack.org"
-	 vb.cpus   	= 2
+	    vb.cpus	  = 2
   end
 
   # use https://github.com/oscar-stack/vagrant-hosts

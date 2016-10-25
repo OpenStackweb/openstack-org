@@ -1,7 +1,7 @@
 #!/bin/bash -xe
 echo “running update deployment …”;
 cd /var/www/local.openstack.org;
-sudo php composer.phar update --ignore-platform-reqs --prefer-dist;
+php composer.phar update --ignore-platform-reqs --prefer-dist;
 #run ss tasks
 sake dev/build;
 sake dev/tasks/DBMigrateTask;
@@ -15,4 +15,3 @@ chown vagrant:www-data -R /var/www/local.openstack.org/vendor;
 sudo service nginx restart;
 sudo service php5-fpm restart;
 sudo php /var/www/local.openstack.org/framework/cli-script.php /UpdateFeedTask;
-

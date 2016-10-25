@@ -40,7 +40,8 @@ php composer-setup.php
 php -r "unlink('composer-setup.php');"
 # create local folder for ss cache
 mkdir -p silverstripe-cache;
-sudo php composer.phar install --ignore-platform-reqs --prefer-dist;
+php composer.phar config --global repositories.packagist.allow_ssl_downgrade false;
+php composer.phar install --ignore-platform-reqs --prefer-dist;
 sudo ./framework/sake installsake;
 
 
