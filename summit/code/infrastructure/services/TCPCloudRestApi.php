@@ -32,7 +32,7 @@ final class TCPCloudRestApi implements ITCPCloudRestApi
         if($response->getStatusCode() !== 200) throw new Exception('invalid status code!');
         $content_type = $response->getHeader('content-type');
         if(empty($content_type)) throw new Exception('invalid content type!');
-        if($content_type !== 'application/json') throw new Exception('invalid content type!');
+        if(!strstr($content_type, 'application/json')) throw new Exception('invalid content type!');
 
         $json       = $response->getBody()->getContents();
         $response   = json_decode($json, true);
