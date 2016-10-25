@@ -85,7 +85,7 @@
       </div> <!--End User Story tile-->
 
       <div class="col-lg-4 col-md-6"> <!--Start User Story tile-->
-        <a href="https://01.org/sites/default/files/performance_analysis_and_tuning_in_china_mobiles_openstack_production_cloud.pdf" class="user-story-square" style="background-image: url('/themes/openstack/images/user-stories/china-mobile.jpg')">
+        <a href="https://01.org/sites/default/files/performance_analysis_and_tuning_in_china_mobiles_openstack_production_cloud_2.pdf" class="user-story-square" style="background-image: url('/themes/openstack/images/user-stories/china-mobile.jpg')">
           <span class="company">
             China Mobile
             <span class="stat">
