@@ -1,5 +1,4 @@
 require('./t.tag');
-require('./raw.tag');
 <openstack-config-samples>
         <div class="row">
             <div class="col-sm-12 sample-configs-wrapper">
