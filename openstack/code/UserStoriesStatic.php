@@ -21,5 +21,33 @@
 	class UserStoriesStatic_Controller extends Page_Controller {
 		function init() {
 			parent::init();
-		}		
+		}
+
+        public function getEnterpriseEvents($limit = 3)
+        {
+            $next_summit = $this->getSummitEvent();
+            $filter = array("EventEndDate:GreaterThan" => date('Y-m-d H:i:s'), "ID:not" => $next_summit->ID);
+            return EventPage::get()
+                ->where("EventCategory IN('Enterprise','Summit')")
+                ->filter($filter)
+                ->sort('EventStartDate')
+                ->limit($limit);
+        }
+
+        public function getEnterpriseFeaturedEvents($limit = 3)
+        {
+            $next_summit = $this->getSummitEvent();
+            $filter = array("EventEndDate:GreaterThan" => date('Y-m-d H:i:s'), "ID:not" => $next_summit->ID);
+            return EventPage::get()
+                ->where("EventCategory IN('Enterprise','Summit') AND EventSponsorLogoUrl IS NOT NULL")
+                ->filter($filter)
+                ->sort('EventStartDate')
+                ->limit($limit);
+
+        }
+
+        public function getSummitEvent()
+        {
+            return EventPage::get()->where("IsSummit = 1 AND EventStartDate > NOW()")->sort('EventStartDate')->first();
+        }
 	}

@@ -72,5 +72,3 @@ class EnterpriseHomePage_Controller extends Page_Controller {
         return EventPage::get()->where("IsSummit = 1 AND EventStartDate > NOW()")->sort('EventStartDate')->first();
     }
 }
- 
-?>
