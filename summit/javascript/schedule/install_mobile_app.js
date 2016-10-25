@@ -24,9 +24,10 @@
         var current_url            = window.location.href;
         var compare_os_version     = is_ios ? bowser.compareVersions([os_version, '9']): 0
         var uri                    = URI(current_url);
+        var hide_banner            = localStorage.hide_app_banner;
 
         var has_meta_app_links = (typeof $("meta[property='al:android:url']").attr("content") != "undefined" || typeof $("meta[property='al:ios:url']").attr("content") != "undefined");
-        if (is_mobile && has_meta_app_links){
+        if (is_mobile && has_meta_app_links && !hide_banner){
             var os = is_android ? 'Android' : 'IOS';
             // check if we are on RSVP page, dont show it
             console.log('uri path '+uri.path());
@@ -63,7 +64,7 @@
                 '<h3>Hey Stacker!</h3>' +
                 '</div>'+
                 '<div class="header-col right">'+
-                '<i title="continue navigating the website" class="fa fa-times btn-continue" aria-hidden="true"></i>' +
+                '<b class="btn-continue">X</b>' +
                 '</div>'+
                 '</div>'+
                 '<div class="row mobile-message">'+
@@ -90,6 +91,7 @@
 
         $(document).on('click', '.btn-continue', function() {
             $('#install-app-overlay').slideUp(1000);
+            localStorage.hide_app_banner = true;
         });
 
         $(document).on('click', '#btn-download', function() {
