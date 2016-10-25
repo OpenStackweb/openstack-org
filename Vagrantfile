@@ -50,8 +50,9 @@ Vagrant.configure(2) do |config|
 
   # use https://github.com/oscar-stack/vagrant-hosts
   # vagrant plugin install vagrant-hosts
-  config.vm.provision "hostsetup", type:"hosts" do |provisioner|
-        provisioner.add_host '127.0.0.1', ['local.openstack.org']
+  
+  config.vm.provision :hosts do |provisioner|
+       provisioner.add_host '127.0.0.1', ['local.openstack.org']
   end
 
   config.vm.provision "bootstrap", type:"shell" do |s|

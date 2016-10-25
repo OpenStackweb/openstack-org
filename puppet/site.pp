@@ -15,6 +15,7 @@ $main_packages = [
   'mysql-server-5.6',
   'zip',
   'unzip',
+  'nginx',
 ]
 
 # php packages needed for server
@@ -106,9 +107,10 @@ file { '/var/www/local.openstack.org/_ss_environment.php':
   mode    => '0640',
 }
 
-class { 'nginx':
-  sendfile => false,
+service { 'nginx':
+  ensure    => running,
   require   => [
+    Package[$main_packages] ,		
     Package[$php5_packages] ,
     Service['mysql'],
     File['/var/www/local.openstack.org/_ss_environment.php'],
@@ -118,7 +120,7 @@ class { 'nginx':
 file { '/etc/nginx/ssl':
   ensure    => 'link',
   target    => '/etc/ssl_certs',
-  require   => Class['nginx'],
+  require   => Service['nginx'],
 }
 
 file { '/etc/nginx/silverstripe.conf':
@@ -127,7 +129,7 @@ file { '/etc/nginx/silverstripe.conf':
   owner   => 'vagrant',
   group   => 'www-data',
   mode    => '0640',
-  require => Class['nginx'],
+  require => Service['nginx'],
 }
 
 file { '/etc/nginx/php5-fpm.conf':
@@ -136,7 +138,7 @@ file { '/etc/nginx/php5-fpm.conf':
   owner   => 'vagrant',
   group   => 'www-data',
   mode    => '0640',
-  require => Class['nginx'],
+  require => Service['nginx'],
 }
 
 file { '/etc/nginx/sites-available/local.openstack.org':
