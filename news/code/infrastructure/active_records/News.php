@@ -260,7 +260,9 @@ final class News extends DataObject implements INews
     public function getHeadlineForUrl()
     {
         $lcase_headline = strtolower(trim($this->Headline));
-        $headline_for_url = str_replace(array(' ', '/'), '-', $lcase_headline);
+
+        $headline_for_url = preg_replace("/[^A-Za-z0-9 ]/", '', $lcase_headline);
+        $headline_for_url = preg_replace('/\s+/', '-', $headline_for_url);
 
         return $headline_for_url;
     }
