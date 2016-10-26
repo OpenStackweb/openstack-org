@@ -18,4 +18,8 @@ interface ISummitEventType extends IEntity
      * @return string
      */
     public function getType();
+
+    const Keynotes     = 'Keynotes';
+    const Presentation = 'Presentation';
+    const Panel        = 'Panel';
 }

@@ -207,10 +207,17 @@ final class SummitService implements ISummitService
             $event_type_id = intval($event_data['event_type']);
             $event_type    = SummitEventType::get()->byID($event_type_id);
             if(is_null($event_type)) throw new NotFoundEntityException('EventType');
+            // todo : move to a factory method !!!
+            $event = (
+                       $event_type->Type == ISummitEventType::Presentation ||
+                       $event_type->Type == ISummitEventType::Keynotes ||
+                       $event_type->Type == ISummitEventType::Panel
+                      )
+                      ? new Presentation :  new SummitEvent;
 
-            $event = ($event_type->Type == 'Presentation'|| $event_type->Type == 'Keynotes') ? new Presentation :  new SummitEvent;
             $start_date = $event_data['start_date'];
             $end_date   = $event_data['end_date'];
+
             if(!empty($start_date) || !empty($end_date))
             {
                 $d1 = new DateTime($start_date);
@@ -295,7 +302,7 @@ final class SummitService implements ISummitService
 
             $event->Speakers()->setByIDList($speaker_ids);
 
-            if($event->Type()->Type == 'Keynotes' || $event->Type()->Type == 'Panel')
+            if($event->Type()->Type == ISummitEventType::Keynotes || $event->Type()->Type == ISummitEventType::Panel)
             {
                 if(!isset($event_data['moderator']))
                     throw new EntityValidationException('moderator is required!');
@@ -351,7 +358,7 @@ final class SummitService implements ISummitService
      * @return bool
      */
     public static function IsPresentationEventType($type){
-        return ($type === 'Presentation' || $type === 'Keynotes' || $type === 'Panel');
+        return ($type === ISummitEventType::Presentation || $type === ISummitEventType::Keynotes || $type === ISummitEventType::Panel);
     }
 
     /**
