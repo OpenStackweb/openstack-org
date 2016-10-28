@@ -36,6 +36,11 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
     private $summitpresentation_repository;
 
     /**
+     * @var IEventbriteAttendeeRepository
+     */
+    private $eventbriteattendee_repository;
+
+    /**
      * @var ISummitService
      */
     private $summit_service;
@@ -46,6 +51,7 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
         ISummitEventRepository $summitevent_repository,
         ISummitAttendeeRepository $summitattendee_repository,
         ISummitPresentationRepository $summitpresentation_repository,
+        IEventbriteAttendeeRepository $eventbriteattendee_repository,
         ISummitService $summit_service
     )
     {
@@ -54,6 +60,7 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
         $this->summitevent_repository        = $summitevent_repository;
         $this->summitattendee_repository     = $summitattendee_repository;
         $this->summitpresentation_repository = $summitpresentation_repository;
+        $this->eventbriteattendee_repository = $eventbriteattendee_repository;
         $this->summit_service                = $summit_service;
     }
 
@@ -78,6 +85,9 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
 
     static $url_handlers = array(
         'GET '                                               => 'getAttendees',
+        'GET unmatched/$EB_ATTENDEE_ID!/suggestions'         => 'getEventbriteUnmatchedSuggestions',
+        'GET unmatched'                                      => 'getEventbriteUnmatched',
+        'POST match/$EB_ATTENDEE_ID!/$MEMBER_ID!'            => 'matchEventbriteAttendee',
         'GET $ATTENDEE_ID!/schedule'                         => 'getSchedule',
         'PUT $ATTENDEE_ID!/tickets/$TICKET_ID!/reassign'     => 'reassignTicket',
         'GET $ATTENDEE_ID!/tickets/$TICKET_ID!'              => 'getTicketData',
@@ -98,6 +108,9 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
         'removeTicket',
         'addTicket',
         'removeRSVP',
+        'getEventbriteUnmatched',
+        'getEventbriteUnmatchedSuggestions',
+        'matchEventbriteAttendee',
     );
 
     public function getAttendees(SS_HTTPRequest $request){
@@ -387,4 +400,107 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
             return $this->serverError();
         }
     }
+
+    public function getEventbriteUnmatched(SS_HTTPRequest $request){
+        try
+        {
+            $query_string = $request->getVars();
+            $page         = (isset($query_string['page'])) ? Convert::raw2sql($query_string['page']) : '';
+            $page_size    = (isset($query_string['items'])) ? Convert::raw2sql($query_string['items']) : '';
+            $search_term  = (isset($query_string['term'])) ? Convert::raw2sql($query_string['term']) : '';
+            $suggested_only  = (isset($query_string['filter_suggested'])) ? Convert::raw2sql($query_string['filter_suggested']) : 0;
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $summit       = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+
+            list($attendees,$count) = $this->eventbriteattendee_repository->getUnmatchedPaged($search_term, $suggested_only, $page, $page_size);
+
+            $attendees_array = array();
+
+            foreach($attendees as $attendee) {
+                $attendees_array[] = array(
+                    'name'          => $attendee->FirstName.' '.$attendee->LastName,
+                    'email'         => $attendee->Email,
+                    'eventbrite_id' => $attendee->ExternalAttendeeId,
+                    'amount_paid'   => $attendee->Price,
+                    'external_ids'  => $attendee->ExternalIds,
+                );
+            }
+
+            return $this->ok(array('attendees' => $attendees_array, 'count' => $count));
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    public function getEventbriteUnmatchedSuggestions(SS_HTTPRequest $request){
+        try
+        {
+            $eb_attendee_id  = intval($request->param('EB_ATTENDEE_ID'));
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $summit       = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+
+            $eb_attendee = $this->eventbriteattendee_repository->getByAttendeeId($eb_attendee_id);
+            if(is_null($eb_attendee)) throw new NotFoundEntityException('Attendee', sprintf(' id %s', $eb_attendee_id));
+
+            $suggestions = $this->eventbriteattendee_repository->getSuggestions($eb_attendee);
+
+            $suggestion_array = array();
+            foreach ($suggestions as $suggestion) {
+                $suggestion_array[] = array(
+                    'id'     => $suggestion->ID,
+                    'name'   => $suggestion->FirstName.' '.$suggestion->Surname,
+                    'email'  => $suggestion->Email,
+                    'reason' => $suggestion->Reason,
+                );
+            }
+
+            return $this->ok($suggestion_array);
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    public function matchEventbriteAttendee(SS_HTTPRequest $request){
+        try
+        {
+            $eb_attendee_id  = intval($request->param('EB_ATTENDEE_ID'));
+            $member_id  = intval($request->param('MEMBER_ID'));
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $summit       = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+
+            $attendee = $this->summit_service->matchEventbriteAttendee($summit, $eb_attendee_id, $member_id);
+
+            return $this->ok($attendee->ID);
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
 }

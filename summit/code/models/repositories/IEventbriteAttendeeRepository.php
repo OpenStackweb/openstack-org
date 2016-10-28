@@ -14,21 +14,31 @@
  **/
 interface IEventbriteAttendeeRepository extends IEntityRepository
 {
+
     /**
+     * @param int $eventbrite_attendee_id
+     * @return EventbriteAttendee
+     */
+    public function getByAttendeeId($eventbrite_attendee_id);
+
+    /**
+     * @param string $email
+     * @return EventbriteAttendee[]
+     */
+    public function getByEmail($email);
+
+    /**
+     * @param string $search_term
+     * @param bool $suggested_only
      * @param int $page
      * @param int $size
      * @return array
      */
-    public function getUnmatchedPaged($page, $size);
+    public function getUnmatchedPaged($search_term = '', $suggested_only = false, $page = 1, $size = 20);
 
     /**
+     * @param EventbriteAttendee $eventbrite_attendee
      * @return array
      */
-    public function getUnmatchedCount();
-
-    /**
-     * @param int $eventbrite_attendee_id
-     * @return array
-     */
-    public function getSuggestions($eventbrite_attendee_id);
+    public function getSuggestions($eventbrite_attendee);
 }

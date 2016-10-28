@@ -368,6 +368,7 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.css');
         Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css');
         Requirements::css('themes/openstack/bower_assets/sweetalert/dist/sweetalert.css');
+        Requirements::css('themes/openstack/bower_assets/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
         //Requirements::css('summit/css/summit-admin-speaker-merge.css');
 
         Requirements::javascript('summit/javascript/simple-sidebar.js');
@@ -380,9 +381,9 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         Requirements::javascript('themes/openstack/bower_assets/typeahead.js/dist/typeahead.bundle.min.js');
         Requirements::javascript('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js');
         Requirements::javascript('themes/openstack/javascript/jquery.cleanform.js');
-        //Requirements::javascript('summit/javascript/summit-admin-speaker-merge.js');
+        Requirements::javascript('summit/javascript/summit-admin-attendees-match.js');
 
-        $orphan_attendees = $this->eventbrite_attendee_repository->getUnmatchedPaged(1,20);
+        list($orphan_attendees, $count) = $this->eventbrite_attendee_repository->getUnmatchedPaged();
 
         return $this->getViewer('attendees_match')->process
             (
@@ -392,7 +393,7 @@ final class SummitAppAdminController extends Controller implements PermissionPro
                         (
                             'Summit' => $summit,
                             'Attendees' => $orphan_attendees,
-                            'TotalAttendees' => $this->eventbrite_attendee_repository->getUnmatchedCount()
+                            'TotalAttendees' => $count
                         )
                     )
             );

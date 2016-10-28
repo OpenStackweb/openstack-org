@@ -81,7 +81,8 @@ Injector:
       1: '%$EventRepository'
       2: '%$SummitAttendeeRepository'
       3: '%$PresentationRepository'
-      4: '%$SummitService'
+      4: '%$EventbriteAttendeeRepository'
+      5: '%$SummitService'
   SummitAppReportsApi:
       constructor:
         0: '%$SummitRepository'
@@ -166,6 +167,8 @@ Injector:
     class: SummitAttendeeFactory
   SummitAttendeeRepository:
     class: SapphireSummitAttendeeRepository
+  EventbriteAttendeeRepository:
+    class: SapphireEventbriteAttendeeRepository
   SummitAssistanceRepository:
       class: SapphireSummitAssistanceRepository
   SummitReportRepository:

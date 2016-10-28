@@ -1285,4 +1285,55 @@ final class SummitService implements ISummitService
         });
     }
 
+    /**
+     * @param ISummit $summit
+     * @param int $eb_attendee_id
+     * @param int $member_id
+     * @return ISummitAttendee
+     */
+    public function matchEventbriteAttendee(ISummit $summit, $eb_attendee_id, $member_id)
+    {
+        $attendee_repository            = $this->attendee_repository;
+        $eventbrite_attendee_repository = new SapphireEventbriteAttendeeRepository();
+        $member_repository              = $this->member_repository;
+
+        return $this->tx_service->transaction(function () use (
+            $summit, $eb_attendee_id, $member_id, $attendee_repository, $eventbrite_attendee_repository, $member_repository) {
+
+            $eb_attendee = $eventbrite_attendee_repository->getByAttendeeId($eb_attendee_id);
+            if(is_null($eb_attendee)) throw new NotFoundEntityException('Attendee', sprintf(' id %s', $eb_attendee_id));
+
+            $member = $member_repository->getById($member_id);
+            if(is_null($member)) throw new NotFoundEntityException('Member', sprintf(' id %s', $member_id));
+
+            $attendee = $attendee_repository->getByMemberAndSummit($member_id, $summit->getIdentifier());
+            if (!$attendee) {
+                $attendee = new SummitAttendee();
+                $attendee->MemberID = $member_id;
+                $attendee->SummitID = $summit->getIdentifier();
+                $attendee->write();
+            }
+
+            list($eb_attendees,$count) = $eventbrite_attendee_repository->getByEmail($eb_attendee->Email);
+
+            foreach ($eb_attendees as $eb_ticket) {
+                $attendee_ticket = SummitAttendeeTicket::get()->where("ExternalAttendeeId = ".$eb_ticket->ExternalAttendeeId)->first();
+                if (!$attendee_ticket) {
+                    $attendee_ticket = new SummitAttendeeTicket();
+                    $ticket_type = SummitTicketType::get()->where("ExternalId = ".$eb_ticket->ExternalTicketClassId)->first();
+                    //TODO: we need the external order id
+                    //$ticket->ExternalOrderId = $eb_ticket->ExternalOrderId;
+                    $attendee_ticket->ExternalAttendeeId = $eb_ticket->ExternalAttendeeId;
+                    $attendee_ticket->TicketTypeID = ($ticket_type) ? $ticket_type->ID : 0;
+                }
+
+                $attendee_ticket->OwnerID = $attendee->ID;
+                $attendee_ticket->write();
+            }
+
+            return $attendee;
+
+        });
+    }
+
 }

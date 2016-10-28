@@ -181,5 +181,13 @@ interface ISummitService
      */
     public function updateBulkPresentations(ISummit $summit, array $data);
 
+    /**
+     * @param ISummit $summit
+     * @param int $eb_attendee_id
+     * @param int $member_id
+     * @return ISummitAttendee
+     */
+    public function matchEventbriteAttendee(ISummit $summit, $eb_attendee_id, $member_id);
+
 
 }

@@ -7,7 +7,7 @@
         <ul class="nav-pills nav-stacked" style="list-style-type:none;">
             <li <% if $Active == 'attendees_match' %> class="active" <% end_if %>>
                 <a href="$AdminLink/$SummitID/attendees/match">
-                    <span class="fa-stack pull-left"><i class="fa fa-chevron-right fa-stack-1x" style="padding-top: 5px;"></i></span>Match
+                    <span class="fa-stack pull-left"><i class="fa fa-chevron-right fa-stack-1x" style="padding-top: 5px;"></i></span>Eventbrite Match
                 </a>
             </li>
         </ul>

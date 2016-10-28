@@ -17,10 +17,14 @@
                 </span>
             </div>
         </div>
+        <div class="col-md-4 checkbox">
+            <input type="checkbox" id="filter_suggested" checked={ suggested_only } />
+            <label for="filter_suggested">Only with suggestions</label>
+        </div>
     </div>
 
     <div class="panel panel-default">
-        <div class="panel-heading">Orphan Attendees ({ page_data.total_items })</div>
+        <div class="panel-heading">Unmatched Eventbrite Orders ({ page_data.total_items })</div>
 
         <table id="attendees-table" class="table">
             <thead>
@@ -37,7 +41,7 @@
                     <td>{ attendee.name }</td>
                     <td>{ attendee.email }</td>
                     <td>{ parent.hasPaid(attendee) }</td>
-                    <td>{ attendee.eventbrite_id }</td>
+                    <td>{ attendee.external_ids }</td>
                     <td>
                         <button class="btn btn-primary btn-sm" onclick={ openMatchModal }>Match</button>
                     </td>
@@ -76,6 +80,7 @@
         this.attendees       = opts.attendees;
         this.page_data       = opts.page_data;
         this.summit_id       = opts.summit_id;
+        this.suggested_only  = false;
         var self             = this;
 
         var total_pages = Math.ceil(self.page_data.total_items / self.page_data.limit);
@@ -87,16 +92,18 @@
                 totalPages: total_pages,
                 numberOfPages: 10,
                 onPageChanged: function(e,oldPage,newPage){
-                    var search_term = $('#attendees_search_term').val();
-                    self.getAttendees(newPage,search_term);
+                    self.getAttendees(newPage);
                 }
             }
 
             $('#attendees-pager').bootstrapPaginator(options);
 
             $('#search_attendees').click(function(e) {
-                var search_term = $('#attendees_search_term').val();
-                self.getAttendees(1,search_term);
+                self.getAttendees(1);
+            });
+
+            $('#filter_suggested').change(function(e) {
+                self.getAttendees(1);
             });
 
             $("#attendees_search_term").keydown(function (e) {
@@ -107,32 +114,39 @@
 
         });
 
-        getAttendees(page,search_term) {
+        getAttendees(page) {
             $('body').ajax_loader();
 
-            $.getJSON('api/v1/summits/'+self.summit_id+'/attendees',{page:page, items:self.page_data.limit, term: search_term},function(data){
-                self.attendees = data.attendees;
-                self.page_data.page = page;
-                self.page_data.total_items = data.count;
+            var search_term = $('#attendees_search_term').val();
+            var filter_suggested = $('#filter_suggested').is(':checked');
 
-                var total_pages = (data.count > 0) ? Math.ceil(self.page_data.total_items / self.page_data.limit) : 1;
+            $.getJSON('api/v1/summits/'+self.summit_id+'/attendees/unmatched',
+                {page:page, items:self.page_data.limit, term: search_term, filter_suggested: filter_suggested},
+                function(data){
+                    self.attendees = data.attendees;
+                    self.page_data.page = page;
+                    self.page_data.total_items = data.count;
+                    self.suggested_only = filter_suggested;
 
-                var options = {
-                    currentPage: page ,
-                    totalPages: total_pages,
-                    numberOfPages: 10
+                    var total_pages = (data.count > 0) ? Math.ceil(self.page_data.total_items / self.page_data.limit) : 1;
+
+                    var options = {
+                        currentPage: page ,
+                        totalPages: total_pages,
+                        numberOfPages: 10
+                    }
+
+                    $('#attendees-pager').bootstrapPaginator(options);
+
+                    self.update();
+                    $('body').ajax_loader('stop');
                 }
-
-                $('#attendees-pager').bootstrapPaginator(options);
-
-                self.update();
-                $('body').ajax_loader('stop');
-            });
+            );
         }
 
         clearClicked(e){
             $('#attendees_search_term').val('');
-            self.getAttendees(1,'');
+            self.getAttendees(1);
         }
 
         hasPaid(attendee){
@@ -141,20 +155,25 @@
 
         openMatchModal(e){
             var attendee_id = e.item.attendee.eventbrite_id;
-            var suggestions_html = '';
 
-            $.each(e.item.attendee.suggestions, function(val,idx) {
-                suggestions_html += '<div class="radio">';
-                suggestions_html += '<label><input type="radio" name="match_suggestion">'+val.email +'('+val.reason+')</label>';
-                suggestions_html += '</div>';
+            $('#eventbrite_attendee_id').val(attendee_id);
+
+            $.getJSON('api/v1/summits/'+self.summit_id+'/attendees/unmatched/'+attendee_id+'/suggestions',{},function(data){
+                var suggestions_html = '';
+
+                if (data.length) {
+                    suggestions_html += '<label>Suggestions</label>';
+                    $.each(data, function(idx,val) {
+                        suggestions_html += '<div class="radio">';
+                        suggestions_html += '<input type="radio" id="match_'+idx+'" class="match_suggestion" value="'+val.id+'" />';
+                        suggestions_html += '<label for="match_'+idx+'">'+val.email +' ( match: '+val.reason+' )</label>';
+                        suggestions_html += '</div>';
+                    });
+
+                    $('#match_attendee_suggestions').html(suggestions_html);
+                }
+                $('#match_attendee_modal').modal("show");
             });
-
-            $('#match_attendee_suggestions').html(suggestions_html);
-            $('#schedule_modal').modal("show");
-        }
-
-        matchAttendee(e) {
-
         }
 
     </script>
