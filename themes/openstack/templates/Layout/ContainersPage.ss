@@ -171,29 +171,29 @@
             </div>
             <div class="row">
                 <div class="col-sm-5ths">
-                    <a href="http://superuser.openstack.org/articles/a-guide-to-navigating-openstack-and-containers" target="_blank">
-                    <div class="video-wrapper small">
-                        <div class="play-button">
-                            <img src="/themes/openstack/images/play-button.png">
-                        </div>
-                        <img class="video-image" src="/themes/openstack/images/containers/featured-1.jpg" alt="A guide to navigating OpenStack and containers">
-                    </div>
-                    </a>
-                    <p class="video-title">
-                        A guide to navigating OpenStack and containers
-                    </p>
-                </div>
-                <div class="col-sm-5ths">
-                    <a href="http://superuser.openstack.org/articles/moving-from-monolith-to-microservices-lithium-technologies-shares-its-hybrid-cloud-strategy" target="_blank">
+                    <a href="http://blog.kubernetes.io/2016/10/kubernetes-and-openstack-at-yahoo-japan.html" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
                             <img src="/themes/openstack/images/read.png">
                         </div>
-                        <img class="video-image" src="/themes/openstack/images/containers/featured-2.jpg" alt="Combining OpenStack and Kubernetes at Lithium Technologies">
+                        <img class="video-image" src="/assets/containers/kubernetes-sm-featured.jpg" alt="How We Architected and Run Kubernetes on OpenStack at Scale at Yahoo! JAPAN">
                     </div>
                     </a>
                     <p class="video-title">
-                        Combining OpenStack and Kubernetes at Lithium Technologies
+                        How We Architected and Run Kubernetes on OpenStack at Scale at Yahoo! JAPAN
+                    </p>
+                </div>
+                <div class="col-sm-5ths">
+                    <a href="http://www.openstack.org/videos/video/innovation-at-bbva-next-generation-overlay-for-kubernetes-and-openstack" target="_blank">
+                    <div class="video-wrapper small">
+                        <div class="play-button">
+                            <img src="/themes/openstack/images/play-button.png">
+                        </div>
+                        <img class="video-image" src="/assets/containers/bbva-featured2.jpg" alt="Innovation at BBVA: Next Generation Overlay for Kubernetes and OpenStack">
+                    </div>
+                    </a>
+                    <p class="video-title">
+                        Innovation at BBVA: Next Generation Overlay for Kubernetes and OpenStack
                     </p>
                 </div>
                 <div class="col-sm-5ths">
@@ -210,16 +210,16 @@
                     </p>
                 </div>
                 <div class="col-sm-5ths">
-                    <a href="http://superuser.openstack.org/articles/why-no-data-center-should-be-full-of-islands" target="_blank">
+                    <a href="http://superuser.openstack.org/articles/scaling-magnum-and-kubernetes-2-million-requests-per-second/" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
                             <img src="/themes/openstack/images/read.png">
                         </div>
-                        <img class="video-image" src="/themes/openstack/images/containers/featured-4.jpg" alt="Why no data center should be full of islands">
+                        <img class="video-image" src="/assets/containers/superuser-sm-featured.jpg" alt="Scaling OpenStack Magnum and Kubernetes: 2 million requests per second">
                     </div>
                     </a>
                     <p class="video-title">
-                        Why no data center should be full of islands
+                        Scaling OpenStack Magnum and Kubernetes: 2 million requests per second
                     </p>
                 </div>
                <div class="col-sm-5ths">
@@ -246,7 +246,7 @@
                 <div class="col-sm-8">
                     <h3>From the Summit to your browser: Everything you need to know about containers and OpenStack</h3>
                     <p>
-                        At the Barcelona Summit, there will be dozens of sessions covering the latest updates around containers, including use cases as well as OpenStack project updates from Magnum, Kuryr and Murano.
+                        At the Barcelona Summit, there were dozens of sessions covering the latest updates around containers, including use cases as well as OpenStack project updates from Magnum, Kuryr and Murano.
                     </p>
                 </div>
                 <div class="col-sm-4">
