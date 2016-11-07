@@ -15,7 +15,7 @@ const SummitItem = ({
 		imageHeight={148}			
 		title={summit.title}
 		subtitle={summit.dates}
-		link={URL.create(`summits/show/${summit.id}`)}
+		link={URL.create(`summits/show/${summit.slug}`)}
 		onItemClicked={onItemClicked}
 	/>
 );

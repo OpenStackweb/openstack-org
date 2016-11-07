@@ -84,7 +84,7 @@ export default connect (
 	(dispatch, ownProps) => {
 		return {
 			requestVideos (start = 0) {
-				dispatch(fetchSummitVideos(ownProps.params.id, start));
+				dispatch(fetchSummitVideos(ownProps.params.slug, start));
 			}
 		}
 	}

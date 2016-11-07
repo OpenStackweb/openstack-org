@@ -42,7 +42,7 @@ class SummitVideoAppBackend
             ->sort('DateUploaded', 'DESC');
 
         if (isset($params['summit'])) {
-            $summit = Summit::get()->byID($params['summit']);
+            $summit = Summit::get()->where("Slug = '". $params['summit'] ."'")->first();
             if ($summit) {
                 $videos = $videos
                     ->innerJoin('SummitEvent', 'SummitEvent.ID = PresentationMaterial.PresentationID')
@@ -334,7 +334,8 @@ class SummitVideoAppBackend
             'thumbnailURL' => "//img.youtube.com/vi/{$v->YouTubeID}/mqdefault.jpg",
             'summit' => [
                 'id' => $v->Presentation()->SummitID,
-                'title' => $v->Presentation()->Summit()->Title
+                'title' => $v->Presentation()->Summit()->Title,
+                'slug' => $v->Presentation()->Summit()->Slug
             ],
             'views' => $v->Views,
             'youtubeID' => $v->YouTubeID,
@@ -368,7 +369,8 @@ class SummitVideoAppBackend
             ])->count(),
             'imageURL' => ($image && $image->exists() && Director::fileExists($image->Filename)) ?
                 $image->CroppedImage(263, 148)->URL :
-                'summit-video-app/production/images/placeholder-image.jpg'
+                'summit-video-app/production/images/placeholder-image.jpg',
+            'slug' => $s->Slug
         ];
     }
 

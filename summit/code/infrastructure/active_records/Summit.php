@@ -31,6 +31,7 @@ final class Summit extends DataObject implements ISummit
         'Active'                      => 'Boolean',
         'DateLabel'                   => 'Varchar',
         'Link'                        => 'Varchar',
+        'Slug'                        => 'Varchar',
         'RegistrationLink'            => 'Text',
         'ComingSoonBtnText'           => 'Text',
         // https://www.eventbrite.com

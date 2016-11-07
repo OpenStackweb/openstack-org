@@ -25,12 +25,12 @@ const Routes = (baseURL) => (
       <Route path={baseURL} component={App}>
       	<IndexRoute component={AllVideos} />
         <Route path="summits" component={Summits}/>
-        <Route path="summits/show/:id" component={SummitDetail}/>
+        <Route path="summits/show/:slug" component={SummitDetail}/>
         <Route path="speakers" component={Speakers} />
         <Route path="speakers/show/:id" component={SpeakerDetail} />
         <Route path="featured" component={Featured} />
         <Route path="search" component={Search} />
-        <Route path="video/:slug" component={VideoDetail} />
+        <Route path=":summit/:slug" component={VideoDetail} />
       </Route>
     </Router>
 );

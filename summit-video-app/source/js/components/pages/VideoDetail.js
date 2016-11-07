@@ -64,7 +64,7 @@ class VideoDetail extends React.Component {
                                 {video.summit &&
                                 <div className="detail-panel-section">
                                     <h5 className="section-title">Summit</h5>
-                                    <RouterLink link={`summits/show/${video.summit.id}`}>
+                                    <RouterLink link={`summits/show/${video.summit.slug}`}>
                                         {video.summit.title}
                                     </RouterLink>
                                 </div>

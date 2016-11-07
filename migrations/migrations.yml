@@ -46,3 +46,4 @@ migrations:
   - UpdateGerritCommitsMigration
   - NormalizeTagsMigration
   - FixEventBriteEventTable
+  - SummitSlugMigration
