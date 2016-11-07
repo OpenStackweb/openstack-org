@@ -28,6 +28,30 @@
                 </p>
                 <hr>
                 <p>
+                    <strong>Q: Why change?</strong>
+                </p>
+                <p>
+                    A: In the past, the OpenStack community has published the latest release, hosted the OpenStack Conference for users, and held the Design Summit for contributors to plan the next version—all in the same feverish, two-week timespan. There have been a few problems with this approach. It has been hard on users because there was very little time get acquainted with the new release before the conference. It has been hard for strategic discussions, because they happened too late in the cycle to be taken into account. It has been hard on upstream contributors, torn between the opportunity to reach out beyond their team, and the necessity to get a lot of things down with your team. And it has been hard on downstream companies who are working to build product based on the new releases.
+                </p>
+                <p>So we’re making adjustments to create time between the OpenStack Conference and the release of the software. Going forward, the releases will happen months before each summit. And a new event will be also held between summits called the Project Teams Gathering (PTG). PTGs will be the new venue for planning, organizing, and kickstarting the work on a new development cycle.</p>
+
+				<p>
+                    <strong>Q: When are those events happening?</strong>
+                </p>
+                <p>
+                    A: Project Teams Gatherings happen in Q1 and Q3 of each year. OpenStack Summits happen in Q2 and Q4 of each year. You can see how this plays out in the timeline below.</p>
+                <p>
+                    <a href="/assets/Uploads/summit-ptg-timeline-revised.png" target="_blank">
+                        <img class="ptg-release-timeline" src="/assets/Uploads/summit-ptg-timeline-revised.png" alt="Project Teams Gathering vs Design Summit">
+                    </a></p>
+
+				<p>
+                    <strong>Q: Attendance to Design Summits used to be free for ATCs. Why do I have to pay to attend the Project Teams Gathering?</strong>
+                </p>
+                <p>
+                    A: In the past, the OpenStack Foundation gave discounted Summit passes to a subset of upstream contributors (not all ATCs) who contributed in the last six months, so that they could more easily attend the Summit. Most ATCs retrieved their Summit pass just in case, and an unpredictable portion of them would actually use them to attend. The PTG space is limited, so we charge a base fee in order to increase the chances that people registering will actually show up, optimizing our usage of the space. The funds will also help keep sponsorship presence at the event to a minimum. Anyone who physically attends the Project Teams Gathering will receive a full discount code to attend the next Summit, in order to keep costs low for people who will attend both events. At the same time, we are beefing up our Travel Support Program in order to ensure we can get all the needed people at the right events. If the base fee for the PTG registration is an issue, you should consider applying to that program.
+                </p>
+                <p>
                     <strong>Q: How is the change helping upstream developers?</strong>
                 </p>
                 <p>
