@@ -42,11 +42,7 @@
                     <div class="col-sm-12">
                         <h2>Summary</h2>
                         $Summary
-                        <h2>Why the change</h2>
                         $WhyTheChange
-                        <a href="$Graph.getURL()" target="_blank">
-                            <img class="ptg-release-timeline" src="$Graph.getURL()" alt="Project Teams Gathering vs Design Summit">
-                        </a>
                     </div>
                 </div>
             </div>
