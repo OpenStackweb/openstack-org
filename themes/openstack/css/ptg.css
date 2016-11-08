@@ -144,7 +144,7 @@ img.ptg-release-timeline {
   color: white;
   text-align: center;
 }
-.ptg-hotel-wrapper a.hotel-btn {
+.ptg-hotel-wrapper a.hotel-btn, a.hotel-btn:visited {
   color: white;
   border: 1px solid white;
   border-radius: 4px;
