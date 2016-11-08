@@ -16,11 +16,12 @@ class EventbriteEvent extends DataObject implements IEventbriteEvent
 {
     private static $db = array
     (
-        'EventType'     => "Enum('ORDER_PLACED,EVENT_ADDED, EVENT_UPDATE, NONE','NONE')",
-        'ApiUrl'        => 'Varchar(512)',
-        'Processed'     => 'Boolean',
-        'ProcessedDate' => 'SS_DateTime',
-        'FinalStatus'   => 'Varchar(255)',
+        'EventType'       => "Enum('ORDER_PLACED,EVENT_ADDED, EVENT_UPDATE, NONE','NONE')",
+        'ApiUrl'          => 'Varchar(512)',
+        'Processed'       => 'Boolean',
+        'ProcessedDate'   => 'SS_DateTime',
+        'FinalStatus'     => 'Varchar(255)',
+        'ExternalOrderId' => 'Int',
     );
 
     private static $has_one = array

@@ -64,6 +64,7 @@ class EventbriteSummitOrderConciliation extends CronTask
                         $api_event->FinalStatus =  $order['status'];
                     }
 
+                    $api_event->ExternalOrderId = $order['id'];
                     $api_event->SummitID = $summit->getIdentifier();
                     $api_event->write();
 

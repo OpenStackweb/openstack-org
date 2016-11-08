@@ -1321,8 +1321,9 @@ final class SummitService implements ISummitService
                 if (!$attendee_ticket) {
                     $attendee_ticket = new SummitAttendeeTicket();
                     $ticket_type = SummitTicketType::get()->where("ExternalId = ".$eb_ticket->ExternalTicketClassId)->first();
-                    //TODO: we need the external order id
-                    //$ticket->ExternalOrderId = $eb_ticket->ExternalOrderId;
+                    $external_event = EventbriteEvent::get()->where("ID = ".$eb_ticket->EventbriteOrderId)->first();
+
+                    $attendee_ticket->ExternalOrderId = $external_event->ExternalOrderId;
                     $attendee_ticket->ExternalAttendeeId = $eb_ticket->ExternalAttendeeId;
                     $attendee_ticket->TicketTypeID = ($ticket_type) ? $ticket_type->ID : 0;
                 }
