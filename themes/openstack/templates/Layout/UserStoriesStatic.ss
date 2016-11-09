@@ -232,7 +232,7 @@
       </div> <!--End User Story tile-->
 
       <div class="col-lg-4 col-md-6"> <!--Start User Story tile-->
-        <a href="http://www.openstack.org/videos/video/why-betfair-chose-openstack-the-road-to-their-production-private-cloud" class="user-story-square" style="background-image: url('/themes/openstack/images/user-stories/betfair.jpg')">
+        <a href="https://betsandbits.files.wordpress.com/2016/10/openstackreferencearchitecturewhitepaper.pdf" class="user-story-square" style="background-image: url('/themes/openstack/images/user-stories/betfair.jpg')">
           <span class="company">
             Betfair
             <span class="stat">
@@ -243,7 +243,7 @@
             <p>
               Betfair, the popular sports betting site in Europe with 120 million transactions per day, and uses Openstack for its CI/CD pipeline of more than 200 applications to production.
             </p>
-            <span class="user-story-more-btn">Watch The Video</span>
+            <span class="user-story-more-btn">Read More</span>
           </span>
         </a>
       </div> <!--End User Story tile-->
