@@ -35,15 +35,15 @@
                         More than 60 percent of telecoms are already using or currently testing new use cases with OpenStack for Network Functions Virtualization (NFV), citing benefits such as offering new services more quickly, faster data center virtualization, and lower operating and software costs. Telecoms also identified Internet of Things (40 percent in production) and 5G (30 percent in production) as major use cases.
                     </p>
                     <p>
-                        Attend the webinar hosted by Heavy Reading senior analyst Roz Roseboro on Nov. 9 for a deep dive into the results and additional analysis on key findings from the survey.
+                        Watch the webinar hosted by Heavy Reading senior analyst Roz Roseboro for a deep dive into the results and additional analysis on key findings from the survey.
                     </p>
                 </div>
                 <div class="col-md-3 col-sm-4 center">
                     <i class="fa fa-tv fa-5x nfv-download-icon"></i>
-                    <p style="margin-top: 20px;">
-                        <em>November 9th at 11AM CST</em>
+                    <a href="https://openstack.webex.com/openstack/lsr.php?RCID=ec304dc157942e4ef39213f35dd43742" class="container-download-btn">WATCH THE WEBINAR <i class="fa fa-chevron-right"></i></a>
+                    <p style="margin-top: 10px;">
+                        <a style="color:white;" href="//openstack.org/assets/pdf-downloads/OpenStack-survey-results-public-presentation.pdf"><em>Download the Webinar PDF</em></a>
                     </p>
-                    <a href="https://openstack.webex.com/openstack/onstage/g.php?MTID=eb84841cf3caf119e8587b0e303f4e3a2" class="container-download-btn">REGISTER FOR THE WEBINAR <i class="fa fa-chevron-right"></i></a>
                 </div>
             </div>
         </div>
