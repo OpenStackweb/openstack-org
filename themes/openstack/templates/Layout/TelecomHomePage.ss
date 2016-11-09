@@ -42,7 +42,7 @@
                     <i class="fa fa-tv fa-5x nfv-download-icon"></i>
                     <a href="https://openstack.webex.com/openstack/lsr.php?RCID=ec304dc157942e4ef39213f35dd43742" class="container-download-btn">WATCH THE WEBINAR <i class="fa fa-chevron-right"></i></a>
                     <p style="margin-top: 10px;">
-                        <a style="color:white;" href="//openstack.org/assets/pdf-downloads/OpenStack-survey-results-public-presentation.pdf"><em>Download the Webinar PDF</em></a>
+                        <a style="color:white;" href="//openstack.org/assets/pdf-downloads/OpenStack-survey-results-public-presentation.pdf"><em>Download the Webinar Slides</em></a>
                     </p>
                 </div>
             </div>
