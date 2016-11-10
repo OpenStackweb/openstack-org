@@ -53,20 +53,40 @@ class VideoDetail extends React.Component {
 						</div>
 						<div className="col-sm-4">
 							<div className="video-detail-panel">
-								<div className="detail-panel-section">
-									<h5 className="section-title">Speakers</h5>
+								{video.speakers && video.speakers.length > 0 &&
+                                <div className="detail-panel-section">
+                                    <h5 className="section-title">Speakers</h5>
 									<ul className="video-speakers-list">
-									{video.speakers && video.speakers.map(s => (
-										<li key={s.id}><RouterLink link={`speakers/show/${s.id}`}>{s.name}</RouterLink></li>
+									{video.speakers.map(s => (
+										<li key={s.id}><RouterLink link={`speakers/${s.id}/${s.name_slug}`}>{s.name}</RouterLink></li>
 									))}
 									</ul>
 								</div>
-                                {video.summit &&
+                                }
+                                {video.summit && video.summit.title &&
+                                    <div className="detail-panel-section">
+                                        <h5 className="section-title">Summit</h5>
+                                        <RouterLink link={`summits/${video.summit.slug}`}>
+                                            {video.summit.title}
+                                        </RouterLink>
+                                    </div>
+                                }
+                                {video.track && video.track.title &&
                                 <div className="detail-panel-section">
-                                    <h5 className="section-title">Summit</h5>
-                                    <RouterLink link={`summits/show/${video.summit.slug}`}>
-                                        {video.summit.title}
+                                    <h5 className="section-title">Track</h5>
+                                    <RouterLink link={`${video.summit.slug}/tracks/${video.track.slug}`}>
+                                        {video.track.title}
                                     </RouterLink>
+                                </div>
+                                }
+                                {video.tags.length > 0 &&
+                                <div className="detail-panel-section">
+                                    <h5 className="section-title">Tags</h5>
+                                    {video.tags && video.tags.map(tag => (
+                                        <RouterLink key={tag.id} className="tag btn btn-primary btn-xs" link={`tags/${tag.tag}`}>
+                                            {tag.tag}
+                                        </RouterLink>
+                                    ))}
                                 </div>
                                 }
 								<div className="detail-panel-section">		

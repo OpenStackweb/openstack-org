@@ -35,6 +35,11 @@ interface IPresentationSpeaker extends IEntity
     /**
      * @return  string
      */
+    public function getNameSlug();
+
+    /**
+     * @return  string
+     */
     public function getCountryName();
 
     /**

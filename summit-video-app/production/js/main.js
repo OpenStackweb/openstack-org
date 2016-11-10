@@ -63,7 +63,7 @@
 /******/ 	}
 
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "bfb897cc2830489ae46d"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "77273b3df295c4b0ecf3"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 
@@ -8441,7 +8441,7 @@
 
 	__webpack_require__(440);
 
-	__webpack_require__(714);
+	__webpack_require__(716);
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(537); if (makeExportsHot(module, __webpack_require__(140))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "index.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
@@ -33579,7 +33579,7 @@
 
 
 	// module
-	exports.push([module.id, "#video-app a {\n  cursor: pointer;\n  text-decoration: none;\n}\n#video-app a:hover {\n  text-decoration: none;\n}\n#video-app .video-error {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  background: #DA422F;\n  color: white;\n  padding: 20px 40px;\n  z-index: 999;\n}\n#video-app .video-error a {\n  position: absolute;\n  top: 10px;\n  right: 10px;\n  font-size: 18px;\n  color: white;\n}\n.video-app-latest {\n  width: 100%;\n  padding: 10px 0;\n  background: rgba(0, 0, 0, 0.5);\n  text-align: left;\n  color: #aaa;\n}\n.video-app-latest a {\n  color: white;\n}\n.gallery-badge {\n  background: #DA422F;\n  color: white;\n  text-transform: uppercase;\n  position: absolute;\n  width: 100px;\n  top: 12px;\n  right: -24px;\n  text-align: center;\n  padding: 6px;\n  font-size: 11px;\n  font-weight: 600;\n  -webkit-transform: rotate(45deg);\n      -ms-transform: rotate(45deg);\n          transform: rotate(45deg);\n  z-index: 500;\n}\n.video-notification {\n  position: fixed;\n  bottom: 15px;\n  right: 15px;\n  max-width: 370px;\n  border-radius: 4px;\n  background: rgba(29, 153, 222, 0.9);\n  min-height: 50px;\n  z-index: 999;\n}\n.video-notification a {\n  padding: 10px 20px;\n  color: white;\n  display: block;\n}\n.video-notification span {\n  position: absolute;\n  top: 5px;\n  right: 5px;\n  cursor: pointer;\n  line-height: 1;\n  padding: 4px;\n  font-size: 18px;\n  color: white;\n}\n.latest-upload {\n  zoom: 1;\n}\n.latest-upload:before,\n.latest-upload:after {\n  content: \"\";\n  display: table;\n}\n.latest-upload:after {\n  clear: both;\n}\n.latest-upload .preview-image {\n  float: left;\n  margin-right: 20px;\n}\n.latest-upload h3 {\n  text-transform: uppercase;\n  margin: 0 0 10px;\n  font-size: 14px;\n  font-weight: 600;\n  color: white;\n}\n.latest-upload h4 {\n  font-size: 13px;\n}\n.latest-upload h5 {\n  margin-top: 0;\n  color: white;\n}\n.latest-upload h5 strong {\n  margin-right: 10px;\n}\n.latest-upload .gallery-subtitle {\n  margin-top: 5px;\n  font-size: 0.9em;\n}\n.latest-upload .feature-meta {\n  margin-top: 3px;\n}\n.latest-upload .feature-image {\n  position: relative;\n  float: left;\n  overflow: hidden;\n  margin-right: 15px;\n  width: 88px;\n  height: 50px;\n}\n.latest-upload .feature-image a {\n  display: block;\n}\n.latest-upload .feature-image img {\n  margin: 0;\n  max-width: 100%;\n}\n.latest-upload .feature-image:before {\n  position: absolute;\n  top: 50%;\n  margin-top: -15px;\n  left: 50%;\n  margin-left: -10px;\n  content: \"\\F144\";\n  font-family: FontAwesome;\n  font-size: 20px;\n  margin-right: 5px;\n  padding: 0 1px;\n  color: white;\n  opacity: 0.9;\n}\n.latest-upload .feature-image:hover {\n  cursor: pointer;\n}\n.latest-upload .feature-image:hover .gallery-image-caption {\n  display: none;\n}\nbutton.more-btn {\n  display: block;\n  max-width: 300px;\n  margin: 20px auto;\n  padding: 8px 30px;\n  background: #248EC7;\n  border-radius: 4px;\n  border: none;\n  color: white;\n  text-transform: uppercase;\n}\nbutton.more-btn:after {\n  content: \"\\F055\";\n  font-family: FontAwesome;\n  margin-left: 10px;\n  font-size: 1em;\n}\nbutton.more-btn:hover,\nbutton.more-btn:focus {\n  background: #30739C;\n  text-decoration: none;\n  outline: none;\n}\n.video-page-hero {\n  text-align: center;\n  padding: 0 0 50px;\n  border-bottom: 6px solid #248EC7;\n  background: url(" + __webpack_require__(438) + ") center center no-repeat;\n  background-size: cover;\n}\n.video-page-hero h1 {\n  margin: 30px 0 50px;\n  font-size: 3em;\n  font-weight: 400;\n  letter-spacing: -0.4px;\n  color: white;\n}\n.search-wrapper {\n  position: relative;\n  margin-bottom: 30px;\n}\n.search-wrapper i {\n  position: absolute;\n  z-index: 100;\n  color: #eee;\n}\n.search-wrapper i.fa-search {\n  left: 20px;\n  top: 13px;\n}\n.video-search-form button {\n  display: none;\n}\n.video-search-form input[type=text] {\n  display: block;\n  position: relative;\n  padding: 10px 10px 10px 50px;\n  font-size: 14px;\n  border-radius: 20px;\n  width: 100%;\n  background: rgba(0, 0, 0, 0.4);\n  border: 1px solid white;\n  color: white;\n}\n.video-search-form input[type=text]:focus {\n  outline: none;\n}\n.video-search-form input[type=text]::-webkit-input-placeholder {\n  color: white;\n}\n.video-search-form input[type=text]::-moz-placeholder {\n  color: white;\n}\n.video-search-form input[type=text]:-ms-input-placeholder {\n  color: white;\n}\n.video-search-form input[type=text]:-moz-placeholder {\n  color: white;\n}\n.video-navbar-wrapper {\n  position: relative;\n  width: 100%;\n}\n.video-navbar {\n  max-width: 680px;\n  margin: -20px auto 20px;\n  text-align: center;\n  display: -webkit-flex;\n  display: -moz-box;\n  display: flex;\n  -webkit-flex-direction: row;\n     -moz-box-orient: horizontal;\n     -moz-box-direction: normal;\n          flex-direction: row;\n}\n.video-navbar a {\n  -webkit-flex: 1;\n     -moz-box-flex: 1;\n          flex: 1;\n  width: auto;\n  text-align: center;\n  border-width: 0 1px 1px 0;\n  border-style: solid;\n  border-top-color: #248EC7;\n  border-bottom-color: #248EC7;\n  border-right-color: #30739C;\n  color: white;\n  padding: 8px 5px;\n  background: #248EC7;\n  transition: background .4s;\n}\n.video-navbar a .badge {\n  background: #29abe2;\n  font-size: 0.75em;\n  line-height: 1.1;\n  font-weight: 400;\n  padding: 2px 9px;\n}\n.video-navbar a:first-of-type {\n  border-left-width: 1px;\n  border-left-color: #248EC7;\n  border-top-left-radius: 10px;\n  border-bottom-left-radius: 10px;\n}\n.video-navbar a:last-of-type {\n  border-right-color: #248EC7;\n  border-top-right-radius: 10px;\n  border-bottom-right-radius: 10px;\n}\n.video-navbar a:hover,\n.video-navbar a:focus,\n.video-navbar a.active {\n  text-decoration: none;\n  background: #29abe2;\n  color: white;\n  outline: none;\n  border-top-color: #248EC7;\n  border-bottom-color: #248EC7;\n  border-right-color: #30739C;\n  transition: background .4s;\n}\n.video-navbar a:hover .badge,\n.video-navbar a:focus .badge,\n.video-navbar a.active .badge {\n  background: #248EC7;\n}\n.video-navbar a:hover:first-of-type,\n.video-navbar a:focus:first-of-type,\n.video-navbar a.active:first-of-type {\n  border-left-color: #29abe2;\n}\n.video-navbar a:hover:last-of-type,\n.video-navbar a:focus:last-of-type,\n.video-navbar a.active:last-of-type {\n  border-right-color: #29abe2;\n}\n.loading {\n  text-align: center;\n  margin: 40px 0 60px;\n  font-weight: 600;\n}\n.loading h1 {\n  position: relative;\n  color: rgba(0, 0, 0, 0.3);\n  font-size: 20px;\n  font-weight: 600;\n  text-transform: uppercase;\n  line-height: 2;\n}\n.loading h1:before {\n  content: attr(data-text);\n  position: absolute;\n  overflow: hidden;\n  max-width: 7em;\n  white-space: nowrap;\n  color: #29abe2;\n  -webkit-animation: loading 3s linear infinite;\n          animation: loading 3s linear infinite;\n}\n@-webkit-keyframes loading {\n  0% {\n    max-width: 0;\n  }\n}\n@keyframes loading {\n  0% {\n    max-width: 0;\n  }\n}\n.video-panel {\n  zoom: 1;\n  margin-bottom: 30px;\n  border-bottom: 1px solid #D4DCE5;\n}\n.video-panel:before,\n.video-panel:after {\n  content: \"\";\n  display: table;\n}\n.video-panel:after {\n  clear: both;\n}\n.video-panel h4 {\n  margin-bottom: 20px;\n  font-size: 15px;\n  color: #2A4E68;\n}\n.video-panel a.panel-link:hover .gallery-item .gallery-image:before,\n.video-panel a.panel-link:hover .gallery-item .gallery-image:after {\n  opacity: 1;\n  transition: opacity 0.5s;\n}\n.video-panel a.panel-link .gallery-item {\n  text-align: left;\n  width: 100%;\n  position: relative;\n  overflow: hidden;\n  margin-bottom: 40px;\n  -moz-box-sizing: border-box;\n       box-sizing: border-box;\n}\n.video-panel a.panel-link .gallery-item .gallery-image {\n  position: relative;\n  overflow: hidden;\n}\n.video-panel a.panel-link .gallery-item .gallery-image img {\n  width: 100%;\n  z-index: 1;\n  margin: 0;\n}\n.video-panel a.panel-link .gallery-item .gallery-image:focus {\n  outline: none;\n}\n.video-panel a.panel-link .gallery-item .gallery-image:before {\n  position: absolute;\n  top: 50%;\n  margin-top: -35px;\n  left: 50%;\n  margin-left: -33px;\n  content: \"\\F144\";\n  font-family: FontAwesome;\n  font-size: 50px;\n  margin-right: 5px;\n  padding: 8px 10px;\n  border-radius: 4px;\n  line-height: 1;\n  color: white;\n  opacity: 0;\n  z-index: 110;\n  background: rgba(0, 0, 0, 0.5);\n}\n.video-panel a.panel-link .gallery-item .gallery-image:hover {\n  cursor: pointer;\n}\n.video-panel a.panel-link .gallery-item .gallery-image-caption {\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  padding: 14px;\n  margin-top: -20px;\n  background: rgba(0, 0, 0, 0.5);\n  width: 100%;\n  display: block;\n  z-index: 2;\n  transition: -webkit-transform .4s;\n  transition: transform .4s;\n  color: white;\n  text-transform: uppercase;\n  font-size: 12px;\n  font-weight: 600;\n}\n.video-panel a.panel-link .gallery-item .gallery-image-caption:before {\n  content: \"\\F041\";\n  font-family: FontAwesome;\n  margin-right: 5px;\n  padding: 0 1px;\n}\n.video-panel a.panel-link .gallery-item .gallery-title {\n  width: 100%;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  margin-top: 10px;\n}\n.video-panel a.panel-link .gallery-item .gallery-title a {\n  color: #30739C;\n  font-size: 12px;\n  font-weight: 600;\n}\n.video-panel a.panel-link .gallery-item .gallery-subtitle {\n  color: #2A4E68;\n  font-weight: 400;\n  font-size: 12px;\n  width: 100%;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  min-height: 2em;\n}\n.video-panel .summit-item .gallery-image a img,\n.video-panel .speaker-item .gallery-image a img {\n  margin: 0;\n}\n.video-panel .summit-item .gallery-image:hover,\n.video-panel .speaker-item .gallery-image:hover {\n  cursor: pointer;\n}\n.video-panel .summit-item .gallery-image:hover:before,\n.video-panel .speaker-item .gallery-image:hover:before {\n  display: none;\n}\n.video-panel .summit-item .gallery-image-caption,\n.video-panel .speaker-item .gallery-image-caption {\n  -webkit-transform: scale(0);\n      -ms-transform: scale(0);\n          transform: scale(0);\n  transition: -webkit-transform 0.2s ease-in;\n  transition: transform 0.2s ease-in;\n}\n.video-panel .summit-item .gallery-title:before {\n  content: \"\\F041\";\n  font-family: FontAwesome;\n  margin-right: 5px;\n  padding: 0 1px;\n  color: #30739C;\n}\n.video-panel .speaker-item .gallery-title:before {\n  display: none;\n}\n.video-panel a:hover .gallery-image-caption,\n.video-panel a:focus .gallery-image-caption {\n  -webkit-transform: translate(0, 100%);\n      -ms-transform: translate(0, 100%);\n          transform: translate(0, 100%);\n}\n.popular-speakers-link {\n  text-transform: uppercase;\n  font-size: 0.8em;\n  margin-right: 10px;\n  color: #30739C;\n  float: left;\n}\n.popular-speakers-link a {\n  font-size: 1.1em;\n  color: #999;\n  font-weight: 600;\n  text-transform: uppercase;\n  width: auto;\n  clear: left;\n  display: block;\n}\n.popular-speakers-link a:hover,\n.popular-speakers-link a:focus {\n  color: #29abe2;\n  text-decoration: none;\n}\n.popular-speakers-link a.active {\n  color: #29abe2;\n  border-bottom: 3px solid;\n}\nul.speaker-name-filter {\n  margin: 20px 0 15px;\n  padding: 0;\n}\nul.speaker-name-filter li {\n  list-style: none;\n  display: inline-block;\n  margin-right: 6px;\n}\nul.speaker-name-filter li a {\n  text-transform: uppercase;\n  font-weight: 600;\n  color: #999;\n}\nul.speaker-name-filter li a:hover {\n  color: #29abe2;\n  text-decoration: none;\n}\nul.speaker-name-filter li a.active {\n  border-bottom: 3px solid;\n  text-decoration: none;\n  color: #248EC7;\n}\nul.speaker-name-filter li.list-title {\n  text-transform: uppercase;\n  font-size: 0.8em;\n  margin-right: 10px;\n  color: #30739C;\n  display: block;\n}\nul.search-tabs {\n  margin: 20px 0;\n  padding: 0;\n}\nul.search-tabs li {\n  list-style: none;\n  display: inline-block;\n  margin-right: 40px;\n}\nul.search-tabs li a {\n  text-transform: uppercase;\n  font-weight: 600;\n  color: #999;\n}\nul.search-tabs li a span.count {\n  font-weight: 400;\n  font-size: 9px;\n  background: #999;\n  color: white;\n  padding: 1px 5px;\n  border-radius: 20px;\n  line-height: 1;\n  margin-left: 5px;\n}\nul.search-tabs li a:hover {\n  color: #29abe2;\n  text-decoration: none;\n}\nul.search-tabs li a:hover span.count {\n  background-color: #29abe2;\n}\nul.search-tabs li.active a {\n  color: #248EC7;\n}\nul.search-tabs li.active a span.count {\n  background-color: #248EC7;\n}\nul.search-tabs li:last-child {\n  margin-right: 0;\n}\n@media (max-width: 767px) {\n  ul.speaker-name-filter {\n    text-align: center;\n  }\n  ul.speaker-name-filter li {\n    margin-right: 4px;\n  }\n  ul.speaker-name-filter li.list-title {\n    display: block;\n    margin-bottom: 5px;\n  }\n  ul.speaker-name-filter li:last-child {\n    margin-right: 0;\n  }\n  ul.search-tabs {\n    text-align: center;\n  }\n  ul.search-tabs li {\n    margin-right: 20px;\n  }\n  ul.search-tabs li:last-child {\n    margin-right: 0;\n  }\n}\n.video-app-layout {\n  min-height: 300px;\n}\n.featured-video {\n  background: #edf2f7;\n  padding: 15px;\n  border-radius: 4px;\n  border: 1px solid #D4DCE5;\n  float: left;\n  margin: 30px 15% 40px;\n  width: 70%;\n  height: auto;\n}\n.featured-video:hover,\n.featured-video:focus {\n  background: #D4DCE5;\n  border-color: #30739C;\n}\n@media (max-width: 767px) {\n  .featured-video {\n    width: 100%;\n    margin: 30px 0 40px;\n  }\n}\n.featured-video h3 {\n  text-transform: uppercase;\n  margin: 0 0 10px;\n  font-size: 14px;\n  font-weight: 600;\n}\n.featured-video h5 {\n  margin-top: 0;\n  color: #2A4E68;\n}\n.featured-video .feature-image {\n  position: relative;\n  float: left;\n  overflow: hidden;\n  margin-right: 15px;\n}\n.featured-video .feature-image a {\n  display: block;\n}\n.featured-video .feature-image img {\n  margin: 0;\n  max-width: 160px;\n}\n.featured-video .feature-image:before {\n  position: absolute;\n  top: 50%;\n  margin-top: -15px;\n  left: 50%;\n  margin-left: -10px;\n  content: \"\\F144\";\n  font-family: FontAwesome;\n  font-size: 20px;\n  margin-right: 5px;\n  padding: 0 1px;\n  color: white;\n  opacity: 0.9;\n}\n.featured-video .feature-image:hover {\n  cursor: pointer;\n}\n.featured-video .feature-image:hover .gallery-image-caption {\n  display: none;\n}\n.video-breadcrumbs {\n  margin-bottom: 15px;\n  color: #aaa;\n  line-height: 1;\n  font-size: 11px;\n  width: 100%;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n.video-breadcrumbs a {\n  font-size: 10px;\n  text-transform: uppercase;\n  color: #2A4E68;\n  margin: 0 5px;\n}\n.video-breadcrumbs a.active {\n  color: #248EC7;\n  text-decoration: none;\n  border-bottom: none;\n}\n.detail-panel-section {\n  margin: 0 0 30px;\n}\n.detail-panel-section:last-of-type {\n  margin: 0;\n}\nh5.section-title {\n  color: #2A4E68;\n  font-weight: 600;\n  text-transform: capitalize;\n  border-bottom: 1px solid #dae5ee;\n  padding-bottom: 15px;\n  margin: 10px 0 10px;\n}\nh3.video-details-title {\n  text-align: center;\n  margin: 10px 0 20px;\n}\n.video-detail-panel {\n  background: #edf2f7;\n  border: 1px solid #D4DCE5;\n  border-radius: 4px;\n  padding: 20px;\n}\nul.video-speakers-list {\n  margin: 0;\n  padding: 0;\n}\nul.video-speakers-list li {\n  list-style: none;\n  line-height: 2em;\n}\nul.videos-share-list {\n  margin: 0;\n  padding: 0;\n}\nul.videos-share-list li {\n  list-style: none;\n  display: inline-block;\n  margin-right: 10px;\n}\nul.videos-share-list li:last-child {\n  margin-right: 0;\n}\nul.videos-share-list li a {\n  font-size: 30px;\n}\n.video-embed {\n  width: 100%;\n  background: #222;\n  height: auto;\n  margin: 0 0 30px;\n  text-align: center;\n  -moz-box-sizing: border-box;\n       box-sizing: border-box;\n}\n@-webkit-keyframes fadeInDown {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(0, -10%, 0);\n    transform: translate3d(0, -10%, 0);\n  }\n  to {\n    opacity: 1;\n    -webkit-transform: none;\n    transform: none;\n  }\n}\n@keyframes fadeInDown {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(0, -10%, 0);\n    transform: translate3d(0, -10%, 0);\n  }\n  to {\n    opacity: 1;\n    -webkit-transform: none;\n    transform: none;\n  }\n}\n@-webkit-keyframes fadeOutUp {\n  from {\n    opacity: 1;\n  }\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(0, -10%, 0);\n    transform: translate3d(0, -10%, 0);\n  }\n}\n@keyframes fadeOutUp {\n  from {\n    opacity: 1;\n  }\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(0, -100%, 0);\n    transform: translate3d(0, -100%, 0);\n  }\n}\n.vertical-fade-enter,\n.vertical-fade-appear {\n  opacity: 0;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n}\n.vertical-fade-enter.vertical-fade-enter-active,\n.vertical-fade-appear.vertical-fade-enter-active,\n.vertical-fade-enter.vertical-fade-appear-active,\n.vertical-fade-appear.vertical-fade-appear-active {\n  animation-name: fadeInDown;\n  -webkit-animation-name: fadeInDown;\n}\n.vertical-fade-leave {\n  opacity: 1;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n}\n.vertical-fade-leave.vertical-fade-leave-active {\n  animation-name: fadeOutUp;\n  -webkit-animation-name: fadeOutUp;\n}\n@-webkit-keyframes flipInX {\n  from {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);\n    -webkit-animation-timing-function: ease-in;\n    animation-timing-function: ease-in;\n    opacity: 0;\n  }\n  40% {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);\n    -webkit-animation-timing-function: ease-in;\n    animation-timing-function: ease-in;\n  }\n  60% {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 10deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, 10deg);\n    opacity: 1;\n  }\n  80% {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -5deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);\n  }\n  to {\n    -webkit-transform: perspective(400px);\n    transform: perspective(400px);\n  }\n}\n@keyframes flipInX {\n  from {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);\n    -webkit-animation-timing-function: ease-in;\n    animation-timing-function: ease-in;\n    opacity: 0;\n  }\n  40% {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);\n    -webkit-animation-timing-function: ease-in;\n    animation-timing-function: ease-in;\n  }\n  60% {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 10deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, 10deg);\n    opacity: 1;\n  }\n  80% {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -5deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);\n  }\n  to {\n    -webkit-transform: perspective(400px);\n    transform: perspective(400px);\n  }\n}\n.vertical-flip-enter,\n.vertical-flip-appear {\n  -webkit-backface-visibility: visible !important;\n  backface-visibility: visible !important;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n}\n.vertical-flip-enter.vertical-flip-enter-active,\n.vertical-flip-appear.vertical-flip-enter-active,\n.vertical-flip-enter.vertical-flip-appear-active,\n.vertical-flip-appear.vertical-flip-appear-active {\n  animation-name: flipInX;\n  -webkit-animation-name: flipInX;\n}\n@-webkit-keyframes flipOutX {\n  from {\n    -webkit-transform: perspective(400px);\n    transform: perspective(400px);\n  }\n  30% {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);\n    opacity: 1;\n  }\n  to {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);\n    opacity: 0;\n  }\n}\n@keyframes flipOutX {\n  from {\n    -webkit-transform: perspective(400px);\n    transform: perspective(400px);\n  }\n  30% {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);\n    opacity: 1;\n  }\n  to {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);\n    opacity: 0;\n  }\n}\n.vertical-flip-leave {\n  -webkit-backface-visibility: visible !important;\n  backface-visibility: visible !important;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n}\n.vertical-flip-leave.vertical-flip-leave-active {\n  animation-name: flipOutX;\n  -webkit-animation-name: flipOutX;\n}\n@-webkit-keyframes slideInDown {\n  from {\n    -webkit-transform: translate3d(0, -100%, 0);\n    transform: translate3d(0, -100%, 0);\n    visibility: visible;\n  }\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes slideInDown {\n  from {\n    -webkit-transform: translate3d(0, -100%, 0);\n    transform: translate3d(0, -100%, 0);\n    visibility: visible;\n  }\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@-webkit-keyframes slideOutUp {\n  from {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n  to {\n    visibility: hidden;\n    -webkit-transform: translate3d(0, -100%, 0);\n    transform: translate3d(0, -100%, 0);\n  }\n}\n.vertical-slide-enter,\n.vertical-slide-appear {\n  visibility: hidden;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n}\n.vertical-slide-enter.vertical-slide-enter-active,\n.vertical-slide-appear.vertical-slide-enter-active,\n.vertical-slide-enter.vertical-slide-appear-active,\n.vertical-slide-appear.vertical-slide-appear-active {\n  animation-name: slideInDown;\n  -webkit-animation-name: slideInDown;\n}\n.vertical-slide-leave {\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n}\n.vertical-slide-leave.vertical-slide-leave-active {\n  animation-name: slideOutUp;\n  -webkit-animation-name: slideOutUp;\n}\n@keyframes slideOutUp {\n  from {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n  to {\n    visibility: hidden;\n    -webkit-transform: translate3d(0, -100%, 0);\n    transform: translate3d(0, -100%, 0);\n  }\n}\n.clearfix {\n  zoom: 1;\n}\n.clearfix:before,\n.clearfix:after {\n  content: \"\";\n  display: table;\n}\n.clearfix:after {\n  clear: both;\n}\n", ""]);
+	exports.push([module.id, "#video-app a {\n  cursor: pointer;\n  text-decoration: none;\n}\n#video-app a:hover {\n  text-decoration: none;\n}\n#video-app .video-error {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  background: #DA422F;\n  color: white;\n  padding: 20px 40px;\n  z-index: 999;\n}\n#video-app .video-error a {\n  position: absolute;\n  top: 10px;\n  right: 10px;\n  font-size: 18px;\n  color: white;\n}\n.video-app-latest {\n  width: 100%;\n  padding: 10px 0;\n  background: rgba(0, 0, 0, 0.5);\n  text-align: left;\n  color: #aaa;\n}\n.video-app-latest a {\n  color: white;\n}\n.gallery-badge {\n  background: #DA422F;\n  color: white;\n  text-transform: uppercase;\n  position: absolute;\n  width: 100px;\n  top: 12px;\n  right: -24px;\n  text-align: center;\n  padding: 6px;\n  font-size: 11px;\n  font-weight: 600;\n  -webkit-transform: rotate(45deg);\n      -ms-transform: rotate(45deg);\n          transform: rotate(45deg);\n  z-index: 500;\n}\n.video-notification {\n  position: fixed;\n  bottom: 15px;\n  right: 15px;\n  max-width: 370px;\n  border-radius: 4px;\n  background: rgba(29, 153, 222, 0.9);\n  min-height: 50px;\n  z-index: 999;\n}\n.video-notification a {\n  padding: 10px 20px;\n  color: white;\n  display: block;\n}\n.video-notification span {\n  position: absolute;\n  top: 5px;\n  right: 5px;\n  cursor: pointer;\n  line-height: 1;\n  padding: 4px;\n  font-size: 18px;\n  color: white;\n}\n.latest-upload {\n  zoom: 1;\n}\n.latest-upload:before,\n.latest-upload:after {\n  content: \"\";\n  display: table;\n}\n.latest-upload:after {\n  clear: both;\n}\n.latest-upload .preview-image {\n  float: left;\n  margin-right: 20px;\n}\n.latest-upload h3 {\n  text-transform: uppercase;\n  margin: 0 0 10px;\n  font-size: 14px;\n  font-weight: 600;\n  color: white;\n}\n.latest-upload h4 {\n  font-size: 13px;\n}\n.latest-upload h5 {\n  margin-top: 0;\n  color: white;\n}\n.latest-upload h5 strong {\n  margin-right: 10px;\n}\n.latest-upload .gallery-subtitle {\n  margin-top: 5px;\n  font-size: 0.9em;\n}\n.latest-upload .feature-meta {\n  margin-top: 3px;\n}\n.latest-upload .feature-image {\n  position: relative;\n  float: left;\n  overflow: hidden;\n  margin-right: 15px;\n  width: 88px;\n  height: 50px;\n}\n.latest-upload .feature-image a {\n  display: block;\n}\n.latest-upload .feature-image img {\n  margin: 0;\n  max-width: 100%;\n}\n.latest-upload .feature-image:before {\n  position: absolute;\n  top: 50%;\n  margin-top: -15px;\n  left: 50%;\n  margin-left: -10px;\n  content: \"\\F144\";\n  font-family: FontAwesome;\n  font-size: 20px;\n  margin-right: 5px;\n  padding: 0 1px;\n  color: white;\n  opacity: 0.9;\n}\n.latest-upload .feature-image:hover {\n  cursor: pointer;\n}\n.latest-upload .feature-image:hover .gallery-image-caption {\n  display: none;\n}\nbutton.more-btn {\n  display: block;\n  max-width: 300px;\n  margin: 20px auto;\n  padding: 8px 30px;\n  background: #248EC7;\n  border-radius: 4px;\n  border: none;\n  color: white;\n  text-transform: uppercase;\n}\nbutton.more-btn:after {\n  content: \"\\F055\";\n  font-family: FontAwesome;\n  margin-left: 10px;\n  font-size: 1em;\n}\nbutton.more-btn:hover,\nbutton.more-btn:focus {\n  background: #30739C;\n  text-decoration: none;\n  outline: none;\n}\n.video-page-hero {\n  text-align: center;\n  padding: 0 0 50px;\n  border-bottom: 6px solid #248EC7;\n  background: url(" + __webpack_require__(438) + ") center center no-repeat;\n  background-size: cover;\n}\n.video-page-hero h1 {\n  margin: 30px 0 50px;\n  font-size: 3em;\n  font-weight: 400;\n  letter-spacing: -0.4px;\n  color: white;\n}\n.search-wrapper {\n  position: relative;\n  margin-bottom: 30px;\n}\n.search-wrapper i {\n  position: absolute;\n  z-index: 100;\n  color: #eee;\n}\n.search-wrapper i.fa-search {\n  left: 20px;\n  top: 13px;\n}\n.video-search-form button {\n  display: none;\n}\n.video-search-form input[type=text] {\n  display: block;\n  position: relative;\n  padding: 10px 10px 10px 50px;\n  font-size: 14px;\n  border-radius: 20px;\n  width: 100%;\n  background: rgba(0, 0, 0, 0.4);\n  border: 1px solid white;\n  color: white;\n}\n.video-search-form input[type=text]:focus {\n  outline: none;\n}\n.video-search-form input[type=text]::-webkit-input-placeholder {\n  color: white;\n}\n.video-search-form input[type=text]::-moz-placeholder {\n  color: white;\n}\n.video-search-form input[type=text]:-ms-input-placeholder {\n  color: white;\n}\n.video-search-form input[type=text]:-moz-placeholder {\n  color: white;\n}\n.video-navbar-wrapper {\n  position: relative;\n  width: 100%;\n}\n.video-navbar {\n  max-width: 680px;\n  margin: -20px auto 20px;\n  text-align: center;\n  display: -webkit-flex;\n  display: -moz-box;\n  display: flex;\n  -webkit-flex-direction: row;\n     -moz-box-orient: horizontal;\n     -moz-box-direction: normal;\n          flex-direction: row;\n}\n.video-navbar a {\n  -webkit-flex: 1;\n     -moz-box-flex: 1;\n          flex: 1;\n  width: auto;\n  text-align: center;\n  border-width: 0 1px 1px 0;\n  border-style: solid;\n  border-top-color: #248EC7;\n  border-bottom-color: #248EC7;\n  border-right-color: #30739C;\n  color: white;\n  padding: 8px 5px;\n  background: #248EC7;\n  transition: background .4s;\n}\n.video-navbar a .badge {\n  background: #29abe2;\n  font-size: 0.75em;\n  line-height: 1.1;\n  font-weight: 400;\n  padding: 2px 9px;\n}\n.video-navbar a:first-of-type {\n  border-left-width: 1px;\n  border-left-color: #248EC7;\n  border-top-left-radius: 10px;\n  border-bottom-left-radius: 10px;\n}\n.video-navbar a:last-of-type {\n  border-right-color: #248EC7;\n  border-top-right-radius: 10px;\n  border-bottom-right-radius: 10px;\n}\n.video-navbar a:hover,\n.video-navbar a:focus,\n.video-navbar a.active {\n  text-decoration: none;\n  background: #29abe2;\n  color: white;\n  outline: none;\n  border-top-color: #248EC7;\n  border-bottom-color: #248EC7;\n  border-right-color: #30739C;\n  transition: background .4s;\n}\n.video-navbar a:hover .badge,\n.video-navbar a:focus .badge,\n.video-navbar a.active .badge {\n  background: #248EC7;\n}\n.video-navbar a:hover:first-of-type,\n.video-navbar a:focus:first-of-type,\n.video-navbar a.active:first-of-type {\n  border-left-color: #29abe2;\n}\n.video-navbar a:hover:last-of-type,\n.video-navbar a:focus:last-of-type,\n.video-navbar a.active:last-of-type {\n  border-right-color: #29abe2;\n}\n.loading {\n  text-align: center;\n  margin: 40px 0 60px;\n  font-weight: 600;\n}\n.loading h1 {\n  position: relative;\n  color: rgba(0, 0, 0, 0.3);\n  font-size: 20px;\n  font-weight: 600;\n  text-transform: uppercase;\n  line-height: 2;\n}\n.loading h1:before {\n  content: attr(data-text);\n  position: absolute;\n  overflow: hidden;\n  max-width: 7em;\n  white-space: nowrap;\n  color: #29abe2;\n  -webkit-animation: loading 3s linear infinite;\n          animation: loading 3s linear infinite;\n}\n@-webkit-keyframes loading {\n  0% {\n    max-width: 0;\n  }\n}\n@keyframes loading {\n  0% {\n    max-width: 0;\n  }\n}\n.video-panel {\n  zoom: 1;\n  margin-bottom: 30px;\n  border-bottom: 1px solid #D4DCE5;\n}\n.video-panel:before,\n.video-panel:after {\n  content: \"\";\n  display: table;\n}\n.video-panel:after {\n  clear: both;\n}\n.video-panel h4 {\n  margin-bottom: 20px;\n  font-size: 15px;\n  color: #2A4E68;\n}\n.video-panel a.panel-link:hover .gallery-item .gallery-image:before,\n.video-panel a.panel-link:hover .gallery-item .gallery-image:after {\n  opacity: 1;\n  transition: opacity 0.5s;\n}\n.video-panel a.panel-link .gallery-item {\n  text-align: left;\n  width: 100%;\n  position: relative;\n  overflow: hidden;\n  margin-bottom: 40px;\n  -moz-box-sizing: border-box;\n       box-sizing: border-box;\n}\n.video-panel a.panel-link .gallery-item .gallery-image {\n  position: relative;\n  overflow: hidden;\n}\n.video-panel a.panel-link .gallery-item .gallery-image img {\n  width: 100%;\n  z-index: 1;\n  margin: 0;\n}\n.video-panel a.panel-link .gallery-item .gallery-image:focus {\n  outline: none;\n}\n.video-panel a.panel-link .gallery-item .gallery-image:before {\n  position: absolute;\n  top: 50%;\n  margin-top: -35px;\n  left: 50%;\n  margin-left: -33px;\n  content: \"\\F144\";\n  font-family: FontAwesome;\n  font-size: 50px;\n  margin-right: 5px;\n  padding: 8px 10px;\n  border-radius: 4px;\n  line-height: 1;\n  color: white;\n  opacity: 0;\n  z-index: 110;\n  background: rgba(0, 0, 0, 0.5);\n}\n.video-panel a.panel-link .gallery-item .gallery-image:hover {\n  cursor: pointer;\n}\n.video-panel a.panel-link .gallery-item .gallery-image-caption {\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  padding: 14px;\n  margin-top: -20px;\n  background: rgba(0, 0, 0, 0.5);\n  width: 100%;\n  display: block;\n  z-index: 2;\n  transition: -webkit-transform .4s;\n  transition: transform .4s;\n  color: white;\n  text-transform: uppercase;\n  font-size: 12px;\n  font-weight: 600;\n}\n.video-panel a.panel-link .gallery-item .gallery-image-caption:before {\n  content: \"\\F041\";\n  font-family: FontAwesome;\n  margin-right: 5px;\n  padding: 0 1px;\n}\n.video-panel a.panel-link .gallery-item .gallery-title {\n  width: 100%;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  margin-top: 10px;\n}\n.video-panel a.panel-link .gallery-item .gallery-title a {\n  color: #30739C;\n  font-size: 12px;\n  font-weight: 600;\n}\n.video-panel a.panel-link .gallery-item .gallery-subtitle {\n  color: #2A4E68;\n  font-weight: 400;\n  font-size: 12px;\n  width: 100%;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  min-height: 2em;\n}\n.video-panel .summit-item .gallery-image a img,\n.video-panel .speaker-item .gallery-image a img {\n  margin: 0;\n}\n.video-panel .summit-item .gallery-image:hover,\n.video-panel .speaker-item .gallery-image:hover {\n  cursor: pointer;\n}\n.video-panel .summit-item .gallery-image:hover:before,\n.video-panel .speaker-item .gallery-image:hover:before {\n  display: none;\n}\n.video-panel .summit-item .gallery-image-caption,\n.video-panel .speaker-item .gallery-image-caption {\n  -webkit-transform: scale(0);\n      -ms-transform: scale(0);\n          transform: scale(0);\n  transition: -webkit-transform 0.2s ease-in;\n  transition: transform 0.2s ease-in;\n}\n.video-panel .summit-item .gallery-title:before {\n  content: \"\\F041\";\n  font-family: FontAwesome;\n  margin-right: 5px;\n  padding: 0 1px;\n  color: #30739C;\n}\n.video-panel .speaker-item .gallery-title:before {\n  display: none;\n}\n.video-panel a:hover .gallery-image-caption,\n.video-panel a:focus .gallery-image-caption {\n  -webkit-transform: translate(0, 100%);\n      -ms-transform: translate(0, 100%);\n          transform: translate(0, 100%);\n}\n.popular-speakers-link {\n  text-transform: uppercase;\n  font-size: 0.8em;\n  margin-right: 10px;\n  color: #30739C;\n  float: left;\n}\n.popular-speakers-link a {\n  font-size: 1.1em;\n  color: #999;\n  font-weight: 600;\n  text-transform: uppercase;\n  width: auto;\n  clear: left;\n  display: block;\n}\n.popular-speakers-link a:hover,\n.popular-speakers-link a:focus {\n  color: #29abe2;\n  text-decoration: none;\n}\n.popular-speakers-link a.active {\n  color: #29abe2;\n  border-bottom: 3px solid;\n}\nul.speaker-name-filter {\n  margin: 20px 0 15px;\n  padding: 0;\n}\nul.speaker-name-filter li {\n  list-style: none;\n  display: inline-block;\n  margin-right: 6px;\n}\nul.speaker-name-filter li a {\n  text-transform: uppercase;\n  font-weight: 600;\n  color: #999;\n}\nul.speaker-name-filter li a:hover {\n  color: #29abe2;\n  text-decoration: none;\n}\nul.speaker-name-filter li a.active {\n  border-bottom: 3px solid;\n  text-decoration: none;\n  color: #248EC7;\n}\nul.speaker-name-filter li.list-title {\n  text-transform: uppercase;\n  font-size: 0.8em;\n  margin-right: 10px;\n  color: #30739C;\n  display: block;\n}\nul.search-tabs {\n  margin: 20px 0;\n  padding: 0;\n}\nul.search-tabs li {\n  list-style: none;\n  display: inline-block;\n  margin-right: 40px;\n}\nul.search-tabs li a {\n  text-transform: uppercase;\n  font-weight: 600;\n  color: #999;\n}\nul.search-tabs li a span.count {\n  font-weight: 400;\n  font-size: 9px;\n  background: #999;\n  color: white;\n  padding: 1px 5px;\n  border-radius: 20px;\n  line-height: 1;\n  margin-left: 5px;\n}\nul.search-tabs li a:hover {\n  color: #29abe2;\n  text-decoration: none;\n}\nul.search-tabs li a:hover span.count {\n  background-color: #29abe2;\n}\nul.search-tabs li.active a {\n  color: #248EC7;\n}\nul.search-tabs li.active a span.count {\n  background-color: #248EC7;\n}\nul.search-tabs li:last-child {\n  margin-right: 0;\n}\n@media (max-width: 767px) {\n  ul.speaker-name-filter {\n    text-align: center;\n  }\n  ul.speaker-name-filter li {\n    margin-right: 4px;\n  }\n  ul.speaker-name-filter li.list-title {\n    display: block;\n    margin-bottom: 5px;\n  }\n  ul.speaker-name-filter li:last-child {\n    margin-right: 0;\n  }\n  ul.search-tabs {\n    text-align: center;\n  }\n  ul.search-tabs li {\n    margin-right: 20px;\n  }\n  ul.search-tabs li:last-child {\n    margin-right: 0;\n  }\n}\n.video-app-layout {\n  min-height: 300px;\n}\n.featured-video {\n  background: #edf2f7;\n  padding: 15px;\n  border-radius: 4px;\n  border: 1px solid #D4DCE5;\n  float: left;\n  margin: 30px 15% 40px;\n  width: 70%;\n  height: auto;\n}\n.featured-video:hover,\n.featured-video:focus {\n  background: #D4DCE5;\n  border-color: #30739C;\n}\n@media (max-width: 767px) {\n  .featured-video {\n    width: 100%;\n    margin: 30px 0 40px;\n  }\n}\n.featured-video h3 {\n  text-transform: uppercase;\n  margin: 0 0 10px;\n  font-size: 14px;\n  font-weight: 600;\n}\n.featured-video h5 {\n  margin-top: 0;\n  color: #2A4E68;\n}\n.featured-video .feature-image {\n  position: relative;\n  float: left;\n  overflow: hidden;\n  margin-right: 15px;\n}\n.featured-video .feature-image a {\n  display: block;\n}\n.featured-video .feature-image img {\n  margin: 0;\n  max-width: 160px;\n}\n.featured-video .feature-image:before {\n  position: absolute;\n  top: 50%;\n  margin-top: -15px;\n  left: 50%;\n  margin-left: -10px;\n  content: \"\\F144\";\n  font-family: FontAwesome;\n  font-size: 20px;\n  margin-right: 5px;\n  padding: 0 1px;\n  color: white;\n  opacity: 0.9;\n}\n.featured-video .feature-image:hover {\n  cursor: pointer;\n}\n.featured-video .feature-image:hover .gallery-image-caption {\n  display: none;\n}\n.video-breadcrumbs {\n  margin-bottom: 15px;\n  color: #aaa;\n  line-height: 1;\n  font-size: 11px;\n  width: 100%;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n.video-breadcrumbs a {\n  font-size: 10px;\n  text-transform: uppercase;\n  color: #2A4E68;\n  margin: 0 5px;\n}\n.video-breadcrumbs a.active {\n  color: #248EC7;\n  text-decoration: none;\n  border-bottom: none;\n}\n.video-breadcrumbs span {\n  font-size: 10px;\n  text-transform: uppercase;\n  color: #2A4E68;\n  margin: 0 5px;\n}\n.detail-panel-section {\n  margin: 0 0 30px;\n}\n.detail-panel-section:last-of-type {\n  margin: 0;\n}\nh5.section-title {\n  color: #2A4E68;\n  font-weight: 600;\n  text-transform: capitalize;\n  border-bottom: 1px solid #dae5ee;\n  padding-bottom: 15px;\n  margin: 10px 0 10px;\n}\nh3.video-details-title {\n  text-align: center;\n  margin: 10px 0 20px;\n}\n.video-detail-panel {\n  background: #edf2f7;\n  border: 1px solid #D4DCE5;\n  border-radius: 4px;\n  padding: 20px;\n}\nul.video-speakers-list {\n  margin: 0;\n  padding: 0;\n}\nul.video-speakers-list li {\n  list-style: none;\n  line-height: 2em;\n}\n.tag {\n  margin: 0 5px 5px 0;\n}\nul.videos-share-list {\n  margin: 0;\n  padding: 0;\n}\nul.videos-share-list li {\n  list-style: none;\n  display: inline-block;\n  margin-right: 10px;\n}\nul.videos-share-list li:last-child {\n  margin-right: 0;\n}\nul.videos-share-list li a {\n  font-size: 30px;\n}\n.video-embed {\n  width: 100%;\n  background: #222;\n  height: auto;\n  margin: 0 0 30px;\n  text-align: center;\n  -moz-box-sizing: border-box;\n       box-sizing: border-box;\n}\n@-webkit-keyframes fadeInDown {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(0, -10%, 0);\n    transform: translate3d(0, -10%, 0);\n  }\n  to {\n    opacity: 1;\n    -webkit-transform: none;\n    transform: none;\n  }\n}\n@keyframes fadeInDown {\n  from {\n    opacity: 0;\n    -webkit-transform: translate3d(0, -10%, 0);\n    transform: translate3d(0, -10%, 0);\n  }\n  to {\n    opacity: 1;\n    -webkit-transform: none;\n    transform: none;\n  }\n}\n@-webkit-keyframes fadeOutUp {\n  from {\n    opacity: 1;\n  }\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(0, -10%, 0);\n    transform: translate3d(0, -10%, 0);\n  }\n}\n@keyframes fadeOutUp {\n  from {\n    opacity: 1;\n  }\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(0, -100%, 0);\n    transform: translate3d(0, -100%, 0);\n  }\n}\n.vertical-fade-enter,\n.vertical-fade-appear {\n  opacity: 0;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n}\n.vertical-fade-enter.vertical-fade-enter-active,\n.vertical-fade-appear.vertical-fade-enter-active,\n.vertical-fade-enter.vertical-fade-appear-active,\n.vertical-fade-appear.vertical-fade-appear-active {\n  animation-name: fadeInDown;\n  -webkit-animation-name: fadeInDown;\n}\n.vertical-fade-leave {\n  opacity: 1;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n}\n.vertical-fade-leave.vertical-fade-leave-active {\n  animation-name: fadeOutUp;\n  -webkit-animation-name: fadeOutUp;\n}\n@-webkit-keyframes flipInX {\n  from {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);\n    -webkit-animation-timing-function: ease-in;\n    animation-timing-function: ease-in;\n    opacity: 0;\n  }\n  40% {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);\n    -webkit-animation-timing-function: ease-in;\n    animation-timing-function: ease-in;\n  }\n  60% {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 10deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, 10deg);\n    opacity: 1;\n  }\n  80% {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -5deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);\n  }\n  to {\n    -webkit-transform: perspective(400px);\n    transform: perspective(400px);\n  }\n}\n@keyframes flipInX {\n  from {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);\n    -webkit-animation-timing-function: ease-in;\n    animation-timing-function: ease-in;\n    opacity: 0;\n  }\n  40% {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);\n    -webkit-animation-timing-function: ease-in;\n    animation-timing-function: ease-in;\n  }\n  60% {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 10deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, 10deg);\n    opacity: 1;\n  }\n  80% {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -5deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);\n  }\n  to {\n    -webkit-transform: perspective(400px);\n    transform: perspective(400px);\n  }\n}\n.vertical-flip-enter,\n.vertical-flip-appear {\n  -webkit-backface-visibility: visible !important;\n  backface-visibility: visible !important;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n}\n.vertical-flip-enter.vertical-flip-enter-active,\n.vertical-flip-appear.vertical-flip-enter-active,\n.vertical-flip-enter.vertical-flip-appear-active,\n.vertical-flip-appear.vertical-flip-appear-active {\n  animation-name: flipInX;\n  -webkit-animation-name: flipInX;\n}\n@-webkit-keyframes flipOutX {\n  from {\n    -webkit-transform: perspective(400px);\n    transform: perspective(400px);\n  }\n  30% {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);\n    opacity: 1;\n  }\n  to {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);\n    opacity: 0;\n  }\n}\n@keyframes flipOutX {\n  from {\n    -webkit-transform: perspective(400px);\n    transform: perspective(400px);\n  }\n  30% {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);\n    opacity: 1;\n  }\n  to {\n    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);\n    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);\n    opacity: 0;\n  }\n}\n.vertical-flip-leave {\n  -webkit-backface-visibility: visible !important;\n  backface-visibility: visible !important;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n}\n.vertical-flip-leave.vertical-flip-leave-active {\n  animation-name: flipOutX;\n  -webkit-animation-name: flipOutX;\n}\n@-webkit-keyframes slideInDown {\n  from {\n    -webkit-transform: translate3d(0, -100%, 0);\n    transform: translate3d(0, -100%, 0);\n    visibility: visible;\n  }\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@keyframes slideInDown {\n  from {\n    -webkit-transform: translate3d(0, -100%, 0);\n    transform: translate3d(0, -100%, 0);\n    visibility: visible;\n  }\n  to {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n}\n@-webkit-keyframes slideOutUp {\n  from {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n  to {\n    visibility: hidden;\n    -webkit-transform: translate3d(0, -100%, 0);\n    transform: translate3d(0, -100%, 0);\n  }\n}\n.vertical-slide-enter,\n.vertical-slide-appear {\n  visibility: hidden;\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n}\n.vertical-slide-enter.vertical-slide-enter-active,\n.vertical-slide-appear.vertical-slide-enter-active,\n.vertical-slide-enter.vertical-slide-appear-active,\n.vertical-slide-appear.vertical-slide-appear-active {\n  animation-name: slideInDown;\n  -webkit-animation-name: slideInDown;\n}\n.vertical-slide-leave {\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n}\n.vertical-slide-leave.vertical-slide-leave-active {\n  animation-name: slideOutUp;\n  -webkit-animation-name: slideOutUp;\n}\n@keyframes slideOutUp {\n  from {\n    -webkit-transform: translate3d(0, 0, 0);\n    transform: translate3d(0, 0, 0);\n  }\n  to {\n    visibility: hidden;\n    -webkit-transform: translate3d(0, -100%, 0);\n    transform: translate3d(0, -100%, 0);\n  }\n}\n.clearfix {\n  zoom: 1;\n}\n.clearfix:before,\n.clearfix:after {\n  content: \"\";\n  display: table;\n}\n.clearfix:after {\n  clear: both;\n}\n", ""]);
 
 	// exports
 
@@ -41666,7 +41666,9 @@
 					speakerVideos: (0, _childVideoReducers.speakerVideos)(),
 					highlightedVideos: (0, _childVideoReducers.highlightedVideos)(),
 					popularVideos: (0, _childVideoReducers.popularVideos)(),
-					searchVideos: (0, _childVideoReducers.searchVideos)()
+					searchVideos: (0, _childVideoReducers.searchVideos)(),
+					tagVideos: (0, _childVideoReducers.tagVideos)(),
+					trackVideos: (0, _childVideoReducers.trackVideos)()
 				};
 			}
 		}
@@ -41677,7 +41679,9 @@
 			speakerVideos: (0, _childVideoReducers.speakerVideos)(state.speakerVideos, action),
 			highlightedVideos: (0, _childVideoReducers.highlightedVideos)(state.highlightedVideos, action),
 			popularVideos: (0, _childVideoReducers.popularVideos)(state.popularVideos, action),
-			searchVideos: (0, _childVideoReducers.searchVideos)(state.searchVideos, action)
+			searchVideos: (0, _childVideoReducers.searchVideos)(state.searchVideos, action),
+			tagVideos: (0, _childVideoReducers.tagVideos)(state.tagVideos, action),
+			trackVideos: (0, _childVideoReducers.trackVideos)(state.trackVideos, action)
 		});
 	};
 	exports.videos = videos;
@@ -41831,6 +41835,92 @@
 	};
 
 	exports.summitVideos = summitVideos;
+	var tagVideos = function tagVideos() {
+		var state = arguments.length <= 0 || arguments[0] === undefined ? {
+			tag: null,
+			loading: false,
+			results: [],
+			has_more: false,
+			total: 0
+		} : arguments[0];
+		var action = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+
+		switch (action.type) {
+			case 'REQUEST_TAG_VIDEOS':
+				if (action.payload.tag && !state.tag || state.tag && +state.tag.tag !== +action.payload.tag) {
+					return {
+						tag: null,
+						results: [],
+						loading: true,
+						has_more: false,
+						total: 0
+					};
+				}
+				return _extends({}, state, {
+					loading: true
+				});
+
+			case 'RECEIVE_TAG_VIDEOS':
+				var response = action.payload.response;
+
+				return _extends({}, state, {
+					tag: _extends({}, response.tag),
+					results: state.has_more ? [].concat(_toConsumableArray(state.results), _toConsumableArray(response.results)) : [].concat(_toConsumableArray(response.results)),
+					loading: false,
+					has_more: response.has_more,
+					total: response.total
+				});
+
+			default:
+				return state;
+
+		}
+	};
+
+	exports.tagVideos = tagVideos;
+	var trackVideos = function trackVideos() {
+		var state = arguments.length <= 0 || arguments[0] === undefined ? {
+			track: null,
+			loading: false,
+			results: [],
+			has_more: false,
+			total: 0
+		} : arguments[0];
+		var action = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+
+		switch (action.type) {
+			case 'REQUEST_TRACK_VIDEOS':
+				if (action.payload.track && !state.track || state.track && +state.track.slug !== +action.payload.track) {
+					return {
+						track: null,
+						results: [],
+						loading: true,
+						has_more: false,
+						total: 0
+					};
+				}
+				return _extends({}, state, {
+					loading: true
+				});
+
+			case 'RECEIVE_TRACK_VIDEOS':
+				var response = action.payload.response;
+
+				return _extends({}, state, {
+					track: _extends({}, response.track),
+					results: state.has_more ? [].concat(_toConsumableArray(state.results), _toConsumableArray(response.results)) : [].concat(_toConsumableArray(response.results)),
+					loading: false,
+					has_more: response.has_more,
+					total: response.total
+				});
+
+			default:
+				return state;
+
+		}
+	};
+
+	exports.trackVideos = trackVideos;
 	var speakerVideos = function speakerVideos() {
 		var state = arguments.length <= 0 || arguments[0] === undefined ? {
 			speaker: null,
@@ -42274,12 +42364,19 @@
 
 	var _componentsPagesVideoDetail2 = _interopRequireDefault(_componentsPagesVideoDetail);
 
+	var _componentsPagesTagDetail = __webpack_require__(714);
+
+	var _componentsPagesTagDetail2 = _interopRequireDefault(_componentsPagesTagDetail);
+
+	var _componentsPagesTrackDetail = __webpack_require__(715);
+
+	var _componentsPagesTrackDetail2 = _interopRequireDefault(_componentsPagesTrackDetail);
+
 	_reactRouter.browserHistory.listenBefore(function (location) {
 	  if (location.search.match(/^\?search=/) || location.pathname.match(/video\/.*$/)) {
 	    var main = document.getElementById('video-navigation');
 	    var box = main.getBoundingClientRect();
-	    var currentScroll = window.scrollY;
-	    window.scrollTo(0, currentScroll + box.top - 50);
+	    window.scrollTo(0, box.top - 50);
 	  }
 	});
 	var Routes = function Routes(baseURL) {
@@ -42291,11 +42388,13 @@
 	      { path: baseURL, component: _componentsPagesApp2['default'] },
 	      _react2['default'].createElement(_reactRouter.IndexRoute, { component: _componentsPagesAllVideos2['default'] }),
 	      _react2['default'].createElement(_reactRouter.Route, { path: 'summits', component: _componentsPagesSummits2['default'] }),
-	      _react2['default'].createElement(_reactRouter.Route, { path: 'summits/show/:slug', component: _componentsPagesSummitDetail2['default'] }),
+	      _react2['default'].createElement(_reactRouter.Route, { path: 'summits/:slug', component: _componentsPagesSummitDetail2['default'] }),
 	      _react2['default'].createElement(_reactRouter.Route, { path: 'speakers', component: _componentsPagesSpeakers2['default'] }),
-	      _react2['default'].createElement(_reactRouter.Route, { path: 'speakers/show/:id', component: _componentsPagesSpeakerDetail2['default'] }),
+	      _react2['default'].createElement(_reactRouter.Route, { path: 'speakers/:id/:slug', component: _componentsPagesSpeakerDetail2['default'] }),
 	      _react2['default'].createElement(_reactRouter.Route, { path: 'featured', component: _componentsPagesFeatured2['default'] }),
 	      _react2['default'].createElement(_reactRouter.Route, { path: 'search', component: _componentsPagesSearch2['default'] }),
+	      _react2['default'].createElement(_reactRouter.Route, { path: 'tags/:tag', component: _componentsPagesTagDetail2['default'] }),
+	      _react2['default'].createElement(_reactRouter.Route, { path: ':summit/tracks/:slug', component: _componentsPagesTrackDetail2['default'] }),
 	      _react2['default'].createElement(_reactRouter.Route, { path: ':summit/:slug', component: _componentsPagesVideoDetail2['default'] })
 	    )
 	  );
@@ -42872,7 +42971,7 @@
 					'a',
 					{ href: this.props.link,
 						onClick: this.handleClick,
-						className: (0, _classnames2['default'])({ active: this.props.active })
+						className: ((0, _classnames2['default'])({ active: this.props.active }), this.props.className)
 					},
 					this.props.children
 				);
@@ -57824,7 +57923,7 @@
 
 	exports.receiveHighlightVideos = receiveHighlightVideos;
 	var fetchHighlightVideos = function fetchHighlightVideos() {
-		return createRequestReceiveAction(requestHighlightVideos, receiveHighlightVideos, 'api/videos')({ highlighted: true });
+		return createRequestReceiveAction(requestHighlightVideos, receiveHighlightVideos, 'api/videos')({ group: 'highlighted' });
 	};
 
 	exports.fetchHighlightVideos = fetchHighlightVideos;
@@ -57835,7 +57934,7 @@
 
 	exports.receivePopularVideos = receivePopularVideos;
 	var fetchPopularVideos = function fetchPopularVideos() {
-		return createRequestReceiveAction(requestPopularVideos, receivePopularVideos, 'api/videos')({ popular: true });
+		return createRequestReceiveAction(requestPopularVideos, receivePopularVideos, 'api/videos')({ group: 'popular' });
 	};
 
 	exports.fetchPopularVideos = fetchPopularVideos;
@@ -57848,7 +57947,7 @@
 	var fetchSpeakerVideos = function fetchSpeakerVideos(speaker) {
 		var start = arguments.length <= 1 || arguments[1] === undefined ? 0 : arguments[1];
 
-		return createRequestReceiveAction(requestSpeakerVideos, receiveSpeakerVideos, 'api/videos')({ speaker: speaker, start: start });
+		return createRequestReceiveAction(requestSpeakerVideos, receiveSpeakerVideos, 'api/videos')({ group: 'speaker', id: speaker, start: start });
 	};
 
 	exports.fetchSpeakerVideos = fetchSpeakerVideos;
@@ -57861,7 +57960,7 @@
 	var fetchSummitVideos = function fetchSummitVideos(summit) {
 		var start = arguments.length <= 1 || arguments[1] === undefined ? 0 : arguments[1];
 
-		return createRequestReceiveAction(requestSummitVideos, receiveSummitVideos, 'api/videos')({ summit: summit, start: start });
+		return createRequestReceiveAction(requestSummitVideos, receiveSummitVideos, 'api/videos')({ group: 'summit', id: summit, start: start });
 	};
 
 	exports.fetchSummitVideos = fetchSummitVideos;
@@ -57872,10 +57971,36 @@
 
 	exports.receiveSearchVideos = receiveSearchVideos;
 	var fetchSearchVideos = function fetchSearchVideos(search) {
-		return createRequestReceiveAction(requestSearchVideos, receiveSearchVideos, 'api/videos')({ search: search });
+		return createRequestReceiveAction(requestSearchVideos, receiveSearchVideos, 'api/videos')({ group: 'search', id: search });
 	};
 
 	exports.fetchSearchVideos = fetchSearchVideos;
+	var requestTagVideos = createAction('REQUEST_TAG_VIDEOS');
+
+	exports.requestTagVideos = requestTagVideos;
+	var receiveTagVideos = createAction('RECEIVE_TAG_VIDEOS');
+
+	exports.receiveTagVideos = receiveTagVideos;
+	var fetchTagVideos = function fetchTagVideos(tag) {
+		var start = arguments.length <= 1 || arguments[1] === undefined ? 0 : arguments[1];
+
+		return createRequestReceiveAction(requestTagVideos, receiveTagVideos, 'api/videos')({ group: 'tag', id: tag, start: start });
+	};
+
+	exports.fetchTagVideos = fetchTagVideos;
+	var requestTrackVideos = createAction('REQUEST_TRACK_VIDEOS');
+
+	exports.requestTrackVideos = requestTrackVideos;
+	var receiveTrackVideos = createAction('RECEIVE_TRACK_VIDEOS');
+
+	exports.receiveTrackVideos = receiveTrackVideos;
+	var fetchTrackVideos = function fetchTrackVideos(summit, track) {
+		var start = arguments.length <= 2 || arguments[2] === undefined ? 0 : arguments[2];
+
+		return createRequestReceiveAction(requestTrackVideos, receiveTrackVideos, 'api/videos')({ group: 'track', id: track, summit: summit, start: start });
+	};
+
+	exports.fetchTrackVideos = fetchTrackVideos;
 	var requestVideoDetail = createAction('REQUEST_VIDEO_DETAIL');
 
 	exports.requestVideoDetail = requestVideoDetail;
@@ -62367,7 +62492,7 @@
 			imageHeight: 148,
 			title: summit.title,
 			subtitle: summit.dates,
-			link: _utilsUrl2['default'].create('summits/show/' + summit.slug),
+			link: _utilsUrl2['default'].create('summits/' + summit.slug),
 			onItemClicked: onItemClicked
 		});
 	};
@@ -62804,7 +62929,7 @@
 			imageHeight: 148,
 			title: speaker.name + ' (' + speaker.videoCount + ' videos)',
 			subtitle: speaker.jobTitle || '',
-			link: _utilsUrl2['default'].create('speakers/show/' + speaker.id),
+			link: _utilsUrl2['default'].create('speakers/' + speaker.id),
 			onItemClicked: onItemClicked
 		});
 	};
@@ -63474,6 +63599,7 @@
 						var titleMatches = _props$videos.titleMatches;
 						var speakerMatches = _props$videos.speakerMatches;
 						var topicMatches = _props$videos.topicMatches;
+						var summitMatches = _props$videos.summitMatches;
 
 						if (activeTab === 'titleMatches') {
 							return _react2['default'].createElement(_containersVideoPanel2['default'], {
@@ -63491,6 +63617,12 @@
 							return _react2['default'].createElement(_containersVideoPanel2['default'], {
 								title: 'Videos matching topic "' + term + '"',
 								videos: topicMatches
+							});
+						}
+						if (activeTab === 'summitMatches') {
+							return _react2['default'].createElement(_containersVideoPanel2['default'], {
+								title: 'Videos matching summit "' + term + '"',
+								videos: summitMatches
 							});
 						}
 					})()
@@ -63744,7 +63876,7 @@
 								_react2['default'].createElement(
 									'div',
 									{ className: 'video-detail-panel' },
-									_react2['default'].createElement(
+									video.speakers && video.speakers.length > 0 && _react2['default'].createElement(
 										'div',
 										{ className: 'detail-panel-section' },
 										_react2['default'].createElement(
@@ -63755,20 +63887,20 @@
 										_react2['default'].createElement(
 											'ul',
 											{ className: 'video-speakers-list' },
-											video.speakers && video.speakers.map(function (s) {
+											video.speakers.map(function (s) {
 												return _react2['default'].createElement(
 													'li',
 													{ key: s.id },
 													_react2['default'].createElement(
 														_containersRouterLink2['default'],
-														{ link: 'speakers/show/' + s.id },
+														{ link: 'speakers/' + s.id + '/' + s.name_slug },
 														s.name
 													)
 												);
 											})
 										)
 									),
-									video.summit && _react2['default'].createElement(
+									video.summit && video.summit.title && _react2['default'].createElement(
 										'div',
 										{ className: 'detail-panel-section' },
 										_react2['default'].createElement(
@@ -63778,9 +63910,39 @@
 										),
 										_react2['default'].createElement(
 											_containersRouterLink2['default'],
-											{ link: 'summits/show/' + video.summit.slug },
+											{ link: 'summits/' + video.summit.slug },
 											video.summit.title
 										)
+									),
+									video.track && video.track.title && _react2['default'].createElement(
+										'div',
+										{ className: 'detail-panel-section' },
+										_react2['default'].createElement(
+											'h5',
+											{ className: 'section-title' },
+											'Track'
+										),
+										_react2['default'].createElement(
+											_containersRouterLink2['default'],
+											{ link: video.summit.slug + '/tracks/' + video.track.slug },
+											video.track.title
+										)
+									),
+									video.tags.length > 0 && _react2['default'].createElement(
+										'div',
+										{ className: 'detail-panel-section' },
+										_react2['default'].createElement(
+											'h5',
+											{ className: 'section-title' },
+											'Tags'
+										),
+										video.tags && video.tags.map(function (tag) {
+											return _react2['default'].createElement(
+												_containersRouterLink2['default'],
+												{ key: tag.id, className: 'tag btn btn-primary btn-xs', link: 'tags/' + tag.tag },
+												tag.tag
+											);
+										})
 									),
 									_react2['default'].createElement(
 										'div',
@@ -63927,6 +64089,338 @@
 
 /***/ },
 /* 714 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(78), RootInstanceProvider = __webpack_require__(86), ReactMount = __webpack_require__(88), React = __webpack_require__(140); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+		value: true
+	});
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x2, _x3, _x4) { var _again = true; _function: while (_again) { var object = _x2, property = _x3, receiver = _x4; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x2 = parent; _x3 = property; _x4 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _react = __webpack_require__(140);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(442);
+
+	var _actions = __webpack_require__(665);
+
+	var _viewsDateGroupedVideoList = __webpack_require__(698);
+
+	var _viewsDateGroupedVideoList2 = _interopRequireDefault(_viewsDateGroupedVideoList);
+
+	var _containersRouterLink = __webpack_require__(682);
+
+	var _containersRouterLink2 = _interopRequireDefault(_containersRouterLink);
+
+	var _uiLoader = __webpack_require__(692);
+
+	var _uiLoader2 = _interopRequireDefault(_uiLoader);
+
+	var _uiBlockButton = __webpack_require__(697);
+
+	var _uiBlockButton2 = _interopRequireDefault(_uiBlockButton);
+
+	var _reactHelmet = __webpack_require__(685);
+
+	var _reactHelmet2 = _interopRequireDefault(_reactHelmet);
+
+	var TagDetail = (function (_React$Component) {
+		_inherits(TagDetail, _React$Component);
+
+		function TagDetail(props) {
+			_classCallCheck(this, TagDetail);
+
+			_get(Object.getPrototypeOf(TagDetail.prototype), 'constructor', this).call(this, props);
+			this.loadMoreVideos = this.loadMoreVideos.bind(this);
+		}
+
+		_createClass(TagDetail, [{
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				var tag = this.props.videos.tag;
+
+				if (!tag || tag.tag != this.props.params.tag) {
+					this.props.requestVideos(0);
+				}
+			}
+		}, {
+			key: 'componentWillReceiveProps',
+			value: function componentWillReceiveProps(nextProps) {
+				if (nextProps.params.tag !== this.props.params.tag) {
+					this.props.requestVideos(0);
+				}
+			}
+		}, {
+			key: 'loadMoreVideos',
+			value: function loadMoreVideos(e) {
+				this.props.requestVideos(this.props.videos.length);
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				if (this.props.loading && !this.props.videos.length) {
+					return _react2['default'].createElement(_uiLoader2['default'], null);
+				}
+				return _react2['default'].createElement(
+					'div',
+					null,
+					this.props.tag && _react2['default'].createElement(_reactHelmet2['default'], { title: this.props.tag.tag }),
+					this.props.tag && _react2['default'].createElement(
+						'div',
+						{ className: 'container' },
+						_react2['default'].createElement(
+							'div',
+							{ className: 'row' },
+							_react2['default'].createElement(
+								'div',
+								{ className: 'col-sm-12 video-breadcrumbs' },
+								_react2['default'].createElement(
+									_containersRouterLink2['default'],
+									{ link: 'videos' },
+									'All videos'
+								),
+								' >   TAGS   >',
+								_react2['default'].createElement(
+									'a',
+									{ href: '#', className: 'active' },
+									this.props.tag.tag
+								)
+							)
+						),
+						_react2['default'].createElement(
+							'div',
+							{ className: 'row' },
+							_react2['default'].createElement(
+								'div',
+								{ className: 'col-sm-12' },
+								_react2['default'].createElement(
+									'h3',
+									null,
+									'Tag: ',
+									this.props.tag.tag
+								)
+							)
+						)
+					),
+					_react2['default'].createElement(_viewsDateGroupedVideoList2['default'], { videos: this.props.videos }),
+					this.props.hasMore && !this.props.loading && _react2['default'].createElement(
+						_uiBlockButton2['default'],
+						{ onButtonClicked: this.loadMoreVideos, className: 'more-btn' },
+						'More videos'
+					),
+					this.props.loading && _react2['default'].createElement(_uiLoader2['default'], null)
+				);
+			}
+		}]);
+
+		return TagDetail;
+	})(_react2['default'].Component);
+
+	exports['default'] = (0, _reactRedux.connect)(function (state, ownProps) {
+		var tagVideos = state.videos.tagVideos;
+
+		return {
+			tag: tagVideos.tag,
+			videos: tagVideos.results,
+			loading: tagVideos.loading,
+			hasMore: tagVideos.has_more,
+			total: tagVideos.total
+		};
+	}, function (dispatch, ownProps) {
+		return {
+			requestVideos: function requestVideos() {
+				var start = arguments.length <= 0 || arguments[0] === undefined ? 0 : arguments[0];
+
+				dispatch((0, _actions.fetchTagVideos)(ownProps.params.tag, start));
+			}
+		};
+	})(TagDetail);
+	module.exports = exports['default'];
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(537); if (makeExportsHot(module, __webpack_require__(140))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "TagDetail.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
+
+/***/ },
+/* 715 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(78), RootInstanceProvider = __webpack_require__(86), ReactMount = __webpack_require__(88), React = __webpack_require__(140); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+		value: true
+	});
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x2, _x3, _x4) { var _again = true; _function: while (_again) { var object = _x2, property = _x3, receiver = _x4; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x2 = parent; _x3 = property; _x4 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _react = __webpack_require__(140);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(442);
+
+	var _actions = __webpack_require__(665);
+
+	var _viewsDateGroupedVideoList = __webpack_require__(698);
+
+	var _viewsDateGroupedVideoList2 = _interopRequireDefault(_viewsDateGroupedVideoList);
+
+	var _containersRouterLink = __webpack_require__(682);
+
+	var _containersRouterLink2 = _interopRequireDefault(_containersRouterLink);
+
+	var _uiLoader = __webpack_require__(692);
+
+	var _uiLoader2 = _interopRequireDefault(_uiLoader);
+
+	var _uiBlockButton = __webpack_require__(697);
+
+	var _uiBlockButton2 = _interopRequireDefault(_uiBlockButton);
+
+	var _reactHelmet = __webpack_require__(685);
+
+	var _reactHelmet2 = _interopRequireDefault(_reactHelmet);
+
+	var TrackDetail = (function (_React$Component) {
+		_inherits(TrackDetail, _React$Component);
+
+		function TrackDetail(props) {
+			_classCallCheck(this, TrackDetail);
+
+			_get(Object.getPrototypeOf(TrackDetail.prototype), 'constructor', this).call(this, props);
+			this.loadMoreVideos = this.loadMoreVideos.bind(this);
+		}
+
+		_createClass(TrackDetail, [{
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				var track = this.props.videos.track;
+
+				if (!track || track.slug != this.props.params.slug) {
+					this.props.requestVideos(0);
+				}
+			}
+		}, {
+			key: 'componentWillReceiveProps',
+			value: function componentWillReceiveProps(nextProps) {
+				if (nextProps.params.slug !== this.props.params.slug) {
+					this.props.requestVideos(0);
+				}
+			}
+		}, {
+			key: 'loadMoreVideos',
+			value: function loadMoreVideos(e) {
+				this.props.requestVideos(this.props.videos.length);
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				if (this.props.loading && !this.props.videos.length) {
+					return _react2['default'].createElement(_uiLoader2['default'], null);
+				}
+				return _react2['default'].createElement(
+					'div',
+					null,
+					this.props.track && _react2['default'].createElement(_reactHelmet2['default'], { title: this.props.track.title }),
+					this.props.track && _react2['default'].createElement(
+						'div',
+						{ className: 'container' },
+						_react2['default'].createElement(
+							'div',
+							{ className: 'row' },
+							_react2['default'].createElement(
+								'div',
+								{ className: 'col-sm-12 video-breadcrumbs' },
+								_react2['default'].createElement(
+									_containersRouterLink2['default'],
+									{ link: 'videos' },
+									'All videos'
+								),
+								' >   TRACKS   >',
+								_react2['default'].createElement(
+									'a',
+									{ href: '#', className: 'active' },
+									this.props.track.title
+								)
+							)
+						),
+						_react2['default'].createElement(
+							'div',
+							{ className: 'row' },
+							_react2['default'].createElement(
+								'div',
+								{ className: 'col-sm-12' },
+								_react2['default'].createElement(
+									'h3',
+									null,
+									'Track: ',
+									this.props.track.title
+								)
+							)
+						)
+					),
+					_react2['default'].createElement(_viewsDateGroupedVideoList2['default'], { videos: this.props.videos }),
+					this.props.hasMore && !this.props.loading && _react2['default'].createElement(
+						_uiBlockButton2['default'],
+						{ onButtonClicked: this.loadMoreVideos, className: 'more-btn' },
+						'More videos'
+					),
+					this.props.loading && _react2['default'].createElement(_uiLoader2['default'], null)
+				);
+			}
+		}]);
+
+		return TrackDetail;
+	})(_react2['default'].Component);
+
+	exports['default'] = (0, _reactRedux.connect)(function (state, ownProps) {
+		var trackVideos = state.videos.trackVideos;
+
+		return {
+			track: trackVideos.track,
+			videos: trackVideos.results,
+			loading: trackVideos.loading,
+			hasMore: trackVideos.has_more,
+			total: trackVideos.total
+		};
+	}, function (dispatch, ownProps) {
+		return {
+			requestVideos: function requestVideos() {
+				var start = arguments.length <= 0 || arguments[0] === undefined ? 0 : arguments[0];
+
+				dispatch((0, _actions.fetchTrackVideos)(ownProps.params.summit, ownProps.params.slug, start));
+			}
+		};
+	})(TrackDetail);
+	module.exports = exports['default'];
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(537); if (makeExportsHot(module, __webpack_require__(140))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "TrackDetail.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
+
+/***/ },
+/* 716 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__.p + "images/placeholder-image.jpg";

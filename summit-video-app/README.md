@@ -85,8 +85,8 @@ All video result sets are limited to `default_video_limit` in the config (50).
 Provides all videos, across all summits, ordered by `DateUploaded DESC`.
 
 **Optional parameters**:
-* `?highlighted=1`: Shows only videos marked highlighted
-* `?popular=1`: Shows popular videos (`Views DESC`). Filtered by `popular_video_view_threshold` in the config.
+* `?group=highlighted`: Shows only videos marked highlighted
+* `?group=popular`: Shows popular videos (`Views DESC`). Filtered by `popular_video_view_threshold` in the config.
 
 **Example response**:
 ```js
@@ -104,8 +104,8 @@ Provides all videos, across all summits, ordered by `DateUploaded DESC`.
 ```
 
 
-### GET api/videos?search=foo
-Searches video titles, speakers, and topics (categories) for keywords, and provides three separate result sets.
+### GET api/videos?group=search&id=foo
+Searches video titles, speakers, topics (categories) and summits for keywords, and provides 4 separate result sets.
 
 **Example response**
 ```js
@@ -131,12 +131,19 @@ Searches video titles, speakers, and topics (categories) for keywords, and provi
 	         "title":"Video 3",
 	         ...
 	      }		
-		]
+		],
+		summitMatches: [
+          {
+             "id":1535,
+             "title":"Video 3",
+             ...
+          }
+        ]
 	}
 }
 ```
 
-### GET api/videos?speaker=[ID]
+### GET api/videos?group=speaker&id=[ID]
 
 Gets the videos for a speaker with given `ID`.
 
@@ -158,9 +165,9 @@ Gets the videos for a speaker with given `ID`.
 }
 ```
 
-### GET api/videos?summit=[ID]
+### GET api/videos?group=summit&id=[SLUG]
 
-Gets the videos for a summit with given `ID`.
+Gets the videos for a summit with given `SLUG`.
 
 **Example response**:
 ```
@@ -172,6 +179,51 @@ Gets the videos for a summit with given `ID`.
    	"speaker": null,
    	"results": [
       {  
+         "id":1533,
+         "title":"Video 1",
+         ...
+      }
+   	]
+
+}
+```
+### GET api/videos?group=tag&id=[TAG]
+
+Gets the videos for a given tag.
+
+**Example response**:
+```
+{
+	"tag": {
+		"id": 123,
+	   	"tag": "Nova"
+   	},
+   	"speaker": null,
+   	"results": [
+      {
+         "id":1533,
+         "title":"Video 1",
+         ...
+      }
+   	]
+
+}
+```
+### GET api/videos?group=track&id=[TRACK-SLUG]&summit=[SLUG]
+
+Gets the videos for a track with given `SLUG` and a summit slug.
+
+**Example response**:
+```
+{
+	"track": {
+		"id": 123,
+	   	"slug": "cloudfunding",
+	   	"title": "CloudFunding"
+   	},
+   	"speaker": null,
+   	"results": [
+      {
          "id":1533,
          "title":"Video 1",
          ...

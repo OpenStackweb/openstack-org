@@ -4,7 +4,9 @@ import {
 	speakerVideos, 
 	highlightedVideos,
 	popularVideos,
-	searchVideos 
+	searchVideos,
+    tagVideos,
+    trackVideos
 } from './childVideoReducers';
 
 export const videos = function (state, action = {}) {
@@ -21,7 +23,9 @@ export const videos = function (state, action = {}) {
 				speakerVideos: speakerVideos(),
 				highlightedVideos: highlightedVideos(),
 				popularVideos: popularVideos(),
-				searchVideos: searchVideos()
+				searchVideos: searchVideos(),
+                tagVideos: tagVideos(),
+                trackVideos: trackVideos(),
 			};
 		}
 	}
@@ -33,7 +37,9 @@ export const videos = function (state, action = {}) {
 		speakerVideos: speakerVideos(state.speakerVideos, action),
 		highlightedVideos: highlightedVideos(state.highlightedVideos, action),
 		popularVideos: popularVideos(state.popularVideos, action),
-		searchVideos: searchVideos(state.searchVideos, action)	
-	};
+		searchVideos: searchVideos(state.searchVideos, action),
+        tagVideos: tagVideos(state.tagVideos, action),
+        trackVideos: trackVideos(state.trackVideos, action)
+    };
 };
 

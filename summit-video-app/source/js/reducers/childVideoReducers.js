@@ -120,6 +120,104 @@ export const summitVideos = (
 	}
 }
 
+export const tagVideos = (
+    state = {
+        tag: null,
+        loading: false,
+        results: [],
+        has_more: false,
+        total: 0
+    },
+    action = {}
+) => {
+    switch(action.type) {
+        case 'REQUEST_TAG_VIDEOS':
+            if( (action.payload.tag && !state.tag) ||
+                (state.tag && +state.tag.tag !== +action.payload.tag)
+                ) {
+                return {
+                    tag: null,
+                    results: [],
+                    loading: true,
+                    has_more: false,
+                    total: 0
+                };
+            }
+            return {
+                ...state,
+                loading: true
+            };
+
+        case 'RECEIVE_TAG_VIDEOS':
+            const {response} = action.payload;
+            return {
+                ...state,
+                tag: {
+                    ...response.tag
+                },
+                results: state.has_more ?
+                    [...state.results, ...response.results] :
+                    [...response.results],
+                loading: false,
+                    has_more: response.has_more,
+                    total: response.total
+            };
+
+        default:
+            return state
+
+    }
+}
+
+export const trackVideos = (
+    state = {
+        track: null,
+        loading: false,
+        results: [],
+        has_more: false,
+        total: 0
+    },
+    action = {}
+) => {
+    switch(action.type) {
+        case 'REQUEST_TRACK_VIDEOS':
+            if( (action.payload.track && !state.track) ||
+                (state.track && +state.track.slug !== +action.payload.track)
+                ) {
+                return {
+                    track: null,
+                    results: [],
+                    loading: true,
+                    has_more: false,
+                    total: 0
+                };
+            }
+            return {
+                ...state,
+                loading: true
+            };
+
+        case 'RECEIVE_TRACK_VIDEOS':
+            const {response} = action.payload;
+            return {
+                ...state,
+                track: {
+                    ...response.track
+                },
+                results: state.has_more ?
+                    [...state.results, ...response.results] :
+                    [...response.results],
+                loading: false,
+                    has_more: response.has_more,
+                    total: response.total
+            };
+
+        default:
+            return state
+
+    }
+}
+
 export const speakerVideos = (
 	state = {
 		speaker: null,

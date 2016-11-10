@@ -24,17 +24,17 @@ class SummitVideoApp extends Page
 class SummitVideoApp_Controller extends Page_Controller
 {
 
-
     /**
      * @var array
      */
     private static $url_handlers = [
-        'api/video/$Type' => 'handleVideo',
-        'api/videos' => 'handleVideos',
-        'api/summits' => 'handleSummits',
-        'api/speakers' => 'handleSpeakers',
+        'api/video/$Type'       => 'handleVideo',
+        'api/videos'            => 'handleVideos',
+        'api/summits'           => 'handleSummits',
+        'api/speakers'          => 'handleSpeakers',
         'PUT api/view/$VideoID' => 'handleVideoViewed',
-        '$Page/$Action/$ID' => 'handleIndex'
+        '$Summit/$Group/$ID'    => 'handleIndex',
+        '$Group/$ID'            => 'handleIndex'
     ];
 
 
@@ -76,7 +76,15 @@ class SummitVideoApp_Controller extends Page_Controller
             'searchVideos' => [
                 'results' => null,
                 'activeTab' => 'titleMatches'
-            ]
+            ],
+            'tagVideos' => [
+                'tag' => null,
+                'results' => []
+            ],
+            'trackVideos' => [
+                'track' => null,
+                'results' => []
+            ],
         ],
         'video' => [
             'featuredVideo' => null,
@@ -220,7 +228,6 @@ class SummitVideoApp_Controller extends Page_Controller
     {
         $state = $this->initialState;
         $page = $this->request->param('Page');
-        $action = $this->request->param('Action');
         $id = $this->request->param('ID');
         $backend = $this->backend;
 
@@ -229,17 +236,24 @@ class SummitVideoApp_Controller extends Page_Controller
         switch ($page) {
             case "summits":
                 $state['summits'] = $backend->getSummits();
-                $state['videos']['summitVideos'] = $backend->getVideos(['summit' => $id]);
+                $state['videos']['summitVideos'] = $backend->getVideos(['group' => 'summit', 'id' => $id]);
+                break;
+            case "tags":
+                $state['videos']['tagVideos'] = $backend->getVideos(['group' => 'tag', 'id' => $id]);
+                break;
+            case "tracks":
+                $summit = $this->request->param('Summit');
+                $state['videos']['trackVideos'] = $backend->getVideos(['group' => 'track', 'id' => $id, 'summit' => $summit]);
                 break;
             case "speakers":
                 $state['speakers'] = $backend->getSpeakers(
                     ['letter' => $this->request->getVar('letter')]
                 );
-                $state['videos']['speakerVideos'] = $backend->getVideos(['speaker' => $id]);
+                $state['videos']['speakerVideos'] = $backend->getVideos(['group' => 'speaker', 'id' => $id]);
                 break;
             case "featured":
-                $state['videos']['highlightedVideos'] = $backend->getVideos(['highlighted' => true]);
-                $state['videos']['popularVideos'] = $backend->getVideos(['popular' => true]);
+                $state['videos']['highlightedVideos'] = $backend->getVideos(['group' => 'highlighted']);
+                $state['videos']['popularVideos'] = $backend->getVideos(['group' => 'popular']);
                 $state['video']['featuredVideo'] = $backend->getFeaturedVideo();
                 break;
             case "video":
@@ -249,7 +263,7 @@ class SummitVideoApp_Controller extends Page_Controller
                 break;
             case "search":
                 $state['videos']['searchVideos'] = $backend->getVideos(
-                    ['search' => $this->request->getVar('search')]
+                    ['group' => 'search', 'search' => $this->request->getVar('search')]
                 );
                 $state['videos']['searchVideos']['activeTab'] = 'titleMatches';
                 break;

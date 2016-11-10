@@ -26,6 +26,7 @@ class PresentationCategory extends DataObject
         'VotingVisible'  => 'Boolean',
         'ChairVisible'   => 'Boolean',
         'Code'           => 'Varchar(5)',
+        'Slug'           => 'Varchar',
     );
 
     private static $defaults = array
@@ -135,6 +136,16 @@ class PresentationCategory extends DataObject
 
     public function hasEventsPublished(){
         return Presentation::get()->filter(["SummitID" => $this->SummitID, "Published" => 1 , "CategoryID" => $this->ID])->count() > 0;
+    }
+
+    protected function onBeforeWrite() {
+        parent::onBeforeWrite();
+
+        // populateDefaults not working, had to do it this way
+        if (empty($this->Slug)) {
+            $clean_title = preg_replace ("/[^a-zA-Z0-9 ]/", "", $this->Title);
+            $this->Slug = preg_replace('/\s+/', '-', strtolower($clean_title));
+        }
     }
 
     protected function onAfterWrite() {

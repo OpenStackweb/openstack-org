@@ -132,6 +132,20 @@ class PresentationSpeaker extends DataObject
         return $full_name;
     }
 
+    /**
+     * Gets a url label for the speaker
+     *
+     * @return  string
+     */
+    public function getNameSlug()
+    {
+        $full_name = $this->getName();
+        $clean_name = preg_replace ("/[^a-zA-Z0-9 ]/", "", $full_name);
+        $slug_name = preg_replace('/\s+/', '-', strtolower($clean_name));
+
+        return $slug_name;
+    }
+
     public function getCountryName()
     {
         $country = '';

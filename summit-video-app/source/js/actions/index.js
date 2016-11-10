@@ -83,7 +83,7 @@ export const fetchHighlightVideos = () => {
 		requestHighlightVideos,
 		receiveHighlightVideos,
 		'api/videos'
-	)({ highlighted: true });
+	)({ group: 'highlighted' });
 };
 
 export const requestPopularVideos = createAction('REQUEST_POPULAR_VIDEOS');
@@ -95,7 +95,7 @@ export const fetchPopularVideos = () => {
 		requestPopularVideos,
 		receivePopularVideos,
 		'api/videos'
-	)({ popular: true });
+	)({ group: 'popular' });
 };
 
 export const requestSpeakerVideos = createAction('REQUEST_SPEAKER_VIDEOS');
@@ -107,7 +107,7 @@ export const fetchSpeakerVideos = (speaker, start = 0) => {
 		requestSpeakerVideos,
 		receiveSpeakerVideos,
 		'api/videos'
-	)({speaker, start});
+	)({ group: 'speaker', id: speaker, start });
 };
 
 export const requestSummitVideos = createAction('REQUEST_SUMMIT_VIDEOS');
@@ -119,7 +119,7 @@ export const fetchSummitVideos = (summit, start = 0) => {
 		requestSummitVideos,
 		receiveSummitVideos,
 		'api/videos'
-	)({ summit, start });	
+	)({ group: 'summit', id: summit, start });
 };	
 
 export const requestSearchVideos = createAction('REQUEST_SEARCH_VIDEOS');
@@ -131,7 +131,31 @@ export const fetchSearchVideos = (search) => {
 		requestSearchVideos,
 		receiveSearchVideos,
 		'api/videos'
-	)({ search });
+	)({ group: 'search', id: search });
+};
+
+export const requestTagVideos = createAction('REQUEST_TAG_VIDEOS');
+
+export const receiveTagVideos = createAction('RECEIVE_TAG_VIDEOS');
+
+export const fetchTagVideos = (tag, start = 0) => {
+    return createRequestReceiveAction(
+        requestTagVideos,
+        receiveTagVideos,
+        'api/videos'
+    )({ group: 'tag', id: tag, start: start });
+};
+
+export const requestTrackVideos = createAction('REQUEST_TRACK_VIDEOS');
+
+export const receiveTrackVideos = createAction('RECEIVE_TRACK_VIDEOS');
+
+export const fetchTrackVideos = (summit, track, start = 0) => {
+    return createRequestReceiveAction(
+        requestTrackVideos,
+        receiveTrackVideos,
+        'api/videos'
+    )({ group: 'track', id: track, summit: summit, start: start });
 };
 
 export const requestVideoDetail = createAction('REQUEST_VIDEO_DETAIL');

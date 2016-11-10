@@ -20,7 +20,7 @@ class LinkButton extends React.Component {
 		return (
 			<a href={this.props.link} 
 			   onClick={this.handleClick}
-			   className={cx({active: this.props.active})}
+			   className={cx({active: this.props.active}), this.props.className }
 			>
 				{this.props.children}
 			</a>
