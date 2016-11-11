@@ -47,3 +47,4 @@ migrations:
   - NormalizeTagsMigration
   - FixEventBriteEventTable
   - SummitSlugMigration
+  - PresentationCategorySlugMigration
