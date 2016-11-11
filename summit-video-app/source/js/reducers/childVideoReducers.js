@@ -83,7 +83,7 @@ export const summitVideos = (
 	switch(action.type) {
 		case 'REQUEST_SUMMIT_VIDEOS':
 			if( (action.payload.summit && !state.summit) ||
-				(state.summit && +state.summit.id !== +action.payload.summit)
+				(state.summit && +state.summit.slug !== +action.payload.summit)
 			) {
 				return {
 					summit: null,
