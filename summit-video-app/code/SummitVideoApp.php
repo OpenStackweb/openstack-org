@@ -15,6 +15,11 @@ class SummitVideoApp extends Page
         return !self::get()->exists();
     }
 
+    public function getOGDescription()
+    {
+        return 'Videos from OpenStack Summits';
+    }
+
 }
 
 

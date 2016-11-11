@@ -63,7 +63,7 @@
 /******/ 	}
 
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "9508d9fd6566b89f73d6"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "29778d768dfbc57dc68c"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 
@@ -63839,6 +63839,13 @@
 				if (!video) {
 					return _react2['default'].createElement(_uiLoader2['default'], null);
 				}
+
+				// change og meta tags for sharing
+				$('meta[property="og:title"]').attr('content', video.title);
+				$('meta[property="og:url"]').attr('content', window.location.href);
+				$('meta[property="og:image"]').attr('content', video.thumbnailURL);
+				$('meta[property="og:description"]').attr('content', video.description);
+
 				return _react2['default'].createElement(
 					'div',
 					{ className: 'video-detail' },
