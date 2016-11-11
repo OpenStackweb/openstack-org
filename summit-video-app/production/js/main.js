@@ -63,7 +63,7 @@
 /******/ 	}
 
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "77273b3df295c4b0ecf3"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "9508d9fd6566b89f73d6"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 
@@ -41803,7 +41803,7 @@
 
 		switch (action.type) {
 			case 'REQUEST_SUMMIT_VIDEOS':
-				if (action.payload.summit && !state.summit || state.summit && +state.summit.id !== +action.payload.summit) {
+				if (action.payload.summit && !state.summit || state.summit && +state.summit.slug !== +action.payload.summit) {
 					return {
 						summit: null,
 						speaker: null,
