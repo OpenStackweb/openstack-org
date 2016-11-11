@@ -2,7 +2,7 @@
 
     <div class="enterprise-bar">
        <div class="container">
-          <a href="/" class="enterprise-bar-left">OpenStack In Science</a>
+          <a href="#" class="enterprise-bar-left">OpenStack In Science</a>
           <a href="#top" class="enterprise-bar-right">Back to Top</a>
        </div>
     </div>
@@ -33,7 +33,7 @@
             <div class="container">
                 <div class="row">
                    <div class="col-xs-7 link-back">
-                        <a href="/users">< User Stories</a>
+                        <a href="/user-stories/">< User Stories</a>
                    </div>
                     <div class="col-xs-5">
                         <ul class="list-inline filters">
@@ -107,9 +107,9 @@
                     <a href="https://www.openstack.org/videos/video/smashing-particles-revolutionizing-medicine-and-exploring-origins-of-the-galaxy-tim-bell" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="/images/play-button.png">
+                            <img src="/themes/openstack/images/play-button.png">
                         </div>
-                        <img class="video-image" src="/images/science/featured1.jpg" alt="OpenStack at CERN">
+                        <img class="video-image" src="/themes/openstack/images/science/featured1.jpg" alt="OpenStack at CERN">
                     </div>
                     </a>
                     <p class="video-title" style="width: 100%;">
@@ -120,9 +120,9 @@
                     <a href="http://superuser.openstack.org/articles/cambridge-openstack/" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="/images/read.png">
+                            <img src="/themes/openstack/images/read.png">
                         </div>
-                        <img class="video-image" src="/images/science/featured2.jpg" alt="University of Cambridge opens new horizons with OpenStack">
+                        <img class="video-image" src="/themes/openstack/images/science/featured2.jpg" alt="University of Cambridge opens new horizons with OpenStack">
                     </div>
                     </a>
                     <p class="video-title">
@@ -133,9 +133,9 @@
                     <a href="https://www.youtube.com/watch?v=8WaeZLaYux4" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="/images/play-button.png">
+                            <img src="/themes/openstack/images/play-button.png">
                         </div>
-                        <img class="video-image" src="/images/science/featured3.jpg" alt="NASA JPL talks OpenStack">
+                        <img class="video-image" src="/themes/openstack/images/science/featured3.jpg" alt="NASA JPL talks OpenStack">
                     </div>
                     </a>
                     <p class="video-title">
@@ -146,9 +146,9 @@
                     <a href="http://superuser.openstack.org/articles/openstack-user-story-the-italian-institute-for-nuclear-physics-infn/" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="/images/read.png">
+                            <img src="/themes/openstack/images/read.png">
                         </div>
-                        <img class="video-image" src="/images/science/featured4.jpg" alt="Italian Institute for Nuclear Physics">
+                        <img class="video-image" src="/themes/openstack/images/science/featured4.jpg" alt="Italian Institute for Nuclear Physics">
                     </div>
                     </a>
                     <p class="video-title">
@@ -270,7 +270,7 @@
             </p>
             <ul class="booklets-list">
                 <li>
-                    <a href="#" taget="_blank">Read the book now</a>
+                    <a href="//openstack.org/assets/science/OpenStack-CloudandHPC6x9Booklet-v4-online.pdf " taget="_blank">Read the book now</a>
                 </li>
                 <li>
                     <a href="//openstack.org/assets/science/OpenStack-CloudandHPC-6x9Book-v4-print.pdf" taget="_blank">Print (6” W x 9”H format)</a>
