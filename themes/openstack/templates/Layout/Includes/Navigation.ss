@@ -10,7 +10,7 @@
                 <span class="icon-bar"></span>
             </button>
             <div class="brand-wrapper">
-                <a class="navbar-brand" href="/"></a>
+                <a class="navbar-brand" href="/"></a><a name="top" />
             </div>
             <div class="search-icon show"><i class="fa fa-search"></i> <span class="header-search-text">Search</span></div>
         </div>
