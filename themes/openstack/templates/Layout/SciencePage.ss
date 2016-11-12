@@ -3,7 +3,7 @@
     <div class="enterprise-bar">
        <div class="container">
           <a href="/science" class="enterprise-bar-left">OpenStack In Science</a>
-          <a href="#top" class="enterprise-bar-right">Back to Top</a>
+          <a href="/science#top" class="enterprise-bar-right">Back to Top</a>
        </div>
     </div>
 
