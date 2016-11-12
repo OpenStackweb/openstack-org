@@ -14,7 +14,7 @@
             <div class="row">
                 <div class="col-lg-8 col-sm-8">
                     <div class="intro-message">
-                        <a name="top"></a><h1>OpenStack for Scientific Research </h1>
+                        <h1>OpenStack for Scientific Research </h1>
                         <h3>Using OpenStack cloud software for high-performance computing and high-throughput computing workloads</h3>
                     </div>
                 </div>
