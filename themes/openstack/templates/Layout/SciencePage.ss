@@ -2,7 +2,7 @@
 
     <div class="enterprise-bar">
        <div class="container">
-          <a href="#" class="enterprise-bar-left">OpenStack In Science</a>
+          <a href="/science" class="enterprise-bar-left">OpenStack In Science</a>
           <a href="#top" class="enterprise-bar-right">Back to Top</a>
        </div>
     </div>
@@ -14,7 +14,7 @@
             <div class="row">
                 <div class="col-lg-8 col-sm-8">
                     <div class="intro-message">
-                        <h1>OpenStack for Scientific Research </h1>
+                        <a name="top"></a><h1>OpenStack for Scientific Research </h1>
                         <h3>Using OpenStack cloud software for high-performance computing and high-throughput computing workloads</h3>
                     </div>
                 </div>
