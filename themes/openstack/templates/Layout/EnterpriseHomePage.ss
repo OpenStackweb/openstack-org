@@ -3,7 +3,7 @@
     <div class="enterprise-bar">
        <div class="container">
           <a href="/enterprise/" class="enterprise-bar-left">OpenStack In The Enterprise</a>
-          <a href="{$Link}#top" class="enterprise-bar-right">Back to Top</a>
+          <a href="/enterprise#top" class="enterprise-bar-right">Back to Top</a>
        </div>
     </div>
 
