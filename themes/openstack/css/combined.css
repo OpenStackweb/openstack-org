@@ -1080,12 +1080,18 @@ a.gs-title, a.gs-title b {
 
 .intro-message {
   position: relative;
-  padding-top: 0;
-  padding-bottom: 110px; }
+  /*padding-top: 0;*/
+  /*padding-bottom: 110px; */
+  padding-top: 15px;
+  padding-bottom: 0;
+  }
 
 @media (max-width: 1199px) {
   .intro-message {
-    padding-bottom: 30px; } }
+    /*padding-bottom: 30px; */
+    padding-bottom: 0px;
+  } 
+}
 
 .intro-message > h1 {
     margin: 0;
@@ -1137,10 +1143,10 @@ a.gs-title, a.gs-title b {
 }
 
 .intro-header.featured .intro-message {
-  padding-bottom: 30px; }
+  padding-bottom: 5px; }
 
 a.promo-btn {
-  color: #fff;
+  /*color: #fff;
   font-size: 16px;
   font-weight: 300;
   background: transparent;
@@ -1151,12 +1157,25 @@ a.promo-btn {
   text-align: center;
   max-width: 300px;
   display: inline-block;
+  line-height: 2;*/
+  color: white;
+  font-size: 16px;
+  font-weight: 400;
+  background: #4CA3EA;
+  border-radius: 4px;
+  padding: 7px 60px;
+  margin: 0 auto;
+  text-align: center;
+  max-width: 369px;
+  display: inline-block;
   line-height: 2;
   }
 
 a.promo-btn:hover, a.promo-btn:focus  {
   text-decoration: none;
-  background: rgba(255, 255, 255, 0.2); }
+  /*background: rgba(255, 255, 255, 0.2);*/
+  background: #3E83BA; 
+  }
 
 .promo-btn-wrapper {
   margin-bottom: 10px;
@@ -1171,9 +1190,14 @@ a.promo-btn i.fa-chevron-right {
 }
 
 p.promo-dates {
+  /*display: inline-block;
+  margin-top: 10px;
+  font-weight: 400; */
   display: inline-block;
   margin-top: 10px;
-  font-weight: 400; }
+  font-weight: 400;
+  margin-bottom: 30px;
+  }
 
 /*End Hero*/
 /*Overview Section*/
