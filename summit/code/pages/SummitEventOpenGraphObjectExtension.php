@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+
 class SummitEventOpenGraphObjectExtension extends SummitEntityOpenGraphObjectExtension
 {
     public function AbsoluteLink()
@@ -26,5 +27,10 @@ class SummitEventOpenGraphObjectExtension extends SummitEntityOpenGraphObjectExt
 
     protected function getEntityPath(){
         return "events";
+    }
+
+    protected function buildAppLinksMetaTags(&$tags){
+        parent::buildAppLinksMetaTags($tags);
+        TwitterCardMetadataBuilder::buildTwitterCardMetaTags($tags, $this->owner);
     }
 }

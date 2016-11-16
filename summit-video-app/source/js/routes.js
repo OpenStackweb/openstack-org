@@ -26,9 +26,11 @@ const Routes = (baseURL) => (
       <Route path={baseURL} component={App}>
       	<IndexRoute component={AllVideos} />
         <Route path="summits" component={Summits}/>
+        <Route path="summits/show/:slug" component={SummitDetail}/>
         <Route path="summits/:slug" component={SummitDetail}/>
         <Route path="speakers" component={Speakers} />
         <Route path="speakers/:id/:slug" component={SpeakerDetail} />
+        <Route path="speakers/show/:id" component={SpeakerDetail} />
         <Route path="featured" component={Featured} />
         <Route path="search" component={Search} />
         <Route path="tags/:tag" component={TagDetail}/>

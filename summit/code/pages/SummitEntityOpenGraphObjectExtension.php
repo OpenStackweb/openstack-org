@@ -43,7 +43,7 @@ class SummitEntityOpenGraphObjectExtension extends OpenGraphObjectExtension
         $this->buildAppLinksMetaTags($tags);
     }
 
-    private function buildAppLinksMetaTags(&$tags){
+    protected function buildAppLinksMetaTags(&$tags){
         // IOS
         $tags .= AppLinkIOSMetadataBuilder::buildAppLinksMetaTags($tags, sprintf("%s/%s",$this->getEntityPath(), $this->owner->ID));
         // Android

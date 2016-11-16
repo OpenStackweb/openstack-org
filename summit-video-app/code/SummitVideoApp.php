@@ -42,6 +42,14 @@ class SummitVideoApp_Controller extends Page_Controller
         '$Group/$ID'            => 'handleIndex'
     ];
 
+    /*
+     *    'api/video/$Type' => 'handleVideo',
+ -        'api/videos' => 'handleVideos',
+ -        'api/summits' => 'handleSummits',
+ -        'api/speakers' => 'handleSpeakers',
+          '$Page/$Action/$ID' => 'handleIndex'
+     */
+
 
     /**
      * @var array

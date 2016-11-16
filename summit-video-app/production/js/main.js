@@ -63,7 +63,7 @@
 /******/ 	}
 
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "29778d768dfbc57dc68c"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "09912ea63e2e93f3b8ac"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 
@@ -42388,9 +42388,11 @@
 	      { path: baseURL, component: _componentsPagesApp2['default'] },
 	      _react2['default'].createElement(_reactRouter.IndexRoute, { component: _componentsPagesAllVideos2['default'] }),
 	      _react2['default'].createElement(_reactRouter.Route, { path: 'summits', component: _componentsPagesSummits2['default'] }),
+	      _react2['default'].createElement(_reactRouter.Route, { path: 'summits/show/:slug', component: _componentsPagesSummitDetail2['default'] }),
 	      _react2['default'].createElement(_reactRouter.Route, { path: 'summits/:slug', component: _componentsPagesSummitDetail2['default'] }),
 	      _react2['default'].createElement(_reactRouter.Route, { path: 'speakers', component: _componentsPagesSpeakers2['default'] }),
 	      _react2['default'].createElement(_reactRouter.Route, { path: 'speakers/:id/:slug', component: _componentsPagesSpeakerDetail2['default'] }),
+	      _react2['default'].createElement(_reactRouter.Route, { path: 'speakers/show/:id', component: _componentsPagesSpeakerDetail2['default'] }),
 	      _react2['default'].createElement(_reactRouter.Route, { path: 'featured', component: _componentsPagesFeatured2['default'] }),
 	      _react2['default'].createElement(_reactRouter.Route, { path: 'search', component: _componentsPagesSearch2['default'] }),
 	      _react2['default'].createElement(_reactRouter.Route, { path: 'tags/:tag', component: _componentsPagesTagDetail2['default'] }),
@@ -63845,6 +63847,10 @@
 				$('meta[property="og:url"]').attr('content', window.location.href);
 				$('meta[property="og:image"]').attr('content', video.thumbnailURL);
 				$('meta[property="og:description"]').attr('content', video.description);
+				$('meta[name="twitter:title"]').attr('content', video.title);
+				$('meta[name="twitter:image"]').attr('content', video.thumbnailURL);
+				$('meta[name="twitter:description"]').attr('content', video.description);
+				$('link[rel="image_src"]').attr('href', video.thumbnailURL);
 
 				return _react2['default'].createElement(
 					'div',

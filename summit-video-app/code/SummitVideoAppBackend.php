@@ -44,7 +44,14 @@ class SummitVideoAppBackend
 
         switch ($group) {
             case 'summit':
-                $summit = Summit::get()->filter('Slug', $criteria)->first();
+
+                // legacy urls like /videos/summits/show/6
+                if (is_numeric($criteria)) {
+                    $summit = Summit::get()->byID($criteria);
+                } else {
+                    $summit = Summit::get()->filter('Slug', $criteria)->first();
+                }
+
                 if ($summit) {
                     $videos = $videos
                         ->innerJoin('SummitEvent', 'SummitEvent.ID = PresentationMaterial.PresentationID')
