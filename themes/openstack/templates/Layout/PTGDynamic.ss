@@ -121,7 +121,6 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-12">
-                            <h2>Travel Support Program</h2>
                             $TravelSupport
                             <h2>Apply for Travel Support</h2>
                             $TravelSupportApply
