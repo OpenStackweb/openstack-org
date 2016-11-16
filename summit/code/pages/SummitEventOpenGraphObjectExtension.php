@@ -31,6 +31,6 @@ class SummitEventOpenGraphObjectExtension extends SummitEntityOpenGraphObjectExt
 
     protected function buildAppLinksMetaTags(&$tags){
         parent::buildAppLinksMetaTags($tags);
-        TwitterCardMetadataBuilder::buildTwitterCardMetaTags($tags, $this->owner);
+        TwitterCardMetadataBuilder::buildTwitterCardMetaTags($tags);
     }
 }

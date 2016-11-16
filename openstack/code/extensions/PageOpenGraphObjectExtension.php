@@ -15,13 +15,10 @@
 
 final class TwitterCardMetadataBuilder
 {
-    public static function buildTwitterCardMetaTags(&$tags, $object){
+    public static function buildTwitterCardMetaTags(&$tags){
         // IOS
         $tags .= '<meta name="twitter:card" content="summary" />'.PHP_EOL;
         $tags .= sprintf('<meta name="twitter:site" content="%s" />', OPENSTACK_TWITTER_ACCOUNT).PHP_EOL;
-        $tags .= sprintf('<meta name="twitter:title" content="%s" />', $object->getOGTitle()).PHP_EOL;
-        $tags .= sprintf('<meta name="twitter:description" content="%s" />', $object->getOGDescription()).PHP_EOL;
-        $tags .= sprintf('<meta name="twitter:image" content="%s" />', $object->getOGImage()).PHP_EOL;
     }
 }
 
@@ -35,7 +32,7 @@ class PageOpenGraphObjectExtension extends OpenGraphObjectExtension
 
     private function buildAppLinksMetaTags(&$tags){
 
-        TwitterCardMetadataBuilder::buildTwitterCardMetaTags($tags, $this->owner);
+        TwitterCardMetadataBuilder::buildTwitterCardMetaTags($tags);
     }
 
 }

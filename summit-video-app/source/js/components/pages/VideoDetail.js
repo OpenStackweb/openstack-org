@@ -38,9 +38,6 @@ class VideoDetail extends React.Component {
         $('meta[property="og:url"]').attr('content', window.location.href );
         $('meta[property="og:image"]').attr('content', video.thumbnailURL);
         $('meta[property="og:description"]').attr('content', video.description);
-        $('meta[name="twitter:title"]').attr('content', video.title);
-        $('meta[name="twitter:image"]').attr('content', video.thumbnailURL);
-        $('meta[name="twitter:description"]').attr('content', video.description);
         $('link[rel="image_src"]').attr('href', video.thumbnailURL);
 
 		return (
