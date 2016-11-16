@@ -206,7 +206,7 @@ a.single-summit:hover {
   text-decoration: none; }
 
 a.past-summit::after {
-  background: url("/themes/openstack/static/images/home/austin-square.png") no-repeat center center;
+  background: url("/themes/openstack/static/images/home/barcelona-square.png") no-repeat center center;
   content: "";
   opacity: 0.3;
   top: 0;
@@ -220,7 +220,7 @@ a.current-summit {
   padding-top: 10px; }
 
 a.current-summit::after {
-  background: url("/themes/openstack/static/images/home/barcelona-wide.png") no-repeat center center;
+  background: url("/themes/openstack/static/images/home/boston-wide.png") no-repeat center center;
   content: "";
   opacity: 0.8;
   top: 0;
@@ -234,7 +234,7 @@ a.current-summit:hover:after {
   opacity: 1; }
 
 a.future-summit::after {
-  background: url("/themes/openstack/static/images/home/boston-square.png") no-repeat center center;
+  background: url("/themes/openstack/static/images/home/sydney-square.png") no-repeat center center;
   content: "";
   opacity: 0.3;
   top: 0;
