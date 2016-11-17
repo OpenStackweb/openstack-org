@@ -22,12 +22,12 @@ class SummitVideoOpenGraphObjectExtension extends PageOpenGraphObjectExtension
 
     public function getOGDescription()
     {
-        return strip_tags($this->owner->Description);
+        return strip_tags($this->owner->getDescription());
     }
 
     public function getOGTitle()
     {
-        return strip_tags($this->owner->Name);
+        return strip_tags($this->owner->getTitle());
     }
 
     public function getOGImage()

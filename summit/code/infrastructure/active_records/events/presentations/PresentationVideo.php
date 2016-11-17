@@ -148,4 +148,9 @@ class PresentationVideo extends PresentationMaterial
             return $page->RelativeLink(false) . $this->Presentation()->Summit()->Slug . '/' . $this->Presentation()->Slug;
         }
     }
+
+    public function getTrack() {
+        return $this->Presentation()->Category()->Title;
+    }
+
 }

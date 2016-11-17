@@ -107,4 +107,12 @@ class PresentationMaterial extends DataObject
         return $valid;
     }
 
+    public function getTitle() {
+        return ($this->Name) ? $this->Name : $this->Presentation()->Title;
+    }
+
+    public function getDescription() {
+        return ($this->getField('Description')) ? $this->getField('Description') : $this->Presentation()->ShortDescription;
+    }
+
 }

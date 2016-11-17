@@ -56,6 +56,18 @@ class SummitDetail extends React.Component {
 							<h3>{this.props.summit.title}</h3>
 						</div>
 					</div>
+                    <div className="row">
+                        <div className="col-sm-12 track-panel">
+                            <h4 className="summit-tracks-title">Tracks</h4>
+                            {this.props.summit.tracks && this.props.summit.tracks.map(track => (
+                                <RouterLink key={track.id}
+                                    className={"track btn btn-default btn-xs " + (track.has_videos ? '' : 'disabled')}
+                                    link={`${this.props.summit.slug}/tracks/${track.slug}`}>
+                                    {track.title}
+                                </RouterLink>
+                            ), this)}
+                        </div>
+                    </div>
 				</div>
 				}
 				<DateGroupedVideoList videos={this.props.videos} />

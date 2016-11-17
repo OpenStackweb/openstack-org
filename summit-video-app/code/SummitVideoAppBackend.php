@@ -151,6 +151,12 @@ class SummitVideoAppBackend
                     ->limit($defaultLimit)
                     ->sort('DateUploaded DESC');
 
+                //group results by youtubeID
+                $speakerVideos = GroupedList::create($speakerVideos)->groupBy('YouTubeID');
+                $titleVideos = GroupedList::create($titleVideos)->groupBy('YouTubeID');
+                $topicVideos = GroupedList::create($topicVideos)->groupBy('YouTubeID');
+                $summitVideos = GroupedList::create($summitVideos)->groupBy('YouTubeID');
+
                 $response = [
                     'results' => [
                         'titleMatches' => [],
@@ -161,15 +167,23 @@ class SummitVideoAppBackend
                 ];
 
                 foreach ($titleVideos as $v) {
+                    if (is_a($v,'ArrayList'))
+                        $v = $v->first();
                     $response['results']['titleMatches'][] = $this->createVideoJSON($v);
                 }
                 foreach ($speakerVideos as $v) {
+                    if (is_a($v,'ArrayList'))
+                        $v = $v->first();
                     $response['results']['speakerMatches'][] = $this->createVideoJSON($v);
                 }
                 foreach ($topicVideos as $v) {
+                    if (is_a($v,'ArrayList'))
+                        $v = $v->first();
                     $response['results']['topicMatches'][] = $this->createVideoJSON($v);
                 }
                 foreach ($summitVideos as $v) {
+                    if (is_a($v,'ArrayList'))
+                        $v = $v->first();
                     $response['results']['summitMatches'][] = $this->createVideoJSON($v);
                 }
 
@@ -177,14 +191,16 @@ class SummitVideoAppBackend
 
         }
 
-        $total = $videos->count();
+        $grouped_videos = GroupedList::create($videos)->groupBy('YouTubeID');
+        $total = count($grouped_videos);
         $limit = ($group == 'popular') ?
             SummitVideoApp::config()->popular_video_limit :
             $defaultLimit;
 
 
         $videos = $videos->limit($limit, $start);
-        $hasMore = $total > ($start + $videos->count());
+        $grouped_videos_limited = GroupedList::create($videos)->groupBy('YouTubeID');
+        $hasMore = $total > ($start + count($grouped_videos_limited));
 
         $response = [
             'summit' => $summit ? $this->createSummitJSON($summit) : null,
@@ -196,7 +212,10 @@ class SummitVideoAppBackend
             'results' => []
         ];
 
-        foreach ($videos as $v) {
+        foreach ($grouped_videos_limited as $v) {
+            if (is_a($v,'ArrayList'))
+                $v = $v->first();
+
             $response['results'][] = $this->createVideoJSON($v);
         }
 
@@ -417,6 +436,33 @@ class SummitVideoAppBackend
             $image = $page->SummitImage()->Image();
         }
 
+        $tracks = array_map(function ($t) {
+            return [
+                'id'         => $t->ID,
+                'slug'       => $t->Slug,
+                'title'      => $t->Title,
+                'has_videos' => 0
+            ];
+        }, $s->Categories()->toArray());
+
+        $videos = PresentationVideo::get()
+            ->filter([
+                'DisplayOnSite' => true,
+                'Processed' => true
+            ])
+            ->sort('DateUploaded', 'DESC')
+            ->innerJoin('Presentation', 'Presentation.ID = PresentationMaterial.PresentationID')
+            ->innerJoin('SummitEvent', 'SummitEvent.ID = PresentationMaterial.PresentationID')
+            ->filter('SummitEvent.SummitID', $s->ID);
+
+        $videos_groupedby_track = GroupedList::create($videos)->groupBy('Track');
+
+        foreach ($tracks as &$track) {
+            if (array_key_exists($track['title'], $videos_groupedby_track)) {
+                $track['has_videos'] = 1;
+            }
+        }
+
         return [
             'id' => $s->ID,
             'title' => $s->Title,
@@ -429,7 +475,8 @@ class SummitVideoAppBackend
             'imageURL' => ($image && $image->exists() && Director::fileExists($image->Filename)) ?
                 $image->CroppedImage(263, 148)->URL :
                 'summit-video-app/production/images/placeholder-image.jpg',
-            'slug' => $s->Slug
+            'slug' => $s->Slug,
+            'tracks' => $tracks
         ];
     }
 
