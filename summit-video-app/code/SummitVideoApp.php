@@ -38,8 +38,7 @@ class SummitVideoApp_Controller extends Page_Controller
         'api/summits'           => 'handleSummits',
         'api/speakers'          => 'handleSpeakers',
         'PUT api/view/$VideoID' => 'handleVideoViewed',
-        '$Summit/$Group/$ID'    => 'handleIndex',
-        '$Group/$ID'            => 'handleIndex'
+        '$Page/$ID'             => 'handleIndex'
     ];
 
     /*
@@ -269,11 +268,6 @@ class SummitVideoApp_Controller extends Page_Controller
                 $state['videos']['popularVideos'] = $backend->getVideos(['group' => 'popular']);
                 $state['video']['featuredVideo'] = $backend->getFeaturedVideo();
                 break;
-            case "video":
-                $state['videoDetail'] = [
-                    'video' => $backend->getVideoDetail($id)
-                ];
-                break;
             case "search":
                 $state['videos']['searchVideos'] = $backend->getVideos(
                     ['group' => 'search', 'search' => $this->request->getVar('search')]
@@ -281,7 +275,15 @@ class SummitVideoApp_Controller extends Page_Controller
                 $state['videos']['searchVideos']['activeTab'] = 'titleMatches';
                 break;
             default:
-                $state['videos']['allVideos'] = $backend->getVideos();
+                $summit = Summit::get()->filter('Slug', $page)->first();
+                if ($summit) {
+                    $state['videoDetail'] = [
+                        'video' => $backend->getVideoDetail($id)
+                    ];
+                } else {
+                    $state['videos']['allVideos'] = $backend->getVideos();
+                }
+
                 break;
 
         }
@@ -319,6 +321,29 @@ class SummitVideoApp_Controller extends Page_Controller
             $socket = @fsockopen('localhost', 3000, $errno, $errstr, 1);
             return !$socket ? false : true;
         }
+    }
+
+    public function MetaTags()
+    {
+        $page = $this->request->param('Page');
+        $id = $this->request->param('ID');
+
+        $summit = Summit::get()->filter('Slug', $page)->first();
+        if ($summit && $id) {
+            $video = PresentationVideo::get()->filter([
+                'Presentation.Slug' => $id,
+                'DisplayOnSite' => true,
+                'Processed' => true
+            ])->first();
+
+            if(!is_null($video)){
+                return $video->MetaTags();
+            } else {
+                return parent::MetaTags();
+            }
+        }
+
+        return parent::MetaTags();
     }
 
 }

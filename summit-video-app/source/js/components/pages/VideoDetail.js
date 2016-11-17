@@ -33,13 +33,6 @@ class VideoDetail extends React.Component {
 			return <Loader />;
 		}
 
-        // change og meta tags for sharing
-        $('meta[property="og:title"]').attr('content', video.title);
-        $('meta[property="og:url"]').attr('content', window.location.href );
-        $('meta[property="og:image"]').attr('content', video.thumbnailURL);
-        $('meta[property="og:description"]').attr('content', video.description);
-        $('link[rel="image_src"]').attr('href', video.thumbnailURL);
-
 		return (
 			<div className="video-detail">
 				<Helmet title={video.title} />

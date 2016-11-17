@@ -41,3 +41,7 @@ Injector:
   SummitVideoAppBackend:
     constructor:
       0: %$SummitVideoYouTubeService
+
+PresentationVideo:
+  extensions:
+    - SummitVideoOpenGraphObjectExtension

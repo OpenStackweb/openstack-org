@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2016 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,27 +13,26 @@
  * limitations under the License.
  **/
 
-
-final class TwitterCardMetadataBuilder
+class SummitVideoOpenGraphObjectExtension extends PageOpenGraphObjectExtension
 {
-    public static function buildTwitterCardMetaTags(&$tags){
-        // IOS
-        $tags .= '<meta name="twitter:card" content="summary" />'.PHP_EOL;
-        $tags .= sprintf('<meta name="twitter:site" content="%s" />', OPENSTACK_TWITTER_ACCOUNT).PHP_EOL;
-    }
-}
-
-class PageOpenGraphObjectExtension extends OpenGraphObjectExtension
-{
-    public function MetaTags(&$tags)
+    public function AbsoluteLink()
     {
-        parent::MetaTags($tags);
-        $this->buildAppLinksMetaTags($tags);
+        return Director::absoluteURL($this->owner->getLink());
     }
 
-    protected function buildAppLinksMetaTags(&$tags){
+    public function getOGDescription()
+    {
+        return strip_tags($this->owner->Description);
+    }
 
-        TwitterCardMetadataBuilder::buildTwitterCardMetaTags($tags);
+    public function getOGTitle()
+    {
+        return strip_tags($this->owner->Name);
+    }
+
+    public function getOGImage()
+    {
+        return '//img.youtube.com/vi/'.$this->owner->YouTubeID.'/mqdefault.jpg';
     }
 
 }

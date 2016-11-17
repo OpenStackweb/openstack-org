@@ -14,6 +14,8 @@
  **/
 class PresentationVideo extends PresentationMaterial
 {
+    use SummitEntityMetaTagGenerator;
+
 	/**
 	 * @var array
      */
@@ -131,6 +133,19 @@ class PresentationVideo extends PresentationMaterial
         parent::onBeforeWrite();
         if(empty($this->DateUploaded) || $this->ID == 0 ){
             $this->DateUploaded = gmdate("Y-m-d H:i:s");
+        }
+    }
+
+    /**
+     * @param bool $absolute
+     * @return null|string
+     */
+    public function getLink($absolute = true) {
+        $page = SummitVideoApp::get()->first();
+        if ($page) {
+            if($absolute)
+                return $page->getAbsoluteLiveLink(false) . $this->Presentation()->Summit()->Slug . '/' . $this->Presentation()->Slug;
+            return $page->RelativeLink(false) . $this->Presentation()->Summit()->Slug . '/' . $this->Presentation()->Slug;
         }
     }
 }
