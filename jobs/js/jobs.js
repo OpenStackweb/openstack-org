@@ -19,6 +19,7 @@
     var keywords         = null;
 
     function expandJobDetail(event) {
+
         var job_id     = $(this).data('id');
         var parent_div = $('#'+job_id);
 
@@ -61,6 +62,7 @@
         }
 
         // toggles the job descriptions
+        $('a.jobExpand').unbind();
         $(document).on('click','.jobExpand' , expandJobDetail);
 
         $("#ddl-menu-sort").on('click', 'li a', function(){
@@ -121,6 +123,7 @@
             type: "GET",
             url: url,
             success: function(result){
+                $('a.jobExpand').unbind();
                 $(document).off('click','.jobExpand' , expandJobDetail);
                 $('.jobPosting','.job_list').remove();
                 if(result == '') result='<div class="empty-job-list"><p>There are no jobs matching your criterias!</p></div>';
