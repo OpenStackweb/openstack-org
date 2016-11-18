@@ -33,7 +33,7 @@ FROM SummitEvent AS E
 INNER JOIN Presentation ON Presentation.ID = E.ID
 INNER JOIN Presentation_Speakers ON Presentation_Speakers.PresentationID = Presentation.ID
 INNER JOIN PresentationSpeaker AS S ON S.ID = Presentation_Speakers.PresentationSpeakerID
-INNER JOIN PresentationCategory  ON PresentationCategory.ID = Presentation.CategoryID
+INNER JOIN PresentationCategory  ON PresentationCategory.ID = SummitEvent.CategoryID
 LEFT JOIN Member ON Member.ID = S.MemberID
 LEFT JOIN SpeakerRegistrationRequest ON SpeakerRegistrationRequest.SpeakerID = S.ID
 LEFT JOIN PresentationSpeakerSummitAssistanceConfirmationRequest AS ACR ON ACR.SpeakerID = S.ID AND ACR.SummitID = {$summit_id}
@@ -118,7 +118,7 @@ COUNT(A.ID) AS total,
 GROUP_CONCAT(DISTINCT CONCAT(S.FirstName,' ',S.LastName) SEPARATOR ', ') AS speaker_list
 FROM SummitEvent AS E
 LEFT JOIN Presentation AS P ON P.ID = E.ID
-LEFT JOIN PresentationCategory AS PC ON P.CategoryID = PC.ID
+LEFT JOIN PresentationCategory AS PC ON E.CategoryID = PC.ID
 LEFT JOIN Presentation_Speakers AS PS ON PS.PresentationID = P.ID
 LEFT JOIN PresentationSpeakerSummitAssistanceConfirmationRequest AS SA ON PS.PresentationSpeakerID = SA.SpeakerID AND SA.SummitID = {$summit_id}
 INNER JOIN SummitAbstractLocation AS L ON L.ID = E.LocationID

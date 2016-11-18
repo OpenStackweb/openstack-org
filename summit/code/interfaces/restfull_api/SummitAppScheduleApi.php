@@ -270,7 +270,6 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi
                 'type_id' => intval($e->TypeID),
                 'rsvp_link' => $e->RSVPLink,
                 'sponsors_id' => array(),
-                'summit_types_id' => array(),
                 'category_group_ids' => array(),
                 'tags_id' => array(),
                 'own' => is_null($current_member) || !$is_attendee ? false : $current_member->isOnMySchedule($e->ID),
@@ -280,15 +279,12 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi
                 'headcount' => intval($e->HeadCount),
                 'summit_id' => intval($summit->ID),
                 'time_zone_id' => $summit->getTimeZoneName(),
-                'attendees_schedule_count' => $e->AttendeesScheduleCount()
+                'attendees_schedule_count' => $e->AttendeesScheduleCount(),
+                'track_id' => intval($e->CategoryID)
             );
 
             foreach ($e->Tags() as $t) {
                 array_push($entry['tags_id'], intval($t->ID));
-            }
-
-            foreach ($e->AllowedSummitTypes() as $t) {
-                array_push($entry['summit_types_id'], intval($t->ID));
             }
 
             if ($e instanceof Presentation && $e->Category()->exists()) {
@@ -309,7 +305,6 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi
 
                 $entry['speakers_id'] = $speakers;
                 $entry['moderator_id'] = intval($e->ModeratorID);
-                $entry['track_id'] = intval($e->CategoryID);
                 $entry['level'] = $e->Level;
                 $entry['status'] = $e->SelectionStatus();
             }
@@ -354,7 +349,6 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi
                 'location_id' => $e->LocationID,
                 'type_id' => $e->TypeID,
                 'sponsors_id' => array(),
-                'summit_types_id' => array(),
                 'category_group_ids' => array(),
                 'tags_id' => array(),
                 'own' => is_null($current_member) || !$is_attendee ? false : $current_member->isOnMySchedule($e->ID),
@@ -364,10 +358,6 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi
 
             foreach ($e->Tags() as $t) {
                 array_push($entry['tags_id'], $t->ID);
-            }
-
-            foreach ($e->AllowedSummitTypes() as $t) {
-                array_push($entry['summit_types_id'], $t->ID);
             }
 
             if ($e->isPresentation()) {

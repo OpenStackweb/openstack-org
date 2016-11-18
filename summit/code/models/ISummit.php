@@ -75,23 +75,6 @@ interface ISummit extends IEntity
     public function getSelectionEndDate();
 
     /**
-     * @return ISummitType[]
-     */
-    public function getTypes();
-
-    /**
-     * @param ISummitType $type
-     * @return void
-     */
-    public function addType(ISummitType $type);
-
-    /**
-     * @return void
-     */
-    public function clearAllTypes();
-
-
-    /**
      * @return ISummitAirport[]
      */
     public function getAirports();

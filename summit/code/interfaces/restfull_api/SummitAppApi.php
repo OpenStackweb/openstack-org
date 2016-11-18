@@ -29,11 +29,6 @@ final class SummitAppApi extends AbstractRestfulJsonApi
     private $summit_repository;
 
     /**
-     * @var IEntityRepository
-     */
-    private $summittype_repository;
-
-    /**
      * @var ISummitManager
      */
     private $summit_manager;
@@ -44,11 +39,13 @@ final class SummitAppApi extends AbstractRestfulJsonApi
     public function __construct()
     {
         parent::__construct();
-        $this->summit_repository = new SapphireSummitRepository;
-        $this->summittype_repository = new SapphireSummitTypeRepository();
-        $this->summit_manager = new SummitManager($this->summit_repository, new SummitFactory(),
-            $this->summittype_repository, new SummitTypeFactory(),
-            SapphireTransactionManager::getInstance());
+        $this->summit_repository     = new SapphireSummitRepository;
+        $this->summit_manager        = new SummitManager
+        (
+            $this->summit_repository,
+            new SummitFactory(),
+            SapphireTransactionManager::getInstance()
+        );
 
         $this_var = $this;
 
@@ -119,7 +116,6 @@ final class SummitAppApi extends AbstractRestfulJsonApi
     static $url_handlers = array(
         'PUT new-summit' => 'createSummit',
         'PUT $SummitID!/delete' => 'deleteSummit',
-        'PUT $SummitID!/save-summittype' => 'saveSummitType',
     );
 
     /**
@@ -128,7 +124,6 @@ final class SummitAppApi extends AbstractRestfulJsonApi
     static $allowed_actions = array(
         'createSummit',
         'deleteSummit',
-        'saveSummitType',
     );
 
     /**
@@ -192,31 +187,6 @@ final class SummitAppApi extends AbstractRestfulJsonApi
             $summit_id = (int)$this->request->param('SummitID');
             $this->summit_manager->deleteSummit($summit_id);
             return $this->updated();
-        } catch (NotFoundEntityException $ex1) {
-            SS_Log::log($ex1, SS_Log::WARN);
-            return $this->notFound($ex1->getMessage());
-        } catch (Exception $ex) {
-            SS_Log::log($ex, SS_Log::ERR);
-            return $this->serverError();
-        }
-    }
-
-    /**
-     * @return SS_HTTPResponse
-     */
-    public function saveSummitType()
-    {
-        try {
-            $data = $this->getJsonRequest();
-            $summit_id = (int)$this->request->param('SummitID');
-
-            if (!$data) {
-                return $this->serverError();
-            }
-
-            $this->summit_manager->saveSummitType($summit_id, $data);
-            $inserted_id = $this->summittype_repository->getLastIdInserted($summit_id);
-            return $inserted_id;
         } catch (NotFoundEntityException $ex1) {
             SS_Log::log($ex1, SS_Log::WARN);
             return $this->notFound($ex1->getMessage());

@@ -17,7 +17,6 @@
                     id:   $Summit.ID,
                     dates : {},
                     events: {},
-                    summit_types: {},
                     speakers : {},
                     sponsors : {},
                     event_types:{},
@@ -69,15 +68,7 @@
                     id : "{$ID}",
                 });
                 <% end_loop %>
-                <% loop $Summit.Types %>
-                summit.summit_types[{$ID}] =
-                {
-                    type: "{$Type}",
-                    name : "{$Title.JS}",
-                    description : "{$Description.JS}",
-                    color : "{$Color}"
-                };
-                <% end_loop %>
+
                 <% loop $Summit.getTopVenues() %>
                     <% if ClassName == SummitVenue || ClassName == SummitExternalLocation || ClassName == SummitHotel  %>
 

@@ -24,34 +24,18 @@ final class SummitManager {
      * @var ISummitFactory
      */
     private $summit_factory;
+
     /**
-     * @var IEntityRepository
-     */
-    private $summittype_repository;
-    /**
-     * @var ISummitTypeFactory
-     */
-    private $summittype_factory;
-	/**
 	 * @var ITransactionManager
 	 */
 	private $tx_manager;
 
-	/**
-	 * @param IEntityRepository   $summit_repository
-	 * @param ISummitFactory      $summit_factory
-	 * @param ITransactionManager $tx_manager
-	 */
 	public function __construct(IEntityRepository $summit_repository,
                                 ISummitFactory $summit_factory,
-                                IEntityRepository $summittype_repository,
-                                ISummitTypeFactory $summittype_factory,
-	                            ITransactionManager $tx_manager){
-		$this->summit_repository = $summit_repository;
-		$this->summit_factory    = $summit_factory;
-        $this->summittype_repository = $summittype_repository;
-        $this->summittype_factory    = $summittype_factory;
-        $this->tx_manager        = $tx_manager;
+                               ITransactionManager $tx_manager){
+		$this->summit_repository     = $summit_repository;
+		$this->summit_factory        = $summit_factory;
+        $this->tx_manager            = $tx_manager;
 	}
 
     /**
@@ -90,41 +74,6 @@ final class SummitManager {
                 throw new NotFoundEntityException('Summit',sprintf('id %s',$id ));
 
             $repository->delete($summit);
-        });
-    }
-
-    /**
-     * @param $summit_id
-     * @param array $data
-     * @return ISummitType
-     */
-    public function saveSummitType($summit_id, array $data){
-
-        $this_var              = $this;
-        $summittype_repository  = $this->summittype_repository;
-        $summit_repository     = $this->summit_repository;
-        $factory               = $this->summittype_factory;
-
-        return  $this->tx_manager->transaction(function() use ($this_var, $factory, $summit_id, $data, $summit_repository, $summittype_repository){
-
-            $summit = $summit_repository->getById($summit_id);
-            if(!$summit)
-                throw new NotFoundEntityException('Summit',sprintf('id %s',$summit_id ));
-
-            if (isset($data['summittype_id'])) {
-                $summittype = $summittype_repository->getById(intval($data['summittype_id']));
-                $summittype->setTitle($data['title']);
-                $summittype->setDescription($data['description']);
-                $summittype->setAudience($data['audience']);
-                $summittype->setStartDate($data['start_date']);
-                $summittype->setEndDate($data['end_date']);
-
-            } else {
-                $summittype = $factory->buildSummitType($data,$summit_id);
-                $summittype_repository->add($summittype);
-            }
-
-            return $summittype;
         });
     }
 

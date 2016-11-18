@@ -15,8 +15,6 @@ var form_validator = null;
 
 $(document).ready(function(){
 
-    $('#summit_type').chosen({width: "100%", placeholder_text_multiple: "Select Summit Types..."});
-
     $("#start_date").datetimepicker({
         format:'Y-m-d H:i:00',
         step:5,
@@ -47,7 +45,6 @@ $(document).ready(function(){
        var val = $(this).find("option:selected").text();
         if (val == 'Presentation' || val == 'Keynotes' || val == 'Panel' ) {
            $('.speakers_container').show();
-           $('.track_container').show();
            $('.level_container').show();
            $('#allow_feedback').attr("checked","checked");
            if(val == 'Keynotes' || val == 'Panel')
@@ -60,7 +57,6 @@ $(document).ready(function(){
            $('#expect_learn_container').hide();
            $('.speakers_container').hide();
            $('.moderator_container').hide();
-           $('.track_container').hide();
            $('.level_container').hide();
            $('#allow_feedback').removeAttr("checked");
        }
@@ -245,14 +241,12 @@ $(document).ready(function(){
             rsvp_link: { url : true },
             headcount: { number: true },
             event_type: { required: true },
-            summit_type: { required: true },
             level: { required: function(){
                 var event_type = $('#event_type').find("option:selected").text();
                 return event_type === 'Presentation' || event_type === 'Keynotes' || event_type === 'Panel';
             }},
             track: { required: function(){
-                var event_type = $('#event_type').find("option:selected").text();
-                return event_type === 'Presentation' || event_type === 'Keynotes' || event_type === 'Panel';
+                return true;
             }},
             speakers: { required: function(){
                 var event_type = $('#event_type').find("option:selected").text();
@@ -381,7 +375,6 @@ $(document).ready(function(){
             start_date: $('#start_date').val(),
             end_date: $('#end_date').val(),
             event_type: $('#event_type').val(),
-            summit_type: $('#summit_type').val(),
             level: $('#level').val(),
             track: $('#track').val(),
             allow_feedback: ($('#allow_feedback').prop('checked')) ? 1 : 0,

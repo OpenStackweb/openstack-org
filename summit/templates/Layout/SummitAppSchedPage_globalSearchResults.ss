@@ -30,7 +30,6 @@
                             year: "{$Summit.getSummitYear().JS}",
                             dates : [],
                             events: [],
-                            summit_types: {},
                             speakers : {},
                             sponsors : {},
                             event_types:{},
@@ -95,15 +94,6 @@
                     {
                         type : "{$Type.JS}",
                         color : "{$Color}",
-                    };
-                    <% end_loop %>
-                    <% loop $Top.Summit.Types %>
-                    summit.summit_types[{$ID}] =
-                    {
-                       type: "{$Type}",
-                       name : "{$Title.JS}",
-                       description : "{$Description.JS}",
-                       color : "{$Color}"
                     };
                     <% end_loop %>
 
@@ -172,12 +162,11 @@
                                     rsvp_link       : "{$RSVPLink.JS}",
                                     sponsors_id     : [<% loop Sponsors %>{$ID},<% end_loop %>],
                                     tags_id         : [<% loop Tags %>{$ID},<% end_loop %>],
-                                    summit_types_id : [<% loop AllowedSummitTypes %>{$ID},<% end_loop %>],
-                                    <% if ClassName == Presentation %>
-                                    moderator_id: {$ModeratorID},
-                                    speakers_id : [<% loop Speakers %>{$ID},<% end_loop %>],
                                     track_id : {$CategoryID},
-                                    level : '{$Level}',
+                                    <% if ClassName == Presentation %>
+                                        moderator_id: {$ModeratorID},
+                                        speakers_id : [<% loop Speakers %>{$ID},<% end_loop %>],
+                                        level : '{$Level}',
                                     <% end_if %>
                                     <% if $CurrentMember && $CurrentMember.isOnMySchedule($ID) %>
                                     own      : true,

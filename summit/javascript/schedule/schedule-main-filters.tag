@@ -54,11 +54,6 @@
         <div class="col-sm-12">
             <a href="{ summit.track_list_link }" target="_blank">Learn more about the { summit.title } Summit Categories and Tracks.</a>
         </div>
-        <div class="col-sm-15 col-xs-12 single-filter-wrapper first">
-            <select id="ddl_summit_types" name="ddl_summit_types" data-placeholder="Summit Type"  multiple="multiple">
-                <option each={ id, obj in summit.summit_types } data-color="{ obj.color }" value="{ id }">{ obj.name }</option>
-            </select>
-        </div>
         <div class="col-sm-15 col-xs-12 single-filter-wrapper">
             <select id="ddl_track_groups" name="ddl_track_groups" data-placeholder="Summit Categories" size="5"  multiple="multiple">
                 <option each={ track_group_id, idx in summit.category_group_ids } value="{ track_group_id }">{ summit.category_groups[track_group_id].name }</option>
@@ -120,29 +115,11 @@
                 visible_checkboxes.prop('checked', $(this).is(':checked'));
             });
 
-            $('#ddl_summit_types').chosen({  width: '100%'});
             $('#ddl_track_groups').chosen({  width: '100%'});
             $('#ddl_event_types').chosen({  width: '100%'});
             $('#ddl_tracks').chosen({  width: '100%'});
             $('#ddl_tags').chosen({ width: '100%'});
             $('#ddl_levels').chosen({ width: '100%'});
-
-
-            $('#ddl_summit_types').change(function(e, params){
-                if(!self.atomic_filtering)
-                    self.doFilter();
-                var choices = $('.search-choice','#ddl_summit_types_chosen');
-                if(choices.length > 0){
-                    choices.each(function(index, e){
-                        var a      = $('.search-choice-close', $(this));
-                        var idx    = $(a).attr('data-option-array-index');
-                        var option = $("#ddl_summit_types option")[parseInt(idx)];
-                        var color  = $(option).attr('data-color');
-                        $(this).css('background-color', color);
-                        $(this).css('background-image','none');
-                    });
-                }
-            });
 
             $('#ddl_track_groups').change(function(e, params){
 
@@ -236,11 +213,6 @@
                     var ddl    = null;
 
                     switch(key) {
-                        case 'summit_types':
-                        {
-                            ddl = $('#ddl_summit_types');
-                        }
-                        break;
                         case 'track_groups':
                         {
                             ddl = $('#ddl_track_groups');
@@ -283,7 +255,6 @@
             var own     = this.summit.current_user !== null && $('.switch_schedule').hasClass('full') === false;
             var filters =
             {
-                summit_types : $('#ddl_summit_types').val(),
                 track_groups : $('#ddl_track_groups').val(),
                 event_types  : $('#ddl_event_types').val(),
                 tracks       : $('#ddl_tracks').val(),
@@ -292,7 +263,6 @@
                 own          : own
             };
 
-            $(window).url_fragment('setParam','summit_types', filters.summit_types);
             $(window).url_fragment('setParam','track_groups', filters.track_groups);
             $(window).url_fragment('setParam','event_types', filters.event_types);
             $(window).url_fragment('setParam','tracks', filters.tracks);
@@ -304,7 +274,6 @@
         }
 
         clearFilters() {
-            $('#ddl_summit_types').val('').trigger("chosen:updated");
             $('#ddl_track_groups').val('').trigger("chosen:updated");
             $('#ddl_event_types').val('').trigger("chosen:updated");
             $('#ddl_tracks').val('').trigger("chosen:updated");

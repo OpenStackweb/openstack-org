@@ -45,7 +45,6 @@ class SummitEvent extends DataObject implements ISummitEvent
 
     private static $many_many = array
     (
-        'AllowedSummitTypes' => 'SummitType',
         'Sponsors'           => 'Company',
         'Tags'               => 'Tag',
     );
@@ -57,16 +56,16 @@ class SummitEvent extends DataObject implements ISummitEvent
 
     private static $has_one = array
     (
-        'Location'          => 'SummitAbstractLocation',
-        'Summit'            => 'Summit',
-        'Type'              => 'SummitEventType',
-        'RSVPTemplate'      => 'RSVPTemplate',
+        'Location'       => 'SummitAbstractLocation',
+        'Summit'         => 'Summit',
+        'Type'           => 'SummitEventType',
+        'RSVPTemplate'   => 'RSVPTemplate',
+        'Category'       => 'PresentationCategory',
     );
 
     private static $summary_fields = array
     (
         'Title'                  => 'Event Title',
-        'SummitTypesLabel'       => 'Summit Types',
         'StartDate'              => 'Event Start Date',
         'EndDate'                => 'Event End Date',
         'Location.Name'          => 'Location',
@@ -82,7 +81,6 @@ class SummitEvent extends DataObject implements ISummitEvent
         foreach($this->RSVPSubmissions() as $e){
             $e->delete();
         }
-        $this->AllowedSummitTypes()->removeAll();
         $this->Sponsors()->removeAll();
         $this->Tags()->removeAll();
         $this->Attendees()->removeAll();
@@ -110,15 +108,6 @@ class SummitEvent extends DataObject implements ISummitEvent
 
     public function getTitleAndTime(){
         return sprintf("%s (%s)", $this->getTitle(), $this->getDateNice());
-    }
-
-    public function SummitTypesLabel()
-    {
-        $label =  '';
-        foreach($this->AllowedSummitTypes() as $st)
-            $label .= $st->Title. ' ';
-        if(empty($label)) $label = 'NOT SET';
-        return $label;
     }
 
     public function getShortDescription(){
@@ -278,23 +267,6 @@ class SummitEvent extends DataObject implements ISummitEvent
     }
 
     /**
-     * @return ISummitType[]
-     */
-    public function getAllowedSummitTypes()
-    {
-        return AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'AllowedSummitTypes')->toArray();
-    }
-
-    public function isAllowedSummitType($summit_type_id) {
-        $allowed_summits = $this->getAllowedSummitTypes();
-        foreach ($allowed_summits as $summit_type) {
-            if ($summit_type->ID == $summit_type_id) return 1;
-        }
-
-        return 0;
-    }
-
-    /**
      * @return ISummit
      */
     public function getSummit()
@@ -355,23 +327,6 @@ class SummitEvent extends DataObject implements ISummitEvent
     }
 
     /**
-     * @param ISummitType $summit_type
-     * @return void
-     */
-    public function addAllowedSummitType(ISummitType $summit_type)
-    {
-        AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'AllowedSummitTypes')->add($summit_type);
-    }
-
-    /**
-     * @return void
-     */
-    public function clearAllAllowedSummitTypes()
-    {
-        AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'AllowedSummitTypes')->removeAll();
-    }
-
-    /**
      * @param ISummitEventFeedBack $feedback
      * @return void
      */
@@ -411,6 +366,9 @@ class SummitEvent extends DataObject implements ISummitEvent
         $f->addFieldToTab('Root.Main', new HtmlEditorField('Description','Description'));
         $f->addFieldToTab('Root.Main', new HtmlEditorField('ShortDescription','Abstract'));
         $f->addFieldToTab('Root.Main', new TextField('HeadCount','HeadCount'));
+        $f->addFieldToTab('Root.Main', $ddl_track = new DropdownField('CategoryID','Category', PresentationCategory::get()->filter('SummitID', $summit_id)->map('ID', 'Title')));
+
+        $ddl_track->setEmptyString("-- Select a Category --");
 
         $f->tag('Tags', 'Tags', Tag::get(), $this->Tags())->configure()
         ->setTitleField('Tag')
@@ -468,15 +426,6 @@ class SummitEvent extends DataObject implements ISummitEvent
 
         if($this->ID > 0)
         {
-
-            // summits types
-            $config = new GridFieldConfig_RelationEditor(100);
-            $config->removeComponentsByType('GridFieldEditButton');
-            $config->removeComponentsByType('GridFieldAddNewButton');
-            $completer = $config->getComponentByType('GridFieldAddExistingAutocompleter');
-            $completer->setSearchList(SummitType::get()->filter('SummitID', $summit_id));
-            $summit_types = new GridField('AllowedSummitTypes', 'Summit Types', $this->AllowedSummitTypes(), $config);
-            $f->addFieldToTab('Root.Main', $summit_types);
 
             // sponsors
             $config = new GridFieldConfig_RelationEditor(100);
@@ -562,9 +511,6 @@ class SummitEvent extends DataObject implements ISummitEvent
         {
             throw new EntityValidationException($validation_result->messageList());
         }
-
-        if(intval($this->AllowedSummitTypes()->count()) === 0)
-            throw new EntityValidationException('To publish this event you must associate a valid summit type!');
 
         $start_date = $this->getStartDate();
         $end_date   = $this->getEndDate();

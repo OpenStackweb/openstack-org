@@ -401,7 +401,7 @@ class PresentationSpeaker extends DataObject
             'SummitID' => $summit->ID
         ])
         ->exclude(['CreatorID' => $this->MemberID,])
-        ->where(" Presentation.CategoryID IN ({$categories_ids})");
+        ->where(" SummitEvent.CategoryID IN ({$categories_ids})");
     }
 
     /**
@@ -418,7 +418,7 @@ class PresentationSpeaker extends DataObject
         return Presentation::get()->filter([
             'CreatorID' => $this->MemberID,
             'SummitID' => $summit->ID
-        ])->where(" Presentation.CategoryID IN ({$categories_ids})");
+        ])->where(" SummitEvent.CategoryID IN ({$categories_ids})");
     }
 
     /**
@@ -436,7 +436,7 @@ class PresentationSpeaker extends DataObject
         return $this->Presentations()
             ->exclude(['CreatorID' => $this->MemberID])
             ->filter(['SummitID' => $summit->ID])
-            ->where(" Presentation.CategoryID IN ({$categories_ids})");
+            ->where(" SummitEvent.CategoryID IN ({$categories_ids})");
     }
 
     /**
@@ -454,7 +454,7 @@ class PresentationSpeaker extends DataObject
         return Presentation::get()->filter([
             'CreatorID' => $this->MemberID,
             'SummitID' => $summit->ID
-        ])->where(" Presentation.CategoryID IN ({$categories_ids})");
+        ])->where(" SummitEvent.CategoryID IN ({$categories_ids})");
     }
 
     /**

@@ -240,8 +240,11 @@ final class SummitService implements ISummitService
             $event->LocationID       = intval($event_data['location_id']);
             $event->TypeID           = $event_type_id;
 
-            $summit_types = ($event_data['summit_type']) ? $event_data['summit_type'] : array();
-            $event->AllowedSummitTypes()->setByIDList($summit_types);
+            $track = PresentationCategory::get()->byID(intval($event_data['track']));
+            if(is_null($track)) throw new NotFoundEntityException('Track');
+
+            $event->CategoryID = $track->ID;
+
             $tags = ($event_data['tags']) ? explode(',',$event_data['tags']) : array();
             $event->Tags()->setByIDList($tags);
             $sponsors = ($event_data['sponsors']) ? explode(',',$event_data['sponsors']) : array();
@@ -329,10 +332,6 @@ final class SummitService implements ISummitService
                 $event->ModeratorID = $moderator->ID;
             }
 
-            $track = PresentationCategory::get()->byID(intval($event_data['track']));
-            if(is_null($track)) throw new NotFoundEntityException('Track');
-
-            $event->CategoryID = $track->ID;
             $event->AttendeesExpectedLearnt = html_entity_decode($event_data['expect_learn']);
             $event->Level = $event_data['level'];
         }
@@ -422,8 +421,11 @@ final class SummitService implements ISummitService
             $event->LocationID       = intval($event_data['location_id']);
             $event->TypeID           = $event_type_id;
 
-            $summit_types = ($event_data['summit_type']) ? $event_data['summit_type'] : array();
-            $event->AllowedSummitTypes()->setByIDList($summit_types);
+            $track = PresentationCategory::get()->byID(intval($event_data['track']));
+            if(is_null($track)) throw new NotFoundEntityException('Track');
+
+            $event->CategoryID = $track->ID;
+
             $tags = ($event_data['tags']) ? explode(',',$event_data['tags']) : array();
             $event->Tags()->setByIDList($tags);
             $sponsors = ($event_data['sponsors']) ? explode(',',$event_data['sponsors']) : array();

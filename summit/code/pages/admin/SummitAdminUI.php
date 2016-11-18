@@ -28,9 +28,14 @@ final class SummitAdminUI extends DataExtension
      */
     private static $summary_fields = array
     (
-        'Title'  => 'Title',
-        'Status' => 'Status',
+        'Title'         => 'Title',
+        'Status'        => 'Status',
+        'FriendlyType'  => 'Type'
     );
+
+    public function getFriendlyType(){
+        return $this->owner->TypeID > 0 ? $this->owner->Type()->Type : 'NOT SET';
+    }
 
     public function updateCMSFields(FieldList $f) {
         //clear all fields
@@ -56,6 +61,9 @@ final class SummitAdminUI extends DataExtension
 
         $f->addFieldToTab('Root.Main', new TextField('Title', 'Title'));
         $f->addFieldToTab('Root.Main', $link = new TextField('Link', 'Summit Page Link'));
+
+        $f->addFieldsToTab('Root.Main', $ddl_type = new DropdownField('TypeID', 'Type', SummitType::get()->map('ID', 'FriendlyName')));
+        $ddl_type->setEmptyString('--SELECT A SUMMIT TYPE --');
 
         $link->setDescription('The link to the site page for this summit. Eg: <em>/summit/vancouver-2015/</em>');
         $f->addFieldToTab('Root.Main', new CheckboxField('Active', 'This is the active summit'));
@@ -195,13 +203,6 @@ final class SummitAdminUI extends DataExtension
                 $this->owner->Locations()->where("ClassName <> 'SummitVenueRoom' "), $config);
             $f->addFieldToTab('Root.Locations', $gridField);
 
-            // types
-
-            $config = GridFieldConfig_RecordEditor::create();
-            $config->addComponent(new GridFieldAddDefaultSummitTypes);
-            $gridField = new GridField('SummitTypes', 'SummitTypes', $this->owner->Types(), $config);
-            $f->addFieldToTab('Root.SummitTypes', $gridField);
-
             // event types
             $config = GridFieldConfig_RecordEditor::create();
             $config->addComponent(new GridFieldAddDefaultEventTypes);
@@ -230,8 +231,7 @@ final class SummitAdminUI extends DataExtension
             $config = GridFieldConfig_RecordEditor::create(25);
             $config->addComponent(new GridFieldPublishSummitEventAction);
             $config->addComponent(new GridFieldAjaxRefresh(1000, false));
-            $config->addComponent($bulk_summit_types = new GridFieldBulkActionAssignSummitTypeSummitEvents);
-            $bulk_summit_types->setTitle('Set Summit Type');
+
             $gridField = new GridField('Events', 'Events', $this->owner->Events()->filter('ClassName', 'SummitEvent'),
                 $config);
             $config->getComponentByType("GridFieldDataColumns")->setFieldCasting(array("Description" => "HTMLText->BigSummary"));
@@ -292,8 +292,7 @@ final class SummitAdminUI extends DataExtension
             $config = GridFieldConfig_RecordEditor::create(25);
             $config->addComponent(new GridFieldPublishSummitEventAction);
             $config->addComponent(new GridFieldAjaxRefresh(1000, false));
-            $config->addComponent($bulk_summit_types = new GridFieldBulkActionAssignSummitTypeSummitEvents);
-            $bulk_summit_types->setTitle('Set Summit Type');
+
             $gridField = new GridField('Presentations', 'Presentations',
                 $this->owner->Presentations()->where(" Title IS NOT NULL AND Title <>'' "), $config);
             $config->getComponentByType("GridFieldDataColumns")->setFieldCasting(array("Description" => "HTMLText->BigSummary"));

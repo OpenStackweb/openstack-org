@@ -180,16 +180,16 @@ WHEN SummitSelectedPresentation.`Order` <= PresentationCategory.SessionCount THE
 ELSE 'alternate' END AS SelectionStatus
 FROM SummitEvent
 INNER JOIN Presentation  ON Presentation.ID = SummitEvent.ID
-INNER JOIN PresentationCategory ON PresentationCategory.ID = Presentation.CategoryID
+INNER JOIN PresentationCategory ON PresentationCategory.ID = SummitEvent.CategoryID
 LEFT JOIN SummitSelectedPresentation ON SummitSelectedPresentation.PresentationID = Presentation.ID
-LEFT JOIN SummitSelectedPresentationList ON SummitSelectedPresentation.SummitSelectedPresentationListID = SummitSelectedPresentationList.ID AND (ListType = 'Group') AND SummitSelectedPresentationList.CategoryID =  Presentation.CategoryID
+LEFT JOIN SummitSelectedPresentationList ON SummitSelectedPresentation.SummitSelectedPresentationListID = SummitSelectedPresentationList.ID AND (ListType = 'Group') AND SummitSelectedPresentationList.CategoryID =  SummitEvent.CategoryID
 WHERE
 SummitEvent.Title IS NOT NULL
 AND SummitEvent.Title <>''
 AND SummitEvent.SummitID = {$summit_id}
 AND SummitEvent.Published = 0
 AND SummitSelectedPresentationList.ListType = 'Group'
-AND SummitSelectedPresentationList.CategoryID = Presentation.CategoryID
+AND SummitSelectedPresentationList.CategoryID = SummitEvent.CategoryID
 {$filter}
 ) AS P {$selection_status_filter}
 SQL;
@@ -214,7 +214,7 @@ WHEN SummitSelectedPresentation.`Order` <= PresentationCategory.SessionCount THE
 ELSE 'alternate' END AS SelectionStatus
 FROM SummitEvent
 INNER JOIN Presentation  ON Presentation.ID = SummitEvent.ID
-INNER JOIN PresentationCategory ON PresentationCategory.ID = Presentation.CategoryID
+INNER JOIN PresentationCategory ON PresentationCategory.ID = SummitEvent.CategoryID
 LEFT JOIN SummitSelectedPresentation ON SummitSelectedPresentation.PresentationID = Presentation.ID
 LEFT JOIN SummitSelectedPresentationList ON SummitSelectedPresentation.SummitSelectedPresentationListID = SummitSelectedPresentationList.ID
 WHERE
@@ -223,7 +223,7 @@ AND SummitEvent.Title <>''
 AND SummitEvent.SummitID = {$summit_id}
 AND SummitEvent.Published = 0
 AND SummitSelectedPresentationList.ListType = 'Group'
-AND SummitSelectedPresentationList.CategoryID = Presentation.CategoryID
+AND SummitSelectedPresentationList.CategoryID = SummitEvent.CategoryID
 {$filter}
 ORDER BY {$order}
 ) AS P  {$selection_status_filter} LIMIT {$offset}, {$page_size}
@@ -325,7 +325,7 @@ FROM SummitEvent AS E
 INNER JOIN Presentation ON Presentation.ID = E.ID
 INNER JOIN Presentation_Speakers ON Presentation_Speakers.PresentationID = Presentation.ID
 INNER JOIN PresentationSpeaker AS S ON S.ID = Presentation_Speakers.PresentationSpeakerID
-INNER JOIN PresentationCategory  ON PresentationCategory.ID = Presentation.CategoryID
+INNER JOIN PresentationCategory  ON PresentationCategory.ID = SummitEvent.CategoryID
 LEFT JOIN Member ON Member.ID = S.MemberID
 LEFT JOIN SpeakerRegistrationRequest ON SpeakerRegistrationRequest.SpeakerID = S.ID
 LEFT JOIN PresentationSpeakerSummitAssistanceConfirmationRequest AS ACR ON ACR.SpeakerID = S.ID AND ACR.SummitID = {$summit_id}
@@ -440,7 +440,7 @@ SQL;
 
         if ($tracks && $tracks != 'all') {
             $query .= <<<SQL
- AND P.CategoryID IN ( {$tracks} )
+ AND E.CategoryID IN ( {$tracks} )
 SQL;
         }
 
@@ -490,7 +490,7 @@ SQL;
         $query_body = <<<SQL
             FROM SummitEvent AS E
             INNER JOIN Presentation AS P ON E.ID = P.ID
-            INNER JOIN PresentationCategory AS PC ON P.CategoryID = PC.ID
+            INNER JOIN PresentationCategory AS PC ON E.CategoryID = PC.ID
             INNER JOIN Presentation_Speakers AS PS ON PS.PresentationID = P.ID
             INNER JOIN PresentationSpeaker AS S ON PS.PresentationSpeakerID = S.ID
             LEFT JOIN SpeakerRegistrationRequest AS SR ON SR.SpeakerID = S.ID

@@ -95,12 +95,6 @@
                         <div class="info_item_text">Level: $Event.Level</div>
                     </div>
                 <% end_if %>
-                <% if Event.isAllowedSummitType("DESIGN") == 1 %>
-                    <div class="info_item">
-                        <div class="info_item_icon"><img style="height:15px" src="/summit/images/summitapp/credential.png" /></div>
-                        <div class="info_item_text">Design Summit Credential</div>
-                    </div>
-                <% end_if %>
                 <% if $Event.Tags %>
                     <div class="info_item">
                         <div class="info_item_icon"><i class="fa fa-tags"></i></div>

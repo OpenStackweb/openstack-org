@@ -56,7 +56,8 @@ class SapphireSummitEventRepository extends SapphireRepository implements ISummi
                 AND EXISTS
                 (
                     SELECT P.ID FROM Presentation P
-                    LEFT JOIN PresentationCategory PC ON PC.ID = P.CategoryID
+                    INNER JOIN SummitEvent E2 ON E2.ID = P.ID                   
+                    LEFT JOIN PresentationCategory PC ON PC.ID = E2.CategoryID
                     WHERE  P.ID = E.ID AND PC.Title LIKE '%{$term}%'
                 )
             UNION SELECT DISTINCT E.* FROM SummitEvent E LEFT JOIN SummitEventType ET ON ET.ID = E.TypeID
@@ -272,7 +273,8 @@ SQL;
                 AND EXISTS
                 (
                     SELECT P.ID FROM Presentation P
-                    LEFT JOIN PresentationCategory PC ON PC.ID = P.CategoryID
+                    INNER JOIN SummitEvent E2 ON E2.ID = P.ID                   
+                    LEFT JOIN PresentationCategory PC ON PC.ID = E2.CategoryID
                     WHERE  P.ID = E.ID AND PC.Title LIKE '%{$term}%'
                 )
             UNION SELECT DISTINCT E.* FROM SummitEvent E LEFT JOIN SummitEventType ET ON ET.ID = E.TypeID

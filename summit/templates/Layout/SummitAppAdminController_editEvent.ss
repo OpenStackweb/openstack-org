@@ -104,20 +104,12 @@
                             <% end_loop %>
                         </select>
                     </div>
-                    <div class="col-md-3">
-                        <label for="summit_type">Summit Type</label>
-                        <select class="form-control" id="summit_type" name="summit_type" multiple>
-                            <% loop Summit.Types() %>
-                                <option value="$ID" <% if $Top.Event.isAllowedSummitType($ID) %> selected <% end_if %>>$Title</option>
-                            <% end_loop %>
-                        </select>
-                    </div>
-                    <div class="col-md-3 track_container" style="display:none">
+                    <div class="col-md-3 track_container">
                         <label for="track">Track</label>
                         <select class="form-control" id="track" name="track">
                             <option value="">-- Select a Track --</option>
                             <% loop Summit.getCategories %>
-                                <option value="$ID" <% if $Top.Event.isPresentation() && $Top.Event.CategoryID == $ID %> selected <% end_if %>>$Title</option>
+                                <option value="$ID" <% if $Top.Event.CategoryID == $ID %> selected <% end_if %>>$Title</option>
                             <% end_loop %>
                         </select>
                     </div>
@@ -262,7 +254,6 @@
             <% if $Top.Event %>
                 <% if $Top.Event.Type.Type == 'Presentation' || $Top.Event.Type.Type == 'Keynotes' || $Top.Event.Type.Type == 'Panel' %>
                     $('.speakers_container').show();
-                    $('.track_container').show();
                     $('.level_container').show();
                     $('#expect_learn_container').show();
                 <% end_if %>

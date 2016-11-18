@@ -70,8 +70,6 @@ class SummitSelectedPresentationList extends DataObject
             $config->addComponent(new GridFieldPublishSummitEventAction);
             $config->removeComponentsByType('GridFieldDeleteAction');
             $config->removeComponentsByType('GridFieldAddNewButton');
-            $config->addComponent($bulk_summit_types = new GridFieldBulkActionAssignSummitTypeSummitEvents);
-            $bulk_summit_types->setTitle('Set Summit Types');
 
             $result = DB::query("SELECT DISTINCT SummitEvent.*, Presentation.*
 FROM SummitEvent

@@ -50,6 +50,7 @@ final class Summit extends DataObject implements ISummit
     private static $has_one = array
     (
         'Logo' => 'BetterImage',
+        'Type' => 'SummitType',
     );
 
     private static $has_many = array
@@ -58,7 +59,6 @@ final class Summit extends DataObject implements ISummit
         'Categories'                   => 'PresentationCategory',
         'CategoryGroups'               => 'PresentationCategoryGroup',
         'Locations'                    => 'SummitAbstractLocation',
-        'Types'                        => 'SummitType',
         'EventTypes'                   => 'SummitEventType',
         'Events'                       => 'SummitEvent',
         'Attendees'                    => 'SummitAttendee',
@@ -439,7 +439,6 @@ final class Summit extends DataObject implements ISummit
         parent::onAfterWrite();
         if ($this->must_seed) {
             self::seedBasicEventTypes($this->ID);
-            self::seedSummitTypes($this->ID);
         }
     }
 
@@ -663,30 +662,7 @@ final class Summit extends DataObject implements ISummit
         AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'EventTypes')->add($event_type);
     }
 
-    /**
-     * @return ISummitType[]
-     */
-    public function getTypes()
-    {
-        return AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Types');
-    }
 
-    /**
-     * @param ISummitType $type
-     * @return void
-     */
-    public function addType(ISummitType $type)
-    {
-        AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Types')->add($type);
-    }
-
-    /**
-     * @return void
-     */
-    public function clearAllTypes()
-    {
-        AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Types')->removeAll();
-    }
 
     /**
      * @return ISummitAirport[]
@@ -945,41 +921,6 @@ final class Summit extends DataObject implements ISummit
      * @throws ValidationException
      * @throws null
      */
-    public static function seedSummitTypes($summit_id)
-    {
-        $summit = Summit::get()->byID($summit_id);
-
-        if (!SummitType::get()->filter(array('Title' => 'Main Conference', 'SummitID' => $summit_id))->first()) {
-            $main_type = new SummitType();
-            $main_type->Title = 'Main Conference';
-            $main_type->Description = 'This Schedule is for general attendees. Its includes breakout tracks, hand-ons labs, keynotes and sponsored sessions';
-            $main_type->Audience = 'General Attendees';
-            $main_type->SummitID = $summit_id;
-            $main_type->StartDate = $summit->BeginDate;
-            $main_type->EndDate = $summit->EndDate;
-            $main_type->Type = 'MAIN';
-            $main_type->write();
-        }
-
-        if (!SummitType::get()->filter(array('Title' => 'Design Summit', 'SummitID' => $summit_id))->first()) {
-            $design_type = new SummitType();
-            $design_type->Title = 'Design Summit';
-            $design_type->Description = 'This Schedule is specifically for developers and operators who contribute to the roadmap for the N release cycle. The Design Summit is not a classic track with speakers and presentations and its not the right place to get started or learn the basics of OpenStack. This schedule also Includes the Main Conference Sessions';
-            $design_type->Audience = 'Developers And Operators';
-            $design_type->SummitID = $summit_id;
-            $design_type->StartDate = $summit->BeginDate;
-            $design_type->EndDate = $summit->EndDate;
-            $design_type->Type = 'DESIGN';
-            $design_type->write();
-        }
-
-    }
-
-    /**
-     * @param int $summit_id
-     * @throws ValidationException
-     * @throws null
-     */
     public static function seedBasicEventTypes($summit_id)
     {
         if (!SummitEventType::get()->filter(array('Type' => 'Presentation', 'SummitID' => $summit_id))->first()) {
@@ -1190,7 +1131,6 @@ SQL;
             $list->write();
             $i++;
         }
-
     }
 
     public function VoteablePresentations()

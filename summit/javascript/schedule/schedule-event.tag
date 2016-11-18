@@ -43,11 +43,11 @@
                     <div class="row">
                         <div class="col-xs-7 col-track">
                             <span if={ track_id} class="track">
-                                <a class="search-link" title="Search Track" href="{ parent.search_url+'?t='+trackName().replace(/ /g,'+') }">{ trackName() }</a>
+                                <a class="search-link" title="Search Track" href="{ parent.search_url+'?t='+encodeURIComponent(trackName().replace(/ /g,'+')) }">{ trackName() }</a>
                             </span>
                         </div>
                         <div class="col-xs-5 event-type-col">
-                            <a class="search-link" title="Search Event Type" href="{ parent.search_url+'?t='+summit.event_types[type_id].type.replace(/ /g,'+') }">{ summit.event_types[type_id].type }</a>
+                            <a class="search-link" title="Search Event Type" href="{ parent.search_url+'?t='+encodeURIComponent(summit.event_types[type_id].type.replace(/ /g,'+')) }">{ summit.event_types[type_id].type }</a>
                         </div>
                     </div>
                 </div>
@@ -125,15 +125,6 @@
             sponsors += s.name;
         }
         return sponsors;
-    }
-
-    hasDesignCredentials(summit_types_id) {
-        for(var id of summit_types_id)
-        {
-            var t = self.summit.summit_types[id];
-            if(t.type === 'DESIGN') return true;
-        }
-        return false;
     }
 
     eventColor(category_group_ids, type_id) {

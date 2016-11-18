@@ -31,11 +31,6 @@ class SummitTicketType extends DataObject implements ISummitTicketType
         'Summit' => 'Summit'
     );
 
-    private static $many_many = array
-    (
-        'AllowedSummitTypes' => 'SummitType'
-    );
-
     private static $has_many = array
     (
 
@@ -56,10 +51,7 @@ class SummitTicketType extends DataObject implements ISummitTicketType
     (
     );
 
-    public function getAllowedSummitTypesBySummit($summit_id)
-    {
-        return SummitType::get()->filter(array ('SummitID'=> $summit_id ) );
-    }
+
 
     // CMS admin UI
     public function getCMSFields()
@@ -73,18 +65,7 @@ class SummitTicketType extends DataObject implements ISummitTicketType
                 new TextField('ExternalId', 'Eventbrite External Id'),
             )
         );
-        if($this->ID > 0) {
-            // summit types
-            $summit_id = $this->SummitID;
-            $config = GridFieldConfig_RelationEditor::create();
-            $config->removeComponentsByType('GridFieldEditButton');
-            $config->removeComponentsByType('GridFieldAddNewButton');
-            $list = $this->getAllowedSummitTypesBySummit($summit_id);
-            $config->getComponentByType('GridFieldAddExistingAutocompleter')->setSearchList($list);
-            $gridField = new GridField('AllowedSummitTypes', 'AllowedSummitTypes',
-                $this->AllowedSummitTypes()->where("SummitID = {$summit_id} "), $config);
-            $f->add($gridField);
-        }
+
         return $f;
     }
 

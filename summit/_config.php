@@ -233,21 +233,6 @@ PublisherSubscriberManager::getInstance()->subscribe('manymanylist_added_item', 
         $event->Metadata = json_encode( array('event_id' => $presentation_id ));
         $event->write();
     }
-    if($item instanceof SummitType && $list->getJoinTable() === 'SummitEvent_AllowedSummitTypes')
-    {
-        $event_id     = intval($list->getForeignID());
-        $summit_event = SummitEvent::get()->byID($event_id);
-        if(is_null($summit_event)) return;
-        $summit_type_id  = $item->ID;
-        $event = new SummitEntityEvent();
-        $event->EntityClassName = 'SummitTypeFromEvent';
-        $event->EntityID = $summit_type_id;
-        $event->Type     = 'INSERT';
-        $event->OwnerID  = Member::currentUserID();
-        $event->SummitID = $summit_event->SummitID;
-        $event->Metadata = json_encode( array('event_id' => $event_id ));
-        $event->write();
-    }
     if($item instanceof PresentationCategory && $list->getJoinTable() === 'PresentationCategoryGroup_Categories')
     {
         $group_id  = intval($list->getForeignID());
@@ -316,22 +301,6 @@ PublisherSubscriberManager::getInstance()->subscribe('manymanylist_removed_item'
         $event->OwnerID  = Member::currentUserID();
         $event->SummitID = $presentation->SummitID;
         $event->Metadata = json_encode( array('event_id' => $presentation_id ));
-        $event->write();
-    }
-    if($item instanceof SummitType && $list->getJoinTable() === 'SummitEvent_AllowedSummitTypes')
-    {
-        // removed summit type from event
-        $event_id     = intval($list->getForeignID());
-        $summit_event = SummitEvent::get()->byID($event_id);
-        if(is_null($summit_event)) return;
-        $summit_type_id  = $item->ID;
-        $event = new SummitEntityEvent();
-        $event->EntityClassName = 'SummitTypeFromEvent';
-        $event->EntityID = $summit_type_id;
-        $event->Type     = 'DELETE';
-        $event->OwnerID  = Member::currentUserID();
-        $event->SummitID = $summit_event->SummitID;
-        $event->Metadata = json_encode( array('event_id' => $event_id ));
         $event->write();
     }
     if($item instanceof PresentationCategory && $list->getJoinTable() === 'PresentationCategoryGroup_Categories')

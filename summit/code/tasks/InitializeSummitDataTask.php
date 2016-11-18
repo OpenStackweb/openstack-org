@@ -52,7 +52,7 @@ class InitializeSummitDataTask extends BuildTask
         $summit->write();
 
         Summit::seedBasicEventTypes($summit_id);
-        Summit::seedSummitTypes($summit_id);
+
 
         $client   = new GuzzleHttp\Client();
 

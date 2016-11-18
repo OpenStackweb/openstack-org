@@ -78,22 +78,6 @@ interface ISummitEvent extends IEntity
     public function setType(ISummitEventType $type);
 
     /**
-     * @return ISummitType[]
-     */
-    public function getAllowedSummitTypes();
-
-    /**
-     * @param ISummitType $summit_type
-     * @return void
-     */
-    public function addAllowedSummitType(ISummitType $summit_type);
-
-    /**
-     * @return void
-     */
-    public function clearAllAllowedSummitTypes();
-
-    /**
      * @return ISummit
      */
     public function getSummit();

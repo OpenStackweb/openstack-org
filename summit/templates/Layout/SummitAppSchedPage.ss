@@ -12,7 +12,6 @@
             year: "{$Summit.getSummitYear().JS}",
             dates : {},
             events: {},
-            summit_types: {},
             speakers : {},
             sponsors : {},
             event_types:{},
@@ -81,16 +80,6 @@
             color : "{$FormattedColor}",
         };
         summit.event_type_ids.push($ID);
-        <% end_loop %>
-
-        <% loop $Summit.Types %>
-        summit.summit_types[{$ID}] =
-        {
-           type: "{$Type}",
-           name : "{$Title.JS}",
-           description : "{$Description.JS}",
-           color : "{$FormattedColor}"
-        };
         <% end_loop %>
 
         <% loop $Summit.CategoryGroups.Sort(Name, ASC)  %>

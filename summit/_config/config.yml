@@ -77,9 +77,6 @@ SummitAbstractLocation:
   extensions:
     - SummitEntity
     - SummitLocationOpenGraphObjectExtension
-SummitType:
-  extensions:
-    - SummitEntity
 SummitTicketType:
   extensions:
     - SummitEntity

@@ -182,7 +182,6 @@ class Presentation extends SummitEvent implements IPresentation
     private static $has_one = array
     (
         'Creator'   => 'Member',
-        'Category'  => 'PresentationCategory',
         'Moderator' => 'PresentationSpeaker',
     );
 
@@ -191,10 +190,9 @@ class Presentation extends SummitEvent implements IPresentation
      */
     private static $summary_fields = array
     (
-        'Created' => 'Created',
-        'Title' => 'Event Title',
-        'SummitTypesLabel' => 'Summit Types',
-        'Level' => 'Level',
+        'Created'         => 'Created',
+        'Title'           => 'Event Title',
+        'Level'           => 'Level',
         'SelectionStatus' => 'Status',
     );
 
@@ -468,7 +466,6 @@ class Presentation extends SummitEvent implements IPresentation
         $f = parent::getCMSFields();
         $f->removeByName('TypeID');
         $f->dropdown('Level', 'Level', $this->dbObject('Level')->enumValues())
-            ->dropdown('CategoryID', 'Category', PresentationCategory::get()->map('ID', 'Title'))
             ->listbox('Topics', 'Topics', PresentationTopic::get()->map('ID', 'Title')->toArray())
             ->configure()
             ->setMultiple(true)

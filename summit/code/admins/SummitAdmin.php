@@ -9,6 +9,7 @@ class SummitAdmin extends ModelAdmin implements PermissionProvider
     private static $managed_models = array
     (
         'Summit',
+        'SummitType',
     );
 
     public function init()

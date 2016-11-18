@@ -12,15 +12,6 @@
  **/
 
 $(document).ready(function(){
-    $('.summit_type_filter').click(function(){
-        toggleCheckboxButton($(this));
-        applyFilters();
-    });
-
-    $('.summit_event_type_filter').change(function(){
-        applyFilters();
-
-    });
 
     $('.switch_schedule').mouseup(function(){
         $(this).blur();
@@ -41,42 +32,19 @@ $(document).ready(function(){
         getSchedule(filters);
     });
 
-    var filters = getScheduleFilters('public');
-    if (filters.summit_types) {
-        getSchedule(filters);
-    }
-
 });
 
 // this function arranges the filters to filter the events from the server side
 function getScheduleFilters(source) {
-    var summit_type_ids = '';
-    $('.summit_type_filter').each(function(){
-        if ($(this).hasClass('checked')) {
-            summit_type_ids += $(this).data('summit_type_id')+',';
-        }
-    });
 
-    summit_type_ids = summit_type_ids.slice(0, -1);
 
-    var filters = {summit_types: summit_type_ids, summit_source: source, event_type: $('.summit_event_type_filter').val()};
+    var filters = { summit_source: source, event_type: $('.summit_event_type_filter').val()};
     return filters;
 }
 
 function applyFilters() {
     // first we show all
     $('.event').show();
-
-    // hide all events with a summit type
-    $('.summit_type_filter').each(function(){
-        $('.summit_type_'+$(this).data('summit_type_id')).hide();
-    });
-    //show events for summit type checked
-    $('.summit_type_filter').each(function(){
-        if ($(this).hasClass('checked')) {
-            $('.summit_type_'+$(this).data('summit_type_id')).show();
-        }
-    });
 
     // apply event type filter
     var event_type_id = $('.summit_event_type_filter').val();
@@ -143,7 +111,7 @@ function renderEvent(event){
     var directives = {
         'div.event@id+'        : 'ID',
         'div.event@style'      : function(a){ return (this.EventType.Color) ? 'background-color:#'+this.EventType.Color : '';},
-        'div.event@class+'     : function(a){ return this.SummitTypes+' event_type_'+this.EventType.ID;},
+        'div.event@class+'     : function(a){ return ' event_type_'+this.EventType.ID;},
         'span.event_type'      : 'EventType.Type',
         'a.event_title'        : 'Title',
         'a.event_title@href'   : 'EventLink',

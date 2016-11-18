@@ -339,10 +339,10 @@
                     if(typeof track_id !== "undefined"){
                         track_name = self.summit.tracks[track_id].name;
                     }
-                    return track_name != '' ? self.search_url+'?t='+track_name.replace(/ /g,'+') : '';
+                    return track_name != '' ? self.search_url+'?t='+encodeURIComponent(track_name.replace(/ /g,'+')) : '';
                 },
                 'a.event-type-search-link': function(arg){ return self.summit.event_types[arg.item.type_id].type; },
-                'a.event-type-search-link@href': function(arg){ return self.search_url+'?t='+self.summit.event_types[arg.item.type_id].type.replace(/ /g,'+')  },
+                'a.event-type-search-link@href': function(arg){ return self.search_url+'?t='+encodeURIComponent(self.summit.event_types[arg.item.type_id].type.replace(/ /g,'+'))  },
             };
 
             if(self.show_date){
@@ -403,15 +403,11 @@
         });
 
         isFilterEmpty() {
-            return self.isSummitTypesFilterEmpty() && self.isTrackGroupsFilterEmpty() && self.isEventTypesFilterEmpty() && self.isTracksFilterEmpty() && self.isLevelsFilterEmpty() && self.isTagsFilterEmpty() && self.isMyScheduleFilterEmpty();
+            return self.isTrackGroupsFilterEmpty() && self.isEventTypesFilterEmpty() && self.isTracksFilterEmpty() && self.isLevelsFilterEmpty() && self.isTagsFilterEmpty() && self.isMyScheduleFilterEmpty();
         }
 
         isEventTypesFilterEmpty() {
             return (self.current_filter.event_types === null || self.current_filter.event_types.length === 0);
-        }
-
-        isSummitTypesFilterEmpty() {
-            return (self.current_filter.summit_types === null || self.current_filter.summit_types.length === 0);
         }
 
         isTrackGroupsFilterEmpty() {
@@ -453,9 +449,6 @@
             if(!self.isFilterEmpty()){
                 for(var e of self.events){
                     var show = true;
-                    //summit types
-                    if(!self.isSummitTypesFilterEmpty())
-                        show &= e.summit_types_id.some(function(v) { return self.current_filter.summit_types.indexOf(v.toString()) != -1; });
                     //track groups
                     if(!self.isTrackGroupsFilterEmpty())
                         show &= e.hasOwnProperty('track_id') ? self.current_filter.track_groups.some(function(v) { return self.summit.category_groups[parseInt(v)].tracks.indexOf(parseInt(e.track_id)) != -1; }) : false;
