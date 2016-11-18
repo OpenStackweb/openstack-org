@@ -26,7 +26,7 @@
                             </div>
                     <% end_if %>
                     <div class="landing-action">
-                        <a href="/summit/barcelona-2016/" class="btn register-btn-lrg">JOIN US <i class="fa fa-chevron-right"></i></a>
+                        <a href="/summit/boston-2017/" class="btn register-btn-lrg">JOIN US <i class="fa fa-chevron-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -51,7 +51,7 @@
 
             <% with $PreviousSummit %>
             <div class="col-sm-3 col-sm-pull-6 small-single-summit">
-                <a href="/videos/summits/show/7" class="single-summit past-summit">
+                <a href="/videos/summits/barcelona-2016" class="single-summit past-summit">
                     <h2>Barcelona</h2>
                     <h4>Watch The Sessions!</h4>
                 </a>
@@ -64,7 +64,7 @@
             
             <% with $NextSummit %>
             <div class="col-sm-3 small-single-summit">
-                <a href="summit/sydney-2017/" class="single-summit future-summit">
+                <a href="/summit/sydney-2017/" class="single-summit future-summit">
                     <h2>Sydney</h2>
                     <h4>Get Ready</h4>
                 </a>
