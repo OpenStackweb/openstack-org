@@ -79,8 +79,8 @@ class SummitVideoAppBackend
 
                 if ($track) {
                     $videos = $videos
-                        ->innerJoin('Presentation', 'Presentation.ID = PresentationMaterial.PresentationID')
-                        ->filter('Presentation.CategoryID', $track->ID);
+                        ->innerJoin('SummitEvent', 'SummitEvent.ID = PresentationMaterial.PresentationID')
+                        ->filter('SummitEvent.CategoryID', $track->ID);
                 } else {
                     $videos = ArrayList::create();
                 }
@@ -115,7 +115,7 @@ class SummitVideoAppBackend
                         'Presentation_Speakers.PresentationID = Presentation.ID')
                     ->innerJoin('PresentationSpeaker',
                         'PresentationSpeaker.ID = Presentation_Speakers.PresentationSpeakerID')
-                    ->leftJoin('PresentationCategory', 'PresentationCategory.ID = Presentation.CategoryID');
+                    ->leftJoin('PresentationCategory', 'PresentationCategory.ID = SummitEvent.CategoryID');
 
                 $search = trim($criteria);
                 $parts = preg_split('/\s+/', $criteria);
