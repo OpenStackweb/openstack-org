@@ -194,7 +194,7 @@
                             <h5>Abstract</h5>
                             </p>
 
-                            <div>$ShortDescription</div>
+                            <div>$Abstract</div>
 
                             <p>
                             <h5>Problems Addressed</h5>

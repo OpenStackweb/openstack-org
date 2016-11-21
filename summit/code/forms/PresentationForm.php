@@ -86,9 +86,14 @@ final class PresentationForm extends BootstrapForm
                     ->setSource(Presentation::create()->dbObject('Level')->enumValues())
                 ->end()
             ->literal('AbstractHelp','<hr/><p>YouTube and other services limit the length of your presentation\'s description. We will take the first 100 characters of your abstract to display in the YouTube description.</p>')
-            ->tinyMCEEditor('ShortDescription','Abstract (1000 chars)')
+            ->tinyMCEEditor('Abstract','Abstract (1000 chars)')
                 ->configure()
                     ->setRows(20)
+                    ->setColumns(8)
+                ->end()
+            ->textArea('SocialSummary', 'Social Summary (100 chars)')
+                ->configure()
+                    ->setRows(10)
                     ->setColumns(8)
                 ->end()
             ->tinyMCEEditor('ProblemAddressed','What is the problem or use case you’re addressing in this session? (1000 chars)')
@@ -114,7 +119,6 @@ final class PresentationForm extends BootstrapForm
         $CategoryGroupField = new CategoryGroupField('GroupID','Select the <a href="'.$this->summit->Link.'categories" target="_blank">Summit Category</a> of your presentation');
         $CategoryGroupField->setSource($category_groups_map);
         $fields->insertAfter($CategoryGroupField,'TypeID');
-
         return $fields;
     }
 

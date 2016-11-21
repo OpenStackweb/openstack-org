@@ -153,7 +153,7 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
                 (
                     'id'          => intval($e->ID),
                     'title'       => $e->Title,
-                    'description' => !empty($e->Description)? $e->Description : $e->ShortDescription,
+                    'abstract'    => $e->Abstract,
                     'type_id'     => intval($e->TypeID),
                     'class_name'  => $e->ClassName,
                 );
@@ -236,7 +236,7 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
                 (
                     'id'          => intval($e->ID),
                     'title'       => $e->Title,
-                    'description' => !empty($e->Description)? $e->Description : $e->ShortDescription,
+                    'description' => $e->Abstract,
                     'type_id'     => intval($e->TypeID),
                     'class_name'  => $e->ClassName,
                 );
@@ -364,7 +364,7 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
                 HTMLCleanner::cleanData
                     (
                         $event_data,
-                        array('title', 'rsvp_link', 'short_description', 'expect_learn')
+                        array('title', 'rsvp_link', 'abstract', 'expect_learn')
                     )
             );
 
@@ -405,7 +405,7 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
                 HTMLCleanner::cleanData
                 (
                     $event_data,
-                    array('title', 'rsvp_link', 'short_description', 'expect_learn')
+                    array('title', 'rsvp_link', 'abstract', 'expect_learn')
                 )
             );
 

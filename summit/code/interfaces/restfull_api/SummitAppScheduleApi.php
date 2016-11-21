@@ -256,9 +256,8 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi
             (
                 'id' => intval($e->ID),
                 'title' => $e->Title,
-                'description' => $e->Description,
                 'class_name' => $e->ClassName,
-                'abstract' => $e->ShortDescription,
+                'abstract' => $e->Abstract,
                 'start_epoch' => strtotime($e->StartDate),
                 'start_datetime' => $e->StartDate,
                 'end_datetime' => $e->EndDate,
@@ -338,8 +337,7 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi
             (
                 'id' => $e->ID,
                 'title' => $e->Title,
-                'description' => $e->Description,
-                'short_desc' => $e->ShortDescription,
+                'abstract' => $e->Abstract,
                 'start_date' => date('Y-m-d', strtotime($e->StartDate)),
                 'start_datetime' => $e->StartDate,
                 'end_datetime' => $e->EndDate,
@@ -667,7 +665,7 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi
             }
 
             $subject = 'Fwd: ' . $event->Title;
-            $body = $event->Title . '<br>' . $event->ShortDescription . '<br><br>Check it out: ' . $event->getLink();
+            $body = $event->Title . '<br>' . $event->Abstract . '<br><br>Check it out: ' . $event->getLink();
 
             $email = EmailFactory::getInstance()->buildEmail($data['from'], $data['to'], $subject, $body);
             $email->send();
@@ -900,8 +898,8 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi
                     ->setDtEnd(new \DateTime($event->getEndDateUTC()))
                     ->setNoTime(false)
                     ->setSummary( $event->Title )
-                    ->setDescription(strip_tags($event->ShortDescription))
-                    ->setDescriptionHTML($event->ShortDescription);
+                    ->setDescription(strip_tags($event->Abstract))
+                    ->setDescriptionHTML($event->Abstract);
 
                 if($location = $event->getLocation()){
                     $venue = $location;

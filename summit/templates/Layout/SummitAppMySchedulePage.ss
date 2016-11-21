@@ -52,7 +52,7 @@
                     end_datetime : "{$getEndDate}",
                     time_zone_id: "{$Summit.TimeZoneName}",
                     title: "{$Title.JS}",
-                    description: "{$ShortDescription.JS}",
+                    description: "{$Abstract.JS}",
                     room: "{$getLocationNameNice.JS}",
                     total: $Attendees.Count(),
                     capacity: "{$LocationCapacity}",

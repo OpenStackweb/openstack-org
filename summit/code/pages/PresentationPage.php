@@ -918,7 +918,8 @@ class PresentationPage_ManageRequest extends RequestHandler
                 'Title'                   => 'required|max:100',
                 'TypeID'                  => 'required',
                 'Level'                   => 'required|text',
-                'ShortDescription'        => 'required',
+                'Abstract'                => 'required',
+                'SocialSummary'           => 'required|max:100',
                 'CategoryID'              => 'required|text'
             );
 
@@ -928,7 +929,9 @@ class PresentationPage_ManageRequest extends RequestHandler
                 'Title.max'                        => ':attribute must be less than 100 characters long.',
                 'TypeID.required'                  => ':attribute is required.',
                 'Level.required'                   => ':attribute is required.',
-                'ShortDescription.required'        => ':attribute is required.',
+                'Abstract.required'                => ':attribute is required.',
+                'SocialSummary.required'           => ':attribute is required.',
+                'SocialSummary.max'                => ':attribute must be less than 100 characters long.',
                 'CategoryID.required'              => 'Please choose a category group and then a category.'
             );
 

@@ -214,7 +214,7 @@ $(document).ready(function(){
     }
 
     tinymce.init({
-        selector: "textarea",
+        selector: "textarea.html_text",
         width:      '100%',
         height:     270,
         plugins:    [ "anchor link spellchecker" ],
@@ -236,7 +236,8 @@ $(document).ready(function(){
         ignore: [],
         rules: {
             title: {required: true},
-            short_description: {required: true, no_rel_urls: true},
+            abstract: {required: true, no_rel_urls: true},
+            social_summary: {required: true , maxlength: 100},
             expect_learn: {no_rel_urls: true},
             rsvp_link: { url : true },
             headcount: { number: true },
@@ -369,7 +370,8 @@ $(document).ready(function(){
             title: $('#title').val(),
             rsvp_link: $('#rsvp_link').val(),
             headcount: $('#headcount').val(),
-            short_description: tinyMCE.get('short_description').getContent(),
+            abstract: tinyMCE.get('abstract').getContent(),
+            social_summary:$('#social_summary').val(),
             expect_learn: tinyMCE.get('expect_learn').getContent(),
             location_id: $('#location').val(),
             start_date: $('#start_date').val(),

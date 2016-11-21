@@ -53,7 +53,7 @@
                     start_time: "{$getStartTime}",
                     end_time: "{$getEndTime}",
                     title: "{$Title.JS}",
-                    description: "{$ShortDescription.JS}",
+                    description: "{$Abstract.JS}",
                     room: "{$getLocationNameNice.JS}",
                     total: $Attendees.Count(),
                     capacity: "{$LocationCapacity}",

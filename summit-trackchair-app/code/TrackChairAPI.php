@@ -436,7 +436,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         $changeRequests = SummitCategoryChange::get()
             ->innerJoin('Presentation', 'Presentation.ID = PresentationID')
             ->innerJoin('SummitEvent', 'Presentation.ID = SummitEvent.ID')
-            ->leftJoin('PresentationCategory', 'OldCategory.ID = Presentation.CategoryID','OldCategory')
+            ->leftJoin('PresentationCategory', 'OldCategory.ID = SummitEvent.CategoryID','OldCategory')
             ->leftJoin('PresentationCategory', 'NewCategory.ID = SummitCategoryChange.NewCategoryID','NewCategory')
             ->leftJoin('Member', 'Member.ID = SummitCategoryChange.ReqesterID')
             ->filter([
@@ -445,7 +445,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
 
         if(!Permission::check('ADMIN')) {
         	$changeRequests = $changeRequests->filter([
-        		'Presentation.CategoryID' => $categories
+        		'SummitEvent.CategoryID' => $categories
         	]);
         }
 
@@ -885,8 +885,8 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
         }
 
         // remove unsafe character for JSON
-        $p->ShortDescription = ($p->ShortDescription != null) ? str_replace(array("\r", "\n"), "",
-            $p->ShortDescription) : '(no description provided)';
+        $p->Abstract = ($p->Abstract != null) ? str_replace(array("\r", "\n"), "",
+            $p->Abstract) : '(no description provided)';
         $p->ProblemAddressed = ($p->ProblemAddressed != null) ? str_replace(array("\r", "\n"), "",
             $p->ProblemAddressed) : '(no answer provided)';
         $p->AttendeesExpectedLearnt = ($p->AttendeesExpectedLearnt != null) ? str_replace(array("\r", "\n"), "",
@@ -894,7 +894,7 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
 
         $data = $p->toJSON();
         $data['title'] = $p->Title;
-        $data['description'] = ($p->ShortDescription != null) ? $p->ShortDescription : '(no description provided)';
+        $data['description'] = ($p->Abstract != null) ? $p->Abstract : '(no description provided)';
         $data['category_name'] = $p->Category()->Title;
         $data['speakers'] = $speakers;
         $data['total_votes'] = $p->Votes()->count();

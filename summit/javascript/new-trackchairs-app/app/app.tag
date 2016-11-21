@@ -139,7 +139,7 @@ require('./comments-list.tag')
 						<span class="label label-info" show="{currentPresentation.comments.length}">Chair Comments: { currentPresentation.comments.length }</span>
 						<hr/>
 						<h4>Description</h4>
-						<raw content="{ currentPresentation.description }"/>
+						<raw content="{ currentPresentation.abstract }"/>
 
 						<hr/>
 						<h4>Problems Addressed</h4>

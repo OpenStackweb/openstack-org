@@ -25,12 +25,16 @@
                 <input type="text" class="form-control" id="title" name="title" value="{$Event.Title}">
             </div>
             <div class="form-group">
-                <label for="short_description">Short Description/Abstract</label>
-                <textarea id="short_description" name="short_description" class="form-control">{$Event.ShortDescription}</textarea>
+                <label for="abstract">Short Description/Abstract</label>
+                <textarea id="abstract" name="abstract" class="form-control html_text">{$Event.Abstract}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="social_summary">Social Summary (100 chars)</label>
+                <textarea id="social_summary" name="social_summary" class="form-control">{$Event.SocialSummary}</textarea>
             </div>
             <div class="form-group" id="expect_learn_container" style="display: none;">
                     <label for="expect_learn">What can attendees expect to learn?</label>
-                    <textarea id="expect_learn" name="expect_learn" class="form-control">{$Event.AttendeesExpectedLearnt}</textarea>
+                    <textarea id="expect_learn" name="expect_learn" class="form-control html_text">{$Event.AttendeesExpectedLearnt}</textarea>
             </div>
             <div class="form-group">
                 <label for="headcount">Head Count</label>

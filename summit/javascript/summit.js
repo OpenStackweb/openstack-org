@@ -47,11 +47,11 @@ var MAX_WORDS = 450;
 var WARNING_THRESHOLD = 150;
 
 $(function() {
-	if($('#PresentationForm_PresentationForm_ShortDescription').length) {
+	if($('#PresentationForm_PresentationForm_Abstract').length) {
 
 
 		setTimeout(function() {		
-			tinyMCE.get('PresentationForm_PresentationForm_ShortDescription')
+			tinyMCE.get('PresentationForm_PresentationForm_Abstract')
 				   .on('keyup', debounce(textEvent, 250))
                    .on('paste', textEvent);
 		},500);

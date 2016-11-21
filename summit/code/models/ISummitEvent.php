@@ -37,7 +37,7 @@ interface ISummitEvent extends IEntity
     /**
      * @return string
      */
-    public function getDescription();
+    public function getAbstract();
 
     /**
      * @return ISummitLocation
@@ -154,6 +154,5 @@ interface ISummitEvent extends IEntity
      * @return int
      */
     public function getCurrentSeatsCountByType($seat_type);
-
 
 }

@@ -200,10 +200,8 @@
                                             {
                                                 id              :  {$ID},
                                                 title           : "{$Title.JS}",
-                                                description     : "{$Description.JS}",
-                                                abstract        : "{$ShortDescription.JS}",
+                                                abstract        : "{$Abstract.JS}",
                                                 date_nice       : "{$StartDate().Format(D j)}",
-                                                short_desc      : "{$getShortDescription(600).JS}",
                                                 start_datetime  : "{$StartDate}",
                                                 end_datetime    : "{$EndDate}",
                                                 start_time      : "{$StartTime}",
@@ -236,10 +234,8 @@
                                     {
                                         id              :  {$ID},
                                         title           : "{$Title.JS}",
-                                        description     : "{$Description.JS}",
-                                        abstract        : "{$ShortDescription.JS}",
+                                        abstract        : "{$Abstract.JS}",
                                         date_nice       : "{$StartDate().Format(D j)}",
-                                        short_desc      : "{$getShortDescription(600).JS}",
                                         start_datetime  : "{$StartDate}",
                                         end_datetime    : "{$EndDate}",
                                         start_time      : "{$StartTime}",

@@ -38,7 +38,8 @@ $(document).ready(function(){
             GroupID:{required: true},
             CategoryID:{required: true},
             Level:{required: true},
-            ShortDescription:{required: true, text_length: true},
+            Abstract:{required: true, text_length: true},
+            SocialSummary: {required: true, maxlength: 100},
             "PresentationLink[1]": {url:true},
             "PresentationLink[2]": {url:true},
             "PresentationLink[3]": {url:true},
@@ -54,10 +55,14 @@ $(document).ready(function(){
             GroupID:{ required: 'Presentation category group is required.'},
             CategoryID:{ required: 'Presentation category is required.'},
             Level:{ required: 'Presentation level is required.'},
-            ShortDescription:{
+            Abstract:{
                 required: 'Presentation abstract is required.',
                 maxlength: 'Abstract must be less than 1000 characters long.'
-            }
+            },
+            SocialSummary:{
+                required: 'Presentation Social Summary is required.',
+                maxlength: 'Presentation Social Summary must be less than 100 characters long.'
+            },
         },
         errorElement: 'span',
         errorClass: 'help-block',

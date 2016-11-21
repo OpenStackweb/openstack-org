@@ -30,7 +30,7 @@ class BulkEmailer extends Controller
 			->innerJoin('Presentation', 'Presentation.ID = SummitEvent.ID')
 			->exclude([
 				// Keynotes, Sponsored Sessions, BoF, and Working Groups, vBrownBag
-				'Presentation.CategoryID' => [40, 41, 46, 45, 48]
+				'SummitEvent.CategoryID' => [40, 41, 46, 45, 48]
 			])
 			->filter([
 				'SummitID' => $summit->ID,

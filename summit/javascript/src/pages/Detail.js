@@ -105,7 +105,7 @@ var Detail = React.createClass({displayName: 'Detail',
               </div>
               <div className="voting-abstract">
               	<h5>Abstract</h5>              
-              	<div dangerouslySetInnerHTML={{__html: pres.short_description}} />
+              	<div dangerouslySetInnerHTML={{__html: pres.abstract}} />
               </div>
               <div className="main-speaker-wrapper">
               {pres.speakers && pres.speakers.map(function (speaker) {

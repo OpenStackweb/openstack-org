@@ -19,8 +19,8 @@ class SummitEvent extends DataObject implements ISummitEvent
     private static $db = array
     (
         'Title'                     => 'Text',
-        'Description'               => 'HTMLText',
-        'ShortDescription'          => 'HTMLText',
+        'Abstract'                  => 'HTMLText',
+        'SocialSummary'             => 'VarChar(100)',
         'StartDate'                 => 'SS_Datetime',
         'EndDate'                   => 'SS_Datetime',
         'Published'                 => 'Boolean',
@@ -110,28 +110,12 @@ class SummitEvent extends DataObject implements ISummitEvent
         return sprintf("%s (%s)", $this->getTitle(), $this->getDateNice());
     }
 
-    public function getShortDescription(){
-        $val = $this->getField('ShortDescription');
-        if(empty($val)){
-            $val = $this->getField('Description');
-        }
-        return $val;
-    }
-
-    public function getDescription(){
-        $val = $this->getField('Description');
-        if(empty($val)){
-            $val = $this->getField('ShortDescription');
-        }
-        return $val;
-    }
-
     private static $searchable_fields = array
     (
         'Title',
         'StartDate',
         'Description',
-        'ShortDescription',
+        'Abstract',
         'EndDate',
         'Location.Name',
         'Type.Type',
@@ -363,8 +347,8 @@ class SummitEvent extends DataObject implements ISummitEvent
         );
 
         $f->addFieldToTab('Root.Main', new TextField('Title','Title'));
-        $f->addFieldToTab('Root.Main', new HtmlEditorField('Description','Description'));
-        $f->addFieldToTab('Root.Main', new HtmlEditorField('ShortDescription','Abstract'));
+        $f->addFieldToTab('Root.Main', new HtmlEditorField('Abstract','Abstract'));
+        $f->addFieldToTab('Root.Main', new TextField('SocialSummary','Social Summary (100 Chars)'));
         $f->addFieldToTab('Root.Main', new TextField('HeadCount','HeadCount'));
         $f->addFieldToTab('Root.Main', $ddl_track = new DropdownField('CategoryID','Category', PresentationCategory::get()->filter('SummitID', $summit_id)->map('ID', 'Title')));
 
@@ -794,5 +778,13 @@ SQL;
     public function getCurrentSeatsCountByType($seat_type)
     {
         return $this->RSVPSubmissions()->filter('SeatType', $seat_type)->count();
+    }
+
+    /**
+     * @return string
+     */
+    public function getAbstract()
+    {
+       return $this->getField('Abstract');
     }
 }

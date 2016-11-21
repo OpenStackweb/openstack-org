@@ -5,7 +5,7 @@
         <label>Title</label>
         <div class="confirm-item">$Title</div>
         <label>Abstract</label>
-        <div>$ShortDescription</div>
+        <div>$Abstract</div>
     </div>
     <div class="main-panel-section confirm-block">
         <label>Level</label>

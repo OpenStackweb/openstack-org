@@ -378,7 +378,8 @@ final class PresentationManager implements IPresentationManager
             $presentation->Title                   = trim($data['Title']);
             $presentation->TypeID                  = intval($data['TypeID']);
             $presentation->Level                   = trim($data['Level']);
-            $presentation->ShortDescription        = trim($data['ShortDescription']);
+            $presentation->Abstract                = trim($data['Abstract']);
+            $presentation->SocialSummary           = trim($data['SocialSummary']);
             $presentation->ProblemAddressed        = trim($data['ProblemAddressed']);
             $presentation->AttendeesExpectedLearnt = trim($data['AttendeesExpectedLearnt']);
             $presentation->CategoryID              = intval(trim($data['CategoryID']));
@@ -458,17 +459,17 @@ final class PresentationManager implements IPresentationManager
             $presentation->Title                   = trim($data['Title']);
             $presentation->TypeID                  = intval($data['TypeID']);
             $presentation->Level                   = trim($data['Level']);
-            $presentation->ShortDescription        = trim($data['ShortDescription']);
+            $presentation->Abstract                = trim($data['Abstract']);
+            $presentation->SocialSummary           = trim($data['SocialSummary']);
             $presentation->ProblemAddressed        = trim($data['ProblemAddressed']);
             $presentation->AttendeesExpectedLearnt = trim($data['AttendeesExpectedLearnt']);
-
             $presentation->CategoryID              = intval(trim($data['CategoryID']));
             $creator                               = Member::get()->byID($presentation->CreatorID);
             $summit                                = $presentation->Summit();
             $speaker                               = $creator->getSpeakerProfile();
 
             // if the user changed the presentation type from panel to presentation we need to remove the moderator
-            if ($presentation->Type()->Type != 'Panel') {
+            if ($presentation->Type()->Type != ISummitEventType::Panel ) {
                 $presentation->ModeratorID = 0;
             }
 

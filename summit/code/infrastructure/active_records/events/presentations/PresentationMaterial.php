@@ -112,7 +112,7 @@ class PresentationMaterial extends DataObject
     }
 
     public function getDescription() {
-        return ($this->getField('Description')) ? $this->getField('Description') : $this->Presentation()->ShortDescription;
+        return ($this->getField('Description')) ? $this->getField('Description') : $this->Presentation()->Abstract;
     }
 
 }

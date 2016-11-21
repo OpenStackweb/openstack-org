@@ -233,7 +233,9 @@ final class SummitService implements ISummitService
             $event->Title            = html_entity_decode($event_data['title']);
             $event->RSVPLink         = html_entity_decode($event_data['rsvp_link']);
             $event->HeadCount        = intval($event_data['headcount']);
-            $event->ShortDescription = html_entity_decode($event_data['short_description']);
+            $event->Abstract         = html_entity_decode($event_data['abstract']);
+            $event->SocialSummary    = strip_tags($event_data['social_summary']);
+
             $event->setStartDate($event_data['start_date']);
             $event->setEndDate($event_data['end_date']);
             $event->AllowFeedBack    = $event_data['allow_feedback'];
@@ -414,7 +416,8 @@ final class SummitService implements ISummitService
             $event->Title            = html_entity_decode($event_data['title']);
             $event->RSVPLink         = html_entity_decode($event_data['rsvp_link']);
             $event->HeadCount        = intval($event_data['headcount']);
-            $event->ShortDescription = html_entity_decode($event_data['short_description']);
+            $event->Abstract         = html_entity_decode($event_data['abstract']);
+            $event->SocialSummary    = strip_tags($event_data['social_summary']);
             $event->setStartDate($event_data['start_date']);
             $event->setEndDate($event_data['end_date']);
             $event->AllowFeedBack    = $event_data['allow_feedback'];

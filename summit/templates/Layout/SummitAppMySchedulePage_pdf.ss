@@ -20,7 +20,7 @@
                 <td style="width:45%">
                     {$Title}<br>
                     <% if $Top.ShowDescription %>
-                        {$ShortDescription.NoHTML()}
+                        {$A.NoHTML()}
                     <% end_if %>
                 </td>
                 <td style="width:27%"><% if $Summit.ShouldShowVenues %> {$getLocationNameNice} <% else %> TBD <% end_if %></td>

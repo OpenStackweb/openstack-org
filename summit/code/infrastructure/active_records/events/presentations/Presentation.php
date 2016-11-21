@@ -75,8 +75,7 @@ class Presentation extends SummitEvent implements IPresentation
             )
             ->where("
                   	SummitEvent.Title LIKE '%{$k}%'
-                  	OR SummitEvent.Description LIKE '%{$k}%'
-                  	OR SummitEvent.ShortDescription LIKE '%{$k}%'
+                  	OR SummitEvent.Abstract LIKE '%{$k}%'
                     OR (CONCAT_WS(' ', Speaker.FirstName, Speaker.LastName)) LIKE '%{$k}%'
                     OR (CONCAT_WS(' ', Moderator.FirstName, Moderator.LastName)) LIKE '%{$k}%'
                 ");
@@ -728,8 +727,8 @@ SQL;
             throw new EntityValidationException('Title is Mandatory!');
         }
 
-        if (empty($this->ShortDescription)) {
-            throw new EntityValidationException('ShortDescription is mandatory!');
+        if (empty($this->Abstract)) {
+            throw new EntityValidationException('Abstract is mandatory!');
         }
 
         if (empty($this->Level)) {

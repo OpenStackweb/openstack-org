@@ -71,7 +71,7 @@ final class SapphireSummitPresentationRepository extends SapphireSummitEventRepo
 
         $where_clause = "SummitEvent.Title IS NOT NULL AND SummitEvent.Title <>'' AND (SummitEventType.Type IN ('Presentation','Panel','Keynotes')) ";
         if ($search_term) {
-            $where_clause .= " AND (SummitEvent.Title LIKE '%{$search_term}%' OR SummitEvent.Description LIKE '%{$search_term}%'";
+            $where_clause .= " AND (SummitEvent.Title LIKE '%{$search_term}%' OR SummitEvent.Abstract LIKE '%{$search_term}%'";
             $where_clause .= " OR PS.FirstName LIKE '%{$search_term}%' OR PS.LastName LIKE '%{$search_term}%'";
             $where_clause .= " OR CONCAT(PS.FirstName,' ',PS.LastName) LIKE '%{$search_term}%'";
             $where_clause .= " OR PS2.FirstName LIKE '%{$search_term}%' OR PS2.LastName LIKE '%{$search_term}%'";
@@ -134,8 +134,7 @@ final class SapphireSummitPresentationRepository extends SapphireSummitEventRepo
             $search_term   = trim($search_term);
             $filter .= " AND (
             SummitEvent.Title LIKE '%{$search_term}%'
-            OR SummitEvent.Description LIKE '%{$search_term}%'
-            OR SummitEvent.ShortDescription LIKE '%{$search_term}%'
+            OR SummitEvent.Abstract LIKE '%{$search_term}%'
             OR SummitEvent.ID = '{$search_term}'
             OR EXISTS
                 (
@@ -198,8 +197,7 @@ SQL;
 SELECT * FROM (
 SELECT DISTINCT
 SummitEvent.Title,
-SummitEvent.Description,
-SummitEvent.ShortDescription,
+SummitEvent.Abstract,
 SummitEvent.StartDate,
 SummitEvent.EndDate,
 SummitEvent.Published,
@@ -263,7 +261,7 @@ SQL;
 
         $where_clause = " SummitEvent.Title IS NOT NULL AND SummitEvent.Title <>'' ";
         if ($search_term) {
-            $where_clause .= " AND (SummitEvent.Title LIKE '%{$search_term}%' OR SummitEvent.Description LIKE '%{$search_term}%'";
+            $where_clause .= " AND (SummitEvent.Title LIKE '%{$search_term}%' OR SummitEvent.Abstract LIKE '%{$search_term}%'";
             $where_clause .= " OR PS.FirstName LIKE '%{$search_term}%' OR PS.LastName LIKE '%{$search_term}%'";
             $where_clause .= " OR CONCAT(PS.FirstName,' ',PS.LastName) LIKE '%{$search_term}%'";
             $where_clause .= " OR PS2.FirstName LIKE '%{$search_term}%' OR PS2.LastName LIKE '%{$search_term}%'";
@@ -416,7 +414,7 @@ E.EndDate AS end_date,
 GROUP_CONCAT(DISTINCT(CONCAT(S.FirstName,' ',S.LastName))) AS speakers,
 GROUP_CONCAT(DISTINCT(T.Tag)) AS tags,
 E.Title AS event,
-E.ShortDescription AS description,
+E.Abstract AS description,
 L.Name AS room,
 L2.Name AS venue,
 PM.DisplayOnSite as display,
@@ -464,7 +462,7 @@ SQL;
 
         if ($search_term) {
             $query .= <<<SQL
- AND (E.Title LIKE '%$search_term%' OR E.ShortDescription LIKE '%$search_term%' OR Tag.Tag LIKE '%$search_term%' )
+ AND (E.Title LIKE '%$search_term%' OR E.Abstract LIKE '%$search_term%' OR Tag.Tag LIKE '%$search_term%' )
 SQL;
         }
 
@@ -523,7 +521,7 @@ SQL;
         P.ID AS presentation_id,
         CONCAT('https://www.openstack.org/summit/barcelona-2016/summit-schedule/events/',P.ID,'/') AS url ,
         E.Title AS title,
-        E.ShortDescription AS description,
+        E.Abstract AS description,
         PC.Title AS track,
         S.FirstName AS first_name,
         S.LastName AS last_name,

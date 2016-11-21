@@ -42,7 +42,7 @@
                     </div>
                 <% end_if %>
 
-                $Event.ShortDescription
+                $Event.Abstract
 
                 <% if $Event.isPresentation &&  $Event.AttendeesExpectedLearnt %>
                     <br>
