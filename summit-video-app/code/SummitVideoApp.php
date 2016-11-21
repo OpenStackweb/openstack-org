@@ -38,6 +38,7 @@ class SummitVideoApp_Controller extends Page_Controller
         'api/summits'           => 'handleSummits',
         'api/speakers'          => 'handleSpeakers',
         'PUT api/view/$VideoID' => 'handleVideoViewed',
+        '$Summit/$Page/$ID'     => 'handleIndex',
         '$Page/$ID'             => 'handleIndex'
     ];
 
