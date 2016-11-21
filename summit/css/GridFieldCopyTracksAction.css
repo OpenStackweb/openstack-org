@@ -1,0 +1,13 @@
+.select-summit-source
+{
+    width: 200px;
+    float: left;
+    margin: 0;
+    padding: 0;
+    margin-right: 15px;
+}
+
+.ss-gridfield-copy-tracks-class {
+    width: auto;
+    float: right;
+}

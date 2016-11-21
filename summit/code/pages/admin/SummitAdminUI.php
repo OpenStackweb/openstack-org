@@ -139,6 +139,7 @@ final class SummitAdminUI extends DataExtension
             $summit_id = $this->owner->ID;
             // tracks
             $config = GridFieldConfig_RecordEditor::create(25);
+            $config->addComponent(new GridFieldCopyTracksAction($summit_id));
             $categories = new GridField('Categories', 'Presentation Categories', $this->owner->getCategories(), $config);
             $f->addFieldToTab('Root.Presentation Categories', $categories);
 
