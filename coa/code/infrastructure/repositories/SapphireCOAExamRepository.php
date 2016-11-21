@@ -32,7 +32,7 @@ final class SapphireCOAExamRepository extends SapphireRepository implements ICer
                     AND Member.Surname = '{$last_name}'
                     AND CertifiedOpenStackAdministratorExam.CertificationExpirationDate > UTC_DATE()
                     AND CertifiedOpenStackAdministratorExam.CertificationStatus = 'Achieved' 
-                    AND CertifiedOpenStackAdministratorExam.Status = 'Pass' "
+                    "
                     );
     }
 
