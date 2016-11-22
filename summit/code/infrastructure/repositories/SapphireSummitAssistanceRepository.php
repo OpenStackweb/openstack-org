@@ -33,7 +33,7 @@ FROM SummitEvent AS E
 INNER JOIN Presentation ON Presentation.ID = E.ID
 INNER JOIN Presentation_Speakers ON Presentation_Speakers.PresentationID = Presentation.ID
 INNER JOIN PresentationSpeaker AS S ON S.ID = Presentation_Speakers.PresentationSpeakerID
-INNER JOIN PresentationCategory  ON PresentationCategory.ID = SummitEvent.CategoryID
+INNER JOIN PresentationCategory  ON PresentationCategory.ID = E.CategoryID
 LEFT JOIN Member ON Member.ID = S.MemberID
 LEFT JOIN SpeakerRegistrationRequest ON SpeakerRegistrationRequest.SpeakerID = S.ID
 LEFT JOIN PresentationSpeakerSummitAssistanceConfirmationRequest AS ACR ON ACR.SpeakerID = S.ID AND ACR.SummitID = {$summit_id}
