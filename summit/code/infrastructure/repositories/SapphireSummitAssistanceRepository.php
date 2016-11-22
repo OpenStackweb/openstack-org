@@ -27,28 +27,41 @@ final class SapphireSummitAssistanceRepository extends SapphireRepository implem
     public function getAssistanceBySummit($summit_id, $page, $page_size, $sort, $sort_dir, $filter)
     {
 
-        $from = <<<SQL
+        $select = <<<SQL
+            SELECT
+            S.ID AS speaker_id,
+            Member.ID AS member_id,
+            IFNULL(CONCAT(Member.FirstName ,' ',Member.Surname), CONCAT(S.FirstName ,' ',S.LastName)) AS name,
+            IFNULL(Member.Email, SpeakerRegistrationRequest.Email) AS email,
+            O.Name AS company,
+            E.Title AS presentation,
+            PresentationCategory.Title AS track,
+            ACR.OnSitePhoneNumber AS phone,
+            ACR.IsConfirmed AS confirmed,
+            ACR.RegisteredForSummit AS registered,
+            ACR.CheckedIn AS checked_in
+SQL;
 
-FROM SummitEvent AS E
-INNER JOIN Presentation ON Presentation.ID = E.ID
-INNER JOIN Presentation_Speakers ON Presentation_Speakers.PresentationID = Presentation.ID
-INNER JOIN PresentationSpeaker AS S ON S.ID = Presentation_Speakers.PresentationSpeakerID
-INNER JOIN PresentationCategory  ON PresentationCategory.ID = E.CategoryID
-LEFT JOIN Member ON Member.ID = S.MemberID
-LEFT JOIN SpeakerRegistrationRequest ON SpeakerRegistrationRequest.SpeakerID = S.ID
-LEFT JOIN PresentationSpeakerSummitAssistanceConfirmationRequest AS ACR ON ACR.SpeakerID = S.ID AND ACR.SummitID = {$summit_id}
-LEFT JOIN Affiliation AS A ON A.ID = (
-	SELECT ID FROM Affiliation
-    WHERE
-    Affiliation.MemberID = Member.ID
-    AND Affiliation.Current = 1
-    ORDER BY EndDate DESC
-    LIMIT 1
-)
-LEFT JOIN Org AS O ON O.ID = A.OrganizationID
-WHERE
-E.SummitID = {$summit_id}
-AND E.Published = 1
+        $from = <<<SQL
+            FROM SummitEvent AS E
+            INNER JOIN Presentation ON Presentation.ID = E.ID
+            %s
+            INNER JOIN PresentationCategory  ON PresentationCategory.ID = E.CategoryID
+            LEFT JOIN Member ON Member.ID = S.MemberID
+            LEFT JOIN SpeakerRegistrationRequest ON SpeakerRegistrationRequest.SpeakerID = S.ID
+            LEFT JOIN PresentationSpeakerSummitAssistanceConfirmationRequest AS ACR ON ACR.SpeakerID = S.ID AND ACR.SummitID = {$summit_id}
+            LEFT JOIN Affiliation AS A ON A.ID = (
+                SELECT ID FROM Affiliation
+                WHERE
+                Affiliation.MemberID = Member.ID
+                AND Affiliation.Current = 1
+                ORDER BY EndDate DESC
+                LIMIT 1
+            )
+            LEFT JOIN Org AS O ON O.ID = A.OrganizationID
+            WHERE
+            E.SummitID = {$summit_id}
+            AND E.Published = 1
 SQL;
 
         if ($filter != 'all') {
@@ -60,27 +73,30 @@ SQL;
                 $from .= " AND ACR.IsConfirmed = 0 AND ACR.RegisteredForSummit = 0";
         }
 
+        $from_1 = sprintf($from,'INNER JOIN Presentation_Speakers ON Presentation_Speakers.PresentationID = Presentation.ID
+            INNER JOIN PresentationSpeaker AS S ON S.ID = Presentation_Speakers.PresentationSpeakerID');
+
+        $from_2 = sprintf($from,'INNER JOIN PresentationSpeaker AS S ON S.ID = Presentation.ModeratorID');
+
+
         $query = <<<SQL
-SELECT
-       S.ID AS speaker_id,
-       Member.ID AS member_id,
-       IFNULL(CONCAT(Member.FirstName ,' ',Member.Surname), CONCAT(S.FirstName ,' ',S.LastName)) AS name,
-       IFNULL(Member.Email, SpeakerRegistrationRequest.Email) AS email,
-       O.Name AS company,
-       E.Title AS presentation,
-       PresentationCategory.Title AS track,
-       ACR.OnSitePhoneNumber AS phone,
-       ACR.IsConfirmed AS confirmed,
-       ACR.RegisteredForSummit AS registered,
-       ACR.CheckedIn AS checked_in
-{$from}
-ORDER BY {$sort} {$sort_dir}
+            {$select}
+            {$from_1}
+            UNION
+            {$select}
+            {$from_2}
+            ORDER BY {$sort} {$sort_dir}
 SQL;
 
 
         $query_count = <<<SQL
-SELECT COUNT(*)
-{$from}
+            SELECT COUNT(*) FROM (
+                {$select}
+                {$from_1}
+                UNION
+                {$select}
+                {$from_2}
+            ) as q1
 SQL;
 
         if ($page && $page_size) {
@@ -112,7 +128,7 @@ E.Title AS event,
 L.Name AS room,
 L2.Name AS venue,
 R.Capacity AS capacity,
-COUNT(DISTINCT(SA.SpeakerID), SA.SpeakerID IS NOT NULL) AS speakers,
+(COUNT(DISTINCT(SA.SpeakerID), SA.SpeakerID IS NOT NULL) + IF(P.ModeratorID != 0, 1, 0)) AS speakers,
 E.HeadCount AS headcount,
 COUNT(A.ID) AS total,
 GROUP_CONCAT(DISTINCT CONCAT(S.FirstName,' ',S.LastName) SEPARATOR ', ') AS speaker_list
