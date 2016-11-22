@@ -1389,6 +1389,10 @@ td.item-name {
 td.action {
   text-align: right; }
 
+.presentation-main-panel .status .accepted {
+    color: green;
+}
+
 .presentation-title, .presentation-status {
   float: left; }
 

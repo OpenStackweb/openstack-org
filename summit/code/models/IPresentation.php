@@ -54,6 +54,11 @@ interface IPresentation extends ISummitEvent
     /**
      * @return string
      */
+    public function PreviewIFrameLink();
+
+    /**
+     * @return string
+     */
     public function EditSpeakersLink();
 
     /**
@@ -105,5 +110,10 @@ interface IPresentation extends ISummitEvent
      * @return ITrackAnswer
      */
     public function findAnswerByQuestion(ITrackQuestionTemplate $question);
+
+    /**
+     * @return string
+     */
+    public function getStatusNice() ;
 
 }

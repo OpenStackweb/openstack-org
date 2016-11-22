@@ -52,11 +52,13 @@ class PresentationPage_Controller extends SummitPage_Controller
         'vote',
         'setpassword',
         'bio',
-        'BioForm'
+        'BioForm',
+        'preview'
     );
 
     private static $url_handlers = array(
         'manage/$PresentationID!' => 'handleManage',
+        'preview/$PresentationID!' => 'preview'
     );
 
     private static $extensions = array(
@@ -317,6 +319,22 @@ class PresentationPage_Controller extends SummitPage_Controller
         );
     }
 
+    /**
+     * Generates a preview of the presentation
+     * @param  SS_HTTPRequest $r
+     * @return SSViewer
+     */
+    public function preview(SS_HTTPRequest $r)
+    {
+        if (!$presentation = $this->getPresentationFromRequest()) {
+            return $this->httpError(404);
+        }
+
+        return $this->customise(array(
+            'Presentation' => $presentation
+        ))->renderWith(array('PresentationPage_preview', 'PresentationPage'));
+    }
+
 
     /**
      * Action that shows the presentation details, readonly
@@ -488,7 +506,7 @@ class PresentationPage_ManageRequest extends RequestHandler
         'confirm',
         'success',
         'speakers',
-        'preview',
+        'preview_iframe',
         'searchSpeaker',
      );
 
@@ -720,7 +738,7 @@ class PresentationPage_ManageRequest extends RequestHandler
      * @param  SS_HTTPRequest $r
      * @return SSViewer
      */
-    public function preview(SS_HTTPRequest $r)
+    public function preview_iframe(SS_HTTPRequest $r)
     {
         return $this->customise(array(
             'Presentation' => $this->presentation

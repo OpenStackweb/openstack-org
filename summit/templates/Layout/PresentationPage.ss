@@ -39,15 +39,13 @@
                                     <td class="item-name">
                                         <i class="fa fa-file-text-o"></i>
                                         <% if $Top.canEditPresentation($ID) %>
-                                            <a href="$EditLink">
-                                        <% end_if %>
-                                        <% if $Title %>$Title<% else %>$ID<% end_if %>
-                                        <% if $Top.canEditPresentation($ID) %>
-                                            </a>
+                                            <a href="$EditLink"> $getTitleNice() </a>
+                                        <% else %>
+                                            <a href="$PreviewLink"> $getTitleNice() </a>
                                         <% end_if %>
                                     </td>
                                     <% if $Status %>
-                                        <td class="status"><i class="fa fa-tag"></i> $Status</td>
+                                        <td class="status $SelectionStatus()"><i class="fa fa-tag"></i> $getStatusNice() </td>
                                     <% else %>
                                         <td class="status"></td>
                                     <% end_if %>
@@ -79,14 +77,12 @@
                                     <td class="item-name">
                                         <i class="fa fa-file-text-o"></i>
                                         <% if $Top.canEditPresentation($ID) %>
-                                            <a href="$EditLink">
-                                        <% end_if %>
-                                            <% if $Title %>$Title<% else %>$ID<% end_if %>
-                                        <% if $Top.canEditPresentation($ID) %>
-                                            </a>
+                                            <a href="$EditLink"> $getTitleNice() </a>
+                                        <% else %>
+                                            <a href="$PreviewLink"> $getTitleNice() </a>
                                         <% end_if %>
                                     </td>
-                                    <td class="status"><i class="fa fa-tag"></i> $Status</td>
+                                    <td class="status $SelectionStatus()"><i class="fa fa-tag"></i> $getStatusNice() </td>
                                     <td class="action">
                                         <% if $CanDelete && $Top.canEditPresentation($ID) %><a href="$DeleteLink">Delete</a><% end_if %>
                                     </td>
@@ -108,14 +104,12 @@
                                     <td class="item-name">
                                         <i class="fa fa-file-text-o"></i>
                                         <% if $Top.canEditPresentation($ID) %>
-                                        <a href="$EditLink">
-                                        <% end_if %>
-                                        <% if $Title %>$Title<% else %>$ID<% end_if %>
-                                        <% if $Top.canEditPresentation($ID) %>
-                                        </a>
+                                            <a href="$EditLink"> $getTitleNice() </a>
+                                        <% else %>
+                                            <a href="$PreviewLink"> $getTitleNice() </a>
                                         <% end_if %>
                                     </td>
-                                    <td class="status"><i class="fa fa-tag"></i> $Status</td>
+                                    <td class="status $SelectionStatus()"><i class="fa fa-tag"></i> $getStatusNice() </td>
                                     <td class="action">
                                         <% if $CanDelete && $Top.canEditPresentation($ID) %><a href="$DeleteLink">Delete</a><% end_if %>
                                     </td>
