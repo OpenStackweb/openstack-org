@@ -23,7 +23,7 @@
       <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
       <![endif]-->      
-      $WebpackCSS('summit-voting-app/production/css/main.css')      
+      $ModuleCSS('main')      
       <!-- Page-specific CSS -->
       <% include Analytics %>
    </head>
@@ -76,7 +76,7 @@
                   <script type="text/javascript">
                   	window.VotingAppConfig = $JSONConfig;
                   </script>
-				  $WebpackJS('/summit-voting-app/production', '/js/main.js')
+				  $ModuleJS('main')
                </div>
             </div>
             <!-- End Page Content -->
