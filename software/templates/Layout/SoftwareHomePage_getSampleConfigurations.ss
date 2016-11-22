@@ -115,4 +115,4 @@
         <!-- End Page Content -->
     </div>
 </div>
-<script src="software/js/public/software_sample_configs.bundle.js"></script>
+$ModuleJS('software_sample_configs')
