@@ -795,6 +795,9 @@ SQL;
         $template_id = Session::get("SurveyBuilder.EntitySurveyTemplateStatistics.TemplateId");
         $filters_where = $this->generateFilters();
 
+        if (!$template_id)
+            return;
+
         $pu_questions_query = " SELECT QT.ID FROM SurveyQuestionTemplate QT
                                 LEFT JOIN SurveyStepTemplate ST ON ST.ID = QT.StepID
                                 WHERE ST.SurveyTemplateID = {$template_id} AND (QT.Name = 'ProjectsUsed' OR QT.Name = 'ProjectsUsedPoC')";
@@ -861,10 +864,9 @@ SQL;
 
     public function getProjectsUsedCombinedCount()
     {
-
         $template_id = Session::get("SurveyBuilder.EntitySurveyTemplateStatistics.TemplateId");
-        $filters = Session::get("SurveyBuilder.EntitySurveyTemplateStatistics.Filters");
-        $questions_filters = Session::get("SurveyBuilder.EntitySurveyTemplateStatistics.Filters_Questions");
+        if (!$template_id)
+            return 0;
 
         $pu_questions_query = " SELECT QT.ID FROM SurveyQuestionTemplate QT
                                 LEFT JOIN SurveyStepTemplate ST ON ST.ID = QT.StepID
@@ -873,6 +875,7 @@ SQL;
         $pu_question_ids = DB::query($pu_questions_query)->column();
 
         $total_answers = 0;
+
         foreach ($pu_question_ids as $pu_question_id) {
             $total_answers +=  $this->SurveyBuilderSurveyCountByQuestion($pu_question_id);
         }
