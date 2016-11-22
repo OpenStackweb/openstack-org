@@ -13,6 +13,7 @@
 
 var show_if_public = ['ProblemAddressed','AttendeesExpectedLearnt'];
 
+var form = null;
 
 $(document).ready(function(){
 
@@ -22,8 +23,9 @@ $(document).ready(function(){
         return ($.trim($(value).text()).length < 1000);
     }, "Text must be less than 1000 characters long.");
 
+    form = $('#PresentationForm_PresentationForm');
 
-    form_validator = $('#PresentationForm_PresentationForm').validate(
+    form_validator = form.validate(
     {
         ignore:[],
         highlight: function(element) {
@@ -90,6 +92,7 @@ $(document).ready(function(){
     $('#PresentationForm_PresentationForm_GroupID').change(function(){
         getCategories();
         toggleFields();
+        //form.persistableForm('reload');
     });
 
     $('body').on('change','input[name=CategoryID][type=radio]',function () {
@@ -114,13 +117,24 @@ $(document).ready(function(){
         }
     });
 
+    form.ready(function(){
+        console.log('form ready ...');
+        form.persistableForm({
+            ignoreFields: [
+                'PresentationForm_PresentationForm_SummitID',
+                'PresentationForm_PresentationForm_SecurityID',
+            ]
+        });
+    });
+
 });
 
 function getCategories() {
-    var summit_id = $('#PresentationForm_PresentationForm_SummitID').val();
-    var group_id = $('#PresentationForm_PresentationForm_GroupID').val();
+
+    var summit_id       = $('#PresentationForm_PresentationForm_SummitID').val();
+    var group_id        = $('#PresentationForm_PresentationForm_GroupID').val();
     var category_id_bis = $('#PresentationForm_PresentationForm_CategoryIDbis').val();
-    var url = 'api/v1/summits/'+summit_id+'/category_groups/'+group_id+'/categories';
+    var url             = 'api/v1/summits/'+summit_id+'/category_groups/'+group_id+'/categories';
 
     if (group_id) {
         $.ajax({
@@ -129,19 +143,21 @@ function getCategories() {
             timeout:120000,
             dataType:'json',
             success: function (data, textStatus, jqXHR) {
-                var html = '<label for="PresentationForm_PresentationForm_CategoryID">What is the general topic of the presentation?</label>';
+                var html     = '<label for="PresentationForm_PresentationForm_CategoryID">What is the general topic of the presentation?</label>';
+                var controls = [];
                 if (!$.isEmptyObject(data)) {
                     for(var key in data) {
                         var category = data[key];
+                        var id       = 'PresentationForm_PresentationForm_CategoryID_'+category.ID;
+                        controls.push(id);
                         html += '<div class="radio">';
-                        html += '<input id="PresentationForm_PresentationForm_CategoryID_'+category.ID+'" class="radio" name="CategoryID" type="radio" value="'+category.ID+'">';
+                        html += '<input id="'+id+'" class="radio" name="CategoryID" type="radio" value="'+category.ID+'">';
                         html += '<label>'+category.Html+'</label>';
                         html += '</div>';
                     }
                 } else {
                     html += '<br><i>This group has no categories.</i>';
                 }
-
 
                 $('#category_options').html(html);
 
@@ -152,6 +168,8 @@ function getCategories() {
                     }
                 }
 
+                if(controls.length > 0)
+                    form.persistableForm('reloadControls', controls)
             }
         }).fail(function (jqXHR, textStatus, errorThrown) {
             alert('there was an error, please contact your administrator');
@@ -175,10 +193,11 @@ function toggleFields() {
 }
 
 function getExtraQuestions() {
-    var summit_id = $('#PresentationForm_PresentationForm_SummitID').val();
+
+    var summit_id       = $('#PresentationForm_PresentationForm_SummitID').val();
     var category_id_bis = $('#PresentationForm_PresentationForm_CategoryIDbis').val();
     var presentation_id = $('#PresentationForm_PresentationForm_ID').val();
-    var url = 'api/v1/summits/'+summit_id+'/categories/'+category_id_bis+'/extra_questions/'+presentation_id;
+    var url             = 'api/v1/summits/'+summit_id+'/categories/'+category_id_bis+'/extra_questions/'+presentation_id;
 
     if (category_id_bis) {
         $.ajax({
@@ -187,11 +206,17 @@ function getExtraQuestions() {
             timeout:120000,
             dataType:'json',
             success: function (data, textStatus, jqXHR) {
+
                 $('.track-question').remove();
-                $.each(data,function(idx,val){
-                    $('#category_options').after(val.Html);
+
+                var controls = [];
+                $.each(data,function(idx, val){
+                    $('#category_options').after( val.Html );
+                    controls.push(val.Name);
                 });
 
+                if(controls.length > 0)
+                    form.persistableForm('reloadControls', controls)
             }
         }).fail(function (jqXHR, textStatus, errorThrown) {
             alert('there was an error, please contact your administrator');

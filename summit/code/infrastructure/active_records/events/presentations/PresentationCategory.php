@@ -44,7 +44,7 @@ class PresentationCategory extends DataObject
     );
 
     private static $many_many = array(
-        'AllowedTags' => 'Tag',
+        'AllowedTags'    => 'Tag',
         'ExtraQuestions' => 'TrackQuestionTemplate',
     );
 

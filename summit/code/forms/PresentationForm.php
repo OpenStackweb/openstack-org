@@ -37,6 +37,7 @@ final class PresentationForm extends BootstrapForm
 
         Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
         Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
+        Requirements::javascript('themes/openstack/javascript/jquery.persistable-form.js');
         Requirements::javascript('summit/javascript/presentation-form.js');
         Requirements::css('themes/openstack/bower_assets/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
 

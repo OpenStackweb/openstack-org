@@ -787,10 +787,15 @@ class PresentationPage_ManageRequest extends RequestHandler
 
     public function PresentationTagsForm()
     {
-        $fields = FieldList::create();
+        $fields    = FieldList::create();
         $tag_field = new TagManagerField('Tags', 'Tags');
         $tag_field->setCategory($this->presentation->Category());
         $fields->add($tag_field);
+
+        Requirements::javascript('themes/openstack/javascript/jquery.persistable-form.js');
+        Requirements::customScript("
+            $(document).persistableForm('clearAll');
+        ");
 
         $form   = new BootstrapForm($this, 'PresentationTagsForm', $fields ,
             FieldList::create(

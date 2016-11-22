@@ -448,23 +448,32 @@ final class SummitsApi extends AbstractRestfulJsonApi
             $presentation     = null;
             $summit_id        = intval($request->param('SUMMIT_ID'));
             $summit           = $this->summit_repository->getById($summit_id);
+
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+
             if ($presentation_id) {
-                $presentation = Presentation::get_by_id('Presentation',$presentation_id);
+                $presentation = Presentation::get_by_id('Presentation', $presentation_id);
             }
 
-            $category = PresentationCategory::get_by_id('PresentationCategory',$category_id);
+            $category        = PresentationCategory::get_by_id('PresentationCategory', $category_id);
             $extra_questions = $category->ExtraQuestions();
-            $question_map = array();
+            $question_map    = array();
+
             foreach ($extra_questions as $q) {
                 //builder
                 $type = $q->Type();
                 $builder_class = $type.'QuestionTemplateUIBuilder';
                 $builder = Injector::inst()->create($builder_class);
-                $answer = ($presentation) ? $presentation->findAnswerByQuestion($q) : null;
+                $answer  = ($presentation) ? $presentation->findAnswerByQuestion($q) : null;
                 $field   = $builder->build($q, $answer);
+
                 $field->addHolderClass('track-question');
-                $question_map[] = array('Name' => $q->Name,'InsertAfter' => $q->AfterQuestion, 'Html' => strval($field->FieldHolder()));
+                $question_map[] = [
+                    'Name'        => $q->Name,
+                    'InsertAfter' => $q->AfterQuestion,
+                    'Html'        => strval($field->FieldHolder()),
+                    'Type'        => $q->Type()
+                ];
             }
 
             return $this->ok($question_map);
