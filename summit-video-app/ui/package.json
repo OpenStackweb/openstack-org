@@ -9,7 +9,6 @@
   "dependencies": {
     "array.prototype.find": "^2.0.0",
     "array.prototype.findindex": "^2.0.0",
-    "babel-polyfill": "^6.13.0",
     "bootstrap": "^3.3.5",
     "classnames": "^2.1.5",
     "dataset": "^0.3.1",
