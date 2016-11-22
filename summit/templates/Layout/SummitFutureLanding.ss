@@ -17,12 +17,12 @@
                        May 8-12, 2017
                        <br>
                        Hynes Convention Center & Surrounding Hotels
-                       <p style="font-size: 0.85em; margin-top:30px;">
-                        <em>More details coming soon...</em>
-                       </p>
                     </div>
                 <div> 
-                  <a href="//openstack.org/assets/boston-summit/Boston-Sponsorship-Prospectus.pdf" class="btn register-btn-lrg" style="margin: 10px;">Sponsorship Prospectus<i class="fa fa-cloud-download"></i></a> 
+                  <a href="//openstack.org/assets/boston-summit/Boston-Sponsorship-Prospectus.pdf" class="btn register-btn-lrg" style="margin: 10px;">Sponsorship Prospectus<i class="fa fa-cloud-download"></i></a>&nbsp;&nbsp;&nbsp;<a href="https://openstacksummit2017boston.eventbrite.com" class="btn register-btn-lrg" style="margin: 10px;">Register Now</a> 
+                       <p style="margin-top:30px;">
+                        <em>More details coming soon...</em>
+                       </p>
                 </div> 
                 <div class="landing-social">
                     <a target="_blank" class="social-icons landing-twitter" onclick="return windowpop(this.href, 545, 433)" href="http://twitter.com/share?text=The May 2017 OpenStack Summit will be in Boston&url=http://openstack.org/summit/boston-2017/"></a>
