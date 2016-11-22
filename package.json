@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "amdefine": "^1.0.0",
+    "babel-polyfill": "^6.16.0",
     "has-flag": "^2.0.0",
     "mousetrap": "^1.6.0",
     "react": "^15.3.1",
@@ -52,10 +53,15 @@
     "webpack": "^1.13.2"
   },
   "babel": {
-	  "presets": [
-	  	["es2015", { "loose": true }],
-	  	"react",
-	  	"stage-2"
-	  ]
-}
+    "presets": [
+      [
+        "es2015",
+        {
+          "loose": true
+        }
+      ],
+      "react",
+      "stage-2"
+    ]
+  }
 }

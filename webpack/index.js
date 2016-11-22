@@ -19,34 +19,49 @@ if(!moduleName) {
 }
 
 const modulePath = `../${moduleName}`;
+const moduleUIPath = path.join(modulePath, 'ui');
+const absModulePath = path.join(__dirname, modulePath);
+const absModuleUIPath = path.join(__dirname, moduleUIPath);
+const absConfigPath = path.join(absModuleUIPath, 'webpack.config.js');
 
 try {
-	fs.statSync(path.join(__dirname, modulePath));
+	fs.statSync(absModulePath);
 } catch (e) {
 	console.error(`${modulePath} is not a directory`);
 	process.exit(1);	
 }
 
-const configPath = path.join(__dirname, modulePath, 'webpack.config.js');
+try {
+	fs.statSync(absModuleUIPath);
+} catch (e) {
+	console.error(`${moduleName} has no ui/ directory`);
+	process.exit(1);	
+}
 
 try {
-	fs.existsSync(configPath)
+	fs.existsSync(absConfigPath)
 } catch (e) {
-	console.error(`There is no webpack.config.js file in ${moduleName}`);
+	console.error(`There is no ui/webpack.config.js file in ${moduleName}`);
 	process.exit(1);
 }
 
-const moduleConfig = require(configPath);
+const moduleConfig = require(absConfigPath);
 const config = Object.assign({}, baseConfig, moduleConfig);
 
 // Set the paths relative to root
 let newEntries = {};	
 iterate(config.entry, (bundleFile, paths) => {
 	paths = !Array.isArray(paths) ? [paths] : paths;
-	newEntries[bundleFile] = paths.map(p => './'+path.join(moduleName, p));
+	newEntries[bundleFile] = paths.map(p => './'+path.join(moduleName, 'ui', p));
 });
 
 config.entry = newEntries;
+config.output = {
+	filename: 'js/[name].js',
+	path: path.join(absModuleUIPath, 'production/'),
+	publicPath: path.join('/', moduleName, 'ui/production/')
+};
+
 
 switch(TARGET) {
 	case 'serve':
