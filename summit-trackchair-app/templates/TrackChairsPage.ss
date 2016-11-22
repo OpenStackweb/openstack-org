@@ -8,7 +8,7 @@
     <title>Track Chairs App | OpenStack.org</title>
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,300,500,700">
-	$WebpackCSS('/summit-trackchair-app/production/css/main.css')	
+	$ModuleCSS('main')	
 
 </head>
 
@@ -17,6 +17,6 @@
     <script type="text/javascript">
         window.TrackChairAppConfig = $JSONConfig;
     </script>
-    $WebpackJS('/summit-trackchair-app/production', '/js/main.js')
+    $ModuleJS('main')
    </body>
 </html>
