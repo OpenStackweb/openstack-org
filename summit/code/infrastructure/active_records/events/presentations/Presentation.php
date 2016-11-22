@@ -472,7 +472,7 @@ class Presentation extends SummitEvent implements IPresentation
     }
 
     public function getStatusNice() {
-        if ($this->SelectionStatus() == IPresentation::SelectionStatus_Accepted) {
+        if ($this->isPublished()) {
             return 'Accepted';
         } else {
             return $this->Status;
