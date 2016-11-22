@@ -70,11 +70,14 @@ class WebpackTemplateHelpers implements TemplateGlobalProvider
     		Controller::join_links(self::ModuleName(), 'ui/production');
 
     	$link = Controller::join_links(
-			Director::absoluteBaseURL(),
 			$prodPath, 
 			'js',
 			self::with_extension($filename, 'js')
 		);
+
+    	if(!Director::is_absolute_url($link)){
+    		$link = Director::absoluteURL($link);
+    	}
 
     	if($withRequirements) {
     		return Requirements::javascript($link);

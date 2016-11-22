@@ -14,7 +14,7 @@ fs.readdir(dir, (err, list) => {
 	list.forEach(entry => {
 		const dirPath = path.join(dir, entry);
 		if(fs.statSync(dirPath).isDirectory()) {
-			const configPath = path.join(dirPath, 'webpack.config.js');
+			const configPath = path.join(dirPath, 'ui', 'webpack.config.js');
 			try {
 				if(fs.statSync(configPath).isFile()) {
 					const moduleName = path.basename(dirPath);
