@@ -24,6 +24,7 @@ class PresentationSpeaker extends DataObject
         'WillingToPresentVideo' => 'Boolean',
         'Notes'                 => 'HTMLText',
         'CreatedFromAPI'        => 'Boolean',
+        'OrgHasCloud'           => 'Boolean',
     ];
 
     private static $has_one = [

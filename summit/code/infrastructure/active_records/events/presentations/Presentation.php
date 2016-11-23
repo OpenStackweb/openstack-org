@@ -131,7 +131,8 @@ class Presentation extends SummitEvent implements IPresentation
         'BeenEmailed'             => 'Boolean',
         'ProblemAddressed'        => 'HTMLText',
         'AttendeesExpectedLearnt' => 'HTMLText',
-        'Legacy'                  => 'Boolean'
+        'Legacy'                  => 'Boolean',
+        'FeatureCloud'            => 'Boolean'
     );
 
     /**
@@ -489,6 +490,10 @@ class Presentation extends SummitEvent implements IPresentation
         $f = parent::getCMSFields();
         $f->removeByName('TypeID');
         $f->dropdown('Level', 'Level', $this->dbObject('Level')->enumValues())
+            ->optionset('FeatureCloud','Does this talk feature an OpenStack cloud?', array(
+                1 => 'Yes',
+                0 => 'No'
+            ))
             ->listbox('Topics', 'Topics', PresentationTopic::get()->map('ID', 'Title')->toArray())
             ->configure()
             ->setMultiple(true)

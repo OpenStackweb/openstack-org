@@ -165,6 +165,10 @@ class SpeakerForm extends BootstrapForm
                     ->end()
                 ->end()
             ->literal('HR','<hr>')
+            ->optionset('OrgHasCloud', 'Is your organization Operating an OpenStack cloud?', array(
+                1 => 'Yes',
+                0 => 'No'
+            ))
             ->hidden('HasChanged',0);
 
         return $fields;

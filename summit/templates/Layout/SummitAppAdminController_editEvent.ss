@@ -146,9 +146,25 @@
             <hr>
             <% end_if %>
             <div class="form-group">
-                <label>Feedback</label>
-                <div class="checkbox">
-                    <label> <input id="allow_feedback" name="allow_feedback" type="checkbox" <% if $Event.AllowFeedBack %> checked <% end_if %>> Allow Feedback </label>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Feedback</label>
+                        <div class="checkbox">
+                            <input id="allow_feedback" name="allow_feedback" type="checkbox" <% if $Event.AllowFeedBack %> checked <% end_if %>>
+                            <label for="allow_feedback"> Allow Feedback </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Does this talk feature an OpenStack cloud?</label><br>
+                        <div class="radio radio-inline">
+                            <input type="radio" name="feature_cloud" id="feature_cloud_yes" value="1" <% if $Event.FeatureCloud %> checked <% end_if %>>
+                            <label for="featured_cloud_yes"> Yes </label>
+                        </div>
+                        <div class="radio radio-inline">
+                            <input type="radio" name="feature_cloud" id="feature_cloud_no" value="0" <% if $Event.FeatureCloud == 0 %> checked <% end_if %>>
+                            <label for="featured_cloud_no"> No </label>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="form-group">

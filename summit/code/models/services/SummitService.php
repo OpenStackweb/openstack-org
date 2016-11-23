@@ -421,6 +421,7 @@ final class SummitService implements ISummitService
             $event->setStartDate($event_data['start_date']);
             $event->setEndDate($event_data['end_date']);
             $event->AllowFeedBack    = $event_data['allow_feedback'];
+            $event->FeatureCloud     = $event_data['feature_cloud'];
             $event->LocationID       = intval($event_data['location_id']);
             $event->TypeID           = $event_type_id;
 
