@@ -29,11 +29,11 @@ final class SapphireCOAExamRepository extends SapphireRepository implements ICer
         return CertifiedOpenStackAdministratorExam::get()
             ->leftJoin("Member","CertifiedOpenStackAdministratorExam.OwnerID = Member.ID")
             ->where("CertifiedOpenStackAdministratorExam.CertificationNumber = '{$cert}'
-                    AND Member.Surname = '{$last_name}'
+                    AND CertifiedOpenStackAdministratorExam.CandidateNameLastName= '{$last_name}'
                     AND CertifiedOpenStackAdministratorExam.CertificationExpirationDate > UTC_DATE()
                     AND CertifiedOpenStackAdministratorExam.CertificationStatus = 'Achieved' 
-                    "
-                    );
+                    ")
+            ->sort("CertifiedOpenStackAdministratorExam.LastEdited", "DESC");
     }
 
     /**
