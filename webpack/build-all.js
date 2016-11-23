@@ -7,33 +7,36 @@ const fs = require('fs');
 
 const dir = path.join(__dirname, '../');
 fs.readdir(dir, (err, list) => {
-	if(err) {
-		console.error(err);
-		process.exit(1);
-	}
+    if (err) {
+        console.error(err);
+        process.exit(1);
+    }
 
-	list.forEach(entry => {
-		const dirPath = path.join(dir, entry);
-		if(fs.statSync(dirPath).isDirectory()) {
-			const configPath = path.join(dirPath, 'ui', 'webpack.config.js');
-			const packagePath = path.join(dirPath, 'ui', 'package.json');
-			try {
-				if(fs.statSync(configPath).isFile()) {
-					const moduleName = path.basename(dirPath);
-					console.log(`
+    list.forEach(entry => {
+        const dirPath = path.join(dir, entry);
+        if (fs.statSync(dirPath).isDirectory()) {
+            const configPath = path.join(dirPath, 'ui', 'webpack.config.js');
+            const packagePath = path.join(dirPath, 'ui', 'package.json');
+            try {
+                if (fs.statSync(configPath).isFile()) {
+                    const moduleName = path.basename(dirPath);
+                    const title = `Building ${moduleName}`;
+                    const bar = '*'.repeat(title.length);
+                    console.log(`
 
-/***************** 
- * Building ${moduleName}
-\\*****************
+/**${bar}**\\
+ * ${title} *
+\\**${bar}**/
 
-`);					if(fs.existsSync(packagePath)) {
-						console.log('Loading dependencies...');
-						execSync(`cd ${moduleName}/ui && npm install`, {stdio: 'inherit'});
-						execSync(`cd ${dir}`);
-					}	
-					execSync(`node ./webpack ${moduleName}`, {stdio: 'inherit'});
-				}
-			} catch (e) { }
-		}
-	});
+`);
+                    if (fs.existsSync(packagePath)) {
+                        console.log('Loading dependencies...');
+                        execSync(`cd ${moduleName}/ui && npm install`, {stdio: 'inherit'});
+                        execSync(`cd ${dir}`);
+                    }
+                    execSync(`node ./webpack ${moduleName}`, {stdio: 'inherit'});
+                }
+            } catch (e) {}
+        }
+    });
 });

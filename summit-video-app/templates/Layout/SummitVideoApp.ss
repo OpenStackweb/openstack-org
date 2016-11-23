@@ -1,5 +1,5 @@
 </div> <!-- Killing the main site .container -->
-$ModuleCSS('main', true)
+$ModuleCSS('main')
 <div id="video-app"></div>
 <script type="text/javascript">
 	window.VideoAppConfig = $JSONConfig;
