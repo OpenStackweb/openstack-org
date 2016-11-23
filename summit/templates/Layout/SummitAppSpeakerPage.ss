@@ -272,6 +272,5 @@
     <% end_cached %>
 </div>
 
-<script src="summit/javascript/schedule/schedule.bundle.js" type="application/javascript"></script>
-<script src="summit/javascript/schedule/event-list.bundle.js" type="application/javascript"></script>
-
+$ModuleJS('schedule')
+$ModuleJS('event-list')
