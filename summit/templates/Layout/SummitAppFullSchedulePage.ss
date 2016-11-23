@@ -77,5 +77,5 @@
 </div>
 
 
-<script src="summit/javascript/schedule/full-schedule-view.bundle.js" type="application/javascript"></script>
+$ModuleJS('full-schedule-view')
 <% include GoogleCalendar GoogleCalendarClientID=$Top.GoogleCalendarClientID %>

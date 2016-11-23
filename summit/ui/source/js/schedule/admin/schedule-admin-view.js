@@ -3,7 +3,7 @@ var dispatcher        = require('./schedule-admin-view-dispatcher.js');
 var published_store   = require('./published-events-store.js');
 var unpublished_store = require('./unpublished-events-store.js');
 
-require('./../../../css/summit-admin-schedule.scss');
+require('../../../scss/summit-admin-schedule.scss');
 require('./schedule-admin-view-schedule-event.tag');
 require('./schedule-admin-view-published-filters.tag');
 require('./schedule-admin-view-published.tag');

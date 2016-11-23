@@ -163,7 +163,7 @@
             </div>
         </div>
     </div>
-   <script src="summit/javascript/schedule/admin/schedule-admin-view.bundle.js?t={$Top.Time}"  type="application/javascript"></script>
+   $ModuleJS('schedule-admin-view')
    <script type="application/javascript">
        var admin_url = "{$Top.Link}/{$Summit.ID}";
    </script>

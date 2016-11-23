@@ -49,4 +49,4 @@
     </div>
 </div>
 
-<script src="summit/javascript/schedule/admin/reports-admin-view.bundle.js?t={$Top.Time}" type="application/javascript"></script>
+$ModuleJS('reports-admin-view')

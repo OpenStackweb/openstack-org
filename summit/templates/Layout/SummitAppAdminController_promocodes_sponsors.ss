@@ -38,4 +38,4 @@
     </div>
 </div>
 
-<script src="summit/javascript/schedule/admin/promocode-admin-view.bundle.js" type="application/javascript"></script>
+$ModuleJS('promocode-admin-view')

@@ -104,4 +104,4 @@
     </div>
 </div>
 
-<script src="summit/javascript/schedule/admin/speakers-admin-view.bundle.js" type="application/javascript"></script>
+$ModuleJS('speakers-admin-view')
