@@ -1,6 +1,5 @@
 import React from 'react';
 import Button from '~core-components/button';
-import buttonStyles from './awesome-button.module.scss';
 
 class AwesomeButton extends React.Component {
 
@@ -10,7 +9,7 @@ class AwesomeButton extends React.Component {
 
     render() {
         return (
-            <div className={buttonStyles.button}>
+            <div>
                 <h2>Click this great button</h2>
                 <Button onButtonClicked={this.clickButton}>Yeah</Button>
             </div>
