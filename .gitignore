@@ -87,3 +87,4 @@ Thumbs.db
 config.json
 auth.json
 autocomplete/
+*.patch
