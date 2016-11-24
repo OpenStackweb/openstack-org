@@ -334,7 +334,7 @@
                     return '';
                 },
                 'a.track-search-link@href': function(arg){
-                    var track_id = arg.item.track_id;
+                    var track_id   = arg.item.track_id;
                     var track_name = '';
                     if(typeof track_id !== "undefined" && track_id > 0){
                         track_name = self.summit.tracks[track_id].name;

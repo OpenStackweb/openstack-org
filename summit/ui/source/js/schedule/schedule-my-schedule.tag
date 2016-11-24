@@ -156,8 +156,8 @@
 
                 var event_id    = $(this).attr('data-event-id');
                 console.log('event id '+ event_id);
-                var event       = self.dic_events[event_id];
-                selected_events = [event];
+                var event           = self.dic_events[event_id];
+                var selected_events = [event];
 
                 if($(this).hasClass('icon-sync-event')){
                     console.log('unsync individual');

@@ -199,5 +199,5 @@
     <schedule-grid summit="{ summit }" default_event_color={'#757575'} search_url="{$Top.Link(global-search)}" base_url="{$Top.Link}" month="{$Summit.Month}"></schedule-grid>
 </div>
 <div id="fb-root"></div>
-$ModuleJSI('schedule')
+$ModuleJS('schedule')
 <% include GoogleCalendar GoogleCalendarClientID=$Top.GoogleCalendarClientID %>

@@ -14,6 +14,6 @@ module.exports = {
     "speakers-admin-view":"./source/js/schedule/admin/speakers-admin-view.js",
     "promocode-admin-view":"./source/js/schedule/admin/promocode-admin-view.js",
     "events-bulk-view":"./source/js/schedule/admin/events-bulk-view.js",
-	  "room-metrics-view":"./source/js/schedule/admin/room-metrics-view.js"
+	"room-metrics-view":"./source/js/schedule/admin/room-metrics-view.js"
   }
 };

@@ -42,7 +42,7 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-7 col-track">
-                            <span if={ track_id} class="track">
+                            <span if={ track_id } class="track">
                                 <a class="search-link" title="Search Track" href="{ parent.search_url+'?t='+encodeURIComponent(trackName().replace(/ /g,'+')) }">{ trackName() }</a>
                             </span>
                         </div>

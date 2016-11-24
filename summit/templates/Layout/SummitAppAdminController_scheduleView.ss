@@ -164,6 +164,7 @@
         </div>
     </div>
    $ModuleJS('schedule-admin-view')
+   $ModuleCSS('schedule-admin-view')
    <script type="application/javascript">
        var admin_url = "{$Top.Link}/{$Summit.ID}";
    </script>
