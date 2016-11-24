@@ -197,10 +197,10 @@
                 e.preventDefault();
                 e.stopPropagation();
 
-                var event_id    = $(e.currentTarget).parents('.main-event-content').attr('data-event-id');
-                var event       = self.dic_events[event_id];
-                event.location  = self.getSummitLocation(event);
-                selected_events = [event];
+                var event_id        = $(e.currentTarget).parents('.main-event-content').attr('data-event-id');
+                var event           = self.dic_events[event_id];
+                event.location      = self.getSummitLocation(event);
+                var selected_events = [event];
 
                 if($(this).hasClass('icon-sync-event')){
                     // check auth
@@ -328,7 +328,7 @@
                 'span.track@style': function(arg){ arg.item.class_name === 'SummitEvent' ? 'display:none' : '';},
                 'a.track-search-link': function(arg){
                     var track_id = arg.item.track_id;
-                    if(typeof track_id !== "undefined"){
+                    if(typeof track_id !== "undefined" && track_id > 0){
                         return self.summit.tracks[track_id].name;
                     }
                     return '';
@@ -336,7 +336,7 @@
                 'a.track-search-link@href': function(arg){
                     var track_id = arg.item.track_id;
                     var track_name = '';
-                    if(typeof track_id !== "undefined"){
+                    if(typeof track_id !== "undefined" && track_id > 0){
                         track_name = self.summit.tracks[track_id].name;
                     }
                     return track_name != '' ? self.search_url+'?t='+encodeURIComponent(track_name.replace(/ /g,'+')) : '';
