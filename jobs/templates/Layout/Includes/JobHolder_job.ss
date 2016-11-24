@@ -38,12 +38,10 @@
                     <% end_if %>     
             </div>
         </div>
-        <div class="col-sm-1">            
-                <a href="#" rel="nofollow" class="jobExpand" data-id="{$ID}">
-                    <div id="moreInfoButton">
-                        <h5>More info</h5>
-                    </div>
-                </a>
+        <div class="col-sm-1">
+            <a href="#" class="jobExpand" data-id="{$ID}" >
+                <h5> More info </h5>
+            </a>
         </div>
     </div>
     <div class="row jobDescription" style="display:none;">

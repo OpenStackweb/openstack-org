@@ -291,15 +291,16 @@ div.publishedDate h5 {
     pointer-events: none;
 }
 
-#moreInfoButton h5 {
+.jobExpand h5{
     color: #30739C;
-    text-decoration: none;
 }
 
-#moreInfoButton h5:hover {
+.jobExpand h5:hover {
     color: #2A4E68;
+}
+
+.jobExpand, .jobExpand:hover {
     text-decoration: none;
-    pointer-events: none;
 }
 
 /* Original Jobs page CSS rulesets below here */
@@ -349,7 +350,7 @@ p.type {
 
 .jobExpand {
     margin: 10px 0;
-    color: black !important;
+    /*color: black !important;*/
 }
 
 ul.location {

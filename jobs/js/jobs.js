@@ -30,7 +30,7 @@
         var is_visible = detail_div.hasClass('is_visible');
 
         if (is_visible) {
-            document.location.hash = '';
+            //document.location.hash = '';
             $(this).html('More info');
         } else {
             document.location.hash = job_id;
@@ -48,7 +48,7 @@
     function showJobDetail(job_id){
         $('.jobDescription','#' + job_id).show();
         $('.jobDescription','#' + job_id).addClass('is_visible');
-        $('.jobExpand','#' + job_id).html('less');
+        $('.jobExpand','#' + job_id).html('Less');
     }
 
     $(document).ready(function($){
@@ -62,7 +62,7 @@
         }
 
         // toggles the job descriptions
-        $('a.jobExpand').unbind();
+        $(document).off('click','.jobExpand');
         $(document).on('click','.jobExpand' , expandJobDetail);
 
         $("#ddl-menu-sort").on('click', 'li a', function(){
@@ -123,12 +123,13 @@
             type: "GET",
             url: url,
             success: function(result){
-                $('a.jobExpand').unbind();
-                $(document).off('click','.jobExpand' , expandJobDetail);
+
                 $('.jobPosting','.job_list').remove();
                 if(result == '') result='<div class="empty-job-list"><p>There are no jobs matching your criterias!</p></div>';
                 $('.job_list').html(result);
+
                 // toggles the job descriptions
+                $(document).off('click','.jobExpand');
                 $(document).on('click','.jobExpand' , expandJobDetail);
 
                 if (document.location.hash && document.location.hash != '') {
