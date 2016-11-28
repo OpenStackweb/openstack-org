@@ -69,8 +69,10 @@ SQL;
                 $from .= " AND ACR.IsConfirmed = 0";
             else if ($filter == 'hide_registered')
                 $from .= " AND ACR.RegisteredForSummit = 0";
-            else if ($filter == 'hide_both')
-                $from .= " AND ACR.IsConfirmed = 0 AND ACR.RegisteredForSummit = 0";
+            else if ($filter == 'hide_checkedin')
+                $from .= " AND ACR.CheckedIn = 0";
+            else if ($filter == 'hide_all')
+                $from .= " AND ACR.IsConfirmed = 0 AND ACR.RegisteredForSummit = 0 AND ACR.CheckedIn = 0";
         }
 
         $from_1 = sprintf($from,'INNER JOIN Presentation_Speakers ON Presentation_Speakers.PresentationID = Presentation.ID

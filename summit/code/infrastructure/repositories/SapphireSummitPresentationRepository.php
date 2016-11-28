@@ -350,8 +350,10 @@ SQL;
                 $query_body .= " AND ACR.IsConfirmed = 0";
             else if ($filter == 'hide_registered')
                 $query_body .= " AND ACR.RegisteredForSummit = 0";
-            else if ($filter == 'hide_both')
-                $query_body .= " AND ACR.IsConfirmed = 0 AND ACR.RegisteredForSummit = 0";
+            else if ($filter == 'hide_checkedin')
+                $query_body .= " AND ACR.CheckedIn = 0";
+            else if ($filter == 'hide_all')
+                $query_body .= " AND ACR.IsConfirmed = 0 AND ACR.RegisteredForSummit = 0 AND ACR.CheckedIn = 0";
         }
 
         $query_count = "SELECT COUNT(*) ";
