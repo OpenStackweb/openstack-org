@@ -90,6 +90,9 @@ final class PresentationForm extends BootstrapForm
                 1 => 'Yes',
                 0 => 'No'
             ))
+                ->configure()
+                    ->setAwesomeTemplate()
+                ->end()
             ->literal('AbstractHelp','<hr/><p>YouTube and other services limit the length of your presentation\'s description. We will take the first 100 characters of your abstract to display in the YouTube description.</p>')
             ->tinyMCEEditor('Abstract','Abstract (1000 chars)')
                 ->configure()
