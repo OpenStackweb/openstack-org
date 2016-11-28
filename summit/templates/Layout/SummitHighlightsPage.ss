@@ -108,10 +108,11 @@
         </div>
         <% if StatisticsVideoUrl %>
             <div style="text-align:center;">
-                <iframe width="853" height="480" src="https://youtu.be/{$Top.StatisticsVideoUrl}" frameborder="0" allowfullscreen="" data-reactid=".0.4.0.0.1.0"></iframe>
+                <iframe width="853" height="480" src="{$Top.StatisticsVideoUrl}" frameborder="0" allowfullscreen="" data-reactid=".0.4.0.0.1.0"></iframe>
 
             </div>
         <% end_if %>
+        <video id="bgvid" poster="{$Top.StatisticsVideoPoster.Link}" loop="" autoplay="">
     </div>
     <% if KeynotesImages %>
         <script>
