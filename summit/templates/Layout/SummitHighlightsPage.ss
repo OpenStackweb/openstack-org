@@ -106,11 +106,12 @@
                 </div>
             </div>
         </div>
-        <video id="bgvid" poster="{$Top.StatisticsVideoPoster.Link}" loop="" autoplay="">
-            <% if StatisticsVideoUrl %>
-            <source type="video/mp4" src="{$Top.StatisticsVideoUrl}"></source>
-            <% end_if %>
-        </video>
+        <% if StatisticsVideoUrl %>
+            <div style="text-align:center;">
+                <iframe width="853" height="480" src="https://youtu.be/{$Top.StatisticsVideoUrl}" frameborder="0" allowfullscreen="" data-reactid=".0.4.0.0.1.0"></iframe>
+
+            </div>
+        <% end_if %>
     </div>
     <% if KeynotesImages %>
         <script>
