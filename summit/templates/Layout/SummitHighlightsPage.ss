@@ -68,9 +68,11 @@
                         <p>
                            {$NextSummitText}
                         </p>
+                        <% if $Summit.Next.RegistrationLink %>
                         <p>
-                            <a class="future-summit-btn" href="#">Find Out More</a>
+                            <a class="future-summit-btn" href="$Summit.Next.RegistrationLink">Find Out More</a>
                         </p>
+                    <% end_if %>
                     </div>
                 </div>
             </div>
@@ -183,7 +185,7 @@
         </p>
         <h1>See You In {$Summit.Next.Title}</h1>
         <div class="summit-date">
-            {$Summit.Next.Text}
+            {$NextSummitText}
         </div>
         <% if $Summit.Next.RegistrationLink %>
         <div>
