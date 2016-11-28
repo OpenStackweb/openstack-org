@@ -182,9 +182,14 @@
             The next Summit will be here before you know it...
         </p>
         <h1>See You In {$Summit.Next.Title}</h1>
-        <p>
-            <a class="btn red-btn" href="<% if $Summit.Next.RegistrationLink %>$Summit.Next.RegistrationLink<% else %>#<% end_if %>">Join Us In {$Summit.Next.Title}</a>
-        </p>
+        <div class="summit-date">
+            {$Summit.Next.Text}
+        </div>
+        <% if $Summit.Next.RegistrationLink %>
+        <div>
+            <br/><a class="btn register-btn-lrg" href="$Summit.Next.RegistrationLink">Join Us</a>
+        </div>
+        <% end_if %>
         <% if NextSummitBackgroundImage %>
         <a target="_blank" title="" data-placement="left" data-toggle="tooltip" class="photo-credit"
            href="{$NextSummitBackgroundImage.OriginalURL}" data-original-title="{$NextSummitBackgroundImage.Attribution}"><i class="fa fa-info-circle"></i></a>
