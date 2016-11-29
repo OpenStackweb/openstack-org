@@ -25,7 +25,8 @@
                 <option value="all">All</option>
                 <option value="hide_confirmed">Hide Confirmed</option>
                 <option value="hide_registered">Hide Registered</option>
-                <option value="hide_both">Hide Both</option>
+                <option value="hide_checkedin">Hide Checked In</option>
+                <option value="hide_all">Hide Both</option>
             </select>
         </div>
         <div class="col-md-4" if={ show_search }>
