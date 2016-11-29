@@ -499,7 +499,6 @@ class Presentation extends SummitEvent implements IPresentation
             ->setMultiple(true)
             ->end()
             ->text('OtherTopic', 'Other topic')
-            ->htmleditor('ProblemAddressed', 'What is the problem or use case you’re addressing in this session?')
             ->htmleditor('AttendeesExpectedLearnt', 'What should attendees expect to learn?')
             ->tab('Preview')
             ->literal('preview', sprintf(

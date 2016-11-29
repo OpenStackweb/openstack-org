@@ -197,12 +197,6 @@
                             <div>$Abstract</div>
 
                             <p>
-                            <h5>Problems Addressed</h5>
-                            </p>
-
-                            <div>$ProblemAddressed</div>
-
-                            <p>
                             <h5>Why Should This Presentation Be Selected?</h5>
                             </p>
 
