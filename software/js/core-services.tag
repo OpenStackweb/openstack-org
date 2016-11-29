@@ -5,7 +5,7 @@ require('./t.tag');
     <div class="col-sm-12">
     <p class="service-section-title">
     	<strong>
-    		<t entity="Software.CORE_SERVICES">Core Services</t>
+    		<t entity="Software.CORE_SERVICES" text="Core Services" />
     	</strong>{ ' ( '+components.length+' Results )' }</p>
     </div>
     </div>
@@ -25,8 +25,7 @@ require('./t.tag');
             return $('#openstack_releases option:selected').text().toLowerCase();
         }
 
-        opts.api.on('loaded-components-by-release',function(data) {
-            console.log('components loaded');
+        opts.api.on('loaded-components-by-release',function(data) {            
             self.components =  data.core_components;
             self.update();
         });

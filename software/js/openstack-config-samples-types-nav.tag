@@ -41,8 +41,7 @@
         }
 
         clickConfigSampleType(id) {
-            var slug = $('#sample_config_type_link_'+ id).data('slug');
-            console.log('config type selected '+id);
+            var slug = $('#sample_config_type_link_'+ id).data('slug');            
             $('.sample_config_type').removeClass('active');
             $('#sample_config_type_'+id).addClass('active');
             window.location.hash = slug;

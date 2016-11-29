@@ -3,8 +3,8 @@ require('./t.tag');
     <div class="row">
     <div class="col-sm-12">
     <p class="service-section-title">
-    	<strong><t entity="Software.OPTIONAL_SERVICES">Optional Services</t></strong>
-    	{` ( ${components.length} ${ss.i18n._t('Openstack.RESULTS','Results')} )`}
+    	<strong><t entity="Software.OPTIONAL_SERVICES" text="Optional Services" /></strong>
+    	( {components.length} <t entity="Openstack.RESULTS" text="Results" /> )
     </p>
     </div>
     </div>
@@ -16,12 +16,12 @@ require('./t.tag');
     <table class="table">
     <thead>
         <tr>
-            <th><t entity="Software.NAME">Name</t></th>
-            <th><t entity="Software.SERVICE">Service</t></th>
-            <th><t entity="Software.MATURITY">Maturity</t> <a href="#" id='sort-maturity' onclick={ sortMaturity }><i class="fa fa-sort"></i></a></th>
-            <th><t entity="Software.AGE">Age</tr> <a href="#" id='sort-age' onclick={ sortAge }><i class="fa fa-sort"></i></a></th>
-            <th><t entity="Software.ADOPTION">Adoption</t> <a href="#" id='sort-adoption' onclick={ sortAdoption }><i class="fa fa-sort"></i></a></th>
-            <th><t entity="Software.DETAILS">Details</t></th>
+            <th><t entity="Software.NAME" text="Name" /></th>
+            <th><t entity="Software.SERVICE" text="Service" /></th>
+            <th><t entity="Software.MATURITY" text="Maturity" /> <a href="#" id='sort-maturity' onclick={ sortMaturity }><i class="fa fa-sort"></i></a></th>
+            <th><t entity="Software.AGE" text="Age" /> <a href="#" id='sort-age' onclick={ sortAge }><i class="fa fa-sort"></i></a></th>
+            <th><t entity="Software.ADOPTION" text="Adoption" /> <a href="#" id='sort-adoption' onclick={ sortAdoption }><i class="fa fa-sort"></i></a></th>
+            <th><t entity="Software.DETAILS" text="Details" /></th>
         </tr>
     </thead>
     <tbody>
@@ -33,7 +33,7 @@ require('./t.tag');
         <td><div>{ adoption } %</div></td>
         <td>
         	<a href="#" onclick={ optionalServiceDetails }>
-        		<t entity="Software.MORE_DETAILS">More Details</t>
+        		<t entity="Software.MORE_DETAILS" text="More Details" />
         	</a>
         </td>
         </tr>
@@ -44,7 +44,6 @@ require('./t.tag');
     </div>
 
     <script>
-
     this.components          = opts.components;
     this.api                 = opts.api;
     this.adoption_dir        = 'desc';

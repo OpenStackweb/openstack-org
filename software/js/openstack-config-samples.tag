@@ -64,7 +64,7 @@ require('./t.tag');
                 { adoption }%
                 </div>
                 <div class="core-stat-title">
-                	<t entity="Software.ADOPTION">Adoption</t>
+                	<t entity="Software.ADOPTION" text="Adoption" />
                 </div>
                 </div>
                 <div class="col-sm-4 col-xs-4">
@@ -150,8 +150,8 @@ require('./t.tag');
                		<t entity="Software.OPTIONAL_SERVICES_INCLUDED">
                			<strong>Optional Services</strong> included in this configuration
                		</t>
-               		({ current_config.optional_components.length } 
-               		<span><t entity="Openstack.RANGE_OF">of</t></span> 
+               		({ current_config.optional_components.length }
+               		<span><t entity="Openstack.RANGE_OF">of</t></span>
                		{ release_optional_component_count })
                	</p>
             </div>
