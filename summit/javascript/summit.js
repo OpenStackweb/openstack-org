@@ -21,6 +21,20 @@ $('a[href^=#]').click(function(e){
     }, 500);
 });
 
+// on call for presentations, clear localStorage when adding new presentation
+$('.add-presentation-button').click(function() {
+    localStorage.clear();
+})
+
+// or editing a presentation
+$('.add-presentation-button').click(function() {
+    localStorage.clear();
+})
+
+$('.edit-presentation-button').click(function() {
+    localStorage.clear();
+})
+
 // Photo Credit Tooltip
 $('.photo-credit').tooltip();
 

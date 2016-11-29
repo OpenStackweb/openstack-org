@@ -39,7 +39,7 @@
                                     <td class="item-name">
                                         <i class="fa fa-file-text-o"></i>
                                         <% if $Top.canEditPresentation($ID) %>
-                                            <a href="$EditLink"> $getTitleNice() </a>
+                                            <a href="$EditLink" class="edit-presentation-button"> $getTitleNice() </a>
                                         <% else %>
                                             <a href="$PreviewLink"> $getTitleNice() </a>
                                         <% end_if %>
