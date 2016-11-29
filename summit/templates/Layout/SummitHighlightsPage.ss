@@ -78,7 +78,8 @@
         </div>
     </div>
     <div class="huge-success-video">
-        <h1>It Was A <strong>HUGE</strong> Success</h1>
+        <h1>"A week filled with <strong>OpenStack innovation</strong>, top notch user stories, and an epic coffee guzzling pigeon mascot."</h1>
+        <div class="summit-success-quote">--<a href="https://www.mirantis.com/blog/openstack-summit-barcelona-replay/" target="_blank">Diana Dvorkin</a></div>
         <div class="summit-success-stats">
             <div class="stat">
                 <div class="number attendance">
@@ -102,6 +103,14 @@
                 </div>
                 <div class="title">
                     Countries Represented
+                </div>
+            </div>
+            <div class="stat">
+                <div class="number sessions">
+                    {$Top.SessionsQty}
+                </div>
+                <div class="title">
+                    Sessions
                 </div>
             </div>
         </div>

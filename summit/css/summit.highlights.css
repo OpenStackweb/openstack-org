@@ -4011,6 +4011,17 @@ a.outline-btn.inactive:hover {
     background-size: cover
 }
 
+.summit-success-quote {
+     text-align:right;
+     color:white;
+     padding-right:5%;
+}
+
+.summit-success-quote a {
+      color:white;
+      font-size:2em;
+}
+
 .summit-success-stats {
     text-align: center;
     color: #fff;
@@ -4045,6 +4056,10 @@ a.outline-btn.inactive:hover {
 
 .summit-success-stats .number.countries {
     border-color: #50dfd0
+}
+
+.summit-success-stats .number.sessions {
+    border-color: #ffe600
 }
 
 .summit-success-stats .title {

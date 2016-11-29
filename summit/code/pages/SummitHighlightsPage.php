@@ -27,6 +27,7 @@ final class SummitHighlightsPage extends SummitPage
         'AttendanceQty'               => 'Text',
         'CompaniesRepresentedQty'     => 'Text',
         'CountriesRepresentedQty'     => 'Text',
+        'SessionsQty'                 => 'Text',
         'ReleaseAnnouncedTitle'       => 'Text',
         'ReleaseAnnouncedDescription' => 'HTMLText',
         'ReleaseAnnouncedButtonTitle' => 'Text',
@@ -89,6 +90,7 @@ final class SummitHighlightsPage extends SummitPage
         $f->addFieldToTab('Root.Statistics', new TextField('AttendanceQty', 'Attendance Qty'));
         $f->addFieldToTab('Root.Statistics', new TextField('CompaniesRepresentedQty', 'Companies Represented Qty'));
         $f->addFieldToTab('Root.Statistics', new TextField('CountriesRepresentedQty', 'Countries Represented Qty'));
+        $f->addFieldToTab('Root.Statistics', new TextField('SessionsQty', 'Sessions Qty'));
         $f->addFieldToTab('Root.Statistics', new TextField('StatisticsVideoUrl', 'Video Url'));
 
         $file = new UploadField('StatisticsVideo','Video');
