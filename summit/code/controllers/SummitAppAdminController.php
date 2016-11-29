@@ -131,7 +131,7 @@ final class SummitAppAdminController extends Controller implements PermissionPro
     private static $url_handlers = array
     (
         '$SummitID!/dashboard'                                       => 'dashboard',
-        '$SummitID!/reports'                                         => 'reports',
+        '$SummitID!/reports/$Report'                                 => 'reports',
         '$SummitID!/events/published'                                => 'publishedEvents',
         '$SummitID!/events/bulk-action'                              => 'scheduleViewEditBulkAction',
         '$SummitID!/events/schedule'                                 => 'scheduleView',
@@ -605,6 +605,7 @@ final class SummitAppAdminController extends Controller implements PermissionPro
 
     public function reports(SS_HTTPRequest $request)
     {
+        $report = $request->param('Report');
         $summit_id = intval($request->param('SummitID'));
         $summit = Summit::get()->byID($summit_id);
 
@@ -625,6 +626,8 @@ final class SummitAppAdminController extends Controller implements PermissionPro
                         array
                         (
                             'Summit' => $summit,
+                            'Report' => $report,
+                            'ReportName' => ucwords(implode(' ',explode('_',$report)))
                         )
                     )
             );
