@@ -78,8 +78,8 @@
         </div>
     </div>
     <div class="huge-success-video">
-        <h1>"A week filled with <strong>OpenStack innovation</strong>, top notch user stories, and an epic coffee guzzling pigeon mascot."</h1>
-        <div class="summit-success-quote">--<a href="https://www.mirantis.com/blog/openstack-summit-barcelona-replay/" target="_blank">Diana Dvorkin</a></div>
+        <h1>{$SuccessTitle}</h1>
+        <div class="summit-success-quote"><a href="{$SuccessAttributionURL}" target="_blank">{$SuccessAttribution}</a></div>
         <div class="summit-success-stats">
             <div class="stat">
                 <div class="number attendance">
