@@ -25,7 +25,7 @@ require('./t.tag');
     { adoption } %
     </div>
     <div class="core-stat-title">
-    <t entity="Software.ADOPTION">ADOPTION</t>
+    <t entity="Software.ADOPTION" text="ADOPTION" />
     </div>
     </div>
     <div class="col-sm-4 col-xs-4">
@@ -33,7 +33,7 @@ require('./t.tag');
     { maturity_points } <span>of</span> { parent.max_maturity_points }
     </div>
     <div class="core-stat-title">
-    <t entity="Software.MATURITY">MATURITY</t>
+    <t entity="Software.MATURITY" text="MATURITY" />
     </div>
     </div>
     <div class="col-sm-4 col-xs-4">
@@ -41,14 +41,14 @@ require('./t.tag');
     { age } <span>yrs</span>
     </div>
     <div class="core-stat-title">
-    <t entity="Software.AGE">AGE</t>
+    <t entity="Software.AGE" text="AGE" />
     </div>
     </div>
     </div>
     </div>
     <div class="core-bottom">
     <a class="core-service-btn" href="#" onclick={ coreServiceDetails }>
-    	<t entity="Software.MORE_DETAILS">More Details</t>
+    	<t entity="Software.MORE_DETAILS" text="More Details" />
     </a>
     </div>
     </div>
@@ -61,7 +61,6 @@ require('./t.tag');
         coreServiceDetails(e) {
             var slug  = e.item.slug;
             var url = self.parent.base_url+'releases/'+self.parent.getCurrentReleaseId()+'/components/'+slug;
-            console.log(url);
             window.location = url;
         }
     </script>

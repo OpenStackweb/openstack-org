@@ -24,9 +24,13 @@ final class SummitHighlightsPage extends SummitPage
     (
         'ThankYouText'                => 'HTMLText',
         'NextSummitText'              => 'HTMLText',
+        'SuccessTitle'                => 'HTMLText',
+        'SuccessAttribution'          => 'Text',
+        'SuccessAttributionURL'          => 'Text',
         'AttendanceQty'               => 'Text',
         'CompaniesRepresentedQty'     => 'Text',
         'CountriesRepresentedQty'     => 'Text',
+        'SessionsQty'                 => 'Text',
         'ReleaseAnnouncedTitle'       => 'Text',
         'ReleaseAnnouncedDescription' => 'HTMLText',
         'ReleaseAnnouncedButtonTitle' => 'Text',
@@ -86,9 +90,13 @@ final class SummitHighlightsPage extends SummitPage
         $f->addFieldToTab('Root.CurrentSummit', $image);
 
         // statistics
+        $f->addFieldToTab('Root.Statistics', new HtmlEditorField('SuccessTitle', 'Success Stats Title'));
+        $f->addFieldToTab('Root.Statistics', new TextField('SuccessAttribution', 'Attribution (appears below title)'));
+        $f->addFieldToTab('Root.Statistics', new TextField('SuccessAttributionURL', 'Attribution URL'));
         $f->addFieldToTab('Root.Statistics', new TextField('AttendanceQty', 'Attendance Qty'));
         $f->addFieldToTab('Root.Statistics', new TextField('CompaniesRepresentedQty', 'Companies Represented Qty'));
         $f->addFieldToTab('Root.Statistics', new TextField('CountriesRepresentedQty', 'Countries Represented Qty'));
+        $f->addFieldToTab('Root.Statistics', new TextField('SessionsQty', 'Sessions Qty'));
         $f->addFieldToTab('Root.Statistics', new TextField('StatisticsVideoUrl', 'Video Url'));
 
         $file = new UploadField('StatisticsVideo','Video');

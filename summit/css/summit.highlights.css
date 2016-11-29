@@ -1,7 +1,7 @@
 body, html {
     width: 100%;
     height: 100%;
-    position: relative
+    position: relative;
 }
 
 #wrap {
@@ -9,13 +9,13 @@ body, html {
     height: auto !important;
     height: 100%;
     margin: 0 auto -300px;
-    right: 0
+    right: 0;
 }
 
 body, h1, h2, h3, h4, h5, h6 {
     font-family: "Open Sans", Helvetica, Arial, sans-serif;
     font-weight: 400;
-    color: #2A4E68
+    color: #2A4E68;
 }
 
 h1 {
@@ -23,44 +23,44 @@ h1 {
     font-size: 34px;
     font-weight: 300;
     margin: 60px 0;
-    text-align: center
+    text-align: center;
 }
 
 h2 {
     color: #2A4E68;
     font-weight: 300;
     margin-bottom: 25px;
-    text-align: left
+    text-align: left;
 }
 
 h3 {
-    color: #2A4E68
+    color: #2A4E68;
 }
 
 h5 {
     color: #DA422F;
-    margin-bottom: 0
+    margin-bottom: 0;
 }
 
 a, a:visited {
-    color: #29abe2
+    color: #29abe2;
 }
 
 .center {
-    text-align: center
+    text-align: center;
 }
 
 p.danger {
     color: red;
-    font-weight: 700
+    font-weight: 700;
 }
 
 .bureau-checkbox {
-    margin-left: -20px !important
+    margin-left: -20px !important;
 }
 
 body.summit-landing-body {
-    background: #040508
+    background: #040508;
 }
 
 .summit-landing-wrapper {
@@ -68,27 +68,27 @@ body.summit-landing-body {
     min-height: 610px;
     background-size: cover;
     position: relative;
-    border-bottom: 1px solid #243440
+    border-bottom: 1px solid #243440;
 }
 
 .summit-landing-wrapper.tokyo {
     background: url(/images/aaaed9907efb65b7dea5965cba3443fac28f63e4/landing-hero-bkgd-v.jpg) no-repeat left center;
-    background-size: cover
+    background-size: cover;
 }
 
 .summit-landing-logo {
-    margin: 145px 0 20px
+    margin: 145px 0 20px;
 }
 
 .summit-landing-wrapper p {
     color: #29abe2;
     font-weight: 300;
-    max-width: 305px
+    max-width: 305px;
 }
 
 .countdown {
     margin: 50px 5px 10px;
-    display: table
+    display: table;
 }
 
 .countdown span {
@@ -101,29 +101,29 @@ body.summit-landing-body {
     margin: 0;
     color: #fff;
     font-size: 25px;
-    line-height: 1
+    line-height: 1;
 }
 
 .countdown span:first-child {
     border-right: 0;
-    margin-right: -4px
+    margin-right: -4px;
 }
 
 .countdown span:last-child {
     border-left: 0;
-    margin-left: -4px
+    margin-left: -4px;
 }
 
 .countdown-text {
     color: #777;
     font-size: 1.12em;
     text-transform: uppercase;
-    margin: 10px 0 30px
+    margin: 10px 0 30px;
 }
 
 .landing-action {
     display: block;
-    margin-top: 20px
+    margin-top: 20px;
 }
 
 .register-btn-lrg, a.register-btn-lrg {
@@ -133,49 +133,49 @@ body.summit-landing-body {
     text-transform: uppercase;
     font-size: 1.1em;
     font-weight: 400;
-    padding: 12px 30px
+    padding: 12px 30px;
 }
 
 .register-btn-lrg:hover, a.register-btn-lrg:hover {
     background: #A51B1B;
-    color: #fff
+    color: #fff;
 }
 
 .register-btn-lrg:focus, a.register-btn-lrg:focus {
     outline: 0;
-    color: #fff
+    color: #fff;
 }
 
 .register-btn-lrg.soon, a.register-btn-lrg.soon {
     background: 0 0;
     border: 1px solid #fff;
     width: auto !important;
-    padding: 5px !important
+    padding: 5px !important;
 }
 
 .register-btn-lrg i, a.register-btn-lrg i {
-    margin-left: 20px
+    margin-left: 20px;
 }
 
 .register-btn-lrg:hover, a.register-btn-lrg:hover {
     background: #A51B1B;
-    color: #fff
+    color: #fff;
 }
 
 .register-btn-lrg.soon:hover, a.register-btn-lrg.soon:hover {
     background: 0 0;
     color: #fff;
-    cursor: default
+    cursor: default;
 }
 
 .summit-landing-bottom {
-    padding-bottom: 80px
+    padding-bottom: 80px;
 }
 
 .summit-row {
     margin-top: 50px;
     text-align: center;
-    position: relative
+    position: relative;
 }
 
 .summit-row h2 {
@@ -588,7 +588,7 @@ a.future-summit:hover:after, a.past-summit:hover:after {
     }
 }
 
-.hero-tab-wrapper ul.nav-tabs {
+/*.hero-tab-wrapper ul.nav-tabs {
     text-align: center;
     width: 100%
 }
@@ -643,7 +643,7 @@ a.future-summit:hover:after, a.past-summit:hover:after {
     border-color: transparent;
     background: rgba(37, 153, 219, .2);
     color: #fff
-}
+}*/
 
 i.collapse-nav {
     color: #4279B0;
@@ -3907,43 +3907,44 @@ a.outline-btn.inactive:hover {
 
     .growth-text-bottom {
         width: 50%;
-        margin-top: -1em
+        margin-top: -1em;
     }
 }
 
 @media (max-width: 767px) {
     .growth-text-top {
-        width: 100%
+        width: 100%;
     }
 
     .growth-chart, .growth-chart.tokyo {
         margin-left: 0;
-        margin-top: 0
+        margin-top: 0;
     }
 
     .growth-text-bottom {
         width: 100%;
-        margin-top: 20px
+        margin-top: 20px;
     }
 }
 
 .networking-row {
-    text-align: center
+    text-align: center;
 }
 
 .summit-highlights-intro {
-    padding: 80px 0
+    padding: 10px 0 20px;
+    text-align: center;
 }
 
 .summit-highlights-intro h1 {
-    margin: 40px 0 30px;
-    text-align: left
+    margin: 40px 0 20px;
+    text-align: center;
 }
 
 .future-summit-promo {
     padding: 40px;
     color: #fff;
-    text-align: center
+    text-align: center;
 }
 
 .future-summit-promo .future-summit-next {
@@ -3953,18 +3954,18 @@ a.outline-btn.inactive:hover {
     padding-bottom: 10px;
     max-width: 200px;
     margin: 0 auto 5px;
-    border-bottom: 1px solid #fff
+    border-bottom: 1px solid #fff;
 }
 
 .future-summit-promo .future-summit-promo-city {
     font-size: 2.5em;
     font-weight: 400;
     text-transform: uppercase;
-    margin-bottom: 20px
+    margin-bottom: 20px;
 }
 
 .future-summit-promo p {
-    margin-bottom: 30px
+    margin-bottom: 30px;
 }
 
 .future-summit-promo a.future-summit-btn {
@@ -3972,30 +3973,30 @@ a.outline-btn.inactive:hover {
     border-radius: 4px;
     color: #fff;
     padding: 8px 20px;
-    text-transform: uppercase
+    text-transform: uppercase;
 }
 
 .future-summit-promo a.future-summit-btn:hover {
     background: rgba(255, 255, 255, .2);
-    text-decoration: none
+    text-decoration: none;
 }
 
 .future-summit-promo.tokyo {
     /*background: url(/images/post-summit/9a53125c9e007c71972b02b07ce630b7dab0ed64/tokyo-promo.jpg) no-repeat center center;*/
-    background-size: cover
+    background-size: cover;
 }
 
 .huge-success-video {
     position: relative;
     background: rgba(0, 0, 0, .6);
     padding: 80px 0;
-    overflow: hidden
+    overflow: hidden;
 }
 
 .huge-success-video h1 {
     color: #fff;
     font-size: 4em;
-    margin: 0
+    margin: 0;
 }
 
 .huge-success-video video#bgvid {
@@ -4010,6 +4011,17 @@ a.outline-btn.inactive:hover {
     background-size: cover
 }
 
+.summit-success-quote {
+     text-align:right;
+     color:white;
+     padding-right:5%;
+}
+
+.summit-success-quote a {
+      color:white;
+      font-size:2em;
+}
+
 .summit-success-stats {
     text-align: center;
     color: #fff;
@@ -4017,7 +4029,7 @@ a.outline-btn.inactive:hover {
 }
 
 .summit-success-stats .stat {
-    width: 30%;
+    width: 20%;
     text-align: center;
     display: inline-block
 }
@@ -4044,6 +4056,10 @@ a.outline-btn.inactive:hover {
 
 .summit-success-stats .number.countries {
     border-color: #50dfd0
+}
+
+.summit-success-stats .number.sessions {
+    border-color: #ffe600
 }
 
 .summit-success-stats .title {

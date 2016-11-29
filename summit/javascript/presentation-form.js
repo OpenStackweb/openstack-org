@@ -11,8 +11,7 @@
  * limitations under the License.
  **/
 
-var show_if_public = ['ProblemAddressed','AttendeesExpectedLearnt'];
-
+var show_if_public = ['AttendeesExpectedLearnt'];
 var form = null;
 
 $(document).ready(function(){
@@ -89,22 +88,16 @@ $(document).ready(function(){
         }
     });
 
-    $('#PresentationForm_PresentationForm_GroupID').change(function(){
+    $('body').on('change', '#PresentationForm_PresentationForm_GroupID', function(){
         getCategories();
         toggleFields();
         //form.persistableForm('reload');
     });
 
-    $('body').on('change','input[name=CategoryID][type=radio]',function () {
+    $('body').on('change', 'input[name=CategoryID][type=radio]', function () {
         $('#PresentationForm_PresentationForm_CategoryIDbis').val($(this).val());
         getExtraQuestions();
     });
-
-    if ($('#PresentationForm_PresentationForm_CategoryIDbis').val()) {
-        getCategories();
-    }
-
-    toggleFields();
 
     $("#PresentationForm_PresentationForm_action_savePresentationSummary").click(function(evt) {
         tinyMCE.triggerSave();

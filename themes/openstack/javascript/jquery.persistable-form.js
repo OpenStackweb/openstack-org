@@ -47,10 +47,10 @@
             var val = localStorage.getItem(id);
             if(val == null) return;
             if(input.is(':radio')){
-                input.prop('checked', val).change();
+                input.prop('checked', (val === 'true')).change();
             }
             else if(input.is(':checkbox')){
-                input.prop('checked', val).change();
+                input.prop('checked', (val === 'true')).change();
             }
             else{
                 input.val(val);
@@ -150,20 +150,26 @@
 
             for(var i=0; i < controls2Reload.length; i++){
 
-               var id    = controls2Reload[i];
-               var input =  $('#'+id, form);
-               var val   = localStorage.getItem(id);
+                var id    = controls2Reload[i];
+                var input =  $('#'+id, form);
+                var val   = localStorage.getItem(id);
 
-               if(val == null) return;
-               if(input.is(':radio')){
-                   input.prop('checked', val).change();
-               }
-               else if(input.is(':checkbox')){
-                   input.prop('checked', val).change();
-               }
-               else{
+                if(val == null) return;
+                if(input.is(':radio')){
+                   input.prop('checked', (val === 'true'));
+                }
+                else if(input.is(':checkbox')){
+                   input.prop('checked', (val === 'true'));
+                }
+                else{
                    input.val(val);
-               }
+                }
+
+                // trigger change only when val is true
+                if (val === 'true') {
+                    input.change();
+                }
+
             }
         },
         clearAll: function(){

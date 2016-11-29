@@ -1,7 +1,7 @@
 <div class="top-bar">
     <p>
         <i class="fa fa-exclamation-circle"></i>
-        We had an amazing time in {$Summit.Title}, you don't want to miss us in {$Top.NextSummit.Name}!
+        The OpenStack community had an amazing time in {$Summit.Title}, so don't miss the OpenStack Summit in {$Top.NextSummit.Name}!
         <a href="<% if $Summit.Next.RegistrationLink %>$Summit.Next.RegistrationLink<% else %>#<% end_if %>">More on the Summit in {$Top.NextSummit.Name}.</a>
     </p>
 </div>
@@ -12,8 +12,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <a href="/">
                         <img alt="OpenStack Summit"
-                             src="/summit/images/summit-logo.svg" onerror="this.onerror=null; this.src=/summit/images/summit-logo.png"
-                             class="summit-hero-logo">
+                             src="/themes/openstack/static/images/summit-logo-small-white.svg" class="summit-hero-logo">
                     </a>
                     <h2>
                         $Summit.DateLabel
@@ -51,13 +50,13 @@
     <div class="white summit-highlights-intro">
         <div class="container">
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-10 col-sm-push-1">
                     <h1>Thank You {$Summit.Title}!</h1>
                     <p>
                         {$ThankYouText}
                     </p>
                 </div>
-                <div class="col-sm-6">
+                <!--<div class="col-sm-6">
                     <div class="future-summit-promo tokyo" <% if NextSummitTinyBackgroundImage %>style="background: rgba(0, 0, 0, 0) url('{$NextSummitTinyBackgroundImage.Link}') no-repeat center center;"<% end_if %>>
                         <div class="future-summit-next">
                             Up Next
@@ -74,19 +73,20 @@
                         </p>
                     <% end_if %>
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
     </div>
     <div class="huge-success-video">
-        <h1>It Was A <strong>HUGE</strong> Success</h1>
+        <h1>{$SuccessTitle}</h1>
+        <div class="summit-success-quote"><a href="{$SuccessAttributionURL}" target="_blank">{$SuccessAttribution}</a></div>
         <div class="summit-success-stats">
             <div class="stat">
                 <div class="number attendance">
                     {$Top.AttendanceQty}
                 </div>
                 <div class="title">
-                    In Attendance
+                    Attendees
                 </div>
             </div>
             <div class="stat">
@@ -103,6 +103,14 @@
                 </div>
                 <div class="title">
                     Countries Represented
+                </div>
+            </div>
+            <div class="stat">
+                <div class="number sessions">
+                    {$Top.SessionsQty}
+                </div>
+                <div class="title">
+                    Sessions
                 </div>
             </div>
         </div>

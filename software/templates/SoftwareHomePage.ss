@@ -39,7 +39,6 @@
             </div>
         </div>
     </div>
-    <% include LocaleMenu %>
     $Layout
     <% include Footer %>
     <% include Quantcast %>
