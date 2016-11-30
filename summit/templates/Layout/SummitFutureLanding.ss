@@ -15,13 +15,13 @@
                    $LocSubtitle
                 </div>
                 <div> 
-                    <% If $ProspectusUrl %><a href="$ProspectusUrl" class="btn register-btn-lrg" style="margin: 10px;">
+                    <% If ProspectusUrl %><a href="$ProspectusUrl" class="btn register-btn-lrg" style="margin: 10px;">
                         Sponsorship Prospectus
                         <i class="fa fa-cloud-download"></i>
                     </a>
                     &nbsp;&nbsp;&nbsp;
                     <% end if %>
-                    <% If $RegisterUrl %>
+                    <% If RegisterUrl %>
                     <a href="$RegisterUrl" class="btn register-btn-lrg" style="margin: 10px;">Register Now</a>
                     <p style="margin-top:30px;">
                         <em>More details coming soon...</em>
