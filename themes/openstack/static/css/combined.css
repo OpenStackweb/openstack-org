@@ -1566,7 +1566,7 @@ a.who-section-cta {
     text-transform: uppercase; }
   .presentation-main-panel form {
     margin-top: 20px; }
-  .presentation-main-panel .btn {
+  .presentation-main-panel .btn:not(.btn-default) {
     color: white !important; }
 
 .form-actions .btn {
@@ -1649,11 +1649,10 @@ td.action {
   color: red; }
 
 .presentation-steps {
-  max-width: 500px;
-  margin: 20px auto; }
+  margin: 20px auto;
+}
 
 .presentation-steps .step {
-  width: 50%;
   float: left;
   border: 1px solid #CCCCCC;
   padding: 7px 10px;

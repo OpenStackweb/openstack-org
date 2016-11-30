@@ -1300,7 +1300,7 @@ a.current-summit-link {
     text-transform: uppercase; }
   .presentation-main-panel form {
     margin-top: 20px; }
-  .presentation-main-panel .btn {
+  .presentation-main-panel .btn:not(.btn-default) {
     color: white; }
 
 .form-actions .btn {
@@ -1414,6 +1414,12 @@ td.action {
   padding: 7px 10px;
   margin-left: -1px;
   text-align: center;
+}
+
+.presentation-steps:after {
+    content:'';
+    display:block;
+    clear: both;
 }
 
 .presentation-steps a.step:hover, .presentation-steps a.step:active, .presentation-steps a.step:visited {
