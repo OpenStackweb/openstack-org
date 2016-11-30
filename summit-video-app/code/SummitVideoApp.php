@@ -17,6 +17,10 @@ class SummitVideoApp extends Page
 
     public function getOGDescription()
     {
+        if($this->hasField('MetaTitle')) {
+            $title = trim($this->MetaTitle);
+            if(!empty($title)) return $title;
+        }
         return 'Videos from OpenStack Summits';
     }
 
