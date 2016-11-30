@@ -73,13 +73,34 @@ final class RevocationNotificationManager {
 		$notification_repository      = $this->notification_repository;
 		$election_repository          = $this->election_repository;
 
-		return $this->tx_manager->transaction(function() use($max_past_elections, $batch_size, $sender, $foundation_member_repository,$notification_repository, $election_repository,  $notification_factory){
-			$res= $foundation_member_repository->getMembersThatNotVotedOnLatestNElections($max_past_elections, $batch_size, 0, $election_repository);
+		return $this->tx_manager->transaction(function() use
+        (
+            $max_past_elections,
+            $batch_size,
+            $sender,
+            $foundation_member_repository,
+            $notification_repository,
+            $election_repository,
+            $notification_factory
+        )
+        {
+
+            $res           = $foundation_member_repository->getMembersThatNotVotedOnLatestNElections
+                            (
+                                $max_past_elections,
+                                $batch_size,
+                                0,
+                                $election_repository
+                            );
+
 			$last_election = $election_repository->getLatestNElections(1);
 			$last_election = $last_election[0];
+
 			foreach($res as $foundation_member_id){
+
 				$foundation_member = $foundation_member_repository->getById($foundation_member_id);
 				$notification      = $notification_factory->build($foundation_member, $last_election);
+
 				$sender->send($foundation_member, $notification, $notification_repository);
 				$notification_repository->add($notification);
 			}

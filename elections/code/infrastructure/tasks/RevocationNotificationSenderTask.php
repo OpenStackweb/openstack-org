@@ -20,11 +20,12 @@ final class RevocationNotificationSenderTask extends CronTask {
 
 		try{
 
-			$batch_size = 100;
+			$batch_size         = 100;
+            $max_past_elections = 2 ;
+
 			if(isset($_GET['batch_size'])){
 				$batch_size = intval(trim(Convert::raw2sql($_GET['batch_size'])));
 			}
-			$max_past_elections = 2 ;
 
 			$manager = new RevocationNotificationManager(new SapphireFoundationMemberRepository,
 				new SapphireFoundationMemberRevocationNotificationRepository,

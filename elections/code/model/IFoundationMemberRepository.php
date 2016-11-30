@@ -29,7 +29,7 @@ interface IFoundationMemberRepository extends IEntityRepository {
 	/**
 	 * @param string $first_name
 	 * @param string $last_name
-	 * @return IFoundationMember
+	 * @return IFoundationMember[]
 	 */
 	public function getByCompleteName($first_name, $last_name);
 } 

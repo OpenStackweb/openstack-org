@@ -35,11 +35,12 @@ final class SapphireFoundationMemberRepository
 	public function getMembersThatNotVotedOnLatestNElections($n, $limit, $offset, IElectionRepository $election_repository)
 	{
 		$specification = new FoundationMembershipRevocationSpecification;
-		$sql = $specification->sql($n,$necessary_votes = 2 ,$election_repository,$offset,$limit);
-		$res = DB::query($sql);
-		$list = array();
+		$sql           = $specification->sql($n, $necessary_votes = 2 , $election_repository, $offset, $limit);
+		$res           = DB::query($sql);
+		$list          = [];
+
 		foreach ($res as $record) {
-			array_push($list,(int)$record["ID"]);
+			$list[] = (int)$record["ID"];
 		}
 		return $list;
 	}
@@ -47,13 +48,14 @@ final class SapphireFoundationMemberRepository
 	/**
 	 * @param string $first_name
 	 * @param string $last_name
-	 * @return IFoundationMember
+	 * @return IFoundationMember[]
 	 */
 	public function getByCompleteName($first_name, $last_name)
 	{
 		$query = new QueryObject(new Member());
 		$query->addAndCondition(QueryCriteria::equal('FirstName',$first_name));
 		$query->addAndCondition(QueryCriteria::equal('Surname',$last_name));
-		return $this->getBy($query);
+		list($res, $count) = $this->getAll($query, 0, PHP_INT_MAX);
+        return $res;
 	}
 }

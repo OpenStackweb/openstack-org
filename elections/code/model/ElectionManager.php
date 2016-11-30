@@ -117,25 +117,41 @@ final class ElectionManager {
 			}
 			$reader   = new CSVReader($filename);
 
-			$line   = false;
-			$header = $reader->getLine();
-			$count  = 0;
+			$line          = false;
+			$header        = $reader->getLine();
+			$count         = 0;
 			$not_processed = array();
+
 			while($line = $reader->getLine()){
-				$first_name = $line[1];
-				$last_name  = $line[2];
-				$member_id  = (int)$line[3];
-				$member = $foundation_member_repository->getById($member_id);
-				if(!$member)
-					$member = $foundation_member_repository->getByCompleteName($first_name,$last_name);
-				if($member && $member->isFoundationMember()){
-					$vote = $vote_factory->buildVote($election, $member);
-					$vote_repository->add($vote);
-					$count++;
-				}
-				else{
-					array_push($not_processed,  array( 'id' => $member_id, 'first_name' => $first_name,'last_name' =>$last_name));
-				}
+
+                $first_name        = $line[1];
+				$last_name         = $line[2];
+				$member_id         = (int)$line[3];
+                $members_2_process = array();
+				$member            = $foundation_member_repository->getById($member_id);
+
+                if(!is_null($member)){
+                    $members_2_process[] = $member;
+                }
+				else {
+                    $members_2_process = $foundation_member_repository->getByCompleteName($first_name, $last_name);
+                }
+
+                if(count($members_2_process) == 0)
+                {
+                    $not_processed[] = ['id' => $member_id, 'first_name' => $first_name, 'last_name' => $last_name ];
+                    continue;
+                }
+
+                foreach($members_2_process as $member) {
+                    if ($member && $member->isFoundationMember()) {
+                        $vote = $vote_factory->buildVote($election, $member);
+                        $vote_repository->add($vote);
+                        $count++;
+                    } else {
+                        $not_processed[] = ['id' => $member_id, 'first_name' => $first_name, 'last_name' => $last_name ];
+                    }
+                }
 			}
 
 			$voter_file = $voter_file_factory->build($filename);

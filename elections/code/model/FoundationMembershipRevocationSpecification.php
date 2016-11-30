@@ -35,6 +35,7 @@ final class FoundationMembershipRevocationSpecification {
 		$elections_id       = array();
 		$latest_election    = $elections[0];
 		$latest_election_id = $latest_election->getIdentifier();
+
 		foreach($elections as $election)
 			array_push($elections_id, $election->getIdentifier());
 
@@ -62,8 +63,10 @@ final class FoundationMembershipRevocationSpecification {
 		$elections_id       = array();
 		$latest_election    = $elections[0];
 		$latest_election_id = $latest_election->getIdentifier();
+
 		foreach($elections as $election)
 			array_push($elections_id, $election->getIdentifier());
+
 		$elections_id = implode(',',$elections_id);
 
 		if($latest_election->startDate() == new DateTime('2014-01-13')) { // until January 2014
@@ -87,7 +90,8 @@ SQL;
 		}
 		else if($latest_election->startDate() > new DateTime('2014-01-13')){ // newer elections -- moving forward for all future elections after Jan. 2015
 			$early_election  = $elections_repository->getEarliestElectionSince(2);
-			$close_date      = $early_election->endDate();
+			$close_date      = $early_election->endDate()->format('Y-m-d');
+
 			$sql = <<<SQL
 					-- members that did not vote on any latest election
 			select M.ID from Member M
