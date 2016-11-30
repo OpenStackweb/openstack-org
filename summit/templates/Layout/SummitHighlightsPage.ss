@@ -210,4 +210,4 @@
     <!-- End Page Content -->
     <div id="push"></div>
 </div>
-<script src="summit/javascript/summit-highlights.bundle.js"></script>
+$ModuleJS('summit-highlights')

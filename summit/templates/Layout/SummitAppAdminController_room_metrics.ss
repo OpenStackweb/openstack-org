@@ -33,4 +33,4 @@
     </div>
 </div>
 
-<script src="summit/javascript/schedule/admin/room-metrics-view.bundle.js?t={$Top.Time}" type="application/javascript"></script>
+$ModuleJS('room-metrics-view')

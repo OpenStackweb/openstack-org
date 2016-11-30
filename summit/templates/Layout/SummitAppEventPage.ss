@@ -174,9 +174,9 @@ Hidding comments, leaving this feature for phase 2
         <event-comments comments="{ comments }" limit="5"></event-comments>
     </div>
 </div>
-<script src="summit/javascript/schedule/event-detail.bundle.js" type="application/javascript"></script>
+$ModuleJS('event-detail')
 --%>
 
 <div id="fb-root"></div>
-<script src="summit/javascript/schedule/schedule.bundle.js" type="application/javascript"></script>
-<script src="summit/javascript/schedule/share-buttons.bundle.js" type="application/javascript"></script>
+$ModuleJS('schedule')
+$ModuleJS('share-buttons')

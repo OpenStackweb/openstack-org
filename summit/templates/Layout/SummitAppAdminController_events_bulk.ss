@@ -17,4 +17,4 @@
     </div>
 </div>
 
-<script src="summit/javascript/schedule/admin/events-bulk-view.bundle.js?t={$Top.Time}" type="application/javascript"></script>
+$ModuleJS('events-bulk-view')

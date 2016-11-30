@@ -211,5 +211,5 @@
             endDate: "{$Summit.EndDateYMD}",
         });
     </script>
-    <script src="summit/javascript/schedule/admin/schedule-admin-view.bundle.js"  type="application/javascript"></script>
+    $ModuleJS('schedule-admin-view')
 </div>

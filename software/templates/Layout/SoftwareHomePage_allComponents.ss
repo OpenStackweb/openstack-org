@@ -67,5 +67,5 @@
         <!-- End Page Content -->
     </div>
 </div>
-<script src="software/js/public/software_all_projects.bundle.js"></script>
+$ModuleJS('software_all_projects')
 <!-- Software Tabs UI -->

@@ -64,4 +64,4 @@
     </div>
 </div>
 
-<script src="summit/javascript/schedule/admin/attendees-admin-view.bundle.js" type="application/javascript"></script>
+$ModuleJS('attendees-admin-view')

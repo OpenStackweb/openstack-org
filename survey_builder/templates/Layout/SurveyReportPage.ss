@@ -28,4 +28,4 @@
     </div>
 </div>
 
-<script src="survey_builder/js/report/survey-report-view.bundle.js" type="application/javascript"></script>
+$ModuleJS('survey-report-view')

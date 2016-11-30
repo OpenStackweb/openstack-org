@@ -164,5 +164,5 @@
 <% end_if %>
 
 <div id="fb-root"></div>
-<script src="summit/javascript/schedule/schedule.bundle.js" type="application/javascript"></script>
-<script src="summit/javascript/schedule/share-buttons.bundle.js" type="application/javascript"></script>
+$ModuleJS('schedule')
+$ModuleJS('share-buttons')

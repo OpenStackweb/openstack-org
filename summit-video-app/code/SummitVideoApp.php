@@ -132,18 +132,7 @@ class SummitVideoApp_Controller extends Page_Controller
         parent::__construct($dataRecord);
         $this->backend = Injector::inst()->get('SummitVideoAppBackend');
     }
-
-    /**
-     *
-     */
-    public function init()
-    {
-        parent::init();
-        if (!$this->WebpackDevServer()) {
-            Requirements::css('summit-video-app/production/css/main.css');
-        }
-    }
-
+    
 
     /**
      * @return mixed
