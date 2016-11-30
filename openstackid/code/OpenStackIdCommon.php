@@ -90,6 +90,12 @@ final class OpenStackIdCommon {
         return Controller::curr()->redirect('/Security/login/?BackURL='.$back_url);
     }
 
+    public static function doLogout($back_url = ''){
+        if(empty($back_url)) $back_url = Controller::curr()->getRequest()->getURL(true);
+        $back_url = self::cleanBackUrl($back_url);
+        return Controller::curr()->redirect('/Security/logout/?BackURL='.$back_url);
+    }
+
     public static function cleanBackUrl($back_url){
         if(empty($back_url) || (!empty($back_url) && !Director::is_site_url($back_url))){
             $back_url = Director::baseURL();

@@ -33,9 +33,14 @@ final class RevocationNotificationSenderTask extends CronTask {
 				new RevocationNotificationFactory,
 				SapphireTransactionManager::getInstance());
 
-			$manager->sendOutNotifications($max_past_elections, $batch_size, new RevocationNotificationEmailSender);
+			$count = $manager->sendOutNotifications
+            (
+                $max_past_elections,
+                $batch_size,
+                new RevocationNotificationEmailSender
+            );
 
-			return 'OK';
+			echo sprintf("processed %s records .", $count).PHP_EOL;
 		}
 		catch(Exception $ex){
 			SS_Log::log($ex,SS_Log::ERR);

@@ -14,7 +14,7 @@
 /**
  * Class RevocationNotificationAction_Controller
  */
-final class RevocationNotificationAction_Controller extends ContentController {
+final class RevocationNotificationAction_Controller extends Page_Controller {
 	/**
 	 * @var array
 	 */
@@ -47,7 +47,7 @@ final class RevocationNotificationAction_Controller extends ContentController {
 	private $notification_manager;
 
 	public function __construct(){
-		parent::__construct();
+     	parent::__construct();
 		$this->notification_repository = new SapphireFoundationMemberRevocationNotificationRepository();
 		$this->notification_manager    = new RevocationNotificationManager(new SapphireFoundationMemberRepository,
 			new SapphireFoundationMemberRevocationNotificationRepository,
@@ -61,8 +61,7 @@ final class RevocationNotificationAction_Controller extends ContentController {
 	public function logout(){
 		$current_member = Member::currentUser();
 		if($current_member){
-			$current_member->logOut();
-			return Controller::curr()->redirect("Security/login?BackURL=" . urlencode($_SERVER['HTTP_REFERER']));
+			return OpenStackIdCommon::doLogout();
 		}
 		return Controller::curr()->redirectBack();
 	}
@@ -75,7 +74,7 @@ final class RevocationNotificationAction_Controller extends ContentController {
 		try{
 			$current_member = Member::currentUser();
 			if(is_null($current_member))
-				return Controller::curr()->redirect("Security/login?BackURL=" . urlencode($_SERVER['REQUEST_URI']));
+				return OpenStackIdCommon::doLogin(Director::absoluteBaseURL().urlencode($_SERVER['REQUEST_URI']));
 
 			$notification = $this->notification_repository->getByHash($token);
 			if(!$notification){
@@ -108,10 +107,11 @@ final class RevocationNotificationAction_Controller extends ContentController {
 		$token = $this->request->param('ACTION_TOKEN');
 		try{
 			$current_member = Member::currentUser();
-			if(is_null($current_member))
-				return Controller::curr()->redirect("Security/login?BackURL=" . urlencode($_SERVER['REQUEST_URI']));
 
-			$notification = $this->notification_repository->getByHash($token);
+            if(is_null($current_member))
+                return OpenStackIdCommon::doLogin(Director::absoluteBaseURL().urlencode($_SERVER['REQUEST_URI']));
+
+            $notification = $this->notification_repository->getByHash($token);
 			if(!$notification){
 				return $this->renderWith(array('RevocationNotificationActionPage_error','Page'));
 			}
@@ -140,10 +140,11 @@ final class RevocationNotificationAction_Controller extends ContentController {
 		$token = $this->request->param('ACTION_TOKEN');
 		try{
 			$current_member = Member::currentUser();
-			if(is_null($current_member))
-				return Controller::curr()->redirect("Security/login?BackURL=" . urlencode($_SERVER['REQUEST_URI']));
 
-			$notification = $this->notification_repository->getByHash($token);
+            if(is_null($current_member))
+                return OpenStackIdCommon::doLogin(Director::absoluteBaseURL().urlencode($_SERVER['REQUEST_URI']));
+
+            $notification = $this->notification_repository->getByHash($token);
 			if(!$notification){
 				return $this->renderWith(array('RevocationNotificationActionPage_error','Page'));
 			}
@@ -172,10 +173,11 @@ final class RevocationNotificationAction_Controller extends ContentController {
 		$token = $this->request->param('ACTION_TOKEN');
 		try{
 			$current_member = Member::currentUser();
-			if(is_null($current_member))
-				return Controller::curr()->redirect("Security/login?BackURL=" . urlencode($_SERVER['REQUEST_URI']));
 
-			$notification = $this->notification_repository->getByHash($token);
+            if(is_null($current_member))
+                return OpenStackIdCommon::doLogin(Director::absoluteBaseURL().urlencode($_SERVER['REQUEST_URI']));
+
+            $notification = $this->notification_repository->getByHash($token);
 			if(!$notification){
 				return $this->renderWith(array('RevocationNotificationActionPage_error','Page'));
 			}
