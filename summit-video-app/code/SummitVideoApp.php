@@ -315,22 +315,17 @@ class SummitVideoApp_Controller extends Page_Controller
 
     public function MetaTags()
     {
-        $page = $this->request->param('Page');
-        $id = $this->request->param('ID');
+        $summit_slug       = $this->request->param('Action');
+        $presentation_slug = $this->request->param('ID');
+        $summit            = Summit::get()->filter('Slug', trim($summit_slug))->first();
 
-        $summit = Summit::get()->filter('Slug', $page)->first();
-        if ($summit && $id) {
+        if ($summit && !empty($presentation_slug)) {
             $video = PresentationVideo::get()->filter([
-                'Presentation.Slug' => $id,
-                'DisplayOnSite' => true,
-                'Processed' => true
+                'Presentation.Slug' => trim($presentation_slug),
             ])->first();
 
-            if(!is_null($video)){
+            if(!is_null($video))
                 return $video->MetaTags();
-            } else {
-                return parent::MetaTags();
-            }
         }
 
         return parent::MetaTags();
