@@ -12,10 +12,15 @@
         <div class="event-inner-body">
             <div>
                 <input type="checkbox" name="bulk_action_{ data.id }" id="bulk_action_{ data.id }" class="bulk-action-unpublished-selector" data-event-id={ data.id }/>
-                <a id="popover_{ data.id }" data-content="{ getPopoverContent() }" title="{ data.title }" data-toggle="popover">{ trimText(data.title, 68) }{ data.class_name === 'Presentation'? ' - '+ trimText(parent.summit.tracks_dictionary[data.track_id].name, 20):'' }</a>
+                <a id="popover_{ data.id }" data-content="{ getPopoverContent() }" title="{ data.title }" data-toggle="popover">
+                    { data.class_name === 'Presentation' ? trimText(data.title, 48) : trimText(data.title, 61) }
+                    { data.class_name === 'Presentation' ? ' - '+ trimText(parent.summit.tracks_dictionary[data.track_id].name, 13) : '' }
+                </a>
             </div>
             <div class="presentation-status">
-                <div if={ data.status }  class="event-status-component" title="status"><i class="fa fa-check-circle">&nbsp;{data.status}</i></div>
+                <div if={ data.status != 'unaccepted' } class="event-status-component" title="status">
+                    { data.status === 'accepted' ? 'Track Chair Selection' : 'Alternate' }
+                </div>
             </div>
         </div>
         <div class="ui-resizable-handle ui-resizable-s" style="display:none">
@@ -37,8 +42,14 @@
         });
 
         trimText(text, maxSize){
-            var trimmedText = text.substring(0, maxSize);
-            if(text.length > maxSize) trimmedText += '...';
+            var trimmedText = '';
+            if(text.length > maxSize) {
+                trimmedText = text.substring(0, (maxSize - 3));
+                trimmedText += '...';
+            } else {
+                trimmedText = text.substring(0, maxSize);
+            }
+
             return trimmedText;
         }
 

@@ -1,5 +1,5 @@
 <schedule-admin-view-published-filters>
-        <div class="row">
+        <div class="row published-filters">
             <div class="col-md-12" style="margin:10px 0;">
                 <div class="input-group" style="width: 100%;">
                     <input data-rule-required="true" data-rule-minlength="3" type="text" id="published_search_term" class="form-control input-global-search" placeholder="Search for published Events">
@@ -12,12 +12,10 @@
                     </span>
                 </div>
             </div>
-        </div>
-        <div class="row" style="margin-bottom: 35px;">
             <div class="col-md-6">
                 <label for="select_day">Day</label>
                 <select id="select_day" name="select_day" style="width: 80%">
-                 <option value=''>-- Select A Day --</option>
+                    <option value=''>-- Select A Day --</option>
                     <option value={ day.date } each={  key, day in summit.dates }>{ day.label }</option>
                 </select>
             </div>

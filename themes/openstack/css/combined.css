@@ -20,6 +20,11 @@ a:hover {
 
 @media (max-width: 950px) {.defaultSkin table.mceLayout {width: 100% !important;}}
 
+/* fix for input-group bootstrap */
+.input-group .input-group-btn .btn {
+    height: 34px;
+}
+
 /* @group Navigation */
 #navigation {
   display: block;

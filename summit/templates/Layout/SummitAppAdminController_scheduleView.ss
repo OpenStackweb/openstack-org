@@ -148,7 +148,7 @@
             <h1>$Summit.Title<small></small></h1>
         </div>
 
-        <div class="row" style="width:100%">
+        <div class="row" style="margin:0">
             <div class="col-md-6 published-container">
                 <schedule-admin-view-published-filters summit="{ summit }"></schedule-admin-view-published-filters>
                 <schedule-admin-view-published-bulk-actions summit="{ summit }" bulk_edition_url="{$Top.Link}/{$Summit.ID}/events/bulk-action" ></schedule-admin-view-published-bulk-actions>

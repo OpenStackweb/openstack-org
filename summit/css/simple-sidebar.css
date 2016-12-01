@@ -23,7 +23,7 @@
     position: absolute;
     left: 250px;
     width: 0;
-    height: 105vh;
+    height: 700px;
     margin-left: -250px;
     overflow-y: auto;
     background: #000;
@@ -45,7 +45,13 @@
     /*width: 85%;*/
     position: absolute;
     left:250px;
-    height: 85vh;
+    margin-bottom: 30px;
+}
+
+#page-content-wrapper:after {
+    content:'';
+    display:block;
+    clear: both;
 }
 
 #wrapper.toggled #page-content-wrapper {

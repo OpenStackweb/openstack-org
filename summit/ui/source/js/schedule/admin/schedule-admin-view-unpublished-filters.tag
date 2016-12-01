@@ -1,5 +1,5 @@
 <schedule-admin-view-unpublished-filters>
-    <div class="row filters">
+    <div class="row unpublished-filters">
         <div class="col-md-12" style="margin:10px 0;">
             <div class="input-group" style="width: 100%;">
                 <input data-rule-required="true" data-rule-minlength="3" type="text" id="unpublished_search_term" class="form-control input-global-search" placeholder="Search for unpublished Events">
@@ -8,12 +8,15 @@
                     <button class="btn btn-default btn-global-search-clear" onclick={ clearClicked }>
                         <i class="fa fa-times"></i>
                     </button>
+                    <button class="btn btn-primary unpublished-events-refresh" title="refresh unpublished events">
+                        Refresh
+                    </button>
                 </span>
             </div>
         </div>
-        <div class="col-md-10">
+        <div class="col-md-12">
             <div class="row">
-                <div class="col-md-5">
+                <div class="col-md-6">
                     <label for="select_unpublished_events_source">Source</label>
                     <select id="select_unpublished_events_source" name="select_unpublished_events_source" style="width: 70%" value="presentations">
                         <option value=''>-- Select An Event Source --</option>
@@ -23,70 +26,43 @@
                         <option value='events'>Summit Events</option>
                     </select>
                 </div>
-                <div class="col-md-7">
-                    <div id="track_list_col" style="display:none;">
-                        <label for="select_track_list">Track Lists</label>
-                        <select id="select_track_list" name="select_track_list" style="width: 70%">
-                            <option value=''>-- All --</option>
-                            <option each="{ list in summit.track_lists }" value='{ list.id }'>{ list.name }</option>
-                        </select>
-                    </div>
-                    <div id="track_col" style="display:none;">
-                        <label for="select_tracks">Tracks</label>
-                        <select id="select_tracks" name="select_tracks" style="width: 70%">
-                            <option value=''>-- All --</option>
-                            <option each="{ list in summit.tracks }" value='{ list.id }'>{ list.name }</option>
-                        </select>
-                    </div>
-                    <div id="event_type_col" style="display:none;">
-                        <label for="select_event_type">Type</label>
-                        <select id="select_event_type" name="select_event_type" style="width: 70%">
-                            <option value=''>-- All --</option>
-                            <option each="{ id, type in summit.event_types }" if={ type.type != 'Presentation'  && type.type != 'Keynotes'} value='{ id }'>{ type.type }</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-5">
+                <div class="col-md-6">
                     <label for="sort_list">Sort by</label>
-                    <select id="sort_list" name="sort_list" style="width: 70%" value="title">
+                    <select id="sort_list" name="sort_list" value="title" style="width: 70%">
                         <option value='SummitEvent.Title' selected>Title</option>
                         <option value='SummitEvent.ID'>Event Id</option>
                         <option value='SummitEvent.StartDate'>Start Date</option>
                     </select>
                 </div>
-                <div class="col-md-7">
-                    <div id="presentation_selection_status_col" style="display:none;">
-                        <label for="select_unpublished_selection_status">Sel. Status</label>
-                        <select id="select_unpublished_selection_status" name="select_unpublished_selection_status" style="width: 70%" value="approved">
-                            <option value=''>All</option>
-                            <option each="{ status in summit.selection_status_options }" value='{ status }'>{ status }</option>
-                        </select>
-                    </div>
+                <div id="track_list_col" class="col-md-6" style="display:none;">
+                    <label for="select_track_list">T. Lists</label>
+                    <select id="select_track_list" name="select_track_list" style="width: 70%">
+                        <option value=''>-- All --</option>
+                        <option each="{ list in summit.track_lists }" value='{ list.id }'>{ list.name }</option>
+                    </select>
+                </div>
+                <div id="track_col" class="col-md-6" style="display:none;">
+                    <label for="select_tracks">Tracks</label>
+                    <select id="select_tracks" name="select_tracks" style="width: 70%">
+                        <option value=''>-- All --</option>
+                        <option each="{ list in summit.tracks }" value='{ list.id }'>{ list.name }</option>
+                    </select>
+                </div>
+                <div id="event_type_col" class="col-md-6" style="display:none;">
+                    <label for="select_event_type">Type</label>
+                    <select id="select_event_type" name="select_event_type" style="width: 70%">
+                        <option value=''>-- All --</option>
+                        <option each="{ id, type in summit.event_types }" if={ type.type != 'Presentation'  && type.type != 'Keynotes'} value='{ id }'>{ type.type }</option>
+                    </select>
+                </div>
+                <div id="presentation_selection_status_col" class="col-md-6" style="display:none;">
+                    <label for="select_unpublished_selection_status">Sel. Status</label>
+                    <select id="select_unpublished_selection_status" name="select_unpublished_selection_status" style="width: 70%" value="approved">
+                        <option value=''>All</option>
+                        <option each="{ status in summit.selection_status_options }" value='{ status }'>{ status }</option>
+                    </select>
                 </div>
             </div>
-        </div>
-        <div class="col-md-2">
-            <button class="btn btn-primary unpublished-events-refresh" title="refresh unpublished events">
-                Refresh
-            </button>
-        </div>
-    </div>
-    <div class="row filters">
-        <div class="col-md-5">
-
-        </div>
-        <div class="col-md-7">
-
-        </div>
-    </div>
-    <div class="row filters">
-        <div class="col-md-5">
-
-        </div>
-        <div class="col-md-7">
-
         </div>
     </div>
 
@@ -146,6 +122,7 @@
                             break;
                     }
                     var order = $('#sort_list').val();
+
                     self.doFilter(source,second_source,status,search_term,order);
                 });
 

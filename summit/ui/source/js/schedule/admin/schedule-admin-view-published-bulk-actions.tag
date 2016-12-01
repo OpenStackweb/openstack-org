@@ -1,6 +1,6 @@
 <schedule-admin-view-published-bulk-actions>
     <div class="row bulk-actions-container">
-        <div class="col-md-4">
+        <div class="col-md-6">
             <input disabled="disabled" type="checkbox" id="select_all_published" title="select all"/>
             <select disabled="disabled" id="bulk-actions-published" name="bulk-actions-published">
                 <option value="">-- Select a Bulk Action --</option>
@@ -8,7 +8,7 @@
                 <option value="UNPUBLISH">Unpublish</option>
             </select>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-6">
             <button title="Apply Bulk Action" disabled="disabled" class="btn btn-default btn-sm" id="apply-bulk-published-action"><i class="fa fa-play">&nbsp;GO</i></button>
         </div>
     </div>

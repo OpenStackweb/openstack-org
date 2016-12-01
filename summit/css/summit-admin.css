@@ -89,18 +89,13 @@
     margin-top: 30px;
 }
 
-.unpublished-events-refresh {
-    width: 100%;
-    height: 45px;
-}
-
 .unpublished-container .unpublished-events-list-container {
-    height: 100%;
+    height: 90%;
 }
 
 .unpublished-container .unpublished-events-list {
     overflow-y: auto;
-    height: 74%;
+    height: 71%;
     position: relative;
     margin-bottom: 0px;
 }
@@ -119,7 +114,7 @@
 }
 
 .unpublished-container .items_per_page {
-    margin: 0 0 10px 0;
+    margin: 20px 0 10px 0;
     float:  right;
     width: 20%;
 }
@@ -134,7 +129,11 @@
 }
 
 #unpublished-events-pager {
-    margin: 0 0 20px 0;
+    margin: 20px 0 20px 0;
+}
+
+.unpublished-filters, .published-filters {
+    height: 120px;
 }
 
 /* SCHEDULE RESULTS */

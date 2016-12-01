@@ -134,6 +134,10 @@ body
   margin-bottom: 10px;
 }
 
+.unpublished-events-list li:first-of-type {
+  margin-top: 0;
+}
+
 .event-inner-body
 {
   padding-top: 5px;
@@ -142,10 +146,10 @@ body
 
 .fixed
 {
-  position:fixed;
-  top:0;
-  left:57.3%;
-  width: 42%;
+  position: fixed;
+  top: 18px;
+  left: 58.7%;
+  width: 41%;
 }
 
 /* pop over */
@@ -191,16 +195,23 @@ body
   user-select: none;
 }
 
+.bulk-action-unpublished-selector, .bulk-action-published-selector {
+    position: relative;
+    top: 6px;
+    margin-right: 5px !important;
+}
+
 .presentation-status
 {
   color: black;
   font-size: 8pt;
   font-weight: bold;
+  margin-left: 22px;
 }
 
-.status-alternate
+.status-alternate .presentation-status
 {
-  background-color: lightgoldenrodyellow !important;
+  color: gold !important;
 }
 
 .status-alternate a,.status-alternate a:visited
@@ -208,9 +219,9 @@ body
   color: black !important;
 }
 
-.status-accepted
+.status-accepted .presentation-status
 {
-  background-color: lime!important;
+  color: lime!important;
 }
 
 .status-accepted a,.status-accepted a:visited
@@ -218,15 +229,9 @@ body
   color: black !important;
 }
 
-.status-unaccepted
-{
-  background-color: lightcoral!important;
-  color: white !important;
-}
-
 .status-unaccepted a,.status-unaccepted a:visited
 {
-  color: white !important;
+  color: black !important;
 }
 
 
