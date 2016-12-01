@@ -43,11 +43,6 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
     /**
      * @var IEntityRepository
      */
-    private $room_metrics_repository;
-
-    /**
-     * @var IEntityRepository
-     */
     private $category_repository;
 
     /**
@@ -67,7 +62,6 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
         ISummitReportRepository $report_repository,
         IRSVPRepository $rsvp_repository,
         ISummitEventRepository $event_repository,
-        IRoomMetricsRepository $room_metrics_repository,
         IPresentationCategoryRepository $category_repository,
         ISummitPresentationRepository $presentation_repository,
         ISummitService $summit_service
@@ -79,7 +73,6 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
         $this->report_repository             = $report_repository;
         $this->rsvp_repository               = $rsvp_repository;
         $this->event_repository              = $event_repository;
-        $this->room_metrics_repository       = $room_metrics_repository;
         $this->category_repository           = $category_repository;
         $this->presentation_repository       = $presentation_repository;
         $this->summit_service                = $summit_service;
@@ -110,7 +103,6 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
         'GET export'                        => 'handleExport',
         'GET speaker_report'                => 'getSpeakerReport',
         'GET room_report'                   => 'getRoomReport',
-        'GET room_metrics/$EVENT_ID'        => 'getRoomMetrics',
         'GET presentation_report'           => 'getPresentationReport',
         'GET video_report'                  => 'getVideoReport',
         'GET rsvp_report'                   => 'getRsvpReport',
@@ -126,7 +118,6 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
         'handleExport',
         'updateReport',
         'getRsvpReport',
-        'getRoomMetrics',
         'getTrackQuestionsReport',
         'getPresentationsCompanyReport',
     );
@@ -575,45 +566,4 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
         }
     }
 
-    public function getRoomMetrics(SS_HTTPRequest $request){
-        try
-        {
-            $summit_id    = intval($request->param('SUMMIT_ID'));
-            $summit       = $this->summit_repository->getById($summit_id);
-            $event_id     = intval($request->param('EVENT_ID'));
-            $event        = $this->event_repository->getById($event_id);
-            $time_offset  = $request->getVar('offset');
-
-            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
-            if(is_null($event)) throw new NotFoundEntityException('Event', sprintf(' id %s', $event_id));
-
-            $time_offset = $summit->convertDateFromTimeZone2UTC($event->getBeginDateYMD().' '.$time_offset);
-
-            $metrics = $this->room_metrics_repository->getByRoomAndDate($event->LocationID, $event->getStartDateUTC(), $event->getEndDateUTC(), $time_offset)->limit(10);
-            $metrics_array = array();
-
-            foreach ($metrics as $metric) {
-                $type = $metric->Type()->Type;
-                $unit = $metric->Type()->Unit;
-                $time = $summit->convertDateFromUTC2TimeZone(date('H:i:s',$metric->TimeStamp),'g:iA');
-                $data = array($time, $metric->Value);
-
-                if (!isset($metrics_array[$type]))
-                    $metrics_array[$type] = array('type' => $type, 'unit' => $unit, 'metrics' => array());
-                $metrics_array[$type]['metrics'][] = $data;
-            }
-
-            return $this->ok($metrics_array);
-        }
-        catch(NotFoundEntityException $ex2)
-        {
-            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
-            return $this->notFound($ex2->getMessage());
-        }
-        catch(Exception $ex)
-        {
-            SS_Log::log($ex->getMessage(), SS_Log::ERR);
-            return $this->serverError();
-        }
-    }
 }

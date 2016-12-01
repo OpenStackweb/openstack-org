@@ -125,7 +125,6 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         'promocodes_bulk',
         'speakers_merge',
         'events_bulk',
-        'room_metrics',
     );
 
     private static $url_handlers = array
@@ -153,7 +152,6 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         '$SummitID!/promocodes/bulk'                                 => 'promocodes_bulk',
         '$SummitID!/promocodes/$Code!'                               => 'editPromoCode',
         '$SummitID!/promocodes'                                      => 'promocodes',
-        '$SummitID!/room_metrics'                                    => 'room_metrics',
     );
 
     /**
@@ -974,43 +972,6 @@ final class SummitAppAdminController extends Controller implements PermissionPro
                         array
                         (
                             'Summit' => $summit,
-                        )
-                    )
-            );
-    }
-
-    public function room_metrics(SS_HTTPRequest $request)
-    {
-        $summit_id = intval($request->param('SummitID'));
-        $summit = Summit::get()->byID($summit_id);
-
-        Requirements::css('summit/css/simple-sidebar.css');
-        Requirements::css('summit/css/summit-admin-room-metrics.css');
-        Requirements::css('themes/openstack/bower_assets/sweetalert/dist/sweetalert.css');
-        Requirements::css('themes/openstack/bower_assets/jquery-ui/themes/smoothness/jquery-ui.css');
-        Requirements::css("themes/openstack/bower_assets/jqplot-bower/dist/jquery.jqplot.min.css");
-        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/jquery.jqplot.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.canvasTextRenderer.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.canvasAxisLabelRenderer.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.dateAxisRenderer.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.highlighter.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.cursor.min.js");
-
-        Requirements::javascript('themes/openstack/bower_assets/sweetalert/dist/sweetalert.min.js');
-        Requirements::javascript('summit/javascript/simple-sidebar.js');
-        Requirements::javascript('themes/openstack/javascript/jquery-ajax-loader.js');
-
-        $current_events = $this->event_repository->getCurrentPublished($summit_id);
-        $current_events = SummitEvent::get()->where("ID = 14960");
-
-        return $this->getViewer('room_metrics')->process
-            (
-                $this->customise
-                    (
-                        array
-                        (
-                            'Summit' => $summit,
-                            'Events' => $current_events,
                         )
                     )
             );
