@@ -45,7 +45,7 @@ require('./t.tag');
                 ticks_snap_bounds: 1
             });
 
-            $("#all-projects-adoption").on("slide", function(slideEvt) {
+            $("#all-projects-adoption").on("slideStop", function(slideEvt) {
                 $("#adoptionSliderVal").text(slideEvt.value);
 
                 var adoption   = $("#all-projects-adoption").slider('getValue');
@@ -66,7 +66,7 @@ require('./t.tag');
                 ticks_snap_bounds: 0
             });
 
-            $("#all-projects-maturity").on("slide", function(slideEvt) {
+            $("#all-projects-maturity").on("slideStop", function(slideEvt) {
                 $("#maturitySliderVal").text(slideEvt.value);
 
                 var adoption   = $("#all-projects-adoption").slider('getValue');
@@ -87,7 +87,7 @@ require('./t.tag');
                 ticks_snap_bounds: 0
             });
 
-            $("#all-projects-age").on("slide", function(slideEvt) {
+            $("#all-projects-age").on("slideStop", function(slideEvt) {
                 $("#ageSliderVal").text(slideEvt.value);
 
                 var adoption   = $("#all-projects-adoption").slider('getValue');
