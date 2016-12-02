@@ -74,7 +74,7 @@ final class RevocationNotificationAction_Controller extends Page_Controller {
 		try{
 			$current_member = Member::currentUser();
 			if(is_null($current_member))
-				return OpenStackIdCommon::doLogin(Director::absoluteBaseURL().urlencode($_SERVER['REQUEST_URI']));
+				return OpenStackIdCommon::doLogin(Director::absoluteURL($this->getRequest()->getUrl()));
 
 			$notification = $this->notification_repository->getByHash($token);
 			if(!$notification){
@@ -109,7 +109,7 @@ final class RevocationNotificationAction_Controller extends Page_Controller {
 			$current_member = Member::currentUser();
 
             if(is_null($current_member))
-                return OpenStackIdCommon::doLogin(Director::absoluteBaseURL().urlencode($_SERVER['REQUEST_URI']));
+                return OpenStackIdCommon::doLogin(Director::absoluteURL($this->getRequest()->getUrl()));
 
             $notification = $this->notification_repository->getByHash($token);
 			if(!$notification){
@@ -142,7 +142,7 @@ final class RevocationNotificationAction_Controller extends Page_Controller {
 			$current_member = Member::currentUser();
 
             if(is_null($current_member))
-                return OpenStackIdCommon::doLogin(Director::absoluteBaseURL().urlencode($_SERVER['REQUEST_URI']));
+                return OpenStackIdCommon::doLogin(Director::absoluteURL($this->getRequest()->getUrl()));
 
             $notification = $this->notification_repository->getByHash($token);
 			if(!$notification){
@@ -175,7 +175,7 @@ final class RevocationNotificationAction_Controller extends Page_Controller {
 			$current_member = Member::currentUser();
 
             if(is_null($current_member))
-                return OpenStackIdCommon::doLogin(Director::absoluteBaseURL().urlencode($_SERVER['REQUEST_URI']));
+                return OpenStackIdCommon::doLogin(Director::absoluteURL($this->getRequest()->getUrl()));
 
             $notification = $this->notification_repository->getByHash($token);
 			if(!$notification){
