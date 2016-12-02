@@ -51,3 +51,4 @@ migrations:
   - MoveTrackToEventsMigration
   - SummitTypeUpdateMigration
   - UpdateSummitEventSocialSummaryMigration
+  - DefaultSummitAvailabilityThroughAPIMigration

@@ -67,6 +67,8 @@ final class SummitAdminUI extends DataExtension
 
         $link->setDescription('The link to the site page for this summit. Eg: <em>/summit/vancouver-2015/</em>');
         $f->addFieldToTab('Root.Main', new CheckboxField('Active', 'This is the active summit'));
+        $f->addFieldToTab('Root.Main', new CheckboxField('AvailableOnApi', 'Is this Summit available through API?'));
+
         $f->addFieldToTab('Root.Main', $date_label = new TextField('DateLabel', 'Date label'));
         $date_label->setDescription('A readable piece of text representing the date, e.g. <em>May 12-20, 2015</em> or <em>December 2016</em>');
 
