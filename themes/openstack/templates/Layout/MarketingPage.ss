@@ -209,7 +209,7 @@
                 </ul>
                 <span class="hr"></span>
 
-                <h3 class="blue-title">Banner & Poster Files</h3>
+                <h3 class="blue-title">Web Graphics</h3>
                 <ul class="content-list">
                     <% loop $BannersGrouped() %>
                         <% include MarketingPage_GroupedItems %>
