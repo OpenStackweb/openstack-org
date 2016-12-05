@@ -803,8 +803,11 @@ final class Summit extends DataObject implements ISummit
         return $date->format('Y-m-d');
     }
 
+    public static $validation_enabled = true;
+
     protected function validate()
     {
+        if(!self::$validation_enabled) return ValidationResult::create();
 
         $valid = parent::validate();
         if (!$valid->valid()) {

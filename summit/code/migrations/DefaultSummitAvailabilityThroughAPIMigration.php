@@ -21,6 +21,7 @@ class DefaultSummitAvailabilityThroughAPIMigration extends AbstractDBMigrationTa
     function doUp()
     {
 
+        Summit::$validation_enabled = false;
         // austin
         $summit = Summit::get()->byID(6);
         if(!is_null($summit)){
@@ -34,6 +35,8 @@ class DefaultSummitAvailabilityThroughAPIMigration extends AbstractDBMigrationTa
             $summit->AvailableOnApi = true;
             $summit->write();
         }
+
+        Summit::$validation_enabled = true;
     }
 
     function doDown()
