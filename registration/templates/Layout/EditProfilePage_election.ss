@@ -50,7 +50,7 @@
 				<% include CandidateNominations %>
 
 
-				<p><a href="/election/2016-individual-director-election/CandidateList/" class="roundedButton">See The Current Nominations</a> &nbsp; 
+				<p><a href="/election/2017-individual-director-election/CandidateList/" class="roundedButton">See The Current Nominations</a> &nbsp; 
                 <% if NominationsAreOpen %><a href="/community/members/" class="roundedButton">Nominate A Member</a></p><% end_if %>
 				</fieldset></form>
 
