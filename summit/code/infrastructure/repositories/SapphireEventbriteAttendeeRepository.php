@@ -55,9 +55,9 @@ final class SapphireEventbriteAttendeeRepository extends SapphireRepository  imp
         $offset = $page * $size;
 
         $query = <<<SQL
-        SELECT EBA.*, GROUP_CONCAT(EBA.ExternalAttendeeId SEPARATOR ', ') AS ExternalIds FROM EventBriteAttendee EBA
+        SELECT EBA.*, GROUP_CONCAT(EBA.ExternalAttendeeId SEPARATOR ', ') AS ExternalIds FROM EventbriteAttendee EBA
         WHERE NOT EXISTS
-        (SELECT SAT.ID FROM SummitAttendeeTicket SAT WHERE SAT.ExternalAttendeeId = EBA.ExternalAttendeeId)
+        ( SELECT SAT.ID FROM SummitAttendeeTicket SAT WHERE SAT.ExternalAttendeeId = EBA.ExternalAttendeeId )
 SQL;
         if ($search_term) {
             $query .= <<<SQL
