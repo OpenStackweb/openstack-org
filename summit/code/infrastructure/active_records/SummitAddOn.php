@@ -32,7 +32,7 @@ class SummitAddOn extends DataObject implements ISummitAddOn
     );    
     
     private static $has_one = array (
-        'SummitSponsorPage' => 'SummitSponsorPage'
+        'Summit' => 'Summit'
     );
     
     private static $summary_fields = array(
@@ -45,13 +45,38 @@ class SummitAddOn extends DataObject implements ISummitAddOn
     public function getCMSFields() {
         $fields = new FieldList();
         $fields->add(new TextField('Title','Title'));
+        $fields->add(new DropdownField('SummitID','Summit', Summit::get()->map("ID","Title")));
         $fields->add(new CheckboxField('ShowQuantity','Show Quantities'));
         $fields->add(new TextField('Cost','Cost'));
         $fields->add(new NumericField('MaxAvailable','Max. Available'));
         $fields->add(new NumericField('CurrentlyAvailable','Currently Available'));
         return $fields;
-    } 
-    
+    }
+
+    public static $validation_enabled = true;
+
+    protected function validate()
+    {
+        if(!self::$validation_enabled) return ValidationResult::create();
+
+        $valid = parent::validate();
+        if (!$valid->valid()) {
+            return $valid;
+        }
+
+        if($this->SummitID == 0){
+            return $valid->error('Summit is required!');
+        }
+
+        $name = trim($this->Title);
+        if (empty($name)) {
+            return $valid->error('Title is required!');
+        }
+
+
+        return $valid;
+    }
+
     public function SoldOut() {
         return $this->CurrentlyAvailable == 0;
     }

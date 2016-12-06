@@ -18,48 +18,48 @@
 class SummitSponsorPage extends SummitPage
 {
 
-    private static $db = array(
-        'SponsorIntro' => 'HTMLText',
-        'SponsorAlert' => 'HTMLText',
-        'SponsorSteps' => 'HTMLText',
-        'SponsorContract' => 'Text',
-        'SponsorProspectus' => 'Text',
-        'SponsorProspectus' => 'Text',
-        'CallForSponsorShipStartDate' => 'SS_Datetime',
-        'CallForSponsorShipEndDate' => 'SS_Datetime',
-        'AudienceIntro' => 'HTMLText',
-        'ShowAudience' => 'Boolean',
-        'AudienceMetricsTitle' => 'Text',
-        'AudienceTotalSummitAttendees' => 'Text',
-        'AudienceCompaniesRepresented' => 'Text',
-        'AudienceCountriesRepresented' => 'Text',
-        'HowToSponsorContent' => 'HTMLText',
-        'VenueMapContent' => 'HTMLText',
-    );
+    private static $db = [
+        'SponsorIntro'                        => 'HTMLText',
+        'SponsorAlert'                        => 'HTMLText',
+        'SponsorSteps'                        => 'HTMLText',
+        'SponsorContract'                     => 'Text',
+        'SponsorProspectus'                   => 'Text',
+        'SponsorProspectus'                   => 'Text',
+        'CallForSponsorShipStartDate'         => 'SS_Datetime',
+        'CallForSponsorShipEndDate'           => 'SS_Datetime',
+        'AudienceIntro'                       => 'HTMLText',
+        'ShowAudience'                        => 'Boolean',
+        'AudienceMetricsTitle'                => 'Text',
+        'AudienceTotalSummitAttendees'        => 'Text',
+        'AudienceCompaniesRepresented'        => 'Text',
+        'AudienceCountriesRepresented'        => 'Text',
+        'HowToSponsorContent'                 => 'HTMLText',
+        'VenueMapContent'                     => 'HTMLText',
+        'SponsorshipPackagesTitle'            => 'HTMLText',
+        'ConditionalSponsorshipPackagesTitle' => 'HTMLText',
+    ];
 
-    private static $has_many = array(
-        'SummitPackages'    => 'SummitPackage',
-        'SummitAddOns'      => 'SummitAddOn',
+    private static $has_many = [
         'AttendeesByRegion' => 'SummitPieDataItemRegion',
         'AttendeesByRoles'  => 'SummitPieDataItemRole',
-    );
+    ];
 
-    private static $has_one = array(
+    private static $has_one = [
         'CrowdImage'   => 'BetterImage',
         'ExhibitImage' => 'BetterImage'
-    );
+    ];
 
-    private static $many_many = array(
+    private static $many_many = [
         'Companies' => 'Company'
-    );
+    ];
 
     //sponsor type
     private static $many_many_extraFields = array(
-        'Companies' => array(
+        'Companies' => [
             'SponsorshipType' => "Enum('Headline, Premier, Event, Startup, InKind, Spotlight, Media', 'Startup')",
             'SubmitPageUrl'   => 'Text',
             'SummitID'        => 'Int'
-        ),
+        ],
     );
 
     public function getCMSFields()
@@ -80,10 +80,18 @@ class SummitSponsorPage extends SummitPage
         // Sponsor Steps Editor
         $sponsorStepsField = new HTMLEditorField('SponsorSteps', 'Steps To Become A Sponsor');
         $fields->addFieldToTab('Root.Main', $sponsorStepsField, 'Content');
+
+        $title1 = new HTMLEditorField('SponsorshipPackagesTitle', 'Sponsorship Packages Title');
+        $fields->addFieldToTab('Root.Main', $title1, 'SponsorSteps');
+
+        // Sponsor Steps Editor
+        $title2 = new HTMLEditorField('ConditionalSponsorshipPackagesTitle', 'Conditional Sponsorship Packages Title');
+        $fields->addFieldToTab('Root.Main', $title2, 'SponsorshipPackagesTitle');
+
         //call for sponsorship dates
 
         $start_date = new DatetimeField('CallForSponsorShipStartDate', 'Call For SponsorShip - Start Date');
-        $end_date = new DatetimeField('CallForSponsorShipEndDate', 'Call For SponsorShip - End Date');
+        $end_date   = new DatetimeField('CallForSponsorShipEndDate', 'Call For SponsorShip - End Date');
         $start_date->getDateField()->setConfig('showcalendar', true);
         $start_date->setConfig('dateformat', 'dd/MM/yyyy');
         $end_date->getDateField()->setConfig('showcalendar', true);
@@ -95,23 +103,6 @@ class SummitSponsorPage extends SummitPage
             //set current page id
             $_REQUEST["PageId"] = $this->ID;
 
-            // Summit Packages
-            $config = GridFieldConfig_RelationEditor::create();
-            $config->addComponent(new GridFieldSortableRows('Order'));
-            $gridField = new GridField('SummitPackages', 'Sponsor Packages', $this->SummitPackages(), $config);
-            $fields->addFieldToTab('Root.Packages', $gridField);
-
-            // Summit Add Ons
-
-            $config = GridFieldConfig_RelationEditor::create();
-            $config->addComponent(new GridFieldSortableRows('Order'));
-
-            // Remove pagination so that you can sort all add-ons collectively
-            $config->removeComponentsByType('GridFieldPaginator');
-            $config->removeComponentsByType('GridFieldPageCount');
-
-            $gridField = new GridField('SummitAddOn', 'Sponsor Add Ons', $this->SummitAddOns(), $config);
-            $fields->addFieldToTab('Root.AddOns', $gridField);
 
             $prospectusField = new TextField('SponsorProspectus');
             $fields->addFieldToTab('Root.ProspectusAndContract', $prospectusField);
@@ -121,15 +112,17 @@ class SummitSponsorPage extends SummitPage
 
             // sponsors
 
-            $companies = new GridField('Companies', 'Sponsors', $this->Companies(), GridFieldConfig_RelationEditor::create(10));
+            $companies = new GridField('Companies', 'Sponsors', $this->Companies(), GridFieldConfig_RelationEditor::create(PHP_INT_MAX));
 
             $companies->getConfig()->removeComponentsByType('GridFieldEditButton');
             $companies->getConfig()->removeComponentsByType('GridFieldAddNewButton');
 
             $companies->getConfig()->getComponentByType('GridFieldDataColumns')->setDisplayFields(
-                array('Name' => 'Name',
+                [
+                    'Name'               => 'Name',
                     "DDLSponsorshipType" => "Sponsorship Type",
-                    "InputSubmitPageUrl" => "Sponsor Link")
+                    "InputSubmitPageUrl" => "Sponsor Link"
+                ]
             );
 
             $fields->addFieldToTab('Root.SponsorCompanies', $companies);
@@ -171,12 +164,22 @@ class SummitSponsorPage extends SummitPage
 
     public function getSortedPackages()
     {
-        return $this->SummitPackages()->sort('Order');
+        return $this->Summit()->SummitPackages()->sort('Order');
     }
 
     public function getSortedAddOns()
     {
-        return $this->SummitAddOns()->sort('Order');
+        return $this->Summit()->SummitAddOns()->sort('Order');
+    }
+
+    /**
+     * @return bool
+     */
+    public function HasDiscountPackages(){
+        foreach($this->Summit()->SummitPackages()->sort('Order') as $package){
+            if($package->DiscountPackages()->count() > 0) return true;
+        }
+        return false;
     }
 
     function onAfterWrite()
@@ -205,6 +208,20 @@ class SummitSponsorPage extends SummitPage
         $res = $this->getField('SponsorIntro');
         if (empty($res))
             $res = '<h1>Thank You To The OpenStack Summit Sponsors</h1><p> The generous support of our sponsors makes it possible for our community to gather, learn and build the future of cloud computing. A warm thank you to all of our sponsors for the May 2015 OpenStack Summit. </p>';
+        return $res;
+    }
+
+    public function getSponsorshipPackagesTitle(){
+        $res = $this->getField('SponsorshipPackagesTitle');
+        if (empty($res))
+            $res = 'Sponsorships Packages Available <span>(prices in USD)</span>';
+        return $res;
+    }
+
+    public function getConditionalSponsorshipPackagesTitle(){
+        $res = $this->getField('ConditionalSponsorshipPackagesTitle');
+        if (empty($res))
+            $res = "*NEW* Special ‘Bundle & Save’ Discount Sponsorships Packages Available for the November 2017 Summit in Sydney, Australia (prices in USD)";
         return $res;
     }
 
