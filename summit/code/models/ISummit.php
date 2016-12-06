@@ -263,6 +263,16 @@ interface ISummit extends IEntity
     public function convertDateFromTimeZone2UTC($value, $format);
 
     /**
+     * @return null|string
+     */
+    public function getTimeZoneName();
+
+    /**
+     * @return null|string
+     */
+    public function getLocalTime($format="Y-m-d H:i:s");
+
+    /**
      * @return PresentationCategory[]
      */
     public function getCategories();
