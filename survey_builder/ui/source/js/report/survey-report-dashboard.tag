@@ -11,7 +11,9 @@
     <raw class="section_desc" content="{ section.Description }"/>
     <div id="dashboard">
         <div class="graph_box { question.Graph }" each="{ question in section.Questions }">
-            <div class="graph_title">{ question.Title }</div>
+            <div class="graph_title">
+                <raw content="{ question.Title }"/>
+            </div>
             <div if={ question.Total > 0 }>
                 <div id="graph_{ question.ID }" class="graph"></div>
                 <span class="label_extra" if={ question.ExtraLabel }>{ question.ExtraLabel }</span>
