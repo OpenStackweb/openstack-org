@@ -3,7 +3,8 @@
         emitPackagePurchaseOrder: '{$Top.Link(emitPackagePurchaseOrder)}',
         searchOrg               : '{$Top.Link(searchOrg)}'
     };
-    var page_id = $Top.ID ;
+
+    var summit_id = $Top.Summit.ID ;
 </script>
 <div class="white sponsor-page-wrapper">
     <div class="container">
@@ -216,18 +217,19 @@
     </div>
 </div>
 <% end_if %>
+
 <!-- sponsorship packages -->
-<% if ShowSponsorShipPackages %>
+<% if $Top.ShowSponsorShipPackages %>
     <div class="light" id="packages">
         <div class="container sponsor-wrapper">
-            <% if $SortedPackages %>
+            <% if $Top.SortedPackages %>
             <div class="row">
                 <h1>Packages</h1>
             </div>
             <div class="row">
                 <div class="col-lg-8 col-lg-push-2">
                     <h5 class="section-title">
-                        Sponsorships Packages Available <span>(prices in USD)</span>
+                       $Top.SponsorshipPackagesTitle
                     </h5>
                     <div class="row" id="packages_container">
                        <% loop $SortedPackages %>
@@ -257,6 +259,43 @@
                             </div>
                         <% end_loop %>
                     </div>
+                    <% if $Top.HasDiscountPackages %>
+                        <div class="row" id="discount_packages_container">
+                            <p>
+                                $Top.ConditionalSponsorshipPackagesTitle
+                            </p>
+                            <% loop $SortedPackages %>
+                                <% if $DiscountPackages %>
+                                    <% loop $DiscountPackages %>
+                                    <div class="sponsor_package col-lg-4 col-md-4 col-sm-4" <% if not $SoldOut %>title="Buy me"<% end_if %>>
+                                        <div class="sponsor-spots <% if $SoldOut %>sold-out<% end_if %>">
+                                            <h3>$Title <span>$SubTitle</span></h3>
+                                            <div class="sponsor-cost">
+                                                $ReducedCost.Nice
+                                            </div>
+                                            <div class="sponsor-count">
+                                                <% if $SoldOut %>
+                                                    Sold Out
+                                                <% else %>
+                                                    <% if $ShowQuantity %>
+                                                        <td>Available: $CurrentlyAvailable of $MaxAvailable</td>
+                                                    <% else %>
+                                                        <td>Still Available</td>
+                                                    <% end_if %>
+                                                <% end_if %>
+                                            </div>
+                                        </div>
+                                    <% end_loop %>
+                                <% end_if %>
+                                <!--
+                                    <div class="package-actions">
+                                        <button type="button" id="package_{$ID}" data-title="{$Title}" data-id="{$ID}" class="btn btn-primary buy-package<% if $SoldOut %> hide<% end_if %>"  data-available="{$CurrentlyAvailable}">Buy Me</button>
+                                    </div>
+                                    -->
+                            </div>
+                            <% end_loop %>
+                        </div>
+                    <% end_if %>
                 </div>
             </div> 
             <div class="sponsor-note">

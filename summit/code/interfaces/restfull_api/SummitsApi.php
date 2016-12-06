@@ -278,9 +278,9 @@ final class SummitsApi extends AbstractRestfulJsonApi
 
             $summit_id = (int)$request->param('SUMMIT_ID');
             $query = new QueryObject(new SummitAddOn);
-            $query->addAndCondition(QueryCriteria::equal('SummitSponsorPageID', $summit_id));
+            $query->addAndCondition(QueryCriteria::equal('SummitID', $summit_id));
             $query->addOrder(QueryOrder::asc("Order"));
-            list($list, $count) = $this->sponsorship_add_on_repository->getAll($query, 0, 999999);
+            list($list, $count) = $this->sponsorship_add_on_repository->getAll($query, 0, PHP_INT_MAX);
             $res = array();
             foreach ($list as $add_on) {
                 array_push($res, SummitAddOnAssembler::toArray($add_on));
@@ -299,11 +299,11 @@ final class SummitsApi extends AbstractRestfulJsonApi
         try {
             $response = $this->loadJSONResponseFromCache($request);
             if(!is_null($response)) return $response;
-            $query = new QueryObject(new SummitPackage());
+            $query     = new QueryObject(new SummitPackage());
             $summit_id = (int)$request->param('SUMMIT_ID');
-            $query->addAndCondition(QueryCriteria::equal('SummitSponsorPageID', $summit_id));
+            $query->addAndCondition(QueryCriteria::equal('SummitID', $summit_id));
             $query->addOrder(QueryOrder::asc("Order"));
-            list($list, $count) = $this->sponsorship_package_repository->getAll($query, 0, 999999);
+            list($list, $count) = $this->sponsorship_package_repository->getAll($query, 0, PHP_INT_MAX);
             $res = array();
             foreach ($list as $package) {
                 array_push($res, SummitPackageAssembler::toArray($package));

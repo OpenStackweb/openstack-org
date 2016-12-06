@@ -343,6 +343,25 @@ final class SummitAdminUI extends DataExtension
             $config->addComponent(new GridFieldAjaxRefresh(1000, false));
             $gridField = new GridField('RSVPTemplates', 'RSVPTemplates', $this->owner->RSVPTemplates(), $config);
             $f->addFieldToTab('Root.RSVPTemplates', $gridField);
+
+            // Summit Packages
+            $config = GridFieldConfig_RecordEditor::create();
+            $config->addComponent(new GridFieldSortableRows('Order'));
+            $gridField = new GridField('SummitPackages', 'Sponsor Packages', $this->owner->SummitPackages(), $config);
+            $f->addFieldToTab('Root.Sponsor Packages', $gridField);
+
+            // Summit Add Ons
+
+            $config = GridFieldConfig_RecordEditor::create();
+            $config->addComponent(new GridFieldSortableRows('Order'));
+
+            // Remove pagination so that you can sort all add-ons collectively
+            $config->removeComponentsByType('GridFieldPaginator');
+            $config->removeComponentsByType('GridFieldPageCount');
+
+            $gridField = new GridField('SummitAddOn', 'Sponsor Add Ons', $this->owner->SummitAddOns(), $config);
+            $f->addFieldToTab('Root.Sponsor Add Ons', $gridField);
+
         }
     }
 

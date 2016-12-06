@@ -72,6 +72,8 @@ final class Summit extends DataObject implements ISummit
         'SummitAssistances'            => 'PresentationSpeakerSummitAssistanceConfirmationRequest',
         'RSVPTemplates'                => 'RSVPTemplate',
         'SpeakerAnnouncementEmails'    => 'SpeakerAnnouncementSummitEmail',
+        'SummitPackages'               => 'SummitPackage',
+        'SummitAddOns'                 => 'SummitAddOn',
     );
 
     /**

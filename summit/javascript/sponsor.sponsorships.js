@@ -109,7 +109,7 @@
                         email           : $('#summit_package_purchase_order_email', form).val(),
                         organization    : $('#summit_package_purchase_order_org', form).val(),
                         organization_id : parseInt($('#summit_package_purchase_order_org_id', form).val()),
-                        summit_page_id  : page_id
+                        summit_id       : summit_id
                     }
 
                     var token = $('#packagePurchaseOrderSecurityToken', form).val();
@@ -199,7 +199,7 @@
 
         setInterval(function(){
             if(jqxhr_packages === null) {
-                jqxhr_packages = $.get("/api/v1/summits/"+page_id+"/packages", function (data) {
+                jqxhr_packages = $.get("/api/v1/summits/"+summit_id+"/packages", function (data) {
 
                     if(data === null || !$.isArray(data) || data.length == 0) return;
 
@@ -238,7 +238,7 @@
 
         setInterval(function(){
             if(jqxhr_add_ons === null) {
-                jqxhr_add_ons = $.get("/api/v1/summits/"+page_id+"/add-ons", function (data) {
+                jqxhr_add_ons = $.get("/api/v1/summits/"+summit_id+"/add-ons", function (data) {
 
                     if(data === null || !$.isArray(data) || data.length == 0) return;
 
