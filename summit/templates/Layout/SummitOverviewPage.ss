@@ -115,7 +115,7 @@
                 $EventTwoContent
             </div>
         </div>
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-sm-8 col-sm-push-2">
                 <div class="about-timeline-wrapper">
                     <h3>Summit Timeline</h3>
@@ -123,7 +123,7 @@
                     <img class="summit-type-icon" src="{$TimelineImageUrl}" onerror="this.onerror=null; this.src={$TimelineImagePngUrl}" alt="Summit Timeline">
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
 <div class="white testimonial-row">

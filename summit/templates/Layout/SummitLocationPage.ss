@@ -32,12 +32,6 @@
                     </a>
                 </li>
             <% end_if %>
-            <li>
-                <a href="/summit/barcelona-2016/travel/travel-tips">
-                    <i class="fa fa-road"></i>
-                    Travel Tips
-                </a>
-            </li>
             <% if VisaInformation  %>
             <li>
                 <a href="#visa">
