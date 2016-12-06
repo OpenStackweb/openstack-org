@@ -220,7 +220,7 @@
 
 <!-- sponsorship packages -->
 <% if $Top.ShowSponsorShipPackages %>
-    <div class="light" id="packages">
+    <div class="light" id="packages" style="margin-bottom: -60px;" >
         <div class="container sponsor-wrapper">
             <% if $Top.SortedPackages %>
             <div class="row">
