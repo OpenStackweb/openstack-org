@@ -20,7 +20,7 @@ class SurveyReportGraph extends DataObject {
     static $db = array
     (
         'Name'  => 'VarChar(255)',
-        'Label' => 'VarChar(255)',
+        'Label' => 'HTMLText',
         'Type'  => "Enum('pie,bars,multibars','pie')",
         'Order' => 'Int',
     );
@@ -57,6 +57,8 @@ class SurveyReportGraph extends DataObject {
         $questionSelect = DropdownField::create('QuestionID', 'Question')->setSource($questionList);
 
         $fields->replaceField('QuestionID', $questionSelect);
+        $fields->replaceField('Label', $label = new HtmlEditorField('Label'));
+        $label->setRows(4);
 
         return $fields;
     }
