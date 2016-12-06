@@ -59,12 +59,25 @@ class SummitPackage
         if($this->ID > 0){
             $config = GridFieldConfig_RelationEditor::create(25);
             $config->removeComponentsByType(new GridFieldDetailForm());
+            $auto_completer = $config->getComponentByType('GridFieldAddExistingAutocompleter');
+            $auto_completer->setResultsFormat('$Title ($Summit.Title)');
             $editconf = new GridFieldDetailForm();
             $editconf->setFields(FieldList::create(
                 ReadonlyField::create('SummitID','Summit'),
                 ReadonlyField::create('Title','Title'),
                 TextField::create('ManyMany[Discount]', 'Discount ( Number between 0.00 and 1.00 )')
             ));
+
+            $config->getComponentByType('GridFieldDataColumns')->setDisplayFields
+            (
+                [
+                    'Title' => 'Title',
+                    'Summit.Title' => 'Summit',
+                    'Cost' => 'Cost',
+                    'MaxAvailable' => 'MaxAvailable',
+                    'CurrentlyAvailable' =>'CurrentlyAvailable'
+                ]
+            );
             $config->addComponent($editconf);
             $discounts_packages = new GridField('DiscountPackages', 'Discount Packages', $this->DiscountPackages(), $config);
             $fields->add($discounts_packages);
