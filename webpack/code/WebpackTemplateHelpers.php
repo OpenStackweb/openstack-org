@@ -187,7 +187,7 @@ class WebpackTemplateHelpers implements TemplateGlobalProvider
      */
     public static function render_component($name)
     {
-        self::module_js('automount');
+        self::module_js('automount', true);
         self::module_js($name, true);
 
         return sprintf(

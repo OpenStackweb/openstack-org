@@ -76,7 +76,7 @@ keys.tags.pub
 trait-loader/
 gridfieldextensions/
 fluent/
-*/ui/production/
+**/ui/production/*
 opengraph/
 translatable/
 .DS_Store
