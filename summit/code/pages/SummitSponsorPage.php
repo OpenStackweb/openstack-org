@@ -182,7 +182,7 @@ class SummitSponsorPage extends SummitPage
     function onAfterWrite()
     {
         parent::onAfterWrite();
-        $summit = Summit::get_active();
+        $summit = $this->Summit();
         //update all relationships with sponsors
         foreach ($this->Companies() as $company) {
             if (isset($_REQUEST["SponsorshipType_{$company->ID}"])) {

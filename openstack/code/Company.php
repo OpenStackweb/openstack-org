@@ -565,7 +565,7 @@ class Company extends DataObject implements PermissionProvider,IEntity
     {
         parent::onAfterWrite();
 
-        if (is_subclass_of(Controller::curr(), "LeftAndMain")) { // check if we are on admin (CMS side)
+        if (Controller::curr() instanceof CompanyAdmin) { // check if we are on admin (CMS side)
             //update all relationships with Administrators
             foreach ($this->Administrators() as $member) {
                 if (isset($_REQUEST["AdminSecurityGroup_{$member->ID}"])) {
