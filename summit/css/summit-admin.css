@@ -34,6 +34,25 @@
     color: white !important;
 }
 
+/* DASHBOARD */
+
+.dashboard .row {
+    font-size: 20px;
+    margin: 20px 0;
+}
+
+.dashboard .past {
+    color: red;
+}
+
+.dashboard .present {
+    color: #1dde1d;
+}
+
+.dashboard .future {
+    color: black;
+}
+
 /* DIRECTORY */
 
 #create_summit .form-group {
