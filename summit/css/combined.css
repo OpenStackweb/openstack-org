@@ -322,7 +322,7 @@ a.past-summit:hover:after, a.future-summit:hover:after {
 /*End Summit Landing*/
 /*Summit Inner Layout*/
 .summit-hero-wrapper {
-  background: url('/assets/Uploads/austin-bkgd-lrg.jpg') no-repeat center bottom;
+  background: rgba(0, 0, 0, 0) url('/assets/Uploads/austin-bkgd-lrg.jpg') no-repeat center bottom;
   background-size: cover;
   position: relative;
   text-align: center;
@@ -331,6 +331,7 @@ a.past-summit:hover:after, a.future-summit:hover:after {
 
 .summit-hero-wrapper.condensed {
   min-height: 100px;
+  background: rgba(0, 0, 0, 0) url('/assets/Uploads/boston-bkgd.jpg') no-repeat scroll center center / cover;
 }
 
 @media (max-width: 767px) {

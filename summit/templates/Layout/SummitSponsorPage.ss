@@ -37,14 +37,6 @@
                     </a>
                 </li>
             <% end_if %>
-            <% if HowToSponsorContent %>
-            <li>
-                <a href="#how-to-sponsor">
-                    <i class="fa fa-question-circle"></i>
-                    How To Sponsor
-                </a>
-            </li>
-            <% end_if %>
             <% if HasSponsors %>
             <li>
                 <a href="#sponsors">
@@ -66,6 +58,14 @@
                 <a href="#audience">
                     <i class="fa fa-group"></i>
                     Audience
+                </a>
+            </li>
+            <% end_if %>
+            <% if HowToSponsorContent %>
+            <li>
+                <a href="#how-to-sponsor">
+                    <i class="fa fa-question-circle"></i>
+                    How To Sponsor
                 </a>
             </li>
             <% end_if %>
