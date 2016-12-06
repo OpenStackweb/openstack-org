@@ -178,7 +178,7 @@ final class Summit extends DataObject implements ISummit
         }
     }
 
-    private function getFromUTCtoLocal($field, $format=null){
+    private function getFromUTCtoLocal($field, $format="Y-m-d H:i:s"){
         return $this->convertDateFromUTC2TimeZone($this->getField($field), $format);
     }
 
@@ -197,7 +197,7 @@ final class Summit extends DataObject implements ISummit
         $this->setDateTimeFromLocalToUTC($value, 'SummitBeginDate');
     }
 
-    public function getSummitBeginDate($format=null)
+    public function getSummitBeginDate($format="Y-m-d H:i:s")
     {
         return $this->getFromUTCtoLocal('SummitBeginDate', $format);
     }
@@ -207,7 +207,7 @@ final class Summit extends DataObject implements ISummit
         $this->setDateTimeFromLocalToUTC($value, 'SummitEndDate');
     }
 
-    public function getSummitEndDate($format=null)
+    public function getSummitEndDate($format="Y-m-d H:i:s")
     {
         return $this->getFromUTCtoLocal('SummitEndDate', $format);
     }
@@ -217,7 +217,7 @@ final class Summit extends DataObject implements ISummit
         $this->setDateTimeFromLocalToUTC($value, 'SubmissionBeginDate');
     }
 
-    public function getSubmissionBeginDate($format=null)
+    public function getSubmissionBeginDate($format="Y-m-d H:i:s")
     {
         return $this->getFromUTCtoLocal('SubmissionBeginDate', $format);
     }
@@ -227,7 +227,7 @@ final class Summit extends DataObject implements ISummit
         $this->setDateTimeFromLocalToUTC($value, 'SubmissionEndDate');
     }
 
-    public function getSubmissionEndDate($format=null)
+    public function getSubmissionEndDate($format="Y-m-d H:i:s")
     {
         return $this->getFromUTCtoLocal('SubmissionEndDate', $format);
     }
@@ -237,7 +237,7 @@ final class Summit extends DataObject implements ISummit
         $this->setDateTimeFromLocalToUTC($value, 'VotingBeginDate');
     }
 
-    public function getVotingBeginDate($format=null)
+    public function getVotingBeginDate($format="Y-m-d H:i:s")
     {
         return $this->getFromUTCtoLocal('VotingBeginDate', $format);
     }
@@ -247,7 +247,7 @@ final class Summit extends DataObject implements ISummit
         $this->setDateTimeFromLocalToUTC($value, 'VotingEndDate');
     }
 
-    public function getVotingEndDate($format=null)
+    public function getVotingEndDate($format="Y-m-d H:i:s")
     {
         return $this->getFromUTCtoLocal('VotingEndDate', $format);
     }
@@ -257,7 +257,7 @@ final class Summit extends DataObject implements ISummit
         $this->setDateTimeFromLocalToUTC($value, 'SelectionBeginDate');
     }
 
-    public function getSelectionBeginDate($format=null)
+    public function getSelectionBeginDate($format="Y-m-d H:i:s")
     {
         return $this->getFromUTCtoLocal('SelectionBeginDate', $format);
     }
@@ -267,7 +267,7 @@ final class Summit extends DataObject implements ISummit
         $this->setDateTimeFromLocalToUTC($value, 'SelectionEndDate');
     }
 
-    public function getSelectionEndDate($format=null)
+    public function getSelectionEndDate($format="Y-m-d H:i:s")
     {
         return $this->getFromUTCtoLocal('SelectionEndDate', $format);
     }
@@ -277,7 +277,7 @@ final class Summit extends DataObject implements ISummit
         $this->setDateTimeFromLocalToUTC($value, 'RegistrationBeginDate');
     }
 
-    public function getRegistrationBeginDate($format=null)
+    public function getRegistrationBeginDate($format="Y-m-d H:i:s")
     {
         return $this->getFromUTCtoLocal('RegistrationBeginDate', $format);
     }
@@ -287,7 +287,7 @@ final class Summit extends DataObject implements ISummit
         $this->setDateTimeFromLocalToUTC($value, 'RegistrationEndDate');
     }
 
-    public function getRegistrationEndDate($format=null)
+    public function getRegistrationEndDate($format="Y-m-d H:i:s")
     {
         return $this->getFromUTCtoLocal('RegistrationEndDate', $format);
     }
