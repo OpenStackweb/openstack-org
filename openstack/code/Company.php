@@ -212,22 +212,21 @@ class Company extends DataObject implements PermissionProvider,IEntity
 
             $admin_list = $admin_list->setDataQuery($query);
 
-            $config = GridFieldConfig_RelationEditor::create();
+            $config = GridFieldConfig_RelationEditor::create(PHP_INT_MAX);
 
             $config->removeComponentsByType('GridFieldEditButton');
             $config->removeComponentsByType('GridFieldAddNewButton');
 
 
             $config->getComponentByType('GridFieldDataColumns')->setDisplayFields(
-                array(
-                    'FirstName' => 'First Name',
-                    'Surname' => 'Last Name',
-                    'Email' => 'Email',
+                [
+                    'FirstName'             => 'First Name',
+                    'Surname'               => 'Last Name',
+                    'Email'                 => 'Email',
                     'DDLAdminSecurityGroup' => 'Security Group'
-                ));
+                ]);
 
-            $admins = new GridField('Administrators', 'Company Administrators', $admin_list, $config);
-
+            $admins    = new GridField('Administrators', 'Company Administrators', $admin_list, $config);
             $contracts = new GridField("Contracts", "Contracts", $this->Contracts(), GridFieldConfig_RecordEditor::create(10));
 
             $fields->addFieldsToTab('Root.Administrators',
