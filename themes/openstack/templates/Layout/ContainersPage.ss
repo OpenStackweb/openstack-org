@@ -129,14 +129,12 @@
         <div class="container"> 
             <div class="row">
                 <div class="col-lg-8 col-lg-push-2">
-                    <img class="testimonial-author-img" src="/themes/openstack/images/containers/mark-collier.png">
                     <blockquote>
-                        The important thing for us as a community is to think about OpenStack as an integration engine that’s agnostic. That puts users in the best position for success. Just like we didn’t reinvent the wheel when it comes to compute, storage and networking, we’ll do the same with containers.
+                        As containerized applications emerge as a new workload type, OpenStack is a prime deployment environment among respondents. Only four percent of respondents are not considering containers on OpenStack, while fifty-seven (57) percent of respondents said that they are already using or plan to use containers on OpenStack, with the remainder undecided.
                     </blockquote>
                     <div class="testimonial-attribute">
-                        <img src="/themes/openstack/images/containers/openstack-logo.png">
-                        <div class="testimonial-name">Mark Collier</div>
-                        <div class="testimonial-title">COO, OpenStack Foundation</div>
+                        <img src="//openstack.org/assets/Uploads/_resampled/SetWidth138-redhat-sm.png">
+                        <div class="testimonial-title">Excerpt from  Red Hat’s 2016 OpenStack enterprise adoption survey. <a href="https://www.redhat.com/en/about/blog/openstack-production-deployments-more-double-2016-red-hat-survey-finds" target="_blank">Learn more.</a></div>
                     </div>
                 </div>
             </div>
