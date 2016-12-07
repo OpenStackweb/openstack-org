@@ -330,26 +330,23 @@
     </div>
 
     <!-- Summit Promo -->
-    <div class="summit-promo containers">
+    <div class="summit-promo containers" style="background: url(/summit/images/boston/boston-promo-bkgd.jpg)">
         <div class="container">
             <div class="row">
                 <div class="col-sm-8">
-                    <h3>Join app developers in the OpenStack community at the Austin Summit</h3>
+                    <h3>Join app developers in the OpenStack community at the Boston Summit</h3>
                     <p>
-                        A large community of application developers and ecosystem of container management and PaaS tools is growing around OpenStack. The Summit will provide content and workshops for users who are building and deploying applications on OpenStack clouds, and cover topics like automating and managing application deployment, SDKs, tools, PaaS and big data. Join us in Austin for content and workshops on April 27 and 28.
-                    </p>
-                    <p>
-                        <a href="//www.openstack.org/summit/austin-2016/categories/" target="_blank">Learn more about the container and application developer content planned for the Austin Summit</a>
+                        A large community of application developers and ecosystem of container management and PaaS tools has grown around OpenStack. The Summit will provide content and workshops for users who are building and deploying applications on OpenStack clouds, and cover topics like automating and managing application deployment, SDKs, tools, PaaS and big data. Join us in Boston for content and workshops from May 8-11.
                     </p>
                 </div>
                 <div class="col-sm-4">
                     <div class="containers-summit-right">
                         <img class="containers-summit-logo" src="/themes/openstack/static/images/summit-logo-small.svg" onerror="this.onerror=null; this.src=/themes/openstack/static/images/summit-logo-small.png" alt="OpenStack Summit">
                         <div class="containers-summit-dates">
-                            April 25-29 in Austin, TX
+                            May 8-11 in Boston, MA
                         </div>
                         <div class="containers-summit-register-btn">
-                            <a href="https://openstacksummit2016austin.eventbrite.com/" class="nfv-summit-btn" target="_blank">Register Now <i class="fa fa-chevron-right"></i></a>
+                            <a href="https://openstacksummit2017boston.eventbrite.com/" class="nfv-summit-btn" target="_blank">Register Now <i class="fa fa-chevron-right"></i></a>
                         </div>
                     </div>
                 </div>
