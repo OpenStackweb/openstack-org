@@ -307,7 +307,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="row">
-                    <h5 class="section-title">Sponsorship Add-Ons Available <span>(prices in USD)</span></h5>
+                    <h5 class="section-title">$Top.SponsorshipAddOnsTitle</h5>
                 </div>
                 <div class="table-responsive sponsor-table">
                     <table class="table">
