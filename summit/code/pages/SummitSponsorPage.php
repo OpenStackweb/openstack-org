@@ -89,7 +89,7 @@ class SummitSponsorPage extends SummitPage
         $title2 = new HTMLEditorField('ConditionalSponsorshipPackagesTitle', 'Conditional Sponsorship Packages Title');
         $fields->addFieldToTab('Root.Main', $title2, 'SponsorshipPackagesTitle');
 
-        $title1 = new HTMLEditorField('SponsorshipAddOnsTitle', 'Sponsorship AddOns Title');
+        $title3 = new HTMLEditorField('SponsorshipAddOnsTitle', 'Sponsorship AddOns Title');
         $fields->addFieldToTab('Root.Main', $title3, 'ConditionalSponsorshipPackagesTitle');
 
         //call for sponsorship dates
