@@ -42,14 +42,14 @@ class OpenStackFoundationStaffPage_Controller extends Page_Controller{
     public function OpenStackFoundationStaffMembers(){
         //Group_Member
         $group = Group::get()->filter('Code','openstack-foundation-staff')->first();
-        $res   = $group->getManyManyComponents("Members",'','Group_Members.SortOrder ASC');
+        $res   = $group->getManyManyComponents("Members",'','Group_Members.SortIndex ASC');
         return $res;
     }
 
     public function SupportingCastMembers(){
         //Group_Member
   	    $group = Group::get()->filter('Code','supporting-cast')->first();
-        $res= $group->getManyManyComponents("Members",'','Group_Members.SortOrder ASC');
+        $res= $group->getManyManyComponents("Members",'','Group_Members.SortIndex ASC');
         return $res;
     }
 
