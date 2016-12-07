@@ -130,7 +130,7 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-push-2">
                     <blockquote>
-                        As containerized applications emerge as a new workload type, OpenStack is a prime deployment environment among respondents. Only four percent of respondents are not considering containers on OpenStack, while fifty-seven (57) percent of respondents said that they are already using or plan to use containers on OpenStack, with the remainder undecided.
+                        As containerized applications emerge as a new workload type, OpenStack is a prime deployment environment among respondents. Only four percent of respondents are not considering containers on OpenStack, while 57% of respondents said that they are already using or plan to use containers on OpenStack, with the remainder undecided.
                     </blockquote>
                     <div class="testimonial-attribute">
                         <img src="//openstack.org/assets/Uploads/_resampled/SetWidth138-redhat-sm.png">
