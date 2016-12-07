@@ -37,11 +37,12 @@ class SummitSponsorPage extends SummitPage
         'VenueMapContent'                     => 'HTMLText',
         'SponsorshipPackagesTitle'            => 'HTMLText',
         'ConditionalSponsorshipPackagesTitle' => 'HTMLText',
+        'SponsorshipAddOnsTitle'              => 'HTMLText'
     ];
 
     private static $has_many = [
         'AttendeesByRegion' => 'SummitPieDataItemRegion',
-        'AttendeesByRoles'  => 'SummitPieDataItemRole',
+        'AttendeesByRoles'  => 'SummitPieDataItemRole'
     ];
 
     private static $has_one = [
@@ -87,6 +88,9 @@ class SummitSponsorPage extends SummitPage
         // Sponsor Steps Editor
         $title2 = new HTMLEditorField('ConditionalSponsorshipPackagesTitle', 'Conditional Sponsorship Packages Title');
         $fields->addFieldToTab('Root.Main', $title2, 'SponsorshipPackagesTitle');
+
+        $title1 = new HTMLEditorField('SponsorshipAddOnsTitle', 'Sponsorship AddOns Title');
+        $fields->addFieldToTab('Root.Main', $title3, 'ConditionalSponsorshipPackagesTitle');
 
         //call for sponsorship dates
 
@@ -222,6 +226,13 @@ class SummitSponsorPage extends SummitPage
         $res = $this->getField('ConditionalSponsorshipPackagesTitle');
         if (empty($res))
             $res = "*NEW* Special ‘Bundle & Save’ Discount Sponsorships Packages Available for the November 2017 Summit in Sydney, Australia (prices in USD)";
+        return $res;
+    }
+
+    public function getSponsorshipAddOnsTitle(){
+        $res = $this->getField('SponsorshipAddOnsTitle');
+        if (empty($res))
+            $res = "Sponsorship Add-Ons Available <span>(prices in USD)</span>";
         return $res;
     }
 
