@@ -52,3 +52,4 @@ migrations:
   - SummitTypeUpdateMigration
   - UpdateSummitEventSocialSummaryMigration
   - DefaultSummitAvailabilityThroughAPIMigration
+  - RemoveGroupMembersSortOrderCol

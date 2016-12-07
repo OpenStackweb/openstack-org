@@ -22,7 +22,7 @@ class GroupDecorator extends DataExtension {
 
     private static $many_many_extraFields = array(
         'Members' => array(
-            'SortOrder' => "Int"
+            'SortIndex' => "Int" // can't be named SortOrder, conflict with Member.SortOrder (btw don't know what that col is for)
         ),
     );
 
@@ -73,12 +73,12 @@ class GroupDecorator extends DataExtension {
         if ($this->owner->Code == 'openstack-foundation-staff' || $this->owner->Code == 'supporting-cast') {
             $config = GridFieldConfig_RelationEditor::create(10);
             $config->getComponentByType('GridFieldDetailForm')->setFields($detailFormFields);
-            $sort = new GridFieldSortableRows('SortOrder');
+            $sort = new GridFieldSortableRows('SortIndex');
             $config->addComponent($sort);
             $config->removeComponentsByType('GridFieldPageCount');
             $config->removeComponentsByType('GridFieldPaginator');
             $dataColumns = $config->getComponentByType('GridFieldDataColumns');
-            $dataColumns->setDisplayFields(array('SortOrder' => 'Order', 'FirstName' => 'Name', 'Surname' => 'Surname', 'Email' => 'Email'));
+            $dataColumns->setDisplayFields(array('FirstName' => 'Name', 'Surname' => 'Surname', 'Email' => 'Email'));
         } else {
             $config = GridFieldConfig_RelationEditor::create(10);
             $config->getComponentByType('GridFieldDetailForm')->setFields($detailFormFields);
