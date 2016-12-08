@@ -844,14 +844,18 @@ final class Summit extends DataObject implements ISummit
 
     public function getScheduleDefaultDate(){
         //'2016-10-26'
-        $date = $this->getFromUTCtoLocal('ScheduleDefaultStartDate');
+        $date = $this->getScheduleDefaultStartDate();
         if(empty($date)) return $this->getBeginDateYMD();
         $date = new DateTime($date);
         return $date->format('Y-m-d');
     }
 
-    public function setScheduleDefaultDate($value){
+    public function setScheduleDefaultStartDate($value){
         $this->setDateTimeFromLocalToUTC($value, 'ScheduleDefaultStartDate');
+    }
+
+    public function getScheduleDefaultStartDate(){
+        return $this->getFromUTCtoLocal('ScheduleDefaultStartDate');
     }
 
     public static $validation_enabled = true;
