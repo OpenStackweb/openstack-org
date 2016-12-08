@@ -28,13 +28,18 @@ final class SummitAdminUI extends DataExtension
      */
     private static $summary_fields = array
     (
-        'Title'         => 'Title',
-        'Status'        => 'Status',
-        'FriendlyType'  => 'Type'
+        'Title'                   => 'Title',
+        'Status'                  => 'Status',
+        'FriendlyType'            => 'Type',
+        'FriendlyApiAvailability' => 'Is Available through API ?'
     );
 
     public function getFriendlyType(){
         return $this->owner->TypeID > 0 ? $this->owner->Type()->Type : 'NOT SET';
+    }
+
+    public function getFriendlyApiAvailability(){
+        return $this->owner->AvailableOnApi == true ? 'Yes' : 'No';
     }
 
     public function updateCMSFields(FieldList $f) {
