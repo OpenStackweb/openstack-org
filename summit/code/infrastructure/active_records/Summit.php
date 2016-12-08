@@ -842,12 +842,16 @@ final class Summit extends DataObject implements ISummit
         AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Locations', $query)->removeAll();
     }
 
-    public function ScheduleDefaultDate(){
+    public function getScheduleDefaultDate(){
         //'2016-10-26'
-        $date = $this->getField('ScheduleDefaultStartDate');
+        $date = $this->getFromUTCtoLocal('ScheduleDefaultStartDate');
         if(empty($date)) return $this->getBeginDateYMD();
         $date = new DateTime($date);
         return $date->format('Y-m-d');
+    }
+
+    public function setScheduleDefaultDate($value){
+        $this->setDateTimeFromLocalToUTC($value, 'ScheduleDefaultStartDate');
     }
 
     public static $validation_enabled = true;
