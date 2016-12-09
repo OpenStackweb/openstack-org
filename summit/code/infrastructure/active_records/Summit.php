@@ -520,6 +520,14 @@ final class Summit extends DataObject implements ISummit
     }
 
     /**
+     * @return string
+     */
+    public function getCallForPresentationsLink() {
+        $page = PresentationPage::get()->filter('SummitID', $this->getIdentifier())->first();
+        return ($page)? $page->getAbsoluteLiveLink(false): '#';
+    }
+
+    /**
      * @param mixed|null $day
      * @param int|null $location
      * @return SummitEvent[]
@@ -1349,6 +1357,21 @@ SQL;
         return ($now > $end_date);
     }
 
+    /**
+     * @return bool
+     */
+    public function isScheduleDisplayed()
+    {
+        $display_date = $this->getField('ScheduleDefaultStartDate');
+
+        if (empty($display_date)) {
+            return false;
+        }
+        $now = new \DateTime('now', new DateTimeZone('UTC'));
+
+        return ($now >= $display_date);
+    }
+
     public function getTopVenues()
     {
         return $this->Locations()->where("ClassName='SummitVenue' OR ClassName='SummitExternalLocation' ")->sort('Name', 'ASC');
@@ -1410,6 +1433,14 @@ SQL;
     }
 
     /**
+     * @return PresentationCategoryGroup[]
+     */
+    public function getPublicCategoryGroups()
+    {
+        return $this->CategoryGroups()->filter('ClassName', 'PresentationCategoryGroup');
+    }
+
+    /**
      * @return PrivatePresentationCategoryGroup[]
      */
     public function getPrivateCategoryGroups()
@@ -1422,10 +1453,10 @@ SQL;
      */
     public function getPublicCategories()
     {
-        $categories     = array();
+        $categories     = new ArrayList();
         $private_groups = $this->getPrivateCategoryGroups();
 
-        foreach ($this->getCategories() as $cat) {
+        foreach ($this->getCategories()->sort('Title') as $cat) {
             $is_private = false;
             foreach($private_groups as $private_group)
             {
@@ -1435,7 +1466,7 @@ SQL;
                 }
             }
             if(!$is_private)
-                array_push($categories, $cat);
+                $categories->push($cat);
         }
         return $categories;
     }

@@ -40,6 +40,16 @@ interface ISummit extends IEntity
     public function getScheduleLink();
 
     /**
+     * @return string
+     */
+    public function getTrackListLink();
+
+    /**
+     * @return string
+     */
+    public function getCallForPresentationsLink();
+
+    /**
      * @return DateTime
      */
     public function getStartShowingVenuesDate();
@@ -214,6 +224,11 @@ interface ISummit extends IEntity
     public function isSelectionOver();
 
     /**
+     * @return bool
+     */
+    public function isScheduleDisplayed();
+
+    /**
      * @param mixed|null $day
      * @param int|null $location
      * @return SummitEvent[]
@@ -276,6 +291,11 @@ interface ISummit extends IEntity
      * @return PresentationCategory[]
      */
     public function getCategories();
+
+    /**
+     * @return PresentationCategoryGroup[]
+     */
+    public function getPublicCategoryGroups();
 
     /**
      * @return PrivatePresentationCategoryGroup[]
