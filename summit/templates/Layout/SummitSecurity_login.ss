@@ -1,3 +1,4 @@
+
 <div class="presentation-app-header">
     <div class="container">
         <p class="status">
@@ -8,17 +9,15 @@
 
     <div class="presentation-app-body">
         <div class="container">
-            <h1>Call for Presentations is over. What now?</h1>
+            <h1>Would you like to speak at the OpenStack Summit?</h1>
 
-            <p>Do you fall into one of these categories?</p>
+            <p>Here are three steps you should take as a potential speaker:</p>
 
             <ul class="submit-steps">
-                <li><span>1</span> Interested in submitting an abstract for a 10 min. TechTalk via #vBrownBag.</a></li>
-                <li><span>2</span> A Summit sponsored speaker or demo theater presenter that was invited to submit an abstract.</li>
-                <li><span>3</span> A leader of a Working Group or BoF that was invited to submit a proposal.</li>
+                <li><span>1</span> <a href="summit/boston-2017/categories/" target="_blank">Review the list of Summit Categories &amp; Tracks.</a></li>
+                <li><span>2</span> <a href="#process">Learn about the selection process.</a></li>
+                <li><span>3</span> <a href="#submit">Submit your session proposal below. (Limit of 3 per speaker)</a></li>
             </ul>
-            
-            <p>If you fall into one of these categories, please log in below.</p>
 
             <hr/>
             <a id="submit"></a>
@@ -48,11 +47,29 @@
 
             <hr/>
 
+            <a id="process"></a>
+            <h2>About The Summit Submission and Selection Process</h2>
+            <p>On average, the OpenStack Foundation receives more than 1,500 submissions for the Summit. Of those, we are only able to select 25-35% for participation, depending on the event. To decide which talks are accepted, we rely on Track Chairs as well a community voting process that will open in February 2017.</p>
+            <p>The Foundation selects Track Chairs who are subject matter experts to review submissions in their track, for example "storage" or "cloud app development." There are typically 3-4 chairs per track who collaboratively decide which presentations to accept. The Foundation strives to recruit Track Chairs from a diverse set of companies, regions, roles in the community (i.e., contributing developers, users and business leaders) and areas of expertise.</p>
+            <h2>New to the Summit Submission Process for 2017</h2>
+            <ul>
+            <li>To continue to improving the quality of the content at the Summit, the OpenStack Foundation will be extending invitations directly to a small number of highly regarded speakers from past events for each track. This was added in response to community requests for specialized sessions, presenter diversity, advanced technical talks and other content that adds to the overall Summit content quality, but was not being addressed in the existing CFP process. This approach will allow the Foundation to lock down key speakers earlier in the process to better serve our community, while making up the less than 10% of the total sessions.</li>
+            </ul>
+            <p>Once the call for speakers has concluded in mid-January, all submissions will be made available for community vote and input. After community voting closes, Track Chairs will receive their presentations to review and they will determine the final selections for their respective tracks. Community votes are meant to help inform the decision, but are not the only guide. Track chairs are expected to exercise judgment in their area of expertise and help ensure diversity. Real-world user stories and in-the-trenches experiences are favored over sales pitches.</p>
+            <p>After track chairs make their decisions, speakers will be informed by mid March 2017. If you are selected as a speaker (or alternate speaker), you will receive a free code to register for the Boston Summit, as well as a set of deadlines and deliverables leading up to the event.</p>
+            <p>Track chair nominations for the Boston Summit are now open <a href="https://openstackfoundation.formstack.com/forms/openstack_summit_boston2017_track_chair_nominations" target="_blank">here</a> and will close January 18, 2017. Notifications will go out to selected track chairs by January 25, 2017.</p>
+            <p>Please note that this process covers the speaking sessions during the Summit, NOT the Forum sessions. You can more about that process on the <a href="https://wiki.openstack.org/wiki/Forum" target="_blank">OpenStack Wiki</a>.</p>
+            <p>Want to provide feedback on this process? Join the discussion on the <a href="http://lists.openstack.org/cgi-bin/mailman/listinfo/community" target="_blank">openstack-community mailing list</a>, and/or contact the Foundation Summit Team directly <a href="mailto:summit@openstack.org">summit@openstack.org</a>.</p>
+            <p>&nbsp;</p>
 
-            <!-- <a id="categories"></a>
+            <p class="submit-button-area"><a href="#submit" class="btn btn-default">Submit Your Presentation Proposal</a></p>
+
+            <!-- <hr />
+
+            <a id="categories"></a>
             <h2>Summit Tracks</h2>
 
-            <p><a href="summit/austin-2016/categories/" target="_blank">Plan your week! See how the session tracks are grouped into audience categories, by day.</a></p>
+            <p><a href="summit/boston-2016/categories/" target="_blank">Plan your week! See how the session tracks are grouped into audience categories, by day.</a></p>
 
             <% loop ActiveSummit.getCategories %>
             <p>
@@ -61,32 +78,10 @@
             </p>
             <% end_loop %>
 
-            <p class="submit-button-area"><a href="#submit" class="btn btn-default">Submit Your Presentation Proposal</a></p>
+            <p class="submit-button-area"><a href="#submit" class="btn btn-default">Submit Your Presentation Proposal</a></p> -->
 
 
-            <hr/> -->
-
-            <a id="process"></a>
-            <h2>About The Summit Submission and Selection Process</h2>
-            
-            <p>On average, we at the OpenStack Foundation receive more than 1500+ submissions for the Main Conference. Of those, we are only able to select 25-35% for participation, depending on the event. To decide which talks are accepted, we rely on Track Chairs, as well as community input through an open voting process that will be open to the community July 26 - August 8th, 2016.</p>
-            <p>As Foundation Staff, our goal is to select Track Chairs who are subject matter experts who review submissions to their particular track, for example "storage" or "cloud app development." There are typically 3-4 chairs per track who review and collaboratively decide which presentations are accepted. The Foundation strives to recruit Track Chairs from a diverse set of companies, regions, roles in the community (i.e., contributing developers, users and business leaders) and areas of expertise.</p>
-            <p>New to the Summit Submission Process for 2016:</p>
-            <ul>
-            <li>Speakers are limited to a maximum of three submissions, including panel participation.</li>
-            <li>The submission forms include additional questions about how the proposed session meets the objectives of the OpenStack community.</li>
-            <li>Speaker biographies are mandatory and should include any relevant OpenStack experience.</li>
-            <li>Speakers are asked to provide information about past Summit presentations or other speaking examples, with links to previous presentations if possible.</li>
-            <li>Speakers will be able to tag their proposals with keywords to help with the sorting process and ensure sessions are included in the correct track.</li>
-            </ul>
-            <p>Once the call for speakers has concluded in mid-July, all submissions will be made available for community vote and input. After community voting wraps up, Track Chairs will receive a slate of presentations to review and they will determine the final schedule. Community votes are meant to help inform the decision, but are not the only guide. Track chairs are expected to exercise judgment in their area of expertise and help ensure diversity. Real-world user stories and in-the-trenches experiences are favored over sales pitches.</p>
-            <p>After track chairs make their decisions, speakers will be informed by early September 2016. If you are selected as a speaker (or alternate speaker), you will receive a free code to register for the Barcelona Summit, as well as a set of deadlines and deliverables leading up to the event.</p>
-            <p>Track chair nomination for the Barcelona Summit closed June 20, 2016. The list of selected track chairs <a href="https://etherpad.openstack.org/p/r.764d79fb8fcd663f862735f621542f2c" target="_blank">is listed here</a>.</p>
-            <p>Please note that this process covers the speaking sessions during the Summit, NOT the design summit working sessions. You can more about that process on the <a href="https://wiki.openstack.org/wiki/Design_Summit">OpenStack Wiki</a>.</p>
-            <p>Want to provide feedback on this process? Join the discussion on the <a href="http://lists.openstack.org/cgi-bin/mailman/listinfo/community">openstack-community mailing list</a>, and/or contact the Foundation Summit Team directly <a href="mailto:summit@openstack.org">summit@openstack.org</a>.</p>
-            <p>&nbsp;</p>
-
-            <p class="submit-button-area"><a href="#submit" class="btn btn-default">Submit Your Presentation Proposal</a></p>
+            <hr/>
 
 
 
