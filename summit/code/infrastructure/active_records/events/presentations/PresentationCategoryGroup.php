@@ -109,8 +109,6 @@ class PresentationCategoryGroup extends DataObject
 
     protected function onAfterWrite() {
         parent::onAfterWrite();
-        $this->Summit()->LastEdited = SS_Datetime::now()->Rfc2822();
-        $this->Summit()->write();
     }
 
     protected function validate()
