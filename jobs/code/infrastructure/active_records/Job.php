@@ -63,8 +63,10 @@ final class Job	extends DataObject implements IJob {
 
     protected function onBeforeDelete() {
         parent::onBeforeDelete();
-        if($this->RegistrationRequestID > 0) $this->RegistrationRequest()->delete();
-        foreach($this->Locations() as $location) $location->delete();
+        if($this->RegistrationRequestID > 0 && $this->RegistrationRequest()->Exists())
+            $this->RegistrationRequest()->delete();
+        foreach($this->Locations() as $location)
+            $location->delete();
     }
 
 	public function getCompanyName(){
