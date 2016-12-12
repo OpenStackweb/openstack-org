@@ -23,7 +23,9 @@
                         <div class="session-list-tracks">
                             <ul>
                                 <% loop Categories() %>
-                                <li class="tracks-tooltip" title="{$Description}">$Title</li>
+                                <li class="tracks-tooltip" title="{$Description}">
+                                    $Title <% if isPrivate() %> * <% end_if %>
+                                </li>
                                 <% end_loop %>
                             </ul>
                         </div>

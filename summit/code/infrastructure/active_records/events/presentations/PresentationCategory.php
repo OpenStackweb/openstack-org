@@ -256,4 +256,16 @@ class PresentationCategory extends DataObject
         return Permission::check("ADMIN") || Permission::check("ADMIN_SUMMIT_APP") || Permission::check("ADMIN_SUMMIT_APP_SCHEDULE");
     }
 
+    /**
+     * @return bool
+     */
+    public function isPrivate()
+    {
+        foreach ($this->CategoryGroup() as $category_group) {
+            if ($category_group->is_a('PrivatePresentationCategoryGroup')) return true;
+        }
+
+        return false;
+    }
+
 }
