@@ -101,7 +101,8 @@ final class PresentationManager implements IPresentationManager
         if(is_null($speaker)) throw new NotFoundEntityException('Speaker not found!');
 
         $presentation_count = intval($speaker->getPublicCategoryPresentationsBySummit($summit)->count()) +
-                              intval($speaker->getPublicCategoryOwnedPresentationsBySummit($summit)->count());
+                              intval($speaker->getPublicCategoryOwnedPresentationsBySummit($summit)->count()) +
+                              intval($speaker->getPublicCategoryModeratedPresentationsBySummit($summit)->count());
 
         //check public categories and check count limits
         if($summit->isCallForSpeakersOpen() && $presentation_count < intval($summit->MaxSubmissionAllowedPerUser))
@@ -127,7 +128,8 @@ final class PresentationManager implements IPresentationManager
             if(!$private_group->isSubmissionOpen()) continue;
 
             $presentation_count = intval($speaker->getPrivateCategoryPresentationsBySummit($summit, $private_group)->count()) +
-                     intval($speaker->getPrivateCategoryOwnedPresentationsBySummit($summit, $private_group)->count());
+                                  intval($speaker->getPrivateCategoryOwnedPresentationsBySummit($summit, $private_group)->count()) +
+                                  intval($speaker->getPrivateCategoryModeratedPresentationsBySummit($summit, $private_group)->count());
 
             // check current submission limit for the group
             if(!($presentation_count < intval($private_group->MaxSubmissionAllowedPerUser))) continue;
@@ -153,8 +155,9 @@ final class PresentationManager implements IPresentationManager
             // zero means infinity
             if ($max_per_summit === 0) $max_per_summit = PHP_INT_MAX;
 
-            $presentation_count = intval($speaker->getPublicCategoryPresentationsBySummit($summit)->count())
-                + intval($speaker->getPublicCategoryOwnedPresentationsBySummit($summit)->count());
+            $presentation_count = intval($speaker->getPublicCategoryPresentationsBySummit($summit)->count()) +
+                                  intval($speaker->getPublicCategoryOwnedPresentationsBySummit($summit)->count()) +
+                                  intval($speaker->getPublicCategoryModeratedPresentationsBySummit($summit)->count());
 
             $res = $presentation_count < $max_per_summit;
         }
@@ -168,8 +171,10 @@ final class PresentationManager implements IPresentationManager
                 $max_per_group = intval($g->MaxSubmissionAllowedPerUser);
                 if($max_per_group === 0) $max_per_group = PHP_INT_MAX; /// infinite
                 // we need to check
-                $group_presentation_count = intval($speaker->getPrivateCategoryPresentationsBySummit($summit, $g)->count())
-                                            + intval($speaker->getPrivateCategoryOwnedPresentationsBySummit($summit, $g)->count());
+                $group_presentation_count = intval($speaker->getPrivateCategoryPresentationsBySummit($summit, $g)->count()) +
+                                            intval($speaker->getPrivateCategoryOwnedPresentationsBySummit($summit, $g)->count()) +
+                                            intval($speaker->getPrivateCategoryModeratedPresentationsBySummit($summit, $g)->count());
+
                 $res = $group_presentation_count < $max_per_group;
                 if($res) break;
             }
@@ -193,8 +198,10 @@ final class PresentationManager implements IPresentationManager
             $max_per_summit     = intval($summit->MaxSubmissionAllowedPerUser);
             //zero means infinity
             if($max_per_summit === 0) $max_per_summit = PHP_INT_MAX;
-            $presentation_count = intval($speaker->getPublicCategoryPresentationsBySummit($summit)->count())
-                + intval($speaker->getPublicCategoryOwnedPresentationsBySummit($summit)->count());
+            $presentation_count = intval($speaker->getPublicCategoryPresentationsBySummit($summit)->count()) +
+                                  intval($speaker->getPublicCategoryOwnedPresentationsBySummit($summit)->count()) +
+                                  intval($speaker->getPublicCategoryModeratedPresentationsBySummit($summit)->count());
+
             return $presentation_count < $max_per_summit;
         }
 
@@ -204,9 +211,10 @@ final class PresentationManager implements IPresentationManager
                 $max_per_group = intval($group->MaxSubmissionAllowedPerUser);
                 //zero means infinity
                 if ($max_per_group === 0) $max_per_group = PHP_INT_MAX;
-                $group_presentation_count =
-                    intval($speaker->getPrivateCategoryPresentationsBySummit($summit, $group)->count())
-                    + intval($speaker->getPrivateCategoryOwnedPresentationsBySummit($summit, $group)->count());
+                $group_presentation_count = intval($speaker->getPrivateCategoryPresentationsBySummit($summit, $group)->count()) +
+                                            intval($speaker->getPrivateCategoryOwnedPresentationsBySummit($summit, $group)->count()) +
+                                            intval($speaker->getPrivateCategoryModeratedPresentationsBySummit($summit, $group)->count());
+
                 return $group_presentation_count < $max_per_group;
             }
         }
@@ -393,11 +401,13 @@ final class PresentationManager implements IPresentationManager
                 $count    = $summit->isPublicCategory($category) ?
                     (
                         intval($speaker->getPublicCategoryPresentationsBySummit($summit)->count()) +
-                        intval($speaker->getPublicCategoryOwnedPresentationsBySummit($summit)->count())
+                        intval($speaker->getPublicCategoryOwnedPresentationsBySummit($summit)->count()) +
+                        intval($speaker->getPublicCategoryModeratedPresentationsBySummit($summit)->count())
                     ):
                     (
                         intval($speaker->getPrivateCategoryPresentationsBySummit($summit, $summit->getPrivateGroupFor($category))->count()) +
-                        intval($speaker->getPrivateCategoryOwnedPresentationsBySummit($summit, $summit->getPrivateGroupFor($category))->count())
+                        intval($speaker->getPrivateCategoryOwnedPresentationsBySummit($summit, $summit->getPrivateGroupFor($category))->count()) +
+                        intval($speaker->getPrivateCategoryModeratedPresentationsBySummit($summit, $summit->getPrivateGroupFor($category))->count())
                     );
 
                 if ($count >= $limit)
