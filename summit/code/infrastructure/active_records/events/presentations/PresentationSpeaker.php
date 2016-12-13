@@ -401,7 +401,8 @@ class PresentationSpeaker extends DataObject
         return $this->Presentations()->filter([
             'SummitID' => $summit->ID
         ])
-            ->exclude(['CreatorID' => $this->MemberID, 'ModeratorID' => $this->ID])
+            ->exclude(['CreatorID' => $this->MemberID])
+            ->exclude(['ModeratorID' => $this->ID])
             ->where(" SummitEvent.CategoryID IN ({$categories_ids})");
 
     }
@@ -456,8 +457,9 @@ class PresentationSpeaker extends DataObject
         $categories_ids = implode(',', $categories_ids);
 
         return $this->Presentations()
-            ->exclude(['CreatorID' => $this->MemberID, 'ModeratorID' => $this->ID])
             ->filter(['SummitID' => $summit->ID])
+            ->exclude(['CreatorID' => $this->MemberID])
+            ->exclude(['ModeratorID' => $this->ID])
             ->where(" SummitEvent.CategoryID IN ({$categories_ids})");
     }
 
