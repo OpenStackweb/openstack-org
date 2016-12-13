@@ -33,6 +33,7 @@ class PresentationMediaUploadForm extends Form
         $fields = FieldList::create(
             FileAttachmentField::create('Slide', 'File')
                 ->setFolderName('/presentation-media/')
+                ->setMaxFilesize(30) // set up to 30 MB
                 ->setPermissions([
                     'upload' => true,
                     'detach' => false,
@@ -73,9 +74,11 @@ class PresentationMediaUploadForm extends Form
      */
     public function doUpload($data, $form)
     {
-        $material = PresentationSlide::create();
+        $material          = PresentationSlide::create();
+        $material->Name    = $this->presentation->Title;
         $material->SlideID = $data['Slide'];
         $material->write();
+
         $this->presentation->Materials()->filter([
             'ClassName' => 'PresentationSlide'
         ])->removeAll();
