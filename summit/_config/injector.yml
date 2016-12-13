@@ -135,7 +135,7 @@ Injector:
     class: SpeakerSecondBreakOutSenderFactory
   SpeakerSummitRegistrationPromoCodeRepository:
     class: SapphireSpeakerSummitRegistrationPromoCodeRepository
-  SpeakerSelectionAnnouncementSenderManager:
+  SpeakerEmailAnnouncementSenderManager:
     constructor:
       0: '%$BatchTaskRepository'
       1: '%$BatchTaskFactory'
