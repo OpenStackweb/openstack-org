@@ -141,4 +141,12 @@ class PresentationCategoryGroup extends DataObject
         return false;
     }
 
+    public function hasCategoryVisible(){
+        foreach($this->Categories() as $category) {
+            if ($category->VotingVisible)
+                return true;
+        }
+        return false;
+    }
+
 }

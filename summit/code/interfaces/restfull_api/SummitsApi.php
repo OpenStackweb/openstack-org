@@ -419,8 +419,12 @@ final class SummitsApi extends AbstractRestfulJsonApi
             $summit       = $this->summit_repository->getById($summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
 
-            $category_group = PresentationCategoryGroup::get_by_id('PresentationCategoryGroup',$group_id);
-            $categories = $category_group->Categories()->sort('Title');
+            $category_group = PresentationCategoryGroup::get()->byID($group_id);
+            if ($category_group->is_a('PrivatePresentationCategoryGroup'))
+                $categories = $category_group->Categories()->sort('Title');
+            else
+                $categories = $category_group->Categories()->filter('VotingVisible',1)->sort('Title');
+
             $category_map = array();
             foreach ($categories as $category) {
                 $category_map[] = array('ID' => $category->ID, 'Html' => $category->FormattedTitleAndDescription);
