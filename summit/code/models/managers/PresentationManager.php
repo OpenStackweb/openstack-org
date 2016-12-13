@@ -378,6 +378,8 @@ final class PresentationManager implements IPresentationManager
             $presentation->Title                   = trim($data['Title']);
             $presentation->TypeID                  = intval($data['TypeID']);
             $presentation->Level                   = trim($data['Level']);
+            $presentation->FeatureCloud            = intval($data['FeatureCloud']);
+            $presentation->LightningTalk           = intval($data['LightningTalk']);
             $presentation->Abstract                = trim($data['Abstract']);
             $presentation->SocialSummary           = trim($data['SocialSummary']);
             $presentation->AttendeesExpectedLearnt = trim($data['AttendeesExpectedLearnt']);
@@ -458,6 +460,8 @@ final class PresentationManager implements IPresentationManager
             $presentation->Title                   = trim($data['Title']);
             $presentation->TypeID                  = intval($data['TypeID']);
             $presentation->Level                   = trim($data['Level']);
+            $presentation->FeatureCloud            = intval($data['FeatureCloud']);
+            $presentation->LightningTalk           = intval($data['LightningTalk']);
             $presentation->Abstract                = trim($data['Abstract']);
             $presentation->SocialSummary           = trim($data['SocialSummary']);
             $presentation->AttendeesExpectedLearnt = trim($data['AttendeesExpectedLearnt']);

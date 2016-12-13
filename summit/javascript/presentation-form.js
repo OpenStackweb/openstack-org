@@ -11,7 +11,7 @@
  * limitations under the License.
  **/
 
-var show_if_public = ['AttendeesExpectedLearnt'];
+var show_if_public = ['AttendeesExpectedLearnt','LightningTalk'];
 var form = null;
 
 $(document).ready(function(){
@@ -68,8 +68,10 @@ $(document).ready(function(){
         errorElement: 'span',
         errorClass: 'help-block',
         errorPlacement: function(error, element) {
-            if(element.parent('.input-group').length) {
+            if(element.parent('.input-group').length ) {
                 error.insertAfter(element.parent());
+            } else if (element.hasClass('radio')) {
+                error.insertBefore(element.parent());
             } else {
                 error.insertAfter(element);
             }
@@ -118,6 +120,10 @@ $(document).ready(function(){
                 'PresentationForm_PresentationForm_SecurityID',
             ]
         });
+
+        getCategories();
+        toggleFields();
+        getExtraQuestions();
     });
 
 });
