@@ -42,6 +42,7 @@
 
                     <% if $Presentation.Speakers %>
                         <h3>Speakers included in this presentation</h3>
+                        <p>IMPORTANT! We have added new questiosn to the speaker bio form. Please review the bios for all speakers before submitting.</p>
                         <table class="table">
                             <tbody>
                                 <% loop $Presentation.Speakers %>

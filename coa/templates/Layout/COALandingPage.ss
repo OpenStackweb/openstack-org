@@ -16,10 +16,14 @@
                         <a href="{$Top.Link(get-started)}" class="coa-action-btn">$GetStartedLabel <i class="fa fa-chevron-right"></i></a>
                     <% end_if %>
                     <% if $HideFee == 0 %>
-                        <span class="coa-already-registered">Exam Fee: $Top.ExamCost</span> &nbsp; | &nbsp;
-                        <a href="/coa#coa-details" class="coa-already-registered">Pricing & Exam Details</a>
+                        <!-- <span class="coa-already-registered">Exam Fee: $Top.ExamCost</span> &nbsp; | &nbsp;
+                        <a href="/coa#coa-details" class="coa-already-registered">Pricing & Exam Details</a> -->
+                        <span class="coa-already-registered">Exam Fee: <span style="text-decoration: line-through; opacity:0.7;">$300</span><strong> $200</strong></span> &nbsp; | &nbsp;
+                        <a href="/coa#coa-details" class="coa-already-registered">Pricing &amp; Exam Details</a>
+                        <p style="font-weight:bold; margin-top: 5px;">^ Buy before January 6th and save $100 with code <span style="background:#C71A28;padding:3px;">2017GOALS</span>!</p> 
                     <% end_if %>
                 </div>
+                                       
             </div>
         </div>
     </div>

@@ -101,7 +101,10 @@
                 </ul>
                 <hr>
                 <h3>Subscribe to our News Feed</h3>
-                <link href="https://app.e2ma.net/css/signup-refresh.med.css" rel="stylesheet" type="text/css"><script type="text/javascript" src="https://app.e2ma.net/app2/audience/tts_signup_refresh/1828648/dc3896463a1fcdd2f57f993be48d29f6/1771360/"></script><div id="load_check" class="signup_form_message" >This form needs Javascript to display, which your browser doesn't support. <a href="https://app.e2ma.net/app2/audience/signup/1828648/1771360/"> Sign up here</a> instead </div><script type="text/javascript">signupFormObj.drawForm();</script>
+                <link href="https://app.e2ma.net/css/signup-refresh.med.css" rel="stylesheet" type="text/css">
+                <div style="font-family: "Open Sans", Helvetica, Arial, sans-serif;font-size:12px;width:160px;"><script type="text/javascript" src="https://app.e2ma.net/app2/audience/tts_signup_refresh/1828648/dc3896463a1fcdd2f57f993be48d29f6/1771360/"></script><div id="load_check" class="signup_form_message">This form needs Javascript to display, which your browser doesn't support. <a href="https://app.e2ma.net/app2/audience/signup/1828648/1771360/"> Sign up here</a> instead </div><script type="text/javascript">signupFormObj.drawForm();</script></div>
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
                 <hr>
                 <div class="upcomingEvents">
                     <h3>
