@@ -3,60 +3,45 @@
 
 <head>
     <% include Head %>
+    <% include Analytics %>
+    $FBTrackingCode
+    $TwitterTrackingCode
+    <link rel="stylesheet" type="text/css" href="/themes/openstack/static/css/tooltipster.css" />
 </head>
 
 <body class="presentation-page">
 <div class="main-body">
     <div id="wrap">
-        <div class="summit-hero-wrapper<% if $top_section != 'full' %> condensed<% end_if %><% if HeroCSSClass %> $HeroCSSClass<% end_if %>"
-             <% if $SummitImage %>style="background: rgba(0, 0, 0, 0) url('{$SummitImage.Image.link}') no-repeat scroll center bottom / cover ;"<% end_if %> >
+         <div  class="summit-hero-wrapper<% if $top_section != 'full' %> condensed<% end_if %><% if HeroCSSClass %> $HeroCSSClass<% end_if %>" <% if $SummitImage %>style="background: rgba(0, 0, 0, 0) url('{$SummitImage.Image.link}') no-repeat scroll center center / cover ;"<% end_if %> >
             <div class="container">
                 <div class="row">
-                    <% with $CurrentSummit %>
-                        <div class="col-lg-12 col-md-12 col-sm-12">
-                            <a href="/">
-                                <img class="summit-hero-logo" src="/summit/images/summit-logo-small.svg"
-                                     onerror="this.onerror=null; this.src='/summit/images/summit-logo-small.png'"
-                                     alt="OpenStack Summit">
-                            </a>
+                    <% with $Summit %>
+                    <div class="col-sm-12">
+                        <a href="/summit">
+                            <img class="summit-hero-logo" src="/themes/openstack/static/images/summit-logo-small-white.svg" alt="OpenStack Summit">
+                        </a>
 
-                            <h2>
-                                $DateLabel
-                            </h2>
-
-                            <h1>
-                                $Title
-                            </h1>
-
-                            <div class="landing-action">
-                                <% if $RegistrationLink %>
-                                    <a href="{$RegistrationLink}" class="btn register-btn-lrg">Register Now</a>
-                                <% end_if %>
-                                <% if $ComingSoonBtnText %>
-                                    <button class="btn register-btn-lrg soon" href="#">{$ComingSoonBtnText}</button>
-                                <% end_if %>
+                        <% if IsUpComing %>
+                            <div class="inner-countdown-wrapper">
+                                <div class="countdown">
+                                    $Top.CountdownDigits
+                                </div>
+                                <div class="countdown-text">
+                                    Days until $Name
+                                </div>
                             </div>
-                            <% if IsUpComing %>
-                                <div class="inner-countdown-wrapper">
-                                    <div class="countdown">
-                                        $Top.CountdownDigits
-                                    </div>
-                                    <div class="countdown-text">
-                                        Days until $Name
-                                    </div>
+                        <% else_if IsCurrent %>
+                            <div class="inner-countdown-wrapper">
+                                <div class="countdown">
+                                    <span>N</span>
+                                    <span>O</span>
+                                    <span>W</span>
                                 </div>
-                            <% else_if IsCurrent %>
-                                <div class="inner-countdown-wrapper">
-                                    <div class="countdown">
-                                        <span>N</span>
-                                        <span>O</span>
-                                        <span>W</span>
-                                    </div>
-                                    <div class="countdown-text">
-                                        The Summit is Happening Now!
-                                    </div>
+                                <div class="countdown-text">
+                                    The Summit is Happening Now!
                                 </div>
-                            <% end_if %>
+                            </div>
+                        <% end_if %>
                         </div>
                     <% end_with %>
                 </div>

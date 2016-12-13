@@ -401,14 +401,16 @@ class PresentationSpeaker extends DataObject
         return $this->Presentations()->filter([
             'SummitID' => $summit->ID
         ])
-        ->exclude(['CreatorID' => $this->MemberID,])
-        ->where(" SummitEvent.CategoryID IN ({$categories_ids})");
+            ->exclude(['CreatorID' => $this->MemberID, 'ModeratorID' => $this->ID])
+            ->where(" SummitEvent.CategoryID IN ({$categories_ids})");
+
     }
 
     /**
      * @param ISummit $summit
      * @return DataList
      */
+    // NOTE: THIS ONE INCLUDES CREATED, MODERATED AND SPEAKER PRESENTATIONS
     public function getPublicCategoryOwnedPresentationsBySummit(ISummit $summit){
         $categories_ids = array(0);
         foreach($summit->getPublicCategories() as $cat)
@@ -424,6 +426,25 @@ class PresentationSpeaker extends DataObject
 
     /**
      * @param ISummit $summit
+     * @return DataList
+     */
+    public function getPublicCategoryModeratedPresentationsBySummit(ISummit $summit){
+        $categories_ids = array(0);
+        foreach($summit->getPublicCategories() as $cat)
+            array_push($categories_ids, $cat->ID);
+
+        $categories_ids = implode(',', $categories_ids);
+
+        return Presentation::get()->filter([
+            'ModeratorID' => $this->ID,
+            'SummitID' => $summit->ID
+        ])
+            ->exclude(['CreatorID' => $this->MemberID])
+            ->where(" SummitEvent.CategoryID IN ({$categories_ids})");
+    }
+
+    /**
+     * @param ISummit $summit
      * @param PrivatePresentationCategoryGroup $private_group
      * @return DataList
      */
@@ -435,7 +456,7 @@ class PresentationSpeaker extends DataObject
         $categories_ids = implode(',', $categories_ids);
 
         return $this->Presentations()
-            ->exclude(['CreatorID' => $this->MemberID])
+            ->exclude(['CreatorID' => $this->MemberID, 'ModeratorID' => $this->ID])
             ->filter(['SummitID' => $summit->ID])
             ->where(" SummitEvent.CategoryID IN ({$categories_ids})");
     }
@@ -445,6 +466,7 @@ class PresentationSpeaker extends DataObject
      * @param PrivatePresentationCategoryGroup $private_group
      * @return DataList
      */
+    // NOTE: THIS ONE INCLUDES CREATED, MODERATED AND SPEAKER PRESENTATIONS
     public function getPrivateCategoryOwnedPresentationsBySummit(ISummit $summit, PrivatePresentationCategoryGroup $private_group){
 
         $categories_ids = array();
@@ -456,6 +478,26 @@ class PresentationSpeaker extends DataObject
             'CreatorID' => $this->MemberID,
             'SummitID' => $summit->ID
         ])->where(" SummitEvent.CategoryID IN ({$categories_ids})");
+    }
+
+    /**
+     * @param ISummit $summit
+     * @param PrivatePresentationCategoryGroup $private_group
+     * @return DataList
+     */
+    public function getPrivateCategoryModeratedPresentationsBySummit(ISummit $summit, PrivatePresentationCategoryGroup $private_group){
+
+        $categories_ids = array();
+        foreach($private_group->Categories() as $cat)
+            array_push($categories_ids, $cat->ID);
+        $categories_ids = implode(',', $categories_ids);
+
+        return Presentation::get()->filter([
+            'ModeratorID' => $this->ID,
+            'SummitID' => $summit->ID
+        ])
+            ->exclude(['CreatorID' => $this->MemberID])
+            ->where(" SummitEvent.CategoryID IN ({$categories_ids})");
     }
 
     /**

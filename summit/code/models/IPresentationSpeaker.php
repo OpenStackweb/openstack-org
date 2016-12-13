@@ -282,6 +282,11 @@ interface IPresentationSpeaker extends IEntity
 
     /**
      * @param ISummit $summit
+     * @return DataList
+     */
+    public function getPublicCategoryModeratedPresentationsBySummit(ISummit $summit);
+    /**
+     * @param ISummit $summit
      * @param PrivatePresentationCategoryGroup $private_group
      * @return DataList
      */
@@ -293,6 +298,13 @@ interface IPresentationSpeaker extends IEntity
      * @return DataList
      */
     public function getPrivateCategoryOwnedPresentationsBySummit(ISummit $summit, PrivatePresentationCategoryGroup $private_group);
+
+    /**
+     * @param ISummit $summit
+     * @param PrivatePresentationCategoryGroup $private_group
+     * @return DataList
+     */
+    public function getPrivateCategoryModeratedPresentationsBySummit(ISummit $summit, PrivatePresentationCategoryGroup $private_group);
 
     /**
      * @param null|int $summit_id
