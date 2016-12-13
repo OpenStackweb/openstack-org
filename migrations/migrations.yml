@@ -54,3 +54,4 @@ migrations:
   - DefaultSummitAvailabilityThroughAPIMigration
   - RemoveGroupMembersSortOrderCol
   - SummitCategoryDefaultTagsMigration
+  - UpdateOpenstackComponentMigration

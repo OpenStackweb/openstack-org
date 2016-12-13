@@ -326,23 +326,28 @@
                                     <td>
                                         <ul>
                                             <li <% if $Component.ReleaseMileStones %>class="on"<% end_if %>>
-                                                <a href="http://governance.openstack.org/reference/tags/release_cycle-with-milestones.html">
+                                                <a target="_blank" href="https://releases.openstack.org/reference/release_models.html#cycle-with-milestones">
                                                     <i class="fa <% if $Component.ReleaseMileStones %>fa-circle<% else %>fa-circle-o<% end_if %>"></i><span><%t Software.CYCLE_WITH_MILESTONES 'Cycle with milestones' %></span>
                                                 </a>
                                             </li>
                                             <li <% if $Component.ReleaseCycleWithIntermediary %>class="on" <% end_if %>>
-                                                <a href="http://governance.openstack.org/reference/tags/release_cycle-with-intermediary.html">
+                                                <a target="_blank" href="https://releases.openstack.org/reference/release_models.html#cycle-with-intermediary">
                                                     <i class="fa <% if $Component.ReleaseCycleWithIntermediary %>fa-circle<% else %>fa-circle-o<% end_if %>"></i><span><%t Software.CYCLE_WITH_INTERMEDIARY 'Cycle with intermediary' %></span>
                                                 </a>
                                             </li>
+                                            <li <% if $Component.ReleaseTrailing %>class="on" <% end_if %>>
+                                                <a target="_blank" href="https://releases.openstack.org/reference/release_models.html#cycle-trailing">
+                                                    <i class="fa <% if $Component.ReleaseTrailing %>fa-circle<% else %>fa-circle-o<% end_if %>"></i><span><%t Software.TRAILING 'Trailing' %></span>
+                                                </a>
+                                            </li>
                                             <li <% if $Component.ReleaseIndependent %>class="on" <% end_if %>>
-                                                <a href="http://governance.openstack.org/reference/tags/release_independent.html">
+                                                <a target="_blank" href="https://releases.openstack.org/reference/release_models.html#independent">
                                                     <i class="fa <% if $Component.ReleaseIndependent %>fa-circle<% else %>fa-circle-o<% end_if %>"></i><span><%t Software.INDEPENDENT 'Independent' %></span>
                                                 </a>
                                             </li>
                                         </ul>
                                     </td>
-                                    <td><a href="http://governance.openstack.org/reference/tags/release_cycle-with-milestones.html"><%t Openstack.VIEW_DETAILS 'View details' %></a></td>
+                                    <td><a target="_blank" href="https://releases.openstack.org/reference/release_models.html"><%t Openstack.VIEW_DETAILS 'View details' %></a></td>
                                 </tr>
 
                                 <tr>
