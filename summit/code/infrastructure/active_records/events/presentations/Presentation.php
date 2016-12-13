@@ -132,7 +132,8 @@ class Presentation extends SummitEvent implements IPresentation
         'ProblemAddressed'        => 'HTMLText',
         'AttendeesExpectedLearnt' => 'HTMLText',
         'Legacy'                  => 'Boolean',
-        'FeatureCloud'            => 'Boolean'
+        'FeatureCloud'            => 'Boolean',
+        'LightningTalk'           => 'Boolean'
     );
 
     /**

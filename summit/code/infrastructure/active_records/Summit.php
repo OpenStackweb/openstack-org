@@ -90,6 +90,12 @@ final class Summit extends DataObject implements ISummit
         ),
     );
 
+    public function populateDefaults()
+    {
+        $this->populateDefaultTags();
+        parent::populateDefaults();
+    }
+
     public static function get_active()
     {
         $summit = Summit::get()->filter([
@@ -106,6 +112,16 @@ final class Summit extends DataObject implements ISummit
             ->where('SummitEndDate < DATE(NOW())')
             ->sort('SummitEndDate DESC')
             ->first();
+    }
+
+    private function populateDefaultTags(){
+        // had to use literal query to avoid infinite loop
+        $id = DB::query("SELECT ID FROM Summit WHERE SummitEndDate < DATE(NOW()) ORDER BY SummitEndDate DESC LIMIT 1")->value();
+
+        $default_tags = DB::query("SELECT * FROM Summit_CategoryDefaultTags AS DT WHERE SummitID = $id");
+        foreach ($default_tags as $dtag) {
+            $this->CategoryDefaultTags()->add($dtag['TagID'],array('Group' => $dtag['Group']));
+        }
     }
 
     public function checkRange($key)
