@@ -12,20 +12,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-interface ISpeakerSelectionAnnouncementSenderManager
+interface ISpeakerEmailAnnouncementSenderManager
 {
     /**
      * @param ISummit $current_summit
      * @param int $batch_size
      * @return void
      */
-    public function sendSpeakers(ISummit $current_summit, $batch_size);
+    public function sendSpeakersSelectionAnnouncementBySummit(ISummit $current_summit, $batch_size);
 
     /**
      * @param ISummit $current_summit
      * @param int $batch_size
      * @return void
      */
-    public function sendModerators(ISummit $current_summit, $batch_size);
+    public function sendModeratorsSelectionAnnouncementBySummit(ISummit $current_summit, $batch_size);
+
+    /**
+     * @param ISummit $current_summit
+     * @param int $batch_size
+     * @return int
+     */
+    public function sendUploadSlidesAnnouncementBySummit(ISummit $current_summit, $batch_size);
 
 }

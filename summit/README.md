@@ -1,12 +1,13 @@
-# OpenStack Speaker Promo Code Ingestion Process
+# Summit Module
 
-process task 
+## tasks
 
-sake SpeakerSelectionAnnouncementEmailSenderTask summit_id=6 batch_size=10
+sake SpeakerSelectionAnnouncementEmailSenderTask summit_id=6 batch_size=100
 
-this task sent all speaker announcement emails by summit
+sends email template for speakers selection process (speakers and moderators)
 
-parameters
 
-batch_size: int (process batch size, if not specified default 100)
-summit_id: int (summit identifier)
+sake SpeakerUploadSlidesEmailSenderTask summit_id=6 batch_size=100
+
+sends email template with a reminder to upload slides for a particular summit
+for speakers

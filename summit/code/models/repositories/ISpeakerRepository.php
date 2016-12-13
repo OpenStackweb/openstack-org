@@ -28,7 +28,7 @@ interface ISpeakerRepository extends IEntityRepository
      */
     public function searchSpeakersOnlyByTerm($term, $limit = 10);
 
-/**
+    /**
      * @param string $term
      * @param int $limit
      * @return array
@@ -100,4 +100,19 @@ interface ISpeakerRepository extends IEntityRepository
      * @return array
      */
     public function searchModeratorsBySummitPaginated(ISummit $summit, $page= 1, $page_size = 10, $term = '', $sort_by = 'id', $sort_dir = 'asc');
+
+    /**
+     * @param ISummit $summit
+     * @param int $page
+     * @param int $page_size
+     * @param array $tracks_2_excludes
+     * return array
+     */
+    public function searchSpeakerBySummitPaginatedForUploadSlidesAnnouncement
+    (
+        ISummit $summit,
+        $page = 1,
+        $page_size = 100,
+        array $tracks_2_excludes
+    );
 }

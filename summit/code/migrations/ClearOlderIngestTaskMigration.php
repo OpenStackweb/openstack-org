@@ -16,7 +16,7 @@ class ClearOlderIngestTaskMigration extends AbstractDBMigrationTask
     {
         global $database;
 
-        $task = BatchTask::get()->filter('Name', SpeakerSelectionAnnouncementSenderManager::TaskName)->first();
+        $task = BatchTask::get()->filter('Name', SpeakerEmailAnnouncementSenderManager::TaskName)->first();
         if(!is_null($task)) $task->delete();
     }
 

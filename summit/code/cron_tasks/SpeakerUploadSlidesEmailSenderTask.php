@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2015 OpenStack Foundation
+ * Copyright 2016 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-final class SpeakerSelectionAnnouncementEmailSenderTask extends CronTask
+final class SpeakerUploadSlidesEmailSenderTask extends CronTask
 {
 
     /**
@@ -23,8 +23,8 @@ final class SpeakerSelectionAnnouncementEmailSenderTask extends CronTask
         try
         {
             $batch_size = 100;
-            $init_time = time();
-            $summit    = null;
+            $init_time  = time();
+            $summit     = null;
 
             if (isset($_GET['batch_size']))
             {
@@ -34,7 +34,7 @@ final class SpeakerSelectionAnnouncementEmailSenderTask extends CronTask
 
             if (isset($_GET['summit_id']))
             {
-               $summit = Summit::get()->byID(intval($_GET['summit_id']));
+                $summit = Summit::get()->byID(intval($_GET['summit_id']));
             }
 
             if(is_null($summit)) throw new Exception('summit_id is not valid!');
@@ -44,11 +44,10 @@ final class SpeakerSelectionAnnouncementEmailSenderTask extends CronTask
                 return;
             }
 
-            $processed1  = $manager->sendSpeakersSelectionAnnouncementBySummit($summit, $batch_size);
-            $processed2  = $manager->sendModeratorsSelectionAnnouncementBySummit($summit, $batch_size);
+            $processed  = $manager->sendUploadSlidesAnnouncementBySummit($summit, $batch_size);
 
             $finish_time = time() - $init_time;
-            echo 'processed records (speakers) ' . $processed1.' processed records (moderators) ' . $processed2. ' - time elapsed : '.$finish_time. ' seconds.'.PHP_EOL;
+            echo 'processed records (speakers) ' . $processed.' processed records (speakers) ' . $processed. ' - time elapsed : '.$finish_time. ' seconds.'.PHP_EOL;
 
         }
         catch(Exception $ex)

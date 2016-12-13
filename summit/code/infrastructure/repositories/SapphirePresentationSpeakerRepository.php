@@ -624,7 +624,6 @@ SQL;
         return PresentationSpeaker::get()->filter('MemberID', $member_id)->first();
     }
 
-
     /**
      * @param string $email
      * @return IPresentationSpeaker
@@ -662,4 +661,36 @@ SQL;
         return $speaker;
     }
 
+    /**
+     * @param ISummit $summit
+     * @param int $page
+     * @param int $page_size
+     * @param array $tracks_2_excludes
+     * @return array
+     */
+    public function searchSpeakerBySummitPaginatedForUploadSlidesAnnouncement
+    (
+        ISummit $summit,
+        $page = 1,
+        $page_size = 100,
+        array $tracks_2_excludes
+    )
+    {
+        $speakers = PresentationSpeaker::get()
+            ->innerJoin('Presentation_Speakers','Presentation_Speakers.PresentationSpeakerID = PresentationSpeaker.ID')
+            ->innerJoin('SummitEvent', 'SummitEvent.ID = Presentation_Speakers.PresentationID')
+            ->innerJoin('Presentation', 'Presentation.ID = SummitEvent.ID')
+            ->exclude([
+                'SummitEvent.CategoryID' => $tracks_2_excludes
+            ])
+            ->filter([
+                'SummitID'              => $summit->getIdentifier(),
+                'SummitEvent.Published' => true
+            ])
+            ->where(" NOT EXISTS (SELECT 1 FROM PresentationSpeakerUploadPresentationMaterialEmail WHERE PresentationSpeakerUploadPresentationMaterialEmail.SpeakerID = PresentationSpeaker.ID AND PresentationSpeakerUploadPresentationMaterialEmail.SummitID = {$summit->getIdentifier()})");
+        $total  = intval($speakers->count());
+        $offset = ($page - 1) * $page_size;
+        return array($total, $speakers->limit($page_size, $offset)->toArray());
+
+    }
 }
