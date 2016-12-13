@@ -55,17 +55,21 @@ class OpenStackRelease
 
     private static $many_many_extraFields = array
     (
-        'OpenStackComponents'  => array
-                                (
-                                    'Adoption'                               => 'Int',
-                                    'MaturityPoints'                         => 'Int',
-                                    'HasInstallationGuide'                   => 'Boolean',
-                                    'SDKSupport'                             => 'Int',
-                                    'QualityOfPackages'                      => 'Text',
-                                    'MostActiveContributorsByCompanyJson'    => 'Text',
-                                    'MostActiveContributorsByIndividualJson' => 'Text',
-                                    'ContributionsJson'                      => 'Text',
-                                )
+        'OpenStackComponents'  =>[
+            'Adoption'                               => 'Int',
+            'MaturityPoints'                         => 'Int',
+            'HasInstallationGuide'                   => 'Boolean',
+            'SDKSupport'                             => 'Int',
+            'QualityOfPackages'                      => 'Text',
+            'MostActiveContributorsByCompanyJson'    => 'Text',
+            'MostActiveContributorsByIndividualJson' => 'Text',
+            'ContributionsJson'                      => 'Text',
+            'ReleaseMileStones'                      => 'Boolean',
+            'ReleaseCycleWithIntermediary'           => 'Boolean',
+            'ReleaseIndependent'                     => 'Boolean',
+            'ReleaseTrailing'                        => 'Boolean',
+            'ReleasesNotes'                          => 'Text',
+        ]
     );
 
     static $has_many = array

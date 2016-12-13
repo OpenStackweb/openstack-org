@@ -37,9 +37,9 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
 
         $this->client     = new HttpClient([
             'defaults' => [
-                'timeout' => 60,
+                'timeout'         => 60,
                 'allow_redirects' => false,
-                'verify' => true
+                'verify'          => true
             ]
         ]);
     }
@@ -57,12 +57,14 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
             foreach($releases as $release)
             {
                 echo sprintf('processing release %s ...', $release->Name).PHP_EOL;
+                $this->ProcessProjectPerRelease($release);
                 $this->getProductionUseStatus($release);
                 $this->getInstallationGuideStatus($release);
                 $this->getSDKSupport($release);
                 $this->getQualityOfPackages($release);
                 $this->calculateMaturityPoints($release);
                 $this->getStackAnalytics($release);
+                $this->ProcessProjectPerRelease($release);
             }
         });
         $delta = time() - $start;
@@ -158,9 +160,6 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                 $is_service                   = false;
                 $has_stable_branches          = false;
                 $tc_approved_release          = false;
-                $release_milestones           = false;
-                $release_intermediary         = false;
-                $release_independent          = false;
                 $starter_kit                  = false;
                 $vulnerability_managed        = false;
                 $follows_standard_deprecation = false;
@@ -183,12 +182,6 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                         $is_service = true;
                     if($tag === "stable:follows-policy" )
                         $has_stable_branches = true;
-                    if($tag === "release:cycle-with-milestones" )
-                        $release_milestones = true;
-                    if($tag === "release:cycle-with-intermediary" )
-                        $release_intermediary = true;
-                    if($tag === "release:independent" )
-                        $release_independent = true;
                     if($tag === "tc-approved-release" )
                         $tc_approved_release = true;
                     if($tag === "starter-kit:compute" )
@@ -206,9 +199,6 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                 $component->HasStableBranches            = $has_stable_branches;
                 $component->WikiUrl                      = $wiki;
                 $component->TCApprovedRelease            = $tc_approved_release;
-                $component->ReleaseMileStones            = $release_milestones;
-                $component->ReleaseCycleWithIntermediary = $release_intermediary;
-                $component->ReleaseIndependent           = $release_independent;
                 $component->HasTeamDiversity             = $team_diverse_affiliation;
                 $component->IncludedComputeStarterKit    = $starter_kit;
                 $component->VulnerabilityManaged         = $vulnerability_managed;
@@ -227,6 +217,74 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
             echo $ex->getMessage().PHP_EOL;
             SS_Log::log($ex->getMessage(), SS_Log::ERR);
             return;
+        }
+    }
+
+    private function ProcessProjectPerRelease($release)
+    {
+        $url_template = "http://git.openstack.org/cgit/openstack/releases/plain/deliverables/%s/%s.yaml";
+
+        foreach($release->OpenStackComponents() as $component){
+            $url      = sprintf($url_template, strtolower($release->Name), strtolower($component->CodeName));
+            echo sprintf("processing url %s ", $url).PHP_EOL;
+            $response = null;
+            try {
+                $response = $this->client->get
+                (
+                    $url
+                );
+            } catch (Exception $ex) {
+                echo $ex->getMessage() . PHP_EOL;
+                SS_Log::log($ex->getMessage(), SS_Log::WARN);
+            }
+
+            if (is_null($response)) continue;
+
+            if ($response->getStatusCode() != 200) continue;
+            $body = $response->getBody();
+            if (is_null($body)) continue;
+            $content = $body->getContents();
+            if (empty($content)) continue;
+
+            try {
+
+                $component_yaml               = Spyc::YAMLLoadString($content);
+                $release_milestones           = false;
+                $release_intermediary         = false;
+                $release_independent          = false;
+                $release_trailing             = false;
+                $release_notes                = isset($component_yaml['release-notes']) ? $component_yaml['release-notes'] : null;
+                if(is_array($release_notes)){
+                    $release_notes = implode(", ", $release_notes);
+                }
+                if(!isset($component_yaml['release-model'])) continue;
+                switch($component_yaml['release-model']){
+                    case 'cycle-with-milestones':
+                        $release_milestones = true;
+                    break;
+                    case 'cycle-with-intermediary':
+                        $release_intermediary = true;
+                    break;
+                    case 'cycle-trailing':
+                         $release_trailing = true;
+                        break;
+                    case 'independant':
+                        $release_independent = true;
+                    break;
+                }
+
+                $release->OpenStackComponents()->add($component , [
+                    'ReleaseMileStones'            => $release_milestones,
+                    'ReleaseCycleWithIntermediary' => $release_intermediary,
+                    'ReleaseIndependent'           => $release_independent,
+                    'ReleaseTrailing'              => $release_trailing,
+                    'ReleasesNotes'                => $release_notes
+                ]);
+
+            } catch (Exception $ex) {
+                echo $ex->getMessage() . PHP_EOL;
+                SS_Log::log($ex->getMessage(), SS_Log::WARN);
+            }
         }
     }
 
