@@ -96,7 +96,7 @@ final class PresentationForm extends BootstrapForm
                     ->setInline(true)
                 ->end()
             ->optionset('LightningTalk',
-                'Would you be willing to present your presentation/panel as a Lightning Talk in the event your submission is not chosen?',
+                'Would you be willing to present your presentation as a Lightning Talk in the event your submission is not chosen? Note: panels are ineligible for Lightning Talks.',
                 array(
                     1 => 'Yes',
                     0 => 'No'
