@@ -98,12 +98,6 @@ class PresentationMaterial extends DataObject
             return $valid;
         }
 
-        $name = trim($this->Name);
-
-        if (empty($name)) {
-            return $valid->error('Name is mandatory!');
-        }
-
         return $valid;
     }
 
