@@ -600,7 +600,6 @@ class PresentationPage_ManageRequest extends RequestHandler
         );
     }
 
-
     /**
      * Handles requests that update speakers attached to this presentation
      * and hands them off to a sub-sub controller
@@ -809,12 +808,6 @@ class PresentationPage_ManageRequest extends RequestHandler
         $tag_field = new TagManagerField('Tags', 'Tags');
         $tag_field->setCategory($this->presentation->Category());
         $fields->add($tag_field);
-
-        Requirements::javascript('themes/openstack/javascript/jquery.persistable-form.js');
-        Requirements::customScript("
-            $(document).persistableForm('clearAll');
-        ");
-
         $form   = new BootstrapForm($this, 'PresentationTagsForm', $fields ,
             FieldList::create(
                 FormAction::create('savePresentationTags', 'Save')

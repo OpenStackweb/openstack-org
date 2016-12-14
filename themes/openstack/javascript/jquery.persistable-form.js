@@ -178,7 +178,7 @@
                 console.log('HTML5 local storage not supported!');
                 return;
             }
-
+            console.log('clearing local storage ...');
             localStorage.clear();
         }
     };

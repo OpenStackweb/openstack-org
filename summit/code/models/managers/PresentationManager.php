@@ -172,6 +172,7 @@ final class PresentationManager implements IPresentationManager
                 $max_per_group = intval($g->MaxSubmissionAllowedPerUser);
                 if($max_per_group === 0) $max_per_group = PHP_INT_MAX; /// infinite
                 // we need to check
+
                 $group_presentation_count = intval($speaker->getPrivateCategoryPresentationsBySummitCount($summit, $g)) +
                                             intval($speaker->getPrivateCategoryOwnedPresentationsBySummitCount($summit, $g)) +
                                             intval($speaker->getPrivateCategoryModeratedPresentationsBySummitCount($summit, $g));
@@ -199,6 +200,7 @@ final class PresentationManager implements IPresentationManager
             $max_per_summit     = intval($summit->MaxSubmissionAllowedPerUser);
             //zero means infinity
             if($max_per_summit === 0) $max_per_summit = PHP_INT_MAX;
+
             $presentation_count = intval($speaker->getPublicCategoryPresentationsBySummitCount($summit)) +
                                   intval($speaker->getPublicCategoryOwnedPresentationsBySummitCount($summit)) +
                                   intval($speaker->getPublicCategoryModeratedPresentationsBySummitCount($summit));
@@ -212,6 +214,7 @@ final class PresentationManager implements IPresentationManager
                 $max_per_group = intval($group->MaxSubmissionAllowedPerUser);
                 //zero means infinity
                 if ($max_per_group === 0) $max_per_group = PHP_INT_MAX;
+
                 $group_presentation_count = intval($speaker->getPrivateCategoryPresentationsBySummitCount($summit, $group)) +
                                             intval($speaker->getPrivateCategoryOwnedPresentationsBySummitCount($summit, $group)) +
                                             intval($speaker->getPrivateCategoryModeratedPresentationsBySummitCount($summit, $group));
