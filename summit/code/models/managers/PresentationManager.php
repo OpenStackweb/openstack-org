@@ -148,6 +148,7 @@ final class PresentationManager implements IPresentationManager
     public function isPresentationSubmissionAllowedFor(PresentationSpeaker $speaker, ISummit $summit)
     {
         $res = false;
+        $res_private = false;
 
         if($summit->isCallForSpeakersOpen())
         {
@@ -175,12 +176,12 @@ final class PresentationManager implements IPresentationManager
                                             intval($speaker->getPrivateCategoryOwnedPresentationsBySummit($summit, $g)->count()) +
                                             intval($speaker->getPrivateCategoryModeratedPresentationsBySummit($summit, $g)->count());
 
-                $res = $group_presentation_count < $max_per_group;
-                if($res) break;
+                $res_private = $group_presentation_count < $max_per_group;
+                if($res_private) break;
             }
         }
 
-        return $res;
+        return ($res || $res_private);
     }
 
     /**
