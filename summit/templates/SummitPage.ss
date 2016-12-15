@@ -49,7 +49,7 @@
                                 The Must-Attend
                             </h2>
                             <h1>
-                                Cloud Computing Event
+                                Open Infrastructure Event
                             </h1>
                             <div class="summit-hero-postcard">
                                 <p>
@@ -89,7 +89,7 @@
     <div class="mobile-city-date">
         <% with $Summit %>
         <h2>The Must-Attend</h2>
-        <h1>Cloud Computing Event</h1>
+        <h1>Open Infrastructure Event</h1>
         <div class="summit-hero-postcard">
             <p>
                 Join the movement behind the most widely deployed open source cloud platform. Whether you are pursuing a private, hybrid or multi-cloud approach, the OpenStack Summit is the place to network, skill up and plan your cloud strategy.
