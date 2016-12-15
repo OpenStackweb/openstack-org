@@ -17,6 +17,24 @@
 interface INews extends IEntity {
 
     /**
+     * @param NewsMainInfo $info
+     * @return void
+     */
+    function registerMainInfo(NewsMainInfo $info);
+
+    /**
+     * @param string[] $tags
+     * @return void
+     */
+    public function registerTags($tags);
+
+    /**
+     * @param NewsSubmitter $submitter
+     * @return void
+     */
+    public function registerSubmitter(NewsSubmitter $info);
+
+    /**
      * @return ISubmitter
      */
     public function getSubmitter();
@@ -28,6 +46,11 @@ interface INews extends IEntity {
      */
     public function getTags();
 
+    /**
+     * @return string
+     */
+    public function getTagsCSV();
+
     public function addTag(INewsTag $tag);
 
     public function clearTags();
@@ -38,21 +61,44 @@ interface INews extends IEntity {
 	 */
 	public function registerImage(array $file_ids, IFileUploadService $upload_service);
 
+    public function removeImage();
+
+    public function getImage();
+
     /**
      * @param array $file_ids
      * @param IFileUploadService $upload_service
      */
     public function registerDocument(array $file_ids, IFileUploadService $upload_service);
 
-    /**
-     * @param NewsSubmitter $submitter
-     * @return void
-     */
-    public function registerSubmitter(NewsSubmitter $info);
+    public function removeDocument();
 
-    /**
-     * @param string[] $tags
-     * @return void
-     */
-    public function registerTags($tags);
+    public function registerSection($section);
+
+    public function registerRestored($restored);
+
+    public function registerRank($rank);
+
+    public function getHTMLBody();
+
+    public function getHTMLSummary();
+
+    public function getHeadlineForUrl();
+
+    public function getImageForArticle();
+
+    public function getImageThumb();
+
+    public function shortenText($text, $chars);
+
+    public function deleteArticle();
+
+    public function getDateEmbargoCentral($format='Y-m-d H:i:s');
+
+    public function setDateEmbargoInGMT($date_embargo);
+
+    public function getDateExpireCentral($format='Y-m-d H:i:s');
+
+    public function setDateExpireInGMT($date_expire);
+
 } 

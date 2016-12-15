@@ -66,7 +66,8 @@
                     $ImageThumb
                     <div class="recent_text">
                         <div class="recentHeadline">
-                            <a href="news/view/$ID/$HeadlineForUrl">$RAW_val(Headline)</a> <span class="itemTimeStamp">$formatDate</span>
+                            <a href="news/view/$ID/$HeadlineForUrl"> $RAW_val(Headline) </a>
+                            <span class="itemTimeStamp"> $getDateEmbargoCentral('M d, g:i a') </span>
                         </div>
                         <div class="recentSummary">$HTMLSummary</div>
                     </div>
@@ -85,7 +86,7 @@
                             <li>
                                 <div class="featuredImage">
                                     <a href="news/view/$ID/$HeadlineForUrl">
-                                        <div class="featuredDate">$formatDate</div>
+                                        <div class="featuredDate">$getDateEmbargoCentral('M d, g:i a')</div>
                                         <div class="featuredHeadline">
                                             $Headline
                                             <div class="more">Read More <i class="fa fa-chevron-circle-right"></i></div>

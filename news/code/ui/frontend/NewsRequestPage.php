@@ -57,6 +57,7 @@ final class NewsRequestPage_Controller extends Page_Controller {
     public function NewsRequestForm() {
         $this->commonScripts();
         Requirements::css('news/code/ui/frontend/css/news.form.css');
+        Requirements::css('themes/openstack/bower_assets/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
         Requirements::javascript("news/code/ui/frontend/js/news.form.js");
         $data = Session::get("FormInfo.Form_NewsRequestForm.data");
         $article = null;

@@ -37,6 +37,7 @@ final class NewsRequestForm extends HoneyPotForm {
         if ($is_manager) {
             $DateExpireField = new TextField('date_expire','Expire Date');
             $DateExpireField->addExtraClass('datefield');
+            $PreApprovedField = new CheckboxField('pre-approved','Approve for Auto-Publish');
         }
 
         $UpdatedField = new DatetimeField_Readonly('date_updated','Last Updated');
@@ -58,7 +59,7 @@ final class NewsRequestForm extends HoneyPotForm {
 		$DocumentField->setCanPreviewFolder(false); // Don't show target filesystem folder on upload field
 		$DocumentField->setRecordClass('File');
 
-		$ImageField = new CustomUploadField('Image', 'Image (Max size 2Mb - Suggested size 300x250px)');
+		$ImageField = new CustomUploadField('Image', 'Image (Max size 2Mb - Suggested size 300x250px - jpg, gif, png, jpeg)');
         $ImageField->setCanAttachExisting(false);
 		$ImageField->setAllowedMaxFileNumber(1);
 		$ImageField->setAllowedFileCategories('image');
@@ -76,6 +77,7 @@ final class NewsRequestForm extends HoneyPotForm {
             $IsLandscapeField = new CheckboxField('is_landscape','Is Banner? (landscape image)');
             $IsLandscapeField->addExtraClass('is_landscape');
         }
+
         if($article) {
             $IDField->setValue($article->ID);
             $HeadlineField->setValue($article->Headline);
@@ -98,6 +100,8 @@ final class NewsRequestForm extends HoneyPotForm {
             $LinkField->setValue($article->Link);
             if ($article->DateExpire)
                 $DateExpireField->setValue($article->getDateExpireCentral('m/d/Y g:i a'));
+            if ($article->PreApproved)
+                $PreApprovedField->setValue($article->PreApproved);
             $IsLandscapeField->setValue($article->IsLandscape);
             //submitter read only
             $SubmitterFirstNameField = new ReadonlyField('submitter_first_name','First Name');
@@ -172,6 +176,10 @@ final class NewsRequestForm extends HoneyPotForm {
         $fields->push($SubmitterCompanyField);
         $fields->push($SubmitterPhoneField);
 
+        if ($is_manager) {
+            $fields->push(new LiteralField('breakline','<hr>'));
+            $fields->push($PreApprovedField);
+        }
 
 		// Create action
 		$actions = new FieldList();

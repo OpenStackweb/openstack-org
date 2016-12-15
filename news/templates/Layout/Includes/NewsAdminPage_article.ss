@@ -1,5 +1,5 @@
 <tr class="article_row <% if $Hidden %> hidden_article <% end_if %>" height="5px">
-    <td class="date_release" >$formattedDate</td>
+    <td class="date_release" >$getDateEmbargoCentral('M jS Y')</td>
     <% if $Type == standby %>
         <td class="title">$shortenText($Headline,20)</td>
     <% else %>

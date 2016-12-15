@@ -37,10 +37,11 @@ final class News extends DataObject implements INews
         'Featured' => 'Boolean',
         'Slider' => 'Boolean',
         'Approved' => 'Boolean',
+        'PreApproved' => 'Boolean',
         'IsLandscape' => 'Boolean',
         'Archived' => 'Boolean',
         'Restored' => 'Boolean',
-        'Deleted' => 'Boolean'
+        'Deleted' => 'Boolean',
     );
 
     private static $defaults = array
@@ -72,11 +73,6 @@ final class News extends DataObject implements INews
     public function getIdentifier()
     {
         return (int)$this->getField('ID');
-    }
-
-    public function formatDate()
-    {
-        return $this->getDateEmbargoCentral('M d, g:i a');
     }
 
     /**
@@ -297,11 +293,6 @@ final class News extends DataObject implements INews
                 return $image_html;
             }
         }
-    }
-
-    public function formattedDate()
-    {
-        return $this->getDateEmbargoCentral('M jS Y');
     }
 
     public function shortenText($text, $chars)
