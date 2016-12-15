@@ -3465,7 +3465,7 @@ h3.recap-title {
   margin-top: 60px; }
 
 .about-timeline-wrapper {
-    margin-top: 80px;
+    margin-top: 0;
 }
 
 .about-timeline-wrapper h3, .summit-types h3 {
