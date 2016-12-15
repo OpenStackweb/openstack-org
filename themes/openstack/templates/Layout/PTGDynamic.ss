@@ -107,7 +107,7 @@
 
                         </div>
                     </div>
-                    <% end if %>
+                    <% end_if %>
                     <div class="row">
                         <div class="col-sm-12">
                             <h2>What are PTG Events & Why Sponsor?</h2>
