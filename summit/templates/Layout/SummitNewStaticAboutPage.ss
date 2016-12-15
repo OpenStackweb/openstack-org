@@ -39,7 +39,7 @@
             </div>
           </div>
         </div>
-        <a class="who-section-cta" href="//www.openstack.org/summit/boston-2017/summit-categories">Learn more about who should attend</a>
+        <a class="who-section-cta" href="//www.openstack.org/summit/boston-2017/summit-categories">Learn more about the content planned for the OpenStack Summit Boston</a>
 			</div>
 		<div class="col-lg-3 col-md-4 col-sm-4">
       <ul class="help-me-menu">
@@ -179,7 +179,7 @@
     </div>
     <div class="row">
       <div class="col-sm-12">
-        <a href="https://www.openstack.org/summit/barcelona-2016/openstack-academy/" class="btn academy-cta">Read more about the OpenStack Academy</a>
+        <a href="https://www.openstack.org/summit/barcelona-2016/openstack-academy/" class="btn academy-cta">Read more about OpenStack Academy</a>
       </div>
     </div>
     <div class="row">
@@ -190,7 +190,7 @@
           <div class="row">
             <div class="col-sm-8 col-sm-push-2">
               <p>
-                At The Forum, OpenStack users and developers gather to brainstorm the requirements for the next release, gather feedback on the past version and have strategic discussions that go beyond just one release cycle. Development teams, working groups and interested individuals will discuss release requirements, connect with community members about cross-project collaboration, and to exchange feedback between design and operations members.
+                At the Forum, OpenStack users and developers will gather to brainstorm the requirements for the next release, gather feedback on the past version and have strategic discussions that go beyond just one release cycle. Development teams, working groups and interested individuals will discuss release requirements, connect with community members about cross-project collaboration, and to exchange feedback between design and operations members.
               </p>
             </div>
           </div>
@@ -281,7 +281,7 @@
 				</div>
 				<div class="growth-text-bottom map">
 					<p>
-            The OpenStack summit is a unique opportunity for the developers and users of OpenStack software to meet and exchange ideas. Hundreds of the core developers will be on site to discuss all things OpenStack. Summits include in-depth technical discussions, hands-on workshops, and the full presence of almost every player in the OpenStack Ecosystem. If you are deploying OpenStack—or considering how it can help your enterprise—there’s no better way to connect with the community than the OpenStack Summit.
+            The OpenStack Summit is a unique opportunity for members open source communities to meet, exchange ideas and collaborate with each other. Summits include in-depth technical discussions, hands-on workshops, and case studies from a diverse set of technologies, industries and geographies. If you are developing your open source strategy—or considering how it can help your business—there’s no better way to connect with IT decision makers, developers and operators than the OpenStack Summit.
 					</p>
 				</div>
 			</div>
@@ -294,7 +294,7 @@
 			<div class="col-sm-8 col-sm-push-2">
           <h2>Join Us In Boston!</h2>
           <p>
-            Tickets are selling fast, so register today…
+            Tickets are selling fast, so register today.
           </p>
           <p>
             <a href="https://openstacksummit2017boston.eventbrite.com/" target="_blank" class="btn" target="_blank">Register Now</a>
