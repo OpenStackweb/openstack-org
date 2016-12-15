@@ -281,7 +281,7 @@
 				</div>
 				<div class="growth-text-bottom map">
 					<p>
-            The OpenStack Summit is a unique opportunity for members open source communities to meet, exchange ideas and collaborate with each other. Summits include in-depth technical discussions, hands-on workshops, and case studies from a diverse set of technologies, industries and geographies. If you are developing your open source strategy—or considering how it can help your business—there’s no better way to connect with IT decision makers, developers and operators than the OpenStack Summit.
+            The OpenStack Summit is a unique opportunity for members of open source communities to meet, exchange ideas and collaborate with each other. Summits include in-depth technical discussions, hands-on workshops, and case studies from a diverse set of technologies, industries and geographies. If you are developing your open source strategy—or considering how it can help your business—there’s no better way to connect with IT decision makers, developers and operators than the OpenStack Summit.
 					</p>
 				</div>
 			</div>
