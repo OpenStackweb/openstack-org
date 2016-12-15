@@ -93,6 +93,7 @@ $(document).ready(function(){
     $('body').on('change', '#PresentationForm_PresentationForm_GroupID', function(){
         getCategories();
         toggleFields();
+        $('.track-question').remove();
         //form.persistableForm('reload');
     });
 
