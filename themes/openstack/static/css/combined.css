@@ -1507,7 +1507,7 @@ a.who-section-cta {
 @media (min-width: 768px) and (max-width: 990px) {
   .summit-more-wrapper .about-video-wrapper {
     display: inline-block;
-    width: 45%;
+    width: 49%;
     margin: 20px auto; }
     .summit-more-wrapper .about-video-wrapper iframe {
       height: 205px; } }
@@ -3626,7 +3626,7 @@ h3.recap-title {
   margin: 60px auto; }
 
 .about-timeline-wrapper {
-  margin-top: 80px; }
+  margin-top: 0; }
   .about-timeline-wrapper h3 {
     font-weight: 300;
     margin-bottom: 20px; }
