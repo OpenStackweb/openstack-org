@@ -65,8 +65,8 @@ class PTGDynamic extends Page {
         $notattend->setRows(5);
         $fields->addFieldToTab('Root.Main', $benefit = new HtmlEditorField('Benefits','How can this benefit?'));
         $benefit->setRows(5);
-        $fields->addFieldToTab('Root.Main', $sponsor = new HtmlEditorField('SponsorLogos','Sponsor Logo Placement'));
-        $sponsor->setRows(5);
+        $fields->addFieldToTab('Root.Main', $sponsorlogos = new HtmlEditorField('SponsorLogos','Sponsor Logo Placement'));
+        $sponsorlogos->setRows(5);
         $fields->addFieldToTab('Root.Main', $sponsor = new HtmlEditorField('Sponsor','What are PTG Events & Why Sponsor?'));
         $sponsor->setRows(5);
         $fields->addFieldToTab('Root.Main', $sponsor_steps = new HtmlEditorField('SponsorSteps','Steps to Sponsoring the PTG event'));
