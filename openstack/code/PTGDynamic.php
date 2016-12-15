@@ -18,7 +18,6 @@
 class PTGDynamic extends Page {
 
     private static $db = array(
-        'Header'             => 'HTMLText',
         'Summary'            => 'HTMLText',
         'WhyTheChange'       => 'HTMLText',
         'HotelAndTravel'     => 'HTMLText',
@@ -45,9 +44,6 @@ class PTGDynamic extends Page {
     function getCMSFields(){
         $fields = parent::getCMSFields();
         $fields->removeByName('Content');
-
-        $fields->addFieldToTab('Root.Main', $header = new HtmlEditorField('Header','Header'));
-        $header->setRows(5);
         $fields->addFieldToTab('Root.Main', $summary = new HtmlEditorField('Summary','Summary'));
         $summary->setRows(5);
         $fields->addFieldToTab('Root.Main', $whychange = new HtmlEditorField('WhyTheChange','Why The Change'));
