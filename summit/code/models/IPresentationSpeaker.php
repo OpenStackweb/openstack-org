@@ -102,6 +102,18 @@ interface IPresentationSpeaker extends IEntity
      * @param null|int $summit_id
      * @return mixed
      */
+    public function ModeratorPresentations($summit_id = null);
+
+    /**
+     * @param null|int $summit_id
+     * @return mixed
+     */
+    public function OtherModeratorPresentations($summit_id = null);
+
+    /**
+     * @param null|int $summit_id
+     * @return mixed
+     */
     public function getPresentationsCount($summit_id = null);
 
    /**

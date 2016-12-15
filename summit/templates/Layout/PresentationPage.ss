@@ -102,8 +102,8 @@
                     <h3>Presentations <strong>Others</strong> Submitted With You As A Moderator</h3>
                     <table class="table">
                         <tbody>
-                            <% if $CurrentMember.SpeakerProfile.ModeratorPresentations($Top.Summit.ID) %>
-                                <% loop $CurrentMember.SpeakerProfile.ModeratorPresentations($Top.Summit.ID) %>
+                            <% if $CurrentMember.SpeakerProfile.OtherModeratorPresentations($Top.Summit.ID) %>
+                                <% loop $CurrentMember.SpeakerProfile.OtherModeratorPresentations($Top.Summit.ID) %>
                                 <tr>
                                     <td class="item-name">
                                         <i class="fa fa-file-text-o"></i>
