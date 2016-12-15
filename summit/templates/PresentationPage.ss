@@ -164,5 +164,5 @@
     </div>
 </div>
 </body>
-
+<% require javascript("themes/openstack/javascript/jquery.persistable-form.js") %>
 </html>

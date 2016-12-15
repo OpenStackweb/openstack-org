@@ -18,7 +18,6 @@
 class PTGDynamic extends Page {
 
     private static $db = array(
-        'Header'             => 'HTMLText',
         'Summary'            => 'HTMLText',
         'WhyTheChange'       => 'HTMLText',
         'HotelAndTravel'     => 'HTMLText',
@@ -26,6 +25,7 @@ class PTGDynamic extends Page {
         'WhoShouldAttend'    => 'HTMLText',
         'WhoShouldNotAttend' => 'HTMLText',
         'Benefits'           => 'HTMLText',
+        'SponsorLogos'       => 'HTMLText',
         'Sponsor'            => 'HTMLText',
         'SponsorSteps'       => 'HTMLText',
         'TravelSupport'      => 'HTMLText',
@@ -44,9 +44,6 @@ class PTGDynamic extends Page {
     function getCMSFields(){
         $fields = parent::getCMSFields();
         $fields->removeByName('Content');
-
-        $fields->addFieldToTab('Root.Main', $header = new HtmlEditorField('Header','Header'));
-        $header->setRows(5);
         $fields->addFieldToTab('Root.Main', $summary = new HtmlEditorField('Summary','Summary'));
         $summary->setRows(5);
         $fields->addFieldToTab('Root.Main', $whychange = new HtmlEditorField('WhyTheChange','Why The Change'));
@@ -64,6 +61,8 @@ class PTGDynamic extends Page {
         $notattend->setRows(5);
         $fields->addFieldToTab('Root.Main', $benefit = new HtmlEditorField('Benefits','How can this benefit?'));
         $benefit->setRows(5);
+        $fields->addFieldToTab('Root.Main', $sponsorlogos = new HtmlEditorField('SponsorLogos','Sponsor Logo Placement'));
+        $sponsorlogos->setRows(5);
         $fields->addFieldToTab('Root.Main', $sponsor = new HtmlEditorField('Sponsor','What are PTG Events & Why Sponsor?'));
         $sponsor->setRows(5);
         $fields->addFieldToTab('Root.Main', $sponsor_steps = new HtmlEditorField('SponsorSteps','Steps to Sponsoring the PTG event'));
