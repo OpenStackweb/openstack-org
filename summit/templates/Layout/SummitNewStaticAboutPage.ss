@@ -7,52 +7,44 @@
         </div>
         <div class="who-section-wrapper">
           <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-6 col-md-6 col-lg-4">
               <div class="who-section it">
                 <div class="content">
-                  <h5>IT Business Leaders</h5>
+                  <h5>Business & Strategy</h5>
                   <p>
-                    Hear case studies about how cloud is saving money and impacting business. Gain the tools to evaluate OpenStack providers
+                    CIO and IT decision makers attend to hear case studies about how cloud is saving money and creating business impact, and to learn how to evaluate OpenStack providers, build a successful team and develop a successful cloud strategy.
                   </p>
                 </div>
               </div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-6 col-md-6 col-lg-4">
               <div class="who-section cloud">
                 <div class="content">
-                  <h5>Cloud Practitioners</h5>
+                  <h5>Architecture & Operations</h5>
                   <p>
-                    Learn from peers in the community with architecture show & tell, containers, technical deep dives and workshops
+                    Architects and operators attend to improve their current deployment, discover new tools or learn how to get an OpenStack cloud up and running from expert community members OpenStack clouds.
                   </p>
                 </div>
               </div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-6 col-md-6 col-lg-4">
               <div class="who-section app">
                 <div class="content">
-                  <h5>Application Developers</h5>
+                  <h5>Developers</h5>
                   <p>
-                    Get hands on with workshops, Kubernetes, Swarm, Mesos, demos, presentations and self-paced labs
+                    App developers can get started developing cloud applications, including integrating technologies like containers, or discover how OpenStack can be used to deliver valuable services like big data analytics. If you’re new to upstream contribution, this is the place to be.
                   </p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <a class="who-section-cta" href="https://www.openstack.org/summit/barcelona-2016/categories/">Learn more about who should attend</a>
+        <a class="who-section-cta" href="//www.openstack.org/summit/boston-2017/summit-categories">Learn more about who should attend</a>
 			</div>
 		<div class="col-lg-3 col-md-4 col-sm-4">
       <ul class="help-me-menu">
-          <li><a href="/summit/barcelona-2016/mobile-apps/"><i class="fa fa-mobile"></i>Mobile App Schedule</a></li>
-          <li><a href="/summit/barcelona-2016/openstack-academy/"><i class="fa fa-graduation-cap"></i>OpenStack Academy</a></li>
-          <li><a href="/summit/barcelona-2016/barcelona-and-travel/#visa"><i class="fa fa-globe"></i>Visa Info</a></li>
-          <li><a href="/summit/barcelona-2016/code-of-conduct/"><i class="fa fa-users"></i>Code Of Conduct</a></li>
-          <li><a href="/summit/barcelona-2016/barcelona-and-travel/#hotels"><i class="fa fa-hotel"></i>Hotels &amp; Airport</a></li>
-          <li><a href="/summit/barcelona-2016/guide-to-barcelona/"><i class="fa fa-compass"></i>Guide to Barcelona</a></li>
-          <li><a href="/summit/barcelona-2016/travel-tips/"><i class="fa fa-map-signs"></i>Travel Tips</a></li>
-          <li><a href="/summit/barcelona-2016/summit-map"><i class="fa fa-globe"></i>Summit Campus Maps</a></li>
-          <li><a href="/summit/barcelona-2016/lunch-menus"><i class="fa fa-cutlery"></i>Lunch Options & Menus</a></li>
-          <li><a href="https://spousetivities.ticketleap.com/openstack-summit-2016-barcelona/" target="_blank"><i class="fa fa-bicycle"></i>Spousetivities</a></li>
+          <li><a href="//openstacksummit2017boston.eventbrite.com/"><i class="fa fa-mobile"></i>Register for the Summit</a></li>
+          <li><a href="/summit/boston-2017/travel/"><i class="fa fa-compass"></i>Travel Info</a></li>
       </ul>
 		</div>
 		</div>
@@ -62,7 +54,7 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-        <h2>Hear Directly From Users</h2>
+        <h2>Past speakers from OpenStack Summits</h2>
       </div>
     </div>
     <div class="row">
@@ -138,7 +130,7 @@
     <div class="row">
       <div class="col-sm-12">
         <div class="gallery-content">
-          <a href="https://www.eventbrite.com/e/openstack-summit-october-2016-barcelona-tickets-24406960877" target="_blank" class="btn register-btn-lrg" target="_blank">Register Now</a>
+          <a href="https://openstacksummit2017boston.eventbrite.com/" target="_blank" class="btn register-btn-lrg" target="_blank">Register Now</a>
         </div>
       </div>
     </div>
@@ -190,6 +182,20 @@
         <a href="https://www.openstack.org/summit/barcelona-2016/openstack-academy/" class="btn academy-cta">Read more about the OpenStack Academy</a>
       </div>
     </div>
+    <div class="row">
+				<div class="col-sm-12">
+          <hr style="margin-top:60px;">
+          <h1 style="margin-bottom: 20px;">The Forum</h1>
+          <i class="fa fa-flask" style="color: #3E9B85;font-size: 5.5em;margin-bottom: 20px;"></i>
+          <div class="row">
+            <div class="col-sm-8 col-sm-push-2">
+              <p>
+                At The Forum, OpenStack users and developers gather to brainstorm the requirements for the next release, gather feedback on the past version and have strategic discussions that go beyond just one release cycle. Development teams, working groups and interested individuals will discuss release requirements, connect with community members about cross-project collaboration, and to exchange feedback between design and operations members.
+              </p>
+            </div>
+          </div>
+        </div>
+    </div>
   </div>
 </div>
 <div class="summit-more-wrapper">
@@ -200,12 +206,12 @@
 				<div class="stats-wrapper">
 					<h3 class="recap-title">Attendees From Around The World</h3>
 					<div class="single-summit-stats right">
-						<h4>November 2014: Paris, France</h4>
-						<img src="/themes/openstack/static/images/bcn-redesign/stats-paris.svg" alt="Paris Summit Attendees">
+						<h4>May 2015: Vancouver, BC</h4>
+						<img src="/themes/openstack/static/images/boston/stats-vancouver.svg" alt="Vancouver Summit Attendees">
 					</div>
 					<div class="single-summit-stats">
 						<h4>April 2016: Austin, Texas</h4>
-						<img src="/themes/openstack/static/images/bcn-redesign/stats-austin.svg" alt="Austin Summit Attendees">
+						<img src="/themes/openstack/static/images/boston/stats-austin.svg" alt="Austin Summit Attendees">
 					</div>
 					<div class="about-summit-legend-wrapper">
 						<img class="about-summit-legend" src="/themes/openstack/static/images/tokyo/about-stats-legend.svg" onerror="this.onerror=null; this.src=/themes/openstack/static/images/tokyo/about-stats-legend.png" alt="Vancouver Summit Attendees">
@@ -213,14 +219,14 @@
 				</div> 
       </div>
       <div class="col-sm-12">
-				<h3 class="recap-title">Watch Video Recaps From Previous Summits</h3>
+				<h3 class="recap-title">Watch the Keynotes from Barcelona</h3>
 				<div class="about-video-wrapper">
-					<iframe src="//www.youtube.com/embed/ggEcb16BVog?rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe>
-                <p class='video-catpion'>April 2016 in Austin</p>
+					<iframe src="//www.youtube.com/embed/GGxzlLwt6WA?rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe>
+                <p class='video-catpion'>Keynote Day 1</p>
 				</div>
 				<div class="about-video-wrapper">
-					<iframe src="//www.youtube.com/embed/-j13REYVJ2g?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
-                <p class='video-catpion'>October 2015 in Tokyo</p>
+					<iframe src="//www.youtube.com/embed/t8IiULAPKwo?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+                <p class='video-catpion'>Keynote Day 2</p>
 				</div>
       </div>
     </div>
@@ -229,72 +235,15 @@
 <div class="light two-summits">
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-8 col-lg-push-2">
-				<h1>One Week, Two Main Events</h1>
-			</div>
-		</div>
-		<div class="row summit-types">
-			<div class="col-lg-5 col-md-5 col-sm-6">
-				<img class="summit-type-icon" src="/themes/openstack/static/images/grey-conference-logo.svg" onerror="this.onerror=null; this.src=/themes/openstack/static/images/grey-conference-logo.png" alt="The OpenStack Conference" style="max-width: 150px;">
-				<h3>The OpenStack Conference</h3>
-				<div class="sub-h3">
-					For Everyone
-				</div>
-				<p>
-                   <strong>Tuesday - Thursday</strong><br>Classic track with speakers and sessions. The perfect place for developers, users, and administrators of OpenStack Cloud Software. This is great for those looking for the best way to get started.
-                </p>
-			</div>
-            <div class="col-lg-5 col-lg-push-2 col-md-5 col-md-push-2 col-sm-6">
-                <img class="summit-type-icon" src="/themes/openstack/static/images/grey-summit-logo.svg" onerror="this.onerror=null; this.src=/themes/openstack/static/images/grey-summit-logo.png" alt="The OpenStack Conference" style="max-width: 150px;">
-                <h3>The OpenStack Ops &amp; Design Summit</h3>
-                <div class="sub-h3">
-                    For Contributors
-                </div>
-                <p>
-                    <strong>Tuesday - Friday</strong><br>Collaborative working sessions where OpenStack developers come together twice annually to discuss the requirements for the next software release and connect with other community members.
-                </p>
-            </div>
-		</div>
-		<div class="row">
 			<div class="col-sm-8 col-sm-push-2">
 				<div class="about-timeline-wrapper">
 					<h3>Summit Timeline</h3>
 					<p>
-            You can access the Barcelona Summit with one of two passes: Keynote + Marketplace Pass or The Full Access Pass.
+            You can access everything the Boston Summit has to offer with one pass!
           </p>
-					<img class="summit-type-icon" src="/themes/openstack/static/images/bcn-redesign/barcelona-schedule.svg" alt="Summit Timeline">
+					<img class="summit-type-icon" src="/themes/openstack/static/images/boston/boston-schedule.png" alt="Summit Timeline">
 				</div>
-				<div class="row">
-					<div class="col-sm-6">
-						<div class="pass-types">
-							<div class="pass-type-title full">Full Access Pass</div>
-							<ul>
-								<li>
-									Access to all Breakout Sessions and Workshops, Developer & Operator working sessions, Keynote presentations, Marketplace Expo Hall, Lounges, etc.
-								</li>
-								<li>
-									This pass includes lunch
-								</li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<div class="pass-types">
-							<div class="pass-type-title keynote">Keynote + Marketplace Pass</div>
-							<ul>
-								<li>
-									Access to the Keynote presentations from industry leaders and Marketplace Expo Hall to explore sponsor booths and network
-								</li>
-								<li>
-									This pass does NOT include access to any breakout sessions (including sponsored sessions and tracks) taking place Tuesday - Thursday or the developer and operator working sessions taking place Tuesday - Friday. This pass ONLY includes access to the Keynote presentations and the Marketplace Expo Hall.
-								</li>
-								<li>
-									This pass includes lunch
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
+
 			</div>
 		</div>
 	</div>
@@ -323,11 +272,11 @@
 				<div class="growth-text-top map">
 					<h2>Join The Movement</h2>
 					<p>
-						 In 2010, 75 people met in Austin, Texas for the very first OpenStack Summit. Six years later, over 7,800 attendees joined us as we returned to Austin.
+						 Twice a year, community members from more than 60 countries and 1,000 companies gather to share OpenStack use cases, perform live software demos and hold free workshops and trainings. Join the movement.
 					</p>
 				</div>
 				<div class="growth-map-wrapper">
-					<img class="growth-map tokyo" src="/themes/openstack/static/images/bcn-redesign/map-about-summit.svg" alt="OpenStack Summit Growth Chart"> 
+					<img class="growth-map tokyo" src="/themes/openstack/static/images/boston/map-about-summit.svg" alt="OpenStack Summit Growth Chart"> 
 					<img class="growth-chart-legend map" src="/themes/openstack/static/images/tokyo/map-legend.svg" alt="OpenStack Summit Map Legend"> 
 				</div>
 				<div class="growth-text-bottom map">
@@ -343,12 +292,12 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-8 col-sm-push-2">
-          <h2>Join Us In Barcelona!</h2>
+          <h2>Join Us In Boston!</h2>
           <p>
             Tickets are selling fast, so register today…
           </p>
           <p>
-            <a href="https://www.eventbrite.com/e/openstack-summit-october-2016-barcelona-tickets-24406960877" target="_blank" class="btn" target="_blank">Register Now</a>
+            <a href="https://openstacksummit2017boston.eventbrite.com/" target="_blank" class="btn" target="_blank">Register Now</a>
           </p>
 			</div>
 		</div>
