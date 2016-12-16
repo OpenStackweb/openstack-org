@@ -604,9 +604,9 @@ SQL;
                             )";
         }
 
-        $query_group = "";
-        if (!in_array('speaker',$filters['show_col'])) {
-            $query_group .= " GROUP BY P.ID ";
+        $query_group = " GROUP BY P.ID";
+        if (in_array('speaker',$filters['show_col'])) {
+            $query_group .= ", S.ID ";
         }
 
         $query_count = "SELECT COUNT(*) FROM (SELECT P.ID ";
@@ -621,7 +621,8 @@ SQL;
         if (in_array('speaker',$filters['show_col'])) {
             $query .= "S.FirstName AS first_name,
                        S.LastName AS last_name,
-                       M.Email AS email,";
+                       M.Email AS email,
+                       GROUP_CONCAT(Org.Name SEPARATOR ', ') AS company,";
         }
 
         if (in_array('moderator',$filters['show_col'])) {
@@ -632,8 +633,7 @@ SQL;
             $query .= "M3.Email AS owner_email,";
         }
 
-        $query .= "Org.Name AS company,
-                   P.Status AS status";
+        $query .= "P.Status AS status";
 
         $query .= $query_body.$query_group." ORDER BY {$sort} {$sort_dir}";
         $query_count .= $query_body." ) AS Q1";
