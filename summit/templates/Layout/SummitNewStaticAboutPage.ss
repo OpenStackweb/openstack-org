@@ -32,7 +32,7 @@
                 <div class="content">
                   <h5>Developers</h5>
                   <p>
-                    App developers can get started developing cloud applications, including integrating technologies like containers, or discover how OpenStack can be used to deliver valuable services like big data analytics. If you’re new to upstream contribution, this is the place to be.
+                    App developers can get started developing cloud applications, including integrating technologies like containers, or discover how OpenStack can be used to deliver valuable services like big data analytics. If you’re an upstream developer or would like to get started contributing, this is the place to be.
                   </p>
                 </div>
               </div>
