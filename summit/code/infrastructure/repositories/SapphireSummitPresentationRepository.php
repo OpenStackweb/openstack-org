@@ -566,33 +566,35 @@ SQL;
             FROM SummitEvent AS E
             INNER JOIN Presentation AS P ON E.ID = P.ID
             INNER JOIN PresentationCategory AS PC ON E.CategoryID = PC.ID
-            INNER JOIN Presentation_Speakers AS PS ON PS.PresentationID = P.ID
-            INNER JOIN PresentationSpeaker AS S ON PS.PresentationSpeakerID = S.ID
+            LEFT JOIN Presentation_Speakers AS PS ON PS.PresentationID = P.ID
+            LEFT JOIN PresentationSpeaker AS S ON PS.PresentationSpeakerID = S.ID
             LEFT JOIN SpeakerRegistrationRequest AS SR ON SR.SpeakerID = S.ID
-            INNER JOIN Member AS M ON M.ID = S.MemberID
-            INNER JOIN Member AS M2 ON M2.ID = P.ModeratorID
-            INNER JOIN Member AS M3 ON M3.ID = P.CreatorID
-            INNER JOIN Affiliation AS A ON A.MemberID=M.ID
-            INNER JOIN Org ON Org.ID = A.OrganizationID
+            LEFT JOIN Member AS M ON M.ID = S.MemberID
+            LEFT JOIN Member AS M2 ON M2.ID = P.ModeratorID
+            LEFT JOIN Member AS M3 ON M3.ID = P.CreatorID
+            LEFT JOIN Affiliation AS A ON A.MemberID=M.ID
+            LEFT JOIN Org ON Org.ID = A.OrganizationID AND A.Current = 1
+SQL;
+
+        $query_where = <<<SQL
             WHERE E.SummitID = {$summit_id} AND E.Title IS NOT NULL
-            AND A.Current = 1
 SQL;
 
         if ($filters['status']) {
-            $query_body .= ($filters['status'] == 'null') ? " AND P.Status IS NULL" : " AND P.Status='{$filters['status']}'";
+            $query_where .= ($filters['status'] == 'null') ? " AND P.Status IS NULL" : " AND P.Status='{$filters['status']}'";
         }
 
         if ($filters['published']) {
-            $query_body .= ($filters['published'] == 'scheduled') ? " AND E.LocationID <> 0" : " AND E.LocationID = 0";
+            $query_where .= ($filters['published'] == 'scheduled') ? " AND E.LocationID <> 0" : " AND E.LocationID = 0";
         }
 
         if ($filters['track']) {
             $tracks = implode(',', $filters['track']);
-            $query_body .= " AND E.CategoryID IN({$tracks})";
+            $query_where .= " AND E.CategoryID IN({$tracks})";
         }
 
         if ($search_term) {
-            $query_body .= " AND (E.Title LIKE '%{$search_term}%' OR S.FirstName LIKE '%{$search_term}%'
+            $query_where .= " AND (E.Title LIKE '%{$search_term}%' OR S.FirstName LIKE '%{$search_term}%'
                             OR S.LastName LIKE '%{$search_term}%' OR CONCAT(S.FirstName,' ',S.LastName) LIKE '%{$search_term}%'
                             OR PC.Title LIKE '%{$search_term}%' OR M.Email LIKE '%{$search_term}%' OR Org.Name LIKE '%{$search_term}%'
                             OR SR.Email LIKE '%{$search_term}%'
@@ -635,9 +637,12 @@ SQL;
 
         $query .= "P.Status AS status";
 
-        $query .= $query_body.$query_group." ORDER BY {$sort} {$sort_dir}";
-        $query_count .= $query_body." ) AS Q1";
-        $query_track = "SELECT PC.Title AS track, COUNT(PC.ID) AS track_count " . $query_body . " GROUP BY PC.ID ORDER BY PC.Title";
+        $query .= $query_body.$query_where.$query_group." ORDER BY {$sort} {$sort_dir}";
+        $query_count .= $query_body.$query_where." ) AS Q1";
+        $query_track = "SELECT PC.Title AS track, COUNT(P.ID) AS track_count FROM SummitEvent AS E
+                        INNER JOIN Presentation AS P ON E.ID = P.ID
+                        INNER JOIN PresentationCategory AS PC ON E.CategoryID = PC.ID
+                       {$query_where} GROUP BY PC.ID ORDER BY PC.Title";
 
         if ($page && $page_size) {
             $offset = ($page - 1 ) * $page_size;
