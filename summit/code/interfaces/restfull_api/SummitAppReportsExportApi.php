@@ -460,11 +460,8 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
             $search_term  = (isset($query_string['term'])) ? Convert::raw2sql($query_string['term']) : '';
             $filters['status']    = (isset($query_string['status'])) ? Convert::raw2sql($query_string['status']) : '';
             $filters['published'] = (isset($query_string['published'])) ? Convert::raw2sql($query_string['published']) : '';
-            $filters['track']     = (isset($query_string['track']) && $query_string['track']) ? Convert::raw2sql($query_string['track']) : '';
-            $filters['show_col']  = (isset($query_string['show_col']) && $query_string['show_col']) ? Convert::raw2sql($query_string['show_col']) : '';
-
-            $filters['track'] = explode(',',$filters['track']);
-            $filters['show_col'] = explode(',',$filters['show_col']);
+            $filters['track']     = (isset($query_string['track']) && $query_string['track']) ? explode(',',$query_string['track']) : array();
+            $filters['show_col']  = (isset($query_string['show_col']) && $query_string['show_col']) ? explode(',',$query_string['show_col']) : array();
 
             $summit_id    = intval($request->param('SUMMIT_ID'));
             $summit       = $this->summit_repository->getById($summit_id);
