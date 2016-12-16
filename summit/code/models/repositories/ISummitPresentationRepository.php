@@ -115,4 +115,16 @@ interface ISummitPresentationRepository extends ISummitEventRepository
      * @return IPresentation[]
      */
     public function searchByCompanyPaged($summit_id,$page,$page_size,$sort,$sort_dir,$search_term);
+
+    /**
+     * @param int $summit_id
+     * @param int $page
+     * @param int $page_size
+     * @param string $sort
+     * @param string $sort_dir
+     * @param string $search_term
+     * @param array $filters
+     * @return IPresentation[]
+     */
+    public function searchByTrackPaged($summit_id,$page,$page_size,$sort,$sort_dir,$search_term,$filters);
 }

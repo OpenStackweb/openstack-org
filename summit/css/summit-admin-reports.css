@@ -38,3 +38,11 @@ th .fa {
     display: inline;
     width: 40%;
 }
+
+.report_filters {
+    margin-bottom: 30px;
+}
+
+.report_count {
+    font-size: 10px;
+}

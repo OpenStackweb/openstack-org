@@ -105,6 +105,7 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
         'GET video_report'                  => 'exportVideoReport',
         'GET rsvp_report'                   => 'exportRsvpReport',
         'GET presentations_company_report'  => 'exportPresentationsCompanyReport',
+        'GET presentations_by_track_report' => 'exportPresentationsByTrackReport',
     );
 
     static $allowed_actions = array(
@@ -115,6 +116,7 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
         'exportReport',
         'exportRsvpReport',
         'exportPresentationsCompanyReport',
+        'exportPresentationsByTrackReport',
     );
 
     public function exportSpeakerReport(SS_HTTPRequest $request){
@@ -335,7 +337,6 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
             $summit_id = intval($request->param('SUMMIT_ID'));
             $summit = $this->summit_repository->getById($summit_id);
             if (is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
-            $ext = 'csv';
 
             $events  = $this->event_repository->searchBySummitTermAndHasRSVP($summit,$search_term);
 
@@ -435,6 +436,85 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
             $filename = "presentations_company_report-" . date('Ymd') . "." . $ext;
             $delimiter = ($ext == 'xls') ? "\t" : ",";
             return CSVExporter::getInstance()->export($filename, $report_data['Data'], $delimiter);
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    public function exportPresentationsByTrackReport(SS_HTTPRequest $request){
+        try
+        {
+            $query_string = $request->getVars();
+            $page         = (isset($query_string['page'])) ? Convert::raw2sql($query_string['page']) : '';
+            $page_size    = (isset($query_string['items'])) ? Convert::raw2sql($query_string['items']) : '';
+            $sort         = (isset($query_string['sort'])) ? Convert::raw2sql($query_string['sort']) : 'presentation';
+            $sort_dir     = (isset($query_string['sort_dir'])) ? Convert::raw2sql($query_string['sort_dir']) : 'ASC';
+            $search_term  = (isset($query_string['term'])) ? Convert::raw2sql($query_string['term']) : '';
+            $filters['status']    = (isset($query_string['status'])) ? Convert::raw2sql($query_string['status']) : '';
+            $filters['published'] = (isset($query_string['published'])) ? Convert::raw2sql($query_string['published']) : '';
+            $filters['track']     = (isset($query_string['track']) && $query_string['track']) ? Convert::raw2sql($query_string['track']) : '';
+            $filters['show_col']  = (isset($query_string['show_col']) && $query_string['show_col']) ? Convert::raw2sql($query_string['show_col']) : '';
+
+            $filters['track'] = explode(',',$filters['track']);
+            $filters['show_col'] = explode(',',$filters['show_col']);
+
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $summit       = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+
+            $report_data = $this->presentation_repository->searchByTrackPaged($summit_id,$page,$page_size,$sort,$sort_dir,$search_term,$filters);
+            $data = $report_data['data'];
+            $track_count = $report_data['track_count'];
+
+            if (count($data)) {
+
+                $objPHPExcel = new PHPExcel();
+                $objPHPExcel->getProperties()->setCreator("OpenStack");
+                $objPHPExcel->getProperties()->setTitle("Presentations By Track Report");
+                $active_sheet = $objPHPExcel->getActiveSheet();
+                $track_index = 0;
+                foreach($track_count as $track => $count) {
+                    $row = $track_index + 2;
+                    $active_sheet->fromArray(array('Track','Count'), NULL, 'A1');
+                    $active_sheet->fromArray(array($track,$count), NULL, 'A'.$row);
+                    $track_index++;
+                }
+
+                $show_header = true;
+                foreach($data as $key => $event) {
+                    $row2 = $row + $key + 3;
+
+                    if ($show_header) {
+                        $heather_row = $row2 - 1;
+                        $headers = array_keys($event);
+                        $active_sheet->fromArray($headers, NULL, 'A'.$heather_row);
+                        $show_header = false;
+                    }
+
+                    $active_sheet->fromArray($event, NULL, 'A'.$row2);
+                }
+
+                $filename = "presentation_by_track_report-" . date('Ymd') . ".xlsx";
+
+                $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
+
+                header('Content-type: application/vnd.ms-excel');
+                header('Content-Disposition: attachment; filename="'.$filename.'"');
+                $objWriter->save('php://output');
+
+                return;
+            }
+
+            return $this->notFound();
+
         }
         catch(NotFoundEntityException $ex2)
         {

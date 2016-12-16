@@ -46,7 +46,7 @@
     <reports-admin-rsvp-report if={ report == 'rsvp_report' } base_url="{ base_url }" page_limit="{ limit }" summit_id="{ summit_id }" dispatcher="{ dispatcher }"></reports-admin-rsvp-report>
     <reports-admin-track-questions-report if={ report == 'track_questions_report' } page_limit="{ limit }" summit_id="{ summit_id }" dispatcher="{ dispatcher }"></reports-admin-track-questions-report>
     <reports-admin-presentations-company-report if={ report == 'presentations_company_report' } page_limit="{ limit }" summit_id="{ summit_id }" dispatcher="{ dispatcher }"></reports-admin-presentations-company-report>
-    <reports-admin-presentations-by-track-report if={ report == 'presentations_by_track_report' } page_limit="{ limit }" summit_id="{ summit_id }" dispatcher="{ dispatcher }"></reports-admin-presentations-by-track-report>
+    <reports-admin-presentations-by-track-report if={ report == 'presentations_by_track_report' } page_limit="{ limit }" summit_id="{ summit_id }" tracks="{ tracks }" dispatcher="{ dispatcher }"></reports-admin-presentations-by-track-report>
 
     <script>
         this.report             = opts.report;

@@ -8,6 +8,7 @@ function ReportsAdminViewDispatcher() {
     this.GET_RSVP_REPORT                       = 'GET_RSVP_REPORT';
     this.GET_TRACK_QUESTIONS_REPORT            = 'GET_TRACK_QUESTIONS_REPORT';
     this.GET_PRESENTATIONS_COMPANY_REPORT      = 'GET_PRESENTATIONS_COMPANY_REPORT';
+    this.GET_PRESENTATIONS_BY_TRACK_REPORT     = 'GET_PRESENTATIONS_BY_TRACK_REPORT';
     this.SAVE_SPEAKER_REPORT                   = 'SAVE_SPEAKER_REPORT';
     this.SAVE_ROOM_REPORT                      = 'SAVE_ROOM_REPORT';
     this.SAVE_VIDEO_REPORT                     = 'SAVE_VIDEO_REPORT';
@@ -18,6 +19,7 @@ function ReportsAdminViewDispatcher() {
     this.EXPORT_RSVP_REPORT                    = 'EXPORT_RSVP_REPORT';
     this.EXPORT_TRACK_QUESTIONS_REPORT         = 'EXPORT_TRACK_QUESTIONS_REPORT';
     this.EXPORT_PRESENTATIONS_COMPANY_REPORT   = 'EXPORT_PRESENTATIONS_COMPANY_REPORT';
+    this.EXPORT_PRESENTATIONS_BY_TRACK_REPORT  = 'EXPORT_PRESENTATIONS_BY_TRACK_REPORT';
 
     this.saveReport = function(report)
     {
@@ -56,6 +58,9 @@ function ReportsAdminViewDispatcher() {
             case 'presentations_company_report' :
                 this.trigger(this.GET_PRESENTATIONS_COMPANY_REPORT);
                 break;
+            case 'presentations_by_track_report' :
+                this.trigger(this.GET_PRESENTATIONS_BY_TRACK_REPORT);
+                break;
         }
     }
 
@@ -79,6 +84,9 @@ function ReportsAdminViewDispatcher() {
                 break;
             case 'presentations_company_report' :
                 this.trigger(this.EXPORT_PRESENTATIONS_COMPANY_REPORT);
+                break;
+            case 'presentations_by_track_report' :
+                this.trigger(this.EXPORT_PRESENTATIONS_BY_TRACK_REPORT);
                 break;
         }
     }

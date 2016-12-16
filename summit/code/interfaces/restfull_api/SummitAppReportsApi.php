@@ -108,6 +108,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
         'GET rsvp_report'                   => 'getRsvpReport',
         'GET track_questions_report'        => 'getTrackQuestionsReport',
         'GET presentations_company_report'  => 'getPresentationsCompanyReport',
+        'GET presentations_by_track_report' => 'getPresentationsByTrackReport',
     );
 
     static $allowed_actions = array(
@@ -120,6 +121,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
         'getRsvpReport',
         'getTrackQuestionsReport',
         'getPresentationsCompanyReport',
+        'getPresentationsByTrackReport',
     );
 
     public function handleExport(SS_HTTPRequest $request)
@@ -553,6 +555,40 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
             $presentations = $this->presentation_repository->searchByCompanyPaged($summit_id,$page,$page_size,$sort,$sort_dir,$search_term);
 
             return $this->ok(array('total' => $presentations['Total'], 'data' => $presentations['Data']));
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    public function getPresentationsByTrackReport(SS_HTTPRequest $request){
+        try
+        {
+            $query_string = $request->getVars();
+            $page         = (isset($query_string['page'])) ? Convert::raw2sql($query_string['page']) : '';
+            $page_size    = (isset($query_string['items'])) ? Convert::raw2sql($query_string['items']) : '';
+            $sort         = (isset($query_string['sort'])) ? Convert::raw2sql($query_string['sort']) : 'presentation';
+            $sort_dir     = (isset($query_string['sort_dir'])) ? Convert::raw2sql($query_string['sort_dir']) : 'ASC';
+            $search_term  = (isset($query_string['term'])) ? Convert::raw2sql($query_string['term']) : '';
+            $filters['status']    = (isset($query_string['status'])) ? Convert::raw2sql($query_string['status']) : '';
+            $filters['published'] = (isset($query_string['published'])) ? Convert::raw2sql($query_string['published']) : '';
+            $filters['track']     = (isset($query_string['track']) && $query_string['track']) ? Convert::raw2sql($query_string['track']) : array();
+            $filters['show_col']  = (isset($query_string['show_col']) && $query_string['show_col']) ? Convert::raw2sql($query_string['show_col']) : array();
+
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $summit       = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+
+            $presentations = $this->presentation_repository->searchByTrackPaged($summit_id,$page,$page_size,$sort,$sort_dir,$search_term,$filters);
+
+            return $this->ok($presentations);
         }
         catch(NotFoundEntityException $ex2)
         {

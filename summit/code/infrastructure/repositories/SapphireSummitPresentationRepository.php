@@ -547,4 +547,111 @@ SQL;
         $result = array('Total' => $total, 'Data' => $data);
         return $result;
     }
+
+    /**
+     * @param int $summit_id
+     * @param int $page
+     * @param int $page_size
+     * @param string $sort
+     * @param string $sort_dir
+     * @param string $search_term
+     * @param array $filters
+     * @return IPresentation[]
+     */
+    public function searchByTrackPaged($summit_id,$page,$page_size,$sort,$sort_dir,$search_term,$filters)
+    {
+        $status_received = Presentation::STATUS_RECEIVED;
+
+        $query_body = <<<SQL
+            FROM SummitEvent AS E
+            INNER JOIN Presentation AS P ON E.ID = P.ID
+            INNER JOIN PresentationCategory AS PC ON E.CategoryID = PC.ID
+            INNER JOIN Presentation_Speakers AS PS ON PS.PresentationID = P.ID
+            INNER JOIN PresentationSpeaker AS S ON PS.PresentationSpeakerID = S.ID
+            LEFT JOIN SpeakerRegistrationRequest AS SR ON SR.SpeakerID = S.ID
+            INNER JOIN Member AS M ON M.ID = S.MemberID
+            INNER JOIN Member AS M2 ON M2.ID = P.ModeratorID
+            INNER JOIN Member AS M3 ON M3.ID = P.CreatorID
+            INNER JOIN Affiliation AS A ON A.MemberID=M.ID
+            INNER JOIN Org ON Org.ID = A.OrganizationID
+            WHERE E.SummitID = {$summit_id} AND E.Title IS NOT NULL
+            AND A.Current = 1
+SQL;
+
+        if ($filters['status']) {
+            $query_body .= ($filters['status'] == 'null') ? " AND P.Status IS NULL" : " AND P.Status='{$filters['status']}'";
+        }
+
+        if ($filters['published']) {
+            $query_body .= ($filters['published'] == 'scheduled') ? " AND E.LocationID <> 0" : " AND E.LocationID = 0";
+        }
+
+        if ($filters['track']) {
+            $tracks = implode(',', $filters['track']);
+            $query_body .= " AND E.CategoryID IN({$tracks})";
+        }
+
+        if ($search_term) {
+            $query_body .= " AND (E.Title LIKE '%{$search_term}%' OR S.FirstName LIKE '%{$search_term}%'
+                            OR S.LastName LIKE '%{$search_term}%' OR CONCAT(S.FirstName,' ',S.LastName) LIKE '%{$search_term}%'
+                            OR PC.Title LIKE '%{$search_term}%' OR M.Email LIKE '%{$search_term}%' OR Org.Name LIKE '%{$search_term}%'
+                            OR SR.Email LIKE '%{$search_term}%'
+                            OR EXISTS (
+                                SELECT * FROM SummitEvent_Tags
+                                LEFT JOIN Tag ON Tag.ID = SummitEvent_Tags.TagID
+                                WHERE SummitEventID = P.ID AND Tag.Tag LIKE '%{$search_term}%'
+                                )
+                            )";
+        }
+
+        $query_group = "";
+        if (!in_array('speaker',$filters['show_col'])) {
+            $query_group .= " GROUP BY P.ID ";
+        }
+
+        $query_count = "SELECT COUNT(*) FROM (SELECT P.ID ";
+
+        $query = <<<SQL
+        SELECT
+        P.ID AS id,
+        E.Title AS title,
+        PC.Title AS track,
+SQL;
+
+        if (in_array('speaker',$filters['show_col'])) {
+            $query .= "S.FirstName AS first_name,
+                       S.LastName AS last_name,
+                       M.Email AS email,";
+        }
+
+        if (in_array('moderator',$filters['show_col'])) {
+            $query .= "M2.Email AS moderator_email,";
+        }
+
+        if (in_array('owner',$filters['show_col'])) {
+            $query .= "M3.Email AS owner_email,";
+        }
+
+        $query .= "Org.Name AS company,
+                   P.Status AS status";
+
+        $query .= $query_body.$query_group." ORDER BY {$sort} {$sort_dir}";
+        $query_count .= $query_body." ) AS Q1";
+        $query_track = "SELECT PC.Title AS track, COUNT(PC.ID) AS track_count " . $query_body . " GROUP BY PC.ID ORDER BY PC.Title";
+
+        if ($page && $page_size) {
+            $offset = ($page - 1 ) * $page_size;
+            $query .= " LIMIT {$offset}, {$page_size}";
+        }
+
+        $data = array();
+        foreach (DB::query($query) as $row) {
+            $data[] = $row;
+        }
+
+        $total = DB::query($query_count)->value();
+        $track_count = DB::query($query_track)->map();
+        $result = array('total' => $total, 'data' => $data, 'track_count' => $track_count);
+        return $result;
+    }
 }
