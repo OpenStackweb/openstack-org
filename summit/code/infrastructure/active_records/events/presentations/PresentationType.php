@@ -17,10 +17,16 @@ class PresentationType extends SummitEventType
 
     private static $db = array
     (
-        'MaxSpeakers'   => 'Int',
-        'MinSpeakers'   => 'Int',
-        'MaxModerators' => 'Int',
-        'MinModerators' => 'Int'
+        'MaxSpeakers'            => 'Int',
+        'MinSpeakers'            => 'Int',
+        'MaxModerators'          => 'Int',
+        'MinModerators'          => 'Int',
+        'UseSpeakers'            => 'Boolean',
+        'AreSpeakersMandatory'   => 'Boolean',
+        'UseModerator'           => 'Boolean',
+        'IsModeratorMandatory'   => 'Boolean',
+        'ModeratorLabel'         => 'VarChar(255)',
+        'ShouldBeAvailableOnCFP' => 'Boolean',
     );
 
     private static $has_many = array
@@ -53,13 +59,27 @@ class PresentationType extends SummitEventType
     public function getCMSFields() {
         $fields = parent::getCMSFields();
         $allowed_types = new DropdownField('Type', 'Type',
-            array('Presentation' => 'Presentation', 'Keynotes' => 'Keynotes', 'Panel'=> 'Panel')
+            [
+                IPresentationType::Presentation  => IPresentationType::Presentation ,
+                IPresentationType::Keynotes      => IPresentationType::Keynotes ,
+                IPresentationType::Panel         => IPresentationType::Panel,
+                IPresentationType::LightingTalks => IPresentationType::LightingTalks ,
+            ]
         );
         $fields->replaceField('Type', $allowed_types );
-        $fields->add(new TextField("MaxSpeakers","Max Speakers"));
+        $fields->add(new CheckboxField("ShouldBeAvailableOnCFP","Should be available on CFP ?"));
+
+        $fields->add(new CheckboxField("UseSpeakers","Should use Speakers?"));
+        $fields->add(new CheckboxField("AreSpeakersMandatory","Are Speakers Mandatory?"));
         $fields->add(new TextField("MinSpeakers","Min Speakers"));
-        $fields->add(new TextField("MaxModerators","Max Moderators"));
+        $fields->add(new TextField("MaxSpeakers","Max Speakers"));
+
+        $fields->add(new CheckboxField("UseModerator","Should use Moderator?"));
+        $fields->add(new CheckboxField("IsModeratorMandatory","Is Moderator Mandatory?"));
+        $fields->add(new TextField('ModeratorLabel', 'Moderator Label'));
         $fields->add(new TextField("MinModerators","Min Moderators"));
+        $fields->add(new TextField("MaxModerators","Max Moderators"));
+
         return $fields;
     }
 
@@ -77,6 +97,20 @@ class PresentationType extends SummitEventType
 
     public function getMinModerators() {
         return $this->getField('MinModerators');
+    }
+
+    /**
+     * @param string $type
+     * @return bool
+     */
+    public static function IsPresentationEventType($type){
+
+        return in_array($type,
+            [IPresentationType::Presentation ,
+                IPresentationType::Keynotes,
+                IPresentationType::Panel,
+                IPresentationType::LightingTalks
+            ]);
     }
 
 }

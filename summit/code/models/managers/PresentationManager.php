@@ -391,7 +391,6 @@ final class PresentationManager implements IPresentationManager
             $presentation->TypeID                  = intval($data['TypeID']);
             $presentation->Level                   = trim($data['Level']);
             $presentation->FeatureCloud            = intval($data['FeatureCloud']);
-            $presentation->LightningTalk           = intval($data['LightningTalk']);
             $presentation->Abstract                = trim($data['Abstract']);
             $presentation->SocialSummary           = trim($data['SocialSummary']);
             $presentation->AttendeesExpectedLearnt = trim($data['AttendeesExpectedLearnt']);
@@ -475,40 +474,15 @@ final class PresentationManager implements IPresentationManager
             $presentation->TypeID                  = intval($data['TypeID']);
             $presentation->Level                   = trim($data['Level']);
             $presentation->FeatureCloud            = intval($data['FeatureCloud']);
-            $presentation->LightningTalk           = intval($data['LightningTalk']);
             $presentation->Abstract                = trim($data['Abstract']);
             $presentation->SocialSummary           = trim($data['SocialSummary']);
             $presentation->AttendeesExpectedLearnt = trim($data['AttendeesExpectedLearnt']);
             $presentation->CategoryID              = intval(trim($data['CategoryID']));
-            $creator                               = Member::get()->byID($presentation->CreatorID);
-            $summit                                = $presentation->Summit();
-            $speaker                               = $creator->getSpeakerProfile();
 
-            // if the user changed the presentation type from panel to presentation we need to remove the moderator
-            if ($presentation->Type()->Type != ISummitEventType::Panel ) {
+            // remove moderator if its not needed
+            if (!$presentation->Type()->UseModerator) {
                 $presentation->ModeratorID = 0;
             }
-
-            // SANTI: why do we check limit on edition?
-            /*if(intval($presentation->CategoryID) > 0)
-            {
-                $category = PresentationCategory::get()->byID($presentation->CategoryID);
-                if(is_null($category)) throw new NotFoundEntityException('category not found!.');
-
-                $limit    = $this->getSubmissionLimitFor($speaker, $category);
-                $count    = $summit->isPublicCategory($category) ?
-                    (
-                        intval($speaker->getPublicCategoryPresentationsBySummit($summit)->count()) +
-                        intval($speaker->getPublicCategoryOwnedPresentationsBySummit($summit)->count())
-                    ):
-                    (
-                        intval($speaker->getPrivateCategoryPresentationsBySummit($summit, $summit->getPrivateGroupFor($category))->count()) +
-                        intval($speaker->getPrivateCategoryOwnedPresentationsBySummit($summit, $summit->getPrivateGroupFor($category))->count())
-                    );
-
-                if ($count >= $limit)
-                    throw new EntityValidationException(sprintf('You reached the limit (%s) of presentations.', $limit));
-            }*/
 
             if(isset($data['OtherTopic']))
                 $presentation->OtherTopic = trim($data['OtherTopic']);
@@ -573,7 +547,6 @@ final class PresentationManager implements IPresentationManager
            $this->presentation_repository->delete($presentation);
        });
     }
-
 
     /**
      * @param IPresentation $presentation

@@ -89,9 +89,8 @@ final class SummitService implements ISummitService
     public function publishEvent(ISummit $summit, array $event_data)
     {
         $event_repository = $this->event_repository;
-        $this_var         = $this;
 
-        return $this->tx_service->transaction(function() use($summit, $this_var, $event_data, $event_repository){
+        return $this->tx_service->transaction(function() use($summit, $event_data, $event_repository){
 
             if(!isset($event_data['id'])) throw new EntityValidationException('missing required param: id');
             $event_id = intval($event_data['id']);
@@ -109,7 +108,7 @@ final class SummitService implements ISummitService
             $event->setStartDate($event_data['start_datetime']);
             $event->setEndDate($event_data['end_datetime']);
             $event->LocationID = intval($event_data['location_id']);
-            $this_var->validateBlackOutTimesAndTimes($event);
+            $this->validateBlackOutTimesAndTimes($event);
             $event->unPublish();
             $event->publish();
             return $event;
@@ -200,21 +199,14 @@ final class SummitService implements ISummitService
     public function createEvent(ISummit $summit, array $event_data)
     {
         $event_repository = $this->event_repository;
-        $this_var         = $this;
 
-        return $this->tx_service->transaction(function() use($this_var, $summit, $event_data, $event_repository){
+        return $this->tx_service->transaction(function() use( $summit, $event_data, $event_repository){
 
             $event_type_id = intval($event_data['event_type']);
             $event_type    = SummitEventType::get()->byID($event_type_id);
             if(is_null($event_type)) throw new NotFoundEntityException('EventType');
             // todo : move to a factory method !!!
-            $event = (
-                       $event_type->Type == ISummitEventType::Presentation ||
-                       $event_type->Type == ISummitEventType::Keynotes ||
-                       $event_type->Type == ISummitEventType::Panel
-                      )
-                      ? new Presentation :  new SummitEvent;
-
+            $event      =  PresentationType::IsPresentationEventType($event_type->Type) ? new Presentation :  new SummitEvent;
             $start_date = $event_data['start_date'];
             $end_date   = $event_data['end_date'];
 
@@ -253,16 +245,16 @@ final class SummitService implements ISummitService
             $event->Sponsors()->setByIDList($sponsors);
 
             if ($event instanceof Presentation) {
-                $event->Status = 'Received';
-                $event->Progress = 4;
+                $event->Status   = Presentation::STATUS_RECEIVED;
+                $event->Progress = Presentation::PHASE_COMPLETE;
             }
 
             self::updatePresentation($event, $event_data);
 
-            $must_publish= (bool)$event_data['publish'];
+            $must_publish = (bool)$event_data['publish'];
             if($must_publish)
             {
-                $this_var->validateBlackOutTimesAndTimes($event);
+                $this->validateBlackOutTimesAndTimes($event);
                 $event->publish();
             }
             $event->write();
@@ -282,6 +274,7 @@ final class SummitService implements ISummitService
     {
         // Speakers, if one of the added members is not a speaker, we need to make him one
         if ($event instanceof Presentation) {
+
             foreach ($event_data['speakers'] as $speaker) {
                 if(!isset($speaker['speaker_id']) || !isset($speaker['member_id']))
                     throw new EntityValidationException('missing parameter on speakers collection!');
@@ -307,7 +300,7 @@ final class SummitService implements ISummitService
 
             $event->Speakers()->setByIDList($speaker_ids);
 
-            if($event->Type()->Type == ISummitEventType::Keynotes || $event->Type()->Type == ISummitEventType::Panel)
+            if($event->Type()->Type == IPresentationType::Keynotes || $event->Type()->Type == IPresentationType::Panel)
             {
                 if(!isset($event_data['moderator']))
                     throw new EntityValidationException('moderator is required!');
@@ -340,7 +333,6 @@ final class SummitService implements ISummitService
         return $event;
     }
 
-
     /**
      * @param ISummitEvent $event
      * @param SummitEventType $type
@@ -349,25 +341,9 @@ final class SummitService implements ISummitService
     public static function checkEventType(ISummitEvent $event, SummitEventType $type)
     {
         if($event->isPresentation() ){
-            return self::IsPresentationEventType($type->Type);
+            return PresentationType::IsPresentationEventType($type->Type);
         }
-        return self::IsSummitEventType($type->Type);
-    }
-
-    /**
-     * @param string $type
-     * @return bool
-     */
-    public static function IsPresentationEventType($type){
-        return ($type === ISummitEventType::Presentation || $type === ISummitEventType::Keynotes || $type === ISummitEventType::Panel);
-    }
-
-    /**
-     * @param string $type
-     * @return bool
-     */
-    public static function IsSummitEventType($type){
-        return !self::IsPresentationEventType($type);
+        return SummitEventType::IsSummitEventType($type->Type);
     }
 
     /**
@@ -378,9 +354,8 @@ final class SummitService implements ISummitService
     public function updateEvent(ISummit $summit, array $event_data)
     {
         $event_repository = $this->event_repository;
-        $this_var         = $this;
 
-        return $this->tx_service->transaction(function() use($this_var, $summit, $event_data, $event_repository){
+        return $this->tx_service->transaction(function() use($summit, $event_data, $event_repository){
 
             if(!isset($event_data['id'])) throw new EntityValidationException('missing required param: id');
 
@@ -402,6 +377,7 @@ final class SummitService implements ISummitService
 
             $start_date = $event_data['start_date'];
             $end_date   = $event_data['end_date'];
+
             if(!empty($start_date) || !empty($end_date))
             {
                 $d1 = new DateTime($start_date);
@@ -413,13 +389,14 @@ final class SummitService implements ISummitService
                     throw new EntityValidationException('Start Date should be inside Summit Duration!');
             }
 
+            $event->setStartDate($event_data['start_date']);
+            $event->setEndDate($event_data['end_date']);
+
             $event->Title            = html_entity_decode($event_data['title']);
             $event->RSVPLink         = html_entity_decode($event_data['rsvp_link']);
             $event->HeadCount        = intval($event_data['headcount']);
             $event->Abstract         = html_entity_decode($event_data['abstract']);
             $event->SocialSummary    = strip_tags($event_data['social_summary']);
-            $event->setStartDate($event_data['start_date']);
-            $event->setEndDate($event_data['end_date']);
             $event->AllowFeedBack    = $event_data['allow_feedback'];
             $event->FeatureCloud     = $event_data['feature_cloud'];
             $event->LocationID       = intval($event_data['location_id']);
@@ -440,7 +417,7 @@ final class SummitService implements ISummitService
             $must_publish= (bool)$event_data['publish'];
             if($event->isPublished() || $must_publish)
             {
-                $this_var->validateBlackOutTimesAndTimes($event);
+                $this->validateBlackOutTimesAndTimes($event);
                 $event->unPublish();
                 $event->publish();
             }
@@ -641,9 +618,8 @@ final class SummitService implements ISummitService
     public function updateAndPublishBulkEvents(ISummit $summit, array $data)
     {
         $event_repository = $this->event_repository;
-        $this_var         = $this;
 
-        $this->tx_service->transaction(function() use($summit, $data, $event_repository, $this_var){
+        $this->tx_service->transaction(function() use($summit, $data, $event_repository){
 
             $events = $data['events'];
             foreach($events as $event_dto) {
@@ -654,7 +630,7 @@ final class SummitService implements ISummitService
                 $event->LocationID = intval($event_dto['location_id']);
                 $event->setStartDate(sprintf("%s %s", $event_dto['start_date'], $event_dto['start_time']));
                 $event->setEndDate(sprintf("%s %s", $event_dto['end_date'], $event_dto['end_time']));
-                $this_var->validateBlackOutTimesAndTimes($event);
+                $this->validateBlackOutTimesAndTimes($event);
                 $event->unPublish();
                 $event->publish();
                 $event->write();
@@ -756,9 +732,8 @@ final class SummitService implements ISummitService
     public function updateHeadCount(ISummit $summit, $data)
     {
         $event_repository = $this->event_repository;
-        $this_var = $this;
 
-        $this->tx_service->transaction(function () use ($this_var, $summit, $data, $event_repository) {
+        $this->tx_service->transaction(function () use ( $summit, $data, $event_repository) {
             foreach ($data as $event_data) {
                 if (!isset($event_data['id']))
                     throw new EntityValidationException('missing required param: id');
@@ -786,9 +761,8 @@ final class SummitService implements ISummitService
     public function updateVideoDisplay(ISummit $summit, $data)
     {
         $event_repository = $this->event_repository;
-        $this_var = $this;
 
-        $this->tx_service->transaction(function () use ($this_var, $summit, $data, $event_repository) {
+        $this->tx_service->transaction(function () use ($summit, $data, $event_repository) {
             foreach ($data as $event_data) {
                 if (!isset($event_data['id']))
                     throw new EntityValidationException('missing required param: id');
@@ -818,9 +792,8 @@ final class SummitService implements ISummitService
     public function updateReportConfig($report_name, $data)
     {
         $report_repository = $this->report_repository;
-        $this_var = $this;
 
-        $report = $this->tx_service->transaction(function () use ($this_var, $report_name, $data, $report_repository) {
+        $report = $this->tx_service->transaction(function () use ($report_name, $data, $report_repository) {
             if (!$report_name)
                 throw new EntityValidationException('missing required param: report_name');
 

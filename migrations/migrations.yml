@@ -55,3 +55,4 @@ migrations:
   - RemoveGroupMembersSortOrderCol
   - SummitCategoryDefaultTagsMigration
   - UpdateOpenstackComponentMigration
+  - LightingTalksMigration

@@ -748,7 +748,7 @@ final class SummitAppAdminController extends Controller implements PermissionPro
      * @return bool
      */
     public function IsPresentationEventType($type){
-        return SummitService::IsPresentationEventType($type);
+        return PresentationType::IsPresentationEventType($type);
     }
 
     /**
@@ -756,7 +756,7 @@ final class SummitAppAdminController extends Controller implements PermissionPro
      * @return bool
      */
     public function IsSummitEventType($type){
-        return SummitService::IsSummitEventType($type);
+        return SummitEventType::IsSummitEventType($type);
     }
 
     public function Time(){

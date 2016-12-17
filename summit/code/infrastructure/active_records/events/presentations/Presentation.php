@@ -133,7 +133,6 @@ class Presentation extends SummitEvent implements IPresentation
         'AttendeesExpectedLearnt' => 'HTMLText',
         'Legacy'                  => 'Boolean',
         'FeatureCloud'            => 'Boolean',
-        'LightningTalk'           => 'Boolean'
     );
 
     /**
@@ -690,7 +689,7 @@ SQL;
      */
     public function maxModeratorsReached()
     {
-        $max_moderators = $this->Type()->getMaxModerators();
+        $max_moderators  = $this->Type()->getMaxModerators();
         $moderator_count = ($this->Moderator()->exists() ? 1 : 0);
         return ($max_moderators == $moderator_count);
     }

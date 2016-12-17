@@ -830,11 +830,11 @@ class PresentationPage_ManageRequest extends RequestHandler
         Requirements::customScript(sprintf("var speaker_search_url = '%s/%s'; ", $this->Link('speakers'), 'search'));
         Requirements::javascript('summit/javascript/AddSpeakerForm.js');
 
-        $summit = $this->Summit();
-        $max_speakers_reached = $this->presentation->maxSpeakersReached();
+        $summit                 = $this->Summit();
+        $max_speakers_reached   = $this->presentation->maxSpeakersReached();
         $max_moderators_reached = $this->presentation->maxModeratorsReached();
-        $speaker_type = (!$max_moderators_reached) ? 'Moderator' : 'Speaker';
-        $presentation_type = $this->presentation->getTypeName();
+        $speaker_type           = (!$max_moderators_reached) ? 'Moderator' : 'Speaker';
+        $presentation_type       = $this->presentation->getTypeName();
 
         $fields = FieldList::create(
             LiteralField::create('SpeakerNote',

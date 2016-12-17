@@ -17,30 +17,30 @@ final class Summit extends DataObject implements ISummit
 
     private static $db = array
     (
-        'Title'                       => 'Varchar',
-        'SummitBeginDate'             => 'SS_Datetime',
-        'SummitEndDate'               => 'SS_Datetime',
-        'SubmissionBeginDate'         => 'SS_Datetime',
-        'SubmissionEndDate'           => 'SS_Datetime',
-        'VotingBeginDate'             => 'SS_Datetime',
-        'VotingEndDate'               => 'SS_Datetime',
-        'SelectionBeginDate'          => 'SS_Datetime',
-        'SelectionEndDate'            => 'SS_Datetime',
-        'RegistrationBeginDate'       => 'SS_Datetime',
-        'RegistrationEndDate'         => 'SS_Datetime',
-        'Active'                      => 'Boolean',
-        'DateLabel'                   => 'Varchar',
-        'Link'                        => 'Varchar',
-        'Slug'                        => 'Varchar',
-        'RegistrationLink'            => 'Text',
-        'ComingSoonBtnText'           => 'Text',
+        'Title' => 'Varchar',
+        'SummitBeginDate' => 'SS_Datetime',
+        'SummitEndDate' => 'SS_Datetime',
+        'SubmissionBeginDate' => 'SS_Datetime',
+        'SubmissionEndDate' => 'SS_Datetime',
+        'VotingBeginDate' => 'SS_Datetime',
+        'VotingEndDate' => 'SS_Datetime',
+        'SelectionBeginDate' => 'SS_Datetime',
+        'SelectionEndDate' => 'SS_Datetime',
+        'RegistrationBeginDate' => 'SS_Datetime',
+        'RegistrationEndDate' => 'SS_Datetime',
+        'Active' => 'Boolean',
+        'DateLabel' => 'Varchar',
+        'Link' => 'Varchar',
+        'Slug' => 'Varchar',
+        'RegistrationLink' => 'Text',
+        'ComingSoonBtnText' => 'Text',
         // https://www.eventbrite.com
-        'ExternalEventId'             => 'Text',
-        'TimeZone'                    => 'Text',
-        'StartShowingVenuesDate'      => 'SS_Datetime',
+        'ExternalEventId' => 'Text',
+        'TimeZone' => 'Text',
+        'StartShowingVenuesDate' => 'SS_Datetime',
         'MaxSubmissionAllowedPerUser' => 'Int',
-        'ScheduleDefaultStartDate'    => 'SS_Datetime',
-        'AvailableOnApi'              => 'Boolean',
+        'ScheduleDefaultStartDate' => 'SS_Datetime',
+        'AvailableOnApi' => 'Boolean',
     );
 
     private static $defaults = array
@@ -56,24 +56,24 @@ final class Summit extends DataObject implements ISummit
 
     private static $has_many = array
     (
-        'Presentations'                => 'Presentation',
-        'Categories'                   => 'PresentationCategory',
-        'CategoryGroups'               => 'PresentationCategoryGroup',
-        'Locations'                    => 'SummitAbstractLocation',
-        'EventTypes'                   => 'SummitEventType',
-        'Events'                       => 'SummitEvent',
-        'Attendees'                    => 'SummitAttendee',
-        'SummitTicketTypes'            => 'SummitTicketType',
+        'Presentations' => 'Presentation',
+        'Categories' => 'PresentationCategory',
+        'CategoryGroups' => 'PresentationCategoryGroup',
+        'Locations' => 'SummitAbstractLocation',
+        'EventTypes' => 'SummitEventType',
+        'Events' => 'SummitEvent',
+        'Attendees' => 'SummitAttendee',
+        'SummitTicketTypes' => 'SummitTicketType',
         'SummitRegistrationPromoCodes' => 'SummitRegistrationPromoCode',
-        'Notifications'                => 'SummitPushNotification',
-        'EntityEvents'                 => 'SummitEntityEvent',
-        'TrackChairs'                  => 'SummitTrackChair',
-        'RandomVotingLists'            => 'PresentationRandomVotingList',
-        'SummitAssistances'            => 'PresentationSpeakerSummitAssistanceConfirmationRequest',
-        'RSVPTemplates'                => 'RSVPTemplate',
-        'SpeakerAnnouncementEmails'    => 'SpeakerAnnouncementSummitEmail',
-        'SummitPackages'               => 'SummitPackage',
-        'SummitAddOns'                 => 'SummitAddOn',
+        'Notifications' => 'SummitPushNotification',
+        'EntityEvents' => 'SummitEntityEvent',
+        'TrackChairs' => 'SummitTrackChair',
+        'RandomVotingLists' => 'PresentationRandomVotingList',
+        'SummitAssistances' => 'PresentationSpeakerSummitAssistanceConfirmationRequest',
+        'RSVPTemplates' => 'RSVPTemplate',
+        'SpeakerAnnouncementEmails' => 'SpeakerAnnouncementSummitEmail',
+        'SummitPackages' => 'SummitPackage',
+        'SummitAddOns' => 'SummitAddOn',
     );
 
     /**
@@ -114,13 +114,14 @@ final class Summit extends DataObject implements ISummit
             ->first();
     }
 
-    private function populateDefaultTags(){
+    private function populateDefaultTags()
+    {
         // had to use literal query to avoid infinite loop
         $id = DB::query("SELECT ID FROM Summit WHERE SummitEndDate < DATE(NOW()) ORDER BY SummitEndDate DESC LIMIT 1")->value();
 
         $default_tags = DB::query("SELECT * FROM Summit_CategoryDefaultTags AS DT WHERE SummitID = $id");
         foreach ($default_tags as $dtag) {
-            $this->CategoryDefaultTags()->add($dtag['TagID'],array('Group' => $dtag['Group']));
+            $this->CategoryDefaultTags()->add($dtag['TagID'], array('Group' => $dtag['Group']));
         }
     }
 
@@ -189,14 +190,16 @@ final class Summit extends DataObject implements ISummit
 
     // dates
 
-    private function setDateTimeFromLocalToUTC($value, $field){
+    private function setDateTimeFromLocalToUTC($value, $field)
+    {
         if (!empty($value)) {
             $value = $this->convertDateFromTimeZone2UTC($value);
             $this->setField($field, $value);
         }
     }
 
-    private function getFromUTCtoLocal($field, $format="Y-m-d H:i:s"){
+    private function getFromUTCtoLocal($field, $format = "Y-m-d H:i:s")
+    {
         return $this->convertDateFromUTC2TimeZone($this->getField($field), $format);
     }
 
@@ -215,7 +218,7 @@ final class Summit extends DataObject implements ISummit
         $this->setDateTimeFromLocalToUTC($value, 'SummitBeginDate');
     }
 
-    public function getSummitBeginDate($format="Y-m-d H:i:s")
+    public function getSummitBeginDate($format = "Y-m-d H:i:s")
     {
         return $this->getFromUTCtoLocal('SummitBeginDate', $format);
     }
@@ -225,7 +228,7 @@ final class Summit extends DataObject implements ISummit
         $this->setDateTimeFromLocalToUTC($value, 'SummitEndDate');
     }
 
-    public function getSummitEndDate($format="Y-m-d H:i:s")
+    public function getSummitEndDate($format = "Y-m-d H:i:s")
     {
         return $this->getFromUTCtoLocal('SummitEndDate', $format);
     }
@@ -235,7 +238,7 @@ final class Summit extends DataObject implements ISummit
         $this->setDateTimeFromLocalToUTC($value, 'SubmissionBeginDate');
     }
 
-    public function getSubmissionBeginDate($format="Y-m-d H:i:s")
+    public function getSubmissionBeginDate($format = "Y-m-d H:i:s")
     {
         return $this->getFromUTCtoLocal('SubmissionBeginDate', $format);
     }
@@ -245,7 +248,7 @@ final class Summit extends DataObject implements ISummit
         $this->setDateTimeFromLocalToUTC($value, 'SubmissionEndDate');
     }
 
-    public function getSubmissionEndDate($format="Y-m-d H:i:s")
+    public function getSubmissionEndDate($format = "Y-m-d H:i:s")
     {
         return $this->getFromUTCtoLocal('SubmissionEndDate', $format);
     }
@@ -255,7 +258,7 @@ final class Summit extends DataObject implements ISummit
         $this->setDateTimeFromLocalToUTC($value, 'VotingBeginDate');
     }
 
-    public function getVotingBeginDate($format="Y-m-d H:i:s")
+    public function getVotingBeginDate($format = "Y-m-d H:i:s")
     {
         return $this->getFromUTCtoLocal('VotingBeginDate', $format);
     }
@@ -265,7 +268,7 @@ final class Summit extends DataObject implements ISummit
         $this->setDateTimeFromLocalToUTC($value, 'VotingEndDate');
     }
 
-    public function getVotingEndDate($format="Y-m-d H:i:s")
+    public function getVotingEndDate($format = "Y-m-d H:i:s")
     {
         return $this->getFromUTCtoLocal('VotingEndDate', $format);
     }
@@ -275,7 +278,7 @@ final class Summit extends DataObject implements ISummit
         $this->setDateTimeFromLocalToUTC($value, 'SelectionBeginDate');
     }
 
-    public function getSelectionBeginDate($format="Y-m-d H:i:s")
+    public function getSelectionBeginDate($format = "Y-m-d H:i:s")
     {
         return $this->getFromUTCtoLocal('SelectionBeginDate', $format);
     }
@@ -285,7 +288,7 @@ final class Summit extends DataObject implements ISummit
         $this->setDateTimeFromLocalToUTC($value, 'SelectionEndDate');
     }
 
-    public function getSelectionEndDate($format="Y-m-d H:i:s")
+    public function getSelectionEndDate($format = "Y-m-d H:i:s")
     {
         return $this->getFromUTCtoLocal('SelectionEndDate', $format);
     }
@@ -295,7 +298,7 @@ final class Summit extends DataObject implements ISummit
         $this->setDateTimeFromLocalToUTC($value, 'RegistrationBeginDate');
     }
 
-    public function getRegistrationBeginDate($format="Y-m-d H:i:s")
+    public function getRegistrationBeginDate($format = "Y-m-d H:i:s")
     {
         return $this->getFromUTCtoLocal('RegistrationBeginDate', $format);
     }
@@ -305,7 +308,7 @@ final class Summit extends DataObject implements ISummit
         $this->setDateTimeFromLocalToUTC($value, 'RegistrationEndDate');
     }
 
-    public function getRegistrationEndDate($format="Y-m-d H:i:s")
+    public function getRegistrationEndDate($format = "Y-m-d H:i:s")
     {
         return $this->getFromUTCtoLocal('RegistrationEndDate', $format);
     }
@@ -313,10 +316,11 @@ final class Summit extends DataObject implements ISummit
     /**
      * @return string past,present,future
      */
-    public function isStageTime($stage) {
+    public function isStageTime($stage)
+    {
 
-        $start = $stage.'BeginDate';
-        $end = $stage.'EndDate';
+        $start = $stage . 'BeginDate';
+        $end = $stage . 'EndDate';
         $start_date = strtotime($this->convertDateFromUTC2TimeZone($this->getField($start)));
         $end_date = strtotime($this->convertDateFromUTC2TimeZone($this->getField($end)));
         $local_date = strtotime($this->getLocalTime());
@@ -522,25 +526,28 @@ final class Summit extends DataObject implements ISummit
     /**
      * @return string
      */
-    public function getScheduleLink() {
+    public function getScheduleLink()
+    {
         $page = SummitAppSchedPage::get()->filter('SummitID', $this->getIdentifier())->first();
-        return ($page)? $page->getAbsoluteLiveLink(false): '#';
+        return ($page) ? $page->getAbsoluteLiveLink(false) : '#';
     }
 
     /**
      * @return string
      */
-    public function getTrackListLink() {
+    public function getTrackListLink()
+    {
         $page = SummitStaticCategoriesPage::get()->filter('SummitID', $this->getIdentifier())->first();
-        return ($page)? $page->getAbsoluteLiveLink(false): '#';
+        return ($page) ? $page->getAbsoluteLiveLink(false) : '#';
     }
 
     /**
      * @return string
      */
-    public function getCallForPresentationsLink() {
+    public function getCallForPresentationsLink()
+    {
         $page = PresentationPage::get()->filter('SummitID', $this->getIdentifier())->first();
-        return ($page)? $page->getAbsoluteLiveLink(false): '#';
+        return ($page) ? $page->getAbsoluteLiveLink(false) : '#';
     }
 
     /**
@@ -633,7 +640,7 @@ final class Summit extends DataObject implements ISummit
      * @param $format
      * @return null|string
      */
-    public function convertDateFromTimeZone2UTC($value, $format="Y-m-d H:i:s")
+    public function convertDateFromTimeZone2UTC($value, $format = "Y-m-d H:i:s")
     {
         $time_zone_id = $this->TimeZone;
         if (empty($time_zone_id)) {
@@ -659,7 +666,7 @@ final class Summit extends DataObject implements ISummit
      * @param $format
      * @return null|string
      */
-    public function convertDateFromUTC2TimeZone($value, $format="Y-m-d H:i:s")
+    public function convertDateFromUTC2TimeZone($value, $format = "Y-m-d H:i:s")
     {
         $time_zone_id = $this->TimeZone;
         if (empty($time_zone_id)) {
@@ -684,19 +691,21 @@ final class Summit extends DataObject implements ISummit
     /**
      * @return null|string
      */
-    public function getTimeZoneName(){
+    public function getTimeZoneName()
+    {
         $time_zone_id = $this->TimeZone;
         if (empty($time_zone_id)) {
             return null;
         }
         $time_zone_list = timezone_identifiers_list();
-        return isset($time_zone_list[$time_zone_id]) ? $time_zone_list[$time_zone_id]:null;
+        return isset($time_zone_list[$time_zone_id]) ? $time_zone_list[$time_zone_id] : null;
     }
 
     /**
      * @return null|string
      */
-    public function getLocalTime($format="Y-m-d H:i:s"){
+    public function getLocalTime($format = "Y-m-d H:i:s")
+    {
         $time_zone_id = $this->TimeZone;
         if (empty($time_zone_id)) {
             return 'Timezone not set';
@@ -733,8 +742,6 @@ final class Summit extends DataObject implements ISummit
     {
         AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'EventTypes')->add($event_type);
     }
-
-
 
     /**
      * @return ISummitAirport[]
@@ -866,19 +873,22 @@ final class Summit extends DataObject implements ISummit
         AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Locations', $query)->removeAll();
     }
 
-    public function getScheduleDefaultDate(){
+    public function getScheduleDefaultDate()
+    {
         //'2016-10-26'
         $date = $this->getScheduleDefaultStartDate();
-        if(empty($date)) return $this->getBeginDateYMD();
+        if (empty($date)) return $this->getBeginDateYMD();
         $date = new DateTime($date);
         return $date->format('Y-m-d');
     }
 
-    public function setScheduleDefaultStartDate($value){
+    public function setScheduleDefaultStartDate($value)
+    {
         $this->setDateTimeFromLocalToUTC($value, 'ScheduleDefaultStartDate');
     }
 
-    public function getScheduleDefaultStartDate(){
+    public function getScheduleDefaultStartDate()
+    {
         return $this->getFromUTCtoLocal('ScheduleDefaultStartDate');
     }
 
@@ -886,7 +896,7 @@ final class Summit extends DataObject implements ISummit
 
     protected function validate()
     {
-        if(!self::$validation_enabled) return ValidationResult::create();
+        if (!self::$validation_enabled) return ValidationResult::create();
 
         $valid = parent::validate();
         if (!$valid->valid()) {
@@ -908,16 +918,16 @@ final class Summit extends DataObject implements ISummit
             return $valid->error('Time Zone is required!');
         }
 
-        $start_date                = $this->SummitBeginDate;
-        $end_date                  = $this->SummitEndDate;
+        $start_date = $this->SummitBeginDate;
+        $end_date = $this->SummitEndDate;
         $start_showing_venues_date = $this->StartShowingVenuesDate;
-        $default_schedule_date     = $this->ScheduleDefaultStartDate;
+        $default_schedule_date = $this->ScheduleDefaultStartDate;
 
         if (!is_null($start_date) && !is_null($end_date)) {
-            $start_date                = new DateTime($start_date);
-            $end_date                  = new DateTime($end_date);
+            $start_date = new DateTime($start_date);
+            $end_date = new DateTime($end_date);
             $start_showing_venues_date = new DateTime($start_showing_venues_date);
-            $default_schedule_date     = new DateTime($default_schedule_date);
+            $default_schedule_date = new DateTime($default_schedule_date);
 
             if ($start_date > $end_date) {
                 return $valid->error('End Date must be greather than Start Date');
@@ -929,7 +939,7 @@ final class Summit extends DataObject implements ISummit
                 }
             }
 
-            if(!is_null($default_schedule_date)){
+            if (!is_null($default_schedule_date)) {
                 if ($default_schedule_date < $start_date || $default_schedule_date > $end_date) {
                     return $valid->error('ScheduleDefaultStartDate should be between Summit Start/End Date');
                 }
@@ -937,7 +947,7 @@ final class Summit extends DataObject implements ISummit
         }
 
         $start_date = $this->RegistrationBeginDate;
-        $end_date   = $this->RegistrationEndDate;
+        $end_date = $this->RegistrationEndDate;
 
         if (!is_null($start_date) && !is_null($end_date)) {
             $start_date = new DateTime($start_date);
@@ -956,9 +966,9 @@ final class Summit extends DataObject implements ISummit
      */
     function registerMainInfo(SummitMainInfo $info)
     {
-        $this->Name            = $info->getName();
+        $this->Name = $info->getName();
         $this->SummitBeginDate = $info->getStartDate();
-        $this->SummitEndDate   = $info->getEndDate();
+        $this->SummitEndDate = $info->getEndDate();
     }
 
     public function isEventInsideSummitDuration(ISummitEvent $summit_event)
@@ -969,7 +979,7 @@ final class Summit extends DataObject implements ISummit
         $summit_end_date = new DateTime($this->getEndDate());
 
         return $event_start_date >= $summit_start_date && $event_start_date <= $summit_end_date &&
-        $event_end_date <= $summit_end_date && $event_end_date >= $event_start_date;
+            $event_end_date <= $summit_end_date && $event_end_date >= $event_start_date;
     }
 
     public function isAttendeesRegistrationOpened()
@@ -1006,65 +1016,120 @@ final class Summit extends DataObject implements ISummit
      */
     public static function seedBasicEventTypes($summit_id)
     {
-        if (!SummitEventType::get()->filter(array('Type' => 'Presentation', 'SummitID' => $summit_id))->first()) {
+        $presentation = SummitEventType::get()->filter(['Type' => IPresentationType::Presentation, 'SummitID' => $summit_id])->first();
+        if (is_null($presentation)) {
             $presentation = new PresentationType();
-            $presentation->Type = 'Presentation';
-            $presentation->SummitID = $summit_id;
-            $presentation->MinSpeakers = 1;
-            $presentation->MaxSpeakers = 3;
-            $presentation->MinModerators = 0;
-            $presentation->MaxModerators = 0;
-            $presentation->write();
         }
 
-        if (!SummitEventType::get()->filter(array('Type' => 'Keynotes', 'SummitID' => $summit_id))->first()) {
+        $presentation->Type = IPresentationType::Presentation;
+        $presentation->SummitID = $summit_id;
+        $presentation->MinSpeakers = 1;
+        $presentation->MaxSpeakers = 3;
+        $presentation->MinModerators = 0;
+        $presentation->MaxModerators = 0;
+        $presentation->UseSpeakers = true;
+        $presentation->ShouldBeAvailableOnCFP = true;
+        $presentation->AreSpeakersMandatory = false;
+        $presentation->UseModerator = false;
+        $presentation->IsModeratorMandatory = false;
+        $presentation->write();
+
+        $key_note = SummitEventType::get()->filter(['Type' => IPresentationType::Keynotes, 'SummitID' => $summit_id])->first();
+        if (is_null($key_note)) {
             $key_note = new PresentationType();
-            $key_note->Type = 'Keynotes';
-            $key_note->SummitID = $summit_id;
-            $key_note->MinSpeakers = 1;
-            $key_note->MaxSpeakers = 3;
-            $key_note->MinModerators = 0;
-            $key_note->MaxModerators = 0;
-            $key_note->write();
         }
 
-        if (!SummitEventType::get()->filter(array('Type' => 'Panel', 'SummitID' => $summit_id))->first()) {
+        $key_note->Type = IPresentationType::Keynotes;
+        $key_note->SummitID = $summit_id;
+        $key_note->MinSpeakers            = 1;
+        $key_note->MaxSpeakers            = 3;
+        $key_note->MinModerators          = 0;
+        $key_note->MaxModerators          = 1;
+        $key_note->ShouldBeAvailableOnCFP = false;
+        $key_note->UseSpeakers            = true;
+        $key_note->AreSpeakersMandatory   = false;
+        $key_note->UseModerator           = true;
+        $key_note->IsModeratorMandatory   = false;
+        $key_note->write();
+
+        $panel = SummitEventType::get()->filter(['Type' => IPresentationType::Panel, 'SummitID' => $summit_id])->first();
+        if (is_null($panel)) {
             $panel = new PresentationType();
-            $panel->Type = 'Panel';
-            $panel->SummitID = $summit_id;
-            $panel->MinSpeakers = 1;
-            $panel->MaxSpeakers = 3;
-            $panel->MinModerators = 0;
-            $panel->MaxModerators = 1;
-            $panel->write();
         }
 
-        if (!SummitEventType::get()->filter(array('Type' => 'Hand-on Labs', 'SummitID' => $summit_id))->first()) {
-            $hand_on = new SummitEventType();
-            $hand_on->Type = 'Hand-on Labs';
-            $hand_on->SummitID = $summit_id;
-            $hand_on->write();
+        $panel->Type = IPresentationType::Panel;
+        $panel->SummitID = $summit_id;
+        $panel->MinSpeakers            = 1;
+        $panel->MaxSpeakers            = 3;
+        $panel->MinModerators          = 0;
+        $panel->MaxModerators          = 1;
+        $panel->ShouldBeAvailableOnCFP = true;
+        $panel->UseSpeakers            = true;
+        $panel->AreSpeakersMandatory   = false;
+        $panel->UseModerator           = true;
+        $panel->IsModeratorMandatory   = false;
+        $panel->write();
+
+        $lighting_talks = SummitEventType::get()->filter(['Type' => IPresentationType::LightingTalks, 'SummitID' => $summit_id])->first();
+        if (is_null($lighting_talks)) {
+            $lighting_talks = new PresentationType();
         }
 
-        if (!SummitEventType::get()->filter(array('Type' => 'Lunch & Breaks', 'SummitID' => $summit_id))->first()) {
-            $key_note = new SummitEventType();
-            $key_note->Type = 'Lunch & Breaks';
-            $key_note->SummitID = $summit_id;
-            $key_note->write();
+        $lighting_talks->Type = IPresentationType::LightingTalks;
+        $lighting_talks->SummitID = $summit_id;
+        $lighting_talks->MinSpeakers = 1;
+        $lighting_talks->MaxSpeakers = 3;
+        $lighting_talks->MinModerators = 0;
+        $lighting_talks->MaxModerators = 0;
+        $lighting_talks->UseSpeakers = true;
+        $lighting_talks->ShouldBeAvailableOnCFP = true;
+        $lighting_talks->AreSpeakersMandatory = false;
+        $lighting_talks->UseModerator = false;
+        $lighting_talks->IsModeratorMandatory = false;
+        $lighting_talks->write();
+
+        $hand_on_labs = SummitEventType::get()->filter(['Type' => ISummitEventType::HandonLabs, 'SummitID' => $summit_id])->first();
+        if (is_null($hand_on_labs)) {
+            $hand_on_labs = new SummitEventType();
+
         }
 
-        if (!SummitEventType::get()->filter(array('Type' => 'Evening Events', 'SummitID' => $summit_id))->first()) {
-            $key_note = new SummitEventType();
-            $key_note->Type = 'Evening Events';
-            $key_note->SummitID = $summit_id;
-            $key_note->write();
+        $hand_on_labs->Type = ISummitEventType::HandonLabs;
+        $hand_on_labs->SummitID = $summit_id;
+        $hand_on_labs->write();
+
+        $lunch_breaks = SummitEventType::get()->filter(['Type' => ISummitEventType::Lunch_Breaks, 'SummitID' => $summit_id])->first();
+        if (is_null($lunch_breaks)) {
+            $lunch_breaks = new SummitEventType();
         }
+
+        $lunch_breaks->Type = ISummitEventType::Lunch_Breaks;
+        $lunch_breaks->SummitID = $summit_id;
+        $lunch_breaks->write();
+
+
+        $evening_events = SummitEventType::get()->filter(['Type' => ISummitEventType::EveningEvents, 'SummitID' => $summit_id])->first();
+        if (is_null($evening_events)) {
+            $evening_events = new SummitEventType();
+        }
+
+        $evening_events->Type     = ISummitEventType::EveningEvents;
+        $evening_events->SummitID = $summit_id;
+        $evening_events->write();
     }
 
     public static function isDefaultEventType($event_type)
     {
         return in_array($event_type,
-            array('Presentation', 'Keynotes', 'Hand-on Labs', 'Lunch & Breaks', 'Evening Events'));
+            [
+                IPresentationType::Presentation,
+                IPresentationType::Keynotes,
+                IPresentationType::Panel,
+                IPresentationType::LightingTalks,
+                ISummitEventType::HandonLabs,
+                ISummitEventType::EveningEvents,
+                ISummitEventType::Lunch_Breaks,
+            ]);
     }
 
     /**
@@ -1083,7 +1148,7 @@ final class Summit extends DataObject implements ISummit
         $end_date = $this->getEndDate();
         $res = array();
         foreach ($this->getDatesFromRange($start_date, $end_date) as $date) {
-            $is_weekday = ($date->format('N') < 6) ? 1: 0;
+            $is_weekday = ($date->format('N') < 6) ? 1 : 0;
             $date_array = array('Label' => $date->format('l j'), 'Date' => $date->format('Y-m-d'), 'IsWeekday' => $is_weekday);
             array_push($res, new ArrayData($date_array));
         }
@@ -1231,14 +1296,14 @@ SQL;
     public function isCallForSpeakersOpen()
     {
         $start_date = $this->getField('SubmissionBeginDate');
-        $end_date   = $this->getField('SubmissionEndDate');
+        $end_date = $this->getField('SubmissionEndDate');
 
         if (empty($start_date) || empty($end_date)) {
             return false;
         }
         $start_date = new DateTime($start_date, new DateTimeZone('UTC'));
-        $end_date   = new DateTime($end_date, new DateTimeZone('UTC'));
-        $now        = new \DateTime('now', new DateTimeZone('UTC'));
+        $end_date = new DateTime($end_date, new DateTimeZone('UTC'));
+        $now = new \DateTime('now', new DateTimeZone('UTC'));
 
         return ($now >= $start_date && $now <= $end_date);
     }
@@ -1405,8 +1470,8 @@ SQL;
         $y1 = $start->Year();
         $y2 = $end->Year();
 
-        if($y1 != $y2) return "$m1 $d1, $y1 - $m2 $d2, $y2";
-        else if($m1 != $m2) return "$m1 $d1 - $m2 $d2, $y1";
+        if ($y1 != $y2) return "$m1 $d1, $y1 - $m2 $d2, $y2";
+        else if ($m1 != $m2) return "$m1 $d1 - $m2 $d2, $y1";
         else return "$m1 $d1 - $d2, $y1";
     }
 
@@ -1431,10 +1496,10 @@ SQL;
             $day = new DateTime($day);
         }
 
-        $start       = $day->setTime(0, 0, 0)->format("Y-m-d H:i:s");
-        $end         = $day->add(new DateInterval('PT23H59M59S'))->format("Y-m-d H:i:s");
-        $start       = $this->convertDateFromTimeZone2UTC($start);
-        $end         = $this->convertDateFromTimeZone2UTC($end);
+        $start = $day->setTime(0, 0, 0)->format("Y-m-d H:i:s");
+        $end = $day->add(new DateInterval('PT23H59M59S'))->format("Y-m-d H:i:s");
+        $start = $this->convertDateFromTimeZone2UTC($start);
+        $end = $this->convertDateFromTimeZone2UTC($end);
         $location_id = $location->ID;
 
         return intval($this->Events()->where(" LocationID = {$location_id} AND Published = 1 AND StartDate >= '{$start}' AND EndDate <= '{$end}'")->count());
@@ -1469,19 +1534,18 @@ SQL;
      */
     public function getPublicCategories()
     {
-        $categories     = new ArrayList();
+        $categories = new ArrayList();
         $private_groups = $this->getPrivateCategoryGroups();
 
         foreach ($this->getCategories()->sort('Title') as $cat) {
             $is_private = false;
-            foreach($private_groups as $private_group)
-            {
-                if($private_group->hasCategory($cat)){
+            foreach ($private_groups as $private_group) {
+                if ($private_group->hasCategory($cat)) {
                     $is_private = true;
                     break;
                 }
             }
-            if(!$is_private)
+            if (!$is_private)
                 $categories->push($cat);
         }
         return $categories;
@@ -1504,9 +1568,8 @@ SQL;
     {
         $res = false;
         $private_groups = $this->getPrivateCategoryGroups();
-        foreach($private_groups as $private_group)
-        {
-            if($private_group->hasCategory($category)){
+        foreach ($private_groups as $private_group) {
+            if ($private_group->hasCategory($category)) {
                 $res = true;
                 break;
             }
@@ -1521,9 +1584,8 @@ SQL;
     public function getPrivateGroupFor(PresentationCategory $category)
     {
         $private_groups = $this->getPrivateCategoryGroups();
-        foreach($private_groups as $private_group)
-        {
-            if($private_group->hasCategory($category)){
+        foreach ($private_groups as $private_group) {
+            if ($private_group->hasCategory($category)) {
                 return $private_group;
             }
         }

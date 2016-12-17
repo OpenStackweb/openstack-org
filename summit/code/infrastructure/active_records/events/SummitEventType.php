@@ -19,9 +19,11 @@ class SummitEventType extends DataObject implements ISummitEventType
 
     private static $db = array
     (
-        'Type'          => 'Text',
-        'Color'         => 'Text',
-        'BlackoutTimes' => 'Boolean'
+        'Type'                 => 'Text',
+        'Color'                => 'Text',
+        'BlackoutTimes'        => 'Boolean',
+        'UseSponsors'          => 'Boolean',
+        'AreSponsorsMandatory' => 'Boolean',
     );
 
     private static $has_many = array
@@ -87,6 +89,8 @@ class SummitEventType extends DataObject implements ISummitEventType
         }
         $fields->add(new ColorField("Color","Color"));
         $fields->add(new CheckboxField("BlackoutTimes","Blackout Times"));
+        $fields->add(new CheckboxField("UseSponsors","Should use Sponsors?"));
+        $fields->add(new CheckboxField("AreSponsorsMandatory","Are Sponsors Mandatory?"));
         $fields->add(new HiddenField('SummitID','SummitID'));
         return $fields;
     }
@@ -131,5 +135,13 @@ class SummitEventType extends DataObject implements ISummitEventType
      */
     public function canEdit($member = null) {
         return Permission::check("ADMIN") || Permission::check("ADMIN_SUMMIT_APP") || Permission::check("ADMIN_SUMMIT_APP_SCHEDULE");
+    }
+
+    /**
+     * @param string $type
+     * @return bool
+     */
+    public static function IsSummitEventType($type){
+        return !PresentationType::IsPresentationEventType($type);
     }
 }
