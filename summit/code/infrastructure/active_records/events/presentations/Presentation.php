@@ -133,6 +133,7 @@ class Presentation extends SummitEvent implements IPresentation
         'AttendeesExpectedLearnt' => 'HTMLText',
         'Legacy'                  => 'Boolean',
         'FeatureCloud'            => 'Boolean',
+        'LightningTalk'           => 'Boolean',
     );
 
     /**

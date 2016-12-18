@@ -105,6 +105,17 @@ final class PresentationForm extends BootstrapForm
                     ->setTemplate('BootstrapAwesomeOptionsetField')
                     ->setInline(true)
                 ->end()
+            ->optionset('LightningTalk',
+                'Would you be willing to present your presentation as a Lightning Talk in the event your submission is not chosen? Note: panels are ineligible for Lightning Talks.',
+                array(
+                    1 => 'Yes',
+                    0 => 'No'
+                )
+            )
+            ->configure()
+                ->setTemplate('BootstrapAwesomeOptionsetField')
+                ->setInline(true)
+            ->end()
             ->tinyMCEEditor('Abstract','Abstract (1000 chars)')
                 ->configure()
                     ->setRows(20)

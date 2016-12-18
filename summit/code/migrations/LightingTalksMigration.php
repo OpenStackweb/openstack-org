@@ -25,19 +25,7 @@ final class LightingTalksMigration extends AbstractDBMigrationTask
         $summit_list = [6, 7, 22];
 
         foreach($summit_list as $summit_id) {
-
             Summit::seedBasicEventTypes($summit_id);
-            $lightning_talk_type = PresentationType::get()->filter(['SummitID' => $summit_id, 'Type' => IPresentationType::LightingTalks])->first();
-            $lightning_talk_presentations = Presentation::get()->filter(["SummitID" => $summit_id, 'LightningTalk' => true]);
-
-            foreach ($lightning_talk_presentations as $p) {
-                $p->TypeID = $lightning_talk_type->ID;
-                $p->write();
-            }
-        }
-
-        if(DBSchema::existsColumn($database, "Presentation", "LightningTalk")){
-            DBSchema::dropColumn($database, "Presentation", "LightningTalk");
         }
 
     }

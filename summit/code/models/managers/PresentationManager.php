@@ -468,6 +468,7 @@ final class PresentationManager implements IPresentationManager
      */
     public function updatePresentationSummary(IPresentation $presentation, array $data)
     {
+        //TODO: this method and registerPresentationOn should be refactored
         return $this->tx_manager->transaction(function() use($presentation,  $data){
 
             $presentation->Title                   = trim($data['Title']);
