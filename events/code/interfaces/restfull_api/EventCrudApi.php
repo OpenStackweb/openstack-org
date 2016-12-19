@@ -208,15 +208,16 @@ final class EventCrudApi
         try {
             $featured_events = FeaturedEvent::get('FeaturedEvent')
                 ->leftJoin('EventPage','EventPage.ID = FeaturedEvent.EventID')
-                ->sort('EventPage.EventStartDate');
+                ->sort('EventPage.EventStartDate','DESC');
 
             $featured_result = array();
             foreach ($featured_events->limit(8,$offset) as $featured) {
+                $image = ($featured->Picture()->CroppedImage(200,100)) ? $featured->Picture()->CroppedImage(200,100)->getTag() : '';
                 $featured_result[] = array(
                     'title' => $featured->Event()->Title,
                     'location' => $featured->Event()->Location,
                     'date' => $featured->Event()->formatDateRange(),
-                    'image' => $featured->Picture()->CroppedImage(200,100)->getTag(),
+                    'image' => $image,
                 );
             }
 
