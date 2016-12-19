@@ -39,6 +39,13 @@ $(document).ready(function(){
         window.location.hash = $(window).url_fragment('serialize');
     });
 
+    $('.deep-link').click(function(ev){
+        ev.preventDefault();
+        var nav_elem_class = $(this).data('tab');
+        $('.nav-link','.tab-'+nav_elem_class).click();
+        return false;
+    });
+
     $('#more_events').click(function(ev){
         ev.preventDefault();
         getMoreEvents();
