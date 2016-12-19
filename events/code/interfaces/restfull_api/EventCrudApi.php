@@ -212,12 +212,12 @@ final class EventCrudApi
 
             $featured_result = array();
             foreach ($featured_events->limit(8,$offset) as $featured) {
-                $image = ($featured->Picture()->CroppedImage(200,100)) ? $featured->Picture()->CroppedImage(200,100)->getTag() : '';
+                $image_url = ($featured->Picture()) ? $featured->Picture()->getUrl() : '';
                 $featured_result[] = array(
                     'title' => $featured->Event()->Title,
                     'location' => $featured->Event()->Location,
                     'date' => $featured->Event()->formatDateRange(),
-                    'image' => $image,
+                    'image' => '<img src="'.$image_url.'" width="200" height="130" />',
                 );
             }
 

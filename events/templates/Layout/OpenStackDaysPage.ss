@@ -67,7 +67,7 @@
                 <div class="row featured_events">
                     <% loop $FeaturedEvents().Limit(4) %>
                     <div class="col-md-3 featured_event">
-                        <img src="$Picture.getUrl()" width="200" />
+                        <img src="$Picture.getUrl()" width="200" height="130"/>
                         <p>
                             $Event.Title
                             <span class="font-13">$Event.getLocation()</span>
