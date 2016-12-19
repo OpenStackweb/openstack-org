@@ -166,7 +166,10 @@ final class SapphireNewsRepository extends SapphireRepository {
     public function getNewsToActivate()
     {
         $now = gmdate("Y-m-d H:i:s");
-        $activate_articles = News::get('News')->where("DateEmbargo < '$now' AND (DateExpire > '$now' OR DateExpire IS NULL) AND Approved = 0 AND Archived = 0 AND Deleted = 0")->toArray();
+        $where = "DateEmbargo < '$now' AND (DateExpire > '$now' OR DateExpire IS NULL)
+                  AND Approved = 0 AND Archived = 0 AND Deleted = 0 AND PreApproved = 1";
+
+        $activate_articles = News::get('News')->where($where)->toArray();
         return $activate_articles;
     }
 

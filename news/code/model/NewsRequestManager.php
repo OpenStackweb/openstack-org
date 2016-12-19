@@ -94,6 +94,8 @@ final class NewsRequestManager {
                 $upload_service
             );
 
+            $news->PreApproved = $data['pre-approved'];
+
             $repository->add($news);
 
             //send email
@@ -151,6 +153,8 @@ final class NewsRequestManager {
 
             $news->clearTags();
             $news->registerTags($data['tags']);
+
+            $news->PreApproved = $data['pre-approved'];
 
 			return $news;
 		});

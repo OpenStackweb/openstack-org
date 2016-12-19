@@ -49,11 +49,11 @@
                                 The Must-Attend
                             </h2>
                             <h1>
-                                Cloud Computing Event
+                                Open Infrastructure Event
                             </h1>
                             <div class="summit-hero-postcard">
                                 <p>
-                                    Join the movement behind the most widely deployed open source cloud platform. Whether you are pursuing a private, hybrid or multi-cloud approach, the OpenStack Summit is the place to network, skill up and plan your cloud strategy.
+                                    The world runs on open infrastructure. At the OpenStack Summit, you’ll learn about the mix of open technologies building the modern infrastructure stack, including OpenStack, Kubernetes, Docker, Ansible, Ceph, OVS, OpenContrail, OPNFV, and more. Whether you are pursuing a private, public or multi-cloud approach, the OpenStack Summit is the place to network, skill up and plan your cloud strategy.
                                 </p>
                                 <div class="landing-action">
                                     <% if $RegistrationLink %>
@@ -89,7 +89,7 @@
     <div class="mobile-city-date">
         <% with $Summit %>
         <h2>The Must-Attend</h2>
-        <h1>Cloud Computing Event</h1>
+        <h1>Open Infrastructure Event</h1>
         <div class="summit-hero-postcard">
             <p>
                 Join the movement behind the most widely deployed open source cloud platform. Whether you are pursuing a private, hybrid or multi-cloud approach, the OpenStack Summit is the place to network, skill up and plan your cloud strategy.

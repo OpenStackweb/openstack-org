@@ -5,7 +5,8 @@
                 <h2 class="center">The Must-Attend OpenStack Event</h2>
                 <hr/>
                 <p>
-                    <strong>The OpenStack Summit</strong> is the most important gathering of IT leaders, telco operators, cloud administrators, app developers and OpenStack contributors building the future of cloud computing. Hear business cases and operational experience directly from users, learn about new products in the ecosystem and participate in hands-on workshops to build your skills. Attended by thousands of people from more than 50 countries, it’s the ideal venue to plan your cloud strategy and share knowledge about architecting and operating OpenStack clouds.
+
+                    <strong>The world runs on open infrastructure.</strong> At the OpenStack Summit, you’ll learn about the mix of open technologies building the modern infrastructure stack, including OpenStack, Kubernetes, Ceph, OpenvSwitch, OPNFV, and more. Whether you are pursuing a private, public or multi-cloud approach, the OpenStack Summit is the place to network, skill up and plan your cloud strategy.
                 </p>
                 <div class="stats-wrapper">
                     <h3 class="recap-title">Attendees From Around The World</h3>
