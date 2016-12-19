@@ -10,7 +10,7 @@
     </div>
 </div>
 
-<div class="days-pretext">$EventsYearlyCountText() - <a href="/community/events/openstackdays#tab=events_tab">find an upcoming OpenStack Day in your region!</a></div>
+<div class="days-pretext">$EventsYearlyCountText() - <a href="#" class="deep-link" data-tab="events_tab">find an upcoming OpenStack Day in your region!</a></div>
 
 <div class="container slider-container">
     <section class="regular slider">
