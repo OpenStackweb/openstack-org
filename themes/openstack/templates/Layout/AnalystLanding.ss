@@ -12,10 +12,12 @@
 		      <div class="carousel-caption">
 		        Leading I&O professionals, application developers, and CIOs at companies like American Express, Disney, and Walmart have embraced OpenStack. It’s the foundation of many private (and, increasingly, public) clouds that give your company the agility it needs.
 		        <div class="attribute">
-		        	- Forrester Research Report, "<a href="#" target="_blank">OpenStack’s Global Traction Expands For Its Newton Release</a>,” December 2017)
+		        	- Forrester Research Report, "<a href="
+https://reprints.forrester.com/#/assets/2/480/'RES136209'/reports" target="_blank">OpenStack’s Global Traction Expands For Its Newton Release</a>,” December 2016)
 		        </div>
 						<div>
-							<a href="#"class="promo-btn">Download the Report <i class="fa fa-chevron-right"></i></a>
+							<a href="
+https://reprints.forrester.com/#/assets/2/480/'RES136209'/reports"class="promo-btn" target="_blank">Download the Report <i class="fa fa-chevron-right"></i></a>
 						</div>
 		      </div>
 		    </div>
