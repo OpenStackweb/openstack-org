@@ -1,24 +1,24 @@
 /* Analysts Landing */
 .analysts-hero {
-  background: url("/themes/openstack/images/analysts/analysts-hero.jpg") no-repeat center left;
+  background: url("/themes/openstack/images/analysts/analysts-hero-bcn.jpg") no-repeat center center;
   background-size: cover;
   padding: 60px 0 60px; }
   .analysts-hero h1 {
     color: white;
     margin: 0; }
   .analysts-hero .carousel {
-    height: 250px; }
+    height: 350px; }
     .analysts-hero .carousel .carousel-inner {
-      height: 250px; }
+      height: 350px; }
       .analysts-hero .carousel .carousel-inner .carousel-caption {
-        top: 25px;
+        top: 10px;
         right: 10%;
         left: 10%;
         font-size: 22px; }
         .analysts-hero .carousel .carousel-inner .carousel-caption .attribute {
           font-size: 14px;
           font-weight: 300;
-          margin-top: 30px; }
+          margin: 20px 0; }
           .analysts-hero .carousel .carousel-inner .carousel-caption .attribute a {
             color: white;
             text-decoration: underline; }
@@ -32,27 +32,15 @@
           opacity: 0.6; }
         .analysts-hero .carousel .carousel-inner .carousel-caption:before {
           content: open-quote;
-          left: -20px; }
+          left: -40px; }
         .analysts-hero .carousel .carousel-inner .carousel-caption:after {
           content: close-quote;
-          right: -20px; }
+          right: -40px; }
       .analysts-hero .carousel .carousel-inner .item {
-        height: 250px;
+        height: 350px;
         background: transparent; }
 
 @media (max-width: 767px) {
-  .analysts-hero .carousel {
-    height: 250px; }
-    .analysts-hero .carousel .carousel-inner {
-      height: 250px; }
-      .analysts-hero .carousel .carousel-inner .carousel-caption {
-        font-size: 18px;
-        right: 5%;
-        left: 5%; }
-      .analysts-hero .carousel .carousel-inner .item {
-        height: 250px; } }
-
-@media (max-width: 500px) {
   .analysts-hero .carousel {
     height: 300px; }
     .analysts-hero .carousel .carousel-inner {
@@ -62,7 +50,33 @@
         right: 5%;
         left: 5%; }
       .analysts-hero .carousel .carousel-inner .item {
-        height: 300px; } }
+        height: 300px; } 
+        .analysts-hero .carousel .carousel-inner .carousel-caption:before {
+          content: open-quote;
+          left: -20px; }
+        .analysts-hero .carousel .carousel-inner .carousel-caption:after {
+          content: close-quote;
+          right: -20px; }
+        }
+
+@media (max-width: 500px) {
+  .analysts-hero .carousel {
+    height: 390px; }
+    .analysts-hero .carousel .carousel-inner {
+      height: 390px; }
+      .analysts-hero .carousel .carousel-inner .carousel-caption {
+        font-size: 18px;
+        right: 5%;
+        left: 5%; }
+      .analysts-hero .carousel .carousel-inner .item {
+        height: 390px; } 
+        .analysts-hero .carousel .carousel-inner .carousel-caption:before {
+          content: open-quote;
+          left: -20px; }
+        .analysts-hero .carousel .carousel-inner .carousel-caption:after {
+          content: close-quote;
+          right: -20px; }
+        }
 
 .analysts-videos {
   padding: 60px 0;
