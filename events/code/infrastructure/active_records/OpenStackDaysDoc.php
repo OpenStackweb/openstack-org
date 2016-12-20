@@ -24,6 +24,7 @@ class OpenStackDaysDoc extends DataObject {
         'PlanningTools'      => 'OpenStackDaysPage',
         'Artwork'            => 'OpenStackDaysPage',
         'Media'              => 'OpenStackDaysPage',
+        'Collaterals'        => 'OpenStackDaysPage',
         'Doc'                => 'File',
         'Thumbnail'          => 'BetterImage',
         'ParentPage'         => 'OpenStackDaysPage', //dummy

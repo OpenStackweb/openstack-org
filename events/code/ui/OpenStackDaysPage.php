@@ -34,6 +34,7 @@ class OpenStackDaysPage extends Page {
         'PlanningTools'      => 'OpenStackDaysDoc.PlanningTools',
         'Artwork'            => 'OpenStackDaysDoc.Artwork',
         'Collaterals'        => 'OpenStackDaysVideo.Collaterals',
+        'CollateralsDocs'    => 'OpenStackDaysDoc.Collaterals',
         'Media'              => 'OpenStackDaysDoc.Media',
     );
 
@@ -124,6 +125,13 @@ class OpenStackDaysPage extends Page {
         $fields->addFieldToTab(
             'Root.Host',
             new GridField('Collaterals', 'Video / Presentations / Collateral', $this->Collaterals(), $config)
+        );
+
+        $config = new GridFieldConfig_RecordEditor(3);
+        $config->addComponent(new GridFieldSortableRows('SortOrder'));
+        $fields->addFieldToTab(
+            'Root.Host',
+            new GridField('CollateralsDocs', 'Collaterals Docs', $this->CollateralsDocs(), $config)
         );
 
         $config = new GridFieldConfig_RecordEditor(3);
