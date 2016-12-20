@@ -3,7 +3,7 @@
     <!-- Begin Page Content -->
     <div class="analysts-hero">
 	<div class="container">
-		<h1>Industry Analysts Weigh in on OpenStack</h1>
+		<h1>OpenStack’s global traction expands</h1>
 
 		<div id="analysts-quote-carousel" class="carousel slide" data-ride="carousel">
 		  <!-- Wrapper for slides -->
