@@ -189,7 +189,7 @@ class OpenStackDaysPage_Controller extends Page_Controller {
     public function getFeaturedEvents() {
         return FeaturedEvent::get('FeaturedEvent')
             ->leftJoin('EventPage','EventPage.ID = FeaturedEvent.EventID')
-            ->sort('EventPage.EventStartDate');
+            ->sort('EventPage.EventStartDate','DESC');
     }
 
     public function getGroupedPlanningTools() {
