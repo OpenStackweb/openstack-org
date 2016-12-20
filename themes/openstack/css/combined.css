@@ -1163,6 +1163,7 @@ a.promo-btn {
   max-width: 300px;
   display: inline-block;
   line-height: 2;*/
+  white-space: nowrap;
   color: white;
   font-size: 16px;
   font-weight: 400;
