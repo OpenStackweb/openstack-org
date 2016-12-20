@@ -6,49 +6,17 @@
 		<h1>Industry Analysts Weigh in on OpenStack</h1>
 
 		<div id="analysts-quote-carousel" class="carousel slide" data-ride="carousel">
-		  <!-- Indicators -->
-		  <ol class="carousel-indicators">
-		    <li data-target="#analysts-quote-carousel" data-slide-to="0" class="active"></li>
-		    <li data-target="#analysts-quote-carousel" data-slide-to="1"></li>
-		    <li data-target="#analysts-quote-carousel" data-slide-to="2"></li>
-		    <li data-target="#analysts-quote-carousel" data-slide-to="3"></li>
-		  </ol>
-
 		  <!-- Wrapper for slides -->
 		  <div class="carousel-inner" role="listbox">
 		    <div class="item active">
 		      <div class="carousel-caption">
-		        OpenStack offers CIOs a credible platform upon which they can drive the transformations required for their business to become <strong>innovative, agile, and truly responsive</strong> to evolving customer needs.
+		        Leading I&O professionals, application developers, and CIOs at companies like American Express, Disney, and Walmart have embraced OpenStack. It’s the foundation of many private (and, increasingly, public) clouds that give your company the agility it needs.
 		        <div class="attribute">
-		        	- Forrester ("<a href="https://www.forrester.com/report/Brief+OpenStack+Is+Now+Ready+For+Business/-/E-RES128302" target="_blank">Brief: OpenStack is Now Ready for Business</a>,” September 2015)
+		        	- Forrester Research Report, "<a href="#" target="_blank">OpenStack’s Global Traction Expands For Its Newton Release</a>,” December 2017)
 		        </div>
-		      </div>
-		    </div>
-		    <!-- Quote 2 -->
-		    <div class="item">
-		      <div class="carousel-caption">
-		        Walmart choosing to go <strong>all in on OpenStack</strong> for its retail operations is a big deal.
-		        <div class="attribute">
-		        	- 451 (“<a href="https://451research.com/report-short?entityId=88973" target="_blank">OpenStack Summit Austin, Part 2: Marquee enterprises doubling down</a>”)
-		        </div>
-		      </div>
-		    </div>
-		    <!-- Quote 3 -->
-		    <div class="item">
-		      <div class="carousel-caption">
-		        OpenStack now runs <strong>key enterprise workloads</strong> for the likes of AT&T, BMW, Best Buy, and Volkswagen. They are choosing OpenStack because it gets the job done.
-		        <div class="attribute">
-		        	- Forrester Blog Post by Paul Miller (“<a href="http://blogs.forrester.com/paul_miller/16-05-02-openstack_returns_to_austin_stressing_evolution_over_revolution" target="_blank">OpenStack Returns to Austin, Stressing Evolution Over Revolution</a>,” May 2016)
-		        </div>
-		      </div>
-		    </div>
-		    <!-- Quote 4 -->
-		    <div class="item">
-		      <div class="carousel-caption">
-		        OpenStack has emerged as the de facto standard for infrastructure as a service (IaaS) in the private cloud and in some cases a more <strong>flexible, cost-effective alternative to public cloud</strong> resources for software development.
-		        <div class="attribute">
-		        	- Moor Insights & Strategy (“<a href="http://www.moorinsightsstrategy.com/research-paper-openstack-is-now-ready-for-the-enterprise/" target="_blank">OpenStack is Now Ready for the Enterprise</a>”)
-		        </div>
+						<div>
+							<a href="#"class="promo-btn">Download the Report <i class="fa fa-chevron-right"></i></a>
+						</div>
 		      </div>
 		    </div>
 		  </div>
@@ -59,7 +27,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12">
-				<h2>See what analysts were saying at the OpenStack Summit in Austin</h2>	
+				<h2>See what analysts were saying at OpenStack Summits in 2016</h2>	
 			</div>
 		</div>
             <div class="row">
