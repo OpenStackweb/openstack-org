@@ -99,10 +99,6 @@ HTML;
 
     public function getExamSpecialCost(){
         $html = $this->getField('ExamSpecialCost');
-<<<<<<< HEAD
-        }
-=======
->>>>>>> hot-fix/coa-students
         return $html;
     }
 
