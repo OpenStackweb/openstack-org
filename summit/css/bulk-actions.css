@@ -1,6 +1,3 @@
-#page-content-wrapper{
-    width: 80% !important;
-}
 
 .row-space
 {
@@ -34,4 +31,12 @@
 
 .datepicker-dropdown {
     z-index: 999999;
+}
+
+.id_col {
+    width: 5%;
+}
+
+.input_col {
+    width: 45%;
 }

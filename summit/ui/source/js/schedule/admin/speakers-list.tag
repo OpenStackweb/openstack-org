@@ -43,7 +43,7 @@
                     <td>{ speaker.registration_code }</td>
                     <td>{ speaker.onsite_phone }</td>
                     <td>{ speaker.presentation_count }</td>
-                    <td><a href="{ parent.edit_link+'/'+speaker.id }" class="btn btn-default btn-sm active" role="button">Edit</a></td>
+                    <td><a href="{ parent.edit_link+'/'+speaker.id }" class="btn btn-default btn-sm" role="button">Edit</a></td>
                 </tr>
             </tbody>
         </table>

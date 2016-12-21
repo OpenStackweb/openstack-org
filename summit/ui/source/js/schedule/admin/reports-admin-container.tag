@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-md-4" if={ show_search }>
             <div class="input-group" style="width: 100%;">
-                <input data-rule-required="true" data-rule-minlength="3" id="search-term" style="height:33px;" class="form-control input-global-search" placeholder="Search...">
+                <input data-rule-required="true" data-rule-minlength="3" id="search-term" style="height:34px;" class="form-control input-global-search" placeholder="Search...">
                 <span class="input-group-btn" style="width: 5%;">
                     <button class="btn btn-default btn-global-search" onclick={ searchReport }><i class="fa fa-search"></i></button>
                     <button class="btn btn-default btn-global-search-clear" onclick={ clearSearch }>

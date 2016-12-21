@@ -4,7 +4,7 @@
         <% include SummitAdmin_SidebarMenu AdminLink=$Top.Link, SummitID=$Summit.ID, Active='schedule' %>
     </div><!-- /#sidebar-wrapper -->
     <!-- Page Content -->
-    <div id="page-content-wrapper">
+    <div id="page-content-wrapper" class="container-fluid summit-admin-container">
         <h2>Summit Events Bulk Edition</h2>
         <% if Events %>
         <form id="events-form" name="events-form">
@@ -130,7 +130,7 @@
             <% loop Events %>
                 <li>
                     <div class="row row-space row-event" data-event-id="{$ID}">
-                        <div class="col-md-1"><a href="summit-admin/6/events/$ID" title="edit event">$ID</a></div>
+                        <div class="col-md-1 id_col"><a href="summit-admin/6/events/$ID" title="edit event">$ID</a></div>
                         <div class="col-md-4">$Title</div>
                         <div class="col-md-2">
                             <select data-rule-required="true"  class="form-control location" id="location_{$ID}" name="location_{$ID}">
@@ -158,7 +158,7 @@
                                 $('#location_{$ID}').attr('data-original-location-id', $LocationID);
                             </script>
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-5 input_col">
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="input-group date">

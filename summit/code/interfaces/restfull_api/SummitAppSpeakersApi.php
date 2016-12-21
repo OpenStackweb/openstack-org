@@ -165,7 +165,7 @@ class SummitAppSpeakersApi extends AbstractRestfulJsonApi {
                     'name'               => $speaker->getName(),
                     'email'              => $speaker->getEmail(),
                     'onsite_phone'       => $speaker->getOnSitePhoneFor($summit_id),
-                    'presentation_count' => $speaker->Presentations()->count(),
+                    'presentation_count' => $speaker->AllPresentations($summit_id)->count(),
                     'registration_code'  => !is_null($promo_code) ? $promo_code->Code : '',
                 );
             }

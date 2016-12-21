@@ -4,7 +4,7 @@
         <% include SummitAdmin_SidebarMenu AdminLink=$Top.Link, SummitID=$Summit.ID, Active='speakers' %>
     </div><!-- /#sidebar-wrapper -->
     <!-- Page Content -->
-    <div id="page-content-wrapper" class="attendees-wrapper">
+    <div id="page-content-wrapper" class="container-fluid summit-admin-container">
         <ol class="breadcrumb">
             <li><a href="$Top.Link">Home</a></li>
             <li><a href="$Top.Link/{$Summit.ID}/dashboard">$Summit.Name</a></li>
@@ -22,7 +22,7 @@
                             name: "$getName",
                             email : "{$getEmail}",
                             onsite_phone : "{$getOnSitePhoneFor($Top.Summit.ID)}",
-                            presentation_count: "{$Presentations().Count()}",
+                            presentation_count: "{$AllPresentations($Top.Summit.ID).Count()}",
                             registration_code: "{$getSummitPromoCode($Top.Summit.ID).Code}"
                         });
                 <% end_loop %>
@@ -54,7 +54,7 @@
                         <div class="row">
                             <div class="col-md-6 member_container">
                                 <label>Email</label>
-                                <input id="email" name="email" style="width: 98%"/>
+                                <input id="email" name="email" class="form-control" style="width: 98%"/>
                             </div>
                             <div class="col-md-6">
                                 <label for="member">Member</label><br>
@@ -66,19 +66,19 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <label>Title</label>
-                                <input id="title" name="title" style="width: 98%"/>
+                                <input id="title" name="title" class="form-control" />
                             </div>
                             <div class="col-md-3">
                                 <label>First Name</label>
-                                <input id="first_name" name="first_name" style="width: 98%"/>
+                                <input id="first_name" name="first_name" class="form-control"/>
                             </div>
                             <div class="col-md-3">
                                 <label>Last Name</label>
-                                <input id="last_name" name="last_name" style="width: 98%"/>
+                                <input id="last_name" name="last_name" class="form-control"/>
                             </div>
                             <div class="col-md-3">
                                 <label>Summit On Site Phone</label>
-                                <input id="onsite_phone" name="onsite_phone" style="width: 98%"/>
+                                <input id="onsite_phone" name="onsite_phone" class="form-control"/>
                             </div>
                         </div>
                     </div>
@@ -86,11 +86,11 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <label>Twitter Name</label>
-                                <input id="twitter_name" name="twitter_name" style="width: 98%"/>
+                                <input id="twitter_name" name="twitter_name" class="form-control"/>
                             </div>
                             <div class="col-md-6">
                                 <label>IRC Name</label>
-                                <input id="irc_name" name="irc_name" style="width: 98%"/>
+                                <input id="irc_name" name="irc_name" class="form-control"/>
                             </div>
                         </div>
                     </div>

@@ -4,7 +4,7 @@
         <% include SummitAdmin_SidebarMenu AdminLink=$Top.Link, SummitID=$Summit.ID, Active=6 %>
     </div><!-- /#sidebar-wrapper -->
     <!-- Page Content -->
-    <div id="page-content-wrapper" class="edit-attendee-wrapper" >
+    <div id="page-content-wrapper" class="container-fluid summit-admin-container" >
         <ol class="breadcrumb">
             <li><a href="$Top.Link">Home</a></li>
             <li><a href="$Top.Link/{$Summit.ID}/dashboard">$Summit.Name</a></li>
@@ -24,44 +24,44 @@
                     </div>
                     <div class="col-md-4">
                         <label for="email">Email</label><br>
-                        <input id="email" name="email" value="{$Speaker.getEmail()}"/>
+                        <input id="email" name="email" class="form-control" value="{$Speaker.getEmail()}"/>
                     </div>
                     <div class="col-md-4">
                         <label for="reg_code">Summit Registration Code</label><br>
-                        <input id="reg_code" name="reg_code" value="{$Speaker.getSummitPromoCode($Top.Summit.ID).Code}"/>
+                        <input id="reg_code" name="reg_code" class="form-control" value="{$Speaker.getSummitPromoCode($Top.Summit.ID).Code}"/>
                     </div>
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <label>Title</label>
-                        <input id="title" name="title" value="$Speaker.Title" />
+                        <input id="title" name="title" class="form-control" value="$Speaker.Title" />
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <label>First Name</label>
-                        <input id="first_name" name="first_name" value="$Speaker.FirstName" />
+                        <input id="first_name" name="first_name" class="form-control" value="$Speaker.FirstName" />
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <label>Last Name</label>
-                        <input id="last_name" name="last_name" value="$Speaker.LastName" />
-                    </div>
-                    <div class="col-md-3">
-                        <label>Summit On Site Phone</label>
-                        <input id="onsite_phone" name="onsite_phone" value="$Speaker.getOnSitePhoneFor($Top.Summit.ID)" />
+                        <input id="last_name" name="last_name" class="form-control" value="$Speaker.LastName" />
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <div class="row">
-                    <div class="col-md-6">
-                        <label>Twitter Name</label>
-                        <input id="twitter_name" name="twitter_name" value="$Speaker.TwitterName" />
+                    <div class="col-md-4">
+                        <label>Summit On Site Phone</label>
+                        <input id="onsite_phone" name="onsite_phone" class="form-control" value="$Speaker.getOnSitePhoneFor($Top.Summit.ID)" />
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
+                        <label>Twitter Name</label>
+                        <input id="twitter_name" name="twitter_name" class="form-control" value="$Speaker.TwitterName" />
+                    </div>
+                    <div class="col-md-4">
                         <label>IRC Name</label>
-                        <input id="irc_name" name="irc_name" value="$Speaker.IRCHandle" />
+                        <input id="irc_name" name="irc_name" class="form-control" value="$Speaker.IRCHandle" />
                     </div>
 
                 </div>
@@ -100,7 +100,10 @@
                      <h2>Presentations</h2>
                      <ul>
                          <% loop $Speaker.AllPresentations($Top.Summit.ID) %>
-                             <li><a href="{$Top.Link}/{$Top.Summit.ID}/events/{$ID}">$Title</a></li>
+                             <li>
+                                <a href="{$Top.Link}/{$Top.Summit.ID}/events/{$ID}">$Title</a>
+                                - $getStatusNice()
+                            </li>
                          <% end_loop %>
                      </ul>
                     </div>

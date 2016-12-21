@@ -317,7 +317,6 @@ class PresentationSpeaker extends DataObject
         if (!$summit) return false;
 
         return $this->Presentations()->filter(array(
-            'Status' => 'Received',
             'SummitID' => $summit->ID
         ));
     }
