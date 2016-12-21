@@ -27,12 +27,8 @@ class COALandingPage extends Page
         'GetStartedLabel'        => 'Text',
         'HideFee'                => 'Boolean',
         'AlreadyRegisteredURL'   => 'Text',
-<<<<<<< HEAD
-        'ExamCost'               => 'HTMLText',
-=======
         'ExamCost'               => 'Text',
         'ExamSpecialCost'        => 'Text',
->>>>>>> hot-fix/coa-students
         'ExamCostSpecialOffer'   => 'HTMLText',
         'ExamFormat'             => 'HTMLText',
         'ExamIDRequirements'     => 'HTMLText',
@@ -101,15 +97,12 @@ HTML;
         return $html;
     }
 
-<<<<<<< HEAD
-=======
     public function getExamSpecialCost(){
         $html = $this->getField('ExamSpecialCost');
         }
         return $html;
     }
 
->>>>>>> hot-fix/coa-students
     public function getExamCostSpecialOffer(){
         $html = $this->getField('ExamCostSpecialOffer');
         return $html;
@@ -270,13 +263,8 @@ HTML;
         // exam details
         $fields->addFieldToTab('Root.ExamDetails', $html_details = new HtmlEditorField('ExamDetails', 'Details Title'));
         $html_details->setRows(5);
-<<<<<<< HEAD
-        $fields->addFieldToTab('Root.ExamDetails', $html_format = new HtmlEditorField('ExamCost', 'Cost (include currency sign)'));
-        $html_format->setRows(2);
-=======
         $fields->addFieldToTab('Root.ExamDetails', new TextField('ExamCost', 'Price of Exam (include currency sign)'));
         $fields->addFieldToTab('Root.ExamDetails', new TextField('ExamSpecialCost', 'Discount Price (leave blank if not special)'));
->>>>>>> hot-fix/coa-students
         $fields->addFieldToTab('Root.ExamDetails', $html_format = new HtmlEditorField('ExamCostSpecialOffer', 'Special Offer (appears under price)'));
         $html_format->setRows(2);
         $fields->addFieldToTab('Root.ExamDetails', new TextField('ExamDuration', 'Duration ( include time unit)'));
