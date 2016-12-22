@@ -17,5 +17,5 @@ interface IPresentationType
     const Presentation  = 'Presentation';
     const Keynotes      = 'Keynotes';
     const Panel         = 'Panel';
-    const LightingTalks = 'Lighting Talks';
+    const LightingTalks = 'Lightning Talks';
 }
