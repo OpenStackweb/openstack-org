@@ -43,8 +43,10 @@
 			</div>
 		<div class="col-lg-3 col-md-4 col-sm-4">
       <ul class="help-me-menu">
-          <li><a href="//openstacksummit2017boston.eventbrite.com/"><i class="fa fa-mobile"></i>Register for the Summit</a></li>
-          <li><a href="/summit/boston-2017/travel/"><i class="fa fa-compass"></i>Travel Info</a></li>
+        <li><a href="//openstackfoundation.formstack.com/forms/boston_summit_discounted_registration"><i class="fa fa-bicycle"></i>Apply for a student discount</a></li>
+        <li><a href="//https://www.openstack.org/summit/boston-2017/travel/#hotels"><i class="fa fa-hotel"></i>Book your hotel</a></li>
+        <li><a href="//https://www.openstack.org/summit/boston-2017/travel/#travel-support"><i class="fa fa-users"></i>Apply for travel support</a></li>
+        <li><a href="//https://www.openstack.org/summit/boston-2017/travel/#visa"><i class="fa fa-globe"></i>Get your visa</a></li>
       </ul>
 		</div>
 		</div>
