@@ -1,0 +1,17 @@
+.dropdown {
+	h3 {
+		border:1px solid #ccc;
+	}
+
+	ul {
+		li {
+			display:block;
+			border:1px solid #aaa;
+			&:hover {
+				background: #eee;
+			}
+
+			cursor:pointer;
+		}
+	}
+}
