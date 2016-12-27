@@ -35,7 +35,6 @@
     "unclecheese/bootstrap-tagfield": "dev-master",
     "guzzlehttp/guzzle": "5.3.0",
     "silverstripe/gridfieldajaxrefresh":"dev-master",
-    "parse/php-sdk" : "1.1.*",
     "fzaninotto/Faker": "^1.5",
     "phpoffice/phpexcel": "dev-master",
     "tractorcow/silverstripe-fluent": "dev-patch/default-route",
@@ -64,7 +63,8 @@
       "summit/code/infrastructure/traits",
       "openstack/code/utils/apis/traits",
       "googlemaps/code/traits",
-      "summit/code/pages/summit_entities/traits"
+      "summit/code/pages/summit_entities/traits",
+      "openstack/code/utils/DB/traits"
     ]
   },
   "config": {

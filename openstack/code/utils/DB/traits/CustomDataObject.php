@@ -12,7 +12,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-class CustomDataObject extends DataObject
+
+/**
+ * Class CustomDataObject
+ */
+trait CustomDataObject
 {
     public function getManyManyComponents($componentName, $filter = "", $sort = "", $join = "", $limit = "") {
         list($parentClass, $componentClass, $parentField, $componentField, $table) = $this->many_many($componentName);

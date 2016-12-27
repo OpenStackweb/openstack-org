@@ -85,4 +85,11 @@ SQL;
 SQL;
         return intval(DB::query($sql)->value()) > 0;
     }
+
+    public static function truncateTable($db_name, $table_name){
+        $sql = <<<SQL
+      TRUNCATE TABLE {$table_name};
+SQL;
+        return intval(DB::query($sql)->value()) > 0;
+    }
 }

@@ -31,7 +31,13 @@ final class SummitPushNotificationSenderTask extends CronTask
                 echo sprintf('batch_size set to %s', $batch_size);
             }
 
-            $manager   = new SummitPushNotificationManager( new SapphireSummitPushNotificationRepository, SapphireTransactionManager::getInstance());
+            $manager   = new SummitPushNotificationManager
+            (
+                new SapphireSummitPushNotificationRepository,
+                new FireBaseGCMApi(FIREBASE_GCM_SERVER_KEY),
+                SapphireTransactionManager::getInstance()
+            );
+
             $processed = $manager->processNotifications($batch_size);
             $finish_time = time() - $init_time;
             echo 'processed records ' . $processed. ' - time elapsed : '.$finish_time. ' seconds.';

@@ -12,14 +12,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-final class SummitPushNotification extends CustomDataObject implements IEntity
+final class SummitPushNotification extends PushNotificationMessage
 {
+    const PushType = 'PUSH_NOTIFICATION';
+
     private static $db = array
     (
-        'Message'  => 'Text',
         'Channel'  => "Enum('EVERYONE, SPEAKERS, ATTENDEES, MEMBERS, SUMMIT, EVENT, GROUP', 'EVERYONE')",
-        'IsSent'   => 'Boolean',
-        'SentDate' => 'SS_Datetime',
     );
 
     private static $summary_fields = array
@@ -29,14 +28,13 @@ final class SummitPushNotification extends CustomDataObject implements IEntity
     private static $has_one = array
     (
         'Summit'    => 'Summit',
-        'Owner'     => 'Member',
         'Event'     => 'SummitEvent',
         'Group'     => 'Group',
     );
 
     private static $many_many = array
     (
-        'Recipients'     => 'Member',
+        'Recipients' => 'Member',
     );
 
     private static $indexes = array(
@@ -101,27 +99,9 @@ final class SummitPushNotification extends CustomDataObject implements IEntity
         return $f;
     }
 
-
     public function getCMSActions(){
         $actions = parent::getCMSActions();
         return $actions;
-    }
-
-    public function sent()
-    {
-        if($this->isAlreadySent()) throw new EntityValidationException('Push notification already sent!.');
-        $this->IsSent   = true;
-        $this->SentDate = MySQLDatabase56::nowRfc2822();
-    }
-
-    public function isAlreadySent(){
-        return $this->IsSent;
-    }
-
-    protected function onBeforeWrite() {
-        parent::onBeforeWrite();
-        if($this->getIdentifier() === 0)
-            $this->OwnerID = Member::currentUserID();
     }
 
     protected function onAfterWrite()
@@ -180,11 +160,4 @@ final class SummitPushNotification extends CustomDataObject implements IEntity
         return Permission::check("ADMIN") || Permission::check("ADMIN_SUMMIT_APP") || Permission::check("ADMIN_SUMMIT_APP_SCHEDULE");
     }
 
-    /**
-     * @return int
-     */
-    public function getIdentifier()
-    {
-        return intval($this->getField('ID'));
-    }
 }
