@@ -74,10 +74,12 @@ final class SpeakerBureauManager
 
             $speaker = $speaker_repository->getById($speaker_id);
             $contact_email_data = $contact_email_factory->buildSpeakerContactEmail($form_data, $speaker);
+            $speaker_email = $speaker->getEmail();
 
+            if(!$speaker_email) throw new EntityValidationException('email not valid');
 
             $email = EmailFactory::getInstance()->buildEmail($contact_email_data->OrgEmail,
-                $speaker->Member()->Email,
+                $speaker_email,
                 "Openstack Web Contact: " . $contact_email_data->OrgName);
 
 

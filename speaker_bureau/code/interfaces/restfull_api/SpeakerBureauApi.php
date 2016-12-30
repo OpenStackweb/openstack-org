@@ -89,7 +89,7 @@ final class SpeakerBureauApi
         } catch (EntityValidationException $ex2) {
             SS_Log::log($ex2, SS_Log::NOTICE);
 
-            return $this->validationError($ex2->getMessages());
+            return $this->validationError($ex2->getMessage());
         } catch (Exception $ex) {
             SS_Log::log($ex, SS_Log::ERR);
 

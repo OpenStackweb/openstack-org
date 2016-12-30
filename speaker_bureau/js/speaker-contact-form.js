@@ -87,10 +87,11 @@ jQuery(document).ready(function ($) {
             dataType: "json",
             success: function (data, textStatus, jqXHR) {
                 $('fieldset', '.contact_form_div').html('<h4>Thank you for contacting this speaker. Moving forward all communication will occur directly with the Speaker and not within OpenStack.org</h4>');
-
+                $('#' + form_id + '_action_sendSpeakerEmail', form).prop('disabled', false);
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                ajaxError(jqXHR, textStatus, errorThrown);
+                sweetAlert("Validation Error", "Could not send email", "error");
+                $('#' + form_id + '_action_sendSpeakerEmail', form).prop('disabled', false);
             }
         });
 

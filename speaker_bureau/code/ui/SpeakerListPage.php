@@ -231,6 +231,9 @@ class SpeakerListPage_Controller extends Page_Controller
         Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
         Requirements::javascript("marketplace/code/ui/admin/js/utils.js");
 
+        Requirements::javascript("summit/bower_components/sweetalert/lib/sweet-alert.js");
+        Requirements::css("summit/bower_components/sweetalert/lib/sweet-alert.css");
+
         Requirements::css('speaker_bureau/css/speaker.contact.form.css');
         Requirements::javascript("speaker_bureau/js/speaker-contact-form.js");
 
