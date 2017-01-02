@@ -103,7 +103,9 @@ final class FoundationMemberRevocationNotification
 	public function revoke()
 	{
 		$member = $this->recipient();
-		$member->convert2SiteUser();
+		if($member->exists())
+		    $member->convert2SiteUser();
+
 		$this->setField('Action','Revoked');
 		$this->setField('ActionDate',gmdate('Y-m-d H:i:s'));
 	}
