@@ -91,10 +91,14 @@ class SurveyTemplate extends DataObject implements ISurveyTemplate {
                 'SurveyDynamicEntityStepTemplate' => 'Entities Holder Step',
             );
 
-            $count = $this->Steps()->filter('ClassName', 'SurveyThankYouStepTemplate')->count();
+            $count = $this->Steps()
+                ->where(" ClassName = 'SurveyThankYouStepTemplate' OR ClassName = 'SurveyReviewStepTemplate' ")
+                ->count();
+
             if(intval($count) === 0)
             {
                 $step_types['SurveyThankYouStepTemplate'] ='Thank You (Final)';
+                $step_types['SurveyReviewStepTemplate']   ='Review (Final)';
             }
 
             $multi_class_selector->setClasses

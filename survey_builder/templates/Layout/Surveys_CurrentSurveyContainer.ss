@@ -1,7 +1,8 @@
-<h1>$Survey.Template.Title : $Survey.CurrentStep.Template.FriendlyName</h1>
-<div class="container">
+<h1 class="survey-subtitle">$Survey.Template.Title</h1>
+<div class="container survey-container">
     <% include Surveys_Header %>
-    <div class="row">
+    <div class="row survey-step-container">
         $Top.SurveyStepForm
     </div>
+    <% include Surveys_SaveLaterModal %>
 </div>

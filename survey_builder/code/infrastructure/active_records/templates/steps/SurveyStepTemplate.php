@@ -294,4 +294,11 @@ class SurveyStepTemplate
         return $list;
     }
 
+    /**
+     * @return string
+     */
+    public function getType(){
+        return SurveyStepTemplate::class;
+    }
+
 }

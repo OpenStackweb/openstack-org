@@ -74,4 +74,11 @@ class SurveyThankYouStepTemplate
         parent::onBeforeWrite();
     }
 
+    /**
+     * @return string
+     */
+    public function getType(){
+        return SurveyThankYouStepTemplate::class;
+    }
+
 }

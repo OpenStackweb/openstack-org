@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Copyright 2017 OpenStack Foundation
+ * Copyright 2016 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -11,36 +12,49 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-
-class SurveyDynamicEntityStepTemplateUIBuilder
+final class SurveyReviewStepTemplateUIBuilder
     extends SurveyAbstractStepTemplateUIBuilder
-    implements ISurveyStepUIBuilder {
+    implements ISurveyStepUIBuilder
+{
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->next_btn_title = _t('SurveyBuilder.ActionSubmitSurvey', 'Submit Your Survey');
+    }
+
     /**
      * @param ISurveyStep $step
      * @param string $action
      * @param string $form_name
      * @return Form
      */
-    public function build(ISurveyStep $step, $action, $form_name ='SurveyStepForm')
+    public function build(ISurveyStep $step, $action, $form_name = 'SurveyStepForm')
     {
-        $fields    = new FieldList();
-
+        $fields = new FieldList();
         $fields->add(new HiddenField('survey_id', 'survey_id', $step->survey()->getIdentifier()));
         $fields->add(new HiddenField('step_id', 'step_id', $step->getIdentifier()));
-
-        $content = $step->template()->content();
-        if(!empty($content))
-            $fields->add(new LiteralField('content', $content));
-
         $validator = null;
-
         list($default_action, $actions) = $this->buildActions($action, $step);
-
         $form = $this->buildForm($form_name, $fields, $actions, $step, $validator);
-        $form->setTemplate('DynamicEntityStepForm');
-        $form->setAttribute('class','survey_step_form');
         $form->setDefaultAction($default_action);
+        $form->setAttribute('class','survey_step_form');
+        $form->disableSecurityToken();
         return $form;
+    }
+
+    /**
+     * @param ISurveyStep $previous_step
+     * @return String
+     */
+    protected function getPreviousStepUrl(ISurveyStep $previous_step){
+        $prev_step_url        = Controller::join_links
+        (
+            Director::absoluteBaseURL(),
+            Controller::curr()->Link(),
+            $previous_step->template()->title()
+        );
+        return $prev_step_url;
     }
 
     /**
@@ -53,6 +67,14 @@ class SurveyDynamicEntityStepTemplateUIBuilder
      */
     protected function buildForm($form_name, $fields, $actions, $step, $validator)
     {
-       return new DynamicStepForm(Controller::curr(), $form_name, $fields, $actions, $step, $validator);
+        return new ReviewStepForm
+        (
+            Controller::curr(),
+            $form_name,
+            $fields,
+            $actions,
+            $step,
+            $validator = array()
+        );
     }
 }

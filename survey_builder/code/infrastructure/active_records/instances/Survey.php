@@ -23,6 +23,7 @@ class Survey extends DataObject implements ISurvey
     (
         'BeenEmailed' => 'Boolean',
         'IsTest'      => 'Boolean',
+        'State'       => "Enum('INCOMPLETE,SAVED,COMPLETE','INCOMPLETE')",
     );
 
     static $indexes = array();
@@ -246,6 +247,14 @@ class Survey extends DataObject implements ISurvey
         return $this->getStepIndex($this->currentStep());
     }
 
+    /**
+     * @return int
+     */
+    public function getCurrentStepIndexNice()
+    {
+        return intval($this->getStepIndex($this->currentStep()))+1;
+    }
+
     public function getStepIndex(ISurveyStep $step)
     {
         $steps = $this->getSteps();
@@ -287,7 +296,7 @@ class Survey extends DataObject implements ISurvey
     {
 
         $current_step_index = $this->getCurrentStepIndex();
-        $steps_count = $this->getStepsCount();
+        $steps_count        = $this->getStepsCount();
 
         if (($current_step_index + 1) === $steps_count) {
             return $this->currentStep();
@@ -496,15 +505,35 @@ class Survey extends DataObject implements ISurvey
      */
     public function getPreviousStep($step_name)
     {
-        $previous = null;
-        foreach ($this->getSteps() as $s) {
-            if ($s->template()->title() === $step_name) {
-                return $previous;
+        $previous_list = [];
+
+        foreach ($this->getSteps() as $step) {
+            if ($step->template()->title() === $step_name) {
+                break;
             }
-            $previous = $s;
+            if($this->canShowStep($step))
+                $previous_list[] = $step;
         }
 
-        return null;
+        return count($previous_list) > 0 ? end($previous_list) : null;
+    }
+
+    /**
+     * @param string $step_name
+     * @return ISurveyStep|null
+     */
+    public function getNextStep($step_name){
+        $next_list = [];
+        $reached   = false;
+        foreach ($this->getSteps() as $step) {
+            if ($step->template()->title() === $step_name) {
+                $reached = true;
+            }
+            if($reached && $step->template()->title() !== $step_name && $this->canShowStep($step))
+                $next_list[] = $step;
+        }
+
+        return count($next_list) > 0 ? reset($next_list) : null;
     }
 
     /**
@@ -539,6 +568,19 @@ class Survey extends DataObject implements ISurvey
         return new ArrayList($completed_steps);
     }
 
+    /**
+     * @return ISurveyStep[]
+     */
+    public function getAvailableSteps(){
+        $available_steps = [];
+        foreach ($this->getSteps() as $step) {
+            if ($this->canShowStep($step)) {
+                $available_steps[] = $step;
+            }
+        }
+        return new ArrayList($available_steps);
+    }
+
     public function getFriendlyName()
     {
         $owner = $this->CreatedBy();
@@ -558,5 +600,20 @@ class Survey extends DataObject implements ISurvey
         $fields->addFieldsToTab('Root.Main', new CheckboxField('IsTest', 'IsTest'));
 
         return $fields;
+    }
+
+    /**
+     * @return $this
+     */
+    public function markComplete(){
+        $this->State = ISurvey::CompleteState;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isComplete(){
+        return $this->State == ISurvey::CompleteState;
     }
 }

@@ -10,6 +10,7 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
+
                     if(data.length === 0)
                     {
                         $('#team-members-container').hide();
@@ -21,7 +22,7 @@
                         '<td class="pic"></td>'+
                         '<td class="fname"></td>'+
                         '<td class="lname"></td>'+
-                        '<td><button class="btn btn-danger active btn-sm delete-team-member" data-member-id="$ID">Delete</button></td>'+
+                        '<td><a class="delete-team-member-btn" data-member-id="$ID" href="#">Delete</a></td>'+
                         '</tr>'+
                         '</tbody>');
 
@@ -37,7 +38,7 @@
                                     return '';
                                 },
                                 '.lname':'member.lname',
-                                '.delete-team-member@data-member-id':'member.id'
+                                '.delete-team-member-btn@data-member-id':'member.id'
                             }
                         }
                     };
@@ -56,10 +57,15 @@
 
     $(document).ready(function() {
 
-        var $auto_complete = $(".ss-member-autocomplete-field");
-        var url    = $('.entity_survey_editors_team_container').attr('data-ss-member-field-suggest-url');
+        var $auto_complete = $("#txt_autocomplete_member");
 
-        $('#add-new-member').click(function(event)
+        $('.add-team-member-btn').click(function(event){
+            $('#TeamModal').modal('toggle');
+            event.preventDefault();
+            return false;
+        });
+
+        $('.select-team-member-btn').click(function(event)
         {
            var new_team_member_id = $('#new-team-member-id').val();
            var entity_survey_id   = $('#ENTITY_SURVEY_ID').val();
@@ -70,7 +76,7 @@
                return false;
            }
            // clean selection
-           $(".ss-member-autocomplete-field").val('');
+           $("#txt_autocomplete_member").val('');
            $('#new-team-member-id').val('');
 
             $.ajax(
@@ -96,7 +102,8 @@
            return false;
         });
 
-        $('.delete-team-member').live('click', function(event){
+        $('.delete-team-member-btn').live('click', function(event){
+            event.preventDefault();
             if(window.confirm('Are you sure?'))
             {
                 var btn              = $(this);
@@ -142,6 +149,7 @@
                     $('#new-team-member-id').val('');
                 }
             },
+            appendTo: "#formSearchTeamMember",
             response: function( event, ui ) {
                 $('#new-team-member-id').val('');
             }

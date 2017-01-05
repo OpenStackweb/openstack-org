@@ -17,6 +17,9 @@
  */
 interface ISurvey extends IEntity {
 
+    const CompleteState   = 'COMPLETE';
+    const IncompleteState = 'INCOMPLETE';
+
     /**
      * @return ISurveyStep
      */
@@ -104,6 +107,18 @@ interface ISurvey extends IEntity {
     public function getPreviousStep($step_name);
 
     /**
+     * @param string $step_name
+     * @return ISurveyStep|null
+     */
+    public function getNextStep($step_name);
+
+    /**
+     * @param ISurveyStep $step
+     * @return bool
+     */
+    public function canShowStep(ISurveyStep $step);
+
+    /**
      * @return bool
      */
     public function isEmailSent();
@@ -119,5 +134,15 @@ interface ISurvey extends IEntity {
      * @return ISurveyAnswer
      */
     public function findAnswerByQuestion(ISurveyQuestionTemplate $question);
+
+    /**
+     * @return $this
+     */
+    function markComplete();
+
+    /**
+     * @return bool
+     */
+    function isComplete();
 
 }

@@ -1,0 +1,10 @@
+en:
+  SurveyBuilder:
+    ActionSaveStep: 'Save &amp; Continue'
+    ActionSaveAndComeBack: 'Save &amp; Come Back Later'
+    ActionGoBack: 'Go Back'
+    ActionSubmitSurvey : 'Submit Your Survey'
+    ThankYouMessage: 'Thank you for your submission !!!'
+    EntityRegularStepForm.EntityDetailTitle: "Deployment details"
+    EntityRegularStepForm.StepCountTitle: "Step {current} of {max}"
+    EntityRegularStepForm.AddTeamMemberTitle: "Add another team member"

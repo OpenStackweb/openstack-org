@@ -128,6 +128,7 @@ final class SurveyManager implements ISurveyManager {
             $entity_survey = $survey_builder->buildEntitySurvey($step->survey(), $step->template()->getEntity(), $owner);
 
             $step->addEntitySurvey($entity_survey);
+            $step->markComplete();
 
             return $entity_survey;
         });
@@ -140,18 +141,14 @@ final class SurveyManager implements ISurveyManager {
      */
     public function completeStep(ISurveyStep $current_step, array $data)
     {
-
-        $template_repository = $this->template_repository;
-        $survey_repository   = $this->survey_repository;
-        $survey_builder      = $this->survey_builder;
-        $member_repository   = $this->member_repository;
-
-        return $this->tx_manager->transaction(function() use($current_step, $data, $survey_builder, $member_repository, $template_repository, $survey_repository){
+        return $this->tx_manager->transaction(function() use($current_step, $data){
 
             $current_survey = $current_step->survey();
+            $save_later     = isset($data['SAVE_LATER']) && $data['SAVE_LATER'] == 1;
 
             if($current_step instanceof ISurveyRegularStep) {
                 $current_step->clearAnswers();
+
                 foreach ($current_step->template()->getQuestions() as $q)
                 {
                     if (isset($data[$q->name()]))
@@ -161,11 +158,25 @@ final class SurveyManager implements ISurveyManager {
                             //publish event
                             PublisherSubscriberManager::getInstance()->publish('survey_organization_selected', array( $current_survey->createdBy(), $data[$q->name()]));
                         }
-                        $current_step->addAnswer($survey_builder->buildAnswer($q, $data[$q->name()]));
+                        $current_step->addAnswer($this->survey_builder->buildAnswer($q, $data[$q->name()]));
                     }
                 }
+                if(count($current_step->getAnswers()) > 0)
+                    $current_step->markComplete();
             }
-            return $current_survey->completeCurrentStep();
+            return $save_later ? $current_step : $current_survey->completeCurrentStep() ;
+        });
+    }
+
+    /**
+     * @param ISurveyStep $current_step
+     * @return void
+     */
+    public function completeSurvey(ISurveyStep $current_step){
+        $this->tx_manager->transaction(function() use($current_step){
+            $current_survey = $current_step->survey();
+            $current_step->markComplete();
+            $current_survey->markComplete();
         });
     }
 
@@ -182,9 +193,7 @@ final class SurveyManager implements ISurveyManager {
         $member_repository   = $this->member_repository;
 
         return $this->tx_manager->transaction(function() use($survey, $step_name, $survey_builder, $member_repository, $template_repository, $survey_repository){
-            if($survey->isAllowedStep($step_name)){
-                $survey->registerCurrentStep($survey->getStep($step_name));
-            }
+            $survey->registerCurrentStep($survey->getStep($step_name));
         });
     }
 
@@ -256,7 +265,7 @@ final class SurveyManager implements ISurveyManager {
     /**
      * @param int $entity_id
      * @param ISurveyDynamicEntityStep $current_step
-     * @return void
+     * @return int
      */
     public function deleteEntitySurvey(ISurveyDynamicEntityStep $current_step, $entity_id)
     {
@@ -265,6 +274,13 @@ final class SurveyManager implements ISurveyManager {
 
             $current_step->removeEntitySurveyById($entity_id);
 
+            $remain = count($current_step->getEntitySurveys());
+
+            if($remain == 0){
+                $current_step->markIncomplete();
+            }
+
+            return $remain;
         });
     }
 
@@ -504,4 +520,5 @@ final class SurveyManager implements ISurveyManager {
             return $template_clone;
         });
     }
+
 }

@@ -50,6 +50,8 @@ final class SurveyStepUIBuilderFactory {
         }
         if($step->template() instanceof ISurveyDynamicEntityStepTemplate)
             return new SurveyDynamicEntityStepTemplateUIBuilder;
+        if($step->template() instanceof ISurveyReviewStepTemplate)
+            return new SurveyReviewStepTemplateUIBuilder;
         if($step->template() instanceof ISurveyThankYouStepTemplate)
             return new SurveySurveyThankYouStepTemplateUIBuilder;
         return null;

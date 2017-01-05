@@ -19,26 +19,26 @@ class SurveyStep
     extends DataObject
     implements ISurveyStep {
 
-    static $db = array(
-    );
+    private static $db = [
+        'State' => "Enum('INCOMPLETE,COMPLETE','INCOMPLETE')",
+    ];
 
-    static $indexes = array(
-    );
+    private static $indexes = [
+    ];
 
-    static $has_one = array
-    (
+    private static $has_one = [
         'Template' => 'SurveyStepTemplate',
         'Survey'   => 'Survey',
-    );
+    ];
 
-    static $many_many = array(
-    );
+    private static $many_many =  [
+    ];
 
-    static $has_many = array(
-    );
+    private static $has_many = [
+    ];
 
-    private static $defaults = array(
-    );
+    private static $defaults =  [
+    ];
 
     /**
      * @return int
@@ -82,7 +82,6 @@ class SurveyStep
      */
     public function clear()
     {
-        throw new AbstractMethodException('getAnswers');
     }
 
     protected function onBeforeDelete() {
@@ -105,5 +104,28 @@ class SurveyStep
     {
         $template = $this->Template();
         return ($template instanceof ISurveyDynamicEntityStepTemplate);
+    }
+
+    /**
+     * @return $this
+     */
+    public function markComplete(){
+        $this->State = ISurveyStep::CompleteState;
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function markIncomplete(){
+        $this->State = ISurveyStep::IncompleteState;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isComplete(){
+        return $this->State == ISurveyStep::CompleteState;
     }
 }

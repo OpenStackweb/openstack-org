@@ -12,12 +12,12 @@
  * limitations under the License.
  **/
 
-class ThankYouStepForm extends HoneyPotForm {
+class ThankYouStepForm extends AbstractStepForm {
 
     /**
      * @var ISurveyRegularStep
      */
-    private $step;
+    protected $step;
 
     /**
      * @param Controller $controller

@@ -62,7 +62,7 @@ interface ISurveyManager {
     /**
      * @param int $entity_id
      * @param ISurveyDynamicEntityStep $current_step
-     * @return void
+     * @return int
      */
     public function deleteEntitySurvey(ISurveyDynamicEntityStep $current_step, $entity_id);
 
@@ -71,7 +71,6 @@ interface ISurveyManager {
      * @return void
      */
     public function resetSteps(ISurvey $survey);
-
 
     /**
      * @param int $entity_survey_id
@@ -102,4 +101,10 @@ interface ISurveyManager {
      * @return ISurveyTemplate
      */
     public function doClone(ISurveyTemplate $template, $clone_name = null, $parent_id = null);
+
+    /**
+     * @param ISurveyStep $current_step
+     * @return void
+     */
+    public function completeSurvey(ISurveyStep $current_step);
 }

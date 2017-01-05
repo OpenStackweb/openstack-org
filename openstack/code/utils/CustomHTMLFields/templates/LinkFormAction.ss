@@ -1,0 +1,1 @@
+<a href="#" id="{$ID}" class="{$CSSClass}">$Title.XML</a>

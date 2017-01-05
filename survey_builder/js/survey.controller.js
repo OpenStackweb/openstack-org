@@ -13,6 +13,7 @@
 
 function jqueryValidatorErrorPlacement(error, element) {
     var error_container = null;
+
     if(element.hasClass('checkbox'))
         error_container = element.parents('div[class*="checkboxset"]');
     if(element.hasClass('text'))
@@ -29,6 +30,7 @@ function jqueryValidatorErrorPlacement(error, element) {
     }
     else
         error.appendTo(error_container);
+
     error.show();
 }
 
@@ -53,7 +55,6 @@ jQuery(document).ready(function($) {
         errorPlacement: jqueryValidatorErrorPlacement
     });
 
-
     //custom validation rules
 
     $.validator.addMethod("ranking_required", function (value, element, container_id) {
@@ -71,7 +72,7 @@ jQuery(document).ready(function($) {
             $('.action').prop('disabled', true);
     });
 
-    $('.delete-entity').click(function(event){
+    $('.delete-entity-survey-btn').click(function(event){
         var res = window.confirm('are you sure?')
         if(!res){
             event.preventDefault();
@@ -83,5 +84,55 @@ jQuery(document).ready(function($) {
         window.location = $(this).attr('data-prev-url');
         event.preventDefault();
         return false;
+    });
+
+    $('.go-back-action-btn').click(function(event){
+        window.location = $(this).attr('data-prev-url');
+        event.preventDefault();
+        return false;
+    });
+
+    var on_save_later = false;
+
+    $('.save-later-action-btn').click(function(event){
+        var form   = $('.survey_step_form');
+        var action = form.attr('action');
+        var $this  = $(this);
+
+        // before to display the current url on the modal
+        // validate the form and post the content ...
+        if(form.valid() && !on_save_later) {
+            on_save_later = true;
+            $('body').ajax_loader();
+            $this.attr('disabled','disabled');
+
+            $.post(action+'?SAVE_LATER=1', form.serialize(), function(data){
+                $('#ModalSaveLater').modal('toggle');
+                on_save_later = false;
+                $('body').ajax_loader('stop');
+                $this.removeAttr('disabled');
+            });
+        }
+
+        event.preventDefault();
+        return false;
+    });
+
+    $('.survey-step').click(function(event){
+
+        var default_action = $('.default-action-btn');
+        var form           = $('.survey_step_form');
+        // before 2 navigate to another step
+        // try to save the current one
+        if(form.length > 0 && default_action.length > 0) {
+            $('<input />').attr('type', 'hidden')
+                .attr('name', "NEXT_STEP")
+                .attr('value', $(this).data('step-name'))
+                .appendTo(form);
+            default_action.trigger('click');
+            event.preventDefault();
+            return false;
+        }
+        return true;
     });
 });

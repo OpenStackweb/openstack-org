@@ -11,11 +11,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-
+use ICanBoogie\Inflector;
 /**
  * Class DynamicStepForm
  */
-class DynamicStepForm extends HoneyPotForm {
+class DynamicStepForm extends AbstractStepForm {
 
     /**
      * @var ISurveyDynamicEntityStep
@@ -71,7 +71,7 @@ class DynamicStepForm extends HoneyPotForm {
      */
     public function EntityIconUrl()
     {
-        $icon = $this->step->template()->EntityIcon();
+        $icon     = $this->step->template()->EntityIcon();
         $icon_url = '/themes/openstack/images/user-survey/cloud.png';
         if($icon->ID > 0){
             $icon_url = $icon->Link();
@@ -88,6 +88,40 @@ class DynamicStepForm extends HoneyPotForm {
             $entity              = $current_member->TeamEntitySurveys()->filter('EntitySurveyID',intval($id))->first();
         }
         return !is_null($entity)? $entity->getFriendlyName(): $id;
+    }
+
+    /**
+     * @return bool
+     */
+    public function CanSkipStep(){
+        return $this->step->canSkip();
+    }
+
+    /**
+     * @return String
+     */
+    public function SkipStepUrl(){
+        return Controller::join_links(
+            Controller::curr()->Link(),
+            $this->step->template()->title(),
+            'skip-step'
+        );
+    }
+
+    /**
+     * @return string
+     */
+    public function EntityNameLowerCase(){
+        return strtolower($this->step->template()->getEntity()->getEntityName());
+    }
+
+    /**
+     * @return string
+     */
+    public function EntityNameLowerCasePlural(){
+        $inflector = Inflector::get('en');
+        $word      = $this->EntityNameLowerCase();
+        return $inflector->pluralize($word);
     }
 
 }

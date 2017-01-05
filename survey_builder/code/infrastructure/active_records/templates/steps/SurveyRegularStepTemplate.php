@@ -144,4 +144,10 @@ class SurveyRegularStepTemplate
         }
     }
 
+    /**
+     * @return string
+     */
+    public function getType(){
+        return SurveyRegularStepTemplate::class;
+    }
 }

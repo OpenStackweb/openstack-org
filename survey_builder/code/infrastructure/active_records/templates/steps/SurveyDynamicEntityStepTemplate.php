@@ -159,4 +159,11 @@ class SurveyDynamicEntityStepTemplate
     protected function onBeforeDelete() {
         parent::onBeforeDelete();
     }
+
+    /**
+     * @return string
+     */
+    public function getType(){
+        return SurveyDynamicEntityStepTemplate::class;
+    }
 }

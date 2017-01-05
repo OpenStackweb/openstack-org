@@ -46,6 +46,7 @@
     "jspdf-plugins": "jsPDF-plugins#*",
     "bowser": "1.4.3",
     "sweetalert2": "4.1.0",
-    "slick-carousel": "~1.6.0"
+    "slick-carousel": "~1.6.0",
+    "clipboard": "^1.5.16"
   }
 }

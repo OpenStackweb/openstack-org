@@ -1,5 +1,5 @@
 <div class="row">
-    <fieldset class="fake">
+    <fieldset class="fake survey_step_form">
         $CurrentStep.Template.Content
         <% if CurrentMember.Password %>
         <% else %>

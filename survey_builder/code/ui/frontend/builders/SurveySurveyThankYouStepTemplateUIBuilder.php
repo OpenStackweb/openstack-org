@@ -12,6 +12,9 @@
  * limitations under the License.
  **/
 
+/**
+ * Class SurveySurveyThankYouStepTemplateUIBuilder
+ */
 class SurveySurveyThankYouStepTemplateUIBuilder
     implements ISurveyStepUIBuilder
 {
@@ -25,7 +28,18 @@ class SurveySurveyThankYouStepTemplateUIBuilder
     public function build(ISurveyStep $step, $action, $form_name ='SurveyStepForm')
     {
         $fields = new FieldList();
-        $form =  new ThankYouStepForm(Controller::curr(), $form_name, $fields, $actions = new FieldList(), $step, $validator = array());
+
+        $form   = new ThankYouStepForm
+        (
+            Controller::curr(),
+            $form_name,
+            $fields,
+            $actions = new FieldList(),
+            $step,
+            $validator = array()
+        );
+
+        $form->disableSecurityToken();
         $form->setAttribute('class','survey_step_form');
         return $form;
     }

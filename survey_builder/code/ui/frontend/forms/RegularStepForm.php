@@ -12,17 +12,12 @@
  * limitations under the License.
  **/
 
-class RegularStepForm extends HoneyPotForm {
+class RegularStepForm extends AbstractStepForm {
 
     /**
      * @var ISurveyRegularStep
      */
-    private $step;
-
-    /**
-     * @var FormAction
-     */
-    protected $default_action;
+    protected $step;
 
     /**
      * @param Controller $controller
@@ -37,15 +32,6 @@ class RegularStepForm extends HoneyPotForm {
         $this->step = $step;
     }
 
-
-    /**
-     * @param $default_action
-     */
-    public function setDefaultAction($default_action)
-    {
-        $this->default_action = $default_action;
-    }
-
     /**
      * @return ISurveyRegularStep
      */
@@ -54,8 +40,4 @@ class RegularStepForm extends HoneyPotForm {
         return $this->step;
     }
 
-    public function defaultAction()
-    {
-       return $this->default_action;
-    }
 }

@@ -1,4 +1,3 @@
-
 .optionset label {
 	position: relative;
 	top: -5px;
@@ -9,10 +8,10 @@ ul.survey-steps {
 	margin: 0px;
 	padding: 0px;
 	width: 100%;
+    margin-left: 5%;
 }
 
 ul.survey-steps li {
-	border: 1px solid #DDDDDD;
 	display: block;
 	float: left;
 	margin: 0px;
@@ -20,24 +19,36 @@ ul.survey-steps li {
 	margin-bottom: 20px;
 }
 
-ul.survey-steps li a {
-	padding: 10px;
-	display: block;
+ul.survey-steps li.current {
+   border-left: 1px solid #D3DEEA;
+   border-right:  2px solid #D3DEEA;
+   border-top: 2px solid #248EC7;
 }
 
+ul.survey-steps li a {
+	display: block;
+    text-transform: uppercase;
+    font-family: OpenSans-Semibold;
+    font-size: 13px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 12px;
+    padding-right: 12px;
+}
 
 ul.survey-steps li a.current {
-	font-weight: bold;
+    background-color: #F3F8FC;
+    color: #2B4D68;
 }
 
 ul.survey-steps li a.future {
-	background-color: #F2F0F4;
-	color: #7E7E7E;
+	background-color: #ffffff;
+    color: #698296;
 }
 
 ul.survey-steps li a.completed {
-    font-weight: bold;
-    background-color: #F2F0F4;
+    background-color: #ffffff;
+    color: #698296;
 }
 
 form hr {
@@ -65,7 +76,6 @@ div.deployment {
 	border: 1px solid #DDDDDD;
 	margin-top: -1px;
 }
-
 
 div.deployment a.deployment-name {
 	display: inline-block;
@@ -99,10 +109,6 @@ div.current-user {
 
 input[type="radio"], input[type="checkbox"] {
    margin-top:0px !important;
-}
-
-label.left{
-    font-weight: normal !important;
 }
 
 .chosen-choices .search-field input{
@@ -308,7 +314,7 @@ input.action, input.action:focus, input.action:active {
     border: none;
     text-shadow: none;
     border-radius: 4px;
-    margin: 10px 0;
+    margin: 10px;
     color: white !important;
     font-weight: 600;
     box-shadow: none;
@@ -498,3 +504,359 @@ table.checkboxset tr td input[type="checkbox"]
     top:4px !important;
 }
 
+i.navigation-icon {
+    padding: 2px 2px;
+    display: inline-block;
+    margin-left: 5px;
+}
+
+i.navigation-icon-current {
+    padding: 1px 2px;
+    background: #248EC7;
+    color: white;
+    border: 1px solid #248EC7;
+    /* oval */
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    -moz-box-shadow: 0px 0px 2px #248EC7;
+    -webkit-box-shadow: 0px 0px 2px #248EC7;
+    box-shadow: 0px 0px 2px #248EC7;
+}
+
+i.navigation-icon-completed {
+    color: #02D04E;
+    font-size: 19px;
+    padding: 0px;
+}
+
+i.navigation-icon-incompleted {
+    color: #DBE0E4;
+    font-size: 19px;
+    padding: 0px;
+}
+
+.survey-container{
+    width: 100%;
+}
+
+.survey-step-container{
+    padding-top: 3%;
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-bottom: 5%;
+    background-color: #F3F8FC;
+}
+
+form.survey_step_form, fieldset.survey_step_form {
+    background-color: #FFFFFF;
+    font-family: OpenSans;
+    font-size: 14px;
+    color: #2A4E68;
+    padding-bottom: 5%;
+}
+
+form.survey_step_form input,
+form.survey_step_form textarea,
+form.survey_step_form select {
+    font-family: OpenSans;
+    font-size: 14px;
+    color: #2A4E68;
+}
+
+form.survey_step_form fieldset{
+    border: none;
+}
+
+form.survey_step_form .default-action-btn{
+    /* btn bkgd: */
+    background: #4CA3EA;
+    border-radius: 4px;
+    /* SAVE & CONTINUE: */
+    font-family: OpenSanss-Semibold;
+    font-size: 11px;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    position: absolute;
+    left: 85.6%;
+    width: 162px;
+    height: 40px;
+}
+
+form.survey_step_form .go-back-action-btn{
+    /* btn bkgd: */
+    background: #E5E5E5;
+    border-radius: 4px;
+    /* GO BACK: */
+    /* GO BACK: */
+    font-family: OpenSans-Semibold;
+    font-size: 11px;
+    color: #565656;
+    text-transform: uppercase;
+    position: absolute;
+    width: 120px;
+    height: 40px;
+    left:1.2%;
+}
+
+
+form.survey_step_form .save-later-action-btn{
+    position: absolute;
+    /* Save & Come Back Lat: */
+    font-family: OpenSans;
+    font-size: 13px;
+    color: #606D77;
+    text-transform: uppercase;
+    text-decoration: underline !important;
+    left: 45%;
+    padding-top: 1.4%;
+}
+
+form.survey_step_form div.Actions{
+    padding-left:0.5%;
+    position: relative;
+}
+
+footer{
+    margin-top: 0;
+}
+
+.survey-top p {
+    text-align: center;
+    font-family: OpenSans;
+    font-size: 18px;
+    color: #606D77;
+}
+
+.modal-header h4.modal-title{
+    /* Save & Come Back Lat: */
+    font-family: OpenSans-Semibold;
+    font-size: 14px;
+    color: #2A4E68;
+}
+
+.modal-body p {
+    /* Your progress has be: */
+    font-family: OpenSans;
+    font-size: 14px;
+    color: #2A4E68;
+}
+
+.modal-body input{
+    /* Rectangle: */
+    background: #FFFFFF;
+    border: 1px solid #A5B2BD;
+    border-radius: 4px;
+    width: 100%;
+    height: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.modal-footer .btn-primary{
+    /* Rectangle: */
+    background: #698296;
+    border-radius: 4px;
+    padding: 10px;
+    text-align: center;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.modal-footer p{
+    text-align: center;
+}
+
+h1.survey-subtitle{
+    /* 2017 OpenStack User: */
+    font-family: OpenSans-Light;
+    font-size: 34px;
+    color: #2B4D68;
+}
+
+a.add-entity-survey-btn{
+    /* Rectangle: */
+    background: #698296;
+    border-radius: 4px;
+    /* ADD A DEPLOYMENT: */
+    font-family: OpenSans-Semibold;
+    font-size: 13px;
+    color: #FFFFFF;
+    width: 207px;
+    height: 48px;
+    text-transform: uppercase;
+    text-align: center;
+    vertical-align: middle;
+    margin-left: 15px;
+    padding: 0px !important;
+    padding-top: 5px !important;
+    position: relative;
+}
+
+a.add-entity-survey-btn i.fa-plus-circle{
+    /* plus-circle - FontAwesome: */
+    font-family: FontAwesome;
+    font-size: 20px;
+    color: #FFFFFF;
+    position: absolute;
+    top: 29%;
+}
+
+h2.entities-surveys-count-title{
+    /* Your deployments (0): */
+    font-family: OpenSans-Semibold;
+    font-size: 14px;
+    color: #2A4E68;
+}
+
+a.edit-entity-survey-btn{
+    /* Edit: */
+    font-family: OpenSans;
+    font-size: 14px;
+    color: #2A4E68;
+}
+
+span.entity-survey-title-row{
+    /* Test Deployment JSUE: */
+    font-family: OpenSans-Bold;
+    font-size: 14px;
+    color: #2A4E68;
+    font-weight: bold;
+}
+
+a.delete-entity-survey-btn{
+    /* Delete: */
+    font-family: OpenSans;
+    font-size: 14px;
+    color: #D0011B;
+}
+
+p.entites-surveys-subtitle{
+    /* You do not have any: */
+    font-family: OpenSans;
+    font-size: 14px;
+    color: #2A4E68;
+}
+
+div.alert-success i.fa-info-circle{
+    /* info-circle - FontAwesome: */
+    font-family: FontAwesome;
+    font-size: 24px;
+    color: #02D04E;
+}
+
+tr.review-row span.step-name{
+    /* Your Organization: */
+    font-family: OpenSans-Bold;
+    font-size: 14px;
+    color: #2A4E68;
+    font-weight: bold;
+    padding-left: 5px;
+}
+
+div.col-icon-info{
+    padding: 0;
+    margin: 0;
+    width: 2%;
+    margin-left: 10px;
+}
+
+div.text-centered{
+    text-align: center;
+}
+
+button.select-team-member-btn{
+    /* Rectangle: */
+    background: #698296;
+    border-radius: 4px;
+    /* ADD: */
+    font-family: OpenSans-Semibold;
+    font-size: 13px;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    position: relative;
+    width: 98px;
+    height: 48px;
+}
+
+button.select-team-member-btn i.fa-plus-circle{
+    /* plus-circle - FontAwesome: */
+    font-family: FontAwesome;
+    font-size: 20px;
+    color: #FFFFFF;
+    position: absolute;
+    top: 28%;
+    margin-left: 5%;
+}
+
+.add-team-member-btn i.fa{
+    font-size: 20px;
+    color: #FFFFFF;
+}
+
+.modal-body input.txt_autocomplete_member{
+    width: 432px;
+    height: 46px;
+    margin-right: 10px;
+}
+
+a.delete-team-member-btn{
+    /* Delete: */
+    font-family: OpenSans;
+    font-size: 14px;
+    color: #D0011B;
+}
+
+#team-members-container{
+    padding-top: 15px;
+}
+
+label.left{
+    /* Which workloads are: */
+    font-family: OpenSans-Semibold;
+    font-size: 14px;
+    color: #2A4E68;
+    font-weight: bold;
+}
+
+div.created-by, div.edited-by {
+    font-family: OpenSans;
+    font-size: 14px;
+    color: #2A4E68;
+}
+
+div.teams-container{
+    position: relative;
+}
+
+div.teams-container i.fa{
+    /* plus-circle - FontAwesome: */
+    font-family: FontAwesome;
+    font-size: 20px;
+    color: #248EC7;
+    position: absolute;
+}
+
+div.teams-container a.add-team-member-btn{
+    /* Add another team mem: */
+    font-family: OpenSans-Bold;
+    font-size: 14px;
+    color: #248EC7;
+    text-decoration: underline;
+    position: absolute;
+    left:3.5%;
+}
+
+div.created-by, div.edited-by, div.teams-container{
+    padding: 0;
+}
+
+span.entity-survey-title-details{
+    /* Deployment details -: */
+    font-family: OpenSans-Semibold;
+    font-size: 14px;
+    color: #2A4E68;
+    font-weight: bold;
+}

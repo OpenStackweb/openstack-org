@@ -20,7 +20,6 @@ class SurveyRegularStep
     implements ISurveyRegularStep
 {
 
-
     static $has_many = array(
         'Answers' => 'SurveyAnswer',
     );
@@ -32,7 +31,6 @@ class SurveyRegularStep
     {
         return AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Answers')->toArray();
     }
-
 
     /**
      * @param ISurveyAnswer $new_answer

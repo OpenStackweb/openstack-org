@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Copyright 2015 OpenStack Foundation
+ * Copyright 2016 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,45 +14,33 @@
  **/
 
 /**
- * Interface ISurveyStep
+ * Class ReviewStepForm
  */
-interface ISurveyStep extends IEntity {
-
-    const CompleteState   = 'COMPLETE';
-    const IncompleteState = 'INCOMPLETE';
-
-    /**
-     * @return ISurveyStepTemplate
-     */
-    public function template();
-
+class ReviewStepForm extends ThankYouStepForm
+{
     /**
      * @return ISurvey
      */
-    public function survey();
+    public function Survey(){
+        return $this->step->survey();
+    }
+
+    public function SurveyStepClassIcon($step_name){
+        return $this->Controller()->SurveyStepClassIcon($step_name);
+    }
+
+
+    public function Link($action){
+        return $this->Controller()->Link($action);
+    }
 
     /**
-     * @return bool
+     * @var array
      */
-    public function canSkip();
+    private static $allowed_actions = array(
+        'Link',
+        'Survey',
+        'SurveyStepClassIcon',
+    );
 
-    /**
-     * @return void
-     */
-    public function clear();
-
-    /**
-     * @return $this
-     */
-    function markComplete();
-
-    /**
-     * @return bool
-     */
-    function isComplete();
-
-    /**
-     * @return $this
-     */
-    public function markIncomplete();
 }

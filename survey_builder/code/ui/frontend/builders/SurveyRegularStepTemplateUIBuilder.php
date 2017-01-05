@@ -15,8 +15,11 @@
 /**
  * Class SurveyRegularStepTemplateUIBuilder
  */
-class SurveyRegularStepTemplateUIBuilder implements ISurveyStepUIBuilder
+class SurveyRegularStepTemplateUIBuilder
+    extends SurveyAbstractStepTemplateUIBuilder
+    implements ISurveyStepUIBuilder
 {
+
     /**
      * @param ISurveyStep $step
      * @param string $action
@@ -38,13 +41,23 @@ class SurveyRegularStepTemplateUIBuilder implements ISurveyStepUIBuilder
 
         if($step->template()->canSkip() && !$step->survey()->isLastStep()){
             $next_step_url = sprintf("%s%s/skip-step",Controller::curr()->Link(), $step->template()->title());
+
             if( $step->survey() instanceof EntitySurvey){
                 $dyn_step_holder = $step->survey()->owner()->template()->title();
-                $id = $step->survey()->getIdentifier();
-                $next_step_url = sprintf("%s%s/edit/%s/skip-step",Controller::curr()->Link(), $dyn_step_holder, $id);
+                $id              = $step->survey()->getIdentifier();
+                $next_step_url   = sprintf("%s%s/edit/%s/skip-step",Controller::curr()->Link(), $dyn_step_holder, $id);
             }
+
             $fields->add(
-                new LiteralField('skip',sprintf('<p><strong>If you do not wish to answer these questions, you may <a href="%s">skip to the next section</a>.</strong></p>', $next_step_url))
+                new LiteralField
+                (
+                    'skip',
+                    sprintf
+                    (
+                        '<p><strong>If you do not wish to answer these questions, you may <a href="%s">skip to the next section</a>.</strong></p>'
+                        , $next_step_url
+                    )
+                )
             );
         }
 
@@ -66,22 +79,16 @@ class SurveyRegularStepTemplateUIBuilder implements ISurveyStepUIBuilder
         $fields->add(new HiddenField('survey_id', 'survey_id', $step->survey()->getIdentifier()));
         $fields->add(new HiddenField('step_id', 'step_id', $step->getIdentifier()));
 
-        $survey = $step->survey();
-        $next_btn_title = 'Next';
-        if($survey->isLastStep()){
-            $next_btn_title = 'Done';
-            if($survey->template() instanceof IEntitySurveyTemplate){
-                $next_btn_title = 'Save '.$survey->template()->getEntityName();
-            }
-        }
-        $actions   = new FieldList
-        (
-            $default_action = FormAction::create($action)->setTitle($next_btn_title)
-        );
+        list($default_action, $actions) = $this->buildActions($action, $step);
 
-        $form =  new RegularStepForm(Controller::curr(), $form_name, $fields, $actions, $step, $validator);
+        $form = $this->buildForm($form_name, $fields, $actions, $step, $validator);
+
         $form->setDefaultAction($default_action);
         $form->setAttribute('class','survey_step_form');
         return $form;
+    }
+
+    protected function buildForm($form_name, $fields, $actions, $step, $validator){
+        return  new RegularStepForm(Controller::curr(), $form_name, $fields, $actions, $step, $validator);
     }
 }

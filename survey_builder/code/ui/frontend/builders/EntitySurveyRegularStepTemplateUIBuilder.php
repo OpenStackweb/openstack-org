@@ -20,79 +20,66 @@ class EntitySurveyRegularStepTemplateUIBuilder extends SurveyRegularStepTemplate
      * @param string $form_name
      * @return Form
      */
-    public function build(ISurveyStep $step, $action, $form_name ='SurveyStepForm')
+    public function build(ISurveyStep $step, $action, $form_name = 'SurveyStepForm')
     {
-        $form = parent::build($step, $action, $form_name);
+
+        if (!$step->survey()->isLastStep())
+            $this->setNextButtonTitle(sprintf('STEP %s', $step->survey()->getCurrentStepIndexNice() + 1));
+
+        $form          = parent::build($step, $action, $form_name);
         $entity_survey = $step->survey();
+
         if
         (
-            $entity_survey instanceof IEntitySurvey
-        )
-        {
-            $fields = $form->Fields();
-            $first  = $fields->first();
+            $entity_survey instanceof IEntitySurvey &&
+            $entity_survey->isTeamEditionAllowed() &&
+            $entity_survey->createdBy()->getIdentifier() === Member::currentUserID() &&
+            $entity_survey->isFirstStep() // only show on first step
+        ) {
 
-            if
-            (
-                $entity_survey->isTeamEditionAllowed() &&
-                $entity_survey->createdBy()->getIdentifier() === Member::currentUserID() &&
-                $entity_survey->isFirstStep() // only show on first step
-            )
-            {
-                $fields->insertBefore
-                (
-                    $team_field = new EntitySurveyEditorTeamField('EditorTeam', '', $entity_survey),
-                    $first->getName()
-                );
-                $team_field->setForm($form);
-                $first = $team_field;
-            }
-
-            $edition_info_panel = '<div class="container editor-info-panel"><div class="row">Created by <b>'.$entity_survey->createdBy()->getEmail().'</b></div>';
-            $edition_info_panel .= '<div class="row">Edited by <b>'.$entity_survey->EditedBy()->getEmail().'</b></div></div>';
-            $fields->insertBefore
-            (
-                new LiteralField('owner_label',$edition_info_panel),
-                $first->getName()
-            );
-
-            $previous_step = $entity_survey->getPreviousStep($step->template()->title());
-
-            if(!is_null($previous_step))
-            {
-                $request = Controller::curr()->getRequest();
-                $step    = $request->param('STEP_SLUG');
-
-                if(empty($step))
-                    $step = $request->requestVar('STEP_SLUG');
-
-                if(empty($step))
-                    throw new LogicException('step empty! - member_id %s', Member::currentUserID());
-
-                $entity_survey_id     = intval($request->param('ENTITY_SURVEY_ID'));
-                $prev_step_url        = Controller::join_links
-                (
-                    Director::absoluteBaseURL(),
-                    Controller::curr()->Link(),
-                    $step,
-                    'edit',
-                    $entity_survey_id,
-                    $previous_step->template()->title()
-                );
-                // add prev button
-                $actions = $form->Actions();
-                $btn = $actions->offsetGet(0);
-                $actions->insertBefore
-                (
-                    $prev_action = new FormAction('PrevStep','Prev Step'),
-                    $btn->name
-                );
-
-                $prev_action->addExtraClass('entity-survey-prev-action');
-                $prev_action->setAttribute('data-prev-url', $prev_step_url);
-            }
-
+            Requirements::javascript('survey_builder/js/entity.survey.editor.team.field.js');
         }
         return $form;
+    }
+
+    /**
+     * @param string $form_name
+     * @param $fields
+     * @param $actions
+     * @param $step
+     * @param $validator
+     * @return EntityRegularStepForm
+     */
+    protected function buildForm($form_name, $fields, $actions, $step, $validator)
+    {
+        return new EntityRegularStepForm(Controller::curr(), $form_name, $fields, $actions, $step, $validator);
+    }
+
+    /**
+     * @param ISurveyStep $previous_step
+     * @return String
+     */
+    protected function getPreviousStepUrl(ISurveyStep $previous_step)
+    {
+        $request = Controller::curr()->getRequest();
+        $step = $request->param('STEP_SLUG');
+
+        if (empty($step))
+            $step = $request->requestVar('STEP_SLUG');
+
+        if (empty($step))
+            throw new LogicException('step empty! - member_id %s', Member::currentUserID());
+
+        $entity_survey_id = intval($request->param('ENTITY_SURVEY_ID'));
+        $prev_step_url = Controller::join_links
+        (
+            Director::absoluteBaseURL(),
+            Controller::curr()->Link(),
+            $step,
+            'edit',
+            $entity_survey_id,
+            $previous_step->template()->title()
+        );
+        return $prev_step_url;
     }
 }
