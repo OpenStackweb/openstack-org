@@ -6,11 +6,5 @@ Fluent:
   default_locale: en_US
   locales:
     - en_US
-    - fr_FR
-    - es_ES
-    - de_DE
-    - th_TH
     - zh_CN
-    - ja_JP
-    - ko_KR
 ---
