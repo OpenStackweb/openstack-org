@@ -94,7 +94,7 @@
           </span>
           <span class="user-story-overlay">
             <p>
-              China Mobile’s telecom network has more than 800 million subscribers and 3 million base stations. They're openstack footprint is already 10,000 nodes with 100,000 cores and growing.
+              China Mobile’s telecom network has more than 800 million subscribers and 3 million base stations. Their openstack footprint is already 10,000 nodes with 100,000 cores and growing.
             </p>
             <span class="user-story-more-btn">Read More</span>
           </span>

@@ -60,68 +60,53 @@
       </div>
     </div>
     <div class="row">
+      <div class="col-sm-4 col-sm-push-3">
+        <div class="summit-user-section">
+          <img src="//www.openstack.org/assets/boston-summit/speakers/Brian-Stevens.jpg" alt="Brian Stevens" class="summit-user-image">
+          <div class="name">Brian Stevens</div>
+          <div class="title">Vice President Cloud Platforms, Google</div>
+        </div>
+      </div>
+      <div class="col-sm-4 col-sm-push-3">
+        <div class="summit-user-section">
+          <img src="//www.openstack.org/assets/boston-summit/speakers/Merce-Crosas.jpg" alt="Mercè Crosas" class="summit-user-image">
+          <div class="name">Mercè Crosas</div>
+          <div class="title">Chief Data Science and Technology Officer at IQSS, Harvard University</div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4 col-sm-push-1">
+        <div class="summit-user-section">
+          <img src="//www.openstack.org/assets/boston-summit/speakers/Suneet.jpg" alt="Suneet Nandwani" class="summit-user-image">
+          <div class="name">Suneet Nandwani</div>
+          <div class="title">Sr. Director, Cloud Infrastructure and Platforms, eBay Inc.</div>
+        </div>
+      </div>
       <div class="col-sm-4 col-sm-push-1">
         <div class="summit-user-section">
           <img src="//www.openstack.org/assets/barcelona-summit/featured-speakers/annilai.jpg" alt="Anni Lai" class="summit-user-image">
           <div class="name">Anni Lai</div>
           <div class="title">Head of Global Business Development, Huawei</div>
-          <div class="description">
+          <!-- <div class="description">
             Encouraging the community to think about taking OpenStack to various industries to solve real world business problems, Anni Lai will present OpenStack share use cases across telecom, government, financial services, media, and automotive. 
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-4 col-sm-push-3">
-        <div class="summit-user-section">
-          <img src="//www.openstack.org/assets/barcelona-summit/featured-speakers/fernandoalvarezgomez.jpg" alt="Fernando Álvarez Gómez" class="summit-user-image">
-          <div class="name">Fernando Álvarez Gómez</div>
-          <div class="title">Cloud Computing Engineer, BBVA</div>
-          <div class="description">
-            BBVA, the second largest bank in Spain, is transforming its OpenStack infrastructure to become fully containerized. Learn how its engineering team is tying together container and VM networks under same networking paradigm. 
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-4 col-sm-push-1">
         <div class="summit-user-section">
-          <img src="//www.openstack.org/assets/barcelona-summit/featured-speakers/meganrossetti.jpg" alt="Megan Rossetti" class="summit-user-image">
-          <div class="name">Megan Rossetti</div>
-          <div class="title">OpenStack Operations, Walmart</div>
-          <div class="description">
-            Open source is a priority in Walmart's approach to new development and embracing new solutions.  Megan Rossetti will share the team's journey as it continues to build a successful open source culture, making it a focused and integral part of day to day planning, operation and execution. 
-          </div>
+          <img src="//www.openstack.org/assets/boston-summit/speakers/Mark-Collier3.jpg" alt="Mark Collier" class="summit-user-image">
+          <div class="name">Mark Collier</div>
+          <div class="title">COO, OpenStack Foundation</div>
         </div>
       </div>
-      <div class="col-sm-4 col-sm-push-3">
-        <div class="summit-user-section">
-          <img src="//www.openstack.org/assets/barcelona-summit/featured-speakers/haoli.jpg" alt="Hao Li" class="summit-user-image">
-          <div class="name">Hao Li</div>
-          <div class="title">Senior Engineer, China Mobile</div>
-          <div class="description">
-            Hao Li will reveal the architecture of the OpenStack cloud at China Mobile and the desicision making process during the planning & deployment.
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
       <div class="col-sm-4 col-sm-push-1">
         <div class="summit-user-section">
-          <img src="//www.openstack.org/assets/barcelona-summit/featured-speakers/guaravgupta.jpg" alt="Gaurav Gupta" class="summit-user-image">
-          <div class="name">Gaurav Gupta</div>
-          <div class="title">VP of Engineering, Snapdeal</div>
-          <div class="description">
-            Gaurav Gupta will present how Snapdeal, India's largest e-commerce marketplace has migrated to a Hybrid cloud built on OpenStack with more than 100,000 cores and a 100G SDN infrastructure.
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-4 col-sm-push-3">
-        <div class="summit-user-section">
-          <img src="//www.openstack.org/assets/barcelona-summit/featured-speakers/sarahnovotny.jpg" alt="Sarah Novotny" class="summit-user-image">
-          <div class="name">Sarah Novotny</div>
-          <div class="title">Program Manager of Kubernetes Community, Google</div>
-          <div class="description">
-            Sarah Novotny will co-present how several OpenStack projects, Magnum and Kuryr leverage containers to more efficiently use resources, deploy faster, and improve overall consistency. 
-          </div>
+          <img src="//www.openstack.org/assets/boston-summit/speakers/Jonathan-Bryce2.jpg" alt="Jonathan Bryce" class="summit-user-image">
+          <div class="name">Jonathan Bryce</div>
+          <div class="title">Executive Director, OpenStack Foundation</div>
         </div>
       </div>
     </div>
