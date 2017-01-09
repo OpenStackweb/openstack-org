@@ -57,7 +57,7 @@ class SummitSponsorPage extends SummitPage
     //sponsor type
     private static $many_many_extraFields = array(
         'Companies' => [
-            'SponsorshipType' => "Enum('Headline, Premier, Event, Startup, InKind, Spotlight, Media', 'Startup')",
+            'SponsorshipType' => "Enum('Headline, Premier, Event, Startup, InKind, Spotlight, Media, Party', 'Startup')",
             'SubmitPageUrl'   => 'Text',
             'SummitID'        => 'Int'
         ],
