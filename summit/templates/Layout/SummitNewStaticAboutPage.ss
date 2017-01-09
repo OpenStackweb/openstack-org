@@ -56,7 +56,7 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-        <h2>Past speakers from OpenStack Summits</h2>
+        <h2>Boston Summit Speakers</h2>
       </div>
     </div>
     <div class="row">
