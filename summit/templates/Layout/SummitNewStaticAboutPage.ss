@@ -60,7 +60,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-4 col-sm-push-3">
+      <div class="col-sm-4 col-sm-push-1">
         <div class="summit-user-section">
           <img src="//www.openstack.org/assets/boston-summit/speakers/Brian-Stevens.jpg" alt="Brian Stevens" class="summit-user-image">
           <div class="name">Brian Stevens</div>
@@ -83,7 +83,7 @@
           <div class="title">Sr. Director, Cloud Infrastructure and Platforms, eBay Inc.</div>
         </div>
       </div>
-      <div class="col-sm-4 col-sm-push-1">
+      <div class="col-sm-4 col-sm-push-3">
         <div class="summit-user-section">
           <img src="//www.openstack.org/assets/barcelona-summit/featured-speakers/annilai.jpg" alt="Anni Lai" class="summit-user-image">
           <div class="name">Anni Lai</div>
@@ -102,7 +102,7 @@
           <div class="title">COO, OpenStack Foundation</div>
         </div>
       </div>
-      <div class="col-sm-4 col-sm-push-1">
+      <div class="col-sm-4 col-sm-push-3">
         <div class="summit-user-section">
           <img src="//www.openstack.org/assets/boston-summit/speakers/Jonathan-Bryce2.jpg" alt="Jonathan Bryce" class="summit-user-image">
           <div class="name">Jonathan Bryce</div>
