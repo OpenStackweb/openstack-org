@@ -6,13 +6,13 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-lg-12">
-            <a href="https://www.openstack.org/summit/barcelona-2016/">
+            <a href="https://www.openstack.org/summit/boston-2017/">
                 <div class="event-ad-lrg"></div>
             </a>
         </div>
-    </div>
+    </div> -->
     <div class="row">
         <div id='upcoming-events-container' class="col-sm-6" style="min-height:500px">
             <div style="float:left;"><h2>Upcoming Events</h2></div>

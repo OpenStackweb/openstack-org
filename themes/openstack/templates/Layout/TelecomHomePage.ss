@@ -221,17 +221,17 @@
                 <div class="col-sm-8">
                     <h3>From the Summit to your browser: Everything you need to know about OpenStack and NFV</h3>
                     <p>
-                        Developers and global telecoms who are actively shaping NFV in the open source community gathered at the Barcelona Summit to discuss use cases, project requirements and next steps.
+                        Developers and global telecoms who are actively shaping NFV in the open source community will gather at the Boston Summit to discuss use cases, project requirements and next steps.
                     </p>
                 </div>
                 <div class="col-sm-4">
                     <div class="nfv-summit-right">
                         <img class="nfv-summit-logo" src="/themes/openstack/static/images/summit-logo-small-white.svg" alt="OpenStack Summit">
                         <div class="nfv-summit-dates">
-                            October 25-28 in Barcelona, Spain
+                            May 8-11, 2017 in Boston
                         </div>
                         <div class="nfv-summit-register-btn">
-                            <a href="//www.openstack.org/summit/barcelona-2016/summit-schedule/#track=77" class="nfv-summit-btn" target="_blank">See NFV Sessions <i class="fa fa-chevron-right"></i></a>
+                            <a href="" class="nfv-summit-btn" target="_blank">NFV Sessions Coming Soon <i class="fa fa-chevron-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -253,7 +253,7 @@
                 <i class="fa fa-file-pdf-o fa-4x"></i>
                 Read Accelerating NFV Delivery with OpenStack, a report created by the OpenStack Foundation in collaboration with ten global communications companies, to learn more about Network Functions Virtualization.
             </p>
-                <a href="http://www.openstack.org/assets/telecoms-and-nfv/OpenStack-Foundation-NFV-Report.pdf" class="download-btn" download="OpenStack-Foundation-NFV-Report.pdf"><i class="fa fa-arrow-circle-down fa-2x"></i> Download the NFV Foundation Report</a>
+                <a href="/assets/telecoms-and-nfv/OpenStack-Foundation-NFV-Report.pdf" class="download-btn" download="OpenStack-Foundation-NFV-Report.pdf"><i class="fa fa-arrow-circle-down fa-2x"></i> Download the NFV Foundation Report</a>
             <hr>
             <p>
 

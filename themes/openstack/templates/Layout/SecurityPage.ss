@@ -253,19 +253,19 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-8">
-                        <h3>Join us in Barcelona to learn more about security in OpenStack</h3>
+                        <h3>Join us in Boston to learn more about security in OpenStack</h3>
                         <p>
-                            Attend the OpenStack Summit in Barcelona to meet the Security Project team and hear directly from enterprise and government users on how they secure their OpenStack clouds.
+                            Attend the OpenStack Summit in Boston to meet the Security Project team and hear directly from enterprise and government users on how they secure their OpenStack clouds.
                         </p>
                     </div>
                     <div class="col-sm-4">
                         <div class="nfv-summit-right">
                             <img class="nfv-summit-logo" src="/themes/openstack/images/summit-logo-small.svg" onerror="this.onerror=null; this.src=/themes/openstack/images/summit-logo-small.png" alt="OpenStack Summit">
                             <div class="nfv-summit-dates">
-                                October 25-28 in Barcelona
+                                May 8-11, 2017 in Boston
                             </div>
                             <div class="nfv-summit-register-btn">
-                                <a href="//openstack.org/summit/barcelona-2016/" class="nfv-summit-btn" target="_blank">Learn More <i class="fa fa-chevron-right"></i></a>
+                                <a href="/summit/boston-2017/" class="nfv-summit-btn" target="_blank">Learn More <i class="fa fa-chevron-right"></i></a>
                             </div>
                         </div>
                     </div>
