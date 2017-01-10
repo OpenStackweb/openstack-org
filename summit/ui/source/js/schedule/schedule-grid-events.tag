@@ -1,4 +1,25 @@
 <schedule-grid-events>
+    <style type="text/css">
+        .modal-body .container {
+            width: auto ;
+        }
+    </style>
+    <div id="eventModal" class="modal fade">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div id="eventModalBody" class="modal-body">
+                    <p>Loading...</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row" id="events-inner-container">
     </div>
     <div class="row" style="display:none;">
@@ -164,28 +185,38 @@
                 var event_id  = $(e.currentTarget).attr('data-event-id');
                 var detail    = $('#event_details_'+event_id);
                 var must_load = !detail.hasClass('loaded');
+
                 if ( detail.is( ":hidden" ) ) {
                     detail.slideDown( "slow" );
                     if(must_load){
                         detail.html('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
-                    var url =  self.parent.base_url+'events/'+ event_id+'/html'
-                    $.ajax({
-                    type: 'GET',
-                    url:  url,
-                    timeout:60000,
-                    //ifModified: true,
-                    //contentType: "application/json; charset=utf-8",
-                    success: function (data, textStatus, jqXHR) {
-                    detail.html(data);
-                    detail.addClass('loaded');
-                    }
-                    }).fail(function (jqXHR, textStatus, errorThrown) {
-                    alert('there was an error, please contact your administrator');
-                    });
+                        var url =  self.parent.base_url+'events/'+ event_id+'/html'
+                            $.ajax({
+                            type: 'GET',
+                            url:  url,
+                            timeout:60000,
+                            cache: false,
+                            success: function (data, textStatus, jqXHR) {
+                                detail.html(data);
+                                detail.addClass('loaded');
+
+                                $(document).off("click", '.btn-go-event').on( "click", '.btn-go-event', function(e) {
+                                    if($(e.target).is('.btn-go-event')){
+                                        e.preventDefault();
+                                        var $this = $(e.target);
+                                        var modal = $('#eventModal');
+                                        $('#eventModalBody').load($this.attr("href"),function(result){
+                                            modal.modal({show:true});
+                                        });
+                                    }
+                                });
+                            }
+                        }).fail(function (jqXHR, textStatus, errorThrown) {
+                            alert('there was an error, please contact your administrator');
+                        });
                     }
                 }
-                else
-                {
+                else {
                     detail.slideUp( "slow" );
                 }
                 e.preventDefault();
@@ -225,7 +256,10 @@
                 return false;
             });
 
+
         });
+
+
 
         addEventCallback(response, event){
             event.gcal_id = response.result.id;

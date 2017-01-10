@@ -48,7 +48,8 @@
     </div>
 
     <script>
-
+        //Fix: boostrap does not support nested modals. Close btn will close all opened modals using regular behavior
+        $('#email-modal').on('click', '[data-dismiss="modal"]', function(e) { e.stopPropagation(); });
         this.share_info   = opts.share_info;
         var self          = this;
 

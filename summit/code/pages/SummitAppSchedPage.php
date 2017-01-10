@@ -179,6 +179,15 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
             Session::set(self::EventShareByEmailCountKey, 0);
         }
 
+        if(Director::is_ajax()) {
+            return $this->renderWith(
+                array('SummitAppEventPage_eventDetails'),
+                array(
+                    'Event'     => $event,
+                    'Token'     => $token
+                ));
+        }
+
         return $this->renderWith(
             array('SummitAppEventPage', 'SummitPage', 'Page'),
             array(
@@ -612,6 +621,7 @@ APP_LINKS;
         if($request->getHeader("Prefer-Html-Meta-Tags")){
             return $this->buildOnlyMetaTagsResponse($this->MetaTags());
         }
+        Requirements::javascript("summit/javascript/schedule/event-detail-page.js");
         Requirements::javascript("summit/javascript/schedule/schedule-page.js");
 
         return $this->getViewer('index')->process($this);

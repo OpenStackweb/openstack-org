@@ -703,6 +703,12 @@ form.all-events-search-form .all-events-search-wrapper i {
     margin-left: 5px !important;
 }
 
+.label-rsvp-full{
+    height: 15px;
+    text-align: center;
+    vertical-align: middle;
+}
+
 .search-field input
 {
     width: 100% !important;
@@ -905,4 +911,10 @@ h2.subtitle {
 
 .col-track{
     padding-right: 0;
+}
+
+
+.row.event-details .label-rsvp-full{
+    position: relative;
+    top: 60%;
 }
