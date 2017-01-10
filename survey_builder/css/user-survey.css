@@ -1,3 +1,174 @@
+/* cyrillic-ext */
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Open Sans'), local('OpenSans'), url(http://fonts.gstatic.com/s/opensans/v13/K88pR3goAWT7BTt32Z01mxJtnKITppOI_IvcXXDNrsc.woff2) format('woff2');
+    unicode-range: U+0460-052F, U+20B4, U+2DE0-2DFF, U+A640-A69F;
+}
+/* cyrillic */
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Open Sans'), local('OpenSans'), url(http://fonts.gstatic.com/s/opensans/v13/RjgO7rYTmqiVp7vzi-Q5URJtnKITppOI_IvcXXDNrsc.woff2) format('woff2');
+    unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Open Sans'), local('OpenSans'), url(http://fonts.gstatic.com/s/opensans/v13/LWCjsQkB6EMdfHrEVqA1KRJtnKITppOI_IvcXXDNrsc.woff2) format('woff2');
+    unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Open Sans'), local('OpenSans'), url(http://fonts.gstatic.com/s/opensans/v13/xozscpT2726on7jbcb_pAhJtnKITppOI_IvcXXDNrsc.woff2) format('woff2');
+    unicode-range: U+0370-03FF;
+}
+/* vietnamese */
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Open Sans'), local('OpenSans'), url(http://fonts.gstatic.com/s/opensans/v13/59ZRklaO5bWGqF5A9baEERJtnKITppOI_IvcXXDNrsc.woff2) format('woff2');
+    unicode-range: U+0102-0103, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Open Sans'), local('OpenSans'), url(http://fonts.gstatic.com/s/opensans/v13/u-WUoqrET9fUeobQW7jkRRJtnKITppOI_IvcXXDNrsc.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Open Sans'), local('OpenSans'), url(http://fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3VtXRa8TVwTICgirnJhmVJw.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+/* cyrillic-ext */
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    src: local('Open Sans Semibold'), local('OpenSans-Semibold'), url(http://fonts.gstatic.com/s/opensans/v13/MTP_ySUJH_bn48VBG8sNSq-j2U0lmluP9RWlSytm3ho.woff2) format('woff2');
+    unicode-range: U+0460-052F, U+20B4, U+2DE0-2DFF, U+A640-A69F;
+}
+/* cyrillic */
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    src: local('Open Sans Semibold'), local('OpenSans-Semibold'), url(http://fonts.gstatic.com/s/opensans/v13/MTP_ySUJH_bn48VBG8sNSpX5f-9o1vgP2EXwfjgl7AY.woff2) format('woff2');
+    unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    src: local('Open Sans Semibold'), local('OpenSans-Semibold'), url(http://fonts.gstatic.com/s/opensans/v13/MTP_ySUJH_bn48VBG8sNShWV49_lSm1NYrwo-zkhivY.woff2) format('woff2');
+    unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    src: local('Open Sans Semibold'), local('OpenSans-Semibold'), url(http://fonts.gstatic.com/s/opensans/v13/MTP_ySUJH_bn48VBG8sNSqaRobkAwv3vxw3jMhVENGA.woff2) format('woff2');
+    unicode-range: U+0370-03FF;
+}
+/* vietnamese */
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    src: local('Open Sans Semibold'), local('OpenSans-Semibold'), url(http://fonts.gstatic.com/s/opensans/v13/MTP_ySUJH_bn48VBG8sNSv8zf_FOSsgRmwsS7Aa9k2w.woff2) format('woff2');
+    unicode-range: U+0102-0103, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    src: local('Open Sans Semibold'), local('OpenSans-Semibold'), url(http://fonts.gstatic.com/s/opensans/v13/MTP_ySUJH_bn48VBG8sNSj0LW-43aMEzIO6XUTLjad8.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    src: local('Open Sans Semibold'), local('OpenSans-Semibold'), url(http://fonts.gstatic.com/s/opensans/v13/MTP_ySUJH_bn48VBG8sNSugdm0LZdjqr5-oayXSOefg.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+/* cyrillic-ext */
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Open Sans Bold'), local('OpenSans-Bold'), url(http://fonts.gstatic.com/s/opensans/v13/k3k702ZOKiLJc3WVjuplzK-j2U0lmluP9RWlSytm3ho.woff2) format('woff2');
+    unicode-range: U+0460-052F, U+20B4, U+2DE0-2DFF, U+A640-A69F;
+}
+/* cyrillic */
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Open Sans Bold'), local('OpenSans-Bold'), url(http://fonts.gstatic.com/s/opensans/v13/k3k702ZOKiLJc3WVjuplzJX5f-9o1vgP2EXwfjgl7AY.woff2) format('woff2');
+    unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Open Sans Bold'), local('OpenSans-Bold'), url(http://fonts.gstatic.com/s/opensans/v13/k3k702ZOKiLJc3WVjuplzBWV49_lSm1NYrwo-zkhivY.woff2) format('woff2');
+    unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Open Sans Bold'), local('OpenSans-Bold'), url(http://fonts.gstatic.com/s/opensans/v13/k3k702ZOKiLJc3WVjuplzKaRobkAwv3vxw3jMhVENGA.woff2) format('woff2');
+    unicode-range: U+0370-03FF;
+}
+/* vietnamese */
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Open Sans Bold'), local('OpenSans-Bold'), url(http://fonts.gstatic.com/s/opensans/v13/k3k702ZOKiLJc3WVjuplzP8zf_FOSsgRmwsS7Aa9k2w.woff2) format('woff2');
+    unicode-range: U+0102-0103, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Open Sans Bold'), local('OpenSans-Bold'), url(http://fonts.gstatic.com/s/opensans/v13/k3k702ZOKiLJc3WVjuplzD0LW-43aMEzIO6XUTLjad8.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Open Sans Bold'), local('OpenSans-Bold'), url(http://fonts.gstatic.com/s/opensans/v13/k3k702ZOKiLJc3WVjuplzOgdm0LZdjqr5-oayXSOefg.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+/* END OF WEB FONTS */
+
+
 .optionset label {
 	position: relative;
 	top: -5px;
@@ -28,7 +199,7 @@ ul.survey-steps li.current {
 ul.survey-steps li a {
 	display: block;
     text-transform: uppercase;
-    font-family: OpenSans-Semibold;
+    font-family: 'Open Sans Semibold', sans-serif;
     font-size: 13px;
     padding-top: 15px;
     padding-bottom: 15px;
@@ -550,7 +721,7 @@ i.navigation-icon-incompleted {
 
 form.survey_step_form, fieldset.survey_step_form {
     background-color: #FFFFFF;
-    font-family: OpenSans;
+    font-family: 'Open Sans', sans-serif;;
     font-size: 14px;
     color: #2A4E68;
     padding-bottom: 5%;
@@ -559,7 +730,7 @@ form.survey_step_form, fieldset.survey_step_form {
 form.survey_step_form input,
 form.survey_step_form textarea,
 form.survey_step_form select {
-    font-family: OpenSans;
+    font-family: 'Open Sans', sans-serif;;
     font-size: 14px;
     color: #2A4E68;
 }
@@ -573,7 +744,7 @@ form.survey_step_form .default-action-btn{
     background: #4CA3EA;
     border-radius: 4px;
     /* SAVE & CONTINUE: */
-    font-family: OpenSanss-Semibold;
+    font-family: 'Open Sans Semibold', sans-serif;
     font-size: 11px;
     color: #FFFFFF;
     text-transform: uppercase;
@@ -589,7 +760,7 @@ form.survey_step_form .go-back-action-btn{
     border-radius: 4px;
     /* GO BACK: */
     /* GO BACK: */
-    font-family: OpenSans-Semibold;
+    font-family: 'Open Sans Semibold', sans-serif;
     font-size: 11px;
     color: #565656;
     text-transform: uppercase;
@@ -603,7 +774,7 @@ form.survey_step_form .go-back-action-btn{
 form.survey_step_form .save-later-action-btn{
     position: absolute;
     /* Save & Come Back Lat: */
-    font-family: OpenSans;
+    font-family: 'Open Sans', sans-serif;
     font-size: 13px;
     color: #606D77;
     text-transform: uppercase;
@@ -623,21 +794,21 @@ footer{
 
 .survey-top p {
     text-align: center;
-    font-family: OpenSans;
+    font-family: 'Open Sans', sans-serif;;
     font-size: 18px;
     color: #606D77;
 }
 
 .modal-header h4.modal-title{
     /* Save & Come Back Lat: */
-    font-family: OpenSans-Semibold;
+    font-family: 'Open Sans Semibold', sans-serif;
     font-size: 14px;
     color: #2A4E68;
 }
 
 .modal-body p {
     /* Your progress has be: */
-    font-family: OpenSans;
+    font-family: 'Open Sans', sans-serif;;
     font-size: 14px;
     color: #2A4E68;
 }
@@ -681,7 +852,7 @@ a.add-entity-survey-btn{
     background: #698296;
     border-radius: 4px;
     /* ADD A DEPLOYMENT: */
-    font-family: OpenSans-Semibold;
+    font-family: 'Open Sans Semibold', sans-serif;
     font-size: 13px;
     color: #FFFFFF;
     width: 207px;
@@ -706,21 +877,21 @@ a.add-entity-survey-btn i.fa-plus-circle{
 
 h2.entities-surveys-count-title{
     /* Your deployments (0): */
-    font-family: OpenSans-Semibold;
+    font-family: 'Open Sans Semibold', sans-serif;
     font-size: 14px;
     color: #2A4E68;
 }
 
 a.edit-entity-survey-btn{
     /* Edit: */
-    font-family: OpenSans;
+    font-family: 'Open Sans', sans-serif;;
     font-size: 14px;
     color: #2A4E68;
 }
 
 span.entity-survey-title-row{
     /* Test Deployment JSUE: */
-    font-family: OpenSans-Bold;
+    font-family: 'Open Sans Bold', sans-serif;
     font-size: 14px;
     color: #2A4E68;
     font-weight: bold;
@@ -728,14 +899,14 @@ span.entity-survey-title-row{
 
 a.delete-entity-survey-btn{
     /* Delete: */
-    font-family: OpenSans;
+    font-family: 'Open Sans', sans-serif;;
     font-size: 14px;
     color: #D0011B;
 }
 
 p.entites-surveys-subtitle{
     /* You do not have any: */
-    font-family: OpenSans;
+    font-family: 'Open Sans', sans-serif;;
     font-size: 14px;
     color: #2A4E68;
 }
@@ -749,7 +920,7 @@ div.alert-success i.fa-info-circle{
 
 tr.review-row span.step-name{
     /* Your Organization: */
-    font-family: OpenSans-Bold;
+    font-family: 'Open Sans Bold', sans-serif;
     font-size: 14px;
     color: #2A4E68;
     font-weight: bold;
@@ -772,7 +943,7 @@ button.select-team-member-btn{
     background: #698296;
     border-radius: 4px;
     /* ADD: */
-    font-family: OpenSans-Semibold;
+    font-family: 'Open Sans Semibold', sans-serif;
     font-size: 13px;
     color: #FFFFFF;
     text-transform: uppercase;
@@ -804,7 +975,7 @@ button.select-team-member-btn i.fa-plus-circle{
 
 a.delete-team-member-btn{
     /* Delete: */
-    font-family: OpenSans;
+    font-family: 'Open Sans', sans-serif;;
     font-size: 14px;
     color: #D0011B;
 }
@@ -815,14 +986,14 @@ a.delete-team-member-btn{
 
 label.left{
     /* Which workloads are: */
-    font-family: OpenSans-Semibold;
+    font-family: 'Open Sans Semibold', sans-serif;
     font-size: 14px;
     color: #2A4E68;
     font-weight: bold;
 }
 
 div.created-by, div.edited-by {
-    font-family: OpenSans;
+    font-family: 'Open Sans', sans-serif;
     font-size: 14px;
     color: #2A4E68;
 }
@@ -841,7 +1012,7 @@ div.teams-container i.fa{
 
 div.teams-container a.add-team-member-btn{
     /* Add another team mem: */
-    font-family: OpenSans-Bold;
+    font-family: 'Open Sans Bold', sans-serif;
     font-size: 14px;
     color: #248EC7;
     text-decoration: underline;
@@ -855,7 +1026,7 @@ div.created-by, div.edited-by, div.teams-container{
 
 span.entity-survey-title-details{
     /* Deployment details -: */
-    font-family: OpenSans-Semibold;
+    font-family: 'Open Sans Semibold', sans-serif;
     font-size: 14px;
     color: #2A4E68;
     font-weight: bold;

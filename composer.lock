@@ -272,12 +272,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/google/google-api-php-client.git",
-                "reference": "85309a3520bb5f53368d43e35fd24f43c9556323"
+                "reference": "107dc7d30fa9c6e5b75ce1200665e4fc3adfba6e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/google/google-api-php-client/zipball/85309a3520bb5f53368d43e35fd24f43c9556323",
-                "reference": "85309a3520bb5f53368d43e35fd24f43c9556323",
+                "url": "https://api.github.com/repos/google/google-api-php-client/zipball/107dc7d30fa9c6e5b75ce1200665e4fc3adfba6e",
+                "reference": "107dc7d30fa9c6e5b75ce1200665e4fc3adfba6e",
                 "shasum": ""
             },
             "require": {
@@ -307,7 +307,7 @@
             "keywords": [
                 "google"
             ],
-            "time": "2016-06-06 21:22:48"
+            "time": "2017-01-09 19:33:08"
         },
         {
             "name": "guzzle/guzzle",
@@ -1601,12 +1601,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "22c2fd4103c7271ddcce21cab30e1919275e239b"
+                "reference": "a7be1238e556929b5a07aa8188d938078e467fab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/22c2fd4103c7271ddcce21cab30e1919275e239b",
-                "reference": "22c2fd4103c7271ddcce21cab30e1919275e239b",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/a7be1238e556929b5a07aa8188d938078e467fab",
+                "reference": "a7be1238e556929b5a07aa8188d938078e467fab",
                 "shasum": ""
             },
             "require": {
@@ -1648,7 +1648,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2017-01-03 13:51:44"
+            "time": "2017-01-09 14:37:34"
         },
         {
             "name": "tractorcow/silverstripe-autocomplete",
@@ -3305,12 +3305,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/class-loader.git",
-                "reference": "2a9462598ccd8660949e8be7e3e68c6209d3d080"
+                "reference": "4d0a33df75d2891bc7c35e84e9faea4c23b001b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/class-loader/zipball/2a9462598ccd8660949e8be7e3e68c6209d3d080",
-                "reference": "2a9462598ccd8660949e8be7e3e68c6209d3d080",
+                "url": "https://api.github.com/repos/symfony/class-loader/zipball/4d0a33df75d2891bc7c35e84e9faea4c23b001b1",
+                "reference": "4d0a33df75d2891bc7c35e84e9faea4c23b001b1",
                 "shasum": ""
             },
             "require": {
@@ -3353,7 +3353,7 @@
             ],
             "description": "Symfony ClassLoader Component",
             "homepage": "https://symfony.com",
-            "time": "2017-01-02 20:33:09"
+            "time": "2017-01-10 14:32:56"
         },
         {
             "name": "symfony/config",
@@ -3361,12 +3361,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
-                "reference": "7cf257ad24791b65bbe8f9d11cc636c19e65ddb6"
+                "reference": "ba3da262813160b4963fb36f573c886592da6acb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/config/zipball/7cf257ad24791b65bbe8f9d11cc636c19e65ddb6",
-                "reference": "7cf257ad24791b65bbe8f9d11cc636c19e65ddb6",
+                "url": "https://api.github.com/repos/symfony/config/zipball/ba3da262813160b4963fb36f573c886592da6acb",
+                "reference": "ba3da262813160b4963fb36f573c886592da6acb",
                 "shasum": ""
             },
             "require": {
@@ -3409,7 +3409,7 @@
             ],
             "description": "Symfony Config Component",
             "homepage": "https://symfony.com",
-            "time": "2017-01-02 20:33:09"
+            "time": "2017-01-09 21:03:44"
         },
         {
             "name": "symfony/console",
@@ -3417,12 +3417,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "18dd041936548b966572b55758cdb3ab32642b43"
+                "reference": "fddd0c5c7c9c3126c7e1f7ce7c851439a7e586b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/18dd041936548b966572b55758cdb3ab32642b43",
-                "reference": "18dd041936548b966572b55758cdb3ab32642b43",
+                "url": "https://api.github.com/repos/symfony/console/zipball/fddd0c5c7c9c3126c7e1f7ce7c851439a7e586b1",
+                "reference": "fddd0c5c7c9c3126c7e1f7ce7c851439a7e586b1",
                 "shasum": ""
             },
             "require": {
@@ -3472,7 +3472,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2017-01-05 17:48:24"
+            "time": "2017-01-08 21:15:04"
         },
         {
             "name": "symfony/css-selector",
@@ -3590,12 +3590,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dependency-injection.git",
-                "reference": "7adf35c31c5cb573f5dba8f62d304e1b1d1338e4"
+                "reference": "b25451c5e0aeb4227efde89d47b81c4be2d77ab0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/7adf35c31c5cb573f5dba8f62d304e1b1d1338e4",
-                "reference": "7adf35c31c5cb573f5dba8f62d304e1b1d1338e4",
+                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/b25451c5e0aeb4227efde89d47b81c4be2d77ab0",
+                "reference": "b25451c5e0aeb4227efde89d47b81c4be2d77ab0",
                 "shasum": ""
             },
             "require": {
@@ -3645,7 +3645,7 @@
             ],
             "description": "Symfony DependencyInjection Component",
             "homepage": "https://symfony.com",
-            "time": "2017-01-04 19:58:57"
+            "time": "2017-01-10 15:50:45"
         },
         {
             "name": "symfony/dom-crawler",
@@ -3709,12 +3709,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "e65abd3727704d5b5497a4263d0dbdab0754e562"
+                "reference": "b2de62936fea037d501159f52b7b6172cc962282"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/e65abd3727704d5b5497a4263d0dbdab0754e562",
-                "reference": "e65abd3727704d5b5497a4263d0dbdab0754e562",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/b2de62936fea037d501159f52b7b6172cc962282",
+                "reference": "b2de62936fea037d501159f52b7b6172cc962282",
                 "shasum": ""
             },
             "require": {
@@ -3750,7 +3750,7 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
-            "time": "2017-01-02 20:33:09"
+            "time": "2017-01-08 21:15:04"
         },
         {
             "name": "symfony/polyfill-mbstring",
