@@ -39,7 +39,7 @@
 			<div class="col-lg-9 col-md-8 col-sm-8">
         <h1>
           Who Should Attend?
-        </h1><a name="who-should-attend" />
+        </h1><a name="who-should-attend"></a>
         <div class="who-section-wrapper">
           <div class="row">
             <div class="col-sm-6 col-md-6 col-lg-4">
