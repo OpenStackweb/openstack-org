@@ -40,7 +40,7 @@
                 <a href="/summit/boston-2017/" class="single-summit current-summit">
                     <h3>$DateLabel</h3>
                     <h2>$Title</h2>
-                    <div class="btn register-btn-lrg skinny">COMING SOON</div>
+                    <div class="btn register-btn-lrg skinny">JOIN US</div>
                 </a>
                 <div class="single-summit-date current">
                     $DateLabel

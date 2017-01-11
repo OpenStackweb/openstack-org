@@ -4,8 +4,13 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "hash": "17cbb8c20af4a57e875250aea903eb1b",
     "content-hash": "177adac2b9c0a7d4a3f73f5999ded647",
+=======
+    "hash": "c3efd7adf7ec88cd3a2cb289de4d9e5c",
+    "content-hash": "a64ee726f96effef440771eef1a70e5e",
+>>>>>>> hotfix/logo-updates
     "packages": [
         {
             "name": "composer/installers",
@@ -815,6 +820,62 @@
             "time": "2016-09-30 19:50:50"
         },
         {
+<<<<<<< HEAD
+=======
+            "name": "parse/php-sdk",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ParsePlatform/parse-php-sdk.git",
+                "reference": "08505c5f104c5f7b6ed7dea2320be3b318cd5ae7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ParsePlatform/parse-php-sdk/zipball/08505c5f104c5f7b6ed7dea2320be3b318cd5ae7",
+                "reference": "08505c5f104c5f7b6ed7dea2320be3b318cd5ae7",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpdocumentor/phpdocumentor": "~2.5",
+                "phpunit/phpunit": "~4.0",
+                "squizlabs/php_codesniffer": "~1.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Parse\\": "src/Parse/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Parse Platform License"
+            ],
+            "authors": [
+                {
+                    "name": "Parse",
+                    "homepage": "https://github.com/parseplatform/parse-php-sdk/contributors"
+                }
+            ],
+            "description": "Parse PHP SDK",
+            "homepage": "https://github.com/parseplatform/parse-php-sdk",
+            "keywords": [
+                "parse",
+                "sdk"
+            ],
+            "time": "2017-01-09 00:13:16"
+        },
+        {
+>>>>>>> hotfix/logo-updates
             "name": "phpoffice/phpexcel",
             "version": "dev-master",
             "source": {
@@ -1816,16 +1877,16 @@
         },
         {
             "name": "unclecheese/betterbuttons",
-            "version": "1.3.11",
+            "version": "1.3.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/unclecheese/silverstripe-gridfield-betterbuttons.git",
-                "reference": "a703795fce8d4d50400c9ac2b82601fde1b67074"
+                "reference": "04ff8bf7928a94626a7eefff3efacd0baa53d8b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/unclecheese/silverstripe-gridfield-betterbuttons/zipball/a703795fce8d4d50400c9ac2b82601fde1b67074",
-                "reference": "a703795fce8d4d50400c9ac2b82601fde1b67074",
+                "url": "https://api.github.com/repos/unclecheese/silverstripe-gridfield-betterbuttons/zipball/04ff8bf7928a94626a7eefff3efacd0baa53d8b5",
+                "reference": "04ff8bf7928a94626a7eefff3efacd0baa53d8b5",
                 "shasum": ""
             },
             "require": {
@@ -1848,7 +1909,7 @@
                 "gridfield",
                 "silverstripe"
             ],
-            "time": "2016-09-16 00:03:03"
+            "time": "2017-01-10 20:47:57"
         },
         {
             "name": "unclecheese/bootstrap-forms",
