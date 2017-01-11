@@ -330,7 +330,7 @@
     </div>
 
     <!-- Summit Promo -->
-    <div class="summit-promo containers" style="background: url(/summit/images/boston/boston-promo-bkgd.jpg)">
+    <div class="summit-promo containers" style="background: url(/assets/boston-summit/promo/OS-Boston-WebBanners-Red-Stamp-Theater-1300x576.jpg)">
         <div class="container">
             <div class="row">
                 <div class="col-sm-8">

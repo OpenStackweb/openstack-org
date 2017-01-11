@@ -219,7 +219,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-8">
-                    <h3>From the Summit to your browser: Everything you need to know about OpenStack and NFV</h3>
+                    <h3>Everything you need to know about OpenStack and NFV</h3>
                     <p>
                         Developers and global telecoms who are actively shaping NFV in the open source community will gather at the Boston Summit to discuss use cases, project requirements and next steps.
                     </p>

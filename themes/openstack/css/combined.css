@@ -1574,7 +1574,7 @@ a.featured-link:hover {
   max-height: 113px;
   max-width: 1140px;
   margin-bottom: 20px;
-  background-image: url('/summit/images/barcelona-banner-events.jpg');
+  background-image: url('/assets/boston-summit/promo/08676F71-479C-47A9-A2D2-59FE4659326D.jpeg');
   background-repeat: no-repeat;
   background-size: 100% auto;
   background-position: center center;
@@ -1584,7 +1584,7 @@ a.featured-link:hover {
 @media (max-width: 767px) {
   .event-ad-lrg {
     max-width: 767px;
-    background-image: url('/summit/images/barcelona-banner-events-small.jpg');
+    background-image: url('/assets/boston-summit/promo/0E430DD4-0DEB-4900-AEE2-D909F2BF87EC.jpeg');
     background-repeat: no-repeat;
     background-size: 100% auto;
     background-position: center center; } }

@@ -242,19 +242,19 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-8">
-                    <h3>From the Summit to your browser: Everything you need to know about containers and OpenStack</h3>
+                    <h3>Find everything you need to know about containers and OpenStack in Boston</h3>
                     <p>
-                        At the Barcelona Summit, there were dozens of sessions covering the latest updates around containers, including use cases as well as OpenStack project updates from Magnum, Kuryr and Murano.
+                        Developers and users from the OpenStack, Kubernetes and Docker communities will gather at the Boston Summit to discuss use cases, software roadmap updates as well as OpenStack project updates from Magnum, Kuryr, Kolla and Murano.
                     </p>
                 </div>
                 <div class="col-sm-4">
                     <div class="containers-summit-right">
                         <img class="containers-summit-logo" src="/themes/openstack/static/images/summit-logo-small-white.svg" alt="OpenStack Summit">
                         <div class="containers-summit-dates">
-                            October 25-28 in Barcelona, Spain
+                            May 8-11, Boston
                         </div>
                         <div class="containers-summit-register-btn">
-                            <a href="//www.openstack.org/summit/barcelona-2016/summit-schedule/#track=81" class="nfv-summit-btn" target="_blank">View Container Sessions <i class="fa fa-chevron-right"></i></a>
+                            <a href="/summit/boston-2017/" class="nfv-summit-btn" target="_blank">Join Us <i class="fa fa-chevron-right"></i></a>
                         </div>
                     </div>
                 </div>
