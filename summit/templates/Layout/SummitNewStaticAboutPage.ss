@@ -74,7 +74,7 @@
             </div>
           </div>
         </div>
-        <p>Join attendees from over 60 countries and ADD SOME RELEVANT TEXT HERE.</p>
+        <p>Join attendees from over 60 countries to enhance your knowledge of OpenStack and get more involved with the community.</p>
         <a class="who-section-cta" href="//www.openstack.org/summit/boston-2017/summit-categories">Learn more about the content planned for the OpenStack Summit Boston</a>
 			</div>
 		<div class="col-lg-3 col-md-4 col-sm-4" style="margin-top:30px;">
