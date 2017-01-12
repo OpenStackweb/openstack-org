@@ -23,7 +23,7 @@
                     <div class="events-wrapper">
                         <div class="row">
                             <div class="col-lg-12 col-sm-12">
-                                <h2>You Can Also Find Us At Our Upcoming Enterprise Events</h2>
+                                <h2>You Can Also Find Us At Our Upcoming Summits</h2>
                             </div>
                         </div>
                         <div class="row events">
