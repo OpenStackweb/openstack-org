@@ -3,20 +3,20 @@
         <ul class="secondary-nav-list">
             <li>
                 <a href="#who-should-attend">
-                    <i class="fa fa-map-marker"></i>
+                    <i class="fa fa-check-circle"></i>
                     Who Should Attend
                 </a>
             </li>
             <li>
                 <a href="#featured-speakers">
-                    <i class="fa fa-h-square"></i>
+                    <i class="fa fa-microphone"></i>
                     Featured Speakers
                 </a>
             </li>
             
                 <li>
                     <a href="#openstackacademy">
-                        <i class="fa fa-globe"></i>
+                        <i class="fa fa-graduation-cap"></i>
                         OpenStack Academy
                     </a>
                 </li>
@@ -24,7 +24,7 @@
             
             <li>
                 <a href="#forum">
-                    <i class="fa fa-plane"></i>
+                    <i class="fa fa-flask"></i>
                     The Forum
                 </a>
             </li>
@@ -75,14 +75,14 @@
           </div>
         </div>
         <p>Join attendees from over 60 countries to enhance your knowledge of OpenStack and get more involved with the community.</p>
-        <a class="who-section-cta" href="//www.openstack.org/summit/boston-2017/summit-categories">Learn more about the content planned for the OpenStack Summit Boston</a>
+        <a class="who-section-cta" href="/summit/boston-2017/summit-categories">Learn more about the content planned for the OpenStack Summit Boston</a>
 			</div>
 		<div class="col-lg-3 col-md-4 col-sm-4" style="margin-top:30px;">
       <ul class="help-me-menu">
         <li><a href="http://openstackfoundation.formstack.com/forms/boston_summit_discounted_registration"><i class="fa fa-bicycle"></i>Apply for a student discount</a></li>
-        <li><a href="//www.openstack.org/summit/boston-2017/travel/#hotels"><i class="fa fa-hotel"></i>Book your hotel</a></li>
-        <li><a href="//www.openstack.org/summit/boston-2017/travel/#travel-support"><i class="fa fa-users"></i>Apply for travel support</a></li>
-        <li><a href="//www.openstack.org/summit/boston-2017/travel/#visa"><i class="fa fa-globe"></i>Get your visa</a></li>
+        <li><a href="/summit/boston-2017/travel/#hotels"><i class="fa fa-hotel"></i>Book your hotel</a></li>
+        <li><a href="/summit/boston-2017/travel/#travel-support"><i class="fa fa-users"></i>Apply for travel support</a></li>
+        <li><a href="/summit/boston-2017/travel/#visa"><i class="fa fa-globe"></i>Get your visa</a></li>
       </ul>
 		</div>
 		</div>
@@ -98,14 +98,14 @@
     <div class="row">
       <div class="col-sm-4 col-sm-push-1">
         <div class="summit-user-section">
-          <img src="//www.openstack.org/assets/boston-summit/speakers/Brian-Stevens.jpg" alt="Brian Stevens" class="summit-user-image">
+          <img src="/assets/boston-summit/speakers/Brian-Stevens.jpg" alt="Brian Stevens" class="summit-user-image">
           <div class="name">Brian Stevens</div>
           <div class="title">Vice President Cloud Platforms, Google</div>
         </div>
       </div>
       <div class="col-sm-4 col-sm-push-3">
         <div class="summit-user-section">
-          <img src="//www.openstack.org/assets/boston-summit/speakers/Merce-Crosas.jpg" alt="Mercè Crosas" class="summit-user-image">
+          <img src="/assets/boston-summit/speakers/Merce-Crosas.jpg" alt="Mercè Crosas" class="summit-user-image">
           <div class="name">Mercè Crosas</div>
           <div class="title">Chief Data Science and Technology Officer at IQSS, Harvard University</div>
         </div>
@@ -114,14 +114,14 @@
     <div class="row">
       <div class="col-sm-4 col-sm-push-1">
         <div class="summit-user-section">
-          <img src="//www.openstack.org/assets/boston-summit/speakers/Suneet.jpg" alt="Suneet Nandwani" class="summit-user-image">
+          <img src="/assets/boston-summit/speakers/Suneet.jpg" alt="Suneet Nandwani" class="summit-user-image">
           <div class="name">Suneet Nandwani</div>
           <div class="title">Sr. Director, Cloud Infrastructure and Platforms, eBay Inc.</div>
         </div>
       </div>
       <div class="col-sm-4 col-sm-push-3">
         <div class="summit-user-section">
-          <img src="//www.openstack.org/assets/barcelona-summit/featured-speakers/annilai.jpg" alt="Anni Lai" class="summit-user-image">
+          <img src="/assets/barcelona-summit/featured-speakers/annilai.jpg" alt="Anni Lai" class="summit-user-image">
           <div class="name">Anni Lai</div>
           <div class="title">Head of Global Business Development, Huawei</div>
           <!-- <div class="description">
@@ -133,14 +133,14 @@
     <div class="row">
       <div class="col-sm-4 col-sm-push-1">
         <div class="summit-user-section">
-          <img src="//www.openstack.org/assets/Uploads/malini.jpg" alt="Malini Bhandaru" class="summit-user-image">
+          <img src="/assets/Uploads/malini.jpg" alt="Malini Bhandaru" class="summit-user-image">
           <div class="name">Malini Bhandaru</div>
           <div class="title">Principal engineer, cloud architect, Intel</div>
         </div>
       </div>
       <div class="col-sm-4 col-sm-push-3">
         <div class="summit-user-section">
-          <img src="//www.openstack.org/assets/profile-images/Boris-Picture2.jpg" alt="Mark Collier" class="summit-user-image">
+          <img src="/assets/profile-images/Boris-Picture2.jpg" alt="Mark Collier" class="summit-user-image">
           <div class="name">Boris Renski</div>
           <div class="title">Co-Founder and CMO, Mirantis</div>
         </div>
@@ -202,7 +202,7 @@
     </div>
     <div class="row">
       <div class="col-sm-12">
-        <a href="https://www.openstack.org/summit/barcelona-2016/openstack-academy/" class="btn academy-cta">Read more about OpenStack Academy</a>
+        <a href="/summit/boston-2017/openstack-academy/" class="btn academy-cta">Read more about OpenStack Academy</a>
       </div>
     </div>
     <div class="row" id="forum">
