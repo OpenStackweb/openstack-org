@@ -41,9 +41,9 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
     private $eventbriteattendee_repository;
 
     /**
-     * @var ISummitService
+     * @var ISummitAttendeeManager
      */
-    private $summit_service;
+    private $attendee_manager;
 
     public function __construct
     (
@@ -52,7 +52,7 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
         ISummitAttendeeRepository $summitattendee_repository,
         ISummitPresentationRepository $summitpresentation_repository,
         IEventbriteAttendeeRepository $eventbriteattendee_repository,
-        ISummitService $summit_service
+        ISummitAttendeeManager $attendee_manager
     )
     {
         parent::__construct();
@@ -61,7 +61,7 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
         $this->summitattendee_repository     = $summitattendee_repository;
         $this->summitpresentation_repository = $summitpresentation_repository;
         $this->eventbriteattendee_repository = $eventbriteattendee_repository;
-        $this->summit_service                = $summit_service;
+        $this->attendee_manager               = $attendee_manager;
     }
 
 
@@ -165,7 +165,7 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
             $attendee_data = $this->getJsonRequest();
             $summit = $this->summit_repository->getById($summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
-            $this->summit_service->addAttendee($summit, $attendee_data);
+            $this->attendee_manager->addAttendee($summit, $attendee_data);
             return $this->ok();
         }
         catch(EntityValidationException $ex1)
@@ -196,7 +196,7 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
             $attendee_data['id'] = $attendee_id;
             $summit = $this->summit_repository->getById($summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
-            $this->summit_service->updateAttendee($summit, $attendee_data);
+            $this->attendee_manager->updateAttendee($summit, $attendee_data);
             return $this->updated();
         }
         catch(EntityValidationException $ex1)
@@ -254,7 +254,7 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
 
             $summit = $this->summit_repository->getById($summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
-            $this->summit_service->reassignTicket($summit, $ticket_id, $ticket_data['member']);
+            $this->attendee_manager->reassignTicket($summit, $ticket_id, $ticket_data['member']);
             return $this->ok();
         }
         catch(EntityValidationException $ex1)
@@ -323,7 +323,7 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
             $summit = $this->summit_repository->getById($summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
 
-            $this->summit_service->reassignTicket($summit, $ticket_id, null);
+            $this->attendee_manager->reassignTicket($summit, $ticket_id, null);
             return $this->ok();
         }
         catch(EntityValidationException $ex1)
@@ -355,7 +355,7 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
             $summit = $this->summit_repository->getById($summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
 
-            $this->summit_service->addAttendeeTicket($summit, $attendee_id, $ticket_data);
+            $this->attendee_manager->addAttendeeTicket($summit, $attendee_id, $ticket_data);
             return $this->ok();
         }
         catch(EntityValidationException $ex1)
@@ -487,7 +487,7 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
             $summit       = $this->summit_repository->getById($summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
 
-            $attendee = $this->summit_service->matchEventbriteAttendee($summit, $eb_attendee_id, $member_id);
+            $attendee = $this->attendee_manager->matchEventbriteAttendee($summit, $eb_attendee_id, $member_id);
 
             return $this->ok($attendee->ID);
         }

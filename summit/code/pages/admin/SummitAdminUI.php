@@ -199,9 +199,9 @@ final class SummitAdminUI extends DataExtension
             (
                 array
                 (
-                    'SummitVenue' => 'Venue',
-                    'SummitHotel' => 'Hotel',
-                    'SummitAirport' => 'Airport',
+                    'SummitVenue'            => 'Venue',
+                    'SummitHotel'            => 'Hotel',
+                    'SummitAirport'          => 'Airport',
                     'SummitExternalLocation' => 'External Location',
                 )
             );
@@ -212,8 +212,21 @@ final class SummitAdminUI extends DataExtension
             $f->addFieldToTab('Root.Locations', $gridField);
 
             // event types
-            $config = GridFieldConfig_RecordEditor::create();
+            $config = GridFieldConfig_RecordEditor::create(100);
+            $config->removeComponentsByType('GridFieldAddNewButton');
             $config->addComponent(new GridFieldAddDefaultEventTypes);
+            $multi_class_selector = new GridFieldAddNewMultiClass();
+
+            $multi_class_selector->setClasses
+            (
+                array
+                (
+                    'SummitEventType' => 'Event Type',
+                    'PresentationType' => 'Presentation Type',
+                )
+            );
+
+            $config->addComponent($multi_class_selector);
             $gridField = new GridField('EventTypes', 'EventTypes', $this->owner->EventTypes(), $config);
             $f->addFieldToTab('Root.EventTypes', $gridField);
 
@@ -261,7 +274,7 @@ final class SummitAdminUI extends DataExtension
             $gridField = new GridField('Attendees', 'Attendees', $this->owner->Attendees(), $config);
             $f->addFieldToTab('Root.Attendees', $gridField);
 
-            //tickets types
+            // tickets types
 
             $config = GridFieldConfig_RecordEditor::create(25);
             $gridField = new GridField('SummitTicketTypes', 'Ticket Types', $this->owner->SummitTicketTypes(), $config);
@@ -326,7 +339,7 @@ final class SummitAdminUI extends DataExtension
 
             $f->addFieldToTab('Root.PushNotifications', $gridField);
 
-            //entity events
+            // entity events
 
             $config = GridFieldConfig_RecordEditor::create(25);
             $config->addComponent(new GridFieldAjaxRefresh(1000, false));

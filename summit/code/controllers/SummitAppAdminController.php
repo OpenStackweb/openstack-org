@@ -433,9 +433,9 @@ final class SummitAppAdminController extends Controller implements PermissionPro
     public function editEvent(SS_HTTPRequest $request)
     {
         $summit_id = intval($request->param('SummitID'));
-        $summit = Summit::get()->byID($summit_id);
-        $event_id = intval($request->param('EventID'));
-        $event = ($event_id == 0) ? null : SummitEvent::get()->byID($event_id);
+        $summit    = Summit::get()->byID($summit_id);
+        $event_id  = intval($request->param('EventID'));
+        $event     = ($event_id == 0) ? null : SummitEvent::get()->byID($event_id);
 
         Requirements::css('summit/css/simple-sidebar.css');
         Requirements::css('themes/openstack/bower_assets/chosen/chosen.min.css');

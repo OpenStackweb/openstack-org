@@ -80,7 +80,7 @@ Injector:
       2: '%$SummitAttendeeRepository'
       3: '%$PresentationRepository'
       4: '%$EventbriteAttendeeRepository'
-      5: '%$SummitService'
+      5: '%$SummitAttendeeManager'
   SummitAppReportsApi:
       constructor:
         0: '%$SummitRepository'
@@ -90,7 +90,7 @@ Injector:
         4: '%$EventRepository'
         5: '%$CategoryRepository'
         6: '%$PresentationRepository'
-        7: '%$SummitService'
+        7: '%$SummitEventManager'
   SummitAppReportsExportApi:
     constructor:
       0: '%$SummitRepository'
@@ -100,14 +100,14 @@ Injector:
       4: '%$EventRepository'
       5: '%$CategoryRepository'
       6: '%$PresentationRepository'
-      7: '%$SummitService'
+      7: '%$SummitEventManager'
   SummitAppEventsApi:
     constructor:
       0: '%$SummitRepository'
       1: '%$EventRepository'
       2: '%$SummitAttendeeRepository'
       3: '%$PresentationRepository'
-      4: '%$SummitService'
+      4: '%$SummitEventManager'
   SummitAppLocationsApi:
     constructor:
       0: '%$SummitRepository'
@@ -115,12 +115,12 @@ Injector:
     constructor:
       0: '%$SummitRepository'
       1: '%$PromoCodeRepository'
-      2: '%$SummitService'
+      2: '%$SummitPromoCodeManager'
   SummitAppSpeakersApi:
     constructor:
       0: '%$SummitRepository'
       1: '%$SpeakerRepository'
-      2: '%$SummitService'
+      2: '%$SpeakerManager'
   BatchTaskRepository:
     class: SapphireBatchTaskRepository
   BatchTaskFactory:
@@ -167,11 +167,11 @@ Injector:
   EventbriteAttendeeRepository:
     class: SapphireEventbriteAttendeeRepository
   SummitAssistanceRepository:
-      class: SapphireSummitAssistanceRepository
+    class: SapphireSummitAssistanceRepository
   SummitReportRepository:
-        class: SapphireSummitReportRepository
+    class: SapphireSummitReportRepository
   PromoCodeRepository:
-        class: SapphireSummitRegistrationPromoCodeRepository
+    class: SapphireSummitRegistrationPromoCodeRepository
   EventbriteEventManager:
     constructor:
       0: '%$EventbriteEventRepository'
@@ -182,18 +182,14 @@ Injector:
       5: '%$SummitAttendeeRepository'
       6: '%$SummitRepository'
       7: '%$TransactionManager'
-  SummitService:
+  SummitEventManager:
     constructor:
       0: '%$SummitRepository'
       1: '%$EventRepository'
-      2: '%$SummitAttendeeRepository'
-      3: '%$SummitAssistanceRepository'
-      4: '%$SpeakerRepository'
-      5: '%$MemberRepository'
-      6: '%$SummitReportRepository'
-      7: '%$PromoCodeRepository'
-      8: '%$SpeakerRegistrationRequestManager'
-      9: '%$TransactionManager'
+      2: '%$SpeakerRepository'
+      3: '%$MemberRepository'
+      4: '%$SummitReportRepository'
+      5: '%$TransactionManager'
   PresentationManager:
     constructor:
       0: '%$SummitRepository'
@@ -208,7 +204,8 @@ Injector:
       0: '%$SummitRepository'
       1: '%$SpeakerRepository'
       2: '%$MemberRepository'
-      3: '%$TransactionManager'
+      3: '%$SpeakerRegistrationRequestManager'
+      4: '%$TransactionManager'
   TCPCloudRestApi:
     class: TCPCloudRestApi
   SummitVenueRoomMetricsManager:
@@ -216,5 +213,16 @@ Injector:
       0: '%$SummitRepository'
       1: '%$TCPCloudRestApi'
       2: '%$TransactionManager'
+  SummitPromoCodeManager:
+   constructor:
+      0: '%$PromoCodeRepository'
+      1: '%$TransactionManager'
+  SummitAttendeeManager:
+    constructor:
+      0: '%$SummitAttendeeRepository'
+      1: '%$MemberRepository'
+      2: '%$EventbriteAttendeeRepository'
+      3: '%$TransactionManager'
+
 
 

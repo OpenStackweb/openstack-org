@@ -58,15 +58,7 @@ class PresentationType extends SummitEventType
 
     public function getCMSFields() {
         $fields = parent::getCMSFields();
-        $allowed_types = new DropdownField('Type', 'Type',
-            [
-                IPresentationType::Presentation  => IPresentationType::Presentation ,
-                IPresentationType::Keynotes      => IPresentationType::Keynotes ,
-                IPresentationType::Panel         => IPresentationType::Panel,
-                IPresentationType::LightingTalks => IPresentationType::LightingTalks ,
-            ]
-        );
-        $fields->replaceField('Type', $allowed_types );
+
         $fields->add(new CheckboxField("ShouldBeAvailableOnCFP","Should be available on CFP ?"));
 
         $fields->add(new CheckboxField("UseSpeakers","Should use Speakers?"));
@@ -105,12 +97,7 @@ class PresentationType extends SummitEventType
      */
     public static function IsPresentationEventType($type){
 
-        return in_array($type,
-            [IPresentationType::Presentation ,
-                IPresentationType::Keynotes,
-                IPresentationType::Panel,
-                IPresentationType::LightingTalks
-            ]);
+        return PresentationType::get()->filter('Type', $type)->count() > 0;
     }
 
 }

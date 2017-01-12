@@ -92,19 +92,17 @@
                         <select class="form-control" id="event_type" name="event_type">
                             <option value="">-- Select a Type --</option>
                             <% loop Summit.EventTypes() %>
-                                <% if $Top.Event %>
-                                    <% if $Top.Event.isPresentation() %>
-                                        <% if $Top.IsPresentationEventType($Type) %>
-                                            <option value="$ID" <% if $Top.Event.Type.ID == $ID %>selected<% end_if %> >$Type</option>
-                                        <% end_if %>
-                                    <% else %>
-                                        <% if  $Top.IsSummitEventType($Type) %>
-                                            <option value="$ID" <% if $Top.Event.Type.ID == $ID %>selected<% end_if %> >$Type</option>
-                                        <% end_if %>
-                                    <% end_if %>
-                                <% else %>
-                                    <option value="$ID" >$Type</option>
-                                <% end_if %>
+                                    <option data-use-sponsors="$UseSponsors"
+                                            data-sponsors-mandatory="$AreSponsorsMandatory"
+                                            data-type="<% if $Top.IsPresentationEventType($Type) %>1<% else %>0<% end_if %>"
+                                            <% if $Top.IsPresentationEventType($Type) %>
+                                            data-use-speakers="$UseSpeakers"
+                                            data-speakers-mandatory="$AreSpeakersMandatory"
+                                            data-use-moderator="$UseModerator"
+                                            data-moderator-mandatory="$IsModeratorMandatory"
+                                            data-moderator-label="<%if $ModeratorLabel != '' %>$ModeratorLabel<% else %>Moderator<% end_if %>"
+                                            <% end_if %>
+                                            value="$ID" >$Type</option>
                             <% end_loop %>
                         </select>
                     </div>
@@ -175,7 +173,7 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group sponsors-container" style="display:none;">
                 <div class="row">
                     <div class="col-md-12">
                         <label for="sponsors">Sponsors</label><br>
@@ -191,7 +189,7 @@
                 var summit_start_time = '{$Summit.BeginTime}';
             </script>
 
-            <div class="form-group speakers_container" style="display:none;">
+            <div class="form-group speakers-container" style="display:none;">
                 <div class="row">
                     <div class="col-md-10">
                         <label for="speakers">Speakers</label><br>
@@ -202,10 +200,12 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group moderator_container" style="display:none;">
+            <div class="form-group moderator-container" style="display:none;">
                 <div class="row">
                     <div class="col-md-12">
-                        <label for="moderator">Moderator</label><br>
+                        <label for="moderator" class="moderator-label">
+                            Moderator
+                        </label><br>
                         <input id="moderator" name="moderator"/>
                     </div>
                 </div>
@@ -269,17 +269,29 @@
         <% end_if %>
 
         $(document).ready(function(){
-            $("#location").chosen();
             $("#event_type").chosen();
+
             <% if $Top.Event %>
-                <% if $Top.Event.Type.Type == 'Presentation' || $Top.Event.Type.Type == 'Keynotes' || $Top.Event.Type.Type == 'Panel' || $Top.Event.Type.Type == 'Lighting Talks'%>
-                    $('.speakers_container').show();
-                    $('.level_container').show();
-                    $('#expect_learn_container').show();
-                <% end_if %>
-                <% if $Top.Event.Type.Type == 'Keynotes' || $Top.Event.Type.Type == 'Panel' %>
-                    $('.moderator_container').show();
-                <% end_if %>
+                // update the event types availables on combo filtering
+                // by the current event type
+
+                var event_type_id = $Top.Event.Type.ID;
+                // set current
+                $('#event_type').val(event_type_id).change();
+                // and get type to filter by
+                var type           = $Top.IsPresentationEventType($Top.Event.Type.Type);
+                $("#event_type").find("option").each(function(){
+                    var item_type = $(this).data('type');
+                    if(typeof (item_type) == 'undefined') return;
+                    if(item_type == type) {
+                        $(this).removeAttr('disabled');
+                    }
+                    else{
+                        $(this).attr('disabled', 'disabled');
+                    }
+                });
+                $("#event_type").trigger("chosen:updated");
+
             <% end_if %>
         });
     </script>

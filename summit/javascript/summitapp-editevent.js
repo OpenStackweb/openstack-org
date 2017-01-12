@@ -15,6 +15,8 @@ var form_validator = null;
 
 $(document).ready(function(){
 
+    $("#location").chosen();
+
     $("#start_date").datetimepicker({
         format:'Y-m-d H:i:00',
         step:5,
@@ -42,24 +44,63 @@ $(document).ready(function(){
 
 
     $('#event_type').change(function(){
-       var val = $(this).find("option:selected").text();
-        if (val == 'Presentation' || val == 'Keynotes' || val == 'Panel' ) {
-           $('.speakers_container').show();
-           $('.level_container').show();
-           $('#allow_feedback').attr("checked","checked");
-           if(val == 'Keynotes' || val == 'Panel')
-               $('.moderator_container').show();
-           else
-               $('.moderator_container').hide();
-           $('#expect_learn_container').show();
-       }
-       else {
-           $('#expect_learn_container').hide();
-           $('.speakers_container').hide();
-           $('.moderator_container').hide();
-           $('.level_container').hide();
-           $('#allow_feedback').removeAttr("checked");
-       }
+
+        var item              = $(this).find(':selected');
+
+        if(item.length == 0) return;
+
+        var useSponsors       = item.data('use-sponsors');
+        var sponsorsMandatory = item.data('sponsors-mandatory');
+        var type              = item.data('type');
+
+        console.log('event type selected '+ type);
+
+        if(useSponsors) $('.sponsors-container').show();
+        else $('.sponsors-container').hide();
+
+        if(sponsorsMandatory){
+            $('#sponsors').rules('add',{ required : true});
+        }
+        else{
+            $('#sponsors').rules("remove");
+        }
+
+        if(type == 1){
+            var useSpeakers       = item.data('use-speakers');
+            var speakersMandatory = item.data('speakers-mandatory');
+
+            if(useSpeakers) $('.speakers-container').show();
+            else $('.speakers-container').hide();
+
+            if(speakersMandatory){
+                $('#speakers').rules('add',{ required : true});
+            }
+            else{
+                $('#speakers').rules("remove");
+            }
+
+            var useModerator       = item.data('use-moderator');
+            var moderatorMandatory = item.data('moderator-mandatory');
+            var moderatorLabel     = item.data('moderator-label');
+            if(useModerator) $('.moderator-container').show();
+            else $('.moderator-container').hide();
+
+            if(moderatorMandatory){
+                $('#moderator').rules('add',{ required : true});
+            }
+            else{
+                $('#moderator').rules("remove");
+            }
+            $('.moderator-label').text(moderatorLabel);
+            $('.level_container').show();
+            $('#allow_feedback').attr("checked","checked");
+            $('#expect_learn_container').show();
+        }
+        else{
+            $('#expect_learn_container').hide();
+            $('.level_container').hide();
+            $('#allow_feedback').removeAttr("checked");
+        }
     });
     // speakers autocomplete
 
@@ -248,14 +289,6 @@ $(document).ready(function(){
             }},
             track: { required: function(){
                 return true;
-            }},
-            speakers: { required: function(){
-                var event_type = $('#event_type').find("option:selected").text();
-                return event_type === 'Presentation' || event_type === 'Keynotes' || event_type === 'Panel';
-            }},
-            moderator :{ required: function(){
-                var event_type = $('#event_type').find("option:selected").text();
-                return (event_type === 'Keynotes' || event_type === 'Panel') ;
             }},
             location: { required: function(){
                 var published = $('#published').val();

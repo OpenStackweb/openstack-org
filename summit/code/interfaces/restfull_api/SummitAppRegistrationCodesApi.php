@@ -25,21 +25,27 @@ final class SummitAppRegistrationCodesApi extends AbstractRestfulJsonApi
     private $code_repository;
 
     /**
-     * @var ISummitService
+     * @var ISummitPromoCodeManager
      */
-    private $summit_service;
+    private $summit_code_manager;
 
+    /**
+     * SummitAppRegistrationCodesApi constructor.
+     * @param ISummitRepository $summit_repository
+     * @param ISummitRegistrationPromoCodeRepository $code_repository
+     * @param ISummitPromoCodeManager $summit_code_manager
+     */
     public function __construct
     (
         ISummitRepository $summit_repository,
         ISummitRegistrationPromoCodeRepository $code_repository,
-        ISummitService $summit_service
+        ISummitPromoCodeManager $summit_code_manager
     )
     {
         parent::__construct();
         $this->summit_repository        = $summit_repository;
         $this->code_repository          = $code_repository;
-        $this->summit_service           = $summit_service;
+        $this->summit_code_manager       = $summit_code_manager;
     }
 
     protected function isApiCall(){
@@ -205,7 +211,7 @@ final class SummitAppRegistrationCodesApi extends AbstractRestfulJsonApi
             $summit       = $this->summit_repository->getById($summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
             $data         = $this->getJsonRequest();
-            $promocode = $this->summit_service->createPromoCode($summit, $data);
+            $promocode = $this->summit_code_manager->createPromoCode($summit, $data);
             return $this->ok($promocode->getCode());
         }
         catch(EntityValidationException $ex1)
@@ -241,7 +247,7 @@ final class SummitAppRegistrationCodesApi extends AbstractRestfulJsonApi
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
             $data         = $this->getJsonRequest();
             $data['code_id'] = $code_id;
-            $promocode = $this->summit_service->updatePromoCode
+            $promocode = $this->summit_code_manager->updatePromoCode
                 (
                     $summit,
                     $data
@@ -344,7 +350,7 @@ final class SummitAppRegistrationCodesApi extends AbstractRestfulJsonApi
             $summit       = $this->summit_repository->getById($summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
             $data         = $this->getJsonRequest();
-            $promocode = $this->summit_service->createPromoCode($summit, $data);
+            $promocode = $this->summit_code_manager->createPromoCode($summit, $data);
             return $this->ok($promocode->getSponsor()->ID);
         }
         catch(EntityValidationException $ex1)
@@ -378,7 +384,7 @@ final class SummitAppRegistrationCodesApi extends AbstractRestfulJsonApi
             $summit       = $this->summit_repository->getById($summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
             $data         = $this->getJsonRequest();
-            $promocode = $this->summit_service->createPromoCode($summit, $data);
+            $promocode = $this->summit_code_manager->createPromoCode($summit, $data);
             return $this->ok($promocode->getSponsor()->ID);
         }
         catch(EntityValidationException $ex1)
@@ -406,7 +412,7 @@ final class SummitAppRegistrationCodesApi extends AbstractRestfulJsonApi
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
             $data         = $this->getJsonRequest();
 
-            $promocodes = $this->summit_service->setMultiPromoCodes($summit, $data);
+            $promocodes = $this->summit_code_manager->setMultiPromoCodes($summit, $data);
             $code_array = array();
             foreach ($promocodes as $code) {
                 $code_array[] = $code->Code;
@@ -532,11 +538,12 @@ final class SummitAppRegistrationCodesApi extends AbstractRestfulJsonApi
         try
         {
             $summit_id    = intval($request->param('SUMMIT_ID'));
-            $code_id   = intval($request->param('CODE_ID'));
+            $code_id      = intval($request->param('CODE_ID'));
             $summit       = $this->summit_repository->getById($summit_id);
+
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
 
-            $promocode = $this->summit_service->sendEmailPromoCode($summit, $code_id);
+            $promocode = $this->summit_code_manager->sendEmailPromoCode($summit, $code_id);
 
             return $this->ok($promocode->getCode());
         }

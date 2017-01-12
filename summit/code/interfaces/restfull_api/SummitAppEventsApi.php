@@ -30,9 +30,9 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
     private $summitpresentation_repository;
 
     /**
-     * @var ISummitService
+     * @var ISummitEventManager
      */
-    private $summit_service;
+    private $summit_manager;
 
     /**
      * SummitAppEventsApi constructor.
@@ -40,7 +40,7 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
      * @param ISummitEventRepository $summitevent_repository
      * @param ISummitAttendeeRepository $summitattendee_repository
      * @param ISummitPresentationRepository $summitpresentation_repository
-     * @param ISummitService $summit_service
+     * @param ISummitEventManager $summit_manager
      */
     public function __construct
     (
@@ -48,7 +48,7 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
         ISummitEventRepository $summitevent_repository,
         ISummitAttendeeRepository $summitattendee_repository,
         ISummitPresentationRepository $summitpresentation_repository,
-        ISummitService $summit_service
+        ISummitEventManager $summit_manager
     )
     {
         parent::__construct();
@@ -56,7 +56,7 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
         $this->summitevent_repository        = $summitevent_repository;
         $this->summitattendee_repository     = $summitattendee_repository;
         $this->summitpresentation_repository = $summitpresentation_repository;
-        $this->summit_service                = $summit_service;
+        $this->summit_manager                = $summit_manager;
     }
 
     protected function isApiCall(){
@@ -296,7 +296,7 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
            $event_data   = $this->getJsonRequest();
            $summit = $this->summit_repository->getById($summit_id);
            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
-           $this->summit_service->publishEvent($summit, $event_data);
+           $this->summit_manager->publishEvent($summit, $event_data);
            return $this->ok();
         }
         catch(EntityValidationException $ex1)
@@ -328,7 +328,7 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
             $event        = $this->summitevent_repository->getById($event_id) ;
             if(is_null($event)) throw new NotFoundEntityException('SummitEvent', sprintf(' id %s', $event_id));
-            $this->summit_service->unpublishEvent($summit, $event);
+            $this->summit_manager->unpublishEvent($summit, $event);
             return $this->ok();
         }
         catch(EntityValidationException $ex1)
@@ -358,7 +358,7 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
             $summit = $this->summit_repository->getById($summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
 
-            $event = $this->summit_service->createEvent
+            $event = $this->summit_manager->createEvent
             (
                 $summit,
                 HTMLCleanner::cleanData
@@ -399,7 +399,7 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
             $summit = $this->summit_repository->getById($summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
 
-            $event = $this->summit_service->updateEvent
+            $event = $this->summit_manager->updateEvent
             (
                 $summit,
                 HTMLCleanner::cleanData
@@ -437,7 +437,7 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
             $summit = $this->summit_repository->getById($summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
             $data = $this->getJsonRequest();
-            $this->summit_service->updateBulkEvents($summit, $data);
+            $this->summit_manager->updateBulkEvents($summit, $data);
             return $this->ok();
         }
         catch(EntityValidationException $ex1)
@@ -466,7 +466,7 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
             $summit = $this->summit_repository->getById($summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
             $data = $this->getJsonRequest();
-            $this->summit_service->updateAndPublishBulkEvents($summit, $data);
+            $this->summit_manager->updateAndPublishBulkEvents($summit, $data);
             return $this->ok();
         }
         catch(EntityValidationException $ex1)
@@ -495,7 +495,7 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
             $summit       = $this->summit_repository->getById($summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
             $data = $this->getJsonRequest();
-            $this->summit_service->unPublishBulkEvents($summit, $data);
+            $this->summit_manager->unPublishBulkEvents($summit, $data);
             return $this->ok();
         }
         catch(EntityValidationException $ex1)
@@ -524,7 +524,7 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
             $summit = $this->summit_repository->getById($summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
             $data = $this->getJsonRequest();
-            $this->summit_service->updateBulkPresentations($summit, $data);
+            $this->summit_manager->updateBulkPresentations($summit, $data);
             return $this->ok();
         }
         catch(EntityValidationException $ex1)

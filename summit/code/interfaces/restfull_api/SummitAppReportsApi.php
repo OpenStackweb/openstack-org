@@ -51,9 +51,9 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
     private $presentation_repository;
 
     /**
-     * @var ISummitService
+     * @var ISummitEventManager
      */
-    private $summit_service;
+    private $summit_manager;
 
     public function __construct
     (
@@ -64,7 +64,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
         ISummitEventRepository $event_repository,
         IPresentationCategoryRepository $category_repository,
         ISummitPresentationRepository $presentation_repository,
-        ISummitService $summit_service
+        ISummitEventManager $summit_manager
     )
     {
         parent::__construct();
@@ -75,7 +75,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
         $this->event_repository              = $event_repository;
         $this->category_repository           = $category_repository;
         $this->presentation_repository       = $presentation_repository;
-        $this->summit_service                = $summit_service;
+        $this->summit_manager                = $summit_manager;
     }
 
 
@@ -192,14 +192,14 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
             switch ($report) {
                 case 'speaker_report':
                 case 'presentation_report':
-                    $this->summit_service->updateAssistance($summit, $report_data);
+                    $this->summit_manager->updateAssistance($summit, $report_data);
                     break;
                 case 'room_report':
-                    $this->summit_service->updateHeadCount($summit, $report_data);
+                    $this->summit_manager->updateHeadCount($summit, $report_data);
                     break;
                 case 'video_report':
-                    $this->summit_service->updateVideoDisplay($summit, $report_data['report_data']);
-                    $this->summit_service->updateReportConfig($report,$report_data['report_config']);
+                    $this->summit_manager->updateVideoDisplay($summit, $report_data['report_data']);
+                    $this->summit_manager->updateReportConfig($report,$report_data['report_config']);
                     break;
             }
             return $this->ok();

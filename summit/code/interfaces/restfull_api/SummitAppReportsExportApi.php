@@ -51,9 +51,9 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
     private $presentation_repository;
 
     /**
-     * @var ISummitService
+     * @var ISummitEventManager
      */
-    private $summit_service;
+    private $summit_manager;
 
     public function __construct
     (
@@ -64,7 +64,7 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
         ISummitEventRepository $event_repository,
         IPresentationCategoryRepository $category_repository,
         ISummitPresentationRepository $presentation_repository,
-        ISummitService $summit_service
+        ISummitEventManager $summit_manager
     )
     {
         parent::__construct();
@@ -75,7 +75,7 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
         $this->event_repository              = $event_repository;
         $this->category_repository           = $category_repository;
         $this->presentation_repository       = $presentation_repository;
-        $this->summit_service                = $summit_service;
+        $this->summit_manager                = $summit_service;
     }
 
 
