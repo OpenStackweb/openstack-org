@@ -49,7 +49,7 @@ class EnterpriseHomePage_Controller extends Page_Controller {
         $next_summit = $this->getSummitEvent();
         $filter = array("EventEndDate:GreaterThan" => date('Y-m-d H:i:s'), "ID:not" => $next_summit->ID);
         return EventPage::get()
-            ->where("EventCategory IN('Enterprise','Summit')")
+            ->where("EventCategory IN('Enterprise','Summit','OpenStack Days')")
             ->filter($filter)
             ->sort('EventStartDate')
             ->limit($limit);
