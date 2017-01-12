@@ -481,8 +481,9 @@ class SummitSponsorPage_Controller extends SummitPage_Controller
                 label: "Other"
             }];');
         }
-
-        Requirements::javascript("summit/javascript/sponsor.js");
+        Requirements::css('themes/openstack/javascript/secondary-nav.jquery/secondary-nav.jquery.css');
+        Requirements::javascript('themes/openstack/javascript/secondary-nav.jquery/secondary-nav.jquery.js');
+        Requirements::javascript("summit/javascript/summit-sponsor-page.js");
         Requirements::javascript('summit/javascript/sponsor.sponsorships.js');
 
         $this->packagePurchaseOrderSecurityToken = new SecurityToken('packagePurchaseOrderSecurityToken');

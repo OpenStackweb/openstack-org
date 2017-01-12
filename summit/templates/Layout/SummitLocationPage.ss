@@ -9,9 +9,9 @@
     </div>
 </div>
 <% end_if %>
-<div class="light city-nav city" id="nav-bar">
+<div class="light secondary-nav" id="nav-bar">
     <div class="container">
-        <ul class="city-nav-list">
+        <ul class="secondary-nav-list">
             <li>
                 <a href="#venue">
                     <i class="fa fa-map-marker"></i>

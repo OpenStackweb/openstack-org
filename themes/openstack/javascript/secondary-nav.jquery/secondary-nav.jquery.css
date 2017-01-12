@@ -1,0 +1,91 @@
+.secondary-nav {
+    padding: 0;
+    background: #29abe2;
+    border-bottom: 1px solid #54617D;
+    z-index: 1000; }
+
+ul.secondary-nav-list {
+    padding: 0;
+    margin: 0;
+    text-align: center; }
+
+ul.secondary-nav-list li {
+    list-style: none;
+    text-align: center;
+    display: inline-block;
+    margin: 0 2%; }
+
+@media (max-width: 767px) {
+    ul.secondary-nav-list li {
+        margin: 0 3%; } }
+
+ul.secondary-nav-list li a {
+    color: white;
+    padding: 25px 0;
+    display: inline-block;
+    opacity: 0.8; }
+
+ul.secondary-nav-list li a:hover {
+    text-decoration: none;
+    opacity: 1; }
+
+ul.secondary-nav-list li i {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 2.2em; }
+
+.secondary-nav.fixed {
+    position: fixed;
+    top: 0;
+    padding: 0;
+    background: #29abe2;
+    border-bottom-color: #54617D; }
+
+@media (max-width: 1200px) {
+    .secondary-nav.fixed ul.secondary-nav-list li {
+        margin: 0 2%; } }
+
+.secondary-nav.fixed ul.secondary-nav-list li a {
+    position: relative;
+    padding: 20px 0;
+    color: white;
+    opacity: 0.5; }
+
+.secondary-nav.fixed ul.secondary-nav-list li a:hover {
+    opacity: 1; }
+
+.secondary-nav.fixed ul.secondary-nav-list li a.active {
+    color: white;
+    opacity: 1; }
+
+.secondary-nav.fixed ul.secondary-nav-list li a.active:after, .secondary-nav.fixed ul.secondary-nav-list li a.active:before {
+    top: 100%;
+    left: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    opacity: 1; }
+
+.secondary-nav.fixed ul.secondary-nav-list li a.active:after {
+    border-color: rgba(237, 242, 247, 0);
+    border-top-color: #29abe2;
+    border-width: 15px;
+    margin-left: -15px; }
+
+.secondary-nav.fixed ul.secondary-nav-list li a.active:before {
+    border-color: rgba(194, 225, 245, 0);
+    border-top-color: #54617D;
+    border-width: 16px;
+    margin-left: -16px; }
+
+@media (max-width: 990px) {
+    .secondary-nav.fixed ul.secondary-nav-list li a.active:after,
+    .secondary-nav.fixed ul.secondary-nav-list li a.active:before { display: none; } }
+
+.secondary-nav.fixed ul.secondary-nav-list li i {
+    display: inline-block;
+    margin: 0 5px;
+    font-size: 1em; }

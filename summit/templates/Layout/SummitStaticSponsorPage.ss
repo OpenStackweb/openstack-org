@@ -16,9 +16,9 @@
         </div>
     </div>
 </div>
-<div class="light city-nav sponsor">
+<div class="light secondary-nav sponsor">
     <div class="container">
-        <ul class="city-nav-list">
+        <ul class="secondary-nav-list">
 <!--             <li>
                 <a href="#sponsors">
                     <i class="fa fa-heart"></i>

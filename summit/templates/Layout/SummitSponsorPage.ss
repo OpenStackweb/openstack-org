@@ -27,9 +27,9 @@
     </div>
 </div>
 
-<div class="light city-nav sponsor">
+<div class="light secondary-nav sponsor">
     <div class="container">
-        <ul class="city-nav-list">
+        <ul class="secondary-nav-list">
             <% if ShowSponsorShipPackages %>
                 <li>
                     <a href="#packages">

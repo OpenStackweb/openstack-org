@@ -1,39 +1,13 @@
-
-// Sponsor Nav Affix
-var num = 425; //number of pixels before modifying styles
-
-$(window).bind('scroll', function () {
-    if ($(window).scrollTop() > num) {
-        $('.city-nav.sponsor').addClass('fixed');
-    } else {
-        $('.city-nav.sponsor').removeClass('fixed');
-    }
-});
-
 // Sponsor active on scroll
 $(document).ready(function () {
     $(document).on("scroll", onScroll);
-    
-    //smoothscroll
-    $('a[href^="#"]').on('click', function (e) {
-        e.preventDefault();
-        $(document).off("scroll");
-        
-        $('a').each(function () {
-            $(this).removeClass('active');
-        })
-        $(this).addClass('active');
-      
-        var target = this.hash,
-            menu = target;
-        $target = $(target);
-        $('html, body').stop().animate({
-            'scrollTop': $target.offset().top+0
-        }, 500, 'swing', function () {
-            window.location.hash = target;
-            $(document).on("scroll", onScroll);
-        });
-    });
+    $('div.secondary-nav').secondaryNav(
+        {
+            num: 425 ,//number of pixels before modifying styles
+            onScroll: onScroll
+        }
+    );
+    $('[data-toggle="tooltip"]').tooltip();
 });
 
 function onScroll(event){
@@ -50,8 +24,6 @@ function onScroll(event){
         }
     });
 }
-
-
 
 window.onload = function(){
     var helpers = Chart.helpers;

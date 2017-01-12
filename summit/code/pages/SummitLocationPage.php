@@ -385,13 +385,14 @@ class SummitLocationPage_Controller extends SummitPage_Controller
         ");
 
         parent::init();
-
-        Requirements::javascript("summit/javascript/host-city.js");
+        Requirements::css('themes/openstack/javascript/secondary-nav.jquery/secondary-nav.jquery.css');
+        Requirements::javascript('themes/openstack/javascript/secondary-nav.jquery/secondary-nav.jquery.js');
         if (empty($this->CampusGraphic)) {
             Requirements::javascript('https://maps.googleapis.com/maps/api/js?v=3.exp');
             Requirements::javascript("summit/javascript/host-city-map.js");
             Requirements::customScript($this->MapScript());
         }
+        Requirements::javascript("summit/javascript/summit-location-page.js");
     }
 
     public function details(SS_HTTPRequest $r)
