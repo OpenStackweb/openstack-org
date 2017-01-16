@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-sm-12 survey-top">
-        <p>Step <strong>{$Survey.getCurrentStepIndexNice} of {$Survey.getStepsCount}</strong> for <strong>$CurrentMember.FullName</strong>. &nbsp;<a href="/Security/logout?BackURL={$Top.Link}" class="survey-logout">log out</a></p>
+        <p>Step <strong>{$Survey.getCurrentStepIndexNice} of {$Survey.getStepsCount}</strong> for <strong>$CurrentMember.FullName</strong>.
     </div>
 </div>
 <div class="row">

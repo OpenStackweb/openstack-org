@@ -86,7 +86,7 @@ class SurveyRegularStepTemplate
 
         if($this->ID > 0) {
             //questions
-            $config = GridFieldConfig_RecordEditor::create(100);
+            $config = GridFieldConfig_RecordEditor::create(PHP_INT_MAX);
             $config->removeComponentsByType('GridFieldAddNewButton');
             $multi_class_selector = new GridFieldAddNewMultiClass();
             $multi_class_selector->setClasses(
@@ -96,8 +96,11 @@ class SurveyRegularStepTemplate
                     'SurveyMemberEmailQuestionTemplate'       => 'Current Member Email' ,
                     'SurveyMemberFirstNameQuestionTemplate'   => 'Current Member FirstName' ,
                     'SurveyMemberLastNameQuestionTemplate'    => 'Current Member LastName' ,
+                    'SurveyMemberCountryQuestionTemplate'     => 'Current Member Country' ,
                     'SurveyTextBoxQuestionTemplate'           => 'TextBox' ,
-                    'SurveyTextBoxQuestionTemplate'           => 'TextBox' ,
+                    'SurveyEmailQuestionTemplate'             => 'Email' ,
+                    'SurveyPercentageQuestionTemplate'        => 'Percentage' ,
+                    'SurveyNumericQuestionTemplate'           => 'Numeric' ,
                     'SurveyTextAreaQuestionTemplate'          => 'TextArea',
                     'SurveyCheckBoxQuestionTemplate'          => 'CheckBox',
                     'SurveyCheckBoxListQuestionTemplate'      => 'CheckBoxList',

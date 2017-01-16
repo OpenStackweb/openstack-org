@@ -56,7 +56,7 @@ class SurveyMultiValueQuestionTemplate
 
         if($this->ID > 0 ){
             //validation rules
-            $config = GridFieldConfig_RecordEditor::create();
+            $config = GridFieldConfig_RecordEditor::create(PHP_INT_MAX);
             $config->addComponent(new GridFieldSortableRows('Order'));
             $add_button = $config->getComponentByType('GridFieldAddNewButton');
             $add_button->setButtonName('Add New Value');

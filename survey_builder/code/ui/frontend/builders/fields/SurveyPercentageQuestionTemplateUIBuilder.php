@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Copyright 2015 OpenStack Foundation
+ * Copyright 2017 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,19 +14,20 @@
  **/
 
 /**
- * Class SurveyTextBoxQuestionTemplateUIBuilder
+ * Class SurveyPercentageQuestionTemplateUIBuilder
  */
-class SurveyTextBoxQuestionTemplateUIBuilder
-    extends AbstractSurveyQuestionTemplateUIBuilder {
-
+class SurveyPercentageQuestionTemplateUIBuilder extends SurveyNumericQuestionTemplateUIBuilder
+{
     /**
      * @param string $name
      * @param string $label
      * @return TextField
      */
     protected function buildField($name, $label){
-        return new TextField($name, $label);
+        return new BootstrapPercentageField($name, $label);
     }
+
+
     /**
      * @param ISurveyStep $current_step
      * @param ISurveyQuestionTemplate $question
@@ -34,17 +36,13 @@ class SurveyTextBoxQuestionTemplateUIBuilder
      */
     public function build(ISurveyStep $current_step, ISurveyQuestionTemplate $question, ISurveyAnswer $answer)
     {
-        $field = $this->buildField($question->name(), $question->label());
-        $field->setValue($question->initialValue());
-        if($question->isReadOnly()) $field->setDisabled(true);
-        if($question->isMandatory())
-        {
-            $field->setAttribute('data-rule-required','true');
-        }
-        if(!is_null($answer)){
-            $field->setValue($answer->value());
-        }
-        $this->buildDependantRules($current_step, $question, $field);
+        $field = parent::build($current_step, $question, $answer);
+        $field->addExtraClass('percentage-input');
+        $field->setAttribute('data-rule-minlength','0');
+        $field->setAttribute('data-rule-maxlength','3');
+        $field->setAttribute('data-rule-min','0');
+        $field->setAttribute('data-rule-max','100');
+        $field->setAttribute('data-rule-step','1');
         return $field;
     }
 }

@@ -69,3 +69,11 @@ Injector:
     class: SurveyLiteralQuestionTemplateUIBuilder
   RadioButtonMatrixUIBuilder:
     class: SurveyRadioButtonMatrixTemplateQuestionUIBuilder
+  MemberCountryUIBuilder:
+    class: SurveyTextBoxQuestionTemplateUIBuilder
+  PercentageUIBuilder:
+    class: SurveyPercentageQuestionTemplateUIBuilder
+  NumericUIBuilder:
+    class: SurveyNumericQuestionTemplate
+  EmailUIBuilder:
+    class:
