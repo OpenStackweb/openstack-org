@@ -355,7 +355,7 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
             if(!$this->isJson()) return $this->validationError(array('invalid content type!'));
             $summit_id    = intval($request->param('SUMMIT_ID'));
             $event_data   = $this->getJsonRequest();
-            $summit = $this->summit_repository->getById($summit_id);
+            $summit       = $this->summit_repository->getById($summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
 
             $event = $this->summit_manager->createEvent

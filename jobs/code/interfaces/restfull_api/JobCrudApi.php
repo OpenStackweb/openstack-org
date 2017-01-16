@@ -11,6 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+use Openstack\Annotations as CustomAnnotation;
 /**
  * Class JobCrudApi
  */
@@ -45,7 +46,6 @@ final class JobCrudApi extends AbstractRestfulJsonApi {
 	 * @var IJobRepository
 	 */
 	private $repository;
-
 
 	/**
 	 * @param $request
@@ -214,16 +214,13 @@ final class JobCrudApi extends AbstractRestfulJsonApi {
     }
 
     /**
+     * @CustomAnnotation\CachedMethod(lifetime=900, format="RAW")
      * @param SS_HTTPRequest $request
      * @return mixed|null|SS_HTTPResponse|string
      */
     public function getJobList(SS_HTTPRequest $request){
         try{
-            $output = $this->loadRAWResponseFromCache($request);
-
-            if(!is_null($output)) return $output;
-
-            $output = '';
+            $output  = '';
             $kw      = $request->getVar('kw');
             $type_id = $request->getVar('type_id');
             $sort_by = !empty($request->getVar('sort_by'))? $request->getVar('sort_by') : 'posted';
@@ -236,7 +233,6 @@ final class JobCrudApi extends AbstractRestfulJsonApi {
                         'FormattedMoreInfoLink' => JobHolder_Controller::getViewInfoLink($job->MoreInfoLink)
                     ]);
             }
-            $this->saveRAWResponseToCache($request, $output);
             return $output;
         }
         catch(NotFoundEntityException $ex1){

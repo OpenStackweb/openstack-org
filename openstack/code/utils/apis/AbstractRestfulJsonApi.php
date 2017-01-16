@@ -11,7 +11,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-
+use Doctrine\Common\Annotations\AnnotationReader;
+use Openstack\Annotations\CachedMethod;
 /**
  * Class AbstractRestfulJsonApi
  */
@@ -19,9 +20,30 @@ abstract class AbstractRestfulJsonApi extends Controller
 {
 
     /**
+     * @param string $action
+     * @return CachedMethod
+     */
+    private function getCacheAnnotation($action){
+        $controller_class  = ($this->class) ? $this->class : get_class($this);
+        $annotation_reader = new AnnotationReader();
+        $method            = new ReflectionMethod($controller_class, $action);
+        return $annotation_reader->getMethodAnnotation($method, 'Openstack\Annotations\CachedMethod');
+    }
+
+    public function init() {
+        parent::init();
+    }
+
+    /**
      * @var array
      */
-    protected $before_filters = array();
+    protected $before_filters = [];
+
+    /**
+     * @var array
+     */
+    protected $after_filter   = [];
+
     /**
      * @var
      */
@@ -32,12 +54,12 @@ abstract class AbstractRestfulJsonApi extends Controller
     protected $current_user;
 
     /**
+     * @param string $key
      * @return Zend_Cache_Frontend
      */
-    protected function getCache()
+    protected function getCache($key = 'all')
     {
-        $cache = SS_Cache::factory(strtolower(get_class($this)) . '_api_cache');
-        return $cache;
+        return SS_Cache::factory(strtolower(get_class($this)) . '_api_cache_'.strtolower($key));
     }
 
     /**
@@ -46,11 +68,9 @@ abstract class AbstractRestfulJsonApi extends Controller
      */
     protected function loadJSONResponseFromCache(SS_HTTPRequest $request)
     {
-        $result = $this->loadRAWResponseFromCache($request);
-        if (!$result) {
-            return null;
-        }
-        return $this->ok($result);
+        if ($body = $this->loadRAWResponseFromCache($request))
+            return $this->ok(json_decode($body));
+        return null;
     }
 
     /**
@@ -59,12 +79,10 @@ abstract class AbstractRestfulJsonApi extends Controller
      */
     protected function loadRAWResponseFromCache(SS_HTTPRequest $request)
     {
-        $cache = $this->getCache();
-        $result = $cache->load(md5($this->getCacheKey($request)));
-        if (!$result) {
-            return null;
+        if ($result = $this->getCache()->load(md5($this->getCacheKey($request)))) {
+            return unserialize($result);
         }
-        return unserialize($result);
+        return null;
     }
 
     /**
@@ -73,13 +91,10 @@ abstract class AbstractRestfulJsonApi extends Controller
      */
     protected function loadRAWFromCache($key)
     {
-        $key = md5($key);
-        $cache = $this->getCache();
-        $result = $cache->load($key);
-        if (!$result) {
-            return null;
+        if ($result = $this->getCache()->load(md5($key))) {
+            return unserialize($result);
         }
-        return unserialize($result);
+        return null;
     }
 
     /**
@@ -88,18 +103,21 @@ abstract class AbstractRestfulJsonApi extends Controller
      */
     protected function saveRAW2Cache($key, $data)
     {
-        $key = md5($key);
-        $cache = $this->getCache();
-        $cache->save(serialize($data), $key);
+        $this->getCache()->save(serialize($data), md5($key));
     }
 
     /**
      * @param SS_HTTPRequest $request
      * @return string
      */
-    protected function getCacheKey(SS_HTTPRequest $request)
+    private function getCacheKey(SS_HTTPRequest $request)
     {
-        return $request->getURL(true);
+        $key = $request->getURL(true);
+
+        if(Member::currentUserID())
+            $key .= '.' . Member::currentUserID();
+
+        return $key;
     }
 
     /**
@@ -115,13 +133,18 @@ abstract class AbstractRestfulJsonApi extends Controller
     /**
      * @param SS_HTTPRequest $request
      * @param $data
+     * @param int $lifetime lifetime in seconds for cache record (null => infinite lifetime)
      * @return $this
      */
-    protected function saveRAWResponseToCache(SS_HTTPRequest $request, $data)
+    protected function saveRAWResponseToCache(SS_HTTPRequest $request, $data, $lifetime = null)
     {
-        $key = md5($this->getCacheKey($request));
-        $cache = $this->getCache();
-        $cache->save(serialize($data), $key);
+        $this->getCache()->save
+        (
+            serialize($data),
+            md5($this->getCacheKey($request)),
+            $tags             = [],
+            $specificLifetime = $lifetime
+        );
         return $this;
     }
 
@@ -212,6 +235,28 @@ abstract class AbstractRestfulJsonApi extends Controller
     }
 
     /**
+     * @param $action
+     * @param $params
+     * @param $response
+     * @return mixed
+     */
+    private function doAfterFilter($action, $params, $response)
+    {
+        if (array_key_exists($action, $this->after_filter)) {
+            $filters = $this->after_filter[$action];
+            foreach ($filters as $filter_name => $callback) {
+                if ($callback instanceof Closure) {
+                    $parameters = array($this->getRequest(), $response, $action);
+                    $res = call_user_func_array($callback, $parameters);
+                    if ($res) {
+                        return $res;
+                    }
+                }
+            }
+        }
+    }
+
+    /**
      * Determine if the request is sending JSON.
      * @return bool
      */
@@ -261,20 +306,82 @@ abstract class AbstractRestfulJsonApi extends Controller
     }
 
     /**
-     * @param $action
-     * @param $name
+     * @param string $action
+     * @param string $name
      * @param Closure $callback
      */
     protected function addBeforeFilter($action, $name, Closure $callback)
     {
         if (!array_key_exists($action, $this->before_filters)) {
-            $this->before_filters[$action] = array();
+            $this->before_filters[$action] = [];
         }
         $filters = $this->before_filters[$action];
         if (!array_key_exists($name, $filters)) {
             $filters[$name] = $callback;
         }
         $this->before_filters[$action] = $filters;
+    }
+
+    /**
+     * @param string $action
+     * @param string $name
+     * @param Closure $callback
+     */
+    protected function addAfterFilter($action, $name, Closure $callback)
+    {
+        if (!array_key_exists($action, $this->after_filter)) {
+            $this->after_filter[$action] = [];
+        }
+        $filters = $this->after_filter[$action];
+        if (!array_key_exists($name, $filters)) {
+            $filters[$name] = $callback;
+        }
+        $this->after_filter[$action] = $filters;
+    }
+
+    /**
+     * @param string $action
+     * @param CachedMethod $annotation
+     */
+    private function markActionAsCacheAble($action, CachedMethod $annotation){
+        $this->addBeforeFilter($action, 'cache_before_'.$action,
+            function(SS_HTTPRequest $request) use($action, $annotation){
+
+                foreach($annotation->conditions as $condition){
+                    if(!$condition->check()) return false;
+                }
+
+                $response = $annotation->format ==  'JSON' ?
+                    $this->loadJSONResponseFromCache($request):
+                    $this->loadRAWResponseFromCache($request);
+
+                if(!is_null($response)) return $response;
+                return false;
+        });
+
+        $this->addAfterFilter($action, 'cache_after'.$action,
+            function (SS_HTTPRequest $request, SS_HTTPResponse $response) use($annotation) {
+                // alwas save raw (string)
+                 $this->saveRAWResponseToCache($request, $response->getBody(), $annotation->lifetime);
+                 return false;
+        });
+    }
+
+
+    /**
+     * @param SS_HTTPRequest $request
+     * @return null|string
+     */
+    public function getCurrentAction(SS_HTTPRequest $request){
+        $controller_class = ($this->class) ? $this->class : get_class($this);
+        $url_handlers     = Config::inst()->get($controller_class, 'url_handlers', Config::FIRST_SET);
+        if(is_null($url_handlers)) return  [null, null];
+        foreach ($url_handlers as $rule => $action) {
+            if ($params = $request->match($rule)) {
+               return [$action, $params];
+            }
+        }
+        return [null, null];
     }
 
     /**
@@ -285,7 +392,12 @@ abstract class AbstractRestfulJsonApi extends Controller
     public function handleRequest(SS_HTTPRequest $request, DataModel $model)
     {
 
-        $this->request = $request;
+        $this->request         = $request;
+        list($action, $params) = $this->getCurrentAction($request);
+
+        if(!is_null($action) && $annotation = $this->getCacheAnnotation($action)){
+            $this->markActionAsCacheAble($action, $annotation);
+        }
 
         if (!$this->authenticate()) {
             return $this->permissionFailure();
@@ -294,22 +406,21 @@ abstract class AbstractRestfulJsonApi extends Controller
             return $this->permissionFailure();
         }
 
-        $controller_class = ($this->class) ? $this->class : get_class($this);
-        $url_handlers = Config::inst()->get($controller_class, 'url_handlers', Config::FIRST_SET);
-
-        if ($url_handlers) {
-            foreach ($url_handlers as $rule => $action) {
-                if ($params = $request->match($rule)) {
-                    $res = $this->doBeforeFilter($action, $params);
-                    if ($res) {
-                        return $res;
-                    }
-                    break;
-                }
+        if(!is_null($action)){
+            if ($res = $this->doBeforeFilter($action, $params)) {
+                return $res;
             }
         }
 
-        return parent::handleRequest($request, $model);
+        $response = parent::handleRequest($request, $model);
+
+        if(!is_null($action)){
+            if ($res = $this->doAfterFilter($action, $params, $response)) {
+                return $res;
+            }
+        }
+
+        return $response;
     }
 
     /**
@@ -346,6 +457,7 @@ abstract class AbstractRestfulJsonApi extends Controller
         if (is_null($res)) {
             $res = array();
         }
+
         $response->setBody(json_encode($res));
 
         //conditional get Request (etags)
@@ -556,3 +668,4 @@ abstract class AbstractRestfulJsonApi extends Controller
         return Director::is_site_url($referer);
     }
 }
+

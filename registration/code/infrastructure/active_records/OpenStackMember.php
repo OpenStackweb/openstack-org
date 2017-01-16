@@ -441,6 +441,9 @@ class OpenStackMember extends DataExtension
         return $res;
     }
 
+    /**
+     * @return bool|int
+     */
     public function isAdmin()
     {
         return Permission::checkMember($this->owner, 'ADMIN');
@@ -509,4 +512,3 @@ class OpenStackMember extends DataExtension
     }
 
 }
-

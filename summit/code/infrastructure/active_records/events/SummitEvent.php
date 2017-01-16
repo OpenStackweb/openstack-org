@@ -354,8 +354,9 @@ class SummitEvent extends DataObject implements ISummitEvent
 
         $ddl_track->setEmptyString("-- Select a Category --");
 
-        $f->tag('Tags', 'Tags', Tag::get(), $this->Tags())->configure()
-        ->setTitleField('Tag')
+        $f->tag('Tags', 'Tags', Tag::get(), $this->Tags())
+        ->configure()
+            ->setTitleField('Tag')
         ->end();
         $f->addFieldToTab('Root.Main', new CheckboxField('AllowFeedBack','Is feedback allowed?'));
         $f->addFieldToTab('Root.Main', new HiddenField('SummitID','SummitID'));
@@ -547,6 +548,7 @@ class SummitEvent extends DataObject implements ISummitEvent
         $this->PublishedDate = null;
     }
 
+    protected $exclude_type_validation = false;
     /**
      * @return ValidationResult
      */
@@ -564,6 +566,10 @@ class SummitEvent extends DataObject implements ISummitEvent
             return $valid->error('Invalid Summit!');
         }
 
+        if(empty($this->Title)){
+            return $valid->error('Title  is mandatory!');
+        }
+
         $start_date = $this->getStartDate();
         $end_date   = $this->getEndDate();
 
@@ -571,7 +577,7 @@ class SummitEvent extends DataObject implements ISummitEvent
             return $valid->error('To publish this event you must define a start/end datetime!');
 
         $type_id = intval($this->TypeID);
-        if($type_id === 0)
+        if(!$this->exclude_type_validation && $type_id === 0)
         {
             return $valid->error('You must select an event type!');
         }
@@ -787,4 +793,5 @@ SQL;
     {
        return $this->getField('Abstract');
     }
+
 }

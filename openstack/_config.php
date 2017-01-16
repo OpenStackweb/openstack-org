@@ -1,4 +1,5 @@
 <?php
+use Doctrine\Common\Annotations\AnnotationRegistry;
 /**
  * Copyright 2014 Openstack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,6 +14,10 @@
  **/
 // Use _ss_environment.php file for configuration
 require_once("conf/ConfigureFromEnv.php");
+
+// register Annotations globally
+// http://docs.doctrine-project.org/projects/doctrine-common/en/latest/reference/annotations.html
+AnnotationRegistry::registerFile(__DIR__.'/code/utils/annotations/OpenStackAnnotations.php');
 
 // Register custom site configuration extension
 DataObject::add_extension('SiteConfig', 'CustomSiteConfig');

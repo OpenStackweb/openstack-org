@@ -580,8 +580,13 @@ final class Summit extends DataObject implements ISummit
             ->addOrder(QueryOrder::asc('EndDate'))
             ->addOrder(QueryOrder::asc('Title'));
 
-        return new ArrayList(AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Events',
-            $query)->toArray());
+        $raw_schedule      = AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Events', $query)->toArray();
+        $filtered_schedule = [];
+        foreach($raw_schedule as $event){
+            if(!ScheduleManager::allowToSee($event)) continue;
+            $filtered_schedule[] = $event;
+        }
+        return new ArrayList($filtered_schedule);
     }
 
     public function getScheduleByLevel($level = null)
@@ -597,8 +602,13 @@ final class Summit extends DataObject implements ISummit
             ->addOrder(QueryOrder::asc('EndDate'))
             ->addOrder(QueryOrder::asc('Title'));
 
-        return new ArrayList(AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Presentations',
-            $query)->toArray());
+        $raw_schedule      = AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Presentations', $query)->toArray();
+        $filtered_schedule = [];
+        foreach($raw_schedule as $event){
+            if(!ScheduleManager::allowToSee($event)) continue;
+            $filtered_schedule[] = $event;
+        }
+        return new ArrayList($filtered_schedule);
     }
 
     public function getScheduleByTrack($track = null)
@@ -614,8 +624,13 @@ final class Summit extends DataObject implements ISummit
             ->addOrder(QueryOrder::asc('EndDate'))
             ->addOrder(QueryOrder::asc('Title'));
 
-        return new ArrayList(AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Presentations',
-            $query)->toArray());
+        $raw_schedule      = AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Presentations', $query)->toArray();
+        $filtered_schedule = [];
+        foreach($raw_schedule as $event){
+            if(!ScheduleManager::allowToSee($event)) continue;
+            $filtered_schedule[] = $event;
+        }
+        return new ArrayList($filtered_schedule);
     }
 
     /**
@@ -973,10 +988,10 @@ final class Summit extends DataObject implements ISummit
 
     public function isEventInsideSummitDuration(ISummitEvent $summit_event)
     {
-        $event_start_date = new DateTime($summit_event->getStartDate());
-        $event_end_date = new DateTime($summit_event->getEndDate());
+        $event_start_date  = new DateTime($summit_event->getStartDate());
+        $event_end_date    = new DateTime($summit_event->getEndDate());
         $summit_start_date = new DateTime($this->getBeginDate());
-        $summit_end_date = new DateTime($this->getEndDate());
+        $summit_end_date   = new DateTime($this->getEndDate());
 
         return $event_start_date >= $summit_start_date && $event_start_date <= $summit_end_date &&
             $event_end_date <= $summit_end_date && $event_end_date >= $event_start_date;
@@ -985,7 +1000,7 @@ final class Summit extends DataObject implements ISummit
     public function isAttendeesRegistrationOpened()
     {
         $registration_begin_date = $this->RegistrationBeginDate;
-        $registration_end_date = $this->RegistrationEndDate;
+        $registration_end_date   = $this->RegistrationEndDate;
 
         if (is_null($registration_begin_date) || is_null($registration_end_date)) {
             return false;
@@ -1116,6 +1131,16 @@ final class Summit extends DataObject implements ISummit
         $evening_events->Type     = ISummitEventType::EveningEvents;
         $evening_events->SummitID = $summit_id;
         $evening_events->write();
+
+
+        $groups_events = SummitEventType::get()->filter(['Type' => ISummitEventType::GroupsEvents, 'SummitID' => $summit_id])->first();
+        if (is_null($groups_events)) {
+            $groups_events = new SummitEventType();
+        }
+
+        $groups_events->Type     = ISummitEventType::GroupsEvents;
+        $groups_events->SummitID = $summit_id;
+        $groups_events->write();
     }
 
     public static function isDefaultEventType($event_type)
@@ -1129,6 +1154,7 @@ final class Summit extends DataObject implements ISummit
                 ISummitEventType::HandonLabs,
                 ISummitEventType::EveningEvents,
                 ISummitEventType::Lunch_Breaks,
+                ISummitEventType::GroupsEvents,
             ]);
     }
 

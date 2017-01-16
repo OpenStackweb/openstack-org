@@ -172,6 +172,8 @@ Injector:
     class: SapphireSummitReportRepository
   PromoCodeRepository:
     class: SapphireSummitRegistrationPromoCodeRepository
+  SummitEventFactory:
+    class: SummitEventFactory
   EventbriteEventManager:
     constructor:
       0: '%$EventbriteEventRepository'
@@ -189,7 +191,8 @@ Injector:
       2: '%$SpeakerRepository'
       3: '%$MemberRepository'
       4: '%$SummitReportRepository'
-      5: '%$TransactionManager'
+      5: '%$SummitEventFactory'
+      6: '%$TransactionManager'
   PresentationManager:
     constructor:
       0: '%$SummitRepository'
@@ -223,6 +226,33 @@ Injector:
       1: '%$MemberRepository'
       2: '%$EventbriteAttendeeRepository'
       3: '%$TransactionManager'
-
-
-
+  EventFeedbackFactory:
+    class: EventFeedbackFactory
+  EventFeedbackRepository:
+    class: SapphireEventFeedbackRepository
+  ScheduleManager:
+    constructor:
+      0: '%$EventRepository'
+      1: '%$PresentationRepository'
+      2: '%$EventFeedbackRepository'
+      3: '%$EventFeedbackFactory'
+      4: '%$SummitAttendeeRepository'
+      5: '%$RSVPRepository'
+      6: '%$TransactionManager'
+  ScheduleEventViewModelMapper:
+    class: ScheduleEventViewModelMapper
+  ScheduleEventSearchViewModelMapper:
+    class: ScheduleEventSearchViewModelMapper
+  FullScheduleViewModelMapper:
+    class: FullScheduleViewModelMapper
+  SummitAppScheduleApi:
+    constructor:
+      0: '%$SummitRepository'
+      1: '%$EventRepository'
+      2: '%$PresentationRepository'
+      3: '%$EventFeedbackRepository'
+      4: '%$SummitAttendeeRepository'
+      5: '%$ScheduleManager'
+      6: '%$ScheduleEventViewModelMapper'
+      7: '%$ScheduleEventSearchViewModelMapper'
+      8: '%$FullScheduleViewModelMapper'

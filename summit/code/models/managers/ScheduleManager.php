@@ -15,21 +15,21 @@
 /**
  * Class ScheduleManager
  */
-final class ScheduleManager
+final class ScheduleManager implements IScheduleManager
 {
 
     /**
-     * @var IEntityRepository
+     * @var ISummitEventRepository
      */
     private $summitevent_repository;
 
     /**
-     * @var IEntityRepository
+     * @var ISummitPresentationRepository
      */
     private $summitpresentation_repository;
 
     /**
-     * @var IEntityRepository
+     * @var IEventFeedbackRepository
      */
     private $eventfeedback_repository;
 
@@ -55,66 +55,61 @@ final class ScheduleManager
 
     /**
      * ScheduleManager constructor.
-     * @param IEntityRepository $summitevent_repository
-     * @param IEntityRepository $summitpresentation_repository
-     * @param IEntityRepository $eventfeedback_repository
+     * @param ISummitEventRepository $summitevent_repository
+     * @param ISummitPresentationRepository $summitpresentation_repository
+     * @param IEventFeedbackRepository $eventfeedback_repository
      * @param IEventFeedbackFactory $eventfeedback_factory
      * @param ISummitAttendeeRepository $attendee_repository
      * @param IRSVPRepository $rsvp_repository
      * @param ITransactionManager $tx_manager
      */
     public function __construct(
-        IEntityRepository $summitevent_repository,
-        IEntityRepository $summitpresentation_repository,
-        IEntityRepository $eventfeedback_repository,
+        ISummitEventRepository $summitevent_repository,
+        ISummitPresentationRepository $summitpresentation_repository,
+        IEventFeedbackRepository $eventfeedback_repository,
         IEventFeedbackFactory $eventfeedback_factory,
         ISummitAttendeeRepository $attendee_repository,
         IRSVPRepository $rsvp_repository,
         ITransactionManager $tx_manager
-    ) {
-        $this->summitevent_repository        = $summitevent_repository;
+    )
+    {
+        $this->summitevent_repository = $summitevent_repository;
         $this->summitpresentation_repository = $summitpresentation_repository;
-        $this->eventfeedback_repository      = $eventfeedback_repository;
-        $this->eventfeedback_factory         = $eventfeedback_factory;
-        $this->attendee_repository           = $attendee_repository;
-        $this->rsvp_repository               = $rsvp_repository;
-        $this->tx_manager                    = $tx_manager;
+        $this->eventfeedback_repository = $eventfeedback_repository;
+        $this->eventfeedback_factory = $eventfeedback_factory;
+        $this->attendee_repository = $attendee_repository;
+        $this->rsvp_repository = $rsvp_repository;
+        $this->tx_manager = $tx_manager;
     }
 
 
     /**
-     * @param $member_id
-     * @param $event_id
-     * @return mixed
+     * @param int $member_id
+     * @param int $event_id
+     * @return ISummitAttendee
      */
     public function addEventToSchedule($member_id, $event_id)
     {
 
-        $this_var               = $this;
-        $summitevent_repository = $this->summitevent_repository;
-        $attendee_repository    = $this->attendee_repository;
+        return $this->tx_manager->transaction(function () use ($member_id, $event_id) {
 
-        return $this->tx_manager->transaction(function () use (
-            $this_var,
-            $member_id,
-            $event_id,
-            $attendee_repository,
-            $summitevent_repository
-        ) {
-
-            $event = $summitevent_repository->getById($event_id);
+            $event = $this->summitevent_repository->getById($event_id);
             if (!$event) {
                 throw new NotFoundEntityException('Event', sprintf('id %s', $event_id));
             }
 
-            $attendee = $attendee_repository->getByMemberAndSummit($member_id, $event->Summit()->getIdentifier());
+            if (!self::allowToSee($event))
+                throw new NotFoundEntityException('Event', sprintf('id %s', $event_id));
+
+            $attendee = $this->attendee_repository->getByMemberAndSummit($member_id, $event->Summit()->getIdentifier());
 
             if (!$attendee) {
                 throw new NotFoundEntityException('Attendee', sprintf('id %s', $event_id));
             }
-            if($attendee->isScheduled($event_id)){
+            if ($attendee->isScheduled($event_id)) {
                 throw new EntityValidationException('Event already exist on attendee schedule');
             }
+
             $attendee->addToSchedule($event);
             PublisherSubscriberManager::getInstance()->publish(ISummitEntityEvent::AddedToSchedule,
                 array($member_id, $event));
@@ -123,36 +118,30 @@ final class ScheduleManager
         });
     }
 
+
     /**
-     * @param $member_id
-     * @param $event_id
-     * @return mixed
+     * @param int $member_id
+     * @param int $event_id
+     * @return ISummitAttendee
      */
     public function removeEventFromSchedule($member_id, $event_id)
     {
 
-        $this_var = $this;
-        $summitevent_repository = $this->summitevent_repository;
-        $attendee_repository = $this->attendee_repository;
-
         return $this->tx_manager->transaction(function () use (
-            $this_var,
             $member_id,
-            $event_id,
-            $attendee_repository,
-            $summitevent_repository
+            $event_id
         ) {
 
-            $event = $summitevent_repository->getById($event_id);
+            $event = $this->summitevent_repository->getById($event_id);
             if (!$event) {
                 throw new NotFoundEntityException('Event', sprintf('id %s', $event_id));
             }
-            $attendee = $attendee_repository->getByMemberAndSummit($member_id, $event->Summit->getIdentifier());
+            $attendee = $this->attendee_repository->getByMemberAndSummit($member_id, $event->Summit->getIdentifier());
 
             if (!$attendee) {
                 throw new NotFoundEntityException('Attendee', sprintf('id %s', $event_id));
             }
-            if(!$attendee->isScheduled($event_id)){
+            if (!$attendee->isScheduled($event_id)) {
                 throw new NotFoundEntityException('Event does not belong to attendee', sprintf('id %s', $event_id));
             }
             $attendee->removeFromSchedule($event);
@@ -169,33 +158,24 @@ final class ScheduleManager
      * @param ISummitEventFeedback $feedback
      * @return ISummitEventFeedback
      */
-    public function updateFeedback(array $data, ISummitEventFeedback $feedback){
-        $this_var = $this;
-        $summitpresentation_repository = $this->summitpresentation_repository;
-        $eventfeedback_repository = $this->eventfeedback_repository;
-        $speakerfeedback_repository = $this->speakerfeedback_repository;
-        $eventfeedback_factory = $this->eventfeedback_factory;
+    public function updateFeedback(array $data, ISummitEventFeedback $feedback)
+    {
 
         return $this->tx_manager->transaction(function () use (
-            $this_var,
             $data,
-            $feedback,
-            $summitpresentation_repository,
-            $eventfeedback_repository,
-            $eventfeedback_factory,
-            $speakerfeedback_repository
+            $feedback
         ) {
-            if(!$feedback)
-                throw new NotFoundEntityException('SummitEventFeedback',sprintf('id %s',$feedback->getIdentifier()));
+            if (!$feedback)
+                throw new NotFoundEntityException('SummitEventFeedback', sprintf('id %s', $feedback->getIdentifier()));
 
-            $feedback_temp = $eventfeedback_factory->buildEventFeedback($data);
+            $feedback_temp = $this->eventfeedback_factory->buildEventFeedback($data);
             $feedback->Note = $feedback_temp->Note;
             $feedback->Rate = $feedback_temp->Rate;
 
-            $presentation = $summitpresentation_repository->getById($data['event_id']);
+            $presentation = $this->summitpresentation_repository->getById($data['event_id']);
             if ($presentation) {
                 foreach ($presentation->getSpeakers()->toArray() as $speaker) {
-                    $speaker_feedback = $speakerfeedback_repository->getFeedback($speaker->getIdentifier(),$data['event_id'],$data['member_id']);
+                    $speaker_feedback = $this->speakerfeedback_repository->getFeedback($speaker->getIdentifier(), $data['event_id'], $data['member_id']);
                     $speaker_feedback->Note = $feedback_temp->Note;
                     $speaker_feedback->Rate = $feedback_temp->Rate;
                 }
@@ -206,38 +186,30 @@ final class ScheduleManager
     }
 
     /**
-     * @param $data
-     * @return mixed
+     * @param array $data
+     * @return ISummitEventFeedBack
      */
-    public function addFeedback($data)
+    public function addFeedback(array $data)
     {
-        $eventfeedback_repository      = $this->eventfeedback_repository;
-        $eventfeedback_factory         = $this->eventfeedback_factory;
-        $attendee_repository           = $this->attendee_repository;
 
-        return $this->tx_manager->transaction(function () use (
-            $data,
-            $attendee_repository,
-            $eventfeedback_repository,
-            $eventfeedback_factory
-        ) {
+        return $this->tx_manager->transaction(function () use ($data) {
 
             $member_id = intval($data['member_id']);
             $summit_id = intval($data['summit_id']);
-            $attendee  = $attendee_repository->getByMemberAndSummit($member_id, $summit_id);
+            $attendee = $this->attendee_repository->getByMemberAndSummit($member_id, $summit_id);
 
             if (!$attendee) {
                 throw new NotFoundEntityException('Attendee', '');
             }
 
-            $feedback = $eventfeedback_repository->getFeedback($data['event_id'],$member_id);
+            $feedback = $this->eventfeedback_repository->getFeedback($data['event_id'], $member_id);
             if ($feedback) {
                 $feedback->Rate = $data['rating'];
                 $feedback->Note = $data['comment'];
                 $feedback->write();
             } else {
-                $feedback  = $eventfeedback_factory->buildEventFeedback($data);
-                $eventfeedback_repository->add($feedback);
+                $feedback = $this->eventfeedback_factory->buildEventFeedback($data);
+                $this->eventfeedback_repository->add($feedback);
             }
 
             return $feedback;
@@ -245,33 +217,28 @@ final class ScheduleManager
     }
 
     /**
-     * @param $member_id
-     * @param $event_id
-     * @return mixed
+     * @param int $member_id
+     * @param int $event_id
+     * @param string $target
+     * @param int $cal_event_id
+     * @return int
      */
-    public function saveSynchId($member_id, $event_id, $target, $cal_event_id)
+    public function saveSynchId($member_id, $event_id, $target = 'google', $cal_event_id)
     {
 
-        $this_var               = $this;
-        $summitevent_repository = $this->summitevent_repository;
-        $attendee_repository    = $this->attendee_repository;
-
         return $this->tx_manager->transaction(function () use (
-            $this_var,
             $member_id,
             $event_id,
             $target,
-            $cal_event_id,
-            $attendee_repository,
-            $summitevent_repository
+            $cal_event_id
         ) {
 
-            $event = $summitevent_repository->getById($event_id);
+            $event = $this->summitevent_repository->getById($event_id);
             if (!$event) {
                 throw new NotFoundEntityException('Event', sprintf('id %s', $event_id));
             }
 
-            $attendee = $attendee_repository->getByMemberAndSummit($member_id, $event->Summit()->getIdentifier());
+            $attendee = $this->attendee_repository->getByMemberAndSummit($member_id, $event->Summit()->getIdentifier());
 
             if (!$attendee) {
                 throw new NotFoundEntityException('Attendee', sprintf('id %s', $event_id));
@@ -285,36 +252,30 @@ final class ScheduleManager
     }
 
     /**
-     * @param $data
+     * @param array $data
      * @param IMessageSenderService $sender_service
-     * @return mixed
+     * @return RSVP
      */
-    public function addRSVP($data, IMessageSenderService $sender_service)
+    public function addRSVP(array $data, IMessageSenderService $sender_service)
     {
-        $rsvp_repository        = $this->rsvp_repository;
-        $attendee_repository    = $this->attendee_repository;
-        $summitevent_repository = $this->summitevent_repository;
 
         return $this->tx_manager->transaction(function () use (
             $data,
-            $attendee_repository,
-            $rsvp_repository,
-            $summitevent_repository,
             $sender_service
         ) {
 
-            $member_id       = intval($data['member_id']);
-            $summit_id       = intval($data['summit_id']);
-            $event_id        = intval($data['event_id']);
-            $seat_type       = $data['seat_type'];
+            $member_id = intval($data['member_id']);
+            $summit_id = intval($data['summit_id']);
+            $event_id = intval($data['event_id']);
+            $seat_type = $data['seat_type'];
 
-            if(empty($seat_type))
+            if (empty($seat_type))
                 throw new EntityValidationException("invalid seat type!");
 
-            $event           = $summitevent_repository->getById($event_id);
-            $summit_attendee = $attendee_repository->getByMemberAndSummit(intval($member_id), intval($summit_id));
+            $event = $this->summitevent_repository->getById($event_id);
+            $summit_attendee = $this->attendee_repository->getByMemberAndSummit(intval($member_id), intval($summit_id));
 
-            if(is_null($summit_attendee)){
+            if (is_null($summit_attendee)) {
                 throw new EntityValidationException(sprintf("there is no any attendee for member %s and summit %s", $member_id, $summit_id));
             }
 
@@ -327,12 +288,12 @@ final class ScheduleManager
             }
 
             // add to schedule the RSVP event
-            if(!$summit_attendee->isScheduled($event_id)){
+            if (!$summit_attendee->isScheduled($event_id)) {
                 $summit_attendee->addToSchedule($event);
             }
 
-            $old_rsvp = $rsvp_repository->getByEventAndAttendee($event_id, $summit_attendee->getIdentifier());
-            if(!is_null($old_rsvp))
+            $old_rsvp = $this->rsvp_repository->getByEventAndAttendee($event_id, $summit_attendee->getIdentifier());
+            if (!is_null($old_rsvp))
                 throw new EntityValidationException
                 (
                     sprintf
@@ -344,12 +305,12 @@ final class ScheduleManager
                     )
                 );
 
-            $rsvp                = new RSVP();
-            $rsvp->EventID       = $event_id;
+            $rsvp = new RSVP();
+            $rsvp->EventID = $event_id;
             $rsvp->SubmittedByID = $summit_attendee->getIdentifier();
-            $rsvp->SeatType      = $event->getCurrentRSVPSubmissionSeatType();
+            $rsvp->SeatType = $event->getCurrentRSVPSubmissionSeatType();
 
-            if(!$event->couldAddSeatType($rsvp->SeatType))
+            if (!$event->couldAddSeatType($rsvp->SeatType))
                 throw new EntityValidationException
                 (
                     sprintf
@@ -361,29 +322,26 @@ final class ScheduleManager
                     )
                 );
 
-            foreach ($event->RSVPTemplate()->getQuestions() as $q)
-            {
+            foreach ($event->RSVPTemplate()->getQuestions() as $q) {
                 $question_name = $q->name();
 
                 if ($q instanceof RSVPDropDownQuestionTemplate) {
-                    $question_name = ($q->IsMultiSelect) ? $q->name().'[]' : $question_name;
+                    $question_name = ($q->IsMultiSelect) ? $q->name() . '[]' : $question_name;
                 } else if ($q instanceof RSVPCheckBoxListQuestionTemplate) {
-                    $question_name = $q->name().'[]';
+                    $question_name = $q->name() . '[]';
                 }
 
-                if (isset($data[$question_name]))
-                {
+                if (isset($data[$question_name])) {
                     if (!$rsvp || !$answer = $rsvp->findAnswerByQuestion($q)) {
                         $answer = new RSVPAnswer();
                     }
 
                     $answer_value = $data[$question_name];
 
-                    if(is_array($answer_value) ){
+                    if (is_array($answer_value)) {
                         $answer_value = str_replace('{comma}', ',', $answer_value);
                         $answer->Value = implode(',', $answer_value);
-                    }
-                    else{
+                    } else {
                         $answer->Value = $answer_value;
                     }
                     $answer->QuestionID = $q->getIdentifier();
@@ -393,7 +351,7 @@ final class ScheduleManager
                 }
             }
 
-            if(!is_null($sender_service)){
+            if (!is_null($sender_service)) {
                 $rsvp->BeenEmailed = true;
                 $sender_service->send(['Event' => $event, 'Attendee' => $summit_attendee]);
             }
@@ -403,4 +361,38 @@ final class ScheduleManager
             return $rsvp;
         });
     }
-} 
+
+    /**
+     * @param ISummitEvent $summit_event
+     * @return bool
+     */
+    static public function allowToSee(ISummitEvent $summit_event)
+    {
+
+        if (SummitEventType::isPrivate($summit_event->getType()->Type)) {
+            if (!Member::currentUserID())
+                return false;
+
+            if (Member::currentUser()->isAdmin()) return true;
+
+            // i am logged, check if i have permissions
+            if ($summit_event instanceof SummitGroupEvent) {
+
+                $member_groups_code = [];
+                $event_groups_code = [];
+
+                foreach (Member::currentUser()->Groups() as $member_group) {
+                    $member_groups_code[] = $member_group->Code;
+                }
+
+                foreach ($summit_event->Groups() as $event_group) {
+                    $event_groups_code[] = $event_group->Code;
+                }
+
+                return count(array_intersect($event_groups_code, $member_groups_code)) > 0;
+            }
+            return true;
+        }
+        return true;
+    }
+}

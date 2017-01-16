@@ -147,13 +147,17 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
     const EventShareByEmailTokenKey = 'SummitAppEventPageShareEmail.Token';
     const EventShareByEmailCountKey = 'SummitAppEventPageShareEmail.Count';
 
+    /**
+     * @param SS_HTTPRequest $request
+     * @return HTMLText|SS_HTTPResponse|void
+     */
     public function ViewEvent(SS_HTTPRequest $request)
     {
-        $event  = $this->getSummitEntity($request);
+        $event    = $this->getSummitEntity($request);
 
         $goback   = $request->getHeader('Referer') && trim($request->getHeader('Referer'),'/') == trim(Director::absoluteURL($this->Link()),'/')? '1':'';
 
-        if (is_null($event) || !$event->isPublished()) {
+        if (is_null($event) || !$event->isPublished() || !ScheduleManager::allowToSee($event)) {
             return $this->httpError(404, 'Sorry that event could not be found');
         }
 
@@ -184,6 +188,10 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
             ));
     }
 
+    /**
+     * @param SS_HTTPRequest $request
+     * @return HTMLText|SS_HTTPResponse|void
+     */
     public function ViewEventRSVP(SS_HTTPRequest $request){
 
         Requirements::block("summit/css/schedule-grid.css");
@@ -194,6 +202,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
 
         if(is_null($event) ||
             !$event->isPublished() ||
+            !ScheduleManager::allowToSee($event) ||
             !$event->hasRSVPTemplate()) {
             return $this->httpError(404, 'Sorry that event could not be found');
         }
@@ -233,6 +242,10 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         return $page->Link("attendeeInfoRegistration");
     }
 
+    /**
+     * @param SS_HTTPRequest $request
+     * @return HTMLText|void
+     */
     public function eventDetails(SS_HTTPRequest $request)
     {
         if(!Director::is_ajax())
@@ -240,7 +253,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
 
         $event_id = intval($request->param('EVENT_ID'));
         $event    = $this->event_repository->getById($event_id);
-        if (is_null($event) || !$event->isPublished()) {
+        if (is_null($event) || !$event->isPublished() || !ScheduleManager::allowToSee($event)) {
             return $this->httpError(404, 'Sorry that event could not be found');
         }
 
@@ -271,6 +284,10 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         return $form;
     }
 
+    /**
+     * @param SS_HTTPRequest $request
+     * @return HTMLText|SS_HTTPResponse|void
+     */
     public function ViewMySchedule(SS_HTTPRequest $request)
     {
         $member    = Member::currentUser();
@@ -290,11 +307,12 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         $my_schedule = $member->getSummitAttendee($this->Summit()->ID)->Schedule()->sort(array('StartDate'=>'ASC','Location.Name' => 'ASC'));
 
         return $this->renderWith(
-            array('SummitAppMySchedulePage', 'SummitPage', 'Page'),
-            array(
+            ['SummitAppMySchedulePage', 'SummitPage', 'Page'],
+            [
                 'Schedule' => $my_schedule,
                 'Summit'   => $this->Summit(),
-                'goback'   => $goback));
+                'goback'   => $goback
+            ]);
     }
 
     public function ViewFullSchedule(SS_HTTPRequest $request)
@@ -307,11 +325,12 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         Requirements::javascript("summit/javascript/schedule/full-schedule-page.js");
 
         return $this->renderWith(
-            array('SummitAppFullSchedulePage', 'SummitPage', 'Page'),
-            array(
+            ['SummitAppFullSchedulePage', 'SummitPage', 'Page'],
+            [
                 'Schedule' => $schedule,
                 'Summit'   => $this->Summit(),
-                'goback'   => $goback));
+                'goback'   => $goback
+            ]);
     }
 
     public function ExportMySchedule()
@@ -378,14 +397,14 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
 
     public function ExportFullSchedule()
     {
-        $sort = $this->getRequest()->getVar('sort') ? $this->getRequest()->getVar('sort') : 'day';
+        $sort      = $this->getRequest()->getVar('sort') ? $this->getRequest()->getVar('sort') : 'day';
         $show_desc = $this->getRequest()->getVar('show_desc') ? $this->getRequest()->getVar('show_desc') : false;
-        $base = Director::protocolAndHost();
+        $base      = Director::protocolAndHost();
 
         if (is_null($this->Summit())) return $this->httpError(404, 'Sorry, summit not found');
 
-        $schedule = $this->Summit()->getSchedule();
-        $events = new ArrayList();
+        $schedule  = $this->Summit()->getSchedule();
+        $events    = new ArrayList();
         $sort_list = false;
 
         foreach ($schedule as $event) {
@@ -544,11 +563,8 @@ APP_LINKS;
             return $this->httpError(404);
         }
 
-        $summit_id = $this->Summit()->ID;
-
-
         $speakers = $this->speaker_repository->searchBySummitAndTerm($this->Summit(), $term);
-        $events = $this->event_repository->searchBySummitAndTerm($this->Summit(), $term);
+        $events   = $this->event_repository->searchBySummitAndTerm($this->Summit(), $term);
 
         return $this->renderWith
         (

@@ -1,7 +1,6 @@
-<?php
-
+<?php namespace Openstack\Annotations;
 /**
- * Copyright 2015 OpenStack Foundation
+ * Copyright 2016 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,20 +11,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-interface ISummitEventType extends IEntity
+
+use Member;
+use Summit;
+
+/**
+ * Class CacheMethodConditionAttendeeNotLogged
+ * @package Openstack\Annotations
+ * @Annotation
+ * @Target({"ANNOTATION"})
+ */
+class CacheMethodConditionAttendeeNotLogged extends CacheMethodConditionMemberNotLogged
 {
     /**
-     * @return string
+     * @return bool
      */
-    public function getType();
-
-    // default types
-
-    const HandonLabs    = 'Hand-on Labs';
-
-    const Lunch_Breaks  = 'Lunch & Breaks';
-
-    const EveningEvents = 'Evening Events';
-
-    const GroupsEvents  = 'Groups Events';
+    public function check(){
+        return parent::check() && !Member::currentUser()->isAttendee(Summit::ActiveSummitID());
+    }
 }

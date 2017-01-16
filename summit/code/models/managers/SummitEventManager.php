@@ -37,6 +37,11 @@ final class SummitEventManager implements ISummitEventManager
      * @var ISummitReportRepository
      */
     private $report_repository;
+
+    /**
+     * @var ISummitEventFactory
+     */
+    private $event_factory;
     /**
      * @var ITransactionManager
      */
@@ -49,6 +54,7 @@ final class SummitEventManager implements ISummitEventManager
      * @param ISpeakerRepository $speaker_repository
      * @param IMemberRepository $member_repository
      * @param ISummitReportRepository $report_repository
+     * @param ISummitEventFactory $event_factory
      * @param ITransactionManager $tx_service
      */
     public function __construct
@@ -58,6 +64,7 @@ final class SummitEventManager implements ISummitEventManager
         ISpeakerRepository $speaker_repository,
         IMemberRepository $member_repository,
         ISummitReportRepository $report_repository,
+        ISummitEventFactory $event_factory,
         ITransactionManager $tx_service
     )
     {
@@ -66,6 +73,7 @@ final class SummitEventManager implements ISummitEventManager
         $this->speaker_repository = $speaker_repository;
         $this->member_repository  = $member_repository;
         $this->report_repository  = $report_repository;
+        $this->event_factory      = $event_factory;
         $this->tx_service         = $tx_service;
     }
 
@@ -228,9 +236,8 @@ final class SummitEventManager implements ISummitEventManager
                     throw new EntityValidationException('event doest not belongs to summit');
             }
             else {
-                $event           =  PresentationType::IsPresentationEventType($event_type->Type) ?
-                    new Presentation :  new SummitEvent;
-                $event->SummitID = $summit->getIdentifier();
+                // new one
+                $event =  $this->event_factory->build($event_type, $summit);
             }
 
             if(!self::checkEventType($event, $event_type))
@@ -282,6 +289,8 @@ final class SummitEventManager implements ISummitEventManager
 
             self::updatePresentationType($event, $event_type, $event_data);
 
+            self::updatePrivateType($event, $event_type, $event_data);
+
             $must_publish = (bool)$event_data['publish'];
             if($event->isPublished() || $must_publish)
             {
@@ -311,8 +320,6 @@ final class SummitEventManager implements ISummitEventManager
 
             if(!isset($event_data['expect_learn']))
                 throw new EntityValidationException('expect_learn is required');
-
-
 
             if(!isset($event_data['level']))
                 throw new EntityValidationException('level is required');
@@ -400,6 +407,28 @@ final class SummitEventManager implements ISummitEventManager
         return $event;
     }
 
+    /**
+     * @param ISummitEvent $event
+     * @param ISummitEventType $event_type
+     * @param array $event_data
+     * @throws EntityValidationException
+     */
+    private static function updatePrivateType(ISummitEvent $event, ISummitEventType $event_type, array $event_data){
+
+        if($event_type->Type == ISummitEventType::GroupsEvents){
+            if(!isset($event_data['groups']) || count($event_data['groups']) == 0)
+                throw new EntityValidationException('groups is required');
+            $groups_ids = [];
+            foreach ($event_data['groups'] as $group) {
+                if (!isset($group['id']))
+                    throw new EntityValidationException('missing parameter on groups collection!');
+
+                $groups_ids[] = $group['id'];
+
+            }
+            $event->Groups()->setByIDList($groups_ids);
+        }
+    }
     /**
      * @param ISummitEvent $event
      * @param SummitEventType $type

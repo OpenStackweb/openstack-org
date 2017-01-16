@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-
+use Openstack\Annotations as CustomAnnotation;
 /**
  * Class SummitsApi
  */
@@ -270,11 +270,14 @@ final class SummitsApi extends AbstractRestfulJsonApi
         }
     }
 
+    /**
+     * @CustomAnnotation\CachedMethod(lifetime=900, format="JSON")
+     * @param SS_HTTPRequest $request
+     * @return mixed|SS_HTTPResponse
+     */
     public function getAllSponsorshipAddOnsBySummit(SS_HTTPRequest $request)
     {
         try {
-            $response = $this->loadJSONResponseFromCache($request);
-            if(!is_null($response)) return $response;
 
             $summit_id = (int)$request->param('SUMMIT_ID');
             $query = new QueryObject(new SummitAddOn);
@@ -286,7 +289,7 @@ final class SummitsApi extends AbstractRestfulJsonApi
                 array_push($res, SummitAddOnAssembler::toArray($add_on));
             }
 
-            return $this->saveJSONResponseToCache($request, $res)->ok($res);
+            return $this->ok($res);
         } catch (Exception $ex) {
             SS_Log::log($ex, SS_Log::WARN);
 
@@ -294,11 +297,14 @@ final class SummitsApi extends AbstractRestfulJsonApi
         }
     }
 
+    /**
+     * @CustomAnnotation\CachedMethod(lifetime=900, format="JSON")
+     * @param SS_HTTPRequest $request
+     * @return mixed|SS_HTTPResponse
+     */
     public function getAllSponsorshipPackagesBySummit(SS_HTTPRequest $request)
     {
         try {
-            $response = $this->loadJSONResponseFromCache($request);
-            if(!is_null($response)) return $response;
             $query     = new QueryObject(new SummitPackage());
             $summit_id = (int)$request->param('SUMMIT_ID');
             $query->addAndCondition(QueryCriteria::equal('SummitID', $summit_id));
@@ -309,7 +315,7 @@ final class SummitsApi extends AbstractRestfulJsonApi
                 array_push($res, SummitPackageAssembler::toArray($package));
             }
 
-            return $this->saveJSONResponseToCache($request, $res)->ok($res);
+            return $this->ok($res);
         } catch (Exception $ex) {
             SS_Log::log($ex, SS_Log::WARN);
 

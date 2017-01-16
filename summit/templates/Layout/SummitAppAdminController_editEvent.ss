@@ -94,7 +94,7 @@
                             <% loop Summit.EventTypes() %>
                                     <option data-use-sponsors="$UseSponsors"
                                             data-sponsors-mandatory="$AreSponsorsMandatory"
-                                            data-type="<% if $Top.IsPresentationEventType($Type) %>1<% else %>0<% end_if %>"
+                                            data-type-taxonomy="$Top.getTypeTaxonomy($Type)"
                                             <% if $Top.IsPresentationEventType($Type) %>
                                             data-use-speakers="$UseSpeakers"
                                             data-speakers-mandatory="$AreSpeakersMandatory"
@@ -181,6 +181,14 @@
                     </div>
                 </div>
             </div>
+            <div class="form-group groups_container" style="display:none;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label for="groups">Groups</label><br>
+                        <input id="groups" name="groups"/>
+                    </div>
+                </div>
+            </div>
             <script>
                 var speakers          = [];
                 var moderator         = {};
@@ -264,7 +272,14 @@
         var sponsors = [];
         <% if $Event.Sponsors() %>
             <% loop $Event.Sponsors() %>
-            sponsors.push({id : "{$ID}", name : "{$Name.JS}"});
+                sponsors.push({id : "{$ID}", name : "{$Name.JS}"});
+            <% end_loop %>
+        <% end_if %>
+
+        var groups = [];
+        <% if $Event.Groups() %>
+            <% loop $Event.Groups() %>
+                groups.push({id : "{$ID}", name : "{$Title.JS}"});
             <% end_loop %>
         <% end_if %>
 
@@ -279,17 +294,18 @@
                 // set current
                 $('#event_type').val(event_type_id).change();
                 // and get type to filter by
-                var type           = $Top.IsPresentationEventType($Top.Event.Type.Type);
+                var taxonomy           = $Top.getTypeTaxonomy($Top.Event.Type.Type);
                 $("#event_type").find("option").each(function(){
-                    var item_type = $(this).data('type');
-                    if(typeof (item_type) == 'undefined') return;
-                    if(item_type == type) {
+                    var item_taxonomy = $(this).data('type-taxonomy');
+                    if(typeof (item_taxonomy) == 'undefined') return;
+                    if(item_taxonomy == taxonomy) {
                         $(this).removeAttr('disabled');
                     }
                     else{
                         $(this).attr('disabled', 'disabled');
                     }
                 });
+
                 $("#event_type").trigger("chosen:updated");
 
             <% end_if %>

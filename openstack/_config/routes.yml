@@ -6,3 +6,4 @@ Director:
   rules:
     'depsurvey': 'DeploymentSurveyController'
     'profile_images': 'ProfileImageApi'
+    'api/v1/groups': 'GroupsApi'

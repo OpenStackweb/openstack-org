@@ -1,6 +1,6 @@
-<?php
+<?php namespace Openstack\Annotations;
 /**
- * Copyright 2015 Openstack Foundation
+ * Copyright 2016 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -11,10 +11,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-
+use Member;
 /**
- * Interface for per-controller policies.
+ * Class CacheMethodConditionMemberNotLogged
+ * @package Openstack\Annotations
+ * @Annotation
+ * @Target({"ANNOTATION"})
  */
-interface ControllerPolicy {
-    public function applyToResponse($originator, SS_HTTPRequest $request, SS_HTTPResponse $response, DataModel $model);
+class CacheMethodConditionMemberNotLogged extends CacheMethodCondition
+{
+    /**
+     * @return bool
+     */
+    public function check(){
+        return is_null(Member::currentUserID()) || Member::currentUserID() == 0;
+    }
 }

@@ -1,7 +1,6 @@
 <?php
-
 /**
- * Copyright 2015 OpenStack Foundation
+ * Copyright 2016 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,20 +11,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-interface ISummitEventType extends IEntity
-{
-    /**
-     * @return string
-     */
-    public function getType();
 
-    // default types
+// here you define all custom annotations
 
-    const HandonLabs    = 'Hand-on Labs';
-
-    const Lunch_Breaks  = 'Lunch & Breaks';
-
-    const EveningEvents = 'Evening Events';
-
-    const GroupsEvents  = 'Groups Events';
-}
+require_once  __DIR__.'/../apis/CacheMethodCondition.php';
+require_once  __DIR__.'/../apis/CacheMethodConditionMemberNotLogged.php';
+require_once  __DIR__.'/../apis/CacheMethodConditionAttendeeNotLogged.php';
+require_once  __DIR__.'/../apis/CachedMethod.php';

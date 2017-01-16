@@ -145,12 +145,12 @@ final class SummitAdminUI extends DataExtension
         if ($this->owner->ID > 0) {
             $summit_id = $this->owner->ID;
             // tracks
-            $config = GridFieldConfig_RecordEditor::create(25);
+            $config = GridFieldConfig_RecordEditor::create(50);
             $config->addComponent(new GridFieldCopyTracksAction($summit_id));
             $categories = new GridField('Categories', 'Presentation Categories', $this->owner->getCategories(), $config);
             $f->addFieldToTab('Root.Presentation Categories', $categories);
 
-            $config = GridFieldConfig_RelationEditor::create(25);
+            $config = GridFieldConfig_RelationEditor::create(50);
             $config->removeComponentsByType(new GridFieldDataColumns());
             $config->removeComponentsByType(new GridFieldDetailForm());
             $config->addComponent(new GridFieldUpdateDefaultCategoryTags);
@@ -176,7 +176,7 @@ final class SummitAdminUI extends DataExtension
             $f->addFieldToTab('Root.Presentation Categories', $default_tags);
 
             // track groups
-            $config = GridFieldConfig_RecordEditor::create(25);
+            $config = GridFieldConfig_RecordEditor::create(50);
             $config->removeComponentsByType('GridFieldAddNewButton');
             $multi_class_selector = new GridFieldAddNewMultiClass();
             $multi_class_selector->setClasses
@@ -192,7 +192,7 @@ final class SummitAdminUI extends DataExtension
             $f->addFieldToTab('Root.Category Groups', $categories);
 
             // locations
-            $config = GridFieldConfig_RecordEditor::create();
+            $config = GridFieldConfig_RecordEditor::create(50);
             $config->removeComponentsByType('GridFieldAddNewButton');
             $multi_class_selector = new GridFieldAddNewMultiClass();
             $multi_class_selector->setClasses
@@ -232,7 +232,7 @@ final class SummitAdminUI extends DataExtension
 
             //schedule
 
-            $config = GridFieldConfig_RecordEditor::create(25);
+            $config = GridFieldConfig_RecordEditor::create(50);
             $config->addComponent(new GridFieldAjaxRefresh(1000, false));
             $config->removeComponentsByType('GridFieldDeleteAction');
             $gridField = new GridField('Schedule', 'Schedule', $this->owner->Events()->filter('Published', true)->sort
@@ -240,7 +240,7 @@ final class SummitAdminUI extends DataExtension
                 array
                 (
                     'StartDate' => 'ASC',
-                    'EndDate' => 'ASC'
+                    'EndDate'   => 'ASC'
                 )
             ), $config);
             $config->getComponentByType("GridFieldDataColumns")->setFieldCasting(array("Description" => "HTMLText->BigSummary"));
@@ -249,18 +249,41 @@ final class SummitAdminUI extends DataExtension
 
             // events
 
-            $config = GridFieldConfig_RecordEditor::create(25);
+            $config = GridFieldConfig_RecordEditor::create(50);
+            $config->removeComponentsByType('GridFieldAddNewButton');
+            $multi_class_selector = new GridFieldAddNewMultiClass();
+            $multi_class_selector->setClasses
+            (
+                array
+                (
+                    'SummitEvent'      => 'Event',
+                    'SummitGroupEvent' => 'Group Event',
+                )
+            );
+            $config->addComponent($multi_class_selector);
             $config->addComponent(new GridFieldPublishSummitEventAction);
             $config->addComponent(new GridFieldAjaxRefresh(1000, false));
 
-            $gridField = new GridField('Events', 'Events', $this->owner->Events()->filter('ClassName', 'SummitEvent'),
-                $config);
-            $config->getComponentByType("GridFieldDataColumns")->setFieldCasting(array("Description" => "HTMLText->BigSummary"));
+            $gridField = new GridField
+            (
+                'Events',
+                'Events',
+                $this->owner->Events()->filter('ClassName:ExactMatch:not', 'Presentation'),
+                $config
+            );
+
+            $config
+            ->getComponentByType("GridFieldDataColumns")
+            ->setFieldCasting
+            (
+                ["Description" => "HTMLText->BigSummary"]
+            );
+
             $f->addFieldToTab('Root.Events', $gridField);
 
             //track selection list presentations
 
-            $config = GridFieldConfig_RecordEditor::create(25);
+            $config    = GridFieldConfig_RecordEditor::create(50);
             $gridField = new GridField('TrackChairsSelectionLists', 'TrackChairs Selection Lists',
                 SummitSelectedPresentationList::get()->filter('ListType', 'Group')
                     ->where(' CategoryID IN ( SELECT ID FROM PresentationCategory WHERE SummitID = ' . $summit_id . ')')
@@ -270,13 +293,13 @@ final class SummitAdminUI extends DataExtension
 
             // attendees
 
-            $config = GridFieldConfig_RecordEditor::create(25);
+            $config = GridFieldConfig_RecordEditor::create(50);
             $gridField = new GridField('Attendees', 'Attendees', $this->owner->Attendees(), $config);
             $f->addFieldToTab('Root.Attendees', $gridField);
 
             // tickets types
 
-            $config = GridFieldConfig_RecordEditor::create(25);
+            $config = GridFieldConfig_RecordEditor::create(50);
             $gridField = new GridField('SummitTicketTypes', 'Ticket Types', $this->owner->SummitTicketTypes(), $config);
             $f->addFieldToTab('Root.TicketTypes', $gridField);
 
@@ -303,14 +326,14 @@ final class SummitAdminUI extends DataExtension
 
             // speakers
 
-            $config = GridFieldConfig_RecordEditor::create(25);
+            $config = GridFieldConfig_RecordEditor::create(50);
             $gridField = new GridField('Speakers', 'Speakers', $this->owner->Speakers(false), $config);
             $config->getComponentByType("GridFieldDataColumns")->setFieldCasting(array("Bio" => "HTMLText->BigSummary"));
             $f->addFieldToTab('Root.Speakers', $gridField);
 
             // presentations
 
-            $config = GridFieldConfig_RecordEditor::create(25);
+            $config = GridFieldConfig_RecordEditor::create(50);
             $config->addComponent(new GridFieldPublishSummitEventAction);
             $config->addComponent(new GridFieldAjaxRefresh(1000, false));
 
@@ -320,7 +343,7 @@ final class SummitAdminUI extends DataExtension
             $f->addFieldToTab('Root.Presentations', $gridField);
 
             // push notifications
-            $config = GridFieldConfig_RecordEditor::create(25);
+            $config = GridFieldConfig_RecordEditor::create(50);
             $config->addComponent(new GridFieldAjaxRefresh(1000, false));
             $config->getComponentByType('GridFieldDataColumns')->setDisplayFields
             (
@@ -341,7 +364,7 @@ final class SummitAdminUI extends DataExtension
 
             // entity events
 
-            $config = GridFieldConfig_RecordEditor::create(25);
+            $config = GridFieldConfig_RecordEditor::create(50);
             $config->addComponent(new GridFieldAjaxRefresh(1000, false));
             $config->addComponent(new GridFieldWipeDevicesDataAction);
             $config->addComponent(new GridFieldDeleteAllSummitEntityEventsAction);
@@ -350,27 +373,27 @@ final class SummitAdminUI extends DataExtension
             $f->addFieldToTab('Root.EntityEvents', $gridField);
 
             //TrackChairs
-            $config = GridFieldConfig_RecordEditor::create(25);
+            $config = GridFieldConfig_RecordEditor::create(50);
             $config->addComponent(new GridFieldAjaxRefresh(1000, false));
             $gridField = new GridField('TrackChairs', 'TrackChairs', $this->owner->TrackChairs(), $config);
             $f->addFieldToTab('Root.TrackChairs', $gridField);
 
             //RSVP templates
 
-            $config = GridFieldConfig_RecordEditor::create(40);
+            $config = GridFieldConfig_RecordEditor::create(50);
             $config->addComponent(new GridFieldAjaxRefresh(1000, false));
             $gridField = new GridField('RSVPTemplates', 'RSVPTemplates', $this->owner->RSVPTemplates(), $config);
             $f->addFieldToTab('Root.RSVPTemplates', $gridField);
 
             // Summit Packages
-            $config = GridFieldConfig_RecordEditor::create();
+            $config = GridFieldConfig_RecordEditor::create(50);
             $config->addComponent(new GridFieldSortableRows('Order'));
             $gridField = new GridField('SummitPackages', 'Sponsor Packages', $this->owner->SummitPackages(), $config);
             $f->addFieldToTab('Root.Sponsor Packages', $gridField);
 
             // Summit Add Ons
 
-            $config = GridFieldConfig_RecordEditor::create();
+            $config = GridFieldConfig_RecordEditor::create(50);
             $config->addComponent(new GridFieldSortableRows('Order'));
 
             // Remove pagination so that you can sort all add-ons collectively

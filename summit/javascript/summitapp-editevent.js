@@ -11,7 +11,11 @@
  * limitations under the License.
  **/
 
-var form_validator = null;
+var form_validator        = null;
+var TaxonomyEvent         = 1;
+var TaxonomyPresentation  = 2;
+var TaxonomyGroupEvent    = 3;
+var TaxonomyTeamEvent     = 4;
 
 $(document).ready(function(){
 
@@ -51,9 +55,7 @@ $(document).ready(function(){
 
         var useSponsors       = item.data('use-sponsors');
         var sponsorsMandatory = item.data('sponsors-mandatory');
-        var type              = item.data('type');
-
-        console.log('event type selected '+ type);
+        var type              = item.data('type-taxonomy');
 
         if(useSponsors) $('.sponsors-container').show();
         else $('.sponsors-container').hide();
@@ -65,7 +67,7 @@ $(document).ready(function(){
             $('#sponsors').rules("remove");
         }
 
-        if(type == 1){
+        if(type == TaxonomyPresentation){
             var useSpeakers       = item.data('use-speakers');
             var speakersMandatory = item.data('speakers-mandatory');
 
@@ -100,6 +102,17 @@ $(document).ready(function(){
             $('#expect_learn_container').hide();
             $('.level_container').hide();
             $('#allow_feedback').removeAttr("checked");
+            $('.moderator-container').hide();
+            $('.speakers-container').hide();
+            $('#moderator').rules("remove");
+            $('#speakers').rules("remove");
+        }
+
+        if(type == TaxonomyGroupEvent ){
+            $('.groups_container').show();
+        }
+        else{
+            $('.groups_container').hide();
         }
     });
     // speakers autocomplete
@@ -254,6 +267,42 @@ $(document).ready(function(){
         $('#moderator').tagsinput('add', moderator);
     }
 
+    // groups autocomplete
+
+    var groups_source = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: {
+            url: 'api/v1/groups?query=%QUERY',
+            wildcard: '%QUERY'
+        }
+    });
+
+    $('#groups').tagsinput({
+        itemValue: 'id',
+        itemText: 'name',
+        freeInput: false,
+        allowDuplicates: false,
+        trimValue: true,
+        tagClass: 'label label-success',
+        typeaheadjs: [
+            {
+                hint: true,
+                highlight: true,
+                minLength: 2
+            },
+            {
+                name: 'groups_source',
+                displayKey: 'name',
+                source: groups_source
+            }
+        ]
+    });
+
+    $.each(groups, function(index, value) {
+        $('#groups').tagsinput('add', value);
+    });
+
     tinymce.init({
         selector: "textarea.html_text",
         width:      '100%',
@@ -284,8 +333,8 @@ $(document).ready(function(){
             headcount: { number: true },
             event_type: { required: true },
             level: { required: function(){
-                var event_type = $('#event_type').find("option:selected").text();
-                return event_type === 'Presentation' || event_type === 'Keynotes' || event_type === 'Panel';
+                var type = $('#event_type').find("option:selected").data('type-taxonomy');
+                return type == TaxonomyPresentation;
             }},
             track: { required: function(){
                 return true;
@@ -303,6 +352,10 @@ $(document).ready(function(){
                 var published = $('#published').val();
                 var start_date  = $('#start_date').val();
                 return is_publishing || published || start_date != '';
+            }},
+            groups: { required: function(){
+                var type = $('#event_type').find("option:selected").data('type-taxonomy');
+                return type === TaxonomyGroupEvent;
             }},
         },
     });
@@ -418,6 +471,7 @@ $(document).ready(function(){
             sponsors: $('#sponsors').val(),
             speakers: $('#speakers').tagsinput('items'),
             moderator: $('#moderator').tagsinput('items')[0],
+            groups: $('#groups').tagsinput('items'),
             publish: publish
         };
 

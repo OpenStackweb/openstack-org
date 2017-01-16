@@ -35,7 +35,7 @@ class SapphireSummitEventRepository extends SapphireRepository implements ISummi
      */
     public function searchBySummitAndTerm(ISummit $summit, $term)
     {
-        $events = array();
+        $events    = [];
 
         $summit_id = $summit->getIdentifier();
 
@@ -117,7 +117,9 @@ SQL;
         foreach(DB::query($sql_events.") AS Q1 ORDER BY StartDate ASC, EndDate ASC ;") as $row)
         {
             $class = $row['ClassName'];
-            array_push($events, new $class($row));
+            $event = new $class($row);
+            if(!ScheduleManager::allowToSee($event)) continue;
+            $events[] = $event;
         }
 
         return $events;

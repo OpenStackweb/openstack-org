@@ -141,7 +141,16 @@ class SummitEventType extends DataObject implements ISummitEventType
      * @param string $type
      * @return bool
      */
-    public static function IsSummitEventType($type){
+    static public function IsSummitEventType($type){
         return !PresentationType::IsPresentationEventType($type);
+    }
+
+    /**
+     * @param string $type
+     * @return bool
+     */
+    static public function isPrivate($type){
+        $private_types = [ISummitEventType::GroupsEvents];
+        return in_array($type, $private_types);
     }
 }
