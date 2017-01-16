@@ -350,57 +350,7 @@
                                     <td><a target="_blank" href="https://releases.openstack.org/reference/release_models.html"><%t Openstack.VIEW_DETAILS 'View details' %></a></td>
                                 </tr>
 
-                                <tr>
-                                    <td>
-                                         <%t Software.EXISTENCE_AND_QUALITY 'Existence and quality of packages for this project in popular distributions.' %>
-                                    </td>
-                                    <td>
-                                        <ul>
-                                            <li <% if $Component.QualityOfPackages == 'good' %>class="on"<% end_if %>>
-                                                <a href="https://github.com/openstack/ops-tags-team/blob/master/descriptions/ops-packaged.rst" target="_blank">
-                                                    <i class="fa <% if $Component.QualityOfPackages == 'good' %>fa-circle<% else %>fa-circle-o<% end_if %>"></i><span><%t Software.GOOD 'Good' %></span>
-                                                </a>
-                                                <% if $Component.QualityOfPackages == 'good' %>
-                                                    <% loop $Component.getCaveatsForReleaseType($Top.CurrentRelease.ID, QualityOfPackages) %>
-                                                        <i class="fa fa-sticky-note tag-caveat-note" data-container="body" data-toggle="popover" data-placement="right" data-content="{$Label} : {$Description}"></i>
-                                                    <% end_loop %>
-                                                <% end_if %>
-                                            </li>
-                                            <li <% if $Component.QualityOfPackages == 'no' %>class="on"<% end_if %>>
-                                                <a href="https://github.com/openstack/ops-tags-team/blob/master/descriptions/ops-packaged.rst" target="_blank">
-                                                    <i class="fa <% if $Component.QualityOfPackages == 'no' %>fa-circle<% else %>fa-circle-o<% end_if %>"></i><span><%t Openstack.NO 'No' %></span>
-                                                </a>
-                                                <% if $Component.QualityOfPackages == 'no' %>
-                                                    <% loop $Component.getCaveatsForReleaseType($Top.CurrentRelease.ID, QualityOfPackages) %>
-                                                        <i class="fa fa-sticky-note tag-caveat-note" data-container="body" data-toggle="popover" data-placement="right" data-content="{$Label} : {$Description}"></i>
-                                                    <% end_loop %>
-                                                <% end_if %>
-                                            </li>
-                                            <li <% if $Component.QualityOfPackages == 'warning' %>class="on"<% end_if %>>
-                                                <a href="https://github.com/openstack/ops-tags-team/blob/master/descriptions/ops-packaged.rst" target="_blank">
-                                                    <i class="fa <% if $Component.QualityOfPackages == 'warning' %>fa-circle<% else %>fa-circle-o<% end_if %>"></i><span><%t Software.WARNING 'Warning' %></span>
-                                                </a>
-                                                <% if $Component.QualityOfPackages == 'warning' %>
-                                                    <% loop $Component.getCaveatsForReleaseType($Top.CurrentRelease.ID, QualityOfPackages) %>
-                                                        <i class="fa fa-sticky-note tag-caveat-note" data-container="body" data-toggle="popover" data-placement="right" data-content="{$Label} : {$Description}"></i>
-                                                    <% end_loop %>
-                                                <% end_if %>
-                                            </li>
-                                            <li <% if $Component.QualityOfPackages == 'beginning' %>class="on"<% end_if %>>
-                                                <a href="https://github.com/openstack/ops-tags-team/blob/master/descriptions/ops-packaged.rst" target="_blank">
-                                                    <i class="fa <% if $Component.QualityOfPackages == 'beginning' %>fa-circle<% else %>fa-circle-o<% end_if %>"></i><span><%t Software.BEGINNING 'Beginning' %></span>
-                                                </a>
-                                                <% if $Component.QualityOfPackages == 'beginning' %>
-                                                    <% loop $Component.getCaveatsForReleaseType($Top.CurrentRelease.ID, QualityOfPackages) %>
-                                                        <i class="fa fa-sticky-note tag-caveat-note" data-container="body" data-toggle="popover" data-placement="right" data-content="{$Label} : {$Description}"></i>
-                                                    <% end_loop %>
-                                                <% end_if %>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                    <td><a href="https://github.com/openstack/ops-tags-team/blob/master/descriptions/ops-packaged.rst" target="_blank"><%t Openstack.VIEW_DETAILS 'View details' %></a></td>
-                                </tr>
-                                <tr>
+                               <tr>
                                     <td>
                                         <%t Software.VULNERABILITY_ISSUES 'Are vulnerability issues managed by the OpenStack security team?' %>
                                     </td>
