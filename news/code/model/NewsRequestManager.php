@@ -94,7 +94,7 @@ final class NewsRequestManager {
                 $upload_service
             );
 
-            $news->PreApproved = $data['pre-approved'];
+            $news->PreApproved = isset($data['pre-approved']) ? $data['pre-approved'] : 0;
 
             $repository->add($news);
 
@@ -154,7 +154,7 @@ final class NewsRequestManager {
             $news->clearTags();
             $news->registerTags($data['tags']);
 
-            $news->PreApproved = $data['pre-approved'];
+            $news->PreApproved = isset($data['pre-approved']) ? $data['pre-approved'] : 0;
 
 			return $news;
 		});

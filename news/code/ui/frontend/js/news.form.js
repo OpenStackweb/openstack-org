@@ -36,15 +36,24 @@ jQuery(document).ready(function($){
             theme: "advanced",
             mode : "textareas",
             theme_advanced_toolbar_location: "top",
-            theme_advanced_buttons1: "formatselect,|,bold,italic,underline,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,outdent,indent,separator,bullist,link,undo,redo,code",
+            theme_advanced_buttons1: "bold,italic,underline,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,outdent,indent,separator,bullist,link,undo,redo,code",
             theme_advanced_buttons2: "",
             theme_advanced_buttons3: "",
             plugins : "paste",
-            paste_text_sticky : true,
+            paste_preprocess : function(pl, o) {
+                var tmp = $('<div />', {
+                    html: o.content
+                })
+                var $elements = tmp.find("*").not("a,br");
+
+                for (var i = $elements.length - 1; i >= 0; i--) {
+                    var e = $elements[i];
+                    $(e).replaceWith(e.innerHTML);
+                }
+
+                o.content = tmp.html();
+            },
             setup : function(ed) {
-                ed.onInit.add(function(ed) {
-                    ed.pasteAsPlainText = true;
-                });
                 ed.onKeyDown.add(function(ed, evt) {
                     var key = evt.keyCode;
                     var max_chars = $(tinyMCE.get(tinyMCE.activeEditor.id).getElement()).attr('max_chars');
@@ -59,8 +68,17 @@ jQuery(document).ready(function($){
                 });
                 ed.onPaste.add(function(ed, evt) {
                     var max_chars = $(tinyMCE.get(tinyMCE.activeEditor.id).getElement()).attr('max_chars');
+                    evt.preventDefault();
+                    // Get that data as text.
+                    var content = ((evt.originalEvent || evt).clipboardData || window.clipboardData).getData('text');
+
                     if (max_chars) {
-                        $(ed.getBody()).text(ed.getContent({ 'format' : 'text' }).substr(0,max_chars));
+                        if (content.length > parseInt(max_chars)) {
+                            alert('Summary is too long!');
+                            return false;
+                        } else {
+                            ed.execCommand('mceInsertContent', false, content);
+                        }
                     }
                 });
             },

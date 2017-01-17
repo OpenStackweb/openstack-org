@@ -61,7 +61,7 @@ final class SapphireNewsRepository extends SapphireRepository {
             $where_string .= " AND (DateEmbargo < '$now' OR DateEmbargo IS NULL)";
         }
 
-        $list = News::get()->where($where_string)->sort(array('Created'=>'DESC','Rank'=>'ASC'))->limit(1000)->toArray();
+        $list = News::get()->where($where_string)->sort(array('DateEmbargo'=>'DESC','Rank'=>'ASC'))->limit(1000)->toArray();
         return $list;
 
     }
