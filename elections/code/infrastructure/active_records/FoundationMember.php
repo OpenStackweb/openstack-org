@@ -22,13 +22,14 @@ final class FoundationMember
 
     private static $db = array
     (
-        'ShowDupesOnProfile' => "Boolean"
+        'ShowDupesOnProfile' => "Boolean",
+        'ResignDate'         => 'SS_Datetime',
     );
 
     private static $has_many = array
     (
         'RevocationNotifications' => 'FoundationMemberRevocationNotification',
-        'Votes'                   => 'Vote',
+        'Votes' => 'Vote',
         'SummitRegistrationCodes' => 'MemberSummitRegistrationPromoCode',
     );
 
@@ -37,56 +38,51 @@ final class FoundationMember
         'ShowDupesOnProfile' => TRUE
     );
 
-    /**
-     * @return int
-     */
-    public function getIdentifier()
-    {
-        return (int)$this->owner->getField('ID');
-    }
-
-
     public function convert2SiteUser()
     {
-        $this->resign(false);
+        $this->resign();
         $this->owner->addToGroupByCode(IFoundationMember::CommunityMemberGroupSlug);
     }
 
     /**
-     * @param bool $remove_affiliation_data
      * @return void
      */
-    public function resign($remove_affiliation_data = true)
+    public function resign()
     {
         // Remove member from Foundation group
         foreach ($this->owner->Groups() as $g) {
-            $this->owner->Groups()->remove($g);
+            if ($g->Code == IFoundationMember::FoundationMemberGroupSlug) {
+                $this->owner->Groups()->remove($g);
+                break;
+            }
         }
 
-        // Remove member managed companies
-        foreach ($this->owner->ManagedCompanies() as $c) {
-            $this->owner->ManagedCompanies()->remove($c);
-        }
         // Remove Member's Legal Agreements
         $legal_agreements = $this->owner->LegalAgreements();
-        if ($legal_agreements)
+        if ($legal_agreements) {
             foreach ($legal_agreements as $document) {
                 $document->delete();
             }
-
-        // Remove Member's Affiliations
-        if ($remove_affiliation_data) {
-            $affiliations = $this->owner->Affiliations();
-            if ($affiliations)
-                foreach ($affiliations as $affiliation) {
-                    $affiliation->delete();
-                }
         }
+
+        $this->owner->ResignDate = MySQLDatabase56::nowRfc2822();
     }
 
     public function onBeforeDelete()
     {
+
         $this->resign();
+        // Remove member managed companies
+        foreach ($this->owner->ManagedCompanies() as $c) {
+            $this->owner->ManagedCompanies()->remove($c);
+        }
+        // Remove Member's Affiliations
+        $affiliations = $this->owner->Affiliations();
+        if ($affiliations)
+            foreach ($affiliations as $affiliation) {
+                $affiliation->delete();
+            }
+
     }
 
     public function upgradeToFoundationMember()
@@ -194,6 +190,14 @@ final class FoundationMember
             }
         }
         return $res;
+    }
+
+    /**
+     * @return int
+     */
+    public function getIdentifier()
+    {
+        return (int)$this->owner->getField('ID');
     }
 
     /**
