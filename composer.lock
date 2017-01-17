@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "49c08ffbc879393ff42aa7cddcdce6e2",
-    "content-hash": "cf3dd0b0251108930fdaf43fcae6b9a2",
+    "hash": "85224735f5cd67a55ff178c5301808f7",
+    "content-hash": "1c49fcefa8770eaf734a638aa4de8ccb",
     "packages": [
         {
             "name": "composer/installers",
@@ -1624,16 +1624,16 @@
         },
         {
             "name": "silverstripe/cms",
-            "version": "3.1.16",
+            "version": "3.1.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-cms.git",
-                "reference": "592588333026502b4968b1837d5725fbe7252745"
+                "reference": "03c628345b93ce25b27a753447e8ff007c4c1125"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-cms/zipball/592588333026502b4968b1837d5725fbe7252745",
-                "reference": "592588333026502b4968b1837d5725fbe7252745",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-cms/zipball/03c628345b93ce25b27a753447e8ff007c4c1125",
+                "reference": "03c628345b93ce25b27a753447e8ff007c4c1125",
                 "shasum": ""
             },
             "require": {
@@ -1667,20 +1667,20 @@
                 "cms",
                 "silverstripe"
             ],
-            "time": "2015-11-16 02:08:39"
+            "time": "2016-05-10 22:58:24"
         },
         {
             "name": "silverstripe/framework",
-            "version": "3.1.16",
+            "version": "3.1.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/silverstripe-framework.git",
-                "reference": "2e6469956fa76513c6c9c70587c806f095ddb6d7"
+                "reference": "68dca6f6c0cc14b1b0f1e1f70a608f78939ac156"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-framework/zipball/2e6469956fa76513c6c9c70587c806f095ddb6d7",
-                "reference": "2e6469956fa76513c6c9c70587c806f095ddb6d7",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-framework/zipball/68dca6f6c0cc14b1b0f1e1f70a608f78939ac156",
+                "reference": "68dca6f6c0cc14b1b0f1e1f70a608f78939ac156",
                 "shasum": ""
             },
             "require": {
@@ -1716,7 +1716,7 @@
                 "framework",
                 "silverstripe"
             ],
-            "time": "2015-11-16 02:20:30"
+            "time": "2016-05-10 23:09:20"
         },
         {
             "name": "silverstripe/geoip",
