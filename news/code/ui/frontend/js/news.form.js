@@ -68,18 +68,10 @@ jQuery(document).ready(function($){
                 });
                 ed.onPaste.add(function(ed, evt) {
                     var max_chars = $(tinyMCE.get(tinyMCE.activeEditor.id).getElement()).attr('max_chars');
-<<<<<<< HEAD
-                    evt.preventDefault();
-                    // Get that data as text.
-                    var content = ((evt.originalEvent || evt).clipboardData || window.clipboardData).getData('text');
-
-                    if (max_chars) {
-=======
                     var content = ((evt.originalEvent || evt).clipboardData || window.clipboardData).getData('Text');
 
                     if (max_chars) {
                         evt.preventDefault();
->>>>>>> hotfix/12193-news-fixes-2
                         if (content.length > parseInt(max_chars)) {
                             alert('Summary is too long!');
                             return false;
