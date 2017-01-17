@@ -65,14 +65,14 @@ class SurveyDoubleEntryTableQuestionTemplate extends SurveyMultiValueQuestionTem
             $fields->removeByName('DefaultValueID');
             $fields->removeByName('Values');
 
-            $config = GridFieldConfig_RecordEditor::create();
+            $config = GridFieldConfig_RecordEditor::create(PHP_INT_MAX);
             $config->addComponent(new GridFieldSortableRows('Order'));
             $add_button = $config->getComponentByType('GridFieldAddNewButton');
             $add_button->setButtonName('Add New Column Value');
             $gridField = new GridField('Columns', 'Columns', $this->Columns(), $config);
             $fields->add($gridField);
 
-            $config = GridFieldConfig_RecordEditor::create();
+            $config = GridFieldConfig_RecordEditor::create(PHP_INT_MAX);
             $config->addComponent(new GridFieldSortableRows('Order'));
             $add_button = $config->getComponentByType('GridFieldAddNewButton');
             $add_button->setButtonName('Add New Row Value');

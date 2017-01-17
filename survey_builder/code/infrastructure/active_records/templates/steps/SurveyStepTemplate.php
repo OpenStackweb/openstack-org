@@ -203,7 +203,7 @@ class SurveyStepTemplate
 
         if($this->ID > 0 ){
             //depends on
-            $config = GridFieldConfig_RelationEditor::create();
+            $config = GridFieldConfig_RelationEditor::create(PHP_INT_MAX);
             $config->removeComponentsByType('GridFieldEditButton');
             $config->removeComponentsByType('GridFieldAddNewButton');
 

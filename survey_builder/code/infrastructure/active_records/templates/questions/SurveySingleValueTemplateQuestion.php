@@ -36,7 +36,7 @@ class SurveySingleValueTemplateQuestion
 
         if($this->ID > 0 ){
             //validation rules
-            $config = GridFieldConfig_RelationEditor::create();
+            $config = GridFieldConfig_RelationEditor::create(PHP_INT_MAX);
             $config->removeComponentsByType('GridFieldAddNewButton');
             $gridField = new GridField('ValidationRules', 'ValidationRules', $this->ValidationRules(), $config);
             $fields->add($gridField);

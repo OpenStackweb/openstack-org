@@ -1,4 +1,4 @@
-<h1>$Survey.Template.Title : $Survey.CurrentStep.Template.FriendlyName</h1>
+<h1 class="survey-subtitle">$Survey.Template.Title : $Survey.CurrentStep.Template.FriendlyName</h1>
 <div class="container survey-container">
     <% include Surveys_Header %>
     <div class="row survey-step-container">
