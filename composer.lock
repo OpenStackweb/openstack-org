@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "82540e29e76f3158a54bed5f10e07b69",
-    "content-hash": "ee2d739dd6ed7426a97ca5eb7b2efd68",
+    "hash": "c7fb4e164fd7e60ceca99c2d9de67d70",
+    "content-hash": "399e763e0dae75d1148481a8c4b221f8",
     "packages": [
         {
             "name": "composer/installers",
@@ -2174,16 +2174,16 @@
         },
         {
             "name": "tractorcow/silverstripe-fluent",
-            "version": "dev-patch/default-route",
+            "version": "3.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/unclecheese/silverstripe-fluent.git",
-                "reference": "59a43e718cf3c12a0e900378fb7463b2f311b873"
+                "reference": "22aee0d1d62b4a37d67981882b5cbe56a5a4c904"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/unclecheese/silverstripe-fluent/zipball/59a43e718cf3c12a0e900378fb7463b2f311b873",
-                "reference": "59a43e718cf3c12a0e900378fb7463b2f311b873",
+                "url": "https://api.github.com/repos/unclecheese/silverstripe-fluent/zipball/22aee0d1d62b4a37d67981882b5cbe56a5a4c904",
+                "reference": "22aee0d1d62b4a37d67981882b5cbe56a5a4c904",
                 "shasum": ""
             },
             "require": {
@@ -2216,9 +2216,9 @@
             ],
             "support": {
                 "issues": "http://github.com/tractorcow/silverstripe-fluent/issues",
-                "source": "https://github.com/unclecheese/silverstripe-fluent/tree/patch/default-route"
+                "source": "https://github.com/unclecheese/silverstripe-fluent/tree/3.2.3"
             },
-            "time": "2016-06-27 22:20:41"
+            "time": "2015-11-06 03:26:40"
         },
         {
             "name": "tractorcow/silverstripe-opengraph",
@@ -4336,7 +4336,6 @@
         "unclecheese/bootstrap-tagfield": 20,
         "silverstripe/gridfieldajaxrefresh": 20,
         "phpoffice/phpexcel": 20,
-        "tractorcow/silverstripe-fluent": 20,
         "tractorcow/silverstripe-opengraph": 20,
         "phpunit/phpunit": 0,
         "behat/behat": 0,
