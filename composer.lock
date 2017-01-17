@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "85224735f5cd67a55ff178c5301808f7",
-    "content-hash": "1c49fcefa8770eaf734a638aa4de8ccb",
+    "hash": "5fe5649dd0e83c3746d0f8c2cee684c1",
+    "content-hash": "736c4f193bec6490f930c79efdea1d71",
     "packages": [
         {
             "name": "composer/installers",
@@ -118,35 +118,35 @@
         },
         {
             "name": "doctrine/annotations",
-            "version": "dev-master",
+            "version": "v1.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/annotations.git",
-                "reference": "1fcf863da06d8f305fc031ee87360f087d854c8d"
+                "reference": "f25c8aab83e0c3e976fd7d19875f198ccf2f7535"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/annotations/zipball/1fcf863da06d8f305fc031ee87360f087d854c8d",
-                "reference": "1fcf863da06d8f305fc031ee87360f087d854c8d",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/f25c8aab83e0c3e976fd7d19875f198ccf2f7535",
+                "reference": "f25c8aab83e0c3e976fd7d19875f198ccf2f7535",
                 "shasum": ""
             },
             "require": {
                 "doctrine/lexer": "1.*",
-                "php": "^5.6 || ^7.0"
+                "php": ">=5.3.2"
             },
             "require-dev": {
                 "doctrine/cache": "1.*",
-                "phpunit/phpunit": "^5.7"
+                "phpunit/phpunit": "4.*"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.4.x-dev"
+                    "dev-master": "1.3.x-dev"
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Doctrine\\Common\\Annotations\\": "lib/Doctrine/Common/Annotations"
+                "psr-0": {
+                    "Doctrine\\Common\\Annotations\\": "lib/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -182,36 +182,37 @@
                 "docblock",
                 "parser"
             ],
-            "time": "2017-01-09 00:44:36"
+            "time": "2015-08-31 12:32:49"
         },
         {
             "name": "doctrine/cache",
-            "version": "dev-master",
+            "version": "1.6.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/cache.git",
-                "reference": "315b2f7ad3acca10fa3a1bf65dcf66c03670ff0f"
+                "reference": "b6f544a20f4807e81f7044d31e679ccbb1866dc3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/cache/zipball/315b2f7ad3acca10fa3a1bf65dcf66c03670ff0f",
-                "reference": "315b2f7ad3acca10fa3a1bf65dcf66c03670ff0f",
+                "url": "https://api.github.com/repos/doctrine/cache/zipball/b6f544a20f4807e81f7044d31e679ccbb1866dc3",
+                "reference": "b6f544a20f4807e81f7044d31e679ccbb1866dc3",
                 "shasum": ""
             },
             "require": {
-                "php": "~5.6|~7.0"
+                "php": "~5.5|~7.0"
             },
             "conflict": {
                 "doctrine/common": ">2.2,<2.4"
             },
             "require-dev": {
-                "phpunit/phpunit": "^5.7",
-                "predis/predis": "~1.0"
+                "phpunit/phpunit": "~4.8|~5.0",
+                "predis/predis": "~1.0",
+                "satooshi/php-coveralls": "~0.6"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.7.x-dev"
+                    "dev-master": "1.6.x-dev"
                 }
             },
             "autoload": {
@@ -251,33 +252,32 @@
                 "cache",
                 "caching"
             ],
-            "time": "2017-01-15 23:47:17"
+            "time": "2016-10-29 11:16:17"
         },
         {
             "name": "doctrine/collections",
-            "version": "dev-master",
+            "version": "v1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/collections.git",
-                "reference": "1a4fb7e902202c33cce8c55989b945612943c2ba"
+                "reference": "6c1e4eef75f310ea1b3e30945e9f06e652128b8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/collections/zipball/1a4fb7e902202c33cce8c55989b945612943c2ba",
-                "reference": "1a4fb7e902202c33cce8c55989b945612943c2ba",
+                "url": "https://api.github.com/repos/doctrine/collections/zipball/6c1e4eef75f310ea1b3e30945e9f06e652128b8a",
+                "reference": "6c1e4eef75f310ea1b3e30945e9f06e652128b8a",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.6 || ^7.0"
+                "php": ">=5.3.2"
             },
             "require-dev": {
-                "doctrine/coding-standard": "~0.1@dev",
-                "phpunit/phpunit": "^5.7"
+                "phpunit/phpunit": "~4.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.3.x-dev"
+                    "dev-master": "1.2.x-dev"
                 }
             },
             "autoload": {
@@ -318,7 +318,7 @@
                 "collections",
                 "iterator"
             ],
-            "time": "2017-01-03 10:49:41"
+            "time": "2015-04-14 22:21:58"
         },
         {
             "name": "doctrine/common",
@@ -1061,7 +1061,7 @@
                     "homepage": "http://ornicar.github.com"
                 },
                 {
-                    "name": "KNPLabs Team",
+                    "name": "KnpLabs Team",
                     "homepage": "http://knplabs.com"
                 }
             ],
@@ -2174,16 +2174,16 @@
         },
         {
             "name": "tractorcow/silverstripe-fluent",
-            "version": "3.2.3",
+            "version": "dev-patch/default-route",
             "source": {
                 "type": "git",
                 "url": "https://github.com/unclecheese/silverstripe-fluent.git",
-                "reference": "22aee0d1d62b4a37d67981882b5cbe56a5a4c904"
+                "reference": "46f6b3f365aa85dc6f38f0e9683c85418b4b4cea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/unclecheese/silverstripe-fluent/zipball/22aee0d1d62b4a37d67981882b5cbe56a5a4c904",
-                "reference": "22aee0d1d62b4a37d67981882b5cbe56a5a4c904",
+                "url": "https://api.github.com/repos/unclecheese/silverstripe-fluent/zipball/46f6b3f365aa85dc6f38f0e9683c85418b4b4cea",
+                "reference": "46f6b3f365aa85dc6f38f0e9683c85418b4b4cea",
                 "shasum": ""
             },
             "require": {
@@ -2216,9 +2216,9 @@
             ],
             "support": {
                 "issues": "http://github.com/tractorcow/silverstripe-fluent/issues",
-                "source": "https://github.com/unclecheese/silverstripe-fluent/tree/3.2.3"
+                "source": "https://github.com/unclecheese/silverstripe-fluent/tree/patch/default-route"
             },
-            "time": "2015-11-06 03:26:40"
+            "time": "2017-01-17 22:07:28"
         },
         {
             "name": "tractorcow/silverstripe-opengraph",
@@ -2503,12 +2503,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/smarcet/silverstripe-green.git",
-                "reference": "c83253c114b4f798fae2bc54e77f76266707074a"
+                "reference": "4395dcef5f4efd5a2c67e0bba3ab5cc583e3fdd4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/smarcet/silverstripe-green/zipball/c83253c114b4f798fae2bc54e77f76266707074a",
-                "reference": "c83253c114b4f798fae2bc54e77f76266707074a",
+                "url": "https://api.github.com/repos/smarcet/silverstripe-green/zipball/4395dcef5f4efd5a2c67e0bba3ab5cc583e3fdd4",
+                "reference": "4395dcef5f4efd5a2c67e0bba3ab5cc583e3fdd4",
                 "shasum": ""
             },
             "require": {
@@ -2518,6 +2518,9 @@
             },
             "require-dev": {
                 "symfony/filesystem": "~3.1"
+            },
+            "suggest": {
+                "unclecheese/silverstripe-green-addons": "Provides additional functionality for content and code generation."
             },
             "type": "silverstripe-module",
             "license": [
@@ -2541,7 +2544,7 @@
                 "issues": "https://github.com/unclecheese/silverstripe-green/issues",
                 "source": "https://github.com/smarcet/silverstripe-green/tree/master"
             },
-            "time": "2016-10-18 01:33:08"
+            "time": "2016-10-19 01:22:37"
         },
         {
             "name": "unclecheese/silverstripe-permamail",
@@ -4336,6 +4339,7 @@
         "unclecheese/bootstrap-tagfield": 20,
         "silverstripe/gridfieldajaxrefresh": 20,
         "phpoffice/phpexcel": 20,
+        "tractorcow/silverstripe-fluent": 20,
         "tractorcow/silverstripe-opengraph": 20,
         "phpunit/phpunit": 0,
         "behat/behat": 0,

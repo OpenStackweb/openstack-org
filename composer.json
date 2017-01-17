@@ -38,7 +38,7 @@
     "parse/php-sdk" : "1.1.*",
     "fzaninotto/Faker": "^1.5",
     "phpoffice/phpexcel": "dev-master",
-    "tractorcow/silverstripe-fluent": "3.2.3",
+    "tractorcow/silverstripe-fluent": "dev-patch/default-route",
     "google/apiclient": "1.*",
     "tractorcow/silverstripe-opengraph": "3.1.*@dev",
     "symfony/process": "^3.1",
