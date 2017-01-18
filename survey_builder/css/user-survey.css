@@ -898,7 +898,7 @@ footer{
 
 h1.survey-subtitle{
     /* 2017 OpenStack User: */
-    font-family: 'OpenSans Light', san-serif !important;
+    font-family: 'Open Sans Light', sans-serif;
     font-size: 34px;
     color: #2B4D68;
 }

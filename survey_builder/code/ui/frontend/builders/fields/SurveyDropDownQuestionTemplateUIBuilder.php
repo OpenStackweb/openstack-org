@@ -12,8 +12,9 @@
  * limitations under the License.
  **/
 
-class SurveyDropDownQuestionTemplateUIBuilder  extends AbstractSurveyQuestionTemplateUIBuilder
+class SurveyDropDownQuestionTemplateUIBuilder extends AbstractSurveyQuestionTemplateUIBuilder
 {
+
 
     /**
      * @param ISurveyStep $current_step
@@ -23,19 +24,14 @@ class SurveyDropDownQuestionTemplateUIBuilder  extends AbstractSurveyQuestionTem
      */
     public function build(ISurveyStep $current_step, ISurveyQuestionTemplate $question, ISurveyAnswer $answer)
     {
-        $options = array();
+        $options = [];
 
         if($question->IsCountrySelector)
         {
 
-            $extra_options = array
-            (
-                'Worldwide' => 'Worldwide',
-                'Prefer not to say' => 'Prefer not to say',
-                'Too many to list' => 'Too many to list',
-            );
-
-            $options = array_merge($extra_options, CountryCodes::$iso_3166_countryCodes);
+            $options =  $question->UseCountrySelectorExtraOption ?
+                array_merge(SurveyDropDownQuestionTemplate::$country_selector_extra_options, CountryCodes::$iso_3166_countryCodes)
+                :CountryCodes::$iso_3166_countryCodes;
         }
         else {
             foreach($question->Values()->sort('Order') as $val)

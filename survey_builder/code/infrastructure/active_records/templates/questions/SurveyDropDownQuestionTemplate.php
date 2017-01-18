@@ -18,11 +18,22 @@
 class SurveyDropDownQuestionTemplate extends SurveyMultiValueQuestionTemplate implements IDropDownQuestionTemplate, ISurveySelectableQuestion
 {
 
-    static $db = array(
-        'IsMultiSelect'     => 'Boolean',
-        'IsCountrySelector' => 'Boolean',
-        'UseChosenPlugin'   => 'Boolean',
-    );
+    const CountrySelectorExtra_Worldwide    =  'Worldwide';
+    const CountrySelectorExtra_PreferNotSay =  'Prefer not to say';
+    const CountrySelectorExtra_TooMany      =  'Too many to list';
+
+    public static $country_selector_extra_options = [
+        self::CountrySelectorExtra_Worldwide    => self::CountrySelectorExtra_Worldwide,
+        self::CountrySelectorExtra_PreferNotSay => self::CountrySelectorExtra_PreferNotSay,
+        self::CountrySelectorExtra_TooMany      => self::CountrySelectorExtra_TooMany,
+    ];
+
+    static $db = [
+        'IsMultiSelect'                 => 'Boolean',
+        'IsCountrySelector'             => 'Boolean',
+        'UseCountrySelectorExtraOption' => 'Boolean',
+        'UseChosenPlugin'               => 'Boolean',
+    ];
 
     static $has_one = array
     (
@@ -46,9 +57,10 @@ class SurveyDropDownQuestionTemplate extends SurveyMultiValueQuestionTemplate im
 
     private static $defaults = array
     (
-        'IsMultiSelect'     => false,
-        'UseChosenPlugin'   => true,
-        'IsCountrySelector' => false
+        'IsMultiSelect'                 => false,
+        'UseChosenPlugin'               => true,
+        'IsCountrySelector'             => false,
+        'UseCountrySelectorExtraOption' => false,
     );
 
     public function Type()
@@ -65,6 +77,19 @@ class SurveyDropDownQuestionTemplate extends SurveyMultiValueQuestionTemplate im
         $fields->add(new CheckboxField('IsMultiSelect','Is MultiSelect?'));
 
         $fields->add(new CheckboxField('IsCountrySelector','Is Country Selector?'));
+
+        $fields->add
+        (
+            new CheckboxField
+            (
+                'UseCountrySelectorExtraOption',
+                sprintf
+                (
+                    "Use Country Selector Extra Options (%s)?",
+                    implode(',', array_keys(self::$country_selector_extra_options))
+                )
+            )
+        );
 
         return $fields;
     }
@@ -85,29 +110,22 @@ class SurveyDropDownQuestionTemplate extends SurveyMultiValueQuestionTemplate im
        if(!$this->isCountrySelector())
             return parent::getValues();
 
-        $extra_options = [
+       $options =  $this->UseCountrySelectorExtraOption ?
+           array_merge(self::$country_selector_extra_options, CountryCodes::$iso_3166_countryCodes)
+           :CountryCodes::$iso_3166_countryCodes;
 
-            'Worldwide' => 'Worldwide',
-            'Prefer not to say' => 'Prefer not to say',
-            'Too many to list' => 'Too many to list',
-        ];
-
-       $options = array_merge($extra_options, CountryCodes::$iso_3166_countryCodes);
-       $res     = array();
+       $res     = [];
 
        foreach($options as $k => $v)
        {
-           array_push($res, new ArrayData
-               (
-                   array
-                   (
-                       'ID'    => $k,
-                       'Label' => $v,
-                       'Value' => $k,
-                   )
-               )
-           );
+           $res[] = new ArrayData
+               ([
+                'ID'    => $k,
+                'Label' => $v,
+                'Value' => $k,
+               ]);
        }
+
        return $res;
     }
 
@@ -119,17 +137,14 @@ class SurveyDropDownQuestionTemplate extends SurveyMultiValueQuestionTemplate im
     {
         $res = parent::getValueById($id);
         if($this->isCountrySelector()){
-            $extra_options = [
 
-                'Worldwide' => 'Worldwide',
-                'Prefer not to say' => 'Prefer not to say',
-                'Too many to list' => 'Too many to list',
-            ];
+            $options =  $this->UseCountrySelectorExtraOption ?
+                array_merge(self::$country_selector_extra_options, CountryCodes::$iso_3166_countryCodes)
+                :CountryCodes::$iso_3166_countryCodes;
 
-            $options = array_merge($extra_options, CountryCodes::$iso_3166_countryCodes);
             if(isset($options[$id])) {
-                $label = $options[$id];
-                $res   = new SurveyQuestionValueTemplate();
+                $label      = $options[$id];
+                $res        = new SurveyQuestionValueTemplate();
                 $res->Value = $id;
                 $res->Label = $label;
             }
