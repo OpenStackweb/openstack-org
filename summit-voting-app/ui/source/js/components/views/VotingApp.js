@@ -13,7 +13,8 @@ import {
 
 import { connect } from 'react-redux';
 import PresentationDetail from './PresentationDetail';
-
+import TransitionGroup from 'react-addons-transition-group';
+import animate from '../../utils/animate';
 
 class VotingApp extends React.Component {
 
@@ -73,7 +74,10 @@ class VotingApp extends React.Component {
 			clearError,
 			xhrLoading,
 			ready,
-			preview
+			preview,
+			requestedID,
+			presentationID,
+			navigationDirection
 		} = this.props;
 
 		if(preview) {
@@ -85,6 +89,8 @@ class VotingApp extends React.Component {
 				</div>
 			);
 		}
+
+		const AnimatedPresentationDetail = animate(PresentationDetail, navigationDirection);
 
 		return (
 			<div className="row">				
@@ -101,7 +107,11 @@ class VotingApp extends React.Component {
 						<Loader active={xhrLoading} type='spin' className='main-loader' />
 						<Sidebar />
 						<div className={`col-lg-9 col-md-9 col-sm-9 voting-content-body-wrapper`}>
-							<PresentationDetail />
+						<TransitionGroup>
+							{(!requestedID || (presentationID == requestedID)) &&
+								<AnimatedPresentationDetail key={requestedID} />
+							}
+						</TransitionGroup>
 						</div>
 					</div>
 				}
@@ -122,7 +132,10 @@ export default connect(
 			ready: (state.categories.initialised && state.presentations.initialised),
 			category: state.presentations.category,
 			search: state.presentations.search,
-			preview: window.location.search.match(/^\?preview/)
+			preview: window.location.search.match(/^\?preview/),
+			presentationID: state.presentations.selectedPresentation.id,
+			requestedID: state.presentations.requestedPresentationID,
+			navigationDirection: state.presentations.navigationDirection
 		}
 	},
 	{ 

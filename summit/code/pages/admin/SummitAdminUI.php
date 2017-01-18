@@ -483,7 +483,7 @@ final class SummitAdminUI extends DataExtension
     {
         $this->owner->generateVotingLists();
 
-        return Summit::config()->random_list_count . " random incarnations created";
+        return Summit::config()->random_voting_list_count . " random incarnations created";
     }
 
     /**

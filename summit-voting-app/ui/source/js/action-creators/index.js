@@ -144,10 +144,10 @@ export function requestPresentation (id) {
 	return (dispatch, getState) => {
 		const existing = getState().presentations.presentations.find(p => p.id == id);
 		
-		if(existing) {
-			dispatch(receivePresentation(existing));
-			if(existing.abstract) return;
-		}
+		// if(existing) {
+		// 	dispatch(receivePresentation(existing));
+		// 	if(existing.abstract) return;
+		// }
 		dispatch(beginXHR());
 		cancelPending(xhrs, 'REQUEST_PRESENTATION');
 

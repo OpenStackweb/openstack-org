@@ -20,10 +20,10 @@ class PresentationDetail extends React.Component {
 		props = props || this.props;
 
 		if(
-			(!props.presentation || (props.presentation.id !== this.props.presentation.id))
+			!props.presentation || (props.requestedPresentationID !== this.props.requestedPresentationID)
 		) {
 			this.props.requestPresentation(
-				props.presentation.id
+				props.requestedPresentationID
 			);
 		}
 
@@ -36,12 +36,13 @@ class PresentationDetail extends React.Component {
 		this._getPresentation(nextProps);
 	}
 
-
 	render () {
 		const {presentation} = this.props;
 		const loggedIn = Config.get('loggedIn');
+		if(!presentation.speakers) {
+			return <div />;
+		}
 
-		if(!presentation.speakers) return <div />;
 		let showForm = false;
 		if(presentation) {
 			showForm = (
@@ -155,9 +156,10 @@ class PresentationDetail extends React.Component {
 	}	
 }
 
-export default connect (
+const ConnectedPresentationDetail = connect(
 	state => ({
-		presentation: state.presentations.selectedPresentation
+		presentation: state.presentations.selectedPresentation,
+		requestedPresentationID: state.presentations.requestedPresentationID
 	}),
 	dispatch => ({
 		requestPresentation(id) {
@@ -173,3 +175,5 @@ export default connect (
 		}
 	})
 )(PresentationDetail);
+
+export default ConnectedPresentationDetail;

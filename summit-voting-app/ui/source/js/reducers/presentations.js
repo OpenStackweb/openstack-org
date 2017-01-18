@@ -5,11 +5,13 @@ import nl2br from '../utils/nl2br';
 export default (state = {
 	presentations: [],
 	selectedPresentation: {},
+	requestedPresentationID: null,
 	total: null,
 	initialised: false,
 	search: null,
-	category: null
-}, action) => {	
+	category: null,
+	navigationDirection: 'down'
+}, action) => {
 	switch(action.type) {	
 		case 'RECEIVE_PRESENTATIONS':
 			return {
@@ -24,30 +26,37 @@ export default (state = {
 				...state,
 				presentations: [],
 				selectedPresentation: state.selectedPresentation,
+				requestedPresentationID: null,
 				total: null
 			};
 		
 		case 'CLEAR_PRESENTATION':
 			return {
 				...state,
-				selectedPresentation: null
+				selectedPresentation: null,
+				requestedPresentationID: null
 			};
 		
 		case 'SELECT_PRESENTATION':
-			if(action.payload === state.selectedPresentation.id) {
+			if(action.payload === state.requestedPresentationID) {
 				return state;
 			}
+
+			const currentIndex = state.presentations.findIndex(p => p.id === state.selectedPresentation.id);
+			const targetIndex = state.presentations.findIndex(p => p.id === action.payload);
+			const navigationDirection = targetIndex > currentIndex ? 'down' : 'up';
+
 			return {
 				...state,
-				selectedPresentation: {
-					id: action.payload
-				}
+				requestedPresentationID: action.payload,
+				navigationDirection
 			};
 
 		case 'RECEIVE_PRESENTATION':
 			const newState = {
 				...state,
 				selectedPresentation: {...action.payload},
+				requestedPresentationID: action.payload.id,
 				presentations: state.presentations.map(p => presentation(p, action))
 			};
 
@@ -101,9 +110,9 @@ export default (state = {
 			return {
 				...state,
 				selectedPresentation: {
-					...state.selectedPresentation,
-					navigationDirection: action.payload
-				}
+					...state.selectedPresentation
+				},
+				navigationDirection: action.payload > 0 ? 'down' : 'up'
 			};
 		case 'UPDATE_CATEGORY':
 			return {
