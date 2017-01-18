@@ -1,6 +1,7 @@
 import React from 'react';
-import {Table, TableColumn} from '../ui/table';
 import {connect} from 'react-redux';
+import Table from '../ui/table/Table';
+import TableColumn from '../ui/table/TableColumn';
 import {sortDirectory, searchDirectory, toggleAddChair, postDeleteChair} from '../../actions';
 import AddChairForm from '../containers/AddChairForm';
 
@@ -9,7 +10,7 @@ class Directory extends React.Component {
     render () {
     	const {
     		directory, 
-    		isAdmin, 
+    		isAdmin,
     		toggleAddChair, 
     		searchTerm, 
     		searchDirectory, 
@@ -69,25 +70,25 @@ class Directory extends React.Component {
 						}
 			               <div className="dataTables_filter">
 			               	<label>
-			               		Search: 
-			               		<input 
+			               		Search:
+			               		<input
 			               			value={searchTerm}
 			               			onChange={searchDirectory}
 			               			type="search"
-			               			className="form-control input-sm" 
-			               			placeholder="" 
+			               			className="form-control input-sm"
+			               			placeholder=""
 			               			/>
 			               	</label>
 			               </div>
 			            {showAddForm &&
 			            	<AddChairForm />
 			            }
-			               <Table 
-			               		sortCol={sortCol} 
-			               		sortDir={sortDir} 
-			               		onSort={sortTable} 
-			               		data={directory} 
-			               		className="table table-striped table-bordered table-hover dataTable" 
+			               <Table
+			               		sortCol={sortCol}
+			               		sortDir={sortDir}
+			               		onSort={sortTable}
+			               		data={directory}
+			               		className="table table-striped table-bordered table-hover dataTable"
 			               		role="grid"
 			               	>
 			               		{columns}

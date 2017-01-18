@@ -13,7 +13,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         'summit/$ID' => 'handleSummit',
         'presentation/$ID' => 'handleManagePresentation',
         'GET ' => 'handleGetAllPresentations',
-        'GET selections/$categoryID' => 'handleGetMemberSelections',
+        'GET selections/$categoryID/$listClass' => 'handleGetMemberSelections',
         'PUT reorder' => 'handleReorderList',
         'GET changerequests' => 'handleChangeRequests',
         'POST chair/add' => 'handleAddChair',
@@ -162,6 +162,8 @@ class TrackChairAPI extends AbstractRestfulJsonApi
                 'description' => $c->Description,
                 'session_count' => $c->SessionCount,
                 'alternate_count' => $c->AlternateCount,
+                'lightning_count' => $c->LightningCount,
+                'lightning_alternate_count' => $c->LightningAlternateCount,
                 'summit_id' => $c->SummitID,
                 'user_is_chair' => $isChair
             ];
@@ -188,6 +190,11 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         $data['categories'] = array_merge($categoriesIsChair, $categoriesNotChair);
 
         $data['chair_list'] = $chairlist;
+
+        $data['list_classes'] = array(
+            ['id'=>SummitSelectedPresentationList::Session, 'title' => 'Sessions'],
+            ['id'=>SummitSelectedPresentationList::Lightning, 'title' => 'Lightning Talks   ']
+        );
 
         return $this->ok($data);
     }
@@ -238,6 +245,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
                 'title' => $p->Title,
                 'viewed' => $p->isViewedByTrackChair(),
                 'selected' => $p->getSelectionType(),
+                'selected_lightning' => $p->getSelectionType(SummitSelectedPresentationList::Lightning),
                 'selectors' => array_keys($p->getSelectors()->map('Name','Name')->toArray()),
                 'likers' => array_keys($p->getLikers()->map('Name','Name')->toArray()),
                 'passers' => array_keys($p->getPassers()->map('Name','Name')->toArray()),
@@ -247,7 +255,9 @@ class TrackChairAPI extends AbstractRestfulJsonApi
                 'vote_average' => $p->CalcVoteAverage(),
                 'total_points' => $p->CalcTotalPoints(),
                 'moved_to_category' => $p->movedToThisCategory(),
-                'speakers' => $p->getSpeakersCSV()
+                'speakers' => $p->getSpeakersCSV(),
+                'lightning' => $p->isOfType(IPresentationType::LightingTalks),
+                'lightning_wannabe' => $p->isLightningWannabe()
             ];
         }
 
@@ -282,6 +292,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
     {
         $results = [];
         $categoryID = (int)$r->param('categoryID');
+        $list_class = $r->param('listClass');
         $results['category_id'] = $categoryID;
 
         $category = PresentationCategory::get()->byID($categoryID);
@@ -293,7 +304,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
             return $this->validationError(sprintf('Category id %s does not belong to current summit!', $categoryID));
         }
 
-        $lists = SummitSelectedPresentationList::getAllListsByCategory($categoryID);
+        $lists = SummitSelectedPresentationList::getAllListsByCategory($categoryID, $list_class);
 
         foreach ($lists as $key => $list) {
             $selections = $list->SummitSelectedPresentations()
@@ -307,11 +318,15 @@ class TrackChairAPI extends AbstractRestfulJsonApi
             	'id' => $listID,
                 'list_name' => $list->name,
                 'list_type' => $list->ListType,
+                'list_class' => $list->ListClass,
+                'is_group' => $list->isGroup(),
+                'is_lightning' => $list->isLightning(),
                 'list_id' => $listID,
+                'member_id' => $list->Member()->ID,
                 'total' => $count,
                 'can_edit' => $list->memberCanEdit(),
                 'slots' => $list->maxPresentations(),
-                'alternates' => $list->Category()->AlternateCount,
+                'alternates' => $list->maxAlternates(),
                 'mine' => $list->mine(),
                 'selections' => [],
                 'maybes' => []                
@@ -327,7 +342,9 @@ class TrackChairAPI extends AbstractRestfulJsonApi
 		                'passers' => array_keys($p->getPassers()->map('Name','Name')->toArray()),
 		                'group_selected' => $p->isGroupSelected(),
 		                'comment_count' => $p->Comments()->count(),
-		                'level' => $p->Level
+		                'level' => $p->Level,
+                        'lightning' => $p->isOfType(IPresentationType::LightingTalks),
+                        'lightning_wannabe' => $p->isLightningWannabe()
 		            ],
                     'order' => $s->Order,
                     'id' => $s->PresentationID
@@ -365,7 +382,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         	return $this->httpError(403, 'You cannot edit this list');
         }
         
-        $isTeam = $list->ListType === 'Group';
+        $isTeam = ($list->isGroup());
 
         // Remove any presentations that are not in the list
         SummitSelectedPresentation::get()
@@ -543,6 +560,8 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         $id = SummitTrackChair::addChair($member, $catid);
         $category->MemberList($member->ID);
         $category->GroupList();
+        $category->MemberList($member->ID, SummitSelectedPresentationList::Lightning);
+        $category->GroupList(SummitSelectedPresentationList::Lightning);
 
         return (new SS_HTTPResponse(Convert::array2json([
         		'chair_id' => $id,
@@ -906,6 +925,7 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
         $data['comments'] = $comments;
         $data['can_assign'] = $p->canAssign(1) ? $p->canAssign(1) : null;
         $data['selected'] = $p->getSelectionType();
+        $data['selected_lightning'] = $p->getSelectionType(SummitSelectedPresentationList::Lightning);
         $data['selectors'] = array_keys($p->getSelectors()->map('Name','Name')->toArray());
         $data['likers'] = array_keys($p->getLikers()->map('Name','Name')->toArray());
         $data['passers'] = array_keys($p->getPassers()->map('Name','Name')->toArray());
@@ -916,6 +936,9 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
         		'PresentationID' => $p->ID,
         		'Status' => SummitCategoryChange::STATUS_PENDING
         	])->count();
+        $data['lightning'] = $p->isOfType(IPresentationType::LightingTalks);
+        $data['lightning_wannabe'] = $p->isLightningWannabe();
+
 
         return (new SS_HTTPResponse(
             Convert::array2json($data), 200

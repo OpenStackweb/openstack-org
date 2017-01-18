@@ -25,6 +25,100 @@ final class SapphireSummitPresentationRepository extends SapphireSummitEventRepo
 
     /**
      * @param int $summit_id
+     * @param array $event_types
+     * @param array $filters
+     * @param int $page
+     * @param int $page_size
+     * @param array $order
+     * @return array
+     */
+    public function getUnpublished($summit_id, $event_types = [], $filters = [], $page = 1, $page_size = 10, $order = 'SummitEvent.Created')
+    {
+        $filters['published'] = 0;
+        return $this->getPresentations($summit_id, $event_types, $filters, $page, $page_size, $order);
+    }
+
+    /**
+     * @param int $summit_id
+     * @param array $event_types
+     * @param array $filters
+     * @param int $page
+     * @param int $page_size
+     * @param array $order
+     * @return array
+     */
+    public function getPresentations($summit_id, $event_types = [], $filters = [], $page = 1, $page_size = 10, $order = 'SummitEvent.Created')
+    {
+        $event_types_csv = "'".implode("','",$event_types)."'";
+        $published = $filters['published'];
+        $selection_status = $filters['status'];
+        $search_term = $filters['search_term'];
+        $track_id = $filters['track_id'];
+
+        $filter = array('SummitID' => $summit_id, 'Published' => $published, 'Status' => Presentation::STATUS_RECEIVED);
+
+        $where_clause = "SummitEvent.Title IS NOT NULL AND SummitEvent.Title <>''";
+        $where_clause .= count($event_types) ? " AND (SummitEventType.Type IN (".$event_types_csv.")) " : "";
+
+        if ($search_term) {
+            $where_clause .= " AND (SummitEvent.Title LIKE '%{$search_term}%' OR SummitEvent.Abstract LIKE '%{$search_term}%'";
+            $where_clause .= " OR PS.FirstName LIKE '%{$search_term}%' OR PS.LastName LIKE '%{$search_term}%'";
+            $where_clause .= " OR CONCAT(PS.FirstName,' ',PS.LastName) LIKE '%{$search_term}%'";
+            $where_clause .= " OR PS2.FirstName LIKE '%{$search_term}%' OR PS2.LastName LIKE '%{$search_term}%'";
+            $where_clause .= " OR CONCAT(PS2.FirstName,' ',PS2.LastName) LIKE '%{$search_term}%'";
+            $where_clause .= " OR PS.ID = '{$search_term}' OR PS2.ID = '{$search_term}' OR SummitEvent.ID = '{$search_term}'";
+            $where_clause .= " OR M.Email LIKE '%{$search_term}%' OR M2.Email LIKE '%{$search_term}%' OR SRR.Email LIKE '%{$search_term}%' )";
+        }
+
+        if ($selection_status) {
+            switch ($selection_status) {
+                case 'selected' :
+                    $where_clause .= " AND SSP.`Order` IS NOT NULL AND SSPL.ListType = 'Group'";
+                    $where_clause .= " AND SSPL.CategoryID = SummitEvent.CategoryID";
+                    break;
+                case 'accepted' :
+                    $where_clause .= " AND SSP.`Order` IS NOT NULL AND SSP.`Order` <= PC.SessionCount AND SSPL.ListType = 'Group'";
+                    $where_clause .= " AND SSPL.CategoryID = SummitEvent.CategoryID";
+                    break;
+                case 'alternate' :
+                    $where_clause .= " AND SSP.`Order` IS NOT NULL AND SSP.`Order` > PC.SessionCount AND SSPL.ListType = 'Group'";
+                    $where_clause .= " AND SSPL.CategoryID = SummitEvent.CategoryID";
+                    break;
+            }
+        }
+
+        if(!empty($track_id)){
+            $where_clause .= " AND SummitEvent.CategoryID = {$track_id} ";
+        }
+
+        $list = Presentation::get()
+            ->leftJoin('Presentation_Speakers','Presentation_Speakers.PresentationID = Presentation.ID')
+            ->leftJoin('PresentationSpeaker','Presentation_Speakers.PresentationSpeakerID = PS.ID','PS')
+            ->leftJoin('PresentationSpeaker','Presentation.ModeratorID = PS2.ID','PS2')
+            ->leftJoin('Member','M.ID = PS.MemberID','M')
+            ->leftJoin('Member','M2.ID = PS2.MemberID','M2')
+            ->leftJoin('SpeakerRegistrationRequest','SRR.SpeakerID = PS.ID','SRR')
+            ->leftJoin('SummitEventType','SummitEventType.ID = SummitEvent.TypeID')
+            ->leftJoin('SummitSelectedPresentation','SSP.PresentationID = Presentation.ID','SSP')
+            ->leftJoin('SummitSelectedPresentationList','SSP.SummitSelectedPresentationListID = SSPL.ID','SSPL')
+            ->leftJoin('PresentationCategory','PC.ID = SummitEvent.CategoryID','PC')
+            ->filter($filter)
+            ->where($where_clause)
+            ->sort("TRIM({$order})");
+
+        $count     = intval($list->count());
+        if ($page_size) {
+            $offset    = ($page - 1 ) * $page_size;
+            $data      = $list->limit($page_size, $offset);
+        } else {
+            $data = $list;
+        }
+
+        return array($page, $page_size, $count, $data);
+    }
+
+    /**
+     * @param int $summit_id
      * @param string $event_type
      * @param string $status
      * @param string $search_term

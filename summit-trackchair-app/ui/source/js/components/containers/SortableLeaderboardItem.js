@@ -99,20 +99,23 @@ class SortableLeaderboardItem extends Component {
       {connectDragSource(<i className="drag-handle fa fa-bars" />)}
         <LeaderboardItem {...this.props} title={p.title} notes={metrics} />
         <div className="selection-tools">
-	        <Dropdown onItemSelected={this.handleSelect} selectedText={<i className="fa fa-cog" />} caret={false}>
-				{canAddTeam &&
-	        	<DropdownItem eventKey='team'>
-	        		<i className="fa fa-group" /> Add to team list
-	        	</DropdownItem>
-	        	}
-	        	<DropdownItem eventKey='remove'>
-	        		<i className="fa fa-remove" /> Remove from this list
-	        	</DropdownItem>
-	        </Dropdown>	        
+            <Dropdown onItemSelected={this.handleSelect} selectedText={<i className="fa fa-cog" />} caret={false}>
+                {canAddTeam &&
+                <DropdownItem eventKey='team'>
+                    <i className="fa fa-group" /> Add to team list
+                </DropdownItem>
+                }
+                <DropdownItem eventKey='remove'>
+                    <i className="fa fa-remove" /> Remove from this list
+                </DropdownItem>
+            </Dropdown>
         </div>
         <div className="selection-meta">
-        	{p.level}
+            {p.level}
+            {p.lightning && <span className="selection-lightning"><i className="fa fa-bolt" /></span> }
+            {p.lightning_wannabe && <span className="selection-lightning">"<i className="fa fa-bolt" />"</span> }
         </div>
+
       </div>
     ));
   }
@@ -140,7 +143,7 @@ const LeaderboardItemDragSource = DragSource('CARD', cardSource, (connect, monit
 
 export default connect(
 	(state, ownProps) => {
-		const teamList = state.lists.results.find(l => l.list_type === 'Group');
+		const teamList = state.lists.results.find(l => l.is_group);
 		if(!teamList) return;
 
 		const teamHasThis = teamList.selections.some(s => +s.id === +ownProps.id);

@@ -47,6 +47,7 @@ class PresentationMeta extends React.Component {
 
 	render() {
 		const {presentation, requesting, success} = this.props;
+        const isSession = (!presentation.lightning && !presentation.lightning_wannabe);
 
 		const tooltip = (
 			<Tooltip
@@ -65,6 +66,10 @@ class PresentationMeta extends React.Component {
 		               <dl className="dl-horizontal">
 		                  <dt>Submitted by:</dt>
 		                  <dd>{presentation.creator}</dd>
+                          <dt>Type:</dt>
+                          {presentation.lightning && <dd>Lightning Talk</dd>}
+                          {presentation.lightning_wannabe && <dd>Lightning Wannabe</dd>}
+                          {isSession && <dd>Session</dd>}
 		               </dl>
 		            </div>
 		            <div className="col-md-7" id="cluster_info">

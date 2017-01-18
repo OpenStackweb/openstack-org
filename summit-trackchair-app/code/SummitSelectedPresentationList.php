@@ -15,12 +15,18 @@
 class SummitSelectedPresentationList extends DataObject
 {
 
+    const Individual = 'Individual';
+    const Group = 'Group';
+    const Session = 'Session';
+    const Lightning = 'Lightning';
+
     /**
      * @var array
      */
     private static $db = [
         'Name' => 'Text',
-        'ListType' => "Enum('Individual,Group','Individual')"
+        'ListType' => "Enum('Individual,Group','Individual')",
+        'ListClass' => "Enum('Session,Lightning','Session')"
     ];
 
     /**
@@ -143,7 +149,7 @@ ORDER BY SummitSelectedPresentation.Order ASC
      * @param $SummitCategoryID
      * @return mixed
      */
-    public static function getAllListsByCategory($SummitCategoryID)
+    public static function getAllListsByCategory($SummitCategoryID, $ListClass = SummitSelectedPresentationList::Session)
     {
 
         $category = PresentationCategory::get()->byID($SummitCategoryID);
@@ -153,18 +159,21 @@ ORDER BY SummitSelectedPresentation.Order ASC
 
         // Get any existing lists made for this category
         $AllLists = SummitSelectedPresentationList::get()
-            ->filter('CategoryID', $SummitCategoryID)
+            ->filter([
+                'CategoryID' => $SummitCategoryID,
+                'ListClass' => $ListClass
+            ])
             ->sort('ListType', 'ASC');
 
         // Filter to lists of any other track chairs
         $OtherTrackChairLists = $AllLists
-            ->filter('ListType', 'Individual')
+            ->filter('ListType', SummitSelectedPresentationList::Individual)
             ->exclude(
                 'MemberID', Member::currentUser()->ID
             );
 
-        $MemberList = $category->MemberList(Member::currentUser()->ID);
-        $GroupList = $category->GroupList();
+        $MemberList = $category->MemberList(Member::currentUser()->ID, $ListClass);
+        $GroupList = $category->GroupList($ListClass);
 
         if ($MemberList) {
             $results->push($MemberList);
@@ -179,10 +188,10 @@ ORDER BY SummitSelectedPresentation.Order ASC
         // Add each of those lists to our results
         foreach ($results as $list) {
 
-            if ($list->ListType == "Individual") {
+            if (!$list->isGroup()) {
                 $list->name = $list->Member()->FirstName . ' ' . $list->Member()->Surname;
             }
-            if ($list->ListType == "Group") {
+            if ($list->isGroup()) {
                 $list->name = 'Team Selections';
             }
 
@@ -196,9 +205,19 @@ ORDER BY SummitSelectedPresentation.Order ASC
      */
     public function maxPresentations()
     {
-        return $this->Category()->SessionCount + $this->Category()->AlternateCount;
+        if ($this->isLightning())
+            return $this->Category()->LightningCount + $this->Category()->LightningAlternateCount;
+        else
+            return $this->Category()->SessionCount + $this->Category()->AlternateCount;
     }
 
+    public function maxAlternates()
+    {
+        if ($this->isLightning())
+            return $this->Category()->LightningAlternateCount;
+        else
+            return $this->Category()->AlternateCount;
+    }
 
     /**
      * @return bool
@@ -210,7 +229,7 @@ ORDER BY SummitSelectedPresentation.Order ASC
             return false;
         }
 
-        if ($this->MemberID == Member::currentUser()->ID || $this->ListType == 'Group') {
+        if ($this->MemberID == Member::currentUser()->ID || $this->isGroup()) {
             return true;
         }
 
@@ -228,30 +247,38 @@ ORDER BY SummitSelectedPresentation.Order ASC
      * @param $SummitCategoryID
      * @return bool|SummitSelectedPresentationList
      */
-    public static function getMemberList($SummitCategoryID)
+    public static function getMemberList($SummitCategoryID, $ListClass = "Session")
     {
 
         if (!Member::currentUser()) {
             return false;
         }
 
-        $MemberID = Member::currentUser()->ID;
-
         $SummitSelectedPresentationList = SummitSelectedPresentationList::get()->filter(array(
             'CategoryID' => $SummitCategoryID,
-            'ListType' => 'Individual',
+            'ListType' => SummitSelectedPresentationList::Individual,
+            'ListClass' => $ListClass,
             'MemberID' => Member::currentUser()->ID
         ))->first();;
 
         // if a summit talk list doesn't exist for this member and category, create it
         if (!$SummitSelectedPresentationList) {
             $SummitSelectedPresentationList = new SummitSelectedPresentationList();
-            $SummitSelectedPresentationList->ListType = 'Individual';
+            $SummitSelectedPresentationList->ListType = SummitSelectedPresentationList::Individual;
+            $SummitSelectedPresentationList->ListClass = $ListClass;
             $SummitSelectedPresentationList->CategoryID = $SummitCategoryID;
             $SummitSelectedPresentationList->MemberID = Member::currentUser()->ID;
             $SummitSelectedPresentationList->write();
         }
 
         return $SummitSelectedPresentationList;
+    }
+
+    public function isGroup() {
+        return ($this->ListType == SummitSelectedPresentationList::Group);
+    }
+
+    public function isLightning() {
+        return ($this->ListClass == SummitSelectedPresentationList::Lightning);
     }
 }

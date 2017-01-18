@@ -136,7 +136,7 @@ SelectionsList.defaultProps = {
 const SortableSelectionsList = DragDropContext(HTML5Backend)(SelectionsList);
 export default connect(
 	state => ({
-		teamList: state.lists.results.find(l => l.list_type ==='Group'),
+		teamList: state.lists.results.find(l => l.is_group),
 		category: state.routing.locationBeforeTransitions.query.category
 	}), 
 	dispatch => ({

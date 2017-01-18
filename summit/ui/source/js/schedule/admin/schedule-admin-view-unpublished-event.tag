@@ -18,7 +18,7 @@
                 </a>
             </div>
             <div class="presentation-status">
-                <div if={ data.status != 'unaccepted' } class="event-status-component" title="status">
+                <div if={ data.status && data.status != 'unaccepted' } class="event-status-component" title="status">
                     { data.status === 'accepted' ? 'Track Chair Selection' : 'Alternate' }
                 </div>
             </div>

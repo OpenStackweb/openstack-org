@@ -3,6 +3,7 @@ import {
 	fetchPresentations,
 	fetchPresentationDetail,
 	fetchLists,
+	fetchListsByClass,
 	clearPresentations
 } from '../actions';
 import {browserHistory} from 'react-router';
@@ -39,8 +40,9 @@ const selectionsQueryParamsDidChange$ = queryParamsDidChange$
 const browseQueryParamsDidChangeCategoryExists$ = browseQueryParamsDidChange$
 	.filter(state => !!q(state, 'category'));
 
-const selectionsQueryParamsDidChangeCategoryExists$ = selectionsQueryParamsDidChange$
-	.filter(state => !!q(state, 'category'));
+const selectionsQueryParamsDidChangeExists$ = selectionsQueryParamsDidChange$
+	.filter(state => !!q(state, 'category'))
+    .filter(state => !!q(state, 'list_class'));
 
 // URL Params
 const urlParamsDidChange$ = state$
@@ -70,7 +72,8 @@ isDefaultView$
 	.map(state => state.summit.defaultCategory.id)
 	.subscribe((category) => {		
 		browserHistory.push(URL.create('selections', {
-			category
+			category: category,
+            list_class: 'Session'
 		}));
 	});
 
@@ -110,10 +113,10 @@ browseQueryParamsDidChangeCategoryExists$
 		dispatch(clearPresentations());
 	})
 
-// Category change on selections
-selectionsQueryParamsDidChangeCategoryExists$	
+// Category or Class change on selections
+selectionsQueryParamsDidChangeExists$
 	.subscribe(state => {
-		dispatch(fetchLists(q(state,'category')));
+		dispatch(fetchListsByClass(q(state,'category'),q(state,'list_class')));
 	});
 
 // On a detail presentation with no ?category, add one.

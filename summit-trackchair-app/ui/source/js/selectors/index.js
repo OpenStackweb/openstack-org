@@ -35,6 +35,15 @@ export const getFilteredPresentations = createSelector(
 			case 'untouched':
 				filterFunc = p => !p.selected;
 				break;
+            case 'lightning':
+                filterFunc = p => p.lightning;
+                break;
+            case 'presentation_lightning':
+                filterFunc = p => p.lightning_wannabe;
+                break;
+            case 'all_lightning':
+                filterFunc = p => p.lightning_wannabe || p.lightning;
+                break;
 			default:
 				filterFunc = p => p
 		}				

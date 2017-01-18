@@ -40,8 +40,8 @@ export default connect(
 	},
 
 	dispatch => ({
-		goToCategory(category) {			
-			browserHistory.push(URL.create(undefined, {category}));
+		goToCategory(category) {
+			browserHistory.push(URL.update(undefined, {category}));
 		}
 	})
 )(CategoryNavigator);

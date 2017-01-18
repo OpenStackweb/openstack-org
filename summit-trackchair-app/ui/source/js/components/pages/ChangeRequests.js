@@ -1,7 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {fetchChangeRequests, sortChangeRequests, searchChangeRequests} from '../../actions';
-import {Table, TableColumn} from '../ui/table';
+import Table from '../ui/table/Table';
+import TableColumn from '../ui/table/TableColumn';
 import Bounce from '../ui/loaders/Bounce';
 import RouterLink from '../containers/RouterLink';
 import RequestResolutionButtons from '../containers/RequestResolutionButtons';

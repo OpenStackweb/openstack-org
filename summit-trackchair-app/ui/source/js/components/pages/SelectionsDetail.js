@@ -153,13 +153,14 @@ class SelectionsDetail extends React.Component {
 }
 
 export default connect(
-	(state, ownProps) => {		
-		const category = state.summit.data.categories.find(c => (
+	(state, ownProps) => {
+
+        const category = state.summit.data.categories.find(c => (
 			c.id == state.routing.locationBeforeTransitions.query.category
 		));
-		const list = state.lists.results.find(l => l.id == ownProps.params.id);
-		const teamList = state.lists.results.find(l => l.list_type === 'Group');
-		const sessionLimit = list.slots;
+		const list = state.lists.results.find(l => l.member_id == ownProps.params.member_id);
+		const teamList = state.lists.results.find(l => l.is_group);
+		const sessionLimit = list.slots ;
 		const altLimit = +category.alternate_count;
 		const canEditIndividual = list && list.can_edit;
 		const canEditTeam = category && category.user_is_chair;

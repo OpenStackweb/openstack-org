@@ -22,6 +22,7 @@ export const summit = function (
                 defaultCategory: response.categories.find(c => (
 					c.user_is_chair
 					)) || response.categories[0],
+                defaultListClass: 'Session',
                 loading: false
             };
 

@@ -19,7 +19,7 @@ export const lists = function (
                 ...state,
                 results: [
                 	...action.payload.response.lists
-                			.sort((a,b) => a.list_type !== 'Group')
+                			.sort((a,b) => !a.is_group)
                 ],
                 loading: false
             };
@@ -38,7 +38,7 @@ export const lists = function (
 
 			if(collection === 'team') {
 				newResults = state.results.map(list => {
-					if(list.list_type === 'Group') {
+					if(list.is_group) {
 						return {
 							...list,
 							selections: organisedSelections

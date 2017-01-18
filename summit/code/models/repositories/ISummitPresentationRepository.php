@@ -17,6 +17,28 @@ interface ISummitPresentationRepository extends ISummitEventRepository
 
     /**
      * @param int $summit_id
+     * @param array $event_types
+     * @param array $filters
+     * @param int $page
+     * @param int $page_size
+     * @param array $order
+     * @return array
+     */
+    public function getUnpublished($summit_id, $event_types = [], $filters = [], $page = 1, $page_size = 10, $order = 'SummitEvent.Created');
+
+    /**
+     * @param int $summit_id
+     * @param array $event_types
+     * @param array $filters
+     * @param int $page
+     * @param int $page_size
+     * @param array $order
+     * @return array
+     */
+    public function getPresentations($summit_id, $event_types = [], $filters = [], $page = 1, $page_size = 10, $order = 'SummitEvent.Created');
+
+    /**
+     * @param int $summit_id
      * @param string $event_type
      * @param string $status
      * @param string $search_term

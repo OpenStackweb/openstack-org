@@ -72,6 +72,12 @@ interface ISummitEvent extends IEntity
     public function getType();
 
     /**
+     * @param string $type
+     * @return bool
+     */
+    public function isOfType($type);
+
+    /**
      * @param ISummitEventType $type
      * @return void
      */

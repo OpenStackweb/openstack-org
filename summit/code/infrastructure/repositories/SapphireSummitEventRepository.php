@@ -127,6 +127,7 @@ SQL;
 
     /**
      * @param int $summit_id
+     * @param string $event_type
      * @param int $page
      * @param int $page_size
      * @param array $order
@@ -141,7 +142,7 @@ SQL;
             $where_clause .= " AND (SummitEvent.Title LIKE '%{$search_term}%' OR SummitEvent.ID = '{$search_term}' OR SummitEvent.Abstract LIKE '%{$search_term}%')";
         }
         if(!empty($event_type)){
-            $where_clause .= " AND SummitEvent.TypeID = {$event_type}";
+            $where_clause .= " AND SummitEventType.Type = '{$event_type}'";
         }
 
         $list      = SummitEvent::get()

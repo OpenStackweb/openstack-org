@@ -243,11 +243,11 @@ class Presentation extends SummitEvent implements IPresentation
     }
 
     /**
-     * @return string
+     * @return bool
      */
-    public function getTypeName()
+    public function isLightningWannabe()
     {
-        return $this->Type()->Type;
+        return boolval($this->LightningTalk);
     }
 
     /**

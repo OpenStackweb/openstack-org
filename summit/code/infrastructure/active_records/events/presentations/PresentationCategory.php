@@ -19,14 +19,16 @@ class PresentationCategory extends DataObject
 
     private static $db = array
     (
-        'Title'          => 'Varchar',
-        'Description'    => 'Text',
-        'SessionCount'   => 'Int',
-        'AlternateCount' => 'Int',
-        'VotingVisible'  => 'Boolean',
-        'ChairVisible'   => 'Boolean',
-        'Code'           => 'Varchar(5)',
-        'Slug'           => 'Varchar',
+        'Title'                     => 'Varchar',
+        'Description'               => 'Text',
+        'SessionCount'              => 'Int',
+        'AlternateCount'            => 'Int',
+        'LightningCount'            => 'Int',
+        'LightningAlternateCount'   => 'Int',
+        'VotingVisible'             => 'Boolean',
+        'ChairVisible'              => 'Boolean',
+        'Code'                      => 'Varchar(5)',
+        'Slug'                      => 'Varchar',
     );
 
     private static $defaults = array
@@ -76,6 +78,8 @@ class PresentationCategory extends DataObject
             ->textarea('Description')
             ->numeric('SessionCount', 'Number of sessions')
             ->numeric('AlternateCount', 'Number of alternates')
+            ->numeric('LightningCount', 'Number of lightning')
+            ->numeric('LightningAlternateCount', 'Number of lightning alternates')
             ->checkbox('VotingVisible', "This category is visible to voters")
             ->checkbox('ChairVisible', "This category is visible to track chairs")
             ->hidden('SummitID', 'SummitID');
@@ -191,19 +195,22 @@ class PresentationCategory extends DataObject
         return $this->exists()? intval($this->TrackChairs()->filter('MemberID', $member_id)->count()):0;
     }
 
-    public function MemberList($memberid)
+    public function MemberList($memberid, $list_class = SummitSelectedPresentationList::Session)
     {
 
         // See if there's a list for the current member
         $MemberList = SummitSelectedPresentationList::get()->filter(array(
             'MemberID' => $memberid,
-            'CategoryID' => $this->ID
+            'CategoryID' => $this->ID,
+            'ListType' => 'Individual',
+            'ListClass' => $list_class,
         ))->first();
 
         // if a selection list doesn't exist for this member and category, create it
         if (!$MemberList && $this->isTrackChair($memberid)) {
             $MemberList = new SummitSelectedPresentationList();
             $MemberList->ListType = 'Individual';
+            $MemberList->ListClass = $list_class;
             $MemberList->CategoryID = $this->ID;
             $MemberList->MemberID = $memberid;
             $MemberList->write();
@@ -216,12 +223,13 @@ class PresentationCategory extends DataObject
 
     }
 
-    public function GroupList()
+    public function GroupList($list_class = SummitSelectedPresentationList::Session)
     {
 
         // See if there's a list for the group
         $GroupList = SummitSelectedPresentationList::get()->filter(array(
             'ListType' => 'Group',
+            'ListClass' => $list_class,
             'CategoryID' => $this->ID
         ))->first();
 
@@ -229,6 +237,7 @@ class PresentationCategory extends DataObject
         if (!$GroupList) {
             $GroupList = new SummitSelectedPresentationList();
             $GroupList->ListType = 'Group';
+            $GroupList->ListClass = $list_class;
             $GroupList->CategoryID = $this->ID;
             $GroupList->write();
         }

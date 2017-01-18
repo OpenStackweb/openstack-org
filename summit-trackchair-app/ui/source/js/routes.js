@@ -30,7 +30,7 @@ const Routes = (baseURL) => (
         	<IndexRoute component={PresentationPlaceholder} />
         </Route>
         <Route path="selections" component={Selections}>
-        	<Route path=":id" component={SelectionsDetail} />
+        	<Route path=":member_id" component={SelectionsDetail} />
         	<IndexRoute component={SelectionsPlaceholder} />
         </Route>
         <Route path="directory" component={Directory} />

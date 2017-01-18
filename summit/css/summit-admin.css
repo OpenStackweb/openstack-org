@@ -151,6 +151,14 @@
     width: 80%;
 }
 
+.unpublished_filter {
+    width: 70%;
+}
+
+#unpublished_event_type {
+    width: 70%;
+}
+
 #unpublished-events-pager {
     margin: 20px 0 20px 0;
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import CategoryNavigator from '../containers/CategoryNavigator';
+import ListClassNavigator from '../containers/ListClassNavigator';
 import ListDropdown from '../containers/ListDropdown';
 import {browserHistory} from 'react-router';
 import URL from '../../utils/url';
@@ -17,11 +18,14 @@ class Selections extends React.Component {
             <div className="selections">
             <div className="container-fluid selections-navigation">
                 <div className="row">
-					<div className="col-md-4">
+                    <div className="col-md-3">
+                        <strong>Class</strong>: <ListClassNavigator />
+                    </div>
+                    <div className="col-md-3">
+                        <strong>List</strong>: <ListDropdown member_id={this.props.params.member_id} autoSelect />
+                    </div>
+					<div className="col-md-3">
 						<strong>Category</strong>: <CategoryNavigator />
-					</div>
-					<div className="col-md-4">
-						<strong>List</strong>: <ListDropdown list={this.props.params.id} autoSelect />
 					</div>
                 </div>
             </div>
@@ -38,7 +42,8 @@ export default connect(
 	state => {
 		return {
 			lists: state.lists.results,
-			category: state.routing.locationBeforeTransitions.query.category
+			category: state.routing.locationBeforeTransitions.query.category,
+            list_class: state.routing.locationBeforeTransitions.query.list_class
 		};
 	},
 	dispatch => ({

@@ -116,4 +116,9 @@ interface IPresentation extends ISummitEvent
      */
     public function getStatusNice() ;
 
+    /**
+     * @return bool
+     */
+    public function isLightningWannabe();
+
 }

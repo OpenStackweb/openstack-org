@@ -35,6 +35,8 @@ class TrackChairsPage_Controller extends Page_Controller
         }
         parent::init();
         Requirements::clear();
+
+        Requirements::css(Director::protocol() . '://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css?'.time());
     }
 
     public function trackChairCheck()

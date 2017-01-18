@@ -30,15 +30,35 @@ class URL {
 			else if(queryParams === true) {
 				serialised = window.location.search.substring(1);
 			}
-			
+
 			if(serialised) {
 				path += `?${serialised}`;
 			}
-			
+
 		}
-		
-		return path;		
+
+		return path;
 	}
+
+    updateQueryParams(path, queryParams) {
+        if(queryParams) {
+            if(typeof queryParams === 'object') {
+                for (var key in queryParams) {
+                    var value = queryParams[key];
+                    var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+                    var separator = path.indexOf('?') !== -1 ? "&" : "?";
+                    if (path.match(re)) {
+                        return path.replace(re, '$1' + key + "=" + value + '$2');
+                    }
+                    else {
+                        return path + separator + key + "=" + value;
+                    }
+                }
+            }
+        }
+
+        return path;
+    }
 
 	create (pathParts, queryParams, baseURL, windowObj) {
 		try {
@@ -69,6 +89,37 @@ class URL {
 
 		return [baseURL, path].join('/');
 	}
+
+    update (pathParts, queryParams, baseURL, windowObj) {
+        try {
+            if(!windowObj) windowObj = window;
+        } catch (e) {
+            if(!windowObj) windowObj = {};
+        }
+
+        baseURL = baseURL || this.baseURL;
+        let path;
+
+        // array
+        if(Array.isArray(pathParts)) {
+            path = pathParts.join('/');
+        }
+        // null
+        else if(pathParts === undefined) {
+            path = windowObj.location.pathname.replace(new RegExp(`^${baseURL}`), '');
+        }
+        // string
+        else {
+            path = pathParts;
+        }
+
+        path = path + windowObj.location.search;
+        path = this.updateQueryParams(path , queryParams);
+        baseURL = baseURL.replace(/\/$/,'');//.replace(/^\//, '');
+        path = path.replace(/\/$/,'').replace(/^\//, '');
+
+        return [baseURL, path].join('/');
+    }
 
 	makeRelative (url) {
 		const replace = this.baseURL.replace(/^\//,'');

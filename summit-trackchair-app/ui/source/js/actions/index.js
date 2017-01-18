@@ -106,6 +106,14 @@ export const fetchLists = (category) => {
 	)(category);
 };
 
+export const fetchListsByClass = (category, list_class) => {
+    return createRequestReceiveAction(
+        requestLists,
+        receiveLists,
+		`selections/${category}/${list_class}`
+)(category);
+};
+
 export const fetchPresentationDetail = (id) => {
 	return createRequestReceiveAction(
     	requestPresentationDetail,

@@ -108,15 +108,13 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
             $query_string = $request->getVars();
             $summit_id    = intval($request->param('SUMMIT_ID'));
             $source       = strtolower(Convert::raw2sql($request->param('Source')));
-            $valid_sources = array('tracks', 'track_list', 'presentations', 'events');
+            $valid_sources = array('presentations', 'lightning', 'evening_events', 'lunch_events', 'all_events');
 
             if(!in_array($source, $valid_sources)) return $this->validationError(array('invalid requested source'));
 
-            $search_term   = isset($query_string['search_term']) ? Convert::raw2sql($query_string['search_term']) : null;
-            $status        = isset($query_string['status']) ? Convert::raw2sql($query_string['status']) : null;
-            $track_list_id = isset($query_string['track_list_id']) ? intval($query_string['track_list_id']) : null;
-            $track_id      = isset($query_string['track_id']) ? intval($query_string['track_id']) : null;
-            $event_type_id = isset($query_string['event_type_id']) ? intval($query_string['event_type_id']) : null;
+            $filters['search_term']   = isset($query_string['search_term']) ? Convert::raw2sql($query_string['search_term']) : null;
+            $filters['status']        = isset($query_string['status']) ? Convert::raw2sql($query_string['status']) : null;
+            $filters['track_id']      = isset($query_string['track_id']) ? intval($query_string['track_id']) : null;
             $page          = isset($query_string['page']) ? intval($query_string['page']) : 1;
             $page_size     = isset($query_string['page_size']) ? intval($query_string['page_size']) : 10;
             $order         = isset($query_string['order']) ? Convert::raw2sql($query_string['order']) : null;
@@ -124,26 +122,27 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
 
             switch ($source)
             {
-                case 'track_list':
-                {
-                    list($page, $page_size, $count, $data) = $this->summitpresentation_repository->getUnpublishedBySummitAndTrackList($summit_id, $track_list_id, $status, $search_term, $page,$page_size, $order);
-                }
-                break;
-                case 'tracks':
-                {
-                    list($page, $page_size, $count, $data) = $this->summitpresentation_repository->getUnpublishedBySummitAndTrack($summit_id, $track_id, $status, $search_term, $page,$page_size, $order);
-                }
-                    break;
                 case 'presentations':
-                {
-                    list($page, $page_size, $count, $data) = $this->summitpresentation_repository->getUnpublishedBySummit($summit_id, null, $status, $search_term, $page,$page_size, $order);
-                }
-                break;
-                case 'events':
-                {
-                    list($page, $page_size, $count, $data) = $this->summitevent_repository->getUnpublishedBySummit($summit_id, $event_type_id, $search_term, $page,$page_size, $order);
-                }
-                break;
+                    $event_types = array(IPresentationType::Presentation,IPresentationType::Keynotes,IPresentationType::Panel);
+                    list($page, $page_size, $count, $data) = $this->summitpresentation_repository->getUnpublished($summit_id,$event_types,$filters,$page,$page_size,$order);
+                    break;
+                case 'lightning':
+                    $event_types = array(IPresentationType::LightingTalks);
+                    list($page, $page_size, $count, $data) = $this->summitpresentation_repository->getUnpublished($summit_id,$event_types,$filters,$page,$page_size,$order);
+                    break;
+                case 'evening_events':
+                    $event_type = ISummitEventType::EveningEvents;
+                    $search_term = $filters['search_term'];
+                    list($page, $page_size, $count, $data) = $this->summitevent_repository->getUnpublishedBySummit($summit_id, $event_type, $search_term, $page,$page_size, $order);
+                    break;
+                case 'lunch_events':
+                    $event_type = ISummitEventType::Lunch_Breaks;
+                    $search_term = $filters['search_term'];
+                    list($page, $page_size, $count, $data) = $this->summitevent_repository->getUnpublishedBySummit($summit_id, $event_type, $search_term, $page,$page_size, $order);
+                    break;
+                case 'all_events':
+                    list($page, $page_size, $count, $data) = $this->summitpresentation_repository->getUnpublished($summit_id,[],$filters,$page,$page_size,$order);
+                    break;
             }
 
             $events = array();
@@ -156,6 +155,7 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
                     'abstract'    => $e->Abstract,
                     'type_id'     => intval($e->TypeID),
                     'class_name'  => $e->ClassName,
+                    'track_id'    => intval($e->CategoryID),
                 );
 
                 if ($e instanceof Presentation)
@@ -175,7 +175,7 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
                         $entry['speakers_id'] = $speakers;
                     }
                     $entry['moderator_id'] = intval($e->ModeratorID);
-                    $entry['track_id']     = intval($e->CategoryID);
+
                     $entry['level']        = $e->Level;
                     $entry['status']       = $e->SelectionStatus();
                 }
