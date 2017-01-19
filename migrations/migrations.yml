@@ -56,4 +56,5 @@ migrations:
   - SummitCategoryDefaultTagsMigration
   - UpdateOpenstackComponentMigration
   - LightingTalksMigration
+  - LightingTalksMigrationFix
   - PushNotificationMigration
