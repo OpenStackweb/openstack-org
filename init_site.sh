@@ -28,9 +28,7 @@ fi
 if [ -f "bower.json" ]; then
     bower install --allow-root --config.interactive=false
 fi
-if [ -f "webpack.config.js" ]; then
-    webpack;
-fi
+npm run build-all;
 sudo ./framework/sake installsake;
 sake dev/build;
 sake dev/tasks/DBMigrateTask;
