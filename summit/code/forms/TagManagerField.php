@@ -24,6 +24,11 @@ class TagManagerField extends FormField
             if(!isset($tag_array[$tag->Group])) $tag_array[$tag->Group] = array();
             $tag_array[$tag->Group][] = $tag->Tag;
         }
+
+        foreach ($tag_array as &$tag_group) {
+            sort($tag_group);
+        }
+
         $tags_json = json_encode($tag_array);
 
         Requirements::customScript("var category_tags = {$tags_json};");
