@@ -1,6 +1,7 @@
 import React from 'react';
-import Sidebar from './Sidebar';
-import DevTools from '../containers/DevTools';
+import Sidebar from '../containers/Sidebar';
+import MobileSidebar from '../containers/MobileSidebar';
+import PresentationPagination from '../containers/PresentationPagination';
 import Loader from '../ui/Loader';
 import TopBanner from '../ui/TopBanner';
 import { 
@@ -12,9 +13,8 @@ import {
 } from '../../action-creators';
 
 import { connect } from 'react-redux';
-import PresentationDetail from './PresentationDetail';
-import TransitionGroup from 'react-addons-transition-group';
-import animate from '../../utils/animate';
+import AnimatedPresentationDetail from './AnimatedPresentationDetail';
+import MobileTools from '../views/MobileTools';
 
 class VotingApp extends React.Component {
 
@@ -66,7 +66,7 @@ class VotingApp extends React.Component {
 		}
 	}
 
-	render () {
+	render () {		 
 		const {
 			errorMsg,
 			clearError,
@@ -75,21 +75,23 @@ class VotingApp extends React.Component {
 			preview,
 			requestedID,
 			presentationID,
-			navigationDirection
+			navigationDirection,
+			isMobile,
+			sidebar
 		} = this.props;
 
+		const filter = this.props.params.filter || 'none';
+     	
      	if(preview) {
 			return (
 				<div className="row">
-					<div className="col-lg-9 col-md-9 col-sm-9 voting-content-body-wrapper">
+					<div className="col-lg-9 col-md-9 col-sm-12 voting-content-body-wrapper">
 						<PresentationDetail />
 					</div>
 				</div>
 			);
 		}
-
-		const AnimatedPresentationDetail = animate(PresentationDetail, navigationDirection);
-
+		
 		return (
 			<div className="row">				
 				{errorMsg &&
@@ -103,14 +105,11 @@ class VotingApp extends React.Component {
 				{ready &&
 					<div>
 						<Loader active={xhrLoading} type='spin' className='main-loader' />
-						<Sidebar filter={ this.props.params.filter || 'none'}/>
-						<div className={`col-lg-9 col-md-9 col-sm-9 voting-content-body-wrapper`}>
-						<TransitionGroup>
-							{(!requestedID || (presentationID == requestedID)) &&
-								<AnimatedPresentationDetail key={requestedID} />
-							}
-						</TransitionGroup>
+						{isMobile ? <MobileSidebar filter={filter} show={sidebar} /> : <Sidebar filter={filter} />}
+						<div className="voting-content-body-wrapper">
+							<AnimatedPresentationDetail />
 						</div>
+						<MobileTools />
 					</div>
 				}
 				{!ready &&
@@ -131,9 +130,11 @@ export default connect(
 			category: state.presentations.category,
 			search: state.presentations.search,
 			preview: window.location.search.match(/^\?preview/),
-            presentationID: state.presentations.selectedPresentation.id,
-            requestedID: state.presentations.requestedPresentationID,
-			navigationDirection: state.presentations.navigationDirection
+			presentationID: state.presentations.selectedPresentation.id,
+			requestedID: state.presentations.requestedPresentationID,
+			navigationDirection: state.presentations.navigationDirection,
+			sidebar: state.mobile.showPresentationList,
+			isMobile: state.mobile.isMobile
 		}
 	},
 	{ 

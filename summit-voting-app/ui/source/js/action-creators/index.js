@@ -2,6 +2,7 @@ import http from 'superagent';
 import Config from '../utils/Config';
 import url  from '../utils/url';
 import { pushState } from 'redux-router';
+import scrollToElement from '../utils/scrollToElement';
 
 require('array.prototype.findindex');
 require('array.prototype.find');
@@ -143,11 +144,7 @@ export function requestCategories () {
 export function requestPresentation (id) {
 	return (dispatch, getState) => {
 		const existing = getState().presentations.presentations.find(p => p.id == id);
-		
-		// if(existing) {
-		// 	dispatch(receivePresentation(existing));
-		// 	if(existing.abstract) return;
-		// }
+		scrollToElement('.main-body', document.querySelector('.outer-wrap'));
 		dispatch(beginXHR());
 		cancelPending(xhrs, 'REQUEST_PRESENTATION');
 
@@ -297,9 +294,16 @@ export function navigatePresentations (adder) {
 };
 
 export function adjacentPresentation(adder) {
-	return {
-		type: 'NAVIGATE_ADJACENT',
-		payload: adder
+	return (dispatch, getState) => {
+		const toIndex = getState().presentations.currentIndex + adder;
+		const presentations = getState().presentations.presentations;
+
+		if (toIndex < 0) {
+			return;			
+		} else if ((toIndex+1) >= presentations.length) {
+			return;			
+		}		
+		dispatch(goToPresentation(presentations[toIndex].id));
 	};
 };
 
@@ -321,5 +325,17 @@ export function setSearchTerm (term) {
 export function clearPresentation () {
 	return {
 		type: 'CLEAR_PRESENTATION'
+	};
+};
+
+export function togglePresentationList () {
+	return {
+		type: 'TOGGLE_PRESENTATION_LIST'
+	};
+};
+
+export function toggleVotingCard () {
+	return {
+		type: 'TOGGLE_VOTING_CARD'
 	};
 }

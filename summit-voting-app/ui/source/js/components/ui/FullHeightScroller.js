@@ -27,6 +27,8 @@ class FullHeightScroller extends React.Component {
 		
 		const top = node.getBoundingClientRect().top;
 		
+		if(top < 0) return Math.abs(top);
+
 		return window.innerHeight - top - this.props.pad;
 	}
 

@@ -47,15 +47,15 @@
          <div class="main-body">
             <div id="wrap">
                <!-- Begin Page Content -->
-               <div class="container">
+               <div class="container-fluid">
                   <div class="row">
                      <div class="voting-header">
-                        <div class="col-lg-3 col-md-3 col-sm-3">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                            <div class="voting-app-logo">
                               <img class="summit-hero-logo" src="/summit/images/voting-logo.png" alt="OpenStack Summit" />
                            </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-9">
                            <div class="voting-app-title">
                               <h1>
                                  Vote For Presentations

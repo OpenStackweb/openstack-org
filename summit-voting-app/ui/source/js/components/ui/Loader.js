@@ -1,5 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
+import '../../../scss/loaders.scss';
 const Loader = ({
 	type,
 	className,

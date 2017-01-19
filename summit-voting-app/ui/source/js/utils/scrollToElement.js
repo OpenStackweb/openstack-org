@@ -13,7 +13,7 @@ const scrollToElement = (el, container, scrollDuration = 300, padding = 0) => {
 		el = document.querySelector(el);		
 	}
 
-	if(!el) return;
+	if(!el) {console.log('no element');return;}
 
 	active = true;
 	var interval = 10;
@@ -23,6 +23,7 @@ const scrollToElement = (el, container, scrollDuration = 300, padding = 0) => {
 				active = false;
 				return;
 			}
+			console.log(container.scrollTop);
 			let scrollPos = container === window ? window.scrollY : container.scrollTop,
 				offset = el.getBoundingClientRect().top,
 				togo = offset - padding,
@@ -35,6 +36,7 @@ const scrollToElement = (el, container, scrollDuration = 300, padding = 0) => {
 			nextY = scrollPos+stepSize;
 			if(container === window) {
 				container.scrollTo( 0, nextY );	
+				console.log('scroll to ', nextY);
 			}
 			else {
 				container.scrollTop = (nextY-containerTop);

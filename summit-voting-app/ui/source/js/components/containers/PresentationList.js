@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import PresentationItem from '../ui/PresentationItem';
 import FullHeightScroller from '../ui/FullHeightScroller';
 import { connect } from 'react-redux';
-import { goToPresentation, requestPresentations } from '../../action-creators';
+import { goToPresentation, requestPresentations, togglePresentationList } from '../../action-creators';
 import Config from '../../utils/Config';
 import shallowEqual from 'shallowequal';
 
@@ -26,17 +26,18 @@ class PresentationList extends React.Component {
 	}
 
 	onPresentationClicked (id) {
-		// Hack!
-		document.body.classList.remove('openVotingNav');
         this.updateLocationHash(id);
         this.props.dispatch(goToPresentation(id));
+		if(this.props.isMobile) {
+			this.props.dispatch(togglePresentationList());
+		}
 	}
 
 	updateLocationHash(id){
         window.location.hash = '#/'+id;
 	}
 
-	componentDidMount (prevProps) {
+	componentDidMount (prevProps) {		
 		if(this.props.presentations.length && !this.props.selectedPresentation.id) {
 			var presentationId = this.props.filter != 'none' ? this.props.filter : this.props.presentations[0].id;
             this.updateLocationHash(presentationId);
@@ -103,7 +104,8 @@ export default connect (
 			...state.presentations,
 			category: state.categories.selectedCategory,
 			searchQuery: state.presentations.search,
-			loading: state.ui.loading
+			loading: state.ui.loading,
+			isMobile: state.mobile.isMobile
 		};
 	}
 )(PresentationList);

@@ -1,2 +1,2 @@
 import './js/init';
-import './less/style.less';
+import './scss/voting-app.scss';

@@ -4,6 +4,7 @@ import PresentationMeta from '../ui/PresentationMeta';
 import VotingSpeakerRow from '../ui/VotingSpeakerRow';
 import MainSpeakerRow from '../ui/MainSpeakerRow';
 import CommentForm from '../containers/CommentForm';
+import PresentationPagination from '../containers/PresentationPagination';
 import Comment from '../ui/Comment'
 import PresentationCommentList from '../containers/PresentationCommentList';
 import PresentationNotices from './PresentationNotices';
@@ -11,16 +12,14 @@ import PresentationError from './PresentationError';
 import Config from '../../utils/Config';
 import { connect } from 'react-redux';
 import { requestPresentation, toggleCommentForm, destroyUserComment } from '../../action-creators';
-
-require('array.prototype.find');
+import 'array.prototype.find';
 
 class PresentationDetail extends React.Component {
 
 	_getPresentation (props) {
 		props = props || this.props;
-
 		if(
-			!props.presentation || (props.requestedPresentationID !== this.props.requestedPresentationID)
+			!props.presentation || (props.requestedPresentationID !== this.props.presentation.id)
 		) {
 			this.props.requestPresentation(
 				props.requestedPresentationID
@@ -32,11 +31,11 @@ class PresentationDetail extends React.Component {
       	this._getPresentation();
 	}
 
-	componentWillReceiveProps (nextProps) {
+	componentWillReceiveProps (nextProps) {		
 		this._getPresentation(nextProps);
 	}
 
-	render () {
+	render () {		
 		const {presentation} = this.props;
 		const loggedIn = Config.get('loggedIn');
 		if(!presentation.speakers) {
@@ -56,14 +55,9 @@ class PresentationDetail extends React.Component {
 
 		return (
 			<div>
-			   <a onClick={(e) => {
-			   		e.preventDefault();
-			   		document.body.classList.toggle('openVotingNav');
-			   	}} className="voting-open-panel text">
-			   		<i className="fa fa-chevron-left" /> All Submissions
-			   </a>
 			   {presentation &&
 			   <div className="voting-content-body">
+			   		<PresentationPagination />
 			   			{presentation.error &&
 			   				<PresentationError />
 			   			}
@@ -71,7 +65,7 @@ class PresentationDetail extends React.Component {
 			   			<div>
 			   				<PresentationNotices loggedIn={loggedIn} votingOpen={Config.get('votingOpen')} />
 							{loggedIn &&
-								<div>
+								<div className="top-voting">
 									<h5>Cast Your Vote</h5>
 									<VotingBar presentation={presentation} />
 									<div className="voting-tip">
@@ -103,9 +97,9 @@ class PresentationDetail extends React.Component {
 
 						      	</div>
 						      	{loggedIn &&
-							      	<div>
+							      	<div className="bottom-voting">
 						      			<h5>Cast Your Vote</h5>						      	
-							      		<VotingBar presentation={presentation} />
+							      		<VotingBar />
 								      	<div className="voting-tip">
 								        	<strong>TIP:</strong> You can vote quickly with your keyboard using the numbers below each option.
 								      	</div>
@@ -146,7 +140,7 @@ class PresentationDetail extends React.Component {
 						      	}
  						    </div>
 						</div>
-						}		   				      
+						}
 			   </div>
 			   }
 			</div>
@@ -156,7 +150,7 @@ class PresentationDetail extends React.Component {
 	}	
 }
 
-const ConnectedPresentationDetail = connect(
+export default connect(
 	state => ({
 		presentation: state.presentations.selectedPresentation,
 		requestedPresentationID: state.presentations.requestedPresentationID
@@ -176,4 +170,3 @@ const ConnectedPresentationDetail = connect(
 	})
 )(PresentationDetail);
 
-export default ConnectedPresentationDetail;

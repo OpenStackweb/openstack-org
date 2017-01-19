@@ -6,11 +6,13 @@ import thunk from 'redux-thunk';
 import categories from '../reducers/categories';
 import presentations from '../reducers/presentations';
 import ui from '../reducers/ui';
+import mobile from '../reducers/mobile';
 
 const reducer = combineReducers({
 	categories,
 	presentations,
-	ui
+	ui,
+	mobile
 });
 
 const composedCreateStore = compose(

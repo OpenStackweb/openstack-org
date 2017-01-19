@@ -41,13 +41,14 @@ class HotKeyOption extends React.Component {
 			this.props.className,
 			this.props.selected ? 'current-vote' : ''
 		].join(' ');
-		return (
-		   <li className={classes}>
-		      <a href="javascript:void(0);" onClick={this.selectOption}>
-		         {this.props.children}
-		         <div className="voting-shortcut">{this.props.eventKey}</div>
-		      </a>
-		   </li>
+
+		return React.createElement(
+			this.props.component,
+			{...this.props, className: classes},			
+			<a href="javascript:void(0);" onClick={this.selectOption}>
+				{this.props.children}
+				<div className="voting-shortcut">{this.props.eventKey}</div>
+			</a>
 		);
 	}
 }
@@ -56,7 +57,12 @@ HotKeyOption.propTypes = {
 	eventKey: React.PropTypes.any.isRequired,
 	keyCodes: React.PropTypes.array,
 	onSelected: React.PropTypes.func,
-	selected: React.PropTypes.bool
+	selected: React.PropTypes.bool,
+	component: React.PropTypes.string
+};
+
+HotKeyOption.defaultProps = {
+	component: 'li'
 };
 
 export default HotKeyOption;

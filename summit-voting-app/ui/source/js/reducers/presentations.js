@@ -10,7 +10,10 @@ export default (state = {
 	initialised: false,
 	search: null,
 	category: null,
-	navigationDirection: 'down'
+	navigationDirection: 'forward',
+	hasNext: false,
+	hasPrev: false,
+	currentIndex: -1
 }, action) => {
 	switch(action.type) {	
 		case 'RECEIVE_PRESENTATIONS':
@@ -27,24 +30,30 @@ export default (state = {
 				presentations: [],
 				selectedPresentation: state.selectedPresentation,
 				requestedPresentationID: null,
-				total: null
+				total: null,
+				currentIndex: -1
 			};
 		
 		case 'CLEAR_PRESENTATION':
 			return {
 				...state,
 				selectedPresentation: null,
-				requestedPresentationID: null
+				requestedPresentationID: null,
+				currentIndex: -1
 			};
 		
 		case 'SELECT_PRESENTATION':
-			if(action.payload === state.requestedPresentationID) {
+			if(action.payload === state.requestedPresentationID) {				
 				return state;
 			}
 
-			const currentIndex = state.presentations.findIndex(p => p.id === state.selectedPresentation.id);
-			const targetIndex = state.presentations.findIndex(p => p.id === action.payload);
-			const navigationDirection = targetIndex > currentIndex ? 'down' : 'up';
+			const currentIndex = state.presentations.findIndex(
+				p => p.id === state.selectedPresentation.id
+			);
+			const targetIndex = state.presentations.findIndex(
+				p => p.id === action.payload
+			);
+			const navigationDirection = targetIndex > currentIndex ? 'forward' : 'backward';
 
 			return {
 				...state,
@@ -53,11 +62,18 @@ export default (state = {
 			};
 
 		case 'RECEIVE_PRESENTATION':
+			const i = state.presentations.findIndex(
+				p => p.id === action.payload.id
+			);
+
 			const newState = {
 				...state,
 				selectedPresentation: {...action.payload},
 				requestedPresentationID: action.payload.id,
-				presentations: state.presentations.map(p => presentation(p, action))
+				presentations: state.presentations.map(p => presentation(p, action)),
+				hasNext: ((i+1) < state.presentations.length),
+				hasPrev: i > 0,
+				currentIndex: i
 			};
 
 			return newState;
@@ -106,14 +122,6 @@ export default (state = {
 				}
 			};
 
-		case 'NAVIGATE_ADJACENT':
-			return {
-				...state,
-				selectedPresentation: {
-					...state.selectedPresentation
-				},
-				navigationDirection: action.payload > 0 ? 'down' : 'up'
-			};
 		case 'UPDATE_CATEGORY':
 			return {
 				...state,

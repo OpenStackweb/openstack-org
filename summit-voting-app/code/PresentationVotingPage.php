@@ -228,7 +228,7 @@ class PresentationVotingPage_API extends RequestHandler
         $offset = $r->getVar('offset') ?: 0;
         $m = Member::currentUser();
         $list = $m ? $m->getRandomisedPresentations(null, $this->summit) : $this->summit->VoteablePresentations();
-
+$list = Presentation::get()->sort('Created DESC')->limit(100);
         if($list) {
 	        if ($r->getVar('category')) {
 	            $list = $list->filter(['CategoryID' => $r->getVar('category')]);
@@ -273,7 +273,7 @@ class PresentationVotingPage_API extends RequestHandler
     public function handleReadPresentation(SS_HTTPRequest $r)
     {
         $presentation = $this->getFromFilename($r->param('ID'), 'Presentation');
-
+        $presentation = Presentation::get()->byID(explode('.', $r->param('ID'))[0]);
         if (!$presentation) {
             return $this->httpError(404);
         }
@@ -349,13 +349,14 @@ class PresentationVotingPage_API extends RequestHandler
         }
 
         $presentation = $this->getFromFilename($r->param('ID'), 'Presentation');
+        $presentation = Presentation::get()->byID(explode('.', $r->param('ID'))[0]);
 
         if (!$presentation) {
             return $this->httpError(404);
         }
 
         if(!$presentation->Summit()->isVotingOpen()) {
-        	return $this->httpError(403,'Voting is closed');
+        //	return $this->httpError(403,'Voting is closed');
         }
 
         $vars = Convert::json2array($r->getBody());
@@ -393,6 +394,7 @@ class PresentationVotingPage_API extends RequestHandler
         }
 
         $presentation = $this->getFromFilename($r->param('ID'), 'Presentation');
+        $presentation = Presentation::get()->byID(explode('.', $r->param('ID'))[0]);
 
         if (!$presentation) {
             return $this->httpError(404);
