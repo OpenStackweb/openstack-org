@@ -119,7 +119,7 @@ jQuery(function($) {
     $('.news-archived-search input').val(searchTerm);
 
 
-    $('.newsRestore').click(function(){
+    $('body').on('click','.newsRestore',function(){
         var article_id = $(this).attr('article_id');
 
         $.ajax({
@@ -130,6 +130,22 @@ jQuery(function($) {
                 $('#article_'+article_id).remove();
             }
         });
+    });
+
+    $('body').on('click','.newsDelete',function(){
+        var article_id = $(this).attr('article_id');
+
+        if (confirm('Are you sure you want to delete this article?')) {
+            $.ajax({
+                type: "POST",
+                url: 'NewsArchivedPage_Controller/deleteArticle',
+                data: { id : article_id},
+                success: function(){
+                    $('#article_'+article_id).remove();
+                }
+            });
+        }
+
     });
 
 });

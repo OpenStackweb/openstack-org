@@ -327,6 +327,19 @@ ul.featured li {
     font-weight: bold;
 }
 
+.newsDelete {
+    font-size: 12px;
+    color: #0404B4;
+    margin-left: 10px;
+    padding-left: 10px;
+    border-left: 1px solid #aaa;
+    cursor: pointer;
+}
+
+.newsDelete:hover {
+    font-weight: bold;
+}
+
 
 .news-sidebar, .rss-sidebar {
     background: white;

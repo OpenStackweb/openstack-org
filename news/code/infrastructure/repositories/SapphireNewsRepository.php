@@ -102,6 +102,7 @@ final class SapphireNewsRepository extends SapphireRepository {
         else {
             $query = new QueryObject(new News);
             $query->addAndCondition(QueryCriteria::equal('Archived','1'));
+            $query->addAndCondition(QueryCriteria::equal('Deleted','0'));
             $query->addOrder(QueryOrder::desc('Created'));
             list($list,$count) = $this->getAll($query,$offset,$limit);
         }
@@ -131,7 +132,7 @@ final class SapphireNewsRepository extends SapphireRepository {
                 MATCH ( Headline, SummaryHtmlFree, BodyHtmlFree )
                 AGAINST ('{$sqlSearchTerm}' IN BOOLEAN MODE)");*/
 
-        return DataList::create("News")->where("Archived = 1 AND
+        return DataList::create("News")->where("Archived = 1 AND Deleted = 0 AND
                 (Headline LIKE '%{$sqlSearchTerm}%' OR
                 SummaryHtmlFree LIKE '%{$sqlSearchTerm}%' OR
                 BodyHtmlFree LIKE '%{$sqlSearchTerm}%')

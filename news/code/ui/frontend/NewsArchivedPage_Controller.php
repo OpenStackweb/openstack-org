@@ -25,7 +25,8 @@ final class NewsArchivedPage_Controller extends Page_Controller {
         'signup',
         'sendSignupConfirmation',
         'newsPage',
-        'restoreArticle'
+        'restoreArticle',
+        'deleteArticle'
     );
 
     /**
@@ -90,5 +91,11 @@ final class NewsArchivedPage_Controller extends Page_Controller {
         $article_id = intval($this->request->postVar('id'));
 
         $this->news_manager->restoreNewsArticle($article_id);
+    }
+
+    public function deleteArticle() {
+        $article_id = intval($this->request->postVar('id'));
+
+        $this->news_manager->deleteNewsArticle($article_id);
     }
 }

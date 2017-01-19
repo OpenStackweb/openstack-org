@@ -1,5 +1,5 @@
 ---
-Name: jobroutes
+Name: newsroutes
 After: 'framework/routes#coreroutes'
 ---
 Director:
