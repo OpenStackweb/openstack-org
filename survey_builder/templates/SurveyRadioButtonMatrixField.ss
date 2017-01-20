@@ -17,7 +17,7 @@
         <% end_loop %>
     </tr>
     <% loop Rows %>
-    <tr>
+    <tr class="{$EvenOdd}">
         <td>$Label</td>
           <% loop Columns %>
             <td class="input-cell<% if $Top.mustHighlite($Up.ID,$ID) %> highlite-row<% end_if %>"><input data-row-id="{$Up.ID}" data-col-id="{$ID}" class="radio_{$Up.ID} radio_opt" <% if $Top.isChecked($Up.ID,$ID) %>checked<% end_if %> type="radio" name="{$Top.Name}_{$Up.ID}" id="{$Up.ID}_{$ID}"></td>

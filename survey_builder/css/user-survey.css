@@ -224,12 +224,6 @@
 }
 /* END OF WEB FONTS */
 
-
-.optionset label {
-	position: relative;
-	top: -5px;
-}
-
 ul.survey-steps {
 	display: block;
 	margin: 0px;
@@ -332,10 +326,6 @@ div#private {
 
 div.current-user {
 	text-align: right;
-}
-
-input[type="radio"], input[type="checkbox"] {
-   margin-top:0px !important;
 }
 
 .chosen-choices .search-field input{
@@ -549,19 +539,7 @@ input.action, input.action:focus, input.action:active {
 input.action:hover {
     background: #2A4E68;
 }
-ul.checkboxset input[type="checkbox"] {
-    margin: 0 10px 0 0;
-    display: inline-block;
-    border: 2px solid #D4DCE5;
-    box-shadow: none;
-    color: #2A4E68;
-    font-size: 1.1em;
-    border-radius: 4px;
-    padding: 10px; 
-}
-.optionset label {
-    top: 0;
-}
+
 ul#answers {
     width: 100%;
     float: left;
@@ -683,11 +661,6 @@ div.deployment {
 }
 
 
-.radio input[type="radio"], .radio-inline input[type="radio"], .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"] {
-    margin-left: 0px;
-    position: absolute;
-}
-
 .entity-survey-label
 {
     min-width: 200px !important;
@@ -724,11 +697,6 @@ table.checkboxset tr
 table.checkboxset tr td {
     vertical-align: middle !important;
     text-align: left !important;
-}
-
-table.checkboxset tr td input[type="checkbox"]
-{
-    top:4px !important;
 }
 
 i.navigation-icon {
@@ -1093,4 +1061,24 @@ input.number-input {
 
 .input-group-percentage{
     width: 130px !important;
+}
+
+div.surveyradiobuttonmatrix tr.even{
+    background-color: #ffffff;
+}
+
+div.surveyradiobuttonmatrix tr.odd{
+    background-color: #eaeaea;
+}
+
+table.checkboxset ul{
+    padding: 0;
+}
+
+ul.surveyradiobuttonset{
+    padding: 0;
+}
+
+table.checkboxset .checkbox label{
+    padding-right: 5px;
 }

@@ -1,10 +1,13 @@
-<% if $Options.Count <= 8 %>
+<% if $Options.Count <= 10 %>
 <ul id="$ID" class="$extraClass">
     <% if $Options.Count %>
         <% loop $Options %>
-            <li class="$Class">
-                <input class="checkbox <% if $Top.isVisible == 0 %>hidden<% end_if %>" id="$ID" <% if $Top.IsRequired%>data-rule-required="true" <% end_if %> name="{$Name}" type="checkbox" value="$Value"<% if $isChecked %> checked="checked"<% end_if %><% if $isDisabled %> disabled="disabled"<% end_if %> />
-                <label for="$ID">$Title</label>
+            <li class="{$EvenOdd}">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" <% if $Top.isVisible == 0 %>hidden<% end_if %>" id="$ID" <% if $Top.IsRequired%>data-rule-required="true" <% end_if %> name="{$Name}" value="$Value"<% if $isChecked %> checked="checked"<% end_if %><% if $isDisabled %> disabled="disabled"<% end_if %> >&nbsp;$Title
+                    </label>
+                </div>
             </li>
         <% end_loop %>
     <% else %>
@@ -13,20 +16,25 @@
 </ul>
 <% else %>
 <table id="$ID" class="$extraClass">
-    <% loop $Options %>
+    <tr>
+    <% loop $Options.Sort('Title') %>
         <% if First %>
-        <tr>
+        <td><ul>
         <% end_if %>
-        <td width="33%">
-            <input class="checkbox <% if $Top.isVisible == 0 %>hidden<% end_if %>" id="$ID" <% if $Top.IsRequired%>data-rule-required="true" <% end_if %> name="{$Name}" type="checkbox" value="$Value"<% if $isChecked %> checked="checked"<% end_if %><% if $isDisabled %> disabled="disabled"<% end_if %> />
-            <label class="checkbox-label" for="$ID">$Title</label>
-        </td>
-        <% if not First && not Last && Modulus(3) == 0 %>
-        </tr><tr>
+        <li class="{$EvenOdd}">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" <% if $Top.isVisible == 0 %>hidden<% end_if %>" id="$ID" <% if $Top.IsRequired%>data-rule-required="true" <% end_if %> name="{$Name}" value="$Value"<% if $isChecked %> checked="checked"<% end_if %><% if $isDisabled %> disabled="disabled"<% end_if %> >&nbsp;$Title
+                </label>
+            </div>
+        </li>
+        <% if not First && not Last && Modulus(6) == 0 %>
+        </ul></td><td><ul>
         <% end_if %>
         <% if Last %>
-        </tr>
+        </ul></td>
         <% end_if %>
     <% end_loop %>
+    </tr>
 </table>
 <% end_if %>
