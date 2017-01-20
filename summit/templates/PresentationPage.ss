@@ -3,7 +3,7 @@
 
 <head>
     <% include Head %>
-    <% include Analytics %>
+    <% include Page_GoogleAnalytics %>
     $FBTrackingCode
     $TwitterTrackingCode
     <link rel="stylesheet" type="text/css" href="/themes/openstack/static/css/tooltipster.css" />
@@ -165,4 +165,5 @@
 </div>
 </body>
 <% require javascript("themes/openstack/javascript/jquery.persistable-form.js") %>
+    <% include Page_LinkedinInsightTracker %>
 </html>

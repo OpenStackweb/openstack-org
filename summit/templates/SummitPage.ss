@@ -3,7 +3,7 @@
 
 <head>
     <% include Head %>
-    <% include Analytics %>
+    <% include Page_GoogleAnalytics %>
     $FBTrackingCode
     $TwitterTrackingCode
     <link rel="stylesheet" type="text/css" href="/themes/openstack/static/css/tooltipster.css" />
@@ -224,5 +224,5 @@
         });
     });
 </script>
-
+    <% include Page_LinkedinInsightTracker %>
 </html>

@@ -20,7 +20,7 @@
 
       // Used to record outbound links before the browser resets to the new site
 
-     <% include Analytics %>
+     <% include Page_GoogleAnalytics %>
 
   </head>
 
@@ -283,4 +283,6 @@
 </div>
 
   </body>
+
+      <% include Page_LinkedinInsightTracker %>
 </html>

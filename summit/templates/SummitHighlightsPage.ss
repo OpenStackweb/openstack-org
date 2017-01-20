@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <% include Head %>
-        <% include Analytics %>
+        <% include Page_GoogleAnalytics %>
     </head>
     <body>
         <div class="main-body">
@@ -34,4 +34,5 @@
 
         </div>
     </body>
+        <% include Page_LinkedinInsightTracker %>
 </html>

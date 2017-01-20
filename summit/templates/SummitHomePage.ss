@@ -3,7 +3,7 @@
 
 <head>
     <% include Head %>
-    <% include Analytics %>
+    <% include Page_GoogleAnalytics %>
 </head>
 <body class="summit-landing-body">
     <!-- Begin Page Content -->
@@ -81,5 +81,5 @@
     <% include JS %>
     <% include Quantcast %>
 </body>
-
+    <% include Page_LinkedinInsightTracker %>
 </html>

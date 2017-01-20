@@ -29,7 +29,7 @@
 
     <!-- Page-specific CSS -->
 
-    <% include Analytics %>
+    <% include Page_GoogleAnalytics %>
 
 </head>
 
@@ -322,5 +322,6 @@
 </div>
     <% include Quantcast %>
 </body>
+    <% include Page_LinkedinInsightTracker %>
 
 </html>

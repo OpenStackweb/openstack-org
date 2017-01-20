@@ -33,7 +33,7 @@
     <![endif]-->    
 
 
-    <% include Analytics %>
+    <% include Page_GoogleAnalytics %>
 
   </head>
 
@@ -50,5 +50,5 @@
     $TrackingLinkScript
     <% include Quantcast %>
   </body>
-
+      <% include Page_LinkedinInsightTracker %>
 </html>

@@ -211,9 +211,10 @@ class SummitPage_Controller extends Page_Controller
 
     function FBTrackingCode()
     {
-        $request = $this->request;
-        $order = $request->requestVar("order");
+        $request       = $this->request;
+        $order         = $request->requestVar("order");
         $tracking_code = '';
+
         if (isset($order) && $order == "complete") {
             //add FB tracking script
             $page = SummitPage::get()->byID($this->ID);

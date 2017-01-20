@@ -28,8 +28,8 @@
         <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <% include Analytics %>
-
+    <% include Page_GoogleAnalytics %>
+    <% include Page_LinkedinInsightTracker %>
   </head>
 
   <body id="$URLSegment">
@@ -45,4 +45,5 @@
     <% include Footer %>
     <% include Quantcast %>
   </body>
+    <% include Page_LinkedinInsightTracker %>
 </html>

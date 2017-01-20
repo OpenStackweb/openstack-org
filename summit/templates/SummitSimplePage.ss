@@ -3,7 +3,7 @@
 
 <head>
     <% include Head %>    
-    <% include Analytics %>
+    <% include Page_GoogleAnalytics %>
 </head>
 
 <body>
@@ -92,5 +92,5 @@
 
     <% include Quantcast %>
 </body>
-
+    <% include Page_LinkedinInsightTracker %>
 </html>

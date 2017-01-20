@@ -25,7 +25,7 @@
       <![endif]-->      
       $ModuleCSS('main')      
       <!-- Page-specific CSS -->
-      <% include Analytics %>
+      <% include Page_GoogleAnalytics %>
    </head>
    <body class="voting-body">
       <div class="outer-wrap">
@@ -84,4 +84,5 @@
       </div>
       <% include Quantcast %>
    </body>
+       <% include Page_LinkedinInsightTracker %>
 </html>

@@ -21,7 +21,7 @@
     <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <% include Analytics %>
+    <% include Page_GoogleAnalytics %>
 
 </head>
 
@@ -36,4 +36,5 @@
 </div>
     <% include Quantcast %>
 </body>
+    <% include Page_LinkedinInsightTracker %>
 </html>
