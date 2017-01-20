@@ -331,7 +331,7 @@ final class SummitEventManager implements ISummitEventManager
             $event->Progress                = Presentation::PHASE_COMPLETE;
             $event->AttendeesExpectedLearnt = html_entity_decode($event_data['expect_learn']);
             $event->Level                   = $event_data['level'];
-
+            $event->ToRecord                = isset($event_data['to_record'])? $event_data['to_record'] : 0;
             // speakers ...
             $speaker_ids = [];
 

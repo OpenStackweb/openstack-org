@@ -134,6 +134,7 @@ class Presentation extends SummitEvent implements IPresentation
         'Legacy'                  => 'Boolean',
         'FeatureCloud'            => 'Boolean',
         'LightningTalk'           => 'Boolean',
+        'ToRecord'                => 'Boolean',
     );
 
     /**
@@ -142,7 +143,8 @@ class Presentation extends SummitEvent implements IPresentation
     private static $defaults = array
     (
         'TrackChairGivenOrder' => 0,
-        'AllowFeedBack' => 1
+        'AllowFeedBack'        => 1,
+        'ToRecord'             => 0
     );
 
     /**
@@ -490,7 +492,9 @@ class Presentation extends SummitEvent implements IPresentation
 
         $f = parent::getCMSFields();
         $f->removeByName('TypeID');
-        $f->dropdown('Level', 'Level', $this->dbObject('Level')->enumValues())
+        $f
+            ->checkbox('ToRecord', 'To Record ?')
+            ->dropdown('Level', 'Level', $this->dbObject('Level')->enumValues())
             ->optionset('FeatureCloud','Does this talk feature an OpenStack cloud?', array(
                 1 => 'Yes',
                 0 => 'No'

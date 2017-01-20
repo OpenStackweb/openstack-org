@@ -97,6 +97,7 @@ $(document).ready(function(){
             $('.level_container').show();
             $('#allow_feedback').attr("checked","checked");
             $('#expect_learn_container').show();
+            $('.to_record_container').show();
         }
         else{
             $('#expect_learn_container').hide();
@@ -104,6 +105,7 @@ $(document).ready(function(){
             $('#allow_feedback').removeAttr("checked");
             $('.moderator-container').hide();
             $('.speakers-container').hide();
+            $('.to_record_container').hide();
             $('#moderator').rules("remove");
             $('#speakers').rules("remove");
         }
@@ -472,7 +474,8 @@ $(document).ready(function(){
             speakers: $('#speakers').tagsinput('items'),
             moderator: $('#moderator').tagsinput('items')[0],
             groups: $('#groups').tagsinput('items'),
-            publish: publish
+            publish: publish,
+            to_record: ($('#to_record').prop('checked')) ? 1 : 0,
         };
 
         $.ajax({

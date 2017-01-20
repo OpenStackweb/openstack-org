@@ -146,10 +146,21 @@
             <div class="form-group">
                 <div class="row">
                     <div class="col-md-4">
-                        <label>Feedback</label>
+                        <!-- https://github.com/flatlogic/awesome-bootstrap-checkbox -->
                         <div class="checkbox">
-                            <input id="allow_feedback" name="allow_feedback" type="checkbox" <% if $Event.AllowFeedBack %> checked <% end_if %>>
-                            <label for="allow_feedback"> Allow Feedback </label>
+                            <input type="checkbox" id="allow_feedback" name="allow_feedback" <% if $Event.AllowFeedBack %> checked <% end_if %>>
+                            <label for="allow_feedback">
+                                Allow feedback ?
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4 to_record_container" style="display: none;">
+                        <!-- https://github.com/flatlogic/awesome-bootstrap-checkbox -->
+                        <div class="checkbox">
+                            <input type="checkbox" id="to_record" name="to_record" <% if $Event.ToRecord %> checked <% end_if %>>
+                            <label for="to_record">
+                                To record ?
+                            </label>
                         </div>
                     </div>
                     <div class="col-md-4">
