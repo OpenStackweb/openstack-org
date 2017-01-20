@@ -20,8 +20,6 @@ class SummitPage extends Page
         'GARemarketingOnly' => 'Boolean',
         //Facebook Conversion Params
         'FBPixelId' => 'Text',
-        'FBValue' => 'Text',
-        'FBCurrency' => 'Text',
         // Twitter Conversion tracking for websites
         //https://support.twitter.com/articles/20170807-conversion-tracking-for-websites#
         'TwitterPixelId' => 'Text',
@@ -38,9 +36,7 @@ class SummitPage extends Page
         "GAConversionValue" => 0,
         "GARemarketingOnly" => false,
         //FB
-        'FBPixelId' => '6013247449963',
-        'FBValue' => '0.00',
-        'FBCurrency' => 'USD',
+        'FBPixelId' => '610497449158652',
         //Twitter
         'TwitterPixelId' => 'l5lav',
     );
@@ -83,9 +79,7 @@ class SummitPage extends Page
         $fields->addFieldToTab("Root.GoogleConversionTracking", new TextField("GAConversionValue", "Conversion Value", "0"));
         $fields->addFieldToTab("Root.GoogleConversionTracking", new CheckboxField("GARemarketingOnly", "Remarketing Only"));
         //Facebook Conversion Params
-        $fields->addFieldToTab("Root.FacebookConversionTracking", new TextField("FBPixelId", "Pixel Id", "6013247449963"));
-        $fields->addFieldToTab("Root.FacebookConversionTracking", new TextField("FBValue", "Value", "0.00"));
-        $fields->addFieldToTab("Root.FacebookConversionTracking", new TextField("FBCurrency", "Currency", "USD"));
+        $fields->addFieldToTab("Root.FacebookConversionTracking", new TextField("FBPixelId", "Pixel Id", "610497449158652"));
         //Twitter
         $fields->addFieldToTab("Root.TwitterConversionTracking", new TextField("TwitterPixelId", "Pixel Id", "l5lav"));
         return $fields;
@@ -223,17 +217,12 @@ class SummitPage_Controller extends Page_Controller
         if (isset($order) && $order == "complete") {
             //add FB tracking script
             $page = SummitPage::get()->byID($this->ID);
-            if ($page && !empty($page->FBPixelId)
-                && !empty($page->FBValue)
-                && !empty($page->FBCurrency)
-            ) {
-                $tracking_code = $this->renderWith("SummitPage_FB", array(
-                    "FB_Data" => new ArrayData(array(
+            if ($page && !empty($page->FBPixelId)) {
+                $tracking_code = $this->renderWith("SummitPage_FBPixelCode",[
+                    "FB_Data" => new ArrayData([
                         "FBPixelId" => $page->FBPixelId,
-                        "FBValue" => $page->FBValue,
-                        "FBCurrency" => $page->FBCurrency,
-                    ))
-                ));
+                    ])
+                ]);
             }
         }
         return $tracking_code;
