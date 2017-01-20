@@ -17,7 +17,7 @@
 <% else %>
 <table id="$ID" class="$extraClass">
     <tr>
-    <% loop $Options.Sort('Title') %>
+    <% loop $Options %>
         <% if First %>
         <td><ul>
         <% end_if %>
