@@ -47,8 +47,8 @@ class TrackDetail extends React.Component {
 				<div className="container">
 					<div className="row">
 						<div className="col-sm-12 video-breadcrumbs">
-							<RouterLink link='videos'>All videos</RouterLink> > &nbsp; TRACKS &nbsp; >
-							<a href="#" className="active">{this.props.track.title}</a>
+							<RouterLink link='videos'>All videos</RouterLink> >
+							{this.props.track.title}
 						</div>
 					</div>
 					<div className="row">
