@@ -68,6 +68,10 @@ body.summit-landing-body {
   background: url('/summit/images/landing-hero-bkgd.jpg') no-repeat center center;
   background-size: cover; }
 
+.summit-landing-wrapper.boston {
+  background: url('/assets/boston-summit/images/landing-hero-bkgd-Boston.jpg') no-repeat center center;
+  background-size: cover; }
+
 .summit-landing-logo {
   margin: 90px 0 20px;
   max-width: 220px; }
@@ -3900,5 +3904,52 @@ a.session-chart-category {
 @media (max-width: 767px) {
   .sessions-first-col {
     display: none; } }
+
+
+@media (max-width: 767px) {
+  .summit-landing-logo-bkgd {
+    position: relative;
+    z-index: 1; }
+    .summit-landing-logo-bkgd:after {
+      content: '';
+      position: absolute;
+      top: 20px;
+      bottom: 10px;
+      left: -10px;
+      background: rgba(0, 0, 0, 0.3);
+      -webkit-filter: blur(10px);
+      -moz-filter: blur(10px);
+      -ms-filter: blur(10px);
+      filter: blur(10px);
+      z-index: -10;
+      width: 220px;
+      border-radius: 20%; }
+  .summit-landing-logo {
+    z-index: 35; } }
+
+.summit-headline {
+  display: block;
+  width: 100%;
+  margin-bottom: 15px; }
+  .summit-headline h1 {
+    display: inline;
+    background: #4295D1;
+    padding: 3px 10px;
+    color: #0c0708;
+    font-size: 2em;
+    font-weight: 700;
+    line-height: 1.8em;
+    text-transform: uppercase;
+    box-shadow: 10px 0 0 #4295D1, -10px 0 0 #4295D1; }
+
+.summit-landing-wrapper p {
+  color: white;
+  font-weight: 300;
+  max-width: 70%; }
+
+.summit-home-dates {
+  font-weight: 700;
+  color: white;
+  font-size: 1.4em; }
 
 /*End Sessions Landing Page*/
