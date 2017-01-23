@@ -7,30 +7,28 @@
 </head>
 <body class="summit-landing-body">
     <!-- Begin Page Content -->
-    <div class="summit-landing-wrapper austin">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                    <img class="summit-landing-logo" src="/summit/images/summit-logo.svg" onerror="this.onerror=null; this.src='/summit/images/summit-logo.png'" alt="OpenStack Summit">
-                    <div>
-                        <p>
-                            $IntroText
-                        </p>
-                    </div>
-                    <% if $CurrentSummit.IsUpComing %>
-                            <div class="countdown">
-                                $Top.CountdownDigits($CurrentSummit.ID)
-                            </div>
-                            <div class="countdown-text">
-                                Days until $CurrentSummit.Name
-                            </div>
-                    <% end_if %>
-                    <div class="landing-action">
-                        <a href="/summit/boston-2017/" class="btn register-btn-lrg">JOIN US <i class="fa fa-chevron-right"></i></a>
-                    </div>
+    <div class="summit-landing-wrapper boston">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-push-6 col-sm-7 col-sm-push-5 col-xs-11 col-xs-push-1">
+                <div class="summit-landing-logo-bkgd">
+                    <img class="summit-landing-logo" src="/themes/openstack/static/images/summit-logo-small-white.svg" onerror="this.onerror=null; this.src=/themes/openstack/static/images/summit-logo-small-white.png" alt="OpenStack Summit">
+                </div>
+                <div class="summit-headline">
+                    <h1>The Must Attend<br/>Open Infrastructure Event</h1>
+                </div>
+                <p>
+                    A four-day conference for developers, users, and administrators of OpenStack Cloud Software.
+                </p>
+                <div class="summit-home-dates">
+                    May 8th -11th, 2017  |  Boston, MA
+                </div>
+                <div class="landing-action">
+                    <a href="/summit/boston-2017/" class="btn register-btn-lrg">Join Us <i class="fa fa-chevron-right"></i></a>
                 </div>
             </div>
-    </div>
+        </div>
+    </div> 
 </div>
 <div class="summit-landing-bottom">
     <div class="container">
