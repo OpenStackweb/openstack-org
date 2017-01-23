@@ -18,7 +18,7 @@
                     <h1>The Must Attend<br/>Open Infrastructure Event</h1>
                 </div>
                 <p>
-                    A four-day conference for developers, users, and administrators of OpenStack Cloud Software.
+                    A four-day conference for IT business leaders, cloud operators and developers covering the open infrastructure landscape.
                 </p>
                 <div class="summit-home-dates">
                     May 8th -11th, 2017  |  Boston, MA
