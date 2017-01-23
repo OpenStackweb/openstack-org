@@ -63,9 +63,19 @@ class SpeakerListPage_Controller extends Page_Controller
             $likeString = "LastName LIKE 'a%'";
         }
 
+        $filter_published = " (
+                            EXISTS(
+                                SELECT * FROM Presentation_Speakers PS
+                                INNER JOIN SummitEvent E ON PS.PresentationID = E.ID
+                                WHERE PS.PresentationSpeakerID = PresentationSpeaker.ID AND E.Published = 1
+                            ) OR EXISTS (
+                                SELECT * FROM Presentation P INNER JOIN SummitEvent E ON P.ID = E.ID
+                                WHERE P.ModeratorID = PresentationSpeaker.ID AND E.Published = 1
+                            )
+                          )";
 
         $list = PresentationSpeaker::get()
-            ->where("AvailableForBureau = 1 AND " . $likeString)
+            ->where("AvailableForBureau = 1 AND " . $likeString . " AND " . $filter_published)
             ->sort('LastName');
 
         return GroupedList::create($list);
@@ -76,17 +86,13 @@ class SpeakerListPage_Controller extends Page_Controller
         // Grab speaker ID from the URL
         $SpeakerID = Convert::raw2sql($this->request->param("ID"));
 
-        // Check to see if the ID is numeric
-        if (is_numeric($SpeakerID)) {
+        // Check to make sure there's a member with the current id
+        if ($Profile = $this->findSpeaker($SpeakerID)) {
 
-            // Check to make sure there's a member with the current id
-            if ($Profile = $this->findSpeaker($SpeakerID)) {
+            $data["Profile"] = $Profile;
 
-                $data["Profile"] = $Profile;
-
-                //return our $Data to use on the page
-                return $this->Customise($data);
-            }
+            //return our $Data to use on the page
+            return $this->Customise($data);
         }
 
         return $this->httpError(404, 'Sorry that speaker could not be found');
@@ -96,7 +102,22 @@ class SpeakerListPage_Controller extends Page_Controller
 
     function findSpeaker($SpeakerID)
     {
-        return PresentationSpeaker::get()->filter(array('ID'=>$SpeakerID,'AvailableForBureau'=>1))->first();
+        if (is_numeric($SpeakerID)) {
+            $speaker = PresentationSpeaker::get()->filter(array('ID'=>$SpeakerID,'AvailableForBureau'=>1))->first();
+            if ($speaker) {
+                $slug = $speaker->getNameSlug();
+                if (is_numeric($slug)) {
+                    // if we couldn't create the slug we just use the ID
+                    return $speaker;
+                } else {
+                    // if we found the slug we redirect to use that instead
+                    return $this->redirect($this->Link('profile/'.$slug));
+                }
+            }
+        } else {
+            return PresentationSpeaker::get()->filter(array('Slug'=>$SpeakerID,'AvailableForBureau'=>1))->first();
+        }
+
     }
 
     public function suggestions()
@@ -181,6 +202,17 @@ class SpeakerListPage_Controller extends Page_Controller
                           OR CONCAT_WS(', ',PresentationSpeaker.LastName,PresentationSpeaker.FirstName) LIKE '%{$query}%'
                           OR SpeakerExpertise.Expertise LIKE '%{$query}%' OR Org.Name LIKE '%{$query}%')";
         }
+
+        $where_string .= " AND (
+                            EXISTS(
+                                SELECT * FROM Presentation_Speakers PS
+                                INNER JOIN SummitEvent E ON PS.PresentationID = E.ID
+                                WHERE PS.PresentationSpeakerID = PresentationSpeaker.ID AND E.Published = 1
+                            ) OR EXISTS (
+                                SELECT * FROM Presentation P INNER JOIN SummitEvent E ON P.ID = E.ID
+                                WHERE P.ModeratorID = PresentationSpeaker.ID AND E.Published = 1
+                            )
+                          )";
 
         //die($where_string);
 

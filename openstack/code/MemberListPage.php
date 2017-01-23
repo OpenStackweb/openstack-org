@@ -116,12 +116,22 @@ class MemberListPage_Controller extends Page_Controller
 
     function findMember($member_id)
     {
-        $member  = Member::get()->byID(intval($member_id));
-        if(!is_null($member))
-        {
-            // Check to make sure they are in the foundation membership group
-            If ($member->inGroup(5, true))
-            {
+        if (is_numeric($member_id)) {
+            $member  = Member::get()->byID(intval($member_id));
+            $slug = $member->getNameSlug();
+
+            if(!is_null($member) && $member->inGroup(5, true)) {
+                if (is_numeric($slug)) {
+                    // if we couldn't create the slug we just use the ID
+                    return $member;
+                } else {
+                    // if we found the slug we redirect to use that instead
+                    return $this->redirect($this->Link('profile/'.$slug));
+                }
+            }
+        } else {
+            $member  = Member::get()->filter('Slug', $member_id)->first();
+            if(!is_null($member) && $member->inGroup(5, true)) {
                 return $member;
             }
         }
@@ -317,33 +327,30 @@ class MemberListPage_Controller extends Page_Controller
         // Grab member ID from the URL
         $MemberID = Convert::raw2sql($this->request->param("ID"));
 
-        // Check to see if the ID is numeric
-        if (is_numeric($MemberID)) {
+        // Check to make sure there's a member with the current id
+        if ($Profile = $this->findMember($MemberID)) {
 
-            // Check to make sure there's a member with the current id
-            if ($Profile = $this->findMember($MemberID)) {
+            $CurrentElection = $this->CurrentElection();
 
-                $CurrentElection = $this->CurrentElection();
+            if ($CurrentElection) {
+                $Candidate = Candidate::get()->filter(array(
+                    'MemberID' => $Profile->ID,
+                    'ElectionID' => $CurrentElection->ID
+                ))->first();
 
-                if ($CurrentElection) {
-                    $Candidate = Candidate::get()->filter(array(
-                        'MemberID' => $MemberID,
-                        'ElectionID' => $CurrentElection->ID
-                    ))->first();
-                    $data["Candidate"] = $Candidate;
-                    $data["CurrentElection"] = $CurrentElection;
-                }
-
-                $data["Profile"] = $Profile;
-
-                // A member is looking at own profile
-                if (Member::currentUserID() == $MemberID) {
-                    $data["OwnProfile"] = true;
-                }
-
-                //return our $Data to use on the page
-                return $this->Customise($data);
+                $data["Candidate"] = $Candidate;
+                $data["CurrentElection"] = $CurrentElection;
             }
+
+            $data["Profile"] = $Profile;
+
+            // A member is looking at own profile
+            if (Member::currentUserID() == $Profile->ID) {
+                $data["OwnProfile"] = true;
+            }
+
+            //return our $Data to use on the page
+            return $this->Customise($data);
         }
 
         return $this->httpError(404, 'Sorry that member could not be found');

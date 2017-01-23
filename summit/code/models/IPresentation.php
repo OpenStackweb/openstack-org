@@ -42,6 +42,37 @@ interface IPresentation extends ISummitEvent
     public function Link();
 
     /**
+     *
+     */
+    public function assignEventType($type="Presentation");
+
+    /**
+     * @return string
+     */
+    public function getTypeName();
+
+    /**
+     * @param string $type
+     * @param bool $absolute
+     * @return null|string
+     */
+    public function getLink($type ='voting', $absolute = true);
+
+    /**
+     * @return bool
+     */
+    public function hasVideos();
+
+    /**
+     * @param bool $absolute
+     * @return null|string
+     */
+    public function getVideoLink($absolute = true);
+
+
+    public function getTitleNice();
+
+    /**
      * @return string
      */
     public function EditLink();

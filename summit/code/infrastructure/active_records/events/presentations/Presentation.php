@@ -273,6 +273,31 @@ class Presentation extends SummitEvent implements IPresentation
                 return $page->RelativeLink(false) . 'events/' . $this->getIdentifier() . '/' . $this->getTitleForUrl();
             }
         }
+
+        return null;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasVideos()
+    {
+        $videos = $this->Materials()->filter('ClassName', 'PresentationVideo');
+        return ($videos->count() > 0);
+    }
+
+    /**
+     * @param bool $absolute
+     * @return null|string
+     */
+    public function getVideoLink($absolute = true)
+    {
+        $first_video = $this->Materials()->filter('ClassName', 'PresentationVideo')->first();
+
+        if ($first_video) {
+            return $first_video->getLink($absolute);
+        }
+
         return null;
     }
 

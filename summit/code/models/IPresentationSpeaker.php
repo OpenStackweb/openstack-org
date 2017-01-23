@@ -37,6 +37,16 @@ interface IPresentationSpeaker extends IEntity
      */
     public function getNameSlug();
 
+    public function createUniqueSlug($slug = '', $idx = 0);
+
+    /**
+     * Gets a url label for the speaker
+     *
+     * @return  string
+     */
+
+    public function getProfileLink($absolute = true);
+
     /**
      * @return  string
      */
@@ -177,6 +187,12 @@ interface IPresentationSpeaker extends IEntity
      * @return bool
      */
     public function hasPublishedPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker);
+
+    /**
+     * @param string $role
+     * @return bool
+     */
+    public function hasHadPublishedPresentations($role = IPresentationSpeaker::RoleSpeaker);
 
     /**
      * @param int $summit_id

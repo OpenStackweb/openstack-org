@@ -25,6 +25,7 @@ class PresentationSpeaker extends DataObject
         'Notes'                 => 'HTMLText',
         'CreatedFromAPI'        => 'Boolean',
         'OrgHasCloud'           => 'Boolean',
+        'Slug'                  => 'Varchar(255)',
     ];
 
     private static $has_one = [
@@ -80,6 +81,14 @@ class PresentationSpeaker extends DataObject
         'IRCHandle' => 'IRCHandle',
         'TwitterName' => 'TwitterName',
     ];
+
+    public function onBeforeWrite() {
+        parent::onBeforeWrite();
+
+        if (!$this->Slug && $this->FirstName && $this->LastName) {
+            $this->Slug = $this->createUniqueSlug();
+        }
+    }
 
     protected function onBeforeDelete() {
         parent::onBeforeDelete();
@@ -138,13 +147,50 @@ class PresentationSpeaker extends DataObject
      *
      * @return  string
      */
-    public function getNameSlug()
-    {
-        $full_name = $this->getName();
-        $clean_name = preg_replace ("/[^a-zA-Z0-9 ]/", "", $full_name);
-        $slug_name = preg_replace('/\s+/', '-', strtolower($clean_name));
 
-        return $slug_name;
+    public function getNameSlug() {
+        if (!$this->Slug) {
+            if ($this->FirstName && $this->LastName) {
+                $this->Slug = $this->createUniqueSlug();
+                $this->write();
+            } else {
+                return $this->ID;
+            }
+        }
+
+        return $this->Slug;
+    }
+
+    /**
+     * Gets a url label for the speaker
+     *
+     * @return  string
+     */
+
+    public function getProfileLink($absolute = true) {
+        $page = SpeakerListPage::get()->first();
+        if ($page) {
+            if($absolute)
+                return $page->getAbsoluteLiveLink(false) . 'profile/' . $this->getNameSlug();
+            return $page->RelativeLink(false) . 'profile/' . $this->getNameSlug();
+        }
+    }
+
+    public function createUniqueSlug($slug = '', $idx = 0) {
+        if (!$slug) {
+            $slug = preg_replace('/\W+/', '', $this->FirstName).'-'.preg_replace('/\W+/', '', $this->LastName);
+            $slug = strtolower($slug);
+        }
+
+        $idx_slug = ($idx) ? $slug.'-'.$idx : $slug;
+        $already_exists = PresentationSpeaker::get()->where("Slug = '$idx_slug'")->count();
+
+        if ($already_exists) {
+            $idx++;
+            return $this->createUniqueSlug($slug, $idx);
+        } else {
+            return $idx_slug;
+        }
     }
 
     public function getCountryName()
@@ -330,6 +376,15 @@ class PresentationSpeaker extends DataObject
             'CreatorID' => $this->MemberID,
             'SummitID' => $summit->ID
         ]);
+    }
+
+    public function AllRelatedPresentations()
+    {
+        $presentations = $this->Presentations()->toArray();
+        $moderator_pres = Presentation::get()->filter('ModeratorID',$this->ID)->toArray();
+        $all_presentations = array_merge($presentations, $moderator_pres);
+
+        return $all_presentations;
     }
 
     /**
@@ -562,11 +617,34 @@ class PresentationSpeaker extends DataObject
     public function PastAcceptedPresentations($limit = 5)
     {
         $acceptedPresentations = new ArrayList();
-        $presentations = $this->Presentations()->sort('Created', 'DESC')->limit($limit);
+        $presentations = $this->Presentations()->sort('Created', 'DESC');
         foreach ($presentations as $presentation) {
             if ($presentation->SelectionStatus() == IPresentation::SelectionStatus_Accepted) {
                 $acceptedPresentations->push($presentation);
             }
+
+            if ($acceptedPresentations->count() >= $limit) break;
+        }
+
+        return $acceptedPresentations;
+    }
+
+    public function PastAcceptedOrPublishedPresentations($limit = 5)
+    {
+        $acceptedPresentations = new ArrayList();
+        $all_presentations = $this->AllRelatedPresentations();
+
+        usort($all_presentations, function($a, $b)
+        {
+            return strcmp($a->Created, $b->Created);
+        });
+
+        foreach ($all_presentations as $presentation) {
+            if ($presentation->SelectionStatus() == IPresentation::SelectionStatus_Accepted || $presentation->Published) {
+                $acceptedPresentations->push($presentation);
+            }
+
+            if ($acceptedPresentations->count() >= $limit) break;
         }
 
         return $acceptedPresentations;
@@ -1126,6 +1204,28 @@ class PresentationSpeaker extends DataObject
     public function hasPublishedPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker)
     {
         return $this->PublishedPresentations($summit_id, $role)->count() > 0;
+    }
+
+    /**
+     * @param int $summit_id
+     * @param string $role
+     * @return bool
+     */
+    public function hasHadPublishedPresentations($role = IPresentationSpeaker::RoleSpeaker)
+    {
+        $presentations = null;
+        if($role == IPresentationSpeaker::RoleSpeaker) {
+            $presentations = $this->Presentations()->filter([
+                'Published' => 1
+            ]);
+        } else {
+            $presentations = Presentation::get()->filter([
+                'Published' => 1,
+                'ModeratorID' => $this->ID
+            ]);
+        }
+
+        return $presentations->count() > 0;
     }
 
     /**

@@ -85,17 +85,30 @@
                         <p>I'm involved in the following OpenStack projects: $Projects</p>
                     </div>
                 <% end_if %>
-                <% if PastAcceptedPresentations() %>
+                <% if PastAcceptedOrPublishedPresentations() %>
+                    <hr>
                     <div class="span-4">
                         <strong>Presentations from previous OpenStack Summits:</strong>
                     </div>
                     <div class="span-6 last">
-                        <ul>
-                            <% loop PastAcceptedPresentations(5) %>
-                                <li>
-                                    <a href="$Link"><% if $Title != '' %>$Title<% else %>$Link<% end_if %></a>
-                                </li>
-                            <% end_loop %>
+                        <% loop $PastAcceptedOrPublishedPresentations(5) %>
+                            <% if $First || $Prev.Summit.ID != $Summit.ID %>
+                                <% if Not $First %> </ul> <% end_if %>
+                                $Summit.Title
+                                <ul>
+                            <% end_if %>
+
+                            <li>
+                                <% if $hasVideos %>
+                                    <a href="$getVideoLink"><% if $Title != '' %>$Title<% else %>$getVideoLink<% end_if %></a>
+                                <% else_if $Summit.isCurrent() %>
+                                    <a href="$getLink(show)"><% if $Title != '' %>$Title<% else %>$getLink(show)<% end_if %></a>
+                                <% else %>
+                                    $Title
+                                <% end_if %>
+                            </li>
+
+                        <% end_loop %>
                         </ul>
                     </div>
                 <% end_if %>
