@@ -95,20 +95,21 @@ jQuery(document).ready(function($) {
     var on_save_later = false;
 
     $('.save-later-action-btn').click(function(event){
-        var form   = $('.survey_step_form');
-        var action = form.attr('action');
-        var $this  = $(this);
-
+        var form      = $('.survey_step_form');
+        var action    = form.attr('action');
+        var $this     = $(this);
+        var validator = form.data("validator");
+        validator.resetForm();
         // before to display the current url on the modal
-        // validate the form and post the content ...
-        if(form.valid() && !on_save_later) {
+        // post the form, and dont validate ( we want only to save progress)
+        if(!on_save_later) {
             on_save_later = true;
             $('body').ajax_loader();
             $this.attr('disabled','disabled');
 
             $.post(action+'?SAVE_LATER=1', form.serialize(), function(data){
                 $('#ModalSaveLater').modal('toggle');
-                on_save_later = false;
+                on_save_later                   = false;
                 $('body').ajax_loader('stop');
                 $this.removeAttr('disabled');
             });
