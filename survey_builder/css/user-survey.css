@@ -686,6 +686,7 @@ div.deployment {
 table.checkboxset
 {
     margin-left: 15px;
+    width: 100%;
 }
 
 table.checkboxset tr
@@ -763,7 +764,23 @@ form.survey_step_form fieldset{
     border: none;
 }
 
-form.survey_step_form .default-action-btn{
+/* actions bottom buttons */
+
+
+form.survey_step_form .go-back-action-btn{
+    /* btn bkgd: */
+    background: #E5E5E5;
+    border-radius: 4px;
+    /* GO BACK: */
+    font-family: 'Open Sans Semibold', sans-serif;
+    font-size: 11px;
+    color: #565656;
+    text-transform: uppercase;
+    width: 120px;
+    height: 40px;
+}
+
+form.survey_step_form .default-action-btn {
     /* btn bkgd: */
     background: #4CA3EA;
     border-radius: 4px;
@@ -772,39 +789,35 @@ form.survey_step_form .default-action-btn{
     font-size: 11px;
     color: #FFFFFF;
     text-transform: uppercase;
-    position: absolute;
-    left: 85.6%;
     width: 162px;
     height: 40px;
 }
 
-form.survey_step_form .go-back-action-btn{
-    /* btn bkgd: */
-    background: #E5E5E5;
-    border-radius: 4px;
-    /* GO BACK: */
-    /* GO BACK: */
-    font-family: 'Open Sans Semibold', sans-serif;
-    font-size: 11px;
-    color: #565656;
-    text-transform: uppercase;
-    position: absolute;
-    width: 120px;
-    height: 40px;
-    left:1.2%;
-}
-
-
 form.survey_step_form .save-later-action-btn{
-    position: absolute;
     /* Save & Come Back Lat: */
     font-family: 'Open Sans', sans-serif;
     font-size: 13px;
     color: #606D77;
     text-transform: uppercase;
     text-decoration: underline !important;
-    left: 45%;
     padding-top: 1.4%;
+}
+
+div.Actions div.last{
+    text-align: right;
+    padding-right: 25px;
+}
+
+div.Actions div.middle{
+    text-align: center;
+}
+
+/*screen-xs*/
+@media (max-width: 768px) {
+    div.col-xs-12{
+        padding-top: 10px;
+        text-align: center !important;
+    }
 }
 
 form.survey_step_form div.Actions{
@@ -1081,4 +1094,8 @@ ul.surveyradiobuttonset{
 
 table.checkboxset .checkbox label{
     padding-right: 5px;
+}
+
+div.field.checkbox input {
+    margin-left: 0px;
 }

@@ -49,9 +49,16 @@
         <a class="roundedButton add-entity-survey-btn" href="{$Controller.Link}{$CurrentStep.Template.Title}/add-entity">{$CurrentStep.Template.getAddEntityText}&nbsp;&nbsp;<i class="fa fa-plus-circle" aria-hidden="true"></i></a>&nbsp;
     </p>
     <% if $Actions %>
-        <div class="Actions">
+        <div class="Actions row">
+            <% if Actions.Count == 2 %>
+                <div class="col-md-4 col-xs-12 col-sm-4">
+                    &nbsp;
+                </div>
+            <% end_if %>
             <% loop $Actions %>
-                $Field
+                <div class="col-md-4 col-xs-12 col-sm-4 <% if Last %>last<% end_if %><% if Mid %>middle<% end_if %>">
+                    $Field
+                </div>
             <% end_loop %>
         </div>
     <% end_if %>

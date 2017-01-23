@@ -1,4 +1,4 @@
-<% if $Options.Count <= 10 %>
+<% if $Options.Count <= 10  || $isMobileClient %>
 <ul id="$ID" class="$extraClass">
     <% if $Options.Count %>
         <% loop $Options %>
@@ -19,7 +19,7 @@
     <tr>
     <% loop $Options %>
         <% if First %>
-        <td><ul>
+        <td width="33%"><ul>
         <% end_if %>
         <li class="{$EvenOdd}">
             <div class="checkbox">
@@ -28,8 +28,8 @@
                 </label>
             </div>
         </li>
-        <% if not First && not Last && Modulus(6) == 0 %>
-        </ul></td><td><ul>
+        <% if not First && not Last && IsThirdPart %>
+        </ul></td><td width="33%"><ul>
         <% end_if %>
         <% if Last %>
         </ul></td>

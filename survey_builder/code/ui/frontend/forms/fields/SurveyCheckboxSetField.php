@@ -57,4 +57,12 @@ class SurveyCheckboxSetField extends CustomCheckboxSetField {
         if($class === 'hidden') $this->setVisible(false);
         return parent::addExtraClass($class);
     }
+
+    /**
+     * @return bool
+     */
+    public function isMobileClient(){
+        $mobile_detect = new Mobile_Detect();
+        return $mobile_detect->isMobile();
+    }
 }

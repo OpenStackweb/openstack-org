@@ -22,7 +22,7 @@ final class MyCustomIteratorFunctions implements TemplateIteratorProvider
 
 	public static function get_template_iterator_variables()
 	{
-		return array('Mid','IsFourth');
+		return array('Mid','IsFourth', 'IsThirdPart');
 	}
 
 	public function iteratorProperties($pos, $totalItems)
@@ -40,7 +40,18 @@ final class MyCustomIteratorFunctions implements TemplateIteratorProvider
 		return ($this->iteratorPos+1) == $mid;
 	}
 
+    /**
+     * @return bool
+     */
 	public function IsFourth(){
 		return ($this->iteratorPos % 4) == 0;
 	}
+
+    /**
+     * @return bool
+     */
+	public function IsThirdPart(){
+        $third = round( $this->iteratorTotalItems / 3);
+        return ($this->iteratorPos+1) == $third || ($this->iteratorPos+1) == ($third * 2);
+    }
 }
