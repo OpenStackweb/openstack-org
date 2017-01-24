@@ -130,7 +130,7 @@
             <% loop Events %>
                 <li>
                     <div class="row row-space row-event" data-event-id="{$ID}">
-                        <div class="col-md-1 id_col"><a href="summit-admin/6/events/$ID" title="edit event">$ID</a></div>
+                        <div class="col-md-1 id_col"><a href="summit-admin/{$Summit.ID}/events/{$ID}" title="edit event">$ID</a></div>
                         <div class="col-md-4">$Title</div>
                         <div class="col-md-2">
                             <select data-rule-required="true"  class="form-control location" id="location_{$ID}" name="location_{$ID}">
