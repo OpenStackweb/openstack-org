@@ -61,29 +61,6 @@ p.danger {
 body.summit-landing-body {
   background: #040508; }
 
-.summit-landing-wrapper {
-  background: url("/themes/openstack/static/images/landing-hero-bkgd.jpg") no-repeat left top;
-  min-height: 610px;
-  background-size: cover;
-  position: relative;
-  border-bottom: 1px solid #243440; }
-
-.summit-landing-wrapper.tokyo {
-  background: url("/themes/openstack/static/images/landing-hero-bkgd-v.jpg") no-repeat left center;
-  background-size: cover; }
-
-.summit-hero-wrapper.austin {
-  background: url("/themes/openstack/static/images/austin/austin-hero1.jpg") no-repeat left center;
-  background-size: cover; }
-
-.summit-landing-logo {
-  margin: 145px 0 20px; }
-
-.summit-landing-wrapper p {
-  color: #29abe2;
-  font-weight: 300;
-  max-width: 305px; }
-
 .countdown {
   margin: 50px 5px 10px;
   display: table; }
