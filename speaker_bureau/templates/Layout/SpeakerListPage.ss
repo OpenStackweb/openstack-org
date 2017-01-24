@@ -55,7 +55,7 @@
         <h3 class="groupHeading" id="$LastNameFirstLetter">$LastNameFirstLetter</h3>
         <ul>
             <% loop Children %>
-                <li><strong><a href="{$Top.Link}profile/{$ID}">$FirstName $LastName</strong></a><% if CurrentOrgName %>
+                <li><strong><a href="{$Top.Link}profile/{$ID}/{$NameSlug}">$FirstName $LastName</strong></a><% if CurrentOrgName %>
                     ($CurrentOrgName)<% end_if %></li>
             <% end_loop %>
         </ul>

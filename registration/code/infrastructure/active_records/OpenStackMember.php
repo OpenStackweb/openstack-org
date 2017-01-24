@@ -519,32 +519,9 @@ class OpenStackMember extends DataExtension
     }
 
     public function getNameSlug() {
-        if (!$this->Slug) {
-            if ($this->owner->FirstName && $this->owner->Surname) {
-                $this->Slug = $this->createUniqueSlug();
-                $this->owner->write();
-            } else {
-                return $this->owner->ID;
-            }
-        }
-        return $this->Slug;
-    }
-
-    public function createUniqueSlug($slug = '', $idx = 0) {
-        if (!$slug) {
-            $slug = preg_replace('/\W+/', '', $this->owner->FirstName).'-'.preg_replace('/\W+/', '', $this->owner->Surname);
-            $slug = strtolower($slug);
-        }
-
-        $idx_slug = ($idx) ? $slug.'-'.$idx : $slug;
-        $already_exists = Member::get()->where("Slug = '$idx_slug'")->count();
-
-        if ($already_exists) {
-            $idx++;
-            return $this->createUniqueSlug($slug, $idx);
-        } else {
-            return $idx_slug;
-        }
+        $slug = preg_replace('/\W+/', '', $this->owner->FirstName).'-'.preg_replace('/\W+/', '', $this->owner->Surname);
+        $slug = strtolower($slug);
+        return $slug;
     }
 
 }

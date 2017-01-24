@@ -91,6 +91,11 @@ class SummitEvent extends DataObject implements ISummitEvent
         return html_entity_decode($this->getField('Title'));
     }
 
+    public function getSummitTitle()
+    {
+        return $this->Summit->Title;
+    }
+
     public function getRSVPLink()
     {
         return html_entity_decode($this->getField('RSVPLink'));

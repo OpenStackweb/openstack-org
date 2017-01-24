@@ -21,7 +21,7 @@ $MemberSearchForm
     <h3 class="groupHeading" id="$SurnameFirstLetter">$SurnameFirstLetter</h3>
     <ul>
         <% loop Children %>
-            <li><strong><a href="{$Top.Link}profile/{$ID}">$FirstName $Surname</strong></a><% if CurrentOrgName %> ($CurrentOrgName)<% end_if %></li>
+            <li><strong><a href="{$Top.Link}profile/{$ID}/{$NameSlug}">$FirstName $Surname</strong></a><% if CurrentOrgName %> ($CurrentOrgName)<% end_if %></li>
         <% end_loop %>
     </ul>
 	</div>

@@ -48,6 +48,14 @@ interface IPresentationSpeaker extends IEntity
     public function getProfileLink($absolute = true);
 
     /**
+     * Gets a url label for the speaker
+     *
+     * @return  string
+     */
+
+    public function getProfileLink($absolute = true);
+
+    /**
      * @return  string
      */
     public function getCountryName();

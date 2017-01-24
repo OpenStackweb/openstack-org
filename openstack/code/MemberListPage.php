@@ -323,36 +323,33 @@ class MemberListPage_Controller extends Page_Controller
     //Show the profile of the member using the MemberListPage_profile.ss template
     function profile()
     {
-
         // Grab member ID from the URL
         $MemberID = Convert::raw2sql($this->request->param("ID"));
-
-        // Check to make sure there's a member with the current id
-        if ($Profile = $this->findMember($MemberID)) {
-
-            $CurrentElection = $this->CurrentElection();
-
-            if ($CurrentElection) {
-                $Candidate = Candidate::get()->filter(array(
-                    'MemberID' => $Profile->ID,
-                    'ElectionID' => $CurrentElection->ID
-                ))->first();
-
-                $data["Candidate"] = $Candidate;
-                $data["CurrentElection"] = $CurrentElection;
-            }
-
-            $data["Profile"] = $Profile;
-
-            // A member is looking at own profile
-            if (Member::currentUserID() == $Profile->ID) {
-                $data["OwnProfile"] = true;
+        // Check to see if the ID is numeric
+        if (is_numeric($MemberID)) {
+            // Check to make sure there's a member with the current id
+            if ($Profile = $this->findMember($MemberID)) {
+                $CurrentElection = $this->CurrentElection();
+                if ($CurrentElection) {
+                    $Candidate = Candidate::get()->filter(array(
+                        'MemberID' => $MemberID,
+                        'ElectionID' => $CurrentElection->ID
+                    ))->first();
+                    $data["Candidate"] = $Candidate;
+                    $data["CurrentElection"] = $CurrentElection;
+                }
+                $data["Profile"] = $Profile;
+                // A member is looking at own profile
+                if (Member::currentUserID() == $MemberID) {
+                    $data["OwnProfile"] = true;
+                }
+                //return our $Data to use on the page
+                return $this->Customise($data);
             }
 
             //return our $Data to use on the page
             return $this->Customise($data);
         }
-
         return $this->httpError(404, 'Sorry that member could not be found');
     }
 

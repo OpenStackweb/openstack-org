@@ -85,21 +85,19 @@ class SpeakerListPage_Controller extends Page_Controller
     {
         // Grab speaker ID from the URL
         $SpeakerID = Convert::raw2sql($this->request->param("ID"));
-
-        // Check to make sure there's a member with the current id
-        if ($Profile = $this->findSpeaker($SpeakerID)) {
-
-            $data["Profile"] = $Profile;
-
-            //return our $Data to use on the page
-            return $this->Customise($data);
+        // Check to see if the ID is numeric
+        if (is_numeric($SpeakerID)) {
+            // Check to make sure there's a member with the current id
+            if ($Profile = $this->findSpeaker($SpeakerID)) {
+                $data["Profile"] = $Profile;
+                //return our $Data to use on the page
+                return $this->Customise($data);
+            }
         }
-
         return $this->httpError(404, 'Sorry that speaker could not be found');
     }
 
     //Show the profile of the speaker using the SpeakerListPage_profile.ss template
-
     function findSpeaker($SpeakerID)
     {
         if (is_numeric($SpeakerID)) {

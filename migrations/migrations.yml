@@ -58,3 +58,4 @@ migrations:
   - LightingTalksMigration
   - LightingTalksMigrationFix
   - PushNotificationMigration
+  - RemoveSlugColMigration

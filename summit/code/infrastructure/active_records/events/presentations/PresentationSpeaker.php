@@ -149,16 +149,9 @@ class PresentationSpeaker extends DataObject
      */
 
     public function getNameSlug() {
-        if (!$this->Slug) {
-            if ($this->FirstName && $this->LastName) {
-                $this->Slug = $this->createUniqueSlug();
-                $this->write();
-            } else {
-                return $this->ID;
-            }
-        }
-
-        return $this->Slug;
+        $slug = preg_replace('/\W+/', '', $this->FirstName).'-'.preg_replace('/\W+/', '', $this->LastName);
+        $slug = strtolower($slug);
+        return $slug;
     }
 
     /**
@@ -171,25 +164,8 @@ class PresentationSpeaker extends DataObject
         $page = SpeakerListPage::get()->first();
         if ($page) {
             if($absolute)
-                return $page->getAbsoluteLiveLink(false) . 'profile/' . $this->getNameSlug();
-            return $page->RelativeLink(false) . 'profile/' . $this->getNameSlug();
-        }
-    }
-
-    public function createUniqueSlug($slug = '', $idx = 0) {
-        if (!$slug) {
-            $slug = preg_replace('/\W+/', '', $this->FirstName).'-'.preg_replace('/\W+/', '', $this->LastName);
-            $slug = strtolower($slug);
-        }
-
-        $idx_slug = ($idx) ? $slug.'-'.$idx : $slug;
-        $already_exists = PresentationSpeaker::get()->where("Slug = '$idx_slug'")->count();
-
-        if ($already_exists) {
-            $idx++;
-            return $this->createUniqueSlug($slug, $idx);
-        } else {
-            return $idx_slug;
+                return $page->getAbsoluteLiveLink(false) . 'profile/' . $this->ID . '/' . $this->getNameSlug();
+            return $page->RelativeLink(false) . 'profile/' . $this->ID . '/' . $this->getNameSlug();
         }
     }
 
@@ -636,7 +612,8 @@ class PresentationSpeaker extends DataObject
 
         usort($all_presentations, function($a, $b)
         {
-            return strcmp($a->Created, $b->Created);
+            if ($a->Summit()->SummitBeginDate == $b->Summit()->SummitBeginDate) return 0;
+            return (strtotime($a->Summit()->SummitBeginDate) < strtotime($b->Summit()->SummitBeginDate)) ? 1 : -1;
         });
 
         foreach ($all_presentations as $presentation) {
@@ -647,7 +624,7 @@ class PresentationSpeaker extends DataObject
             if ($acceptedPresentations->count() >= $limit) break;
         }
 
-        return $acceptedPresentations;
+        return new GroupedList($acceptedPresentations);
     }
 
     /**
