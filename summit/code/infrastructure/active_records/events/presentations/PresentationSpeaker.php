@@ -601,7 +601,7 @@ class PresentationSpeaker extends DataObject
         $acceptedPresentations = new ArrayList();
         $all_presentations = $this->AllRelatedPresentations();
 
-        usort($all_presentations, function($a, $b)
+        @usort($all_presentations, function($a, $b)
         {
             if ($a->Summit()->SummitBeginDate == $b->Summit()->SummitBeginDate) return 0;
             return (strtotime($a->Summit()->SummitBeginDate) < strtotime($b->Summit()->SummitBeginDate)) ? 1 : -1;
