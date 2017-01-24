@@ -25,7 +25,6 @@ class PresentationSpeaker extends DataObject
         'Notes'                 => 'HTMLText',
         'CreatedFromAPI'        => 'Boolean',
         'OrgHasCloud'           => 'Boolean',
-        'Slug'                  => 'Varchar(255)',
     ];
 
     private static $has_one = [

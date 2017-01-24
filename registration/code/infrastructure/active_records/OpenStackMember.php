@@ -46,7 +46,6 @@ class OpenStackMember extends DataExtension
         'EmailVerifiedTokenHash' => 'Text',
         'EmailVerifiedDate'      => 'SS_Datetime',
         'LegacyMember'           => 'Boolean',
-        'Slug'                   => 'Varchar(255)',
     );
 
     private static $defaults = array
