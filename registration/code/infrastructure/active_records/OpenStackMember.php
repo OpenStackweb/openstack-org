@@ -85,12 +85,6 @@ class OpenStackMember extends DataExtension
         'ManagedCompanies' => 'Company'
     );
 
-    public function onBeforeWrite() {
-        if (!$this->owner->Slug && $this->owner->FirstName && $this->owner->Surname) {
-            $this->owner->Slug = $this->createUniqueSlug();
-        }
-    }
-
     public function onBeforeDelete()
     {
         $current_id = $this->owner->ID;
@@ -447,9 +441,6 @@ class OpenStackMember extends DataExtension
         return $res;
     }
 
-    /**
-     * @return bool|int
-     */
     public function isAdmin()
     {
         return Permission::checkMember($this->owner, 'ADMIN');

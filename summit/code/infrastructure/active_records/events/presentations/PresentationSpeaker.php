@@ -81,14 +81,6 @@ class PresentationSpeaker extends DataObject
         'TwitterName' => 'TwitterName',
     ];
 
-    public function onBeforeWrite() {
-        parent::onBeforeWrite();
-
-        if (!$this->Slug && $this->FirstName && $this->LastName) {
-            $this->Slug = $this->createUniqueSlug();
-        }
-    }
-
     protected function onBeforeDelete() {
         parent::onBeforeDelete();
 
@@ -393,8 +385,8 @@ class PresentationSpeaker extends DataObject
         return $this->Presentations()->filter([
             'SummitID' => $summit->ID
         ])->exclude([
-            'CreatorID' => $this->MemberID,
-        ]);
+                'CreatorID' => $this->MemberID,
+            ]);
     }
 
     public function ModeratorPresentations($summit_id = null)
@@ -417,9 +409,9 @@ class PresentationSpeaker extends DataObject
             'ModeratorID' => $this->ID,
             'SummitID'    => $summit->ID
         ])
-        ->exclude([
-            'CreatorID' => $this->MemberID,
-        ]);
+            ->exclude([
+                'CreatorID' => $this->MemberID,
+            ]);
     }
 
     public function getPresentationsCount($summit_id = null)
