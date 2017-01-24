@@ -132,6 +132,8 @@ final class NewsAdminPage_Controller extends AdminController {
             //item removed, reorder
             $this->news_manager->sortNewsArticles($article_id,$new_rank,$old_rank,false,true,$type);
         }
+
+        $this->news_manager->doReorderArticles($type);
     }
 
     public function deleteArticle() {

@@ -256,6 +256,8 @@ final class NewsRequestManager {
                 $article->Rank = $article->Rank + $rank_delta;
             }
 
+            //$this->reorderArticles($type, $repository);
+
         });
     }
 
@@ -268,6 +270,14 @@ final class NewsRequestManager {
         foreach ($news as $key => $article) {
             $article->Rank = $key + 1;
         }
+    }
+
+    public function doReorderArticles($section) {
+        $repository           = $this->news_repository ;
+
+        return $this->tx_manager->transaction(function() use($repository,$section){
+            $this->reorderArticles($section, $repository);
+        });
     }
 
     /**
@@ -330,6 +340,5 @@ final class NewsRequestManager {
             }
         });
     }
-
 
 } 

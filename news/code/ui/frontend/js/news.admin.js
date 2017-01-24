@@ -28,7 +28,7 @@ jQuery(document).ready(function($){
         placeholder: "placeholder",
         update: function(event,ui) {
             if (ui.sender) {
-                if ($(this).children().length > 5 && $(this).attr('id') == 'slider_sortable') {
+                if ($(this).children().length > 6 && $(this).attr('id') == 'slider_sortable') {
                     $(ui.sender).sortable('cancel');
                 } else {
                     saveSortArticle(ui.item,true);
