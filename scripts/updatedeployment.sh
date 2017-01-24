@@ -1,6 +1,7 @@
 #!/bin/bash -xe
 echo “running update deployment …”;
 cd /var/www/local.openstack.org;
+./clear_ss_cache.sh;
 php composer.phar update --ignore-platform-reqs --prefer-dist;
 #run ss tasks
 sake dev/build;

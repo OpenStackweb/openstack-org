@@ -116,6 +116,8 @@ final class Summit extends DataObject implements ISummit
 
     private function populateDefaultTags()
     {
+        global $database;
+        if(!DBSchema::existsTable($database, "Summit")) return;
         // had to use literal query to avoid infinite loop
         $id = DB::query("SELECT ID FROM Summit WHERE SummitEndDate < DATE(NOW()) ORDER BY SummitEndDate DESC LIMIT 1")->value();
 
