@@ -116,22 +116,12 @@ class MemberListPage_Controller extends Page_Controller
 
     function findMember($member_id)
     {
-        if (is_numeric($member_id)) {
-            $member  = Member::get()->byID(intval($member_id));
-            $slug = $member->getNameSlug();
-
-            if(!is_null($member) && $member->inGroup(5, true)) {
-                if (is_numeric($slug)) {
-                    // if we couldn't create the slug we just use the ID
-                    return $member;
-                } else {
-                    // if we found the slug we redirect to use that instead
-                    return $this->redirect($this->Link('profile/'.$slug));
-                }
-            }
-        } else {
-            $member  = Member::get()->filter('Slug', $member_id)->first();
-            if(!is_null($member) && $member->inGroup(5, true)) {
+        $member  = Member::get()->byID(intval($member_id));
+        if(!is_null($member))
+        {
+            // Check to make sure they are in the foundation membership group
+            If ($member->inGroup(5, true))
+            {
                 return $member;
             }
         }
@@ -346,9 +336,6 @@ class MemberListPage_Controller extends Page_Controller
                 //return our $Data to use on the page
                 return $this->Customise($data);
             }
-
-            //return our $Data to use on the page
-            return $this->Customise($data);
         }
         return $this->httpError(404, 'Sorry that member could not be found');
     }

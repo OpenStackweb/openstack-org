@@ -100,22 +100,7 @@ class SpeakerListPage_Controller extends Page_Controller
     //Show the profile of the speaker using the SpeakerListPage_profile.ss template
     function findSpeaker($SpeakerID)
     {
-        if (is_numeric($SpeakerID)) {
-            $speaker = PresentationSpeaker::get()->filter(array('ID'=>$SpeakerID,'AvailableForBureau'=>1))->first();
-            if ($speaker) {
-                $slug = $speaker->getNameSlug();
-                if (is_numeric($slug)) {
-                    // if we couldn't create the slug we just use the ID
-                    return $speaker;
-                } else {
-                    // if we found the slug we redirect to use that instead
-                    return $this->redirect($this->Link('profile/'.$slug));
-                }
-            }
-        } else {
-            return PresentationSpeaker::get()->filter(array('Slug'=>$SpeakerID,'AvailableForBureau'=>1))->first();
-        }
-
+        return PresentationSpeaker::get()->filter(array('ID'=>$SpeakerID,'AvailableForBureau'=>1))->first();
     }
 
     public function suggestions()
