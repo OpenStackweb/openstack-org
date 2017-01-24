@@ -48,7 +48,7 @@
             <% loop Results %>
                 <% if AvailableForBureau = 1 %>
                     <li>
-                        <p><a href="{$Top.Link}profile/{$ID}">$FirstName $LastName</a></p>
+                        <p><a href="{$Top.Link}profile/{$ID}/{$NameSlug}">$FirstName $LastName</a></p>
                     </li>
                 <% end_if %>
             <% end_loop %>

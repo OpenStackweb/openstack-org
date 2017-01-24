@@ -24,9 +24,15 @@ class SpeakerListPage_Controller extends Page_Controller
 
     static $allowed_actions = array(
         'profile',
+        'profileRedirect',
         'results',
         'suggestions',
         'SpeakerSearchForm'
+    );
+
+    private static $url_handlers = array(
+        'profile/$SpeakerID!/$NameSlug!' => 'profile',
+        'profile/$SpeakerID!' => 'profileRedirect',
     );
 
     function init()
@@ -84,16 +90,32 @@ class SpeakerListPage_Controller extends Page_Controller
     function profile()
     {
         // Grab speaker ID from the URL
-        $SpeakerID = Convert::raw2sql($this->request->param("ID"));
+        $SpeakerID = Convert::raw2sql($this->request->param("SpeakerID"));
         // Check to see if the ID is numeric
         if (is_numeric($SpeakerID)) {
             // Check to make sure there's a member with the current id
             if ($Profile = $this->findSpeaker($SpeakerID)) {
                 $data["Profile"] = $Profile;
                 //return our $Data to use on the page
-                return $this->Customise($data);
+                return $this->getViewer('profile')->process
+                    (
+                        $this->customise($data)
+                    );
             }
         }
+        return $this->httpError(404, 'Sorry that speaker could not be found');
+    }
+
+    function profileRedirect()
+    {
+        $speaker_id = Convert::raw2sql($this->request->param("SpeakerID"));
+        if (is_numeric($speaker_id)) {
+            // Check to make sure there's a member with the current id
+            if ($speaker = $this->findSpeaker($speaker_id)) {
+                return $this->redirect($this->Link('profile/'.$speaker_id.'/'.$speaker->getNameSlug()), 301);
+            }
+        }
+
         return $this->httpError(404, 'Sorry that speaker could not be found');
     }
 
@@ -218,7 +240,7 @@ class SpeakerListPage_Controller extends Page_Controller
 
             // If there is only one person with this name, go straight to the resulting profile page
             if ($Results && $Results->Count() == 1) {
-                $this->redirect($this->Link() . 'profile/' . $Results->First()->ID);
+                $this->redirect($this->Link() . 'profile/' . $Results->First()->ID . '/' . $Results->First()->getNameSlug());
             }
 
             $Output = new ArrayData(array(

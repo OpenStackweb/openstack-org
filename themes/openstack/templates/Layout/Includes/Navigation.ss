@@ -34,7 +34,11 @@
 
                     <li role="presentation"><a role="menuitem" tabindex="-1" href="/profile/">Edit Profile</a></li>
 
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="/community/members/profile/{$CurrentMember.ID}">View Public Profile</a></li>
+                    <li role="presentation">
+                        <a role="menuitem" tabindex="-1" href="/community/members/profile/{$CurrentMember.ID}/{$CurrentMember.NameSlug}">
+                            View Public Profile
+                        </a>
+                    </li>
 
                     <li role="presentation" class="divider"></li>
 

@@ -7,7 +7,7 @@
 		    <ul id="results">
 		      <% loop Results %>
 		        <li>
-					<p><a href="{$Top.Link}profile/{$ID}">$FirstName $Surname</a></p>
+					<p><a href="{$Top.Link}profile/{$ID}/{$NameSlug}">$FirstName $Surname</a></p>
 		        </li>
 		      <% end_loop %>
 		    </ul>

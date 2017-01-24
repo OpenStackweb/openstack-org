@@ -15,6 +15,6 @@
 		<p>This candidate needs at least 10 nominations to appear on the election ballet.</p>	
 	<% end_if %>
 
-	<p><a class="roundedButton" href="{$Top.Link}profile/$Member.ID">Done</a> &nbsp; <a class="roundedButton" href="{$Top.Link}">Nominate Someone Else</a></p>
+	<p><a class="roundedButton" href="{$Top.Link}profile/$Member.ID/$Member.NameSlug">Done</a> &nbsp; <a class="roundedButton" href="{$Top.Link}">Nominate Someone Else</a></p>
 
 <% end_loop %>

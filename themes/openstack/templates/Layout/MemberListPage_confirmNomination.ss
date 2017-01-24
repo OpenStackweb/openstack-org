@@ -6,7 +6,7 @@
 
 	<p>Are you sure you would officially like to nominate <strong>$Candidate.FirstName $Candidate.Surname</strong> to the OpenStack Board?</p>
 
-	<p><a class="roundedButton" href="$NominateLink">Yes, Nominate $Candidate.FirstName</a> &nbsp; <a class="roundedButton" href="{$Link}profile/$Candidate.ID">No</a></p>
+	<p><a class="roundedButton" href="$NominateLink">Yes, Nominate $Candidate.FirstName</a> &nbsp; <a class="roundedButton" href="{$Link}profile/$Candidate.ID/$Candidate.NameSlug">No</a></p>
 
 <% else %>
 

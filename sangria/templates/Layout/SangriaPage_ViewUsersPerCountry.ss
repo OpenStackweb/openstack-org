@@ -17,7 +17,7 @@
                             var users = countries_with_users["{$Country}"];
                             users.push({code:"{$Country}" , name : "{$FullName} - {$Email}", url: "/community/members/profile/{$ID}?BackUrl={$Top.Link(ViewUsersPerRegion)}%3Fcontinent%3D{$Top.continent}" });
                         </script>
-                        <a href="/community/members/profile/{$ID}?BackUrl={$Top.Link(ViewUsersPerRegion)}%3Fcountry%3D{$Top.country}">$FullName - $Email</a>
+                        <a href="/community/members/profile/{$ID}/{$NameSlug}?BackUrl={$Top.Link(ViewUsersPerRegion)}%3Fcountry%3D{$Top.country}">$FullName - $Email</a>
                     </li>
                 <% end_loop %>
             </ul>

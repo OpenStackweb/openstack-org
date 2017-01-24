@@ -53,6 +53,7 @@ class MemberListPage_Controller extends Page_Controller
         'CurrentElection',
         'saveNomination',
         'profile',
+        'profileRedirect',
         'results',
         'MemberSearchForm',
         'candidateStats',
@@ -61,6 +62,11 @@ class MemberListPage_Controller extends Page_Controller
         'assignGroup' => 'ADMIN',
         'ListExport',
         'CSVExport' => 'ADMIN'
+    );
+
+    private static $url_handlers = array(
+        'profile/$MemberID!/$NameSlug!' => 'profile',
+        'profile/$MemberID!' => 'profileRedirect',
     );
 
     function MemberList()
@@ -144,7 +150,7 @@ class MemberListPage_Controller extends Page_Controller
             $results["Success"] = true;
             $results["Candidate"] = $Nominee;
             $results["NominateLink"] = $this->Link() . "saveNomination/" . $CandidateID;
-            $results["BackLink"] = $this->Link() . "profile/" . $CandidateID;
+            $results["BackLink"] = $this->Link() . "profile/" . $CandidateID . '/' . $Nominee->getNameSlug();
 
         } elseif ($this->validateNomation($CandidateID) == 'ALREADY NOMINATED') {
 
@@ -156,7 +162,7 @@ class MemberListPage_Controller extends Page_Controller
             $results["Success"] = false;
             $results["NominatedByMe"] = true;
             $results["Candidate"] = $Nominee;
-            $results["BackLink"] = $this->Link() . "profile/" . $CandidateID;
+            $results["BackLink"] = $this->Link() . "profile/" . $CandidateID . '/' . $Nominee->getNameSlug();
 
 
         } elseif ($this->validateNomation($CandidateID) == 'LIMIT EXCEEDED') {
@@ -166,7 +172,7 @@ class MemberListPage_Controller extends Page_Controller
             $results["Success"] = false;
             $results["LimitExceeded"] = true;
             $results["Candidate"] = $Nominee;
-            $results["BackLink"] = $this->Link() . "profile/" . $CandidateID;
+            $results["BackLink"] = $this->Link() . "profile/" . $CandidateID . '/' . $Nominee->getNameSlug();
 
 
         } else {
@@ -310,11 +316,24 @@ class MemberListPage_Controller extends Page_Controller
         }
     }
 
+    function profileRedirect()
+    {
+        $member_id = Convert::raw2sql($this->request->param("MemberID"));
+        if (is_numeric($member_id)) {
+            // Check to make sure there's a member with the current id
+            if ($member = $this->findMember($member_id)) {
+                return $this->redirect($this->Link('profile/'.$member_id.'/'.$member->getNameSlug()), 301);
+            }
+        }
+
+        return $this->httpError(404, 'Sorry that member could not be found');
+    }
+
     //Show the profile of the member using the MemberListPage_profile.ss template
     function profile()
     {
         // Grab member ID from the URL
-        $MemberID = Convert::raw2sql($this->request->param("ID"));
+        $MemberID = Convert::raw2sql($this->request->param("MemberID"));
         // Check to see if the ID is numeric
         if (is_numeric($MemberID)) {
             // Check to make sure there's a member with the current id
@@ -333,8 +352,12 @@ class MemberListPage_Controller extends Page_Controller
                 if (Member::currentUserID() == $MemberID) {
                     $data["OwnProfile"] = true;
                 }
+
                 //return our $Data to use on the page
-                return $this->Customise($data);
+                return $this->getViewer('profile')->process
+                    (
+                        $this->customise($data)
+                    );
             }
         }
         return $this->httpError(404, 'Sorry that member could not be found');
@@ -428,7 +451,7 @@ class MemberListPage_Controller extends Page_Controller
 
                 // If there is only one person with this name, go straight to the resulting profile page
                 if ($OneMember && $OneMember->Count() == 1) {
-                    $this->redirect($this->Link() . 'profile/' . $OneMember->First()->ID);
+                    $this->redirect($this->Link() . 'profile/' . $OneMember->First()->ID .'/'. $OneMember->First()->getNameSlug());
                 }
 
                 $Output = new ArrayData(array(
