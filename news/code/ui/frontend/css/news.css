@@ -847,6 +847,11 @@ input[type=checkbox], input[type=radio] {
 
 /* ARTICLE VIEW PAGE */
 
+.declaimer{
+    font-size: 12px;
+    margin-top: 10px;
+}
+
 .article_full_image {
     padding-bottom:20px;
     text-align:center;

@@ -12,6 +12,12 @@
 
 <div class="container">
     <div class="row">
+        <div class="col-lg-8 col-lg-push-2 col-md-10 col-md-push-1 col-sm-10 col-sm-push-1 declaimer">
+            <i>This content has been submitted by a company in the OpenStack ecosystem, not the OpenStack Foundation.
+            It would be great if this were an option to checkbox or something that defaults for the News from the OpenStack Community.</i>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-lg-8 col-lg-push-2 col-md-10 col-md-push-1 col-sm-10 col-sm-push-1">
             <div style="text-align:left;">
                 <h1 class="article-h1">$Article.Headline</h1>

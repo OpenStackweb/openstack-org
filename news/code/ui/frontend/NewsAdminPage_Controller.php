@@ -88,7 +88,7 @@ final class NewsAdminPage_Controller extends AdminController {
                 $articles = $this->news_repository->getSlideNews(false);
                 break;
             case 'featured' :
-                $articles = $this->news_repository->getFeaturedNews(false);
+                $articles = $this->news_repository->getFeaturedNews(false,5);
                 break;
             case 'recent' :
                 $articles = $this->news_repository->getRecentNews(false);

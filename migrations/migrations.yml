@@ -59,3 +59,4 @@ migrations:
   - LightingTalksMigrationFix
   - PushNotificationMigration
   - RemoveSlugColMigration
+  - NewsFeaturedToArchiveMigration

@@ -33,7 +33,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="newsFeatured">
-                            <h3>Featured</h3>
+                            <h3>OpenStack in the News</h3>
                             <table>
                                 <thead>
                                 <tr>
@@ -55,7 +55,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="newsRecent">
-                            <h3>Recent News</h3>
+                            <h3>News from the OpenStack Community</h3>
                             <table>
                                 <thead>
                                 <tr>
