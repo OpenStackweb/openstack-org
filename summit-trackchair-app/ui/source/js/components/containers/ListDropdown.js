@@ -8,7 +8,7 @@ import URL from '../../utils/url';
 class ListDropdown extends React.Component {
 
 	componentDidMount() {
-		if(this.props.autoSelect && !this.props.lists.find(l => l.member_id == this.props.member_id)) {
+		if(this.props.lists.length && this.props.autoSelect && !this.props.lists.find(l => l.member_id == this.props.member_id)) {
 			let mine = this.props.lists.find(l => l.mine);
 
 			this.props.goToList(mine ? mine.member_id : this.props.lists[0].member_id);
@@ -16,10 +16,15 @@ class ListDropdown extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if(nextProps.autoSelect && !nextProps.lists.find(l => l.member_id == nextProps.member_id)) {
-			let mine = nextProps.lists.find(l => l.mine);			
-			nextProps.goToList(mine ? mine.member_id : nextProps.lists[0].member_id);
-		}
+        let next_ids = nextProps.lists.map(l => l.id);
+        let this_ids = this.props.lists.map(l => l.id);
+
+        if (nextProps.lists.length && next_ids.join(',') != this_ids.join(',')) {
+            if(nextProps.autoSelect && !nextProps.lists.find(l => l.member_id == nextProps.member_id)) {
+                let mine = nextProps.lists.find(l => l.mine);
+                nextProps.goToList(mine ? mine.member_id : nextProps.lists[0].member_id);
+            }
+        }
 	}
 
 	render() {

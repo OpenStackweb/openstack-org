@@ -202,14 +202,14 @@ class PresentationCategory extends DataObject
         $MemberList = SummitSelectedPresentationList::get()->filter(array(
             'MemberID' => $memberid,
             'CategoryID' => $this->ID,
-            'ListType' => 'Individual',
+            'ListType' => SummitSelectedPresentationList::Individual,
             'ListClass' => $list_class,
         ))->first();
 
         // if a selection list doesn't exist for this member and category, create it
         if (!$MemberList && $this->isTrackChair($memberid)) {
             $MemberList = new SummitSelectedPresentationList();
-            $MemberList->ListType = 'Individual';
+            $MemberList->ListType = SummitSelectedPresentationList::Individual;
             $MemberList->ListClass = $list_class;
             $MemberList->CategoryID = $this->ID;
             $MemberList->MemberID = $memberid;
@@ -228,7 +228,7 @@ class PresentationCategory extends DataObject
 
         // See if there's a list for the group
         $GroupList = SummitSelectedPresentationList::get()->filter(array(
-            'ListType' => 'Group',
+            'ListType' => SummitSelectedPresentationList::Group,
             'ListClass' => $list_class,
             'CategoryID' => $this->ID
         ))->first();
@@ -236,7 +236,7 @@ class PresentationCategory extends DataObject
         // if a group selection list doesn't exist for this category, create it
         if (!$GroupList) {
             $GroupList = new SummitSelectedPresentationList();
-            $GroupList->ListType = 'Group';
+            $GroupList->ListType = SummitSelectedPresentationList::Group;
             $GroupList->ListClass = $list_class;
             $GroupList->CategoryID = $this->ID;
             $GroupList->write();

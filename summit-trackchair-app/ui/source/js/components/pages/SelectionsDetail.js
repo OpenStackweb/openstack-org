@@ -57,7 +57,6 @@ class SelectionsDetail extends React.Component {
 		);
 	}
 
-
     render () {
     	const {
     		selections,
@@ -74,9 +73,19 @@ class SelectionsDetail extends React.Component {
     		myListFull,
     		teamListFull
     	} = this.props;
-    	
+
+        if(this.props.loading) {
+            return <Wave />
+        }
+
     	if(!list) {
-    		return <Wave />
+    		return (
+                <div className="row">
+                    <div className="col-md-12 empty-selections">
+                        There are no track chairs lists for this category and class.
+                    </div>
+                </div>
+            );
     	}
 
     	const IndividualListComponent = canEditIndividual ? SelectionsList : StaticSelectionsList;
@@ -146,7 +155,6 @@ class SelectionsDetail extends React.Component {
 					   </div>
 					</div>
         		</div>
-
         	</div>
         );
     }
@@ -160,8 +168,8 @@ export default connect(
 		));
 		const list = state.lists.results.find(l => l.member_id == ownProps.params.member_id);
 		const teamList = state.lists.results.find(l => l.is_group);
-		const sessionLimit = list.slots ;
-		const altLimit = +category.alternate_count;
+		const sessionLimit = (list) ? list.slots : 0;
+		const altLimit = (list) ? list.alternates : 0;
 		const canEditIndividual = list && list.can_edit;
 		const canEditTeam = category && category.user_is_chair;
 
@@ -176,7 +184,8 @@ export default connect(
 			canEditIndividual,
 			canEditTeam,
 			teamListFull: (teamList.selections.length >= sessionLimit),
-			myListFull: (list.selections.length >= sessionLimit)
+			myListFull: (list) ? (list.selections.length >= sessionLimit) : false,
+            loading: state.lists.loading
 		}
 		
 	},

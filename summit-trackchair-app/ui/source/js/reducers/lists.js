@@ -4,7 +4,7 @@ export const lists = function (
     state = {
         results: null,        
         loading: false,
-        showDrawer: false
+        showDrawer: false,
     },
     action = {}) {	
 
