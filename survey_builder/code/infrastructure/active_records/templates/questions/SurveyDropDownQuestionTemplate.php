@@ -23,8 +23,8 @@ class SurveyDropDownQuestionTemplate extends SurveyMultiValueQuestionTemplate im
     const CountrySelectorExtra_TooMany      =  'Too many to list';
 
     public static $country_selector_extra_options = [
-        self::CountrySelectorExtra_Worldwide    => self::CountrySelectorExtra_Worldwide,
         self::CountrySelectorExtra_PreferNotSay => self::CountrySelectorExtra_PreferNotSay,
+        self::CountrySelectorExtra_Worldwide    => self::CountrySelectorExtra_Worldwide,
         self::CountrySelectorExtra_TooMany      => self::CountrySelectorExtra_TooMany,
     ];
 

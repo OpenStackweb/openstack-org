@@ -65,6 +65,31 @@
             return false;
         });
 
+        $('#btn_modal_team_done').click(function(e){
+            var entity_survey_id   = $('#ENTITY_SURVEY_ID').val();
+            $.ajax(
+                {
+                    type: "PUT",
+                    url: '/api/v1/surveys/entity-surveys/'+entity_survey_id+'/team-members/mail',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function () {
+                        $('#TeamModal').modal('hide');
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        if(jqXHR.status === 401)
+                        {
+                            alert(jqXHR.responseText);
+                            return;
+                        }
+                        alert( "Request failed: " + textStatus );
+                    }
+                }
+            );
+            e.preventDefault();
+            return false;
+        });
+
         $('.select-team-member-btn').click(function(event)
         {
            var new_team_member_id = $('#new-team-member-id').val();

@@ -74,4 +74,10 @@ interface IEntitySurvey extends ISurvey {
      * @return string|null
      */
     public function getOrganization();
+
+    /**
+     * @param Member $member
+     * @return bool
+     */
+    public function hasTeamPermissions(Member $member);
 }

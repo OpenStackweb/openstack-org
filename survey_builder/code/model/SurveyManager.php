@@ -334,6 +334,9 @@ final class SurveyManager implements ISurveyManager {
 
             if(!$survey instanceof IEntitySurvey) throw new NotFoundEntityException('EntitySurvey','');
 
+            if(!$survey->hasTeamPermissions(Member::currentUser()))
+                throw new NotFoundEntityException('EntitySurvey','');
+
             if($member->getIdentifier() === $survey->createdBy()->getIdentifier())
                 throw new Exception('You cant add owner as a team member!');
 
@@ -374,12 +377,40 @@ final class SurveyManager implements ISurveyManager {
 
             if(is_null($survey)) throw new NotFoundEntityException('EntitySurvey','');
 
+            if(!$survey->hasTeamPermissions(Member::currentUser()))
+                throw new NotFoundEntityException('EntitySurvey','');
+
             if(!$survey instanceof IEntitySurvey) throw new NotFoundEntityException('EntitySurvey','');
 
             if($member->getIdentifier() === $survey->createdBy()->getIdentifier())
-                throw new Exception('You cant add owner as a team member!');
+                throw new Exception('You cant remove owner as a team member!');
 
             $survey->removeTeamMember($member);
+
+        });
+    }
+
+    public function emailTeamMembersOnEntitySurvey($entity_survey_id, IMessageSenderService $sender_service ){
+
+        return $this->tx_manager->transaction(function() use($entity_survey_id, $sender_service){
+
+            $survey = $this->survey_repository->getById($entity_survey_id);
+
+            if(is_null($survey)) throw new NotFoundEntityException('EntitySurvey','');
+
+            if(!$survey->hasTeamPermissions(Member::currentUser()))
+                throw new NotFoundEntityException('EntitySurvey','');
+
+            if(!$survey instanceof IEntitySurvey) throw new NotFoundEntityException('EntitySurvey','');
+
+            foreach($survey->EditorTeam() as $member)
+            {
+                if($member->EntitySurveyTeamMemberMailed) continue;
+                if(!is_null($sender_service))
+                    $sender_service->send($member);
+
+                $survey->EditorTeam()->add($member, ['EntitySurveyTeamMemberMailed' => 1]);
+            }
 
         });
     }

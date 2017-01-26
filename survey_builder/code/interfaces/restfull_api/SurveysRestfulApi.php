@@ -82,6 +82,7 @@ class SurveysRestfulApi extends AbstractRestfulJsonApi
         'getTeamMembers',
         'addTeamMember',
         'deleteTeamMember',
+        'emailTeamMembers',
     );
 
     static $url_handlers = array
@@ -91,6 +92,7 @@ class SurveysRestfulApi extends AbstractRestfulJsonApi
         'GET entity-surveys/$ENTITY_SURVEY_ID/team-members'               => 'getTeamMembers',
         'POST entity-surveys/$ENTITY_SURVEY_ID/team-members/$MEMBER_ID'   => 'addTeamMember',
         'DELETE entity-surveys/$ENTITY_SURVEY_ID/team-members/$MEMBER_ID' => 'deleteTeamMember',
+        'PUT entity-surveys/$ENTITY_SURVEY_ID/team-members/mail'          => 'emailTeamMembers',
     );
 
     public function suggestMember(SS_HTTPRequest $request)
@@ -172,7 +174,7 @@ class SurveysRestfulApi extends AbstractRestfulJsonApi
             (
                 $entity_survey_id,
                 $member_id,
-                new EntitySurveyTeamMemberEmailSenderService
+                null
             );
             return $this->deleted();
         }
@@ -213,6 +215,7 @@ class SurveysRestfulApi extends AbstractRestfulJsonApi
         try {
             $entity_survey = $this->survey_repository->getById($entity_survey_id);
             if(is_null($entity_survey) || !$entity_survey instanceof IEntitySurvey) return $this->httpError(404);
+            if(!$entity_survey->hasTeamPermissions(Member::currentUser())) return $this->httpError(404);
             $items = array();
             foreach($entity_survey->getTeamMembers() as $member)
             {
@@ -225,6 +228,26 @@ class SurveysRestfulApi extends AbstractRestfulJsonApi
                 );
             }
             return $this->ok($items);
+        }
+        catch(Exception $ex)
+        {
+            return $this->serverError();
+        }
+    }
+
+    public function emailTeamMembers(SS_HTTPRequest $request){
+        if (!Director::is_ajax()) return $this->forbiddenError();
+        if(!Member::currentUser()) return $this->forbiddenError();
+
+        $entity_survey_id = (int)$request->param('ENTITY_SURVEY_ID');
+
+        try {
+            $this->survey_manager->emailTeamMembersOnEntitySurvey
+            (
+                $entity_survey_id, new EntitySurveyTeamMemberEmailSenderService
+            );
+
+            return $this->ok();
         }
         catch(Exception $ex)
         {

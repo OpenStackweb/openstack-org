@@ -15,6 +15,12 @@
 class AbstractStepForm extends HoneyPotForm
 {
 
+    function __construct($controller, $name, FieldList $fields, FieldList $actions, $validator = null)
+    {
+        parent::__construct($controller, $name, $fields, $actions, $validator);
+        // to prevent Security token doesn't match, possible CSRF attack
+        $this->disableSecurityToken();
+    }
     /**
      * @param $default_action
      */

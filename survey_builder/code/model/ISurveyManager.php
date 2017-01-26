@@ -107,4 +107,11 @@ interface ISurveyManager {
      * @return void
      */
     public function completeSurvey(ISurveyStep $current_step);
+
+    /**
+     * @param int $entity_survey_id
+     * @param IMessageSenderService $sender_service
+     * @return void
+     */
+    public function emailTeamMembersOnEntitySurvey($entity_survey_id, IMessageSenderService $sender_service );
 }

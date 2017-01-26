@@ -37,11 +37,25 @@ class EntitySurvey extends Survey implements IEntitySurvey
         'EditorTeam' => 'Member'
     );
 
+    static $many_many_extraFields = [
+        'EditorTeam' => ['EntitySurveyTeamMemberMailed' => 'Boolean']
+    ];
+
     static $has_many = array
     ();
 
     private static $defaults = array
     ();
+
+
+    /**
+     * @param Member $member
+     * @return bool
+     */
+    public function hasTeamPermissions(Member $member){
+       if($this->iAmOwner() || $this->isTeamMember($member)) return true;
+       return false;
+    }
 
     /**
      * @return ISurvey
@@ -121,9 +135,9 @@ class EntitySurvey extends Survey implements IEntitySurvey
      * @param ICommunityMember $member
      * @return void
      */
-    public function addTeamMember(ICommunityMember $member)
+    public function addTeamMember(ICommunityMember $member, $extraFields = null)
     {
-        AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'EditorTeam')->add($member);
+        AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'EditorTeam')->add($member, $extraFields);
     }
 
     /**

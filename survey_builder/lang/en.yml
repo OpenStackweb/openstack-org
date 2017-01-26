@@ -5,6 +5,6 @@ en:
     ActionGoBack: 'Go Back'
     ActionSubmitSurvey : 'Submit Your Survey'
     ThankYouMessage: 'Thank you for your submission !!!'
-    EntityRegularStepForm.EntityDetailTitle: "Deployment details"
-    EntityRegularStepForm.StepCountTitle: "Step {current} of {max}"
+    EntityRegularStepForm.EntityDetailTitle: "Your Deployments"
+    EntityRegularStepForm.StepCountTitle: "Part {current} of {max}"
     EntityRegularStepForm.AddTeamMemberTitle: "Add another team member"

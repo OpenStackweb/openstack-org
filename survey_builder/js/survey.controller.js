@@ -55,6 +55,10 @@ jQuery(document).ready(function($) {
         errorPlacement: jqueryValidatorErrorPlacement
     });
 
+    $('select').on('change', function(event, params) {
+        $(this).valid();
+    });
+
     //custom validation rules
 
     $.validator.addMethod("ranking_required", function (value, element, container_id) {

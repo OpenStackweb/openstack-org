@@ -3,9 +3,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="TeamModalLabel"><strong>Add team member to this deployment
-                </strong></h4>
+                <h4 class="modal-title" id="TeamModalLabel"><strong>Add team member to this deployment</strong></h4>
             </div>
             <div class="modal-body">
                 <p><strong>Search by name</strong></p>
@@ -32,7 +30,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <p>
+                <p style="text-align: right;">
+                    <button type="button" id="btn_modal_team_done" class="btn btn-primary">Done</button>
                 </p>
             </div>
         </div>

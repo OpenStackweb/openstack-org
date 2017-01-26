@@ -2,7 +2,7 @@
     <fieldset>
         <div class="row">
             <div class="col-md-12">
-                <p><span class="entity-survey-title-details"><%t EntityRegularStepForm.EntityDetailTitle "Deployment details" %>&nbsp;-</span>&nbsp;<%t EntityRegularStepForm.StepCountTitle "Step {current} of {max}" current=$CurrentStepIndex max=$MaxStepIndex %></p>
+                <h3><span class="entity-survey-title-details"><%t EntityRegularStepForm.EntityDetailTitle "Your Deployments" %>&nbsp;-&nbsp;<%t EntityRegularStepForm.StepCountTitle "Part {current} of {max}" current=$CurrentStepIndex max=$MaxStepIndex %></span></h3>
             </div>
         </div>
         <hr>

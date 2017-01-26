@@ -84,6 +84,7 @@ class SurveyDropDownQuestionTemplateUIBuilder extends AbstractSurveyQuestionTemp
                             var form    = $('.survey_step_form');
                             var form_id = form.attr('id');
                             $('#'+form_id+'_{$question->name()}').chosen({width: '30%'});
+                            
                         });
                     ");
         }
