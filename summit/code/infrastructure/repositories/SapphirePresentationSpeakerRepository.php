@@ -369,6 +369,18 @@ SQL;
             INNER JOIN Presentation_Speakers PS ON PS.PresentationID = P.ID
             WHERE PS.PresentationSpeakerID = S.ID AND E.Title LIKE '%{$term}%'
       )
+      UNION
+      SELECT DISTINCT S.*, CONCAT(S.FirstName,' ',S.LastName) AS FullName FROM PresentationSpeaker S
+      WHERE EXISTS
+      (
+            SELECT P.ID From Presentation P
+            INNER JOIN SummitEvent E ON E.ID = P.ID AND E.Published = 1 AND E.SummitID = {$summit_id}
+            INNER JOIN Presentation_Speakers PS ON PS.PresentationID = P.ID
+            INNER JOIN PresentationSpeaker S2 ON S2.ID = PS.PresentationSpeakerID
+            INNER JOIN Affiliation A ON A.MemberID = S2.MemberID
+            INNER JOIN Org ON Org.ID = A.OrganizationID
+            WHERE PS.PresentationSpeakerID = S.ID AND Org.Name LIKE '%{$term}%'
+      )
 SQL;
 
         foreach(DB::query($sql_speakers) as $row)

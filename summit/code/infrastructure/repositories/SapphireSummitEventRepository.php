@@ -55,6 +55,13 @@ class SapphireSummitEventRepository extends SapphireRepository implements ISummi
                 WHERE E.SummitID = {$summit_id} AND E.Published = 1
                 AND EXISTS
                 (
+                    SELECT C.ID FROM Company C INNER JOIN SummitEvent_Sponsors ES ON ES.CompanyID = C.ID
+                    WHERE ES.SummitEventID = E.ID AND C.Name LIKE '%{$term}%'
+                )
+            UNION SELECT DISTINCT E.* FROM SummitEvent E
+                WHERE E.SummitID = {$summit_id} AND E.Published = 1
+                AND EXISTS
+                (
                     SELECT P.ID FROM Presentation P
                     INNER JOIN SummitEvent E2 ON E2.ID = P.ID                   
                     LEFT JOIN PresentationCategory PC ON PC.ID = E2.CategoryID
