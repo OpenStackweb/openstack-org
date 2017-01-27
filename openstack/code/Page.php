@@ -257,7 +257,8 @@ class Page_Controller extends ContentController
     private static $allowed_actions = array(
         'logout',
         'FeedbackForm',
-        'getNavigationMenu'
+        'getNavigationMenu',
+        'dismissUpdateProfileModal',
     );
 
     /**
@@ -288,6 +289,7 @@ class Page_Controller extends ContentController
             "themes/openstack/javascript/jcarousellite.min.js",
             "themes/openstack/javascript/navigation.js",
             "themes/openstack/javascript/filetracking.jquery.js",
+            "themes/openstack/javascript/updateProfileModal.js"
         );
 
         if($this->use_jquery_ui)
@@ -550,5 +552,9 @@ class Page_Controller extends ContentController
     {
         $tags = parent::MetaTags(false);
         return $tags;
+    }
+
+    public function showUpdateProfileModal(){
+        return (Member::currentUser() && Session::get("Member.showUpdateProfileModal"));
     }
 }

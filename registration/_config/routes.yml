@@ -6,3 +6,4 @@ Director:
   rules:
     'userprofile': 'AffiliationController'
     'members/verification': 'MemberVerificationController'
+    'memberProfile': 'MemberProfileAPI'

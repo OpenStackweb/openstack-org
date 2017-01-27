@@ -184,6 +184,8 @@ class EditProfilePage_Controller extends Page_Controller
             $CurrentMember->Gender = $data['GenderSpecify'];
         }
         $email_updated = $CurrentMember->isChanged('Email');
+        $CurrentMember->ProfileUpdated();
+        Session::set("Member.showUpdateProfileModal", false);
         $CurrentMember->write();
 
         $speaker = PresentationSpeaker::get()->filter('MemberID', $CurrentMember->ID)->first();
