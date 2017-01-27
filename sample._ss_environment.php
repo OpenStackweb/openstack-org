@@ -115,43 +115,36 @@ define('NEW_PURCHASE_ORDER_EMAIL_SUBJECT','New Sponsorship Package Purchase Orde
 define('REJECTED_PURCHASE_ORDER_EMAIL_FROM','');
 define('REJECTED_PURCHASE_ORDER_EMAIL_SUBJECT','Your OpenStack Sponsorship Package Purchase Order was rejected');
 
-// summit push notification manager settings
-define('PARSE_APP_ID','');
-define('PARSE_REST_KEY','');
-define('PARSE_MASTER_KEY','');
-
-// COA
-define('COA_FILE_API_BASE_URL','');
-define('COA_FILE_API_BASE_USER','');
-define('COA_FILE_API_BASE_PASS','');
-
-// GOOGLE API KEYS
-// get from https://console.cloud.google.com/home/dashboard
-// browser key to use Google Maps JavaScript API
-define('GOOGLE_MAP_KEY', '');
-// server key to use Google Maps Geocoding API
-define('GOOGLE_GEO_CODING_API_KEY','');
-
 // OAUTH 2.0 Client ID to use Google Calendar API
 define('GAPI_CLIENT','');
 
 // APP LINKS
 // http://applinks.org/documentation/
-//IOS
+//ios
 define('APP_LINKS_IOS_APP_STORE_ID','');
-define('APP_LINKS_IOS_APP_NAME','');
-define('APP_LINKS_IOS_APP_CUSTOM_SCHEMA','');
+define('APP_LINKS_IOS_APP_NAME','OpenStack Summit');
+define('APP_LINKS_IOS_APP_CUSTOM_SCHEMA','org.openstack.ios.summit');
 $APP_LINKS_IOS_FILE_CONFIG = [];
-$APP_LINKS_IOS_FILE_CONFIG['AppID1'] = array('*');
-//Android
-define('APP_LINKS_ANDROID_PACKAGE','');
-define('APP_LINKS_ANDROID_APP_NAME','');
-define('APP_LINKS_ANDROID_APP_CUSTOM_SCHEMA','');
+$APP_LINKS_IOS_FILE_CONFIG['org.openstack.ios.summit.debug'] = array('*');
+$APP_LINKS_IOS_FILE_CONFIG['org.openstack.ios.summit.beta']  = array('*');
+//android
+define('APP_LINKS_ANDROID_PACKAGE','org.openstack.android.summit');
+define('APP_LINKS_ANDROID_APP_NAME','OpenStackSummitApplication');
+define('APP_LINKS_ANDROID_APP_CUSTOM_SCHEMA','org.openstack.android.summit');
 $APP_LINKS_ANDROID_FILE_CONFIG = [];
+$APP_LINKS_ANDROID_FILE_CONFIG[APP_LINKS_ANDROID_PACKAGE] = [
+    "FA:39:81:5D:C8:A3:36:96:A1:4F:8B:21:DA:4B:9A:6B:71:36:9C:30:56:BB:C1:3F:40:BD:94:EC:B2:26:89:10",
+    "3C:FA:62:3E:0B:C6:9F:81:EA:F1:74:4F:94:FC:55:6A:A4:28:0C:CB:11:4A:E3:34:30:D2:D7:6E:3D:A8:AA:8A",
+];
 
-$APP_LINKS_ANDROID_FILE_CONFIG[APP_LINKS_ANDROID_PACKAGE] = [''];
+define('GROUP_CONTACT_REPORT_TOKEN', '123456');
+define('OPENSTACK_YOUTUBE_API_KEY','');
+define('OPENSTACK_YOUTUBE_CHANNEL_ID','');
 
+// Twitter
 define('OPENSTACK_TWITTER_ACCOUNT', '');
+
+define('FIREBASE_GCM_SERVER_KEY', '');
 
 global $_FILE_TO_URL_MAPPING;
 $_FILE_TO_URL_MAPPING[''] = '';

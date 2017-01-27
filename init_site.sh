@@ -22,12 +22,8 @@ sudo chmod 775 assets;
 mkdir -p silverstripe-cache
 sudo chmod 775 silverstripe-cache;
 ln -sfn $PWD/private-assets/themes/openstack/images $PWD/themes/openstack/images;
-if [ -f "package.json" ]; then
-    sudo npm install;
-fi
-if [ -f "bower.json" ]; then
-    bower install --allow-root --config.interactive=false
-fi
+sudo npm install;
+bower install --allow-root --config.interactive=false;
 npm run build-all;
 sudo ./framework/sake installsake;
 sake dev/build;
