@@ -1,0 +1,12 @@
+.company-logo,
+p.minh100 {
+  min-height: 100px;
+}
+
+#osd-register {
+	background: #DA422F url(/summit/images/boston/group-4-background.jpg) no-repeat center center scroll;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
