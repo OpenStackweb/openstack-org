@@ -278,7 +278,12 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
     {
         $event          = $this->event_repository->getById($event_id);
         $rsvp_template  = $event->RSVPTemplate();
-        $rsvp           = $this->rsvp_repository->getByEventAndAttendee($event_id,Member::currentUserID());
+        $attendee       = Member::currentUser()->getSummitAttendee($this->Summit()->ID);
+        $rsvp           = null;
+        if ($attendee) {
+            $rsvp = $this->rsvp_repository->getByEventAndAttendee($event_id, $attendee->ID);
+        }
+
         $builder        = new RSVPTemplateUIBuilder();
         $form           = $builder->build($rsvp_template, $rsvp, $event);
         return $form;

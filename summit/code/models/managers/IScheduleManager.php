@@ -58,4 +58,17 @@ interface IScheduleManager
      */
     public function addRSVP(array $data, IMessageSenderService $sender_service);
 
+    /**
+     * @param array $data
+     * @param IMessageSenderService $sender_service
+     * @return RSVP
+     */
+    public function updateRSVP(array $data, IMessageSenderService $sender_service);
+
+    /**
+     * @param array $data
+     * @return RSVP
+     */
+    public function deleteRSVP(array $data);
+
 }

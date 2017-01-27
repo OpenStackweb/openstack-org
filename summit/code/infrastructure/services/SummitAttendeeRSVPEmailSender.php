@@ -22,11 +22,17 @@ final class SummitAttendeeRSVPEmailSender implements IMessageSenderService
     {
 
         if(!is_array($subject)) return;
-        if(!isset($subject['Event']) || !isset($subject['Attendee'])) return;
+        if(!isset($subject['Event']) || !isset($subject['Attendee']) || !isset($subject['RsvpID'])) return;
         $event     = $subject['Event'];
         $attendee  = $subject['Attendee'];
+        $rsvp_id   = $subject['RsvpID'];
 
         if(!$attendee instanceof  ISummitAttendee) return;
+
+        //create confirmation number
+        $summit_title = substr($event->Summit()->Title,0,3);
+        $summit_year = date('y', strtotime($event->Summit()->SummitBeginDate));
+        $confirmation_nbr = strtoupper($summit_title).$summit_year.$rsvp_id;
 
         $email = PermamailTemplate::get()->filter('Identifier', SUMMIT_ATTENDEE_RSVP_EMAIL)->first();
         if(is_null($email)) throw new Exception(sprintf('Email Template %s does not exists on DB!', SUMMIT_ATTENDEE_RSVP_EMAIL));
@@ -41,7 +47,8 @@ final class SummitAttendeeRSVPEmailSender implements IMessageSenderService
             (
                 'Event'                => $event,
                 'Attendee'             => $attendee,
-                'ScheduleURL'          => $schedule_page->getAbsoluteLiveLink(false)
+                'ScheduleURL'          => $schedule_page->getAbsoluteLiveLink(false),
+                'ConfirmationNbr'      => $confirmation_nbr
             )
         )
         ->send();

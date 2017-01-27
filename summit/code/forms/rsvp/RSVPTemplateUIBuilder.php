@@ -43,9 +43,8 @@ class RSVPTemplateUIBuilder implements IRSVPUIBuilder
 
         $validator = null;
 
-        if ($rsvp)
-            $fields->add(new HiddenField('rsvp_id', 'rsvp_id', $rsvp->getIdentifier()));
-
+        $rsvp_id = ($rsvp) ? $rsvp->getIdentifier() : '';
+        $fields->add($rsvp_field = new HiddenField('rsvp_id', 'rsvp_id', $rsvp_id));
         $fields->add(new HiddenField('event_id', 'event_id', $event->getIdentifier()));
         $fields->add(new HiddenField('summit_id', 'summit_id', $event->Summit()->getIdentifier()));
         $fields->add(new HiddenField('seat_type', 'seat_type', $event->getCurrentRSVPSubmissionSeatType()));
@@ -56,6 +55,15 @@ class RSVPTemplateUIBuilder implements IRSVPUIBuilder
         (
             FormAction::create('submit_rsvp')->setTitle('Send RSVP')->addExtraClass('rsvp_submit')
         );
+
+        $delete_button = BetterButtonAction::create('Delete RSVP')
+            ->addExtraClass('rsvp_delete btn btn-danger pull-right');
+
+        if (!$rsvp) {
+            $delete_button->addExtraClass('hidden');
+        }
+
+        $actions->add($delete_button);
 
         $form =  new BootstrapForm(Controller::curr(), $form_name.'_'.$event->getIdentifier() , $fields, $actions, $validator);
         $form->setAttribute('class','rsvp_form');

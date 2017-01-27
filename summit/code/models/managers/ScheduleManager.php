@@ -273,7 +273,7 @@ final class ScheduleManager implements IScheduleManager
                 throw new EntityValidationException("invalid seat type!");
 
             $event = $this->summitevent_repository->getById($event_id);
-            $summit_attendee = $this->attendee_repository->getByMemberAndSummit(intval($member_id), intval($summit_id));
+            $summit_attendee = $this->attendee_repository->getByMemberAndSummit($member_id, $summit_id);
 
             if (is_null($summit_attendee)) {
                 throw new EntityValidationException(sprintf("there is no any attendee for member %s and summit %s", $member_id, $summit_id));
@@ -353,12 +353,137 @@ final class ScheduleManager implements IScheduleManager
 
             if (!is_null($sender_service)) {
                 $rsvp->BeenEmailed = true;
-                $sender_service->send(['Event' => $event, 'Attendee' => $summit_attendee]);
+
+            }
+
+            $new_rsvp_id = $rsvp->write();
+
+            $sender_service->send(['Event' => $event, 'Attendee' => $summit_attendee, 'RsvpID' => $new_rsvp_id]);
+
+            return $rsvp;
+        });
+    }
+
+    /**
+     * @param array $data
+     * @param IMessageSenderService $sender_service
+     * @return RSVP
+     */
+    public function updateRSVP(array $data, IMessageSenderService $sender_service)
+    {
+
+        return $this->tx_manager->transaction(function () use (
+            $data,
+            $sender_service
+        ) {
+
+            $member_id = intval($data['member_id']);
+            $summit_id = intval($data['summit_id']);
+            $event_id = intval($data['event_id']);
+            $rsvp_id = intval($data['rsvp_id']);
+            $seat_type = $data['seat_type'];
+
+            if (empty($seat_type))
+                throw new EntityValidationException("invalid seat type!");
+
+            $event = $this->summitevent_repository->getById($event_id);
+            $summit_attendee = $this->attendee_repository->getByMemberAndSummit($member_id, $summit_id);
+
+            if (is_null($summit_attendee)) {
+                throw new EntityValidationException(sprintf("there is no any attendee for member %s and summit %s", $member_id, $summit_id));
+            }
+
+            if (!$event) {
+                throw new NotFoundEntityException('Event', '');
+            }
+
+            if (!$event->RSVPTemplate()) {
+                throw new EntityValidationException('RSVPTemplate not set');
+            }
+
+            // add to schedule the RSVP event
+            if (!$summit_attendee->isScheduled($event_id)) {
+                $summit_attendee->addToSchedule($event);
+            }
+
+            $current_rsvp = $this->rsvp_repository->getByEventAndAttendee($event_id, $summit_attendee->getIdentifier());
+            $rsvp = $this->rsvp_repository->getById($rsvp_id);
+
+            if (!$rsvp || $current_rsvp->ID != $rsvp_id) {
+                throw new EntityValidationException(sprintf("RSVP %s does not correspond to your user.", $rsvp_id));
+            }
+
+            foreach ($event->RSVPTemplate()->getQuestions() as $q) {
+                $question_name = $q->name();
+
+                if ($q instanceof RSVPDropDownQuestionTemplate) {
+                    $question_name = ($q->IsMultiSelect) ? $q->name() . '[]' : $question_name;
+                } else if ($q instanceof RSVPCheckBoxListQuestionTemplate) {
+                    $question_name = $q->name() . '[]';
+                }
+
+                if (isset($data[$question_name])) {
+                    if (!$rsvp || !$answer = $rsvp->findAnswerByQuestion($q)) {
+                        $answer = new RSVPAnswer();
+                    }
+
+                    $answer_value = $data[$question_name];
+
+                    if (is_array($answer_value)) {
+                        $answer_value = str_replace('{comma}', ',', $answer_value);
+                        $answer->Value = implode(',', $answer_value);
+                    } else {
+                        $answer->Value = $answer_value;
+                    }
+                    $answer->QuestionID = $q->getIdentifier();
+                    $answer->write();
+
+                    $rsvp->addAnswer($answer);
+                }
+            }
+
+            if (!is_null($sender_service)) {
+                $rsvp->BeenEmailed = true;
+                $sender_service->send(['Event' => $event, 'Attendee' => $summit_attendee, 'RsvpID' => $rsvp->ID]);
             }
 
             $rsvp->write();
 
             return $rsvp;
+        });
+    }
+
+    /**
+     * @param array $data
+     * @return bool
+     */
+    public function deleteRSVP(array $data)
+    {
+
+        return $this->tx_manager->transaction(function () use (
+            $data
+        ) {
+
+            $member_id = intval($data['member_id']);
+            $summit_id = intval($data['summit_id']);
+            $event_id = intval($data['event_id']);
+            $rsvp_id = intval($data['rsvp_id']);
+
+            $summit_attendee = $this->attendee_repository->getByMemberAndSummit($member_id, $summit_id);
+
+            if (is_null($summit_attendee)) {
+                throw new EntityValidationException(sprintf("there is no any attendee for member %s and summit %s", $member_id, $summit_id));
+            }
+
+            $rsvp = $this->rsvp_repository->getById($rsvp_id);
+
+            if (!$rsvp || $summit_attendee->ID != $rsvp->SubmittedBy()->ID || $rsvp->Event()->ID != $event_id) {
+                throw new EntityValidationException(sprintf("RSVP %s does not correspond to your user.", $rsvp_id));
+            }
+
+            $this->rsvp_repository->delete($rsvp);
+
+            return true;
         });
     }
 

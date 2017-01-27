@@ -140,13 +140,16 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi
         'GET export/ics'                          => 'ExportEventToICS',
         'GET empty_spots'                         => 'getEmptySpots',
         'GET full'                                => 'getFullSchedule',
+        'PUT $EventID!/rsvp/$RsvpID!'             => 'updateRSVP',
         'PUT $EventID!/synch/google/$CalEventID!' => 'synchEvent',
-        'PUT $EventID!/rsvp'                      => 'rsvpEvent',
         'PUT $EventID!'                           => 'addToSchedule',
         'DELETE $EventID!/synch/google'           => 'unSynchEvent',
+        'DELETE $EventID!/rsvp/$RsvpID!'          => 'deleteRSVP',
         'DELETE $EventID!'                        => 'removeFromSchedule',
         'POST $EventID!/feedback'                 => 'addFeedback',
         'POST $EventID!/share'                    => 'shareEmail',
+        'POST $EventID!/rsvp'                     => 'rsvpEvent',
+
     ];
 
     static $allowed_actions = [
@@ -163,6 +166,8 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi
         'synchEvent',
         'unSynchEvent',
         'rsvpEvent',
+        'updateRSVP',
+        'deleteRSVP',
         'ExportEventToICS',
     ];
 
@@ -734,7 +739,119 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi
             $data['event_id']  = $event_id;
             $data['member_id'] = $member_id;
 
-            return $this->created($this->schedule_manager->addRSVP($data, new SummitAttendeeRSVPEmailSender));
+            $rsvp = $this->schedule_manager->addRSVP($data, new SummitAttendeeRSVPEmailSender);
+
+            return $this->created($rsvp->ID);
+
+        } catch (EntityValidationException $ex1) {
+            SS_Log::log($ex1, SS_Log::WARN);
+            return $this->validationError($ex1->getMessages());
+        } catch (NotFoundEntityException $ex2) {
+            SS_Log::log($ex2, SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        } catch (Exception $ex) {
+            SS_Log::log($ex, SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    /**
+     * @return SS_HTTPResponse
+     */
+    public function updateRSVP()
+    {
+        try {
+
+            $data      = $this->getJsonRequest();
+            $event_id  = (int)$this->request->param('EventID');
+            $summit_id = (int)$this->request->param('SUMMIT_ID');
+            $rsvp_id = (int)$this->request->param('RsvpID');
+            $member_id = Member::CurrentUserID();
+
+            if ($member_id <= 0)
+                return $this->forbiddenError();
+
+            if (!$data) return $this->serverError();
+
+            if (intval($summit_id) > 0)
+                $summit = $this->summit_repository->getById(intval($summit_id));
+
+            if (strtolower($summit_id) === 'current')
+                $summit = Summit::ActiveSummit();
+
+            if (is_null($summit))
+                return $this->notFound('summit not found!');
+
+            if (intval($event_id) > 0)
+                $event = $this->summitevent_repository->getById(intval($event_id));
+
+            if (is_null($event))
+                return $this->notFound('event not found!');
+            else if ($event->getSummit()->getIdentifier() != intval($summit_id))
+                return $this->notFound('event not found in current summit');
+
+            $data['summit_id'] = $summit->ID;
+            $data['event_id']  = $event_id;
+            $data['member_id'] = $member_id;
+            $data['rsvp_id'] = $rsvp_id;
+
+            return $this->updated($this->schedule_manager->updateRSVP($data, new SummitAttendeeRSVPEmailSender));
+
+        } catch (EntityValidationException $ex1) {
+            SS_Log::log($ex1, SS_Log::WARN);
+            return $this->validationError($ex1->getMessages());
+        } catch (NotFoundEntityException $ex2) {
+            SS_Log::log($ex2, SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        } catch (Exception $ex) {
+            SS_Log::log($ex, SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    /**
+     * @return SS_HTTPResponse
+     */
+    public function deleteRSVP()
+    {
+        try {
+
+            $data      = $this->getJsonRequest();
+            $event_id  = (int)$this->request->param('EventID');
+            $summit_id = (int)$this->request->param('SUMMIT_ID');
+            $rsvp_id = (int)$this->request->param('RsvpID');
+            $member_id = Member::CurrentUserID();
+
+            if ($member_id <= 0)
+                return $this->forbiddenError();
+
+            if (!$data) return $this->serverError();
+
+            if (intval($summit_id) > 0)
+                $summit = $this->summit_repository->getById(intval($summit_id));
+
+            if (strtolower($summit_id) === 'current')
+                $summit = Summit::ActiveSummit();
+
+            if (is_null($summit))
+                return $this->notFound('summit not found!');
+
+            if (intval($event_id) > 0)
+                $event = $this->summitevent_repository->getById(intval($event_id));
+
+            if (is_null($event))
+                return $this->notFound('event not found!');
+            else if ($event->getSummit()->getIdentifier() != intval($summit_id))
+                return $this->notFound('event not found in current summit');
+
+            $data['summit_id'] = $summit->ID;
+            $data['event_id']  = $event_id;
+            $data['member_id'] = $member_id;
+            $data['rsvp_id'] = $rsvp_id;
+
+            $this->deleted($this->schedule_manager->deleteRSVP($data));
+
+            return $event->getCurrentRSVPSubmissionSeatType();
 
         } catch (EntityValidationException $ex1) {
             SS_Log::log($ex1, SS_Log::WARN);
