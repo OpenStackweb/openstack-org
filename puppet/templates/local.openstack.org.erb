@@ -23,6 +23,18 @@ server {
     error_log /var/log/nginx/local.openstack.org.error.log;
     access_log /var/log/nginx/local.openstack.org.access.log;
 
+    # Directives to send expires headers and turn off 404 error logging.
+    location ~* \.(js|css|png|jpe?g|gif|ico)$ {
+        expires 24h;
+        log_not_found off;
+        try_files $uri $uri/ @production;
+    }
+
+    location @production {
+        resolver 8.8.8.8;
+        proxy_pass http://www.openstack.org/$uri;
+    }
+
     #php-fcgi
     include /etc/nginx/php5-fpm.conf;
     include /etc/nginx/silverstripe.conf;

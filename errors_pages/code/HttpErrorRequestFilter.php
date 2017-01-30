@@ -48,7 +48,7 @@ class HttpErrorRequestFilter implements RequestFilter {
             // set content type
             $response->addHeader('Content-Type','text/html');
             $response->setBody($body);
-            $response->setStatusCode(200);
+            $response->setStatusCode(404);
             return true;
         }
         return true;

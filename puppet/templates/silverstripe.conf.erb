@@ -6,11 +6,6 @@ location / {
     try_files $uri /framework/main.php?url=$uri&$query_string;
 }
 
-
-location ^~ /assets/ {
-    try_files $uri =404;
-}
-
 location ~ /(mysite|framework|cms)/.*\.(php|php3|php4|php5|phtml|inc)$ {
     deny all;
 }
