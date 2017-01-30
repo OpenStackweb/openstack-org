@@ -1,9 +1,11 @@
 # global variables
 
-$os_db_user      = hiera('os_db_user')
-$os_db_password  = hiera('os_db_password')
-$os_db           = 'os_local'
-$developer_email = 'test@test.com'
+$os_db_user          = hiera('os_db_user')
+$os_db_password      = hiera('os_db_password')
+$mysql_root_password = hiera('mysql_root_password')
+$os_db               = hiera('os_db_name')
+$developer_email     = hiera('developer_email')
+$db_dump_url         = hiera('db_dump_url')
 
 $main_packages = [
   'curl',
@@ -12,10 +14,10 @@ $main_packages = [
   'git',
   'geoip-bin',
   'sendmail',
-  'mysql-server-5.6',
   'zip',
   'unzip',
   'nginx',
+  'mysql-client-core-5.6',
 ]
 
 # php packages needed for server
@@ -49,23 +51,32 @@ package { $php5_packages:
   ],
 }
 
+$override_options = {
+  'mysqld' => {
+    'bind-address' => '0.0.0.0',
+  }
+}
+
+class { '::mysql::server':
+  package_name            => 'mysql-server-5.6',
+  root_password           => $mysql_root_password,
+  remove_default_accounts => true,
+  override_options        => $override_options
+}
+
 class { '::mysql::client':
   package_name => 'mysql-client-5.6',
   require => [
     Package[$main_packages],
+    Class['::mysql::server']
   ],
-}
-
-service { "mysql":
-  ensure  => running,
-  require => Class['::mysql::client']
 }
 
 exec { 'download-db':
   cwd       => '/',
   path      => '/usr/bin:/bin:/usr/local/bin:/usr/lib/node_modules/npm/bin',
   logoutput => on_failure,
-  command   => 'wget http://219ce3a47922f82273e7-ab6defd935ab43e677f8278246e07e36.r82.cf1.rackcdn.com/dbdump-current.zip',
+  command   => "wget $db_dump_url",
   require   => Package[$main_packages]
 }
 
@@ -85,17 +96,25 @@ exec { 'rename-db':
   require   => Exec['unzip-db'],
 }
 
+exec { 'mysql-post-install-cmd':
+  cwd       => '/',
+  path      => '/usr/bin:/bin:/usr/local/bin:/usr/lib/node_modules/npm/bin',
+  logoutput => on_failure,
+  command   => "mysql -u root --password=$mysql_root_password -e \"SET GLOBAL innodb_file_format_max = 'Barracuda';SET GLOBAL innodb_file_format = 'Barracuda';\"",
+  require   => Class['::mysql::client'],
+}
+
 #create and import db
 mysql::db { $os_db :
   user           => $os_db_user,
   password       => $os_db_password,
-  host           => 'localhost',
+  host           => '%',
   grant          => ['ALL'],
   sql            => '/dump.sql',
   import_timeout => 900,
   require        => [
-    Service['mysql'],
     Exec['rename-db'],
+    Exec['mysql-post-install-cmd']
   ],
 }
 

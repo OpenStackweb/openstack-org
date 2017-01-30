@@ -45,6 +45,8 @@ global $email_log;
 
 if(Director::isDev()) {
     SS_Log::add_writer(new SS_LogFileWriter(Director::baseFolder() . '/logs/site.log'), SS_Log::ERR);
+    //Force cache to flush on page load if in Dev mode (prevents needing ?flush=1 on the end of a URL)
+    SSViewer::flush_template_cache();
 }
 
 $email_log_writer = new Custom_SS_LogEmailWriter($email_log);

@@ -1,4 +1,7 @@
 ---
+os_db_name: 'os_local'
 os_db_user: 'os_user'
 os_db_password: '1qaz2wsx'
 mysql_root_password: '1qaz2wsx'
+developer_email: 'test@test.com'
+db_dump_url: 'http://219ce3a47922f82273e7-ab6defd935ab43e677f8278246e07e36.r82.cf1.rackcdn.com/dbdump-current.zip'
