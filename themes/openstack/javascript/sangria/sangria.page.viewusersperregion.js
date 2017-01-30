@@ -45,6 +45,15 @@ jQuery(document).ready(function($){
         $('.export_cb',$(this).parent()).prop('checked',cb_value);
     });
 
+    $('input[name="members[]"]').change(function(){
+        var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+        var checked_member = $('input[name="members[]"]:checked');
+        if (checked_member.length == 1) {
+            newurl = newurl + "?members=" + checked_member.val();
+        }
+        document.location = newurl;
+    });
+
     var form_export_members = $('#form-export-members');
 
     var form_validator = form_export_members.validate({

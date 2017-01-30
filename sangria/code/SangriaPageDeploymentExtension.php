@@ -1278,10 +1278,30 @@ SQL;
 
     function UsersPerContinent()
     {
+        $member = Convert::raw2sql(Controller::curr()->request->getVar('members'));
+        $group_ids = [];
+        $members = [];
+        if (!$member) {
+            $members = array(IFoundationMember::FoundationMemberGroupSlug, IFoundationMember::CommunityMemberGroupSlug);
+        } else {
+            $members[] = $member;
+        }
+
+        foreach ($members as $member_group) {
+            $group = Group::get()->filter('Code',$member_group)->first();
+            $group_ids[] = $group->ID;
+        }
+
+        $join_group_ids = implode(",",$group_ids);
+
         $list = new ArrayList();
-        $records = DB::query('SELECT COUNT(M.ID) UsersCount, C.Name AS ContinentName, C.ID ContinentID from Member M INNER JOIN Continent_Countries CC ON M.Country = CC.CountryCode
-INNER JOIN Continent C ON C.ID = CC.ContinentID
-GROUP BY C.Name, C.ID;');
+        $records = DB::query("  SELECT COUNT(M.ID) UsersCount, C.Name AS ContinentName, C.ID ContinentID
+                                FROM Member M
+                                INNER JOIN Continent_Countries CC ON M.Country = CC.CountryCode
+                                INNER JOIN Continent C ON C.ID = CC.ContinentID
+                                INNER JOIN Group_Members GM ON GM.MemberID = M.ID AND GM.GroupID IN ($join_group_ids)
+                                GROUP BY C.Name, C.ID;");
+
         foreach ($records as $record) {
             $count = $record['UsersCount'];
             $continent = $record['ContinentName'];
@@ -1298,12 +1318,30 @@ GROUP BY C.Name, C.ID;');
 
     function UsersPerContinentCountry($continent_id)
     {
+        $member = Convert::raw2sql(Controller::curr()->request->getVar('members'));
+        $group_ids = [];
+        $members = [];
+        if (!$member) {
+            $members = array(IFoundationMember::FoundationMemberGroupSlug, IFoundationMember::CommunityMemberGroupSlug);
+        } else {
+            $members[] = $member;
+        }
+
+        foreach ($members as $member_group) {
+            $group = Group::get()->filter('Code',$member_group)->first();
+            $group_ids[] = $group->ID;
+        }
+
+        $join_group_ids = implode(",",$group_ids);
 
         $list = new ArrayList();
-        $countries = DB::query("SELECT COUNT(M.ID) UsersCount, CC.CountryCode AS Country from Member M INNER JOIN Continent_Countries CC ON M.Country = CC.CountryCode
-INNER JOIN Continent C ON C.ID = CC.ContinentID
-WHERE C.ID = {$continent_id}
-GROUP BY CC.CountryCode;");
+        $countries = DB::query("SELECT COUNT(M.ID) UsersCount, CC.CountryCode AS Country
+                                FROM Member M INNER JOIN Continent_Countries CC ON M.Country = CC.CountryCode
+                                INNER JOIN Continent C ON C.ID = CC.ContinentID
+                                INNER JOIN Group_Members GM ON GM.MemberID = M.ID AND GM.GroupID IN ($join_group_ids)
+                                WHERE C.ID = {$continent_id}
+                                GROUP BY CC.CountryCode;");
+
         foreach ($countries as $country) {
             $count = $country['UsersCount'];
             $country = $country['Country'];
@@ -1317,6 +1355,17 @@ GROUP BY CC.CountryCode;");
         }
 
         return $list;
+    }
+
+    function isMemberGroupSelected($group) {
+        $member = Controller::curr()->request->getVar('members');
+        if (!$member) {
+            return 'checked';
+        } else if ( $member == $group) {
+            return 'checked';
+        } else {
+            return '';
+        }
     }
 
     function UsersCount()

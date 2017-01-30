@@ -17,9 +17,9 @@
                 <input type="submit" class="btn" value="Export selected" id="submit_export"/>
                 <span for="countries[]" class="error" style="margin-left:20px;display:none"></span>
                 <br><br>
-                <input type="checkbox" name="members[]" value="foundation-members" class="export_cb export_cb_fm" checked />Foundation Members
+                <input type="checkbox" name="members[]" value="foundation-members" class="export_cb export_cb_fm" $isMemberGroupSelected(foundation-members) />Foundation Members
                 &nbsp;&nbsp;
-                <input type="checkbox" name="members[]" value="community-members" class="export_cb export_cb_cm" checked />Community Members
+                <input type="checkbox" name="members[]" value="community-members" class="export_cb export_cb_cm" $isMemberGroupSelected(community-members) />Community Members
                 <hr>
                 <input type="checkbox" class="export_cb export_cb_all" />Select All
                 <ul style="list-style: none">
