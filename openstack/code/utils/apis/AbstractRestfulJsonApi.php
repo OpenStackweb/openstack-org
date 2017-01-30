@@ -402,6 +402,7 @@ abstract class AbstractRestfulJsonApi extends Controller
         if (!$this->authenticate()) {
             return $this->permissionFailure();
         }
+
         if (!$this->authorize()) {
             return $this->permissionFailure();
         }
@@ -459,9 +460,9 @@ abstract class AbstractRestfulJsonApi extends Controller
         }
 
         $response->setBody(json_encode($res));
-
+        $controller = Controller::curr();
         //conditional get Request (etags)
-        $request = Controller::curr()->getRequest();
+        $request = is_null($controller) ? $this->request: $controller->getRequest();
         if ($request->isGET() && $use_etag) {
             $etag = md5($response->getBody());
             $requestETag = $request->getHeader('If-None-Match');
