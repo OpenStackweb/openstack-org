@@ -5,7 +5,7 @@
             <li class="{$EvenOdd}">
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" <% if $Top.isVisible == 0 %>hidden<% end_if %>" id="$ID" <% if $Top.IsRequired%>data-rule-required="true" <% end_if %> name="{$Name}" value="$Value"<% if $isChecked %> checked="checked"<% end_if %><% if $isDisabled %> disabled="disabled"<% end_if %> >&nbsp;$Title
+                        <input type="checkbox" class="checkboxset-item" <% if $Top.isVisible == 0 %>hidden<% end_if %>" id="$ID" <% if $Top.IsRequired%>data-rule-required="true" <% end_if %> name="{$Name}" value="$Value"<% if $isChecked %> checked="checked"<% end_if %><% if $isDisabled %> disabled="disabled"<% end_if %> >&nbsp;$Title
                     </label>
                 </div>
             </li>
@@ -24,7 +24,7 @@
         <li class="{$EvenOdd}">
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" <% if $Top.isVisible == 0 %>hidden<% end_if %>" id="$ID" <% if $Top.IsRequired%>data-rule-required="true" <% end_if %> name="{$Name}" value="$Value"<% if $isChecked %> checked="checked"<% end_if %><% if $isDisabled %> disabled="disabled"<% end_if %> >&nbsp;$Title
+                    <input type="checkbox" class="checkboxset-item" <% if $Top.isVisible == 0 %>hidden<% end_if %>" id="$ID" <% if $Top.IsRequired%>data-rule-required="true" <% end_if %> name="{$Name}" value="$Value"<% if $isChecked %> checked="checked"<% end_if %><% if $isDisabled %> disabled="disabled"<% end_if %> >&nbsp;$Title
                 </label>
             </div>
         </li>

@@ -24,6 +24,8 @@ function jqueryValidatorErrorPlacement(error, element) {
         error_container = element.parents('div[class*="textarea"]');
     if(element.hasClass('multidropdown'))
         error_container = element.parents('div[class*="multidropdown"]');
+    if(element.hasClass('checkboxset-item'))
+        error_container = element.parents('div[class*="checkboxset"]');
     if(!element.is(':visible') || error_container == null || error_container.length == 0 || !error_container.is(':visible')){
         error_container = element.closest(":visible");
         error_container.after(error);
