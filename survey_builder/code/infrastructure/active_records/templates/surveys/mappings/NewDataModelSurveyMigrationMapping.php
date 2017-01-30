@@ -58,6 +58,7 @@ class NewDataModelSurveyMigrationMapping extends AbstractSurveyMigrationMapping 
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
+        Requirements::customCSS("#Form_ItemEditForm_action_doNew {display: none}");
 
         $survey_id = isset($_REQUEST['survey_template_id'])?intval($_REQUEST['survey_template_id']) : $this->TargetSurveyID;
 
