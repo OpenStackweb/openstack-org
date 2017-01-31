@@ -14,10 +14,8 @@
             $('.step-main').addClass("active");
         <% else_if $Step == 2 %>
             $('.step-tags').addClass("active");
-            $(document).persistableForm('clearAll');
         <% else_if $Step == 3 %>
             $('.step-speakers').addClass("active");
-            $(document).persistableForm('clearAll');
         <% end_if %>
     </script>
 <% end_if %>

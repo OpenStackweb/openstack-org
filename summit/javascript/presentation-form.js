@@ -94,7 +94,6 @@ $(document).ready(function(){
         getCategories();
         toggleFields();
         $('.track-question').remove();
-        //form.persistableForm('reload');
     });
 
     $('body').on('change', 'input[name=CategoryID][type=radio]', function () {
@@ -114,14 +113,6 @@ $(document).ready(function(){
     });
 
     form.ready(function(){
-        console.log('form ready ...');
-        form.persistableForm({
-            ignoreFields: [
-                'PresentationForm_PresentationForm_SummitID',
-                'PresentationForm_PresentationForm_SecurityID',
-            ]
-        });
-
         getCategories();
         toggleFields();
         getExtraQuestions();
@@ -167,9 +158,6 @@ function getCategories() {
                         getExtraQuestions();
                     }
                 }
-
-                if(controls.length > 0)
-                    form.persistableForm('reloadControls', controls)
             }
         }).fail(function (jqXHR, textStatus, errorThrown) {
             alert('there was an error, please contact your administrator');
@@ -214,10 +202,7 @@ function getExtraQuestions() {
                     $('#category_options').after( val.Html );
                     controls.push(val.Name);
                 });
-
-                if(controls.length > 0)
-                    form.persistableForm('reloadControls', controls)
-            }
+          }
         }).fail(function (jqXHR, textStatus, errorThrown) {
             alert('there was an error, please contact your administrator');
         });
