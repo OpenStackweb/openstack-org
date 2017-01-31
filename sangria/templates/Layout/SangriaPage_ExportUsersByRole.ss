@@ -52,7 +52,10 @@
         <input id="fields[]" class="field_cb" name="fields[PostCode]"  checked type="checkbox" value="Member.PostCode"/>PostCode
     </div>
     <div class="cb_wrapper">
-        <input id="fields[]" class="field_cb" name="fields[Country]"  checked type="checkbox" value="Member.Country"/>Country
+        <input id="fields[]" class="field_cb" name="fields[Country]"  checked type="checkbox" value="Countries.Name"/>Country
+    </div>
+    <div class="cb_wrapper">
+        <input id="fields[]" class="field_cb" name="fields[Continent]"  checked type="checkbox" value="Continent.Name"/>Continent
     </div>
     <div class="cb_wrapper">
         <input id="fields[]" class="field_cb" name="fields[JobTitle]"  checked type="checkbox" value="Member.JobTitle"/>Job Title

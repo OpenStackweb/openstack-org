@@ -1508,12 +1508,15 @@ WHERE CC.ContinentID = {$continent_id} GROUP BY CC.CountryCode; ");
             'Member.Email',
             'Member.City',
             'Member.State',
-            'Member.Country'
+            'Member.Country',
+            'Continent.Name'
         );
         $query->setFrom('Member');
         $query->setSelect($select_fields);
         $query->addInnerJoin('Group_Members', 'Group_Members.MemberID = Member.ID');
         $query->addInnerJoin('Group', "Group.ID = Group_Members.GroupID AND Group.Code IN (" . $join_members . ")");
+        $query->addLeftJoin('Continent_Countries', 'Continent_Countries.CountryCode = Member.Country');
+        $query->addLeftJoin('Continent', 'Continent.ID = Continent_Countries.ContinentID');
         $query->setWhere("Member.Country IN (" . $join_countries . ")");
         $query->setOrderBy('SurName,FirstName');
 
@@ -1527,7 +1530,8 @@ WHERE CC.ContinentID = {$continent_id} GROUP BY CC.CountryCode; ");
                 'Email' => $row['Email'],
                 'City' => $row['City'],
                 'State' => $row['State'],
-                'Country' => CountryCodes::$iso_3166_countryCodes[$row['Country']]
+                'Country' => CountryCodes::$iso_3166_countryCodes[$row['Country']],
+                'Continent' => $row['Name']
             );
 
             array_push($data, $member);

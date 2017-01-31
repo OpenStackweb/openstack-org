@@ -33,7 +33,7 @@ class SpeakersSubmissionsExportQuery implements IQueryHandler {
                     INNER JOIN Presentation_Speakers PS on PS.PresentationSpeakerID = S.ID
                     INNER JOIN Presentation P ON P.ID = PS.PresentationID
                     INNER JOIN SummitEvent E ON E.ID = P.ID
-                    INNER JOIN PresentationCategory PC ON PC.ID = P.CategoryID
+                    INNER JOIN PresentationCategory PC ON PC.ID = E.CategoryID
                     LEFT  JOIN SummitSelectedPresentation SSP ON SSP.PresentationID = P.ID
                     LEFT  JOIN SummitSelectedPresentationList SSPL ON SSPL.ID = SSP.SummitSelectedPresentationListID
                     WHERE E.SummitID IN ( $selectedSummits ) ORDER BY P.ID,S.MemberID,SSP.LastEdited DESC

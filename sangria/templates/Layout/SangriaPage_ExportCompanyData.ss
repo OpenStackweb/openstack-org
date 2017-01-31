@@ -23,7 +23,8 @@
     <div class="cb_field company"><input name="fields[Company]" checked type="checkbox" value="Company.Name"/>Company Name</div>
     <div class="cb_field company"><input name="fields[City]" checked type="checkbox" value="Company.City"/>City</div>
     <div class="cb_field company"><input name="fields[State]" checked type="checkbox" value="Company.State"/>State</div>
-    <div class="cb_field company"><input name="fields[Country]" checked type="checkbox" value="Company.Country"/>Country</div>
+    <div class="cb_field company"><input name="fields[Country]" checked type="checkbox" value="Countries.Name"/>Country</div>
+    <div class="cb_field company"><input name="fields[Continent]" checked type="checkbox" value="Continent.Name"/>Continent</div>
     <div class="cb_field company"><input name="fields[Industry]" checked type="checkbox" value="Company.Industry"/>Industry</div>
     <div class="cb_field company"><input name="fields[Contact Email]" checked type="checkbox" value="Company.ContactEmail"/>Contact Email</div>
     <div class="cb_field company"><input name="fields[Admin Email]" checked type="checkbox" value="Company.AdminEmail"/>Admin Email</div>
