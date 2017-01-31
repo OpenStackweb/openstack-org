@@ -44,9 +44,9 @@ Vagrant.configure(2) do |config|
   # Example for VirtualBox:
   #
   config.vm.provider "virtualbox" do |vb|
-        vb.memory = "4096"
+        vb.memory = "2048"
         vb.name   = "local.openstack.org"
-	    vb.cpus	  = 2
+	    vb.cpus	  = 1
   end
 
   # use https://github.com/oscar-stack/vagrant-hosts
