@@ -1370,7 +1370,25 @@ SQL;
 
     function UsersCount()
     {
-        return DB::query("SELECT COUNT(M.ID) from Member M INNER JOIN Continent_Countries CC ON M.Country = CC.CountryCode;")->value();
+        $member = Convert::raw2sql(Controller::curr()->request->getVar('members'));
+        $group_ids = [];
+        $members = [];
+        if (!$member) {
+            $members = array(IFoundationMember::FoundationMemberGroupSlug, IFoundationMember::CommunityMemberGroupSlug);
+        } else {
+            $members[] = $member;
+        }
+
+        foreach ($members as $member_group) {
+            $group = Group::get()->filter('Code',$member_group)->first();
+            $group_ids[] = $group->ID;
+        }
+
+        $join_group_ids = implode(",",$group_ids);
+
+        return DB::query("  SELECT COUNT(M.ID) from Member M
+                            INNER JOIN Continent_Countries CC ON M.Country = CC.CountryCode
+                            INNER JOIN Group_Members GM ON GM.MemberID = M.ID AND GM.GroupID IN ($join_group_ids);")->value();
     }
 
     function CountriesWithUsers($continent_id)
