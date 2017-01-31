@@ -1,7 +1,23 @@
-.company-logo,
-p.minh100 {
+
+#about-open-source-days a.btn-block {
+    margin-bottom: 8px;
+}
+
+#about-open-source-days a.btn.btn-block {
+  background-color: #DA422F;
+  margin-bottom: 10px;
+}
+
+#about-open-source-days a,
+#about-open-source-days a:visited {
+    color: #fff;
+}
+
+.company-desc {
   min-height: 100px;
 }
+
+p.learn-more-button {display: none;}
 
 #osd-register {
 	background: #DA422F url(/summit/images/boston/group-4-background.jpg) no-repeat center center scroll;
