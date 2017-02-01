@@ -126,6 +126,10 @@
     top: -10px;
 }
 
+.icon-attachment {
+    font-size: 1.3em;
+}
+
 .info_item_text {
     float: left;
     width: 90%;

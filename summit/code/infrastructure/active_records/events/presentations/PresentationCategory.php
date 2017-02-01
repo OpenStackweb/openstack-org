@@ -139,7 +139,7 @@ class PresentationCategory extends DataObject
     }
 
     public function hasEventsPublished(){
-        return Presentation::get()->filter(["SummitID" => $this->SummitID, "Published" => 1 , "CategoryID" => $this->ID])->count() > 0;
+        return SummitEvent::get()->filter(["SummitID" => $this->SummitID, "Published" => 1 , "CategoryID" => $this->ID])->count() > 0;
     }
 
     protected function onBeforeWrite() {

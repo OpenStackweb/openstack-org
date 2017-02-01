@@ -12,11 +12,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-interface ISummitEventTypeTaxonomy
+final class SummitEventWithFileMigration extends AbstractDBMigrationTask
 {
-    const Event         = 1;
-    const Presentation  = 2;
-    const GroupEvent    = 3;
-    const TeamEvent     = 4;
-    const EventWithFile = 5;
+    protected $title = "SummitEventWithFileMigration";
+
+    protected $description = "migrate lunch and breaks event types";
+
+    function doUp()
+    {
+        global $database;
+
+        $boston_summit = Summit::get()->byID(22);
+        Summit::seedBasicEventTypes($boston_summit->ID);
+        $old_type = $boston_summit->EventTypes()->filter('Type',ISummitEventType::Lunch_Breaks)->first();
+
+        $old_type->delete();
+
+    }
+
+    function doDown()
+    {
+        // TODO: Implement doDown() method.
+    }
 }

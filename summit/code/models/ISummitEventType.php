@@ -25,6 +25,10 @@ interface ISummitEventType extends IEntity
 
     const Lunch_Breaks  = 'Lunch & Breaks';
 
+    const Lunch  = 'Lunch';
+
+    const Breaks  = 'Breaks';
+
     const EveningEvents = 'Evening Events';
 
     const GroupsEvents  = 'Groups Events';

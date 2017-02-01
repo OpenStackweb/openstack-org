@@ -87,7 +87,7 @@
             </div>
             <div class="form-group">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <label for="event_type">Event Type</label>
                         <select class="form-control" id="event_type" name="event_type">
                             <option value="">-- Select a Type --</option>
@@ -106,7 +106,7 @@
                             <% end_loop %>
                         </select>
                     </div>
-                    <div class="col-md-3 track_container">
+                    <div class="col-md-4 track_container">
                         <label for="track">Track</label>
                         <select class="form-control" id="track" name="track">
                             <option value="">-- Select a Track --</option>
@@ -115,7 +115,7 @@
                             <% end_loop %>
                         </select>
                     </div>
-                    <div class="col-md-3 level_container" style="display:none;">
+                    <div class="col-md-4 level_container" style="display:none;">
                         <label for="level">Level</label>
                         <select class="form-control" id="level" name="level">
                             <option value="">-- Select a Level --</option>
@@ -146,7 +146,7 @@
             <div class="form-group">
                 <div class="row">
                     <div class="col-md-4">
-                        <!-- https://github.com/flatlogic/awesome-bootstrap-checkbox -->
+                        <label>Feedback</label><br>
                         <div class="checkbox">
                             <input type="checkbox" id="allow_feedback" name="allow_feedback" <% if $Event.AllowFeedBack %> checked <% end_if %>>
                             <label for="allow_feedback">
@@ -176,7 +176,7 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group tag-container">
                 <div class="row">
                     <div class="col-md-12">
                         <label for="tags">Tags</label><br>
@@ -197,6 +197,23 @@
                     <div class="col-md-12">
                         <label for="groups">Groups</label><br>
                         <input id="groups" name="groups"/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group attachment_container" style="display:none;">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="event_attachment">Attachment</label><br>
+                        <img class="event_attachment" src="{$Event.Attachment.getUrl()}" />
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <span class="btn btn-default btn-file">
+                                    Change… <input type="file" id="event-attachment" name="event-attachment">
+                                </span>
+                            </span>
+                            <input id="attachment-filename" type="text" class="form-control" readonly="">
+                            <input id="attachment-id" name="attachment-id" type="hidden" value="{$Event.AttachmentID}">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -295,8 +312,6 @@
         <% end_if %>
 
         $(document).ready(function(){
-            $("#event_type").chosen();
-
             <% if $Top.Event %>
                 // update the event types availables on combo filtering
                 // by the current event type
@@ -317,7 +332,6 @@
                     }
                 });
 
-                $("#event_type").trigger("chosen:updated");
 
             <% end_if %>
         });

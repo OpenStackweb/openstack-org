@@ -30,6 +30,9 @@ final class SummitEventFactory implements ISummitEventFactory
         if(SummitEventType::isPrivate($event_type->Type))
             $event = new SummitGroupEvent();
 
+        if(SummitEventType::isTypeWithFile($event_type->Type))
+            $event = new SummitEventWithFile();
+
         $event->SummitID = $summit->getIdentifier();
 
         return $event;

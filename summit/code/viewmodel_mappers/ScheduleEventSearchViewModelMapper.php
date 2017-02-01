@@ -46,7 +46,8 @@ final class ScheduleEventSearchViewModelMapper implements IViewModelMapper
                 'tags_id' => array(),
                 'own' => is_null($current_member) || !$is_attendee ? false : $current_member->isOnMySchedule($e->ID),
                 'favorite' => false,
-                'show' => true
+                'show' => true,
+                'attachment_url' => '',
             );
 
             foreach ($e->Tags() as $t) {
@@ -75,6 +76,10 @@ final class ScheduleEventSearchViewModelMapper implements IViewModelMapper
                 $entry['moderator_id'] = $e->ModeratorID;
                 $entry['track_id'] = $e->CategoryID;
                 $entry['level'] = $e->Level;
+            }
+
+            if ($e instanceof SummitEventWithFile) {
+                $entry['attachment_url'] = ($e->Attachment()) ? $e->Attachment()->getUrl() : '';
             }
 
             $events[] = $entry;

@@ -43,6 +43,14 @@ interface ISummitEventManager
 
     /**
      * @param ISummit $summit
+     * @param $event_id
+     * @param $tmp_file
+     * @return File
+     */
+    public function uploadAttachment(ISummit $summit, $event_id, $tmp_file);
+
+    /**
+     * @param ISummit $summit
      * @param array $data
      */
     public function updateAndPublishBulkEvents(ISummit $summit, array $data);

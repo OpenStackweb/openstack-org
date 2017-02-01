@@ -256,8 +256,9 @@ final class SummitAdminUI extends DataExtension
             (
                 array
                 (
-                    'SummitEvent'      => 'Event',
-                    'SummitGroupEvent' => 'Group Event',
+                    'SummitEvent'           => 'Event',
+                    'SummitEventWithFile'   => 'Event with attachment',
+                    'SummitGroupEvent'      => 'Group Event',
                 )
             );
             $config->addComponent($multi_class_selector);

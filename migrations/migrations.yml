@@ -60,3 +60,4 @@ migrations:
   - PushNotificationMigration
   - RemoveSlugColMigration
   - NewsFeaturedToArchiveMigration
+  - SummitEventWithFileMigration

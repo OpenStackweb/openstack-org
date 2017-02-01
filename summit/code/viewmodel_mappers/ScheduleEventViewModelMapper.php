@@ -28,7 +28,6 @@ final class ScheduleEventViewModelMapper implements IViewModelMapper
         foreach ($schedule as $e) {
 
             $entry = [
-
                 'id' => intval($e->ID),
                 'title' => $e->Title,
                 'class_name' => $e->ClassName,
@@ -54,7 +53,8 @@ final class ScheduleEventViewModelMapper implements IViewModelMapper
                 'summit_id' => intval($summit->ID),
                 'time_zone_id' => $summit->getTimeZoneName(),
                 'attendees_schedule_count' => $e->AttendeesScheduleCount(),
-                'track_id' => intval($e->CategoryID)
+                'track_id' => intval($e->CategoryID),
+                'attachment_url' => '',
             ];
 
             foreach ($e->Tags() as $t) {
@@ -82,6 +82,11 @@ final class ScheduleEventViewModelMapper implements IViewModelMapper
                 $entry['level'] = $e->Level;
                 $entry['status'] = $e->SelectionStatus();
             }
+
+            if ($e instanceof SummitEventWithFile) {
+                $entry['attachment_url'] = ($e->Attachment()) ? $e->Attachment()->getUrl() : '';
+            }
+
             $events[] = $entry;
         };
 

@@ -74,6 +74,14 @@
                         </div>
                     </div>
                 <% end_if %>
+                <% if Event.ClassName == 'SummitEventWithFile' %>
+                    <div class="row info_item">
+                        <div class="col-md-2 col-xs-2 info_item_icon"><i class="fa fa-download icon-attachment"></i></div>
+                        <div class="col-md-10 col-xs-10 info_item_text">
+                            <a href="{$Event.Attachment().getUrl()}" target="_blank"> Attachment </a>
+                        </div>
+                    </div>
+                <% end_if %>
                 <% if $Event.isPresentation %>
                     <div class="row info_item">
                         <div class="col-md-2 col-xs-2 info_item_icon"><i class="fa fa-2x fa-signal icon-level"></i></div>

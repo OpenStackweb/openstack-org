@@ -411,7 +411,7 @@ class SummitEvent extends DataObject implements ISummitEvent
         $f->addFieldToTab
         (
             'Root.Main',
-            $ddl_location = new DropdownField
+            $ddl_type = new DropdownField
             (
                 'TypeID',
                 'Event Type',
@@ -419,7 +419,7 @@ class SummitEvent extends DataObject implements ISummitEvent
             )
         );
 
-        $ddl_location->setEmptyString('-- Select a Event Type --');
+        $ddl_type->setEmptyString('-- Select a Event Type --');
 
         $f->addFieldToTab('Root.Main', new HiddenField('SummitID','SummitID'));
 

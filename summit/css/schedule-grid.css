@@ -165,6 +165,10 @@ i.collapse-nav {
     color: #2A4E68;
 }
 
+.attachment-link {
+    margin-left: 10px;
+}
+
 .event-details
 {
     background-color: #edf2f7;

@@ -987,6 +987,8 @@ final class SummitAppAdminController extends Controller implements PermissionPro
             return ISummitEventTypeTaxonomy::Presentation;
         if(SummitEventType::isPrivate($type))
             return ISummitEventTypeTaxonomy::GroupEvent;
+        if(SummitEventType::isTypeWithFile($type))
+            return ISummitEventTypeTaxonomy::EventWithFile;
         return ISummitEventTypeTaxonomy::Event;
     }
 }

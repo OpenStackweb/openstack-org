@@ -16,8 +16,15 @@ var TaxonomyEvent         = 1;
 var TaxonomyPresentation  = 2;
 var TaxonomyGroupEvent    = 3;
 var TaxonomyTeamEvent     = 4;
+var TaxonomyEventWithFile = 5;
 
 $(document).ready(function(){
+
+    $(document).on('change', '.btn-file :file', function() {
+        var input = $(this),
+            label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+        $('#attachment-filename').val(label);
+    });
 
     $("#location").chosen();
 
@@ -115,6 +122,14 @@ $(document).ready(function(){
         }
         else{
             $('.groups_container').hide();
+        }
+
+        if(type == TaxonomyEventWithFile ){
+            $('.attachment_container').show();
+        }
+        else{
+            $('.attachment_container').hide();
+            $('#attachment-filename').val('');
         }
     });
     // speakers autocomplete
@@ -485,16 +500,21 @@ $(document).ready(function(){
             contentType: "application/json; charset=utf-8",
             dataType: "json"
         }).done(function(saved_event) {
-            if (event_id) {
-                swal("Updated!", "Your event was updated successfully.", "success");
-                location.reload();
-            } else {
-                swal("Saved!", "Your event was created successfully.", "success");
-                window.location = window.location+'/'+saved_event.ID;
-                $('#event_id').val(saved_event.ID);
-                $('.active','.breadcrumb').html(saved_event.Title);
-            }
+
+            $.when( uploadAttachment(saved_event.ID) ).then(function( data, textStatus, jqXHR ) {
+                if (event_id) {
+                    swal("Updated!", "Your event was updated successfully.", "success");
+                    //location.reload();
+                } else {
+                    swal("Saved!", "Your event was created successfully.", "success");
+                    //window.location = window.location+'/'+saved_event.ID;
+                    $('#event_id').val(saved_event.ID);
+                    $('.active','.breadcrumb').html(saved_event.Title);
+                }
+            });
+
             form.find(':submit').removeAttr('disabled');
+
         }).fail(function(jqXHR) {
             var responseCode = jqXHR.status;
             if(responseCode == 412) {
@@ -506,6 +526,32 @@ $(document).ready(function(){
             form.find(':submit').removeAttr('disabled');
         });
 
+    }
+
+    function uploadAttachment(event_id)
+    {
+        var summit_id  = $('#summit_id').val();
+        var url           = 'api/v1/summits/'+summit_id+'/events/'+event_id+'/attach';
+        var file_data  = $("#event-attachment").prop("files")[0];
+        var form_data  = new FormData();
+        form_data.append("file", file_data);
+
+        if ($('#attachment-filename').val()) {
+            $.ajax({
+                url: url,
+                dataType: 'JSON',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: form_data,
+                type: 'POST',
+                success: function(attachment_id){
+                },
+                error: function(response,status,error) {
+                    swal('Validation error', response.responseJSON.messages[0].message, 'warning');
+                }
+            });
+        }
     }
 
 });

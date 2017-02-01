@@ -140,16 +140,21 @@ SQL;
      * @param array $order
      * @return array
      */
-    public function getUnpublishedBySummit($summit_id, $event_type = null, $search_term, $page = 1, $page_size = 10, $order = null)
+    public function getUnpublishedBySummit($summit_id, $event_types = [], $search_term, $page = 1, $page_size = 10, $order = null)
     {
+        $presentation_types = PresentationType::presentationTypes();
+        $presentation_types_csv = "'".implode("','",$presentation_types)."'";
+
+        $event_types_csv = "'".implode("','",$event_types)."'";
+
         if(is_null($order)) $order = array('SummitEvent.Created' => 'ASC');
 
-        $where_clause = "SummitEvent.Title IS NOT NULL AND SummitEvent.Title <>'' AND (SummitEventType.Type NOT IN ('Presentation','Panel','Keynotes')) ";
+        $where_clause = "SummitEvent.Title IS NOT NULL AND SummitEvent.Title <>'' AND (SummitEventType.Type NOT IN (".$presentation_types_csv.")) ";
         if (!empty($search_term)) {
             $where_clause .= " AND (SummitEvent.Title LIKE '%{$search_term}%' OR SummitEvent.ID = '{$search_term}' OR SummitEvent.Abstract LIKE '%{$search_term}%')";
         }
         if(!empty($event_type)){
-            $where_clause .= " AND SummitEventType.Type = '{$event_type}'";
+            $where_clause .= " AND (SummitEventType.Type IN (".$event_types_csv.")) ";
         }
 
         $list      = SummitEvent::get()

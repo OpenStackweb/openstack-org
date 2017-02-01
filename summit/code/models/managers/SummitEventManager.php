@@ -194,7 +194,7 @@ final class SummitEventManager implements ISummitEventManager
      */
     public function createEvent(ISummit $summit, array $event_data)
     {
-        return $this->saveOrUpdateEvent($summit, $event_data);;
+        return $this->saveOrUpdateEvent($summit, $event_data);
     }
 
     /**
@@ -300,6 +300,41 @@ final class SummitEventManager implements ISummitEventManager
             }
             $event->write();
             return $event;
+        });
+    }
+
+    /**
+     * @param ISummit $summit
+     * @param $event_id
+     * @param $tmp_file
+     * @return File
+     */
+    public function uploadAttachment(ISummit $summit, $event_id, $tmp_file)
+    {
+
+        return $this->tx_service->transaction(function () use ($summit, $event_id, $tmp_file) {
+            $event_id = intval($event_id);
+            $event    = $this->event_repository->getById($event_id);
+
+            if(is_null($event) || !$event->is_a('SummitEventWithFile') ) throw new NotFoundEntityException('SummitEventWithFile');
+
+            $attachment = new File();
+            $upload = new Upload();
+            $validator = new Upload_Validator();
+            $validator->setAllowedExtensions(array('png','jpg','jpeg','gif','pdf'));
+            $validator->setAllowedMaxFileSize(4*1024*1024); // 4Mb
+            $upload->setValidator($validator);
+
+            if (!$upload->loadIntoFile($tmp_file,$attachment,'summit-event-attachments')) {
+                throw new EntityValidationException($upload->getErrors());
+            }
+
+            $new_file_id = $attachment->write();
+
+            $event->AttachmentID = $new_file_id;
+
+            return $attachment;
+
         });
     }
 

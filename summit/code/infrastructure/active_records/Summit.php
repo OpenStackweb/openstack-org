@@ -1116,14 +1116,23 @@ final class Summit extends DataObject implements ISummit
         $hand_on_labs->SummitID = $summit_id;
         $hand_on_labs->write();
 
-        $lunch_breaks = SummitEventType::get()->filter(['Type' => ISummitEventType::Lunch_Breaks, 'SummitID' => $summit_id])->first();
-        if (is_null($lunch_breaks)) {
-            $lunch_breaks = new SummitEventType();
+        $lunch = SummitEventType::get()->filter(['Type' => ISummitEventType::Lunch, 'SummitID' => $summit_id])->first();
+        if (is_null($lunch)) {
+            $lunch = new SummitEventType();
         }
 
-        $lunch_breaks->Type = ISummitEventType::Lunch_Breaks;
-        $lunch_breaks->SummitID = $summit_id;
-        $lunch_breaks->write();
+        $lunch->Type = ISummitEventType::Lunch;
+        $lunch->SummitID = $summit_id;
+        $lunch->write();
+
+        $breaks = SummitEventType::get()->filter(['Type' => ISummitEventType::Breaks, 'SummitID' => $summit_id])->first();
+        if (is_null($breaks)) {
+            $breaks = new SummitEventType();
+        }
+
+        $breaks->Type = ISummitEventType::Breaks;
+        $breaks->SummitID = $summit_id;
+        $breaks->write();
 
 
         $evening_events = SummitEventType::get()->filter(['Type' => ISummitEventType::EveningEvents, 'SummitID' => $summit_id])->first();

@@ -79,6 +79,7 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
 
     static $url_handlers = array(
         'POST '                       => 'createEvent',
+        'POST $EVENT_ID!/attach'      => 'uploadAttachment',
         'PUT bulk'                    => 'updateBulkEvents',
         'PUT bulk_presentations'      => 'updateBulkPresentations',
         'PUT publish/bulk'            => 'updateAndPublishBulkEvents',
@@ -101,6 +102,7 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
         'updateAndPublishBulkEvents',
         'unPublishBulkEvents',
         'updateBulkPresentations',
+        'uploadAttachment',
     );
 
     public function getUnpublishedEventsBySource(SS_HTTPRequest $request) {
@@ -131,14 +133,14 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
                     list($page, $page_size, $count, $data) = $this->summitpresentation_repository->getUnpublished($summit_id,$event_types,$filters,$page,$page_size,$order);
                     break;
                 case 'evening_events':
-                    $event_type = ISummitEventType::EveningEvents;
+                    $event_types = [ISummitEventType::EveningEvents];
                     $search_term = $filters['search_term'];
-                    list($page, $page_size, $count, $data) = $this->summitevent_repository->getUnpublishedBySummit($summit_id, $event_type, $search_term, $page,$page_size, $order);
+                    list($page, $page_size, $count, $data) = $this->summitevent_repository->getUnpublishedBySummit($summit_id, $event_types, $search_term, $page,$page_size, $order);
                     break;
                 case 'lunch_events':
-                    $event_type = ISummitEventType::Lunch_Breaks;
+                    $event_types = [ISummitEventType::Lunch, ISummitEventType::Breaks];
                     $search_term = $filters['search_term'];
-                    list($page, $page_size, $count, $data) = $this->summitevent_repository->getUnpublishedBySummit($summit_id, $event_type, $search_term, $page,$page_size, $order);
+                    list($page, $page_size, $count, $data) = $this->summitevent_repository->getUnpublishedBySummit($summit_id, $event_types, $search_term, $page,$page_size, $order);
                     break;
                 case 'all_events':
                     list($page, $page_size, $count, $data) = $this->summitpresentation_repository->getUnpublished($summit_id,[],$filters,$page,$page_size,$order);
@@ -536,6 +538,34 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
         {
             SS_Log::log($ex3->getMessage(), SS_Log::WARN);
             return $this->notFound($ex3->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    public function uploadAttachment(SS_HTTPRequest $request){
+        try
+        {
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $event_id   = intval($request->param('EVENT_ID'));
+            $summit       = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+
+            $attachment = $this->summit_manager->uploadAttachment($summit, $event_id, $_FILES['file']);
+            return $this->ok($attachment->ID);
+        }
+        catch(EntityValidationException $ex1)
+        {
+            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
+            return $this->validationError($ex1->getMessages());
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
         }
         catch(Exception $ex)
         {

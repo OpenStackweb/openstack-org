@@ -292,7 +292,10 @@
                 myschedule_container+
                 '</div>'+
                 '<div class="row">'+
-                '<div class="col-md-10 event-title"></div>'+
+                '<div class="col-md-10">'+
+                '<span class="event-title"></span>'+
+                '<a class="search-link attachment-link" target="_blank"><i class="search-link fa fa-download" aria-hidden="true"></i></a>'+
+                '</div>'+
                 cal_synch_container+
                 '</div>'+
                 '<div class="row">'+
@@ -316,7 +319,13 @@
             var event_directives  = {
                 'div.event-details@id':  function (arg){ return 'event_details_'+arg.item.id; },
                 '@id': function(arg){ return 'event_'+arg.item.id; },
-                'div.event-title': 'event.title',
+                'span.event-title': 'event.title',
+                'a.attachment-link@style': function(arg){
+                    return (arg.item.attachment_url != '') ? '' : 'display:none';
+                },
+                'a.attachment-link@href': function(arg){
+                    return arg.item.attachment_url;
+                },
                 'div.main-event-content@data-event-id': 'event.id',
                 'div.main-event-content@style': function (arg){
                     var category_group_ids = arg.item.category_group_ids;
@@ -359,7 +368,7 @@
                     if (arg.item.location_id) {
                         return self.summit.locations[arg.item.location_id].link;
                     } else {
-                        return '/summit/barcelona-2016/venues';
+                        return self.summit.link + 'venues';
                     }
                  };
             }

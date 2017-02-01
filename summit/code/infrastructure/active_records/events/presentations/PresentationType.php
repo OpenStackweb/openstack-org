@@ -100,4 +100,11 @@ class PresentationType extends SummitEventType
         return PresentationType::get()->filter('Type', $type)->count() > 0;
     }
 
+    /**
+     * @return array()
+     */
+    static public function presentationTypes(){
+        return [IPresentationType::Presentation, IPresentationType::Keynotes, IPresentationType::LightingTalks, IPresentationType::Panel];
+    }
+
 }
