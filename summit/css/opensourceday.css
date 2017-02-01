@@ -16,8 +16,6 @@
   min-height: 100px;
 }
 
-p.learn-more-button {display: none;}
-
 #osd-register {
 	background: #DA422F url(/summit/images/boston/group-4-background.jpg) no-repeat center center scroll;
 	-webkit-background-size: cover;
