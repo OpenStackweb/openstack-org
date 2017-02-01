@@ -54,27 +54,27 @@ final class Summit extends DataObject implements ISummit
         'Type' => 'SummitType',
     );
 
-    private static $has_many = array
-    (
-        'Presentations' => 'Presentation',
-        'Categories' => 'PresentationCategory',
-        'CategoryGroups' => 'PresentationCategoryGroup',
-        'Locations' => 'SummitAbstractLocation',
-        'EventTypes' => 'SummitEventType',
-        'Events' => 'SummitEvent',
-        'Attendees' => 'SummitAttendee',
-        'SummitTicketTypes' => 'SummitTicketType',
+    private static $has_many = [
+        'Presentations'                => 'Presentation',
+        'Categories'                   => 'PresentationCategory',
+        'CategoryGroups'               => 'PresentationCategoryGroup',
+        'Locations'                    => 'SummitAbstractLocation',
+        'EventTypes'                   => 'SummitEventType',
+        'Events'                       => 'SummitEvent',
+        'Attendees'                    => 'SummitAttendee',
+        'SummitTicketTypes'            => 'SummitTicketType',
         'SummitRegistrationPromoCodes' => 'SummitRegistrationPromoCode',
-        'Notifications' => 'SummitPushNotification',
-        'EntityEvents' => 'SummitEntityEvent',
-        'TrackChairs' => 'SummitTrackChair',
-        'RandomVotingLists' => 'PresentationRandomVotingList',
-        'SummitAssistances' => 'PresentationSpeakerSummitAssistanceConfirmationRequest',
-        'RSVPTemplates' => 'RSVPTemplate',
-        'SpeakerAnnouncementEmails' => 'SpeakerAnnouncementSummitEmail',
-        'SummitPackages' => 'SummitPackage',
-        'SummitAddOns' => 'SummitAddOn',
-    );
+        'Notifications'                => 'SummitPushNotification',
+        'EntityEvents'                 => 'SummitEntityEvent',
+        'TrackChairs'                  => 'SummitTrackChair',
+        'RandomVotingLists'            => 'PresentationRandomVotingList',
+        'SummitAssistances'            => 'PresentationSpeakerSummitAssistanceConfirmationRequest',
+        'RSVPTemplates'                => 'RSVPTemplate',
+        'SpeakerAnnouncementEmails'    => 'SpeakerAnnouncementSummitEmail',
+        'SummitPackages'               => 'SummitPackage',
+        'SummitAddOns'                 => 'SummitAddOn',
+        'WIFIConnections'              => 'SummitWIFIConnection',
+    ];
 
     /**
      * @var array

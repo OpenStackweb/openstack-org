@@ -386,14 +386,14 @@ final class SummitAdminUI extends DataExtension
             $f->addFieldToTab('Root.RSVPTemplates', $gridField);
 
             // Summit Packages
-            $config = GridFieldConfig_RecordEditor::create(50);
+            $config = GridFieldConfig_RecordEditor::create(PHP_INT_MAX);
             $config->addComponent(new GridFieldSortableRows('Order'));
             $gridField = new GridField('SummitPackages', 'Sponsor Packages', $this->owner->SummitPackages(), $config);
             $f->addFieldToTab('Root.Sponsor Packages', $gridField);
 
             // Summit Add Ons
 
-            $config = GridFieldConfig_RecordEditor::create(50);
+            $config = GridFieldConfig_RecordEditor::create(PHP_INT_MAX);
             $config->addComponent(new GridFieldSortableRows('Order'));
 
             // Remove pagination so that you can sort all add-ons collectively
@@ -402,6 +402,13 @@ final class SummitAdminUI extends DataExtension
 
             $gridField = new GridField('SummitAddOn', 'Sponsor Add Ons', $this->owner->SummitAddOns(), $config);
             $f->addFieldToTab('Root.Sponsor Add Ons', $gridField);
+
+            // Summit WIFI Connections
+
+            $config = GridFieldConfig_RecordEditor::create(PHP_INT_MAX);
+
+            $gridField = new GridField('WIFIConnections', 'WIFI Connections', $this->owner->WIFIConnections(), $config);
+            $f->addFieldToTab('Root.WIFI Connections', $gridField);
 
         }
     }
