@@ -214,11 +214,15 @@ final class SangriaSurveyBuilderExtension extends Extension
 </nav>
 HTML;
 
+        $surveys = new ArrayList($surveys);
+        
         $result = [
             'Templates' => new ArrayList($templates),
-            'Surveys' => new ArrayList($surveys),
+            'Surveys' => $surveys,
             'Questions' => new ArrayList($selected_template->getAllFilterableQuestions()),
-            'Pager' => $pager
+            'Pager' => $pager,
+            'CompleteCount' => $surveys->filter('Status', 'COMPLETE')->count(),
+            'DeploymentsCount' => array_sum(array_map(function($item){ return $item->EntitySurveysCount();},$surveys->toArray())),
         ];
 
         return $result;

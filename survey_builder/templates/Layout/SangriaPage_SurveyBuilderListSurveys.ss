@@ -1,6 +1,11 @@
 <h2>Surveys</h2>
 <% include SangriaPage_SurveyBuilderListFilter %>
 <hr>
+<div class="row">
+    <div class="col-md-3"> Completed: $CompleteCount</div>
+    <div class="col-md-3"> Deployments: $DeploymentsCount</div>
+</div>
+<hr>
 <table class="table table-hover">
     <thead>
         <tr>
