@@ -192,6 +192,8 @@ final class SangriaSurveyBuilderExtension extends Extension
 
 
         list($surveys, $count_surveys) = $this->survey_repository->getAll($query_surveys, $offset, self::SurveysPageSize);
+        list($all_surveys, $all_count) = $this->survey_repository->getAll($query_surveys,0,0);
+
         // build pager
         $pages = '';
         $max_page = intval(ceil($count_surveys / self::SurveysPageSize));
@@ -214,15 +216,16 @@ final class SangriaSurveyBuilderExtension extends Extension
 </nav>
 HTML;
 
-        $surveys = new ArrayList($surveys);
+        $all_surveys = new ArrayList($all_surveys);
         
         $result = [
             'Templates' => new ArrayList($templates),
-            'Surveys' => $surveys,
+            'Surveys' => new ArrayList($surveys),
             'Questions' => new ArrayList($selected_template->getAllFilterableQuestions()),
             'Pager' => $pager,
-            'CompleteCount' => $surveys->filter('Status', 'COMPLETE')->count(),
-            'DeploymentsCount' => array_sum(array_map(function($item){ return $item->EntitySurveysCount();},$surveys->toArray())),
+            'TotalCount' => $all_surveys->count(),
+            'CompleteCount' => $all_surveys->filter('State', 'COMPLETE')->count(),
+            'DeploymentsCount' => array_sum(array_map(function($item){ return $item->EntitySurveysCount();},$all_surveys->toArray())),
         ];
 
         return $result;

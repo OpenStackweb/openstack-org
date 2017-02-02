@@ -5,7 +5,7 @@
 <b>Created:</b>&nbsp;$Created<br>
 <b>Last Updated:</b>&nbsp;$LastEdited<br>
 <b>Email:</b>&nbsp;$CreatedBy.Email<br>
-<b>Completed?: </b>&nbsp;<% if isCompleted %>true<% else %>false<% end_if %><br>
+<b>Completed?: </b>&nbsp;<% if isComplete %>true<% else %>false<% end_if %><br>
 <% if Parent %>
     <b>Survey:</b>&nbsp;<a href="$Top.Link(SurveyDetails)/{$Parent.ID}?BackUrl={$Top.Link(DeploymentDetails)}/{$ID}" title="view associated survey"># $Parent.ID</a><br>
 <% end_if %>

@@ -137,6 +137,8 @@ class SangriaPageSurveyBuilderStatisticsExtension extends Extension
         $template_id = Session::get(sprintf("SurveyBuilder.%sStatistics.TemplateId",
             Session::get('SurveyBuilder.Statistics.ClassName')));
 
+        //die('temp: '.$template_id);
+
         return (!empty($template_id) && !empty($current_template_id) && intval($current_template_id) === intval($template_id));
     }
 
@@ -441,9 +443,9 @@ SQL;
             return;
         }
         if ($class_name === 'SurveyTemplate') {
-            return "Surveys Submitted";
+            return "Surveys Submitted (w/ at least 1 mandatory answer)";
         } else {
-            return "Deployments Submitted";
+            return "Deployments Submitted (w/ at least 1 mandatory answer)";
         }
     }
 
@@ -483,7 +485,7 @@ SQL;
 
                 $from = date('Y/m/d H:i', strtotime($template->StartDate));
                 $to = date('Y/m/d H:i', strtotime($template->EndDate));
-                $query_str = sprintf("?From=%s&To=%s", $from, $to);
+                $query_str = sprintf("?survey_template_id=%s&From=%s&To=%s", $template_id, $from, $to);
 
                 return Controller::curr()->redirect(Controller::curr()->Link($action) . $query_str);
             }
@@ -501,7 +503,7 @@ SQL;
 
                 $query_str = '';
                 if (!empty($from) && !empty($to)) {
-                    $query_str = sprintf("?From=%s&To=%s", $from, $to);
+                    $query_str = sprintf("?survey_template_id=%s&From=%s&To=%s", $template_id, $from, $to);
                 }
 
                 return Controller::curr()->redirect(Controller::curr()->Link($action) . $query_str);

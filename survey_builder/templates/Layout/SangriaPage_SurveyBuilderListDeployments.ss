@@ -1,6 +1,11 @@
 <h2>Deployments</h2>
 <% include SangriaPage_SurveyBuilderListFilter %>
 <hr>
+<div class="row">
+    <div class="col-md-3"> Total: $TotalCount</div>
+    <div class="col-md-3"> Completed: $CompleteCount</div>
+</div>
+<hr>
 <table class="table table-hover">
     <thead>
     <tr>
@@ -23,7 +28,7 @@
             <td>$CreatedBy.Email</td>
             <td>$getAnswerFor(Label)</td>
             <td>$CurrentStep.Template.Name</td>
-            <td><% if isCompleted %>true<% else %>false<% end_if %></td>
+            <td><% if isComplete %>true<% else %>false<% end_if %></td>
             <td><a href="$Top.Link(DeploymentDetails)/$ID?BackUrl=$Top.Link(SurveyBuilderListDeployments)">view</a></td>
         </tr>
         <% end_loop %>

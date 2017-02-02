@@ -547,10 +547,18 @@ class Survey extends DataObject implements ISurvey
     }
 
     /**
+     * @return $this
+     */
+    public function markComplete(){
+        $this->State = ISurvey::CompleteState;
+        return $this;
+    }
+
+    /**
      * @return bool
      */
-    public function isCompleted(){
-        return $this->MaxAllowedStep()->Template()->ID === $this->Template()->getLastStep()->ID;
+    public function isComplete(){
+        return $this->State == ISurvey::CompleteState;
     }
 
     /**
@@ -602,18 +610,4 @@ class Survey extends DataObject implements ISurvey
         return $fields;
     }
 
-    /**
-     * @return $this
-     */
-    public function markComplete(){
-        $this->State = ISurvey::CompleteState;
-        return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isComplete(){
-        return $this->State == ISurvey::CompleteState;
-    }
 }
