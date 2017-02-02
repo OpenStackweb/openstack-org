@@ -16,11 +16,14 @@ max_execution_time=300
 max_input_time=223
 display_errors=On
 error_reporting=E_ALL
+memory_limit=512M
 
-for key in upload_max_filesize post_max_size max_execution_time max_input_time display_errors error_reporting
+for key in memory_limit upload_max_filesize post_max_size max_execution_time max_input_time display_errors error_reporting
 do
- sed -i "s/^\($key\).*/\1 $(eval echo \=\${$key})/" /etc/php5/fpm/php.ini
+ sed -i "s/^\($key\).*/\1 $(eval echo \=\${$key})/" /etc/php/5.6/fpm/php.ini
 done
+
+sudo service php5.6-fpm restart;
 
 su vagrant;
 # install local nodejs modules on VM
@@ -39,9 +42,6 @@ php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 php composer-setup.php
 php -r "unlink('composer-setup.php');"
 # create local folder for ss cache
-mkdir -p silverstripe-cache;
-php composer.phar config --global repositories.packagist.allow_ssl_downgrade false;
+mkdir -p /var/www/local.openstack.org/silverstripe-cache;
 php composer.phar install --ignore-platform-reqs --prefer-dist;
 sudo ./framework/sake installsake;
-
-

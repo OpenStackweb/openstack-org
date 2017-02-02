@@ -14,5 +14,5 @@ chown vagrant:www-data -R /home/vagrant/node_modules;
 chown vagrant:www-data -R /home/vagrant/bower_modules;
 chown vagrant:www-data -R /var/www/local.openstack.org/vendor;
 sudo service nginx restart;
-sudo service php5-fpm restart;
+sudo service php5.6-fpm restart;
 sudo php /var/www/local.openstack.org/framework/cli-script.php /UpdateFeedTask;

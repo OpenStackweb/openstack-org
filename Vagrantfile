@@ -1,10 +1,9 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
-
+# https://github.com/DevNIX/Vagrant-dependency-manager
 required_plugins = %w( vagrant-vbguest vagrant-hosts vagrant-hostsupdater )
-required_plugins.each do |plugin|
-  system "vagrant plugin install #{plugin}" unless Vagrant.has_plugin? plugin
-end
+require File.dirname(__FILE__)+"/scripts/dependency_manager"
+check_plugins required_plugins
 
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
@@ -74,6 +73,6 @@ Vagrant.configure(2) do |config|
 
   config.vm.provision "update", type:"shell", run: "always" do |s|
       s.path = "scripts/updatedeployment.sh"
-    end
+  end
 
 end

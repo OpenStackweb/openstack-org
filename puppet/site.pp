@@ -18,18 +18,21 @@ $main_packages = [
   'unzip',
   'nginx',
   'mysql-client-core-5.6',
+  'python-software-properties',
 ]
 
 # php packages needed for server
 $php5_packages = [
-  'php5-fpm',
-  'php5-mcrypt',
-  'php5-cli',
-  'php5-curl',
-  'php5-gd',
-  'php5-json',
-  'php5-gmp',
-  'php5-mysqlnd',
+  'php5.6-fpm',
+  'php5.6-mcrypt',
+  'php5.6-cli',
+  'php5.6-curl',
+  'php5.6-gd',
+  'php5.6-json',
+  'php5.6-gmp',
+  'php5.6-mysqlnd',
+  'php5.6-mbstring',
+  'php5.6-xml',
 ]
 
 exec { 'apt-get update':
@@ -44,10 +47,19 @@ package { $main_packages:
   ],
 }
 
+exec{ 'add-php-5.6-repository':
+  cwd       => '/',
+  path      => '/usr/bin:/bin:/usr/local/bin:/usr/lib/node_modules/npm/bin',
+  logoutput => on_failure,
+  command   => "add-apt-repository ppa:ondrej/php && apt-get update",
+  require   => Package[$main_packages]
+}
+
 package { $php5_packages:
   ensure  => present,
   require => [
     Package[$main_packages],
+    Exec['add-php-5.6-repository'],
   ],
 }
 
@@ -72,6 +84,7 @@ class { '::mysql::client':
   ],
 }
 
+# process db from cdn
 exec { 'download-db':
   cwd       => '/',
   path      => '/usr/bin:/bin:/usr/local/bin:/usr/lib/node_modules/npm/bin',
@@ -96,6 +109,16 @@ exec { 'rename-db':
   require   => Exec['unzip-db'],
 }
 
+# append to script the defautl admin user and his group
+exec { 'post-process-db':
+  cwd       => '/',
+  path      => '/usr/bin:/bin:/usr/local/bin:/usr/lib/node_modules/npm/bin',
+  logoutput => on_failure,
+  command   => "cat /var/www/local.openstack.org/scripts/insert_default_admin.sql >> /dump.sql",
+  require   => Exec['rename-db'],
+}
+
+# set proper innodb file format
 exec { 'mysql-post-install-cmd':
   cwd       => '/',
   path      => '/usr/bin:/bin:/usr/local/bin:/usr/lib/node_modules/npm/bin',
@@ -111,9 +134,9 @@ mysql::db { $os_db :
   host           => '%',
   grant          => ['ALL'],
   sql            => '/dump.sql',
-  import_timeout => 900,
+  import_timeout => 1200,
   require        => [
-    Exec['rename-db'],
+    Exec['post-process-db'],
     Exec['mysql-post-install-cmd']
   ],
 }
@@ -204,4 +227,8 @@ cron { 'UpdateFeedTask':
     command => 'php /var/www/www.openstack.org/framework/cli-script.php /UpdateFeedTask',
     user => 'root', 
     minute => '*/5', 
+}
+
+swap_file::files { 'default':
+  ensure   => present,
 }
