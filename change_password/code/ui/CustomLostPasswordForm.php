@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2015 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,6 +11,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+
+/**
+ * Class CustomLostPasswordForm
+ */
 class CustomLostPasswordForm extends HoneyPotForm
 {
 
@@ -20,6 +23,12 @@ class CustomLostPasswordForm extends HoneyPotForm
      */
     private $tx_manager;
 
+    /**
+     * CustomLostPasswordForm constructor.
+     * @param Controller $controller
+     * @param String $name
+     * @param ITransactionManager $tx_manager
+     */
     public function __construct($controller, $name, ITransactionManager $tx_manager) {
 
         $fields = new FieldList(new EmailField('Email', _t('Member.EMAIL', 'Email')));
@@ -37,6 +46,9 @@ class CustomLostPasswordForm extends HoneyPotForm
 
         $this->tx_manager = $tx_manager;
         parent::__construct($controller, $name, $fields, $actions, $validator);
+        $this->Fields()->bootstrapIgnore(HoneyPotForm::FieldName)->bootstrapify();
+        $this->Actions()->bootstrapify();
+        $this->setTemplate("BootstrapForm");
     }
 
     public function forgotPassword($data) {
@@ -54,20 +66,29 @@ class CustomLostPasswordForm extends HoneyPotForm
 
             if ($member) {
                 $token = $this->tx_manager->transaction(function () use ($member) {
+                    if(empty($member->Password)){
+                        // fix empty password condition
+                        $member->changePassword(substr( md5(rand()), 0, 15));
+                    }
                     return $member->generateAutologinTokenAndStoreHash();
                 });
 
-                $e = Member_ForgotPasswordEmail::create();
-                $e->populateTemplate($member);
-                $e->populateTemplate(array(
+                $e = PermamailTemplate::get()->filter('Identifier', MEMBER_FORGOT_PASSWORD_EMAIL_TEMPLATE_ID)->first();
+                if(is_null($e))
+                    throw new Exception(sprintf('Email Template %s does not exists on DB!', MEMBER_FORGOT_PASSWORD_EMAIL_TEMPLATE_ID));
+
+                $e = EmailFactory::getInstance()->buildEmail("noreply@openstack.org", $member->Email);
+
+                $e->setUserTemplate(MEMBER_FORGOT_PASSWORD_EMAIL_TEMPLATE_ID)->populateTemplate(
+                  [
+                    'Member'            => $member,
                     'PasswordResetLink' => Security::getPasswordResetLink($member, $token)
-                ));
-                $e->setTo($member->Email);
-                $e->send();
+                  ])->send();
+
                 $this->controller->redirect('Security/passwordsent/' . urlencode($email));
             }
             // Avoid information disclosure by displaying the same status,
-            // regardless wether the email address actually exists
+            // regardless weather the email address actually exists
             $this->controller->redirect('Security/passwordsent/' . urlencode($email));
         }
         catch(EntityValidationException $ex1){

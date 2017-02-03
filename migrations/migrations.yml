@@ -62,3 +62,4 @@ migrations:
   - NewsFeaturedToArchiveMigration
   - SummitEventWithFileMigration
   - SurveyStateMigration
+  - InsertEmailForgotPasswordTemplateMigration

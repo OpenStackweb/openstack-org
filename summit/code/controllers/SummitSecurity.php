@@ -55,6 +55,25 @@ class SummitSecurity extends SummitPage_Controller {
     private $member_manager;
 
     /**
+     * @var ITransactionManager
+     */
+    private $tx_manager;
+
+    /**
+     * @param ITransactionManager $tx_manager
+     */
+    public function setTransactionManager(ITransactionManager $tx_manager){
+        $this->tx_manager = $tx_manager;
+    }
+
+    /**
+     * @return ITransactionManager
+     */
+    public function getTransactionManager(){
+        return $this->tx_manager;
+    }
+
+    /**
      * @return IMemberManager
      */
     public function getMemberManager()
@@ -337,19 +356,7 @@ class SummitSecurity extends SummitPage_Controller {
      * @return Form Returns the lost password form
      */
     public function LostPasswordForm() {        
-        return BootstrapMemberLoginForm::create(         $this,
-            'LostPasswordForm',
-            new FieldList(
-                new EmailField('Email', _t('Member.EMAIL', 'Email'))
-            ),
-            new FieldList(
-                new FormAction(
-                    'forgotPassword',
-                    _t('Security.BUTTONSEND', 'Send me the password reset link')
-                )
-            ),
-            false
-        );
+        return new CustomLostPasswordForm(Controller::curr(), 'LostPasswordForm', $this->tx_manager);
     }
 
     /**

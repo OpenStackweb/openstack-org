@@ -14,3 +14,4 @@
 
 define('CHANGE_PASSWORD_EMAIL_FROM','noreply@openstack.org');
 define('CHANGE_PASSWORD_EMAIL_SUBJECT','OpenStack Profile Password Recovery');
+define('MEMBER_FORGOT_PASSWORD_EMAIL_TEMPLATE_ID','member-forgot-password-email');
