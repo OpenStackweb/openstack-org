@@ -307,25 +307,28 @@ final class SummitEventManager implements ISummitEventManager
      * @param ISummit $summit
      * @param $event_id
      * @param $tmp_file
+     * @param int $max_file_size
      * @return File
      */
-    public function uploadAttachment(ISummit $summit, $event_id, $tmp_file)
+    public function uploadAttachment(ISummit $summit, $event_id, $tmp_file, $max_file_size = 10*1024*1024)
     {
 
-        return $this->tx_service->transaction(function () use ($summit, $event_id, $tmp_file) {
+        return $this->tx_service->transaction(function () use ($summit, $event_id, $tmp_file, $max_file_size) {
+
             $event_id = intval($event_id);
             $event    = $this->event_repository->getById($event_id);
 
-            if(is_null($event) || !$event->is_a('SummitEventWithFile') ) throw new NotFoundEntityException('SummitEventWithFile');
+            if(is_null($event) || !$event instanceof SummitEventWithFile) throw new NotFoundEntityException('SummitEventWithFile');
 
             $attachment = new File();
-            $upload = new Upload();
-            $validator = new Upload_Validator();
-            $validator->setAllowedExtensions(array('png','jpg','jpeg','gif','pdf'));
-            $validator->setAllowedMaxFileSize(4*1024*1024); // 4Mb
+            $upload     = new Upload();
+            $validator  = new Upload_Validator();
+
+            $validator->setAllowedExtensions(['png','jpg','jpeg','gif','pdf']);
+            $validator->setAllowedMaxFileSize($max_file_size);
             $upload->setValidator($validator);
 
-            if (!$upload->loadIntoFile($tmp_file,$attachment,'summit-event-attachments')) {
+            if (!$upload->loadIntoFile($tmp_file, $attachment, 'summit-event-attachments')) {
                 throw new EntityValidationException($upload->getErrors());
             }
 

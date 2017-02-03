@@ -550,12 +550,23 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
         try
         {
             $summit_id    = intval($request->param('SUMMIT_ID'));
-            $event_id   = intval($request->param('EVENT_ID'));
+            $event_id     = intval($request->param('EVENT_ID'));
             $summit       = $this->summit_repository->getById($summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
 
-            $attachment = $this->summit_manager->uploadAttachment($summit, $event_id, $_FILES['file']);
-            return $this->ok($attachment->ID);
+            switch ($_FILES['file']['error']) {
+                case UPLOAD_ERR_OK:
+                    $attachment = $this->summit_manager->uploadAttachment($summit, $event_id, $_FILES['file']);
+                    return $this->ok($attachment->ID);
+                    break;
+                case UPLOAD_ERR_NO_FILE:
+                    throw new RuntimeException('No file sent.');
+                case UPLOAD_ERR_INI_SIZE:
+                case UPLOAD_ERR_FORM_SIZE:
+                    throw new RuntimeException('Exceeded filesize limit.');
+                default:
+                    throw new RuntimeException('Unknown errors.');
+            }
         }
         catch(EntityValidationException $ex1)
         {
