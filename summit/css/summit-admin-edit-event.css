@@ -36,3 +36,7 @@
 .tag-container .bootstrap-tagsinput {
     width: 100%;
 }
+
+.attachment-container{
+    padding: 5px;
+}

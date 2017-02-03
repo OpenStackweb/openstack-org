@@ -531,7 +531,7 @@ $(document).ready(function(){
     function uploadAttachment(event_id)
     {
         var summit_id  = $('#summit_id').val();
-        var url           = 'api/v1/summits/'+summit_id+'/events/'+event_id+'/attach';
+        var url        = 'api/v1/summits/'+summit_id+'/events/'+event_id+'/attach';
         var file_data  = $("#event-attachment").prop("files")[0];
         var form_data  = new FormData();
         form_data.append("file", file_data);

@@ -11,7 +11,7 @@
             <li><a href="$Top.Link/{$Summit.ID}/events/schedule">Events</a></li>
             <li class="active"><% if $Event %> $Event.Title <% else %> New Event <% end_if %></li>
         </ol>
-        <form id="edit-event-form">
+        <form id="edit-event-form" enctype="multipart/form-data">
             <input type="hidden" id="summit_id" value="{$Summit.ID}" />
             <input type="hidden" id="event_id"  value="{$Event.ID}" />
             <input type="hidden" id="published" value="{$Event.IsPublished}" />
@@ -204,7 +204,9 @@
                 <div class="row">
                     <div class="col-md-6">
                         <label for="event_attachment">Attachment</label><br>
-                        <img class="event_attachment" src="{$Event.Attachment.getUrl()}" />
+                        <% if $Event.Attachment %>
+                            <div class="attachment-container">$Event.Attachment.CMSThumbnail&nbsp;$Event.Attachment.Name</div>
+                        <% end_if %>
                         <div class="input-group">
                             <span class="input-group-btn">
                                 <span class="btn btn-default btn-file">
