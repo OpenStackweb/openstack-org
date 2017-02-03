@@ -2052,12 +2052,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "a8c0522f1f99d9c2542fe282c51e5331b7ca1e9f"
+                "reference": "6331c1dfc730193249db014492909234b245f448"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/a8c0522f1f99d9c2542fe282c51e5331b7ca1e9f",
-                "reference": "a8c0522f1f99d9c2542fe282c51e5331b7ca1e9f",
+                "url": "https://api.github.com/repos/symfony/process/zipball/6331c1dfc730193249db014492909234b245f448",
+                "reference": "6331c1dfc730193249db014492909234b245f448",
                 "shasum": ""
             },
             "require": {
@@ -2093,7 +2093,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2017-01-31T14:22:24+00:00"
+            "time": "2017-02-03T12:20:42+00:00"
         },
         {
             "name": "symfony/yaml",
