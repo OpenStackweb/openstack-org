@@ -52,26 +52,26 @@ Vagrant.configure(2) do |config|
   # vagrant plugin install vagrant-hosts
   
   config.vm.provision :hosts do |provisioner|
-       provisioner.add_host '127.0.0.1', ['local.openstack.org']
+      provisioner.add_host '127.0.0.1', ['local.openstack.org']
   end
 
   config.vm.provision "bootstrap", type:"shell" do |s|
-    s.path = "scripts/bootstrap.sh"
+      s.path = "scripts/bootstrap.sh"
   end
 
   config.vm.provision "puppetbuild", type: "puppet" do |puppet|
-        puppet.manifests_path = "puppet"
-        puppet.manifest_file = "site.pp"
-        puppet.hiera_config_path = "puppet/hiera/hiera.yaml"
-        puppet.working_directory = "/etc/puppet/data"
-        #puppet.options = "--verbose --debug"
+      puppet.manifests_path = "puppet"
+      puppet.manifest_file = "site.pp"
+      puppet.hiera_config_path = "puppet/hiera/hiera.yaml"
+      puppet.working_directory = "/etc/puppet/data"
+      #puppet.options = "--verbose --debug"
   end
   
   config.vm.provision "postbuild", type:"shell" do |s|
-    s.path = "scripts/postdeployment.sh"
+      s.path = "scripts/postdeployment.sh"
   end
 
-  config.vm.provision "update", type:"shell", run: "always" do |s|
+  config.vm.provision "update", type:"shell" do |s|
       s.path = "scripts/updatedeployment.sh"
   end
 
