@@ -51,12 +51,12 @@
     </div>
     <div class="row">
         <div class="col-lg-5 col-md-5 col-sm-6">
-            <div class="company-logo"><img src="/assets/companies/main_logo/openswitch-lg.png" alt="Open Switch"></div>
+            <div class="company-logo"><img src="/assets/boston-summit/images/openswitch-344-lg.png" alt="Open Switch"></div>
             <p class="company-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras urna orci, dictum vitae maximus at, consectetur vitae velit. Morbi interdum eu nibh quis gravida. Pellentesque nec magna libero. Fusce nisi orci.</p>
             <p class="learn-more-button"><a href="http://www.openswitch.net/" class="btn btn-primary" role="button">Learn More</a></p>
         </div>
         <div class="col-lg-5 col-lg-push-2 col-md-5 col-md-push-2 col-sm-6">
-            <div class="company-logo"><img src="/assets/companies/main_logo/vswitch-lg.jpg" alt="Open vSwitch"></div>
+            <div class="company-logo"><img src="/assets/boston-summit/images/ovs-344-lg.png" alt="Open vSwitch"></div>
             <p class="company-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras urna orci, dictum vitae maximus at, consectetur vitae velit. Morbi interdum eu nibh quis gravida. Pellentesque nec magna libero. Fusce nisi orci.</p>
             <p class="learn-more-button"><a href="http://www.openvswitch.net/" class="btn btn-primary" role="button">Learn More</a></p>
         </div>
