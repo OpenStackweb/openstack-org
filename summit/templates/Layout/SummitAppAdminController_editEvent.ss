@@ -148,7 +148,7 @@
                     <div class="col-md-4">
                         <label>Feedback</label><br>
                         <div class="checkbox">
-                            <input type="checkbox" id="allow_feedback" name="allow_feedback" <% if $Event.AllowFeedBack %> checked <% end_if %>>
+                            <input type="checkbox" id="allow_feedback" name="allow_feedback" <% if $Event.AllowFeedBack = 1 %> checked <% end_if %>>
                             <label for="allow_feedback">
                                 Allow feedback ?
                             </label>

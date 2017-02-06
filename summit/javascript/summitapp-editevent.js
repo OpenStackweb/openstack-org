@@ -102,19 +102,27 @@ $(document).ready(function(){
             }
             $('.moderator-label').text(moderatorLabel);
             $('.level_container').show();
-            $('#allow_feedback').attr("checked","checked");
             $('#expect_learn_container').show();
             $('.to_record_container').show();
+
+            // only prepopulate on new
+            if (!$('#event_id').val()) {
+                $('#allow_feedback').attr("checked","checked");
+            }
         }
         else{
             $('#expect_learn_container').hide();
             $('.level_container').hide();
-            $('#allow_feedback').removeAttr("checked");
             $('.moderator-container').hide();
             $('.speakers-container').hide();
             $('.to_record_container').hide();
             $('#moderator').rules("remove");
             $('#speakers').rules("remove");
+
+            // only prepopulate on new
+            if (!$('#event_id').val()) {
+                $('#allow_feedback').removeAttr("checked");
+            }
         }
 
         if(type == TaxonomyGroupEvent ){

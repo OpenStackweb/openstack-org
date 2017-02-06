@@ -265,7 +265,7 @@ final class SummitEventManager implements ISummitEventManager
             $event->HeadCount        = intval($event_data['headcount']);
             $event->Abstract         = html_entity_decode($event_data['abstract']);
             $event->SocialSummary    = strip_tags($event_data['social_summary']);
-            $event->AllowFeedBack    = $event_data['allow_feedback'];
+            $event->AllowFeedBack    = isset($event_data['allow_feedback']) ? $event_data['allow_feedback'] : 0;
             $event->FeatureCloud     = isset($event_data['feature_cloud']) ? $event_data['feature_cloud'] : null;
             $event->LocationID       = intval($event_data['location_id']);
             $event->TypeID           = $event_type_id;
