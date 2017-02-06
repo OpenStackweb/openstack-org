@@ -461,8 +461,10 @@ SQL;
         $template_id   = intval($request->requestVar('survey_template_id'));
 
         if (empty($template_id)) {
-            $template = $this->SurveyBuilderSurveyTemplates($class_name)->last();
-            $template_id = $template->ID;
+            if (!$template_id = Session::get(sprintf("SurveyBuilder.%sStatistics.TemplateId", $class_name))) {
+                $template = $this->SurveyBuilderSurveyTemplates($class_name)->last();
+                $template_id = $template->ID;
+            }
         } else {
             Session::clear(sprintf("SurveyBuilder.%sStatistics.Filters", $class_name));
             Session::clear(sprintf("SurveyBuilder.%sStatistics.Filters_Questions", $class_name));
@@ -813,8 +815,6 @@ SQL;
                             AND ANS.`Value` IS NOT NULL {$filters_where}";
 
         $answers = DB::query($answers_query);
-
-        //die($answers_query);
 
         $question_values = SurveyQuestionValueTemplate::get()
                             ->where("OwnerID IN (".implode(',',$pu_question_ids).")")
