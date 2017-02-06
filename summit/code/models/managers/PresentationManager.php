@@ -420,9 +420,10 @@ final class PresentationManager implements IPresentationManager
             if(isset($data['OtherTopic']))
                 $presentation->OtherTopic = trim($data['OtherTopic']);
 
-            $presentation->SummitID  = $summit->getIdentifier();
-            $presentation->CreatorID = $creator->ID;
-            $presentation->Progress  = Presentation::PHASE_SUMMARY;
+            $presentation->SummitID      = $summit->getIdentifier();
+            $presentation->CreatorID     = $creator->ID;
+            $presentation->Progress      = Presentation::PHASE_SUMMARY;
+            $presentation->LightningTalk = isset($data['LightningTalk']) ? intval($data['LightningTalk']) : 0;
             $presentation->write();
 
             if(isset($data["PresentationLink"]))
@@ -479,6 +480,7 @@ final class PresentationManager implements IPresentationManager
             $presentation->SocialSummary           = trim($data['SocialSummary']);
             $presentation->AttendeesExpectedLearnt = trim($data['AttendeesExpectedLearnt']);
             $presentation->CategoryID              = intval(trim($data['CategoryID']));
+            $presentation->LightningTalk           = isset($data['LightningTalk']) ? intval($data['LightningTalk']) : 0;
 
             // remove moderator if its not needed
             if (!$presentation->Type()->UseModerator) {
