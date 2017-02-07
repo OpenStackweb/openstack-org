@@ -1,0 +1,34 @@
+.mobile-city-date{
+	display: none;
+}
+.featured-guide-row span{
+	display: none;
+}
+@media (max-width: 767px){
+	.featured-guide-row .featured{
+		border: none;
+		border-bottom: 1px solid #edf2f7;
+		margin: 0;
+		}
+	.image-wrapper{
+		display: none;
+	}
+	.featured-guide-row .featured .featured-content{
+		margin-left: 0;
+		padding: 0 15px;
+	}
+	.featured-guide-row a.featured-site{
+		color: #29abe2;
+		border: none;
+		padding: 0;
+	}
+	.featured-guide-row span{
+		display: inline-block;
+	}
+	.featured-guide-row .featured .featured-content p{
+		font-size: 1em;
+	}
+	.main-body .mobile-city-date{
+		display: none;
+	}
+}
