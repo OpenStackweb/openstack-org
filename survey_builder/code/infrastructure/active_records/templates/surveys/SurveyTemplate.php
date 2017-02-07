@@ -357,7 +357,7 @@ class SurveyTemplate extends DataObject implements ISurveyTemplate {
      * @return ISurveyQuestionTemplate[]
      */
     public function getAllFilterableQuestions(){
-        $questions = [];
+        $questions = new ArrayList();
         $to_add  = [
             'SurveyMemberEmailQuestionTemplate',
             'SurveyMemberFirstNameQuestionTemplate',
@@ -376,7 +376,7 @@ class SurveyTemplate extends DataObject implements ISurveyTemplate {
             if(!$step instanceof ISurveyRegularStepTemplate) continue;
             foreach($step->getQuestions() as $q) {
                 if (!in_array($q->ClassName, $to_add)) continue;
-                $questions[] = $q;
+                $questions->push($q);
             }
         }
         return $questions;

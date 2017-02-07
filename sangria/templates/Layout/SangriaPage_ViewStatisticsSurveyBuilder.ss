@@ -67,8 +67,10 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                <% loop $SurveyBuilderDeploymentCompanyList %>
-                    <div class="col-md-4">$Company</div>
+                <% loop $SurveyBuilderDeploymentCompanyList($Top.Link($Top.Action)) %>
+                    <div class="col-md-4">
+                        <a href="{$Link}" target="_blank">$Company</a>
+                    </div>
                 <% end_loop %>
                 </div>
             </div>

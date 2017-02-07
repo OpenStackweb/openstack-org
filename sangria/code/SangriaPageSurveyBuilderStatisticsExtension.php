@@ -382,10 +382,11 @@ SQL;
         return $this->matrix_count_by_question[$question_id];
     }
 
-    public function SurveyBuilderDeploymentCompanyList()
+    public function SurveyBuilderDeploymentCompanyList($back_url = '')
     {
         $template = $this->getCurrentSelectedSurveyTemplate();
         $class_name = $this->getCurrentSelectedSurveyClassName();
+        $question = $template->Parent()->getAllFilterableQuestions()->filter('ClassName','SurveyOrganizationQuestionTemplate')->first();
 
         if (is_null($template))
         {
@@ -400,7 +401,7 @@ SQL;
         $filters_where = $this->generateFilters();
 
         $query = <<<SQL
-    SELECT SANS.`Value` AS Company FROM Survey AS I
+    SELECT SANS.`Value` AS Company, COUNT(I2.ID) AS SurveyCount, I2.ID AS ID FROM Survey AS I
     LEFT JOIN EntitySurvey AS ES ON ES.ID = I.ID
     LEFT JOIN Survey AS I2 ON I2.ID = ES.ParentID
     LEFT JOIN SurveyStep AS SSTEP ON SSTEP.SurveyID = I2.ID
@@ -429,8 +430,22 @@ SQL;
 SQL;
 
         $companies = new ArrayList();
-        foreach (DB::query($query)->column('Company') as $company) {
-            $companies->push(new ArrayData(array('Company' => $company)));
+        foreach (DB::query($query) as $company_row) {
+            $link = '';
+            if ($company_row['SurveyCount'] == 1) {
+                $link = 'sangria/SurveyDetails/'.$company_row['ID'].'?BackUrl='.$back_url;
+            } else if ($company_row['SurveyCount'] > 1) {
+                $link = 'sangria/SurveyBuilderListSurveys?survey_template_id='.$template->Parent()->ID.'&question_id='.$question->ID.'&question_value='.$company_row['Company'];
+            }
+
+            $companies->push(
+                new ArrayData(
+                    array(
+                        'Company' => $company_row['Company'],
+                        'Link'    => $link
+                    )
+                )
+            );
         }
 
         return $companies;
@@ -884,4 +899,5 @@ SQL;
 
         return $total_answers;
     }
+
 }

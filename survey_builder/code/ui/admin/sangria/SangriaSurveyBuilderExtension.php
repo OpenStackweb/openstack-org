@@ -221,7 +221,7 @@ HTML;
         $result = [
             'Templates' => new ArrayList($templates),
             'Surveys' => new ArrayList($surveys),
-            'Questions' => new ArrayList($selected_template->getAllFilterableQuestions()),
+            'Questions' => $selected_template->getAllFilterableQuestions(),
             'Pager' => $pager,
             'TotalCount' => $all_surveys->count(),
             'CompleteCount' => $all_surveys->filter('State', 'COMPLETE')->count(),
