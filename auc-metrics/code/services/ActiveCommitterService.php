@@ -46,18 +46,16 @@ class ActiveCommitterService extends BaseService implements MetricService
         @mkdir($outputDir, 0755, true);
 
         $sixMonthsAgo = date('YmdHis', strtotime('-6 months'));
-        $user = Config::inst()->get('AUCActiveCommitterService', 'user');
-        $keyFile = Config::inst()->get('AUCActiveCommitterService', 'keyfile');
 
         $execPath = Controller::join_links(
             BASE_PATH,
             AUC_METRICS_DIR,
             sprintf(
                 "lib/uc-recognition/tools/get_active_commiters.py %s -b %s -p %s -k %s",
-                $user,
+                ACTIVECOMMITTERSERVICE_GERRIT_USER,
                 $sixMonthsAgo,
-                $outputDir,                
-                $keyFile
+                $outputDir,
+                ACTIVECOMMITTERSERVICE_GERRIT_USER_SSH_KEY_FILE
             )
         );
 

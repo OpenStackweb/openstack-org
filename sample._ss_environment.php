@@ -145,7 +145,9 @@ define('OPENSTACK_YOUTUBE_CHANNEL_ID','');
 define('OPENSTACK_TWITTER_ACCOUNT', '');
 
 define('FIREBASE_GCM_SERVER_KEY', '');
-
+//auc-metrics/code/services/ActiveCommitterService.php
+define('ACTIVECOMMITTERSERVICE_GERRIT_USER', '');
+define('ACTIVECOMMITTERSERVICE_GERRIT_USER_SSH_KEY_FILE', '');
 global $_FILE_TO_URL_MAPPING;
 $_FILE_TO_URL_MAPPING[''] = '';
 
