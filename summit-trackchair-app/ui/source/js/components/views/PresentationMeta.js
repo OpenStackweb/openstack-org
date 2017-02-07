@@ -68,7 +68,7 @@ class PresentationMeta extends React.Component {
 		                  <dd>{presentation.creator}</dd>
                           <dt>Type:</dt>
                           {presentation.lightning && <dd>Lightning Talk</dd>}
-                          {presentation.lightning_wannabe && <dd>Lightning Wannabe</dd>}
+                          {presentation.lightning_wannabe && <dd>Lightning or Presentation</dd>}
                           {isSession && <dd>Session</dd>}
 		               </dl>
 		            </div>

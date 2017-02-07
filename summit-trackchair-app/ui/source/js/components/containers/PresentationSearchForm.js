@@ -35,7 +35,7 @@ class PresentationSearchForm extends React.Component {
 	
 			        <input value={this.state.value} onChange={this.updateValue} type="text" placeholder="Search presentations " className="input form-control" />
 			        <span className="input-group-btn">
-			                <button type="button" className="btn btn btn-primary"> <i className="fa fa-search"></i> Search</button>
+			                <button type="submit" className="btn btn btn-primary"> <i className="fa fa-search"></i> Search</button>
 			        </span>		    
 		    </div>
 		    </form>

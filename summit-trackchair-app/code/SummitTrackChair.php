@@ -115,14 +115,17 @@ class SummitTrackChair extends DataObject
         if (!$valid->valid() || !$summit_id) {
             return $valid;
         }
-        
-        $old_one = Summit::get_active()
-        	->Categories()
-        	->relation('TrackChairs')
+
+        if (!$this->MemberID) {
+            return $valid->error('Not a valid member!');
+        }
+
+        $old_one = $this->Summit()->TrackChairs()
         	->filter('MemberID', $this->MemberID)
         	->first();
 
-        if (!$old_one) {
+        // if there is one track chair in db and this save is a creation
+        if ($old_one && !$this->ID) {
             return $valid->error('Already exists a track chair for this member!');
         }
 

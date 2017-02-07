@@ -77,11 +77,11 @@ class PresentationTrackChairFeatures extends DataExtension
         // tricky part here, if presentation is lightning talk or lightning wannabe we have to add it to Lightning List
         $lists_to_add_to = array();
         if ($this->owner->Type()->Type == IPresentationType::LightingTalks) {
-            $lists_to_add_to[] = 'Lightning';
+            $lists_to_add_to[] = SummitSelectedPresentationList::Lightning;
         } else {
-            $lists_to_add_to[] = 'Session';
+            $lists_to_add_to[] = SummitSelectedPresentationList::Session;
             if ($this->owner->LightningTalk) {
-                $lists_to_add_to[] = 'Lightning';
+                $lists_to_add_to[] = SummitSelectedPresentationList::Lightning;
             }
         }
 
@@ -102,8 +102,26 @@ class PresentationTrackChairFeatures extends DataExtension
                 ->max('Order');
 
             if($selected && $highestOrderInList >= $highestSelection) {
-                throw new EntityValidationException("$list_class Selection list is full. Currently at $highestOrderInList. Limit is $highestSelection.");
+                $msg = "$list_class Selection list is full. Currently at $highestOrderInList. Limit is $highestSelection.";
+                //check if there is space for selected in the other list
+                if ($this->owner->isLightningWannabe()) {
+                    $other_list_class = ($list_class == SummitSelectedPresentationList::Lightning) ? SummitSelectedPresentationList::Session : SummitSelectedPresentationList::Lightning;
+                    $myOtherSelections = SummitSelectedPresentationList::getMemberList($this->owner->CategoryID, $other_list_class);
+                    $highestOtherSelection = $myOtherSelections->maxPresentations();
+                    $highestOtherOrderInList = $myOtherSelections
+                        ->SummitSelectedPresentations()
+                        ->filter('Collection', $collection)
+                        ->max('Order');
+
+                    if($highestOtherOrderInList < $highestOtherSelection) {
+                        $msg .= "However it will be added to ".$other_list_class.' Selection.';
+                    }
+                }
+
+                throw new EntityValidationException($msg);
             }
+
+
 
             if (!$selectedPresentation) {
                 $selectedPresentation = SummitSelectedPresentation::create();
@@ -112,9 +130,20 @@ class PresentationTrackChairFeatures extends DataExtension
                 $selectedPresentation->MemberID = Member::currentUser()->ID;
             }
 
+            $previous_collection = $selectedPresentation->Collection;
             $selectedPresentation->Collection = $collection;
             $selectedPresentation->Order = $highestOrderInList+1;
             $selectedPresentation->write();
+
+            // reorder list from where it was removed
+            if ($previous_collection != SummitSelectedPresentation::COLLECTION_PASS) {
+                $left_selections = $mySelections->SummitSelectedPresentations()
+                    ->filter('Collection', $previous_collection);
+                foreach ($left_selections as $order => $selection) {
+                    $selection->Order = $order+1;
+                    $selection->write();
+                }
+            }
         }
 
     }
@@ -131,11 +160,11 @@ class PresentationTrackChairFeatures extends DataExtension
             // tricky part here, if presentation is lightning talk or lightning wannabe we have to add it to Lightning List
             $lists_to_add_to = array();
             if ($this->owner->Type()->Type == IPresentationType::LightingTalks) {
-                $lists_to_add_to[] = 'Lightning';
+                $lists_to_add_to[] = SummitSelectedPresentationList::Lightning;
             } else {
-                $lists_to_add_to[] = 'Session';
+                $lists_to_add_to[] = SummitSelectedPresentationList::Session;
                 if ($this->owner->LightningTalk) {
-                    $lists_to_add_to[] = 'Lightning';
+                    $lists_to_add_to[] = SummitSelectedPresentationList::Lightning;
                 }
             }
 
@@ -229,10 +258,10 @@ class PresentationTrackChairFeatures extends DataExtension
      * Used by the track chair app see if the presentation has been selected by currently logged in member.
      **/
 
-    public function isSelected($type = SummitSelectedPresentationList::Individual)
+    public function isSelected($list_class = SummitSelectedPresentationList::Session)
     {
         $memID = Member::currentUserID();
-        $selected = $this->getSelectedPresentation($type);
+        $selected = $this->getSelectedPresentation($list_class);
 
         if(!$selected) return false;
 
@@ -240,10 +269,10 @@ class PresentationTrackChairFeatures extends DataExtension
     }
 
 
-    public function isMaybe($type = SummitSelectedPresentationList::Individual)
+    public function isMaybe($list_class = SummitSelectedPresentationList::Session)
     {
         $memID = Member::currentUserID();
-        $selected = $this->getSelectedPresentation($type);
+        $selected = $this->getSelectedPresentation($list_class);
 
         if(!$selected) return false;
 
@@ -251,25 +280,27 @@ class PresentationTrackChairFeatures extends DataExtension
     }
 
     
-    public function isPass($type = SummitSelectedPresentationList::Individual)
+    public function isPass($list_class = SummitSelectedPresentationList::Session)
     {
         $memID = Member::currentUserID();
-        $selected = $this->getSelectedPresentation($type);
+        $selected = $this->getSelectedPresentation($list_class);
 
         if(!$selected) return false;
 
         return $selected->isPass();
     }
 
-    public function getSelectionType($type = SummitSelectedPresentationList::Individual)
+    public function getSelectionType()
     {
-    	if($this->isSelected($type)) {
+        $list_class = ($this->owner->isOfType(IPresentationType::LightingTalks)) ? SummitSelectedPresentationList::Lightning : SummitSelectedPresentationList::Session;
+
+    	if($this->isSelected($list_class)) {
     		return SummitSelectedPresentation::COLLECTION_SELECTED;
     	}
-    	if($this->isMaybe($type)) {
+    	if($this->isMaybe($list_class)) {
     		return SummitSelectedPresentation::COLLECTION_MAYBE;
     	}
-    	if($this->isPass($type)) {
+    	if($this->isPass($list_class)) {
     		return SummitSelectedPresentation::COLLECTION_PASS;
     	}
 
@@ -316,7 +347,7 @@ class PresentationTrackChairFeatures extends DataExtension
      * Used by the track chair app see if the presentation has been selected by the group.
      **/
 
-    public function isGroupSelected($type = SummitSelectedPresentationList::Group)
+    public function isGroupSelected($list_class = SummitSelectedPresentationList::Session)
     {
         $memID = Member::currentUserID();
         $selected = SummitSelectedPresentation::get()
@@ -324,7 +355,8 @@ class PresentationTrackChairFeatures extends DataExtension
                 "SummitSelectedPresentationList.ID = SummitSelectedPresentation.SummitSelectedPresentationListID")
             ->filter([
             	'PresentationID' => $this->owner->ID,            	
-            	'ListType' => $type,
+            	'ListClass' => $list_class,
+            	'ListType' => SummitSelectedPresentationList::Group,
             	'Collection' => SummitSelectedPresentation::COLLECTION_SELECTED
             ]);
 
@@ -477,14 +509,14 @@ class PresentationTrackChairFeatures extends DataExtension
     	])->exists();
     }
 
-    protected function getSelectedPresentation()
+    protected function getSelectedPresentation($list_class = SummitSelectedPresentationList::Session)
     {
         $memID = Member::currentUserID();
         return SummitSelectedPresentation::get()
             ->filter([
             	'PresentationID' => $this->owner->ID,
             	'SummitSelectedPresentation.MemberID' => $memID,
-                'SummitSelectedPresentationList.ListType' => SummitSelectedPresentationList::Individual,
+                'SummitSelectedPresentationList.ListClass' => $list_class,
             ])
             ->first();
     }

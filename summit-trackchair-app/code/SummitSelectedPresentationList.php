@@ -247,7 +247,7 @@ ORDER BY SummitSelectedPresentation.Order ASC
      * @param $SummitCategoryID
      * @return bool|SummitSelectedPresentationList
      */
-    public static function getMemberList($SummitCategoryID, $ListClass = "Session")
+    public static function getMemberList($SummitCategoryID, $ListClass = SummitSelectedPresentationList::Session)
     {
 
         if (!Member::currentUser()) {

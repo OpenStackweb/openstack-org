@@ -28,7 +28,7 @@ const PresentationFilterDropdown = ({
 		<DropdownItem eventKey='pass'><i className='fa fa-thumbs-down danger' /> Vote: No thanks</DropdownItem>
         <DropdownItem divider />
         <DropdownItem eventKey='lightning'><i className='fa fa-bolt' /> Lightning Talk </DropdownItem>
-        <DropdownItem eventKey='presentation_lightning'>"<i className='fa fa-bolt' />" Presentation Lightning </DropdownItem>
+        <DropdownItem eventKey='presentation_lightning'>"<i className='fa fa-bolt' />" Lightning or Pres. </DropdownItem>
         <DropdownItem eventKey='all_lightning'><i className='fa fa-bolt' /> All Lightning </DropdownItem>
 	</Dropdown>
 );

@@ -19,7 +19,10 @@ export const lists = function (
                 ...state,
                 results: [
                 	...action.payload.response.lists
-                			.sort((a,b) => !a.is_group)
+                			.sort((a,b) => {
+                                if (a.is_group == b.is_group) return a.is_lightning;
+                                else !a.is_group;
+                            })
                 ],
                 loading: false
             };

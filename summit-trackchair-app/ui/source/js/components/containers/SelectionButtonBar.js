@@ -61,8 +61,7 @@ class SelectionButtonBar extends React.Component {
 		const {myList} = this.props;
 		const {id, selected} = this.props.presentation;
 		if(myList) {
-			activeKey = myList.selections.find(s => +s.id === +id) ? 'selected' :
-						(myList.maybes.find(s => +s.id === +id) ? 'maybe' : selected);
+			activeKey = selected;
 			canAdd = myList.slots > myList.selections.length;
 		}
 
@@ -70,7 +69,7 @@ class SelectionButtonBar extends React.Component {
 			<ButtonGroup onSelect={this.handleSelect} activeKey={activeKey}>
 				<ButtonOption disabled={!canAdd} eventKey='selected' className='success'><Selected /> Yes</ButtonOption>
 				<ButtonOption eventKey='maybe' className='warning'><Maybe /> Interested</ButtonOption>
-				<ButtonOption eventKey='pass' className='danger'><Pass /> No thanks</ButtonOption>
+				<ButtonOption eventKey='pass' className='damyListnger'><Pass /> No thanks</ButtonOption>
 			</ButtonGroup>
 		);		
 	}
