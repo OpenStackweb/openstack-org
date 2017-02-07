@@ -229,25 +229,35 @@ final class PresentationManager implements IPresentationManager
     /**
      * @param PresentationSpeaker $speaker
      * @param PresentationCategory $category
+     * @throws EntityValidationException
      * @return int
      */
     public function getSubmissionLimitFor(PresentationSpeaker $speaker, PresentationCategory $category)
     {
-        $summit = $category->Summit();
-        $res    = -1;
-        if($summit->isCallForSpeakersOpen() && $summit->isPublicCategory($category))
-            $res = intval($summit->MaxSubmissionAllowedPerUser);
+        $summit        = $category->Summit();
+        $res           = -1;
+        $found_public  = false;
+        $found_private = false;
+
+        if($summit->isCallForSpeakersOpen() && $summit->isPublicCategory($category)) {
+            $res          = intval($summit->MaxSubmissionAllowedPerUser);
+            $found_public = true;
+        }
 
         if($speaker->Member()->exists() && $groups = $this->getPrivateCategoryGroupsFor($speaker->Member(), $summit)){
             foreach($groups as $g) {
                 if (!$g->isSubmissionOpen()) continue;
                 if (!$g->hasCategory($category)) continue;
                 $res = intval($g->MaxSubmissionAllowedPerUser);
+                $found_private = true;
                 break;
             }
         }
         // zero means infinity
         $res = $res === 0 ? PHP_INT_MAX : $res;
+        if(!$found_public && !$found_private){
+            throw new EntityValidationException("Call for speaker is closed!");
+        }
         return $res;
     }
 
@@ -403,7 +413,7 @@ final class PresentationManager implements IPresentationManager
 
                 $count    = $summit->isPublicCategory($category) ?
                     (
-                        intval($speaker->getPublicCategoryPresentationsBySummitCount($summit)) +
+                        intval($speaker->getPublicCateEntityValidationExceptiongoryPresentationsBySummitCount($summit)) +
                         intval($speaker->getPublicCategoryOwnedPresentationsBySummitCount($summit)) +
                         intval($speaker->getPublicCategoryModeratedPresentationsBySummitCount($summit))
                     ):
@@ -414,7 +424,7 @@ final class PresentationManager implements IPresentationManager
                     );
 
                 if ($count >= $limit)
-                    throw new EntityValidationException(sprintf('*You reached the limit (%s) of presentations.', $limit));
+                    throw new EntityValidationException(sprintf('You reached the limit (%s) of presentations.', $limit));
             }
 
             if(isset($data['OtherTopic']))
