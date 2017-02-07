@@ -290,4 +290,14 @@ class CountryCodes {
         return $name;
     }
 
+    public static function getContinent($code)
+    {
+        $continent = DB::query("SELECT C.Name FROM Continent_Countries CC
+                                LEFT JOIN Continent C ON C.ID = CC.ContinentID
+                                WHERE CC.CountryCode = '$code'")->value();
+
+        return $continent;
+
+    }
+
 }

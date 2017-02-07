@@ -477,8 +477,13 @@ SQL;
                     $template_1[$header] = null;
                 }
             }
-            else
+            else {
+                if (strpos($name,'Country') !== false) {
+                    $template_1['Continent'] = null;
+                }
                 $template_1[$name] = null;
+            }
+
         }
 
         $entity_survey_header_query = <<<SQL
@@ -791,8 +796,15 @@ SQL;
                     }
                 }
             }
-            else
-                $line[$question] = $row['Answer'];
+            else {
+                if (strpos($question,'Country') !== false) {
+                    $line['Continent'] = CountryCodes::getContinent($row['Answer']);
+                    $country_name = CountryCodes::countryCode2name($row['Answer']);
+                    $line[$question] = $country_name ? $country_name : $row['Answer'];
+                } else {
+                    $line[$question] = $row['Answer'];
+                }
+            }
         }
 
         if(isset($line['SurveyID']) && intval($line['SurveyID']) > 0)
