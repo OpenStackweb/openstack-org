@@ -330,10 +330,10 @@ SQL;
 
             $index_dep = 0;
             foreach($dependencies as $dependency){
-                $question_id      = $dependency->ID;
+                $dep_question_id  = $dependency->ID;
                 $value_id         = $dependency->ValueID;
                 $boolean_operator = $dependency->BooleanOperatorOnValues;
-                $dependencies_sql .= sprintf("( A.QuestionID = %s  AND A.Value = '%s' )", $question_id, $value_id);
+                $dependencies_sql .= sprintf("( A.QuestionID = %s  AND A.Value = '%s' )", $dep_question_id, $value_id);
 
                 if(count($dependencies) - 1 > $index_dep)   $dependencies_sql .= sprintf(" %s ", $boolean_operator);
                 ++$index_dep;
