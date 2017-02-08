@@ -413,7 +413,7 @@ final class PresentationManager implements IPresentationManager
 
                 $count    = $summit->isPublicCategory($category) ?
                     (
-                        intval($speaker->getPublicCateEntityValidationExceptiongoryPresentationsBySummitCount($summit)) +
+                        intval($speaker->getPublicCategoryPresentationsBySummitCount($summit)) +
                         intval($speaker->getPublicCategoryOwnedPresentationsBySummitCount($summit)) +
                         intval($speaker->getPublicCategoryModeratedPresentationsBySummitCount($summit))
                     ):
