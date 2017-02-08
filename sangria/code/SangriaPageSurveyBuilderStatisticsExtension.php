@@ -386,7 +386,6 @@ SQL;
     {
         $template = $this->getCurrentSelectedSurveyTemplate();
         $class_name = $this->getCurrentSelectedSurveyClassName();
-        $question = $template->Parent()->getAllFilterableQuestions()->filter('ClassName','SurveyOrganizationQuestionTemplate')->first();
 
         if (is_null($template))
             return 0;
