@@ -44,10 +44,6 @@
 
     <% include Footer %>
     <% include Quantcast %>
-    <!-- udpdate profile modal -->
-    <% if showUpdateProfileModal() && $Top.URLSegment != profile %>
-      <% include UpdateProfileModal %>
-    <% end_if %>
   </body>
     <% include Page_LinkedinInsightTracker %>
 </html>
