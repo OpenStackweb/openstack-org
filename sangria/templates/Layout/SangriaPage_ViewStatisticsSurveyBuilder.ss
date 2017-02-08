@@ -31,6 +31,7 @@
         <div class="col-md-12">
         <% if SurveyQuestions2Show %>
             <div class="row">
+                <% if $Top.getProjectsUsedCombinedCount() %>
                 <div class="col-md-8 question_container" style="width:100%; margin-bottom: 30px">
                     <h3> Projects Used (PoC, Testing, and Production) </h3>
                     <p>N = $Top.getProjectsUsedCombinedCount() </p>
@@ -38,7 +39,7 @@
                     <script type="application/javascript">
                         var pu_answers = $Top.getProjectsUsedCombined();
                     </script>
-
+                <% end_if %>
                 </div>
                 <% loop SurveyQuestions2Show %>
                     <% if $ClassName == 'SurveyRadioButtonMatrixTemplateQuestion' %>

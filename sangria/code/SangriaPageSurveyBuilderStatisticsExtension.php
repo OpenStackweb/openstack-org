@@ -389,26 +389,23 @@ SQL;
         $question = $template->Parent()->getAllFilterableQuestions()->filter('ClassName','SurveyOrganizationQuestionTemplate')->first();
 
         if (is_null($template))
-        {
             return 0;
-        }
 
-        if ($class_name != 'EntitySurvey') //only works for deployment
-        {
-            return 0;
-        }
+        if ($class_name == 'EntitySurvey') //only works for deployment
+            $template = $template->Parent();
+
+        $question = $template->getAllFilterableQuestions()->filter('ClassName','SurveyOrganizationQuestionTemplate')->first();
 
         $filters_where = $this->generateFilters();
 
         $query = <<<SQL
-    SELECT SANS.`Value` AS Company, COUNT(I2.ID) AS SurveyCount, I2.ID AS ID FROM Survey AS I
-    LEFT JOIN EntitySurvey AS ES ON ES.ID = I.ID
-    LEFT JOIN Survey AS I2 ON I2.ID = ES.ParentID
-    LEFT JOIN SurveyStep AS SSTEP ON SSTEP.SurveyID = I2.ID
+    SELECT SANS.`Value` AS Company, COUNT(I.ID) AS SurveyCount, I.ID AS ID
+    FROM Survey AS I
+    LEFT JOIN SurveyStep AS SSTEP ON SSTEP.SurveyID = I.ID
     LEFT JOIN SurveyAnswer AS SANS ON SANS.StepID = SSTEP.ID
     LEFT JOIN SurveyQuestionTemplate AS SQUEST ON SQUEST.ID = SANS.QuestionID
     WHERE
-    I.TemplateID = $template->ID AND I.ClassName = '{$class_name}' AND I.IsTest = 0
+    I.TemplateID = $template->ID AND I.IsTest = 0
     AND SQUEST.ClassName = 'SurveyOrganizationQuestionTemplate'
     AND EXISTS
     (
@@ -435,7 +432,7 @@ SQL;
             if ($company_row['SurveyCount'] == 1) {
                 $link = 'sangria/SurveyDetails/'.$company_row['ID'].'?BackUrl='.$back_url;
             } else if ($company_row['SurveyCount'] > 1) {
-                $link = 'sangria/SurveyBuilderListSurveys?survey_template_id='.$template->Parent()->ID.'&question_id='.$question->ID.'&question_value='.$company_row['Company'];
+                $link = 'sangria/SurveyBuilderListSurveys?survey_template_id='.$template->ID.'&question_id='.$question->ID.'&question_value='.$company_row['Company'];
             }
 
             $companies->push(
