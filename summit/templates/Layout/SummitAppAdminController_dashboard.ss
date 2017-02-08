@@ -80,7 +80,7 @@
         </div>
         <div class="row">
             <div class="col-md-6">
-                <i class="fa fa-calendar-plus-o"></i>&nbsp;Submitted Events&nbsp;<strong>$Summit.Events.Count</strong>
+                <i class="fa fa-calendar-plus-o"></i>&nbsp;Submitted Events&nbsp;<strong>$Summit.Presentations().Filter('Status','Received').Count</strong>
             </div>
             <div class="col-md-6">
                 <i class="fa fa-calendar-check-o"></i>&nbsp;Published Events&nbsp;<strong>$Summit.PublishedEvents.Count</strong>
