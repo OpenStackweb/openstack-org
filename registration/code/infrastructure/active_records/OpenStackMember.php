@@ -46,7 +46,7 @@ class OpenStackMember extends DataExtension
         'EmailVerifiedTokenHash' => 'Text',
         'EmailVerifiedDate'      => 'SS_Datetime',
         'LegacyMember'           => 'Boolean',
-        'ProfileLastUpdate'           => 'SS_Datetime',
+        'ProfileLastUpdate'      => 'SS_Datetime',
     );
 
     private static $defaults = array
@@ -85,6 +85,26 @@ class OpenStackMember extends DataExtension
     private static $belongs_many_many = array(
         'ManagedCompanies' => 'Company'
     );
+
+    public function onBeforeWrite()
+    {
+        parent::onBeforeWrite();
+
+        $this->owner->FirstName           = trim($this->owner->FirstName);
+        $this->owner->Surname             = trim($this->owner->Surname);
+        $this->owner->Email               = trim($this->owner->Email);
+        $this->owner->SecondEmail         = trim($this->owner->SecondEmail);
+        $this->owner->ThirdEmail          = trim($this->owner->ThirdEmail);
+        $this->owner->StatementOfInterest = trim($this->owner->StatementOfInterest);
+        $this->owner->IRCHandle           = trim($this->owner->IRCHandle);
+        $this->owner->TwitterName         = trim($this->owner->TwitterName);
+        $this->owner->LinkedInProfile     = trim($this->owner->LinkedInProfile);
+        $this->owner->Address             = trim($this->owner->Address);
+        $this->owner->Suburb              = trim($this->owner->Suburb);
+        $this->owner->State               = trim($this->owner->State);
+        $this->owner->Postcode            = trim($this->owner->Postcode);
+        $this->owner->City                = trim($this->owner->City);
+    }
 
     public function onBeforeDelete()
     {

@@ -34,13 +34,13 @@ class PresentationSpeaker extends DataObject
     ];
 
     private static $has_many = [
-        'AreasOfExpertise' => 'SpeakerExpertise',
-        'OtherPresentationLinks' => 'SpeakerPresentationLink',
-        'TravelPreferences' => 'SpeakerTravelPreference',
-        'Languages' => 'SpeakerLanguage',
-        'PromoCodes' => 'SpeakerSummitRegistrationPromoCode',
+        'AreasOfExpertise'         => 'SpeakerExpertise',
+        'OtherPresentationLinks'   => 'SpeakerPresentationLink',
+        'TravelPreferences'        => 'SpeakerTravelPreference',
+        'Languages'                => 'SpeakerLanguage',
+        'PromoCodes'               => 'SpeakerSummitRegistrationPromoCode',
         'AnnouncementSummitEmails' => 'SpeakerAnnouncementSummitEmail',
-        'SummitAssistances' => 'PresentationSpeakerSummitAssistanceConfirmationRequest',
+        'SummitAssistances'        => 'PresentationSpeakerSummitAssistanceConfirmationRequest',
     ];
 
     private static $searchable_fields = [
@@ -59,7 +59,7 @@ class PresentationSpeaker extends DataObject
     ];
 
     private static $defaults = [
-        'MemberID' => 0,
+        'MemberID'       => 0,
         'CreatedFromAPI' => false,
     ];
 
@@ -73,12 +73,12 @@ class PresentationSpeaker extends DataObject
     ];
 
     private static $summary_fields = [
-        'FirstName' => 'FirstName',
-        'LastName' => 'LastName',
+        'FirstName'    => 'FirstName',
+        'LastName'     => 'LastName',
         'Member.Email' => 'Email',
-        'Bio' => 'Bio',
-        'IRCHandle' => 'IRCHandle',
-        'TwitterName' => 'TwitterName',
+        'Bio'          => 'Bio',
+        'IRCHandle'    => 'IRCHandle',
+        'TwitterName'  => 'TwitterName',
     ];
 
     protected function onBeforeDelete() {
@@ -118,6 +118,16 @@ class PresentationSpeaker extends DataObject
         DB::query("UPDATE Presentation SET ModeratorID = 0 WHERE ModeratorID = {$this->ID};");
     }
 
+    protected function onBeforeWrite()
+    {
+        parent::onBeforeWrite();
+
+        $this->FirstName   = trim($this->FirstName);
+        $this->LastName    = trim($this->LastName);
+        $this->Title       = trim($this->Title);
+        $this->IRCHandle   = trim($this->IRCHandle);
+        $this->TwitterName = trim($this->TwitterName);
+    }
     /**
      * Gets a readable label for the speaker
      *

@@ -51,6 +51,13 @@ class SpeakerRegistrationRequest
 
     );
 
+    protected function onBeforeWrite()
+    {
+        parent::onBeforeWrite();
+
+        $this->Email = trim($this->Email);
+    }
+
     /**
      * @return int
      */

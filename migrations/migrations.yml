@@ -63,3 +63,4 @@ migrations:
   - SummitEventWithFileMigration
   - SurveyStateMigration
   - InsertEmailForgotPasswordTemplateMigration
+  - CleanMemberFirstNameSurnameMigration
