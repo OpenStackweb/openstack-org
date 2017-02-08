@@ -15,7 +15,6 @@ class PresentationList extends React.Component {
 		this.loadMore = this.loadMore.bind(this);
 	}
 
-
 	loadMore (e) {
 		e.preventDefault();
 
@@ -26,21 +25,24 @@ class PresentationList extends React.Component {
 		}));
 	}
 
-
 	onPresentationClicked (id) {
 		// Hack!
 		document.body.classList.remove('openVotingNav');
-		
-		this.props.dispatch(goToPresentation(id));
+        this.updateLocationHash(id);
+        this.props.dispatch(goToPresentation(id));
 	}
 
+	updateLocationHash(id){
+        window.location.hash = '#/'+id;
+	}
 
 	componentDidMount (prevProps) {
 		if(this.props.presentations.length && !this.props.selectedPresentation.id) {
-			this.props.dispatch(goToPresentation(this.props.presentations[0].id));
+			var presentationId = this.props.filter != 'none' ? this.props.filter : this.props.presentations[0].id;
+            this.updateLocationHash(presentationId);
+			this.props.dispatch(goToPresentation(presentationId));
 		}
 	}
-
 
 	render () {
 		const {
@@ -59,7 +61,6 @@ class PresentationList extends React.Component {
 			total - presentations.length,
 			Config.get('presentationLimit')
 		);
-
 
 		let children = presentations.map(p => (
 		    <PresentationItem 

@@ -23,7 +23,6 @@ class VotingApp extends React.Component {
 		this._keyListener = this._keyListener.bind(this);
 	}
 
-
 	_getPresentations(props, offset) {
 		const params = {};
 		
@@ -33,7 +32,6 @@ class VotingApp extends React.Component {
 		
 		this.props.requestPresentations(params);
 	}
-
 
 	_keyListener (e) {
 		const {tagName} = e.target;
@@ -80,7 +78,7 @@ class VotingApp extends React.Component {
 			navigationDirection
 		} = this.props;
 
-		if(preview) {
+     	if(preview) {
 			return (
 				<div className="row">
 					<div className="col-lg-9 col-md-9 col-sm-9 voting-content-body-wrapper">
@@ -105,7 +103,7 @@ class VotingApp extends React.Component {
 				{ready &&
 					<div>
 						<Loader active={xhrLoading} type='spin' className='main-loader' />
-						<Sidebar />
+						<Sidebar filter={ this.props.params.filter || 'none'}/>
 						<div className={`col-lg-9 col-md-9 col-sm-9 voting-content-body-wrapper`}>
 						<TransitionGroup>
 							{(!requestedID || (presentationID == requestedID)) &&
@@ -125,7 +123,7 @@ class VotingApp extends React.Component {
 
 
 export default connect(
-	state => {
+	(state) => {
 		return {
 			xhrLoading: state.ui.loading,
 			errorMsg: state.ui.errorMsg,
@@ -133,8 +131,8 @@ export default connect(
 			category: state.presentations.category,
 			search: state.presentations.search,
 			preview: window.location.search.match(/^\?preview/),
-			presentationID: state.presentations.selectedPresentation.id,
-			requestedID: state.presentations.requestedPresentationID,
+            presentationID: state.presentations.selectedPresentation.id,
+            requestedID: state.presentations.requestedPresentationID,
 			navigationDirection: state.presentations.navigationDirection
 		}
 	},

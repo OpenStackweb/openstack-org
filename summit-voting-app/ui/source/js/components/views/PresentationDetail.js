@@ -29,7 +29,7 @@ class PresentationDetail extends React.Component {
 
 	}
 	componentDidMount () {
-		this._getPresentation();
+      	this._getPresentation();
 	}
 
 	componentWillReceiveProps (nextProps) {
