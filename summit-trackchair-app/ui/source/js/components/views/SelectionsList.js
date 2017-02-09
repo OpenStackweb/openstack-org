@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {postReorganise} from '../../actions';
+import {postReorganise, throwError} from '../../actions';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import SortableLeaderboardItem from '../containers/SortableLeaderboardItem';
@@ -58,6 +58,10 @@ class SelectionsList extends React.Component {
 		else if(toList === this.props.column && !this.props.acceptNew) {			
 			return;
 		}
+        else if(item.presentation.group_selected) {
+            this.props.throwError('Presentation already assign to another Team List.');
+            return;
+        }
 		else {
 			this.props.onColumnChange(item, fromList, fromIndex, toList, toIndex);
 		}
@@ -142,7 +146,10 @@ export default connect(
 	dispatch => ({
 		reorganiseSelections(listID, collection, newOrder) {
 			dispatch(postReorganise(listID, collection, newOrder));
-		}
+		},
+        throwError(msg) {
+            dispatch(throwError(msg));
+        }
 
 	})
 )(SortableSelectionsList);

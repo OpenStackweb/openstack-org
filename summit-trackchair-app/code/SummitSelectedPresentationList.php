@@ -281,4 +281,8 @@ ORDER BY SummitSelectedPresentation.Order ASC
     public function isLightning() {
         return ($this->ListClass == SummitSelectedPresentationList::Lightning);
     }
+
+    public static function getListClassName($list_class) {
+        return ($list_class == SummitSelectedPresentationList::Session) ? 'Presentation' : 'Lightning';
+    }
 }

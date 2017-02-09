@@ -52,7 +52,8 @@ export const detailPresentation = function (
         case 'TOGGLE_FOR_ME':
         	return {
         		...state,
-        		selected: action.payload.type
+        		selected: action.payload.type,
+        		lightning_selected: action.payload.type,
         	};
 
         case 'TOGGLE_FOR_GROUP':

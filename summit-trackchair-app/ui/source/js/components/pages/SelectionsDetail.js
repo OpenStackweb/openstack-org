@@ -33,8 +33,6 @@ class SelectionsDetail extends React.Component {
 			);
 		}
 
-
-		
 		if(this.props[toList].find(i => +i.id === +item.id)) {
 			// List already has it.
 			return;

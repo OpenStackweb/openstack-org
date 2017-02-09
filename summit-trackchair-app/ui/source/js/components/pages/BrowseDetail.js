@@ -49,7 +49,7 @@ class BrowseDetail extends React.Component {
 
     render () {
     	const p = this.props.presentation;    	
-    	const {selectionsRemaining, myList, isAdmin, index, total} = this.props;
+    	const {selectionsRemaining, lightningSelectionsRemaining, myList, myLightningList, isAdmin, index, total} = this.props;
 
     	if(!p.id) {
     		return <Wave />
@@ -116,7 +116,12 @@ class BrowseDetail extends React.Component {
 			            	</div>
 			            }
 			            {myList &&
-			            	<p><small className="pull-right">Selections remaining: {selectionsRemaining}</small></p>
+			            	<p>
+                                <small className="pull-right">
+                                    Selections remaining: {selectionsRemaining}
+                                    {p.lightning_wannabe && <span>-{selectionsRemaining}<i className='fa fa-bolt' /></span> }
+                                </small>
+                            </p>
 			            }
 			            {p.can_assign &&
 			               <div className="row">
@@ -161,15 +166,23 @@ class BrowseDetail extends React.Component {
 export default connect(
 	state => {
 		const filteredPresentations = getFilteredPresentations(state);
-		const myList = state.lists.results ? state.lists.results.find(l => l.mine) : null;
-		const selectionsRemaining = myList ? (myList.slots - myList.selections.length) : null;
+		const myList = state.lists.results ? state.lists.results.find(l => l.mine && !l.is_lightning) : null;
+		const myLightningList = state.lists.results ? state.lists.results.find(l => l.mine && l.is_lightning) : null;
+		let selectionsRemaining = myList ? (myList.slots - myList.selections.length) : null;
+		const lightningSelectionsRemaining = myLightningList ? (myLightningList.slots - myLightningList.selections.length) : null;
 		const index = filteredPresentations.findIndex(p => p.id === state.detailPresentation.id)+1;
-		
+
+        /*if (state.detailPresentation.lightning_wannabe) {
+            selectionsRemaining = `${selectionsRemaining} <i className='fa fa-bolt' /> ${lightningSelectionsRemaining}`;
+        }*/
+
 		return {	
 			presentation: state.detailPresentation,
 			myList,
+            myLightningList,
 			selectionsRemaining,
-			index,			
+            lightningSelectionsRemaining,
+			index,
 			total: filteredPresentations.length,
 			isAdmin: window.TrackChairAppConfig.userinfo.isAdmin
 		}

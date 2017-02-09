@@ -51,10 +51,11 @@ class PresentationMeta extends React.Component {
 
 		const tooltip = (
 			<Tooltip
+                popupClassName='popularity_tooltip'
 				key='popularity'
 				arrowContent={<div className="rc-tooltip-arrow-inner"></div>}
 				placement="left" 
-				overlay={`Popularity score is a composite rating<br>that weights individual selections, <br>"interested", and "no thanks" from everyone on the team`}
+				overlay={`Popularity score is a composite rating that weights individual selections, "interested", and "no thanks" from everyone on the team`}
 			>
 				<i className="fa fa-question-circle" />
 			</Tooltip>
@@ -69,7 +70,7 @@ class PresentationMeta extends React.Component {
                           <dt>Type:</dt>
                           {presentation.lightning && <dd>Lightning Talk</dd>}
                           {presentation.lightning_wannabe && <dd>Lightning or Presentation</dd>}
-                          {isSession && <dd>Session</dd>}
+                          {isSession && <dd>Presentation</dd>}
 		               </dl>
 		            </div>
 		            <div className="col-md-7" id="cluster_info">
@@ -164,7 +165,7 @@ class PresentationMeta extends React.Component {
 		            </div>
 		    	</div>
 		    	<RichTextSection title="Description" body={presentation.description} />
-		    	<RichTextSection title="Problems Addressed" body={presentation.problem_addressed} />
+		    	<RichTextSection title="Social Description" body={presentation.social_desc} />
 		    	<RichTextSection title="What Should Attendees Expect to Learn?" body={presentation.attendees_expected_learnt} />
 		</div>
 		);		

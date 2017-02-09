@@ -102,7 +102,9 @@ class PresentationTrackChairFeatures extends DataExtension
                 ->max('Order');
 
             if($selected && $highestOrderInList >= $highestSelection) {
-                $msg = "$list_class Selection list is full. Currently at $highestOrderInList. Limit is $highestSelection.";
+                $list_class_name = SummitSelectedPresentationList::getListClassName($list_class);
+                $msg = "$list_class_name Selection list is full. Currently at $highestOrderInList. Limit is $highestSelection.";
+
                 //check if there is space for selected in the other list
                 if ($this->owner->isLightningWannabe()) {
                     $other_list_class = ($list_class == SummitSelectedPresentationList::Lightning) ? SummitSelectedPresentationList::Session : SummitSelectedPresentationList::Lightning;
@@ -113,8 +115,17 @@ class PresentationTrackChairFeatures extends DataExtension
                         ->filter('Collection', $collection)
                         ->max('Order');
 
-                    if($highestOtherOrderInList < $highestOtherSelection) {
-                        $msg .= "However it will be added to ".$other_list_class.' Selection.';
+                    // lightning wannabes first we add session and then lightning, so it depends
+                    $should_add_declaimer = false;
+                    if ($list_class == SummitSelectedPresentationList::Lightning) {
+                        $should_add_declaimer = $highestOtherOrderInList == $highestOtherSelection;
+                    } else {
+                        $should_add_declaimer = $highestOtherOrderInList < $highestOtherSelection;
+                    }
+
+                    if($should_add_declaimer) {
+                        $other_list_class_name = SummitSelectedPresentationList::getListClassName($other_list_class);
+                        $msg .= "However it will be added to {$other_list_class_name} Selection.";
                     }
                 }
 
@@ -290,9 +301,9 @@ class PresentationTrackChairFeatures extends DataExtension
         return $selected->isPass();
     }
 
-    public function getSelectionType()
+    public function getSelectionType($list_class = SummitSelectedPresentationList::Session)
     {
-        $list_class = ($this->owner->isOfType(IPresentationType::LightingTalks)) ? SummitSelectedPresentationList::Lightning : SummitSelectedPresentationList::Session;
+        $list_class = ($this->owner->isOfType(IPresentationType::LightingTalks)) ? SummitSelectedPresentationList::Lightning : $list_class;
 
     	if($this->isSelected($list_class)) {
     		return SummitSelectedPresentation::COLLECTION_SELECTED;
@@ -304,7 +315,7 @@ class PresentationTrackChairFeatures extends DataExtension
     		return SummitSelectedPresentation::COLLECTION_PASS;
     	}
 
-    	return null;
+    	return false;
     }
 
     public function getSelectors()

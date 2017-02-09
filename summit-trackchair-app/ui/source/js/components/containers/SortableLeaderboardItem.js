@@ -148,9 +148,10 @@ export default connect(
 
 		const teamHasThis = teamList.selections.some(s => +s.id === +ownProps.id);
 		const teamIsFull = teamList.selections.length >= teamList.slots;
+		const otherTeamHasThis = ownProps.presentation.group_selected;
 
 		return {
-			canAddTeam: (!teamHasThis && !teamIsFull)
+			canAddTeam: (!teamHasThis && !teamIsFull && !otherTeamHasThis)
 		};
 	}
 )(LeaderboardItemDragSource);
