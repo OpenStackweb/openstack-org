@@ -7,6 +7,7 @@ Member:
     - PresentationMemberExtension
     - MemberTokenProvider
     - AttendeeMember
+    - SummitMemberInteractor
 EditProfilePage_Controller:
   extensions:
     - EditProfilePageSummitAttendeeExtension

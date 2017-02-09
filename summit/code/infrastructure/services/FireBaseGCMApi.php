@@ -39,7 +39,7 @@ final class FireBaseGCMApi implements IPushNotificationApi
      * @param null|int $ttl
      * @return bool
      */
-    function sendPush($to, array $data, $priority = self::NormalPriority, $ttl = null)
+    function sendPush($to, array $data, $priority = IPushNotificationApi::NormalPriority, $ttl = null)
     {
         $endpoint = self::BaseUrl.'/fcm/send';
         $client   = new GuzzleHttp\Client();
@@ -48,14 +48,19 @@ final class FireBaseGCMApi implements IPushNotificationApi
             foreach ($to as $recipient) {
 
                 $message = [
-                    'to' => '/topics/' . $recipient,
-                    'data' => $data
+                    'to'       => '/topics/' . $recipient,
+                    'data'     => $data,
+                    'priority' => $priority,
                 ];
+
+                if(!is_null($ttl) && intval($ttl)  >= 0 ){
+                    $message['time_to_live'] = intval($ttl);
+                }
 
                 $response = $client->post($endpoint, [
                     'headers' => [
                         'Authorization' => sprintf('key=%s', $this->api_server_key),
-                        'Content-Type' => 'application/json'
+                        'Content-Type'  => 'application/json'
                     ],
                     'body' => json_encode($message)
                 ]);
