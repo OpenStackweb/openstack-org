@@ -18,6 +18,8 @@ const PresentationSpeakers = ({
 				bio={s.bio}
 				imageURL={s.photo_url}
 				twitter={s.twitter_name}
+                available_for_bureau={s.available_for_bureau}
+                profile_link={s.profile_link}
 				/>
 
 		);
