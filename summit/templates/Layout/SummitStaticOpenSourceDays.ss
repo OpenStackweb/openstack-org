@@ -65,12 +65,12 @@
         <div class="col-lg-5 col-md-5 col-sm-6">
             <div class="company-logo"><img src="/assets/boston-summit/images/ansible-344-lg.png" alt="Ansible"></div>
             <p class="company-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras urna orci, dictum vitae maximus at, consectetur vitae velit. Morbi interdum eu nibh quis gravida. Pellentesque nec magna libero. Fusce nisi orci.</p>
-            <p class="learn-more-button"><a href="https://www.ansible.com/" class="btn btn-primary" role="button">Learn More</a></p>
+            <p class="learn-more-button"><a href="http://www.ansible.com/" class="btn btn-primary" role="button">Learn More</a></p>
         </div>
         <div class="col-lg-5 col-lg-push-2 col-md-5 col-md-push-2 col-sm-6">
+            <div class="company-logo"></div>
         </div>
     </div>
-  </div>
   </div>
 </div>
 <div class="register-promo-wrapper" id="osd-register" >
