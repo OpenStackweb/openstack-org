@@ -22,7 +22,7 @@ class CleanMemberFirstNameSurnameMigration extends AbstractDBMigrationTask
     {
         DB::query("UPDATE Member SET 
                 FirstName           = TRIM(FirstName), 
-                Surname             = TRIM(Surname).
+                Surname             = TRIM(Surname),
                 SecondEmail         = TRIM(SecondEmail),
                 ThirdEmail          = TRIM(ThirdEmail),
                 StatementOfInterest = TRIM(StatementOfInterest),
