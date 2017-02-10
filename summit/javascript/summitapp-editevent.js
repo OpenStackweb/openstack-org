@@ -330,8 +330,8 @@ $(document).ready(function(){
 
     tinymce.init({
         selector: "textarea.html_text",
-        width:      '100%',
-        height:     270,
+        width:      '99%',
+        height:     150,
         plugins:    [ "anchor link spellchecker" ],
         toolbar:    "formatselect, fontselect, fontsizeselect, bold, italic, underline, alignleft, aligncenter, alignright, alignjustify, bullist, numlist, outdent, indent, blockquote, undo, redo, removeformat, link, spellchecker",
         statusbar:  false,

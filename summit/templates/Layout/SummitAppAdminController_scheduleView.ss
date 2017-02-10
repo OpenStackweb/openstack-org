@@ -133,7 +133,6 @@
                     });
 
                     $(window).scroll(function () {
-                        console.log('scroll '+$(this).scrollTop());
                         if ($(this).scrollTop() > 318) {
                             $('.unpublished-container').addClass('fixed');
                         } else {
