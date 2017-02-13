@@ -144,12 +144,13 @@
             var source        = $('#unpublished_event_type').val();
             var track_id      = $('#unpublished_track').val();
             var status        = $('#unpublished_selection_status').val();
-            var search_term   = $('#unpublished_search_term').val();
             var order         = $('#unpublished_sort').val();
+
+            $('#unpublished_search_term').val('');
 
             if (!source) swal("Select a Source", "Please select a source to search on.", "warning");
 
-            self.doFilter(source,track_id,status,search_term,order);
+            self.doFilter(source,track_id,status,'',order);
         }
 
     </script>

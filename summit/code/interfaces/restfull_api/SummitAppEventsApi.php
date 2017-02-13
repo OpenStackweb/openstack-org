@@ -134,16 +134,14 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
                     break;
                 case 'evening_events':
                     $event_types = [ISummitEventType::EveningEvents];
-                    $search_term = $filters['search_term'];
-                    list($page, $page_size, $count, $data) = $this->summitevent_repository->getUnpublishedBySummit($summit_id, $event_types, $search_term, $page,$page_size, $order);
+                    list($page, $page_size, $count, $data) = $this->summitevent_repository->getUnpublishedBySummit($summit_id, $event_types, $filters, $page,$page_size, $order);
                     break;
                 case 'lunch_events':
                     $event_types = [ISummitEventType::Lunch, ISummitEventType::Breaks];
-                    $search_term = $filters['search_term'];
-                    list($page, $page_size, $count, $data) = $this->summitevent_repository->getUnpublishedBySummit($summit_id, $event_types, $search_term, $page,$page_size, $order);
+                    list($page, $page_size, $count, $data) = $this->summitevent_repository->getUnpublishedBySummit($summit_id, $event_types, $filters, $page,$page_size, $order);
                     break;
                 case 'all_events':
-                    list($page, $page_size, $count, $data) = $this->summitpresentation_repository->getUnpublished($summit_id,[],$filters,$page,$page_size,$order);
+                    list($page, $page_size, $count, $data) = $this->summitevent_repository->getUnpublishedBySummit($summit_id, null, $filters, $page,$page_size, $order);
                     break;
             }
 

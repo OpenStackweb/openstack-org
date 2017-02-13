@@ -25,8 +25,8 @@ final class SummitEventWithFileMigration extends AbstractDBMigrationTask
         $boston_summit = Summit::get()->byID(22);
         Summit::seedBasicEventTypes($boston_summit->ID);
         $old_type = $boston_summit->EventTypes()->filter('Type',ISummitEventType::Lunch_Breaks)->first();
-
-        $old_type->delete();
+        if ($old_type)
+            $old_type->delete();
 
     }
 

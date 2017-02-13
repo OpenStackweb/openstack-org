@@ -134,32 +134,58 @@ SQL;
 
     /**
      * @param int $summit_id
-     * @param string $event_type
+     * @param array $event_types
+     * @param array $filters
      * @param int $page
      * @param int $page_size
      * @param array $order
      * @return array
      */
-    public function getUnpublishedBySummit($summit_id, $event_types = [], $search_term, $page = 1, $page_size = 10, $order = null)
+    public function getUnpublishedBySummit($summit_id, $event_types = [], $filters, $page = 1, $page_size = 10, $order = null)
     {
-        $presentation_types = PresentationType::presentationTypes();
-        $presentation_types_csv = "'".implode("','",$presentation_types)."'";
-
-        $event_types_csv = "'".implode("','",$event_types)."'";
+        $selection_status = $filters['status'];
+        $search_term = $filters['search_term'];
+        $track_id = $filters['track_id'];
 
         if(is_null($order)) $order = array('SummitEvent.Created' => 'ASC');
 
-        $where_clause = "SummitEvent.Title IS NOT NULL AND SummitEvent.Title <>'' AND (SummitEventType.Type NOT IN (".$presentation_types_csv.")) ";
-        if (!empty($search_term)) {
-            $where_clause .= " AND (SummitEvent.Title LIKE '%{$search_term}%' OR SummitEvent.ID = '{$search_term}' OR SummitEvent.Abstract LIKE '%{$search_term}%')";
+        $where_clause = "SummitEvent.Title IS NOT NULL AND SummitEvent.Title <> '' ";
+        $where_clause .= !empty($track_id) ? " AND SummitEvent.CategoryID = {$track_id} " : "";
+
+        if (count($event_types)) {
+            $event_types_csv = "'".implode("','",$event_types)."'";
+            $where_clause .= " AND SummitEventType.Type IN (".$event_types_csv.") ";
         }
-        if(!empty($event_type)){
-            $where_clause .= " AND (SummitEventType.Type IN (".$event_types_csv.")) ";
+
+        if ($selection_status) {
+            switch ($selection_status) {
+                case 'selected' :
+                    $where_clause .= " AND SSP.`Order` IS NOT NULL AND SSPL.ListType = 'Group'";
+                    $where_clause .= " AND SSPL.CategoryID = SummitEvent.CategoryID";
+                    break;
+                case 'accepted' :
+                    $where_clause .= " AND SSP.`Order` IS NOT NULL AND SSP.`Order` <= PC.SessionCount AND SSPL.ListType = 'Group'";
+                    $where_clause .= " AND SSPL.CategoryID = SummitEvent.CategoryID";
+                    break;
+                case 'alternate' :
+                    $where_clause .= " AND SSP.`Order` IS NOT NULL AND SSP.`Order` > PC.SessionCount AND SSPL.ListType = 'Group'";
+                    $where_clause .= " AND SSPL.CategoryID = SummitEvent.CategoryID";
+                    break;
+            }
+        }
+
+        if (!empty($search_term)) {
+            $where_clause .= " AND (SummitEvent.Title LIKE '%{$search_term}%'
+                                    OR SummitEvent.ID = '{$search_term}'
+                                    OR SummitEvent.Abstract LIKE '%{$search_term}%')";
         }
 
         $list      = SummitEvent::get()
             ->filter( array('SummitID' => $summit_id, 'Published' => 0))
             ->leftJoin("SummitEventType","SummitEventType.ID = SummitEvent.TypeID")
+            ->leftJoin('SummitSelectedPresentation','SSP.PresentationID = SummitEvent.ID','SSP')
+            ->leftJoin('SummitSelectedPresentationList','SSP.SummitSelectedPresentationListID = SSPL.ID','SSPL')
+            ->leftJoin('PresentationCategory','PC.ID = SummitEvent.CategoryID','PC')
             ->where($where_clause)->sort("TRIM({$order})");
 
         $count     = intval($list->count());
