@@ -509,20 +509,12 @@ $(document).ready(function(){
             dataType: "json"
         }).done(function(saved_event) {
 
-            $.when( uploadAttachment(saved_event.ID) ).then(function( data, textStatus, jqXHR ) {
-                if (event_id) {
-                    swal("Updated!", "Your event was updated successfully.", "success");
-                    //location.reload();
-                } else {
-                    swal("Saved!", "Your event was created successfully.", "success");
-                    //window.location = window.location+'/'+saved_event.ID;
-                    $('#event_id').val(saved_event.ID);
-                    $('.active','.breadcrumb').html(saved_event.Title);
-                }
-            });
-
-            form.find(':submit').removeAttr('disabled');
-
+            if($('#attachment-filename').val()){
+                // upload file
+                uploadAttachment(event_id == 0, saved_event);
+                return;
+            }
+            finishEventSaveOrUpdate(event_id == 0, saved_event);
         }).fail(function(jqXHR) {
             var responseCode = jqXHR.status;
             if(responseCode == 412) {
@@ -536,12 +528,26 @@ $(document).ready(function(){
 
     }
 
-    function uploadAttachment(event_id)
+    function finishEventSaveOrUpdate(newEvent, event){
+        if (newEvent) {
+            swal("Saved!", "Your event was created successfully.", "success");
+            window.location = window.location+'/'+event.ID;
+            $('#event_id').val(event.ID);
+            $('.active','.breadcrumb').html(event.Title);
+        } else {
+            swal("Updated!", "Your event was updated successfully.", "success");
+            location.reload();
+        }
+        form.find(':submit').removeAttr('disabled');
+    }
+
+    function uploadAttachment(newEvent, event)
     {
         var summit_id  = $('#summit_id').val();
-        var url        = 'api/v1/summits/'+summit_id+'/events/'+event_id+'/attach';
+        var url        = 'api/v1/summits/'+summit_id+'/events/'+event.ID+'/attach';
         var file_data  = $("#event-attachment").prop("files")[0];
         var form_data  = new FormData();
+
         form_data.append("file", file_data);
 
         if ($('#attachment-filename').val()) {
@@ -554,6 +560,7 @@ $(document).ready(function(){
                 data: form_data,
                 type: 'POST',
                 success: function(attachment_id){
+                    finishEventSaveOrUpdate(newEvent, event);
                 },
                 error: function(response,status,error) {
                     swal('Validation error', response.responseJSON.messages[0].message, 'warning');
