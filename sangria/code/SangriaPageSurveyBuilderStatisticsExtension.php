@@ -510,7 +510,7 @@ SQL;
 
                 $from = date('Y/m/d H:i', strtotime($template->StartDate));
                 $to = date('Y/m/d H:i', strtotime($template->EndDate));
-                $query_str = sprintf("?survey_template_id=%s&From=%s&To=%s", $template_id, $from, $to);
+                $query_str = sprintf("?From=%s&To=%s", $from, $to);
 
                 return Controller::curr()->redirect(Controller::curr()->Link($action) . $query_str);
             }
@@ -528,7 +528,7 @@ SQL;
 
                 $query_str = '';
                 if (!empty($from) && !empty($to)) {
-                    $query_str = sprintf("?survey_template_id=%s&From=%s&To=%s", $template_id, $from, $to);
+                    $query_str = sprintf("?From=%s&To=%s", $from, $to);
                 }
 
                 return Controller::curr()->redirect(Controller::curr()->Link($action) . $query_str);
