@@ -18,7 +18,7 @@
 import datetime
 import json
 import requests
-
+import time
 
 user_list = 'https://ask.openstack.org/en/api/v1/users/'
 
@@ -44,6 +44,7 @@ def get_user_data(karma_level):
         print "Getting page: %d" % page
         response = session.get(user_list, params=params)
         user_data.extend(json.loads(response.text)['users'])
+        time.sleep(3)
 
     # since pages are big chunks, we will have some users that are
     # having karma lower than karma_level in the last page. Remove them.
