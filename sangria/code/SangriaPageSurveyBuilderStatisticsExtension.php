@@ -234,7 +234,7 @@ SQL;
         $filters_where = '';
 
         if (!empty($from) && !empty($to)) {
-            $filters_where = " AND " . SangriaPage_Controller::generateDateFilters($survey_table_prefix, "LastEdited");
+            $filters_where = " AND " . SangriaPage_Controller::generateDateFilters($survey_table_prefix, 'LastEdited');
         }
 
         if (!empty($filters))
@@ -390,40 +390,52 @@ SQL;
         if (is_null($template))
             return 0;
 
-        if ($class_name == 'EntitySurvey') //only works for deployment
-            $template = $template->Parent();
+        if ($class_name == 'EntitySurvey') {
+            $question = $template->Parent()->getAllFilterableQuestions()->filter('ClassName','SurveyOrganizationQuestionTemplate')->first();
+            $parent_survey_template_id = $template->ParentID;
+        } else {
+            $question = $template->getAllFilterableQuestions()->filter('ClassName','SurveyOrganizationQuestionTemplate')->first();
+            $parent_survey_template_id = $template->ID;
+        }
 
-        $question = $template->getAllFilterableQuestions()->filter('ClassName','SurveyOrganizationQuestionTemplate')->first();
 
         $filters_where = $this->generateFilters();
 
-        $query = <<<SQL
-    SELECT SANS.`Value` AS Company, COUNT(I.ID) AS SurveyCount, I.ID AS ID
-    FROM Survey AS I
-    LEFT JOIN SurveyStep AS SSTEP ON SSTEP.SurveyID = I.ID
-    LEFT JOIN SurveyAnswer AS SANS ON SANS.StepID = SSTEP.ID
-    LEFT JOIN SurveyQuestionTemplate AS SQUEST ON SQUEST.ID = SANS.QuestionID
-    WHERE
-    I.TemplateID = $template->ID AND I.IsTest = 0
-    AND SQUEST.ClassName = 'SurveyOrganizationQuestionTemplate'
-    AND EXISTS
-    (
-        SELECT COUNT(A.ID) AS AnsweredMandatoryQuestionCount
-        FROM SurveyAnswer A
-        INNER JOIN SurveyStep STP ON STP.ID = A.StepID
-        INNER JOIN Survey S ON S.ID = STP.SurveyID
+        $query = " SELECT SANS.`Value` AS Company, COUNT(I.ID) AS SurveyCount, I.ID AS ID";
+
+        if ($class_name == 'EntitySurvey') {
+            $query .= " FROM Survey AS I
+                       LEFT JOIN EntitySurvey AS ES ON ES.ID = I.ID
+                       LEFT JOIN Survey AS I2 ON I2.ID = ES.ParentID
+                       LEFT JOIN SurveyStep AS SSTEP ON SSTEP.SurveyID = I2.ID";
+        } else {
+            $query .= " FROM Survey AS I
+                       LEFT JOIN SurveyStep AS SSTEP ON SSTEP.SurveyID = I.ID";
+        }
+
+        $query .= "
+        LEFT JOIN SurveyAnswer AS SANS ON SANS.StepID = SSTEP.ID
+        LEFT JOIN SurveyQuestionTemplate AS SQUEST ON SQUEST.ID = SANS.QuestionID
         WHERE
-        S.ID = I.ID AND S.IsTest = 0 AND
-        A.QuestionID IN
+        I.TemplateID = $template->ID AND I.IsTest = 0
+        AND SQUEST.ClassName = 'SurveyOrganizationQuestionTemplate'
+        AND EXISTS
         (
-            SELECT Q.ID FROM SurveyQuestionTemplate Q
-            INNER JOIN SurveyStepTemplate STP ON STP.ID = Q.StepID AND STP.SurveyTemplateID = $template->ID
-            WHERE Q.Mandatory = 1 AND NOT EXISTS ( SELECT ID FROM SurveyQuestionTemplate_DependsOn DP WHERE SurveyQuestionTemplateID = Q.ID )
+            SELECT COUNT(A.ID) AS AnsweredMandatoryQuestionCount
+            FROM SurveyAnswer A
+            INNER JOIN SurveyStep STP ON STP.ID = A.StepID
+            INNER JOIN Survey S ON S.ID = STP.SurveyID
+            WHERE S.ID = I.ID AND S.IsTest = 0
+            AND A.QuestionID IN
+            (
+                SELECT Q.ID FROM SurveyQuestionTemplate Q
+                INNER JOIN SurveyStepTemplate STP ON STP.ID = Q.StepID AND STP.SurveyTemplateID = $template->ID
+                WHERE Q.Mandatory = 1 AND NOT EXISTS ( SELECT ID FROM SurveyQuestionTemplate_DependsOn DP WHERE SurveyQuestionTemplateID = Q.ID )
+            )
+            GROUP BY S.ID
         )
-        GROUP BY S.ID
-    )
-    {$filters_where} GROUP BY SANS.`Value` ORDER BY SANS.`Value`;
-SQL;
+        {$filters_where} GROUP BY SANS.`Value` ORDER BY SANS.`Value`;";
+
 
         $companies = new ArrayList();
         foreach (DB::query($query) as $company_row) {
@@ -431,7 +443,7 @@ SQL;
             if ($company_row['SurveyCount'] == 1) {
                 $link = 'sangria/SurveyDetails/'.$company_row['ID'].'?BackUrl='.$back_url;
             } else if ($company_row['SurveyCount'] > 1) {
-                $link = 'sangria/SurveyBuilderListSurveys?survey_template_id='.$template->ID.'&question_id='.$question->ID.'&question_value='.$company_row['Company'];
+                $link = 'sangria/SurveyBuilderListSurveys?survey_template_id='.$parent_survey_template_id.'&question_id='.$question->ID.'&question_value='.$company_row['Company'];
             }
 
             $companies->push(
