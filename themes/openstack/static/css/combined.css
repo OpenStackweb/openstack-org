@@ -4195,6 +4195,16 @@ h1 span.subhead {
 /*Edn Mentoring & Diversity Page*/
 
 
+/*Open Source Days*/
+
+a.learn-more-button,
+a.learn-more-button:visited {
+  color: #fff; }
+
+.about-open-source-days a:hover.btn.btn.btn-block {
+  background: #A51B1B;
+}
+
 /*Austin Guide*/
 .guide-header {
   text-align: center; }
