@@ -55,6 +55,7 @@ final class ScheduleEventViewModelMapper implements IViewModelMapper
                 'attendees_schedule_count' => $e->AttendeesScheduleCount(),
                 'track_id' => intval($e->CategoryID),
                 'attachment_url' => '',
+                'to_record' => false,
             ];
 
             foreach ($e->Tags() as $t) {
@@ -81,6 +82,7 @@ final class ScheduleEventViewModelMapper implements IViewModelMapper
                 $entry['moderator_id'] = intval($e->ModeratorID);
                 $entry['level'] = $e->Level;
                 $entry['status'] = $e->SelectionStatus();
+                $entry['to_record'] = boolval($e->ToRecord);
             }
 
             if ($e instanceof SummitEventWithFile) {

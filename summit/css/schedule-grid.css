@@ -146,7 +146,7 @@ i.collapse-nav {
     top: -12px;
 }
 
-.col-tags-content a, .col-speakers-content a, .event-title a, .col-level-content a
+.col-tags-content a, .col-speakers-content a, .col-level-content a
 {
     color: #4a4a4a !important;
 }
@@ -167,6 +167,16 @@ i.collapse-nav {
 
 .attachment-link {
     margin-left: 10px;
+    font-size: 15px;
+    color: #2A4E68;
+}
+
+.record-icon {
+    margin-left: 10px;
+    top: -1px;
+    position: relative;
+    color: #2A4E68;
+    font-size: 15px;
 }
 
 .event-details

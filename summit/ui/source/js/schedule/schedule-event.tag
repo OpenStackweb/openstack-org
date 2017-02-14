@@ -33,7 +33,8 @@
                     <div class="row">
                         <div class="col-md-12 event-title">
                             <raw content="{ title }"/>
-                            <a href="{ attachment_url }" if={ attachment_url } ><i class="fa fa-download" aria-hidden="true"></i></a>
+                            <a class="attachment-link" href="{ attachment_url }" if={ attachment_url } ><i class="fa fa-download" aria-hidden="true"></i></a>
+                            <span class="record-icon" if={ to_record }><i class="fa fa-video-camera" aria-hidden="true"></i></span>
                         </div>
                     </div>
                     <div class="row" if={ sponsors_id.length > 0 }>

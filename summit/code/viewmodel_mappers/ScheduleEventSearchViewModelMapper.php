@@ -48,6 +48,7 @@ final class ScheduleEventSearchViewModelMapper implements IViewModelMapper
                 'favorite' => false,
                 'show' => true,
                 'attachment_url' => '',
+                'to_record' => false,
             );
 
             foreach ($e->Tags() as $t) {
@@ -76,6 +77,7 @@ final class ScheduleEventSearchViewModelMapper implements IViewModelMapper
                 $entry['moderator_id'] = $e->ModeratorID;
                 $entry['track_id'] = $e->CategoryID;
                 $entry['level'] = $e->Level;
+                $entry['to_record'] = boolval($e->ToRecord);
             }
 
             if ($e instanceof SummitEventWithFile) {

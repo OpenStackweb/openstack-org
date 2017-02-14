@@ -166,6 +166,7 @@
                                         moderator_id: {$ModeratorID},
                                         speakers_id : [<% loop Speakers %>{$ID},<% end_loop %>],
                                         level : '{$Level}',
+                                        to_record : {$ToRecord},
                                     <% end_if %>
                                     <% if $CurrentMember && $CurrentMember.isOnMySchedule($ID) %>
                                     own      : true,
@@ -173,7 +174,8 @@
                                     own      : false,
                                     <% end_if %>
                                     favorite : false,
-                                    show : true
+                                    show : true,
+                                    attachment_url : "<% if $Attachment() %>{$Attachment().getUrl().JS}<% end_if %>",
                                 }
                         );
                     <% end_loop %>

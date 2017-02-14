@@ -295,6 +295,7 @@
                 '<div class="col-md-10">'+
                 '<span class="event-title"></span>'+
                 '<a class="search-link attachment-link" target="_blank"><i class="search-link fa fa-download" aria-hidden="true"></i></a>'+
+                '<span class="record-icon"><i class="fa fa-video-camera" aria-hidden="true"></i></span>'+
                 '</div>'+
                 cal_synch_container+
                 '</div>'+
@@ -325,6 +326,9 @@
                 },
                 'a.attachment-link@href': function(arg){
                     return arg.item.attachment_url;
+                },
+                'span.record-icon@style': function(arg){
+                    return (arg.item.to_record) ? '' : 'display:none';
                 },
                 'div.main-event-content@data-event-id': 'event.id',
                 'div.main-event-content@style': function (arg){
