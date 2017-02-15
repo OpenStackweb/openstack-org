@@ -80,11 +80,8 @@ class VotingApp extends React.Component {
 			sidebar
 		} = this.props;
 
-<<<<<<< HEAD
 		const filter = this.props.params.filter || 'none';
      	
-=======
->>>>>>> branch/project-nav-revamp
      	if(preview) {
 			return (
 				<div className="row">
@@ -108,19 +105,9 @@ class VotingApp extends React.Component {
 				{ready &&
 					<div>
 						<Loader active={xhrLoading} type='spin' className='main-loader' />
-<<<<<<< HEAD
 						{isMobile ? <MobileSidebar filter={filter} show={sidebar} /> : <Sidebar filter={filter} />}
 						<div className="voting-content-body-wrapper">
 							<AnimatedPresentationDetail />
-=======
-						<Sidebar filter={ this.props.params.filter || 'none'}/>
-						<div className={`col-lg-9 col-md-9 col-sm-9 voting-content-body-wrapper`}>
-						<TransitionGroup>
-							{(!requestedID || (presentationID == requestedID)) &&
-								<AnimatedPresentationDetail key={requestedID} />
-							}
-						</TransitionGroup>
->>>>>>> branch/project-nav-revamp
 						</div>
 						<MobileTools />
 					</div>
@@ -143,17 +130,11 @@ export default connect(
 			category: state.presentations.category,
 			search: state.presentations.search,
 			preview: window.location.search.match(/^\?preview/),
-<<<<<<< HEAD
 			presentationID: state.presentations.selectedPresentation.id,
 			requestedID: state.presentations.requestedPresentationID,
 			navigationDirection: state.presentations.navigationDirection,
 			sidebar: state.mobile.showPresentationList,
 			isMobile: state.mobile.isMobile
-=======
-            presentationID: state.presentations.selectedPresentation.id,
-            requestedID: state.presentations.requestedPresentationID,
-			navigationDirection: state.presentations.navigationDirection
->>>>>>> branch/project-nav-revamp
 		}
 	},
 	{ 

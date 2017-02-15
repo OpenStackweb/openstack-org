@@ -11,28 +11,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-
 /**
  * Used to vote on summit presentations
  */
 class PresentationVotingPage extends Page
 {
-
     /**
      * @var array
      */
     private static $defaults = array(
         'ShowInMenus' => false
     );
-
 }
-
 /**
  * Class PresentationVotingPage_Controller
  */
 class PresentationVotingPage_Controller extends Page_Controller
 {
-
     /**
      * @var array
      */
@@ -40,8 +35,6 @@ class PresentationVotingPage_Controller extends Page_Controller
         'api' => 'handleAPI',
         '$Action/$ID/$OtherID' => 'handleIndex'
     );
-
-
     /**
      * @var array
      */
@@ -49,40 +42,33 @@ class PresentationVotingPage_Controller extends Page_Controller
         'handleAPI',
         'handleIndex'
     );
-
-
     /**
      *
      */
     public function init()
     {
         parent::init();
-
         Requirements::clear();
-
         $summit = Summit::get_active();
         $randomList = $summit
-        	->RandomVotingLists()
-        	->sort('RAND()')
-        	->first();
+            ->RandomVotingLists()
+            ->sort('RAND()')
+            ->first();
         if(!$randomList) {
-        	return $summit->generateVotingLists();
+            return $summit->generateVotingLists();
         }
         else {
-        	$presentations = $summit->VoteablePresentations();
-        	$randomListPriority = $randomList->getPriorityList();
-
-        	if(sizeof($randomListPriority) != $presentations->count()) {
-        		return $summit->generateVotingLists();
-        	}
-        	$diff = array_diff($randomListPriority, $presentations->column('ID'));
-        	if(sizeof($diff)) {
-        		return $summit->generateVotingLists();
-        	}
+            $presentations = $summit->VoteablePresentations();
+            $randomListPriority = $randomList->getPriorityList();
+            if(sizeof($randomListPriority) != $presentations->count()) {
+                return $summit->generateVotingLists();
+            }
+            $diff = array_diff($randomListPriority, $presentations->column('ID'));
+            if(sizeof($diff)) {
+                return $summit->generateVotingLists();
+            }
         }
     }
-
-
     /**
      * @param SS_HTTPRequest $r
      * @return array|RequestHandler|SS_HTTPResponse|string
@@ -93,11 +79,8 @@ class PresentationVotingPage_Controller extends Page_Controller
             Summit::get_active(),
             $this->config()->presentation_limit
         );
-
         return $request->handleRequest($r, DataModel::inst());
     }
-
-
     /**
      * @param SS_HTTPRequest $r
      * @return $this
@@ -108,18 +91,15 @@ class PresentationVotingPage_Controller extends Page_Controller
         if ($r->param('Action') === 'presentation' && is_numeric($r->param('ID'))) {
             $presentation = Presentation::get()->byID($r->param('ID'));
             if(!$presentation) {
-            	return $this->httpError(404);
+                return $this->httpError(404);
             }
             if(!$presentation->canEdit()) {
-            	return $this->redirect($this->Link());	
+                return $this->redirect($this->Link());  
             }
             
         }
-
         return $this;
     }
-
-
     /**
      * @return string
      */
@@ -135,8 +115,6 @@ class PresentationVotingPage_Controller extends Page_Controller
             'presentationLimit' => $this->config()->presentation_limit
         ]);
     }
-
-
     /**
      * @return bool
      */
@@ -147,16 +125,12 @@ class PresentationVotingPage_Controller extends Page_Controller
             return !$socket ? false : true;
         }
     }
-
 }
-
 /**
  * Class PresentationVotingPage_API
  */
 class PresentationVotingPage_API extends RequestHandler
 {
-
-
     /**
      * @var array
      */
@@ -168,7 +142,6 @@ class PresentationVotingPage_API extends RequestHandler
         'POST presentation/$ID' => 'handleUpdatePresentation',
         'DELETE presentation/$ID' => 'handleDeleteComment'
     );
-
     /**
      * @var array
      */
@@ -180,20 +153,14 @@ class PresentationVotingPage_API extends RequestHandler
         'handleUpdatePresentation',
         'handleDeleteComment'
     );
-
-
     /**
      * @var Summit
      */
     protected $summit;
-
-
     /**
      * @var int
      */
     protected $limit;
-
-
     /**
      * PresentationVotingPage_API constructor.
      * @param Summit $summit
@@ -203,11 +170,8 @@ class PresentationVotingPage_API extends RequestHandler
     {
         $this->summit = $summit;
         $this->limit = $limit;
-
         parent::__construct();
     }
-
-
     /**
      * @param SS_HTTPRquest $r
      * @throws SS_HTTPResponse_Exception
@@ -216,8 +180,6 @@ class PresentationVotingPage_API extends RequestHandler
     {
         return $this->httpError(404);
     }
-
-
     /**
      * @param SS_HTTPRequest $r
      * @return SS_HTTPRequest
@@ -230,22 +192,19 @@ class PresentationVotingPage_API extends RequestHandler
         $list = $m ? $m->getRandomisedPresentations(null, $this->summit) : $this->summit->VoteablePresentations();
 $list = Presentation::get()->sort('Created DESC')->limit(100);
         if($list) {
-	        if ($r->getVar('category')) {
-	            $list = $list->filter(['CategoryID' => $r->getVar('category')]);
-	        }
-
-	        if ($r->getVar('search')) {
-	            $list = Presentation::apply_search_query($list, $r->getVar('search'));
-	        }
-
-	        $total = $list->count();
-	        $list = $list->limit($this->limit, $offset);
-    	}
-    	else {
-    		$list = [];
-    		$total = 0;
-    	}
-
+            if ($r->getVar('category')) {
+                $list = $list->filter(['CategoryID' => $r->getVar('category')]);
+            }
+            if ($r->getVar('search')) {
+                $list = Presentation::apply_search_query($list, $r->getVar('search'));
+            }
+            $total = $list->count();
+            $list = $list->limit($this->limit, $offset);
+        }
+        else {
+            $list = [];
+            $total = 0;
+        }
         foreach ($list as $p) {
             $vote = $p->getUserVote();
             $presentations[] = [
@@ -254,17 +213,13 @@ $list = Presentation::get()->sort('Created DESC')->limit(100);
                 'user_vote' => $vote ? $vote->Vote : null
             ];
         }
-
         $result = [
             'presentations' => $presentations,
             'total' => $total
         ];
-
         return (new SS_HTTPResponse(Convert::array2json($result), 200))
             ->addHeader('Content-Type', 'application/json');
     }
-
-
     /**
      * @param SS_HTTPRequest $r
      * @return SS_HTTPRequest|void
@@ -277,7 +232,6 @@ $list = Presentation::get()->sort('Created DESC')->limit(100);
         if (!$presentation) {
             return $this->httpError(404);
         }
-
         $vote = $presentation->getUserVote();
         $json = [
             'id' => $presentation->ID,
@@ -291,10 +245,9 @@ $list = Presentation::get()->sort('Created DESC')->limit(100);
                 'date' => $vote->obj('Created')->Format('F j, Y'),
                 'ago' => $vote->obj('Created')->Ago()
             ] : null,
-            'abstract' => $presentation->Abstract,
+            'abstract' => $presentation->Description,
             'attendees_expected_learnt' => $presentation->AttendeesExpectedLearnt
         ];
-
         foreach ($presentation->getSpeakersAndModerators() as $s) {
             $json['speakers'][] = [
                 'first_name' => $s->FirstName,
@@ -303,25 +256,20 @@ $list = Presentation::get()->sort('Created DESC')->limit(100);
                 'photoUrl' => $s->ProfilePhoto(),
                 'isModerator' => (boolean) $s->ModeratorPresentations()->byID($presentation->ID)
             ];
-
         }
-
         $userIsSpeaker = $presentation->getSpeakersAndModerators()
             ->filter('MemberID', Member::currentUserID())
             ->exists();
-
         $userIsTrackChair = Summit::get_active()
-        	->Categories()
-        	->relation('TrackChairs')
-        	->filter('MemberID', Member::currentUserID())
-        	->exists();
-
+            ->Categories()
+            ->relation('TrackChairs')
+            ->filter('MemberID', Member::currentUserID())
+            ->exists();
         if ($userIsSpeaker || $userIsTrackChair || Permission::check('ADMIN')) {
             $json['all_comments'] = [];
             $votes = $presentation->Votes()
                 ->where('Content IS NOT NULL')
                 ->sort('Created ASC');
-
             foreach ($votes as $v) {
                 $json['all_comments'][] = [
                     'id' => $v->ID,
@@ -335,8 +283,6 @@ $list = Presentation::get()->sort('Created DESC')->limit(100);
         return (new SS_HTTPResponse(Convert::array2json($json), 200))
             ->addHeader('Content-Type', 'application/json');
     }
-
-
     /**
      * @param SS_HTTPRequest $r
      * @return SS_HTTPResponse|void
@@ -347,41 +293,29 @@ $list = Presentation::get()->sort('Created DESC')->limit(100);
         if (!Member::currentUser()) {
             return $this->httpError(403, 'You must be logged in to vote');
         }
-
         $presentation = $this->getFromFilename($r->param('ID'), 'Presentation');
         $presentation = Presentation::get()->byID(explode('.', $r->param('ID'))[0]);
-
         if (!$presentation) {
             return $this->httpError(404);
         }
-
         if(!$presentation->Summit()->isVotingOpen()) {
-        //	return $this->httpError(403,'Voting is closed');
+        //  return $this->httpError(403,'Voting is closed');
         }
-
         $vars = Convert::json2array($r->getBody());
-
         if (isset($vars['vote'])) {
             $presentation->setUserVote((int)$vars['vote']);
-
             return new SS_HTTPResponse('OK', 200);
         }
-
         if (isset($vars['comment'])) {
             if ($userVote = $presentation->getUserVote()) {
                 $userVote->Content = $vars['comment'];
                 $userVote->write();
-
                 return new SS_HTTPResponse('OK', 200);
             }
-
             return new SS_HTTPResponse('No vote found', 403);
         }
-
         return $this->httpError(400);
     }
-
-
     /**
      * @param SS_HTTPRequest $r
      * @return SS_HTTPResponse|void
@@ -392,27 +326,19 @@ $list = Presentation::get()->sort('Created DESC')->limit(100);
         if (!Member::currentUser()) {
             return $this->httpError(403, 'You must be logged in to vote');
         }
-
         $presentation = $this->getFromFilename($r->param('ID'), 'Presentation');
         $presentation = Presentation::get()->byID(explode('.', $r->param('ID'))[0]);
-
         if (!$presentation) {
             return $this->httpError(404);
         }
-
         if(!$presentation->Summit()->isVotingOpen()) {
-        	return $this->httpError(403,'Voting is closed');
+            return $this->httpError(403,'Voting is closed');
         }
-
-
         $userVote = $presentation->getUserVote();
         $userVote->Content = null;
         $userVote->write();
-
         return new SS_HTTPResponse('OK', 200);
     }
-
-
     /**
      * @param SS_HTTPRequest $r
      * @return SS_HTTPRequest
@@ -422,8 +348,6 @@ $list = Presentation::get()->sort('Created DESC')->limit(100);
         return (new SS_HTTPResponse(Convert::array2json($this->summit->toJSON()), 200))
             ->addHeader('Content-Type', 'application/json');
     }
-
-
     /**
      * @param SS_HTTPRequest $r
      * @return SS_HTTPRequest
@@ -437,13 +361,9 @@ $list = Presentation::get()->sort('Created DESC')->limit(100);
                 'title' => $c->Title
             ];
         }
-
         return (new SS_HTTPResponse(Convert::array2json($result), 200))
             ->addHeader('Content-Type', 'application/json');
-
     }
-
-
     /**
      * @param $file
      * @param $class
@@ -454,11 +374,9 @@ $list = Presentation::get()->sort('Created DESC')->limit(100);
         $info = pathinfo($file);
         $id = $info['filename'];
         $list = $class::get();
-
         if ($class === 'Presentation') {
             $list = $list->filter('Category.VotingVisible', true);
         }
-
         return $list->byID($id);
     }
 }
