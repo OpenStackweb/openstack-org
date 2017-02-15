@@ -9,8 +9,8 @@ require('./t.tag');
     <div class="core-service">
     { name }
     </div>
-    <div class="core-service-icon">
-    <i class="fa { icon_css_class ? this.icon_css_class: 'fa-cogs' }"></i>
+    <div class="core-service-mascot">
+    <i class="fa { mascot_css_class ? this.mascot_css_class: 'Barbican' }"></i>
     </div>
     </div>
     <div class="core-mid component-description">

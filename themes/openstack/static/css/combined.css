@@ -1506,6 +1506,9 @@ a.who-section-cta {
     padding: 15px 20px;
     min-width: 330px;
     margin: 30px auto; }
+  .register-promo-wrapper a:hover.btn {
+    background: #DA422F;
+  }
 /*End BCN Redesign*/
 
 /* Presentation App */
@@ -4193,6 +4196,16 @@ h1 span.subhead {
         margin-top: 10px; }
 
 /*Edn Mentoring & Diversity Page*/
+
+/*Open Source Days*/
+
+a.learn-more-button,
+a.learn-more-button:visited {
+  color: #fff; }
+
+.about-open-source-days a:hover.btn.btn.btn-block {
+  background: #A51B1B;
+}
 
 
 /*Open Source Days*/

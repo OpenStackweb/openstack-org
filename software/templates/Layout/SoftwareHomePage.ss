@@ -100,7 +100,7 @@
                                 <i class="fa fa-search"></i>
                             </div>
                             <div class="top">
-                                <i class="fa {$IconClass}"></i>
+                                <i class="{$MascotClass}"></i>
                             </div>
                             <div class="bottom">
                                 <h5>$CodeName</h5>
@@ -120,7 +120,7 @@
                                         <i class="fa fa-search"></i>
                                     </div>
                                     <div class="top">
-                                        <i class="fa {$IconClass}"></i>
+                                        <i class="{$MascotClass}"></i>
                                     </div>
                                     <div class="bottom">
                                         <h5>$CodeName</h5>
@@ -139,7 +139,7 @@
                                     <i class="fa fa-search"></i>
                                 </div>
                                 <div class="top">
-                                    <i class="fa {$IconClass}"></i>
+                                    <i class="{$MascotClass}"></i>
                                 </div>
                                 <div class="bottom">
                                     <h5>$CodeName</h5>

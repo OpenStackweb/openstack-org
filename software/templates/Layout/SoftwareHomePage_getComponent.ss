@@ -9,7 +9,7 @@
         <!-- Begin Page Content -->
         <div class="row project-details-intro">
             <div class="col-lg-8 col-md-7 col-sm-6">
-                <h2>$Component.CodeName <i class="fa <% if $Component.IconClass %>$Component.IconClass<% else %>fa-cogs<% end_if %>"></i></h2>
+                <h2>$Component.CodeName <i class="<% if $Component.MascotClass %>$Component.MascotClass<% else %>Barbican<% end_if %>"></i></h2>
                 <h4>$Component.Name</h4>
                 <div class="project-intro-links">
                     <% if $Component.WikiUrl %>

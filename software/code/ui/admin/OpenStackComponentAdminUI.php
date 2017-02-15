@@ -44,8 +44,8 @@ final class OpenStackComponentAdminUI extends DataExtension
         $fields->push(new CheckboxField('SupportsVersioning', 'Supports Versioning?'));
         $fields->push(new CheckboxField('SupportsExtensions', 'Supports Extensions?'));
         $fields->push(new CheckboxField('IsCoreService', 'Is Core Service?'));
-        $fields->push(new DropdownField('IconClass', 'Font Awesome Icon CSS Class',  $this->owner->dbObject('IconClass')->enumValues()));
-        $fields->push(new DropdownField('Use', 'OpenStack Usage',  $this->owner->dbObject('Use')->enumValues()));
+        $fields->push(new DropdownField('MascotClass', 'Mascot',  $this->owner->dbObject('MascotClass')->enumValues()));
+        $fields->push(new DropdownField('Use', 'Project Category',  $this->owner->dbObject('Use')->enumValues()));
 
         if ($this->owner->getSupportsVersioning()) {
 

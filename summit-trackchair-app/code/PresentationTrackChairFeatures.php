@@ -104,7 +104,10 @@ class PresentationTrackChairFeatures extends DataExtension
             if($selected && $highestOrderInList >= $highestSelection) {
                 $list_class_name = SummitSelectedPresentationList::getListClassName($list_class);
                 $msg = "$list_class_name Selection list is full. Currently at $highestOrderInList. Limit is $highestSelection.";
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch/project-nav-revamp
                 //check if there is space for selected in the other list
                 if ($this->owner->isLightningWannabe()) {
                     $other_list_class = ($list_class == SummitSelectedPresentationList::Lightning) ? SummitSelectedPresentationList::Session : SummitSelectedPresentationList::Lightning;
