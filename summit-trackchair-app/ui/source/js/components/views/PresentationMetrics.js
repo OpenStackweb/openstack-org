@@ -22,10 +22,10 @@ export default ({
 				list = list.slice(0, tooltipLimit);
 				list.push(`... and ${listLength - tooltipLimit} more`);
 			}
-			list = list.join('<br>');
+			list = list.join(', ');
 
 			return (
-				<Tooltip key={k} arrowContent={arrowContent} placement="bottom" overlay={list}>
+				<Tooltip key={k} arrowContent={arrowContent} placement="bottom" popupClassName='metric_tooltip' overlay={list}>
     				<span className={`presentation-metric ${k}`}>
     					<Icon /> {presentation[k].length}
     				</span>
