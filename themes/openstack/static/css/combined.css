@@ -4408,6 +4408,10 @@ h5.section-title.guide {
   .guide-listing .guide-name {
     font-weight: 600; }
 
+   .summit-users-wrapper .more-speakers, .summit-users-wrapper .less-speakers{
+      display: none;
+   }
+
 /*End Austin Guide*/
 
 
@@ -4426,7 +4430,27 @@ h5.section-title.guide {
     display: block;
   }
 
+   .summit-users-wrapper .more-speakers{
+      display: inline-block;
+   }
+  
+  .summit-users-wrapper.expanded .col-sm-3{
+    display: block;
   }
+  
+  .summit-users-wrapper.expanded .more-speakers{
+    display: none;
+  }
+  
+  .summit-users-wrapper.expanded .less-speakers{
+    display: inline-block;
+  }
+  
+  .summit-users-wrapper .less-speakers{
+    display: none;
+  }
+
+  
 }
 
 

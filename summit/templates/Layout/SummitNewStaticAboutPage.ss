@@ -185,6 +185,14 @@
         </div>
       </div>
     </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="summit-user-section ">
+          <button class="more-speakers btn register-btn-lrg">Show More</button>
+          <button class="less-speakers btn register-btn-lrg">Show Less</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 <div class="summit-gallery-section">
@@ -354,3 +362,15 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+  $('.more-speakers').on({
+    'click': function() {
+        $(this).parents('div.summit-users-wrapper').addClass('expanded')
+    }
+});
+  $('.less-speakers').on({
+    'click': function() {
+        $(this).parents('div.summit-users-wrapper').removeClass('expanded')
+    }
+});
+</script>
