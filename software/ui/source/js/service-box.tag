@@ -1,5 +1,5 @@
 require('./t.tag');
-<core-service-box>
+<service-box>
     <div class="col-md-4 col-sm-6">
     <div class="core-services-single-full">
     <div class="core-top">
@@ -60,8 +60,8 @@ require('./t.tag');
 
         coreServiceDetails(e) {
             var slug  = e.item.slug;
-            var url = self.parent.base_url+'releases/'+self.parent.getCurrentReleaseId()+'/components/'+slug;
+            var url = self.parent.base_url+'releases/'+self.parent.parent.getCurrentReleaseId()+'/components/'+slug;
             window.location = url;
         }
     </script>
-</core-service-box>
+</service-box>

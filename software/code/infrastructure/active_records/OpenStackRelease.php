@@ -430,4 +430,32 @@ class OpenStackRelease
         if(is_null($component)) return null;
         return $component->MaturityPoints;
     }
+
+    /**
+     * @param string $term
+     * @param int $adoption
+     * @param int $maturity
+     * @param int $age
+     * @return IOpenStackComponent[]
+     */
+    public function getOpenStackComponentsFiltered($term = '', $adoption = 0, $maturity = 0, $age = 0)
+    {
+        $query = $this->OpenStackComponents();
+
+        $query = $query->where(" Adoption >= {$adoption} AND  MaturityPoints >= {$maturity}");
+
+        if(!empty($term))
+        {
+            $query = $query->where(" (Name LIKE '%{$term}%' OR CodeName LIKE '%{$term}%' OR Description LIKE '%{$term}%' ) ");
+        }
+
+        $final = array();
+        $res   = $query->sort(array('Use'=>'ASC','IsCoreService'=>'DESC', 'Order'=>'ASC'))->toArray();
+        foreach($res as $c)
+        {
+            if($c->getAge() >= $age)
+                array_push($final, $c);
+        }
+        return $final;
+    }
 }

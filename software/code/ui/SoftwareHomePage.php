@@ -312,6 +312,18 @@ class SoftwareHomePage_Controller extends Page_Controller
         );
     }
 
+    public function getComponentsByCategory()
+    {
+        $components = $this->manager->getComponentsByCategory($this->getDefaultRelease());
+        return json_encode
+        (
+            array
+            (
+                'grouped_components' => $components,
+            )
+        );
+    }
+
     public function getSampleConfigurations()
     {
         $release = $this->getDefaultRelease();

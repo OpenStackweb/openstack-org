@@ -86,7 +86,7 @@ class SoftwareRestfulApi extends AbstractRestfulJsonApi
         if(is_null($release))
             return $this->notFound();
 
-        list($core_components, $optional_components) = $this->manager->getComponents
+        $components = $this->manager->getComponentsByCategory
         (
             $release,
             $term,
@@ -97,13 +97,7 @@ class SoftwareRestfulApi extends AbstractRestfulJsonApi
             $sort_dir
         );
 
-        $res = array
-        (
-            'core_components'     => $core_components,
-            'optional_components' => $optional_components
-        );
-
-        return $this->ok($res);
+        return $this->ok($components);
 
     }
 
