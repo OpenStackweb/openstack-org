@@ -4409,3 +4409,24 @@ h5.section-title.guide {
     font-weight: 600; }
 
 /*End Austin Guide*/
+
+
+
+
+/* mediaquery for speakers */
+
+
+
+@media (max-width: 767px){
+  .summit-users-wrapper .col-sm-3{
+    display: none;
+
+  }
+  .summit-users-wrapper .featured{
+    display: block;
+  }
+
+  }
+}
+
+
