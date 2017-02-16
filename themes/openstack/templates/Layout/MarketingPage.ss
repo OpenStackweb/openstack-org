@@ -153,9 +153,7 @@
                                 <span class="left-info">Video</span>
                                 <% if $YoutubeID %>
                                     <a class="download" href="#software_modal_{$YoutubeID}" data-toggle="modal" >WATCH</a>
-                                <% else %>
-                                <span class="soon">COMING SOON</span>
-                                <% end_if %>
+                                 <% end_if %>
                             </p>
                             <% if $YoutubeID %>
                                 <div id="software_modal_{$YoutubeID}" data-video_id="{$YoutubeID}" data-section="software" class="modal fade">

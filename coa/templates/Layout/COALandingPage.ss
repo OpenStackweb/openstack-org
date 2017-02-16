@@ -165,6 +165,8 @@
                         $Top.ExamIDRequirements
                         <h5 class="section-title">Retake</h5>
                         $ExamRetake
+                        <h5 class="section-title">Certification Period</h5>
+                        $ExamCertificationPeriod
                     </div>
                     <div class="col-sm-6">
                         <h5 class="section-title">How long do I have to schedule my exam?</h5>

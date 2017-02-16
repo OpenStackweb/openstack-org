@@ -32,6 +32,7 @@ class COALandingPage extends Page
         'ExamCostSpecialOffer'   => 'HTMLText',
         'ExamFormat'             => 'HTMLText',
         'ExamIDRequirements'     => 'HTMLText',
+        'ExamCertificationPeriod'=> 'HTMLText',
         'ExamRetake'             => 'HTMLText',
         'ExamDuration'           => 'Text',
         'ExamSystemRequirements' => 'HTMLText',
@@ -130,6 +131,16 @@ HTML;
         if(empty($html)){
             $html = <<<HTML
     <p>Candidates are required to provide a means of photo identification before the Exam can be launched. Acceptable forms of photo ID include current, non-expired: passport, government-issued driver's license/permit, national ID card, state or province-issued ID card, or other form of government issued identification. If acceptable proof of identification is not provided to the exam proctor prior to the exam, entry to the exam will be refused. Candidates who are refused entry due to lack of sufficient ID will not be eligible for a refund or rescheduling.</p>
+HTML;
+        }
+        return $html;
+    }
+
+    public function getExamCertificationPeriod(){
+        $html = $this->getField('ExamCertificationPeriod');
+        if(empty($html)){
+            $html = <<<HTML
+    <p>The certification is valid for 36 months after the passing date. After 36 months, test takers will need to resit the exam to remain certified.</p>
 HTML;
         }
         return $html;
@@ -270,6 +281,8 @@ HTML;
         $fields->addFieldToTab('Root.ExamDetails', $html_format = new HtmlEditorField('ExamFormat', 'Format'));
         $html_format->setRows(5);
         $fields->addFieldToTab('Root.ExamDetails', $html_req = new HtmlEditorField('ExamIDRequirements', 'ID Requirements'));
+        $html_req->setRows(5);
+        $fields->addFieldToTab('Root.ExamDetails', $html_req = new HtmlEditorField('ExamCertificationPeriod', 'Certification Period'));
         $html_req->setRows(5);
         $fields->addFieldToTab('Root.ExamDetails', $html_system = new HtmlEditorField('ExamSystemRequirements', 'System Requirements'));
         $html_system->setRows(5);
