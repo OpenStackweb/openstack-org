@@ -80,7 +80,7 @@ final class COAManager implements ICOAManager
                     if ($this->isFileProcessed($file_info)) continue;
 
                     $content = $coa_file_api->getFileContent($file_info['filename']);
-                    $rows = CSVReader::load($content);
+                    $rows    = CSVReader::load($content);
 
                     foreach ($rows as $row) {
                         $exam_ext_id               = $row['candidate_exam_id'];
@@ -118,7 +118,11 @@ final class COAManager implements ICOAManager
                             }
                         }
                         // we werent able to find member ... skip it
-                        if (is_null($member)) continue;
+                        if (is_null($member) || !$member->exists()){
+
+                            echo sprintf("missing member %s - track_id %s - filename %s", $email, $track_id, $file_info['filename']).PHP_EOL;
+                            continue;
+                        }
                         // try to find if we have a former exam ...
                         $exam = $member->getExamByExternalId($exam_ext_id);
 
