@@ -460,12 +460,10 @@ abstract class AbstractRestfulJsonApi extends Controller
         }
 
         $response->setBody(json_encode($res));
-        $controller = Controller::curr();
         //conditional get Request (etags)
-        $request = is_null($controller) ? $this->request: $controller->getRequest();
-        if ($request->isGET() && $use_etag) {
+        if ($this->request->isGET() && $use_etag) {
             $etag = md5($response->getBody());
-            $requestETag = $request->getHeader('If-None-Match');
+            $requestETag = $this->request->getHeader('If-None-Match');
             foreach (array(
                          'Expires',
                          'Cache-Control'
