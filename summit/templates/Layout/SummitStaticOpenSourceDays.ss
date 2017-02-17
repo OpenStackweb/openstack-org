@@ -45,7 +45,7 @@
         </div>
         <div class="col-lg-5 col-lg-push-2 col-md-5 col-md-push-2 col-sm-6">
             <div class="company-logo"><img src="/summit/images/boston/companies-opnfv.png" alt="OPNFY"></div>
-            <p class="company-desc">The combination of OpenStack and OPNFV allows developers and users to tap into the most comprehensive set of NFV capabilities available today. We welcome attendees to learn about OPNFV and how the OPNFV and OpenStack communities work together, to get to know the collaborating projects and feature development process, and learn how to get involved. For an example, view a short keynote demo from OpenStack Barcelona on carrier-grade fault management.</p>
+            <p class="company-desc">The combination of OpenStack and OPNFV allows developers and users to tap into the most comprehensive set of NFV capabilities available today. We welcome attendees to learn about OPNFV and how the OPNFV and OpenStack communities work together, to get to know the collaborating projects and feature development process, and learn how to get involved. For an example, <a href="https://www.youtube.com/watch?v=Dvh8q5m9Ahk&t=41s" target="_blank">view a short keynote demo from OpenStack Barcelona</a> on carrier-grade fault management.</p>
             <p class="learn-more-button"><a href="https://www.opnfv.org/" class="btn btn-primary" role="button">Learn More</a></p>
         </div>
     </div>
