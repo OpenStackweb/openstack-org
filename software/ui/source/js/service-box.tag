@@ -21,18 +21,20 @@ require('./t.tag');
     <div class="core-stats-wrapper">
     <div class="row">
     <div class="col-sm-4 col-xs-4">
-    <div class="core-stat-graphic">
+    <div class="core-stat-graphic" if={ adoption > 0 }>
     { adoption } %
     </div>
-    <div class="core-stat-title">
+    <div class="core-stat-graphic off" if={ adoption == 0 }></div>
+    <div class={ core-stat-title:true, off:(adoption == 0) }>
     <t entity="Software.ADOPTION" text="ADOPTION" />
     </div>
     </div>
     <div class="col-sm-4 col-xs-4">
-    <div class="core-stat-graphic">
+    <div class="core-stat-graphic" if={ maturity_points > 0 }>
     { maturity_points } <span>of</span> { parent.max_maturity_points }
     </div>
-    <div class="core-stat-title">
+    <div class="core-stat-graphic off" if={ maturity_points == 0 }></div>
+    <div class={ core-stat-title:true, off:(maturity_points == 0) }>
     <t entity="Software.MATURITY" text="MATURITY" />
     </div>
     </div>

@@ -20,7 +20,7 @@ require('./t.tag');
             </p>
             -->
             <p if={ current_config.description !== null &&  current_config.description !=='' }>
-               <a class="more-about-config" href="#"><t entity="Software.MORE_ABOUT_CONFIG">More about this configuration</t> [+]</a>
+               <a class="more-about-config" href="#"><t entity="Software.MORE_ABOUT_CONFIG" text="More about this configuration" /> [+]</a>
             </p>
             <div class="more-sample-config" if={ current_config.description !== null &&  current_config.description !=='' }>
                 { current_config.description }
@@ -31,10 +31,8 @@ require('./t.tag');
         <div class="row">
             <div class="col-sm-12">
                  <p class="service-section-title">
-                 	<t entity="Software.CORE_SERVICES_INCLUDED">
-                 		<strong>Core Services</strong> included in this configuration
-                 	</t>
-                 	({ current_config.core_components.length } <t entity="Openstack.RANGE_OF">of</t> { release_core_component_count })
+                 	<t entity="Software.CORE_SERVICES_INCLUDED" text="<strong>Core Services</strong> included in this configuration" />
+                 	({ current_config.core_components.length } <t entity="Openstack.RANGE_OF" text="of" /> { release_core_component_count })
                  </p>
             </div>
         </div>
@@ -60,34 +58,36 @@ require('./t.tag');
                 <div class="core-stats-wrapper">
                 <div class="row">
                 <div class="col-sm-4 col-xs-4">
-                <div class="core-stat-graphic">
+                <div class="core-stat-graphic" if={ adoption > 0 }>
                 { adoption }%
                 </div>
-                <div class="core-stat-title">
+                <div class="core-stat-graphic off" if={ adoption == 0 }></div>
+                <div class={ core-stat-title:true, off:(adoption == 0) }>
                 	<t entity="Software.ADOPTION" text="Adoption" />
                 </div>
                 </div>
                 <div class="col-sm-4 col-xs-4">
-                <div class="core-stat-graphic">
-                { maturity_points } <span><t entity="Openstack.RANGE_OF">of</t></span> { this.max_maturity_points }
+                <div class="core-stat-graphic" if={ maturity_points > 0 }>
+                { maturity_points } <span><t entity="Openstack.RANGE_OF" text="of" /></span> { this.max_maturity_points }
                 </div>
-                <div class="core-stat-title">
-                	<t entity="Software.MATURITY">Maturity</t>
+                <div class="core-stat-graphic off" if={ maturity_points == 0 }></div>
+                <div class={ core-stat-title:true, off:(maturity_points == 0) }>
+                	<t entity="Software.MATURITY" text="Maturity" />
                 </div>
                 </div>
                 <div class="col-sm-4 col-xs-4">
                 <div class="core-stat-graphic">
-                { age} <span><t entity="Software.YEARS_ABBR">yrs</t></span>
+                { age} <span><t entity="Software.YEARS_ABBR" text="yrs" /></span>
                 </div>
                 <div class="core-stat-title">
-                	<t entity="Software.AGE">Age</t>
+                	<t entity="Software.AGE" text="Age" />
                 </div>
                 </div>
                 </div>
                 </div>
                 <div class="core-bottom">
                     <a class="core-service-btn" href="#" onclick={ onComponentDetails }>
-                    	<t entity="Software.MORE_DETAILS">More Details</t>
+                    	<t entity="Software.MORE_DETAILS" text="More Details" />
                     </a>
                 </div>
                 </div>
@@ -117,7 +117,7 @@ require('./t.tag');
                 { adoption }%
                 </div>
                 <div class="core-stat-title">
-                	<t entity="Software.ADOPTION">Adoption</t>
+                	<t entity="Software.ADOPTION" text="Adoption" />
                 </div>
                 </div>
                 <div class="col-sm-4 col-xs-4">
@@ -125,21 +125,21 @@ require('./t.tag');
                 { maturity_points } <span>of</span> { this.max_maturity_points }
                 </div>
                 <div class="core-stat-title">
-                	<t entity="Software.MATURITY">Maturity</t>
+                	<t entity="Software.MATURITY" text="Maturity" />
                 </div>
                 </div>
                 <div class="col-sm-4 col-xs-4">
                 <div class="core-stat-graphic">
-                { age} <span><t entity="Software.YEARS_ABBR">yrs</t></span>
+                { age} <span><t entity="Software.YEARS_ABBR" text="yrs" /></span>
                 </div>
                 <div class="core-stat-title">
-                	<t entity="Software.AGE">Age</t>
+                	<t entity="Software.AGE" text="Age" />
                 </div>
                 </div>
                 </div>
                 </div>
                 <div class="core-bottom">
-                <a class="core-service-btn" href="#" onclick={ onComponentDetails }><t entity="Software.MORE_DETAILS">More Details</t></a>
+                <a class="core-service-btn" href="#" onclick={ onComponentDetails }><t entity="Software.MORE_DETAILS" text="More Details" /></a>
                 </div>
                 </div>
                 </div>
@@ -147,11 +147,9 @@ require('./t.tag');
         <div class="row" if={ current_config.optional_components.length >0 }>
             <div class="col-sm-12">
                <p class="service-section-title">
-               		<t entity="Software.OPTIONAL_SERVICES_INCLUDED">
-               			<strong>Optional Services</strong> included in this configuration
-               		</t>
+               		<t entity="Software.OPTIONAL_SERVICES_INCLUDED" text="<strong>Optional Services</strong> included in this configuration" />
                		({ current_config.optional_components.length }
-               		<span><t entity="Openstack.RANGE_OF">of</t></span>
+               		<span><t entity="Openstack.RANGE_OF" text="of" /></span>
                		{ release_optional_component_count })
                	</p>
             </div>
@@ -163,12 +161,12 @@ require('./t.tag');
             </div><table class="table">
             <thead>
             <tr>
-                <th><t entity="Software.NAME">Name</t></th>
-                <th><t entity="Software.SERVICE">Service</t></th>
-                <th><t entity="Software.MATURITY">Maturity</t> <a href="#" id='sort-maturity' onclick={ sortMaturity }><i class="fa fa-sort"></i></a></th>
-                <th><t entity="Software.AGE">Age</t> <a href="#" id='sort-age' onclick={ sortAge }><i class="fa fa-sort"></i></a></th>
-                <th><t entity="Software.ADOPTION">Adoption</t> <a href="#" id='sort-adoption' onclick={ sortAdoption }><i class="fa fa-sort"></i></a></th>
-                <th><t entity="Software.DETAILS">Details</t></th>
+                <th><t entity="Software.NAME" text="Name" /></th>
+                <th><t entity="Software.SERVICE" text="Service" /></th>
+                <th><t entity="Software.MATURITY" text="Maturity" /> <a href="#" id='sort-maturity' onclick={ sortMaturity }><i class="fa fa-sort"></i></a></th>
+                <th><t entity="Software.AGE" text="Age" /> <a href="#" id='sort-age' onclick={ sortAge }><i class="fa fa-sort"></i></a></th>
+                <th><t entity="Software.ADOPTION" text="Adoption" /> <a href="#" id='sort-adoption' onclick={ sortAdoption }><i class="fa fa-sort"></i></a></th>
+                <th><t entity="Software.DETAILS" text="Details" /></th>
             </tr>
             </thead>
             <tbody>
@@ -178,7 +176,7 @@ require('./t.tag');
                 <td><div class="service-stat-pill { maturity_points >= 0  && maturity_points <= 1 ? 'red': (maturity_points > 1  && maturity_points <= 3 ? 'orange' : 'green') }">{ maturity_points } <span>of</span> { this.max_maturity_points }</div></td>
                 <td><div>{ age } Yrs</div></td>
                 <td><div>{ adoption } %</div></td>
-                <td><a href="#" onclick={ onComponentDetails }><t entity="Software.MORE_DETAILS">More Details</t></a></td>
+                <td><a href="#" onclick={ onComponentDetails }><t entity="Software.MORE_DETAILS" text="More Details" /></a></td>
                 </tr>
             </tbody>
             </table>
@@ -189,7 +187,7 @@ require('./t.tag');
             <div class="col-sm-12">
                 <p class="service-section-title">
                 	<strong>
-                		<t entity="Software.RELATED_CONTENT">Related Content</t>
+                		<t entity="Software.RELATED_CONTENT" text="Related Content" />
                 	</strong>
                 </p>
             </div>

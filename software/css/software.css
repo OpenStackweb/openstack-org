@@ -622,7 +622,9 @@ p.service-section-title {
     display: table;
     text-align: center;
     width: auto;
-    margin: 0 auto; }
+    margin: 0 auto;
+    min-height: 131px;
+}
 .core-services-single-full .core-stats-wrapper .core-stat-graphic {
     border-radius: 100%;
     border: 3px solid #6CBB45;
@@ -656,6 +658,15 @@ p.service-section-title {
 .core-services-single-full .core-bottom a.core-service-btn:hover {
     text-decoration: none;
     background: #29abe2; }
+
+.core-stat-graphic.off {
+    border-color: #CCC !important;
+    color: #CCC !important;
+}
+
+.core-stat-title.off {
+    color: #CCC !important;
+}
 
 @media (max-width: 1200px) and (min-width: 991px) {
     .core-services-single-full .core-stats-wrapper {
