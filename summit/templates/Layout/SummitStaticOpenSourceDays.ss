@@ -33,43 +33,43 @@
         </div>
         <div class="col-lg-5 col-lg-push-2 col-md-5 col-md-push-2 col-sm-6">
             <div class="company-logo"><img src="/summit/images/boston/companies-kubernetes.png" alt="Kubernetes"></div>
-            <p class="company-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras urna orci, dictum vitae maximus at, consectetur vitae velit. Morbi interdum eu nibh quis gravida. Pellentesque nec magna libero. Fusce nisi orci.</p>
+            <p class="company-desc">Sustaining & integrating open source technologies - to orchestrate containers as part of a microservices architecture.</p>
             <p class="learn-more-button"><a href="https://kubernetes.io/" class="btn btn-primary" role="button">Learn More</a></p>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-5 col-md-5 col-sm-6">
             <div class="company-logo"><img src="/summit/images/boston/companies-cloud-foundary.png" alt="CloudFoundry"></div>
-            <p class="company-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras urna orci, dictum vitae maximus at, consectetur vitae velit. Morbi interdum eu nibh quis gravida. Pellentesque nec magna libero. Fusce nisi orci.</p>
+            <p class="company-desc">The Cloud Foundry Foundation is an independent non-profit organization formed to sustain the development, promotion and adoption of Cloud Foundry as the industry standard platform for cloud applications. Cloud Foundry makes it faster and easier for developers to build, test, deploy and scale applications.</p>
             <p class="learn-more-button"><a href="https://www.cloudfoundry.org/" class="btn btn-primary" role="button">Learn More</a></p>
         </div>
         <div class="col-lg-5 col-lg-push-2 col-md-5 col-md-push-2 col-sm-6">
             <div class="company-logo"><img src="/summit/images/boston/companies-opnfv.png" alt="OPNFY"></div>
-            <p class="company-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras urna orci, dictum vitae maximus at, consectetur vitae velit. Morbi interdum eu nibh quis gravida. Pellentesque nec magna libero. Fusce nisi orci.</p>
+            <p class="company-desc">The combination of OpenStack and OPNFV allows developers and users to tap into the most comprehensive set of NFV capabilities available today. We welcome attendees to learn about OPNFV and how the OPNFV and OpenStack communities work together, to get to know the collaborating projects and feature development process, and learn how to get involved. For an example, view a short keynote demo from OpenStack Barcelona on carrier-grade fault management.</p>
             <p class="learn-more-button"><a href="https://www.opnfv.org/" class="btn btn-primary" role="button">Learn More</a></p>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-5 col-md-5 col-sm-6">
             <div class="company-logo"><img src="/assets/boston-summit/images/openswitch-344-lg.png" alt="Open Switch"></div>
-            <p class="company-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras urna orci, dictum vitae maximus at, consectetur vitae velit. Morbi interdum eu nibh quis gravida. Pellentesque nec magna libero. Fusce nisi orci.</p>
+            <p class="company-desc">OpenSwitch is a Linux Foundation project aims to deliver an open and fully-featured Linux-based Networking Operation System (NOS). OpenSwitch has been specifically designed to serve the evolving disaggregated switching market needs from the aspects of usability, performance and cost savings.</p>
             <p class="learn-more-button"><a href="http://www.openswitch.net/" class="btn btn-primary" role="button">Learn More</a></p>
         </div>
         <div class="col-lg-5 col-lg-push-2 col-md-5 col-md-push-2 col-sm-6">
             <div class="company-logo"><img src="/assets/boston-summit/images/ovs-344-lg.png" alt="Open vSwitch"></div>
-            <p class="company-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras urna orci, dictum vitae maximus at, consectetur vitae velit. Morbi interdum eu nibh quis gravida. Pellentesque nec magna libero. Fusce nisi orci.</p>
+            <p class="company-desc">Open vSwitch and OVN provide virtual networking to OpenStack for VMs, containers, and beyond.  Join us for talks and tutorials on what's available and what's coming up next.</p>
             <p class="learn-more-button"><a href="http://www.openvswitch.net/" class="btn btn-primary" role="button">Learn More</a></p>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-5 col-md-5 col-sm-6">
             <div class="company-logo"><img src="/assets/boston-summit/images/ansible-344-lg.png" alt="Ansible"></div>
-            <p class="company-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras urna orci, dictum vitae maximus at, consectetur vitae velit. Morbi interdum eu nibh quis gravida. Pellentesque nec magna libero. Fusce nisi orci.</p>
+            <p class="company-desc">Ansible is the simplest way to automate IT — and the top choice of operators for deployment and configuration of OpenStack.  Join us for a day of learning and collaboration at OpenStack Summit in Boston, and hear from the contributors, operators, and users who are making the use of OpenStack even better with Ansible.</p>
             <p class="learn-more-button"><a href="http://www.ansible.com/" class="btn btn-primary" role="button">Learn More</a></p>
         </div>
         <div class="col-lg-5 col-lg-push-2 col-md-5 col-md-push-2 col-sm-6">
             <div class="company-logo"><img src="/assets/boston-summit/images/juniper-344-lg.png" alt="Ansible"></div>
-            <p class="company-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras urna orci, dictum vitae maximus at, consectetur vitae velit. Morbi interdum eu nibh quis gravida. Pellentesque nec magna libero. Fusce nisi orci.</p>
+            <p class="company-desc">OpenContrail is a network virtualization platform for cloud operators to modernize their cloud networks using SDN, enabling network abstraction, segmentation, and distributed security policy enforcement.  Combined with OpenStack and Kubernetes, users can now run their apps anywhere, anytime, and at any scale.   </p>
             <p class="learn-more-button"><a href="http://www.opencontrail.org/" class="btn btn-primary" role="button">Learn More</a></p>
         </div>
     </div>
