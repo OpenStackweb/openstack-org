@@ -108,6 +108,8 @@
 				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/6z7lw9f09yfkvtg/AAB5rTSchDMJae0sltTuf2zra?dl=0" target="_blank"><strong>Zaqar:</strong> Carrier pigeon</a></li>
 				<li class="col-lg-6 col-md-6 col-sm-6"><strong>Zun:</strong> Panda (in progress)</li>
 			</ul>
+		</div>
+    	<div class="col-sm-12">
 			<h5 class="section-title">FAQs - Using Your Mascot Logo</h5>
 			<p class="question">
 				What kind of options will my logo have?
