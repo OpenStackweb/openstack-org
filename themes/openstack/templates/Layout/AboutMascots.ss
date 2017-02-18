@@ -5,8 +5,8 @@
             <div class="row">
                 <div class="col-md-8 col-md-push-2">
                     <div class="intro-message">
-                        <h1>A great project deserves a great mascot.</h1>
-                        <h4>Here’s how to choose a logo for your OpenStack project.</h4>
+                        <h1>A great project deserves a great mascot</h1>
+                        <h4>Get your OpenStack project logos here</h4>
                     </div>
                 </div>
             </div>
@@ -16,7 +16,6 @@
     <div class="container">
     	<div class="row">
     		<div class="col-sm-10 col-sm-push-1 center">
-		    	<h2>Get your OpenStack project logos here</h2>
 				<p>We are OpenStack. We’re also passionately developing more than 60 projects within OpenStack. To support each project’s unique identity and visually demonstrate our cohesive, connected community, we’ve created project logos to help us promote projects and their benefits.</p>
 				<p>Project teams first selected a mascot that best represents their project’s capabilities and personality. Then a team of professional illustrators worked to create a family of logos that are unique to each team, yet immediately identifiable as part of OpenStack. The logos are used to promote projects on the OpenStack website, at the Summit and in marketing materials.
 				<p>The value of creating this family of logos is communicating that OpenStack projects work together—we’re part of a larger team. When this project began, less than one-third of projects had logos, none looked like they were part of the same family, and some needed professional tuning. Now, as a whole, they’re a vibrant way to represent our projects over 15 releases of OpenStack software. 
@@ -27,14 +26,14 @@
     <div class="mascots-intro">
     	<div class="container">
 			<h2>
-				Watch the Video
+				Watch how the logos were created
 			</h2>
     		<div class="col-md-4 col-sm-6">
 			<p>See all of the OpenStack logos <em>(1 minute)</em></p>
 			<iframe width="350" height="197" src="https://www.youtube.com/embed/JmMTCWyY8Y4?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
     		</div>
     		<div class="col-md-4 col-sm-6">
-			<p>See the OpenStack mascots in development <em>(1 minute)</em></p>
+			<p>See the mascots in development <em>(1 minute)</em></p>
 			<iframe width="350" height="197" src="https://www.youtube.com/embed/JmMTCWyY8Y4?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
     		</div>
     		<div class="col-md-4 col-sm-6">
@@ -45,71 +44,71 @@
     </div>
     <div class="container">
     	<div class="col-sm-12">
-			<h5 class="section-title">Mascots already selected</h5>
+			<h5 class="section-title">Download your project’s logo package</h5>
 			<ul>
-				<li><strong>Ansible:</strong> Cape buffalo</li>
-				<li><a href="https://www.dropbox.com/sh/aoeyaou0a1tu5il/AABb3IiVc5R7IlWr9EQLULrha?dl=0" target="_blank"><strong>Barbican:</strong> Sea urchin</a></li>
-				<li><a href="https://www.dropbox.com/sh/8s3859c6qulu1m3/AABu_rIyuBM_bZmfGkagUXhua?dl=0" target="_blank"><strong>Cinder:</strong> Horse</a></li>
-				<li><a href="https://www.dropbox.com/sh/5krzib412pmfcrv/AAAK-WqHaKhhhqJSan6IMo_ta?dl=0" target="_blank"><strong>Cloudkitty:</strong> Cat (maneki-neko)</a></li>
-				<li><a href="https://www.dropbox.com/sh/ugh0asumotak1b1/AAD8ObN7106ccFPAM9nwBohla?dl=0" target="_blank"><strong>Community App Catalog:</strong> Quokka</a></li>
-				<li><a href="https://www.dropbox.com/sh/p0luab8o5twqm9n/AABJKzfx6JiRBSZDS7IzLgaxa?dl=0" target="_blank"><strong>Congress:</strong> Raven</a></li>
-				<li><a href="https://www.dropbox.com/sh/hilygxe70dwafk4/AABhiTaOj9oU-Zod5z7oubsea?dl=0" target="_blank"><strong>Designate:</strong> Crocodile</a></li>
-				<li><a href="https://www.dropbox.com/sh/6nmfrqxlxfion3u/AAD9B_ZK4JVLKwHtUbUjBS0Ja?dl=0" target="_blank"><strong>Dragonflow:</strong> Seahorse</a></li>
-				<li><a href="https://www.dropbox.com/sh/o44ga6usq7aodbc/AAAdQNtjaAbSFSfLT-0LDNbYa?dl=0" target="_blank"><strong>EC2-API:</strong> Toucan</a></li>
-				<li><a href="https://www.dropbox.com/sh/uqmbeinxu58nhe5/AAC2VI7eAYJdk5aM4qbAyE0ua?dl=0" target="_blank"><strong>Freezer:</strong> Polar Bear</a></li>
-				<li><a href="https://www.dropbox.com/sh/xct2hsah2h8l6yi/AAATDIfxQHXfgPqop1cOSYdsa?dl=0" target="_blank"><strong>Glance:</strong> Chipmunk</a></li>
-				<li><a href="https://www.dropbox.com/sh/kon1k7707ob2mq2/AAAsGHWtln4y8uY9a5YiVMbaa?dl=0" target="_blank"><strong>Heat:</strong> Flame/fire</a></li>
-				<li><strong>Fuel:</strong> (not chosen)</li>
-				<li><a href="https://www.dropbox.com/sh/vyig9h2ko7onkcr/AACRX7ChY3lA0cNYs1OhCGZja?dl=0" target="_blank"><strong>Horizon:</strong> Shiba inu (dog)</a></li>
-				<li><strong>I18n:</strong> Parrot</li>
-				<li><a href="https://www.dropbox.com/sh/hjfhn8rev8dxqya/AACFbVuOjSYiSyPHVtsoO1Kda?dl=0" target="_blank"><strong>Infrastructure:</strong> Ant</a></li>
-				<li><a href="https://www.dropbox.com/sh/xnozrzu3a72iexy/AAAOQN0ecPpA6UA61D--Rc-Va?dl=0" target="_blank"><strong>Interop:</strong> Onion</a></li>
-				<li><strong>Ironic:</strong> Bear</li>
-				<li><a href="https://www.dropbox.com/sh/3vk6eplkg58z3we/AAB88OtKhQ2PskDJdvTfnQ-La?dl=0" target="_blank"><strong>Karbor:</strong> Beaver</a></li>
-				<li><a href="https://www.dropbox.com/sh/0owldvy0u5y4yk9/AAB5Q95wYj-oaiisneKbnEiDa?dl=0" target="_blank"><strong>Keystone:</strong> Turtle </a></li>
-				<li><a href="https://www.dropbox.com/sh/94pukquiw425ji2/AAAl2wVmm72KHPLCAzR6Uboha?dl=0" target="_blank"><strong>Kolla:</strong> Koala</a></li>
-				<li><a href="https://www.dropbox.com/sh/gj76va8evyzj6zm/AADlu2d-fcT3HcugukqDhb_va?dl=0" target="_blank"><strong>Kuryr:</strong> Platypus</a></li>
-				<li><a href="https://www.dropbox.com/sh/kxr9up3qa4484qd/AABXgI0jr0elHP4QwBBdjJpya?dl=0" target="_blank"><strong>Magnum:</strong> Shark</a></li>
-				<li><a href="https://www.dropbox.com/sh/pi0gis7kjj776tz/AADBb-tpxHOczWAMSdUSP9hra?dl=0" target="_blank"><strong>Manila:</strong> Gorilla</a></li>
-				<li><a href="https://www.dropbox.com/sh/ngoqm9zazohwplb/AAAcgv3JzFE9isrLiU8SL7s4a?dl=0" target="_blank"><strong>Mistral:</strong> Dandelion</a></li>
-				<li><a href="https://www.dropbox.com/sh/yigfsgvpzxz4t72/AABHPm5FOoBFv2Q-div_j9RXa?dl=0" target="_blank"><strong>Monasca:</strong> Monitor lizard</a></li>
-				<li><a href="https://www.dropbox.com/sh/eyyrumpmgabyu4y/AAAYw6qyKkii2z_Qab5N4oJCa?dl=0" target="_blank"><strong>Murano:</strong> Muraena eel (moray)</a></li>
-				<li><a href="https://www.dropbox.com/sh/9nzvr9nxzo7w9zw/AACdyh1flHgQWc37dwdxnfWda?dl=0" target="_blank"><strong>Neutron:</strong> Spiderweb+spiderv</li>
-				<li><a href="https://www.dropbox.com/sh/9l1c7ymyjgpa3cc/AAB9iPZ0HIwn16nzC7G5liuza?dl=0" target="_blank"><strong>Nova:</strong> Supernovea</a></li>
-				<li><strong>Octavia:</strong> (not chosen)</li>
-				<li><a href="https://www.dropbox.com/sh/zkzuzvr2yfnmhao/AACiNMXzHMV9zfeU8LIajkYba?dl=0" target="_blank"><strong>OpenStack Chef:</strong> Kangaroo</a></li>
-				<li><a href="https://www.dropbox.com/sh/asz0o1lw2msyd2y/AAD7Be3ViKIF9z15S8XT65b0a?dl=0 " target="_blank"><strong>OpenStack Charms:</strong> Orangutan</a></li>
-				<li><strong>OpenStack Client:</strong> (not chosen)</li>
-				<li><strong>OpenStack-Ansible:</strong> Cape buffalo (in progress)</li>
-				<li><a href="https://www.dropbox.com/sh/kj0e3sdu47pqr3e/AABllB31vJZDlw4OkZRK_AZia?dl=0" target="_blank"><strong>Oslo:</strong> Moose</a></li>
-				<li><a href="https://www.dropbox.com/sh/sdqnsxo9jekdwpf/AADOJKekM3RrIesiS3d2I88Ya?dl=0" target="_blank"><strong>Packaging-deb:</strong> Lemur</a></li>
-				<li><a href="https://www.dropbox.com/sh/n9obbuhm2jz7zey/AABV4BfBhLuF5xLf94IRqkICa?dl=0" target="_blank"><strong>Packaging-rpm:</strong> Donkey</a></li>
-				<li><a href="https://www.dropbox.com/sh/oax7i1xvca3edxc/AAAtfQSyx0rJijKBoqoZmp-va?dl=0" target="_blank"><strong>Puppet:</strong> Wolf</a></li>
-				<li><a href="https://www.dropbox.com/sh/bxb0zmqbcnzov20/AAAXEYaYORHe5hXXiPa09Tisa?dl=0" target="_blank"><strong>Quality Assurance:</strong> Little brown bat</a></li>
-				<li><a href="https://www.dropbox.com/sh/gwb40gry3taao4k/AADDKMZtFS16U4fMwBvMOTDha?dl=0" target="_blank"><strong>Rally:</strong> White ermine</a></li>
-				<li><a href="https://www.dropbox.com/sh/5u0grlova3h4dtp/AAAadorRO7Mit4ndW0A_UhZha?dl=0" target="_blank"><strong>RefStack:</strong> Honeycomb+bee</a></li>
-				<li><strong>Release Management:</strong> Border collie (in progress)</li>
-				<li><a href="https://www.dropbox.com/sh/p5hclpt07t9svw8/AAB0Ri3gJ8hogH5PSMtSSqJaa?dl=0" target="_blank"><strong>Requirements:</strong> Waterfall</a></li>
-				<li><a href="https://www.dropbox.com/sh/6ets39nenrbuccl/AAAEGEMsAZbytHQ_BcZyTShTa?dl=0" target="_blank"><strong>Sahara:</strong> Elephant</a></li>
-				<li><a href="https://www.dropbox.com/sh/yn45e1fp3hy705a/AABWJ68ZEHuP5SYdGFbIRZJza?dl=0" target="_blank"><strong>Searchlight:</strong> Firefly</a></li>
-				<li><a href="https://www.dropbox.com/sh/2mqqcetyr9o1xe2/AABl_NHYdDkxCWuozmwcoQA3a?dl=0" target="_blank"><strong>Security:</strong> Pangolin (scaly anteater)</a></li>
-				<li><a href="https://www.dropbox.com/sh/b8kpj5k29eaf65t/AADoIo9VUz14A81c--UTRtLNa?dl=0" target="_blank"><strong>Senlin:</strong> Forest</a></li>
-				<li><strong>Solum:</strong> (not chosen)</li>
-				<li><a href="https://www.dropbox.com/sh/x5uh65yqqdge5ae/AABvq9ztd_MTE9GLZUPGibG4a?dl=0" target="_blank"><strong>Stable Branch Management:</strong> Scarab beetle</a></li>
-				<li><strong>Storlets:</strong> (not chosen)</li>
-				<li><strong>Swift:</strong> Swift (in progress)</li>
-				<li><a href="https://www.dropbox.com/sh/yyt1lazllah7ccf/AACkW8LkIiG32OXLYBqeP-RJa?dl=0" target="_blank"><strong>Tacker:</strong> Giant squid</a></li>
-				<li><a href="https://www.dropbox.com/sh/c2xop4mve9h3fvw/AADqjLNkIENChKMMxrGMbVsna?dl=0" target="_blank"><strong>Telemetry:</strong> Meerkat</a></li>
-				<li><strong>TripleO:</strong> Owl (in progress)</li>
-				<li><a href="https://www.dropbox.com/sh/v7l130m8ci4kmv7/AAA7dBhyjtTSaaQZvYOatmJga?dl=0" target="_blank"><strong>Trove:</strong> Stingray</a></li>
-				<li><a href="https://www.dropbox.com/sh/7yxme67d5yj1jf3/AAD60hwj-3G-lQenQWqZFPJia?dl=0" target="_blank"><strong>UX:</strong> Octopus</a></li>
-				<li><a href="https://www.dropbox.com/sh/qghopozg09ktmte/AAC1Uihwn1kgURqYNTxS7T2Pa?dl=0" target="_blank"><strong>Vitrage:</strong> Giraffe</a></li>
-				<li><a href="https://www.dropbox.com/sh/y3z28r62d51zvoo/AACcm3R4kJaN1whd8XajaGIna?dl=0" target="_blank"><strong>Watcher:</strong> Jellyfish</a></li>
-				<li><a href="https://www.dropbox.com/sh/lbv77upl6drah0v/AAByZeKu2Ar4mEbZ08jDsPNca?dl=0" target="_blank"><strong>Winstackers:</strong> Hawk</a></li>
-				<li><a href="https://www.dropbox.com/sh/6z7lw9f09yfkvtg/AAB5rTSchDMJae0sltTuf2zra?dl=0" target="_blank"><strong>Zaqar:</strong> Carrier pigeon</a></li>
-				<li><strong>Zun:</strong> Panda (in progress)</li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/aoeyaou0a1tu5il/AABb3IiVc5R7IlWr9EQLULrha?dl=0" target="_blank"><strong>Barbican:</strong> Porcupine</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/zkzuzvr2yfnmhao/AACiNMXzHMV9zfeU8LIajkYba?dl=0" target="_blank"><strong>Chef OpenStack:</strong> Kangaroo</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/8s3859c6qulu1m3/AABu_rIyuBM_bZmfGkagUXhua?dl=0" target="_blank"><strong>Cinder:</strong> Horse</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/5krzib412pmfcrv/AAAK-WqHaKhhhqJSan6IMo_ta?dl=0" target="_blank"><strong>Cloudkitty:</strong> Cat (maneki-neko)</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/ugh0asumotak1b1/AAD8ObN7106ccFPAM9nwBohla?dl=0" target="_blank"><strong>Community App Catalog:</strong> Quokka</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/p0luab8o5twqm9n/AABJKzfx6JiRBSZDS7IzLgaxa?dl=0" target="_blank"><strong>Congress:</strong> Raven</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/hilygxe70dwafk4/AABhiTaOj9oU-Zod5z7oubsea?dl=0" target="_blank"><strong>Designate:</strong> Crocodile</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/htu234yuf963i9b/AAAsraXwT3a5O9HNmms4E9yFa?dl=0" target="_blank"><strong>Documentation:</strong> Fox</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/6nmfrqxlxfion3u/AAD9B_ZK4JVLKwHtUbUjBS0Ja?dl=0" target="_blank"><strong>Dragonflow:</strong> Seahorse</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/o44ga6usq7aodbc/AAAdQNtjaAbSFSfLT-0LDNbYa?dl=0" target="_blank"><strong>EC2-API:</strong> Toucan</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/uqmbeinxu58nhe5/AAC2VI7eAYJdk5aM4qbAyE0ua?dl=0" target="_blank"><strong>Freezer:</strong> Polar Bear</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><strong>Fuel:</strong> (not chosen)</li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/xct2hsah2h8l6yi/AAATDIfxQHXfgPqop1cOSYdsa?dl=0" target="_blank"><strong>Glance:</strong> Chipmunk</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/kon1k7707ob2mq2/AAAsGHWtln4y8uY9a5YiVMbaa?dl=0" target="_blank"><strong>Heat:</strong> Flame/fire</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/vyig9h2ko7onkcr/AACRX7ChY3lA0cNYs1OhCGZja?dl=0" target="_blank"><strong>Horizon:</strong> Shiba inu (dog)</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/h1viph4bhbc06lw/AABxQGzAHhN3nAmk_1jy8OA2a?dl=0" target="_blank"><strong>I18n:</strong> Parrot</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/hjfhn8rev8dxqya/AACFbVuOjSYiSyPHVtsoO1Kda?dl=0" target="_blank"><strong>Infrastructure:</strong> Ant</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/xnozrzu3a72iexy/AAAOQN0ecPpA6UA61D--Rc-Va?dl=0" target="_blank"><strong>Interop:</strong> Onion</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><strong>Ironic:</strong> Bear (in progress)</li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/3vk6eplkg58z3we/AAB88OtKhQ2PskDJdvTfnQ-La?dl=0" target="_blank"><strong>Karbor:</strong> Beaver</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/0owldvy0u5y4yk9/AAB5Q95wYj-oaiisneKbnEiDa?dl=0" target="_blank"><strong>Keystone:</strong> Turtle </a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/94pukquiw425ji2/AAAl2wVmm72KHPLCAzR6Uboha?dl=0" target="_blank"><strong>Kolla:</strong> Koala</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/gj76va8evyzj6zm/AADlu2d-fcT3HcugukqDhb_va?dl=0" target="_blank"><strong>Kuryr:</strong> Platypus</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/kxr9up3qa4484qd/AABXgI0jr0elHP4QwBBdjJpya?dl=0" target="_blank"><strong>Magnum:</strong> Shark</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/pi0gis7kjj776tz/AADBb-tpxHOczWAMSdUSP9hra?dl=0" target="_blank"><strong>Manila:</strong> Zorilla</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/ngoqm9zazohwplb/AAAcgv3JzFE9isrLiU8SL7s4a?dl=0" target="_blank"><strong>Mistral:</strong> Dandelion</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/yigfsgvpzxz4t72/AABHPm5FOoBFv2Q-div_j9RXa?dl=0" target="_blank"><strong>Monasca:</strong> Monitor lizard</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/eyyrumpmgabyu4y/AAAYw6qyKkii2z_Qab5N4oJCa?dl=0" target="_blank"><strong>Murano:</strong> Muraena eel (moray)</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/9nzvr9nxzo7w9zw/AACdyh1flHgQWc37dwdxnfWda?dl=0" target="_blank"><strong>Neutron:</strong> Spider and its web</li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/9l1c7ymyjgpa3cc/AAB9iPZ0HIwn16nzC7G5liuza?dl=0" target="_blank"><strong>Nova:</strong> Supernova</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><strong>Octavia:</strong> (not chosen)</li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/asz0o1lw2msyd2y/AAD7Be3ViKIF9z15S8XT65b0a?dl=0 " target="_blank"><strong>OpenStack Charms:</strong> Orangutan</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><strong>OpenStack Client:</strong> (not chosen)</li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/zt9yvvoxvob8fe2/AAD79erHXrU-m681PRmZZxVQa?dl=0" target="_blank"><strong>OpenStack-Ansible:</strong> Cape buffalo</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/kj0e3sdu47pqr3e/AABllB31vJZDlw4OkZRK_AZia?dl=0" target="_blank"><strong>Oslo:</strong> Moose</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/sdqnsxo9jekdwpf/AADOJKekM3RrIesiS3d2I88Ya?dl=0" target="_blank"><strong>Packaging-deb:</strong> Lemur</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/n9obbuhm2jz7zey/AABV4BfBhLuF5xLf94IRqkICa?dl=0" target="_blank"><strong>Packaging-rpm:</strong> Donkey</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/oax7i1xvca3edxc/AAAtfQSyx0rJijKBoqoZmp-va?dl=0" target="_blank"><strong>Puppet OpenStack:</strong> Wolf</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/bxb0zmqbcnzov20/AAAXEYaYORHe5hXXiPa09Tisa?dl=0" target="_blank"><strong>Quality Assurance:</strong> Little brown bat</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/gwb40gry3taao4k/AADDKMZtFS16U4fMwBvMOTDha?dl=0" target="_blank"><strong>Rally:</strong> White ermine</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/5u0grlova3h4dtp/AAAadorRO7Mit4ndW0A_UhZha?dl=0" target="_blank"><strong>RefStack:</strong> Bee and its honeycomb</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/jijkinfgd67iqgn/AABIeqS6p-fYzNHyOd0Kkb5Ba?dl=0" target="_blank"><strong>Release Management:</strong> Border collie</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/p5hclpt07t9svw8/AAB0Ri3gJ8hogH5PSMtSSqJaa?dl=0" target="_blank"><strong>Requirements:</strong> Waterfall</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/6ets39nenrbuccl/AAAEGEMsAZbytHQ_BcZyTShTa?dl=0" target="_blank"><strong>Sahara:</strong> Elephant</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/yn45e1fp3hy705a/AABWJ68ZEHuP5SYdGFbIRZJza?dl=0" target="_blank"><strong>Searchlight:</strong> Firefly</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/2mqqcetyr9o1xe2/AABl_NHYdDkxCWuozmwcoQA3a?dl=0" target="_blank"><strong>Security:</strong> Pangolin (scaly anteater)</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/b8kpj5k29eaf65t/AADoIo9VUz14A81c--UTRtLNa?dl=0" target="_blank"><strong>Senlin:</strong> Forest</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><strong>Solum:</strong> (not chosen)</li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/x5uh65yqqdge5ae/AABvq9ztd_MTE9GLZUPGibG4a?dl=0" target="_blank"><strong>Stable Branch Management:</strong> Scarab beetle</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><strong>Storlets:</strong> (not chosen)</li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><strong>Swift:</strong> Swift (in progress)</li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/yyt1lazllah7ccf/AACkW8LkIiG32OXLYBqeP-RJa?dl=0" target="_blank"><strong>Tacker:</strong> Giant squid</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/c2xop4mve9h3fvw/AADqjLNkIENChKMMxrGMbVsna?dl=0" target="_blank"><strong>Telemetry:</strong> Meerkat</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><strong>TripleO:</strong> Owl (in progress)</li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/v7l130m8ci4kmv7/AAA7dBhyjtTSaaQZvYOatmJga?dl=0" target="_blank"><strong>Trove:</strong> Stingray</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/7yxme67d5yj1jf3/AAD60hwj-3G-lQenQWqZFPJia?dl=0" target="_blank"><strong>UX:</strong> Octopus</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/qghopozg09ktmte/AAC1Uihwn1kgURqYNTxS7T2Pa?dl=0" target="_blank"><strong>Vitrage:</strong> Giraffe</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/y3z28r62d51zvoo/AACcm3R4kJaN1whd8XajaGIna?dl=0" target="_blank"><strong>Watcher:</strong> Jellyfish</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/lbv77upl6drah0v/AAByZeKu2Ar4mEbZ08jDsPNca?dl=0" target="_blank"><strong>Winstackers:</strong> Hawk</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/6z7lw9f09yfkvtg/AAB5rTSchDMJae0sltTuf2zra?dl=0" target="_blank"><strong>Zaqar:</strong> Carrier pigeon</a></li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><strong>Zun:</strong> Panda (in progress)</li>
 			</ul>
-			<h5 class="section-title">FAQs</h5>
+			<h5 class="section-title">FAQs - Using Your Mascot Logo</h5>
 			<p class="question">
 				What kind of options will my logo have?
 			</p>
@@ -128,6 +127,7 @@
 			<p class="answer">
 				Yes. Feel free to print vintage swag, such as stickers and shirts. For official channels, such as the website, project navigator, and signage at OpenStack events, we’ll use official logos exclusively.
 			</p>
+			<h5 class="section-title">FAQs - Selecting Your Mascot</h5>
 			<p class="question">
 				Who can get a mascot?
 			</p>
