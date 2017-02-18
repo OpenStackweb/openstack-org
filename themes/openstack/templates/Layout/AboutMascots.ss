@@ -28,15 +28,15 @@
 			<h2>
 				Watch how the logos were created
 			</h2>
-    		<div class="col-md-4 col-sm-6">
+    		<div class="col-lg-4 col-md-6 col-sm-6">
 			<p>See all of the OpenStack logos <em>(1 minute)</em></p>
 			<iframe width="350" height="197" src="https://www.youtube.com/embed/JmMTCWyY8Y4?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
     		</div>
-    		<div class="col-md-4 col-sm-6">
+    		<div class="col-lg-4 col-md-6 col-sm-6">
 			<p>See the mascots in development <em>(1 minute)</em></p>
 			<iframe width="350" height="197" src="https://www.youtube.com/embed/JmMTCWyY8Y4?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
     		</div>
-    		<div class="col-md-4 col-sm-6">
+    		<div class="col-lg-4 col-md-6 col-sm-6">
 			<p>Hear from the project and creative leads <em>(8 minutes)</em></p>
 			<iframe width="350" height="197" src="https://www.youtube.com/embed/LOdsuNr2T-o?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
     		</div>
