@@ -3,14 +3,11 @@ require('./t.tag');
     <div class="col-md-4 col-sm-6">
     <div class="core-services-single-full">
     <div class="core-top">
-    <div class="core-title">
+    <div class="core-title" style="background: url(/software/images/mascots/{slug}.png) no-repeat center center;">
     { code_name }
     </div>
     <div class="core-service">
     { name }
-    </div>
-    <div class="core-service-mascot">
-    <i class="fa { mascot_css_class ? this.mascot_css_class: 'Barbican' }"></i>
     </div>
     </div>
     <div class="core-mid component-description">
@@ -21,20 +18,18 @@ require('./t.tag');
     <div class="core-stats-wrapper">
     <div class="row">
     <div class="col-sm-4 col-xs-4">
-    <div class="core-stat-graphic" if={ adoption > 0 }>
+    <div class="core-stat-graphic">
     { adoption } %
     </div>
-    <div class="core-stat-graphic off" if={ adoption == 0 }></div>
-    <div class={ core-stat-title:true, off:(adoption == 0) }>
+    <div class="core-stat-title">
     <t entity="Software.ADOPTION" text="ADOPTION" />
     </div>
     </div>
     <div class="col-sm-4 col-xs-4">
-    <div class="core-stat-graphic" if={ maturity_points > 0 }>
+    <div class="core-stat-graphic">
     { maturity_points } <span>of</span> { parent.max_maturity_points }
     </div>
-    <div class="core-stat-graphic off" if={ maturity_points == 0 }></div>
-    <div class={ core-stat-title:true, off:(maturity_points == 0) }>
+    <div class="core-stat-title">
     <t entity="Software.MATURITY" text="MATURITY" />
     </div>
     </div>
