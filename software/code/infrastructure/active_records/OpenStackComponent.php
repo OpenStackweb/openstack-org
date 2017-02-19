@@ -106,6 +106,10 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
         return strtolower($this->getCodeName());
     }
 
+    public function getMascotRef()
+    {
+        return str_replace(' ', '-', strtolower($this->getCodeName()));
+    }
 
     public function setCodeName($codename)
     {

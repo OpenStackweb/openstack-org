@@ -8,7 +8,10 @@
     <div class="container inner-software">
         <!-- Begin Page Content -->
         <div class="row project-details-intro">
-            <div class="col-lg-8 col-md-7 col-sm-6">
+            <div class="col-lg-2 col-md-2 col-sm-2">
+                <img src="/software/images/mascots/{$Component.MascotRef}.png" width="100%">
+            </div>
+            <div class="col-lg-6 col-md-5 col-sm-4">
                 <h2>$Component.CodeName <i class="<% if $Component.MascotClass %>$Component.MascotClass<% else %>Barbican<% end_if %>"></i></h2>
                 <h4>$Component.Name</h4>
                 <div class="project-intro-links">

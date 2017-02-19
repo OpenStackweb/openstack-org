@@ -31,14 +31,14 @@ require('./t.tag');
         <div class="row">
             <div class="col-sm-12">
                  <p class="service-section-title">
-                 	<t entity="Software.CORE_SERVICES_INCLUDED" text="<strong>Core Services</strong> included in this configuration" />
+                 	<t entity="Software.CORE_SERVICES_INCLUDED" text="<strong>OpenStack Services</strong> included in this configuration" />
                  	({ current_config.core_components.length } <t entity="Openstack.RANGE_OF" text="of" /> { release_core_component_count })
                  </p>
             </div>
         </div>
         <div class="row">
             <div each={ current_config.core_components } class="col-md-4 col-sm-6">
-                <div class="core-services-single-full">
+                <div class="core-services-single-full" onclick={ onComponentDetails }>
                     <div class="core-top">
                     <div class="core-title" style="background: url({mascotImage(slug)}) no-repeat center center;">
                         { code_name }
