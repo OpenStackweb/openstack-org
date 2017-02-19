@@ -654,17 +654,21 @@ a.more-about-config {
   transition: max-height 0.5s ease-out; }
 
 p.service-section-title {
+  text-align: center;
   color: #2A4E68;
-  margin-top: 20px;
-  font-size: 0.9em; }
+  margin-top: 30px;
+  font-size: 1.4em;
+  margin-bottom: 30px; }
 
 .core-services-single-full {
+  cursor: pointer;
   /* Mask: */
   background: #FFFFFF;
   border: 1px solid #D3DEE9;
   box-shadow: 1px 1px 3px 0px rgba(51, 51, 51, 0.12);
   border-radius: 4px;
   padding: 15px;
+  padding-top: 0px;
   margin-bottom: 20px; }
 
 .core-services-single-full .core-top {
@@ -673,7 +677,7 @@ p.service-section-title {
 
 .core-services-single-full .core-top .core-title {
   text-align: center;
-  padding-top: 150px;
+  padding-top: 170px;
   background: url(/images/mascots/nova.png) no-repeat center center;
   text-transform: uppercase;
   color: black;
@@ -686,7 +690,9 @@ p.service-section-title {
   font-weight: 600;
   margin: 0 0 10px;
   font-size: 1.2em;
-  color: #207ABA; }
+  line-height: 1.5em;
+  color: #207ABA;
+  min-height: 3em; }
 
 .core-services-single-full .core-top .core-service-icon {
   font-size: 2em;
@@ -703,7 +709,6 @@ p.service-section-title {
   color: #555; }
 
 .core-services-single-full .core-stats-wrapper {
-  border-bottom: 1px solid #D4DCE5;
   padding: 20px 20px 30px;
   display: table;
   text-align: center;
