@@ -1,7 +1,7 @@
 require('./t.tag');
 <service-box>
     <div class="col-md-4 col-sm-6">
-    <div class="core-services-single-full">
+    <div class="core-services-single-full" onclick={ coreServiceDetails }>
     <div class="core-top">
     <div class="core-title" style="background: url({mascotImage()}) no-repeat center center;">
     { code_name }
@@ -39,11 +39,6 @@ require('./t.tag');
     </div>
     </div>
     </div>
-    </div>
-    <div class="core-bottom">
-    <a class="core-service-btn" href="#" onclick={ coreServiceDetails }>
-    	<t entity="Software.MORE_DETAILS" text="More Details" />
-    </a>
     </div>
     </div>
     </div>
