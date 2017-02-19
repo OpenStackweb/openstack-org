@@ -3,18 +3,15 @@ require('./t.tag');
     <div class="col-md-4 col-sm-6">
     <div class="core-services-single-full">
     <div class="core-top">
-    <div class="core-title" style="background: url(/software/images/mascots/{slug}.png) no-repeat center center;">
+    <div class="core-title" style="background: url({mascotImage()}) no-repeat center center;">
     { code_name }
     </div>
     <div class="core-service">
     { name }
     </div>
     </div>
-    <div class="core-mid component-description">
-    <p>
-    { description }
-    </p>
-    </div>
+
+
     <div class="core-stats-wrapper">
     <div class="row">
     <div class="col-sm-4 col-xs-4">
@@ -60,5 +57,11 @@ require('./t.tag');
             var url = self.parent.base_url+'releases/'+self.parent.parent.getCurrentReleaseId()+'/components/'+slug;
             window.location = url;
         }
+
+        mascotImage() {
+            var slugWithoutSpaces = self.slug.replace(/ /g,"_");
+            return '/software/images/mascots/' + slugWithoutSpaces + '.png';
+        }
+
     </script>
 </service-box>
