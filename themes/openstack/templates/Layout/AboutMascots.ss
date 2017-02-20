@@ -109,6 +109,10 @@
 				<li class="col-lg-6 col-md-6 col-sm-6"><strong>Zun:</strong> Panda (in progress)</li>
 			</ul>
 		</div>
+		<div class="col-lg-10 col-sm-12 center">
+			<p>&nbsp;</p>
+			<p><a href="//www.openstack.org/assets/software/mascots/OS-Mascot-Key.pdf">View Project Mascot Key</a></p>
+		</div>
     	<div class="col-sm-12">
 			<h5 class="section-title">FAQs - Using Your Mascot Logo</h5>
 			<p class="question">
