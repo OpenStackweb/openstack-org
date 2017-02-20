@@ -30,7 +30,7 @@
 			</h2>
     		<div class="col-lg-4 col-md-6 col-sm-6">
 			<p>See all of the OpenStack logos <em>(1 minute)</em></p>
-			<iframe width="350" height="197" src="https://www.youtube.com/embed/JmMTCWyY8Y4?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+			<iframe width="350" height="197" src="https://www.youtube.com/embed/wO1R8TZR_Lc?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
     		</div>
     		<div class="col-lg-4 col-md-6 col-sm-6">
 			<p>See the mascots in development <em>(1 minute)</em></p>
