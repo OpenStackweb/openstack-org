@@ -41,18 +41,3 @@ location ~* composer\.(json|lock)$ {
 location ~* /(cms|framework)/silverstripe_version$ {
     deny all;
 }
-
-location ~* \.(png|jpg|jpeg|gif|ico)$ {
-        expires 1y;
-        log_not_found off;
-}
-
-location ~* \.(js)$ {
-        expires 24h;
-        log_not_found off;
-}
-
-location ~* \.(css)$ {
-        expires 24h;
-        log_not_found off;
-}
