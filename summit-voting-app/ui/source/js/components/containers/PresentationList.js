@@ -26,18 +26,11 @@ class PresentationList extends React.Component {
 	}
 
 	onPresentationClicked (id) {
-<<<<<<< HEAD
         this.updateLocationHash(id);
         this.props.dispatch(goToPresentation(id));
 		if(this.props.isMobile) {
 			this.props.dispatch(togglePresentationList());
 		}
-=======
-		// Hack!
-		document.body.classList.remove('openVotingNav');
-        this.updateLocationHash(id);
-        this.props.dispatch(goToPresentation(id));
->>>>>>> branch/project-nav-revamp
 	}
 
 	updateLocationHash(id){
