@@ -33,6 +33,7 @@ $php5_packages = [
   'php5.6-mysqlnd',
   'php5.6-mbstring',
   'php5.6-xml',
+  'php5.6-xdebug',
 ]
 
 exec { 'apt-get update':
@@ -192,6 +193,17 @@ file { '/etc/nginx/sites-available/local.openstack.org':
   require =>  [
     File['/etc/nginx/silverstripe.conf'],
     File['/etc/nginx/php5-fpm.conf'],
+  ]
+}
+
+file { '/etc/php/5.6/mods-available/xdebug.ini':
+  ensure  => present,
+  content => template('site/xdebug.ini.erb'),
+  owner   => 'vagrant',
+  group   => 'www-data',
+  mode    => '0640',
+  require =>  [
+    Package[$php5_packages],
   ]
 }
 
