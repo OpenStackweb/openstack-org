@@ -1319,3 +1319,23 @@ a.security-promo-btn {
 a.security-promo-btn:hover, a.security-promo-btn:focus {
   background: #1753AA;
   text-decoration: none; }
+
+.project-category-tile {
+  border: 1px solid #CCEDF4;
+  margin-bottom: 20px; }
+  .project-category-tile h4 {
+    margin: 20px 0px; }
+
+.number-of-projects {
+  background-color: #EDFDFF;
+  margin: 0px;
+  padding: 10px; }
+
+.project-category-list-background {
+  padding: 20px 0px; }
+
+.project-short-description {
+  min-height: 3em;
+  color: #1B92D4;
+  font-size: 1.2em;
+  margin-top: 3px; }
