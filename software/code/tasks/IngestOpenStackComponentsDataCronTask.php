@@ -431,10 +431,6 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
             {
                 $points += 1;
             }
-            if(intval($c->SDKSupport) > 7)
-            {
-                $points += 1;
-            }
             if($c->FollowsStandardDeprecation)
             {
                 $points += 1;
