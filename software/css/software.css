@@ -1320,13 +1320,56 @@ a.security-promo-btn:hover, a.security-promo-btn:focus {
   background: #1753AA;
   text-decoration: none; }
 
-.project-project-category-section, .project-category-section h3 {
-  text-align: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
+.project-category h2 {
+  font-size: 1.2em;
+  border-bottom: 1px solid #D9D9D9;
+  padding-bottom: 8px;
+  margin-top: 70px;
+  text-transform: uppercase; }
+
+.no-gutter > [class*='col-'] {
+  padding-right: 0;
+  padding-left: 0; }
+
+.project-tile {
+  border: 1px solid #A6A6A6;
+  margin-bottom: 15px; }
+  .project-tile h3 {
+    padding-top: 160px;
+    color: black;
+    font-weight: 800;
+    margin-bottom: 0px; }
+  .project-tile strong {
+    font-weight: normal;
+    color: black; }
+
+.project-stat-bar {
+  border-top: 1px solid #D9D9D9;
+  background-color: #F5F5F5;
+  color: #4C4C4C; }
+  .project-stat-bar .small-type {
+    font-size: 0.6em; }
+
+.project-stat {
+  font-size: 1.4em;
+  border-right: 1px solid #D9D9D9;
+  width: 30%;
+  display: inline-block;
+  padding-bottom: 7px;
+  padding-top: 7px; }
+
+.project-stat:last-child {
+  border-right: none; }
+
+.project-stat-label {
+  font-size: 0.6em;
+  color: #8C8C8C; }
+
+.project-stat-label {
+  text-transform: uppercase; }
 
 .project-category-tile {
+  text-align: center;
   border: 1px solid #CCEDF4;
   margin-bottom: 20px; }
   .project-category-tile h4 {
@@ -1345,3 +1388,30 @@ a.security-promo-btn:hover, a.security-promo-btn:focus {
   color: #1B92D4;
   font-size: 1.2em;
   margin-top: 3px; }
+
+.optional-services-table td {
+  text-align: left; }
+
+.optional-services-table {
+  margin-top: 40px; }
+
+h3.header-center {
+  text-align: center;
+  padding-bottom: 30px; }
+
+.workloads-section ul {
+  margin: 0px;
+  padding: 0px; }
+
+.workloads-section li {
+  font-weight: bold;
+  list-style: none;
+  margin: 10px;
+  border: 1px solid #CCEDF4;
+  padding: 0.5em;
+  display: block;
+  float: left;
+  width: 200px;
+  height: 4em;
+  text-align: center;
+  background-color: #EDFDFF; }
