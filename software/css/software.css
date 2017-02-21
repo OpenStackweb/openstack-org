@@ -1320,7 +1320,7 @@ a.security-promo-btn:hover, a.security-promo-btn:focus {
   background: #1753AA;
   text-decoration: none; }
 
-.project-category-listing, .project-category-listing h3 {
+.project-category-list-background, .project-category-list-background h3 {
   text-align: center;
   padding-top: 20px;
   padding-bottom: 20px;
