@@ -17,13 +17,13 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="input-group search_box" style="width: 100%;">
-                    <label for="speaker-search-1">Select Speaker 1</label>
+                    <label for="speaker-search-1">Speaker 1</label>
                     <input id="speaker-search-1" class="form-control" />
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="input-group search_box" style="width: 100%;">
-                    <label for="speaker-search-2">Select Speaker 2</label>
+                    <label for="speaker-search-2">Speaker 2</label>
                     <input id="speaker-search-2" class="form-control" />
                 </div>
             </div>

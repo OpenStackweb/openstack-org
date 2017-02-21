@@ -149,7 +149,7 @@ final class SpeakerManager implements ISpeakerManager
     public function createSpeaker(ISummit $summit, array $speaker_data, IMessageSenderService $speaker_creation_email_sender)
     {
 
-        return $this->tx_service->transaction(function () use
+        return $this->tx_manager->transaction(function () use
         (
             $summit,
             $speaker_data,
@@ -237,7 +237,7 @@ final class SpeakerManager implements ISpeakerManager
     public function updateSpeaker(ISummit $summit, array $speaker_data)
     {
 
-        return $this->tx_service->transaction(function () use ($summit, $speaker_data) {
+        return $this->tx_manager->transaction(function () use ($summit, $speaker_data) {
             $speaker_id = intval($speaker_data['speaker_id']);
             $speaker    = $this->speaker_repository->getById($speaker_id);
             if(is_null($speaker)) throw new NotFoundEntityException('PresentationSpeaker');
@@ -310,7 +310,7 @@ final class SpeakerManager implements ISpeakerManager
     public function uploadSpeakerPic(ISummit $summit, $speaker_id, $tmp_file)
     {
 
-        return $this->tx_service->transaction(function () use ($summit, $speaker_id, $tmp_file) {
+        return $this->tx_manager->transaction(function () use ($summit, $speaker_id, $tmp_file) {
             $speaker_id = intval($speaker_id);
             $speaker    = $this->speaker_repository->getById($speaker_id);
             if(is_null($speaker)) throw new NotFoundEntityException('PresentationSpeaker');
@@ -343,7 +343,7 @@ final class SpeakerManager implements ISpeakerManager
     public function mergeSpeakers(ISummit $summit, $speaker_id_1, $speaker_id_2, array $data)
     {
 
-        $changes = $this->tx_service->transaction(function () use ($summit, $data, $speaker_id_1, $speaker_id_2) {
+        $changes = $this->tx_manager->transaction(function () use ($summit, $data, $speaker_id_1, $speaker_id_2) {
 
             $speaker_1 = $this->speaker_repository->getById($speaker_id_1);
             $speaker_2 = $this->speaker_repository->getById($speaker_id_2);
