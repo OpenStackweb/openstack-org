@@ -9,14 +9,11 @@
             <div class="col-sm-10 col-sm-push-1 center">
                 <h3>$IntroTitle</h3>
                 <p>
-                    <img width="100%" src="/software/images/diagram/overview-diagram.svg" onerror="this.onerror=null; this.src=/software/images/diagram/overview-diagram.png" alt="OpenStack Cloud Software">
+                    <img class="overview-diagram" width="100%" src="/software/images/diagram/overview-diagram.svg" onerror="this.onerror=null; this.src=/software/images/diagram/overview-diagram.png" alt="OpenStack Cloud Software">
                 </p>
                 <div class="row projects-overview">
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                      $IntroText
-                    </div>
-                    <div class="col-sm-6"><a rel="shadowbox" href="//www.youtube.com/v/z6ftW7fUdp4"><img class="icehouse-video" title="" src="assets/software/newton/newton-video-thumb.png" alt="Newton Demo" /></a>
-                        <h4>Newton OpenStack Overview (4:02)</h4>
                     </div>
                 </div>
             </div>
@@ -24,9 +21,31 @@
 
         <hr/>
 
-<h3>What can OpenStack Automate?</h3>
+<div class="row">
+<div class="screenshotBoxes col-sm-12">
+<h3 class="header-center">OpenStack Dashboard Screenshots</h3>
+<div class="col-sm-4"><a class="screenshots" rel="shadowbox" href="/software/ocata/screenshots/create-image.png"><img style="border: 1px solid #ddd;" title="" src="/software/ocata/screenshots/create-image-thumb.jpg" alt="Ocata - Create Image"></a>
+<p>&nbsp;</p>
+<p>OpenStack provides versatile infrastructure, making it easy to run any workload of your choosing.</p>
+</div>
+<div class="col-sm-4"><a class="screenshots" rel="shadowbox" href="/software/ocata/screenshots/images.png"><img style="border: 1px solid #ddd;" title="" src="/software/ocata/screenshots/images-thumb.jpg" alt="Ocata - Images"></a>
+<p>&nbsp;</p>
+<p>The OpenStack dashboard gives you a single management plane for all your infrastructure resources.</p>
+</div>
+<div class="col-lg-4 col-md-4 col-sm-4"><a class="screenshots" rel="shadowbox" href="/software/ocata/screenshots/launch-instance.png"><img style="border: 1px solid #ddd;" title="" src="/software/ocata/screenshots/launch-instance-thumb.jpg" alt="Ocata - Launch Instance"></a>
+<p>&nbsp;</p>
+<p>OpenStack is one platform for on-demand compute, networking, storage, and the applications to run on them, with security built right in.</p>
+</div>
+</div>
+</div>        
 
-<div class="project-category-list-background">
+<hr/>
+
+
+<div class="project-category-section">
+<h3 class="header-center">What can OpenStack Automate?</h3>
+
+
     <div class="row">
         
             <div class="col-md-4">
@@ -38,8 +57,7 @@
         </p>
     </div>
     </a>
-</div>
-            
+</div>            
         
             <div class="col-md-4">
     <a href="#">
@@ -139,6 +157,29 @@
         <a href="/software/project-navigator" class="red-btn-lrg">Browse All OpenStack Projects</a>
     </div>
 </div>
+
+<hr/>
+
+<div class="row">
+    <div class="workloads-section">
+
+    <h3 class="header-center">Sample OpenStack Configurations</h3>
+
+        <ul>
+            <li> <a href="#">Web Applications</a></li>
+            <li> <a href="#">eCommerce</a></li>
+            <li> <a href="#">Video Processing and Content Delivery</a></li>
+            <li> <a href="#">High Throughput Computing</a></li>
+            <li> <a href="#">Container Optimized</a></li>
+            <li> <a href="#">Web Hosting</a></li>
+            <li> <a href="#">Public Cloud</a></li>
+            <li> <a href="#">Compute Starter Kit</a></li>
+            <li> <a href="#">DBaaS</a></li>
+        </ul>
+
+    </div>
+</div>
+
 
 <div class="lf-security-promo">
     <div class="row">
