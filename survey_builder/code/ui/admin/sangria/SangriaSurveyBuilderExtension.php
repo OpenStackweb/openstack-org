@@ -115,6 +115,7 @@ final class SangriaSurveyBuilderExtension extends Extension
 
         $query_templates = new QueryObject(new SurveyTemplate);
         $query_templates->addAndCondition(QueryCriteria::equal('ClassName', $template_class));
+        $query_templates->addOrder(QueryOrder::desc('ID'));
 
         list($templates, $count) = $this->survey_template_repository->getAll($query_templates, 0, PHP_INT_MAX);
 
@@ -182,7 +183,7 @@ final class SangriaSurveyBuilderExtension extends Extension
         }
 
         if (empty($order)) {
-            $query_surveys->addOrder(QueryOrder::asc('ID'));
+            $query_surveys->addOrder(QueryOrder::desc('LastEdited'));
         } else {
             if ($order_dir === 'ASC')
                 $query_surveys->addOrder(QueryOrder::asc($sort_fields[$order]));
