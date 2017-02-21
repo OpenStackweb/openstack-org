@@ -427,12 +427,15 @@ class TrackChairAPI extends AbstractRestfulJsonApi
                                                 ->exclude('ListClass', $list->ListClass)
                                                 ->first();
 
-                            $other_selection = $other_team_list->SummitSelectedPresentations()->filter(['PresentationID' => $id])->first();
+                            if ($other_team_list) {
 
-                            if ($other_selection->Exists()) { // conflict, throw exception
-                                $other_team_list_name = SummitSelectedPresentationList::getListClassName($other_team_list->ListClass);
-                                $msg = "This presentation is in {$other_team_list_name} Team List. Please remove it to add it to this Team List.";
-                                throw new EntityValidationException($msg);
+                                $other_selection = $other_team_list->SummitSelectedPresentations()->filter(['PresentationID' => $id])->first();
+
+                                if ($other_selection && $other_selection->Exists()) { // conflict, throw exception
+                                    $other_team_list_name = SummitSelectedPresentationList::getListClassName($other_team_list->ListClass);
+                                    $msg = "This presentation is in {$other_team_list_name} Team List. Please remove it to add it to this Team List.";
+                                    throw new EntityValidationException($msg);
+                                }
                             }
 
                         }
