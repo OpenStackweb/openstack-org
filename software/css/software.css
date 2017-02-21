@@ -1320,6 +1320,12 @@ a.security-promo-btn:hover, a.security-promo-btn:focus {
   background: #1753AA;
   text-decoration: none; }
 
+.project-category-listing, .project-category-listing h3 {
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
 .project-category-tile {
   border: 1px solid #CCEDF4;
   margin-bottom: 20px; }

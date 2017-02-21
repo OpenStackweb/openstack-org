@@ -22,6 +22,8 @@
             </div>
         </div>
 
+        <hr/>
+
 <h3>What can OpenStack Automate?</h3>
 
 <div class="project-category-list-background">
