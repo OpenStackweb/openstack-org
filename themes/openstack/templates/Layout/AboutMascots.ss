@@ -100,13 +100,14 @@
 				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/yyt1lazllah7ccf/AACkW8LkIiG32OXLYBqeP-RJa?dl=0" target="_blank"><strong>Tacker:</strong> Giant squid</a></li>
 				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/c2xop4mve9h3fvw/AADqjLNkIENChKMMxrGMbVsna?dl=0" target="_blank"><strong>Telemetry:</strong> Meerkat</a></li>
 				<li class="col-lg-6 col-md-6 col-sm-6"><strong>TripleO:</strong> Owl (in progress)</li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><strong>Tricircle:</strong> Panda (in progress)</li>
 				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/v7l130m8ci4kmv7/AAA7dBhyjtTSaaQZvYOatmJga?dl=0" target="_blank"><strong>Trove:</strong> Stingray</a></li>
 				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/7yxme67d5yj1jf3/AAD60hwj-3G-lQenQWqZFPJia?dl=0" target="_blank"><strong>UX:</strong> Octopus</a></li>
 				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/qghopozg09ktmte/AAC1Uihwn1kgURqYNTxS7T2Pa?dl=0" target="_blank"><strong>Vitrage:</strong> Giraffe</a></li>
 				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/y3z28r62d51zvoo/AACcm3R4kJaN1whd8XajaGIna?dl=0" target="_blank"><strong>Watcher:</strong> Jellyfish</a></li>
 				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/lbv77upl6drah0v/AAByZeKu2Ar4mEbZ08jDsPNca?dl=0" target="_blank"><strong>Winstackers:</strong> Hawk</a></li>
 				<li class="col-lg-6 col-md-6 col-sm-6"><a href="https://www.dropbox.com/sh/6z7lw9f09yfkvtg/AAB5rTSchDMJae0sltTuf2zra?dl=0" target="_blank"><strong>Zaqar:</strong> Carrier pigeon</a></li>
-				<li class="col-lg-6 col-md-6 col-sm-6"><strong>Zun:</strong> Panda (in progress)</li>
+				<li class="col-lg-6 col-md-6 col-sm-6"><strong>Zun:</strong> (not chosen)</li>
 			</ul>
 		</div>
 		<div class="col-lg-10 col-sm-12 center">
