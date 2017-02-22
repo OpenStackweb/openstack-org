@@ -93,7 +93,7 @@ class MarketingPage extends Page{
             'Root.Software',
             new HtmlEditorField('SoftwareIntroText','Software Intro Text',$this->SoftwareIntroText)
         );
-        $config = new GridFieldConfig_RecordEditor(3);
+        $config = new GridFieldConfig_RecordEditor();
         $config->addComponent(new GridFieldSortableRows('SortOrder'));
         $fields->addFieldToTab(
             'Root.Software',
