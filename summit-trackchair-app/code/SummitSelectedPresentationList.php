@@ -49,6 +49,7 @@ class SummitSelectedPresentationList extends DataObject
      */
     private static $summary_fields = [
         'Category.Title' => 'Name',
+        'ListClass' => 'List Class'
     ];
 
 
@@ -153,6 +154,7 @@ ORDER BY SummitSelectedPresentation.Order ASC
     {
 
         $category = PresentationCategory::get()->byID($SummitCategoryID);
+        $track_chair_ids = $category->TrackChairs()->column('MemberID');
 
         // An empty array list that we'll use to return results
         $results = ArrayList::create();
@@ -163,6 +165,7 @@ ORDER BY SummitSelectedPresentation.Order ASC
                 'CategoryID' => $SummitCategoryID,
                 'ListClass' => $ListClass
             ])
+            ->where('MemberID IN ('.implode(',', $track_chair_ids).')')
             ->sort('ListType', 'ASC');
 
         // Filter to lists of any other track chairs

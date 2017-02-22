@@ -198,28 +198,32 @@ class PresentationCategory extends DataObject
     public function MemberList($memberid, $list_class = SummitSelectedPresentationList::Session)
     {
 
-        // See if there's a list for the current member
-        $MemberList = SummitSelectedPresentationList::get()->filter(array(
-            'MemberID' => $memberid,
-            'CategoryID' => $this->ID,
-            'ListType' => SummitSelectedPresentationList::Individual,
-            'ListClass' => $list_class,
-        ))->first();
+        if ($this->isTrackChair($memberid)) {
 
-        // if a selection list doesn't exist for this member and category, create it
-        if (!$MemberList && $this->isTrackChair($memberid)) {
-            $MemberList = new SummitSelectedPresentationList();
-            $MemberList->ListType = SummitSelectedPresentationList::Individual;
-            $MemberList->ListClass = $list_class;
-            $MemberList->CategoryID = $this->ID;
-            $MemberList->MemberID = $memberid;
-            $MemberList->write();
+            // See if there's a list for the current member
+            $MemberList = SummitSelectedPresentationList::get()->filter(array(
+                'MemberID' => $memberid,
+                'CategoryID' => $this->ID,
+                'ListType' => SummitSelectedPresentationList::Individual,
+                'ListClass' => $list_class,
+            ))->first();
+
+            // if a selection list doesn't exist for this member and category, create it
+            if (!$MemberList) {
+                $MemberList = new SummitSelectedPresentationList();
+                $MemberList->ListType = SummitSelectedPresentationList::Individual;
+                $MemberList->ListClass = $list_class;
+                $MemberList->CategoryID = $this->ID;
+                $MemberList->MemberID = $memberid;
+                $MemberList->write();
+            }
+
+            if ($MemberList) {
+                return $MemberList;
+            }
         }
 
-        if ($MemberList) {
-            return $MemberList;
-        }
-
+        return array();
 
     }
 
