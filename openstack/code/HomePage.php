@@ -243,6 +243,7 @@ class HomePage_Controller extends Page_Controller
 
     function NewsItems($limit = 20)
     {
+        $news_repository = new SapphireNewsRepository();
         $repository = new SapphireRssNewsRepository();
         $tx_manager = SapphireTransactionManager::getInstance();
         $rss_news_manager = new RssNewsManager(
@@ -288,12 +289,11 @@ class HomePage_Controller extends Page_Controller
         }*/
 
         $rss_count = $return_array->count();
-
-        $openstack_news = DataObject::get('News', "Approved = 1", "Date DESC", "", $limit - $rss_count)->toArray();
+        $openstack_news = $news_repository->getAllNews()->limit($limit - $rss_count)->toArray();
         foreach ($openstack_news as $item) {
             $art_link = 'news/view/' . $item->ID . '/' . $item->HeadlineForUrl;
             $return_array->push(array('type' => 'News', 'link' => $art_link, 'title' => $item->Headline,
-                'pubdate' => date('D, M jS Y', strtotime($item->Date)), 'rawpubdate' => $item->Date));
+                'pubdate' => date('D, M jS Y', strtotime($item->DateEmbargo)), 'rawpubdate' => $item->DateEmbargo));
         }
 
         return $return_array->sort('rawpubdate', 'DESC')->limit($limit,0);

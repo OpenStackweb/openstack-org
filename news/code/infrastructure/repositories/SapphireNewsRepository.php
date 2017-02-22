@@ -69,6 +69,22 @@ final class SapphireNewsRepository extends SapphireRepository {
     /**
      * @return INews[]
      */
+    public function getAllNews($filter_embargo = true)
+    {
+        $where_string = "Approved = 1 AND Archived = 0";
+        if ($filter_embargo) {
+            $now = gmdate("Y-m-d H:i:s");
+            $where_string .= " AND (DateEmbargo < '$now')";
+        }
+
+        $list = News::get()->where($where_string)->sort(array('DateEmbargo'=>'DESC','Rank'=>'ASC'))->limit(1000);
+        return $list;
+
+    }
+
+    /**
+     * @return INews[]
+     */
     public function getStandByNews()
     {
         $where_string = "Featured = 0 AND Slider = 0 AND Approved = 0 AND Archived = 0 AND Deleted = 0";
