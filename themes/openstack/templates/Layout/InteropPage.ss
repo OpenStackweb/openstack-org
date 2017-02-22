@@ -29,10 +29,7 @@
     <p>
 	   "<a href="http://www.openstack.org/brand/openstack-compatible/">OpenStack Compatible</a>" is for software solutions
        that interact with "OpenStack Powered" systems, and hardware solutions that are designed to run the OpenStack
-       software. In June 2015, the OpenStack Board approved the development of testing programs for "OpenStack Compatible"
-       products. The OpenStack Foundation is rolling out these testing programs with new requirements for storage drivers
-       starting in November 2015. Network driver testing and application testing requirements are scheduled for 2016.
-       Details on the technical requirements to qualify for the the storage driver "Compatible" logo are
+       software. Details on the technical requirements to qualify for the the storage driver "Compatible" logo are
        <a href="http://www.openstack.org/brand/interop#openstackcompatible">here</a>.
     </p>
 	<h3 id="openstackpowered">OpenStack Powered</h3>
@@ -108,13 +105,13 @@
     </p>
     <p>
         Products must comply with one of the two most recent guidelines approved by the OpenStack Foundation Board of Directors.
-        These versions are numbered based on the date when they were approved, such as "2016.08"for the version approved in August, 2016.
+        These versions are numbered based on the date when they were approved, such as "2017.01"for the version approved in January, 2017.
     </p>
     <p>
         The two most recent versions approved by the board are
-        "<a title="2016.01 DefCore Capabilities" href="http://git.openstack.org/cgit/openstack/defcore/tree/2016.01.json" target="_blank">2016.01</a>"
-        and "<a title="Defcore 2016.08 Guideline" href="http://git.openstack.org/cgit/openstack/defcore/tree/2016.08.json">2016.08</a>". These
-        two guidelines cover four OpenStack releases: Icehouse, Juno, Kilo, and Liberty.
+        "<a title="2016.08 DefCore Capabilities" href="http://git.openstack.org/cgit/openstack/defcore/tree/2016.08.json" target="_blank">2016.08</a>"
+        and "<a title="Defcore 2017.01 Guideline" href="http://git.openstack.org/cgit/openstack/defcore/tree/2017.01.json">2017.01</a>". These
+        two guidelines cover five OpenStack releases: Kilo, and Liberty, Mitaka, Newton, and Ocata.
         The list of required capabilities (with must-pass tests) and designated code sections are published on
         <a title="OpenStack DefCore Repository" href="http://git.openstack.org/cgit/openstack/defcore/tree/" target="_blank">git.openstack.org</a>&nbsp;
         and summarized below. Once a company verifies their products include the appropriate designated sections and submit API test results, they will
@@ -149,7 +146,7 @@
     </p>
     <p>
         For more detailed instructions to run the tests, please consult
-        <a title="Procedure for Running Defcore Interop Tests" href="http://git.openstack.org/cgit/openstack/defcore/tree/2016.01/procedure.rst">this document</a>.
+        <a title="Procedure for Running Defcore Interop Tests" href="http://git.openstack.org/cgit/openstack/defcore/tree/2016.08/procedure.rst">this document</a>.
         If you need help getting started, contact Chris Hoge, the Foundation's Interop Engineer, by emailing
         <a href="mailto:interop@openstack.org">interop@openstack.org</a>. The Foundation is looking for feedback from companies
         who are running tests in order to improve the testing process and shape policy in the future.
