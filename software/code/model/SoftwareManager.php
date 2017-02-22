@@ -77,21 +77,18 @@ final class SoftwareManager implements ISoftwareManager
      * @param string $sort_dir
      * @return array
      */
-    public function getComponentsByCategory(IOpenStackRelease $release , $term = '', $adoption = 0, $maturity = 0, $age = 0, $sort = '', $sort_dir = '')
+    public function getComponentsGroupedByCategory(IOpenStackRelease $release , $term = '', $adoption = 0, $maturity = 0, $age = 0, $sort = '', $sort_dir = '')
     {
-        $res1 = array();
-
         $components     = $release->getOpenStackComponentsFiltered($term, $adoption, $maturity, $age);
+        $cat_enum       = OpenStackComponent::$categories;
+        $categories     = array_fill_keys($cat_enum, array());
 
         foreach($components as $c)
         {
-            if (!isset($res1[$c->Use]))
-                $res1[$c->Use] = array();
-
-            $res1[$c->Use][] = $this->serializer->serialize($c);
+            $categories[$c->Use][] = $this->serializer->serialize($c);
         }
 
-        return $res1;
+        return array_filter($categories);
     }
 
     /**

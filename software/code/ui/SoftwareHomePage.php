@@ -312,9 +312,10 @@ class SoftwareHomePage_Controller extends Page_Controller
         );
     }
 
-    public function getComponentsByCategory()
+    public function getComponentsByCategoryJSON()
     {
-        $components = $this->manager->getComponentsByCategory($this->getDefaultRelease());
+        $components = $this->manager->getComponentsGroupedByCategory($this->getDefaultRelease());
+
         return json_encode
         (
             array
@@ -322,6 +323,21 @@ class SoftwareHomePage_Controller extends Page_Controller
                 'grouped_components' => $components,
             )
         );
+    }
+
+    public function getComponentCategories()
+    {
+        $categories = $this->manager->getComponentsGroupedByCategory($this->getDefaultRelease());
+        $cat_list = new ArrayList();
+
+        foreach ($categories as $category => $components) {
+            $arr = array_filter(preg_split('/[,\s]+/', $category));
+            $cat_id = strtolower($arr[0]);
+            $component_count = count($components);
+            $cat_list->push(new ArrayData(array('Name' => $category, 'Id' => $cat_id, 'Count' => $component_count)));
+        }
+
+        return $cat_list;
     }
 
     public function getSampleConfigurations()

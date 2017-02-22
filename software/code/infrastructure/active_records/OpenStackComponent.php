@@ -20,6 +20,19 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
 
     private static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
 
+    // IMPORTANT : this fixes the order for categories on software page
+    public static $categories = array(
+        "Compute",
+        "Storage, Backup & Recovery",
+        "Networking & Content Delivery",
+        "Data & Analytics",
+        "Security, Identity & Compliance",
+        "Management Tools",
+        "Deployment Tools",
+        "Application Services",
+        "None"
+    );
+
     private static $db = array
     (
         'Name'                         => 'Varchar',

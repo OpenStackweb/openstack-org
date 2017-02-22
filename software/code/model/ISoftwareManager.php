@@ -36,7 +36,7 @@ interface ISoftwareManager
      * @param string $sort_dir
      * @return array
      */
-    public function getComponentsByCategory(IOpenStackRelease $release , $term = '', $adoption = 0, $maturity = 0, $age = 0, $sort = '', $sort_dir = '');
+    public function getComponentsGroupedByCategory(IOpenStackRelease $release , $term = '', $adoption = 0, $maturity = 0, $age = 0, $sort = '', $sort_dir = '');
 
     /**
      * @param IOpenStackRelease $release
