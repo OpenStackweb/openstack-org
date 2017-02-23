@@ -86,10 +86,12 @@ class AffiliationController extends Page_Controller
         if ($CurrentMember = Member::currentUser()) {
             $affiliations = array();
 
+            DB::query("LOCK TABLES Affiliation A READ, Org O READ");
             $results = DB::query("SELECT A.ID,A.StartDate,A.EndDate,O.Name AS OrgName,JobTitle
                                   FROM Affiliation A
                                   INNER JOIN Org O on O.ID=A.OrganizationID
-                                  WHERE A.MemberID = {$CurrentMember->ID} ORDER BY A.StartDate ASC, A.EndDate ASC");
+                                  WHERE A.MemberID = {$CurrentMember->ID} ORDER BY A.StartDate ASC, A.EndDate ASC;");
+            DB::query("UNLOCK TABLES");
 
             if (!is_null($results) && $results->numRecords() > 0) {
                 for ($i = 0; $i < $results->numRecords(); $i++) {

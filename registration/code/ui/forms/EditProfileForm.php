@@ -18,6 +18,8 @@ class EditProfileForm extends SafeXSSForm
 
     function __construct($controller, $name)
     {
+        Requirements::css('themes/openstack/bower_assets/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
+
         // Name Set
         $MemberIDField = new TextField('MemberID', "Member ID");
         $MemberIDField->setDisabled(true);
@@ -79,6 +81,7 @@ class EditProfileForm extends SafeXSSForm
                 'Gluten' => 'Gluten allergy',
                 'Peanut' => 'Peanut allergy'
             ));
+        $FoodPreferenceField->setTemplate('BootstrapAwesomeCheckboxsetField');
 
         // Other Field
         $OtherFoodField = new TextField('OtherFood', 'Other Food Considerations');
@@ -89,29 +92,16 @@ class EditProfileForm extends SafeXSSForm
         $TwitterNameField = new TextField('TwitterName', 'Twitter Name <em>(Optional)</em>');
         $LinkedInProfileField = new TextField('LinkedInProfile', 'LinkedIn Profile <em>(Optional)</em>');
         // Associated Projects
-        $ProjectsField = new CheckboxSetField('Projects', 'What programs are you involved with? <em>(Optional)</em>',
-            array(
-                'Nova' => 'Compute',
-                'Swift' => 'Object Storage',
-                'Glance' => 'Image Service',
-                'Keystone' => 'Identity Service',
-                'Horizon' => 'Dashboard',
-                'Quantum' => 'Networking',
-                'Cinder' => 'Block Storage',
-                'Ceilometer' => 'Metering/Monitoring',
-                'Heat' => 'Orchestration',
-                'Trove' => 'Database Service',
-                'Ironic' => 'Bare Metal',
-                'Queue' => 'Queue Service',
-                'DataProcessing' => 'Data Processing',
-                'Oslo' => 'Common Libraries',
-                'Openstack-ci' => 'Infrastructure',
-                'Openstack-manuals' => 'Documentation',
-                'QA' => 'Quality Assurance',
-                'Deployment' => 'Deployment',
-                'DevStack' => 'DevStack',
-                'Release' => 'Release Cycle Management'
-            ));
+        $release = OpenStackRelease::get()->filter('HasStatistics', true)->sort('ReleaseDate','DESC')->first();
+        $components = $release->OpenStackComponents()->sort(array('IsCoreService'=>'DESC', 'Order'=>'ASC'))->map('CodeName','Name')->toArray();
+        $component_list = array();
+        array_walk($components, function (&$value,$key) use (&$component_list) {
+            $new_key = $value.' ('.$key.')';
+            $component_list[$new_key] = $new_key;
+        });
+
+        $ProjectsField = new CheckboxSetField('Projects', 'What programs are you involved with? <em>(Optional)</em>',$component_list);
+        $ProjectsField->setTemplate('BootstrapAwesomeCheckboxsetField');
 
         // Other Projects Field
         $OtherProjectField = new TextField('OtherProject', 'Other Project (if one above does not match)');
@@ -120,8 +110,11 @@ class EditProfileForm extends SafeXSSForm
         //Newsletter Field
         $subscribedToNewsletterField = new CheckboxField('SubscribedToNewsletter',
             'I don\'t mind occasionally receiving updates and communications from the OpenStack Foundation.');
+        $subscribedToNewsletterField->addExtraClass('checkbox');
+
 
         $DisplayOnSiteField = new CheckboxField('DisplayOnSite', 'Include this bio on openstack.org.');
+        $DisplayOnSiteField->addExtraClass('checkbox');
 
         // New Gender Field
         $GenderField = new OptionSetField('Gender', 'I identify my gender as:', array(
@@ -130,11 +123,20 @@ class EditProfileForm extends SafeXSSForm
             'Specify' => 'Let me specify',
             'Prefer not to say' => 'Prefer not to say'
         ));
+        $GenderField->setTemplate('BootstrapAwesomeOptionsetField');
+
         $GenderSpecifyField = new TextField('GenderSpecify', 'Specify your gender');
         $GenderSpecifyField->addExtraClass('hide');
 
         $fields = new FieldList(
-
+            new LiteralField('header', '<h3 class="section-divider">Email Addresses</h3>'),
+            new LiteralField('instructions',
+                '<p class="info"><strong>If you\'re an active developer on the OpenStack project, please list any email addresses you use to commit code.</strong> (This will really help us avoid duplicates!) If you contributed code ONLY using gerrit, all email addresses you used will be listed on the <a href="https://review.openstack.org/#/settings/web-identities" target="_blank">web identities page</a>. If you have contributed also <em>before</em> gerrit was put in place, please make an effort to remember other email addresses you may have used. Interested in how to <a href="http://wiki.openstack.org/HowToContribute" target="_blank">become a contributor</a>?</p>'),
+            $PrimaryEmailField,
+            new LiteralField('instructions',
+                '<p class="info username_warning">This email address is also the account name you use to login.</p>'),
+            $SecondEmailField,
+            $ThirdEmailField,
             new LiteralField('header', '<h3 class="section-divider">Public Information</h3>'),
             $MemberIDField,
             new HeaderField("First & Last Name"),
@@ -162,16 +164,6 @@ class EditProfileForm extends SafeXSSForm
 
             new LiteralField('header', '<h3 class="section-divider">Private Information</h3>'),
 
-            new HeaderField("Email Addresses"),
-            new LiteralField('instructions',
-                '<p class="info"><strong>If you\'re an active developer on the OpenStack project, please list any email addresses you use to commit code.</strong> (This will really help us avoid duplicates!) If you contributed code ONLY using gerrit, all email addresses you used will be listed on the <a href="https://review.openstack.org/#/settings/web-identities" target="_blank">web identities page</a>. If you have contributed also <em>before</em> gerrit was put in place, please make an effort to remember other email addresses you may have used. Interested in how to <a href="http://wiki.openstack.org/HowToContribute" target="_blank">become a contributor</a>?</p>'),
-            $PrimaryEmailField,
-            new LiteralField('instructions',
-                '<p class="info">This email address is also the account name you use to login.</p>'),
-            $SecondEmailField,
-            $ThirdEmailField,
-
-            new LiteralField('break', '<hr/>'),
             $GenderField,
             $GenderSpecifyField,
             new LiteralField('instructions',
