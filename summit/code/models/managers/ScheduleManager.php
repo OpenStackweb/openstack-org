@@ -266,7 +266,7 @@ final class ScheduleManager implements IScheduleManager
 
             $member_id = intval($data['member_id']);
             $summit_id = intval($data['summit_id']);
-            $event_id = intval($data['event_id']);
+            $event_id  = intval($data['event_id']);
             $seat_type = $data['seat_type'];
 
             if (empty($seat_type))
@@ -290,6 +290,8 @@ final class ScheduleManager implements IScheduleManager
             // add to schedule the RSVP event
             if (!$summit_attendee->isScheduled($event_id)) {
                 $summit_attendee->addToSchedule($event);
+                PublisherSubscriberManager::getInstance()->publish(ISummitEntityEvent::AddedToSchedule,
+                    array($member_id, $event));
             }
 
             $old_rsvp = $this->rsvp_repository->getByEventAndAttendee($event_id, $summit_attendee->getIdentifier());
@@ -353,7 +355,6 @@ final class ScheduleManager implements IScheduleManager
 
             if (!is_null($sender_service)) {
                 $rsvp->BeenEmailed = true;
-
             }
 
             $new_rsvp_id = $rsvp->write();
