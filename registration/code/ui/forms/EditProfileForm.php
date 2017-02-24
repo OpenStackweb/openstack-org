@@ -92,13 +92,37 @@ class EditProfileForm extends SafeXSSForm
         $TwitterNameField = new TextField('TwitterName', 'Twitter Name <em>(Optional)</em>');
         $LinkedInProfileField = new TextField('LinkedInProfile', 'LinkedIn Profile <em>(Optional)</em>');
         // Associated Projects
-        $release = OpenStackRelease::get()->filter('HasStatistics', true)->sort('ReleaseDate','DESC')->first();
+
+        /*$release = OpenStackRelease::get()->filter('HasStatistics', true)->sort('ReleaseDate','DESC')->first();
         $components = $release->OpenStackComponents()->sort(array('IsCoreService'=>'DESC', 'Order'=>'ASC'))->map('CodeName','Name')->toArray();
         $component_list = array();
         array_walk($components, function (&$value,$key) use (&$component_list) {
             $new_key = $value.' ('.$key.')';
             $component_list[$new_key] = $new_key;
-        });
+        });*/
+
+        $component_list = array(
+            'Nova' => 'Compute (Nova)',
+            'Swift' => 'Object Storage (Swift)',
+            'Glance' => 'Image Service (Glance)',
+            'Keystone' => 'Identity Service (Keystone)',
+            'Horizon' => 'Dashboard (Horizon)',
+            'Quantum' => 'Networking (Quantum)',
+            'Cinder' => 'Block Storage (Cinder)',
+            'Ceilometer' => 'Metering/Monitoring (Ceilometer)',
+            'Heat' => 'Orchestration (Heat)',
+            'Trove' => 'Database Service (Trove)',
+            'Ironic' => 'Bare Metal (Ironic)',
+            'Queue' => 'Queue Service (Queue)',
+            'DataProcessing' => 'Data Processing (DataProcessing)',
+            'Oslo' => 'Common Libraries (Oslo)',
+            'Openstack-ci' => 'Infrastructure (Openstack-ci)',
+            'Openstack-manuals' => 'Documentation (Openstack-manuals)',
+            'QA' => 'Quality Assurance (QA)',
+            'Deployment' => 'Deployment (Deployment)',
+            'DevStack' => 'DevStack (DevStack)',
+            'Release' => 'Release Cycle Management (Release)'
+        );
 
         $ProjectsField = new CheckboxSetField('Projects', 'What programs are you involved with? <em>(Optional)</em>',$component_list);
         $ProjectsField->setTemplate('BootstrapAwesomeCheckboxsetField');
