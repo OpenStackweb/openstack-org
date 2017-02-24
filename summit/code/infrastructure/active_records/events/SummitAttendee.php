@@ -167,8 +167,11 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
         AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'Schedule')->add
         (
             $summit_event,
-            array('IsCheckedIn'=> false)
+            ['IsCheckedIn'=> false]
         );
+
+        PublisherSubscriberManager::getInstance()->publish(ISummitEntityEvent::AddedToSchedule,
+            [$this->MemberID, $summit_event]);
     }
 
     /**
@@ -178,6 +181,9 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
     public function removeFromSchedule(ISummitEvent $summit_event)
     {
         AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'Schedule')->remove($summit_event);
+
+        PublisherSubscriberManager::getInstance()->publish(ISummitEntityEvent::RemovedToSchedule,
+            [$this->MemberID, $summit_event]);
     }
 
     /**

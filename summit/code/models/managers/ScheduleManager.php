@@ -106,13 +106,16 @@ final class ScheduleManager implements IScheduleManager
             if (!$attendee) {
                 throw new NotFoundEntityException('Attendee', sprintf('id %s', $event_id));
             }
+
             if ($attendee->isScheduled($event_id)) {
                 throw new EntityValidationException('Event already exist on attendee schedule');
             }
 
+            if($event->hasRSVPTemplate()){
+                throw new EntityValidationException('Event has RSVP set on it, will be automatically added once you sign in for RSVP.');
+            }
+
             $attendee->addToSchedule($event);
-            PublisherSubscriberManager::getInstance()->publish(ISummitEntityEvent::AddedToSchedule,
-                array($member_id, $event));
 
             return $attendee;
         });
@@ -144,10 +147,8 @@ final class ScheduleManager implements IScheduleManager
             if (!$attendee->isScheduled($event_id)) {
                 throw new NotFoundEntityException('Event does not belong to attendee', sprintf('id %s', $event_id));
             }
-            $attendee->removeFromSchedule($event);
 
-            PublisherSubscriberManager::getInstance()->publish(ISummitEntityEvent::RemovedToSchedule,
-                array($member_id, $event));
+            $attendee->removeFromSchedule($event);
 
             return $attendee;
         });
@@ -290,8 +291,6 @@ final class ScheduleManager implements IScheduleManager
             // add to schedule the RSVP event
             if (!$summit_attendee->isScheduled($event_id)) {
                 $summit_attendee->addToSchedule($event);
-                PublisherSubscriberManager::getInstance()->publish(ISummitEntityEvent::AddedToSchedule,
-                    array($member_id, $event));
             }
 
             $old_rsvp = $this->rsvp_repository->getByEventAndAttendee($event_id, $summit_attendee->getIdentifier());
