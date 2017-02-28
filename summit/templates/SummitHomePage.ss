@@ -46,6 +46,8 @@
                 </div>
             </div>
             <% end_with %>
+
+            <% with $CurrentSummit %>
             <div class="col-sm-3 small-single-summit">
                 <a href="/summit/boston-2017/" class="single-summit current-summit">
                     <h3>$DateLabel</h3>
@@ -57,6 +59,7 @@
                     <div class="date-circle"></div>
                 </div>
             </div>
+            <% end_with %>
             <div class="col-sm-3 small-single-summit">
                 <a href="/summit/sydney-2017/" class="single-summit future-summit">
                     <h2>Sydney</h2>
