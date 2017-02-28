@@ -194,7 +194,7 @@ a.past-summit::after {
   z-index: -1; }
 
 a.current-summit {
-  padding-top: 10px; }
+  padding-top: 53px;}
 
 a.current-summit::after {
   background: url("/themes/openstack/static/images/home/boston-wide.jpg") no-repeat center center;
@@ -234,7 +234,7 @@ a.future-summit2::after {
 
 a.past-summit:hover:after,
 a.future-summit:hover:after {
-  opacity: 0.5; }
+  opacity: 0.6; }
 
 @media (max-width: 767px) {
   a.single-summit::after {
