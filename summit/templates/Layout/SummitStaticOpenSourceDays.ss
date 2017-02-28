@@ -33,7 +33,7 @@
         </div>
         <div class="col-lg-5 col-lg-push-2 col-md-5 col-md-push-2 col-sm-6">
             <div class="company-logo"><img src="/summit/images/boston/companies-kubernetes.png" alt="Kubernetes"></div>
-            <p class="company-desc">Sustaining & integrating open source technologies - to orchestrate containers as part of a microservices architecture.</p>
+            <p class="company-desc">Kubernetes is an open-source system for automating deployment, scaling, and management of containerized applications. Kubernetes builds upon 15 years of experience of running production workloads at Google and is one of the highest velocity projects in the history of open source. Please join us for a day to learn about how Kubernetes is changing computing.</p>
             <p class="learn-more-button"><a href="https://kubernetes.io/" class="btn btn-primary" role="button">Learn More</a></p>
         </div>
     </div>

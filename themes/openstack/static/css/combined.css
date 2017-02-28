@@ -221,6 +221,17 @@ a.future-summit::after {
   position: absolute;
   z-index: -1; }
 
+a.future-summit2::after {
+  background: url("/themes/openstack/static/images/home/vancouver-square.jpg") no-repeat center center;
+  content: "";
+  opacity: 0.3;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1; }
+
 a.past-summit:hover:after,
 a.future-summit:hover:after {
   opacity: 0.5; }

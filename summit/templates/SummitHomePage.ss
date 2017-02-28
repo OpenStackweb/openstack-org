@@ -33,22 +33,9 @@
 <div class="summit-landing-bottom">
     <div class="container">
         <div class="row summit-row">
-            <% with $CurrentSummit %>
-            <div class="col-sm-6 col-sm-push-3 large-single-summit">
-                <a href="/summit/boston-2017/" class="single-summit current-summit">
-                    <h3>$DateLabel</h3>
-                    <h2>$Title</h2>
-                    <div class="btn register-btn-lrg skinny">JOIN US</div>
-                </a>
-                <div class="single-summit-date current">
-                    $DateLabel
-                    <div class="date-circle"></div>
-                </div>
-            </div>
-            <% end_with %>
 
             <% with $PreviousSummit %>
-            <div class="col-sm-3 col-sm-pull-6 small-single-summit">
+            <div class="col-sm-3 small-single-summit">
                 <a href="/videos/summits/barcelona-2016" class="single-summit past-summit">
                     <h2>Barcelona</h2>
                     <h4>Watch The Sessions!</h4>
@@ -59,8 +46,17 @@
                 </div>
             </div>
             <% end_with %>
-            
-            <% with $NextSummit %>
+            <div class="col-sm-3 small-single-summit">
+                <a href="/summit/boston-2017/" class="single-summit current-summit">
+                    <h3>$DateLabel</h3>
+                    <h2>$Title</h2>
+                    <div class="btn register-btn-lrg skinny">JOIN US</div>
+                </a>
+                <div class="single-summit-date current">
+                    $DateLabel
+                    <div class="date-circle"></div>
+                </div>
+            </div>
             <div class="col-sm-3 small-single-summit">
                 <a href="/summit/sydney-2017/" class="single-summit future-summit">
                     <h2>Sydney</h2>
@@ -71,7 +67,16 @@
                     <div class="date-circle"></div>
                 </div>
             </div>
-            <% end_with %>
+            <div class="col-sm-3 small-single-summit">
+                <a href="/summit/vancouver-2018/" class="single-summit future-summit2">
+                    <h2>Vancouver</h2>
+                    <h4>Get Ready</h4>
+                </a>
+                <div class="single-summit-date future">
+                    Spring 2018
+                    <div class="date-circle"></div>
+                </div>
+            </div>
         </div>
     </div>
     <hr>
