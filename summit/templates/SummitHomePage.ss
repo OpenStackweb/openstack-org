@@ -73,7 +73,7 @@
                     <h4>Get Ready</h4>
                 </a>
                 <div class="single-summit-date future">
-                    Spring 2018
+                    May 2018
                     <div class="date-circle"></div>
                 </div>
             </div>
