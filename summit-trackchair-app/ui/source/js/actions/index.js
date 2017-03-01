@@ -218,7 +218,21 @@ export const postEmail = (presentationID, emailData) => {
 export const postReorganise = (listID, collection, newOrder) => {
 	return (dispatch, getState) => {
 		const key = `REORDER_${listID}_${collection}`;
+		var msg = '';
+		for(var o of newOrder){
+			msg += ' '+ o.id;
+		}
+		console.log('old order '+msg);
+
+        var order = newOrder.map(s => s.id);
 		dispatch(reorganiseSelections({listID, collection, newOrder}));
+
+		msg = '';
+        for(var o of newOrder){
+            msg += ' '+ o.id;
+        }
+        console.log('new order '+msg);
+
 		cancel(key);
 		const collectionMap = {
 			selections: 'selected',
@@ -227,7 +241,7 @@ export const postReorganise = (listID, collection, newOrder) => {
 		};
 		const data = {
 			list_id: listID,
-			order: newOrder.map(s => s.id),
+			order: order,
 			collection: collectionMap[collection]
 		};
 		const req = http.put('/trackchairs/api/v1/reorder')
