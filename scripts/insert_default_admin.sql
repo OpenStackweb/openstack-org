@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS 'Member';
 CREATE TABLE `Member` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `ClassName` enum('Member') CHARACTER SET utf8 DEFAULT 'Member',
@@ -87,6 +88,7 @@ CREATE TABLE `Member` (
   FULLTEXT KEY `SearchFields` (`FirstName`,`Surname`)
 ) ENGINE=InnoDB AUTO_INCREMENT=80922 DEFAULT CHARSET=latin1;
 
+DROP TABLE IF EXISTS 'Group_Members';
 CREATE TABLE `Group_Members` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `GroupID` int(11) NOT NULL DEFAULT '0',
