@@ -51,6 +51,8 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         'MemberTokenAuthenticator'
     ];
 
+    private $tx_manager;
+
     /**
      *
      */
@@ -58,6 +60,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
     {
         parent::init();
         $this->checkAuthenticationToken(false);
+        $this->tx_manager = SapphireTransactionManager::getInstance();
     }
 
     /**
@@ -317,7 +320,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
             					->exclude('Collection', SummitSelectedPresentation::COLLECTION_PASS)
             					->sort(['Collection DESC', 'Order ASC']);
             
-            $count = $selections->count();
+            $count = intval($selections->count());
             $listID = $list->ID;
 
             $data = [
@@ -386,70 +389,82 @@ class TrackChairAPI extends AbstractRestfulJsonApi
             $listID = $vars['list_id'];
             $collection = $vars['collection'];
             $list = SummitSelectedPresentationList::get()->byId($listID);
+            $max_limit = $list->maxPresentations();
 
             if(!$list->memberCanEdit()) {
                 return $this->httpError(403, 'You cannot edit this list');
             }
 
-            $isTeam = ($list->isGroup());
-
-            // Remove any presentations that are not in the list
-            SummitSelectedPresentation::get()
-                ->filter([
-                    'SummitSelectedPresentationListID' => $listID,
-                    'Collection' => $collection
-                ])
-                ->exclude([
-                    'PresentationID' => array_values($idList)
-                ])
-                ->removeAll();
+            if (count($idList) > $max_limit) {
+                $msg = "Can't add this presentation, limit is ".$max_limit;
+                throw new EntityValidationException($msg);
+            }
 
             if (is_array($idList)) {
-                foreach ($idList as $order => $id) {
-                    $attributes = [
-                        'PresentationID' => $id,
-                        'SummitSelectedPresentationListID' => $listID,
-                        'Collection' => $collection,
-                        'MemberID' => Member::currentUser()->ID
-                    ];
+                $this->tx_manager->transaction(function() use ($idList, $collection, $list){
 
-                    $selection = SummitSelectedPresentation::get()
-                        ->filter($attributes)
-                        ->first();
+                    $isTeam = ($list->isGroup());
 
-                    if(!$selection) {
-                        $presentation = Presentation::get()->byID($id);
-
-                        // lightning wannabes can only be added to one team list, not both
-                        if($isTeam && $presentation && $presentation->isLightningWannabe()) {
-                            $other_team_list = SummitSelectedPresentationList::get()
-                                                ->filter(['CategoryID' => $list->CategoryID, 'ListType' => $list->ListType])
-                                                ->exclude('ListClass', $list->ListClass)
-                                                ->first();
-
-                            if ($other_team_list) {
-
-                                $other_selection = $other_team_list->SummitSelectedPresentations()->filter(['PresentationID' => $id])->first();
-
-                                if ($other_selection && $other_selection->Exists()) { // conflict, throw exception
-                                    $other_team_list_name = SummitSelectedPresentationList::getListClassName($other_team_list->ListClass);
-                                    $msg = "This presentation is in {$other_team_list_name} Team List. Please remove it to add it to this Team List.";
-                                    throw new EntityValidationException($msg);
-                                }
-                            }
-
-                        }
-
-                        $selection = SummitSelectedPresentation::create($attributes);
-
-                        if($isTeam && $presentation) {
-                                $presentation->addNotification('{member} added this presentation to the team list');
-                        }
+                    // Remove any presentations that are not in the list
+                    // for team selection we remove all, for individual we just remove the one not there, just to save time
+                    $current_presentations = SummitSelectedPresentation::get()
+                                                    ->filter([
+                                                        'SummitSelectedPresentationListID' => $list->ID,
+                                                        'Collection' => $collection
+                                                    ]);
+                    if (!$isTeam) {
+                        $current_presentations->exclude(['PresentationID' => array_values($idList)]);
                     }
 
-                    $selection->Order = $order+1;
-                    $selection->write();
-                }
+                    $current_presentations->removeAll();
+
+                    foreach ($idList as $order => $id) {
+                        $attributes = [
+                            'PresentationID' => $id,
+                            'SummitSelectedPresentationListID' => $list->ID,
+                            'Collection' => $collection,
+                            'MemberID' => (!$isTeam) ? Member::currentUser()->ID : 0
+                        ];
+
+                        $selection = SummitSelectedPresentation::get()
+                            ->filter($attributes)
+                            ->first();
+
+                        if(!$selection) {
+                            $presentation = Presentation::get()->byID($id);
+
+                            // lightning wannabes can only be added to one team list, not both
+                            if($isTeam && $presentation && $presentation->isLightningWannabe()) {
+                                $other_team_list = SummitSelectedPresentationList::get()
+                                    ->filter(['CategoryID' => $list->CategoryID, 'ListType' => $list->ListType])
+                                    ->exclude('ListClass', $list->ListClass)
+                                    ->first();
+
+                                if ($other_team_list) {
+
+                                    $other_selection = $other_team_list->SummitSelectedPresentations()->filter(['PresentationID' => $id])->first();
+
+                                    if ($other_selection && $other_selection->Exists()) { // conflict, throw exception
+                                        $other_team_list_name = SummitSelectedPresentationList::getListClassName($other_team_list->ListClass);
+                                        $msg = "This presentation is in {$other_team_list_name} Team List. Please remove it to add it to this Team List.";
+                                        throw new EntityValidationException($msg);
+                                    }
+                                }
+
+                            }
+
+                            $selection = SummitSelectedPresentation::create($attributes);
+
+                            if($isTeam && $presentation) {
+                                $presentation->addNotification('{member} added this presentation to the team list');
+                            }
+                        }
+
+                        $selection->Order = $order+1;
+                        $selection->write();
+                    }
+                });
+
             }
 
             return $this->ok();

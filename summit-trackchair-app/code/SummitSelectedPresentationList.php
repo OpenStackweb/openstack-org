@@ -217,9 +217,9 @@ ORDER BY SummitSelectedPresentation.Order ASC
     public function maxAlternates()
     {
         if ($this->isLightning())
-            return $this->Category()->LightningAlternateCount;
+            return intval($this->Category()->LightningAlternateCount);
         else
-            return $this->Category()->AlternateCount;
+            return intval($this->Category()->AlternateCount);
     }
 
     /**
