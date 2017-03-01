@@ -332,9 +332,11 @@ class SoftwareHomePage_Controller extends Page_Controller
 
         foreach ($categories as $category => $components) {
             $arr = array_filter(preg_split('/[,\s]+/', $category));
-            $cat_id = strtolower($arr[0]);
-            $component_count = count($components);
-            $cat_list->push(new ArrayData(array('Name' => $category, 'Id' => $cat_id, 'Count' => $component_count)));
+            if ($arr) {
+                $cat_id = strtolower($arr[0]);
+                $component_count = count($components);
+                $cat_list->push(new ArrayData(array('Name' => $category, 'Id' => $cat_id, 'Count' => $component_count)));
+            }
         }
 
         return $cat_list;

@@ -92,10 +92,10 @@ class OpenStackApiManager
         $res = false;
         $component_repository = $this->component_repository;
         $this->tx_manager->transaction(function () use (&$res, $component, $component_repository) {
-            $old_one = $component_repository->getByName($component->getName());
+            /*$old_one = $component_repository->getByName($component->getName());
             if ($old_one) {
                 throw new EntityAlreadyExistsException('OpenStackComponent', sprintf('name %s', $component->getName()));
-            }
+            }*/
             $res = $component_repository->add($component);
         });
 
