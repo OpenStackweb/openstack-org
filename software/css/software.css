@@ -1370,14 +1370,19 @@ a.security-promo-btn:hover, a.security-promo-btn:focus {
 
 .project-category-tile {
   text-align: center;
-  border: 1px solid #CCEDF4;
-  margin-bottom: 20px; }
-  .project-category-tile h4 {
-    margin: 20px 0px; }
+  background: white;
+  border: 1px solid #D3DEE9;
+  box-shadow: 1px 1px 3px 0px rgba(51, 51, 51, 0.12);
+  border-radius: 4px;
+  margin-bottom: 20px;
+  display: block;
+  position: relative; }
 
 .number-of-projects {
+  border-top: 1px solid #D3DEE9;
   background-color: #EDFDFF;
   margin: 0px;
+  margin-top: 10px;
   padding: 10px; }
 
 .project-category-list-background {
@@ -1404,14 +1409,31 @@ h3.header-center {
   padding: 0px; }
 
 .workloads-section li {
+  border: 1px solid #D3DEE9;
+  box-shadow: 1px 1px 3px 0px rgba(51, 51, 51, 0.12);
+  border-radius: 4px;  
   font-weight: bold;
   list-style: none;
   margin: 10px;
-  border: 1px solid #CCEDF4;
   padding: 0.5em;
   display: block;
   float: left;
-  width: 200px;
-  height: 4em;
-  text-align: center;
-  background-color: #EDFDFF; }
+  width: 23%;
+  text-align: left;
+ }
+
+ .workloads-section li a {
+   display: block;
+   margin-top: 10px;
+ }
+
+  .category-icon {
+    text-align: center;
+  }
+
+  .workloads-icon {
+    width: 70px;
+    float: left;
+    background-color: #EDFDFF;
+    margin-right: 10px;
+  }

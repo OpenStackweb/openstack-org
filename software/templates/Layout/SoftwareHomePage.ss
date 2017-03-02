@@ -20,35 +20,6 @@
 
         <hr/>
 
-        <div class="row">
-            <div class="screenshotBoxes col-sm-12">
-                <h3 class="header-center">OpenStack Dashboard Screenshots</h3>
-                <div class="col-sm-4">
-                    <a class="screenshots" rel="shadowbox" href="/software/ocata/screenshots/create-image.png">
-                        <img style="border: 1px solid #ddd;" title="" src="/software/ocata/screenshots/create-image-thumb.jpg" alt="Ocata - Create Image">
-                    </a>
-                    <p>&nbsp;</p>
-                    <p>OpenStack provides versatile infrastructure, making it easy to run any workload of your choosing.</p>
-                </div>
-                <div class="col-sm-4">
-                    <a class="screenshots" rel="shadowbox" href="/software/ocata/screenshots/images.png">
-                        <img style="border: 1px solid #ddd;" title="" src="/software/ocata/screenshots/images-thumb.jpg" alt="Ocata - Images">
-                    </a>
-                    <p>&nbsp;</p>
-                    <p>The OpenStack dashboard gives you a single management plane for all your infrastructure resources.</p>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-4">
-                    <a class="screenshots" rel="shadowbox" href="/software/ocata/screenshots/launch-instance.png">
-                        <img style="border: 1px solid #ddd;" title="" src="/software/ocata/screenshots/launch-instance-thumb.jpg" alt="Ocata - Launch Instance">
-                    </a>
-                    <p>&nbsp;</p>
-                    <p>OpenStack is one platform for on-demand compute, networking, storage, and the applications to run on them, with security built right in.</p>
-                </div>
-            </div>
-        </div>
-
-        <hr/>
-
         <div class="project-category-section">
             <h3 class="header-center">What can OpenStack Automate?</h3>
             <div class="row">
@@ -56,9 +27,10 @@
                 <div class="col-md-4">
                     <a href="$Top.Link(project-navigator)#{$Id}">
                         <div class="project-category-tile">
+                            <img class="category-icon" width="114px" src="/software/images/icons/{$Id}.svg" onerror="this.onerror=null; this.src=/software/images/icons/{$Id}.png" alt="OpenStack Cloud Software">
                             <h4>{$Name}</h4>
                             <p class="number-of-projects">
-                                {$Count} projects
+                                {$Count} OpenStack Projects
                             </p>
                         </div>
                     </a>
@@ -81,39 +53,20 @@
             <h3 class="header-center">Sample OpenStack Configurations</h3>
 
                 <ul>
-                    <li> <a href="#">Web Applications</a></li>
-                    <li> <a href="#">eCommerce</a></li>
-                    <li> <a href="#">Video Processing and Content Delivery</a></li>
-                    <li> <a href="#">High Throughput Computing</a></li>
-                    <li> <a href="#">Container Optimized</a></li>
-                    <li> <a href="#">Web Hosting</a></li>
-                    <li> <a href="#">Public Cloud</a></li>
-                    <li> <a href="#">Compute Starter Kit</a></li>
-                    <li> <a href="#">DBaaS</a></li>
+                    <li> <a href="#"> <img class="workloads-icon" src="/software/images/icons/sample-config.svg" onerror="this.onerror=null; this.src=/software/images/icons/sample-config.png" alt="OpenStack Cloud Software"> Web Applications</a></li>
+                    <li> <a href="#"> <img class="workloads-icon" src="/software/images/icons/sample-config.svg" onerror="this.onerror=null; this.src=/software/images/icons/sample-config.png" alt="OpenStack Cloud Software"> eCommerce</a></li>
+                    <li> <a href="#"> <img class="workloads-icon" src="/software/images/icons/sample-config.svg" onerror="this.onerror=null; this.src=/software/images/icons/sample-config.png" alt="OpenStack Cloud Software"> Video Processing and Content Delivery</a></li>
+                    <li> <a href="#"> <img class="workloads-icon" src="/software/images/icons/sample-config.svg" onerror="this.onerror=null; this.src=/software/images/icons/sample-config.png" alt="OpenStack Cloud Software"> High Throughput Computing</a></li>
+                    <li> <a href="#"> <img class="workloads-icon" src="/software/images/icons/sample-config.svg" onerror="this.onerror=null; this.src=/software/images/icons/sample-config.png" alt="OpenStack Cloud Software"> Container Optimized</a></li>
+                    <li> <a href="#"> <img class="workloads-icon" src="/software/images/icons/sample-config.svg" onerror="this.onerror=null; this.src=/software/images/icons/sample-config.png" alt="OpenStack Cloud Software"> Web Hosting</a></li>
+                    <li> <a href="#"> <img class="workloads-icon" src="/software/images/icons/sample-config.svg" onerror="this.onerror=null; this.src=/software/images/icons/sample-config.png" alt="OpenStack Cloud Software"> Public Cloud</a></li>
+                    <li> <a href="#"> <img class="workloads-icon" src="/software/images/icons/sample-config.svg" onerror="this.onerror=null; this.src=/software/images/icons/sample-config.png" alt="OpenStack Cloud Software"> Compute Starter Kit</a></li>
+                    <li> <a href="#"> <img class="workloads-icon" src="/software/images/icons/sample-config.svg" onerror="this.onerror=null; this.src=/software/images/icons/sample-config.png" alt="OpenStack Cloud Software"> DBaaS</a></li>
                 </ul>
 
             </div>
         </div>
 
-
-        <div class="lf-security-promo">
-            <div class="row">
-                <div class="col-sm-3 center">
-                    <img class="security-badge" src="/themes/openstack/images/security/badge.png" alt="">
-                </div>
-                <div class="col-sm-9">
-                    <h2>OpenStack security experts answer your questions</h2>
-                    <p>
-                        The Security Project team lives and breathes cloud security and answers the most frequently asked questions from enterprises
-                        and technologists. The Linux Foundation's Core Infrastructure Initiative has validated OpenStack passes 100%
-                        of the best practices for open source security, quality and stability and has issued its Best Practices badge.
-                    </p>
-                    <p>
-                        <a href="/software/security/" class="security-promo-btn">Learn More <i class="fa fa-chevron-circle-right"></i></a>
-                    </p>
-                </div>
-            </div>
-        </div>
 
         <!-- End Page Content -->
     </div>
