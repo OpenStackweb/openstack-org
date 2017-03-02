@@ -691,6 +691,10 @@ class TrackChairAPI extends AbstractRestfulJsonApi
             return new SS_HTTPResponse("The presentation has already been selected by chairs.", 500);
         }
 
+        if ($request->Presentation()->isGroupSelected() || $request->Presentation()->isGroupSelected(SummitSelectedPresentationList::Lightning)) {
+            return new SS_HTTPResponse("The presentation is on the Team List.", 500);
+        }
+
         if ($request->Presentation()->CategoryID == $request->NewCategoryID) {
             return new SS_HTTPResponse("The presentation is already in this category.", 200);
         }
@@ -705,6 +709,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         if($approved) {
 	        $request->OldCategoryID = $request->Presentation()->CategoryID;
 	        $request->Presentation()->CategoryID = $request->NewCategoryID;
+            $request->Presentation()->TrackChairViews()->removeAll(); // empty viewed
 	        $request->Presentation()->write();    
 	        $request->Presentation()->addNotification(
 	        	'{member} approved ' . 
