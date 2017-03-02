@@ -18,7 +18,7 @@ body{
 
 .wrapper{
     background: url(../images/cat.png) no-repeat center;
-    min-height: 80vh;
+    min-height: 90vh;
     width: 50vh;
     background-size: 100%;
     text-align: center;
@@ -26,7 +26,7 @@ body{
 }
 
 .content{
-	padding-top: 48vh;
+	padding-top: 52vh;
 }
 
 h6{
@@ -41,7 +41,7 @@ h6{
 }
 
 .wrapper ul{
-	padding: 9em 0 0;
+	padding: 10em 0 0;
 }
 
 .wrapper ul li{
@@ -97,9 +97,27 @@ h6{
 
 /*general*/
 
-@media only screen and (min-device-width : 0px)  and (max-device-width : 720px)  and (orientation : portrait) { 
+
+
+
+
+@media only screen and (min-height : 720px)  and (max-height : 960px){ 
 	.wrapper ul{
-		padding-top: 7em;
+		padding-top: 8.5em;
+	}
+
+}
+
+@media only screen and (min-height : 0px)  and (max-height : 720px){ 
+	.wrapper ul{
+		padding-top: 8em;
+	}
+
+}
+
+@media only screen and (min-height : 960px)  and (max-height : 1280px){ 
+	.wrapper ul{
+		padding-top: 10.5em;
 	}
 
 }
@@ -131,6 +149,16 @@ h6{
 		padding-top: 6em
 	}
 
+}
+
+@media only screen and (min-height : 0px)  and (max-height : 700px){ 
+	.content h6{
+		font-size: 1em;
+		margin: 0.2em 0;
+	}
+	.wrapper ul li a{
+		font-size: 0.8em;
+	}
 }
 
 
