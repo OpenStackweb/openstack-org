@@ -67,6 +67,10 @@
             </div>
         </div>
 
+        <hr/>
+
+        <p>Find more products, support, and services in the <a href="/marketplace/">OpenStack Marketplace</a></p>
+
 
         <!-- End Page Content -->
     </div>

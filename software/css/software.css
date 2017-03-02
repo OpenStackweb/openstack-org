@@ -673,7 +673,9 @@ p.service-section-title {
 
 .core-services-single-full .core-top {
   width: 100%;
-  position: relative; }
+  position: relative; 
+  border-bottom: 1px solid #E5EDF6;
+}
 
 .core-services-single-full .core-top .core-title {
   text-align: center;
