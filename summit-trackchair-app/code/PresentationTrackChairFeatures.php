@@ -53,12 +53,14 @@ class PresentationTrackChairFeatures extends DataExtension
     {
         // Check permissions of user on talk
         if (!$this->owner->CanAssign()) return;
+
         $maybe = $collection === SummitSelectedPresentation::COLLECTION_MAYBE;
         $pass = $collection === SummitSelectedPresentation::COLLECTION_PASS;
         $selected = $collection === SummitSelectedPresentation::COLLECTION_SELECTED;
         if(!$maybe && !$pass && !$selected) {
             throw new InvalidArgumentException("assignToIndividualList() must take a collection argument of COLLECTION_MAYBE, COLLECTION_PASS, or COLLECTION_SELECTED per the SummitSelectedPresentation class definition");
         }
+
         // tricky part here, if presentation is lightning talk or lightning wannabe we have to add it to Lightning List
         $lists_to_add_to = array();
         if ($this->owner->Type()->Type == IPresentationType::LightingTalks) {
@@ -69,18 +71,24 @@ class PresentationTrackChairFeatures extends DataExtension
                 $lists_to_add_to[] = SummitSelectedPresentationList::Lightning;
             }
         }
+
+        // error message
+        $msg = '';
+
         foreach ($lists_to_add_to as $list_class) {
             $mySelections = SummitSelectedPresentationList::getMemberList($this->owner->CategoryID, $list_class);
             // See if the presentation has already been assigned
             $selectedPresentation = $mySelections->SummitSelectedPresentations()
                 ->filter('PresentationID', $this->owner->ID)
                 ->first();
-            $category = $this->owner->Category();
+
             $highestSelection = $mySelections->maxPresentations();
+
             $highestOrderInList = $mySelections
                 ->SummitSelectedPresentations()
                 ->filter('Collection', $collection)
                 ->max('Order');
+
             if($selected && $highestOrderInList >= $highestSelection) {
                 $list_class_name = SummitSelectedPresentationList::getListClassName($list_class);
                 $msg = "$list_class_name Selection list is full. Currently at $highestOrderInList. Limit is $highestSelection.";
@@ -94,7 +102,6 @@ class PresentationTrackChairFeatures extends DataExtension
                         ->filter('Collection', $collection)
                         ->max('Order');
                     // lightning wannabes first we add session and then lightning, so it depends
-                    $should_add_declaimer = false;
                     if ($list_class == SummitSelectedPresentationList::Lightning) {
                         $should_add_declaimer = $highestOtherOrderInList == $highestOtherSelection;
                     } else {
@@ -105,14 +112,18 @@ class PresentationTrackChairFeatures extends DataExtension
                         $msg .= "However it will be added to {$other_list_class_name} Selection.";
                     }
                 }
-                throw new EntityValidationException($msg);
+
+                // will not add this presentation, list is full
+                continue;
             }
+
             if (!$selectedPresentation) {
                 $selectedPresentation = SummitSelectedPresentation::create();
                 $selectedPresentation->SummitSelectedPresentationListID = $mySelections->ID;
                 $selectedPresentation->PresentationID = $this->owner->ID;
                 $selectedPresentation->MemberID = Member::currentUser()->ID;
             }
+
             $previous_collection = $selectedPresentation->Collection;
             $selectedPresentation->Collection = $collection;
             $selectedPresentation->Order = $highestOrderInList+1;
@@ -126,6 +137,10 @@ class PresentationTrackChairFeatures extends DataExtension
                     $selection->write();
                 }
             }
+        }
+
+        if ($msg) {
+            throw new EntityValidationException($msg);
         }
     }
     /**

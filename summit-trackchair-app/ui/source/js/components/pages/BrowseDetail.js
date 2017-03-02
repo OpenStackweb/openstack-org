@@ -118,8 +118,8 @@ class BrowseDetail extends React.Component {
 			            {myList &&
 			            	<p>
                                 <small className="pull-right">
-                                    Selections remaining: {selectionsRemaining}
-                                    {p.lightning_wannabe && <span>-{selectionsRemaining}<i className='fa fa-bolt' /></span> }
+                                    Selections remaining: {p.lightning ? lightningSelectionsRemaining : selectionsRemaining }
+                                    {p.lightning_wannabe && <span>-{lightningSelectionsRemaining}<i className='fa fa-bolt' /></span> }
                                 </small>
                             </p>
 			            }

@@ -243,10 +243,13 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         ];
 
         foreach ($presentations as $p) {
+            $is_group_selected = ($p->isGroupSelected() || $p->isGroupSelected(SummitSelectedPresentationList::Lightning));
+
             $data['results'][] = [
                 'id' => $p->ID,
                 'title' => $p->Title,
                 'viewed' => $p->isViewedByTrackChair(),
+                'group_selected' => $is_group_selected,
                 'selected' => $p->getSelectionType(),
                 'lightning_selected' => $p->getSelectionType(SummitSelectedPresentationList::Lightning),
                 'selectors' => array_keys($p->getSelectors()->map('Name','Name')->toArray()),

@@ -9,8 +9,20 @@ export const getFilteredPresentations = createSelector(
 		let filterFunc;
 		switch(filter) {
 			case 'all':
-				filterFunc = p => p.selected !== 'pass';
+				filterFunc = p => p;
 				break;
+            case 'team':
+                filterFunc = p => p.group_selected;
+                break;
+            case 'untouched':
+                filterFunc = p => !p.selected;
+                break;
+            case 'moved':
+                filterFunc = p => !!p.moved_to_category && !p.viewed;
+                break;
+            case 'voted':
+                filterFunc = p => !!p.selected;
+                break;
 			case 'unseen':
 				filterFunc = p => !p.viewed;
 				break;
@@ -26,23 +38,14 @@ export const getFilteredPresentations = createSelector(
 			case 'pass':
 				filterFunc = p => p.selected === 'pass';
 				break;
-			case 'moved':		
-				filterFunc = p => !!p.moved_to_category && !p.viewed;
-				break;
-			case 'team':
-				filterFunc = p => p.group_selected;
-				break;
-			case 'untouched':
-				filterFunc = p => !p.selected;
-				break;
             case 'lightning':
-                filterFunc = p => p.lightning;
+                filterFunc = p => !!p.lightning;
                 break;
             case 'presentation_lightning':
-                filterFunc = p => p.lightning_wannabe;
+                filterFunc = p => !!p.lightning_wannabe;
                 break;
             case 'all_lightning':
-                filterFunc = p => p.lightning_wannabe || p.lightning;
+                filterFunc = p => !!p.lightning_wannabe || !!p.lightning;
                 break;
 			default:
 				filterFunc = p => p
