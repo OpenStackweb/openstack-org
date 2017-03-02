@@ -22,19 +22,28 @@ final class SummitEventSetAvgRateTask extends CronTask
     {
         try
         {
-            $init_time  = time();
+            $init_time        = time();
             $processed_events = 0;
-            $events = array();
+            $events           = [];
+            $summit_id        = 0 ;
+            if (isset($_GET['summit_id']))
+            {
+                $summit_id = intval(trim(Convert::raw2sql($_GET['summit_id'])));
+                echo sprintf('summit_id set to %s', $summit_id);
+            }
 
-            $current_summit = Summit::get_active();
+            if($summit_id == 0) $summit_id = Summit::ActiveSummitID();
+            $current_summit = Summit::get()->byID($summit_id);
+
             if($current_summit) {
                 $events = $current_summit->getSchedule();
             }
 
             foreach ($events as $event) {
 
-                $rate_sum = 0;
+                $rate_sum   = 0;
                 $rate_count = 0;
+
                 foreach ($event->Feedback as $feedback) {
                     $rate_count++;
                     $rate_sum = $rate_sum + $feedback->Rate;
