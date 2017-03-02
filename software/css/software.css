@@ -1371,6 +1371,7 @@ a.security-promo-btn:hover, a.security-promo-btn:focus {
   text-transform: uppercase; }
 
 .project-category-tile {
+  padding-top: 20px;
   text-align: center;
   background: white;
   border: 1px solid #D3DEE9;
@@ -1426,7 +1427,6 @@ h3.header-center {
 
  .workloads-section li a {
    display: block;
-   margin-top: 10px;
  }
 
   .category-icon {
