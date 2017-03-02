@@ -1,0 +1,136 @@
+
+
+@font-face {
+  font-family: 'GothamNarrow-Ultra';
+  src: url('../fonts/GothamNarrow-Ultra.eot?#iefix') format('embedded-opentype'),  url('../fonts/GothamNarrow-Ultra.otf')  format('opentype'),
+	     url('../fonts/GothamNarrow-Ultra.woff') format('woff'), url('../fonts/GothamNarrow-Ultra.ttf')  format('truetype'), url('../fonts/GothamNarrow-Ultra.svg#GothamNarrow-Ultra') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+body{
+	background: url(../images/bg.jpg);
+	background-size: 100%;
+	font-family: 'GothamNarrow-Ultra';
+	text-align: center;
+}
+
+.wrapper{
+    background: url(../images/cat.png) no-repeat center;
+    min-height: 80vh;
+    width: 50vh;
+    background-size: 100%;
+    text-align: center;
+    margin: 2em auto;
+}
+
+.content{
+	padding-top: 48vh;
+}
+
+h6{
+	font-family: 'GothamNarrow-Ultra';
+	font-size: 1.2em;
+	color: #444;
+}
+
+.wrapper a{
+	text-decoration: underline;
+	color: #444;
+}
+
+.wrapper ul{
+	padding: 9em 0 0;
+}
+
+.wrapper ul li{
+    width: 11.11%;
+    display: inline-block;
+    float: left;
+    transform: rotate(270deg);
+    transform-origin: left top 0;
+    padding-left: 0em;
+    padding-top: 0.55em;
+
+}
+.wrapper ul li a{
+	text-decoration: none;
+}
+.wrapper ul li a:hover{
+	text-decoration: none;
+	color: #000
+}
+.wrapper ul li a span{
+	margin-left: 0.5em
+}
+
+
+.wrapper ul li:first-child{
+    padding-top: 1em;
+
+}
+
+
+.wrapper ul li:nth-child(2){
+    padding-top: 1.1em;
+
+}
+
+.wrapper ul li:nth-child(3){
+    padding-top: 1.1em;
+
+}
+
+.wrapper ul li:nth-child(4){
+    padding-top: 0.75em;
+
+}
+
+.wrapper ul li:last-child{
+    padding-top: 0.5em;
+
+}
+
+
+/* mediaqueries */
+
+/*general*/
+
+@media only screen and (min-device-width : 0px)  and (max-device-width : 720px)  and (orientation : portrait) { 
+	.wrapper ul{
+		padding-top: 7em;
+	}
+
+}
+
+
+/*IPAD Landscape*/
+
+@media only screen and (min-device-width : 768px)  and (max-device-width : 1024px)  and (orientation : landscape) { 
+	.wrapper ul{
+		padding-top: 8em;
+	}
+
+}
+
+/*IPAD Portrait*/
+
+@media only screen and (min-device-width : 768px)  and (max-device-width : 1024px)  and (orientation : portrait) { 
+	.wrapper ul{
+		padding-top: 13em;
+	}
+
+}
+
+
+/*iphone Portrait*/
+
+@media only screen and (min-device-width : 375px)  and (max-device-width : 667px)  and (orientation : portrait) { 
+	.wrapper ul{
+		padding-top: 6em
+	}
+
+}
+
+
