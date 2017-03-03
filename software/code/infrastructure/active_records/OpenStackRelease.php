@@ -22,15 +22,15 @@ class OpenStackRelease
 
     static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
 
-    static $db = array
-    (
-        'Name'                             => 'Varchar',
-        'ReleaseNumber'                    => 'Varchar',
-        'ReleaseDate'                      => 'Date',
-        'ReleaseNotesUrl'                  => 'Text',
-        'Status'                           => "Enum('Deprecated, EOL, SecuritySupported , Current, UnderDevelopment, Future', 'Deprecated')",
-        'HasStatistics'                    => 'Boolean',
-    );
+    static $db = [
+
+        'Name'            => 'Varchar',
+        'ReleaseNumber'   => 'Varchar',
+        'ReleaseDate'     => 'Date',
+        'ReleaseNotesUrl' => 'Text',
+        'Status'          => "Enum('Deprecated, EOL, SecuritySupported , Current, UnderDevelopment, Future', 'Deprecated')",
+        'HasStatistics'   => 'Boolean',
+    ];
 
     static $summary_fields = array
     (
@@ -53,8 +53,8 @@ class OpenStackRelease
         'OpenStackComponents' => 'OpenStackComponent',
     );
 
-    private static $many_many_extraFields = array
-    (
+    private static $many_many_extraFields = [
+
         'OpenStackComponents'  =>[
             'Adoption'                               => 'Int',
             'MaturityPoints'                         => 'Int',
@@ -69,8 +69,9 @@ class OpenStackRelease
             'ReleaseIndependent'                     => 'Boolean',
             'ReleaseTrailing'                        => 'Boolean',
             'ReleasesNotes'                          => 'Text',
+            'CustomTeamYAMLFileName'                 => 'Text',
         ]
-    );
+    ];
 
     static $has_many = array
     (
