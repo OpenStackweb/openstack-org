@@ -694,7 +694,6 @@ SQL;
                         {
                             if($class === 'SurveyRankingQuestionTemplate')
                             {
-
                                 $question_id = intval($row['QuestionID']);
                                 $q = SurveyRankingQuestionTemplate::get()->byID($question_id);
                                 if(!is_null($q))
@@ -715,9 +714,20 @@ SQL;
                             }
                             else
                             {
-                                $answers = explode('|', $answer);
-                                foreach ($answers as $a) {
-                                    $line2[sprintf("%s - %s", $question, $a)] = 1;
+                                if($class === 'SurveyRadioButtonMatrixTemplateQuestion')
+                                {
+                                    $answer = preg_split('/,/',$answer);
+                                    foreach($answer as $a)
+                                    {
+                                        $a =  preg_split('/:/',$a);
+                                        if( count($a) !== 2) continue;
+                                        $line2[sprintf("%s - %s",$question,$a[0])] = $a[1];
+                                    }
+                                } else {
+                                    $answers = explode('|', $answer);
+                                    foreach ($answers as $a) {
+                                        $line2[sprintf("%s - %s", $question, $a)] = '1';
+                                    }
                                 }
                             }
                         }
@@ -736,7 +746,6 @@ SQL;
                             else
                                 $line2[$question] = $answer;
                         }
-
                     }
 
                     if(isset($line2['DeploymentID']) && intval($line2['DeploymentID']) > 0)
