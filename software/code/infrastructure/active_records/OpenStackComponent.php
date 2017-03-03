@@ -79,7 +79,11 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
     private static $indexes = array
     (
         'Name'     => array('type' => 'index', 'value' => 'Name'),
-        'CodeName' => array('type' => 'index', 'value' => 'CodeName')
+        'CodeName' => array('type' => 'index', 'value' => 'CodeName'),
+        'NameCodeName' => array(
+            'type' => 'unique',
+            'value' => '"Name","CodeName"'
+        )
     );
 
     private static $defaults = array
