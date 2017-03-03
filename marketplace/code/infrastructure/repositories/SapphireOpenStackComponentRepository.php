@@ -28,4 +28,15 @@ class SapphireOpenStackComponentRepository
 		return $class::get()->filter('Name',$name)->first();
 	}
 
+    /**
+     * @param string $name
+     * @param string $codename
+     * @return IOpenStackComponent
+     */
+    public function getByNameAndCodeName($name, $codename)
+    {
+        $class = $this->entity_class;
+        return $class::get()->filter(['Name' => $name, 'CodeName' => $codename])->first();
+    }
+
 }

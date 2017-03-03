@@ -23,4 +23,11 @@ interface IOpenStackComponentRepository extends IEntityRepository
      */
     public function getByName($name);
 
+    /**
+     * @param string $name
+     * @param string $codename
+     * @return IOpenStackComponent
+     */
+    public function getByNameAndCodeName($name, $codename);
+
 } 

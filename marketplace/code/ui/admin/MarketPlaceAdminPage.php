@@ -366,6 +366,7 @@ class MarketPlaceAdminPage_Controller extends AdminController
     public function getOpenStackAvailableComponents()
     {
         $query = new QueryObject;
+        $query->addAndCondition(QueryCriteria::equal('ShowOnMarketplace', 1));
         $query->addOrder(QueryOrder::asc('Name'));
         list($list, $size) = $this->components_repository->getAll($query, 0, 1000);
         return new ArrayList($list);

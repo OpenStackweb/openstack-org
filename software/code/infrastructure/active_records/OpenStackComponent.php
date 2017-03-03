@@ -56,6 +56,7 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
         'FollowsStandardDeprecation'   => 'Boolean',
         'SupportsUpgrade'              => 'Boolean',
         'SupportsRollingUpgrade'       => 'Boolean',
+        'ShowOnMarketplace'            => 'Boolean(1)',
     );
 
     private static $has_one = array
@@ -83,7 +84,8 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
 
     private static $defaults = array
     (
-        'MascotClass' => 'Barbican',
+        'MascotClass'       => 'Barbican',
+        'ShowOnMarketplace' => 1,
     );
 
     protected function onBeforeWrite()
