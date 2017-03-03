@@ -425,10 +425,10 @@
                         </p>
                         <p>
                             <a target="_blank" href="community/members/profile/{$Component.LatestReleasePTL.ID}">
-                                <img alt="OpenStack Profile" src="themes/openstack/images/software/ptl-openstack.png"></a>
+                                <img alt="OpenStack Profile" src="themes/openstack/images/foundation-staff/icon_openstack.png"></a>
                             <% if $Component.LatestReleasePTL.TwitterName %>
                             <a target="_blank" href="https://twitter.com/{$Component.LatestReleasePTL.TwitterName}">
-                                <img alt="Twitter Profile" src="themes/openstack/images/software/ptl-twitter.png">
+                                <img alt="Twitter Profile" src="themes/openstack/images/foundation-staff/icon_twitter.png">
                             </a>
                             <% end_if %>
                         </p>
