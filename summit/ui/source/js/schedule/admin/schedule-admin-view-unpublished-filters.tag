@@ -20,8 +20,7 @@
                     <label for="unpublished_event_type">Source</label>
                     <select id="unpublished_event_type">
                         <option value=''>-- Select An Event Type --</option>
-                        <option value='presentations' selected>Presentations + Panels</option>
-                        <option value='lightning'>Lightning Talks</option>
+                        <option value='presentations' selected>Presentations + Panels + LT</option>
                         <option value='evening_events'>Evening Events</option>
                         <option value='lunch_events'>Lunches / Breaks</option>
                         <option value='all_events'>All Events</option>

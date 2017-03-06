@@ -64,7 +64,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="end_time_modal">Gap (minutes)</label>
-                                <input type='number' id="length_modal" min="15" max="240" step="15" value="60" style="width: 60px"/>
+                                <input type='number' id="length_modal" min="10" max="240" step="10" value="60" style="width: 60px"/>
                             </div>
                         </div>
                     </div>
@@ -138,7 +138,7 @@
                             format:'H:i',
                             minTime:'07:00',
                             maxTime:'22:00',
-                            step: 15
+                            step: 10
                         });
 
                         self.setFromHash();

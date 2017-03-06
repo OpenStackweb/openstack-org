@@ -77,11 +77,19 @@ final class SapphireSummitPresentationRepository extends SapphireSummitEventRepo
                     $where_clause .= " AND SSPL.CategoryID = SummitEvent.CategoryID";
                     break;
                 case 'accepted' :
-                    $where_clause .= " AND SSP.`Order` IS NOT NULL AND SSP.`Order` <= PC.SessionCount AND SSPL.ListType = 'Group'";
+                    $where_clause .= " AND SSP.`Order` IS NOT NULL AND SSP.`Order` <= PC.SessionCount AND SSPL.ListType = 'Group' AND SSPL.ListClass = 'Session'";
                     $where_clause .= " AND SSPL.CategoryID = SummitEvent.CategoryID";
                     break;
                 case 'alternate' :
-                    $where_clause .= " AND SSP.`Order` IS NOT NULL AND SSP.`Order` > PC.SessionCount AND SSPL.ListType = 'Group'";
+                    $where_clause .= " AND SSP.`Order` IS NOT NULL AND SSP.`Order` > PC.SessionCount AND SSPL.ListType = 'Group' AND SSPL.ListClass = 'Session'";
+                    $where_clause .= " AND SSPL.CategoryID = SummitEvent.CategoryID";
+                    break;
+                case 'lightning accepted' :
+                    $where_clause .= " AND SSP.`Order` IS NOT NULL AND SSP.`Order` <= PC.LightningCount AND SSPL.ListType = 'Group' AND SSPL.ListClass = 'Lightning'";
+                    $where_clause .= " AND SSPL.CategoryID = SummitEvent.CategoryID";
+                    break;
+                case 'lightning alternate' :
+                    $where_clause .= " AND SSP.`Order` IS NOT NULL AND SSP.`Order` > PC.LightningCount AND SSPL.ListType = 'Group' AND SSPL.ListClass = 'Lightning'";
                     $where_clause .= " AND SSPL.CategoryID = SummitEvent.CategoryID";
                     break;
             }

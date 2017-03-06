@@ -546,6 +546,8 @@ final class SummitAppAdminController extends Controller implements PermissionPro
                         //new ArrayData(array('Status'=> 'unaccepted')),
                         new ArrayData(array('Status'=> 'accepted')),
                         new ArrayData(array('Status'=> 'alternate')),
+                        new ArrayData(array('Status'=> 'lightning accepted')),
+                        new ArrayData(array('Status'=> 'lightning alternate')),
                     )
                 ),
             )

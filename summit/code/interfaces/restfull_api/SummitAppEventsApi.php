@@ -125,7 +125,7 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
             switch ($source)
             {
                 case 'presentations':
-                    $event_types = array(IPresentationType::Presentation,IPresentationType::Keynotes,IPresentationType::Panel);
+                    $event_types = array(IPresentationType::Presentation,IPresentationType::Keynotes,IPresentationType::Panel, IPresentationType::LightingTalks);
                     list($page, $page_size, $count, $data) = $this->summitpresentation_repository->getUnpublished($summit_id,$event_types,$filters,$page,$page_size,$order);
                     break;
                 case 'lightning':
