@@ -13,7 +13,7 @@ require('./t.tag');
             </p>
         </div>
         <div class="col-sm-12">
-            <service-box each="{ components }" tiles="{ opts.tiles }" ></service-box>
+            <service-box each="{ components }" tiles="{ tiles }" ></service-box>
         </div>
     </div>
 
@@ -21,6 +21,7 @@ require('./t.tag');
 
         this.base_url = this.parent.base_url;
         var self = this;
+        var tiles = this.opts.tiles;
 
         getGroupId(group_title) {
             var group_split = group_title.split(/[ ,]+/);
