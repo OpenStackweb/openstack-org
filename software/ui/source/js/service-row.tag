@@ -1,18 +1,8 @@
 require('./t.tag');
-<service-box>
-    <div class="col-md-4 col-sm-6">
-    <div class="core-services-single-full" onclick={ coreServiceDetails }>
-    <div class="core-top">
-    <div class="core-title" style="background: url({mascotImage()}) no-repeat center center;">
-    { code_name } 
-    </div>
-    <div class="core-service">
-    { name }
-    </div>
-    </div>
-
-    </div>
-    </div>
+<service-row>
+    <tr>
+        <td>{ name }</td>
+    </tr>
 
     <script>
 
@@ -30,4 +20,4 @@ require('./t.tag');
         }
 
     </script>
-</service-box>
+</service-row>
