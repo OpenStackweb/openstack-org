@@ -32,6 +32,7 @@
                         <option value='SummitEvent.Title' selected>Title</option>
                         <option value='SummitEvent.ID'>Event Id</option>
                         <option value='SummitEvent.StartDate'>Start Date</option>
+                        <option value='SSP.`Order`'>Track Chair Sel.</option>
                     </select>
                 </div>
                 <div id="unpublished_track_col" class="col-md-6">
@@ -73,15 +74,23 @@
                 switch (source) {
                     case 'presentations':
                     case 'lightning':
+                        $('#unpublished_track_col').show();
+                        $('#unpublished_selection_status_col').show();
+                        $('#unpublished_sort option').last().show();
+                        break;
                     case 'all_events':
                         $('#unpublished_track_col').show();
                         $('#unpublished_selection_status_col').show();
+                        $('#unpublished_sort option').last().hide();
                         break;
                     default:
                         $('#unpublished_track_col').hide();
                         $('#unpublished_selection_status_col').hide();
+                        $('#unpublished_sort option').last().hide();
                         break;
                 }
+
+                $("#unpublished_sort").val('');
                 var order = $('#unpublished_sort').val();
 
                 self.doFilter(source,track_id,status,search_term,order);
