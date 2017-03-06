@@ -5,6 +5,7 @@ require('./t.tag');
     <div class="row" id={ getGroupId(group_title) }>
         <div class="col-sm-12">
             <p class="service-section-title">
+                <span if={ opts.tiles }>Tiles Mode</span>
                 <strong>
                     <t entity="Software.SERVICES_SECTION_TITLE" text={ group_title } />
                 </strong>
@@ -12,7 +13,7 @@ require('./t.tag');
             </p>
         </div>
         <div class="col-sm-12">
-            <service-box each="{ components }" ></service-box>
+            <service-box each="{ components }" tiles="{ opts.tiles }" ></service-box>
         </div>
     </div>
 

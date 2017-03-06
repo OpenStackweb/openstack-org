@@ -4,17 +4,11 @@ require('./t.tag');
     <div class="core-services-single-full" onclick={ coreServiceDetails }>
     <div class="core-top">
     <div class="core-title" style="background: url({mascotImage()}) no-repeat center center;">
-    { code_name }
+    { code_name } 
     </div>
     <div class="core-service">
-    { name }
+    { name } <span if={ opts.tiles }>(Tiles Mode)</span>
     </div>
-    </div>
-
-    <div class="core-bottom">
-    <a class="core-service-btn" href="#" onclick={ coreServiceDetails }>
-    	<t entity="Software.MORE_DETAILS" text="More Details" />
-    </a>
     </div>
 
     </div>
