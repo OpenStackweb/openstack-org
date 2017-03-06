@@ -27,7 +27,7 @@
                 <div class="col-md-4">
                     <a href="$Top.Link(project-navigator)#{$Id}">
                         <div class="project-category-tile">
-                            <img class="category-icon" width="114px" src="/software/images/icons/{$MascotClass}.svg" onerror="this.onerror=null; this.src=/software/images/icons/{$MascotClass}.png" alt="OpenStack Cloud Software">
+                            <img class="category-icon" width="114px" src="/software/images/icons/{$Id}.svg" onerror="this.onerror=null; this.src=/software/images/icons/{$Id}.png" alt="OpenStack Cloud Software">
                             <h4>{$Name}</h4>
                             <p class="number-of-projects">
                                 {$Count} OpenStack Projects

@@ -11,35 +11,12 @@ require('./t.tag');
     </div>
     </div>
 
+    <div class="core-bottom">
+    <a class="core-service-btn" href="#" onclick={ coreServiceDetails }>
+    	<t entity="Software.MORE_DETAILS" text="More Details" />
+    </a>
+    </div>
 
-    <div class="core-stats-wrapper">
-    <div class="row">
-    <div class="col-sm-4 col-xs-4">
-    <div class="core-stat-graphic">
-    { adoption } %
-    </div>
-    <div class="core-stat-title">
-    <t entity="Software.ADOPTION" text="ADOPTION" />
-    </div>
-    </div>
-    <div class="col-sm-4 col-xs-4">
-    <div class="core-stat-graphic">
-    { maturity_points } <span>of</span> { parent.max_maturity_points }
-    </div>
-    <div class="core-stat-title">
-    <t entity="Software.MATURITY" text="MATURITY" />
-    </div>
-    </div>
-    <div class="col-sm-4 col-xs-4">
-    <div class="core-stat-graphic">
-    { age } <span>yrs</span>
-    </div>
-    <div class="core-stat-title">
-    <t entity="Software.AGE" text="AGE" />
-    </div>
-    </div>
-    </div>
-    </div>
     </div>
     </div>
 
