@@ -300,11 +300,13 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         $categoryID = (int)$r->param('categoryID');
         $list_class = $r->param('listClass');
         $results['category_id'] = $categoryID;
+        $results['lists'] = array();
 
         $category = PresentationCategory::get()->byID($categoryID);
         if (!$category) {
-            return $this->notFound(sprintf('Category id %s not found!', $categoryID));
+            return $this->validationError(sprintf('Category id %s not found!', $categoryID));
         }
+
         $summitID = (int) Summit::get_active()->ID;
         if (intval($category->SummitID) !== $summitID) {
             return $this->validationError(sprintf('Category id %s does not belong to current summit!', $categoryID));

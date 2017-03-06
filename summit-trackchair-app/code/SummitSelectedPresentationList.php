@@ -159,6 +159,8 @@ ORDER BY SummitSelectedPresentation.Order ASC
         // An empty array list that we'll use to return results
         $results = ArrayList::create();
 
+        if (count($track_chair_ids) == 0) return $results;
+
         // Get any existing lists made for this category
         $AllLists = SummitSelectedPresentationList::get()
             ->filter([
