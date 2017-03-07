@@ -3,8 +3,10 @@ require('./service-group.tag')
 <project-services>
 
 
-    <div class="toggle-wrapper">
-        <input class="tgl tgl-light" type="checkbox" id="cbox1" onclick={ toggleTileMode } checked={self.tileMode} value="tiles_mode">
+    <div class="toggle-wrapper" onclick={ toggleTileMode }>
+        <span>Tiles View</span>
+        <div class="toggle {tiles: tileMode}">
+        <span>List View</span>
     </div>
 
     <service-group each="{ group_title, components in groups }" tiles="{ tileMode }"></service-group>
