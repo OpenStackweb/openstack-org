@@ -17,9 +17,9 @@ require('./t.tag');
         <div class="col-sm-12" if="{ !opts.tiles }">
             <table class="table">
                 <tbody>        
-                    <tr each="{ component in components }">
+                    <tr each="{ component in components }" onclick={ coreServiceDetails }>
                         <td class="project-table-code-name">
-                            <span class="project-table-mascot-icon" style="background: url({mascotImage(component)}) no-repeat center center;"></span>
+                            <span class="project-table-mascot-icon" style="background-image: url({mascotImage(component)});"></span>
                             { component.code_name }
                         </td>
                         <td class="project-table-description">{ component.name }</td>

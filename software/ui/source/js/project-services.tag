@@ -2,7 +2,10 @@ require('./service-group.tag')
 
 <project-services>
 
-    <button onclick={ toggleTileMode }>Toggle View Mode</button>
+
+    <div class="toggle-wrapper">
+        <input class="tgl tgl-light" type="checkbox" id="cbox1" onclick={ toggleTileMode } checked={self.tileMode} value="tiles_mode">
+    </div>
 
     <service-group each="{ group_title, components in groups }" tiles="{ tileMode }"></service-group>
 

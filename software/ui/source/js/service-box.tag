@@ -3,7 +3,7 @@ require('./t.tag');
     <div class="col-md-4 col-sm-6">
     <div class="core-services-single-full" onclick={ coreServiceDetails }>
     <div class="core-top">
-    <div class="core-title" style="background: url({mascotImage()}) no-repeat center center;">
+    <div class="core-title" style="background-image: url({mascotImage()});">
     { code_name } 
     </div>
     <div class="core-service">

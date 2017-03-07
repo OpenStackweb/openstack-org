@@ -1,7 +1,8 @@
 /* @override 
 	http://devbranch.openstack.org/software/css/software.css?m=1488912982
 	http://devbranch.openstack.org/software/css/software.css?m=1488919317
-	http://devbranch.openstack.org/software/css/software.css?m=1488921533 */
+	http://devbranch.openstack.org/software/css/software.css?m=1488921533
+	http://devbranch.openstack.org/software/css/software.css?m=1488923699 */
 
 .software-tab-wrapper {
   width: 100%;
@@ -700,8 +701,29 @@ p.service-section-title {
   line-height: 1.5em;
   color: #207ABA;
   min-height: 3em; }
+  
+  .project-table-code-name {
+  	font-weight: bold;
+  	text-transform: uppercase;
+  	width: 25%;
+  }
 
-.core-services-single-full .core-top .core-service-icon {
+	.project-table-code-name span {
+		display: inline-block;
+		width: 25px;
+		height: 25px;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+		margin-right: 10px;
+	}
+  
+  .project-table-description {
+  	color: #1C64B5;	
+  }
+  
+  .core-services-single-full .core-top .core-service-icon {
   font-size: 2em;
   color: #248EC7;
   position: absolute;
