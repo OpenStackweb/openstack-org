@@ -1,10 +1,12 @@
 require('./t.tag');
 <service-row>
-    <td>{ opts.component.code_name }</td>
-    <td>{ opts.component.name }</td>
+    <td>Item: { opts.component.code_name }</td>
+    <td>Item: { opts.component.name }</td>
     <script>
 
         var self = this;
+
+        console.log(this.opts);
 
         coreServiceDetails(e) {
             var slug  = e.item.slug;
