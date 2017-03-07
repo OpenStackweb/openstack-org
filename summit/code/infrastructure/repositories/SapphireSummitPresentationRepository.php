@@ -112,7 +112,7 @@ final class SapphireSummitPresentationRepository extends SapphireSummitEventRepo
             ->leftJoin('PresentationCategory','PC.ID = SummitEvent.CategoryID','PC')
             ->filter($filter)
             ->where($where_clause)
-            ->sort("TRIM({$order})");
+            ->sort($order);
 
         $count     = intval($list->count());
         if ($page_size) {

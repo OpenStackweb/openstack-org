@@ -32,7 +32,7 @@
                         <option value='SummitEvent.Title' selected>Title</option>
                         <option value='SummitEvent.ID'>Event Id</option>
                         <option value='SummitEvent.StartDate'>Start Date</option>
-                        <option value='SSP.`Order`'>Track Chair Sel.</option>
+                        <option value='SSP.Order'>Track Chair Sel.</option>
                     </select>
                 </div>
                 <div id="unpublished_track_col" class="col-md-6">
