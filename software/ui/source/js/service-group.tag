@@ -18,7 +18,14 @@ require('./t.tag');
         </div>
         <div class="col-sm-12" if="{ !opts.tiles }">
             <table class="table">
-                <service-row each="{ components }" ></service-row>
+                <thead>
+                    <tr>
+                        <th>Project Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <service-row each="{ components }" ></service-row>
+                </tbody>
             </table>
         </div>
     </div>
