@@ -911,7 +911,8 @@ a, a:visited {
     display: block; } }
 
 input#gsc-i-id2.gsc-input {
-  height: 30px !important; }
+  height: 30px !important;
+  : none; }
 
 table.gsc-search-box {
   margin-bottom: 0; }
@@ -1100,12 +1101,12 @@ a.gs-title, a.gs-title b {
 
 .intro-message > h1 {
     margin: 0;
-    font-size: 2.4em;
+    font-size: 2.3em;
     font-weight: 400;
     text-align: center;
     font-family: "Open Sans", Helvetica, Arial, sans-serif;
     width: 100%;
-    letter-spacing: -0.4px;
+    letter-spacing: -1px;
 }
 
 @media (max-width: 767px) {
@@ -1203,6 +1204,7 @@ p.promo-dates {
   margin-top: 10px;
   font-weight: 400;
   margin-bottom: 30px;
+  letter-spacing: -.4px;
   }
 
 /*End Hero*/
