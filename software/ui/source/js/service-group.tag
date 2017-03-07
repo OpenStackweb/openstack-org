@@ -1,4 +1,5 @@
 require('./service-box.tag')
+require('./service-row.tag')
 require('./t.tag');
 
 <service-group>
@@ -16,7 +17,9 @@ require('./t.tag');
             <service-box each="{ components }" ></service-box>
         </div>
         <div class="col-sm-12" if="{ !opts.tiles }">
-            <service-row each="{ components }" ></service-row>
+            <table class="table">
+                <service-row each="{ components }" ></service-row>
+            </table>
         </div>
     </div>
 
