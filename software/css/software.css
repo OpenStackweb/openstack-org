@@ -1,5 +1,7 @@
 /* @override 
-	http://devbranch.openstack.org/software/css/software.css?m=1488912982 */
+	http://devbranch.openstack.org/software/css/software.css?m=1488912982
+	http://devbranch.openstack.org/software/css/software.css?m=1488919317
+	http://devbranch.openstack.org/software/css/software.css?m=1488921533 */
 
 .software-tab-wrapper {
   width: 100%;
@@ -681,19 +683,20 @@ p.service-section-title {
 
 .core-services-single-full .core-top .core-title {
   text-align: center;
-  padding-top: 170px;
-  background: url(/images/mascots/nova.png) no-repeat center center;
+  padding-top: 120px;
   text-transform: uppercase;
+  padding-bottom: 5px;
   color: black;
-  font-size: 2em;
+  font-size: 1.4em;
   font-weight: 700;
   line-height: 1; }
 
 .core-services-single-full .core-top .core-service {
   text-align: center;
   font-weight: 600;
-  margin: 0 0 10px;
-  font-size: 1.2em;
+  margin: 0px;
+  margin-bottom: 10px;
+  font-size: 1.1em;
   line-height: 1.5em;
   color: #207ABA;
   min-height: 3em; }

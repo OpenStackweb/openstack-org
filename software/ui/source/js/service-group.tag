@@ -1,12 +1,10 @@
 require('./service-box.tag')
-require('./service-row.tag')
 require('./t.tag');
 
 <service-group>
     <div class="row" id={ getGroupId(group_title) }>
         <div class="col-sm-12">
             <p class="service-section-title">
-                <span if={ opts.tiles }>Tiles Mode</span>
                 <strong>
                     <t entity="Software.SERVICES_SECTION_TITLE" text={ group_title } />
                 </strong>
@@ -18,20 +16,13 @@ require('./t.tag');
         </div>
         <div class="col-sm-12" if="{ !opts.tiles }">
             <table class="table">
-                <thead>
-                    <tr>
-                        <th>Project Name</th>
-                        <th>Service</th>                        
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Top Row</td>
-                        <td>Top Row</td>
-                    </tr>                    
+                <tbody>        
                     <tr each="{ component in components }">
-                        <td>Item: { component.code_name }</td>
-                        <td>Item: { component.name }</td>
+                        <td class="project-table-code-name">
+                            <span class="project-table-mascot-icon" style="background: url({mascotImage(component)}) no-repeat center center;"></span>
+                            { component.code_name }
+                        </td>
+                        <td class="project-table-description">{ component.name }</td>
                     </tr>
                 </tbody>
             </table>
@@ -47,6 +38,17 @@ require('./t.tag');
             var group_split = group_title.split(/[ ,]+/);
             return group_split[0].toLowerCase();
         }
+
+        coreServiceDetails(e) {
+            var slug  = e.item.slug;
+            var url = self.base_url+'releases/'+self.parent.getCurrentReleaseId()+'/components/'+slug;
+            window.location = url;
+        }
+
+        mascotImage(component) {
+            var slugWithoutSpaces = component.slug.replace(/ /g,"_");
+            return '/software/images/mascots/' + slugWithoutSpaces + '.png';
+        }        
 
     </script>
 </service-group>
