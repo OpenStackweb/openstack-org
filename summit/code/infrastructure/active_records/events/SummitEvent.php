@@ -101,10 +101,28 @@ class SummitEvent extends DataObject implements ISummitEvent
         return html_entity_decode($this->getField('RSVPLink'));
     }
 
+    /**
+     * @param bool $absolute
+     * @return string
+     */
     public function getRSVPURL($absolute = true)
     {
         return $this->hasRSVPTemplate() ?
             $this->getLink('show', $absolute).'/rsvp': $this->getRSVPLink();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isExternalRSVP(){
+        return !$this->hasRSVPTemplate() ;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasRSVP(){
+        return !empty($this->getRSVPURL());
     }
 
     public function getFormattedTitle(){
@@ -474,6 +492,7 @@ class SummitEvent extends DataObject implements ISummitEvent
      * @return string
      */
     public function getCurrentRSVPSubmissionSeatType(){
+        if(!$this->hasRSVPTemplate()) return 'N/A';
         $count_regular = $this->RSVPSubmissions()->filter('SeatType', IRSVP::SeatTypeRegular )->count();
         if($count_regular < intval($this->RSVPMaxUserNumber)) return IRSVP::SeatTypeRegular;
         $count_wait = $this->RSVPSubmissions()->filter('SeatType', IRSVP::SeatTypeWaitList )->count();

@@ -71,4 +71,18 @@ interface IScheduleManager
      */
     public function deleteRSVP(array $data);
 
+    /**
+     * @param int $member_id
+     * @param int $event_id
+     * @return mixed
+     */
+    public function addEventToFavorites($member_id, $event_id);
+
+    /**
+     * @param int $member_id
+     * @param int $event_id
+     * @return mixed
+     */
+    public function removeEventFromFavorites($member_id, $event_id);
+
 }

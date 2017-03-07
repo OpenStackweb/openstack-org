@@ -1,0 +1,14 @@
+.radio input[type="radio"],
+.radio-inline input[type="radio"],
+.checkbox input[type="checkbox"],
+.checkbox-inline input[type="checkbox"]
+{
+    position: absolute;
+    margin-top: 0px;
+    margin-left: -5px;
+}
+
+div.title{
+    text-align: center;
+    padding: 25px
+}

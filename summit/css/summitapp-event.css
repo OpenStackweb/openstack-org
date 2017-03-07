@@ -139,14 +139,6 @@
     width: 90%;
 }
 
-.btn-rsvp-event
-{
-    background-color: #224066 !important;
-    border-color: #224066 !important;
-    border-radius: 0;
-    margin-top: 10px;
-}
-
 .share {
     clear: both;
     margin-top: 20px;
@@ -344,4 +336,32 @@ a.profile-pic-wrapper {
 }
 
 .info_item {
+}
+
+.btn-action
+{
+   border-radius: 5px;
+   padding: 5px;
+   min-width: 125px;
+   max-width: 125px;
+}
+
+.btn-action-pressed{
+    background-color: #30739C !important;
+    color: white !important;
+}
+
+.btn-action-normal{
+    background-color: #509cb9 !important;
+    color: #E5E5E5 !important;
+}
+
+.event-actions{
+    text-align: center;
+}
+
+
+.btn-full-rsvp {
+    background-color: red !important;
+    color: #E5E5E5 !important;
 }

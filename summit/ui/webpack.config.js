@@ -6,6 +6,7 @@ module.exports = {
     "my-schedule-view":"./source/js/schedule/my-schedule-view.js",
     "full-schedule-view":"./source/js/schedule/full-schedule-view.js",
     "share-buttons":"./source/js/schedule/share-buttons.js",
+    "event-action-buttons":"./source/js/schedule/event-action-buttons.js",
     "tagmanagerfield":"./source/js/tagmanagerfield/tagmanagerfield.js",
     "event-list":"./source/js/schedule/event-list.js",
     "schedule-admin-view":"./source/js/schedule/admin/schedule-admin-view.js",

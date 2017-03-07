@@ -1,5 +1,4 @@
 <div class="container-fluid">
-    <% cached 'frontend_schedule_speaker_page_page', $Speaker.ID, $Speaker.LastEdited %>
     <% with Speaker %>
     <div class="container">
         <div class="row schedule-title-wrapper">
@@ -80,6 +79,7 @@
                             year: "{$Summit.getSummitYear().JS}",
                             dates : [],
                             events: [],
+                            dic_events: {},
                             speakers : {},
                             sponsors : {},
                             event_types:{},
@@ -92,9 +92,9 @@
                             should_show_venues: <% if $Summit.ShouldShowVenues %>true<% else %>false<% end_if %>
                         };
 
-                            <% if CurrentMember && CurrentMember.isAttendee($Top.Summit.ID) %>
-                                <% with CurrentMember %>
-                                summit.current_user = { id: {$ID}, first_name: '{$FirstName.JS}', last_name: '{$Surname.JS}' };
+                            <% if $CurrentMember %>
+                                <% with $CurrentMember %>
+                                summit.current_user = { id: {$ID}, first_name: '{$FirstName.JS}', last_name: '{$Surname.JS}', is_attendee: <% if CurrentMember.isAttendee($Top.Summit.ID) %>true<% else %>false<% end_if %> };
                                 <% end_with %>
                             <% end_if %>
 
@@ -196,8 +196,8 @@
 
                             <% loop PublishedPresentations($Top.Summit.ID, 'MODERATOR') %>
 
-                                    summit.events.push(
-                                            {
+                            var event_{$ID} =
+                                    {
                                                 id              :  {$ID},
                                                 title           : "{$Title.JS}",
                                                 abstract        : "{$Abstract.JS}",
@@ -212,54 +212,77 @@
                                                 sponsors_id     : [<% loop Sponsors %>{$ID},<% end_loop %>],
                                                 tags_id         : [<% loop Tags %>{$ID},<% end_loop %>],
                                                 track_id        : {$CategoryID},
+                                                rsvp_link       : "{$getRSVPURL().JS}",
+                                                has_rsvp        : <%if hasRSVP() %>true<% else %>false<% end_if %>,
+                                                rsvp_external   : <%if isExternalRSVP() %>true<% else %>false<% end_if %>,
+                                                rsvp_seat_type  : "{$CurrentRSVPSubmissionSeatType}",
                                                 <% if ClassName == Presentation %>
                                                     moderator_id: {$ModeratorID},
                                                     speakers_id : [<% loop Speakers %>{$ID},<% end_loop %>],
                                                     level : '{$Level}',
                                                 <% end_if %>
                                                 <% if CurrentMember && CurrentMember.isOnMySchedule($ID) %>
-                                                    own      : true,
+                                                    going      : true,
                                                 <% else %>
-                                                    own      : false,
+                                                    going      : false,
                                                 <% end_if %>
-                                                favorite : false,
-                                                show : true
-                                            }
-                                    );
+                                                <% if $CurrentMember && $CurrentMember.isOnFavorites($ID) %>
+                                                    favorite : true,
+                                                <% else %>
+                                                    favorite : false,
+                                                <% end_if %>
+                                                show : true,
+                                                attachment_url : "<% if $Attachment() %>{$Attachment().getUrl().JS}<% end_if %>",
+                                            };
+
+                                    summit.events.push(event_{$ID});
+                                    summit.dic_events[{$ID}] = event_{$ID};
 
                             <% end_loop %>
                             <% loop PublishedPresentations($Top.Summit.ID, 'SPEAKER') %>
                             <% if not $isModeratorByID($Up.ID) %>
-                            summit.events.push(
-                                    {
-                                        id              :  {$ID},
-                                        title           : "{$Title.JS}",
-                                        abstract        : "{$Abstract.JS}",
-                                        date_nice       : "{$StartDate().Format(D j)}",
-                                        start_datetime  : "{$StartDate}",
-                                        end_datetime    : "{$EndDate}",
-                                        start_time      : "{$StartTime}",
-                                        end_time        : "{$EndTime}",
-                                        allow_feedback  : {$AllowFeedBack},
-                                        location_id     : {$LocationID},
-                                        type_id         : {$TypeID},
-                                        sponsors_id     : [<% loop Sponsors %>{$ID},<% end_loop %>],
-                                        tags_id         : [<% loop Tags %>{$ID},<% end_loop %>],
-                                        track_id        : {$CategoryID},
-                                        <% if ClassName == Presentation %>
-                                            moderator_id: {$ModeratorID},
-                                            speakers_id : [<% loop Speakers %>{$ID},<% end_loop %>],
-                                            level       : '{$Level}',
-                                        <% end_if %>
-                                        <% if CurrentMember && CurrentMember.isOnMySchedule($ID) %>
-                                            own      : true,
-                                        <% else %>
-                                            own      : false,
-                                        <% end_if %>
+                                var event_{$ID} =   {
+                                    id              :  {$ID},
+                                    title           : "{$Title.JS}",
+                                    abstract        : "{$Abstract.JS}",
+                                    date_nice       : "{$StartDate().Format(D j)}",
+                                    start_datetime  : "{$StartDate}",
+                                    end_datetime    : "{$EndDate}",
+                                    start_time      : "{$StartTime}",
+                                    end_time        : "{$EndTime}",
+                                    allow_feedback  : {$AllowFeedBack},
+                                    location_id     : {$LocationID},
+                                    type_id         : {$TypeID},
+                                    sponsors_id     : [<% loop Sponsors %>{$ID},<% end_loop %>],
+                                    tags_id         : [<% loop Tags %>{$ID},<% end_loop %>],
+                                    track_id        : {$CategoryID},
+                                    rsvp_link       : "{$getRSVPURL().JS}",
+                                    has_rsvp        : <%if hasRSVP() %>true<% else %>false<% end_if %>,
+                                    rsvp_external   : <%if isExternalRSVP() %>true<% else %>false<% end_if %>,
+                                    rsvp_seat_type  : "{$CurrentRSVPSubmissionSeatType}",
+                                    <% if ClassName == Presentation %>
+                                        moderator_id: {$ModeratorID},
+                                        speakers_id : [<% loop Speakers %>{$ID},<% end_loop %>],
+                                        level       : '{$Level}',
+                                    <% end_if %>
+                                    <% if CurrentMember && CurrentMember.isOnMySchedule($ID) %>
+                                        going      : true,
+                                    <% else %>
+                                        going      : false,
+                                    <% end_if %>
+                                    <% if $CurrentMember && $CurrentMember.isOnFavorites($ID) %>
+                                        favorite : true,
+                                    <% else %>
                                         favorite : false,
-                                        show : true
-                                    }
-                            );
+                                    <% end_if %>
+                                    show : true,
+                                    attachment_url : "<% if $Attachment() %>{$Attachment().getUrl().JS}<% end_if %>",
+                                };
+
+                                summit.events.push(event_{$ID});
+                                summit.dic_events[{$ID}] = event_{$ID};
+
+
                             <% end_if %>
                             <% end_loop %>
                     </script>
@@ -269,8 +292,6 @@
         </div>
     </div>
     <% end_with %>
-    <% end_cached %>
 </div>
 
-$ModuleJS('schedule')
 $ModuleJS('event-list')

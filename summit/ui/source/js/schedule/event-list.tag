@@ -19,7 +19,18 @@
         var self                      = this;
 
         this.on('mount', function(){
-
+               $(document).off("click",".btn-go-event").on("click",".btn-go-event", function(e){
+                    e.preventDefault();
+                    e.stopPropagation();
+                    var event_url = $(this).attr('href');
+                    var url       = new URI(event_url);
+                    // add back url
+                    $(window).url_fragment('setParam','eventId', $(this).data('event-id'));
+                    window.location.hash = $(window).url_fragment('serialize');
+                    url.addQuery('BackURL', window.location)
+                    window.location = url.toString();
+                    return false;
+               });
         });
 
         this.schedule_api.on('eventAdded2MySchedule',function(event_id) {

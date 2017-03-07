@@ -1,4 +1,3 @@
-
 <share-buttons>
 
     <div class="facebook share_icon" onclick={shareFacebook}>

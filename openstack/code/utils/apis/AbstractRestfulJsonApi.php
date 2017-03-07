@@ -110,7 +110,7 @@ abstract class AbstractRestfulJsonApi extends Controller
      * @param SS_HTTPRequest $request
      * @return string
      */
-    private function getCacheKey(SS_HTTPRequest $request)
+    protected function getCacheKey(SS_HTTPRequest $request)
     {
         $key = $request->getURL(true);
 

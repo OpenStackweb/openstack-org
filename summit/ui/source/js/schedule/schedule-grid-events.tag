@@ -4,31 +4,19 @@
             width: auto ;
         }
     </style>
-    <div id="eventModal" class="modal fade">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                </div>
-                <div id="eventModalBody" class="modal-body">
-                    <p>Loading...</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
+    <div class="row">
+        <div class="col-md-12 col-xs-12" id="events-inner-container">
         </div>
     </div>
-    <div class="row" id="events-inner-container">
-    </div>
+
     <div class="row" style="display:none;">
-        <div class="col-md-12">
+        <div class="col-md-12 col-xs-12">
             <p>* There are not events that match your search criteria. </p>
         </div>
     </div>
+
     <div class="row" id="no_events_msg" style="display:none;margin-top: 25px;">
-        <div class="col-md-12">
+        <div class="col-md-12 col-xs-12">
             <p>* The combination of filters you have selected resulted in no matching events. Please adjust the filters or try different search parameters.</p>
         </div>
     </div>
@@ -48,40 +36,6 @@
         var self                      = this;
 
         this.on('mount', function(){
-            // add/remove to my schedule
-            $(document).off("click", ".icon-event-action").on( "click", ".icon-event-action", function(e) {
-
-                console.log('my schedule icon pressed ...');
-
-                var event_id = $(this).data('event-id');
-                var event    = self.dic_events[event_id];
-
-                if($(this).hasClass('foreign')){
-                    // add to my schedule
-                    self.schedule_api.addEvent2MySchedule(self.summit.id, event.id);
-                    $(this).removeClass('foreign');
-                    event.own  = true;
-                    $('.myschedule-icon',$(this)).removeClass('icon-foreign-event');
-                    $('.myschedule-icon',$(this)).addClass('icon-own-event');
-                    $(this).addClass('own');
-                    return false;
-                }
-                if($(this).hasClass('own')){
-                    // remove to my schedule
-                    self.schedule_api.removeEventFromMySchedule(self.summit.id, event.id);
-                    $(this).removeClass('own');
-                    event.own  = false;
-                    $('.myschedule-icon',$(this)).removeClass('icon-own-event');
-                    $('.myschedule-icon',$(this)).addClass('icon-foreign-event');
-                    $(this).addClass('foreign');
-                    //check if we are on my schedule view
-                    if(self.current_filter.own){
-                        //fade animation
-                        $('#event_'+event_id).fadeOut({ duration: 1000, queue: false }).slideUp(200);
-                    }
-                    return false;
-                }
-            });
 
             $(document).on('click', '#link_google_sync', function() {
 
@@ -165,12 +119,93 @@
                 return true;
             });
 
+            $(document).off("click",".btn-go-event").on("click",".btn-go-event", function(e){
+                 e.preventDefault();
+                 e.stopPropagation();
+                 var event_url = $(this).attr('href');
+                 var url       = new URI(event_url);
+                 // add back url
+                 $(window).url_fragment('setParam','eventId', $(this).data('event-id'));
+                 window.location.hash = $(window).url_fragment('serialize');
+                 url.addQuery('BackURL', window.location)
+                 window.location = url.toString();
+                 return false;
+            });
+
+            $(document).off("click", ".event-action-link").on("click", ".event-action-link", function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                var event_id = $(this).data('event-id');
+                if($(this).hasClass('disabled') || $(this).parent().hasClass('disabled')) return false;
+                $('#event_actions_'+event_id).removeClass('open');
+                var type     = $(this).data('type');
+                var event    = self.dic_events[event_id];
+                switch(type){
+                    case 'going':
+                         self.schedule_api.addEvent2MySchedule(self.summit.id, event.id);
+                         event.going  = true;
+                         self.updateMenu(event);
+                         self.updateState(event);
+                    break;
+                    case 'not-going':
+                        self.schedule_api.removeEventFromMySchedule(self.summit.id, event.id);
+                        event.going  = false;
+                        self.updateMenu(event);
+                        self.updateState(event);
+                        //check if we are on my schedule view
+                        if(self.current_filter.going){
+                            //fade animation
+                            $('#event_'+event_id).fadeOut({ duration: 1000, queue: false }).slideUp(200);
+                        }
+                    break;
+                    case 'watch':
+                        self.schedule_api.addEvent2MyFavorites(self.summit.id, event.id);
+                        event.favorite  = true;
+                        self.updateMenu(event);
+                        self.updateState(event);
+                    break;
+                    case 'unwatch':
+                       self.schedule_api.removeEventFromMyFavorites(self.summit.id, event.id);
+                       event.favorite  = false;
+                       self.updateMenu(event);
+                       self.updateState(event);
+                    break;
+                    case 'rsvp':
+                        event.going  = true;
+                        if(event.rsvp_external){
+                            self.schedule_api.addEvent2MySchedule(self.summit.id, event.id);
+                            self.updateMenu(event);
+                            self.updateState(event);
+                        }
+                        else
+                        {
+                            // our custom one, just navigate
+                            var url = new URI(event.rsvp_link);
+                            $(window).url_fragment('setParam','eventId', event_id);
+                            window.location.hash = $(window).url_fragment('serialize');
+                            url.addQuery('BackURL', window.location);
+                            window.location = url.toString();
+                        }
+                        self.updateMenu(event);
+                        self.updateState(event);
+                    break;
+                    case 'unrsvp':
+                       event.going  = false;
+                       self.schedule_api.unRSVPEvent(self.summit.id, event.id);
+                       self.updateMenu(event);
+                       self.updateState(event);
+                    break;
+                }
+
+                return false;
+            });
+
             // show event details handler (jquery)
             $(document).off("click", ".main-event-content").on( "click", ".main-event-content", function(e) {
 
-               if($(e.target).is('.icon-event-action, .myschedule-icon')){
+                if($(e.target).is('.icon-event-action, .event-action-link')){
                     return false;
-               }
+                }
 
                 if($(e.target).is('.synch-container, .select-event-chk')){
                     return true;
@@ -192,24 +227,13 @@
                         detail.html('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');
                         var url =  self.parent.base_url+'events/'+ event_id+'/html'
                             $.ajax({
-                            type: 'GET',
-                            url:  url,
-                            timeout:60000,
-                            cache: false,
-                            success: function (data, textStatus, jqXHR) {
+                            type    : 'GET',
+                            url     : url,
+                            timeout : 60000,
+                            cache   : false,
+                            success : function (data, textStatus, jqXHR) {
                                 detail.html(data);
                                 detail.addClass('loaded');
-
-                                $(document).off("click", '.btn-go-event').on( "click", '.btn-go-event', function(e) {
-                                    if($(e.target).is('.btn-go-event')){
-                                        e.preventDefault();
-                                        var $this = $(e.target);
-                                        var modal = $('#eventModal');
-                                        $('#eventModalBody').load($this.attr("href"),function(result){
-                                            modal.modal({show:true});
-                                        });
-                                    }
-                                });
                             }
                         }).fail(function (jqXHR, textStatus, errorThrown) {
                             alert('there was an error, please contact your administrator');
@@ -255,11 +279,7 @@
                 }
                 return false;
             });
-
-
         });
-
-
 
         addEventCallback(response, event){
             event.gcal_id = response.result.id;
@@ -288,16 +308,34 @@
             $('#events-container').ajax_loader();
         });
 
+        this.schedule_api.on('addedEvent2MySchedule', function(event_id){
+              var event    = self.dic_events[event_id];
+              if(event.has_rsvp && rsvp_external){
+                  var url      = new URI(event.rsvp_link);
+                  url.addQuery('BackURL',window.location)
+                  window.location = url.toString();
+              }
+        });
+
         this.schedule_api.on('eventsRetrieved',function(data) {
             self.show_date    = data.show_date;
             self.day_selected = data.day_selected;
             self.events       = data.events;
 
-            var myschedule_container = self.summit.current_user !== null ? '<div class="col-sm-3 my-schedule-container">'+
-            '<span class="icon-event-action">'+
-            '<i class="fa fa-plus-circle myschedule-icon"></i>&nbsp;My&nbsp;schedule'+
-            '</span>'+
-            '</div>' : '';
+            var actions_container = self.summit.current_user !== null ? '<a class"event-actions-menu" data-target="#" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" title+"event actions">'+
+            '<span class="caret caret-event-actions"></span>'+
+            '</a>'+
+            '<ul class="dropdown-menu dropdown-menu-event-actions" aria-labelledby="dLabel">'+
+            '<li class="rsvp-action event-action"><a data-type="rsvp" class="event-action-link" href="#"><i class="fa fa-check-circle" aria-hidden="true"></i>&nbsp;RSVP</a></li>'+
+            '<li class="unrsvp-action event-action"><a data-type="unrsvp" class="event-action-link" href="#"><i class="fa fa-times-circle" aria-hidden="true"></i>&nbsp;unRSVP</a></li>'+
+            '<li class="going-action event-action"><a data-type="going" class="event-action-link" href="#"><i class="fa fa-check-circle" aria-hidden="true"></i>&nbsp;Schedule</a></li>'+
+            '<li class="not-going-action event-action"><a data-type="not-going" class="event-action-link" href="#"><i class="fa fa-times-circle" aria-hidden="true"></i>&nbsp;UnSchedule</a></li>'+
+            '<li class="watch-action event-action"><a data-type="watch" class="event-action-link" href="#"><i class="fa fa-bookmark" aria-hidden="true"></i>&nbsp;Watch Later</a></li>'+
+            '<li class="unwatch-action event-action"><a data-type="unwatch" class="event-action-link" href="#"><i class="fa fa-bookmark-o" aria-hidden="true"></i>&nbsp;Do not Watch Later</a></li>'+
+            '<li role="separator" class="divider"></li>'+
+            '<li class="cancel-action event-action"><a data-type="cancel" class="event-action-link" href="#">Cancel</a></li>'+
+            '</ul>'
+            : '';
 
             var cal_synch_container = self.summit.current_user !== null ? '<div style="display:none" class="col-md-2 synch-container">'+
             '<span class="icon-event-synched">'+
@@ -310,20 +348,19 @@
             '<div class="col-md-12">'+
                 '<div class="row event-row">'+
                 '<div class="col-sm-12">'+
-                '<div class="row main-event-content">'+
-                '<div class="event-content">'+
+                '<div class="row main-event-content row-eq-height">'+
+                '<div class="event-content col-sm-10 col-xs-10">'+
                 '<div class="row row_location">'+
                 '<div class="col-sm-3 col-time">'+
                 '<i class="fa fa-clock-o icon-clock">'+
                 '</i><span class="event-date"></span>&nbsp;'+
                 '<span class="start-time" data-epoch=""></span>-<span class="end-time"></span>'+
                 '</div>'+
-                '<div class="col-sm-6 col-location">'+
+                '<div class="col-sm-8 col-location">'+
                 '<div>'+
                 ( (self.summit.should_show_venues)? '<i class="fa fa-map-marker icon-map"></i>&nbsp;<a class="search-link venue-search-link"></a>' : '')+
                 '</div>'+
                 '</div>'+
-                myschedule_container+
                 '</div>'+
                 '<div class="row">'+
                 '<div class="col-md-10">'+
@@ -343,6 +380,11 @@
                 '<a class="search-link event-type-search-link" title="Search Event Type"></a></div>'+
                 '</div>'+
                 '</div>'+
+                '<div class="event-state col-sm-1 col-xs-1">'+
+                '<i class="fa fa-check-circle going-status event-status" aria-hidden="true"></i>'+
+                '<i class="fa fa-bookmark favorite-status event-status" aria-hidden="true"></i>'+
+                '</div>'+
+                '<div class="event-actions-container col-sm-1 col-xs-1">'+  actions_container +'</div>'+
                 '</div>'+
                 '<div class="row event-details" style="display:none;"></div>'+
                 '</div>'+
@@ -412,23 +454,46 @@
             }
 
             if(self.summit.current_user !== null ){
-                // MY SCHEDULE
-                event_directives['i.myschedule-icon@class+']             = function(arg){ return arg.item.own ? ' icon-own-event':' icon-foreign-event'; };
-                event_directives['span.icon-event-action@id']            = function(arg){ return 'event_myschedule_action_'+arg.item.id; };
-                event_directives['span.icon-event-action@title']         = function(arg){ return arg.item.own ? 'remove from my schedule':'add to my schedule'; };
-                event_directives['span.icon-event-action@data-event-id'] = function(arg){
-                                                                                               var item = arg.item;
-                                                                                               self.dic_events[item.id] = item;
-                                                                                               return item.id;
-                                                                                        };
-                event_directives['span.icon-event-action@class+']        = function(arg){ return arg.item.own ? ' own':' foreign'; };
-
-                // GOOGLE CALENDAR SYNCH
-                event_directives['i.sync-icon@title']                    = function(arg){ return arg.item.gcal_id != ''  && arg.item.gcal_id != null ? 'Syncronized':'Unsyncronized'; };
-                event_directives['i.sync-icon@class+']                   = function(arg){ return arg.item.gcal_id != ''  && arg.item.gcal_id != null ? ' icon-sync-event':' icon-unsync-event'; };
-                event_directives['span.icon-event-synched@data-event-id']= function(arg){ return arg.item.id; };
-                event_directives['input.select-event-chk@id']            = function(arg){ return 'select_event_chk_'+ arg.item.id; };
-                event_directives['input.select-event-chk@data-event-id'] = function(arg){ return arg.item.id; };
+                // EVENT ACTIONS
+                event_directives['div.event-actions-container@id'] = function(arg){
+                   var item = arg.item;
+                   self.dic_events[item.id] = item;
+                   return 'event_actions_'+item.id;
+                };
+                event_directives['a.event-action-link@data-event-id']     = function(arg){ return arg.item.id; };
+                event_directives['li.going-action@class+']                = function(arg){
+                            if(!self.summit.current_user.is_attendee) return " hide";
+                            if(arg.item.has_rsvp ) return " hide";
+                            return arg.item.going ? " hide":" show"; };
+                event_directives['li.not-going-action@class+']            = function(arg){
+                            if(!self.summit.current_user.is_attendee) return " hide";
+                            if(arg.item.has_rsvp ) return " hide";
+                            return arg.item.going  ? " show":" hide"; };
+                event_directives['li.rsvp-action@class+']            = function(arg){
+                                                                           if(!self.summit.current_user.is_attendee) return " hide";
+                                                                           if(arg.item.has_rsvp && !arg.item.going && arg.item.rsvp_seat_type == 'FULL') return " disabled"
+                                                                           return arg.item.has_rsvp && !arg.item.going? " show": " hide";
+                                                                       };
+                event_directives['li.unrsvp-action@class+']   = function(arg){
+                                                                        if(!self.summit.current_user.is_attendee) return " hide";
+                                                                        return arg.item.has_rsvp && arg.item.going ? " show": " hide";
+                                                              };
+                event_directives['li.watch-action@class+']                = function(arg){ return arg.item.favorite ? " hide":" show"; };
+                event_directives['li.unwatch-action@class+']              = function(arg){ return arg.item.favorite ? " show":" hide"; };
+                event_directives['.event-state@id']                       = function(arg){ return 'event_state_'+arg.item.id; };
+                event_directives['i.going-status@class+']                 = function(arg){ return arg.item.going ?    " show":" hide"; };
+                event_directives['i.favorite-status@class+']              = function(arg){ return !arg.item.going && arg.item.favorite ? " show":" hide"; };
+                // GOOGLE CALENDAR SYNC
+                event_directives['i.sync-icon@title']                     = function(arg){ return arg.item.gcal_id != ''  && arg.item.gcal_id != null ? 'Syncronized':'Unsyncronized'; };
+                event_directives['i.sync-icon@class+']                    = function(arg){ return arg.item.gcal_id != ''  && arg.item.gcal_id != null ? ' icon-sync-event':' icon-unsync-event'; };
+                event_directives['span.icon-event-synched@data-event-id'] = function(arg){ return arg.item.id; };
+                event_directives['input.select-event-chk@id']             = function(arg){ return 'select_event_chk_'+ arg.item.id; };
+                event_directives['input.select-event-chk@data-event-id']  = function(arg){ return arg.item.id; };
+            }
+            else
+            {
+                event_directives['div.event-state@class+'] = function(arg){ return ' hide'};
+                event_directives['div.event-actions-container@class+'] = function(arg){  return ' hide'};
             }
 
             var directives = {
@@ -441,7 +506,17 @@
             $('#events-inner-container').html(html);
             self.scrollToTime();
             self.applyFilters();
-            window.setTimeout(function(){$('#events-container').ajax_loader('stop');}, 1000);
+            window.setTimeout(function(){
+                var eventId   = $(window).url_fragment('getParam','eventid');
+                if(eventId != null){
+                 if($('#event_'+eventId),length > 0) {
+                        $('html, body').animate({
+                            scrollTop: $('#event_'+eventId).offset().top
+                        }, 1000);
+                    }
+                }
+                $('#events-container').ajax_loader('stop');
+            }, 1000);
         });
 
         this.schedule_filters.on('scheduleFiltersChanged', function(filters){
@@ -449,8 +524,43 @@
             self.applyFilters();
         });
 
+        updateMenu(event){
+            var menu = $('#event_actions_'+event.id);
+
+            if(self.summit.current_user.is_attendee){
+                // going opt
+                $('li.going-action', menu).removeClass(!event.has_rsvp && event.going ? 'show' : 'hide');
+                $('li.going-action', menu).addClass(!event.has_rsvp && event.going ? 'hide' : 'show');
+                // not going opt
+                $('li.not-going-action', menu).removeClass(!event.has_rsvp && event.going ? 'hide' : 'show');
+                $('li.not-going-action', menu).addClass(!event.has_rsvp && event.going ? 'show' : 'hide');
+                // rsvp
+                $('li.rsvp-action', menu).removeClass(event.has_rsvp && !event.going ? 'hide' : 'show');
+                $('li.rsvp-action', menu).addClass(event.has_rsvp && !event.going ? 'show' : 'hide');
+                // un rsvp ( only our custom system)
+                $('li.unrsvp-action', menu).removeClass(event.has_rsvp && !event.rsvp_external && event.going ? 'hide' : 'show');
+                $('li.unrsvp-action', menu).addClass(event.has_rsvp && !event.rsvp_external && event.going ? 'show' : 'hide');
+
+            }
+
+            $('li.watch-action', menu).removeClass(event.favorite ? 'show': 'hide');
+            $('li.watch-action', menu).addClass(event.favorite ? 'hide': 'show');
+            $('li.unwatch-action', menu).removeClass(event.favorite ? 'hide' : 'show');
+            $('li.unwatch-action', menu).addClass(event.favorite ? 'show' : 'hide');
+        }
+
+        updateState(event){
+            var state = $('#event_state_'+event.id);
+            if(self.summit.current_user.is_attendee){
+                $('i.going-status', state).removeClass(event.going ? 'hide' : 'show');
+                $('i.going-status', state).addClass(event.going ? 'show' : 'hide');
+            }
+            $('i.favorite-status', state).removeClass(!event.going && event.favorite ? 'hide' : 'show');
+            $('i.favorite-status', state).addClass(!event.going && event.favorite ? 'show' : 'hide');
+        }
+
         isFilterEmpty() {
-            return self.isTrackGroupsFilterEmpty() && self.isEventTypesFilterEmpty() && self.isTracksFilterEmpty() && self.isLevelsFilterEmpty() && self.isTagsFilterEmpty() && self.isMyScheduleFilterEmpty();
+            return self.isTrackGroupsFilterEmpty() && self.isEventTypesFilterEmpty() && self.isTracksFilterEmpty() && self.isLevelsFilterEmpty() && self.isTagsFilterEmpty() && self.isMyScheduleFilterEmpty() && self.isMyFavoritesFilterEmpty();
         }
 
         isEventTypesFilterEmpty() {
@@ -474,7 +584,11 @@
         }
 
         isMyScheduleFilterEmpty() {
-            return (!self.current_filter.own);
+            return (!self.current_filter.going);
+        }
+
+        isMyFavoritesFilterEmpty() {
+            return (!self.current_filter.favorites);
         }
 
         getSummitLocation(event) {
@@ -517,8 +631,13 @@
                         show &= e.tags_id.some(function(v) { return self.current_filter.tags.indexOf(v.toString()) != -1; });
                     if(!show){ $('#event_'+e.id).hide(); continue;}
                     //my schedule
-                    if(self.current_filter.own)
-                        show &= e.own;
+                    if(self.current_filter.going)
+                        show &= e.going;
+                    if(!show){ $('#event_'+e.id).hide(); continue;}
+
+                    //my favorites
+                    if(self.current_filter.favorites)
+                        show &= e.favorite;
                     if(!show){ $('#event_'+e.id).hide(); continue;}
 
                     $('#event_'+e.id).show();

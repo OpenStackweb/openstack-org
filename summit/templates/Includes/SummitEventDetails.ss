@@ -3,9 +3,9 @@
         <div class="row schedule-title-wrapper">
             <div class="col-sm-6 col-xs-12 col-main-title">
                 <h1 style="text-align:left;">Event Details</h1>
-                <% if $goback %>
+                <% if $BackURL %>
                     <div class="go-back">
-                        <a href="#" onclick="window.history.back(); return false;"><< Go back </a>
+                        <a href="{$BackURL}"><< Go back </a>
                     </div>
                 <% end_if %>
             </div>
@@ -38,22 +38,32 @@
                 <% end_if %>
             </div>
             <div class="col-md-6 col-xs-12 info">
-                <% if CurrentMember && $ShowMySchedule == 1 %>
-                    <% if $Event.Summit.isAttendee() %>
-                        <div class="row info_item">
-                            <div class="col-md-12 col-xs-12" id="remove_from_my_schedule" <% if not CurrentMember.isOnMySchedule($Event.ID) %> style="display:none" <% end_if %>>
-                                <span id="icon-event-action-{$Event.ID}-remove" onclick="removeFromMySchedule({$Event.Summit.ID},{$Event.ID})" title="remove from my schedule" class="icon-event-action">
-                                    <i class="fa fa-2x fa-check-circle icon-own-event"></i>
-                                    My&nbsp;calendar
-                                </span>
-                            </div>
-                            <div class="col-md-12 col-xs-12" id="add_to_my_schedule" <% if CurrentMember.isOnMySchedule($Event.ID) %> style="display:none" <% end_if %>>
-                                <span id="icon-event-action-{$Event.ID}-add"onclick="addToMySchedule({$Event.Summit.ID},{$Event.ID})" title="add to my schedule" class="icon-event-action">
-                                    <i class="fa fa-2x fa-plus-circle icon-foreign-event" ></i>
-                                    My&nbsp;calendar
-                                </span>
-                            </div>
-                        </div>
+                    <% if $CurrentMember %>
+                        <script type="application/javascript">
+                            <% with $CurrentMember %>
+                                   var current_user = { id: {$ID}, first_name: '{$FirstName.JS}', last_name: '{$Surname.JS}', is_attendee: <% if CurrentMember.isAttendee($Top.Event.Summit.ID) %>true<% else %>false<% end_if %> };
+                            <% end_with %>
+
+                           var event = {
+                               id              : {$Event.ID},
+                               summit_id       : {$Event.SummitID},
+                               rsvp_link       : "{$Event.getRSVPURL().JS}",
+                               has_rsvp        : <%if $Event.hasRSVP() %>true<% else %>false<% end_if %>,
+                               rsvp_external   : <%if $Event.isExternalRSVP() %>true<% else %>false<% end_if %>,
+                               rsvp_seat_type  : "{$Event.CurrentRSVPSubmissionSeatType}",
+                               <% if $CurrentMember && $CurrentMember.isOnMySchedule($Top.Event.ID) %>
+                                   going      : true,
+                               <% else %>
+                                   going      : false,
+                               <% end_if %>
+                               <% if $CurrentMember && $CurrentMember.isOnFavorites($Top.Event.ID) %>
+                                   favorite : true,
+                               <% else %>
+                                   favorite : false,
+                               <% end_if %>
+                           };
+                        </script>
+                        <event-action-buttons event="{ event }" current_user="{ current_user }"></event-action-buttons>
                     <% else %>
                         <div class="alert alert-success alert-dismissible" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -61,7 +71,6 @@
                             <p><%t Summit.RegistrationLine2 confirm_order_link=$Top.ProfileAttendeeRegistrationLink %></p>
                         </div>
                     <% end_if %>
-                <% end_if %>
                 <div class="row info_item">
                     <div class="col-md-2 col-xs-2 info_item_icon"><i class="fa fa-clock-o icon-clock"></i></div>
                     <div class="col-md-10 col-xs-10 info_item_text">$Event.DateNice()</div>
@@ -107,7 +116,7 @@
                     </div>
                 <% end_if %>
                 <div class="clearfix"></div>
-                <% include SummitAppEvent_RSVPButton Event=$Event %>
+
                 <% if Event.Sponsors %>
                     <div class="logo">
                         <% loop Event.Sponsors %>

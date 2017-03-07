@@ -92,7 +92,6 @@ i.collapse-nav {
 {
     height: 100%;
     padding: 20px;
-    width: 100%;
 }
 
 .event-type
@@ -571,16 +570,16 @@ a.navbar-brand {
     padding-bottom: 10px;
 }
 
-.col-switch-schedule {
+.col-switch-schedule, .col-switch-watchlist {
     float: right;
     margin-right: 20px;
 }
 
-.switch_schedule {
+.switch_schedule, .switch_favorites {
     padding: 8px 14px;
 }
 
-.switch_schedule > .glyphicon {
+.switch_schedule > .glyphicon, .switch_favorites > .glyphicon{
     margin-right: 5px;
 }
 
@@ -913,8 +912,64 @@ h2.subtitle {
     padding-right: 0;
 }
 
-
 .row.event-details .label-rsvp-full{
     position: relative;
     top: 60%;
+}
+
+span.caret-event-actions:before {
+    content: '\2807';
+}
+
+.caret-event-actions {
+    margin-left: 0;
+    font-size: 20px;
+    color: #0a0a0a;
+    border: none !important;
+}
+
+.event-actions-container
+{
+    border-left: 1px solid darkgrey;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.dropdown-menu-event-actions{
+    left: -8em !important;
+    top: 40%;
+}
+
+.event-state{
+    padding: 0;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.event-state .event-status{
+    margin: 0;
+    text-align: center;
+    vertical-align: middle;
+    position: absolute;
+    top: 45%;
+}
+
+.event-state .event-status{
+    font-size: 25px;
+}
+
+.row-eq-height {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+span.caret-event-actions {
+    position: absolute;
+    top: 45%;
 }

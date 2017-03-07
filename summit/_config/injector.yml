@@ -239,7 +239,8 @@ Injector:
       3: '%$EventFeedbackFactory'
       4: '%$SummitAttendeeRepository'
       5: '%$RSVPRepository'
-      6: '%$TransactionManager'
+      6: '%$MemberRepository'
+      7: '%$TransactionManager'
   ScheduleEventViewModelMapper:
     class: ScheduleEventViewModelMapper
   ScheduleEventSearchViewModelMapper:
