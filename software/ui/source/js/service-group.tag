@@ -25,7 +25,8 @@ require('./t.tag');
                     </tr>
                 </thead>
                 <tbody>
-                    <tr data-is="service-row" each="{ components }" ></tr>
+                    <tr><td>one</td><td>two</td></tr>
+                    <tr data-is='service-row' each="{ component in components }" component={ component } ></tr>
                 </tbody>
             </table>
         </div>

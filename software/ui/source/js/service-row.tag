@@ -1,7 +1,7 @@
 require('./t.tag');
 <service-row>
-    <td>{ code_name }</td>
-    <td>{ name }</td>
+    <td>{ opts.component.code_name }</td>
+    <td>{ opts.component.name }</td>
     <script>
 
         var self = this;
