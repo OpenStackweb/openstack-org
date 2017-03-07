@@ -1,9 +1,7 @@
 require('./t.tag');
 <service-row>
-    <tr>
-        <td>{ name }</td>
-    </tr>
-
+    <td>{ code_name }</td>
+    <td>{ name }</td>
     <script>
 
         var self = this;

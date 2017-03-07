@@ -21,10 +21,11 @@ require('./t.tag');
                 <thead>
                     <tr>
                         <th>Project Name</th>
+                        <th>Service</th>                        
                     </tr>
                 </thead>
                 <tbody>
-                    <service-row each="{ components }" ></service-row>
+                    <tr data-is="service-row" each="{ components }" ></tr>
                 </tbody>
             </table>
         </div>
