@@ -98,16 +98,6 @@
                                 <% end_with %>
                             <% end_if %>
 
-                            <% loop $Top.Summit.Speakers %>
-                            summit.speakers[{$ID}] =
-                            {
-                                id: {$ID},
-                                name : "{$Name.JS}",
-                                profile_pic : "{$ProfilePhoto(60).JS}",
-                                position : "{$TitleNice.JS}",
-                            };
-                            <% end_loop %>
-
                             <% loop $Top.Summit.Sponsors %>
                             summit.sponsors[{$ID}] =
                             {
@@ -281,8 +271,6 @@
 
                                 summit.events.push(event_{$ID});
                                 summit.dic_events[{$ID}] = event_{$ID};
-
-
                             <% end_if %>
                             <% end_loop %>
                     </script>
@@ -295,3 +283,4 @@
 </div>
 
 $ModuleJS('event-list')
+
