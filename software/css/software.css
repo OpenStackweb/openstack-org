@@ -1,7 +1,3 @@
-/* @override 
-	http://devbranch.openstack.org/software/css/software.css?m=1488944387 */
-
-
 .software-tab-wrapper {
   width: 100%;
   border-bottom: 1px solid #D4DCE5; }
@@ -722,6 +718,38 @@ p.service-section-title {
   	color: grey;	
   	cursor: pointer;
   }
+  
+  .toggle-wrapper {
+  	max-width: 400px;
+  	margin: auto;
+  	text-align: center;
+  	background-color: white;
+  }
+  
+   .toggle-wrapper span {
+   	 padding: 8px;
+   }
+    
+  .toggle {
+  	display: inline-block;
+  	width: 34px;
+  	height: 20px;
+  	background: url(/software/images/icons/toggle-right.png) no-repeat center center;
+  	background-size: 100%;
+  	cursor: pointer;
+  }
+  
+  .tiles {
+  	background: url(/software/images/icons/toggle-left.png) no-repeat center center;
+  	background-size: 100%;
+  }
+  
+  .toggle-wrapper span {
+  	text-transform: uppercase;
+  	color: grey;
+  	display: inline-box;
+  }
+
   
   .core-services-single-full .core-top .core-service-icon {
   font-size: 2em;
