@@ -144,7 +144,7 @@ jQuery(document).ready(function($) {
             //re add rules
             form_validator.settings.ignore = [];
 
-            //if(is_valid){
+            if(is_valid){
                 var location = {
                     city    : $('#'+form_id+'_city').val(),
                     state   : $('#'+form_id+'_state').val(),
@@ -155,7 +155,7 @@ jQuery(document).ready(function($) {
                 $('#'+form_id+'_state').val('');
 
                 addLocation(location);
-            //}
+            }
 
             return false;
         });
