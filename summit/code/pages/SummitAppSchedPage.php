@@ -139,6 +139,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         Requirements::javascript('themes/openstack/javascript/jquery.serialize.js');
         Requirements::javascript('themes/openstack/javascript/jquery.cleanform.js');
         Requirements::javascript('themes/openstack/bower_assets/urijs/src/URI.min.js');
+        Requirements::javascript('themes/openstack/bower_assets/urijs/src/URI.fragmentQuery.js');
         Requirements::javascript('summit/javascript/schedule/install_mobile_app.js');
         Requirements::javascript('summit/javascript/forms/rsvp.form.js');
 
@@ -192,7 +193,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
             array('SummitAppEventPage', 'SummitPage', 'Page'),
             array(
                 'Event'     => $event,
-                'goback'    => $goback,
+                'BackURL'   => $request->requestVar('BackURL'),
                 'Token'     => $token
             ));
     }
@@ -205,6 +206,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
 
         Requirements::block("summit/css/schedule-grid.css");
         Requirements::css("summit/css/summitapp-event.css");
+        Requirements::css("summit/css/summitapp-event-rsvp.css");
         Requirements::javascript("summit/javascript/schedule/event-detail-page.js");
 
         $event     = $this->getSummitEntity($request);
@@ -237,9 +239,19 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
             Session::set(self::EventShareByEmailCountKey, 0);
         }
 
+        if(Director::is_ajax()) {
+            return $this->renderWith(
+                array('SummitAppEventPage_RSVP_AjaxForm'),
+                array(
+                    'Event'     => $event,
+                    'Token'     => $token
+                ));
+        }
+
         return $this->renderWith(
             array('SummitAppEventPage_RSVP', 'SummitPage', 'Page'),
             array(
+                'BackURL'   => $request->requestVar('BackURL'),
                 'Event'     => $event,
                 'Token'     => $token
             ));
@@ -294,8 +306,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         }
 
         $builder        = new RSVPTemplateUIBuilder();
-        $form           = $builder->build($rsvp_template, $rsvp, $event);
-        return $form;
+        return $builder->build($rsvp_template, $rsvp, $event);
     }
 
     /**

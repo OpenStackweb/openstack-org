@@ -28,34 +28,37 @@ final class ScheduleEventViewModelMapper implements IViewModelMapper
         foreach ($schedule as $e) {
 
             $entry = [
-                'id' => intval($e->ID),
-                'title' => $e->Title,
-                'class_name' => $e->ClassName,
-                'abstract' => $e->Abstract,
-                'start_epoch' => strtotime($e->StartDate),
-                'start_datetime' => $e->StartDate,
-                'end_datetime' => $e->EndDate,
-                'start_time' => $e->StartTime,
-                'end_time' => $e->EndTime,
-                'date_nice' => date('D j', strtotime($e->StartDate)),
-                'allow_feedback' => $e->AllowFeedBack,
-                'location_id' => intval($e->LocationID),
-                'type_id' => intval($e->TypeID),
-                'rsvp_link' => $e->RSVPLink,
-                'sponsors_id' => array(),
-                'category_group_ids' => array(),
-                'tags_id' => array(),
-                'own' => is_null($current_member) || !$is_attendee ? false : $current_member->isOnMySchedule($e->ID),
-                'gcal_id' => is_null($current_member) || !$is_attendee ? false : $current_member->getGoogleCalEventId($e->ID),
-                'favorite' => false,
-                'show' => true,
-                'headcount' => intval($e->HeadCount),
-                'summit_id' => intval($summit->ID),
-                'time_zone_id' => $summit->getTimeZoneName(),
+                'id'                 => intval($e->ID),
+                'title'              => trim($e->Title),
+                'class_name'         => $e->ClassName,
+                'abstract'           => $e->Abstract,
+                'start_epoch'        => strtotime($e->StartDate),
+                'start_datetime'     => $e->StartDate,
+                'end_datetime'       => $e->EndDate,
+                'start_time'         => $e->StartTime,
+                'end_time'           => $e->EndTime,
+                'date_nice'          => date('D j', strtotime($e->StartDate)),
+                'allow_feedback'     => $e->AllowFeedBack,
+                'location_id'        => intval($e->LocationID),
+                'type_id'            => intval($e->TypeID),
+                'rsvp_link'          => $e->getRSVPURL(),
+                'has_rsvp'           => $e->hasRSVP(),
+                'rsvp_external'      => $e->isExternalRSVP(),
+                'rsvp_seat_type'     => $e->getCurrentRSVPSubmissionSeatType(),
+                'sponsors_id'        => [],
+                'category_group_ids' => [],
+                'tags_id'            => [],
+                'going'                    => is_null($current_member) || !$is_attendee ? false : $current_member->isOnMySchedule($e->ID),
+                'favorite'                 => is_null($current_member)? false : $current_member->isOnFavorites($e->ID),
+                'gcal_id'                  => is_null($current_member) || !$is_attendee ? false : $current_member->getGoogleCalEventId($e->ID),
+                'show'                     => true,
+                'headcount'                => intval($e->HeadCount),
+                'summit_id'                => intval($summit->ID),
+                'time_zone_id'             => $summit->getTimeZoneName(),
                 'attendees_schedule_count' => $e->AttendeesScheduleCount(),
-                'track_id' => intval($e->CategoryID),
-                'attachment_url' => '',
-                'to_record' => false,
+                'track_id'                 => intval($e->CategoryID),
+                'attachment_url'           => '',
+                'to_record'                => false,
             ];
 
             foreach ($e->Tags() as $t) {
@@ -78,11 +81,11 @@ final class ScheduleEventViewModelMapper implements IViewModelMapper
                     array_push($speakers, intval($s->ID));
                 }
 
-                $entry['speakers_id'] = $speakers;
+                $entry['speakers_id']  = $speakers;
                 $entry['moderator_id'] = intval($e->ModeratorID);
-                $entry['level'] = $e->Level;
-                $entry['status'] = $e->SelectionStatus();
-                $entry['to_record'] = boolval($e->ToRecord);
+                $entry['level']        = $e->Level;
+                $entry['status']       = $e->SelectionStatus();
+                $entry['to_record']    = boolval($e->ToRecord);
             }
 
             if ($e instanceof SummitEventWithFile) {

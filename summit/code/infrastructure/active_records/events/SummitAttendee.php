@@ -145,6 +145,23 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
        return AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'Schedule')->toArray();
     }
 
+
+    /**
+     * @param int $summit_id
+     * @return int[]
+     */
+    public function getScheduleEventIds($summit_id){
+        $res   = [];
+        $query = DB::query("SELECT SummitEventID 
+FROM SummitAttendee_Schedule 
+INNER JOIN SummitEvent ON SummitEvent.ID = SummitAttendee_Schedule.SummitEventID
+WHERE SummitEvent.SummitID = {$summit_id} AND SummitAttendeeID = ".$this->ID);
+        foreach ($query as $record){
+            $res[] = intval($record['SummitEventID']);
+        }
+        return $res;
+    }
+
     /**
      * @param int $event_id
      * @return bool
@@ -182,7 +199,7 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
     {
         AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'Schedule')->remove($summit_event);
 
-        PublisherSubscriberManager::getInstance()->publish(ISummitEntityEvent::RemovedToSchedule,
+        PublisherSubscriberManager::getInstance()->publish(ISummitEntityEvent::RemovedFromSchedule,
             [$this->MemberID, $summit_event]);
     }
 

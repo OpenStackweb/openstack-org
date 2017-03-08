@@ -1,15 +1,15 @@
 <schedule-event>
     <div id="event_{ id }" class="row event-row">
         <div class="col-sm-12">
-            <div class="row main-event-content" style="border-left: 3px solid { eventColor(category_group_ids, type_id) }" data-event-id="{ id }">
-                <div class="event-content">
+            <div class="row main-event-content row-eq-height" style="border-left: 3px solid { eventColor(category_group_ids, type_id) }" data-event-id="{ id }">
+                <div class="event-content col-sm-10 col-xs-10">
                     <div class="row row_location">
                         <div class="col-sm-3 col-time">
                             <i class="fa fa-clock-o icon-clock"></i>
                             <span if={ show_date }>{ date_nice }</span>
                             &nbsp;<span>{ start_time }</span>-<span>{ end_time }</span>
                         </div>
-                        <div class="col-sm-6 col-location">
+                        <div class="col-sm-9 col-location">
                             <div if={ summit.should_show_venues } >
                                 <i class="fa fa-map-marker icon-map"></i>
                                 &nbsp;
@@ -18,16 +18,6 @@
                                 </a>
                                 <span if={ !summit.locations[location_id] }> { locationName(location_id) } </span>
                             </div>
-                        </div>
-                        <div class="col-sm-3 my-schedule-container" if={ parent.summit.current_user !== null } >
-                            <span if={ !own } onclick={ addToMySchedule } title="add to my schedule" class="icon-event-action">
-                                <i class="fa fa-plus-circle icon-foreign-event myschedule-icon" ></i>
-                                My&nbsp;schedule
-                            </span>
-                            <span if={ own } onclick={ removeFromMySchedule } title="remove from my schedule" class="icon-event-action">
-                                <i class="fa fa-check-circle icon-own-event myschedule-icon"></i>
-                                My&nbsp;schedule
-                            </span>
                         </div>
                     </div>
                     <div class="row">
@@ -53,6 +43,25 @@
                         </div>
                     </div>
                 </div>
+                <div id="{ 'event_state_'+id }" class="event-state col-sm-1 col-xs-1" if={ self.summit.current_user != null }>
+                    <i if={ going } class="fa fa-check-circle going-status event-status" aria-hidden="true"></i>
+                    <i if={ favorite } class="fa fa-bookmark favorite-status event-status" aria-hidden="true"></i>
+                </div>
+                <div class="event-actions-container col-sm-1 col-xs-1" id="{ 'event_actions_'+ id }" if={ self.summit.current_user !== null }>
+                    <a class"event-actions-menu" data-target="#" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" title+"event actions">
+                        <span class="caret caret-event-actions"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-event-actions" aria-labelledby="dLabel">
+                       <li if={ !going && has_rsvp && self.summit.current_user.is_attendee } class="rsvp-action event-action"><a data-event-id="{ id }" data-type="rsvp" class="event-action-link {  !going && has_rsvp && rsvp_seat_type == 'FULL' ? 'disabled' : ''}" href="#"><i class="fa fa-check-circle" aria-hidden="true"></i>&nbsp;RSVP</a></li>
+                       <li if={ going && has_rsvp && !rsvp_external && self.summit.current_user.is_attendee } class="unrsvp-action event-action"><a data-event-id="{ id }" data-type="unrsvp" class="event-action-link" href="#"><i class="fa fa-times-circle" aria-hidden="true"></i>&nbsp;unRSVP</a></li>
+                       <li if={ !has_rsvp  && !going  && self.summit.current_user.is_attendee } class="going-action event-action"><a data-event-id="{ id }" data-type="going" class="event-action-link" href="#"><i class="fa fa-check-circle" aria-hidden="true"></i>&nbsp;Schedule</a></li>
+                       <li if={ !has_rsvp  && going && self.summit.current_user.is_attendee } class="not-going-action event-action"><a data-event-id="{ id }" data-type="not-going" class="event-action-link" href="#"><i class="fa fa-times-circle" aria-hidden="true"></i>&nbsp;UnSchedule</a></li>
+                       <li if={ !favorite } class="watch-action event-action"><a data-event-id="{ id }" data-type="watch" class="event-action-link" href="#"><i class="fa fa-bookmark" aria-hidden="true"></i>&nbsp;Watch Later</a></li>
+                       <li if={ favorite } class="unwatch-action event-action"><a data-event-id="{ id }" data-type="unwatch" class="event-action-link" href="#"><i class="fa fa-bookmark-o" aria-hidden="true"></i>&nbsp;Do not Watch Later</a></li>
+                       <li role="separator" class="divider"></li>
+                       <li class="cancel-action event-action"><a data-type="cancel" class="event-action-link" href="#">Cancel</a></li>
+                    </ul>
+               </div>
             </div>
             <div class="row event-details" id="event_details_{ id }" style="display:none;">
             </div>
@@ -69,11 +78,65 @@
     var self                      = this;
 
     this.on('mount', function(){
-    console.log("this.summit.should_show_venues "+this.summit.should_show_venues.should_show_venues);
-    // show event details handler (jquery)
-    $(document).off("click", ".main-event-content").on( "click", ".main-event-content", function(e) {
 
-            if($(e.target).is('.icon-event-action, .myschedule-icon')){
+
+        $(document).off("click", ".event-action-link").on( "click", ".event-action-link", function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                if($(this).hasClass('disabled') || $(this).parent().hasClass('disabled')) return false;
+                var event_id = $(this).data('event-id');
+                $('#event_actions_'+event_id).removeClass('open');
+                var type     = $(this).data('type');
+                var event    = self.summit.dic_events[event_id];
+                switch(type){
+                    case 'going':
+                         self.schedule_api.addEvent2MySchedule(self.summit.id, event.id);
+                         event.going  = self.going = true;
+                    break;
+                    case 'not-going':
+                        self.schedule_api.removeEventFromMySchedule(self.summit.id, event.id);
+                        event.going  = self.going = false;
+                        //check if we are on my schedule view
+                        if(self.current_filter.going){
+                            //fade animation
+                            $('#event_'+event_id).fadeOut({ duration: 1000, queue: false }).slideUp(200);
+                        }
+                    break;
+                    case 'watch':
+                        event.favorite = self.favorite = true;
+                        self.schedule_api.addEvent2MyFavorites(self.summit.id, event.id);
+                    break;
+                    case 'unwatch':
+                       event.favorite = self.favorite = false;
+                       self.schedule_api.removeEventFromMyFavorites(self.summit.id, event.id);
+                    break;
+                    case 'rsvp':
+                        event.going  = self.going = true;
+                        if(event.rsvp_external){
+                            self.schedule_api.addEvent2MySchedule(self.summit.id, event.id);
+                        }
+                        else
+                        {
+                            // our custom one, just navigate
+                            var url = new URI(event.rsvp_link);
+                            url.addQuery('BackURL',window.location)
+                            window.location = url.toString();
+                        }
+                    break;
+                    case 'unrsvp':
+                        event.going  = self.going = false;
+                        self.schedule_api.unRSVPEvent(self.summit.id, event.id);
+                    break;
+                }
+
+                self.update();
+                return false;
+            });
+
+            $(document).off("click", ".main-event-content").on( "click", ".main-event-content", function(e) {
+
+            if($(e.target).is('.icon-event-action, .event-action-link')){
                 return false;
             }
 
@@ -112,6 +175,15 @@
         });
     });
 
+    this.schedule_api.on('addedEvent2MySchedule', function(event_id){
+        var event    = self.summit.dic_events[event_id];
+        if(event.has_rsvp && event.rsvp_external){
+            var url      = new URI(event.rsvp_link);
+            url.addQuery('BackURL', window.location)
+            window.location = url.toString();
+        }
+    });
+
     locationName(location_id) {
         var location = self.summit.locations[location_id];
         if (typeof location == 'undefined') return 'TBA';
@@ -142,26 +214,6 @@
             return self.summit.tracks[track_id].name;
         }
         return ' ';
-    }
-
-    //EVENTS
-
-    addToMySchedule(e) {
-        e.preventUpdate = true;
-        this.own        = true;
-        e.item.own      = true;
-        self.schedule_api.addEvent2MySchedule(self.summit.id, e.item.id);
-        self.update();
-        self.parent.applyFilters();
-    }
-
-    removeFromMySchedule(e) {
-        e.preventUpdate = true;
-        this.own        = false;
-        e.item.own      = false;
-        self.schedule_api.removeEventFromMySchedule(self.summit.id, e.item.id);
-        self.update();
-        self.parent.applyFilters();
     }
 
     </script>

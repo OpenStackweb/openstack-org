@@ -70,7 +70,6 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi
      */
     private $full_schedule_view_model_mapper;
 
-
     /**
      * SummitAppScheduleApi constructor.
      * @param ISummitRepository $summit_repository
@@ -97,8 +96,7 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi
     )
     {
         parent::__construct();
-        $this->securityToken                 = new SecurityToken();
-
+        $this->securityToken                     = new SecurityToken();
         $this->summit_repository                 = $summit_repository;
         $this->summitevent_repository            = $summitevent_repository;
         $this->summitpresentation_repository     = $summitpresentation_repository;
@@ -140,16 +138,17 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi
         'GET export/ics'                          => 'ExportEventToICS',
         'GET empty_spots'                         => 'getEmptySpots',
         'GET full'                                => 'getFullSchedule',
+        'PUT $EventID!/favorite'                  => 'AddToFavorites',
+        'DELETE $EventID!/favorite'               => 'RemoveFromFavorites',
+        'DELETE $EventID!/rsvp'                   => 'deleteRSVP',
         'PUT $EventID!/rsvp/$RsvpID!'             => 'updateRSVP',
         'PUT $EventID!/synch/google/$CalEventID!' => 'synchEvent',
         'PUT $EventID!'                           => 'addToSchedule',
         'DELETE $EventID!/synch/google'           => 'unSynchEvent',
-        'DELETE $EventID!/rsvp/$RsvpID!'          => 'deleteRSVP',
         'DELETE $EventID!'                        => 'removeFromSchedule',
         'POST $EventID!/feedback'                 => 'addFeedback',
         'POST $EventID!/share'                    => 'shareEmail',
         'POST $EventID!/rsvp'                     => 'rsvpEvent',
-
     ];
 
     static $allowed_actions = [
@@ -169,6 +168,8 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi
         'updateRSVP',
         'deleteRSVP',
         'ExportEventToICS',
+        'AddToFavorites',
+        'RemoveFromFavorites',
     ];
 
     /**
@@ -230,7 +231,30 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi
     }
 
     /**
-     * @CustomAnnotation\CachedMethod(lifetime=900, format="JSON", conditions={@CustomAnnotation\CacheMethodConditionMemberNotLogged()})
+     * @param SS_HTTPRequest $request
+     * @return string
+     */
+    protected function getCacheKey(SS_HTTPRequest $request)
+    {
+        $key = parent::getCacheKey($request);
+
+        if(Member::currentUserID()){
+            $member    = Member::currentUser();
+            $summit_id = intval($request->param('SUMMIT_ID'));
+            $attendee  = $member->getSummitAttendee($summit_id);
+            if($attendee) {
+                $schedule_events = $attendee->getScheduleEventIds($summit_id);
+                $key .= '-sched-' . implode('.', $schedule_events);
+            }
+
+            $favorites_events = $member->getFavoritesEventIds($summit_id);
+            $key .= '-fav-' . implode('.', $favorites_events);
+        }
+        return $key;
+    }
+
+    /**
+     * @CustomAnnotation\CachedMethod(lifetime=900, format="JSON")
      * @param SS_HTTPRequest $request
      * @return SS_HTTPResponse
      */
@@ -765,7 +789,7 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi
             $data      = $this->getJsonRequest();
             $event_id  = (int)$this->request->param('EventID');
             $summit_id = (int)$this->request->param('SUMMIT_ID');
-            $rsvp_id = (int)$this->request->param('RsvpID');
+            $rsvp_id   = (int)$this->request->param('RsvpID');
             $member_id = Member::CurrentUserID();
 
             if ($member_id <= 0)
@@ -793,9 +817,11 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi
             $data['summit_id'] = $summit->ID;
             $data['event_id']  = $event_id;
             $data['member_id'] = $member_id;
-            $data['rsvp_id'] = $rsvp_id;
+            $data['rsvp_id']   = $rsvp_id;
 
-            return $this->updated($this->schedule_manager->updateRSVP($data, new SummitAttendeeRSVPEmailSender));
+            $this->schedule_manager->updateRSVP($data, new SummitAttendeeRSVPEmailSender);
+
+            return $this->updated();
 
         } catch (EntityValidationException $ex1) {
             SS_Log::log($ex1, SS_Log::WARN);
@@ -816,16 +842,12 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi
     {
         try {
 
-            $data      = $this->getJsonRequest();
             $event_id  = (int)$this->request->param('EventID');
             $summit_id = (int)$this->request->param('SUMMIT_ID');
-            $rsvp_id = (int)$this->request->param('RsvpID');
             $member_id = Member::CurrentUserID();
 
             if ($member_id <= 0)
                 return $this->forbiddenError();
-
-            if (!$data) return $this->serverError();
 
             if (intval($summit_id) > 0)
                 $summit = $this->summit_repository->getById(intval($summit_id));
@@ -841,17 +863,17 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi
 
             if (is_null($event))
                 return $this->notFound('event not found!');
-            else if ($event->getSummit()->getIdentifier() != intval($summit_id))
+
+            if ($event->getSummit()->getIdentifier() != intval($summit_id))
                 return $this->notFound('event not found in current summit');
 
             $data['summit_id'] = $summit->ID;
             $data['event_id']  = $event_id;
             $data['member_id'] = $member_id;
-            $data['rsvp_id'] = $rsvp_id;
 
-            $this->deleted($this->schedule_manager->deleteRSVP($data));
+            $this->schedule_manager->deleteRSVP($data);
 
-            return $event->getCurrentRSVPSubmissionSeatType();
+            return $this->deleted();
 
         } catch (EntityValidationException $ex1) {
             SS_Log::log($ex1, SS_Log::WARN);
@@ -926,4 +948,67 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi
         }
     }
 
+    function AddToFavorites(SS_HTTPRequest $request){
+        try {
+            $summit_id  = (int)$this->request->param('SUMMIT_ID');
+            $event_id   = (int)$this->request->param('EventID');
+            $member     = Member::currentUser();
+
+            if (is_null($member)) return $this->permissionFailure();
+
+            if (intval($summit_id) > 0)
+                $summit = $this->summit_repository->getById(intval($summit_id));
+
+            if (strtolower($summit_id) === 'current')
+                $summit = Summit::ActiveSummit();
+
+            if (is_null($summit))
+                return $this->notFound('summit not found!');
+
+            $this->schedule_manager->addEventToFavorites(Member::currentUserID(), $event_id);
+
+            return $this->ok();
+        } catch (EntityValidationException $ex1) {
+            SS_Log::log($ex1, SS_Log::WARN);
+            return $this->validationError($ex1->getMessages());
+        } catch (NotFoundEntityException $ex2) {
+            SS_Log::log($ex2, SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        } catch (Exception $ex) {
+            SS_Log::log($ex, SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    function RemoveFromFavorites(SS_HTTPRequest $request){
+        try {
+            $summit_id = (int)$this->request->param('SUMMIT_ID');
+            $event_id = (int)$this->request->param('EventID');
+            $member = Member::currentUser();
+
+            if (is_null($member)) return $this->permissionFailure();
+
+            if (intval($summit_id) > 0)
+                $summit = $this->summit_repository->getById(intval($summit_id));
+
+            if (strtolower($summit_id) === 'current')
+                $summit = Summit::ActiveSummit();
+
+            if (is_null($summit))
+                return $this->notFound('summit not found!');
+
+            $this->schedule_manager->removeEventFromFavorites(Member::currentUserID(), $event_id);
+
+            return $this->ok();
+        } catch (EntityValidationException $ex1) {
+            SS_Log::log($ex1, SS_Log::WARN);
+            return $this->validationError($ex1->getMessages());
+        } catch (NotFoundEntityException $ex2) {
+            SS_Log::log($ex2, SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        } catch (Exception $ex) {
+            SS_Log::log($ex, SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
 }

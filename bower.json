@@ -37,7 +37,7 @@
     "animate.css": "3.4.0",
     "pure-templates": "*",
     "clockpicker": "0.0.7",
-    "urijs": "1.17.0",
+    "urijs": "1.18.9",
     "moment": "2.11.0",
     "bootstrap3-typeahead": "~4.0.0",
     "typeahead.js": "0.11.1",

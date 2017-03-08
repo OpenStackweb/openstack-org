@@ -49,6 +49,11 @@ final class ScheduleManager implements IScheduleManager
     private $rsvp_repository;
 
     /**
+     * @var IMemberRepository
+     */
+    private $member_repository;
+
+    /**
      * @var ITransactionManager
      */
     private $tx_manager;
@@ -61,6 +66,7 @@ final class ScheduleManager implements IScheduleManager
      * @param IEventFeedbackFactory $eventfeedback_factory
      * @param ISummitAttendeeRepository $attendee_repository
      * @param IRSVPRepository $rsvp_repository
+     * @param IMemberRepository $member_repository
      * @param ITransactionManager $tx_manager
      */
     public function __construct(
@@ -70,16 +76,18 @@ final class ScheduleManager implements IScheduleManager
         IEventFeedbackFactory $eventfeedback_factory,
         ISummitAttendeeRepository $attendee_repository,
         IRSVPRepository $rsvp_repository,
+        IMemberRepository $member_repository,
         ITransactionManager $tx_manager
     )
     {
-        $this->summitevent_repository = $summitevent_repository;
+        $this->summitevent_repository        = $summitevent_repository;
         $this->summitpresentation_repository = $summitpresentation_repository;
-        $this->eventfeedback_repository = $eventfeedback_repository;
-        $this->eventfeedback_factory = $eventfeedback_factory;
-        $this->attendee_repository = $attendee_repository;
-        $this->rsvp_repository = $rsvp_repository;
-        $this->tx_manager = $tx_manager;
+        $this->eventfeedback_repository      = $eventfeedback_repository;
+        $this->eventfeedback_factory         = $eventfeedback_factory;
+        $this->attendee_repository           = $attendee_repository;
+        $this->rsvp_repository               = $rsvp_repository;
+        $this->member_repository             = $member_repository;
+        $this->tx_manager                    = $tx_manager;
     }
 
 
@@ -120,7 +128,6 @@ final class ScheduleManager implements IScheduleManager
             return $attendee;
         });
     }
-
 
     /**
      * @param int $member_id
@@ -379,8 +386,8 @@ final class ScheduleManager implements IScheduleManager
 
             $member_id = intval($data['member_id']);
             $summit_id = intval($data['summit_id']);
-            $event_id = intval($data['event_id']);
-            $rsvp_id = intval($data['rsvp_id']);
+            $event_id  = intval($data['event_id']);
+            $rsvp_id   = intval($data['rsvp_id']);
             $seat_type = $data['seat_type'];
 
             if (empty($seat_type))
@@ -460,14 +467,12 @@ final class ScheduleManager implements IScheduleManager
     public function deleteRSVP(array $data)
     {
 
-        return $this->tx_manager->transaction(function () use (
-            $data
-        ) {
+        return $this->tx_manager->transaction(function () use ($data)
+        {
 
             $member_id = intval($data['member_id']);
             $summit_id = intval($data['summit_id']);
-            $event_id = intval($data['event_id']);
-            $rsvp_id = intval($data['rsvp_id']);
+            $event_id  = intval($data['event_id']);
 
             $summit_attendee = $this->attendee_repository->getByMemberAndSummit($member_id, $summit_id);
 
@@ -475,13 +480,14 @@ final class ScheduleManager implements IScheduleManager
                 throw new EntityValidationException(sprintf("there is no any attendee for member %s and summit %s", $member_id, $summit_id));
             }
 
-            $rsvp = $this->rsvp_repository->getById($rsvp_id);
+            $rsvp = $this->rsvp_repository->getByEventAndAttendee($event_id, $summit_attendee->getIdentifier());
 
             if (!$rsvp || $summit_attendee->ID != $rsvp->SubmittedBy()->ID || $rsvp->Event()->ID != $event_id) {
-                throw new EntityValidationException(sprintf("RSVP %s does not correspond to your user.", $rsvp_id));
+                throw new EntityValidationException("RSVP does not correspond to your user.");
             }
 
             $this->rsvp_repository->delete($rsvp);
+            $this->removeEventFromSchedule($member_id, $event_id);
 
             return true;
         });
@@ -519,5 +525,70 @@ final class ScheduleManager implements IScheduleManager
             return true;
         }
         return true;
+    }
+
+    /**
+     * @param int $member_id
+     * @param int $event_id
+     * @return mixed
+     */
+    public function addEventToFavorites($member_id, $event_id)
+    {
+        return $this->tx_manager->transaction(function () use ($member_id, $event_id) {
+
+            $event = $this->summitevent_repository->getById($event_id);
+            if (!$event) {
+                throw new NotFoundEntityException('Event', sprintf('id %s', $event_id));
+            }
+
+            if (!self::allowToSee($event))
+                throw new NotFoundEntityException('Event', sprintf('id %s', $event_id));
+
+            $member = $this->member_repository->getById($member_id);
+
+            if (!$member) {
+                throw new NotFoundEntityException('Attendee', sprintf('id %s', $event_id));
+            }
+
+            if ($member->isOnFavorites($event_id)) {
+                throw new EntityValidationException('Event already exist on member favorites');
+            }
+
+            $member->addToFavorites($event);
+
+            return true;
+        });
+    }
+
+    /**
+     * @param int $member_id
+     * @param int $event_id
+     * @return mixed
+     */
+    public function removeEventFromFavorites($member_id, $event_id)
+    {
+        return $this->tx_manager->transaction(function () use (
+            $member_id,
+            $event_id
+        ) {
+
+            $event = $this->summitevent_repository->getById($event_id);
+            if (!$event) {
+                throw new NotFoundEntityException('Event', sprintf('id %s', $event_id));
+            }
+
+            $member = $this->member_repository->getById($member_id);
+
+            if (!$member) {
+                throw new NotFoundEntityException('Member', sprintf('id %s', $member_id));
+            }
+            if (!$member->isOnFavorites($event_id)) {
+                throw new NotFoundEntityException('Event does not belong to member favorites', sprintf('id %s', $event_id));
+            }
+
+            $member->removeFromFavorites($event);
+
+            return true;
+        });
     }
 }

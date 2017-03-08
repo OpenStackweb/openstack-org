@@ -1,3 +1,3 @@
-<% include SummitEventDetails Event=$Event, Token=$token, goback=$goback, ShowMySchedule=1 %>
-$ModuleJS('schedule')
+<% include SummitEventDetails Event=$Event, Token=$token, BackURL=$BackURL %>
+$ModuleJS('event-action-buttons')
 $ModuleJS('share-buttons')

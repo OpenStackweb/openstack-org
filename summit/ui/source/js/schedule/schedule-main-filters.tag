@@ -10,21 +10,20 @@
             </div>
         </div>
         <div class="col-md-7 col-xs-12">
-
             <div class="col-view-all-schedule">
-                <form action="{ base_url+'mine/' }" method="POST" if={ mine }>
+                <form action="{ base_url+'mine/' }" method="POST" if={ going }>
                     <input type="hidden" name="goback" value="1" />
                     <button type="submit" class="btn btn-default view-all-schedule">View&nbsp;/&nbsp;Print&nbsp;My&nbsp;Schedule</button>
                 </form>
-                <form action="{ base_url+'full/' }" method="POST" if={ !mine }>
+                <form action="{ base_url+'full/' }" method="POST" if={ !going }>
                     <input type="hidden" name="goback" value="1" />
                     <button type="submit" class="btn btn-default view-all-schedule">View&nbsp;/&nbsp;Print&nbsp;Full&nbsp;Schedule</button>
                 </form>
             </div>
-            <div class="col-select-all-calendar-own" if={ mine }>
+            <div class="col-select-all-calendar-own" if={ going }>
                 <input type="checkbox" id="chk_select_all" title="select/unselect all events"/>
             </div>
-            <div class="col-sync-calendar-own" if={ mine }>
+            <div class="col-sync-calendar-own" if={ going }>
                 <div class="btn-group">
                     <button type="button" class="btn btn-default">Sync to Calendar</button>
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -40,8 +39,13 @@
                 </div>
             </div>
             <div class="col-switch-schedule">
-                <button if={ summit.current_user !== null } type="button" class="btn btn-primary pull-right switch_schedule full">
-                    <span class="glyphicon glyphicon-calendar"></span>&nbsp;<span class="content">Switch&nbsp;to&nbsp;My&nbsp;Schedule</span>
+                <button if={ summit.current_user !== null && summit.current_user.is_attendee } type="button" class="btn btn-primary pull-right switch_schedule full">
+                    <span class="glyphicon glyphicon-calendar"></span>&nbsp;<span class="content">My&nbsp;Schedule</span>
+                </button>
+            </div>
+            <div class="col-switch-watchlist">
+                <button if={ summit.current_user !== null } type="button" class="btn btn-primary pull-right switch_favorites full">
+                    <span class="glyphicon glyphicon-bookmark"></span>&nbsp;<span class="content">Watch&nbsp;List</span>
                 </button>
             </div>
         </div>
@@ -88,7 +92,8 @@
         this.calendar_synch   = opts.calendar_synch;
         this.atomic_filtering = false;
         this.base_url         = opts.base_url;
-        this.mine             = false;
+        this.going            = false;
+        this.favorites        = false;
         var self              = this;
 
         this.on('mount', function(){
@@ -186,13 +191,35 @@
             $('.switch_schedule').click(function(e){
                 if ($(this).hasClass('full'))
                 {
-                    self.mine = true;
-                    $('.content', this).text('Switch to Full Schedule');
+                    self.going = true;
+                    $('.content', this).text('Full Schedule');
+                    $('.switch_favorites').hide();
                 }
                 else
                 {
-                    self.mine = false;
-                    $('.content', this).text('Switch to My Schedule');
+                    self.going = false;
+                    $('.content', this).text('My Schedule');
+                    $('.switch_favorites').show();
+                }
+                $(this).toggleClass('full');
+                if(!self.atomic_filtering)
+                    self.doFilter();
+
+                self.update();
+            });
+
+            $('.switch_favorites').click(function(e){
+                if ($(this).hasClass('full'))
+                {
+                    self.favorites = true;
+                    $('.content', this).text('Full Schedule');
+                    $('.switch_schedule').hide();
+                }
+                else
+                {
+                    self.favorites = false;
+                    $('.content', this).text('Watch Later');
+                    $('.switch_schedule').show();
                 }
                 $(this).toggleClass('full');
                 if(!self.atomic_filtering)
@@ -252,7 +279,9 @@
         });
 
         doFilter() {
-            var own     = this.summit.current_user !== null && $('.switch_schedule').hasClass('full') === false;
+            var going     = this.summit.current_user !== null && self.going;
+            var favorites = this.summit.current_user !== null && self.favorites;
+
             var filters =
             {
                 track_groups : $('#ddl_track_groups').val(),
@@ -260,7 +289,8 @@
                 tracks       : $('#ddl_tracks').val(),
                 tags         : $('#ddl_tags').val(),
                 levels       : $('#ddl_levels').val(),
-                own          : own
+                going        : going,
+                favorites    : favorites
             };
 
             $(window).url_fragment('setParam','track_groups', filters.track_groups);

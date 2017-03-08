@@ -49,7 +49,7 @@ schedule_api.addEvent2MySchedule = function (summit_id, event_id)
         timeout:10000,
         contentType: "application/json; charset=utf-8",
         success: function (data) {
-
+            schedule_api.trigger('addedEvent2MySchedule', event_id);
         }
     }).fail(function (jqXHR, textStatus, errorThrown) {
         var http_code = jqXHR.status;
@@ -57,6 +57,10 @@ schedule_api.addEvent2MySchedule = function (summit_id, event_id)
             // user lost its session
             sweetAlert("Oops...", 'you are not logged in!', "error");
             location.reload();
+        }
+        if(http_code === 412){
+            // user lost its session
+            sweetAlert("Oops...", 'Event already belongs to my schedule', "error");
         }
     });
 }
@@ -78,6 +82,84 @@ schedule_api.removeEventFromMySchedule = function (summit_id, event_id)
             // user lost its session
             sweetAlert("Oops...", 'you are not logged in!', "error");
             location.reload();
+        }
+        if(http_code === 412){
+            // user lost its session
+            sweetAlert("Oops...", 'Event does not belongs to my schedule', "error");
+        }
+    });
+}
+
+schedule_api.unRSVPEvent = function (summit_id, event_id) {
+    var url = api_base_url.replace('@SUMMIT_ID', summit_id)+'/'+event_id+'/rsvp';
+    $.ajax({
+        type: 'DELETE',
+        url:  url,
+        timeout:10000,
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+
+        }
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        var http_code = jqXHR.status;
+        if(http_code === 401){
+            // user lost its session
+            sweetAlert("Oops...", 'you are not logged in!', "error");
+            location.reload();
+        }
+        if(http_code === 412){
+            // user lost its session
+            sweetAlert("Oops...", 'Event does not belongs to my schedule', "error");
+        }
+    });
+}
+
+schedule_api.addEvent2MyFavorites = function (summit_id, event_id)
+{
+    var url = api_base_url.replace('@SUMMIT_ID', summit_id)+'/'+event_id+'/favorite';
+    $.ajax({
+        type: 'PUT',
+        url:  url,
+        timeout:10000,
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            schedule_api.trigger('addedEvent2MySchedule', event_id);
+        }
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        var http_code = jqXHR.status;
+        if(http_code === 401){
+            // user lost its session
+            sweetAlert("Oops...", 'you are not logged in!', "error");
+            location.reload();
+        }
+        if(http_code === 412){
+            // user lost its session
+            sweetAlert("Oops...", 'Event already belongs to favorites', "error");
+        }
+    });
+}
+
+schedule_api.removeEventFromMyFavorites = function (summit_id, event_id)
+{
+    var url = api_base_url.replace('@SUMMIT_ID', summit_id)+'/'+event_id+'/favorite';
+    $.ajax({
+        type: 'DELETE',
+        url:  url,
+        timeout:10000,
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+
+        }
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        var http_code = jqXHR.status;
+        if(http_code === 401){
+            // user lost its session
+            sweetAlert("Oops...", 'you are not logged in!', "error");
+            location.reload();
+        }
+        if(http_code === 412){
+            // user lost its session
+            sweetAlert("Oops...", 'Event does not belongs to favorites', "error");
         }
     });
 }

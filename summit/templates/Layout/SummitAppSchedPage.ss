@@ -31,9 +31,9 @@
             schedule_default_day: '{$Summit.ScheduleDefaultDate}',
         };
 
-        <% if CurrentMember && CurrentMember.isAttendee($Summit.ID) %>
+        <% if CurrentMember %>
             <% with CurrentMember %>
-            summit.current_user = { id: {$ID}, first_name: '{$FirstName.JS}', last_name: '{$Surname.JS}' };
+            summit.current_user = { id: {$ID}, first_name: '{$FirstName.JS}', last_name: '{$Surname.JS}', is_attendee: <% if CurrentMember.isAttendee($Top.Summit.ID) %>true<% else %>false<% end_if %> };
             <% end_with %>
         <% end_if %>
 

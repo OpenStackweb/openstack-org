@@ -14,9 +14,11 @@
  **/
 interface ISummitEntityEvent
 {
-    const UpdatedEntity     = 'updated_summit_entity';
-    const InsertedEntity    = 'inserted_summit_entity';
-    const DeletedEntity     = 'deleted_summit_entity';
-    const AddedToSchedule   = 'added_to_schedule';
-    const RemovedToSchedule = 'removed_to_schedule';
+    const UpdatedEntity        = 'updated_summit_entity';
+    const InsertedEntity       = 'inserted_summit_entity';
+    const DeletedEntity        = 'deleted_summit_entity';
+    const AddedToSchedule      = 'added_to_schedule';
+    const RemovedFromSchedule    = 'removed_from_schedule';
+    const AddedToFavorites     = 'added_to_favorites';
+    const RemovedFromFavorites = 'removed_from_favorites';
 }

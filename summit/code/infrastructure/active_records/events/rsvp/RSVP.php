@@ -141,6 +141,8 @@ final class RSVP extends DataObject implements IRSVP
         foreach($this->Answers() as $answer){
             $answer->delete();
         }
+        // remove from my schedule
+        $this->SubmittedBy()->removeFromSchedule($this->Event());
     }
 
     public function getCMSFields()
