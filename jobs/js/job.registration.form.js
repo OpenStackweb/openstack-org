@@ -22,7 +22,7 @@ function addLocation(location){
         '<span class="location_country"></span>'+
         '<input class="location_country" type="hidden" id="location_country[]" name="location_country[]"></td>' +
         '<td>' +
-        '<button class="delete_location">Remove</button></td></tr>');
+        '<a class="delete_location"><i class="fa fa-times" aria-hidden="true"></i></a></td></tr>');
 
     var directives = {
         'span.location_city' : 'city',
@@ -144,7 +144,7 @@ jQuery(document).ready(function($) {
             //re add rules
             form_validator.settings.ignore = [];
 
-            if(is_valid){
+            //if(is_valid){
                 var location = {
                     city    : $('#'+form_id+'_city').val(),
                     state   : $('#'+form_id+'_state').val(),
@@ -155,7 +155,7 @@ jQuery(document).ready(function($) {
                 $('#'+form_id+'_state').val('');
 
                 addLocation(location);
-            }
+            //}
 
             return false;
         });

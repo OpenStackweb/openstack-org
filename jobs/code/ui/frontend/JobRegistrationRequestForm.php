@@ -17,6 +17,8 @@
 final class JobRegistrationRequestForm extends HoneyPotForm {
 
 	function __construct($controller, $name, $use_actions = true) {
+        Requirements::css('themes/openstack/bower_assets/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
+
 		$fields = new FieldList;
 		//point of contact
 		$fields->push($point_of_contact_name = new TextField('point_of_contact_name','Name'));
@@ -83,13 +85,6 @@ final class JobRegistrationRequestForm extends HoneyPotForm {
         $this->addExtraClass('input-form');
 		parent::__construct($controller, $name, $fields, $actions, $validator);
 	}
-
-	/*function forTemplate() {
-		return $this->renderWith(array(
-			$this->class,
-			'Form'
-		));
-	}*/
 
 	function submit($data, $form) {
 		// do stuff here

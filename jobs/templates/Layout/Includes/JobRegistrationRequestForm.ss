@@ -97,6 +97,7 @@
                     $Fields.dataFieldByName(location_type)
                 </div>
             </div>
+
             <table id="locations_table">
                 <thead>
                     <tr>
@@ -113,7 +114,7 @@
                         <td> $Fields.dataFieldByName(city)</td>
                         <td> $Fields.dataFieldByName(state)</td>
                         <td> $Fields.dataFieldByName(country)</td>
-                        <td><button id="add_location"  name="add_location">Add</button></td>
+                        <td><button id="add_location" class="btn btn-default" name="add_location">Add</button></td>
                     </tr>
                 </tfoot>
             </table>
@@ -146,6 +147,6 @@
         theme_advanced_buttons2: "",
         theme_advanced_buttons3: "",
         height: "250px",
-        width: "800px"
+        width: "100%"
     });
 </script>

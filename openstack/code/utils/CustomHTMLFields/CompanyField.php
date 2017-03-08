@@ -23,8 +23,8 @@ class CompanyField extends CompositeField
         $this->title = $title;
         $children    = new FieldList();
 
-        $source      = Company::get()->sort('Name')->map('ID', 'Name')->toArray();
-        $source['0'] = "-- New Company --";
+        $source = array( '0' => ' -- New Company -- ');
+        $source = array_merge($source, Company::get()->sort('Name')->map('ID', 'Name')->toArray());
 
         $children->add($ddl = new DropdownField($name . '_id', $title, $source));
         $ddl->setEmptyString('-- Select Your Company --');
@@ -46,5 +46,12 @@ class CompanyField extends CompositeField
         jQuery(document).ready(function($) {
             $('.'+'{$control_css_class}').company_field();
         });");
+
+        Requirements::customCSS(<<<CSS
+            #company {
+                margin-top: 10px;
+            }
+CSS
+        );
     }
 }

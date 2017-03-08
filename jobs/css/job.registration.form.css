@@ -20,10 +20,14 @@ span.message.bad {
 
 #point_of_contact_container{
     background-color:#dcdcdc;
-    padding: 5px;
+    padding: 20px;
     -webkit-border-radius:10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
+}
+
+#point_of_contact_container h2 {
+    margin-top: 0;
 }
 
 .section_container {
@@ -34,4 +38,35 @@ span.message.bad {
 
 #locations_table thead th {
     background: none repeat scroll 0 0 #FFFFFF;
+}
+
+.job-registration-form .field {
+    margin-top: 10px;
+}
+
+#locations_table {
+    margin-top: 10px;
+}
+
+#locations_table th, td { padding: 5px; }
+
+#locations_table .chosen-container-single .chosen-single {
+    height: 34px;
+}
+
+#locations_table tfoot td{
+    padding-top: 15px;
+}
+
+.delete_location {
+    cursor: pointer;
+    color: black;
+}
+
+.delete_location:hover {
+    color: #da3b3b !important;
+}
+
+#locations_table .chosen-container-single .chosen-single span {
+    line-height: 31px;
 }

@@ -113,7 +113,7 @@ final class JobFactory implements IJobFactory {
 		// company name logic
         $job->CompanyID              = intval($request->CompanyID);
         if($job->CompanyID == 0)
-            $job->CompanyName = intval($request->CompanyName);
+            $job->CompanyName = $request->CompanyName;
 
 		$job->ExpirationDate         = $request->ExpirationDate;
 		$job->Description            = $request->Description;
@@ -123,6 +123,8 @@ final class JobFactory implements IJobFactory {
 		$job->LocationType           = $request->LocationType;
         $job->IsCOANeeded            = $request->IsCOANeeded;
         $job->TypeID                 = $request->TypeID;
+        $job->RegistrationRequestID  = $request->ID;
+        
         //locations
 		foreach($request->getLocations() as $location)
 			$job->addLocation($location);
