@@ -678,7 +678,7 @@ p.service-section-title {
 
 .core-services-single-full .core-top .core-title {
   background-repeat: no-repeat;
-  background-position: center 10px;
+  background-position: center 15px;
   text-align: center;
   padding-top: 120px;
   text-transform: uppercase;
@@ -725,22 +725,18 @@ p.service-section-title {
   	text-align: center;
   	background-color: white;
   }
-  
-   .toggle-wrapper span {
-   	 padding: 8px;
-   }
-    
+      
   .toggle {
   	display: inline-block;
   	width: 34px;
-  	height: 20px;
-  	background: url(/software/images/icons/toggle-right.png) no-repeat center center;
+  	height: 25px;
+  	background: url(/software/images/icons/toggle-right.png) no-repeat center bottom;
   	background-size: 100%;
   	cursor: pointer;
   }
   
   .tiles {
-  	background: url(/software/images/icons/toggle-left.png) no-repeat center center;
+  	background: url(/software/images/icons/toggle-left.png) no-repeat center bottom;
   	background-size: 100%;
   }
   
@@ -748,6 +744,9 @@ p.service-section-title {
   	text-transform: uppercase;
   	color: grey;
   	display: inline-box;
+  	cursor: pointer;
+  	padding: 5px;
+  	padding-top: 0px;
   }
 
   
