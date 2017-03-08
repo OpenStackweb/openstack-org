@@ -5,7 +5,7 @@ require('./service-group.tag')
 
     <div class="toggle-wrapper" onclick={ toggleTileMode }>
         <span>Tiles View</span>
-        <div class="toggle {tiles: tileMode}">
+        <div class="toggle {tiles: tileMode}"></div>
         <span>List View</span>
     </div>
 

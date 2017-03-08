@@ -1,3 +1,6 @@
+/* @override 
+	http://devbranch.openstack.org/software/css/software.css?m=1488944387 */
+
 
 .software-tab-wrapper {
   width: 100%;
@@ -702,7 +705,8 @@ p.service-section-title {
   .project-table-code-name {
   	font-weight: bold;
   	text-transform: uppercase;
-  	width: 25%;
+  	width: 20%;
+  	cursor: pointer;  	
   }
 
 	.project-table-code-name span {
@@ -715,7 +719,8 @@ p.service-section-title {
 	}
   
   .project-table-description {
-  	color: #1C64B5;	
+  	color: grey;	
+  	cursor: pointer;
   }
   
   .core-services-single-full .core-top .core-service-icon {
@@ -1461,98 +1466,4 @@ h3.header-center {
     background-color: #EDFDFF;
     margin-right: 10px;
   }
-  
-  /* TOGGLE SWITCH */
-  
-  
-.toggle-wrapper {
-    text-align: center;
-    width: auto;
-    display: inline-block;
-    margin: 20px 0 50px;
-    padding: 0;
-    position: relative; }
-  .toggle-wrapper:before, .toggle-wrapper:after {
-      position: absolute;
-      content: 'Option';
-      top: 5px;
-      text-transform: uppercase;
-      font-size: 1.1em;
-      color: #7B8692;
-      white-space: nowrap; }
-  .toggle-wrapper:before {
-      margin-right: 20px;
-      right: 100%;
-      text-align: right; }
-  .toggle-wrapper:after {
-      margin-left: 20px;
-      left: 100%;
-      text-align: left; }
-  .toggle-wrapper.cost:before {
-      content: 'Cash Price'; }
-  .toggle-wrapper.cost:after {
-      content: 'Finance'; }
-  .toggle-wrapper.cost .tgl-light + .tgl-btn {
-      background: #7ED321; }
-  .toggle-wrapper.cost .tgl-light:checked + .tgl-btn {
-      background: #7ED321; }
-  .toggle-wrapper.savings:before {
-      content: 'Residential'; }
-  .toggle-wrapper.savings:after {
-      content: 'Commercial'; }
-  .toggle-wrapper.savings .tgl-light + .tgl-btn {
-      background: #6A3293; }
-  .toggle-wrapper.savings .tgl-light:checked + .tgl-btn {
-      background: #6A3293; }
-  .toggle-wrapper li {
-      text-align: center;
-      list-style: none;
-      margin: 0; }
-  
-  .tgl {
-    display: none; }
-    .tgl, .tgl:after, .tgl:before,
-    .tgl *,
-    .tgl *:after,
-    .tgl *:before,
-    .tgl + .tgl-btn {
-      box-sizing: border-box; }
-      .tgl::-moz-selection, .tgl:after::-moz-selection, .tgl:before::-moz-selection,
-      .tgl *::-moz-selection,
-      .tgl *:after::-moz-selection,
-      .tgl *:before::-moz-selection,
-      .tgl + .tgl-btn::-moz-selection {
-        background: none; }
-      .tgl::selection, .tgl:after::selection, .tgl:before::selection,
-      .tgl *::selection,
-      .tgl *:after::selection,
-      .tgl *:before::selection,
-      .tgl + .tgl-btn::selection {
-        background: none; }
-    .tgl + .tgl-btn {
-      outline: 0;
-      display: block;
-      width: 4em;
-      height: 2em;
-      position: relative;
-      cursor: pointer;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none; }
-      .tgl + .tgl-btn:after, .tgl + .tgl-btn:before {
-        position: relative;
-        display: block;
-        content: "";
-        width: 50%;
-        height: 100%; }
-      .tgl + .tgl-btn:after {
-        left: 0; }
-      .tgl + .tgl-btn:before {
-        display: none; }
-    .tgl:checked + .tgl-btn:after {
-      left: 50%; }
-      
-      
-  
   
