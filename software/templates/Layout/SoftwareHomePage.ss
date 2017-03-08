@@ -48,20 +48,75 @@
         <hr/>
 
         <div class="row">
+            <div class="starter-pack">
+                <h3 class="header-center">Popular Project Set</h3>
+                <ul>
+                    <li class="nova">
+                        <a href="/software/releases/ocata/components/nova">
+                            <h4>Nova</h4>
+                            <p>Compute</p>
+                        </a>
+                    </li>
+                    <li class="neutron">
+                        <a href="/software/releases/ocata/components/neutron">
+                            <h4>Neutron</h4>
+                            <p>Networking</p>
+                        </a>
+                    </li>                     
+                    <li class="swift">
+                        <a href="/software/releases/ocata/components/cinder">
+                            <h4>Cinder</h4>
+                            <p>Block Storage</p>
+                        </a>
+                    </li>
+                    <li class="glance">
+                        <a href="/software/releases/ocata/components/glance">
+                            <h4>Glance</h4>
+                            <p>Image Service</p>
+                        </a>
+                    </li>
+                    <li class="keystone">
+                        <a href="/software/releases/ocata/components/keystone">
+                            <h4>Keystone</h4>
+                            <p>Identity Service</p>
+                        </a>
+                    </li>          
+                    <li class="cinder">
+                        <a href="/software/releases/ocata/components/cinder">
+                            <h4>Cinder</h4>
+                            <p>Block Storage</p>
+                        </a>
+                    </li>                                                                                                      
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+
             <div class="workloads-section">
 
             <h3 class="header-center">Sample OpenStack Configurations</h3>
 
                 <ul>
-                    <li> <a href="#"> <img class="workloads-icon" src="/software/images/icons/sample-config.svg" onerror="this.onerror=null; this.src=/software/images/icons/sample-config.png" alt="OpenStack Cloud Software"> Web Applications</a></li>
-                    <li> <a href="#"> <img class="workloads-icon" src="/software/images/icons/sample-config.svg" onerror="this.onerror=null; this.src=/software/images/icons/sample-config.png" alt="OpenStack Cloud Software"> eCommerce</a></li>
-                    <li> <a href="#"> <img class="workloads-icon" src="/software/images/icons/sample-config.svg" onerror="this.onerror=null; this.src=/software/images/icons/sample-config.png" alt="OpenStack Cloud Software"> Video Processing and Content Delivery</a></li>
-                    <li> <a href="#"> <img class="workloads-icon" src="/software/images/icons/sample-config.svg" onerror="this.onerror=null; this.src=/software/images/icons/sample-config.png" alt="OpenStack Cloud Software"> High Throughput Computing</a></li>
-                    <li> <a href="#"> <img class="workloads-icon" src="/software/images/icons/sample-config.svg" onerror="this.onerror=null; this.src=/software/images/icons/sample-config.png" alt="OpenStack Cloud Software"> Container Optimized</a></li>
-                    <li> <a href="#"> <img class="workloads-icon" src="/software/images/icons/sample-config.svg" onerror="this.onerror=null; this.src=/software/images/icons/sample-config.png" alt="OpenStack Cloud Software"> Web Hosting</a></li>
-                    <li> <a href="#"> <img class="workloads-icon" src="/software/images/icons/sample-config.svg" onerror="this.onerror=null; this.src=/software/images/icons/sample-config.png" alt="OpenStack Cloud Software"> Public Cloud</a></li>
-                    <li> <a href="#"> <img class="workloads-icon" src="/software/images/icons/sample-config.svg" onerror="this.onerror=null; this.src=/software/images/icons/sample-config.png" alt="OpenStack Cloud Software"> Compute Starter Kit</a></li>
-                    <li> <a href="#"> <img class="workloads-icon" src="/software/images/icons/sample-config.svg" onerror="this.onerror=null; this.src=/software/images/icons/sample-config.png" alt="OpenStack Cloud Software"> DBaaS</a></li>
+                    <li> <a href="/software/sample-configs#web-applications"> <img class="workloads-icon" src="/software/images/icons/sample-config.svg" onerror="this.onerror=null; this.src=/software/images/icons/sample-config.png"> Web Applications</a></li>    
+
+                    <li> <a href="/software/sample-configs#big-data"> <img class="workloads-icon" src="/software/images/icons/sample-config.svg" onerror="this.onerror=null; this.src=/software/images/icons/sample-config.png"> Big Data</a></li>
+
+                    <li> <a href="/software/sample-configs#ecommerce"> <img class="workloads-icon" src="/software/images/icons/sample-config.svg" onerror="this.onerror=null; this.src=/software/images/icons/sample-config.png"> eCommerce</a></li>
+
+                    <li> <a href="/software/sample-configs#video-processing-and-content-delivery"> <img class="workloads-icon" src="/software/images/icons/sample-config.svg" onerror="this.onerror=null; this.src=/software/images/icons/sample-config.png"> Video Processing and Content Delivery</a></li>
+
+                    <li> <a href="/software/sample-configs#high-throughput-computing"> <img class="workloads-icon" src="/software/images/icons/sample-config.svg" onerror="this.onerror=null; this.src=/software/images/icons/sample-config.png"> High Throughput Computing</a></li>
+
+                    <li> <a href="/software/sample-configs#container-optimized"> <img class="workloads-icon" src="/software/images/icons/sample-config.svg" onerror="this.onerror=null; this.src=/software/images/icons/sample-config.png"> Container Optimized</a></li>
+                    
+                    <li> <a href="/software/sample-configs#web-hosting"> <img class="workloads-icon" src="/software/images/icons/sample-config.svg" onerror="this.onerror=null; this.src=/software/images/icons/sample-config.png"> Web Hosting</a></li>
+
+                    <li> <a href="/software/sample-configs#public-cloud"> <img class="workloads-icon" src="/software/images/icons/sample-config.svg" onerror="this.onerror=null; this.src=/software/images/icons/sample-config.png"> Public Cloud</a></li>
+
+                    <li> <a href="/software/sample-configs#compute-starter-kit"> <img class="workloads-icon" src="/software/images/icons/sample-config.svg" onerror="this.onerror=null; this.src=/software/images/icons/sample-config.png"> Compute Starter Kit</a></li>
+
+                    <li> <a href="/software/sample-configs#dbaas"> <img class="workloads-icon" src="/software/images/icons/sample-config.svg" onerror="this.onerror=null; this.src=/software/images/icons/sample-config.png"> DBaaS</a></li>
                 </ul>
 
             </div>
