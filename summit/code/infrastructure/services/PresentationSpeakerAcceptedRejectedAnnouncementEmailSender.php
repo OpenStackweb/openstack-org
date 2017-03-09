@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-final class phpPresentationSpeakerAcceptedRejectedAnnouncementEmailSender implements IMessageSenderService
+final class PresentationSpeakerAcceptedRejectedAnnouncementEmailSender implements IMessageSenderService
 {
 
     /**

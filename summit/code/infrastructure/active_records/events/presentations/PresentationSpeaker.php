@@ -371,19 +371,40 @@ class PresentationSpeaker extends DataObject
      */
     public function PublishedPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker)
     {
+       return $this->PublishedPresentationsByType($summit_id, $role);
+    }
+
+    public function PublishedRegularPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker){
+        return $this->PublishedPresentationsByType($summit_id, $role, [IPresentationType::Keynotes, IPresentationType::Panel, IPresentationType::Presentation]);
+    }
+
+    public function PublishedLightningPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker){
+        return $this->PublishedPresentationsByType($summit_id, $role, [IPresentationType::LightingTalks]);
+    }
+
+    public function PublishedPresentationsByType(
+        $summit_id   = null,
+        $role        = IPresentationSpeaker::RoleSpeaker,
+        array $types_slugs = [IPresentationType::Keynotes, IPresentationType::Panel, IPresentationType::Presentation, IPresentationType::LightingTalks]
+    ){
         $summit = !$summit_id ? Summit::get_active() : Summit::get()->byID($summit_id);
         if (!$summit) return false;
+
+        $types = PresentationType::get()->filter(['Type' =>  $types_slugs ,'SummitID'  => $summit->ID ] );
+        if($types->count() == 0 ) return false;
 
         if($role == IPresentationSpeaker::RoleSpeaker)
             return $this->Presentations()->filter([
                 'SummitID'  => $summit->ID,
-                'Published' => 1
+                'Published' => 1,
+                'TypeID'      => $types->getIDList()
             ]);
 
         return Presentation::get()->filter([
-            'SummitID'  => $summit->ID,
-            'Published' => 1,
-            'ModeratorID' => $this->ID
+            'SummitID'    => $summit->ID,
+            'Published'   => 1,
+            'ModeratorID' => $this->ID,
+            'TypeID'        => $types->getIDList()
         ]);
     }
 

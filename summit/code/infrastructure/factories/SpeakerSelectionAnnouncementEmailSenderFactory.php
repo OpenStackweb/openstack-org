@@ -18,7 +18,7 @@ final class SpeakerSelectionAnnouncementEmailSenderFactory implements ISpeakerSe
      * @param ISummit $summit
      * @param IPresentationSpeaker $speaker
      * @param string $role
-     * @return PresentationSpeakerAcceptedAnnouncementEmailSender
+     * @return IMessageSenderService
      * @throws Exception
      */
     public function build(ISummit $summit, IPresentationSpeaker $speaker, $role = IPresentationSpeaker::RoleSpeaker)

@@ -70,11 +70,11 @@ final class SpeakerEmailAnnouncementSenderManager
     public function sendSpeakersSelectionAnnouncementBySummit(ISummit $current_summit, $batch_size)
     {
 
-        $speaker_repository = $this->speaker_repository;
-        $sender_factory = $this->sender_factory;
+        $speaker_repository    = $this->speaker_repository;
+        $sender_factory        = $this->sender_factory;
         $promo_code_repository = $this->promo_code_repository;
-        $batch_repository = $this->batch_repository;
-        $batch_task_factory = $this->batch_task_factory;
+        $batch_repository      = $this->batch_repository;
+        $batch_task_factory    = $this->batch_task_factory;
 
         return $this->tx_manager->transaction(function () use (
             $current_summit,
@@ -87,9 +87,9 @@ final class SpeakerEmailAnnouncementSenderManager
         ) {
             try {
 
-                $page = 1;
+                $page      = 1;
                 $page_size = $batch_size;
-                $task = $batch_repository->findByName(self::TaskName . '_' . $current_summit->getIdentifier());
+                $task      = $batch_repository->findByName(self::TaskName . '_' . $current_summit->getIdentifier());
 
                 if (is_null($task)) {
                     //create task
@@ -148,8 +148,8 @@ final class SpeakerEmailAnnouncementSenderManager
                     $params = array
                     (
                         'Speaker' => $speaker,
-                        'Summit' => $current_summit,
-                        "Role" => IPresentationSpeaker::RoleSpeaker
+                        'Summit'  => $current_summit,
+                        "Role"    => IPresentationSpeaker::RoleSpeaker
                     );
 
                     if (!is_null($code)) {

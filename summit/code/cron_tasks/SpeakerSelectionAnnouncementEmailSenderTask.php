@@ -23,8 +23,8 @@ final class SpeakerSelectionAnnouncementEmailSenderTask extends CronTask
         try
         {
             $batch_size = 100;
-            $init_time = time();
-            $summit    = null;
+            $init_time  = time();
+            $summit     = null;
 
             if (isset($_GET['batch_size']))
             {
