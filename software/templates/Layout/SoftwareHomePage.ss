@@ -64,9 +64,9 @@
                         </a>
                     </li>                     
                     <li class="swift">
-                        <a href="/software/releases/ocata/components/cinder">
-                            <h4>Cinder</h4>
-                            <p>Block Storage</p>
+                        <a href="/software/releases/ocata/components/swift">
+                            <h4>Swift</h4>
+                            <p>Object Storage</p>
                         </a>
                     </li>
                     <li class="glance">
