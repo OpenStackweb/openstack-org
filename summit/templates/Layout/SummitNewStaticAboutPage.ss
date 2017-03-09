@@ -32,7 +32,7 @@
             <li>
                 <a href="#openstackcoa">
                     <i class="fa fa-graduation-cap"></i>
-                    OpenStack Academy
+                    COA in Boston
                 </a>
             </li>
             
