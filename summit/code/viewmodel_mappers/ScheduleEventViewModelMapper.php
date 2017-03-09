@@ -65,10 +65,11 @@ final class ScheduleEventViewModelMapper implements IViewModelMapper
                 array_push($entry['tags_id'], intval($t->ID));
             }
 
-            if ($e instanceof Presentation && $e->Category()->exists()) {
-                foreach ($e->Category()->getCategoryGroups() as $group) {
-                    array_push($entry['category_group_ids'], intval($group->ID));
-                }
+            $entry['category_group_ids']  = [];
+            if ($e->Category()) {
+                foreach ($e->Category()->getCategoryGroups() as $group)
+                    $entry['category_group_ids'][] = $group->ID;
+
             }
 
             foreach ($e->Sponsors() as $e) {

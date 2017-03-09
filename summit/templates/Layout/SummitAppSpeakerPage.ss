@@ -223,6 +223,13 @@
                                                 <% end_if %>
                                                 show : true,
                                                 attachment_url : "<% if $Attachment() %>{$Attachment().getUrl().JS}<% end_if %>",
+                                                category_group_ids:[
+                                                    <% if Category && Category.CategoryGroups %>
+                                                        <% loop Category.CategoryGroups %>
+                                                            {$ID},
+                                                        <% end_loop %>
+                                                    <% end_if %>
+                                                ],
                                             };
 
                                     summit.events.push(event_{$ID});
@@ -267,6 +274,13 @@
                                     <% end_if %>
                                     show : true,
                                     attachment_url : "<% if $Attachment() %>{$Attachment().getUrl().JS}<% end_if %>",
+                                    category_group_ids:[
+                                        <% if Category && Category.CategoryGroups %>
+                                            <% loop Category.CategoryGroups %>
+                                                {$ID},
+                                            <% end_loop %>
+                                        <% end_if %>
+                                    ],
                                 };
 
                                 summit.events.push(event_{$ID});
