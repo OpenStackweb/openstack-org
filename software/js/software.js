@@ -142,6 +142,14 @@
             return false;
         });
 
+        // prevent submiting form on enter key press
+        $('#all-projects-search').keydown(function(event){
+            if(event.keyCode == 13) {
+                event.preventDefault();
+                return false;
+            }
+        });
+
     });
 
   // End of closure.
