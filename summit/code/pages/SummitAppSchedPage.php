@@ -193,7 +193,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
             array('SummitAppEventPage', 'SummitPage', 'Page'),
             array(
                 'Event'     => $event,
-                'BackURL'   => $request->requestVar('BackURL'),
+                'BackURL'   => $request->requestVar('BackURL') ? $request->requestVar('BackURL') : '#',
                 'Token'     => $token
             ));
     }
@@ -251,7 +251,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         return $this->renderWith(
             array('SummitAppEventPage_RSVP', 'SummitPage', 'Page'),
             array(
-                'BackURL'   => $request->requestVar('BackURL'),
+                'BackURL'   => $request->requestVar('BackURL') ? $request->requestVar('BackURL') : '#',
                 'Event'     => $event,
                 'Token'     => $token
             ));

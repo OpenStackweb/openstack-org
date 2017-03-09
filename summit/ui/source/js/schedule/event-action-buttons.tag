@@ -146,8 +146,8 @@
         else{
             // open modal
             var modal       = $('#rsvpModal');
-            var rsvpFormUrl = window.location+'/rsvp';
-            $('#rsvpModalBody').load(rsvpFormUrl,function(result){
+            var uri         = new URI( window.location);
+            $('#rsvpModalBody').load(uri.segment('rsvp').toString(),function(result){
 
             });
             modal.modal('show');

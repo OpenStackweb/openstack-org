@@ -144,37 +144,39 @@
                     case 'going':
                          self.schedule_api.addEvent2MySchedule(self.summit.id, event.id);
                          event.going  = true;
-                         self.updateMenu(event);
                          self.updateState(event);
                     break;
                     case 'not-going':
                         self.schedule_api.removeEventFromMySchedule(self.summit.id, event.id);
                         event.going  = false;
-                        self.updateMenu(event);
-                        self.updateState(event);
+
                         //check if we are on my schedule view
                         if(self.current_filter.going){
                             //fade animation
                             $('#event_'+event_id).fadeOut({ duration: 1000, queue: false }).slideUp(200);
                         }
+                        else
+                             self.updateState(event);
                     break;
                     case 'watch':
                         self.schedule_api.addEvent2MyFavorites(self.summit.id, event.id);
                         event.favorite  = true;
-                        self.updateMenu(event);
                         self.updateState(event);
                     break;
                     case 'unwatch':
                        self.schedule_api.removeEventFromMyFavorites(self.summit.id, event.id);
                        event.favorite  = false;
-                       self.updateMenu(event);
-                       self.updateState(event);
+                       if(self.current_filter.favorites){
+                            //fade animation
+                            $('#event_'+event_id).fadeOut({ duration: 1000, queue: false }).slideUp(200);
+                       }
+                       else
+                            self.updateState(event);
                     break;
                     case 'rsvp':
                         event.going  = true;
                         if(event.rsvp_external){
                             self.schedule_api.addEvent2MySchedule(self.summit.id, event.id);
-                            self.updateMenu(event);
                             self.updateState(event);
                         }
                         else
@@ -186,13 +188,11 @@
                             url.addQuery('BackURL', window.location);
                             window.location = url.toString();
                         }
-                        self.updateMenu(event);
                         self.updateState(event);
                     break;
                     case 'unrsvp':
                        event.going  = false;
                        self.schedule_api.unRSVPEvent(self.summit.id, event.id);
-                       self.updateMenu(event);
                        self.updateState(event);
                     break;
                 }
@@ -310,7 +310,7 @@
 
         this.schedule_api.on('addedEvent2MySchedule', function(event_id){
               var event    = self.dic_events[event_id];
-              if(event.has_rsvp && rsvp_external){
+              if(event.has_rsvp && event.rsvp_external){
                   var url      = new URI(event.rsvp_link);
                   url.addQuery('BackURL',window.location)
                   window.location = url.toString();
@@ -322,10 +322,11 @@
             self.day_selected = data.day_selected;
             self.events       = data.events;
 
-            var actions_container = self.summit.current_user !== null ? '<a class"event-actions-menu" data-target="#" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" title+"event actions">'+
+            var actions_container = self.summit.current_user !== null ?
+            '<a class="event-actions-menu" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" title="event actions">'+
             '<span class="caret caret-event-actions"></span>'+
             '</a>'+
-            '<ul class="dropdown-menu dropdown-menu-event-actions" aria-labelledby="dLabel">'+
+            '<ul class="dropdown-menu dropdown-menu-event-actions">'+
             '<li class="rsvp-action event-action"><a data-type="rsvp" class="event-action-link" href="#"><i class="fa fa-check-circle" aria-hidden="true"></i>&nbsp;RSVP</a></li>'+
             '<li class="unrsvp-action event-action"><a data-type="unrsvp" class="event-action-link" href="#"><i class="fa fa-times-circle" aria-hidden="true"></i>&nbsp;unRSVP</a></li>'+
             '<li class="going-action event-action"><a data-type="going" class="event-action-link" href="#"><i class="fa fa-check-circle" aria-hidden="true"></i>&nbsp;Schedule</a></li>'+
@@ -460,29 +461,13 @@
                    self.dic_events[item.id] = item;
                    return 'event_actions_'+item.id;
                 };
+                 event_directives['div.event-actions-container@data-event-id'] = function(arg){
+                                   return arg.item.id;
+                                };
+                event_directives['a.event-actions-menu@id'] = function(arg){ return 'event_action_menu_'+arg.item.id; }
+                event_directives['ul.dropdown-menu@aria-labelledby'] = function(arg){ return 'event_action_menu_'+arg.item.id; }
                 event_directives['a.event-action-link@data-event-id']     = function(arg){ return arg.item.id; };
-                event_directives['li.going-action@class+']                = function(arg){
-                            if(!self.summit.current_user.is_attendee) return " hide";
-                            if(arg.item.has_rsvp ) return " hide";
-                            return arg.item.going ? " hide":" show"; };
-                event_directives['li.not-going-action@class+']            = function(arg){
-                            if(!self.summit.current_user.is_attendee) return " hide";
-                            if(arg.item.has_rsvp ) return " hide";
-                            return arg.item.going  ? " show":" hide"; };
-                event_directives['li.rsvp-action@class+']            = function(arg){
-                                                                           if(!self.summit.current_user.is_attendee) return " hide";
-                                                                           if(arg.item.has_rsvp && !arg.item.going && arg.item.rsvp_seat_type == 'FULL') return " disabled"
-                                                                           return arg.item.has_rsvp && !arg.item.going? " show": " hide";
-                                                                       };
-                event_directives['li.unrsvp-action@class+']   = function(arg){
-                                                                        if(!self.summit.current_user.is_attendee) return " hide";
-                                                                        return arg.item.has_rsvp && arg.item.going ? " show": " hide";
-                                                              };
-                event_directives['li.watch-action@class+']                = function(arg){ return arg.item.favorite ? " hide":" show"; };
-                event_directives['li.unwatch-action@class+']              = function(arg){ return arg.item.favorite ? " show":" hide"; };
                 event_directives['.event-state@id']                       = function(arg){ return 'event_state_'+arg.item.id; };
-                event_directives['i.going-status@class+']                 = function(arg){ return arg.item.going ?    " show":" hide"; };
-                event_directives['i.favorite-status@class+']              = function(arg){ return !arg.item.going && arg.item.favorite ? " show":" hide"; };
                 // GOOGLE CALENDAR SYNC
                 event_directives['i.sync-icon@title']                     = function(arg){ return arg.item.gcal_id != ''  && arg.item.gcal_id != null ? 'Syncronized':'Unsyncronized'; };
                 event_directives['i.sync-icon@class+']                    = function(arg){ return arg.item.gcal_id != ''  && arg.item.gcal_id != null ? ' icon-sync-event':' icon-unsync-event'; };
@@ -506,6 +491,13 @@
             $('#events-inner-container').html(html);
             self.scrollToTime();
             self.applyFilters();
+
+            $('.event-actions-container').on('show.bs.dropdown', function (e) {
+               var event_id = $(this).data('event-id');
+               var event    = self.dic_events[event_id];
+               self.updateMenu(event);
+            });
+
             window.setTimeout(function(){
                 var eventId   = $(window).url_fragment('getParam','eventid');
                 if(eventId != null){
@@ -526,37 +518,74 @@
 
         updateMenu(event){
             var menu = $('#event_actions_'+event.id);
+            $('li.rsvp-action', menu).hide();
+            $('li.unrsvp-action', menu).hide();
+            $('li.not-going-action', menu).hide();
+            $('li.going-action', menu).hide();
+            $('li.watch-action', menu).hide();
+            $('li.unwatch-action', menu).hide();
 
-            if(self.summit.current_user.is_attendee){
-                // going opt
-                $('li.going-action', menu).removeClass(!event.has_rsvp && event.going ? 'show' : 'hide');
-                $('li.going-action', menu).addClass(!event.has_rsvp && event.going ? 'hide' : 'show');
-                // not going opt
-                $('li.not-going-action', menu).removeClass(!event.has_rsvp && event.going ? 'hide' : 'show');
-                $('li.not-going-action', menu).addClass(!event.has_rsvp && event.going ? 'show' : 'hide');
-                // rsvp
-                $('li.rsvp-action', menu).removeClass(event.has_rsvp && !event.going ? 'hide' : 'show');
-                $('li.rsvp-action', menu).addClass(event.has_rsvp && !event.going ? 'show' : 'hide');
-                // un rsvp ( only our custom system)
-                $('li.unrsvp-action', menu).removeClass(event.has_rsvp && !event.rsvp_external && event.going ? 'hide' : 'show');
-                $('li.unrsvp-action', menu).addClass(event.has_rsvp && !event.rsvp_external && event.going ? 'show' : 'hide');
-
+            if(!self.current_filter.favorites && self.summit.current_user.is_attendee){
+                if(!event.has_rsvp){
+                    if( event.going ){
+                        $('li.not-going-action', menu).show();
+                    }
+                    else{
+                        $('li.going-action', menu).show();
+                    }
+                }
+                else{
+                    // RSVP
+                    if( ! event.going ){
+                        $('li.rsvp-action', menu).show();
+                        if(event.rsvp_seat_type == 'FULL')
+                            $('li.rsvp-action', menu).addClass('disabled');
+                        else
+                            $('li.rsvp-action', menu).removeClass('disabled');
+                    }
+                    else{
+                         if(!event.rsvp_external)
+                            $('li.unrsvp-action', menu).show();
+                    }
+                }
             }
 
-            $('li.watch-action', menu).removeClass(event.favorite ? 'show': 'hide');
-            $('li.watch-action', menu).addClass(event.favorite ? 'hide': 'show');
-            $('li.unwatch-action', menu).removeClass(event.favorite ? 'hide' : 'show');
-            $('li.unwatch-action', menu).addClass(event.favorite ? 'show' : 'hide');
+            if(event.favorite){
+                $('li.unwatch-action', menu).show();
+            }
+            else{
+                $('li.watch-action', menu).show();
+            }
+
         }
 
         updateState(event){
-            var state = $('#event_state_'+event.id);
-            if(self.summit.current_user.is_attendee){
-                $('i.going-status', state).removeClass(event.going ? 'hide' : 'show');
-                $('i.going-status', state).addClass(event.going ? 'show' : 'hide');
+            var state = $('#event_state_' + event.id);
+            $('i.favorite-status', state).css('display','none');
+            $('i.going-status', state).css('display','none');
+            if(self.summit.current_user && self.summit.current_user.is_attendee){
+                if(event.going)
+                    $('i.going-status', state).css('display','');
             }
-            $('i.favorite-status', state).removeClass(!event.going && event.favorite ? 'hide' : 'show');
-            $('i.favorite-status', state).addClass(!event.going && event.favorite ? 'show' : 'hide');
+            if(!event.going && event.favorite){
+                $('i.favorite-status', state).css('display','');
+            }
+        }
+
+        showOnlyFavoriteState(event){
+             var state = $('#event_state_' + event.id);
+             if(event.favorite){
+                $('i.favorite-status', state).css('display','');
+                $('i.going-status', state).css('display','none');
+             }
+        }
+
+        showOnlyGoingState(event){
+            var state = $('#event_state_' + event.id);
+            if(event.going){
+                $('i.favorite-status', state).css('display','none');
+                $('i.going-status', state).css('display','');
+            }
         }
 
         isFilterEmpty() {
@@ -607,9 +636,9 @@
             else
                 $('.synch-container').hide();
 
-            if(!self.isFilterEmpty()){
                 for(var e of self.events){
                     var show = true;
+                    self.updateState(e);
                     //track groups
                     if(!self.isTrackGroupsFilterEmpty())
                         show &= e.hasOwnProperty('track_id') ? self.current_filter.track_groups.some(function(v) { return self.summit.category_groups[parseInt(v)].tracks.indexOf(parseInt(e.track_id)) != -1; }) : false;
@@ -631,13 +660,18 @@
                         show &= e.tags_id.some(function(v) { return self.current_filter.tags.indexOf(v.toString()) != -1; });
                     if(!show){ $('#event_'+e.id).hide(); continue;}
                     //my schedule
-                    if(self.current_filter.going)
+                    if(self.current_filter.going){
                         show &= e.going;
+                        if(e.going) self.showOnlyGoingState(e);
+                    }
                     if(!show){ $('#event_'+e.id).hide(); continue;}
 
                     //my favorites
-                    if(self.current_filter.favorites)
+                    if(self.current_filter.favorites){
+                        // favorites view
                         show &= e.favorite;
+                        if(e.favorite) self.showOnlyFavoriteState(e);
+                    }
                     if(!show){ $('#event_'+e.id).hide(); continue;}
 
                     $('#event_'+e.id).show();
@@ -649,8 +683,6 @@
                 } else {
                     $('#no_events_msg').hide();
                 }
-            }
-
         }
 
         scrollToTime() {

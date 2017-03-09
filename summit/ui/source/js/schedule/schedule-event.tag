@@ -45,21 +45,21 @@
                 </div>
                 <div id="{ 'event_state_'+id }" class="event-state col-sm-1 col-xs-1" if={ self.summit.current_user != null }>
                     <i if={ going } class="fa fa-check-circle going-status event-status" aria-hidden="true"></i>
-                    <i if={ favorite } class="fa fa-bookmark favorite-status event-status" aria-hidden="true"></i>
+                    <i if={ !going && favorite } class="fa fa-bookmark favorite-status event-status" aria-hidden="true"></i>
                 </div>
                 <div class="event-actions-container col-sm-1 col-xs-1" id="{ 'event_actions_'+ id }" if={ self.summit.current_user !== null }>
                     <a class"event-actions-menu" data-target="#" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" title+"event actions">
                         <span class="caret caret-event-actions"></span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-event-actions" aria-labelledby="dLabel">
-                       <li if={ !going && has_rsvp && self.summit.current_user.is_attendee } class="rsvp-action event-action"><a data-event-id="{ id }" data-type="rsvp" class="event-action-link {  !going && has_rsvp && rsvp_seat_type == 'FULL' ? 'disabled' : ''}" href="#"><i class="fa fa-check-circle" aria-hidden="true"></i>&nbsp;RSVP</a></li>
-                       <li if={ going && has_rsvp && !rsvp_external && self.summit.current_user.is_attendee } class="unrsvp-action event-action"><a data-event-id="{ id }" data-type="unrsvp" class="event-action-link" href="#"><i class="fa fa-times-circle" aria-hidden="true"></i>&nbsp;unRSVP</a></li>
-                       <li if={ !has_rsvp  && !going  && self.summit.current_user.is_attendee } class="going-action event-action"><a data-event-id="{ id }" data-type="going" class="event-action-link" href="#"><i class="fa fa-check-circle" aria-hidden="true"></i>&nbsp;Schedule</a></li>
-                       <li if={ !has_rsvp  && going && self.summit.current_user.is_attendee } class="not-going-action event-action"><a data-event-id="{ id }" data-type="not-going" class="event-action-link" href="#"><i class="fa fa-times-circle" aria-hidden="true"></i>&nbsp;UnSchedule</a></li>
-                       <li if={ !favorite } class="watch-action event-action"><a data-event-id="{ id }" data-type="watch" class="event-action-link" href="#"><i class="fa fa-bookmark" aria-hidden="true"></i>&nbsp;Watch Later</a></li>
-                       <li if={ favorite } class="unwatch-action event-action"><a data-event-id="{ id }" data-type="unwatch" class="event-action-link" href="#"><i class="fa fa-bookmark-o" aria-hidden="true"></i>&nbsp;Do not Watch Later</a></li>
+                       <li if={ !going && has_rsvp && self.summit.current_user.is_attendee } class="rsvp-action event-action"><a onclick={ onMenuItemSelected } data-event-id="{ id }" data-type="rsvp" class="event-action-link {  !going && has_rsvp && rsvp_seat_type == 'FULL' ? 'disabled' : ''}" href="#"><i class="fa fa-check-circle" aria-hidden="true"></i>&nbsp;RSVP</a></li>
+                       <li if={ going && has_rsvp && !rsvp_external && self.summit.current_user.is_attendee } class="unrsvp-action event-action"><a onclick={ onMenuItemSelected } data-event-id="{ id }" data-type="unrsvp" class="event-action-link" href="#"><i class="fa fa-times-circle" aria-hidden="true"></i>&nbsp;unRSVP</a></li>
+                       <li if={ !has_rsvp  && !going  && self.summit.current_user.is_attendee } class="going-action event-action"><a onclick={ onMenuItemSelected } data-event-id="{ id }" data-type="going" class="event-action-link" href="#"><i class="fa fa-check-circle" aria-hidden="true"></i>&nbsp;Schedule</a></li>
+                       <li if={ !has_rsvp  && going && self.summit.current_user.is_attendee } class="not-going-action event-action"><a onclick={ onMenuItemSelected } data-event-id="{ id }" data-type="not-going" class="event-action-link" href="#"><i class="fa fa-times-circle" aria-hidden="true"></i>&nbsp;UnSchedule</a></li>
+                       <li if={ !favorite } class="watch-action event-action"><a onclick={ onMenuItemSelected } data-event-id="{ id }" data-type="watch" class="event-action-link" href="#"><i class="fa fa-bookmark" aria-hidden="true"></i>&nbsp;Watch Later</a></li>
+                       <li if={ favorite } class="unwatch-action event-action"><a onclick={ onMenuItemSelected } data-event-id="{ id }" data-type="unwatch" class="event-action-link" href="#"><i class="fa fa-bookmark-o" aria-hidden="true"></i>&nbsp;Do not Watch Later</a></li>
                        <li role="separator" class="divider"></li>
-                       <li class="cancel-action event-action"><a data-type="cancel" class="event-action-link" href="#">Cancel</a></li>
+                       <li class="cancel-action event-action"><a onclick={ onMenuItemSelected } data-event-id="{ id }" data-type="cancel" class="event-action-link" href="#">Cancel</a></li>
                     </ul>
                </div>
             </div>
@@ -78,61 +78,6 @@
     var self                      = this;
 
     this.on('mount', function(){
-
-
-        $(document).off("click", ".event-action-link").on( "click", ".event-action-link", function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-
-                if($(this).hasClass('disabled') || $(this).parent().hasClass('disabled')) return false;
-                var event_id = $(this).data('event-id');
-                $('#event_actions_'+event_id).removeClass('open');
-                var type     = $(this).data('type');
-                var event    = self.summit.dic_events[event_id];
-                switch(type){
-                    case 'going':
-                         self.schedule_api.addEvent2MySchedule(self.summit.id, event.id);
-                         event.going  = self.going = true;
-                    break;
-                    case 'not-going':
-                        self.schedule_api.removeEventFromMySchedule(self.summit.id, event.id);
-                        event.going  = self.going = false;
-                        //check if we are on my schedule view
-                        if(self.current_filter.going){
-                            //fade animation
-                            $('#event_'+event_id).fadeOut({ duration: 1000, queue: false }).slideUp(200);
-                        }
-                    break;
-                    case 'watch':
-                        event.favorite = self.favorite = true;
-                        self.schedule_api.addEvent2MyFavorites(self.summit.id, event.id);
-                    break;
-                    case 'unwatch':
-                       event.favorite = self.favorite = false;
-                       self.schedule_api.removeEventFromMyFavorites(self.summit.id, event.id);
-                    break;
-                    case 'rsvp':
-                        event.going  = self.going = true;
-                        if(event.rsvp_external){
-                            self.schedule_api.addEvent2MySchedule(self.summit.id, event.id);
-                        }
-                        else
-                        {
-                            // our custom one, just navigate
-                            var url = new URI(event.rsvp_link);
-                            url.addQuery('BackURL',window.location)
-                            window.location = url.toString();
-                        }
-                    break;
-                    case 'unrsvp':
-                        event.going  = self.going = false;
-                        self.schedule_api.unRSVPEvent(self.summit.id, event.id);
-                    break;
-                }
-
-                self.update();
-                return false;
-            });
 
             $(document).off("click", ".main-event-content").on( "click", ".main-event-content", function(e) {
 
@@ -183,6 +128,52 @@
             window.location = url.toString();
         }
     });
+
+      onMenuItemSelected(e){
+            var item     = $(e.currentTarget);
+            if(item.hasClass('disabled') || item.parent().hasClass('disabled')) return false;
+
+            var event_id = item.data('event-id');
+            $('#event_actions_'+event_id).removeClass('open');
+            var type     = item.data('type');
+            var event    = self.summit.dic_events[event_id];
+            switch(type){
+                case 'going':
+                self.schedule_api.addEvent2MySchedule(self.summit.id, event.id);
+                event.going = self.going = true;
+                break;
+                case 'not-going':
+                event.going = self.going = false;
+                self.schedule_api.removeEventFromMySchedule(self.summit.id, event.id);
+                break;
+                case 'watch':
+                self.schedule_api.addEvent2MyFavorites(self.summit.id, event.id);
+                event.favorite = self.favorite = true;
+                break;
+                case 'unwatch':
+                self.schedule_api.removeEventFromMyFavorites(self.summit.id, event.id);
+                event.favorite = self.favorite = false;
+                break;
+                case 'rsvp':
+                event.going = self.going = true;
+                if(event.rsvp_external){
+                self.schedule_api.addEvent2MySchedule(self.summit.id, event.id);
+                }
+                else
+                {
+                    // our custom one, just navigate
+                    var url = new URI(event.rsvp_link);
+                    url.addQuery('BackURL',window.location)
+                    window.location = url.toString();
+                }
+                break;
+                case 'unrsvp':
+                self.going = event.going = false;
+                self.schedule_api.unRSVPEvent(self.summit.id, event.id);
+                break;
+            }
+    }
+
 
     locationName(location_id) {
         var location = self.summit.locations[location_id];

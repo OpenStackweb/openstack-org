@@ -123,7 +123,6 @@ schedule_api.addEvent2MyFavorites = function (summit_id, event_id)
         timeout:10000,
         contentType: "application/json; charset=utf-8",
         success: function (data) {
-            schedule_api.trigger('addedEvent2MySchedule', event_id);
         }
     }).fail(function (jqXHR, textStatus, errorThrown) {
         var http_code = jqXHR.status;
