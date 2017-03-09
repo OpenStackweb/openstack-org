@@ -501,7 +501,7 @@
             window.setTimeout(function(){
                 var eventId   = $(window).url_fragment('getParam','eventid');
                 if(eventId != null){
-                 if($('#event_'+eventId),length > 0) {
+                 if($('#event_'+eventId).length > 0) {
                         $('html, body').animate({
                             scrollTop: $('#event_'+eventId).offset().top
                         }, 1000);
