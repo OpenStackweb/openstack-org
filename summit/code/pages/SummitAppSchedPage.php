@@ -180,15 +180,6 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
             Session::set(self::EventShareByEmailCountKey, 0);
         }
 
-        if(Director::is_ajax()) {
-            return $this->renderWith(
-                array('SummitAppEventPage_eventDetails'),
-                array(
-                    'Event'     => $event,
-                    'Token'     => $token
-                ));
-        }
-
         return $this->renderWith(
             array('SummitAppEventPage', 'SummitPage', 'Page'),
             array(
