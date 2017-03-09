@@ -579,6 +579,8 @@ APP_LINKS;
             return $this->httpError(404);
         }
 
+        $term = urldecode($term);
+
         $speakers = $this->speaker_repository->searchBySummitAndTerm($this->Summit(), $term);
         $events   = $this->event_repository->searchBySummitAndTerm($this->Summit(), $term);
 
