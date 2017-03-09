@@ -110,6 +110,8 @@ final class SpeakerEmailAnnouncementSenderManager
 
                 $speakers_notified = 0;
 
+                echo sprintf('total speakers %s - count %s', $count, count($speakers)).PHP_EOL;
+
                 foreach ($speakers as $speaker) {
 
                     if (!$speaker instanceof IPresentationSpeaker) continue;
@@ -121,7 +123,10 @@ final class SpeakerEmailAnnouncementSenderManager
 
                     $sender_service = $sender_factory->build($current_summit, $speaker, IPresentationSpeaker::RoleSpeaker);
                     // get registration code
-                    if (is_null($sender_service)) continue;
+                    if (is_null($sender_service)) {
+                        echo sprintf('excluding email to %s', $email).PHP_EOL;
+                        continue;
+                    }
 
                     $code = null;
 
@@ -158,7 +163,7 @@ final class SpeakerEmailAnnouncementSenderManager
                         $code->write();
                         $params['PromoCode'] = $code;
                     }
-
+                    echo sprintf('sending email to %s', $email).PHP_EOL;
                     $sender_service->send($params);
                     ++$speakers_notified;
                 }
@@ -196,9 +201,9 @@ final class SpeakerEmailAnnouncementSenderManager
         ) {
             try {
 
-                $page = 1;
+                $page      = 1;
                 $page_size = $batch_size;
-                $task = $batch_repository->findByName(self::TaskName . '_MODERATORS_' . $current_summit->getIdentifier());
+                $task      = $batch_repository->findByName(self::TaskName . '_MODERATORS_' . $current_summit->getIdentifier());
 
                 if (is_null($task)) {
                     //create task
@@ -219,6 +224,8 @@ final class SpeakerEmailAnnouncementSenderManager
 
                 $speakers_notified = 0;
 
+                echo sprintf('total speakers %s - count %s', $count, count($moderators)).PHP_EOL;
+
                 foreach ($moderators as $moderator) {
 
                     if (!$moderator instanceof IPresentationSpeaker) continue;
@@ -230,7 +237,10 @@ final class SpeakerEmailAnnouncementSenderManager
 
                     $sender_service = $sender_factory->build($current_summit, $moderator, IPresentationSpeaker::RoleModerator);
                     // get registration code
-                    if (is_null($sender_service)) continue;
+                    if (is_null($sender_service)) {
+                        echo sprintf('excluding email to %s', $email).PHP_EOL;
+                        continue;
+                    }
 
                     $code = null;
 
@@ -267,7 +277,7 @@ final class SpeakerEmailAnnouncementSenderManager
                         $code->write();
                         $params['PromoCode'] = $code;
                     }
-
+                    echo sprintf('sending email to %s', $email).PHP_EOL;
                     $sender_service->send($params);
                     ++$speakers_notified;
                 }

@@ -367,11 +367,18 @@ class PresentationSpeaker extends DataObject
     /**
      * @param null $summit_id
      * @param string $role
+     * @param bool $exclude_privates_tracks
      * @return bool|DataList
      */
-    public function PublishedPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker)
+    public function PublishedPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker,  $exclude_privates_tracks = true)
     {
-       return $this->PublishedPresentationsByType($summit_id, $role);
+       return $this->PublishedPresentationsByType
+       (
+           $summit_id,
+           $role,
+           [IPresentationType::Keynotes, IPresentationType::Panel, IPresentationType::Presentation, IPresentationType::LightingTalks],
+           $exclude_privates_tracks
+       );
     }
 
     public function PublishedRegularPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker){
@@ -382,10 +389,16 @@ class PresentationSpeaker extends DataObject
         return $this->PublishedPresentationsByType($summit_id, $role, [IPresentationType::LightingTalks]);
     }
 
+    public function hasPublishedLightningPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker)
+    {
+        return $this->PublishedLightningPresentations($summit_id, $role)->count() > 0;
+    }
+
     public function PublishedPresentationsByType(
-        $summit_id   = null,
-        $role        = IPresentationSpeaker::RoleSpeaker,
-        array $types_slugs = [IPresentationType::Keynotes, IPresentationType::Panel, IPresentationType::Presentation, IPresentationType::LightingTalks]
+        $summit_id               = null,
+        $role                    = IPresentationSpeaker::RoleSpeaker,
+        array $types_slugs       = [IPresentationType::Keynotes, IPresentationType::Panel, IPresentationType::Presentation, IPresentationType::LightingTalks],
+        $exclude_privates_tracks = true
     ){
         $summit = !$summit_id ? Summit::get_active() : Summit::get()->byID($summit_id);
         if (!$summit) return false;
@@ -393,19 +406,38 @@ class PresentationSpeaker extends DataObject
         $types = PresentationType::get()->filter(['Type' =>  $types_slugs ,'SummitID'  => $summit->ID ] );
         if($types->count() == 0 ) return false;
 
-        if($role == IPresentationSpeaker::RoleSpeaker)
-            return $this->Presentations()->filter([
-                'SummitID'  => $summit->ID,
-                'Published' => 1,
-                'TypeID'      => $types->getIDList()
-            ]);
+        $private_tracks          = [];
+        $exclude_privates_tracks = boolval($exclude_privates_tracks);
 
-        return Presentation::get()->filter([
-            'SummitID'    => $summit->ID,
-            'Published'   => 1,
-            'ModeratorID' => $this->ID,
-            'TypeID'        => $types->getIDList()
-        ]);
+        if($exclude_privates_tracks){
+            $private_track_groups = PrivatePresentationCategoryGroup::get()->filter(['SummitID' =>  $summit->ID]);
+            foreach($private_track_groups as $private_track_group){
+                $current_private_tracks = $private_track_group->Categories()->getIDList();
+                if(count($current_private_tracks) == 0) continue;
+                $private_tracks = array_merge($private_tracks, array_values($current_private_tracks));
+            }
+        }
+
+        $filter_conditions = [
+            'SummitID'  => $summit->ID,
+            'Published' => 1,
+            'TypeID'    => $types->getIDList()
+        ];
+
+        if(count($private_tracks) > 0) {
+            $filter_conditions['CategoryID:ExactMatch:not'] = $private_tracks;
+        }
+
+        if($role == IPresentationSpeaker::RoleSpeaker) {
+            return $this->Presentations()->filter(
+                $filter_conditions
+            );
+        }
+
+        $filter_conditions['ModeratorID'] = $this->ID;
+        return Presentation::get()->filter(
+            $filter_conditions
+        );
     }
 
     public function OtherPresentations($summit_id = null)
@@ -678,18 +710,39 @@ class PresentationSpeaker extends DataObject
     /**
      * @param null|int $summit_id
      * @param string $role
+     * @param bool $exclude_privates_tracks
      * @return ArrayList|bool
      */
-    public function UnacceptedPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker)
+    public function UnacceptedPresentations
+    (
+        $summit_id = null,
+        $role = IPresentationSpeaker::RoleSpeaker,
+        $exclude_privates_tracks = true
+    )
     {
         $unacceptedPresentations = new ArrayList();
         $summit                  = !$summit_id ? Summit::get_active() : Summit::get()->byID($summit_id);
 
         if (!$summit) return false;
 
+        $private_tracks = [];
+
+        if($exclude_privates_tracks){
+            $private_track_groups = PrivatePresentationCategoryGroup::get()->filter(['SummitID' =>  $summit->ID]);
+            foreach($private_track_groups as $private_track_group){
+                $current_private_tracks = $private_track_group->Categories()->getIDList();
+                if(count($current_private_tracks) == 0) continue;
+                $private_tracks = array_merge($private_tracks, array_values($current_private_tracks));
+            }
+        }
+
         $presentations = $role == IPresentationSpeaker::RoleSpeaker ?
             $this->Presentations()->filter('SummitEvent.SummitID', $summit->ID):
             Presentation::get()->filter(['SummitEvent.SummitID' => $summit->ID, 'ModeratorID' => $this->ID]);
+
+        if(count($private_tracks) > 0) {
+            $presentations = $presentations->filter('CategoryID:ExactMatch:not', $private_tracks);
+        }
 
         foreach ($presentations as $p) {
             if ($p->SelectionStatus() == IPresentation::SelectionStatus_Unaccepted && !$p->isPublished()) {
@@ -1198,11 +1251,12 @@ class PresentationSpeaker extends DataObject
     /**
      * @param int $summit_id
      * @param string $role
+     * @param bool $exclude_privates_tracks
      * @return bool
      */
-    public function hasPublishedPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker)
+    public function hasPublishedPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker,  $exclude_privates_tracks = true)
     {
-        return $this->PublishedPresentations($summit_id, $role)->count() > 0;
+        return $this->PublishedPresentations($summit_id, $role, $exclude_privates_tracks)->count() > 0;
     }
 
     /**

@@ -187,6 +187,13 @@ interface IPresentationSpeaker extends IEntity
     public function hasPublishedPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker);
 
     /**
+     * @param int $summit_id
+     * @param string $role
+     * @return bool
+     */
+    public function hasPublishedLightningPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker);
+
+    /**
      * @param string $role
      * @return bool
      */

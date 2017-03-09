@@ -184,7 +184,7 @@
                                 <% end_if %>
                             <% end_loop %>
 
-                            <% loop PublishedPresentations($Top.Summit.ID, 'MODERATOR') %>
+                            <% loop PublishedPresentations($Top.Summit.ID, 'MODERATOR', 0) %>
 
                             var event_{$ID} =
                                     {
@@ -236,7 +236,7 @@
                                     summit.dic_events[{$ID}] = event_{$ID};
 
                             <% end_loop %>
-                            <% loop PublishedPresentations($Top.Summit.ID, 'SPEAKER') %>
+                            <% loop PublishedPresentations($Top.Summit.ID, 'SPEAKER', 0) %>
                             <% if not $isModeratorByID($Up.ID) %>
                                 var event_{$ID} =   {
                                     id              :  {$ID},
