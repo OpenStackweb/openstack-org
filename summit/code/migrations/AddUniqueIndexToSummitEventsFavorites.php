@@ -20,8 +20,11 @@ class AddUniqueIndexToSummitEventsFavorites extends AbstractDBMigrationTask
 
     function doUp()
     {
-        DB::query("CREATE UNIQUE INDEX IDX_MEMBER_SUMMIT_EVENT
-ON Member_FavoriteSummitEvents (MemberID, SummitEventID);");
+        global $database;
+        if(!DBSchema::existsIndex($database, 'Member_FavoriteSummitEvents', 'IDX_MEMBER_SUMMIT_EVENT')){
+            DB::query("CREATE UNIQUE INDEX IDX_MEMBER_SUMMIT_EVENT
+    ON Member_FavoriteSummitEvents (MemberID, SummitEventID);");
+    }
 
     }
 
