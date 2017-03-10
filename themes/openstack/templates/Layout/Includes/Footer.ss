@@ -19,6 +19,7 @@
                         <li><a href="//openstack.org/community/jobs/">Jobs</a></li>
                         <li><a href="//openstack.org/foundation/companies/">Companies</a></li>
                         <li><a href="http://docs.openstack.org/infra/manual/developers.html">Contribute</a></li>
+                        <li><a href="//openstack.org/store">Get Swag!</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-2 col-sm-2">
