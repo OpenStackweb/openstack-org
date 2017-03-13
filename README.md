@@ -22,7 +22,16 @@ In light of the trademarks held by the OpenStack Foundation, it is important tha
 
 Unless otherwise noted, all code is released under the APACHE 2.0 License http://www.apache.org/licenses/LICENSE-2.0.html
 
-## Installation and futher documentation
+## Installation and further documentation
 
 Detailed installation instruction can be found at http://openstackweb.github.io/openstack-org/
+
+Detailed installation instructions for a virtual machine environment using Vagrant are located at:
+[Vagrant virtual machine installation](./installation.md) 
+
+Information for installation to a local machine environment can be found at:
+<http://openstackweb.github.io/openstack-org/>
+
+Information on publishing a page on OpenStackweb and working with the development environment can be found at:
+[Publishing a new web page](./publishing.md)
 
