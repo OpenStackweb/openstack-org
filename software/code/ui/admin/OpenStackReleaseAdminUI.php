@@ -51,7 +51,7 @@ final class OpenStackReleaseAdminUI extends DataExtension
             $openStackComponentFields = singleton('OpenStackComponent')->getCMSFields();
             $openStackComponentFields->addField(
                 // The "ManyMany[<extradata-name>]" convention
-                new TextField('ManyMany[CustomTeamYAMLFileName]', 'Custom Team YAML FileName ( without extension)')
+                new TextField('ManyMany[CustomTeamYAMLFileName]', 'Custom Team YAML File name ( full url path)')
             );
 
             $components_config = GridFieldConfig_RelationEditor::create(PHP_INT_MAX);
