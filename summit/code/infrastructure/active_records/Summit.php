@@ -541,6 +541,7 @@ final class Summit extends DataObject implements ISummit
     public function getTrackListLink()
     {
         $page = SummitStaticCategoriesPage::get()->filter('SummitID', $this->getIdentifier())->first();
+        if(!$page) $page = SummitCategoriesPage::get()->filter('SummitID', $this->getIdentifier())->first();
         return ($page) ? $page->getAbsoluteLiveLink(false) : '#';
     }
 

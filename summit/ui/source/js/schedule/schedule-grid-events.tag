@@ -119,17 +119,12 @@
                 return true;
             });
 
-            $(document).off("click",".btn-go-event").on("click",".btn-go-event", function(e){
-                 e.preventDefault();
-                 e.stopPropagation();
-                 var event_url = $(this).attr('href');
-                 var url       = new URI(event_url);
-                 // add back url
-                 $(window).url_fragment('setParam','eventId', $(this).data('event-id'));
-                 window.location.hash = $(window).url_fragment('serialize');
-                 url.addQuery('BackURL', window.location)
-                 window.location = url.toString();
-                 return false;
+            $(document).off("click",".event-actions-container").on("click", ".event-actions-container", function(e){
+                e.preventDefault();
+                e.stopPropagation();
+                var event_id = $(this).data('event-id');
+                $('#event_action_menu_'+event_id).dropdown('toggle');
+                return false;
             });
 
             $(document).off("click", ".event-action-link").on("click", ".event-action-link", function(e) {
@@ -194,6 +189,15 @@
                        event.going  = false;
                        self.schedule_api.unRSVPEvent(self.summit.id, event.id);
                        self.updateState(event);
+                    break;
+                    case 'share-facebook':
+                        FB.ui({
+                            method: 'share',
+                            href: event.url,
+                        }, function(response){});
+                    break;
+                    case 'share-twitter':
+                        window.open('https://twitter.com/intent/tweet?text='+self.summit.share_info.tweet+'&url='+event.url, 'mywin','left=50,top=50,width=600,height=260,toolbar=1,resizable=0');
                     break;
                 }
 
@@ -293,7 +297,7 @@
 
         this.schedule_api.on('googleEventSynchSaved', function(event){
             var container    = $('.icon-event-synched[data-event-id="'+event.id+'"]');
-            var synch_button = $('.sync-icon',container);
+            var synch_button = $('.sync-icon', container);
             if (synch_button.hasClass('icon-unsync-event')) {
                 synch_button.removeClass('icon-unsync-event').addClass('icon-sync-event');
                 synch_button.attr('title','Syncronized');
@@ -322,7 +326,7 @@
             self.day_selected = data.day_selected;
             self.events       = data.events;
 
-            var actions_container = self.summit.current_user !== null ?
+            var actions_container =
             '<a class="event-actions-menu" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" title="event actions">'+
             '<span class="caret caret-event-actions"></span>'+
             '</a>'+
@@ -333,10 +337,12 @@
             '<li class="not-going-action event-action"><a data-type="not-going" class="event-action-link" href="#"><i class="fa fa-times-circle" aria-hidden="true"></i>&nbsp;UnSchedule</a></li>'+
             '<li class="watch-action event-action"><a data-type="watch" class="event-action-link" href="#"><i class="fa fa-bookmark" aria-hidden="true"></i>&nbsp;Watch Later</a></li>'+
             '<li class="unwatch-action event-action"><a data-type="unwatch" class="event-action-link" href="#"><i class="fa fa-bookmark-o" aria-hidden="true"></i>&nbsp;Do not Watch Later</a></li>'+
+            '<li class="share-facebook-action event-action"><a data-type="share-facebook" class="event-action-link" href="#"><i class="fa fa-facebook-official" aria-hidden="true"></i>&nbsp;Share on Facebook</a></li>'+
+            '<li class="share-twitter-action event-action"><a data-type="share-twitter" class="event-action-link" href="#"><i class="fa fa-twitter-square" aria-hidden="true"></i>&nbsp;Share on Twitter</a></li>'+
             '<li role="separator" class="divider"></li>'+
             '<li class="cancel-action event-action"><a data-type="cancel" class="event-action-link" href="#">Cancel</a></li>'+
             '</ul>'
-            : '';
+            ;
 
             var cal_synch_container = self.summit.current_user !== null ? '<div style="display:none" class="col-md-2 synch-container">'+
             '<span class="icon-event-synched">'+
@@ -382,8 +388,8 @@
                 '</div>'+
                 '</div>'+
                 '<div class="event-state col-sm-1 col-xs-1">'+
-                '<i class="fa fa-check-circle going-status event-status" aria-hidden="true"></i>'+
-                '<i class="fa fa-bookmark favorite-status event-status" aria-hidden="true"></i>'+
+                '<i class="fa fa-check-circle going-status event-status" aria-hidden="true" style="display:none"></i>'+
+                '<i class="fa fa-bookmark favorite-status event-status" aria-hidden="true" style="display:none"></i>'+
                 '</div>'+
                 '<div class="event-actions-container col-sm-1 col-xs-1">'+  actions_container +'</div>'+
                 '</div>'+
@@ -435,13 +441,10 @@
                 'a.event-type-search-link@href': function(arg){ return self.search_url+'?t='+encodeURIComponent(self.summit.event_types[arg.item.type_id].type.replace(/ /g,'+'))  },
             };
 
-            if(self.show_date){
-                event_directives['span.event-date'] =  function(arg){ return ' '+arg.item.date_nice+' ,';};
-            }
-
-            event_directives['span.start-time'] =  'event.start_time';
+            event_directives['span.event-date']            =  function(arg){ return ' '+arg.item.date_nice+' ,';};
+            event_directives['span.start-time']            =  'event.start_time';
             event_directives['span.start-time@data-epoch'] = 'event.start_epoch',
-            event_directives['span.end-time']   =  'event.end_time';
+            event_directives['span.end-time']              = 'event.end_time';
 
             if(self.summit.should_show_venues){
                  event_directives['a.venue-search-link'] = function(arg){ return self.getSummitLocation(arg.item);};
@@ -454,19 +457,19 @@
                  };
             }
 
+            event_directives['div.event-actions-container@id']            = function(arg){
+                                                                                var item = arg.item;
+                                                                                self.dic_events[item.id] = item;
+                                                                                return 'event_actions_'+item.id;
+                                                                            };
+
+            event_directives['div.event-actions-container@data-event-id'] = function(arg){ return arg.item.id; };
+            event_directives['a.event-actions-menu@id']                   = function(arg){ return 'event_action_menu_'+arg.item.id; }
+            event_directives['ul.dropdown-menu@aria-labelledby']          = function(arg){ return 'event_action_menu_'+arg.item.id; }
+            event_directives['a.event-action-link@data-event-id']         = function(arg){ return arg.item.id; };
+
             if(self.summit.current_user !== null ){
                 // EVENT ACTIONS
-                event_directives['div.event-actions-container@id'] = function(arg){
-                   var item = arg.item;
-                   self.dic_events[item.id] = item;
-                   return 'event_actions_'+item.id;
-                };
-                 event_directives['div.event-actions-container@data-event-id'] = function(arg){
-                                   return arg.item.id;
-                                };
-                event_directives['a.event-actions-menu@id'] = function(arg){ return 'event_action_menu_'+arg.item.id; }
-                event_directives['ul.dropdown-menu@aria-labelledby'] = function(arg){ return 'event_action_menu_'+arg.item.id; }
-                event_directives['a.event-action-link@data-event-id']     = function(arg){ return arg.item.id; };
                 event_directives['.event-state@id']                       = function(arg){ return 'event_state_'+arg.item.id; };
                 // GOOGLE CALENDAR SYNC
                 event_directives['i.sync-icon@title']                     = function(arg){ return arg.item.gcal_id != ''  && arg.item.gcal_id != null ? 'Syncronized':'Unsyncronized'; };
@@ -474,11 +477,6 @@
                 event_directives['span.icon-event-synched@data-event-id'] = function(arg){ return arg.item.id; };
                 event_directives['input.select-event-chk@id']             = function(arg){ return 'select_event_chk_'+ arg.item.id; };
                 event_directives['input.select-event-chk@data-event-id']  = function(arg){ return arg.item.id; };
-            }
-            else
-            {
-                event_directives['div.event-state@class+'] = function(arg){ return ' hide'};
-                event_directives['div.event-actions-container@class+'] = function(arg){  return ' hide'};
             }
 
             var directives = {
@@ -525,36 +523,38 @@
             $('li.watch-action', menu).hide();
             $('li.unwatch-action', menu).hide();
 
-            if(!self.current_filter.favorites && self.summit.current_user.is_attendee){
-                if(!event.has_rsvp){
-                    if( event.going ){
-                        $('li.not-going-action', menu).show();
+            if(self.summit.current_user){
+                if(!self.current_filter.favorites && self.summit.current_user.is_attendee){
+                    if(!event.has_rsvp){
+                        if( event.going ){
+                            $('li.not-going-action', menu).show();
+                        }
+                        else{
+                            $('li.going-action', menu).show();
+                        }
                     }
                     else{
-                        $('li.going-action', menu).show();
+                        // RSVP
+                        if( ! event.going ){
+                            $('li.rsvp-action', menu).show();
+                            if(event.rsvp_seat_type == 'FULL')
+                                $('li.rsvp-action', menu).addClass('disabled');
+                            else
+                                $('li.rsvp-action', menu).removeClass('disabled');
+                        }
+                        else{
+                             if(!event.rsvp_external)
+                                $('li.unrsvp-action', menu).show();
+                        }
                     }
+                }
+
+                if(event.favorite){
+                    $('li.unwatch-action', menu).show();
                 }
                 else{
-                    // RSVP
-                    if( ! event.going ){
-                        $('li.rsvp-action', menu).show();
-                        if(event.rsvp_seat_type == 'FULL')
-                            $('li.rsvp-action', menu).addClass('disabled');
-                        else
-                            $('li.rsvp-action', menu).removeClass('disabled');
-                    }
-                    else{
-                         if(!event.rsvp_external)
-                            $('li.unrsvp-action', menu).show();
-                    }
+                    $('li.watch-action', menu).show();
                 }
-            }
-
-            if(event.favorite){
-                $('li.unwatch-action', menu).show();
-            }
-            else{
-                $('li.watch-action', menu).show();
             }
 
         }
@@ -631,12 +631,12 @@
 
             $('.event-row').show();
             // show select checkbox only if my schedule
-            if(self.current_filter.own)
+            if(self.current_filter.going)
                 $('.synch-container').show();
             else
                 $('.synch-container').hide();
 
-                for(var e of self.events){
+            for(var e of self.events){
                     var show = true;
                     self.updateState(e);
                     //track groups
@@ -676,13 +676,13 @@
 
                     $('#event_'+e.id).show();
                     event_count++;
-                }
+            }
 
-                if(event_count == 0) {
-                    $('#no_events_msg').show();
-                } else {
-                    $('#no_events_msg').hide();
-                }
+            if(event_count == 0) {
+                $('#no_events_msg').show();
+            } else {
+                $('#no_events_msg').hide();
+            }
         }
 
         scrollToTime() {
@@ -703,6 +703,25 @@
                 }
             }
         }
+
+        // facebook SDK setting
+
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : self.summit.share_info.fb_app_id,
+                xfbml      : true,
+                status     : true,
+                version    : 'v2.7'
+            });
+        };
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
 
      </script>
 </schedule-grid-events>

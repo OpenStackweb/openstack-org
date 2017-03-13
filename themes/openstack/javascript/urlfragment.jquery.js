@@ -59,7 +59,7 @@
 
     function convertToHash(str_hash)
     {
-        str_hash = str_hash.substr(1).toLowerCase();
+        str_hash   = str_hash.substr(1).toLowerCase();
         var params = str_hash.split('&');
         var res = {};
         for(var param of params)

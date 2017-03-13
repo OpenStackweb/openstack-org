@@ -59,6 +59,7 @@ final class ScheduleEventViewModelMapper implements IViewModelMapper
                 'track_id'                 => intval($e->CategoryID),
                 'attachment_url'           => '',
                 'to_record'                => false,
+                'url'                      => $e->getLink('show'),
             ];
 
             foreach ($e->Tags() as $t) {

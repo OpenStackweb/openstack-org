@@ -43,6 +43,12 @@
                             should_show_venues: <% if $Summit.ShouldShowVenues %>true<% else %>false<% end_if %>
                         };
 
+                    summit.share_info =   {
+                        fb_app_name: "OpenStack",
+                        fb_app_id : "{$Top.SiteConfig.getOGApplicationID()}",
+                        tweet: '<%t Summit.TweetText %>'
+                    };
+
                     <% if $CurrentMember %>
                         <% with $CurrentMember %>
                             summit.current_user = { id: {$ID}, first_name: '{$FirstName.JS}', last_name: '{$Surname.JS}', is_attendee: <% if CurrentMember.isAttendee($Top.Summit.ID) %>true<% else %>false<% end_if %> };
@@ -180,6 +186,7 @@
                                     <% end_loop %>
                                 <% end_if %>
                             ],
+                            url: "{$getLink(show)}",
                         };
                         summit.events.push(event_{$ID});
                         summit.dic_events[{$ID}] = event_{$ID};

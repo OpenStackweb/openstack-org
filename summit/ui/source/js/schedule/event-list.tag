@@ -25,7 +25,7 @@
                     var event_url = $(this).attr('href');
                     var url       = new URI(event_url);
                     // add back url
-                    $(window).url_fragment('setParam','eventId', $(this).data('event-id'));
+                    $(window).url_fragment('setParam','eventid', $(this).data('event-id'));
                     window.location.hash = $(window).url_fragment('serialize');
                     url.addQuery('BackURL', window.location)
                     window.location = url.toString();
@@ -46,6 +46,25 @@
             self.update();
             delete self.clicked_event[event_id];
         });
+
+        // facebook SDK setting
+
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : self.summit.share_info.fb_app_id,
+                xfbml      : true,
+                status     : true,
+                version    : 'v2.7'
+             });
+        };
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
 
     </script>
 </event-list>

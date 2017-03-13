@@ -5,6 +5,11 @@
  */
 class SummitAppSchedPage extends SummitPage
 {
+    private static $db = array
+    (
+        'EnableMobileSupport' => 'Boolean',
+    );
+
     /**
      * @param ISummit $summit
      * @return SummitAppSchedPage
@@ -14,6 +19,13 @@ class SummitAppSchedPage extends SummitPage
         if(is_null($page))
             $page = Versioned::get_by_stage('SummitAppSchedPage', 'Stage')->filter('SummitID', $summit->getIdentifier())->first();
         return $page;
+    }
+
+    public function getCMSFields()
+    {
+        $fields = parent::getCMSFields();
+        $fields->addFieldToTab('Root.Main', new CheckboxField('EnableMobileSupport', 'Enable Mobile App Download Dialog'));
+        return $fields;
     }
 }
 
@@ -140,9 +152,10 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         Requirements::javascript('themes/openstack/javascript/jquery.cleanform.js');
         Requirements::javascript('themes/openstack/bower_assets/urijs/src/URI.min.js');
         Requirements::javascript('themes/openstack/bower_assets/urijs/src/URI.fragmentQuery.js');
-        Requirements::javascript('summit/javascript/schedule/install_mobile_app.js');
+        if($this->EnableMobileSupport) {
+            Requirements::javascript('summit/javascript/schedule/install_mobile_app.js');
+        }
         Requirements::javascript('summit/javascript/forms/rsvp.form.js');
-
     }
 
     const EventShareByEmailTokenKey = 'SummitAppEventPageShareEmail.Token';
@@ -154,9 +167,8 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
      */
     public function ViewEvent(SS_HTTPRequest $request)
     {
-        $event    = $this->getSummitEntity($request);
-
-        $goback   = $request->getHeader('Referer') && trim($request->getHeader('Referer'),'/') == trim(Director::absoluteURL($this->Link()),'/')? '1':'';
+        $event     = $this->getSummitEntity($request);
+        $summit_id = $event->SummitID;
 
         if (is_null($event) || !$event->isPublished() || !ScheduleManager::allowToSee($event)) {
             return $this->httpError(404, 'Sorry that event could not be found');
@@ -180,11 +192,19 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
             Session::set(self::EventShareByEmailCountKey, 0);
         }
 
+        $back_url           = $request->requestVar('BackURL') ;
+        if(!Director::is_site_url($back_url) || empty($back_url)) {
+            $start_date = new \DateTime($event->getStartDate());
+            $main_schedule_page = SummitAppSchedPage::get()->filter("SummitID", $summit_id)->first();
+            $back_url = $main_schedule_page->getAbsoluteLiveLink(false);
+            $back_url .= sprintf("#day=%s-%s-%s&evenid=%s", $start_date->format('Y'), $start_date->format('m'), $start_date->format('d'), $event->ID);
+        }
+
         return $this->renderWith(
             array('SummitAppEventPage', 'SummitPage', 'Page'),
             array(
                 'Event'     => $event,
-                'BackURL'   => $request->requestVar('BackURL') ? $request->requestVar('BackURL') : '#',
+                'BackURL'   => $back_url,
                 'Token'     => $token
             ));
     }
@@ -201,6 +221,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         Requirements::javascript("summit/javascript/schedule/event-detail-page.js");
 
         $event     = $this->getSummitEntity($request);
+        $summit_id = $event->SummitID;
 
         if(is_null($event) ||
             !$event->isPublished() ||
@@ -239,10 +260,18 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
                 ));
         }
 
+        $back_url           = $request->requestVar('BackURL') ;
+        if(!Director::is_site_url($back_url) || empty($back_url)) {
+            $start_date = new \DateTime($event->getStartDate());
+            $main_schedule_page = SummitAppSchedPage::get()->filter("SummitID", $summit_id)->first();
+            $back_url = $main_schedule_page->getAbsoluteLiveLink(false);
+            $back_url .= sprintf("#day=%s-%s-%s&eventid=%s", $start_date->format('Y'), $start_date->format('m'), $start_date->format('d'), $event->ID);
+        }
+
         return $this->renderWith(
             array('SummitAppEventPage_RSVP', 'SummitPage', 'Page'),
             array(
-                'BackURL'   => $request->requestVar('BackURL') ? $request->requestVar('BackURL') : '#',
+                'BackURL'   => $back_url,
                 'Event'     => $event,
                 'Token'     => $token
             ));
@@ -626,7 +655,6 @@ APP_LINKS;
             return $this->buildOnlyMetaTagsResponse($this->MetaTags());
         }
         Requirements::javascript("summit/javascript/schedule/event-detail-page.js");
-        Requirements::javascript("summit/javascript/schedule/schedule-page.js");
 
         return $this->getViewer('index')->process($this);
     }

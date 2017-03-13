@@ -48,8 +48,8 @@
                             id              : {$Event.ID},
                             summit_id       : {$Event.SummitID},
                             rsvp_link       : "{$Event.getRSVPURL().JS}",
-                        has_rsvp        : <%if $Event.hasRSVP() %>true<% else %>false<% end_if %>,
-                        rsvp_external   : <%if $Event.isExternalRSVP() %>true<% else %>false<% end_if %>,
+                            has_rsvp        : <%if $Event.hasRSVP() %>true<% else %>false<% end_if %>,
+                            rsvp_external   : <%if $Event.isExternalRSVP() %>true<% else %>false<% end_if %>,
                             rsvp_seat_type  : "{$Event.CurrentRSVPSubmissionSeatType}",
                             <% if $CurrentMember && $CurrentMember.isOnMySchedule($Top.Event.ID) %>
                                 going      : true,

@@ -48,3 +48,7 @@
     position: relative;
     left:-5%;
 }
+
+#btn-launch{
+    min-width: 200px !important;
+}
