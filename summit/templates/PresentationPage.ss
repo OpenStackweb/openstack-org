@@ -23,12 +23,7 @@
 
                         <% if IsUpComing %>
                             <div class="inner-countdown-wrapper">
-                                <div class="countdown">
-                                    $Top.CountdownDigits
-                                </div>
-                                <div class="countdown-text">
-                                    Days until $Name
-                                </div>
+                               <a href="{$RegistrationLink}" class="btn register-btn-lrg">Register Now</a>
                             </div>
                         <% else_if IsCurrent %>
                             <div class="inner-countdown-wrapper">

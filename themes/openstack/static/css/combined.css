@@ -377,7 +377,7 @@ a.future-summit:hover:after {
 
 
 .summit-hero-wrapper.condensed .register-btn-lrg {
-  width: 130px; }
+  width: 170px; }
 
 @media (max-width: 767px) {
   .summit-hero-wrapper .register-btn-lrg {
@@ -398,7 +398,7 @@ a.future-summit:hover:after {
   margin: 0 auto; }
 
 .summit-hero-wrapper.condensed .inner-countdown-wrapper {
-  top: 20px; }
+  top: 32px; }
 
 @media (max-width: 767px) {
   .summit-hero-wrapper .inner-countdown-wrapper {
