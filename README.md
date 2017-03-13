@@ -24,8 +24,6 @@ Unless otherwise noted, all code is released under the APACHE 2.0 License http:/
 
 ## Installation and further documentation
 
-Detailed installation instruction can be found at http://openstackweb.github.io/openstack-org/
-
 Detailed installation instructions for a virtual machine environment using Vagrant are located at:
 [Vagrant virtual machine installation](./installation.md) 
 
