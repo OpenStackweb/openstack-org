@@ -97,7 +97,9 @@ class SapphireSummitEventRepository extends SapphireRepository implements ISummi
                     INNER JOIN Presentation_Speakers PS ON PS.PresentationID = P.ID
                     INNER JOIN PresentationSpeaker S ON S.ID = PS.PresentationSpeakerID
                     LEFT JOIN Member M ON M.ID = S.MemberID
-                    WHERE P.ID = E.ID AND (S.ID = '{$term}' OR M.Email LIKE '{$term}')
+                    LEFT JOIN Affiliation A ON A.MemberID = S.MemberID
+                    LEFT JOIN Org ON Org.ID = A.OrganizationID
+                    WHERE P.ID = E.ID AND (S.ID = '{$term}' OR M.Email LIKE '{$term}' OR Org.Name LIKE '%{$term}%')
                 )
             UNION SELECT DISTINCT E.* FROM SummitEvent E
                 WHERE E.SummitID = {$summit_id} AND E.Published = 1
@@ -106,7 +108,9 @@ class SapphireSummitEventRepository extends SapphireRepository implements ISummi
                     SELECT P.ID, CONCAT(S.FirstName,' ',S.LastName) AS SpeakerFullName  From Presentation P
                     INNER JOIN PresentationSpeaker S ON S.ID = P.ModeratorID
                     LEFT JOIN Member M ON M.ID = S.MemberID
-                    WHERE P.ID = E.ID AND (S.ID = '{$term}' OR M.Email LIKE '{$term}')
+                    LEFT JOIN Affiliation A ON A.MemberID = S.MemberID
+                    LEFT JOIN Org ON Org.ID = A.OrganizationID
+                    WHERE P.ID = E.ID AND (S.ID = '{$term}' OR M.Email LIKE '{$term}' OR Org.Name LIKE '%{$term}%')
                 )
             UNION SELECT DISTINCT E.* FROM SummitEvent E
                 WHERE E.SummitID = {$summit_id} AND E.Published = 1
