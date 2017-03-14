@@ -272,15 +272,6 @@ final class SpeakerManager implements ISpeakerManager
 
             $speaker->MemberID    = $member_id;
 
-            // set email
-            if ($speaker->MemberID > 0) {
-                $speaker->Member()->Email = trim($speaker_data['email']);
-                $speaker->Member()->write();
-            } else {
-                $speaker->RegistrationRequest()->Email = trim($speaker_data['email']);
-                $speaker->RegistrationRequest()->write();
-            }
-
             $onsite_phone = trim($speaker_data['onsite_phone']);
             $reg_code     = trim($speaker_data['reg_code']);
 

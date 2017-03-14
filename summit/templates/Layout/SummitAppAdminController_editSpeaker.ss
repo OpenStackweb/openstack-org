@@ -24,7 +24,7 @@
                     </div>
                     <div class="col-md-4">
                         <label for="email">Email</label><br>
-                        <input id="email" name="email" class="form-control" value="{$Speaker.getEmail()}"/>
+                        <input id="email" name="email" disabled class="form-control" value="{$Speaker.getEmail()}"/>
                     </div>
                     <div class="col-md-4">
                         <label for="reg_code">Summit Registration Code</label><br>
