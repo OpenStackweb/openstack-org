@@ -46,11 +46,13 @@ class MarketingCollateral extends DataObject {
 
         $image_validator = new Upload_Validator();
         $image_validator->setAllowedExtensions(array('jpg','png','jpeg'));
+        $image_validator->setAllowedMaxFileSize(40*1024*1024);
         $image->setValidator($image_validator);
         $fields->push($image);
 
         $files = new UploadField('CollateralFiles','Files', $this->CollateralFiles());
         $files->setFolderName('marketing');
+        $files->getValidator()->setAllowedMaxFileSize(40*1024*1024);
         $fields->push($files);
 
         $config = new GridFieldConfig_RecordEditor(3);

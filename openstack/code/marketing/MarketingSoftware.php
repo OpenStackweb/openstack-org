@@ -54,6 +54,7 @@ class MarketingSoftware extends DataObject {
 
         $presentation = new UploadField('Presentation','Presentation');
         $presentation->setFolderName('marketing');
+        $presentation->getValidator()->setAllowedMaxFileSize(40*1024*1024);
         $fields->push($presentation);
 
         $fields->push(new HiddenField('ParentPageID','ParentPageID'));
