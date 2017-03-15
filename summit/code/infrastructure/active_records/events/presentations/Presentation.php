@@ -102,7 +102,6 @@ class Presentation extends SummitEvent implements IPresentation
 
         if ($this->getProgress() < $progress) {
             $this->setField('Progress', $progress);
-            $this->write();
         }
 
         return $this;
@@ -114,7 +113,6 @@ class Presentation extends SummitEvent implements IPresentation
     public function setComplete()
     {
         $this->Progress = self::PHASE_COMPLETE;
-        $this->write();
         return $this;
     }
 

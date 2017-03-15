@@ -1098,7 +1098,7 @@ class PresentationPage_ManageRequest extends RequestHandler
         if ($this->presentation->getProgress() < Presentation::PHASE_SUMMARY) {
             return $this->parent->redirect($this->Link('summary'));
         } else {
-            $this->presentation->setProgress(Presentation::PHASE_SPEAKERS);
+            $this->presentation->setProgress(Presentation::PHASE_SPEAKERS)->write();
         }
 
         return $this->parent->redirect($this->Link('confirm'));
