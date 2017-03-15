@@ -124,6 +124,13 @@
           <div class="title">Sr. Director, Cloud Infrastructure and Platforms, eBay Inc.</div>
         </div>
       </div>
+      <div class="col-sm-3 featured">
+        <div class="summit-user-section">
+          <img src="/assets/boston-summit/speakers/JuliannaRodriguez.jpg" alt="Major Julianna Rodriguez" class="summit-user-image">
+          <div class="name">Major Julianna Rodriguez</div>
+          <div class="title">Director, U.S. Army Cyber School</div>
+        </div>
+      </div>
     </div>
     <div class="row">
       <div class="col-sm-3 featured">
