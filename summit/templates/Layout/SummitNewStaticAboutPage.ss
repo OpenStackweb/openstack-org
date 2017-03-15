@@ -124,14 +124,8 @@
           <div class="title">Sr. Director, Cloud Infrastructure and Platforms, eBay Inc.</div>
         </div>
       </div>
-      <div class="col-sm-3 featured">
-        <div class="summit-user-section">
-          <img src="/assets/boston-summit/speakers/JuliannaRodriguez.jpg" alt="Major Julianna Rodriguez" class="summit-user-image">
-          <div class="name">Major Julianna Rodriguez</div>
-          <div class="title">Director, U.S. Army Cyber School</div>
-        </div>
-      </div>
     </div>
+    <div class="row">
       <div class="col-sm-3 featured">
         <div class="summit-user-section">
           <img src="/assets/boston-summit/speakers/Merce-Crosas.jpg" alt="Mercè Crosas" class="summit-user-image">
@@ -139,7 +133,6 @@
           <div class="title">Chief Data Science and Technology Officer at IQSS, Harvard University</div>
         </div>
       </div>
-    <div class="row">
       <div class="col-sm-3">
         <div class="summit-user-section">
           <img src="/assets/boston-summit/speakers/JacobRosenberg.jpg" alt="Jacob Rosenberg" class="summit-user-image">
@@ -161,6 +154,8 @@
           <div class="title">Assistant General Manager of Cloud Computing Products Division, China Mobile</div>
         </div>
       </div>
+    </div>
+    <div class="row">
       <div class="col-sm-3">
         <div class="summit-user-section">
           <img src="/assets/boston-summit/speakers/DavidAronchick.jpg" alt="David Aronchick" class="summit-user-image">
@@ -168,8 +163,6 @@
           <div class="title">Product Manager, Google</div>
         </div>
       </div>
-    </div>
-    <div class="row">
       <div class="col-sm-3">
         <div class="summit-user-section">
           <img src="//www.openstack.org/assets/boston-summit/speakers/Mark-Collier3.jpg" alt="Mark Collier" class="summit-user-image">
@@ -189,13 +182,6 @@
           <img src="//www.openstack.org/assets/boston-summit/speakers/Jonathan-Bryce2.jpg" alt="Jonathan Bryce" class="summit-user-image">
           <div class="name">Jonathan Bryce</div>
           <div class="title">Executive Director, OpenStack Foundation</div>
-        </div>
-      </div>
-      <div class="col-sm-3">
-        <div class="summit-user-section">
-          <img src="/assets/boston-summit/speakers/ChrisApsey.jpg" alt="Chris Apsey" class="summit-user-image">
-          <div class="name">Chris Apsey</div>
-          <div class="title">Deputy Director U.S. Army Cyber School</div>
         </div>
       </div>
     </div>
