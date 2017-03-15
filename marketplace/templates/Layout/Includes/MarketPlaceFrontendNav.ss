@@ -73,10 +73,5 @@
             </div>
         </div>
         <% end_with %>
-        <div class="row">
-            <div class="col-sm-12">
-                <a href="http://apps.openstack.org" class="app-promo-banner"></a>
-            </div>
-        </div>
     </div>
 </div>

@@ -112,12 +112,11 @@
       </div>
       <div class="col-sm-3 featured">
         <div class="summit-user-section">
-          <img src="/assets/boston-summit/speakers/Merce-Crosas.jpg" alt="Mercè Crosas" class="summit-user-image">
-          <div class="name">Mercè Crosas</div>
-          <div class="title">Chief Data Science and Technology Officer at IQSS, Harvard University</div>
+          <img src="/assets/Uploads/Profile-GauravGupta.jpg" alt="Gaurav Gupta" class="summit-user-image">
+          <div class="name">Gaurav Gupta</div>
+          <div class="title">VP of Engineering, Snapdeal</div>
         </div>
       </div>
-      <!-- 
       <div class="col-sm-3 featured">
         <div class="summit-user-section">
           <img src="/assets/boston-summit/speakers/Suneet.jpg" alt="Suneet Nandwani" class="summit-user-image">
@@ -125,7 +124,6 @@
           <div class="title">Sr. Director, Cloud Infrastructure and Platforms, eBay Inc.</div>
         </div>
       </div>
-      -->
       <div class="col-sm-3 featured">
         <div class="summit-user-section">
           <img src="/assets/boston-summit/speakers/JuliannaRodriguez.jpg" alt="Major Julianna Rodriguez" class="summit-user-image">
@@ -134,6 +132,13 @@
         </div>
       </div>
     </div>
+      <div class="col-sm-3 featured">
+        <div class="summit-user-section">
+          <img src="/assets/boston-summit/speakers/Merce-Crosas.jpg" alt="Mercè Crosas" class="summit-user-image">
+          <div class="name">Mercè Crosas</div>
+          <div class="title">Chief Data Science and Technology Officer at IQSS, Harvard University</div>
+        </div>
+      </div>
     <div class="row">
       <div class="col-sm-3">
         <div class="summit-user-section">
