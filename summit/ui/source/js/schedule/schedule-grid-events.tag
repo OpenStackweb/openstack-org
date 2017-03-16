@@ -197,7 +197,8 @@
                         }, function(response){});
                     break;
                     case 'share-twitter':
-                        window.open('https://twitter.com/intent/tweet?text='+self.summit.share_info.tweet+'&url='+event.url, 'mywin','left=50,top=50,width=600,height=260,toolbar=1,resizable=0');
+                        var text = event.social_summary != '' ? event.social_summary : self.summit.share_info.tweet
+                        window.open('https://twitter.com/intent/tweet?text='+text+'&url='+event.url, 'mywin','left=50,top=50,width=600,height=260,toolbar=1,resizable=0');
                     break;
                 }
 

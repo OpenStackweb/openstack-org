@@ -567,6 +567,7 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi
         try {
             $event_id = intval($request->param('EventID'));
             $event    = $this->summitevent_repository->getById($event_id);
+
             if (is_null($event))
                 throw new NotFoundEntityException('SummitEvent', sprintf(' id %s', $event_id));
 

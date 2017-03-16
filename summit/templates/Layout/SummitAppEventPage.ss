@@ -139,6 +139,7 @@
                                     event_title: "{$Event.Title}",
                                     event_url: "{$Event.getLink(show)}",
                                     event_description: "{$Event.Description.JS}",
+                                    social_summary : "{$Event.SocialSummary.JS}",
                                     event_pic_url: "{$Event.getOGImage}",
                                     tweet: '<%t Summit.TweetText %>'
                                 };

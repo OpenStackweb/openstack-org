@@ -60,6 +60,7 @@ final class ScheduleEventViewModelMapper implements IViewModelMapper
                 'attachment_url'           => '',
                 'to_record'                => false,
                 'url'                      => $e->getLink('show'),
+                'social_summary'           => $e->SocialSummary,
             ];
 
             foreach ($e->Tags() as $t) {

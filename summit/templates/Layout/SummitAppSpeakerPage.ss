@@ -237,6 +237,7 @@
                                                     <% end_if %>
                                                 ],
                                                 url: "{$getLink(show)}",
+                                                social_summary : "{$SocialSummary.JS}",
                                             };
 
                                     summit.events.push(event_{$ID});
@@ -289,6 +290,7 @@
                                         <% end_if %>
                                     ],
                                     url: "{$getLink(show)}",
+                                    social_summary : "{$SocialSummary.JS}",
                                 };
 
                                 summit.events.push(event_{$ID});

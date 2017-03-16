@@ -187,6 +187,7 @@
                                 <% end_if %>
                             ],
                             url: "{$getLink(show)}",
+                            social_summary : "{$SocialSummary.JS}",
                         };
                         summit.events.push(event_{$ID});
                         summit.dic_events[{$ID}] = event_{$ID};

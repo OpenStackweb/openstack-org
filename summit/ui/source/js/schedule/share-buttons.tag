@@ -60,7 +60,8 @@
         }
 
         shareTwitter(e) {
-            window.open('https://twitter.com/intent/tweet?text='+self.share_info.tweet+'&url='+self.share_info.event_url, 'mywin','left=50,top=50,width=600,height=260,toolbar=1,resizable=0');
+            var text = self.share_info.social_summary != '' ? self.share_info.social_summary : self.share_info.tweet;
+            window.open('https://twitter.com/intent/tweet?text='+text+'&url='+self.share_info.event_url, 'mywin','left=50,top=50,width=600,height=260,toolbar=1,resizable=0');
             return false;
         }
 
@@ -73,10 +74,11 @@
 
         sendEmail() {
             var url = 'api/v1/summits/current/schedule/'+self.share_info.event_id+'/share';
+
             var request = {
-                from:$('#email-from').val(),
-                to:$('#email-to').val(),
-                token:$('#email-token').val()
+                from  : $('#email-from').val(),
+                to    : $('#email-to').val(),
+                token : $('#email-token').val()
             }
 
             if (!$('#email-form').valid()) {
