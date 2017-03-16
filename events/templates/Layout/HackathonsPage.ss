@@ -10,7 +10,7 @@
     </div>
 </div>
 
-<div class="days-pretext">$EventsYearlyCountText() - <a href="#" class="deep-link" data-tab="events_tab">find an upcoming OpenStack Day in your region!</a></div>
+<div class="days-pretext">$EventsYearlyCountText() - <a href="#" class="deep-link" data-tab="events_tab">find an upcoming OpenStack Hackathon in your region!</a></div>
 
 <div class="container slider-container">
     <section class="regular slider">
@@ -24,10 +24,10 @@
     <div class="container">
         <ul class="nav nav-tabs project-tabs" id="osdays-tabs" role="tablist">
             <li class="active tab-about_tab nav-item">
-                <a href="#about_tab" class="nav-link" role="tab" data-toggle="tab">About OpenStack Days</a>
+                <a href="#about_tab" class="nav-link" role="tab" data-toggle="tab">About OpenStack Hackathons</a>
              </li>
             <li class="tab-host_tab nav-item">
-                <a href="#host_tab" class="nav-link" role="tab" data-toggle="tab">Host An OpenStack Day</a>
+                <a href="#host_tab" class="nav-link" role="tab" data-toggle="tab">Host An OpenStack Hackathon</a>
             </li>
             <li class="tab-events_tab nav-item">
                 <a href="#events_tab" class="nav-link" role="tab" data-toggle="tab">Upcoming Events</a>
@@ -44,10 +44,10 @@
                 <div class="row">
                     <div class="col-sm-12"> $AboutDescription </div>
                     <div class="col-sm-12">
-                        <p class="mr5-30">$EventsYearlyCountText() - <a href="/community/events/openstackdays#tab=events_tab">find an upcoming OpenStack Day in your region!</a> </p>
+                        <p class="mr5-30">$EventsYearlyCountText() - <a href="{$Top.Link()}#tab=events_tab">find an upcoming OpenStack Hackathon in your region!</a> </p>
                     </div>
                 </div>
-                <h2 class="tab-title">Highlights From Recent OpenStack Days</h2>
+                <h2 class="tab-title">Highlights From Recent OpenStack Hackathons</h2>
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="row">
@@ -63,15 +63,13 @@
 
                 <span class="hr"></span>
 
-                <h2 class="tab-title">Check Out More of the Past OpenStack Days!</h2>
+                <h2 class="tab-title">Check Out More of the Past OpenStack Hackathons!</h2>
                 <div class="row featured_events">
                     <% loop $FeaturedEvents().Limit(4) %>
                     <div class="col-md-3 featured_event">
-                        <a href="$Event.EventLink()" target="_blank">
-                            <img src="$Picture.getUrl()" width="200" height="130"/>
-                        </a>
+                        <img src="$Picture.getUrl()" width="200" height="130"/>
                         <p>
-                            <a href="$Event.EventLink()" target="_blank">$Event.Title</a>
+                            $Event.Title
                             <span class="font-13">$Event.getLocation()</span>
                             <span class="font-12">$Event.formatDateRange()</span>
                         </p>
@@ -79,7 +77,7 @@
                     <% end_loop %>
                 </div>
                 <div class="text-center more-events">
-                    <a href="" id="more_events" data-category="OpenStack Days">See More Past Events [+]</a>
+                    <a href="" id="more_events" data-category="Hackathons">See More Past Events [+]</a>
                 </div>
             </div>
             <div role="tabpanel" class="tab-pane fade in hostan-page" id="host_tab">
@@ -97,6 +95,7 @@
                         $ToolkitDesc
                     </div>
                 </div>
+                <% if OfficialGuidelines() %>
                 <h3 class="blue-title">Official Guidelines</h3>
                 <div class="row host-an">
                     <% loop OfficialGuidelines() %>
@@ -111,9 +110,10 @@
                     <% end_loop %>
                     <div class="col-md-4 brl1"></div>
                 </div>
-
                 <span class="hr margin24-0"></span>
+                <% end_if %>
 
+                <% if getGroupedPlanningTools() %>
                 <h3 class="blue-title">Planning Tools</h3>
                 <div class="row host-an">
                     <% loop getGroupedPlanningTools() %>
@@ -134,9 +134,10 @@
                         </div>
                     <% end_loop %>
                 </div>
-
                 <span class="hr margin24-0"></span>
+                <% end_if %>
 
+                <% if Artwork() %>
                 <h3 class="blue-title">Artwork for Print</h3>
                 <div class="mrtop20">
                     $ArtworkIntro
@@ -150,9 +151,10 @@
                     </li>
                     <% end_loop %>
                 </ul>
-
                 <span class="hr margin0-0-24"></span>
+                <% end_if %>
 
+                <% if Collaterals() %>
                 <h3 class="blue-title">Marketing / Branding / Video /Presentations / Collateral</h3>
                 <div class="mrtop20">
                     $CollateralIntro
@@ -175,16 +177,16 @@
                     <% end_loop %>
                     <% end_if %>
                 </ul>
-
                 <span class="hr margin0-0-24"></span>
+                <% end_if %>
 
                 <p>
-                    <strong>OpenStack Day Logo and Digital Assets</strong>
+                    <strong>OpenStack Hackathon Logo and Digital Assets</strong>
                 </p>
                 <p>
-                    The OpenStack Foundation has created an official OpenStack Day logo and digital assets to be used for all OpenStack Days events.
-                    For both trademark and legal reasons, all official OpenStack Day events are required to use these assets in all event
-                    communications, printed materials, signage, and website presence.  To request your official OpenStack Day logo and branding
+                    The OpenStack Foundation has created an official OpenStack Hackathon logo and digital assets to be used for all OpenStack Hackathons.
+                    For both trademark and legal reasons, all official OpenStack Hackathons are required to use these assets in all event
+                    communications, printed materials, signage, and website presence.  To request your official OpenStack Hackathon logo and branding
                     kit, please send an email to events@openstack.org
                 </p>
 
@@ -213,6 +215,7 @@
                 <p>&nbsp;</p>
                 <span class="hr margin0-0-24"></span>
 
+                <% if Media() %>
                 <h3 class="blue-title">PR / Media</h3>
                 <div class="row host-an">
                     <% loop Media() %>
@@ -222,14 +225,15 @@
                     </div>
                     <% end_loop %>
                 </div>
+                <% end_if %>
             </div>
 
             <div role="tabpanel" class="tab-pane fade in" id="events_tab">
                 <div class="inner-osdays">
-                    <h2 class="tab-title">Highlights From Recent OpenStack Days</h2>
+                    <h2 class="tab-title">Highlights From Recent OpenStack Hackathons</h2>
                     <div class="osdays-events">
-                        <% if $FutureOpenstackDaysEvents(22) %>
-                            <% loop $FutureOpenstackDaysEvents(22) %>
+                        <% if $FutureHackathonsEvents(22) %>
+                            <% loop $FutureHackathonsEvents(22) %>
                             <div class="row osdays-event">
                                 <div class="col-sm-2 col-xs-3"><div class="osd-date">$formatDateRange</div></div>
                                 <div class="col-sm-4 col-xs-4">$Title</div>

@@ -48,24 +48,26 @@ $(document).ready(function(){
 
     $('#more_events').click(function(ev){
         ev.preventDefault();
-        getMoreEvents();
+        var category = $(this).data('category');
+        getMoreEvents(category);
         return false;
     });
 
 });
 
-function getMoreEvents() {
+function getMoreEvents(category) {
     var event_count = $('.featured_event').length;
 
     $.ajax({
         type: 'GET',
-        url: 'api/v1/events/featured?offset='+event_count,
+        url: 'api/v1/events/featured?category='+category+'&offset='+event_count,
         success: function(result){
             if (result.length) {
                 var html = '';
                 $.each(result,function(idx,val){
                    html += '<div class="col-md-3 featured_event">';
-                   html += val.image + '<p>' + val.title;
+                   html += '<a href="'+ val.link +'" target="_blank">'+ val.image + '</a>';
+                   html += '<p><a href="'+ val.link +'" target="_blank">' + val.title+'</a>';
                    html += '<span class="font-13">' + val.location + '</span>';
                    html += '<span class="font-12">' + val.date + '</span>';
                    html += '</p></div>';

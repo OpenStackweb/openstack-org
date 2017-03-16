@@ -12,9 +12,9 @@
  * limitations under the License.
  **/
 /**
- * Defines the OpenStackDaysPage page type
+ * Defines the HackathonsPage page type
  */
-class OpenStackDaysPage extends Page {
+class HackathonsPage extends Page {
     private static $db = array(
         'AboutDescription' => 'HTMLText',
         'HostIntro'        => 'HTMLText',
@@ -52,7 +52,7 @@ class OpenStackDaysPage extends Page {
             $uploadField = new UploadField('HeaderPics','Header Pictures')
         );
         $uploadField->setAllowedMaxFileNumber(10);
-        $uploadField->setFolderName('openstackdays');
+        $uploadField->setFolderName('hackathons');
 
         // About
         $fields->addFieldToTab(
@@ -146,9 +146,9 @@ class OpenStackDaysPage extends Page {
 
 }
 /**
- * Class OpenStackDaysPage_Controller
+ * Class HackathonsPage_Controller
  */
-class OpenStackDaysPage_Controller extends Page_Controller {
+class HackathonsPage_Controller extends Page_Controller {
 
     private $event_manager;
 
@@ -177,9 +177,9 @@ class OpenStackDaysPage_Controller extends Page_Controller {
         );
     }
 
-    function FutureOpenstackDaysEvents($num) {
+    function FutureHackathonsEvents($num) {
         $filter_array = array('EventEndDate:GreaterThanOrEqual'=> date('Y-m-d'));
-        $filter_array['EventCategory'] = 'Openstack Days';
+        $filter_array['EventCategory'] = 'Hackathons';
         $pulled_events = EventPage::get()->filter($filter_array)->sort(array('EventStartDate'=>'ASC','EventContinent'=>'ASC'))->limit($num);
 
         return $pulled_events;
@@ -187,17 +187,17 @@ class OpenStackDaysPage_Controller extends Page_Controller {
 
     function EventsYearlyCountText() {
         $this_year = date('Y');
-        $event_count = EventPage::get()->where("YEAR(EventStartDate) = '".$this_year."' AND EventPage.EventCategory = 'Openstack Days'")
+        $event_count = EventPage::get()->where("YEAR(EventStartDate) = '".$this_year."' AND EventPage.EventCategory = 'Hackathons'")
                                        ->sort(array('EventStartDate'=>'ASC','EventContinent'=>'ASC'))->count();
 
 
-        return "There are more than <strong>".$event_count." OpenStack Days</strong> scheduled for ".$this_year;
+        return "There are more than <strong>".$event_count." OpenStack Hackathons</strong> scheduled for ".$this_year;
     }
 
     public function getFeaturedEvents() {
         return FeaturedEvent::get('FeaturedEvent')
             ->leftJoin('EventPage','EventPage.ID = FeaturedEvent.EventID')
-            ->filter('EventPage.EventCategory', 'Openstack Days')
+            ->filter('EventPage.EventCategory', 'Hackathons')
             ->sort('EventPage.EventStartDate','DESC');
     }
 

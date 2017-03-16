@@ -1,10 +1,10 @@
-<h1>Openstack Days Events</h1>
+<h1>Hackathon Events</h1>
 
-$FeaturedEventForm('OpenStack Days')
+$FeaturedEventForm(Hackathons)
 
-<% if FeaturedEvents('OpenStack Days') %>
+<% if $getFeaturedEvents(Hackathons) %>
     <br><br>
-    <h2>Featured Openstack Days Events</h2>
+    <h2>Featured Hackathon Events</h2>
     <table id="featured-event-table">
         <thead>
             <tr>
@@ -16,7 +16,7 @@ $FeaturedEventForm('OpenStack Days')
             </tr>
         </thead>
         <tbody>
-        <% loop FeaturedEvents('OpenStack Days') %>
+        <% loop $getFeaturedEvents(Hackathons) %>
             <tr>
                 <td class="title"><a id="evt{$Event.ID}" href="#"></a>
                     $Event.Title

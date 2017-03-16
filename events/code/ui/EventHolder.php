@@ -16,26 +16,11 @@
  */
 class EventHolder extends Page {
    private static$db = array(
-       'OpenstackHackathonsContent'    => 'HTMLText',
-       'OpenstackHackathonsVideoID1'   => 'Text',
-       'OpenstackHackathonsVideoDesc1' => 'Text',
-       'OpenstackHackathonsVideoID2'   => 'Text',
-       'OpenstackHackathonsVideoDesc2' => 'Text',
    );
 
    private static $has_one = array(
    );
 
-    /** static $icon = "icon/path"; */
-    function getCMSFields() {
-        $fields = parent::getCMSFields();
-        $fields->addFieldToTab("Root.OpenstackHackathons", new HtmlEditorField("OpenstackHackathonsContent", "Intro Text"));
-        $fields->addFieldToTab("Root.OpenstackHackathons", new TextField("OpenstackHackathonsVideoID1", "Youtube ID 1"));
-        $fields->addFieldToTab("Root.OpenstackHackathons", new TextField("OpenstackHackathonsVideoDesc1", "Video Description"));
-        $fields->addFieldToTab("Root.OpenstackHackathons", new TextField("OpenstackHackathonsVideoID2", "Youtube ID 2"));
-        $fields->addFieldToTab("Root.OpenstackHackathons", new TextField("OpenstackHackathonsVideoDesc2", "Video Description"));
-		return $fields;
-	}
       
 }
 /**
@@ -49,7 +34,6 @@ class EventHolder_Controller extends Page_Controller {
 		'AjaxFutureEvents',
 		'AjaxFutureSummits',
 		'AjaxPastSummits',
-        'openstackhackathons'
 	);
 
 	function init() {
@@ -105,14 +89,6 @@ class EventHolder_Controller extends Page_Controller {
 
 		return $events_array->sort('EventStartDate', 'ASC')->limit($num,0)->toArray();
 	}
-
-    function FutureOpenstackHackathonsEvents($num) {
-        $filter_array = array('EventEndDate:GreaterThanOrEqual'=> date('Y-m-d'));
-        $filter_array['EventCategory'] = 'Hackathons';
-        $pulled_events = EventPage::get()->filter($filter_array)->sort(array('EventStartDate'=>'ASC','EventContinent'=>'ASC'))->limit($num);
-
-        return $pulled_events;
-    }
 
     function PastSummits($num) {
 	    return EventPage::get()->filter(array('EventEndDate:LessThanOrEqual'=> date('Y-m-d') , 'IsSummit'=>1))->sort('EventEndDate','DESC')->limit($num);
@@ -201,8 +177,4 @@ class EventHolder_Controller extends Page_Controller {
         return $event_type_links;
     }
 
-    function openstackhackathons() {
-        Requirements::css('events/css/openstackhackathons.css');
-        return $this->renderWith(array('EventHolder_openstackhackathons','EventHolder','Page'));
-    }
 }

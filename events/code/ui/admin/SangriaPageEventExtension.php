@@ -26,8 +26,8 @@ final class SangriaPageEventExtension extends Extension {
 	}
 
 	public function onBeforeInit(){
-		Config::inst()->update(get_class($this), 'allowed_actions', array('ViewEventDetails','ViewPostedEvents','ViewOpenstackDaysEvents','FeaturedEventForm','saveFeaturedEvent'));
-		Config::inst()->update(get_class($this->owner), 'allowed_actions', array('ViewEventDetails','ViewPostedEvents','ViewOpenstackDaysEvents','FeaturedEventForm','saveFeaturedEvent'));
+		Config::inst()->update(get_class($this), 'allowed_actions', array('ViewEventDetails','ViewPostedEvents','ViewOpenstackDaysEvents','ViewHackathonEvents','FeaturedEventForm','saveFeaturedEvent'));
+		Config::inst()->update(get_class($this->owner), 'allowed_actions', array('ViewEventDetails','ViewPostedEvents','ViewOpenstackDaysEvents','ViewHackathonEvents','FeaturedEventForm','saveFeaturedEvent'));
 	}
 
 	public function EventRegistrationRequestForm() {
@@ -64,10 +64,12 @@ final class SangriaPageEventExtension extends Extension {
         return $form;
     }
 
-    public function FeaturedEventForm() {
+    public function FeaturedEventForm($category = 'OpenStack Days') {
         $fields = new FieldList;
         //main info
-        $events = EventPage::get('EventPage',"EventCategory = 'OpenStack Days'")->sort('EventStartDate','DESC');
+        $events = EventPage::get('EventPage')
+            ->filter('EventCategory', $category)
+            ->sort('EventStartDate','DESC');
         $options = array();
         foreach($events as $event) {
             $options[$event->ID] = $event->Title.' - '.$event->formatDateRange();
@@ -145,6 +147,12 @@ final class SangriaPageEventExtension extends Extension {
         return $this->owner->getViewer('ViewOpenstackDaysEvents')->process($this->owner);
     }
 
+    public function ViewHackathonEvents(){
+        $this->commonScripts();
+        Requirements::javascript('events/js/admin/sangria.page.event.extension.js');
+        return $this->owner->getViewer('ViewHackathonEvents')->process($this->owner);
+    }
+
 	public function getQuickActionsExtensions(&$html){
 		$view = new SSViewer('SangriaPage_EventLinks');
 		$html .= $view->process($this->owner);
@@ -165,7 +173,7 @@ final class SangriaPageEventExtension extends Extension {
         return $count;
     }
 
-    public function getFeaturedEvents(){
-        return FeaturedEvent::get('FeaturedEvent');
+    public function getFeaturedEvents($category = 'OpenStack Days'){
+        return FeaturedEvent::get('FeaturedEvent')->filter('Event.EventCategory', $category);
     }
 } 

@@ -205,9 +205,12 @@ final class EventCrudApi
     public function getFeaturedEvents()
     {
         $offset = $this->request->getVar('offset');
+        $category = $this->request->getVar('category');
+
         try {
             $featured_events = FeaturedEvent::get('FeaturedEvent')
                 ->leftJoin('EventPage','EventPage.ID = FeaturedEvent.EventID')
+                ->filter('EventPage.EventCategory', urldecode($category))
                 ->sort('EventPage.EventStartDate','DESC');
 
             $featured_result = array();
@@ -218,6 +221,7 @@ final class EventCrudApi
                     'location' => $featured->Event()->Location,
                     'date' => $featured->Event()->formatDateRange(),
                     'image' => '<img src="'.$image_url.'" width="200" height="130" />',
+                    'link' => $featured->Event()->EventLink
                 );
             }
 
