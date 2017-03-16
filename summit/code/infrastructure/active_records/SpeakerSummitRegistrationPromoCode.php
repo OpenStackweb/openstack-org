@@ -56,6 +56,14 @@ class SpeakerSummitRegistrationPromoCode extends SummitRegistrationPromoCode imp
     }
 
     /**
+     * @return boolean
+     */
+    public function hasOwner()
+    {
+        return $this->getSpeaker()->Exists();
+    }
+
+    /**
      * @param IPresentationSpeaker $speaker
      * @return $this
      */

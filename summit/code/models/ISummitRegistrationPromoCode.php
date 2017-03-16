@@ -29,6 +29,11 @@ interface ISummitRegistrationPromoCode extends IEntity
      */
     static public function getTypes();
 
+    /**
+     * @return boolean
+     */
+    public function hasOwner();
+
     public function setCode($code);
 
     public function setSummit($summit_id);

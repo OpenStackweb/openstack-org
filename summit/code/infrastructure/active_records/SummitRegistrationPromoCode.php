@@ -76,6 +76,11 @@ class SummitRegistrationPromoCode extends DataObject implements ISummitRegistrat
         return $type_list;
     }
 
+    /**
+     * @return boolean
+     */
+    public function hasOwner(){ }
+
     public function setCode($code)
     {
         $this->setField('Code',$code);

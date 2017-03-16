@@ -185,7 +185,7 @@ final class SummitPromoCodeManager implements ISummitPromoCodeManager
                 }
             }
 
-            if($promocode->ClassName == 'MemberSummitRegistrationPromoCode') {
+            if($promocode->is_a('MemberSummitRegistrationPromoCode')) {
                 if ($promocode->Owner()->exists()) {
                     $email = $promocode->Owner()->getEmail();
                     $name = $promocode->Owner()->getName();

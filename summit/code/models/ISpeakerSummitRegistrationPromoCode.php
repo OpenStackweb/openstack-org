@@ -27,6 +27,11 @@ interface ISpeakerSummitRegistrationPromoCode extends ISummitRegistrationPromoCo
     public function getSpeaker();
 
     /**
+     * @return boolean
+     */
+    public function hasOwner();
+
+    /**
      * @param IPresentationSpeaker $speaker
      * @return $this
      */

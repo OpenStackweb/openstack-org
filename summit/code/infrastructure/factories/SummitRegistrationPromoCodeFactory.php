@@ -60,6 +60,8 @@ final class SummitRegistrationPromoCodeFactory
                     $speaker = PresentationSpeaker::get_by_id('PresentationSpeaker',trim($data['speaker_id']));
                     if ($speaker->Exists())
                         $promocode->assignSpeaker($speaker);
+                } else {
+                    $promocode->SpeakerID = 0;
                 }
                 break;
             case 'VIP':
@@ -69,7 +71,10 @@ final class SummitRegistrationPromoCodeFactory
                     $owner = Member::get_by_id('Member',trim($data['member_id']));
                     if ($owner->Exists())
                         $promocode->assignOwner($owner);
+                } else {
+                    $promocode->OwnerID = 0;
                 }
+
                 if (isset($data['first_name']))
                     $promocode->setFirstName(trim($data['first_name']));
                 if (isset($data['last_name']))
@@ -82,7 +87,10 @@ final class SummitRegistrationPromoCodeFactory
                     $owner = Member::get_by_id('Member',trim($data['member_id']));
                     if ($owner->Exists())
                         $promocode->assignOwner($owner);
+                } else {
+                    $promocode->OwnerID = 0;
                 }
+
                 if (isset($data['company_id']) && $data['company_id']) {
                     $sponsor = Company::get_by_id('Company',trim($data['company_id']));
                     if ($sponsor->Exists())

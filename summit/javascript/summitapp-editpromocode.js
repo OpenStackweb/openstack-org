@@ -22,6 +22,18 @@ $(document).ready(function(){
        updateForm();
     });
 
+    $('#speaker_id').on('itemRemoved', function(event) {
+        // hide send email
+        $('#send_email').prop('disabled',true);
+        $('#email_sent').prop('checked', false);
+    });
+
+    $('#member_id').on('itemRemoved', function(event) {
+        $('#send_email').prop('disabled',true);
+        $('#email_sent').prop('checked', false);
+    });
+
+
     $('#send_email').click(function(){
         if($('#member_id').tagsinput('items').length || $('#speaker_id').tagsinput('items').length) {
             sendEmail();
@@ -158,7 +170,7 @@ $(document).ready(function(){
         focusCleanup: true,
         ignore: [],
         rules: {
-            code:       { required: true},
+            code: { required: true},
         },
     });
 
@@ -167,6 +179,29 @@ $(document).ready(function(){
 
         if (!form.valid()) return false;
 
+        //check if the owner changed and the promocode already sent
+        if (email_sent && old_owner && old_owner != $('#speaker_id').val() && old_owner != $('#member_id').val()) {
+            swal({
+                title: "Are you sure?",
+                text: "This promocode was already sent by email to the previous owner.",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, change it!",
+                closeOnConfirm: false
+            },
+            function(){
+                $('#email_sent').prop('checked', false);
+                savePromocode();
+            });
+        } else {
+            savePromocode();
+        }
+
+        return false;
+    });
+
+    function savePromocode() {
         form.find(':submit').attr('disabled','disabled');
         var disabled = form.find(':input:disabled').removeAttr('disabled');
         var request      = form.serializeForm();
@@ -200,8 +235,7 @@ $(document).ready(function(){
             }
             form.find(':submit').removeAttr('disabled');
         });
-        return false;
-    });
+    }
 
     function updateForm() {
         var type = $('#code_type').val();

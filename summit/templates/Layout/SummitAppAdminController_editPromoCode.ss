@@ -84,9 +84,9 @@
                             <label for="redeemed">Redeemed</label>
                         </div>
                     </div>
-                    <% if $PromoCode.EmailSent == 0 && $PromoCode.Exists %>
+                    <% if $PromoCode.Exists %>
                     <div class="col-md-3">
-                        <button type="button" id="send_email" class="btn btn-default">Send Email</button>
+                        <button type="button" id="send_email" class="btn btn-default" <% if not $PromoCode.hasOwner() %> disabled <% end_if %>>Send Email</button>
                     </div>
                     <% end_if %>
                 </div>
@@ -104,6 +104,8 @@
         var company = {};
         var code = "{$PromoCode.Code.JS}";
         var speaker_email = '';
+        var old_owner = 0;
+        var email_sent = {$PromoCode.EmailSent};
 
         <% if $PromoCode.Speaker %>
             <% if $PromoCode.Speaker.Member.Email %>
@@ -120,6 +122,13 @@
         <% if $PromoCode.Sponsor %>
             company = {id : "{$PromoCode.Sponsor.ID}", name : "{$PromoCode.Sponsor.Name.JS}"};
         <% end_if %>
+
+        if (speaker) {
+            old_owner = speaker.speaker_id;
+        } else if (owner) {
+            old_owner = owner.id;
+        }
+
     </script>
 
 </div>

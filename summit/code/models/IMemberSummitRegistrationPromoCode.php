@@ -25,6 +25,11 @@ interface IMemberSummitRegistrationPromoCode extends ISummitRegistrationPromoCod
     public function getOwner();
 
     /**
+     * @return boolean
+     */
+    public function hasOwner();
+
+    /**
      * @param ICommunityMember $member
      * @return $this
      */

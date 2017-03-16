@@ -67,6 +67,14 @@ class MemberSummitRegistrationPromoCode extends SummitRegistrationPromoCode impl
     }
 
     /**
+     * @return boolean
+     */
+    public function hasOwner()
+    {
+        return $this->getOwner()->Exists() || $this->Email;
+    }
+
+    /**
      * @param ICommunityMember $member
      * @return $this
      */

@@ -58,7 +58,7 @@
                     </td>
                     <td>{ pcode.source }</td>
                     <td>
-                        <a href="{ parent.edit_link+'/'+pcode.code }" class="btn btn-default btn-sm" role="button" if="{ !pcode.email_sent }">Edit</a>
+                        <a href="{ parent.edit_link+'/'+pcode.code }" class="btn btn-default btn-sm" role="button">Edit</a>
                         <a href="" onclick="{ deleteCode }" class="btn btn-danger btn-sm" role="button" if="{ !pcode.email_sent }">Delete</a>
                     </td>
                 </tr>
