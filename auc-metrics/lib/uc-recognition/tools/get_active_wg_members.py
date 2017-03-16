@@ -24,11 +24,9 @@ import os
 meeting_mappings = {
 'uc': 'user_committee',
 'product_team': 'product_working_group',
-'large_deployments_team_december_2015_meeting': 'large_deployment_team',
-'large_deployments_team_february_2016_meeting': 'large_deployment_team',
 'large_deployments_team_monthly_meeting': 'large_deployment_team',
-'large_deployments_team_january_2016_meeting': 'large_deployment_team',
-'large_deployments_team_october_2015_meeting': 'large_deployment_team'
+'ops_meetup_team': 'ops_meetups_team',
+'operators_telco_nfv': 'telcowg',
 }
 
 
