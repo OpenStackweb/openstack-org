@@ -244,7 +244,7 @@
       <div class="col-xs-4 col-xs-push-2 academy-section">
         <i class="fa fa-retweet"></i>
         <p>
-          Upstream University two-day training session for new contributors
+          OpenStack Upstream Institute two-day training session for new contributors
         </p>
       </div>
       <div class="col-xs-4 col-xs-push-2 academy-section">
