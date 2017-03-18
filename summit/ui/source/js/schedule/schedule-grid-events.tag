@@ -503,7 +503,10 @@
                  if($('#event_'+eventId).length > 0) {
                         $('html, body').animate({
                             scrollTop: $('#event_'+eventId).offset().top
-                        }, 1000);
+                        }, 1000).promise().then(function() {
+                              $('div.main-event-content','#event_'+eventId).trigger('click');
+                        });
+
                     }
                 }
                 $('#events-container').ajax_loader('stop');

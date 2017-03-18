@@ -197,7 +197,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
             $start_date = new \DateTime($event->getStartDate());
             $main_schedule_page = SummitAppSchedPage::get()->filter("SummitID", $summit_id)->first();
             $back_url = $main_schedule_page->getAbsoluteLiveLink(false);
-            $back_url .= sprintf("#day=%s-%s-%s&evenid=%s", $start_date->format('Y'), $start_date->format('m'), $start_date->format('d'), $event->ID);
+            $back_url .= sprintf("#day=%s-%s-%s&eventid=%s", $start_date->format('Y'), $start_date->format('m'), $start_date->format('d'), $event->ID);
         }
 
         return $this->renderWith(
