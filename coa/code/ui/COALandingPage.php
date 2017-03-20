@@ -25,6 +25,10 @@ class COALandingPage extends Page
         'HandBookLink'           => 'Text',
         'GetStartedURL'          => 'Text',
         'GetStartedLabel'        => 'Text',
+        'GetStartedURL2'         => 'Text',
+        'GetStartedLabel2'       => 'Text',
+        'GetStartedURL3'         => 'Text',
+        'GetStartedLabel3'       => 'Text',
         'HideFee'                => 'Boolean',
         'AlreadyRegisteredURL'   => 'Text',
         'ExamCost'               => 'Text',
@@ -266,10 +270,15 @@ HTML;
         $fields->addFieldToTab('Root.Main', $how_html = new HtmlEditorField('GetStartedText', 'How to Get Started'));
         $how_html->setRows(5);
         $fields->addFieldToTab('Root.Main', new TextField('HandBookLink', 'HandBook Link'));
+        $fields->addFieldToTab('Root.Main', new TextField('AlreadyRegisteredURL', 'Already Registered URL'));
+
         $fields->addFieldToTab('Root.Main', new TextField('GetStartedURL', 'Get Started URL'));
         $fields->addFieldToTab('Root.Main', new TextField('GetStartedLabel', 'Get Started Label'));
+        $fields->addFieldToTab('Root.Main', new TextField('GetStartedURL2', 'Get Started URL 2'));
+        $fields->addFieldToTab('Root.Main', new TextField('GetStartedLabel2', 'Get Started Label 2'));
+        $fields->addFieldToTab('Root.Main', new TextField('GetStartedURL3', 'Get Started URL 3'));
+        $fields->addFieldToTab('Root.Main', new TextField('GetStartedLabel3', 'Get Started Label 3'));
 
-        $fields->addFieldToTab('Root.Main', new TextField('AlreadyRegisteredURL', 'Already Registered URL'));
         // exam details
         $fields->addFieldToTab('Root.ExamDetails', $html_details = new HtmlEditorField('ExamDetails', 'Details Title'));
         $html_details->setRows(5);
@@ -335,7 +344,7 @@ class COALandingPage_Controller extends Page_Controller
 
     static $url_handlers = array
     (
-        'get-started'        => 'getStarted',
+        'get-started/$IDX'   => 'getStarted',
         'already-registered' => 'alreadyRegistered',
     );
 
@@ -351,14 +360,18 @@ class COALandingPage_Controller extends Page_Controller
 
     public function index(){
         Requirements::css('coa/css/coa.css');
+        Requirements::javascript('coa/js/coa.js');
+
         return $this->getViewer('index')->process($this);
     }
 
-    public function getStarted(){
+    public function getStarted(SS_HTTPRequest $request){
         if(Member::currentUser()){
-            $this->redirect($this->GetStartedURL);
+            $idx = $request->param('IDX') ? $request->param('IDX') : '';
+            $url_var = 'GetStartedURL'.$idx;
+            $this->redirect($this->$url_var);
         }
-        OpenStackIdCommon::doLogin($this->Link('get-started'));
+        OpenStackIdCommon::doLogin($this->Link('get-started').'/'.$idx);
     }
 
     public function alreadyRegistered(){
@@ -366,6 +379,14 @@ class COALandingPage_Controller extends Page_Controller
             $this->redirect($this->AlreadyRegisteredURL);
         }
         OpenStackIdCommon::doLogin($this->Link('already-registered'));
+    }
+
+    public function multipleGetStarted() {
+        return $this->GetStartedURL && ($this->GetStartedURL2 || $this->GetStartedURL3);
+    }
+
+    public function bannerGetStartedLabel() {
+        return ($this->multipleGetStarted()) ? 'How to get started' : $this->GetStartedLabel;
     }
 
 }

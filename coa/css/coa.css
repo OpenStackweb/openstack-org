@@ -241,3 +241,40 @@ a.coa-started-btn:visited {
     width: 165px;
     max-width: 90%;
 }
+
+#get-started-modal .coa-badge-modal img {
+    height: 120px;
+}
+
+#get-started-modal .coa-badge-modal {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#get-started-modal .modal-body {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#get-started-modal .modal-footer {
+    text-align: center;
+    border: none;
+    height: 80px;
+}
+
+.coa-get-started-btn {
+    background: #30739C;
+    color: white !important;
+    border-radius: 4px;
+    padding: 20px 40px;
+    width: 150px;
+    margin: 20px 10px;
+    height: 60px;
+}
+
+.coa-get-started-btn:hover, .coa-get-started-btn:focus {
+    text-decoration: none;
+    background: #2A4E68;
+}
+
+

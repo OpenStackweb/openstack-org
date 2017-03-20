@@ -11,9 +11,13 @@
                 <hr>
                 <div class="coa-action-top">
                     <% if $HideHowGetStarted == 0 %>
-                        <a href="/coa#coa-get-started" class="coa-action-btn">$GetStartedLabel <i class="fa fa-chevron-right"></i></a>
+                        <a href="/coa#coa-get-started" class="coa-action-btn">
+                            $bannerGetStartedLabel() <i class="fa fa-chevron-right"></i>
+                        </a>
                     <% else %>
-                        <a href="{$Top.Link(get-started)}" class="coa-action-btn">$GetStartedLabel <i class="fa fa-chevron-right"></i></a>
+                        <a href="{$Top.Link(get-started)}" data-show-modal="{$multipleGetStarted()}" class="coa-link coa-action-btn">
+                            $bannerGetStartedLabel() <i class="fa fa-chevron-right"></i>
+                        </a>
                     <% end_if %>
                     <% if $HideFee == 0 %>
                         <% if ExamSpecialCost %>
@@ -35,13 +39,13 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-3 coa-action-single">
-                <a href="{$Top.Link(get-started)}" class="coa-action-btn">Purchase Exam</a>
+                <a href="{$Top.Link(get-started)}" data-show-modal="{$multipleGetStarted()}" class="coa-action-btn coa-link">Purchase Exam</a>
                 <p>
                     Get started with a new COA exam.
                 </p>
             </div>
             <div class="col-sm-3 coa-action-single">
-                <a href="{$Top.Link(get-started)}" class="coa-action-btn">Redeem A Code</a>
+                <a href="{$Top.Link(get-started)}" data-show-modal="{$multipleGetStarted()}" class="coa-action-btn coa-link">Redeem A Code</a>
                 <p>
                     Redeem a code from a partner company and get started with your COA exam.
                 </p>
@@ -130,7 +134,7 @@
                 <h2>How to Get Started</h2>
                 $Top.GetStartedText
                 <p>
-                    <a href="{$Top.Link(get-started)}" class="coa-started-btn">Get Started <i class="fa fa-angle-right"></i></a>
+                    <a href="{$Top.Link(get-started)}" data-show-modal="{$multipleGetStarted()}" class="coa-started-btn coa-link">Get Started <i class="fa fa-angle-right"></i></a>
                 </p>
             </div>
         </div>
@@ -199,4 +203,36 @@
         </div>
     </div>
 </div>
+
+<% if $multipleGetStarted() %>
+<div id="get-started-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Select Your Exam Type</h4>
+            </div>
+            <div class="modal-body">
+                <div class="coa-badge-modal">
+                    <img src="/themes/openstack/images/coa/coa-badge.svg" alt="{$Top.BannerTitle}">
+                </div>
+                <p>
+                    Select the operating system you would like to use to take the Certified <br>
+                    OpenStack Administrator (COA) exam. Please keep in mind, you cannot switch <br>
+                    operating systems after the exam has been purchased.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <a href="{$Top.Link(get-started)}" class="coa-get-started-btn" >$GetStartedLabel</a>
+                <% if $GetStartedURL2 %>
+                    <a href="{$Top.Link(get-started)}/2" class="coa-get-started-btn" >$GetStartedLabel2</a>
+                <% end_if %>
+                <% if $GetStartedURL3 %>
+                    <a href="{$Top.Link(get-started)}/3" class="coa-get-started-btn" >$GetStartedLabel3</a>
+                <% end_if %>
+            </div>
+        </div>
+    </div>
+</div>
+<% end_if %>
 <!-- End Page Content -->
