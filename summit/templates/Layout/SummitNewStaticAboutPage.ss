@@ -326,7 +326,7 @@
 					<p>
             You can access everything the Boston Summit has to offer with one pass!
           </p>
-					<img class="summit-type-icon" src="/themes/openstack/static/images/boston/boston-schedule.png" alt="Summit Timeline">
+					<img class="summit-type-icon" src="/assets/boston-summit/images/boston-schedule-final.png" alt="Summit Timeline">
 				</div>
 
 			</div>
