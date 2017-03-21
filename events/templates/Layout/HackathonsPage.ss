@@ -1,9 +1,9 @@
 </div>
-<div class="osdays-hero">
+<div class="hackathon-hero">
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <img class="osdays-logo" src="./themes/openstack/images/osdays/days-logo.png" alt="">
+                <img class="hackathon-logo" src="/assets/openstack-logo/2016R/OpenStack-Logo-Mark.png" alt="OpenStack Logo">
                 <h1>$Title</h1>
             </div>
         </div>

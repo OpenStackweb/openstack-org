@@ -14,10 +14,33 @@
     font-weight: 400;
     font-size: 34px;
     margin: 4px 0 19px;
+    font-family: 'Montserrat';
+    src: url('/themes/openstack/fonts/Sentinel-Medium.otf');
 }
 
 .osdays-hero .osdays-logo {
     margin: 19px 0 1px;
+    height:90px;
+}
+
+.hackathon-hero {
+    background: url('/themes/openstack/images/osdays/days-hero-bkgd.jpg') no-repeat top center;
+    background-size: cover;
+    text-align: center;
+    border-bottom: 1px solid #DFE2E5
+}
+
+.hackathon-hero h1 {
+    color: #2b4e68;
+    font-weight: 400;
+    font-size: 34px;
+    margin: 4px 0 19px;
+}
+
+.hackathon-hero .hackathon-logo {
+    margin: 19px 0 1px;
+    height:90px;
+    padding-bottom: 10px;
 }
 
 .days-pretext{
