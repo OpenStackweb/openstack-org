@@ -1,3 +1,11 @@
+@font-face {
+    font-family: 'Sentinel-Medium';
+    src: url(/themes/openstack/fonts/Sentinel-Medium.otf);
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 .new-design .software-tab-wrapper ul.project-tabs li.active a{
     background: #F3F7FB;
 }
