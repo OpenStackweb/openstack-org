@@ -121,7 +121,7 @@ class SummitPage_Controller extends Page_Controller
         Requirements::block("themes/openstack/css/combined.css");
         Requirements::css("summit/css/combined.css");
         Requirements::css("themes/openstack/static/css/combined.css");
-        Requirements::css(Director::protocol() . '://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css?'.time());
+        Requirements::css('//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css');
     }
 
     public function CurrentSummit()

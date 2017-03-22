@@ -372,12 +372,13 @@ abstract class AbstractRestfulJsonApi extends Controller
      * @param SS_HTTPRequest $request
      * @return null|string
      */
-    public function getCurrentAction(SS_HTTPRequest $request){
+    public function getCurrentAction(SS_HTTPRequest $request, $shift = false){
         $controller_class = ($this->class) ? $this->class : get_class($this);
-        $url_handlers     = Config::inst()->get($controller_class, 'url_handlers', Config::FIRST_SET);
+        $url_handlers     = Config::inst()->get($controller_class, 'url_handlers', Config::UNINHERITED);
+
         if(is_null($url_handlers)) return  [null, null];
         foreach ($url_handlers as $rule => $action) {
-            if ($params = $request->match($rule)) {
+            if ($params = $request->match($rule, $shift)) {
                return [$action, $params];
             }
         }
@@ -389,11 +390,11 @@ abstract class AbstractRestfulJsonApi extends Controller
      * @param DataModel $model
      * @return mixed|SS_HTTPResponse
      */
-    public function handleRequest(SS_HTTPRequest $request, DataModel $model)
+    public function handleRequest(SS_HTTPRequest $request, DataModel $model, $shift = false)
     {
 
         $this->request         = $request;
-        list($action, $params) = $this->getCurrentAction($request);
+        list($action, $params) = $this->getCurrentAction($request, $shift);
 
         if(!is_null($action) && $annotation = $this->getCacheAnnotation($action)){
             $this->markActionAsCacheAble($action, $annotation);
@@ -409,6 +410,8 @@ abstract class AbstractRestfulJsonApi extends Controller
 
         if(!is_null($action)){
             if ($res = $this->doBeforeFilter($action, $params)) {
+                // final response, doing this to get request marked as parsed
+                $this->findAction($request);
                 return $res;
             }
         }

@@ -131,13 +131,13 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi
     }
 
     static $url_handlers = [
-        'GET '                                    => 'getScheduleByDay',
         'GET level'                               => 'getScheduleByLevel',
         'GET track'                               => 'getScheduleByTrack',
         'GET search'                              => 'getSearchResults',
         'GET export/ics'                          => 'ExportEventToICS',
         'GET empty_spots'                         => 'getEmptySpots',
         'GET full'                                => 'getFullSchedule',
+        'GET '                                    => 'getScheduleByDay',
         'PUT $EventID!/favorite'                  => 'AddToFavorites',
         'DELETE $EventID!/favorite'               => 'RemoveFromFavorites',
         'DELETE $EventID!/rsvp'                   => 'deleteRSVP',

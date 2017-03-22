@@ -17,6 +17,7 @@ schedule_api.getEventByDay = function (summit_id, day)
         }
     }).fail(function (jqXHR, textStatus, errorThrown) {
         sweetAlert("Oops...", 'there was an error, please contact your administrator', "error");
+        schedule_api.trigger('error');
     });
 }
 
@@ -24,9 +25,19 @@ schedule_api.getEventByLevel = function (summit_id, level)
 {
     schedule_api.trigger('beforeEventsRetrieved',{});
     var url = api_base_url.replace('@SUMMIT_ID', summit_id)+'/level?level='+level;
-    return $.get(url,function (data) {
-        data.show_date = true;
-        schedule_api.trigger('eventsRetrieved', data);
+
+    $.ajax({
+        type: 'GET',
+        url:  url,
+        timeout:120000,
+        dataType:'json',
+        success: function (data, textStatus, jqXHR) {
+            data.show_date = true;
+            schedule_api.trigger('eventsRetrieved', data);
+        }
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        sweetAlert("Oops...", 'there was an error, please contact your administrator', "error");
+        schedule_api.trigger('error');
     });
 }
 
@@ -34,9 +45,19 @@ schedule_api.getEventByTrack = function (summit_id, track)
 {
     schedule_api.trigger('beforeEventsRetrieved',{});
     var url = api_base_url.replace('@SUMMIT_ID', summit_id)+'/track?track='+track;
-    return $.get(url,function (data) {
-        data.show_date = true;
-        schedule_api.trigger('eventsRetrieved', data);
+
+    $.ajax({
+        type: 'GET',
+        url:  url,
+        timeout:120000,
+        dataType:'json',
+        success: function (data, textStatus, jqXHR) {
+            data.show_date = true;
+            schedule_api.trigger('eventsRetrieved', data);
+        }
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        sweetAlert("Oops...", 'there was an error, please contact your administrator', "error");
+        schedule_api.trigger('error');
     });
 }
 
@@ -62,6 +83,7 @@ schedule_api.addEvent2MySchedule = function (summit_id, event_id)
             // user lost its session
             sweetAlert("Oops...", 'Event already belongs to my schedule', "error");
         }
+        schedule_api.trigger('error');
     });
 }
 
@@ -87,6 +109,7 @@ schedule_api.removeEventFromMySchedule = function (summit_id, event_id)
             // user lost its session
             sweetAlert("Oops...", 'Event does not belongs to my schedule', "error");
         }
+        schedule_api.trigger('error');
     });
 }
 
@@ -111,6 +134,7 @@ schedule_api.unRSVPEvent = function (summit_id, event_id) {
             // user lost its session
             sweetAlert("Oops...", 'Event does not belongs to my schedule', "error");
         }
+        schedule_api.trigger('error');
     });
 }
 
@@ -135,6 +159,7 @@ schedule_api.addEvent2MyFavorites = function (summit_id, event_id)
             // user lost its session
             sweetAlert("Oops...", 'Event already belongs to favorites', "error");
         }
+        schedule_api.trigger('error');
     });
 }
 
@@ -160,6 +185,7 @@ schedule_api.removeEventFromMyFavorites = function (summit_id, event_id)
             // user lost its session
             sweetAlert("Oops...", 'Event does not belongs to favorites', "error");
         }
+        schedule_api.trigger('error');
     });
 }
 
@@ -181,6 +207,7 @@ schedule_api.googleCalSynch = function (event)
             sweetAlert("Oops...", 'you are not logged in!', "error");
             location.reload();
         }
+        schedule_api.trigger('error');
     });
 }
 
@@ -202,6 +229,7 @@ schedule_api.googleCalUnSynch = function (event)
             sweetAlert("Oops...", 'you are not logged in!', "error");
             location.reload();
         }
+        schedule_api.trigger('error');
     });
 }
 

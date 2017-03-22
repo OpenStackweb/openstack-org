@@ -322,6 +322,10 @@
               }
         });
 
+        this.schedule_api.on('error',function() {
+            $('#events-container').ajax_loader('stop');
+        });
+
         this.schedule_api.on('eventsRetrieved',function(data) {
             self.show_date    = data.show_date;
             self.day_selected = data.day_selected;
