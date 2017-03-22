@@ -36,10 +36,10 @@ class SS_CustomLogErrorEmailFormatter extends SS_LogErrorEmailFormatter {
 			return false;
 		}
 
-		$errno = $event['message']['errno'];
-		$errstr = $event['message']['errstr'];
-		$errfile = $event['message']['errfile'];
-		$errline = $event['message']['errline'];
+		$errno      = $event['message']['errno'];
+		$errstr     = $event['message']['errstr'];
+		$errfile    = $event['message']['errfile'];
+		$errline    = $event['message']['errline'];
 		$errcontext = $event['message']['errcontext'];
 
 		$ref          = @$_SERVER['HTTP_REFERER'];
@@ -54,14 +54,12 @@ class SS_CustomLogErrorEmailFormatter extends SS_LogErrorEmailFormatter {
 			$ip = $_SERVER['REMOTE_ADDR'];
 		}
 
-		$data = "<div style=\"border: 5px $colour solid\">\n";
+		$data  = "<div style=\"border: 5px $colour solid\">\n";
 		$data .= "<p style=\"color: white; background-color: $colour; margin: 0\">HTTP_REFERER :$ref - CLIENT_IP : $ip  <br/>$errorType: $errstr<br/> At line $errline in $errfile\n<br />\n<br />\n</p>\n";
 
 		// Get a backtrace, filtering out debug method calls
-		$data .= SS_Backtrace::backtrace(true, false, array(
-			'SS_LogErrorEmailFormatter->format',
-			'SS_LogEmailWriter->_write'
-		));
+		$ex = new \Exception();
+        $data .= $ex->getTraceAsString().PHP_EOL;
 
 		$data .= "</div>\n";
 
@@ -72,7 +70,7 @@ class SS_CustomLogErrorEmailFormatter extends SS_LogErrorEmailFormatter {
 
 		return array(
 			'subject' => $subject,
-			'data' => $data
+			'data'    => $data
 		);
 
 	}

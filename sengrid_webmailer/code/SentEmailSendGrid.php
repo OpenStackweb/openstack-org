@@ -15,9 +15,9 @@
 class SentEmailSendGrid extends DataObject
 {
     private static $db = [
-      'To'            => 'Varchar',
-      'From'          => 'Varchar',
-      'Subject'       => 'Varchar',
+      'To'            => 'Varchar(255)',
+      'From'          => 'Varchar(255)',
+      'Subject'       => 'Varchar(255)',
       'Body'          => 'HTMLText',
       'CC'            => 'Text',
       'BCC'           => 'Text',
