@@ -27,13 +27,14 @@ class SendGridWebMailer extends Mailer {
         parent::__construct();
         $this->mailer = $mailer;
     }
+
     protected function instanciate() {
         $sendgrid = new SendGrid(SMTPMAILER_USERNAME, SMTPMAILER_PASSWORD);
         return $sendgrid;
     }
 
     /* Overwriting SilverStripe's Mailer's function */
-    function sendHTML($to, $from, $subject, $htmlContent, $attachedFiles = false, $customheaders = false, $plainContent = false, $inlineImages = false){
+    public function sendHTML($to, $from, $subject, $htmlContent, $attachedFiles = false, $customheaders = false, $plainContent = false, $inlineImages = false){
 
         $mail     = new SendGrid\Email();
         $sendgrid = $this->instanciate();
@@ -55,7 +56,7 @@ class SendGridWebMailer extends Mailer {
     }
 
     /* Overwriting SilverStripe's Mailer function */
-    function sendPlain($to, $from, $subject, $plainContent, $attachedFiles = false, $customheaders = false){
+    public function sendPlain($to, $from, $subject, $plainContent, $attachedFiles = false, $customheaders = false){
 
         $mail     = new SendGrid\Email();
         $sendgrid = $this->instanciate();

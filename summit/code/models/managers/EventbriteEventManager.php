@@ -55,6 +55,11 @@ final class EventbriteEventManager implements IEventbriteEventManager
      */
     private $summit_repository;
 
+    /**
+     * @var ISummitAttendeeTicketRepository
+     */
+    private $ticket_repository;
+
     public function __construct
     (
         IEventbriteEventRepository $repository,
@@ -64,6 +69,7 @@ final class EventbriteEventManager implements IEventbriteEventManager
         ISummitAttendeeFactory $attendee_factory,
         ISummitAttendeeRepository $attendee_repository,
         ISummitRepository $summit_repository,
+        ISummitAttendeeTicketRepository $ticket_repository,
         ITransactionManager $tx_manager
     ) {
         $this->repository          = $repository;
@@ -73,6 +79,7 @@ final class EventbriteEventManager implements IEventbriteEventManager
         $this->attendee_factory    = $attendee_factory;
         $this->attendee_repository = $attendee_repository;
         $this->summit_repository   = $summit_repository;
+        $this->ticket_repository   = $ticket_repository;
         $this->tx_manager          = $tx_manager;
 
         $this->api->setCredentials(array('token' => EVENTBRITE_PERSONAL_OAUTH2_TOKEN));
@@ -117,6 +124,7 @@ final class EventbriteEventManager implements IEventbriteEventManager
         $attendee_factory    = $this->attendee_factory;
         $attendee_repository = $this->attendee_repository;
         $summit_repository   = $this->summit_repository;
+        $ticket_repository   = $this->ticket_repository;
 
         return $this->tx_manager->transaction(function () use (
             $bach_size,
@@ -126,6 +134,7 @@ final class EventbriteEventManager implements IEventbriteEventManager
             $attendee_factory,
             $attendee_repository,
             $summit_repository,
+            $ticket_repository,
             $invite_sender,
             $create_sender
         ) {
@@ -168,6 +177,7 @@ final class EventbriteEventManager implements IEventbriteEventManager
 
                             if (is_null($member)) {
                                 // member not found ... send email to invite to openstack.org membership
+                                echo sprintf("sending email (invite) to %s", $email).PHP_EOL;
                                 $invite_sender->send($email);
                                 continue;
                             }
@@ -191,11 +201,28 @@ final class EventbriteEventManager implements IEventbriteEventManager
                                 $current_summit->getIdentifier()
                             );
 
+                            $old_ticket = $ticket_repository->getByExternalOrderIdAndExternalAttendeeId
+                            (
+                                $order_id,
+                                $external_id
+                            );
 
-                            $ticket = $attendee_factory->buildTicket($external_id , $order_id, $bought_date, $changed_date, $ticket_type);
+                            $ticket     = $attendee_factory->buildTicket($external_id , $order_id, $bought_date, $changed_date, $ticket_type);
+                            if(!is_null($old_ticket)){
+                                $former_attendee = $old_ticket->Owner();
+                                if(is_null($old_attendee) || $old_attendee->getIdentifier() != $former_attendee->getIdentifier()){
+                                    echo sprintf("(ticket reassignment) current member %s (%s) - former attendee %s - former member id %s (%s)", $member->ID, $email,  $former_attendee->getMemberFullName(), $former_attendee->Member()->ID, $former_attendee->Member()->Email).PHP_EOL;
+                                    echo sprintf("(ticket reassignment) deleting former attendee %s", $former_attendee->getMemberFullName()).PHP_EOL;
+                                    $former_attendee->delete();
+                                }
+                            }
+
                             if ($old_attendee)
                             {
-                                if($old_attendee->hasTicket($ticket)) continue;
+                                if($old_attendee->hasTicket($ticket)){
+                                    echo sprintf("old attendee %s member id %s (%s) already has ticket for external order id %s", $old_attendee->getMemberFullName(), $old_attendee->Member()->ID, $old_attendee->Member()->Email, $order_id).PHP_EOL;
+                                    continue;
+                                }
                                 $attendee = $old_attendee;
                             }
                             else
@@ -206,14 +233,14 @@ final class EventbriteEventManager implements IEventbriteEventManager
                                     $current_summit
                                 );
                                 // send email informing that u became attendee...
+                                echo sprintf("sending email (association) to %s (%s)", $attendee->getMemberFullName(), $email).PHP_EOL;
                                 $create_sender->send($attendee);
                             }
                             $attendee->addTicket($ticket);
                             $attendee_repository->add($attendee);
                         }
 
-                        $external_summit    = $json_data['event'];
-                        $external_summit_id = $external_summit['id'];
+                        $external_summit_id = $json_data['event_id'];
                         // associate the corresponding summit
                         $summit             = $summit_repository->getByExternalEventId($external_summit_id);
                         if(is_null(!$summit))

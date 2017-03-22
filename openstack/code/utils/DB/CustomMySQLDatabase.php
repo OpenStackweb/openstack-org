@@ -85,6 +85,14 @@ class CustomMySQLDatabase extends MySQLDatabase
         $this->query('SET AUTOCOMMIT=1;');
     }
 
+    /*
+	 * Commit everything inside this transaction so far
+	 */
+    public function transactionEnd($chain = false){
+        parent::transactionEnd($chain);
+        $this->query('SET AUTOCOMMIT=1;');
+    }
+
     public function query($sql, $errorLevel = E_USER_ERROR) {
         $query = parent::query($sql, $errorLevel);
         SS_Log::log($sql, SS_Log::DEBUG);

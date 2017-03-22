@@ -173,6 +173,8 @@ Injector:
     class: SapphireSummitReportRepository
   PromoCodeRepository:
     class: SapphireSummitRegistrationPromoCodeRepository
+  SummitAttendeeTicketRepository:
+    class: SapphireSummitAttendeeTicketRepository
   SummitEventFactory:
     class: SummitEventFactory
   EventbriteEventManager:
@@ -184,7 +186,8 @@ Injector:
       4: '%$SummitAttendeeFactory'
       5: '%$SummitAttendeeRepository'
       6: '%$SummitRepository'
-      7: '%$TransactionManager'
+      7: '%$SummitAttendeeTicketRepository'
+      8: '%$TransactionManager'
   SummitEventManager:
     constructor:
       0: '%$SummitRepository'

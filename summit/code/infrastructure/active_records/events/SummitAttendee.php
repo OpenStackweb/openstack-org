@@ -106,6 +106,12 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
     }
 
     /**
+     * @return string
+     */
+    public function getMemberFullName(){
+        return $this->Member()->exists() ? $this->Member()->getFullName() : '';
+    }
+    /**
      * @return ISummit
      */
     public function getSummit()

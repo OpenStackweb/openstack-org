@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Copyright 2015 Openstack Foundation
+ * Copyright 2016 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -11,5 +12,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-
-if(defined("SENDGRID_REST_API")) Email::set_mailer(new NullMailer());
+interface ISummitAttendeeTicketRepository extends IEntityRepository
+{
+    /**
+     * @param int $external_order_id
+     * @param int $external_attendee_id
+     * @return ISummitAttendeeTicket
+     */
+    function getByExternalOrderIdAndExternalAttendeeId($external_order_id, $external_attendee_id);
+}
