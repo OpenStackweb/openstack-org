@@ -2,32 +2,34 @@
 
 $(document).ready(function () {
 
-    $('.rsvp_form').validate({
-        errorPlacement: function(error, element) {
-            error.insertAfter($(element).closest('div'));
-        }
-    });
+    if($('.rsvp_form').length > 0) {
+        $('.rsvp_form').validate({
+            errorPlacement: function (error, element) {
+                error.insertAfter($(element).closest('div'));
+            }
+        });
 
-    if($('.rsvp_form'),length > 0) {
+
         $('html, body').animate({
             scrollTop: $('.rsvp_form').offset().top - 100
         }, 1000);
+
+
+        $(document).off("click", ".rsvp_submit").on("click", ".rsvp_submit", function (e) {
+            e.preventDefault();
+            var btn = $(this);
+            var form = btn.closest('.rsvp_form');
+            if (!form.valid()) return false;
+
+            var event_id = $('input[name="event_id"]', form).val();
+            var summit_id = $('input[name="summit_id"]', form).val();
+            var security_id = $('input[name="SecurityID"]', form).val();
+
+            addRSVP(form, event_id, summit_id, security_id);
+
+            return false;
+        });
     }
-
-    $(document).off("click", ".rsvp_submit").on( "click", ".rsvp_submit", function(e) {
-        e.preventDefault();
-        var btn     = $(this);
-        var form    = btn.closest('.rsvp_form');
-        if(!form.valid()) return false;
-
-        var event_id    = $('input[name="event_id"]',form).val();
-        var summit_id   = $('input[name="summit_id"]',form).val();
-        var security_id = $('input[name="SecurityID"]',form).val();
-
-        addRSVP(form, event_id, summit_id, security_id);
-
-        return false;
-    });
 
 });
 
