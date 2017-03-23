@@ -90,23 +90,28 @@
                             <table class="table maturity-table">
                                 <thead>
                                 <tr>
+                                    <th class="checkbox"></th>
                                     <th><%t Software.MATURITY_INDICATORS 'Maturity Indicators' %></th>
                                     <th><%t Software.TAG_DETAILS 'Tag Details' %></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <% if $Component.HasInstallationGuide %>
+
+                                <% if $Component.Adoption > 75 %>
                                     <tr>
-                                        <td> $Component.CodeName <%t Software.IS_THERE_INSTALL 'has an install guide (at docs.openstack.org)' %></td>
+                                        <td>{$Component.Adoption}%</td>
                                         <td>
-                                            <a href="http://docs.openstack.org/{$Top.CurrentRelease.Slug}/" target="_blank"><%t Software.VIEW_INSTALL_GUIDE 'View the install guide' %></a>
+                                            <%t Software.PERCENTAGE_OF_DEPLOYMENTS 'of deployments using this project in production environments.' %> 
+                                            <a href="#" onclick="return false;" data-html="true" data-trigger="focus" data-content="<%t Software.ADOPTION_DATA_CONTENT "Adoption data is derived from the latest <a href='//www.openstack.org/user-survey'>user survey</a>." %>" title="" data-placement="right" data-toggle="popover" data-original-title="<%t Software.HOW_CALCULATED 'How is this calculated?' %>"><i class="fa fa-question-circle tag-tooltip"></i></a>
                                         </td>
-                                    </tr>
-                                <% end_if %>
+                                        <td><a href="https://github.com/openstack/ops-tags-team/blob/master/descriptions/ops-production-use.rst"><%t Openstack.VIEW_DETAILS 'View Details' %></a></td>
+                                    </tr>                                
+                                <% end_if %>                                    
 
                                 <% if $Component.SDKSupport > 7 %>
                                     <tr>
-                                        <td>$Component.SDKSupport <%t Software.NUMBER_OF_SDK 'software development kits (SDKs) support' %>  $Component.CodeName </td>
+                                        <td>$Component.SDKSupport</td>
+                                        <td><%t Software.NUMBER_OF_SDK 'software development kits (SDKs) support' %>  $Component.CodeName </td>
                                         <td>
                                             <a href="https://github.com/openstack/ops-tags-team/blob/master/descriptions/ops-sdk-support.rst">
                                                 <%t Openstack.VIEW_DETAILS 'View Details' %>
@@ -115,18 +120,20 @@
                                     </tr>                                
                                 <% end_if %>
 
-                                <% if $Component.Adoption > 75 %>
+
+                                <% if $Component.HasInstallationGuide %>
                                     <tr>
+                                        <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                        <td> $Component.CodeName <%t Software.IS_THERE_INSTALL 'has an install guide (at docs.openstack.org)' %></td>
                                         <td>
-                                            {$Component.Adoption}% <%t Software.PERCENTAGE_OF_DEPLOYMENTS 'of deployments using this project in production environments.' %> 
-                                            <a href="#" onclick="return false;" data-html="true" data-trigger="focus" data-content="<%t Software.ADOPTION_DATA_CONTENT "Adoption data is derived from the latest <a href='//www.openstack.org/user-survey'>user survey</a>." %>" title="" data-placement="right" data-toggle="popover" data-original-title="<%t Software.HOW_CALCULATED 'How is this calculated?' %>"><i class="fa fa-question-circle tag-tooltip"></i></a>
+                                            <a href="http://docs.openstack.org/{$Top.CurrentRelease.Slug}/" target="_blank"><%t Software.VIEW_INSTALL_GUIDE 'View the install guide' %></a>
                                         </td>
-                                        <td><a href="https://github.com/openstack/ops-tags-team/blob/master/descriptions/ops-production-use.rst"><%t Openstack.VIEW_DETAILS 'View Details' %></a></td>
-                                    </tr>                                
+                                    </tr>
                                 <% end_if %>
 
                                 <% if $Component.HasTeamDiversity %>
                                     <tr>
+                                        <td><i class="fa fa-check" aria-hidden="true"></i></td>
                                         <td>
                                             $Component.CodeName <%t Software.USED_IN_CORPORATE ' team has achieved corporate diversity' %>
                                             <a href="#" onclick="return false;" data-trigger="focus" data-content="<%t Software.PROJECT_DIVERSITY "A project with this tag has achieved a level of diversity in the affiliation of contributors that is indicative of a healthy collaborative project. This tag exists in the ‘team’ category, which as the name implies, covers information about the team itself. Another example of a tag that could exist in this category is one that conveys the size of the team that is actively contributing." %>" title="" data-placement="right" data-toggle="popover" data-original-title="<%t Software.WHAT_DOES_MEAN 'What does this mean?' %>"><i class="fa fa-question-circle tag-tooltip"></i></a>
@@ -137,6 +144,7 @@
 
                                 <% if $Component.HasStableBranches %>
                                     <tr>
+                                        <td><i class="fa fa-check" aria-hidden="true"></i></td>
                                         <td>
                                             $Component.CodeName <%t Software.STABLE_BRANCHES 'is maintained following the common Stable branch policy' %>
                                         </td>
@@ -146,6 +154,7 @@
 
                                 <% if $Component.FollowsStandardDeprecation %>
                                     <tr>
+                                        <td><i class="fa fa-check" aria-hidden="true"></i></td>
                                         <td>
                                             $Component.CodeName <%t Software.FOLLOW_DEPRECATION 'follows standard deprecation' %>
                                             <a href="#" onclick="return false;" data-trigger="focus" data-content="<%t Software.DEPRECATION_TAG_DESCRIPTION 'The “assert:follows-standard-deprecation” tag asserts that the project will follow standard feature deprecation rules' %>" title="" data-placement="right" data-toggle="popover" data-original-title="<%t Software.WHAT_DOES_MEAN 'What does this mean?' %>"><i class="fa fa-question-circle tag-tooltip"></i></a>
@@ -156,6 +165,7 @@
 
                                 <% if $Component.SupportsUpgrade %>
                                     <tr>
+                                        <td><i class="fa fa-check" aria-hidden="true"></i></td>
                                         <td>
                                             $Component.CodeName <%t Software.MINIMAL_UPGRADE 'supports minimal cold (offline) upgrade capabilities' %>
                                             <a href="#" onclick="return false;" data-trigger="focus" data-content="<%t Software.MINIMAL_UPGRADE_DESCRIPTION 'asserts that the project will support minimal cold (offline) upgrade capabilities' %>" title="" data-placement="right" data-toggle="popover" data-original-title="<%t Software.WHAT_DOES_MEAN 'What does this mean?' %>"><i class="fa fa-question-circle tag-tooltip"></i></a>
@@ -166,6 +176,7 @@
 
                                 <% if $Component.SupportsRollingUpgrade %>
                                     <tr>
+                                        <td><i class="fa fa-check" aria-hidden="true"></i></td>
                                         <td>
                                             $Component.CodeName <%t Software.MINIMAL_ROLLING 'supports minimal rolling upgrade capabilities' %>
                                             <a href="#" onclick="return false;" data-trigger="focus" data-content="<%t Software.MINIMAL_ROLLING_DESCRIPTION 'tag asserts that the project will support minimal rolling upgrade capabilities.' %>" title="" data-placement="right" data-toggle="popover" data-original-title="<%t Software.WHAT_DOES_MEAN 'What does this mean?' %>"><i class="fa fa-question-circle tag-tooltip"></i></a>
