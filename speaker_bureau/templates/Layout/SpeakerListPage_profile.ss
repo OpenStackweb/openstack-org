@@ -59,7 +59,7 @@
                         </ul>
                     </div>
                 <% end_if %>
-                <% if TwitterName || LinkedInProfile || IRCHandle || Bio %>
+                <% if TwitterName || IRCHandle || Bio %>
                     <hr>
                 <% end_if %>
                 <% if TwitterName %>

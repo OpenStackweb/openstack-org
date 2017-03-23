@@ -90,9 +90,10 @@ class EditProfileForm extends SafeXSSForm
         // IRC and Twitter
         $IRCHandleField = new TextField('IRCHandle', 'IRC Handle <em>(Optional)</em>');
         $TwitterNameField = new TextField('TwitterName', 'Twitter Name <em>(Optional)</em>');
-        $LinkedInProfileField = new TextField('LinkedInProfile', 'LinkedIn Profile <em>(Optional)</em>');
-        // Associated Projects
+        $LinkedInProfileField = new TextField('LinkedInProfile', 'LinkedIn Profile - full URL <em>(Optional)</em>');
+        $LinkedInProfileField->setAttribute('type', 'url')->setAttribute('pattern', 'https?://.+');
 
+        // Associated Projects
         /*$release = OpenStackRelease::get()->filter('HasStatistics', true)->sort('ReleaseDate','DESC')->first();
         $components = $release->OpenStackComponents()->sort(array('IsCoreService'=>'DESC', 'Order'=>'ASC'))->map('CodeName','Name')->toArray();
         $component_list = array();

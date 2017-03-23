@@ -45,7 +45,7 @@
             <% end_if %>
             <% if LinkedInProfile %>
                 <div class="span-4"><strong>LinkedIn </strong></div>
-                <div class="span-6 last"><a href="http://linkedin.com/in/{$LinkedInProfile}">@{$LinkedInProfile}</a></div>
+                <div class="span-6 last"><a href="{$LinkedInProfile}">{$LinkedInProfile}</a></div>
             <% end_if %>
             <% if IRCHandle %>
                 <div class="span-4"><strong>IRC</strong></div>

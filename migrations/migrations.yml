@@ -65,3 +65,4 @@ migrations:
   - InsertEmailForgotPasswordTemplateMigration
   - CleanMemberFirstNameSurnameMigration
   - AddUniqueIndexToSummitEventsFavorites
+  - MemberLinkedInCleanMigration
