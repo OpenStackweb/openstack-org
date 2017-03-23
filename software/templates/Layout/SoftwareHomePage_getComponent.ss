@@ -91,243 +91,89 @@
                                 <thead>
                                 <tr>
                                     <th><%t Software.MATURITY_INDICATORS 'Maturity Indicators' %></th>
-                                    <th></th>
                                     <th><%t Software.TAG_DETAILS 'Tag Details' %></th>
-                                    <th><%t Software.MEETS_MATURITY 'Meets Maturity<br>Requirements?' %></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td><%t Software.IS_THERE_INSTALL 'Is there an install guide for this project guide (at docs.openstack.org)?' %>
-                                    </td>
-                                    <td>
-                                        <ul>
-                                            <li <% if $Component.HasInstallationGuide %>class="on"<% end_if %>>
-                                                <% if $Component.HasInstallationGuide %>
-                                                    <i class="fa fa-circle"></i><span><%t Openstack.YES 'Yes' %></span>
-                                                    <% loop $Component.getCaveatsForReleaseType($Top.CurrentRelease.ID, InstallationGuide) %>
-                                                        <i class="fa fa-sticky-note tag-caveat-note" data-container="body" data-toggle="popover" data-placement="right" data-content="{$Label} : {$Description}"></i>
-                                                    <% end_loop %>
-                                                <% else %>
-                                                    <i class="fa fa-circle-o"></i>
-                                                <% end_if %>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                    <td>
-                                        <% if $Component.HasInstallationGuide %>
+                                <% if $Component.HasInstallationGuide %>
+                                    <tr>
+                                        <td> $Component.CodeName <%t Software.IS_THERE_INSTALL 'has an install guide (at docs.openstack.org)?' %></td>
+                                        <td>
                                             <a href="http://docs.openstack.org/{$Top.CurrentRelease.Slug}/" target="_blank"><%t Software.VIEW_INSTALL_GUIDE 'View the install guide' %></a>
-                                        <% else %>
-                                            &nbsp;
-                                        <% end_if %>
-                                    </td>
-                                    <td>
-                                        <ul>
-                                            <% if $Component.HasInstallationGuide %>
-                                                <li class="on"><%t Openstack.YES 'Yes' %></li>
-                                            <% else %>
-                                                <li><%t Openstack.NO 'No' %></li>
-                                            <% end_if %>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><%t Software.NUMBER_OF_SDK 'Number of software development kits (SDKs) which support this project.' %>
-                                    </td>
-                                    <td>
-                                        <ul>
-                                            <li <% if $Component.SDKSupport %>class="on"<% end_if %>>
-                                                <% if $Component.SDKSupport %>
-                                                    <i class="fa fa-circle"></i><span>{$Component.SDKSupport}</span>
-                                                    <% loop $Component.getCaveatsForReleaseType($Top.CurrentRelease.ID, SDKSupport) %>
-                                                        <i class="fa fa-sticky-note tag-caveat-note" data-container="body" data-toggle="popover" data-placement="right" data-content="{$Label} : {$Description}"></i>
-                                                    <% end_loop %>
-                                                <% else %>
-                                                    <i class="fa fa-circle-o"></i>
-                                                <% end_if %>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                    <td>
-                                        <a href="https://github.com/openstack/ops-tags-team/blob/master/descriptions/ops-sdk-support.rst">
-                                            <%t Openstack.VIEW_DETAILS 'View Details' %>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <ul>
-                                            <% if $Component.SDKSupport > 7 %>
-                                                <li class="on"><%t Openstack.YES 'Yes' %></li>
-                                            <% else %>
-                                                <li><%t Openstack.NO 'No' %></li>
-                                            <% end_if %>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <%t Software.PERCENTAGE_OF_DEPLOYMENTS 'Percentage of deployments using this project in production environments.' %>
-                                        <a href="#" onclick="return false;" data-html="true" data-trigger="focus" data-content="<%t Software.ADOPTION_DATA_CONTENT "Adoption data is derived from the latest <a href='//www.openstack.org/user-survey'>user survey</a>." %>" title="" data-placement="right" data-toggle="popover" data-original-title="<%t Software.HOW_CALCULATED 'How is this calculated?' %>"><i class="fa fa-question-circle tag-tooltip"></i></a>
-                                    </td>
-                                    <td>
-                                        <ul>
-                                            <li <% if $Component.Adoption > 0 %>class="on"<% end_if %>>
-                                                <% if $Component.Adoption > 0 %>
-                                                    <a href="https://github.com/openstack/ops-tags-team/blob/master/descriptions/ops-production-use.rst">
-                                                        <i class="fa fa-circle"></i><span> {$Component.Adoption}%</span>
-                                                        <% loop $Component.getCaveatsForReleaseType($Top.CurrentRelease.ID, ProductionUse) %>
-                                                                <i class="fa fa-sticky-note tag-caveat-note" data-container="body" data-toggle="popover" data-placement="right" data-content="{$Label} : {$Description}"></i>
-                                                        <% end_loop %>
-                                                    </a>
-                                                <% else %>
-                                                    <i class="fa fa-circle-o"></i>
-                                                <% end_if %>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                    <td><a href="https://github.com/openstack/ops-tags-team/blob/master/descriptions/ops-production-use.rst"><%t Openstack.VIEW_DETAILS 'View Details' %></a></td>
-                                    <td>
-                                        <ul>
-                                            <% if $Component.Adoption > 75 %>
-                                                <li class="on"><%t Openstack.YES 'Yes' %></li>
-                                            <% else %>
-                                                <li><%t Openstack.NO 'No' %></li>
-                                            <% end_if %>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <%t Software.USED_IN_CORPORATE 'Has this project team achieved corporate diversity?' %>
-                                        <a href="#" onclick="return false;" data-trigger="focus" data-content="<%t Software.PROJECT_DIVERSITY "A project with this tag has achieved a level of diversity in the affiliation of contributors that is indicative of a healthy collaborative project. This tag exists in the ‘team’ category, which as the name implies, covers information about the team itself. Another example of a tag that could exist in this category is one that conveys the size of the team that is actively contributing." %>" title="" data-placement="right" data-toggle="popover" data-original-title="<%t Software.WHAT_DOES_MEAN 'What does this mean?' %>"><i class="fa fa-question-circle tag-tooltip"></i></a>
-                                    </td>
-                                    <td>
-                                        <ul>
-                                            <li <% if $Component.HasTeamDiversity %>class="on" <% end_if %>>
-                                                <% if $Component.HasTeamDiversity %>
-                                                    <i class="fa fa-circle"></i><span><%t Openstack.YES 'Yes' %></span>
-                                                <% else %>
-                                                    <i class="fa fa-circle-o"></i><span><%t Openstack.NO 'No' %></span>
-                                                <% end_if %>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                    <td><a href="http://governance.openstack.org/reference/tags/team_diverse-affiliation.html"><%t Openstack.VIEW_DETAILS 'View details' %></a></td>
-                                    <td>
-                                        <ul>
-                                            <% if $Component.HasTeamDiversity %>
-                                                <li class="on"><%t Openstack.YES 'Yes' %></li>
-                                            <% else %>
-                                                <li><%t Openstack.NO 'No' %></li>
-                                            <% end_if %>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><%t Software.STABLE_BRANCHES 'Is this project maintained following the common Stable branch policy?' %>
-                                    </td>
-                                    <td>
-                                        <ul>
-                                            <li <% if $Component.HasStableBranches %>class="on"<% end_if %>>
-                                                <% if $Component.HasStableBranches %>
-                                                    <i class="fa fa-circle"></i><span><%t Openstack.YES 'Yes' %></span>
-                                                <% else %>
-                                                    <i class="fa fa-circle-o"></i>
-                                                <% end_if %>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                    <td><a href="http://docs.openstack.org/project-team-guide/stable-branches.html"><%t Openstack.VIEW_DETAILS 'View details' %></a></td>
-                                    <td>
-                                        <ul>
-                                            <% if $Component.HasStableBranches %>
-                                                <li class="on"><%t Openstack.YES 'Yes' %></li>
-                                            <% else %>
-                                                <li><%t Openstack.NO 'No' %></li>
-                                            <% end_if %>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <%t Software.FOLLOW_DEPRECATION 'Does this project follows standard deprecation?' %>
-                                        <a href="#" onclick="return false;" data-trigger="focus" data-content="<%t Software.DEPRECATION_TAG_DESCRIPTION 'The “assert:follows-standard-deprecation” tag asserts that the project will follow standard feature deprecation rules' %>" title="" data-placement="right" data-toggle="popover" data-original-title="<%t Software.WHAT_DOES_MEAN 'What does this mean?' %>"><i class="fa fa-question-circle tag-tooltip"></i></a>
-                                    </td>
-                                    <td>
-                                        <ul>
-                                            <li <% if $Component.FollowsStandardDeprecation %>class="on" <% end_if %>>
-                                                <% if $Component.FollowsStandardDeprecation %>
-                                                    <i class="fa fa-circle"></i><span><%t Openstack.YES 'Yes' %></span>
-                                                <% else %>
-                                                    <i class="fa fa-circle-o"></i>
-                                                <% end_if %>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                    <td><a href="http://governance.openstack.org/reference/tags/assert_follows-standard-deprecation.html"><%t Openstack.VIEW_DETAILS 'View details' %></a></td>
-                                    <td>
-                                        <ul>
-                                            <% if $Component.FollowsStandardDeprecation %>
-                                                <li class="on"><%t Openstack.YES 'Yes' %></li>
-                                            <% else %>
-                                                <li><%t Openstack.NO 'No' %></li>
-                                            <% end_if %>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <%t Software.MINIMAL_UPGRADE 'Does this project support minimal cold (offline) upgrade capabilities?' %>
-                                        <a href="#" onclick="return false;" data-trigger="focus" data-content="<%t Software.MINIMAL_UPGRADE_DESCRIPTION 'asserts that the project will support minimal cold (offline) upgrade capabilities' %>" title="" data-placement="right" data-toggle="popover" data-original-title="<%t Software.WHAT_DOES_MEAN 'What does this mean?' %>"><i class="fa fa-question-circle tag-tooltip"></i></a>
-                                    </td>
-                                    <td>
-                                        <ul>
-                                            <li <% if $Component.SupportsUpgrade %>class="on" <% end_if %>>
-                                                <% if $Component.SupportsUpgrade %>
-                                                    <i class="fa fa-circle"></i><span><%t Openstack.YES 'Yes' %></span>
-                                                <% else %>
-                                                    <i class="fa fa-circle-o"></i>
-                                                <% end_if %>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                    <td><a href="http://governance.openstack.org/reference/tags/assert_supports-upgrade.html"><%t Openstack.VIEW_DETAILS 'View details' %></a></td>
-                                    <td>
-                                        <ul>
-                                            <% if $Component.SupportsUpgrade %>
-                                                <li class="on"><%t Openstack.YES 'Yes' %></li>
-                                            <% else %>
-                                                <li><%t Openstack.NO 'No' %></li>
-                                            <% end_if %>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <%t Software.MINIMAL_ROLLING 'Does this project support minimal rolling upgrade capabilities?' %>
-                                        <a href="#" onclick="return false;" data-trigger="focus" data-content="<%t Software.MINIMAL_ROLLING_DESCRIPTION 'tag asserts that the project will support minimal rolling upgrade capabilities.' %>" title="" data-placement="right" data-toggle="popover" data-original-title="<%t Software.WHAT_DOES_MEAN 'What does this mean?' %>"><i class="fa fa-question-circle tag-tooltip"></i></a>
-                                    </td>
-                                    <td>
-                                        <ul>
-                                            <li <% if $Component.SupportsRollingUpgrade %>class="on" <% end_if %>>
-                                                <% if $Component.SupportsRollingUpgrade %>
-                                                    <i class="fa fa-circle"></i><span><%t Openstack.YES 'Yes' %></span>
-                                                <% else %>
-                                                    <i class="fa fa-circle-o"></i>
-                                                <% end_if %>
-                                            </li>
-                                        </ul>
-                                    </td>
-                                    <td><a href="http://governance.openstack.org/reference/tags/assert_supports-rolling-upgrade.html"><%t Openstack.VIEW_DETAILS 'View details' %></a></td>
-                                    <td>
-                                        <ul>
-                                            <% if $Component.SupportsRollingUpgrade %>
-                                                <li class="on"><%t Openstack.YES 'Yes' %></li>
-                                            <% else %>
-                                                <li><%t Openstack.NO 'No' %></li>
-                                            <% end_if %>
-                                        </ul>
-                                    </td>
-                                </tr>
+                                        </td>
+                                    </tr>
+                                <% end_if %>
+
+                                <% if $Component.SDKSupport > 7 %>
+                                    <tr>
+                                        <td>$Component.SDKSupport <%t Software.NUMBER_OF_SDK 'software development kits (SDKs) support' %>  $Component.CodeName </td>
+                                        <td>
+                                            <a href="https://github.com/openstack/ops-tags-team/blob/master/descriptions/ops-sdk-support.rst">
+                                                <%t Openstack.VIEW_DETAILS 'View Details' %>
+                                            </a>
+                                        </td>
+                                    </tr>                                
+                                <% end_if %>
+
+                                <% if $Component.Adoption > 75 %>
+                                    <tr>
+                                        <td>
+                                            {$Component.Adoption}% <%t Software.PERCENTAGE_OF_DEPLOYMENTS 'of deployments using this project in production environments.' %> 
+                                            <a href="#" onclick="return false;" data-html="true" data-trigger="focus" data-content="<%t Software.ADOPTION_DATA_CONTENT "Adoption data is derived from the latest <a href='//www.openstack.org/user-survey'>user survey</a>." %>" title="" data-placement="right" data-toggle="popover" data-original-title="<%t Software.HOW_CALCULATED 'How is this calculated?' %>"><i class="fa fa-question-circle tag-tooltip"></i></a>
+                                        </td>
+                                        <td><a href="https://github.com/openstack/ops-tags-team/blob/master/descriptions/ops-production-use.rst"><%t Openstack.VIEW_DETAILS 'View Details' %></a></td>
+                                    </tr>                                
+                                <% end_if %>
+
+                                <% if $Component.HasTeamDiversity %>
+                                    <tr>
+                                        <td>
+                                            $Component.CodeName <%t Software.USED_IN_CORPORATE ' team has achieved corporate diversity' %>
+                                            <a href="#" onclick="return false;" data-trigger="focus" data-content="<%t Software.PROJECT_DIVERSITY "A project with this tag has achieved a level of diversity in the affiliation of contributors that is indicative of a healthy collaborative project. This tag exists in the ‘team’ category, which as the name implies, covers information about the team itself. Another example of a tag that could exist in this category is one that conveys the size of the team that is actively contributing." %>" title="" data-placement="right" data-toggle="popover" data-original-title="<%t Software.WHAT_DOES_MEAN 'What does this mean?' %>"><i class="fa fa-question-circle tag-tooltip"></i></a>
+                                        </td>
+                                         <td><a href="http://governance.openstack.org/reference/tags/team_diverse-affiliation.html"><%t Openstack.VIEW_DETAILS 'View details' %></a></td>
+                                    </tr>                                
+                                <% end_if %>
+
+                                <% if $Component.HasStableBranches %>
+                                    <tr>
+                                        <td>
+                                            $Component.CodeName <%t Software.STABLE_BRANCHES 'is maintained following the common Stable branch policy' %>
+                                        </td>
+                                        <td><a href="http://docs.openstack.org/project-team-guide/stable-branches.html"><%t Openstack.VIEW_DETAILS 'View details' %></a></td>
+                                    </tr>                                
+                                <% end_if %>
+
+                                <% if $Component.FollowsStandardDeprecation %>
+                                    <tr>
+                                        <td>
+                                            $Component.CodeName <%t Software.FOLLOW_DEPRECATION 'follows standard deprecation?' %>
+                                            <a href="#" onclick="return false;" data-trigger="focus" data-content="<%t Software.DEPRECATION_TAG_DESCRIPTION 'The “assert:follows-standard-deprecation” tag asserts that the project will follow standard feature deprecation rules' %>" title="" data-placement="right" data-toggle="popover" data-original-title="<%t Software.WHAT_DOES_MEAN 'What does this mean?' %>"><i class="fa fa-question-circle tag-tooltip"></i></a>
+                                        </td>
+                                        <td><a href="http://governance.openstack.org/reference/tags/assert_follows-standard-deprecation.html"><%t Openstack.VIEW_DETAILS 'View details' %></a></td>
+                                    </tr>                                
+                                <% end_if %>
+
+                                <% if $Component.SupportsUpgrade %>
+                                    <tr>
+                                        <td>
+                                            $Component.CodeName <%t Software.MINIMAL_UPGRADE 'supports minimal cold (offline) upgrade capabilities' %>
+                                            <a href="#" onclick="return false;" data-trigger="focus" data-content="<%t Software.MINIMAL_UPGRADE_DESCRIPTION 'asserts that the project will support minimal cold (offline) upgrade capabilities' %>" title="" data-placement="right" data-toggle="popover" data-original-title="<%t Software.WHAT_DOES_MEAN 'What does this mean?' %>"><i class="fa fa-question-circle tag-tooltip"></i></a>
+                                        </td>
+                                        <td><a href="http://governance.openstack.org/reference/tags/assert_supports-upgrade.html"><%t Openstack.VIEW_DETAILS 'View details' %></a></td>
+                                    </tr>                                
+                                <% end_if %>
+
+                                <% if $Component.SupportsRollingUpgrade %>
+                                    <tr>
+                                        <td>
+                                            $Component.CodeName <%t Software.MINIMAL_ROLLING 'supports minimal rolling upgrade capabilities' %>
+                                            <a href="#" onclick="return false;" data-trigger="focus" data-content="<%t Software.MINIMAL_ROLLING_DESCRIPTION 'tag asserts that the project will support minimal rolling upgrade capabilities.' %>" title="" data-placement="right" data-toggle="popover" data-original-title="<%t Software.WHAT_DOES_MEAN 'What does this mean?' %>"><i class="fa fa-question-circle tag-tooltip"></i></a>
+                                        </td>
+                                        <td><a href="http://governance.openstack.org/reference/tags/assert_supports-rolling-upgrade.html"><%t Openstack.VIEW_DETAILS 'View details' %></a></td>
+                                    </tr>                                
+                                <% end_if %>                                
+
                                 </tbody>
                             </table>
                         </div>
