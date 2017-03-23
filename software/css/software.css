@@ -1550,4 +1550,9 @@ h3.header-center {
 
 .starter-pack li.swift h4 {
 	background-image: url(/software/images/mascots/swift.png);
-}    
+}
+
+th.maturity, td.maturity {
+	color:  #1F78BC;
+	width: 45px;
+}
