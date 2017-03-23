@@ -97,7 +97,7 @@
                                 <tbody>
                                 <% if $Component.HasInstallationGuide %>
                                     <tr>
-                                        <td> $Component.CodeName <%t Software.IS_THERE_INSTALL 'has an install guide (at docs.openstack.org)?' %></td>
+                                        <td> $Component.CodeName <%t Software.IS_THERE_INSTALL 'has an install guide (at docs.openstack.org)' %></td>
                                         <td>
                                             <a href="http://docs.openstack.org/{$Top.CurrentRelease.Slug}/" target="_blank"><%t Software.VIEW_INSTALL_GUIDE 'View the install guide' %></a>
                                         </td>
@@ -147,7 +147,7 @@
                                 <% if $Component.FollowsStandardDeprecation %>
                                     <tr>
                                         <td>
-                                            $Component.CodeName <%t Software.FOLLOW_DEPRECATION 'follows standard deprecation?' %>
+                                            $Component.CodeName <%t Software.FOLLOW_DEPRECATION 'follows standard deprecation' %>
                                             <a href="#" onclick="return false;" data-trigger="focus" data-content="<%t Software.DEPRECATION_TAG_DESCRIPTION 'The “assert:follows-standard-deprecation” tag asserts that the project will follow standard feature deprecation rules' %>" title="" data-placement="right" data-toggle="popover" data-original-title="<%t Software.WHAT_DOES_MEAN 'What does this mean?' %>"><i class="fa fa-question-circle tag-tooltip"></i></a>
                                         </td>
                                         <td><a href="http://governance.openstack.org/reference/tags/assert_follows-standard-deprecation.html"><%t Openstack.VIEW_DETAILS 'View details' %></a></td>
