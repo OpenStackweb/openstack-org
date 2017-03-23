@@ -1553,6 +1553,6 @@ h3.header-center {
 }
 
 th.maturity, td.maturity {
-	color:  #1F78BC;
+  color:  #1F78BC!important;
 	width: 45px;
 }

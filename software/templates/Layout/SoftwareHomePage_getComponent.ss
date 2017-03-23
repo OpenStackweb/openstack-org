@@ -90,8 +90,7 @@
                             <table class="table maturity-table">
                                 <thead>
                                 <tr>
-                                    <th class="maturity"></th>
-                                    <th><%t Software.MATURITY_INDICATORS 'Maturity Indicators' %></th>
+                                    <th colspan="2"><%t Software.MATURITY_INDICATORS 'Maturity Indicators' %></th>
                                     <th><%t Software.TAG_DETAILS 'Tag Details' %></th>
                                 </tr>
                                 </thead>
