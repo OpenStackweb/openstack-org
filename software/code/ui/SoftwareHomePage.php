@@ -240,6 +240,22 @@ class SoftwareHomePage_Controller extends Page_Controller
             Requirements::customScript(" timeline_data = {$json};  renderTimeline();");
         }
 
+        $has_maturity_indicators = ($component->Adoption > 75)
+            || ($component->SDKSupport > 7)
+            || ($component->HasInstallationGuide)
+            || ($component->HasTeamDiversity)
+            || ($component->HasStableBranches)
+            || ($component->FollowsStandardDeprecation)
+            || ($component->SupportsUpgrade)
+            || ($component->SupportsRollingUpgrade);
+
+        $has_release_desc = $component->ReleaseMileStones
+            || $component->ReleaseCycleWithIntermediary
+            || $component->ReleaseTrailing
+            || $component->ReleaseIndependent;
+
+        $has_additional_info = $component->VulnerabilityManaged || $has_release_desc;
+
         return $this->render
         (
             array
@@ -248,7 +264,10 @@ class SoftwareHomePage_Controller extends Page_Controller
                 'MostActiveCompanyContributors'    => $companies_contrib,
                 'Release'                          => $release,
                 'Component'                        => $component,
-                'Releases'                         => $component->Releases()->where("Status <>'Deprecated' AND Name <> 'Trunk' ")->sort('ReleaseDate', 'DESC')
+                'Releases'                         => $component->Releases()->where("Status <>'Deprecated' AND Name <> 'Trunk' ")->sort('ReleaseDate', 'DESC'),
+                'HasMaturityIndicators'            => $has_maturity_indicators,
+                'HasReleaseDesc'                   => $has_release_desc,
+                'HasAdditionalInfo'                => $has_additional_info
             )
         );
     }

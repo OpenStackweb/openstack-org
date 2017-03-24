@@ -69,6 +69,7 @@ fr:
     MINIMAL_ROLLING: 'Est-ce que ce projet de soutien au roulement minimal de mise à niveau des capacités?'
     MINIMAL_ROLLING_DESCRIPTION: 'tag affirme que le projet appuiera les capacités de mise à niveau de roulement minimal.'
     ADDITIONAL_INFORMATION: 'Additional Information'
+    PROJECT_INFO: 'Project Info'
     TAG_DETAILS: 'Détails de tag'
     HOW_RELEASED: 'Comment est relâché ce projet ?'
     HOW_RELEASED_DESCRIPTION: 'le développement OpenStack qui se passe sur un cycle de six mois. Les projets peuvent choisir de libérer sur ce cycle sous la supervision de l'équipe de gestion des versions, ou de libérer indépendamment du cycle.'

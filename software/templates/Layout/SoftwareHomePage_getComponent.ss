@@ -84,6 +84,7 @@
                 $Component.Description
                 <hr style="margin: 40px 0;">
                 <h4><%t Software.PROJECT_DETAILS 'Project details' %></h4>
+                <% if $HasMaturityIndicators %>
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="table-responsive project-tags-table table-hover">
@@ -100,11 +101,11 @@
                                     <tr>
                                         <td class="maturity">{$Component.Adoption}%</td>
                                         <td>
-                                            <%t Software.PERCENTAGE_OF_DEPLOYMENTS 'of deployments using this project in production environments.' %> 
+                                            <%t Software.PERCENTAGE_OF_DEPLOYMENTS 'of deployments using this project in production environments.' %>
                                             <a href="#" onclick="return false;" data-html="true" data-trigger="focus" data-content="<%t Software.ADOPTION_DATA_CONTENT "Adoption data is derived from the latest <a href='//www.openstack.org/user-survey'>user survey</a>." %>" title="" data-placement="right" data-toggle="popover" data-original-title="<%t Software.HOW_CALCULATED 'How is this calculated?' %>"><i class="fa fa-question-circle tag-tooltip"></i></a>
                                         </td>
                                         <td><a href="https://github.com/openstack/ops-tags-team/blob/master/descriptions/ops-production-use.rst"><%t Openstack.VIEW_DETAILS 'View Details' %></a></td>
-                                    </tr>                                
+                                    </tr>
                                 <% end_if %>                                    
 
                                 <% if $Component.SDKSupport > 7 %>
@@ -138,7 +139,7 @@
                                             <a href="#" onclick="return false;" data-trigger="focus" data-content="<%t Software.PROJECT_DIVERSITY "A project with this tag has achieved a level of diversity in the affiliation of contributors that is indicative of a healthy collaborative project. This tag exists in the ‘team’ category, which as the name implies, covers information about the team itself. Another example of a tag that could exist in this category is one that conveys the size of the team that is actively contributing." %>" title="" data-placement="right" data-toggle="popover" data-original-title="<%t Software.WHAT_DOES_MEAN 'What does this mean?' %>"><i class="fa fa-question-circle tag-tooltip"></i></a>
                                         </td>
                                          <td><a href="http://governance.openstack.org/reference/tags/team_diverse-affiliation.html"><%t Openstack.VIEW_DETAILS 'View details' %></a></td>
-                                    </tr>                                
+                                    </tr>
                                 <% end_if %>
 
                                 <% if $Component.HasStableBranches %>
@@ -148,7 +149,7 @@
                                             $Component.CodeName <%t Software.STABLE_BRANCHES 'is maintained following the common Stable branch policy' %>
                                         </td>
                                         <td><a href="http://docs.openstack.org/project-team-guide/stable-branches.html"><%t Openstack.VIEW_DETAILS 'View details' %></a></td>
-                                    </tr>                                
+                                    </tr>
                                 <% end_if %>
 
                                 <% if $Component.FollowsStandardDeprecation %>
@@ -159,7 +160,7 @@
                                             <a href="#" onclick="return false;" data-trigger="focus" data-content="<%t Software.DEPRECATION_TAG_DESCRIPTION 'The “assert:follows-standard-deprecation” tag asserts that the project will follow standard feature deprecation rules' %>" title="" data-placement="right" data-toggle="popover" data-original-title="<%t Software.WHAT_DOES_MEAN 'What does this mean?' %>"><i class="fa fa-question-circle tag-tooltip"></i></a>
                                         </td>
                                         <td><a href="http://governance.openstack.org/reference/tags/assert_follows-standard-deprecation.html"><%t Openstack.VIEW_DETAILS 'View details' %></a></td>
-                                    </tr>                                
+                                    </tr>
                                 <% end_if %>
 
                                 <% if $Component.SupportsUpgrade %>
@@ -170,7 +171,7 @@
                                             <a href="#" onclick="return false;" data-trigger="focus" data-content="<%t Software.MINIMAL_UPGRADE_DESCRIPTION 'asserts that the project will support minimal cold (offline) upgrade capabilities' %>" title="" data-placement="right" data-toggle="popover" data-original-title="<%t Software.WHAT_DOES_MEAN 'What does this mean?' %>"><i class="fa fa-question-circle tag-tooltip"></i></a>
                                         </td>
                                         <td><a href="http://governance.openstack.org/reference/tags/assert_supports-upgrade.html"><%t Openstack.VIEW_DETAILS 'View details' %></a></td>
-                                    </tr>                                
+                                    </tr>
                                 <% end_if %>
 
                                 <% if $Component.SupportsRollingUpgrade %>
@@ -181,7 +182,7 @@
                                             <a href="#" onclick="return false;" data-trigger="focus" data-content="<%t Software.MINIMAL_ROLLING_DESCRIPTION 'tag asserts that the project will support minimal rolling upgrade capabilities.' %>" title="" data-placement="right" data-toggle="popover" data-original-title="<%t Software.WHAT_DOES_MEAN 'What does this mean?' %>"><i class="fa fa-question-circle tag-tooltip"></i></a>
                                         </td>
                                         <td><a href="http://governance.openstack.org/reference/tags/assert_supports-rolling-upgrade.html"><%t Openstack.VIEW_DETAILS 'View details' %></a></td>
-                                    </tr>                                
+                                    </tr>
                                 <% end_if %>                                
 
                                 </tbody>
@@ -189,18 +190,21 @@
                         </div>
                     </div>
                 </div>
+                <% end_if %>
+                <% if $HasAdditionalInfo %>
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="table-responsive project-tags-table table-hover">
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th><%t Software.ADDITIONAL_INFORMATION 'Additional Information' %></th>
+                                    <th><%t Software.PROJECT_INFO 'Project Info' %></th>
                                     <th></th>
                                     <th><%t Software.TAG_DETAILS 'Tag Details' %></th>
                                 </tr>
                                 </thead>
                                 <tbody>
+                                <% if $HasReleaseInfo %>
                                 <tr>
                                     <td>
                                         <%t Software.HOW_RELEASED 'How is this project released?' %>
@@ -232,8 +236,9 @@
                                     </td>
                                     <td><a target="_blank" href="https://releases.openstack.org/reference/release_models.html"><%t Openstack.VIEW_DETAILS 'View details' %></a></td>
                                 </tr>
-
-                               <tr>
+                                <% end_if %>
+                                <% if $Component.VulnerabilityManaged %>
+                                <tr>
                                     <td>
                                         <%t Software.VULNERABILITY_ISSUES 'Are vulnerability issues managed by the OpenStack security team?' %>
                                     </td>
@@ -250,11 +255,13 @@
                                     </td>
                                     <td><a href="http://governance.openstack.org/reference/tags/vulnerability_managed.html"><%t Openstack.VIEW_DETAILS 'View details' %></a></td>
                                 </tr>
+                                <% end_if %>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
+                <% end_if %>
             </div>
         </div>
         <% if $Component.ContributionsJson %>
