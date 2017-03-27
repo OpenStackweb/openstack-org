@@ -278,7 +278,7 @@ final class SummitEventManager implements ISummitEventManager
             $tags = ($event_data['tags']) ? explode(',',$event_data['tags']) : array();
             $event->Tags()->setByIDList($tags);
 
-            $sponsors = ($event_type->UseSponsors && isset($event_data['sponsors'])) ?
+            $sponsors = ($event_type->UseSponsors && isset($event_data['sponsors']) && $event_data['sponsors']) ?
                 explode(',',$event_data['sponsors']) : [];
 
             if($event_type->AreSponsorsMandatory && count($sponsors) == 0){
