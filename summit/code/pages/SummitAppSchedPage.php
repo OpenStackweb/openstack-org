@@ -637,15 +637,27 @@ APP_LINKS;
 
     public function MetaTags()
     {
-        $entity = $this->getSummitEntity(Controller::curr()->getRequest());
+        $request = $this->getRequest();
+        $action  = $request->param("Action");
+        $entity  = $this->getSummitEntity($request);
+
         if(!is_null($entity)){
             return $entity->MetaTags();
         }
         $tags = parent::MetaTags();
+        // default one
+        $url_path = "schedule";
+        if(!empty($action) && $action == 'global-search'){
+            $term = Convert::raw2sql($request->requestVar('t'));
+            $url_path = "search";
+            if(!empty($term)){
+                $url_path .= "/".urlencode($term);
+            }
+        }
         // IOS
-        $tags .= AppLinkIOSMetadataBuilder::buildAppLinksMetaTags($tags, "schedule");
+        $tags .= AppLinkIOSMetadataBuilder::buildAppLinksMetaTags($tags, $url_path);
         // Android
-        $tags .= AppLinkIAndroidMetadataBuilder::buildAppLinksMetaTags($tags, "schedule");
+        $tags .= AppLinkIAndroidMetadataBuilder::buildAppLinksMetaTags($tags, $url_path);
         return $tags;
     }
 
