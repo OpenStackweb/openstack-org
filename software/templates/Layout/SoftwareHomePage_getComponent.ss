@@ -204,7 +204,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <% if $HasReleaseInfo %>
+                                <% if $HasReleaseDesc %>
                                 <tr>
                                     <td>
                                         <%t Software.HOW_RELEASED 'How is this project released?' %>
