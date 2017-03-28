@@ -19,8 +19,8 @@ require('./t.tag');
                 <tbody>        
                     <tr each="{ component in components }" onclick={ coreServiceDetails }>
                         <td class="project-table-code-name">
-                            <span class="project-table-mascot-icon" style="background-image: url({mascotImage(component)});"></span>
-                            { component.code_name }
+                             <a href="{ coreServiceDetailsURL }"><span class="project-table-mascot-icon" style="background-image: url({mascotImage(component)});"></span>
+                            { component.code_name }</a>
                         </td>
                         <td class="project-table-description">{ component.name }</td>
                     </tr>
@@ -40,9 +40,13 @@ require('./t.tag');
         }
 
         coreServiceDetails(e) {
+            window.location = self.coreServiceDetailsURL(e);
+        }
+
+        coreServiceDetailsURL(e) {
             var slug  = e.item.slug;
-            var url = self.base_url+'releases/'+self.parent.getCurrentReleaseId()+'/components/'+slug;
-            window.location = url;
+            var url = self.parent.base_url+'releases/'+self.parent.parent.getCurrentReleaseId()+'/components/'+slug;
+            return url;
         }
 
         mascotImage(component) {

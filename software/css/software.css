@@ -730,13 +730,13 @@ p.service-section-title {
   	display: inline-block;
   	width: 34px;
   	height: 25px;
-  	background: url(/software/images/icons/toggle-right.png) no-repeat center bottom;
+  	background: url(/software/images/icons/toggle-left.png) no-repeat center bottom;
   	background-size: 100%;
   	cursor: pointer;
   }
   
   .tiles {
-  	background: url(/software/images/icons/toggle-left.png) no-repeat center bottom;
+  	background: url(/software/images/icons/toggle-right.png) no-repeat center bottom;
   	background-size: 100%;
   }
   

@@ -4,10 +4,10 @@ require('./t.tag');
     <div class="core-services-single-full" onclick={ coreServiceDetails }>
     <div class="core-top">
     <div class="core-title" style="background-image: url({mascotImage()});">
-    { code_name } 
+        <a href="{ coreServiceDetailsURL }">{ code_name }</a>
     </div>
     <div class="core-service">
-    { name }
+        <a href="{ coreServiceDetailsURL }">{ name }</a>
     </div>
     </div>
 
@@ -19,9 +19,13 @@ require('./t.tag');
         var self = this;
 
         coreServiceDetails(e) {
+            window.location = self.coreServiceDetailsURL(e);
+        }
+
+        coreServiceDetailsURL(e) {
             var slug  = e.item.slug;
             var url = self.parent.base_url+'releases/'+self.parent.parent.getCurrentReleaseId()+'/components/'+slug;
-            window.location = url;
+            return url;
         }
 
         mascotImage() {
