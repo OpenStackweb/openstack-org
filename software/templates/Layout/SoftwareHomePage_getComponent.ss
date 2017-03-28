@@ -129,7 +129,7 @@
                                             <td class="maturity"><i class="fa fa-check" aria-hidden="true"></i></td>
                                             <td> $Component.CodeName <%t Software.IS_THERE_INSTALL 'is included in the install guide.' %></td>
                                             <td>
-                                                <a href="http://docs.openstack.org/{$Top.CurrentRelease.Slug}/" target="_blank">
+                                                <a href="http://docs.openstack.org/project-install-guide/{$Top.CurrentRelease.Slug}/" target="_blank">
                                                     <%t Software.VIEW_INSTALL_GUIDE 'View the install guide' %>
                                                 </a>
                                             </td>
