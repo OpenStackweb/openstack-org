@@ -214,7 +214,9 @@
 .summit-promo.containers {
   background: url(/themes/openstack/images/containers-r/OS-Boston-WebBanners-Red-Stamp-Theater-1300x576.jpg) no-repeat scroll center center;
   background-size: cover;
-  padding: 60px 0 90px; }
+  padding: 60px 0 90px; 
+  margin-bottom: -50px;
+}
 
 .summit-promo.containers .nfv-summit-right .nfv-summit-dates.containers {
   color: white;
