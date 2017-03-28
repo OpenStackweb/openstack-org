@@ -3,7 +3,7 @@
 
     <div class="enterprise-bar">
        <div class="container">
-          <a href="/appdev/" class="enterprise-bar-left">OpenStack For App Developers</a>
+          <a href="/appdev/" class="enterprise-bar-left">OpenStack &amp; Containers</a>
           <a href="/containers/#top" class="enterprise-bar-right">Back to Top</a>
        </div>
     </div>
@@ -11,44 +11,30 @@
 
 
 
+    
     <!-- Begin Page Content -->
-        <div class="intro-header containers">
+        <div class="intro-header containers-r">
         <div class="container">
 
             <div class="row">
-                <div class="col-lg-8 col-sm-8">
+                <div class="col-sm-8">
                     <div class="intro-message">
-                        <h1>Exploring containers with OpenStack</h1>
-                        <h3>OpenStack provides path to production for containers in the enterprise</h3>
+                        <h1>Deploy production-ready containers today</h1>
+                        <h3>Discover why Kubernetes, OpenShift, Mesos and Swarm run best on open infrastructure</h3>
                     </div>
                 </div> 
-                <div class="col-lg-4 col-sm-4">
+                <div class="col-sm-4">
                     <div class="download-container">
-                        <div class="download-text">Download the white paper</div>
-                        <a href="#" class="download-btn" data-toggle="modal" data-target="#downloadModal"><i class="fa fa-arrow-circle-down"></i> Download</a>
+                      <img src="/themes/openstack/images/containers-r/summit-logo-white.svg" class="summit-cta-logo" alt="">
+                        <div class="download-text">Start planning your OpenStack and containers strategy at the OpenStack Summit in Boston, May 8-11, 2017</div>
+                        <a href="//www.openstack.org/summit/boston-2017/" class="download-btn">Learn more about the Summit</a>
                     </div>
                 </div>
             </div>
 
         </div>
-        <a href="https://flic.kr/p/gibiAV" class="photo-credit" data-toggle="tooltip" data-placement="left" title="Photo by www.GlynLowe.com" target="_blank"><i class="fa fa-info-circle"></i></a>
+        <a href="https://flic.kr/p/avrpZx" class="photo-credit" data-toggle="tooltip" data-placement="left" title="Photo by cuxclipper" target="_blank"><i class="fa fa-info-circle"></i></a>
         <!-- /.container -->
-        <div class="hero-bottom">
-            <div class="container">
-                <div class="row">
-                   <div class="col-sm-7 link-back">
-                        <a href="/appdev">< Back to the App Developer Homepage</a>
-                   </div>
-                    <div class="col-sm-5">
-                        <ul class="list-inline filters">
-                            <li>
-                                <i class="fa fa-database fa-2x"></i><span>Containers</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
     <!-- /.intro-header -->
 
@@ -56,185 +42,245 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-10 col-sm-push-1 center">
-                    <h1>The containers your developers want, with the manageability your IT staff needs</h1>
+                    <h1>Run containers on bare metal or virtual machines with full enterprise storage and networking support</h1>
                     <p>
-                        As a fundamental framework for IT infrastructure, OpenStack brings together VMs, bare metal and containers with common APIs and policies. Most organizations have a mix of technologies in their data centers. OpenStack unifies these systems and allows you to integrate containers with your existing infrastructure. Many OpenStack users are starting to deploy containers on OpenStack, because it’s a proven and familiar platform that provides a path to adopt new technologies such as Kubernetes, Docker and Mesos.
+                        OpenStack is programmable infrastructure that provides API-driven access to bare metal, virtual machines and container resources—all on a single network. 
+                    </p>
+                    <p>
+                      OpenStack provides full enterprise storage and networking support for containers today, because the OpenStack community has already done the work to support the largest number of enterprise systems. While OpenStack is widely known as a private cloud platform, you can access the same open infrastructure immediately from dozens of public cloud providers around the world. Whether you want to run containerized applications on bare metal or virtual machines, OpenStack let’s you run containers the way you want to.
                     </p>
                 </div>
             </div>
         </div>
     </div>
-    <div class="containers-highlights">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12 center">
-                    <h2>White paper highlights</h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4 single">
-                    <i class="fa fa-ship fa-4x"></i>
-                    <h4>What are containers?</h4>
-                </div>
-                <div class="col-sm-4 single">
-                    <i class="fa fa-bank fa-4x"></i>
-                    <h4>Value of containers within an OpenStack infrastructure</h4>
-                </div>
-                <div class="col-sm-4 single">
-                    <i class="fa fa-wrench fa-4x"></i>
-                    <h4>Building a container hosting environment with OpenStack Nova</h4>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4 single">
-                    <i class="fa fa-map-signs fa-4x"></i>
-                    <h4>Tomorrow's containers with OpenStack</h4>
-                </div>
-                <div class="col-sm-4 single">
-                    <i class="fa fa-cogs fa-4x"></i>
-                    <h4>Container support components & architecture</h4>
-                </div>
-                <div class="col-sm-4 single">
-                    <i class="fa fa-info fa-4x"></i>
-                    <h4>Use cases for containers</h4>
-                </div>
-            </div>
-            <div class="row">
-                <a href="#" class="blue-btn" data-toggle="modal" data-target="#downloadModal">Download Now</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Video -->
-    <div class="container-video-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <h2>What app developers were saying at the Austin Summit</h2>
-                    <p>
-                        OpenStack is the is programmable platform that gives users access to bare metal, VMs and containers. The March 2016 user survey indicated that 70% of OpenStack users are interested in containers, and at the OpenStack Summit Austin, users including Time Warner Cable, Lithium technologies and LivePerson spoke about how their teams are working with container technologies like Kubernetes and Mesos. To further build the community of app developers, hackathons are being held to provide access to OpenStack resources, and the winning team from the first app hackathon in Taipei shared a demo how its app measures muscle movement on top of an OpenStack cloud.
-                    </p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12">
-                    <iframe src="https://www.youtube.com/embed/PwOB_y__AKY?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Quote -->
-    <div class="content-section-a testimonial-row">
+    <div class="testimonial-row containers-r"> 
         <div class="container"> 
             <div class="row">
                 <div class="col-lg-8 col-lg-push-2">
+                  <a href="https://www.openstack.org/assets/containers/LivePerson.pdf" target="_blank"><img src="/themes/openstack/images/containers-r/liveperson-logo.png"></a>
                     <blockquote>
-                        As containerized applications emerge as a new workload type, OpenStack is a prime deployment environment among respondents. Only four percent of respondents are not considering containers on OpenStack, while 57% of respondents said that they are already using or plan to use containers on OpenStack, with the remainder undecided.
+                        The important thing for us as a community is to think about OpenStack as an integration engine that’s agnostic. That puts users in the best position for success. Just like we didn’t reinvent the wheel when it comes to compute, storage and networking, we’ll do the same with containers.
                     </blockquote>
                     <div class="testimonial-attribute">
-                        <img src="//openstack.org/assets/Uploads/_resampled/SetWidth138-redhat-sm.png">
-                        <div class="testimonial-title">Excerpt from  Red Hat’s 2016 OpenStack enterprise adoption survey. <a href="https://www.redhat.com/en/about/blog/openstack-production-deployments-more-double-2016-red-hat-survey-finds" target="_blank">Learn more.</a></div>
+                      <img class="testimonial-author-img" src="/themes/openstack/images/containers-r/holzer.png">
+                        <div class="testimonial-name">Koby Holzer</div>
+                        <div class="testimonial-title">Cloud Engineering Director, LivePerson</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- End Quote -->
-    <!-- Action Section -->
-    <div class="containers-action-wrapper">
+
+
+    <div class="containers-highlights r">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 col-sm-push-2">
-                    <div class="">
-                        <p>
-                            OpenStack offers developers the infrastructure framework based on a single set of compatible APIs to manage their workloads, no matter whether those run on containers, virtual machines or bare metal.
-                        </p>
-                        <a class="containers-action-btn" href="#" data-toggle="modal" data-target="#downloadModal"><i class="fa fa-arrow-circle-down"></i> Download The White Paper</a>
-                    </div>
+                <div class="col-sm-10 col-sm-push-1 center">
+                    <h3 style="margin-bottom:30px;">Why ae OpenStack users adopting containers <strong>3x faster</strong> than the overall market?</h3>
                 </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 single">
+                    <i class="fa fa-cogs fa-5x"></i>
+                    <h4>Supports multiple orchestration tools including Docker Swarm, Kubernetes and Mesos</h4>
+                </div>
+                <div class="col-sm-4 single">
+                    <i class="fa fa-sliders fa-5x"></i>
+                    <h4>Enables you to run containers in virtual machines or directly on bare metal</h4>
+                </div>
+                <div class="col-sm-4 single">
+                    <i class="fa fa-server fa-5x"></i>
+                    <h4>No silos in your data center: Integrates containers with important enterprise systems</h4>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-10 col-sm-push-1">
+                <hr style="margin:30px 0 60px;">
+                <h3 style="margin-bottom:30px;">What containers & Platform-as-a-Service tools are OpenStack users deploying?</h3>
+                <img src="/themes/openstack/images/containers-r/containers-chart.svg" alt="">
+              </div>
             </div>
         </div>
     </div>
-    <!-- End Action Section -->
-
-    <!-- Featured Content -->
-
-    <div class="content-section-c featured-wrapper nfv">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2>Learn more about Containers directly from users</h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-5ths">
-                    <a href="http://blog.kubernetes.io/2016/10/kubernetes-and-openstack-at-yahoo-japan.html" target="_blank">
-                    <div class="video-wrapper small">
-                        <div class="play-button">
-                            <img src="/themes/openstack/images/read.png">
-                        </div>
-                        <img class="video-image" src="/assets/containers/kubernetes-sm-featured.jpg" alt="How We Architected and Run Kubernetes on OpenStack at Scale at Yahoo! JAPAN">
-                    </div>
-                    </a>
-                    <p class="video-title">
-                        How We Architected and Run Kubernetes on OpenStack at Scale at Yahoo! JAPAN
-                    </p>
-                </div>
-                <div class="col-sm-5ths">
-                    <a href="http://www.openstack.org/videos/video/innovation-at-bbva-next-generation-overlay-for-kubernetes-and-openstack" target="_blank">
-                    <div class="video-wrapper small">
-                        <div class="play-button">
-                            <img src="/themes/openstack/images/play-button.png">
-                        </div>
-                        <img class="video-image" src="/assets/containers/bbva-featured2.jpg" alt="Innovation at BBVA: Next Generation Overlay for Kubernetes and OpenStack">
-                    </div>
-                    </a>
-                    <p class="video-title">
-                        Innovation at BBVA: Next Generation Overlay for Kubernetes and OpenStack
-                    </p>
-                </div>
-                <div class="col-sm-5ths">
-                    <a href="//www.openstack.org/assets/containers/LivePerson.pdf" target="_blank">
-                    <div class="video-wrapper small">
-                        <div class="play-button">
-                            <img src="/themes/openstack/images/read.png">
-                        </div>
-                        <img class="video-image" src="/themes/openstack/images/containers/featured-3.jpg" alt="Containers and Cloud: Exploring the OpenStack Opportunity with LivePerson">
-                    </div>
-                    </a> 
-                    <p class="video-title">
-                        Containers and Cloud: Exploring the OpenStack Opportunity with LivePerson
-                    </p>
-                </div>
-                <div class="col-sm-5ths">
-                    <a href="http://superuser.openstack.org/articles/scaling-magnum-and-kubernetes-2-million-requests-per-second/" target="_blank">
-                    <div class="video-wrapper small">
-                        <div class="play-button">
-                            <img src="/themes/openstack/images/read.png">
-                        </div>
-                        <img class="video-image" src="/assets/containers/superuser-sm-featured.jpg" alt="Scaling OpenStack Magnum and Kubernetes: 2 million requests per second">
-                    </div>
-                    </a>
-                    <p class="video-title">
-                        Scaling OpenStack Magnum and Kubernetes: 2 million requests per second
-                    </p>
-                </div>
-               <div class="col-sm-5ths">
-                    <a href="//www.openstack.org/blog/2015/07/google-bringing-container-expertise-to-openstack/" target="_blank">
-                    <div class="video-wrapper small">
-                        <div class="play-button">
-                            <img src="/themes/openstack/images/read.png">
-                        </div>
-                        <img class="video-image" src="/themes/openstack/images/containers/featured-5.jpg" alt="Google bringing container expertise to OpenStack">
-                    </div>
-                    </a>
-                    <p class="video-title">
-                        Google bringing container expertise to OpenStack
-                    </p>
-                </div>
-            </div>
+    <div class="containers-users r">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <h2>Learn more about containers directly from users</h2>
+          </div>
         </div>
+        <div class="row">
+          <div class="col-sm-5ths col-xs-4">
+            <a href="http://blog.kubernetes.io/2016/10/kubernetes-and-openstack-at-yahoo-japan.html" target="_blank">
+            <div class="video-wrapper small">
+              <img class="video-image" src="/themes/openstack/images/containers-r/users/yahoo-japan.jpg" alt="How We Architected and Run Kubernetes on OpenStack at Scale at Yahoo! JAPAN">
+            </div>
+            </a>
+            <p class="video-title containers">
+                How We Architected and Run Kubernetes on OpenStack at Scale at Yahoo! JAPAN
+            </p>
+          </div>
+          <div class="col-sm-5ths col-xs-4">
+            <a href="https://www.openstack.org/videos/video/innovation-at-bbva-next-generation-overlay-for-kubernetes-and-openstack" target="_blank">
+            <div class="video-wrapper small">
+              <img class="video-image" src="/themes/openstack/images/containers-r/users/bbva.jpg" alt="Innovation at BBVA: Next Generation Overlay for Kubernetes and OpenStack">
+            </div>
+            </a>
+            <p class="video-title containers">
+                Innovation at BBVA: Next Generation Overlay for Kubernetes and OpenStack
+            </p>
+          </div>
+          <div class="col-sm-5ths col-xs-4">
+            <a href="https://www.openstack.org/assets/containers/LivePerson.pdf" target="_blank">
+            <div class="video-wrapper small">
+              <img class="video-image" src="/themes/openstack/images/containers-r/users/liveperson.jpg" alt="Containers and Cloud: Exploring the OpenStack Opportunity with LivePerson">
+            </div>
+            </a>
+            <p class="video-title containers">
+                Containers and Cloud: Exploring the OpenStack Opportunity with LivePerson
+            </p>
+          </div>
+          <div class="col-sm-5ths col-xs-4">
+            <a href="http://superuser.openstack.org/articles/scaling-magnum-and-kubernetes-2-million-requests-per-second" target="_blank">
+            <div class="video-wrapper small">
+              <img class="video-image" src="/themes/openstack/images/containers-r/users/cern.jpg" alt="Scaling OpenStack Magnum and Kubernetes: 2 million requests per second">
+            </div>
+            </a>
+            <p class="video-title containers">
+                Scaling OpenStack Magnum and Kubernetes: 2 million requests per second
+            </p>
+          </div>
+          <div class="col-sm-5ths col-xs-4">
+            <a href="https://www.sap.com/documents/2016/10/304c03e0-917c-0010-82c7-eda71af511fa.html" target="_blank">
+            <div class="video-wrapper small">
+              <img class="video-image" src="/themes/openstack/images/containers-r/users/sap.jpg" alt="Bare Metal As a Service Within the Enterprise: A Use Case">
+            </div>
+            </a>
+            <p class="video-title containers">
+                Bare Metal As a Service Within the Enterprise: A Use Case
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="containers-services">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-10 col-sm-push-1">
+            <h2>OpenStack services support containers</h2>
+            <p>
+              OpenStack services are comprised of different composable projects that deliver programmable infrastructure. You can combine the services in different ways based on your use case, but there are some common patterns. When it comes to running containerized applications on OpenStack, it depends whether you want to run containers on bare metal, in virtual machines, or both.
+            </p>
+            <p>
+              There are a few OpenStack projects that may be of interest:
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="single-service-wrapper">
+              <div class="single-service-top">
+                <div class="content">
+                  <img src="/themes/openstack/images/containers-r/icons/networking.svg" alt="" class="single-service-icon">
+                  <div class="single-service-title"> 
+                    Networking
+                  </div>
+                </div>
+              </div>
+              <div class="single-service-description">
+                <a href="//www.openstack.org/software/releases/ocata/components/neutron"><strong>Neutron</strong></a> and <strong>Kuryr</strong> provide advanced network functions to libnetwork and CNI-based containers
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="single-service-wrapper">
+              <div class="single-service-top">
+                <div class="content">
+                  <img src="/themes/openstack/images/containers-r/icons/storage.svg" alt="" class="single-service-icon">
+                  <div class="single-service-title"> 
+                    Storage
+                  </div>
+                </div>
+              </div>
+              <div class="single-service-description">
+                <a href="//www.openstack.org/software/releases/ocata/components/cinder"><strong>Cinder</strong></a> block storage supports dozens of open source and enterprise storage systems, bringing the technology already in your datacenter to containers
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="single-service-wrapper">
+              <div class="single-service-top">
+                <div class="content">
+                  <img src="/themes/openstack/images/containers-r/icons/compute.svg" alt="" class="single-service-icon">
+                  <div class="single-service-title"> 
+                    Compute
+                  </div>
+                </div>
+              </div>
+              <div class="single-service-description">
+                <a href="//www.openstack.org/software/releases/ocata/components/nova"><strong>Nova</strong></a> provides true cloud compute functionality on top of all major virtualization platforms while <a href="//www.openstack.org/software/releases/ocata/components/ironic"><strong>Ironic</strong></a> provides automatic access and provisioning of bare metal servers
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="single-service-wrapper">
+              <div class="single-service-top">
+                <div class="content">
+                  <img src="/themes/openstack/images/containers-r/icons/identity.svg" alt="" class="single-service-icon">
+                  <div class="single-service-title"> 
+                    Identity
+                  </div>
+                </div>
+              </div>
+              <div class="single-service-description">
+                <a href="//www.openstack.org/software/releases/ocata/components/keystone"><strong>Keystone</strong></a> integrates with existing authentication systems to provide multi-tenant identity management to cloud services
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="single-service-wrapper">
+              <div class="single-service-top">
+                <div class="content">
+                  <img src="/themes/openstack/images/containers-r/icons/container.svg" alt="" class="single-service-icon">
+                  <div class="single-service-title"> 
+                    Container provisioning
+                  </div>
+                </div>
+              </div>
+              <div class="single-service-description">
+                <a href="//www.openstack.org/software/releases/ocata/components/magnum"><strong>Magnum</strong></a> service allows self-service provisioning of container orchestration engines like Kubernetes, Swarm and Mesos on top of virtual machines or bare metal
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="single-service-wrapper">
+              <div class="single-service-top">
+                <div class="content">
+                  <img src="/themes/openstack/images/containers-r/icons/deployment.svg" alt="" class="single-service-icon">
+                  <div class="single-service-title"> 
+                    Deployment
+                  </div>
+                </div>
+              </div>
+              <div class="single-service-description">
+                <strong>Kolla</strong> and <strong>OpenStack-helm</strong> allow you to containerize the OpenStack control plane to ease deployment and management
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <p style="margin-top: 30px;">
+              Learn more in the OpenStack Project Navigator: <a href="//openstack.org/software/project-navigator" style="text-decoration: underline;">www.openstack.org/software/project-navigator</a>
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
     <!-- End Featured Content -->
     <!-- Summit Promo -->
@@ -242,19 +288,19 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-8">
-                    <h3>Find everything you need to know about containers and OpenStack in Boston</h3>
+                    <h3>More OpenStack + containers content at OpenStack Summit Boston</h3>
                     <p>
-                        Developers and users from the OpenStack, Kubernetes and Docker communities will gather at the Boston Summit to discuss use cases, software roadmap updates as well as OpenStack project updates from Magnum, Kuryr, Kolla and Murano.
+                        Want to build a strategy around containers and OpenStack? Join the must-attend open infrastructure event, May 8-11 to hear from users <strong>eBay</strong>, <strong>AT&T</strong>, <strong>Yahoo! Japan</strong> and learn more about the Kubernetes roadmap from Google’s David Aronchick. Plus, hear project updates from OpenStack Magnum, Kuryr, Kolla, Murano and more.  
                     </p>
                 </div>
                 <div class="col-sm-4">
-                    <div class="containers-summit-right">
-                        <img class="containers-summit-logo" src="/themes/openstack/static/images/summit-logo-small-white.svg" alt="OpenStack Summit">
-                        <div class="containers-summit-dates">
-                            May 8-11, Boston
+                    <div class="nfv-summit-right">
+                        <img class="nfv-summit-logo" src="/themes/openstack/images/summit-logo-small.svg" alt="OpenStack Summit">
+                        <div class="nfv-summit-dates containers">
+                            May 8-11, 2017 in Boston
                         </div>
-                        <div class="containers-summit-register-btn">
-                            <a href="/summit/boston-2017/" class="nfv-summit-btn" target="_blank">Join Us <i class="fa fa-chevron-right"></i></a>
+                        <div class="nfv-summit-register-btn">
+                            <a href="https://www.openstack.org/summit/boston-2017/" class="nfv-summit-btn red" target="_blank">Join Us in Boston <i class="fa fa-chevron-right"></i></a>
                         </div>
                     </div>
                 </div>

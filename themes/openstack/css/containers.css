@@ -109,4 +109,121 @@
   }
 }
 
+.intro-header.containers-r {
+  background: url(/themes/openstack/images/containers-r/hero-bkgd.jpg) no-repeat center center;
+  background-size: cover;
+  position: relative; }
+  .intro-header.containers-r a.photo-credit {
+    bottom: 20px; }
+  .intro-header.containers-r h1 {
+    font-size: 2.8em;
+    margin: 40px 0 30px; }
+  .intro-header.containers-r h3 {
+    font-size: 1.5em; }
+    .intro-header.containers-r h3 strong {
+      font-weight: 600; }
+  .intro-header.containers-r .download-container {
+    background: rgba(1, 31, 52, 0.8);
+    border-radius: 2px;
+    width: 100%;
+    margin: 80px auto 0;
+    padding: 30px 20px; }
+    .intro-header.containers-r .download-container .download-btn {
+      margin-top: 20px;
+      font-weight: 400; }
+
+@media (max-width: 767px) {
+  .intro-header.containers-r .intro-message {
+    padding-bottom: 0; }
+  .intro-header.containers-r a.photo-credit {
+    bottom: 20px; }
+  .intro-header.containers-r .download-container {
+    margin: 40px auto 50px; } }
+
+.summit-cta-logo {
+  width: 108px;
+  margin-bottom: 10px; }
+
+.testimonial-row.containers-r {
+  background: #edf2f7; }
+  .testimonial-row.containers-r blockquote:before, .testimonial-row.containers-r blockquote:after {
+    color: #D4DCE5; }
+
+.containers-highlights.r {
+  background: white; }
+
+.containers-users.r {
+  background: #30739C;
+  padding: 40px 0;
+  text-align: center;
+  color: white; }
+  .containers-users.r h2 {
+    color: white;
+    text-align: center; }
+  .containers-users.r .video-wrapper {
+    margin-top: 10px;
+    margin-bottom: 10px; }
+
+@media (max-width: 767px) {
+  .video-title.containers {
+    font-size: 0.8em; } }
+
+.containers-services {
+  text-align: center;
+  padding: 60px 0; }
+  .containers-services h2 {
+    text-align: center; }
+  .containers-services .single-service-wrapper {
+    background: white;
+    border: 1px solid #D4DCE5;
+    box-shadow: 0 2px 4px 0 #D4DCE5;
+    border-radius: 4px;
+    margin-top: 20px; }
+  .containers-services .single-service-top {
+    height: 150px;
+    position: relative; }
+    .containers-services .single-service-top .content {
+      bottom: 10px;
+      position: absolute;
+      left: 50%;
+      -webkit-transform: translateX(-50%);
+              transform: translateX(-50%); }
+  .containers-services img.single-service-icon {
+    max-height: 75px;
+    max-width: 85px;
+    margin: 25px 0 15px; }
+  .containers-services .single-service-title {
+    color: #30739C;
+    font-size: 1.3em;
+    white-space: nowrap; }
+  .containers-services .single-service-description {
+    width: 100%;
+    background: #EDFDFF;
+    color: #30739C;
+    padding: 10px 20px;
+    border-top: 1px solid #D4DCE5;
+    margin-top: 20px;
+    min-height: 125px; }
+    .containers-services .single-service-description a {
+      text-decoration: underline; }
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .containers-services .single-service-description {
+    min-height: 200px; } }
+
+.summit-promo.containers {
+  background: url(/themes/openstack/images/containers-r/OS-Boston-WebBanners-Red-Stamp-Theater-1300x576.jpg) no-repeat scroll center center;
+  background-size: cover;
+  padding: 60px 0 90px; }
+
+.summit-promo.containers .nfv-summit-right .nfv-summit-dates.containers {
+  color: white;
+  font-size: 1.1em;
+  margin-bottom: 20px;
+  font-style: italic; }
+
+.summit-promo.containers .nfv-summit-right .nfv-summit-btn.red {
+  background: #A51B1B; }
+
+
 /*End Containers Page*/
