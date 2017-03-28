@@ -78,7 +78,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-10 col-sm-push-1 center">
-                    <h3 style="margin-bottom:30px;">Why ae OpenStack users adopting containers <strong>3x faster</strong> than the overall market?</h3>
+                    <h3 style="margin-bottom:30px;">Why are OpenStack users adopting containers <strong>3x faster</strong> than the overall market?</h3>
                 </div>
             </div>
             <div class="row">
