@@ -1600,12 +1600,6 @@ img.global-figures-chart {
     color: white; }
   .summit-promo p {
     color: white; }
-  .summit-promo.containers {
-    background: url('/assets/Uploads/hero-bkgd.png') no-repeat center center;
-    background-size: cover;
-    padding: 60px 0 80px; 
-    margin-bottom: -50px;
-  }
   .summit-promo.barcelona {
     background: url('/assets/boston-summit/promo/OS-Boston-WebBanners-Red-Stamp-Theater-1300x576.jpg') no-repeat scroll center center; 
     background-size: cover;
