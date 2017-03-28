@@ -193,12 +193,14 @@ class SummitAppSpeakersApi extends AbstractRestfulJsonApi {
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
 
             $speaker = PresentationSpeaker::get_by_id('PresentationSpeaker',$speaker_id);
+            $attendee = ($speaker->Member()) ? $speaker->Member()->getCurrentSummitAttendee() : null;
+
             $speaker_array = array(
                 'Title' => $speaker->Title,
                 'FirstName' => $speaker->FirstName,
                 'LastName' => $speaker->LastName,
                 'Email' => $speaker->RegistrationRequest()->Email,
-                'Member' => ($speaker->Member()->Exists()) ? $speaker->Member()->toMap() : null,
+                'Member' => ($speaker->Member()) ? $speaker->Member()->toMap() : null,
                 'Twitter' => $speaker->TwitterName,
                 'IRC' => $speaker->IRCHandle,
                 'Bio' => $speaker->Bio,
@@ -212,6 +214,7 @@ class SummitAppSpeakersApi extends AbstractRestfulJsonApi {
                 'Assistances' => $speaker->SummitAssistances()->toNestedArray(),
                 'OrganizationalRoles' => $speaker->OrganizationalRoles()->toNestedArray(),
                 'ActiveInvolvements' => $speaker->ActiveInvolvements()->toNestedArray(),
+                'Tickets' => ($attendee) ? implode(', ',$attendee->Tickets()->column('ExternalOrderId')) : ''
             );
 
             return $this->ok($speaker_array, false);

@@ -101,7 +101,7 @@ $(document).ready(function(){
         swal(
             {
                 title: "Attention!",
-                text: "There is no going back. One of these speakers will be erased and the other one will have all the green fields",
+                text: "There is no going back. Speaker 1 on the left will have all the green fields and Speaker 2 will be erased",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
@@ -132,13 +132,16 @@ function populateSpeaker(speaker_id, col) {
         $('#first_name-'+col).val(speaker.FirstName);
         $('#last_name-'+col).val(speaker.LastName);
         $('#email-'+col).val(speaker.Email);
+
+        var member_html = '';
         if (speaker.Member) {
-            var member_html = '';
             member_html += 'ID: '+speaker.Member.ID+'<br>';
             member_html += 'Name: '+speaker.Member.FirstName+' '+speaker.Member.Surname+'<br>';
-            member_html += 'Email: '+speaker.Member.Email;
-            $('#member-'+col).html(member_html);
+            member_html += 'Email: '+speaker.Member.Email+'<br>';
+            member_html += 'EB Ticket: '+speaker.Tickets;
         }
+        $('#member-'+col).html(member_html);
+
         var pres_html = '';
         var last_summit = '';
         $.each(speaker.Presentations,function(idx,val){

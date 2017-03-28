@@ -105,7 +105,7 @@
         var code = "{$PromoCode.Code.JS}";
         var speaker_email = '';
         var old_owner = 0;
-        var email_sent = {$PromoCode.EmailSent};
+        var email_sent = parseInt({$PromoCode.EmailSent});
 
         <% if $PromoCode.Speaker %>
             <% if $PromoCode.Speaker.Member.Email %>

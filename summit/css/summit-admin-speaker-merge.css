@@ -60,3 +60,8 @@
 #picture-1, #picture-2 {
     text-align: center;
 }
+
+.sweet-alert {
+    max-height: 600px;
+    overflow: auto;
+}

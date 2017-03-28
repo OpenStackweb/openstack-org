@@ -196,10 +196,10 @@
                         <label for="promocode-1">PromoCode</label>
                     </div>
                     <div class="col-md-5 selectable">
-                        <div id="promocode-1" data-field="PromoCode" data-speaker="1"></div>
+                        <div id="promocode-1" data-field="PromoCodes" data-speaker="1"></div>
                     </div>
                     <div class="col-md-6 selectable">
-                        <div id="promocode-2" data-field="PromoCode" data-speaker="2"></div>
+                        <div id="promocode-2" data-field="PromoCodes" data-speaker="2"></div>
                     </div>
                 </div>
                 <div class="row">
