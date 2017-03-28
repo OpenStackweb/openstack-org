@@ -4,11 +4,11 @@
 
      <button if={ this.current_user.is_attendee && this.event.has_rsvp && this.event.rsvp_external}
                   id="btn_rsvp_external"
-                  title="RSVP"
+                  title="{ this.event.going ? 'UnSchedule': 'RSVP' }"
                   type="button"
-                  onclick={ redirect2ExternalRSVP }
+                  onclick={ toggleExternalRSVP }
                   class="btn btn-primary btn-md active btn-rsvp-own-event btn-action { this.event.going ? 'btn-action-pressed': 'btn-action-normal' }">
-             <span class="glyphicon glyphicon-ok-circle"></span>&nbsp;<span class="content">RSVP</span>
+             <span class="glyphicon glyphicon-ok-circle"></span>&nbsp;<span class="content">{ this.event.going ? 'Schedule': 'RSVP' }</span>
      </button>
      <button if={ this.current_user.is_attendee && this.event.has_rsvp && !this.event.rsvp_external}
              id="btn_rsvp_own"
@@ -155,22 +155,14 @@
         return false;
      }
 
-     redirect2ExternalRSVP(e){
-          var former_state = self.event.going;
-          self.event.going = !former_state;
-          self.update();
-          if(!former_state){
-            self.schedule_api.addEvent2MySchedule(self.event.summit_id, self.event.id);
-          }
-          else
-          {
-            var url      = new URI(event.rsvp_link);
-            url.addQuery('BackURL', window.location)
-            window.location = url.toString();
-          }
-          e.preventDefault();
-          e.stopPropagation();
-          return false;
+     toggleExternalRSVP(e){
+        self.toogleScheduleState(e);
+        var url      = new URI(self.event.rsvp_link);
+        url.addQuery('BackURL', window.location)
+        window.location = url.toString();
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
      }
 
   </script>

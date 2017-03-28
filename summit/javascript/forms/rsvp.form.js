@@ -1,34 +1,46 @@
 // RSVP
 
+function jqueryValidatorInvalidHandler(form, validator) {
+    var errors = validator.numberOfInvalids();
+    if (errors) {
+        var first_error  = $(validator.errorList[0].element);
+        if(!first_error.is(':visible')){
+            first_error = first_error.closest(":visible" );
+        }
+        $('html, body').animate({
+            scrollTop: first_error.offset().top
+        }, 2000);
+    }
+}
+
 $(document).ready(function () {
 
+    $('.rsvp_form').validate({
+        errorPlacement: function (error, element) {
+            error.insertAfter($(element).closest('div'));
+        },
+        invalidHandler: jqueryValidatorInvalidHandler,
+    });
+
+    $(document).off("click", ".rsvp_submit").on("click", ".rsvp_submit", function (e) {
+        e.preventDefault();
+        var btn = $(this);
+        var form = btn.closest('.rsvp_form');
+        if (!form.valid()) return false;
+
+        var event_id = $('input[name="event_id"]', form).val();
+        var summit_id = $('input[name="summit_id"]', form).val();
+        var security_id = $('input[name="SecurityID"]', form).val();
+
+        addRSVP(form, event_id, summit_id, security_id);
+
+        return false;
+    });
+
     if($('.rsvp_form').length > 0) {
-        $('.rsvp_form').validate({
-            errorPlacement: function (error, element) {
-                error.insertAfter($(element).closest('div'));
-            }
-        });
-
-
         $('html, body').animate({
             scrollTop: $('.rsvp_form').offset().top - 100
         }, 1000);
-
-
-        $(document).off("click", ".rsvp_submit").on("click", ".rsvp_submit", function (e) {
-            e.preventDefault();
-            var btn = $(this);
-            var form = btn.closest('.rsvp_form');
-            if (!form.valid()) return false;
-
-            var event_id = $('input[name="event_id"]', form).val();
-            var summit_id = $('input[name="summit_id"]', form).val();
-            var security_id = $('input[name="SecurityID"]', form).val();
-
-            addRSVP(form, event_id, summit_id, security_id);
-
-            return false;
-        });
     }
 
 });
@@ -53,7 +65,6 @@ function addRSVP(form, event_id, summit_id, security_id) {
             $('input[name="rsvp_id"]',form).val(rsvp_id);
             $('.rsvp_delete', modal_id).removeClass('hidden');
 
-            // check if we should update event action buttons
             if(!loadedFromAjaxRequest) {
                 swal("Done!", "Your rsvp to this event was sent successfully.", "success");
                 var url = new URI(window.location);

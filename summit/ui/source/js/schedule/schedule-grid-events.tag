@@ -553,6 +553,8 @@
                         else{
                              if(!event.rsvp_external)
                                 $('li.unrsvp-action', menu).show();
+                             else
+                                $('li.not-going-action', menu).show();
                         }
                     }
                 }
