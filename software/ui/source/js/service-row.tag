@@ -1,5 +1,5 @@
 require('./t.tag');
-<service-box>
+<service-row>
 
     <tr> 
         <td class="project-table-code-name">
@@ -24,4 +24,4 @@ require('./t.tag');
         }
 
     </script>
-</service-box>
+</service-row>
