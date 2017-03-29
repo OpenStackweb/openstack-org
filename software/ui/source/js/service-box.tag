@@ -1,7 +1,7 @@
 require('./t.tag');
 <service-box>
     <div class="col-md-4 col-sm-6">
-    <div class="core-services-single-full" onclick={ coreServiceDetails }>
+    <div class="core-services-single-full">
     <div class="core-top">
     <div class="core-title" style="background-image: url({mascotImage()});">
         <a href="{ coreServiceDetailsURL() }">{ code_name }</a>
@@ -19,12 +19,11 @@ require('./t.tag');
         var self = this;
 
         coreServiceDetails(e) {
-            window.location = self.coreServiceDetailsURL(e);
+            window.location = self.coreServiceDetailsURL();
         }
 
-        coreServiceDetailsURL(e) {
-            var slug  = e.item.slug;
-            var url = self.parent.base_url+'releases/'+self.parent.parent.getCurrentReleaseId()+'/components/'+slug;
+        coreServiceDetailsURL() {
+            var url = self.parent.base_url+'releases/'+self.parent.parent.getCurrentReleaseId()+'/components/'+self.slug;
             return url;
         }
 
