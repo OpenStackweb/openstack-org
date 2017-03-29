@@ -19,7 +19,7 @@ require('./t.tag');
                 <tbody>        
                     <tr each="{ component in components }" onclick={ coreServiceDetails }>
                         <td class="project-table-code-name">
-                             <a href="{ coreServiceDetailsURL }"><span class="project-table-mascot-icon" style="background-image: url({mascotImage(component)});"></span>
+                             <a href="{ coreServiceDetailsURL() }"><span class="project-table-mascot-icon" style="background-image: url({mascotImage(component)});"></span>
                             { component.code_name }</a>
                         </td>
                         <td class="project-table-description">{ component.name }</td>

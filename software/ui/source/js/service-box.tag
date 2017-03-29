@@ -4,10 +4,10 @@ require('./t.tag');
     <div class="core-services-single-full" onclick={ coreServiceDetails }>
     <div class="core-top">
     <div class="core-title" style="background-image: url({mascotImage()});">
-        <a href="{ coreServiceDetailsURL }">{ code_name }</a>
+        <a href="{ coreServiceDetailsURL() }">{ code_name }</a>
     </div>
     <div class="core-service">
-        <a href="{ coreServiceDetailsURL }">{ name }</a>
+        <a href="{ coreServiceDetailsURL() }">{ name }</a>
     </div>
     </div>
 
