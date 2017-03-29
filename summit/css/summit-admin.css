@@ -35,7 +35,7 @@
 }
 
 .summit-admin-container {
-    width: 83%;
+    min-width: 83%;
 }
 
 /* DASHBOARD */

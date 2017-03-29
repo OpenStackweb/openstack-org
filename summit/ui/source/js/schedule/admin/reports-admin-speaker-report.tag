@@ -71,9 +71,10 @@
             var sort = $('.sorted').data('sort');
             var sort_dir = $('.sorted').data('dir');
             var filter = $('#status-filter').val();
+            var term = $('#search-term').val();
 
             $.getJSON('api/v1/summits/'+self.summit_id+'/reports/speaker_report',
-                {page:page, items:self.page_data.limit, sort:sort, sort_dir:sort_dir, filter:filter},
+                {page:page, items:self.page_data.limit, sort:sort, sort_dir:sort_dir, filter:filter, term: term},
                 function(data){
                     self.speakers = data.data;
                     self.page_data.page = page;

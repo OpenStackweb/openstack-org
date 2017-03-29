@@ -3,7 +3,7 @@
     this.root.innerHTML = opts.content
 </raw>
 
-<reports-admin-container>
+<reports-admin-container class="reports-wrapper">
     <div class="row">
         <div class="col-md-4" if={ show_search }>
             <div class="input-group" style="width: 100%;">
@@ -120,6 +120,7 @@
                     self.show_status_filter = true;
                     self.show_save = true;
                     self.show_export = true;
+                    self.show_search = true;
                     break;
                 case 'presentation_report':
                     self.show_status_filter = true;

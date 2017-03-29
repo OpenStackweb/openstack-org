@@ -126,12 +126,13 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
             $sort = (isset($query_string['sort'])) ? Convert::raw2sql($query_string['sort']) : 'name';
             $sort_dir = (isset($query_string['sort_dir'])) ? Convert::raw2sql($query_string['sort_dir']) : 'ASC';
             $filter = (isset($query_string['filter'])) ? $query_string['filter'] : 'all';
+            $search_term  = (isset($query_string['term'])) ? Convert::raw2sql($query_string['term']) : '';
             $summit_id = intval($request->param('SUMMIT_ID'));
             $summit = $this->summit_repository->getById($summit_id);
             if (is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
             $ext = 'csv';
 
-            $report_data = $this->assistance_repository->getAssistanceBySummit($summit_id, null, null, $sort, $sort_dir, $filter);
+            $report_data = $this->assistance_repository->getAssistanceBySummit($summit_id, null, null, $sort, $sort_dir, $filter, $search_term);
             $data = $report_data['Data'];
             $results = array();
             foreach ($data as $row) {

@@ -24,7 +24,7 @@ final class SapphireSummitAssistanceRepository extends SapphireRepository implem
      * @param int $summit_id
      * @return array
      */
-    public function getAssistanceBySummit($summit_id, $page, $page_size, $sort, $sort_dir, $filter)
+    public function getAssistanceBySummit($summit_id, $page, $page_size, $sort, $sort_dir, $filter, $search_term)
     {
 
         $select = <<<SQL
@@ -63,6 +63,11 @@ SQL;
             E.SummitID = {$summit_id}
             AND E.Published = 1
 SQL;
+
+        if ($search_term) {
+            $from .= " AND (SpeakerRegistrationRequest.Email = '$search_term' OR Member.Email = '$search_term'
+                       OR Member.Surname = '$search_term' OR S.LastName = '$search_term' OR O.Name = '$search_term')";
+        }
 
         if ($filter != 'all') {
             if ($filter == 'hide_confirmed')
