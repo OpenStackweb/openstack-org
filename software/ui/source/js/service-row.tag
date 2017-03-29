@@ -1,13 +1,11 @@
 require('./t.tag');
 <service-row>
 
-    <tr> 
-        <td class="project-table-code-name">
-                <a href="{ coreServiceDetailsURL() }"><span class="project-table-mascot-icon" style="background-image: url({mascotImage()});"></span>
-            { code_name }</a>
-        </td>
-        <td class="project-table-description"><a href="{ coreServiceDetailsURL() }">{ name }</a></td>
-    </tr>
+    <div class="project-table-code-name">
+            <a href="{ coreServiceDetailsURL() }"><span class="project-table-mascot-icon" style="background-image: url({mascotImage()});"></span>
+        { code_name }</a>
+    </div>
+    <div class="project-table-description"><a href="{ coreServiceDetailsURL() }">{ name }</a></div>
 
     <script>
 

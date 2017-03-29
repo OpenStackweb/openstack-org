@@ -16,11 +16,7 @@ require('./t.tag');
             <service-box each="{ components }" ></service-box>
         </div>
         <div class="col-sm-12" if="{ !opts.tiles }">
-            <table class="table">
-                <tbody>        
-                    <virtual data-is="service-row"  each="{ components }"></virtual>
-                </tbody>
-            </table>
+            <service-row each="{ components }"></service-row>
         </div>
     </div>
 
