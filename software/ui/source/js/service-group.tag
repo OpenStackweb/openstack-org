@@ -1,4 +1,5 @@
 require('./service-box.tag')
+require('./service-row.tag')
 require('./t.tag');
 
 <service-group>
@@ -17,13 +18,7 @@ require('./t.tag');
         <div class="col-sm-12" if="{ !opts.tiles }">
             <table class="table">
                 <tbody>        
-                    <tr each="{ component in components }" onclick={ coreServiceDetails }>
-                        <td class="project-table-code-name">
-                             <a href="{ coreServiceDetailsURL() }"><span class="project-table-mascot-icon" style="background-image: url({mascotImage(component)});"></span>
-                            { component.code_name }</a>
-                        </td>
-                        <td class="project-table-description">{ component.name }</td>
-                    </tr>
+                    <virtual data-is="service-row"  each="{ component in components }"></virtual>
                 </tbody>
             </table>
         </div>
