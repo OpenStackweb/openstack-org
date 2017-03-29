@@ -49,7 +49,10 @@
                     <td>{ event.capacity }</td>
                     <td>{ event.speakers }</td>
                     <td><input type="text" class="headcount" value={ event.headcount } /></td>
-                    <td>{ event.total }</td>
+                    <td>
+                        { event.total }
+                        <i class="fa fa-download export_room_attendees" aria-hidden="true"></i>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -77,6 +80,11 @@
 
             $('#select_venue').change(function(){
                 self.getReport();
+            });
+
+            $('.reports-wrapper').on('click','.export_room_attendees',function(){
+                var event_id = $(this).parents('tr').data('id');
+                window.open('api/v1/summits/'+self.summit_id+'/reports/export/room_report/'+event_id, '_blank');
             });
 
             $('#select_venue').chosen();

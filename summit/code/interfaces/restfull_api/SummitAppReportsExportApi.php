@@ -75,7 +75,7 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
         $this->event_repository              = $event_repository;
         $this->category_repository           = $category_repository;
         $this->presentation_repository       = $presentation_repository;
-        $this->summit_manager                = $summit_service;
+        $this->summit_manager                = $summit_manager;
     }
 
 
@@ -100,6 +100,7 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
     static $url_handlers = array
     (
         'GET speaker_report'                => 'exportSpeakerReport',
+        'GET room_report/$EVENT_ID'         => 'exportRoomAttendees',
         'GET room_report'                   => 'exportRoomReport',
         'GET presentation_report'           => 'exportPresentationReport',
         'GET video_report'                  => 'exportVideoReport',
@@ -110,6 +111,7 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
 
     static $allowed_actions = array(
         'exportSpeakerReport',
+        'exportRoomAttendees',
         'exportRoomReport',
         'exportPresentationReport',
         'exportVideoReport',
@@ -142,6 +144,44 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
             $delimiter = ($ext == 'xls') ? "\t" : ",";
             return CSVExporter::getInstance()->export($filename, $results, $delimiter);
 
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    public function exportRoomAttendees(SS_HTTPRequest $request){
+        try
+        {
+            $event_id     = intval($request->param('EVENT_ID'));
+            $summit_id = intval($request->param('SUMMIT_ID'));
+            $summit = $this->summit_repository->getById($summit_id);
+            if (is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+            $ext = 'csv';
+
+            $attendees = SummitEvent::get()->byID($event_id)->Attendees();
+            $report_data = array();
+            foreach ($attendees as $attendee) {
+                $attendee_data = array();
+                if (!$attendee->Member()) continue;
+
+                $attendee_data['FirstName'] = $attendee->Member()->FirstName;
+                $attendee_data['LastName'] = $attendee->Member()->Surname;
+                $attendee_data['Email'] = $attendee->Member()->Email;
+                $attendee_data['Company'] = ($attendee->Member()->getCurrentOrganization()) ? $attendee->Member()->getCurrentOrganization()->Name : '';
+                $report_data[] = $attendee_data;
+            }
+
+            $filename = $event_id."-attendees-" . date('Ymd') . "." . $ext;
+            $delimiter = ($ext == 'xls') ? "\t" : ",";
+            return CSVExporter::getInstance()->export($filename, $report_data, $delimiter);
         }
         catch(NotFoundEntityException $ex2)
         {

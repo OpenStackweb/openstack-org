@@ -41,3 +41,8 @@ th .fa {
 .report_count {
     font-size: 10px;
 }
+
+.export_room_attendees {
+    margin-left: 10px;
+    cursor: pointer;
+}

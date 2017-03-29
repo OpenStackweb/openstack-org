@@ -137,7 +137,7 @@ L2.Name AS venue,
 R.Capacity AS capacity,
 (COUNT(DISTINCT(SA.SpeakerID), SA.SpeakerID IS NOT NULL) + IF(P.ModeratorID != 0, 1, 0)) AS speakers,
 E.HeadCount AS headcount,
-COUNT(A.ID) AS total,
+COUNT(DISTINCT A.ID) AS total,
 GROUP_CONCAT(DISTINCT CONCAT(S.FirstName,' ',S.LastName) SEPARATOR ', ') AS speaker_list
 FROM SummitEvent AS E
 LEFT JOIN Presentation AS P ON P.ID = E.ID
@@ -164,7 +164,7 @@ SQL;
         }
 
         $query .= <<<SQL
- GROUP BY E.ID
+ GROUP BY E.ID ORDER BY E.StartDate
 SQL;
 
         return DB::query($query);
