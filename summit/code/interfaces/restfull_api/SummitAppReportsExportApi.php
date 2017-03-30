@@ -161,12 +161,16 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
         try
         {
             $event_id     = intval($request->param('EVENT_ID'));
+            $event        = SummitEvent::get()->byID($event_id);
             $summit_id = intval($request->param('SUMMIT_ID'));
             $summit = $this->summit_repository->getById($summit_id);
             if (is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+            if (is_null($event)) throw new NotFoundEntityException('Event', sprintf(' id %s', $event_id));
+            $date = $summit->convertDateFromUTC2TimeZone($event->getField('StartDate'), 'm-d_H.i');
+            $room = $event->getLocation()->Name;
             $ext = 'csv';
 
-            $attendees = SummitEvent::get()->byID($event_id)->Attendees();
+            $attendees = $event->Attendees();
             $report_data = array();
             foreach ($attendees as $attendee) {
                 $attendee_data = array();
@@ -179,7 +183,7 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
                 $report_data[] = $attendee_data;
             }
 
-            $filename = $event_id."-attendees-" . date('Ymd') . "." . $ext;
+            $filename = $date."_". $room . "_" . date('Ymd') . "." . $ext;
             $delimiter = ($ext == 'xls') ? "\t" : ",";
             return CSVExporter::getInstance()->export($filename, $report_data, $delimiter);
         }
