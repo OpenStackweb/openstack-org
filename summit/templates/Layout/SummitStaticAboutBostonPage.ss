@@ -261,7 +261,7 @@
                 <div class="about-timeline-wrapper">
                     <h3>Summit Timeline</h3>
                     <p>
-                        You can access everything the Austin Summit has to offer with one pass!
+                        You can access everything the Sydney Summit has to offer with one pass!
                     </p>
                     <img class="summit-type-icon" src="/assets/sydney-summit/images/sydney-schedule-final.png" alt="Summit Timeline">
                 </div>
