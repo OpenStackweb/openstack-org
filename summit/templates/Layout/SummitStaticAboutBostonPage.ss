@@ -13,15 +13,12 @@
                     Featured Speakers
                 </a>
             </li>
-            
-                <li>
-                    <a href="#openstackacademy">
-                        <i class="fa fa-graduation-cap"></i>
-                        OpenStack Academy
-                    </a>
-                </li>
-            
-            
+            <li>
+                <a href="#openstackacademy">
+                    <i class="fa fa-graduation-cap"></i>
+                    OpenStack Academy
+                </a>
+            </li>
             <li>
                 <a href="#forum">
                     <i class="fa fa-flask"></i>
@@ -78,10 +75,7 @@
             </div>
         <div class="col-lg-3 col-md-4 col-sm-4" style="margin-top:30px;">
       <ul class="help-me-menu">
-        <li><a href="http://openstackfoundation.formstack.com/forms/boston_summit_discounted_registration"><i class="fa fa-bicycle"></i>Apply for a student discount</a></li>
-        <li><a href="/summit/sydney-2017/travel/#hotels"><i class="fa fa-hotel"></i>Book your hotel</a></li>
         <li><a href="/summit/sydney-2017/code-of-conduct" target="_blank"><i class="fa fa-eye"></i>Code of Conduct</a></li>
-        <li><a href="/summit/sydney-2017/travel/#travel-support"><i class="fa fa-users"></i>Apply for travel support</a></li>
       </ul>
         </div>
         </div>
