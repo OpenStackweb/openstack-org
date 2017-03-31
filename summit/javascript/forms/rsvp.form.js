@@ -71,9 +71,22 @@ function addRSVP(form, event_id, summit_id, security_id) {
                         text:"Your rsvp to this event was sent successfully.",
                         type: "success"
                     }).then(function () {
-                        var url = new URI(window.location);
-                        if (url.hasQuery("BackURL")) {
-                            window.location = url.query(true)['BackURL'];
+
+
+                        var is_mobile              = bowser.mobile ||  bowser.tablet;
+                        var is_ios                 = bowser.ios;
+                        var is_android             = bowser.android;
+
+                        if(is_android){
+                            var form     = $('.rsvp_form');
+                            var event_id = $('input[name="event_id"]', form).val();
+                            window.location = "org.openstack.android.summit://events/"+event_id;
+                        }
+                        else {
+                            var url = new URI(window.location);
+                            if (url.hasQuery("BackURL")) {
+                                window.location = url.query(true)['BackURL'];
+                            }
                         }
                     });
             }
