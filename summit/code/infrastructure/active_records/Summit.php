@@ -34,6 +34,8 @@ final class Summit extends DataObject implements ISummit
         'Slug' => 'Varchar',
         'RegistrationLink' => 'Text',
         'ComingSoonBtnText' => 'Text',
+        'SecondaryRegistrationLink' => 'Text',
+        'SecondaryRegistrationBtnText' => 'Text',
         // https://www.eventbrite.com
         'ExternalEventId' => 'Text',
         'TimeZone' => 'Text',
@@ -46,6 +48,7 @@ final class Summit extends DataObject implements ISummit
     private static $defaults = array
     (
         'MaxSubmissionAllowedPerUser' => 3,
+        'SecondaryRegistrationBtnText' => 'Book Hotel',
     );
 
     private static $has_one = array

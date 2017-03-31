@@ -57,7 +57,8 @@
                                     <% if $ComingSoonBtnText %>
                                         <button class="btn register-btn-lrg soon" href="#">{$ComingSoonBtnText}</button>
                                     <% end_if %>
-                                    &nbsp;&nbsp;<a href="/summit/boston-2017/travel/" class="btn register-btn-lrg">Book Hotel</a>
+                                    &nbsp;&nbsp;
+                                    <a href="{$SecondaryRegistrationLink}" <% if not $SecondaryRegistrationLink %> disabled <% end_if %> class="btn register-btn-lrg">{$SecondaryRegistrationBtnText}</a>
                                 </div>
                                 <div class="landing-date">
                                     <div class="left">
@@ -97,7 +98,8 @@
                 <% if $ComingSoonBtnText %>
                     <button class="btn register-btn-lrg soon" href="#">{$ComingSoonBtnText}</button>
                 <% end_if %>
-                &nbsp;&nbsp;<a href="/summit/boston-2017/travel/" class="btn register-btn-lrg">Book Hotel</a>
+                &nbsp;&nbsp;
+                <a href="{$SecondaryRegistrationLink}" <% if not $SecondaryRegistrationLink %> disabled <% end_if %> class="btn register-btn-lrg">{$SecondaryRegistrationBtnText}</a>
             </div>
             <div class="landing-date">
                 <div class="left">

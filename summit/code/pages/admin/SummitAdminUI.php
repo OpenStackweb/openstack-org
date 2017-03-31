@@ -80,6 +80,10 @@ final class SummitAdminUI extends DataExtension
         $f->addFieldToTab('Root.Main', $registration_link = new TextField('RegistrationLink', 'Registration Link'));
         $registration_link->setDescription('Link to the site where tickets can be purchased.');
 
+        $f->addFieldToTab('Root.Main', $secondary_registration_link = new TextField('SecondaryRegistrationLink', 'Secondary Registration Link'));
+        $f->addFieldToTab('Root.Main', $secondary_registration_btn_txt = new TextField('SecondaryRegistrationBtnText', 'Secondary Registration Label'));
+        $secondary_registration_link->setDescription('Link to the site where you book a hotel.');
+
         $f->addFieldsToTab('Root.Dates',
             $ddl_timezone = new DropdownField('TimeZone', 'Time Zone', DateTimeZone::listIdentifiers()));
         $ddl_timezone->setEmptyString('-- Select a Timezone --');
