@@ -702,10 +702,10 @@ p.service-section-title {
   	font-weight: bold;
   	text-transform: uppercase;
   	width: 20%;
-  	cursor: pointer;  	
+  	float: left;
   }
-
-	.project-table-code-name span {
+  
+  .project-table-code-name span {
 	    margin-top: -3px;
 		display: inline-block;
 		width: 25px;
@@ -718,6 +718,11 @@ p.service-section-title {
   	color: grey;	
   	cursor: pointer;
   }
+  
+	div.project-table-row {
+		border-top: 1px solid #EAEAEA;
+		min-height: 40px;
+	}  
   
   .toggle-wrapper {
   	max-width: 400px;
