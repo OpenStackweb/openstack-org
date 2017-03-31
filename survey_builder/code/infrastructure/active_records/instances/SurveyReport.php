@@ -59,10 +59,30 @@ class SurveyReport extends DataObject {
 
     public function getCMSFields() {
         $fields = parent::getCMSFields();
+
         $templateList = SurveyTemplate::get()->filter(array('ClassName' => 'SurveyTemplate' ))->sort('Title')->map()->toArray();
         $templateSelect = DropdownField::create('TemplateID', 'Survey Template')->setSource($templateList);
-
         $fields->replaceField('TemplateID', $templateSelect);
+
+        $sectionList = SurveyReportSection::get()->filter('ReportID',0);
+        $config = GridFieldConfig_RelationEditor::create(15);
+        $config->addComponent(new GridFieldCopySectionsAction($this->ID));
+        $completer = $config->getComponentByType('GridFieldAddExistingAutocompleter');
+        $completer->setResultsFormat('$Name');
+        $completer->setSearchFields(array('Name'));
+        $completer->setSearchList($sectionList);
+        $sections = new GridField('Sections', 'Sections', $this->Sections(), $config);
+        $fields->replaceField('Sections', $sections);
+
+        $filterList = SurveyReportFilter::get()->filter('ReportID',0);
+        $config = GridFieldConfig_RelationEditor::create(15);
+        $config->addComponent(new GridFieldCopyFiltersAction($this->ID));
+        $completer = $config->getComponentByType('GridFieldAddExistingAutocompleter');
+        $completer->setResultsFormat('$Name');
+        $completer->setSearchFields(array('Name'));
+        $completer->setSearchList($filterList);
+        $filters = new GridField('Filters', 'Filters', $this->Filters(), $config);
+        $fields->replaceField('Filters', $filters);
 
         return $fields;
     }
