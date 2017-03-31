@@ -66,12 +66,11 @@ function addRSVP(form, event_id, summit_id, security_id) {
             $('.rsvp_delete', modal_id).removeClass('hidden');
 
             if(!loadedFromAjaxRequest) {
-                swal(
-                    {
+                swal({
                         title: "Done!",
                         text:"Your rsvp to this event was sent successfully.",
                         type: "success"
-                    }, function() {
+                    }).then(function () {
                         var url = new URI(window.location);
                         if (url.hasQuery("BackURL")) {
                             window.location = url.query(true)['BackURL'];
