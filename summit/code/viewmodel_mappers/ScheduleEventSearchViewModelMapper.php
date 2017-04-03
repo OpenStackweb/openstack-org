@@ -81,7 +81,7 @@ final class ScheduleEventSearchViewModelMapper implements IViewModelMapper
             }
 
             if ($e instanceof SummitEventWithFile) {
-                $entry['attachment_url'] = ($e->Attachment()) ? $e->Attachment()->getUrl() : '';
+                $entry['attachment_url'] = ($e->Attachment()->Exists()) ? $e->Attachment()->getUrl() : '';
             }
 
             $events[] = $entry;

@@ -178,7 +178,7 @@
                                 favorite : false,
                             <% end_if %>
                             show : true,
-                            attachment_url : "<% if $Attachment() %>{$Attachment().getUrl().JS}<% end_if %>",
+                            attachment_url : "<% if $Attachment().Exists() %>{$Attachment().getUrl().JS}<% end_if %>",
                             category_group_ids:[
                                 <% if Category && Category.CategoryGroups %>
                                     <% loop Category.CategoryGroups %>

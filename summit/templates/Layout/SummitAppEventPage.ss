@@ -83,7 +83,7 @@
                         </div>
                     </div>
                 <% end_if %>
-                <% if Event.ClassName == 'SummitEventWithFile' %>
+                <% if Event.ClassName == 'SummitEventWithFile' && $Event.Attachment().Exists() %>
                     <div class="row info_item">
                         <div class="col-md-2 col-xs-2 info_item_icon"><i class="fa fa-download icon-attachment"></i></div>
                         <div class="col-md-10 col-xs-10 info_item_text">
