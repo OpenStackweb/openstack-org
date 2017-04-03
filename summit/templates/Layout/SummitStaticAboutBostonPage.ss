@@ -71,7 +71,7 @@
           </div>
         </div>
         <p>Join attendees from over 60 countries to enhance your knowledge of OpenStack and get more involved with the community.</p>
-        <a class="who-section-cta" href="/summit/sydney-2017/summit-categories">Learn more about the content planned for the OpenStack Summit Sydney</a>
+        <!-- <a class="who-section-cta" href="/summit/sydney-2017/summit-categories">Learn more about the content planned for the OpenStack Summit Sydney</a> -->
             </div>
         <div class="col-lg-3 col-md-4 col-sm-4" style="margin-top:30px;">
       <ul class="help-me-menu">
