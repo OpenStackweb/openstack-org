@@ -62,7 +62,7 @@
             <div class="col-sm-3 small-single-summit">
                 <a href="/summit/sydney-2017/" class="single-summit future-summit">
                     <h2>Sydney</h2>
-                    <h4>Get Ready</h4>
+                    <div class="btn register-btn-lrg skinny">JOIN US</div>
                 </a>
                 <div class="single-summit-date future">
                     November 6-8, 2017
