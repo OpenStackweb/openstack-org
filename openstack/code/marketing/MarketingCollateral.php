@@ -78,6 +78,18 @@ class MarketingCollateral extends DataObject {
             }
         }
 
+        foreach ($this->CollateralLinks() as $link) {
+            if($link->Group) {
+                if (!isset($result_array[$link->Group])) {
+                    $result_array[$link->Group] = array();
+                }
+                $result_array[$link->Group][] = $link;
+
+            } else {
+                $result_array['single'][] = $link;
+            }
+        }
+
         $result = ArrayList::create();
         foreach ($result_array as $group => $items)
         {

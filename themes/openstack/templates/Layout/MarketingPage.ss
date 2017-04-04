@@ -116,14 +116,7 @@
                                 </div>
                             <% end_if %>
                             <% end_loop %>
-                            <% loop $CollateralLinks %>
-                            <div class="row item_row">
-                                <div class="col-md-8 left-info">$Title</div>
-                                <div class="col-md-4">
-                                    <a href="$Link()" target="_blank" class="download">DOWNLOAD</a>
-                                </div>
-                            </div>
-                            <% end_loop %>
+                            
                         </div>
                     </div>
                     <% end_loop %>

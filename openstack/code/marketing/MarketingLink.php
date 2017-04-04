@@ -16,6 +16,7 @@ class MarketingLink extends DataObject {
     private static $db = array(
         'Title'     => 'Varchar(255)',
         'Link'      => 'Text',
+        'Group'     => 'Varchar(255)',
         'SortOrder' => 'Int',
     );
 
