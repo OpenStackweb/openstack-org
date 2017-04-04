@@ -77,15 +77,8 @@ class GridFieldCopySectionsAction implements GridField_HTMLProvider, GridField_U
             if ( !$new_section = $report->Sections()->find('Name', $section->Name)) {
                 $new_section = $section->duplicate(false);
                 $new_section->ReportID = $report_id;
+                $new_section->Graphs()->removeAll();
                 $new_section->write();
-            }
-
-            foreach ($section->Graphs() as $graph) {
-                if ( !$new_graph = $new_section->Graphs()->find('Name', $graph->Name)) {
-                    $new_graph = $graph->duplicate(false);
-                    $new_graph->write();
-                    $new_section->Graphs()->add($new_graph);
-                }
             }
         }
 

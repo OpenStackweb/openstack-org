@@ -77,6 +77,7 @@ class GridFieldCopyFiltersAction implements GridField_HTMLProvider, GridField_UR
             if ( !$new_filter = $report->Filters()->find('Name', $filter->Name)) {
                 $new_filter = $filter->duplicate(false);
                 $new_filter->ReportID = $report_id;
+                $new_filter->QuestionID = 0;
                 $new_filter->write();
             }
         }

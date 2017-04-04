@@ -67,20 +67,18 @@ class SurveyReport extends DataObject {
         $sectionList = SurveyReportSection::get()->filter('ReportID',0);
         $config = GridFieldConfig_RelationEditor::create(15);
         $config->addComponent(new GridFieldCopySectionsAction($this->ID));
-        $completer = $config->getComponentByType('GridFieldAddExistingAutocompleter');
-        $completer->setResultsFormat('$Name');
-        $completer->setSearchFields(array('Name'));
-        $completer->setSearchList($sectionList);
+        $config->removeComponentsByType('GridFieldAddExistingAutocompleter');
+        $config->removeComponentsByType('GridFieldDeleteAction');
+        $config->addComponent(new GridFieldDeleteAction(false));
         $sections = new GridField('Sections', 'Sections', $this->Sections(), $config);
         $fields->replaceField('Sections', $sections);
 
         $filterList = SurveyReportFilter::get()->filter('ReportID',0);
         $config = GridFieldConfig_RelationEditor::create(15);
         $config->addComponent(new GridFieldCopyFiltersAction($this->ID));
-        $completer = $config->getComponentByType('GridFieldAddExistingAutocompleter');
-        $completer->setResultsFormat('$Name');
-        $completer->setSearchFields(array('Name'));
-        $completer->setSearchList($filterList);
+        $config->removeComponentsByType('GridFieldAddExistingAutocompleter');
+        $config->removeComponentsByType('GridFieldDeleteAction');
+        $config->addComponent(new GridFieldDeleteAction(false));
         $filters = new GridField('Filters', 'Filters', $this->Filters(), $config);
         $fields->replaceField('Filters', $filters);
 
@@ -95,8 +93,10 @@ class SurveyReport extends DataObject {
         foreach ($this->Filters()->sort('Order') as $filter) {
             $options = array();
 
-            foreach ($filter->Question()->getValues() as $option) {
-                $options[] = array('id' => $option->ID, 'value' => $option->Value);
+            if ($filter->Question()->Exists()) {
+                foreach ($filter->Question()->Values() as $option) {
+                    $options[] = array('id' => $option->ID, 'value' => $option->Value);
+                }
             }
 
             $filters[] = array(

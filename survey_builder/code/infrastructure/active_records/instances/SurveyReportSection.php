@@ -77,6 +77,7 @@ class SurveyReportSection extends DataObject {
                 }
             }
 
+
             if (count($answers)) {
                 foreach ($answers as $answer) {
                     if (!$answer) continue;
