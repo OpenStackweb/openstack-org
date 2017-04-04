@@ -134,6 +134,36 @@
     </div>
     <div class="row">
       <div class="col-sm-3 featured">
+        <div class="summit-user-section ">
+          <img src="/assets/boston-summit/speakers/Martin-Casado.jpg" alt="Martin Casado" class="summit-user-image">
+          <div class="name">Martin Casado</div>
+          <div class="title">General Partner, Andreessen Horowitz</div>
+        </div>
+      </div>
+      <div class="col-sm-3 featured">
+        <div class="summit-user-section">
+          <img src="/assets/boston-summit/speakers/Jimy-Whitehurst.jpg" alt="Jim Whitehurst" class="summit-user-image">
+          <div class="name">Jim Whitehurst</div>
+          <div class="title">CEO, Red Hat</div>
+        </div>
+      </div>
+      <div class="col-sm-3 featured">
+        <div class="summit-user-section">
+          <img src="/assets/boston-summit/speakers/Month-Taylor.jpg" alt="Monty Taylor" class="summit-user-image">
+          <div class="name">Monty Taylor</div>
+          <div class="title">Member of OpenStack Technical Committee</div>
+        </div>
+      </div>
+      <div class="col-sm-3 featured">
+        <div class="summit-user-section">
+          <img src="/assets/boston-summit/speakers/Elijah-Elliot2.jpg" alt="Elijah Elliot" class="summit-user-image">
+          <div class="name">Elijah Elliott</div>
+          <div class="title">Domain Architect, Cloud, Gap Inc</div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3 featured">
         <div class="summit-user-section">
           <img src="/assets/boston-summit/speakers/Merce-Crosas.jpg" alt="Mercè Crosas" class="summit-user-image">
           <div class="name">Mercè Crosas</div>
@@ -179,9 +209,9 @@
       </div>
       <div class="col-sm-3">
         <div class="summit-user-section">
-          <img src="/assets/Uploads/malini.jpg" alt="Malini Bhandaru" class="summit-user-image">
-          <div class="name">Malini Bhandaru</div>
-          <div class="title">Principal engineer, cloud architect, Intel</div>
+          <img src="///www.openstack.org/assets/boston-summit/speakers/Daniela-Rus.jpg" alt="Daniela Rus" class="summit-user-image">
+          <div class="name">Daniela Rus</div>
+          <div class="title">MIT Computer Science and Artificial Intelligence Laboratory</div>
         </div>
       </div>
       <div class="col-sm-3">
