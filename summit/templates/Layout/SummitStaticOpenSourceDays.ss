@@ -73,6 +73,18 @@
             <p class="learn-more-button"><a href="http://www.opencontrail.org/" class="btn btn-primary" role="button">Learn More</a></p>
         </div>
     </div>
+    <div class="row">
+        <div class="col-lg-5 col-md-5 col-sm-6">
+            <div class="company-logo"><img src="/assets/boston-summit/images/fdio-osd.png" alt="FD.io"></div>
+            <p class="company-desc">FD.io (Fast Data) is the first truly open data plane project focusing on data IO speed and efficiency for more flexible and scalable network and storage. Join us at the FD.io Mini summit to hear and learn from FD.io community experts who will be sharing information about the projects, use cases, capabilities, integration with other communities, tools and many more exciting topics.</p>
+            <p class="learn-more-button"><a href="https://fd.io/" class="btn btn-primary" role="button">Learn More</a></p>
+        </div>
+        <div class="col-lg-5 col-lg-push-2 col-md-5 col-md-push-2 col-sm-6">
+            <div class="company-logo"><img src="/assets/boston-summit/images/opendaylight-osd.png" alt="Open Daylight"></div>
+            <p class="company-desc">As the open source networking initiatives associated with networking proliferate, it becomes necessary to take stock of the various options in defining a so-called "Nirvana Stack" for open networking. The recent emergence of orchestration initiatives such as ONAP, coupled with the Gluon Network Extensibility project in OpenStack, broadening use cases for the ODL controller, and the FD.io forwarding plane provide a compelling new set of options for meeting carrier needs.</p>
+            <p class="learn-more-button"><a href="https://www.opendaylight.org/" class="btn btn-primary" role="button">Learn More</a></p>
+        </div>
+    </div>
   </div>
 </div>
 <div class="register-promo-wrapper" id="osd-register" >
