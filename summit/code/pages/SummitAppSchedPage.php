@@ -219,9 +219,9 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         Requirements::css("summit/css/summitapp-event.css");
         Requirements::css("summit/css/summitapp-event-rsvp.css");
         Requirements::javascript("summit/javascript/schedule/event-detail-page.js");
-
-        $event     = $this->getSummitEntity($request);
-        $summit_id = $event->SummitID;
+        $mobile_detect = new Mobile_Detect();
+        $event         = $this->getSummitEntity($request);
+        $summit_id     = $event->SummitID;
 
         if(is_null($event) ||
             !$event->isPublished() ||
@@ -238,7 +238,9 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
             return $this->redirect('profile/attendeeInfoRegistration');
         }
 
-        if(Member::currentUser()->getSummitAttendee($event->SummitID)->hasRSVPSubmission($event->getIdentifier()))
+        $has_rsvp_submission = Member::currentUser()->getSummitAttendee($event->SummitID)->hasRSVPSubmission($event->getIdentifier());
+
+        if(!$mobile_detect->isMobile() && $has_rsvp_submission)
         {
             return $this->redirect($event->getLink('show'));
         }
@@ -261,6 +263,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         }
 
         $back_url           = $request->requestVar('BackURL') ;
+
         if(!Director::is_site_url($back_url) || empty($back_url)) {
             $start_date = new \DateTime($event->getStartDate());
             $main_schedule_page = SummitAppSchedPage::get()->filter("SummitID", $summit_id)->first();
@@ -271,9 +274,10 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         return $this->renderWith(
             array('SummitAppEventPage_RSVP', 'SummitPage', 'Page'),
             array(
-                'BackURL'   => $back_url,
-                'Event'     => $event,
-                'Token'     => $token
+                'BackURL'        => $back_url,
+                'Event'          => $event,
+                'Token'          => $token,
+                'HasRSVPAlready' => $has_rsvp_submission
             ));
     }
 

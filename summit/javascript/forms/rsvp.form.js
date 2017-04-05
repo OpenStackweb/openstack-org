@@ -73,7 +73,7 @@ function addRSVP(form, event_id, summit_id, security_id) {
                     }).then(function () {
 
 
-                        var is_mobile              = bowser.mobile ||  bowser.tablet;
+                        var is_mobile              = bowser.mobile || bowser.tablet;
                         var is_ios                 = bowser.ios;
                         var is_android             = bowser.android;
 

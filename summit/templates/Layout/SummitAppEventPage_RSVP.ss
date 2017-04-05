@@ -20,7 +20,36 @@
         <hr/>
         <div class="row">
             <div class="col-md-12 col-rsvp">
-                <% if Event.RSVPTemplate.Exists() %>
+                <%if HasRSVPAlready %>
+                    <script>
+
+                        swal({
+                            title: "Done!",
+                            text:"You already signed rsvp for this event!",
+                            type: "success"
+                        }).then(function () {
+
+
+                            var is_mobile              = bowser.mobile || bowser.tablet;
+                            var is_ios                 = bowser.ios;
+                            var is_android             = bowser.android;
+
+                            if(is_android){
+                                var form     = $('.rsvp_form');
+                                var event_id = $('input[name="event_id"]', form).val();
+                                window.location = "org.openstack.android.summit://events/"+event_id;
+                            }
+                            else {
+                                var url = new URI(window.location);
+                                if (url.hasQuery("BackURL")) {
+                                    window.location = url.query(true)['BackURL'];
+                                }
+                            }
+                        });
+
+                    </script>
+
+                <% elseif Event.RSVPTemplate.Exists()%>
                     <div class="container-fluid rsvp-container" >
                         <div class="row">
                             <div class="col-md-8 col-md-offset-2" style="border: 1px solid darkblue;padding: 15px">
