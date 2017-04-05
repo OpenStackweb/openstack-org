@@ -89,7 +89,7 @@
         <li><a href="http://openstackfoundation.formstack.com/forms/boston_summit_discounted_registration"><i class="fa fa-bicycle"></i>Apply for a student discount</a></li>
         <li><a href="/summit/boston-2017/travel/#hotels"><i class="fa fa-hotel"></i>Book your hotel</a></li>
         <li><a href="/summit/boston-2017/code-of-conduct" target="_blank"><i class="fa fa-eye"></i>Code of Conduct</a></li>
-        <li><a href="/summit/boston-2017/travel/#travel-support"><i class="fa fa-users"></i>Apply for travel support</a></li>
+        <li><a href="/summit/boston-2017/mobile-apps"><i class="fa fa-users"></i>Download the Summit Apps</a></li>
       </ul>
 		</div>
 		</div>
