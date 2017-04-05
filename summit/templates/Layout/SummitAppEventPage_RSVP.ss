@@ -20,7 +20,7 @@
         <hr/>
         <div class="row">
             <div class="col-md-12 col-rsvp">
-                <%if HasRSVPAlready %>
+                <% if HasRSVPAlready %>
                     <script>
 
                         swal({
@@ -49,7 +49,7 @@
 
                     </script>
 
-                <% elseif Event.RSVPTemplate.Exists()%>
+                <% else_if Event.RSVPTemplate.Exists()%>
                     <div class="container-fluid rsvp-container" >
                         <div class="row">
                             <div class="col-md-8 col-md-offset-2" style="border: 1px solid darkblue;padding: 15px">
