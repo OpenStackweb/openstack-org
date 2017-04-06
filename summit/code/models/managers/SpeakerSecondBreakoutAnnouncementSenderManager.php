@@ -84,7 +84,15 @@ final class SpeakerSecondBreakoutAnnouncementSenderManager implements ISpeakerSe
         $promo_code_repository  = $this->promo_code_repository;
         $batch_repository       = $this->batch_repository;
         $batch_task_factory     = $this->batch_task_factory;
-        $not_allowed_categories = array('Working Groups', 'Birds of a Feather');
+
+        $not_allowed_categories = [
+            "sponsored sessions",
+            "intensive training",
+            "ceph day",
+            "open vswitch day",
+            "birds of a feather",
+            "working groups"
+        ];
 
         return $this->tx_manager->transaction(function() use
         (
@@ -144,7 +152,13 @@ final class SpeakerSecondBreakoutAnnouncementSenderManager implements ISpeakerSe
                     $presentations  = $speaker->AllPublishedPresentations($current_summit->getIdentifier());
 
                     if(intval($presentations->Count()) === 1){
-                        if(in_array($presentations->first()->Category()->Title, $not_allowed_categories) ) continue;
+                        $track = strtolower($presentations->first()->Category()->Title);
+
+                        if(in_array($track, $not_allowed_categories))
+                        {
+                            echo sprintf("skipping speaker %s (%s) - track %s", $speaker->getName(), $speaker->getIdentifier(), $track).PHP_EOL;
+                            continue;
+                        }
                     }
 
                     $sender_service = $sender_factory->build($current_summit, $speaker);
@@ -159,7 +173,9 @@ final class SpeakerSecondBreakoutAnnouncementSenderManager implements ISpeakerSe
 
                     if(!$speaker->hasConfirmedAssistanceFor($current_summit->getIdentifier()))
                     {
+                        echo sprintf("speaker %s (%s) has not confirmed assistance for summit.", $speaker->getName(), $speaker->getIdentifier()).PHP_EOL;
                         if (!$speaker->hasSummitPromoCode($current_summit->getIdentifier())) {
+                            echo sprintf("speaker %s (%s) has not promo code for summit.", $speaker->getName(), $speaker->getIdentifier()).PHP_EOL;
                             $code = $promo_code_repository->getNextAvailableByType
                             (
                                 $current_summit,
@@ -168,11 +184,12 @@ final class SpeakerSecondBreakoutAnnouncementSenderManager implements ISpeakerSe
                             );
                             if (is_null($code)) throw new Exception('not available promo code!!!');
                             $speaker->registerSummitPromoCode($code);
+                            echo sprintf("speaker %s (%s) has been assigned to promo code %s.", $speaker->getName(), $speaker->getIdentifier(), $code->getCode()).PHP_EOL;
                             $code->write();
                         }
                         $params['PromoCode'] = $speaker->getSummitPromoCode($current_summit->getIdentifier());
                     }
-                    echo sprintf("sending email to %s", $speaker->getEmail()).PHP_EOL;
+                    echo sprintf("sending to speaker %s (%s) - %s", $speaker->getName(), $speaker->getIdentifier(), $speaker->getEmail()).PHP_EOL;
                     $sender_service->send($params);
                     ++$speakers_notified;
                 }
