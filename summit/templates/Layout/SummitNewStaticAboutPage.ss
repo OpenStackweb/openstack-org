@@ -367,23 +367,6 @@
 		</div>
 	</div>
 </div>
-<div class="white testimonial-row">
-	<div class="container">
-		<div class="row">
-            <div class="col-lg-8 col-lg-push-2">
-                <img class="testimonial-author-img" src="/themes/openstack/static/images/wjossey.jpg">
-                <blockquote>
-                    OpenStack is clearly the winner, and the reason for that is what you see in this room today. It’s all of you, it’s all of the community that have come together around this platform; it's people like CERN and Expedia pushing upstream to this platform.
-                </blockquote>
-            <div class="testimonial-attribute">
-                <img src="/themes/openstack/static/images/tapjoy-logo.jpg">
-            <div class="testimonial-name">Wes Jossey</div>
-            <div class="testimonial-title">Head of Operations for Tapjoy</div>
-            </div>
-            </div>
-		</div>
-	</div>
-</div>
 <div class="growth austin">
 	<div class="container">
 		<div class="row">
