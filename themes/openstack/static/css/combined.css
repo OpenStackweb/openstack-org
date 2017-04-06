@@ -4465,3 +4465,40 @@ h5.section-title.guide {
 }
 
 
+/*Attendance*/
+
+.about-summit h1{
+  text-align: left;
+}
+
+.who-section-wrapper{
+  margin-bottom: 2em;
+}
+.who-section-wrapper .row{
+  margin-bottom: 1em;
+}
+
+.who-section-wrapper h3{
+    font-weight: 700;
+    font-size: 1.25em;
+    margin: 1em 0;
+}
+
+.who-section-wrapper p, .who-section-wrapper h3{
+  color: #2B4D67
+}
+.who-section-wrapper p{
+  font-size: 0.9em;
+}
+
+.who-section-wrapper .image{
+    text-align: center;
+}
+
+.who-section-wrapper .image img{
+    width: 100%;
+    max-width: 7em;
+    margin: 1em 0 2em;
+    max-height: 4em;
+}
+

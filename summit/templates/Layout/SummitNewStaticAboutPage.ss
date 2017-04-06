@@ -49,35 +49,39 @@
         </h1>
         <div class="who-section-wrapper">
           <div class="row">
-            <div class="col-sm-6 col-md-6 col-lg-4">
-              <div class="who-section it">
-                <div class="content">
-                  <h5>Business & Strategy</h5>
-                  <p>
-                    CIO and IT decision makers attend to hear case studies about how cloud is saving money and creating business impact, and to learn how to evaluate OpenStack providers, build a successful team and develop a successful cloud strategy.
-                  </p>
-                </div>
-              </div>
+            <div class="col-xs-12 col-sm-3 col-lg-2 image">
+              <img src="summit/images/boston/who1.svg">
             </div>
-            <div class="col-sm-6 col-md-6 col-lg-4">
-              <div class="who-section cloud">
-                <div class="content">
-                  <h5>Architecture & Operations</h5>
-                  <p>
-                    Architects and operators attend to improve their current deployment, discover new tools or learn how to get an OpenStack cloud up and running from expert community members OpenStack clouds.
-                  </p>
-                </div>
-              </div>
+            <div class="col-xs-12 col-sm-9 col-lg-10 text">
+              <h3>Architecture & Ops</h3>
+              <p>Architects and operators attend to improve their current deployment, discover new tools or learn how to get an OpenStack cloud up and running from expert community members OpenStack clouds. <a href="https://www.openstack.org/summit/boston-2017/summit-categories">Learn more</a></p>
             </div>
-            <div class="col-sm-6 col-md-6 col-lg-4">
-              <div class="who-section app">
-                <div class="content">
-                  <h5>Developers</h5>
-                  <p>
-                    App developers can get started developing cloud applications, including integrating technologies like containers, or discover how OpenStack can be used to deliver valuable services like big data analytics. If you’re an upstream developer or would like to get started contributing, this is the place to be.
-                  </p>
-                </div>
-              </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-sm-3 col-lg-2 image">
+              <img src="summit/images/boston/who2.svg">
+            </div>
+            <div class="col-xs-12 col-sm-9 col-lg-10 text">
+              <h3>Business & Strategy</h3>
+              <p>CIO and IT decision makers attend to hear case studies about how cloud is saving money and creating business impact, and to learn how to evaluate OpenStack providers, build a successful team and develop a successful cloud strategy.</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-sm-3 col-lg-2 image">
+              <img src="summit/images/boston/who3.svg">
+            </div>
+            <div class="col-xs-12 col-sm-9 col-lg-10 text">
+              <h3>App Developers</h3>
+              <p>App developers can get started developing cloud applications, including integrating technologies like containers, or discover how OpenStack can be used to deliver valuable services like big data analytics.</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-sm-3 col-lg-2 image">
+              <img src="summit/images/boston/who4.svg">
+            </div>
+            <div class="col-xs-12 col-sm-9 col-lg-10 text">
+              <h3>Upstream Developer</h3>
+              <p>If you’re an upstream developer looking to reconnect to the community or would like to get started contributing, this is the place to be.</p>
             </div>
           </div>
         </div>
