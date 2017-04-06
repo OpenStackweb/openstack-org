@@ -105,28 +105,28 @@
     <div class="row">
       <div class="col-sm-3 featured">
         <div class="summit-user-section ">
-          <img src="/assets/boston-summit/speakers/Brian-Stevens.jpg" alt="Brian Stevens" class="summit-user-image">
+          <img src="//www.openstack.org/assets/boston-summit/speakers/Brian-Stevens.jpg" alt="Brian Stevens" class="summit-user-image">
           <div class="name">Brian Stevens</div>
           <div class="title">Vice President Cloud Platforms, Google</div>
         </div>
       </div>
-      <div class="col-sm-3 featured">
+      <div class="col-sm-3">
         <div class="summit-user-section">
-          <img src="/assets/Uploads/Profile-GauravGupta.jpg" alt="Gaurav Gupta" class="summit-user-image">
-          <div class="name">Gaurav Gupta</div>
-          <div class="title">VP of Engineering, Snapdeal</div>
+          <img src="//www.openstack.org/assets/boston-summit/speakers/Daniela-Rus.jpg" alt="Daniela Rus" class="summit-user-image">
+          <div class="name">Daniela Rus</div>
+          <div class="title">MIT Computer Science and Artificial Intelligence Laboratory</div>
         </div>
       </div>
       <div class="col-sm-3 featured">
         <div class="summit-user-section">
-          <img src="/assets/boston-summit/speakers/Suneet.jpg" alt="Suneet Nandwani" class="summit-user-image">
+          <img src="//www.openstack.org/assets/boston-summit/speakers/Suneet.jpg" alt="Suneet Nandwani" class="summit-user-image">
           <div class="name">Suneet Nandwani</div>
           <div class="title">Sr. Director, Cloud Infrastructure and Platforms, eBay Inc.</div>
         </div>
       </div>
       <div class="col-sm-3 featured">
         <div class="summit-user-section">
-          <img src="/assets/boston-summit/speakers/JuliannaRodriguez.jpg" alt="Major Julianna Rodriguez" class="summit-user-image">
+          <img src="//www.openstack.org/assets/boston-summit/speakers/JuliannaRodriguez.jpg" alt="Major Julianna Rodriguez" class="summit-user-image">
           <div class="name">Major Julianna Rodriguez</div>
           <div class="title">Director, U.S. Army Cyber School</div>
         </div>
@@ -135,28 +135,28 @@
     <div class="row">
       <div class="col-sm-3 featured">
         <div class="summit-user-section ">
-          <img src="/assets/boston-summit/speakers/Martin-Casado.jpg" alt="Martin Casado" class="summit-user-image">
+          <img src="//www.openstack.org/assets/boston-summit/speakers/Martin-Casado.jpg" alt="Martin Casado" class="summit-user-image">
           <div class="name">Martin Casado</div>
           <div class="title">General Partner, Andreessen Horowitz</div>
         </div>
       </div>
       <div class="col-sm-3 featured">
         <div class="summit-user-section">
-          <img src="/assets/boston-summit/speakers/Jimy-Whitehurst.jpg" alt="Jim Whitehurst" class="summit-user-image">
+          <img src="//www.openstack.org/assets/boston-summit/speakers/Jimy-Whitehurst.jpg" alt="Jim Whitehurst" class="summit-user-image">
           <div class="name">Jim Whitehurst</div>
           <div class="title">CEO, Red Hat</div>
         </div>
       </div>
       <div class="col-sm-3 featured">
         <div class="summit-user-section">
-          <img src="/assets/boston-summit/speakers/Month-Taylor.jpg" alt="Monty Taylor" class="summit-user-image">
+          <img src="//www.openstack.org/assets/boston-summit/speakers/Month-Taylor.jpg" alt="Monty Taylor" class="summit-user-image">
           <div class="name">Monty Taylor</div>
           <div class="title">Member of OpenStack Technical Committee</div>
         </div>
       </div>
       <div class="col-sm-3 featured">
         <div class="summit-user-section">
-          <img src="/assets/boston-summit/speakers/Elijah-Elliot2.jpg" alt="Elijah Elliot" class="summit-user-image">
+          <img src="//www.openstack.org/assets/boston-summit/speakers/Elijah-Elliot2.jpg" alt="Elijah Elliot" class="summit-user-image">
           <div class="name">Elijah Elliott</div>
           <div class="title">Domain Architect, Cloud, Gap Inc</div>
         </div>
@@ -165,28 +165,28 @@
     <div class="row">
       <div class="col-sm-3 featured">
         <div class="summit-user-section">
-          <img src="/assets/boston-summit/speakers/Merce-Crosas.jpg" alt="Mercè Crosas" class="summit-user-image">
+          <img src="//www.openstack.org/assets/boston-summit/speakers/Merce-Crosas.jpg" alt="Mercè Crosas" class="summit-user-image">
           <div class="name">Mercè Crosas</div>
           <div class="title">Chief Data Science and Technology Officer at IQSS, Harvard University</div>
         </div>
       </div>
       <div class="col-sm-3">
         <div class="summit-user-section">
-          <img src="/assets/boston-summit/speakers/JacobRosenberg.jpg" alt="Jacob Rosenberg" class="summit-user-image">
+          <img src="//www.openstack.org/assets/boston-summit/speakers/JacobRosenberg.jpg" alt="Jacob Rosenberg" class="summit-user-image">
           <div class="name">Jacob Rosenberg</div>
           <div class="title">Head of Infrastructure Engineering, Bloomberg</div>
         </div>
       </div>
       <div class="col-sm-3">
         <div class="summit-user-section">
-          <img src="/assets/barcelona-summit/featured-speakers/annilai.jpg" alt="Anni Lai" class="summit-user-image">
+          <img src="//www.openstack.org/assets/barcelona-summit/featured-speakers/annilai.jpg" alt="Anni Lai" class="summit-user-image">
           <div class="name">Anni Lai</div>
           <div class="title">Head of Global Business Development, Huawei</div>
         </div>
       </div>
       <div class="col-sm-3">
         <div class="summit-user-section">
-          <img src="/assets/boston-summit/speakers/JunweiLiu.jpg" alt="Junwei Liu" class="summit-user-image">
+          <img src="//www.openstack.org/assets/boston-summit/speakers/JunweiLiu.jpg" alt="Junwei Liu" class="summit-user-image">
           <div class="name">Junwei Liu</div>
           <div class="title">Assistant General Manager of Cloud Computing Products Division, China Mobile</div>
         </div>
@@ -195,7 +195,7 @@
     <div class="row">
       <div class="col-sm-3">
         <div class="summit-user-section">
-          <img src="/assets/boston-summit/speakers/DavidAronchick.jpg" alt="David Aronchick" class="summit-user-image">
+          <img src="//www.openstack.org/assets/boston-summit/speakers/DavidAronchick.jpg" alt="David Aronchick" class="summit-user-image">
           <div class="name">David Aronchick</div>
           <div class="title">Product Manager, Google</div>
         </div>
@@ -209,9 +209,9 @@
       </div>
       <div class="col-sm-3">
         <div class="summit-user-section">
-          <img src="///www.openstack.org/assets/boston-summit/speakers/Daniela-Rus.jpg" alt="Daniela Rus" class="summit-user-image">
-          <div class="name">Daniela Rus</div>
-          <div class="title">MIT Computer Science and Artificial Intelligence Laboratory</div>
+          <img src="//www.openstack.org/assets/Uploads/_resampled/CroppedImage136136-malini.jpg" alt="Malini Bhandaru" class="summit-user-image">
+          <div class="name">Malini Bhandaru</div>
+          <div class="title">Cloud Architect & Principal Engineer, Intel</div>
         </div>
       </div>
       <div class="col-sm-3">
