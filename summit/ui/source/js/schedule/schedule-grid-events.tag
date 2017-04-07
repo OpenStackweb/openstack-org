@@ -137,7 +137,6 @@
                 var type     = $(this).data('type');
                 var event    = self.dic_events[event_id];
 
-
                 // login is mandatory for these actions :
                 if ($.inArray(type,['going','watch','rsvp']) !== -1 && !self.summit.current_user) {
                     swal({
@@ -168,7 +167,6 @@
 
                     return false;
                 }
-
 
                 switch(type){
                     case 'going':
