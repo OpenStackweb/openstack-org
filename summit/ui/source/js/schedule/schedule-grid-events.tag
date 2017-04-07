@@ -130,11 +130,46 @@
             $(document).off("click", ".event-action-link").on("click", ".event-action-link", function(e) {
                 e.preventDefault();
                 e.stopPropagation();
+
                 var event_id = $(this).data('event-id');
                 if($(this).hasClass('disabled') || $(this).parent().hasClass('disabled')) return false;
                 $('#event_actions_'+event_id).removeClass('open');
                 var type     = $(this).data('type');
                 var event    = self.dic_events[event_id];
+
+
+                // login is mandatory for these actions :
+                if ($.inArray(type,['going','watch','rsvp']) !== -1 && !self.summit.current_user) {
+                    swal({
+                        title: 'Login Required',
+                        text: "You need to log in to proceed with this action.",
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Log in'
+                    }).then(function () {
+                        window.location = "/Security/login?BackURL="+self.summit.schedule_link
+                    })
+
+                    return false;
+                } else if ($.inArray(type,['going','rsvp']) !== -1 && !self.summit.current_user.is_attendee) {
+                    swal({
+                        title: 'EventBrite Ticket Required',
+                        text: "Only attendees can use this function. Enter your Eventbrite order number in My Summit if you are an attendee.",
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Add ticket'
+                    }).then(function () {
+                        window.location = "/profile/attendeeInfoRegistration?BackURL="+self.summit.schedule_link
+                    })
+
+                    return false;
+                }
+
+
                 switch(type){
                     case 'going':
                          self.schedule_api.addEvent2MySchedule(self.summit.id, event.id);
@@ -531,42 +566,39 @@
             $('li.watch-action', menu).hide();
             $('li.unwatch-action', menu).hide();
 
-            if(self.summit.current_user){
-                if(!self.current_filter.favorites && self.summit.current_user.is_attendee){
-                    if(!event.has_rsvp){
-                        if( event.going ){
-                            $('li.not-going-action', menu).show();
-                        }
-                        else{
-                            $('li.going-action', menu).show();
-                        }
+            if(!self.current_filter.favorites){
+                if(!event.has_rsvp){
+                    if( event.going ){
+                        $('li.not-going-action', menu).show();
                     }
                     else{
-                        // RSVP
-                        if( ! event.going ){
-                            $('li.rsvp-action', menu).show();
-                            if(event.rsvp_seat_type == 'FULL')
-                                $('li.rsvp-action', menu).addClass('disabled');
-                            else
-                                $('li.rsvp-action', menu).removeClass('disabled');
-                        }
-                        else{
-                             if(!event.rsvp_external)
-                                $('li.unrsvp-action', menu).show();
-                             else
-                                $('li.not-going-action', menu).show();
-                        }
+                        $('li.going-action', menu).show();
                     }
                 }
-
-                if(event.favorite){
-                    $('li.unwatch-action', menu).show();
-                }
                 else{
-                    $('li.watch-action', menu).show();
+                    // RSVP
+                    if( ! event.going ){
+                        $('li.rsvp-action', menu).show();
+                        if(event.rsvp_seat_type == 'FULL')
+                            $('li.rsvp-action', menu).addClass('disabled');
+                        else
+                            $('li.rsvp-action', menu).removeClass('disabled');
+                    }
+                    else{
+                         if(!event.rsvp_external)
+                            $('li.unrsvp-action', menu).show();
+                         else
+                            $('li.not-going-action', menu).show();
+                    }
                 }
             }
 
+            if(event.favorite){
+                $('li.unwatch-action', menu).show();
+            }
+            else{
+                $('li.watch-action', menu).show();
+            }
         }
 
         updateState(event){
