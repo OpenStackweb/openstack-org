@@ -90,7 +90,7 @@
                         break;
                 }
 
-                $("#unpublished_sort").val('');
+                $("#unpublished_sort").val($("#unpublished_sort option:first").val());
                 var order = $('#unpublished_sort').val();
 
                 self.doFilter(source,track_id,status,search_term,order);
