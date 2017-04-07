@@ -295,7 +295,7 @@ class SummitEvent extends DataObject implements ISummitEvent
      */
     public function getFeedback()
     {
-        return $this->Feedback()->filter('ClassName','SummitEventFeedback');
+        return $this->Feedback()->filter('ClassName','SummitEventFeedback')->sort("Created", "DESC");
     }
 
     /**
@@ -827,4 +827,11 @@ SQL;
        return $this->getField('Abstract');
     }
 
+    public function AllowFeedBack(){
+        return $this->AllowFeedBack;
+    }
+
+    public function hasEnded(){
+        return $this->getSummit()->getLocalTime() > $this->getEndDate();
+    }
 }

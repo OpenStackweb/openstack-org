@@ -365,3 +365,16 @@ a.profile-pic-wrapper {
     background-color: red !important;
     color: #E5E5E5 !important;
 }
+
+.feedback_box textarea {
+    width: 100%;
+    height: 100px;
+}
+
+.feedback_box button
+{
+    background-color: #224066 !important;
+    border-color: #224066 !important;
+    border-radius: 2px;
+    margin-top: 10px;
+}

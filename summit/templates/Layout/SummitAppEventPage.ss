@@ -174,32 +174,28 @@
     </div>
 <% end_if %>
 
-<%--
-Hidding comments, leaving this feature for phase 2
+<script type="application/javascript">
+    var event = {
+        eventID : "{$Event.ID}",
+        summitID: "{$Event.SummitID}",
+        memberID: "{$CurrentMember.ID}",
+        avgRate : "{$Event.getAvgRate()}"
+    };
+    var showfeedbackform = <% if CurrentMember && Event.AllowFeedBack && Event.hasEnded && not Event.getCurrentMemberFeedback() %>true<% else %>false<% end_if %>
+    var comments = [];
 
-<div class="container">
-    <div class="col1 comment_section">
-        <div class="comment_title"> Comment </div>
+    <% loop $Event.getFeedback() %>
+    comments.push(
+            {
+                rate:  "{$getRate.JS}",
+                date : "{$getDateNice.JS}",
+                note : "{$getNote.JS}",
+            });
+    <% end_loop %>
+</script>
 
-        <script type="application/javascript">
-                var comments = [];
+<feedback-form-comments comments="{ comments }" showfeedbackform="{ showfeedbackform }"  event="{ event }" limit="5"></feedback-form-comments>
 
-                <% loop $Event.getFeedback() %>
-                    comments.push(
-                    {
-                        profile_pic : "{$Owner.ProfilePhotoUrl(50).JS}",
-                        full_name : "{$Owner.getFullName.JS}",
-                        date : "{$getDateNice.JS}",
-                        note : "{$getNote.JS}",
-                    });
-                <% end_loop %>
-        </script>
-
-        <event-comments comments="{ comments }" limit="5"></event-comments>
-    </div>
-</div>
 $ModuleJS('event-detail')
---%>
 <div id="fb-root"></div>
 
-$ModuleJS('event-detail')

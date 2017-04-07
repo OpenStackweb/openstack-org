@@ -212,9 +212,7 @@ final class ScheduleManager implements IScheduleManager
 
             $feedback = $this->eventfeedback_repository->getFeedback($data['event_id'], $member_id);
             if ($feedback) {
-                $feedback->Rate = $data['rating'];
-                $feedback->Note = $data['comment'];
-                $feedback->write();
+                throw new EntityValidationException("Feedback already exists for the given member and event.");
             } else {
                 $feedback = $this->eventfeedback_factory->buildEventFeedback($data);
                 $this->eventfeedback_repository->add($feedback);
