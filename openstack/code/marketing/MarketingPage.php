@@ -32,6 +32,7 @@ class MarketingPage extends Page{
         'Stickers'       => 'MarketingDoc.Stickers',
         'TShirts'        => 'MarketingDoc.TShirts',
         'Banners'        => 'MarketingDoc.Banners',
+        'Templates'      => 'MarketingDoc.Templates',
         'Videos'         => 'MarketingVideo.Videos',
         'PromoteEvents'  => 'MarketingEvent.PromoteEvents',
 	);
@@ -129,6 +130,13 @@ class MarketingPage extends Page{
         $fields->addFieldToTab(
             'Root.Graphics',
             new GridField('Videos', 'Videos', $this->Videos(), $config)
+        );
+
+        $config = new GridFieldConfig_RecordEditor(3);
+        $config->addComponent(new GridFieldSortableRows('SortOrder'));
+        $fields->addFieldToTab(
+            'Root.Graphics',
+            new GridField('Templates', 'Templates', $this->Templates(), $config)
         );
 
         // Promote
@@ -235,6 +243,30 @@ class MarketingPage_Controller extends Page_Controller{
 
             } else {
                 $result_array['single'][] = $banner;
+            }
+        }
+
+        $result = ArrayList::create();
+        foreach ($result_array as $group => $items)
+        {
+            $group_list = new ArrayData(array('Group' => $group, 'GroupID' => str_replace(' ','_',$group), 'Items' => new ArrayList($items)));
+            $result->push($group_list);
+        }
+
+        return $result;
+    }
+
+    function getTemplatesGrouped() {
+        $result_array = array();
+        foreach ($this->Templates() as $template) {
+            if($template->GroupName) {
+                if (!isset($result_array[$template->GroupName])) {
+                    $result_array[$template->GroupName] = array();
+                }
+                $result_array[$template->GroupName][] = $template;
+
+            } else {
+                $result_array['single'][] = $template;
             }
         }
 

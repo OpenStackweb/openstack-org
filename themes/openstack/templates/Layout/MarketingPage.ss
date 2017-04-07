@@ -184,49 +184,74 @@
         <div id="graphics" class="tab-pane fade in tab-page" role="tabpanel">
             <div class="container">
                 <div class="tab-header">$GraphicsIntroText</div>
-                <h3 class="blue-title">Sticker Files</h3>
-                <ul class="content-list">
-                    <% loop $getStickersGrouped() %>
-                        <% include MarketingPage_GroupedItems %>
-                    <% end_loop %>
-                </ul>
-                <span class="hr"></span>
 
-                <h3 class="blue-title">T-Shirt Files</h3>
-                <ul class="content-list">
-                    <% loop $getTShirtsGrouped() %>
-                        <% include MarketingPage_GroupedItems %>
-                    <% end_loop %>
-                </ul>
-                <span class="hr"></span>
+                <% if $getStickersGrouped() %>
+                    <h3 class="blue-title">Sticker Files</h3>
+                    <ul class="content-list">
+                        <% loop $getStickersGrouped() %>
+                            <% include MarketingPage_GroupedItems %>
+                        <% end_loop %>
+                    </ul>
+                <% end_if %>
 
-                <h3 class="blue-title">Web Graphics</h3>
-                <ul class="content-list">
-                    <% loop $BannersGrouped() %>
-                        <% include MarketingPage_GroupedItems %>
-                    <% end_loop %>
-                </ul>
-                <span class="hr"></span>
+                <% if $getTShirtsGrouped() %>
+                    <span class="hr"></span>
 
-                <h3 class="blue-title">Videos</h3>
-                <ul class="content-list">
-                    <% loop $Videos() %>
-                    <li>
-                        <img src="$getThumbnailUrl()" width="245" height="135"/>
-                        <p>$Caption</p>
-                        <a class="download" href="#graphics_modal_{$YoutubeID}" data-toggle="modal" >Watch</a>
-                        <div id="graphics_modal_{$YoutubeID}" data-video_id="{$YoutubeID}" data-section="graphics" class="modal fade video_modal">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-body">
-                                        <iframe id="graphics_iframe_{$YoutubeID}" width="567" height="315" src="//www.youtube.com/embed/{$YoutubeID}?version=3&enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+                    <h3 class="blue-title">T-Shirt Files</h3>
+                    <ul class="content-list">
+                        <% loop $getTShirtsGrouped() %>
+                            <% include MarketingPage_GroupedItems %>
+                        <% end_loop %>
+                    </ul>
+                <% end_if %>
+
+
+                <% if $BannersGrouped() %>
+                    <span class="hr"></span>
+
+                    <h3 class="blue-title">Web Graphics</h3>
+                    <ul class="content-list">
+                        <% loop $BannersGrouped() %>
+                            <% include MarketingPage_GroupedItems %>
+                        <% end_loop %>
+                    </ul>
+                <% end_if %>
+
+                <% if $Videos() %>
+                    <span class="hr"></span>
+
+                    <h3 class="blue-title">Videos</h3>
+                    <ul class="content-list">
+                        <% loop $Videos() %>
+                        <li>
+                            <img src="$getThumbnailUrl()" width="245" height="135"/>
+                            <p>$Caption</p>
+                            <a class="download" href="#graphics_modal_{$YoutubeID}" data-toggle="modal" >Watch</a>
+                            <div id="graphics_modal_{$YoutubeID}" data-video_id="{$YoutubeID}" data-section="graphics" class="modal fade video_modal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <iframe id="graphics_iframe_{$YoutubeID}" width="567" height="315" src="//www.youtube.com/embed/{$YoutubeID}?version=3&enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </li>
-                    <% end_loop %>
-                </ul>
+                        </li>
+                        <% end_loop %>
+                    </ul>
+                <% end_if %>
+
+                <% if $TemplatesGrouped() %>
+                    <span class="hr"></span>
+
+                    <h3 class="blue-title">Templates</h3>
+                    <ul class="content-list">
+                        <% loop $TemplatesGrouped() %>
+                            <% include MarketingPage_GroupedItems %>
+                        <% end_loop %>
+                    </ul>
+
+                <% end_if %>
             </div>
         </div>
         <div id="promote_product" class="tab-pane fade in tab-page" role="tabpanel">

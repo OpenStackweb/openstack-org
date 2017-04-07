@@ -23,6 +23,7 @@ class MarketingDoc extends DataObject {
         'Stickers'         => 'MarketingPage',
         'TShirts'          => 'MarketingPage',
         'Banners'          => 'MarketingPage',
+        'Templates'        => 'MarketingPage',
         'Thumbnail'        => 'BetterImage',
         'Doc'              => 'File',
         'ParentPage'       => 'MarketingPage',
