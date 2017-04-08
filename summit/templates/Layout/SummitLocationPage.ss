@@ -99,7 +99,7 @@
                     </p>
                     <div class="alert alert-danger" role="alert">
                         <p class="center">
-                            Limited time offer: <a href="https://www.eventbrite.com/e/openstack-summit-may-2017-boston-tickets-28375675409" target="_blank">Book a 4-night stay at a hotel</a> walkable to the Summit venue by Friday, April 14 at a discounted rate of $999 - only $250 a night. 
+                            Limited time offer: <a href="https://www.eventbrite.com/e/openstack-summit-may-2017-boston-tickets-28375675409" target="_blank">Book a Full Access Ticket & a  4-night stay at a hotel walkable to the Summit venue by Friday, April 14 at a discounted rate of $1599 - only $175 a night</a>. 
                         </p>
                     </div>
                 <% end_if %>
