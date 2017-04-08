@@ -97,6 +97,11 @@
                     <p style="margin-bottom:30px;">
                         <i class="fa fa-hotel fa-4x"></i>
                     </p>
+                    <div class="alert alert-danger" role="alert">
+                        <p class="center">
+                            Limited time offer: <a href="https://www.eventbrite.com/e/openstack-summit-may-2017-boston-tickets-28375675409" target="_blank">Book a 4-night stay at a hotel</a> walkable to the Summit venue by Friday, April 14 at a discounted rate of $999 - only $250 a night. 
+                        </p>
+                    </div>
                 <% end_if %>
                 $LocationsTextHeader
             </div>
