@@ -222,5 +222,5 @@
     });
 </script>
     <% include Page_LinkedinInsightTracker %>
+    $GATrackingCode
 </html>
-$GATrackingCode
