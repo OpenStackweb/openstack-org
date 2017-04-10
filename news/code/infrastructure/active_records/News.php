@@ -38,6 +38,7 @@ final class News extends DataObject implements INews
         'Slider' => 'Boolean',
         'Approved' => 'Boolean',
         'PreApproved' => 'Boolean',
+        'ShowDeclaimer' => 'Boolean',
         'IsLandscape' => 'Boolean',
         'Archived' => 'Boolean',
         'Restored' => 'Boolean',
@@ -48,6 +49,7 @@ final class News extends DataObject implements INews
     (
         'Headline' => '',
         'Summary'  => '',
+        'ShowDeclaimer'  => 1,
     );
 
     static $has_one = array(

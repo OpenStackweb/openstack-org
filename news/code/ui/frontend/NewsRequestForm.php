@@ -38,6 +38,8 @@ final class NewsRequestForm extends HoneyPotForm {
             $DateExpireField = new TextField('date_expire','Expire Date');
             $DateExpireField->addExtraClass('datefield');
             $PreApprovedField = new CheckboxField('pre-approved','Approve for Auto-Publish');
+            $ShowDeclaimerField = new CheckboxField('show-declaimer','Show Declaimer');
+            $ShowDeclaimerField->setValue(1);
         }
 
         $UpdatedField = new DatetimeField_Readonly('date_updated','Last Updated');
@@ -102,6 +104,8 @@ final class NewsRequestForm extends HoneyPotForm {
                 $DateExpireField->setValue($article->getDateExpireCentral('m/d/Y g:i a'));
             if ($article->PreApproved)
                 $PreApprovedField->setValue($article->PreApproved);
+
+            $ShowDeclaimerField->setValue($article->ShowDeclaimer);
             $IsLandscapeField->setValue($article->IsLandscape);
             //submitter read only
             $SubmitterFirstNameField = new ReadonlyField('submitter_first_name','First Name');
@@ -179,6 +183,7 @@ final class NewsRequestForm extends HoneyPotForm {
         if ($is_manager) {
             $fields->push(new LiteralField('breakline','<hr>'));
             $fields->push($PreApprovedField);
+            $fields->push($ShowDeclaimerField);
         }
 
 		// Create action

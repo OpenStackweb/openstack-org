@@ -95,6 +95,7 @@ final class NewsRequestManager {
             );
 
             $news->PreApproved = isset($data['pre-approved']) ? $data['pre-approved'] : 0;
+            $news->ShowDeclaimer = isset($data['show-declaimer']) ? $data['show-declaimer'] : 0;
 
             $repository->add($news);
 
@@ -155,6 +156,7 @@ final class NewsRequestManager {
             $news->registerTags($data['tags']);
 
             $news->PreApproved = isset($data['pre-approved']) ? $data['pre-approved'] : 0;
+            $news->ShowDeclaimer = isset($data['show-declaimer']) ? $data['show-declaimer'] : 0;
 
 			return $news;
 		});
