@@ -14,7 +14,7 @@ require('./t.tag');
         var self = this;
 
         coreServiceDetailsURL() {
-            var url = self.parent.base_url+'releases/'+self.parent.parent.getCurrentReleaseId()+'/components/'+self.slug;
+            var url = self.parent.base_url+'releases/'+self.parent.getCurrentReleaseId()+'/components/'+self.slug;
             return url;
         }
 
