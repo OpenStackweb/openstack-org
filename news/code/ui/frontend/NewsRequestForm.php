@@ -38,7 +38,7 @@ final class NewsRequestForm extends HoneyPotForm {
             $DateExpireField = new TextField('date_expire','Expire Date');
             $DateExpireField->addExtraClass('datefield');
             $PreApprovedField = new CheckboxField('pre-approved','Approve for Auto-Publish');
-            $ShowDeclaimerField = new CheckboxField('show-declaimer','Show Declaimer');
+            $ShowDeclaimerField = new CheckboxField('show-declaimer','Show Disclaimer');
             $ShowDeclaimerField->setValue(1);
         }
 
