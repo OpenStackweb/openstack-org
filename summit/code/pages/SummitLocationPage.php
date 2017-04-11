@@ -37,7 +37,7 @@ class SummitLocationPage extends SummitPage
 
     public function getCMSFields()
     {
-        $fields = parent::getCMSFields();
+        $fields = parent::getCMSFields();;
 
         $fields->addFieldToTab('Root.Main', new HTMLEditorField('VisaInformation', 'Visa Information'));
         $fields->addFieldToTab('Root.Main', new HTMLEditorField('TravelSupport', 'Travel Support'));
@@ -92,6 +92,8 @@ class SummitLocationPage extends SummitPage
 
     public function getCityIntro()
     {
+        
+        $order = $request->requestVar("order")
         $res = $this->getField('CityIntro');
         if (empty($res) && $this->SummitID == 4) {
             $res = '<blockquote>
