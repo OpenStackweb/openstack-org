@@ -93,7 +93,6 @@ class SummitLocationPage extends SummitPage
     public function getCityIntro()
     {
         
-        $order = $request->requestVar("order")
         $res = $this->getField('CityIntro');
         if (empty($res) && $this->SummitID == 4) {
             $res = '<blockquote>
