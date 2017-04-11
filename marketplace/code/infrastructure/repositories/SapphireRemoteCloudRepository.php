@@ -11,17 +11,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-
 /**
- * Interface IOpenStackReleaseSupportedApiVersionRepository
+ * Class SapphireRemoteCloudRepository
  */
-interface IOpenStackReleaseSupportedApiVersionRepository extends IEntityRepository
+class SapphireRemoteCloudRepository
+extends SapphireOpenStackImplementationRepository
 {
-    /**
-     * @param int $release_id
-     * @param int $component_id
-     * @param int $api_version_id
-     * @return IReleaseSupportedApiVersion
-     */
-    public function getByReleaseAndComponentAndApiVersion($release_id, $component_id, $api_version_id);
+
+	public function __construct($draft_entity=false){
+        $entity = ($draft_entity) ? new RemoteCloudServiceDraft() : new RemoteCloudService();
+		parent::__construct($entity);
+	}
+
+	/**
+	 * @return string
+	 */
+	protected function getMarketPlaceTypeGroup()
+	{
+		return IRemoteCloudService::MarketPlaceGroupSlug;
+	}
 }

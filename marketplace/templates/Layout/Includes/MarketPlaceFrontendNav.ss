@@ -11,7 +11,7 @@
             </div>
 
             <% with Top %>
-            <div class="col-lg-9 col-lg-offset-1 col-md-12">
+            <div class="col-lg-10 col-md-12">
                 <ul class="marketplace-nav">
                     <% if canViewTab(1) %>
                         <li id="training">
@@ -46,6 +46,14 @@
                             <a href="{$getMarketPlaceTypeLink(6)}">
                                 <span></span>
                                 Hosted <br />Private Clouds
+                            </a>
+                        </li>
+                    <% end_if %>
+                    <% if canViewTab(7) %>
+                        <li id="remote-clouds">
+                            <a href="{$getMarketPlaceTypeLink(7)}">
+                                <span></span>
+                                Remotely Managed <br />Private Clouds
                             </a>
                         </li>
                     <% end_if %>

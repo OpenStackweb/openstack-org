@@ -11,17 +11,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-
 /**
- * Interface IOpenStackReleaseSupportedApiVersionRepository
+ * Interface IRemoteCloudService
  */
-interface IOpenStackReleaseSupportedApiVersionRepository extends IEntityRepository
-{
-    /**
-     * @param int $release_id
-     * @param int $component_id
-     * @param int $api_version_id
-     * @return IReleaseSupportedApiVersion
-     */
-    public function getByReleaseAndComponentAndApiVersion($release_id, $component_id, $api_version_id);
+interface IRemoteCloudService extends IOpenStackImplementation {
+	const MarketPlaceType           = 'Remote Cloud';
+	const MarketPlaceGroupSlug      = 'marketplace-remote-cloud-administrators';
+	const MarketPlacePermissionSlug = 'MANAGE_MARKETPLACE_REMOTE_CLOUD';
 }

@@ -52,6 +52,9 @@ class MarketPlacePage_Controller extends Page_Controller {
 			case 6:
 				$class = 'PrivateCloudsDirectoryPage';
 				break;
+            case 7:
+                $class = 'RemoteCloudsDirectoryPage';
+                break;
 		}
 		if(!empty($class)){
 			$page  = $class::get()->first();
@@ -95,6 +98,9 @@ class MarketPlacePage_Controller extends Page_Controller {
 			case 6:
 				$class = 'PrivateCloudsDirectoryPage';
 				break;
+            case 7:
+                $class = 'RemoteCloudsDirectoryPage';
+                break;
 		}
 		if(!empty($class)){
 			$page  = $class::get()->first();

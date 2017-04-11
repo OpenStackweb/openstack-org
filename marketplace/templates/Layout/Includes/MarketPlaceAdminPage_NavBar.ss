@@ -9,6 +9,9 @@
         <% if canAdmin(private_clouds) %>
             <a href="{$Link}private_clouds" <% if CurrentTab=4 %>class="active"<% end_if %>>Private Clouds</a>
         <% end_if %>
+        <% if canAdmin(remote_clouds) %>
+            <a href="{$Link}remote_clouds" <% if CurrentTab=5 %>class="active"<% end_if %>>Remotely Managed Private Clouds</a>
+        <% end_if %>
         <% if canAdmin(consultants) %>
         <a href="{$Link}consultants"  <% if CurrentTab=3 %>class="active"<% end_if %> >Consultants</a>
         <% end_if %>

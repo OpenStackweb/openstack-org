@@ -105,6 +105,14 @@ class MarketPlaceAdminPage_Controller extends AdminController
      */
     private $private_clouds_draft_repository;
     /**
+     * @var ICompanyServiceRepository
+     */
+    private $remote_clouds_repository;
+    /**
+     * @var ICompanyServiceRepository
+     */
+    private $remote_clouds_draft_repository;
+    /**
      * @var IEntityRepository
      */
     private $config_management_type_repository;
@@ -165,6 +173,7 @@ class MarketPlaceAdminPage_Controller extends AdminController
             'marketplace/code/ui/admin/js/utils.js',
             "marketplace/code/ui/admin/js/marketplaceadmin.js",
             "marketplace/code/ui/admin/js/implementations.js",
+            "marketplace/code/ui/admin/js/remote_clouds.js",
             'marketplace/code/ui/admin/js/public_clouds.js',
             'marketplace/code/ui/admin/js/private_clouds.js',
             'marketplace/code/ui/admin/js/consultants.js',
@@ -192,6 +201,8 @@ class MarketPlaceAdminPage_Controller extends AdminController
         $this->public_clouds_draft_repository = new SapphirePublicCloudRepository(true);
         $this->private_clouds_repository = new SapphirePrivateCloudRepository;
         $this->private_clouds_draft_repository = new SapphirePrivateCloudRepository(true);
+        $this->remote_clouds_repository = new SapphireRemoteCloudRepository();
+        $this->remote_clouds_draft_repository = new SapphireRemoteCloudRepository(true);
         $this->config_management_type_repository = new SapphireConfigurationManagementTypeRepository;
         $this->consultant_service_offered_type_repository = new SapphireConsultantServiceOfferedTypeRepository;
         $this->consultant_repository = new SapphireConsultantRepository;
@@ -210,7 +221,8 @@ class MarketPlaceAdminPage_Controller extends AdminController
             return Controller::curr()->redirect($this->Link("private_clouds"));
         } else if ($this->canAdmin('consultants')) {
             return Controller::curr()->redirect($this->Link("consultants"));
-
+        } else if ($this->canAdmin('remote_clouds')) {
+            return Controller::curr()->redirect($this->Link("remote_clouds"));
         }
         return $this->httpError(401, 'Unauthorized: you do not have the proper rights to access this page.');
     }
@@ -223,6 +235,8 @@ class MarketPlaceAdminPage_Controller extends AdminController
         'public_cloud',
         'private_clouds',
         'private_cloud',
+        'remote_clouds',
+        'remote_cloud',
         'consultants',
         'consultant',
         'preview',
@@ -317,6 +331,8 @@ class MarketPlaceAdminPage_Controller extends AdminController
             $ds->push($this->marketplace_repository->getByType(IPublicCloudService::MarketPlaceType));
         if ($this->canAdmin('private_clouds'))
             $ds->push($this->marketplace_repository->getByType(IPrivateCloudService::MarketPlaceType));
+        if ($this->canAdmin('remote_clouds'))
+            $ds->push($this->marketplace_repository->getByType(IRemoteCloudService::MarketPlaceType));
         if ($this->canAdmin('consultants'))
             $ds->push($this->marketplace_repository->getByType(IConsultant::MarketPlaceType));
         return $ds;
@@ -458,6 +474,10 @@ class MarketPlaceAdminPage_Controller extends AdminController
                         return $this->private_cloud();
                     }
                         break;
+                    case IRemoteCloudService::MarketPlaceType: {
+                        return $this->remote_cloud();
+                    }
+                        break;
                     case IConsultant::MarketPlaceType: {
                         return $this->consultant();
                     }
@@ -546,6 +566,24 @@ class MarketPlaceAdminPage_Controller extends AdminController
         HtmlEditorField::include_js();
         Requirements::javascript('marketplace/code/ui/admin/js/private_cloud.js');
         return $this->getViewer('private_cloud')->process($this);
+    }
+
+    public function remote_cloud()
+    {
+        Requirements::javascript('marketplace/code/ui/admin/js/utils.js');
+        Requirements::javascript('marketplace/code/ui/admin/js/jquery.text.area.counter.js');
+        Requirements::javascript('marketplace/code/ui/admin/js/hypervisors.js');
+        Requirements::javascript('marketplace/code/ui/admin/js/guest.os.js');
+        Requirements::javascript('marketplace/code/ui/admin/js/components.js');
+        Requirements::javascript('marketplace/code/ui/admin/js/videos.js');
+        Requirements::javascript('marketplace/code/ui/admin/js/support.channels.js');
+        Requirements::javascript('marketplace/code/ui/admin/js/additional.resources.js');
+        Requirements::javascript('marketplace/code/ui/admin/js/marketplace.type.header.js');
+        Requirements::javascript('marketplace/code/ui/admin/js/implementation_openstack_powered.js');
+        HtmlEditorField::include_js();
+        Requirements::javascript('marketplace/code/ui/admin/js/remote_cloud.js');
+
+        return $this->getViewer('remote_cloud')->process($this);
     }
 
     public function consultant()
@@ -909,6 +947,83 @@ class MarketPlaceAdminPage_Controller extends AdminController
         }
     }
 
+    public function getRemoteClouds()
+    {
+
+        if (!$this->canAdmin('remote_clouds')) {
+            return $this->httpError(401, 'Unauthorized: you do not have the proper rights to access this page.');
+        }
+
+        $product_name = trim(Convert::raw2sql($this->request->getVar('name')));
+        $implementation_type_id = intval($this->request->getVar('implementation_type_id'));
+        $company_id = intval($this->request->getVar('company_id'));
+
+        $sort = $this->request->getVar('sort');
+        $query = new QueryObject(new CompanyService);
+        $query_draft = new QueryObject(new CompanyServiceDraft);
+        $query_draft->addAndCondition(QueryCriteria::equal('LiveServiceID', 0));
+
+        if (!empty($product_name)) {
+            $query->addAndCondition(QueryCriteria::like('Name', $product_name));
+            $query_draft->addAndCondition(QueryCriteria::like('Name', $product_name));
+        }
+        if ($implementation_type_id > 0) {
+            $query->addAndCondition(QueryCriteria::equal('MarketPlaceType.ID', $implementation_type_id));
+            $query_draft->addAndCondition(QueryCriteria::equal('MarketPlaceType.ID', $implementation_type_id));
+        }
+        if ($company_id > 0) {
+            $query->addAndCondition(QueryCriteria::equal('Company.ID', $company_id));
+            $query_draft->addAndCondition(QueryCriteria::equal('Company.ID', $company_id));
+        }
+        //set sorting
+        if (!empty($sort)) {
+            $dir = $this->getSortDir('remote_clouds');
+            $this->sortCompanyService($query, $sort, $dir);
+            $this->sortCompanyService($query_draft, $sort, $dir);
+        }
+        //get remote clouds
+        $list1 = array();
+        $list2 = array();
+
+        if ($this->canAdmin('remote_clouds')) {
+            list($list1, $size1) = $this->remote_clouds_repository->getAll($query, 0, 1000);
+            list($list2, $size2) = $this->remote_clouds_draft_repository->getAll($query_draft, 0, 1000);
+        }
+
+        //return on view model
+        return new ArrayList(array_merge($list1, $list2));
+
+    }
+
+    public function getCurrentRemoteCloud()
+    {
+        $remote_cloud_id = intval($this->request->getVar('id'));
+        $is_draft = intval($this->request->getVar('is_draft'));
+        $remote_cloud = false;
+        if ($remote_cloud_id > 0) {
+            if ($is_draft) {
+                $remote_cloud = $this->remote_clouds_draft_repository->getById($remote_cloud_id);
+            } else {
+                $remote_cloud = $this->remote_clouds_draft_repository->getByLiveServiceId($remote_cloud_id);
+            }
+
+            //if no draft found we pull the live one to create the draft from it when saved
+            if (!$remote_cloud) {
+                $remote_cloud = $this->remote_clouds_repository->getById($remote_cloud_id);
+            }
+        }
+        return $remote_cloud;
+    }
+
+    public function getCurrentRemoteCloudJson()
+    {
+        $remote_cloud = $this->getCurrentRemoteCloud();
+        if ($remote_cloud) {
+            return json_encode(OpenStackImplementationAssembler::convertOpenStackImplementationToArray($remote_cloud));
+        }
+    }
+
+
     public function getUsePricingSchema()
     {
         $type_id = intval($this->request->getVar('type_id'));
@@ -952,6 +1067,9 @@ class MarketPlaceAdminPage_Controller extends AdminController
                 break;
             case 'private_clouds':
                 return Member::currentUser()->isMarketPlaceTypeAdmin(IPrivateCloudService::MarketPlaceGroupSlug);
+                break;
+            case 'remote_clouds':
+                return Member::currentUser()->isMarketPlaceTypeAdmin(IRemoteCloudService::MarketPlaceGroupSlug);
                 break;
         }
         return false;
@@ -1061,6 +1179,15 @@ class MarketPlaceAdminPage_Controller extends AdminController
                 $private_cloud->IsPreview = true;
                 $private_cloud->IsDraft = true;
                 $render = new PrivateCloudSapphireRender($private_cloud);
+                return $render->draw();
+
+            }
+                break;
+            case 'remote_cloud': {
+                $remote_cloud = $this->remote_clouds_draft_repository->getBy($query);
+                $remote_cloud->IsPreview = true;
+                $remote_cloud->IsDraft = true;
+                $render = new RemoteCloudSapphireRender($remote_cloud);
                 return $render->draw();
 
             }
@@ -1457,6 +1584,16 @@ class MarketPlaceAdminPage_Controller extends AdminController
                 $css = @file_get_contents($base . "/marketplace/code/ui/admin/css/pdf.css");
 
             }
+                break;
+            case 'remote_cloud': {
+                $remote_cloud = $this->remote_clouds_draft_repository->getBy($query);
+                if (!$remote_cloud) throw new NotFoundEntityException('', '');
+                $render = new RemoteCloudSapphireRender($remote_cloud);
+                $remote_cloud->IsPreview = true;
+                $html_inner = $render->pdf();
+                $css = @file_get_contents($base . "/marketplace/code/ui/admin/css/pdf.css");
+            }
+
                 break;
             case 'consultant': {
                 $consultant = $this->consultant_draft_repository->getBy($query);

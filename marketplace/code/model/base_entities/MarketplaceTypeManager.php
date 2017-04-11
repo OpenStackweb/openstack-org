@@ -58,7 +58,7 @@ final class MarketplaceTypeManager  extends AbstractEntityManager {
 				throw new EntityAlreadyExistsException('MarketPlaceType',sprintf('Name  %s',$marketplace_type->getName()));
 			}
 
-			$repository->add($marketplace_type);
+            $marketplace_type->write();
 		});
 		//reload from db...
 		$id = $marketplace_type->getIdentifier();

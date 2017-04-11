@@ -11,17 +11,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-
 /**
- * Interface IOpenStackReleaseSupportedApiVersionRepository
+ * Class Distribution
  */
-interface IOpenStackReleaseSupportedApiVersionRepository extends IEntityRepository
-{
-    /**
-     * @param int $release_id
-     * @param int $component_id
-     * @param int $api_version_id
-     * @return IReleaseSupportedApiVersion
-     */
-    public function getByReleaseAndComponentAndApiVersion($release_id, $component_id, $api_version_id);
-}
+class RemoteCloudService
+	extends OpenStackImplementation
+	implements IRemoteCloudService {
+
+} 
