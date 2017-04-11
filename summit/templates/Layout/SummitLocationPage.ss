@@ -98,9 +98,15 @@
                         <i class="fa fa-hotel fa-4x"></i>
                     </p>
                     <div class="alert alert-danger" role="alert">
+                        <% if $order %>
                         <p class="center">
-                            Limited time offer: <a href="https://www.eventbrite.com/e/openstack-summit-may-2017-boston-tickets-28375675409" target="_blank">Click here to book a Full Access Ticket & a 4-night stay</a> at a hotel walkable to the Summit venue by Friday, April 14 at a discounted rate of $1599 - only $175 a night. 
+                            Still need a hotel? Limited time offer: <a href="https://www.eventbrite.com/e/openstack-summit-may-2017-boston-tickets-28375675409" target="_blank">Click here for a 4-night stay</a> at a hotel walkable to the Summit venue. Register by Friday, April 14  at 8AM EDT for a discounted rate of $999 - only $250 a night.
+                        </p>    
+                        <% else %>
+                        <p class="center">
+                            Limited time offer: <a href="https://www.eventbrite.com/e/openstack-summit-may-2017-boston-tickets-28375675409" target="_blank">Click here to book a Full Access Ticket & a 4-night stay</a> at a hotel walkable to the Summit venue by 8am EDT Friday, April 14 at a discounted rate of $1599 - only $175 a night. 
                         </p>
+                        <% end_if %>
                     </div>
                 <% end_if %>
                 $LocationsTextHeader
