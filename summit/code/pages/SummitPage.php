@@ -170,7 +170,8 @@ class SummitPage_Controller extends Page_Controller
     }
 
     public function getOrder(){
-       return $this->request->getVar('order');
+       $order = $this->request->getVar('order');
+       return isset($order) && $order == "complete";
     }
 
 
