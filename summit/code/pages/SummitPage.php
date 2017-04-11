@@ -169,6 +169,11 @@ class SummitPage_Controller extends Page_Controller
         return $this->Link();
     }
 
+    public function getOrder(){
+        $request = $this->request;
+         return $request->requestVar(“order”);
+    }
+
 
     public function IsWelcome()
     {
