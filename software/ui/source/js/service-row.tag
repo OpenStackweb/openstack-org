@@ -11,17 +11,28 @@ require('./t.tag');
 
     <script>
 
+        this.base_url = this.parent.base_url;
         var self = this;
 
-        coreServiceDetailsURL() {
-            var url = self.parent.base_url+'releases/'+self.parent.getCurrentReleaseId()+'/components/'+self.slug;
+        getGroupId(group_title) {
+            var group_split = group_title.split(/[ ,]+/);
+            return group_split[0].toLowerCase();
+        }
+
+        coreServiceDetails(e) {
+            window.location = self.coreServiceDetailsURL(e);
+        }
+
+        coreServiceDetailsURL(e) {
+            var slug  = e.item.slug;
+            var url = self.parent.base_url+'releases/'+self.parent.parent.getCurrentReleaseId()+'/components/'+slug;
             return url;
         }
 
-        mascotImage() {
-            var slugWithoutSpaces = self.slug.replace(/ /g,"_");
+        mascotImage(component) {
+            var slugWithoutSpaces = component.slug.replace(/ /g,"_");
             return '/software/images/mascots/' + slugWithoutSpaces + '.png';
-        }
+        } 
 
     </script>
 </service-row>
