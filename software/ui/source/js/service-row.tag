@@ -22,7 +22,7 @@ require('./t.tag');
             window.location = self.coreServiceDetailsURL();
         }
 
-        coreServiceDetailsURL() 
+        coreServiceDetailsURL() {
             var url = self.parent.base_url+'releases/'+self.parent.parent.getCurrentReleaseId()+'/components/'+self.slug;
             return url;
         }
