@@ -1,18 +1,13 @@
 require('./t.tag');
 <service-row>
-    <div class="col-md-4 col-sm-6">
-    <div class="core-services-single-full">
-    <div class="core-top">
-    <div class="core-title" style="background-image: url({mascotImage()});">
-        <a href="{ coreServiceDetailsURL() }">{ code_name }</a>
-    </div>
-    <div class="core-service">
-        <a href="{ coreServiceDetailsURL() }">{ name }</a>
-    </div>
-    </div>
-
-    </div>
-    </div>
+    
+    <div class="project-table-row">
+        <div class="project-table-code-name">
+                <a href="{ coreServiceDetailsURL() }"><span class="project-table-mascot-icon" style="background-image: url({mascotImage()});"></span>
+            { code_name }</a>
+        </div>
+        <div class="project-table-description"><a href="{ coreServiceDetailsURL() }">{ name }</a></div>
+    </div>    
 
     <script>
 
@@ -23,7 +18,7 @@ require('./t.tag');
         }
 
         coreServiceDetailsURL() {
-            var url = self.parent.base_url+'releases/'+ self.opts.release +'/components/'+self.slug;
+            var url = self.parent.base_url+'releases/'+self.parent.parent.getCurrentReleaseId()+'/components/'+self.slug;
             return url;
         }
 

@@ -23,7 +23,7 @@ require('./t.tag');
         }
 
         coreServiceDetailsURL() {
-            var url = self.parent.base_url+'releases/'+ self.opts.release +'/components/'+self.slug;
+            var url = self.parent.base_url+'releases/'+self.parent.parent.getCurrentReleaseId()+'/components/'+self.slug;
             return url;
         }
 

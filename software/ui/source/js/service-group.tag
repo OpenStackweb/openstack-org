@@ -12,11 +12,11 @@ require('./t.tag');
                 { ' ( '+components.length+' Results )' }
             </p>
         </div>
-        <div class="col-sm-12" if="{ opts.tiles }">
-            <service-box each="{ components }" release="{ opts.release }" ></service-box>
+        <div class="col-sm-12" show="{ opts.tiles }">
+            <service-box each="{ components }" ></service-box>
         </div>
-        <div class="col-sm-12" if="{ !opts.tiles }">
-            <service-row each="{ components }" release="{ opts.release }"></service-row>
+        <div class="col-sm-12" show="{ !opts.tiles }">
+            <service-row each="{ components }"></service-row>
         </div>
     </div>
 
@@ -36,7 +36,7 @@ require('./t.tag');
 
         coreServiceDetailsURL(e) {
             var slug  = e.item.slug;
-            var url = self.parent.base_url+'releases/'+ this.opts.release +'/components/'+slug;
+            var url = self.parent.base_url+'releases/'+self.parent.parent.getCurrentReleaseId()+'/components/'+slug;
             return url;
         }
 
