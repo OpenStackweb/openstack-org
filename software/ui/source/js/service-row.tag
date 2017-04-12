@@ -1,6 +1,6 @@
 require('./t.tag');
 <service-row>
-    
+
     <div class="project-table-row">
         <div class="project-table-code-name">
                 <a href="{ coreServiceDetailsURL() }"><span class="project-table-mascot-icon" style="background-image: url({mascotImage()});"></span>
@@ -18,7 +18,7 @@ require('./t.tag');
         }
 
         coreServiceDetailsURL() {
-            var url = self.parent.base_url+'releases/'+self.parent.parent.getCurrentReleaseId()+'/components/'+self.slug;
+            var url = self.parent.base_url+'releases/ocata/components/'+self.slug;
             return url;
         }
 

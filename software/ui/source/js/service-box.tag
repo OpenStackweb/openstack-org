@@ -23,7 +23,7 @@ require('./t.tag');
         }
 
         coreServiceDetailsURL() {
-            var url = self.parent.base_url+'releases/'+self.parent.parent.getCurrentReleaseId()+'/components/'+self.slug;
+            var url = self.parent.base_url+'releases/ocata/components/'+self.slug;
             return url;
         }
 
