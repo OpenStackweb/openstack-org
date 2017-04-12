@@ -13,10 +13,10 @@ require('./t.tag');
             </p>
         </div>
         <div class="col-sm-12" if="{ opts.tiles }">
-            <service-box each="{ components }" ></service-box>
+            <service-box each="{ components }" release="{ opts.release }" ></service-box>
         </div>
         <div class="col-sm-12" if="{ !opts.tiles }">
-            <service-row each="{ components }"></service-row>
+            <service-row each="{ components }" release="{ opts.release }"></service-row>
         </div>
     </div>
 
@@ -36,7 +36,7 @@ require('./t.tag');
 
         coreServiceDetailsURL(e) {
             var slug  = e.item.slug;
-            var url = self.parent.base_url+'releases/'+self.parent.parent.getCurrentReleaseId()+'/components/'+slug;
+            var url = self.parent.base_url+'releases/'+ this.opts.release +'/components/'+slug;
             return url;
         }
 
