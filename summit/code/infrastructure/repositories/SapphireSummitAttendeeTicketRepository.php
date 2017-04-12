@@ -23,8 +23,8 @@ class SapphireSummitAttendeeTicketRepository
     }
 
     /**
-     * @param int $external_order_id
-     * @param int $external_attendee_id
+     * @param $external_order_id
+     * @param $external_attendee_id
      * @return ISummitAttendeeTicket
      */
     function getByExternalOrderIdAndExternalAttendeeId($external_order_id, $external_attendee_id)

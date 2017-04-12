@@ -212,7 +212,7 @@
                     </div>
                     <br>
                     <div class="row">
-                        <div class="col-md-6 ticket_member_container">
+                        <div class="col-md-8 ticket_member_container">
                             <label for="ticket-member">Assign to another Member</label><br>
                             <input id="ticket-member" />
                         </div>

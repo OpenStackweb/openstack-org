@@ -16,8 +16,8 @@ class RedeemTicketError extends DataObject
 {
     private static $db = array
     (
-        'ExternalOrderId'    => 'Int',
-        'ExternalAttendeeId' => 'Int',
+        'ExternalOrderId'    => 'Varchar(255)',
+        'ExternalAttendeeId' => 'Varchar(255)',
     );
 
     private static $has_one = array

@@ -21,7 +21,7 @@ class SummitTicketType extends DataObject implements ISummitTicketType
 {
     private static $db = array
     (
-        'ExternalId'  => 'Int',
+        'ExternalId'  => 'Varchar(255)',
         'Name'        => 'Text',
         'Description' => 'Text',
     );

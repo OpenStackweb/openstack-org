@@ -317,6 +317,45 @@ final class EventbriteEventManager implements IEventbriteEventManager
                     )
                 );
 
+            $ticket = $this->createTicket($external_order_id, $external_attendee_id, $bought_date, $ticket_type, $member);
+
+            $attendee = $attendee_factory->build
+            (
+                $member,
+                $summit
+            );
+            $attendee->setShareContactInfo($shared_contact_info);
+
+            $attendee->addTicket($ticket);
+            $attendee_repository->add($attendee);
+
+            return $attendee;
+        });
+    }
+
+    /**
+     * @param string $external_order_id
+     * @param string $external_attendee_id
+     * @param string $bought_date
+     * @param ISummitTicketType $ticket_type
+     * @param $member
+     * @throws NotFoundEntityException
+     * @throws RedeemTicketException
+     */
+    public function createTicket($external_order_id, $external_attendee_id, $bought_date, $ticket_type, $member) {
+
+        $attendee_factory = $this->attendee_factory;
+
+        return $this->tx_manager->transaction(function () use
+        (
+            $member,
+            $external_order_id,
+            $external_attendee_id,
+            $bought_date,
+            $ticket_type,
+            $attendee_factory
+        )
+        {
             $old_ticket = SummitAttendeeTicket::get()->filter(array
             (
                 'ExternalOrderId'    => $external_order_id,
@@ -347,6 +386,7 @@ final class EventbriteEventManager implements IEventbriteEventManager
                         )
                     );
                     $exception->setRedeemTicketError($redeem_error);
+
                     throw $exception;
                 }
                 $old_ticket->delete();
@@ -354,18 +394,9 @@ final class EventbriteEventManager implements IEventbriteEventManager
 
             $ticket = $attendee_factory->buildTicket($external_attendee_id , $external_order_id, $bought_date, $bought_date, $ticket_type);
 
-            $attendee = $attendee_factory->build
-            (
-                $member,
-                $summit
-            );
-            $attendee->setShareContactInfo($shared_contact_info);
-
-            $attendee->addTicket($ticket);
-            $attendee_repository->add($attendee);
-
-            return $attendee;
+            return $ticket;
         });
+
     }
 
     /**
@@ -397,5 +428,56 @@ final class EventbriteEventManager implements IEventbriteEventManager
             SS_Log::log($ex->getMessage(), SS_Log::WARN);
             throw new NotFoundEntityException(sprintf("order # %s does not exists!",$order_external_id));
         }
+    }
+
+    /**
+     * @param ISummit $summit
+     * @param $ticket_id
+     * @param $member_id
+     * @return mixed
+     */
+    public function reassignTicket(ISummit $summit, $ticket_id, $member_id)
+    {
+        $attendee_repository = $this->attendee_repository;
+        $attendee_factory    = $this->attendee_factory;
+
+        return $this->tx_manager->transaction(function() use($summit, $ticket_id, $member_id, $attendee_repository, $attendee_factory){
+
+            if(!$ticket_id)
+                throw new EntityValidationException('missing required param: id');
+
+            $ticket = SummitAttendeeTicket::get()->byID($ticket_id);
+
+            if (!$member_id) {
+                $ticket->delete();
+            } else {
+                $attendee = $attendee_repository->getByMemberAndSummit($member_id,$summit->getIdentifier());
+                $previous_owner = $ticket->Owner();
+
+                if ($attendee) {
+                    if ($attendee->Tickets()->count() > 0) {
+                        throw new EntityValidationException('This member is already assigned to another tix');
+                    } else {
+                        $previous_owner->Tickets()->remove($ticket);
+                        $attendee->Tickets()->add($ticket);
+                    }
+                } else {
+                    $previous_owner->Tickets()->remove($ticket);
+                    $member = Member::get()->byID($member_id);
+
+                    $attendee = $attendee_factory->build($member, $summit);
+                    $attendee->Tickets()->add($ticket);
+                }
+
+                $attendee->write();
+
+                // if the attendee has no more tickets we delete it
+                if ($previous_owner->Tickets()->count() == 0) {
+                    $previous_owner->delete();
+                }
+
+                return $attendee;
+            }
+        });
     }
 }

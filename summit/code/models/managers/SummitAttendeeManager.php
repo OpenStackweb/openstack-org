@@ -18,39 +18,60 @@ final class SummitAttendeeManager implements ISummitAttendeeManager
      * @var IMemberRepository
      */
     private $member_repository;
-
     /**
      * @var ISummitAttendeeRepository
      */
     private $attendee_repository;
     /**
-     * @var IEventbriteAttendeeRepository
+     * @var ISummitAttendeeFactory
+     */
+    private $attendee_factory;
+    /**
+     * @var IEventBriteAttendeeRepository
      */
     private $eventbrite_attendee_repository;
-
     /**
      * @var ITransactionManager
      */
     private $tx_service;
+    /**
+     * @var IEventbriteEventManager
+     */
+    private $eventbrite_manager;
 
     /**
      * SummitAttendeeManager constructor.
      * @param ISummitAttendeeRepository $attendee_repository
      * @param IMemberRepository $member_repository
+     * @param ISummitAttendeeFactory $attendee_factory
      * @param ITransactionManager $tx_service
      */
     public function __construct
     (
         ISummitAttendeeRepository $attendee_repository,
         IMemberRepository $member_repository,
-        IEventbriteAttendeeRepository $eventbrite_attendee_repository,
+        ISummitAttendeeFactory $attendee_factory,
+        IEventBriteAttendeeRepository $eventbrite_attendee_repository,
         ITransactionManager $tx_service
     )
     {
         $this->attendee_repository            = $attendee_repository;
-        $this->eventbrite_attendee_repository = $eventbrite_attendee_repository;
         $this->member_repository              = $member_repository;
+        $this->attendee_factory               = $attendee_factory;
+        $this->eventbrite_attendee_repository = $eventbrite_attendee_repository;
         $this->tx_service                     = $tx_service;
+    }
+
+
+
+    public function getEventbriteEventManager()
+    {
+        return $this->eventbrite_manager;
+    }
+
+    public function setEventbriteEventManager(IEventbriteEventManager $eventbrite_manager)
+    {
+        $this->eventbrite_manager = $eventbrite_manager;
     }
 
     /**
@@ -60,23 +81,24 @@ final class SummitAttendeeManager implements ISummitAttendeeManager
      */
     public function addAttendee(ISummit $summit, array $attendee_data)
     {
+        $attendee_factory    = $this->attendee_factory;
+        $attendee_repository = $this->attendee_repository;
+        $member_repository = $this->member_repository;
 
-        return $this->tx_service->transaction(function() use($summit, $attendee_data){
+        return $this->tx_service->transaction(function() use($summit, $attendee_data, $attendee_factory, $attendee_repository, $member_repository){
             $member_id = intval($attendee_data['member_id']);
-            $member = $this->member_repository->getById($member_id);
+            $member = $member_repository->getById($member_id);
 
             if (is_null($member))
                 throw new NotFoundEntityException('Member', sprintf('id %s', $member_id));
 
-            $attendee = $this->attendee_repository->getByMemberAndSummit($member_id,$summit->getIdentifier());
+            $attendee = $attendee_repository->getByMemberAndSummit($member_id,$summit->getIdentifier());
 
             if ($attendee)
                 throw new EntityValidationException('This member is already assigned to another attendee');
 
-            $attendee = new SummitAttendee();
-            $attendee->MemberID = $member_id;
-            $attendee->SummitID = $summit->getIdentifier();
-            $attendee->write();
+            $attendee = $attendee_factory->build($member, $summit);
+            $attendee_repository->add($attendee);
 
             return $attendee;
         });
@@ -89,8 +111,9 @@ final class SummitAttendeeManager implements ISummitAttendeeManager
      */
     public function updateAttendee(ISummit $summit, array $attendee_data)
     {
+        $attendee_repository = $this->attendee_repository;
 
-        return $this->tx_service->transaction(function() use($summit, $attendee_data){
+        return $this->tx_service->transaction(function() use($summit, $attendee_data, $attendee_repository){
 
             if(!isset($attendee_data['id']))
                 throw new EntityValidationException('missing required param: id');
@@ -98,11 +121,11 @@ final class SummitAttendeeManager implements ISummitAttendeeManager
             $member_id = $attendee_data['member'];
             $attendee_id = intval($attendee_data['id']);
 
-            $attendee = $this->attendee_repository->getByMemberAndSummit($member_id,$summit->getIdentifier());
+            $attendee = $attendee_repository->getByMemberAndSummit($member_id,$summit->getIdentifier());
             if ($attendee && $attendee->ID != $attendee_id)
                 throw new EntityValidationException('This member is already assigned to another tix');
 
-            $attendee = $this->attendee_repository->getById($attendee_id);
+            $attendee = $attendee_repository->getById($attendee_id);
 
             if(is_null($attendee))
                 throw new NotFoundEntityException('Summit Attendee', sprintf('id %s', $attendee_id));
@@ -154,47 +177,7 @@ final class SummitAttendeeManager implements ISummitAttendeeManager
      */
     public function reassignTicket(ISummit $summit, $ticket_id, $member_id)
     {
-        return $this->tx_service->transaction(function() use($summit, $ticket_id, $member_id){
-
-            if(!$ticket_id)
-                throw new EntityValidationException('missing required param: id');
-
-            $ticket = SummitAttendeeTicket::get_by_id('SummitAttendeeTicket',$ticket_id);
-
-            if (!$member_id) {
-                $ticket->OwnerID = 0;
-                $ticket->write();
-            } else {
-                $attendee = $this->attendee_repository->getByMemberAndSummit($member_id,$summit->getIdentifier());
-                $previous_owner = $ticket->Owner();
-
-                if ($attendee) {
-                    if ($attendee->Tickets()->count() > 0) {
-                        throw new EntityValidationException('This member is already assigned to another tix');
-                    } else {
-                        $previous_owner->Tickets()->remove($ticket);
-                        $attendee->Tickets()->add($ticket);
-                    }
-                } else {
-                    $previous_owner->Tickets()->remove($ticket);
-
-                    $attendee = new SummitAttendee();
-                    $attendee->MemberID = $member_id;
-                    $attendee->SummitID = $summit->getIdentifier();
-
-                    $attendee->Tickets()->add($ticket);
-                }
-
-                $attendee->write();
-
-                // if the attendee has no more tickets we delete it
-                if ($previous_owner->Tickets()->count() == 0) {
-                    $previous_owner->delete();
-                }
-
-                return $attendee;
-            }
-        });
+        return $this->eventbrite_manager->reassignTicket($summit, $ticket_id, $member_id);
     }
 
     /**
@@ -205,8 +188,10 @@ final class SummitAttendeeManager implements ISummitAttendeeManager
      */
     public function addAttendeeTicket(ISummit $summit, $attendee_id, $data)
     {
+        $eventbrite_manager = $this->eventbrite_manager;
+        $attendee_repository = $this->attendee_repository;
 
-        return $this->tx_service->transaction(function() use($summit, $attendee_id, $data){
+        return $this->tx_service->transaction(function() use($summit, $attendee_id, $data, $eventbrite_manager, $attendee_repository){
 
             if(!$attendee_id)
                 throw new EntityValidationException('missing required param: attendee id');
@@ -214,17 +199,11 @@ final class SummitAttendeeManager implements ISummitAttendeeManager
             if (!isset($data['external_id']) && !empty($data['external_id']))
                 throw new EntityValidationException('missing required param: external id');
 
-            $existing_ticket = SummitAttendeeTicket::get()->where("ExternalOrderId = '".$data['external_id']."'")->first();
-            if ($existing_ticket)
-                throw new EntityValidationException('External Order ID already exists, please choose another one.');
+            $ticket_type = SummitTicketType::get()->byID($data['ticket_type_id']);
 
-            $ticket = new SummitAttendeeTicket();
-            $ticket->ExternalOrderId = $data['external_id'];
-            $ticket->ExternalAttendeeId = $data['external_attendee_id'];
-            $ticket->TicketTypeID = $data['ticket_type_id'];
-            $ticket->write();
+            $ticket = $eventbrite_manager->createTicket($data['external_id'], $data['external_attendee_id'], '', $ticket_type, Member::currentUser());
 
-            $attendee = $this->attendee_repository->getById($attendee_id);
+            $attendee = $attendee_repository->getById($attendee_id);
             $attendee->Tickets()->add($ticket);
 
             return $attendee;
@@ -233,30 +212,32 @@ final class SummitAttendeeManager implements ISummitAttendeeManager
 
     /**
      * @param ISummit $summit
-     * @param int $eb_attendee_id
+     * @param $eb_attendee_id
      * @param int $member_id
      * @return ISummitAttendee
      */
     public function matchEventbriteAttendee(ISummit $summit, $eb_attendee_id, $member_id)
     {
-        return $this->tx_service->transaction(function () use (
-            $summit, $eb_attendee_id, $member_id) {
+        $attendee_factory = $this->attendee_factory;
+        $attendee_repository = $this->attendee_repository;
+        $member_repository = $this->member_repository;
+        $eventbrite_attendee_repository = $this->eventbrite_attendee_repository;
 
-            $eb_attendee = $this->eventbrite_attendee_repository->getByAttendeeId($eb_attendee_id);
+        return $this->tx_service->transaction(function () use (
+            $summit, $eb_attendee_id, $member_id, $attendee_factory, $attendee_repository, $member_repository, $eventbrite_attendee_repository) {
+
+            $eb_attendee = $eventbrite_attendee_repository->getByAttendeeId($eb_attendee_id);
             if(is_null($eb_attendee)) throw new NotFoundEntityException('Attendee', sprintf(' id %s', $eb_attendee_id));
 
-            $member = $this->member_repository->getById($member_id);
+            $member = $member_repository->getById($member_id);
             if(is_null($member)) throw new NotFoundEntityException('Member', sprintf(' id %s', $member_id));
 
-            $attendee = $this->attendee_repository->getByMemberAndSummit($member_id, $summit->getIdentifier());
+            $attendee = $attendee_repository->getByMemberAndSummit($member_id, $summit->getIdentifier());
             if (!$attendee) {
-                $attendee = new SummitAttendee();
-                $attendee->MemberID = $member_id;
-                $attendee->SummitID = $summit->getIdentifier();
-                $attendee->write();
+                $attendee = $attendee_factory->build($member, $summit);
             }
 
-            list($eb_attendees,$count) = $this->eventbrite_attendee_repository->getByEmail($eb_attendee->Email);
+            list($eb_attendees,$count) = $eventbrite_attendee_repository->getByEmail($eb_attendee->Email);
 
             foreach ($eb_attendees as $eb_ticket) {
                 $attendee_ticket = SummitAttendeeTicket::get()->where("ExternalAttendeeId = ".$eb_ticket->ExternalAttendeeId)->first();

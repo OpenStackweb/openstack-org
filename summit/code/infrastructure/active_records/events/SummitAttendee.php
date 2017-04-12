@@ -82,6 +82,10 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
 
         $schedule = $this->getManyManyComponents('Schedule');
         $schedule->removeAll();
+
+        foreach ($this->RSVPs() as $rsvp) {
+            $rsvp->delete();
+        }
     }
 
     public function TicketsCount()
@@ -333,11 +337,11 @@ WHERE SummitEvent.SummitID = {$summit_id} AND SummitAttendeeID = ".$this->ID);
         foreach($tickets as $t)
         {
             if(
-                intval($t->ExternalOrderId)    === intval($ticket->ExternalOrderId) &&
-                intval($t->ExternalAttendeeId) === intval($ticket->ExternalAttendeeId) &&
+                $t->ExternalOrderId === $ticket->ExternalOrderId &&
+                $t->ExternalAttendeeId === $ticket->ExternalAttendeeId &&
                 $t->TicketType()->exists() &&
                 $ticket->TicketType()->exists() &&
-                intval($t->TicketType()->ExternalId) === intval($ticket->TicketType()->ExternalId)
+                $t->TicketType()->ExternalId === $ticket->TicketType()->ExternalId
             )
             return true;
         }

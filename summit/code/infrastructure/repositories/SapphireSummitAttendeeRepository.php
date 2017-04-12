@@ -58,7 +58,8 @@ final class SapphireSummitAttendeeRepository extends SapphireRepository implemen
                                 OR Member.Surname LIKE '{$search_term}%'
                                 OR CONCAT(Member.FirstName,' ',Member.Surname) LIKE '{$search_term}%'
                                 OR SummitAttendeeTicket.ExternalOrderId = '{$search_term}'
-                                OR Member.Email LIKE '{$search_term}%' ) ";
+                                OR Member.Email LIKE '{$search_term}%'
+                                OR SummitAttendee.ID = '{$search_term}') ";
         }
 
         $list = SummitAttendee::get()

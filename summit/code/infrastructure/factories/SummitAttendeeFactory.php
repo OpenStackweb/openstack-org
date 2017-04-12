@@ -46,8 +46,8 @@ final class SummitAttendeeFactory implements ISummitAttendeeFactory
         ISummitTicketType $ticket_type
     ) {
         $ticket                     = new SummitAttendeeTicket;
-        $ticket->ExternalOrderId    = intval($order_external_id);
-        $ticket->ExternalAttendeeId = intval($external_attendee_id);
+        $ticket->ExternalOrderId    = $order_external_id;
+        $ticket->ExternalAttendeeId = $external_attendee_id;
         $ticket->TicketBoughtDate   = $bought_date;
         $ticket->TicketChangedDate  = $changed_date;
         $ticket->TicketTypeID       = $ticket_type->getIdentifier();

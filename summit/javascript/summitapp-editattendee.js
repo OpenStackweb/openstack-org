@@ -176,13 +176,15 @@ $(document).ready(function(){
     $('.del-ticket').click(function(ev){
         ev.preventDefault();
         var ticket_id = $(this).data('ticket');
+        var ticket_count = $('.ticket ').length;
         var summit_id   = $('#summit_id').val();
         var attendee_id = $('#attendee_id').val();
         var element = $(this);
+        var warning_text = (ticket_count > 1) ? 'Ticket will be deleted.' : 'Ticket AND Attendee will be deleted (and with the attendee we delete all RSVPs and Schedule)';
 
         swal({
             title: "Are you sure?",
-            text: "Ticket will be left unassigned!",
+            text: warning_text,
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
@@ -299,7 +301,7 @@ $(document).ready(function(){
             swal(
                 {
                     title: "Are you sure?",
-                    text: "The attendee will be left without any ticket and it will be DELETED !",
+                    text: "The attendee will be left without any ticket and it will be DELETED (including all RSVPs and Schedule) !",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#DD6B55",

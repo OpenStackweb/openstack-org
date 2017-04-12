@@ -17,8 +17,8 @@ final class SummitAttendeeTicket extends DataObject implements ISummitAttendeeTi
     private static $db = array
     (
         // https://www.eventbrite.com/developer/v3/formats/order/#ebapi-std:format-order
-        'ExternalOrderId'    => 'Int',
-        'ExternalAttendeeId' => 'Int',
+        'ExternalOrderId'    => 'Varchar(255)',
+        'ExternalAttendeeId' => 'Varchar(255)',
         'TicketBoughtDate'   => 'SS_Datetime',
         'TicketChangedDate'  => 'SS_Datetime',
     );

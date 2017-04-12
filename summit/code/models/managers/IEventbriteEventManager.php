@@ -52,8 +52,27 @@ interface IEventbriteEventManager
     );
 
     /**
+     * @param string $external_order_id
+     * @param string $external_attendee_id
+     * @param string $bought_date
+     * @param ISummitTicketType $ticket_type
+     * @param $member
+     * @throws NotFoundEntityException
+     * @throws RedeemTicketException
+     */
+    public function createTicket($external_order_id, $external_attendee_id, $bought_date, $ticket_type, $member);
+
+    /**
      * @param $order_external_id
      * @throw InvalidEventbriteOrderStatusException
      */
     public function getOrderAttendees($order_external_id);
+
+    /**
+     * @param ISummit $summit
+     * @param $ticket_id
+     * @param $member_id
+     * @return mixed
+     */
+    public function reassignTicket(ISummit $summit, $ticket_id, $member_id);
 }

@@ -20,8 +20,8 @@ class EventbriteAttendee extends DataObject
         'FirstName'             => 'Varchar(512)',
         'LastName'              => 'Varchar(512)',
         'Price'                 => 'Currency',
-        'ExternalAttendeeId'    => 'Int',
-        'ExternalTicketClassId' => 'Int',
+        'ExternalAttendeeId'    => 'Varchar(255)',
+        'ExternalTicketClassId' => 'Varchar(255)',
         'Status'                => 'Varchar(512)',
     );
 

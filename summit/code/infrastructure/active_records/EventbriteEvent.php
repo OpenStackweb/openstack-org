@@ -21,7 +21,7 @@ class EventbriteEvent extends DataObject implements IEventbriteEvent
         'Processed'       => 'Boolean',
         'ProcessedDate'   => 'SS_DateTime',
         'FinalStatus'     => 'Varchar(255)',
-        'ExternalOrderId' => 'Int',
+        'ExternalOrderId' => 'Varchar(255)',
     );
 
     private static $has_one = array

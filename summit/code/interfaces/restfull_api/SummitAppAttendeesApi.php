@@ -368,6 +368,11 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
             SS_Log::log($ex2->getMessage(), SS_Log::WARN);
             return $this->notFound($ex2->getMessages());
         }
+        catch(RedeemTicketException $ex3)
+        {
+            SS_Log::log($ex3->getMessage(), SS_Log::WARN);
+            return $this->validationError($ex3->getMessage());
+        }
         catch(Exception $ex)
         {
             SS_Log::log($ex->getMessage(), SS_Log::ERR);
