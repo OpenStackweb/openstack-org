@@ -216,6 +216,7 @@
                                                     moderator_id: {$ModeratorID},
                                                     speakers_id : [<% loop Speakers %>{$ID},<% end_loop %>],
                                                     level : '{$Level}',
+                                                    to_record : {$ToRecord},
                                                 <% end_if %>
                                                 <% if CurrentMember && CurrentMember.isOnMySchedule($ID) %>
                                                     going      : true,
@@ -269,6 +270,7 @@
                                         moderator_id: {$ModeratorID},
                                         speakers_id : [<% loop Speakers %>{$ID},<% end_loop %>],
                                         level       : '{$Level}',
+                                        to_record   : {$ToRecord},
                                     <% end_if %>
                                     <% if CurrentMember && CurrentMember.isOnMySchedule($ID) %>
                                         going      : true,

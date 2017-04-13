@@ -27,11 +27,12 @@
         <span class="glyphicon { getScheduleIcon() }"></span>&nbsp;<span class="content">Schedule</span>
      </button>
 
-     <button id="btn_favorite"
-                  title="{ this.event.favorite ? 'Do not Watch Later': 'Watch Later' }"
-                  type="button"
-                  onclick={ toogleFavoriteState }
-                  class="btn btn-primary btn-md active btn-favorite-event btn-action { this.event.favorite ? 'btn-action-pressed': 'btn-action-normal' }">
+     <button if={ this.event.to_record }
+             id="btn_favorite"
+             title="{ this.event.favorite ? 'Do not Watch Later': 'Watch Later' }"
+             type="button"
+             onclick={ toogleFavoriteState }
+             class="btn btn-primary btn-md active btn-favorite-event btn-action { this.event.favorite ? 'btn-action-pressed': 'btn-action-normal' }">
              <i class="fa { getFavoriteIcon() }" aria-hidden="true"></i></span>&nbsp;<span class="content">Watch Later</span>
      </button>
 

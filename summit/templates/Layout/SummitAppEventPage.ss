@@ -61,7 +61,14 @@
                                 rsvp_seat_type  : "{$Event.CurrentRSVPSubmissionSeatType}",
                                 avg_rate        : "{$Event.getAvgRate()}",
                                 allow_feedback  : <% if Event.AllowFeedBack %>true<% else %>false<% end_if %>,
-                                has_ended           : <% if Event.hasEnded %>true<% else %>false<% end_if %>,
+                                has_ended       : <% if Event.hasEnded %>true<% else %>false<% end_if %>,
+                                <% if $Event.ClassName == 'Presentation' %>
+                                    moderator_id: {$Event.ModeratorID},
+                                    speakers_id : [<% loop $Event.Speakers %>{$ID},<% end_loop %>],
+                                    level       : '{$Event.Level}',
+                                    to_record   : {$Event.ToRecord},
+                                <% end_if %>
+
                                 <% if $CurrentMember && $CurrentMember.isOnMySchedule($Top.Event.ID) %>
                                     going      : true,
                                 <% else %>

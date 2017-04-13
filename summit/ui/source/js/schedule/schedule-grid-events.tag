@@ -594,7 +594,7 @@
             if(event.favorite){
                 $('li.unwatch-action', menu).show();
             }
-            else{
+            else if(event.to_record){
                 $('li.watch-action', menu).show();
             }
         }
