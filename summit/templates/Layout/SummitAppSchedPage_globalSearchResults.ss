@@ -2,10 +2,10 @@
     <div class="row">
         <div class="col-xs-12 col-main-title search-header">
             <div class="row">
-                <div class="col-xs-12"><h1 style="text-align:left;">Search Result</h1></div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12">
+                <div class="col-xs-6">
+                    <h1 style="text-align:left;">Search Result</h1>
+                </div>
+                <div class="col-xs-6">
                     <schedule-global-filter search_url="{$Top.Link(global-search)}" value="{$SearchTerm}" clear_url="{$Top.Link}"></schedule-global-filter>
                 </div>
             </div>
