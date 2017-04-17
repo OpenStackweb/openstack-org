@@ -1,7 +1,7 @@
 <div id="$ID" class="ranking_container">
-    <p>Please rank up to $Question.MaxItemsToRank</p>
-    $Question.Intro
-    <p><strong>Click your options to rank them. Select at least one.</strong>&nbsp;&nbsp;<a title="clear all options." href="#" class="clear_all_ranking_options">clear all</a></p>
+    <p>$_T("survey_ui","Please rank up to %s", $Question.MaxItemsToRank)</p>
+    $_T("survey_template", $Question.Intro)
+    <p><strong>$_T("survey_ui", "Click your options to rank them. Select at least one.")</strong>&nbsp;&nbsp;<a title="clear all options." href="#" class="clear_all_ranking_options">$_T("survey_ui","clear all")</a></p>
     <table class="ranking-table">
         <tbody>
             <% if $Options.Count %>
@@ -13,7 +13,7 @@
                     <tr class="spacer"></tr>
                 <% end_loop %>
             <% else %>
-                 <p>No options available</p>
+                 <p>$_T("survey_ui","No options available")</p>
             <% end_if %>
         </tbody>
      </table>

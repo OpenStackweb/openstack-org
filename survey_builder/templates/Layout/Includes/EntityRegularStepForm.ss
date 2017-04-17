@@ -2,14 +2,14 @@
     <fieldset>
         <div class="row">
             <div class="col-md-12">
-                <h3><span class="entity-survey-title-details"><%t EntityRegularStepForm.EntityDetailTitle "Your Deployments" %>&nbsp;-&nbsp;<%t EntityRegularStepForm.StepCountTitle "Part {current} of {max}" current=$CurrentStepIndex max=$MaxStepIndex %></span></h3>
+                <h3><span class="entity-survey-title-details">$_T("survey_ui", "Your Deployments")&nbsp;-&nbsp;$_T("survey_ui", "Part %s of %s", $CurrentStepIndex, $MaxStepIndex)</span></h3>
             </div>
         </div>
         <hr>
         <div class="row">
             <div class="col-md-3 created-by">Created&nbsp;by&nbsp;<strong>{$Survey.createdBy.Email}</strong></div>
-            <div class="col-md-3 edited-by"><span class="team-separator">&#124;&nbsp;Edited&nbsp;by&nbsp</span><strong>{$Survey.EditedBy.Email}</strong></div>
-            <div class="col-md-6 teams-container"><% if AllowTeams %><span class="team-separator">&#124;&nbsp;</span><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;<a class="add-team-member-btn" href="#" title="<%t EntityRegularStepForm.AddTeamMemberTitle "Add another team member" %>"><%t EntityRegularStepForm.AddTeamMemberTitle "Add another team member" %></a><% end_if %></div>
+            <div class="col-md-3 edited-by"><span class="team-separator">&#124;&nbsp{$_T("survey_ui","Edited by")}&nbsp</span><strong>{$Survey.EditedBy.Email}</strong></div>
+            <div class="col-md-6 teams-container"><% if AllowTeams %><span class="team-separator">&#124;&nbsp;</span><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;<a class="add-team-member-btn" href="#" title="{$_T("survey_ui", "Add another team member"}">{$_T("survey_ui", "Add another team member"}</a><% end_if %></div>
         </div>
         <hr>
         <% loop $Fields %>

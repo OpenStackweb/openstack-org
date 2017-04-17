@@ -22,7 +22,7 @@
                         '<td class="pic"></td>'+
                         '<td class="fname"></td>'+
                         '<td class="lname"></td>'+
-                        '<td><a class="delete-team-member-btn" data-member-id="$ID" href="#">Delete</a></td>'+
+                        '<td><a class="delete-team-member-btn" data-member-id="$ID" href="#">'+GetText._t("Delete")+'</a></td>'+
                         '</tr>'+
                         '</tbody>');
 
@@ -97,7 +97,7 @@
 
            if(new_team_member_id === '')
            {
-               alert('You must select a valid member!');
+               alert(GetText._t('You must select a valid member!'));
                return false;
            }
            // clean selection
@@ -129,7 +129,7 @@
 
         $('.delete-team-member-btn').live('click', function(event){
             event.preventDefault();
-            if(window.confirm('Are you sure?'))
+            if(window.confirm(GetText._t('Are you sure?')))
             {
                 var btn              = $(this);
                 var member_id        = btn.attr('data-member-id');

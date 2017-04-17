@@ -11,7 +11,7 @@
             </li>
         <% end_loop %>
     <% else %>
-        <li>No options available</li>
+        <li>$_T("survey_ui","No options available")</li>
     <% end_if %>
 </ul>
 <% else %>

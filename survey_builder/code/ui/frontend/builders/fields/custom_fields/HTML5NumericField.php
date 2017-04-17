@@ -16,7 +16,7 @@ class HTML5NumericField extends TextField
 {
     public function getAttributes() {
         $attributes = parent::getAttributes();
-        $attributes =  array_merge($attributes, $this->attributes);
+        $attributes = array_merge($attributes, $this->attributes);
         $attributes['type'] = 'number';
         return $attributes;
     }

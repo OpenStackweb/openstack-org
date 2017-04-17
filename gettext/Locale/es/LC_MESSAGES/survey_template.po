@@ -1,0 +1,2195 @@
+# Translations template for OpenStack WWW site user survey.
+# Copyright (C) 2017 ORGANIZATION
+# This file is distributed under the same license as the OpenStack www site project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openstack-user-survey\n"
+"POT-Creation-Date: 2017-04-24 13:11-0300\n"
+"PO-Revision-Date: 2017-04-24 13:14-0300\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.4\n"
+"X-Poedit-Basepath: .\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: es_ES\n"
+
+# survey template 6 title
+msgid "OpenStack User Survey - 2017"
+msgstr ""
+
+# survey template 6 - survey step about-you friendly name
+msgid "About You"
+msgstr ""
+
+# step about-you - question FirstName label
+msgid "First name / Given name*"
+msgstr ""
+
+# step about-you - question Surname label
+msgid "Last name / Family name*<br/><font size=\"-2\"><em>We'll never share individual information without your permission, but we will present select user survey results in aggregate. </em></font>"
+msgstr ""
+
+# step about-you - question OpenStackActivity label
+msgid "What are the ways you work with OpenStack?*<br/><font size=\"-2\"><em>Select all that apply</em></font>"
+msgstr ""
+
+# step about-you - question OpenStackActivityOther label
+msgid "Please describe your relationship with OpenStack"
+msgstr ""
+
+# step about-you - question Email label
+msgid "Your Email*"
+msgstr ""
+
+# step about-you - question UserCountry label
+msgid "Country of Residence*"
+msgstr ""
+
+# step about-you - question OkToContact label
+msgid "The OpenStack Foundation and User Committee may communicate with me in the future about my usage.*"
+msgstr ""
+
+# survey template 6 - survey step your-organization friendly name
+msgid "Your Organization"
+msgstr "Tu Organizacion"
+
+# step your-organization - question Organization label
+msgid "Your Organization Name*"
+msgstr "El Nombre de tu Organizacion*"
+
+# step your-organization - question Industry label
+msgid "Your Organization’s Primary Industry*"
+msgstr "La actividad Primaria de tu organizacion*"
+
+# question Industry empty string, question PrimaryCountry empty string, question OrgSize empty string, question DocsFeedback empty string, question IsPublic empty string, question DeploymentStage empty string, question DeploymentAge empty string, question CountriesPhysicalLocation empty string, question DeploymentType empty string, question RefStackTest empty string, question NumCloudUsers empty string, question ComputeNodes empty string, question ComputeCores empty string, question ComputeInstances empty string, question NetworkNumIPs empty string, question BlockStorageTotalSize empty string, question ObjectStorageSize empty string, question ObjectStorageNumObjects empty string, question NovaNumCells empty string, question ITPercentageonOpenStack empty string, question OperatingSystems empty string, question HeatFeedback empty string, question NovaFeedback empty string, question TripleOFeedback empty string
+msgid "-- Select One --"
+msgstr ""
+
+# question Industry value Academic / Research label
+msgid "Academic / Research"
+msgstr "Academica / Investigacion"
+
+# question Industry value Advertising label
+msgid "Advertising"
+msgstr ""
+
+# question Industry value Automotive label
+msgid "Automotive"
+msgstr ""
+
+# question Industry value Consumer Goods label
+msgid "Consumer Goods"
+msgstr ""
+
+# question Industry value Energy label
+msgid "Energy"
+msgstr ""
+
+# question Industry value Film/Media label
+msgid "Film / Media"
+msgstr ""
+
+# question Industry value Finance label
+msgid "Finance"
+msgstr ""
+
+# question Industry value Gaming label
+msgid "Gaming"
+msgstr ""
+
+# question Industry value Government / Defense label
+msgid "Government / Defense"
+msgstr ""
+
+# question Industry value Healthcare label
+msgid "Healthcare"
+msgstr ""
+
+# question Industry value Information Technology label
+msgid "Information Technology"
+msgstr "Tecnologias de informacion"
+
+# question Industry value Insurance label
+msgid "Insurance"
+msgstr ""
+
+# question Industry value Manufacturing/Industrial label
+msgid "Manufacturing / Industrial"
+msgstr ""
+
+# question Industry value Nonprofit label
+msgid "Nonprofit"
+msgstr ""
+
+# question Industry value Retail / ecommerce label
+msgid "Retail / ecommerce"
+msgstr ""
+
+# question Industry value Telecommunications label
+msgid "Telecommunications"
+msgstr ""
+
+# question Industry value Travel label
+msgid "Travel"
+msgstr ""
+
+# question Industry value Other label, question OperatingSystems value Other label
+msgid "Other"
+msgstr ""
+
+# step your-organization - question IndustryOther label
+msgid "Please specify which industry best describes your organization."
+msgstr ""
+
+# step your-organization - question ITActivity label
+msgid "Your Organization's Primary IT Focus"
+msgstr ""
+
+# step your-organization - question ITActivityOther label
+msgid "Other IT activity"
+msgstr ""
+
+# question break1 literal content
+msgid "<hr><p>Your Organization’s Primary Location or Headquarters</p>"
+msgstr "<hr><p>La locacion de la surcursal principal de tu Organizacion</p>"
+
+# step your-organization - question PrimaryCountry label
+msgid "Country*"
+msgstr "Pais*"
+
+# question PrimaryCountry value AF label, question CountriesPhysicalLocation value AF label
+msgid "Afghanistan"
+msgstr ""
+
+# question PrimaryCountry value AX label, question CountriesPhysicalLocation value AX label
+msgid "Aland Islands"
+msgstr ""
+
+# question PrimaryCountry value AL label, question CountriesPhysicalLocation value AL label
+msgid "Albania"
+msgstr ""
+
+# question PrimaryCountry value DZ label, question CountriesPhysicalLocation value DZ label
+msgid "Algeria"
+msgstr ""
+
+# question PrimaryCountry value AS label, question CountriesPhysicalLocation value AS label
+msgid "American Samoa"
+msgstr ""
+
+# question PrimaryCountry value AD label, question CountriesPhysicalLocation value AD label
+msgid "Andorra"
+msgstr ""
+
+# question PrimaryCountry value AO label, question CountriesPhysicalLocation value AO label
+msgid "Angola"
+msgstr ""
+
+# question PrimaryCountry value AI label, question CountriesPhysicalLocation value AI label
+msgid "Anguilla"
+msgstr ""
+
+# question PrimaryCountry value AQ label, question CountriesPhysicalLocation value AQ label
+msgid "Antarctica"
+msgstr ""
+
+# question PrimaryCountry value AG label, question CountriesPhysicalLocation value AG label
+msgid "Antigua and Barbuda"
+msgstr ""
+
+# question PrimaryCountry value AR label, question CountriesPhysicalLocation value AR label
+msgid "Argentina"
+msgstr ""
+
+# question PrimaryCountry value AM label, question CountriesPhysicalLocation value AM label
+msgid "Armenia"
+msgstr ""
+
+# question PrimaryCountry value AW label, question CountriesPhysicalLocation value AW label
+msgid "Aruba"
+msgstr ""
+
+# question PrimaryCountry value AU label, question CountriesPhysicalLocation value AU label
+msgid "Australia"
+msgstr ""
+
+# question PrimaryCountry value AT label, question CountriesPhysicalLocation value AT label
+msgid "Austria"
+msgstr ""
+
+# question PrimaryCountry value AZ label, question CountriesPhysicalLocation value AZ label
+msgid "Azerbaijan"
+msgstr ""
+
+# question PrimaryCountry value BS label, question CountriesPhysicalLocation value BS label
+msgid "Bahamas"
+msgstr ""
+
+# question PrimaryCountry value BH label, question CountriesPhysicalLocation value BH label
+msgid "Bahrain"
+msgstr ""
+
+# question PrimaryCountry value BD label, question CountriesPhysicalLocation value BD label
+msgid "Bangladesh"
+msgstr ""
+
+# question PrimaryCountry value BB label, question CountriesPhysicalLocation value BB label
+msgid "Barbados"
+msgstr ""
+
+# question PrimaryCountry value BY label, question CountriesPhysicalLocation value BY label
+msgid "Belarus"
+msgstr ""
+
+# question PrimaryCountry value BE label, question CountriesPhysicalLocation value BE label
+msgid "Belgium"
+msgstr ""
+
+# question PrimaryCountry value BZ label, question CountriesPhysicalLocation value BZ label
+msgid "Belize"
+msgstr ""
+
+# question PrimaryCountry value BJ label, question CountriesPhysicalLocation value BJ label
+msgid "Benin"
+msgstr ""
+
+# question PrimaryCountry value BM label, question CountriesPhysicalLocation value BM label
+msgid "Bermuda"
+msgstr ""
+
+# question PrimaryCountry value BT label, question CountriesPhysicalLocation value BT label
+msgid "Bhutan"
+msgstr ""
+
+# question PrimaryCountry value BO label, question CountriesPhysicalLocation value BO label
+msgid "Bolivia, Plurinational State of"
+msgstr ""
+
+# question PrimaryCountry value BQ label, question CountriesPhysicalLocation value BQ label
+msgid "Bonaire, Sint Eustatius and Saba"
+msgstr ""
+
+# question PrimaryCountry value BA label, question CountriesPhysicalLocation value BA label
+msgid "Bosnia and Herzegovina"
+msgstr ""
+
+# question PrimaryCountry value BW label, question CountriesPhysicalLocation value BW label
+msgid "Botswana"
+msgstr ""
+
+# question PrimaryCountry value BV label, question CountriesPhysicalLocation value BV label
+msgid "Bouvet Island"
+msgstr ""
+
+# question PrimaryCountry value BR label, question CountriesPhysicalLocation value BR label
+msgid "Brazil"
+msgstr ""
+
+# question PrimaryCountry value IO label, question CountriesPhysicalLocation value IO label
+msgid "British Indian Ocean Territory"
+msgstr ""
+
+# question PrimaryCountry value BN label, question CountriesPhysicalLocation value BN label
+msgid "Brunei Darussalam"
+msgstr ""
+
+# question PrimaryCountry value BG label, question CountriesPhysicalLocation value BG label
+msgid "Bulgaria"
+msgstr ""
+
+# question PrimaryCountry value BF label, question CountriesPhysicalLocation value BF label
+msgid "Burkina Faso"
+msgstr ""
+
+# question PrimaryCountry value BI label, question CountriesPhysicalLocation value BI label
+msgid "Burundi"
+msgstr ""
+
+# question PrimaryCountry value KH label, question CountriesPhysicalLocation value KH label
+msgid "Cambodia"
+msgstr ""
+
+# question PrimaryCountry value CM label, question CountriesPhysicalLocation value CM label
+msgid "Cameroon"
+msgstr ""
+
+# question PrimaryCountry value CA label, question CountriesPhysicalLocation value CA label
+msgid "Canada"
+msgstr ""
+
+# question PrimaryCountry value CV label, question CountriesPhysicalLocation value CV label
+msgid "Cape Verde"
+msgstr ""
+
+# question PrimaryCountry value KY label, question CountriesPhysicalLocation value KY label
+msgid "Cayman Islands"
+msgstr ""
+
+# question PrimaryCountry value CF label, question CountriesPhysicalLocation value CF label
+msgid "Central African Republic"
+msgstr ""
+
+# question PrimaryCountry value TD label, question CountriesPhysicalLocation value TD label
+msgid "Chad"
+msgstr ""
+
+# question PrimaryCountry value CL label, question CountriesPhysicalLocation value CL label
+msgid "Chile"
+msgstr ""
+
+# question PrimaryCountry value CN label, question CountriesPhysicalLocation value CN label
+msgid "China"
+msgstr ""
+
+# question PrimaryCountry value CX label, question CountriesPhysicalLocation value CX label
+msgid "Christmas Island"
+msgstr ""
+
+# question PrimaryCountry value CC label, question CountriesPhysicalLocation value CC label
+msgid "Cocos (Keeling) Islands"
+msgstr ""
+
+# question PrimaryCountry value CO label, question CountriesPhysicalLocation value CO label
+msgid "Colombia"
+msgstr ""
+
+# question PrimaryCountry value KM label, question CountriesPhysicalLocation value KM label
+msgid "Comoros"
+msgstr ""
+
+# question PrimaryCountry value CG label, question CountriesPhysicalLocation value CG label
+msgid "Congo"
+msgstr ""
+
+# question PrimaryCountry value CD label, question CountriesPhysicalLocation value CD label
+msgid "Congo, the Democratic Republic of the"
+msgstr ""
+
+# question PrimaryCountry value CK label, question CountriesPhysicalLocation value CK label
+msgid "Cook Islands"
+msgstr ""
+
+# question PrimaryCountry value CR label, question CountriesPhysicalLocation value CR label
+msgid "Costa Rica"
+msgstr ""
+
+# question PrimaryCountry value CI label, question CountriesPhysicalLocation value CI label
+msgid "Côte d'Ivoire"
+msgstr ""
+
+# question PrimaryCountry value HR label, question CountriesPhysicalLocation value HR label
+msgid "Croatia"
+msgstr ""
+
+# question PrimaryCountry value CU label, question CountriesPhysicalLocation value CU label
+msgid "Cuba"
+msgstr ""
+
+# question PrimaryCountry value CW label, question CountriesPhysicalLocation value CW label
+msgid "Curaçao"
+msgstr ""
+
+# question PrimaryCountry value CY label, question CountriesPhysicalLocation value CY label
+msgid "Cyprus"
+msgstr ""
+
+# question PrimaryCountry value CZ label, question CountriesPhysicalLocation value CZ label
+msgid "Czech Republic"
+msgstr ""
+
+# question PrimaryCountry value DK label, question CountriesPhysicalLocation value DK label
+msgid "Denmark"
+msgstr ""
+
+# question PrimaryCountry value DJ label, question CountriesPhysicalLocation value DJ label
+msgid "Djibouti"
+msgstr ""
+
+# question PrimaryCountry value DM label, question CountriesPhysicalLocation value DM label
+msgid "Dominica"
+msgstr ""
+
+# question PrimaryCountry value DO label, question CountriesPhysicalLocation value DO label
+msgid "Dominican Republic"
+msgstr ""
+
+# question PrimaryCountry value EC label, question CountriesPhysicalLocation value EC label
+msgid "Ecuador"
+msgstr ""
+
+# question PrimaryCountry value EG label, question CountriesPhysicalLocation value EG label
+msgid "Egypt"
+msgstr ""
+
+# question PrimaryCountry value SV label, question CountriesPhysicalLocation value SV label
+msgid "El Salvador"
+msgstr ""
+
+# question PrimaryCountry value GQ label, question CountriesPhysicalLocation value GQ label
+msgid "Equatorial Guinea"
+msgstr ""
+
+# question PrimaryCountry value ER label, question CountriesPhysicalLocation value ER label
+msgid "Eritrea"
+msgstr ""
+
+# question PrimaryCountry value EE label, question CountriesPhysicalLocation value EE label
+msgid "Estonia"
+msgstr ""
+
+# question PrimaryCountry value ET label, question CountriesPhysicalLocation value ET label
+msgid "Ethiopia"
+msgstr ""
+
+# question PrimaryCountry value FK label, question CountriesPhysicalLocation value FK label
+msgid "Falkland Islands (Malvinas)"
+msgstr ""
+
+# question PrimaryCountry value FO label, question CountriesPhysicalLocation value FO label
+msgid "Faroe Islands"
+msgstr ""
+
+# question PrimaryCountry value FJ label, question CountriesPhysicalLocation value FJ label
+msgid "Fiji"
+msgstr ""
+
+# question PrimaryCountry value FI label, question CountriesPhysicalLocation value FI label
+msgid "Finland"
+msgstr ""
+
+# question PrimaryCountry value FR label, question CountriesPhysicalLocation value FR label
+msgid "France"
+msgstr ""
+
+# question PrimaryCountry value FX label, question CountriesPhysicalLocation value FX label
+msgid "France, Metropolitan"
+msgstr ""
+
+# question PrimaryCountry value GF label, question CountriesPhysicalLocation value GF label
+msgid "French Guiana"
+msgstr ""
+
+# question PrimaryCountry value PF label, question CountriesPhysicalLocation value PF label
+msgid "French Polynesia"
+msgstr ""
+
+# question PrimaryCountry value TF label, question CountriesPhysicalLocation value TF label
+msgid "French Southern Territories"
+msgstr ""
+
+# question PrimaryCountry value GA label, question CountriesPhysicalLocation value GA label
+msgid "Gabon"
+msgstr ""
+
+# question PrimaryCountry value GM label, question CountriesPhysicalLocation value GM label
+msgid "Gambia"
+msgstr ""
+
+# question PrimaryCountry value GE label, question CountriesPhysicalLocation value GE label
+msgid "Georgia"
+msgstr ""
+
+# question PrimaryCountry value DE label, question CountriesPhysicalLocation value DE label
+msgid "Germany"
+msgstr ""
+
+# question PrimaryCountry value GH label, question CountriesPhysicalLocation value GH label
+msgid "Ghana"
+msgstr ""
+
+# question PrimaryCountry value GI label, question CountriesPhysicalLocation value GI label
+msgid "Gibraltar"
+msgstr ""
+
+# question PrimaryCountry value GR label, question CountriesPhysicalLocation value GR label
+msgid "Greece"
+msgstr ""
+
+# question PrimaryCountry value GL label, question CountriesPhysicalLocation value GL label
+msgid "Greenland"
+msgstr ""
+
+# question PrimaryCountry value GD label, question CountriesPhysicalLocation value GD label
+msgid "Grenada"
+msgstr ""
+
+# question PrimaryCountry value GP label, question CountriesPhysicalLocation value GP label
+msgid "Guadeloupe"
+msgstr ""
+
+# question PrimaryCountry value GU label, question CountriesPhysicalLocation value GU label
+msgid "Guam"
+msgstr ""
+
+# question PrimaryCountry value GT label, question CountriesPhysicalLocation value GT label
+msgid "Guatemala"
+msgstr ""
+
+# question PrimaryCountry value GG label, question CountriesPhysicalLocation value GG label
+msgid "Guernsey"
+msgstr ""
+
+# question PrimaryCountry value GN label, question CountriesPhysicalLocation value GN label
+msgid "Guinea"
+msgstr ""
+
+# question PrimaryCountry value GW label, question CountriesPhysicalLocation value GW label
+msgid "Guinea-Bissau"
+msgstr ""
+
+# question PrimaryCountry value GY label, question CountriesPhysicalLocation value GY label
+msgid "Guyana"
+msgstr ""
+
+# question PrimaryCountry value HT label, question CountriesPhysicalLocation value HT label
+msgid "Haiti"
+msgstr ""
+
+# question PrimaryCountry value HM label, question CountriesPhysicalLocation value HM label
+msgid "Heard Island and McDonald Islands"
+msgstr ""
+
+# question PrimaryCountry value VA label, question CountriesPhysicalLocation value VA label
+msgid "Holy See (Vatican City State)"
+msgstr ""
+
+# question PrimaryCountry value HN label, question CountriesPhysicalLocation value HN label
+msgid "Honduras"
+msgstr ""
+
+# question PrimaryCountry value HK label, question CountriesPhysicalLocation value HK label
+msgid "Hong Kong"
+msgstr ""
+
+# question PrimaryCountry value HU label, question CountriesPhysicalLocation value HU label
+msgid "Hungary"
+msgstr ""
+
+# question PrimaryCountry value IS label, question CountriesPhysicalLocation value IS label
+msgid "Iceland"
+msgstr ""
+
+# question PrimaryCountry value IN label, question CountriesPhysicalLocation value IN label
+msgid "India"
+msgstr ""
+
+# question PrimaryCountry value ID label, question CountriesPhysicalLocation value ID label
+msgid "Indonesia"
+msgstr ""
+
+# question PrimaryCountry value IR label, question CountriesPhysicalLocation value IR label
+msgid "Iran, Islamic Republic of"
+msgstr ""
+
+# question PrimaryCountry value IQ label, question CountriesPhysicalLocation value IQ label
+msgid "Iraq"
+msgstr ""
+
+# question PrimaryCountry value IE label, question CountriesPhysicalLocation value IE label
+msgid "Ireland"
+msgstr ""
+
+# question PrimaryCountry value IM label, question CountriesPhysicalLocation value IM label
+msgid "Isle of Man"
+msgstr ""
+
+# question PrimaryCountry value IL label, question CountriesPhysicalLocation value IL label
+msgid "Israel"
+msgstr ""
+
+# question PrimaryCountry value IT label, question CountriesPhysicalLocation value IT label
+msgid "Italy"
+msgstr ""
+
+# question PrimaryCountry value JM label, question CountriesPhysicalLocation value JM label
+msgid "Jamaica"
+msgstr ""
+
+# question PrimaryCountry value JP label, question CountriesPhysicalLocation value JP label
+msgid "Japan"
+msgstr ""
+
+# question PrimaryCountry value JE label, question CountriesPhysicalLocation value JE label
+msgid "Jersey"
+msgstr ""
+
+# question PrimaryCountry value JO label, question CountriesPhysicalLocation value JO label
+msgid "Jordan"
+msgstr ""
+
+# question PrimaryCountry value KZ label, question CountriesPhysicalLocation value KZ label
+msgid "Kazakhstan"
+msgstr ""
+
+# question PrimaryCountry value KE label, question CountriesPhysicalLocation value KE label
+msgid "Kenya"
+msgstr ""
+
+# question PrimaryCountry value KI label, question CountriesPhysicalLocation value KI label
+msgid "Kiribati"
+msgstr ""
+
+# question PrimaryCountry value KP label, question CountriesPhysicalLocation value KP label
+msgid "Korea, Democratic People's Republic of"
+msgstr ""
+
+# question PrimaryCountry value KR label, question CountriesPhysicalLocation value KR label
+msgid "Korea, Republic of"
+msgstr ""
+
+# question PrimaryCountry value KW label, question CountriesPhysicalLocation value KW label
+msgid "Kuwait"
+msgstr ""
+
+# question PrimaryCountry value KG label, question CountriesPhysicalLocation value KG label
+msgid "Kyrgyzstan"
+msgstr ""
+
+# question PrimaryCountry value LA label, question CountriesPhysicalLocation value LA label
+msgid "Lao People's Democratic Republic"
+msgstr ""
+
+# question PrimaryCountry value LV label, question CountriesPhysicalLocation value LV label
+msgid "Latvia"
+msgstr ""
+
+# question PrimaryCountry value LB label, question CountriesPhysicalLocation value LB label
+msgid "Lebanon"
+msgstr ""
+
+# question PrimaryCountry value LS label, question CountriesPhysicalLocation value LS label
+msgid "Lesotho"
+msgstr ""
+
+# question PrimaryCountry value LR label, question CountriesPhysicalLocation value LR label
+msgid "Liberia"
+msgstr ""
+
+# question PrimaryCountry value LY label, question CountriesPhysicalLocation value LY label
+msgid "Libya"
+msgstr ""
+
+# question PrimaryCountry value LI label, question CountriesPhysicalLocation value LI label
+msgid "Liechtenstein"
+msgstr ""
+
+# question PrimaryCountry value LT label, question CountriesPhysicalLocation value LT label
+msgid "Lithuania"
+msgstr ""
+
+# question PrimaryCountry value LU label, question CountriesPhysicalLocation value LU label
+msgid "Luxembourg"
+msgstr ""
+
+# question PrimaryCountry value MO label, question CountriesPhysicalLocation value MO label
+msgid "Macao"
+msgstr ""
+
+# question PrimaryCountry value MK label, question CountriesPhysicalLocation value MK label
+msgid "Macedonia, the former Yugoslav Republic of"
+msgstr ""
+
+# question PrimaryCountry value MG label, question CountriesPhysicalLocation value MG label
+msgid "Madagascar"
+msgstr ""
+
+# question PrimaryCountry value MW label, question CountriesPhysicalLocation value MW label
+msgid "Malawi"
+msgstr ""
+
+# question PrimaryCountry value MY label, question CountriesPhysicalLocation value MY label
+msgid "Malaysia"
+msgstr ""
+
+# question PrimaryCountry value MV label, question CountriesPhysicalLocation value MV label
+msgid "Maldives"
+msgstr ""
+
+# question PrimaryCountry value ML label, question CountriesPhysicalLocation value ML label
+msgid "Mali"
+msgstr ""
+
+# question PrimaryCountry value MT label, question CountriesPhysicalLocation value MT label
+msgid "Malta"
+msgstr ""
+
+# question PrimaryCountry value MH label, question CountriesPhysicalLocation value MH label
+msgid "Marshall Islands"
+msgstr ""
+
+# question PrimaryCountry value MQ label, question CountriesPhysicalLocation value MQ label
+msgid "Martinique"
+msgstr ""
+
+# question PrimaryCountry value MR label, question CountriesPhysicalLocation value MR label
+msgid "Mauritania"
+msgstr ""
+
+# question PrimaryCountry value MU label, question CountriesPhysicalLocation value MU label
+msgid "Mauritius"
+msgstr ""
+
+# question PrimaryCountry value YT label, question CountriesPhysicalLocation value YT label
+msgid "Mayotte"
+msgstr ""
+
+# question PrimaryCountry value MX label, question CountriesPhysicalLocation value MX label
+msgid "Mexico"
+msgstr ""
+
+# question PrimaryCountry value FM label, question CountriesPhysicalLocation value FM label
+msgid "Micronesia, Federated States of"
+msgstr ""
+
+# question PrimaryCountry value MD label, question CountriesPhysicalLocation value MD label
+msgid "Moldova, Republic of"
+msgstr ""
+
+# question PrimaryCountry value MC label, question CountriesPhysicalLocation value MC label
+msgid "Monaco"
+msgstr ""
+
+# question PrimaryCountry value MN label, question CountriesPhysicalLocation value MN label
+msgid "Mongolia"
+msgstr ""
+
+# question PrimaryCountry value ME label, question CountriesPhysicalLocation value ME label
+msgid "Montenegro"
+msgstr ""
+
+# question PrimaryCountry value MS label, question CountriesPhysicalLocation value MS label
+msgid "Montserrat"
+msgstr ""
+
+# question PrimaryCountry value MA label, question CountriesPhysicalLocation value MA label
+msgid "Morocco"
+msgstr ""
+
+# question PrimaryCountry value MZ label, question CountriesPhysicalLocation value MZ label
+msgid "Mozambique"
+msgstr ""
+
+# question PrimaryCountry value MM label, question CountriesPhysicalLocation value MM label
+msgid "Myanmar"
+msgstr ""
+
+# question PrimaryCountry value NA label, question CountriesPhysicalLocation value NA label
+msgid "Namibia"
+msgstr ""
+
+# question PrimaryCountry value NR label, question CountriesPhysicalLocation value NR label
+msgid "Nauru"
+msgstr ""
+
+# question PrimaryCountry value NP label, question CountriesPhysicalLocation value NP label
+msgid "Nepal"
+msgstr ""
+
+# question PrimaryCountry value NL label, question CountriesPhysicalLocation value NL label
+msgid "Netherlands"
+msgstr ""
+
+# question PrimaryCountry value NC label, question CountriesPhysicalLocation value NC label
+msgid "New Caledonia"
+msgstr ""
+
+# question PrimaryCountry value NZ label, question CountriesPhysicalLocation value NZ label
+msgid "New Zealand"
+msgstr ""
+
+# question PrimaryCountry value NI label, question CountriesPhysicalLocation value NI label
+msgid "Nicaragua"
+msgstr ""
+
+# question PrimaryCountry value NE label, question CountriesPhysicalLocation value NE label
+msgid "Niger"
+msgstr ""
+
+# question PrimaryCountry value NG label, question CountriesPhysicalLocation value NG label
+msgid "Nigeria"
+msgstr ""
+
+# question PrimaryCountry value NU label, question CountriesPhysicalLocation value NU label
+msgid "Niue"
+msgstr ""
+
+# question PrimaryCountry value NF label, question CountriesPhysicalLocation value NF label
+msgid "Norfolk Island"
+msgstr ""
+
+# question PrimaryCountry value MP label, question CountriesPhysicalLocation value MP label
+msgid "Northern Mariana Islands"
+msgstr ""
+
+# question PrimaryCountry value NO label, question CountriesPhysicalLocation value NO label
+msgid "Norway"
+msgstr ""
+
+# question PrimaryCountry value OM label, question CountriesPhysicalLocation value OM label
+msgid "Oman"
+msgstr ""
+
+# question PrimaryCountry value PK label, question CountriesPhysicalLocation value PK label
+msgid "Pakistan"
+msgstr ""
+
+# question PrimaryCountry value PW label, question CountriesPhysicalLocation value PW label
+msgid "Palau"
+msgstr ""
+
+# question PrimaryCountry value PS label, question CountriesPhysicalLocation value PS label
+msgid "Palestine"
+msgstr ""
+
+# question PrimaryCountry value PA label, question CountriesPhysicalLocation value PA label
+msgid "Panama"
+msgstr ""
+
+# question PrimaryCountry value PG label, question CountriesPhysicalLocation value PG label
+msgid "Papua New Guinea"
+msgstr ""
+
+# question PrimaryCountry value PY label, question CountriesPhysicalLocation value PY label
+msgid "Paraguay"
+msgstr ""
+
+# question PrimaryCountry value PE label, question CountriesPhysicalLocation value PE label
+msgid "Peru"
+msgstr ""
+
+# question PrimaryCountry value PH label, question CountriesPhysicalLocation value PH label
+msgid "Philippines"
+msgstr ""
+
+# question PrimaryCountry value PN label, question CountriesPhysicalLocation value PN label
+msgid "Pitcairn"
+msgstr ""
+
+# question PrimaryCountry value PL label, question CountriesPhysicalLocation value PL label
+msgid "Poland"
+msgstr ""
+
+# question PrimaryCountry value PT label, question CountriesPhysicalLocation value PT label
+msgid "Portugal"
+msgstr ""
+
+# question PrimaryCountry value PR label, question CountriesPhysicalLocation value PR label
+msgid "Puerto Rico"
+msgstr ""
+
+# question PrimaryCountry value QA label, question CountriesPhysicalLocation value QA label
+msgid "Qatar"
+msgstr ""
+
+# question PrimaryCountry value RE label, question CountriesPhysicalLocation value RE label
+msgid "Réunion"
+msgstr ""
+
+# question PrimaryCountry value RO label, question CountriesPhysicalLocation value RO label
+msgid "Romania"
+msgstr ""
+
+# question PrimaryCountry value RU label, question CountriesPhysicalLocation value RU label
+msgid "Russian Federation"
+msgstr ""
+
+# question PrimaryCountry value RW label, question CountriesPhysicalLocation value RW label
+msgid "Rwanda"
+msgstr ""
+
+# question PrimaryCountry value BL label, question CountriesPhysicalLocation value BL label
+msgid "Saint Barthélemy"
+msgstr ""
+
+# question PrimaryCountry value SH label, question CountriesPhysicalLocation value SH label
+msgid "Saint Helena, Ascension and Tristan da Cunha"
+msgstr ""
+
+# question PrimaryCountry value KN label, question CountriesPhysicalLocation value KN label
+msgid "Saint Kitts and Nevis"
+msgstr ""
+
+# question PrimaryCountry value LC label, question CountriesPhysicalLocation value LC label
+msgid "Saint Lucia"
+msgstr ""
+
+# question PrimaryCountry value MF label, question CountriesPhysicalLocation value MF label
+msgid "Saint Martin (French part)"
+msgstr ""
+
+# question PrimaryCountry value PM label, question CountriesPhysicalLocation value PM label
+msgid "Saint Pierre and Miquelon"
+msgstr ""
+
+# question PrimaryCountry value VC label, question CountriesPhysicalLocation value VC label
+msgid "Saint Vincent and the Grenadines"
+msgstr ""
+
+# question PrimaryCountry value WS label, question CountriesPhysicalLocation value WS label
+msgid "Samoa"
+msgstr ""
+
+# question PrimaryCountry value SM label, question CountriesPhysicalLocation value SM label
+msgid "San Marino"
+msgstr ""
+
+# question PrimaryCountry value ST label, question CountriesPhysicalLocation value ST label
+msgid "Sao Tome and Principe"
+msgstr ""
+
+# question PrimaryCountry value SA label, question CountriesPhysicalLocation value SA label
+msgid "Saudi Arabia"
+msgstr ""
+
+# question PrimaryCountry value SN label, question CountriesPhysicalLocation value SN label
+msgid "Senegal"
+msgstr ""
+
+# question PrimaryCountry value RS label, question CountriesPhysicalLocation value RS label
+msgid "Serbia"
+msgstr ""
+
+# question PrimaryCountry value SC label, question CountriesPhysicalLocation value SC label
+msgid "Seychelles"
+msgstr ""
+
+# question PrimaryCountry value SL label, question CountriesPhysicalLocation value SL label
+msgid "Sierra Leone"
+msgstr ""
+
+# question PrimaryCountry value SG label, question CountriesPhysicalLocation value SG label
+msgid "Singapore"
+msgstr ""
+
+# question PrimaryCountry value SX label, question CountriesPhysicalLocation value SX label
+msgid "Sint Maarten (Dutch part)"
+msgstr ""
+
+# question PrimaryCountry value SK label, question CountriesPhysicalLocation value SK label
+msgid "Slovakia"
+msgstr ""
+
+# question PrimaryCountry value SI label, question CountriesPhysicalLocation value SI label
+msgid "Slovenia"
+msgstr ""
+
+# question PrimaryCountry value SB label, question CountriesPhysicalLocation value SB label
+msgid "Solomon Islands"
+msgstr ""
+
+# question PrimaryCountry value SO label, question CountriesPhysicalLocation value SO label
+msgid "Somalia"
+msgstr ""
+
+# question PrimaryCountry value ZA label, question CountriesPhysicalLocation value ZA label
+msgid "South Africa"
+msgstr ""
+
+# question PrimaryCountry value GS label, question CountriesPhysicalLocation value GS label
+msgid "South Georgia and the South Sandwich Islands"
+msgstr ""
+
+# question PrimaryCountry value SS label, question CountriesPhysicalLocation value SS label
+msgid "South Sudan"
+msgstr ""
+
+# question PrimaryCountry value ES label, question CountriesPhysicalLocation value ES label
+msgid "Spain"
+msgstr ""
+
+# question PrimaryCountry value LK label, question CountriesPhysicalLocation value LK label
+msgid "Sri Lanka"
+msgstr ""
+
+# question PrimaryCountry value SD label, question CountriesPhysicalLocation value SD label
+msgid "Sudan"
+msgstr ""
+
+# question PrimaryCountry value SR label, question CountriesPhysicalLocation value SR label
+msgid "Suriname"
+msgstr ""
+
+# question PrimaryCountry value SJ label, question CountriesPhysicalLocation value SJ label
+msgid "Svalbard and Jan Mayen"
+msgstr ""
+
+# question PrimaryCountry value SZ label, question CountriesPhysicalLocation value SZ label
+msgid "Swaziland"
+msgstr ""
+
+# question PrimaryCountry value SE label, question CountriesPhysicalLocation value SE label
+msgid "Sweden"
+msgstr ""
+
+# question PrimaryCountry value CH label, question CountriesPhysicalLocation value CH label
+msgid "Switzerland"
+msgstr ""
+
+# question PrimaryCountry value SY label, question CountriesPhysicalLocation value SY label
+msgid "Syrian Arab Republic"
+msgstr ""
+
+# question PrimaryCountry value TW label, question CountriesPhysicalLocation value TW label
+msgid "Taiwan"
+msgstr ""
+
+# question PrimaryCountry value TJ label, question CountriesPhysicalLocation value TJ label
+msgid "Tajikistan"
+msgstr ""
+
+# question PrimaryCountry value TZ label, question CountriesPhysicalLocation value TZ label
+msgid "Tanzania, United Republic of"
+msgstr ""
+
+# question PrimaryCountry value TH label, question CountriesPhysicalLocation value TH label
+msgid "Thailand"
+msgstr ""
+
+# question PrimaryCountry value TL label, question CountriesPhysicalLocation value TL label
+msgid "Timor-Leste"
+msgstr ""
+
+# question PrimaryCountry value TG label, question CountriesPhysicalLocation value TG label
+msgid "Togo"
+msgstr ""
+
+# question PrimaryCountry value TK label, question CountriesPhysicalLocation value TK label
+msgid "Tokelau"
+msgstr ""
+
+# question PrimaryCountry value TO label, question CountriesPhysicalLocation value TO label
+msgid "Tonga"
+msgstr ""
+
+# question PrimaryCountry value TT label, question CountriesPhysicalLocation value TT label
+msgid "Trinidad and Tobago"
+msgstr ""
+
+# question PrimaryCountry value TN label, question CountriesPhysicalLocation value TN label
+msgid "Tunisia"
+msgstr ""
+
+# question PrimaryCountry value TR label, question CountriesPhysicalLocation value TR label
+msgid "Turkey"
+msgstr ""
+
+# question PrimaryCountry value TM label, question CountriesPhysicalLocation value TM label
+msgid "Turkmenistan"
+msgstr ""
+
+# question PrimaryCountry value TC label, question CountriesPhysicalLocation value TC label
+msgid "Turks and Caicos Islands"
+msgstr ""
+
+# question PrimaryCountry value TV label, question CountriesPhysicalLocation value TV label
+msgid "Tuvalu"
+msgstr ""
+
+# question PrimaryCountry value UG label, question CountriesPhysicalLocation value UG label
+msgid "Uganda"
+msgstr ""
+
+# question PrimaryCountry value UA label, question CountriesPhysicalLocation value UA label
+msgid "Ukraine"
+msgstr ""
+
+# question PrimaryCountry value AE label, question CountriesPhysicalLocation value AE label
+msgid "United Arab Emirates"
+msgstr ""
+
+# question PrimaryCountry value GB label, question CountriesPhysicalLocation value GB label
+msgid "United Kingdom"
+msgstr ""
+
+# question PrimaryCountry value US label, question CountriesPhysicalLocation value US label
+msgid "United States"
+msgstr ""
+
+# question PrimaryCountry value UM label, question CountriesPhysicalLocation value UM label
+msgid "United States Minor Outlying Islands"
+msgstr ""
+
+# question PrimaryCountry value UY label, question CountriesPhysicalLocation value UY label
+msgid "Uruguay"
+msgstr ""
+
+# question PrimaryCountry value UZ label, question CountriesPhysicalLocation value UZ label
+msgid "Uzbekistan"
+msgstr ""
+
+# question PrimaryCountry value VU label, question CountriesPhysicalLocation value VU label
+msgid "Vanuatu"
+msgstr ""
+
+# question PrimaryCountry value VE label, question CountriesPhysicalLocation value VE label
+msgid "Venezuela, Bolivarian Republic of"
+msgstr ""
+
+# question PrimaryCountry value VN label, question CountriesPhysicalLocation value VN label
+msgid "Viet Nam"
+msgstr ""
+
+# question PrimaryCountry value VG label, question CountriesPhysicalLocation value VG label
+msgid "Virgin Islands, British"
+msgstr ""
+
+# question PrimaryCountry value VI label, question CountriesPhysicalLocation value VI label
+msgid "Virgin Islands, U.S."
+msgstr ""
+
+# question PrimaryCountry value WF label, question CountriesPhysicalLocation value WF label
+msgid "Wallis and Futuna"
+msgstr ""
+
+# question PrimaryCountry value EH label, question CountriesPhysicalLocation value EH label
+msgid "Western Sahara"
+msgstr ""
+
+# question PrimaryCountry value YE label, question CountriesPhysicalLocation value YE label
+msgid "Yemen"
+msgstr ""
+
+# question PrimaryCountry value ZM label, question CountriesPhysicalLocation value ZM label
+msgid "Zambia"
+msgstr ""
+
+# question PrimaryCountry value ZW label, question CountriesPhysicalLocation value ZW label
+msgid "Zimbabwe"
+msgstr ""
+
+# step your-organization - question PrimaryState label
+msgid "State / Province / Region"
+msgstr "Estado / Provincia /Region"
+
+# step your-organization - question PrimaryCity label
+msgid "City*"
+msgstr "Ciudad*"
+
+# step your-organization - question OrgSize label
+msgid "Your Organization's Size*"
+msgstr "El Tamanio de tu Organizacion*"
+
+# question OrgSize value 1 to 9 employees label
+msgid "1 to 9 employees"
+msgstr ""
+
+# question OrgSize value 10 to 99 employees label
+msgid "10 to 99 employees"
+msgstr ""
+
+# question OrgSize value 100 to 999 employees label
+msgid "100 to 999 employees"
+msgstr ""
+
+# question OrgSize value 1,000 to 9,999 employees label
+msgid "1,000 to 9,999 employees"
+msgstr ""
+
+# question OrgSize value 10,000 to 99,999 employees label
+msgid "10,000 to 99,999 employees"
+msgstr ""
+
+# question OrgSize value 100,000 employees or more label
+msgid "100,000 employees or more"
+msgstr ""
+
+# question OrgSize value Don’t know / not sure label
+msgid "Don’t know / not sure"
+msgstr ""
+
+# survey template 6 - survey step your-thoughts friendly name
+msgid "Your Thoughts"
+msgstr ""
+
+# step your-thoughts - question BusinessDrivers label
+msgid "What are your top business drivers for using OpenStack?"
+msgstr ""
+
+# step your-thoughts - question OtherBusinessDrivers label, step your-openstack-deployments - question WorkloadsCategoriesOther label, step deployment-decisions - question OtherCustomPackagesReason label, step deployment-decisions - question OtherDeploymentTools label, step deployment-decisions - question OtherContainerFormat label, step deployment-decisions - question OtherPaasTools label, step deployment-decisions - question OtherHypervisor label, step deployment-decisions - question OtherNetworkDriver label, step deployment-decisions - question OtherIndentityDriver label, step deployment-decisions - question OtherBlockStorageDriver label, step deployment-decisions - question OtherOperatingSystems label, step deployment-decisions - question OtherSupportedFeatures label
+msgid "Please specify"
+msgstr ""
+
+# step your-thoughts - question NetPromoter label
+msgid "How likely are you to recommend OpenStack to a friend or colleague? (0=Least Likely, 10=Most Likely)*"
+msgstr ""
+
+# question NetPromoter empty string
+msgid "-- Select One  (0=Least Likely, 10=Most Likely) --"
+msgstr ""
+
+# question NetPromoter value 0 label
+msgid "0"
+msgstr ""
+
+# question NetPromoter value 1 label
+msgid "1"
+msgstr ""
+
+# question NetPromoter value 2 label
+msgid "2"
+msgstr ""
+
+# question NetPromoter value 3 label
+msgid "3"
+msgstr ""
+
+# question NetPromoter value 4 label
+msgid "4"
+msgstr ""
+
+# question NetPromoter value 5 label
+msgid "5"
+msgstr ""
+
+# question NetPromoter value 6 label
+msgid "6"
+msgstr ""
+
+# question NetPromoter value 7 label
+msgid "7"
+msgstr ""
+
+# question NetPromoter value 8 label
+msgid "8"
+msgstr ""
+
+# question NetPromoter value 9 label
+msgid "9"
+msgstr ""
+
+# question NetPromoter value 10 label
+msgid "10"
+msgstr ""
+
+# step your-thoughts - question NetPromoterReason label
+msgid "What is your primary reason for this rating?"
+msgstr ""
+
+# question SectionBreak literal content
+msgid "<hr><p>We would love to hear how OpenStack and the OpenStack Foundation can better meet your needs. These free-form questions are optional, but will provide valuable insights. Your responses are anonymous, and each of these text fields are independent, so we cannot \"see previous answer.\" We would really appreciate a separate answer to each question.</p>"
+msgstr ""
+
+# step your-thoughts - question WhatDoYouLikeMost label
+msgid "What do you like most about OpenStack, besides “free” and “open”?"
+msgstr ""
+
+# step your-thoughts - question FurtherEnhancement label
+msgid "Which areas of OpenStack require further enhancement?"
+msgstr ""
+
+# step your-thoughts - question EmergingTechnologies label
+msgid "Which new/emerging technologies are you interested in using or seeing integrated with OpenStack?<br/><font size=\"-2\"><em>Select all that apply</em></font>"
+msgstr ""
+
+# step your-thoughts - question EmergingTechnologiesOther label
+msgid "Please specify:"
+msgstr ""
+
+# step your-thoughts - question DocsFeedback label
+msgid "How often do you refer to documentation from docs.openstack.org?"
+msgstr ""
+
+# question DocsFeedback value Daily label
+msgid "Daily"
+msgstr ""
+
+# question DocsFeedback value Weekly label
+msgid "Weekly"
+msgstr ""
+
+# question DocsFeedback value Monthly label
+msgid "Monthly"
+msgstr ""
+
+# question DocsFeedback value Rarely label
+msgid "Rarely"
+msgstr ""
+
+# question DocsFeedback value Never label
+msgid "Never"
+msgstr ""
+
+# survey template 6 - survey step your-openstack-deployments content
+msgid "<p>A deployment profile tracks information about an individual OpenStack deployment.</p><ul><li>An organization may have multiple deployment profiles for each OpenStack deployment they have.</li><li>Once you have created a deployment profile, you can return to the site to update the data in it.</li><li>You will be the default administrator for any deployment profiles you create.</li></ul><p>As always, the information you provide is confidential and will only be presented in aggregate unless you consent to making it public.</p>"
+msgstr ""
+
+# survey template 6 - survey step your-openstack-deployments friendly name, survey template 7 - survey step your-openstack-deployments friendly name
+msgid "Your OpenStack Deployments"
+msgstr ""
+
+# survey step your-openstack-deployments AddEntityText
+msgid "Add"
+msgstr ""
+
+# survey step your-openstack-deployments DeleteEntityText
+msgid "Delete"
+msgstr ""
+
+# survey step your-openstack-deployments EditEntityText
+msgid "Edit"
+msgstr ""
+
+# survey template 6 - survey step thank-you friendly name
+msgid "Thank You"
+msgstr ""
+
+# survey template 7 title
+msgid "Deployment"
+msgstr ""
+
+# step your-openstack-deployments - question Label label
+msgid "Please create a friendly label, like “Production OpenStack Deployment.” This name is for your deployment in our survey tool. If several people in your organization work on this deployment, please work with your team members to enter your deployment data to avoid duplication.*"
+msgstr ""
+
+# step your-openstack-deployments - question IsPublic label
+msgid "Each deployment profile can be marked public or confidential.*"
+msgstr ""
+
+# question IsPublic value 1 label
+msgid "<strong>Public:</strong> The information I provide on this page only may be shared on openstack.org."
+msgstr ""
+
+# question IsPublic value 0 label
+msgid "<strong>Confidential:</strong> All information provided, including my organization name, should be kept confidential to the OpenStack Foundation."
+msgstr ""
+
+# step your-openstack-deployments - question DeploymentStage label
+msgid "In what stage is your OpenStack deployment? (make a new deployment profile for each type of deployment)*"
+msgstr ""
+
+# question DeploymentStage value Proof of Concept label
+msgid "Proof of Concept"
+msgstr ""
+
+# question DeploymentStage value Under development/in testing label
+msgid "Under development / In testing"
+msgstr ""
+
+# question DeploymentStage value Production or Full Operational Use label
+msgid "Production / Full Operational Use"
+msgstr ""
+
+# step your-openstack-deployments - question DeploymentAge label
+msgid "When was this deployment created?"
+msgstr ""
+
+# question DeploymentAge value 2017 label
+msgid "2017"
+msgstr ""
+
+# question DeploymentAge value 2016 label
+msgid "2016"
+msgstr ""
+
+# question DeploymentAge value 2015 label
+msgid "2015"
+msgstr ""
+
+# question DeploymentAge value 2014 label
+msgid "2014"
+msgstr ""
+
+# question DeploymentAge value 2013 label
+msgid "2013"
+msgstr ""
+
+# question DeploymentAge value 2012 label
+msgid "2012"
+msgstr ""
+
+# question DeploymentAge value 2011 label
+msgid "2011"
+msgstr ""
+
+# question DeploymentAge value 2010 label
+msgid "2010"
+msgstr ""
+
+# question DeploymentAge value Older label
+msgid "Older"
+msgstr ""
+
+# question DeploymentAge value I don't know. label, question ITPercentageonOpenStack value I don't know. label
+msgid "I don't know."
+msgstr ""
+
+# step your-openstack-deployments - question CountriesPhysicalLocation label
+msgid "In which country / countries is this OpenStack deployment physically located?*<br/><font size=\"-2\"><em>You can select multiple country names.</em></font>"
+msgstr ""
+
+# question CountriesPhysicalLocation value Prefer not to say label
+msgid "Prefer not to say"
+msgstr ""
+
+# step your-openstack-deployments - question DeploymentType label
+msgid "Deployment Type"
+msgstr ""
+
+# question DeploymentType value Community cloud label
+msgid "Community Cloud"
+msgstr ""
+
+# question DeploymentType value On-Premises Private Cloud label
+msgid "On-Premises Private Cloud"
+msgstr ""
+
+# question DeploymentType value Off-Premises Private Cloud label
+msgid "Off-Premises Private Cloud"
+msgstr ""
+
+# question DeploymentType value Public Cloud label
+msgid "Public Cloud"
+msgstr ""
+
+# step your-openstack-deployments - question CurrentReleases label
+msgid "Which releases does this deployment currently use?*<BR><font size=\"-2\"><em>Select All That Apply</em></font>"
+msgstr ""
+
+# step your-openstack-deployments - question WorkloadsCategories label
+msgid "Which workloads are you currently using?<BR><font size=\"-2\"><em>Select All That Apply</em></font>"
+msgstr ""
+
+# step your-openstack-deployments - question ProjectsUsed label
+msgid "Which projects does this deployment currently use, or are you interested in using in the future?"
+msgstr ""
+
+# question ProjectsUsed col Production label
+msgid "Production"
+msgstr ""
+
+# question ProjectsUsed col Testing label, question ProjectsUsedPoC col Testing label
+msgid "Testing"
+msgstr ""
+
+# question ProjectsUsed col Interested label, question ProjectsUsedPoC col Interested label
+msgid "Interested"
+msgstr ""
+
+# question ProjectsUsed row Nova (Compute) label, question ProjectsUsedPoC row Nova (Compute) label
+msgid "Nova (Compute)"
+msgstr ""
+
+# question ProjectsUsed row Ceilometer (Metering & Monitoring) label, question ProjectsUsedPoC row Ceilometer (Metering & Monitoring) label
+msgid "Ceilometer (Metering & Monitoring)"
+msgstr ""
+
+# question ProjectsUsed row Cinder (Block Storage) label, question ProjectsUsedPoC row Cinder (Block Storage) label
+msgid "Cinder (Block Storage)"
+msgstr ""
+
+# question ProjectsUsed row Designate (DNS Service) label, question ProjectsUsedPoC row Designate (DNS Service) label
+msgid "Designate (DNS Service)"
+msgstr ""
+
+# question ProjectsUsed row Glance (Image Service) label, question ProjectsUsedPoC row Glance (Image Service) label
+msgid "Glance (Image Service)"
+msgstr ""
+
+# question ProjectsUsed row Heat (Orchestration) label, question ProjectsUsedPoC row Heat (Orchestration) label
+msgid "Heat (Orchestration)"
+msgstr ""
+
+# question ProjectsUsed row Horizon (Dashboard) label, question ProjectsUsedPoC row Horizon (Dashboard) label
+msgid "Horizon (Dashboard)"
+msgstr ""
+
+# question ProjectsUsed row Ironic (Bare Metal) label, question ProjectsUsedPoC row Ironic (Bare Metal) label
+msgid "Ironic (Bare Metal)"
+msgstr ""
+
+# question ProjectsUsed row Keystone (Identity Service) label, question ProjectsUsedPoC row Keystone (Identity Service) label
+msgid "Keystone (Identity Service)"
+msgstr ""
+
+# question ProjectsUsed row Neutron (Networking) label, question ProjectsUsedPoC row Neutron (Networking) label
+msgid "Neutron (Networking)"
+msgstr ""
+
+# question ProjectsUsed row Sahara (Data Processing) label, question ProjectsUsedPoC row Sahara (Data Processing) label
+msgid "Sahara (Data Processing)"
+msgstr ""
+
+# question ProjectsUsed row Swift (Object Storage) label, question ProjectsUsedPoC row Swift (Object Storage) label
+msgid "Swift (Object Storage)"
+msgstr ""
+
+# question ProjectsUsed row Trove (Database Service) label, question ProjectsUsedPoC row Trove (Database Service) label
+msgid "Trove (Database Service)"
+msgstr ""
+
+# question ProjectsUsed row Barbican (Key Management) label, question ProjectsUsedPoC row Barbican (Key Management) label
+msgid "Barbican (Key Management)"
+msgstr ""
+
+# question ProjectsUsed row Congress (Governance Service) label, question ProjectsUsedPoC row Congress (Governance Service) label
+msgid "Congress (Governance Service)"
+msgstr ""
+
+# question ProjectsUsed row Manila (Shared File Systems) label, question ProjectsUsedPoC row Manila (Shared File Systems) label
+msgid "Manila (Shared File Systems)"
+msgstr ""
+
+# question ProjectsUsed row Magnum(Containers Service) label, question ProjectsUsedPoC row Magnum(Containers Service) label
+msgid "Magnum(Containers Service)"
+msgstr ""
+
+# question ProjectsUsed row Murano (Application Catalog) label, question ProjectsUsedPoC row Murano (Application Catalog) label
+msgid "Murano (Application Catalog)"
+msgstr ""
+
+# question ProjectsUsed row Rally (Benchmark Service) label, question ProjectsUsedPoC row Rally (Benchmark Service) label
+msgid "Rally (Benchmark Service)"
+msgstr ""
+
+# question ProjectsUsed row Cue (Message Broker Service) label, question ProjectsUsedPoC row Cue (Message Broker Service) label
+msgid "Cue (Message Broker Service)"
+msgstr ""
+
+# question ProjectsUsed row Kolla (Containerized Deployment) label, question ProjectsUsedPoC row Kolla (Containerized Deployment) label
+msgid "Kolla (Containerized Deployment)"
+msgstr ""
+
+# question ProjectsUsed row Magnetodb (Key-Value Store as a Service) label, question ProjectsUsedPoC row Magnetodb (Key-Value Store as a Service) label
+msgid "Magnetodb (Key-Value Store as a Service)"
+msgstr ""
+
+# question ProjectsUsed row Mistral (Workflow Service) label, question ProjectsUsedPoC row Mistral (Workflow Service) label
+msgid "Mistral (Workflow Service)"
+msgstr ""
+
+# question ProjectsUsed row Solum (Software Dev Lifecycle Mgmt) label, question ProjectsUsedPoC row Solum (Software Dev Lifecycle Mgmt) label
+msgid "Solum (Software Dev Lifecycle Mgmt)"
+msgstr ""
+
+# question ProjectsUsed row TripleO (Deployment) label, question ProjectsUsedPoC row TripleO (Deployment) label
+msgid "TripleO (Deployment)"
+msgstr ""
+
+# question ProjectsUsed row Zaqar (Message Service) label, question ProjectsUsedPoC row Zaqar (Message Service) label
+msgid "Zaqar (Message Service)"
+msgstr ""
+
+# step your-openstack-deployments - question ProjectsUsedPoC label
+msgid "Which projects does this deployment currently use, or are you interested in using in the future? (PoC/Testing)"
+msgstr ""
+
+# question RefStack break literal content
+msgid "<p> </p><hr>"
+msgstr ""
+
+# step your-openstack-deployments - question RefStackTest label
+msgid "Are you interested in helping our interoperability efforts by using RefStack to test your cloud capabilities?"
+msgstr ""
+
+# question RefStackTest value Yes label
+msgid "Yes"
+msgstr ""
+
+# question RefStackTest value No, but I am interested in helping label
+msgid "No, but I am interested in helping"
+msgstr ""
+
+# question RefStackTest value No, and not interested in helping label
+msgid "No, and not interested in helping"
+msgstr ""
+
+# survey template 7 - survey step deployment-decisions friendly name
+msgid "Deployment Decisions"
+msgstr ""
+
+# question Break8 literal content
+msgid "<h3>What’s the size of this cloud?</h3><p>All of these questions are optional and confidential. We appreciate you providing your best estimate of cloud size so that we may reflect this back to the community in aggregate.</p><hr>"
+msgstr ""
+
+# step deployment-decisions - question NumCloudUsers label
+msgid "Number of users"
+msgstr ""
+
+# question NumCloudUsers value 1 to 9 users label
+msgid "1 to 9 users"
+msgstr ""
+
+# question NumCloudUsers value 10 to 99 users label
+msgid "10 to 99 users"
+msgstr ""
+
+# question NumCloudUsers value 100 to 999 users label
+msgid "100 to 999 users"
+msgstr ""
+
+# question NumCloudUsers value 1,000 to 9,999 users label
+msgid "1,000 to 9,999 users"
+msgstr ""
+
+# question NumCloudUsers value 10,000 to 99,999 users label
+msgid "10,000 to 99,999 users"
+msgstr ""
+
+# question NumCloudUsers value 100,000 to 999,999 users label
+msgid "100,000 to 999,999 users"
+msgstr ""
+
+# question NumCloudUsers value 1,000,000 to 9,999,999 users label
+msgid "1,000,000 to 9,999,999 users"
+msgstr ""
+
+# question NumCloudUsers value 10,000,000 to 999,999,999 users label
+msgid "10,000,000 to 999,999,999 users"
+msgstr ""
+
+# question NumCloudUsers value 100,000,000 or more users label
+msgid "100,000,000 or more users"
+msgstr ""
+
+# step deployment-decisions - question ComputeNodes label
+msgid "Physical compute nodes"
+msgstr ""
+
+# question ComputeNodes value 1 to 9 nodes label
+msgid "1 to 9 nodes"
+msgstr ""
+
+# question ComputeNodes value 10 to 99 nodes label
+msgid "10 to 99 nodes"
+msgstr ""
+
+# question ComputeNodes value 100 to 999 nodes label
+msgid "100 to 999 nodes"
+msgstr ""
+
+# question ComputeNodes value 1,000 to 9,999 nodes label
+msgid "1,000 to 9,999 nodes"
+msgstr ""
+
+# question ComputeNodes value 10,000 to 99,999 nodes label
+msgid "10,000 to 99,999 nodes"
+msgstr ""
+
+# question ComputeNodes value 100,000 to 999,999 nodes label
+msgid "100,000 to 999,999 nodes"
+msgstr ""
+
+# question ComputeNodes value 1 million or more nodes label
+msgid "1 million or more nodes"
+msgstr ""
+
+# step deployment-decisions - question ComputeCores label
+msgid "Processor cores"
+msgstr ""
+
+# question ComputeCores value 1 to 9 cores label
+msgid "1 to 9 cores"
+msgstr ""
+
+# question ComputeCores value 10 to 99 cores label
+msgid "10 to 99 cores"
+msgstr ""
+
+# question ComputeCores value 100 to 999 cores label
+msgid "100 to 999 cores"
+msgstr ""
+
+# question ComputeCores value 1,000 to 9,999 cores label
+msgid "1,000 to 9,999 cores"
+msgstr ""
+
+# question ComputeCores value 10,000 to 99,999 cores label
+msgid "10,000 to 99,999 cores"
+msgstr ""
+
+# question ComputeCores value 100,000 to 999,999 cores label
+msgid "100,000 to 999,999 cores"
+msgstr ""
+
+# question ComputeCores value 1 million or more cores label
+msgid "1 million or more cores"
+msgstr ""
+
+# step deployment-decisions - question ComputeInstances label
+msgid "Number of instances"
+msgstr ""
+
+# question ComputeInstances value 1 to 9 instances label
+msgid "1 to 9 instances"
+msgstr ""
+
+# question ComputeInstances value 10 to 99 instances label
+msgid "10 to 99 instances"
+msgstr ""
+
+# question ComputeInstances value 100 to 999 instances label
+msgid "100 to 999 instances"
+msgstr ""
+
+# question ComputeInstances value 1,000 to 9,999 instances label
+msgid "1,000 to 9,999 instances"
+msgstr ""
+
+# question ComputeInstances value 10,000 to 99,999 instances label
+msgid "10,000 to 99,999 instances"
+msgstr ""
+
+# question ComputeInstances value 100,000 to 999,999 instances label
+msgid "100,000 to 999,999 instances"
+msgstr ""
+
+# question ComputeInstances value 1 million or more instances label
+msgid "1 million or more instances"
+msgstr ""
+
+# step deployment-decisions - question NetworkNumIPs label
+msgid "Total number of usable IPs"
+msgstr ""
+
+# question NetworkNumIPs value 1 to 9 IPs label
+msgid "1 to 9 IPs"
+msgstr ""
+
+# question NetworkNumIPs value 10 to 99 IPs label
+msgid "10 to 99 IPs"
+msgstr ""
+
+# question NetworkNumIPs value 100 to 999 IPs label
+msgid "100 to 999 IPs"
+msgstr ""
+
+# question NetworkNumIPs value 1,000 to 9,999 IPs label
+msgid "1,000 to 9,999 IPs"
+msgstr ""
+
+# question NetworkNumIPs value 10,000 to 99,999 IPs label
+msgid "10,000 to 99,999 IPs"
+msgstr ""
+
+# question NetworkNumIPs value 100,000 or more IPs label
+msgid "100,000 or more IPs"
+msgstr ""
+
+# step deployment-decisions - question BlockStorageTotalSize label
+msgid "How much usable block storage do you have in this Cinder deployment?"
+msgstr ""
+
+# question BlockStorageTotalSize value Less than 1 TB label, question ObjectStorageSize value Less than 1 TB label
+msgid "Less than 1 TB"
+msgstr ""
+
+# question BlockStorageTotalSize value 1 TB to 9 TB label, question ObjectStorageSize value 1 TB to 9 TB label
+msgid "1 TB to 9 TB"
+msgstr ""
+
+# question BlockStorageTotalSize value 10 TB to 99 TB label, question ObjectStorageSize value 10 TB to 99 TB label
+msgid "10 TB to 99 TB"
+msgstr ""
+
+# question BlockStorageTotalSize value 100 TB to 999 TB label, question ObjectStorageSize value 100 TB to 999 TB label
+msgid "100 TB to 999 TB"
+msgstr ""
+
+# question BlockStorageTotalSize value 1 PB to 9 PB label, question ObjectStorageSize value 1 PB to 9 PB label
+msgid "1 PB to 9 PB"
+msgstr ""
+
+# question BlockStorageTotalSize value 10 PB to 99 PB label, question ObjectStorageSize value 10 PB to 99 PB label
+msgid "10 PB to 99 PB"
+msgstr ""
+
+# question BlockStorageTotalSize value 100 PB to 999 PB label, question ObjectStorageSize value 100 PB to 999 PB label
+msgid "100 PB to 999 PB"
+msgstr ""
+
+# question BlockStorageTotalSize value 1 EB to 9 EB label, question ObjectStorageSize value 1 EB to 9 EB label
+msgid "1 EB to 9 EB"
+msgstr ""
+
+# question BlockStorageTotalSize value 10 EB to 99 EB label, question ObjectStorageSize value 10 EB to 99 EB label
+msgid "10 EB to 99 EB"
+msgstr ""
+
+# question BlockStorageTotalSize value 100 to 999 EB label, question ObjectStorageSize value 100 to 999 EB label
+msgid "100 to 999 EB"
+msgstr ""
+
+# question BlockStorageTotalSize value 1 ZB to 9 ZB label, question ObjectStorageSize value 1 ZB to 9 ZB label
+msgid "1 ZB to 9 ZB"
+msgstr ""
+
+# step deployment-decisions - question ObjectStorageSize label
+msgid "How much <strong>OpenStack Object Storage (Swift)</strong> have you provisioned?"
+msgstr ""
+
+# step deployment-decisions - question ObjectStorageNumObjects label
+msgid "How many <strong>OpenStack Object Storage (Swift)</strong> objects are stored?"
+msgstr ""
+
+# question ObjectStorageNumObjects value Fewer than 1,000 objects label
+msgid "Fewer than 1,000 objects"
+msgstr ""
+
+# question ObjectStorageNumObjects value 1,000 to 9,999 objects label
+msgid "1,000 to 9,999 objects"
+msgstr ""
+
+# question ObjectStorageNumObjects value 10,000 to 99,999 objects label
+msgid "10,000 to 99,999 objects"
+msgstr ""
+
+# question ObjectStorageNumObjects value 100,000 to 999,999 objects label
+msgid "100,000 to 999,999 objects"
+msgstr ""
+
+# question ObjectStorageNumObjects value 1 million to 9 million objects label
+msgid "1 million to 9 million objects"
+msgstr ""
+
+# question ObjectStorageNumObjects value 10 million to 999 million objects label
+msgid "10 million to 999 million objects"
+msgstr ""
+
+# question ObjectStorageNumObjects value 100 million to 999 million objects label
+msgid "100 million to 999 million objects"
+msgstr ""
+
+# question ObjectStorageNumObjects value 1 billion to 9 billion objects label
+msgid "1 billion to 9 billion objects"
+msgstr ""
+
+# question ObjectStorageNumObjects value 10 billion to 99 billion objects label
+msgid "10 billion to 99 billion objects"
+msgstr ""
+
+# question ObjectStorageNumObjects value 100 billion or more objects label
+msgid "100 billion or more objects"
+msgstr ""
+
+# step deployment-decisions - question NovaNumCells label
+msgid "Approximately how many Nova cells do you use?"
+msgstr ""
+
+# question NovaNumCells value None label
+msgid "None"
+msgstr ""
+
+# question NovaNumCells value 1 cell label
+msgid "1 cell"
+msgstr ""
+
+# question NovaNumCells value 2 cells label
+msgid "2 cells"
+msgstr ""
+
+# question NovaNumCells value 3 cells label
+msgid "3 cells"
+msgstr ""
+
+# question NovaNumCells value 4 cells label
+msgid "4 cells"
+msgstr ""
+
+# question NovaNumCells value 5 cells label
+msgid "5 cells"
+msgstr ""
+
+# question NovaNumCells value 6 cells label
+msgid "6 cells"
+msgstr ""
+
+# question NovaNumCells value 7 cells label
+msgid "7 cells"
+msgstr ""
+
+# question NovaNumCells value 8 cells label
+msgid "8 cells"
+msgstr ""
+
+# question NovaNumCells value 9 cells label
+msgid "9 cells"
+msgstr ""
+
+# question NovaNumCells value 10 cells label
+msgid "10 cells"
+msgstr ""
+
+# question NovaNumCells value More than 10 label
+msgid "More than 10"
+msgstr ""
+
+# question break7 literal content
+msgid "<p><span style=\"color: #0083c8; font-size: 1.6em;\">Deployment Decisions</span></p><p>The information below will help us better understand the most common configuration and component choices OpenStack deployments are using. This information is optional, but will be kept confidential and never published in connection with you or your organization.</p><hr>"
+msgstr ""
+
+# step deployment-decisions - question UsedPackages label
+msgid "What packages does this deployment use?<BR><font size=\"-2\"><em>Select All That Apply</em></font>"
+msgstr ""
+
+# step deployment-decisions - question CustomPackagesReason label
+msgid "If you have modified packages or have built your own packages, why?<BR><font size=\"-2\"><em>Select All That Apply</em></font>"
+msgstr ""
+
+# step deployment-decisions - question DeploymentTools label
+msgid "Which tools are you using to deploy / manage this cluster?<BR><font size=\"-2\"><em>Select All That Apply</em></font>"
+msgstr ""
+
+# step deployment-decisions - question ContainerFormat label
+msgid "If you are running your OpenStack services inside of containers, which container format are you using?<br/><font size=\"-2\"><em>Select all that apply</em></font>"
+msgstr ""
+
+# step deployment-decisions - question PaasTools label
+msgid "Which container orchestration or Platform-as-a-Service (PaaS) tools are you using to manage applications on this OpenStack deployment?<br/><font size=\"-2\"><em>Select All That Apply</em></font>"
+msgstr ""
+
+# step deployment-decisions - question Hypervisors label
+msgid "Which <b>OpenStack Compute (Nova)</b> hypervisors are you using?<BR><font size=\"-2\"><em>Select All That Apply</em></font>"
+msgstr ""
+
+# step deployment-decisions - question DatabaseUsed label
+msgid "Which databases are you using for OpenStack components?<br/><font size=\"-2\"><em>Select all that apply</em></font>"
+msgstr ""
+
+# step deployment-decisions - question OtherDatabase label
+msgid "Other database"
+msgstr ""
+
+# step deployment-decisions - question Toolkits label
+msgid "What programmatic interfaces (SDKs, tools, platforms) do you expose (or plan to make available) to your users/customers/developers so they are able to consume your product/cloud?<br/><font size=\"-2\"><em>Select all that apply</em></font>"
+msgstr ""
+
+# step deployment-decisions - question ToolkitsOther label
+msgid "Other toolkits"
+msgstr ""
+
+# step deployment-decisions - question InteractingClouds label
+msgid "With which other clouds do your users interact?<br/><font size=\"-2\"><em>Select all that apply</em></font>"
+msgstr ""
+
+# step deployment-decisions - question InteractingCloudsOther label
+msgid "Other Clouds"
+msgstr ""
+
+# step deployment-decisions - question ITPercentageonOpenStack label
+msgid "Approximately what percentage of your overall cloud infrastructure is running on OpenStack?"
+msgstr ""
+
+# question ITPercentageonOpenStack value 81-100% label
+msgid "81-100%"
+msgstr ""
+
+# question ITPercentageonOpenStack value 61-80% label
+msgid "61-80%"
+msgstr ""
+
+# question ITPercentageonOpenStack value 41-60% label
+msgid "41-60%"
+msgstr ""
+
+# question ITPercentageonOpenStack value 21-40% label
+msgid "21-40%"
+msgstr ""
+
+# question ITPercentageonOpenStack value 1-20% label
+msgid "1-20%"
+msgstr ""
+
+# step deployment-decisions - question NetworkDrivers label
+msgid "Which <b>OpenStack Network (Neutron)</b> drivers are you using?<BR><font size=\"-2\"><em>Select all that apply. Please note we now distinguish between ML2 drivers and non-ML2 drivers.</em></font>"
+msgstr ""
+
+# step deployment-decisions - question IdentityDrivers label
+msgid "Which  <b>OpenStack Identity Service (Keystone)</b> drivers are you using?<BR><font size=\"-2\"><em>Select All That Apply</em></font>"
+msgstr ""
+
+# step deployment-decisions - question BlockStorageDrivers label
+msgid "Which <b>OpenStack Block Storage (Cinder)</b> drivers are you using?<BR><font size=\"-2\"><em>Select All That Apply</em></font>"
+msgstr ""
+
+# step deployment-decisions - question VendorProducts label
+msgid "Which vendor's products power your OpenStack cloud?"
+msgstr ""
+
+# step deployment-decisions - question OperatingSystems label
+msgid "What is the main operating system running this OpenStack cloud deployment?"
+msgstr ""
+
+# question OperatingSystems value CentOS label
+msgid "CentOS"
+msgstr ""
+
+# question OperatingSystems value Debian label
+msgid "Debian"
+msgstr ""
+
+# question OperatingSystems value Fedora Server label
+msgid "Fedora Server"
+msgstr ""
+
+# question OperatingSystems value Microsoft Windows Server label
+msgid "Microsoft Windows Server"
+msgstr ""
+
+# question OperatingSystems value Red Hat Enterprise Linux (RHEL) label
+msgid "Red Hat Enterprise Linux (RHEL)"
+msgstr ""
+
+# question OperatingSystems value SUSE Linux Enterprise Server (SLES) label
+msgid "SUSE Linux Enterprise Server (SLES)"
+msgstr ""
+
+# question OperatingSystems value Scientific Linux label
+msgid "Scientific Linux"
+msgstr ""
+
+# question OperatingSystems value Ubuntu Server label
+msgid "Ubuntu Server"
+msgstr ""
+
+# question OperatingSystems value openSUSE Server label
+msgid "openSUSE Server"
+msgstr ""
+
+# step deployment-decisions - question SupportedFeatures label
+msgid "Which compatibility APIs does this deployment support?<BR><font size=\"-2\"><em>Select All That Apply</em></font>"
+msgstr ""
+
+# question Break9 literal content
+msgid "<hr><h3>Project Feedback</h3>"
+msgstr ""
+
+# step deployment-decisions - question BarbicanFeedback label
+msgid "Barbican: What is missing from Barbican that might prevent your adoption?"
+msgstr ""
+
+# step deployment-decisions - question CinderFeedback label
+msgid "<strong>Cinder:</strong> If there was one thing you would like to see changed (added, removed, fixed) in Cinder, what would it be?"
+msgstr ""
+
+# step deployment-decisions - question DesignateFeedback label
+msgid "Designate: What (if any) features or issues are preventing you from using Designate as a production service?"
+msgstr ""
+
+# step deployment-decisions - question GlanceFeedback label
+msgid "Glance: As you're aware, the Images API v1 supplied by OpenStack Glance is currently deprecated. If you haven't yet moved to the Images API v2, what is preventing you? Please be specific."
+msgstr ""
+
+# step deployment-decisions - question HeatFeedback label
+msgid "Heat: What's the current/expected load on your Heat deployment?"
+msgstr ""
+
+# question HeatFeedback value Few small stacks (<100 resources each) label
+msgid "Few small stacks (<100 resources each)"
+msgstr ""
+
+# question HeatFeedback value Lots of small stacks (<100 resources each) label
+msgid "Lots of small stacks (<100 resources each)"
+msgstr ""
+
+# question HeatFeedback value Few big stacks (>100 resources each) label
+msgid "Few big stacks (>100 resources each)"
+msgstr ""
+
+# question HeatFeedback value Lots of big stacks (>100 resources each) label
+msgid "Lots of big stacks (>100 resources each)"
+msgstr ""
+
+# step deployment-decisions - question InteropFeedback label
+msgid "Interop: Do you use the OpenStack Powered program or Interoperability Guideline compliance as a factor in your OpenStack procurement process? Why or why not?"
+msgstr ""
+
+# step deployment-decisions - question InteropFeedbackChallenges label
+msgid "Interop: What do you consider to be the biggest challenges to achieving interoperability between OpenStack clouds?<br/><font size=\"-2\"><em>Select all that apply</em></font>"
+msgstr ""
+
+# step deployment-decisions - question InteropFeedbackChallengesOther label
+msgid "Please explain"
+msgstr ""
+
+# step deployment-decisions - question IronicFeedback label
+msgid "Ironic: What's been your most frustrating or difficult experience with Ironic?"
+msgstr ""
+
+# step deployment-decisions - question KeystoneFeedback label
+msgid "Keystone: In your opinion, where should the Keystone development team focus their effort(s)?<br/><font size=\"-2\"><em>Select all that apply</em></font>"
+msgstr ""
+
+# step deployment-decisions - question KeystoneFeedbackOther label, step deployment-decisions - question ManilaFeedbackOther label, step deployment-decisions - question TelemetryFeedbackOther label
+msgid "Other - please specify"
+msgstr ""
+
+# step deployment-decisions - question KollaFeedback label
+msgid "Kolla: How do you use Kolla? <br/><font size=\"-2\"><em>Select all that apply</em></font>"
+msgstr ""
+
+# step deployment-decisions - question KollaFeedbackOther label
+msgid "Which custom tool?"
+msgstr ""
+
+# step deployment-decisions - question ManilaFeedback label
+msgid "Manila: Which OpenStack Shared File System (Manila) drivers are you using?<br/><font size=\"-2\"><em>Select all that apply</em></font>"
+msgstr ""
+
+# step deployment-decisions - question NeutronFeedback label
+msgid "Neutron: Which of the following features in the Neutron project are you actively using, interested in using or looking forward to using in your OpenStack deployment?<br/><font size=\"-2\"><em>Select all that apply</em></font>"
+msgstr ""
+
+# step deployment-decisions - question NovaFeedback label
+msgid "Nova: How important is it to be able to customize Nova in your deployment, e.g. classload your own managers/drivers, use hooks, plug in API extensions, etc."
+msgstr ""
+
+# question NovaFeedback value Not important; I use pretty much stock Nova with maybe some small patches or bug fixes that aren't upstream. label
+msgid "Not important; I use pretty much stock Nova with maybe some small patches or bug fixes that aren't upstream."
+msgstr ""
+
+# question NovaFeedback value Somewhat important; I have some custom scheduler filters and other small patches but nothing major. label
+msgid "Somewhat important; I have some custom scheduler filters and other small patches but nothing major."
+msgstr ""
+
+# question NovaFeedback value Very important; my Nova deployment is heavily customized and hooks/plugins/custom APIs are a major part of my operation. label
+msgid "Very important; my Nova deployment is heavily customized and hooks/plugins/custom APIs are a major part of my operation."
+msgstr ""
+
+# step deployment-decisions - question RefStackFeedback label
+msgid "RefStack: Which of the following features in RefStack are important to you?<br/><font size=\"-2\"><em>Select all that apply</em></font>"
+msgstr ""
+
+# step deployment-decisions - question SaharaFeedback label
+msgid "Sahara: What else can be improved in the Sahara project?"
+msgstr ""
+
+# step deployment-decisions - question SwiftFeedback label
+msgid "Swift: What kinds of data are you planning to store in object storage in the next 12 months?<br/><font size=\"-2\"><em>Select all that apply</em></font>"
+msgstr ""
+
+# step deployment-decisions - question SwiftFeedbackOther label
+msgid "Please specify other types of data."
+msgstr ""
+
+# step deployment-decisions - question TelemetryFeedback label
+msgid "Telemetry: Which dispatcher are you using or planning to use with Ceilometer?<br/><font size=\"-2\"><em>Select all that apply</em></font>"
+msgstr ""
+
+# step deployment-decisions - question TripleOFeedback label
+msgid "TripleO: As a user/operator, do you value having a common interface for deployment tooling and the deployed cloud (e.g common APIs and CLI tools)?"
+msgstr ""
+
+# question TripleOFeedback value Yes, definitely. label
+msgid "Yes, definitely."
+msgstr ""
+
+# question TripleOFeedback value Yes, but not required. label
+msgid "Yes, but not required."
+msgstr ""
+
+# question TripleOFeedback value No opinion. label
+msgid "No opinion."
+msgstr ""
+
+# question TripleOFeedback value No, it's a bad idea. label
+msgid "No, it's a bad idea."
+msgstr ""
+
+# step deployment-decisions - question TroveFeedback label
+msgid "Trove: When do you expect to begin evaluating Database as a Service in your cloud using the OpenStack Trove project?"
+msgstr ""

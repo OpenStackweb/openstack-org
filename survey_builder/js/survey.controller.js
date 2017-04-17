@@ -51,6 +51,24 @@ function jqueryValidatorInvalidHandler(form, validator) {
 
 jQuery(document).ready(function($) {
 
+    jQuery.extend(jQuery.validator.messages, {
+        required: GetText._t("This field is required."),
+        remote: GetText._t("Please fix this field."),
+        email: GetText._t("Please enter a valid email address."),
+        url: GetText._t("Please enter a valid URL."),
+        date: GetText._t("Please enter a valid date."),
+        dateISO: GetText._t("Please enter a valid date (ISO)."),
+        number: GetText._t("Please enter a valid number."),
+        digits: GetText._t("Please enter only digits."),
+        equalTo: GetText._t("Please enter the same value again."),
+        maxlength: jQuery.validator.format(GetText._t("Please enter no more than {0} characters.")),
+        minlength: jQuery.validator.format(GetText._t("Please enter at least {0} characters.")),
+        rangelength: jQuery.validator.format(GetText._t("Please enter a value between {0} and {1} characters long.")),
+        range: jQuery.validator.format(GetText._t("Please enter a value between {0} and {1}.")),
+        max: jQuery.validator.format(GetText._t("Please enter a value less than or equal to {0}.")),
+        min: jQuery.validator.format(GetText._t("Please enter a value greater than or equal to {0}."))
+    });
+
     $.validator.setDefaults({
         ignore: ".hidden:not(.chosen-visible)",
         invalidHandler: jqueryValidatorInvalidHandler,
@@ -79,7 +97,7 @@ jQuery(document).ready(function($) {
     });
 
     $('.delete-entity-survey-btn').click(function(event){
-        var res = window.confirm('are you sure?')
+        var res = window.confirm(GetText._t('Are you sure?'))
         if(!res){
             event.preventDefault();
             return false;

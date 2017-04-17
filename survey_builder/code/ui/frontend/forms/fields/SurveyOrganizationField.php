@@ -42,7 +42,7 @@ class SurveyOrganizationField extends CompositeField {
         $current_affiliations = $current_user->getCurrentAffiliations();
 
         if (!$current_affiliations) {
-            $children->add($txt = new TextField($question->name(), $question->label()));
+            $children->add($txt = new TextField($question->name(), GetTextTemplateHelpers::_t("survey_template", $question->label())));
             $txt->addExtraClass('input-organization-name');
         }
         else {
@@ -52,9 +52,9 @@ class SurveyOrganizationField extends CompositeField {
                     $org = $a->Organization();
                     $source[$org->ID] = $org->Name;
                 }
-                $source['0'] = "-- New One --";
+                $source['0'] = GetTextTemplateHelpers::_t("survey_ui","-- New One --");
                 $children->add( $ddl = new DropdownField($question->name() .'ID', $question->label(), $source));
-                $ddl->setEmptyString('-- Select Your Organization --');
+                $ddl->setEmptyString(GetTextTemplateHelpers::_t("survey_ui",'-- Select Your Organization --'));
                 $ddl->addExtraClass('select-organization-name');
                 if(!is_null($value)){
                     $org = Org::get()->filter('Name', $value)->first();
@@ -63,7 +63,7 @@ class SurveyOrganizationField extends CompositeField {
                 $children->add($txt = new TextField($question->name(), ''));
                 $txt->addExtraClass('input-organization-name');
             } else {
-                $children->add( $txt = new TextField($question->name(), $question->label(), $current_user->getOrgName()));
+                $children->add( $txt = new TextField($question->name(), GetTextTemplateHelpers::_t("survey_template",$question->label()), $current_user->getOrgName()));
                 $txt->addExtraClass('input-organization-name');
             }
         }

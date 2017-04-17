@@ -21,7 +21,7 @@ abstract class SurveyAbstractStepTemplateUIBuilder implements ISurveyStepUIBuild
 
     public function __construct()
     {
-        $this->next_btn_title = _t('SurveyBuilder.ActionSaveStep', 'Save &amp; Continue');
+        $this->next_btn_title =  GetTextTemplateHelpers::_t("survey_ui", 'Save &amp; Continue');
     }
 
     /**
@@ -54,7 +54,7 @@ abstract class SurveyAbstractStepTemplateUIBuilder implements ISurveyStepUIBuild
      */
     protected function buildActions($action, ISurveyStep $step){
         $survey               = $step->survey();
-        $save_later_btn_title = _t('SurveyBuilder.ActionSaveAndComeBack', 'Save &amp; Come Back Later');
+        $save_later_btn_title = GetTextTemplateHelpers::_t("survey_ui",'Save &amp; Come Back Later');
         $previous_step        = $survey->getPreviousStep($step->template()->title());
         $array_actions        = [];
 
@@ -62,8 +62,8 @@ abstract class SurveyAbstractStepTemplateUIBuilder implements ISurveyStepUIBuild
         {
 
             // add prev button
-            $prev_action = new FormAction('PrevStep', _t('SurveyBuilder.ActionGoBack', 'Go Back'));
-            $prev_action->setButtonContent("<i class=\"fa fa-chevron-left\" aria-hidden=\"true\"></i>&nbsp;". _t('SurveyBuilder.ActionGoBack', 'Go Back'));
+            $prev_action = new FormAction('PrevStep', GetTextTemplateHelpers::_t("survey_ui",'Go Back'));
+            $prev_action->setButtonContent("<i class=\"fa fa-chevron-left\" aria-hidden=\"true\"></i>&nbsp;".  GetTextTemplateHelpers::_t("survey_ui",'Go Back'));
             $prev_action->addExtraClass('btn go-back-action-btn');
             $prev_action->setAttribute('data-prev-url', $this->getPreviousStepUrl($previous_step));
             $prev_action->setUseButtonTag(true);

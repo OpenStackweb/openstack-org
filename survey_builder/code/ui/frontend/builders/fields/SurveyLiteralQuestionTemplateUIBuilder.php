@@ -22,7 +22,7 @@ final class SurveyLiteralQuestionTemplateUIBuilder implements ISurveyQuestionTem
      */
     public function build(ISurveyStep $current_step, ISurveyQuestionTemplate $question, ISurveyAnswer $answer)
     {
-        $field = new LiteralField($question->name(), $question->Content);
+        $field = new LiteralField($question->name(), GetTextTemplateHelpers::_t("survey_template" , $question->Content));
         return $field;
     }
 }

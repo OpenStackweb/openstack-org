@@ -178,6 +178,36 @@ class SurveyPage_Controller extends Page_Controller
         Requirements::javascript('themes/openstack/javascript/pure.min.js');
         Requirements::javascript('themes/openstack/javascript/jquery-ajax-loader.js');
         Requirements::javascript('survey_builder/js/survey.controller.js');
+        Requirements::javascript("themes/openstack/bower_assets/jquery-cookie/jquery.cookie.js");
+        Requirements::javascript('gettext/javascript/gettext.js');
+
+        // populate the js messages
+
+        $messages_ids = [
+            "This field is required.",
+            "Please fix this field.",
+            "Please enter a valid email address.",
+            "Please enter a valid URL.",
+            "Please enter a valid date.",
+            "Please enter a valid number.",
+            "Please enter only digits.",
+            "Please enter the same value again.",
+            "Please enter no more than {0} characters.",
+            "Please enter at least {0} characters.",
+            "Please enter a value between {0} and {1} characters long.",
+            "Please enter a value between {0} and {1}.",
+            "Please enter a value less than or equal to {0}.",
+            "Please enter a value greater than or equal to {0}.",
+            "Are you sure?",
+            "You Must Specify a New Organization Name!.",
+            "You must select a valid member!",
+            "Delete",
+        ];
+
+        foreach ($messages_ids as $msgid)
+            $messages[$msgid] = GetTextTemplateHelpers::_t("survey_ui", $msgid);
+
+        Requirements::customScript(sprintf("GetText.addMessages(%s);", json_encode($messages)));
 
         header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
         header("Cache-Control: post-check=0, pre-check=0", false);
@@ -408,7 +438,7 @@ class SurveyPage_Controller extends Page_Controller
             if(!$current_survey->isEmailSent())
                 $this->survey_manager->sendFinalStepEmail(new SurveyThankYouEmailSenderService, $current_survey);
             $this->survey_manager->completeSurvey($current_step);
-            $form->sessionMessage(_t('SurveyBuilder.ThankYouMessage', 'Thank you for your submission !!!'), 'good');
+            $form->sessionMessage(GetTextTemplateHelpers::_t("survey_ui", "Thank you for your submission !!!"), 'good');
         }
 
         return $this->redirect($this->Link().$next_step->template()->title());

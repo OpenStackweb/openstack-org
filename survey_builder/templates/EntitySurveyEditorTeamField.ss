@@ -2,11 +2,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <input type="text" id="member-auto-complete" class="form-control ss-member-autocomplete-field" placeholder="Find your team member in our database">
+                <input type="text" id="member-auto-complete" class="form-control ss-member-autocomplete-field" placeholder="{$_T("survey_ui","Find your team member in our database")}">
                 <input type="hidden" id="new-team-member-id"/>
             </div>
             <div class="col-md-6">
-                <button class="btn btn-primary active btn-sm" id="add-new-member">+ Add Team Member</button>
+                <button class="btn btn-primary active btn-sm" id="add-new-member">$_T("survey_ui", "+ Add Team Member")</button>
             </div>
         </div>
 
@@ -16,8 +16,8 @@
                     <thead>
                     <tr>
                         <th>&nbsp;</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
+                        <th>$_T("survey_ui","First Name")</th>
+                        <th>$_T("survey_ui","Last Name")</th>
                         <th>&nbsp;</th>
                     </tr>
                     </thead>
@@ -27,7 +27,7 @@
                         <td><img width="50" height="50" src="{$ProfilePhotoUrl}"/></td>
                         <td>$FirstName</td>
                         <td>$Surname</td>
-                        <td><button class="btn btn-danger active btn-sm delete-team-member" data-member-id="$ID">Delete</button></td>
+                        <td><button class="btn btn-danger active btn-sm delete-team-member" data-member-id="$ID">$_T("survey_ui","Delete")</button></td>
                     </tr>
                     <% end_loop %>
                     </tbody>

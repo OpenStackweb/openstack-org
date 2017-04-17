@@ -32,18 +32,22 @@ class SurveyDropDownQuestionTemplateUIBuilder extends AbstractSurveyQuestionTemp
             $options =  $question->UseCountrySelectorExtraOption ?
                 array_merge(SurveyDropDownQuestionTemplate::$country_selector_extra_options, CountryCodes::$iso_3166_countryCodes)
                 :CountryCodes::$iso_3166_countryCodes;
+
+            foreach ($options as $key => $val){
+                $options[$key] = GetTextTemplateHelpers::_t("survey_template", $val);
+            }
         }
         else {
             foreach($question->Values()->sort('Order') as $val)
             {
-                $options[$val->ID] = empty($val->Label)?$val->Value:$val->Label;
+                $options[$val->ID] = GetTextTemplateHelpers::_t("survey_template", empty($val->Label)? $val->Value : $val->Label);
             }
         }
 
         $default_value = $question->DefaultValue();
 
-        $field  = ($question->IsMultiSelect) ? new MultiDropdownField($question->name(), $question->label(), $options)
-                                             : new DropdownField($question->name(), $question->label(), $options);
+        $field  = ($question->IsMultiSelect) ? new MultiDropdownField($question->name(), GetTextTemplateHelpers::_t("survey_template", $question->label()), $options)
+                                             : new DropdownField($question->name(), GetTextTemplateHelpers::_t("survey_template", $question->label()), $options);
 
         if($question->isReadOnly()) $field->setDisabled(true);
         if($question->isMandatory())
@@ -62,7 +66,7 @@ class SurveyDropDownQuestionTemplateUIBuilder extends AbstractSurveyQuestionTemp
             $field->setValue($answer->value());
         }
 
-        $empty_string = $question->EmptyString;
+        $empty_string = GetTextTemplateHelpers::_t("survey_template", $question->EmptyString);
 
         if(!empty($empty_string))
         {

@@ -27,14 +27,14 @@ final class SurveyRegistrationForm extends Form
         // Define fields //////////////////////////////////////
         $this->member_manager = $member_manager;
         $fields = new FieldList (
-            new TextField('FirstName', 'First Name'),
-            new TextField('Surname', 'Last Name'),
-            new EmailField('Email', 'Email'),
+            new TextField('FirstName', GetTextTemplateHelpers::_t("survey_ui", "First Name")),
+            new TextField('Surname', GetTextTemplateHelpers::_t("survey_ui",'Last Name')),
+            new EmailField('Email', GetTextTemplateHelpers::_t("survey_ui",'Email')),
             new HiddenField('BackURL', 'BackURL', Controller::curr()->Link()),
-            new ConfirmedPasswordField('Password', 'Password')
+            new ConfirmedPasswordField('Password',  GetTextTemplateHelpers::_t("survey_ui",'Password'))
         );
 
-        $startSurveyButton = new FormAction('StartSurvey', 'Start Survey');
+        $startSurveyButton = new FormAction('StartSurvey', GetTextTemplateHelpers::_t("survey_ui",'Start Survey!'));
         $actions = new FieldList(
             $startSurveyButton
         );
@@ -85,7 +85,7 @@ final class SurveyRegistrationForm extends Form
              return Controller::curr()->redirectBack();
          }
          catch(Exception $ex){
-             Form::messageForForm($form->FormName(), "There was an error with your request, please contact your admin.", 'bad');
+             Form::messageForForm($form->FormName(), GetTextTemplateHelpers::_t("survey_ui","There was an error with your request, please contact your admin."), 'bad');
              //Return back to form
              SS_Log::log($ex->getMessage(), SS_Log::ERR);
              return Controller::curr()->redirectBack();

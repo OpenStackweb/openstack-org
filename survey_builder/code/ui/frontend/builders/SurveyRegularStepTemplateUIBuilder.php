@@ -54,7 +54,7 @@ class SurveyRegularStepTemplateUIBuilder
                     'skip',
                     sprintf
                     (
-                        '<p><strong>If you do not wish to answer these questions, you may <a href="%s">skip to the next section</a>.</strong></p>'
+                        GetTextTemplateHelpers::_t("survey_ui","<p><strong>If you do not wish to answer these questions, you may <a href=\"%s\">skip to the next section</a>.</strong></p>")
                         , $next_step_url
                     )
                 )

@@ -3,14 +3,14 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="TeamModalLabel"><strong>Add team member to this deployment</strong></h4>
+                <h4 class="modal-title" id="TeamModalLabel"><strong>$_T("survey_ui", "Add team member to this deployment")</strong></h4>
             </div>
             <div class="modal-body">
-                <p><strong>Search by name</strong></p>
+                <p><strong>$_T("survey_ui", "Search by name")</strong></p>
                 <form id="formSearchTeamMember">
-                    <input class="txt_autocomplete_member" type="text" placeholder="Find your team member on our database" value="" id="txt_autocomplete_member">
+                    <input class="txt_autocomplete_member" type="text" placeholder="{$_T("survey_ui","Find your team member on our database")}" value="" id="txt_autocomplete_member">
                     <input type="hidden" id="new-team-member-id"/>
-                    <button type="button" class="btn select-team-member-btn">Add&nbsp;<i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+                    <button type="button" class="btn select-team-member-btn">$_T("survey_ui","Add")&nbsp;<i class="fa fa-plus-circle" aria-hidden="true"></i></button>
                 </form>
                 <div class="row" <% if not $TeamMembers %>style="display:none;"<% end_if %> id="team-members-container">
                     <div class="col-md-12">
@@ -31,7 +31,7 @@
             </div>
             <div class="modal-footer">
                 <p style="text-align: right;">
-                    <button type="button" id="btn_modal_team_done" class="btn btn-primary">Done</button>
+                    <button type="button" id="btn_modal_team_done" class="btn btn-primary">$_T("survey_ui","Done")</button>
                 </p>
             </div>
         </div>

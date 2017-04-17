@@ -28,10 +28,10 @@ final class SurveyRadioButtonListQuestionTemplateUIBuilder extends AbstractSurve
         $options = array();
         foreach($question->Values()->sort('Order') as $val)
         {
-            $options[$val->ID] = empty($val->Label)?$val->Value:$val->Label;
+            $options[$val->ID] = GetTextTemplateHelpers::_t("survey_template", empty($val->Label)?$val->Value:$val->Label);
         }
 
-        $field         = new SurveyRadioButtonSetField($question->name(), $question->label(), $options);
+        $field         = new SurveyRadioButtonSetField($question->name(), GetTextTemplateHelpers::_t("survey_template", $question->label()), $options);
         $default_value = $question->getDefaultValue();
         if(!is_null($default_value) && $default_value->ID > 0){
             $field->setValue($default_value->ID);

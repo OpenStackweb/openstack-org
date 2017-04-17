@@ -1099,3 +1099,7 @@ table.checkboxset .checkbox label{
 div.field.checkbox input {
     margin-left: 0px;
 }
+
+#language-selector{
+    padding: 10px;
+}

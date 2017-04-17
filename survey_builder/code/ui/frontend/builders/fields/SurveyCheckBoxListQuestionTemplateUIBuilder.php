@@ -29,10 +29,10 @@ class SurveyCheckBoxListQuestionTemplateUIBuilder
         $options = array();
         foreach($question->Values()->sort('Order') as $val)
         {
-            $options[$val->ID] = empty($val->Label)?$val->Value:$val->Label;
+            $options[$val->ID] = GetTextTemplateHelpers::_t("survey_template", empty($val->Label)? $val->Value : $val->Label);
         }
 
-        $field  = new SurveyCheckboxSetField($question->name(), $question->label(), $options,  $value='', $form=null, $emptyString=null, $question);
+        $field  = new SurveyCheckboxSetField($question->name(), GetTextTemplateHelpers::_t("survey_template", $question->label()), $options,  $value='', $form = null, $emptyString = null, $question);
         if($question->isReadOnly()) $field->setDisabled(true);
         if($question->isMandatory())
         {

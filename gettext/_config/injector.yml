@@ -1,0 +1,8 @@
+---
+Name: gettextrequestprocessors
+---
+Injector:
+  RequestProcessor:
+    properties:
+      filters:
+        - '%$GetTextRequestFilter'

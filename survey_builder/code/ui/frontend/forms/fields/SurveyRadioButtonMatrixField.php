@@ -118,14 +118,15 @@ class SurveyRadioButtonMatrixField extends FormField
             $r->Columns = $cols;
         }
 
-        $properties['Columns'] = $cols;
-        $properties['Rows'] = $rows;
-        $properties['AdditionalRows'] = $additional_rows;
+        $properties['Columns']                    = $cols;
+        $properties['Rows']                       = $rows;
+        $properties['AdditionalRows']             = $additional_rows;
         $properties['AlreadyAddedAdditionalRows'] = $already_added_additional_rows;
-        $properties['RowsLabel'] = $this->question->RowsLabel;
-        $properties['AdditionalRowsLabel'] = $this->question->AdditionalRowsLabel;
-        $properties['AdditionalRowsDescription'] = $this->question->AdditionalRowsDescription;
-        $properties['EmptyString'] = $this->question->EmptyString;
+        // all this is translated on survey_builder/templates/SurveyRadioButtonMatrixField.ss
+        $properties['RowsLabel']                  = $this->question->RowsLabel;
+        $properties['AdditionalRowsLabel']        = $this->question->AdditionalRowsLabel;
+        $properties['AdditionalRowsDescription']  = $this->question->AdditionalRowsDescription;
+        $properties['EmptyString']                = $this->question->EmptyString;
 
         return $this
             ->customise($properties)

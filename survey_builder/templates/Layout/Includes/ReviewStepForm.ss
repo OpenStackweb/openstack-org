@@ -7,21 +7,21 @@
     <% end_if %>
 <div class="row">
     <fieldset class="fake">
-        <p>Review your completed sections and Submit Your Survey when ready. Thank you for helping create a better OpenStack!</p>
+        <p>$_T("survey_ui", "Review your completed sections and Submit Your Survey when ready. Thank you for helping create a better OpenStack!")</p>
         <table class="table table-striped">
         <% loop Survey.getAvailableSteps %>
             <% if $Template.Type != 'SurveyReviewStepTemplate' %>
             <tr class="review-row">
                 <td width="95%">
                     <i class="navigation-icon fa {$Top.SurveyStepClassIcon($Template.Name)}" aria-hidden="true"></i>
-                    <span class="step-name">$Template.FriendlyName</span>
+                    <span class="step-name">$_T("survey_template", $Template.FriendlyName)</span>
                 </td>
                 <td width="5%">
                     <a href="$Top.Link($Template.Title)">
                     <% if isComplete %>
-                        Edit
+                        $_T("survey_ui", "Edit")
                     <% else %>
-                        Start
+                        $_T("survey_ui", "Start")
                     <% end_if %>
                     </a>
                 </td>

@@ -26,7 +26,7 @@ class SurveyCheckBoxQuestionTemplateUIBuilder
      */
     public function build(ISurveyStep $current_step, ISurveyQuestionTemplate $question, ISurveyAnswer $answer)
     {
-        $field = new CheckboxField($question->name(), $question->label());
+        $field = new CheckboxField($question->name(), GetTextTemplateHelpers::_t("survey_template", $question->label()));
         $field->setValue($question->initialValue());
         if($question->isReadOnly()) $field->setDisabled(true);
         if($question->isMandatory())

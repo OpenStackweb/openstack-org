@@ -1,8 +1,5 @@
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
-        "http://www.w3.org/TR/html4/strict.dtd">
-
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="{$CurrentLocale}">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -31,9 +28,11 @@
         <% include Navigation %>
         <!-- Page Content -->
         $Message
+        <div id="language-selector"></div>
         $Layout
         <% include Footer %>
         <% include Quantcast %>
     </body>
     <% include Page_LinkedinInsightTracker %>
+   $ModuleJS('survey')
 </html>

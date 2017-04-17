@@ -11,7 +11,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-
 /**
  * Class SurveyTextBoxQuestionTemplateUIBuilder
  */
@@ -24,7 +23,7 @@ class SurveyTextBoxQuestionTemplateUIBuilder
      * @return TextField
      */
     protected function buildField($name, $label){
-        return new TextField($name, $label);
+        return new TextField($name, GetTextTemplateHelpers::_t("survey_template", $label) );
     }
     /**
      * @param ISurveyStep $current_step

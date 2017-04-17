@@ -24,7 +24,7 @@ class SurveyNumericQuestionTemplateUIBuilder extends SurveyTextBoxQuestionTempla
      * @return TextField
      */
     protected function buildField($name, $label){
-        return new HTML5NumericField($name, $label);
+        return new HTML5NumericField($name, GetTextTemplateHelpers::_t("survey_template", $label));
     }
 
     /**

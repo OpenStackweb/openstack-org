@@ -75,7 +75,7 @@
 
             $('.clear_all_ranking_options', control).click(function(evt){
                 evt.preventDefault();
-                if(window.confirm('Are you sure?')) {
+                if(window.confirm(GetText._t('Are you sure?'))) {
                     settings.rank_order = 0;
                     var sorted = $('.selected-rank', control);
                     for (var i = 0; i < sorted.length; i++) {

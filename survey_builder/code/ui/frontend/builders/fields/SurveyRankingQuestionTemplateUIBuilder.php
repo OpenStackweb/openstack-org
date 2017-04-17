@@ -25,16 +25,16 @@ class SurveyRankingQuestionTemplateUIBuilder extends AbstractSurveyQuestionTempl
         $options = array();
         foreach($question->Values()->sort('Order') as $val)
         {
-            $options[$val->ID] = empty($val->Label)?$val->Value:$val->Label;
+            $options[$val->ID] = GetTextTemplateHelpers::_t("survey_template",empty($val->Label) ? $val->Value : $val->Label);
         }
 
-        $field  = new SurveyRankingField($question->name(), $question->label(), $options,  $value = '' , $form=null, $emptyString=null, $question);
+        $field  = new SurveyRankingField($question->name(), GetTextTemplateHelpers::_t("survey_template", $question->label()), $options,  $value = '' , $form = null, $emptyString = null, $question);
 
         if($question->isReadOnly()) $field->setDisabled(true);
         if($question->isMandatory())
         {
            $field->setValidationAttribute('data-rule-ranking_required', $field->ID());
-           $field->setValidationAttribute('data-msg-ranking_required', sprintf('you must select at least one item (%s)', $question->name()));
+           $field->setValidationAttribute('data-msg-ranking_required', GetTextTemplateHelpers::_t("survey_ui", 'you must select at least one item (%s)', $question->name()));
         }
         if(!is_null($answer)){
             $field->setValue($answer->value());

@@ -1,0 +1,16 @@
+---
+Name: gettextconfig
+---
+GetText:
+  # Don't forget to set i18n->default_locale too!
+  default_locale: en_US
+  locales:
+    - en_US
+    - zn_CH
+    - fr_FR
+  # ID to persist the locale in cookies / session in the front end
+  persist_id: 'GetTextLocale'
+  # ID to persist the locale in cookies / session in the CMS
+  persist_id_cms: 'GetTextLocale_CMS'
+  # Request parameter to store the locale in. Used for some Controllers
+  query_param: 'lang'

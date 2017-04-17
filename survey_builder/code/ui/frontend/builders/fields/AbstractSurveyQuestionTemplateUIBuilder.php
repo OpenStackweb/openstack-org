@@ -54,12 +54,12 @@ abstract class AbstractSurveyQuestionTemplateUIBuilder
                      if(!isset($static_rules[$d->getIdentifier()]))
                          $static_rules[$d->getIdentifier()] = array (
                             'question'           => $d,
-                            'values'             => array(),
+                            'values'             => [],
                             'operator'           => $d->Operator,
                             'visibility'         => $d->Visibility,
                             'default'            => $d->DependantDefaultValue,
-                             'boolean_operator'  => $d->BooleanOperatorOnValues,
-                             'initial_condition' => ($d->BooleanOperatorOnValues === 'And') ? true:false
+                            'boolean_operator'   => $d->BooleanOperatorOnValues,
+                            'initial_condition'  => ($d->BooleanOperatorOnValues === 'And') ? true:false
                          );
 
                      array_push($static_rules[$d->getIdentifier()]['values'], $d->ValueID);
@@ -119,7 +119,6 @@ final class StaticRulesStrategy implements IDependantRulesStrategy {
 
                 $answer = $current_step->survey()->findAnswerByQuestion($q);
                 if(is_null($answer)) continue;
-
 
                 //checks the condition
                 switch($operator){

@@ -20,7 +20,7 @@ final class SurveyReviewStepTemplateUIBuilder
     public function __construct()
     {
         parent::__construct();
-        $this->next_btn_title = _t('SurveyBuilder.ActionSubmitSurvey', 'Submit Your Survey');
+        $this->next_btn_title = GetTextTemplateHelpers::_t("survey_ui","Submit Your Survey");
     }
 
     /**

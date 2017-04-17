@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-sm-12 survey-top">
-        <p>Step <strong>{$Survey.getCurrentStepIndexNice} of {$Survey.getStepsCount}</strong> for <strong>$CurrentMember.FullName</strong>.
+        <p>$_T("survey_ui", "Step <strong>%s of %s</strong> for <strong>%s</strong>",$Survey.getCurrentStepIndexNice, $Survey.getStepsCount, $CurrentMember.FullName)</p>
     </div>
 </div>
 <div class="row">
@@ -9,7 +9,7 @@
             <% loop Survey.getAvailableSteps %>
                 <li class="{$Top.SurveyStepClass($Template.Name)}">
                     <a data-step-name='{$Template.Name}' id="$Template.Name" href="$Top.Link{$Template.Name}" class="survey-step {$Top.SurveyStepClass($Template.Name)}">
-                        $Template.FriendlyName
+                        $_T("survey_template", $Template.FriendlyName)
                         <i class="navigation-icon fa {$Top.SurveyStepClassIcon($Template.Name)}" aria-hidden="true"></i>
                     </a>
                 </li>

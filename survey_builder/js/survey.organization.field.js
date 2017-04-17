@@ -28,8 +28,7 @@
         if(value == '0' && field.val().trim() === '')
             return false;
         return true;
-    }, "You Must Specify a New Organization Name!.");
-
+    }, GetText._t("You Must Specify a New Organization Name!."));
 
     //private methods
     var methods = {
