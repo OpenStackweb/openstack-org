@@ -84,6 +84,14 @@
 			<div class="col-sm-2 col-xs-6">
 				<a href="/foundation/companies/profile/ovh-group">
 					<div class="img-wrapper">
+						<img src="/assets/logos/vexxhost.jpg" alt="OVH Group">
+					</div>
+					<p class="center">Vexxhost</p>
+				</a>
+			</div>
+			<div class="col-sm-2 col-xs-6">
+				<a href="/foundation/companies/profile/ovh-group">
+					<div class="img-wrapper">
 						<img src="/assets/Uploads/_resampled/SetWidth138-Group-NORMAL-15-cm-copy.png" alt="OVH Group">
 					</div>
 					<p class="center">OVH Group</p>
@@ -91,9 +99,9 @@
 			</div>
 			<div class="col-sm-2 col-xs-6">
 					<div class="img-wrapper">
-						<img src="/assets/companies/main_logo/OSIC-lg.jpg" alt="OpenStack Innovation Center" width="138">
+						<img src="/assets/companies/main_logo/_resampled/SetWidth70-hpe-pri-grn-pos-rgb2.png" alt="Hewlett Packard Enteprise">
 					</div>
-					<p class="center">OpenStack Innovation Center</p>
+					<p class="center">Hewlett Packard Enteprise</p>
 			</div>
 			<div class="col-sm-2 col-xs-6">
 	                <a href="/foundation/companies/profile/internap ">
