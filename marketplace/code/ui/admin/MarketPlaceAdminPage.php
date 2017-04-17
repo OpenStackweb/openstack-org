@@ -1019,7 +1019,7 @@ class MarketPlaceAdminPage_Controller extends AdminController
     {
         $remote_cloud = $this->getCurrentRemoteCloud();
         if ($remote_cloud) {
-            return json_encode(OpenStackImplementationAssembler::convertOpenStackImplementationToArray($remote_cloud));
+            return json_encode(RemoteCloudAssembler::convertRemoteCloudToArray($remote_cloud));
         }
     }
 

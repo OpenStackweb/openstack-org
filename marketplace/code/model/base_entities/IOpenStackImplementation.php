@@ -83,18 +83,6 @@ interface IOpenStackImplementation extends IRegionalSupportedCompanyService {
 	 */
 	public function isCompatibleWithPlatform();
 
-	/***
-	 * @return bool
-	 */
-	public function isCompatibleWithFederatedIdentity();
-
-	/**
-	 * @param string $compatible
-	 * @return void
-	 */
-	public function setCompatibleWithFederatedIdentity($compatible);
-
-
     /**
      * @param IInteropProgramVersion $program_version
      * @return void

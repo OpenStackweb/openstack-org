@@ -413,7 +413,6 @@ abstract class CompanyServiceManager
         $prefix = get_class($this);
         $order = $this->cache_service->getSingleValue(strtolower($prefix . ".ordering"));
         if (!empty($order)) {
-
             $service_count = $this->repository->countActives();
             if (intval($service_count) != count(explode(',', $order))) {
                 //select random order

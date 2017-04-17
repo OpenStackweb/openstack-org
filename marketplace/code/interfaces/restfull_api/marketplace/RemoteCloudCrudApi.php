@@ -135,7 +135,7 @@ final class RemoteCloudCrudApi extends CompanyServiceCrudApi {
 		$remote_cloud = $this->remote_cloud_repository->getById($company_service_id);
 		if(!$remote_cloud)
 			return $this->notFound();
-		return $this->ok(OpenStackImplementationAssembler::convertOpenStackImplementationToArray($remote_cloud));
+		return $this->ok(RemoteCloudAssembler::convertRemoteCloudToArray($remote_cloud));
 	}
 
     public function getDistributionDraft(){
@@ -143,7 +143,7 @@ final class RemoteCloudCrudApi extends CompanyServiceCrudApi {
         $remote_cloud = $this->remote_cloud_draft_repository->getByLiveServiceId($company_service_id);
         if(!$remote_cloud)
             return $this->notFound();
-        return $this->ok(OpenStackImplementationAssembler::convertOpenStackImplementationToArray($remote_cloud));
+        return $this->ok(RemoteCloudAssembler::convertRemoteCloudToArray($remote_cloud));
     }
 
 	public function addCompanyService(){

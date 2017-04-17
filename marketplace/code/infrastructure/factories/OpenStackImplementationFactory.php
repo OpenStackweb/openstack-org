@@ -39,7 +39,6 @@ abstract class OpenStackImplementationFactory
     {
         $implementation->setCompatibleWithCompute($data['compatible_compute']);
         $implementation->setCompatibleWithStorage($data['compatible_storage']);
-        $implementation->setCompatibleWithFederatedIdentity($data['compatible_federated_identity']);
         if(isset($data['interop_program_version_id'])) {
             $program_version = new InteropProgramVersion();
             $program_version->ID = (int)$data['interop_program_version_id'];

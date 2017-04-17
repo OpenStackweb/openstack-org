@@ -34,6 +34,17 @@ jQuery(document).ready(function($){
             $("#name",form).val(remote_cloud.name);
             $("#overview",form).val(remote_cloud.overview);
             $("#call_2_action_uri",form).val(remote_cloud.call_2_action_uri);
+            $("#hardware_specifications",form).val(remote_cloud.hardware_specifications);
+            $("#pricing_models",form).val(remote_cloud.pricing_models);
+            $("#published_slas",form).val(remote_cloud.published_slas);
+
+            if(remote_cloud.vendor_managed_upgrades){
+                $('#vendor_managed_upgrades',form).prop('checked',true);
+            }
+            else{
+                $('#vendor_managed_upgrades',form).prop('checked',false);
+            }
+
             if(remote_cloud.active){
                 $('#active',form).prop('checked',true);
             }
@@ -236,6 +247,10 @@ function serializeRemoteCloud(form, publish){
         remote_cloud.name                    = $("#name",form).val();
         remote_cloud.overview                = $("#overview",form).val();
         remote_cloud.call_2_action_uri       = $("#call_2_action_uri",form).val();
+        remote_cloud.hardware_specifications = $("#hardware_specifications",form).val();
+        remote_cloud.pricing_models          = $("#pricing_models",form).val();
+        remote_cloud.published_slas          = $("#published_slas",form).val();
+        remote_cloud.vendor_managed_upgrades = $('#vendor_managed_upgrades',form).is(":checked");
         remote_cloud.active                  = $('#active',form).is(":checked");
         remote_cloud.videos                  = videos;
         remote_cloud.hypervisors             = hypervisors;

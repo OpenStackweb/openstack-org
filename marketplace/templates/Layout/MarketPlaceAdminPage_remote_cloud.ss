@@ -22,6 +22,31 @@
             <form id="remote_cloud_form" name="remote_cloud_form">
                 <% include MarketPlaceAdminPage_CompanyServiceHeader %><BR>
                 <% include MarketPlaceAdminPage_OpenStackPowered %>
+
+                <label for="vendor_managed_upgrades">Vendor Managed Upgrades</label>
+                <input title="Vendor Managed Upgrades" type="checkbox" id="vendor_managed_upgrades" name="vendor_managed_upgrades"><br><br>
+
+                <div class="field textarea">
+                    <label for="hardware_specifications">Hardware Specifications</label>
+                    <div class="middleColumn">
+                        <textarea cols="15" rows="5" style="width: 700px; height: 100px;" id="hardware_specifications" name="hardware_specifications"></textarea>
+                    </div>
+                </div>
+
+                <div class="field textarea">
+                    <label for="pricing_models">Pricing Models</label>
+                    <div class="middleColumn">
+                        <textarea cols="15" rows="5" style="width: 700px; height: 100px;" id="pricing_models" name="pricing_models"></textarea><br>
+                    </div>
+                </div>
+
+                <div class="field textarea">
+                    <label for="published_slas">Published SLAs</label>
+                    <div class="middleColumn">
+                        <textarea cols="15" rows="5" style="width: 700px; height: 100px;" id="published_slas" name="published_slas"></textarea><br>
+                    </div>
+                </div>
+
              </form>
             <% include Components %>
             <% include Hypervisors %>

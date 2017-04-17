@@ -42,4 +42,17 @@ final class RemoteCloudDraftFactory extends OpenStackImplementationDraftFactory 
         return $remote_cloud;
     }
 
+    /**
+     * @param IRemoteCloudService $remote_cloud
+     * @param                          $data
+     */
+    public function buildExtras(IRemoteCloudService $remote_cloud, $data)
+    {
+        $remote_cloud->setHardwareSpecifications($data['hardware_specifications']);
+        $remote_cloud->setVendorManagedUpgrades($data['vendor_managed_upgrades']);
+        $remote_cloud->setPricingModels($data['pricing_models']);
+        $remote_cloud->setPublishedSLAs($data['published_slas']);
+
+    }
+
 }

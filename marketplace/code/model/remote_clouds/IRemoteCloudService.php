@@ -18,4 +18,48 @@ interface IRemoteCloudService extends IOpenStackImplementation {
 	const MarketPlaceType           = 'Remote Cloud';
 	const MarketPlaceGroupSlug      = 'marketplace-remote-cloud-administrators';
 	const MarketPlacePermissionSlug = 'MANAGE_MARKETPLACE_REMOTE_CLOUD';
+
+    /***
+     * @return string
+     */
+    public function getHardwareSpecifications();
+
+    /**
+     * @param string $specs
+     * @return void
+     */
+    public function setHardwareSpecifications($specs);
+
+    /***
+     * @return bool
+     */
+    public function hasVendorManagedUpgrades();
+
+    /**
+     * @param bool $is_managed
+     * @return void
+     */
+    public function setVendorManagedUpgrades($is_managed);
+
+    /***
+     * @return string
+     */
+    public function getPricingModels();
+
+    /**
+     * @param string $models
+     * @return void
+     */
+    public function setPricingModels($models);
+
+    /***
+     * @return string
+     */
+    public function getPublishedSLAs();
+
+    /**
+     * @param string $slas
+     * @return void
+     */
+    public function setPublishedSLAs($slas);
 }

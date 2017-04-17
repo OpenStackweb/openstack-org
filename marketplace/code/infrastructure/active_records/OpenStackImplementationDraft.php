@@ -12,7 +12,6 @@ class OpenStackImplementationDraft
         'CompatibleWithCompute' => 'Boolean',
         'CompatibleWithStorage' => 'Boolean',
         'CompatibleWithPlatform' => 'Boolean',
-        'CompatibleWithFederatedIdentity' => 'Boolean',
       );
 
     static $has_one = array('ProgramVersion' => 'InteropProgramVersion');
@@ -26,7 +25,6 @@ class OpenStackImplementationDraft
         'CompatibleWithCompute' => false,
         'CompatibleWithStorage' => false,
         'CompatibleWithPlatform' => false,
-        'CompatibleWithFederatedIdentity' => false,
     );
 
     static $has_many = array(
@@ -141,24 +139,6 @@ class OpenStackImplementationDraft
         return $this->isCompatibleWithStorage() && $this->isCompatibleWithCompute();
     }
 
-
-    /***
-     * @return bool
-     */
-    public function isCompatibleWithFederatedIdentity()
-    {
-        return (bool)$this->getField('CompatibleWithFederatedIdentity');
-    }
-
-    /**
-     * @param bool $compatible
-     * @return void
-     */
-    public function setCompatibleWithFederatedIdentity($compatible)
-    {
-        $this->setField('CompatibleWithFederatedIdentity', $compatible);
-    }
-
     /**
      * @param IInteropProgramVersion $program_version
      * @return void
@@ -186,7 +166,6 @@ class OpenStackImplementationDraft
         $storage = $this->isCompatibleWithStorage();
         $compute = $this->isCompatibleWithCompute();
         $platform = $this->isCompatibleWithPlatform();
-        $identity = $this->isCompatibleWithFederatedIdentity();
 
         return $storage || $compute || $platform || $identity;
     }

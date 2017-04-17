@@ -32,7 +32,6 @@
         load: function(implementation) {
             $('#compatible_compute',form).prop('checked',implementation.compatible_compute);
             $('#compatible_storage',form).prop('checked',implementation.compatible_storage);
-            $('#compatible_federated_identity',form).prop('checked',implementation.compatible_federated_identity);
 
             if(implementation.interop_program_version_id > 0)
                 $('#interop_program_version_' + implementation.interop_program_version_id, form).prop('checked', true);
@@ -45,7 +44,6 @@
             }
             implementation.compatible_compute            = $('#compatible_compute', form).is(':checked');
             implementation.compatible_storage            = $('#compatible_storage', form).is(':checked');
-            implementation.compatible_federated_identity = $('#compatible_federated_identity', form).is(':checked');
             var version = $('.interop-program-version:checked', form);
 
             implementation.interop_program_version_id    = version.length > 0? version.attr('data-version-id'):0;

@@ -26,6 +26,4 @@
         </td>
     </tr>
 </table>
-<h2>OpenStack Federated Identity</h2>
-<label for="compatible_federated_identity">Compatible with Federated Identity</label>
-<input title="supports OpenStack Federated Identity" type="checkbox" id="compatible_federated_identity" name="compatible_federated_identity"><BR><BR>
+<BR>

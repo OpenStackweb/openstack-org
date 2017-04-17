@@ -32,8 +32,6 @@ final class OpenStackImplementationAssembler
 
         $res['interop_program_version_id'] = $implementation->getProgramVersion()->getIdentifier();
 
-        $res['compatible_federated_identity'] = $implementation->isCompatibleWithFederatedIdentity();
-
         //capabilities
         $capabilities = array();
         foreach ($implementation->getCapabilities() as $capability) {

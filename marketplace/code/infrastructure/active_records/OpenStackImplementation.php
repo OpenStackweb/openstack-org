@@ -23,7 +23,6 @@ class OpenStackImplementation
     static $db = array(
         'CompatibleWithCompute'           => 'Boolean',
         'CompatibleWithStorage'           => 'Boolean',
-        'CompatibleWithFederatedIdentity' => 'Boolean',
     );
 
     static $has_one = array('ProgramVersion' => 'InteropProgramVersion');
@@ -40,7 +39,6 @@ class OpenStackImplementation
     private static $defaults = array(
         'CompatibleWithCompute' => false,
         'CompatibleWithStorage' => false,
-        'CompatibleWithFederatedIdentity' => false,
     );
 
     /**
@@ -155,15 +153,6 @@ class OpenStackImplementation
     /***
      * @return bool
      */
-    public function isCompatibleWithFederatedIdentity()
-    {
-        return (bool)$this->getField('CompatibleWithFederatedIdentity');
-    }
-
-
-    /***
-     * @return bool
-     */
     public function isOpenStackPowered()
     {
         $storage  = $this->isCompatibleWithStorage();
@@ -193,15 +182,6 @@ class OpenStackImplementation
         } else if ($this->isCompatibleWithStorage()) {
             return 'Storage';
         }
-    }
-
-    /**
-     * @param bool $compatible
-     * @return void
-     */
-    public function setCompatibleWithFederatedIdentity($compatible)
-    {
-        $this->setField('CompatibleWithFederatedIdentity', $compatible);
     }
 
     /**

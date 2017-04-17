@@ -28,4 +28,23 @@ final class RemoteCloudManager extends OpenStackImplementationManager {
 
 		return $marketplace_type;
 	}
+
+    public function buildCompanyService($data, $company, $getMarketPlaceType, $live_service_id)
+    {
+        $service = parent::buildCompanyService($data, $company, $getMarketPlaceType, $live_service_id);
+        $this->factory->buildExtras($service, $data);
+        return $service;
+    }
+
+    public function update($remote_cloud, $data)
+    {
+        $remote_cloud = parent::update($remote_cloud, $data);
+        $remote_cloud->setHardwareSpecifications($data['hardware_specifications']);
+        $remote_cloud->setVendorManagedUpgrades($data['vendor_managed_upgrades']);
+        $remote_cloud->setPricingModels($data['pricing_models']);
+        $remote_cloud->setPublishedSLAs($data['published_slas']);
+
+        return $remote_cloud;
+    }
+
 } 

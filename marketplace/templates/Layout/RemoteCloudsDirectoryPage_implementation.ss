@@ -11,6 +11,30 @@
     <% include OpenStackImplementationCapabilities %>
     <div class="col-lg-6">
         <h3 style="color: #000000 !important;">Other Details</h3>
+        <% if HardwareSpecifications %>
+            <div class="info-area">
+                <h4 style="color: #{$Company.CompanyColor} !important;">Hardware Specifications</h4>
+                $HardwareSpecifications
+            </div>
+        <% end_if %>
+        <% if hasVendorManagedUpgrades %>
+            <div class="info-area">
+                <h4 style="color: #{$Company.CompanyColor} !important;">Vendor Managed Upgrades</h4>
+                YES
+            </div>
+        <% end_if %>
+        <% if PricingModels %>
+            <div class="info-area">
+                <h4 style="color: #{$Company.CompanyColor} !important;">Pricing Models</h4>
+                $PricingModels
+            </div>
+        <% end_if %>
+        <% if PublishedSLAs %>
+            <div class="info-area">
+                <h4 style="color: #{$Company.CompanyColor} !important;">Published SLAs</h4>
+                $PublishedSLAs
+            </div>
+        <% end_if %>
         <% if HyperVisors %>
         <div class="info-area">
             <h4 style="color: #{$Company.CompanyColor} !important;">Supported Hypervisors</h4>
