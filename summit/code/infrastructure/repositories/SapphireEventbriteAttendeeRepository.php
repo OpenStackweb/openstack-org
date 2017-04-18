@@ -53,7 +53,7 @@ final class SapphireEventbriteAttendeeRepository extends SapphireRepository impl
     public function getUnmatchedPaged($search_term = '', $suggested_only = false, $page = 1, $size = 20, $summit_id)
     {
         $attendees = new ArrayList();
-        $offset    = $page * $size;
+        $offset    = ($page - 1 ) * $size;
 
         $query = <<<SQL
         SELECT EBA.*, GROUP_CONCAT(EBA.ExternalAttendeeId SEPARATOR ', ') AS ExternalIds 
@@ -88,7 +88,7 @@ SQL;
         $total = DB::query($query)->numRecords();
 
         $query .= <<<SQL
-        LIMIT {$page},{$offset};
+        LIMIT {$offset},{$size};
 SQL;
 
         foreach(DB::query($query) as $row)

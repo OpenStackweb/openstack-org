@@ -22,31 +22,31 @@ class CreateEventbriteAttendeeSummitAttendeeTicketIndexMigration extends Abstrac
     {
         global $database;
 
-        if (DBSchema::existsIndex($database, 'EventbriteAttendee', 'idx_EventbriteAttendee_ExternalAttendeeId')) {
+        if (!DBSchema::existsIndex($database, 'EventbriteAttendee', 'idx_EventbriteAttendee_ExternalAttendeeId')) {
 
             DB::query("CREATE INDEX idx_EventbriteAttendee_ExternalAttendeeId
 ON EventbriteAttendee (ExternalAttendeeId);");
         }
 
-        if (DBSchema::existsIndex($database, 'EventbriteAttendee', 'idx_EventbriteAttendee_Email_FirstName_LastName')) {
+        if (!DBSchema::existsIndex($database, 'EventbriteAttendee', 'idx_EventbriteAttendee_Email_FirstName_LastName')) {
 
             DB::query("CREATE INDEX idx_EventbriteAttendee_Email_FirstName_LastName
 ON EventbriteAttendee (Email, FirstName, LastName);");
         }
 
-        if (DBSchema::existsIndex($database, 'EventbriteAttendee', 'idx_EventbriteAttendee_ExternalTicketClassId')) {
+        if (!DBSchema::existsIndex($database, 'EventbriteAttendee', 'idx_EventbriteAttendee_ExternalTicketClassId')) {
 
             DB::query("CREATE INDEX idx_EventbriteAttendee_ExternalTicketClassId
 ON EventbriteAttendee (ExternalTicketClassId);");
         }
 
-        if (DBSchema::existsIndex($database, 'SummitAttendeeTicket', 'idx_SummitAttendeeTicket_ExternalAttendeeId')) {
+        if (!DBSchema::existsIndex($database, 'SummitAttendeeTicket', 'idx_SummitAttendeeTicket_ExternalAttendeeId')) {
 
             DB::query("CREATE INDEX idx_SummitAttendeeTicket_ExternalAttendeeId
 ON SummitAttendeeTicket (ExternalAttendeeId);");
         }
 
-        if (DBSchema::existsIndex($database, 'SummitAttendeeTicket', 'idx_SummitAttendeeTicket_ExternalOrderId')) {
+        if (!DBSchema::existsIndex($database, 'SummitAttendeeTicket', 'idx_SummitAttendeeTicket_ExternalOrderId')) {
 
             DB::query("CREATE INDEX idx_SummitAttendeeTicket_ExternalOrderId
 ON SummitAttendeeTicket (ExternalOrderId);");
