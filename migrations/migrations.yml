@@ -67,3 +67,4 @@ migrations:
   - AddUniqueIndexToSummitEventsFavorites
   - MemberLinkedInCleanMigration
   - NewMarketplaceTypeRemoteCloudSeedTask
+  - CreateEventbriteAttendeeSummitAttendeeTicketIndexMigration

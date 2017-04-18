@@ -32,9 +32,10 @@ interface IEventbriteAttendeeRepository extends IEntityRepository
      * @param bool $suggested_only
      * @param int $page
      * @param int $size
+     * @param int $summit_id
      * @return array
      */
-    public function getUnmatchedPaged($search_term = '', $suggested_only = false, $page = 1, $size = 20);
+    public function getUnmatchedPaged($search_term = '', $suggested_only = false, $page = 1, $size = 20, $summit_id);
 
     /**
      * @param EventbriteAttendee $eventbrite_attendee

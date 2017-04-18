@@ -359,7 +359,7 @@ final class SummitAppAdminController extends Controller implements PermissionPro
     public function attendees_match(SS_HTTPRequest $request)
     {
         $summit_id = intval($request->param('SummitID'));
-        $summit = Summit::get()->byID($summit_id);
+        $summit    = Summit::get()->byID($summit_id);
 
         Requirements::css('summit/css/simple-sidebar.css');
         // tag inputes
@@ -381,18 +381,17 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         Requirements::javascript('themes/openstack/javascript/jquery.cleanform.js');
         Requirements::javascript('summit/javascript/summit-admin-attendees-match.js');
 
-        list($orphan_attendees, $count) = $this->eventbrite_attendee_repository->getUnmatchedPaged();
+        list($orphan_attendees, $count) = $this->eventbrite_attendee_repository->getUnmatchedPaged('', false, 1, 20, $summit_id);
 
         return $this->getViewer('attendees_match')->process
             (
                 $this->customise
                     (
-                        array
-                        (
-                            'Summit' => $summit,
-                            'Attendees' => $orphan_attendees,
+                        [
+                            'Summit'         => $summit,
+                            'Attendees'      => $orphan_attendees,
                             'TotalAttendees' => $count
-                        )
+                        ]
                     )
             );
     }

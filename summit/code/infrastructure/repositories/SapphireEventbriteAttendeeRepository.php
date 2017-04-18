@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-final class SapphireEventbriteAttendeeRepository extends SapphireRepository  implements IEventbriteAttendeeRepository
+final class SapphireEventbriteAttendeeRepository extends SapphireRepository implements IEventbriteAttendeeRepository
 {
 
     public function __construct()
@@ -47,29 +47,38 @@ final class SapphireEventbriteAttendeeRepository extends SapphireRepository  imp
      * @param bool $suggested_only
      * @param int $page
      * @param int $size
+     * @param int $summit_id
      * @return array
      */
-    public function getUnmatchedPaged($search_term = '', $suggested_only = false, $page = 1, $size = 20)
+    public function getUnmatchedPaged($search_term = '', $suggested_only = false, $page = 1, $size = 20, $summit_id)
     {
         $attendees = new ArrayList();
-        $offset = $page * $size;
+        $offset    = $page * $size;
 
         $query = <<<SQL
-        SELECT EBA.*, GROUP_CONCAT(EBA.ExternalAttendeeId SEPARATOR ', ') AS ExternalIds FROM EventbriteAttendee EBA
-        WHERE NOT EXISTS
-        ( SELECT SAT.ID FROM SummitAttendeeTicket SAT WHERE SAT.ExternalAttendeeId = EBA.ExternalAttendeeId )
+        SELECT EBA.*, GROUP_CONCAT(EBA.ExternalAttendeeId SEPARATOR ', ') AS ExternalIds 
+        FROM EventbriteAttendee EBA
+        INNER JOIN SummitTicketType TT ON TT.ExternalId = EBA.ExternalTicketClassId
+        WHERE 
+        TT.SummitID = {$summit_id} AND
+        NOT EXISTS
+        ( 
+          SELECT SAT.ID FROM SummitAttendeeTicket SAT WHERE SAT.ExternalAttendeeId = EBA.ExternalAttendeeId 
+        )
 SQL;
         if ($search_term) {
             $query .= <<<SQL
-        AND (EBA.FirstName LIKE '{$search_term}%' OR EBA.LastName LIKE '{$search_term}%' OR EBA.Email LIKE '{$search_term}%')
+            AND (EBA.FirstName LIKE '{$search_term}%' OR EBA.LastName LIKE '{$search_term}%' OR EBA.Email LIKE '{$search_term}%')
 SQL;
         }
 
         if ($suggested_only) {
             $query .= <<<SQL
-        AND EXISTS
-        (SELECT M.ID, M.FirstName, M.Surname, M.Email, M.SecondEmail, M.ThirdEmail
-         FROM Member M WHERE M.FirstName = EBA.FirstName AND M.Surname = EBA.LastName)
+            AND EXISTS
+            ( 
+                SELECT M.ID, M.FirstName, M.Surname, M.Email, M.SecondEmail, M.ThirdEmail
+                FROM Member M WHERE M.FirstName = EBA.FirstName AND M.Surname = EBA.LastName
+            )
 SQL;
         }
 
