@@ -24,7 +24,7 @@ class CompanyField extends CompositeField
         $children    = new FieldList();
 
         $source = array( '0' => ' -- New Company -- ');
-        $source = array_merge($source, Company::get()->sort('Name')->map('ID', 'Name')->toArray());
+        $source = $source + (Company::get()->sort('Name')->map('ID', 'Name')->toArray());
 
         $children->add($ddl = new DropdownField($name . '_id', $title, $source));
         $ddl->setEmptyString('-- Select Your Company --');
