@@ -85,4 +85,14 @@ final class EventbriteRestApi implements IEventbriteRestApi
         return $this->getEntity($url, ['expand' => 'attendees', 'status' => 'active', 'page' => intval($page), ]);
     }
 
+    /**
+     * @param ISummit $summit
+     * @return mixed
+     */
+    public function getTicketTypes(ISummit $summit){
+        $event_id = $summit->getExternalEventId();
+        $url      = sprintf('%s/events/%s', self::BaseUrl, $event_id);
+        return $this->getEntity($url, ['expand' => 'ticket_classes']);
+    }
+
 }

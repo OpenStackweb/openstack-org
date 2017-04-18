@@ -40,4 +40,11 @@ interface IEventbriteRestApi
      * @return mixed
      */
     public function getOrdersBySummit(ISummit $summit, $page = 1);
+
+
+    /**
+     * @param ISummit $summit
+     * @return mixed
+     */
+    public function getTicketTypes(ISummit $summit);
 }

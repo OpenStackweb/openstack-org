@@ -38,7 +38,8 @@ class SummitTicketType extends DataObject implements ISummitTicketType
 
     static $indexes = array
     (
-       'ExternalId' => array('type' => 'unique', 'value' => 'ExternalId')
+       'ExternalId' => array('type' => 'unique', 'value' => 'ExternalId'),
+       'Summit_ExternalId' => array('type' => 'unique', 'value' => 'SummitID,ExternalId')
     );
 
     private static $summary_fields = array
@@ -71,24 +72,7 @@ class SummitTicketType extends DataObject implements ISummitTicketType
 
     protected function validate()
     {
-        $valid = parent::validate();
-        if(!$valid->valid()) return $valid;
-
-        $summit_id = isset($_REQUEST['SummitID']) ?  $_REQUEST['SummitID'] : $this->SummitID;
-
-        $summit   = Summit::get()->byID($summit_id);
-
-        if(!$summit)
-        {
-            return $valid->error('Invalid Summit!');
-        }
-
-        $count = intval(SummitTicketType::get()->filter(array('SummitID' => $summit->ID, 'Name' => trim($this->Name), 'ID:ExactMatch:not' => $this->ID))->count());
-
-        if($count > 0)
-            return $valid->error(sprintf('Summit Ticket Type "%s" already exists!. please set another one', $this->Name));
-
-        return $valid;
+        return parent::validate();
     }
 
     /**
