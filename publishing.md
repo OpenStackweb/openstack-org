@@ -12,13 +12,13 @@ Publishing a new web page will involve four basic steps that are detailed in thi
 1. Publishing your work through the Silverstripe Content Management System
 
 
-###**Start with a fresh OpenStack web Development Environment and work from a feature branch in Git**
+### **Start with a fresh OpenStack web Development Environment and work from a feature branch in Git**
 
 It is a best practice to set up your Git environment to avoid merge commits.   This can easily be done with Git by running the following command to set up auto rebase.
 
 	$ git config --global branch.autosetuprebase always
 
-You will work in feature branch in Git taken off of the production branch.  The production branch contains the latest code that is approved and reflects the public OpenStack website.  
+You will work in a feature branch in Git taken off of the production branch.  The production branch contains the latest code that is approved and reflects the public OpenStack website.  
 
 In Git, follow these steps to create your branch:
 
@@ -34,7 +34,7 @@ Now you are ready to complete your work.  You will revisit Git - for this reposi
 
 If you are making a quick change to an existing page or any other minor changes you will want to work from the master branch.  This is outlined later in a summary section called "WORKING FROM THE MASTER BRANCH".
 
-###**Create your web page**
+### **Create your web page**
 
 The OpenStack website environment utilizes the SilverStripe framework and Content Management System (CMS) and your html documents will be saved in a Silverstripe file.  
 
@@ -46,7 +46,7 @@ Or, if your file is related to the Summit, at this location:
 
 **openstack-org/Summit/templates/Layout/YourFile.ss**
 
-####**Adding images for your site**
+#### **Adding images for your site**
 
 You can place public domain images in an images folder along with your commits to the repo.
 
@@ -76,7 +76,7 @@ Then, you will add your images, not on the VM, but on your local development env
 
 When you are finished, you will need to save, commit, and push your commit to the private assets repo.  Remember that this is a separate repository from your OpenStackweb development environment and will require separate Git actions.
 
-###**Push your work to the OpenStackweb Github repository.**
+### **Push your work to the OpenStackweb Github repository.**
 
 After work completion, add all of your files to the git repository on your local machine.   You should still be on your feature branch.
 
@@ -132,13 +132,13 @@ If you have a conflict with files that you did not wish to change to your commit
 
 	$ git checkout --ours "filename-in-question"
 
-###**Publishing your work through the Silverstripe CMS**
+### **Publishing your work through the Silverstripe CMS**
 
 You will need to create .php file that will define Page class and controller and save to:
 
 **openstack-org/openstack/code/YourPage.php**
 
-where your page is the name you have chosen to for your project.
+where YourPage is the name you have chosen for your project.
 
 You will need to add code that defines the following:
 
@@ -150,7 +150,7 @@ Define the YourPage controller:
 
    * class YourPage_Controller extends Page_Controller
 
-Here is an example from the Project Teams Gatherings static page, PTG.php with and added section to require a css document:
+Here is an example from the Project Teams Gatherings static page, PTG.php with an added section to require a css document:
 
 ```
 <?php
@@ -175,7 +175,7 @@ At this point you will need to add your new page to the database by connecting t
 
 	$ sake dev/build
 
-####**Adding your page to local.openstack.org **
+#### **Adding your page to local.openstack.org**
 
 You will want to view your page on local.openstack.org, but first, you must publish it through the Silverstripe CMS. 
 
@@ -203,7 +203,7 @@ You will then create the page by:
 
 ![image alt text](readme-images/image_8.png)
 
-After clicking "Create", you will be brought to the screen shown below.
+After clicking "Create" you will be brought to the screen shown below.
 
 You will need to fill in the fields with the red arrows:
 
@@ -219,9 +219,9 @@ When finished, click "Save and Publish"
 
 You should now be able to view the OpenStack website at local.openstack.org and view your page at the URL that you listed in the URL Segment field listed above.
 
-####**Adding your page to devbranch.openstack.org**
+#### **Adding your page to devbranch.openstack.org**
 
-Follow the same instructions for adding your page to the Silverstripe CMS as above, but user this URL: devbranch.openstack.org/admin
+Follow the same instructions for adding your page to the Silverstripe CMS as above, but use this URL: devbranch.openstack.org/admin
 
 ## **Working with the Database in the Vagrant Dev Environment**
 
@@ -265,9 +265,9 @@ Add the following information to configure your connection:
 
 ![image alt text](readme-images/image_10.png)
 
-##**General troubleshooting:**
+## **General troubleshooting:**
 
-**If you get composer errors: **
+**If you get composer errors:**
 
 Run from within your VM:
 
