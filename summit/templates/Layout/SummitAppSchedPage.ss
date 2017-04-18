@@ -84,7 +84,7 @@
         <% end_loop %>
 
         <% loop $Summit.CategoryGroups.Sort(Name, ASC)  %>
-            <% if hasEventsPublished %>
+            <% if hasEventsPublished &&  $ClassName != "PrivatePresentationCategoryGroup"  %>
             summit.category_groups[{$ID}] =
             {
                name : "{$Name.JS}",
