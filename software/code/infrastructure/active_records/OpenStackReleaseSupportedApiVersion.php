@@ -25,6 +25,8 @@ class OpenStackReleaseSupportedApiVersion
     private static $db = array
     (
         'ReleaseVersion'     => 'Text',
+        'Status'             => "Enum('Deprecated, Supported, Current, Beta, Alpha' , 'Deprecated')",
+        'CreatedFromTask'    => 'Boolean',
     );
 
     private static $has_one = array
@@ -34,10 +36,15 @@ class OpenStackReleaseSupportedApiVersion
         'Release'            => 'OpenStackRelease',
     );
 
+    private static $has_many = array(
+        'OpenStackImplementationApiCoverageDrafts' => 'OpenStackImplementationApiCoverageDraft',
+        'OpenStackImplementationApiCoverages'      => 'OpenStackImplementationApiCoverage'
+    );
+
     private static $indexes = array
     (
         'Component_ApiVersion_Release' => array(
-            'type' => 'unique',
+            'type'  => 'unique',
             'value' => 'OpenStackComponentID,ApiVersionID,ReleaseID'
         )
     );
@@ -106,8 +113,35 @@ class OpenStackReleaseSupportedApiVersion
     public function onBeforeDelete()
     {
         parent::onBeforeDelete();
-        // delete related records ...
-        DB::query("DELETE FROM OpenStackImplementationApiCoverageDraft where ReleaseSupportedApiVersionID = {$this->ID};");
-        DB::query("DELETE FROM OpenStackImplementationApiCoverage where ReleaseSupportedApiVersionID = {$this->ID};");
+        // one to many relations
+        foreach($this->OpenStackImplementationApiCoverageDrafts() as $item){
+            $item->delete();
+        }
+        foreach($this->OpenStackImplementationApiCoverages() as $item){
+            $item->delete();
+        }
+    }
+    /**
+     * @return ValidationResult
+     */
+    protected function validate()
+    {
+        $valid = parent::validate();
+
+        if(!$valid->valid()) return $valid;
+
+        if($this->OpenStackComponentID <= 0){
+            return $valid->error('OpenStack Component is mandatory!');
+        }
+
+        if($this->ReleaseID <= 0){
+            return $valid->error('Release is mandatory!');
+        }
+
+        if($this->OpenStackComponent()->SupportsVersioning && $this->ApiVersionID <= 0){
+            return $valid->error('Api Version is mandatory!');
+        }
+
+        return $valid;
     }
 }

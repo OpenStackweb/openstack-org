@@ -22,13 +22,30 @@ class OpenStackApiVersion extends DataObject implements IOpenStackApiVersion
 
     static $db = array
     (
-        'Version'        => 'Varchar',
-        'Status'         => "Enum('Deprecated, Current, Beta, Alpha' , 'Deprecated')",
+        'Version'               => 'Varchar',
+        /* @deprecated use OpenStackReleaseSupportedApiVersion.Status instead */
+        'Status'                => "Enum('Deprecated, Supported, Current, Beta, Alpha' , 'Deprecated')",
+        'CreatedFromTask'       => 'Boolean',
     );
 
+    /**
+     * @param string $external_status
+     * @return string
+     */
+    public static function convertStatus($external_status){
+        switch ($external_status){
+            case "DEPRECATED": return 'Deprecated';
+            case "SUPPORTED": return 'Supported';
+            case "CURRENT": return 'Current';
+        }
+        return "Deprecated";
+    }
+
     static $summary_fields = array(
-        'Version' => 'Version',
-        'Status' => 'Status',
+        'Version'         => 'Version',
+        /* @deprecated use OpenStackReleaseSupportedApiVersion.Status instead */
+        'Status'          => 'Status',
+        'CreatedFromTask' => 'CreatedFromTask',
     );
 
     static $indexes = array(
@@ -38,6 +55,18 @@ class OpenStackApiVersion extends DataObject implements IOpenStackApiVersion
     static $has_one = array(
         'OpenStackComponent' => 'OpenStackComponent',
     );
+
+    private static $has_many = array(
+        'OpenStackReleaseSupportedApiVersions' => 'OpenStackReleaseSupportedApiVersion',
+    );
+
+    protected function onBeforeDelete() {
+        parent::onBeforeDelete();
+        // one to many relations
+        foreach ($this->OpenStackReleaseSupportedApiVersions() as $item){
+            $item->delete();
+        }
+    }
 
     protected function onBeforeWrite()
     {
@@ -91,6 +120,7 @@ class OpenStackApiVersion extends DataObject implements IOpenStackApiVersion
     }
 
     /**
+     * @deprecated use OpenStackReleaseSupportedApiVersion.Status
      * @return string
      */
     public function getStatus()
@@ -99,6 +129,7 @@ class OpenStackApiVersion extends DataObject implements IOpenStackApiVersion
     }
 
     /**
+     * @deprecated use OpenStackReleaseSupportedApiVersion.Status instead
      * @param string $status
      * @return void
      */
@@ -107,6 +138,10 @@ class OpenStackApiVersion extends DataObject implements IOpenStackApiVersion
         $this->setField('Status', $status);
     }
 
+    /**
+     * @deprecated use OpenStackReleaseSupportedApiVersion.Status instead
+     * @return string
+     */
     public function getStatusI18n()
     { 
     	return _t('Software.API_VERSION_STATUS_'.strtoupper($this->Status), $this->Status);

@@ -353,7 +353,7 @@
                     <ul>
                         <% loop Releases %>
                             <li <% if $Status == Current %>class="timeline-current"<% end_if %><% if $Status == Future %>class="timeline-future"<% end_if %>>
-                                <a href="http://docs.openstack.org/releases/releases/{$Slug}.html" target="_blank">
+                                <a href="https://releases.openstack.org/{$Slug}/index.html#{$Slug}-{$Top.Component.Slug}" target="_blank">
                                     <%t Software.VERSION 'Version' %> {$getVersionLabel($Top.Component.ID)} ({$Name}) <% if $Status == Current %>- LATEST RELEASE<% end_if %>
                                 </a>
                             </li>

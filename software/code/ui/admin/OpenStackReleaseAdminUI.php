@@ -56,6 +56,7 @@ final class OpenStackReleaseAdminUI extends DataExtension
 
             $components_config = GridFieldConfig_RelationEditor::create(PHP_INT_MAX);
             $components_config->getComponentByType('GridFieldDetailForm')->setFields($openStackComponentFields);
+            $components_config->addComponent(new GridFieldAjaxRefresh(1000, false));
 
             $components = new GridField
             (
@@ -74,19 +75,20 @@ final class OpenStackReleaseAdminUI extends DataExtension
 
             if ($this->owner->OpenStackComponents()->filter('SupportsVersioning', true)->count() > 0)
             {
-                $supported_versions_config = new GridFieldConfig_RecordEditor(100);
+                $supported_versions_config = new GridFieldConfig_RecordEditor(PHP_INT_MAX);
 
                 $dataColumns = $supported_versions_config->getComponentByType('GridFieldDataColumns');
                 $dataColumns->setDisplayFields(
-                    array
-                    (
-                    'OpenStackComponent.CodeName' => 'Component CodeName',
-                    'OpenStackComponent.Name'     => 'Component Name',
-                    'ApiVersion.Version'          => 'Api Version',
-                    )
+                    [
+                        'OpenStackComponent.CodeName' => 'Component CodeName',
+                        'OpenStackComponent.Name'     => 'Component Name',
+                        'ApiVersion.Version'          => 'Api Version',
+                        'Status'                      => 'Status',
+                        'CreatedFromTask'             => 'CreatedFromTask',
+                    ]
                 );
 
-                //$supported_versions_config->removeComponentsByType('GridFieldEditButton');
+                $supported_versions_config->addComponent(new GridFieldAjaxRefresh(1000, false));
 
                 $supported_versions = new GridField("SupportedApiVersions", "Supported Release Components",
                     $this->owner->SupportedApiVersions(" ReleaseID = {$this->owner->getIdentifier()} AND OpenStackComponent.SupportsVersioning = 1 ")->innerJoin('OpenStackComponent',
@@ -117,13 +119,13 @@ final class OpenStackReleaseAdminUI extends DataExtension
             foreach ($supported_components as $component) {
                 if (!$component->getSupportsVersioning()) {
                     //crete dumb version
-                    array_push($non_versioned_components, $component->getIdentifier());
-                    $old = $this->owner->SupportedApiVersions(" OpenStackComponentID = {$component->getIdentifier()} AND ApiVersionID = 0 ");
+                    $non_versioned_components[] = $component->getIdentifier();
+                    $old                        = $this->owner->SupportedApiVersions(" OpenStackComponentID = {$component->getIdentifier()} AND ApiVersionID = 0 ");
                     if (count($old) == 0) {
-                        $new_supported_version = new OpenStackReleaseSupportedApiVersion;
+                        $new_supported_version                       = new OpenStackReleaseSupportedApiVersion;
                         $new_supported_version->OpenStackComponentID = $component->getIdentifier();
-                        $new_supported_version->ReleaseID = $this->owner->getIdentifier();
-                        $new_supported_version->ApiVersionID = 0;
+                        $new_supported_version->ReleaseID            = $this->owner->getIdentifier();
+                        $new_supported_version->ApiVersionID         = 0;
                         $new_supported_version->write();
                     }
                 }
@@ -144,8 +146,7 @@ final class OpenStackReleaseAdminUI extends DataExtension
 
     function getValidator()
     {
-        $validator = new RequiredFields(array('Name', 'ReleaseNumber', 'ReleaseDate'));
-
+        $validator = new RequiredFields(['Name', 'ReleaseNumber', 'ReleaseDate']);
         return $validator;
     }
 
