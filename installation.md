@@ -1,8 +1,8 @@
-##**OpenStack Foundation Website**
+## **OpenStack Foundation Website**
 
 ### **Setting up the Development Environment - Virtual machine**
 
-These instructions will detail the Vagrant method for installing the OpenStack Website development environment on your machine.  You will create a directory on your local machine and clone a github repository to this directory that will contain all of the necessary files to setup and operate your development environment.  The backend of your environment will run on a virtual machine (VM) that your development machine will host.  This VM will contain an Ubuntu Linux installation on which your web server (Nginx) and database (MySQL) will be installed and run.  Vagrant, a command line virtual machine management tool, will automatically set up and control this VM environment.  The configuration information for Nginx and MySQL are scripted and included in the Vagrant package, so there is no need for you configure anything related to this on the backend.  
+These instructions detail the Vagrant method for installing the OpenStack Website development environment on your machine.  You will create a directory on your local machine and clone a github repository to this directory that will contain all of the necessary files to setup and operate your development environment.  The backend of your environment will run on a virtual machine (VM) that your development machine will host.  This VM will contain an Ubuntu Linux installation on which your web server (Nginx) and database (MySQL) will be installed and run.  Vagrant, a command line virtual machine management tool, will automatically set up and control this VM environment.  The configuration information for Nginx and MySQL are scripted and included in the Vagrant package, so there is no need for you configure anything related to this on the backend.  
 
 The steps are outlined below but basically are as follows:
 
@@ -59,7 +59,11 @@ Next, you will need to edit your config file at (~/.ssh/config) with the correct
 
 * Edit the config file using your text editor, such as vim, with the following information:  
 
-	#private assets  	Host assets.github.com  	HostName github.com  	PreferredAuthentications publickey  	IdentityFile ~/.ssh/id_rsa  
+	#private assets  
+	Host assets.github.com  
+	HostName github.com  
+	PreferredAuthentications publickey  
+	IdentityFile ~/.ssh/id_rsa  
   
 **NOTE**: your identity file is the path to your private key, id_rsa in this example.  Your private key file may have a different name.
 
@@ -77,11 +81,11 @@ Create the development environment by running the following command from the "op
 
 Upon completion of the Vagrant install process, your development environment will be fully functional and the web server will be running.  You can check this by opening your browser and entering **local.openstack.org**
 
-**Note: **If you can’t see the OpenStack website in your browser, you may need to restart the Nginx server.
+**Note:** If you can’t see the OpenStack website in your browser, you may need to restart the Nginx server.
 
-**Working with your development environment **
+**Working with your development environment**
 
-**VAGRANT** - Use the below commands from the Terminal to stop and restart a vagrant session.  You will always type "vagrant up" from the project directory to re-start or recreate the same project.  You can have multiple projects in different directories with their own clone of the OpenStack website repository. 
+**VAGRANT** - Use the below commands from the Terminal to stop and restart a vagrant session.  You will always type "vagrant up" from the project directory to restart or recreate the same project.  You can have multiple projects in different directories with their own clone of the OpenStack website repository. 
 
 * Useful Vagrant commands run from terminal in the openstack-org directory (~/vagrant/openstack-org)
 
@@ -101,7 +105,7 @@ Upon completion of the Vagrant install process, your development environment wil
 
             * Displays state of machines that Vagrant is running.  Use this to determine whether you are up and running or are in a suspended state.
 
-**SHARED FILES - **The development environment contains a shared directory of your web files at the following locations.  **NOTE**: the vagrant  project directory is used here, if you put it in a different location it will impact the location on the host machine.
+**SHARED FILES -** The development environment contains a shared directory of your web files at the following locations.  **NOTE**: the vagrant  project directory is used here, if you put it in a different location it will impact the location on the host machine.
 
 **Host Machine -** ~/vagrant/openstack-org
 
@@ -129,7 +133,7 @@ You may have run the sudo (superuser do) command before the restart command if y
 
 * Run: sudo service nginx restart
 
-**REMOVING VIRTUAL MACHINES**** - **Removing virtual machines is generally and seamlessly completed by running the "vagrant destroy" command from your project directory.  If, however, you need to remove a VM that cannot be destroyed by the “vagrant destroy” command, you can access the VM directly from the VirtualBox application on your development system, as shown below.
+**REMOVING VIRTUAL MACHINES -** Removing virtual machines is generally and seamlessly completed by running the "vagrant destroy" command from your project directory.  If, however, you need to remove a VM that cannot be destroyed by the “vagrant destroy” command, you can access the VM directly from the VirtualBox application on your development system, as shown below.
 
 Launch the VirtualBox application from the Launchpad on your Mac.  Select the local.openstack.org VM, right click and select Remove:
 
