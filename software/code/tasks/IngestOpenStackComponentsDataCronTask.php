@@ -52,24 +52,92 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
         $start = time();
         $this->tx_manager->transaction(function(){
             $releases = OpenStackRelease::get()->where(" Name <> 'Trunk' ")->sort('ReleaseDate', 'DESC');
-            DB::query('DELETE FROM OpenStackComponentReleaseCaveat;');
-            $this->processProjects();
+            //DB::query('DELETE FROM OpenStackComponentReleaseCaveat;');
+            //$this->processProjects();
             foreach($releases as $release)
             {
                 echo sprintf('processing release %s ...', $release->Name).PHP_EOL;
-                $this->ProcessProjectPerRelease($release);
+                $this->processApiVersionsPerRelease($release);
+                /*$this->processProjectPerRelease($release);
                 $this->getProductionUseStatus($release);
                 $this->getInstallationGuideStatus($release);
                 $this->getSDKSupport($release);
                 $this->getQualityOfPackages($release);
                 $this->calculateMaturityPoints($release);
-                $this->getStackAnalytics($release);
-                $this->ProcessProjectPerRelease($release);
+                $this->getStackAnalytics($release);*/
             }
         });
         $delta = time() - $start;
         echo sprintf('task took %s seconds to run.',$delta).PHP_EOL;
         $this->client = null;
+    }
+
+    private function processApiVersionsPerRelease($release){
+        $url_template = "http://git.openstack.org/cgit/openstack/project-navigator-data/plain/releases/%s/%s.json";
+
+        foreach(OpenStackComponent::get() as $component){
+            $url = sprintf($url_template, strtolower($release->Name),  strtolower($component->CodeName));
+            echo sprintf("processing url %s ", $url).PHP_EOL;
+            $response = null;
+            try {
+                $response = $this->client->get
+                (
+                    $url
+                );
+            } catch (Exception $ex) {
+                echo $ex->getMessage() . PHP_EOL;
+                SS_Log::log($ex->getMessage(), SS_Log::WARN);
+            }
+
+            if (is_null($response)) continue;
+
+            if ($response->getStatusCode() != 200) continue;
+
+            if(!$release->supportsComponent($component->CodeName)){
+                echo sprintf("adding component %s to release %s", $component->CodeName, $release->Name).PHP_EOL;
+                $release->addOpenStackComponent($component);
+            }
+
+            $body = $response->getBody();
+            if (is_null($body)) continue;
+            $content = $body->getContents();
+            if (empty($content)) continue;
+
+            $api_versions = json_decode($content, true);
+
+            if(!isset($api_versions['versions'])) continue;
+
+            $component->SupportsVersioning = true;
+            $component->write();
+
+            foreach($api_versions['versions'] as $api_version){
+                // check first if api version exists on component ...
+                $status         = OpenStackApiVersion::convertStatus($api_version['status']);
+                $db_api_version = $component->getVersionByLabel($api_version['id']);
+                if(is_null($db_api_version)){
+                    echo sprintf("Component %s - Adding Api Version %s", $component->CodeName, $api_version['id']).PHP_EOL;
+                    $db_api_version                       = new OpenStackApiVersion();
+                    $db_api_version->Version              = $api_version['id'];
+                    $db_api_version->CreatedFromTask      = 1;
+                    $db_api_version->OpenStackComponentID = $component->ID;
+                }
+
+                $db_api_version->Status  = $status;
+                $db_api_version->write();
+
+                //check if version exists on release / component ...
+                $old_db_api_version = $release->supportsApiVersion($db_api_version);
+                if(is_null($old_db_api_version)){
+                    // associate it on release / component ...
+                    echo sprintf("Release %s - Component %s - Adding api version %s - status %s", $release->Name , $component->CodeName, $api_version['id'], $status).PHP_EOL;
+                    $old_db_api_version = $release->addSupportedVersion($db_api_version, $status);
+                    $old_db_api_version->CreatedFromTask = 1;
+                }
+
+                $old_db_api_version->Status  = $status;
+                $old_db_api_version->write();
+            }
+        }
     }
 
     private function processProjects()
@@ -220,7 +288,7 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
         }
     }
 
-    private function ProcessProjectPerRelease($release)
+    private function processProjectPerRelease($release)
     {
         $url_template = "http://git.openstack.org/cgit/openstack/releases/plain/deliverables/%s/%s.yaml";
 

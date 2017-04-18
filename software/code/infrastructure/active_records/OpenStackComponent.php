@@ -71,6 +71,7 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
         'Caveats'        => 'OpenStackComponentReleaseCaveat',
     );
 
+
     private static $belongs_many_many = array
     (
         "Releases" => "OpenStackRelease",
@@ -95,6 +96,28 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
     protected function onBeforeWrite()
     {
         parent::onBeforeWrite();
+
+        if($this->SupportsVersioning){
+            // delete all dummy records
+            DB::query("DELETE FROM OpenStackReleaseSupportedApiVersion WHERE OpenStackComponentID = {$this->ID} AND ApiVersionID = 0 ;");
+        }
+    }
+
+    protected function onBeforeDelete() {
+        parent::onBeforeDelete();
+        // clean related do so no leave orphans
+        // one to many relations
+        foreach($this->Versions() as $item){
+            $item->delete();
+        }
+        foreach($this->RelatedContent() as $item){
+            $item->delete();
+        }
+        foreach($this->Caveats() as $item){
+            $item->delete();
+        }
+        // many many relation
+        $this->Releases()->removeAll();
     }
 
     /**
@@ -183,6 +206,21 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
         }
 
         return false;
+    }
+
+    /**
+     * @param string $version
+     * @return OpenStackApiVersion
+     */
+    public function getVersionByLabel($version)
+    {
+        foreach ($this->getVersions() as $api_version) {
+            if ($api_version->Version == $version) {
+                return $api_version;
+            }
+        }
+
+        return null;
     }
 
     /**

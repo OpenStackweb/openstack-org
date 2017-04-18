@@ -83,6 +83,7 @@ class OpenStackRelease
 
     protected function onBeforeDelete() {
         parent::onBeforeDelete();
+        // one to many relations
         foreach($this->SupportedApiVersions() as $item){
             $item->delete();
         }
@@ -92,6 +93,7 @@ class OpenStackRelease
         foreach($this->Caveats() as $item){
             $item->delete();
         }
+        // many many relation
         $this->OpenStackComponents()->removeAll();
     }
 
@@ -224,19 +226,24 @@ class OpenStackRelease
 
     /**
      * @param IOpenStackApiVersion $version
+     * @param string $status
      * @return void
      */
-    public function addSupportedVersion(IOpenStackApiVersion $version)
+    public function addSupportedVersion(IOpenStackApiVersion $version, $status = "Current")
     {
         if ($this->supportsComponent($version->getReleaseComponent()->getCodeName())) {
             //add supported version
-            $new_supported_version = new OpenStackReleaseSupportedApiVersion;
+            $new_supported_version                       = new OpenStackReleaseSupportedApiVersion;
             $new_supported_version->OpenStackComponentID = $version->getReleaseComponent()->getIdentifier();
-            $new_supported_version->ReleaseID = $this->getIdentifier();
-            $new_supported_version->ApiVersionID = $version->getIdentifier();
+            $new_supported_version->ReleaseID            = $this->getIdentifier();
+            $new_supported_version->ApiVersionID         = $version->getIdentifier();
+            $new_supported_version->Status               = $status;
+            $new_supported_version->CreatedFromTask      = 0;
 
             AssociationFactory::getInstance()->getOne2ManyAssociation($this,
                 'SupportedApiVersions')->add($new_supported_version);
+
+            return $new_supported_version;
         }
 
         return false;
@@ -268,7 +275,7 @@ class OpenStackRelease
      */
     public function supportsApiVersion(IOpenStackApiVersion $version)
     {
-        $version_id = $version->getIdentifier();
+        $version_id   = $version->getIdentifier();
         $component_id = $version->getReleaseComponent()->getIdentifier();
 
         return $this->getComponents('SupportedApiVersions',

@@ -75,7 +75,14 @@ JS;
         $ddl->addExtraClass('ddl-os-component-id');
         $fields->insertBefore($ddl, 'ApiVersionID');
 
-        $fields->insertAfter(new TextField("ReleaseVersion", "Release Version"), 'ReleaseID');
+        $fields->insertAfter(new DropdownField(
+            'Status',
+            'Status',
+            $this->owner->dbObject('Status')->enumValues()
+
+        ),'ReleaseID');
+
+        $fields->insertAfter(new TextField("ReleaseVersion", "Release Version"), 'Status');
         $fields->insertAfter(new LiteralField('ReleaseVersionTitle' ,'<p>You could get this data from <a href="http://docs.openstack.org/releases" target="_blank">http://docs.openstack.org/releases</a></p>'),'ReleaseVersion' );
         return $fields;
     }

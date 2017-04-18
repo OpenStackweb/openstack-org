@@ -29,6 +29,7 @@ final class OpenStackApiVersionAdminUI extends DataExtension
         }
         $fields->push(new LiteralField("Title", "<h2>OpenStack Api Version</h2>"));
         $fields->push(new TextField("Version", "Version"));
+        $fields->push(new CheckboxField('CreatedFromTask', 'Created From Task?'));
         $fields->push(new DropdownField(
             'Status',
             'Status',
