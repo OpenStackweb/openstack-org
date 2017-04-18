@@ -52,19 +52,19 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
         $start = time();
         $this->tx_manager->transaction(function(){
             $releases = OpenStackRelease::get()->where(" Name <> 'Trunk' ")->sort('ReleaseDate', 'DESC');
-            //DB::query('DELETE FROM OpenStackComponentReleaseCaveat;');
-            //$this->processProjects();
+            DB::query('DELETE FROM OpenStackComponentReleaseCaveat;');
+            $this->processProjects();
             foreach($releases as $release)
             {
                 echo sprintf('processing release %s ...', $release->Name).PHP_EOL;
                 $this->processApiVersionsPerRelease($release);
-                /*$this->processProjectPerRelease($release);
+                $this->processProjectPerRelease($release);
                 $this->getProductionUseStatus($release);
                 $this->getInstallationGuideStatus($release);
                 $this->getSDKSupport($release);
                 $this->getQualityOfPackages($release);
                 $this->calculateMaturityPoints($release);
-                $this->getStackAnalytics($release);*/
+                $this->getStackAnalytics($release);
             }
         });
         $delta = time() - $start;
