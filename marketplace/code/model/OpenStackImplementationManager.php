@@ -34,6 +34,7 @@ abstract class OpenStackImplementationManager
      * @var IOpenStackComponentRepository
      */
     protected $component_repository;
+
     /**
      * @var IOpenStackReleaseRepository
      */
@@ -217,7 +218,6 @@ abstract class OpenStackImplementationManager
         $company_service = parent::update($company_service, $data);
         $company_service->setCompatibleWithCompute($data['compatible_compute']);
         $company_service->setCompatibleWithStorage($data['compatible_storage']);
-        $company_service->setCompatibleWithFederatedIdentity($data['compatible_federated_identity']);
         if(isset($data['interop_program_version_id'])) {
             $program_version = new InteropProgramVersion();
             $program_version->ID = (int)$data['interop_program_version_id'];
