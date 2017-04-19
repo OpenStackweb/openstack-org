@@ -54,6 +54,8 @@ class MarketPlacePage_Controller extends Page_Controller {
 				break;
             case 7:
                 $class = 'RemoteCloudsDirectoryPage';
+                $repository = new SapphireRemoteCloudRepository();
+                if ($repository->countActives() == 0) return false;
                 break;
 		}
 		if(!empty($class)){
