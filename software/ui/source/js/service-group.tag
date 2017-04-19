@@ -30,20 +30,5 @@ require('./t.tag');
             return group_split[0].toLowerCase();
         }
 
-        coreServiceDetails(e) {
-            window.location = self.coreServiceDetailsURL(e);
-        }
-
-        coreServiceDetailsURL(e) {
-            var slug  = e.item.slug;
-            var url = self.parent.base_url+'releases/'+self.parent.parent.getCurrentReleaseId()+'/components/'+slug;
-            return url;
-        }
-
-        mascotImage(component) {
-            var slugWithoutSpaces = component.slug.replace(/ /g,"_");
-            return '/software/images/mascots/' + slugWithoutSpaces + '.png';
-        }        
-
     </script>
 </service-group>

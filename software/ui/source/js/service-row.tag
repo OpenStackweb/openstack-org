@@ -3,10 +3,12 @@ require('./t.tag');
 
     <div class="project-table-row">
         <div class="project-table-code-name">
-                <a href="{ coreServiceDetailsURL() }"><span class="project-table-mascot-icon" style="background-image: url({mascotImage()});"></span>
-            { code_name }</a>
+            <a href="" onclick={ coreServiceDetails }>
+                <span class="project-table-mascot-icon" style="background-image: url({mascotImage()});"></span>
+                { code_name }
+            </a>
         </div>
-        <div class="project-table-description"><a href="{ coreServiceDetailsURL() }">{ name }</a></div>
+        <div class="project-table-description"><a href="" onclick={ coreServiceDetails }>{ name }</a></div>
     </div>    
 
     <script>
@@ -15,10 +17,12 @@ require('./t.tag');
 
         coreServiceDetails(e) {
             window.location = self.coreServiceDetailsURL();
+            return false;
         }
 
         coreServiceDetailsURL() {
-            var url = self.parent.base_url+'releases/ocata/components/'+self.slug;
+            var release = self.parent.parent.getCurrentReleaseId();
+            var url = self.parent.base_url+'releases/'+release+'/components/'+self.slug;
             return url;
         }
 

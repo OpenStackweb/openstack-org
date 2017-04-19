@@ -1,17 +1,18 @@
 require('./t.tag');
 <service-box>
     <div class="col-md-4 col-sm-6">
-    <div class="core-services-single-full">
-    <div class="core-top">
-    <div class="core-title" style="background-image: url({mascotImage()});">
-        <a href="{ coreServiceDetailsURL() }">{ code_name }</a>
-    </div>
-    <div class="core-service">
-        <a href="{ coreServiceDetailsURL() }">{ name }</a>
-    </div>
-    </div>
-
-    </div>
+        <div class="core-services-single-full">
+            <div class="core-top">
+                <a href="" onclick={ coreServiceDetails }>
+                    <div class="core-title" style="background-image: url({mascotImage()});">
+                        { code_name }
+                    </div>
+                </a>
+                <div class="core-service">
+                    <a href="" onclick={ coreServiceDetails }>{ name }</a>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -20,10 +21,12 @@ require('./t.tag');
 
         coreServiceDetails(e) {
             window.location = self.coreServiceDetailsURL();
+            return false;
         }
 
         coreServiceDetailsURL() {
-            var url = self.parent.base_url+'releases/ocata/components/'+self.slug;
+            var release = self.parent.parent.getCurrentReleaseId();
+            var url = self.parent.base_url+'releases/'+release+'/components/'+self.slug;
             return url;
         }
 

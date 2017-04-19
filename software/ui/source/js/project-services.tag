@@ -13,7 +13,7 @@ require('./service-group.tag')
 
     <script>
 
-        this.tileMode            = false;
+        this.tileMode            = opts.tilemode;
         this.groups              = opts.groups;
         this.base_url            = opts.base_url;
         this.max_maturity_points = opts.max_maturity_points;
@@ -26,6 +26,11 @@ require('./service-group.tag')
 
         toggleTileMode() {
             self.tileMode = !self.tileMode;
+            if (self.tileMode)
+                window.location.hash = 'tiles';
+            else
+                history.pushState("", document.title, window.location.pathname + window.location.search);
+
             self.update();
         }
 

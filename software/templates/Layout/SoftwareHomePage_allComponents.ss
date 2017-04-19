@@ -2,6 +2,7 @@
     var components = $getComponentsByCategoryJSON;
     var releases   = $getReleases;
     components.max_maturity_points = $Top.getMaxAllowedMaturityPoints;
+    var tileMode = (window.location.hash == '#tiles');
 </script>
 <% include SoftwareHomePage_MainNavMenu Active=1 %>
 <div class="software-main-wrapper">
@@ -32,7 +33,7 @@
                 <hr>
             </div>
         </div>
-        <project-services base_url="{$Top.Link}" groups="{ components.grouped_components }" max_maturity_points="{ components.max_maturity_points }">
+        <project-services base_url="{$Top.Link}" groups="{ components.grouped_components }" max_maturity_points="{ components.max_maturity_points }" tilemode="{ tileMode }">
         </project-services>
         <!-- Stats 'what does this mean?' Modal -->
         <div id="statsInfoModal" class="modal fade">
