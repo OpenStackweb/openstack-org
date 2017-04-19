@@ -15,8 +15,78 @@
     }
 </style>
 <div class="container">
-    <h1>$LoginPageTitle</h1>
     <!-- user survey report -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="condensed hero-survey">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <h1 style="color: white">See the results from the latest User Survey</h1>
+                        </div>
+                    </div>
+                    <div title="Photo by the OpenStack Foundation" data-placement="left" data-toggle="tooltip"
+                         class="hero-credit" data-original-title="Photo by the OpenStack Foundation">
+                        <a target="_blank" href="#"><i class="fa fa-info-circle"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <h3>See the OpenStack community’s opinions, adoption and technology choices</h3>
+            <p>
+                Read more from the ninth survey of OpenStack users since April 2013, with a goal of better understanding user perspectives, organizational profiles, use cases, and technology choices across the community’s deployments. This survey offers insights from more than 1,300 users, representing 44% more deployments and 22% more organizations than ever before.
+            </p>
+            <p>
+                <a class="roundedButton" href="https://www.openstack.org/assets/survey/April2017SurveyReport.pdf" target="_blank"> Read the April 2017 report</a>
+            </p>
+            <h3>Be your own data scientist</h3>
+            <p>
+                Uncover your own findings by digging into the User Survey data from the past year with a <a href="/analytics">new analysis tool</a> available to the OpenStack community. Apply multiple filters to virtually every quantitative question from the user survey.
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <h3>Watch a quick video overview</h3>
+            <ul class="list-unstyled">>
+                <li>April 2017 full report</li>
+                <li><a href="https://www.youtube.com/watch?v=m9p8NUMs_PM&feature=youtu.be" target="_blank">October 2016 highlights report</a></li>
+                <li><a href="http://www.amazon.com/dp/1532707053/" target="_blank">Order a print copy of the April 2016 full report</a></li>
+                <li><a href="https://www.youtube.com/watch?v=lmu5r7BCY_U&feature=youtu.be" target="_blank">April 2016 full report</a></li>
+            </ul>
+            <h3>See prior surveys</h3>
+            <p>
+                Learn more about past User Survey data to see how OpenStack is growing and maturing.
+            </p>
+            <ul class="list-unstyled">
+                <li><a href="https://www.openstack.org/assets/survey/October2016SurveyReport.pdf">October 2016 highlights report</a></li>
+                <li><a href="https://www.openstack.org/assets/survey/April-2016-User-Survey-Report.pdf">April 2016 full report</a></li>
+                <li>
+                    <a href="http://www.openstack.org/assets/survey/Public-User-Survey-Report.pdf">October 2015 Full report</a>
+                <li>
+                    <a href="http://superuser.openstack.org/articles/user-survey-identifies-leading-industries-and-business-drivers-for-openstack-adoption"
+                       target="_blank">May 2015 Demographics</a></li>
+                <li>
+                    <a href="http://superuser.openstack.org/articles/user-survey-identifies-leading-industries-and-business-drivers-for-openstack-adoption"
+                       target="_blank">May 2015 Business drivers</a></li>
+                <li>
+                    <a href="http://superuser.openstack.org/articles/openstack-users-share-how-their-deployments-stack-up"
+                       target="_blank">May 2015 Deployments</a></li>
+                <li><a href="http://superuser.openstack.org/articles/openstack-user-survey-insights-november-2014"
+                       target="_blank">November 2014 Full report</a></li>
+            </ul>
+            <h3>Order the User Survey as a printed book</h3>
+            <ul class="list-unstyled">>
+                <li>April 2017 full report</li>
+                <li><a href="https://www.amazon.com/dp/1532707053/" target="_blank">April 2016 full report</a></li>
+            </ul>
+        </div>
+    </div>
+    <hr />
+
 
     
     <h1>Get Started</h1>
@@ -49,73 +119,6 @@
             </div>
         </div>
     <% end_if %>
-    <hr />
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="condensed hero-survey">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12">
-                            <h1 style="color: white">See the results from the latest User Survey</h1>
-                        </div>
-                    </div>
-                    <div title="Photo by the OpenStack Foundation" data-placement="left" data-toggle="tooltip"
-                         class="hero-credit" data-original-title="Photo by the OpenStack Foundation">
-                        <a target="_blank" href="#"><i class="fa fa-info-circle"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <h3>See the OpenStack community’s opinions, adoption and technology choices</h3>
-            <p>
-                Read more from the eighth survey of OpenStack users since April 2013, with a goal of better understanding attitudes, organizational profiles, use cases, and technology choices across the community’s various deployment stages and sizes. This round of the survey offers highlights only, including a selection of charts most widely used by the community, and focuses only on deployments.
-            </p>
-            <p>
-                <a class="roundedButton" href="/assets/survey/October2016SurveyReport.pdf" target="_blank">Download the October 2016 highlights report</a>
-                <a class="roundedButton" href="/assets/survey/April-2016-User-Survey-Report.pdf" target="_blank">Download the full April 2016 Report</a>
-            </p>
-            <h3>Be your own data scientist</h3>
-            <p>
-                Uncover your own findings by digging into the User Survey data from the past year with a <a href="/analytics">new analysis tool</a> available to the OpenStack community. Apply multiple filters to virtually every quantitative question from the user survey.
-            </p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <h3>Survey Assets</h3>
-            <p>
-            <ul>
-                <li><a href="https://www.youtube.com/watch?v=m9p8NUMs_PM&feature=youtu.be" target="_blank">See a video overview of the October 2016 report</a></li>
-                <li><a href="/assets/survey/October2016-UserSurvey-script-charts.pdf" target="_blank">Slide deck of the October 2016 highlights report</a></li>
-                <li><a href="http://www.amazon.com/dp/1532707053/" target="_blank">Order a print copy of the April 2016 full report</a></li>
-                <li><a href="https://www.youtube.com/watch?v=lmu5r7BCY_U&feature=youtu.be" target="_blank">Video overview of the April 2016 full report</a></li>
-                <li><a href="https://www.dropbox.com/s/8sxfm5bt57kgeys/User%20Survey%20overview%20web.pptx?dl=0" target="_blank">Slide deck of the April 2016 full report</a></li>
-            </ul>
-            </p>
-            <h3>See prior surveys</h3>
-            <p>
-                Learn more about past User Survey data to see how OpenStack is growing and maturing.
-            </p>
-            <ul class="list-unstyled">
-                <li>
-                    <a href="http://www.openstack.org/assets/survey/Public-User-Survey-Report.pdf">October 2015 Full report</a>
-                <li>
-                    <a href="http://superuser.openstack.org/articles/user-survey-identifies-leading-industries-and-business-drivers-for-openstack-adoption"
-                       target="_blank">May 2015 Demographics</a></li>
-                <li>
-                    <a href="http://superuser.openstack.org/articles/user-survey-identifies-leading-industries-and-business-drivers-for-openstack-adoption"
-                       target="_blank">May 2015 Business drivers</a></li>
-                <li>
-                    <a href="http://superuser.openstack.org/articles/openstack-users-share-how-their-deployments-stack-up"
-                       target="_blank">May 2015 Deployments</a></li>
-                <li><a href="http://superuser.openstack.org/articles/openstack-user-survey-insights-november-2014"
-                       target="_blank">November 2014 Full report</a></li>
-            </ul>
-        </div>
-    </div>
     <!-- end - user survey report -->
     <% if $LoginPageSlide1Content && $LoginPageSlide2Content && $LoginPageSlide3Content %>
     <hr/>
