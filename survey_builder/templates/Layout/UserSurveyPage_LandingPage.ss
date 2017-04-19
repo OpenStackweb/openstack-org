@@ -16,6 +16,7 @@
 </style>
 <div class="container">
     <!-- user survey report -->
+    <p>&nbsp;</p>
     <div class="row">
         <div class="col-lg-12">
             <div class="condensed hero-survey">
@@ -51,7 +52,7 @@
     <div class="row">
         <div class="col-sm-6">
             <h3>Watch a quick video overview</h3>
-            <ul class="list-unstyled">>
+            <ul class="list-unstyled">
                 <li><a href="https://www.youtube.com/watch?v=1yerazN3ZHc&feature=youtu.be" target="_blank">April 2017 full report</a></li>
                 <li><a href="https://www.youtube.com/watch?v=m9p8NUMs_PM&feature=youtu.be" target="_blank">October 2016 highlights report</a></li>
                 <li><a href="http://www.amazon.com/dp/1532707053/" target="_blank">Order a print copy of the April 2016 full report</a></li>
