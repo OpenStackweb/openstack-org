@@ -81,7 +81,7 @@
             </ul>
             <h3>Order the User Survey as a printed book</h3>
             <ul class="list-unstyled">
-                <li>April 2017 full report</li>
+                <li>April 2017 full report (coming soon)</li>
                 <li><a href="https://www.amazon.com/dp/1532707053/" target="_blank">April 2016 full report</a></li>
             </ul>
         </div>
