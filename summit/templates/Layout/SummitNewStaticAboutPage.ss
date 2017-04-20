@@ -130,9 +130,9 @@
       </div>
       <div class="col-sm-3 featured">
         <div class="summit-user-section">
-          <img src="//www.openstack.org/assets/boston-summit/speakers/JuliannaRodriguez.jpg" alt="Major Julianna Rodriguez" class="summit-user-image">
-          <div class="name">Major Julianna Rodriguez</div>
-          <div class="title">Director, U.S. Army Cyber School</div>
+          <img src="//www.openstack.org/assets/boston-summit/speakers/Patrick-Weeks.jpg" alt="Patrick Weeks" class="summit-user-image">
+          <div class="name">Patrick Weeks</div>
+          <div class="title">Senior Director of Cloud, Automation and Operations, GE Healthcare</div>
         </div>
       </div>
     </div>
@@ -199,9 +199,9 @@
     <div class="row">
       <div class="col-sm-3">
         <div class="summit-user-section">
-          <img src="//www.openstack.org/assets/boston-summit/speakers/DavidAronchick.jpg" alt="David Aronchick" class="summit-user-image">
-          <div class="name">David Aronchick</div>
-          <div class="title">Product Manager, Google</div>
+          <img src="//www.openstack.org/assets/boston-summit/speakers/JuliannaRodriguez.jpg" alt="Major Julianna Rodriguez" class="summit-user-image">
+          <div class="name">Major Julianna Rodriguez</div>
+          <div class="title">Director, U.S. Army Cyber School</div>
         </div>
       </div>
       <div class="col-sm-3">
