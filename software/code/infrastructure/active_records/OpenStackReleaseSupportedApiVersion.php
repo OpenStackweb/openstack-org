@@ -25,7 +25,7 @@ class OpenStackReleaseSupportedApiVersion
     private static $db = array
     (
         'ReleaseVersion'     => 'Text',
-        'Status'             => "Enum('Deprecated, Supported, Current, Beta, Alpha' , 'Deprecated')",
+        'Status'             => "Enum('Deprecated, Supported, Current, Beta, Alpha' , 'Current')",
         'CreatedFromTask'    => 'Boolean',
     );
 

@@ -251,14 +251,14 @@ class OpenStackRelease
 
     /**
      * @param string $code_name
-     * @return bool
+     * @return OpenStackComponent|null
      */
     public function supportsComponent($code_name)
     {
-        $res = $this->getManyManyComponents('OpenStackComponents',
-            "OpenStackComponent.CodeName = '{$code_name}' ")->First();
-
-        return $res;
+        foreach(AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'OpenStackComponents')->toArray() as $component){
+            if($component->CodeName == $code_name) return $component;
+        }
+        return null;
     }
 
     /**
@@ -407,11 +407,17 @@ class OpenStackRelease
         return $this->OpenStackComponents()->filter(array( 'OpenStackComponentID' => $component_id))->first();
     }
 
-    public function getVersionLabel($component_id)
+    public function getCurrentSupportedApiVersionLabel($component_id)
     {
         $api = $this->SupportedApiVersions()
-            ->innerJoin('OpenStackApiVersion','OpenStackApiVersion.ID = OpenStackReleaseSupportedApiVersion.ApiVersionID')
-            ->filter('OpenStackComponentID', $component_id)->sort('OpenStackReleaseSupportedApiVersion.ReleaseVersion','DESC')->first();
+              ->innerJoin('OpenStackApiVersion','OpenStackApiVersion.ID = OpenStackReleaseSupportedApiVersion.ApiVersionID')
+              ->filter(
+                  [
+                      'OpenStackComponentID'                       => $component_id,
+                      'OpenStackReleaseSupportedApiVersion.Status' => 'Current'
+                  ]
+              )
+             ->first();
         if(is_null($api))
             return 'N/A';
         $res = $api->ReleaseVersion;
