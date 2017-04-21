@@ -21,7 +21,7 @@
     "knplabs/github-api": "1.4.4",
     "rackspace/php-opencloud": "1.12.2",
     "nnnick/chartjs": "dev-master",
-    "openid/php-openid": "dev-master",
+    "openid/php-openid": "2.3.0",
     "silverstripe/geoip": "dev-master",
     "sendgrid/sendgrid": "3.0.0",
     "silverstripe-australia/gridfieldextensions": "1.0.3",
