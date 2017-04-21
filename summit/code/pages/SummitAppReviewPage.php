@@ -39,7 +39,7 @@ class SummitAppReviewPage_Controller extends SummitPage_Controller
 
     }
 
-    public function index(){
+    public function index(SS_HTTPRequest $request){
 
         $member    = Member::currentUser();
 

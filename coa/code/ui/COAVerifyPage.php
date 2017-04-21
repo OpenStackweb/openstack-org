@@ -72,7 +72,7 @@ class COAVerifyPage_Controller extends Page_Controller
         Requirements::javascript('themes/openstack/bower_assets/sweetalert/dist/sweetalert.min.js');
     }
 
-    public function index(){
+    public function index(SS_HTTPRequest $request){
 
         return $this->getViewer('index')->process($this);
     }

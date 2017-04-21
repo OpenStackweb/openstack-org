@@ -110,7 +110,7 @@ class SoftwareHomePage_Controller extends Page_Controller
         Requirements::javascript("software/js/software.js");
     }
 
-    public function index()
+    public function index(SS_HTTPRequest $request)
     {
         $release = $this->getDefaultRelease();
         if(is_null($release)) return 'Default Release not set!';

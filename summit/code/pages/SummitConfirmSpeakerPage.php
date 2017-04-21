@@ -49,7 +49,7 @@ class SummitConfirmSpeakerPage_Controller extends SummitPage_Controller
         parent::init();
     }
 
-    public function index()
+    public function index(SS_HTTPRequest $request)
     {
         $response = new SS_HTTPResponse;
         $response->setStatusCode(404);

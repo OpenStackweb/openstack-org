@@ -27,4 +27,9 @@ Injector:
 
 Page:
   extensions:
-    - 'PageOpenGraphObjectExtension'
+    - PageOpenGraphObjectExtension
+    - FuturePublishDate
+
+Page_Controller:
+  extensions:
+    - FuturePublishDateController

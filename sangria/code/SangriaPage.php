@@ -55,7 +55,7 @@ final class SangriaPage_Controller extends AdminController implements Permission
         self::$default_end_date = date('Y/m/d') . ' 23:59';
     }
 
-    public function index()
+    public function index(SS_HTTPRequest $request)
     {
         $this->extend('onBeforeIndex', $this);
         return $this;

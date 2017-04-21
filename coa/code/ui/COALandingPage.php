@@ -358,7 +358,7 @@ class COALandingPage_Controller extends Page_Controller
         return parent::handleAction($request, $action);
     }
 
-    public function index(){
+    public function index(SS_HTTPRequest $request){
         Requirements::css('coa/css/coa.css');
         Requirements::javascript('coa/js/coa.js');
 

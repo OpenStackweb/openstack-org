@@ -211,7 +211,7 @@ class MarketPlaceAdminPage_Controller extends AdminController
     }
 
 
-    public function index()
+    public function index(SS_HTTPRequest $request)
     {
         if ($this->canAdmin('implementations'))
             return $this->getViewer('index')->process($this);
