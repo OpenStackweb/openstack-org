@@ -36,14 +36,19 @@ final class AttendeeMember extends DataExtension implements IAttendeeMember
      */
     public function getSummitAttendee($summit_id = null)
     {
-        $attendee = $this->owner->SummitAttendance();
-        if (!is_null($summit_id)) {
-            $attendee = $attendee->filter(array
-            (
-                'SummitID' => $summit_id
-            ));
+        $attendees = $this->owner->SummitAttendance();
+        if ($attendees->Count() > 0) {
+            if (!is_null($summit_id)) {
+                $summit_attendees = $attendees->filter('SummitID', $summit_id);
+                $attendee = $summit_attendees->first();
+            } else {
+                $attendee = $attendees->first();
+            }
+
+            return $attendee;
+        } else {
+            return null;
         }
-        return $attendee->first();
     }
 
     /**

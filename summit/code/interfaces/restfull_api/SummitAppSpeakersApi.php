@@ -192,7 +192,7 @@ class SummitAppSpeakersApi extends AbstractRestfulJsonApi {
             $summit       = Summit::get_by_id('Summit',$summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
 
-            $speaker = PresentationSpeaker::get_by_id('PresentationSpeaker',$speaker_id);
+            $speaker = PresentationSpeaker::get()->byID($speaker_id);
             $attendee = ($speaker->Member()) ? $speaker->Member()->getCurrentSummitAttendee() : null;
 
             $speaker_array = array(
