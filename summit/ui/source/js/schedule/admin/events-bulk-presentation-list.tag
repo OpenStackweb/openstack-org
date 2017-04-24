@@ -48,7 +48,7 @@
         this.on('mount', function() {
             self.getList(1);
 
-            $('.reports-wrapper').on('change','input',function(){
+            $('events-bulk-container').on('change','input',function(){
                 $(this).parents('tr').addClass('changed');
             });
         });
