@@ -99,14 +99,14 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
 
     static $url_handlers = array
     (
-        'GET speaker_report'                => 'exportSpeakerReport',
-        'GET room_report/$EVENT_ID'         => 'exportRoomAttendees',
-        'GET room_report'                   => 'exportRoomReport',
-        'GET presentation_report'           => 'exportPresentationReport',
-        'GET video_report'                  => 'exportVideoReport',
-        'GET rsvp_report'                   => 'exportRsvpReport',
-        'GET presentations_company_report'  => 'exportPresentationsCompanyReport',
-        'GET presentations_by_track_report' => 'exportPresentationsByTrackReport',
+        'GET speaker_report'                   => 'exportSpeakerReport',
+        'GET room_report/attendees/$EVENT_ID!' => 'exportRoomAttendees',
+        'GET room_report'                      => 'exportRoomReport',
+        'GET presentation_report'              => 'exportPresentationReport',
+        'GET video_report'                     => 'exportVideoReport',
+        'GET rsvp_report'                      => 'exportRsvpReport',
+        'GET presentations_company_report'     => 'exportPresentationsCompanyReport',
+        'GET presentations_by_track_report'    => 'exportPresentationsByTrackReport',
     );
 
     static $allowed_actions = array(

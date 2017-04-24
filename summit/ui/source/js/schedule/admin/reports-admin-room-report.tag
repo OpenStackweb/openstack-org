@@ -84,7 +84,7 @@
 
             $('.reports-wrapper').on('click','.export_room_attendees',function(){
                 var event_id = $(this).parents('tr').data('id');
-                window.open('api/v1/summits/'+self.summit_id+'/reports/export/room_report/'+event_id, '_blank');
+                window.open('api/v1/summits/'+self.summit_id+'/reports/export/room_report/attendees/'+event_id, '_blank');
             });
 
             $('#select_venue').chosen();
