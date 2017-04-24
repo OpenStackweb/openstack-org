@@ -57,7 +57,7 @@ class SummitSponsorPage extends SummitPage
     //sponsor type
     private static $many_many_extraFields = array(
         'Companies' => [
-            'SponsorshipType' => "Enum('Headline, Premier, Event, Startup, InKind, Spotlight, Media, Party', 'Startup')",
+            'SponsorshipType' => "Enum('Headline, Premier, Event, Exhibitor, Startup, InKind, Spotlight, Media, Party', 'Startup')",
             'SubmitPageUrl'   => 'Text',
             'SummitID'        => 'Int'
         ],
@@ -287,7 +287,7 @@ class SummitSponsorPage extends SummitPage
      */
     public function HasSponsors(){
         return $this->StartupSponsors()->Count() > 0 || $this->HeadlineSponsors()->Count() > 0
-        || $this->PremierSponsors()->Count() > 0 || $this->EventSponsors()->Count() > 0
+        || $this->PremierSponsors()->Count() > 0 || $this->EventSponsors()->Count() > 0 || $this->Exhibitor()->Count() > 0
         || $this->InKindSponsors()->Count() > 0 || $this->SpotlightSponsors()->Count() > 0
         || $this->MediaSponsors()->Count() > 0;
     }
@@ -318,6 +318,11 @@ class SummitSponsorPage extends SummitPage
     public function EventSponsors()
     {
         return $this->Sponsors("Event");
+    }
+
+    public function ExhibitorSponsors()
+    {
+        return $this->Sponsors("Exhibitor");
     }
 
     public function InKindSponsors()
