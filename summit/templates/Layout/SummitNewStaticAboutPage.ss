@@ -201,7 +201,7 @@
         <div class="summit-user-section">
           <img src="//www.openstack.org/assets/boston-summit/speakers/JuliannaRodriguez.jpg" alt="Major Julianna Rodriguez" class="summit-user-image">
           <div class="name">Major Julianna Rodriguez</div>
-          <div class="title">Director, U.S. Army Cyber School</div>
+          <div class="title">Director, Technical College, U.S. Army Cyber School</div>
         </div>
       </div>
       <div class="col-sm-3">
