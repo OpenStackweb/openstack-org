@@ -68,3 +68,4 @@ migrations:
   - MemberLinkedInCleanMigration
   - NewMarketplaceTypeRemoteCloudSeedTask
   - CreateEventbriteAttendeeSummitAttendeeTicketIndexMigration
+  - UpdateComponentReleasesMigration
