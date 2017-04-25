@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: openstack-user-survey\n"
-"POT-Creation-Date: 2017-04-24 13:11-0300\n"
-"PO-Revision-Date: 2017-04-24 13:14-0300\n"
+"POT-Creation-Date: 2017-04-25 17:35-0300\n"
+"PO-Revision-Date: 2017-04-25 17:40-0300\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,39 +20,39 @@ msgstr ""
 
 # survey template 6 title
 msgid "OpenStack User Survey - 2017"
-msgstr ""
+msgstr "Encuesta de Usuario de OpenStack - 2017"
 
 # survey template 6 - survey step about-you friendly name
 msgid "About You"
-msgstr ""
+msgstr "Acerca de ti"
 
 # step about-you - question FirstName label
 msgid "First name / Given name*"
-msgstr ""
+msgstr "Primer Nombre / Nombre de pila*"
 
 # step about-you - question Surname label
 msgid "Last name / Family name*<br/><font size=\"-2\"><em>We'll never share individual information without your permission, but we will present select user survey results in aggregate. </em></font>"
-msgstr ""
+msgstr "Apellido*<br/><font size=\"-2\"><em>Nunca compartiremos informacion personal sin tu consentimiento, pero presentaremos datos anonimos en los resultados de la encuesta de usuario</em></font>"
 
 # step about-you - question OpenStackActivity label
 msgid "What are the ways you work with OpenStack?*<br/><font size=\"-2\"><em>Select all that apply</em></font>"
-msgstr ""
+msgstr "De cuales formas trabajas con OpenStack?*<br/><font size=\"-2\"><em>Elige todas las que apliquen</em></font>"
 
 # step about-you - question OpenStackActivityOther label
 msgid "Please describe your relationship with OpenStack"
-msgstr ""
+msgstr "Por favor describa su relacion con OpenStack"
 
 # step about-you - question Email label
 msgid "Your Email*"
-msgstr ""
+msgstr "Su Email*"
 
 # step about-you - question UserCountry label
 msgid "Country of Residence*"
-msgstr ""
+msgstr "Pais de Residencia*"
 
 # step about-you - question OkToContact label
 msgid "The OpenStack Foundation and User Committee may communicate with me in the future about my usage.*"
-msgstr ""
+msgstr "El comite de usuarios y la Fundacion OpenStack podran comunicarse conmigo acerca de mi uso en el futuro.*"
 
 # survey template 6 - survey step your-organization friendly name
 msgid "Your Organization"
@@ -60,19 +60,19 @@ msgstr "Tu Organizacion"
 
 # step your-organization - question Organization label
 msgid "Your Organization Name*"
-msgstr "El Nombre de tu Organizacion*"
+msgstr "El nombre de tu Organizacion*"
 
 # step your-organization - question Industry label
 msgid "Your Organization’s Primary Industry*"
-msgstr "La actividad Primaria de tu organizacion*"
+msgstr "La actividad principal de tu Organizacion*"
 
 # question Industry empty string, question PrimaryCountry empty string, question OrgSize empty string, question DocsFeedback empty string, question IsPublic empty string, question DeploymentStage empty string, question DeploymentAge empty string, question CountriesPhysicalLocation empty string, question DeploymentType empty string, question RefStackTest empty string, question NumCloudUsers empty string, question ComputeNodes empty string, question ComputeCores empty string, question ComputeInstances empty string, question NetworkNumIPs empty string, question BlockStorageTotalSize empty string, question ObjectStorageSize empty string, question ObjectStorageNumObjects empty string, question NovaNumCells empty string, question ITPercentageonOpenStack empty string, question OperatingSystems empty string, question HeatFeedback empty string, question NovaFeedback empty string, question TripleOFeedback empty string
 msgid "-- Select One --"
-msgstr ""
+msgstr "-- Seleccione Una --"
 
 # question Industry value Academic / Research label
 msgid "Academic / Research"
-msgstr "Academica / Investigacion"
+msgstr ""
 
 # question Industry value Advertising label
 msgid "Advertising"
@@ -112,7 +112,7 @@ msgstr ""
 
 # question Industry value Information Technology label
 msgid "Information Technology"
-msgstr "Tecnologias de informacion"
+msgstr ""
 
 # question Industry value Insurance label
 msgid "Insurance"
@@ -156,7 +156,7 @@ msgstr ""
 
 # question break1 literal content
 msgid "<hr><p>Your Organization’s Primary Location or Headquarters</p>"
-msgstr "<hr><p>La locacion de la surcursal principal de tu Organizacion</p>"
+msgstr ""
 
 # step your-organization - question PrimaryCountry label
 msgid "Country*"
@@ -1164,15 +1164,15 @@ msgstr ""
 
 # step your-organization - question PrimaryState label
 msgid "State / Province / Region"
-msgstr "Estado / Provincia /Region"
+msgstr ""
 
 # step your-organization - question PrimaryCity label
 msgid "City*"
-msgstr "Ciudad*"
+msgstr ""
 
 # step your-organization - question OrgSize label
 msgid "Your Organization's Size*"
-msgstr "El Tamanio de tu Organizacion*"
+msgstr ""
 
 # question OrgSize value 1 to 9 employees label
 msgid "1 to 9 employees"
