@@ -160,3 +160,4 @@
     </script>
 </div>
 $ModuleJS('survey')
+$ModuleCSS('survey')

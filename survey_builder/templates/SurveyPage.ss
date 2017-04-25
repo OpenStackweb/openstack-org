@@ -35,4 +35,5 @@
     </body>
     <% include Page_LinkedinInsightTracker %>
    $ModuleJS('survey')
+   $ModuleCSS('survey')
 </html>
