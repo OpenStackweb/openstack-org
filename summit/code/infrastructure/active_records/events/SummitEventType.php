@@ -24,6 +24,7 @@ class SummitEventType extends DataObject implements ISummitEventType
         'BlackoutTimes'        => 'Boolean',
         'UseSponsors'          => 'Boolean',
         'AreSponsorsMandatory' => 'Boolean',
+        'AllowsAttachment'     => 'Boolean',
     );
 
     private static $has_many = array
@@ -91,6 +92,7 @@ class SummitEventType extends DataObject implements ISummitEventType
         $fields->add(new CheckboxField("BlackoutTimes","Blackout Times"));
         $fields->add(new CheckboxField("UseSponsors","Should use Sponsors?"));
         $fields->add(new CheckboxField("AreSponsorsMandatory","Are Sponsors Mandatory?"));
+        $fields->add(new CheckboxField("AllowsAttachment","Allows Attachment?"));
         $fields->add(new HiddenField('SummitID','SummitID'));
         return $fields;
     }
@@ -152,15 +154,6 @@ class SummitEventType extends DataObject implements ISummitEventType
     static public function isPrivate($type){
         $private_types = [ISummitEventType::GroupsEvents];
         return in_array($type, $private_types);
-    }
-
-    /**
-     * @param string $type
-     * @return bool
-     */
-    static public function isTypeWithFile($type){
-        $file_types = [ISummitEventType::Lunch, ISummitEventType::Breaks];
-        return in_array($type, $file_types);
     }
 
 }

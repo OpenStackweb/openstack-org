@@ -58,6 +58,7 @@ class PresentationType extends SummitEventType
 
     public function getCMSFields() {
         $fields = parent::getCMSFields();
+        $fields->removeByName('AllowsAttachment');
 
         $fields->add(new CheckboxField("ShouldBeAvailableOnCFP","Should be available on CFP ?"));
 

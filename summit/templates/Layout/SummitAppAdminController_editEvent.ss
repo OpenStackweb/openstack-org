@@ -94,7 +94,7 @@
                             <% loop Summit.EventTypes() %>
                                     <option data-use-sponsors="$UseSponsors"
                                             data-sponsors-mandatory="$AreSponsorsMandatory"
-                                            data-type-taxonomy="$Top.getTypeTaxonomy($Type)"
+                                            data-type-taxonomy="$Top.getTypeTaxonomy($Type, $AllowsAttachment)"
                                             <% if $Top.IsPresentationEventType($Type) %>
                                             data-use-speakers="$UseSpeakers"
                                             data-speakers-mandatory="$AreSpeakersMandatory"
@@ -322,7 +322,7 @@
                 // set current
                 $('#event_type').val(event_type_id).change();
                 // and get type to filter by
-                var taxonomy           = $Top.getTypeTaxonomy($Top.Event.Type.Type);
+                var taxonomy           = $Top.getTypeTaxonomy($Top.Event.Type.Type, $Top.Event.Type.AllowsAttachment);
                 $("#event_type").find("option").each(function(){
                     var item_taxonomy = $(this).data('type-taxonomy');
                     if(typeof (item_taxonomy) == 'undefined') return;

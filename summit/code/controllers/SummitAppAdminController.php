@@ -981,14 +981,15 @@ final class SummitAppAdminController extends Controller implements PermissionPro
 
     /**
      * @param string $type
+     * @param bool $allows_attachment
      * @return int
      */
-    public function getTypeTaxonomy($type){
+    public function getTypeTaxonomy($type, $allows_attachment){
         if(PresentationType::IsPresentationEventType($type))
             return ISummitEventTypeTaxonomy::Presentation;
         if(SummitEventType::isPrivate($type))
             return ISummitEventTypeTaxonomy::GroupEvent;
-        if(SummitEventType::isTypeWithFile($type))
+        if($allows_attachment)
             return ISummitEventTypeTaxonomy::EventWithFile;
         return ISummitEventTypeTaxonomy::Event;
     }
