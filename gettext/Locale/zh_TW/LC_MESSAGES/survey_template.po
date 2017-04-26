@@ -1,0 +1,1786 @@
+# Tom Fifield <tom@openstack.org>, 2017. #zanata
+msgid ""
+msgstr ""
+"Project-Id-Version: openstack-user-survey\n"
+"POT-Creation-Date: 2017-04-21 22:21-0300\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2017-04-25 23:37-0300\n"
+"Last-Translator: Tom Fifield <tom@openstack.org>\n"
+"Language-Team: Chinese (Taiwan)\n"
+"Language: zh_TW\n"
+"X-Generator: Poedit 1.8.4\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "OpenStack User Survey - 2017"
+msgstr "2017年OpenStack用戶調查"
+
+msgid "About You"
+msgstr "關於你"
+
+msgid "First name / Given name*"
+msgstr "名"
+
+msgid ""
+"Last name / Family name*<br/><font size=\"-2\"><em>We'll never share "
+"individual information without your permission, but we will present select "
+"user survey results in aggregate. </em></font>"
+msgstr ""
+
+msgid ""
+"What are the ways you work with OpenStack?*<br/><font size=\"-2\"><em>Select "
+"all that apply</em></font>"
+msgstr ""
+
+msgid "Please describe your relationship with OpenStack"
+msgstr ""
+
+msgid "Your Email*"
+msgstr "你的郵件*"
+
+msgid "Country of Residence*"
+msgstr "居住國家*"
+
+msgid ""
+"The OpenStack Foundation and User Committee may communicate with me in the "
+"future about my usage.*"
+msgstr ""
+
+msgid "Your Organization"
+msgstr ""
+
+msgid "Your Organization Name*"
+msgstr ""
+
+msgid "Your Organization’s Primary Industry*"
+msgstr ""
+
+msgid "-- Select One --"
+msgstr "-- 選擇一 --"
+
+msgid "Academic / Research"
+msgstr ""
+
+msgid "Advertising"
+msgstr ""
+
+msgid "Automotive"
+msgstr ""
+
+msgid "Consumer Goods"
+msgstr ""
+
+msgid "Energy"
+msgstr ""
+
+msgid "Film / Media"
+msgstr ""
+
+msgid "Finance"
+msgstr ""
+
+msgid "Gaming"
+msgstr ""
+
+msgid "Government / Defense"
+msgstr ""
+
+msgid "Healthcare"
+msgstr ""
+
+msgid "Information Technology"
+msgstr ""
+
+msgid "Insurance"
+msgstr ""
+
+msgid "Manufacturing / Industrial"
+msgstr ""
+
+msgid "Nonprofit"
+msgstr ""
+
+msgid "Retail / ecommerce"
+msgstr ""
+
+msgid "Telecommunications"
+msgstr ""
+
+msgid "Travel"
+msgstr ""
+
+msgid "Other"
+msgstr "其他"
+
+msgid "Please specify which industry best describes your organization."
+msgstr ""
+
+msgid "Your Organization's Primary IT Focus"
+msgstr ""
+
+msgid "Other IT activity"
+msgstr ""
+
+msgid "<hr><p>Your Organization’s Primary Location or Headquarters</p>"
+msgstr ""
+
+msgid "Country*"
+msgstr "國名*"
+
+msgid "Afghanistan"
+msgstr "阿富汗"
+
+msgid "Aland Islands"
+msgstr "阿蘭群島"
+
+msgid "Albania"
+msgstr "阿爾巴尼亞"
+
+msgid "Algeria"
+msgstr "阿爾及利亞"
+
+msgid "American Samoa"
+msgstr "美屬薩摩亞"
+
+msgid "Andorra"
+msgstr "安道爾"
+
+msgid "Angola"
+msgstr "安哥拉"
+
+msgid "Anguilla"
+msgstr "安圭拉"
+
+msgid "Antarctica"
+msgstr "南極洲"
+
+msgid "Antigua and Barbuda"
+msgstr "安提瓜和巴布達"
+
+msgid "Argentina"
+msgstr "阿根廷"
+
+msgid "Armenia"
+msgstr "亞美尼亞"
+
+msgid "Aruba"
+msgstr "阿路巴"
+
+msgid "Australia"
+msgstr "澳大利亞"
+
+msgid "Austria"
+msgstr "奧地利"
+
+msgid "Azerbaijan"
+msgstr "亞塞拜然"
+
+msgid "Bahamas"
+msgstr "巴哈馬"
+
+msgid "Bahrain"
+msgstr "巴林"
+
+msgid "Bangladesh"
+msgstr "孟加拉"
+
+msgid "Barbados"
+msgstr "巴貝多"
+
+msgid "Belarus"
+msgstr "白俄羅斯"
+
+msgid "Belgium"
+msgstr "比利時"
+
+msgid "Belize"
+msgstr "貝里斯"
+
+msgid "Benin"
+msgstr "貝南"
+
+msgid "Bermuda"
+msgstr "百慕達"
+
+msgid "Bhutan"
+msgstr "不丹"
+
+msgid "Bolivia, Plurinational State of"
+msgstr "玻利維亞"
+
+msgid "Bonaire, Sint Eustatius and Saba"
+msgstr "博內爾島,圣尤斯特歇斯和薩巴"
+
+msgid "Bosnia and Herzegovina"
+msgstr "波希尼亞及赫塞哥維那"
+
+msgid "Botswana"
+msgstr "波札那"
+
+msgid "Bouvet Island"
+msgstr "布韋島"
+
+msgid "Brazil"
+msgstr "巴西"
+
+msgid "British Indian Ocean Territory"
+msgstr "英國印度洋領土"
+
+msgid "Brunei Darussalam"
+msgstr "汶萊"
+
+msgid "Bulgaria"
+msgstr "保加利亞"
+
+msgid "Burkina Faso"
+msgstr "有吉納法索"
+
+msgid "Burundi"
+msgstr "蒲隆地"
+
+msgid "Cambodia"
+msgstr "柬埔寨"
+
+msgid "Cameroon"
+msgstr "喀麥隆"
+
+msgid "Canada"
+msgstr "加拿大"
+
+msgid "Cape Verde"
+msgstr "維德角島"
+
+msgid "Cayman Islands"
+msgstr "開曼群島"
+
+msgid "Central African Republic"
+msgstr "中非共和國"
+
+msgid "Chad"
+msgstr "查德"
+
+msgid "Chile"
+msgstr "智利"
+
+msgid "China"
+msgstr "中國大陸"
+
+msgid "Christmas Island"
+msgstr "聖誕島"
+
+msgid "Cocos (Keeling) Islands"
+msgstr "科科斯（基林）群島"
+
+msgid "Colombia"
+msgstr "哥倫比亞"
+
+msgid "Comoros"
+msgstr "科摩羅"
+
+msgid "Congo"
+msgstr "剛果"
+
+msgid "Congo, the Democratic Republic of the"
+msgstr "剛果"
+
+msgid "Cook Islands"
+msgstr "科克群島"
+
+msgid "Costa Rica"
+msgstr "哥斯大黎加"
+
+msgid "Côte d'Ivoire"
+msgstr "象牙海岸"
+
+msgid "Croatia"
+msgstr "克羅埃西亞"
+
+msgid "Cuba"
+msgstr "古巴"
+
+msgid "Curaçao"
+msgstr "庫拉索"
+
+msgid "Cyprus"
+msgstr "塞浦路斯"
+
+msgid "Czech Republic"
+msgstr "捷克"
+
+msgid "Denmark"
+msgstr "丹麥"
+
+msgid "Djibouti"
+msgstr "吉布提"
+
+msgid "Dominica"
+msgstr "多米尼克"
+
+msgid "Dominican Republic"
+msgstr "多明尼加"
+
+msgid "Ecuador"
+msgstr "厄瓜多爾"
+
+msgid "Egypt"
+msgstr "埃及"
+
+msgid "El Salvador"
+msgstr "薩爾瓦多"
+
+msgid "Equatorial Guinea"
+msgstr "幾內亞"
+
+msgid "Eritrea"
+msgstr "厄利垂亞"
+
+msgid "Estonia"
+msgstr "愛沙尼亞"
+
+msgid "Ethiopia"
+msgstr "衣索匹亞"
+
+msgid "Falkland Islands (Malvinas)"
+msgstr "福克蘭群島（馬爾維納斯）"
+
+msgid "Faroe Islands"
+msgstr "法羅群島"
+
+msgid "Fiji"
+msgstr "斐濟"
+
+msgid "Finland"
+msgstr "芬蘭"
+
+msgid "France"
+msgstr "法國"
+
+msgid "France, Metropolitan"
+msgstr "法國本土"
+
+msgid "French Guiana"
+msgstr "法屬圭亞那"
+
+msgid "French Polynesia"
+msgstr "法屬玻里尼西亞"
+
+msgid "French Southern Territories"
+msgstr "法國南部地區"
+
+msgid "Gabon"
+msgstr "加彭"
+
+msgid "Gambia"
+msgstr "岡比亞"
+
+msgid "Georgia"
+msgstr "喬治亞"
+
+msgid "Germany"
+msgstr "德國"
+
+msgid "Ghana"
+msgstr "迦納"
+
+msgid "Gibraltar"
+msgstr "直布羅陀"
+
+msgid "Greece"
+msgstr "希臘"
+
+msgid "Greenland"
+msgstr "格陵蘭"
+
+msgid "Grenada"
+msgstr "格瑞那達"
+
+msgid "Guadeloupe"
+msgstr "瓜德羅普"
+
+msgid "Guam"
+msgstr "關島"
+
+msgid "Guatemala"
+msgstr "瓜地馬拉"
+
+msgid "Guernsey"
+msgstr "根西島"
+
+msgid "Guinea"
+msgstr "幾內亞"
+
+msgid "Guinea-Bissau"
+msgstr "幾內亞"
+
+msgid "Guyana"
+msgstr "蓋亞那"
+
+msgid "Haiti"
+msgstr "海地"
+
+msgid "Heard Island and McDonald Islands"
+msgstr "赫德島和麥克唐納群島"
+
+msgid "Holy See (Vatican City State)"
+msgstr "教廷（梵蒂岡城）"
+
+msgid "Honduras"
+msgstr "宏都拉斯"
+
+msgid "Hong Kong"
+msgstr "香港"
+
+msgid "Hungary"
+msgstr "匈牙利"
+
+msgid "Iceland"
+msgstr "冰島"
+
+msgid "India"
+msgstr "印度"
+
+msgid "Indonesia"
+msgstr "印尼"
+
+msgid "Iran, Islamic Republic of"
+msgstr "依朗"
+
+msgid "Iraq"
+msgstr "伊拉克"
+
+msgid "Ireland"
+msgstr "愛爾蘭"
+
+msgid "Isle of Man"
+msgstr "馬恩島"
+
+msgid "Israel"
+msgstr "以色列"
+
+msgid "Italy"
+msgstr "義大利"
+
+msgid "Jamaica"
+msgstr "牙買加"
+
+msgid "Japan"
+msgstr ""
+
+msgid "Jersey"
+msgstr ""
+
+msgid "Jordan"
+msgstr "約旦"
+
+msgid "Kazakhstan"
+msgstr "哈薩克"
+
+msgid "Kenya"
+msgstr "肯亞"
+
+msgid "Kiribati"
+msgstr "基里巴斯共和國"
+
+msgid "Korea, Democratic People's Republic of"
+msgstr ""
+
+msgid "Korea, Republic of"
+msgstr "韓國"
+
+msgid "Kuwait"
+msgstr "科威特"
+
+msgid "Kyrgyzstan"
+msgstr "吉爾吉斯斯坦"
+
+msgid "Lao People's Democratic Republic"
+msgstr "寮國"
+
+msgid "Latvia"
+msgstr "拉脫維亞"
+
+msgid "Lebanon"
+msgstr "黎巴嫩"
+
+msgid "Lesotho"
+msgstr "賴索托"
+
+msgid "Liberia"
+msgstr "賴比瑞亞"
+
+msgid "Libya"
+msgstr "利比亞"
+
+msgid "Liechtenstein"
+msgstr "列支敦士登"
+
+msgid "Lithuania"
+msgstr ""
+
+msgid "Luxembourg"
+msgstr "盧森堡"
+
+msgid "Macao"
+msgstr "澳門"
+
+msgid "Macedonia, the former Yugoslav Republic of"
+msgstr "馬其頓"
+
+msgid "Madagascar"
+msgstr "馬達加斯加"
+
+msgid "Malawi"
+msgstr "馬拉威"
+
+msgid "Malaysia"
+msgstr "馬來西亞"
+
+msgid "Maldives"
+msgstr "馬爾地夫"
+
+msgid "Mali"
+msgstr "馬利"
+
+msgid "Malta"
+msgstr "馬利"
+
+msgid "Marshall Islands"
+msgstr "馬紹爾群島"
+
+msgid "Martinique"
+msgstr ""
+
+msgid "Mauritania"
+msgstr "茅利塔尼亞"
+
+msgid "Mauritius"
+msgstr "模里西斯"
+
+msgid "Mayotte"
+msgstr ""
+
+msgid "Mexico"
+msgstr "墨西哥"
+
+msgid "Micronesia, Federated States of"
+msgstr "密克羅尼西亞"
+
+msgid "Moldova, Republic of"
+msgstr "摩爾多瓦"
+
+msgid "Monaco"
+msgstr "摩納哥"
+
+msgid "Mongolia"
+msgstr "蒙古"
+
+msgid "Montenegro"
+msgstr ""
+
+msgid "Montserrat"
+msgstr ""
+
+msgid "Morocco"
+msgstr "摩洛哥"
+
+msgid "Mozambique"
+msgstr "莫三鼻克"
+
+msgid "Myanmar"
+msgstr ""
+
+msgid "Namibia"
+msgstr "納米比亞"
+
+msgid "Nauru"
+msgstr "諾魯"
+
+msgid "Nepal"
+msgstr "尼泊爾"
+
+msgid "Netherlands"
+msgstr "荷蘭"
+
+msgid "New Caledonia"
+msgstr "新喀里多尼亞"
+
+msgid "New Zealand"
+msgstr "紐西蘭"
+
+msgid "Nicaragua"
+msgstr "尼加拉瓜"
+
+msgid "Niger"
+msgstr "尼日"
+
+msgid "Nigeria"
+msgstr ""
+
+msgid "Niue"
+msgstr ""
+
+msgid "Norfolk Island"
+msgstr ""
+
+msgid "Northern Mariana Islands"
+msgstr ""
+
+msgid "Norway"
+msgstr "挪威"
+
+msgid "Oman"
+msgstr "阿曼"
+
+msgid "Pakistan"
+msgstr "巴基斯坦"
+
+msgid "Palau"
+msgstr "帕勞"
+
+msgid "Palestine"
+msgstr ""
+
+msgid "Panama"
+msgstr "巴拿馬"
+
+msgid "Papua New Guinea"
+msgstr "巴布亞紐幾內亞"
+
+msgid "Paraguay"
+msgstr "巴拉圭"
+
+msgid "Peru"
+msgstr "秘魯"
+
+msgid "Philippines"
+msgstr "菲律賓"
+
+msgid "Pitcairn"
+msgstr ""
+
+msgid "Poland"
+msgstr "波蘭"
+
+msgid "Portugal"
+msgstr "葡萄牙"
+
+msgid "Puerto Rico"
+msgstr ""
+
+msgid "Qatar"
+msgstr "卡達"
+
+msgid "Réunion"
+msgstr ""
+
+msgid "Romania"
+msgstr "羅馬尼亞"
+
+msgid "Russian Federation"
+msgstr "俄羅斯"
+
+msgid "Rwanda"
+msgstr "盧安達"
+
+msgid "Saint Barthélemy"
+msgstr ""
+
+msgid "Saint Helena, Ascension and Tristan da Cunha"
+msgstr ""
+
+msgid "Saint Kitts and Nevis"
+msgstr "聖克里斯多福及尼維斯"
+
+msgid "Saint Lucia"
+msgstr "聖露西亞"
+
+msgid "Saint Martin (French part)"
+msgstr ""
+
+msgid "Saint Pierre and Miquelon"
+msgstr ""
+
+msgid "Saint Vincent and the Grenadines"
+msgstr "聖文森及格瑞那丁"
+
+msgid "Samoa"
+msgstr ""
+
+msgid "San Marino"
+msgstr "聖馬力諾"
+
+msgid "Sao Tome and Principe"
+msgstr "聖多美及普林西比"
+
+msgid "Saudi Arabia"
+msgstr "沙烏地阿拉伯"
+
+msgid "Senegal"
+msgstr "塞內加爾"
+
+msgid "Serbia"
+msgstr "塞爾維亞"
+
+msgid "Seychelles"
+msgstr "塞席爾"
+
+msgid "Sierra Leone"
+msgstr "獅子山"
+
+msgid "Singapore"
+msgstr "新加坡"
+
+msgid "Sint Maarten (Dutch part)"
+msgstr "聖馬丁（荷蘭部分）"
+
+msgid "Slovakia"
+msgstr "斯洛伐克"
+
+msgid "Slovenia"
+msgstr "斯洛維尼亞"
+
+msgid "Solomon Islands"
+msgstr "索羅門群島"
+
+msgid "Somalia"
+msgstr "索馬利亞"
+
+msgid "South Africa"
+msgstr "南非"
+
+msgid "South Georgia and the South Sandwich Islands"
+msgstr "南喬治亞和南桑威奇群島"
+
+msgid "South Sudan"
+msgstr "南蘇丹"
+
+msgid "Spain"
+msgstr "西班牙"
+
+msgid "Sri Lanka"
+msgstr "斯里蘭卡"
+
+msgid "Sudan"
+msgstr "蘇丹"
+
+msgid "Suriname"
+msgstr "蘇利南"
+
+msgid "Svalbard and Jan Mayen"
+msgstr "斯瓦尔巴和揚馬延"
+
+msgid "Swaziland"
+msgstr "史瓦濟蘭"
+
+msgid "Sweden"
+msgstr "瑞典"
+
+msgid "Switzerland"
+msgstr "瑞士"
+
+msgid "Syrian Arab Republic"
+msgstr "敘利亞"
+
+msgid "Taiwan"
+msgstr "台灣"
+
+msgid "Tajikistan"
+msgstr "塔吉克斯坦"
+
+msgid "Tanzania, United Republic of"
+msgstr "坦尚尼亞"
+
+msgid "Thailand"
+msgstr "泰國"
+
+msgid "Timor-Leste"
+msgstr "東帝汶"
+
+msgid "Togo"
+msgstr "多哥"
+
+msgid "Tokelau"
+msgstr "托克勞"
+
+msgid "Tonga"
+msgstr "東加王國"
+
+msgid "Trinidad and Tobago"
+msgstr "千里達及托貝哥"
+
+msgid "Tunisia"
+msgstr "突尼西亞"
+
+msgid "Turkey"
+msgstr "土耳其"
+
+msgid "Turkmenistan"
+msgstr "土庫曼"
+
+msgid "Turks and Caicos Islands"
+msgstr "特克斯和凱科斯群島"
+
+msgid "Tuvalu"
+msgstr "吐瓦魯"
+
+msgid "Uganda"
+msgstr "吐瓦魯"
+
+msgid "Ukraine"
+msgstr "烏克蘭"
+
+msgid "United Arab Emirates"
+msgstr "阿拉伯聯合大公國"
+
+msgid "United Kingdom"
+msgstr "英國"
+
+msgid "United States"
+msgstr "美國"
+
+msgid "United States Minor Outlying Islands"
+msgstr "美國小離島"
+
+msgid "Uruguay"
+msgstr "烏拉圭"
+
+msgid "Uzbekistan"
+msgstr "烏茲別克斯坦"
+
+msgid "Vanuatu"
+msgstr "瓦努阿圖"
+
+msgid "Venezuela, Bolivarian Republic of"
+msgstr "委內瑞拉"
+
+msgid "Viet Nam"
+msgstr "越南"
+
+msgid "Virgin Islands, British"
+msgstr "英屬維爾京群島"
+
+msgid "Virgin Islands, U.S."
+msgstr "美屬維爾京群島"
+
+msgid "Wallis and Futuna"
+msgstr "瓦利斯和富圖納"
+
+msgid "Western Sahara"
+msgstr "西撒哈拉"
+
+msgid "Yemen"
+msgstr "葉門"
+
+msgid "Zambia"
+msgstr "尚比亞"
+
+msgid "Zimbabwe"
+msgstr "辛巴威"
+
+msgid "State / Province / Region"
+msgstr ""
+
+msgid "City*"
+msgstr "市*"
+
+msgid "Your Organization's Size*"
+msgstr ""
+
+msgid "1 to 9 employees"
+msgstr ""
+
+msgid "10 to 99 employees"
+msgstr ""
+
+msgid "100 to 999 employees"
+msgstr ""
+
+msgid "1,000 to 9,999 employees"
+msgstr ""
+
+msgid "10,000 to 99,999 employees"
+msgstr ""
+
+msgid "100,000 employees or more"
+msgstr ""
+
+msgid "Don’t know / not sure"
+msgstr "不知道/不確定"
+
+msgid "Your Thoughts"
+msgstr ""
+
+msgid "What are your top business drivers for using OpenStack?"
+msgstr ""
+
+msgid "Please specify"
+msgstr "請指定"
+
+msgid ""
+"How likely are you to recommend OpenStack to a friend or colleague? (0=Least "
+"Likely, 10=Most Likely)*"
+msgstr ""
+
+msgid "-- Select One  (0=Least Likely, 10=Most Likely) --"
+msgstr ""
+
+msgid "0"
+msgstr "0"
+
+msgid "1"
+msgstr "1"
+
+msgid "2"
+msgstr "2"
+
+msgid "3"
+msgstr "3"
+
+msgid "4"
+msgstr "4"
+
+msgid "5"
+msgstr "5"
+
+msgid "6"
+msgstr "6"
+
+msgid "7"
+msgstr "7"
+
+msgid "8"
+msgstr "8"
+
+msgid "9"
+msgstr "9"
+
+msgid "10"
+msgstr "10"
+
+msgid "What is your primary reason for this rating?"
+msgstr "這個評級的主要原因是什麼？"
+
+msgid ""
+"<hr><p>We would love to hear how OpenStack and the OpenStack Foundation can "
+"better meet your needs. These free-form questions are optional, but will "
+"provide valuable insights. Your responses are anonymous, and each of these "
+"text fields are independent, so we cannot \"see previous answer.\" We would "
+"really appreciate a separate answer to each question.</p>"
+msgstr ""
+
+msgid "What do you like most about OpenStack, besides “free” and “open”?"
+msgstr ""
+
+msgid "Which areas of OpenStack require further enhancement?"
+msgstr ""
+
+msgid ""
+"Which new/emerging technologies are you interested in using or seeing "
+"integrated with OpenStack?<br/><font size=\"-2\"><em>Select all that apply</"
+"em></font>"
+msgstr ""
+
+msgid "Please specify:"
+msgstr "請指定:"
+
+msgid "How often do you refer to documentation from docs.openstack.org?"
+msgstr ""
+
+msgid "Daily"
+msgstr "每天"
+
+msgid "Weekly"
+msgstr "每週"
+
+msgid "Monthly"
+msgstr "每月"
+
+msgid "Rarely"
+msgstr "很少"
+
+msgid "Never"
+msgstr "永不"
+
+msgid ""
+"<p>A deployment profile tracks information about an individual OpenStack "
+"deployment.</p><ul><li>An organization may have multiple deployment profiles "
+"for each OpenStack deployment they have.</li><li>Once you have created a "
+"deployment profile, you can return to the site to update the data in it.</"
+"li><li>You will be the default administrator for any deployment profiles you "
+"create.</li></ul><p>As always, the information you provide is confidential "
+"and will only be presented in aggregate unless you consent to making it "
+"public.</p>"
+msgstr ""
+
+msgid "Your OpenStack Deployments"
+msgstr ""
+
+msgid "Add"
+msgstr "加入"
+
+msgid "Delete"
+msgstr "刪除"
+
+msgid "Edit"
+msgstr "編輯"
+
+msgid "Thank You"
+msgstr "謝謝"
+
+msgid "Deployment"
+msgstr ""
+
+msgid ""
+"Please create a friendly label, like “Production OpenStack Deployment.” This "
+"name is for your deployment in our survey tool. If several people in your "
+"organization work on this deployment, please work with your team members to "
+"enter your deployment data to avoid duplication.*"
+msgstr ""
+
+msgid "Each deployment profile can be marked public or confidential.*"
+msgstr ""
+
+msgid ""
+"<strong>Public:</strong> The information I provide on this page only may be "
+"shared on openstack.org."
+msgstr ""
+
+msgid ""
+"<strong>Confidential:</strong> All information provided, including my "
+"organization name, should be kept confidential to the OpenStack Foundation."
+msgstr ""
+
+msgid ""
+"In what stage is your OpenStack deployment? (make a new deployment profile "
+"for each type of deployment)*"
+msgstr ""
+
+msgid "Proof of Concept"
+msgstr ""
+
+msgid "Under development / In testing"
+msgstr ""
+
+msgid "Production / Full Operational Use"
+msgstr ""
+
+msgid "When was this deployment created?"
+msgstr ""
+
+msgid "2017"
+msgstr "2017"
+
+msgid "2016"
+msgstr "2016"
+
+msgid "2015"
+msgstr "2015"
+
+msgid "2014"
+msgstr "2014"
+
+msgid "2013"
+msgstr "2013"
+
+msgid "2012"
+msgstr "2012"
+
+msgid "2011"
+msgstr "2011"
+
+msgid "2010"
+msgstr "2010"
+
+msgid "Older"
+msgstr ""
+
+msgid "I don't know."
+msgstr "我不知道。"
+
+msgid ""
+"In which country / countries is this OpenStack deployment physically located?"
+"*<br/><font size=\"-2\"><em>You can select multiple country names.</em></"
+"font>"
+msgstr ""
+
+msgid "Prefer not to say"
+msgstr "不想說"
+
+msgid "Deployment Type"
+msgstr ""
+
+msgid "Community Cloud"
+msgstr ""
+
+msgid "On-Premises Private Cloud"
+msgstr ""
+
+msgid "Off-Premises Private Cloud"
+msgstr ""
+
+msgid "Public Cloud"
+msgstr ""
+
+msgid ""
+"Which releases does this deployment currently use?*<BR><font size="
+"\"-2\"><em>Select All That Apply</em></font>"
+msgstr ""
+
+msgid ""
+"Which workloads are you currently using?<BR><font size=\"-2\"><em>Select All "
+"That Apply</em></font>"
+msgstr ""
+
+msgid ""
+"Which projects does this deployment currently use, or are you interested in "
+"using in the future?"
+msgstr ""
+
+msgid "Production"
+msgstr ""
+
+msgid "Testing"
+msgstr ""
+
+msgid "Interested"
+msgstr ""
+
+msgid "Nova (Compute)"
+msgstr ""
+
+msgid "Ceilometer (Metering & Monitoring)"
+msgstr ""
+
+msgid "Cinder (Block Storage)"
+msgstr "Cinder (區塊儲存服務)"
+
+msgid "Designate (DNS Service)"
+msgstr "Designate (DNS服務)"
+
+msgid "Glance (Image Service)"
+msgstr "Glance (映像檔服務)"
+
+msgid "Heat (Orchestration)"
+msgstr ""
+
+msgid "Horizon (Dashboard)"
+msgstr "Horizon (儀表板)"
+
+msgid "Ironic (Bare Metal)"
+msgstr "Ironic (裸機服務)"
+
+msgid "Keystone (Identity Service)"
+msgstr "Keystone (身份服務)"
+
+msgid "Neutron (Networking)"
+msgstr ""
+
+msgid "Sahara (Data Processing)"
+msgstr "Sahara (資料處理)"
+
+msgid "Swift (Object Storage)"
+msgstr "Swift (物件儲存)"
+
+msgid "Trove (Database Service)"
+msgstr "Trove (資料庫服務)"
+
+msgid "Barbican (Key Management)"
+msgstr ""
+
+msgid "Congress (Governance Service)"
+msgstr ""
+
+msgid "Manila (Shared File Systems)"
+msgstr ""
+
+msgid "Magnum(Containers Service)"
+msgstr ""
+
+msgid "Murano (Application Catalog)"
+msgstr ""
+
+msgid "Rally (Benchmark Service)"
+msgstr ""
+
+msgid "Cue (Message Broker Service)"
+msgstr ""
+
+msgid "Kolla (Containerized Deployment)"
+msgstr ""
+
+msgid "Magnetodb (Key-Value Store as a Service)"
+msgstr ""
+
+msgid "Mistral (Workflow Service)"
+msgstr ""
+
+msgid "Solum (Software Dev Lifecycle Mgmt)"
+msgstr ""
+
+msgid "TripleO (Deployment)"
+msgstr ""
+
+msgid "Zaqar (Message Service)"
+msgstr ""
+
+msgid ""
+"Which projects does this deployment currently use, or are you interested in "
+"using in the future? (PoC/Testing)"
+msgstr ""
+
+msgid "<p> </p><hr>"
+msgstr "<p> </p><hr>"
+
+msgid ""
+"Are you interested in helping our interoperability efforts by using RefStack "
+"to test your cloud capabilities?"
+msgstr ""
+
+msgid "Yes"
+msgstr "是"
+
+msgid "No, but I am interested in helping"
+msgstr ""
+
+msgid "No, and not interested in helping"
+msgstr ""
+
+msgid "Deployment Decisions"
+msgstr ""
+
+msgid ""
+"<h3>What’s the size of this cloud?</h3><p>All of these questions are "
+"optional and confidential. We appreciate you providing your best estimate of "
+"cloud size so that we may reflect this back to the community in aggregate.</"
+"p><hr>"
+msgstr ""
+
+msgid "Number of users"
+msgstr "使用者數量"
+
+msgid "1 to 9 users"
+msgstr ""
+
+msgid "10 to 99 users"
+msgstr ""
+
+msgid "100 to 999 users"
+msgstr ""
+
+msgid "1,000 to 9,999 users"
+msgstr ""
+
+msgid "10,000 to 99,999 users"
+msgstr ""
+
+msgid "100,000 to 999,999 users"
+msgstr ""
+
+msgid "1,000,000 to 9,999,999 users"
+msgstr ""
+
+msgid "10,000,000 to 999,999,999 users"
+msgstr ""
+
+msgid "100,000,000 or more users"
+msgstr ""
+
+msgid "Physical compute nodes"
+msgstr ""
+
+msgid "1 to 9 nodes"
+msgstr ""
+
+msgid "10 to 99 nodes"
+msgstr ""
+
+msgid "100 to 999 nodes"
+msgstr ""
+
+msgid "1,000 to 9,999 nodes"
+msgstr ""
+
+msgid "10,000 to 99,999 nodes"
+msgstr ""
+
+msgid "100,000 to 999,999 nodes"
+msgstr ""
+
+msgid "1 million or more nodes"
+msgstr ""
+
+msgid "Processor cores"
+msgstr ""
+
+msgid "1 to 9 cores"
+msgstr ""
+
+msgid "10 to 99 cores"
+msgstr ""
+
+msgid "100 to 999 cores"
+msgstr ""
+
+msgid "1,000 to 9,999 cores"
+msgstr ""
+
+msgid "10,000 to 99,999 cores"
+msgstr ""
+
+msgid "100,000 to 999,999 cores"
+msgstr ""
+
+msgid "1 million or more cores"
+msgstr ""
+
+msgid "Number of instances"
+msgstr "雲實例數量"
+
+msgid "1 to 9 instances"
+msgstr ""
+
+msgid "10 to 99 instances"
+msgstr ""
+
+msgid "100 to 999 instances"
+msgstr ""
+
+msgid "1,000 to 9,999 instances"
+msgstr ""
+
+msgid "10,000 to 99,999 instances"
+msgstr ""
+
+msgid "100,000 to 999,999 instances"
+msgstr ""
+
+msgid "1 million or more instances"
+msgstr ""
+
+msgid "Total number of usable IPs"
+msgstr ""
+
+msgid "1 to 9 IPs"
+msgstr ""
+
+msgid "10 to 99 IPs"
+msgstr ""
+
+msgid "100 to 999 IPs"
+msgstr ""
+
+msgid "1,000 to 9,999 IPs"
+msgstr ""
+
+msgid "10,000 to 99,999 IPs"
+msgstr ""
+
+msgid "100,000 or more IPs"
+msgstr ""
+
+msgid "How much usable block storage do you have in this Cinder deployment?"
+msgstr ""
+
+msgid "Less than 1 TB"
+msgstr ""
+
+msgid "1 TB to 9 TB"
+msgstr ""
+
+msgid "10 TB to 99 TB"
+msgstr ""
+
+msgid "100 TB to 999 TB"
+msgstr ""
+
+msgid "1 PB to 9 PB"
+msgstr ""
+
+msgid "10 PB to 99 PB"
+msgstr ""
+
+msgid "100 PB to 999 PB"
+msgstr ""
+
+msgid "1 EB to 9 EB"
+msgstr ""
+
+msgid "10 EB to 99 EB"
+msgstr ""
+
+msgid "100 to 999 EB"
+msgstr ""
+
+msgid "1 ZB to 9 ZB"
+msgstr ""
+
+msgid ""
+"How much <strong>OpenStack Object Storage (Swift)</strong> have you "
+"provisioned?"
+msgstr ""
+
+msgid ""
+"How many <strong>OpenStack Object Storage (Swift)</strong> objects are "
+"stored?"
+msgstr ""
+
+msgid "Fewer than 1,000 objects"
+msgstr ""
+
+msgid "1,000 to 9,999 objects"
+msgstr ""
+
+msgid "10,000 to 99,999 objects"
+msgstr ""
+
+msgid "100,000 to 999,999 objects"
+msgstr ""
+
+msgid "1 million to 9 million objects"
+msgstr ""
+
+msgid "10 million to 999 million objects"
+msgstr ""
+
+msgid "100 million to 999 million objects"
+msgstr ""
+
+msgid "1 billion to 9 billion objects"
+msgstr ""
+
+msgid "10 billion to 99 billion objects"
+msgstr ""
+
+msgid "100 billion or more objects"
+msgstr ""
+
+msgid "Approximately how many Nova cells do you use?"
+msgstr ""
+
+msgid "None"
+msgstr ""
+
+msgid "1 cell"
+msgstr ""
+
+msgid "2 cells"
+msgstr ""
+
+msgid "3 cells"
+msgstr ""
+
+msgid "4 cells"
+msgstr ""
+
+msgid "5 cells"
+msgstr ""
+
+msgid "6 cells"
+msgstr ""
+
+msgid "7 cells"
+msgstr ""
+
+msgid "8 cells"
+msgstr ""
+
+msgid "9 cells"
+msgstr ""
+
+msgid "10 cells"
+msgstr ""
+
+msgid "More than 10"
+msgstr ""
+
+msgid ""
+"<p><span style=\"color: #0083c8; font-size: 1.6em;\">Deployment Decisions</"
+"span></p><p>The information below will help us better understand the most "
+"common configuration and component choices OpenStack deployments are using. "
+"This information is optional, but will be kept confidential and never "
+"published in connection with you or your organization.</p><hr>"
+msgstr ""
+
+msgid ""
+"What packages does this deployment use?<BR><font size=\"-2\"><em>Select All "
+"That Apply</em></font>"
+msgstr ""
+
+msgid ""
+"If you have modified packages or have built your own packages, why?<BR><font "
+"size=\"-2\"><em>Select All That Apply</em></font>"
+msgstr ""
+
+msgid ""
+"Which tools are you using to deploy / manage this cluster?<BR><font size="
+"\"-2\"><em>Select All That Apply</em></font>"
+msgstr ""
+
+msgid ""
+"If you are running your OpenStack services inside of containers, which "
+"container format are you using?<br/><font size=\"-2\"><em>Select all that "
+"apply</em></font>"
+msgstr ""
+
+msgid ""
+"Which container orchestration or Platform-as-a-Service (PaaS) tools are you "
+"using to manage applications on this OpenStack deployment?<br/><font size="
+"\"-2\"><em>Select All That Apply</em></font>"
+msgstr ""
+
+msgid ""
+"Which <b>OpenStack Compute (Nova)</b> hypervisors are you using?<BR><font "
+"size=\"-2\"><em>Select All That Apply</em></font>"
+msgstr ""
+
+msgid ""
+"Which databases are you using for OpenStack components?<br/><font size="
+"\"-2\"><em>Select all that apply</em></font>"
+msgstr ""
+
+msgid "Other database"
+msgstr ""
+
+msgid ""
+"What programmatic interfaces (SDKs, tools, platforms) do you expose (or plan "
+"to make available) to your users/customers/developers so they are able to "
+"consume your product/cloud?<br/><font size=\"-2\"><em>Select all that apply</"
+"em></font>"
+msgstr ""
+
+msgid "Other toolkits"
+msgstr ""
+
+msgid ""
+"With which other clouds do your users interact?<br/><font size="
+"\"-2\"><em>Select all that apply</em></font>"
+msgstr ""
+
+msgid "Other Clouds"
+msgstr ""
+
+msgid ""
+"Approximately what percentage of your overall cloud infrastructure is "
+"running on OpenStack?"
+msgstr ""
+
+msgid "81-100%"
+msgstr ""
+
+msgid "61-80%"
+msgstr ""
+
+msgid "41-60%"
+msgstr ""
+
+msgid "21-40%"
+msgstr ""
+
+msgid "1-20%"
+msgstr ""
+
+msgid ""
+"Which <b>OpenStack Network (Neutron)</b> drivers are you using?<BR><font "
+"size=\"-2\"><em>Select all that apply. Please note we now distinguish "
+"between ML2 drivers and non-ML2 drivers.</em></font>"
+msgstr ""
+
+msgid ""
+"Which  <b>OpenStack Identity Service (Keystone)</b> drivers are you using?"
+"<BR><font size=\"-2\"><em>Select All That Apply</em></font>"
+msgstr ""
+
+msgid ""
+"Which <b>OpenStack Block Storage (Cinder)</b> drivers are you using?"
+"<BR><font size=\"-2\"><em>Select All That Apply</em></font>"
+msgstr ""
+
+msgid "Which vendor's products power your OpenStack cloud?"
+msgstr ""
+
+msgid ""
+"What is the main operating system running this OpenStack cloud deployment?"
+msgstr ""
+
+msgid "CentOS"
+msgstr "CentOS"
+
+msgid "Debian"
+msgstr "Debian"
+
+msgid "Fedora Server"
+msgstr "Fedora Server"
+
+msgid "Microsoft Windows Server"
+msgstr "Microsoft Windows Server"
+
+msgid "Red Hat Enterprise Linux (RHEL)"
+msgstr "Red Hat Enterprise Linux (RHEL)"
+
+msgid "SUSE Linux Enterprise Server (SLES)"
+msgstr "SUSE Linux Enterprise Server (SLES)"
+
+msgid "Scientific Linux"
+msgstr "Scientific Linux"
+
+msgid "Ubuntu Server"
+msgstr "Ubuntu Server"
+
+msgid "openSUSE Server"
+msgstr "openSUSE Server"
+
+msgid ""
+"Which compatibility APIs does this deployment support?<BR><font size="
+"\"-2\"><em>Select All That Apply</em></font>"
+msgstr ""
+
+msgid "<hr><h3>Project Feedback</h3>"
+msgstr ""
+
+msgid ""
+"Barbican: What is missing from Barbican that might prevent your adoption?"
+msgstr ""
+
+msgid ""
+"<strong>Cinder:</strong> If there was one thing you would like to see "
+"changed (added, removed, fixed) in Cinder, what would it be?"
+msgstr ""
+
+msgid ""
+"Designate: What (if any) features or issues are preventing you from using "
+"Designate as a production service?"
+msgstr ""
+
+msgid ""
+"Glance: As you're aware, the Images API v1 supplied by OpenStack Glance is "
+"currently deprecated. If you haven't yet moved to the Images API v2, what is "
+"preventing you? Please be specific."
+msgstr ""
+
+msgid "Heat: What's the current/expected load on your Heat deployment?"
+msgstr ""
+
+msgid "Few small stacks (<100 resources each)"
+msgstr ""
+
+msgid "Lots of small stacks (<100 resources each)"
+msgstr ""
+
+msgid "Few big stacks (>100 resources each)"
+msgstr ""
+
+msgid "Lots of big stacks (>100 resources each)"
+msgstr ""
+
+msgid ""
+"Interop: Do you use the OpenStack Powered program or Interoperability "
+"Guideline compliance as a factor in your OpenStack procurement process? Why "
+"or why not?"
+msgstr ""
+
+msgid ""
+"Interop: What do you consider to be the biggest challenges to achieving "
+"interoperability between OpenStack clouds?<br/><font size=\"-2\"><em>Select "
+"all that apply</em></font>"
+msgstr ""
+
+msgid "Please explain"
+msgstr "請解釋"
+
+msgid ""
+"Ironic: What's been your most frustrating or difficult experience with "
+"Ironic?"
+msgstr ""
+
+msgid ""
+"Keystone: In your opinion, where should the Keystone development team focus "
+"their effort(s)?<br/><font size=\"-2\"><em>Select all that apply</em></font>"
+msgstr ""
+
+msgid "Other - please specify"
+msgstr ""
+
+msgid ""
+"Kolla: How do you use Kolla? <br/><font size=\"-2\"><em>Select all that "
+"apply</em></font>"
+msgstr ""
+
+msgid "Which custom tool?"
+msgstr ""
+
+msgid ""
+"Manila: Which OpenStack Shared File System (Manila) drivers are you using?"
+"<br/><font size=\"-2\"><em>Select all that apply</em></font>"
+msgstr ""
+
+msgid ""
+"Neutron: Which of the following features in the Neutron project are you "
+"actively using, interested in using or looking forward to using in your "
+"OpenStack deployment?<br/><font size=\"-2\"><em>Select all that apply</em></"
+"font>"
+msgstr ""
+
+msgid ""
+"Nova: How important is it to be able to customize Nova in your deployment, e."
+"g. classload your own managers/drivers, use hooks, plug in API extensions, "
+"etc."
+msgstr ""
+
+msgid ""
+"Not important; I use pretty much stock Nova with maybe some small patches or "
+"bug fixes that aren't upstream."
+msgstr ""
+
+msgid ""
+"Somewhat important; I have some custom scheduler filters and other small "
+"patches but nothing major."
+msgstr ""
+
+msgid ""
+"Very important; my Nova deployment is heavily customized and hooks/plugins/"
+"custom APIs are a major part of my operation."
+msgstr ""
+
+msgid ""
+"RefStack: Which of the following features in RefStack are important to you?"
+"<br/><font size=\"-2\"><em>Select all that apply</em></font>"
+msgstr ""
+
+msgid "Sahara: What else can be improved in the Sahara project?"
+msgstr ""
+
+msgid ""
+"Swift: What kinds of data are you planning to store in object storage in the "
+"next 12 months?<br/><font size=\"-2\"><em>Select all that apply</em></font>"
+msgstr ""
+
+msgid "Please specify other types of data."
+msgstr ""
+
+msgid ""
+"Telemetry: Which dispatcher are you using or planning to use with Ceilometer?"
+"<br/><font size=\"-2\"><em>Select all that apply</em></font>"
+msgstr ""
+
+msgid ""
+"TripleO: As a user/operator, do you value having a common interface for "
+"deployment tooling and the deployed cloud (e.g common APIs and CLI tools)?"
+msgstr ""
+
+msgid "Yes, definitely."
+msgstr ""
+
+msgid "Yes, but not required."
+msgstr ""
+
+msgid "No opinion."
+msgstr ""
+
+msgid "No, it's a bad idea."
+msgstr ""
+
+msgid ""
+"Trove: When do you expect to begin evaluating Database as a Service in your "
+"cloud using the OpenStack Trove project?"
+msgstr ""

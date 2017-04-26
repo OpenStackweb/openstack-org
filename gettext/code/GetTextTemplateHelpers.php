@@ -31,6 +31,11 @@ class GetTextTemplateHelpers implements TemplateGlobalProvider
     private static function convertLocale($locale){
         switch ($locale){
             case "es_ES": return "es_ES.utf8";
+            case "zh_TW": return "zh_TW.utf8";
+            case "zh_CN": return "zh_CN.utf8";
+            case "ja_JP": return "ja_JP.utf8";
+            case "ko_KR": return "ko_KR.utf8";
+            case "en_US": return "en_US.utf8";
             default:
                 return $locale;
         }
