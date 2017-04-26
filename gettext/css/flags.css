@@ -1,0 +1,17 @@
+.flag-sm {
+    float: left;
+    margin-right: 5px;
+    border: none !important;
+    width: 32px;
+    height: 32px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    background-image: url(./flags.png);
+}
+
+.flag-sm[lang=es_ES] { background-position: -64px -128px }
+.flag-sm[lang=en_US] { background-position: 0 -448px }
+.flag-sm[lang=ja_JP] { background-position: -448px -192px }
+.flag-sm[lang=ko_KR] { background-position: -192px -224px }
+.flag-sm[lang=zh_CN] { background-position: -448px -64px }
+.flag-sm[lang=zh_TW] { background-position: -384px -416px }

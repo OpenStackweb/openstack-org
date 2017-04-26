@@ -12,6 +12,8 @@
  **/
 
 require("../../../../gettext/css/languages.css");
+require("../../../../gettext/css/flags.css");
+
 // get URI module
 import URI from '../../../../themes/openstack/bower_assets/urijs/src/URI';
 
