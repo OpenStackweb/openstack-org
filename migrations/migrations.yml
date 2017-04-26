@@ -69,3 +69,4 @@ migrations:
   - NewMarketplaceTypeRemoteCloudSeedTask
   - CreateEventbriteAttendeeSummitAttendeeTicketIndexMigration
   - UpdateComponentReleasesMigration
+  - GenerateComponentSlugMigration

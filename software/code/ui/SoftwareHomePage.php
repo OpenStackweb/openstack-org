@@ -189,8 +189,10 @@ class SoftwareHomePage_Controller extends Page_Controller
 
         $release      = OpenStackRelease::get()->filter('Name',ucfirst($release_id))->first();
         if(is_null($release)) return $this->httpError(404);
+        $component    = OpenStackComponent::get()->filter('Slug', $component_id)->first();
+        if(is_null($component)) return $this->httpError(404);
 
-        $component = $release->supportsComponent(ucfirst($component_id));
+        $component = $release->supportsComponent($component->CodeName);
         if(is_null($component)) return $this->httpError(404);
 
         // individual contributors

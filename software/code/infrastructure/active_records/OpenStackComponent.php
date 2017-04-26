@@ -18,6 +18,8 @@
 class OpenStackComponent extends DataObject implements IOpenStackComponent
 {
 
+    use SluggableEntity;
+
     private static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
 
     // IMPORTANT : this fixes the order for categories on software page
@@ -35,8 +37,8 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
 
     private static $db = array
     (
-        'Name'                         => 'Varchar',
-        'CodeName'                     => 'Varchar',
+        'Name'                         => 'Varchar(255)',
+        'CodeName'                     => 'Varchar(255)',
         'Description'                  => 'Text',
         'SupportsVersioning'           => 'Boolean',
         'SupportsExtensions'           => 'Boolean',
@@ -57,6 +59,7 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
         'SupportsUpgrade'              => 'Boolean',
         'SupportsRollingUpgrade'       => 'Boolean',
         'ShowOnMarketplace'            => 'Boolean(1)',
+        'Slug'                         => 'Varchar(255)'
     );
 
     private static $has_one = array
@@ -84,6 +87,10 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
         'NameCodeName' => array(
             'type' => 'unique',
             'value' => '"Name","CodeName"'
+        ),
+        'Slug' => array(
+            'type' => 'unique',
+            'value' => 'Slug'
         )
     );
 
@@ -96,7 +103,7 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
     protected function onBeforeWrite()
     {
         parent::onBeforeWrite();
-
+        $this->Slug = $this->generateSlug($this->CodeName);
         if($this->SupportsVersioning){
             // delete all dummy records
             DB::query("DELETE FROM OpenStackReleaseSupportedApiVersion WHERE OpenStackComponentID = {$this->ID} AND ApiVersionID = 0 ;");
@@ -143,11 +150,6 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
         return $this->getField('CodeName');
     }
 
-    public function getSlug()
-    {
-        return strtolower($this->getCodeName());
-    }
-
     public function getMascotRef()
     {
         return str_replace(' ', '-', strtolower($this->getCodeName()));
@@ -156,6 +158,10 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
     public function setCodeName($codename)
     {
         $this->setField('CodeName', $codename);
+    }
+
+    public function getSlug(){
+        return $this->getField('Slug');
     }
 
     public function getDescription()
