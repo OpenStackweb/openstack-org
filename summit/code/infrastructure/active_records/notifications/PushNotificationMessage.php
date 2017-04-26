@@ -58,7 +58,16 @@ class PushNotificationMessage extends DataObject implements IEntity
      * @return int
      */
     public function getTimestamp(){
-        $date  = new \DateTime($this->getField('Created'));
+        // force from local time zone ( web server) to UTC
+        $web_server_time_zone = Config::inst()->get('MySQLDatabase', 'web_server_time_zone');
+        if(empty($web_server_time_zone))
+            $web_server_time_zone = CustomMySQLDatabase::DefaultWebServerTimeZone;
+
+        $utc_timezone = new DateTimeZone("UTC");
+        $time_zone   = new \DateTimeZone($web_server_time_zone);
+        $date        = new \DateTime($this->getField('Created'), $time_zone);
+        $date->setTimezone($utc_timezone);
+
         return $date->getTimestamp();
     }
 }

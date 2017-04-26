@@ -13,6 +13,7 @@ SSViewer:
 
 MySQLDatabase:
   connection_charset: 'utf8'
+  web_server_time_zone: 'America/Chicago'
 
 SiteTree:
   nested_urls: true

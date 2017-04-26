@@ -353,12 +353,12 @@ final class SummitAdminUI extends DataExtension
             $config->getComponentByType('GridFieldDataColumns')->setDisplayFields
             (
                 array(
-                    'Created'        => 'Created',
+                    'Created'        => 'Created (LOCAL)',
                     'Channel'        => 'Channel',
                     'Message'        => 'Message',
                     'Owner.FullName' => 'Owner',
                     'IsSent'         => 'Is Sent?',
-                    'SentDate'       => 'Sent Date',
+                    'SentDate'       => 'Sent Date (UTC)',
                 )
             );
             $config->getComponentByType('GridFieldDetailForm')->setItemRequestClass('GridFieldDetailFormPushNotification');
