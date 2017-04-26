@@ -204,10 +204,17 @@ final class EventManager {
             echo $ex->getMessage();
         }
 
-        $feedXML = $feed->request()->getBody();
+        $result = new ArrayList();
 
-        // Extract items from feed
-        $result = $feed->getValues($feedXML, 'channel', 'item');
+        try {
+            $feedXML = $feed->request()->getBody();
+            // Extract items from feed
+            $result = $feed->getValues($feedXML, 'channel', 'item');
+        }
+        catch(Exception $ex){
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            //echo $ex->getMessage();
+        }
 
         foreach ($result as $item) {
             $item->pubDate = date("D, M jS Y", strtotime($item->pubDate));
