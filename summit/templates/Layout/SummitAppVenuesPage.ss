@@ -56,9 +56,9 @@
 </div>
 <script type="text/javascript">
     var primary_locations = [];
-    <% loop $Summit.PrimaryVenues() %>
+    <% loop $Summit.getVenues() %>
         <% if $Lat && $Lng %>
-            primary_locations.push({id: {$ID}, lat: {$Lat}, lng: {$Lng}, title: "<h5>{$Name.JS}</h5>", description: "{$Description.JS}", address: "{$Address.JS}"});
+            primary_locations.push({id: {$ID}, lat: {$Lat}, lng: {$Lng}, title: "{$Name.JS}", description: "{$Description.JS}", address: "{$Address.JS}"});
         <% end_if %>
     <% end_loop %>
 

@@ -80,7 +80,7 @@ function clickVenue(venue_id, floor_id) {
     var opened_elem = $('.opened');
     var is_opened = elem.hasClass('opened');
 
-    infowindow.setContent(marker.title+' '+marker.description+' '+marker.address);
+    infowindow.setContent('<h5>' + marker.title + '</h5> '+ marker.description + ' ' + marker.address);
     infowindow.open(map, marker);
 
     opened_elem.siblings('.carousel').slideUp();
