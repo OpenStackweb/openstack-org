@@ -89,8 +89,16 @@ class MySQLDatabase56 extends CustomMySQLDatabase {
     }
 
 
+    /**
+     * @return string
+     */
     public function now(){
-        return 'NOW('.self::MicrosecondsPrecision.')';
+        //return 'NOW('.self::MicrosecondsPrecision.')';
+        // todo: this is a kludge due this bug https://github.com/silverstripe/silverstripe-framework/issues/6848
+        $web_server_time_zone = Config::inst()->get('MySQLDatabase', 'web_server_time_zone');
+        if(empty($web_server_time_zone))
+            $web_server_time_zone = CustomMySQLDatabase::DefaultWebServerTimeZone;
+        return sprintf("CONVERT_TZ(NOW(%s), @@system_time_zone, '%s')", self::MicrosecondsPrecision, $web_server_time_zone);
     }
 
     /**

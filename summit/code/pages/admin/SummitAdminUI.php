@@ -353,6 +353,7 @@ final class SummitAdminUI extends DataExtension
             $config->getComponentByType('GridFieldDataColumns')->setDisplayFields
             (
                 array(
+                    'Created'        => 'Created',
                     'Channel'        => 'Channel',
                     'Message'        => 'Message',
                     'Owner.FullName' => 'Owner',

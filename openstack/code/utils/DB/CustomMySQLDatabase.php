@@ -14,6 +14,8 @@
  **/
 class CustomMySQLDatabase extends MySQLDatabase
 {
+    const DefaultWebServerTimeZone = 'America/Chicago';
+
     public function __construct($parameters)
     {
         parent::__construct($parameters);
@@ -97,6 +99,18 @@ class CustomMySQLDatabase extends MySQLDatabase
         $query = parent::query($sql, $errorLevel);
         SS_Log::log($sql, SS_Log::DEBUG);
         return $query;
+    }
+
+    /**
+     * @return string
+     */
+    public function now(){
+        //return 'NOW('.self::MicrosecondsPrecision.')';
+        // todo: this is a kludge due this bug https://github.com/silverstripe/silverstripe-framework/issues/6848
+        $web_server_time_zone = Config::inst()->get('MySQLDatabase', 'web_server_time_zone');
+        if(empty($web_server_time_zone))
+            $web_server_time_zone = self::DefaultWebServerTimeZone;
+        return sprintf("CONVERT_TZ(NOW(), @@system_time_zone, '%s')", $web_server_time_zone);
     }
 
 }
