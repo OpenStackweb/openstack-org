@@ -30,7 +30,3 @@ Page:
   extensions:
     - PageOpenGraphObjectExtension
     - FuturePublishDate
-
-Page_Controller:
-  extensions:
-    - FuturePublishDateController
