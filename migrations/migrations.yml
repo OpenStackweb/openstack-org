@@ -70,3 +70,4 @@ migrations:
   - CreateEventbriteAttendeeSummitAttendeeTicketIndexMigration
   - UpdateComponentReleasesMigration
   - GenerateComponentSlugMigration
+  - SetMascotNamesMigration

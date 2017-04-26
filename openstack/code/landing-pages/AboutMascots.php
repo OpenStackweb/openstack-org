@@ -18,30 +18,37 @@ class AboutMascots extends Page {
  
 class AboutMascots_Controller extends Page_Controller {
 
+    private static $mascots_dir = 'themes/openstack/images/project-mascots/';
+
     function init()
     {
         parent::init();
 
         Requirements::CSS('themes/openstack/css/about-mascots.css');
 
-        Requirements::javascript('themes/openstack/javascript/filetracking.jquery.js');     
+        Requirements::javascript('themes/openstack/javascript/filetracking.jquery.js');
 
-	    Requirements::customScript("jQuery(document).ready(function($) {
+        Requirements::customScript("var mascots_dir = '".self::$mascots_dir."';");
 
+        Requirements::javascript('themes/openstack/javascript/about-mascots.js');
 
-            $('body').filetracking();
+    }
 
-             $(document).on('click', '.outbound-link', function(event){
-                var href = $(this).attr('href');
-                recordOutboundLink(this,'Outbound Links',href);
-                event.preventDefault();
-                event.stopPropagation()
-                return false;
-            });
+    function getComponents() {
+        $components = OpenStackComponent::get()->sort('CodeName');
+        $componentsAL = new ArrayList();
+        foreach ($components as $component) {
+            $mascots_folder = Director::baseFolder() .'/'. self::$mascots_dir . $component->CodeName;
+            $image_array = array();
+            foreach (glob($mascots_folder.'/*.*') as $image) {
+                $image_array[] = basename($image);
+            }
+            $component->MascotFiles = implode(',', $image_array);
+            $componentsAL->push($component);
+        }
+        return $componentsAL;
+    }
 
-        });");
-
-    } 
 }
  
 ?>

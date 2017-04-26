@@ -75,4 +75,34 @@ img.example-project-logo {
 	max-width: 950px;
 	width: 100%;
 }
+
+.mascot_image {
+    width: 100px;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.mascot_box {
+    text-align: center;
+}
+
+.mascot_image_box {
+    height: 100px;
+}
+
+.mascot_row {
+    margin-bottom: 20px;
+}
+
+.download_link {
+    margin-right: 10px;
+}
+
+.download_link:visited {
+    color: #fff;
+}
 /*End Mascots Proposal landing*/
