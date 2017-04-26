@@ -134,7 +134,7 @@ final class SummitPushNotificationManager
                             break;
                     }
 
-                    $res = $this->push_api->sendPush($to, $data);
+                    $res = $this->push_api->sendPush($to, $data, IPushNotificationApi::HighPriority);
 
                     if($res) {
                         $notification->sent();
