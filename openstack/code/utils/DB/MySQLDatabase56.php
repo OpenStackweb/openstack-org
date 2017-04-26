@@ -90,7 +90,7 @@ class MySQLDatabase56 extends CustomMySQLDatabase {
 
 
     public function now(){
-        return 'UTC_TIMESTAMP('.self::MicrosecondsPrecision.')';
+        return 'NOW('.self::MicrosecondsPrecision.')';
     }
 
     /**
