@@ -1,4 +1,4 @@
-    <form $AttributesHTML>
+<form $AttributesHTML>
     <fieldset>
         <div class="row">
             <div class="col-md-12">
@@ -7,15 +7,14 @@
         </div>
         <hr>
         <div class="row">
-            <div class="col-md-3 created-by">Created&nbsp;by&nbsp;<strong>{$Survey.createdBy.Email}</strong></div>
-            <div class="col-md-3 edited-by"><span class="team-separator">&#124;&nbsp{$_T("survey_ui","Edited by")}&nbsp</span><strong>{$Survey.EditedBy.Email}</strong></div>
-            <div class="col-md-6 teams-container"><% if AllowTeams %><span class="team-separator">&#124;&nbsp;</span><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;<a class="add-team-member-btn" href="#" title="{$_T("survey_ui", "Add another team member"}">{$_T("survey_ui", "Add another team member"}</a><% end_if %></div>
+            <div class="col-md-3 created-by">$_T("survey_ui","Created by")&nbsp;<strong>{$Survey.createdBy.Email}</strong></div>
+            <div class="col-md-3 edited-by"><span class="team-separator">&#124;$_T("survey_ui","Edited by")&nbsp;</span><strong>{$Survey.EditedBy.Email}</strong></div>
+            <div class="col-md-6 teams-container"><% if AllowTeams %><span class="team-separator">&#124;&nbsp;</span><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;<a class="add-team-member-btn" href="#" title="Add another team member">$_T("survey_ui", "Add another team member")</a><% end_if %></div>
         </div>
         <hr>
         <% loop $Fields %>
             $FieldHolder
         <% end_loop %>
-        <div class="clear"><!-- --></div>
     </fieldset>
     <% if $Actions %>
         <div class="Actions row">
@@ -29,7 +28,8 @@
                     $Field
                 </div>
             <% end_loop %>
+            <div class="clear"><!-- --></div>
         </div>
     <% end_if %>
-    </form>
-    <% include EntitySurvey_TeamModal Survey=$Survey %>
+</form>
+<% include EntitySurvey_TeamModal Survey=$Survey %>

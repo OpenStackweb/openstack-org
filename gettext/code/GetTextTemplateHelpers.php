@@ -48,8 +48,11 @@ class GetTextTemplateHelpers implements TemplateGlobalProvider
             $args = func_get_args();
             $args = array_slice($args, 2);
         }
+        if(empty($msgid)) return "";
+
         $msgid    = str_replace("\r\n", '', $msgid);
         $msgid    = str_replace('\"', '"', $msgid);
+
         $t        = new GettextTranslator();
         $language = self::convertLocale(i18n::get_locale());
         $path     = Director::baseFolder().'/gettext/Locale';
