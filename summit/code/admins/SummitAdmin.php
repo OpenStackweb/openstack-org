@@ -15,6 +15,7 @@ class SummitAdmin extends ModelAdmin implements PermissionProvider
     public function init()
     {
         parent::init();
+        Requirements::javascript('summit/javascript/GridFieldApprovePushNotificationAction.js');
         $res = Permission::check("ADMIN") || Permission::check("ADMIN_SUMMIT_APP") || Permission::check("ADMIN_SUMMIT_APP_SCHEDULE");
         if (!$res) {
             Security::permissionFailure();

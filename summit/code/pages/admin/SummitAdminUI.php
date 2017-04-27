@@ -357,12 +357,14 @@ final class SummitAdminUI extends DataExtension
                     'Channel'        => 'Channel',
                     'Message'        => 'Message',
                     'Owner.FullName' => 'Owner',
-                    'IsSent'         => 'Is Sent?',
-                    'SentDate'       => 'Sent Date (UTC)',
+                    'Approved'            => 'Approved',
+                    'ApprovedBy.FullName' => 'Approved By',
+                    'IsSent'              => 'Is Sent?',
+                    'SentDate'            => 'Sent Date (UTC)',
                 )
             );
             $config->getComponentByType('GridFieldDetailForm')->setItemRequestClass('GridFieldDetailFormPushNotification');
-
+            $config->addComponent(new GridFieldApprovePushNotificationAction);
             $gridField = new GridField('Notifications', 'Notifications', $this->owner->Notifications(), $config);
 
 

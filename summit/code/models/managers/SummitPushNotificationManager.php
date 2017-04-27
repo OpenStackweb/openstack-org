@@ -58,9 +58,9 @@ final class SummitPushNotificationManager
             $qty   = 0;
             $query = new QueryObject();
             $query->addAndCondition(QueryCriteria::equal('IsSent', 0));
+            $query->addAndCondition(QueryCriteria::equal('Approved', 1));
             list($list, $size)  = $notifications_repository->getAll($query, 0, $batch_size);
             // init parse ...
-
 
             foreach($list as $notification)
             {

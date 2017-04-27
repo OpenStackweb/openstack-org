@@ -19,6 +19,7 @@ class PushNotificationMessage extends DataObject implements IEntity
     private static $db = array
     (
         'Message'   => 'Text',
+        'Approved'  => 'Boolean',
         'IsSent'    => 'Boolean',
         'SentDate'  => 'SS_Datetime',
         'Priority'  => "Enum('NORMAL, HIGH', 'NORMAL')",
@@ -26,7 +27,8 @@ class PushNotificationMessage extends DataObject implements IEntity
 
     private static $has_one = array
     (
-        'Owner'     => 'Member',
+        'Owner'      => 'Member',
+        'ApprovedBy' => 'Member',
     );
 
     /**
@@ -42,6 +44,12 @@ class PushNotificationMessage extends DataObject implements IEntity
         if($this->isAlreadySent()) throw new EntityValidationException('Push notification already sent!.');
         $this->IsSent   = true;
         $this->SentDate = MySQLDatabase56::nowRfc2822();
+    }
+
+    public function approve(){
+        if($this->Approved) throw new EntityValidationException('Push notification already approved!.');
+        $this->Approved   = true;
+        $this->ApprovedByID = Member::currentUserID();
     }
 
     public function isAlreadySent(){

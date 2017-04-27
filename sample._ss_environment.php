@@ -148,6 +148,8 @@ define('FIREBASE_GCM_SERVER_KEY', '');
 //auc-metrics/code/services/ActiveCommitterService.php
 define('ACTIVECOMMITTERSERVICE_GERRIT_USER', '');
 define('ACTIVECOMMITTERSERVICE_GERRIT_USER_SSH_KEY_FILE', '');
+
+define('SERVER_TIME_ZONE', 'America/Chicago');
 global $_FILE_TO_URL_MAPPING;
 $_FILE_TO_URL_MAPPING[''] = '';
 
