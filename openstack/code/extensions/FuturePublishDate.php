@@ -32,10 +32,6 @@ class FuturePublishDate extends DataExtension
         $fields->insertBefore( $datetimeField, 'Content' );
     }
 
-    public function populateDefaults() {
-        $this->owner->PublishDate = SS_Datetime::now();
-    }
-
     public function onAfterWrite() {
         if ($this->owner->ClassName == 'RedirectorPage') {
             $page = $this->owner->LinkTo();
