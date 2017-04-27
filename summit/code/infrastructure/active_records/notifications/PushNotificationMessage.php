@@ -47,8 +47,7 @@ class PushNotificationMessage extends DataObject implements IEntity
     }
 
     public function approve(){
-        if($this->Approved) throw new EntityValidationException('Push notification already approved!.');
-        $this->Approved   = true;
+        $this->Approved     = true;
         $this->ApprovedByID = Member::currentUserID();
     }
 

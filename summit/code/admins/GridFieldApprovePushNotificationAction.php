@@ -43,9 +43,9 @@ class GridFieldApprovePushNotificationAction implements GridField_ColumnProvider
         if (!$record->canEdit()) return;
 
         $notification = $gridField->getList()->byID($record->ID);
-        if($notification->Approved || $notification->isAlreadySent()) return;
+        if($notification->isAlreadySent()) return;
 
-        $title        = $notification->Approved ? "" : "Approved Notification";
+        $title        = $notification->Approved ? "Approved Notification" : "Approve Notification";
         $icon         = $notification->Approved ? 'accept' : 'accept_disabled';
 
         $field = GridField_FormAction::create($gridField, 'approvesummitnotification' . $record->ID, false, "approvesummitnotification",
@@ -54,7 +54,9 @@ class GridFieldApprovePushNotificationAction implements GridField_ColumnProvider
             ->setAttribute('data-icon', $icon)
             ->addExtraClass('gridfield-button-approve-summit-notification')
             ->setDescription($title);
-
+        if($notification->Approved){
+            $field->addExtraClass("disabled");
+        }
         return $field->Field();
     }
 

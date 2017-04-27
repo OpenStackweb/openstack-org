@@ -104,6 +104,15 @@ final class SummitPushNotification extends PushNotificationMessage
         return $actions;
     }
 
+    protected function onBeforeWrite()
+    {
+        parent::onBeforeWrite();
+        if($this->Channel == 'MEMBERS'){
+            // auto approve for members
+            $this->approve();
+        }
+    }
+
     protected function onAfterWrite()
     {
         parent::onAfterWrite();
