@@ -45,23 +45,6 @@
     height: 30px !important;
 }
 
-label.error{
-    border: 1px solid #aaa;
-    background: #aa2222;
-    color: #fff;
-    padding: 5px;
-    margin: 0;
-    width: auto;
-    float:left;
-    -webkit-border-radius: 05px;
-    -moz-border-radius: 05px;
-    border-radius: 05px;
-}
-
-input.error{
-    border: 1px solid  #aa2222;
-}
-
 #add-affiliation{
     color : black !important;
 }

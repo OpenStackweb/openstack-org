@@ -1,0 +1,31 @@
+label.error {
+    background: #c51244 !important;
+    padding: 10px !important;
+    border-radius: 10px !important;
+    position: relative;
+    display: inline-block;
+    box-shadow: 1px 1px 1px #aaaaaa !important;
+    margin-top: 10px !important;
+    color: white !important;
+    font-style: italic !important;
+    text-transform: capitalize !important;
+}
+
+label.error:before{
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #c51244;
+    position: absolute;
+    top: -10px;
+}
+
+input.error {
+    border: 1px solid #c51244 !important;
+}
+
+select.error {
+    border: 1px solid #c51244 !important;
+}

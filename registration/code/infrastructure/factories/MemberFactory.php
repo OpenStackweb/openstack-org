@@ -44,12 +44,15 @@ final class MemberFactory implements IMemberFactory
      */
     public function buildReduced(array $data)
     {
-        $member = Member::create();
+        $member            = Member::create();
         $member->FirstName = trim($data['FirstName']);
-        $member->Surname = trim($data['Surname']);
-        $member->Email = trim($data['Email']);
-        $member->Country = trim($data['Country']);
-        $member->Password = trim($data['Password']['_Password']);
+        $member->Surname   = trim($data['Surname']);
+        $member->Email     = trim($data['Email']);
+
+        if(isset($data['Country']))
+            $member->Country   = trim($data['Country']);
+
+        $member->Password  = trim($data['Password']['_Password']);
         return $member;
     }
 }

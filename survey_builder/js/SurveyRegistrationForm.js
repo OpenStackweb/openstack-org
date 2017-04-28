@@ -1,5 +1,5 @@
 /**
- * Copyright 2014 Openstack Foundation
+ * Copyright 2017 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -10,10 +10,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+
 jQuery(document).ready(function($) {
 
 
-    var registration_form = $('.mobile-registration-form');
+    var registration_form = $('.survey-registration-form');
 
     if(registration_form.length > 0){
 
@@ -21,10 +22,10 @@ jQuery(document).ready(function($) {
         $('#g_recaptcha_hidden').val('');
 
         jQuery.validator.addMethod('regex',function(value, element, regexp) {
-                var re = new RegExp(regexp,'g');
-                var res =  re.test(value);
-                return !res;
-            },'Please check your input.');
+            var re = new RegExp(regexp,'g');
+            var res =  re.test(value);
+            return !res;
+        },'Please check your input.');
 
         var registration_form_validator = registration_form.validate({
             onfocusout: false,

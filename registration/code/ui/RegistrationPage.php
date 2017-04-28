@@ -74,6 +74,7 @@ class RegistrationPage_Controller extends Page_Controller
         $css_files =  array(
             "themes/openstack/css/chosen.css",
             'registration/css/registration.page.css',
+            'themes/openstack/css/validation.errors.css',
         );
 
         foreach($css_files as $css_file)
@@ -104,7 +105,7 @@ class RegistrationPage_Controller extends Page_Controller
 
         // Name Set
         $FirstNameField = new TextField('FirstName', "First Name");
-        $LastNameField = new TextField('Surname', "Last Name");
+        $LastNameField  = new TextField('Surname', "Last Name");
 
         // Email Addresses
         $PrimaryEmailField = new TextField('Email', "Primary Email Address");
@@ -120,7 +121,6 @@ class RegistrationPage_Controller extends Page_Controller
 
         $StatementOfInterestField = new TextField('StatementOfInterest', 'Statement of Interest');
         $StatementOfInterestField->addExtraClass('autocompleteoff');
-
 
         $affiliations = new AffiliationField('Affiliations', 'Affiliations');
         $affiliations->setMode('local');
@@ -147,11 +147,12 @@ class RegistrationPage_Controller extends Page_Controller
 
         $label = _t('Addressable.STATE', 'State');
         if (is_array($this->allowedStates)) {
-            $fields->push(new DropdownField('State', $label, $this->allowedStates));
+            $fields->push($states = new DropdownField('State', $label, $this->allowedStates));
         } elseif (!is_string($this->allowedStates)) {
-            $fields->push(new TextField('State', $label));
-
+            $fields->push($states = new TextField('State', $label));
         }
+
+        $states->addExtraClass('state-form-control');
 
         $AdressField = new TextField(
             'Postcode', _t('Addressable.POSTCODE', 'Postcode')
@@ -200,7 +201,7 @@ class RegistrationPage_Controller extends Page_Controller
             'Password'
         );
 
-        $form =  new HoneyPotForm($this, 'RegistrationForm', $fields, $actions, $validator);
+        $form =  new RecaptchaForm($this, 'RegistrationForm', $fields, $actions, $validator);
 
         if ($data = Session::get("FormInfo.{$form->FormName()}.data")) {
             if(isset($data['HiddenAffiliations']))
@@ -209,7 +210,7 @@ class RegistrationPage_Controller extends Page_Controller
             }
             return $form->loadDataFrom($data);
         }
-
+        $form->addExtraClass("registration-form");
         return $form;
     }
 
@@ -234,13 +235,13 @@ class RegistrationPage_Controller extends Page_Controller
             }
         }
         catch(EntityValidationException $ex1){
-            Form::messageForForm('HoneyPotForm_RegistrationForm',$ex1->getMessage(), 'bad');
+            Form::messageForForm($form->FormName(), $ex1->getMessage(), 'bad');
             //Return back to form
             SS_Log::log($ex1->getMessage(), SS_Log::WARN);
             return $this->redirectBack();
         }
         catch(Exception $ex){
-            Form::messageForForm('HoneyPotForm_RegistrationForm', "There was an error with your request, please contact your admin.", 'bad');
+            Form::messageForForm($form->FormName(), "There was an error with your request, please contact your admin.", 'bad');
             //Return back to form
             SS_Log::log($ex->getMessage(), SS_Log::ERR);
             return $this->redirectBack();
@@ -298,11 +299,13 @@ class RegistrationPage_Controller extends Page_Controller
             'Password'
         );
 
-        $form =  new HoneyPotForm($this, 'MobileRegistrationForm', $fields, $actions, $validator);
+        $form =  new RecaptchaForm($this, 'MobileRegistrationForm', $fields, $actions, $validator);
 
         if ($data = Session::get("FormInfo.{$form->FormName()}.data")) {
             return $form->loadDataFrom($data);
         }
+
+        $form->addExtraClass('mobile-registration-form');
 
         return $form;
     }
@@ -331,13 +334,13 @@ class RegistrationPage_Controller extends Page_Controller
             }
         }
         catch(EntityValidationException $ex1){
-            Form::messageForForm('HoneyPotForm_MobileRegistrationForm',$ex1->getMessage(), 'bad');
+            Form::messageForForm($form->FormName(),$ex1->getMessage(), 'bad');
             //Return back to form
             SS_Log::log($ex1->getMessage(), SS_Log::WARN);
             return $this->redirectBack();
         }
         catch(Exception $ex){
-            Form::messageForForm('HoneyPotForm_MobileRegistrationForm', "There was an error with your request, please contact your admin.", 'bad');
+            Form::messageForForm($form->FormName(), "There was an error with your request, please contact your admin.", 'bad');
             //Return back to form
             SS_Log::log($ex->getMessage(), SS_Log::ERR);
             return $this->redirectBack();

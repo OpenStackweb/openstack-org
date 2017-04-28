@@ -12,7 +12,7 @@
  * limitations under the License.
  **/
 
-final class SurveyRegistrationForm extends Form
+final class SurveyRegistrationForm extends RecaptchaForm
 {
 
     /**
@@ -23,6 +23,8 @@ final class SurveyRegistrationForm extends Form
 
     function __construct($controller, $name, IMemberManager $member_manager)
     {
+        Requirements::css("themes/openstack/css/validation.errors.css");
+        Requirements::javascript("survey_builder/js/SurveyRegistrationForm.js");
 
         // Define fields //////////////////////////////////////
         $this->member_manager = $member_manager;
@@ -34,6 +36,8 @@ final class SurveyRegistrationForm extends Form
             new ConfirmedPasswordField('Password',  GetTextTemplateHelpers::_t("survey_ui",'Password'))
         );
 
+
+
         $startSurveyButton = new FormAction('StartSurvey', GetTextTemplateHelpers::_t("survey_ui",'Start Survey!'));
         $actions = new FieldList(
             $startSurveyButton
@@ -41,7 +45,7 @@ final class SurveyRegistrationForm extends Form
 
 
         $validator = new RequiredFields("FirstName", "Surname", "Email","Password");
-
+        $this->addExtraClass("survey-registration-form");
 
         parent::__construct($controller, $name, $fields, $actions, $validator);
 
