@@ -21,8 +21,9 @@
 final class FireBaseGCMApi implements IPushNotificationApi
 {
 
-    const BaseUrl = 'https://fcm.googleapis.com';
-    const Topics  = '/topics/';
+    const BaseUrl     = 'https://fcm.googleapis.com';
+    const Topics      = '/topics/';
+    const BaseBackOff = 2000;
     /**
      * @var string
      */
@@ -45,6 +46,7 @@ final class FireBaseGCMApi implements IPushNotificationApi
         $endpoint = self::BaseUrl.'/fcm/send';
         $client   = new GuzzleHttp\Client();
         $res      = true;
+        $attempt  = 1;
         try {
             foreach ($to as $recipient) {
                 // todo: this is a temporal solutions for IOS side, bc IOS is making the wrong assumption that has
@@ -76,6 +78,9 @@ final class FireBaseGCMApi implements IPushNotificationApi
                 ]);
 
                 if ($response->getStatusCode() !== 200) $res = $res && false;
+
+                usleep(self::BaseBackOff * $attempt);
+                ++$attempt;
             }
             return $res;
         }
