@@ -23,15 +23,18 @@ var infowindow = new google.maps.InfoWindow({
 $(document).ready(function(){
     initMap();
 
-    $('.header').on('click',function(){
+    $('.header:not(.no_floors)').on('click',function(){
         var venue_id = $(this).attr('id');
         clickVenue(venue_id,0);
     });
 
     $('.floor_header').on('click',function(){
-        $('.floor_image').slideUp();
-        $(this).siblings('.floor_image').slideDown();
-
+        if ($(this).siblings('.floor_image').is(':visible')) {
+            $('.floor_image').slideUp();
+        } else {
+            $('.floor_image').slideUp();
+            $(this).siblings('.floor_image').slideDown();
+        }
     });
 
     handleDeepLink();
@@ -123,7 +126,9 @@ function handleDeepLink() {
         var venue_id = hash['venue'];
         if ($('#'+venue_id).length) {
             $('body').delay(1000).animate({scrollTop: $('#'+venue_id).offset().top }, 2000, function(){
-                clickVenue(venue_id,0);
+                if (!$('#'+venue_id).hasClass('no_floors')) {
+                    clickVenue(venue_id,0);
+                }
             });
         }
     }

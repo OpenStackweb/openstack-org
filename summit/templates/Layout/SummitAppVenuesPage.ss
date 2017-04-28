@@ -1,8 +1,8 @@
 <div id="map"></div>
 <div id="venue-accordion">
-    <% loop $Summit.PrimaryVenues() %>
+    <% loop $Summit.getVenues() %>
         <div class="venue">
-            <div class="header" id="{$ID}">
+            <div class="header <% if not $Floors() %> no_floors <% end_if %>" id="{$ID}">
                 <div class="overlay"></div>
                 <img class="image" src="<% if $getFirstPicture %> $getFirstPicture.croppedImage(1500,350).getURL() <% end_if %>" />
                 <div class="labelbox">
@@ -10,6 +10,7 @@
                     <div class="address"> $Address </div>
                 </div>
             </div>
+            <% if $Floors() %>
             <div class="floor-accordion">
                 <% loop $Floors() %>
                 <div class="floor">
@@ -19,12 +20,19 @@
                             <div class="title"> $Name </div>
                         </div>
                     </div>
+                    <% if $Image() %>
                     <div id="floor_{$ID}" class="floor_image">
                         <img class="" src="$Image.getURL()"/>
                     </div>
+                    <% end_if %>
                 </div>
                 <% end_loop %>
             </div>
+            <% end_if %>
+
+            <%-- HIDING CAROUSEL FTM --%>
+            <%--
+            <% if $Images().Count() > 1 %>
             <div id="carousel_{$ID}" class="carousel slide" data-ride="carousel" >
                 <ol class="carousel-indicators">
                     <% loop $Images() %>
@@ -51,6 +59,8 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div>
+            <% end_if %>
+            --%>
         </div>
     <% end_loop %>
 </div>
