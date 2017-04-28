@@ -47,6 +47,10 @@ final class FireBaseGCMApi implements IPushNotificationApi
         $res      = true;
         try {
             foreach ($to as $recipient) {
+                // todo: this is a temporal solutions for IOS side, bc IOS is making the wrong assumption that has
+                //       access to envelope, and its trying to parse the to field ( only available on envelope)
+                //       so we send the to also on payload
+                $data['to'] = self::Topics . $recipient;
 
                 $message = [
                     'to'                => self::Topics . $recipient,
