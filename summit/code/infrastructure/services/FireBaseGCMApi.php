@@ -22,6 +22,7 @@ final class FireBaseGCMApi implements IPushNotificationApi
 {
 
     const BaseUrl = 'https://fcm.googleapis.com';
+    const Topics  = '/topics/%s';
     /**
      * @var string
      */
@@ -48,9 +49,14 @@ final class FireBaseGCMApi implements IPushNotificationApi
             foreach ($to as $recipient) {
 
                 $message = [
-                    'to'       => '/topics/' . $recipient,
-                    'data'     => $data,
-                    'priority' => $priority,
+                    'to'                => sprintf(self::Topics, $recipient) ,
+                    'data'              => $data,
+                    'priority'          => $priority,
+                    /*
+                     * If you want to send messages consisting of only custom key-values to an iOS device when the app
+                     * is in the background, set custom key-value pairs in the data key and set content_available to true.
+                     * */
+                    'content_available' => true,
                 ];
 
                 if(!is_null($ttl) && intval($ttl)  >= 0 ){
