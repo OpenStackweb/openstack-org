@@ -22,7 +22,7 @@ final class FireBaseGCMApi implements IPushNotificationApi
 {
 
     const BaseUrl = 'https://fcm.googleapis.com';
-    const Topics  = '/topics/%s';
+    const Topics  = '/topics/';
     /**
      * @var string
      */
@@ -49,7 +49,7 @@ final class FireBaseGCMApi implements IPushNotificationApi
             foreach ($to as $recipient) {
 
                 $message = [
-                    'to'                => sprintf(self::Topics, $recipient) ,
+                    'to'                => self::Topics . $recipient,
                     'data'              => $data,
                     'priority'          => $priority,
                     /*
