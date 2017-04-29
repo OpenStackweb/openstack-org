@@ -21,9 +21,10 @@
 final class FireBaseGCMApi implements IPushNotificationApi
 {
 
-    const BaseUrl     = 'https://fcm.googleapis.com';
-    const Topics      = '/topics/';
-    const BaseBackOff = 2000;
+    const BaseUrl            = 'https://fcm.googleapis.com';
+    const Topics             = '/topics/';
+    const BaseBackOff        = 2000;
+    const AndroidClickAction = 'org.openstack.android.summit.intent.action.OPEN_OPENSTACK_PUSH_NOTIFICATION_FROM_SYSTRAY';
     /**
      * @var string
      */
@@ -47,6 +48,7 @@ final class FireBaseGCMApi implements IPushNotificationApi
         $client   = new GuzzleHttp\Client();
         $res      = true;
         $attempt  = 1;
+
         try {
             foreach ($to as $recipient) {
                 // todo: this is a temporal solutions for IOS side, bc IOS is making the wrong assumption that has
@@ -54,8 +56,11 @@ final class FireBaseGCMApi implements IPushNotificationApi
                 //       so we send the to also on payload
                 $data['to'] = self::Topics . $recipient;
                 $notification = [];
-                $notification['body']  = $data['body'];
-                $notification['title'] = isset($data['title']) ? $data['title'] : 'OpenStack Summit Notification';
+                $notification['body']         = $data['body'];
+                $notification['title']        = isset($data['title']) ? $data['title'] : 'OpenStack Summit Notification';
+                // only for droid to specifiy the intent that should be fired
+                $notification['click_action'] = self::AndroidClickAction;
+
                 $message = [
                     'to'                => self::Topics . $recipient,
                     'data'              => $data,
