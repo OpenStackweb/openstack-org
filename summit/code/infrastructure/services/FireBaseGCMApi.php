@@ -53,7 +53,9 @@ final class FireBaseGCMApi implements IPushNotificationApi
                 //       access to envelope, and its trying to parse the to field ( only available on envelope)
                 //       so we send the to also on payload
                 $data['to'] = self::Topics . $recipient;
-
+                $notification = [];
+                $notification['body']  = $data['body'];
+                $notification['title'] = isset($data['title']) ? $data['title'] : 'OpenStack Summit Notification';
                 $message = [
                     'to'                => self::Topics . $recipient,
                     'data'              => $data,
@@ -63,6 +65,7 @@ final class FireBaseGCMApi implements IPushNotificationApi
                      * is in the background, set custom key-value pairs in the data key and set content_available to true.
                      * */
                     'content_available' => true,
+                    'notification'      => $notification,
                 ];
 
                 if(!is_null($ttl) && intval($ttl)  >= 0 ){
