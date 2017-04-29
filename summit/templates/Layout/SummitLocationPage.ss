@@ -97,7 +97,7 @@
                     <p style="margin-bottom:30px;">
                         <i class="fa fa-hotel fa-4x"></i>
                     </p>
-                    <div class="alert alert-danger" role="alert">
+                    <!-- <div class="alert alert-danger" role="alert">
                         <% if $Order %>
                         <p class="center">
                             Still need a hotel? Limited time offer: <a href="https://www.eventbrite.com/e/openstack-summit-may-2017-boston-tickets-28375675409" target="_blank">Click here for a 4-night stay</a> at a hotel walkable to the Summit venue at a discounted rate of $999 - only $250 a night. First come, first served, get it before it's gone!
@@ -107,7 +107,7 @@
                             Limited time offer: <a href="https://www.eventbrite.com/e/openstack-summit-may-2017-boston-tickets-28375675409" target="_blank">Click here to book a Full Access Ticket & a 4-night stay</a> at a hotel walkable to the Summit venue at a discounted rate of $1999 - only $200 a night. First come, first served, get it before it's gone!
                         </p>
                         <% end_if %>
-                    </div>
+                    </div> -->
                 <% end_if %>
                 $LocationsTextHeader
             </div>
