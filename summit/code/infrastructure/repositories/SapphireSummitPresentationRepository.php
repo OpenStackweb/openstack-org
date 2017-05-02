@@ -699,7 +699,7 @@ SQL;
             $query_where .= " AND (E.Title LIKE '%{$search_term}%' OR S.FirstName LIKE '%{$search_term}%'
                             OR S.LastName LIKE '%{$search_term}%' OR CONCAT(S.FirstName,' ',S.LastName) LIKE '%{$search_term}%'
                             OR PC.Title LIKE '%{$search_term}%' OR M.Email LIKE '%{$search_term}%' OR Org.Name LIKE '%{$search_term}%'
-                            OR SR.Email LIKE '%{$search_term}%'
+                            OR SR.Email LIKE '%{$search_term}%' OR P.ID = '{$search_term}'
                             OR EXISTS (
                                 SELECT * FROM SummitEvent_Tags
                                 LEFT JOIN Tag ON Tag.ID = SummitEvent_Tags.TagID
@@ -739,11 +739,17 @@ SQL;
 
         $query .= "P.Status AS status";
 
-        $query .= $query_body.$query_where.$query_group." ORDER BY {$sort} {$sort_dir}";
-        $query_count .= $query_body.$query_where." ) AS Q1";
-        $query_track = "SELECT PC.Title AS track, COUNT(P.ID) AS track_count FROM SummitEvent AS E
+        $query .= $query_body . $query_where . $query_group . " ORDER BY {$sort} {$sort_dir}";
+        $query_count .= $query_body . $query_where . " ) AS Q1";
+        $query_track = "SELECT PC.Title AS track, COUNT(DISTINCT P.ID) AS track_count FROM SummitEvent AS E
                         INNER JOIN Presentation AS P ON E.ID = P.ID
                         INNER JOIN PresentationCategory AS PC ON E.CategoryID = PC.ID
+                        LEFT JOIN Presentation_Speakers AS PS ON PS.PresentationID = P.ID
+                        LEFT JOIN PresentationSpeaker AS S ON PS.PresentationSpeakerID = S.ID
+                        LEFT JOIN SpeakerRegistrationRequest AS SR ON SR.SpeakerID = S.ID
+                        LEFT JOIN Member AS M ON M.ID = S.MemberID
+                        LEFT JOIN Affiliation AS A ON A.MemberID=M.ID
+                        LEFT JOIN Org ON Org.ID = A.OrganizationID AND A.Current = 1
                        {$query_where} GROUP BY PC.ID ORDER BY PC.Title";
 
         if ($page && $page_size) {
