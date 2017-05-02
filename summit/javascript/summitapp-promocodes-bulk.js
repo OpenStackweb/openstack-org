@@ -149,7 +149,7 @@ $(document).ready(function(){
         focusCleanup: true,
         ignore: [],
         rules: {
-            code_qty: { required: true },
+            code_qty: { required: true, min: 1 },
             company_id :{ required: function(){
                 var code_type = $('#code_type').find("option:selected").val();
                 return code_type === 'SPONSOR';
@@ -219,7 +219,7 @@ function getCodes() {
         company_id: company_id,
     };
 
-    if (!code_qty) return false;
+    if (!code_qty || code_qty < 1) return false;
     if(code_type == 'SPONSOR' && !company_id) return false;
 
     $.getJSON('api/v1/summits/'+summit_id+'/registration-codes/free', request, function(codes){
