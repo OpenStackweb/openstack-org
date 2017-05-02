@@ -66,11 +66,6 @@ final class FireBaseGCMApi implements IPushNotificationApi
         return [
             'to'                => $to,
             'priority'          => $priority,
-            /*
-             * If you want to send messages consisting of only custom key-values to an iOS device when the app
-             * is in the background, set custom key-value pairs in the data key and set content_available to true.
-             * */
-            'content_available' => true,
             'notification'      => $notification,
         ];
     }
