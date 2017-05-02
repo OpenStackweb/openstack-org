@@ -61,7 +61,8 @@ final class FireBaseGCMApi implements IPushNotificationApi
         $data['to']                   = $to;
         $notification                 = [];
         $notification['body']         = $data['body'];
-        $notification['title']        = isset($data['title']) ? $data['title'] : 'OpenStack Summit Notification';
+        if(isset($data['title']))
+            $notification['title'] = $data['title'];
 
         return [
             'to'                => $to,
