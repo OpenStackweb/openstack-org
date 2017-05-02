@@ -55,7 +55,7 @@ final class FireBaseGCMApi implements IPushNotificationApi
      * @param $priority
      * @return array
      */
-    private function createNotificationMessageWithCustomPayload(array $data, $recipient, $priority ){
+    private function createNotificationMessage(array $data, $recipient, $priority ){
 
         $to                           = self::Topics . $recipient;
         $data['to']                   = $to;
@@ -65,7 +65,6 @@ final class FireBaseGCMApi implements IPushNotificationApi
 
         return [
             'to'                => $to,
-            'data'              => $data,
             'priority'          => $priority,
             /*
              * If you want to send messages consisting of only custom key-values to an iOS device when the app
@@ -115,7 +114,7 @@ final class FireBaseGCMApi implements IPushNotificationApi
                         'Authorization' => sprintf('key=%s', $this->api_server_key),
                         'Content-Type'  => 'application/json'
                     ],
-                    'body' => json_encode($this->createNotificationMessageWithCustomPayload($data, 'ios_'.$recipient, $priority ))
+                    'body' => json_encode($this->createNotificationMessage($data, 'ios_'.$recipient, $priority ))
                 ]);
 
                 if ($response->getStatusCode() !== 200) $res = $res && false;
