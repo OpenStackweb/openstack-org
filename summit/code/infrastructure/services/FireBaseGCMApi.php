@@ -24,7 +24,6 @@ final class FireBaseGCMApi implements IPushNotificationApi
     const BaseUrl            = 'https://fcm.googleapis.com';
     const Topics             = '/topics/';
     const BaseBackOff        = 2000;
-    const AndroidClickAction = 'org.openstack.android.summit.intent.action.OPEN_OPENSTACK_PUSH_NOTIFICATION_FROM_SYSTRAY';
     /**
      * @var string
      */
@@ -34,6 +33,49 @@ final class FireBaseGCMApi implements IPushNotificationApi
     {
         $this->api_server_key = $api_server_key;
     }
+
+    /**
+     * @param array $data
+     * @param $recipient
+     * @param $priority
+     * @return array
+     */
+    private function createDataMessage(array $data, $recipient, $priority ){
+
+        return [
+            'to'                => self::Topics . $recipient,
+            'data'              => $data,
+            'priority'          => $priority,
+        ];
+    }
+
+    /**
+     * @param array $data
+     * @param $recipient
+     * @param $priority
+     * @return array
+     */
+    private function createNotificationMessageWithCustomPayload(array $data, $recipient, $priority ){
+
+        $to                           = self::Topics . $recipient;
+        $data['to']                   = $to;
+        $notification                 = [];
+        $notification['body']         = $data['body'];
+        $notification['title']        = isset($data['title']) ? $data['title'] : 'OpenStack Summit Notification';
+
+        return [
+            'to'                => $to,
+            'data'              => $data,
+            'priority'          => $priority,
+            /*
+             * If you want to send messages consisting of only custom key-values to an iOS device when the app
+             * is in the background, set custom key-value pairs in the data key and set content_available to true.
+             * */
+            'content_available' => true,
+            'notification'      => $notification,
+        ];
+    }
+
 
     /**
      * @param string $to
@@ -51,43 +93,49 @@ final class FireBaseGCMApi implements IPushNotificationApi
 
         try {
             foreach ($to as $recipient) {
-                // todo: this is a temporal solutions for IOS side, bc IOS is making the wrong assumption that has
-                //       access to envelope, and its trying to parse the to field ( only available on envelope)
-                //       so we send the to also on payload
-                $data['to'] = self::Topics . $recipient;
-                $notification = [];
-                $notification['body']         = $data['body'];
-                $notification['title']        = isset($data['title']) ? $data['title'] : 'OpenStack Summit Notification';
-                // only for droid to specifiy the intent that should be fired
-                $notification['click_action'] = self::AndroidClickAction;
 
-                $message = [
-                    'to'                => self::Topics . $recipient,
-                    'data'              => $data,
-                    'priority'          => $priority,
-                    /*
-                     * If you want to send messages consisting of only custom key-values to an iOS device when the app
-                     * is in the background, set custom key-value pairs in the data key and set content_available to true.
-                     * */
-                    'content_available' => true,
-                    'notification'      => $notification,
-                ];
-
-                if(!is_null($ttl) && intval($ttl)  >= 0 ){
-                    $message['time_to_live'] = intval($ttl);
-                }
+                // create for droid ( data message)
 
                 $response = $client->post($endpoint, [
                     'headers' => [
                         'Authorization' => sprintf('key=%s', $this->api_server_key),
                         'Content-Type'  => 'application/json'
                     ],
-                    'body' => json_encode($message)
+                    'body' => json_encode($this->createDataMessage($data, 'android_'.$recipient, $priority ))
                 ]);
 
                 if ($response->getStatusCode() !== 200) $res = $res && false;
 
                 usleep(self::BaseBackOff * $attempt);
+
+                // create for ios ( notification message with custom payload)
+
+                $response = $client->post($endpoint, [
+                    'headers' => [
+                        'Authorization' => sprintf('key=%s', $this->api_server_key),
+                        'Content-Type'  => 'application/json'
+                    ],
+                    'body' => json_encode($this->createNotificationMessageWithCustomPayload($data, 'ios_'.$recipient, $priority ))
+                ]);
+
+                if ($response->getStatusCode() !== 200) $res = $res && false;
+
+                usleep(self::BaseBackOff * $attempt);
+
+                // create for ios ( data message)
+
+                $response = $client->post($endpoint, [
+                    'headers' => [
+                        'Authorization' => sprintf('key=%s', $this->api_server_key),
+                        'Content-Type'  => 'application/json'
+                    ],
+                    'body' => json_encode($this->createDataMessage($data, 'ios_'.$recipient, $priority ))
+                ]);
+
+                if ($response->getStatusCode() !== 200) $res = $res && false;
+
+                usleep(self::BaseBackOff * $attempt);
+
                 ++$attempt;
             }
             return $res;
