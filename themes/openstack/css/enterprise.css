@@ -1068,7 +1068,7 @@ a.enterprise-bar-right {
     opacity: 1; }
 
 .intro-header.enterprise-booklet {
-  background: url('/themes/openstack/images/enterprise/path-to-cloud/path-to-cloud-hero.jpg') no-repeat center center;
+  background: url('/themes/openstack/images/enterprise/app-guide-hero-bkgd.jpg') no-repeat center center;
   background-size: cover;
   position: relative;
   padding: 60px 0; }

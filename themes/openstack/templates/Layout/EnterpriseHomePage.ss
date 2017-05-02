@@ -17,14 +17,13 @@
                     <div class="row">
                         <div class="col-md-8 col-md-push-2">
                             <div class="intro-message">
-                                <div class="foundation-report-title">OpenStack Foundation Report</div>
-                                <h1>OpenStack: The Path To Cloud</h1>
-                                <!-- <h3>OpenStack is a driving force in Enterprise software</h3> -->
+                                <div class="foundation-report-title">OpenStack Essentials</div>
+                                <h1>Designing, Migrating and Deploying Applications</h1>
                                 <p>
-                                    Considerations and recommendations for businesses adopting cloud technology
+                                    A Guide to Applications on OpenStack
                                 </p>
                                 <p>
-                                    <a href="#" class="path-options-btn" data-toggle="modal" data-target="#BookletModalHero">Get the recommendations now</a>
+                                    <a href="#" class="path-options-btn" data-toggle="modal" data-target="#BookletModalHero">Read the booklet now</a>
                                 </p>
                             </div>
                         </div>
@@ -406,30 +405,27 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title">OpenStack: The Path To Cloud</h4>
+            <h4 class="modal-title">Designing, Migrating and Deploying Applications on OpenStack</h4>
           </div>
           <div class="modal-body">
             <p class="download-text">
-                Read the recommendations for IT architects planning an OpenStack cloud. Learn from seasoned community members to make the best decisions about cloud for your business.
+                Read this booklet by OpenStack users to learn approaches and patterns for cloud-native and containers, OpenStack services and tools for application developers, migration checklists and much more.
             </p>
             <ul class="booklets-list">
                 <li>
-                    <a href="//openstack.org/assets/path-to-cloud/OpenStack-6x9Booklet-online.pdf" taget="_blank">View the book online</a>
+                    <a href="/assets/enterprise/OpenStack-AppDevMigration8x10Booklet-v10-online.pdf" taget="_blank">View the book online</a>
                 </li>
                 <li>
-                    <a href="//openstack.org/assets/path-to-cloud/The-Path-to-Cloud.epub" taget="_blank">Read the ebook on your phone, tablet, computer or e-reader</a>
+                    <a href="/assets/enterprise/OpenStack-AppDevMigration8x10Booklet-v10-press-withcover.pdf" taget="_blank">Print the booklet in 8”W x 10”H format</a>
                 </li>
                 <li>
-                    <a href="//openstack.org/assets/path-to-cloud/The-Path-to-Cloud.mobi" taget="_blank">Read the ebook on your Kindle</a>
-                </li>
-                <li>
-                    <a href="http://www.amazon.com/dp/1532709404" taget="_blank">Order a paperback from Amazon</a>
+                    <a href="http://www.amazon.com/dp/1545369887" taget="_blank">Order a paperback from Amazon</a>
                 </li>
             </ul>
-            <div class="tip">
+            <!-- <div class="tip">
                 <strong><i class="fa fa-info-circle"></i>TIP:</strong> 
                 <a href="http://www.amazon.com/gp/sendtokindle/email" target="_blank">how to open documents on your Kindle</a>
-            </div>
+            </div> -->
           </div>
           <div class="modal-footer">
           </div>
