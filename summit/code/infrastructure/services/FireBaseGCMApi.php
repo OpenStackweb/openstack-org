@@ -55,22 +55,25 @@ final class FireBaseGCMApi implements IPushNotificationApi
      * @param $priority
      * @return array
      */
-    private function createNotificationMessage(array $data, $recipient, $priority ){
+    private function createNotificationMessageWithCustomPayload(array $data, $recipient, $priority )
+    {
 
-        $to                           = self::Topics . $recipient;
-        $data['to']                   = $to;
-        $notification                 = [];
-        $notification['body']         = $data['body'];
-        if(isset($data['title']))
+        $to                   = self::Topics . $recipient;
+        $data['to']           = $to;
+        $notification         = [];
+        $notification['body'] = $data['body'];
+
+        if (isset($data['title']))
             $notification['title'] = $data['title'];
 
         return [
-            'to'                => $to,
-            'priority'          => $priority,
-            'notification'      => $notification,
+            'to'           => $to,
+            'data'         => $data,
+            'priority'     => $priority,
+            'notification' => $notification,
         ];
-    }
 
+    }
 
     /**
      * @param string $to
@@ -110,7 +113,7 @@ final class FireBaseGCMApi implements IPushNotificationApi
                         'Authorization' => sprintf('key=%s', $this->api_server_key),
                         'Content-Type'  => 'application/json'
                     ],
-                    'body' => json_encode($this->createNotificationMessage($data, 'ios_'.$recipient, $priority ))
+                    'body' => json_encode($this->createNotificationMessageWithCustomPayload($data, 'ios_'.$recipient, $priority ))
                 ]);
 
                 if ($response->getStatusCode() !== 200) $res = $res && false;
