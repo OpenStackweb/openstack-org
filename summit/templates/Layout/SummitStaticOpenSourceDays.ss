@@ -70,7 +70,7 @@
         <div class="col-lg-5 col-lg-push-2 col-md-5 col-md-push-2 col-sm-6">
             <div class="company-logo"><img src="/assets/boston-summit/images/juniper-344-lg.png" alt="OpenContrail"></div>
             <p class="company-desc">Learn real-world case studies of how scale-out operators are using the software for hybrid cloud networking with VMs and containers with Docker and Kubernetes. OpenContrail's infrastructure-agnostic design makes it perfect for multi-cloud connectivity and the ideal SDN for production across multiple cloud devices and ISSs.</p>
-            <p class="learn-more-button"><a href="http://www.opencontrail.org/" class="btn btn-primary" role="button">Learn More</a>&nbsp;&nbsp;<a href="/summit/boston-2017/summit-schedule/#track=150" class="btn btn-primary" role="button">View on Schedule</a></p>
+            <p class="learn-more-button"><a href="http://www.opencontrail.org/" class="btn btn-primary" role="button">Learn More</a>&nbsp;&nbsp;<a href="/summit/boston-2017/summit-schedule/#track=138" class="btn btn-primary" role="button">View on Schedule</a></p>
         </div>
     </div>
     <div class="row">
