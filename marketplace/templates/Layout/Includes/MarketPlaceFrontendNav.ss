@@ -1,14 +1,11 @@
 <div class="container">
     <div class="row marketplace-top-wrapper">
         <div class="row">
-            <div class="col-lg-2 col-md-12 marketplace-brand">
-                <h2 class="marketplace">
-                    <a href="/marketplace/">OpenStack</a>
-                </h2>
-                <h1 class="marketplace">
-                    <a href="/marketplace/">Marketplace</a>
-                </h1>
-            </div>
+		<div class="col-sm-12 marketplace-brand">
+			<h1 class="marketplace">
+				The OpenStack Marketplace
+			</h1>
+		</div>
 
             <% with Top %>
             <div class="col-lg-10 col-md-12">
@@ -28,7 +25,6 @@
                             <a href="{$getMarketPlaceTypeLink(2)}">
                                 <span></span>
                                 Distros &
-                                <br>
                                 Appliances
                             </a>
                         </li>
@@ -37,15 +33,16 @@
                         <li id="public-clouds">
                             <a href="{$getMarketPlaceTypeLink(3)}">
                                 <span></span>
-                                Public <br>Clouds
+                                Public Clouds
                             </a>
                         </li>
                     <% end_if %>
+                    <span id="pcaas-wrapper"> <!--Wrapper for PCaaS graphic-->
                     <% if canViewTab(6) %>
                         <li id="private-clouds">
                             <a href="{$getMarketPlaceTypeLink(6)}">
                                 <span></span>
-                                Hosted <br />Private Clouds
+                                Hosted Private Clouds
                             </a>
                         </li>
                     <% end_if %>
@@ -53,16 +50,16 @@
                         <li id="remote-clouds">
                             <a href="{$getMarketPlaceTypeLink(7)}">
                                 <span></span>
-                                Remotely Managed <br />Private Clouds
+                                Remotely Managed Private Clouds
                             </a>
                         </li>
                     <% end_if %>
+                    </span>
                     <% if canViewTab(4) %>
                         <li id="consulting">
                             <a href="{$getMarketPlaceTypeLink(4)}">
                                 <span></span>
                                 Consulting &
-                                <br>
                                 Integrators
                             </a>
                         </li>
@@ -72,8 +69,6 @@
                             <a href="{$getMarketPlaceTypeLink(5)}">
                                 <span></span>
                                  Drivers
-                                <br>
-                                &nbsp;
                             </a>
                         </li>
                     <% end_if %>

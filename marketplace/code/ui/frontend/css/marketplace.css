@@ -739,3 +739,146 @@ a.app-promo-banner {
     padding-bottom:15px;
     height:65px;
 }
+
+/*New Marketplace Nav*/
+
+.marketplace-brand {
+  padding-left: 0; }
+  .marketplace-brand h1.marketplace {
+    text-align: center; }
+    .marketplace-brand h1.marketplace a {
+      font-family: 'Open Sans';
+      font-size: 34px;
+      font-weight: 300; }
+
+ul.marketplace-nav {
+  text-align: center;
+  -ms-box-orient: horizontal;
+  width: 100%;
+  margin-bottom: 90px; }
+  ul.marketplace-nav li {
+    text-transform: uppercase;
+    border-right: none;
+    text-align: center;
+    padding: 5px 0;
+    margin: 5px 0.5%;
+    width: 12.7%; }
+    ul.marketplace-nav li a {
+      color: #333;
+      padding-bottom: 5px;
+      display: inline-block;
+      width: auto; }
+    ul.marketplace-nav li.current a {
+      color: black;
+      font-weight: 600;
+      position: relative; }
+      ul.marketplace-nav li.current a:after {
+        content: '';
+        height: 3px;
+        background: red;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 100%; }
+  ul.marketplace-nav #pcaas-wrapper {
+    position: relative;
+    width: 25.4%;
+    display: inline-block; }
+    ul.marketplace-nav #pcaas-wrapper:after {
+      background: url('/themes/openstack/images/marketplace/new/pcaas-wrap.svg') no-repeat 0px 0px;
+      content: 'Private Cloud As A Service';
+      color: #aaa;
+      position: absolute;
+      top: 110%;
+      text-transform: uppercase;
+      font-size: 0.8em;
+      white-space: nowrap;
+      width: 180px;
+      height: 20px;
+      overflow: visible;
+      padding: 30px 10px 20px;
+      left: 50%;
+      -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+          transform: translateX(-50%); }
+  ul.marketplace-nav #drivers a span {
+    background: url('/themes/openstack/images/marketplace/new/drivers.svg') no-repeat;
+    background-position: center center; }
+  ul.marketplace-nav #consulting a span {
+    background: url('/themes/openstack/images/marketplace/new/consultants.svg') no-repeat;
+    background-position: center center; }
+  ul.marketplace-nav #remote-clouds {
+    width: 48%; }
+    ul.marketplace-nav #remote-clouds a span {
+      background: url('/themes/openstack/images/marketplace/new/remote-clouds.svg') no-repeat;
+      background-position: center center; }
+  ul.marketplace-nav #private-clouds {
+    width: 48%; }
+    ul.marketplace-nav #private-clouds a span {
+      background: url('/themes/openstack/images/marketplace/new/hosted-private-clouds.svg') no-repeat;
+      background-position: center center; }
+  ul.marketplace-nav #public-clouds a span {
+    background: url('/themes/openstack/images/marketplace/new/public-clouds.svg') no-repeat;
+    background-position: center center; }
+  ul.marketplace-nav #distros a span {
+    background: url('/themes/openstack/images/marketplace/new/distros.svg') no-repeat;
+    background-position: center center; }
+  ul.marketplace-nav #training a span {
+    background: url('/themes/openstack/images/marketplace/new/training.svg') no-repeat;
+    background-position: center center; }
+  ul.marketplace-nav a span {
+    background: none;
+    display: block;
+    width: 90px;
+    height: 60px;
+    text-align: center;
+    margin: 0 auto; }
+
+@media (max-width: 1200px) and (min-width: 1001px) {
+  ul.marketplace-nav #pcaas-wrapper:after {
+    top: 120%; } }
+
+@media (max-width: 1000px) and (min-width: 767px) {
+  ul.marketplace-nav {
+    margin-bottom: 50px; }
+    ul.marketplace-nav li {
+      height: auto; }
+    ul.marketplace-nav #pcaas-wrapper:after {
+      top: 95%; } }
+
+@media (max-width: 767px) {
+  ul.marketplace-nav {
+    text-align: left;
+    margin-bottom: 10px; }
+    ul.marketplace-nav li {
+      border-right: none;
+      text-transform: uppercase;
+      text-align: left;
+      padding: 3px;
+      margin: 3px 0;
+      width: 98%;
+      height: auto;
+      border-bottom: 1px solid #e8e8e8; }
+      ul.marketplace-nav li:last-child {
+        border-bottom: none; }
+      ul.marketplace-nav li a {
+        color: #333;
+        text-align: left;
+        width: 100%;
+        vertical-align: middle; }
+        ul.marketplace-nav li a span {
+          display: inline-block;
+          text-align: left;
+          width: 40px;
+          margin-right: 20px;
+          height: 40px;
+          float: none;
+          vertical-align: middle; }
+      ul.marketplace-nav li#private-clouds, ul.marketplace-nav li#remote-clouds {
+        width: 100%; }
+    ul.marketplace-nav #pcaas-wrapper {
+      width: 100%; }
+      ul.marketplace-nav #pcaas-wrapper li:last-child {
+        border-bottom: 1px solid #e8e8e8; }
+      ul.marketplace-nav #pcaas-wrapper:after {
+        display: none; } }
