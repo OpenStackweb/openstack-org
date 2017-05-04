@@ -70,9 +70,12 @@ SQL;
 				break;
 				case 'private cloud':
 					$res = $current_user->getManagedMarketPlaceCompaniesByType(IPrivateCloudService::MarketPlaceGroupSlug);
-					break;
+			    break;
 				case 'consultant':
 					$res = $current_user->getManagedMarketPlaceCompaniesByType(IConsultant::MarketPlaceGroupSlug);
+                break;
+                case 'remote cloud':
+					$res = $current_user->getManagedMarketPlaceCompaniesByType(IRemoteCloudService::MarketPlaceGroupSlug);
 				break;
 			}
 			foreach(array_values($res) as $company){

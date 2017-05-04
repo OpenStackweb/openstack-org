@@ -302,6 +302,9 @@ class MarketPlaceAdminPage_Controller extends AdminController
                 case 4:
                     $current_marketplace_type = IPrivateCloudService::MarketPlaceType;
                     break;
+                case 5:
+                    $current_marketplace_type = IRemoteCloudService::MarketPlaceType;
+                    break;
             }
         }
         $result = $this->companies_with_marketplace_creation_rights->handle(new CompaniesWithMarketPlaceCreationRightsSpecification($current_marketplace_type));

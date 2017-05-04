@@ -121,6 +121,7 @@ class MarketPlaceAdminMember extends DataExtension
 		$res = $res || $this->isMarketPlaceTypeAdmin(IPublicCloudService::MarketPlaceGroupSlug);
 		$res = $res || $this->isMarketPlaceTypeAdmin(IConsultant::MarketPlaceGroupSlug);
 		$res = $res || $this->isMarketPlaceTypeAdmin(IPrivateCloudService::MarketPlaceGroupSlug);
+        $res = $res || $this->isMarketPlaceTypeAdmin(IRemoteCloudService::MarketPlaceGroupSlug);
 		return $res;
 	}
 
@@ -156,6 +157,10 @@ class MarketPlaceAdminMember extends DataExtension
 			case IConsultant::MarketPlaceType:
 				$permission_code = IConsultant::MarketPlacePermissionSlug;
 				break;
+            case IRemoteCloudService::MarketPlaceGroupSlug:
+            case IRemoteCloudService::MarketPlaceType:
+                $permission_code = IRemoteCloudService::MarketPlacePermissionSlug;
+                break;
 		}
 		return Permission::check($permission_code);
 	}
