@@ -834,3 +834,107 @@ ul.marketplace-nav {
         border-bottom: 1px solid #e8e8e8; }
       ul.marketplace-nav #pcaas-wrapper:after {
         display: none; } }
+
+/*Marketplace homepage redesign*/
+.marketplace-intro {
+  margin: 0 0 30px; }
+
+h3.marketplace-title {
+  margin-bottom: 10px;
+  font-size: 1.3em; }
+
+h2.marketplace-title {
+  text-align: center;
+  margin-top: 5px;
+  text-transform: uppercase; }
+
+hr.marketplace-hr {
+  margin: 60px 0; }
+
+.marketplace-where {
+  margin-bottom: 20px; }
+  .marketplace-where h2, .marketplace-where h3 {
+    text-align: center; }
+
+.marketplace-consider-box {
+  background: white;
+  border: 1px solid #D3DEE9;
+  box-shadow: 1px 1px 3px 0px rgba(51, 51, 51, 0.12);
+  border-radius: 4px;
+  padding: 20px;
+  margin-bottom: 30px;
+  min-height: 560px; }
+  .marketplace-consider-box .title {
+    border-bottom: 1px solid #D3DEE9;
+    background-color: #EDFDFF;
+    margin: -20px -20px 20px;
+    padding: 15px;
+    text-align: center;
+    color: #30739C;
+    font-size: 1.1em;
+    text-transform: uppercase; }
+
+@media (min-width: 768px) and (max-width: 990px) {
+  .marketplace-consider-box {
+    min-height: 730px; } }
+
+@media (max-width: 767px) {
+  .marketplace-consider-box {
+    min-height: auto; } }
+
+.marketplace-consider-box ul, .marketplace-designing ul {
+  margin: 0;
+  padding: 0; }
+  .marketplace-consider-box ul li, .marketplace-designing ul li {
+    list-style: none;
+    padding-left: 100px;
+    margin: 25px 0 30px; }
+    .marketplace-consider-box ul li h5, .marketplace-designing ul li h5 {
+      color: #2B4D68;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 10px;
+      padding-top: 15px; }
+    .marketplace-consider-box ul li:last-child, .marketplace-designing ul li:last-child {
+      margin-bottom: 0; }
+    .marketplace-consider-box ul li#remote, .marketplace-designing ul li#remote {
+      background: url('/themes/openstack/images/marketplace/new/remote-private-clouds.svg') no-repeat;
+      background-position: top left;
+      background-size: 80px; }
+    .marketplace-consider-box ul li#distros, .marketplace-designing ul li#distros {
+      background: url('/themes/openstack/images/marketplace/new/distros.svg') no-repeat;
+      background-position: top left;
+      background-size: 80px; }
+    .marketplace-consider-box ul li#hosted, .marketplace-designing ul li#hosted {
+      background: url('/themes/openstack/images/marketplace/new/hosted-private-clouds.svg') no-repeat;
+      background-position: top left;
+      background-size: 80px; }
+    .marketplace-consider-box ul li#public, .marketplace-designing ul li#public {
+      background: url('/themes/openstack/images/marketplace/new/public-clouds.svg') no-repeat;
+      background-position: top left;
+      background-size: 80px; }
+    .marketplace-consider-box ul li#consulting, .marketplace-designing ul li#consulting {
+      background: url('/themes/openstack/images/marketplace/new/consultants.svg') no-repeat;
+      background-position: top left;
+      background-size: 80px; }
+    .marketplace-consider-box ul li#training, .marketplace-designing ul li#training {
+      background: url('/themes/openstack/images/marketplace/new/training.svg') no-repeat;
+      background-position: top left;
+      background-size: 80px; }
+
+a.marketplace-consider-btn {
+  display: inline-block;
+  background: #29abe2;
+  color: white;
+  border-radius: 4px;
+  padding: 5px 20px;
+  font-size: 0.9em;
+  text-transform: uppercase;
+  margin-top: 10px; }
+  a.marketplace-consider-btn:hover, a.marketplace-consider-btn:focus {
+    text-decoration: none;
+    background: #30739C; }
+
+img.marketplace-single-icon {
+  width: 70px;
+  margin: 0 auto; }
