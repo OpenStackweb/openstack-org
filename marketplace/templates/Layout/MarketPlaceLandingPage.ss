@@ -2,70 +2,130 @@
         &nbsp;
 </div>
 <div class="container">
-    <div class="row">
-        <h2 class="marketplace-header">
-            <strong>The OpenStack Marketplace</strong> will help you make an informed decision, whether you're building a cloud, looking to use one by the hour, or pursuing a hybrid model.
-        </h2>
-        <div class="col-lg-6 col-md-6 col-sm-6">
-            <div class="build-use-box">
-                <h3>Building a cloud</h3>
-                <ul>
-                    <li>You'll want to understand which <a href="/marketplace/distros/">Software Distributions</a> and <a href="/marketplace/distros/">Converged Appliance</a> options there are.</li>
-                    <li>Many users start by hiring experts, which you can find in our <a href="/marketplace/consulting/">Consultants and System Integrators</a> section.</li>
-                    <li>Want to train your staff? Check out our <a href="/marketplace/training/">Training</a> section.</li>
-                    <li>Wondering if your compute, storage, and networking gear has compatible drivers? Check out the <a href="/marketplace/drivers/">Drivers section</a><a></a> to learn the status of ongoing testing.</li>
-                </ul>
-            </div>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-6">
-            <div class="build-use-box">
-                <h3>Using a cloud</h3>
-                <p>There are OpenStack powered public clouds all over the world. Explore the possibilities.</p>
-                <script type="application/javascript">
-                    var dc_locations = $DataCenterLocationsJson;
-                </script>
-                <div style="width: 100%; height: 200px; position: relative;" id="mini-map" tabindex="0">
-                </div>
-                
-            </div>
-        </div>
-    </div>
-    <div class="row marketplace-description">
-        <div class="col-lg-4 col-md-4 col-sm-4">
-            <div class="video">
-                <iframe allowfullscreen="" src="//www.youtube.com/embed/_zYqQVguMMw?rel=0&amp;showinfo=0&amp;modestbranding=1&amp;controls=2" frameborder="0" height="200" width="250"></iframe>
-            </div>
-        </div>
-        <div class="col-lg-8 col-md-8 col-sm-8">
-            <h1>Why a marketplace?</h1>
-            <p>A key part of the OpenStack Foundation mission is to inform, and with the ever expanding ecosystem, we felt it was a good time to cut through the noise to give our members the facts needed to make sound decisions.</p>
-            <p>We break it down for you with the OpenStack details like <em>which components are included</em>, the <em>versions used</em>, and the <em>APIs exposed</em>. We've also implemented <a href="/interop">interoperability testing</a> to validate OpenStack Powered products,and the results are now available in the Marketplace for public clouds, hosted private clouds, distributions &amp; appliances.</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 program-logos">
-			<h3>Training & Certification</h3>
-
-			<p>OpenStack training courses and workshops are happening daily online and around the world thanks to dozens of training partners. Whether you are installing OpenStack for the first time or interested in advanced networking, there’s a course for you in the <a href="http://www.openstack.org/marketplace/training">Training Marketplace</a>.</p>
-
-			<p>The OpenStack Foundation will offer its first professional certification, Certified OpenStack Administrator (COA), in Q2 2016. <a href="coa">Learn more about the certification and sign up for updates</a>.</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 program-logos">
-            <div class="col-lg-8">
-                <h3>Look for these logos</h3>
-                <p>When evaluating OpenStack related products, look for these logos which indicate products that have met the necessary requirements:</p>
-                <p>
-                    <img src="http://5c4cf848f6454dc02ec8-c49fe7e7355d384845270f4a7a0a7aa1.r53.cf2.rackcdn.com/images/program-logos/3630fcbe89d947d9c106b9e2c520abaed86b487a/openstack-powered.png">
-                    <img src="http://5c4cf848f6454dc02ec8-c49fe7e7355d384845270f4a7a0a7aa1.r53.cf2.rackcdn.com/images/program-logos/c2587897812c5059c410f91ed42785b16588ae9a/openstack-compatible.png">
-                    <img src="http://5c4cf848f6454dc02ec8-c49fe7e7355d384845270f4a7a0a7aa1.r53.cf2.rackcdn.com/images/program-logos/1ecc9d93c999f449a5084a9902723f11ca00eaa8/openstack-training.png">
-                </p>
-            </div>
-            <div class="col-lg-4 ecosystem-wrapper">
-                <h3>Be Featured In The Ecosystem</h3>
-                <p>Does your company offer a product or service that you think fits in the Marketplace? Check out <a href="http://www.openstack.org/assets/marketplace/join-the-marketplace.pdf">this overview</a> (PDF), then <a href="mailto:ecosystem@openstack.org">contact us</a> for next steps on how to join. You can also learn more about the logo licensing programs <a href="http://openstack.org/brand">here</a>.</p>
-            </div>
-        </div>
-    </div>
+	<div class="row">
+		<div class="col-sm-10 col-sm-push-1 marketplace-intro">
+			<p>
+				Few organizations would undergo deploying a cloud on their own - the good news is, you don't have to. The Openstack Community has a tremendous amount of expertise in building and scaling clouds of all sizes. We put together the OpenStack Marketplace as a guide to help you find the resources you need to make your cloud project successful.
+			</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 marketplace-where">
+			<h3 class="marketplace-title">How to Find The Right Help and Expertise</h3>
+			<h2 class="marketplace-title">First, Where Will You Deploy OpenStack?</h2>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-6">
+			<div class="marketplace-consider-box">
+				<div class="title">
+					In your facilities
+				</div>
+				<p><em>You should consider...</em></p>
+				<ul>
+					<li id="remote">
+						<h5>Remotely Managed Private Cloud</h5>
+						<p>
+							Build your own private cloud, on your own hardware and in your own data centers, remotely managed by OpenStack experts. If you don't have (or want) in house experts to manage your cloud infrastructure, this option provides you an on-premise cloud with a fully-managed service model.
+						</p>
+						<p>
+							<a href="/marketplace/remotely-managed-private-clouds/" class="marketplace-consider-btn">Explore Providers</a>
+						</p>
+					</li>
+					<li id="distros">
+						<h5>Distros & Appliances</h5>
+						<p>
+							Building a cloud is a big undertaking, so a popular way to build an OpenStack private cloud is with the backing of commercial distributions and hardware appliances.
+						</p>
+						<p>
+							<a href="/marketplace/distros/" class="marketplace-consider-btn">Explore Providers</a>
+						</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="marketplace-consider-box">
+				<div class="title">
+					With a hosting provider
+				</div>
+				<p><em>You should consider...</em></p>
+				<ul>
+					<li id="hosted">
+						<h5>Hosted Private Cloud</h5>
+						<p>
+							You don't need your own data centers to run your own cloud. OpenStack providers can get you all the benefits of private cloud without any of the on-side hardware. There's usually an option to have your hosted private cloud completely managed for you.
+						</p>
+						<p>
+							<a href="/marketplace/hosted-private-clouds/" class="marketplace-consider-btn">Explore Providers</a>
+						</p>
+					</li>
+					<li id="public">
+						<h5>Public Cloud</h5>
+						<p>
+							Perhaps the easiest way to get started is making use of one of the worldwide OpenStack powered public clouds. Get access to compute, storage and networking in minutes and only pay for what you use.
+						</p>
+						<p>
+							<a href="/marketplace/public-clouds/" class="marketplace-consider-btn">Explore Providers</a>
+						</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			<h3 class="marketplace-title">Why Not Both?</h3>
+			<p>
+				Of course, there's no reason why you can't do both public and private cloud (a "hybrid" approach.) The powere of OpenStack is the many ways you can deploy it and you'll find OpenStack in private data centers, public clouds, edge environments - or any combination of the three.
+			</p>
+			<hr class="marketplace-hr">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 marketplace-where">
+			<h2 class="marketplace-title">Designing your cloud & training your people</h2>
+		</div>
+	</div>
+	<div class="row marketplace-designing">
+		<div class="col-sm-6">
+			<ul>
+				<li id="consulting">
+					<h5>Consulting & Integrators</h5>
+					<p>
+						It can really help to get expert help from partners who have designed and built cloud infrastructure for companies of all sizes. OpenStack consultants can help you decide where to start and how to meet your unique cloud needs.
+					</p>
+						<p>
+							<a href="/marketplace/consulting/" class="marketplace-consider-btn">Explore Providers</a>
+						</p>
+				</li>
+			</ul>
+		</div>
+		<div class="col-sm-6">
+			<ul>
+				<li id="training">
+					<h5>OpenStack Training</h5>
+					<p>
+						Operating a cloud is a unique skill set - luckily, there's a collection of certified OpenStack Training Partners worldwide. Admins versed in OpenStack can even take the Certified OpenStack Administrator exam, and you can be sure you are hiring the right cloud talent.
+					</p>
+						<p>
+							<a href="/marketplace/training/" class="marketplace-consider-btn">Explore Providers</a>
+						</p>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-8 col-sm-push-2 center">
+			<hr class="marketplace-hr">
+			<img src="/themes/openstack/images/marketplace/new/drivers.svg" class="marketplace-single-icon" alt="">
+			<h2 class="marketplace-title">Software Drivers for all your Devices</h2>
+			<p>
+				A growing collection of software drivers are available to plug all kinds of storage, networking and compute devices into your OpenStack infrastructure.
+			</p>
+			<p>
+				<a href="/marketplace/drivers/" class="marketplace-consider-btn">Explore Providers</a>
+			</p>
+		</div>
+	</div>
 </div>
