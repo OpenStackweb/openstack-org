@@ -8,7 +8,7 @@
 		</div>
 
             <% with Top %>
-            <div class="col-lg-10 col-md-12">
+            <div class="col-sm-12">
                 <ul class="marketplace-nav">
                     <% if canViewTab(1) %>
                         <li id="training">
