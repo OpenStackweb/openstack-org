@@ -12,24 +12,21 @@
  **/
 jQuery(document).ready(function($) {
 
-    var form_id ="#HoneyPotForm_RegistrationForm";
+    var registration_form = $('.registration-form');
 
-    var country = $(form_id+'_Country');
+    var country = $(".countrydropdowncountrydropdown", registration_form);
 
     if(country.length>0)
         country.chosen();
 
-    var registration_form = $(form_id);
 
     var default_country = country.val();
-    var state_input = $(form_id + ' input[name="State"]');
+    var state_input     = $("input[name='State']", registration_form);
 
     if(registration_form.length > 0){
 
+        $('#g_recaptcha_hidden').val('');
         $('.autocompleteoff').attr('autocomplete', 'off');
-
-
-        var country = $(form_id+'_Country');
 
         country.chosen().change(function(){
             var country_selected = $(this).val();
@@ -73,10 +70,28 @@ jQuery(document).ready(function($) {
                 if (errors) {
                     var element = validator.errorList[0].element;
                     var offset = (element.name == 'Affiliations') ? $(element).prev().offset().top : $(element).offset().top;
+
+                    if(element.name == 'g_recaptcha_hidden'){
+                        offset = $('#g-recaptcha-container').offset().top;
+                    }
+
                     $('html, body').animate({
                         scrollTop: offset-100
                     }, 2000);
                 }
+            },
+            errorPlacement: function(error, element) {
+                if($(element).attr('name') == 'g_recaptcha_hidden'){
+                    error.insertAfter($('#g-recaptcha-container'));
+                }
+                if($(element).attr('name') == 'HiddenAffiliations'){
+                    error.insertAfter($(".middleColumn", $('#Affiliations')));
+                }
+                if($(element).attr('name') == 'Gender'){
+                    error.insertAfter($("#Gender"));
+                }
+                else
+                    error.insertAfter(element); // default function
             },
             ignore: [],
             rules: {
@@ -91,7 +106,8 @@ jQuery(document).ready(function($) {
                 'Password[_Password]': {required: true,minlength: 5},
                 'Password[_ConfirmPassword]': {required: true,minlength: 5,equalTo: '#Password-_Password'},
                 'HiddenAffiliations':{ checkAffiliations:true },
-                'Gender':{checkGender:true}
+                'Gender':{checkGender:true},
+                'g_recaptcha_hidden': {required: true}
             },
             messages: {
                 FirstName:{
@@ -110,13 +126,13 @@ jQuery(document).ready(function($) {
                 Email:{
                     required:'Primary Email Address is required.',
                     email:'Primary Email Address is not valid.',
-                    remote:'That address is already in use by another user'
-                }
+                    remote:'That address is already in use by another user.'
+                },
+                'g_recaptcha_hidden': { required: 'Please confirm that you are not a robot.'}
             }
         });
 
         $( "#HiddenAffiliations" ).on( "affiliation:saved", function( event ) {
-            console.log('affiliation:saved');
             registration_form_validator.resetForm();
         });
 

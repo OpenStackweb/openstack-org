@@ -1,16 +1,3 @@
-label.error {
-  border: 1px solid #aaa;
-  background: #aa2222;
-  color: #fff;
-  padding: 5px;
-  margin: 0;
-  -webkit-border-radius: 05px;
-  -moz-border-radius: 05px;
-  border-radius: 05px; }
-
-input.error {
-  border: 1px solid #aa2222; }
-
 .membership-level-container {
   margin-top: 1em;
   margin-bottom: 1em; }

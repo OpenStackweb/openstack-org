@@ -4,8 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2dcccc025e37737858fff0fcaadb3393",
-    "content-hash": "decbd31d82a8d0ac3a2e4f85c6db6c50",
+    "content-hash": "4f5c0ef007f25878265735c189b625e3",
     "packages": [
         {
             "name": "composer/installers",
@@ -323,7 +322,7 @@
                 "collections",
                 "iterator"
             ],
-            "time": "2017-01-03 10:49:41"
+            "time": "2017-01-03T10:49:41+00:00"
         },
         {
             "name": "doctrine/common",
@@ -396,7 +395,7 @@
                 "persistence",
                 "spl"
             ],
-            "time": "2016-11-30 16:50:46"
+            "time": "2016-11-30T16:50:46+00:00"
         },
         {
             "name": "doctrine/inflector",
@@ -570,7 +569,7 @@
                 "ics",
                 "php calendar"
             ],
-            "time": "2016-06-09 09:08:55"
+            "time": "2016-06-09T09:08:55+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -727,7 +726,7 @@
                 "po",
                 "translation"
             ],
-            "time": "2017-03-04 16:39:13"
+            "time": "2017-03-04T16:39:13+00:00"
         },
         {
             "name": "gettext/languages",
@@ -788,7 +787,7 @@
                 "translations",
                 "unicode"
             ],
-            "time": "2017-03-23 17:02:28"
+            "time": "2017-03-23T17:02:28+00:00"
         },
         {
             "name": "google/apiclient",
@@ -832,6 +831,51 @@
                 "google"
             ],
             "time": "2017-01-09 19:33:08"
+        },
+        {
+            "name": "google/recaptcha",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/google/recaptcha.git",
+                "reference": "6990961e664372ddbed7ebc1cd673da7077552e5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/google/recaptcha/zipball/6990961e664372ddbed7ebc1cd673da7077552e5",
+                "reference": "6990961e664372ddbed7ebc1cd673da7077552e5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ReCaptcha\\": "src/ReCaptcha"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Client library for reCAPTCHA, a free service that protect websites from spam and abuse.",
+            "homepage": "http://www.google.com/recaptcha/",
+            "keywords": [
+                "Abuse",
+                "captcha",
+                "recaptcha",
+                "spam"
+            ],
+            "time": "2017-03-09 18:57:45"
         },
         {
             "name": "guzzle/guzzle",
@@ -985,7 +1029,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2015-05-20 03:47:55"
+            "time": "2015-05-20T03:47:55+00:00"
         },
         {
             "name": "guzzlehttp/ringphp",
@@ -1138,7 +1182,7 @@
                 "singularize",
                 "underscore"
             ],
-            "time": "2016-12-15 09:15:25"
+            "time": "2016-12-15T09:15:25+00:00"
         },
         {
             "name": "knplabs/github-api",
@@ -1199,7 +1243,7 @@
                 "gist",
                 "github"
             ],
-            "time": "2015-02-23 16:36:53"
+            "time": "2015-02-23T16:36:53+00:00"
         },
         {
             "name": "mobiledetect/mobiledetectlib",
@@ -1251,7 +1295,7 @@
                 "mobile detector",
                 "php mobile detect"
             ],
-            "time": "2017-03-29 13:59:30"
+            "time": "2017-03-29T13:59:30+00:00"
         },
         {
             "name": "mustangostang/spyc",
@@ -1298,7 +1342,7 @@
                 "yaml",
                 "yml"
             ],
-            "time": "2013-02-21 10:52:01"
+            "time": "2013-02-21T10:52:01+00:00"
         },
         {
             "name": "nnnick/chartjs",
@@ -1388,7 +1432,7 @@
                 "auth",
                 "yadis"
             ],
-            "time": "2015-07-30 18:07:43"
+            "time": "2015-07-30T18:07:43+00:00"
         },
         {
             "name": "parse/php-sdk",
@@ -1441,7 +1485,7 @@
                 "parse",
                 "sdk"
             ],
-            "time": "2016-01-25 19:05:20"
+            "time": "2016-01-25T19:05:20+00:00"
         },
         {
             "name": "phpoffice/phpexcel",
@@ -1610,7 +1654,7 @@
                 "rackspace",
                 "swift"
             ],
-            "time": "2015-03-16 23:57:58"
+            "time": "2015-03-16T23:57:58+00:00"
         },
         {
             "name": "react/promise",
@@ -1703,7 +1747,7 @@
                 "send",
                 "sendgrid"
             ],
-            "time": "2015-04-14 20:19:12"
+            "time": "2015-04-14T20:19:12+00:00"
         },
         {
             "name": "sendgrid/smtpapi",
@@ -1751,7 +1795,7 @@
                 "smtpapi",
                 "xsmtp"
             ],
-            "time": "2015-04-14 02:37:45"
+            "time": "2015-04-14T02:37:45+00:00"
         },
         {
             "name": "silverstripe-australia/gridfieldextensions",
@@ -1801,7 +1845,7 @@
                 "gridfield",
                 "silverstripe"
             ],
-            "time": "2014-12-08 11:14:53"
+            "time": "2014-12-08T11:14:53+00:00"
         },
         {
             "name": "silverstripe/cms",
@@ -1848,7 +1892,7 @@
                 "cms",
                 "silverstripe"
             ],
-            "time": "2016-05-10 22:58:24"
+            "time": "2016-05-10T22:58:24+00:00"
         },
         {
             "name": "silverstripe/framework",
@@ -1897,7 +1941,7 @@
                 "framework",
                 "silverstripe"
             ],
-            "time": "2016-05-10 23:09:20"
+            "time": "2016-05-10T23:09:20+00:00"
         },
         {
             "name": "silverstripe/geoip",
@@ -2008,7 +2052,7 @@
                 "silverstripe",
                 "tag"
             ],
-            "time": "2015-11-04 01:25:35"
+            "time": "2015-11-04T01:25:35+00:00"
         },
         {
             "name": "simplepie/simplepie",
@@ -2062,7 +2106,7 @@
                 "feeds",
                 "rss"
             ],
-            "time": "2016-06-14 05:48:16"
+            "time": "2016-06-14T05:48:16+00:00"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -2468,7 +2512,7 @@
                 "silverstripe",
                 "twitter"
             ],
-            "time": "2016-01-20 23:44:19"
+            "time": "2016-01-20T23:44:19+00:00"
         },
         {
             "name": "unclecheese/bootstrap-tagfield",
@@ -2551,7 +2595,7 @@
                 "logic",
                 "silverstripe"
             ],
-            "time": "2015-01-29 23:35:48"
+            "time": "2015-01-29T23:35:48+00:00"
         },
         {
             "name": "unclecheese/dropzone",
@@ -2593,7 +2637,7 @@
                 "upload",
                 "uploader"
             ],
-            "time": "2016-09-08 00:24:26"
+            "time": "2016-09-08T00:24:26+00:00"
         },
         {
             "name": "unclecheese/reflection-templates",
@@ -2798,7 +2842,7 @@
                 "fields",
                 "silverstripe"
             ],
-            "time": "2014-05-19 21:47:58"
+            "time": "2014-05-19T21:47:58+00:00"
         },
         {
             "name": "undefinedoffset/sortablegridfield",
@@ -2838,7 +2882,7 @@
                 "gridfield",
                 "silverstripe"
             ],
-            "time": "2016-01-18 13:53:30"
+            "time": "2016-01-18T13:53:30+00:00"
         }
     ],
     "packages-dev": [
@@ -2922,7 +2966,7 @@
                 "symfony",
                 "testing"
             ],
-            "time": "2016-12-25 13:43:52"
+            "time": "2016-12-25T13:43:52+00:00"
         },
         {
             "name": "behat/gherkin",
@@ -3039,7 +3083,7 @@
                 "testing",
                 "web"
             ],
-            "time": "2016-03-05 08:26:18"
+            "time": "2016-03-05T08:26:18+00:00"
         },
         {
             "name": "behat/mink-browserkit-driver",
@@ -3154,7 +3198,7 @@
                 "test",
                 "web"
             ],
-            "time": "2016-02-15 07:55:18"
+            "time": "2016-02-15T07:55:18+00:00"
         },
         {
             "name": "behat/mink-goutte-driver",
@@ -3209,7 +3253,7 @@
                 "headless",
                 "testing"
             ],
-            "time": "2016-03-05 09:04:22"
+            "time": "2016-03-05T09:04:22+00:00"
         },
         {
             "name": "behat/mink-selenium2-driver",
@@ -3270,7 +3314,7 @@
                 "testing",
                 "webdriver"
             ],
-            "time": "2016-03-05 09:10:18"
+            "time": "2016-03-05T09:10:18+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -3314,7 +3358,7 @@
                 "slug",
                 "transliterator"
             ],
-            "time": "2017-04-04 11:38:05"
+            "time": "2017-04-04T11:38:05+00:00"
         },
         {
             "name": "container-interop/container-interop",
@@ -3345,7 +3389,7 @@
             ],
             "description": "Promoting the interoperability of container objects (DIC, SL, etc.)",
             "homepage": "https://github.com/container-interop/container-interop",
-            "time": "2017-02-14 19:40:03"
+            "time": "2017-02-14T19:40:03+00:00"
         },
         {
             "name": "fabpot/goutte",
@@ -3394,7 +3438,7 @@
             "keywords": [
                 "scraper"
             ],
-            "time": "2015-05-05 21:14:57"
+            "time": "2015-05-05T21:14:57+00:00"
         },
         {
             "name": "instaclick/php-webdriver",
@@ -3452,7 +3496,7 @@
                 "webdriver",
                 "webtest"
             ],
-            "time": "2017-03-22 17:46:51"
+            "time": "2017-03-22T17:46:51+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -3650,7 +3694,7 @@
             "keywords": [
                 "timer"
             ],
-            "time": "2017-03-07 15:42:04"
+            "time": "2017-03-07T15:42:04+00:00"
         },
         {
             "name": "phpunit/php-token-stream",
@@ -3700,7 +3744,7 @@
             "keywords": [
                 "tokenizer"
             ],
-            "time": "2014-03-03 05:10:30"
+            "time": "2014-03-03T05:10:30+00:00"
         },
         {
             "name": "phpunit/phpunit",
@@ -3774,7 +3818,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2013-03-07 21:45:39"
+            "time": "2013-03-07T21:45:39+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -3880,7 +3924,7 @@
                 "container-interop",
                 "psr"
             ],
-            "time": "2017-02-14 16:28:37"
+            "time": "2017-02-14T16:28:37+00:00"
         },
         {
             "name": "symfony/browser-kit",
@@ -3937,7 +3981,7 @@
             ],
             "description": "Symfony BrowserKit Component",
             "homepage": "https://symfony.com",
-            "time": "2017-04-12 14:07:15"
+            "time": "2017-04-12T14:07:15+00:00"
         },
         {
             "name": "symfony/class-loader",
@@ -3993,7 +4037,7 @@
             ],
             "description": "Symfony ClassLoader Component",
             "homepage": "https://symfony.com",
-            "time": "2017-04-12 14:14:56"
+            "time": "2017-04-12T14:14:56+00:00"
         },
         {
             "name": "symfony/config",
@@ -4053,7 +4097,7 @@
             ],
             "description": "Symfony Config Component",
             "homepage": "https://symfony.com",
-            "time": "2017-04-12 20:43:31"
+            "time": "2017-04-12T20:43:31+00:00"
         },
         {
             "name": "symfony/console",
@@ -4121,7 +4165,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2017-04-19 23:40:30"
+            "time": "2017-04-19T23:40:30+00:00"
         },
         {
             "name": "symfony/css-selector",
@@ -4174,7 +4218,7 @@
             ],
             "description": "Symfony CssSelector Component",
             "homepage": "https://symfony.com",
-            "time": "2017-04-12 14:07:15"
+            "time": "2017-04-12T14:07:15+00:00"
         },
         {
             "name": "symfony/debug",
@@ -4230,7 +4274,7 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2017-04-20 17:12:40"
+            "time": "2017-04-20T17:12:40+00:00"
         },
         {
             "name": "symfony/dependency-injection",
@@ -4300,7 +4344,7 @@
             ],
             "description": "Symfony DependencyInjection Component",
             "homepage": "https://symfony.com",
-            "time": "2017-04-25 13:50:48"
+            "time": "2017-04-25T13:50:48+00:00"
         },
         {
             "name": "symfony/dom-crawler",
@@ -4356,7 +4400,7 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "https://symfony.com",
-            "time": "2017-04-12 14:07:15"
+            "time": "2017-04-12T14:07:15+00:00"
         },
         {
             "name": "symfony/filesystem",
@@ -4405,7 +4449,7 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
-            "time": "2017-04-12 14:14:56"
+            "time": "2017-04-12T14:14:56+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -4529,7 +4573,7 @@
             ],
             "description": "Symfony Translation Component",
             "homepage": "https://symfony.com",
-            "time": "2017-04-12 14:14:56"
+            "time": "2017-04-12T14:14:56+00:00"
         }
     ],
     "aliases": [],
@@ -4544,6 +4588,7 @@
         "silverstripe/gridfieldajaxrefresh": 20,
         "phpoffice/phpexcel": 20,
         "tractorcow/silverstripe-opengraph": 20,
+        "google/recaptcha": 20,
         "phpunit/phpunit": 0,
         "behat/behat": 0,
         "behat/mink": 0,
