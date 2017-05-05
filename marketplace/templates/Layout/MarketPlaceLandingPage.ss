@@ -3,14 +3,6 @@
 </div>
 <div class="container">
 	<div class="row">
-		<div class="col-sm-10 col-sm-push-1 marketplace-intro">
-			<p>
-				Few organizations would undergo deploying a cloud on their own - the good news is, you don't have to. The Openstack Community has a tremendous amount of expertise in building and scaling clouds of all sizes. We put together the OpenStack Marketplace as a guide to help you find the resources you need to make your cloud project successful.
-			</p>
-            <hr class="marketplace-hr">
-		</div>
-	</div>
-	<div class="row">
 		<div class="col-sm-12 marketplace-where">
 			<h3 class="marketplace-title">How to Find The Right Help and Expertise</h3>
 			<h2 class="marketplace-title">First, Where Will You Deploy OpenStack?</h2>
