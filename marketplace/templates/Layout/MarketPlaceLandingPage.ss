@@ -7,6 +7,7 @@
 			<p>
 				Few organizations would undergo deploying a cloud on their own - the good news is, you don't have to. The Openstack Community has a tremendous amount of expertise in building and scaling clouds of all sizes. We put together the OpenStack Marketplace as a guide to help you find the resources you need to make your cloud project successful.
 			</p>
+            <hr class="marketplace-hr">
 		</div>
 	</div>
 	<div class="row">
@@ -77,7 +78,7 @@
 		<div class="col-sm-12">
 			<h3 class="marketplace-title">Why Not Both?</h3>
 			<p>
-				Of course, there's no reason why you can't do both public and private cloud (a "hybrid" approach.) The powere of OpenStack is the many ways you can deploy it and you'll find OpenStack in private data centers, public clouds, edge environments - or any combination of the three.
+				Of course, there's no reason why you can't do both public and private cloud (a "hybrid" approach.) The power of OpenStack is the many ways you can deploy it and you'll find OpenStack in private data centers, public clouds, edge environments - or any combination of the three.
 			</p>
 			<hr class="marketplace-hr">
 		</div>
