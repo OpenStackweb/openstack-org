@@ -810,7 +810,7 @@ ul.marketplace-nav {
   ul.marketplace-nav #remote-clouds {
     width: 48%; }
     ul.marketplace-nav #remote-clouds a span {
-      background: url('/themes/openstack/images/marketplace/new/remote-clouds.svg') no-repeat;
+      background: url('/themes/openstack/images/marketplace/new/remote-private-clouds.svg') no-repeat;
       background-position: center center; }
   ul.marketplace-nav #private-clouds {
     width: 48%; }
