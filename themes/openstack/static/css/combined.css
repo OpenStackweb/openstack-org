@@ -1322,10 +1322,10 @@ a.current-summit-link {
       margin-bottom: 15px; }
     .mobile-city-date .summit-hero-postcard .landing-date {
       width: 100%;
-      padding: 15px 60px 20px; }
+      padding: 15px 10px 20px; }
       .mobile-city-date .summit-hero-postcard .landing-date .left, .mobile-city-date .summit-hero-postcard .landing-date .right {
         color: #30739C;
-        font-size: 1em;
+        font-size: 1.5em;
         width: 50%; }
       .mobile-city-date .summit-hero-postcard .landing-date .left {
         float: left;
