@@ -736,7 +736,7 @@
                     return $(this).data('epoch') >= ($.now()/1000);
                 }).first();
 
-                if (current_event) {
+                if (current_event.length > 0) {
                     $('html, body').animate({
                         scrollTop: current_event.parents('.event-row').offset().top
                     }, 2000);
