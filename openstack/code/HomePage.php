@@ -94,7 +94,7 @@ class HomePage extends Page
 
     public function getPromoIntroMessage(){
         $value = $this->getField('PromoIntroMessage');
-        return !empty($value)? $value : self::PromoIntroMessageDefault;
+        return $value; //!empty($value)? $value : self::PromoIntroMessageDefault;
     }
 
     public function getPromoButtonText(){
@@ -109,7 +109,7 @@ class HomePage extends Page
 
     public function getPromoDatesText(){
         $value = $this->getField('PromoDatesText');
-        return !empty($value)? $value : self::PromoDatesTextDefault;
+        return $value; //!empty($value)? $value : self::PromoDatesTextDefault;
     }
 
     public function getPromoHeroCredit(){
