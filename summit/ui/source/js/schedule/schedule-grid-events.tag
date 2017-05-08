@@ -54,6 +54,7 @@
                         sweetAlert("Oops...", "you selected one or more events that are already synched!", "error");
                         return true;
                     }
+                    event.location = self.getSummitLocation(event);
                     selected_events.push(event);
                 });
 
