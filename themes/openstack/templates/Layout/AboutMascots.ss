@@ -53,7 +53,7 @@
                                 <strong>$CodeName:</strong> $MascotName
                             </a>
                         <% else %>
-                            <strong>$CodeName:</strong> <% if $MascotName %> $MascotName <% else %> (not chosen) <% end_if %>
+                            <strong>$CodeName:</strong> <% if $MascotName %> $MascotName (in progress) <% else %> (not chosen) <% end_if %>
                         <% end_if %>
 			        </li>
 			    <% end_loop %>

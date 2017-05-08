@@ -12,9 +12,15 @@
  **/
 
 function copyToClipboard(filename) {
+    var extension = filename.substr( (filename.lastIndexOf('.') +1) );
     var temp = $('<input>');
     $("body").append(temp);
-    temp.val('<img src="' + filename + '" />').select();
+    if (extension == 'eps') {
+        temp.val('<a href="' + base_url + filename + '"> Download EPS </a>').select();
+    } else {
+        temp.val('<img src="' + base_url + filename + '" />').select();
+    }
+
     document.execCommand("copy");
     temp.remove();
 }

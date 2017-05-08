@@ -26,7 +26,7 @@ class SetMascotNamesMigration extends AbstractDBMigrationTask
             'Barbican' => 'Porcupine',
             'Chef OpenStack' => 'Kangaroo',
             'Cinder' => 'Horse',
-            'Cloudkitty' => 'Cat (maneki-neko)',
+            'CloudKitty' => 'Cat (maneki-neko)',
             'Community App Catalog' => 'Quokka',
             'Congress' => 'Raven',
             'Designate' => 'Crocodile',
@@ -54,6 +54,7 @@ class SetMascotNamesMigration extends AbstractDBMigrationTask
             'Nova' => 'Supernova',
             'OpenStack Charms' => 'Orangutan',
             'OpenStack-Ansible' => 'Cape buffalo',
+            'Octavia' => 'Peacock',
             'Oslo' => 'Moose',
             'Packaging-deb' => 'Lemur',
             'Packaging-rpm' => 'Donkey',
@@ -68,6 +69,7 @@ class SetMascotNamesMigration extends AbstractDBMigrationTask
             'Security' => 'Pangolin (scaly anteater)',
             'Senlin' => 'Forest',
             'Stable Branch Management' => 'Scarab beetle',
+            'Storlets' => 'Storklet',
             'Tacker' => 'Giant squid',
             'Swift' => 'Swift',
             'Ceilometer' => 'Meerkat',
@@ -79,6 +81,7 @@ class SetMascotNamesMigration extends AbstractDBMigrationTask
             'Watcher' => 'Jellyfish',
             'Winstackers' => 'Hawk',
             'Zaqar' => 'Carrier pigeon',
+            'Zun' => 'Dolphin',
         );
 
         $components = OpenStackComponent::get();

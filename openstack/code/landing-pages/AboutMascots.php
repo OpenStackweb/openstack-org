@@ -28,7 +28,10 @@ class AboutMascots_Controller extends Page_Controller {
 
         Requirements::javascript('themes/openstack/javascript/filetracking.jquery.js');
 
-        Requirements::customScript("var mascots_dir = '".self::$mascots_dir."';");
+        Requirements::customScript("
+            var mascots_dir = '".self::$mascots_dir."';
+            var base_url = '".Director::absoluteBaseURL()."';
+        ");
 
         Requirements::javascript('themes/openstack/javascript/about-mascots.js');
 
