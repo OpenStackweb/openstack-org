@@ -52,24 +52,21 @@ class OpenStackIdAuthenticator extends Controller
             list($timestamp, $salt) = Auth_OpenID_splitNonce($nonce);
             $claimed_id  = $message->getArg(Auth_OpenID_OPENID2_NS,'claimed_id');
 
-            error_log(sprintf('OpenStackIdAuthenticator : id %s - salt %s - timestamp %s',$claimed_id, $salt, $timestamp));
-
+            SS_Log::log(sprintf('OpenStackIdAuthenticator : id %s - salt %s - timestamp %s',$claimed_id, $salt, $timestamp), SS_Log::DEBUG);
 
             // Complete the authentication process using the server's response.
             $response = $consumer->complete(OpenStackIdCommon::getReturnTo());
 
             if ($response->status == Auth_OpenID_CANCEL) {
-                error_log('OpenStackIdAuthenticator : Auth_OpenID_CANCEL');
                 SS_Log ::log('OpenStackIdAuthenticator : Auth_OpenID_CANCEL', SS_Log::WARN);
                 throw new Exception('The verification was cancelled. Please try again.');
 
             } else if ($response->status == Auth_OpenID_FAILURE) {
-                error_log('OpenStackIdAuthenticator : Auth_OpenID_FAILURE');
                 SS_Log ::log('OpenStackIdAuthenticator : Auth_OpenID_FAILURE', SS_Log::WARN);
                 throw new Exception("The OpenID authentication failed.");
 
             } else if ($response->status == Auth_OpenID_SUCCESS) {
-                error_log('OpenStackIdAuthenticator : Auth_OpenID_SUCCESS');
+                SS_Log ::log('OpenStackIdAuthenticator : Auth_OpenID_SUCCESS', SS_Log::DEBUG);
                 $openid = $response->getDisplayIdentifier();
                 $openid = OpenStackIdCommon::escape($openid);
 
@@ -103,7 +100,7 @@ class OpenStackIdAuthenticator extends Controller
         } catch (Exception $ex) {
             Session::set("Security.Message.message", $ex->getMessage());
             Session::set("Security.Message.type", "bad");
-            SS_Log ::log($ex, SS_Log::WARN);
+            SS_Log ::log($ex, SS_Log::DEBUG);
             return $this->redirect("Security/badlogin");
         }
     }

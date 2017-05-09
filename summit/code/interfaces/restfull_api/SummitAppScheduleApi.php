@@ -510,8 +510,8 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi
     public function addFeedback()
     {
         try {
-            $data = $this->getJsonRequest();
-            $event_id = (int)$this->request->param('EventID');
+            $data     = $this->getJsonRequest();
+            $event_id  = (int)$this->request->param('EventID');
             $summit_id = (int)$this->request->param('SUMMIT_ID');
             $member_id = Member::CurrentUserID();
 

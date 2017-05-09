@@ -38,39 +38,53 @@
                 <% end_if %>
             </div>
             <div class="col-md-6 col-xs-12 info">
-                <% if $CurrentMember %>
                     <script type="application/javascript">
+                            <% if CurrentMember %>
                             <% with $CurrentMember %>
-                            var current_user = { id: {$ID}, first_name: '{$FirstName.JS}', last_name: '{$Surname.JS}', is_attendee: <% if CurrentMember.isAttendee($Top.Event.Summit.ID) %>true<% else %>false<% end_if %> };
+                            var current_user = {
+                                id: {$ID},
+                                first_name: '{$FirstName.JS}',
+                                last_name: '{$Surname.JS}',
+                                is_attendee: <% if CurrentMember.isAttendee($Top.Event.Summit.ID) %>true<% else %>false<% end_if %>,
+                                has_feedback :  <% if Event.getCurrentMemberFeedback() %>true<% else %>false<% end_if %>
+                            };
                             <% end_with %>
+                            <% else %>
+                            var current_user = null;
+                            <% end_if %>
+                            var event = {
+                                id              : {$Event.ID},
+                                summit_id       : {$Event.SummitID},
+                                rsvp_link       : "{$Event.getRSVPURL().JS}",
+                                has_rsvp        : <%if $Event.hasRSVP() %>true<% else %>false<% end_if %>,
+                                rsvp_external   : <%if $Event.isExternalRSVP() %>true<% else %>false<% end_if %>,
+                                rsvp_seat_type  : "{$Event.CurrentRSVPSubmissionSeatType}",
+                                avg_rate        : "{$Event.getAvgRate()}",
+                                allow_feedback  : <% if Event.AllowFeedBack %>true<% else %>false<% end_if %>,
+                                has_ended           : <% if Event.hasEnded %>true<% else %>false<% end_if %>,
+                                <% if $CurrentMember && $CurrentMember.isOnMySchedule($Top.Event.ID) %>
+                                    going      : true,
+                                <% else %>
+                                    going      : false,
+                                <% end_if %>
+                                <% if $CurrentMember && $CurrentMember.isOnFavorites($Top.Event.ID) %>
+                                    favorite : true,
+                                <% else %>
+                                    favorite : false,
+                                <% end_if %>
+                               comments : [],
+                           };
 
-                        var event = {
-                            id              : {$Event.ID},
-                            summit_id       : {$Event.SummitID},
-                            rsvp_link       : "{$Event.getRSVPURL().JS}",
-                            has_rsvp        : <%if $Event.hasRSVP() %>true<% else %>false<% end_if %>,
-                            rsvp_external   : <%if $Event.isExternalRSVP() %>true<% else %>false<% end_if %>,
-                            rsvp_seat_type  : "{$Event.CurrentRSVPSubmissionSeatType}",
-                            <% if $CurrentMember && $CurrentMember.isOnMySchedule($Top.Event.ID) %>
-                                going      : true,
-                            <% else %>
-                                going      : false,
-                            <% end_if %>
-                            <% if $CurrentMember && $CurrentMember.isOnFavorites($Top.Event.ID) %>
-                                favorite : true,
-                            <% else %>
-                                favorite : false,
-                            <% end_if %>
-                        };
+                           <% loop $Event.getFeedback() %>
+                                event.comments.push(
+                                    {
+                                        rate:  "{$getRate.JS}",
+                                        date : "{$getDateNice.JS}",
+                                        note : "{$getNote.JS}",
+                                    });
+                            <% end_loop %>
                     </script>
                     <event-action-buttons event="{ event }" current_user="{ current_user }"></event-action-buttons>
-                <% else %>
-                    <div class="alert alert-success alert-dismissible" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <p><%t Summit.RegistrationLine1 member_name=$CurrentMember.FullName summit_name=$Top.Summit.Title summit_registration_link=$Top.Summit.RegistrationLink %></p>
-                        <p><%t Summit.RegistrationLine2 confirm_order_link=$Top.ProfileAttendeeRegistrationLink %></p>
-                    </div>
-                <% end_if %>
                 <div class="row info_item">
                     <div class="col-md-2 col-xs-2 info_item_icon"><i class="fa fa-clock-o icon-clock"></i></div>
                     <div class="col-md-10 col-xs-10 info_item_text">$Event.DateNice()</div>
@@ -174,27 +188,7 @@
     </div>
 <% end_if %>
 
-<script type="application/javascript">
-    var event = {
-        eventID : "{$Event.ID}",
-        summitID: "{$Event.SummitID}",
-        memberID: "{$CurrentMember.ID}",
-        avgRate : "{$Event.getAvgRate()}"
-    };
-    var showfeedbackform = <% if CurrentMember && Event.AllowFeedBack && Event.hasEnded && not Event.getCurrentMemberFeedback() %>true<% else %>false<% end_if %>
-    var comments = [];
-
-    <% loop $Event.getFeedback() %>
-    comments.push(
-            {
-                rate:  "{$getRate.JS}",
-                date : "{$getDateNice.JS}",
-                note : "{$getNote.JS}",
-            });
-    <% end_loop %>
-</script>
-
-<feedback-form-comments comments="{ comments }" showfeedbackform="{ showfeedbackform }"  event="{ event }" limit="5"></feedback-form-comments>
+<feedback-form-comments current_user="{ current_user }" event="{ event }" limit="5"></feedback-form-comments>
 
 $ModuleJS('event-detail')
 <div id="fb-root"></div>

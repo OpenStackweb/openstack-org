@@ -29,7 +29,7 @@ final class SummitEventSetAvgRateTask extends CronTask
             if (isset($_GET['summit_id']))
             {
                 $summit_id = intval(trim(Convert::raw2sql($_GET['summit_id'])));
-                echo sprintf('summit_id set to %s', $summit_id);
+                echo sprintf('summit_id set to %s', $summit_id).PHP_EOL;
             }
 
             if($summit_id == 0) $summit_id = Summit::ActiveSummitID();
@@ -39,12 +39,14 @@ final class SummitEventSetAvgRateTask extends CronTask
                 $events = $current_summit->getSchedule();
             }
 
+            echo sprintf('processing %s events for summit_id %s',$events->count(), $summit_id).PHP_EOL;
+
             foreach ($events as $event) {
 
                 $rate_sum   = 0;
                 $rate_count = 0;
 
-                foreach ($event->Feedback as $feedback) {
+                foreach ($event->getFeedback() as $feedback) {
                     $rate_count++;
                     $rate_sum = $rate_sum + $feedback->Rate;
                 }
@@ -52,21 +54,22 @@ final class SummitEventSetAvgRateTask extends CronTask
                 $avg_rate = ($rate_count > 0) ? ($rate_sum/$rate_count) : 0;
 
                 try {
-                    $avg_rate = round($avg_rate,2);
+                    $avg_rate     = round($avg_rate,2);
                     $old_avg_rate = $event->getAvgRate();
+                    echo sprintf("new avg rate %s - old avg rate %s - for event id %s", $avg_rate, $old_avg_rate, $event->ID).PHP_EOL;
                     if(floatval($avg_rate) === floatval($old_avg_rate)) continue;
                     $event->setAvgRate($avg_rate);
                     $event->write(true);
                     $processed_events++;
                 } catch (Exception $ex) {
                     SS_Log::log($ex, SS_Log::ERR);
-                    echo $ex->getMessage();
+                    echo $ex->getMessage().PHP_EOL;
                 }
 
             }
 
             $finish_time = time() - $init_time;
-            echo 'processed events ' . $processed_events. ' - time elapsed : '.$finish_time. ' seconds.';
+            echo 'processed events ' . $processed_events. ' - time elapsed : '.$finish_time. ' seconds.'.PHP_EOL;
         }
         catch(Exception $ex)
         {

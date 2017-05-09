@@ -204,19 +204,19 @@ final class ScheduleManager implements IScheduleManager
 
             $member_id = intval($data['member_id']);
             $summit_id = intval($data['summit_id']);
-            $attendee = $this->attendee_repository->getByMemberAndSummit($member_id, $summit_id);
+            $member    = $this->member_repository->getById($member_id);
 
-            if (!$attendee) {
-                throw new NotFoundEntityException('Attendee', '');
+            if (!$member) {
+                throw new NotFoundEntityException('Member', '');
             }
 
             $feedback = $this->eventfeedback_repository->getFeedback($data['event_id'], $member_id);
-            if ($feedback) {
+
+            if ($feedback)
                 throw new EntityValidationException("Feedback already exists for the given member and event.");
-            } else {
-                $feedback = $this->eventfeedback_factory->buildEventFeedback($data);
-                $this->eventfeedback_repository->add($feedback);
-            }
+
+            $feedback = $this->eventfeedback_factory->buildEventFeedback($data);
+            $this->eventfeedback_repository->add($feedback);
 
             return $feedback;
         });

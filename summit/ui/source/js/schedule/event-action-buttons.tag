@@ -2,7 +2,7 @@
 
   <div class="row info_item event-actions">
 
-     <button if={ this.current_user.is_attendee && this.event.has_rsvp && this.event.rsvp_external}
+     <button if={ this.event.has_rsvp && this.event.rsvp_external}
                   id="btn_rsvp_external"
                   title="{ this.event.going ? 'UnSchedule': 'RSVP' }"
                   type="button"
@@ -10,7 +10,7 @@
                   class="btn btn-primary btn-md active btn-rsvp-own-event btn-action { this.event.going ? 'btn-action-pressed': 'btn-action-normal' }">
              <span class="glyphicon glyphicon-ok-circle"></span>&nbsp;<span class="content">{ this.event.going ? 'Schedule': 'RSVP' }</span>
      </button>
-     <button if={ this.current_user.is_attendee && this.event.has_rsvp && !this.event.rsvp_external}
+     <button if={ this.event.has_rsvp && !this.event.rsvp_external}
              id="btn_rsvp_own"
              title="{ this.event.going ? 'unRSVP': 'RSVP' }"
              type="button"
@@ -18,7 +18,7 @@
              class="btn btn-primary btn-md active btn-rsvp-own-event btn-action { this.event.going ? 'btn-action-pressed': 'btn-action-normal' } { !this.event.going && this.event.rsvp_seat_type == 'FULL' ? 'btn-full-rsvp': '' }">
         <span class="glyphicon { getRSVPIcon() }"></span>&nbsp;<span class="content">{ getOwnRSVPText() }</span>
      </button>
-     <button if={ this.current_user.is_attendee && !this.event.has_rsvp }
+     <button if={ !this.event.has_rsvp }
              id="btn_schedule"
              title="{ this.event.going ? 'UnSchedule': 'Schedule' }"
              type="button"
@@ -56,6 +56,16 @@
      this.current_user = opts.current_user;
      this.schedule_api = opts.schedule_api;
      var self          = this;
+
+     const  LOGIN_REQ_MODAL_TITLE  = "Login Required";
+     const  LOGIN_REQ_MODAL_BODY   = "You must be logged in to use this function";
+     const  LOGIN_REQ_MODAL_CANCEL = "Dismiss";
+     const  LOGIN_REQ_MODAL_OK     = "Login Now";
+
+     const  ATTENDEE_REQ_MODAL_TITLE  = "EventBrite Ticket Required";
+     const  ATTENDEE_REQ_MODAL_BODY   = "Only attendees can use this function. Enter your Eventbrite order number in My Summit if you are an attendee";
+     const  ATTENDEE_REQ_MODAL_CANCEL = "Dismiss";
+     const  ATTENDEE_REQ_MODAL_OK     = "Add Now";
 
      this.on('mount', function(){
         $('#rsvpModal').modal({
@@ -99,6 +109,39 @@
      }
 
      toogleScheduleState(e){
+        e.preventDefault();
+        e.stopPropagation();
+
+        if(this.current_user == null){
+            swal({
+                title: LOGIN_REQ_MODAL_TITLE,
+                text: LOGIN_REQ_MODAL_BODY,
+                type:"warning",
+                showCloseButton: true,
+                showCancelButton: true,
+                cancelButtonText: LOGIN_REQ_MODAL_CANCEL,
+                confirmButtonText: LOGIN_REQ_MODAL_OK
+                }).then(function () {
+                    window.location = "/Security/login/?BackURL="+encodeURIComponent(window.location);
+                });
+            return false;
+        }
+
+        if(!this.current_user.is_attendee){
+            swal({
+                title: ATTENDEE_REQ_MODAL_TITLE,
+                text: ATTENDEE_REQ_MODAL_BODY,
+                type:"warning",
+                showCloseButton: true,
+                showCancelButton: true,
+                cancelButtonText: ATTENDEE_REQ_MODAL_CANCEL,
+                confirmButtonText: ATTENDEE_REQ_MODAL_OK
+            }).then(function () {
+                window.location = "/profile/attendeeInfoRegistration";
+            });
+            return false;
+        }
+
         var former_state = self.event.going;
         self.event.going = !former_state;
         if(former_state){
@@ -107,14 +150,32 @@
         else{
            self.schedule_api.addEvent2MySchedule(self.event.summit_id, self.event.id);
         }
-        e.preventDefault();
-        e.stopPropagation();
+
         self.update();
         return false;
      }
 
      toogleFavoriteState(e){
-        var former_state = self.event.favorite;
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        if(this.current_user == null){
+            swal({
+                    title: LOGIN_REQ_MODAL_TITLE,
+                    text: LOGIN_REQ_MODAL_BODY,
+                    type:"warning",
+                    showCloseButton: true,
+                    showCancelButton: true,
+                    cancelButtonText: LOGIN_REQ_MODAL_CANCEL,
+                    confirmButtonText: LOGIN_REQ_MODAL_OK
+                }).then(function () {
+                    window.location = "/Security/login/?BackURL="+encodeURIComponent(window.location);
+                });
+            return false;
+        }
+
+        var former_state    = self.event.favorite;
         self.event.favorite = !former_state;
         if(former_state){
               self.schedule_api.removeEventFromMyFavorites(self.event.summit_id, self.event.id);
@@ -123,8 +184,6 @@
              self.schedule_api.addEvent2MyFavorites(self.event.summit_id, self.event.id);
         }
         self.update();
-        e.preventDefault();
-        e.stopPropagation();
         return false;
      }
 
@@ -132,6 +191,37 @@
         var former_state = self.event.going;
         e.preventDefault();
         e.stopPropagation();
+
+        if(this.current_user == null){
+                    swal({
+                            title: LOGIN_REQ_MODAL_TITLE,
+                            text: LOGIN_REQ_MODAL_BODY,
+                            type:"warning",
+                            showCloseButton: true,
+                            showCancelButton: true,
+                            cancelButtonText: LOGIN_REQ_MODAL_CANCEL,
+                            confirmButtonText: LOGIN_REQ_MODAL_OK
+                        }).then(function () {
+                            window.location = "/Security/login/?BackURL="+encodeURIComponent(window.location);
+                        });
+                    return false;
+        }
+
+        if(!this.current_user.is_attendee){
+            swal({
+                title: ATTENDEE_REQ_MODAL_TITLE,
+                text: ATTENDEE_REQ_MODAL_BODY,
+                type:"warning",
+                showCloseButton: true,
+                showCancelButton: true,
+                cancelButtonText: ATTENDEE_REQ_MODAL_CANCEL,
+                confirmButtonText: ATTENDEE_REQ_MODAL_OK
+             }).then(function () {
+                window.location = "/profile/attendeeInfoRegistration";
+             });
+             return false;
+        }
+
         if(!former_state && self.event.rsvp_seat_type == 'FULL'){
             return false;
         }

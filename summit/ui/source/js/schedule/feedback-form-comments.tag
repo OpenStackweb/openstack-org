@@ -4,17 +4,15 @@
 </raw>
 <feedback-form-comments>
 
-    <feedback-form if={ showfeedbackform }  event="{ event }" dispatcher="{ dispatcher }"></feedback-form>
-    <event-comments id="commentList" comments="{ comments }" event="{ event }" limit="{ limit }" dispatcher="{ dispatcher }"></event-comments>
+    <feedback-form if={ current_user != null && event.has_ended && event.allow_feedback && !current_user.has_feedback } current_user={ current_user } event="{ event }" dispatcher="{ dispatcher }"></feedback-form>
+    <event-comments if={ event.has_ended } id="commentList" event="{ event }" limit="{ limit }" dispatcher="{ dispatcher }"></event-comments>
 
     <script>
-        this.comments          = opts.comments;
-        this.showfeedbackform  = opts.showfeedbackform;
         this.event             = opts.event;
         this.limit             = opts.limit;
+        this.current_user      = opts.current_user;
         this.dispatcher        = opts.dispatcher;
         var self               = this;
-        var comments = [];
 
     </script>
 

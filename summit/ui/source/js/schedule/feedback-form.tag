@@ -10,9 +10,9 @@
             <input id="rating"  class="rating" min="1" max="5" data-size="xs" >
             <div>Comment</div>
             <textarea id="comment"></textarea>
-            <input id="event_id"  value="{event.eventID}" type="hidden" />
-            <input id="summit_id" value="{event.summitID}" type="hidden" />
-            <input id="member_id" value="{event.memberID}" type="hidden" />
+            <input id="event_id"  value="{ event.id }" type="hidden" />
+            <input id="summit_id" value="{ event.summit_id }" type="hidden" />
+            <input id="member_id" value="{ current_user.id }" type="hidden" />
             <div>
                 <button onclick={ submitEventFeedback } id="btn_submit_event_feedback" type="button" class="btn btn-primary btn-md active btn-warning save">Submit</button>
             </div>
@@ -22,6 +22,7 @@
     <script>
         var self               = this;
         this.event             = opts.event;
+        this.current_user      = opts.current_user;
         this.dispatcher        = opts.dispatcher;
 
         submitEventFeedback(e) {
