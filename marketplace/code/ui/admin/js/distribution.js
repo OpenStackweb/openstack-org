@@ -101,8 +101,10 @@ jQuery(document).ready(function($){
                         ajaxError(jqXHR, textStatus, errorThrown);
                     }
                 });
+            } else {
+                $('html,body').animate({ scrollTop: $('.error').offset().top }, 'slow');
             }
-            return false;
+
         });
 
         $('.preview-distribution').click(function(event){
@@ -155,6 +157,8 @@ jQuery(document).ready(function($){
                         ajaxError(jqXHR, textStatus, errorThrown);
                     }
                 });
+            } else {
+                $(window).scrollTop($('.error').offset().top);
             }
 
             return false;

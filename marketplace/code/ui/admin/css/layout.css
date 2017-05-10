@@ -41,7 +41,7 @@ html, body {
 	color: #52697E;
 }
 body {
-	overflow: auto;
+	/* overflow: auto; */ /* Santi: hiding this it breaks marketplace admin validator scroll to error */
 }
 .wrapper {
 	width: 700px;

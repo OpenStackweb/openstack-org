@@ -89,15 +89,30 @@ select.error{
     width: 200px;
 }
 
+#search_distributions .main-table {
+    width: 50% !important;
+}
+
 .main-table {
     border: 1px solid #ccc;
     border-collapse:collapse;
     clear:both;
+    width: 100%;
 }
 
 .main-table th, .main-table td{
     border: 1px solid #ccc;
     background-color: white;
+}
+
+.main-table select, .main-table input {
+    width: 90%;
+    margin: 0 10px;
+}
+
+.main-table .chosen-container {
+    width: 90% !important;
+    margin: 0 10px;
 }
 
 .nav-bar-container{
@@ -132,4 +147,8 @@ select.error{
 .footer_buttons {
     clear: both;
     padding-top: 50px;
+}
+
+#CompanyName .chosen-container {
+    width: 200px !important;
 }
