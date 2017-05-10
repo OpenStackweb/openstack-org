@@ -703,6 +703,7 @@ p.service-section-title {
   	text-transform: uppercase;
   	width: 20%;
   	float: left;
+    vertical-align: middle;
   }
   
   .project-table-code-name span {
@@ -722,6 +723,7 @@ p.service-section-title {
 	div.project-table-row {
 		border-top: 1px solid #EAEAEA;
 		min-height: 40px;
+    padding-top: 10px;
 	}  
   
   .toggle-wrapper {
