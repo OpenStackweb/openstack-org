@@ -164,6 +164,7 @@ class SurveyPage_Controller extends Page_Controller
         Requirements::css('survey_builder/css/user-survey.css');
         Requirements::css("themes/openstack/css/chosen.css", "screen,projection");
         Requirements::css("themes/openstack/javascript/jquery-ui-1.10.3.custom/css/smoothness/jquery-ui-1.10.3.custom.min.css");
+        Requirements::css('themes/openstack/css/validation.errors.css');
 
         Requirements::block(SAPPHIRE_DIR . '/thirdparty/behaviour/behaviour.js');
         Requirements::block(SAPPHIRE_DIR . '/thirdparty/prototype/prototype.js');
@@ -180,6 +181,7 @@ class SurveyPage_Controller extends Page_Controller
         Requirements::javascript('survey_builder/js/survey.controller.js');
         Requirements::javascript("themes/openstack/bower_assets/jquery-cookie/jquery.cookie.js");
         Requirements::javascript('gettext/javascript/gettext.js');
+
 
         // populate the js messages
 
