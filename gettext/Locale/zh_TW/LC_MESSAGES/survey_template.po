@@ -1,3 +1,4 @@
+# Ching Kuo <gene@openstack.org>, 2017. #zanata
 # Tom Fifield <tom@openstack.org>, 2017. #zanata
 msgid ""
 msgstr ""
@@ -6,12 +7,12 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2017-04-25 23:37-0300\n"
-"Last-Translator: Tom Fifield <tom@openstack.org>\n"
+"PO-Revision-Date: 2017-05-11 07:48+0000\n"
+"Last-Translator: Ching Kuo <gene@openstack.org>\n"
 "Language-Team: Chinese (Taiwan)\n"
-"Language: zh_TW\n"
-"X-Generator: Poedit 1.8.4\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh-TW\n"
+"X-Generator: Zanata 3.9.6\n"
+"Plural-Forms: nplurals=1; plural=0\n"
 
 msgid "OpenStack User Survey - 2017"
 msgstr "2017年OpenStack用戶調查"
@@ -27,14 +28,16 @@ msgid ""
 "individual information without your permission, but we will present select "
 "user survey results in aggregate. </em></font>"
 msgstr ""
+"姓氏*<br/><font size=\"-2\"><em>如未獲您徐可,我們不會分享個人訊息, 不過我們將選擇參加用戶的調查結果進行統計合. </"
+"em></font>"
 
 msgid ""
 "What are the ways you work with OpenStack?*<br/><font size=\"-2\"><em>Select "
 "all that apply</em></font>"
-msgstr ""
+msgstr "請問您如何使用 OpenStack?*<br/><font size=\"-2\"><em>選擇您所用到的所有方面.</em></font>"
 
 msgid "Please describe your relationship with OpenStack"
-msgstr ""
+msgstr "請描述你跟OpenStack的關係"
 
 msgid "Your Email*"
 msgstr "你的郵件*"
@@ -45,85 +48,85 @@ msgstr "居住國家*"
 msgid ""
 "The OpenStack Foundation and User Committee may communicate with me in the "
 "future about my usage.*"
-msgstr ""
+msgstr "OpenStack基金會和用戶委員會今後可以與我溝通，討論我的使用情況。*"
 
 msgid "Your Organization"
-msgstr ""
+msgstr "你的組織"
 
 msgid "Your Organization Name*"
-msgstr ""
+msgstr "你的組織名稱*"
 
 msgid "Your Organization’s Primary Industry*"
-msgstr ""
+msgstr "你的組織的主要行業："
 
 msgid "-- Select One --"
 msgstr "-- 選擇一 --"
 
 msgid "Academic / Research"
-msgstr ""
+msgstr "學術研究"
 
 msgid "Advertising"
-msgstr ""
+msgstr "廣告業"
 
 msgid "Automotive"
-msgstr ""
+msgstr "汽車業"
 
 msgid "Consumer Goods"
-msgstr ""
+msgstr "消費品"
 
 msgid "Energy"
-msgstr ""
+msgstr "能源"
 
 msgid "Film / Media"
-msgstr ""
+msgstr "電影/媒體"
 
 msgid "Finance"
-msgstr ""
+msgstr "金融"
 
 msgid "Gaming"
-msgstr ""
+msgstr "遊戲"
 
 msgid "Government / Defense"
-msgstr ""
+msgstr "政府/國防"
 
 msgid "Healthcare"
-msgstr ""
+msgstr "醫療"
 
 msgid "Information Technology"
-msgstr ""
+msgstr "信息技術"
 
 msgid "Insurance"
-msgstr ""
+msgstr "保險"
 
 msgid "Manufacturing / Industrial"
-msgstr ""
+msgstr "製造/工業"
 
 msgid "Nonprofit"
-msgstr ""
+msgstr "非營利"
 
 msgid "Retail / ecommerce"
-msgstr ""
+msgstr "零售/電子商務"
 
 msgid "Telecommunications"
-msgstr ""
+msgstr "電訊"
 
 msgid "Travel"
-msgstr ""
+msgstr "旅遊"
 
 msgid "Other"
 msgstr "其他"
 
 msgid "Please specify which industry best describes your organization."
-msgstr ""
+msgstr "請指定哪個行業最能描述您的組織。"
 
 msgid "Your Organization's Primary IT Focus"
-msgstr ""
+msgstr "你的組織的IT焦點"
 
 msgid "Other IT activity"
-msgstr ""
+msgstr "其他IT活動"
 
 msgid "<hr><p>Your Organization’s Primary Location or Headquarters</p>"
-msgstr ""
+msgstr "<hr><p>你的組織的總部主要位置</p>"
 
 msgid "Country*"
 msgstr "國名*"
@@ -465,10 +468,10 @@ msgid "Jamaica"
 msgstr "牙買加"
 
 msgid "Japan"
-msgstr ""
+msgstr "日本"
 
 msgid "Jersey"
-msgstr ""
+msgstr "澤西"
 
 msgid "Jordan"
 msgstr "約旦"
@@ -483,7 +486,7 @@ msgid "Kiribati"
 msgstr "基里巴斯共和國"
 
 msgid "Korea, Democratic People's Republic of"
-msgstr ""
+msgstr "朝鮮"
 
 msgid "Korea, Republic of"
 msgstr "韓國"
@@ -516,7 +519,7 @@ msgid "Liechtenstein"
 msgstr "列支敦士登"
 
 msgid "Lithuania"
-msgstr ""
+msgstr "立陶宛"
 
 msgid "Luxembourg"
 msgstr "盧森堡"
@@ -549,7 +552,7 @@ msgid "Marshall Islands"
 msgstr "馬紹爾群島"
 
 msgid "Martinique"
-msgstr ""
+msgstr "馬提尼克"
 
 msgid "Mauritania"
 msgstr "茅利塔尼亞"
@@ -558,7 +561,7 @@ msgid "Mauritius"
 msgstr "模里西斯"
 
 msgid "Mayotte"
-msgstr ""
+msgstr "馬約特"
 
 msgid "Mexico"
 msgstr "墨西哥"
@@ -576,10 +579,10 @@ msgid "Mongolia"
 msgstr "蒙古"
 
 msgid "Montenegro"
-msgstr ""
+msgstr "黑山"
 
 msgid "Montserrat"
-msgstr ""
+msgstr "蒙塞拉特島"
 
 msgid "Morocco"
 msgstr "摩洛哥"
@@ -588,7 +591,7 @@ msgid "Mozambique"
 msgstr "莫三鼻克"
 
 msgid "Myanmar"
-msgstr ""
+msgstr "緬甸"
 
 msgid "Namibia"
 msgstr "納米比亞"
@@ -615,16 +618,16 @@ msgid "Niger"
 msgstr "尼日"
 
 msgid "Nigeria"
-msgstr ""
+msgstr "奈及利亞"
 
 msgid "Niue"
-msgstr ""
+msgstr "紐埃"
 
 msgid "Norfolk Island"
-msgstr ""
+msgstr "諾福克島"
 
 msgid "Northern Mariana Islands"
-msgstr ""
+msgstr "北馬里亞納群島"
 
 msgid "Norway"
 msgstr "挪威"
@@ -639,7 +642,7 @@ msgid "Palau"
 msgstr "帕勞"
 
 msgid "Palestine"
-msgstr ""
+msgstr "巴勒斯坦國"
 
 msgid "Panama"
 msgstr "巴拿馬"
@@ -657,7 +660,7 @@ msgid "Philippines"
 msgstr "菲律賓"
 
 msgid "Pitcairn"
-msgstr ""
+msgstr "皮特肯群島"
 
 msgid "Poland"
 msgstr "波蘭"
@@ -666,13 +669,13 @@ msgid "Portugal"
 msgstr "葡萄牙"
 
 msgid "Puerto Rico"
-msgstr ""
+msgstr "波多黎各"
 
 msgid "Qatar"
 msgstr "卡達"
 
 msgid "Réunion"
-msgstr ""
+msgstr "留尼旺"
 
 msgid "Romania"
 msgstr "羅馬尼亞"
@@ -684,10 +687,10 @@ msgid "Rwanda"
 msgstr "盧安達"
 
 msgid "Saint Barthélemy"
-msgstr ""
+msgstr "聖巴泰勒米"
 
 msgid "Saint Helena, Ascension and Tristan da Cunha"
-msgstr ""
+msgstr "聖赫勒拿、阿森鬆和特裏斯坦-達庫尼亞"
 
 msgid "Saint Kitts and Nevis"
 msgstr "聖克里斯多福及尼維斯"
@@ -696,16 +699,16 @@ msgid "Saint Lucia"
 msgstr "聖露西亞"
 
 msgid "Saint Martin (French part)"
-msgstr ""
+msgstr "法屬聖馬丁"
 
 msgid "Saint Pierre and Miquelon"
-msgstr ""
+msgstr "聖皮埃爾和密克隆"
 
 msgid "Saint Vincent and the Grenadines"
 msgstr "聖文森及格瑞那丁"
 
 msgid "Samoa"
-msgstr ""
+msgstr "薩摩亞"
 
 msgid "San Marino"
 msgstr "聖馬力諾"
@@ -879,40 +882,40 @@ msgid "Zimbabwe"
 msgstr "辛巴威"
 
 msgid "State / Province / Region"
-msgstr ""
+msgstr "州/省/地區"
 
 msgid "City*"
 msgstr "市*"
 
 msgid "Your Organization's Size*"
-msgstr ""
+msgstr "你的組織規模(組織員工總數)*"
 
 msgid "1 to 9 employees"
-msgstr ""
+msgstr "1-9名員工"
 
 msgid "10 to 99 employees"
-msgstr ""
+msgstr "10-99名員工"
 
 msgid "100 to 999 employees"
-msgstr ""
+msgstr "100-999名員工"
 
 msgid "1,000 to 9,999 employees"
-msgstr ""
+msgstr "1,000-9,999名員工"
 
 msgid "10,000 to 99,999 employees"
-msgstr ""
+msgstr "10,000-99,999名員工"
 
 msgid "100,000 employees or more"
-msgstr ""
+msgstr "100,000名員工以上"
 
 msgid "Don’t know / not sure"
 msgstr "不知道/不確定"
 
 msgid "Your Thoughts"
-msgstr ""
+msgstr "你的想法"
 
 msgid "What are your top business drivers for using OpenStack?"
-msgstr ""
+msgstr "您使用OpenStack的主要業務推動因素是什麼？"
 
 msgid "Please specify"
 msgstr "請指定"
@@ -920,10 +923,10 @@ msgstr "請指定"
 msgid ""
 "How likely are you to recommend OpenStack to a friend or colleague? (0=Least "
 "Likely, 10=Most Likely)*"
-msgstr ""
+msgstr "您向朋友或同事推薦OpenStack的可能性有多大？ （0 =最不可能，10=最有可能）*"
 
 msgid "-- Select One  (0=Least Likely, 10=Most Likely) --"
-msgstr ""
+msgstr "-- 選擇一個 (0 =最不可能，10=最有可能) --"
 
 msgid "0"
 msgstr "0"
@@ -968,24 +971,29 @@ msgid ""
 "text fields are independent, so we cannot \"see previous answer.\" We would "
 "really appreciate a separate answer to each question.</p>"
 msgstr ""
+"<hr><p>我們希望得知OpenStack跟OpenStack "
+"Foundation該如何更符合您期望。這些開放問答的問題是選填的，但是回答這些問題會提供珍貴的見解。您的回應是匿名的，而所有的回答都是獨立的，所以我們不能「看到以前的答案」。 "
+"我們真的很感激每個問題獨立回答。</p>"
 
 msgid "What do you like most about OpenStack, besides “free” and “open”?"
-msgstr ""
+msgstr "除了“免費”和“開放”您最喜歡OpenStack什麼？"
 
 msgid "Which areas of OpenStack require further enhancement?"
-msgstr ""
+msgstr "OpenStack在哪些領域需要進一步加強"
 
 msgid ""
 "Which new/emerging technologies are you interested in using or seeing "
 "integrated with OpenStack?<br/><font size=\"-2\"><em>Select all that apply</"
 "em></font>"
 msgstr ""
+"哪些新興的科技你有興趣用在或是看到其整合進OpenStack<br/><font size=\"-2\"><em>選擇所有符合條件的</em></"
+"font>"
 
 msgid "Please specify:"
 msgstr "請指定:"
 
 msgid "How often do you refer to documentation from docs.openstack.org?"
-msgstr ""
+msgstr "你多常參考 docs.openstack.org 中的文件？"
 
 msgid "Daily"
 msgstr "每天"
@@ -1012,9 +1020,12 @@ msgid ""
 "and will only be presented in aggregate unless you consent to making it "
 "public.</p>"
 msgstr ""
+"<p>一個部署文件追蹤一個獨立部署的相關資訊。</p><ul><li>一個組織機構可以有多個部署文件對應到其多個OpenStack部署環境</"
+"li><li>當你創建了一個部署配置文件，您可以返回到網站更新其中的數據。</li><li>您將是您創建的任何部署配置文件的默認管理員。</li></"
+"ul><p>與往常一樣， 您提供的信息是保密的，只有在您同意公開的情況下才會被匯總。</p>"
 
 msgid "Your OpenStack Deployments"
-msgstr ""
+msgstr "你的OpenStack部署"
 
 msgid "Add"
 msgstr "加入"
@@ -1029,7 +1040,7 @@ msgid "Thank You"
 msgstr "謝謝"
 
 msgid "Deployment"
-msgstr ""
+msgstr "部署"
 
 msgid ""
 "Please create a friendly label, like “Production OpenStack Deployment.” This "
@@ -1037,36 +1048,38 @@ msgid ""
 "organization work on this deployment, please work with your team members to "
 "enter your deployment data to avoid duplication.*"
 msgstr ""
+"請創建一個友好的標籤，如“生產中的OpenStack部署”。這將是我們的調查工具中您的部屬的名稱。 "
+"如果組織中有幾個人負責此部署，請與您的團隊成員一起輸入部署數據以避免重複。"
 
 msgid "Each deployment profile can be marked public or confidential.*"
-msgstr ""
+msgstr "每個部署可以標記公共或機密。*"
 
 msgid ""
 "<strong>Public:</strong> The information I provide on this page only may be "
 "shared on openstack.org."
-msgstr ""
+msgstr "<strong>公開：</strong>我在此頁面上提供的信息可以在openstack.org上分享。"
 
 msgid ""
 "<strong>Confidential:</strong> All information provided, including my "
 "organization name, should be kept confidential to the OpenStack Foundation."
-msgstr ""
+msgstr "<strong>機密：</strong>所提供的所有信息（包括我的組織名稱）應對OpenStack Foundation保密。"
 
 msgid ""
 "In what stage is your OpenStack deployment? (make a new deployment profile "
 "for each type of deployment)*"
-msgstr ""
+msgstr "你的OpenStack部署在哪個階段？(創建一個新的部署配置文件給不同部署環境)"
 
 msgid "Proof of Concept"
-msgstr ""
+msgstr "概念證明"
 
 msgid "Under development / In testing"
-msgstr ""
+msgstr "開發/測試中"
 
 msgid "Production / Full Operational Use"
-msgstr ""
+msgstr "全面運作"
 
 msgid "When was this deployment created?"
-msgstr ""
+msgstr "這個部署什麼時候創建？"
 
 msgid "2017"
 msgstr "2017"
@@ -1093,64 +1106,64 @@ msgid "2010"
 msgstr "2010"
 
 msgid "Older"
-msgstr ""
+msgstr "更早"
 
 msgid "I don't know."
 msgstr "我不知道。"
 
 msgid ""
-"In which country / countries is this OpenStack deployment physically located?"
-"*<br/><font size=\"-2\"><em>You can select multiple country names.</em></"
-"font>"
-msgstr ""
+"In which country / countries is this OpenStack deployment physically "
+"located?*<br/><font size=\"-2\"><em>You can select multiple country names.</"
+"em></font>"
+msgstr "你的OpenStack實際部署在那個/些國家*<br/><font size=\"-2\"><em>你可以選擇多個國家</em></font>"
 
 msgid "Prefer not to say"
 msgstr "不想說"
 
 msgid "Deployment Type"
-msgstr ""
+msgstr "部署类型"
 
 msgid "Community Cloud"
-msgstr ""
+msgstr "公共雲"
 
 msgid "On-Premises Private Cloud"
-msgstr ""
+msgstr "內部私有云"
 
 msgid "Off-Premises Private Cloud"
-msgstr ""
+msgstr "內部私有雲"
 
 msgid "Public Cloud"
-msgstr ""
+msgstr "公共雲"
 
 msgid ""
-"Which releases does this deployment currently use?*<BR><font size="
-"\"-2\"><em>Select All That Apply</em></font>"
-msgstr ""
+"Which releases does this deployment currently use?*<BR><font size=\"-"
+"2\"><em>Select All That Apply</em></font>"
+msgstr "你的部屬正在使用哪個OpenStack版本？*<BR><font size=\"-2\"><em>選擇所有符合條件的</em></font>"
 
 msgid ""
 "Which workloads are you currently using?<BR><font size=\"-2\"><em>Select All "
 "That Apply</em></font>"
-msgstr ""
+msgstr "你目前在OpenStack跑哪些負載？<BR><font size=\"-2\"><em>選擇所有符合條件的</em></font>"
 
 msgid ""
 "Which projects does this deployment currently use, or are you interested in "
 "using in the future?"
-msgstr ""
+msgstr "哪些OpenStack projects在你的部屬中使用，或是有興趣在未來使用？"
 
 msgid "Production"
-msgstr ""
+msgstr "全面運作"
 
 msgid "Testing"
-msgstr ""
+msgstr "測試"
 
 msgid "Interested"
-msgstr ""
+msgstr "有興趣"
 
 msgid "Nova (Compute)"
-msgstr ""
+msgstr "Nova (運算)"
 
 msgid "Ceilometer (Metering & Monitoring)"
-msgstr ""
+msgstr "Ceilometer (計量和監測)"
 
 msgid "Cinder (Block Storage)"
 msgstr "Cinder (區塊儲存服務)"
@@ -1162,7 +1175,7 @@ msgid "Glance (Image Service)"
 msgstr "Glance (映像檔服務)"
 
 msgid "Heat (Orchestration)"
-msgstr ""
+msgstr "Heat (Orchestration)"
 
 msgid "Horizon (Dashboard)"
 msgstr "Horizon (儀表板)"
@@ -1174,7 +1187,7 @@ msgid "Keystone (Identity Service)"
 msgstr "Keystone (身份服務)"
 
 msgid "Neutron (Networking)"
-msgstr ""
+msgstr "Neutron (網路)"
 
 msgid "Sahara (Data Processing)"
 msgstr "Sahara (資料處理)"
@@ -1186,48 +1199,48 @@ msgid "Trove (Database Service)"
 msgstr "Trove (資料庫服務)"
 
 msgid "Barbican (Key Management)"
-msgstr ""
+msgstr "Barbican (密鑰管理)"
 
 msgid "Congress (Governance Service)"
-msgstr ""
+msgstr "Congress (治理服務)"
 
 msgid "Manila (Shared File Systems)"
-msgstr ""
+msgstr "Manila (檔案共享系統)"
 
 msgid "Magnum(Containers Service)"
-msgstr ""
+msgstr "Magnum(容器服務)"
 
 msgid "Murano (Application Catalog)"
-msgstr ""
+msgstr "Murano (應用程式目錄)"
 
 msgid "Rally (Benchmark Service)"
-msgstr ""
+msgstr "Rally (基準服務)"
 
 msgid "Cue (Message Broker Service)"
-msgstr ""
+msgstr "Cue (消息對列服務)"
 
 msgid "Kolla (Containerized Deployment)"
-msgstr ""
+msgstr "Kolla (容器部署)"
 
 msgid "Magnetodb (Key-Value Store as a Service)"
-msgstr ""
+msgstr "Magnetodb (Key-Value儲存及服務)"
 
 msgid "Mistral (Workflow Service)"
-msgstr ""
+msgstr "Mistral (工作流程服務)"
 
 msgid "Solum (Software Dev Lifecycle Mgmt)"
-msgstr ""
+msgstr "Solum (軟體開發生命周期管理)"
 
 msgid "TripleO (Deployment)"
-msgstr ""
+msgstr "TripleO (部署服務)"
 
 msgid "Zaqar (Message Service)"
-msgstr ""
+msgstr "Zaqar (訊息佇列服務)"
 
 msgid ""
 "Which projects does this deployment currently use, or are you interested in "
 "using in the future? (PoC/Testing)"
-msgstr ""
+msgstr "哪些OpenStack projects在你的部屬中使用，或是有興趣在未來使用？(概念證明/測試)"
 
 msgid "<p> </p><hr>"
 msgstr "<p> </p><hr>"
@@ -1235,19 +1248,19 @@ msgstr "<p> </p><hr>"
 msgid ""
 "Are you interested in helping our interoperability efforts by using RefStack "
 "to test your cloud capabilities?"
-msgstr ""
+msgstr "您是否有興趣通過使用RefStack來測試您的的OpenStack雲功能來幫助我們實現互操作性？"
 
 msgid "Yes"
 msgstr "是"
 
 msgid "No, but I am interested in helping"
-msgstr ""
+msgstr "沒有，但是我有興趣幫忙"
 
 msgid "No, and not interested in helping"
-msgstr ""
+msgstr "沒有，我也沒有興趣幫忙"
 
 msgid "Deployment Decisions"
-msgstr ""
+msgstr "部署决策"
 
 msgid ""
 "<h3>What’s the size of this cloud?</h3><p>All of these questions are "
@@ -1255,244 +1268,245 @@ msgid ""
 "cloud size so that we may reflect this back to the community in aggregate.</"
 "p><hr>"
 msgstr ""
+"<h3>這個雲的大小是多少？</h3><p>所有的問題都是可選的和保密的。我們感謝您提供對您雲大小的最佳估計，以便將其統整，反應回社群。</p><hr>"
 
 msgid "Number of users"
 msgstr "使用者數量"
 
 msgid "1 to 9 users"
-msgstr ""
+msgstr "1-9使用者"
 
 msgid "10 to 99 users"
-msgstr ""
+msgstr "10-99使用者"
 
 msgid "100 to 999 users"
-msgstr ""
+msgstr "100-999使用者"
 
 msgid "1,000 to 9,999 users"
-msgstr ""
+msgstr "1,000-9,999使用者"
 
 msgid "10,000 to 99,999 users"
-msgstr ""
+msgstr "10,000-99,999使用者"
 
 msgid "100,000 to 999,999 users"
-msgstr ""
+msgstr "100,000-999,999使用者"
 
 msgid "1,000,000 to 9,999,999 users"
-msgstr ""
+msgstr "1,000,000-9,999,999使用者"
 
 msgid "10,000,000 to 999,999,999 users"
-msgstr ""
+msgstr "10,000,000-999,999,999使用者"
 
 msgid "100,000,000 or more users"
-msgstr ""
+msgstr "100,000,000或更多使用者"
 
 msgid "Physical compute nodes"
-msgstr ""
+msgstr "實體計算節點"
 
 msgid "1 to 9 nodes"
-msgstr ""
+msgstr "1-9節點"
 
 msgid "10 to 99 nodes"
-msgstr ""
+msgstr "10-99節點"
 
 msgid "100 to 999 nodes"
-msgstr ""
+msgstr "100-999節點"
 
 msgid "1,000 to 9,999 nodes"
-msgstr ""
+msgstr "1,000-9,999節點"
 
 msgid "10,000 to 99,999 nodes"
-msgstr ""
+msgstr "10,000-99,999節點"
 
 msgid "100,000 to 999,999 nodes"
-msgstr ""
+msgstr "100,000-999,999節點"
 
 msgid "1 million or more nodes"
-msgstr ""
+msgstr "一百萬節點以上"
 
 msgid "Processor cores"
-msgstr ""
+msgstr "處理器核心"
 
 msgid "1 to 9 cores"
-msgstr ""
+msgstr "1-9核"
 
 msgid "10 to 99 cores"
-msgstr ""
+msgstr "10-99核"
 
 msgid "100 to 999 cores"
-msgstr ""
+msgstr "100-999核"
 
 msgid "1,000 to 9,999 cores"
-msgstr ""
+msgstr "1,000-9,999核"
 
 msgid "10,000 to 99,999 cores"
-msgstr ""
+msgstr "10,000-99,999核"
 
 msgid "100,000 to 999,999 cores"
-msgstr ""
+msgstr "100,000-999,999核"
 
 msgid "1 million or more cores"
-msgstr ""
+msgstr "一百萬核以上"
 
 msgid "Number of instances"
 msgstr "雲實例數量"
 
 msgid "1 to 9 instances"
-msgstr ""
+msgstr "1-9雲實例"
 
 msgid "10 to 99 instances"
-msgstr ""
+msgstr "10-99雲實例"
 
 msgid "100 to 999 instances"
-msgstr ""
+msgstr "100-999雲實例"
 
 msgid "1,000 to 9,999 instances"
-msgstr ""
+msgstr "1,000-9,999雲實例"
 
 msgid "10,000 to 99,999 instances"
-msgstr ""
+msgstr "10,000-99,999雲實例"
 
 msgid "100,000 to 999,999 instances"
-msgstr ""
+msgstr "100,000-999,999雲實例"
 
 msgid "1 million or more instances"
-msgstr ""
+msgstr "一百萬雲實例以上"
 
 msgid "Total number of usable IPs"
-msgstr ""
+msgstr "能使用的IP數量"
 
 msgid "1 to 9 IPs"
-msgstr ""
+msgstr "1-9 IP位址"
 
 msgid "10 to 99 IPs"
-msgstr ""
+msgstr "10-99  IP位址"
 
 msgid "100 to 999 IPs"
-msgstr ""
+msgstr "100-999  IP位址"
 
 msgid "1,000 to 9,999 IPs"
-msgstr ""
+msgstr "1,000-9,999  IP位址"
 
 msgid "10,000 to 99,999 IPs"
-msgstr ""
+msgstr "10,000-99,999 IP位址"
 
 msgid "100,000 or more IPs"
-msgstr ""
+msgstr "100,000 IP位址以上"
 
 msgid "How much usable block storage do you have in this Cinder deployment?"
-msgstr ""
+msgstr "您的Cinder部署中有多少容量的區塊儲存"
 
 msgid "Less than 1 TB"
-msgstr ""
+msgstr "1TB以下"
 
 msgid "1 TB to 9 TB"
-msgstr ""
+msgstr "1TB-9TB"
 
 msgid "10 TB to 99 TB"
-msgstr ""
+msgstr "10TB-99TB"
 
 msgid "100 TB to 999 TB"
-msgstr ""
+msgstr "100TB-999TB"
 
 msgid "1 PB to 9 PB"
-msgstr ""
+msgstr "1PB-9PB"
 
 msgid "10 PB to 99 PB"
-msgstr ""
+msgstr "10PB-99PB"
 
 msgid "100 PB to 999 PB"
-msgstr ""
+msgstr "100PB-999PB"
 
 msgid "1 EB to 9 EB"
-msgstr ""
+msgstr "1EB-9EB"
 
 msgid "10 EB to 99 EB"
-msgstr ""
+msgstr "10EB-99EB"
 
 msgid "100 to 999 EB"
-msgstr ""
+msgstr "100EB-999EB"
 
 msgid "1 ZB to 9 ZB"
-msgstr ""
+msgstr "1ZB-9ZB"
 
 msgid ""
 "How much <strong>OpenStack Object Storage (Swift)</strong> have you "
 "provisioned?"
-msgstr ""
+msgstr "您配置了多少 <strong>OpenStack 物件儲存 (Swift)</strong> "
 
 msgid ""
 "How many <strong>OpenStack Object Storage (Swift)</strong> objects are "
 "stored?"
-msgstr ""
+msgstr "有多少 <strong>OpenStack 物件儲存(Swift)</strong> 物件被儲存？"
 
 msgid "Fewer than 1,000 objects"
-msgstr ""
+msgstr "1,000物件以下"
 
 msgid "1,000 to 9,999 objects"
-msgstr ""
+msgstr "1,000-9,999物件"
 
 msgid "10,000 to 99,999 objects"
-msgstr ""
+msgstr "10,000-99,999物件"
 
 msgid "100,000 to 999,999 objects"
-msgstr ""
+msgstr "100,000-999,999物件"
 
 msgid "1 million to 9 million objects"
-msgstr ""
+msgstr "一百萬到九百萬物件"
 
 msgid "10 million to 999 million objects"
-msgstr ""
+msgstr "一千萬到9.99億物件"
 
 msgid "100 million to 999 million objects"
-msgstr ""
+msgstr "一億到9.99億物件"
 
 msgid "1 billion to 9 billion objects"
-msgstr ""
+msgstr "十億到九十億物件"
 
 msgid "10 billion to 99 billion objects"
-msgstr ""
+msgstr "一百億到990億物件"
 
 msgid "100 billion or more objects"
-msgstr ""
+msgstr "1000億或更多物件"
 
 msgid "Approximately how many Nova cells do you use?"
-msgstr ""
+msgstr "您估計使用了多少Nova cells"
 
 msgid "None"
-msgstr ""
+msgstr "無"
 
 msgid "1 cell"
-msgstr ""
+msgstr "1個cell"
 
 msgid "2 cells"
-msgstr ""
+msgstr "2個cell"
 
 msgid "3 cells"
-msgstr ""
+msgstr "3個cell"
 
 msgid "4 cells"
-msgstr ""
+msgstr "4個cell"
 
 msgid "5 cells"
-msgstr ""
+msgstr "5個cell"
 
 msgid "6 cells"
-msgstr ""
+msgstr "6個cell"
 
 msgid "7 cells"
-msgstr ""
+msgstr "7個cell"
 
 msgid "8 cells"
-msgstr ""
+msgstr "8個cell"
 
 msgid "9 cells"
-msgstr ""
+msgstr "9個cell"
 
 msgid "10 cells"
-msgstr ""
+msgstr "10個cell"
 
 msgid "More than 10"
-msgstr ""
+msgstr "10個cell以上"
 
 msgid ""
 "<p><span style=\"color: #0083c8; font-size: 1.6em;\">Deployment Decisions</"
@@ -1501,46 +1515,55 @@ msgid ""
 "This information is optional, but will be kept confidential and never "
 "published in connection with you or your organization.</p><hr>"
 msgstr ""
+"<p><span style=\"color: #0083c8; font-size: 1.6em;\">部署決策</span></"
+"p><p>以下的資訊將會提供我們對OpenStack部署最普遍的設定跟元件選擇的了解。這些資訊是選填的，但是將會保密並且永遠不會公佈與您的組織機構有關。</"
+"p><hr>"
 
 msgid ""
 "What packages does this deployment use?<BR><font size=\"-2\"><em>Select All "
 "That Apply</em></font>"
-msgstr ""
+msgstr "此部署使用了哪些套件<BR><font size=\"-2\"><em>選擇所有符合條件的</em></font>"
 
 msgid ""
 "If you have modified packages or have built your own packages, why?<BR><font "
 "size=\"-2\"><em>Select All That Apply</em></font>"
-msgstr ""
+msgstr "如果您修改了套件或者構建了自己的套件, 為什麼？<BR><font size=\"-2\"><em>選擇所有符合條件的</em></font>"
 
 msgid ""
-"Which tools are you using to deploy / manage this cluster?<BR><font size="
-"\"-2\"><em>Select All That Apply</em></font>"
-msgstr ""
+"Which tools are you using to deploy / manage this cluster?<BR><font size=\"-"
+"2\"><em>Select All That Apply</em></font>"
+msgstr "您使用了哪些套件來部署/管理這個集群？<BR><font size=\"-2\"><em>選擇所有符合條件的</em></font>"
 
 msgid ""
 "If you are running your OpenStack services inside of containers, which "
 "container format are you using?<br/><font size=\"-2\"><em>Select all that "
 "apply</em></font>"
 msgstr ""
+"如果您在容器中運行OpenStack服務，請問您使用了哪些容器格式？<br/><font size=\"-2\"><em>選擇所有符合條件的</em></"
+"font>"
 
 msgid ""
 "Which container orchestration or Platform-as-a-Service (PaaS) tools are you "
-"using to manage applications on this OpenStack deployment?<br/><font size="
-"\"-2\"><em>Select All That Apply</em></font>"
+"using to manage applications on this OpenStack deployment?<br/><font size=\"-"
+"2\"><em>Select All That Apply</em></font>"
 msgstr ""
+"您使用了哪些容器編排或者平台及服務(PaaS)工具來管理此OpenStack部署的應用程序？<br/><font size=\"-"
+"2\"><em>選擇所有符合條件的</em></font>"
 
 msgid ""
 "Which <b>OpenStack Compute (Nova)</b> hypervisors are you using?<BR><font "
 "size=\"-2\"><em>Select All That Apply</em></font>"
 msgstr ""
+"您在使用哪種 <b>OpenStack計算(Nova)</b> 驅動程序？ <BR><font size=\"-2\"><em>選擇所有符合條件的</"
+"em></font>"
 
 msgid ""
-"Which databases are you using for OpenStack components?<br/><font size="
-"\"-2\"><em>Select all that apply</em></font>"
-msgstr ""
+"Which databases are you using for OpenStack components?<br/><font size=\"-"
+"2\"><em>Select all that apply</em></font>"
+msgstr "您的OpenStack元件使用了哪些資料庫<br/><font size=\"-2\"><em>選擇所有符合條件的</em></font>"
 
 msgid "Other database"
-msgstr ""
+msgstr "其他數據庫"
 
 msgid ""
 "What programmatic interfaces (SDKs, tools, platforms) do you expose (or plan "
@@ -1548,60 +1571,68 @@ msgid ""
 "consume your product/cloud?<br/><font size=\"-2\"><em>Select all that apply</"
 "em></font>"
 msgstr ""
+"您已經或者計畫向用戶/客戶/開發者開放了哪些程式接口(SDK, 工具, 平台), 以便他們來使用您的產品/雲? <br/><font size=\"-"
+"2\"><em>選擇所有符合條件的</em></font>"
 
 msgid "Other toolkits"
-msgstr ""
+msgstr "其他工具包"
 
 msgid ""
-"With which other clouds do your users interact?<br/><font size="
-"\"-2\"><em>Select all that apply</em></font>"
-msgstr ""
+"With which other clouds do your users interact?<br/><font size=\"-"
+"2\"><em>Select all that apply</em></font>"
+msgstr "您的用戶還使用哪些雲？<br/><font size=\"-2\"><em>選擇所有符合條件的·</em></font>"
 
 msgid "Other Clouds"
-msgstr ""
+msgstr "其他雲端"
 
 msgid ""
 "Approximately what percentage of your overall cloud infrastructure is "
 "running on OpenStack?"
-msgstr ""
+msgstr "估計您有多少的雲端基礎設施運作在OpenStack上"
 
 msgid "81-100%"
-msgstr ""
+msgstr "81-100%"
 
 msgid "61-80%"
-msgstr ""
+msgstr "61-80%"
 
 msgid "41-60%"
-msgstr ""
+msgstr "41-60%"
 
 msgid "21-40%"
-msgstr ""
+msgstr "21-40%"
 
 msgid "1-20%"
-msgstr ""
+msgstr "1-20%"
 
 msgid ""
 "Which <b>OpenStack Network (Neutron)</b> drivers are you using?<BR><font "
 "size=\"-2\"><em>Select all that apply. Please note we now distinguish "
 "between ML2 drivers and non-ML2 drivers.</em></font>"
 msgstr ""
+"您在使用哪些 <b>OpenStack 網路 (Neutron)</b> 驅動程式?<BR><font size=\"-"
+"2\"><em>選擇所有符合條件的。請注意我們現在區分ML2跟非ML2的驅動。</em></font>"
 
 msgid ""
-"Which  <b>OpenStack Identity Service (Keystone)</b> drivers are you using?"
-"<BR><font size=\"-2\"><em>Select All That Apply</em></font>"
+"Which  <b>OpenStack Identity Service (Keystone)</b> drivers are you "
+"using?<BR><font size=\"-2\"><em>Select All That Apply</em></font>"
 msgstr ""
+"您在使用哪些  <b>OpenStack認證服務 (Keystone)</b> 驅動程式 ？<BR><font size=\"-"
+"2\"><em>選擇所有符合條件的</em></font>"
 
 msgid ""
-"Which <b>OpenStack Block Storage (Cinder)</b> drivers are you using?"
-"<BR><font size=\"-2\"><em>Select All That Apply</em></font>"
+"Which <b>OpenStack Block Storage (Cinder)</b> drivers are you "
+"using?<BR><font size=\"-2\"><em>Select All That Apply</em></font>"
 msgstr ""
+"您在使用哪些 <b>OpenStack 區塊儲存 (Cinder)</b> 驅動程式？<BR><font size=\"-"
+"2\"><em>選擇所有符合條件的</em></font>"
 
 msgid "Which vendor's products power your OpenStack cloud?"
-msgstr ""
+msgstr "哪個供應商的產品提供您的OpenStack雲？"
 
 msgid ""
 "What is the main operating system running this OpenStack cloud deployment?"
-msgstr ""
+msgstr "您主要在您的OpenStack雲部署中跑哪個作業系統？"
 
 msgid "CentOS"
 msgstr "CentOS"
@@ -1631,59 +1662,62 @@ msgid "openSUSE Server"
 msgstr "openSUSE Server"
 
 msgid ""
-"Which compatibility APIs does this deployment support?<BR><font size="
-"\"-2\"><em>Select All That Apply</em></font>"
-msgstr ""
+"Which compatibility APIs does this deployment support?<BR><font size=\"-"
+"2\"><em>Select All That Apply</em></font>"
+msgstr "此部署支持哪些兼容的API？<BR><font size=\"-2\"><em>選擇所有符合條件的</em></font>"
 
 msgid "<hr><h3>Project Feedback</h3>"
-msgstr ""
+msgstr "<hr><h3>項目反饋</h3>"
 
 msgid ""
 "Barbican: What is missing from Barbican that might prevent your adoption?"
-msgstr ""
+msgstr "Barbican: Barbican缺少了哪些東西以至於可能影響採用意願？"
 
 msgid ""
 "<strong>Cinder:</strong> If there was one thing you would like to see "
 "changed (added, removed, fixed) in Cinder, what would it be?"
-msgstr ""
+msgstr "<strong>Cinder:</strong> 如果您期望看到Cinder中的其中一個項目改變 (增加、減少、修改) ，將會是哪一個？"
 
 msgid ""
 "Designate: What (if any) features or issues are preventing you from using "
 "Designate as a production service?"
-msgstr ""
+msgstr "Designate: 有哪些(如果有的話)功能或問題阻止你使用Designate？"
 
 msgid ""
 "Glance: As you're aware, the Images API v1 supplied by OpenStack Glance is "
 "currently deprecated. If you haven't yet moved to the Images API v2, what is "
 "preventing you? Please be specific."
-msgstr ""
+msgstr "Glance: 就如你所知，OpenStack Glance所提供的Image API v1已經被棄用。"
 
 msgid "Heat: What's the current/expected load on your Heat deployment?"
-msgstr ""
+msgstr "Heat: 你的Heat部署目前/預期的負載是多少？"
 
 msgid "Few small stacks (<100 resources each)"
-msgstr ""
+msgstr "一些小的stack (<100個資源)"
 
 msgid "Lots of small stacks (<100 resources each)"
-msgstr ""
+msgstr "很多小的stack (<100個資源)"
 
 msgid "Few big stacks (>100 resources each)"
-msgstr ""
+msgstr "一些大的stack (>100個資源)"
 
 msgid "Lots of big stacks (>100 resources each)"
-msgstr ""
+msgstr "很多大的stack (>100個資源)"
 
 msgid ""
 "Interop: Do you use the OpenStack Powered program or Interoperability "
 "Guideline compliance as a factor in your OpenStack procurement process? Why "
 "or why not?"
 msgstr ""
+"Interop: 您是否在OpenStack採購流程中使用OpenStack Powered Program或互操作性指導規定？ 為什麼或為什麼不？"
 
 msgid ""
 "Interop: What do you consider to be the biggest challenges to achieving "
 "interoperability between OpenStack clouds?<br/><font size=\"-2\"><em>Select "
 "all that apply</em></font>"
 msgstr ""
+"Interop: 您認為OpenStack雲之間實現互操作性最大個挑在世？<br/><font size=\"-2\"><em>選擇所有符合條件的</"
+"em></font>"
 
 msgid "Please explain"
 msgstr "請解釋"
@@ -1691,28 +1725,32 @@ msgstr "請解釋"
 msgid ""
 "Ironic: What's been your most frustrating or difficult experience with "
 "Ironic?"
-msgstr ""
+msgstr "Ironic: 您在使用Ironic最令人沮喪或困難的經歷是什麼？"
 
 msgid ""
 "Keystone: In your opinion, where should the Keystone development team focus "
 "their effort(s)?<br/><font size=\"-2\"><em>Select all that apply</em></font>"
 msgstr ""
+"Keystone: 在您看來，Keystone開發團隊應該在哪方面傾注他們的精力？<br/><font size=\"-"
+"2\"><em>選擇所有符合條件的</em></font>"
 
 msgid "Other - please specify"
-msgstr ""
+msgstr "其他 - 請指定"
 
 msgid ""
 "Kolla: How do you use Kolla? <br/><font size=\"-2\"><em>Select all that "
 "apply</em></font>"
-msgstr ""
+msgstr "Kolla: 您如何使用Kolla<br/><font size=\"-2\"><em>選擇所有符合條件的</em></font>"
 
 msgid "Which custom tool?"
-msgstr ""
+msgstr "哪些客製的工具"
 
 msgid ""
-"Manila: Which OpenStack Shared File System (Manila) drivers are you using?"
-"<br/><font size=\"-2\"><em>Select all that apply</em></font>"
+"Manila: Which OpenStack Shared File System (Manila) drivers are you "
+"using?<br/><font size=\"-2\"><em>Select all that apply</em></font>"
 msgstr ""
+"Manila: 您使用哪些 OpenStack Shared File System (Manila) drivers?<br/><font size="
+"\"-2\"><em>選擇所有符合條件的</em></font>"
 
 msgid ""
 "Neutron: Which of the following features in the Neutron project are you "
@@ -1720,67 +1758,78 @@ msgid ""
 "OpenStack deployment?<br/><font size=\"-2\"><em>Select all that apply</em></"
 "font>"
 msgstr ""
+"Neutron: 這之中哪些Neutron的功能您的部署正在使用或有興趣在未來使用？<br/><font size=\"-"
+"2\"><em>選擇所有符合條件的</em></font>"
 
 msgid ""
 "Nova: How important is it to be able to customize Nova in your deployment, e."
 "g. classload your own managers/drivers, use hooks, plug in API extensions, "
 "etc."
 msgstr ""
+"Nova: 能夠在您的部署中客製Nova e.g. classload your own managers/drivers, use hooks, "
+"plug in API extensions, etc. 有多重要？"
 
 msgid ""
 "Not important; I use pretty much stock Nova with maybe some small patches or "
 "bug fixes that aren't upstream."
-msgstr ""
+msgstr "不重要，我基本上只使用未修改過的Nova，或是一般些小更改跟上游上會修正的bug。"
 
 msgid ""
 "Somewhat important; I have some custom scheduler filters and other small "
 "patches but nothing major."
-msgstr ""
+msgstr "有些重要，我有一些客製的排程過濾器跟其他小更改但沒什麼重大改變。"
 
 msgid ""
 "Very important; my Nova deployment is heavily customized and hooks/plugins/"
 "custom APIs are a major part of my operation."
-msgstr ""
+msgstr "很重要，我的Nova部署有大量更改，hooks/plugins/custom APIs在我們的維運中佔了非常大的一部分。"
 
 msgid ""
-"RefStack: Which of the following features in RefStack are important to you?"
-"<br/><font size=\"-2\"><em>Select all that apply</em></font>"
+"RefStack: Which of the following features in RefStack are important to "
+"you?<br/><font size=\"-2\"><em>Select all that apply</em></font>"
 msgstr ""
+"RefStack: 哪些RefStack的功能對您來說很重要<br/><font size=\"-2\"><em>選擇所有符合條件的</em></"
+"font>"
 
 msgid "Sahara: What else can be improved in the Sahara project?"
-msgstr ""
+msgstr "Sahara: Sahara計畫中還有什麼可以進步的？"
 
 msgid ""
 "Swift: What kinds of data are you planning to store in object storage in the "
 "next 12 months?<br/><font size=\"-2\"><em>Select all that apply</em></font>"
 msgstr ""
+"Swift: 接下來12個月中，您預定將儲存哪種類型的資料到物件儲存系統中<br/><font size=\"-2\"><em>選擇所有符合條件的</"
+"em></font>"
 
 msgid "Please specify other types of data."
-msgstr ""
+msgstr "請註明其他類型的資料"
 
 msgid ""
-"Telemetry: Which dispatcher are you using or planning to use with Ceilometer?"
-"<br/><font size=\"-2\"><em>Select all that apply</em></font>"
+"Telemetry: Which dispatcher are you using or planning to use with "
+"Ceilometer?<br/><font size=\"-2\"><em>Select all that apply</em></font>"
 msgstr ""
+"Telemetry: 您已經或者計劃在 Ceilometer 中使用哪些調度器? <br/><font size=\"-"
+"2\"><em>選擇所有符合條件的</em></font>"
 
 msgid ""
 "TripleO: As a user/operator, do you value having a common interface for "
 "deployment tooling and the deployed cloud (e.g common APIs and CLI tools)?"
-msgstr ""
+msgstr "TripleO: 從一個user/operator的角度，您是否重視部署工具和部署雲有通用接口(如：共用的API跟CLI工具)？"
 
 msgid "Yes, definitely."
-msgstr ""
+msgstr "當然是。"
 
 msgid "Yes, but not required."
-msgstr ""
+msgstr "是，但不是必需的。"
 
 msgid "No opinion."
-msgstr ""
+msgstr "沒有意見。"
 
 msgid "No, it's a bad idea."
-msgstr ""
+msgstr "不，這是一個壞主意。"
 
 msgid ""
 "Trove: When do you expect to begin evaluating Database as a Service in your "
 "cloud using the OpenStack Trove project?"
-msgstr ""
+msgstr "Trove: 您預期您什麼時候會開使用OpenStack Trove評估您的雲中的資料庫及服務？"
+
