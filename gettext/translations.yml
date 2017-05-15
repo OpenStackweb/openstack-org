@@ -1,0 +1,7 @@
+# here are all available po file to compile to mo files per language code
+zh_TW:
+  - survey_template
+  - survey_ui
+es_ES:
+  - survey_template
+  - survey_ui

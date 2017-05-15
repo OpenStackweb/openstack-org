@@ -88,3 +88,4 @@ config.json
 auth.json
 autocomplete/
 *.patch
+*.mo
