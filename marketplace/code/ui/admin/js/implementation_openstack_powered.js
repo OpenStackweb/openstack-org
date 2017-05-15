@@ -42,11 +42,19 @@
             if(!is_valid){
                 return false;
             }
-            implementation.compatible_compute            = $('#compatible_compute', form).is(':checked');
-            implementation.compatible_storage            = $('#compatible_storage', form).is(':checked');
-            var version = $('.interop-program-version:checked', form);
+            if ($('#compatible_compute', form).length) {
+                implementation.compatible_compute            = $('#compatible_compute', form).is(':checked');
+            }
 
-            implementation.interop_program_version_id    = version.length > 0? version.attr('data-version-id'):0;
+            if ($('#compatible_storage', form).length) {
+                implementation.compatible_storage            = $('#compatible_storage', form).is(':checked');
+            }
+
+            if ($('.interop-program-version', form).length) {
+                var version = $('.interop-program-version:checked', form);
+                implementation.interop_program_version_id    = version.length > 0 ? version.attr('data-version-id') : 0;
+            }
+
             return implementation;
         }
     }
