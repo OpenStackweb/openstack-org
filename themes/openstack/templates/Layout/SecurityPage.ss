@@ -78,7 +78,7 @@
                     <h3>Best practices</h3>
                     <i class="fa fa-lock fa-4x"></i>
                     <p>
-                        Implementation and best practices: <a style="text-decoration:underline;" href="http://docs.openstack.org/sec/" target="_blank">Security Guide</a>
+                        Implementation and best practices: <a style="text-decoration:underline;" href="http://docs.openstack.org/security-guide/" target="_blank">Security Guide</a>
                     </p>
                     <p>
                         Vulnerabilities with patches or mitigation: <a style="text-decoration:underline;" href="https://security.openstack.org/ossalist.html" target="_blank">Security Advisories</a> and <a style="text-decoration:underline;" href="https://wiki.openstack.org/wiki/Security_Notes" target="_blank">Notes</a>.
