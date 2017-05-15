@@ -292,8 +292,9 @@ final class SpeakerEmailAnnouncementSenderManager
     }
 
     private static $excluded_tracks = [
-        6 => [40, 41, 46, 45, 48],
-        7 => [49, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100],
+        6  => [40, 41, 46, 45, 48],
+        7  => [49, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100],
+        22 => [],
     ];
 
     /**
@@ -308,7 +309,8 @@ final class SpeakerEmailAnnouncementSenderManager
                 throw new EntityValidationException($errors = [sprintf("exclude tracks not set for summit id %s", $current_summit->getIdentifier())]);
 
             list($count, $speakers) = $this->speaker_repository->searchSpeakerBySummitPaginatedForUploadSlidesAnnouncement($current_summit, 1, $batch_size, self::$excluded_tracks[$current_summit->getIdentifier()]);
-            $send = 0;
+            $send                   = 0;
+
             foreach ($speakers as $speaker) {
                 /* @var DataList */
                 $presentations = $speaker->PublishedPresentations($current_summit->ID);
@@ -327,6 +329,7 @@ final class SpeakerEmailAnnouncementSenderManager
                 $subject = "Important Speaker Information for OpenStack Summit in {$current_summit->Title}";
 
                 $email = EmailFactory::getInstance()->buildEmail('do-not-reply@openstack.org', $to, $subject);
+
                 $email->setUserTemplate("upload-presentation-slides-email");
                 $email->populateTemplate([
                     'Speaker'       => $speaker,
@@ -336,7 +339,7 @@ final class SpeakerEmailAnnouncementSenderManager
 
                 $email->send();
 
-                $notification = new PresentationSpeakerUploadPresentationMaterialEmail();
+                $notification            = new PresentationSpeakerUploadPresentationMaterialEmail();
                 $notification->SpeakerID = $speaker->ID;
                 $notification->SummitID  = $current_summit->ID;
                 $notification->SentDate  = MySQLDatabase56::nowRfc2822();

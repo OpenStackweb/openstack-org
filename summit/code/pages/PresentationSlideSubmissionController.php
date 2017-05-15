@@ -54,17 +54,19 @@ class PresentationSlideSubmissionController extends Page_Controller
 		);
 	}
 
-	/**
-	 * @param SS_HTTPRequest $r
+    /**
+     * @param SS_HTTPRequest $r
+     * @return SS_HTTPResponse|ViewableData_Customised|void
      */
 	public function presentations(SS_HTTPRequest $r)
 	{
-		$data = [];
+		$data    = [];
 		$speaker = null;
-		$key = $r->getVar('key');
+		$key     = $r->getVar('key');
+
 		if ($key) {
 			$username = PresentationSpeaker::hash_to_username($key);
-			$speaker = PresentationSpeaker::get()->filter('Member.Email', $username)->first();
+			$speaker  = PresentationSpeaker::get()->filter('Member.Email', $username)->first();
 
 		} elseif ($speakerID = Session::get('UploadMedia.SpeakerID')) {
 			$speaker = PresentationSpeaker::get()->byID($speakerID);
@@ -99,7 +101,7 @@ class PresentationSlideSubmissionController extends Page_Controller
 			}
 		}
 
-		$data['Speaker'] = $speaker;
+		$data['Speaker']       = $speaker;
 		$data['Presentations'] = $presentations;
 
 		return $this->customise($data);
