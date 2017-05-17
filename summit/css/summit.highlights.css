@@ -3995,6 +3995,7 @@ a.outline-btn.inactive:hover {
 
 .huge-success-video h1 {
     color: #fff;
+    margin:30px;
 }
 
 .huge-success-video video#bgvid {
@@ -4023,7 +4024,7 @@ a.outline-btn.inactive:hover {
 .summit-success-stats {
     text-align: center;
     color: #fff;
-    margin: 110px 0 40px
+    margin: 80px 0 40px
 }
 
 .summit-success-stats .stat {
