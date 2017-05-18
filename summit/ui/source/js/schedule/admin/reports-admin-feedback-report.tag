@@ -73,6 +73,8 @@
         this.feedbacks       = [];
         this.header          = [];
         this.is_grouped      = false;
+        this.source          = '';
+        this.source_id       = 0;
         var self             = this;
 
 
@@ -86,13 +88,18 @@
         });
 
         groupClick(ev) {
-            self.getReportBySource(1, ev.item.feedback_group.source, ev.item.feedback_group.source_id);
+            self.source = ev.item.feedback_group.source;
+            self.source_id = ev.item.feedback_group.source_id;
+            self.getReportBySource(1);
         }
 
         getReport(page) {
             $('body').ajax_loader();
             var term = $('#search-term').val();
             var group_by = $('#group-by').val();
+
+            self.source = '';
+            self.source_id = 0;
 
             $.getJSON('api/v1/summits/'+self.summit_id+'/reports/feedback_report',
                 {page:page, items: self.page_data.limit, term: term, group_by: group_by},
@@ -126,10 +133,10 @@
             });
         }
 
-        getReportBySource(page, source, id) {
+        getReportBySource(page) {
             $('body').ajax_loader();
 
-            $.getJSON('api/v1/summits/'+self.summit_id+'/reports/feedback_report/'+source+'/'+id,
+            $.getJSON('api/v1/summits/'+self.summit_id+'/reports/feedback_report/'+self.source+'/'+self.source_id,
                 {page:page, items: self.page_data.limit},
                 function(data){
                     self.feedbacks = data.data;
@@ -145,7 +152,7 @@
                         totalPages: total_pages,
                         numberOfPages: 10,
                         onPageChanged: function(e,oldPage,newPage){
-                            self.getReportBySource(newPage,source, id);
+                            self.getReportBySource(newPage);
                         }
                     }
 
@@ -163,6 +170,20 @@
 
         self.dispatcher.on(self.dispatcher.GET_FEEDBACK_REPORT,function() {
             self.getReport(1);
+        });
+
+        self.dispatcher.on(self.dispatcher.EXPORT_FEEDBACK_REPORT,function() {
+            var term = $('#search-term').val();
+            var group_by = $('#group-by').val();
+
+            var query_string = 'term='+term+'&group_by='+group_by;
+            var url          = 'api/v1/summits/'+self.summit_id+'/reports/export/feedback_report';
+
+            if (self.source && self.source_id) {
+                url += '/'+self.source+'/'+self.source_id;
+            }
+
+            window.open(url+'?'+query_string, '_blank');
         });
 
     </script>

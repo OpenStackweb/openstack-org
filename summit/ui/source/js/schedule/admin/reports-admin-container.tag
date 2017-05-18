@@ -155,6 +155,7 @@
                     break;
                 case 'feedback_report':
                     self.show_search = true;
+                    self.show_export = true;
                     break;
             }
         }

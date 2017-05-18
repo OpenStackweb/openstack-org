@@ -51,6 +51,11 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
     private $presentation_repository;
 
     /**
+     * @var IEntityRepository
+     */
+    private $feedback_repository;
+
+    /**
      * @var ISummitEventManager
      */
     private $summit_manager;
@@ -64,6 +69,7 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
         ISummitEventRepository $event_repository,
         IPresentationCategoryRepository $category_repository,
         ISummitPresentationRepository $presentation_repository,
+        ISummitEventFeedBack $feedback_repository,
         ISummitEventManager $summit_manager
     )
     {
@@ -75,6 +81,7 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
         $this->event_repository              = $event_repository;
         $this->category_repository           = $category_repository;
         $this->presentation_repository       = $presentation_repository;
+        $this->feedback_repository           = $feedback_repository;
         $this->summit_manager                = $summit_manager;
     }
 
@@ -107,6 +114,7 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
         'GET rsvp_report'                      => 'exportRsvpReport',
         'GET presentations_company_report'     => 'exportPresentationsCompanyReport',
         'GET presentations_by_track_report'    => 'exportPresentationsByTrackReport',
+        'GET feedback_report/$SOURCE/$ID'      => 'exportFeedbackReport',
     );
 
     static $allowed_actions = array(
@@ -119,6 +127,7 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
         'exportRsvpReport',
         'exportPresentationsCompanyReport',
         'exportPresentationsByTrackReport',
+        'exportFeedbackReport',
     );
 
     public function exportSpeakerReport(SS_HTTPRequest $request){
@@ -557,6 +566,55 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
 
             return $this->notFound();
 
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    public function exportFeedbackReport(SS_HTTPRequest $request){
+        try
+        {
+            $query_string = $request->getVars();
+            $sort         = (isset($query_string['sort'])) ? Convert::raw2sql($query_string['sort']) : 'rate';
+            $sort_dir     = (isset($query_string['sort_dir'])) ? Convert::raw2sql($query_string['sort_dir']) : 'DESC';
+            $search_term  = (isset($query_string['term'])) ? Convert::raw2sql($query_string['term']) : '';
+            $group_by     = (isset($query_string['group_by'])) ? Convert::raw2sql($query_string['group_by']) : 'feedback';
+
+            $source       = $request->param('SOURCE');
+            $item_id      = $request->param('ID');
+
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $summit       = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+            $ext = 'csv';
+
+            if ($group_by == 'feedback' || ($source && $item_id) ) {
+                $feedbacks = $this->feedback_repository->getBySourcePaged($summit_id,null,null,$sort,$sort_dir,$source,$item_id,$search_term);
+                if ($source && $item_id) {
+                    $filename = "feedback_report_".$source."_".$item_id."-" . date('Ymd') . "." . $ext;
+                } else {
+                    $filename = "feedback_report-" . date('Ymd') . "." . $ext;
+                }
+            } else {
+                $feedbacks = $this->feedback_repository->searchByTermGrouped($summit_id,null,null,$sort,$sort_dir,$search_term,$group_by);
+                foreach($feedbacks['data'] as &$feedback) {
+                    unset($feedback['source']);
+                    unset($feedback['source_id']);
+                }
+                $filename = "feedback_report_".$group_by."-" . date('Ymd') . "." . $ext;
+            }
+
+
+            $delimiter = ($ext == 'xls') ? "\t" : ",";
+            return CSVExporter::getInstance()->export($filename, $feedbacks['data'], $delimiter);
         }
         catch(NotFoundEntityException $ex2)
         {

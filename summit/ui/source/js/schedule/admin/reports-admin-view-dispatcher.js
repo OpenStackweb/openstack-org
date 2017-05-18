@@ -21,6 +21,7 @@ function ReportsAdminViewDispatcher() {
     this.EXPORT_TRACK_QUESTIONS_REPORT         = 'EXPORT_TRACK_QUESTIONS_REPORT';
     this.EXPORT_PRESENTATIONS_COMPANY_REPORT   = 'EXPORT_PRESENTATIONS_COMPANY_REPORT';
     this.EXPORT_PRESENTATIONS_BY_TRACK_REPORT  = 'EXPORT_PRESENTATIONS_BY_TRACK_REPORT';
+    this.EXPORT_FEEDBACK_REPORT                = 'EXPORT_FEEDBACK_REPORT';
 
     this.saveReport = function(report)
     {
@@ -91,6 +92,9 @@ function ReportsAdminViewDispatcher() {
                 break;
             case 'presentations_by_track_report' :
                 this.trigger(this.EXPORT_PRESENTATIONS_BY_TRACK_REPORT);
+                break;
+            case 'feedback_report' :
+                this.trigger(this.EXPORT_FEEDBACK_REPORT);
                 break;
         }
     }

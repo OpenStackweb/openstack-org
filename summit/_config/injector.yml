@@ -106,7 +106,8 @@ Injector:
       4: '%$EventRepository'
       5: '%$CategoryRepository'
       6: '%$PresentationRepository'
-      7: '%$SummitEventManager'
+      7: '%$EventFeedbackRepository'
+      8: '%$SummitEventManager'
   SummitAppEventsApi:
     constructor:
       0: '%$SummitRepository'

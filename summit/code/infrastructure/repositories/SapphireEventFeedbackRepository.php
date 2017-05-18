@@ -84,7 +84,6 @@ SQL;
 
         $query = <<<SQL
         SELECT
-        F.ID AS feedback_id,
         P.ID AS presentation_id,
         E.Title AS title,
         PC.Title AS track,
