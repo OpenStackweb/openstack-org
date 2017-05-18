@@ -47,6 +47,8 @@
     <reports-admin-track-questions-report if={ report == 'track_questions_report' } page_limit="{ limit }" summit_id="{ summit_id }" dispatcher="{ dispatcher }"></reports-admin-track-questions-report>
     <reports-admin-presentations-company-report if={ report == 'presentations_company_report' } page_limit="{ limit }" summit_id="{ summit_id }" dispatcher="{ dispatcher }"></reports-admin-presentations-company-report>
     <reports-admin-presentations-by-track-report if={ report == 'presentations_by_track_report' } page_limit="{ limit }" summit_id="{ summit_id }" tracks="{ tracks }" dispatcher="{ dispatcher }"></reports-admin-presentations-by-track-report>
+    <reports-admin-feedback-report if={ report == 'feedback_report' } page_limit="{ limit }" summit_id="{ summit_id }" dispatcher="{ dispatcher }"></reports-admin-feedback-report>
+
 
     <script>
         this.report             = opts.report;
@@ -150,6 +152,9 @@
                 case 'presentations_by_track_report':
                     self.show_search = true;
                     self.show_export = true;
+                    break;
+                case 'feedback_report':
+                    self.show_search = true;
                     break;
             }
         }

@@ -8,6 +8,7 @@ require('./reports-admin-rsvp-report.tag');
 require('./reports-admin-track-questions-report.tag');
 require('./reports-admin-presentations-company-report.tag');
 require('./reports-admin-presentations-by-track-report.tag');
+require('./reports-admin-feedback-report.tag');
 require('./reports-admin-container.tag');
 
 riot.mount('reports-admin-container',{ dispatcher: dispatcher });

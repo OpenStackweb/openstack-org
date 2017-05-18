@@ -15,4 +15,29 @@
 interface IEventFeedbackRepository extends IEntityRepository
 {
     public function getFeedback($event_id,$member_id);
+
+    /**
+     * @param int $summit_id
+     * @param int $page
+     * @param int $page_size
+     * @param string $sort
+     * @param string $sort_dir
+     * @param string $source
+     * @param int $id
+     * @param string $search_term
+     * @return ISummitEventFeedback[]
+     */
+    public function getBySourcePaged($summit_id,$page,$page_size,$sort,$sort_dir,$source,$id,$search_term);
+
+    /**
+     * @param int $summit_id
+     * @param int $page
+     * @param int $page_size
+     * @param string $sort
+     * @param string $sort_dir
+     * @param string $search_term
+     * @param string $group_by
+     * @return array()
+     */
+    public function searchByTermGrouped($summit_id,$page,$page_size,$sort,$sort_dir,$search_term,$group_by);
 }

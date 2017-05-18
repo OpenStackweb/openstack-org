@@ -24,6 +24,7 @@
                         <a href="$Top.Link/{$Summit.ID}/reports/presentations_company_report" class="list-group-item">Presentations by Company</a>
                         <a href="$Top.Link/{$Summit.ID}/reports/presentations_by_track_report" class="list-group-item">Presentations by Track</a>
                         <a href="$Top.Link/{$Summit.ID}/reports/track_questions_report" class="list-group-item">Track Questions Report</a>
+                        <a href="$Top.Link/{$Summit.ID}/reports/feedback_report" class="list-group-item">Feedback Report</a>
                     </div>
                 </div>
                 <div class="col-md-6">

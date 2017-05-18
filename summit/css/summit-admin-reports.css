@@ -46,3 +46,13 @@ th .fa {
     margin-left: 10px;
     cursor: pointer;
 }
+
+.group_by_filter {
+    float: right;
+    position: relative;
+    top: -53px;
+}
+
+.star-rating {
+    display: inline;
+}

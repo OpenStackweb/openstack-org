@@ -619,6 +619,10 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         Requirements::javascript('themes/openstack/javascript/jquery-ajax-loader.js');
         Requirements::javascript('summit/javascript/jquery.tabletoCSV.js');
 
+        //JS libraries for feedback form and list
+        Requirements::javascript('marketplace/code/ui/frontend/js/star-rating.min.js');
+        Requirements::css("marketplace/code/ui/frontend/css/star-rating.min.css");
+
         return $this->getViewer('reports')->process
             (
                 $this->customise

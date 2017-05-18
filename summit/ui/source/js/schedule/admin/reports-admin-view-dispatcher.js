@@ -9,6 +9,7 @@ function ReportsAdminViewDispatcher() {
     this.GET_TRACK_QUESTIONS_REPORT            = 'GET_TRACK_QUESTIONS_REPORT';
     this.GET_PRESENTATIONS_COMPANY_REPORT      = 'GET_PRESENTATIONS_COMPANY_REPORT';
     this.GET_PRESENTATIONS_BY_TRACK_REPORT     = 'GET_PRESENTATIONS_BY_TRACK_REPORT';
+    this.GET_FEEDBACK_REPORT                   = 'GET_FEEDBACK_REPORT';
     this.SAVE_SPEAKER_REPORT                   = 'SAVE_SPEAKER_REPORT';
     this.SAVE_ROOM_REPORT                      = 'SAVE_ROOM_REPORT';
     this.SAVE_VIDEO_REPORT                     = 'SAVE_VIDEO_REPORT';
@@ -60,6 +61,9 @@ function ReportsAdminViewDispatcher() {
                 break;
             case 'presentations_by_track_report' :
                 this.trigger(this.GET_PRESENTATIONS_BY_TRACK_REPORT);
+                break;
+            case 'feedback_report' :
+                this.trigger(this.GET_FEEDBACK_REPORT);
                 break;
         }
     }

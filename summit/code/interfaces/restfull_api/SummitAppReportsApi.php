@@ -51,6 +51,11 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
     private $presentation_repository;
 
     /**
+     * @var IEntityRepository
+     */
+    private $feedback_repository;
+
+    /**
      * @var ISummitEventManager
      */
     private $summit_manager;
@@ -64,6 +69,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
         ISummitEventRepository $event_repository,
         IPresentationCategoryRepository $category_repository,
         ISummitPresentationRepository $presentation_repository,
+        IEventFeedbackRepository $feedback_repository,
         ISummitEventManager $summit_manager
     )
     {
@@ -75,6 +81,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
         $this->event_repository              = $event_repository;
         $this->category_repository           = $category_repository;
         $this->presentation_repository       = $presentation_repository;
+        $this->feedback_repository           = $feedback_repository;
         $this->summit_manager                = $summit_manager;
     }
 
@@ -109,6 +116,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
         'GET track_questions_report'        => 'getTrackQuestionsReport',
         'GET presentations_company_report'  => 'getPresentationsCompanyReport',
         'GET presentations_by_track_report' => 'getPresentationsByTrackReport',
+        'GET feedback_report/$SOURCE/$ID'   => 'getFeedbackReport',
     );
 
     static $allowed_actions = array(
@@ -122,6 +130,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
         'getTrackQuestionsReport',
         'getPresentationsCompanyReport',
         'getPresentationsByTrackReport',
+        'getFeedbackReport',
     );
 
     public function handleExport(SS_HTTPRequest $request)
@@ -590,6 +599,47 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
             $presentations = $this->presentation_repository->searchByTrackPaged($summit_id,$page,$page_size,$sort,$sort_dir,$search_term,$filters);
 
             return $this->ok($presentations);
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    public function getFeedbackReport(SS_HTTPRequest $request){
+        try
+        {
+            $query_string = $request->getVars();
+            $page         = (isset($query_string['page'])) ? Convert::raw2sql($query_string['page']) : '';
+            $page_size    = (isset($query_string['items'])) ? Convert::raw2sql($query_string['items']) : '';
+            $sort         = (isset($query_string['sort'])) ? Convert::raw2sql($query_string['sort']) : 'rate';
+            $sort_dir     = (isset($query_string['sort_dir'])) ? Convert::raw2sql($query_string['sort_dir']) : 'DESC';
+            $search_term  = (isset($query_string['term'])) ? Convert::raw2sql($query_string['term']) : '';
+            $group_by     = (isset($query_string['group_by'])) ? Convert::raw2sql($query_string['group_by']) : 'feedback';
+
+            $source       = $request->param('SOURCE');
+            $item_id      = $request->param('ID');
+
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $summit       = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+
+            if ($group_by == 'feedback' || ($source && $item_id) ) {
+                $feedbacks = $this->feedback_repository->getBySourcePaged($summit_id,$page,$page_size,$sort,$sort_dir,$source,$item_id,$search_term);
+                $feedbacks['is_grouped'] = false;
+            } else {
+                $feedbacks = $this->feedback_repository->searchByTermGrouped($summit_id,$page,$page_size,$sort,$sort_dir,$search_term,$group_by);
+                $feedbacks['header'] = array('title' => 'Grouped by '. $group_by);
+                $feedbacks['is_grouped'] = true;
+            }
+
+            return $this->ok($feedbacks);
         }
         catch(NotFoundEntityException $ex2)
         {
