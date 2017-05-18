@@ -37,6 +37,9 @@ final class SummitHighlightsPage extends SummitPage
         'ReleaseAnnouncedButtonLink' => 'Text',
         'CurrentSummitFlickrUrl'      => 'Text',
         'StatisticsVideoUrl'          => 'Text',
+        'StatisticsVideoUrl2'         => 'Text',
+        'StatisticsVideoUrl3'         => 'Text',
+        'StatisticsVideoUrl4'         => 'Text',
     );
 
     private static $has_many = array
@@ -62,6 +65,60 @@ final class SummitHighlightsPage extends SummitPage
         if(!is_null($video) && $video->ID > 0)
             return $video->Link();
         return $this->getField('StatisticsVideoUrl');
+    }
+
+    public function getVideoUrls()
+    {
+        $video_urls = new ArrayList();
+        $url = 'https://www.youtube.com/embed/';
+        if ($this->StatisticsVideoUrl) {
+            $description = $this->getVideoDescription($this->StatisticsVideoUrl);
+            $video_urls->push(
+                new ArrayData([
+                    'Url' => $url.$this->StatisticsVideoUrl,
+                    'Description' => $description
+                ])
+            );
+        }
+        if ($this->StatisticsVideoUrl2) {
+            $description = $this->getVideoDescription($this->StatisticsVideoUrl2);
+            $video_urls->push(
+                new ArrayData([
+                    'Url' => $url.$this->StatisticsVideoUrl2,
+                    'Description' => $description
+                ])
+            );
+        }
+        if ($this->StatisticsVideoUrl3) {
+            $description = $this->getVideoDescription($this->StatisticsVideoUrl3);
+            $video_urls->push(
+                new ArrayData([
+                    'Url' => $url.$this->StatisticsVideoUrl3,
+                    'Description' => $description
+                ])
+            );
+        }
+        if ($this->StatisticsVideoUrl4) {
+            $description = $this->getVideoDescription($this->StatisticsVideoUrl4);
+            $video_urls->push(
+                new ArrayData([
+                    'Url' => $url.$this->StatisticsVideoUrl4,
+                    'Description' => $description
+                ])
+            );
+        }
+
+        return $video_urls;
+    }
+
+    function getVideoDescription($id) {
+        $videoTitle = file_get_contents("https://www.googleapis.com/youtube/v3/videos?id=".$id."&key=".OPENSTACK_YOUTUBE_API_KEY."&fields=items(id,snippet(title),snippet(description))&part=snippet");
+        if ($videoTitle) {
+            $json = json_decode($videoTitle, true);
+            return $json['items'][0]['snippet']['description'];
+        } else {
+            return false;
+        }
     }
 
     public function getSummitKeynoteHighlightAvailableDays()
@@ -97,7 +154,10 @@ final class SummitHighlightsPage extends SummitPage
         $f->addFieldToTab('Root.Statistics', new TextField('CompaniesRepresentedQty', 'Companies Represented Qty'));
         $f->addFieldToTab('Root.Statistics', new TextField('CountriesRepresentedQty', 'Countries Represented Qty'));
         $f->addFieldToTab('Root.Statistics', new TextField('SessionsQty', 'Sessions Qty'));
-        $f->addFieldToTab('Root.Statistics', new TextField('StatisticsVideoUrl', 'Video Url'));
+        $f->addFieldToTab('Root.Statistics', new TextField('StatisticsVideoUrl', 'Youtube ID'));
+        $f->addFieldToTab('Root.Statistics', new TextField('StatisticsVideoUrl2', 'Youtube ID'));
+        $f->addFieldToTab('Root.Statistics', new TextField('StatisticsVideoUrl3', 'Youtube ID'));
+        $f->addFieldToTab('Root.Statistics', new TextField('StatisticsVideoUrl4', 'Youtube ID'));
 
         $file = new UploadField('StatisticsVideo','Video');
         $file->setAllowedMaxFileNumber(1);
