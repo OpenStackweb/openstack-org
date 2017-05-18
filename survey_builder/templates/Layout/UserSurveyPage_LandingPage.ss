@@ -105,7 +105,7 @@
                           enctype="application/x-www-form-urlencoded">
                         <div class="Actions">
                             <input class="action" id="MemberLoginForm_LoginForm_action_dologin" type="submit"
-                                   name="action_dologin" value="Log in" title="Log in"/>
+                                   name="action_dologin" value="{$_T('survey_ui','Log In')}" title="{$_T('survey_ui','Log In')}">
                             <p id="ForgotPassword"><a href="Security/lostpassword">$_T("survey_ui", "I've lost my password")</a></p>
                         </div>
                     </form>
@@ -149,9 +149,8 @@
         </div>
     </div>
     <% end_if %>
-    <% if  $LoginPageContent %>
-     $LoginPageContent
-    <% end_if %>
+    <p>$_T("survey_ui", "This survey provides users an opportunity to influence the community and software direction. By sharing information about your configuration and requirements, the OpenStack Foundation User Committee will be able to advocate on your behalf.")</p>
+    <p><a href="/user-survey/faq" class="roundedButton">$_T("survey_ui", "More Information About The Survey")</a></p>
     <script>
         $(function () {
             var param = $('#fragment');

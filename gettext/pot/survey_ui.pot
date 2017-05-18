@@ -253,11 +253,11 @@ msgid "All of the information you provide is <strong>confidential</strong> to th
 msgstr ""
 
 
-#: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:132
+#: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:153
 msgid "This survey provides users an opportunity to influence the community and software direction. By sharing information about your configuration and requirements, the OpenStack Foundation User Committee will be able to advocate on your behalf."
 msgstr ""
 
-#: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:132
+#: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:156
 msgid "More Information About The Survey"
 msgstr ""
 
@@ -406,4 +406,36 @@ msgstr ""
 
 #: survey_builder/js/entity.survey.editor.team.field.js:100
 msgid "You must select a valid member!"
+msgstr ""
+
+#: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:43
+msgid "Read more from the ninth survey of OpenStack users since April 2013, with a goal of better understanding user perspectives, organizational profiles, use cases, and technology choices across the community’s deployments. This survey offers insights from more than 1,300 users, representing 44% more deployments and 22% more organizations than ever before."
+msgstr ""
+
+#: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:46
+msgid "Read the April 2017 report"
+msgstr ""
+
+#: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:56
+msgid "Watch a quick video overview"
+msgstr ""
+
+#: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:58
+msgid "April 2017 full report"
+msgstr ""
+
+#: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:59
+msgid "October 2016 highlights report"
+msgstr ""
+
+#: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:61
+msgid "April 2016 full report"
+msgstr ""
+
+#: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:84
+msgid "Order the User Survey as a printed book"
+msgstr ""
+
+#: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:86
+msgid "April 2017 full report (coming soon)"
 msgstr ""

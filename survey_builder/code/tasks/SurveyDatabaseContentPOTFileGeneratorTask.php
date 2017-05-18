@@ -93,6 +93,7 @@ POT_FILE_ENTRY_TPL;
                     switch($question->Type()){
                         case "ComboBox":
                         case "RadioButtonList":
+                        case "CheckBoxList":
                         case "SurveyRankingQuestionTemplate":
 
                             if(!empty($question->EmptyString)) {
@@ -102,6 +103,8 @@ POT_FILE_ENTRY_TPL;
                             if($question->DefaultValueID > 0) {
                                 self::addEntryToPOT($pot_file_dic, $pot_file_entries, addslashes($question->DefaultValue()->Label), sprintf("question %s default value", $question->Name));
                             }
+
+                            if($question->Type() == 'ComboBox' && $question->isCountrySelector()) continue;
 
                             foreach ($question->getValues() as $value){
                                 $key                = !empty($value->Label) ? addslashes($value->Label) : addslashes($value->Value);
@@ -113,7 +116,6 @@ POT_FILE_ENTRY_TPL;
                             }
 
                             break;
-
                         case "Literal":
                             self::addEntryToPOT($pot_file_dic, $pot_file_entries, addslashes($question->Content), sprintf("question %s literal content", $question->Name));
                             break;
