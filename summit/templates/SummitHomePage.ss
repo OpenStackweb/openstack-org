@@ -18,13 +18,13 @@
                     <h1>The Must Attend<br/>Open Infrastructure Event</h1>
                 </div>
                 <p>
-                    A four-day conference for IT business leaders, cloud operators and developers covering the open infrastructure landscape.
+                    A three-day conference for IT business leaders, cloud operators and developers covering the open infrastructure landscape.
                 </p>
                 <div class="summit-home-dates">
-                    May 8th -11th, 2017  |  Boston, MA
+                    November 6-8, 2017 in Sydney, Australia
                 </div>
                 <div class="landing-action">
-                    <a href="/summit/boston-2017/" class="btn register-btn-lrg">Join Us <i class="fa fa-chevron-right"></i></a>
+                    <a href="/summit/sydney-2017/" class="btn register-btn-lrg">Join Us <i class="fa fa-chevron-right"></i></a>
                 </div>
             </div>
         </div>
@@ -36,12 +36,12 @@
 
             <% with $PreviousSummit %>
             <div class="col-sm-3 small-single-summit">
-                <a href="/videos/summits/barcelona-2016" class="single-summit past-summit">
-                    <h2>Barcelona</h2>
+                <a href="/videos/summits/boston-2017" class="single-summit past-summit">
+                    <h2>Boston</h2>
                     <h4>Watch The Sessions!</h4>
                 </a>
                 <div class="single-summit-date past">
-                    October 2016
+                    May 2017
                     <div class="date-circle"></div>
                 </div>
             </div>
@@ -49,7 +49,7 @@
 
             <% with $CurrentSummit %>
             <div class="col-sm-3 small-single-summit">
-                <a href="/summit/boston-2017/" class="single-summit current-summit">
+                <a href="/summit/sydney-2017/" class="single-summit current-summit">
                     <h2>$Title</h2>
                     <div class="btn register-btn-lrg skinny">JOIN US</div>
                 </a>
@@ -59,16 +59,6 @@
                 </div>
             </div>
             <% end_with %>
-            <div class="col-sm-3 small-single-summit">
-                <a href="/summit/sydney-2017/" class="single-summit future-summit">
-                    <h2>Sydney</h2>
-                    <div class="btn register-btn-lrg skinny">JOIN US</div>
-                </a>
-                <div class="single-summit-date future">
-                    November 6-8, 2017
-                    <div class="date-circle"></div>
-                </div>
-            </div>
             <div class="col-sm-3 small-single-summit">
                 <a href="/summit/vancouver-2018/" class="single-summit future-summit2">
                     <h2>Vancouver</h2>
