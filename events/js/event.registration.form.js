@@ -18,6 +18,16 @@ jQuery(document).ready(function($) {
     var live_form_validator = null;
 
     if(form.length > 0){
+        $.validator.addMethod("complete_url", function(val, elem) {
+            if (val.length == 0) { return false; }
+            // if user has not entered http:// https:// or ftp:// assume they mean http://
+            if(!/^(https?|ftp):\/\//i.test(val)) {
+                val = 'http://'+val; // set both the value
+                $(elem).val(val); // also update the form element
+            }
+            // now check if valid url
+            return /^(https?|ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&amp;'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&amp;'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&amp;'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&amp;'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&amp;'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i.test(val);
+        });
 
         //main form validation
         form_validator = form.validate({
@@ -27,7 +37,7 @@ jQuery(document).ready(function($) {
                 point_of_contact_name    : { required: true , ValidPlainText:true, maxlength: 100 },
                 point_of_contact_email   : { required: true , email:true, maxlength: 100 },
                 title      : { required: true , ValidPlainText:true, maxlength: 35 },
-                url        : {required: true, url: true, maxlength: 255},
+                url        : {required: true, complete_url: true, maxlength: 255},
                 category   : {required: true},
                 city       : {required: true, ValidPlainText: true, maxlength: 255},
                 country    : {required: true},
@@ -44,8 +54,8 @@ jQuery(document).ready(function($) {
                 }
 
                 $('html, body').animate({
-                    scrollTop: element.offset().top
-                }, 2000);
+                    scrollTop: element.offset().top - 100
+                }, 1000);
             },
             errorPlacement: function(error, element) {
                 if(!element.is(":visible")){

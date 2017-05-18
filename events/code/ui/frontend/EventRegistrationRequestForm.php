@@ -51,8 +51,6 @@ final class EventRegistrationRequestForm extends SafeXSSForm {
 		//duration
 		$fields->push($start_date = new TextField('start_date','Start Date'));
 		$fields->push($end_date   = new TextField('end_date','End Date'));
-		$start_date->addExtraClass('date');
-		$end_date->addExtraClass('date');
 
 		// Guard against automated spam registrations by optionally adding a field
 		// that is supposed to stay blank (and is hidden from most humans).
