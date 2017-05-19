@@ -30,7 +30,7 @@ class SurveyDynamicEntityStepTemplateUIBuilder
 
         $content = $step->template()->content();
         if(!empty($content))
-            $fields->add(new LiteralField('content', $content));
+            $fields->add(new LiteralField('content',  GetTextTemplateHelpers::_t("survey_template", $content)));
 
         $validator = null;
 

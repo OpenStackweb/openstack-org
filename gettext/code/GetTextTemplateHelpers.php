@@ -51,6 +51,8 @@ class GetTextTemplateHelpers implements TemplateGlobalProvider
         if(empty($msgid)) return "";
 
         $msgid    = str_replace("\r\n", '', $msgid);
+        $msgid    = str_replace("\n", '', $msgid);
+        $msgid    = str_replace("\t", '', $msgid);
         $msgid    = str_replace('\"', '"', $msgid);
 
         $t        = new GettextTranslator();
