@@ -36,6 +36,7 @@ class GetTextTemplateHelpers implements TemplateGlobalProvider
             case "ja_JP": return "ja_JP.utf8";
             case "ko_KR": return "ko_KR.utf8";
             case "en_US": return "en_US.utf8";
+            case "id_ID": return "id_ID.utf8";
             default:
                 return $locale;
         }

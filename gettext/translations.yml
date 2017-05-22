@@ -5,3 +5,12 @@ zh_TW:
 es_ES:
   - survey_template
   - survey_ui
+ko_KR:
+  - survey_template
+  - survey_ui
+zh_CN:
+  - survey_template
+  - survey_ui
+id_ID:
+  - survey_template
+  - survey_ui

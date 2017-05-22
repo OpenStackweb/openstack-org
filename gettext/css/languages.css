@@ -24,17 +24,20 @@
 .lang-lbl-full[lang=ko_KR]:after { content: "\00D55C\00AD6D\00C5B4\0000A0/\0000A0Korean"; }
 .lang-lbl-full[lang=zh_CN]:after { content: "简体中文\0000A0/\0000A0Chinese"; }
 .lang-lbl-full[lang=zh_TW]:after { content: "繁體中文\0000A0/\0000A0Chinese"; }
+.lang-lbl-full[lang=id_ID]:after { content: "Bahasa\000020indonesia\0000A0/\0000A0Indonesian"; }
 
 .lang-item {
     min-height: 40px;
 }
 
-.lang-item>a{
+.lang-item > a{
     min-height: 40px;
+    padding-right: 5px !important;
+    padding-left: 5px !important;
 }
 
 .lang-dropdown-menu{
-    min-width: 225px;
+    min-width: 265px;
 }
 
 .lang-dropdown>button{

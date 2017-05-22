@@ -1,5 +1,5 @@
-# Ching Kuo <gene@openstack.org>, 2017. #zanata
-# Tom Fifield <tom@openstack.org>, 2017. #zanata
+# Ian Y. Choi <ianyrchoi@gmail.com>, 2017. #zanata
+# Sungjin Kang <gang.sungjin@gmail.com>, 2017. #zanata
 msgid ""
 msgstr ""
 "Project-Id-Version: openstack-user-survey\n"
@@ -7,137 +7,137 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2017-05-19 04:09+0000\n"
-"Last-Translator: Ching Kuo <gene@openstack.org>\n"
-"Language-Team: Chinese (Taiwan)\n"
-"Language: zh-TW\n"
+"PO-Revision-Date: 2017-05-14 08:36+0000\n"
+"Last-Translator: Ian Y. Choi <ianyrchoi@gmail.com>\n"
+"Language-Team: Korean (South Korea)\n"
+"Language: ko-KR\n"
 "X-Generator: Zanata 3.9.6\n"
 "Plural-Forms: nplurals=1; plural=0\n"
 
 #: survey_builder/templates/Layout/Includes/EntitySurvey_TeamModal.ss:6
 msgid "Add team member to this deployment"
-msgstr "添加團隊成員到此部署"
+msgstr "팀 구성원을 해당 배포에 추가합니다"
 
 #: survey_builder/templates/Layout/Includes/EntitySurvey_TeamModal.ss:9
 msgid "Search by name"
-msgstr "透過名字搜尋"
+msgstr "이름으로 찾기"
 
 #: survey_builder/templates/Layout/Includes/EntitySurvey_TeamModal.ss:11
 msgid "Find your team member on our database"
-msgstr "在我們的資料庫中搜尋你的成員"
+msgstr "팀 구성원을 데이터베이스에서 검색합니다"
 
 #: survey_builder/templates/Layout/Includes/EntitySurvey_TeamModal.ss:13
 msgid "Add"
-msgstr "加入"
+msgstr "추가"
 
 #: survey_builder/templates/Layout/Includes/EntitySurvey_TeamModal.ss:24
 #:  survey_builder/templates/EntitySurveyEditorTeamField.ss:20
 msgid "Delete"
-msgstr "刪除"
+msgstr "삭제"
 
 #: survey_builder/templates/Layout/Includes/EntitySurvey_TeamModal.ss:34
 msgid "Done"
-msgstr "完成"
+msgstr "완료"
 
 #: survey_builder/templates/Layout/Includes/EntityRegularStepForm.ss:5
 msgid "Your Deployments"
-msgstr "你的部署"
+msgstr "당신의 배포"
 
 #: survey_builder/templates/Layout/Includes/EntityRegularStepForm.ss:5
 #, php-format
 msgid "Part %s of %s"
-msgstr "Part %s of %s"
+msgstr "%s 부분 (%s 중)"
 
 #: survey_builder/templates/Layout/Includes/EntityRegularStepForm.ss:10
 msgid "Created by"
-msgstr "創建者"
+msgstr "생성자:"
 
 #: survey_builder/templates/Layout/Includes/EntityRegularStepForm.ss:11
 msgid "Edited by"
-msgstr "編輯者"
+msgstr "편집자:"
 
 #: survey_builder/templates/Layout/Includes/EntityRegularStepForm.ss:12
 msgid "Add another team member"
-msgstr "添加另一位團隊成員"
+msgstr "다른 구성원을 추가합니다"
 
 #: survey_builder/templates/Layout/Includes/Surveys_SaveLaterModal.ss:7
 msgid "Save & Come Back Later"
-msgstr "保存 & 稍後回來"
+msgstr "저장 & 나중에 돌아오기"
 
 #: survey_builder/templates/Layout/Includes/Surveys_SaveLaterModal.ss:10
 msgid ""
 "Your progress has been saved! Come back by going to the url below. "
 "<strong>See you soon!</strong>"
-msgstr "你的進度已經保存! 使用以下連結回來繼續. <strong>待會兒見!</strong>"
+msgstr "진행 사항을 저장하였습니다! 아래 url로 다시 돌아와 계속 해 주세요. <strong>다시 뵙겠습니다!</strong>"
 
 #: survey_builder/templates/Layout/Includes/Surveys_SaveLaterModal.ss:15
 msgid "COPY URL"
-msgstr "複製連結"
+msgstr "COPY URL"
 
 #: survey_builder/templates/Layout/Includes/ThankYouStepForm.ss:6
 msgid "Create A Password For Return Visits"
-msgstr "創建一個回來時用的密碼"
+msgstr ""
 
 #: survey_builder/templates/Layout/Includes/ThankYouStepForm.ss:7
 msgid ""
 "If you'd like to be able to return and update this information in the "
 "future, you may choose a password below."
-msgstr "如果你希望今後回來更新此訊息, 您可以在下面選擇一個密碼."
+msgstr ""
 
 #: survey_builder/templates/EntitySurveyEditorTeamField.ss:5
 msgid "Find your team member in our database"
-msgstr "從我們的資料庫搜尋你的成員"
+msgstr ""
 
 #: survey_builder/templates/EntitySurveyEditorTeamField.ss:9
 msgid "+ Add Team Member"
-msgstr "+添加成員"
+msgstr ""
 
 #: survey_builder/templates/EntitySurveyEditorTeamField.ss:19
 #:  survey_builder/code/ui/frontend/forms/SurveyRegistrationForm.php:30
 msgid "First Name"
-msgstr "名"
+msgstr "이름 (名)"
 
 #: survey_builder/code/ui/frontend/forms/SurveyRegistrationForm.php:32
 msgid "Email"
-msgstr "電子郵件"
+msgstr "이메일"
 
 #: survey_builder/code/ui/frontend/forms/SurveyRegistrationForm.php:34
 msgid "Password"
-msgstr "密碼"
+msgstr "암호"
 
 #: survey_builder/templates/EntitySurveyEditorTeamField.ss:20
 #:  survey_builder/code/ui/frontend/forms/SurveyRegistrationForm.php:31
 msgid "Last Name"
-msgstr "姓"
+msgstr "이름 (姓)"
 
 #: survey_builder/templates/SurveyCheckboxSetField.ss:14
 #:  survey_builder/templates/SurveyRankingField.ss:16
 msgid "No options available"
-msgstr "沒有這個選項"
+msgstr "사용 가능한 옵션이 없습니다"
 
 #: survey_builder/templates/SurveyRankingField.ss:2
 #, php-format
 msgid "Please rank up to %s"
-msgstr "請排序至 %s"
+msgstr ""
 
 #: survey_builder/templates/SurveyRankingField.ss:4
 msgid "Click your options to rank them. Select at least one."
-msgstr "選擇選項排序。選擇至少一項"
+msgstr ""
 
 #: survey_builder/templates/SurveyRankingField.ss:4
 msgid "clear all"
-msgstr "清除全部"
+msgstr "초기화"
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:26
 #:  survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:59
 msgid "See the results from the latest User Survey"
-msgstr "查看最新的使用者調查結果"
+msgstr "지난 사용자 설문에서 결과 살펴보기"
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:39
 msgid ""
 "OpenStack users share their opinions and deployment choices to inform the "
 "roadmap"
-msgstr "OpenStack 使用者分享他們的意見和部署選擇來影像路線圖"
+msgstr "OpenStack 사용자는 로드맵을 알리기 위해 의견 및 선택한 배포 사항을 공유합니다"
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:45
 msgid ""
@@ -146,77 +146,76 @@ msgid ""
 "and technology choices across the community’s various deployment stages and "
 "sizes."
 msgstr ""
-"從在2013四月以來的第6次OpenStack使用者調查中閱讀更多內容。以便根據各種部署階段及規模，更好的了解社群的態度、組織結構、使用案例和技術選擇"
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:50
 msgid "Download the report"
-msgstr "下載報告"
+msgstr "보고서 다운로드"
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:56
 #:  survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:98
 msgid "See prior surveys"
-msgstr "查看以前的調查"
+msgstr "이전 설문 보기"
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:62
 #:  survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:100
 msgid ""
 "Learn more about past User Survey data to see how OpenStack is growing and "
 "maturing."
-msgstr "暸解有關過去使用者調查資料的更多訊息，以暸解OpenStack如何成長和成熟"
+msgstr ""
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:67
 #:  survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:107
 msgid "May 2015 Demographics"
-msgstr "2015年5月人口統計"
+msgstr "2015년 5월 데모그래픽"
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:70
 #:  survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:110
 msgid "May 2015 Business drivers"
-msgstr "2015年5月業務推動"
+msgstr "2015년 5월 비즈니스 추진 요인"
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:73
 #:  survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:114
 msgid "May 2015 Deployments"
-msgstr "2015年5月部署"
+msgstr "2015년 5월 배포"
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:75
 #:  survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:115
 msgid "November 2014 Full report"
-msgstr "2014年11月完整報告"
+msgstr "2014년 11월 전체 보고서"
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:104
 msgid "Get Started"
-msgstr "開始吧"
+msgstr "시작하기"
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:107
 #:  survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:26
 msgid "Already have an OpenStack Foundation login?"
-msgstr "已經有一個OpenStack基金會帳號？"
+msgstr "이미 OpenStack Foundation 로그인 계정이 있습니까?"
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:115
 #:  survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:30
 msgid "Log In"
-msgstr "登入"
+msgstr "로그인"
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:115
 #:  survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:33
 msgid "I've lost my password"
-msgstr "忘記密碼"
+msgstr "암호를 잊어버렸습니다"
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:121
 #:  survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:39
 msgid "Don't have a login? Start here."
-msgstr "沒有帳號嗎？從這裡開始。"
+msgstr "로그인이 없습니까? 여기서 시작합니다."
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:48
 #:  survey_builder/code/ui/frontend/forms/SurveyRegistrationForm.php:37
 msgid "Start Survey!"
-msgstr "開始使用者調查問卷"
+msgstr "설문을 시작합니다!"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:72
 msgid ""
 "See the OpenStack community’s opinions, adoption and technology choices"
-msgstr "查看OpenStack社群的意見、採納和技術選擇"
+msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:74
 msgid ""
@@ -227,19 +226,18 @@ msgid ""
 "selection of charts most widely used by the community, and focuses only on "
 "deployments."
 msgstr ""
-"從字2013年4月開始的第八次OpenStack使用者調查閱讀更多內容，以便根據部署階段和規模更好地瞭解社群的態度、組織結構、使用案例和技術選擇。此輪調查僅提供重點，包跨挑選社群應用最廣泛的圖表，僅聚焦於部署方面。"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:77
 msgid "Download the October 2016 highlights report"
-msgstr "下載2016十月的重點報告"
+msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:78
 msgid "Download the full April 2016 Report"
-msgstr "下載2016四月的完整報告"
+msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:80
 msgid "Be your own data scientist"
-msgstr "成為自己的資料科學家"
+msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:82
 #, php-format
@@ -248,51 +246,51 @@ msgid ""
 "year with a <a href=\"%s\">new analysis tool</a> available to the OpenStack "
 "community. Apply multiple filters to virtually every quantitative question "
 "from the user survey."
-msgstr "用社群提供<a href=\"%s\">新的分析工具</a>從去年的使用者調查中發現更多。對使用者調查中的每個定量問題套用多個過濾器。"
+msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:88
 msgid "Survey Assets"
-msgstr "調查資產"
+msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:91
 msgid "See a video overview of the October 2016 report"
-msgstr "觀看2016十月報告的影片概述"
+msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:92
 msgid "Slide deck of the October 2016 highlights report"
-msgstr "2016十月重點報告投影片"
+msgstr "2016년 10월 핵심 보고서에 대한 슬라이드"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:93
 msgid "Order a print copy of the April 2016 full report"
-msgstr "訂購2016四月的完整紙本報告"
+msgstr "2016년 4월 전체 보고서에 대한 출력본 주문"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:94
 msgid "Video overview of the April 2016 full report"
-msgstr "2016四月完整報告的影片概述"
+msgstr "2016년 4월 전체 보고서에 대한 개요 (비디오)"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:95
 msgid "Slide deck of the April 2016 full report"
-msgstr "2016四月完整報告的投影片"
+msgstr "2016년 4월 전체 보고서에 대한 슬라이드"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:104
 msgid "October 2015 Full report"
-msgstr "2015十月完整報告"
+msgstr "2015년 10월 전체 보고서"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:126
 msgid ""
 "This is the <strong>OpenStack User Survey</strong> for OpenStack cloud users "
 "and operators."
-msgstr "這是面向OpenStack Cloud使用者和維運人員的<strong>OpenStack 使用者調查</strong>。"
+msgstr "OpenStack 클라우드 사용자 및 운영자를 위한 <strong>OpenStack 사용자 설문</strong> 입니다."
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:132
 msgid "It should only take <strong>10 minutes</strong> to complete."
-msgstr "僅需要 <strong>10 分鐘</strong> 就可以完成。"
+msgstr "(설문을) 완료하는데에는 <strong>10분</strong> 정도만 소요될 것입니다."
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:138
 msgid ""
 "All of the information you provide is <strong>confidential</strong> to the "
 "Foundation (unless you specify otherwise)."
-msgstr "對基金會而言，您提供的所有資料 <strong>都是機密</strong> (除非您另行註明)."
+msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:153
 msgid ""
@@ -301,167 +299,168 @@ msgid ""
 "requirements, the OpenStack Foundation User Committee will be able to "
 "advocate on your behalf."
 msgstr ""
-"這個調查提供使用者一個能夠影響社群和軟體開發方向的機會。透過分享你的設定跟要求的相關資訊，OpenStack基金會和用戶委員會能夠代表你的主張。"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:156
 msgid "More Information About The Survey"
-msgstr "有關調查的更多訊息"
+msgstr ""
 
 #: survey_builder/templates/Layout/Includes/DynamicEntityStepForm.ss:16
 #, php-format
 msgid ""
 "If you do not wish to answer these questions, you may <a href=\"%s\">skip to "
 "the next section.</a>"
-msgstr "如果你不願意回答這些問題，你可以<a href=\"%s\">跳過掉下一階段。</a>"
+msgstr ""
 
 #: survey_builder/templates/Layout/Includes/DynamicEntityStepForm.ss:18
 #, php-format
 msgid "Your deployments (%s)"
-msgstr "你的部屬 (%s)"
+msgstr ""
 
 #: survey_builder/templates/Layout/Includes/DynamicEntityStepForm.ss:21
 #, php-format
 msgid ""
 "You do not have any OpenStack deployment yet. <a href=\"%s\">Want to add "
 "one?</a>"
-msgstr "你目前沒有任何OpenStack部署。<a href=\"%s\">想要新增一個？</a>"
+msgstr ""
 
 #: survey_builder/templates/Layout/Includes/ReviewStepForm.ss:10
 msgid ""
 "Review your completed sections and Submit Your Survey when ready. Thank you "
 "for helping create a better OpenStack!"
-msgstr "準備好後，查看完成的部分並提交。感謝您幫忙創造一個更好的OpenStack"
+msgstr ""
 
 #: survey_builder/templates/Layout/Includes/ReviewStepForm.ss:22
 msgid "Edit"
-msgstr "編輯"
+msgstr "편집"
 
 #: survey_builder/templates/Layout/Includes/ReviewStepForm.ss:24
 msgid "Start"
-msgstr "開始"
+msgstr "시작하기"
 
 #: survey_builder/code/ui/frontend/forms/SurveyRegistrationForm.php:88
 msgid "There was an error with your request, please contact your admin."
-msgstr "你的請求出現錯誤，請與管理員聯繫"
+msgstr "요청에 오류가 있습니다, 관리자에게 문의하십시오."
 
 #: survey_builder/code/ui/frontend/forms/fields/SurveyOrganizationField.php:55
 msgid "-- New One --"
-msgstr "-- 新建 --"
+msgstr "-- 새로운 항목 --"
 
 #: survey_builder/code/ui/frontend/forms/fields/SurveyOrganizationField.php:57
 msgid "-- Select Your Organization --"
-msgstr "-- 選擇你的組織機構 --"
+msgstr "-- 회사 (조직)을 선택합니다 --"
 
 #: survey_builder/code/ui/frontend/builders/SurveyRegularStepTemplateUIBuilder.php:57
 #, php-format
 msgid ""
 "<p><strong>If you do not wish to answer these questions, you may <a href="
 "\"%s\">skip to the next section</a>.</strong></p>"
-msgstr "<p><strong>如果你不願意回答這些問題，你可以<a href=\"%s\">跳過掉下一階段</a>。</strong></p>"
+msgstr ""
+"<p><strong>해당 질문에 답변을 하고 싶지 않은 경우에는, <a href=\"%s\">다음 섹션으로 넘어가기</a> 를 할 수 "
+"있습니다.</strong></p>"
 
 #: survey_builder/code/ui/frontend/builders/SurveyReviewStepTemplateUIBuilder.php:23
 msgid "Submit Your Survey"
-msgstr "提交你的調查"
+msgstr "설문 제출하기"
 
 #: survey_builder/code/ui/frontend/builders/SurveyAbstractStepTemplateUIBuilder.php:24
 msgid "Save &amp; Continue"
-msgstr "保存 &amp; 繼續"
+msgstr "저장 &amp; 계속 진행"
 
 #: survey_builder/code/ui/frontend/builders/SurveyAbstractStepTemplateUIBuilder.php:57
 msgid "Save &amp; Come Back Later"
-msgstr "保存 &amp; 稍後回來"
+msgstr "저장 &amp; 나중에 다시 돌아오기"
 
 #: survey_builder/code/ui/frontend/builders/SurveyAbstractStepTemplateUIBuilder.php:65
 #:  survey_builder/code/ui/frontend/builders/SurveyAbstractStepTemplateUIBuilder.php:66
 msgid "Go Back"
-msgstr "返回"
+msgstr "이전으로 복귀"
 
 #: survey_builder/code/ui/frontend/builders/EntitySurveyRegularStepTemplateUIBuilder.php:27
 #, php-format
 msgid "STEP %s"
-msgstr "第 %s 步"
+msgstr "단계 %s"
 
 #: survey_builder/code/ui/frontend/builders/fields/SurveyRadioButtonMatrixTemplateQuestionUIBuilder.php:34
 #:  survey_builder/code/ui/frontend/builders/fields/SurveyRankingQuestionTemplateUIBuilder.php:37
 #, php-format
 msgid "you must select at least one item (%s)"
-msgstr "你必須選擇至少一項 (%s)"
+msgstr "적어도 하나의 항목 (%s) 을 선택해야 합니다"
 
 #: survey_builder/code/ui/frontend/SurveyPage.php:411
 msgid "Thank you for your submission !!!"
-msgstr "感謝您提交！！！"
+msgstr "제출해 주셔서 감사합니다 !!!"
 
 #: survey_builder/templates/Layout/Includes/Surveys_Header.ss:3
 msgid "Step <strong>%s of %s</strong> for <strong>%s</strong>"
-msgstr "步驟 <strong>%s of %s</strong> for <strong>%s</strong>"
+msgstr "단계 <strong>%s (%s 중)</strong> 주제: <strong>%s</strong>"
 
 #: survey_builder/js/survey.controller.js:55
 msgid "This field is required."
-msgstr "這欄位是必填"
+msgstr "해당 항목은 필수입니다."
 
 #: survey_builder/js/survey.controller.js:56
 msgid "Please fix this field."
-msgstr "請修正這欄位"
+msgstr "해당 항목을 수정해 주세요."
 
 #: survey_builder/js/survey.controller.js:57
 msgid "Please enter a valid email address."
-msgstr "請輸入一個有效的信箱地址"
+msgstr "유효한 이메일 주소를 입력합니다."
 
 #: survey_builder/js/survey.controller.js:58
 msgid "Please enter a valid URL."
-msgstr "請輸入一個有效的連結"
+msgstr "유효한 URL을 입력합니다."
 
 #: survey_builder/js/survey.controller.js:59
 msgid "Please enter a valid date."
-msgstr "請輸入一個有效的日期"
+msgstr "유효한 일자를 입력합니다."
 
 #: survey_builder/js/survey.controller.js:61
 msgid "Please enter a valid number."
-msgstr "請輸入一個有效的數字"
+msgstr "유효한 숫자를 입력합니다."
 
 #: survey_builder/js/survey.controller.js:62
 msgid "Please enter only digits."
-msgstr "請僅輸入數字"
+msgstr "숫자만을 입력합니다."
 
 #: survey_builder/js/survey.controller.js:63
 msgid "Please enter the same value again."
-msgstr "請再次填寫相同的內容"
+msgstr "동일한 값을 다시 입력해 주세요."
 
 #: survey_builder/js/survey.controller.js:64
 msgid "Please enter no more than {0} characters."
-msgstr "請不要輸入超過 {0} 字"
+msgstr "{0} 글자 이하로 입력해 주세요."
 
 #: survey_builder/js/survey.controller.js:65
 msgid "Please enter at least {0} characters."
-msgstr "請輸入至少 {0} 字"
+msgstr "최소 {0} 글자로 입력해 주세요."
 
 #: survey_builder/js/survey.controller.js:66
 msgid "Please enter a value between {0} and {1} characters long."
-msgstr "請輸入一個 {0} 跟 {1} 之間的字數的內容"
+msgstr "{0} 에서 {1} 문자 길이로 값을 입력합니다."
 
 #: survey_builder/js/survey.controller.js:67
 msgid "Please enter a value between {0} and {1}."
-msgstr "請輸入一個 {0} 跟 {1} 之間的值"
+msgstr "{0} 에서 {1} 사이 값을 입력합니다."
 
 #: survey_builder/js/survey.controller.js:68
 msgid "Please enter a value less than or equal to {0}."
-msgstr "請輸入一個 {0} 以下的值"
+msgstr "{0} 이하 값을 입력합니다."
 
 #: survey_builder/js/survey.controller.js:69
 msgid "Please enter a value greater than or equal to {0}."
-msgstr "請輸入一個 {0} 以上的值"
+msgstr "{0} 이상 값을 입력합니다."
 
 #: survey_builder/js/survey.controller.js:100
 msgid "Are you sure?"
-msgstr "你確定嗎？"
+msgstr "정말로 진행하시겠습니까?"
 
 #: survey_builder/js/survey.organization.field.js:31
 msgid "You Must Specify a New Organization Name!."
-msgstr "你必須指定一個新的組織機構名稱"
+msgstr "새로운 회사 이름을 지정해야 합니다!."
 
 #: survey_builder/js/entity.survey.editor.team.field.js:100
 msgid "You must select a valid member!"
-msgstr "你必須選擇一個有效的成員"
+msgstr "유효한 숫자를 선택해 주세요!"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:43
 msgid ""
@@ -471,33 +470,32 @@ msgid ""
 "survey offers insights from more than 1,300 users, representing 44% more "
 "deployments and 22% more organizations than ever before."
 msgstr ""
-"從在2013四月以來的第9次OpenStack使用者調查中閱讀更多內容。以便根據各種部署階段及規模，更好的了解社群的態度、組織機構、使用案例和技術選擇。這次的使用者調查有從超過1300位用戶的見解，並且比之前增加44%的部署和22%的組織機構。"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:46
 msgid "Read the April 2017 report"
-msgstr "閱讀2017四月的報告"
+msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:56
 msgid "Watch a quick video overview"
-msgstr "觀看簡短的影片概述"
+msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:58
 msgid "April 2017 full report"
-msgstr "2017四月的完整報告"
+msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:59
 msgid "October 2016 highlights report"
-msgstr "2016十月的重點報告"
+msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:61
 msgid "April 2016 full report"
-msgstr "2016四月完整報告"
+msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:84
 msgid "Order the User Survey as a printed book"
-msgstr "購買紙本列印的使用者調查報告"
+msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:86
 msgid "April 2017 full report (coming soon)"
-msgstr "2017四月的完整報告（即將公佈）"
+msgstr ""
 
