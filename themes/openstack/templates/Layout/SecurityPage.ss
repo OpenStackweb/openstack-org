@@ -260,7 +260,7 @@
                         <p>&nbsp;</p>
 
                         <div class="nfv-summit-register-btn">
-                            <a href="/summit/boston-2017/" class="nfv-summit-btn" target="_blank">Learn More <i class="fa fa-chevron-right"></i></a>
+                            <a href="/videos/boston-2017/tracks/security" class="nfv-summit-btn" target="_blank">Learn More <i class="fa fa-chevron-right"></i></a>
                         </div>
                     </div>
                     <!-- <div class="col-sm-4">

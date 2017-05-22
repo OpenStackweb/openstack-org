@@ -340,7 +340,7 @@
                     </p>
                     <p>&nbsp;</p>
 
-                    <div class="containers-summit-register-btn">
+                    <div class="nfv-summit-register-btn">
                         <a href="/videos/boston-2017/tracks/cloud-app-development" class="nfv-summit-btn" target="_blank">Watch the Session Videos <i class="fa fa-chevron-right"></i></a>
                     </div>
                 </div>
