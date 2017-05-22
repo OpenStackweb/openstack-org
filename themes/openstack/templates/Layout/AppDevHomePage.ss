@@ -336,12 +336,12 @@
                 <div class="col-sm-12">
                     <h3>Around 50% of OpenStack users are running CaaS/PaaS on OpenStack</h3>
                     <p>
-                        Want to build a strategy around containers and OpenStack? Check out sessions from OpenStack users eBay, AT&T, Yahoo! Japan and learn more about the Kubernetes roadmap from Google’s David Aronchick. Plus, hear project updates from OpenStack Magnum, Kuryr, Kolla, Murano and more.
+                        A large community of application developers and ecosystem of container management and PaaS tools has grown around OpenStack. At the Boston Summit, there were workshops and sessions for users who are building and deploying applications on OpenStack clouds, and cover topics like automating and managing application deployment, SDKs, tools, PaaS and big data. 
                     </p>
                     <p>&nbsp;</p>
 
                     <div class="containers-summit-register-btn">
-                        <a href="/videos/boston-2017/tracks/cloud-app-development" class="nfv-summit-btn" target="_blank">Learn More <i class="fa fa-chevron-right"></i></a>
+                        <a href="/videos/boston-2017/tracks/cloud-app-development" class="nfv-summit-btn" target="_blank">Watch the Session Videos <i class="fa fa-chevron-right"></i></a>
                     </div>
                 </div>
                 <!-- <div class="col-sm-4">
