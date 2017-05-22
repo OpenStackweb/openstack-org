@@ -1617,11 +1617,10 @@ img.global-figures-chart {
     color: white;
 }
 .summit-promo .nfv-summit-register-btn a {
-    display: block;
     text-align: center;
-    max-width: 80%;
+    min-width: 200px;
     margin: 10px auto;
-    background: #DA422F;
+    background: #30739C;
     color: white;
     padding: 10px 20px;
     border-radius: 4px; 
@@ -1656,14 +1655,13 @@ img.global-figures-chart {
   display: block;
   font-weight: 700; }
 .summit-promo.containers .containers-summit-right .containers-summit-register-btn a {
-  display: block;
-  text-align: center;
-  max-width: 80%;
-  margin: 10px auto;
-  background: #DA422F;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 4px; }
+    text-align: center;
+    min-width: 200px;
+    margin: 10px auto;
+    background: #30739C;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;  }
 .summit-promo.containers .containers-summit-right .containers-summit-register-btn a i {
   margin-left: 5px; }
 .summit-promo.containers .containers-summit-right .containers-summit-register-btn a:hover {

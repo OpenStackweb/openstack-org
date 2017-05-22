@@ -287,13 +287,16 @@
     <div class="summit-promo containers">
         <div class="container">
             <div class="row">
-                <div class="col-sm-8">
-                    <h3>More OpenStack + containers content at OpenStack Summit Boston</h3>
-                    <p>
-                        Want to build a strategy around containers and OpenStack? Join the must-attend open infrastructure event, May 8-11 to hear from users <strong>eBay</strong>, <strong>AT&T</strong>, <strong>Yahoo! Japan</strong> and learn more about the Kubernetes roadmap from Google’s David Aronchick. Plus, hear project updates from OpenStack Magnum, Kuryr, Kolla, Murano and more.  
+                <div class="col-sm-12">
+                    <h3>Everything you need to know about OpenStack + Containers</h3>
+                    <p>Want to build a strategy around containers and OpenStack? Check out sessions from OpenStack users eBay, AT&T, Yahoo! Japan and learn more about the Kubernetes roadmap from Google’s David Aronchick. Plus, hear project updates from OpenStack Magnum, Kuryr, Kolla, Murano and more.
                     </p>
+                    <p>&nbsp;</p>
+                    <div class="containers-summit-register-btn">
+                        <a href="/videos/boston-2017/tracks/containers" class="nfv-summit-btn" target="_blank">Learn More <i class="fa fa-chevron-right"></i></a>
+                    </div>
                 </div>
-                <div class="col-sm-4">
+                <!-- <div class="col-sm-4">
                     <div class="nfv-summit-right">
                         <img class="nfv-summit-logo" src="/themes/openstack/images/summit-logo-small.svg" alt="OpenStack Summit">
                         <div class="nfv-summit-dates containers">
@@ -303,7 +306,7 @@
                             <a href="https://www.openstack.org/summit/boston-2017/" class="nfv-summit-btn red" target="_blank">Join Us in Boston <i class="fa fa-chevron-right"></i></a>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

@@ -218,13 +218,18 @@
     <div class="summit-promo nfv">
         <div class="container">
             <div class="row">
-                <div class="col-sm-8">
+                <div class="col-sm-12">
                     <h3>Everything you need to know about OpenStack and NFV</h3>
                     <p>
-                        Developers and global telecoms who are actively shaping NFV in the open source community will gather at the Boston Summit to discuss use cases, project requirements and next steps.
+                        Developers and global telecoms who are actively shaping NFV in the open source community met at the Boston Summit to discuss use cases, project requirements and next steps.
                     </p>
+                    <p>&nbsp;</p>
+
+                    <div class="nfv-summit-register-btn">
+                        <a href="/videos/boston-2017/tracks/telecom-nfv-strategy" class="nfv-summit-btn" target="_blank">Watch the session videos <i class="fa fa-chevron-right"></i></a>
+                    </div>
                 </div>
-                <div class="col-sm-4">
+                <!-- <div class="col-sm-4">
                     <div class="nfv-summit-right">
                         <img class="nfv-summit-logo" src="/themes/openstack/static/images/summit-logo-small-white.svg" alt="OpenStack Summit">
                         <div class="nfv-summit-dates">
@@ -234,7 +239,7 @@
                             <a href="" class="nfv-summit-btn" target="_blank">NFV Sessions Coming Soon <i class="fa fa-chevron-right"></i></a>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

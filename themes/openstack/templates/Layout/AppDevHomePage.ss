@@ -333,13 +333,18 @@
     <div class="summit-promo containers" style="background: url(/assets/boston-summit/promo/OS-Boston-WebBanners-Red-Stamp-Theater-1300x576.jpg)">
         <div class="container">
             <div class="row">
-                <div class="col-sm-8">
-                    <h3>Join app developers in the OpenStack community at the Boston Summit</h3>
+                <div class="col-sm-12">
+                    <h3>Around 50% of OpenStack users are running CaaS/PaaS on OpenStack</h3>
                     <p>
-                        A large community of application developers and ecosystem of container management and PaaS tools has grown around OpenStack. The Summit will provide content and workshops for users who are building and deploying applications on OpenStack clouds, and cover topics like automating and managing application deployment, SDKs, tools, PaaS and big data. Join us in Boston for content and workshops from May 8-11.
+                        Want to build a strategy around containers and OpenStack? Check out sessions from OpenStack users eBay, AT&T, Yahoo! Japan and learn more about the Kubernetes roadmap from Google’s David Aronchick. Plus, hear project updates from OpenStack Magnum, Kuryr, Kolla, Murano and more.
                     </p>
+                    <p>&nbsp;</p>
+
+                    <div class="containers-summit-register-btn">
+                        <a href="/videos/boston-2017/tracks/cloud-app-development" class="nfv-summit-btn" target="_blank">Learn More <i class="fa fa-chevron-right"></i></a>
+                    </div>
                 </div>
-                <div class="col-sm-4">
+                <!-- <div class="col-sm-4">
                     <div class="containers-summit-right">
                         <img class="containers-summit-logo" src="/themes/openstack/static/images/summit-logo-small.svg" onerror="this.onerror=null; this.src=/themes/openstack/static/images/summit-logo-small.png" alt="OpenStack Summit">
                         <div class="containers-summit-dates">
@@ -349,7 +354,7 @@
                             <a href="https://openstacksummit2017boston.eventbrite.com/" class="nfv-summit-btn" target="_blank">Register Now <i class="fa fa-chevron-right"></i></a>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

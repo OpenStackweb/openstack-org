@@ -252,23 +252,28 @@
     <div class="summit-promo barcelona">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-8">
-                        <h3>Join us in Boston to learn more about security in OpenStack</h3>
+                    <div class="col-sm-12">
+                        <h3>Learn more about OpenStack security</h3>
                         <p>
-                            Attend the OpenStack Summit in Boston to meet the Security Project team and hear directly from enterprise and government users on how they secure their OpenStack clouds.
+                            Hear from enterprise and government users on how they secure their OpenStack clouds as well as from the upstream community on their security updates.
                         </p>
+                        <p>&nbsp;</p>
+
+                        <div class="nfv-summit-register-btn">
+                            <a href="/summit/boston-2017/" class="nfv-summit-btn" target="_blank">Learn More <i class="fa fa-chevron-right"></i></a>
+                        </div>
                     </div>
-                    <div class="col-sm-4">
+                    <!-- <div class="col-sm-4">
                         <div class="nfv-summit-right">
                             <img class="nfv-summit-logo" src="/themes/openstack/images/summit-logo-small.svg" onerror="this.onerror=null; this.src=/themes/openstack/images/summit-logo-small.png" alt="OpenStack Summit">
                             <div class="nfv-summit-dates">
                                 May 8-11, 2017 in Boston
                             </div>
                             <div class="nfv-summit-register-btn">
-                                <a href="/summit/boston-2017/" class="nfv-summit-btn" target="_blank">Learn More <i class="fa fa-chevron-right"></i></a>
+                                <a href="/videos/boston-2017/tracks/security" class="nfv-summit-btn" target="_blank">Learn More <i class="fa fa-chevron-right"></i></a>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
