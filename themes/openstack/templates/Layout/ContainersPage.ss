@@ -26,8 +26,8 @@
                 <div class="col-sm-4">
                     <div class="download-container">
                       <img src="/themes/openstack/images/containers-r/summit-logo-white.svg" class="summit-cta-logo" alt="">
-                        <div class="download-text">Start planning your OpenStack and containers strategy at the OpenStack Summit in Boston, May 8-11, 2017</div>
-                        <a href="//www.openstack.org/summit/boston-2017/" class="download-btn">Learn more about the Summit</a>
+                        <div class="download-text">Start planning your OpenStack and containers strategy at the OpenStack Summit in Sydney, November 6-8, 2017</div>
+                        <a href="//www.openstack.org/summit/sydney-2017/" class="download-btn">Learn more about the Summit</a>
                     </div>
                 </div>
             </div>
