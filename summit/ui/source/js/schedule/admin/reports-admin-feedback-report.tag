@@ -20,8 +20,22 @@
 
 
     <div if={ is_grouped }>
-        <h2>{ header.title }</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <h2>{ header.title }</h2>
+            </div>
+        </div>
+
         <div class="list-group">
+            <div class="list-group-item">
+                <div class="row">
+                    <div class="col-md-4 sortable sorted group_sorted" data-sort="grouped_item" data-dir="DESC">
+                        Name <i class="fa fa-caret-down"></i>
+                    </div>
+                    <div class="col-md-4 sortable group_sorted" data-sort="avg_rate">Rate </div>
+                    <div class="col-md-4 sortable group_sorted" data-sort="feedback_count"> Total </div>
+                </div>
+            </div>
             <a href="#" class="list-group-item" each={ feedback_group, i in feedbacks } onclick={ groupClick }>
                 <div class="row">
                     <div class="col-md-4">{ feedback_group.grouped_item }</div>
@@ -44,8 +58,8 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Rate</th>
-                    <th>Presentation</th>
+                    <th class="sortable sorted" data-sort="rate" data-dir="DESC">Rate<i class="fa fa-caret-down"></i></th>
+                    <th class="sortable" data-sort="title">Presentation</th>
                     <th>Speakers</th>
                     <th>Critic</th>
                     <th>Note</th>
@@ -85,6 +99,15 @@
                 self.getReport(1);
             });
 
+            $('.reports-wrapper').on('click','.sortable',function(){
+                self.parent.toggleSort($(this));
+                if (self.is_grouped) {
+                    self.getReport(self.page_data.page);
+                } else {
+                    self.getReportBySource(self.page_data.page);
+                }
+            });
+
         });
 
         groupClick(ev) {
@@ -97,12 +120,14 @@
             $('body').ajax_loader();
             var term = $('#search-term').val();
             var group_by = $('#group-by').val();
+            var sort = $('.sorted.group_sorted').data('sort');
+            var sort_dir = $('.sorted.group_sorted').data('dir');
 
             self.source = '';
             self.source_id = 0;
 
             $.getJSON('api/v1/summits/'+self.summit_id+'/reports/feedback_report',
-                {page:page, items: self.page_data.limit, term: term, group_by: group_by},
+                {page:page, items: self.page_data.limit, term: term, group_by: group_by, sort:sort, sort_dir: sort_dir},
                 function(data){
                     self.feedbacks = data.data;
                     self.header = data.header;
@@ -135,9 +160,11 @@
 
         getReportBySource(page) {
             $('body').ajax_loader();
+            var sort = $('.sorted').not('.group_sorted').data('sort');
+            var sort_dir = $('.sorted').not('.group_sorted').data('dir');
 
             $.getJSON('api/v1/summits/'+self.summit_id+'/reports/feedback_report/'+self.source+'/'+self.source_id,
-                {page:page, items: self.page_data.limit},
+                {page:page, items: self.page_data.limit, sort:sort, sort_dir: sort_dir},
                 function(data){
                     self.feedbacks = data.data;
                     self.header = data.header;

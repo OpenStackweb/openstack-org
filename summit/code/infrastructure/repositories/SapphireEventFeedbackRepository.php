@@ -73,7 +73,7 @@ SQL;
                 $header_query = "SELECT E.Title AS title, ROUND(AVG(F.Rate),1) AS avg_rate " . $query_body . $query_where . " GROUP BY P.ID";
                 break;
             case 'speaker' :
-                $query_where .= " AND (S.ID = {$id} OR S2.ID = {$id})";
+                $query_where .= " AND S.ID = {$id}";
                 $header_query = "SELECT CONCAT(S.FirstName,' ',S.LastName) AS title, ROUND(AVG(F.Rate),1) AS avg_rate " . $query_body . $query_where . " GROUP BY S.ID";
                 break;
             default:
@@ -109,6 +109,7 @@ SQL;
 
         $total = DB::query($query_count)->value();
         $header = DB::query($header_query)->record();
+
         $result = array('total' => $total, 'data' => $data, 'header' => $header);
         return $result;
     }
@@ -151,34 +152,38 @@ SQL;
                       ROUND(AVG(F.Rate),1) AS avg_rate,
                       'presentation' AS source,
                       P.ID AS source_id
-                      {$query_body} {$query_where} GROUP BY P.ID ORDER BY E.Title";
+                      {$query_body} {$query_where} GROUP BY P.ID";
         } else if ($group_by == 'speaker') {
             $query = "SELECT CONCAT(S.FirstName,' ',S.LastName) AS grouped_item,
                       COUNT(DISTINCT F.ID) AS feedback_count,
                       ROUND(AVG(F.Rate),1) AS avg_rate,
                       'speaker' AS source,
                       S.ID AS source_id
-                      {$query_body} {$query_where} GROUP BY S.ID ORDER BY S.LastName";
+                      {$query_body} {$query_where} GROUP BY S.ID";
         } else {
             $query = "SELECT PC.Title AS grouped_item,
                       COUNT(DISTINCT F.ID) AS feedback_count,
                       ROUND(AVG(F.Rate),1) AS avg_rate,
                       'track' AS source,
                       PC.ID AS source_id
-                      {$query_body} {$query_where} GROUP BY PC.ID ORDER BY PC.Title";
+                      {$query_body} {$query_where} GROUP BY PC.ID";
         }
 
+        $order_by = ' ORDER BY '.$sort.' '.$sort_dir;
+
+        $limit = '';
         if ($page && $page_size) {
             $offset = ($page - 1 ) * $page_size;
-            $query .= " LIMIT {$offset}, {$page_size}";
+            $limit .= " LIMIT {$offset}, {$page_size}";
         }
 
         $data = array();
-        foreach (DB::query($query) as $row) {
+        foreach (DB::query($query.$order_by.$limit) as $row) {
             $data[] = $row;
         }
 
         $total = DB::query("SELECT COUNT(*) FROM (" . $query . " ) AS Q1")->value();
+
         $result = array('total' => $total, 'data' => $data);
         return $result;
     }
