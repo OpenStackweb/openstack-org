@@ -72,38 +72,30 @@ final class SummitHighlightsPage extends SummitPage
         $video_urls = new ArrayList();
         $url = 'https://www.youtube.com/embed/';
         if ($this->StatisticsVideoUrl) {
-            $description = $this->getVideoDescription($this->StatisticsVideoUrl);
             $video_urls->push(
                 new ArrayData([
-                    'Url' => $url.$this->StatisticsVideoUrl,
-                    'Description' => $description
+                    'Url' => $url.$this->StatisticsVideoUrl
                 ])
             );
         }
         if ($this->StatisticsVideoUrl2) {
-            $description = $this->getVideoDescription($this->StatisticsVideoUrl2);
             $video_urls->push(
                 new ArrayData([
-                    'Url' => $url.$this->StatisticsVideoUrl2,
-                    'Description' => $description
+                    'Url' => $url.$this->StatisticsVideoUrl2
                 ])
             );
         }
         if ($this->StatisticsVideoUrl3) {
-            $description = $this->getVideoDescription($this->StatisticsVideoUrl3);
             $video_urls->push(
                 new ArrayData([
-                    'Url' => $url.$this->StatisticsVideoUrl3,
-                    'Description' => $description
+                    'Url' => $url.$this->StatisticsVideoUrl3
                 ])
             );
         }
         if ($this->StatisticsVideoUrl4) {
-            $description = $this->getVideoDescription($this->StatisticsVideoUrl4);
             $video_urls->push(
                 new ArrayData([
-                    'Url' => $url.$this->StatisticsVideoUrl4,
-                    'Description' => $description
+                    'Url' => $url.$this->StatisticsVideoUrl4
                 ])
             );
         }

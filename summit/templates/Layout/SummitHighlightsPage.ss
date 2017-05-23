@@ -120,12 +120,10 @@
                 <% if $Top.getVideoUrls().Count == 1 %>
                     <div class="big_stats_video_wrapper">
                         <iframe src="{$Url}" width="853" height="480" frameborder="0" allowfullscreen="" ></iframe>
-                        <p class='video_caption' style="width:853px;">{$Description}</p>
                     </div>
                 <% else %>
                     <div class="stats_video_wrapper">
                         <iframe src="{$Url}" frameborder="0" allowfullscreen="" ></iframe>
-                        <p class='video_caption'>{$Description}</p>
                     </div>
                 <% end_if %>
             <% end_loop %>
