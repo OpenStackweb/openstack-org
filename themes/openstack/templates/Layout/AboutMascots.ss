@@ -46,14 +46,14 @@
     	<div class="col-sm-12">
 			<h5 class="section-title">Download your project’s logo package</h5>
 			<ul>
-			    <% loop $Components() %>
+			    <% loop $Mascots() %>
 			        <li class="col-lg-6 col-md-6 col-sm-6">
-			            <% if $MascotName && $MascotFiles %>
-                            <a href="#" data-toggle="modal" data-target="#mascots_modal" data-component="{$CodeName}" data-images="{$MascotFiles}">
-                                <strong>$CodeName:</strong> $MascotName
+			            <% if $Name && $MascotFiles %>
+                            <a href="#" data-toggle="modal" data-target="#mascots_modal" data-component="{$CodeNameString}" data-images="{$MascotFiles}">
+                                <strong>$CodeNameString:</strong> $Name
                             </a>
                         <% else %>
-                            <strong>$CodeName:</strong> <% if $MascotName %> $MascotName (in progress) <% else %> (not chosen) <% end_if %>
+                            <strong>$CodeNameString:</strong> <% if $Name %> $Name (in progress) <% else %> (not chosen) <% end_if %>
                         <% end_if %>
 			        </li>
 			    <% end_loop %>

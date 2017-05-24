@@ -40,11 +40,9 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
         'Name'                         => 'Varchar(255)',
         'CodeName'                     => 'Varchar(255)',
         'Description'                  => 'Text',
-        'MascotName'                   => 'Varchar',
         'SupportsVersioning'           => 'Boolean',
         'SupportsExtensions'           => 'Boolean',
         'IsCoreService'                => 'Boolean',
-        'MascotClass'                  => "Enum('Barbican,Chef OpenStack,Cinder,CLI,CloudKitty,Congress,Designate,Dragonflow,Freezer,Fuel,Glance,Heat,Horizon,Ironic,Karbor,Keystone,Kolla,Kuryr,Magnum,Manila,Mistral,Monasca,Murano,Neutron,Nova,Octavia,OpenStack Charms,OpenStackansible,Puppet OpenStack,Rally,Sahara,Searchlight,Senlin,Solum,Storlets,Swift,Tacker,Telemetry,Tricircle,TripleO,Trove,Vitrage,Watcher,Zun','Barbican')",
         'Use'                          => 'Enum(array("Application Services","Compute","Data & Analytics","Deployment Tools","Management Tools","Monitoring & Metering","Networking & Content Delivery","Security, Identity & Compliance","Storage, Backup & Recovery","None"), "None")',
         'HasStableBranches'            => 'Boolean',
         'WikiUrl'                      => 'Text',
@@ -65,7 +63,8 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
 
     private static $has_one = array
     (
-        "LatestReleasePTL" => "Member"
+        "LatestReleasePTL" => "Member",
+        "Mascot"           => "Mascot"
     );
 
     private static $has_many = array
@@ -97,7 +96,6 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
 
     private static $defaults = array
     (
-        'MascotClass'       => 'Barbican',
         'ShowOnMarketplace' => 1,
     );
 

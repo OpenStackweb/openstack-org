@@ -18,8 +18,6 @@ class AboutMascots extends Page {
  
 class AboutMascots_Controller extends Page_Controller {
 
-    private static $mascots_dir = 'themes/openstack/images/project-mascots/';
-
     function init()
     {
         parent::init();
@@ -29,7 +27,7 @@ class AboutMascots_Controller extends Page_Controller {
         Requirements::javascript('themes/openstack/javascript/filetracking.jquery.js');
 
         Requirements::customScript("
-            var mascots_dir = '".self::$mascots_dir."';
+            var mascots_dir = '".Mascot::$mascots_dir."';
             var base_url = '".Director::absoluteBaseURL()."';
         ");
 
@@ -37,19 +35,27 @@ class AboutMascots_Controller extends Page_Controller {
 
     }
 
-    function getComponents() {
-        $components = OpenStackComponent::get()->sort('CodeName');
-        $componentsAL = new ArrayList();
-        foreach ($components as $component) {
-            $mascots_folder = Director::baseFolder() .'/'. self::$mascots_dir . $component->CodeName;
-            $image_array = array();
-            foreach (glob($mascots_folder.'/*.*') as $image) {
-                $image_array[] = basename($image);
+    function getMascots() {
+        $mascots = Mascot::get();
+
+        $mascotsAL = new ArrayList();
+        foreach ($mascots as $mascot) {
+            $mascot_folder = $mascot->getImageDir();
+            $mascot->MascotFiles = '';
+            $mascot->CodeNameString = $mascot->CodeName;
+
+            if ($mascot_folder) {
+                $image_array = array();
+                foreach (glob($mascot_folder.'/*.*') as $image) {
+                    $image_array[] = basename($image);
+                }
+                $mascot->MascotFiles = implode(',', $image_array);
             }
-            $component->MascotFiles = implode(',', $image_array);
-            $componentsAL->push($component);
+
+            $mascotsAL->push($mascot);
         }
-        return $componentsAL;
+
+        return $mascotsAL->sort('CodeNameString');
     }
 
 }

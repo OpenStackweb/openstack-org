@@ -37,6 +37,7 @@ final class OpenStackComponentAdminUI extends DataExtension
         $fields->push(new LiteralField("Title", "<h2>OpenStack Component</h2>"));
         $fields->push(new TextField("Name", "Name"));
         $fields->push(new TextField("CodeName", "Code Name"));
+        $fields->push(new DropdownField('Mascot', 'Mascot',  Mascot::get()->map()));
         $fields->push(new TextField("Description", "Description"));
         $fields->push(new TextField("YouTubeID", "Video (YouTubeID)"));
         $fields->push(new TextField("VideoTitle", "Video Title"));
@@ -45,7 +46,6 @@ final class OpenStackComponentAdminUI extends DataExtension
         $fields->push(new CheckboxField('SupportsExtensions', 'Supports Extensions?'));
         $fields->push(new CheckboxField('IsCoreService', 'Is Core Service?'));
         $fields->push(new CheckboxField('ShowOnMarketplace', 'Show On Marketplace?'));
-        $fields->push(new DropdownField('MascotClass', 'Mascot',  $this->owner->dbObject('MascotClass')->enumValues()));
         $fields->push(new DropdownField('Use', 'Project Category',  $this->owner->dbObject('Use')->enumValues()));
 
         if ($this->owner->getSupportsVersioning()) {

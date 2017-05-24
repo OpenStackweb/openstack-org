@@ -19,6 +19,7 @@ class SoftwareModelAdmin extends ModelAdmin
         'OpenStackComponent',
         'OpenStackRelease',
         'OpenStackSampleConfig',
+        'Mascot'
     );
 
     public $showImportForm = false;
@@ -45,6 +46,7 @@ class SoftwareModelAdmin extends ModelAdmin
             $config = $gridField->getConfig();
             $config->addComponent(new GridFieldCloneReleaseAction());
         }
+
         return $form;
     }
 }

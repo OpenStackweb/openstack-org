@@ -12,11 +12,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-class SetMascotNamesMigration extends AbstractDBMigrationTask
+class PopulateMascotsMigration extends AbstractDBMigrationTask
 {
-    protected $title = "SetMascotNamesMigration";
+    protected $title = "PopulateMascotsMigration";
 
-    protected $description = "SetMascotNamesMigration";
+    protected $description = "PopulateMascotsMigration";
 
     function doUp()
     {
@@ -84,14 +84,21 @@ class SetMascotNamesMigration extends AbstractDBMigrationTask
             'Zun' => 'Dolphin',
         );
 
-        $components = OpenStackComponent::get();
-        foreach ($components as $component) {
-            if (array_key_exists($component->CodeName, $mascots)) {
-                $component->MascotName = $mascots[$component->CodeName];
-                $component->write();
+        foreach ($mascots as $codename => $mascot) {
+            if (!Mascot::get()->filter('Name', $mascot)->exists()) {
+                $new_mascot = new Mascot();
+                $new_mascot->Name = $mascot;
+                $new_mascot->CodeName = $codename;
+                $new_mascot_id = $new_mascot->write();
+
+                $component = OpenStackComponent::get()->filter('CodeName', $codename)->first();
+                if ($component) {
+                    $component->MascotID = $new_mascot_id;
+                    $component->write();
+                }
+
             }
         }
-
     }
 
     function doDown()

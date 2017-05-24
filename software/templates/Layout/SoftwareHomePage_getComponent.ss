@@ -12,7 +12,7 @@
                 <img src="/software/images/mascots/{$Component.MascotRef}.png" width="100%">
             </div>
             <div class="col-lg-6 col-md-5 col-sm-4">
-                <h2>$Component.CodeName <i class="<% if $Component.MascotClass %>$Component.MascotClass<% else %>Barbican<% end_if %>"></i></h2>
+                <h2>$Component.CodeName <i class="<% if $Component.Mascot %>$Component.Mascot.Name<% else %>Barbican<% end_if %>"></i></h2>
                 <h4>$Component.Name</h4>
                 <div class="project-intro-links">
                     <% if $Component.WikiUrl %>
