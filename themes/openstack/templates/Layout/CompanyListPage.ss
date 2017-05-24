@@ -115,6 +115,16 @@
 						<p class="center">Internap </p>
 			</a>
 			</div>
+			<div class="col-sm-2 col-xs-6">
+	                <a href="/foundation/companies/profile/city-network">
+	                	<div class="img-wrapper">
+							
+								<img src="/assets/companies/main_logo/_resampled/SetWidth138-CityNetwork-Logo-Regular-200px-RGB.png" alt="City Network">
+							
+						</div>
+						<p class="center">City Network </p>
+			</a>
+			</div>
 		</div>
 
 		<!-- Corporate & Startup Members -->
