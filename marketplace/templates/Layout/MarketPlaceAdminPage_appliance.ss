@@ -21,9 +21,6 @@
         <fieldset>
         <form id="appliance_form" name="appliance_form">
             <% include MarketPlaceAdminPage_CompanyServiceHeader %><BR>
-            <% if CurrentMember.isAdmin %>
-                <% include MarketPlaceAdminPage_OpenStackPowered %>
-            <% end_if %>
         </form>
         <% include Components %>
         <% include Hypervisors %>

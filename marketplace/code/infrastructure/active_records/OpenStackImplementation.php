@@ -20,26 +20,37 @@ class OpenStackImplementation
     implements IOpenStackImplementation
 {
 
-    static $db = array(
-        'CompatibleWithCompute'           => 'Boolean',
-        'CompatibleWithStorage'           => 'Boolean',
-    );
+    // OpenStack Powered Program attributes
+    static $db = [
+        'CompatibleWithCompute' => 'Boolean',
+        'CompatibleWithStorage' => 'Boolean',
+        'ExpiryDate'            => 'SS_Datetime',
+        'Notes'                 => 'Text',
+    ];
 
-    static $has_one = array('ProgramVersion' => 'InteropProgramVersion');
+    // OpenStack Powered Program attributes
+    static $has_one   = [
+        'ProgramVersion'  => 'InteropProgramVersion',
+        'ReportedRelease' => 'OpenStackRelease',
+        'PassedRelease'   => 'OpenStackRelease',
+    ];
 
-    static $many_many = array(
-        'HyperVisors' => 'HyperVisorType',
-        'Guests'      => 'GuestOSType',
-    );
+    static $many_many = [
+        'HyperVisors'   => 'HyperVisorType',
+        'Guests'        => 'GuestOSType',
+    ];
 
-    static $has_many = array(
-        'Capabilities' => 'OpenStackImplementationApiCoverage'
-    );
+    static $has_many = [
+        'Capabilities'   => 'OpenStackImplementationApiCoverage',
+        'StateSnapshots' => 'OpenStackPoweredProgramHistory',
+        'ZenDeskLinks'   => 'ZenDeskLink',
+        'RefStackLinks'  => 'RefStackLink',
+    ];
 
-    private static $defaults = array(
+    private static $defaults = [
         'CompatibleWithCompute' => false,
         'CompatibleWithStorage' => false,
-    );
+    ];
 
     /**
      * @return IHyperVisorType[]
@@ -158,7 +169,7 @@ class OpenStackImplementation
         $storage  = $this->isCompatibleWithStorage();
         $compute  = $this->isCompatibleWithCompute();
         $platform = $this->isCompatibleWithPlatform();
-        return $storage || $compute || $platform ;
+        return ($storage || $compute || $platform ) && !$this->isOpenStackPoweredExpired();
     }
 
     /**
@@ -278,5 +289,45 @@ class OpenStackImplementation
         }
 
         return $this->getProgramVersion()->getDesignatedSectionsByProgramType($program_type);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isOpenStackPoweredExpired()
+    {
+        $res = false;
+        if(!$this->ExpiryDate) return $res;
+        $utc_timezone = new \DateTimeZone("UTC");
+        $time_zone    = new \DateTimeZone('America/Chicago');
+        $expiry_date  = new \DateTime($this->ExpiryDate, $time_zone);
+        $expiry_date  = $expiry_date->setTimezone($utc_timezone);
+        $utc_now      = new \DateTime(null, new \DateTimeZone("UTC"));
+
+        return $utc_now > $expiry_date;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPrintableZenDeskLinks(){
+        $list = [];
+        foreach ($this->ZenDeskLinks() as $link){
+            $list[] = $link->Link;
+        }
+
+        return join('|', $list);
+    }
+
+    /**
+     * @return string
+     */
+    public function getPrintableRefStackLinks(){
+        $list = [];
+        foreach ($this->RefStackLinks() as $link){
+            $list[] = $link->Link;
+        }
+
+        return join('|', $list);
     }
 }

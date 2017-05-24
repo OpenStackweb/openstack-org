@@ -176,13 +176,11 @@ abstract class CompanyServiceManager
      */
     public function addCompanyService(array $data)
     {
-        $this_var = $this;
         $marketplace_factory = $this->marketplace_factory;
-        $factory = $this->factory;
+        $factory            = $this->factory;
         $validator_factory = $this->validator_factory;
 
         return $this->tx_manager->transaction(function () use (
-            $this_var,
             $marketplace_factory,
             $data,
             $factory,
@@ -192,33 +190,29 @@ abstract class CompanyServiceManager
             $validator = $validator_factory->buildValidatorForCompanyService($data);
 
             if ($validator->fails()) {
-                return $this_var->validationError($validator->messages());
+                return $this->validationError($validator->messages());
             }
 
-            $getMarketPlaceType = new ReflectionMethod(get_class($this_var), 'getMarketPlaceType');
-            $getMarketPlaceType->setAccessible(true);
             $company = $marketplace_factory->buildCompanyById(intval($data['company_id']));
             $live_service_id = (isset($data['live_service_id'])) ? $data['live_service_id'] : null;
-            $company_service = $this_var->buildCompanyService($data, $company, $getMarketPlaceType, $live_service_id);
-            $this_var->register($company_service);
+            $company_service = $this->buildCompanyService($data, $company, $live_service_id);
+            $this->register($company_service);
 
-            $updateCollections = new ReflectionMethod(get_class($this_var), 'updateCollections');
-            $updateCollections->setAccessible(true);
-            $updateCollections->invoke($this_var, $company_service, $data);
+            $this->updateCollections($company_service, $data);
 
             return $company_service;
         });
 
     }
 
-    public function buildCompanyService($data, $company, $getMarketPlaceType, $live_service_id)
+    public function buildCompanyService($data, $company, $live_service_id)
     {
         $company_service = $this->factory->buildCompanyService(
             $data['name'],
             $data['overview'],
             $company,
             $data['active'],
-            $getMarketPlaceType->invoke($this),
+            $this->getMarketPlaceType(),
             $data['call_2_action_uri'],
             $live_service_id,
             $data['published']);
@@ -261,14 +255,12 @@ abstract class CompanyServiceManager
     public function updateCompanyService(array $data)
     {
 
-        $this_var = $this;
         $validator_factory = $this->validator_factory;
         $repository = $this->repository;
         $marketplace_factory = $this->marketplace_factory;
 
         $company_service = $this->tx_manager->transaction(function () use (
             &$company_service,
-            $this_var,
             $marketplace_factory,
             $data,
             $validator_factory,
@@ -276,7 +268,7 @@ abstract class CompanyServiceManager
         ) {
             $validator = $validator_factory->buildValidatorForCompanyService($data);
             if ($validator->fails()) {
-                return $this_var->validationError($validator->messages());
+                return $this->validationError($validator->messages());
             }
             $id = intval($data['id']);
             $company_service = $repository->getById($id);
@@ -304,15 +296,11 @@ abstract class CompanyServiceManager
             }
 
 
-            $this_var->update($company_service, $data);
+            $this->update($company_service, $data);
 
-            $clearCollections = new ReflectionMethod(get_class($this_var), 'clearCollections');
-            $clearCollections->setAccessible(true);
-            $clearCollections->invoke($this_var, $company_service);
+            $this->clearCollections($company_service);
 
-            $updateCollections = new ReflectionMethod(get_class($this_var), 'updateCollections');
-            $updateCollections->setAccessible(true);
-            $updateCollections->invoke($this_var, $company_service, $data);
+            $this->updateCollections($company_service, $data);
 
             // store updates
             $update_record = new CompanyServiceUpdateRecord();

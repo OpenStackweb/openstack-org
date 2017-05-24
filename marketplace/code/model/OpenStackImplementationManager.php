@@ -206,30 +206,13 @@ abstract class OpenStackImplementationManager
         $implementation->addHyperVisor($hypervisor);
     }
 
-    public function buildCompanyService($data, $company, $getMarketPlaceType, $live_service_id)
+    public function buildCompanyService($data, $company, $live_service_id)
     {
-        $service = parent::buildCompanyService($data, $company, $getMarketPlaceType, $live_service_id);
-        $this->factory->buildOpenStackPowered($service, $data);
-        return $service;
+        return parent::buildCompanyService($data, $company, $live_service_id);
     }
 
     public function update($company_service, $data)
     {
-        $company_service = parent::update($company_service, $data);
-
-        if (isset($data['compatible_compute'])) {
-            $company_service->setCompatibleWithCompute($data['compatible_compute']);
-        }
-
-        if (isset($data['compatible_storage'])) {
-            $company_service->setCompatibleWithStorage($data['compatible_storage']);
-        }
-
-        if(isset($data['interop_program_version_id'])) {
-            $program_version = new InteropProgramVersion();
-            $program_version->ID = (int)$data['interop_program_version_id'];
-            $company_service->setProgramVersion($program_version);
-        }
-        return $company_service;
+        return parent::update($company_service, $data);
     }
 }

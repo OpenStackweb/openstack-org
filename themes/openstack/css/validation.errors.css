@@ -2,7 +2,7 @@ label.error {
     background: #c51244 !important;
     padding: 10px !important;
     border-radius: 10px !important;
-    position: relative;
+    position: absolute;
     display: inline-block;
     box-shadow: 1px 1px 1px #aaaaaa !important;
     margin-top: 10px !important;

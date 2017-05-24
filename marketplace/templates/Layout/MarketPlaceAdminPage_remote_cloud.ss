@@ -21,10 +21,6 @@
             <fieldset>
             <form id="remote_cloud_form" name="remote_cloud_form">
                 <% include MarketPlaceAdminPage_CompanyServiceHeader %><BR>
-                <% if CurrentMember.isAdmin %>
-                    <% include MarketPlaceAdminPage_OpenStackPowered %>
-                <% end_if %>
-
                 <label for="vendor_managed_upgrades">Vendor Managed Upgrades</label>
                 <input title="Vendor Managed Upgrades" type="checkbox" id="vendor_managed_upgrades" name="vendor_managed_upgrades"><br><br>
 

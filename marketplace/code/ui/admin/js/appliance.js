@@ -19,8 +19,6 @@ jQuery(document).ready(function($){
         //main form
         form.marketplace_type_header();
 
-        form.implementation_openstack_powered();
-
         $("#videos-form").videos();
         $("#guest_os_form").guest_os();
         $("#hypervisors_form").hypervisors();
@@ -52,7 +50,6 @@ jQuery(document).ready(function($){
                 $('.publish-appliance').prop('disabled',true);
             }
 
-            form.implementation_openstack_powered('load', appliance);
             //reload widgets
             $("#guest_os_form").guest_os('load',appliance.guest_os);
             $("#hypervisors_form").hypervisors('load',appliance.hypervisors);
@@ -241,7 +238,6 @@ function serializeAppliance(form, publish){
         appliance.capabilities            = capabilities;
         appliance.regional_support        = regional_support;
         appliance.additional_resources    = additional_resources;
-        appliance                         = form.implementation_openstack_powered('serialize', appliance);
         appliance.published               = publish ? 1 : 0;
 
         return appliance;

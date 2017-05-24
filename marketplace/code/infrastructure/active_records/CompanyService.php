@@ -243,4 +243,33 @@ class CompanyService
 	{
 		return $this->getField('Slug');
 	}
+
+	public function getAdminEmails(){
+	    $list = new ArrayList();
+	    $dict = [];
+	    foreach($this->Company()->Administrators() as $administrator){
+	        if(!isset($dict[$administrator->Email])){
+                $dict[$administrator->Email] = $administrator->Email;
+                $list->add(new ArrayData(['Email' => $administrator->Email]));
+            }
+
+        }
+	    return $list;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPrintableAdminEmails(){
+        $list = [];
+        $dict = [];
+        foreach($this->Company()->Administrators() as $administrator){
+            if(!isset($dict[$administrator->Email])){
+                $dict[$administrator->Email] = $administrator->Email;
+                $list[] = $administrator->Email;
+            }
+
+        }
+        return join('|', $list);
+    }
 }
