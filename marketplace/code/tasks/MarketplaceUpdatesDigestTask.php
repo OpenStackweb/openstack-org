@@ -24,6 +24,8 @@ final class MarketplaceUpdatesDigestTask extends CronTask {
             $prev_service = 0;
             $prev_class = '';
 
+            if ($recent_updates->count() == 0) return 'OK';
+
             foreach ($recent_updates as $update) {
                 if (!$prev_class || $prev_class != $update->CompanyService()->ClassName) {
                     $prev_class = $update->CompanyService()->ClassName;
