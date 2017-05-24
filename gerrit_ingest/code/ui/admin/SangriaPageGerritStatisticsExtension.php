@@ -123,9 +123,4 @@ SQL;
         return $res->value();
     }
 
-    public function getQuickActionsExtensions(&$html){
-        $view = new SSViewer('SangriaPage_GerritStatisticsLinks');
-        $html .= $view->process($this->owner);
-    }
-
 }

@@ -20,7 +20,6 @@ jQuery(document).ready(function($){
 
         //main form
         form.marketplace_type_header();
-        form.implementation_openstack_powered();
 
         $("#components_form").components();
         $("#hypervisors_form").hypervisors();
@@ -54,7 +53,6 @@ jQuery(document).ready(function($){
                 $("#live_id",form).val(private_cloud.id);
                 $('.publish-private-cloud').prop('disabled',true);
             }
-            form.implementation_openstack_powered('load', private_cloud);
             //reload widgets
             $("#components_form").components('load',private_cloud.capabilities);
             if(private_cloud.capabilities.length>0){
@@ -343,7 +341,6 @@ function serializePrivateCloud(form, publish){
         private_cloud.regional_support        = regional_support;
         private_cloud.additional_resources    = additional_resources;
         private_cloud.data_centers            = data_centers;
-        private_cloud                         = form.implementation_openstack_powered('serialize', private_cloud);
         private_cloud.published               = publish?1:0;
         return private_cloud;
     }

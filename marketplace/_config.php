@@ -34,5 +34,4 @@ Object::add_extension('SupportChannelType', 'SupportChannelTypeAdminUI');
 Object::add_extension('MarketPlaceVideoType', 'MarketPlaceVideoTypeAdminUI');
 Object::add_extension('MarketPlaceAllowedInstance', 'MarketPlaceAllowedInstanceAdminUI');
 
-//Sangria
-Object::add_extension('SangriaPage_Controller', 'SangriaPageMarketPlaceExtension');
+define('EXPIRED_POWERED_OPENSTACK_IMPLEMENTATION_EMAIL','EXPIRED_POWERED_OPENSTACK_IMPLEMENTATION_EMAIL');

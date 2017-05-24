@@ -26,12 +26,6 @@ final class OpenStackImplementationAssembler
     {
         $res = RegionalSupportedCompanyServiceAssembler::convertRegionalSupportedCompanyServiceToArray($implementation);
 
-        $res['compatible_compute'] = $implementation->isCompatibleWithCompute();
-
-        $res['compatible_storage'] = $implementation->isCompatibleWithStorage();
-
-        $res['interop_program_version_id'] = $implementation->getProgramVersion()->getIdentifier();
-
         //capabilities
         $capabilities = array();
         foreach ($implementation->getCapabilities() as $capability) {

@@ -295,14 +295,6 @@ final class SangriaPage_Controller extends AdminController implements Permission
         return CountryCodes::asObject();
     }
 
-    function getQuickActionsExtensions()
-    {
-        $html = '';
-        $this->extend('getQuickActionsExtensions', $html);
-        return $html;
-    }
-
-
     public static function getSurveys()
     {
         return SurveyTemplate::get()->filter('ClassName' , 'SurveyTemplate');

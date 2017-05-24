@@ -83,11 +83,6 @@ final class SangriaPageJobsExtension extends Extension {
         return count($list);
     }
 
-	public function getQuickActionsExtensions(&$html){
-		$view = new SSViewer('SangriaPage_JobsLinks');
-		$html .= $view->process($this->owner);
-	}
-
 	function JobRegistrationRequestForm(){
 		$this->commonScripts();
 		Requirements::javascript(Director::protocol()."maps.googleapis.com/maps/api/js?sensor=false");

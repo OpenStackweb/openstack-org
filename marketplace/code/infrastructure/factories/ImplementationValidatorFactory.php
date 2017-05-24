@@ -22,8 +22,6 @@ class ImplementationValidatorFactory extends ValidatorFactory {
             'active'            => 'required|boolean',
             'company_id'        => 'required|integer',
             'call_2_action_uri' => 'required|url',
-            'compatible_compute'            => 'required|boolean',
-            'compatible_storage'            => 'required|boolean',
         );
 
         $messages = array(

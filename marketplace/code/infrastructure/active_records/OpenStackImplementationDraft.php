@@ -8,11 +8,12 @@ class OpenStackImplementationDraft
     implements IOpenStackImplementation
 {
 
-    static $db = array(
+    static $db = [
         'CompatibleWithCompute' => 'Boolean',
         'CompatibleWithStorage' => 'Boolean',
         'CompatibleWithPlatform' => 'Boolean',
-      );
+        'ExpiryDate'             => 'SS_Datetime',
+    ];
 
     static $has_one = array('ProgramVersion' => 'InteropProgramVersion');
 
@@ -208,5 +209,13 @@ class OpenStackImplementationDraft
         }
 
         return $this->getProgramVersion()->getDesignatedSectionsByProgramType($program_type);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isOpenStackPoweredExpired()
+    {
+        return false;
     }
 }

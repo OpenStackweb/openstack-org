@@ -17,7 +17,6 @@ jQuery(document).ready(function($){
     if(form.length > 0){
 
         form.marketplace_type_header();
-        form.implementation_openstack_powered();
 
         $("#components_form").components();
         $("#hypervisors_form").hypervisors();
@@ -60,7 +59,6 @@ jQuery(document).ready(function($){
                 $("#live_id",form).val(remote_cloud.id);
                 $('.publish-remote-cloud').prop('disabled',true);
             }
-            form.implementation_openstack_powered('load', remote_cloud);
             //reload widgets
             $("#components_form").components('load',remote_cloud.capabilities);
             $("#hypervisors_form").hypervisors('load',remote_cloud.hypervisors);
@@ -258,7 +256,6 @@ function serializeRemoteCloud(form, publish){
         remote_cloud.capabilities            = capabilities;
         remote_cloud.regional_support        = regional_support;
         remote_cloud.additional_resources    = additional_resources;
-        remote_cloud                         = form.implementation_openstack_powered('serialize', remote_cloud);
         remote_cloud.published               = publish? 1:0;
 
         return remote_cloud;

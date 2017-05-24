@@ -72,3 +72,4 @@ migrations:
   - GenerateComponentSlugMigration
   - PopulateMascotsMigration
   - SummitSponsorsMigration
+  - AboutExpirePoweredOpenStackImplementationEmailMigration
