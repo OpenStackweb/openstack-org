@@ -30,7 +30,10 @@ const languages = [
     "zh_TW",
     "ko_KR",
     "ja_JP",
-    "id_ID"
+    "id_ID",
+    "fr_FR",
+    "de_DE",
+    "ru_RU",
 ];
 // get language cookie, is none, then default is en_US
 var lang = $.cookie('GetTextLocale');

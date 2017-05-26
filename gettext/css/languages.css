@@ -25,6 +25,9 @@
 .lang-lbl-full[lang=zh_CN]:after { content: "简体中文\0000A0/\0000A0Chinese"; }
 .lang-lbl-full[lang=zh_TW]:after { content: "繁體中文\0000A0/\0000A0Chinese"; }
 .lang-lbl-full[lang=id_ID]:after { content: "Bahasa\000020indonesia\0000A0/\0000A0Indonesian"; }
+.lang-lbl-full[lang=de_DE]:after { content: "Deutsch\0000A0/\0000A0German"; }
+.lang-lbl-full[lang=fr_FR]:after { content: "Fran\0000E7ais\0000A0/\0000A0French"; }
+.lang-lbl-full[lang=ru_RU]:after { content: "\000420\000443\000441\000441\00043A\000438\000439\0000A0/\0000A0Russian"; }
 
 .lang-item {
     min-height: 40px;

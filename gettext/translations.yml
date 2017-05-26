@@ -14,3 +14,13 @@ zh_CN:
 id_ID:
   - survey_template
   - survey_ui
+jp_JP:
+  - survey_template
+  - survey_ui
+de_DE:
+  - survey_template
+  - survey_ui
+ru_RU:
+  - survey_template
+fr_FR:
+  - survey_ui
