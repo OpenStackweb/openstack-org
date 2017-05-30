@@ -14,7 +14,7 @@
             <p>Here are three steps you should take as a potential speaker:</p>
 
             <ul class="submit-steps">
-                <li><span>1</span> <a href="summit/boston-2017/categories/" target="_blank">Review the list of Summit Categories &amp; Tracks.</a></li>
+                <li><span>1</span> <a href="summit/sydney-2017/categories/" target="_blank">Review the list of Summit Categories &amp; Tracks.</a></li>
                 <li><span>2</span> <a href="#process">Learn about the selection process.</a></li>
                 <li><span>3</span> <a href="#submit">Submit your session proposal below. (Limit of 3 per speaker)</a></li>
             </ul>
@@ -56,8 +56,8 @@
             <li>To continue to improving the quality of the content at the Summit, the OpenStack Foundation will be extending invitations directly to a small number of highly regarded speakers from past events for each track. This was added in response to community requests for specialized sessions, presenter diversity, advanced technical talks and other content that adds to the overall Summit content quality, but was not being addressed in the existing CFP process. This approach will allow the Foundation to lock down key speakers earlier in the process to better serve our community, while making up the less than 10% of the total sessions.</li>
             </ul>
             <p>Once the call for speakers has concluded on February 6, 11:59PM PST, all submissions will be made available for community vote and input. After community voting closes, Track Chairs will receive their presentations to review and they will determine the final selections for their respective tracks. Community votes are meant to help inform the decision, but are not the only guide. Track chairs are expected to exercise judgment in their area of expertise and help ensure diversity. Real-world user stories and in-the-trenches experiences are favored over sales pitches.</p>
-            <p>After track chairs make their decisions, speakers will be informed by mid March 2017. If you are selected as a speaker (or alternate speaker), you will receive a free code to register for the Boston Summit, as well as a set of deadlines and deliverables leading up to the event.</p>
-            <p>Track chair nominations for the Boston Summit are now open <a href="https://openstackfoundation.formstack.com/forms/openstack_summit_boston2017_track_chair_nominations" target="_blank">here</a> and will close January 18, 2017. Notifications will go out to selected track chairs by January 25, 2017.</p>
+            <p>After track chairs make their decisions, speakers will be informed by mid March 2017. If you are selected as a speaker (or alternate speaker), you will receive a free code to register for the Sydney Summit, as well as a set of deadlines and deliverables leading up to the event.</p>
+            <p>Track chair nominations for the Sydney Summit are now open <a href="https://openstackfoundation.formstack.com/forms/openstack_summit_sydney017_track_chair_nominations" target="_blank">here</a> and will close January 18, 2017. Notifications will go out to selected track chairs by January 25, 2017.</p>
             <p>Please note that this process covers the speaking sessions during the Summit, NOT the Forum sessions. You can more about that process on the <a href="https://wiki.openstack.org/wiki/Forum" target="_blank">OpenStack Wiki</a>.</p>
             <p>Want to provide feedback on this process? Join the discussion on the <a href="http://lists.openstack.org/cgi-bin/mailman/listinfo/community" target="_blank">openstack-community mailing list</a>, and/or contact the Foundation Summit Team directly <a href="mailto:summit@openstack.org">summit@openstack.org</a>.</p>
             <p>&nbsp;</p>
@@ -69,7 +69,7 @@
             <a id="categories"></a>
             <h2>Summit Tracks</h2>
 
-            <p><a href="summit/boston-2016/categories/" target="_blank">Plan your week! See how the session tracks are grouped into audience categories, by day.</a></p>
+            <p><a href="summit/sydney-2017/categories/" target="_blank">Plan your week! See how the session tracks are grouped into audience categories, by day.</a></p>
 
             <% loop ActiveSummit.getCategories %>
             <p>

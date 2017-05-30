@@ -32,7 +32,7 @@
             <li>
                 <a href="#openstackcoa">
                     <i class="fa fa-trophy"></i>
-                    COA in Boston
+                    COA in Sydney
                 </a>
             </li>
             
