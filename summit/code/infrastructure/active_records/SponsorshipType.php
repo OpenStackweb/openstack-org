@@ -21,7 +21,8 @@ class SponsorshipType extends DataObject implements ISponsorshipType
     (
         'Name'  => 'Varchar',
         'Label' => 'Varchar',
-        'Order' => 'Int'
+        'Order' => 'Int',
+        'Size'  => "Enum('Small, Medium, Large, Big', 'Medium')",
     );
 
     /**
@@ -30,5 +31,23 @@ class SponsorshipType extends DataObject implements ISponsorshipType
     public function getIdentifier()
     {
         return (int)$this->getField('ID');
+    }
+
+    public function getSizeClass()
+    {
+        switch ($this->Size) {
+            case 'Small':
+                return 'col-lg-1 col-md-1 col-sm-1';
+                break;
+            case 'Medium':
+                return 'col-lg-2 col-md-2 col-sm-2';
+                break;
+            case 'Large':
+                return 'col-lg-3 col-md-3 col-sm-3';
+                break;
+            case 'Big':
+                return 'col-lg-4 col-md-4 col-sm-4';
+                break;
+        }
     }
 }

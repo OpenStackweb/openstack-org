@@ -11,11 +11,9 @@
         <% if $SponsorAlert %>
         <div class="row">
             <div class="col-lg-12">
-
-                    <div class="alert alert-info sponsor-alert">
-                        $SponsorAlert
-                    </div>
-
+                <div class="alert alert-info sponsor-alert">
+                    $SponsorAlert
+                </div>
             </div>
         </div>
         <% end_if %>
@@ -87,7 +85,7 @@
                     <div class="col-lg-12">
                         <div class="row">
                             <% loop $Top.getSponsorsByType($Name) %>
-                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                <div class="{$SponsorshipType.getSizeClass()}">
                                     <a rel="nofollow" href="{$SubmitPageUrl}">$Company.SubmitLogo</a>
                                 </div>
                             <% end_loop %>
