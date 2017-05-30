@@ -12,14 +12,30 @@
  * limitations under the License.
  **/
 /**
- * Defines the JobsHolder page type
+ * Defines the Events page type
  */
 class EventHolder extends Page {
-   private static$db = array(
-   );
+    private static $db = array(
 
-   private static $has_one = array(
-   );
+    );
+
+    private static $has_one = array(
+       'Banner' => 'BetterImage'
+    );
+
+    function getCMSFields() {
+        $fields = parent::getCMSFields();
+
+        // header
+        $fields->addFieldToTab(
+            'Root.Main',
+            $uploadField = new UploadField('Banner','Banner')
+        );
+        $uploadField->setFolderName('openstackdays');
+        $uploadField->setAllowedFileCategories('image');
+
+        return $fields;
+    }
 
       
 }
@@ -175,6 +191,15 @@ class EventHolder_Controller extends Page_Controller {
         }
 
         return $event_type_links;
+    }
+
+    public function getUpcomingSummitLink() {
+        $summit = Summit::GetUpcoming();
+        if ($summit) {
+            return $summit->Link();
+        } else {
+            return '/summit';
+        }
     }
 
 }

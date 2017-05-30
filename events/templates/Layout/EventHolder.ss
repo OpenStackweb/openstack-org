@@ -2,14 +2,16 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="eventTitleArea">
-                <h1>OpenStack Event Listing</h1>
+                $Content
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-12">
-            <a href="/summit/boston-2017/">
-                <div class="event-ad-lrg"></div>
+            <a href="{$getUpcomingSummitLink()}">
+                <div class="event-ad-lrg">
+                    <img src="{$Banner.URL}" alt="Don't miss The Summit">
+                </div>
             </a>
         </div>
     </div>
