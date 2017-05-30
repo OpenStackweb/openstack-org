@@ -21,9 +21,7 @@ class SummitSponsorPage extends SummitPage
     private static $db = [
         'SponsorIntro'                        => 'HTMLText',
         'SponsorAlert'                        => 'HTMLText',
-        'SponsorSteps'                        => 'HTMLText',
         'SponsorContract'                     => 'Text',
-        'SponsorProspectus'                   => 'Text',
         'SponsorProspectus'                   => 'Text',
         'CallForSponsorShipStartDate'         => 'SS_Datetime',
         'CallForSponsorShipEndDate'           => 'SS_Datetime',
@@ -42,7 +40,8 @@ class SummitSponsorPage extends SummitPage
 
     private static $has_many = [
         'AttendeesByRegion' => 'SummitPieDataItemRegion',
-        'AttendeesByRoles'  => 'SummitPieDataItemRole'
+        'AttendeesByRoles'  => 'SummitPieDataItemRole',
+        'Sponsors'          => 'Sponsor'
     ];
 
     private static $has_one = [
@@ -50,118 +49,100 @@ class SummitSponsorPage extends SummitPage
         'ExhibitImage' => 'BetterImage'
     ];
 
-    private static $many_many = [
-        'Companies' => 'Company'
-    ];
-
-    //sponsor type
-    private static $many_many_extraFields = array(
-        'Companies' => [
-            'SponsorshipType' => "Enum('Headline, Premier, Event, Exhibitor, Startup, InKind, Spotlight, Media, Party', 'Startup')",
-            'SubmitPageUrl'   => 'Text',
-            'SummitID'        => 'Int'
-        ],
-    );
-
     public function getCMSFields()
     {
-        $fields = parent::getCMSFields();
+        $fields = new FieldList(new TabSet("Root", new Tab('Main')));
+        $fields_array = array();
+        HtmlEditorConfig::set_active('simple');
 
-        // Optional Sponsor Alert
-        $sponsorAlertField = new TextField('SponsorAlert', 'Sponsor Alert');
+        // Main
+        $fields_array[] = new TextField('SponsorAlert', 'Sponsor Alert');
+        $fields_array[] = new HtmlEditorField('SponsorIntro', 'Sponsor Intro Text');
+        $fields_array[] = new HtmlEditorField('HowToSponsorContent', 'How To Sponsor (Bottom)');
+        $fields_array[] = new HtmlEditorField('VenueMapContent', 'Venue Map Content');
+        $fields->addFieldsToTab('Root.Main', $fields_array);
 
-        $fields->addFieldToTab('Root.Main', $sponsorAlertField);
-
-        $fields->addFieldsToTab('Root.Main', new HtmlEditorField('SponsorIntro', 'Sponsor Intro Text'));
-
-        $fields->addFieldsToTab('Root.Main', new HtmlEditorField('HowToSponsorContent', 'How To Sponsor (Bottom)'));
-
-        $fields->addFieldsToTab('Root.Main', new HtmlEditorField('VenueMapContent', 'Venue Map Content'));
-
-        // Sponsor Steps Editor
-        $sponsorStepsField = new HTMLEditorField('SponsorSteps', 'Steps To Become A Sponsor');
-        $fields->addFieldToTab('Root.Main', $sponsorStepsField, 'Content');
-
-        $title1 = new HTMLEditorField('SponsorshipPackagesTitle', 'Sponsorship Packages Title');
-        $fields->addFieldToTab('Root.Main', $title1, 'SponsorSteps');
-
-        // Sponsor Steps Editor
-        $title2 = new HTMLEditorField('ConditionalSponsorshipPackagesTitle', 'Conditional Sponsorship Packages Title');
-        $fields->addFieldToTab('Root.Main', $title2, 'SponsorshipPackagesTitle');
-
-        $title3 = new HTMLEditorField('SponsorshipAddOnsTitle', 'Sponsorship AddOns Title');
-        $fields->addFieldToTab('Root.Main', $title3, 'ConditionalSponsorshipPackagesTitle');
-
-        //call for sponsorship dates
-
+        // Packages & Addons
         $start_date = new DatetimeField('CallForSponsorShipStartDate', 'Call For SponsorShip - Start Date');
         $end_date   = new DatetimeField('CallForSponsorShipEndDate', 'Call For SponsorShip - End Date');
         $start_date->getDateField()->setConfig('showcalendar', true);
         $start_date->setConfig('dateformat', 'dd/MM/yyyy');
         $end_date->getDateField()->setConfig('showcalendar', true);
         $end_date->setConfig('dateformat', 'dd/MM/yyyy');
-        $fields->addFieldToTab('Root.Main', $start_date);
-        $fields->addFieldToTab('Root.Main', $end_date);
+        $packages_title = new HTMLEditorField('SponsorshipPackagesTitle', 'Sponsorship Packages Title');
+        $packages_title->setRows(8);
+        $conditional_title = new HTMLEditorField('ConditionalSponsorshipPackagesTitle', 'Conditional Sponsorship Packages Title');
+        $conditional_title->setRows(8);
+        $addons_title = new HTMLEditorField('SponsorshipAddOnsTitle', 'Sponsorship AddOns Title');
+        $addons_title->setRows(8);
+
+        $fields->addFieldsToTab('Root.Packages&Addons', [$start_date,$end_date,$packages_title,$conditional_title,$addons_title]);
+
 
         if ($this->ID) {
             //set current page id
             $_REQUEST["PageId"] = $this->ID;
 
-
-            $prospectusField = new TextField('SponsorProspectus');
-            $fields->addFieldToTab('Root.ProspectusAndContract', $prospectusField);
-
-            $contractField = new TextField('SponsorContract');
-            $fields->addFieldToTab('Root.ProspectusAndContract', $contractField);
-
-            // sponsors
-
-            $companies = new GridField('Companies', 'Sponsors', $this->Companies(), GridFieldConfig_RelationEditor::create(PHP_INT_MAX));
-
-            $companies->getConfig()->removeComponentsByType('GridFieldEditButton');
-            $companies->getConfig()->removeComponentsByType('GridFieldAddNewButton');
-
-            $companies->getConfig()->getComponentByType('GridFieldDataColumns')->setDisplayFields(
-                [
-                    'Name'               => 'Name',
-                    "DDLSponsorshipType" => "Sponsorship Type",
-                    "InputSubmitPageUrl" => "Sponsor Link"
-                ]
-            );
-
-            $fields->addFieldToTab('Root.SponsorCompanies', $companies);
-
-            $fields->addFieldsToTab("Root.Main", $upload_0 = new UploadField('CrowdImage','Crowd Image'));
-            $fields->addFieldsToTab("Root.Main", $upload_1 = new UploadField('ExhibitImage','Exhibit Image'));
-
-            $upload_0->setFolderName('summits/sponsorship/backgroun');
+            // Images and Files
+            $upload_0 = new UploadField('CrowdImage','Crowd Image');
+            $upload_0->setFolderName('summits/sponsorship/background');
             $upload_0->setAllowedMaxFileNumber(1);
             $upload_0->setAllowedFileCategories('image');
-
+            $upload_1 = new UploadField('ExhibitImage','Exhibit Image');
             $upload_1->setFolderName('summits/sponsorship/background');
             $upload_1->setAllowedMaxFileNumber(1);
             $upload_1->setAllowedFileCategories('image');
+            $prospectusField = new TextField('SponsorProspectus');
+            $contractField = new TextField('SponsorContract');
+            $fields->addFieldsToTab("Root.Images&Files", [$upload_0,$upload_1,$prospectusField,$contractField]);
+
+            // sponsors
+            $companies = new GridField('Sponsors', 'Sponsors', $this->Sponsors(), GridFieldConfig_RelationEditor::create(PHP_INT_MAX));
+            $companies->getConfig()->removeComponentsByType('GridFieldEditButton');
+            $companies->getConfig()->removeComponentsByType('GridFieldAddNewButton');
+            $companies->getConfig()->removeComponentsByType('GridFieldAddExistingAutocompleter');
+            $completer = new SponsorsGridFieldAddExistingAutocompleter();
+            $completer->setSearchList(Company::get());
+            $completer->setPlaceholderText('Search by Company Name');
+            $completer->setSummitID($this->Summit()->ID);
+            $companies->getConfig()->addComponent($completer);
+            $companies->getConfig()->getComponentByType('GridFieldDataColumns')->setDisplayFields(
+                [
+                    'Company.Name'       => 'Name',
+                    'DDLSponsorshipType' => 'Sponsorship Type',
+                    'InputSubmitPageUrl' => 'Sponsor Link'
+                ]
+            );
+
+            $config = GridFieldConfig_RecordEditor::create();
+            $config->addComponent($sort = new GridFieldSortableRows('Order'));
+            $sponsorship_types = new GridField('SponsorshipTypes', 'Sponsoship Types', SponsorshipType::get(), $config);
+
+            $fields->addFieldsToTab('Root.SponsorCompanies', [$companies,$sponsorship_types]);
+
 
             //audience
             $config = GridFieldConfig_RecordEditor::create();
             $config->addComponent($sort = new GridFieldSortableRows('Order'));
-            $gridField = new GridField('AttendeesByRegion', 'Attendees By Region', $this->AttendeesByRegion(), $config);
-            $fields->add( $gridField);
-
+            $attendees_region = new GridField('AttendeesByRegion', 'Attendees By Region', $this->AttendeesByRegion(), $config);
             $config = GridFieldConfig_RecordEditor::create();
             $config->addComponent($sort = new GridFieldSortableRows('Order'));
-            $gridField = new GridField('AttendeesByRoles', 'Attendees By Roles', $this->AttendeesByRoles(), $config);
-            $fields->add( $gridField);
-
+            $attendees_roles = new GridField('AttendeesByRoles', 'Attendees By Roles', $this->AttendeesByRoles(), $config);
 
         }
 
+        //audience
         $fields->addFieldsToTab('Root.Audience', new CheckboxField('ShowAudience', 'Show Audience'));
-        $fields->addFieldsToTab('Root.Audience', new HtmlEditorField('AudienceIntro', 'Intro'));
+        $fields->addFieldsToTab('Root.Audience', $audience_intro = new HtmlEditorField('AudienceIntro', 'Intro'));
+        $audience_intro->setRows(8);
         $fields->addFieldsToTab('Root.Audience', new TextField('AudienceMetricsTitle', 'Metrics Title'));
         $fields->addFieldsToTab('Root.Audience', new TextField('AudienceTotalSummitAttendees', 'Total Summit Attendees'));
         $fields->addFieldsToTab('Root.Audience', new TextField('AudienceCompaniesRepresented', 'Companies Represented'));
         $fields->addFieldsToTab('Root.Audience', new TextField('AudienceCountriesRepresented', 'Countries Represented'));
+        if ($this->ID) {
+            $fields->addFieldsToTab('Root.Audience', [$attendees_region,$attendees_roles]);
+        }
+
         return $fields;
 
     }
@@ -189,20 +170,18 @@ class SummitSponsorPage extends SummitPage
     function onAfterWrite()
     {
         parent::onAfterWrite();
-        $summit = $this->Summit();
         //update all relationships with sponsors
-        foreach ($this->Companies() as $company) {
-            if (isset($_REQUEST["SponsorshipType_{$company->ID}"])) {
-                $type = $_REQUEST["SponsorshipType_{$company->ID}"];
-                $sql = "UPDATE SummitSponsorPage_Companies SET SponsorshipType ='{$type}', SummitID = '{$summit->ID}' WHERE CompanyID={$company->ID} AND SummitSponsorPageID={$this->ID};";
+        foreach ($this->Sponsors() as $sponsor) {
+            if (isset($_REQUEST["SponsorshipType_{$sponsor->ID}"])) {
+                $type = $_REQUEST["SponsorshipType_{$sponsor->ID}"];
+                $sql = "UPDATE Sponsor SET SponsorshipTypeID ='{$type}' WHERE CompanyID={$sponsor->CompanyID} AND SponsorPageID={$this->ID};";
                 DB::query($sql);
             }
-            if (isset($_REQUEST["SubmitPageUrl_{$company->ID}"])) {
-                $page_url = $_REQUEST["SubmitPageUrl_{$company->ID}"];
-                $sql = "UPDATE SummitSponsorPage_Companies SET SubmitPageUrl ='{$page_url}', SummitID = '{$summit->ID}' WHERE CompanyID={$company->ID} AND SummitSponsorPageID={$this->ID};";
+            if (isset($_REQUEST["SubmitPageUrl_{$sponsor->ID}"])) {
+                $page_url = $_REQUEST["SubmitPageUrl_{$sponsor->ID}"];
+                $sql = "UPDATE Sponsor SET SubmitPageUrl ='{$page_url}' WHERE CompanyID={$sponsor->CompanyID} AND SponsorPageID={$this->ID};";
                 DB::query($sql);
             }
-
         }
     }
 
@@ -287,57 +266,62 @@ class SummitSponsorPage extends SummitPage
      */
     public function HasSponsors(){
         return $this->StartupSponsors()->Count() > 0 || $this->HeadlineSponsors()->Count() > 0
-        || $this->PremierSponsors()->Count() > 0 || $this->EventSponsors()->Count() > 0 || $this->Exhibitor()->Count() > 0
+        || $this->PremierSponsors()->Count() > 0 || $this->EventSponsors()->Count() > 0 || $this->ExhibitorSponsors()->Count() > 0
         || $this->InKindSponsors()->Count() > 0 || $this->SpotlightSponsors()->Count() > 0
         || $this->MediaSponsors()->Count() > 0;
     }
 
-    private function Sponsors($type)
+    public function getSponsorsByType($type)
     {
         $page_id = $this->ID;
         $page = SummitSponsorPage::get()->byID($page_id);
-        $res = $page->getManyManyComponents("Companies", "SponsorshipType='{$type}'", "ID");
+        $res = $page->Sponsors()->leftJoin('SponsorshipType', 'SponsorshipType.ID = Sponsor.SponsorshipTypeID')->where("SponsorshipType.Name='{$type}'");
         return $res;
+    }
+
+    public function getSponsorshipTypes()
+    {
+        return SponsorshipType::get()->sort('Order');
     }
 
     public function StartupSponsors()
     {
-        return $this->Sponsors("Startup");
+        return $this->getSponsorsByType("Startup");
     }
 
     public function HeadlineSponsors()
     {
-        return $this->Sponsors("Headline");
+        return $this->getSponsorsByType("Headline");
     }
 
     public function PremierSponsors()
     {
-        return $this->Sponsors("Premier");
+        return $this->getSponsorsByType("Premier");
     }
 
     public function EventSponsors()
     {
-        return $this->Sponsors("Event");
+        return $this->getSponsorsByType("Event");
     }
 
     public function ExhibitorSponsors()
     {
-        return $this->Sponsors("Exhibitor");
+        return $this->getSponsorsByType("Exhibitor");
     }
 
     public function InKindSponsors()
     {
-        return $this->Sponsors("InKind");
+        return $this->getSponsorsByType("InKind");
     }
 
     public function SpotlightSponsors()
     {
-        return $this->Sponsors("Spotlight");
+        return $this->getSponsorsByType("Spotlight");
     }
 
     public function MediaSponsors()
     {
-        return $this->Sponsors("Media");
+        return $this->getSponsorsByType("Media");
     }
 
     public function CrowdImageUrl(){

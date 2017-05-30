@@ -71,3 +71,4 @@ migrations:
   - UpdateComponentReleasesMigration
   - GenerateComponentSlugMigration
   - PopulateMascotsMigration
+  - SummitSponsorsMigration

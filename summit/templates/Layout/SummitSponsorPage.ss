@@ -76,164 +76,26 @@
 <% if HasSponsors %>
 <div class="white sponsor-list" id="sponsors">
     <div class="container">
-        <% if HeadlineSponsors %>
-            <div class="row">
-                <div class="col-lg-8 col-lg-push-2">
-                    <h5 class="section-title">
-                        Headline Sponsors
-                    </h5>
-                </div>
-                <div class="col-lg-12">
-                    <div class="row">
-                        <% loop HeadlineSponsors %>
-                            <div class="col-lg-3 col-md-3 col-sm-3">
-                                <a rel="nofollow" href="{$SubmitLandPageUrl}">$SubmitLogo</a>
-                            </div>
-                        <% end_loop %>
+        <% loop getSponsorshipTypes() %>
+            <% if $Top.getSponsorsByType($Name) %>
+                <div class="row">
+                    <div class="col-lg-8 col-lg-push-2">
+                        <h5 class="section-title">
+                            $Label
+                        </h5>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <% loop $Top.getSponsorsByType($Name) %>
+                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                    <a rel="nofollow" href="{$SubmitPageUrl}">$Company.SubmitLogo</a>
+                                </div>
+                            <% end_loop %>
+                        </div>
                     </div>
                 </div>
-            </div>
-        <% end_if %>
-        <% if PremierSponsors %>
-            <div class="row">
-                <div class="col-lg-8 col-lg-push-2">
-                    <h5 class="section-title">
-                        Premier Sponsors
-                    </h5>
-                </div>
-                <div class="col-lg-8 col-lg-push-2">
-                    <div class="row">
-                        <% loop PremierSponsors %>
-                            <div class="col-lg-3 col-md-3 col-sm-3">
-                                <a rel="nofollow" href="{$SubmitLandPageUrl}">
-                                    $SubmitLogo
-                                </a>
-                            </div>
-                        <% end_loop %>
-                    </div>
-                </div>
-            </div>
-        <% end_if %>
-        <% if SpotlightSponsors %>
-            <div class="row">
-                <div class="col-lg-8 col-lg-push-2">
-                    <h5 class="section-title">
-                        Spotlight Sponsors
-                    </h5>
-                </div>
-                <div class="col-lg-8 col-lg-push-2">
-                    <div class="row">
-                        <% loop SpotlightSponsors %>
-                            <div class="col-lg-2 col-md-2 col-sm-2">
-                                <a rel="nofollow" href="{$SubmitLandPageUrl}">
-                                    $SubmitLogo
-                                </a>
-                            </div>
-                        <% end_loop %>
-                    </div>
-                </div>
-            </div>
-        <% end_if %>
-        <% if ExhibitorSponsors %>
-            <div class="row">
-                <div class="col-lg-8 col-lg-push-2">
-                    <h5 class="section-title">
-                        Exhibitor Sponsors
-                    </h5>
-                </div>
-                <div class="col-lg-8 col-lg-push-2">
-                    <div class="row">
-                        <% loop ExhibitorSponsors %>
-                            <div class="col-lg-2 col-md-2 col-sm-2">
-                                <a rel="nofollow" href="{$SubmitLandPageUrl}">
-                                    $SubmitLogo
-                                </a>
-                            </div>
-                        <% end_loop %>
-                    </div>
-                </div>
-            </div>
-        <% end_if %>
-        <% if EventSponsors %>
-            <div class="row">
-                <div class="col-lg-8 col-lg-push-2">
-                    <h5 class="section-title">
-                        Event Sponsors
-                    </h5>
-                </div>
-                <div class="col-lg-8 col-lg-push-2">
-                    <div class="row">
-                        <% loop EventSponsors %>
-                            <div class="col-lg-2 col-md-2 col-sm-2">
-                                <a rel="nofollow" href="{$SubmitLandPageUrl}">
-                                    $SubmitLogo
-                                </a>
-                            </div>
-                        <% end_loop %>
-                    </div>
-                </div>
-            </div>
-        <% end_if %>
-        <% if StartupSponsors %>
-            <div class="row">
-                <div class="col-lg-8 col-lg-push-2">
-                    <h5 class="section-title">
-                        Startup Sponsors
-                    </h5>
-                </div>
-                <div class="col-lg-8 col-lg-push-2">
-                    <div class="row">
-                        <% loop StartupSponsors %>
-                            <div class="col-lg-2 col-md-2 col-sm-2">
-                                <a rel="nofollow" href="{$SubmitLandPageUrl}">
-                                    $SubmitLogo
-                                </a>
-                            </div>
-                        <% end_loop %>
-                    </div>
-                </div>
-            </div>
-        <% end_if %>
-        <% if InKindSponsors %>
-            <div class="row">
-                <div class="col-lg-8 col-lg-push-2">
-                    <h5 class="section-title">
-                        Community Partners
-                    </h5>
-                </div>
-                <div class="col-lg-8 col-lg-push-2">
-                    <div class="row">
-                        <% loop InKindSponsors %>
-                            <div class="col-lg-2 col-md-2 col-sm-2">
-                                <a rel="nofollow" href="{$SubmitLandPageUrl}">
-                                    $SubmitLogo
-                                </a>
-                            </div>
-                        <% end_loop %>
-                    </div>
-                </div>
-            </div>
-        <% end_if %>
-        <% if MediaSponsors %>
-            <div class="row">
-                <div class="col-lg-8 col-lg-push-2">
-                    <h5 class="section-title">
-                        Media Partners
-                    </h5>
-                </div>
-                <div class="col-lg-8 col-lg-push-2">
-                    <div class="row">
-                        <% loop MediaSponsors %>
-                            <div class="col-lg-3 col-md-. col-sm-3">
-                                <a rel="nofollow" href="{$SubmitLandPageUrl}">
-                                    $SubmitLogo
-                                </a>
-                            </div>
-                        <% end_loop %>
-                    </div>
-                </div>
-            </div>
-        <% end_if %>
+            <% end_if %>
+        <% end_loop %>
     </div>
 </div>
 <% end_if %>

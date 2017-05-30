@@ -964,16 +964,17 @@ SQL;
             switch($report_name) {
                 case 'sponsorship_type' :
                     $query->setFrom('Company');
-                    $query->addLeftJoin('SummitSponsorPage_Companies', 'SummitSponsorPage_Companies.CompanyID = Company.ID');
-                    $query->addLeftJoin('Summit', 'Summit.ID = SummitSponsorPage_Companies.SummitID');
+                    $query->addLeftJoin('Sponsor', 'Sponsor.CompanyID = Company.ID');
+                    $query->addLeftJoin('SponsorshipType', 'Sponsor.SponsorshipTypeID = SponsorshipType.ID');
+                    $query->addLeftJoin('Summit', 'Summit.ID = Sponsor.SummitID');
                     $query->addLeftJoin('Countries', 'Company.Country = Countries.Code');
                     $query->addLeftJoin('Continent_Countries', 'Continent_Countries.CountryCode = Company.Country');
                     $query->addLeftJoin('Continent', 'Continent.ID = Continent_Countries.ContinentID');
                     $query->addWhere('Summit.Active','1');
-                    $fields = array_merge($fields,array('Sponsorship'=>'SummitSponsorPage_Companies.SponsorshipType','Summit ID'=>'Summit.ID'));
+                    $fields = array_merge($fields,array('Sponsorship'=>'SponsorshipType.Name','Summit ID'=>'Summit.ID'));
 
                     $query->setSelect($fields);
-                    $query->addOrderBy('SummitSponsorPage_Companies.SponsorshipType');
+                    $query->addOrderBy('SponsorshipType.Name');
 
                     $filename = "Sponsorship_Levels_" . date('Ymd') . "." . $ext;
                     break;

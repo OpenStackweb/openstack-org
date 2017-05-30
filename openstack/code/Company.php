@@ -77,10 +77,6 @@ class Company extends DataObject implements PermissionProvider,IEntity
     private static $singular_name = 'Company';
     private static $plural_name = 'Companies';
 
-    //Administrators Security Groups
-    private static $belongs_many_many = array(
-        'SponsorsPages' => 'SponsorsPage'
-    );
     private static $summary_fields = array(
         'Name' => 'Company',
         'MemberLevel' => 'MemberLevel'
@@ -390,79 +386,9 @@ class Company extends DataObject implements PermissionProvider,IEntity
         }
     }
 
-    //helper function to create Drop Down for Sponsorship type
     function IsExternalUrl()
     {
         return !$this->Description ? true : false;
-    }
-
-    //helper function to create Drop Down for Logo Size
-
-    public function getInputSubmitPageUrl()
-    {
-        $type = null;
-        $pageId = Convert::raw2sql($_REQUEST["PageId"]);
-        if (isset($pageId)) {
-            $sqlQuery = new SQLQuery();
-            $sqlQuery->setSelect("SubmitPageUrl");
-            $sqlQuery->setFrom("SummitSponsorPage_Companies");
-            $sqlQuery->setWhere("CompanyID={$this->ID} AND SummitSponsorPageID={$pageId}");
-            $type = $sqlQuery->execute()->value();
-        }
-
-        return new TextField("SubmitPageUrl_{$this->ID}", "SubmitPageUrl_{$this->ID}", $type, 255);
-    }
-
-    public function getDDLSponsorshipType()
-    {
-        $type = null;
-        $pageId = Convert::raw2sql($_REQUEST["PageId"]);
-
-        if (isset($pageId)) {
-            $sqlQuery = new SQLQuery();
-            $sqlQuery->setSelect("SponsorshipType");
-            $sqlQuery->setFrom("SummitSponsorPage_Companies");
-            $sqlQuery->setWhere("CompanyID={$this->ID} AND SummitSponsorPageID={$pageId}");
-            $type = $sqlQuery->execute()->value();
-        }
-
-        return new DropdownField("SponsorshipType_{$this->ID}", "SponsorshipType_{$this->ID}", array(
-            'Headline' => 'Headline',
-            'Premier' => 'Premier',
-            'Event' => 'Event',
-            'Startup' => 'Startup',
-            'InKind' => 'In Kind',
-            'Spotlight' => 'Spotlight',
-            'Media' => 'Media',
-            '' => '--NONE--'
-        ), $type);
-    }
-
-    public function getDDLLogoSize()
-    {
-        $size = null;
-        $pageId = Convert::raw2sql($_REQUEST["PageId"]);
-
-        if (isset($pageId)) {
-            $sqlQuery = new SQLQuery();
-            $sqlQuery->setSelect("LogoSize");
-            $sqlQuery->setFrom("SummitSponsorPage_Companies");
-            $sqlQuery->setWhere("CompanyID={$this->ID} AND SummitSponsorPageID={$pageId}");
-            $size = $sqlQuery->execute()->value();
-            if (is_null($size)) {
-                $size = 'None';
-            }
-        }
-
-        $sizes = array(
-            'Small' => 'Small',
-            'Medium' => 'Medium',
-            'Large' => 'Large',
-            'Big' => 'Big',
-            'None' => '--NONE--'
-        );
-
-        return new DropdownField("LogoSize_{$this->ID}", "LogoSize_{$this->ID}", $sizes, $size);
     }
 
     public function SidebarLogoPreview()
@@ -528,6 +454,7 @@ class Company extends DataObject implements PermissionProvider,IEntity
         return 'missing';
     }
 
+    // this is only used for SponsorPage (not SummitSponsorPage) which is used only in old summits
     public function SubmitLandPageUrl()
     {
         $url = $this->URL;
