@@ -51,13 +51,12 @@ final class SummitSponsorsMigration extends AbstractDBMigrationTask
 
         foreach ($sponsors as $sponsor) {
             $sponsor_exists = Sponsor::get()
-                        ->filter(array('SponsorPageID' => $sponsor['SummitSponsorPageID'], 'CompanyID' => $sponsor['CompanyID']))
+                        ->filter(array('SummitID' => $sponsor['SummitID'], 'CompanyID' => $sponsor['CompanyID']))
                         ->count();
 
             if (!$sponsor_exists) {
                 $new_sponsor = new Sponsor();
                 $new_sponsor->CompanyID = $sponsor['CompanyID'];
-                $new_sponsor->SponsorPageID = $sponsor['SummitSponsorPageID'];
                 $new_sponsor->SubmitPageUrl = $sponsor['SubmitPageUrl'];
                 $new_sponsor->SummitID = $sponsor['SummitID'];
                 $sponsorship_type = SponsorshipType::get()->filter('Name',$sponsor['SponsorshipType'])->first();

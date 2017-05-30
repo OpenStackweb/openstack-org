@@ -26,7 +26,6 @@ class Sponsor extends DataObject implements ISponsor
     (
         'Company'         => 'Company',
         'SponsorshipType' => 'SponsorshipType',
-        'SponsorPage'     => 'SummitSponsorPage',
         'Summit'          => 'Summit'
     );
 

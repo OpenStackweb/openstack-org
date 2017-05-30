@@ -190,7 +190,7 @@ interface ISummit extends IEntity
     /**
      * @return ICompany[]
      */
-    public function Sponsors();
+    public function EventSponsors();
 
     /**
      * @param $date

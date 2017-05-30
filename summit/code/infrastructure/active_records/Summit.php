@@ -77,6 +77,7 @@ final class Summit extends DataObject implements ISummit
         'SummitPackages'               => 'SummitPackage',
         'SummitAddOns'                 => 'SummitAddOn',
         'WIFIConnections'              => 'SummitWIFIConnection',
+        'Sponsors'                     => 'Sponsor'
     ];
 
     /**
@@ -1361,7 +1362,7 @@ SQL;
     /**
      * @return ICompany[]
      */
-    public function Sponsors()
+    public function EventSponsors()
     {
         $query = <<<SQL
 SELECT DISTINCT C.* FROM SummitEvent_Sponsors S

@@ -40,8 +40,7 @@ class SummitSponsorPage extends SummitPage
 
     private static $has_many = [
         'AttendeesByRegion' => 'SummitPieDataItemRegion',
-        'AttendeesByRoles'  => 'SummitPieDataItemRole',
-        'Sponsors'          => 'Sponsor'
+        'AttendeesByRoles'  => 'SummitPieDataItemRole'
     ];
 
     private static $has_one = [
@@ -97,7 +96,7 @@ class SummitSponsorPage extends SummitPage
             $fields->addFieldsToTab("Root.Images&Files", [$upload_0,$upload_1,$prospectusField,$contractField]);
 
             // sponsors
-            $companies = new GridField('Sponsors', 'Sponsors', $this->Sponsors(), GridFieldConfig_RelationEditor::create(PHP_INT_MAX));
+            $companies = new GridField('Sponsors', 'Sponsors', $this->Summit()->Sponsors(), GridFieldConfig_RelationEditor::create(PHP_INT_MAX));
             $companies->getConfig()->removeComponentsByType('GridFieldEditButton');
             $companies->getConfig()->removeComponentsByType('GridFieldAddNewButton');
             $companies->getConfig()->removeComponentsByType('GridFieldAddExistingAutocompleter');
@@ -171,15 +170,15 @@ class SummitSponsorPage extends SummitPage
     {
         parent::onAfterWrite();
         //update all relationships with sponsors
-        foreach ($this->Sponsors() as $sponsor) {
+        foreach ($this->Summit()->Sponsors() as $sponsor) {
             if (isset($_REQUEST["SponsorshipType_{$sponsor->ID}"])) {
                 $type = $_REQUEST["SponsorshipType_{$sponsor->ID}"];
-                $sql = "UPDATE Sponsor SET SponsorshipTypeID ='{$type}' WHERE CompanyID={$sponsor->CompanyID} AND SponsorPageID={$this->ID};";
+                $sql = "UPDATE Sponsor SET SponsorshipTypeID ='{$type}' WHERE CompanyID={$sponsor->CompanyID} AND SummitID={$this->Summit()->ID};";
                 DB::query($sql);
             }
             if (isset($_REQUEST["SubmitPageUrl_{$sponsor->ID}"])) {
                 $page_url = $_REQUEST["SubmitPageUrl_{$sponsor->ID}"];
-                $sql = "UPDATE Sponsor SET SubmitPageUrl ='{$page_url}' WHERE CompanyID={$sponsor->CompanyID} AND SponsorPageID={$this->ID};";
+                $sql = "UPDATE Sponsor SET SubmitPageUrl ='{$page_url}' WHERE CompanyID={$sponsor->CompanyID} AND SummitID={$this->Summit()->ID};";
                 DB::query($sql);
             }
         }
@@ -265,63 +264,27 @@ class SummitSponsorPage extends SummitPage
      * @return bool
      */
     public function HasSponsors(){
-        return $this->StartupSponsors()->Count() > 0 || $this->HeadlineSponsors()->Count() > 0
-        || $this->PremierSponsors()->Count() > 0 || $this->EventSponsors()->Count() > 0 || $this->ExhibitorSponsors()->Count() > 0
-        || $this->InKindSponsors()->Count() > 0 || $this->SpotlightSponsors()->Count() > 0
-        || $this->MediaSponsors()->Count() > 0;
+        foreach ($this->getSponsorshipTypes() as $type) {
+            if ($this->getSponsorsByType($type)) return true;
+        }
+
+        return false;
     }
 
     public function getSponsorsByType($type)
     {
         $page_id = $this->ID;
         $page = SummitSponsorPage::get()->byID($page_id);
-        $res = $page->Sponsors()->leftJoin('SponsorshipType', 'SponsorshipType.ID = Sponsor.SponsorshipTypeID')->where("SponsorshipType.Name='{$type}'");
+        $res = $page->Summit()->Sponsors()
+                ->leftJoin('SponsorshipType', 'SponsorshipType.ID = Sponsor.SponsorshipTypeID')
+                ->where("SponsorshipType.Name='{$type}'");
+
         return $res;
     }
 
     public function getSponsorshipTypes()
     {
         return SponsorshipType::get()->sort('Order');
-    }
-
-    public function StartupSponsors()
-    {
-        return $this->getSponsorsByType("Startup");
-    }
-
-    public function HeadlineSponsors()
-    {
-        return $this->getSponsorsByType("Headline");
-    }
-
-    public function PremierSponsors()
-    {
-        return $this->getSponsorsByType("Premier");
-    }
-
-    public function EventSponsors()
-    {
-        return $this->getSponsorsByType("Event");
-    }
-
-    public function ExhibitorSponsors()
-    {
-        return $this->getSponsorsByType("Exhibitor");
-    }
-
-    public function InKindSponsors()
-    {
-        return $this->getSponsorsByType("InKind");
-    }
-
-    public function SpotlightSponsors()
-    {
-        return $this->getSponsorsByType("Spotlight");
-    }
-
-    public function MediaSponsors()
-    {
-        return $this->getSponsorsByType("Media");
     }
 
     public function CrowdImageUrl(){

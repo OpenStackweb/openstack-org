@@ -39,7 +39,7 @@
 
         <% cached 'frontend_schedule_page', $Summit.ID, $Summit.LastEdited %>
 
-        <% loop $Summit.Sponsors %>
+        <% loop $Summit.EventSponsors %>
            summit.sponsors[{$ID}] =
            {
                 id: {$ID},

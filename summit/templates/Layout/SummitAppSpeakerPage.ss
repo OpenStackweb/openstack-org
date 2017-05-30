@@ -104,7 +104,7 @@
                                 <% end_with %>
                             <% end_if %>
 
-                            <% loop $Top.Summit.Sponsors %>
+                            <% loop $Top.Summit.EventSponsors %>
                             summit.sponsors[{$ID}] =
                             {
                                 id: {$ID},
