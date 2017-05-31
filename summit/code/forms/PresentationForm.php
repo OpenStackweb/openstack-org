@@ -70,7 +70,10 @@ final class PresentationForm extends BootstrapForm
         }
 
         usort($category_groups_map, function($a, $b) { return strcmp($a["title"], $b["title"]); });
-        $types = PresentationType::get()->filter('SummitID', $this->summit->ID)->exclude('Type', IPresentationType::Keynotes);
+        $types = PresentationType::get()
+                    ->filter('SummitID', $this->summit->ID)
+                    ->exclude('Type', [IPresentationType::Keynotes, IPresentationType::LightingTalks]);
+        
         $instructions = '(';
         foreach($types as $type){
             $instructions .= $type->Type;
