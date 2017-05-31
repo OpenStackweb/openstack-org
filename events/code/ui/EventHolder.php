@@ -20,7 +20,8 @@ class EventHolder extends Page {
     );
 
     private static $has_one = array(
-       'Banner' => 'BetterImage'
+       'Banner' => 'BetterImage',
+       'HomePageBanner' => 'BetterImage'
     );
 
     function getCMSFields() {
@@ -33,6 +34,13 @@ class EventHolder extends Page {
         );
         $uploadField->setFolderName('openstackdays');
         $uploadField->setAllowedFileCategories('image');
+
+        $fields->addFieldToTab(
+            'Root.Main',
+            $uploadField2 = new UploadField('HomePageBanner','HomePage Banner')
+        );
+        $uploadField2->setFolderName('openstackdays');
+        $uploadField2->setAllowedFileCategories('image');
 
         return $fields;
     }

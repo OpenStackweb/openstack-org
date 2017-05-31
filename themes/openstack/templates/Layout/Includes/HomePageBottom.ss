@@ -92,7 +92,11 @@
             <div class="row">
                 <div class="col-lg-6 col-sm-6 news-wrapper">
                     <h2>Upcoming Events <a href="/community/events/">See All <i class="fa fa-caret-right"></i></a></h2>
-                    <a href="/summit/boston-2017/"><img class="event-ad" src="/assets/boston-summit/promo/0E430DD4-0DEB-4900-AEE2-D909F2BF87EC.jpeg"></a>
+                    <% if $getEventsBanner() %>
+                    <a href="{$getUpcomingSummitLink()}">
+                        <img class="event-ad" src="{$getEventsBanner().URL}">
+                    </a>
+                    <% end_if %>
                     $UpcomingEvents(20)
                 </div>
                 <div class="col-lg-6 col-sm-6 news-wrapper">

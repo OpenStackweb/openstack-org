@@ -193,6 +193,20 @@ class HomePage_Controller extends Page_Controller
         return $output;
     }
 
+    function getEventsBanner() {
+        $event_page = EventHolder::get()->sort('ID','DESC')->first();
+        return $event_page->HomePageBanner();
+    }
+
+    function getUpcomingSummitLink() {
+        $summit = Summit::GetUpcoming();
+        if ($summit) {
+            return $summit->Link();
+        } else {
+            return '/summit';
+        }
+    }
+
     function UpcomingEvents($limit = 1)
     {
 
