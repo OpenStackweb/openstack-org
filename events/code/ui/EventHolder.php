@@ -204,7 +204,7 @@ class EventHolder_Controller extends Page_Controller {
     public function getUpcomingSummitLink() {
         $summit = Summit::GetUpcoming();
         if ($summit) {
-            return $summit->Link();
+            return $summit->Link;
         } else {
             return '/summit';
         }
