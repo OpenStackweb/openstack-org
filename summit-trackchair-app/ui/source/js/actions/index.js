@@ -47,6 +47,7 @@ export const toggleForGroup = createAction('TOGGLE_FOR_GROUP');
 export const requestLists = createAction('REQUEST_LISTS');
 export const receiveLists = createAction('RECEIVE_LISTS');
 export const reorganiseSelections = createAction('REORGANISE_SELECTIONS');
+export const successReorderChange = createAction('SUCCESS_REORDER_CHANGE');
 export const sortDirectory = createAction('SORT_DIRECTORY');
 export const searchDirectory = createAction('SEARCH_DIRECTORY');
 export const requestChangeRequests = createAction('REQUEST_CHANGE_REQUESTS');
@@ -215,7 +216,7 @@ export const postEmail = (presentationID, emailData) => {
 	};
 }
 
-export const postReorganise = (listID, collection, newOrder) => {
+export const postReorganise = (listID, collection, newOrder, listHash) => {
 	return (dispatch, getState) => {
 		const key = `REORDER_${listID}_${collection}`;
 		var msg = '';
@@ -242,11 +243,17 @@ export const postReorganise = (listID, collection, newOrder) => {
 		const data = {
 			list_id: listID,
 			order: order,
-			collection: collectionMap[collection]
+			collection: collectionMap[collection],
+            list_hash: listHash
 		};
 		const req = http.put('/trackchairs/api/v1/reorder')
 			.send(data)
-			.end(responseHandler(dispatch));
+			.end(responseHandler(dispatch,
+                json => {
+                    dispatch(successReorderChange({ response: json, listID: listID }))
+                }
+            ));
+
 		schedule(key, req);
 	};
 };

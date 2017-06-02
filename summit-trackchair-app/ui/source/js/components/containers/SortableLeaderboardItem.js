@@ -48,7 +48,7 @@ const cardTarget = {
     // When dragging upwards, only move when the cursor is above 50%
 
     // Dragging downwards
-    if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY && dragList === hoverList) {      
+    if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY && dragList === hoverList) {
       return;
     }
 
@@ -112,8 +112,6 @@ class SortableLeaderboardItem extends Component {
         </div>
         <div className="selection-meta">
             {p.level}
-            {p.lightning && <span className="selection-lightning"><i className="fa fa-bolt" /></span> }
-            {p.lightning_wannabe && <span className="selection-lightning">"<i className="fa fa-bolt" />"</span> }
         </div>
 
       </div>

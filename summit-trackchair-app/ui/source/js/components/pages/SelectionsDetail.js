@@ -29,7 +29,8 @@ class SelectionsDetail extends React.Component {
 			this.props.reorganiseSelections(
 				this.props.list.id,
 				fromList,
-				this.props[fromList].filter(i => i.id !== existing.id)
+				this.props[fromList].filter(i => i.id !== existing.id),
+                this.props.list.list_hash
 			);
 		}
 
@@ -51,7 +52,8 @@ class SelectionsDetail extends React.Component {
 		this.props.reorganiseSelections(
 			toList === 'team' ? this.props.teamList.id : this.props.list.id,
 			toList,
-			newList.move((newList.length-1), toIndex)
+			newList.move((newList.length-1), toIndex),
+            this.props.teamList.list_hash
 		);
 	}
 
@@ -189,8 +191,8 @@ export default connect(
 	},
 
 	dispatch => ({
-		reorganiseSelections(listID, collection, newOrder) {
-			dispatch(postReorganise(listID, collection, newOrder));
+		reorganiseSelections(listID, collection, newOrder, listHash) {
+			dispatch(postReorganise(listID, collection, newOrder, listHash));
 		}
 	})
 )(SelectionsDetail);

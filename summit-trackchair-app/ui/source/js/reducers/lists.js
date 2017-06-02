@@ -20,8 +20,7 @@ export const lists = function (
                 results: [
                 	...action.payload.response.lists
                 			.sort((a,b) => {
-                                if (a.is_group == b.is_group) return a.is_lightning;
-                                else !a.is_group;
+                                return !a.is_group;
                             })
                 ],
                 loading: false
@@ -121,6 +120,19 @@ export const lists = function (
         			return l;
         		})
         	};
+        case 'SUCCESS_REORDER_CHANGE':
+            return {
+                ...state,
+                results: state.results.map(list => {
+                    if(list.id == action.payload.listID) {
+                        return {
+                            ...list,
+                            list_hash: action.payload.response.new_hash
+                        }
+                    }
+                    return list;
+                })
+            };
         default:
             return state;
 

@@ -28,7 +28,8 @@ class SelectionsList extends React.Component {
 		this.props.reorganiseSelections(
 			this.props.list.id,
 			this.props.column,
-			selections.move(currentIndex, newIndex)
+			selections.move(currentIndex, newIndex),
+            this.props.list.list_hash
 		);
 	}
 
@@ -43,7 +44,8 @@ class SelectionsList extends React.Component {
 		this.props.reorganiseSelections(
 			this.props.list.id,
 			this.props.column,
-			selections.move(currentIndex, newIndex)			
+			selections.move(currentIndex, newIndex),
+            this.props.list.list_hash
 		);
 	}
 
@@ -52,7 +54,8 @@ class SelectionsList extends React.Component {
 			this.props.reorganiseSelections(
 				this.props.list.id,
 				this.props.column,
-				this.props.selections.move(fromIndex, toIndex)
+				this.props.selections.move(fromIndex, toIndex),
+                this.props.list.list_hash
 			);
 		}
 		else if(toList === this.props.column && !this.props.acceptNew) {			
@@ -77,7 +80,8 @@ class SelectionsList extends React.Component {
 				[
 					...this.props.teamList.selections,
 					item
-				]
+				],
+                this.props.teamList.list_hash
 			);
 		}
 	}
@@ -86,8 +90,11 @@ class SelectionsList extends React.Component {
 		this.props.reorganiseSelections(
 			this.props.list.id,
 			this.props.column,
-			this.props.selections.filter(s => +s.id !== +id)
+			this.props.selections.filter(s => +s.id !== +id),
+            this.props.list.list_hash
 		);
+    
+        this.props.selections.find(s => +s.id === +id).group_selected = false;
 	}
 
 	render() {
@@ -144,8 +151,8 @@ export default connect(
 		category: state.routing.locationBeforeTransitions.query.category
 	}), 
 	dispatch => ({
-		reorganiseSelections(listID, collection, newOrder) {
-			dispatch(postReorganise(listID, collection, newOrder));
+		reorganiseSelections(listID, collection, newOrder, listHash) {
+			dispatch(postReorganise(listID, collection, newOrder, listHash));
 		},
         throwError(msg) {
             dispatch(throwError(msg));

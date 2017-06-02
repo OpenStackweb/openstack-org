@@ -49,7 +49,7 @@ class BrowseDetail extends React.Component {
 
     render () {
     	const p = this.props.presentation;    	
-    	const {selectionsRemaining, lightningSelectionsRemaining, myList, myLightningList, isAdmin, index, total} = this.props;
+    	const {selectionsRemaining, myList, isAdmin, index, total} = this.props;
 
     	if(!p.id) {
     		return <Wave />
@@ -118,8 +118,7 @@ class BrowseDetail extends React.Component {
 			            {myList &&
 			            	<p>
                                 <small className="pull-right">
-                                    Selections remaining: {p.lightning ? lightningSelectionsRemaining : selectionsRemaining }
-                                    {p.lightning_wannabe && <span>-{lightningSelectionsRemaining}<i className='fa fa-bolt' /></span> }
+                                    Selections remaining: { selectionsRemaining }
                                 </small>
                             </p>
 			            }
@@ -166,22 +165,14 @@ class BrowseDetail extends React.Component {
 export default connect(
 	state => {
 		const filteredPresentations = getFilteredPresentations(state);
-		const myList = state.lists.results ? state.lists.results.find(l => l.mine && !l.is_lightning) : null;
-		const myLightningList = state.lists.results ? state.lists.results.find(l => l.mine && l.is_lightning) : null;
+		const myList = state.lists.results ? state.lists.results.find(l => l.mine) : null;
 		let selectionsRemaining = myList ? (myList.slots - myList.selections.length) : null;
-		const lightningSelectionsRemaining = myLightningList ? (myLightningList.slots - myLightningList.selections.length) : null;
 		const index = filteredPresentations.findIndex(p => p.id === state.detailPresentation.id)+1;
 
-        /*if (state.detailPresentation.lightning_wannabe) {
-            selectionsRemaining = `${selectionsRemaining} <i className='fa fa-bolt' /> ${lightningSelectionsRemaining}`;
-        }*/
-
-		return {	
+		return {
 			presentation: state.detailPresentation,
 			myList,
-            myLightningList,
 			selectionsRemaining,
-            lightningSelectionsRemaining,
 			index,
 			total: filteredPresentations.length,
 			isAdmin: window.TrackChairAppConfig.userinfo.isAdmin

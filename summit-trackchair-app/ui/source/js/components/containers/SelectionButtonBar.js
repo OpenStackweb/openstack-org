@@ -22,19 +22,14 @@ class SelectionButtonBar extends React.Component {
 	}
 
 	handleSelect(key) {
-        const {myList, myLightningList} = this.props;
-        let canAdd,canAddLightning;
-
-        if(myLightningList) {
-            canAddLightning = (myLightningList.slots > myLightningList.selections.length);
-        }
+        const {myList} = this.props;
+        let canAdd;
 
         if(myList) {
             canAdd = (myList.slots > myList.selections.length);
         }
 
-		if((key === this.props.presentation.selected || !canAdd) &&
-            (key === this.props.presentation.lightning_selected || !canAddLightning)) return;
+		if((key === this.props.presentation.selected || !canAdd) ) return;
 
 		this.select(key);
 	}
@@ -69,41 +64,22 @@ class SelectionButtonBar extends React.Component {
 	}
 
 	render() {
-		let activeKey, activeKeyLightning, successClass, warningClass;
+		let activeKey, successClass, warningClass;
 		let canAdd = true;
-		let canAddLightning = true;
-        let canAddGlobal = true;
-		const {myList, myLightningList} = this.props;
-		const {id, selected, lightning_selected, lightning, lightning_wannabe} = this.props.presentation;
+		const {myList} = this.props;
+		const {id, selected} = this.props.presentation;
+
 		if(myList) {
 			activeKey = selected;
 			canAdd = (myList.slots > myList.selections.length);
 		}
 
-        if(myLightningList) {
-            activeKeyLightning = lightning_selected;
-            canAddLightning = (myLightningList.slots > myLightningList.selections.length);
-        }
-
-        canAddGlobal = (lightning) ? canAddLightning : (lightning_wannabe ? (canAdd || canAddLightning) : canAdd);
-
         successClass = 'success';
         warningClass = 'warning';
-        if (lightning_wannabe) {
-            if ((activeKey == 'selected') ^ (activeKeyLightning == 'selected')) {
-                successClass = 'success partial';
-                activeKey = false;
-            }
-            if ((activeKey == 'maybe') ^ (activeKeyLightning == 'maybe')) {
-                warningClass = 'warning partial';
-                activeKey = false;
-            }
-        }
-
 
 		return (
 			<ButtonGroup onSelect={this.handleSelect} activeKey={activeKey}>
-				<ButtonOption disabled={!canAddGlobal} eventKey='selected' className={successClass} ><Selected /> Yes</ButtonOption>
+				<ButtonOption disabled={!canAdd} eventKey='selected' className={successClass} ><Selected /> Yes</ButtonOption>
 				<ButtonOption eventKey='maybe' className={warningClass}><Maybe /> Interested</ButtonOption>
 				<ButtonOption eventKey='pass' className='damyListnger'><Pass /> No thanks</ButtonOption>
 			</ButtonGroup>
@@ -114,8 +90,7 @@ class SelectionButtonBar extends React.Component {
 export default connect(
 	state => ({		
 		presentation: state.detailPresentation,
-		myList: state.lists.results && state.lists.results.find(l => l.mine && !l.is_lightning),
-		myLightningList: state.lists.results && state.lists.results.find(l => l.mine && l.is_lightning)
+		myList: state.lists.results && state.lists.results.find( l => l.mine )
 	}),
 	dispatch => ({
 		onSelect(presentationID, key, name) {
