@@ -27,6 +27,7 @@ final class PasswordManager
     {
         $this->tx_manager = $tx_manager;
     }
+
     /**
      * @param int $member_id
      * @param string $token
@@ -35,8 +36,7 @@ final class PasswordManager
      */
     public function verifyToken($member_id, $token)
     {
-        return $this->tx_manager->transaction(function() use($member_id, $token)
-        {
+        return $this->tx_manager->transaction(function () use ($member_id, $token) {
             if (is_null($member_id) || $member_id == 0 || empty($token)) {
                 throw new InvalidPasswordResetLinkException;
             }
@@ -64,8 +64,7 @@ final class PasswordManager
      */
     public function changePassword($token, $password, $password_confirmation)
     {
-        return $this->tx_manager->transaction(function() use($token, $password, $password_confirmation)
-        {
+        return $this->tx_manager->transaction(function () use ($token, $password, $password_confirmation) {
             $member = Member::currentUser();
             if (!$member) {
                 if (empty($token)) {
@@ -91,8 +90,11 @@ final class PasswordManager
             $member->generateAutologinTokenAndStoreHash();
 
             //send confirmation email
-            $email = EmailFactory::getInstance()->buildEmail(CHANGE_PASSWORD_EMAIL_FROM, $member->Email,
-                CHANGE_PASSWORD_EMAIL_SUBJECT);
+            $email = EmailFactory::getInstance()->buildEmailIgnoringEnv(CHANGE_PASSWORD_EMAIL_FROM,
+                $member->Email,
+                CHANGE_PASSWORD_EMAIL_SUBJECT
+            );
+
             $email->setTemplate('ChangedPasswordEmail');
             $email->populateTemplate(array('MemberName' => $member->getFullName()));
             $email->send();

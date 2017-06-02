@@ -24,13 +24,9 @@ final class EmailFactory
      */
     private static $instance;
 
-    private function __construct()
-    {
-    }
+    private function __construct(){}
 
-    private function __clone()
-    {
-    }
+    private function __clone(){}
 
     /**
      * @return EmailFactory
@@ -44,6 +40,7 @@ final class EmailFactory
         return self::$instance;
     }
 
+
     /**
      * @param null $from
      * @param null $to
@@ -54,7 +51,8 @@ final class EmailFactory
      * @param null $bcc
      * @return Email
      */
-    public function buildEmail(
+    public function buildEmailIgnoringEnv
+    (
         $from = null,
         $to = null,
         $subject = null,
@@ -62,6 +60,30 @@ final class EmailFactory
         $bounceHandlerURL = null,
         $cc = null,
         $bcc = null
+    )
+    {
+        return $this->buildEmail($from, $to, $subject, $body, $bounceHandlerURL, $cc, $bcc, true);
+    }
+    /**
+     * @param null $from
+     * @param null $to
+     * @param null $subject
+     * @param null $body
+     * @param null $bounceHandlerURL
+     * @param null $cc
+     * @param null $bcc
+     * @param bool $ignore_env
+     * @return Email
+     */
+    public function buildEmail(
+        $from = null,
+        $to = null,
+        $subject = null,
+        $body = null,
+        $bounceHandlerURL = null,
+        $cc = null,
+        $bcc = null,
+        $ignore_env = false
     ) {
         $env = 'dev';
         if (defined('SS_ENVIRONMENT_TYPE')) {
@@ -69,7 +91,7 @@ final class EmailFactory
         }
 
         $email = Email::create();
-        if ($env == 'dev') {
+        if ($env == 'dev' && !$ignore_env) {
             $to = defined('DEV_EMAIL_TO') ? DEV_EMAIL_TO : Config::inst()->get('Email', 'admin_email');
         }
 

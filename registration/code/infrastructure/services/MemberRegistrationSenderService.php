@@ -30,11 +30,9 @@ class MemberRegistrationSenderService implements IMessageSenderService
         }
 
         $from  = null;
-        $email = EmailFactory::getInstance()->buildEmail($from, $subject->Email);
+        $email = EmailFactory::getInstance()->buildEmailIgnoringEnv($from, $subject->Email);
 
         $token = $subject->generateEmailVerificationToken();
-
-
 
         $email->setUserTemplate(MEMBER_REGISTRATION_VERIFICATION_EMAIL_TEMPLATE_ID)->populateTemplate(
             array

@@ -30,7 +30,7 @@ final class MemberRegistrationVerifiedSenderService implements IMessageSenderSer
         }
 
         $from  = null;
-        $email = EmailFactory::getInstance()->buildEmail($from, $subject->Email);
+        $email = EmailFactory::getInstance()->buildEmailIgnoringEnv($from, $subject->Email);
         $email->setUserTemplate(MEMBER_REGISTRATION_VERIFIED_EMAIL_TEMPLATE_ID)->populateTemplate(
             array
             (

@@ -77,7 +77,7 @@ class CustomLostPasswordForm extends HoneyPotForm
                 if(is_null($e))
                     throw new Exception(sprintf('Email Template %s does not exists on DB!', MEMBER_FORGOT_PASSWORD_EMAIL_TEMPLATE_ID));
 
-                $e = EmailFactory::getInstance()->buildEmail("noreply@openstack.org", $member->Email);
+                $e = EmailFactory::getInstance()->buildEmailIgnoringEnv("noreply@openstack.org", $member->Email);
 
                 $e->setUserTemplate(MEMBER_FORGOT_PASSWORD_EMAIL_TEMPLATE_ID)->populateTemplate(
                   [
