@@ -399,13 +399,14 @@ class TrackChairAPI extends AbstractRestfulJsonApi
             if (is_array($idList)) {
                 $new_hash = $this->tx_manager->transaction(function() use ($idList, $collection, $list, $old_hash){
 
+                    $isTeam = ($list->isGroup());
+
                     // first we compare the list hash to see if there were modifications
-                    if (!$list->compareHashString($old_hash)) {
+                    // we only do this for team bc there are 2 individual lists maybe and selections
+                    if ($isTeam && !$list->compareHashString($old_hash)) {
                         $msg = "The list was modified by someone else, please REFRESH";
                         throw new EntityValidationException($msg);
                     }
-
-                    $isTeam = ($list->isGroup());
 
                     // Remove any presentations that are not in the list
                     // for team selection we remove all, for individual we just remove the one not there, just to save time

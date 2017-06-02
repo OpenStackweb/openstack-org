@@ -6,17 +6,29 @@ import PresentationMetrics from'../views/PresentationMetrics';
 import Dropdown from '../ui/Dropdown';
 import DropdownItem from '../ui/DropdownItem';
 import {connect} from 'react-redux';
+import {postReorganise} from '../../actions';
 
 const cardSource = {
-  beginDrag(props) {
-    return {
-      id: props.id,
-      index: props.index,
-      presentation: props.presentation,
-      order: props.rank,
-      column: props.column
-    };
-  }
+    beginDrag(props) {
+        return {
+            id: props.id,
+            index: props.index,
+            presentation: props.presentation,
+            order: props.rank,
+            column: props.column
+        };
+    },
+    endDrag(props, monitor) {
+        const didDrop = monitor.didDrop();
+
+        if (didDrop) {
+            props.dropSelection(
+                props.listID,
+                monitor.getItem().column,
+                props.listHash
+            );
+        }
+    }
 };
 
 const cardTarget = {
@@ -59,26 +71,24 @@ const cardTarget = {
     // Time to actually perform the action
     props.onMove(monitor.getItem(), dragList, dragIndex, hoverList, hoverIndex);
     monitor.getItem().index = hoverIndex;
+    monitor.getItem().column = hoverList;
   }
 };
 
 class SortableLeaderboardItem extends Component {
   
-  constructor(props) {
-  	super(props);
-  	this.handleSelect = this.handleSelect.bind(this);  	
-  }
-
+    constructor(props) {
+        super(props);
+        this.handleSelect = this.handleSelect.bind(this);
+    }
   
-  handleSelect (key) {
-  	if(key === 'remove') {
-  		this.props.onRemove && this.props.onRemove(this.props.id, this.props.index);	
-  	}
-  	else if(key === 'team') {
-  		this.props.onAddToTeam && this.props.onAddToTeam(this.props.id, this.props.index);	
-  	}  	
-  }
-
+    handleSelect (key) {
+        if(key === 'remove') {
+            this.props.onRemove && this.props.onRemove(this.props.id, this.props.index);
+        } else if(key === 'team') {
+            this.props.onAddToTeam && this.props.onAddToTeam(this.props.id, this.props.index);
+        }
+    }
 
   render() {
     const {
@@ -151,5 +161,10 @@ export default connect(
 		return {
 			canAddTeam: (!teamHasThis && !teamIsFull && !otherTeamHasThis)
 		};
-	}
+	},
+    dispatch => ({
+        dropSelection(listID, collection, listHash) {
+            dispatch(postReorganise(listID, collection, listHash));
+        }
+    })
 )(LeaderboardItemDragSource);

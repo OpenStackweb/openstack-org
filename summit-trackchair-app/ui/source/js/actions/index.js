@@ -216,23 +216,13 @@ export const postEmail = (presentationID, emailData) => {
 	};
 }
 
-export const postReorganise = (listID, collection, newOrder, listHash) => {
+export const postReorganise = (listID, collection, listHash) => {
 	return (dispatch, getState) => {
 		const key = `REORDER_${listID}_${collection}`;
-		var msg = '';
-		for(var o of newOrder){
-			msg += ' '+ o.id;
-		}
-		console.log('old order '+msg);
 
-        var order = newOrder.map(s => s.id);
-		dispatch(reorganiseSelections({listID, collection, newOrder}));
-
-		msg = '';
-        for(var o of newOrder){
-            msg += ' '+ o.id;
-        }
-        console.log('new order '+msg);
+        // order is set on state while dragging so we just need to store whats on state
+        var list = getState().lists.results.find(l => +l.id === +listID);
+        var order = list[collection].map(s => s.id);
 
 		cancel(key);
 		const collectionMap = {

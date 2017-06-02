@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {postReorganise, throwError} from '../../actions';
+import {postReorganise, throwError, reorganiseSelections} from '../../actions';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import SortableLeaderboardItem from '../containers/SortableLeaderboardItem';
@@ -25,7 +25,7 @@ class SelectionsList extends React.Component {
 			newIndex = currentIndex;
 		}
 
-		this.props.reorganiseSelections(
+		this.props.reorganizeAndDrop(
 			this.props.list.id,
 			this.props.column,
 			selections.move(currentIndex, newIndex),
@@ -41,7 +41,7 @@ class SelectionsList extends React.Component {
 			newIndex = currentIndex;
 		}
 		
-		this.props.reorganiseSelections(
+		this.props.reorganizeAndDrop(
 			this.props.list.id,
 			this.props.column,
 			selections.move(currentIndex, newIndex),
@@ -51,11 +51,10 @@ class SelectionsList extends React.Component {
 
 	handleDrag(item, fromList, fromIndex, toList, toIndex) {
 		if(toList === fromList) {				
-			this.props.reorganiseSelections(
+			this.props.reorderSelections(
 				this.props.list.id,
 				this.props.column,
-				this.props.selections.move(fromIndex, toIndex),
-                this.props.list.list_hash
+				this.props.selections.move(fromIndex, toIndex)
 			);
 		}
 		else if(toList === this.props.column && !this.props.acceptNew) {			
@@ -74,7 +73,7 @@ class SelectionsList extends React.Component {
 		const item = this.props.selections.find(s => +s.id === +id);
 		const existing = this.props.teamList.selections.some(s => +s.id === +id);
 		if(item && !existing) {
-			this.props.reorganiseSelections(
+			this.props.reorganizeAndDrop(
 				this.props.teamList.id,
 				'team',
 				[
@@ -87,13 +86,13 @@ class SelectionsList extends React.Component {
 	}
 
 	handleRemove(id, index) {
-		this.props.reorganiseSelections(
+		this.props.reorganizeAndDrop(
 			this.props.list.id,
 			this.props.column,
 			this.props.selections.filter(s => +s.id !== +id),
             this.props.list.list_hash
 		);
-    
+
         this.props.selections.find(s => +s.id === +id).group_selected = false;
 	}
 
@@ -126,6 +125,8 @@ class SelectionsList extends React.Component {
 					isAlternate={i >= altThreshold}
 					rank={i >= altThreshold ? 'ALT' : ('#' + s.order)}
 					column={this.props.column}
+					listID={this.props.list.id}
+					listHash={this.props.list.list_hash}
 					onUp={this.handleUp}
 					onDown={this.handleDown}
 					eventKey={i}
@@ -151,12 +152,15 @@ export default connect(
 		category: state.routing.locationBeforeTransitions.query.category
 	}), 
 	dispatch => ({
-		reorganiseSelections(listID, collection, newOrder, listHash) {
-			dispatch(postReorganise(listID, collection, newOrder, listHash));
+		reorderSelections(listID, collection, newOrder) {
+            dispatch(reorganiseSelections({listID, collection, newOrder}));
 		},
         throwError(msg) {
             dispatch(throwError(msg));
+        },
+        reorganizeAndDrop(listID, collection, newOrder, listHash) {
+            dispatch(reorganiseSelections({listID, collection, newOrder}));
+            dispatch(postReorganise(listID, collection, listHash));
         }
-
 	})
 )(SortableSelectionsList);
