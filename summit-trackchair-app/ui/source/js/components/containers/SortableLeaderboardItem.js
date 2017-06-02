@@ -6,17 +6,30 @@ import PresentationMetrics from'../views/PresentationMetrics';
 import Dropdown from '../ui/Dropdown';
 import DropdownItem from '../ui/DropdownItem';
 import {connect} from 'react-redux';
+import {postReorganise} from '../../actions';
 
 const cardSource = {
-  beginDrag(props) {
-    return {
-      id: props.id,
-      index: props.index,
-      presentation: props.presentation,
-      order: props.rank,
-      column: props.column
-    };
-  }
+    beginDrag(props) {
+        return {
+            id: props.id,
+            index: props.index,
+            presentation: props.presentation,
+            order: props.rank,
+            column: props.column
+        };
+    },
+    endDrag(props, monitor) {
+        const didDrop = monitor.didDrop();
+        const canDrop = !(props.column == 'team' && monitor.getItem().column != 'team');
+
+        if (didDrop && canDrop) {
+            props.dropSelection(
+                monitor.getItem().targetListID,
+                monitor.getItem().column,
+                monitor.getItem().targetListHash
+            );
+        }
+    }
 };
 
 const cardTarget = {
@@ -48,7 +61,7 @@ const cardTarget = {
     // When dragging upwards, only move when the cursor is above 50%
 
     // Dragging downwards
-    if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY && dragList === hoverList) {      
+    if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY && dragList === hoverList) {
       return;
     }
 
@@ -59,26 +72,26 @@ const cardTarget = {
     // Time to actually perform the action
     props.onMove(monitor.getItem(), dragList, dragIndex, hoverList, hoverIndex);
     monitor.getItem().index = hoverIndex;
+    monitor.getItem().column = hoverList;
+    monitor.getItem().targetListID = props.listID;
+    monitor.getItem().targetListHash = props.listHash;
   }
 };
 
 class SortableLeaderboardItem extends Component {
   
-  constructor(props) {
-  	super(props);
-  	this.handleSelect = this.handleSelect.bind(this);  	
-  }
-
+    constructor(props) {
+        super(props);
+        this.handleSelect = this.handleSelect.bind(this);
+    }
   
-  handleSelect (key) {
-  	if(key === 'remove') {
-  		this.props.onRemove && this.props.onRemove(this.props.id, this.props.index);	
-  	}
-  	else if(key === 'team') {
-  		this.props.onAddToTeam && this.props.onAddToTeam(this.props.id, this.props.index);	
-  	}  	
-  }
-
+    handleSelect (key) {
+        if(key === 'remove') {
+            this.props.onRemove && this.props.onRemove(this.props.id, this.props.index);
+        } else if(key === 'team') {
+            this.props.onAddToTeam && this.props.onAddToTeam(this.props.id, this.props.index);
+        }
+    }
 
   render() {
     const {
@@ -112,8 +125,6 @@ class SortableLeaderboardItem extends Component {
         </div>
         <div className="selection-meta">
             {p.level}
-            {p.lightning && <span className="selection-lightning"><i className="fa fa-bolt" /></span> }
-            {p.lightning_wannabe && <span className="selection-lightning">"<i className="fa fa-bolt" />"</span> }
         </div>
 
       </div>
@@ -144,7 +155,7 @@ const LeaderboardItemDragSource = DragSource('CARD', cardSource, (connect, monit
 export default connect(
 	(state, ownProps) => {
 		const teamList = state.lists.results.find(l => l.is_group);
-		if(!teamList) return;
+		if(!teamList || !ownProps.presentation) return;
 
 		const teamHasThis = teamList.selections.some(s => +s.id === +ownProps.id);
 		const teamIsFull = teamList.selections.length >= teamList.slots;
@@ -153,5 +164,10 @@ export default connect(
 		return {
 			canAddTeam: (!teamHasThis && !teamIsFull && !otherTeamHasThis)
 		};
-	}
+	},
+    dispatch => ({
+        dropSelection(listID, collection, listHash) {
+            dispatch(postReorganise(listID, collection, listHash));
+        }
+    })
 )(LeaderboardItemDragSource);

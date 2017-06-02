@@ -19,9 +19,8 @@ class RequestResolutionButtons extends React.Component {
 
 	reject(e) {
 		e.preventDefault();
-		this.props.resolveRequest(
-			this.props.request,
-			0
+		this.props.onReject(
+			this.props.request
 		);
 	}
 
@@ -43,7 +42,7 @@ export default connect(
 
 	dispatch => ({
 		resolveRequest(requestID, approved) {
-			dispatch(postResolveRequest(requestID, approved));
-		}
+			dispatch(postResolveRequest(requestID, approved, ''));
+		},
 	})
 )(RequestResolutionButtons);

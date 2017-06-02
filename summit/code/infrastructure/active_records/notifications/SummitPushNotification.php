@@ -14,7 +14,6 @@
  **/
 final class SummitPushNotification extends PushNotificationMessage
 {
-    const PushType = 'PUSH_NOTIFICATION';
 
     private static $db = array
     (
@@ -107,6 +106,7 @@ final class SummitPushNotification extends PushNotificationMessage
     protected function onBeforeWrite()
     {
         parent::onBeforeWrite();
+        $this->Platform = 'MOBILE';
         if($this->Channel == 'MEMBERS'){
             // auto approve for members
             $this->approve();
@@ -168,5 +168,4 @@ final class SummitPushNotification extends PushNotificationMessage
         }
         return Permission::check("ADMIN") || Permission::check("ADMIN_SUMMIT_APP") || Permission::check("ADMIN_SUMMIT_APP_SCHEDULE");
     }
-
 }

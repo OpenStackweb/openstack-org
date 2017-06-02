@@ -489,6 +489,14 @@ class OpenStackMember extends DataExtension
         return Permission::checkMember($this->owner, 'ADMIN');
     }
 
+    public function isTrackChair() {
+        return Summit::get_active()
+            ->Categories()
+            ->relation('TrackChairs')
+            ->filter('MemberID', $this->owner->ID)
+            ->exists();
+    }
+
     public function generateEmailVerificationToken()
     {
         $generator = new RandomGenerator();

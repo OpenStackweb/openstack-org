@@ -6,7 +6,7 @@ import Wave from '../ui/loaders/Wave';
 import AnimateCSS from '../ui/animate/AnimateCSS';
 import SlideInLeft from '../ui/animate/SlideInLeft';
 import SlideOutRight from '../ui/animate/SlideOutRight';
-import {toggleMaybeDrawer, postReorganise} from '../../actions';
+import {toggleMaybeDrawer, postReorganise, reorganiseSelections} from '../../actions';
 import {Maybe, Selected, Team} from '../ui/Icons';
 import SelectionStats from '../ui/SelectionStats';
 
@@ -24,12 +24,13 @@ class SelectionsDetail extends React.Component {
 		let existing = this.props[fromList].find(i => +i.id === +item.id);
 		
 		// Team is a clone. Shouldn't remove from the other piles
-		if(existing && toList !== 'team') {			
+		if(existing && toList !== 'team') {
 			// Remove from the old list
-			this.props.reorganiseSelections(
+			this.props.reorganizeAndDrop(
 				this.props.list.id,
 				fromList,
-				this.props[fromList].filter(i => i.id !== existing.id)
+				this.props[fromList].filter(i => i.id !== existing.id),
+                this.props.list.list_hash
 			);
 		}
 
@@ -48,7 +49,8 @@ class SelectionsDetail extends React.Component {
 				order: item.order
 			}
 		];
-		this.props.reorganiseSelections(
+
+		this.props.reorderSelections(
 			toList === 'team' ? this.props.teamList.id : this.props.list.id,
 			toList,
 			newList.move((newList.length-1), toIndex)
@@ -189,8 +191,12 @@ export default connect(
 	},
 
 	dispatch => ({
-		reorganiseSelections(listID, collection, newOrder) {
-			dispatch(postReorganise(listID, collection, newOrder));
-		}
+        reorderSelections(listID, collection, newOrder) {
+            dispatch(reorganiseSelections({listID, collection, newOrder}));
+		},
+        reorganizeAndDrop(listID, collection, newOrder, listHash) {
+            dispatch(reorganiseSelections({listID, collection, newOrder}));
+            dispatch(postReorganise(listID, collection, listHash));
+        }
 	})
 )(SelectionsDetail);

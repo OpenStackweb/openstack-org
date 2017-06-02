@@ -14,13 +14,13 @@ export const detailPresentation = function (
                 sending: false,
                 emailSuccess: false,
                 showForm: false,
-                showChangeRequest: false,
                 categorySuccess: false,
                 requesting: false
             };
         case 'RECEIVE_PRESENTATION_DETAIL':
             return {
                 ...action.payload.response,
+                showChangeRequest: false,
                 loading: false
             };
 
@@ -52,8 +52,7 @@ export const detailPresentation = function (
         case 'TOGGLE_FOR_ME':
         	return {
         		...state,
-        		selected: action.payload.type,
-        		lightning_selected: action.payload.type,
+        		selected: action.payload.type
         	};
 
         case 'TOGGLE_FOR_GROUP':
@@ -61,6 +60,18 @@ export const detailPresentation = function (
         		...state,
         		group_selected: !!action.payload
         	};
+
+        case 'UPDATE_PRESENTATION_COMMENTS':
+            return {
+                ...state,
+                show_comment_message: true
+            };
+
+        case 'UPDATE_PRESENTATION_CHANGE_REQUESTS':
+            return {
+                ...state,
+                change_requests_count: action.payload
+            };
 
         case 'MARK_AS_READ':
         	return {
@@ -92,14 +103,16 @@ export const detailPresentation = function (
         case 'REQUEST_CATEGORY_CHANGE':
         	return {
         		...state,
-        		requesting: true
+        		requesting: true,
+                showChangeRequest: true
         	};
         case 'SUCCESS_CATEGORY_CHANGE':
         	return {
         		...state,
         		requesting: false,
         		categorySuccess: action.payload,
-        		change_requests_count: +state.change_requests_count+1
+        		change_requests_count: +state.change_requests_count+1,
+                showChangeRequest: true
         	};
         default:
             return state;

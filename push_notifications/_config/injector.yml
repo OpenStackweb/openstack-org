@@ -1,0 +1,15 @@
+---
+Name: 'push-notification-injection'
+---
+Injector:
+  FirebaseSerializationSummitFactory:
+    class: FireBaseSerializationTrackChairPushNotificationFactory
+  FirebaseSerializationTrackChairFactory:
+    class: FireBaseSerializationSummitPushNotificationFactory
+  FireBasePushNotificationSerializationStrategyFactory:
+    constructor:
+      - '%$FirebaseSerializationSummitFactory'
+      - '%$FirebaseSerializationTrackChairFactory'
+  PushNotificationSenderTask:
+    constructor:
+      0: '%$FireBasePushNotificationSerializationStrategyFactory'

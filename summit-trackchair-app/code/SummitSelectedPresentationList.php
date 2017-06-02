@@ -24,9 +24,10 @@ class SummitSelectedPresentationList extends DataObject
      * @var array
      */
     private static $db = [
-        'Name' => 'Text',
-        'ListType' => "Enum('Individual,Group','Individual')",
-        'ListClass' => "Enum('Session,Lightning','Session')"
+        'Name'      => 'Text',
+        'ListType'  => "Enum('Individual,Group','Individual')",
+        'ListClass' => "Enum('Session,Lightning','Session')",
+        'Hash'      => 'Varchar'
     ];
 
     /**
@@ -210,18 +211,12 @@ ORDER BY SummitSelectedPresentation.Order ASC
      */
     public function maxPresentations()
     {
-        if ($this->isLightning())
-            return $this->Category()->LightningCount + $this->Category()->LightningAlternateCount;
-        else
-            return $this->Category()->SessionCount + $this->Category()->AlternateCount;
+        return $this->Category()->SessionCount + $this->Category()->AlternateCount;
     }
 
     public function maxAlternates()
     {
-        if ($this->isLightning())
-            return intval($this->Category()->LightningAlternateCount);
-        else
-            return intval($this->Category()->AlternateCount);
+        return intval($this->Category()->AlternateCount);
     }
 
     /**
@@ -283,11 +278,23 @@ ORDER BY SummitSelectedPresentation.Order ASC
         return ($this->ListType == SummitSelectedPresentationList::Group);
     }
 
-    public function isLightning() {
-        return ($this->ListClass == SummitSelectedPresentationList::Lightning);
+    public static function getListClassName($list_class) {
+        return 'Presentation';
     }
 
-    public static function getListClassName($list_class) {
-        return ($list_class == SummitSelectedPresentationList::Session) ? 'Presentation' : 'Lightning';
+    private function buildHashString($ids) {
+        $id_string = implode('', $ids);
+        return md5($id_string);
     }
+
+    public function setHashString() {
+        $ids = $this->SortedPresentations()->getIDList();
+        $this->Hash = $this->buildHashString($ids);
+    }
+
+    public function compareHashString($hash) {
+        if ($this->Hash == null) return true;
+        return ($this->Hash == $hash);
+    }
+
 }

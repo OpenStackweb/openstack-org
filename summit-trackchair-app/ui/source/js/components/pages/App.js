@@ -2,13 +2,26 @@ import React from 'react';
 import NavigationBar from '../views/NavigationBar';
 import ErrorMessage from '../containers/ErrorMessage';
 import {connect} from 'react-redux';
-import {fetchSummit} from '../../actions';
+import {fetchSummit,updateWithPushNotification} from '../../actions';
 import Bounce from '../ui/loaders/Bounce';
 
 class App extends React.Component {
 
     componentDidMount() {
         this.props.fetch();
+
+        let _this_var = this;
+
+        if (firebase) {
+            // Retrieve Firebase Messaging object.
+            const messaging = firebase.messaging();
+
+            messaging.onMessage(function(payload) {
+                var presentation_data = JSON.parse(payload.data.presentation);
+                _this_var.props.updateWithPushNotification(presentation_data);
+            });
+        }
+
     }
     
     render () {
@@ -41,6 +54,9 @@ export default connect(
     dispatch => ({
         fetch () {
             dispatch(fetchSummit(window.TrackChairAppConfig.summitID))
+        },
+        updateWithPushNotification(updated_data) {
+            dispatch(updateWithPushNotification(updated_data));
         }
     })
 )(App);

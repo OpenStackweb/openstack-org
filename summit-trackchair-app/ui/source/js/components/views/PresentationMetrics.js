@@ -42,10 +42,18 @@ export default ({
 	if(presentation.group_selected) {
 		innerContent.push(
 			<span key='team' className="presentation-metric team">
-				<i className="fa fa-team" />
+				<i className="fa fa-users" />
 			</span>
 		);
 	}
+
+    if(!!presentation.moved_to_category) {
+        innerContent.push(
+            <span key='moved' className="presentation-metric moved">
+                <i className="fa fa-exchange" />
+            </span>
+        );
+    }
 
 	return (
 		<span className="presentation-metrics">{innerContent}</span>

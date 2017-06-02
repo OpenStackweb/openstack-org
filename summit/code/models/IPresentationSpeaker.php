@@ -372,4 +372,16 @@ interface IPresentationSpeaker extends IEntity
      * @return mixed
      */
     public function AllPublishedPresentations($summit_id = null);
+
+    /**
+     * @param ISummit $summit
+     * @return ArrayList
+     */
+    public function getFeedback(ISummit $summit);
+
+    /**
+     * @param ISummit $summit
+     * @return float
+     */
+    public function getAvgFeedback(ISummit $summit);
 }

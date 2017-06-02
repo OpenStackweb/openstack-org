@@ -582,4 +582,8 @@ class Page_Controller extends ContentController
     public function showUpdateProfileModal(){
         return (Member::currentUser() && Session::get("Member.showUpdateProfileModal"));
     }
+
+    public function getEnv($name) {
+        return constant($name);
+    }
 }

@@ -60,7 +60,6 @@ export const presentations = function (
         				let newPresentation = {
         					...p,
         					selected: action.payload.type,
-                            lightning_selected: action.payload.type,
         					[addTo]: [...p[addTo], action.payload.name]
         				};
         				if(subtractFrom) {

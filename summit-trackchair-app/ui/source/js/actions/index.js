@@ -44,9 +44,12 @@ export const createComment = createAction('CREATE_COMMENT');
 export const syncComment = createAction('SYNC_COMMENT');
 export const toggleForMe = createAction('TOGGLE_FOR_ME');
 export const toggleForGroup = createAction('TOGGLE_FOR_GROUP');
+export const updatePresentationComments = createAction('UPDATE_PRESENTATION_COMMENTS');
+export const updatePresentationChangeRequests = createAction('UPDATE_PRESENTATION_CHANGE_REQUESTS');
 export const requestLists = createAction('REQUEST_LISTS');
 export const receiveLists = createAction('RECEIVE_LISTS');
 export const reorganiseSelections = createAction('REORGANISE_SELECTIONS');
+export const successReorderChange = createAction('SUCCESS_REORDER_CHANGE');
 export const sortDirectory = createAction('SORT_DIRECTORY');
 export const searchDirectory = createAction('SEARCH_DIRECTORY');
 export const requestChangeRequests = createAction('REQUEST_CHANGE_REQUESTS');
@@ -215,23 +218,14 @@ export const postEmail = (presentationID, emailData) => {
 	};
 }
 
-export const postReorganise = (listID, collection, newOrder) => {
+export const postReorganise = (listID, collection, listHash) => {
 	return (dispatch, getState) => {
 		const key = `REORDER_${listID}_${collection}`;
-		var msg = '';
-		for(var o of newOrder){
-			msg += ' '+ o.id;
-		}
-		console.log('old order '+msg);
 
-        var order = newOrder.map(s => s.id);
-		dispatch(reorganiseSelections({listID, collection, newOrder}));
-
-		msg = '';
-        for(var o of newOrder){
-            msg += ' '+ o.id;
-        }
-        console.log('new order '+msg);
+        // order is set on state while dragging so we just need to store whats on state
+        var list = getState().lists.results.find(l => +l.id === +listID);
+        collection = list.is_group ? 'selections' : collection;
+        var order = list[collection].map(s => s.id);
 
 		cancel(key);
 		const collectionMap = {
@@ -242,23 +236,29 @@ export const postReorganise = (listID, collection, newOrder) => {
 		const data = {
 			list_id: listID,
 			order: order,
-			collection: collectionMap[collection]
+			collection: collectionMap[collection],
+            list_hash: listHash
 		};
 		const req = http.put('/trackchairs/api/v1/reorder')
 			.send(data)
-			.end(responseHandler(dispatch));
+			.end(responseHandler(dispatch,
+                json => {
+                    dispatch(successReorderChange({ response: json, listID: listID }))
+                }
+            ));
+
 		schedule(key, req);
 	};
 };
 
-export const postResolveRequest = (requestID, approved) => {
+export const postResolveRequest = (requestID, approved, rejectReason) => {
 	return (dispatch, getState) => {
 		const key = `RESOLVE_${requestID}`;
-		dispatch(resolveRequest({requestID, approved}));
+		dispatch(resolveRequest({requestID, approved, rejectReason}));
 		cancel(key);
 
 		const req = http.put(`/trackchairs/api/v1/categorychange/resolve/${requestID}`)
-			.send({approved})
+			.send({approved: approved, reason: rejectReason})
 			.end(responseHandler(dispatch));
 
 		schedule(key, req);
@@ -397,5 +397,20 @@ export const postDeleteChair = (params) => {
 	};
 }
 
+export const updateWithPushNotification = (updated_pres = {}) => {
+    return (dispatch, getState) => {
+        let presentation = getState().detailPresentation;
+        if (updated_pres.id == presentation.id) {
+            if (updated_pres.change_requests_count != presentation.change_requests_count) {
+                dispatch(updatePresentationChangeRequests(updated_pres.change_requests_count));
+            }
+            if (updated_pres.comment_count != presentation.comments.length) {
+                dispatch(updatePresentationComments());
+            }
+
+            dispatch(throwError('This Presentation was updated by someone else. Refresh or check presentation header for more details.'));
+        }
+    }
+}
 
 /*eslint-enable */
