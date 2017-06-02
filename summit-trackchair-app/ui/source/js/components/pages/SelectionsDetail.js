@@ -53,7 +53,8 @@ class SelectionsDetail extends React.Component {
 		this.props.reorderSelections(
 			toList === 'team' ? this.props.teamList.id : this.props.list.id,
 			toList,
-			newList.move((newList.length-1), toIndex)
+			newList.move((newList.length-1), toIndex),
+            this.props.teamList.list_hash
 		);
 	}
 
