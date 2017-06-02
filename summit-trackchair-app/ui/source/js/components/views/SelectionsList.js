@@ -54,8 +54,7 @@ class SelectionsList extends React.Component {
 			this.props.reorderSelections(
 				this.props.list.id,
 				this.props.column,
-				this.props.selections.move(fromIndex, toIndex),
-                this.props.list.list_hash
+				this.props.selections.move(fromIndex, toIndex)
 			);
 		}
 		else if(toList === this.props.column && !this.props.acceptNew) {			
