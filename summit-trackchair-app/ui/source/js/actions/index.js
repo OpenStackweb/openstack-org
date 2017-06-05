@@ -248,14 +248,14 @@ export const postReorganise = (listID, collection, listHash) => {
 	};
 };
 
-export const postResolveRequest = (requestID, approved) => {
+export const postResolveRequest = (requestID, approved, rejectReason) => {
 	return (dispatch, getState) => {
 		const key = `RESOLVE_${requestID}`;
-		dispatch(resolveRequest({requestID, approved}));
+		dispatch(resolveRequest({requestID, approved, rejectReason}));
 		cancel(key);
 
 		const req = http.put(`/trackchairs/api/v1/categorychange/resolve/${requestID}`)
-			.send({approved})
+			.send({approved: approved, reason: rejectReason})
 			.end(responseHandler(dispatch));
 
 		schedule(key, req);

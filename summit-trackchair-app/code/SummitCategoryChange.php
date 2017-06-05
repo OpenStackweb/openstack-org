@@ -28,6 +28,7 @@ class SummitCategoryChange extends DataObject
         'Comment' => 'Varchar',
         'ApprovalDate' => 'SS_DateTime',
         'Status' => 'Int',
+        'Reason' => 'Text'
     ];
 
     /**

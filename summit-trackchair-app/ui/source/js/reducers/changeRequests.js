@@ -3,15 +3,17 @@ const map = (results) => {
 	return results.map(data => {
 		const r = [
 			{title: data.presentation_title, id: data.presentation_id},
-			data.status,
+            {status: data.status, reason: data.reject_reason},
 			data.old_category.title,
 			data.new_category.title,
 			data.requester		
 		];
 
-		if(data.is_admin) {
-			r.push(data.has_selections ? false : data.id);
-		}
+		if(data.chair_of_new || data.is_admin) {
+			r.push(data.has_selections ? 'has_selections' : data.id);
+		} else {
+            r.push('not_admin')
+        }
 
 		return r;
 	});
@@ -66,7 +68,8 @@ export const changeRequests = function (
         		results: state.results.map(r => {        			
         			if(+r[5] === action.payload.requestID) {        				
         				const newRow = [...r];
-        				newRow[1] = action.payload.approved ? 'Approved' : 'Rejected';
+        				newRow[1].status = action.payload.approved ? 'Approved' : 'Rejected';
+        				newRow[1].reason = action.payload.rejectReason;
 
         				return newRow;
         			}

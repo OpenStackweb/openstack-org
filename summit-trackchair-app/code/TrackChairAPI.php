@@ -528,10 +528,10 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         		$sortClause = "Member.Surname";
         		break;
         	default:
-        		$sortClause = "Done";
+        		$sortClause = "Status";
         }
 
-        $changeRequests = $changeRequests->sort($sortClause, $sortDir);
+        $changeRequests = $changeRequests->sort([$sortClause => $sortDir, 'LastEdited' => 'DESC']);
 
         if($search) {
         	$changeRequests = $changeRequests->filterAny([
@@ -554,7 +554,6 @@ class TrackChairAPI extends AbstractRestfulJsonApi
             'results' => [],
             'page' => $page,
             'total_pages' => ceil($count / $page_size),
-            'results' => [],
             'has_more' => $count > ($page_size * ($page)),
             'total' => $count,
             'remaining' => $count - ($page_size * ($page))
@@ -567,6 +566,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
             $row['presentation_title'] = $request->Presentation()->Title;
             $row['is_admin'] = $isAdmin;
             $row['status'] = $request->getNiceStatus();
+            $row['reject_reason'] = $request->Reason;
             $row['chair_of_old'] = $request->Presentation()->Category()->isTrackChair($memID);
             $row['chair_of_new'] = $request->NewCategory()->isTrackChair($memID);
             $row['new_category']['title'] = $request->NewCategory()->Title;
@@ -648,10 +648,6 @@ class TrackChairAPI extends AbstractRestfulJsonApi
     public function handleResolveCategoryChange(SS_HTTPResponse $r)
     {
 
-        if (!Permission::check('ADMIN')) {
-            return $this->httpError(403);
-        }
-
         if (!is_numeric($r->param('ID'))) {
             return $this->httpError(500, "Invalid category change id");
         }
@@ -661,10 +657,16 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         	return $this->httpError(500, "Request body must contain 'approved' 1 or 0");	
         }
         $approved = (boolean) $vars['approved'];
+        $reason = (isset($vars['reason'])) ? $vars['reason'] : 'No reason.';
 
         $request = SummitCategoryChange::get()->byID($r->param('ID'));
         if(!$request) {
         	return $this->httpError(500, "Request " . $r->param('ID') . " does not exist");
+        }
+
+        $new_category = PresentationCategory::get()->byID($request->NewCategoryID);
+        if(!$new_category->isTrackChair(Member::currentUserID()) && !Permission::check('ADMIN')) {
+            return $this->httpError(403);
         }
         
     	$status = $approved ? SummitCategoryChange::STATUS_APPROVED : SummitCategoryChange::STATUS_REJECTED;
@@ -705,14 +707,14 @@ class TrackChairAPI extends AbstractRestfulJsonApi
 	        	'{member} rejected ' . 
 	        	$request->Reqester()->getName() .'\'s request to move this presentation from ' . 
 	        	$oldCat->Title . ' to ' .
-	        	$category->Title
-
+	        	$category->Title.' because : '.$reason
     		);     
     	}
         
         $request->AdminApproverID = Member::currentUserID();
         $request->Status = $status;
         $request->ApprovalDate = SS_Datetime::now();
+        $request->Reason = $reason;
         $request->write();
 
         $peers = SummitCategoryChange::get()
@@ -726,10 +728,42 @@ class TrackChairAPI extends AbstractRestfulJsonApi
 
         foreach($peers as $p) {
             $p->AdminApproverID = Member::currentUserID();
-            $p->Status = SummitCategoryChange::STATUS_APPROVED;
+            $p->Status = $status;
             $p->ApprovalDate = SS_Datetime::now();
+            $p->Reason = $reason;
             $p->write();
         }
+
+        //send email to chairs from both categories
+        $new_cat_chairs = $new_category->TrackChairs();
+        $old_cat_chairs = $oldCat->TrackChairs();
+        $chairs_emails = array();
+
+        foreach($new_cat_chairs as $chair) {
+            $chairs_emails[] = $chair->Member()->Email;
+        }
+
+        foreach($old_cat_chairs as $chair) {
+            $chairs_emails[] = $chair->Member()->Email;
+        }
+
+        $subject = 'Track Change '.($approved ? 'Approved' : 'Rejected');
+        $body = 'Request submited by '.$request->Reqester()->getName().' to change presentation "'.$request->Presentation()->Title.'"';
+        $body .= ' from track '.$oldCat->Title.' to '.$new_category->Title. ' was '.($approved ? 'approved' : 'rejected');
+        $body .= ' by '.Member::currentUser()->getName().'.<br>';
+
+        if (!$approved) {
+            $body .= 'The reason for the rejection was the following:<br>';
+            $body .= '"'.$reason.'".';
+        }
+
+        $email = EmailFactory::getInstance()->buildEmail(
+            null,
+            implode(',',$chairs_emails),
+            $subject,
+            $body
+        );
+        $email->send();
 
         return $this->ok('change request accepted.');
     }
@@ -1203,7 +1237,24 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
             	$request->Presentation()->Category()->Title . ' to ' .
             	$c->Title
             );           
-            
+
+            // send email to chairs
+            $chairs = $c->TrackChairs();
+            $chairs_emails = array();
+            foreach ($chairs as $chair) {
+                $chairs_emails[] = $chair->Member()->Email;
+            }
+
+            $review_link = Director::baseURL().'track-chairs/change-requests';
+
+            $subject = 'Track Change Requested';
+            $body = Member::currentUser()->getName() . ' requested to change the track for presentation ';
+            $body .= '"' . $this->presentation->Title . '" from ' . $c->Title . ' to ' . $this->presentation->Category()->Title.'.';
+            $body .= '<br>Please review here: <a href="'.$review_link.'">'.$review_link.'</a>.';
+
+            $email = EmailFactory::getInstance()->buildEmail(null, implode(',', $chairs_emails), $subject, $body);
+            $email->send();
+
             return new SS_HTTPResponse("change request made.", 200);
 
         }
