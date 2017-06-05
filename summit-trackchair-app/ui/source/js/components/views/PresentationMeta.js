@@ -76,10 +76,15 @@ class PresentationMeta extends React.Component {
 		                  <dd>{presentation.level}</dd>
 		                  <dt>Category:</dt>
 		                  <dd>
-		                  	{presentation.category_name}<br />
-		                  		(<a href="#" onClick={this.toggleCategoryChange}>Request category change</a>)
-
-		                  </dd>                  
+		                  	{presentation.category_name}
+                              {presentation.moved_to_category &&
+                                <span key='moved' className="detail-presentation-metric moved">
+                                  <i className="fa fa-exchange" />
+                                </span>
+                              }
+                            <br />
+		                  	(<a href="#" onClick={this.toggleCategoryChange}>Request category change</a>)
+		                  </dd>
 		               </dl>		               
 		            </div>
 		        </div>
