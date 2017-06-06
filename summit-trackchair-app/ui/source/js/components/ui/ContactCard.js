@@ -7,17 +7,21 @@ export default ({
 	twitter,
 	bio,
     available_for_bureau,
-    profile_link
+    profile_link,
+    avg_rate_width,
+    is_moderator
 }) => (
 <div className="contact-box">    
     <div className="col-sm-4">
         <div className="text-center">
-            {available_for_bureau ?
-                <a href={profile_link} target="_blank"> <img alt="image" className="img-circle m-t-xs" src={imageURL} /> </a>
-                : <img alt="image" className="img-circle m-t-xs" src={imageURL} />
-            }
+            <a href={profile_link} target="_blank"> <img alt="image" className="img-circle m-t-xs" src={imageURL} /> </a>
             <div className="m-t-xs font-bold">{title}</div>
-	        <h3><strong> {available_for_bureau ? <a href={profile_link} target="_blank">{name}</a> : name } </strong></h3>
+	        <h3><strong> <a href={profile_link} target="_blank">{name}</a> </strong></h3>
+            {!is_moderator &&
+            <div className="rating-container rating-gly-star" data-content="">
+                <div className="rating-stars" data-content="" style={{width: avg_rate_width + '%'}}></div>
+            </div>
+            }
 	        {twitter &&
 	        	<p><i className="fa fa-twitter"></i> {twitter}</p>
 	    	}

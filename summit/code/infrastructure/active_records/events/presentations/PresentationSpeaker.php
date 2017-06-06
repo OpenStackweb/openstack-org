@@ -1356,4 +1356,36 @@ class PresentationSpeaker extends DataObject
         $list = $this->getPrivateCategoryModeratedPresentationsBySummit($summit, $private_group);
         return is_null($list) ? 0 : intval($list->count());
     }
+
+    /**
+     * @param ISummit $summit
+     * @return ArrayList
+     */
+    public function getFeedback(ISummit $summit){
+        $presentations = $this->Presentations()->filter('SummitID',$summit->ID);
+        $feedbacks = new ArrayList();
+        foreach($presentations as $pres) {
+            if ($pres->Feedback()->count()) {
+                $feedbacks->merge($pres->Feedback()->toArray());
+            }
+        }
+
+        return $feedbacks;
+    }
+
+    /**
+     * @param ISummit $summit
+     * @return float
+     */
+    public function getAvgFeedback(ISummit $summit){
+        $feedbacks = $this->getFeedback($summit);
+        $sum = $count = 0;
+
+        foreach ($feedbacks as $feedback) {
+            $sum += $feedback->Rate;
+            $count++;
+        }
+
+        return $count ? round($sum/$count,1) : 0;
+    }
 }

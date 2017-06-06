@@ -20,6 +20,8 @@ const PresentationSpeakers = ({
 				twitter={s.twitter_name}
                 available_for_bureau={s.available_for_bureau}
                 profile_link={s.profile_link}
+                avg_rate_width={s.avg_rate_width}
+                is_moderator={s.is_moderator}
 				/>
 
 		);
