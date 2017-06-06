@@ -7,7 +7,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2017-05-25 12:45+0000\n"
+"PO-Revision-Date: 2017-06-01 04:42+0000\n"
 "Last-Translator: Frank Kloeker <eumel@arcor.de>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -135,7 +135,7 @@ msgstr "alles löschen"
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:26
 #:  survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:59
 msgid "See the results from the latest User Survey"
-msgstr "Schauen Sie nach den Ergebnissen der letzten Nutzerumfrage"
+msgstr "Betrachten Sie die Ergebnisse der letzten Nutzerumfrage"
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:39
 msgid ""
@@ -159,12 +159,12 @@ msgstr ""
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:50
 msgid "Download the report"
-msgstr ""
+msgstr "Bericht herunterladen"
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:56
 #:  survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:98
 msgid "See prior surveys"
-msgstr ""
+msgstr "Frühere Umfragen"
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:62
 #:  survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:100
@@ -172,60 +172,64 @@ msgid ""
 "Learn more about past User Survey data to see how OpenStack is growing and "
 "maturing."
 msgstr ""
+"Erfahren Sie mehr über vergangene User Survey Daten, um zu sehen, wie "
+"OpenStack wächst und gedeiht."
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:67
 #:  survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:107
 msgid "May 2015 Demographics"
-msgstr ""
+msgstr "Mai 2015 Demographie"
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:70
 #:  survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:110
 msgid "May 2015 Business drivers"
-msgstr ""
+msgstr "Mai 2015 Business-Treiber"
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:73
 #:  survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:114
 msgid "May 2015 Deployments"
-msgstr ""
+msgstr "Mai 2015 Installationen"
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:75
 #:  survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:115
 msgid "November 2014 Full report"
-msgstr ""
+msgstr "November 2014 Vollständiger Report"
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:104
 msgid "Get Started"
-msgstr ""
+msgstr "Los geht's"
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:107
 #:  survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:26
 msgid "Already have an OpenStack Foundation login?"
-msgstr ""
+msgstr "Haben Sie bereits einen OpenStack Foundation Login?"
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:115
 #:  survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:30
 msgid "Log In"
-msgstr ""
+msgstr "Anmelden"
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:115
 #:  survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:33
 msgid "I've lost my password"
-msgstr ""
+msgstr "Ich habe mein Passwort verloren"
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:121
 #:  survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:39
 msgid "Don't have a login? Start here."
-msgstr ""
+msgstr "Kein Login? Beginnen Sie hier."
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:48
 #:  survey_builder/code/ui/frontend/forms/SurveyRegistrationForm.php:37
 msgid "Start Survey!"
-msgstr ""
+msgstr "Umfrage starten!"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:72
 msgid ""
 "See the OpenStack community’s opinions, adoption and technology choices"
 msgstr ""
+"Siehe die Meinungen der OpenStack Community, Adoption und "
+"Technologieentscheidungen"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:74
 msgid ""
@@ -236,18 +240,24 @@ msgid ""
 "selection of charts most widely used by the community, and focuses only on "
 "deployments."
 msgstr ""
+"Lesen Sie mehr von der achten Umfrage von OpenStack-Nutzern seit April 2013 "
+"mit dem Ziel, Einstellungen, organisatorische Profile, Anwendungsfälle und "
+"Technologie-Entscheidungen in den verschiedenen Einsatzphasen und -größen "
+"der Community besser zu verstehen. Diese Runde der Umfrage bietet nur "
+"Highlights, darunter eine Auswahl von Charts, die am häufigsten von der "
+"Community genutzt werden, und konzentriert sich nur auf Implementierungen."
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:77
 msgid "Download the October 2016 highlights report"
-msgstr ""
+msgstr "Laden Sie den Report mit den Highlights von Oktober 2016 herunter"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:78
 msgid "Download the full April 2016 Report"
-msgstr ""
+msgstr "Laden Sie den vollen Report von April 2016 herunter"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:80
 msgid "Be your own data scientist"
-msgstr ""
+msgstr "Seien Sie Ihr eigener Datenwissenschaftler"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:82
 #, php-format
@@ -257,50 +267,58 @@ msgid ""
 "community. Apply multiple filters to virtually every quantitative question "
 "from the user survey."
 msgstr ""
+"Entdecken Sie Ihre eigenen Erkenntnisse, indem Sie in den User Survey Daten "
+"aus dem vergangenen Jahr mit einem <a href=\"%s\"> neuen Analyse-Tool </a>, "
+"das der OpenStack-Community zur Verfügung steht, graben. Wenden Sie mehrere "
+"Filter auf praktisch jede quantitative Frage aus der Benutzerbefragung an."
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:88
 msgid "Survey Assets"
-msgstr ""
+msgstr "Umfragewerte"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:91
 msgid "See a video overview of the October 2016 report"
-msgstr ""
+msgstr "Sehen Sie ein Video des Reports von Oktober 2016"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:92
 msgid "Slide deck of the October 2016 highlights report"
-msgstr ""
+msgstr "Slide deck des Reports von Oktober 2016"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:93
 msgid "Order a print copy of the April 2016 full report"
-msgstr ""
+msgstr "Bestellen Sie eine gedruckte Ausgabe des Reports von April 2016"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:94
 msgid "Video overview of the April 2016 full report"
-msgstr ""
+msgstr "Video Übersicht zu April 2016 Vollständiger Report"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:95
 msgid "Slide deck of the April 2016 full report"
-msgstr ""
+msgstr "Folien zu April 2016 Vollständiger Report"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:104
 msgid "October 2015 Full report"
-msgstr ""
+msgstr "Oktober 2015 Vollständiger Report"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:126
 msgid ""
 "This is the <strong>OpenStack User Survey</strong> for OpenStack cloud users "
 "and operators."
 msgstr ""
+"Das ist die <strong>OpenStack User Survey</strong> für OpenStack Cloud-"
+"Nutzer und Operatoren."
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:132
 msgid "It should only take <strong>10 minutes</strong> to complete."
-msgstr ""
+msgstr "Es sollte nur  <strong>10 Minuten</strong> dauern."
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:138
 msgid ""
 "All of the information you provide is <strong>confidential</strong> to the "
 "Foundation (unless you specify otherwise)."
 msgstr ""
+"Alle Informationen die Sie zur Verfügung stellen, sind für die Foundation "
+"<strong>vertraulich</strong>  (sofern nicht anders angegeben)."
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:153
 msgid ""
@@ -309,10 +327,14 @@ msgid ""
 "requirements, the OpenStack Foundation User Committee will be able to "
 "advocate on your behalf."
 msgstr ""
+"Diese Umfrage bietet den Nutzern die Möglichkeit, die Community- und "
+"Software-Richtung zu beeinflussen. Durch das Teilen von Informationen über "
+"Ihre Konfiguration und Anforderungen, ist das OpenStack Foundation User "
+"Committee in der Lage, sich in Ihrem Namen dafür einzusetzen."
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:156
 msgid "More Information About The Survey"
-msgstr ""
+msgstr "Weitere Informationen zur Umfrage"
 
 #: survey_builder/templates/Layout/Includes/DynamicEntityStepForm.ss:16
 #, php-format
@@ -320,11 +342,13 @@ msgid ""
 "If you do not wish to answer these questions, you may <a href=\"%s\">skip to "
 "the next section.</a>"
 msgstr ""
+"Wenn Sie diese Fragen nicht beantworten möchten, können Sie <a href=\"%s\"> "
+"zum nächsten Abschnitt überspringen. </a>"
 
 #: survey_builder/templates/Layout/Includes/DynamicEntityStepForm.ss:18
 #, php-format
 msgid "Your deployments (%s)"
-msgstr ""
+msgstr "Ihre Bereitstellungen (%s)"
 
 #: survey_builder/templates/Layout/Includes/DynamicEntityStepForm.ss:21
 #, php-format
@@ -332,32 +356,38 @@ msgid ""
 "You do not have any OpenStack deployment yet. <a href=\"%s\">Want to add "
 "one?</a>"
 msgstr ""
+"Sie haben gerade keine OpenStack-Installationen. <a href=\"%s\">Möchten Sie "
+"eine hinzufügen?</a>"
 
 #: survey_builder/templates/Layout/Includes/ReviewStepForm.ss:10
 msgid ""
 "Review your completed sections and Submit Your Survey when ready. Thank you "
 "for helping create a better OpenStack!"
 msgstr ""
+"Überprüfen Sie Ihre abgeschlossenen Abschnitte und senden Sie Ihre Umfrage "
+"wenn bereit. Danke für die Hilfe beim Erstellen eines besseren OpenStack!"
 
 #: survey_builder/templates/Layout/Includes/ReviewStepForm.ss:22
 msgid "Edit"
-msgstr ""
+msgstr "Bearbeiten"
 
 #: survey_builder/templates/Layout/Includes/ReviewStepForm.ss:24
 msgid "Start"
-msgstr ""
+msgstr "Start"
 
 #: survey_builder/code/ui/frontend/forms/SurveyRegistrationForm.php:88
 msgid "There was an error with your request, please contact your admin."
 msgstr ""
+"Bei Ihrer Anfrage ist ein Fehler aufgetreten, bitte kontaktieren Sie Ihren "
+"Administrator."
 
 #: survey_builder/code/ui/frontend/forms/fields/SurveyOrganizationField.php:55
 msgid "-- New One --"
-msgstr ""
+msgstr "-- Neu --"
 
 #: survey_builder/code/ui/frontend/forms/fields/SurveyOrganizationField.php:57
 msgid "-- Select Your Organization --"
-msgstr ""
+msgstr "-- Wählen Sie Ihre Organisation --"
 
 #: survey_builder/code/ui/frontend/builders/SurveyRegularStepTemplateUIBuilder.php:57
 #, php-format
@@ -365,110 +395,112 @@ msgid ""
 "<p><strong>If you do not wish to answer these questions, you may <a href="
 "\"%s\">skip to the next section</a>.</strong></p>"
 msgstr ""
+"<p><strong>Wenn Sie diese Fragen nicht beantworten wollen, <a href="
+"\"%s\">springen Sie zum nächsten Abschnitt</a>.</strong></p>"
 
 #: survey_builder/code/ui/frontend/builders/SurveyReviewStepTemplateUIBuilder.php:23
 msgid "Submit Your Survey"
-msgstr ""
+msgstr "Schicken Sie Ihre Umfrage ab"
 
 #: survey_builder/code/ui/frontend/builders/SurveyAbstractStepTemplateUIBuilder.php:24
 msgid "Save &amp; Continue"
-msgstr ""
+msgstr "Speichern &amp; Fortsetzen"
 
 #: survey_builder/code/ui/frontend/builders/SurveyAbstractStepTemplateUIBuilder.php:57
 msgid "Save &amp; Come Back Later"
-msgstr ""
+msgstr "Speichern &amp; Später fortsetzen"
 
 #: survey_builder/code/ui/frontend/builders/SurveyAbstractStepTemplateUIBuilder.php:65
 #:  survey_builder/code/ui/frontend/builders/SurveyAbstractStepTemplateUIBuilder.php:66
 msgid "Go Back"
-msgstr ""
+msgstr "Zurück"
 
 #: survey_builder/code/ui/frontend/builders/EntitySurveyRegularStepTemplateUIBuilder.php:27
 #, php-format
 msgid "STEP %s"
-msgstr ""
+msgstr "SCHRITT %s"
 
 #: survey_builder/code/ui/frontend/builders/fields/SurveyRadioButtonMatrixTemplateQuestionUIBuilder.php:34
 #:  survey_builder/code/ui/frontend/builders/fields/SurveyRankingQuestionTemplateUIBuilder.php:37
 #, php-format
 msgid "you must select at least one item (%s)"
-msgstr ""
+msgstr "Sie müssen mindestens einen Wert auswählen (%s)"
 
 #: survey_builder/code/ui/frontend/SurveyPage.php:411
 msgid "Thank you for your submission !!!"
-msgstr ""
+msgstr "Vielen Dank für Ihre Einreichung!!!"
 
 #: survey_builder/templates/Layout/Includes/Surveys_Header.ss:3
 msgid "Step <strong>%s of %s</strong> for <strong>%s</strong>"
-msgstr ""
+msgstr "Schritt <strong>%s von %s</strong> für <strong>%s</strong>"
 
 #: survey_builder/js/survey.controller.js:55
 msgid "This field is required."
-msgstr ""
+msgstr "Dieses Feld ist erforderlich."
 
 #: survey_builder/js/survey.controller.js:56
 msgid "Please fix this field."
-msgstr ""
+msgstr "Bitte korrigieren Sie dieses Feld."
 
 #: survey_builder/js/survey.controller.js:57
 msgid "Please enter a valid email address."
-msgstr ""
+msgstr "Bitte geben Sie eine gültige E-Mail Adresse an."
 
 #: survey_builder/js/survey.controller.js:58
 msgid "Please enter a valid URL."
-msgstr ""
+msgstr "Bitte geben Sie eine gültige URL an."
 
 #: survey_builder/js/survey.controller.js:59
 msgid "Please enter a valid date."
-msgstr ""
+msgstr "Bitte geben Sie ein gültiges Datum an."
 
 #: survey_builder/js/survey.controller.js:61
 msgid "Please enter a valid number."
-msgstr ""
+msgstr "Bitte geben Sie eine gültige Zahl an."
 
 #: survey_builder/js/survey.controller.js:62
 msgid "Please enter only digits."
-msgstr ""
+msgstr "Bitte geben Sie nur Ziffern an."
 
 #: survey_builder/js/survey.controller.js:63
 msgid "Please enter the same value again."
-msgstr ""
+msgstr "Bitte geben Sie den gleichen Wert noch einmal an."
 
 #: survey_builder/js/survey.controller.js:64
 msgid "Please enter no more than {0} characters."
-msgstr ""
+msgstr "Bitte geben Sie nicht mehr als {0} Zeichen an."
 
 #: survey_builder/js/survey.controller.js:65
 msgid "Please enter at least {0} characters."
-msgstr ""
+msgstr "Bitte geben Sie mindestens {0} Zeichen an."
 
 #: survey_builder/js/survey.controller.js:66
 msgid "Please enter a value between {0} and {1} characters long."
-msgstr ""
+msgstr "Bitte geben Sie einen zwischen {0} und {1} Zeichen langen Wert an."
 
 #: survey_builder/js/survey.controller.js:67
 msgid "Please enter a value between {0} and {1}."
-msgstr ""
+msgstr "Bitte geben Sie einen Wert zwischen {0} und {1} an."
 
 #: survey_builder/js/survey.controller.js:68
 msgid "Please enter a value less than or equal to {0}."
-msgstr ""
+msgstr "Bitte geben Sie einen Wert kleiner oder gleich {0} an."
 
 #: survey_builder/js/survey.controller.js:69
 msgid "Please enter a value greater than or equal to {0}."
-msgstr ""
+msgstr "Bitte geben Sie einen Wert größer oder gleich {0} an."
 
 #: survey_builder/js/survey.controller.js:100
 msgid "Are you sure?"
-msgstr ""
+msgstr "Sind Sie sicher?"
 
 #: survey_builder/js/survey.organization.field.js:31
 msgid "You Must Specify a New Organization Name!."
-msgstr ""
+msgstr "Sie müssen den neuen Organisationsnamen angeben!"
 
 #: survey_builder/js/entity.survey.editor.team.field.js:100
 msgid "You must select a valid member!"
-msgstr ""
+msgstr "Sie müssen ein gültiges Mitglied auswählen!"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:43
 msgid ""
@@ -478,32 +510,38 @@ msgid ""
 "survey offers insights from more than 1,300 users, representing 44% more "
 "deployments and 22% more organizations than ever before."
 msgstr ""
+"Lesen Sie mehr von der neunten Umfrage von OpenStack-Nutzern seit April 2013 "
+"mit dem Ziel, Benutzerperspektiven, organisatorische Profile, "
+"Anwendungsfälle und Technologieauswahl in den Bereitstellungen der Community "
+"besser zu verstehen. Diese Umfrage bietet Einblicke von mehr als 1.300 "
+"Nutzern, was 44% mehr Einsätze und 22% mehr Organisationen als je zuvor "
+"darstellt."
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:46
 msgid "Read the April 2017 report"
-msgstr ""
+msgstr "Lesen Sie den April 2017 Report"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:56
 msgid "Watch a quick video overview"
-msgstr ""
+msgstr "Sehen Sie eine kurze Video-Übersicht"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:58
 msgid "April 2017 full report"
-msgstr ""
+msgstr "April 2017 Vollständiger Report"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:59
 msgid "October 2016 highlights report"
-msgstr ""
+msgstr "Highlights des Reports von Oktober 2016"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:61
 msgid "April 2016 full report"
-msgstr ""
+msgstr "April 2016 Vollständiger Report"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:84
 msgid "Order the User Survey as a printed book"
-msgstr ""
+msgstr "Gedrucktes Exemplar der Nutzerumfrage bestellen"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:86
 msgid "April 2017 full report (coming soon)"
-msgstr ""
+msgstr "April 2017 Vollständiger Report (in Kürze)"
 

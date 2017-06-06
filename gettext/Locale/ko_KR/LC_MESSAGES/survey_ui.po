@@ -7,8 +7,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2017-05-14 08:36+0000\n"
-"Last-Translator: Ian Y. Choi <ianyrchoi@gmail.com>\n"
+"PO-Revision-Date: 2017-05-29 09:16+0000\n"
+"Last-Translator: Sungjin Kang <gang.sungjin@gmail.com>\n"
 "Language-Team: Korean (South Korea)\n"
 "Language: ko-KR\n"
 "X-Generator: Zanata 3.9.6\n"
@@ -76,21 +76,21 @@ msgstr "COPY URL"
 
 #: survey_builder/templates/Layout/Includes/ThankYouStepForm.ss:6
 msgid "Create A Password For Return Visits"
-msgstr ""
+msgstr "재 방문에 대한 비밀번호 생성"
 
 #: survey_builder/templates/Layout/Includes/ThankYouStepForm.ss:7
 msgid ""
 "If you'd like to be able to return and update this information in the "
 "future, you may choose a password below."
-msgstr ""
+msgstr "앞으로 이 정보를 제공하고 업데이트하려면 아래에서 비밀번호를 입력하세요."
 
 #: survey_builder/templates/EntitySurveyEditorTeamField.ss:5
 msgid "Find your team member in our database"
-msgstr ""
+msgstr "데이터베이스에서 팀원 찾기"
 
 #: survey_builder/templates/EntitySurveyEditorTeamField.ss:9
 msgid "+ Add Team Member"
-msgstr ""
+msgstr "+ 팀원 추가"
 
 #: survey_builder/templates/EntitySurveyEditorTeamField.ss:19
 #:  survey_builder/code/ui/frontend/forms/SurveyRegistrationForm.php:30
@@ -118,11 +118,11 @@ msgstr "사용 가능한 옵션이 없습니다"
 #: survey_builder/templates/SurveyRankingField.ss:2
 #, php-format
 msgid "Please rank up to %s"
-msgstr ""
+msgstr "최대 %s 까지 순위를 매겨주세요."
 
 #: survey_builder/templates/SurveyRankingField.ss:4
 msgid "Click your options to rank them. Select at least one."
-msgstr ""
+msgstr "옵션을 클릭하여 등급을 지정하십시오. 하나 이상 선택하십시오."
 
 #: survey_builder/templates/SurveyRankingField.ss:4
 msgid "clear all"
@@ -146,6 +146,8 @@ msgid ""
 "and technology choices across the community’s various deployment stages and "
 "sizes."
 msgstr ""
+"2013년 4월 이후 OpenStack 사용자에 대한 여섯 번째 설문 조사에서 커뮤니티의 다양한 배포 단계와 규모에 대한 태도, 조직 "
+"프로필, 사용 사례, 기술 선택에 대한 이해를 높이는 목표를 자세히 읽었습니다."
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:50
 msgid "Download the report"
@@ -161,7 +163,7 @@ msgstr "이전 설문 보기"
 msgid ""
 "Learn more about past User Survey data to see how OpenStack is growing and "
 "maturing."
-msgstr ""
+msgstr "과거 사용자 설문 조사 데이터에대해 자세히 알아보고 OpenStack 성장과 성숙도를 확인하싶시오."
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:67
 #:  survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:107
@@ -215,7 +217,7 @@ msgstr "설문을 시작합니다!"
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:72
 msgid ""
 "See the OpenStack community’s opinions, adoption and technology choices"
-msgstr ""
+msgstr "OpenStack 커뮤니티 의견, 채택, 기술 선택 보기"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:74
 msgid ""
@@ -226,18 +228,21 @@ msgid ""
 "selection of charts most widely used by the community, and focuses only on "
 "deployments."
 msgstr ""
+"2013년 4월 이후 OpenStack 사용자에 대한 8번째 조사에서 지역 커뮤니티의 다양한 비포 단계와 규모에 대한 태도, 조직 "
+"프로필, 사용 사례, 기술 선택에 대한 이해를 높히는 것을 목표로합니다. 이 설문 조사에서는 커뮤니티에서 가장 널리 사용되는 차트를 "
+"포함하여 하이라이트만 제공하고 배포에만 중점을 둡니다."
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:77
 msgid "Download the October 2016 highlights report"
-msgstr ""
+msgstr "2016년 10월 핵심 보고서 다운"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:78
 msgid "Download the full April 2016 Report"
-msgstr ""
+msgstr "2016년 4월 전체 보고서 다운"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:80
 msgid "Be your own data scientist"
-msgstr ""
+msgstr "데이터 과학자라면,"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:82
 #, php-format
@@ -247,14 +252,16 @@ msgid ""
 "community. Apply multiple filters to virtually every quantitative question "
 "from the user survey."
 msgstr ""
+"지난해 사용자 설문 조사 데이터를 OpenStack 커뮤니티에서 사용할 수 있는 <a href=\"%s\">새로운 분석 도구</a>를 "
+"이용하여 원하는 조사결과서를 만드십시오. 사용자 설문 조사의 모든 정량적 질문에 필터를 적용할 수 있습니다."
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:88
 msgid "Survey Assets"
-msgstr ""
+msgstr "설문 조사 자산"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:91
 msgid "See a video overview of the October 2016 report"
-msgstr ""
+msgstr "2016년 10월 보고서에 대한 비디오 개요 보기"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:92
 msgid "Slide deck of the October 2016 highlights report"
@@ -290,7 +297,7 @@ msgstr "(설문을) 완료하는데에는 <strong>10분</strong> 정도만 소�
 msgid ""
 "All of the information you provide is <strong>confidential</strong> to the "
 "Foundation (unless you specify otherwise)."
-msgstr ""
+msgstr "귀하기 제공하는 모든 정보는 귀하기 달리 지정하지 않는한 재단에서는 <strong>기밀 사항</strong>으로 보호됩니다."
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:153
 msgid ""
@@ -299,35 +306,38 @@ msgid ""
 "requirements, the OpenStack Foundation User Committee will be able to "
 "advocate on your behalf."
 msgstr ""
+"이 설문 조사는 사용자에게 커뮤니티와 소프트웨어 방향에 영향을 줄 수 있는 기회를 제공합니다. 귀하의 구성과 요구 사항에 대한 정보를 "
+"공유함으로써 OpenStack Foundation User Committee가 귀하를 대신하여 발언할 수 있습니다."
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:156
 msgid "More Information About The Survey"
-msgstr ""
+msgstr "설문 조사에대한 추가 정ㅂ"
 
 #: survey_builder/templates/Layout/Includes/DynamicEntityStepForm.ss:16
 #, php-format
 msgid ""
 "If you do not wish to answer these questions, you may <a href=\"%s\">skip to "
 "the next section.</a>"
-msgstr ""
+msgstr "이 질문에 답현하지 않으려면 <a href=\"%s\">다음 섹션으로 건너 뜁니다</a>."
 
 #: survey_builder/templates/Layout/Includes/DynamicEntityStepForm.ss:18
 #, php-format
 msgid "Your deployments (%s)"
-msgstr ""
+msgstr "귀하의 배포 (%s)"
 
 #: survey_builder/templates/Layout/Includes/DynamicEntityStepForm.ss:21
 #, php-format
 msgid ""
 "You do not have any OpenStack deployment yet. <a href=\"%s\">Want to add "
 "one?</a>"
-msgstr ""
+msgstr "아직 OpenStack 배포가 없습니다. <a href=\"%s\">추가하시겠습니까?</a>"
 
 #: survey_builder/templates/Layout/Includes/ReviewStepForm.ss:10
 msgid ""
 "Review your completed sections and Submit Your Survey when ready. Thank you "
 "for helping create a better OpenStack!"
 msgstr ""
+"완성된 섹션을 검토하고 준비가되면 설문 조사를 제출 하십시오. 더 나은 OpenStack을 만드는데 도움을 주셔서 감사합니다."
 
 #: survey_builder/templates/Layout/Includes/ReviewStepForm.ss:22
 msgid "Edit"
@@ -470,32 +480,35 @@ msgid ""
 "survey offers insights from more than 1,300 users, representing 44% more "
 "deployments and 22% more organizations than ever before."
 msgstr ""
+"2013년 4월 이후, OpenStack 사용자에 대한 9번째 설문조사에서 커뮤니티 배포 전반에 걸친 사용자 관점, 조직 프로필, 사용 "
+"사례와 기술 선택을 보다 잘 이해하는 것을 목표로 합니다. 이 설문 조사는 1300명이 넘는 사용자의 통찰력을 제공하여 전보다 44% 더 "
+"많은 배포사항과 22% 더 많은 조직의 내용을 담고 있습니다."
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:46
 msgid "Read the April 2017 report"
-msgstr ""
+msgstr "2017년 4월 보고서 읽기"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:56
 msgid "Watch a quick video overview"
-msgstr ""
+msgstr "빠른 비디오 개요 보기"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:58
 msgid "April 2017 full report"
-msgstr ""
+msgstr "2017년 4월 전체 보고서"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:59
 msgid "October 2016 highlights report"
-msgstr ""
+msgstr "2016년 10월 핵심 보고서"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:61
 msgid "April 2016 full report"
-msgstr ""
+msgstr "2016년 4월 전체 보고서"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:84
 msgid "Order the User Survey as a printed book"
-msgstr ""
+msgstr "사용자 설문지를 인쇄본으로 주문"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:86
 msgid "April 2017 full report (coming soon)"
-msgstr ""
+msgstr "2017년 4월 전체 보고서 (작성중)"
 

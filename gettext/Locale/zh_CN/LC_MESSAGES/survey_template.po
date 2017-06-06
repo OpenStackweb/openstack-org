@@ -1,3 +1,4 @@
+# TigerFang <tigerfun@126.com>, 2017. #zanata
 # vuuv <froms2008@gmail.com>, 2017. #zanata
 # xiezhongtian <zhongtianemail@gmail.com>, 2017. #zanata
 # zzxwill <zzxwill@gmail.com>, 2017. #zanata
@@ -6,8 +7,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"PO-Revision-Date: 2017-05-12 06:17+0000\n"
-"Last-Translator: vuuv <froms2008@gmail.com>\n"
+"PO-Revision-Date: 2017-06-02 09:57+0000\n"
+"Last-Translator: TigerFang <tigerfun@126.com>\n"
 "Language-Team: Chinese (China)\n"
 "Language: zh-CN\n"
 "X-Generator: Zanata 3.9.6\n"
@@ -39,19 +40,19 @@ msgid "-- Select One --"
 msgstr "-- 选择一个 --"
 
 msgid "App developer / deployer"
-msgstr ""
+msgstr "应用开发人员 / 部署人员"
 
 msgid "CIO/ IT infrastructure manager"
-msgstr ""
+msgstr "首席信息官 / IT 基础架构经理"
 
 msgid "Cloud architect"
-msgstr ""
+msgstr "云架构师"
 
 msgid "Cloud operator or sys-admin"
-msgstr ""
+msgstr "云管理员或者系统管理员"
 
 msgid "OpenStack upstream developer"
-msgstr ""
+msgstr "OpenStack上游开发人员"
 
 msgid "Other"
 msgstr "其他"
@@ -138,40 +139,40 @@ msgid "Your Organization's Primary IT Focus"
 msgstr "贵方的主要IT焦点"
 
 msgid "Big data/ data analytics"
-msgstr ""
+msgstr "大数据/ 数据分析"
 
 msgid "DevOps consulting/ delivery"
-msgstr ""
+msgstr "持续集成咨询/ 交付"
 
 msgid "HPC"
-msgstr ""
+msgstr "高性能计算"
 
 msgid "Infrastructure provider (compute, network, and/or storage)"
-msgstr ""
+msgstr "基础架构提供商（计算，网络和/或者存储）"
 
 msgid "Media & entertainment"
-msgstr ""
+msgstr "媒体和娱乐"
 
 msgid "Telco"
-msgstr ""
+msgstr "电信运营商"
 
 msgid "Data center/ co-location services"
-msgstr ""
+msgstr "数据中心/协同定位服务"
 
 msgid "Consulting/ professional services"
-msgstr ""
+msgstr "咨询/ 专家服务"
 
 msgid "Education/ training services"
-msgstr ""
+msgstr "教育/ 培训服务"
 
 msgid "Public/ hosted cloud service provider"
-msgstr ""
+msgstr "公有/托管云服务提供商"
 
 msgid "Private cloud provider"
-msgstr ""
+msgstr "私有云提供商"
 
 msgid "Systems integrator"
-msgstr ""
+msgstr "系统集成商"
 
 msgid "Other IT activity"
 msgstr "其他IT活动"
@@ -289,25 +290,25 @@ msgid ""
 msgstr "您有兴趣使用或希望集成到OpenStack的技术？<br/><font size=\"-2\"><em>选择所有适用的</em></font>"
 
 msgid "Bare metal"
-msgstr ""
+msgstr "祼金属"
 
 msgid "Containers"
-msgstr ""
+msgstr "容器"
 
 msgid "Hardware accelerators (e.g. FPGAs, GPGPUs, ASICs)"
-msgstr ""
+msgstr "硬件加速设备（如：FPGA，GPU，ASIC等）"
 
 msgid "Hybrid cloud"
-msgstr ""
+msgstr "混合云"
 
 msgid "Internet of Things"
-msgstr ""
+msgstr "物联网"
 
 msgid "Platform as a Service"
-msgstr ""
+msgstr "平台即服务"
 
 msgid "SDN/NFV"
-msgstr ""
+msgstr "软件定义（或驱动的）网络/网络功能虚拟化"
 
 msgid "Please specify:"
 msgstr "请选择:"
@@ -340,6 +341,10 @@ msgid ""
 "and will only be presented in aggregate unless you consent to making it "
 "public.</p>"
 msgstr ""
+"<p>一套部署配置文件会记录一个完整的OpenStack环境的信息。</"
+"p><ul><li>如果一个组织中存在多个OpenStack环境，则针对每套环境都会有一套部署配置文件。</"
+"li><li>在你创建了一套部署配置文件后，其中的信息还可以再进行更新。</li><li>你创建的部署配置文件，默认管理员是你自己。</li></"
+"ul><p>通常情况下，你提供的信息都是机密的只有在项目组内可见，除非你把它设置成公共的。</p>"
 
 msgid "Your OpenStack Deployments"
 msgstr "您的 OpenStack 部署"
@@ -365,6 +370,7 @@ msgid ""
 "organization work on this deployment, please work with your team members to "
 "enter your deployment data to avoid duplication.*"
 msgstr ""
+"请创建一个如下所示的易辨识的标签，如“生产用OpenStack环境。”在我们的监测工具中它也将作为您环境的名字。如果您的组织中有多人同时使用这套环境，请和所有相关成员确认，防止出现部署信息重复。"
 
 msgid "Each deployment profile can be marked public or confidential.*"
 msgstr "每个部署配置文件都可以标记为 公开 或 保密 。"
@@ -455,37 +461,37 @@ msgid ""
 msgstr "此部署当前使用的什么版本？<BR><font size=\"-2\"><em>选择所有适用的</em></font>"
 
 msgid "Trunk / continuous deployment"
-msgstr ""
+msgstr "Trunk / 持续部署"
 
 msgid "Newton (2016.2)"
-msgstr ""
+msgstr "Newton (2016.2)"
 
 msgid "Mitaka (2016.2)"
-msgstr ""
+msgstr "Mitaka (2016.2)"
 
 msgid "Liberty (2015.2)"
-msgstr ""
+msgstr "Liberty (2015.2)"
 
 msgid "Kilo (2015.1)"
-msgstr ""
+msgstr "Kilo (2015.1)"
 
 msgid "Juno (2014.2)"
-msgstr ""
+msgstr "Juno (2014.2)"
 
 msgid "Icehouse (2014.1)"
-msgstr ""
+msgstr "Icehouse (2014.1)"
 
 msgid "Havana (2013.2)"
-msgstr ""
+msgstr "Havana (2013.2)"
 
 msgid "Grizzly (2013.1)"
-msgstr ""
+msgstr "Grizzly (2013.1)"
 
 msgid "Folsom (2012.2)"
-msgstr ""
+msgstr "Folsom (2012.2)"
 
 msgid "Essex (2012.1)"
-msgstr ""
+msgstr "Essex (2012.1)"
 
 msgid ""
 "Which workloads are you currently using?<BR><font size=\"-2\"><em>Select All "
@@ -493,47 +499,47 @@ msgid ""
 msgstr "您当前使用了多大的工作量？<BR><font size=\"-2\"><em>选择所有适用的</em></font>"
 
 msgid "Big Data Analytics/ Data Mining/ Hadoop, Spark, etc."
-msgstr ""
+msgstr "大数据分析/ 数据挖掘/ Hadoop, Spark等"
 
 msgid "Bio and medical"
-msgstr ""
+msgstr "生物和医药"
 
 msgid "Business applications (i.e. ERP, CRM, email)"
-msgstr ""
+msgstr "企业应用（如 ERP, CRM, 电子邮件）"
 
 msgid "Database: mySQL, Oracle, etc."
-msgstr ""
+msgstr "数据库：mySQL, Oracle等"
 
 msgid ""
 "Infrastructure services (i.e. public and private cloud products and "
 "services)"
-msgstr ""
+msgstr "基础架构服务（如公有和私有云产品及服务）"
 
 msgid "Mobile applications and services"
-msgstr ""
+msgstr "移动应用和服务"
 
 msgid "Network Functions Virtualization"
-msgstr ""
+msgstr "网络功能虚拟化"
 
 msgid ""
 "Research computing (including High Performance and High Throughput "
 "Computing)"
-msgstr ""
+msgstr "科研计算（包括高性能高吞吐量计算）"
 
 msgid "SaaS provider/ delivery"
-msgstr ""
+msgstr "SaaS提供商/ 交付"
 
 msgid "Software dev/ test/ QA and CI"
-msgstr ""
+msgstr "软件开发/ 测试/ 品控 和持续集成"
 
 msgid "Storage/  backup/ archiving"
-msgstr ""
+msgstr "存储/ 备份/ 归档"
 
 msgid "Video processing and content delivery"
-msgstr ""
+msgstr "视频处理和内容分发"
 
 msgid "Web services and e-commerce"
-msgstr ""
+msgstr "网站服务和电子商务"
 
 msgid ""
 "Which projects does this deployment currently use, or are you interested in "
@@ -761,61 +767,61 @@ msgid "1 million or more instances"
 msgstr "1 百万及以上"
 
 msgid "Total number of usable IPs"
-msgstr ""
+msgstr "可用IP总数"
 
 msgid "1 to 9 IPs"
-msgstr ""
+msgstr "1到9个IP地址"
 
 msgid "10 to 99 IPs"
-msgstr ""
+msgstr "10到99个IP地址"
 
 msgid "100 to 999 IPs"
-msgstr ""
+msgstr "100到999个IP地址"
 
 msgid "1,000 to 9,999 IPs"
-msgstr ""
+msgstr "1000到9999个IP地址"
 
 msgid "10,000 to 99,999 IPs"
-msgstr ""
+msgstr "10000到99999个IP地址"
 
 msgid "100,000 or more IPs"
-msgstr ""
+msgstr "100,000或者更多IP地址"
 
 msgid "How much usable block storage do you have in this Cinder deployment?"
-msgstr ""
+msgstr "在这套Cinder环境中您有多少可用的块存储？"
 
 msgid "Less than 1 TB"
-msgstr ""
+msgstr "少于1TB"
 
 msgid "1 TB to 9 TB"
-msgstr ""
+msgstr "1到9TB"
 
 msgid "10 TB to 99 TB"
-msgstr ""
+msgstr "10到99TB"
 
 msgid "100 TB to 999 TB"
-msgstr ""
+msgstr "100到999TB"
 
 msgid "1 PB to 9 PB"
-msgstr ""
+msgstr "1到9PB"
 
 msgid "10 PB to 99 PB"
-msgstr ""
+msgstr "10到99PB"
 
 msgid "100 PB to 999 PB"
-msgstr ""
+msgstr "100到999PB"
 
 msgid "1 EB to 9 EB"
-msgstr ""
+msgstr "1到9EB"
 
 msgid "10 EB to 99 EB"
-msgstr ""
+msgstr "10到99EB"
 
 msgid "100 to 999 EB"
-msgstr ""
+msgstr "100到999EB"
 
 msgid "1 ZB to 9 ZB"
-msgstr ""
+msgstr "1到9ZB"
 
 msgid ""
 "How much <strong>OpenStack Object Storage (Swift)</strong> have you "
@@ -828,73 +834,73 @@ msgid ""
 msgstr "<strong>OpenStack对象存储(Swift)</strong>里面存储了多少对象?"
 
 msgid "Fewer than 1,000 objects"
-msgstr ""
+msgstr "少于1000个对象"
 
 msgid "1,000 to 9,999 objects"
-msgstr ""
+msgstr "1000到9999个对象"
 
 msgid "10,000 to 99,999 objects"
-msgstr ""
+msgstr "10000到99999个对象"
 
 msgid "100,000 to 999,999 objects"
-msgstr ""
+msgstr "100000到999999个对象"
 
 msgid "1 million to 9 million objects"
-msgstr ""
+msgstr "1百万到9百万个对象"
 
 msgid "10 million to 999 million objects"
-msgstr ""
+msgstr "1千万到9亿9千9百万个对象"
 
 msgid "100 million to 999 million objects"
-msgstr ""
+msgstr "1亿到9亿9千9百万个对象"
 
 msgid "1 billion to 9 billion objects"
-msgstr ""
+msgstr "10亿到90亿个对象"
 
 msgid "10 billion to 99 billion objects"
-msgstr ""
+msgstr "10亿到990亿个对象"
 
 msgid "100 billion or more objects"
-msgstr ""
+msgstr "100亿以上的对象"
 
 msgid "Approximately how many Nova cells do you use?"
 msgstr "您大约使用了多少个 Nova Cell?"
 
 msgid "None"
-msgstr ""
+msgstr "无"
 
 msgid "1 cell"
-msgstr ""
+msgstr "1个cell"
 
 msgid "2 cells"
-msgstr ""
+msgstr "2个cell"
 
 msgid "3 cells"
-msgstr ""
+msgstr "3个cell"
 
 msgid "4 cells"
-msgstr ""
+msgstr "4个cell"
 
 msgid "5 cells"
-msgstr ""
+msgstr "5个cell"
 
 msgid "6 cells"
-msgstr ""
+msgstr "6个cell"
 
 msgid "7 cells"
-msgstr ""
+msgstr "7个cell"
 
 msgid "8 cells"
-msgstr ""
+msgstr "8个cell"
 
 msgid "9 cells"
-msgstr ""
+msgstr "9个cell"
 
 msgid "10 cells"
-msgstr ""
+msgstr "10个cell"
 
 msgid "More than 10"
-msgstr ""
+msgstr "10个以上cell"
 
 msgid ""
 "<p><span style=\"color: #0083c8; font-size: 1.6em;\">Deployment Decisions</"
@@ -903,6 +909,9 @@ msgid ""
 " This information is optional, but will be kept confidential and never "
 "published in connection with you or your organization.</p><hr>"
 msgstr ""
+"<p><span style=\"color: #0083c8; font-size: 1.6em;\">部署前的决策</span></"
+"p><p>以下信息将会帮助我们更好的理解OpenStack部署过程中最常用的配置和组件。这条信息是可选的，但会处于保密状态且决不会连同您或者您的组织一起被公开</"
+"p><hr>"
 
 msgid ""
 "What packages does this deployment use?<BR><font size=\"-2\"><em>Select All "
@@ -910,16 +919,16 @@ msgid ""
 msgstr "此部署当前使用的什么软件包？<BR><font size=\"-2\"><em>选择所有适用的</em></font>"
 
 msgid "Unmodified packages from the OS"
-msgstr ""
+msgstr "操作系统中原生的包"
 
 msgid "Unmodified packages from a non-OS source (e.g. vendor distribution)"
-msgstr ""
+msgstr "从非操作系统源获取的包（如厂商发行版包含的包）"
 
 msgid "Packages you've modified"
-msgstr ""
+msgstr "您更改过的包"
 
 msgid "Packages you’ve built yourself"
-msgstr ""
+msgstr "您自己构建的包"
 
 msgid ""
 "If you have modified packages or have built your own packages, why?<BR><font "
@@ -927,16 +936,16 @@ msgid ""
 msgstr "如果您修改了软件包或者构建了自己的软件包, 为什么？<BR><font size=\"-2\"><em>选择所有适用的</em></font>"
 
 msgid "Need an OpenStack bug fix not in standard packages"
-msgstr ""
+msgstr "请对OpenStack进行bug修复而不是标准包"
 
 msgid "Need an OpenStack feature not in standard packages"
-msgstr ""
+msgstr "需要OpenStack的功能而不是标准包的"
 
 msgid "Standard packages have bugs"
-msgstr ""
+msgstr "标准包中存在多个bug"
 
 msgid "Standard packages aren't updated quickly enough"
-msgstr ""
+msgstr "未及时对标准包进行升级"
 
 msgid ""
 "Which tools are you using to deploy / manage this cluster?<BR><font size=\"-"
@@ -944,58 +953,58 @@ msgid ""
 msgstr "您使用了哪些工具来 部署/管理 此集群？<BR><font size=\"-2\"><em>选择所有适用的</em></font>"
 
 msgid "Ansible"
-msgstr ""
+msgstr "Ansible"
 
 msgid "Ansible (LXC)"
-msgstr ""
+msgstr "Ansible (LXC)"
 
 msgid "CFEngine"
-msgstr ""
+msgstr "CFEngine"
 
 msgid "Chef"
-msgstr ""
+msgstr "Chef"
 
 msgid "Container-based orchestration"
-msgstr ""
+msgstr "基于容器的编排"
 
 msgid "Crowbar"
-msgstr ""
+msgstr "Crowbar"
 
 msgid "DevStack"
-msgstr ""
+msgstr "DevStack"
 
 msgid "Fuel"
-msgstr ""
+msgstr "Fuel"
 
 msgid "Fuel CCP"
-msgstr ""
+msgstr "Fuel CCP"
 
 msgid "Helm"
-msgstr ""
+msgstr "Helm"
 
 msgid "Juju"
-msgstr ""
+msgstr "Juju"
 
 msgid "Kolla-Ansible"
-msgstr ""
+msgstr "Kolla-Ansible"
 
 msgid "Kolla-Kubernetes"
-msgstr ""
+msgstr "Kolla-Kubernetes"
 
 msgid "Mesos"
-msgstr ""
+msgstr "Mesos"
 
 msgid "PackStack"
-msgstr ""
+msgstr "PackStack"
 
 msgid "Puppet"
-msgstr ""
+msgstr "Puppet"
 
 msgid "SaltStack"
-msgstr ""
+msgstr "SaltStack"
 
 msgid "Other Tool"
-msgstr ""
+msgstr "其它工具"
 
 msgid ""
 "If you are running your OpenStack services inside of containers, which "
@@ -1006,16 +1015,16 @@ msgstr ""
 "font>"
 
 msgid "Docker"
-msgstr ""
+msgstr "Docker"
 
 msgid "LXC"
-msgstr ""
+msgstr "LXC"
 
 msgid "LXD"
-msgstr ""
+msgstr "LXD"
 
 msgid "RKT"
-msgstr ""
+msgstr "RKT"
 
 msgid ""
 "Which container orchestration or Platform-as-a-Service (PaaS) tools are you "
@@ -1026,31 +1035,31 @@ msgstr ""
 "2\"><em>选择所有适用的</em></font>"
 
 msgid "Built our own"
-msgstr ""
+msgstr "自己构建的"
 
 msgid "CloudFoundry"
-msgstr ""
+msgstr "CloudFoundry"
 
 msgid "Cloudify"
-msgstr ""
+msgstr "Cloudify"
 
 msgid "Docker Swarm"
-msgstr ""
+msgstr "Docker Swarm"
 
 msgid "Kubernetes"
-msgstr ""
+msgstr "Kubernetes"
 
 msgid "OpenShift"
-msgstr ""
+msgstr "OpenShift"
 
 msgid "OneOps"
-msgstr ""
+msgstr "OneOps"
 
 msgid "Stackato"
-msgstr ""
+msgstr "Stackato"
 
 msgid "Scalr"
-msgstr ""
+msgstr "Scalr"
 
 msgid ""
 "Which <b>OpenStack Compute (Nova)</b> hypervisors are you using?<BR><font "
@@ -1060,37 +1069,37 @@ msgstr ""
 "font>"
 
 msgid "Bare Metal (Ironic)"
-msgstr ""
+msgstr "祼金属 (Ironic)"
 
 msgid "KVM (x86)"
-msgstr ""
+msgstr "KVM (x86)"
 
 msgid "KVM (ppc64)"
-msgstr ""
+msgstr "KVM (ppc64)"
 
 msgid "Hyper from HyperHQ"
-msgstr ""
+msgstr "Hyper from HyperHQ"
 
 msgid "Microsoft Hyper-V"
-msgstr ""
+msgstr "微软 Hyper-V"
 
 msgid "OpenVZ/Virtuozzo"
-msgstr ""
+msgstr "OpenVZ/Virtuozzo"
 
 msgid "QEMU"
-msgstr ""
+msgstr "QEMU"
 
 msgid "VMware ESX"
-msgstr ""
+msgstr "VMware ESX"
 
 msgid "Xen / XCP"
-msgstr ""
+msgstr "Xen / XCP"
 
 msgid "XenServer"
-msgstr ""
+msgstr "XenServer"
 
 msgid "Other Hypervisors"
-msgstr ""
+msgstr "其它虚拟化系统"
 
 msgid ""
 "Which databases are you using for OpenStack components?<br/><font size=\"-"
@@ -1098,31 +1107,31 @@ msgid ""
 msgstr "您的OpenStack组件用到了哪些数据库？<br/><font size=\"-2\"><em>选择所有适用的</em></font>"
 
 msgid "MariaDB"
-msgstr ""
+msgstr "MariaDB"
 
 msgid "MariaDB Galera Cluster"
-msgstr ""
+msgstr "MariaDB Galera Cluster"
 
 msgid "MongoDB"
-msgstr ""
+msgstr "MongoDB"
 
 msgid "MySQL"
-msgstr ""
+msgstr "MySQL"
 
 msgid "MySQL with DRBD"
-msgstr ""
+msgstr "MySQL with DRBD"
 
 msgid "MySQL with Galera"
-msgstr ""
+msgstr "MySQL with Galera"
 
 msgid "Percona Server"
-msgstr ""
+msgstr "Percona Server"
 
 msgid "Percona XtraDB Cluster"
-msgstr ""
+msgstr "Percona XtraDB Cluster"
 
 msgid "PostgreSQL"
-msgstr ""
+msgstr "PostgreSQL"
 
 msgid "Other database"
 msgstr "其他"
@@ -1137,40 +1146,40 @@ msgstr ""
 "2\"><em>选择所有适用的</em></font>"
 
 msgid "Deltacloud"
-msgstr ""
+msgstr "Deltacloud"
 
 msgid "Do not use/plan to use the OpenStack API"
-msgstr ""
+msgstr "未使用/未计划使用OpenStack API"
 
 msgid "libcloud (Python)"
-msgstr ""
+msgstr "libcloud (Python)"
 
 msgid "FOG"
-msgstr ""
+msgstr "FOG"
 
 msgid "gophercloud"
-msgstr ""
+msgstr "gophercloud"
 
 msgid "jclouds"
-msgstr ""
+msgstr "jclouds"
 
 msgid "pkgcloud"
-msgstr ""
+msgstr "pkgcloud"
 
 msgid "php-opencloud"
-msgstr ""
+msgstr "php-opencloud"
 
 msgid "OpenStack.net"
-msgstr ""
+msgstr "OpenStack.net"
 
 msgid "OpenStack clients"
-msgstr ""
+msgstr "OpenStack clients"
 
 msgid "Shade"
-msgstr ""
+msgstr "Shade"
 
 msgid "Wrote our own"
-msgstr ""
+msgstr "Wrote our own"
 
 msgid "Other toolkits"
 msgstr "其他"
@@ -1181,19 +1190,19 @@ msgid ""
 msgstr "您的用户还在使用哪些云？<br/><font size=\"-2\"><em>选择所有适用的</em></font>"
 
 msgid "Amazon Web Services"
-msgstr ""
+msgstr "Amazon Web Services"
 
 msgid "Google Compute Engine"
-msgstr ""
+msgstr "Google Compute Engine"
 
 msgid "Microsoft Azure"
-msgstr ""
+msgstr "Microsoft Azure"
 
 msgid "OpenStack Private Cloud"
-msgstr ""
+msgstr "OpenStack 私有云"
 
 msgid "OpenStack Public Clouds"
-msgstr ""
+msgstr "OpenStack 公有云"
 
 msgid "Other Clouds"
 msgstr "其他"
@@ -1204,19 +1213,19 @@ msgid ""
 msgstr "您运行的的全部云计算基础架构中OpenStack的百分比是？"
 
 msgid "81-100%"
-msgstr ""
+msgstr "81-100%"
 
 msgid "61-80%"
-msgstr ""
+msgstr "61-80%"
 
 msgid "41-60%"
-msgstr ""
+msgstr "41-60%"
 
 msgid "21-40%"
-msgstr ""
+msgstr "21-40%"
 
 msgid "1-20%"
-msgstr ""
+msgstr "1-20%"
 
 msgid ""
 "Which <b>OpenStack Network (Neutron)</b> drivers are you using?<BR><font "
@@ -1227,157 +1236,157 @@ msgstr ""
 "请注意, 我们现在区分ML2驱动和非ML2驱动</em></font>"
 
 msgid "ML2 - Open vSwitch"
-msgstr ""
+msgstr "ML2 - Open vSwitch"
 
 msgid "ML2 - Linux Bridge"
-msgstr ""
+msgstr "ML2 - Linux Bridge"
 
 msgid "OpenContrail or Juniper"
-msgstr ""
+msgstr "OpenContrail or Juniper"
 
 msgid "nova-network"
-msgstr ""
+msgstr "nova-network"
 
 msgid "MidoNet"
-msgstr ""
+msgstr "MidoNet"
 
 msgid "PLUMgrid"
-msgstr ""
+msgstr "PLUMgrid"
 
 msgid "OpenDaylight"
-msgstr ""
+msgstr "OpenDaylight"
 
 msgid "VMWare NSX (formerly Nicira NVP)"
-msgstr ""
+msgstr "VMWare NSX (formerly Nicira NVP)"
 
 msgid "Hyper-V"
-msgstr ""
+msgstr "Hyper-V"
 
 msgid "ML2 - Mellanox"
-msgstr ""
+msgstr "ML2 - Mellanox"
 
 msgid "A10 Networks"
-msgstr ""
+msgstr "A10 Networks"
 
 msgid "Arista"
-msgstr ""
+msgstr "Arista"
 
 msgid "Big Switch"
-msgstr ""
+msgstr "Big Switch"
 
 msgid "Brocade"
-msgstr ""
+msgstr "Brocade"
 
 msgid "Cisco UCS / Nexus"
-msgstr ""
+msgstr "Cisco UCS / Nexus"
 
 msgid "Embrane"
-msgstr ""
+msgstr "Embrane"
 
 msgid "Extreme Networks"
-msgstr ""
+msgstr "Extreme Networks"
 
 msgid "IBM SDN-VE"
-msgstr ""
+msgstr "IBM SDN-VE"
 
 msgid "Linux Bridge"
-msgstr ""
+msgstr "Linux Bridge"
 
 msgid "Mellanox"
-msgstr ""
+msgstr "Mellanox"
 
 msgid "Meta Plugin"
-msgstr ""
+msgstr "Meta Plugin"
 
 msgid "Modular Layer 2 Plugin (ML2)"
-msgstr ""
+msgstr "Modular Layer 2 Plugin (ML2)"
 
 msgid "NEC OpenFlow"
-msgstr ""
+msgstr "NEC OpenFlow"
 
 msgid "Nuage Networks"
-msgstr ""
+msgstr "Nuage Networks"
 
 msgid "One Convergence NVSD"
-msgstr ""
+msgstr "One Convergence NVSD"
 
 msgid "Open vSwitch"
-msgstr ""
+msgstr "Open vSwitch"
 
 msgid "Ruijie Networks"
-msgstr ""
+msgstr "锐捷网络"
 
 msgid "Ryu OpenFlow Controller"
-msgstr ""
+msgstr "Ryu OpenFlow Controller"
 
 msgid "ML2 - Alcatel-Lucent Omniswitch"
-msgstr ""
+msgstr "ML2 - 阿尔卡特-朗讯 Omniswitch"
 
 msgid "ML2 - Arista"
-msgstr ""
+msgstr "ML2 - Arista"
 
 msgid "ML2 - Big Switch"
-msgstr ""
+msgstr "ML2 - Big Switch"
 
 msgid "ML2 - Brocade VDX/VCS"
-msgstr ""
+msgstr "ML2 - Brocade VDX/VCS"
 
 msgid "ML2 - Calico"
-msgstr ""
+msgstr "ML2 - Calico"
 
 msgid "ML2 - Cisco APIC"
-msgstr ""
+msgstr "ML2 - Cisco APIC"
 
 msgid "ML2 - Cisco DFA"
-msgstr ""
+msgstr "ML2 - Cisco DFA"
 
 msgid "ML2 - Cloudbase Hyper-V"
-msgstr ""
+msgstr "ML2 - Cloudbase Hyper-V"
 
 msgid "ML2 - Freescale SDN"
-msgstr ""
+msgstr "ML2 - Freescale SDN"
 
 msgid "ML2 - Frescale FWaaS"
-msgstr ""
+msgstr "ML2 - Frescale FWaaS"
 
 msgid "ML2 - Fujitsu Converged Fabric Switch"
-msgstr ""
+msgstr "ML2 - Fujitsu Converged Fabric Switch"
 
 msgid "ML2 - Huawei Agile Controller"
-msgstr ""
+msgstr "ML2 - 华为 Agile Controller"
 
 msgid "ML2 - Mellanox SR-IOV"
-msgstr ""
+msgstr "ML2 - Mellanox SR-IOV"
 
 msgid "ML2 - MidoNet"
-msgstr ""
+msgstr "ML2 - MidoNet"
 
 msgid "ML2 - Nuage Networks"
-msgstr ""
+msgstr "ML2 - Nuage Networks"
 
 msgid "ML2 - One Convergence"
-msgstr ""
+msgstr "ML2 - One Convergence"
 
 msgid "ML2 - ONOS"
-msgstr ""
+msgstr "ML2 - ONOS"
 
 msgid "ML2 - OpenDaylight"
-msgstr ""
+msgstr "ML2 - OpenDaylight"
 
 msgid "ML2 - OpenFlow Agent"
-msgstr ""
+msgstr "ML2 - OpenFlow Agent"
 
 msgid "ML2 - Pluribus"
-msgstr ""
+msgstr "ML2 - Pluribus"
 
 msgid "ML2 - Tail-F"
-msgstr ""
+msgstr "ML2 - Tail-F"
 
 msgid "ML2 - VMWare DVS"
-msgstr ""
+msgstr "ML2 - VMWare DVS"
 
 msgid "Other Network Driver"
-msgstr ""
+msgstr "其它网络驱动"
 
 msgid ""
 "Which  <b>OpenStack Identity Service (Keystone)</b> drivers are you "
@@ -1387,25 +1396,25 @@ msgstr ""
 "2\"><em>选择所有适用的</em></font>"
 
 msgid "Active Directory"
-msgstr ""
+msgstr "Active Directory"
 
 msgid "KVS"
-msgstr ""
+msgstr "KVS"
 
 msgid "LDAP"
-msgstr ""
+msgstr "LDAP"
 
 msgid "PAM"
-msgstr ""
+msgstr "PAM"
 
 msgid "SQL (default)"
-msgstr ""
+msgstr "SQL (默认)"
 
 msgid "Templated"
-msgstr ""
+msgstr "模板化的"
 
 msgid "Other Identity Driver"
-msgstr ""
+msgstr "其它身份认证驱动程序"
 
 msgid ""
 "Which <b>OpenStack Block Storage (Cinder)</b> drivers are you "
@@ -1415,214 +1424,214 @@ msgstr ""
 "em></font>"
 
 msgid "Ceph RBD"
-msgstr ""
+msgstr "Ceph RBD"
 
 msgid "Coraid"
-msgstr ""
+msgstr "Coraid"
 
 msgid "Dell EqualLogic"
-msgstr ""
+msgstr "Dell EqualLogic"
 
 msgid "EMC"
-msgstr ""
+msgstr "EMC"
 
 msgid "GlusterFS"
-msgstr ""
+msgstr "GlusterFS"
 
 msgid "HDS"
-msgstr ""
+msgstr "HDS"
 
 msgid "HP 3PAR"
-msgstr ""
+msgstr "HP 3PAR"
 
 msgid "HP LeftHand"
-msgstr ""
+msgstr "HP LeftHand"
 
 msgid "Huawei"
-msgstr ""
+msgstr "华为"
 
 msgid "IBM GPFS"
-msgstr ""
+msgstr "IBM GPFS"
 
 msgid "IBM NAS"
-msgstr ""
+msgstr "IBM NAS"
 
 msgid "IBM Storwize"
-msgstr ""
+msgstr "IBM Storwize"
 
 msgid "IBM XIV / DS8000"
-msgstr ""
+msgstr "IBM XIV / DS8000"
 
 msgid "LVM (default)"
-msgstr ""
+msgstr "LVM (default)"
 
 msgid "NetApp"
-msgstr ""
+msgstr "NetApp"
 
 msgid "Nexenta"
-msgstr ""
+msgstr "Nexenta"
 
 msgid "NFS"
-msgstr ""
+msgstr "NFS"
 
 msgid "ProphetStor"
-msgstr ""
+msgstr "ProphetStor"
 
 msgid "SAN / Solaris"
-msgstr ""
+msgstr "SAN / Solaris"
 
 msgid "Scality"
-msgstr ""
+msgstr "Scality"
 
 msgid "Sheepdog"
-msgstr ""
+msgstr "Sheepdog"
 
 msgid "SolidFire"
-msgstr ""
+msgstr "SolidFire"
 
 msgid "VMWare VMDK"
-msgstr ""
+msgstr "VMWare VMDK"
 
 msgid "Windows Server 2012"
-msgstr ""
+msgstr "Windows Server 2012"
 
 msgid "Xenapi NFS"
-msgstr ""
+msgstr "Xenapi NFS"
 
 msgid "XenAPI Storage Manager"
-msgstr ""
+msgstr "XenAPI Storage Manager"
 
 msgid "Zadara"
-msgstr ""
+msgstr "Zadara"
 
 msgid "Other Block Storage Driver"
-msgstr ""
+msgstr "其它块存储驱动"
 
 msgid "Which vendor's products power your OpenStack cloud?"
 msgstr "您的OpenStack云由哪个厂商的产品驱动?"
 
 msgid "99Cloud Inc."
-msgstr ""
+msgstr "九州云"
 
 msgid "AppFormix"
-msgstr ""
+msgstr "AppFormix"
 
 msgid "Aptira"
-msgstr ""
+msgstr "Aptira"
 
 msgid "AQORN"
-msgstr ""
+msgstr "AQORN"
 
 msgid "AURO"
-msgstr ""
+msgstr "AURO"
 
 msgid "AWcloud"
-msgstr ""
+msgstr "海云捷迅"
 
 msgid "Blue Box"
-msgstr ""
+msgstr "Blue Box"
 
 msgid "Breqwatr"
-msgstr ""
+msgstr "Breqwatr"
 
 msgid "Bright Computing"
-msgstr ""
+msgstr "Bright Computing"
 
 msgid "Canonical"
-msgstr ""
+msgstr "Canonical"
 
 msgid "China Mobile"
-msgstr ""
+msgstr "中国移动"
 
 msgid "ChinaCloud"
-msgstr ""
+msgstr "中电科华云"
 
 msgid "Cisco"
-msgstr ""
+msgstr "思科"
 
 msgid "Cloudbase Solutions"
-msgstr ""
+msgstr "Cloudbase Solutions"
 
 msgid "DataCentred"
-msgstr ""
+msgstr "DataCentred"
 
 msgid "Debian"
 msgstr "Debian"
 
 msgid "Dell EMC"
-msgstr ""
+msgstr "戴尔EMC"
 
 msgid "EasyStack"
-msgstr ""
+msgstr "易捷思达"
 
 msgid "eNovance"
-msgstr ""
+msgstr "eNovance"
 
 msgid "Hangzhou H3C Technologies Co., Ltd"
-msgstr ""
+msgstr "华三"
 
 msgid "Hewlett Packard Enterprise"
-msgstr ""
+msgstr "惠普"
 
 msgid "IBM"
-msgstr ""
+msgstr "IBM"
 
 msgid "IO"
-msgstr ""
+msgstr "IO"
 
 msgid "KIO Networks"
-msgstr ""
+msgstr "KIO Networks"
 
 msgid "Mirantis"
-msgstr ""
+msgstr "Mirantis"
 
 msgid "Morphlabs"
-msgstr ""
+msgstr "Morphlabs"
 
 msgid "Oracle"
-msgstr ""
+msgstr "甲骨文"
 
 msgid "Platform9 Systems, Inc"
-msgstr ""
+msgstr "Platform9 Systems, Inc"
 
 msgid "Rackspace"
-msgstr ""
+msgstr "Rackspace"
 
 msgid "Red Hat, Inc."
-msgstr ""
+msgstr "红帽"
 
 msgid "Stratoscale"
-msgstr ""
+msgstr "Stratoscale"
 
 msgid "SUSE"
-msgstr ""
+msgstr "SUSE"
 
 msgid "SwiftStack Inc"
-msgstr ""
+msgstr "SwiftStack Inc"
 
 msgid "T2 Cloud"
-msgstr ""
+msgstr "T2 Cloud"
 
 msgid "Tata Communications"
-msgstr ""
+msgstr "Tata Communications"
 
 msgid "TransCirrus"
-msgstr ""
+msgstr "TransCirrus"
 
 msgid "Ultimum Technologies s.r.o."
-msgstr ""
+msgstr "Ultimum Technologies s.r.o."
 
 msgid "UnitedStack Inc."
-msgstr ""
+msgstr "有云"
 
 msgid "VMware"
-msgstr ""
+msgstr "VMware"
 
 msgid "vScaler Ltd."
-msgstr ""
+msgstr "vScaler Ltd."
 
 msgid "ZTE Corporation"
-msgstr ""
+msgstr "中兴"
 
 msgid ""
 "What is the main operating system running this OpenStack cloud deployment?"
@@ -1658,22 +1667,22 @@ msgid ""
 msgstr "此部署支持哪些兼容的API？<BR><font size=\"-2\"><em>选择所有适用的</em></font>"
 
 msgid "EC2 compatibility API"
-msgstr ""
+msgstr "EC2兼容性接口"
 
 msgid "GCE compatibility API"
-msgstr ""
+msgstr "GCE兼容性接口"
 
 msgid "OCCI compatibility API"
-msgstr ""
+msgstr "OCCI兼容性接口"
 
 msgid "S3 compatibility API"
-msgstr ""
+msgstr "S3兼容性接口"
 
 msgid "This deployment doesn't use compatibility APIs."
-msgstr ""
+msgstr "此环境不使用兼容性接口"
 
 msgid "Other Compatibility API"
-msgstr ""
+msgstr "其它兼容性接口"
 
 msgid "<hr><h3>Project Feedback</h3>"
 msgstr "<hr><h3>项目反馈</h3>"
@@ -1704,22 +1713,23 @@ msgid "Heat: What's the current/expected load on your Heat deployment?"
 msgstr "Heat：您的Heat部署目前及预期的负载分别是多少？"
 
 msgid "Few small stacks (<100 resources each)"
-msgstr ""
+msgstr "少量小环境（每套小于100个节点）"
 
 msgid "Lots of small stacks (<100 resources each)"
-msgstr ""
+msgstr "大量小环境（每套小于100个节点）"
 
 msgid "Few big stacks (>100 resources each)"
-msgstr ""
+msgstr "少量大环境（每套大于100个节点）"
 
 msgid "Lots of big stacks (>100 resources each)"
-msgstr ""
+msgstr "大量大环境（每套大于100个节点）"
 
 msgid ""
 "Interop: Do you use the OpenStack Powered program or Interoperability "
 "Guideline compliance as a factor in your OpenStack procurement process? Why "
 "or why not?"
 msgstr ""
+"Interop: 在您采购OpenStack的流程中是否将如下内容作为评判依据，与OpenStack兼容或者合乎互操作性规范，为什么或者为什么没有？"
 
 msgid ""
 "Interop: What do you consider to be the biggest challenges to achieving "
@@ -1732,23 +1742,23 @@ msgstr ""
 msgid ""
 "Different products provide different versions of OpenStack and/or different "
 "versions of APIs."
-msgstr ""
+msgstr "不同的产品提供不同的OpenStack版本并且/或者不同版本的API。"
 
 msgid ""
 "Lack of consistency in how and when different projects make major API "
 "changes."
-msgstr ""
+msgstr "不同项目应该怎样和在何时进行核心API变动这两个问题上缺少连续性。"
 
 msgid ""
 "Flexible networking capabilities mean that different clouds may have "
 "different ways of providing external connectivity to instances running my "
 "workloads."
-msgstr ""
+msgstr "灵活的组网能力意味着不同的云可以通过各不相同的方式为运行了我的工作负载的实例提供外部连接。"
 
 msgid ""
 "Lack of policy discovery. (e.g. actions I'm allowed to perform on one cloud "
 "may be disallowed or reserved for administrators only on another cloud)"
-msgstr ""
+msgstr "缺少策略发现机制（如在一个云上允许我可以执行的操作在其它云上会被管理员禁止或者保留）"
 
 msgid ""
 "Lack of familiarity with how I can determine whether different products are "
@@ -1775,16 +1785,16 @@ msgid "Federated identity enhancements"
 msgstr ""
 
 msgid "Performance improvements"
-msgstr ""
+msgstr "性能升级"
 
 msgid "Enhancing policy"
-msgstr ""
+msgstr "增强策略"
 
 msgid "Scaling out to multiple regions"
-msgstr ""
+msgstr "扩展到多个区域"
 
 msgid "Per domain configuration"
-msgstr ""
+msgstr "每个域的配置"
 
 msgid "Other - please specify"
 msgstr "其他 - 请指明."
@@ -1795,13 +1805,13 @@ msgid ""
 msgstr "Kolla: 您如何使用 Kolla？<br/><font size=\"-2\"><em>选择所有适用的</em></font>"
 
 msgid "Full kolla-ansible deployment"
-msgstr ""
+msgstr "全部 kolla-ansible 部署"
 
 msgid "Kolla-kubernetes deployment"
-msgstr ""
+msgstr "Kolla-kubernetes 部署"
 
 msgid "Only kolla images with custom tool"
-msgstr ""
+msgstr "只有kolla镜像和自定义工具"
 
 msgid "Which custom tool?"
 msgstr "哪个自定义工具?"
@@ -1814,22 +1824,22 @@ msgstr ""
 "font>"
 
 msgid "CephFS"
-msgstr ""
+msgstr "CephFS"
 
 msgid "Generic or LVM (default)"
-msgstr ""
+msgstr "Generic or LVM (default)"
 
 msgid "HP"
-msgstr ""
+msgstr "HP"
 
 msgid "Quobyte"
-msgstr ""
+msgstr "Quobyte"
 
 msgid "Tegile"
-msgstr ""
+msgstr "Tegile"
 
 msgid "Windows SMB"
-msgstr ""
+msgstr "Windows SMB"
 
 msgid ""
 "Neutron: Which of the following features in the Neutron project are you "
@@ -1841,67 +1851,67 @@ msgstr ""
 "2\"><em>选择所有适用的</em></font>"
 
 msgid "Distributed Virtual routing"
-msgstr ""
+msgstr "分布式虚拟路由"
 
 msgid "VRRP-based HA routing"
-msgstr ""
+msgstr "基于VRRP的高可用路由"
 
 msgid "Multiple routing capabilities in the same deployment"
-msgstr ""
+msgstr "同一环境中有多种路由功能"
 
 msgid "Dynamic routing"
-msgstr ""
+msgstr "动态路由"
 
 msgid "DNS resolution"
-msgstr ""
+msgstr "DNS解析"
 
 msgid "Pluggable IPAM"
-msgstr ""
+msgstr "Pluggable IPAM"
 
 msgid "Subnet pools"
-msgstr ""
+msgstr "子网池"
 
 msgid "Address Scopes"
-msgstr ""
+msgstr "地址范围"
 
 msgid "Agent-based availability zones"
-msgstr ""
+msgstr "基于Agent的可用区域"
 
 msgid "ML2 Hierarchical Port Binding"
-msgstr ""
+msgstr "ML2 阶梯式端口绑定"
 
 msgid "Multiple ML2 drivers in the same deployment"
-msgstr ""
+msgstr "同环境中多ML2驱动"
 
 msgid "Multi-segment provider networks"
-msgstr ""
+msgstr "多分段提供者网络"
 
 msgid "QoS Bandwidth limiting"
-msgstr ""
+msgstr "QoS带宽限制"
 
 msgid "Accelerated virtual switching (e.g. DPDK based)"
-msgstr ""
+msgstr "增强型虚拟交换（如基于DPDK的）"
 
 msgid "L2 Gateways"
-msgstr ""
+msgstr "L2网关"
 
 msgid "Port mirroring/monitoring"
-msgstr ""
+msgstr "端口镜像/监测"
 
 msgid "Traffic steering"
-msgstr ""
+msgstr "流量定位"
 
 msgid "Performance counters"
-msgstr ""
+msgstr "性能计数"
 
 msgid "Software load balancing"
-msgstr ""
+msgstr "软负载均衡"
 
 msgid "Software firewalling"
-msgstr ""
+msgstr "软件防火墙"
 
 msgid "Software virtual private networking"
-msgstr ""
+msgstr "软件虚拟私有网络"
 
 #, fuzzy
 msgid ""
@@ -1934,25 +1944,25 @@ msgstr ""
 
 msgid ""
 "Continue to allow uploading test result data to RefStack server anonymously"
-msgstr ""
+msgstr "继续下一步将会允许不记名式地向RefStack服务器上传测试结果数据"
 
 msgid ""
 "Ability to share your data with a group of people before making the data "
 "publicly available."
-msgstr ""
+msgstr "提供这样的机制，即在数据公开前可以先在一组人中分享。"
 
 msgid ""
 "Community results should be linked to vendors or cloud provider (results are "
 "currently shared anonymously)"
-msgstr ""
+msgstr "社区成果应该连接到开发者或者云提供商（当前这些成果是匿名共享的）"
 
 msgid "Show pass/fail statuses on the community results page"
-msgstr ""
+msgstr "在社区成果页面上显示通过/失败的状态"
 
 msgid ""
 "View overall statistics on individual tests (seeing what tests are passed/"
 "failed the most in reported results)"
-msgstr ""
+msgstr "查看每个测试的统计数据（检查结果中的哪些测试是通过/失败最多的）"
 
 msgid "Sahara: What else can be improved in the Sahara project?"
 msgstr "Sahara: Sahara 项目还有什么可以改进的呢？"
@@ -1965,22 +1975,22 @@ msgstr ""
 "font>"
 
 msgid "Application data"
-msgstr ""
+msgstr "应用数据"
 
 msgid "Backups"
-msgstr ""
+msgstr "备份"
 
 msgid "Documents"
-msgstr ""
+msgstr "文档"
 
 msgid "Static web content"
-msgstr ""
+msgstr "静态网页内容"
 
 msgid "Research data"
-msgstr ""
+msgstr "科研数据"
 
 msgid "Video"
-msgstr ""
+msgstr "视频"
 
 msgid "Please specify other types of data."
 msgstr "请指定其他类型的数据."
@@ -1993,28 +2003,28 @@ msgstr ""
 "2\"><em>选择所有适用的</em></font>"
 
 msgid "Gnocchi"
-msgstr ""
+msgstr "Gnocchi"
 
 msgid "Legacy Ceilometer database with MongoDB"
-msgstr ""
+msgstr "经典Ceilmeter使用的MongoDB数据库"
 
 msgid "Legacy Ceilometer database with MySQL"
-msgstr ""
+msgstr "经典Ceilmeter使用的MySQL数据库"
 
 msgid "Legacy Ceilometer database with PostgreSQL"
-msgstr ""
+msgstr "经典Ceilmeter使用的PostgreSQL数据库"
 
 msgid "Legacy Ceilometer database with HBase"
-msgstr ""
+msgstr "经典Ceilmeter使用的HBase数据库"
 
 msgid "Legacy Ceilometer database with SQLite"
-msgstr ""
+msgstr "经典Ceilmeter使用的SQLite数据库"
 
 msgid "HTTP dispatcher"
-msgstr ""
+msgstr "HTTP 分发器"
 
 msgid "File dispatcher"
-msgstr ""
+msgstr "文件分发"
 
 msgid ""
 "TripleO: As a user/operator, do you value having a common interface for "
