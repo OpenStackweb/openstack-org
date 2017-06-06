@@ -69,7 +69,7 @@ class SurveyReportPage_Controller extends Page_Controller
 
         $templates = SurveyTemplate::get('SurveyTemplate')
             ->filter(array('ClassName'=>'SurveyTemplate'))
-            ->exclude('EndDate:GreaterThan', $curDate);
+            ->exclude('StartDate:GreaterThan', $curDate);
         
         return $templates;
     }
