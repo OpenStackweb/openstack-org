@@ -88,11 +88,19 @@
         <div role="tabpanel" class="tab-pane" id="sponsor">
             <div class="ptg-body">
                 <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h2>What are PTG Events & Why Sponsor?</h2>
+                            $Sponsor
+                            <h2>Steps to Sponsoring the PTG event:</h2>
+                            $SponsorSteps
+                        </div>
+                    </div>
                     <% if $SponsorLogos %>
                     <div class="row">
                         <div class="col-lg-12">
                             <h5 class="section-title">
-                                Thanks to Our Sponsors!
+                                Thank you to our Atlanta PTG Sponsors
                             </h5>
                         </div>
                         <div class="col-lg-12">
@@ -108,14 +116,6 @@
                         </div>
                     </div>
                     <% end_if %>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h2>What are PTG Events & Why Sponsor?</h2>
-                            $Sponsor
-                            <h2>Steps to Sponsoring the PTG event:</h2>
-                            $SponsorSteps
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
