@@ -12,7 +12,6 @@
  **/
 (function( $ ){
 
-
 $.validator.addMethod("ValidPlainText", function (value, element, arg) {
     value = value.trim();
     if(value.length == 0)
@@ -69,7 +68,7 @@ $.validator.addMethod("complete_url", function(value, element, arg) {
     if (value.length == 0) { return true; }
 
     // if user has not entered http:// https:// or ftp:// assume they mean http://
-    if(!/^(https?|ftp):\/\//i.test(value)) {
+    if(value.indexOf('http://') < 0 && value.indexOf('https://') < 0  && value.indexOf('ftp://') < 0){
         value = 'http://'+value; // set both the value
         $(element).val(value); // also update the form element
     }

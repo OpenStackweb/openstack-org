@@ -27,7 +27,7 @@ class InteropProgramVersion extends DataObject implements IInteropProgramVersion
     );
 
     public static $many_many_extraFields = array(
-        'Capabilities' => array('Order' => 'Int'),
+        'Capabilities'       => array('Order' => 'Int'),
         'DesignatedSections' => array('Order' => 'Int')
     );
 

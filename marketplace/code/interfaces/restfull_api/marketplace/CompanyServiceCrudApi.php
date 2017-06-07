@@ -135,7 +135,7 @@ abstract class CompanyServiceCrudApi
         }
         catch (EntityAlreadyExistsException $ex1) {
             SS_Log::log($ex1,SS_Log::ERR);
-            return $this->addingDuplicate($ex1->getMessage());
+            return $this->validationError($ex1->getMessage());
         }
         catch (PolicyException $ex2) {
             SS_Log::log($ex2,SS_Log::ERR);

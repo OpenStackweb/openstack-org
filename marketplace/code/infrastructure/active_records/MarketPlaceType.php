@@ -142,4 +142,24 @@ class MarketPlaceType extends DataObject implements IMarketPlaceType  {
 		$group->setTitle("MarketPlace {$name} Administrators");
 		return $group;
 	}
+
+	const PublicCloudSlug  = 'public-cloud';
+	const PrivateCloudSlug = 'private-cloud';
+	const RemoveCloudSlug  = 'remote-cloud';
+	const DistributionSlug = 'distribution';
+	const ApplianceSlug    = 'appliance';
+
+    /**
+     * @return string
+     */
+	public function getLinkPath(){
+	    switch ($this->Slug){
+            case self::PublicCloudSlug:  return 'public-clouds';
+            case self::PrivateCloudSlug: return 'hosted-private-clouds';
+            case self::RemoveCloudSlug:  return 'remotely-managed-private-clouds';
+            case self::DistributionSlug: return 'distros/distribution';
+            case self::ApplianceSlug:    return 'distros/appliance';
+        }
+        return '';
+    }
 }

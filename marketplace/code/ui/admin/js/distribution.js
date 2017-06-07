@@ -17,7 +17,6 @@ jQuery(document).ready(function($){
     if(form.length > 0){
 
         form.marketplace_type_header();
-        form.implementation_openstack_powered();
 
         $("#components_form").components();
         $("#hypervisors_form").hypervisors();
@@ -49,7 +48,6 @@ jQuery(document).ready(function($){
                 $("#live_id",form).val(distribution.id);
                 $('.publish-distribution').prop('disabled',true);
             }
-            form.implementation_openstack_powered('load', distribution);
             //reload widgets
             $("#components_form").components('load',distribution.capabilities);
             $("#hypervisors_form").hypervisors('load',distribution.hypervisors);
@@ -247,7 +245,6 @@ function serializeDistribution(form, publish){
         distribution.capabilities            = capabilities;
         distribution.regional_support        = regional_support;
         distribution.additional_resources    = additional_resources;
-        distribution                         = form.implementation_openstack_powered('serialize', distribution);
         distribution.published               = publish? 1:0;
 
         return distribution;

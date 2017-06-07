@@ -152,3 +152,18 @@ select.error{
 #CompanyName .chosen-container {
     width: 200px !important;
 }
+
+.left-inner-addon{
+    position: relative;
+    width: 40%;
+}
+
+.left-inner-addon span {
+    position: absolute;
+    padding: 10px 12px;
+    pointer-events: none;
+}
+
+.left-inner-addon input {
+    padding-left: 30px;
+}

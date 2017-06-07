@@ -31,11 +31,6 @@ final class SangriaPageICLACompaniesExtension extends Extension {
 		Config::inst()->update(get_class($this->owner), 'allowed_actions', array('ViewICLACompanies','exportCCLACompanies'));
 	}
 
-	public function getQuickActionsExtensions(&$html){
-		$view = new SSViewer('SangriaPage_ICLALinks');
-		$html .= $view->process($this->owner);
-	}
-
 	public function ViewICLACompanies(){
 		Requirements::css('ICLA/css/sangia.ccla.companies.css');
 		Requirements::javascript('ICLA/js/sangia.ccla.companies.js');

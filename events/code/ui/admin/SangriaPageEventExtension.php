@@ -153,11 +153,6 @@ final class SangriaPageEventExtension extends Extension {
         return $this->owner->getViewer('ViewHackathonEvents')->process($this->owner);
     }
 
-	public function getQuickActionsExtensions(&$html){
-		$view = new SSViewer('SangriaPage_EventLinks');
-		$html .= $view->process($this->owner);
-	}
-
 	public function getEventRegistrationRequest(){
 		list($list,$size) = $this->repository->getAllNotPostedAndNotRejected(0,1000);
 		return new ArrayList($list);

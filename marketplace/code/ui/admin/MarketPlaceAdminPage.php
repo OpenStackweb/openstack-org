@@ -150,6 +150,8 @@ class MarketPlaceAdminPage_Controller extends AdminController
             "marketplace/code/ui/admin/css/marketplace.admin.css",
             "themes/openstack/css/chosen.css",
             "themes/openstack/css/colorpicker.css",
+            "themes/openstack/bower_assets/bootstrap/dist/css/bootstrap.min.css",
+            "themes/openstack/javascript/datetimepicker/jquery.datetimepicker.css",
         );
 
         foreach($css_files as $css_file)
@@ -177,7 +179,9 @@ class MarketPlaceAdminPage_Controller extends AdminController
             'marketplace/code/ui/admin/js/public_clouds.js',
             'marketplace/code/ui/admin/js/private_clouds.js',
             'marketplace/code/ui/admin/js/consultants.js',
-            "themes/openstack/javascript/colorpicker.js"
+            "themes/openstack/javascript/colorpicker.js",
+            "themes/openstack/bower_assets/bootstrap/dist/js/bootstrap.min.js",
+            "themes/openstack/javascript/datetimepicker/jquery.datetimepicker.js",
         );
 
         foreach($js_files as $js_file)
@@ -503,7 +507,6 @@ class MarketPlaceAdminPage_Controller extends AdminController
         Requirements::javascript('marketplace/code/ui/admin/js/support.channels.js');
         Requirements::javascript('marketplace/code/ui/admin/js/additional.resources.js');
         Requirements::javascript('marketplace/code/ui/admin/js/marketplace.type.header.js');
-        Requirements::javascript('marketplace/code/ui/admin/js/implementation_openstack_powered.js');
         HtmlEditorField::include_js();
         Requirements::javascript('marketplace/code/ui/admin/js/distribution.js');
 
@@ -521,7 +524,6 @@ class MarketPlaceAdminPage_Controller extends AdminController
         Requirements::javascript('marketplace/code/ui/admin/js/support.channels.js');
         Requirements::javascript('marketplace/code/ui/admin/js/additional.resources.js');
         Requirements::javascript('marketplace/code/ui/admin/js/marketplace.type.header.js');
-        Requirements::javascript('marketplace/code/ui/admin/js/implementation_openstack_powered.js');
         HtmlEditorField::include_js();
         Requirements::javascript('marketplace/code/ui/admin/js/appliance.js');
 
@@ -541,7 +543,6 @@ class MarketPlaceAdminPage_Controller extends AdminController
         Requirements::javascript('marketplace/code/ui/admin/js/pricing.schemas.js');
         Requirements::javascript('marketplace/code/ui/admin/js/datacenter.locations.js');
         Requirements::javascript('marketplace/code/ui/admin/js/marketplace.type.header.js');
-        Requirements::javascript('marketplace/code/ui/admin/js/implementation_openstack_powered.js');
         Requirements::javascript(Director::protocol() . "maps.googleapis.com/maps/api/js?sensor=false");
         Requirements::javascript('marketplace/code/ui/admin/js/geocoding.jquery.js');
         HtmlEditorField::include_js();
@@ -563,7 +564,6 @@ class MarketPlaceAdminPage_Controller extends AdminController
         Requirements::javascript('marketplace/code/ui/admin/js/pricing.schemas.js');
         Requirements::javascript('marketplace/code/ui/admin/js/datacenter.locations.js');
         Requirements::javascript('marketplace/code/ui/admin/js/marketplace.type.header.js');
-        Requirements::javascript('marketplace/code/ui/admin/js/implementation_openstack_powered.js');
         Requirements::javascript(Director::protocol() . "maps.googleapis.com/maps/api/js?sensor=false");
         Requirements::javascript('marketplace/code/ui/admin/js/geocoding.jquery.js');
         HtmlEditorField::include_js();
@@ -582,7 +582,6 @@ class MarketPlaceAdminPage_Controller extends AdminController
         Requirements::javascript('marketplace/code/ui/admin/js/support.channels.js');
         Requirements::javascript('marketplace/code/ui/admin/js/additional.resources.js');
         Requirements::javascript('marketplace/code/ui/admin/js/marketplace.type.header.js');
-        Requirements::javascript('marketplace/code/ui/admin/js/implementation_openstack_powered.js');
         HtmlEditorField::include_js();
         Requirements::javascript('marketplace/code/ui/admin/js/remote_cloud.js');
 

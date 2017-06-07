@@ -94,4 +94,9 @@ interface IOpenStackImplementation extends IRegionalSupportedCompanyService {
      */
     public function getProgramVersion();
 
+    /**
+     * @return bool
+     */
+    public function isOpenStackPoweredExpired();
+
 }

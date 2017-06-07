@@ -87,11 +87,12 @@ class WebpackTemplateHelpers implements TemplateGlobalProvider
      *
      * @return DBField
      */
-    public static function module_js($filename, $withRequirements = false)
+    public static function module_js($filename, $withRequirements = false, $module_name = null)
     {
-        $hasCommon = false;
+        $hasCommon  = false;
         $commonLink = null;
-        $prodLink = null;
+        $prodLink   = null;
+        if(empty($module_name)) $module_name = self::module_name();
 
         if (self::is_webpack()) {
             $devURL = Config::inst()->get('Webpack', 'dev_server_baseurl');
@@ -106,23 +107,23 @@ class WebpackTemplateHelpers implements TemplateGlobalProvider
                 self::with_extension($filename, 'js')
             );
 
-            $headers = get_headers($commonLink, 1);
+            $headers   = get_headers($commonLink, 1);
             $hasCommon = preg_match('/200/', $headers[0]);
         } else {
             $prodLink = Controller::join_links(
-                self::module_name(),
+                $module_name,
                 'ui/production/js',
                 self::with_extension($filename, 'js')
             );
 
             $commonLink = Controller::join_links(
-                self::module_name(),
+                $module_name,
                 'ui/production/js/__common__.js'
             );
 
-            $hasCommon = Director::fileExists($commonLink);
+            $hasCommon  = Director::fileExists($commonLink);
             $commonLink = Director::absoluteURL($commonLink);
-            $prodLink = Director::absoluteURL($prodLink);
+            $prodLink   = Director::absoluteURL($prodLink);
         }
 
         if ($withRequirements) {

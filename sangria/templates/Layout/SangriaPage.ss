@@ -170,6 +170,7 @@
     <h2>Marketplace</h2>
     <ul>
         <li><a href="$Top.Link(ViewReviews)">Approve Product Reviews</a></li>
+        <li><a href="$Top.Link(ViewPoweredOpenStackProducts)">Powered OpenStack Products</a></li>
     </ul>
 
     <h2>Speakers</h2>

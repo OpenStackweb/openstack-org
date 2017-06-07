@@ -21,9 +21,6 @@
         <fieldset>
         <form id="distribution_form" name="distribution_form">
             <% include MarketPlaceAdminPage_CompanyServiceHeader %><BR>
-            <% if CurrentMember.isAdmin %>
-                <% include MarketPlaceAdminPage_OpenStackPowered %>
-            <% end_if %>
          </form>
         <% include Components %>
         <% include Hypervisors %>

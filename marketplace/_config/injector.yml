@@ -1,0 +1,21 @@
+---
+Name: 'marketplace-injection'
+---
+Injector:
+  PoweredOpenStackServicesRepository:
+      class: SapphireOpenStackPoweredServiceRepository
+  ExpiredPoweredOpenStackImplementationEmailMessageSender:
+      class: ExpiredPoweredOpenStackImplementationEmailMessageSender
+  PoweredOpenStackImplementationManager:
+      constructor:
+        0: '%$PoweredOpenStackServicesRepository'
+        1: '%$TransactionManager'
+  OpenStackPoweredImplementionResfullApi:
+      constructor:
+        0: '%$PoweredOpenStackServicesRepository'
+        1: '%$PoweredOpenStackImplementationManager'
+  MarketPlaceOpenStackPoweredExpireServicesDigestTask:
+      constructor:
+        0: '%$ExpiredPoweredOpenStackImplementationEmailMessageSender'
+        1: '%$PoweredOpenStackImplementationManager'
+        2: 90

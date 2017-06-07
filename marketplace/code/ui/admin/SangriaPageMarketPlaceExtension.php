@@ -23,9 +23,15 @@ final class SangriaPageMarketPlaceExtension extends Extension {
 		parent::__construct();
 	}
 
+	private static $allowed_actions = [
+	    'ViewReviews',
+        'ViewPoweredOpenStackProducts',
+        'ViewPoweredOpenStackProductDetail'
+    ];
+
 	public function onBeforeInit(){
-		Config::inst()->update(get_class($this), 'allowed_actions', array('ViewReviews'));
-		Config::inst()->update(get_class($this->owner), 'allowed_actions', array('ViewReviews'));
+		Config::inst()->update(get_class($this), 'allowed_actions', self::$allowed_actions);
+		Config::inst()->update(get_class($this->owner), 'allowed_actions', self::$allowed_actions);
 	}
 
 	public function onAfterInit(){
@@ -45,6 +51,75 @@ final class SangriaPageMarketPlaceExtension extends Extension {
 		Requirements::javascript('marketplace/code/ui/admin/js/sangria.page.marketplace.extension.js');
 		return $this->owner->getViewer('ViewReviews')->process($this->owner);
 	}
+
+	public function ViewPoweredOpenStackProducts(){
+	    Requirements::clear();
+	    // css
+
+        Requirements::css('marketplace/ui/source/css/sangria.css');
+        Requirements::css("themes/openstack/bower_assets/bootstrap/dist/css/bootstrap.min.css");
+        Requirements::css("themes/openstack/bower_assets/fontawesome/css/font-awesome.min.css");
+        Requirements::css('//fonts.googleapis.com/css?family=Open+Sans:300,400,700');
+        Requirements::css('themes/openstack/bower_assets/datetimepicker/build/jquery.datetimepicker.min.css');
+
+        // js
+        Requirements::javascript("themes/openstack/bower_assets/jquery/dist/jquery.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jquery-migrate/jquery-migrate.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/bootstrap/dist/js/bootstrap.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jquery-cookie/jquery.cookie.js");
+        Requirements::javascript('themes/openstack/bower_assets/jquery-mousewheel/jquery.mousewheel.js');
+        Requirements::javascript('themes/openstack/bower_assets/php-date-formatter/js/php-date-formatter.min.js');
+        Requirements::javascript("themes/openstack/bower_assets/datetimepicker/build/jquery.datetimepicker.min.js");
+
+        return $this->owner->getViewer('ViewPoweredOpenStackProducts')->process
+        (
+            $this->owner->Customise([
+                'InteropProgramVersions' => InteropProgramVersion::get()->sort('Name', 'ASC')
+            ])
+        );
+    }
+
+    public function ViewPoweredOpenStackProductDetail(SS_HTTPRequest $request){
+        Requirements::clear();
+        // css
+
+        Requirements::css('marketplace/ui/source/css/sangria.css');
+        Requirements::css("themes/openstack/bower_assets/bootstrap/dist/css/bootstrap.min.css");
+        Requirements::css("themes/openstack/bower_assets/fontawesome/css/font-awesome.min.css");
+        Requirements::css('//fonts.googleapis.com/css?family=Open+Sans:300,400,700');
+        Requirements::css('themes/openstack/bower_assets/datetimepicker/build/jquery.datetimepicker.min.css');
+        Requirements::css('themes/openstack/bower_assets/sweetalert2/dist/sweetalert2.min.css');
+        Requirements::css("themes/openstack/css/validation.errors.css");
+
+        // js
+        Requirements::javascript("themes/openstack/bower_assets/jquery/dist/jquery.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jquery-migrate/jquery-migrate.min.js");
+        Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
+        Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
+        Requirements::javascript("themes/openstack/javascript/jquery.validate.custom.methods.js");
+        Requirements::javascript("themes/openstack/bower_assets/bootstrap/dist/js/bootstrap.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jquery-cookie/jquery.cookie.js");
+        Requirements::javascript('themes/openstack/bower_assets/jquery-mousewheel/jquery.mousewheel.js');
+        Requirements::javascript('themes/openstack/bower_assets/php-date-formatter/js/php-date-formatter.min.js');
+        Requirements::javascript("themes/openstack/bower_assets/datetimepicker/build/jquery.datetimepicker.min.js");
+        Requirements::javascript('themes/openstack/bower_assets/sweetalert2/dist/sweetalert2.min.js');
+        Requirements::javascript("marketplace/code/ui/admin/js/utils.js");
+        Requirements::javascript("marketplace/ui/source/js/ViewPoweredOpenStackProductDetail.js");
+
+        $service_id = intval($request->param("ID"));
+        if($service_id <= 0 ) return $this->owner->httpError(404);
+        $service = OpenStackImplementation::get()->byID($service_id);
+        if(is_null($service)) return $this->owner->httpError(404);
+
+        return $this->owner->getViewer('ViewPoweredOpenStackProductDetail')->process
+        (
+            $this->owner->Customise([
+                'Product'  => $service,
+                'Programs' => InteropProgramVersion::get()->sort('Name', 'ASC'),
+                'Releases' => OpenStackRelease::get()->sort('ReleaseDate', 'ASC'),
+            ])
+        );
+    }
 
     public function getMarketPlaceTypeLink($type){
         $class = '';
@@ -83,10 +158,5 @@ final class SangriaPageMarketPlaceExtension extends Extension {
         list($list,$size) = $this->repository->getAllNotApproved(0,1000);
         return new ArrayList($list);
     }
-
-	public function getQuickActionsExtensions(&$html){
-		$view = new SSViewer('SangriaPage_MarketPlaceLinks');
-		$html .= $view->process($this->owner);
-	}
 
 }
