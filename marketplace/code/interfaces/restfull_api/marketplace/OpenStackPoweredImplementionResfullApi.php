@@ -52,7 +52,7 @@ final class OpenStackPoweredImplementionResfullApi extends AbstractRestfulJsonAp
      */
     protected function authorize(){
         //check permissions
-        if(!$this->current_user->isMarketPlaceAdmin())
+        if(!Permission::check("SANGRIA_ACCESS"))
             return false;
         return true;
     }

@@ -19,3 +19,8 @@ Injector:
         0: '%$ExpiredPoweredOpenStackImplementationEmailMessageSender'
         1: '%$PoweredOpenStackImplementationManager'
         2: 90
+  SapphireRegionalServiceRepository:
+        class: SapphireRegionalServiceRepository
+  CompanyServiceResfullApi:
+        constructor:
+          0: '%$SapphireRegionalServiceRepository'

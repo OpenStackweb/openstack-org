@@ -20,3 +20,4 @@ Director:
     'api/v1/marketplace/consultants': 'ConsultantsCrudApi'
     'api/v1/marketplace/reviews': 'ReviewCrudApi'
     'api/v1/marketplace/openstack-powered-implementations': 'OpenStackPoweredImplementionResfullApi'
+    'api/v1/marketplace/company-service': 'CompanyServiceResfullApi'
