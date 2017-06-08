@@ -9,6 +9,7 @@ label.error {
     color: white !important;
     font-style: italic !important;
     text-transform: capitalize !important;
+    z-index: 1000 !important;
 }
 
 label.error:before{
