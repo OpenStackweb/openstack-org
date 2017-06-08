@@ -52,10 +52,30 @@ HTML;
 
         }
         if($res) {
-            $recaptcha = new \ReCaptcha\ReCaptcha(RECAPTCHA_SECRET_KEY);
-            $resp = $recaptcha->verify($recaptcha_reponse, $_SERVER['REMOTE_ADDR']);
+            $fields = [
+                'secret'    =>  RECAPTCHA_SECRET_KEY,
+                'response'  =>  $recaptcha_reponse,
+                'remoteip'  =>  $_SERVER['REMOTE_ADDR']
+            ];
 
-            if (!$resp->isSuccess()) {
+            $ch = curl_init("https://www.google.com/recaptcha/api/siteverify");
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 15);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($fields));
+            $response = json_decode(curl_exec($ch), true);
+            curl_close($ch);
+
+            $valid = false;
+
+            if (isset($response['success']) && $response['success'] == true) {
+                $valid = true;
+            }
+
+            if (isset($response['error-codes']) && is_array($response['error-codes'])) {
+                $valid = false;
+            }
+
+            if (!$valid) {
                 $errors[] = [
                     'fieldName'   => 'Password',
                     'message'     => 'Recaptcha is invalid!',
