@@ -54,10 +54,96 @@ final class COAManager implements ICOAManager
     )
     {
         $this->member_repository = $member_repository;
-        $this->exam_repository   = $exam_repository;
-        $this->coa_file_api      = $coa_file_api;
-        $this->factory           = $factory;
-        $this->tx_manager        = $tx_manager;
+        $this->exam_repository = $exam_repository;
+        $this->coa_file_api = $coa_file_api;
+        $this->factory = $factory;
+        $this->tx_manager = $tx_manager;
+    }
+
+
+    /**
+     * @param string $content
+     * @param string $filename
+     * @param int $timestamp
+     */
+    private function processFile($content, $filename, $timestamp)
+    {
+
+        $rows = CSVReader::load($content);
+
+        foreach ($rows as $row) {
+            $exam_ext_id                = $row['candidate_exam_id'];
+            $modified_date              = $row['candidate_exam_date_modified'];
+            // this groups all candidate exams attempts together ...
+            $track_id                   = $row['certification_track_status_id'];
+            $track_id_modified_date     = $row['certification_track_status_date_modified'];
+            $candidate_name             = $row['candidate_exam_name'];
+            $candidate_fname            = $row['first_name'];
+            $candidate_lname            = $row['last_name'];
+            $external_id                = $row['open_stack_id'];
+            $email                      = $row['open_stack_email'];
+            $exam_expiration_date       = $row['exam_expiration_date'];
+            $status                     = $row['exam_status'];
+            $pass_date                  = $row['pass_fail_date_c'];
+            $cert_nbr                   = $row['certification_number'];
+            $code                       = $row['exam_code'];
+            $cert_status                = $row['certification_status'];
+            $cert_exam_expiration_date  = $row['certificate_expiration_date'];
+            $certificate_completed_date = $row['certificate_completed_date'];
+
+            $member = null;
+            // first attempt, try to find member by email ...
+            if (!empty($email)) {
+                $member = $this->member_repository->findByEmail($email);
+            }
+
+            // second attempt, try to find member by former exams
+            if (is_null($member)) {
+                // possible a retake ? check by $track_id
+                $former_exams = $this->exam_repository->getByTrackId($track_id);
+                foreach ($former_exams as $former_exam) {
+                    if ($former_exam->hasOwner()) {
+                        $member = $former_exam->Owner();
+                        break;
+                    }
+                }
+            }
+            // we werent able to find member ... skip it
+            if (is_null($member) || !$member->exists()) {
+
+                echo sprintf("missing member %s - track_id %s - filename %s", $email, $track_id, $filename) . PHP_EOL;
+                continue;
+            }
+            // try to find if we have a former exam ...
+            $exam = $member->getExamByExternalId($exam_ext_id);
+
+            if (is_null($exam)) {
+                $exam = $this->factory->build($member, $exam_ext_id);
+            }
+
+            $exam->setState
+            (
+                $track_id,
+                $track_id_modified_date,
+                $candidate_name,
+                $candidate_fname,
+                $candidate_lname,
+                $status,
+                $modified_date,
+                $exam_expiration_date,
+                $pass_date,
+                $code,
+                $cert_nbr,
+                $cert_exam_expiration_date,
+                $cert_status,
+                $certificate_completed_date,
+                $email,
+                $external_id
+            );
+
+            $exam->write();
+        }
+        $this->markFileAsProcessed($filename, $timestamp);
     }
 
     /**
@@ -65,115 +151,75 @@ final class COAManager implements ICOAManager
      */
     public function processFiles()
     {
-        $coa_file_api      = $this->coa_file_api;
-        $member_repository = $this->member_repository;
-        $exam_repository   = $this->exam_repository;
-        $factory           = $this->factory;
-
-        return $this->tx_manager->transaction(function() use($coa_file_api, $member_repository, $exam_repository, $factory) {
+        return $this->tx_manager->transaction(function () {
             try {
 
-                $files           = $coa_file_api->getFilesList();
+                $files = $this->coa_file_api->getFilesList();
                 $processed_files = 0;
 
                 foreach ($files as $file_info) {
-                    if ($this->isFileProcessed($file_info)) continue;
+                    $filename  = $file_info['filename'];
+                    $timestamp = intval($file_info['timestamp']);
 
-                    $content = $coa_file_api->getFileContent($file_info['filename']);
-                    $rows    = CSVReader::load($content);
+                    if ($this->isFileProcessed($filename)) continue;
 
-                    foreach ($rows as $row) {
-                        $exam_ext_id               = $row['candidate_exam_id'];
-                        $modified_date             = $row['candidate_exam_date_modified'];
-                        // this groups all candidate exams attempts together ...
-                        $track_id                  = $row['certification_track_status_id'];
-                        $track_id_modified_date    = $row['certification_track_status_date_modified'];
-                        $candidate_name            = $row['candidate_exam_name'];
-                        $candidate_fname           = $row['first_name'];
-                        $candidate_lname           = $row['last_name'];
-                        $email                     = $row['open_stack_id'];
-                        $exam_expiration_date      = $row['exam_expiration_date'];
-                        $status                    = $row['exam_status'];
-                        $pass_date                 = $row['pass_fail_date_c'];
-                        $cert_nbr                  = $row['certification_number'];
-                        $code                      = $row['exam_code'];
-                        $cert_status               = $row['certification_status'];
-                        $cert_exam_expiration_date = $row['certificate_expiration_date'];
+                    $content = $this->coa_file_api->getFileContent($filename);
+                    $this->processFile($content, $filename, $timestamp);
 
-                        $member = null;
-                        // first attempt, try to find member by email ...
-                        if(!empty($email)){
-                            $member = $member_repository->findByEmail($email);
-                        }
-
-                        // second attempt, try to find member by former exams
-                        if(is_null($member)){
-                            // possible a retake ? check by $track_id
-                            $former_exams = $exam_repository->getByTrackId($track_id);
-                            foreach($former_exams as $former_exam){
-                                if($former_exam->hasOwner()) {
-                                    $member = $former_exam->Owner();
-                                    break;
-                                }
-                            }
-                        }
-                        // we werent able to find member ... skip it
-                        if (is_null($member) || !$member->exists()){
-
-                            echo sprintf("missing member %s - track_id %s - filename %s", $email, $track_id, $file_info['filename']).PHP_EOL;
-                            continue;
-                        }
-                        // try to find if we have a former exam ...
-                        $exam = $member->getExamByExternalId($exam_ext_id);
-
-                        if (is_null($exam))
-                        {
-                            $exam = $factory->build($member, $exam_ext_id);
-                        }
-
-                        $exam->setState
-                        (
-                            $track_id,
-                            $track_id_modified_date,
-                            $candidate_name,
-                            $candidate_fname,
-                            $candidate_lname,
-                            $status,
-                            $modified_date,
-                            $exam_expiration_date,
-                            $pass_date,
-                            $code,
-                            $cert_nbr,
-                            $cert_exam_expiration_date,
-                            $cert_status
-                        );
-                        $exam->write();
-                    }
-                    $this->markFileAsProcessed($file_info);
                     $processed_files++;
                 }
 
                 return $processed_files;
-            }
-            catch(Exception $ex)
-            {
+            } catch (Exception $ex) {
                 SS_Log::log($ex->getMessage(), SS_Log::WARN);
                 throw $ex;
             }
         });
-
     }
 
-    private function isFileProcessed(array $file_info)
+    /**
+     * @param string $filename
+     * @return void
+     */
+    public function processExternalInitialDump($filename)
     {
-        return intval(COAProcessedFile::get()->filter('Name', trim($file_info['filename']))->count()) > 0;
+        return $this->tx_manager->transaction(function () use ($filename) {
+            try {
+
+                $timestamp = time();
+                if ($this->isFileProcessed($filename)) return;
+                if (!file_exists($filename)) return;
+                $content = file_get_contents($filename);
+
+                // delete all former exams ...
+                $this->exam_repository->deleteAll();
+
+                $this->processFile($content, $filename, $timestamp);
+            } catch (Exception $ex) {
+                SS_Log::log($ex->getMessage(), SS_Log::WARN);
+                throw $ex;
+            }
+        });
     }
 
-    private function markFileAsProcessed(array $file_info)
+    /**
+     * @param string $filename
+     * @return bool
+     */
+    private function isFileProcessed($filename)
+    {
+        return intval(COAProcessedFile::get()->filter('Name', trim($filename))->count()) > 0;
+    }
+
+    /**
+     * @param string $filename
+     * @param int $timestamp
+     */
+    private function markFileAsProcessed($filename, $timestamp)
     {
         $file            = COAProcessedFile::create();
-        $file->Name      = trim($file_info['filename']);
-        $file->TimeStamp = intval($file_info['timestamp']);
+        $file->Name      = trim($filename);
+        $file->TimeStamp = intval($timestamp);
         $file->write();
     }
 }

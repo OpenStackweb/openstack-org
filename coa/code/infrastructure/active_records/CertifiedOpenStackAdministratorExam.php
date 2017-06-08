@@ -16,10 +16,12 @@
 /**
  * Class CertifiedOpenStackAdministratorExam
  */
-final class CertifiedOpenStackAdministratorExam extends DataObject implements ICertifiedOpenStackAdministratorExam
+final class CertifiedOpenStackAdministratorExam
+    extends DataObject
+    implements ICertifiedOpenStackAdministratorExam
 {
-    private static $db = array
-    (
+    private static $db = [
+
         'ExternalID'                   => 'Varchar(255)',
         'ExpirationDate'               => 'SS_Datetime',
         'PassFailDate'                 => 'SS_Datetime',
@@ -34,23 +36,25 @@ final class CertifiedOpenStackAdministratorExam extends DataObject implements IC
         'CandidateName'                => 'Varchar(512)',
         'CandidateNameFirstName'       => 'Varchar(512)',
         'CandidateNameLastName'        => 'Varchar(512)',
-    );
+        'CandidateEmail'               => 'Varchar(512)',
+        'CandidateExternalID'          => 'Varchar(512)',
+        'CompletedDate'                => "SS_Datetime",
+    ];
 
-    public static $valid_status                  = array('None','New','Pending','Pass','No Pass','No Pending','Invalidated', 'Cancelled');
-    public static $valid_certification_status    = array('Achieved','InProgress','Expired','Renewed','In Appeals','Revoked');
-    public static $approved_certification_status = array('Renewed', 'Achieved', 'InProgress');
+    public static $valid_status                  = ['None','New','Pending','Pass','No Pass','No Pending','Invalidated', 'Cancelled'];
+    public static $valid_certification_status    = ['Achieved','InProgress','Expired','Renewed','In Appeals','Revoked'];
+    public static $approved_certification_status = ['Renewed', 'Achieved', 'InProgress'];
 
-    private static $has_one = array
-    (
+    private static $has_one = [
         'Owner' => 'Member',
-    );
+    ];
 
     /**
      * @return int
      */
     public function getIdentifier()
     {
-        // TODO: Implement getIdentifier() method.
+        return intval($this->ID);
     }
 
     /**
@@ -67,12 +71,33 @@ final class CertifiedOpenStackAdministratorExam extends DataObject implements IC
      * @param string $cert_nbr
      * @param string $cert_expiration_date
      * @param string $cert_status
+     * @param string $completed_date
+     * @param string $email
+     * @param string $external_id
      * @return $this
      * @throws EntityValidationException
      */
-    public function setState($track_id, $track_id_modified_date, $candidate_name, $candidate_fname, $candidate_lname, $status, $modified_date, $exam_expiration_date, $pass_date,$code, $cert_nbr,$cert_expiration_date, $cert_status)
+    public function setState
+    (
+        $track_id,
+        $track_id_modified_date,
+        $candidate_name,
+        $candidate_fname,
+        $candidate_lname,
+        $status,
+        $modified_date,
+        $exam_expiration_date,
+        $pass_date,
+        $code,
+        $cert_nbr,
+        $cert_expiration_date,
+        $cert_status,
+        $completed_date,
+        $email,
+        $external_id
+    )
     {
-        if(!empty($status)) {
+        if(!empty($status) && $status != 'NULL') {
             if (!$this->isValidStatus($status))
                 throw new EntityValidationException(sprintf("invalid status %s", $status));
 
@@ -99,13 +124,13 @@ final class CertifiedOpenStackAdministratorExam extends DataObject implements IC
         if(!empty($candidate_lname))
             $this->CandidateNameLastName = $candidate_lname ;
 
-        if(!empty($expiration_date))
-            $this->ExpirationDate = $expiration_date;
+        if(!empty($exam_expiration_date))
+            $this->ExpirationDate = $exam_expiration_date;
 
         if(!empty($pass_date))
             $this->PassFailDate = $pass_date;
 
-        if(!empty($cert_nbr))
+        if(!empty($cert_nbr) && $cert_nbr != 'NULL' )
             $this->CertificationNumber = $cert_nbr;
 
         if(!empty($cert_status))
@@ -113,6 +138,15 @@ final class CertifiedOpenStackAdministratorExam extends DataObject implements IC
 
         if(!empty($cert_expiration_date))
             $this->CertificationExpirationDate = $cert_expiration_date;
+
+        if(!empty($completed_date))
+            $this->CompletedDate = $completed_date;
+
+        if(!empty($email))
+            $this->CandidateEmail = $email;
+
+        if(!empty($external_id))
+            $this->CandidateExternalID = $external_id;
 
         return $this;
     }
@@ -140,6 +174,6 @@ final class CertifiedOpenStackAdministratorExam extends DataObject implements IC
      */
     public function hasOwner()
     {
-        return $this->OwnerID > 0;
+        return intval($this->OwnerID) > 0;
     }
 }

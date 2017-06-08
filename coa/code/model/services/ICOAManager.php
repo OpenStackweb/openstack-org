@@ -18,4 +18,10 @@ interface ICOAManager
      * @return int
      */
     public function processFiles();
+
+    /**
+     * @param string $filename
+     * @return void
+     */
+    public function processExternalInitialDump($filename);
 }

@@ -14,7 +14,9 @@
 /**
  * Class SapphireCOAExamRepository
  */
-final class SapphireCOAExamRepository extends SapphireRepository implements ICertifiedOpenStackAdministratorExamRepository{
+final class SapphireCOAExamRepository
+    extends SapphireRepository
+    implements ICertifiedOpenStackAdministratorExamRepository {
 
 	public function __construct(){
 		parent::__construct(new CertifiedOpenStackAdministratorExam());
@@ -46,5 +48,13 @@ final class SapphireCOAExamRepository extends SapphireRepository implements ICer
             ->filter('TrackID', $track_id)
             ->sort('TrackModifiedDate', 'ASC')
             ->toArray();
+    }
+
+    /**
+     * @return void
+     */
+    public function deleteAll()
+    {
+        DB::query("DELETE FROM CertifiedOpenStackAdministratorExam;");
     }
 }
