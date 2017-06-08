@@ -15,19 +15,18 @@
 class SurveyAnswer extends DataObject implements ISurveyAnswer
 {
 
-    static $db = array
-    (
+    static $db = [
         'Value' => 'Text',
-    );
+    ];
 
-    static $indexes = array(
+    static $indexes = [
 
-    );
+    ];
 
-    static $has_one = array(
+    static $has_one = [
         'Question' => 'SurveyQuestionTemplate',
         'Step'     => 'SurveyStep',
-    );
+    ];
 
     static $many_many = array(
     );

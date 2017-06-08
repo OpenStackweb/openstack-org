@@ -20,9 +20,9 @@ class SurveyRegularStep
     implements ISurveyRegularStep
 {
 
-    static $has_many = array(
+    static $has_many = [
         'Answers' => 'SurveyAnswer',
-    );
+    ];
 
     /**
      * @return ISurveyAnswer[]
@@ -88,5 +88,17 @@ class SurveyRegularStep
         foreach($this->Answers() as $answer){
             $answer->delete();
         }
+    }
+
+    /**
+     * @return array
+     */
+    public function getCurrentAnswersSnapshotState()
+    {
+        $snapshot = [];
+        foreach ($this->Answers() as $answer) {
+            $snapshot[$answer->Question()->Name] = $answer->Value;
+        }
+        return $snapshot;
     }
 }

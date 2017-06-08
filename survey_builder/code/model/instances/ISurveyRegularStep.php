@@ -41,4 +41,9 @@ interface ISurveyRegularStep extends ISurveyStep {
      */
     public function getAnswerByName($name);
 
+    /**
+     * @return array
+     */
+    public function getCurrentAnswersSnapshotState();
+
 }
