@@ -20,21 +20,21 @@
                                 <span class="dot" style="background:#{$Color};"></span> $Name
                             </a>
                         </h3>
-                        <div class="session-list-tracks">
-                            <ul>
-                                <% loop Categories() %>
-                                <li class="tracks-tooltip" title="{$Description}">
-                                    $Title <% if not $VotingVisible %> * <% end_if %>
-                                </li>
-                                <% end_loop %>
-                            </ul>
+                        <div class="session-list-description">
+                            <div class="session-list-text" style="margin-bottom:10px;">
+                                <p> $Description </p>
+                            </div>
                         </div>
                         <div class="session-list-wrapper">
-                            <div class="session-tracks-title">Description</div>
-                            <div class="session-list-description">
-                                <div class="session-list-text">
-                                    <p> $Description </p>
-                                </div>
+                            <div class="session-tracks-title">Tracks</div>
+                            <div class="session-list-tracks">
+                                <ul>
+                                    <% loop Categories() %>
+                                    <li class="tracks-tooltip" title="{$Description}">
+                                        $Title <% if not $VotingVisible %> * <% end_if %>
+                                    </li>
+                                    <% end_loop %>
+                                </ul>
                             </div>
                         </div>
                         <% if $Top.Summit.isCallForSpeakersOpen() %>
