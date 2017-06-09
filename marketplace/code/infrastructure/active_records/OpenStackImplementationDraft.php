@@ -186,9 +186,8 @@ class OpenStackImplementationDraft
         $storage = $this->isCompatibleWithStorage();
         $compute = $this->isCompatibleWithCompute();
         $platform = $this->isCompatibleWithPlatform();
-        $identity = $this->isCompatibleWithFederatedIdentity();
 
-        return $storage || $compute || $platform || $identity;
+        return $storage || $compute || $platform;
     }
 
     /**

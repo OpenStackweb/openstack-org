@@ -188,8 +188,7 @@ class OpenStackImplementation
         $storage  = $this->isCompatibleWithStorage();
         $compute  = $this->isCompatibleWithCompute();
         $platform = $this->isCompatibleWithPlatform();
-        $identity = $this->isCompatibleWithFederatedIdentity();
-        return ($storage || $compute || $platform || $identity) && !$this->isOpenStackPoweredExpired();
+        return ($storage || $compute || $platform) && !$this->isOpenStackPoweredExpired();
     }
 
     /**
