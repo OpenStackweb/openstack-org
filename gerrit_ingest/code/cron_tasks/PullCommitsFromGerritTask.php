@@ -18,6 +18,7 @@
 final class PullCommitsFromGerritTask extends CronTask  {
 
     function run(){
+
         $init_time  = time();
 
         $manager = new GerritIngestManager (
@@ -29,6 +30,7 @@ final class PullCommitsFromGerritTask extends CronTask  {
         $processed = $manager->processCommits();
 
         $finish_time = time() - $init_time;
+
         echo 'processed records ' . $processed. ' - time elapsed : '.$finish_time. ' seconds.'.PHP_EOL;
     }
 }

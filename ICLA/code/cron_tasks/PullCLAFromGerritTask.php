@@ -18,6 +18,8 @@ final class PullCLAFromGerritTask extends CronTask {
 
 	function run(){
 
+        $init_time  = time();
+
 		$manager = new ICLAManager (
 			new GerritAPI(GERRIT_BASE_URL, GERRIT_USER, GERRIT_PASSWORD),
 			new SapphireGerritUserRepository,
@@ -27,5 +29,7 @@ final class PullCLAFromGerritTask extends CronTask {
 		$members_updated = $manager->processICLAGroup(ICLA_GROUP_ID);
 
 		echo sprintf("Gerrit Users Processed %s .", $members_updated).PHP_EOL;
+        $finish_time = time() - $init_time;
+        echo 'time elapsed : '.$finish_time. ' seconds.'.PHP_EOL;
 	}
 } 
