@@ -71,6 +71,7 @@ final class SangriaPageMarketPlaceExtension extends Extension {
         Requirements::javascript('themes/openstack/bower_assets/jquery-mousewheel/jquery.mousewheel.js');
         Requirements::javascript('themes/openstack/bower_assets/php-date-formatter/js/php-date-formatter.min.js');
         Requirements::javascript("themes/openstack/bower_assets/datetimepicker/build/jquery.datetimepicker.min.js");
+        Requirements::javascript('themes/openstack/javascript/jquery.tablednd.js');
 
         return $this->owner->getViewer('ViewPoweredOpenStackProducts')->process
         (
@@ -176,6 +177,7 @@ final class SangriaPageMarketPlaceExtension extends Extension {
         Requirements::javascript("themes/openstack/bower_assets/jquery-cookie/jquery.cookie.js");
         Requirements::javascript('themes/openstack/bower_assets/jquery-mousewheel/jquery.mousewheel.js');
         Requirements::javascript('themes/openstack/bower_assets/php-date-formatter/js/php-date-formatter.min.js');
+        Requirements::javascript('themes/openstack/javascript/jquery.tablednd.js');
 
         return $this->owner->getViewer('ViewOpenStackProductsByRegion')->process
             (

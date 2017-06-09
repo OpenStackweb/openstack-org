@@ -26,7 +26,7 @@ final class SapphireOpenStackPoweredServiceRepository
      * @param int $page
      * @param int $page_size
      * @param string $order
-     * @param bool $show_all
+     * @param bool $filters
      * @param null $search_term
      * @param string $service_type
      * @return array
@@ -36,7 +36,7 @@ final class SapphireOpenStackPoweredServiceRepository
         $page         = 1,
         $page_size    = 10,
         $order        = null,
-        $show_all     = true,
+        $filters      = array(),
         $search_term  = null,
         $service_type = 'ALL'
     )
@@ -77,12 +77,17 @@ final class SapphireOpenStackPoweredServiceRepository
 
         if(!empty($search_term)){
             if(!empty($where)) $where .= ' AND ';
-            $where .= " Company.Name LIKE '%{$search_term}%' ";
+            $where .= " (Company.Name LIKE '%{$search_term}%' OR CompanyService.Name '%{$search_term}%') ";
         }
 
-        if(!$show_all){
+        if(isset($filters['expired']) && $filters['expired']){
             if(!empty($where)) $where .= ' AND ';
             $where .= " OpenStackImplementation.ExpiryDate < NOW()";
+        }
+
+        if(isset($filters['powered']) && $filters['powered']){
+            if(!empty($where)) $where .= ' AND ';
+            $where .= " (CompatibleWithStorage = 1 OR CompatibleWithCompute = 1) ";
         }
 
         if(!empty($where)) $where = ' WHERE '.$where;

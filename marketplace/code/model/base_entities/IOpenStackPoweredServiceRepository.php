@@ -18,7 +18,7 @@ interface IOpenStackPoweredServiceRepository
      * @param int $page
      * @param int $page_size
      * @param string $order
-     * @param bool $show_all
+     * @param bool $filters
      * @param null $search_term
      * @param string $service_type
      * @return array
@@ -28,7 +28,7 @@ interface IOpenStackPoweredServiceRepository
         $page        = 1,
         $page_size   = 10,
         $order       = '',
-        $show_all    = true,
+        $filters     = [],
         $search_term = null,
         $service_type = 'ALL'
     );

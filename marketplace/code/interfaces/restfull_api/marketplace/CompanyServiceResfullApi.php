@@ -14,17 +14,17 @@
 final class CompanyServiceResfullApi extends AbstractRestfulJsonApi
 {
     /**
-     * @var ICompanyServiceRepository
+     * @var IRegionalServiceRepository
      */
     private $regional_repository;
 
     /**
      * CompanyServiceResfullApi constructor.
-     * @param ICompanyServiceRepository $repository
+     * @param IRegionalServiceRepository $repository
      */
     public function __construct
     (
-        ICompanyServiceRepository $repository
+        IRegionalServiceRepository $repository
     )
     {
         parent::__construct();

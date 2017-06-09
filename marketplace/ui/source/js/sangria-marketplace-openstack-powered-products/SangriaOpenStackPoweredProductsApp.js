@@ -55,16 +55,15 @@ class OpenStackProgramVersionSelector extends React.Component{
 class FilterLink extends React.Component {
 
     render() {
-        let {filter, currentFilter, onClick, children} = this.props;
-        if (filter === currentFilter) {
-            return <span>{children}</span>;
-        }
+        let {filter, currentStatus, onClick, children} = this.props;
+        let active = (currentStatus) ? 'active' : '';
 
         return (
-            <a href='#' onClick={onClick}>
-                {children}
-            </a>
+            <label className={"btn btn-primary btn-sm " + active} onClick={onClick} data-filter={filter}>
+                <input type="checkbox" defaultChecked={currentStatus} autoComplete="off"/> {children}
+            </label>
         );
+
     }
 }
 
@@ -77,22 +76,16 @@ class SangriaOpenStackPoweredProductsApp extends React.Component
             sort_field      : 'name',
             current_page: 1,
             page_size: 25,
-            show_all : 1,
+            show_expired : 0,
+            show_powered : 0,
             type: 'ALL',
             search_term: '',
         }
     }
 
-    componentWillMount(){
-
-    }
-
-    componentDidUpdate(){
-    }
-
     componentDidMount(){
         if(!this.props.items.length) {
-            this.props.fetchPage(this.state.current_page, this.state.page_size, this.state.show_all, this.buildSort());
+            this.props.fetchPage(this.state.current_page, this.state.page_size, this.state.show_expired, this.state.show_powered, this.buildSort());
         }
     }
 
@@ -104,10 +97,11 @@ class SangriaOpenStackPoweredProductsApp extends React.Component
             prevState.current_page != this.state.current_page ||
             prevState.type != this.state.type ||
             prevState.search_term != this.state.search_term ||
-            prevState.show_all != this.state.show_all ||
+            prevState.show_expired != this.state.show_expired ||
+            prevState.show_powered != this.state.show_powered ||
             prevState.page_size != this.state.page_size
         )
-            this.props.fetchPage(this.state.current_page, this.state.page_size, this.state.show_all, this.buildSort(), this.state.type, this.state.search_term);
+            this.props.fetchPage(this.state.current_page, this.state.page_size, this.state.show_expired, this.state.show_powered, this.buildSort(), this.state.type, this.state.search_term);
     }
 
     onChangeSorting(e, property){
@@ -178,15 +172,24 @@ class SangriaOpenStackPoweredProductsApp extends React.Component
         this.props.updateProduct(product, 'expiry_date', val);
     }
 
-    onShowStatusFilter(e, status){
+    onFilterChange(e){
         e.preventDefault();
-        this.setState({...this.state, show_all: status == 'ALL' ? 1: 0, current_page: 1 });
+        let filter = e.target.dataset.filter;
+        let status = e.target.firstElementChild.checked ? 1 : 0;
+        switch (filter) {
+            case 'EXPIRED':
+                this.setState({...this.state, show_expired: status, current_page: 1 });
+                break;
+            case 'POWERED':
+                this.setState({...this.state, show_powered: status, current_page: 1 });
+                break;
+        }
     }
 
     onExport(e){
         e.preventDefault();
         console.log(`export type ${this.state.type}`);
-        this.props.exportProducts(this.state.show_all, this.buildSort(), this.state.type, this.state.search_term);
+        this.props.exportProducts(this.state.show_expired, this.state.show_powered, this.buildSort(), this.state.type, this.state.search_term);
     }
 
     navigate2ProductDetails(e, product){
@@ -231,16 +234,15 @@ class SangriaOpenStackPoweredProductsApp extends React.Component
                 <h3>OpenStack Powered Products</h3>
                 <div className="row" style={{ marginBottom: "25px"}}>
                     <div className="col-md-12">
-                        <span>Show: </span>
-                        <FilterLink onClick={(e) => this.onShowStatusFilter(e, 'ALL')} filter='ALL' currentFilter={this.state.show_all == 1 ? 'ALL' : 'EXPIRED' }>
-                            All
-                        </FilterLink>
-                        {' | '}
-                        <FilterLink onClick={(e) => this.onShowStatusFilter(e, 'EXPIRED')} filter='EXPIRED' currentFilter={this.state.show_all == 1 ? 'ALL' : 'EXPIRED' }>
-                            Expired
-                        </FilterLink>
-                        {' | '}
-                        <button onClick={(e) => this.onExport(e)}>Export</button>
+                        <div className="btn-group" data-toggle="buttons" style={{ marginRight: "10px"}}>
+                            <FilterLink onClick={(e) => this.onFilterChange(e)} filter='EXPIRED' currentStatus={this.state.show_expired}>
+                                Expired
+                            </FilterLink>
+                            <FilterLink onClick={(e) => this.onFilterChange(e)} filter='POWERED' currentStatus={this.state.show_powered}>
+                                Powered
+                            </FilterLink>
+                        </div>
+                        <button className="btn btn-sm btn-default" onClick={(e) => this.onExport(e)}>Export</button>
                     </div>
                 </div>
                 <div className="row">
@@ -320,7 +322,7 @@ class SangriaOpenStackPoweredProductsApp extends React.Component
                                     {product.edited_by}
                                 </td>
                                 <td>
-                                    <button onClick={(e) => this.navigate2ProductDetails(e, product)} >Detail</button>
+                                    <button className="btn btn-sm btn-default" onClick={(e) => this.navigate2ProductDetails(e, product)} >Detail</button>
                                 </td>
                             </tr>
                         )
@@ -355,17 +357,17 @@ export default connect (
         }
     },
     dispatch => ({
-        fetchPage (page = 1, page_size = 25, show_all = 1, order = '', type = 'ALL', search_term = '') {
+        fetchPage (page = 1, page_size = 25, show_expired = 0, show_powered = 0, order = '', type = 'ALL', search_term = '') {
             console.log('fetchPage');
-            return dispatch(fetchAllProducts({page, page_size, show_all, order, type, search_term}));
+            return dispatch(fetchAllProducts({page, page_size, show_expired, show_powered, order, type, search_term}));
         },
         updateProduct(product, field, value){
             let payload    = {};
             payload[field] = value;
             return dispatch(updateProductField({ product_id: product.id}, payload));
         },
-        exportProducts(show_all = 1, order = '', type = 'ALL', search_term = ''){
-            return dispatch(exportAllProducts({show_all, order, type, search_term}));
+        exportProducts(show_expired = 0, show_powered = 0, order = '', type = 'ALL', search_term = ''){
+            return dispatch(exportAllProducts({show_expired, show_powered, order, type, search_term}));
         },
         navigate2ProductDetails(product){
             return dispatch(navigateToProductDetails(product.id));

@@ -78,7 +78,7 @@ final class SapphireRegionalServiceRepository
 
         if(!empty($search_term)){
             if(!empty($where)) $where .= ' AND ';
-            $where .= " Company.Name LIKE '%{$search_term}%' ";
+            $where .= " (Company.Name LIKE '%{$search_term}%' OR CompanyService.Name '%{$search_term}%') ";
         }
 
         if(!empty($where)) $where = ' WHERE '.$where;

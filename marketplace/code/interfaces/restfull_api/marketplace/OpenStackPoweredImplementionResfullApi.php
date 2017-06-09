@@ -86,13 +86,14 @@ final class OpenStackPoweredImplementionResfullApi extends AbstractRestfulJsonAp
             $order        = (isset($query_string['order'])) ? Convert::raw2sql($query_string['order']) : '';
             $search_term  = (isset($query_string['search_term'])) ? Convert::raw2sql($query_string['search_term']) : '';
             $service_type = (isset($query_string['type'])) ? Convert::raw2sql($query_string['type']) : '';
-            $show_all     = boolval((isset($query_string['show_all'])) ? Convert::raw2sql($query_string['show_all']) : true);
+            $filters['expired'] = boolval((isset($query_string['show_expired'])) ? Convert::raw2sql($query_string['show_expired']) : false);
+            $filters['powered'] = boolval((isset($query_string['show_powered'])) ? Convert::raw2sql($query_string['show_powered']) : false);
 
             list($list, $count) = $this->repository->getAllByPage(
                 $page,
                 $page_size,
                 $order,
-                $show_all,
+                $filters,
                 $search_term,
                 $service_type
             );
@@ -136,14 +137,16 @@ final class OpenStackPoweredImplementionResfullApi extends AbstractRestfulJsonAp
         $order        = (isset($query_string['order'])) ? Convert::raw2sql($query_string['order']) : '';
         $search_term  = (isset($query_string['search_term'])) ? Convert::raw2sql($query_string['search_term']) : '';
         $service_type = (isset($query_string['type'])) ? Convert::raw2sql($query_string['type']) : '';
-        $show_all     = boolval((isset($query_string['show_all'])) ? Convert::raw2sql($query_string['show_all']) : true);
+        $filters['expired'] = boolval((isset($query_string['show_expired'])) ? Convert::raw2sql($query_string['show_expired']) : false);
+        $filters['powered'] = boolval((isset($query_string['show_powered'])) ? Convert::raw2sql($query_string['show_powered']) : false);
+
 
         list($list, $count) = $this->repository->getAllByPage
         (
             1,
             PHP_INT_MAX,
             $order,
-            $show_all,
+            $filters,
             $search_term,
             $service_type
         );
