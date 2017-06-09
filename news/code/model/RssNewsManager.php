@@ -181,7 +181,11 @@ final class RssNewsManager
             $response = $feed->request();
             if ($response->getStatusCode() == 200) {
                 $body = $response->getBody();
-                $output = $feed->getValues($body, $collection, $element);
+                if (@simplexml_load_string($body)) {
+                    $output = $feed->getValues($body, $collection, $element);
+                } else {
+                    SS_Log::log('Wrong format on XML: '.$url, SS_Log::WARN);
+                }
             }
         }
         catch(Exception $ex){
