@@ -85,7 +85,7 @@ final class SurveyBuilder implements ISurveyBuilder {
     {
         $answer = new SurveyAnswer();
         if(is_array($answer_value) ){
-            $answer_value = str_replace('{comma}', ',', $answer_value);
+            $answer_value  = str_replace('{comma}', ',', $answer_value);
             $answer->Value = implode(',', $answer_value);
         }
         else{

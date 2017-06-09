@@ -118,7 +118,6 @@ final class SurveyManager implements ISurveyManager {
         $survey_builder      = $this->survey_builder;
         $member_repository   = $this->member_repository;
 
-
         return $this->tx_manager->transaction(function() use($step, $creator_id, $survey_builder, $member_repository, $template_repository, $survey_repository){
 
             $owner = $member_repository->getById($creator_id);
@@ -135,35 +134,78 @@ final class SurveyManager implements ISurveyManager {
     }
 
     /**
-     * @param array $data
+     * @param array $answers
      * @param ISurveyStep $current_step
      * @return ISurveyStep
      */
-    public function completeStep(ISurveyStep $current_step, array $data)
+    public function completeStep(ISurveyStep $current_step, array $answers)
     {
-        return $this->tx_manager->transaction(function() use($current_step, $data){
+        return $this->tx_manager->transaction(function() use($current_step, $answers){
 
             $current_survey = $current_step->survey();
-            $save_later     = isset($data['SAVE_LATER']) && $data['SAVE_LATER'] == 1;
+            $save_later     = isset($answers['SAVE_LATER']) && $answers['SAVE_LATER'] == 1;
 
             if($current_step instanceof ISurveyRegularStep) {
+                $snapshot = $current_step->getCurrentAnswersSnapshotState();
+
                 $current_step->clearAnswers();
 
                 foreach ($current_step->template()->getQuestions() as $q)
                 {
-                    if (isset($data[$q->name()]))
-                    {
-                        // its has an answer set
-                        if($q->name() === SurveyOrganizationQuestionTemplate::FieldName){
-                            //publish event
-                            PublisherSubscriberManager::getInstance()->publish('survey_organization_selected', array( $current_survey->createdBy(), $data[$q->name()]));
-                        }
-                        $current_step->addAnswer($this->survey_builder->buildAnswer($q, $data[$q->name()]));
+                    $question_name = $q->name();
+
+                    // answer changes
+                    $log             = new SurveyAnswerLog();
+                    $log->QuestionID = $q->ID;
+                    $log->StepID     = $current_step->ID;
+                    $log->SurveyID   = $current_step->survey()->ID;
+                    $log->MemberID   = Member::currentUserID();
+
+                    if(isset($snapshot[$question_name])){
+                        $log->FormerValue = $snapshot[$question_name];
                     }
+
+                    if (isset($answers[$question_name]))
+                    {
+                        $answer_val = $answers[$question_name];
+                        // its has an answer set
+                        if($question_name === SurveyOrganizationQuestionTemplate::FieldName){
+                            //publish event
+                            PublisherSubscriberManager::getInstance()->publish
+                            (
+                                'survey_organization_selected',
+                                [ $current_survey->createdBy(), $answer_val ]
+                            );
+                        }
+
+                        $answer        = $this->survey_builder->buildAnswer($q, $answer_val);
+                        $log->NewValue = $answer->value();
+                        $current_step->addAnswer($answer);
+                    }
+
+                    if(empty($log->FormerValue) && !empty($log->NewValue)){
+                        // insert of value
+                        $log->Operation   = 'INSERT';
+                    }
+
+                    if(!empty($log->FormerValue) && empty($log->NewValue)){
+                        // delete of value
+                        $log->Operation   = 'DELETE';
+                    }
+
+                    if(!empty($log->FormerValue) && !empty($log->NewValue) && $log->FormerValue != $log->NewValue){
+                        // update of value
+                        $log->Operation   = 'UPDATE';
+                    }
+
+                    if(!empty($log->Operation)  && (!empty($log->NewValue) || !empty($log->FormerValue)))
+                        $log->write();
                 }
+
                 if(count($current_step->getAnswers()) > 0)
                     $current_step->markComplete();
             }
+
             return $save_later ? $current_step : $current_survey->completeCurrentStep() ;
         });
     }
