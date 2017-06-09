@@ -57,7 +57,7 @@ final class SchedulerCronTask extends CronTask
                     }
 
                     $params     = isset($job['params']) ? $job['params'] : '';
-                    $raw        = sprintf('%s/framework/sake %s %s', $base_folder, $name, $params);
+                    $raw        = sprintf('cd %s && sake %s %s', $base_folder, $name, $params);
 
                     echo sprintf('running %s at %s', $raw, $expression) . PHP_EOL;
                     $scheduler->raw($raw)->at($expression)->onlyOne()->output(sprintf("/tmp/%s.log", strtolower($name)));

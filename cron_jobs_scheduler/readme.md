@@ -5,7 +5,7 @@
 add following entry to crontab
 
 ```bash
-* * * * * su dployio -s /bin/bash -c "/var/www/www.openstack.org/framework/sake SchedulerCronTask" 1>> /dev/null 2>&1
+* * * * * su dployio -s /bin/bash -c "cd /var/www/www.openstack.org && sake SchedulerCronTask" 1>> /dev/null 2>&1
 ```
 
 to install sake please run on your site root 
