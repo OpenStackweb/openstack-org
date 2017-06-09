@@ -28,10 +28,31 @@ interface ICertifiedOpenStackAdministratorExam extends IEntity
      * @param string $cert_nbr
      * @param string $cert_expiration_date
      * @param string $cert_status
+     * @param string $completed_date
+     * @param string $email
+     * @param string $external_id
      * @return $this
      * @throws EntityValidationException
      */
-    public function setState($track_id, $track_id_modified_date, $candidate_name, $candidate_fname, $candidate_lname, $status, $modified_date, $exam_expiration_date, $pass_date,$code, $cert_nbr,$cert_expiration_date, $cert_status);
+    public function setState
+    (
+        $track_id,
+        $track_id_modified_date,
+        $candidate_name,
+        $candidate_fname,
+        $candidate_lname,
+        $status,
+        $modified_date,
+        $exam_expiration_date,
+        $pass_date,
+        $code,
+        $cert_nbr,
+        $cert_expiration_date,
+        $cert_status,
+        $completed_date,
+        $email,
+        $external_id
+    );
 
     /**
      * @param string $status

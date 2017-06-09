@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2016 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -55,11 +54,10 @@ final class COAFileApi implements ICOAFileApi
             if(!preg_match($pattern, $href, $matches, PREG_OFFSET_CAPTURE)) continue;
             if(count($matches) < 2) continue;
 
-            $files[] = array
-            (
-                'filename'  => $matches[0][0],
+            $files[] = [
+               'filename'   => $matches[0][0],
                 'timestamp' => intval($matches[1][0])
-            );
+            ];
         }
         uasort($files, array($this, 'orderFiles'));
         return $files;

@@ -32,9 +32,7 @@ final class COACrudApi
 
 	public function __construct(){
 		parent::__construct();
-
 		$this->repository = new SapphireCOAExamRepository();
-
 	}
 
 	/**
@@ -70,13 +68,15 @@ final class COACrudApi
 	public function getCOAExam(){
 		$cert_id   = trim(Convert::raw2sql($this->request->param('CERT_ID')));
 		$last_name = trim(Convert::raw2sql(html_entity_decode($this->request->param('LAST_NAME'))));
+
 		try{
 			$exam = $this->repository->getByCertAndLastName($cert_id, $last_name);
+
             if ($exam->count() > 0) {
-                $exam_obj = $exam->first();
-                $exam_map = $exam_obj->toMap();
-                $exam_map['OwnerName'] = $exam_obj->Owner()->FirstName.' '.$exam_obj->Owner()->Surname;
-                $exam_map['PassFailDate'] = date('M jS Y',strtotime($exam_obj->PassFailDate));
+                $exam_obj                 = $exam->first();
+                $exam_map                 = $exam_obj->toMap();
+                $exam_map['OwnerName']    = $exam_obj->Owner()->FirstName.' '.$exam_obj->Owner()->Surname;
+                $exam_map['PassFailDate'] = date('M jS Y',strtotime($exam_obj->CompletedDate));
                 return $this->ok($exam_map);
             }
 

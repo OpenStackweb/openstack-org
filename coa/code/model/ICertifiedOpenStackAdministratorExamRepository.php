@@ -22,4 +22,9 @@ interface ICertifiedOpenStackAdministratorExamRepository extends IEntityReposito
      * @return ICertifiedOpenStackAdministratorExam[]
      */
     public function getByTrackId($track_id);
+
+    /**
+     * @return void
+     */
+    public function deleteAll();
 }
