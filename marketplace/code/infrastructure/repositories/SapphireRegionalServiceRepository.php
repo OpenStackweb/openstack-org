@@ -12,9 +12,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-final class SapphireOpenStackPoweredServiceRepository
+final class SapphireRegionalServiceRepository
     extends SapphireRepository
-    implements IOpenStackPoweredServiceRepository
+    implements IRegionalServiceRepository
 {
 
     public function __construct()
@@ -50,8 +50,6 @@ final class SapphireOpenStackPoweredServiceRepository
             if(strstr($order, 'type') !== false)
                 $order_by = ' CompanyService.ClassName '. (strstr($order, '+') !== false ? 'ASC' : 'DESC');
 
-            if(strstr($order, 'expiry_date') !== false)
-                $order_by = ' ExpiryDate '.(strstr($order, '+') !== false ? 'ASC' : 'DESC');
         }
 
         $order_by = ' ORDER BY '.$order_by;
@@ -73,6 +71,9 @@ final class SapphireOpenStackPoweredServiceRepository
             case 'PRIVATECLOUD':
                 $where .= " CompanyService.ClassName = 'PrivateCloudService' ";
                 break;
+            case 'CONSULTANT':
+                $where .= " CompanyService.ClassName = 'Consultant' ";
+                break;
         }
 
         if(!empty($search_term)){
@@ -80,42 +81,34 @@ final class SapphireOpenStackPoweredServiceRepository
             $where .= " Company.Name LIKE '%{$search_term}%' ";
         }
 
-        if(!$show_all){
-            if(!empty($where)) $where .= ' AND ';
-            $where .= " OpenStackImplementation.ExpiryDate < NOW()";
-        }
-
         if(!empty($where)) $where = ' WHERE '.$where;
         $query = <<<SQL
-SELECT  
+SELECT
 CompanyService.ID,
-CompatibleWithStorage,
-CompatibleWithCompute,
-CompatibleWithFederatedIdentity,
 ProgramVersionID,
 InteropProgramVersion.Name AS ProgramVersionName,
-ExpiryDate,
 CompanyService.ClassName,
 CompanyService.Name,
 Company.Name AS CompanyName,
-H.Email AS LastEditedBy
-FROM OpenStackImplementation
-INNER JOIN CompanyService ON CompanyService.ID = OpenStackImplementation.ID
-INNER JOIN Company ON Company.ID = CompanyService.CompanyID
+GROUP_CONCAT(DISTINCT L.City SEPARATOR ', ') AS City,
+GROUP_CONCAT(DISTINCT Countries.Name SEPARATOR ', ') AS Country,
+CONCAT_WS(',',GROUP_CONCAT(DISTINCT DCR.Name),GROUP_CONCAT(DISTINCT DCR2.Name),GROUP_CONCAT(DISTINCT Region.Name)) AS RegionName,
+GROUP_CONCAT(DISTINCT Member.Email SEPARATOR ', ') AS Admins,
+OpenStackImplementation.Notes AS Notes
+FROM CompanyService
+LEFT JOIN OpenStackImplementation ON CompanyService.ID = OpenStackImplementation.ID
+LEFT JOIN Company ON Company.ID = CompanyService.CompanyID
 LEFT JOIN InteropProgramVersion ON InteropProgramVersion.ID = OpenStackImplementation.ProgramVersionID
-LEFT JOIN 
-( SELECT OpenStackPoweredProgramHistory.*, Member.Email 
-  FROM OpenStackPoweredProgramHistory 
-  INNER JOIN Member ON Member.ID = OpenStackPoweredProgramHistory.OwnerID
-) AS H
-ON H.ID = 
-(
-		SELECT MAX(OpenStackPoweredProgramHistory.ID) 
-		FROM OpenStackPoweredProgramHistory 
-		WHERE OpenStackPoweredProgramHistory.OpenStackImplementationID = OpenStackImplementation.ID
-)
-
+LEFT JOIN RegionalSupport ON RegionalSupport.ServiceID = CompanyService.ID
+LEFT JOIN Region ON RegionalSupport.RegionID = Region.ID
+LEFT JOIN DataCenterLocation L ON L.CloudServiceID = CompanyService.ID
+LEFT JOIN DataCenterRegion DCR ON DCR.ID = L.DataCenterRegionID
+LEFT JOIN DataCenterRegion DCR2 ON DCR2.CloudServiceID = CompanyService.ID
+LEFT JOIN Countries ON Countries.Code = L.Country
+LEFT JOIN Company_Administrators ON Company_Administrators.CompanyID = Company.ID
+LEFT JOIN Member ON Member.ID = Company_Administrators.MemberID
 {$where}
+GROUP BY CompanyService.ID
 {$order_by}
 SQL;
 
@@ -132,59 +125,5 @@ SQL;
         }
 
         return [$list, $count];
-    }
-
-    /**
-     * @return array
-     */
-    function getAllExpired()
-    {
-       list($list, $count) = $this->getAllByPage(1, PHP_INT_MAX,null, false);
-       return $list;
-    }
-
-    /**
-     * @param int $days qty of days
-     * @return array
-     */
-    function getAllAboutToExpireOn($days)
-    {
-        $query = <<<SQL
-SELECT  
-CompanyService.ID,
-CompatibleWithStorage,
-CompatibleWithCompute,
-CompatibleWithFederatedIdentity,
-ProgramVersionID,
-InteropProgramVersion.Name AS ProgramVersionName,
-ExpiryDate,
-CompanyService.ClassName,
-CompanyService.Name,
-Company.Name AS CompanyName,
-H.Email AS LastEditedBy
-FROM OpenStackImplementation
-INNER JOIN CompanyService ON CompanyService.ID = OpenStackImplementation.ID
-INNER JOIN Company ON Company.ID = CompanyService.CompanyID
-LEFT JOIN InteropProgramVersion ON InteropProgramVersion.ID = OpenStackImplementation.ProgramVersionID
-LEFT JOIN 
-( SELECT OpenStackPoweredProgramHistory.*, Member.Email 
-  FROM OpenStackPoweredProgramHistory 
-  INNER JOIN Member ON Member.ID = OpenStackPoweredProgramHistory.OwnerID
-) AS H
-ON H.ID = 
-(
-		SELECT MAX(OpenStackPoweredProgramHistory.ID) 
-		FROM OpenStackPoweredProgramHistory 
-		WHERE OpenStackPoweredProgramHistory.OpenStackImplementationID = OpenStackImplementation.ID
-)
-WHERE ExpiryDate IS NOT NULL AND DATEDIFF(ExpiryDate, NOW() ) <= {$days} AND DATEDIFF(ExpiryDate, NOW() ) >= 0
-SQL;
-        $list = new ArrayList();
-        foreach(DB::query($query) as $row)
-        {
-            $list->push(new ArrayData($row));
-        }
-
-        return $list;
     }
 }

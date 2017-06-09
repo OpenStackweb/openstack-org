@@ -9,10 +9,11 @@ class OpenStackImplementationDraft
 {
 
     static $db = [
-        'CompatibleWithCompute' => 'Boolean',
-        'CompatibleWithStorage' => 'Boolean',
-        'CompatibleWithPlatform' => 'Boolean',
-        'ExpiryDate'             => 'SS_Datetime',
+        'CompatibleWithCompute'             => 'Boolean',
+        'CompatibleWithStorage'             => 'Boolean',
+        'CompatibleWithPlatform'            => 'Boolean',
+        'ExpiryDate'                        => 'SS_Datetime',
+        'CompatibleWithFederatedIdentity'   => 'Boolean',
     ];
 
     static $has_one = array('ProgramVersion' => 'InteropProgramVersion');
@@ -26,6 +27,7 @@ class OpenStackImplementationDraft
         'CompatibleWithCompute' => false,
         'CompatibleWithStorage' => false,
         'CompatibleWithPlatform' => false,
+        'CompatibleWithFederatedIdentity' => false,
     );
 
     static $has_many = array(
@@ -135,6 +137,23 @@ class OpenStackImplementationDraft
     /***
      * @return bool
      */
+    public function isCompatibleWithFederatedIdentity()
+    {
+        return (bool)$this->getField('CompatibleWithFederatedIdentity');
+    }
+
+    /**
+     * @param bool $compatible
+     * @return void
+     */
+    public function setCompatibleWithFederatedIdentity($compatible)
+    {
+        $this->setField('CompatibleWithFederatedIdentity', $compatible);
+    }
+
+    /***
+     * @return bool
+     */
     public function isCompatibleWithPlatform()
     {
         return $this->isCompatibleWithStorage() && $this->isCompatibleWithCompute();
@@ -167,6 +186,7 @@ class OpenStackImplementationDraft
         $storage = $this->isCompatibleWithStorage();
         $compute = $this->isCompatibleWithCompute();
         $platform = $this->isCompatibleWithPlatform();
+        $identity = $this->isCompatibleWithFederatedIdentity();
 
         return $storage || $compute || $platform || $identity;
     }

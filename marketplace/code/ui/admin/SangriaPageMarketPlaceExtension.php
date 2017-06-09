@@ -26,7 +26,8 @@ final class SangriaPageMarketPlaceExtension extends Extension {
 	private static $allowed_actions = [
 	    'ViewReviews',
         'ViewPoweredOpenStackProducts',
-        'ViewPoweredOpenStackProductDetail'
+        'ViewPoweredOpenStackProductDetail',
+        'ViewOpenStackProductsByRegion',
     ];
 
 	public function onBeforeInit(){
@@ -157,6 +158,31 @@ final class SangriaPageMarketPlaceExtension extends Extension {
     public function getNotApprovedReviews(){
         list($list,$size) = $this->repository->getAllNotApproved(0,1000);
         return new ArrayList($list);
+    }
+
+    public function ViewOpenStackProductsByRegion(){
+        Requirements::clear();
+        // css
+
+        Requirements::css('marketplace/ui/source/css/sangria.css');
+        Requirements::css("themes/openstack/bower_assets/bootstrap/dist/css/bootstrap.min.css");
+        Requirements::css("themes/openstack/bower_assets/fontawesome/css/font-awesome.min.css");
+        Requirements::css('//fonts.googleapis.com/css?family=Open+Sans:300,400,700');
+
+        // js
+        Requirements::javascript("themes/openstack/bower_assets/jquery/dist/jquery.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jquery-migrate/jquery-migrate.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/bootstrap/dist/js/bootstrap.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jquery-cookie/jquery.cookie.js");
+        Requirements::javascript('themes/openstack/bower_assets/jquery-mousewheel/jquery.mousewheel.js');
+        Requirements::javascript('themes/openstack/bower_assets/php-date-formatter/js/php-date-formatter.min.js');
+
+        return $this->owner->getViewer('ViewOpenStackProductsByRegion')->process
+            (
+                $this->owner->Customise([
+                    'InteropProgramVersions' => InteropProgramVersion::get()->sort('Name', 'ASC')
+                ])
+            );
     }
 
 }

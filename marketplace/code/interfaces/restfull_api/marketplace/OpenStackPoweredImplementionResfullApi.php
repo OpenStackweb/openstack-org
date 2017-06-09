@@ -52,7 +52,7 @@ final class OpenStackPoweredImplementionResfullApi extends AbstractRestfulJsonAp
      */
     protected function authorize(){
         //check permissions
-        if(!$this->current_user->isMarketPlaceAdmin())
+        if(!Permission::check("SANGRIA_ACCESS"))
             return false;
         return true;
     }
@@ -108,6 +108,7 @@ final class OpenStackPoweredImplementionResfullApi extends AbstractRestfulJsonAp
                     'company'              => trim($item->CompanyName),
                     'required_for_compute' => boolval($item->CompatibleWithCompute),
                     'required_for_storage' => boolval($item->CompatibleWithStorage),
+                    'federated_identity'   => boolval($item->CompatibleWithFederatedIdentity),
                     'program_version_id'   => intval($item->ProgramVersionID),
                     'expiry_date'          => $item->ExpiryDate,
                     'edited_by'            => trim($item->LastEditedBy),
@@ -158,6 +159,7 @@ final class OpenStackPoweredImplementionResfullApi extends AbstractRestfulJsonAp
                     'Company'              => trim($item->CompanyName),
                     'Required For Compute' => intval($item->CompatibleWithCompute),
                     'Required For Storage' => intval($item->CompatibleWithStorage),
+                    'Federated Identity'   => intval($item->CompatibleWithFederatedIdentity),
                     'Program Version Name' => trim($item->ProgramVersionName),
                     'Expiry Date'          => $item->ExpiryDate,
                     'Edited By'            => trim($item->LastEditedBy),

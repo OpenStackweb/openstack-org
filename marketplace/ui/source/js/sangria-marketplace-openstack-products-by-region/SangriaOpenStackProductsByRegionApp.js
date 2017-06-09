@@ -1,56 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchAllProducts, updateProductField, exportAllProducts, navigateToProductDetails } from './actions';
+import { fetchAllProducts, exportAllProducts } from './actions';
 import { AjaxLoader } from '../../../../../ui-core/ui/source/js/components/ajaxloader';
 
 const SortDirectionAsc  = 'ASC';
 const SortDirectionDesc = 'DESC';
-
-class DatePicker extends React.Component {
-    componentDidMount() {
-        let _this = this;
-        $(this.textInput).datetimepicker({
-            format: 'Y-m-d H:i:00',
-            step: 1,
-            formatDate: 'Y-m-d',
-            formatTime: 'H:i:00',
-            defaultTime: '23:59:00',
-            onSelectTime:(dp,input) => {
-                console.log(`onChangeDateTime ${input.val()}`);
-                let event = new Event('input', { bubbles: true });
-                _this.textInput.dispatchEvent(event);
-            }
-        });
-    }
-
-    componentWillUnmount() {
-        $(this.textInput).datetimepicker('destroy');
-    }
-
-    render() {
-        const props = this.props;
-        return <input ref={(input) => { this.textInput = input; }} placeholder="Enter a Date" type="text" {...props} />
-    }
-}
-
-class OpenStackProgramVersionSelector extends React.Component{
-
-    render() {
-        let options                             = [];
-        let {onChange, className, defaultValue} = this.props;
-
-        for (let program_version of this.props.items) {
-            options.push(<option key={program_version.id} value={program_version.id}>{program_version.name}</option>)
-        }
-
-        return (
-            <select defaultValue={defaultValue} className={className} onChange={onChange}>
-                <option value="">--SELECT ONE --</option>
-                {options}
-            </select>
-        );
-    }
-}
 
 class FilterLink extends React.Component {
 
@@ -68,7 +22,7 @@ class FilterLink extends React.Component {
     }
 }
 
-class SangriaOpenStackPoweredProductsApp extends React.Component
+class SangriaOpenStackProductsByRegionApp extends React.Component
 {
     constructor(props) {
         super(props);
@@ -143,55 +97,10 @@ class SangriaOpenStackPoweredProductsApp extends React.Component
         this.setState({...this.state, search_term: val, current_page: 1});
     }
 
-    onChangeRequiredForCompute(e, product){
-        let target = e.currentTarget;
-        let val    = target.checked;
-        console.log(`onChangeRequiredForCompute value ${val} productId ${product.id}`);
-        this.props.updateProduct(product, 'required_for_compute', val);
-    }
-
-    onChangeRequiredForStorage(e, product){
-        let target = e.currentTarget;
-        let val    = target.checked;
-        console.log(`onChangeRequiredForStorage value ${val} productId ${product.id}`);
-        this.props.updateProduct(product, 'required_for_storage', val);
-    }
-
-    onChangeFederatedIdentity(e, product){
-        let target = e.currentTarget;
-        let val    = target.checked;
-        console.log(`onChangeFederatedIdentity value ${val} productId ${product.id}`);
-        this.props.updateProduct(product, 'federated_identity', val);
-    }
-
-    onChangeProgramVersion(e, product){
-        let target             = e.currentTarget;
-        let val                = target.value;
-        console.log(`onChangeProgramVersion value ${val} productId ${product.id}`);
-        this.props.updateProduct(product, 'program_version_id', val);
-    }
-
-    onChangeExpiryDate(e, product){
-        let target     = e.currentTarget;
-        let val        = target.value;
-        console.log(`onChangeExpiryDate value ${val} productId ${product.id}`);
-        this.props.updateProduct(product, 'expiry_date', val);
-    }
-
-    onShowStatusFilter(e, status){
-        e.preventDefault();
-        this.setState({...this.state, show_all: status == 'ALL' ? 1: 0, current_page: 1 });
-    }
-
     onExport(e){
         e.preventDefault();
         console.log(`export type ${this.state.type}`);
         this.props.exportProducts(this.state.show_all, this.buildSort(), this.state.type, this.state.search_term);
-    }
-
-    navigate2ProductDetails(e, product){
-        e.preventDefault();
-        this.props.navigate2ProductDetails(product);
     }
 
     onChangePageSize(e) {
@@ -228,18 +137,9 @@ class SangriaOpenStackPoweredProductsApp extends React.Component
 
         return (
             <div>
-                <h3>OpenStack Powered Products</h3>
+                <h3>OpenStack Products By Region</h3>
                 <div className="row" style={{ marginBottom: "25px"}}>
                     <div className="col-md-12">
-                        <span>Show: </span>
-                        <FilterLink onClick={(e) => this.onShowStatusFilter(e, 'ALL')} filter='ALL' currentFilter={this.state.show_all == 1 ? 'ALL' : 'EXPIRED' }>
-                            All
-                        </FilterLink>
-                        {' | '}
-                        <FilterLink onClick={(e) => this.onShowStatusFilter(e, 'EXPIRED')} filter='EXPIRED' currentFilter={this.state.show_all == 1 ? 'ALL' : 'EXPIRED' }>
-                            Expired
-                        </FilterLink>
-                        {' | '}
                         <button onClick={(e) => this.onExport(e)}>Export</button>
                     </div>
                 </div>
@@ -272,17 +172,11 @@ class SangriaOpenStackPoweredProductsApp extends React.Component
                             </a>
                         </th>
                         <th>Company</th>
-                        <th>Required for Compute</th>
-                        <th>Required for Storage</th>
-                        <th>Federated Identity</th>
-                        <th>Program Version Compatibility</th>
-                        <th>
-                            <a title="Order by Expiry Date" onClick={(e) => this.onChangeSorting(e, 'expiry_date')} href="#">
-                            { filterExpiryDate }&nbsp;Expiry Date (CDT)
-                            </a>
-                        </th>
-                        <th>Last Edited By</th>
-                        <th>&nbsp;</th>
+                        <th>City</th>
+                        <th>Country</th>
+                        <th>Region</th>
+                        <th>Contacts</th>
+                        <th>Notes</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -302,25 +196,19 @@ class SangriaOpenStackPoweredProductsApp extends React.Component
                                     {product.company}
                                 </td>
                                 <td>
-                                    <input type="checkbox" defaultChecked={product.required_for_compute} onChange={(e) => this.onChangeRequiredForCompute(e, product)}/>
+                                    {product.city}
                                 </td>
                                 <td>
-                                    <input type="checkbox" defaultChecked={product.required_for_storage} onChange={(e) => this.onChangeRequiredForStorage(e, product)}/>
+                                    {product.country}
                                 </td>
                                 <td>
-                                    <input type="checkbox" defaultChecked={product.federated_identity} onChange={(e) => this.onChangeFederatedIdentity(e, product)}/>
+                                    {product.region}
                                 </td>
                                 <td>
-                                    <OpenStackProgramVersionSelector className="form-control" items={this.props.program_versions} defaultValue={product.program_version_id} onChange={(e) => this.onChangeProgramVersion(e, product)} />
+                                    {product.admins}
                                 </td>
                                 <td>
-                                    <DatePicker className="expiry-date-selector form-control" defaultValue={product.expiry_date} onChange={(e) => this.onChangeExpiryDate(e, product)} />
-                                </td>
-                                <td>
-                                    {product.edited_by}
-                                </td>
-                                <td>
-                                    <button onClick={(e) => this.navigate2ProductDetails(e, product)} >Detail</button>
+                                    {product.notes}
                                 </td>
                             </tr>
                         )
@@ -359,16 +247,8 @@ export default connect (
             console.log('fetchPage');
             return dispatch(fetchAllProducts({page, page_size, show_all, order, type, search_term}));
         },
-        updateProduct(product, field, value){
-            let payload    = {};
-            payload[field] = value;
-            return dispatch(updateProductField({ product_id: product.id}, payload));
-        },
         exportProducts(show_all = 1, order = '', type = 'ALL', search_term = ''){
             return dispatch(exportAllProducts({show_all, order, type, search_term}));
-        },
-        navigate2ProductDetails(product){
-            return dispatch(navigateToProductDetails(product.id));
         }
     })
-)(SangriaOpenStackPoweredProductsApp);
+)(SangriaOpenStackProductsByRegionApp);

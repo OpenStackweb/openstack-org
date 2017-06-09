@@ -1,0 +1,113 @@
+jobs:
+  - name: "PullCLAFromGerritTask"
+    cron_expression: "00 01 * * *"
+    enabled: 1
+
+  - name: "EventbriteSummitTicketTypeConciliation"
+    params: "summit_external_id=32888262679"
+    cron_expression: "00 01 * * *"
+    enabled: 1
+
+  - name: "PullCommitsFromGerritTask"
+    cron_expression: "00 01 * * *"
+    enabled: 1
+
+  - name: "UpdateFeedTask"
+    cron_expression: "0 * * * *" # run every hour
+    enabled: 1
+
+  - name: "IngestCOAFilesTask"
+    cron_expression: "0 * * * *" # run every hour
+    enabled: 1
+
+  - name: "EventRegistrationRequestDigestTask"
+    params: "batch_size=15"
+    cron_expression: "20 */3 * * *" # run each 3 hours , past 20 minutes from hour
+    enabled: 1
+
+  - name: "JobRegistrationRequestPurgeTask"
+    cron_expression: "00 03 * * *" # run at 0300 AM every day
+    enabled: 1
+
+  - name: "JobRegistrationRequestDigestTask"
+    params: "batch_size=15"
+    cron_expression: "00 06 * * *" # run at 0600 AM every day
+    enabled: 1
+
+  - name: "DeploymentSurveyTask"
+    params: "batch_size=15"
+    cron_expression: "00 06 * * *" # run at 0600 AM every day
+    enabled: 1
+
+  - name: "SummitEventSetAvgRateTask"
+    params: "summit_id=22"
+    cron_expression: "*/10 * * * *" # run every 10 minutes
+    enabled: 1
+
+  - name: "NewsArticlesUpdateTask"
+    cron_expression: "*/10 * * * *" # run every 10 minutes
+    enabled: 1
+
+  - name: "EventbriteEventConsumerTask"
+    params: "batch_size=100"
+    cron_expression: "*/15 * * * *" # run every 15 minutes
+    enabled: 1
+
+  - name: "RssEventsDigestTask"
+    cron_expression: "*/5 * * * *" # run every 5 minutes
+    enabled: 1
+
+  - name: "RssNewsDigestTask"
+    cron_expression: "*/5 * * * *" # run every 5 minutes
+    enabled: 1
+
+  - name: "SummitPushNotificationSenderTask"
+    cron_expression: "* * * * *" # run every minute
+    enabled: 1
+
+  - name: "IngestOpenStackComponentsDataCronTask"
+    cron_expression: "00 23 * * *" # run every day at 2300
+    enabled: 1
+
+  - name: "UpdateDriversTask"
+    cron_expression: "00 23 * * *" # run every day at 2300
+    enabled: 1
+
+  - name: "AUCMetricTask"
+    cron_expression: "00 02 * * *" # run every day at 0200 AM
+    enabled: 1
+
+  - name: "EventbriteSummitOrderConciliation"
+    params: "summit_external_id=32888262679"
+    cron_expression: "00 02 * * *" # run every day at 0200 AM
+    enabled: 1
+
+  - name: "SummitVideoViewTask"
+    cron_expression: "05 * * * *"
+    enabled: 1
+
+  - name: "SummitVideoProcessingTask"
+    cron_expression: "*/5 * * * *" # run every 5 minutes
+    enabled: 1
+
+  - name: "SendGridEmailSenderTask"
+    cron_expression: "* * * * *" # run every minute
+    enabled: 1
+
+  - name: "MarketplaceUpdatesDigestTask"
+    cron_expression: "0 8 * * *"
+    enabled: 1
+
+  - name: "RevocationNotificationSenderTask"
+    cron_expression: "*/5 * * * *"
+    enabled: 0
+
+  - name: "RoomMetricsIngestionTask"
+    params: "summit_id=7"
+    cron_expression: "*/1 * * * *"
+    enabled: 0 # only meant to enabled on summit time
+
+  - name: "RevocationExecutorTask"
+    params: "batch_size=10000"
+    cron_expression: "59 11 * * *"
+    enabled: 0
