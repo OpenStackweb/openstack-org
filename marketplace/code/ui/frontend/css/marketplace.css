@@ -216,7 +216,9 @@ table.marketplace-services-table td:last-child i.none {
 
 .test-details-list.open {
     max-height: 1000px;
-    transition: max-height 1s ease; }
+    transition: max-height 1s ease;
+    overflow: auto;
+}
 
 .test-details-list table {
     width: 90%;

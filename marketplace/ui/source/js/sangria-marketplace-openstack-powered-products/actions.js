@@ -11,7 +11,7 @@
  * limitations under the License.
  **/
 
-import { getRequest, createAction } from "../generic/actions";
+import { getRequest, putRequest, createAction } from "../generic/actions";
 import URI from "urijs";
 
 export const RECEIVE_PRODUCTS_PAGE = 'RECEIVE_PRODUCTS_PAGE';

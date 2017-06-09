@@ -22,10 +22,11 @@ class OpenStackImplementation
 
     // OpenStack Powered Program attributes
     static $db = [
-        'CompatibleWithCompute' => 'Boolean',
-        'CompatibleWithStorage' => 'Boolean',
-        'ExpiryDate'            => 'SS_Datetime',
-        'Notes'                 => 'Text',
+        'CompatibleWithCompute'             => 'Boolean',
+        'CompatibleWithStorage'             => 'Boolean',
+        'ExpiryDate'                        => 'SS_Datetime',
+        'Notes'                             => 'Text',
+        'CompatibleWithFederatedIdentity'   => 'Boolean',
     ];
 
     // OpenStack Powered Program attributes
@@ -50,6 +51,7 @@ class OpenStackImplementation
     private static $defaults = [
         'CompatibleWithCompute' => false,
         'CompatibleWithStorage' => false,
+        'CompatibleWithFederatedIdentity' => false,
     ];
 
     /**
@@ -164,12 +166,30 @@ class OpenStackImplementation
     /***
      * @return bool
      */
+    public function isCompatibleWithFederatedIdentity()
+    {
+        return (bool)$this->getField('CompatibleWithFederatedIdentity');
+    }
+
+    /**
+     * @param bool $compatible
+     * @return void
+    */
+    public function setCompatibleWithFederatedIdentity($compatible)
+    {
+        $this->setField('CompatibleWithFederatedIdentity', $compatible);
+    }
+
+    /***
+     * @return bool
+     */
     public function isOpenStackPowered()
     {
         $storage  = $this->isCompatibleWithStorage();
         $compute  = $this->isCompatibleWithCompute();
         $platform = $this->isCompatibleWithPlatform();
-        return ($storage || $compute || $platform ) && !$this->isOpenStackPoweredExpired();
+        $identity = $this->isCompatibleWithFederatedIdentity();
+        return ($storage || $compute || $platform || $identity) && !$this->isOpenStackPoweredExpired();
     }
 
     /**

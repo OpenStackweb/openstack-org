@@ -157,6 +157,13 @@ class SangriaOpenStackPoweredProductsApp extends React.Component
         this.props.updateProduct(product, 'required_for_storage', val);
     }
 
+    onChangeFederatedIdentity(e, product){
+        let target = e.currentTarget;
+        let val    = target.checked;
+        console.log(`onChangeFederatedIdentity value ${val} productId ${product.id}`);
+        this.props.updateProduct(product, 'federated_identity', val);
+    }
+
     onChangeProgramVersion(e, product){
         let target             = e.currentTarget;
         let val                = target.value;
@@ -267,6 +274,7 @@ class SangriaOpenStackPoweredProductsApp extends React.Component
                         <th>Company</th>
                         <th>Required for Compute</th>
                         <th>Required for Storage</th>
+                        <th>Federated Identity</th>
                         <th>Program Version Compatibility</th>
                         <th>
                             <a title="Order by Expiry Date" onClick={(e) => this.onChangeSorting(e, 'expiry_date')} href="#">
@@ -298,6 +306,9 @@ class SangriaOpenStackPoweredProductsApp extends React.Component
                                 </td>
                                 <td>
                                     <input type="checkbox" defaultChecked={product.required_for_storage} onChange={(e) => this.onChangeRequiredForStorage(e, product)}/>
+                                </td>
+                                <td>
+                                    <input type="checkbox" defaultChecked={product.federated_identity} onChange={(e) => this.onChangeFederatedIdentity(e, product)}/>
                                 </td>
                                 <td>
                                     <OpenStackProgramVersionSelector className="form-control" items={this.props.program_versions} defaultValue={product.program_version_id} onChange={(e) => this.onChangeProgramVersion(e, product)} />
