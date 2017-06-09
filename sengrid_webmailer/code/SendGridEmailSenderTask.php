@@ -69,7 +69,7 @@ final class SendGridEmailSenderTask extends CronTask
             });
 
             $finish_time = time() - $init_time;
-            echo 'processed records ' . $processed. ' - time elapsed : '.$finish_time. ' seconds.';
+            echo 'processed records ' . $processed. ' - time elapsed : '.$finish_time. ' seconds.'.PHP_EOL;
         }
         catch(Exception $ex)
         {

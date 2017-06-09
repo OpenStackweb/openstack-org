@@ -47,7 +47,8 @@
     "doctrine/common": "2.6.2",
     "mobiledetect/mobiledetectlib": "^2.8",
     "gettext/gettext": "^4.3",
-    "google/recaptcha": "^1.1@dev"
+    "google/recaptcha": "^1.1@dev",
+    "peppeocchi/php-cron-scheduler": "dev-master"
   },
   "require-dev": {
     "phpunit/PHPUnit": "~3.7@stable",
