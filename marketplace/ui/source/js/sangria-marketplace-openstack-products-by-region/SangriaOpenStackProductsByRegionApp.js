@@ -140,7 +140,7 @@ class SangriaOpenStackProductsByRegionApp extends React.Component
                 <h3>OpenStack Products By Region</h3>
                 <div className="row" style={{ marginBottom: "25px"}}>
                     <div className="col-md-12">
-                        <button onClick={(e) => this.onExport(e)}>Export</button>
+                        <button className="btn btn-sm btn-default" onClick={(e) => this.onExport(e)}>Export</button>
                     </div>
                 </div>
                 <div className="row">
