@@ -21,6 +21,7 @@ interface IRegionalServiceRepository
      * @param bool $show_all
      * @param null $search_term
      * @param string $service_type
+     * @param string $service_region
      * @return array
      */
     function getAllByPage
@@ -30,7 +31,10 @@ interface IRegionalServiceRepository
         $order       = '',
         $show_all    = true,
         $search_term = null,
-        $service_type = 'ALL'
+        $service_type = 'ALL',
+        $service_region = 'ALL'
     );
+
+    function getAllRegions();
 
 }

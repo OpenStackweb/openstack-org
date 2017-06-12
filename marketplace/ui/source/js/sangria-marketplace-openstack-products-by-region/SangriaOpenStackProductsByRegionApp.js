@@ -32,6 +32,7 @@ class SangriaOpenStackProductsByRegionApp extends React.Component
             current_page: 1,
             page_size: 25,
             show_all : 1,
+            region: 'ALL',
             type: 'ALL',
             search_term: '',
         }
@@ -56,12 +57,13 @@ class SangriaOpenStackProductsByRegionApp extends React.Component
             prevState.sort_direction != this.state.sort_direction ||
             prevState.sort_field != this.state.sort_field ||
             prevState.current_page != this.state.current_page ||
+            prevState.region != this.state.region ||
             prevState.type != this.state.type ||
             prevState.search_term != this.state.search_term ||
             prevState.show_all != this.state.show_all ||
             prevState.page_size != this.state.page_size
         )
-            this.props.fetchPage(this.state.current_page, this.state.page_size, this.state.show_all, this.buildSort(), this.state.type, this.state.search_term);
+            this.props.fetchPage(this.state.current_page, this.state.page_size, this.state.show_all, this.buildSort(), this.state.region, this.state.type, this.state.search_term);
     }
 
     onChangeSorting(e, property){
@@ -83,6 +85,13 @@ class SangriaOpenStackProductsByRegionApp extends React.Component
         this.setState({...this.state, current_page});
     }
 
+    onRegionFilterChange(e){
+        let target = e.currentTarget;
+        let val    = target.value;
+        console.log(`onRegionFilterChange value ${val}`);
+        this.setState({...this.state, region: val, current_page: 1});
+    }
+
     onProductTypeFilterChange(e){
         let target = e.currentTarget;
         let val    = target.value;
@@ -100,7 +109,7 @@ class SangriaOpenStackProductsByRegionApp extends React.Component
     onExport(e){
         e.preventDefault();
         console.log(`export type ${this.state.type}`);
-        this.props.exportProducts(this.state.show_all, this.buildSort(), this.state.type, this.state.search_term);
+        this.props.exportProducts(this.state.show_all, this.buildSort(), this.state.region, this.state.type, this.state.search_term);
     }
 
     onChangePageSize(e) {
@@ -144,7 +153,7 @@ class SangriaOpenStackProductsByRegionApp extends React.Component
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-md-6">
+                    <div className="col-md-4">
                         <select id="filterProductType" className="form-control" onChange={(e) => this.onProductTypeFilterChange(e)}>
                             <option value="ALL">--ALL--</option>
                             <option value="DISTRIBUTION">Distributions</option>
@@ -154,7 +163,16 @@ class SangriaOpenStackProductsByRegionApp extends React.Component
                             <option value="PRIVATECLOUD">Private Cloud</option>
                         </select>
                     </div>
-                    <div className="col-md-6">
+                    <div className="col-md-4">
+                        <select id="filterRegion" className="form-control" onChange={(e) => this.onRegionFilterChange(e)}>
+                            <option value="ALL">--ALL--</option>
+                            {this.props.regions.map(
+                                region =>
+                                <option key={region.name} value={region.name}>{region.name}</option>
+                            )}
+                        </select>
+                    </div>
+                    <div className="col-md-4">
                         <input type="text" className="form-control" onChange={(e) => this.onFilterByCompanyName(e) } placeholder="Company Name" id="filterProductCompany"/>
                     </div>
                 </div>
@@ -243,12 +261,12 @@ export default connect (
         }
     },
     dispatch => ({
-        fetchPage (page = 1, page_size = 25, show_all = 1, order = '', type = 'ALL', search_term = '') {
+        fetchPage (page = 1, page_size = 25, show_all = 1, order = '', region = 'ALL', type = 'ALL', search_term = '') {
             console.log('fetchPage');
-            return dispatch(fetchAllProducts({page, page_size, show_all, order, type, search_term}));
+            return dispatch(fetchAllProducts({page, page_size, show_all, order, region, type, search_term}));
         },
-        exportProducts(show_all = 1, order = '', type = 'ALL', search_term = ''){
-            return dispatch(exportAllProducts({show_all, order, type, search_term}));
+        exportProducts(show_all = 1, order = '', region = 'ALL', type = 'ALL', search_term = ''){
+            return dispatch(exportAllProducts({show_all, order, region, type, search_term}));
         }
     })
 )(SangriaOpenStackProductsByRegionApp);

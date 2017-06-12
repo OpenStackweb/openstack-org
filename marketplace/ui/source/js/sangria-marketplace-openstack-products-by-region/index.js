@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function init() {
     if (document.getElementById(containerId)) {
         render(
             <Provider store={store}>
-                <SangriaOpenStackProductsByRegionApp page_size={pageSize} program_versions={program_versions}/>
+                <SangriaOpenStackProductsByRegionApp page_size={pageSize} regions={regions}/>
             </Provider>,
             document.getElementById(containerId)
         );

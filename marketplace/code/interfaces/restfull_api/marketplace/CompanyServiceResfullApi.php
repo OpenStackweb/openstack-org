@@ -71,6 +71,7 @@ final class CompanyServiceResfullApi extends AbstractRestfulJsonApi
 
             $order        = (isset($query_string['order'])) ? Convert::raw2sql($query_string['order']) : '';
             $search_term  = (isset($query_string['search_term'])) ? Convert::raw2sql($query_string['search_term']) : '';
+            $service_region = (isset($query_string['region'])) ? Convert::raw2sql($query_string['region']) : '';
             $service_type = (isset($query_string['type'])) ? Convert::raw2sql($query_string['type']) : '';
             $show_all     = boolval((isset($query_string['show_all'])) ? Convert::raw2sql($query_string['show_all']) : true);
 
@@ -80,7 +81,8 @@ final class CompanyServiceResfullApi extends AbstractRestfulJsonApi
                 $order,
                 $show_all,
                 $search_term,
-                $service_type
+                $service_type,
+                $service_region
             );
 
             $items = [];

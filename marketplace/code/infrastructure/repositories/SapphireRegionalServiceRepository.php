@@ -38,7 +38,8 @@ final class SapphireRegionalServiceRepository
         $order        = null,
         $show_all     = true,
         $search_term  = null,
-        $service_type = 'ALL'
+        $service_type = 'ALL',
+        $service_region = 'ALL'
     )
     {
         $offset    = ($page - 1 ) * $page_size;
@@ -78,7 +79,12 @@ final class SapphireRegionalServiceRepository
 
         if(!empty($search_term)){
             if(!empty($where)) $where .= ' AND ';
-            $where .= " (Company.Name LIKE '%{$search_term}%' OR CompanyService.Name '%{$search_term}%') ";
+            $where .= " (Company.Name LIKE '%{$search_term}%' OR CompanyService.Name LIKE '%{$search_term}%') ";
+        }
+
+        if(!empty($service_region) && $service_region != 'ALL'){
+            if(!empty($where)) $where .= ' AND ';
+            $where .= " (Region.Name = '{$service_region}' OR DCR.Name = '{$service_region}' OR DCR2.Name = '{$service_region}') ";
         }
 
         if(!empty($where)) $where = ' WHERE '.$where;
@@ -125,5 +131,19 @@ SQL;
         }
 
         return [$list, $count];
+    }
+
+    function getAllRegions() {
+        $query = <<<SQL
+SELECT DISTINCT Q1.Name FROM (
+SELECT Name FROM Region UNION SELECT Name FROM DataCenterRegion ) Q1 ORDER BY Name;
+SQL;
+        $list = new ArrayList();
+        foreach(DB::query($query) as $row)
+        {
+            $list->push(new ArrayData($row));
+        }
+
+        return $list;
     }
 }

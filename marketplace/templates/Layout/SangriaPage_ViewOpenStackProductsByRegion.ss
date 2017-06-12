@@ -1,10 +1,9 @@
 <div id="openstack-products-by-region-app"></div>
 <script>
 var pageSize         = 25;
-var program_versions = [
-    <% loop InteropProgramVersions %>
+var regions = [
+    <% loop Regions %>
         {
-            id: $ID,
             name: '{$Name}'
         },
     <% end_loop %>

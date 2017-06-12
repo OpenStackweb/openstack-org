@@ -179,10 +179,13 @@ final class SangriaPageMarketPlaceExtension extends Extension {
         Requirements::javascript('themes/openstack/bower_assets/php-date-formatter/js/php-date-formatter.min.js');
         Requirements::javascript('themes/openstack/javascript/jquery.tablednd.js');
 
+        $repository = new SapphireRegionalServiceRepository();
+        $regions = $repository->getAllRegions();
+
         return $this->owner->getViewer('ViewOpenStackProductsByRegion')->process
             (
                 $this->owner->Customise([
-                    'InteropProgramVersions' => InteropProgramVersion::get()->sort('Name', 'ASC')
+                    'Regions'                => $regions
                 ])
             );
     }
