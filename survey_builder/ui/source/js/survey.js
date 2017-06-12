@@ -24,16 +24,16 @@ import LanguageSelector from '../../../../gettext/ui/source/js/components/Langua
 // add supported languages here
 
 const languages = [
-    //"es_ES",
+    //"es_ES", // Spanish
     "en_US",
     "zh_CN", // Chinese Traditional
     "zh_TW", // Chinese Mandarin
     "ko_KR", // Korean
-    //"ja_JP",
-    //"id_ID",
-    //"fr_FR",
+    //"ja_JP", // Japanese
+    "id_ID", // Indonesian
+    //"fr_FR", // French
     "de_DE", // German
-    //"ru_RU",
+    //"ru_RU", // Russian
 ];
 // get language cookie, is none, then default is en_US
 var lang = $.cookie('GetTextLocale');

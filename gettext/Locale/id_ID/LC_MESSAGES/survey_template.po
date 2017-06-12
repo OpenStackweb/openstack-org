@@ -4,7 +4,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"PO-Revision-Date: 2017-05-06 06:11+0000\n"
+"PO-Revision-Date: 2017-06-09 02:25+0000\n"
 "Last-Translator: suhartono <cloudsuhartono@gmail.com>\n"
 "Language-Team: Indonesian\n"
 "Language: id\n"
@@ -40,19 +40,19 @@ msgid "-- Select One --"
 msgstr "-- Select One --"
 
 msgid "App developer / deployer"
-msgstr ""
+msgstr "Pengembang aplikasi / deployer"
 
 msgid "CIO/ IT infrastructure manager"
-msgstr ""
+msgstr "Manajer infrastruktur CIO / IT"
 
 msgid "Cloud architect"
-msgstr ""
+msgstr "Arsitek awan"
 
 msgid "Cloud operator or sys-admin"
-msgstr ""
+msgstr "Operator awan atau sys-admin"
 
 msgid "OpenStack upstream developer"
-msgstr ""
+msgstr "Pengembang hulu OpenStack"
 
 msgid "Other"
 msgstr "Lainnya"
@@ -141,40 +141,40 @@ msgid "Your Organization's Primary IT Focus"
 msgstr "Fokus Utama TI Organisasi Anda"
 
 msgid "Big data/ data analytics"
-msgstr ""
+msgstr "Analisis data / Big data"
 
 msgid "DevOps consulting/ delivery"
-msgstr ""
+msgstr "Konsultasi / pengiriman DevOps"
 
 msgid "HPC"
-msgstr ""
+msgstr "HPC"
 
 msgid "Infrastructure provider (compute, network, and/or storage)"
-msgstr ""
+msgstr "Penyedia infrastruktur (komputasi, jaringan, dan / atau penyimpanan)"
 
 msgid "Media & entertainment"
-msgstr ""
+msgstr "Media & hiburan"
 
 msgid "Telco"
-msgstr ""
+msgstr "Telco"
 
 msgid "Data center/ co-location services"
-msgstr ""
+msgstr "Layanan data center / co-location"
 
 msgid "Consulting/ professional services"
-msgstr ""
+msgstr " Layanan profesional / konsultasi "
 
 msgid "Education/ training services"
-msgstr ""
+msgstr "Layanan pendidikan / pelatihan"
 
 msgid "Public/ hosted cloud service provider"
-msgstr ""
+msgstr "Penyedia layanan awan publik / host"
 
 msgid "Private cloud provider"
-msgstr ""
+msgstr "Penyedia awan private"
 
 msgid "Systems integrator"
-msgstr ""
+msgstr "Sistem integrator"
 
 msgid "Other IT activity"
 msgstr "Kegiatan TI lainnya"
@@ -301,25 +301,25 @@ msgstr ""
 "yang berlaku </em> </font>"
 
 msgid "Bare metal"
-msgstr ""
+msgstr "Bare metal"
 
 msgid "Containers"
-msgstr ""
+msgstr "Containers"
 
 msgid "Hardware accelerators (e.g. FPGAs, GPGPUs, ASICs)"
-msgstr ""
+msgstr "Akselerator perangkat keras (contoh  FPGAs, GPGPUs, ASICs)"
 
 msgid "Hybrid cloud"
-msgstr ""
+msgstr "Hybrid cloud"
 
 msgid "Internet of Things"
-msgstr ""
+msgstr "Internet of Things"
 
 msgid "Platform as a Service"
-msgstr ""
+msgstr "Platform as a Service"
 
 msgid "SDN/NFV"
-msgstr ""
+msgstr "SDN/NFV"
 
 msgid "Please specify:"
 msgstr "Harap merinci:"
@@ -490,37 +490,37 @@ msgstr ""
 "That Apply</em></font>"
 
 msgid "Trunk / continuous deployment"
-msgstr ""
+msgstr "Trunk / pengerahan terus menerus"
 
 msgid "Newton (2016.2)"
-msgstr ""
+msgstr "Newton (2016.2)"
 
 msgid "Mitaka (2016.2)"
-msgstr ""
+msgstr "Mitaka (2016.2)"
 
 msgid "Liberty (2015.2)"
-msgstr ""
+msgstr "Liberty (2015.2)"
 
 msgid "Kilo (2015.1)"
-msgstr ""
+msgstr "Kilo (2015.1)"
 
 msgid "Juno (2014.2)"
-msgstr ""
+msgstr "Juno (2014.2)"
 
 msgid "Icehouse (2014.1)"
-msgstr ""
+msgstr "Icehouse (2014.1)"
 
 msgid "Havana (2013.2)"
-msgstr ""
+msgstr "Havana (2013.2)"
 
 msgid "Grizzly (2013.1)"
-msgstr ""
+msgstr "Grizzly (2013.1)"
 
 msgid "Folsom (2012.2)"
-msgstr ""
+msgstr "Folsom (2012.2)"
 
 msgid "Essex (2012.1)"
-msgstr ""
+msgstr "Essex (2012.1)"
 
 msgid ""
 "Which workloads are you currently using?<BR><font size=\"-2\"><em>Select All "
@@ -530,47 +530,50 @@ msgstr ""
 "All That Apply</em></font>"
 
 msgid "Big Data Analytics/ Data Mining/ Hadoop, Spark, etc."
-msgstr ""
+msgstr "Big Data Analytics/ Data Mining/ Hadoop, Spark, dll."
 
 msgid "Bio and medical"
-msgstr ""
+msgstr "Bio and medical"
 
 msgid "Business applications (i.e. ERP, CRM, email)"
-msgstr ""
+msgstr "Business applications (i.e. ERP, CRM, email)"
 
 msgid "Database: mySQL, Oracle, etc."
-msgstr ""
+msgstr "Database: mySQL, Oracle, dll"
 
 msgid ""
 "Infrastructure services (i.e. public and private cloud products and "
 "services)"
 msgstr ""
+"Layanan infrastruktur (mis., Produk dan layanan awan publik dan private)"
 
 msgid "Mobile applications and services"
-msgstr ""
+msgstr "Aplikasi dan layanan mobile"
 
 msgid "Network Functions Virtualization"
-msgstr ""
+msgstr "Network Functions Virtualization"
 
 msgid ""
 "Research computing (including High Performance and High Throughput "
 "Computing)"
 msgstr ""
+"Komputasi penelitian (termasuk High Performance dan High Throughput "
+"Computing)"
 
 msgid "SaaS provider/ delivery"
-msgstr ""
+msgstr "Provider/ delivery SaaS"
 
 msgid "Software dev/ test/ QA and CI"
-msgstr ""
+msgstr "Software dev/ test/ QA dan CI"
 
 msgid "Storage/  backup/ archiving"
-msgstr ""
+msgstr "Penyimpanan / backup / pengarsipan"
 
 msgid "Video processing and content delivery"
-msgstr ""
+msgstr "Pengolahan video dan pengiriman konten"
 
 msgid "Web services and e-commerce"
-msgstr ""
+msgstr "Layanan web dan e-commerce"
 
 msgid ""
 "Which projects does this deployment currently use, or are you interested in "
@@ -953,6 +956,12 @@ msgid ""
 " This information is optional, but will be kept confidential and never "
 "published in connection with you or your organization.</p><hr>"
 msgstr ""
+"<p><span style=\"color: #0083c8; font-size: 1.6em;\">Deployment Decisions</"
+"span></p><p>Informasi di bawah ini akan membantu kita memahami pilihan "
+"konfigurasi dan komponen yang paling umum yang digunakan oleh penggunaan "
+"OpenStack. Informasi ini bersifat opsional, namun akan dirahasiakan dan "
+"tidak pernah dipublikasikan sehubungan dengan Anda atau organisasi Anda.</"
+"p><hr>"
 
 msgid ""
 "What packages does this deployment use?<BR><font size=\"-2\"><em>Select All "
@@ -962,16 +971,18 @@ msgstr ""
 "All That Apply</em></font>"
 
 msgid "Unmodified packages from the OS"
-msgstr ""
+msgstr "Paket yang tidak dimodifikasi dari OS"
 
 msgid "Unmodified packages from a non-OS source (e.g. vendor distribution)"
 msgstr ""
+"Paket yang tidak dimodifikasi dari sumber non-OS (misalnya distribusi "
+"vendor)"
 
 msgid "Packages you've modified"
-msgstr ""
+msgstr "Paket yang telah Anda modifikasi"
 
 msgid "Packages you’ve built yourself"
-msgstr ""
+msgstr "Paket yang telah Anda bangun sendiri"
 
 msgid ""
 "If you have modified packages or have built your own packages, why?<BR><font "
@@ -981,16 +992,16 @@ msgstr ""
 "<BR><font size=\"-2\"><em>Select All That Apply</em></font>"
 
 msgid "Need an OpenStack bug fix not in standard packages"
-msgstr ""
+msgstr "Butuh perbaikan bug OpenStack tidak dalam paket standar"
 
 msgid "Need an OpenStack feature not in standard packages"
-msgstr ""
+msgstr "Butuh fitur OpenStack bukan dalam paket standar"
 
 msgid "Standard packages have bugs"
-msgstr ""
+msgstr "Paket standar memiliki bug"
 
 msgid "Standard packages aren't updated quickly enough"
-msgstr ""
+msgstr "Paket standar tidak diperbarui dengan cukup cepat"
 
 msgid ""
 "Which tools are you using to deploy / manage this cluster?<BR><font size=\"-"
@@ -1000,58 +1011,58 @@ msgstr ""
 "<BR><font size=\"-2\"><em>Select All That Apply</em></font>"
 
 msgid "Ansible"
-msgstr ""
+msgstr "Ansible"
 
 msgid "Ansible (LXC)"
-msgstr ""
+msgstr "Ansible (LXC)"
 
 msgid "CFEngine"
-msgstr ""
+msgstr "CFEngine"
 
 msgid "Chef"
-msgstr ""
+msgstr "Chef"
 
 msgid "Container-based orchestration"
-msgstr ""
+msgstr "Container-based orchestration"
 
 msgid "Crowbar"
-msgstr ""
+msgstr "Crowbar"
 
 msgid "DevStack"
-msgstr ""
+msgstr "DevStack"
 
 msgid "Fuel"
-msgstr ""
+msgstr "Fuel"
 
 msgid "Fuel CCP"
-msgstr ""
+msgstr "Fuel CCP"
 
 msgid "Helm"
-msgstr ""
+msgstr "Helm"
 
 msgid "Juju"
-msgstr ""
+msgstr "Juju"
 
 msgid "Kolla-Ansible"
-msgstr ""
+msgstr "Kolla-Ansible"
 
 msgid "Kolla-Kubernetes"
-msgstr ""
+msgstr "Kolla-Kubernetes"
 
 msgid "Mesos"
-msgstr ""
+msgstr "Mesos"
 
 msgid "PackStack"
-msgstr ""
+msgstr "PackStack"
 
 msgid "Puppet"
-msgstr ""
+msgstr "Puppet"
 
 msgid "SaltStack"
-msgstr ""
+msgstr "SaltStack"
 
 msgid "Other Tool"
-msgstr ""
+msgstr "Other Tool"
 
 msgid ""
 "If you are running your OpenStack services inside of containers, which "
@@ -1063,16 +1074,16 @@ msgstr ""
 "em></font>"
 
 msgid "Docker"
-msgstr ""
+msgstr "Docker"
 
 msgid "LXC"
-msgstr ""
+msgstr "LXC"
 
 msgid "LXD"
-msgstr ""
+msgstr "LXD"
 
 msgid "RKT"
-msgstr ""
+msgstr "RKT"
 
 msgid ""
 "Which container orchestration or Platform-as-a-Service (PaaS) tools are you "
@@ -1084,31 +1095,31 @@ msgstr ""
 "><font size=\"-2\"><em>Select All That Apply</em></font>"
 
 msgid "Built our own"
-msgstr ""
+msgstr "Built our own"
 
 msgid "CloudFoundry"
-msgstr ""
+msgstr "CloudFoundry"
 
 msgid "Cloudify"
-msgstr ""
+msgstr "Cloudify"
 
 msgid "Docker Swarm"
-msgstr ""
+msgstr "Docker Swarm"
 
 msgid "Kubernetes"
-msgstr ""
+msgstr "Kubernetes"
 
 msgid "OpenShift"
-msgstr ""
+msgstr "OpenShift"
 
 msgid "OneOps"
-msgstr ""
+msgstr "OneOps"
 
 msgid "Stackato"
-msgstr ""
+msgstr "Stackato"
 
 msgid "Scalr"
-msgstr ""
+msgstr "Scalr"
 
 msgid ""
 "Which <b>OpenStack Compute (Nova)</b> hypervisors are you using?<BR><font "
@@ -1118,37 +1129,37 @@ msgstr ""
 "size=\"-2\"><em>Select All That Apply</em></font>"
 
 msgid "Bare Metal (Ironic)"
-msgstr ""
+msgstr "Bare Metal (Ironic)"
 
 msgid "KVM (x86)"
-msgstr ""
+msgstr "KVM (x86)"
 
 msgid "KVM (ppc64)"
-msgstr ""
+msgstr "KVM (ppc64)"
 
 msgid "Hyper from HyperHQ"
-msgstr ""
+msgstr "Hyper dari HyperHQ"
 
 msgid "Microsoft Hyper-V"
-msgstr ""
+msgstr "Microsoft Hyper-V"
 
 msgid "OpenVZ/Virtuozzo"
-msgstr ""
+msgstr "OpenVZ/Virtuozzo"
 
 msgid "QEMU"
-msgstr ""
+msgstr "QEMU"
 
 msgid "VMware ESX"
-msgstr ""
+msgstr "VMware ESX"
 
 msgid "Xen / XCP"
-msgstr ""
+msgstr "Xen / XCP"
 
 msgid "XenServer"
-msgstr ""
+msgstr "XenServer"
 
 msgid "Other Hypervisors"
-msgstr ""
+msgstr "Other Hypervisors"
 
 msgid ""
 "Which databases are you using for OpenStack components?<br/><font size=\"-"
@@ -1158,31 +1169,31 @@ msgstr ""
 "2\"><em>Select all that apply</em></font>"
 
 msgid "MariaDB"
-msgstr ""
+msgstr "MariaDB"
 
 msgid "MariaDB Galera Cluster"
-msgstr ""
+msgstr "MariaDB Galera Cluster"
 
 msgid "MongoDB"
-msgstr ""
+msgstr "MongoDB"
 
 msgid "MySQL"
-msgstr ""
+msgstr "MySQL"
 
 msgid "MySQL with DRBD"
-msgstr ""
+msgstr "MySQL dengan DRBD"
 
 msgid "MySQL with Galera"
-msgstr ""
+msgstr "MySQL dengan Galera"
 
 msgid "Percona Server"
-msgstr ""
+msgstr "Percona Server"
 
 msgid "Percona XtraDB Cluster"
-msgstr ""
+msgstr "Percona XtraDB Cluster"
 
 msgid "PostgreSQL"
-msgstr ""
+msgstr "PostgreSQL"
 
 msgid "Other database"
 msgstr "Database lainnya"
@@ -1199,40 +1210,40 @@ msgstr ""
 "2\"><em>Select all that apply</em></font>"
 
 msgid "Deltacloud"
-msgstr ""
+msgstr "Deltacloud"
 
 msgid "Do not use/plan to use the OpenStack API"
-msgstr ""
+msgstr "Jangan gunakan / rencanakan untuk menggunakan OpenStack API"
 
 msgid "libcloud (Python)"
-msgstr ""
+msgstr "libcloud (Python)"
 
 msgid "FOG"
-msgstr ""
+msgstr "FOG"
 
 msgid "gophercloud"
-msgstr ""
+msgstr "gophercloud"
 
 msgid "jclouds"
-msgstr ""
+msgstr "jclouds"
 
 msgid "pkgcloud"
-msgstr ""
+msgstr "pkgcloud"
 
 msgid "php-opencloud"
-msgstr ""
+msgstr "php-opencloud"
 
 msgid "OpenStack.net"
-msgstr ""
+msgstr "OpenStack.net"
 
 msgid "OpenStack clients"
-msgstr ""
+msgstr "OpenStack clients"
 
 msgid "Shade"
-msgstr ""
+msgstr "Shade"
 
 msgid "Wrote our own"
-msgstr ""
+msgstr "Menulis sendiri"
 
 msgid "Other toolkits"
 msgstr "Toolkit lainnya"
@@ -1245,19 +1256,19 @@ msgstr ""
 "2\"><em>Select all that apply</em></font>"
 
 msgid "Amazon Web Services"
-msgstr ""
+msgstr "Amazon Web Services"
 
 msgid "Google Compute Engine"
-msgstr ""
+msgstr "Google Compute Engine"
 
 msgid "Microsoft Azure"
-msgstr ""
+msgstr "Microsoft Azure"
 
 msgid "OpenStack Private Cloud"
-msgstr ""
+msgstr "OpenStack Private Cloud"
 
 msgid "OpenStack Public Clouds"
-msgstr ""
+msgstr "OpenStack Public Clouds"
 
 msgid "Other Clouds"
 msgstr "Awan lainnya"
@@ -1294,157 +1305,157 @@ msgstr ""
 "between ML2 drivers and non-ML2 drivers.</em></font>"
 
 msgid "ML2 - Open vSwitch"
-msgstr ""
+msgstr "ML2 - Open vSwitch"
 
 msgid "ML2 - Linux Bridge"
-msgstr ""
+msgstr "ML2 - Linux Bridge"
 
 msgid "OpenContrail or Juniper"
-msgstr ""
+msgstr "OpenContrail or Juniper"
 
 msgid "nova-network"
-msgstr ""
+msgstr "nova-network"
 
 msgid "MidoNet"
-msgstr ""
+msgstr "MidoNet"
 
 msgid "PLUMgrid"
-msgstr ""
+msgstr "PLUMgrid"
 
 msgid "OpenDaylight"
-msgstr ""
+msgstr "OpenDaylight"
 
 msgid "VMWare NSX (formerly Nicira NVP)"
-msgstr ""
+msgstr "VMWare NSX (formerly Nicira NVP)"
 
 msgid "Hyper-V"
-msgstr ""
+msgstr "Hyper-V"
 
 msgid "ML2 - Mellanox"
-msgstr ""
+msgstr "ML2 - Mellanox"
 
 msgid "A10 Networks"
-msgstr ""
+msgstr "A10 Networks"
 
 msgid "Arista"
-msgstr ""
+msgstr "Arista"
 
 msgid "Big Switch"
-msgstr ""
+msgstr "Big Switch"
 
 msgid "Brocade"
-msgstr ""
+msgstr "Brocade"
 
 msgid "Cisco UCS / Nexus"
-msgstr ""
+msgstr "Cisco UCS / Nexus"
 
 msgid "Embrane"
-msgstr ""
+msgstr "Embrane"
 
 msgid "Extreme Networks"
-msgstr ""
+msgstr "Extreme Networks"
 
 msgid "IBM SDN-VE"
-msgstr ""
+msgstr "IBM SDN-VE"
 
 msgid "Linux Bridge"
-msgstr ""
+msgstr "Linux Bridge"
 
 msgid "Mellanox"
-msgstr ""
+msgstr "Mellanox"
 
 msgid "Meta Plugin"
-msgstr ""
+msgstr "Meta Plugin"
 
 msgid "Modular Layer 2 Plugin (ML2)"
-msgstr ""
+msgstr "Modular Layer 2 Plugin (ML2)"
 
 msgid "NEC OpenFlow"
-msgstr ""
+msgstr "NEC OpenFlow"
 
 msgid "Nuage Networks"
-msgstr ""
+msgstr "Nuage Networks"
 
 msgid "One Convergence NVSD"
-msgstr ""
+msgstr "One Convergence NVSD"
 
 msgid "Open vSwitch"
-msgstr ""
+msgstr "Open vSwitch"
 
 msgid "Ruijie Networks"
-msgstr ""
+msgstr "Ruijie Networks"
 
 msgid "Ryu OpenFlow Controller"
-msgstr ""
+msgstr "Ryu OpenFlow Controller"
 
 msgid "ML2 - Alcatel-Lucent Omniswitch"
-msgstr ""
+msgstr "ML2 - Alcatel-Lucent Omniswitch"
 
 msgid "ML2 - Arista"
-msgstr ""
+msgstr "ML2 - Arista"
 
 msgid "ML2 - Big Switch"
-msgstr ""
+msgstr "ML2 - Big Switch"
 
 msgid "ML2 - Brocade VDX/VCS"
-msgstr ""
+msgstr "ML2 - Brocade VDX/VCS"
 
 msgid "ML2 - Calico"
-msgstr ""
+msgstr "ML2 - Calico"
 
 msgid "ML2 - Cisco APIC"
-msgstr ""
+msgstr "ML2 - Cisco APIC"
 
 msgid "ML2 - Cisco DFA"
-msgstr ""
+msgstr "ML2 - Cisco DFA"
 
 msgid "ML2 - Cloudbase Hyper-V"
-msgstr ""
+msgstr "ML2 - Cloudbase Hyper-V"
 
 msgid "ML2 - Freescale SDN"
-msgstr ""
+msgstr "ML2 - Freescale SDN"
 
 msgid "ML2 - Frescale FWaaS"
-msgstr ""
+msgstr "ML2 - Frescale FWaaS"
 
 msgid "ML2 - Fujitsu Converged Fabric Switch"
-msgstr ""
+msgstr "ML2 - Fujitsu Converged Fabric Switch"
 
 msgid "ML2 - Huawei Agile Controller"
-msgstr ""
+msgstr "ML2 - Huawei Agile Controller"
 
 msgid "ML2 - Mellanox SR-IOV"
-msgstr ""
+msgstr "ML2 - Mellanox SR-IOV"
 
 msgid "ML2 - MidoNet"
-msgstr ""
+msgstr "ML2 - MidoNet"
 
 msgid "ML2 - Nuage Networks"
-msgstr ""
+msgstr "ML2 - Nuage Networks"
 
 msgid "ML2 - One Convergence"
-msgstr ""
+msgstr "ML2 - One Convergence"
 
 msgid "ML2 - ONOS"
-msgstr ""
+msgstr "ML2 - ONOS"
 
 msgid "ML2 - OpenDaylight"
-msgstr ""
+msgstr "ML2 - OpenDaylight"
 
 msgid "ML2 - OpenFlow Agent"
-msgstr ""
+msgstr "ML2 - OpenFlow Agent"
 
 msgid "ML2 - Pluribus"
-msgstr ""
+msgstr "ML2 - Pluribus"
 
 msgid "ML2 - Tail-F"
-msgstr ""
+msgstr "ML2 - Tail-F"
 
 msgid "ML2 - VMWare DVS"
-msgstr ""
+msgstr "ML2 - VMWare DVS"
 
 msgid "Other Network Driver"
-msgstr ""
+msgstr "Other Network Driver"
 
 msgid ""
 "Which  <b>OpenStack Identity Service (Keystone)</b> drivers are you "
@@ -1454,25 +1465,25 @@ msgstr ""
 "gunakan?<BR><font size=\"-2\"><em>Select All That Apply</em></font>"
 
 msgid "Active Directory"
-msgstr ""
+msgstr "Active Directory"
 
 msgid "KVS"
-msgstr ""
+msgstr "KVS"
 
 msgid "LDAP"
-msgstr ""
+msgstr "LDAP"
 
 msgid "PAM"
-msgstr ""
+msgstr "PAM"
 
 msgid "SQL (default)"
-msgstr ""
+msgstr "SQL (default)"
 
 msgid "Templated"
-msgstr ""
+msgstr "Templated"
 
 msgid "Other Identity Driver"
-msgstr ""
+msgstr "Driver Identitas Lainnya"
 
 msgid ""
 "Which <b>OpenStack Block Storage (Cinder)</b> drivers are you "
@@ -1482,214 +1493,214 @@ msgstr ""
 "gunakan?<BR><font size=\"-2\"><em>Select All That Apply</em></font>"
 
 msgid "Ceph RBD"
-msgstr ""
+msgstr "Ceph RBD"
 
 msgid "Coraid"
-msgstr ""
+msgstr "Coraid"
 
 msgid "Dell EqualLogic"
-msgstr ""
+msgstr "Dell EqualLogic"
 
 msgid "EMC"
-msgstr ""
+msgstr "EMC"
 
 msgid "GlusterFS"
-msgstr ""
+msgstr "GlusterFS"
 
 msgid "HDS"
-msgstr ""
+msgstr "HDS"
 
 msgid "HP 3PAR"
-msgstr ""
+msgstr "HP 3PAR"
 
 msgid "HP LeftHand"
-msgstr ""
+msgstr "HP LeftHand"
 
 msgid "Huawei"
-msgstr ""
+msgstr "Huawei"
 
 msgid "IBM GPFS"
-msgstr ""
+msgstr "IBM GPFS"
 
 msgid "IBM NAS"
-msgstr ""
+msgstr "IBM NAS"
 
 msgid "IBM Storwize"
-msgstr ""
+msgstr "IBM Storwize"
 
 msgid "IBM XIV / DS8000"
-msgstr ""
+msgstr "IBM XIV / DS8000"
 
 msgid "LVM (default)"
-msgstr ""
+msgstr "LVM (default)"
 
 msgid "NetApp"
-msgstr ""
+msgstr "NetApp"
 
 msgid "Nexenta"
-msgstr ""
+msgstr "Nexenta"
 
 msgid "NFS"
-msgstr ""
+msgstr "NFS"
 
 msgid "ProphetStor"
-msgstr ""
+msgstr "ProphetStor"
 
 msgid "SAN / Solaris"
-msgstr ""
+msgstr "SAN / Solaris"
 
 msgid "Scality"
-msgstr ""
+msgstr "Scality"
 
 msgid "Sheepdog"
-msgstr ""
+msgstr "Sheepdog"
 
 msgid "SolidFire"
-msgstr ""
+msgstr "SolidFire"
 
 msgid "VMWare VMDK"
-msgstr ""
+msgstr "VMWare VMDK"
 
 msgid "Windows Server 2012"
-msgstr ""
+msgstr "Windows Server 2012"
 
 msgid "Xenapi NFS"
-msgstr ""
+msgstr "Xenapi NFS"
 
 msgid "XenAPI Storage Manager"
-msgstr ""
+msgstr "XenAPI Storage Manager"
 
 msgid "Zadara"
-msgstr ""
+msgstr "Zadara"
 
 msgid "Other Block Storage Driver"
-msgstr ""
+msgstr "Block Storage Driver Lainnya"
 
 msgid "Which vendor's products power your OpenStack cloud?"
 msgstr "Produk vendor mana yang mendukung awan OpenStack Anda?"
 
 msgid "99Cloud Inc."
-msgstr ""
+msgstr "99Cloud Inc."
 
 msgid "AppFormix"
-msgstr ""
+msgstr "AppFormix"
 
 msgid "Aptira"
-msgstr ""
+msgstr "Aptira"
 
 msgid "AQORN"
-msgstr ""
+msgstr "AQORN"
 
 msgid "AURO"
-msgstr ""
+msgstr "AURO"
 
 msgid "AWcloud"
-msgstr ""
+msgstr "AWcloud"
 
 msgid "Blue Box"
-msgstr ""
+msgstr "Blue Box"
 
 msgid "Breqwatr"
-msgstr ""
+msgstr "Breqwatr"
 
 msgid "Bright Computing"
-msgstr ""
+msgstr "Bright Computing"
 
 msgid "Canonical"
-msgstr ""
+msgstr "Canonical"
 
 msgid "China Mobile"
-msgstr ""
+msgstr "China Mobile"
 
 msgid "ChinaCloud"
-msgstr ""
+msgstr "ChinaCloud"
 
 msgid "Cisco"
-msgstr ""
+msgstr "Cisco"
 
 msgid "Cloudbase Solutions"
-msgstr ""
+msgstr "Cloudbase Solutions"
 
 msgid "DataCentred"
-msgstr ""
+msgstr "DataCentred"
 
 msgid "Debian"
 msgstr "Debian"
 
 msgid "Dell EMC"
-msgstr ""
+msgstr "Dell EMC"
 
 msgid "EasyStack"
-msgstr ""
+msgstr "EasyStack"
 
 msgid "eNovance"
-msgstr ""
+msgstr "eNovance"
 
 msgid "Hangzhou H3C Technologies Co., Ltd"
-msgstr ""
+msgstr "Hangzhou H3C Technologies Co., Ltd"
 
 msgid "Hewlett Packard Enterprise"
-msgstr ""
+msgstr "Hewlett Packard Enterprise"
 
 msgid "IBM"
-msgstr ""
+msgstr "IBM"
 
 msgid "IO"
-msgstr ""
+msgstr "IO"
 
 msgid "KIO Networks"
-msgstr ""
+msgstr "KIO Networks"
 
 msgid "Mirantis"
-msgstr ""
+msgstr "Mirantis"
 
 msgid "Morphlabs"
-msgstr ""
+msgstr "Morphlabs"
 
 msgid "Oracle"
-msgstr ""
+msgstr "Oracle"
 
 msgid "Platform9 Systems, Inc"
-msgstr ""
+msgstr "Platform9 Systems, Inc"
 
 msgid "Rackspace"
-msgstr ""
+msgstr "Rackspace"
 
 msgid "Red Hat, Inc."
-msgstr ""
+msgstr "Red Hat, Inc."
 
 msgid "Stratoscale"
-msgstr ""
+msgstr "Stratoscale"
 
 msgid "SUSE"
-msgstr ""
+msgstr "SUSE"
 
 msgid "SwiftStack Inc"
-msgstr ""
+msgstr "SwiftStack Inc"
 
 msgid "T2 Cloud"
-msgstr ""
+msgstr "T2 Cloud"
 
 msgid "Tata Communications"
-msgstr ""
+msgstr "Tata Communications"
 
 msgid "TransCirrus"
-msgstr ""
+msgstr "TransCirrus"
 
 msgid "Ultimum Technologies s.r.o."
-msgstr ""
+msgstr "Ultimum Technologies s.r.o."
 
 msgid "UnitedStack Inc."
-msgstr ""
+msgstr "UnitedStack Inc."
 
 msgid "VMware"
-msgstr ""
+msgstr "VMware"
 
 msgid "vScaler Ltd."
-msgstr ""
+msgstr "vScaler Ltd."
 
 msgid "ZTE Corporation"
-msgstr ""
+msgstr "ZTE Corporation"
 
 msgid ""
 "What is the main operating system running this OpenStack cloud deployment?"
@@ -1728,22 +1739,22 @@ msgstr ""
 "2\"><em>Select All That Apply</em></font>"
 
 msgid "EC2 compatibility API"
-msgstr ""
+msgstr "EC2 compatibility API"
 
 msgid "GCE compatibility API"
-msgstr ""
+msgstr "GCE compatibility API"
 
 msgid "OCCI compatibility API"
-msgstr ""
+msgstr "OCCI compatibility API"
 
 msgid "S3 compatibility API"
-msgstr ""
+msgstr "S3 compatibility API"
 
 msgid "This deployment doesn't use compatibility APIs."
-msgstr ""
+msgstr "Penerapan ini tidak menggunakan compatibility API"
 
 msgid "Other Compatibility API"
-msgstr ""
+msgstr "Compatibility API lainnya"
 
 msgid "<hr><h3>Project Feedback</h3>"
 msgstr "<hr><h3>Project Feedback</h3>"
@@ -1814,28 +1825,41 @@ msgid ""
 "Different products provide different versions of OpenStack and/or different "
 "versions of APIs."
 msgstr ""
+"Produk yang berbeda menyediakan versi yang berbeda dari OpenStack dan / atau "
+"berbagai versi API."
 
 msgid ""
 "Lack of consistency in how and when different projects make major API "
 "changes."
 msgstr ""
+"Kurangnya konsistensi dalam bagaimana dan kapan berbagai proyek membuat "
+"perubahan API yang besar."
 
 msgid ""
 "Flexible networking capabilities mean that different clouds may have "
 "different ways of providing external connectivity to instances running my "
 "workloads."
 msgstr ""
+"Kemampuan jaringan yang fleksibel berarti bahwa awan yang berbeda mungkin "
+"memiliki cara yang berbeda untuk menyediakan konektivitas eksternal ke "
+"instance menjalankan beban kerjanya"
 
 msgid ""
 "Lack of policy discovery. (e.g. actions I'm allowed to perform on one cloud "
 "may be disallowed or reserved for administrators only on another cloud)"
 msgstr ""
+"Kurangnya penemuan kebijakan. (Misalnya tindakan yang diizinkan dilakukan di "
+"satu awan mungkin tidak diizinkan atau dicadangkan untuk hanya administrator "
+"di awan lain)"
 
 msgid ""
 "Lack of familiarity with how I can determine whether different products are "
 "actually interoperable, such as the OpenStack Powered logo or using RefStack "
 "to test."
 msgstr ""
+"Kurangnya keakraban dengan bagaimana kita dapat menentukan apakah produk "
+"yang berbeda benar-benar dapat dioperasikan, seperti logo OpenStack Powered "
+"atau menggunakan RefStack untuk pengujian."
 
 msgid "Please explain"
 msgstr "Tolong jelaskan"
@@ -1855,19 +1879,19 @@ msgstr ""
 "usaha mereka?<br/><font size=\"-2\"><em>Select all that apply</em></font>"
 
 msgid "Federated identity enhancements"
-msgstr ""
+msgstr "Tambahan identitas Federasi"
 
 msgid "Performance improvements"
-msgstr ""
+msgstr "Peningkatan kinerja"
 
 msgid "Enhancing policy"
-msgstr ""
+msgstr "Meningkatkan kebijakan"
 
 msgid "Scaling out to multiple regions"
-msgstr ""
+msgstr "Scaling out ke beberapa wilayah"
 
 msgid "Per domain configuration"
-msgstr ""
+msgstr "Konfigurasi per domain"
 
 msgid "Other - please specify"
 msgstr "Lainnya - sebutkan"
@@ -1880,13 +1904,13 @@ msgstr ""
 "all that apply</em></font>"
 
 msgid "Full kolla-ansible deployment"
-msgstr ""
+msgstr "Pengerahan kolla-ansible penuh"
 
 msgid "Kolla-kubernetes deployment"
-msgstr ""
+msgstr "Pengerahan kolla-kubernetes"
 
 msgid "Only kolla images with custom tool"
-msgstr ""
+msgstr "Hanya kolla image dengan custom tool"
 
 msgid "Which custom tool?"
 msgstr "Alat khusus apa?"
@@ -1899,22 +1923,22 @@ msgstr ""
 "gunakan?<br/><font size=\"-2\"><em>Select all that apply</em></font>"
 
 msgid "CephFS"
-msgstr ""
+msgstr "CephFS"
 
 msgid "Generic or LVM (default)"
-msgstr ""
+msgstr "Generic atau LVM (default)"
 
 msgid "HP"
-msgstr ""
+msgstr "HP"
 
 msgid "Quobyte"
-msgstr ""
+msgstr "Quobyte"
 
 msgid "Tegile"
-msgstr ""
+msgstr "Tegile"
 
 msgid "Windows SMB"
-msgstr ""
+msgstr "Windows SMB"
 
 msgid ""
 "Neutron: Which of the following features in the Neutron project are you "
@@ -1928,67 +1952,67 @@ msgstr ""
 "all that apply</em></font>"
 
 msgid "Distributed Virtual routing"
-msgstr ""
+msgstr "Distributed Virtual routing"
 
 msgid "VRRP-based HA routing"
-msgstr ""
+msgstr "VRRP-based HA routing"
 
 msgid "Multiple routing capabilities in the same deployment"
-msgstr ""
+msgstr "Beberapa kemampuan routing dalam penyebaran yang sama"
 
 msgid "Dynamic routing"
-msgstr ""
+msgstr "Dynamic routing"
 
 msgid "DNS resolution"
-msgstr ""
+msgstr "DNS resolution"
 
 msgid "Pluggable IPAM"
-msgstr ""
+msgstr "Pluggable IPAM"
 
 msgid "Subnet pools"
-msgstr ""
+msgstr "Subnet pools"
 
 msgid "Address Scopes"
-msgstr ""
+msgstr "Address Scopes"
 
 msgid "Agent-based availability zones"
-msgstr ""
+msgstr "Agent-based availability zones"
 
 msgid "ML2 Hierarchical Port Binding"
-msgstr ""
+msgstr "ML2 Hierarchical Port Binding"
 
 msgid "Multiple ML2 drivers in the same deployment"
-msgstr ""
+msgstr "Beberapa driver ML2 dalam penyebaran yang sama"
 
 msgid "Multi-segment provider networks"
-msgstr ""
+msgstr "Jaringan penyedia multi-segmen"
 
 msgid "QoS Bandwidth limiting"
-msgstr ""
+msgstr "Pembatasan QoS Bandwidth"
 
 msgid "Accelerated virtual switching (e.g. DPDK based)"
-msgstr ""
+msgstr "Accelerated virtual switching (e.g. DPDK based)"
 
 msgid "L2 Gateways"
-msgstr ""
+msgstr "L2 Gateways"
 
 msgid "Port mirroring/monitoring"
-msgstr ""
+msgstr "Port mirroring / monitoring"
 
 msgid "Traffic steering"
-msgstr ""
+msgstr "Traffic steering"
 
 msgid "Performance counters"
-msgstr ""
+msgstr "Performance counters"
 
 msgid "Software load balancing"
-msgstr ""
+msgstr "Software load balancing"
 
 msgid "Software firewalling"
-msgstr ""
+msgstr "Software firewalling"
 
 msgid "Software virtual private networking"
-msgstr ""
+msgstr "Software virtual private networking"
 
 msgid ""
 "Nova: How important is it to be able to customize Nova in your deployment, e."
@@ -2030,24 +2054,32 @@ msgstr ""
 msgid ""
 "Continue to allow uploading test result data to RefStack server anonymously"
 msgstr ""
+"Lanjutkan untuk mengizinkan mengunggah data hasil uji ke server RefStack "
+"secara anonim"
 
 msgid ""
 "Ability to share your data with a group of people before making the data "
 "publicly available."
 msgstr ""
+"Kemampuan untuk berbagi data dengan sekelompok orang sebelum membuat data "
+"tersedia untuk umum."
 
 msgid ""
 "Community results should be linked to vendors or cloud provider (results are "
 "currently shared anonymously)"
 msgstr ""
+"Hasil komunitas harus dikaitkan dengan vendor atau penyedia awan (hasilnya "
+"saat ini tidak disebutkan secara anonim)"
 
 msgid "Show pass/fail statuses on the community results page"
-msgstr ""
+msgstr "Tampilkan status pass / fail di halaman hasil komunitas"
 
 msgid ""
 "View overall statistics on individual tests (seeing what tests are passed/"
 "failed the most in reported results)"
 msgstr ""
+"Lihat keseluruhan statistik tes individual (lihat tes apa yang lulus / gagal "
+"paling banyak dalam hasil yang dilaporkan)"
 
 msgid "Sahara: What else can be improved in the Sahara project?"
 msgstr "Sahara: Apa lagi yang bisa diperbaiki dalam proyek Sahara?"
@@ -2060,22 +2092,22 @@ msgstr ""
 "bulan ke depan?<br/><font size=\"-2\"><em>Select all that apply</em></font>"
 
 msgid "Application data"
-msgstr ""
+msgstr "Data aplikasi"
 
 msgid "Backups"
-msgstr ""
+msgstr "Backups"
 
 msgid "Documents"
-msgstr ""
+msgstr "Dokumen"
 
 msgid "Static web content"
-msgstr ""
+msgstr "Konten web statis"
 
 msgid "Research data"
-msgstr ""
+msgstr "Data penelitian"
 
 msgid "Video"
-msgstr ""
+msgstr "Video"
 
 msgid "Please specify other types of data."
 msgstr "Harap tentukan jenis data lainnya."
@@ -2088,28 +2120,28 @@ msgstr ""
 "Ceilometer?<br/><font size=\"-2\"><em>Select all that apply</em></font>"
 
 msgid "Gnocchi"
-msgstr ""
+msgstr "Gnocchi"
 
 msgid "Legacy Ceilometer database with MongoDB"
-msgstr ""
+msgstr "Legacy Ceilometer database dengan MongoDB"
 
 msgid "Legacy Ceilometer database with MySQL"
-msgstr ""
+msgstr "Legacy Ceilometer database dengan MySQL"
 
 msgid "Legacy Ceilometer database with PostgreSQL"
-msgstr ""
+msgstr "Legacy Ceilometer database dengan PostgreSQL"
 
 msgid "Legacy Ceilometer database with HBase"
-msgstr ""
+msgstr "Legacy Ceilometer database dengan HBase"
 
 msgid "Legacy Ceilometer database with SQLite"
-msgstr ""
+msgstr "Legacy Ceilometer database dengan SQLite"
 
 msgid "HTTP dispatcher"
-msgstr ""
+msgstr "HTTP dispatcher"
 
 msgid "File dispatcher"
-msgstr ""
+msgstr "File dispatcher"
 
 msgid ""
 "TripleO: As a user/operator, do you value having a common interface for "
@@ -2139,20 +2171,20 @@ msgstr ""
 "menggunakan proyek OpenStack Trove?"
 
 msgid "Already evaluating Trove or using Trove"
-msgstr ""
+msgstr "Sudah mengevaluasi Trove atau menggunakan Trove"
 
 msgid "Planned to begin within the next 90 days"
-msgstr ""
+msgstr "Direncanakan dimulai dalam 90 hari ke depan"
 
 msgid "Planned to begin within the next 180 days"
-msgstr ""
+msgstr "Direncanakan dimulai dalam 180 hari ke depan"
 
 msgid "Planned to begin this year (2017)"
-msgstr ""
+msgstr "Direncanakan mulai tahun ini (2017)"
 
 msgid "Planned for next year (2018)"
-msgstr ""
+msgstr "Direncanakan untuk tahun depan (2018)"
 
 msgid "No current plans"
-msgstr ""
+msgstr "Tidak ada rencana saat ini"
 

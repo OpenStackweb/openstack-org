@@ -1,3 +1,4 @@
+# TigerFang <tigerfun@126.com>, 2017. #zanata
 # vuuv <froms2008@gmail.com>, 2017. #zanata
 # zzxwill <zzxwill@gmail.com>, 2017. #zanata
 msgid ""
@@ -7,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2017-05-11 11:09+0000\n"
+"PO-Revision-Date: 2017-06-12 06:03+0000\n"
 "Last-Translator: vuuv <froms2008@gmail.com>\n"
 "Language-Team: Chinese (China)\n"
 "Language: zh-CN\n"
@@ -118,11 +119,11 @@ msgstr "无可用选项"
 #: survey_builder/templates/SurveyRankingField.ss:2
 #, php-format
 msgid "Please rank up to %s"
-msgstr ""
+msgstr "请评级到 %s"
 
 #: survey_builder/templates/SurveyRankingField.ss:4
 msgid "Click your options to rank them. Select at least one."
-msgstr ""
+msgstr "依次点击选项进行评级。请至少选择一个。"
 
 #: survey_builder/templates/SurveyRankingField.ss:4
 msgid "clear all"
@@ -251,10 +252,12 @@ msgid ""
 "community. Apply multiple filters to virtually every quantitative question "
 "from the user survey."
 msgstr ""
+"请您使用OpenStack社区中提供的<a href=\"%s\">最新分析工具</"
+"a>在过去几年积累的客户调查数据中深入挖掘并探索发现。可以对客户调查中的每个量化的问题使用多重过滤器。"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:88
 msgid "Survey Assets"
-msgstr ""
+msgstr "调查资料"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:91
 msgid "See a video overview of the October 2016 report"
@@ -284,7 +287,7 @@ msgstr "2015年10月完整报告"
 msgid ""
 "This is the <strong>OpenStack User Survey</strong> for OpenStack cloud users "
 "and operators."
-msgstr "这是面向 OpenStack 云用户和运维人员的<strong> OpenStack 用户调查</strong>。"
+msgstr "本 <strong> OpenStack 用户调查</strong> 面向 OpenStack 云用户和运维人员。"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:132
 msgid "It should only take <strong>10 minutes</strong> to complete."
@@ -294,7 +297,7 @@ msgstr "只需要 <strong>10 分钟</strong> 即可完成。"
 msgid ""
 "All of the information you provide is <strong>confidential</strong> to the "
 "Foundation (unless you specify otherwise)."
-msgstr "对基金会而言, 您的所有信息都是 <strong>机密</strong> (除非您另行注明)"
+msgstr "基金会将您提供的所有信息视为 <strong>机密</strong> (除非您另行注明)。"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:153
 msgid ""
@@ -303,6 +306,7 @@ msgid ""
 "requirements, the OpenStack Foundation User Committee will be able to "
 "advocate on your behalf."
 msgstr ""
+"这项问卷调查为最终用户提供了一个影响社区和平台发展方向的途径。您将配置和需求相关的信息分享出来，就可以让OpenStack基金会用户委员会代表您进行表决。"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:156
 msgid "More Information About The Survey"
@@ -394,7 +398,7 @@ msgstr "感谢您提交 ！！！"
 
 #: survey_builder/templates/Layout/Includes/Surveys_Header.ss:3
 msgid "Step <strong>%s of %s</strong> for <strong>%s</strong>"
-msgstr ""
+msgstr "第 <strong>%s 步共 %s步</strong> 属于<strong>%s</strong>"
 
 #: survey_builder/js/survey.controller.js:55
 msgid "This field is required."
@@ -472,32 +476,33 @@ msgid ""
 "survey offers insights from more than 1,300 users, representing 44% more "
 "deployments and 22% more organizations than ever before."
 msgstr ""
+"阅读自2013年四月以来的第九期OpenStack用户问卷调查的更多内容，来更好的理解用户观点、组织概述、用例、所有社区部署环境中的技术选择。这项调查问卷提供了来自1300+用户的内部信息，内容范围上比以往增加44%实际部署环境和22%更多组织。"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:46
 msgid "Read the April 2017 report"
-msgstr ""
+msgstr "阅读2017年四月报告"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:56
 msgid "Watch a quick video overview"
-msgstr ""
+msgstr "观看简介视频"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:58
 msgid "April 2017 full report"
-msgstr ""
+msgstr "2017年四月总体报告"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:59
 msgid "October 2016 highlights report"
-msgstr ""
+msgstr "2016年十月亮点报告"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:61
 msgid "April 2016 full report"
-msgstr ""
+msgstr "2016年四月总体报告"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:84
 msgid "Order the User Survey as a printed book"
-msgstr ""
+msgstr "以打印成册的形式获取用户问卷调查"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:86
 msgid "April 2017 full report (coming soon)"
-msgstr ""
+msgstr "2017年四月总体报告（即将发布）"
 

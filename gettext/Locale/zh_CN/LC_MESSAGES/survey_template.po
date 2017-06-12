@@ -1,14 +1,13 @@
 # TigerFang <tigerfun@126.com>, 2017. #zanata
 # vuuv <froms2008@gmail.com>, 2017. #zanata
-# xiezhongtian <zhongtianemail@gmail.com>, 2017. #zanata
 # zzxwill <zzxwill@gmail.com>, 2017. #zanata
 msgid ""
 msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"PO-Revision-Date: 2017-06-02 09:57+0000\n"
-"Last-Translator: TigerFang <tigerfun@126.com>\n"
+"PO-Revision-Date: 2017-06-12 05:49+0000\n"
+"Last-Translator: \n"
 "Language-Team: Chinese (China)\n"
 "Language: zh-CN\n"
 "X-Generator: Zanata 3.9.6\n"
@@ -66,11 +65,10 @@ msgstr "您的邮件*"
 msgid "Country of Residence*"
 msgstr "所在国家*"
 
-#, fuzzy
 msgid ""
 "The OpenStack Foundation and User Committee may communicate with me in the "
 "future about my usage.*"
-msgstr "Openstack 基金会和用户组织可能会在不久之内与我沟通关于使用情况事情。"
+msgstr "Openstack 基金会和用户委员会将来可能就使用率相关事宜与我沟通。"
 
 msgid "Your Organization"
 msgstr "您的组织机构"
@@ -444,16 +442,16 @@ msgid "Deployment Type"
 msgstr "部署类型"
 
 msgid "Community Cloud"
-msgstr "社区云"
+msgstr "社群云 (Community Cloud)"
 
 msgid "On-Premises Private Cloud"
-msgstr "内部私有云"
+msgstr "自建私有云 (On-Premises Private Cloud)"
 
 msgid "Off-Premises Private Cloud"
-msgstr "外部私有云"
+msgstr "托管私有云 (Off-Premises Private Cloud)"
 
 msgid "Public Cloud"
-msgstr "公有云"
+msgstr "公有云 (Public Cloud)"
 
 msgid ""
 "Which releases does this deployment currently use?*<BR><font size=\"-"
@@ -1396,7 +1394,7 @@ msgstr ""
 "2\"><em>选择所有适用的</em></font>"
 
 msgid "Active Directory"
-msgstr "Active Directory"
+msgstr "活动目录"
 
 msgid "KVS"
 msgstr "KVS"
@@ -1411,7 +1409,7 @@ msgid "SQL (default)"
 msgstr "SQL (默认)"
 
 msgid "Templated"
-msgstr "模板化的"
+msgstr "Templated"
 
 msgid "Other Identity Driver"
 msgstr "其它身份认证驱动程序"
@@ -1764,7 +1762,7 @@ msgid ""
 "Lack of familiarity with how I can determine whether different products are "
 "actually interoperable, such as the OpenStack Powered logo or using RefStack "
 "to test."
-msgstr ""
+msgstr "我不熟悉如何确定不同的产品之间是否真的可以相互协同工作，比如通过检查OpenStack认证支持标志或者用RefStack进行测试。"
 
 msgid "Please explain"
 msgstr "请阐述"
@@ -1782,7 +1780,7 @@ msgstr ""
 "2\"><em>选择所有适用的</em></font>"
 
 msgid "Federated identity enhancements"
-msgstr ""
+msgstr "联合身份验证的增强"
 
 msgid "Performance improvements"
 msgstr "性能升级"
@@ -1827,7 +1825,7 @@ msgid "CephFS"
 msgstr "CephFS"
 
 msgid "Generic or LVM (default)"
-msgstr "Generic or LVM (default)"
+msgstr "通用 或者 LVM (默认)"
 
 msgid "HP"
 msgstr "HP"
@@ -1913,12 +1911,12 @@ msgstr "软件防火墙"
 msgid "Software virtual private networking"
 msgstr "软件虚拟私有网络"
 
-#, fuzzy
 msgid ""
 "Nova: How important is it to be able to customize Nova in your deployment, e."
 "g. classload your own managers/drivers, use hooks, plug in API extensions, "
 "etc."
-msgstr "Nova：能够在您的部署中定制Nova有多重要，例如 分类你自己的管理器/驱动程序，使用钩子，插入API扩展等。"
+msgstr ""
+"Nova: 在您部署的环境中，能够对Nova做定制化的重要程度如何？比如通过类的方式加载您自己的管理器/驱动程序，使用钩子机制，插件式的API扩展等。"
 
 msgid ""
 "Not important; I use pretty much stock Nova with maybe some small patches or "
@@ -2029,40 +2027,40 @@ msgstr "文件分发"
 msgid ""
 "TripleO: As a user/operator, do you value having a common interface for "
 "deployment tooling and the deployed cloud (e.g common APIs and CLI tools)?"
-msgstr ""
+msgstr "TripleO: 作为用户或者管理员，您是否会看重为部署工具和已经部署完成的云平台提供通用接口（如通用API和命令行工具）？"
 
 msgid "Yes, definitely."
-msgstr ""
+msgstr "肯定是。"
 
 msgid "Yes, but not required."
-msgstr ""
+msgstr "是，但不是必需的。"
 
 msgid "No opinion."
-msgstr ""
+msgstr "没意见。"
 
 msgid "No, it's a bad idea."
-msgstr ""
+msgstr "不，这是个坏主意。"
 
 msgid ""
 "Trove: When do you expect to begin evaluating Database as a Service in your "
 "cloud using the OpenStack Trove project?"
-msgstr ""
+msgstr "Trove: 您打算什么时候开始评估使用OpenStack Trove项目构建数据库即服务？"
 
 msgid "Already evaluating Trove or using Trove"
-msgstr ""
+msgstr "已经在评估或者使用Trove"
 
 msgid "Planned to begin within the next 90 days"
-msgstr ""
+msgstr "计划90天内开始。"
 
 msgid "Planned to begin within the next 180 days"
-msgstr ""
+msgstr "计划180天内开始。"
 
 msgid "Planned to begin this year (2017)"
-msgstr ""
+msgstr "计划本年度（2017）开始"
 
 msgid "Planned for next year (2018)"
-msgstr ""
+msgstr "计划明年（2018）开始"
 
 msgid "No current plans"
-msgstr ""
+msgstr "目前没有计划"
 
