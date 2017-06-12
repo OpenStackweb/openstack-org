@@ -94,7 +94,7 @@ POT_FILE_ENTRY_TPL;
                         case "ComboBox":
                         case "RadioButtonList":
                         case "CheckBoxList":
-                        case "SurveyRankingQuestionTemplate":
+                        case "Ranking":
 
                             if(!empty($question->EmptyString)) {
                                 self::addEntryToPOT($pot_file_dic, $pot_file_entries, addslashes($question->EmptyString), sprintf("question %s empty string", $question->Name));
@@ -111,7 +111,7 @@ POT_FILE_ENTRY_TPL;
                                 self::addEntryToPOT($pot_file_dic, $pot_file_entries, $key, sprintf("question %s value %s label", $question->Name, $value->Value));
                             }
 
-                            if($question->Type() == 'SurveyRankingQuestionTemplate'){
+                            if($question->Type() == 'Ranking'){
                                 self::addEntryToPOT($pot_file_dic, $pot_file_entries, addslashes($question->Intro), sprintf("question %s intro", $question->Name));
                             }
 
