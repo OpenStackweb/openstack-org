@@ -92,12 +92,18 @@ final class COAManager implements ICOAManager
             $certificate_completed_date = $row['certificate_completed_date'];
 
             $member = null;
-            // first attempt, try to find member by email ...
-            if (!empty($email)) {
+
+            // first attempt, try to find member by id ...
+            if(!empty($external_id) && intval($external_id) > 0 ){
+                $member = $this->member_repository->getById($external_id);
+            }
+
+            // second attempt, try to find member by email ...
+            if (is_null($member) && !empty($email)) {
                 $member = $this->member_repository->findByEmail($email);
             }
 
-            // second attempt, try to find member by former exams
+            // third attempt, try to find member by former exams
             if (is_null($member)) {
                 // possible a retake ? check by $track_id
                 $former_exams = $this->exam_repository->getByTrackId($track_id);
@@ -114,6 +120,7 @@ final class COAManager implements ICOAManager
                 echo sprintf("missing member %s - track_id %s - filename %s", $email, $track_id, $filename) . PHP_EOL;
                 continue;
             }
+
             // try to find if we have a former exam ...
             $exam = $member->getExamByExternalId($exam_ext_id);
 
