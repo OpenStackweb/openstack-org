@@ -52,7 +52,7 @@ class GetText extends Object implements TemplateGlobalProvider
         // Ensure the locale is set correctly given the designated parameters
         $locale = self::current_locale($persist);
         if(empty($locale)) return;
-
+        $locale = Locales::process($locale);
         i18n::set_locale($locale);
 
         // LC_NUMERIC causes SQL errors for some locales (comma as decimal indicator) so skip
