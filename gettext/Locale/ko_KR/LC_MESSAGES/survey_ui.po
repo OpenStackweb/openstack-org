@@ -7,7 +7,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2017-05-29 09:16+0000\n"
+"PO-Revision-Date: 2017-06-12 05:13+0000\n"
 "Last-Translator: Sungjin Kang <gang.sungjin@gmail.com>\n"
 "Language-Team: Korean (South Korea)\n"
 "Language: ko-KR\n"
@@ -163,7 +163,7 @@ msgstr "이전 설문 보기"
 msgid ""
 "Learn more about past User Survey data to see how OpenStack is growing and "
 "maturing."
-msgstr "과거 사용자 설문 조사 데이터에대해 자세히 알아보고 OpenStack 성장과 성숙도를 확인하싶시오."
+msgstr "과거 사용자 설문 조사 데이터에 대해 자세히 알아보고 어떻게 OpenStack이 성장 및 성숙하였는지를 확인하십시오."
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:67
 #:  survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:107
@@ -228,17 +228,17 @@ msgid ""
 "selection of charts most widely used by the community, and focuses only on "
 "deployments."
 msgstr ""
-"2013년 4월 이후 OpenStack 사용자에 대한 8번째 조사에서 지역 커뮤니티의 다양한 비포 단계와 규모에 대한 태도, 조직 "
-"프로필, 사용 사례, 기술 선택에 대한 이해를 높히는 것을 목표로합니다. 이 설문 조사에서는 커뮤니티에서 가장 널리 사용되는 차트를 "
-"포함하여 하이라이트만 제공하고 배포에만 중점을 둡니다."
+"2013년 4월 이후 OpenStack 사용자에 대한 8번째 조사에서 지역 커뮤니티의 다양한 배포 단계와 규모에 대한 견해, 조직 "
+"프로필, 사용 사례, 기술 선택에 대한 이해도를 높히는 것을 목표로 합니다. 이번 설문 조사에서는 커뮤니티에서 가장 널리 사용되는 차트를 "
+"포함하여 하이라이트만 제공하며 배포에만 중점을 둡니다."
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:77
 msgid "Download the October 2016 highlights report"
-msgstr "2016년 10월 핵심 보고서 다운"
+msgstr "2016년 10월 핵심 보고서 다운로드"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:78
 msgid "Download the full April 2016 Report"
-msgstr "2016년 4월 전체 보고서 다운"
+msgstr "2016년 4월 전체 보고서 다운로드"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:80
 msgid "Be your own data scientist"
@@ -253,7 +253,7 @@ msgid ""
 "from the user survey."
 msgstr ""
 "지난해 사용자 설문 조사 데이터를 OpenStack 커뮤니티에서 사용할 수 있는 <a href=\"%s\">새로운 분석 도구</a>를 "
-"이용하여 원하는 조사결과서를 만드십시오. 사용자 설문 조사의 모든 정량적 질문에 필터를 적용할 수 있습니다."
+"이용하여 원하는 조사 결과서를 만드십시오. 사용자 설문 조사의 모든 정량적 질문에 필터를 적용할 수 있습니다."
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:88
 msgid "Survey Assets"
@@ -311,7 +311,7 @@ msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:156
 msgid "More Information About The Survey"
-msgstr "설문 조사에대한 추가 정ㅂ"
+msgstr "설문 조사에대한 추가 정보"
 
 #: survey_builder/templates/Layout/Includes/DynamicEntityStepForm.ss:16
 #, php-format
