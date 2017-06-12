@@ -22,6 +22,14 @@ class SurveyTemplate extends DataObject implements ISurveyTemplate {
         'Enabled'   => 'Boolean',
     );
 
+    static $summary_fields = array(
+        'Title'         => 'Title',
+        'StartDate'     => 'Start Date',
+        'EndDate'       => 'End Date',
+        'Enabled'       => 'Is Enabled',
+    );
+
+
     static $indexes = array
     (
         //'Title' => array('type' => 'unique', 'value' => 'Title')

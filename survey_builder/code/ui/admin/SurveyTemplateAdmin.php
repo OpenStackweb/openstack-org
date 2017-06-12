@@ -108,7 +108,7 @@ class SurveyTemplateAdmin extends ModelAdmin {
         }
         if($this->modelClass === 'SurveyTemplate') {
             $gridField = $form->Fields()->fieldByName($this->sanitiseClassName($this->modelClass));
-            $config = $gridField->getConfig();
+            $config    = $gridField->getConfig();
             $config->addComponent(new GridFieldAjaxRefresh(1000, false));
             $config->addComponent(new GridFieldCloneSurveyTemplateAction());
         }

@@ -543,17 +543,6 @@ final class SurveyManager implements ISurveyManager {
                             (SurveyQuestionTemplateID, ChildID , ValueID,Operator, Visibility, DefaultValue, BooleanOperatorOnValues)
                             VALUES ({$clone_question->ID}, {$new_id}, $value_id,'{$operator}','{$visibility}','{$initial_value}', '{$boolean_operator}');");
                         }
-                        if($original_question instanceof IMultiValueQuestionTemplate)
-                        {
-                            if($original_question instanceof IDropDownQuestionTemplate && $original_question->isCountrySelector()) continue;
-                            foreach($original_question->getValues() as $original_val)
-                            {
-                                $clone_val = $template_factory->cloneQuestionValue($original_val);
-                                $clone_val->OwnerID = $clone_question->ID;
-                                $clone_val->write();
-                                $original_clone_question_values_dictionary[$original_val->ID] = $clone_val->ID;
-                            }
-                        }
                         if($original_question instanceof IDoubleEntryTableQuestionTemplate)
                         {
                             foreach($original_question->getColumns() as $original_val)
@@ -571,6 +560,17 @@ final class SurveyManager implements ISurveyManager {
                                 $original_clone_question_values_dictionary[$original_val->ID] = $clone_val->ID;
                             }
                             foreach($original_question->getAlternativeRows() as $original_val)
+                            {
+                                $clone_val = $template_factory->cloneQuestionValue($original_val);
+                                $clone_val->OwnerID = $clone_question->ID;
+                                $clone_val->write();
+                                $original_clone_question_values_dictionary[$original_val->ID] = $clone_val->ID;
+                            }
+                        }
+                        else if($original_question instanceof IMultiValueQuestionTemplate)
+                        {
+                            if($original_question instanceof IDropDownQuestionTemplate && $original_question->isCountrySelector()) continue;
+                            foreach($original_question->getValues() as $original_val)
                             {
                                 $clone_val = $template_factory->cloneQuestionValue($original_val);
                                 $clone_val->OwnerID = $clone_question->ID;

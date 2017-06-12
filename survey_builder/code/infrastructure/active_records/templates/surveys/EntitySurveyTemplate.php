@@ -43,10 +43,10 @@ class EntitySurveyTemplate extends SurveyTemplate implements IEntitySurveyTempla
     static $has_many = array(
     );
 
-    private static $defaults = array(
+    static $defaults = array(
     );
 
-    private static $summary_fields = array(
+    static $summary_fields = array(
         'EntityName',
     );
 

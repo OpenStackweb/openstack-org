@@ -12,9 +12,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-class GridFieldCloneSurveyTemplateAction implements GridField_ColumnProvider, GridField_ActionProvider
+class GridFieldCloneSurveyTemplateAction
+    implements GridField_ColumnProvider,
+    GridField_ActionProvider
 {
     const ACTION_NAME = 'clonesurveytemplate';
+
+    public function __construct()
+    {
+    }
 
     public function augmentColumns($gridField, &$columns) {
         if(!in_array('Actions', $columns)) {
@@ -63,20 +69,16 @@ class GridFieldCloneSurveyTemplateAction implements GridField_ColumnProvider, Gr
             $code      = 200;
 
             try {
-                $manager = Injector::inst()->get('SurveyManager');
+                $manager      = Injector::inst()->get('SurveyManager');
                 $new_template = $manager->doClone($template);
+
             }
             catch(Exception $ex)
             {
-                //SS_Log::log($ex->getMessage(). SS_Log::ERR);
-                //throw new ValidationException($ex->getMessage(),0);
-                //return sprintf('<div>%s</div>', $ex->getMessage());
-                //Controller::curr()->getResponse()->setStatusCode($code,  $ex->getMessage());
-                //Controller::curr()->getResponse()->setBody(sprintf('<div>%s</div>', $ex->getMessage()));
                 throw new ValidationException($ex->getMessage() ,0);
             }
 
-            Controller::curr()->getResponse()->setStatusCode($code,$msg);
+            Controller::curr()->getResponse()->setStatusCode($code, $msg);
         }
     }
 }
