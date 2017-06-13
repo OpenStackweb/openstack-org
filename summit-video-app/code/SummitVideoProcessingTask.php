@@ -66,6 +66,8 @@ class SummitVideoProcessingTask extends CronTask
 
             }
 
+            $response = false;
+
             try {
                 if ($ids) {
                     $response = $this->api->getVideoStatusById($ids);
@@ -74,6 +76,8 @@ class SummitVideoProcessingTask extends CronTask
                 SS_Log::log("YouTube check for status failed" . $e->getMessage(), SS_Log::ERR);
                 return;
             }
+
+            if (!$response) return false;
 
             $body = $response->getBody()->getContents();
             $data = Convert::json2array($body);
