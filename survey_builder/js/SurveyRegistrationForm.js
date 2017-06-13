@@ -13,7 +13,6 @@
 
 jQuery(document).ready(function($) {
 
-
     var registration_form = $('.survey-registration-form');
 
     if(registration_form.length > 0){
@@ -41,28 +40,28 @@ jQuery(document).ready(function($) {
             },
             ignore: [],
             rules: {
-                FirstName:{required: true,regex:'[\"()=<>]+'},
-                Surname:{required: true,regex:'[\"()=<>]+'},
-                Email: {required: true,email: true, remote: '/RegistrationPage_Controller/CheckEmail'},
-                'Password[_Password]': {required: true,minlength: 5},
-                'Password[_ConfirmPassword]': {required: true,minlength: 5,equalTo: '#Password-_Password'},
+                FirstName:{required: true, regex:'[\"()=<>]+'},
+                Surname:{required: true, regex:'[\"()=<>]+'},
+                Email: {required: true, email: true, remote: '/RegistrationPage_Controller/CheckEmail'},
+                'Password[_Password]': {required: true, minlength: 5},
+                'Password[_ConfirmPassword]': {required: true, minlength: 5, equalTo: '#Password-_Password'},
                 'g_recaptcha_hidden': {required: true}
             },
             messages: {
                 FirstName:{
-                    required:'First Name is required.',
-                    regex:'First Name is not valid.'
+                    required: GetText._t('First Name is required.'),
+                    regex:    GetText._t('First Name is not valid.')
                 },
                 Surname:{
-                    required:'Last Name is required.',
-                    regex:'Last Name is not valid.'
+                    required: GetText._t('Last Name is required.'),
+                    regex:    GetText._t('Last Name is not valid.')
                 },
                 Email:{
-                    required:'Primary Email Address is required.',
-                    email:'Primary Email Address is not valid.',
-                    remote:'That address is already in use by another user.'
+                    required: GetText._t('Primary Email Address is required.'),
+                    email:    GetText._t('Primary Email Address is not valid.'),
+                    remote:   GetText._t('That address is already in use by another user.')
                 },
-                'g_recaptcha_hidden': { required: 'Please confirm that you are not a robot.'}
+                'g_recaptcha_hidden': { required: GetText._t('Please confirm that you are not a robot.')}
             }
         });
 

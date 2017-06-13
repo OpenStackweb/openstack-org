@@ -36,13 +36,10 @@ final class SurveyRegistrationForm extends RecaptchaForm
             new ConfirmedPasswordField('Password',  GetTextTemplateHelpers::_t("survey_ui",'Password'))
         );
 
-
-
         $startSurveyButton = new FormAction('StartSurvey', GetTextTemplateHelpers::_t("survey_ui",'Start Survey!'));
         $actions = new FieldList(
             $startSurveyButton
         );
-
 
         $validator = new RequiredFields("FirstName", "Surname", "Email","Password");
         $this->addExtraClass("survey-registration-form");

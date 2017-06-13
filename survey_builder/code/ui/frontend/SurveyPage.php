@@ -204,6 +204,14 @@ class SurveyPage_Controller extends Page_Controller
             "You Must Specify a New Organization Name!.",
             "You must select a valid member!",
             "Delete",
+            "First Name is required.",
+            "First Name is not valid.",
+            "Last Name is required.",
+            "Last Name is not valid.",
+            "Primary Email Address is required.",
+            "Primary Email Address is not valid.",
+            "That address is already in use by another user.",
+            "Please confirm that you are not a robot.",
         ];
 
         foreach ($messages_ids as $msgid)

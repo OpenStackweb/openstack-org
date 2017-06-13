@@ -1,5 +1,5 @@
 # survey template 6 title
-msgid "OpenStack User Survey - 2017"
+msgid "OpenStack User Survey - 2017 (Jun-Dec)"
 msgstr ""
 
 # survey template 6 - survey step about-you friendly name

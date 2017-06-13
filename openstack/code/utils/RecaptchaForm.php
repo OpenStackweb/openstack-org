@@ -29,6 +29,7 @@ HTML;
         Requirements::javascript('https://www.google.com/recaptcha/api.js');
         Requirements::customScript("var verifyCallback = function(response) {
             $('#g_recaptcha_hidden').val(response);
+            $('#g_recaptcha_hidden').valid();
         };
         
         ");
