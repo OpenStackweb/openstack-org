@@ -15,15 +15,23 @@
  * ========================================================================== */
 
 /* Define properties for our icons (default to the unknown language flag) */
-.lang-sm {min-width: 32px; height: 16px; min-height: 16px; max-height: 16px; margin-top:6px; float: left}
+.lang-sm {
+    min-width: 32px;
+    height: 16px;
+    min-height: 16px;
+    max-height: 16px;
+    margin-top:6px;
+    float: left;
+    margin-right: 10px
+}
 
 /* Combined native/english labels */
 .lang-lbl-full[lang=en_US]:after { content: "English\0000A0/\0000A0English"; }
 .lang-lbl-full[lang=es_ES]:after { content: "Espa\0000F1ol\0000A0/\0000A0Spanish"; }
 .lang-lbl-full[lang=ja_JP]:after { content: "\0065E5\00672C\008A9E\0000A0/\0000A0Japanese"; }
 .lang-lbl-full[lang=ko_KR]:after { content: "\00D55C\00AD6D\00C5B4\0000A0/\0000A0Korean"; }
-.lang-lbl-full[lang=zh_CN]:after { content: "简体中文\0000A0/\0000A0Chinese"; }
-.lang-lbl-full[lang=zh_TW]:after { content: "繁體中文\0000A0/\0000A0Chinese"; }
+.lang-lbl-full[lang=zh_CN]:after { content: "简体中文\0000A0/\0000A0Simplified\0000A0Chinese"; }
+.lang-lbl-full[lang=zh_TW]:after { content: "繁體中文\0000A0/\0000A0Traditional\0000A0Chinese"; }
 .lang-lbl-full[lang=id_ID]:after { content: "Bahasa\000020indonesia\0000A0/\0000A0Indonesian"; }
 .lang-lbl-full[lang=de_DE]:after { content: "Deutsch\0000A0/\0000A0German"; }
 .lang-lbl-full[lang=fr_FR]:after { content: "Fran\0000E7ais\0000A0/\0000A0French"; }
