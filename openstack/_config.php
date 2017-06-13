@@ -47,6 +47,10 @@ if(Director::isDev()) {
     SS_Log::add_writer(new SS_LogFileWriter(Director::baseFolder() . '/logs/site.log'), SS_Log::DEBUG);
     //Force cache to flush on page load if in Dev mode (prevents needing ?flush=1 on the end of a URL)
     SSViewer::flush_template_cache();
+} else {
+    $error_log_path = (defined('SS_ERROR_LOG')) ? SS_ERROR_LOG : '/logs/silvertripe.log';
+    SS_Log::clear_writers();
+    SS_Log::add_writer(new SS_LogFileWriter(BASE_PATH . '/' . $error_log_path), SS_Log::ERR);
 }
 
 $email_log_writer = new Custom_SS_LogEmailWriter($email_log);
