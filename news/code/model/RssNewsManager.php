@@ -155,7 +155,7 @@ final class RssNewsManager
      */
     function getSuperUserItems($limit = 7) {
 
-        $result = $this->queryExternalSource('http://superuser.openstack.org/articles/feed/', 7200, 'entry');
+        $result = $this->queryExternalSource('https://superuser.openstack.org/feed/', 7200, 'entry');
         if(!$result->count()) return $result;
 
         foreach ($result as $item) {
