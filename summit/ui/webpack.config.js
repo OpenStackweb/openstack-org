@@ -10,11 +10,11 @@ module.exports = {
     "event-detail":"./source/js/schedule/event-detail.js",
     "tagmanagerfield":"./source/js/tagmanagerfield/tagmanagerfield.js",
     "event-list":"./source/js/schedule/event-list.js",
-    "schedule-admin-view":"./source/js/schedule/admin/schedule-admin-view.js",
-    "attendees-admin-view":"./source/js/schedule/admin/attendees-admin-view.js",
-    "reports-admin-view":"./source/js/schedule/admin/reports-admin-view.js",
-    "speakers-admin-view":"./source/js/schedule/admin/speakers-admin-view.js",
-    "promocode-admin-view":"./source/js/schedule/admin/promocode-admin-view.js",
-    "events-bulk-view":"./source/js/schedule/admin/events-bulk-view.js",
+    "schedule-admin-view":"./source/js/admin/schedule/schedule-admin-view.js",
+    "attendees-admin-view":"./source/js/admin/attendees/attendees-admin-view.js",
+    "reports-admin-view":"./source/js/admin/reports/reports-admin-view.js",
+    "speakers-admin-view":"./source/js/admin/speakers/speakers-admin-view.js",
+    "promocode-admin-view":"./source/js/admin/tickets/promocode-admin-view.js",
+    "events-bulk-view":"./source/js/admin/events_bulk/events-bulk-view.js",
   }
 };
