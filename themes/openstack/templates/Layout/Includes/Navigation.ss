@@ -17,12 +17,12 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <div class="search-container tiny">
-               <% include GoogleCustomSearch %>
+               <% include SwiftypeCustomSearch %>
                <i class="fa fa-times close-search"></i>
            </div>
            <ul class="nav navbar-nav navbar-main show">
             <li>
-                <% include GoogleCustomSearchMobile %>
+                <% include SwiftypeCustomSearchMobile %>
             </li>
 
             <% include Navigation_menu %>
