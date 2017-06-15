@@ -12,8 +12,8 @@ msgstr ""
 "X-Generator: Zanata 3.9.6\n"
 "Plural-Forms: nplurals=1; plural=0\n"
 
-msgid "OpenStack User Survey - 2017"
-msgstr "OpenStack 사용자 설문 - 2017"
+msgid "OpenStack User Survey - 2017 (Jun-Dec)"
+msgstr ""
 
 msgid "About You"
 msgstr "본인에 관하여"

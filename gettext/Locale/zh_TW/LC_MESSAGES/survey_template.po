@@ -12,8 +12,8 @@ msgstr ""
 "X-Generator: Zanata 3.9.6\n"
 "Plural-Forms: nplurals=1; plural=0\n"
 
-msgid "OpenStack User Survey - 2017"
-msgstr "2017年OpenStack用戶調查"
+msgid "OpenStack User Survey - 2017 (Jun-Dec)"
+msgstr ""
 
 msgid "About You"
 msgstr "關於你"
@@ -215,6 +215,36 @@ msgstr "你的想法"
 
 msgid "What are your top business drivers for using OpenStack?"
 msgstr "您使用OpenStack的主要業務推動因素是什麼？"
+
+msgid ""
+"Standardize on the same open platform and APIs that power a global network "
+"of of public and private clouds"
+msgstr ""
+
+msgid "Avoid vendor lock-in"
+msgstr ""
+
+msgid "Accelerate ability to innovate"
+msgstr ""
+
+msgid "Increase operational efficiency"
+msgstr ""
+
+msgid "Save money"
+msgstr ""
+
+msgid "Attract top technical talent"
+msgstr ""
+
+msgid "Achieve security and/or privacy goals"
+msgstr ""
+
+msgid "Something else not listed here"
+msgstr ""
+
+msgid ""
+"<p><span>1 = top business driver, 2 = next, 3 = third, and so on</span></p>"
+msgstr ""
 
 msgid "Please specify"
 msgstr "請指定"

@@ -114,6 +114,38 @@ msgstr "Passwort"
 msgid "Last Name"
 msgstr "Nachname"
 
+#: survey_builder/js/SurveyRegistrationForm.js:53
+msgid "First Name is required."
+msgstr ""
+
+#: survey_builder/js/SurveyRegistrationForm.js:54
+msgid "First Name is not valid."
+msgstr ""
+
+#: survey_builder/js/SurveyRegistrationForm.js:57
+msgid "Last Name is required."
+msgstr ""
+
+#: survey_builder/js/SurveyRegistrationForm.js:58
+msgid "Last Name is not valid."
+msgstr ""
+
+#: survey_builder/js/SurveyRegistrationForm.js:61
+msgid "Primary Email Address is required."
+msgstr ""
+
+#: survey_builder/js/SurveyRegistrationForm.js:62
+msgid "Primary Email Address is not valid."
+msgstr ""
+
+#: survey_builder/js/SurveyRegistrationForm.js:63
+msgid "That address is already in use by another user."
+msgstr ""
+
+#: survey_builder/js/SurveyRegistrationForm.js:65
+msgid "Please confirm that you are not a robot."
+msgstr ""
+
 #: survey_builder/templates/SurveyCheckboxSetField.ss:14
 #:  survey_builder/templates/SurveyRankingField.ss:16
 msgid "No options available"

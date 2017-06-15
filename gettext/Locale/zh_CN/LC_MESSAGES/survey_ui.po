@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2017-06-12 06:03+0000\n"
+"PO-Revision-Date: 2017-06-14 04:27+0000\n"
 "Last-Translator: vuuv <froms2008@gmail.com>\n"
 "Language-Team: Chinese (China)\n"
 "Language: zh-CN\n"
@@ -110,6 +110,38 @@ msgstr "密码"
 #:  survey_builder/code/ui/frontend/forms/SurveyRegistrationForm.php:31
 msgid "Last Name"
 msgstr "姓氏"
+
+#: survey_builder/js/SurveyRegistrationForm.js:53
+msgid "First Name is required."
+msgstr "需要填写名字."
+
+#: survey_builder/js/SurveyRegistrationForm.js:54
+msgid "First Name is not valid."
+msgstr "名字格式无效."
+
+#: survey_builder/js/SurveyRegistrationForm.js:57
+msgid "Last Name is required."
+msgstr "需要填写姓氏."
+
+#: survey_builder/js/SurveyRegistrationForm.js:58
+msgid "Last Name is not valid."
+msgstr "姓氏格式无效."
+
+#: survey_builder/js/SurveyRegistrationForm.js:61
+msgid "Primary Email Address is required."
+msgstr "需要重要邮箱地址."
+
+#: survey_builder/js/SurveyRegistrationForm.js:62
+msgid "Primary Email Address is not valid."
+msgstr "重要邮箱地址格式无效."
+
+#: survey_builder/js/SurveyRegistrationForm.js:63
+msgid "That address is already in use by another user."
+msgstr "此地址已被他人所用."
+
+#: survey_builder/js/SurveyRegistrationForm.js:65
+msgid "Please confirm that you are not a robot."
+msgstr "请确认您不是机器人."
 
 #: survey_builder/templates/SurveyCheckboxSetField.ss:14
 #:  survey_builder/templates/SurveyRankingField.ss:16
