@@ -1,11 +1,5 @@
-<style>
-    .custom-search-box{
-        width: 90%;
-        position: relative;
-        top: 10px;
-    }
-</style>
-<input type="text" class="st-default-search-input custom-search-box" placeholder="Search Site">
+
+<input type="text" class="st-default-search-input custom-search-box" placeholder="Search OpenStack">
 
 <script type="text/javascript">
     (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){

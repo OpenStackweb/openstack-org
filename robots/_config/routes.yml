@@ -1,0 +1,7 @@
+---
+Name: robotsroutes
+After: 'framework/routes#coreroutes'
+---
+Director:
+  rules:
+    'robots.txt': 'Robots_Controller'
