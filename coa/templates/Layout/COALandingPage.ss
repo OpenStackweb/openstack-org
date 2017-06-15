@@ -81,7 +81,7 @@
                 <i class="fa fa-area-chart fa-4x"></i>
                 <h3>Performance-Based</h3>
                 <p class="coa-point-description">
-                    Test your skills and problem solving in the command line and Horizon dashboard, based on the OpenStack Liberty version
+                    Test your skills and problem solving in the command line and Horizon dashboard, based on the OpenStack Newton version
                 </p>
             </div>
             <div class="col-sm-4">
@@ -155,7 +155,7 @@
                             <div class="title">
                                 OpenStack release being tested
                             </div>
-                            <img src="/themes/openstack/static/images/coa/liberty-logo.png" alt="" class="logo">
+                            <img src="/assets/software/newton/newton-logo.png" alt="" class="logo">
                         </div>
                     </div>
                 </div>

@@ -219,7 +219,7 @@ a.single-summit:hover, a.single-summit:focus {
 }
 
 a.past-summit::after {
-  background: url('/summit/images/barcelona/austin-square.jpg') no-repeat center center;
+  background: url('/summit/images/barcelona/boston-square.jpg') no-repeat center center;
   content: "";
   opacity: 0.3;
   top: 0;
@@ -233,7 +233,7 @@ a.current-summit {
   padding-top: 10px; }
 
 a.current-summit::after {
-  background: url('/summit/images/barcelona/barcelona-wide.jpg') no-repeat center center;
+  background: url('/summit/images/sydney/sydney-wide.jpg') no-repeat center center;
   content: "";
   opacity: 0.8;
   top: 0;
@@ -247,7 +247,7 @@ a.current-summit:hover:after {
   opacity: 1; }
 
 a.future-summit::after {
-  background: url('/summit/images/barcelona/boston-square.jpg') no-repeat center center;
+  background: url('/summit/images/vancouver/vancouver-square.jpg') no-repeat center center;
   content: "";
   opacity: 0.3;
   top: 0;
