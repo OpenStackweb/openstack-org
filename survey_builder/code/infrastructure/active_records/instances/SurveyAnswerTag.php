@@ -1,3 +1,5 @@
+<?php
+
 /**
  * Copyright 2017 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -10,31 +12,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-import {
-    CLEAR_MESSAGE,
-    SHOW_MESSAGE,
-} from './actions';
 
-export const genericReducers  = function (
-state = {
-    msg: null,
-    msg_type: null,
-    params: {}
-},
-action = {}) {
-    switch(action.type) {
-        case SHOW_MESSAGE:
-            return {
-                ...state,
-                msg: action.payload.msg,
-                msg_type: action.payload.msg_type,
-            };
-        case CLEAR_MESSAGE:
-            return {
-                ...state,
-                msg: null
-            };
-        default:
-            return state;
-    }
-};
+class SurveyAnswerTag extends DataObject
+{
+    const TypeAutomatic = 'AUTOMATIC';
+    const TypeCustom    = 'CUSTOM';
+    const TypeRegex     = 'REGEX';
+
+    static $db = [
+        'Value' => 'Text',
+        'Type' => "Enum('AUTOMATIC,CUSTOM,REGEX','AUTOMATIC')",
+    ];
+
+    static $has_one = [
+        'CreatedBy' => 'Member',
+    ];
+
+    static $belongs_many_many = [
+      'Answers' => 'SurveyAnswer',
+    ];
+}

@@ -1,0 +1,6 @@
+[mysql]
+host =
+db =
+user =
+passwd =
+use_unicode= True

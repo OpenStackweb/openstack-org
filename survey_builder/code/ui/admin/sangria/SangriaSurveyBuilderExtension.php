@@ -17,37 +17,38 @@
  */
 final class SangriaSurveyBuilderExtension extends Extension
 {
+
     const SurveysPageSize = 15;
 
+    static $allowed_actions =  [
+        'SurveyBuilderListSurveys',
+        'SurveyBuilderListDeployments',
+        'SurveyDetails',
+        'DeploymentDetails',
+        'ViewSurveyFreeAnswersList',
+        'ViewSurveyFreeAnswersStats',
+    ];
+
     /**
-     * @var SapphireSurveyRepository
+     * @var ISurveyRepository
      */
     private $survey_repository;
     /**
-     * @var SapphireSurveyTemplateRepository
+     * @var ISurveyTemplateRepository
      */
     private $survey_template_repository;
 
-    public function __construct()
+    public function __construct(ISurveyRepository $survey_repository, ISurveyTemplateRepository $survey_template_repository)
     {
-        $this->survey_repository = new SapphireSurveyRepository();
-        $this->survey_template_repository = new SapphireSurveyTemplateRepository();
+        parent::__construct();
+        $this->survey_repository =  $survey_repository;
+        $this->survey_template_repository = $survey_template_repository;
     }
 
     public function onBeforeInit()
     {
-        Config::inst()->update(get_class($this), 'allowed_actions', [
-            'SurveyBuilderListSurveys',
-            'SurveyBuilderListDeployments',
-            'SurveyDetails',
-            'DeploymentDetails',
-        ]);
-        Config::inst()->update(get_class($this->owner), 'allowed_actions', [
-            'SurveyBuilderListSurveys',
-            'SurveyBuilderListDeployments',
-            'SurveyDetails',
-            'DeploymentDetails',
-        ]);
+        Config::inst()->update(get_class($this), 'allowed_actions', self::$allowed_actions);
+        Config::inst()->update(get_class($this->owner), 'allowed_actions', self::$allowed_actions);
     }
 
     public function onAfterInit()
@@ -302,6 +303,128 @@ HTML;
             $data
         )->renderWith(array('SangriaPage_SurveyBuilderSurveyDetails', 'SangriaPage', 'SangriaPage'));
 
+    }
+
+    /**
+     * @param SS_HTTPRequest $request
+     */
+    public function ViewSurveyFreeAnswersList(SS_HTTPRequest $request){
+
+        Requirements::clear();
+        Requirements::css('sangria/ui/source/css/sangria.css');
+
+        // js
+        Requirements::javascript("themes/openstack/bower_assets/jquery/dist/jquery.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jquery-migrate/jquery-migrate.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jquery-cookie/jquery.cookie.js");
+        //tags inputs
+        // defined here bc amd/requirejs module definition is broken
+        Requirements::javascript('node_modules/bootstrap-3-typeahead/bootstrap3-typeahead.min.js');
+
+        $now  = MySQLDatabase56::nowRfc2822();
+
+        return $this->owner->getViewer('ViewSurveyFreeAnswersList')->process
+        (
+            $this->owner->Customise([
+                'SurveyTemplates' => SurveyTemplate::get()->filter(
+                    [
+                        'ClassName'        => 'SurveyTemplate',
+                        'EndDate:LessThan' => $now,
+                    ]
+                )->sort('StartDate', 'ASC')
+            ])
+        );
+    }
+
+    /**
+     * @param SS_HTTPRequest $request
+     */
+    public function ViewSurveyFreeAnswersStats(SS_HTTPRequest $request){
+
+        $query_string = $request->getVars();
+        $question_id  = intval($query_string['question_id']);
+        $tags         = explode(',', $query_string['tags']);
+        $tags         = implode("','", $tags);
+
+        $question = SurveyQuestionTemplate::get()->byID($question_id);
+
+        if(is_null($question)) return new SS_HTTPResponse("", 404);
+
+        Requirements::clear();
+        Requirements::set_force_js_to_bottom(true);
+        Requirements::css('sangria/ui/source/css/sangria.css');
+
+        // js
+        Requirements::javascript("themes/openstack/bower_assets/jquery/dist/jquery.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jquery-migrate/jquery-migrate.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jquery-cookie/jquery.cookie.js");
+
+        $query_1 = <<<SQL
+SELECT COUNT(ID) AS Qty, Tags FROM (
+SELECT SurveyAnswer.ID, GROUP_CONCAT(SurveyAnswerTag.Value) AS Tags
+from SurveyAnswer 
+INNER JOIN SurveyAnswer_Tags ON  SurveyAnswer_Tags.SurveyAnswerID=SurveyAnswer.ID
+INNER JOIN SurveyAnswerTag ON SurveyAnswer_Tags.SurveyAnswerTagID = SurveyAnswerTag.ID 
+WHERE SurveyAnswerTag.Value IN ('{$tags}')
+AND 
+QuestionID = {$question_id}
+GROUP BY SurveyAnswer.ID
+HAVING COUNT(SurveyAnswerTag.Value) = 1
+) AS T2
+GROUP BY Tags;
+SQL;
+
+        $query_2 = <<<SQL
+SELECT COUNT(ID) AS Qty, Tags FROM (
+SELECT SurveyAnswer.ID, GROUP_CONCAT(SurveyAnswerTag.Value) AS Tags
+from SurveyAnswer 
+INNER JOIN SurveyAnswer_Tags ON  SurveyAnswer_Tags.SurveyAnswerID=SurveyAnswer.ID
+INNER JOIN SurveyAnswerTag ON SurveyAnswer_Tags.SurveyAnswerTagID = SurveyAnswerTag.ID 
+WHERE SurveyAnswerTag.Value IN ('{$tags}')
+AND 
+QuestionID = {$question_id}
+GROUP BY SurveyAnswer.ID
+HAVING COUNT(SurveyAnswerTag.Value) > 1
+) AS T2
+GROUP BY Tags;
+SQL;
+
+        $results = [];
+        $count = 0;
+        $res1 = DB::query($query_1);
+        foreach ($res1 as $row){
+            $count += intval( $row['Qty']);
+            $results[] = new ArrayData([
+                'Count' => $row['Qty'],
+                'Tags' => $row['Tags']
+            ]);
+        }
+
+        $res2 = DB::query($query_2);
+        foreach ($res2 as $row){
+            $count += intval( $row['Qty']);
+            $results[] = new ArrayData([
+                'Count' => $row['Qty'],
+                'Tags' => $row['Tags']
+            ]);
+        }
+
+        $total_count = intval(DB::query("SELECT COUNT(ID) FROM SurveyAnswer WHERE QuestionID = {$question_id};")->value());
+
+        if($total_count - $count > 0) {
+            $results[] = new ArrayData([
+                'Count' => $total_count - $count,
+                'Tags' => 'Other'
+            ]);
+        }
+
+        return $this->owner->getViewer('ViewSurveyFreeAnswersStats')->process
+        (
+            $this->owner->Customise([
+                'Data'          => new ArrayList($results),
+                'QuestionTitle' => sprintf('%s ( N = %s )',$question->Label, $total_count)
+            ])
+        );
     }
 
 }

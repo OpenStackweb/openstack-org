@@ -154,8 +154,10 @@ class WebpackTemplateHelpers implements TemplateGlobalProvider
      *
      * @param string $filename [description]
      */
-    public static function module_css($filename, $withRequirements = true)
+    public static function module_css($filename, $withRequirements = true,  $module_name = null)
     {
+        if(empty($module_name)) $module_name = self::module_name();
+
         // If webpack dev server is running, the CSS is injected with JS
         if (self::is_webpack()) {
             return;
@@ -163,7 +165,7 @@ class WebpackTemplateHelpers implements TemplateGlobalProvider
 
         $link = Controller::join_links(
             Director::absoluteBaseURL(),
-            self::module_name(),
+            $module_name,
             'ui/production/css',
             self::with_extension($filename, 'css')
         );

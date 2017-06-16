@@ -10,31 +10,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-import {
-    CLEAR_MESSAGE,
-    SHOW_MESSAGE,
-} from './actions';
 
-export const genericReducers  = function (
-state = {
-    msg: null,
-    msg_type: null,
-    params: {}
-},
-action = {}) {
-    switch(action.type) {
-        case SHOW_MESSAGE:
-            return {
-                ...state,
-                msg: action.payload.msg,
-                msg_type: action.payload.msg_type,
-            };
-        case CLEAR_MESSAGE:
-            return {
-                ...state,
-                msg: null
-            };
-        default:
-            return state;
-    }
-};
+import { createStore, applyMiddleware, compose} from 'redux';
+import reduceReducers from 'reduce-reducers';
+import thunk from 'redux-thunk';
+import {surveyFreeTextAnswersReducer} from './reducers';
+import { genericReducers } from "~core-utils/reducers";
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+let reducer = reduceReducers(surveyFreeTextAnswersReducer, genericReducers);
+
+const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
+
+export default store;
