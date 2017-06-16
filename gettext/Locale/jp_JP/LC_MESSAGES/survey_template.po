@@ -1,4 +1,7 @@
+# Akira YOSHIYAMA <akirayoshiyama@gmail.com>, 2017. #zanata
 # Ian Y. Choi <ianyrchoi@gmail.com>, 2017. #zanata
+# KATO Tomoyuki <kato.tomoyuki@jp.fujitsu.com>, 2017. #zanata
+# Shintaro Mizuno <mizuno.shintaro@lab.ntt.co.jp>, 2017. #zanata
 # Tom Fifield <tom@openstack.org>, 2017. #zanata
 # Yuko Fukuda <fukuda.yuko@jp.fujitsu.com>, 2017. #zanata
 msgid ""
@@ -6,61 +9,61 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"PO-Revision-Date: 2017-05-31 01:34+0000\n"
-"Last-Translator: Ian Y. Choi <ianyrchoi@gmail.com>\n"
+"PO-Revision-Date: 2017-06-16 04:46+0000\n"
+"Last-Translator: Akira YOSHIYAMA <akirayoshiyama@gmail.com>\n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
 "X-Generator: Zanata 3.9.6\n"
 "Plural-Forms: nplurals=1; plural=0\n"
 
-msgid "OpenStack User Survey - 2017"
-msgstr "OpenStackユーザーアンケート - 2017"
+msgid "OpenStack User Survey - 2017 (Jun-Dec)"
+msgstr "OpenStack ユーザー調査 - 2017年 (7月～12月)"
 
 msgid "About You"
 msgstr "あなたについて"
 
 msgid "First name / Given name*"
-msgstr "名*"
+msgstr "名 / 姓*"
 
 msgid ""
 "Last name / Family name*<br/><font size=\"-2\"><em>We'll never share "
 "individual information without your permission, but we will present select "
 "user survey results in aggregate. </em></font>"
 msgstr ""
-"姓*<br/><font size=\"-"
-"2\"><em>個人情報は許可なしに共有されることはありません。ただし、集計においてユーザーアンケートの記入内容が採用されることはあります。</em></"
-"font>"
+"氏名*<br/><font size=\"-"
+"2\"><em>あなたの許可なしにあなたの個人情報が共有されることはありません。ただし、集計においてユーザーアンケートの記入内容が採用されることはあります。</"
+"em></font>"
 
 msgid ""
 "What are the ways you work with OpenStack?*<br/><font size=\"-2\"><em>Select "
 "all that apply</em></font>"
 msgstr ""
-"あなたはOpenStackをどのように使っていますか？*<br/><font size=\"-2\"><em>該当するものをすべて選択してください。</"
-"em></font>"
+"あなたは OpenStack をどのように使っていますか?*<br/><font size=\"-"
+"2\"><em>該当するものをすべて選択してください。</em></font>"
 
 msgid "-- Select One --"
-msgstr "-- 1つを選択してください --"
+msgstr "-- 1 つ選択してください --"
 
 msgid "App developer / deployer"
-msgstr ""
+msgstr "アプリケーション開発者／利用者"
 
 msgid "CIO/ IT infrastructure manager"
-msgstr ""
+msgstr "CIO／IT インフラ責任者"
 
 msgid "Cloud architect"
-msgstr ""
+msgstr "クラウドアーキテクト"
 
 msgid "Cloud operator or sys-admin"
-msgstr ""
+msgstr "クラウド運用者／システム管理者"
 
 msgid "OpenStack upstream developer"
-msgstr ""
+msgstr "OpenStack アップストリーム開発者"
 
 msgid "Other"
 msgstr "その他"
 
 msgid "Please describe your relationship with OpenStack"
-msgstr "OpenStackとの関わりを説明してください。"
+msgstr "あなたと OpenStack との関係を記載ください。"
 
 msgid "Your Email*"
 msgstr "Emailアドレス*"
@@ -71,7 +74,9 @@ msgstr "居住国*"
 msgid ""
 "The OpenStack Foundation and User Committee may communicate with me in the "
 "future about my usage.*"
-msgstr "OpenStack FoundationとUser CommitteeがOpenStackの利用について問合せすることを許可する。*"
+msgstr ""
+"OpenStack Foundation と User Committee が OpenStack "
+"の利用状況についてあなたに問い合わせることを許可する。*"
 
 msgid "Your Organization"
 msgstr "所属組織"
@@ -83,7 +88,7 @@ msgid "Your Organization’s Primary Industry*"
 msgstr "組織が属する主な業界*"
 
 msgid "Academic / Research"
-msgstr "学問 / 研究"
+msgstr "学問／研究"
 
 msgid "Advertising"
 msgstr "広告"
@@ -98,7 +103,7 @@ msgid "Energy"
 msgstr "エネルギー"
 
 msgid "Film / Media"
-msgstr "映像 / メディア"
+msgstr "映像／メディア"
 
 msgid "Finance"
 msgstr "金融"
@@ -107,7 +112,7 @@ msgid "Gaming"
 msgstr "ゲーム"
 
 msgid "Government / Defense"
-msgstr "政府 / 国防(軍)"
+msgstr "政府／国防"
 
 msgid "Healthcare"
 msgstr "医療"
@@ -119,13 +124,13 @@ msgid "Insurance"
 msgstr "保険"
 
 msgid "Manufacturing / Industrial"
-msgstr "生産 / 工業"
+msgstr "生産／工業"
 
 msgid "Nonprofit"
 msgstr "NPO"
 
 msgid "Retail / ecommerce"
-msgstr "小売 / Eコマース"
+msgstr "小売／Eコマース"
 
 msgid "Telecommunications"
 msgstr "通信"
@@ -134,105 +139,135 @@ msgid "Travel"
 msgstr "旅行"
 
 msgid "Please specify which industry best describes your organization."
-msgstr "あなたの所属する組織が該当する業界を選択してください。"
+msgstr "あなたの所属組織が該当する業界を選択してください。"
 
 msgid "Your Organization's Primary IT Focus"
-msgstr "あなたの組織の主なITの活用"
+msgstr "あなたの所属組織の主なITの活用"
 
 msgid "Big data/ data analytics"
-msgstr ""
+msgstr "ビッグデータ／データ解析"
 
 msgid "DevOps consulting/ delivery"
-msgstr ""
+msgstr "DevOps コンサルティング／導入"
 
 msgid "HPC"
-msgstr ""
+msgstr "HPC"
 
 msgid "Infrastructure provider (compute, network, and/or storage)"
-msgstr ""
+msgstr "インフラプロバイダー (コンピュート、ネットワーク、ストレージ)"
 
 msgid "Media & entertainment"
-msgstr ""
+msgstr "メディア & エンターテインメント"
 
 msgid "Telco"
-msgstr ""
+msgstr "テレコム"
 
 msgid "Data center/ co-location services"
-msgstr ""
+msgstr "データセンター／コロケーションサービス"
 
 msgid "Consulting/ professional services"
-msgstr ""
+msgstr "コンサルティング／プロフェッショナルサービス"
 
 msgid "Education/ training services"
-msgstr ""
+msgstr "教育／トレーニングサービス"
 
 msgid "Public/ hosted cloud service provider"
-msgstr ""
+msgstr "パブリック／ホステッド クラウドサービスプロバイダー"
 
 msgid "Private cloud provider"
-msgstr ""
+msgstr "プライベートクラウドプロバイダー"
 
 msgid "Systems integrator"
-msgstr ""
+msgstr "システムインテグレーター(SIer)"
 
 msgid "Other IT activity"
 msgstr "その他のIT活用"
 
 msgid "<hr><p>Your Organization’s Primary Location or Headquarters</p>"
-msgstr "<hr><p>あなたの組織の所在地または本社</p>"
+msgstr "<hr><p>あなたの所属組織の所在地または本社</p>"
 
 msgid "Country*"
 msgstr "国*"
 
 msgid "State / Province / Region"
-msgstr ""
+msgstr "都道府県／地域"
 
 msgid "City*"
-msgstr ""
+msgstr "都市*"
 
 msgid "Your Organization's Size*"
-msgstr ""
+msgstr "あなたの所属組織の規模*"
 
 msgid "1 to 9 employees"
-msgstr ""
+msgstr "従業員 10人未満"
 
 msgid "10 to 99 employees"
-msgstr ""
+msgstr "従業員 100人未満"
 
 msgid "100 to 999 employees"
-msgstr ""
+msgstr "従業員 1,000人未満"
 
 msgid "1,000 to 9,999 employees"
-msgstr ""
+msgstr "従業員 1万人未満"
 
 msgid "10,000 to 99,999 employees"
-msgstr ""
+msgstr "従業員 10万人未満"
 
 msgid "100,000 employees or more"
-msgstr ""
+msgstr "従業員 10万人以上"
 
 msgid "Don’t know / not sure"
-msgstr ""
+msgstr "知らない／自信がない"
 
 msgid "Your Thoughts"
-msgstr ""
+msgstr "あなたのご意見"
 
 msgid "What are your top business drivers for using OpenStack?"
-msgstr ""
+msgstr "OpenStack の利用で、ビジネス上最重要の動機はどれですか？"
+
+msgid ""
+"Standardize on the same open platform and APIs that power a global network "
+"of of public and private clouds"
+msgstr "同じオープンな基盤と API による標準化により、パブリック／プライベートクラウドのグローバルなネットワークを強化したい"
+
+msgid "Avoid vendor lock-in"
+msgstr "ベンダーロックインを回避したい"
+
+msgid "Accelerate ability to innovate"
+msgstr "イノベーションを加速したい"
+
+msgid "Increase operational efficiency"
+msgstr "運用効率を向上したい"
+
+msgid "Save money"
+msgstr "費用を削減したい"
+
+msgid "Attract top technical talent"
+msgstr "トップレベルの技術者を雇用したい"
+
+msgid "Achieve security and/or privacy goals"
+msgstr "セキュリティ／プライバシー目標に到達したい"
+
+msgid "Something else not listed here"
+msgstr "上記以外の理由"
+
+msgid ""
+"<p><span>1 = top business driver, 2 = next, 3 = third, and so on</span></p>"
+msgstr "<p><span>1 = 第１動機, 2 = 第２動機, 3 = 第３動機, …</span></p>"
 
 msgid "Please specify"
-msgstr ""
+msgstr "具体的に記載してください。"
 
 msgid ""
 "How likely are you to recommend OpenStack to a friend or colleague? (0=Least "
 "Likely, 10=Most Likely)*"
-msgstr ""
+msgstr "OpenStack を友人や同僚に推薦しますか？(0=推薦しない、10=強く推薦する)"
 
 msgid "-- Select One  (0=Least Likely, 10=Most Likely) --"
-msgstr ""
+msgstr "-- １つ選択してください。(0=推薦しない、10=強く推薦する) --"
 
 msgid "0"
-msgstr ""
+msgstr "0"
 
 msgid "1"
 msgstr "1"
@@ -265,7 +300,7 @@ msgid "10"
 msgstr "10"
 
 msgid "What is your primary reason for this rating?"
-msgstr ""
+msgstr "このような評価をされた理由は何ですか？"
 
 msgid ""
 "<hr><p>We would love to hear how OpenStack and the OpenStack Foundation can "
@@ -274,60 +309,65 @@ msgid ""
 "text fields are independent, so we cannot \"see previous answer.\" We would "
 "really appreciate a separate answer to each question.</p>"
 msgstr ""
+"<hr><p>あなたのご希望に OpenStack や OpenStack Foundation "
+"がどのようにお応えできるかを教えてください。以下の自由記述欄の回答は任意ですが、我々にとって貴重な情報となります。本回答は匿名であり、他の設問とは独立して扱われるため、これまでご回答頂いた内容を私達は参照できません。是非とも各設問への回答にご協力ください。 "
+"</p>"
 
 msgid "What do you like most about OpenStack, besides “free” and “open”?"
-msgstr ""
+msgstr "「無償」と「オープン」以外で、OpenStack を気に入っている理由は何ですか？"
 
 msgid "Which areas of OpenStack require further enhancement?"
-msgstr ""
+msgstr "OpenStack のどの部分で更なる強化が必要ですか？"
 
 msgid ""
 "Which new/emerging technologies are you interested in using or seeing "
 "integrated with OpenStack?<br/><font size=\"-2\"><em>Select all that apply</"
 "em></font>"
 msgstr ""
+"新しい技術の中で OpenStack と共に利用する／組み込まれることに興味があるものはどれですか？<br/><font size=\"-"
+"2\"><em>当てはまる項目を全て選択して下さい</em></font>"
 
 msgid "Bare metal"
-msgstr ""
+msgstr "ベアメタル"
 
 msgid "Containers"
-msgstr ""
+msgstr "コンテナ"
 
 msgid "Hardware accelerators (e.g. FPGAs, GPGPUs, ASICs)"
-msgstr ""
+msgstr "ハードウェアアクセラレータ（例：FPGS, GPGPU, ASIC)"
 
 msgid "Hybrid cloud"
-msgstr ""
+msgstr "ハイブリッドクラウド"
 
 msgid "Internet of Things"
-msgstr ""
+msgstr "IoT"
 
 msgid "Platform as a Service"
-msgstr ""
+msgstr "PaaS"
 
 msgid "SDN/NFV"
-msgstr ""
+msgstr "SDN/NFV"
 
 msgid "Please specify:"
-msgstr ""
+msgstr "具体的に記述してください："
 
 msgid "How often do you refer to documentation from docs.openstack.org?"
-msgstr ""
+msgstr "どれぐらいの頻度で docs.openstack.org のドキュメントを参照しますか？"
 
 msgid "Daily"
-msgstr ""
+msgstr "毎日"
 
 msgid "Weekly"
-msgstr ""
+msgstr "毎週"
 
 msgid "Monthly"
-msgstr ""
+msgstr "毎月"
 
 msgid "Rarely"
-msgstr ""
+msgstr "まれに"
 
 msgid "Never"
-msgstr ""
+msgstr "一度もない"
 
 msgid ""
 "<p>A deployment profile tracks information about an individual OpenStack "
@@ -339,24 +379,29 @@ msgid ""
 "and will only be presented in aggregate unless you consent to making it "
 "public.</p>"
 msgstr ""
+"<p>デプロイメントプロファイルは個々の OpenStack 環境の情報を調査するものです。</p>\n"
+"<ul><li>各組織で複数の OpenStack 環境毎に個別のデプロイメントプロファイルを持つことができます。</"
+"li><li>一度デプロイメントプロファイルを作成すればいつでも内容の更新を行うことができます。</"
+"li><li>デプロイメントプロファイルを作成した方がデフォルトの管理者となります。</li></"
+"ul><p>提供された情報は基本的に非公開として扱い、公開すると同意された場合を除き、集約された形でのみ開示されます。</p>"
 
 msgid "Your OpenStack Deployments"
-msgstr ""
+msgstr "あなたの OpenStack 環境"
 
 msgid "Add"
-msgstr ""
+msgstr "追加"
 
 msgid "Delete"
-msgstr ""
+msgstr "削除"
 
 msgid "Edit"
-msgstr ""
+msgstr "編集"
 
 msgid "Thank You"
-msgstr ""
+msgstr "ありがとうございました。"
 
 msgid "Deployment"
-msgstr ""
+msgstr "OpenStack 環境"
 
 msgid ""
 "Please create a friendly label, like “Production OpenStack Deployment.” This "
@@ -364,287 +409,295 @@ msgid ""
 "organization work on this deployment, please work with your team members to "
 "enter your deployment data to avoid duplication.*"
 msgstr ""
+"「本番 OpenStack "
+"環境」のような簡易な名称を付与してください。この名称は本アンケートツール内での識別に利用されます。同一組織で複数の方が本OpenStack環境について作業される場合、他の方と協力し、重複しないようにご注意ください。"
 
 msgid "Each deployment profile can be marked public or confidential.*"
-msgstr ""
+msgstr "各デプロイメントプロファイルは公開／非公開が選択できます。"
 
 msgid ""
 "<strong>Public:</strong> The information I provide on this page only may be "
 "shared on openstack.org."
-msgstr ""
+msgstr "<strong>公開：</strong> ここで提供する情報は openstack.org 上でのみ共有を許可します。"
 
 msgid ""
 "<strong>Confidential:</strong> All information provided, including my "
 "organization name, should be kept confidential to the OpenStack Foundation."
 msgstr ""
+"<strong>非公開：</strong> 回答した全ての情報（組織名を含む）はOpenStack Foundation に対して機密扱いとします。"
 
 msgid ""
 "In what stage is your OpenStack deployment? (make a new deployment profile "
 "for each type of deployment)*"
-msgstr ""
+msgstr "貴方の OpenStack 環境はどの段階ですか？（各環境毎にデプロイメントプロファイルを作成してください）*"
 
 msgid "Proof of Concept"
-msgstr ""
+msgstr "PoC (コンセプト実証）"
 
 msgid "Under development / In testing"
-msgstr ""
+msgstr "構築中／検証中"
 
 msgid "Production / Full Operational Use"
-msgstr ""
+msgstr "本番運用中"
 
 msgid "When was this deployment created?"
-msgstr ""
+msgstr "本環境はいつ構築しましたか？"
 
 msgid "2017"
-msgstr "2017"
+msgstr "2017年"
 
 msgid "2016"
-msgstr "2016"
+msgstr "2016年"
 
 msgid "2015"
-msgstr "2015"
+msgstr "2015年"
 
 msgid "2014"
-msgstr "2014"
+msgstr "2014年"
 
 msgid "2013"
-msgstr "2013"
+msgstr "2013年"
 
 msgid "2012"
-msgstr "2012"
+msgstr "2012年"
 
 msgid "2011"
-msgstr "2011"
+msgstr "2011年"
 
 msgid "2010"
-msgstr "2010"
+msgstr "2010年"
 
 msgid "Older"
-msgstr ""
+msgstr "それ以前"
 
 msgid "I don't know."
-msgstr ""
+msgstr "知らない"
 
 msgid ""
 "In which country / countries is this OpenStack deployment physically "
 "located?*<br/><font size=\"-2\"><em>You can select multiple country names.</"
 "em></font>"
 msgstr ""
+"その OpenStack 環境は物理的にどの国（国々）に位置していますか？*<br/><font size=\"-"
+"2\"><em>複数の国名を選択できます</em></font>"
 
 msgid "Deployment Type"
-msgstr ""
+msgstr "OpenStack 環境の種類"
 
 msgid "Community Cloud"
-msgstr ""
+msgstr "コミュニティクラウド"
 
 msgid "On-Premises Private Cloud"
-msgstr ""
+msgstr "オンプレミス プライベートクラウド"
 
 msgid "Off-Premises Private Cloud"
-msgstr ""
+msgstr "オフプレミス プライベートクラウド"
 
 msgid "Public Cloud"
-msgstr ""
+msgstr "パブリッククラウド"
 
 msgid ""
 "Which releases does this deployment currently use?*<BR><font size=\"-"
 "2\"><em>Select All That Apply</em></font>"
 msgstr ""
+"本環境は現在どのリリース（バージョン）を利用していますか？*<BR><font size=\"-2\"><em>当てはまる項目を全て選択して下さい</"
+"em></font>"
 
 msgid "Trunk / continuous deployment"
-msgstr ""
+msgstr "開発版／継続デプロイ"
 
 msgid "Newton (2016.2)"
-msgstr ""
+msgstr "Newton (2016.2)"
 
 msgid "Mitaka (2016.2)"
-msgstr ""
+msgstr "Mitaka (2016.2)"
 
 msgid "Liberty (2015.2)"
-msgstr ""
+msgstr "Liberty (2015.2)"
 
 msgid "Kilo (2015.1)"
-msgstr ""
+msgstr "Kilo (2015.1)"
 
 msgid "Juno (2014.2)"
-msgstr ""
+msgstr "Juno (2014.2)"
 
 msgid "Icehouse (2014.1)"
-msgstr ""
+msgstr "Icehouse (2014.1)"
 
 msgid "Havana (2013.2)"
-msgstr ""
+msgstr "Havana (2013.2)"
 
 msgid "Grizzly (2013.1)"
-msgstr ""
+msgstr "Grizzly (2013.1)"
 
 msgid "Folsom (2012.2)"
-msgstr ""
+msgstr "Folsom (2012.2)"
 
 msgid "Essex (2012.1)"
-msgstr ""
+msgstr "Essex (2012.1)"
 
 msgid ""
 "Which workloads are you currently using?<BR><font size=\"-2\"><em>Select All "
 "That Apply</em></font>"
 msgstr ""
+"どのような用途で利用していますか？<BR><font size=\"-2\"><em>当てはまる項目を全て選択して下さい</em></font>"
 
 msgid "Big Data Analytics/ Data Mining/ Hadoop, Spark, etc."
-msgstr ""
+msgstr "ビッグデータ分析／データマイニング／Hadoop, Spark等"
 
 msgid "Bio and medical"
-msgstr ""
+msgstr "医療・バイオ"
 
 msgid "Business applications (i.e. ERP, CRM, email)"
-msgstr ""
+msgstr "ビジネスアプリケーション（ERP, CRM, email など）"
 
 msgid "Database: mySQL, Oracle, etc."
-msgstr ""
+msgstr "データベース（MySQL, Oracle等）"
 
 msgid ""
 "Infrastructure services (i.e. public and private cloud products and "
 "services)"
-msgstr ""
+msgstr "基盤サービス（パブリック／プライベートクラウド製品、サービスなど）"
 
 msgid "Mobile applications and services"
-msgstr ""
+msgstr "モバイルアプリ・サービス"
 
 msgid "Network Functions Virtualization"
-msgstr ""
+msgstr "NFV"
 
 msgid ""
 "Research computing (including High Performance and High Throughput "
 "Computing)"
-msgstr ""
+msgstr "科学技術計算（High Performance, High Throughput Computing含む）"
 
 msgid "SaaS provider/ delivery"
-msgstr ""
+msgstr "SaaSプロバイダ／デリバリ"
 
 msgid "Software dev/ test/ QA and CI"
-msgstr ""
+msgstr "ソフトウェア開発／テスト／QA・CI"
 
 msgid "Storage/  backup/ archiving"
-msgstr ""
+msgstr "ストレージ／バックアップ／アーカイブ"
 
 msgid "Video processing and content delivery"
-msgstr ""
+msgstr "映像作成・コンテンツ配信"
 
 msgid "Web services and e-commerce"
-msgstr ""
+msgstr "Webサービス・Eコマース"
 
 msgid ""
 "Which projects does this deployment currently use, or are you interested in "
 "using in the future?"
-msgstr ""
+msgstr "本環境はどのプロジェクトを利用していますか、もしくは今後の利用に興味がありますか？"
 
 msgid "Production"
-msgstr ""
+msgstr "本番環境"
 
 msgid "Testing"
-msgstr ""
+msgstr "検証中"
 
 msgid "Interested"
-msgstr ""
+msgstr "興味がある"
 
 msgid "Nova (Compute)"
-msgstr ""
+msgstr "Nova (Compute)"
 
 msgid "Ceilometer (Metering & Monitoring)"
-msgstr ""
+msgstr "Ceilometer (Metering & Monitoring)"
 
 msgid "Cinder (Block Storage)"
-msgstr ""
+msgstr "Cinder (Block Storage)"
 
 msgid "Designate (DNS Service)"
-msgstr ""
+msgstr "Designate (DNS Service)"
 
 msgid "Glance (Image Service)"
-msgstr ""
+msgstr "Glance (Image Service)"
 
 msgid "Heat (Orchestration)"
-msgstr ""
+msgstr "Heat (Orchestration)"
 
 msgid "Horizon (Dashboard)"
-msgstr ""
+msgstr "Horizon (Dashboard)"
 
 msgid "Ironic (Bare Metal)"
-msgstr ""
+msgstr "Ironic (Bare Metal)"
 
 msgid "Keystone (Identity Service)"
-msgstr ""
+msgstr "Keystone (Identity Service)"
 
 msgid "Neutron (Networking)"
-msgstr ""
+msgstr "Neutron (Networking)"
 
 msgid "Sahara (Data Processing)"
-msgstr ""
+msgstr "Sahara (Data Processing)"
 
 msgid "Swift (Object Storage)"
-msgstr ""
+msgstr "Swift (Object Storage)"
 
 msgid "Trove (Database Service)"
-msgstr ""
+msgstr "Trove (Database Service)"
 
 msgid "Barbican (Key Management)"
-msgstr ""
+msgstr "Barbican (Key Management)"
 
 msgid "Congress (Governance Service)"
-msgstr ""
+msgstr "Congress (Governance Service)"
 
 msgid "Manila (Shared File Systems)"
-msgstr ""
+msgstr "Manila (Shared File Systems)"
 
 msgid "Magnum(Containers Service)"
-msgstr ""
+msgstr "Magnum(Containers Service)"
 
 msgid "Murano (Application Catalog)"
-msgstr ""
+msgstr "Murano (Application Catalog)"
 
 msgid "Rally (Benchmark Service)"
-msgstr ""
+msgstr "Rally (Benchmark Service)"
 
 msgid "Cue (Message Broker Service)"
-msgstr ""
+msgstr "Cue (Message Broker Service)"
 
 msgid "Kolla (Containerized Deployment)"
-msgstr ""
+msgstr "Kolla (Containerized Deployment)"
 
 msgid "Magnetodb (Key-Value Store as a Service)"
-msgstr ""
+msgstr "Magnetodb (Key-Value Store as a Service)"
 
 msgid "Mistral (Workflow Service)"
-msgstr ""
+msgstr "Mistral (Workflow Service)"
 
 msgid "Solum (Software Dev Lifecycle Mgmt)"
-msgstr ""
+msgstr "Solum (Software Dev Lifecycle Mgmt)"
 
 msgid "TripleO (Deployment)"
-msgstr ""
+msgstr "TripleO (Deployment)"
 
 msgid "Zaqar (Message Service)"
-msgstr ""
+msgstr "Zaqar (Message Service)"
 
 msgid ""
 "Which projects does this deployment currently use, or are you interested in "
 "using in the future? (PoC/Testing)"
-msgstr ""
+msgstr "本環境はどのプロジェクトを利用していますか、もしくは今後の利用に興味がありますか？（PoC／検証）"
 
 msgid ""
 "Are you interested in helping our interoperability efforts by using RefStack "
 "to test your cloud capabilities?"
-msgstr ""
+msgstr "RefStack を用いてあなたのクラウドの機能検証をすることで、我々の相互接続性の取り組みに協力することに興味がありますか？"
 
 msgid "Yes"
-msgstr ""
+msgstr "はい"
 
 msgid "No, but I am interested in helping"
-msgstr ""
+msgstr "いいえ、ただし協力することには興味があります"
 
 msgid "No, and not interested in helping"
-msgstr ""
+msgstr "いいえ、協力することに興味はありません"
 
 msgid "Deployment Decisions"
-msgstr ""
+msgstr "OpenStack 環境構築に関する判断"
 
 msgid ""
 "<h3>What’s the size of this cloud?</h3><p>All of these questions are "
@@ -652,244 +705,248 @@ msgid ""
 "cloud size so that we may reflect this back to the community in aggregate.</"
 "p><hr>"
 msgstr ""
+"<h3>本クラウドの規模はどの程度ですか？</"
+"h3><p>全ての設問は必須ではなく、また非公開です。クラウドの規模はあなたの推測の範囲で最も近い値を選択してください。本情報はコミュニティ向けに集約された情報として提供するために活用されます。</"
+"p><hr>"
 
 msgid "Number of users"
-msgstr ""
+msgstr "利用者数"
 
 msgid "1 to 9 users"
-msgstr ""
+msgstr "10人未満"
 
 msgid "10 to 99 users"
-msgstr ""
+msgstr "100人未満"
 
 msgid "100 to 999 users"
-msgstr ""
+msgstr "1,000人未満"
 
 msgid "1,000 to 9,999 users"
-msgstr ""
+msgstr "1万人未満"
 
 msgid "10,000 to 99,999 users"
-msgstr ""
+msgstr "10万人未満"
 
 msgid "100,000 to 999,999 users"
-msgstr ""
+msgstr "100万人未満"
 
 msgid "1,000,000 to 9,999,999 users"
-msgstr ""
+msgstr "1,000万人未満"
 
 msgid "10,000,000 to 999,999,999 users"
-msgstr ""
+msgstr "1億人未満"
 
 msgid "100,000,000 or more users"
-msgstr ""
+msgstr "1億人以上"
 
 msgid "Physical compute nodes"
-msgstr ""
+msgstr "物理コンピュートノード数"
 
 msgid "1 to 9 nodes"
-msgstr ""
+msgstr "10台未満"
 
 msgid "10 to 99 nodes"
-msgstr ""
+msgstr "100台未満"
 
 msgid "100 to 999 nodes"
-msgstr ""
+msgstr "1,000台未満"
 
 msgid "1,000 to 9,999 nodes"
-msgstr ""
+msgstr "1万台未満"
 
 msgid "10,000 to 99,999 nodes"
-msgstr ""
+msgstr "10万台未満"
 
 msgid "100,000 to 999,999 nodes"
-msgstr ""
+msgstr "100万台未満"
 
 msgid "1 million or more nodes"
-msgstr ""
+msgstr "100万台以上"
 
 msgid "Processor cores"
-msgstr ""
+msgstr "CPUコア数"
 
 msgid "1 to 9 cores"
-msgstr ""
+msgstr "10コア未満"
 
 msgid "10 to 99 cores"
-msgstr ""
+msgstr "100コア未満"
 
 msgid "100 to 999 cores"
-msgstr ""
+msgstr "1,000コア未満"
 
 msgid "1,000 to 9,999 cores"
-msgstr ""
+msgstr "1万コア未満"
 
 msgid "10,000 to 99,999 cores"
-msgstr ""
+msgstr "10万コア未満"
 
 msgid "100,000 to 999,999 cores"
-msgstr ""
+msgstr "100万コア未満"
 
 msgid "1 million or more cores"
-msgstr ""
+msgstr "100万コア以上"
 
 msgid "Number of instances"
-msgstr ""
+msgstr "インスタンス(VM)数"
 
 msgid "1 to 9 instances"
-msgstr ""
+msgstr "10インスタンス未満"
 
 msgid "10 to 99 instances"
-msgstr ""
+msgstr "100インスタンス未満"
 
 msgid "100 to 999 instances"
-msgstr ""
+msgstr "1,000インスタンス未満"
 
 msgid "1,000 to 9,999 instances"
-msgstr ""
+msgstr "1万インスタンス未満"
 
 msgid "10,000 to 99,999 instances"
-msgstr ""
+msgstr "10万インスタンス未満"
 
 msgid "100,000 to 999,999 instances"
-msgstr ""
+msgstr "100万インスタンス未満"
 
 msgid "1 million or more instances"
-msgstr ""
+msgstr "100万インスタンス以上"
 
 msgid "Total number of usable IPs"
-msgstr ""
+msgstr "利用可能IPアドレス総数"
 
 msgid "1 to 9 IPs"
-msgstr ""
+msgstr "10個未満"
 
 msgid "10 to 99 IPs"
-msgstr ""
+msgstr "100個未満"
 
 msgid "100 to 999 IPs"
-msgstr ""
+msgstr "1,000個未満"
 
 msgid "1,000 to 9,999 IPs"
-msgstr ""
+msgstr "1万個未満"
 
 msgid "10,000 to 99,999 IPs"
-msgstr ""
+msgstr "10万個未満"
 
 msgid "100,000 or more IPs"
-msgstr ""
+msgstr "10万個以上"
 
 msgid "How much usable block storage do you have in this Cinder deployment?"
-msgstr ""
+msgstr "この Cinder 環境で利用可能なストレージ容量"
 
 msgid "Less than 1 TB"
-msgstr ""
+msgstr "1TB未満"
 
 msgid "1 TB to 9 TB"
-msgstr ""
+msgstr "10TB未満"
 
 msgid "10 TB to 99 TB"
-msgstr ""
+msgstr "100TB未満"
 
 msgid "100 TB to 999 TB"
-msgstr ""
+msgstr "1PB (1,000TB) 未満"
 
 msgid "1 PB to 9 PB"
-msgstr ""
+msgstr "10PB未満"
 
 msgid "10 PB to 99 PB"
-msgstr ""
+msgstr "100PB未満"
 
 msgid "100 PB to 999 PB"
-msgstr ""
+msgstr "1EB (1,000PB) 未満"
 
 msgid "1 EB to 9 EB"
-msgstr ""
+msgstr "10EB未満"
 
 msgid "10 EB to 99 EB"
-msgstr ""
+msgstr "100EB未満"
 
 msgid "100 to 999 EB"
-msgstr ""
+msgstr "1ZB (1,000EB) 未満"
 
 msgid "1 ZB to 9 ZB"
-msgstr ""
+msgstr "10ZB未満"
 
 msgid ""
 "How much <strong>OpenStack Object Storage (Swift)</strong> have you "
 "provisioned?"
-msgstr ""
+msgstr "どれぐらいの <strong>OpenStack Object Storage (Swift)</strong> 環境を構築しましたか？"
 
 msgid ""
 "How many <strong>OpenStack Object Storage (Swift)</strong> objects are "
 "stored?"
 msgstr ""
+"どれぐらいの <strong>OpenStack Object Storage (Swift)</strong> オブジェクトが保存されていますか？"
 
 msgid "Fewer than 1,000 objects"
-msgstr ""
+msgstr "1,000個未満"
 
 msgid "1,000 to 9,999 objects"
-msgstr ""
+msgstr "1万個未満"
 
 msgid "10,000 to 99,999 objects"
-msgstr ""
+msgstr "10万個未満"
 
 msgid "100,000 to 999,999 objects"
-msgstr ""
+msgstr "100万個未満"
 
 msgid "1 million to 9 million objects"
-msgstr ""
+msgstr "1,000万個未満"
 
 msgid "10 million to 999 million objects"
-msgstr ""
+msgstr "1億個未満"
 
 msgid "100 million to 999 million objects"
-msgstr ""
+msgstr "10億個未満"
 
 msgid "1 billion to 9 billion objects"
-msgstr ""
+msgstr "100億個未満"
 
 msgid "10 billion to 99 billion objects"
-msgstr ""
+msgstr "1,000億個未満"
 
 msgid "100 billion or more objects"
-msgstr ""
+msgstr "1,000億個以上"
 
 msgid "Approximately how many Nova cells do you use?"
-msgstr ""
+msgstr "使用している Nova セルのおよその個数は？"
 
 msgid "None"
-msgstr ""
+msgstr "無し"
 
 msgid "1 cell"
-msgstr ""
+msgstr "1セル"
 
 msgid "2 cells"
-msgstr ""
+msgstr "2セル"
 
 msgid "3 cells"
-msgstr ""
+msgstr "3セル"
 
 msgid "4 cells"
-msgstr ""
+msgstr "4セル"
 
 msgid "5 cells"
-msgstr ""
+msgstr "5セル"
 
 msgid "6 cells"
-msgstr ""
+msgstr "6セル"
 
 msgid "7 cells"
-msgstr ""
+msgstr "7セル"
 
 msgid "8 cells"
-msgstr ""
+msgstr "8セル"
 
 msgid "9 cells"
-msgstr ""
+msgstr "9セル"
 
 msgid "10 cells"
-msgstr ""
+msgstr "10セル"
 
 msgid "More than 10"
-msgstr ""
+msgstr "11セル以上"
 
 msgid ""
 "<p><span style=\"color: #0083c8; font-size: 1.6em;\">Deployment Decisions</"
@@ -898,223 +955,241 @@ msgid ""
 " This information is optional, but will be kept confidential and never "
 "published in connection with you or your organization.</p><hr>"
 msgstr ""
+"<p><span style=\"color: #0083c8; font-size: 1.6em;\">構築判断</span></"
+"p><p>以下の情報は、OpenStack "
+"環境で使用中の最も一般的な構成とコンポーネント選択を我々が理解するのに役立ちます。この情報の記入は任意ですが、戴いた情報はあなたやあなたの所属企業と我々の間で秘密扱いとなり、公開される事はありません。</"
+"p><hr>"
 
 msgid ""
 "What packages does this deployment use?<BR><font size=\"-2\"><em>Select All "
 "That Apply</em></font>"
 msgstr ""
+"この環境で使用されているパッケージはどれですか？<BR><font size=\"-2\"><em>当てはまる項目を全て選択して下さい</em></"
+"font>"
 
 msgid "Unmodified packages from the OS"
-msgstr ""
+msgstr "OSで提供されたパッケージ（改変なし）"
 
 msgid "Unmodified packages from a non-OS source (e.g. vendor distribution)"
-msgstr ""
+msgstr "OS以外の提供元（OpenStackディストリビュータ等）から提供されたパッケージ（改変なし）"
 
 msgid "Packages you've modified"
-msgstr ""
+msgstr "あなたが改変したパッケージ"
 
 msgid "Packages you’ve built yourself"
-msgstr ""
+msgstr "あなたが自分で作成したパッケージ"
 
 msgid ""
 "If you have modified packages or have built your own packages, why?<BR><font "
 "size=\"-2\"><em>Select All That Apply</em></font>"
 msgstr ""
+"修正／独自作成したパッケージがある場合、作成した理由は何ですか？<BR><font size=\"-2\"><em>当てはまる項目を全て選択して下さい</"
+"em></font>"
 
 msgid "Need an OpenStack bug fix not in standard packages"
-msgstr ""
+msgstr "標準パッケージで未適用の OpenStack バグ修正が必要だった"
 
 msgid "Need an OpenStack feature not in standard packages"
-msgstr ""
+msgstr "標準パッケージで提供されていない OpenStack 機能が必要だった"
 
 msgid "Standard packages have bugs"
-msgstr ""
+msgstr "標準パッケージにバグがある"
 
 msgid "Standard packages aren't updated quickly enough"
-msgstr ""
+msgstr "標準パッケージの更新がいまいち遅い"
 
 msgid ""
 "Which tools are you using to deploy / manage this cluster?<BR><font size=\"-"
 "2\"><em>Select All That Apply</em></font>"
 msgstr ""
+"この環境を構築／管理するのに使用しているツールはどれですか？<BR><font size=\"-2\"><em>当てはまる項目を全て選択して下さい</"
+"em></font>"
 
 msgid "Ansible"
-msgstr ""
+msgstr "Ansible"
 
 msgid "Ansible (LXC)"
-msgstr ""
+msgstr "Ansible (LXC)"
 
 msgid "CFEngine"
-msgstr ""
+msgstr "CFEngine"
 
 msgid "Chef"
-msgstr ""
+msgstr "Chef"
 
 msgid "Container-based orchestration"
-msgstr ""
+msgstr "コンテナベースのオーケストレーション"
 
 msgid "Crowbar"
-msgstr ""
+msgstr "Crowbar"
 
 msgid "DevStack"
-msgstr ""
+msgstr "DevStack"
 
 msgid "Fuel"
-msgstr ""
+msgstr "Fuel"
 
 msgid "Fuel CCP"
-msgstr ""
+msgstr "Fuel CCP"
 
 msgid "Helm"
-msgstr ""
+msgstr "Helm"
 
 msgid "Juju"
-msgstr ""
+msgstr "Juju"
 
 msgid "Kolla-Ansible"
-msgstr ""
+msgstr "Kolla-Ansible"
 
 msgid "Kolla-Kubernetes"
-msgstr ""
+msgstr "Kolla-Kubernetes"
 
 msgid "Mesos"
-msgstr ""
+msgstr "Mesos"
 
 msgid "PackStack"
-msgstr ""
+msgstr "PackStack"
 
 msgid "Puppet"
-msgstr ""
+msgstr "Puppet"
 
 msgid "SaltStack"
-msgstr ""
+msgstr "SaltStack"
 
 msgid "Other Tool"
-msgstr ""
+msgstr "その他のツール"
 
 msgid ""
 "If you are running your OpenStack services inside of containers, which "
 "container format are you using?<br/><font size=\"-2\"><em>Select all that "
 "apply</em></font>"
 msgstr ""
+"コンテナ上で OpenStack サービスを動かしている場合、どのコンテナフォーマットを使用していますか？<br/><font size=\"-"
+"2\"><em>当てはまる項目を全て選択して下さい</em></font>"
 
 msgid "Docker"
-msgstr ""
+msgstr "Docker"
 
 msgid "LXC"
-msgstr ""
+msgstr "LXC"
 
 msgid "LXD"
-msgstr ""
+msgstr "LXD"
 
 msgid "RKT"
-msgstr ""
+msgstr "RKT"
 
 msgid ""
 "Which container orchestration or Platform-as-a-Service (PaaS) tools are you "
 "using to manage applications on this OpenStack deployment?<br/><font size=\"-"
 "2\"><em>Select All That Apply</em></font>"
 msgstr ""
+"あなたが OpenStack 環境上でアプリケーションの管理に使用している オーケストレーションツールまたは Platform-as-a-Service "
+"(PaaS) 基盤はどれですか？<br/><font size=\"-2\"><em>当てはまる項目を全て選択して下さい</em></font>"
 
 msgid "Built our own"
-msgstr ""
+msgstr "独自開発"
 
 msgid "CloudFoundry"
-msgstr ""
+msgstr "CloudFoundry"
 
 msgid "Cloudify"
-msgstr ""
+msgstr "Cloudify"
 
 msgid "Docker Swarm"
-msgstr ""
+msgstr "Docker Swarm"
 
 msgid "Kubernetes"
-msgstr ""
+msgstr "Kubernetes"
 
 msgid "OpenShift"
-msgstr ""
+msgstr "OpenShift"
 
 msgid "OneOps"
-msgstr ""
+msgstr "OneOps"
 
 msgid "Stackato"
-msgstr ""
+msgstr "Stackato"
 
 msgid "Scalr"
-msgstr ""
+msgstr "Scalr"
 
 msgid ""
 "Which <b>OpenStack Compute (Nova)</b> hypervisors are you using?<BR><font "
 "size=\"-2\"><em>Select All That Apply</em></font>"
 msgstr ""
+"<b>OpenStack Compute (Nova)</b> で使用しているハイパーバイザーはどれですか？<BR><font size=\"-"
+"2\"><em>当てはまる項目を全て選択して下さい</em></font>"
 
 msgid "Bare Metal (Ironic)"
-msgstr ""
+msgstr "Bare Metal (Ironic)"
 
 msgid "KVM (x86)"
-msgstr ""
+msgstr "KVM (x86)"
 
 msgid "KVM (ppc64)"
-msgstr ""
+msgstr "KVM (ppc64)"
 
 msgid "Hyper from HyperHQ"
-msgstr ""
+msgstr "Hyper from HyperHQ"
 
 msgid "Microsoft Hyper-V"
-msgstr ""
+msgstr "Microsoft Hyper-V"
 
 msgid "OpenVZ/Virtuozzo"
-msgstr ""
+msgstr "OpenVZ／Virtuozzo"
 
 msgid "QEMU"
-msgstr ""
+msgstr "QEMU"
 
 msgid "VMware ESX"
-msgstr ""
+msgstr "VMware ESX"
 
 msgid "Xen / XCP"
-msgstr ""
+msgstr "Xen / XCP"
 
 msgid "XenServer"
-msgstr ""
+msgstr "XenServer"
 
 msgid "Other Hypervisors"
-msgstr ""
+msgstr "他のハイパーバイザー"
 
 msgid ""
 "Which databases are you using for OpenStack components?<br/><font size=\"-"
 "2\"><em>Select all that apply</em></font>"
 msgstr ""
+"OpenStack コンポーネント用にどのデータベースを使用していますか？<br/><font size=\"-"
+"2\"><em>当てはまる項目をすべて選択して下さい</em></font>"
 
 msgid "MariaDB"
-msgstr ""
+msgstr "MariaDB"
 
 msgid "MariaDB Galera Cluster"
-msgstr ""
+msgstr "MariaDB Galera Cluster"
 
 msgid "MongoDB"
-msgstr ""
+msgstr "MongoDB"
 
 msgid "MySQL"
-msgstr ""
+msgstr "MySQL"
 
 msgid "MySQL with DRBD"
-msgstr ""
+msgstr "MySQL＋DRBD"
 
 msgid "MySQL with Galera"
-msgstr ""
+msgstr "MySQL＋Galera"
 
 msgid "Percona Server"
-msgstr ""
+msgstr "Percona Server"
 
 msgid "Percona XtraDB Cluster"
-msgstr ""
+msgstr "Percona XtraDB Cluster"
 
 msgid "PostgreSQL"
-msgstr ""
+msgstr "PostgreSQL"
 
 msgid "Other database"
-msgstr ""
+msgstr "その他のデータベース"
 
 msgid ""
 "What programmatic interfaces (SDKs, tools, platforms) do you expose (or plan "
@@ -1122,492 +1197,502 @@ msgid ""
 "consume your product/cloud?<br/><font size=\"-2\"><em>Select all that apply</"
 "em></font>"
 msgstr ""
+"ユーザ、顧客、開発者があなたの本番環境／クラウドを使うためにあなたが提供している（または提供しようとしている）プログラミングインターフェース（SDK、ツール、プラットフォーム）は何ですか？<br/"
+"><font size=\"-2\"><em>当てはまる項目をすべて選択して下さい</em></font>"
 
 msgid "Deltacloud"
-msgstr ""
+msgstr "Deltacloud"
 
 msgid "Do not use/plan to use the OpenStack API"
-msgstr ""
+msgstr "OpenStack API を使用しない／使用する計画がない"
 
 msgid "libcloud (Python)"
-msgstr ""
+msgstr "libcloud (Python)"
 
 msgid "FOG"
-msgstr ""
+msgstr "FOG"
 
 msgid "gophercloud"
-msgstr ""
+msgstr "gophercloud"
 
 msgid "jclouds"
-msgstr ""
+msgstr "jclouds"
 
 msgid "pkgcloud"
-msgstr ""
+msgstr "pkgcloud"
 
 msgid "php-opencloud"
-msgstr ""
+msgstr "php-opencloud"
 
 msgid "OpenStack.net"
-msgstr ""
+msgstr "OpenStack.net"
 
 msgid "OpenStack clients"
-msgstr ""
+msgstr "OpenStack clients"
 
 msgid "Shade"
-msgstr ""
+msgstr "Shade"
 
 msgid "Wrote our own"
-msgstr ""
+msgstr "独自開発"
 
 msgid "Other toolkits"
-msgstr ""
+msgstr "他のツールキット"
 
 msgid ""
 "With which other clouds do your users interact?<br/><font size=\"-"
 "2\"><em>Select all that apply</em></font>"
 msgstr ""
+"あなたのユーザが興味を持っている他のクラウドはどれですか？<br/><font size=\"-2\"><em>当てはまる項目を全て選択して下さい</"
+"em></font>"
 
 msgid "Amazon Web Services"
-msgstr ""
+msgstr "Amazon Web Services"
 
 msgid "Google Compute Engine"
-msgstr ""
+msgstr "Google Compute Engine"
 
 msgid "Microsoft Azure"
-msgstr ""
+msgstr "Microsoft Azure"
 
 msgid "OpenStack Private Cloud"
-msgstr ""
+msgstr "OpenStack プライベートクラウド"
 
 msgid "OpenStack Public Clouds"
-msgstr ""
+msgstr "OpenStack パブリッククラウド"
 
 msgid "Other Clouds"
-msgstr ""
+msgstr "その他のクラウド"
 
 msgid ""
 "Approximately what percentage of your overall cloud infrastructure is "
 "running on OpenStack?"
-msgstr ""
+msgstr "あなたのクラウドインフラ全体のうち、OpenStack 上で稼働しているもの何％ぐらいですか？"
 
 msgid "81-100%"
-msgstr ""
+msgstr "８割以上"
 
 msgid "61-80%"
-msgstr ""
+msgstr "６割以上"
 
 msgid "41-60%"
-msgstr ""
+msgstr "４割以上"
 
 msgid "21-40%"
-msgstr ""
+msgstr "２割以上"
 
 msgid "1-20%"
-msgstr ""
+msgstr "１割以下"
 
 msgid ""
 "Which <b>OpenStack Network (Neutron)</b> drivers are you using?<BR><font "
 "size=\"-2\"><em>Select all that apply. Please note we now distinguish "
 "between ML2 drivers and non-ML2 drivers.</em></font>"
 msgstr ""
+"<b>OpenStack Network (Neutron)</b> で使用しているドライバーは何ですか？<BR><font size=\"-"
+"2\"><em>当てはまる項目を全て選択して下さい。ML2 ドライバーと非 ML2 ドライバーの違いに注意して下さい。</em></font>"
 
 msgid "ML2 - Open vSwitch"
-msgstr ""
+msgstr "ML2 - Open vSwitch"
 
 msgid "ML2 - Linux Bridge"
-msgstr ""
+msgstr "ML2 - Linux Bridge"
 
 msgid "OpenContrail or Juniper"
-msgstr ""
+msgstr "OpenContrail／Juniper"
 
 msgid "nova-network"
-msgstr ""
+msgstr "nova-network"
 
 msgid "MidoNet"
-msgstr ""
+msgstr "MidoNet"
 
 msgid "PLUMgrid"
-msgstr ""
+msgstr "PLUMgrid"
 
 msgid "OpenDaylight"
-msgstr ""
+msgstr "OpenDaylight"
 
 msgid "VMWare NSX (formerly Nicira NVP)"
-msgstr ""
+msgstr "VMWare NSX (旧Nicira NVP)"
 
 msgid "Hyper-V"
-msgstr ""
+msgstr "Hyper-V"
 
 msgid "ML2 - Mellanox"
-msgstr ""
+msgstr "ML2 - Mellanox"
 
 msgid "A10 Networks"
-msgstr ""
+msgstr "A10 Networks"
 
 msgid "Arista"
-msgstr ""
+msgstr "Arista"
 
 msgid "Big Switch"
-msgstr ""
+msgstr "Big Switch"
 
 msgid "Brocade"
-msgstr ""
+msgstr "Brocade"
 
 msgid "Cisco UCS / Nexus"
-msgstr ""
+msgstr "Cisco UCS／Nexus"
 
 msgid "Embrane"
-msgstr ""
+msgstr "Embrane"
 
 msgid "Extreme Networks"
-msgstr ""
+msgstr "Extreme Networks"
 
 msgid "IBM SDN-VE"
-msgstr ""
+msgstr "IBM SDN-VE"
 
 msgid "Linux Bridge"
-msgstr ""
+msgstr "Linux Bridge"
 
 msgid "Mellanox"
-msgstr ""
+msgstr "Mellanox"
 
 msgid "Meta Plugin"
-msgstr ""
+msgstr "Meta Plugin"
 
 msgid "Modular Layer 2 Plugin (ML2)"
-msgstr ""
+msgstr "Modular Layer 2 プラグイン(ML2)"
 
 msgid "NEC OpenFlow"
-msgstr ""
+msgstr "NEC OpenFlow"
 
 msgid "Nuage Networks"
-msgstr ""
+msgstr "Nuage Networks"
 
 msgid "One Convergence NVSD"
-msgstr ""
+msgstr "One Convergence NVSD"
 
 msgid "Open vSwitch"
-msgstr ""
+msgstr "Open vSwitch"
 
 msgid "Ruijie Networks"
-msgstr ""
+msgstr "Ruijie Networks"
 
 msgid "Ryu OpenFlow Controller"
-msgstr ""
+msgstr "Ryu OpenFlow コントローラー"
 
 msgid "ML2 - Alcatel-Lucent Omniswitch"
-msgstr ""
+msgstr "ML2 - Alcatel-Lucent Omniswitch"
 
 msgid "ML2 - Arista"
-msgstr ""
+msgstr "ML2 - Arista"
 
 msgid "ML2 - Big Switch"
-msgstr ""
+msgstr "ML2 - Big Switch"
 
 msgid "ML2 - Brocade VDX/VCS"
-msgstr ""
+msgstr "ML2 - Brocade VDX/VCS"
 
 msgid "ML2 - Calico"
-msgstr ""
+msgstr "ML2 - Calico"
 
 msgid "ML2 - Cisco APIC"
-msgstr ""
+msgstr "ML2 - Cisco APIC"
 
 msgid "ML2 - Cisco DFA"
-msgstr ""
+msgstr "ML2 - Cisco DFA"
 
 msgid "ML2 - Cloudbase Hyper-V"
-msgstr ""
+msgstr "ML2 - Cloudbase Hyper-V"
 
 msgid "ML2 - Freescale SDN"
-msgstr ""
+msgstr "ML2 - Freescale SDN"
 
 msgid "ML2 - Frescale FWaaS"
-msgstr ""
+msgstr "ML2 - Frescale FWaaS"
 
 msgid "ML2 - Fujitsu Converged Fabric Switch"
-msgstr ""
+msgstr "ML2 - Fujitsu Converged Fabric Switch"
 
 msgid "ML2 - Huawei Agile Controller"
-msgstr ""
+msgstr "ML2 - Huawei Agile Controller"
 
 msgid "ML2 - Mellanox SR-IOV"
-msgstr ""
+msgstr "ML2 - Mellanox SR-IOV"
 
 msgid "ML2 - MidoNet"
-msgstr ""
+msgstr "ML2 - MidoNet"
 
 msgid "ML2 - Nuage Networks"
-msgstr ""
+msgstr "ML2 - Nuage Networks"
 
 msgid "ML2 - One Convergence"
-msgstr ""
+msgstr "ML2 - One Convergence"
 
 msgid "ML2 - ONOS"
-msgstr ""
+msgstr "ML2 - ONOS"
 
 msgid "ML2 - OpenDaylight"
-msgstr ""
+msgstr "ML2 - OpenDaylight"
 
 msgid "ML2 - OpenFlow Agent"
-msgstr ""
+msgstr "ML2 - OpenFlow Agent"
 
 msgid "ML2 - Pluribus"
-msgstr ""
+msgstr "ML2 - Pluribus"
 
 msgid "ML2 - Tail-F"
-msgstr ""
+msgstr "ML2 - Tail-F"
 
 msgid "ML2 - VMWare DVS"
-msgstr ""
+msgstr "ML2 - VMWare DVS"
 
 msgid "Other Network Driver"
-msgstr ""
+msgstr "その他のネットワークドライバー"
 
 msgid ""
 "Which  <b>OpenStack Identity Service (Keystone)</b> drivers are you "
 "using?<BR><font size=\"-2\"><em>Select All That Apply</em></font>"
 msgstr ""
+"<b>OpenStack Identity Service (Keystone)</b> で使用しているドライバーは何ですが？<BR><font "
+"size=\"-2\"><em>当てはまる項目を全て選択して下さい</em></font>"
 
 msgid "Active Directory"
-msgstr ""
+msgstr "Active Directory"
 
 msgid "KVS"
-msgstr ""
+msgstr "KVS"
 
 msgid "LDAP"
-msgstr ""
+msgstr "LDAP"
 
 msgid "PAM"
-msgstr ""
+msgstr "PAM"
 
 msgid "SQL (default)"
-msgstr ""
+msgstr "SQL (デフォルト)"
 
 msgid "Templated"
-msgstr ""
+msgstr "Templated"
 
 msgid "Other Identity Driver"
-msgstr ""
+msgstr "その他の Identity ドライバー"
 
 msgid ""
 "Which <b>OpenStack Block Storage (Cinder)</b> drivers are you "
 "using?<BR><font size=\"-2\"><em>Select All That Apply</em></font>"
 msgstr ""
+"<b>OpenStack Block Storage (Cinder)</b> で使用しているドライバーは何ですか？<BR><font size=\"-"
+"2\"><em>当てはまる項目をすべて選択して下さい</em></font>"
 
 msgid "Ceph RBD"
-msgstr ""
+msgstr "Ceph RBD"
 
 msgid "Coraid"
-msgstr ""
+msgstr "Coraid"
 
 msgid "Dell EqualLogic"
-msgstr ""
+msgstr "Dell EqualLogic"
 
 msgid "EMC"
-msgstr ""
+msgstr "EMC"
 
 msgid "GlusterFS"
-msgstr ""
+msgstr "GlusterFS"
 
 msgid "HDS"
-msgstr ""
+msgstr "HDS"
 
 msgid "HP 3PAR"
-msgstr ""
+msgstr "HP 3PAR"
 
 msgid "HP LeftHand"
-msgstr ""
+msgstr "HP LeftHand"
 
 msgid "Huawei"
-msgstr ""
+msgstr "Huawei"
 
 msgid "IBM GPFS"
-msgstr ""
+msgstr "IBM GPFS"
 
 msgid "IBM NAS"
-msgstr ""
+msgstr "IBM NAS"
 
 msgid "IBM Storwize"
-msgstr ""
+msgstr "IBM Storwize"
 
 msgid "IBM XIV / DS8000"
-msgstr ""
+msgstr "IBM XIV / DS8000"
 
 msgid "LVM (default)"
-msgstr ""
+msgstr "LVM (デフォルト)"
 
 msgid "NetApp"
-msgstr ""
+msgstr "NetApp"
 
 msgid "Nexenta"
-msgstr ""
+msgstr "Nexenta"
 
 msgid "NFS"
-msgstr ""
+msgstr "NFS"
 
 msgid "ProphetStor"
-msgstr ""
+msgstr "ProphetStor"
 
 msgid "SAN / Solaris"
-msgstr ""
+msgstr "SAN／Solaris"
 
 msgid "Scality"
-msgstr ""
+msgstr "Scality"
 
 msgid "Sheepdog"
-msgstr ""
+msgstr "Sheepdog"
 
 msgid "SolidFire"
-msgstr ""
+msgstr "SolidFire"
 
 msgid "VMWare VMDK"
-msgstr ""
+msgstr "VMWare VMDK"
 
 msgid "Windows Server 2012"
-msgstr ""
+msgstr "Windows Server 2012"
 
 msgid "Xenapi NFS"
-msgstr ""
+msgstr "Xenapi NFS"
 
 msgid "XenAPI Storage Manager"
-msgstr ""
+msgstr "XenAPI Storage Manager"
 
 msgid "Zadara"
-msgstr ""
+msgstr "Zadara"
 
 msgid "Other Block Storage Driver"
-msgstr ""
+msgstr "その他の Block Storage ドライバー"
 
 msgid "Which vendor's products power your OpenStack cloud?"
-msgstr ""
+msgstr "どのベンダーの商品があなたの OpenStack クラウドを強化していますか？"
 
 msgid "99Cloud Inc."
-msgstr ""
+msgstr "99Cloud Inc."
 
 msgid "AppFormix"
-msgstr ""
+msgstr "AppFormix"
 
 msgid "Aptira"
-msgstr ""
+msgstr "Aptira"
 
 msgid "AQORN"
-msgstr ""
+msgstr "AQORN"
 
 msgid "AURO"
-msgstr ""
+msgstr "AURO"
 
 msgid "AWcloud"
-msgstr ""
+msgstr "AWcloud"
 
 msgid "Blue Box"
-msgstr ""
+msgstr "Blue Box"
 
 msgid "Breqwatr"
-msgstr ""
+msgstr "Breqwatr"
 
 msgid "Bright Computing"
-msgstr ""
+msgstr "Bright Computing"
 
 msgid "Canonical"
-msgstr ""
+msgstr "Canonical"
 
 msgid "China Mobile"
-msgstr ""
+msgstr "China Mobile"
 
 msgid "ChinaCloud"
-msgstr ""
+msgstr "ChinaCloud"
 
 msgid "Cisco"
-msgstr ""
+msgstr "Cisco"
 
 msgid "Cloudbase Solutions"
-msgstr ""
+msgstr "Cloudbase Solutions"
 
 msgid "DataCentred"
-msgstr ""
+msgstr "DataCentred"
 
 msgid "Debian"
 msgstr "Debian"
 
 msgid "Dell EMC"
-msgstr ""
+msgstr "Dell EMC"
 
 msgid "EasyStack"
-msgstr ""
+msgstr "EasyStack"
 
 msgid "eNovance"
-msgstr ""
+msgstr "eNovance"
 
 msgid "Hangzhou H3C Technologies Co., Ltd"
-msgstr ""
+msgstr "Hangzhou H3C Technologies Co., Ltd"
 
 msgid "Hewlett Packard Enterprise"
-msgstr ""
+msgstr "Hewlett Packard Enterprise"
 
 msgid "IBM"
-msgstr ""
+msgstr "IBM"
 
 msgid "IO"
-msgstr ""
+msgstr "IO"
 
 msgid "KIO Networks"
-msgstr ""
+msgstr "KIO Networks"
 
 msgid "Mirantis"
-msgstr ""
+msgstr "Mirantis"
 
 msgid "Morphlabs"
-msgstr ""
+msgstr "Morphlabs"
 
 msgid "Oracle"
-msgstr ""
+msgstr "Oracle"
 
 msgid "Platform9 Systems, Inc"
-msgstr ""
+msgstr "Platform9 Systems, Inc"
 
 msgid "Rackspace"
-msgstr ""
+msgstr "Rackspace"
 
 msgid "Red Hat, Inc."
-msgstr ""
+msgstr "Red Hat, Inc."
 
 msgid "Stratoscale"
-msgstr ""
+msgstr "Stratoscale"
 
 msgid "SUSE"
-msgstr ""
+msgstr "SUSE"
 
 msgid "SwiftStack Inc"
-msgstr ""
+msgstr "SwiftStack Inc"
 
 msgid "T2 Cloud"
-msgstr ""
+msgstr "T2 Cloud"
 
 msgid "Tata Communications"
-msgstr ""
+msgstr "Tata Communications"
 
 msgid "TransCirrus"
-msgstr ""
+msgstr "TransCirrus"
 
 msgid "Ultimum Technologies s.r.o."
-msgstr ""
+msgstr "Ultimum Technologies s.r.o."
 
 msgid "UnitedStack Inc."
-msgstr ""
+msgstr "UnitedStack Inc."
 
 msgid "VMware"
-msgstr ""
+msgstr "VMware"
 
 msgid "vScaler Ltd."
-msgstr ""
+msgstr "vScaler Ltd."
 
 msgid "ZTE Corporation"
-msgstr ""
+msgstr "ZTE Corporation"
 
 msgid ""
 "What is the main operating system running this OpenStack cloud deployment?"
-msgstr ""
+msgstr "OpenStack クラウド基盤で使用しているOSは何ですか？"
 
 msgid "CentOS"
 msgstr "CentOS"
@@ -1637,172 +1722,190 @@ msgid ""
 "Which compatibility APIs does this deployment support?<BR><font size=\"-"
 "2\"><em>Select All That Apply</em></font>"
 msgstr ""
+"この環境はどの互換 API をサポートしていますか？<BR><font size=\"-2\"><em>当てはまる項目をすべて選択して下さい</em></"
+"font>"
 
 msgid "EC2 compatibility API"
-msgstr ""
+msgstr "EC2 互換 API"
 
 msgid "GCE compatibility API"
-msgstr ""
+msgstr "GCE 互換 API"
 
 msgid "OCCI compatibility API"
-msgstr ""
+msgstr "OCCI 互換 API"
 
 msgid "S3 compatibility API"
-msgstr ""
+msgstr "S3 互換 API"
 
 msgid "This deployment doesn't use compatibility APIs."
-msgstr ""
+msgstr "この環境では互換 API を使用しない"
 
 msgid "Other Compatibility API"
-msgstr ""
+msgstr "その他の互換 API"
 
 msgid "<hr><h3>Project Feedback</h3>"
-msgstr ""
+msgstr "<hr><h3>プロジェクトフィードバック</h3>"
 
 msgid ""
 "Barbican: What is missing from Barbican that might prevent your adoption?"
-msgstr ""
+msgstr "Barbican）あなたの Barbican 採用を妨げている、Barbican に欠けているものは何ですか？"
 
 msgid ""
 "<strong>Cinder:</strong> If there was one thing you would like to see "
 "changed (added, removed, fixed) in Cinder, what would it be?"
 msgstr ""
+"<strong>Cinder）</strong> Cinder に何か１つ変更（追加・削除・修正）を加えたいものがあったとすると、それは何ですか？"
 
 msgid ""
 "Designate: What (if any) features or issues are preventing you from using "
 "Designate as a production service?"
-msgstr ""
+msgstr "Designate）本番サービスでの Designate 採用を妨げる機能／問題は何ですか？"
 
 msgid ""
 "Glance: As you're aware, the Images API v1 supplied by OpenStack Glance is "
 "currently deprecated. If you haven't yet moved to the Images API v2, what is "
 "preventing you? Please be specific."
 msgstr ""
+"Glance）ご存知の通り、OpenStack GLance が提供する Image Service API v1 "
+"は現在廃止予定になっています。あなたが Image Service API v2 "
+"に移行していないのであれば、何がその移行を妨げていますか？具体的にお願いいたします。"
 
 msgid "Heat: What's the current/expected load on your Heat deployment?"
-msgstr ""
+msgstr "Heat）あなたの Heat 環境における現在／将来の利用法は何ですか？"
 
 msgid "Few small stacks (<100 resources each)"
-msgstr ""
+msgstr "少数の小規模スタック（各 100リソース未満）"
 
 msgid "Lots of small stacks (<100 resources each)"
-msgstr ""
+msgstr "多数の小規模スタック（各 100リソース未満）"
 
 msgid "Few big stacks (>100 resources each)"
-msgstr ""
+msgstr "少数の大規模スタック（各 100リソース以上）"
 
 msgid "Lots of big stacks (>100 resources each)"
-msgstr ""
+msgstr "多数の大規模スタック（各 100リソース以上）"
 
 msgid ""
 "Interop: Do you use the OpenStack Powered program or Interoperability "
 "Guideline compliance as a factor in your OpenStack procurement process? Why "
 "or why not?"
 msgstr ""
+"相互運用: あなたの OpenStack 調達プロセスにおけるポイントとして、OpenStack Powered "
+"プログラムまたは相互運用ガイドラインを使用していますか？"
 
 msgid ""
 "Interop: What do you consider to be the biggest challenges to achieving "
 "interoperability between OpenStack clouds?<br/><font size=\"-2\"><em>Select "
 "all that apply</em></font>"
 msgstr ""
+"相互運用：あなたが考える OpenStack クラウド間の相互運用性到達への最大の挑戦はどれですか？<br/><font size=\"-"
+"2\"><em>当てはまる項目を全て選択して下さい</em></font>"
 
 msgid ""
 "Different products provide different versions of OpenStack and/or different "
 "versions of APIs."
-msgstr ""
+msgstr "異なる製品が異なるバージョンの OpenStack と同 API を提供する事"
 
 msgid ""
 "Lack of consistency in how and when different projects make major API "
 "changes."
-msgstr ""
+msgstr "異なるプロジェクトが主要な API 変更を行う方法と時期に一貫性がない事"
 
 msgid ""
 "Flexible networking capabilities mean that different clouds may have "
 "different ways of providing external connectivity to instances running my "
 "workloads."
 msgstr ""
+"柔軟なネットワーク機能によって、あなたのアプリケーションを実行するインスタンスへの外部接続提供のために異なるクラウドで異なる方法を提供する事"
 
 msgid ""
 "Lack of policy discovery. (e.g. actions I'm allowed to perform on one cloud "
 "may be disallowed or reserved for administrators only on another cloud)"
-msgstr ""
+msgstr "ポリシー検出の欠如（例：１クラウド上で実行を許可されたアクションが別クラウド上では許可されていなかったり、管理者のみに制限されていたり）"
 
 msgid ""
 "Lack of familiarity with how I can determine whether different products are "
 "actually interoperable, such as the OpenStack Powered logo or using RefStack "
 "to test."
 msgstr ""
+"OpenStack Powered ロゴやテスト用 RefStack 使用のような、異なる製品が実際相互運用可能なのかどうかを判断する方法の欠如"
 
 msgid "Please explain"
-msgstr ""
+msgstr "説明して下さい"
 
 msgid ""
 "Ironic: What's been your most frustrating or difficult experience with "
 "Ironic?"
-msgstr ""
+msgstr "Ironic）Ironic で最も苛々したり難しい事は何でしたか？"
 
 msgid ""
 "Keystone: In your opinion, where should the Keystone development team focus "
 "their effort(s)?<br/><font size=\"-2\"><em>Select all that apply</em></font>"
 msgstr ""
+"Keystone：あなたの意見では、Keystone 開発チームは何に注力すべきですか？<br/><font size=\"-"
+"2\"><em>当てはまる項目を全て選択して下さい</em></font>"
 
 msgid "Federated identity enhancements"
-msgstr ""
+msgstr "Federated identity 拡張"
 
 msgid "Performance improvements"
-msgstr ""
+msgstr "性能向上"
 
 msgid "Enhancing policy"
-msgstr ""
+msgstr "ポリシー拡張"
 
 msgid "Scaling out to multiple regions"
-msgstr ""
+msgstr "複数リージョンへの拡大"
 
 msgid "Per domain configuration"
-msgstr ""
+msgstr "ドメイン単位の設定"
 
 msgid "Other - please specify"
-msgstr ""
+msgstr "その他：具体的に記述して下さい"
 
 msgid ""
 "Kolla: How do you use Kolla? <br/><font size=\"-2\"><em>Select all that "
 "apply</em></font>"
 msgstr ""
+"Kolla：どのように Kolla を使用していますか？<br/><font size=\"-2\"><em>当てはまる項目を全て選択して下さい</"
+"em></font>"
 
 msgid "Full kolla-ansible deployment"
-msgstr ""
+msgstr "完全な Kolla-ansible 構築"
 
 msgid "Kolla-kubernetes deployment"
-msgstr ""
+msgstr "Kolla-kubernetes 構築"
 
 msgid "Only kolla images with custom tool"
-msgstr ""
+msgstr "Kolla イメージのみ（カスタマイズしたツールを使用）"
 
 msgid "Which custom tool?"
-msgstr ""
+msgstr "どのカスタマイズツールですか？"
 
 msgid ""
 "Manila: Which OpenStack Shared File System (Manila) drivers are you "
 "using?<br/><font size=\"-2\"><em>Select all that apply</em></font>"
 msgstr ""
+"Manila：OpenStack Shared File System (Manila) で使用しているドライバーは何ですか？<br/><font "
+"size=\"-2\"><em>当てはまる項目を全て選択して下さい</em></font>"
 
 msgid "CephFS"
-msgstr ""
+msgstr "CephFS"
 
 msgid "Generic or LVM (default)"
-msgstr ""
+msgstr "Generic または LVM (デフォルト)"
 
 msgid "HP"
 msgstr "HP"
 
 msgid "Quobyte"
-msgstr ""
+msgstr "Quobyte"
 
 msgid "Tegile"
-msgstr ""
+msgstr "Tegile"
 
 msgid "Windows SMB"
-msgstr ""
+msgstr "Windows SMB"
 
 msgid ""
 "Neutron: Which of the following features in the Neutron project are you "
@@ -1810,214 +1913,228 @@ msgid ""
 "OpenStack deployment?<br/><font size=\"-2\"><em>Select all that apply</em></"
 "font>"
 msgstr ""
+"Neutron：Neutron プロジェクトにおける下記の機能のうち、あなたの OpenStack "
+"環境でどれを現在使用している／興味がある／楽しみにしていますか？<br/><font size=\"-"
+"2\"><em>当てはまる項目を全て選択して下さい</em></font>"
 
 msgid "Distributed Virtual routing"
-msgstr ""
+msgstr "分散仮想ルーティング(DVR)"
 
 msgid "VRRP-based HA routing"
-msgstr ""
+msgstr "VRRPベース HA（高可用性）ルーティング"
 
 msgid "Multiple routing capabilities in the same deployment"
-msgstr ""
+msgstr "同一環境における複数のルーティング機能"
 
 msgid "Dynamic routing"
-msgstr ""
+msgstr "動的ルーティング"
 
 msgid "DNS resolution"
-msgstr ""
+msgstr "DNS解決"
 
 msgid "Pluggable IPAM"
-msgstr ""
+msgstr "プラグイン可能な IPAM"
 
 # auto translated by TM merge from project: openstack-manuals, version: stable-mitaka, DocId: doc/networking-guide/source/locale/networking-guide
 msgid "Subnet pools"
 msgstr "サブネットプール"
 
 msgid "Address Scopes"
-msgstr ""
+msgstr "アドレススコープ"
 
 msgid "Agent-based availability zones"
-msgstr ""
+msgstr "エージェントベースのアベイラビリティーゾーン"
 
 msgid "ML2 Hierarchical Port Binding"
-msgstr ""
+msgstr "ML2 階層ポートバインディング"
 
 msgid "Multiple ML2 drivers in the same deployment"
-msgstr ""
+msgstr "同一環境における複数 ML2 ドライバー"
 
 msgid "Multi-segment provider networks"
-msgstr ""
+msgstr "複数セグメントのプロバイダーネットワーク"
 
 msgid "QoS Bandwidth limiting"
-msgstr ""
+msgstr "QoS 帯域制限"
 
 msgid "Accelerated virtual switching (e.g. DPDK based)"
-msgstr ""
+msgstr "強化版仮想スイッチ（例：DPDKベース）"
 
 msgid "L2 Gateways"
-msgstr ""
+msgstr "L2 ゲートウェイ"
 
 msgid "Port mirroring/monitoring"
-msgstr ""
+msgstr "ポートミラーrヒング／監視"
 
 msgid "Traffic steering"
-msgstr ""
+msgstr "トラフィックステアリング"
 
 msgid "Performance counters"
-msgstr ""
+msgstr "パフォーマンスカウンター"
 
 msgid "Software load balancing"
-msgstr ""
+msgstr "ソフトウェア負荷分散"
 
 msgid "Software firewalling"
-msgstr ""
+msgstr "ソフトウェア ファイアウォール"
 
 msgid "Software virtual private networking"
-msgstr ""
+msgstr "ソフトウェア 仮想プライベートネットワーク"
 
 msgid ""
 "Nova: How important is it to be able to customize Nova in your deployment, e."
 "g. classload your own managers/drivers, use hooks, plug in API extensions, "
 "etc."
 msgstr ""
+"Nova: あなたの環境で Nova をカスタマイズできる事はどの程度重要ですか？例：独自マネージャー／ドライバー、フック、プラグイン "
+"API拡張の使用等"
 
 msgid ""
 "Not important; I use pretty much stock Nova with maybe some small patches or "
 "bug fixes that aren't upstream."
-msgstr ""
+msgstr "重要でない：アップストリームにない幾つかの小規模パッチ／バグ修正ぐらいは適用するかも知れないが、ごくありふれた Nova を使用している。"
 
 msgid ""
 "Somewhat important; I have some custom scheduler filters and other small "
 "patches but nothing major."
-msgstr ""
+msgstr "やや重要：幾つかのカスタムスケジューラフィルターや、その他小規模なパッチがあるが、大したものではない。"
 
 msgid ""
 "Very important; my Nova deployment is heavily customized and hooks/plugins/"
 "custom APIs are a major part of my operation."
-msgstr ""
+msgstr "非常に重要：Nova 環境はかなりカスタマイズされており、フック／プラグイン／カスタムAPI は私の運用上主要な部分である。"
 
 msgid ""
 "RefStack: Which of the following features in RefStack are important to "
 "you?<br/><font size=\"-2\"><em>Select all that apply</em></font>"
 msgstr ""
+"RefStack：RefStack の下記機能のどれがあなたにとって重要ですか？<br/><font size=\"-"
+"2\"><em>当てはまる項目を全て選択して下さい</em></font>"
 
 msgid ""
 "Continue to allow uploading test result data to RefStack server anonymously"
-msgstr ""
+msgstr "継続して匿名でテスト結果データを RefStack サーバにアップロード"
 
 msgid ""
 "Ability to share your data with a group of people before making the data "
 "publicly available."
-msgstr ""
+msgstr "データを一般公開する前にグループの方とデータを共有"
 
 msgid ""
 "Community results should be linked to vendors or cloud provider (results are "
 "currently shared anonymously)"
-msgstr ""
+msgstr "コミュニティの結果はベンダーやクラウドプロバイダにリンクすべき（結果は現在匿名で共有されている）"
 
 msgid "Show pass/fail statuses on the community results page"
-msgstr ""
+msgstr "コミュニティ結果ページ上で成功／失敗の状態を表示"
 
 msgid ""
 "View overall statistics on individual tests (seeing what tests are passed/"
 "failed the most in reported results)"
-msgstr ""
+msgstr "個々のテストの統計概要を表示（報告された結果の大半でどのテストが成功／失敗したか）"
 
 msgid "Sahara: What else can be improved in the Sahara project?"
-msgstr ""
+msgstr "Sahara）Saharaプロジェクトで他に何を改善できますか？"
 
 msgid ""
 "Swift: What kinds of data are you planning to store in object storage in the "
 "next 12 months?<br/><font size=\"-2\"><em>Select all that apply</em></font>"
 msgstr ""
+"Swift：今後１年間でオブジェクトストレージ中にどんな種類のデータを保存する予定ですか？<br/><font size=\"-"
+"2\"><em>当てはまる項目を全て選択して下さい</em></font>"
 
 msgid "Application data"
-msgstr ""
+msgstr "アプリケーションデータ"
 
 msgid "Backups"
 msgstr "バックアップ"
 
 msgid "Documents"
-msgstr ""
+msgstr "ドキュメント"
 
 msgid "Static web content"
-msgstr ""
+msgstr "静的Webコンテンツ"
 
 msgid "Research data"
-msgstr ""
+msgstr "研究データ"
 
 msgid "Video"
-msgstr ""
+msgstr "ビデオ"
 
 msgid "Please specify other types of data."
-msgstr ""
+msgstr "データの種類を指定して下さい。"
 
 msgid ""
 "Telemetry: Which dispatcher are you using or planning to use with "
 "Ceilometer?<br/><font size=\"-2\"><em>Select all that apply</em></font>"
 msgstr ""
+"Telemetry：Ceilometer で使っている／使う予定のディスパッチャーはどれですか？<br/><font size=\"-"
+"2\"><em>当てはまる項目を全て選択して下さい</em></font>"
 
 msgid "Gnocchi"
-msgstr ""
+msgstr "Gnocchi"
 
 msgid "Legacy Ceilometer database with MongoDB"
-msgstr ""
+msgstr "旧式 Ceilometer データベース（MongoDB）"
 
 msgid "Legacy Ceilometer database with MySQL"
-msgstr ""
+msgstr "旧式 Ceilometer データベース（MySQL）"
 
 msgid "Legacy Ceilometer database with PostgreSQL"
-msgstr ""
+msgstr "旧式 Ceilometer データベース（PostgreSQL）"
 
 msgid "Legacy Ceilometer database with HBase"
-msgstr ""
+msgstr "旧式 Ceilometer データベース（HBase）"
 
 msgid "Legacy Ceilometer database with SQLite"
-msgstr ""
+msgstr "旧式 Ceilometer データベース（SQLite）"
 
 msgid "HTTP dispatcher"
-msgstr ""
+msgstr "HTTP ディスパッチャー"
 
 msgid "File dispatcher"
-msgstr ""
+msgstr "ファイルディスパッチャー"
 
 msgid ""
 "TripleO: As a user/operator, do you value having a common interface for "
 "deployment tooling and the deployed cloud (e.g common APIs and CLI tools)?"
 msgstr ""
+"TripleO: ユーザー／運用者として、構築ツールや構築されたクラウド用の共通インターフェース（例：共通API、CLIツール）がある事は重要ですか？"
 
 msgid "Yes, definitely."
-msgstr ""
+msgstr "はい。間違いなく"
 
 msgid "Yes, but not required."
-msgstr ""
+msgstr "はい。ただ必要でない"
 
 msgid "No opinion."
-msgstr ""
+msgstr "意見なし"
 
 msgid "No, it's a bad idea."
-msgstr ""
+msgstr "いいえ。悪いアイデアです"
 
 msgid ""
 "Trove: When do you expect to begin evaluating Database as a Service in your "
 "cloud using the OpenStack Trove project?"
 msgstr ""
+"Trove: あなたのクラウドで  OpenStack Trove プロジェクトを使った Database as a Service "
+"を評価し始める時期はいつ頃ですか？"
 
 msgid "Already evaluating Trove or using Trove"
-msgstr ""
+msgstr "既に Trove を評価中か、Trove を使用中"
 
 msgid "Planned to begin within the next 90 days"
-msgstr ""
+msgstr "今後３ヶ月で評価を開始する予定"
 
 msgid "Planned to begin within the next 180 days"
-msgstr ""
+msgstr "今後半年間で評価を開始する予定"
 
 msgid "Planned to begin this year (2017)"
-msgstr ""
+msgstr "2017年に開始する予定"
 
 msgid "Planned for next year (2018)"
-msgstr ""
+msgstr "2018年に開始する予定"
 
 msgid "No current plans"
-msgstr ""
+msgstr "予定なし"
 
