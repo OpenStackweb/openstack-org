@@ -24,6 +24,7 @@ class Survey extends DataObject implements ISurvey
         'BeenEmailed' => 'Boolean',
         'IsTest'      => 'Boolean',
         'State'       => "Enum('INCOMPLETE,SAVED,COMPLETE','INCOMPLETE')",
+        'Lang'        => 'Varchar(10)'
     );
 
     static $indexes = array();

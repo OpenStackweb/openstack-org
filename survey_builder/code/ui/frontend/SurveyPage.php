@@ -386,6 +386,11 @@ class SurveyPage_Controller extends Page_Controller
 
         $this->current_survey = $this->survey_manager->updateSurveyWithTemplate($this->current_survey, $current_template);
 
+        if(!is_null($this->current_survey)) {
+            $this->current_survey->Lang = GetText::current_locale();
+            $this->current_survey->write();
+        }
+
         return $this->current_survey;
     }
 
@@ -400,6 +405,10 @@ class SurveyPage_Controller extends Page_Controller
 
         $this->current_survey        = $this->getCurrentSurveyInstance();
         $this->current_entity_survey = $this->current_survey->currentStep()->getEntitySurvey($entity_survey_id);
+        if(!is_null($this->current_entity_survey)) {
+            $this->current_entity_survey->Lang = GetText::current_locale();
+            $this->current_entity_survey->write();
+        }
         return $this->current_entity_survey;
     }
 
@@ -641,6 +650,11 @@ class SurveyPage_Controller extends Page_Controller
                 $this->current_entity_survey->template()
             );
 
+            if(!is_null($this->current_entity_survey)) {
+                $this->current_entity_survey->Lang = GetText::current_locale();
+                $this->current_entity_survey->write();
+            }
+
             if ($sub_step === 'skip-step' && $this->current_entity_survey->currentStep()->canSkip())
             {
                 $next_step = $this->survey_manager->completeStep
@@ -650,6 +664,7 @@ class SurveyPage_Controller extends Page_Controller
                 );
                 return $this->go2DynEntityStep($this->current_entity_survey, $next_step);
             }
+
 
             return $this->customise
             (

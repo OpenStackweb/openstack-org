@@ -101,6 +101,8 @@ final class SurveyManager implements ISurveyManager {
                 $survey_repository->add($survey);
             }
 
+            $survey->Lang = GetText::current_locale();
+
             return $survey;
 
         });
@@ -129,6 +131,7 @@ final class SurveyManager implements ISurveyManager {
             $step->addEntitySurvey($entity_survey);
             $step->markComplete();
 
+            $entity_survey->Lang = GetText::current_locale();
             return $entity_survey;
         });
     }
@@ -142,8 +145,10 @@ final class SurveyManager implements ISurveyManager {
     {
         return $this->tx_manager->transaction(function() use($current_step, $answers){
 
-            $current_survey = $current_step->survey();
-            $save_later     = isset($answers['SAVE_LATER']) && $answers['SAVE_LATER'] == 1;
+            $current_survey       = $current_step->survey();
+            $current_survey->Lang = GetText::current_locale();
+            $current_survey->write();
+            $save_later           = isset($answers['SAVE_LATER']) && $answers['SAVE_LATER'] == 1;
 
             if($current_step instanceof ISurveyRegularStep) {
                 $snapshot = $current_step->getCurrentAnswersSnapshotState();
