@@ -229,10 +229,10 @@ class PresentationCategoryPage_Controller extends Page_Controller
 
     protected function CustomScripts()
     {
-
+        Requirements::javascript(  "themes/openstack/javascript/navigation.js");
+        Requirements::javascript("themes/openstack/javascript/filetracking.jquery.js");
         Requirements::javascript("themes/openstack/javascript/bootstrap.min.js");
         Requirements::javascript("themes/openstack/javascript/videos.js");
-
     }
 
     public function PresentationFileName($media_link)
