@@ -227,9 +227,7 @@ a.coa-started-btn:visited {
     font-size: 1.5em;
 }
 .coa-current-release {
-    background: #edf2f7;
     border-radius: 4px;
-    padding: 30px 5px 40px;
     text-align: center;
 }
 .coa-current-release .title {
