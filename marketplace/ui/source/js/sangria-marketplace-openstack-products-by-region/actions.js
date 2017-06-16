@@ -13,7 +13,7 @@
 
 
 import URI from "urijs";
-import { getRequest, createAction } from "../generic/actions";
+import { getRequest, putRequest, createAction } from "~core-utils/actions";
 
 export const RECEIVE_PRODUCTS_PAGE = 'RECEIVE_PRODUCTS_PAGE';
 export const REQUEST_PRODUCTS_PAGE = 'REQUEST_PRODUCTS_PAGE';

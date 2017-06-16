@@ -120,7 +120,8 @@ module.exports = {
         alias: {
             '~core': path.join(__dirname, '../ui-core/ui/source'),
             '~core-components': path.join(__dirname, '../ui-core/ui/source/js/components'),
-            '~core-css': path.join(__dirname, '../ui-core/ui/source/css')
+            '~core-css': path.join(__dirname, '../ui-core/ui/source/css'),
+            '~core-utils': path.join(__dirname, '../ui-core/ui/source/js/utils')
         }
     }
 };
