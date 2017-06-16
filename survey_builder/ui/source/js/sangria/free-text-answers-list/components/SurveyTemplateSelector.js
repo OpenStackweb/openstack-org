@@ -10,31 +10,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-import {
-    CLEAR_MESSAGE,
-    SHOW_MESSAGE,
-} from './actions';
+import React from 'react';
 
-export const genericReducers  = function (
-state = {
-    msg: null,
-    msg_type: null,
-    params: {}
-},
-action = {}) {
-    switch(action.type) {
-        case SHOW_MESSAGE:
-            return {
-                ...state,
-                msg: action.payload.msg,
-                msg_type: action.payload.msg_type,
-            };
-        case CLEAR_MESSAGE:
-            return {
-                ...state,
-                msg: null
-            };
-        default:
-            return state;
+export const SurveyTemplateSelector = ({onChange,className,defaultValue, items}) => {
+
+    let options = [];
+
+    for (let template of items) {
+        options.push(<option key={template.id} value={template.id}>{template.name}</option>)
     }
+
+    return (
+        <select defaultValue={defaultValue} className={className} onChange={onChange}>
+            <option value="">--SELECT SURVEY --</option>
+            {options}
+        </select>
+    );
 };

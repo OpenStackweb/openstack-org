@@ -27,4 +27,26 @@ interface ISurveyAnswerRepository extends IEntityRepository {
      * @return ArrayList
      */
     public function mapAnswers($question_id, $answers);
+
+    /**
+     * @param int $question_id
+     * @param int $page
+     * @param int $page_size
+     * @param string $search_term
+     * @return array
+     * @throws NotFoundEntityException
+     */
+    public function getPaginatedFreeTextAnswers($question_id, $page, $page_size, $search_term);
+
+    /**
+     * @param int $question_id
+     * @return array
+     */
+    public function getAllFreeTextAnswerTagsByQuestion($question_id);
+
+    /**
+     * @param int $question_id
+     * @return array
+     */
+    public function getCountForTags($question_id);
 }

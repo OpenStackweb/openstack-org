@@ -43,12 +43,19 @@ final class SangriaPage_Controller extends AdminController implements Permission
             Security::permissionFailure();
         }
         parent::init();
+
+        Requirements::css('fonts.googleapis.com/css?family=PT+Sans&subset=latin');
+        Requirements::css('themes/openstack/css/blueprint/screen.css', 'screen, projection');
+        Requirements::css('themes/openstack/css/blueprint/print.css', 'print');
+        Requirements::css('themes/openstack/css/dropdown.css', 'screen, projection, print');
+
         Requirements::css(THIRDPARTY_DIR . '/jquery-ui-themes/smoothness/jquery-ui.css');
+        Requirements::css("themes/openstack/javascript/datetimepicker/jquery.datetimepicker.css");
+        Requirements::css("themes/openstack/css/deployment.survey.page.css");
+
         Requirements::javascript(THIRDPARTY_DIR . '/jquery-ui/jquery-ui.js');
         Requirements::javascript('themes/openstack/javascript/jquery.tablednd.js');
-        Requirements::css("themes/openstack/javascript/datetimepicker/jquery.datetimepicker.css");
         Requirements::javascript("themes/openstack/javascript/datetimepicker/jquery.datetimepicker.js");
-        Requirements::css("themes/openstack/css/deployment.survey.page.css");
         Requirements::javascript("themes/openstack/javascript/deployment.survey.filters.js");
 
         self::$default_start_date = date('Y/m/d', strtotime('-1 months')) . ' 00:00';

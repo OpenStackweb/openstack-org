@@ -16,6 +16,8 @@ import URI from "urijs";
 let http = request;
 
 const GENERIC_ERROR = "Yikes. Something seems to be broken. Our web team has been notified, and we apologize for the inconvenience.";
+export const CLEAR_MESSAGE = 'CLEAR_MESSAGE';
+export const SHOW_MESSAGE = 'SHOW_MESSAGE';
 
 export const createAction = type => payload => ({
     type,
@@ -34,6 +36,7 @@ const cancel = (key) => {
 }
 
 const schedule = (key, req) => {
+    console.log(`scheduling ${key}`);
     xhrs[key] = req;
 };
 
@@ -48,10 +51,8 @@ export const getRequest =
 ) => params => dispatch => {
     dispatch(requestActionCreator(params));
     const key = `${requestActionCreator().type}_${JSON.stringify(params || {})}`;
-    console.log(`key ${key}`);
     cancel(key);
     let url = URI(endpoint).query(params).toString();
-    console.log(`url is ${url}`);
     const req = http.get(url)
         .end(
             responseHandler(
@@ -74,7 +75,7 @@ export const putRequest = (
     payload,
     errorHandler
 ) => params => dispatch => {
-    let url = URI(endpoint).toString();
+    let url = URI(endpoint).query(params).toString();
     dispatch(requestActionCreator(params));
     const req = http.put(url)
         .send(payload)
@@ -115,9 +116,35 @@ export const deleteRequest = (
         )
 };
 
-export const clearMessage = createAction('CLEAR_MESSAGE');
+export const postRequest = (
+    requestActionCreator,
+    receiveActionCreator,
+    endpoint,
+    payload,
+    errorHandler
+) => params => dispatch => {
+    let url = URI(endpoint).query(params).toString();
+    dispatch(requestActionCreator(params));
+    const req = http.post(url)
+        .send(payload)
+        .end(
+            responseHandler(
+                dispatch,
+                json => {
+                    dispatch(receiveActionCreator({
+                        response: json
+                    }));
+                },
+                errorHandler
+            )
+        )
 
-export const showMessage = createAction('SHOW_MESSAGE');
+};
+
+
+export const clearMessage = createAction(CLEAR_MESSAGE);
+
+export const showMessage = createAction(SHOW_MESSAGE);
 
 export const responseHandler = (dispatch, success, errorHandler) => {
     return (err, res) => {

@@ -15,7 +15,7 @@
 /**
  * Class SapphireAnswerSurveyRepository
  */
-class SapphireAnswerSurveyRepository
+final class SapphireAnswerSurveyRepository
     extends SapphireRepository
     implements ISurveyAnswerRepository {
 
@@ -221,4 +221,88 @@ class SapphireAnswerSurveyRepository
         return intval(DB::query($query)->value());
     }
 
+    /**
+     * @param int $question_id
+     * @param int $page
+     * @param int $page_size
+     * @param string $search_term
+     * @return array
+     * @throws NotFoundEntityException
+     */
+    public function getPaginatedFreeTextAnswers($question_id, $page, $page_size, $search_term)
+    {
+        $question = SurveyQuestionTemplate::get()->byID($question_id);
+        if(is_null($question)) throw new NotFoundEntityException('SurveyQuestionTemplate');
+        $offset    = ($page - 1 ) * $page_size;
+        $search_condition = '';
+        if(!empty($search_term)){
+            $search_condition = <<<SQL
+AND EXISTS (
+			SELECT SurveyAnswerTag.ID FROM SurveyAnswerTag 
+            INNER JOIN SurveyAnswer_Tags
+            ON SurveyAnswer_Tags.SurveyAnswerTagID = SurveyAnswerTag.ID 
+            WHERE SurveyAnswer_Tags.SurveyAnswerID = SurveyAnswer.ID AND SurveyAnswerTag.Value LIKE '%{$search_term}%'
+        )
+SQL;
+
+        }
+        $query = <<<SQL
+        SELECT SurveyAnswer.* FROM SurveyAnswer
+        WHERE 
+        QuestionID = {$question_id} 
+        AND SurveyAnswer.Value IS NOT NULL AND SurveyAnswer.Value <> ''
+        {$search_condition}
+SQL;
+
+        $count = intval(DB::query("SELECT COUNT(*) FROM ( {$query} ) AS T")->value());
+        $res = DB::query($query . " LIMIT {$offset},{$page_size};");
+        $list = [];
+        foreach ($res as $row)
+            $list[] = new SurveyAnswer($row);
+        return [$list, $count];
+    }
+
+    /**
+     * @param int $question_id
+     * @return array
+     */
+    public function getAllFreeTextAnswerTagsByQuestion($question_id)
+    {
+        $query = <<<SQL
+SELECT * FROM SurveyAnswerTag WHERE ID IN (
+SELECT DISTINCT(SurveyAnswerTag.ID) FROM SurveyAnswerTag
+INNER JOIN SurveyAnswer_Tags on SurveyAnswer_Tags.SurveyAnswerTagID = SurveyAnswerTag.ID
+INNER JOIN  SurveyAnswer on SurveyAnswer.ID = SurveyAnswer_Tags.SurveyAnswerID
+WHERE SurveyAnswer.QuestionID = {$question_id}
+);
+SQL;
+
+        $res   = DB::query($query);
+        $items = [];
+        foreach($res as $row){
+            $items[] = new SurveyAnswerTag($row);
+        }
+        return $items;
+    }
+
+    /**
+     * @param int $question_id
+     * @return array
+     */
+    public function getCountForTags($question_id)
+    {
+
+        $query = <<<SQL
+SELECT ID, `Value` AS Tag, COUNT(ID) AS Qty, GROUP_CONCAT(SurveyAnswerID) AS AnswerIDs FROM (
+SELECT SurveyAnswerTag.*, SurveyAnswer_Tags.SurveyAnswerID FROM SurveyAnswerTag
+INNER JOIN SurveyAnswer_Tags on SurveyAnswer_Tags.SurveyAnswerTagID = SurveyAnswerTag.ID
+INNER JOIN  SurveyAnswer on SurveyAnswer.ID = SurveyAnswer_Tags.SurveyAnswerID
+WHERE SurveyAnswer.QuestionID = {$question_id}
+) AS T2
+GROUP BY Tag ORDER BY Qty ASC;
+SQL;
+
+        $res   = DB::query($query);
+        return $res;
+    }
 }

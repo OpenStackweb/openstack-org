@@ -12,7 +12,7 @@
  * limitations under the License.
  **/
 
-class SapphireSurveyTemplateRepository extends SapphireRepository {
+class SapphireSurveyTemplateRepository extends SapphireRepository implements ISurveyTemplateRepository {
 
     public function __construct(){
         parent::__construct(new SurveyTemplate());
