@@ -47,7 +47,7 @@
                         <p class="mr5-30">$EventsYearlyCountText() - <a href="{$Top.Link()}#tab=events_tab">find an upcoming OpenStack Hackathon in your region!</a> </p>
                     </div>
                 </div>
-                <h2 class="tab-title">Highlights From Recent OpenStack Hackathons</h2>
+                <h2 class="tab-title">Upcoming Hackathon Events</h2>
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="row">
