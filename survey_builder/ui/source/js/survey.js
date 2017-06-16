@@ -29,7 +29,7 @@ const languages = [
     "zh_CN", // Chinese Traditional
     "zh_TW", // Chinese Mandarin
     "ko_KR", // Korean
-    //"ja_JP", // Japanese
+    "ja_JP", // Japanese
     "id_ID", // Indonesian
     //"fr_FR", // French
     "de_DE", // German
