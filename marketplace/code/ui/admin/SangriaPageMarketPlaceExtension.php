@@ -165,7 +165,7 @@ final class SangriaPageMarketPlaceExtension extends Extension {
         Requirements::clear();
         // css
 
-        Requirements::css('marketplace/ui/source/css/sangria.css');
+        Requirements::css('sangria/ui/source/css/sangria.css');
         Requirements::css("themes/openstack/bower_assets/bootstrap/dist/css/bootstrap.min.css");
         Requirements::css("themes/openstack/bower_assets/fontawesome/css/font-awesome.min.css");
         Requirements::css('//fonts.googleapis.com/css?family=Open+Sans:300,400,700');

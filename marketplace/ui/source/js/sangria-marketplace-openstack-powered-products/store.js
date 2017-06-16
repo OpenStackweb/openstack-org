@@ -17,15 +17,9 @@ import thunk from 'redux-thunk';
 import {openStackPoweredProducts} from './reducers';
 import { genericReducers } from "~core-utils/reducers";
 
-/*const createStoreWithMiddleware = applyMiddleware(
-    thunk,
-)(createStore);*/
-
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 let reducer = reduceReducers(openStackPoweredProducts, genericReducers);
 const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
-
-//const store = createStoreWithMiddleware(openStackPoweredProducts);
 
 export default store;

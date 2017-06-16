@@ -7,3 +7,91 @@ After:
 SurveyPage_Controller:
   dependencies:
     MemberManager: '%$MemberManager'
+---
+Name: surveybuilderapi
+---
+Injector:
+  SurveyRepository:
+    class: SapphireSurveyRepository
+  TemplateRepository:
+    class: SapphireSurveyTemplateRepository
+  FoundationMemberRepository:
+    class: SapphireFoundationMemberRepository
+  SurveyBuilder:
+    class: SurveyBuilder
+  SurveyAnswerRepository:
+    class: SapphireAnswerSurveyRepository
+  TemplateSurveyFactory:
+    class: TemplateSurveyFactory
+  SurveyManager:
+    class: SurveyManager
+    constructor:
+      0: '%$SurveyRepository'
+      1: '%$TemplateRepository'
+      2: '%$FoundationMemberRepository'
+      3: '%$SurveyBuilder'
+      4: '%$TemplateSurveyFactory'
+      5: '%$TransactionManager'
+  SurveyFreeTextAnswerManager:
+    constructor:
+      0: '%$SurveyAnswerRepository'
+      1: '%$TransactionManager'
+  SurveyTemplateManager:
+    constructor:
+      0: '%$TemplateRepository'
+      1: '%$TransactionManager'
+  SangriaSurveyTemplateApi:
+    constructor:
+      0: '%$SurveyFreeTextAnswerManager'
+      1: '%$SurveyTemplateManager'
+  SangriaSurveyBuilderExtension:
+    constructor:
+      0: '%$SurveyRepository'
+      1: '%$TemplateRepository'
+      2: '%$SurveyAnswerRepository'
+SurveysRestfulApi:
+  dependencies:
+    SurveyManager: '%$SurveyManager'
+    SurveyRepository: '%$SurveyRepository'
+SurveyPage_Controller:
+  dependencies:
+    SurveyManager: '%$SurveyManager'
+    SurveyRepository: '%$SurveyRepository'
+---
+Name: surveybuilderui
+---
+Injector:
+  TextBoxUIBuilder:
+    class: SurveyTextBoxQuestionTemplateUIBuilder
+  MemberEmailUIBuilder:
+    class: SurveyTextBoxQuestionTemplateUIBuilder
+  MemberFirstNameUIBuilder:
+    class: SurveyTextBoxQuestionTemplateUIBuilder
+  MemberLastNameUIBuilder:
+    class: SurveyTextBoxQuestionTemplateUIBuilder
+  TextAreaUIBuilder:
+      class: SurveyTextAreaQuestionTemplateUIBuilder
+  CheckBoxUIBuilder:
+      class: SurveyCheckBoxQuestionTemplateUIBuilder
+  CheckBoxListUIBuilder:
+      class: SurveyCheckBoxListQuestionTemplateUIBuilder
+  RadioButtonListUIBuilder:
+      class: SurveyRadioButtonListQuestionTemplateUIBuilder
+  ComboBoxUIBuilder:
+      class: SurveyDropDownQuestionTemplateUIBuilder
+  RankingUIBuilder:
+        class: SurveyRankingQuestionTemplateUIBuilder
+  OrganizationUIBuilder:
+        class: SurveyOrganizationQuestionTemplateUIBuilder
+  LiteralUIBuilder:
+    class: SurveyLiteralQuestionTemplateUIBuilder
+  RadioButtonMatrixUIBuilder:
+    class: SurveyRadioButtonMatrixTemplateQuestionUIBuilder
+  MemberCountryUIBuilder:
+    class: SurveyTextBoxQuestionTemplateUIBuilder
+  PercentageUIBuilder:
+    class: SurveyPercentageQuestionTemplateUIBuilder
+  NumericUIBuilder:
+    class: SurveyNumericQuestionTemplateUIBuilder
+  EmailUIBuilder:
+    class: SurveyEmailQuestionTemplateUIBuilder
