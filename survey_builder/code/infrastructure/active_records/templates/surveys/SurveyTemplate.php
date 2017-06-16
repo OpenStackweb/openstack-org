@@ -29,7 +29,6 @@ class SurveyTemplate extends DataObject implements ISurveyTemplate {
         'Enabled'       => 'Is Enabled',
     );
 
-
     static $indexes = array
     (
         //'Title' => array('type' => 'unique', 'value' => 'Title')

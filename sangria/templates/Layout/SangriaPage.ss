@@ -113,6 +113,7 @@
         <ul>
             <li><a href="$Link(SurveyBuilderListSurveys)">Full Survey</a></li>
             <li><a href="$Link(SurveyBuilderListDeployments)">Deployment Data Only</a></li>
+            <li><a href="$Link(ViewSurveyFreeAnswersList)">Free Text Answers List</a></li>
         </ul>
 
         <li>Statistics</li>
