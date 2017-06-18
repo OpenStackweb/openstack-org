@@ -2,7 +2,7 @@
     <fieldset>
         <div class="row">
             <div class="col-md-12">
-                <h3><span class="entity-survey-title-details">$_T("survey_ui", "Your Deployments")&nbsp;-&nbsp;$_T("survey_ui", "Part %s of %s", $CurrentStepIndex, $MaxStepIndex)</span></h3>
+                <h3><span class="entity-survey-title-details">$_T("survey_ui", "Your Deployments")&nbsp;-&nbsp;$_T("survey_ui", "Part %1$s of %2$s", $CurrentStepIndex, $MaxStepIndex)</span></h3>
             </div>
         </div>
         <hr>
