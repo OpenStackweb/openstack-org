@@ -90,6 +90,12 @@
             return false;
         });
 
+        $('#btn_modal_team_cancel').click(function(e){
+            $('#TeamModal').modal('hide');
+            e.preventDefault();
+            return false;
+        });
+
         $('.select-team-member-btn').click(function(event)
         {
            var new_team_member_id = $('#new-team-member-id').val();

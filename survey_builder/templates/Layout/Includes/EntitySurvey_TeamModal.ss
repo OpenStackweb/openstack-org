@@ -31,6 +31,7 @@
             </div>
             <div class="modal-footer">
                 <p style="text-align: right;">
+                    <button type="button" id="btn_modal_team_cancel" class="btn btn-primary">$_T("survey_ui","Cancel")</button>
                     <button type="button" id="btn_modal_team_done" class="btn btn-primary">$_T("survey_ui","Done")</button>
                 </p>
             </div>
