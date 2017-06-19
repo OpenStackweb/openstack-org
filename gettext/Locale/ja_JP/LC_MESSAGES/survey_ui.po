@@ -47,8 +47,8 @@ msgstr "あなたの OpenStack 環境情報"
 
 #: survey_builder/templates/Layout/Includes/EntityRegularStepForm.ss:5
 #, php-format
-msgid "Part %s of %s"
-msgstr "%s 個／%s 個"
+msgid "Part %1$s of %2$s"
+msgstr "%1$s 個／%2$s 個"
 
 #: survey_builder/templates/Layout/Includes/EntityRegularStepForm.ss:10
 msgid "Created by"
@@ -437,8 +437,8 @@ msgid "Thank you for your submission !!!"
 msgstr "ご協力ありがとうございます。"
 
 #: survey_builder/templates/Layout/Includes/Surveys_Header.ss:3
-msgid "Step <strong>%s of %s</strong> for <strong>%s</strong>"
-msgstr "<strong>%s／%s</strong>ステップ（<strong>%s</strong>）"
+msgid "Step <strong>%1$s of %2$s</strong> for <strong>%3$s</strong>"
+msgstr "<strong>%1$s／%2$s</strong>ステップ（<strong>%3$s</strong>）"
 
 #: survey_builder/js/survey.controller.js:55
 msgid "This field is required."

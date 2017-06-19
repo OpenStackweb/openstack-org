@@ -46,8 +46,8 @@ msgstr "你的部署"
 
 #: survey_builder/templates/Layout/Includes/EntityRegularStepForm.ss:5
 #, php-format
-msgid "Part %s of %s"
-msgstr "Part %s of %s"
+msgid "Part %1$s of %2$s"
+msgstr "Part %1$s of %2$s"
 
 #: survey_builder/templates/Layout/Includes/EntityRegularStepForm.ss:10
 msgid "Created by"
@@ -429,8 +429,8 @@ msgid "Thank you for your submission !!!"
 msgstr "感谢您提交 ！！！"
 
 #: survey_builder/templates/Layout/Includes/Surveys_Header.ss:3
-msgid "Step <strong>%s of %s</strong> for <strong>%s</strong>"
-msgstr "第 <strong>%s 步共 %s步</strong> 属于<strong>%s</strong>"
+msgid "Step <strong>%1$s of %2$s</strong> for <strong>%3$s</strong>"
+msgstr "第 <strong>%1$s 步共 %2$s步</strong> 属于<strong>%3$s</strong>"
 
 #: survey_builder/js/survey.controller.js:55
 msgid "This field is required."

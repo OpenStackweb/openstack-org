@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-sm-12 survey-top">
-        <p>$_T("survey_ui", "Step <strong>%s of %s</strong> for <strong>%s</strong>",$Survey.getCurrentStepIndexNice, $Survey.getStepsCount, $CurrentMember.FullName)</p>
+        <p>$_T("survey_ui", "Step <strong>%1$s of %2$s</strong> for <strong>%3$s</strong>",$Survey.getCurrentStepIndexNice, $Survey.getStepsCount, $CurrentMember.FullName)</p>
     </div>
 </div>
 <div class="row">

@@ -46,7 +46,7 @@ msgstr ""
 
 #: survey_builder/templates/Layout/Includes/EntityRegularStepForm.ss:5
 #, php-format
-msgid "Part %s of %s"
+msgid "Part %1$s of %2$s"
 msgstr ""
 
 #: survey_builder/templates/Layout/Includes/EntityRegularStepForm.ss:10
@@ -368,7 +368,7 @@ msgid "Thank you for your submission !!!"
 msgstr ""
 
 #: survey_builder/templates/Layout/Includes/Surveys_Header.ss:3
-msgid "Step <strong>%s of %s</strong> for <strong>%s</strong>"
+msgid "Step <strong>%1$s of %2$s</strong> for <strong>%3$s</strong>"
 msgstr ""
 
 

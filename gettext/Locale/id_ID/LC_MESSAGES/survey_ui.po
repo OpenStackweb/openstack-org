@@ -44,8 +44,8 @@ msgstr "Penyebaran Anda"
 
 #: survey_builder/templates/Layout/Includes/EntityRegularStepForm.ss:5
 #, php-format
-msgid "Part %s of %s"
-msgstr "Bagian %s dari %s"
+msgid "Part %1$s of %2$s"
+msgstr "Bagian %1$s dari %2$s"
 
 #: survey_builder/templates/Layout/Includes/EntityRegularStepForm.ss:10
 msgid "Created by"
@@ -459,8 +459,8 @@ msgid "Thank you for your submission !!!"
 msgstr "Terima kasih atas kirimanmu !!!"
 
 #: survey_builder/templates/Layout/Includes/Surveys_Header.ss:3
-msgid "Step <strong>%s of %s</strong> for <strong>%s</strong>"
-msgstr "Langkah <strong>%s dari %s</strong> untuk <strong>%s</strong>"
+msgid "Step <strong>%1$s of %2$s</strong> for <strong>%3$s</strong>"
+msgstr "Langkah <strong>%1$s dari %2$s</strong> untuk <strong>%3$s</strong>"
 
 #: survey_builder/js/survey.controller.js:55
 msgid "This field is required."
