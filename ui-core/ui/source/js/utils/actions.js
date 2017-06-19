@@ -95,8 +95,6 @@ export const responseHandler = (dispatch, success, errorHandler) => {
         }
         else if(typeof success === 'function') {
             success(res.body);
-            if (res.body && res.body.msg && res.body.msg_type)
-                dispatch(showMessage({msg: res.body.msg, msg_type: res.body.msg_type}));
         }
     };
 };

@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchAllProducts, exportAllProducts } from './actions';
-import { AjaxLoader } from '~core-components/ajaxloader';
 import Message from "~core-components/message";
 
 const SortDirectionAsc  = 'ASC';
@@ -149,7 +148,6 @@ class SangriaOpenStackProductsByRegionApp extends React.Component
         return (
             <div>
                 <Message />
-                <AjaxLoader show={this.props.loading} />
                 <h3>OpenStack Products By Region</h3>
                 <div className="row" style={{ marginBottom: "25px"}}>
                     <div className="col-md-12">

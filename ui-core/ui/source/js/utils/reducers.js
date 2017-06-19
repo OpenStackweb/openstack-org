@@ -11,7 +11,7 @@
  * limitations under the License.
  **/
 
-export const generic_reducers = function (
+export const genericReducers  = function (
 state = {
     msg: null,
     msg_type: null,

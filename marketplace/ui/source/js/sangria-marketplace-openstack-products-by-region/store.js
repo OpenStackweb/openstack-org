@@ -15,11 +15,11 @@ import { createStore, applyMiddleware, combineReducers, compose} from 'redux';
 import reduceReducers from 'reduce-reducers';
 import thunk from 'redux-thunk';
 import {openStackProductsByRegion} from './reducers';
-import { generic_reducers } from "~core-utils/reducers";
+import { genericReducers } from "~core-utils/reducers";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-let reducer = reduceReducers(openStackProductsByRegion, generic_reducers);
+let reducer = reduceReducers(openStackProductsByRegion, genericReducers);
 const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
 
 export default store;
