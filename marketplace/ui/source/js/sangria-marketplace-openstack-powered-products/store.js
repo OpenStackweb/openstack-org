@@ -12,8 +12,10 @@
  **/
 
 import { createStore, applyMiddleware, combineReducers, compose} from 'redux';
+import reduceReducers from 'reduce-reducers';
 import thunk from 'redux-thunk';
 import {openStackPoweredProducts} from './reducers';
+import { generic_reducers } from "~core-utils/reducers";
 
 /*const createStoreWithMiddleware = applyMiddleware(
     thunk,
@@ -21,7 +23,8 @@ import {openStackPoweredProducts} from './reducers';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(openStackPoweredProducts, composeEnhancers(applyMiddleware(thunk)));
+let reducer = reduceReducers(openStackPoweredProducts, generic_reducers);
+const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
 
 //const store = createStoreWithMiddleware(openStackPoweredProducts);
 

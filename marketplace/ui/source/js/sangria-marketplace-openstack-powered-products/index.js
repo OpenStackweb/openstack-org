@@ -14,7 +14,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import SangriaOpenStackPoweredProductsApp from './SangriaOpenStackPoweredProductsApp'
+import SangriaOpenStackPoweredProductsApp from './SangriaOpenStackPoweredProductsApp';
 import "../../css/sangria.css";
 import store from './store';
 

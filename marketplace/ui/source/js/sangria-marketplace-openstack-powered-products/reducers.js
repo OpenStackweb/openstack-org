@@ -55,7 +55,9 @@ export const openStackPoweredProducts = (
         case PRODUCT_UPDATED:
             return {
                 ...state,
-                loading: false
+                loading: false,
+                msg: 'Saved!',
+                msg_type: 'success'
         }
         break;
         default:

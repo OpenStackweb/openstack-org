@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchAllProducts, updateProductField, exportAllProducts, navigateToProductDetails } from './actions';
-import { AjaxLoader } from '../../../../../ui-core/ui/source/js/components/ajaxloader';
+import { AjaxLoader } from '~core-components/ajaxloader';
+import Message from "~core-components/message";
 
 const SortDirectionAsc  = 'ASC';
 const SortDirectionDesc = 'DESC';
@@ -80,6 +81,7 @@ class SangriaOpenStackPoweredProductsApp extends React.Component
             show_powered : 0,
             type: 'ALL',
             search_term: '',
+            loading: false
         }
     }
 
@@ -231,6 +233,8 @@ class SangriaOpenStackPoweredProductsApp extends React.Component
 
         return (
             <div>
+                <Message />
+                <AjaxLoader show={this.props.loading} />
                 <h3>OpenStack Powered Products</h3>
                 <div className="row" style={{ marginBottom: "25px"}}>
                     <div className="col-md-12">
@@ -353,7 +357,7 @@ export default connect (
         return {
             items:      state.items,
             page_count: state.page_count,
-            loading:    state.loading,
+            loading:    state.loading
         }
     },
     dispatch => ({

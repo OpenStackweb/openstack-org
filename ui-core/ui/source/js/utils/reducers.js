@@ -11,15 +11,26 @@
  * limitations under the License.
  **/
 
-import { createStore, applyMiddleware, combineReducers, compose} from 'redux';
-import reduceReducers from 'reduce-reducers';
-import thunk from 'redux-thunk';
-import {openStackProductsByRegion} from './reducers';
-import { generic_reducers } from "~core-utils/reducers";
-
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-let reducer = reduceReducers(openStackProductsByRegion, generic_reducers);
-const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
-
-export default store;
+export const generic_reducers = function (
+state = {
+    msg: null,
+    msg_type: null,
+    params: {}
+},
+action = {}) {
+    switch(action.type) {
+        case 'SHOW_MESSAGE':
+            return {
+                ...state,
+                msg: action.payload.msg,
+                msg_type: action.payload.msg_type
+            };
+        case 'CLEAR_MESSAGE':
+            return {
+                ...state,
+                msg: null
+            };
+        default:
+            return state;
+    }
+};

@@ -78,7 +78,9 @@ export const putRequest = (
 
 };
 
-export const throwError = createAction('THROW_ERROR');
+export const clearMessage = createAction('CLEAR_MESSAGE');
+
+export const showMessage = createAction('SHOW_MESSAGE');
 
 export const responseHandler = (dispatch, success, errorHandler) => {
     return (err, res) => {
@@ -88,11 +90,13 @@ export const responseHandler = (dispatch, success, errorHandler) => {
             }
             else {
                 console.log(err, res);
-                dispatch(throwError(GENERIC_ERROR));
+                dispatch(showMessage({msg:GENERIC_ERROR, msg_type:'error'}));
             }
         }
         else if(typeof success === 'function') {
             success(res.body);
+            if (res.body && res.body.msg && res.body.msg_type)
+                dispatch(showMessage({msg: res.body.msg, msg_type: res.body.msg_type}));
         }
     };
 };
