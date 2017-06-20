@@ -14,3 +14,9 @@ label.error{
 input.error{
     border: 1px solid  #aa2222;
 }
+
+ul.columned-list {
+    columns: 200px 3;
+    -webkit-columns: 200px 3;
+    -moz-columns: 200px 3;
+}

@@ -94,15 +94,15 @@ class EditProfileForm extends SafeXSSForm
         $LinkedInProfileField->setAttribute('type', 'url')->setAttribute('pattern', 'https?://.+');
 
         // Associated Projects
-        /*$release = OpenStackRelease::get()->filter('HasStatistics', true)->sort('ReleaseDate','DESC')->first();
+        $release = OpenStackRelease::get()->filter('HasStatistics', true)->sort('ReleaseDate','DESC')->first();
         $components = $release->OpenStackComponents()->sort(array('IsCoreService'=>'DESC', 'Order'=>'ASC'))->map('CodeName','Name')->toArray();
         $component_list = array();
         array_walk($components, function (&$value,$key) use (&$component_list) {
             $new_key = $value.' ('.$key.')';
             $component_list[$new_key] = $new_key;
-        });*/
+        });
 
-        $component_list = array(
+        /*$component_list = array(
             'Nova' => 'Compute (Nova)',
             'Swift' => 'Object Storage (Swift)',
             'Glance' => 'Image Service (Glance)',
@@ -123,10 +123,11 @@ class EditProfileForm extends SafeXSSForm
             'Deployment' => 'Deployment (Deployment)',
             'DevStack' => 'DevStack (DevStack)',
             'Release' => 'Release Cycle Management (Release)'
-        );
+        );*/
 
         $ProjectsField = new CheckboxSetField('Projects', 'What programs are you involved with? <em>(Optional)</em>',$component_list);
         $ProjectsField->setTemplate('BootstrapAwesomeCheckboxsetField');
+        $ProjectsField->addExtraClass('columned-list');
 
         // Other Projects Field
         $OtherProjectField = new TextField('OtherProject', 'Other Project (if one above does not match)');
