@@ -44,10 +44,10 @@
                 <div class="row">
                     <div class="col-sm-12"> $AboutDescription </div>
                     <div class="col-sm-12">
-                        <p class="mr5-30">$EventsYearlyCountText() - <a href="{$Top.Link()}#tab=events_tab">find an upcoming OpenStack Hackathon in your region!</a> </p>
+                        <p class="mr5-30">$EventsYearlyCountText() - <a href="{$Top.Link()}#tab=events_tab" target="_blank">find an upcoming OpenStack Hackathon in your region!</a> </p>
                     </div>
                 </div>
-                <h2 class="tab-title">Upcoming Hackathon Events</h2>
+                <h2 class="tab-title">Previous Hackathon Events</h2>
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="row">
@@ -61,7 +61,7 @@
                     </div>
                 </div>
 
-                <span class="hr"></span>
+                <!-- <span class="hr"></span>
 
                 <h2 class="tab-title">Check Out More of the Past OpenStack Hackathons!</h2>
                 <div class="row featured_events">
@@ -78,7 +78,7 @@
                 </div>
                 <div class="text-center more-events">
                     <a href="" id="more_events" data-category="Hackathons">See More Past Events [+]</a>
-                </div>
+                </div> -->
             </div>
             <div role="tabpanel" class="tab-pane fade in hostan-page" id="host_tab">
                 <div class="row">
