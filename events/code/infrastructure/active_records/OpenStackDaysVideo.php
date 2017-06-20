@@ -18,9 +18,10 @@ class OpenStackDaysVideo extends VideoLink {
     );
 
     private static $has_one = array(
-        'AboutVideos' => 'OpenStackDaysPage',
-        'Collaterals' => 'OpenStackDaysPage',
-        'ParentPage'  => 'OpenStackDaysPage', //dummy
+        'About'         => 'OpenStackDaysPage',
+        'AboutHack'     => 'HackathonsPage',
+        'Collaterals'   => 'OpenStackDaysPage',
+        'ParentPage'    => 'OpenStackDaysPage', //dummy
     );
 
     function getCMSFields(){

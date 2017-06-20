@@ -28,7 +28,7 @@ class HackathonsPage extends Page {
     private static $has_one = array();
 
     private static $has_many = array(
-        'AboutVideos'        => 'OpenStackDaysVideo.About',
+        'AboutVideos'        => 'OpenStackDaysVideo.AboutHack',
         'HeaderPics'         => 'OpenStackDaysImage.HeaderPics',
         'OfficialGuidelines' => 'OpenStackDaysDoc.OfficialGuidelines',
         'PlanningTools'      => 'OpenStackDaysDoc.PlanningTools',
