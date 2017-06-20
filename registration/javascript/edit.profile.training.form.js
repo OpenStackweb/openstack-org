@@ -29,16 +29,7 @@ jQuery(document).ready(function($) {
         }
         else{
             // Set Required
-            var $city_input = $('.city_name').find('input');
-            $city_input.prop('required', true);
-
-            var $state_input = $('.state').find('input');
-
-            var $country_input = $('.country').find('select');
-            $country_input.prop('required', true);
-
-            var url_input = $('.url').find('input');
-            url_input.prop('required', true);
+            setRequired();
 
             $('#Link').hide();
             $online_link.prop('required', false);
@@ -124,18 +115,32 @@ jQuery(document).ready(function($) {
         });
 
         $('.scheduleRow',$training_form).each(function(){
-            $(this).append('<div class="remove">X</div>');
+            $(this).append('<div class="remove"><i class="fa fa-times" aria-hidden="true"></i></div>');
         });
 
+        if($('.scheduleRow',$training_form).length == 0){
+            $('#no_schedules').show();
+        } else {
+            $('#no_schedules').hide();
+        }
+
         $('.scheduleRow .remove',$training_form).live('click',function(){
-            if($('.scheduleRow',$training_form).length>1){
+            if($('.scheduleRow',$training_form).length > 0){
                 $(this).parent().remove();
+            }
+
+            if($('.scheduleRow',$training_form).length == 0){
+                $('#no_schedules').show();
+            } else {
+                $('#no_schedules').hide();
             }
         });
 
         $('#addSchedule',$training_form).click( function(){
 
-            var new_row = $('.scheduleRow:last',$training_form).clone();
+            var new_row = $('.schedule_template:first').clone();
+
+            new_row.addClass('scheduleRow').removeClass('schedule_template');
 
             new_row.find('input,select').each( function(){
 
@@ -171,6 +176,8 @@ jQuery(document).ready(function($) {
             });
             new_row.appendTo('#schedules');
 
+            setRequired();
+
             return false;
 
         });
@@ -181,3 +188,16 @@ jQuery(document).ready(function($) {
 
     }
 });
+
+function setRequired() {
+    var $city_input = $('.city_name','#schedules').find('input');
+    $city_input.prop('required', true);
+
+    var $state_input = $('.state','#schedules').find('input');
+
+    var $country_input = $('.country','#schedules').find('select');
+    $country_input.prop('required', true);
+
+    var url_input = $('.url','#schedules').find('input');
+    url_input.prop('required', true);
+}

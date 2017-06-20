@@ -504,6 +504,7 @@ class EditProfilePage_Controller extends Page_Controller
         $Paid = new CheckboxField('Paid', "Is Paid?");
         $Level = new DropdownField('LevelID', 'Level', TrainingCourseLevel::get()->map('ID', 'Level'));
         $Projects = new CheckboxSetField('Projects', '', Project::get()->map('ID', 'Name'));
+        $Projects->setTemplate('BootstrapAwesomeCheckboxsetField');
 
         $Program = new HiddenField('TrainingServiceID', "TrainingServiceID", $this->training_id);
         $Course = new HiddenField('ID', "course", 0);
@@ -521,7 +522,7 @@ class EditProfilePage_Controller extends Page_Controller
                 $State[$i] = new TextField('State[' . $i . ']', "State", $dto->getState());
                 $State[$i]->addExtraClass('state');
 
-                $Country[$i] = new DropdownField('Country[' . $i . ']', $dto->getCountry(), CountryCodes::$iso_3166_countryCodes, $dto->getCountry());
+                $Country[$i] = new DropdownField('Country[' . $i . ']', "Country", CountryCodes::$iso_3166_countryCodes, $dto->getCountry());
                 $Country[$i]->setEmptyString('-- Select One --');
                 $Country[$i]->addExtraClass('country');
 
@@ -536,30 +537,29 @@ class EditProfilePage_Controller extends Page_Controller
             }
         }
 
-        if ($show_blank_schedule) {
-            $City = new TextField('City[]', "City");
-            $City->addExtraClass('city_name');
+        // fields for template
+        $TemplateCity = new TextField('City[]', "City");
+        $TemplateCity->addExtraClass('city_name');
 
-            $State = new TextField('State[]', "State");
-            $State->addExtraClass('state');
+        $TemplateState = new TextField('State[]', "State");
+        $TemplateState->addExtraClass('state');
 
-            $Country = new DropdownField('Country[]', 'Country', CountryCodes::$iso_3166_countryCodes);
-            $Country->setEmptyString('-- Select One --');
-            $Country->addExtraClass('country');
+        $TemplateCountry = new DropdownField('Country[]', 'Country', CountryCodes::$iso_3166_countryCodes);
+        $TemplateCountry->setEmptyString('-- Select One --');
+        $TemplateCountry->addExtraClass('country');
 
-            $StartDate = new TextField('StartDate[]', "Start Date");
-            $StartDate->addExtraClass('dateSelector start');
-            $EndDate = new TextField('EndDate[]', "End Date");
-            $EndDate->addExtraClass('dateSelector end');
-            $LinkS = new TextField('LinkS[]', "Link");
-            $LinkS->addExtraClass('url');
-        }
+        $TemplateStartDate = new TextField('StartDate[]', "Start Date");
+        $TemplateStartDate->addExtraClass('dateSelector start');
+        $TemplateEndDate = new TextField('EndDate[]', "End Date");
+        $TemplateEndDate->addExtraClass('dateSelector end');
+        $TemplateLinkS = new TextField('LinkS[]', "Link");
+        $TemplateLinkS->addExtraClass('url');
 
         $fields = new FieldList(
             $Name,
             $Description,
             $Link,
-            new LiteralField('break', '<hr/><div class="horizontal-fields">'),
+            new LiteralField('break', '<br><hr/><div class="horizontal-fields">'),
             $Online,
             $Paid,
             $Level,
@@ -570,6 +570,7 @@ class EditProfilePage_Controller extends Page_Controller
             $Projects,
             new LiteralField('schedule', '<h4>Schedule</h4>'),
             new LiteralField('instruction', '<p class="note_online">City, State and Country can\'t be edited when a course is marked <em>Online</em>.</p>'),
+            new LiteralField('noSchedule', '<div id="no_schedules">No schedules set.</div>'),
             new LiteralField('scheduleDiv', '<div id="schedules">')
         );
 
@@ -589,23 +590,25 @@ class EditProfilePage_Controller extends Page_Controller
 
             }
 
-        } else {
-            $fields->push(new LiteralField('scheduleDiv', '<div class="scheduleRow">'));
-            $fields->push($City);
-            $fields->push($State);
-            $fields->push($Country);
-            $fields->push($StartDate);
-            $fields->push($EndDate);
-            $fields->push($LinkS);
-            $fields->push(new LiteralField('scheduleDiv', '</div>'));
         }
 
         $fields->push(new LiteralField('scheduleDivC', '</div>'));
-        $fields->push(new LiteralField('addSchedule', '<button id="addSchedule" class="action">Add Another</button>'));
+        $fields->push(new LiteralField('addSchedule', '<button id="addSchedule" class="btn btn-default action">Add Another</button>'));
+
+        // schedule template
+        $fields->push(new LiteralField('scheduleTemplate', '<div class="schedule_template">'));
+        $fields->push($TemplateCity);
+        $fields->push($TemplateState);
+        $fields->push($TemplateCountry);
+        $fields->push($TemplateStartDate);
+        $fields->push($TemplateEndDate);
+        $fields->push($TemplateLinkS);
+        $fields->push(new LiteralField('scheduleTemplate', '</div>'));
 
         $actions = new FieldList(
-            new FormAction('AddCourse', 'Submit')
+            $submit = new FormAction('AddCourse', 'Submit')
         );
+        $submit->addExtraClass('btn btn-primary');
         $validators = new ConditionalAndValidationRule(array(new RequiredFields('Name', 'Level'), new HtmlPurifierRequiredValidator('Description')));
         $form = new Form($this, 'AddTrainingCourseForm', $fields, $actions, $validators);
         if (isset($this->EditCourseID)) {
@@ -635,6 +638,8 @@ class EditProfilePage_Controller extends Page_Controller
 
     function trainingEdit()
     {
+        Requirements::css('themes/openstack/bower_assets/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
+
         $this->EditCourseID = intval($_GET['course_id']);
         return $this->renderWith(array('EditProfilePage_TrainingAddCourse', 'Page'));
     }

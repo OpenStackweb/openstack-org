@@ -152,6 +152,9 @@ final class CourseManager {
 				//save locations only if course is not online type
 				if(isset($data['StartDate'])){
 					foreach($data['StartDate'] as $K=>$C){
+                        // escape to avoid adding template
+                        if (!$data['City'][$K] || !$data['State'][$K] || !$data['Country'][$K]) continue;
+
 						$city     = $data['City'][$K];
 						$state    = $data['State'][$K];
 						$country  = $data['Country'][$K];

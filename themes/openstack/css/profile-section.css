@@ -44,7 +44,7 @@ h3.section-divider:first-child {
 }
 
 .field {
-	margin-top: 10px;
+	margin-top: 10px !important;
 }
 
 
@@ -54,6 +54,18 @@ h3.section-divider:first-child {
 #Form_AddTrainingCourseForm_Description{
 	width:97%;
 	height:100px;
+}
+
+#Form_AddTrainingCourseForm_Projects {
+    padding-top: 10px !important;
+}
+
+#Form_AddTrainingCourseForm_Projects > .val1 {
+    margin-top: -5px;
+}
+
+.horizontal-fields {
+    height: 50px;
 }
 
 .horizontal-fields > *{
@@ -96,7 +108,7 @@ h3.section-divider:first-child {
 }
 #Form_AddTrainingCourseForm .scheduleRow > div.remove{
 	float:left;
-	color:#FF0000;
+	color: black;
 	width:20px;
 	margin-top:35px;
 	padding:5px;
@@ -104,21 +116,23 @@ h3.section-divider:first-child {
 	text-align: center;
 	height:19px;
 }
-	#Form_AddTrainingCourseForm .scheduleRow > div.remove:hover{
-		background-color: #FF0000;
-		color:#FFF;
-	}
+
+#Form_AddTrainingCourseForm .scheduleRow > div.remove:hover{
+    color:#FF0000;;
+}
+
 #Form_AddTrainingCourseForm .scheduleRow > div input{
 	width:90%;
 }
+
 #Form_AddTrainingCourseForm .scheduleRow > div select{
-	width:99%;
+	width:90%;
 	padding:5px;
-	height:29px;
 }
+
 #Form_AddTrainingCourseForm .city_name:disabled,
 #Form_AddTrainingCourseForm .state:disabled,
-#Form_AddTrainingCourseForm .country:disabled{
+#Form_AddTrainingCourseForm .country:disabled {
 	background-color: #dedede;
 }
 
@@ -126,6 +140,26 @@ h3.section-divider:first-child {
 	display:none;
 }
 
+#addSchedule {
+    margin-top: 20px;
+}
+
+#schedules > .scheduleRow + .scheduleRow > .remove{
+    margin-top: 10px;
+}
+
+#schedules > .scheduleRow + .scheduleRow > div > label{
+    display: none;
+}
+
 .travel-field {
 	min-height: 20em;
+}
+
+#no_schedules {
+    display: none;
+}
+
+.schedule_template {
+    display: none;
 }
