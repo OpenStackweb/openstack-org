@@ -9,8 +9,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2017-06-18 03:48+0000\n"
-"Last-Translator: Akihiro Motoki <amotoki@gmail.com>\n"
+"PO-Revision-Date: 2017-06-20 04:05+0000\n"
+"Last-Translator: Akira YOSHIYAMA <akirayoshiyama@gmail.com>\n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
 "X-Generator: Zanata 3.9.6\n"
@@ -48,7 +48,7 @@ msgstr "あなたの OpenStack 環境情報"
 #: survey_builder/templates/Layout/Includes/EntityRegularStepForm.ss:5
 #, php-format
 msgid "Part %1$s of %2$s"
-msgstr "%1$s 個／%2$s 個"
+msgstr "%2$s 分の %1$s"
 
 #: survey_builder/templates/Layout/Includes/EntityRegularStepForm.ss:10
 msgid "Created by"
@@ -438,7 +438,7 @@ msgstr "ご協力ありがとうございます。"
 
 #: survey_builder/templates/Layout/Includes/Surveys_Header.ss:3
 msgid "Step <strong>%1$s of %2$s</strong> for <strong>%3$s</strong>"
-msgstr "<strong>%1$s／%2$s</strong>ステップ（<strong>%3$s</strong>）"
+msgstr "<strong>%3$s</strong> の <strong>%2$s 分の%1$s</strong> "
 
 #: survey_builder/js/survey.controller.js:55
 msgid "This field is required."

@@ -89,3 +89,4 @@ auth.json
 autocomplete/
 *.patch
 *.mo
+blog

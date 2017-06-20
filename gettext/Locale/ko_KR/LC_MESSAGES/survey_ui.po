@@ -46,7 +46,7 @@ msgstr "당신의 배포"
 #: survey_builder/templates/Layout/Includes/EntityRegularStepForm.ss:5
 #, php-format
 msgid "Part %1$s of %2$s"
-msgstr "%1$s 부분 (%2$s 중)"
+msgstr ""
 
 #: survey_builder/templates/Layout/Includes/EntityRegularStepForm.ss:10
 msgid "Created by"
@@ -434,7 +434,7 @@ msgstr "제출해 주셔서 감사합니다 !!!"
 
 #: survey_builder/templates/Layout/Includes/Surveys_Header.ss:3
 msgid "Step <strong>%1$s of %2$s</strong> for <strong>%3$s</strong>"
-msgstr "단계 <strong>%1$s (%2$s 중)</strong> 주제: <strong>%3$s</strong>"
+msgstr ""
 
 #: survey_builder/js/survey.controller.js:55
 msgid "This field is required."

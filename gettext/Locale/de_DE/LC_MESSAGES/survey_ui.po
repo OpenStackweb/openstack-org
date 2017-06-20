@@ -46,7 +46,7 @@ msgstr "Ihre Bereitstellungen"
 #: survey_builder/templates/Layout/Includes/EntityRegularStepForm.ss:5
 #, php-format
 msgid "Part %1$s of %2$s"
-msgstr "Teil %1$s von %2$s"
+msgstr ""
 
 #: survey_builder/templates/Layout/Includes/EntityRegularStepForm.ss:10
 msgid "Created by"
@@ -464,7 +464,7 @@ msgstr "Vielen Dank für Ihre Einreichung!!!"
 
 #: survey_builder/templates/Layout/Includes/Surveys_Header.ss:3
 msgid "Step <strong>%1$s of %2$s</strong> for <strong>%3$s</strong>"
-msgstr "Schritt <strong>%1$s von %2$s</strong> für <strong>%3$s</strong>"
+msgstr ""
 
 #: survey_builder/js/survey.controller.js:55
 msgid "This field is required."
