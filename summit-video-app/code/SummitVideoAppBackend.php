@@ -362,7 +362,7 @@ class SummitVideoAppBackend
 
                 } catch (Exception $e) {
                     SS_Log::log("Summit video app tried to get video {$video->YouTubeID}: {$e->getMessage()}",
-                        SS_Log::ERR);
+                        SS_Log::WARN);
                 }
 
                 $video->write();
