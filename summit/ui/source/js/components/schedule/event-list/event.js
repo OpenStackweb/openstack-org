@@ -104,7 +104,9 @@ class Event extends PureComponent {
             ? summit.category_groups[event.category_group_ids[0]]
             : summit.event_types[event.type_id]
 
-        return { borderLeft: `3px solid ${type.color}` }
+        const color = type && type.color || '#fff'
+
+        return { borderLeft: `3px solid ${color}` }
     }
 }
 
