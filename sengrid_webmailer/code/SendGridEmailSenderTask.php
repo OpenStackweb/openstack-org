@@ -48,21 +48,23 @@ final class SendGridEmailSenderTask extends CronTask
                     $attachments = $email->Attachments;
 
                     if(!empty($attachments)){
-                        $attachments = json_decode($attachments);
+                        $attachments = json_decode($attachments, true);
                     }
                     else{
                         $attachments = false;
                     }
-
+                    $res = false;
                     if($is_plain){
-                        $send_grid_mailer->sendPlain($to, $from, $subject, $body, $attachments);
+                        $res = $send_grid_mailer->sendPlain($to, $from, $subject, $body, $attachments);
                     }
                     else{
-                        $send_grid_mailer->sendHTML($to, $from, $subject, $body, $attachments);
+                        $res = $send_grid_mailer->sendHTML($to, $from, $subject, $body, $attachments);
                     }
 
-                    $email->markAsSent()->write();
-                    ++$counter;
+                    if($res) {
+                        $email->markAsSent()->write();
+                        ++$counter;
+                    }
                 }
 
                 return $counter;

@@ -18,6 +18,6 @@ Injector:
   IngestCOAFilesTask:
     constructor:
       0: '%$COAManager'
-  LoadInitialCOADump:
+  LoadExternalCOAFile:
     constructor:
       0: '%$COAManager'
