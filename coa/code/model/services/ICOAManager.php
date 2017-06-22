@@ -23,5 +23,5 @@ interface ICOAManager
      * @param string $filename
      * @return void
      */
-    public function processExternalInitialDump($filename);
+    public function processExternalDump($filename);
 }
