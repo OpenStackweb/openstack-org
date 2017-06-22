@@ -70,8 +70,16 @@ class SurveyReportPage_Controller extends Page_Controller
         $templates = SurveyTemplate::get('SurveyTemplate')
             ->filter(array('ClassName'=>'SurveyTemplate'))
             ->exclude('StartDate:GreaterThan', $curDate);
+
+        $available_report_templates = new ArrayList();
+
+        foreach ($templates as $template) {
+            if ($template->Report()->Exists() && $template->Report()->Display) {
+                $available_report_templates->push($template);
+            }
+        }
         
-        return $templates;
+        return $available_report_templates;
     }
 
 

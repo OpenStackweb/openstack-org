@@ -39,7 +39,7 @@
                 for (var key in self.section.Questions) {
                     var values =  self.section.Questions[key].Values;
                     var graph_type = self.section.Questions[key].Graph;
-                    if (Object.keys(values).length) {
+                    if ( values && Object.keys(values).length) {
                         self.renderGraph('graph_'+self.section.Questions[key].ID, values, graph_type);
                     }
                 }

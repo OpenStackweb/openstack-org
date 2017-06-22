@@ -19,7 +19,8 @@ class SurveyReport extends DataObject {
 
     static $db = array
     (
-        'Name' => 'Varchar(254)'
+        'Name' => 'Varchar(254)',
+        'Display' => 'Boolean(1)'
     );
 
     static $has_one = array
@@ -35,6 +36,10 @@ class SurveyReport extends DataObject {
     private static $summary_fields = array(
         'ID',
         'Template.Title',
+    );
+
+    private static $defaults = array(
+        'Display' => 1
     );
 
     /**
