@@ -537,6 +537,9 @@ class PresentationPage_ManageRequest extends RequestHandler
     public function __construct(Presentation $presentation, PresentationPage_Controller $parent)
     {
         parent::__construct();
+
+        Requirements::css('summit/css/call-for-presentations.css');
+
         $this->presentation = $presentation;
         $this->parent       = $parent;
     }
@@ -685,6 +688,25 @@ class PresentationPage_ManageRequest extends RequestHandler
         ))->renderWith(array('PresentationPage_tags', 'PresentationPage'), $this->parent);
     }
 
+    public function getStepClass($current_step, $this_step) {
+        if ($current_step == $this_step) {
+            return 'current';
+        } else if ($this->presentation->getProgress() >= $this_step) {
+            return 'completed';
+        } else {
+            return 'future';
+        }
+    }
+
+    public function getStepClassIcon($current_step, $this_step) {
+        if ($current_step == $this_step) {
+            return 'fa-pencil navigation-icon-current';
+        } else if ($this->presentation->getProgress() >= $this_step) {
+            return 'fa-check-circle navigation-icon-completed';
+        } else {
+            return 'fa-plus-circle navigation-icon-incompleted';
+        }
+    }
 
     /**
      * Handles the deletion of a presentation
@@ -774,6 +796,31 @@ class PresentationPage_ManageRequest extends RequestHandler
         }
     }
 
+    public function createSaveActions($action, $step) {
+
+        if($step > 1) {
+            // add prev button
+            $prev_action = new FormAction('PrevStep', 'Go Back');
+            $prev_action->setButtonContent("<i class=\"fa fa-chevron-left\" aria-hidden=\"true\"></i>&nbsp;Go Back");
+            $prev_action->addExtraClass('btn go-back-action-btn');
+            $prev_action->setUseButtonTag(true);
+            $array_actions[] = $prev_action;
+        }
+
+        $save_later_action = LinkFormAction::create('save_later')->setTitle('Save &amp; Come Back Later');
+        $save_later_action->setCSSClass('save-later-action-btn');
+        // default action btn
+        $default_action    = FormAction::create($action, 'Save and continue');
+        $default_action->addExtraClass("btn default-action-btn");
+        $default_action->setUseButtonTag(true);
+        $default_action->setButtonContent("Save and continue&nbsp;<i class=\"fa fa-chevron-right\" aria-hidden=\"true\"></i>");
+
+        $array_actions[]   = $save_later_action;
+        $array_actions[]   = $default_action;
+
+        return $array_actions;
+    }
+
 
     /**
      * Creates the presentation add/edit form
@@ -781,14 +828,13 @@ class PresentationPage_ManageRequest extends RequestHandler
      */
     public function PresentationForm()
     {
+        $actions = $this->createSaveActions('savePresentationSummary', 1);
+
         $form = PresentationForm::create
         (
             $this,
             "PresentationForm",
-            FieldList::create
-            (
-                FormAction::create('savePresentationSummary', 'Save and continue')->addExtraClass('btn-primary')
-            ),
+            new FieldList($actions),
             $this->Summit(),
             $this->parent->getPresentationManager(),
             $this->presentation
@@ -804,19 +850,16 @@ class PresentationPage_ManageRequest extends RequestHandler
 
     public function PresentationTagsForm()
     {
-        $fields    = FieldList::create();
-        $tag_field = new TagManagerField('Tags', 'Tags');
-        $tag_field->setCategory($this->presentation->Category());
-        $fields->add($tag_field);
-        $form   = new BootstrapForm($this, 'PresentationTagsForm', $fields ,
-            FieldList::create(
-                FormAction::create('savePresentationTags', 'Save')
-            )
-        );
+        $actions = $this->createSaveActions('savePresentationTags', 2);
+
+        $form   = new PresentationTagsForm($this, 'PresentationTagsForm', new FieldList($actions), $this->presentation);
+
         if ($data = Session::get("FormInfo.{$form->FormName()}.data")) {
             return $form->loadDataFrom($data);
         }
-        return $form->loadDataFrom($this->presentation);
+        $form = $form->loadDataFrom($this->presentation);
+
+        return $form;
     }
 
     /**
@@ -825,94 +868,16 @@ class PresentationPage_ManageRequest extends RequestHandler
      */
     public function AddSpeakerForm()
     {
-        Requirements::css('themes/openstack/bower_assets/jquery-ui/themes/ui-lightness/jquery-ui.min.css');
-        Requirements::javascript('themes/openstack/bower_assets/jquery-ui/jquery-ui.min.js');
         Requirements::customScript(sprintf("var speaker_search_url = '%s/%s'; ", $this->Link('speakers'), 'search'));
-        Requirements::javascript('summit/javascript/AddSpeakerForm.js');
 
-        $summit                 = $this->Summit();
-        $max_speakers_reached   = $this->presentation->maxSpeakersReached();
-        $max_moderators_reached = $this->presentation->maxModeratorsReached();
-        $speaker_type           = (!$max_moderators_reached) ? 'Moderator' : 'Speaker';
-        $presentation_type       = $this->presentation->getTypeName();
-
-        $fields = FieldList::create(
-            LiteralField::create('SpeakerNote',
-                '<p class="at-least-one">Each '.$presentation_type.' needs at least one '.$speaker_type.'.</p>'),
-            OptionsetField::create('SpeakerType', '', array(
-                'Me'   => 'Add yourself as a '.$speaker_type.' to this '.$presentation_type,
-                'Else' => 'Add someone else'
-            ))->setValue('Me'),
-            LiteralField::create('LegalMe', sprintf('
-                <div id="legal-me" style="display: none;">
-                 <label>
-                    '.$speaker_type.'s agree that OpenStack Foundation may record and publish their talks presented during the %s OpenStack Summit. If you submit a proposal on behalf of a speaker, you represent to OpenStack Foundation that you have the authority to submit the proposal on the speaker’s behalf and agree to the recording and publication of their presentation.
-                </label>
-                </div>', $summit->Title)),
-            TextField::create('EmailAddress',
-                "To add another person as a ".$speaker_type.", you will need their first name, last name or email address. (*)")
-                ->displayIf('SpeakerType')
-                ->isEqualTo('Else')
-                ->end(),
-            HiddenField::create('SpeakerId','SpeakerId'),
-            HiddenField::create('MemberId','MemberId'),
-            LiteralField::create('LegalOther', sprintf('
-                <div id="legal-other" style="display: none;">
-                 <label>
-                    '.$speaker_type.'s agree that OpenStack Foundation may record and publish their talks presented during the %s OpenStack Summit. If you submit a proposal on behalf of a speaker, you represent to OpenStack Foundation that you have the authority to submit the proposal on the speaker’s behalf and agree to the recording and publication of their presentation.
-                </label>
-                </div>', $summit->Title)
-            )
-        );
-
-        $validator = RequiredFields::create();
-
-        if (Member::currentUser()->IsSpeaker($this->presentation)
-        || $this->presentation->ModeratorID == Member::currentUser()->getSpeakerProfile()->ID) {
-            $fields->replaceField('SpeakerType', HiddenField::create('SpeakerType', '', 'Else'));
-            $fields->field('EmailAddress')
-                ->setTitle('Enter the first name, last name or email address of your '.$speaker_type.' (*)')
-                ->setDisplayLogicCriteria(null);
-        }
-
-        if ($this->presentation->Speakers()->exists() && $max_moderators_reached) {
-            if (!$max_speakers_reached) {
-                $fields->insertBefore(
-                    LiteralField::create('MoreSpeakers', '<h3 class="more-speakers">Any more speakers to add?</h3>'),
-                    'SpeakerNote'
-                );
-                $fields->removeField('SpeakerNote');
-
-                $actions = FieldList::create(
-                    FormAction::create('doAddSpeaker', '<i class="fa fa-plus fa-start"></i> Add another speaker'),
-                    FormAction::create('doFinishSpeaker', 'Done adding speakers <i class="fa fa-arrow-right fa-end"></i>')
-                );
-            } else {
-                $fields->insertBefore(
-                    LiteralField::create('LimitSpeakers', '<h3 class="limit-speakers">You have reached the maximum of speakers.</h3>'),
-                    'SpeakerNote'
-                );
-                $fields->removeField('SpeakerNote');
-                $fields->removeField('EmailAddress');
-                $fields->removeField('SpeakerType');
-                $actions = FieldList::create(
-                    FormAction::create('doFinishSpeaker', 'Done adding speakers <i class="fa fa-arrow-right fa-end"></i>')
-                );
-            }
-        } else {
-            $action_text = 'Add '.(($speaker_type == 'speaker') ? 'first ' : 'a ').$speaker_type;
-            $actions = FieldList::create(
-                FormAction::create('doAddSpeaker', '<i class="fa fa-plus fa-start"></i> '.$action_text)
-            );
-        }
-
-        return BootstrapForm::create(
+        $form = AddSpeakerForm::create(
             $this,
             "AddSpeakerForm",
-            $fields,
-            $actions,
-            $validator
+            $this->presentation,
+            $this->Summit()
         );
+
+        return $form;
     }
 
     /**
@@ -924,7 +889,6 @@ class PresentationPage_ManageRequest extends RequestHandler
      */
     public function savePresentationSummary($data, $form)
     {
-
         try
         {
             Session::set("FormInfo.{$form->FormName()}.data", $data);
@@ -970,7 +934,13 @@ class PresentationPage_ManageRequest extends RequestHandler
             Session::clear("FormInfo.{$form->FormName()}.data");
 
             // next step
-            return $this->parent->redirect($this->Link('tags'));
+            $continue = $data['Continue'];
+            if ($continue == 1) {
+                return $this->parent->redirect($this->Link('tags'));
+            } else {
+                return $this->parent->redirect($this->parent->Link());
+            }
+
         }
         catch(EntityValidationException $ex1){
             $form->sessionMessage($ex1->getMessage(), 'bad');
@@ -1000,7 +970,14 @@ class PresentationPage_ManageRequest extends RequestHandler
         Session::clear("FormInfo.{$form->FormName()}.data");
 
         // next step
-        return $this->parent->redirect($this->Link('speakers'));
+        $continue = $data['Continue'];
+        if ($continue == 1) {
+            return $this->parent->redirect($this->Link('speakers'));
+        } else if ($continue == -1) {
+            return $this->parent->redirect($this->Link('summary'));
+        } else {
+            return $this->parent->redirect($this->parent->Link());
+        }
     }
 
     /**
@@ -1101,7 +1078,15 @@ class PresentationPage_ManageRequest extends RequestHandler
             $this->presentation->setProgress(Presentation::PHASE_SPEAKERS)->write();
         }
 
-        return $this->parent->redirect($this->Link('confirm'));
+        // next step
+        $continue = $data['Continue'];
+        if ($continue == 1) {
+            return $this->parent->redirect($this->Link('confirm'));
+        } else if ($continue == -1) {
+            return $this->parent->redirect($this->Link('tags'));
+        } else {
+            return $this->parent->redirect($this->parent->Link());
+        }
     }
 }
 

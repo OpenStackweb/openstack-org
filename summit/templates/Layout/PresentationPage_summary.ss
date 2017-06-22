@@ -1,3 +1,5 @@
+<% include PresentationPage_HeaderNav CurrentStep=1 %>
+
 <div class="presentation-app-body">
     <div class="container">
         <div class="row">
@@ -13,7 +15,6 @@
                             <h2>Add New Presentation</h2>
                         <% end_if %>
                     </div>
-                    <% include PresentationPage_NavSteps Step=1 %>
                     $PresentationForm
                 </div>
             </div>

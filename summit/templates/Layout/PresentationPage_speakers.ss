@@ -1,3 +1,5 @@
+<% include PresentationPage_HeaderNav CurrentStep=3 %>
+
 <div class="presentation-app-body">
     <div class="container">
         <div class="row">
@@ -11,7 +13,6 @@
                             speaker<% end_if %></h2>
                     </div>
 
-                    <% include PresentationPage_NavSteps Step=3 %>
                     <% if $Presentation.Moderator %>
                         <h3>Moderator for this presentation</h3>
                         <table class="table">

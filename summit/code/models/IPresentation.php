@@ -78,6 +78,20 @@ interface IPresentation extends ISummitEvent
     public function EditLink();
 
     /**
+     * Gets a link to edit this presentation
+     *
+     * @return  string
+     */
+    public function EditTagsLink();
+
+    /**
+     * Gets a link to edit confirmation for this presentation
+     *
+     * @return  string
+     */
+    public function EditConfirmLink();
+
+    /**
      * @return string
      */
     public function PreviewLink();

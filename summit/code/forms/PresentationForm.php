@@ -29,20 +29,22 @@ final class PresentationForm extends BootstrapForm
      * @param IPresentationManager $presentation_manager
      * @param IPresentation $presentation
      */
-     public function __construct($controller, $name, $actions, ISummit $summit, IPresentationManager $presentation_manager, IPresentation $presentation) {
+    public function __construct($controller, $name, $actions, ISummit $summit, IPresentationManager $presentation_manager, IPresentation $presentation) {
 
         $this->presentation_manager = $presentation_manager;
         $this->summit               = $summit;
         $this->presentation         = $presentation;
+        $this->setTemplate('PresentationForm');
 
         Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
         Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
         Requirements::javascript('summit/javascript/presentation-form.js');
+        Requirements::javascript('summit/javascript/presentation-form-save-actions.js');
         Requirements::css('themes/openstack/bower_assets/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
 
         parent::__construct(
-            $controller, 
-            $name, 
+            $controller,
+            $name,
             $this->getPresentationFields(),
             $actions,
             $this->getPresentationValidator()
@@ -143,7 +145,12 @@ final class PresentationForm extends BootstrapForm
             ->text('PresentationLink[5]','#5')
             ->hidden('ID','ID')
             ->hidden('SummitID','',$this->summit->ID)
-            ->hidden('CategoryIDbis','');
+            ->hidden('CategoryIDbis','')
+            ->hidden('Continue','',1)
+                ->configure()
+                    ->addExtraClass('continue_field')
+                ->end()
+            ->literal('EndHr','<hr>');
 
         $CategoryGroupField = new CategoryGroupField('GroupID','Select the <a href="'.$this->summit->Link.'categories" target="_blank">Summit Category</a> of your presentation');
         $CategoryGroupField->setSource($category_groups_map);
@@ -166,6 +173,8 @@ final class PresentationForm extends BootstrapForm
 
         $presentation = $data;
 
+        $this->fields->fieldByName('Continue')->setValue(1);
+
         if ($presentation->Category()->ID) {
             $group = $presentation->Category()->getCategoryGroups()->first();
             $this->fields->fieldByName('GroupID')->setValue($group->ID);
@@ -183,7 +192,6 @@ final class PresentationForm extends BootstrapForm
 
     public function saveInto(DataObjectInterface $dataObject, $fieldList = null)
     {
-
         parent::saveInto($dataObject, $fieldList);
 
         if (!$dataObject instanceof Presentation) {
@@ -227,6 +235,17 @@ final class PresentationForm extends BootstrapForm
 
             $presentation->ExtraAnswers()->add($answer);
         }
+    }
+
+    public function forTemplate() {
+        parent::forTemplate();
+
+        $return = $this->renderWith(['PresentationForm']);
+
+        // Now that we're rendered, clear message
+        $this->clearMessage();
+
+        return $return;
     }
 
 }

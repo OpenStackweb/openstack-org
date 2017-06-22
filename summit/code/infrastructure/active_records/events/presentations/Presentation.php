@@ -327,6 +327,18 @@ class Presentation extends SummitEvent implements IPresentation
         }
     }
 
+    /**
+     * Gets a link to edit confirmation for this presentation
+     *
+     * @return  string
+     */
+    public function EditConfirmLink()
+    {
+        if ($page = PresentationPage::get()->filter('SummitID', $this->SummitID)->first()) {
+            return Controller::join_links($page->Link(), 'manage', $this->ID, 'confirm');
+        }
+    }
+
 
     /**
      * Gets a link to the preview iframe

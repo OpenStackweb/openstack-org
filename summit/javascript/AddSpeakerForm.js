@@ -14,7 +14,7 @@
 (function($) {
     $(document).ready(function() {
         var cache = {};
-        $( "#BootstrapForm_AddSpeakerForm_EmailAddress" ).autocomplete({
+        $( "#AddSpeakerForm_AddSpeakerForm_EmailAddress" ).autocomplete({
             minLength: 2,
             source: function( request, response ) {
                 var term = request.term;
@@ -29,9 +29,9 @@
                 });
             },
             select: function( event, ui ) {
-                $( "#BootstrapForm_AddSpeakerForm_EmailAddress" ).val(ui.item.name);
-                $( "#BootstrapForm_AddSpeakerForm_MemberId" ).val(ui.item.member_id );
-                $( "#BootstrapForm_AddSpeakerForm_SpeakerId" ).val(ui.item.speaker_id);
+                $( "#AddSpeakerForm_AddSpeakerForm_EmailAddress" ).val(ui.item.name);
+                $( "#AddSpeakerForm_AddSpeakerForm_MemberId" ).val(ui.item.member_id );
+                $( "#AddSpeakerForm_AddSpeakerForm_SpeakerId" ).val(ui.item.speaker_id);
                 return false;
             }
 
