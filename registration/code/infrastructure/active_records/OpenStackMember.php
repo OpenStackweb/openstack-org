@@ -104,6 +104,28 @@ class OpenStackMember extends DataExtension
         $this->owner->State               = trim($this->owner->State);
         $this->owner->Postcode            = trim($this->owner->Postcode);
         $this->owner->City                = trim($this->owner->City);
+
+
+        $fields = $this->owner->getChangedFields(true);
+        // log changes on email or password fields ( tracking )
+        if(isset($fields['Email']))
+        {
+            $log                = new MemberEmailChange();
+            $log->OldValue      = trim($fields['Email']['before']);
+            $log->NewValue      = trim($fields['Email']['after']);
+            $log->MemberID      = $this->owner->ID;
+            $log->PerformedByID = Member::currentUserID();
+            $log->write();
+        }
+        if(isset($fields['Password']))
+        {
+            $log                = new MemberPasswordChange();
+            $log->OldValue      = trim($fields['Password']['before']);
+            $log->NewValue      = trim($fields['Password']['after']);
+            $log->MemberID      = $this->owner->ID;
+            $log->PerformedByID = Member::currentUserID();
+            $log->write();
+        }
     }
 
     public function onBeforeDelete()
