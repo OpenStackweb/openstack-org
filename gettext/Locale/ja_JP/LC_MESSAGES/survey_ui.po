@@ -1,6 +1,7 @@
 # Akihiro Motoki <amotoki@gmail.com>, 2017. #zanata
 # Akira YOSHIYAMA <akirayoshiyama@gmail.com>, 2017. #zanata
 # KATO Tomoyuki <kato.tomoyuki@jp.fujitsu.com>, 2017. #zanata
+# Shintaro Mizuno <mizuno.shintaro@lab.ntt.co.jp>, 2017. #zanata
 # Tom Fifield <tom@openstack.org>, 2017. #zanata
 msgid ""
 msgstr ""
@@ -9,8 +10,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2017-06-20 04:05+0000\n"
-"Last-Translator: Akira YOSHIYAMA <akirayoshiyama@gmail.com>\n"
+"PO-Revision-Date: 2017-06-21 07:36+0000\n"
+"Last-Translator: Shintaro Mizuno <mizuno.shintaro@lab.ntt.co.jp>\n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
 "X-Generator: Zanata 3.9.6\n"
@@ -152,7 +153,7 @@ msgstr "選択肢がありません。"
 #: survey_builder/templates/SurveyRankingField.ss:2
 #, php-format
 msgid "Please rank up to %s"
-msgstr "%s にランクアップして下さい。"
+msgstr "%s 個までランク付けしてください。"
 
 #: survey_builder/templates/SurveyRankingField.ss:4
 msgid "Click your options to rank them. Select at least one."
@@ -181,7 +182,7 @@ msgid ""
 "sizes."
 msgstr ""
 "2013 年 4 月以来 6 回目の OpenStack ユーザ調査（コミュニティーの様々な OpenStack "
-"環境の段階と規模における、意見、組織プロフィール、事例、技術選択のより良い理解）を読む。"
+"環境の段階と規模における、意見、組織プロフィール、事例、技術選択のより良い理解）をご覧ください。"
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:50
 msgid "Download the report"
@@ -251,7 +252,7 @@ msgstr "アンケート開始！"
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:72
 msgid ""
 "See the OpenStack community’s opinions, adoption and technology choices"
-msgstr "OpenStack コミュニティーの意見、採用、技術選択を見る"
+msgstr "OpenStack コミュニティーからの意見、適用状況、及び技術的な選択肢を見る"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:74
 msgid ""
@@ -263,7 +264,7 @@ msgid ""
 "deployments."
 msgstr ""
 "2013 年 4 月以来 8 回目の OpenStack ユーザ調査（コミュニティーの様々な OpenStack "
-"環境の段階と規模における、意見、組織プロフィール、事例、技術選択のより良い理解）を読む。この頃の調査は要点のみ（コミュニティーが最も広範囲に使用するチャートの抜粋を含む）で、OpenStack "
+"環境の段階と規模における、意見、組織プロフィール、事例、技術選択のより良い理解）をご覧ください。この頃の調査は要点のみ（コミュニティーが最も広範囲に使用するチャートの抜粋を含む）で、OpenStack "
 "環境にのみフォーカスしています。"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:77
@@ -287,7 +288,7 @@ msgid ""
 "from the user survey."
 msgstr ""
 "OpenStack コミュニティーに提供された<a href=\"%s\">新しい分析ツール</"
-"a>を使って昨年からのユーザ調査データを分析し、あなた自身で新しい知見を得ましょう。実質的にユーザ調査の全質問に複数のフィルタを適用して下さい。"
+"a>を使って昨年からのユーザ調査データを分析し、あなた自身で新しい知見を得ましょう。ユーザ調査のほぼ全ての質問に対して、複数のフィルタを適用してご利用下さい。"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:88
 msgid "Survey Assets"
@@ -325,7 +326,7 @@ msgstr "これは、OpenStack クラウドユーザと運用者用の <strong>Op
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:132
 msgid "It should only take <strong>10 minutes</strong> to complete."
-msgstr "<strong>10 分</strong>で済みます。"
+msgstr "本調査にかかる時間は<strong>10 分</strong>程度です。"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:138
 msgid ""
@@ -343,7 +344,7 @@ msgid ""
 "advocate on your behalf."
 msgstr ""
 "この調査は、コミュニティーとソフトウェアの方向性に影響を与える機会をユーザーに提供します。あなたの構成と要件に関する情報を共有する事により、OpenStack "
-"Foundation ユーザーコミッティーはあなたの代弁者であると主張できるでしょう。"
+"Foundation ユーザーコミッティーはあなたの代わりに提言することができます。"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:156
 msgid "More Information About The Survey"
@@ -366,7 +367,7 @@ msgstr "あなたの OpenStack 環境情報 (%s)"
 msgid ""
 "You do not have any OpenStack deployment yet. <a href=\"%s\">Want to add "
 "one?</a>"
-msgstr "あなたはまだ OpenStack 構築情報を登録していません。 <a href=\"%s\">追加しますか？</a>"
+msgstr "あなたはまだ OpenStack 環境情報を登録していません。 <a href=\"%s\">追加しますか？</a>"
 
 #: survey_builder/templates/Layout/Includes/ReviewStepForm.ss:10
 msgid ""
@@ -434,7 +435,7 @@ msgstr "１つ以上の項目を選択して下さい (%s)"
 
 #: survey_builder/code/ui/frontend/SurveyPage.php:411
 msgid "Thank you for your submission !!!"
-msgstr "ご協力ありがとうございます。"
+msgstr "ご協力ありがとうございました。"
 
 #: survey_builder/templates/Layout/Includes/Surveys_Header.ss:3
 msgid "Step <strong>%1$s of %2$s</strong> for <strong>%3$s</strong>"
@@ -502,7 +503,7 @@ msgstr "これで良いですか？"
 
 #: survey_builder/js/survey.organization.field.js:31
 msgid "You Must Specify a New Organization Name!."
-msgstr "新しい所属組織名を入力しなければなりません。"
+msgstr "新しい所属組織名を入力してください。"
 
 #: survey_builder/js/entity.survey.editor.team.field.js:100
 msgid "You must select a valid member!"
@@ -517,7 +518,7 @@ msgid ""
 "deployments and 22% more organizations than ever before."
 msgstr ""
 "2013 年 4 月以来 9 回目の OpenStack ユーザ調査（コミュニティーの様々な OpenStack "
-"環境の段階と規模における、意見、組織プロフィール、事例、技術選択のより良い理解）を読む。この調査は 1,300 "
+"環境の段階と規模における、意見、組織プロフィール、事例、技術選択のより良い理解）をご覧ください。この調査は 1,300 "
 "人以上のユーザから得られた見識（前回比＋44 %の環境、＋22 %の所属組織を示す）を提示します。"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:46
@@ -526,7 +527,7 @@ msgstr "2017年4月のレポートを読む"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:56
 msgid "Watch a quick video overview"
-msgstr "短いビデオ概要を観る"
+msgstr "ビデオ概要を観る"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:58
 msgid "April 2017 full report"
