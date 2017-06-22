@@ -44,6 +44,32 @@ final class CSVExporter
 
 
     /**
+     * @param array $data
+     * @param string $field_separator
+     * @return string
+     */
+    public function exportContent(array $data, $field_separator = "\t"){
+        $content = '';
+
+        $flag = false;
+        foreach ($data as $row) {
+            if (!$flag) {
+                // display field/column names as first row
+                $header = array_keys($row);
+                array_walk($header, array($this, 'cleanData'));
+                $header = implode($field_separator, $header) .PHP_EOL;
+                $content .= $header;
+                $flag = true;
+            }
+            array_walk($row, array($this, 'cleanData'));
+            $line = implode($field_separator, array_values($row)) . PHP_EOL;
+            $content .= $line;
+        }
+
+        return $content;
+    }
+
+    /**
      * @param        $filename
      * @param array  $data
      * @param string $field_separator
@@ -67,12 +93,12 @@ final class CSVExporter
                 // display field/column names as first row
                 $header = array_keys($row);
                 array_walk($header, array($this, 'cleanData'));
-                $header = implode($field_separator, $header) . "\n";
+                $header = implode($field_separator, $header) . PHP_EOL;
                 echo $header;
                 $flag = true;
             }
             array_walk($row, array($this, 'cleanData'));
-            $line = implode($field_separator, array_values($row)) . "\n";
+            $line = implode($field_separator, array_values($row)) . PHP_EOL;
             echo $line;
         }
         exit;

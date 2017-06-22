@@ -17,8 +17,7 @@
  */
 class SendGridWebMailer extends Mailer {
 
-    var $mailer = null;
-
+    var $mailer          = null;
     const Header_CC      = 'Cc';
     const Header_BCC     = 'Bcc';
     const Header_ReplyTo = 'Reply-To';
@@ -28,69 +27,110 @@ class SendGridWebMailer extends Mailer {
         $this->mailer = $mailer;
     }
 
-    protected function instanciate() {
-        $sendgrid = new SendGrid(SMTPMAILER_USERNAME, SMTPMAILER_PASSWORD);
-        return $sendgrid;
+    /**
+     * @return SendGrid
+     */
+    protected function instantiate() {
+         return new SendGrid(SENDGRID_API_KEY);
     }
 
     /* Overwriting SilverStripe's Mailer's function */
     public function sendHTML($to, $from, $subject, $htmlContent, $attachedFiles = false, $customheaders = false, $plainContent = false, $inlineImages = false){
 
-        $mail     = new SendGrid\Email();
-        $sendgrid = $this->instanciate();
+        $mail     = new SendGrid\Mail;
+        $sendgrid = $this->instantiate();
+        $p        = new \SendGrid\Personalization();
 
         $to = explode(',',$to);
         foreach($to as $s1){
-            $mail->addTo(trim($s1));
+            $p->addTo(
+                new SendGrid\Email(null, trim($s1))
+            );
         }
 
-        $this->processEmailHeaders($customheaders, $mail);
-        $mail->setFrom(trim($from));
+        $this->processEmailHeaders($customheaders, $p, $mail);
+        $mail->setFrom(new SendGrid\Email(null, trim($from)));
         $mail->setSubject($subject);
-        $mail->setHtml($htmlContent);
+        $mail->addPersonalization($p);
 
-        if($attachedFiles && is_array($attachedFiles))
-            $mail->setAttachments($attachedFiles);
+        $content = new \SendGrid\Content("text/html", $htmlContent);
 
-        $sendgrid->send($mail);                        // send mail via sendgrid web API
+        $mail->addContent($content);
+
+        $this->processAttachments($mail, $attachedFiles);
+
+        // send mail via sendgrid web API
+        $response = $sendgrid->client->mail()->send()->post($mail);
+
+        return $response->statusCode() == 202;
     }
 
     /* Overwriting SilverStripe's Mailer function */
     public function sendPlain($to, $from, $subject, $plainContent, $attachedFiles = false, $customheaders = false){
 
-        $mail     = new SendGrid\Email();
-        $sendgrid = $this->instanciate();
+        $mail     = new SendGrid\Mail();
+        $sendgrid = $this->instantiate();
+        $p        = new \SendGrid\Personalization();
 
         $to = explode(',',$to);
         foreach($to as $s1){
-            $mail->addTo(trim($s1));
+            $p->addTo(
+                new SendGrid\Email(null, trim($s1))
+            );
         }
-        $this->processEmailHeaders($customheaders, $mail);
-        $mail->setFrom(trim($from));
+
+        $this->processEmailHeaders($customheaders, $p, $mail);
+        $mail->setFrom(new SendGrid\Email(null, trim($from)));
         $mail->setSubject($subject);
-        $mail->setText($plainContent);
+        $mail->addPersonalization($p);
 
-        if($attachedFiles && is_array($attachedFiles))
-            $mail->setAttachments($attachedFiles);
+        $content = new \SendGrid\Content("text/plain", $plainContent);
+        $mail->addContent($content);
+        $this->processAttachments($mail, $attachedFiles);
 
-        $sendgrid->send($mail);
+
+        // send mail via sendgrid web API
+        $response = $sendgrid->client->mail()->send()->post($mail);
+
+        return $response->statusCode() == 202;
     }
 
-    private function processEmailHeaders($headers, SendGrid\Email $email){
+    /**
+     * @param $headers
+     * @param \SendGrid\Personalization $p
+     * @param \SendGrid\Mail $mail
+     */
+    private function processEmailHeaders($headers, \SendGrid\Personalization $p, SendGrid\Mail $mail){
         if($headers && is_array($headers)){
             if(isset($headers[self::Header_CC])){
                 foreach (explode(',', $headers[self::Header_CC]) as $cc)
-                    $email->addCc(trim($cc));
+                    $p->addCc(new SendGrid\Email(null, trim($cc)));
             }
             if(isset($headers[self::Header_BCC])){
                 foreach (explode(',', $headers[self::Header_BCC]) as $bcc)
-                    $email->addBcc(trim($bcc));
+                    $p->addBcc(new SendGrid\Email(null, trim($bcc)));
             }
             if(isset($headers[self::Header_ReplyTo])){
-                $email->setReplyTo($headers[self::Header_ReplyTo]);
+                $mail->setReplyTo(new SendGrid\Email(null, $headers[self::Header_ReplyTo]));
             }
         }
-        return $email;
+    }
+
+    /**
+     * @param \SendGrid\Mail $mail
+     * @param bool|array $attachedFiles
+     */
+    private function processAttachments(SendGrid\Mail $mail, $attachedFiles = false ){
+        if($attachedFiles && is_array($attachedFiles)){
+            foreach ($attachedFiles as $attachedFile){
+                $att = new \SendGrid\Attachment();
+                $att->setContent(base64_encode($attachedFile['contents']));
+                $att->setType($attachedFile['mimetype']);
+                $att->setFilename(basename($attachedFile['filename']));
+                $att->setDisposition("attachment");
+                $mail->addAttachment( $att );
+            }
+        }
     }
 
 }
