@@ -12,11 +12,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-final class LoadInitialCOADump extends CronTask
+final class LoadExternalCOAFile extends CronTask
 {
-    protected $title = "LoadInitialCOADump";
+    protected $title = "LoadExternalCOAFile";
 
-    protected $description = "LoadInitialCOADump";
+    protected $description = "LoadExternalCOAFile";
 
     /**
      * @var ICOAManager
@@ -35,11 +35,11 @@ final class LoadInitialCOADump extends CronTask
     {
         $filename = isset($_GET['filename']) ? trim($_GET['filename']) : null;
         if (is_null($filename)) {
-            echo 'ERROR - csv_file param missing!';
-            exit;
+            echo 'ERROR - csv_file param missing!'.PHP_EOL;
+            return;
         }
 
-        $this->manager->processExternalInitialDump($filename);
+        $this->manager->processExternalDump($filename);
     }
 
 }

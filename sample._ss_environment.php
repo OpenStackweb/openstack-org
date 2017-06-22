@@ -155,6 +155,12 @@ define('RECAPTCHA_SITE_KEY', "");
 define('RECAPTCHA_SECRET_KEY', "");
 //marketplace/code/infrastructure/services/ExpiredPoweredOpenStackImplementationEmailMessageSender.php#32
 define('EXPIRED_POWERED_OPENSTACK_IMPLEMENTATION_EMAIL_TO', '');
+// coa
+define('SENDGRID_API_KEY', '');
+define('COA_UNPROCESSED_EMAIL_ROWS_FROM', '');
+define('COA_UNPROCESSED_EMAIL_ROWS_TO', '');
+define('COA_UNPROCESSED_EMAIL_ROWS_SUBJECT', '');
+
 
 global $_FILE_TO_URL_MAPPING;
 $_FILE_TO_URL_MAPPING[''] = '';

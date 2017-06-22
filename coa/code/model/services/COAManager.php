@@ -69,7 +69,8 @@ final class COAManager implements ICOAManager
     private function processFile($content, $filename, $timestamp)
     {
 
-        $rows = CSVReader::load($content);
+        $rows             = CSVReader::load($content);
+        $unprocessed_rows = [];
 
         foreach ($rows as $row) {
             $exam_ext_id                = $row['candidate_exam_id'];
@@ -114,10 +115,11 @@ final class COAManager implements ICOAManager
                     }
                 }
             }
-            // we werent able to find member ... skip it
+            // we we are not able to find member ... skip it
             if (is_null($member) || !$member->exists()) {
 
                 echo sprintf("missing member %s - track_id %s - filename %s", $email, $track_id, $filename) . PHP_EOL;
+                $unprocessed_rows[] = $row;
                 continue;
             }
 
@@ -151,6 +153,23 @@ final class COAManager implements ICOAManager
             $exam->write();
         }
         $this->markFileAsProcessed($filename, $timestamp);
+
+        if(count($unprocessed_rows) > 0){
+            // sent email with csv attachment
+
+            $csv_unprocessed_rows = CSVExporter::getInstance()->exportContent($unprocessed_rows, ',');
+
+            $email = EmailFactory::getInstance()->buildEmail(
+                COA_UNPROCESSED_EMAIL_ROWS_FROM,
+                COA_UNPROCESSED_EMAIL_ROWS_TO,
+                COA_UNPROCESSED_EMAIL_ROWS_SUBJECT
+            );
+
+            $email->attachFileFromString($csv_unprocessed_rows, basename($filename), 'application/vnd.ms-excel');
+
+            $email->send();
+
+        }
     }
 
     /**
@@ -188,7 +207,7 @@ final class COAManager implements ICOAManager
      * @param string $filename
      * @return void
      */
-    public function processExternalInitialDump($filename)
+    public function processExternalDump($filename)
     {
         return $this->tx_manager->transaction(function () use ($filename) {
             try {
@@ -198,10 +217,8 @@ final class COAManager implements ICOAManager
                 if (!file_exists($filename)) return;
                 $content = file_get_contents($filename);
 
-                // delete all former exams ...
-                $this->exam_repository->deleteAll();
-
                 $this->processFile($content, $filename, $timestamp);
+
             } catch (Exception $ex) {
                 SS_Log::log($ex->getMessage(), SS_Log::WARN);
                 throw $ex;
