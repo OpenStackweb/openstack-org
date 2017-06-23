@@ -47,7 +47,7 @@ jQuery(document).ready(function($) {
         var modal = $(this);
         var body_html = '<div class="row mascot_row">';
 
-        for (var i in mascot_images) {
+        for (var i = 0; i < mascot_images.length; i++) {
             var filename = mascot_images[i];
             var extension = filename.split('.')[1];
             var image_file = mascots_dir + component + '/' + filename;
