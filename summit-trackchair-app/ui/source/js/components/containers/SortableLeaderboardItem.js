@@ -20,8 +20,9 @@ const cardSource = {
     },
     endDrag(props, monitor) {
         const didDrop = monitor.didDrop();
+        const canDrop = !(props.column == 'team' && monitor.getItem().column != 'team');
 
-        if (didDrop) {
+        if (didDrop && canDrop) {
             props.dropSelection(
                 monitor.getItem().targetListID,
                 monitor.getItem().column,
@@ -154,7 +155,7 @@ const LeaderboardItemDragSource = DragSource('CARD', cardSource, (connect, monit
 export default connect(
 	(state, ownProps) => {
 		const teamList = state.lists.results.find(l => l.is_group);
-		if(!teamList) return;
+		if(!teamList || !ownProps.presentation) return;
 
 		const teamHasThis = teamList.selections.some(s => +s.id === +ownProps.id);
 		const teamIsFull = teamList.selections.length >= teamList.slots;
