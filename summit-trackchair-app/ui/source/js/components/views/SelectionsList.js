@@ -61,7 +61,7 @@ class SelectionsList extends React.Component {
 			return;
 		}
         else if(item.presentation.group_selected && toList === 'team') {
-            this.props.throwError('Presentation already assigned to another Team List.');
+            this.props.throwError('Presentation already assigned to this Team List.');
             return;
         }
 		else {

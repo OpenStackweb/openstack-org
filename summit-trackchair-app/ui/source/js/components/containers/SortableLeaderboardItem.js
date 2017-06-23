@@ -23,9 +23,9 @@ const cardSource = {
 
         if (didDrop) {
             props.dropSelection(
-                props.listID,
+                monitor.getItem().targetListID,
                 monitor.getItem().column,
-                props.listHash
+                monitor.getItem().targetListHash
             );
         }
     }
@@ -72,6 +72,8 @@ const cardTarget = {
     props.onMove(monitor.getItem(), dragList, dragIndex, hoverList, hoverIndex);
     monitor.getItem().index = hoverIndex;
     monitor.getItem().column = hoverList;
+    monitor.getItem().targetListID = props.listID;
+    monitor.getItem().targetListHash = props.listHash;
   }
 };
 

@@ -109,7 +109,7 @@ class BrowseDetail extends React.Component {
 
 			         <div className="row">
 			            <div className="col-lg-12">
-			            {p.change_requests_count > 0 && isAdmin &&
+			            {p.change_requests_count > 0 && ( isAdmin || p.can_assign ) &&
 			            	<div className="alert alert-info">
 			            		This presentation has {p.change_requests_count} category change requests that are unresolved.
 			            		[<RouterLink link='change-requests'>View</RouterLink>]

@@ -222,6 +222,7 @@ export const postReorganise = (listID, collection, listHash) => {
 
         // order is set on state while dragging so we just need to store whats on state
         var list = getState().lists.results.find(l => +l.id === +listID);
+        collection = list.is_group ? 'selections' : collection;
         var order = list[collection].map(s => s.id);
 
 		cancel(key);

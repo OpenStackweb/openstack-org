@@ -403,6 +403,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
 
                     // first we compare the list hash to see if there were modifications
                     // we only do this for team bc there are 2 individual lists maybe and selections
+
                     if ($isTeam && !$list->compareHashString($old_hash)) {
                         $msg = "The list was modified by someone else, please REFRESH";
                         throw new EntityValidationException($msg);
