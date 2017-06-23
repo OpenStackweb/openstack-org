@@ -132,4 +132,10 @@
             </div>
         </div>
     </div>
+    <% if $getGoBackStep() %>
+        <% include PresentationPage_SaveLaterModal StepUrl=$AbsoluteLink($Top.getGoBackStep()) %>
+        <script>
+            $('#save-later-modal').modal('toggle');
+        </script>
+    <% end_if %>
 </div>

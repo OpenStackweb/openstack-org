@@ -53,7 +53,8 @@ class PresentationPage_Controller extends SummitPage_Controller
         'setpassword',
         'bio',
         'BioForm',
-        'preview'
+        'preview',
+        'getGoBackStep'
     );
 
     private static $url_handlers = array(
@@ -206,6 +207,8 @@ class PresentationPage_Controller extends SummitPage_Controller
     public function init()
     {
         parent::init();
+
+        Requirements::javascript('themes/openstack/bower_assets/clipboard/dist/clipboard.min.js');
 
         if (!Summit::get_active()->isInDB()) {
             return $this->httpError(404, 'There is no active summit');
@@ -478,6 +481,30 @@ class PresentationPage_Controller extends SummitPage_Controller
         return $presentation;
     }
 
+    public function getGoBackStep()
+    {
+        return $this->getRequest()->getVar('GoBackStep');
+    }
+
+    public function getStepClass($current_step, $this_step, $progress) {
+        if ($current_step == $this_step) {
+            return 'current';
+        } else if ($progress >= $this_step) {
+            return 'completed';
+        } else {
+            return 'future';
+        }
+    }
+
+    public function getStepClassIcon($current_step, $this_step, $progress) {
+        if ($current_step == $this_step) {
+            return 'fa-pencil navigation-icon-current';
+        } else if ($progress >= $this_step) {
+            return 'fa-check-circle navigation-icon-completed';
+        } else {
+            return 'fa-plus-circle navigation-icon-incompleted';
+        }
+    }
 }
 
 
@@ -628,7 +655,7 @@ class PresentationPage_ManageRequest extends RequestHandler
             return $this->httpError(403, 'That speaker is not part of this presentation');
         }
 
-        $request = PresentationPage_ManageSpeakerRequest::create($speaker, $this);
+        $request = PresentationPage_ManageSpeakerRequest::create($speaker, $this->presentation, $this);
 
         return $request->handleRequest($r, DataModel::inst());
     }
@@ -688,26 +715,6 @@ class PresentationPage_ManageRequest extends RequestHandler
         ))->renderWith(array('PresentationPage_tags', 'PresentationPage'), $this->parent);
     }
 
-    public function getStepClass($current_step, $this_step) {
-        if ($current_step == $this_step) {
-            return 'current';
-        } else if ($this->presentation->getProgress() >= $this_step) {
-            return 'completed';
-        } else {
-            return 'future';
-        }
-    }
-
-    public function getStepClassIcon($current_step, $this_step) {
-        if ($current_step == $this_step) {
-            return 'fa-pencil navigation-icon-current';
-        } else if ($this->presentation->getProgress() >= $this_step) {
-            return 'fa-check-circle navigation-icon-completed';
-        } else {
-            return 'fa-plus-circle navigation-icon-incompleted';
-        }
-    }
-
     /**
      * Handles the deletion of a presentation
      * @param   $r SS_HTTPRequest
@@ -750,6 +757,7 @@ class PresentationPage_ManageRequest extends RequestHandler
     {
         return $this->customise(array(
             'SuccessLink' => $this->Link('success'),
+            'GoBackLink' => $this->Link('speakers'),
             'Presentation' => $this->presentation
         ))->renderWith(array('PresentationPage_confirm', 'PresentationPage'), $this->parent);
     }
@@ -820,7 +828,6 @@ class PresentationPage_ManageRequest extends RequestHandler
 
         return $array_actions;
     }
-
 
     /**
      * Creates the presentation add/edit form
@@ -938,7 +945,8 @@ class PresentationPage_ManageRequest extends RequestHandler
             if ($continue == 1) {
                 return $this->parent->redirect($this->Link('tags'));
             } else {
-                return $this->parent->redirect($this->parent->Link());
+                $vars = '?GoBackStep=manage/'.$this->presentation->ID.'/summary';
+                return $this->parent->redirect($this->parent->Link().$vars);
             }
 
         }
@@ -976,7 +984,8 @@ class PresentationPage_ManageRequest extends RequestHandler
         } else if ($continue == -1) {
             return $this->parent->redirect($this->Link('summary'));
         } else {
-            return $this->parent->redirect($this->parent->Link());
+            $vars = '?GoBackStep=manage/'.$this->presentation->ID.'/tags';
+            return $this->parent->redirect($this->parent->Link().$vars);
         }
     }
 
@@ -1085,7 +1094,8 @@ class PresentationPage_ManageRequest extends RequestHandler
         } else if ($continue == -1) {
             return $this->parent->redirect($this->Link('tags'));
         } else {
-            return $this->parent->redirect($this->parent->Link());
+            $vars = '?GoBackStep=manage/'.$this->presentation->ID.'/speakers';
+            return $this->parent->redirect($this->parent->Link().$vars);
         }
     }
 }
@@ -1117,7 +1127,12 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
     /**
      * @var  Speaker The speaker being updated
      */
+    protected $speaker;
 
+    /**
+     * @var  Presentation being updated
+     */
+    protected $presentation;
 
     /**
      * @var  PresentationPage_ManageRequest The parent controller
@@ -1129,11 +1144,14 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
      * @param   $speaker PresentationSpeaker The speaker being updated
      * @param   $parent PresentationPage_ManageRequest The parent controller
      */
-    public function __construct(PresentationSpeaker $speaker, PresentationPage_ManageRequest $parent)
+    public function __construct(PresentationSpeaker $speaker, IPresentation $presentation, PresentationPage_ManageRequest $parent)
     {
         parent::__construct();
         $this->speaker = $speaker;
+        $this->presentation = $presentation;
         $this->parent  = $parent;
+
+        Requirements::css('summit/css/call-for-presentations.css');
     }
 
     /**
@@ -1179,7 +1197,8 @@ class PresentationPage_ManageSpeakerRequest extends RequestHandler
     public function edit(SS_HTTPRequest $r)
     {
         return $this->customise(array(
-            'Speaker' => $this->speaker
+            'Speaker' => $this->speaker,
+            'Presentation' => $this->presentation,
         ))->renderWith(array('PresentationPage_editspeaker', 'PresentationPage'), $this->parent->getParent());
     }
 

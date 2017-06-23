@@ -27,7 +27,7 @@ ul.presentation-nav-steps li.current {
     border-left: 1px solid #D3DEEA;
     border-right:  2px solid #D3DEEA;
     border-top: 1px solid #248EC7;
-    border-bottom: 1px solid #F6F7F9;
+    border-bottom: 2px solid #F6F7F9;
 }
 
 ul.presentation-nav-steps li a {
@@ -36,7 +36,7 @@ ul.presentation-nav-steps li a {
     font-family: 'Open Sans Semibold', sans-serif;
     font-size: 13px;
     padding-top: 15px;
-    padding-bottom: 15px;
+    padding-bottom: 11px;
     padding-left: 12px;
     padding-right: 12px;
 }
@@ -47,7 +47,7 @@ ul.presentation-nav-steps li span {
     font-family: 'Open Sans Semibold', sans-serif;
     font-size: 13px;
     padding-top: 15px;
-    padding-bottom: 15px;
+    padding-bottom: 11px;
     padding-left: 12px;
     padding-right: 12px;
     cursor: no-drop;
@@ -101,7 +101,7 @@ i.navigation-icon-incompleted {
     padding: 0px;
 }
 
-.presentation-main-panel form .go-back-action-btn{
+.presentation-main-panel .go-back-action-btn{
     /* btn bkgd: */
     background: #E5E5E5;
     border-radius: 4px;
@@ -114,7 +114,7 @@ i.navigation-icon-incompleted {
     height: 40px;
 }
 
-.presentation-main-panel form .default-action-btn {
+.presentation-main-panel .default-action-btn {
     /* btn bkgd: */
     background: #4CA3EA;
     border-radius: 4px;
@@ -127,7 +127,7 @@ i.navigation-icon-incompleted {
     height: 40px;
 }
 
-.presentation-main-panel form .save-later-action-btn{
+.presentation-main-panel .save-later-action-btn{
     /* Save & Come Back Lat: */
     font-family: 'Open Sans', sans-serif;
     font-size: 13px;
@@ -144,4 +144,13 @@ div.form-actions div.last{
 
 div.form-actions div.middle{
     text-align: center;
+}
+
+.confirm-btn {
+    width: 190px !important;
+    line-height: 2.5;
+}
+
+.confirm-back-btn {
+    line-height: 2.5;
 }

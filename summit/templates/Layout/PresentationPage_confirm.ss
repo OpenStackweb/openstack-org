@@ -15,12 +15,21 @@
                             You MUST push "CONFIRM MY SUBMISSION" to complete the process.</p>
                     </div>
                     <% include PresentationPreview Presentation=$Presentation %>
-                    <div class="row confirm-actions">
-                        <div class="col-md-12">
-                        <p><a class="btn btn-primary" href="$SuccessLink">Confirm my submission <i
-                                class="fa fa-arrow-right fa-end"></i></a>&nbsp;<a class="btn btn-primary"
-                                                                                  href="$Presentation.EditLink">Make
-                            changes</a></p>
+
+                    <br>
+                    <div class="form-actions row">
+                        <div class="col-md-4 col-xs-12 col-sm-4 ">
+                            <a href="$GoBackLink" class="btn action btn go-back-action-btn confirm-back-btn">
+                    	        <i class="fa fa-chevron-left" aria-hidden="true"></i>&nbsp;Go Back
+                            </a>
+                        </div>
+                        <div class="col-md-4 col-xs-12 col-sm-4 middle">
+                            &nbsp;
+                        </div>
+                        <div class="col-md-4 col-xs-12 col-sm-4 last">
+                            <a class="action btn default-action-btn confirm-btn" href="$SuccessLink">
+                                Confirm my submission&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
