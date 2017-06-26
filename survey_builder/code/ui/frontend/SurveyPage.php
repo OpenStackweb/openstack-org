@@ -434,7 +434,7 @@ class SurveyPage_Controller extends Page_Controller
         if ( $is_last_step && $current_survey->isComplete() && $this->ThankYouText) {
             $arrayData = new ArrayData(array(
                 'Name' => $current_survey->CreatedBy()->getName(),
-                'ThankYouText' => $this->ThankYouText
+                'ThankYouText' => GetTextTemplateHelpers::_t("survey_ui", $this->ThankYouText)
             ));
 
             return $arrayData->renderWith('SurveyPage_FinalLandingPage');
