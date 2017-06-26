@@ -13,6 +13,11 @@
  **/
 class SurveyPage extends Page
 {
+    static $db = array
+    (
+        'ThankYouText' => 'HTMLText'
+    );
+
     private static $has_one = array
     (
         'SurveyTemplate' => 'SurveyTemplate',
@@ -30,6 +35,9 @@ class SurveyPage extends Page
             )
         )->map('ID','Title')));
         $ddl->setEmptyString('-- Select a Survey Template');
+
+        $fields->addFieldsToTab('Root.Main', $thankyou = new HtmlEditorField('ThankYouText', 'Thank You Text'));
+
         return $fields;
     }
 }
@@ -420,9 +428,21 @@ class SurveyPage_Controller extends Page_Controller
     {
         $current_survey = $this->getCurrentSurveyInstance();
         $current_step   = $current_survey->currentStep();
-        $builder        = SurveyStepUIBuilderFactory::getInstance()->build($current_step);
-        if(is_null($builder)) return '<p>There is not set any form yet!</p>';
-        return $builder->build($current_step, 'NextStep');
+        $is_last_step = ($current_step->template() instanceof ISurveyReviewStepTemplate);
+
+        // if its last step and he/she already submitted the survey, we show the thank you message
+        if ( $is_last_step && $current_survey->isComplete() && $this->ThankYouText) {
+            $arrayData = new ArrayData(array(
+                'Name' => $current_survey->CreatedBy()->getName(),
+                'ThankYouText' => $this->ThankYouText
+            ));
+
+            return $arrayData->renderWith('SurveyPage_FinalLandingPage');
+        } else {
+            $builder        = SurveyStepUIBuilderFactory::getInstance()->build($current_step);
+            if(is_null($builder)) return '<p>There is no form for this step yet!</p>';
+            return $builder->build($current_step, 'NextStep');
+        }
     }
 
     /**

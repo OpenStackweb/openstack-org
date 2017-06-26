@@ -727,6 +727,14 @@ i.navigation-icon-incompleted {
     background-color: #F3F8FC;
 }
 
+.thank-you-text {
+    background-color: #FFFFFF;
+    font-family: 'Open Sans', sans-serif;;
+    font-size: 14px;
+    color: #2A4E68;
+    padding-bottom: 5%;
+}
+
 form.survey_step_form, fieldset.survey_step_form {
     background-color: #FFFFFF;
     font-family: 'Open Sans', sans-serif;;
