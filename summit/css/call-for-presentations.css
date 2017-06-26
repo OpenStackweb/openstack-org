@@ -9,6 +9,12 @@
     color: #606D77;
 }
 
+.presentation-nav-wrapper {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    height: 47px;
+}
+
 ul.presentation-nav-steps {
     display: block;
     margin: 0px;
@@ -25,9 +31,11 @@ ul.presentation-nav-steps li {
 
 ul.presentation-nav-steps li.current {
     border-left: 1px solid #D3DEEA;
-    border-right:  2px solid #D3DEEA;
-    border-top: 1px solid #248EC7;
+    border-right:  1px solid #D3DEEA;
+    border-top: 2px solid #248EC7;
     border-bottom: 2px solid #F6F7F9;
+    overflow-y: visible;
+    height: 48px;
 }
 
 ul.presentation-nav-steps li a {
@@ -154,3 +162,5 @@ div.form-actions div.middle{
 .confirm-back-btn {
     line-height: 2.5;
 }
+
+

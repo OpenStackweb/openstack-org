@@ -7,7 +7,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12" style="padding-left: 0 !important;padding-right: 0 !important;">
+        <div class="col-md-12 presentation-nav-wrapper">
             <ul class="presentation-nav-steps">
                 <li class="{$Top.getStepClass($CurrentStep,1,$Presentation.getProgress())}">
                     <a data-step='1' id="step-1" href="$Presentation.EditLink" class="presentation-step {$Top.getStepClass($CurrentStep,1,$Presentation.getProgress())}">

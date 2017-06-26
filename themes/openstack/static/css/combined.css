@@ -1492,7 +1492,9 @@ a.who-section-cta {
 
 .presentation-app-body {
   padding-top: 30px;
-  background-color: #F6F7F9; }
+  background-color: #F6F7F9;
+  border-top: 1px solid #D3DEEA;
+}
 
 .presentation-app-login-panel {
   background-color: white;
