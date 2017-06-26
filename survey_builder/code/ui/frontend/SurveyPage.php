@@ -428,13 +428,13 @@ class SurveyPage_Controller extends Page_Controller
     {
         $current_survey = $this->getCurrentSurveyInstance();
         $current_step   = $current_survey->currentStep();
-        $is_last_step = ($current_step->template() instanceof ISurveyReviewStepTemplate);
+        $is_last_step   = ($current_step->template() instanceof ISurveyReviewStepTemplate);
 
         // if its last step and he/she already submitted the survey, we show the thank you message
-        if ( $is_last_step && $current_survey->isComplete() && $this->ThankYouText) {
+        if ( $is_last_step && $current_survey->isComplete() && !empty($this->ThankYouText)) {
             $arrayData = new ArrayData(array(
                 'Name' => $current_survey->CreatedBy()->getName(),
-                'ThankYouText' => GetTextTemplateHelpers::_t("survey_ui", $this->ThankYouText)
+                'ThankYouText' => $this->ThankYouText
             ));
 
             return $arrayData->renderWith('SurveyPage_FinalLandingPage');

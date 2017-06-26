@@ -471,3 +471,25 @@ msgstr ""
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:86
 msgid "April 2017 full report (coming soon)"
 msgstr ""
+
+#: survey_builder/templates/Layout/SurveyPage_FinalLandingPage.ss:3
+msgid "Dear %1$s,"
+msgstr ""
+
+#: survey_builder/templates/Layout/SurveyPage_FinalLandingPage.ss:4
+msgid ""
+"<p>Thank you for participating in the 10th OpenStack User Survey. Your feedback is valuable to OpenStack's development "
+"teams and our entire community. Make sure to register for the OpenStack Summit in Sydney, November 6-8, where you can "
+"meet fellow users, share feedback with developers at the Forum, hear findings from the User Survey and learn more from"
+" other open infrastructure communities like Kubernetes, Ceph, Cloud Foundry and more.</p>"
+"<p>Interested in sharing your story? Submit a session for the OpenStack Summit Sydney here by July 14 at 11:59pm PT.</p>"
+"<p>Other helpful resources:<br />Q&amp;A Site: ask.openstack.org<br />OpenStack documentation: "
+"<a class=\"external\" href=\"http://docs.openstack.org/\">http://docs.openstack.org/</a><br />Join your local user "
+"group: groups.openstack.org<br />Find a nagios/sensu plugin, ELK filters, useful scripts or add an example config: "
+"<a class=\"external\" href=\"https://wiki.openstack.org/wiki/Osops\">https://wiki.openstack.org/wiki/Osops</a><br />"
+"Join detailed technical discussions: "
+"<a class=\"external\" href=\"http://lists.openstack.org/cgi-bin/mailman/listinfo/openstack-operators\">"
+"http://lists.openstack.org/cgi-bin/mailman/listinfo/openstack-operators</a><br />Find other OpenStack case studies,"
+"tutorials and news from relevant open source communities: <a href=\"http://superuser.openstack.org\" target=\"_blank\">"
+"superuser.openstack.org</a></p>"
+msgstr ""

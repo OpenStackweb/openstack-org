@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row survey-step-container thank-you-text">
-        Dear $Name,<br><br>
-        $ThankYouText
+        $_T("survey_ui", "Dear %1$s,", $Name)<br><br>
+        $_T("survey_ui", $ThankYouText)
     </div>
 </div>
