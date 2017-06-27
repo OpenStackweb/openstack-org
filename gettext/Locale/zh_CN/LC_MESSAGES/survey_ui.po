@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2017-06-19 04:57+0000\n"
+"PO-Revision-Date: 2017-06-27 06:16+0000\n"
 "Last-Translator: vuuv <froms2008@gmail.com>\n"
 "Language-Team: Chinese (China)\n"
 "Language: zh-CN\n"
@@ -47,7 +47,7 @@ msgstr "你的部署"
 #: survey_builder/templates/Layout/Includes/EntityRegularStepForm.ss:5
 #, php-format
 msgid "Part %1$s of %2$s"
-msgstr ""
+msgstr "第 %1$s / %2$s 部分"
 
 #: survey_builder/templates/Layout/Includes/EntityRegularStepForm.ss:10
 msgid "Created by"
@@ -430,7 +430,7 @@ msgstr "感谢您提交 ！！！"
 
 #: survey_builder/templates/Layout/Includes/Surveys_Header.ss:3
 msgid "Step <strong>%1$s of %2$s</strong> for <strong>%3$s</strong>"
-msgstr ""
+msgstr "<strong>%3$s</strong> 的调查问卷. 第 <strong>%1$s / %2$s</strong>步."
 
 #: survey_builder/js/survey.controller.js:55
 msgid "This field is required."
@@ -537,4 +537,38 @@ msgstr "以打印成册的形式获取用户问卷调查"
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:86
 msgid "April 2017 full report (coming soon)"
 msgstr "2017年四月总体报告（即将发布）"
+
+#: survey_builder/templates/Layout/SurveyPage_FinalLandingPage.ss:3
+msgid "Dear %1$s,"
+msgstr "亲爱的 %1$s,"
+
+#: survey_builder/templates/Layout/SurveyPage_FinalLandingPage.ss:4
+msgid ""
+"<p>Thank you for participating in the 10th OpenStack User Survey. Your feedback is valuable to OpenStack's development "
+"teams and our entire community. Make sure to register for the OpenStack Summit in Sydney, November 6-8, where you can "
+"meet fellow users, share feedback with developers at the Forum, hear findings from the User Survey and learn more from "
+"other open infrastructure communities like Kubernetes, Ceph, Cloud Foundry and more.</p><p>Interested in sharing your "
+"story? Submit a session for the OpenStack Summit Sydney here by July 14 at 11:59pm PT.</p><p>Other helpful resources:"
+"<br>Q&amp;A Site: <a class=\"external\" href=\"http://ask.openstack.org\">ask.openstack.org</a><br>OpenStack documentation: "
+"<a class=\"external\" href=\"http://docs.openstack.org/\">http://docs.openstack.org/</a><br>Join your local user group: "
+"groups.openstack.org<br>Find a nagios/sensu plugin, ELK filters, useful scripts or add an example config: "
+"<a class=\"external\" href=\"https://wiki.openstack.org/wiki/Osops\">https://wiki.openstack.org/wiki/Osops</a><br>"
+"Join detailed technical discussions: "
+"<a class=\"external\" href=\"http://lists.openstack.org/cgi-bin/mailman/listinfo/openstack-operators\">http://lists.openstack.org/cgi-bin/mailman/listinfo/openstack-operators</a>"
+"<br>Find other OpenStack case studies, tutorials and news from relevant open source communities: "
+"<a href=\"http://superuser.openstack.org\" target=\"_blank\">superuser.openstack.org</a></p>"
+msgstr ""
+"<p>感谢您参加第十届OpenStack用户调查，您的反馈对OpenStack开发团队及社区都很有价值。请务必报名定于11月6-"
+"8日召开的OpenStack悉尼峰会，届时您可以和同行见面、向开发者反馈、听取用户调查的结果、以及了解其他开放架构社区——例如 "
+"Kubernetes、Ceph、Cloud Foundry等——的情况。</p><p>有意分享您的故事吗？ 请于北京时间7月15日14:"
+"59前报名参加OpenStack悉尼峰会。</p><p>其他参考资源：<br />问答站：  ask.openstack.org<br /"
+">OpenStack文档站： <a class=\"external\" href=\"http://docs.openstack.org/"
+"\">http://docs.openstack.org/</a><br />加入本地用户组： groups.openstack.org<br />寻找 "
+"nagios/sensu plugin, ELK filters, 实用脚本及添加示例配置： <a class=\"external\" href="
+"\"https://wiki.openstack.org/wiki/Osops\">https://wiki.openstack.org/wiki/"
+"Osops</a><br />参与技术细节讨论： <a class=\"external\" href=\"http://lists.openstack."
+"org/cgi-bin/mailman/listinfo/openstack-operators\">http://lists.openstack."
+"org/cgi-bin/mailman/listinfo/openstack-operators</a><br /"
+">寻找OpenStack学习案例、入门指引及相关开源社区的新闻： <a href=\"http://superuser.openstack.org\" "
+"target=\"_blank\">superuser.openstack.org</a></p>"
 
