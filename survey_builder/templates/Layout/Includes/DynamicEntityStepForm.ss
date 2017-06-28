@@ -13,7 +13,7 @@
         </div>
         <% end_if %>
         <% if CanSkipStep %>
-        <p>$_T("survey_ui", "If you do not wish to answer these questions, you may <a href=\"%s\">skip to the next section.</a>" , $SkipStepUr)</p>
+        <p>$_T("survey_ui", "If you do not wish to answer these questions, you may <a href=\"%s\">skip to the next section.</a>" , $SkipStepUrl)</p>
         <% end_if %>
         <h2 class="entities-surveys-count-title">$_T("survey_ui", "Your deployments (%s)", $EntitiesSurveys.Count )</h2>
         <hr/>
