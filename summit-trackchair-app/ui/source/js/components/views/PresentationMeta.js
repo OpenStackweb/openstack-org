@@ -12,7 +12,7 @@ class PresentationMeta extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			showCategoryChange: false,
+            showChangeRequest: props.showChangeRequest,
 			selectedCategory: +props.presentation.category_id
 		};
 		this.toggleCategoryChange = this.toggleCategoryChange.bind(this);
@@ -20,10 +20,19 @@ class PresentationMeta extends React.Component {
 		this.onSubmit = this.onSubmit.bind(this);	
 	}
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.showChangeRequest !== this.state.showChangeRequest) {
+            this.setState({
+                showChangeRequest: nextProps.showChangeRequest,
+                selectedCategory: nextProps.presentation.category_id
+            });
+        }
+    }
+
 	toggleCategoryChange(e) {
 		e.preventDefault();
 		this.setState({
-			showCategoryChange: !this.state.showCategoryChange
+            showChangeRequest: !this.state.showChangeRequest
 		});
 	}
 
@@ -88,7 +97,7 @@ class PresentationMeta extends React.Component {
 		               </dl>		               
 		            </div>
 		        </div>
-              	{this.state.showCategoryChange &&
+              	{this.state.showChangeRequest &&
               	<div className="row">
               		<div className="col-md-8 col-md-offset-2">
 	              		<div className="change-request-form">
@@ -176,6 +185,7 @@ class PresentationMeta extends React.Component {
 export default connect(
 	state => ({
 		showChangeRequest: state.detailPresentation.showChangeRequest,
+        selectedCategory: state.detailPresentation.category_id,
 		requesting: state.detailPresentation.requesting,
 		success: state.detailPresentation.categorySuccess
 	}),

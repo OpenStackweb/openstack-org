@@ -14,13 +14,13 @@ export const detailPresentation = function (
                 sending: false,
                 emailSuccess: false,
                 showForm: false,
-                showChangeRequest: false,
                 categorySuccess: false,
                 requesting: false
             };
         case 'RECEIVE_PRESENTATION_DETAIL':
             return {
                 ...action.payload.response,
+                showChangeRequest: false,
                 loading: false
             };
 

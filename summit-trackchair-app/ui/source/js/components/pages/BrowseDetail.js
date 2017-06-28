@@ -51,7 +51,7 @@ class BrowseDetail extends React.Component {
     	const p = this.props.presentation;    	
     	const {selectionsRemaining, myList, isAdmin, index, total} = this.props;
 
-    	if(!p.id) {
+    	if(!p.id || p.loading) {
     		return <Wave />
     	}
 
