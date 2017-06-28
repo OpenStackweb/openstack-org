@@ -3,10 +3,10 @@ const map = (results) => {
 	return results.map(data => {
 		const r = [
 			{title: data.presentation_title, id: data.presentation_id},
-            {status: data.status, reason: data.reject_reason},
+            {status: data.status, reason: data.reject_reason, approver: data.approver},
 			data.old_category.title,
 			data.new_category.title,
-			data.requester		
+			data.requester
 		];
 
 		if(data.chair_of_new || data.is_admin) {
@@ -70,7 +70,7 @@ export const changeRequests = function (
         				const newRow = [...r];
         				newRow[1].status = action.payload.approved ? 'Approved' : 'Rejected';
         				newRow[1].reason = action.payload.rejectReason;
-
+                        newRow[1].approver = window.TrackChairAppConfig.userinfo.name;
         				return newRow;
         			}
 

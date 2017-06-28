@@ -140,15 +140,18 @@ class ChangeRequests extends React.Component {
                         {this.props.isAdmin &&
                             <TableColumn width='15%' columnKey='admin'
                                 cell={(data, row) => {
-                                    if(data == 'has_selections') {
-                                        return <small>Presentation already has selections.</small>
-                                    } else if (data == 'not_admin') {
-                                        return <small>Not your track.</small>
-                                    } else if(row[1].status === 'Pending') {
-                                        return <RequestResolutionButtons request={data} onReject={this.openModal} />
+                                    if(row[1].status === 'Pending') {
+                                        if(data == 'has_selections') {
+                                            return <small>Presentation already has selections.</small>
+                                        } else if (data == 'not_admin') {
+                                            return <small>Not your track.</small>
+                                        } else {
+                                            return <RequestResolutionButtons request={data} onReject={this.openModal} />
+                                        }
+                                    } else {
+                                        return <small>{row[1].status} by {row[1].approver}</small>
                                     }
                                     return <span />
-
                                 }}
                             >
                                 Admin

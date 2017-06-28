@@ -574,9 +574,9 @@ class TrackChairAPI extends AbstractRestfulJsonApi
             $row['new_category']['id'] = $request->NewCategory()->ID;
             $row['old_category']['title'] = $request->Presentation()->Category()->Title;
             $row['old_category']['id'] = $request->Presentation()->Category()->ID;
-            $row['requester'] = $request->Reqester()->FirstName
-                . ' ' . $request->Reqester()->Surname;
+            $row['requester'] = $request->Reqester()->getName();
             $row['has_selections'] = $request->Presentation()->isSelectedByAnyone();
+            $row['approver'] = $request->AdminApprover()->getName();
             $data['results'][] = $row;
         }
 
@@ -666,6 +666,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         }
 
         $new_category = PresentationCategory::get()->byID($request->NewCategoryID);
+
         if(!$new_category->isTrackChair(Member::currentUserID()) && !Permission::check('ADMIN')) {
             return $this->httpError(403);
         }
@@ -702,16 +703,15 @@ class TrackChairAPI extends AbstractRestfulJsonApi
 	        	$oldCat->Title . ' to ' .
 	        	$category->Title
 	        );
-    	}
-    	else {	   
+    	} else {
     		$request->Presentation()->addNotification(
-	        	'{member} rejected ' . 
-	        	$request->Reqester()->getName() .'\'s request to move this presentation from ' . 
+	        	'{member} rejected ' .
+	        	$request->Reqester()->getName() .'\'s request to move this presentation from ' .
 	        	$oldCat->Title . ' to ' .
 	        	$category->Title.' because : '.$reason
-    		);     
+    		);
     	}
-        
+
         $request->AdminApproverID = Member::currentUserID();
         $request->Status = $status;
         $request->ApprovalDate = SS_Datetime::now();

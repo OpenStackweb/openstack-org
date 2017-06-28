@@ -91,14 +91,16 @@ export const detailPresentation = function (
         case 'REQUEST_CATEGORY_CHANGE':
         	return {
         		...state,
-        		requesting: true
+        		requesting: true,
+                showChangeRequest: true
         	};
         case 'SUCCESS_CATEGORY_CHANGE':
         	return {
         		...state,
         		requesting: false,
         		categorySuccess: action.payload,
-        		change_requests_count: +state.change_requests_count+1
+        		change_requests_count: +state.change_requests_count+1,
+                showChangeRequest: true
         	};
         default:
             return state;
