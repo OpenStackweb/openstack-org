@@ -143,7 +143,7 @@
 				We picked a few good mascot candidates. Now what?
 			</p>
 			<p class="answer">
-				Send your candidates to <a href="mailto:heidijoy@openstack.org">Heidi Joy Tretheway</a> by July 27 for priority consideration. She’ll work with project leaders to avoid duplicates across projects and answer questions. Once she works with the project branding team to confirm your candidates, your team can vote to select your final mascot.
+				Send your candidates to anne at openstack.org to begin the mascot creation process.
 			</p>
 			<p class="question">
 				What if my mascot candidate is disqualified?
@@ -161,7 +161,7 @@
 				Whom should I contact with more questions?
 			</p>
 			<p class="answer">
-				Ask <a href="mailto:heidijoy@openstack.org">Heidi Joy Tretheway</a> from the OpenStack Foundation, who is the liaison for the project teams in this branding effort.
+				Email anne at openstack.org if you have questions about Project Mascots.
 			</p>
     	</div>
     </div>
