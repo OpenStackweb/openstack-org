@@ -208,7 +208,10 @@ a.future-summit:hover:after {
   .small-single-summit a.single-summit::after {
     background-size: 100%;
     -moz-background-size: 100%;
-    -webkit-background-size: 100%; } }
+    -webkit-background-size: 100%; } 
+  .summit-row h2 {
+    font-size: 1.5em; }
+  }
 
 .single-summit-date {
   margin-top: 35px;
