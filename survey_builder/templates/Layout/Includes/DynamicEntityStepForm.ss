@@ -18,7 +18,7 @@
         <h2 class="entities-surveys-count-title">$_T("survey_ui", "Your deployments (%s)", $EntitiesSurveys.Count )</h2>
         <hr/>
         <% if EntitiesSurveys.Count == 0%>
-        <p class="entites-surveys-subtitle">$_T("survey_ui", "You do not have any OpenStack deployment yet. <a href=\"%s\">Want to add one?</a>", "{$Controller.Link}{$CurrentStep.Template.Title}/add-entity" )</p>
+        <p class="entites-surveys-subtitle">$_T("survey_ui", "You do not have any OpenStack deployment yet. <a href=\"%s\">Want to add one?</a>", $AddEntityUrl)</p>
         <% end_if %>
         <% if EntitiesSurveys %>
             <table class="table table-striped">
@@ -31,13 +31,12 @@
                         <span class="entity-survey-title-row">$Top.EntityFriendlyName($ID)</span>
                     </td>
                     <td width="10%">
-                        <a class="edit-entity-survey-btn" href="{$Top.Controller.Link}{$Top.CurrentStep.Template.Title}/edit/{$ID}">$_T("survey_template", $Top.CurrentStep.Template.getEditEntityText)</a>
+                        <a class="edit-entity-survey-btn" href="{$Top.EditEntityUrl($ID)}">$_T("survey_template", $Top.CurrentStep.Template.getEditEntityText)</a>
                     </td>
                     <td width="10%">
                         <% if iAmOwner %>
-                            <a class="delete-entity-survey-btn" href="{$Top.Controller.Link}{$Top.CurrentStep.Template.Title}/delete/{$ID}">$_T("survey_template", $Top.CurrentStep.Template.getDeleteEntityText)</a>
+                            <a class="delete-entity-survey-btn" href="{$Top.DeleteEntityUrl($ID)}">$_T("survey_template", $Top.CurrentStep.Template.getDeleteEntityText)</a>
                         <% else %>
-                            &nbsp;
                         <% end_if %>
                     </td>
                 </tr>
@@ -46,7 +45,7 @@
         <% end_if %>
     </fieldset>
     <p>
-        <a class="roundedButton add-entity-survey-btn" href="{$Controller.Link}{$CurrentStep.Template.Title}/add-entity">{$_T("survey_template", $CurrentStep.Template.getAddEntityText)}&nbsp;&nbsp;<i class="fa fa-plus-circle" aria-hidden="true"></i></a>&nbsp;
+        <a class="roundedButton add-entity-survey-btn" href="$SkipStepUrl">{$_T("survey_template", $CurrentStep.Template.getAddEntityText)}&nbsp;&nbsp;<i class="fa fa-plus-circle" aria-hidden="true"></i></a>&nbsp;
     </p>
     <% if $Actions %>
         <div class="Actions row">

@@ -124,4 +124,41 @@ class DynamicStepForm extends AbstractStepForm {
         return $inflector->pluralize($word);
     }
 
+    /**
+     * @return String
+     */
+    public function AddEntityUrl(){
+        return Controller::join_links(
+            Controller::curr()->Link(),
+            $this->step->template()->title(),
+            'add-entity'
+        );
+    }
+
+    /**
+     * @param string $id
+     * @return string
+     */
+    public function DeleteEntityUrl($id){
+        return Controller::join_links(
+            Controller::curr()->Link(),
+            $this->step->template()->title(),
+            'delete',
+            $id
+        );
+    }
+
+
+    /**
+     * @param string $id
+     * @return string
+     */
+    public function EditEntityUrl($id){
+        return Controller::join_links(
+            Controller::curr()->Link(),
+            $this->step->template()->title(),
+            'edit',
+            $id
+        );
+    }
 }

@@ -438,11 +438,11 @@ class SurveyPage_Controller extends Page_Controller
             ));
 
             return $arrayData->renderWith('SurveyPage_FinalLandingPage');
-        } else {
-            $builder        = SurveyStepUIBuilderFactory::getInstance()->build($current_step);
-            if(is_null($builder)) return '<p>There is no form for this step yet!</p>';
-            return $builder->build($current_step, 'NextStep');
         }
+
+        $builder = SurveyStepUIBuilderFactory::getInstance()->build($current_step);
+        if(is_null($builder)) return '<p>There is no form for this step yet!</p>';
+        return $builder->build($current_step, 'NextStep');
     }
 
     /**
