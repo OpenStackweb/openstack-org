@@ -7,7 +7,7 @@
     ];
 </script>
 <p>$Label</p>
-<p><a href="#" class="survey-radui-button-matrix-clear">$_T("survey_ui","Clear All")</a></p>
+<p><a href="#" class="survey-radui-button-matrix-clear">$_T("survey_ui","clear all")</a></p>
 <table width="600">
     <tbody>
     <tr>
