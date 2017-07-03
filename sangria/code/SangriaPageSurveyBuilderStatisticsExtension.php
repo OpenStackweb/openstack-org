@@ -872,15 +872,29 @@ SQL;
                 $row = $matrix[1];
                 if (!$col || !$row) continue;
 
+                if (!isset($question_values[$col]) || !isset($question_values[$row])) {
+                    //print_r($question_values);
+                    //die('col: '.$col.' - row: '.$row);
+                    continue;
+                }
+
                 $row_value = $question_values[$row];
                 $col_value = $question_values[$col];
                 $values[$row_value][$col_value]++;
             }
         }
 
+        // normalize array - all 3 (prod,test,deploy) must have the same answer options for the graph to render
+        // the largest one will have all the answers
+        $counts = array_map('count', $values);
+        $count_key = array_flip($counts)[max($counts)];
+        $largest_arr = $values[$count_key];
+        $all_values = array_keys($largest_arr);
+
         foreach ($values as $key => $val) {
-            foreach ($val as $key2 => $val2) {
-                $values[$key][$key2] = round(($val2 / $total_answers) * 100);
+            foreach ($all_values as $key2) {
+                if (!isset($values[$key][$key2])) $values[$key][$key2] = 0;
+                $values[$key][$key2] = round(($values[$key][$key2] / $total_answers) * 100);
             }
         }
 
