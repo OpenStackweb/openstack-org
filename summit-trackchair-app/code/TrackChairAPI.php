@@ -1036,7 +1036,10 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
 
         if ($comment != null) {
             $commentObj = $this->presentation->addComment($comment, Member::currentUserID());
-            
+
+            // send push notification
+            PublisherSubscriberManager::getInstance()->publish(ISummitEntityEvent::UpdatedEntity, [$this->presentation]);
+
             $json = $commentObj->toJSON();
             $json['name'] = Member::currentUser()->getName();
             $json['ago'] = $commentObj->obj('Created')->Ago(false);
@@ -1186,6 +1189,9 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
 
         $this->presentation->assignToGroupList();
 
+        // send push notification
+        PublisherSubscriberManager::getInstance()->publish(ISummitEntityEvent::UpdatedEntity, [$this->presentation]);
+
         return new SS_HTTPResponse('OK');
 
     }
@@ -1202,6 +1208,9 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
         }
 
         $this->presentation->removeFromGroupList();
+
+        // send push notification
+        PublisherSubscriberManager::getInstance()->publish(ISummitEntityEvent::UpdatedEntity, [$this->presentation]);
 
         return new SS_HTTPResponse("Presentation unselected.", 200);
 
@@ -1233,6 +1242,9 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
             $request->NewCategoryID = $newCat;
             $request->ReqesterID = Member::currentUserID();
             $request->write();
+
+            // send push notification
+            PublisherSubscriberManager::getInstance()->publish(ISummitEntityEvent::UpdatedEntity, [$this->presentation]);
 
             $this->presentation->addNotification('
             	{member} submitted a request to change the category from '. 

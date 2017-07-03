@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-final class SummitPushNotificationSenderTask extends CronTask
+final class PushNotificationSenderTask extends CronTask
 {
 
     /**
@@ -31,9 +31,9 @@ final class SummitPushNotificationSenderTask extends CronTask
                 echo sprintf('batch_size set to %s', $batch_size);
             }
 
-            $manager   = new SummitPushNotificationManager
+            $manager   = new PushNotificationManager
             (
-                new SapphireSummitPushNotificationRepository,
+                new SapphirePushNotificationRepository,
                 new FireBaseGCMApi(FIREBASE_GCM_SERVER_KEY),
                 SapphireTransactionManager::getInstance()
             );

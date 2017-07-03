@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2015 OpenStack Foundation
+ * Copyright 2017 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,10 +12,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-final class SapphireSummitPushNotificationRepository extends SapphireRepository
+final class SapphirePushNotificationRepository extends SapphireRepository
 {
     public function __construct()
     {
-        parent::__construct(new SummitPushNotification());
+        parent::__construct(new PushNotificationMessage());
     }
 }

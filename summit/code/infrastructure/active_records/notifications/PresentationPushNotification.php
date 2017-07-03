@@ -18,6 +18,7 @@ final class PresentationPushNotification extends PushNotificationMessage
 
     private static $db = array
     (
+        'Channel'  => "Enum('TRACKCHAIRS', 'TRACKCHAIRS')",
     );
 
     private static $summary_fields = array
@@ -36,5 +37,44 @@ final class PresentationPushNotification extends PushNotificationMessage
     private static $indexes = array(
 
     );
+
+    /**
+     * returns data for firebase ingestion
+     * @return array
+     */
+    public function getDataForFCM()
+    {
+        $data  = [
+            'id'         => intval($this->ID),
+            'type'       => PresentationPushNotification::PushType,
+            'body'       => $this->Message,
+            'presentation_id'  => intval($this->PresentationID),
+            'channel'    => $this->Channel,
+            'created_at' => $this->getTimestamp(),
+        ];
+
+        return $data;
+    }
+
+    /**
+     * returns recipient for firebase ingestion
+     * @return array
+     */
+    public function getRecipientForFCM()
+    {
+        $to = null;
+
+        switch($this->Channel)
+        {
+            case 'TRACKCHAIRS':
+            {
+                $to = ['trackchairs'];
+            }
+                break;
+
+        }
+
+        return $to;
+    }
 
 }
