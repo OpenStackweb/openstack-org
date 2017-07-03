@@ -195,8 +195,7 @@
         <div class="clear"><!-- --></div>
     </fieldset>
 
-    Speakers agree that OpenStack Foundation may record and publish their talks presented during the October 2015 OpenStack Summit.
-    If you submit a proposal on behalf of a speaker, you represent to OpenStack Foundation that you have the authority to submit the proposal
+    Speakers agree that OpenStack Foundation may record and publish any talks presented during the OpenStack Summit. If you submit a proposal on behalf of a speaker, you represent to OpenStack Foundation that you have the authority to submit the proposal
     on the speaker’s behalf and agree to the recording and publication of their presentation.
     <br><br>
 
