@@ -193,11 +193,15 @@ function setRequired() {
     var $city_input = $('.city_name','#schedules').find('input');
     $city_input.prop('required', true);
 
-    var $state_input = $('.state','#schedules').find('input');
-
     var $country_input = $('.country','#schedules').find('select');
     $country_input.prop('required', true);
 
     var url_input = $('.url','#schedules').find('input');
     url_input.prop('required', true);
+
+    var start_input = $('.start','#schedules').find('input');
+    start_input.prop('required', true);
+
+    var end_input = $('.end','#schedules').find('input');
+    end_input.prop('required', true);
 }

@@ -671,6 +671,7 @@ class EditProfilePage_Controller extends Page_Controller
 
     function trainingAddCourse()
     {
+        Requirements::css('themes/openstack/bower_assets/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
 
         if ($this->request->postVars()) {
             $data = $this->request->postVars();

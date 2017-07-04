@@ -153,7 +153,7 @@ final class CourseManager {
 				if(isset($data['StartDate'])){
 					foreach($data['StartDate'] as $K=>$C){
                         // escape to avoid adding template
-                        if (!$data['City'][$K] || !$data['State'][$K] || !$data['Country'][$K]) continue;
+                        if (!$data['City'][$K] || !$data['StartDate'][$K] || !$data['EndDate'][$K]) continue;
 
 						$city     = $data['City'][$K];
 						$state    = $data['State'][$K];
