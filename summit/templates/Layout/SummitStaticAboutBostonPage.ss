@@ -78,9 +78,11 @@
         <!-- <a class="who-section-cta" href="/summit/sydney-2017/summit-categories">Learn more about the content planned for the OpenStack Summit Sydney</a> -->
             </div>
         <div class="col-lg-3 col-md-4 col-sm-4" style="margin-top:30px;">
-      <ul class="help-me-menu">
-        <li><a href="/summit/sydney-2017/code-of-conduct" target="_blank"><i class="fa fa-eye"></i>Code of Conduct</a></li>
-      </ul>
+          <ul class="help-me-menu">
+            <li><a href="/summit/sydney-2017/travel/#travel-support" target="_blank"><i class="fa fa-plane"></i>Travel Support</a></li>
+            <li><a href="/summit/sydney-2017/call-for-presentations/" target="_blank"><i class="fa fa-microphone"></i>Call for Presentations</a></li>
+            <li><a href="/summit/sydney-2017/code-of-conduct" target="_blank"><i class="fa fa-eye"></i>Code of Conduct</a></li>
+          </ul>
         </div>
         </div>
     </div>
