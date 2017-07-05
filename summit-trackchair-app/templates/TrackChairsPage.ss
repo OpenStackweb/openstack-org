@@ -15,7 +15,7 @@
     <body class="top-navigation">
         <div id="trackchair-app"></div>
 
-        <% include InitWebNotifications %>
+        <% include InitWebNotifications topicChannel='trackchairs' %>
 
         <script type="text/javascript">
             window.TrackChairAppConfig = $JSONConfig;

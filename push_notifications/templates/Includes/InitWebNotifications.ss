@@ -4,7 +4,7 @@
 <script>
     // API key
     var apiKey = "{$getEnv('FIREBASE_GCM_SERVER_KEY')}";
-    var topic = "trackchairs";
+    var topic_channel = '{$topicChannel}';
 
     // Initialize Firebase
     var config = {

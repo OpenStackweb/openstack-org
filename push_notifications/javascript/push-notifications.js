@@ -47,8 +47,8 @@ function requestPermission() {
         });
 }
 
-function subscribeTokenToTopic(token, topic) {
-    fetch('https://iid.googleapis.com/iid/v1/'+token+'/rel/topics/'+topic, {
+function subscribeTokenToTopic(token) {
+    fetch('https://iid.googleapis.com/iid/v1/'+token+'/rel/topics/'+topic_channel, {
         method: 'POST',
         headers: new Headers({
             'Authorization': 'key='+apiKey
@@ -57,7 +57,7 @@ function subscribeTokenToTopic(token, topic) {
         if (response.status < 200 || response.status >= 400) {
             throw 'Error subscribing to topic: '+response.status + ' - ' + response.text();
         }
-        console.log('Subscribed to "'+topic+'"');
+        console.log('Subscribed to "'+topic_channel+'"');
     }).catch(error => {
         console.error(error);
     })
@@ -67,7 +67,7 @@ function getRegistrationToken() {
     messaging.getToken()
         .then(function(currentToken) {
             if (currentToken) {
-                subscribeTokenToTopic(currentToken, topic);
+                subscribeTokenToTopic(currentToken);
             } else {
                 // Show permission request.
                 console.log('No Instance ID token available. Request permission to generate one.');
