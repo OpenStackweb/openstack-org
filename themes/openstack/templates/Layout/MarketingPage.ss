@@ -79,16 +79,16 @@
                             <% if $Group == 'single' %>
                                 <% loop $Items %>
                                     <div class="row item_row">
-                                        <div class="col-md-8 left-info">$Title</div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-7 left-info">$Title</div>
+                                        <div class="col-md-5">
                                             <a href="$Link()" target="_blank" class="download">DOWNLOAD</a>
                                         </div>
                                     </div>
                                 <% end_loop %>
                             <% else %>
                                 <div class="row item_row">
-                                    <div class="col-md-8 left-info">$Group</div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-7 left-info">$Group</div>
+                                    <div class="col-md-5">
                                         <a class="download" href="#" data-toggle="modal" data-target="#{$GroupID}_modal">View All ($Items.Count())</a>
                                     </div>
                                     <div class="modal fade" id="{$GroupID}_modal" role="dialog" >
