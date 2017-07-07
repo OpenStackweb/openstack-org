@@ -1,9 +1,9 @@
 <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
-<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase-messaging.js"></script>
+
 <script>
     // API key
-    var apiKey = "{$getEnv('FIREBASE_GCM_SERVER_KEY')}";
+    var apiKey = "{$getEnv('FIREBASE_API_KEY')}";
+    var serverKey = "{$getEnv('FIREBASE_GCM_SERVER_KEY')}";
     var topic_channel = '{$topicChannel}';
 
     // Initialize Firebase

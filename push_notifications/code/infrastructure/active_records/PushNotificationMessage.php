@@ -23,6 +23,7 @@ class PushNotificationMessage extends DataObject implements IEntity
         'IsSent'    => 'Boolean',
         'SentDate'  => 'SS_Datetime',
         'Priority'  => "Enum('NORMAL, HIGH', 'NORMAL')",
+        'Platform'  => "Enum('MOBILE, WEB','MOBILE')"
     );
 
     private static $has_one = array

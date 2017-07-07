@@ -23,7 +23,7 @@ export const responseHandler = (dispatch, success, errorHandler) => {
         	}
         	else {
         		let errorMessage = GENERIC_ERROR;
-        		if(res.type === 'application/json' && res.text) {        			
+        		if(res && res.type === 'application/json' && res.text) {
         			const errorResponse = JSON.parse(res.text);        			
         			if(Array.isArray(errorResponse.messages)) {
         				errorMessage = errorResponse.messages[0].message;        				

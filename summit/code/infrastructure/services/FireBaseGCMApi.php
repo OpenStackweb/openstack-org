@@ -79,10 +79,31 @@ final class FireBaseGCMApi implements IPushNotificationApi
      * @param string $to
      * @param array $data
      * @param string $priority
+     * @param string $platform
      * @param null|int $ttl
      * @return bool
      */
-    function sendPush($to, array $data, $priority = IPushNotificationApi::NormalPriority, $ttl = null)
+    function sendPush($to, array $data, $priority = IPushNotificationApi::NormalPriority, $platform = 'MOBILE', $ttl = null)
+    {
+        $res      = true;
+
+        if ($platform == 'WEB') {
+            $res = $this->sendPushWeb($to, $data, $priority, $ttl);
+        } else {
+            $res = $this->sendPushMobile($to, $data, $priority, $ttl);
+        }
+
+        return $res;
+    }
+
+    /**
+     * @param string $to
+     * @param array $data
+     * @param string $priority
+     * @param null|int $ttl
+     * @return bool
+     */
+    function sendPushMobile($to, array $data, $priority = IPushNotificationApi::NormalPriority, $ttl = null)
     {
         $endpoint = self::BaseUrl.'/fcm/send';
         $client   = new GuzzleHttp\Client();
@@ -141,5 +162,73 @@ final class FireBaseGCMApi implements IPushNotificationApi
         catch (\GuzzleHttp\Exception\ClientException $ex1){
             return false;
         }
+    }
+
+    /**
+     * @param string $to
+     * @param array $data
+     * @param string $priority
+     * @param null|int $ttl
+     * @return bool
+     */
+    function sendPushWeb($to, array $data, $priority = IPushNotificationApi::NormalPriority, $ttl = null)
+    {
+        $endpoint = self::BaseUrl.'/fcm/send';
+        $client   = new GuzzleHttp\Client();
+        $res      = true;
+        $attempt  = 1;
+
+        try {
+            foreach ($to as $recipient) {
+
+                // create for web ( data message)
+
+                $response = $client->post($endpoint, [
+                    'headers' => [
+                        'Authorization' => sprintf('key=%s', $this->api_server_key),
+                        'Content-Type'  => 'application/json'
+                    ],
+                    'body' => json_encode($this->createDataMessage($data, $recipient, $priority ))
+                ]);
+
+                if ($response->getStatusCode() !== 200) $res = $res && false;
+
+                usleep(self::BaseBackOff * $attempt);
+
+                ++$attempt;
+            }
+            return $res;
+        }
+        catch (\GuzzleHttp\Exception\ClientException $ex1){
+            return false;
+        }
+    }
+
+
+    /**
+     * @param string $token
+     * @param string $topic
+     * @return bool
+     */
+    function subscribeToTopicWeb($token, $topic){
+        $endpoint = self::BaseUrl.'/iid/v1/'.$token.'/rel/topics/'.$topic;
+        $client   = new GuzzleHttp\Client();
+        $res      = true;
+
+        try {
+            $response = $client->post($endpoint, [
+                'headers' => [
+                    'Authorization' => sprintf('key=%s', $this->api_server_key)
+                ]
+            ]);
+
+            if ($response->getStatusCode() !== 200) $res = $res && false;
+
+            return $res;
+        }
+        catch (\GuzzleHttp\Exception\ClientException $ex1){
+            return false;
+        }
+
     }
 }

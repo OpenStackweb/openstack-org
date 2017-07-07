@@ -38,6 +38,13 @@ final class PresentationPushNotification extends PushNotificationMessage
 
     );
 
+    protected function onBeforeWrite()
+    {
+        parent::onBeforeWrite();
+        $this->Platform = 'WEB';
+        $this->approve();
+    }
+
     /**
      * returns data for firebase ingestion
      * @return array
@@ -45,12 +52,12 @@ final class PresentationPushNotification extends PushNotificationMessage
     public function getDataForFCM()
     {
         $data  = [
-            'id'         => intval($this->ID),
-            'type'       => PresentationPushNotification::PushType,
-            'body'       => $this->Message,
-            'presentation_id'  => intval($this->PresentationID),
-            'channel'    => $this->Channel,
-            'created_at' => $this->getTimestamp(),
+            'id'            => intval($this->ID),
+            'type'          => PresentationPushNotification::PushType,
+            'body'          => $this->Message,
+            'presentation'  => $this->presentationToJson(),
+            'channel'       => $this->Channel,
+            'created_at'    => $this->getTimestamp(),
         ];
 
         return $data;
@@ -75,6 +82,29 @@ final class PresentationPushNotification extends PushNotificationMessage
         }
 
         return $to;
+    }
+
+    /**
+     * returns presentation object as json for firebase ingestion
+     * @return string
+     */
+    public function presentationToJson()
+    {
+        $presentation_array = array();
+        $presentation_array['id'] = $this->Presentation()->ID;
+        $presentation_array['change_request_count'] = $this->Presentation()->ChangeRequests()->Count();
+        $presentation_array['comments'] = array();
+
+        foreach ($this->Presentation()->Comments() as $c ) {
+            $comment = array();
+            $comment['body'] = $c->Body;
+            $comment['name'] = $c->Commenter()->getName();
+            $comment['ago'] =  $c->obj('Created')->Ago(false);
+            $comment['is_activity'] = (boolean) $c->IsActivity;
+            $presentation_array['comments'][] = $comment;
+        }
+
+        return json_encode($presentation_array);
     }
 
 }

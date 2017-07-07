@@ -107,6 +107,7 @@ final class SummitPushNotification extends PushNotificationMessage
     protected function onBeforeWrite()
     {
         parent::onBeforeWrite();
+        $this->Platform = 'MOBILE';
         if($this->Channel == 'MEMBERS'){
             // auto approve for members
             $this->approve();

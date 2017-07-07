@@ -71,10 +71,10 @@ class PushNotificationManager
                     $to = $notification->getRecipientForFCM();
                     $data = $notification->getDataForFCM();
 
-                    $res = $this->push_api->sendPush($to, $data, IPushNotificationApi::HighPriority);
+                    $res = $this->push_api->sendPush($to, $data, IPushNotificationApi::HighPriority, $notification->Platform);
 
                     if($res) {
-                        $notification->sent();
+                        //$notification->sent();
                         ++$qty;
                     }
                 }

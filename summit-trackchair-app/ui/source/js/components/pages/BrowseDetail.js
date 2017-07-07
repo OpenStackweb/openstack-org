@@ -25,6 +25,16 @@ class BrowseDetail extends React.Component {
 		super(props);
 		this.toggleMySelection = this.toggleMySelection.bind(this);
 		this.toggleGroupSelection = this.toggleGroupSelection.bind(this);
+
+        if (firebase) {
+            // Retrieve Firebase Messaging object.
+            const messaging = firebase.messaging();
+
+            messaging.onMessage(function(payload) {
+                var presentation_data = JSON.parse(payload.data.presentation);
+                console.log("Presentation ID: ", presentation_data.id);
+            });
+        }
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -69,7 +79,7 @@ class BrowseDetail extends React.Component {
 
     	const speakers = p.speakers.filter(s => !s.is_moderator);
     	const moderators = p.speakers.filter(s => !!s.is_moderator);
-        
+
         return (
 			<div className="wrapper wrapper-content">
 				{p.selected && !p.group_selected &&

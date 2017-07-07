@@ -25,4 +25,29 @@ interface IPushNotificationApi
      * @return bool
      */
     function sendPush($to,  array $data, $priority = self::NormalPriority, $ttl = null);
+
+    /**
+     * @param string $to
+     * @param array $data
+     * @param string $priority
+     * @param null|int $ttl
+     * @return bool
+     */
+    function sendPushMobile($to, array $data, $priority = IPushNotificationApi::NormalPriority, $ttl = null);
+
+    /**
+     * @param string $to
+     * @param array $data
+     * @param string $priority
+     * @param null|int $ttl
+     * @return bool
+     */
+    function sendPushWeb($to, array $data, $priority = IPushNotificationApi::NormalPriority, $ttl = null);
+
+    /**
+     * @param string $token
+     * @param string $topic
+     * @return bool
+     */
+    function subscribeToTopicWeb($token, $topic);
 }
