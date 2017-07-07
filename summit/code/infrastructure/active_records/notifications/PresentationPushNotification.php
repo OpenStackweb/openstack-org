@@ -92,17 +92,8 @@ final class PresentationPushNotification extends PushNotificationMessage
     {
         $presentation_array = array();
         $presentation_array['id'] = $this->Presentation()->ID;
-        $presentation_array['change_request_count'] = $this->Presentation()->ChangeRequests()->Count();
-        $presentation_array['comments'] = array();
-
-        foreach ($this->Presentation()->Comments() as $c ) {
-            $comment = array();
-            $comment['body'] = $c->Body;
-            $comment['name'] = $c->Commenter()->getName();
-            $comment['ago'] =  $c->obj('Created')->Ago(false);
-            $comment['is_activity'] = (boolean) $c->IsActivity;
-            $presentation_array['comments'][] = $comment;
-        }
+        $presentation_array['change_requests_count'] = $this->Presentation()->ChangeRequests()->filter('Status', SummitCategoryChange::STATUS_PENDING)->Count();
+        $presentation_array['comment_count'] = $this->Presentation()->Comments()->Count();
 
         return json_encode($presentation_array);
     }

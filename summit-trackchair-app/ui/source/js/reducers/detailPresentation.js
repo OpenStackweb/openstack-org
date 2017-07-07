@@ -61,6 +61,18 @@ export const detailPresentation = function (
         		group_selected: !!action.payload
         	};
 
+        case 'UPDATE_PRESENTATION_COMMENTS':
+            return {
+                ...state,
+                show_comment_message: true
+            };
+
+        case 'UPDATE_PRESENTATION_CHANGE_REQUESTS':
+            return {
+                ...state,
+                change_requests_count: action.payload
+            };
+
         case 'MARK_AS_READ':
         	return {
         		...state,

@@ -44,6 +44,8 @@ export const createComment = createAction('CREATE_COMMENT');
 export const syncComment = createAction('SYNC_COMMENT');
 export const toggleForMe = createAction('TOGGLE_FOR_ME');
 export const toggleForGroup = createAction('TOGGLE_FOR_GROUP');
+export const updatePresentationComments = createAction('UPDATE_PRESENTATION_COMMENTS');
+export const updatePresentationChangeRequests = createAction('UPDATE_PRESENTATION_CHANGE_REQUESTS');
 export const requestLists = createAction('REQUEST_LISTS');
 export const receiveLists = createAction('RECEIVE_LISTS');
 export const reorganiseSelections = createAction('REORGANISE_SELECTIONS');
@@ -395,5 +397,20 @@ export const postDeleteChair = (params) => {
 	};
 }
 
+export const updateWithPushNotification = (updated_pres = {}) => {
+    return (dispatch, getState) => {
+        let presentation = getState().detailPresentation;
+        if (updated_pres.id == presentation.id) {
+            if (updated_pres.change_requests_count != presentation.change_requests_count) {
+                dispatch(updatePresentationChangeRequests(updated_pres.change_requests_count));
+            }
+            if (updated_pres.comment_count != presentation.comments.length) {
+                dispatch(updatePresentationComments());
+            }
+
+            dispatch(throwError('This Presentation was updated by someone else. Refresh or check presentation header for more details.'));
+        }
+    }
+}
 
 /*eslint-enable */

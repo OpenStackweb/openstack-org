@@ -5,7 +5,7 @@ import {
 	postMySelection, 
 	postGroupSelection,
 	postMarkAsRead,
-	toggleEmailSpeakers,
+    toggleEmailSpeakers,
 	updateDetailPresentationID
 } from '../../actions';
 import PresentationCommentForm from '../containers/PresentationCommentForm';
@@ -25,16 +25,6 @@ class BrowseDetail extends React.Component {
 		super(props);
 		this.toggleMySelection = this.toggleMySelection.bind(this);
 		this.toggleGroupSelection = this.toggleGroupSelection.bind(this);
-
-        if (firebase) {
-            // Retrieve Firebase Messaging object.
-            const messaging = firebase.messaging();
-
-            messaging.onMessage(function(payload) {
-                var presentation_data = JSON.parse(payload.data.presentation);
-                console.log("Presentation ID: ", presentation_data.id);
-            });
-        }
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -125,6 +115,11 @@ class BrowseDetail extends React.Component {
 			            		[<RouterLink link='change-requests'>View</RouterLink>]
 			            	</div>
 			            }
+                        {p.show_comment_message && ( isAdmin || p.can_assign ) &&
+                            <div className="alert alert-info">
+                                New comments awaiting! Please refresh to view them.
+                            </div>
+                        }
 			            {myList &&
 			            	<p>
                                 <small className="pull-right">
