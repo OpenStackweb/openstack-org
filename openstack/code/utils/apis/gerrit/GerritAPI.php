@@ -11,6 +11,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
 /**
  * Class GerritAPI
  */
@@ -66,7 +68,7 @@ final class GerritAPI
      */
 	private function request($method, $url, $query = null){
         try {
-            $client   = new \GuzzleHttp\Client(
+            $client   = new Client(
                 [
                     'defaults'            => [
                         'timeout'         => 60,
@@ -88,9 +90,9 @@ final class GerritAPI
                 $options['query'] = $query;
             }
 
-            $request  = $client->createRequest($method, $url , $options);
+            $request  = new Request($method, $url);
 
-            $response = $client->send($request);
+            $response = $client->send($request, $options);
 
             if($response->getStatusCode() == 200)
                 return $response->getBody()->getContents();

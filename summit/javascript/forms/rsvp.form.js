@@ -13,14 +13,18 @@ function jqueryValidatorInvalidHandler(form, validator) {
     }
 }
 
-$(document).ready(function () {
-
+function initRSVPForm(){
     $('.rsvp_form').validate({
         errorPlacement: function (error, element) {
-            error.insertAfter($(element).closest('div'));
+            error.insertAfter($(element).closest('div.form-group'));
         },
         invalidHandler: jqueryValidatorInvalidHandler,
     });
+}
+
+$(document).ready(function () {
+
+    initRSVPForm();
 
     $(document).off("click", ".rsvp_submit").on("click", ".rsvp_submit", function (e) {
         e.preventDefault();

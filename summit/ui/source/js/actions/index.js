@@ -1,4 +1,5 @@
-import ScheduleApi from '../schedule/schedule-api'
+import ScheduleApi from '../schedule/schedule-api';
+import { getRequest, putRequest, createAction, deleteRequest } from "~core-utils/actions";
 
 export const ScheduleProps = {
     month: null,
@@ -11,11 +12,10 @@ export const ScheduleProps = {
 export const CHANGE_VIEW = 'CHANGE_VIEW'
 export const SET_FILTERS = 'SET_FILTERS'
 export const UPDATE_EVENT = 'UPDATE_EVENT'
-export const CALENDAR_SYNC = 'CALENDAR_SYNC'
 export const TOGGLE_FILTERS = 'TOGGLE_FILTERS'
 export const RECEIVE_EVENTS = 'RECEIVE_EVENTS'
-export const BULK_SYNC_TOGGLE_ALL = 'BULK_SYNC_TOGGLE_ALL'
-export const BULK_SYNC_TOGGLE_EVENT = 'BULK_SYNC_TOGGLE_EVENT'
+export const UNSYNC_CALENDAR = 'UNSYNC_CALENDAR'
+export const CALENDAR_SYNCD = 'CALENDAR_SYNCD'
 
 // Application constants.
 export const DEFAULT_FILTERS = {
@@ -28,21 +28,22 @@ export const DEFAULT_FILTERS = {
     favorites    : false,
 }
 
-export const VIEW_DAYS   = 'day'
-export const VIEW_TRACKS = 'track'
-export const VIEW_LEVELS = 'level'
-
 export const DEFAULT_VIEWS = {
     [VIEW_DAYS]: null,
     [VIEW_TRACKS]: null,
     [VIEW_LEVELS]: null,
 }
 
-const CALENDAR_ERROR_MSG = 'Some events failed to update.';
-
+export const VIEW_DAYS   = 'day'
+export const VIEW_TRACKS = 'track'
+export const VIEW_LEVELS = 'level'
 export const EVENT_FIELD_DETAIL = '_detail'
 export const EVENT_FIELD_LOADED = '_loaded'
 export const EVENT_FIELD_EXPANDED = '_expanded'
+
+const CALENDAR_ERROR_MSG = 'Some events failed to update.';
+const API_BASE_URL   = 'api/v1/summits/@SUMMIT_ID/schedule';
+
 
 ScheduleApi.on('error', () => $('#events-container').ajax_loader('stop'))
 
@@ -51,6 +52,8 @@ export const loadFilters = () => {
     return dispatch => {
         let view = null
         let values = {}
+        const { summit } = ScheduleProps
+        let cal_sync = summit.current_user ? summit.current_user.cal_sync : false;
 
         Object.keys(DEFAULT_FILTERS).forEach(filterName => {
             const value = getUrlParam(filterName)
@@ -65,7 +68,7 @@ export const loadFilters = () => {
         view = view || { type: VIEW_DAYS, value: getDefaultViewDay() }
 
         dispatch(changeView(view.type, view.value))
-        dispatch(setFilters(values, Object.keys(values).length > 0))
+        dispatch(setFilters(values, Object.keys(values).length > 0, cal_sync ))
     }
 }
 
@@ -91,15 +94,16 @@ export const autoloadEvent = (events, view, filtered) => {
     }
 }
 
-export const setFilters = (values, expanded) => {
+export const setFilters = (values, expanded, calSync) => {
     return {
         type: SET_FILTERS,
-        payload: { values, expanded }
+        payload: { values, expanded, calSync }
     }
 }
 
 export const clearFilters = () => {
-    return setFilters({ ...DEFAULT_FILTERS }, false)
+    const { summit } = ScheduleProps
+    return setFilters({ ...DEFAULT_FILTERS }, false, summit.current_user.cal_sync)
 }
 
 export const toggleFilters = () => {
@@ -276,31 +280,6 @@ export const removeEventFromFavorites = event => {
     }
 }
 
-export const bulkSyncToggleAll = checked => {
-    return {
-        type: BULK_SYNC_TOGGLE_ALL,
-        payload: { checked }
-    }
-}
-
-export const bulkSyncToggleEvent = (event, checked) => {
-    return {
-        type: BULK_SYNC_TOGGLE_EVENT,
-        payload: { event, checked },
-    }
-}
-
-export const syncEventsToCalendar = (events, sync) => {
-    return dispatch => {
-        calendarPush(events, sync).then(payload => {
-            dispatch({
-                type: CALENDAR_SYNC,
-                payload
-            })
-        })
-    }
-}
-
 // Helper functions.
 const getUrlParam = param => {
     return $(window).url_fragment('getParam', param)
@@ -333,54 +312,6 @@ const getAutoloadEventId = (events, view) => {
     return matched ? matched.id : 0
 }
 
-const calendarPush = (events, sync) => {
-    // Promise resolves after updating *all* events.
-    return new Promise((resolve, reject) => {
-        calendarAuth().then(() => {
-            const updated = []
-            const calendarMethod = sync ? 'addEvents' : 'removeEvents'
-            const apiMethod = sync ? 'googleCalSynch' : 'googleCalUnSynch'
-
-            $('#events-container').ajax_loader();
-
-            GoogleCalendarApi[calendarMethod](events,(response, event) => {
-                const gcal_id = sync ? response.result.id : null
-                ScheduleApi[apiMethod]({ ...event, gcal_id })
-                updated.push({ id: event.id, gcal_id })
-
-                if (events.length === updated.length) {
-                    $('#events-container').ajax_loader('stop')
-                    resolve({ updated })
-                }
-            })
-
-            // GoogleCalendarApi does not currently support promises.
-            // Raise an error if overall execution takes more than
-            // 500 ms for each event after 2 initial seconds.
-            setTimeout(() => {
-                if (events.length !== updated.length) {
-                    $('#events-container').ajax_loader('stop')
-
-                    setTimeout(() => { // Display error after loader closes.
-                        sweetAlert('Oops...', CALENDAR_ERROR_MSG, 'error')
-                    }, 500)
-
-                    resolve({ updated })
-                }
-            }, events.length * 500 + 2000);
-        })
-    })
-}
-
-const calendarAuth = () => {
-    return new Promise(resolve => {
-        if (GoogleCalendarApi.isAuthorized()) {
-            return resolve();
-        }
-        GoogleCalendarApi.doUserAuth(resolve);
-    })
-}
-
 const getDefaultViewDay = () => {
     const { summit } = ScheduleProps
 
@@ -401,4 +332,50 @@ const getDefaultViewDay = () => {
     }
 
     return filterDay
+}
+
+const errorHandler = (err, res) => {
+    let text = res.body;
+    if(res.body.messages instanceof Array) {
+        let messages = res.body.messages.map( m => {
+            if (m instanceof Object) return m.message
+            else return m;
+        })
+        text = messages.join('\n');
+    }
+
+    sweetAlert(res.statusText, text, "error");
+}
+
+export const unSyncCalendar = () => {
+        let summit_id = ScheduleProps.summit.id;
+        return deleteRequest(
+            createAction(''),
+            createAction(UNSYNC_CALENDAR),
+            `summit-calendar-sync/unsync?summit_id=${summit_id}`,
+            {},
+            errorHandler
+        )();
+}
+
+export const syncCalendar = (cal_type, ios_user, ios_pass ) => {
+    let summit_id = ScheduleProps.summit.id;
+    console.log(`syncCalendar - cal_type ${cal_type}`);
+    switch (cal_type) {
+        case 'google':
+            window.location = `summit-calendar-sync/login-google?state=${summit_id}`;
+            break;
+        case 'apple':
+             return putRequest(
+                createAction(''),
+                createAction(CALENDAR_SYNCD),
+                `summit-calendar-sync/login-apple?state=${summit_id}`,
+                {ios_user: ios_user, ios_pass: ios_pass},
+                errorHandler
+            )();
+            break;
+        case 'outlook':
+            window.location = `summit-calendar-sync/login-outlook?state=${summit_id}`;
+            break;
+    }
 }

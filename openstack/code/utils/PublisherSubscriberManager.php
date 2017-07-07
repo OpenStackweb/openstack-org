@@ -22,15 +22,11 @@ final class PublisherSubscriberManager
      */
     private static $instance;
 
-    private $events = array(); // all subscriptions
+    private $events = []; // all subscriptions
 
-    private function __construct()
-    {
-    }
+    private function __construct(){}
 
-    private function __clone()
-    {
-    }
+    private function __clone(){}
 
     /**
      * @return PublisherSubscriberManager
@@ -72,9 +68,12 @@ final class PublisherSubscriberManager
         }
 
         // Loop through all the events and call them
+        // call it inside tx
         foreach ($this->events[$event_name] as $event) {
             if (is_callable($event)) {
-                call_user_func_array($event, $params);
+                SapphireTransactionManager::getInstance()->transaction(function() use($event, $params) {
+                    call_user_func_array($event, $params);
+                });
             }
         }
     }

@@ -247,7 +247,7 @@ i.collapse-nav {
     border: none;
     border-radius: 4px;
     margin: 0;
-    height: auto;
+    height: 51px !important;
 }
 
 .view-select-container {
@@ -570,16 +570,21 @@ a.navbar-brand {
     padding-bottom: 10px;
 }
 
-.col-switch-schedule, .col-switch-watchlist {
+.col-switch-schedule, .col-switch-watchlist, .col-toggle-sync {
     float: right;
     margin-right: 20px;
 }
 
-.switch_schedule, .switch_favorites {
+.switch_schedule, .switch_favorites, .toggle_sync {
     padding: 8px 14px;
 }
 
-.switch_schedule > .glyphicon, .switch_favorites > .glyphicon{
+.toggle_sync {
+    height: 38px !important;
+
+}
+
+.switch_schedule > .glyphicon, .switch_favorites > .glyphicon, .toggle_sync .glyphicon{
     margin-right: 5px;
 }
 
@@ -973,4 +978,46 @@ span.caret-event-actions:before {
 span.caret-event-actions {
     position: absolute;
     top: 45%;
+}
+
+/* cal sync */
+
+.error {
+    border-color: red;
+}
+
+.google{background-image:url(/summit/images/google.jpg);}
+.apple{background-image:url(/summit/images/apple.jpg);}
+.outlook{background-image:url(/summit/images/outlook.jpg);}
+
+.cal_box {
+    margin-top: 10px;
+}
+.selected.cal_image{
+    -webkit-filter: none;
+    -moz-filter: none;
+    filter: none;
+}
+.cal_image{
+    cursor:pointer;
+    background-size:contain;
+    background-repeat:no-repeat;
+    display:inline-block;
+    width:100px;height:70px;
+    -webkit-transition: all 100ms ease-in;
+    -moz-transition: all 100ms ease-in;
+    transition: all 100ms ease-in;
+    -webkit-filter: brightness(1.8) grayscale(1) opacity(.7);
+    -moz-filter: brightness(1.8) grayscale(1) opacity(.7);
+    filter: brightness(1.8) grayscale(1) opacity(.7);
+}
+
+.cal_image:hover{
+    -webkit-filter: brightness(1.2) grayscale(.5) opacity(.9);
+    -moz-filter: brightness(1.2) grayscale(.5) opacity(.9);
+    filter: brightness(1.2) grayscale(.5) opacity(.9);
+}
+
+.apple_note {
+    margin-bottom: 20px;
 }

@@ -1,18 +1,14 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import thunk from 'redux-thunk'
-import { Provider } from 'react-redux'
-import { createStore, applyMiddleware } from 'redux'
-
-import Schedule from '../components/schedule'
-import reducers from '../reducers/index'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import thunk from 'redux-thunk';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import Schedule from '../components/schedule';
+import reducers from '../reducers/index';
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 
 require("../../../../../themes/openstack/bower_assets/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css");
-
-require('./schedule-global-filter.tag')
-riot.mount('schedule-global-filter');
 
 const props = {
     ...window.ReactScheduleGridProps,

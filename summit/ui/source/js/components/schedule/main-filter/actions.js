@@ -1,18 +1,17 @@
-import React from 'react'
+import React from 'react';
+import ToggleButton from "~core-components/toggle_button";
+
 
 const MainFilterActions = ({
     filters,
-    bulkSync,
     setFilters,
     clearFilters,
     toggleFilters,
-    ScheduleProps,
-    exportCalendar,
-    bulkSyncToggleAll,
+    toggleCalSyncClick,
+    ScheduleProps
 }) => {
-    const { summit: { current_user }, base_url } = ScheduleProps
-    const { values, expanded } = filters
-
+    const { summit: { current_user }, base_url } = ScheduleProps;
+    const { values, expanded, calSync }          = filters;
     return (
     <div className="row all-events-filter-row">
         <div className="col-md-4 col-xs-12 all-events-filter-link">
@@ -50,52 +49,8 @@ const MainFilterActions = ({
                 </form>
                 }
             </div>
-            {values.going &&
-            <div>
-                <div className="col-select-all-calendar-own">
-                    <input type="checkbox" id="chk_select_all" title="Select/Unselect All Events"
-                    onClick={e => bulkSyncToggleAll(e.target.checked)} />
-                </div>
-                <div className="col-sync-calendar-own">
-                    <div className="btn-group">
-                        <button type="button" className="btn btn-default">
-                            Sync to Calendar
-                        </button>
-                        <button type="button" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false" className="btn btn-default dropdown-toggle">
-                            <span className="caret"></span>
-                            <span className="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <ul className="dropdown-menu">
-                            <li>
-                                <a data-target="#" id="link_google_sync" className="link-google-sync"
-                                onClick={() => bulkSync(true)}>
-                                    <span aria-hidden="true" className="glyphicon glyphicon-refresh"></span>
-                                    &nbsp;Google&nbsp;Sync
-                                </a>
-                            </li>
-                            <li>
-                                <a data-target="#" id="link_google_unsync" className="link-google-unsync"
-                                onClick={() => bulkSync(false)}>
-                                    <i className="fa fa-calendar-times-o" aria-hidden="true"></i>
-                                    &nbsp;Google&nbsp;Unsync
-                                </a>
-                            </li>
-                            <li role="separator" className="divider"></li>
-                            <li>
-                                <a data-target="#" id="link_export_ics" className="link-export-ics"
-                                onClick={exportCalendar}>
-                                    <span className="glyphicon glyphicon-paperclip" aria-hidden="true"></span>
-                                    &nbsp;Export&nbsp;ICS
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            }
             <div className="col-switch-schedule">
-                {current_user && current_user.is_attendee && ! values.favorites &&
+                {current_user && ! values.favorites &&
                 <button type="button" className="btn btn-primary pull-right switch_schedule"
                 onClick={() => setFilters({ going: ! values.going })}>
                     <span className="glyphicon glyphicon-calendar"></span>
@@ -118,19 +73,29 @@ const MainFilterActions = ({
                 </button>
                 }
             </div>
+                <div className="col-toggle-sync">
+                {summit.should_show_venues && current_user &&
+                    <ToggleButton
+                        onClick={ () => toggleCalSyncClick() }
+                        className="toggle_sync"
+                        on={<span><span className="glyphicon glyphicon-calendar"></span>Synced</span>}
+                        off={<span>Not Synced</span>}
+                        offstyle="danger"
+                        active={calSync}
+                    />
+            }
+            </div>
         </div>
     </div>
 )}
 
 MainFilterActions.propTypes = {
     filters: React.PropTypes.object.isRequired,
-    bulkSync: React.PropTypes.func.isRequired,
     setFilters: React.PropTypes.func.isRequired,
     clearFilters: React.PropTypes.func.isRequired,
     toggleFilters: React.PropTypes.func.isRequired,
+    toggleCalSyncClick: React.PropTypes.func.isRequired,
     ScheduleProps: React.PropTypes.object.isRequired,
-    exportCalendar: React.PropTypes.func.isRequired,
-    bulkSyncToggleAll: React.PropTypes.func.isRequired,
 }
 
 export default MainFilterActions

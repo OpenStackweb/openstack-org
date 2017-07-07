@@ -26,20 +26,6 @@ const EventContent = ({
         ? summit.event_types[event.type_id].type
         : '#'
 
-    const syncClass = event.gcal_id
-        ? 'icon-sync-event'
-        : 'icon-unsync-event'
-
-    const syncEvent = e => {
-        e.stopPropagation()
-        syncEventsToCalendar([event], ! event.gcal_id)
-    }
-
-    const toggleBulkSync = e => {
-        e.stopPropagation()
-        bulkSyncToggleEvent(event, e.target.checked)
-    }
-
     return (
     <div className="event-content col-sm-10 col-xs-10">
         <div className="row row_location">
@@ -78,17 +64,6 @@ const EventContent = ({
                 </span>
                 }
             </div>
-            {summit.current_user &&
-            <div className="col-md-2 synch-container" style={{ display: 'none' }}>
-                <span className="icon-event-synched" onClick={syncEvent}>
-                    <i title={event.gcal_id && 'Syncronized' || 'Unsyncronized'}
-                    className={`fa fa-refresh sync-icon ${syncClass}`} aria-hidden="true" />
-                    &nbsp;Sync&nbsp;
-                </span>
-                <input type="checkbox" title="select event" className="select-event-chk"
-                onClick={toggleBulkSync} />
-            </div>
-            }
         </div>
         <div className="row">
             <div className="col-xs-8 col-track">
@@ -114,9 +89,7 @@ const EventContent = ({
 
 EventContent.propTypes = {
     event: React.PropTypes.object.isRequired,
-    ScheduleProps: React.PropTypes.object.isRequired,
-    bulkSyncToggleEvent: React.PropTypes.func.isRequired,
-    syncEventsToCalendar: React.PropTypes.func.isRequired,
+    ScheduleProps: React.PropTypes.object.isRequired
 };
 
 export default EventContent;

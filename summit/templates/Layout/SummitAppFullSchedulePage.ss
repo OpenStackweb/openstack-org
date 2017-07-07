@@ -13,7 +13,7 @@
                 <% if CurrentMember %>
                     <a title="logout" class="action btn btn-default" id="login-button" href="/Security/logout/?BackURL={$Top.Link(full)}"><i class="fa fa-sign-out" aria-hidden="true"></i>Log Out</a>
                 <% else %>
-                    <a title="Log in to unlock features only available for registered summit attendees" class="action btn btn-default" id="login-button" href="Security/login?BackURL={$Top.Link(full)}"><i class="fa fa-user"></i>Log in</a>
+                    <a title="Log in to create your own Schedule and Watch List" class="action btn btn-default" id="login-button" href="Security/login?BackURL={$Top.Link(full)}"><i class="fa fa-user"></i>Log in</a>
                 <% end_if %>
             </div>
             <div class="col-sm-5">
@@ -49,7 +49,6 @@
                     time_zone_id : "{$Summit.TimeZoneName}",
                     start_datetime : "{$StartDate}",
                     end_datetime   : "{$EndDate}",
-                    <% if $Top.CurrentMember && $Top.CurrentMember.isAttendee($Summit.ID) %>gcal_id : "{$Top.CurrentMember.getGoogleCalEventId($ID)}", <% end_if %>
                 };
                 events["{$getDayLabel()}"].push(event_{$ID});
                 events_by_id[event_{$ID}.id] = event_{$ID};
@@ -64,6 +63,4 @@
     </div>
 </div>
 
-
 $ModuleJS('full-schedule-view')
-<% include GoogleCalendar GoogleCalendarClientID=$Top.GoogleCalendarClientID %>

@@ -12,6 +12,10 @@
  * limitations under the License.
  **/
 
+use GuzzleHttp\Client;
+use Psr\Http\Message\ResponseInterface;
+use GuzzleHttp\Exception\ClientException;
+
 /**
  * Class FireBaseGCMApi
  * https://firebase.google.com/docs/cloud-messaging/http-server-ref
@@ -23,7 +27,7 @@ final class FireBaseGCMApi implements IPushNotificationApi
     const SendPushEndpoint   = 'https://fcm.googleapis.com/fcm/send';
     const TopicsEndpoint     = 'https://iid.googleapis.com/iid/v1/%s/rel/topics/%s';
     const Topics             = '/topics/';
-    const BaseBackOff        = 2000;
+    const BaseBackOff        =  2000;
     const AndroidRecipient   = 'android_%s';
     const IOSRecipient       = 'ios_%s';
 
@@ -32,6 +36,10 @@ final class FireBaseGCMApi implements IPushNotificationApi
      */
     private $api_server_key;
 
+    /**
+     * FireBaseGCMApi constructor.
+     * @param string $api_server_key
+     */
     public function __construct($api_server_key)
     {
         $this->api_server_key = $api_server_key;
@@ -94,39 +102,35 @@ final class FireBaseGCMApi implements IPushNotificationApi
     }
 
     /**
-     * @param \GuzzleHttp\Client $client
+     * @param Client $client
      * @param array $data
-     * @param $recipient
-     * @param $priority
-     * @throws GuzzleHttp\Exception\ClientException
-     * @return \GuzzleHttp\Message\FutureResponse|\GuzzleHttp\Message\ResponseInterface|\GuzzleHttp\Ring\Future\FutureInterface|null
+     * @param string $recipient
+     * @param string $priority
+     * @return ResponseInterface
      */
-    private function sendRegularPayloadPush(GuzzleHttp\Client $client, array $data, $recipient, $priority){
+    private function sendRegularPayloadPush(Client $client, array $data, $recipient, $priority){
         $response = $client->post(self::SendPushEndpoint, [
             'headers' => [
                 'Authorization' => sprintf('key=%s', $this->api_server_key),
-                'Content-Type'  => 'application/json'
             ],
-            'body' => json_encode($this->createDataMessage($data, $recipient, $priority ))
+            'json' => $this->createDataMessage($data, $recipient, $priority )
         ]);
         return $response;
     }
 
     /**
-     * @param \GuzzleHttp\Client $client
+     * @param Client $client
      * @param array $data
      * @param string $recipient
      * @param string $priority
-     * @return \GuzzleHttp\Message\FutureResponse|\GuzzleHttp\Message\ResponseInterface|\GuzzleHttp\Ring\Future\FutureInterface|null
-     * @throws GuzzleHttp\Exception\ClientException
+     * @return ResponseInterface
      */
     private function sendCustomPayloadPush(GuzzleHttp\Client $client, array $data, $recipient, $priority){
         $response = $client->post(self::SendPushEndpoint, [
             'headers' => [
                 'Authorization' => sprintf('key=%s', $this->api_server_key),
-                'Content-Type'  => 'application/json'
             ],
-            'body' => json_encode($this->createNotificationMessageWithCustomPayload($data, $recipient, $priority ))
+            'json' => $this->createNotificationMessageWithCustomPayload($data, $recipient, $priority )
         ]);
         return $response;
     }
@@ -139,7 +143,7 @@ final class FireBaseGCMApi implements IPushNotificationApi
      */
     private function sendPushMobile($to, array $data, $priority = IPushNotificationMessage::NormalPriority, $ttl = null)
     {
-        $client   = new GuzzleHttp\Client();
+        $client   = new Client();
         $res      = true;
         $attempt  = 1;
 
@@ -173,7 +177,7 @@ final class FireBaseGCMApi implements IPushNotificationApi
             }
             return $res;
         }
-        catch (\GuzzleHttp\Exception\ClientException $ex1){
+        catch (ClientException $ex1){
             return false;
         }
     }
@@ -187,7 +191,7 @@ final class FireBaseGCMApi implements IPushNotificationApi
      */
     private function sendPushWeb($to, array $data, $priority = IPushNotificationMessage::NormalPriority, $ttl = null)
     {
-        $client   = new GuzzleHttp\Client();
+        $client   = new Client();
         $res      = true;
         $attempt  = 1;
 
@@ -204,7 +208,7 @@ final class FireBaseGCMApi implements IPushNotificationApi
             }
             return $res;
         }
-        catch (\GuzzleHttp\Exception\ClientException $ex1){
+        catch (ClientException $ex1){
             return false;
         }
     }
@@ -235,7 +239,7 @@ final class FireBaseGCMApi implements IPushNotificationApi
 
             return $res;
         }
-        catch (\GuzzleHttp\Exception\ClientException $ex1){
+        catch (ClientException $ex1){
             throw $ex1;
             return false;
         }

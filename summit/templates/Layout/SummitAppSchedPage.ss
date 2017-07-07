@@ -33,7 +33,13 @@
 
         <% if CurrentMember %>
             <% with CurrentMember %>
-            summit.current_user = { id: {$ID}, first_name: '{$FirstName.JS}', last_name: '{$Surname.JS}', is_attendee: <% if CurrentMember.isAttendee($Top.Summit.ID) %>true<% else %>false<% end_if %> };
+                summit.current_user = {
+                    id: {$ID},
+                    first_name: '{$FirstName.JS}',
+                    last_name: '{$Surname.JS}',
+                    is_attendee: <% if CurrentMember.isAttendee($Top.Summit.ID) %> true <% else %> false <% end_if %>,
+                    cal_sync: <% if CurrentMember && CurrentMember.existCalendarSyncInfoForSummit($Top.Summit.ID) %> true <% else %> false <% end_if %>
+                };
             <% end_with %>
         <% end_if %>
 
@@ -160,13 +166,21 @@
             fb_app_id : "{$SiteConfig.getOGApplicationID()}",
             tweet: '<%t Summit.TweetText %>'
        };
+
+       window.ReactScheduleGridProps = {
+           month: "{$Summit.Month}",
+           summit: summit,
+           base_url: "{$Top.Link}",
+           search_url: "{$Top.Link(global-search)}",
+           default_event_color: '#757575'
+       };
     </script>
     <div class="row schedule-title-wrapper">
         <div class="col-sm-6 col-main-title">
             <h1 style="text-align:left;">Schedule</h1>
         </div>
         <div class="col-sm-6">
-           <schedule-global-filter search_url="{$Top.Link(global-search)}"></schedule-global-filter>
+            <div id="os-schedule-global-search" data-search-url="{$Top.Link(global-search)}" data-schedule-url="" data-search-value=""></div>
         </div>
     </div>
     <% if CurrentMember %>
@@ -181,7 +195,7 @@
                 <form id="MemberLoginForm_LoginForm" action="Security/login?BackURL={$Top.Link}" method="post" enctype="application/x-www-form-urlencoded">
                     <input type="hidden" name="fragment" id="fragment"/>
                     <div class="Actions">
-                        <button class="action btn btn-primary" type="submit" id="login-button" name="action_dologin" title="Log in to unlock features only available for registered summit attendees">
+                        <button class="action btn btn-primary" type="submit" id="login-button" name="action_dologin" title="Log in to create your own Schedule and Watch List">
                             <i class="fa fa-user"></i>
                             Log in
                         </button>
@@ -206,8 +220,11 @@
             });
         });
     </script>
+
     <div id="os-schedule-react"></div>
 </div>
 <div id="fb-root"></div>
 $ModuleJS('schedule')
-<% include GoogleCalendar GoogleCalendarClientID=$Top.GoogleCalendarClientID %>
+$ModuleCSS('schedule')
+$ModuleJS('global-search')
+$ModuleCSS('global-search')

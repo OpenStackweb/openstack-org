@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-final class Summit extends DataObject implements ISummit
+class Summit extends DataObject implements ISummit
 {
 
     private static $db = array
@@ -43,6 +43,8 @@ final class Summit extends DataObject implements ISummit
         'MaxSubmissionAllowedPerUser' => 'Int',
         'ScheduleDefaultStartDate' => 'SS_Datetime',
         'AvailableOnApi' => 'Boolean',
+        'CalendarSyncName'        => 'Varchar(255)',
+        'CalendarSyncDescription' => 'Text',
     );
 
     private static $defaults = array
@@ -1690,6 +1692,37 @@ SQL;
      */
     public function getExcludedTracksForUploadPresentationSlideDeck()
     {
-        return  array_values($this->ExcludedTracksForUploadPresentationSlideDeck()->getIDList());
+        return array_values($this->ExcludedTracksForUploadPresentationSlideDeck()->getIDList());
+    }
+
+    /**
+     * @return string
+     */
+    public function getCalendarSyncId(){
+        $res  = "openstack-".$this->Title.'-';
+        $begin_date = new DateTime($this->getSummitBeginDate());
+        $res .= $begin_date->format('Y').'-summit';
+        $res  = strtolower(  preg_replace('/[^a-zA-Z0-9\-]/', '',$res));
+        return $res;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCalendarSyncName(){
+        $val = $this->getField("CalendarSyncName");
+        if(empty($val))
+            $val =  $this->Title .' Calendar';
+        return $val;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCalendarSyncDescription(){
+        $val = $this->getField("CalendarSyncDescription");
+        if(empty($val))
+            $val =  'Calendar to hold Summit Events';
+        return $val;
     }
 }

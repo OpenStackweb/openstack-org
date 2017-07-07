@@ -22,12 +22,10 @@ final class SummitAttendeeRSVPEmailSender implements IMessageSenderService
     {
 
         if(!is_array($subject)) return;
-        if(!isset($subject['Event']) || !isset($subject['Attendee']) || !isset($subject['RsvpID'])) return;
+        if(!isset($subject['Event']) || !isset($subject['Member']) || !isset($subject['RsvpID'])) return;
         $event     = $subject['Event'];
-        $attendee  = $subject['Attendee'];
+        $member    = $subject['Member'];
         $rsvp_id   = $subject['RsvpID'];
-
-        if(!$attendee instanceof  ISummitAttendee) return;
 
         //create confirmation number
         $summit_title = substr($event->Summit()->Title,0,3);
@@ -37,7 +35,7 @@ final class SummitAttendeeRSVPEmailSender implements IMessageSenderService
         $email = PermamailTemplate::get()->filter('Identifier', SUMMIT_ATTENDEE_RSVP_EMAIL)->first();
         if(is_null($email)) throw new Exception(sprintf('Email Template %s does not exists on DB!', SUMMIT_ATTENDEE_RSVP_EMAIL));
 
-        $email = EmailFactory::getInstance()->buildEmail(SUMMIT_ATTENDEE_RSVP_EMAIL_FROM, $attendee->getMember()->getEmail());
+        $email = EmailFactory::getInstance()->buildEmail(SUMMIT_ATTENDEE_RSVP_EMAIL_FROM, $member->getEmail());
 
         $schedule_page = SummitAppSchedPage::getBy($event->Summit());
         if(is_null($schedule_page)) throw new NotFoundEntityException('Summit Schedule page does not exists!');
@@ -46,7 +44,7 @@ final class SummitAttendeeRSVPEmailSender implements IMessageSenderService
             array
             (
                 'Event'                => $event,
-                'Attendee'             => $attendee,
+                'Member'               => $member,
                 'ScheduleURL'          => $schedule_page->getAbsoluteLiveLink(false),
                 'ConfirmationNbr'      => $confirmation_nbr
             )

@@ -9,22 +9,6 @@
                 </div>
                 <% end_if %>
             </div>
-            <div class="col-sm-2 col-sync-calendar">
-                <div class="btn-group">
-                    <button type="button" class="btn btn-default">Sync to Calendar</button>
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="caret"></span>
-                        <span class="sr-only">Toggle Dropdown</span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a data-target="#" class="link-google-sync" id="link_google_sync"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>&nbsp;Google&nbsp;sync</a></li>
-                        <li><a data-target="#" class="link-google-unsync" id="link_google_unsync"><i class="fa fa-calendar-times-o" aria-hidden="true"></i>&nbsp;Google&nbsp;unsync</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a data-target="#" class="link-export-ics" id="link_export_ics"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span>&nbsp;Export&nbsp;ICS</a></li>
-                    </ul>
-                </div>
-                <input type="checkbox" id="chk_select_all" title="select/unselect all events"/>
-            </div>
 
             <div class="col-sm-4">
                 <form action="{$Top.Link('/mine/pdf')}">
@@ -57,7 +41,6 @@
                     total: $Attendees.Count(),
                     capacity: "{$LocationCapacity}",
                     rsvp: "{$RSVPLink}",
-                    gcal_id: <% if $Top.CurrentMember.isAttendee($Summit.ID) %> "{$Top.CurrentMember.getGoogleCalEventId($ID)}" <% else %> "" <% end_if %>,
                     summit_id: $Summit.ID,
                 };
 
@@ -74,6 +57,4 @@
     </div>
 </div>
 
-
 $ModuleJS('my-schedule-view')
-<% include GoogleCalendar GoogleCalendarClientID=$Top.GoogleCalendarClientID %>

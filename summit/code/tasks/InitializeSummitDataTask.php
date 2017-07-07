@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2015 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,7 +11,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-class InitializeSummitDataTask extends BuildTask
+use GuzzleHttp\Client;
+
+/**
+ * Class InitializeSummitDataTask
+ */
+final class InitializeSummitDataTask extends BuildTask
 {
     /**
      * @var string $title Shown in the overview on the {@link TaskRunner}
@@ -54,7 +58,7 @@ class InitializeSummitDataTask extends BuildTask
         Summit::seedBasicEventTypes($summit_id);
 
 
-        $client   = new GuzzleHttp\Client();
+        $client   = new Client();
 
         $query = array
         (
@@ -68,10 +72,14 @@ class InitializeSummitDataTask extends BuildTask
             )
         );
 
-        if($response->getStatusCode() !== 200) throw new Exception('invalid status code!');
-        $content_type = $response->getHeader('content-type');
-        if(empty($content_type)) throw new Exception('invalid content type!');
-        if($content_type !== 'application/json') throw new Exception('invalid content type!');
+        if($response->getStatusCode() !== 200)
+            throw new Exception('invalid status code!');
+        $content_type = $response->getHeaderLine('content-type');
+
+        if(empty($content_type))
+            throw new Exception('invalid content type!');
+        if($content_type !== 'application/json')
+            throw new Exception('invalid content type!');
 
         $json         = $response->getBody()->getContents();
         $ticket_types = json_decode($json, true);

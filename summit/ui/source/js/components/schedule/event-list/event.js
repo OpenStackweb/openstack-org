@@ -59,7 +59,7 @@ class Event extends PureComponent {
         const expanded = event[EVENT_FIELD_EXPANDED]
         const detail = event[EVENT_FIELD_DETAIL]
 
-        const going = current_user && current_user.is_attendee && event.going
+        const going = current_user && event.going
 
         return (
             <div className="col-sm-12" id={`event_${event.id}`} ref="container">

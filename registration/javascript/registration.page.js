@@ -90,8 +90,9 @@ jQuery(document).ready(function($) {
                 if($(element).attr('name') == 'Gender'){
                     error.insertAfter($("#Gender"));
                 }
-                else
-                    error.insertAfter(element); // default function
+                else {
+                    error.insertAfter($(element).closest('div.middleColumn'));
+                }
             },
             ignore: [],
             rules: {

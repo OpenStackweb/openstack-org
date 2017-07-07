@@ -159,7 +159,13 @@ class SummitAbstractLocation extends DataObject implements ISummitLocation
     protected function onBeforeDelete()
     {
         parent::onBeforeDelete();
-        //remove locations from all events
-        DB::query("UPDATE SummitEvent SET LocationID = 0 WHERE LocationID = {$this->ID} AND SummitID = {$this->SummitID};");
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasPublishedEvents(){
+        $count = intval(DB::query("SELECT COUNT(SummitEvent.ID) FROM SummitEvent WHERE LocationID = {$this->ID} AND SummitID = {$this->SummitID} AND Published = 1;")->value());
+        return $count > 0;
     }
 }

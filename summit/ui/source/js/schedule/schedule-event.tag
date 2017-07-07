@@ -53,9 +53,9 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-event-actions" aria-labelledby="{ 'event_action_menu_'+ id }">
                        <li if={ !going && has_rsvp } class="rsvp-action event-action { !going && has_rsvp && rsvp_seat_type == 'FULL' ? 'disabled' : '' }"><a onclick={ onMenuItemSelected } data-event-id="{ id }" data-type="rsvp" class="event-action-link" href="#"><i class="fa fa-check-circle" aria-hidden="true"></i>&nbsp;RSVP</a></li>
-                       <li if={ going && has_rsvp && !rsvp_external && self.summit.current_user.is_attendee } class="unrsvp-action event-action"><a onclick={ onMenuItemSelected } data-event-id="{ id }" data-type="unrsvp" class="event-action-link" href="#"><i class="fa fa-times-circle" aria-hidden="true"></i>&nbsp;unRSVP</a></li>
+                       <li if={ going && has_rsvp && !rsvp_external } class="unrsvp-action event-action"><a onclick={ onMenuItemSelected } data-event-id="{ id }" data-type="unrsvp" class="event-action-link" href="#"><i class="fa fa-times-circle" aria-hidden="true"></i>&nbsp;unRSVP</a></li>
                        <li if={ !has_rsvp  && !going } class="going-action event-action"><a onclick={ onMenuItemSelected } data-event-id="{ id }" data-type="going" class="event-action-link" href="#"><i class="fa fa-check-circle" aria-hidden="true"></i>&nbsp;Schedule</a></li>
-                       <li if={ ( !has_rsvp && going || ( has_rsvp && rsvp_external && going) ) && self.summit.current_user.is_attendee } class="not-going-action event-action"><a onclick={ onMenuItemSelected } data-event-id="{ id }" data-type="not-going" class="event-action-link" href="#"><i class="fa fa-times-circle" aria-hidden="true"></i>&nbsp;UnSchedule</a></li>
+                       <li if={ ( !has_rsvp && going || ( has_rsvp && rsvp_external && going) ) } class="not-going-action event-action"><a onclick={ onMenuItemSelected } data-event-id="{ id }" data-type="not-going" class="event-action-link" href="#"><i class="fa fa-times-circle" aria-hidden="true"></i>&nbsp;UnSchedule</a></li>
                        <li if={ !favorite && to_record } class="watch-action event-action"><a onclick={ onMenuItemSelected } data-event-id="{ id }" data-type="watch" class="event-action-link" href="#"><i class="fa fa-bookmark" aria-hidden="true"></i>&nbsp;Watch Later</a></li>
                        <li if={ favorite } class="unwatch-action event-action"><a onclick={ onMenuItemSelected } data-event-id="{ id }" data-type="unwatch" class="event-action-link" href="#"><i class="fa fa-bookmark-o" aria-hidden="true"></i>&nbsp;Do not Watch Later</a></li>
                        <li class="share-facebook-action event-action"><a onclick={ onMenuItemSelected } data-event-id="{ id }" data-type="share-facebook" class="event-action-link" href="#"><i class="fa fa-facebook-official" aria-hidden="true"></i>&nbsp;Share on Facebook</a></li>
@@ -161,20 +161,6 @@
                     confirmButtonText: 'Log in'
                 }).then(function () {
                     window.location = "/Security/login?BackURL="+self.summit.schedule_link
-                })
-
-                return false;
-            } else if ($.inArray(type,['going','rsvp']) !== -1 && !self.summit.current_user.is_attendee) {
-                swal({
-                    title: 'EventBrite Ticket Required',
-                    text: "Only attendees can use this function. Enter your Eventbrite order number in My Summit if you are an attendee.",
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Add ticket'
-                }).then(function () {
-                    window.location = "/profile/attendeeInfoRegistration?BackURL="+self.summit.schedule_link
                 })
 
                 return false;

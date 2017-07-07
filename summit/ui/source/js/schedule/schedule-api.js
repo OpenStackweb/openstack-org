@@ -189,49 +189,4 @@ schedule_api.removeEventFromMyFavorites = function (summit_id, event_id)
     });
 }
 
-schedule_api.googleCalSynch = function (event)
-{
-    var url = api_base_url.replace('@SUMMIT_ID', event.summit_id)+'/'+event.id+'/synch/google/'+event.gcal_id;
-    $.ajax({
-        type: 'PUT',
-        url:  url,
-        timeout:10000,
-        contentType: "application/json; charset=utf-8",
-        success: function (data) {
-            schedule_api.trigger('googleEventSynchSaved', event);
-        }
-    }).fail(function (jqXHR, textStatus, errorThrown) {
-        var http_code = jqXHR.status;
-        if(http_code === 401){
-            // user lost its session
-            sweetAlert("Oops...", 'you are not logged in!', "error");
-            location.reload();
-        }
-        schedule_api.trigger('error');
-    });
-}
-
-schedule_api.googleCalUnSynch = function (event)
-{
-    var url = api_base_url.replace('@SUMMIT_ID', event.summit_id)+'/'+event.id+'/synch/google';
-    $.ajax({
-        type: 'DELETE',
-        url:  url,
-        timeout:10000,
-        contentType: "application/json; charset=utf-8",
-        success: function (data) {
-            schedule_api.trigger('googleEventSynchSaved', event);
-        }
-    }).fail(function (jqXHR, textStatus, errorThrown) {
-        var http_code = jqXHR.status;
-        if(http_code === 401){
-            // user lost its session
-            sweetAlert("Oops...", 'you are not logged in!', "error");
-            location.reload();
-        }
-        schedule_api.trigger('error');
-    });
-}
-
-
 module.exports = schedule_api;

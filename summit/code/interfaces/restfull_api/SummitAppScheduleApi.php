@@ -142,9 +142,7 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi
         'DELETE $EventID!/favorite'               => 'RemoveFromFavorites',
         'DELETE $EventID!/rsvp'                   => 'deleteRSVP',
         'PUT $EventID!/rsvp/$RsvpID!'             => 'updateRSVP',
-        'PUT $EventID!/synch/google/$CalEventID!' => 'synchEvent',
         'PUT $EventID!'                           => 'addToSchedule',
-        'DELETE $EventID!/synch/google'           => 'unSynchEvent',
         'DELETE $EventID!'                        => 'removeFromSchedule',
         'POST $EventID!/feedback'                 => 'addFeedback',
         'POST $EventID!/share'                    => 'shareEmail',
@@ -162,8 +160,6 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi
         'addFeedback',
         'getFullSchedule',
         'shareEmail',
-        'synchEvent',
-        'unSynchEvent',
         'rsvpEvent',
         'updateRSVP',
         'deleteRSVP',
@@ -241,15 +237,18 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi
         if(Member::currentUserID()){
             $member    = Member::currentUser();
             $summit_id = intval($request->param('SUMMIT_ID'));
-            $attendee  = $member->getSummitAttendee($summit_id);
-            if($attendee) {
-                $schedule_events = $attendee->getScheduleEventIds($summit_id);
+
+            $schedule_events = $member->getScheduleEventIds($summit_id);
+            if(count($schedule_events) > 0) {
                 $key .= '-sched-' . implode('.', $schedule_events);
             }
 
             $favorites_events = $member->getFavoritesEventIds($summit_id);
-            $key .= '-fav-' . implode('.', $favorites_events);
+            if(count($favorites_events) > 0) {
+                $key .= '-fav-' . implode('.', $favorites_events);
+            }
         }
+
         return $key;
     }
 
@@ -510,7 +509,7 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi
     public function addFeedback()
     {
         try {
-            $data     = $this->getJsonRequest();
+            $data      = $this->getJsonRequest();
             $event_id  = (int)$this->request->param('EventID');
             $summit_id = (int)$this->request->param('SUMMIT_ID');
             $member_id = Member::CurrentUserID();
@@ -648,81 +647,6 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi
         $events    = $this->full_schedule_view_model_mapper->map([$schedule, $sort]);
 
         return $this->ok($events);
-    }
-
-    /**
-     * @param SS_HTTPRequest $request
-     * @return SS_HTTPResponse
-     */
-    public function synchEvent(SS_HTTPRequest $request)
-    {
-        try {
-            $summit_id    = (int)$request->param('SUMMIT_ID');
-            $event_id     = (int)$request->param('EventID');
-            $cal_event_id = $request->param('CalEventID');
-            $member       = Member::currentUser();
-
-            if (is_null($member)) return $this->permissionFailure();
-
-            if (intval($summit_id) > 0)
-                $summit = $this->summit_repository->getById(intval($summit_id));
-
-            if (strtolower($summit_id) === 'current')
-                $summit = Summit::ActiveSummit();
-
-            if (is_null($summit))
-                return $this->notFound('summit not found!');
-
-            $this->schedule_manager->saveSynchId(Member::currentUserID(), $event_id, 'google', $cal_event_id);
-
-            return $this->ok($cal_event_id);
-
-        } catch (EntityValidationException $ex1) {
-            SS_Log::log($ex1, SS_Log::WARN);
-            return $this->validationError($ex1->getMessages());
-        } catch (NotFoundEntityException $ex2) {
-            SS_Log::log($ex2, SS_Log::WARN);
-            return $this->notFound($ex2->getMessage());
-        } catch (Exception $ex) {
-            SS_Log::log($ex, SS_Log::ERR);
-            return $this->serverError();
-        }
-    }
-
-    /**
-     * @param SS_HTTPRequest $request
-     * @return SS_HTTPResponse
-     */
-    public function unSynchEvent(SS_HTTPRequest $request)
-    {
-        try {
-            $summit_id = (int)$request->param('SUMMIT_ID');
-            $event_id  = (int)$request->param('EventID');
-            $member    = Member::currentUser();
-
-            if (is_null($member)) return $this->permissionFailure();
-
-            if (intval($summit_id) > 0)
-                $summit = $this->summit_repository->getById(intval($summit_id));
-            if (strtolower($summit_id) === 'current')
-                $summit = Summit::ActiveSummit();
-
-            if (is_null($summit))
-                return $this->notFound('summit not found!');
-
-            $this->schedule_manager->saveSynchId(Member::currentUserID(), $event_id, 'google', '');
-
-            return $this->ok();
-        } catch (EntityValidationException $ex1) {
-            SS_Log::log($ex1, SS_Log::WARN);
-            return $this->validationError($ex1->getMessages());
-        } catch (NotFoundEntityException $ex2) {
-            SS_Log::log($ex2, SS_Log::WARN);
-            return $this->notFound($ex2->getMessage());
-        } catch (Exception $ex) {
-            SS_Log::log($ex, SS_Log::ERR);
-            return $this->serverError();
-        }
     }
 
     /**
@@ -1012,4 +936,5 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi
             return $this->serverError();
         }
     }
+
 }

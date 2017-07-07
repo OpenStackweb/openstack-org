@@ -117,6 +117,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         'ExportFullSchedule',
         'eventDetails',
         'ViewEventRSVP',
+        'ViewSyncCalendar',
     );
 
     static $url_handlers = array
@@ -131,6 +132,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         'full/pdf'                           => 'ExportFullSchedule',
         'full'                               => 'ViewFullSchedule',
         'global-search'                      => 'DoGlobalSearch',
+        'sync-cal'                           => 'ViewSyncCalendar',
     );
 
     public function init()
@@ -168,6 +170,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
     const EventShareByEmailTokenKey = 'SummitAppEventPageShareEmail.Token';
     const EventShareByEmailCountKey = 'SummitAppEventPageShareEmail.Count';
 
+
     /**
      * @param SS_HTTPRequest $request
      * @return HTMLText|SS_HTTPResponse|void
@@ -189,6 +192,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         Requirements::block("summit/css/schedule-grid.css");
         Requirements::block("summit/css/schedule-grid.css");
         Requirements::css("summit/css/summitapp-event.css");
+        Requirements::css('themes/openstack/css/validation.errors.css');
         Requirements::javascript("summit/javascript/schedule/event-detail-page.js");
 
 
@@ -230,6 +234,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         Requirements::block("summit/css/schedule-grid.css");
         Requirements::css("summit/css/summitapp-event.css");
         Requirements::css("summit/css/summitapp-event-rsvp.css");
+        Requirements::css('themes/openstack/css/validation.errors.css');
         Requirements::javascript("summit/javascript/schedule/event-detail-page.js");
         $mobile_detect = new Mobile_Detect();
         $event         = $this->getSummitEntity($request);
@@ -246,11 +251,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
             return $this->redirect('Security/login?BackURL='.$event->getRSVPURL(false));
         }
 
-        if(!Member::currentUser()->isAttendee($event->SummitID)){
-            return $this->redirect('profile/attendeeInfoRegistration');
-        }
-
-        $has_rsvp_submission = Member::currentUser()->getSummitAttendee($event->SummitID)->hasRSVPSubmission($event->getIdentifier());
+        $has_rsvp_submission = Member::currentUser()->hasRSVPSubmission($event->getIdentifier());
 
         if(!$mobile_detect->isMobile() && $has_rsvp_submission)
         {
@@ -335,12 +336,11 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
     {
         $event          = $this->event_repository->getById($event_id);
         $rsvp_template  = $event->RSVPTemplate();
-        $attendee       = Member::currentUser()->getSummitAttendee($this->Summit()->ID);
+        $member         = Member::currentUser();
         $rsvp           = null;
-        if ($attendee) {
-            $rsvp = $this->rsvp_repository->getByEventAndAttendee($event_id, $attendee->ID);
+        if ($member) {
+            $rsvp = $this->rsvp_repository->getByEventAndMember($event_id, $member->ID);
         }
-
         $builder        = new RSVPTemplateUIBuilder();
         return $builder->build($rsvp_template, $rsvp, $event);
     }
@@ -361,11 +361,8 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
             return $this->redirect('Security/login?BackURL='.$this->Link('mine'));
         }
 
-        if(!$member->isAttendee($this->Summit()->ID)){
-            return $this->redirect($this->Link());
-        }
 
-        $my_schedule = $member->getSummitAttendee($this->Summit()->ID)->Schedule()->sort(array('StartDate'=>'ASC','Location.Name' => 'ASC'));
+        $my_schedule = $member->Schedule()->sort(array('StartDate'=>'ASC','Location.Name' => 'ASC'));
 
         return $this->renderWith(
             ['SummitAppMySchedulePage', 'SummitPage', 'Page'],
@@ -394,37 +391,79 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
             ]);
     }
 
+    /**
+     * @param SS_HTTPRequest $request
+     * @return HTMLText|SS_HTTPResponse|void
+     */
+    public function ViewSyncCalendar(SS_HTTPRequest $request)
+    {
+
+        $member    = Member::currentUser();
+        $goback    = $request->getHeader('Referer') && trim($request->getHeader('Referer'),'/') == trim(Director::absoluteURL($this->Link()),'/')? '1':'';
+
+        if (is_null($this->Summit()))
+            return $this->httpError(404, 'Sorry, summit not found');
+
+        if(is_null($member)){
+            return $this->redirect('Security/login?BackURL='.$this->Link('sync-cal'));
+        }
+
+        // if there is already a calenday sync info, redirectBack
+        if($member->existCalendarSyncInfoForSummit($this->Summit()->getIdentifier())){
+            return $this->redirect($this->Summit()->getScheduleLink());
+        }
+
+        Requirements::css('themes/openstack/bower_assets/sweetalert2/dist/sweetalert2.min.css');
+        Requirements::javascript('themes/openstack/bower_assets/sweetalert2/dist/sweetalert2.min.js');
+
+        $error_msg = $request->getVar('error_msg');
+        if ($error_msg) {
+            Requirements::customScript(
+                "swal('Oops...', 'Calendar synchronization was not possible due to: " . $error_msg ."', 'error');"
+            );
+        }
+
+        return $this->renderWith(
+            ['SummitAppSchedPage_sync_calendar', 'SummitPage', 'Page'],
+            [
+                'Member' => $member,
+                'Summit'   => $this->Summit(),
+                'goback'   => $goback
+            ]);
+    }
+
     public function ExportMySchedule()
     {
-        $member = Member::currentUser();
-        $base = Director::protocolAndHost();
-        $show_desc = $this->getRequest()->getVar('show_desc') ? $this->getRequest()->getVar('show_desc') : false;
-
+        $member     = Member::currentUser();
+        $base       = Director::protocolAndHost();
+        $show_desc  = $this->getRequest()->getVar('show_desc') ? $this->getRequest()->getVar('show_desc') : false;
 
         if (is_null($this->Summit())) return $this->httpError(404, 'Sorry, summit not found');
 
-        if(is_null($member) || !$member->isAttendee($this->Summit()->ID)) return $this->httpError(401, 'You need to login to access your schedule.');
+        if(is_null($member) ) return $this->httpError(401, 'You need to login to access your schedule.');
 
-        $my_schedule = $member->getSummitAttendee($this->Summit()->ID)->Schedule()->sort(array('StartDate'=>'ASC','Location.Name' => 'ASC'));
+        $my_schedule  = $member->getScheduleBySummit($this->Summit()->ID, ['SummitEvent.StartDate'=>'ASC', 'Location.Name' => 'ASC']);
         $day_schedule = new ArrayList();
+
         foreach ($my_schedule as $event) {
             $day_label = $event->getDayLabel();
             if ($day_array = $day_schedule->find('Group',$day_label)) {
                 $day_array->Events->push($event);
             } else {
-                $day_array = new ArrayData(array('Group' => $day_label, 'Events' => new ArrayList()));
+                $day_array = new ArrayData(['Group' => $day_label, 'Events' => new ArrayList()]);
                 $day_array->Events->push($event);
                 $day_schedule->push($day_array);
             }
         }
 
         $html_inner = $this->renderWith(
-            array('SummitAppMySchedulePage_pdf'),
-            array(
-                'Schedule' => $day_schedule,
-                'Summit' => $this->Summit(),
+            ['SummitAppMySchedulePage_pdf'],
+            [
+                'Schedule'        => $day_schedule,
+                'Summit'          => $this->Summit(),
                 'ShowDescription' => $show_desc,
-                'Heading' => 'My Schedule'));
+                'Heading'         => 'My Schedule'
+            ]);
 
         $css = @file_get_contents($base . "/summit/css/summitapp-myschedule-pdf.css");
 
@@ -444,13 +483,13 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
             ob_end_clean();
             $html2pdf->Output($file, "D");
         } catch (HTML2PDF_exception $e) {
-            $message = array(
+            $message = [
                 'errno' => '',
                 'errstr' => $e->__toString(),
                 'errfile' => 'SummitAppSchedPage.php',
                 'errline' => '',
                 'errcontext' => ''
-            );
+            ];
             SS_Log::log($message, SS_Log::ERR);
             $this->httpError(404, 'There was an error on PDF generation!');
         }
@@ -487,7 +526,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
             if ($group_array = $events->find('Group',$group_label)) {
                 $group_array->Events->push($event);
             } else {
-                $group_array = new ArrayData(array('Group' => $group_label, 'Events' => new ArrayList()));
+                $group_array = new ArrayData(['Group' => $group_label, 'Events' => new ArrayList()]);
                 $group_array->Events->push($event);
                 $events->push($group_array);
             }
@@ -497,11 +536,13 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
             $events->sort('Group');
 
         $html_inner = $this->renderWith(
-            array('SummitAppMySchedulePage_pdf'),
-            array(  'Schedule' => $events,
-                    'Summit' => $this->Summit(),
-                    'ShowDescription' => $show_desc,
-                    'Heading' => 'Full Schedule by '.$sort));
+            ['SummitAppMySchedulePage_pdf'],
+            [
+                'Schedule' => $events,
+                'Summit' => $this->Summit(),
+                'ShowDescription' => $show_desc,
+                'Heading' => 'Full Schedule by '.$sort
+            ]);
 
         $css = @file_get_contents($base . "/summit/css/summitapp-myschedule-pdf.css");
 
@@ -687,10 +728,4 @@ APP_LINKS;
         return $this->getViewer('index')->process($this);
     }
 
-    /**
-     * @return string
-     */
-    public function getGoogleCalendarClientID() {
-        return GAPI_CLIENT;
-    }
 }

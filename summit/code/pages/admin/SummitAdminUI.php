@@ -146,6 +146,8 @@ final class SummitAdminUI extends DataExtension
         $f->addFieldToTab('Root.Main', new TextField('ComingSoonBtnText', 'Coming Soon Btn Text'));
         $f->addFieldToTab('Root.Main', new TextField('ExternalEventId', 'Eventbrite Event Id'));
 
+        $f->addFieldsToTab("Root.ExternalCalendarSync", new TextField("CalendarSyncName", "External Calendar Display Name"));
+        $f->addFieldsToTab("Root.ExternalCalendarSync", new TextareaField("CalendarSyncDescription", "External Calendar Description"));
         if ($this->owner->ID > 0) {
             $summit_id = $this->owner->ID;
             // tracks

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2015 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,6 +11,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+
+use GuzzleHttp\Client;
+
+/**
+ * Class EventbriteRestApi
+ */
 final class EventbriteRestApi implements IEventbriteRestApi
 {
     const BaseUrl = 'https://www.eventbriteapi.com/v3';
@@ -35,7 +40,7 @@ final class EventbriteRestApi implements IEventbriteRestApi
     public function getEntity($api_url, array $params)
     {
         if(strstr($api_url, EventbriteRestApi::BaseUrl) === false) throw new Exception('invalid base url!');
-        $client   = new GuzzleHttp\Client();
+        $client   = new Client();
 
         $query = array
         (
@@ -53,10 +58,13 @@ final class EventbriteRestApi implements IEventbriteRestApi
             )
         );
 
-        if($response->getStatusCode() !== 200) throw new Exception('invalid status code!');
-        $content_type = $response->getHeader('content-type');
-        if(empty($content_type)) throw new Exception('invalid content type!');
-        if($content_type !== 'application/json') throw new Exception('invalid content type!');
+        if($response->getStatusCode() !== 200)
+            throw new Exception('invalid status code!');
+        $content_type = $response->getHeaderLine('content-type');
+        if(empty($content_type))
+            throw new Exception('invalid content type!');
+        if($content_type !== 'application/json')
+            throw new Exception('invalid content type!');
 
         $json = $response->getBody()->getContents();
         return json_decode($json, true);

@@ -4,11 +4,10 @@ import {
     SET_FILTERS,
     UPDATE_EVENT,
     DEFAULT_VIEWS,
-    CALENDAR_SYNC,
     TOGGLE_FILTERS,
     RECEIVE_EVENTS,
-    BULK_SYNC_TOGGLE_ALL,
-    BULK_SYNC_TOGGLE_EVENT,
+    UNSYNC_CALENDAR,
+    CALENDAR_SYNCD
 } from '../actions'
 
 import Filter from './tools/filter'
@@ -25,6 +24,7 @@ const DEFAULT_STATE = {
         visible: true,
         expanded: false,
         allowedTracks: [],
+        calSync: false,
     },
     bulk: [],
     events: [],
@@ -51,9 +51,6 @@ const ScheduleReducer = (state = DEFAULT_STATE, action) => {
                 [view.type]: view.value
             }, FILTER_URL_EXCLUDE)
 
-            // Reset bulk sync status.
-            updateBulkSyncCheck(false)
-            clearEventSyncChecks()
 
             return { ...state, view, filters, events: [], bulk: [] }
 
@@ -96,8 +93,12 @@ const ScheduleReducer = (state = DEFAULT_STATE, action) => {
                 ? state.filters.expanded
                 : payload.expanded
 
+            var calSync = payload.calSync == undefined
+                ? state.filters.calSync
+                : payload.calSync
+
             // Build the new filter object with allowed tracks data.
-            var filters = { ...state.filters, values, expanded,
+            var filters = { ...state.filters, values, expanded, calSync,
                 allowedTracks: getAllowedTracks(values),
             }
 
@@ -108,11 +109,6 @@ const ScheduleReducer = (state = DEFAULT_STATE, action) => {
                 })
                 filters.values.tracks = tracks.length ? tracks : null
             }
-
-            // Reset bulk sync status.
-            updateBulkSyncCheck(false)
-            toggleEventSyncChecks(values.going)
-            clearEventSyncChecks()
 
             // Write filter values to URL.
             setUrlParams(filters.values, FILTER_URL_EXCLUDE)
@@ -132,75 +128,16 @@ const ScheduleReducer = (state = DEFAULT_STATE, action) => {
                 }
             }
 
-
-        case CALENDAR_SYNC:
-            var { updated } = payload
-
-            if (updated.length) {
-                updateBulkSyncCheck(false)
-            }
-
-            var events = state.events
-            var bulk = [ ...state.bulk ]
-
-            updated.forEach(eventData => {
-                // Update event's gcal id.
-                const mutator = event => ({ ...event,
-                    gcal_id: eventData.gcal_id
-                })
-                // Replace old event.
-                events = updateEvent(eventData.id, mutator, events)
-                // Remove event from bulk.
-                bulk.splice(bulk.indexOf(eventData.id), 1)
-                // Unckeck event sync check.
-                updateEventsSyncChecks([eventData.id], false)
-            })
-
-            return { ...state, events, bulk }
-
-
-        case BULK_SYNC_TOGGLE_ALL:
-            var { checked } = payload
-            var bulk = []
-
-            clearEventSyncChecks()
-            updateBulkSyncCheck(checked)
-
-            if (checked) {
-                bulk = getVisibleEvents(state).map(event => event.id)
-                updateEventsSyncChecks(bulk, true)
-            }
-
-            // DEBUG
-            // console.log(bulk.map(event => event.title))
-
-            return { ...state, bulk }
-
-
-        case BULK_SYNC_TOGGLE_EVENT:
-            var { event, checked } = payload
-            var bulk = [ ...state.bulk ]
-            var index = bulk.indexOf(event.id)
-
-            if (checked) {
-                // Add event if not exists.
-                if (bulk.indexOf(event.id) < 0) {
-                    bulk.push(event.id)
+        case UNSYNC_CALENDAR:
+            return { ...state,
+                filters: { ...state.filters,
+                    calSync: false
                 }
-            } else if (index >= 0) {
-                // Remove event if exists.
-                bulk.splice(index, 1)
-                updateBulkSyncCheck(false)
             }
 
-            updateEventsSyncChecks([event.id], checked)
+        case CALENDAR_SYNCD:
+            window.location = ScheduleProps.summit.schedule_link;
 
-            // DEBUG
-            // console.log(state.events.filter(event => {
-            //     return bulk.indexOf(event.id) >= 0
-            // }).map(event => event.title))
-
-            return { ...state, bulk }
     }
 
     return state
@@ -244,24 +181,6 @@ const setUrlParams = (params, exclude = []) => {
     })
 
     window.location.hash = $(window).url_fragment('serialize');
-}
-
-const updateBulkSyncCheck = checked => {
-    $('#chk_select_all').prop('checked', checked);
-}
-
-const updateEventsSyncChecks = (eventIds, checked) => {
-    eventIds.forEach(eventId => {updateEventsSyncChecks
-        $(`#event_${eventId} .select-event-chk`).prop('checked', checked);
-    })
-}
-
-const clearEventSyncChecks = () => {
-    $(".select-event-chk").prop('checked', false);
-}
-
-const toggleEventSyncChecks = visible => {
-    $('#events-container .synch-container')[visible ? 'show' : 'hide']();
 }
 
 export default ScheduleReducer

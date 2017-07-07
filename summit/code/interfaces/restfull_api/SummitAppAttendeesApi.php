@@ -138,7 +138,7 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
                     'ticket_bought' => $attendee->getBoughtDate(),
                     'checked_in'    => $attendee->SummitHallCheckedIn,
                     'link'          => 'summit-admin/'.$summit_id.'/attendees/'.$attendee->ID,
-                    'schedule'      => $attendee->Schedule()->toNestedArray()
+                    'schedule'      => $attendee->Member()->Schedule()->toNestedArray()
                 ];
             }
 
@@ -286,7 +286,7 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
             if(is_null($attendee)) throw new NotFoundEntityException('SummitAttendee', sprintf(' id %s', $attendee_id));
 
             $events_array = array();
-            $events = $attendee->Schedule()->sort('StartDate');
+            $events = $attendee->Member()->Schedule()->sort('StartDate');
             foreach ($events as $event) {
                 $event_start_unix = strtotime($event->getStartDateUTC());
                 $event_end_unix = strtotime($event->getEndDateUTC());

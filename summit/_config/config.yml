@@ -7,7 +7,6 @@ Member:
     - PresentationMemberExtension
     - MemberTokenProvider
     - AttendeeMember
-    - SummitMemberInteractor
 EditProfilePage_Controller:
   extensions:
     - EditProfilePageSummitAttendeeExtension
@@ -94,6 +93,9 @@ SummitVenueFloor:
   extensions:
     - SummitEntity
 SummitWIFIConnection:
+  extensions:
+      - SummitEntity
+CalendarSyncInfo:
   extensions:
       - SummitEntity
 Injector:

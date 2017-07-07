@@ -124,15 +124,11 @@ function renderEvent(event){
         '.add_button' : function(a){ return (this.isScheduledEvent) ? 'Remove From My Schedule' : 'Add to My Schedule';},
         '.add_button@data-event_id' : 'ID',
         '.add_button@class+' : function(a){
-            if(this.isAttendee) {
                 if (this.isScheduledEvent) {
                     return 'remove_from_schedule btn-danger';
                 } else {
                     return 'add_to_schedule btn-success';
                 }
-            } else {
-                return 'hidden';
-            }
         },
         '.link_button@href' : 'EventLink',
         'div.event_details_date'   : function(a){ return 'Date: '+this.Date+' ('+this.StartTime+' - '+this.EndTime+')';},
