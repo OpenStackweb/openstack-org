@@ -25,7 +25,6 @@ final class ScheduleEventSearchViewModelMapper implements IViewModelMapper
         $summit         = $params[1];
         $events         = [];
         $current_member = Member::currentUser();
-        $is_attendee    = is_null($current_member) ? false : $current_member->isAttendee($summit->ID);
 
         foreach ($search_results as $e) {
             $entry = array
@@ -44,7 +43,7 @@ final class ScheduleEventSearchViewModelMapper implements IViewModelMapper
                 'sponsors_id' => array(),
                 'category_group_ids' => array(),
                 'tags_id' => array(),
-                'own' => is_null($current_member) || !$is_attendee ? false : $current_member->isOnMySchedule($e->ID),
+                'own' => is_null($current_member) ? false : $current_member->isOnMySchedule($e->ID),
                 'favorite' => false,
                 'show' => true,
                 'attachment_url' => '',

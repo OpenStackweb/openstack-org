@@ -6,7 +6,7 @@
                     <h1 style="text-align:left;">Search Result</h1>
                 </div>
                 <div class="col-xs-6">
-                    <schedule-global-filter search_url="{$Top.Link(global-search)}" value="{$SearchTerm}" clear_url="{$Top.Link}"></schedule-global-filter>
+                    <div id="os-schedule-global-search" data-search-url="{$Top.Link(global-search)}" data-schedule-url="{$Summit.getScheduleLink.JS}" data-search-value="{$SearchTerm}"></div>
                 </div>
             </div>
         </div>
@@ -192,6 +192,7 @@
                         summit.events.push(event_{$ID});
                         summit.dic_events[{$ID}] = event_{$ID};
                     <% end_loop %>
+
                 </script>
 
                 <event-list summit="{ summit }" default_event_color={'#757575'} search_url="{$Top.Link(global-search)}" base_url="{$Top.Link}" ></event-list>
@@ -243,3 +244,4 @@
     <% end_if %>
 </div>
 $ModuleJS('event-list')
+$ModuleJS('global-search')

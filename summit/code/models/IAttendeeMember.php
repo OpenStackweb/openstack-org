@@ -37,8 +37,125 @@ interface IAttendeeMember extends IEntity
     public function getUpcomingSummitAttendee();
 
     /**
-     * @param int $event_id
-     * @return string
+     * @return ISummitEvent[]
      */
-    public function getGoogleCalEventId($event_id);
+    public function getSchedule();
+
+    /**
+     * @param ISummitEvent $summit_event
+     * @return void
+     */
+    public function addToSchedule(ISummitEvent $summit_event);
+
+    /**
+     * @param ISummitEvent $summit_event
+     * @return void
+     */
+    public function removeFromSchedule(ISummitEvent $summit_event);
+
+    /**
+     * @param int $event_id
+     * @return bool
+     */
+    public function isOnMySchedule($event_id);
+
+    /**
+     * @param int $summit_id
+     * @return int[]
+     */
+    public function getScheduleEventIds($summit_id);
+
+    /**
+     * @param int $summit_id
+     * @param array $sort
+     * @return DataList
+     */
+    public function getScheduleBySummit($summit_id, array $sort = []);
+
+    /**
+     * @return void
+     */
+    public function clearSchedule();
+
+    /**
+     * @return DataList
+     */
+    public function getAllowedSchedule();
+
+    /*
+     * @param int $event_id
+     * @return bool
+     */
+    public function hasRSVPSubmission($event_id);
+
+    /**
+     * @param int $summit_id
+     * @return int[]
+     */
+    public function getFavoritesEventIds($summit_id);
+
+    /**
+     * @param SummitEvent $event
+     */
+    public function removeFromFavorites(SummitEvent $event);
+
+    /**
+     * @param SummitEvent $event
+     */
+    public function addToFavorites(SummitEvent $event);
+
+    /**
+     * @param int $event_id
+     * @return bool
+     */
+    public function isOnFavorites($event_id);
+
+    /**
+     * @param int $summit_id
+     * @param array $sort
+     * @return DataList
+     */
+    public function getFavoritesBySummit($summit_id, array $sort = []);
+
+    /**
+     * @param Summit $summit
+     * @param string $access_token
+     * @param string $refresh_token
+     * @return CalendarSyncInfo
+     * @throws EntityValidationException
+     */
+    public function registerGoogleAuthGrant(Summit $summit, $access_token, $refresh_token);
+
+    /**
+     * @param Summit $summit
+     * @param string $access_token
+     * @param string $refresh_token
+     * @return CalendarSyncInfo
+     * @throws EntityValidationException
+     */
+    public function registerOutlookAuthGrant(Summit $summit, $access_token, $refresh_token);
+
+    /**
+     * @param Summit $summit
+     * @param string $user
+     * @param string $password
+     * @param string $user_ppal_url
+     * @return CalendarSyncInfo
+     * @throws EntityValidationException
+     */
+    public function registerICloudAuthGrant(Summit $summit, $user, $password, $user_ppal_url);
+
+    /**
+     * @param string $provider
+     * @param int $summit_id
+     * @return bool
+     */
+    public function existCalendarSyncInfoForProviderAndSummit($provider, $summit_id);
+
+    /**
+     * @param int $summit_id
+     * @return CalendarSyncInfo|null
+     */
+    public function getCalendarSyncInfoBy($summit_id);
+
 }

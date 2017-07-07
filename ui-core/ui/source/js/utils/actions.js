@@ -24,6 +24,8 @@ export const createAction = type => payload => ({
     payload
 });
 
+export const clearMessage = createAction(CLEAR_MESSAGE);
+export const showMessage = createAction(SHOW_MESSAGE);
 
 const xhrs = {};
 
@@ -140,11 +142,6 @@ export const postRequest = (
         )
 
 };
-
-
-export const clearMessage = createAction(CLEAR_MESSAGE);
-
-export const showMessage = createAction(SHOW_MESSAGE);
 
 export const responseHandler = (dispatch, success, errorHandler) => {
     return (err, res) => {

@@ -24,4 +24,9 @@ interface ISummitLocation extends IEntity
      */
     public function getDescription();
 
+    /**
+     * @return bool
+     */
+    public function hasPublishedEvents();
+
 }

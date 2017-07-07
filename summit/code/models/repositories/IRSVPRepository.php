@@ -16,10 +16,10 @@ interface IRSVPRepository extends IEntityRepository {
 
     /**
      * @param int $event_id
-     * @param int $attendee_id
+     * @param int $member_id
      * @return IRSVP|null
      */
-    public function getByEventAndAttendee($event_id, $attendee_id);
+    public function getByEventAndMember($event_id, $member_id);
 
     /**
      * @param int $event_id

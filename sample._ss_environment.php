@@ -113,7 +113,16 @@ define('REJECTED_PURCHASE_ORDER_EMAIL_SUBJECT','Your OpenStack Sponsorship Packa
 
 // OAUTH 2.0 Client ID to use Google Calendar API
 define('GAPI_CLIENT','');
+define('GAPI_CLIENT_SECRET', '');
+define('GAPI_REDIRECT_URL','http://local.openstack.org/summit-calendar-sync/login-google');
+define('GAPI_SCOPES','email,profile,https://www.googleapis.com/auth/calendar');
+define('GAPI_APPROVAL_PROMPT','force');
+define('GAPI_ACCESS_TYPE','offline');
 
+define('OUTLOOK_APP_PASSWORD','');
+define('OUTLOOK_APP_ID','');
+define('OUTLOOK_REDIRECT_URL','https://local.openstack.org/summit-calendar-sync/login-outlook');
+define('OUTLOOK_SCOPES', 'openid profile offline_access User.Read https://outlook.office.com/calendars.readwrite');
 // APP LINKS
 // http://applinks.org/documentation/
 //ios
@@ -163,6 +172,14 @@ define('COA_UNPROCESSED_EMAIL_ROWS_SUBJECT', '');
 
 // track chair tool
 define('TRACK_CHAIR_TOOL_EMAIL_FROM', '');
+/**
+    use sake dev/tasks/GenerateEncryptionKeyTask to generate Encrypter_Key
+ */
+define('Encrypter_Key', '');
+define('Encrypter_Cipher', 'AES-256-CBC');
+
+//APPLE CALENDAR
+define('CALDAV_BASE_SERVER_URL', 'https://p01-caldav.icloud.com:443');
 
 global $_FILE_TO_URL_MAPPING;
 $_FILE_TO_URL_MAPPING[''] = '';

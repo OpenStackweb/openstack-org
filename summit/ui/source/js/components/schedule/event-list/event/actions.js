@@ -68,9 +68,6 @@ class EventActions extends Component {
         if (['going', 'watch', 'rsvp'].indexOf(type) >= 0 && ! current_user) {
             return this.showLoginAlert()
         }
-        if (['going', 'rsvp'].indexOf(type) >= 0 && ! current_user.is_attendee) {
-            return this.showEventBriteAlert()
-        }
 
         return action.click(this.props)
     }
@@ -87,21 +84,6 @@ class EventActions extends Component {
         }).then(function () {
             const url = encodeURIComponent(window.location.href)
             window.location = "/Security/login?BackURL=" + url
-        })
-    }
-
-    showEventBriteAlert() {
-        swal({
-            title: 'EventBrite Ticket Required',
-            text: "Only attendees can use this function. Enter your Eventbrite order number in My Summit if you are an attendee.",
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Add ticket'
-        }).then(function () {
-            const url = encodeURIComponent(window.location.href)
-            window.location = "/profile/attendeeInfoRegistration?BackURL=" + url
         })
     }
 }
@@ -158,7 +140,7 @@ const ActionList = [
             event.going
             && event.has_rsvp
             && ! event.rsvp_external
-            && user && user.is_attendee
+            && user
         ),
     },
     {
@@ -188,7 +170,7 @@ const ActionList = [
                     && event.going
                 )
             )
-            && user && user.is_attendee
+            && user
         ),
     },
     {
@@ -198,7 +180,7 @@ const ActionList = [
         click: ({ addEventToFavorites, event }) => addEventToFavorites(event),
         enabled: () => true,
         visible: (event, user) => (
-            ! event.favorite
+            ! event.favorite && event.to_record
         ),
     },
     {
@@ -208,7 +190,7 @@ const ActionList = [
         click: ({ removeEventFromFavorites, event }) => removeEventFromFavorites(event),
         enabled: () => true,
         visible: (event, user) => (
-            event.favorite
+            event.favorite && event.to_record
         ),
     },
     {

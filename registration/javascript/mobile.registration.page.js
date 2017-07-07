@@ -38,6 +38,20 @@ jQuery(document).ready(function($) {
                     }, 2000);
                 }
             },
+            errorPlacement: function(error, element) {
+                if($(element).attr('name') == 'g_recaptcha_hidden'){
+                    error.insertAfter($('#g-recaptcha-container'));
+                }
+                if($(element).attr('name') == 'HiddenAffiliations'){
+                    error.insertAfter($(".middleColumn", $('#Affiliations')));
+                }
+                if($(element).attr('name') == 'Gender'){
+                    error.insertAfter($("#Gender"));
+                }
+                else {
+                    error.insertAfter($(element).closest('div.middleColumn'));
+                }
+            },
             ignore: [],
             rules: {
                 FirstName:{required: true,regex:'[\"()=<>]+'},

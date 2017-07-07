@@ -2,6 +2,7 @@
 
     <testsuite name="Default">
         <directory>sitemap/tests</directory>
+        <directory>summit/tests</directory>
     </testsuite>
 
     <listeners>

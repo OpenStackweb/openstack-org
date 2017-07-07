@@ -79,3 +79,6 @@ migrations:
   - NewMarketplaceTypeBookSeedTask
   - AddNewBooksMigration
   - AddMarketPlaceHelpLinksMigration
+  - PermissionModelMigration
+  - AddUniqueIndexMemberScheduleFavorites
+  - AddONDELETECascadeFKOnInheritanceMappingMigration

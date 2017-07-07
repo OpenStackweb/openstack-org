@@ -28,7 +28,7 @@ final class RSVP extends DataObject implements IRSVP
 
     static $has_one = array
     (
-        'SubmittedBy'  => 'SummitAttendee',
+        'SubmittedBy'  => 'Member',
         'Event'        => 'SummitEvent',
     );
 
@@ -50,7 +50,7 @@ final class RSVP extends DataObject implements IRSVP
         'ID'                       => 'ID',
         'SeatType'                 => 'Seat Type',
         'Created'                  => 'Created',
-        'SubmittedBy.Member.Email' => 'SubmittedBy',
+        'SubmittedBy.Email' => 'SubmittedBy',
         'Event.RSVPTemplate.Title' => 'RSVP Template',
     );
 

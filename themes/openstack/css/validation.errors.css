@@ -5,14 +5,14 @@ label.error {
     position: absolute;
     display: inline-block;
     box-shadow: 1px 1px 1px #aaaaaa !important;
-    margin-top: 10px !important;
     color: white !important;
     font-style: italic !important;
     text-transform: capitalize !important;
     z-index: 1000 !important;
+    font-weight: 700;
 }
 
-label.error:before{
+label.error:before {
     content: '';
     width: 0;
     height: 0;
@@ -29,4 +29,17 @@ input.error {
 
 select.error {
     border: 1px solid #c51244 !important;
+}
+
+.form-group{
+    margin-bottom: 10px !important;
+}
+
+#g_recaptcha_hidden-error{
+    position: relative;
+    top: -34px;
+}
+
+.middleColumn{
+    margin-bottom: 10px !important;
 }

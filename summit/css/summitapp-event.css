@@ -327,10 +327,6 @@ a.profile-pic-wrapper {
     background-color: #fff;
 }
 
-.error {
-    color: red;
-}
-
 .col-rsvp{
     padding-top: 5%;
 }
@@ -356,10 +352,10 @@ a.profile-pic-wrapper {
     color: #E5E5E5 !important;
 }
 
-.event-actions{
-    text-align: center;
+.event-actions, .form-actions
+{
+    text-align: center !important;
 }
-
 
 .btn-full-rsvp {
     background-color: red !important;

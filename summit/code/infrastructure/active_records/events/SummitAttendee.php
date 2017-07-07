@@ -25,7 +25,6 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
     private static $has_many = array
     (
         'Tickets' => 'SummitAttendeeTicket',
-        'RSVPs'   => 'RSVP',
     );
 
     private static $defaults = array
@@ -34,22 +33,12 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
 
     private static $many_many = array
     (
-        'Schedule'    => 'SummitEvent',
+
     );
 
     private static $belongs_to = array
     (
 
-    );
-
-    static $many_many_extraFields = array
-    (
-        'Schedule' => array
-        (
-            'IsCheckedIn' => 'Boolean',
-            'GoogleCalEventId' => 'Varchar',
-            'AppleCalEventId' => 'Varchar'
-        ),
     );
 
     private static $has_one = array
@@ -58,12 +47,12 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
         'Summit'     => 'Summit',
     );
 
-    private static $summary_fields = array
-    (
+    private static $summary_fields = [
+
         "Member.Email"        => 'Member',
         'SummitHallCheckedIn' => "Is Checked In",
-        'TicketsCount' => '# Tickets'
-    );
+        'TicketsCount'        => '# Tickets'
+    ];
 
     static $indexes = array
     (
@@ -79,13 +68,6 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
         parent::onBeforeDelete();
         foreach($this->Tickets() as $t)
             $t->delete();
-
-        $schedule = $this->getManyManyComponents('Schedule');
-        $schedule->removeAll();
-
-        foreach ($this->RSVPs() as $rsvp) {
-            $rsvp->delete();
-        }
     }
 
     public function TicketsCount()
@@ -148,80 +130,6 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
     }
 
     /**
-     * @return ISummitEvent[]
-     */
-    public function getSchedule()
-    {
-       return AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'Schedule')->toArray();
-    }
-
-
-    /**
-     * @param int $summit_id
-     * @return int[]
-     */
-    public function getScheduleEventIds($summit_id){
-        $res   = [];
-        $query = DB::query("SELECT SummitEventID 
-FROM SummitAttendee_Schedule 
-INNER JOIN SummitEvent ON SummitEvent.ID = SummitAttendee_Schedule.SummitEventID
-WHERE SummitEvent.SummitID = {$summit_id} AND SummitAttendeeID = ".$this->ID);
-        foreach ($query as $record){
-            $res[] = intval($record['SummitEventID']);
-        }
-        return $res;
-    }
-
-    /**
-     * @param int $event_id
-     * @return bool
-     */
-    public function isScheduled($event_id)
-    {
-        $query = new QueryObject($this);
-        $query->addAndCondition(QueryCriteria::equal('SummitEvent.ID',$event_id));
-        $events = AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'Schedule', $query)->toArray();
-
-        return (count($events) > 0);
-    }
-
-    /**
-     * @param ISummitEvent $summit_event
-     * @return void
-     */
-    public function addToSchedule(ISummitEvent $summit_event)
-    {
-        AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'Schedule')->add
-        (
-            $summit_event,
-            ['IsCheckedIn'=> false]
-        );
-
-        PublisherSubscriberManager::getInstance()->publish(ISummitEntityEvent::AddedToSchedule,
-            [$this->MemberID, $summit_event]);
-    }
-
-    /**
-     * @param ISummitEvent $summit_event
-     * @return void
-     */
-    public function removeFromSchedule(ISummitEvent $summit_event)
-    {
-        AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'Schedule')->remove($summit_event);
-
-        PublisherSubscriberManager::getInstance()->publish(ISummitEntityEvent::RemovedFromSchedule,
-            [$this->MemberID, $summit_event]);
-    }
-
-    /**
-     * @return void
-     */
-    public function clearSchedule()
-    {
-        AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'Schedule')->removeAll();
-    }
-
-    /**
      * @return void
      */
     public function registerSummitHallChecking()
@@ -230,16 +138,6 @@ WHERE SummitEvent.SummitID = {$summit_id} AND SummitAttendeeID = ".$this->ID);
 
        $this->SummitHallCheckedIn      = true;
        $this->SummitHallCheckedInDate =  MySQLDatabase56::nowRfc2822();
-    }
-
-    public function registerCheckInOnEvent(ISummitEvent $summit_event)
-    {
-        AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'Schedule')->remove($summit_event);
-        AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'Schedule')->add
-        (
-            $summit_event,
-            array('IsCheckedIn'=> true)
-        );
     }
 
     public function getCMSFields()
@@ -259,20 +157,6 @@ WHERE SummitEvent.SummitID = {$summit_id} AND SummitAttendeeID = ".$this->ID);
 
         if($this->ID > 0)
         {
-            // schedule
-            $config = GridFieldConfig_RelationEditor::create(50);
-            $config->removeComponentsByType('GridFieldAddNewButton');
-            $config->getComponentByType('GridFieldAddExistingAutocompleter')->setSearchList($this->getAllowedSchedule());
-            $config->addComponent(new GridFieldAjaxRefresh(1000,false));
-            $detailFormFields = new FieldList();
-            $detailFormFields->push(new CheckBoxField(
-                'ManyMany[IsCheckedIn]',
-                'Is Checked In?'
-            ));
-            $config->getComponentByType('GridFieldDetailForm')->setFields($detailFormFields);
-            $gridField = new GridField('Schedule', 'Schedule', $this->Schedule(), $config);
-            $f->addFieldToTab('Root.Schedule', $gridField);
-
             //tickets
 
             $config = GridFieldConfig_RecordEditor::create(10);
@@ -300,13 +184,6 @@ WHERE SummitEvent.SummitID = {$summit_id} AND SummitAttendeeID = ".$this->ID);
             return $valid->error(sprintf('There is already an attendee for member %s on summit %s!', $this->MemberID, $this->SummitID));
         }
         return $valid;
-    }
-
-    public function getAllowedSchedule()
-    {
-        $summit = $this->Summit();
-        if(is_null($summit)) $summit = Summit::get()->byID(intval($_REQUEST['SummitID']));
-        return SummitEvent::get()->filter(array('Published'=> true, 'SummitID' => $summit->ID));
     }
 
     /**
@@ -379,40 +256,6 @@ WHERE SummitEvent.SummitID = {$summit_id} AND SummitAttendeeID = ".$this->ID);
         return $this;
     }
 
-    /**
-     * @param ISummitEvent $event
-     * @return string
-     */
-    public function getGoogleCalEventId(ISummitEvent $event)
-    {
-        $event_extra_fields = $this->Schedule()->getExtraData('SummitEvent',$event->getIdentifier());
-        return $event_extra_fields['GoogleCalEventId'];
-    }
-
-    /**
-     * @param ISummitEvent $event
-     * @param int $google_event_id
-     * @return string
-     */
-    public function setGoogleCalEventId(ISummitEvent $event, $google_event_id)
-    {
-        AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'Schedule')->updateExtraFields
-        (
-            $event,
-            array('GoogleCalEventId' => $google_event_id)
-        );
-    }
-
-    /*
-     * @param int $event_id
-     * @return bool
-     */
-    public function hasRSVPSubmission($event_id)
-    {
-        $event = SummitEvent::get()->byID($event_id);
-        if(!$event) return false;
-        return $event->RSVPSubmissions()->filter('SubmittedByID', $this->ID)->count() > 0;
-    }
 
     /**
      * @return string

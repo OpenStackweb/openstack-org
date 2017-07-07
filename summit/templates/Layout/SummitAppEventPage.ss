@@ -10,7 +10,7 @@
                 <% end_if %>
             </div>
             <div class="col-sm-6 col-xs-12">
-                <schedule-global-filter search_url="{$Top.Link(global-search)}"></schedule-global-filter>
+                <div id="os-schedule-global-search" data-search-url="{$Top.Link(global-search)}" data-schedule-url="" data-search-value=""></div>
             </div>
         </div>
         <hr/>
@@ -204,5 +204,6 @@
 <feedback-form-comments current_user="{ current_user }" event="{ event }" limit="5"></feedback-form-comments>
 
 $ModuleJS('event-detail')
+$ModuleJS('global-search')
 <div id="fb-root"></div>
 

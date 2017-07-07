@@ -24,7 +24,7 @@ final class ScheduleEventViewModelMapper implements IViewModelMapper
         $summit         = $params[1];
         $events         = [];
         $current_member = Member::currentUser();
-        $is_attendee    = is_null($current_member) ? false : $current_member->isAttendee($summit->ID);
+
         foreach ($schedule as $e) {
 
             $entry = [
@@ -48,9 +48,8 @@ final class ScheduleEventViewModelMapper implements IViewModelMapper
                 'sponsors_id'        => [],
                 'category_group_ids' => [],
                 'tags_id'            => [],
-                'going'                    => is_null($current_member) || !$is_attendee ? false : $current_member->isOnMySchedule($e->ID),
-                'favorite'                 => is_null($current_member)? false : $current_member->isOnFavorites($e->ID),
-                'gcal_id'                  => is_null($current_member) || !$is_attendee ? false : $current_member->getGoogleCalEventId($e->ID),
+                'going'                    => is_null($current_member) ? false : $current_member->isOnMySchedule($e->ID),
+                'favorite'                 => is_null($current_member) ? false : $current_member->isOnFavorites($e->ID),
                 'show'                     => true,
                 'headcount'                => intval($e->HeadCount),
                 'summit_id'                => intval($summit->ID),

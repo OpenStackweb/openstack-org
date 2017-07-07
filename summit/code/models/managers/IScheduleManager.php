@@ -43,15 +43,6 @@ interface IScheduleManager
     public function addFeedback(array $data);
 
     /**
-     * @param int $member_id
-     * @param int $event_id
-     * @param string $target
-     * @param int $cal_event_id
-     * @return int
-     */
-    public function saveSynchId($member_id, $event_id, $target = 'google' , $cal_event_id);
-
-    /**
      * @param array $data
      * @param IMessageSenderService $sender_service
      * @return RSVP

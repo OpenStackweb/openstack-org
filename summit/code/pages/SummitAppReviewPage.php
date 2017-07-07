@@ -46,11 +46,7 @@ class SummitAppReviewPage_Controller extends SummitPage_Controller
         if (is_null($this->Summit())) return $this->httpError(404, 'Sorry, summit not found');
         if(is_null($member)) return $this->httpError(401, 'You need to login to access your schedule.');
 
-        $is_attendee = $member->isAttendee($this->Summit()->ID);
-        $my_schedule = '';
-
-        if ($is_attendee)
-            $my_schedule = $member->getSummitAttendee($this->Summit()->ID)->Schedule()->sort(array('StartDate'=>'ASC','Location.Name' => 'ASC'));
+        $my_schedule = $member->getScheduleBySummit($this->Summit()->ID, ['StartDate'=>'ASC','Location.Name' => 'ASC']);
 
         return $this->renderWith(
             array('SummitAppReviewPage', 'SummitPage', 'Page'),

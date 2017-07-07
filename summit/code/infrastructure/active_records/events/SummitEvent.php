@@ -51,7 +51,7 @@ class SummitEvent extends DataObject implements ISummitEvent
 
     private static $belongs_many_many = array
     (
-        'Attendees'   => 'SummitAttendee',
+        'Attendees'   => 'Member',
     );
 
     private static $has_one = array
@@ -756,9 +756,7 @@ SQL;
         $current_user = Member::currentUser();
         if (!$current_user) return false;
 
-        $attendee = $current_user->getSummitAttendee($this->Summit->getIdentifier());
-
-        return $attendee->isScheduled($this->getIdentifier());
+        return $current_user->isOnMySchedule($this->getIdentifier());
     }
 
     /**
@@ -791,7 +789,7 @@ SQL;
      */
     public function AttendeesScheduleCount()
     {
-        $res = DB::query("SELECT COUNT(ID) AS QTY FROM SummitAttendee_Schedule WHERE SummitEventID = {$this->ID};")->first();
+        $res = DB::query("SELECT COUNT(ID) AS QTY FROM Member_Schedule WHERE SummitEventID = {$this->ID};")->first();
         return intval($res['QTY']);
     }
 

@@ -147,7 +147,7 @@ LEFT JOIN PresentationSpeakerSummitAssistanceConfirmationRequest AS SA ON PS.Pre
 INNER JOIN SummitAbstractLocation AS L ON L.ID = E.LocationID
 LEFT JOIN SummitVenueRoom AS R ON R.ID = L.ID
 LEFT JOIN SummitAbstractLocation AS L2 ON L2.ID = R.VenueID
-LEFT JOIN SummitAttendee_Schedule AS A ON A.SummitEventID = E.ID
+LEFT JOIN Member_Schedule AS A ON A.SummitEventID = E.ID
 LEFT JOIN PresentationSpeaker AS S ON S.ID = PS.PresentationSpeakerID
 WHERE E.Published = 1 AND DATE(E.StartDate) = '{$date}' AND E.SummitID = {$summit_id}
 SQL;
@@ -173,8 +173,8 @@ SQL;
     public function getAttendeesWithCalendar($summit_id)
     {
         $query = <<<SQL
-SELECT COUNT(DISTINCT(ASched.SummitAttendeeID)) AS calcount
-FROM SummitAttendee_Schedule AS ASched
+SELECT COUNT(DISTINCT(ASched.MemberID)) AS calcount
+FROM Member_Schedule AS ASched
 LEFT JOIN SummitEvent AS E ON E.Id = ASched.SummitEventID
 WHERE E.SummitID = {$summit_id}
 SQL;

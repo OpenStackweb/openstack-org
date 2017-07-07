@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-
+use GuzzleHttp\Client;
 /**
  * Class GoogleGeoLocationService
  * https://developers.google.com/maps/documentation/geocoding/
@@ -66,12 +66,12 @@ final class GoogleGeoCodingService implements IGeoCodingService
             $private_key = GOOGLE_GEO_CODING_PRIVATE_KEY;
         }
 
-        $this->api_key = $api_key;
-        $this->client_id = $client_id;
+        $this->api_key     = $api_key;
+        $this->client_id   = $client_id;
         $this->private_key = $private_key;
-        $this->repository = $repository;
-        $this->tx_manager = $tx_manager;
-        $this->factory = $factory;
+        $this->repository  = $repository;
+        $this->tx_manager  = $tx_manager;
+        $this->factory     = $factory;
     }
 
     // Encode a string to URL-safe base64
@@ -158,10 +158,10 @@ final class GoogleGeoCodingService implements IGeoCodingService
             $response = null;
 
             try {
-                $client = new \GuzzleHttp\Client();
+                $client   = new  Client();
                 $response = json_decode($client->get(self::ApiHost . self::ApiBaseUrl, [
                     'query' => $query
-                ])->getBody());
+                ])->getBody()->getContents());
                 $client = null;
             } catch (Exception $ex) {
                 SS_Log::log($ex, SS_Log::ERR);

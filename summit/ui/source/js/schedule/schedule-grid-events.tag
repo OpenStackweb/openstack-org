@@ -37,70 +37,6 @@
 
         this.on('mount', function(){
 
-            $(document).on('click', '#link_google_sync', function() {
-
-                console.log('clicked link_google_sync');
-                var selected_checkboxes  = $('.select-event-chk:checkbox:checked');
-                if(selected_checkboxes.length == 0){
-                    sweetAlert("Oops...", "you must select at least one event!", "error");
-                    return true;
-                }
-
-                var selected_events = [];
-                selected_checkboxes.each(function(){
-                    var event_id = $(this).data('event-id');
-                    var event    = self.dic_events[event_id];
-                    if(event.gcal_id != '' && event.gcal_id != null){
-                        sweetAlert("Oops...", "you selected one or more events that are already synched!", "error");
-                        return true;
-                    }
-                    event.location = self.getSummitLocation(event);
-                    selected_events.push(event);
-                });
-
-                if(!GoogleCalendarApi.isAuthorized()){
-                    GoogleCalendarApi.doUserAuth(function(){
-                        GoogleCalendarApi.addEvents(selected_events, self.addEventCallback);
-                        selected_checkboxes.prop( "checked", false );
-                    });
-                    return true;
-                }
-                GoogleCalendarApi.addEvents(selected_events, self.addEventCallback);
-                selected_checkboxes.prop( "checked", false );
-                return true;
-            });
-
-             $(document).on('click', '#link_google_unsync', function() {
-                console.log('clicked link_google_unsync');
-                var selected_checkboxes  = $('.select-event-chk:checkbox:checked');
-                if(selected_checkboxes.length == 0){
-                    sweetAlert("Oops...", "you must select at least one event!", "error");
-                    return true;
-                }
-
-                var selected_events = [];
-                selected_checkboxes.each(function(){
-                    var event_id = $(this).data('event-id');
-                    var event    = self.dic_events[event_id];
-                    if(event.gcal_id == '' || event.gcal_id == null){
-                        sweetAlert("Oops...", "you selected one or more events that are not synched!", "error");
-                        return true;
-                    }
-                    selected_events.push(event);
-                });
-
-                if(!GoogleCalendarApi.isAuthorized()){
-                    GoogleCalendarApi.doUserAuth(function(){
-                        GoogleCalendarApi.removeEvents(selected_events, self.removeEventCallback);
-                         selected_checkboxes.prop( "checked", false );
-                    });
-                    return true;
-                }
-                GoogleCalendarApi.removeEvents(selected_events, self.removeEventCallback);
-                selected_checkboxes.prop( "checked", false );
-                return true;
-            });
-
             $(document).on('click', '#link_export_ics', function() {
                 console.log('clicked link_export_ics');
                 var selected_checkboxes  = $('.select-event-chk:checkbox:checked');
@@ -153,22 +89,7 @@
                     })
 
                     return false;
-                } else if ($.inArray(type,['going','rsvp']) !== -1 && !self.summit.current_user.is_attendee) {
-                    swal({
-                        title: 'EventBrite Ticket Required',
-                        text: "Only attendees can use this function. Enter your Eventbrite order number in My Summit if you are an attendee.",
-                        type: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Add ticket'
-                    }).then(function () {
-                        window.location = "/profile/attendeeInfoRegistration?BackURL="+self.summit.schedule_link
-                    })
-
-                    return false;
                 }
-
                 switch(type){
                     case 'going':
                          self.schedule_api.addEvent2MySchedule(self.summit.id, event.id);
@@ -246,14 +167,6 @@
                     return false;
                 }
 
-                if($(e.target).is('.synch-container, .select-event-chk')){
-                    return true;
-                }
-
-                if($(e.target).is('.synch-container, .sync-icon')){
-                    return false;
-                }
-
                 if($(e.target).hasClass('search-link')) return true;
 
                 var event_id  = $(e.currentTarget).attr('data-event-id');
@@ -287,61 +200,6 @@
                 return false;
             });
 
-            $(document).off("click",".sync-icon").on("click",".sync-icon", function(e){
-                e.preventDefault();
-                e.stopPropagation();
-
-                var event_id        = $(e.currentTarget).parents('.main-event-content').attr('data-event-id');
-                var event           = self.dic_events[event_id];
-                event.location      = self.getSummitLocation(event);
-                var selected_events = [event];
-
-                if($(this).hasClass('icon-sync-event')){
-                    // check auth
-                    if(!GoogleCalendarApi.isAuthorized()){
-                            GoogleCalendarApi.doUserAuth(function(){
-                                GoogleCalendarApi.removeEvents(selected_events, self.removeEventCallback);
-                            });
-                            return false;
-                    }
-                    GoogleCalendarApi.removeEvents(selected_events, self.removeEventCallback);
-                }
-                if($(this).hasClass('icon-unsync-event')){
-                    // check auth
-                    if(!GoogleCalendarApi.isAuthorized()){
-                        GoogleCalendarApi.doUserAuth(function(){
-                            GoogleCalendarApi.addEvents(selected_events, self.addEventCallback);
-                        });
-                        return false;
-                     }
-                     GoogleCalendarApi.addEvents(selected_events, self.addEventCallback);
-                }
-                return false;
-            });
-        });
-
-        addEventCallback(response, event){
-            event.gcal_id = response.result.id;
-            console.log(" event.id "+event.id+" cal id "+response.result.id);
-            self.schedule_api.googleCalSynch(event);
-        }
-
-        removeEventCallback(response, event){
-            self.schedule_api.googleCalUnSynch(event);
-        }
-
-        this.schedule_api.on('googleEventSynchSaved', function(event){
-            var container    = $('.icon-event-synched[data-event-id="'+event.id+'"]');
-            var synch_button = $('.sync-icon', container);
-            if (synch_button.hasClass('icon-unsync-event')) {
-                synch_button.removeClass('icon-unsync-event').addClass('icon-sync-event');
-                synch_button.attr('title','Syncronized');
-                return;
-            }
-            event.gcal_id = '';
-            synch_button.removeClass('icon-sync-event').addClass('icon-unsync-event');
-            synch_button.attr('title','Unsyncronized');
-        });
 
         this.schedule_api.on('beforeEventsRetrieved', function(){
             $('#events-container').ajax_loader();
@@ -383,13 +241,6 @@
             '</ul>'
             ;
 
-            var cal_synch_container = self.summit.current_user !== null ? '<div style="display:none" class="col-md-2 synch-container">'+
-            '<span class="icon-event-synched">'+
-            '<i class="fa fa-refresh sync-icon" title="" style="cursor:pointer" aria-hidden="true"></i>&nbsp;Sync&nbsp;'+
-            '</span>'+
-            '<input type="checkbox" title="select event" class="select-event-chk"/>'+
-            '</div>' : '';
-
             var event_template = $(
             '<div class="col-md-12">'+
                 '<div class="row event-row">'+
@@ -414,7 +265,6 @@
                 '<a class="search-link attachment-link" target="_blank"><i class="search-link fa fa-download" aria-hidden="true"></i></a>'+
                 '<span class="record-icon"><i class="fa fa-video-camera" aria-hidden="true"></i></span>'+
                 '</div>'+
-                cal_synch_container+
                 '</div>'+
                 '<div class="row">'+
                 '<div class="col-xs-8 col-track">'+
@@ -510,12 +360,6 @@
             if(self.summit.current_user !== null ){
                 // EVENT ACTIONS
                 event_directives['.event-state@id']                       = function(arg){ return 'event_state_'+arg.item.id; };
-                // GOOGLE CALENDAR SYNC
-                event_directives['i.sync-icon@title']                     = function(arg){ return arg.item.gcal_id != ''  && arg.item.gcal_id != null ? 'Syncronized':'Unsyncronized'; };
-                event_directives['i.sync-icon@class+']                    = function(arg){ return arg.item.gcal_id != ''  && arg.item.gcal_id != null ? ' icon-sync-event':' icon-unsync-event'; };
-                event_directives['span.icon-event-synched@data-event-id'] = function(arg){ return arg.item.id; };
-                event_directives['input.select-event-chk@id']             = function(arg){ return 'select_event_chk_'+ arg.item.id; };
-                event_directives['input.select-event-chk@data-event-id']  = function(arg){ return arg.item.id; };
             }
 
             var directives = {
@@ -604,9 +448,8 @@
             var state = $('#event_state_' + event.id);
             $('i.favorite-status', state).css('display','none');
             $('i.going-status', state).css('display','none');
-            if(self.summit.current_user && self.summit.current_user.is_attendee){
-                if(event.going)
-                    $('i.going-status', state).css('display','');
+            if(event.going){
+                $('i.going-status', state).css('display','');
             }
             if(!event.going && event.favorite){
                 $('i.favorite-status', state).css('display','');

@@ -35,6 +35,7 @@ interface ISummitAttendee extends IEntity
      * @return $this
      */
     public function addTicket(ISummitAttendeeTicket $ticket);
+
     /**
      * @return void
      */
@@ -44,7 +45,6 @@ interface ISummitAttendee extends IEntity
      * @return DateTime
      */
     public function getTicketBoughtDate();
-
 
     /**
      * @return ISummitAttendeeTicket[]
@@ -62,54 +62,12 @@ interface ISummitAttendee extends IEntity
      */
     public function isSummitHallCheckedIn();
 
-    /**
-     * @return ISummitEvent[]
-     */
-    public function getSchedule();
-
-    /**
-     * @param ISummitEvent $summit_event
-     * @return void
-     */
-    public function addToSchedule(ISummitEvent $summit_event);
-
-    /**
-     * @param int $event_id
-     * @return bool
-     */
-    public function isScheduled($event_id);
-
-    /**
-     * @return void
-     */
-    public function clearSchedule();
-
-    public function registerCheckInOnEvent(ISummitEvent $summit_event);
 
     /**
      * @param bool $must_share
      * @return $this
      */
     public function setShareContactInfo($must_share);
-
-    /**
-     * @param ISummitEvent $event
-     * @return string
-     */
-    public function getGoogleCalEventId(ISummitEvent $event);
-
-    /**
-     * @param ISummitEvent $event
-     * @param int $google_event_id
-     * @return string
-     */
-    public function setGoogleCalEventId(ISummitEvent $event, $google_event_id);
-
-    /*
-     * @param int $event_id
-     * @return bool
-     */
-    public function hasRSVPSubmission($event_id);
 
     /**
      * @return string

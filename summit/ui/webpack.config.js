@@ -16,5 +16,7 @@ module.exports = {
     "speakers-admin-view":"./source/js/admin/speakers/speakers-admin-view.js",
     "promocode-admin-view":"./source/js/admin/tickets/promocode-admin-view.js",
     "events-bulk-view":"./source/js/admin/events_bulk/events-bulk-view.js",
+    "sync-calendar":"./source/js/schedule/sync-calendar.js",
+    "global-search":"./source/js/schedule/global-search.js",
   }
 };
