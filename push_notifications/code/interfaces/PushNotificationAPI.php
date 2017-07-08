@@ -64,7 +64,7 @@ class PushNotificationAPI extends AbstractRestfulJsonApi
      * @return string
      */
     public function subscribeToTopic(SS_HTTPRequest $r)
-    {    	
+    {
         $token = $r->postVar('Token');
         $topic = $r->postVar('Topic');
 

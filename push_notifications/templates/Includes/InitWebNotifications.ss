@@ -1,4 +1,5 @@
 <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <script>
     // API key

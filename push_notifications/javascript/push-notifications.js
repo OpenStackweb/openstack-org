@@ -51,17 +51,16 @@ function requestPermission() {
 }
 
 function subscribeTokenToTopic(token) {
-    fetch('api/v1/push_notifications/subscribe/'+token+'/'+topic_channel, {
-        method: 'POST',
-        headers: new Headers()
-    }).then(response => {
-        if (response.status < 200 || response.status >= 400) {
-            throw 'Error subscribing to topic: '+response.status + ' - ' + response.text();
-        }
+    $.ajax({
+        type: 'POST',
+        url: '/api/v1/push_notifications/subscribe/'+token+'/'+topic_channel,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json"
+    }).done(function(response) {
         console.log('Subscribed to "'+topic_channel+'"');
-    }).catch(error => {
-        console.error(error);
-    })
+    }).fail(function(jqXHR, textStatus, errorThrown) {
+        console.error('Error subscribing to topic: '+textStatus + ' - ' + errorThrown);
+    });
 }
 
 function getRegistrationToken() {
