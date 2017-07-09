@@ -65,10 +65,14 @@ class PushNotificationAPI extends AbstractRestfulJsonApi
      */
     public function subscribeToTopic(SS_HTTPRequest $r)
     {
-        $token = $r->postVar('Token');
-        $topic = $r->postVar('Topic');
+        $token = $r->param('Token');
+        $topic = $r->param('Topic');
 
-        $response = $this->firebase_api->subscribeToTopicWeb($token, $topic);
+        try {
+            $response = $this->firebase_api->subscribeToTopicWeb($token, $topic);
+        } catch (Exception $ex) {
+            return $this->httpError(400, $ex->getMessage());
+        }
 
         return $response;
     }

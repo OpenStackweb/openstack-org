@@ -145,6 +145,10 @@ define('OPENSTACK_YOUTUBE_CHANNEL_ID','');
 define('OPENSTACK_TWITTER_ACCOUNT', '');
 
 define('FIREBASE_GCM_SERVER_KEY', '');
+define('FIREBASE_API_KEY', '');
+define('FIREBASE_PROJECT_ID', '');
+define('FIREBASE_MESSAGING_SENDER_ID', '');
+
 //auc-metrics/code/services/ActiveCommitterService.php
 define('ACTIVECOMMITTERSERVICE_GERRIT_USER', '');
 define('ACTIVECOMMITTERSERVICE_GERRIT_USER_SSH_KEY_FILE', '');

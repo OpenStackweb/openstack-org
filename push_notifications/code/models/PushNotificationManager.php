@@ -74,7 +74,7 @@ class PushNotificationManager
                     $res = $this->push_api->sendPush($to, $data, IPushNotificationApi::HighPriority, $notification->Platform);
 
                     if($res) {
-                        //$notification->sent();
+                        $notification->sent();
                         ++$qty;
                     }
                 }

@@ -182,13 +182,15 @@ final class FireBaseGCMApi implements IPushNotificationApi
             foreach ($to as $recipient) {
 
                 // create for web ( data message)
+                $data = $this->createDataMessage($data, $recipient, $priority );
+                //$data['content_available'] = false;
 
                 $response = $client->post($endpoint, [
                     'headers' => [
                         'Authorization' => sprintf('key=%s', $this->api_server_key),
                         'Content-Type'  => 'application/json'
                     ],
-                    'body' => json_encode($this->createDataMessage($data, $recipient, $priority ))
+                    'body' => json_encode($data)
                 ]);
 
                 if ($response->getStatusCode() !== 200) $res = $res && false;
@@ -211,7 +213,7 @@ final class FireBaseGCMApi implements IPushNotificationApi
      * @return bool
      */
     function subscribeToTopicWeb($token, $topic){
-        $endpoint = self::BaseUrl.'/iid/v1/'.$token.'/rel/topics/'.$topic;
+        $endpoint = 'https://iid.googleapis.com/iid/v1/'.$token.'/rel/topics/'.$topic;
         $client   = new GuzzleHttp\Client();
         $res      = true;
 
@@ -227,6 +229,7 @@ final class FireBaseGCMApi implements IPushNotificationApi
             return $res;
         }
         catch (\GuzzleHttp\Exception\ClientException $ex1){
+            throw $ex1;
             return false;
         }
 

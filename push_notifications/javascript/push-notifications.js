@@ -20,11 +20,13 @@ const messaging = firebase.messaging();
 navigator.serviceWorker.register('/push_notifications/javascript/firebase-messaging-sw.js')
     .then((registration) => {
         messaging.useServiceWorker(registration);
+        console.log('Service worker registered. Retrieving Token...');
         getRegistrationToken();
 });
 
 
 messaging.onTokenRefresh(function() {
+    console.log('Token refreshed. Retrieving new token...');
     getRegistrationToken();
 });
 
@@ -53,9 +55,7 @@ function requestPermission() {
 function subscribeTokenToTopic(token) {
     $.ajax({
         type: 'POST',
-        url: '/api/v1/push_notifications/subscribe/'+token+'/'+topic_channel,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json"
+        url: '/api/v1/push_notifications/subscribe/'+token+'/'+topic_channel
     }).done(function(response) {
         console.log('Subscribed to "'+topic_channel+'"');
     }).fail(function(jqXHR, textStatus, errorThrown) {
@@ -67,6 +67,7 @@ function getRegistrationToken() {
     messaging.getToken()
         .then(function(currentToken) {
             if (currentToken) {
+                //console.log('Token retrieved: '+currentToken);
                 subscribeTokenToTopic(currentToken);
             } else {
                 // Show permission request.
