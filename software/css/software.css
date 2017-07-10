@@ -725,6 +725,18 @@ p.service-section-title {
 		min-height: 40px;
     padding-top: 10px;
 	}  
+
+@media (max-width: 767px) {
+
+  div.project-table-row {
+    min-height: 60px;
+  }  
+
+  .project-table-description {
+    float:right;
+  }
+
+}
   
   .toggle-wrapper {
   	max-width: 400px;
