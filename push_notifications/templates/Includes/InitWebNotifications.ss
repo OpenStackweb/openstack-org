@@ -4,7 +4,6 @@
 <script>
     // API key
     var apiKey = "{$getEnv('FIREBASE_API_KEY')}";
-    var serverKey = "{$getEnv('FIREBASE_GCM_SERVER_KEY')}";
     var topic_channel = '{$topicChannel}';
     var project_id = "{$getEnv('FIREBASE_PROJECT_ID')}";
     var sender_id = "{$getEnv('FIREBASE_MESSAGING_SENDER_ID')}";
