@@ -157,4 +157,17 @@ final class SurveyFreeTextAnswerManager implements ISurveyFreeTextAnswerManager
     {
         return $this->repository->getAllFreeTextAnswerTagsByQuestion($question_id);
     }
+
+    /**
+     * @param int $template_id
+     * @param int $question_id
+     * @param array $tags
+     * @param string $replace_tag
+     * @throws NotFoundEntityException
+     * @return void
+     */
+    public function mergeTagsInFreeTextQuestion($template_id, $question_id, $tags, $replace_tag)
+    {
+
+    }
 }

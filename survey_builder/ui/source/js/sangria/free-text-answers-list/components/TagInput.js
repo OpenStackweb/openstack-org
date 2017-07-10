@@ -71,6 +71,14 @@ export class TagInput extends React.Component {
         $(this.textInput).tagsinput('refresh');
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        let source_change = (this.props.source && this.props.source.length == 0 && nextProps.source.length > 0);
+        let modal_opened = (nextState && (nextState.isOpenModalShowStats || nextState.isOpenModalMergeTags));
+        let tags_change = (this.props.tags != nextProps.tags);
+
+        return source_change || modal_opened || tags_change;
+    }
+
     componentDidUpdate(prevProps, prevState){
 
         if(prevProps.source && prevProps.source.length == 0 && this.props.source.length > 0){

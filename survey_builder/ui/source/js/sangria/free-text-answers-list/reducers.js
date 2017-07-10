@@ -21,7 +21,9 @@ import {
     REQUEST_UPDATE_FREE_TEXT_ANSWER,
     RECEIVE_UPDATE_FREE_TEXT_ANSWER,
     REQUEST_TAGS_FREE_TEXT_QUESTIONS_BY_TEMPLATE,
-    RECEIVE_TAGS_FREE_TEXT_QUESTIONS_BY_TEMPLATE
+    RECEIVE_TAGS_FREE_TEXT_QUESTIONS_BY_TEMPLATE,
+    REQUEST_MERGE_TAGS_FREE_TEXT_QUESTION,
+    RECEIVE_MERGE_TAGS_FREE_TEXT_QUESTION
 } from './actions';
 
 import {
@@ -134,7 +136,6 @@ export const surveyFreeTextAnswersReducer = (
                 ...state,
                 loading: true,
                 tags: [],
-                open_modal_show_stats: false
             };
             break;
         case RECEIVE_TAGS_FREE_TEXT_QUESTIONS_BY_TEMPLATE:
@@ -149,7 +150,19 @@ export const surveyFreeTextAnswersReducer = (
                 ...state,
                 tags: tags,
                 loading: false,
-                open_modal_show_stats: true
+            };
+            break;
+        case REQUEST_MERGE_TAGS_FREE_TEXT_QUESTION:
+            return {
+                ...state,
+                loading: true,
+            };
+            break;
+        case RECEIVE_MERGE_TAGS_FREE_TEXT_QUESTION:
+            return {
+                ...state,
+                loading: false,
+                reload: true
             };
             break;
         default:

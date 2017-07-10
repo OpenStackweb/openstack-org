@@ -35,6 +35,7 @@ class SangriaSurveyTemplateApi extends AbstractRestfulJsonApi
         'GET $SURVEY_TEMPLATE_ID/questions/$QUESTION_ID/free-text-answers/all/tags'           => 'getAllFreeTextAnswersTags',
         'POST $SURVEY_TEMPLATE_ID/questions/$QUESTION_ID/free-text-answers/$ANSWER_ID/tags'   => 'addFreeTextAnswerTag',
         'DELETE $SURVEY_TEMPLATE_ID/questions/$QUESTION_ID/free-text-answers/$ANSWER_ID/tags' => 'removeFreeTextAnswerTag',
+        'POST $SURVEY_TEMPLATE_ID/questions/$QUESTION_ID/free-text-answers/merge_tags'        => 'addFreeTextTagMerge',
         'PUT $SURVEY_TEMPLATE_ID/questions/$QUESTION_ID/free-text-answers/$ANSWER_ID'         => 'updateFreeTextAnswer',
         'GET $SURVEY_TEMPLATE_ID/questions/$QUESTION_ID/free-text-answers'                    => 'getFreeTextAnswers',
         'GET $SURVEY_TEMPLATE_ID/questions'                                                   => 'getFreeTextQuestions',
@@ -50,6 +51,7 @@ class SangriaSurveyTemplateApi extends AbstractRestfulJsonApi
         'extractTagsByRake',
         'updateFreeTextAnswer',
         'getAllFreeTextAnswersTags',
+        'addFreeTextTagMerge',
     ];
 
     public function __construct(ISurveyFreeTextAnswerManager $manager,  ISurveyTemplateManager $template_manager)
@@ -327,5 +329,32 @@ class SangriaSurveyTemplateApi extends AbstractRestfulJsonApi
         }
 
         return $this->ok();
+    }
+
+    public function addFreeTextTagMerge(SS_HTTPRequest $request){
+
+        $template_id = intval($request->param('SURVEY_TEMPLATE_ID'));
+        $question_id = intval($request->param('QUESTION_ID'));
+
+        if(!$this->isJson()) return $this->validationError(array('invalid content type!'));
+        $data        = $this->getJsonRequest();
+
+        try{
+            if(!isset($data['tags']) || !isset($data['replace_tag']))
+                throw new EntityValidationException('tags is mandatory!');
+
+            $this->manager->mergeTagsInFreeTextQuestion($template_id, $question_id, $data['tags'], $data['replace_tag']);
+            return $this->updated();
+        }
+        catch (EntityValidationException $ex1) {
+            SS_Log::log($ex1, SS_Log::WARN);
+            return $this->validationError($ex1->getMessages());
+        } catch (NotFoundEntityException $ex2) {
+            SS_Log::log($ex2, SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        } catch (Exception $ex) {
+            SS_Log::log($ex, SS_Log::ERR);
+            return $this->serverError();
+        }
     }
 }

@@ -29,6 +29,8 @@ export const REQUEST_UPDATE_FREE_TEXT_ANSWER         = 'REQUEST_UPDATE_FREE_TEXT
 export const RECEIVE_UPDATE_FREE_TEXT_ANSWER              = 'RECEIVE_UPDATE_FREE_TEXT_ANSWER';
 export const REQUEST_TAGS_FREE_TEXT_QUESTIONS_BY_TEMPLATE = 'REQUEST_TAGS_FREE_TEXT_QUESTIONS_BY_TEMPLATE';
 export const RECEIVE_TAGS_FREE_TEXT_QUESTIONS_BY_TEMPLATE = 'RECEIVE_TAGS_FREE_TEXT_QUESTIONS_BY_TEMPLATE';
+export const REQUEST_MERGE_TAGS_FREE_TEXT_QUESTION = 'REQUEST_MERGE_TAGS_FREE_TEXT_QUESTION';
+export const RECEIVE_MERGE_TAGS_FREE_TEXT_QUESTION = 'RECEIVE_MERGE_TAGS_FREE_TEXT_QUESTION';
 
 export const fetchAnswersPage = (params) => (dispatch) => {
     let {template_id, question_id} = params;
@@ -130,3 +132,13 @@ export const showFreeTextAnswersStatsView = (params) => (dispatch) => {
     let url = URI('sangria/ViewSurveyFreeAnswersStats').query(params).toString();
     window.open(url);
 }
+
+export const mergeTags = (params) => (dispatch) => {
+    let {template_id, question_id, tags, replace_tag } = params;
+
+    postRequest(
+        createAction(REQUEST_MERGE_TAGS_FREE_TEXT_QUESTION),
+        createAction(RECEIVE_MERGE_TAGS_FREE_TEXT_QUESTION),
+        `api/v1/sangria/survey-templates/${template_id}/questions/${question_id}/free-text-answers/merge_tags`
+    )(params)(dispatch);
+};

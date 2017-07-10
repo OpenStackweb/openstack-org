@@ -59,4 +59,14 @@ interface ISurveyFreeTextAnswerManager
      * @return void
      */
     public function deleteTagToFreeTextAnswers($template_id, $question_id, $answer_id, $tag);
+
+    /**
+     * @param int $template_id
+     * @param int $question_id
+     * @param array $tags
+     * @param string $replace_tag
+     * @throws NotFoundEntityException
+     * @return void
+     */
+    public function mergeTagsInFreeTextQuestion($template_id, $question_id, $tags, $replace_tag);
 }

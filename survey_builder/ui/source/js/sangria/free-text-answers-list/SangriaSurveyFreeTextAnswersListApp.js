@@ -51,6 +51,7 @@ class SangriaSurveyFreeTextAnswersListApp extends React.Component {
         this.state = {
             isOpenModalExtractTags  : false,
             isOpenModalShowStats : false,
+            isOpenModalMergeTags : false,
         }
     }
 
@@ -167,7 +168,12 @@ class SangriaSurveyFreeTextAnswersListApp extends React.Component {
     }
 
     onShowStartClicked(e){
-        //this.openModalShowStatsFilters();
+        this.openModalShowStatsFilters();
+        this.props.fetchTagsByQuestion(this.props.template_id, this.props.question_id);
+    }
+
+    onMergeTagsClicked(e){
+        this.openModalMergeTags();
         this.props.fetchTagsByQuestion(this.props.template_id, this.props.question_id);
     }
 
@@ -182,6 +188,37 @@ class SangriaSurveyFreeTextAnswersListApp extends React.Component {
             isOpenModalExtractTags: false
         });
     };
+
+    openModalMergeTags() {
+        this.setState({
+            isOpenModalMergeTags: true,
+            replaceTag: ''
+        });
+    };
+
+    hideModalMergeTags(){
+        this.setState({
+            isOpenModalMergeTags: false
+        });
+    };
+
+    onReplaceWithTagChange(e) {
+        let target = e.currentTarget;
+        let val    = target.value;
+
+        this.setState({
+            replaceTag: val
+        });
+    }
+
+    onMergeTags(e){
+        let tags = this.mergeTagsFilter.getVal();
+        let replace_tag = this.state.replaceTag;
+        if(tags ==  '' || replace_tag == '') return;
+
+        this.hideModalMergeTags();
+        this.props.mergeTags(this.props.template_id, this.props.question_id, tags, replace_tag);
+    }
 
     openModalShowStatsFilters() {
         this.setState({
@@ -332,6 +369,52 @@ class SangriaSurveyFreeTextAnswersListApp extends React.Component {
                         </button>
                     </ModalFooter>
                 </Modal>
+                <Modal isOpen={this.state.isOpenModalMergeTags} onRequestHide={(e) => this.hideModalMergeTags()}>
+                    <ModalHeader>
+                        <ModalClose onClick={ (e) => this.hideModalMergeTags()}/>
+                        <ModalTitle>Merge Tags</ModalTitle>
+                    </ModalHeader>
+                    <ModalBody>
+                        <form>
+                            <div className="form-group">
+                                <div className="row">
+                                    <div className="col-md-4">
+                                        <label htmlFor="">Choose&nbsp;Tags&nbsp;For&nbsp;Merge&nbsp;</label>
+                                    </div>
+                                    <div className="col-md-8">
+                                        <TagInput freeInput={false}
+                                                  source={this.props.tags}
+                                                  ref={(input) => this.mergeTagsFilter = input}
+                                        >
+                                        </TagInput>
+                                    </div>
+                                </div>
+                                <br/>
+                                <div className="row">
+                                    <div className="col-md-4">
+                                        <label htmlFor="">Replace&nbsp;With&nbsp;</label>
+                                    </div>
+                                    <div className="col-md-4">
+                                        <input type="text" className="form-control"
+                                               onChange={(e) => this.onReplaceWithTagChange(e) }
+                                               placeholder="Replace with Tag"
+                                               id="replaceWithTag"
+                                               defaultValue={replaceTag}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </ModalBody>
+                    <ModalFooter>
+                        <button className='btn btn-default' onClick={(e) => this.hideModalMergeTags()}>
+                        Close
+                        </button>
+                        <button className='btn btn-primary' onClick={(e)=> this.onMergeTags(e)}>
+                        Merge
+                        </button>
+                    </ModalFooter>
+                </Modal>
                 <h3>Survey Free Text Answers</h3>
                 <div className="row">
                     <div className="col-md-6">
@@ -368,6 +451,11 @@ class SangriaSurveyFreeTextAnswersListApp extends React.Component {
                         <button type="button"
                                 onClick={(e) => this.onShowStartClicked(e)}
                                 className="btn btn-primary btn-sm btn-action">Show Stats
+                        </button>
+
+                        <button type="button"
+                                onClick={(e) => this.onMergeTagsClicked(e)}
+                                className="btn btn-primary btn-sm btn-action">Merge Tags
                         </button>
                     </div>
 
@@ -491,6 +579,10 @@ export default connect(
         },
         showStatsView(template_id, question_id, tags){
             return dispatch(showFreeTextAnswersStatsView({ template_id, question_id, tags }));
+        },
+        mergeTags(template_id, question_id, tags, replace_tag){
+            return dispatch(mergeTags({ template_id, question_id, tags, replace_tag }));
         }
+
     })
 )(SangriaSurveyFreeTextAnswersListApp);
