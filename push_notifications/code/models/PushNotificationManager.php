@@ -31,35 +31,42 @@ class PushNotificationManager
      */
     private $push_api;
 
-    /***
+    /**
+     * @var IFireBasePushNotificationSerializationStrategyFactory
+     */
+    private $serialization_strategy_factory;
+
+    /**
      * PushNotificationManager constructor.
      * @param IEntityRepository $notifications_repository
      * @param IPushNotificationApi $push_api
+     * @param IFireBasePushNotificationSerializationStrategyFactory $serialization_strategy_factory
      * @param ITransactionManager $tx_manager
      */
     public function __construct
     (
         IEntityRepository $notifications_repository,
         IPushNotificationApi $push_api,
+        IFireBasePushNotificationSerializationStrategyFactory $serialization_strategy_factory,
         ITransactionManager $tx_manager
     )
     {
-        $this->notifications_repository = $notifications_repository;
-        $this->push_api                 = $push_api;
-        $this->tx_manager               = $tx_manager;
+        $this->notifications_repository        = $notifications_repository;
+        $this->push_api                        = $push_api;
+        $this->serialization_strategy_factory  = $serialization_strategy_factory;
+        $this->tx_manager                      = $tx_manager;
     }
 
     public function processNotifications($batch_size)
     {
-        $notifications_repository = $this->notifications_repository;
 
-        return $this->tx_manager->transaction(function() use($batch_size, $notifications_repository)
+        return $this->tx_manager->transaction(function() use($batch_size)
         {
             $qty   = 0;
             $query = new QueryObject();
             $query->addAndCondition(QueryCriteria::equal('IsSent', 0));
             $query->addAndCondition(QueryCriteria::equal('Approved', 1));
-            list($list, $size)  = $notifications_repository->getAll($query, 0, $batch_size);
+            list($list, $size)  = $this->notifications_repository->getAll($query, 0, $batch_size);
             // init parse ...
 
             foreach($list as $notification)
@@ -68,10 +75,16 @@ class PushNotificationManager
 
                 try
                 {
-                    $to = $notification->getRecipientForFCM();
-                    $data = $notification->getDataForFCM();
+                    $serializer = $this->serialization_strategy_factory->build($notification);
+                    if(is_null($serializer)) continue;
 
-                    $res = $this->push_api->sendPush($to, $data, IPushNotificationApi::HighPriority, $notification->Platform);
+                    $res = $this->push_api->sendPush
+                    (
+                        $serializer->getToField(),
+                        $serializer->getDataField(),
+                        IPushNotificationMessage::HighPriority,
+                        $notification->getPlatform()
+                    );
 
                     if($res) {
                         $notification->sent();

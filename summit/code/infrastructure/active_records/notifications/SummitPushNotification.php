@@ -14,7 +14,6 @@
  **/
 final class SummitPushNotification extends PushNotificationMessage
 {
-    const PushType = 'PUSH_NOTIFICATION';
 
     private static $db = array
     (
@@ -169,95 +168,4 @@ final class SummitPushNotification extends PushNotificationMessage
         }
         return Permission::check("ADMIN") || Permission::check("ADMIN_SUMMIT_APP") || Permission::check("ADMIN_SUMMIT_APP_SCHEDULE");
     }
-
-    /**
-     * returns data for firebase ingestion
-     * @return array
-     */
-    public function getDataForFCM()
-    {
-        $data  = [
-            'id'         => intval($this->ID),
-            'type'       => SummitPushNotification::PushType,
-            'body'       => $this->Message,
-            'summit_id'  => intval($this->SummitID),
-            'channel'    => $this->Channel,
-            'created_at' => $this->getTimestamp(),
-        ];
-
-        if($this->Channel == 'EVENT')
-        {
-            $extra_data     = [
-                'event_id' => $this->EventID,
-                'title'    => $this->Event()->getTitle(),
-            ];
-
-            $data = array_merge($data, $extra_data);
-        }
-
-        return $data;
-    }
-
-    /**
-     * returns recipient for firebase ingestion
-     * @return array
-     */
-    public function getRecipientForFCM()
-    {
-        // Push to speakers
-        $to = null;
-
-        switch($this->Channel)
-        {
-            case 'SPEAKERS':
-            {
-                $to = ['speakers'];
-            }
-                break;
-            case 'ATTENDEES':
-            {
-                $to = ['attendees'];
-            }
-                break;
-            case 'MEMBERS':
-            {
-                $recipients = array();
-
-                foreach($this->Recipients() as $m)
-                {
-                    array_push($recipients, 'member_'.$m->ID);
-                }
-                $to = $recipients;
-            }
-                break;
-            case 'SUMMIT':
-            {
-                $to = ['summit_'.$this->SummitID];
-            }
-                break;
-            case 'EVENT':
-            {
-                $to   = ['event_'.$this->EventID];
-            }
-                break;
-            case 'EVERYONE':
-            {
-                $to = ['everyone'];
-            }
-                break;
-            case 'GROUP':
-            {
-                $recipients = array();
-                foreach($this->Group()->Members() as $m)
-                {
-                    array_push($recipients, 'member_'.$m->ID);
-                }
-                $to = $recipients;
-            }
-                break;
-        }
-
-        return $to;
-    }
-
 }

@@ -38,7 +38,7 @@ class PushNotificationAPI extends AbstractRestfulJsonApi
     {
         parent::init();
         $this->checkAuthenticationToken(false);
-        $this->tx_manager = SapphireTransactionManager::getInstance();
+        $this->tx_manager   = SapphireTransactionManager::getInstance();
         $this->firebase_api = new FireBaseGCMApi(FIREBASE_GCM_SERVER_KEY);
     }
 
@@ -69,7 +69,7 @@ class PushNotificationAPI extends AbstractRestfulJsonApi
         $topic = $r->param('Topic');
 
         try {
-            $response = $this->firebase_api->subscribeToTopicWeb($token, $topic);
+            $response = $this->firebase_api->subscribeToTopic($token, $topic);
         } catch (Exception $ex) {
             return $this->httpError(400, $ex->getMessage());
         }

@@ -16,6 +16,21 @@ final class PushNotificationSenderTask extends CronTask
 {
 
     /**
+     * @var IFireBasePushNotificationSerializationStrategyFactory
+     */
+    private $serialization_strategy_factory;
+
+    /**
+     * PushNotificationSenderTask constructor.
+     * @param IFireBasePushNotificationSerializationStrategyFactory $serialization_strategy_factory
+     */
+    public function __construct(IFireBasePushNotificationSerializationStrategyFactory $serialization_strategy_factory)
+    {
+        parent::__construct();
+        $this->serialization_strategy_factory = $serialization_strategy_factory;
+    }
+
+    /**
      * @return void
      */
     public function run()
@@ -35,6 +50,7 @@ final class PushNotificationSenderTask extends CronTask
             (
                 new SapphirePushNotificationRepository,
                 new FireBaseGCMApi(FIREBASE_GCM_SERVER_KEY),
+                $this->serialization_strategy_factory,
                 SapphireTransactionManager::getInstance()
             );
 

@@ -14,40 +14,24 @@
  **/
 interface IPushNotificationApi
 {
-    const NormalPriority = 'normal';
-    const HighPriority   = 'high';
-
     /**
      * @param string $to
      * @param array $data
      * @param string $priority
+     * @param string $platform
      * @param null|int $ttl
      * @return bool
      */
-    function sendPush($to,  array $data, $priority = self::NormalPriority, $ttl = null);
+    function sendPush($to, array $data, $priority = IPushNotificationApi::NormalPriority, $platform = 'MOBILE', $ttl = null);
 
     /**
-     * @param string $to
-     * @param array $data
-     * @param string $priority
-     * @param null|int $ttl
-     * @return bool
-     */
-    function sendPushMobile($to, array $data, $priority = IPushNotificationApi::NormalPriority, $ttl = null);
-
-    /**
-     * @param string $to
-     * @param array $data
-     * @param string $priority
-     * @param null|int $ttl
-     * @return bool
-     */
-    function sendPushWeb($to, array $data, $priority = IPushNotificationApi::NormalPriority, $ttl = null);
-
-    /**
+     * https://developers.google.com/instance-id/reference/server#create_relationship_maps_for_app_instances
+     * Given a registration token and a supported relationship, you can create a mapping. For example, you can
+     * subscribe an app instance to a Google Cloud Messaging topic by calling the Instance ID service at this endpoint,
+     * providing the app instance's token as shown:
      * @param string $token
      * @param string $topic
      * @return bool
      */
-    function subscribeToTopicWeb($token, $topic);
+    function subscribeToTopic($token, $topic);
 }

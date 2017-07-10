@@ -1,4 +1,5 @@
 <?php
+
 PublisherSubscriberManager::getInstance()->subscribe(ISummitEntityEvent::UpdatedEntity, function($entity){
 
     $summit_id = isset($_REQUEST['SummitID']) ? intval($_REQUEST['SummitID']) : $entity->getField("SummitID");
@@ -7,10 +8,10 @@ PublisherSubscriberManager::getInstance()->subscribe(ISummitEntityEvent::Updated
     if($entity instanceof Presentation)
     {
         // send push notification
-        $notification = new PresentationPushNotification();
+        $notification                 = new PresentationChangeRequestPushNotification();
         $notification->PresentationID = $entity->ID;
-        $notification->Message = 'Presentation Updated';
-        $notification->Channel = 'TRACKCHAIRS';
+        $notification->Message        = 'Presentation Updated';
+        $notification->Channel        = 'TRACKCHAIRS';
         $notification->approve();
         $notification->write();
     }
