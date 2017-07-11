@@ -131,14 +131,15 @@ export const showFreeTextAnswersStatsView = (params) => (dispatch) => {
 
     let url = URI('sangria/ViewSurveyFreeAnswersStats').query(params).toString();
     window.open(url);
-}
+};
 
-export const mergeTags = (params) => (dispatch) => {
-    let {template_id, question_id, tags, replace_tag } = params;
+export const mergeTags = (params, payload) => (dispatch) => {
+    let {template_id, question_id} = params;
 
     postRequest(
         createAction(REQUEST_MERGE_TAGS_FREE_TEXT_QUESTION),
         createAction(RECEIVE_MERGE_TAGS_FREE_TEXT_QUESTION),
-        `api/v1/sangria/survey-templates/${template_id}/questions/${question_id}/free-text-answers/merge_tags`
+        `api/v1/sangria/survey-templates/${template_id}/questions/${question_id}/free-text-answers/merge_tags`,
+        payload
     )(params)(dispatch);
 };

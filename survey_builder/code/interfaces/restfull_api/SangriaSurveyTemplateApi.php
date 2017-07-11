@@ -343,7 +343,7 @@ class SangriaSurveyTemplateApi extends AbstractRestfulJsonApi
             if(!isset($data['tags']) || !isset($data['replace_tag']))
                 throw new EntityValidationException('tags is mandatory!');
 
-            $this->manager->mergeTagsInFreeTextQuestion($template_id, $question_id, $data['tags'], $data['replace_tag']);
+            $this->manager->mergeTagsInFreeTextQuestion($template_id, $question_id, explode(',',$data['tags']), $data['replace_tag']);
             return $this->updated();
         }
         catch (EntityValidationException $ex1) {

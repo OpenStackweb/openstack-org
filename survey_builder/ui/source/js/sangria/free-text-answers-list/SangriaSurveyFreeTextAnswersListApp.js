@@ -26,7 +26,8 @@ import {
     extractTagsByRAKE,
     updateFreeTextAnswer,
     fetchFreeTextAnswersTagsByQuestion,
-    showFreeTextAnswersStatsView
+    showFreeTextAnswersStatsView,
+    mergeTags
 } from './actions';
 
 import {
@@ -52,6 +53,7 @@ class SangriaSurveyFreeTextAnswersListApp extends React.Component {
             isOpenModalExtractTags  : false,
             isOpenModalShowStats : false,
             isOpenModalMergeTags : false,
+            replaceTag : ''
         }
     }
 
@@ -399,7 +401,7 @@ class SangriaSurveyFreeTextAnswersListApp extends React.Component {
                                                onChange={(e) => this.onReplaceWithTagChange(e) }
                                                placeholder="Replace with Tag"
                                                id="replaceWithTag"
-                                               defaultValue={replaceTag}
+                                               value={this.state.replaceTag}
                                         />
                                     </div>
                                 </div>
@@ -581,7 +583,8 @@ export default connect(
             return dispatch(showFreeTextAnswersStatsView({ template_id, question_id, tags }));
         },
         mergeTags(template_id, question_id, tags, replace_tag){
-            return dispatch(mergeTags({ template_id, question_id, tags, replace_tag }));
+            let payload    = { tags, replace_tag };
+            return dispatch(mergeTags({ template_id, question_id }, payload));
         }
 
     })

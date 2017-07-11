@@ -166,8 +166,35 @@ final class SurveyFreeTextAnswerManager implements ISurveyFreeTextAnswerManager
      * @throws NotFoundEntityException
      * @return void
      */
-    public function mergeTagsInFreeTextQuestion($template_id, $question_id, $tags, $replace_tag)
+    public function mergeTagsInFreeTextQuestion($template_id, $question_id, $tags_to_replace, $replace_tag)
     {
+        $this->tx_manager->transaction(function() use($template_id, $question_id, $tags_to_replace, $replace_tag){
 
+            $question = SurveyQuestionTemplate::get()->byID($question_id);
+            if(is_null($question)) throw new NotFoundEntityException();
+
+            if($question->step()->survey()->getIdentifier() != $template_id)
+                throw new NotFoundEntityException();
+
+            $replace_tag_value = strtolower(trim($replace_tag));
+
+            $replace_tag_obj = SurveyAnswerTag::get()->filter('Value', $replace_tag)->first();
+
+            if(is_null($replace_tag_obj)){
+                $replace_tag_obj = new SurveyAnswerTag();
+                $replace_tag_obj->Value = $replace_tag_value;
+                $replace_tag_obj->CreatedByID = Member::currentUserID();
+                $replace_tag_obj->Type = SurveyAnswerTag::TypeCustom;
+                $replace_tag_obj->write();
+            }
+
+            $answers = $question->Answers()->filter(array('Tags.Value' => $tags_to_replace));
+            foreach($answers as $answer) {
+                $answer->Tags()->filter('Value',$tags_to_replace)->removeAll();
+                if ($answer->Tags()->filter('Value',$replace_tag_value)->Count() == 0){
+                    $answer->Tags()->add($replace_tag_obj);
+                }
+            }
+        });
     }
 }
