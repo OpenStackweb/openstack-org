@@ -65,13 +65,13 @@ final class SurveyFreeTextAnswerManager implements ISurveyFreeTextAnswerManager
 
         $this->tx_manager->transaction(function() use($template_id, $question_id, $answer_id, $data){
             $answer = $this->repository->getById($answer_id);
-            if(is_null($answer)) throw new NotFoundEntityException();
+            if(is_null($answer)) throw new NotFoundEntityException('SurveyAnswer');
 
             if($answer->question()->getIdentifier() != $question_id)
-                throw new NotFoundEntityException();
+                throw new NotFoundEntityException('SurveyQuestionTemplate');
 
             if($answer->question()->step()->survey()->getIdentifier() != $template_id)
-                throw new NotFoundEntityException();
+                throw new NotFoundEntityException('SurveyTemplate');
 
             $answer->Value       = trim($data['value']);
             $answer->UpdatedByID = Member::currentUserID();
@@ -93,13 +93,13 @@ final class SurveyFreeTextAnswerManager implements ISurveyFreeTextAnswerManager
         $this->tx_manager->transaction(function() use($template_id, $question_id, $answer_id, $tag){
 
             $answer = $this->repository->getById($answer_id);
-            if(is_null($answer)) throw new NotFoundEntityException();
+            if(is_null($answer)) throw new NotFoundEntityException('SurveyAnswer');
 
             if($answer->question()->getIdentifier() != $question_id)
-                throw new NotFoundEntityException();
+                throw new NotFoundEntityException('SurveyQuestionTemplate');
 
             if($answer->question()->step()->survey()->getIdentifier() != $template_id)
-                throw new NotFoundEntityException();
+                throw new NotFoundEntityException('SurveyTemplate');
 
             $tag_value = strtolower(trim($tag));
 
@@ -131,13 +131,13 @@ final class SurveyFreeTextAnswerManager implements ISurveyFreeTextAnswerManager
         $this->tx_manager->transaction(function() use($template_id, $question_id, $answer_id, $tag){
 
             $answer = $this->repository->getById($answer_id);
-            if(is_null($answer)) throw new NotFoundEntityException();
+            if(is_null($answer)) throw new NotFoundEntityException('SurveyAnswer');
 
             if($answer->question()->getIdentifier() != $question_id)
-                throw new NotFoundEntityException();
+                throw new NotFoundEntityException('SurveyQuestionTemplate');
 
             if($answer->question()->step()->survey()->getIdentifier() != $template_id)
-                throw new NotFoundEntityException();
+                throw new NotFoundEntityException('SurveyTemplate');
 
             $tag_value = strtolower(trim($tag));
 
@@ -171,10 +171,10 @@ final class SurveyFreeTextAnswerManager implements ISurveyFreeTextAnswerManager
         $this->tx_manager->transaction(function() use($template_id, $question_id, $tags_to_replace, $replace_tag){
 
             $question = SurveyQuestionTemplate::get()->byID($question_id);
-            if(is_null($question)) throw new NotFoundEntityException();
+            if(is_null($question)) throw new NotFoundEntityException('SurveyQuestionTemplate');
 
             if($question->step()->survey()->getIdentifier() != $template_id)
-                throw new NotFoundEntityException();
+                throw new NotFoundEntityException('SurveyTemplate');
 
             $replace_tag_value = strtolower(trim($replace_tag));
 
