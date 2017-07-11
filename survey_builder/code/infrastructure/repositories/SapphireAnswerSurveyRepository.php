@@ -284,4 +284,25 @@ SQL;
         }
         return $items;
     }
+
+    /**
+     * @param int $question_id
+     * @return array
+     */
+    public function getCountForTags($question_id)
+    {
+
+        $query = <<<SQL
+SELECT ID, `Value` AS Tag, COUNT(ID) AS Qty FROM (
+SELECT SurveyAnswerTag.* FROM SurveyAnswerTag
+INNER JOIN SurveyAnswer_Tags on SurveyAnswer_Tags.SurveyAnswerTagID = SurveyAnswerTag.ID
+INNER JOIN  SurveyAnswer on SurveyAnswer.ID = SurveyAnswer_Tags.SurveyAnswerID
+WHERE SurveyAnswer.QuestionID = {$question_id}
+) AS T2
+GROUP BY Tag ORDER BY Qty ASC;
+SQL;
+
+        $res   = DB::query($query);
+        return $res;
+    }
 }

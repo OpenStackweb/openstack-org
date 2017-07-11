@@ -5,18 +5,24 @@
 
     var labels = [];
     var data = [];
+    var tags = [];
 
     <% loop $Data %>
-        labels.push('{$Tags}');
+        labels.push('{$Tag}');
         data.push({$Count});
     <% end_loop %>
 
-    var options = {
-        title: {
-            display: true,
-            text: '{$QuestionTitle}'
-        }
-    }
+    <% loop $Data.Sort(Tag) %>
+        tags.push({
+            id: {$ID},
+            name: '{$Tag}',
+            qty: '{$Count}',
+            active: true
+        });
+    <% end_loop %>
+
+    var question_title = '{$QuestionTitle}';
+
 </script>
 $ModuleJS("sangria-free-text-answers-list-stats", true , "survey_builder")
 $ModuleCSS("sangria-free-text-answers-list-stats", true , "survey_builder")

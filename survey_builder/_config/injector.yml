@@ -48,6 +48,7 @@ Injector:
     constructor:
       0: '%$SurveyRepository'
       1: '%$TemplateRepository'
+      2: '%$SurveyAnswerRepository'
 SurveysRestfulApi:
   dependencies:
     SurveyManager: '%$SurveyManager'

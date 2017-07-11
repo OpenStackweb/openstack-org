@@ -170,8 +170,10 @@ class SangriaSurveyFreeTextAnswersListApp extends React.Component {
     }
 
     onShowStartClicked(e){
-        this.openModalShowStatsFilters();
-        this.props.fetchTagsByQuestion(this.props.template_id, this.props.question_id);
+        /*this.openModalShowStatsFilters();
+        this.props.fetchTagsByQuestion(this.props.template_id, this.props.question_id);*/
+
+        this.props.showStatsView(this.props.template_id, this.props.question_id, '');
     }
 
     onMergeTagsClicked(e){

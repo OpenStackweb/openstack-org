@@ -37,12 +37,20 @@ final class SangriaSurveyBuilderExtension extends Extension
      * @var ISurveyTemplateRepository
      */
     private $survey_template_repository;
+    /**
+     * @var ISurveyAnswerRepository
+     */
+    private $survey_answer_repository;
 
-    public function __construct(ISurveyRepository $survey_repository, ISurveyTemplateRepository $survey_template_repository)
+
+    public function __construct(ISurveyRepository $survey_repository,
+                                ISurveyTemplateRepository $survey_template_repository,
+                                ISurveyAnswerRepository $survey_answer_repository)
     {
         parent::__construct();
         $this->survey_repository =  $survey_repository;
         $this->survey_template_repository = $survey_template_repository;
+        $this->survey_answer_repository = $survey_answer_repository;
     }
 
     public function onBeforeInit()
@@ -341,80 +349,31 @@ HTML;
      */
     public function ViewSurveyFreeAnswersStats(SS_HTTPRequest $request){
 
-        $query_string = $request->getVars();
-        $question_id  = intval($query_string['question_id']);
-        $tags         = explode(',', $query_string['tags']);
-        $tags         = implode("','", $tags);
-
-        $question = SurveyQuestionTemplate::get()->byID($question_id);
-
-        if(is_null($question)) return new SS_HTTPResponse("", 404);
-
         Requirements::clear();
         Requirements::set_force_js_to_bottom(true);
         Requirements::css('sangria/ui/source/css/sangria.css');
-
         // js
         Requirements::javascript("themes/openstack/bower_assets/jquery/dist/jquery.min.js");
         Requirements::javascript("themes/openstack/bower_assets/jquery-migrate/jquery-migrate.min.js");
         Requirements::javascript("themes/openstack/bower_assets/jquery-cookie/jquery.cookie.js");
 
-        $query_1 = <<<SQL
-SELECT COUNT(ID) AS Qty, Tags FROM (
-SELECT SurveyAnswer.ID, GROUP_CONCAT(SurveyAnswerTag.Value) AS Tags
-from SurveyAnswer 
-INNER JOIN SurveyAnswer_Tags ON  SurveyAnswer_Tags.SurveyAnswerID=SurveyAnswer.ID
-INNER JOIN SurveyAnswerTag ON SurveyAnswer_Tags.SurveyAnswerTagID = SurveyAnswerTag.ID 
-WHERE SurveyAnswerTag.Value IN ('{$tags}')
-AND 
-QuestionID = {$question_id}
-GROUP BY SurveyAnswer.ID
-HAVING COUNT(SurveyAnswerTag.Value) = 1
-) AS T2
-GROUP BY Tags;
-SQL;
+        $query_string = $request->getVars();
+        $question_id  = intval($query_string['question_id']);
+        $question     = SurveyQuestionTemplate::get()->byID($question_id);
 
-        $query_2 = <<<SQL
-SELECT COUNT(ID) AS Qty, Tags FROM (
-SELECT SurveyAnswer.ID, GROUP_CONCAT(SurveyAnswerTag.Value) AS Tags
-from SurveyAnswer 
-INNER JOIN SurveyAnswer_Tags ON  SurveyAnswer_Tags.SurveyAnswerID=SurveyAnswer.ID
-INNER JOIN SurveyAnswerTag ON SurveyAnswer_Tags.SurveyAnswerTagID = SurveyAnswerTag.ID 
-WHERE SurveyAnswerTag.Value IN ('{$tags}')
-AND 
-QuestionID = {$question_id}
-GROUP BY SurveyAnswer.ID
-HAVING COUNT(SurveyAnswerTag.Value) > 1
-) AS T2
-GROUP BY Tags;
-SQL;
+        if(is_null($question)) return new SS_HTTPResponse("Question not found", 404);
+
+        $tag_count_results = $this->survey_answer_repository->getCountForTags($question_id);
+        $answer_count = $question->Answers()->Count();
 
         $results = [];
-        $count = 0;
-        $res1 = DB::query($query_1);
-        foreach ($res1 as $row){
-            $count += intval( $row['Qty']);
+        $total_tag_count = 0;
+        foreach ($tag_count_results as $row){
+            $total_tag_count += intval( $row['Qty']);
             $results[] = new ArrayData([
                 'Count' => $row['Qty'],
-                'Tags' => $row['Tags']
-            ]);
-        }
-
-        $res2 = DB::query($query_2);
-        foreach ($res2 as $row){
-            $count += intval( $row['Qty']);
-            $results[] = new ArrayData([
-                'Count' => $row['Qty'],
-                'Tags' => $row['Tags']
-            ]);
-        }
-
-        $total_count = intval(DB::query("SELECT COUNT(ID) FROM SurveyAnswer WHERE QuestionID = {$question_id};")->value());
-
-        if($total_count - $count > 0) {
-            $results[] = new ArrayData([
-                'Count' => $total_count - $count,
-                'Tags' => 'Other'
+                'Tag' => $row['Tag'],
+                'ID'  => $row['ID']
             ]);
         }
 
@@ -422,7 +381,7 @@ SQL;
         (
             $this->owner->Customise([
                 'Data'          => new ArrayList($results),
-                'QuestionTitle' => sprintf('%s ( N = %s )',$question->Label, $total_count)
+                'QuestionTitle' => sprintf('%s ( N = %s )',$question->Label, $answer_count)
             ])
         );
     }

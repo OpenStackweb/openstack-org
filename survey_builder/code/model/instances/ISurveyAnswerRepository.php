@@ -43,4 +43,10 @@ interface ISurveyAnswerRepository extends IEntityRepository {
      * @return array
      */
     public function getAllFreeTextAnswerTagsByQuestion($question_id);
+
+    /**
+     * @param int $question_id
+     * @return array
+     */
+    public function getCountForTags($question_id);
 }
