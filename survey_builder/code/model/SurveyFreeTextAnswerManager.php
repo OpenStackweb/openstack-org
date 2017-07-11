@@ -70,7 +70,10 @@ final class SurveyFreeTextAnswerManager implements ISurveyFreeTextAnswerManager
             if($answer->question()->getIdentifier() != $question_id)
                 throw new NotFoundEntityException('SurveyQuestionTemplate');
 
-            if($answer->question()->step()->survey()->getIdentifier() != $template_id)
+            $survey = $answer->question()->step()->survey();
+            $survey_id = (is_a($survey, 'EntitySurveyTemplate')) ? $survey->Parent()->getIdentifier() : $survey->getIdentifier();
+
+            if($survey_id != $template_id)
                 throw new NotFoundEntityException('SurveyTemplate');
 
             $answer->Value       = trim($data['value']);
@@ -98,7 +101,10 @@ final class SurveyFreeTextAnswerManager implements ISurveyFreeTextAnswerManager
             if($answer->question()->getIdentifier() != $question_id)
                 throw new NotFoundEntityException('SurveyQuestionTemplate');
 
-            if($answer->question()->step()->survey()->getIdentifier() != $template_id)
+            $survey = $answer->question()->step()->survey();
+            $survey_id = (is_a($survey, 'EntitySurveyTemplate')) ? $survey->Parent()->getIdentifier() : $survey->getIdentifier();
+
+            if($survey_id != $template_id)
                 throw new NotFoundEntityException('SurveyTemplate');
 
             $tag_value = strtolower(trim($tag));
@@ -136,14 +142,17 @@ final class SurveyFreeTextAnswerManager implements ISurveyFreeTextAnswerManager
             if($answer->question()->getIdentifier() != $question_id)
                 throw new NotFoundEntityException('SurveyQuestionTemplate');
 
-            if($answer->question()->step()->survey()->getIdentifier() != $template_id)
+            $survey = $answer->question()->step()->survey();
+            $survey_id = (is_a($survey, 'EntitySurveyTemplate')) ? $survey->Parent()->getIdentifier() : $survey->getIdentifier();
+
+            if($survey_id != $template_id)
                 throw new NotFoundEntityException('SurveyTemplate');
 
             $tag_value = strtolower(trim($tag));
 
             $tag = SurveyAnswerTag::get()->filter('Value', $tag_value)->first();
             if(is_null($tag))
-                throw new EntityValidationException('tag does not belongs to answer');
+                throw new EntityValidationException('tag does not belong to answer');
 
             $answer->Tags()->remove($tag);
         });
@@ -173,7 +182,10 @@ final class SurveyFreeTextAnswerManager implements ISurveyFreeTextAnswerManager
             $question = SurveyQuestionTemplate::get()->byID($question_id);
             if(is_null($question)) throw new NotFoundEntityException('SurveyQuestionTemplate');
 
-            if($question->step()->survey()->getIdentifier() != $template_id)
+            $survey = $question->step()->survey();
+            $survey_id = (is_a($survey, 'EntitySurveyTemplate')) ? $survey->Parent()->getIdentifier() : $survey->getIdentifier();
+
+            if($survey_id != $template_id)
                 throw new NotFoundEntityException('SurveyTemplate');
 
             $replace_tag_value = strtolower(trim($replace_tag));
