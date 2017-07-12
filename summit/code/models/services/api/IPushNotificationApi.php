@@ -22,7 +22,7 @@ interface IPushNotificationApi
      * @param null|int $ttl
      * @return bool
      */
-    function sendPush($to, array $data, $priority = IPushNotificationApi::NormalPriority, $platform = 'MOBILE', $ttl = null);
+    function sendPush($to, array $data, $priority = IPushNotificationMessage::NormalPriority, $platform =  IPushNotificationMessage::PlatFormMobile, $ttl = null);
 
     /**
      * https://developers.google.com/instance-id/reference/server#create_relationship_maps_for_app_instances

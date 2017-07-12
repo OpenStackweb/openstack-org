@@ -86,19 +86,12 @@ final class FireBaseGCMApi implements IPushNotificationApi
      * @param null|int $ttl
      * @return bool
      */
-    function sendPush($to, array $data, $priority = IPushNotificationApi::NormalPriority, $platform = 'MOBILE', $ttl = null)
+    function sendPush($to, array $data, $priority = IPushNotificationMessage::NormalPriority, $platform = IPushNotificationMessage::PlatFormMobile, $ttl = null)
     {
-        $res      = true;
-
-        if ($platform == 'WEB') {
-            $res = $this->sendPushWeb($to, $data, $priority, $ttl);
-        } else {
-            $res = $this->sendPushMobile($to, $data, $priority, $ttl);
-        }
-
-        return $res;
+        if ($platform == IPushNotificationMessage::PlatFormWeb)
+            return   $this->sendPushWeb($to, $data, $priority, $ttl);
+        return $this->sendPushMobile($to, $data, $priority, $ttl);
     }
-
 
     /**
      * @param \GuzzleHttp\Client $client
@@ -144,7 +137,7 @@ final class FireBaseGCMApi implements IPushNotificationApi
      * @param null|int $ttl
      * @return bool
      */
-    private function sendPushMobile($to, array $data, $priority = IPushNotificationApi::NormalPriority, $ttl = null)
+    private function sendPushMobile($to, array $data, $priority = IPushNotificationMessage::NormalPriority, $ttl = null)
     {
         $client   = new GuzzleHttp\Client();
         $res      = true;
@@ -155,7 +148,7 @@ final class FireBaseGCMApi implements IPushNotificationApi
 
                 // create for droid ( data message)
 
-                $response = $this->sendRegularPayloadPush($data, sprintf(self::AndroidRecipient, $recipient), $priority );
+                $response = $this->sendRegularPayloadPush($client, $data, sprintf(self::AndroidRecipient, $recipient), $priority );
 
                 if ($response->getStatusCode() !== 200) $res = $res && false;
 
@@ -163,14 +156,14 @@ final class FireBaseGCMApi implements IPushNotificationApi
 
                 // create for ios ( notification message with custom payload)
 
-                $response = $this->sendCustomPayloadPush($data, sprintf(self::IOSRecipient, $recipient), $priority );
+                $response = $this->sendCustomPayloadPush($client, $data, sprintf(self::IOSRecipient, $recipient), $priority );
                 if ($response->getStatusCode() !== 200) $res = $res && false;
 
                 usleep(self::BaseBackOff * $attempt);
 
                 // create for ios ( data message)
 
-                $response = $this->sendRegularPayloadPush($data, sprintf(self::IOSRecipient, $recipient), $priority );
+                $response = $this->sendRegularPayloadPush($client, $data, sprintf(self::IOSRecipient, $recipient), $priority );
 
                 if ($response->getStatusCode() !== 200) $res = $res && false;
 
@@ -192,7 +185,7 @@ final class FireBaseGCMApi implements IPushNotificationApi
      * @param null|int $ttl
      * @return bool
      */
-    private function sendPushWeb($to, array $data, $priority = IPushNotificationApi::NormalPriority, $ttl = null)
+    private function sendPushWeb($to, array $data, $priority = IPushNotificationMessage::NormalPriority, $ttl = null)
     {
         $client   = new GuzzleHttp\Client();
         $res      = true;
@@ -201,7 +194,7 @@ final class FireBaseGCMApi implements IPushNotificationApi
         try {
             foreach ($to as $recipient) {
 
-                $response = $this->sendRegularPayloadPush($data, $recipient, $priority);
+                $response = $this->sendRegularPayloadPush($client, $data, $recipient, $priority);
 
                 if ($response->getStatusCode() !== 200) $res = $res && false;
 
