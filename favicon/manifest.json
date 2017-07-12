@@ -13,5 +13,6 @@
 		}
 	],
 	"theme_color": "#ffffff",
-	"display": "standalone"
+	"display": "standalone",
+    "gcm_sender_id": "103953800507" //Some browsers will use this to enable push notifications
 }

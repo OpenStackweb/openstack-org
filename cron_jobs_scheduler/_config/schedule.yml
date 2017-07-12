@@ -61,7 +61,7 @@ jobs:
     cron_expression: "*/5 * * * *" # run every 5 minutes
     enabled: 1
 
-  - name: "SummitPushNotificationSenderTask"
+  - name: "PushNotificationSenderTask"
     cron_expression: "* * * * *" # run every minute
     enabled: 1
 

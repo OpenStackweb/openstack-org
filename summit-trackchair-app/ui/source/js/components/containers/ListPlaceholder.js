@@ -8,8 +8,11 @@ const listTarget = {
     const dragIndex = monitor.getItem().index;    
     const dragList = monitor.getItem().column;    
 
-    props.onMove(monitor.getItem(), dragList, dragIndex, props.column, 0);    
+    //props.onMove(monitor.getItem(), dragList, dragIndex, props.column, 0);
     monitor.getItem().index = 0;
+    monitor.getItem().column = props.column;
+    monitor.getItem().targetListID = props.listID;
+    monitor.getItem().targetListHash = props.listHash;
   }
 };
 

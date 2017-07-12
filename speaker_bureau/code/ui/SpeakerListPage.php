@@ -122,7 +122,12 @@ class SpeakerListPage_Controller extends Page_Controller
     //Show the profile of the speaker using the SpeakerListPage_profile.ss template
     function findSpeaker($SpeakerID)
     {
-        return PresentationSpeaker::get()->filter(array('ID'=>$SpeakerID,'AvailableForBureau'=>1))->first();
+        $current_member = Member::currentUser();
+        if ($current_member && ($current_member->isTrackChair() || $current_member->isAdmin())) {
+            return PresentationSpeaker::get()->filter(array('ID'=>$SpeakerID))->first();
+        } else {
+            return PresentationSpeaker::get()->filter(array('ID'=>$SpeakerID,'AvailableForBureau'=>1))->first();
+        }
     }
 
     public function suggestions()

@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-class PushNotificationMessage extends DataObject implements IEntity
+class PushNotificationMessage extends DataObject implements IPushNotificationMessage
 {
     use CustomDataObject;
 
@@ -23,6 +23,7 @@ class PushNotificationMessage extends DataObject implements IEntity
         'IsSent'    => 'Boolean',
         'SentDate'  => 'SS_Datetime',
         'Priority'  => "Enum('NORMAL, HIGH', 'NORMAL')",
+        'Platform'  => "Enum('MOBILE, WEB','MOBILE')"
     );
 
     private static $has_one = array
@@ -51,6 +52,9 @@ class PushNotificationMessage extends DataObject implements IEntity
         $this->ApprovedByID = Member::currentUserID();
     }
 
+    /**
+     * @return boolean
+     */
     public function isAlreadySent(){
         return $this->IsSent;
     }
@@ -76,5 +80,30 @@ class PushNotificationMessage extends DataObject implements IEntity
         $date->setTimezone($utc_timezone);
 
         return $date->getTimestamp();
+    }
+
+    const PushType = 'PUSH_NOTIFICATION';
+
+    /**
+     * @return string
+     */
+    public function getType(){
+        return self::PushType;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPlatform()
+    {
+        return $this->getField('Platform');
+    }
+
+    /**
+     * @return string
+     */
+    public function getPriority()
+    {
+        return $this->getField('Priority');
     }
 }

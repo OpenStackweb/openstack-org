@@ -27,8 +27,6 @@ const PresentationList = ({
 	            		muted={!!presentation.viewed}
 	            		notes={notes}
 	            		title={presentation.title}
-                        lightning={presentation.lightning}
-                        lightning_wannabe={presentation.lightning_wannabe}
                     />
 	            </RouterLink>
             );

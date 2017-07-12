@@ -26,8 +26,6 @@ class StaticSelectionsList extends React.Component {
 						>
 							<div className="selection-meta">
                                 {s.presentation.level}
-                                {s.presentation.lightning && <span className="selection-lightning"><i className="fa fa-bolt" /></span> }
-                                {s.presentation.lightning_wannabe && <span className="selection-lightning">"<i className="fa fa-bolt" />"</span> }
                             </div>
 
 						</LeaderboardItem>	

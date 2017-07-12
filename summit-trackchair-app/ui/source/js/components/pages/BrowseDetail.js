@@ -5,7 +5,7 @@ import {
 	postMySelection, 
 	postGroupSelection,
 	postMarkAsRead,
-	toggleEmailSpeakers,
+    toggleEmailSpeakers,
 	updateDetailPresentationID
 } from '../../actions';
 import PresentationCommentForm from '../containers/PresentationCommentForm';
@@ -49,9 +49,9 @@ class BrowseDetail extends React.Component {
 
     render () {
     	const p = this.props.presentation;    	
-    	const {selectionsRemaining, lightningSelectionsRemaining, myList, myLightningList, isAdmin, index, total} = this.props;
+    	const {selectionsRemaining, myList, isAdmin, index, total} = this.props;
 
-    	if(!p.id) {
+    	if(!p.id || p.loading) {
     		return <Wave />
     	}
 
@@ -69,7 +69,7 @@ class BrowseDetail extends React.Component {
 
     	const speakers = p.speakers.filter(s => !s.is_moderator);
     	const moderators = p.speakers.filter(s => !!s.is_moderator);
-        
+
         return (
 			<div className="wrapper wrapper-content">
 				{p.selected && !p.group_selected &&
@@ -109,17 +109,21 @@ class BrowseDetail extends React.Component {
 
 			         <div className="row">
 			            <div className="col-lg-12">
-			            {p.change_requests_count > 0 && isAdmin &&
+			            {p.change_requests_count > 0 && ( isAdmin || p.can_assign ) &&
 			            	<div className="alert alert-info">
 			            		This presentation has {p.change_requests_count} category change requests that are unresolved.
 			            		[<RouterLink link='change-requests'>View</RouterLink>]
 			            	</div>
 			            }
+                        {p.show_comment_message && ( isAdmin || p.can_assign ) &&
+                            <div className="alert alert-info">
+                                New comments awaiting! Please refresh to view them.
+                            </div>
+                        }
 			            {myList &&
 			            	<p>
                                 <small className="pull-right">
-                                    Selections remaining: {p.lightning ? lightningSelectionsRemaining : selectionsRemaining }
-                                    {p.lightning_wannabe && <span>-{lightningSelectionsRemaining}<i className='fa fa-bolt' /></span> }
+                                    Selections remaining: { selectionsRemaining }
                                 </small>
                             </p>
 			            }
@@ -166,22 +170,14 @@ class BrowseDetail extends React.Component {
 export default connect(
 	state => {
 		const filteredPresentations = getFilteredPresentations(state);
-		const myList = state.lists.results ? state.lists.results.find(l => l.mine && !l.is_lightning) : null;
-		const myLightningList = state.lists.results ? state.lists.results.find(l => l.mine && l.is_lightning) : null;
+		const myList = state.lists.results ? state.lists.results.find(l => l.mine) : null;
 		let selectionsRemaining = myList ? (myList.slots - myList.selections.length) : null;
-		const lightningSelectionsRemaining = myLightningList ? (myLightningList.slots - myLightningList.selections.length) : null;
 		const index = filteredPresentations.findIndex(p => p.id === state.detailPresentation.id)+1;
 
-        /*if (state.detailPresentation.lightning_wannabe) {
-            selectionsRemaining = `${selectionsRemaining} <i className='fa fa-bolt' /> ${lightningSelectionsRemaining}`;
-        }*/
-
-		return {	
+		return {
 			presentation: state.detailPresentation,
 			myList,
-            myLightningList,
 			selectionsRemaining,
-            lightningSelectionsRemaining,
 			index,
 			total: filteredPresentations.length,
 			isAdmin: window.TrackChairAppConfig.userinfo.isAdmin

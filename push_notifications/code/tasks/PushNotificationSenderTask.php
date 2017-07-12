@@ -12,8 +12,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-final class SummitPushNotificationSenderTask extends CronTask
+final class PushNotificationSenderTask extends CronTask
 {
+
+    /**
+     * @var IFireBasePushNotificationSerializationStrategyFactory
+     */
+    private $serialization_strategy_factory;
+
+    /**
+     * PushNotificationSenderTask constructor.
+     * @param IFireBasePushNotificationSerializationStrategyFactory $serialization_strategy_factory
+     */
+    public function __construct(IFireBasePushNotificationSerializationStrategyFactory $serialization_strategy_factory)
+    {
+        parent::__construct();
+        $this->serialization_strategy_factory = $serialization_strategy_factory;
+    }
 
     /**
      * @return void
@@ -31,10 +46,11 @@ final class SummitPushNotificationSenderTask extends CronTask
                 echo sprintf('batch_size set to %s', $batch_size);
             }
 
-            $manager   = new SummitPushNotificationManager
+            $manager   = new PushNotificationManager
             (
-                new SapphireSummitPushNotificationRepository,
+                new SapphirePushNotificationRepository,
                 new FireBaseGCMApi(FIREBASE_GCM_SERVER_KEY),
+                $this->serialization_strategy_factory,
                 SapphireTransactionManager::getInstance()
             );
 

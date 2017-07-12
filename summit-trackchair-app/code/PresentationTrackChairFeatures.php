@@ -61,16 +61,8 @@ class PresentationTrackChairFeatures extends DataExtension
             throw new InvalidArgumentException("assignToIndividualList() must take a collection argument of COLLECTION_MAYBE, COLLECTION_PASS, or COLLECTION_SELECTED per the SummitSelectedPresentation class definition");
         }
 
-        // tricky part here, if presentation is lightning talk or lightning wannabe we have to add it to Lightning List
-        $lists_to_add_to = array();
-        if ($this->owner->Type()->Type == IPresentationType::LightingTalks) {
-            $lists_to_add_to[] = SummitSelectedPresentationList::Lightning;
-        } else {
-            $lists_to_add_to[] = SummitSelectedPresentationList::Session;
-            if ($this->owner->LightningTalk) {
-                $lists_to_add_to[] = SummitSelectedPresentationList::Lightning;
-            }
-        }
+        // since lightning talks are off, we only add to session
+        $lists_to_add_to = array(SummitSelectedPresentationList::Session);
 
         // error message
         $msg = '';
@@ -92,27 +84,6 @@ class PresentationTrackChairFeatures extends DataExtension
             if($selected && $highestOrderInList >= $highestSelection) {
                 $list_class_name = SummitSelectedPresentationList::getListClassName($list_class);
                 $msg = "$list_class_name Selection list is full. Currently at $highestOrderInList. Limit is $highestSelection.";
-                //check if there is space for selected in the other list
-                if ($this->owner->isLightningWannabe()) {
-                    $other_list_class = ($list_class == SummitSelectedPresentationList::Lightning) ? SummitSelectedPresentationList::Session : SummitSelectedPresentationList::Lightning;
-                    $myOtherSelections = SummitSelectedPresentationList::getMemberList($this->owner->CategoryID, $other_list_class);
-                    $highestOtherSelection = $myOtherSelections->maxPresentations();
-                    $highestOtherOrderInList = $myOtherSelections
-                        ->SummitSelectedPresentations()
-                        ->filter('Collection', $collection)
-                        ->max('Order');
-                    // lightning wannabes first we add session and then lightning, so it depends
-                    if ($list_class == SummitSelectedPresentationList::Lightning) {
-                        $should_add_declaimer = $highestOtherOrderInList == $highestOtherSelection;
-                    } else {
-                        $should_add_declaimer = $highestOtherOrderInList < $highestOtherSelection;
-                    }
-                    if($should_add_declaimer) {
-                        $other_list_class_name = SummitSelectedPresentationList::getListClassName($other_list_class);
-                        $msg .= "However it will be added to {$other_list_class_name} Selection.";
-                    }
-                }
-
                 // will not add this presentation, list is full
                 continue;
             }
@@ -150,16 +121,9 @@ class PresentationTrackChairFeatures extends DataExtension
     {
         // Check permissions of user on talk
         if ($this->owner->CanAssign()) {
-            // tricky part here, if presentation is lightning talk or lightning wannabe we have to add it to Lightning List
-            $lists_to_add_to = array();
-            if ($this->owner->Type()->Type == IPresentationType::LightingTalks) {
-                $lists_to_add_to[] = SummitSelectedPresentationList::Lightning;
-            } else {
-                $lists_to_add_to[] = SummitSelectedPresentationList::Session;
-                if ($this->owner->LightningTalk) {
-                    $lists_to_add_to[] = SummitSelectedPresentationList::Lightning;
-                }
-            }
+            // since lightning talks are off, we only update session lists
+            $lists_to_add_to = array(SummitSelectedPresentationList::Session);
+
             foreach ($lists_to_add_to as $list_class) {
                 $mySelections = SummitSelectedPresentationList::getMemberList($this->owner->CategoryID, $list_class);
                 // See if the presentation has already been assigned
@@ -254,7 +218,6 @@ class PresentationTrackChairFeatures extends DataExtension
     }
     public function getSelectionType($list_class = SummitSelectedPresentationList::Session)
     {
-        $list_class = ($this->owner->isOfType(IPresentationType::LightingTalks)) ? SummitSelectedPresentationList::Lightning : $list_class;
         if($this->isSelected($list_class)) {
             return SummitSelectedPresentation::COLLECTION_SELECTED;
         }
@@ -361,7 +324,6 @@ class PresentationTrackChairFeatures extends DataExtension
                 'ListType' => SummitSelectedPresentationList::Group,
             ]);
         $session_sel = $selections->filter('ListClass',SummitSelectedPresentationList::Session);
-        $lightning_sel = $selections->filter('ListClass',SummitSelectedPresentationList::Lightning);
         // Error out if a talk has more than one selection
         if ($session_sel->count() > 1) {
             $selectionsList = [];
@@ -374,23 +336,12 @@ class PresentationTrackChairFeatures extends DataExtension
                 SS_Log::WARN
             );
         }
-        if ($lightning_sel->count() > 1) {
-            $selectionsList = [];
-            foreach($lightning_sel as $s) {
-                $l = $s->SummitSelectedPresentationList();
-                $selectionsList[] = "List: {$l->ListName} ID: {$l->ID} Category: ({$l->Category()->Title})";
-            }
-            SS_Log::log(
-                'There is more than one instance of a talk selected. Talk ID ' . $this->owner->ID . ' appears in: ' . implode(', ', $selectionsList),
-                SS_Log::WARN
-            );
-        }
+
         $selection = null;
         if ($session_sel->exists()) {
             $selection = $session_sel->first();
-        } else if ($lightning_sel->exists()) {
-            $selection = $lightning_sel->first();
         }
+
         // Error out if the category of presentation does not match category of selection
         if ($selection && $this->owner->CategoryID != $selection->SummitSelectedPresentationList()->Category()->ID) {
             SS_Log::log(

@@ -12,7 +12,7 @@ class PresentationMeta extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			showCategoryChange: false,
+            showChangeRequest: props.showChangeRequest,
 			selectedCategory: +props.presentation.category_id
 		};
 		this.toggleCategoryChange = this.toggleCategoryChange.bind(this);
@@ -20,10 +20,19 @@ class PresentationMeta extends React.Component {
 		this.onSubmit = this.onSubmit.bind(this);	
 	}
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.showChangeRequest !== this.state.showChangeRequest) {
+            this.setState({
+                showChangeRequest: nextProps.showChangeRequest,
+                selectedCategory: nextProps.presentation.category_id
+            });
+        }
+    }
+
 	toggleCategoryChange(e) {
 		e.preventDefault();
 		this.setState({
-			showCategoryChange: !this.state.showCategoryChange
+            showChangeRequest: !this.state.showChangeRequest
 		});
 	}
 
@@ -47,7 +56,6 @@ class PresentationMeta extends React.Component {
 
 	render() {
 		const {presentation, requesting, success} = this.props;
-        const isSession = (!presentation.lightning && !presentation.lightning_wannabe);
 
 		const tooltip = (
 			<Tooltip
@@ -68,9 +76,7 @@ class PresentationMeta extends React.Component {
 		                  <dt>Submitted by:</dt>
 		                  <dd>{presentation.creator}</dd>
                           <dt>Type:</dt>
-                          {presentation.lightning && <dd>Lightning Talk</dd>}
-                          {presentation.lightning_wannabe && <dd>Lightning or Presentation</dd>}
-                          {isSession && <dd>Presentation</dd>}
+                          <dd>Presentation</dd>
 		               </dl>
 		            </div>
 		            <div className="col-md-7" id="cluster_info">
@@ -79,14 +85,19 @@ class PresentationMeta extends React.Component {
 		                  <dd>{presentation.level}</dd>
 		                  <dt>Category:</dt>
 		                  <dd>
-		                  	{presentation.category_name}<br />
-		                  		(<a href="#" onClick={this.toggleCategoryChange}>Request category change</a>)
-
-		                  </dd>                  
+		                  	{presentation.category_name}
+                              {presentation.moved_to_category &&
+                                <span key='moved' className="detail-presentation-metric moved">
+                                  <i className="fa fa-exchange" />
+                                </span>
+                              }
+                            <br />
+		                  	(<a href="#" onClick={this.toggleCategoryChange}>Request category change</a>)
+		                  </dd>
 		               </dl>		               
 		            </div>
 		        </div>
-              	{this.state.showCategoryChange &&
+              	{this.state.showChangeRequest &&
               	<div className="row">
               		<div className="col-md-8 col-md-offset-2">
 	              		<div className="change-request-form">
@@ -174,6 +185,7 @@ class PresentationMeta extends React.Component {
 export default connect(
 	state => ({
 		showChangeRequest: state.detailPresentation.showChangeRequest,
+        selectedCategory: state.detailPresentation.category_id,
 		requesting: state.detailPresentation.requesting,
 		success: state.detailPresentation.categorySuccess
 	}),
