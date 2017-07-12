@@ -740,7 +740,7 @@ SQL;
         $query .= "P.Status AS status";
 
         $query .= $query_body . $query_where . $query_group . " ORDER BY {$sort} {$sort_dir}";
-        $query_count .= $query_body . $query_where . " ) AS Q1";
+        $query_count .= $query_body . $query_where . $query_group . " ) AS Q1";
         $query_track = "SELECT PC.Title AS track, COUNT(DISTINCT P.ID) AS track_count FROM SummitEvent AS E
                         INNER JOIN Presentation AS P ON E.ID = P.ID
                         INNER JOIN PresentationCategory AS PC ON E.CategoryID = PC.ID
