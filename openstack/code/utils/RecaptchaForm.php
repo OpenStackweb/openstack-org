@@ -26,7 +26,8 @@ HTML;
         // Guard against automated spam registrations by optionally adding a field
         // that is supposed to stay blank (and is hidden from most humans).
         $fields->push($recaptcha = new LiteralField(self::FieldName, sprintf(self::RecaptchaFieldContent, RECAPTCHA_SITE_KEY)));
-        Requirements::javascript('https://www.google.com/recaptcha/api.js');
+
+        Requirements::javascript(sprintf('https://www.google.com/recaptcha/api.js?hl=%s',$this->getReCaptchaLocale() ));
         Requirements::customScript("var verifyCallback = function(response) {
             $('#g_recaptcha_hidden').val(response);
             $('#g_recaptcha_hidden').valid();
@@ -36,6 +37,38 @@ HTML;
         parent::__construct($controller, $name, $fields, $actions, $validator);
     }
 
+    /**
+     * https://developers.google.com/recaptcha/docs/language?hl=en
+     */
+    private function getReCaptchaLocale(){
+        $locale = GetText::current_locale();
+
+        switch ($locale){
+            case Locales::German:
+                $locale = 'de';
+                break;
+            case Locales::Chinese:
+                $locale = 'zh-CN';
+                break;
+            case Locales::Taiwanese:
+                $locale = 'zh-TW';
+                break;
+            case Locales::Korean:
+                $locale = 'ko';
+                break;
+            case Locales::Japanese:
+                $locale = 'ja';
+                break;
+            case Locales::Indonesian:
+                $locale = 'id';
+                break;
+            default:
+                $locale = 'en';
+                break;
+        }
+
+        return $locale;
+    }
 
     public function validate(){
         $res               = parent::validate();
