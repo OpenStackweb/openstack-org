@@ -6,13 +6,15 @@
     function countDown(){
         if(seconds > 0)
             seconds = seconds - 1;
+
         $('#redirect-seconds-counter').text(seconds);
+
         if(seconds == 0) {
             window.location = "{$LoginUrl}";
+            return;
         }
-        else{
-            setTimeout(countDown,1000);
-        }
+        setTimeout(countDown,1000);
     }
-    countDown();
-</script>
+
+    setTimeout(countDown, 1000);
+</script>cla
