@@ -2,26 +2,24 @@
 <div id="openstack-sangria-survey-free-text-answerss-stats-app"></div>
 
 <script>
-
-    var labels = [];
-    var data = [];
-    var tags = [];
+    var data = {
+        tags: [],
+        question_title: '{$QuestionTitle}',
+        total_answers: {$AnswerCount},
+        template_id: {$TemplateID},
+        question_id: {$QuestionID}
+    }
 
     <% loop $Data %>
-        labels.push('{$Tag}');
-        data.push({$Count});
-    <% end_loop %>
-
-    <% loop $Data.Sort(Tag) %>
-        tags.push({
+        data.tags.push({
             id: {$ID},
             name: '{$Tag}',
             qty: '{$Count}',
-            active: true
+            active: true,
+            answer_ids: '{$AnswerIDs}'.split(',')
         });
     <% end_loop %>
 
-    var question_title = '{$QuestionTitle}';
 
 </script>
 $ModuleJS("sangria-free-text-answers-list-stats", true , "survey_builder")

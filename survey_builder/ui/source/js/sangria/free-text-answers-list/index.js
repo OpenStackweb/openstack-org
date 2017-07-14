@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function init() {
             <Provider store={store}>
                 <SangriaSurveyFreeTextAnswersListApp page_size={pageSize} templates={templates}/>
             </Provider>
-        ,
+            ,
             document.getElementById(containerId)
         );
     }

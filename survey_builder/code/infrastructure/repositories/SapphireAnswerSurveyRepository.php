@@ -293,8 +293,8 @@ SQL;
     {
 
         $query = <<<SQL
-SELECT ID, `Value` AS Tag, COUNT(ID) AS Qty FROM (
-SELECT SurveyAnswerTag.* FROM SurveyAnswerTag
+SELECT ID, `Value` AS Tag, COUNT(ID) AS Qty, GROUP_CONCAT(SurveyAnswerID) AS AnswerIDs FROM (
+SELECT SurveyAnswerTag.*, SurveyAnswer_Tags.SurveyAnswerID FROM SurveyAnswerTag
 INNER JOIN SurveyAnswer_Tags on SurveyAnswer_Tags.SurveyAnswerTagID = SurveyAnswerTag.ID
 INNER JOIN  SurveyAnswer on SurveyAnswer.ID = SurveyAnswer_Tags.SurveyAnswerID
 WHERE SurveyAnswer.QuestionID = {$question_id}

@@ -358,6 +358,7 @@ HTML;
         Requirements::javascript("themes/openstack/bower_assets/jquery-cookie/jquery.cookie.js");
 
         $query_string = $request->getVars();
+        $template_id  = intval($query_string['template_id']);
         $question_id  = intval($query_string['question_id']);
         $question     = SurveyQuestionTemplate::get()->byID($question_id);
 
@@ -371,9 +372,10 @@ HTML;
         foreach ($tag_count_results as $row){
             $total_tag_count += intval( $row['Qty']);
             $results[] = new ArrayData([
-                'Count' => $row['Qty'],
-                'Tag' => $row['Tag'],
-                'ID'  => $row['ID']
+                'Count'     => $row['Qty'],
+                'Tag'       => $row['Tag'],
+                'ID'        => $row['ID'],
+                'AnswerIDs' => $row['AnswerIDs']
             ]);
         }
 
@@ -381,7 +383,10 @@ HTML;
         (
             $this->owner->Customise([
                 'Data'          => new ArrayList($results),
-                'QuestionTitle' => sprintf('%s ( N = %s )',$question->Label, $answer_count)
+                'QuestionTitle' => $question->Label,
+                'AnswerCount'   => $answer_count,
+                'QuestionID'    => $question_id,
+                'TemplateID'    => $template_id
             ])
         );
     }

@@ -200,9 +200,9 @@ final class SurveyFreeTextAnswerManager implements ISurveyFreeTextAnswerManager
                 $replace_tag_obj->write();
             }
 
-            $answers = $question->Answers()->filter(array('Tags.Value' => $tags_to_replace));
+            $answers = $question->Answers()->filter(array('Tags.ID' => $tags_to_replace));
             foreach($answers as $answer) {
-                $answer->Tags()->filter('Value',$tags_to_replace)->removeAll();
+                $answer->Tags()->filter('ID',$tags_to_replace)->removeAll();
                 if ($answer->Tags()->filter('Value',$replace_tag_value)->Count() == 0){
                     $answer->Tags()->add($replace_tag_obj);
                 }
