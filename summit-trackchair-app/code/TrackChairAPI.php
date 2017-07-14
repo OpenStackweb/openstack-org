@@ -1266,7 +1266,7 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
 
             $subject = 'Track Change Requested';
             $body = Member::currentUser()->getName() . ' requested to change the track for presentation ';
-            $body .= '"' . $this->presentation->Title . '" from ' . $c->Title . ' to ' . $this->presentation->Category()->Title.'.';
+            $body .= '"' . $this->presentation->Title . '" from ' . $this->presentation->Category()->Title . ' to ' . $c->Title .'.';
             $body .= '<br>Please review here: <a href="'.$review_link.'">'.$review_link.'</a>.';
 
             $email = EmailFactory::getInstance()->buildEmail(null, implode(',', $chairs_emails), $subject, $body);
