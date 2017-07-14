@@ -16,7 +16,7 @@ import RC2 from 'react-chartjs2';
 import { render } from 'react-dom';
 import randomColor from 'randomcolor';
 import {mergeTags} from './actions';
-
+import Confirm from 'react-confirm-bootstrap';
 
 
 class SangriaSurveyFreeTextAnswersListStatsApp extends React.Component {
@@ -32,7 +32,7 @@ class SangriaSurveyFreeTextAnswersListStatsApp extends React.Component {
             format: 'rgbArray'
         });
 
-        for(let i=0; i<random_colors.length; i++){
+        for(let i=0; i < random_colors.length; i++){
             let color = random_colors[i];
             tags[i].bgnd_color = `rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.3)`;
             tags[i].brd_color = `rgba(${color[0]}, ${color[1]}, ${color[2]}, 1)`;
@@ -65,8 +65,11 @@ class SangriaSurveyFreeTextAnswersListStatsApp extends React.Component {
             question_title: props.data.question_title,
             chartData: chart_data,
             chartOptions: options,
-            select_all: true
+            select_all: true,
+            isOpenModalMergeTags: false
         }
+
+        this.onMergeTags = this.onMergeTags.bind(this);
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -148,41 +151,52 @@ class SangriaSurveyFreeTextAnswersListStatsApp extends React.Component {
         this.props.mergeTags(this.props.data.template_id, this.props.data.question_id, tags, replace_tag);
     }
 
-
     render() {
         return (
-            <div>
-                <h4>{this.state.question_title + ' (' + this.state.tag_answers + ' out of ' + this.props.data.total_answers + ' )'}</h4>
-                <RC2 data={this.state.chartData} type='pie' options={this.state.chartOptions} />
-                <div id="tag-list">
-                    <div>Tag List (<a id="select-all" onClick={(e) => this.onSelectAllClick(e)}>{(this.state.select_all ? 'select none' : 'select all')}</a>)</div>
-                    <hr/>
-                    {
-                        this.state.tags.map(
-                            tag =>
-                            <button type="button" key={'tag_' + tag.id}
-                                    className={"btn btn-default btn-sm " + (tag.active ? "active" : "")}
-                                    data-toggle="button"
-                                    onClick={(e) => this.onTagClick(e, tag)}
-                                    style={{backgroundColor: tag.bgnd_color}}>
-                                {tag.name}
-                            </button>
-                        )
-                    }
-                </div>
-                <div>Merge Tags</div>
-                <hr/>
-                <div id="merge-box" className="row">
-                    <div className="col-md-8">
-                        <input type="text" id="merge-tag" className="form-control"
-                            onChange={(e) => this.onReplaceTagChange(e) }
-                            placeholder="Replace with Tag"
-                        />
+            <div className="row">
+                <div className="col-md-6 left_col">
+                    <h4 className="graph_title" >{this.state.question_title + ' ( ' + this.state.tag_answers + ' out of ' + this.props.data.total_answers + ' )'}</h4>
+                    <div id="graph-box">
+                        <RC2 data={this.state.chartData} type='pie' options={this.state.chartOptions} />
                     </div>
-                    <div className="col-md-4">
-                        <button type="button" className="btn btn-primary" onClick={(e) => this.onMergeTags(e)}>
-                            Merge
-                        </button>
+                </div>
+                <div className="col-md-6 right_col">
+                    <div id="tag-list">
+                        <h4>Tag List (<a id="select-all" onClick={(e) => this.onSelectAllClick(e)}>{(this.state.select_all ? 'select none' : 'select all')}</a>)</h4>
+                        {
+                            this.state.tags.map(
+                                tag =>
+                                <button type="button" key={'tag_' + tag.id}
+                                        className={"btn btn-default btn-sm " + (tag.active ? "active" : "")}
+                                        data-toggle="button"
+                                        onClick={(e) => this.onTagClick(e, tag)}
+                                        style={{backgroundColor: tag.bgnd_color}}>
+                                    {tag.name} ({tag.qty})
+                                </button>
+                            )
+                        }
+                    </div>
+                    <hr/>
+                    <h4>Merge Tags</h4>
+                    <div id="merge-box" className="row">
+                        <div className="col-md-8">
+                            <input type="text" id="merge-tag" className="form-control"
+                                onChange={(e) => this.onReplaceTagChange(e) }
+                                placeholder="Replace with Tag"
+                            />
+                        </div>
+                        <div className="col-md-4">
+                            <Confirm
+                                onConfirm={this.onMergeTags}
+                                body="Are you sure you want to merge the selected tags?"
+                                confirmText="Merge"
+                                title="Merge Tags">
+                                    <button type="button" className="btn btn-primary">
+                                        Merge
+                                    </button>
+                            </Confirm>
+
+                        </div>
                     </div>
                 </div>
             </div>

@@ -159,11 +159,7 @@ export const surveyFreeTextAnswersReducer = (
             };
             break;
         case RECEIVE_MERGE_TAGS_FREE_TEXT_QUESTION:
-            return {
-                ...state,
-                loading: false,
-                reload: true
-            };
+            window.location.reload();
             break;
         default:
             return state;
