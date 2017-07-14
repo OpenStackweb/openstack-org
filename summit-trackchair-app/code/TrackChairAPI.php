@@ -563,6 +563,8 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         ];
 
         foreach ($changeRequests as $request) {
+            $old_category = ($request->Status == SummitCategoryChange::STATUS_PENDING) ? $request->Presentation()->Category() : $request->OldCategory();
+
             $row = [];
             $row['id'] = $request->ID;
             $row['presentation_id'] = $request->PresentationID;
@@ -574,8 +576,8 @@ class TrackChairAPI extends AbstractRestfulJsonApi
             $row['chair_of_new'] = $request->NewCategory()->isTrackChair($memID);
             $row['new_category']['title'] = $request->NewCategory()->Title;
             $row['new_category']['id'] = $request->NewCategory()->ID;
-            $row['old_category']['title'] = $request->Presentation()->Category()->Title;
-            $row['old_category']['id'] = $request->Presentation()->Category()->ID;
+            $row['old_category']['title'] = $old_category->Title;
+            $row['old_category']['id'] = $old_category->ID;
             $row['requester'] = $request->Reqester()->getName();
             $row['has_selections'] = $request->Presentation()->isSelectedByAnyone();
             $row['approver'] = $request->AdminApprover()->getName();
@@ -693,9 +695,10 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         if (!$category->exists()) {
             return $this->httpError(500, "Category not found in current summit");
         }
+
 		$oldCat = $request->Presentation()->Category();
+
         if($approved) {
-	        $request->OldCategoryID = $request->Presentation()->CategoryID;
 	        $request->Presentation()->CategoryID = $request->NewCategoryID;
             $request->Presentation()->TrackChairViews()->removeAll(); // empty viewed
 	        $request->Presentation()->write();    
@@ -714,6 +717,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
     		);
     	}
 
+        $request->OldCategoryID = $oldCat->ID;
         $request->AdminApproverID = Member::currentUserID();
         $request->Status = $status;
         $request->ApprovalDate = SS_Datetime::now();
@@ -751,7 +755,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         }
 
         $subject = 'Track Change '.($approved ? 'Approved' : 'Rejected');
-        $body = 'Request submited by '.$request->Reqester()->getName().' to change presentation "'.$request->Presentation()->Title.'"';
+        $body = 'Request submitted by '.$request->Reqester()->getName().' to change presentation "'.$request->Presentation()->Title.'"';
         $body .= ' from track '.$oldCat->Title.' to '.$new_category->Title. ' was '.($approved ? 'approved' : 'rejected');
         $body .= ' by '.Member::currentUser()->getName().'.<br>';
 
