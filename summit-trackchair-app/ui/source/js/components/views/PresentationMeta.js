@@ -76,7 +76,7 @@ class PresentationMeta extends React.Component {
 		                  <dt>Submitted by:</dt>
 		                  <dd>{presentation.creator}</dd>
                           <dt>Type:</dt>
-                          <dd>Presentation</dd>
+                          <dd>Presentation&nbsp;{presentation.lightning_wannabe && <i className='fa fa-bolt' /> }</dd>
 		               </dl>
 		            </div>
 		            <div className="col-md-7" id="cluster_info">

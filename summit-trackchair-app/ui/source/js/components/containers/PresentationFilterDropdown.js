@@ -26,6 +26,8 @@ const PresentationFilterDropdown = ({
 		<DropdownItem eventKey='selected'><i className='fa fa-star success' /> Vote: Selected</DropdownItem>
 		<DropdownItem eventKey='maybe'><i className='fa fa-thumbs-up warning' /> Vote: Interested</DropdownItem>
 		<DropdownItem eventKey='pass'><i className='fa fa-thumbs-down danger' /> Vote: No thanks</DropdownItem>
+        <DropdownItem divider />
+        <DropdownItem eventKey='presentation_lightning'><i className='fa fa-bolt' /> Lightning Talk </DropdownItem>
 	</Dropdown>
 );
 

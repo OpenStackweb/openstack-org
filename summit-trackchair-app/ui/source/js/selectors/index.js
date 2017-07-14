@@ -38,6 +38,9 @@ export const getFilteredPresentations = createSelector(
 			case 'pass':
 				filterFunc = p => p.selected === 'pass';
 				break;
+            case 'presentation_lightning':
+                filterFunc = p => !!p.lightning_wannabe;
+                break;
 			default:
 				filterFunc = p => p
 		}				
