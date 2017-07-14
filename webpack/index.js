@@ -68,7 +68,9 @@ if (!config.output) {
 }
 
 if (Object.keys(config.entry).length > 1) {
-    config.plugins.push(new webpack.optimize.CommonsChunkPlugin('js/__common__.js'));
+    config.plugins.push(new webpack.optimize.CommonsChunkPlugin(
+        { name: 'common', filename: 'js/__common__.js' }
+    ));
 }
 
 switch (TARGET) {
