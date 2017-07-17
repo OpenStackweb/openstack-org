@@ -320,21 +320,21 @@ msgstr "2015 年 10 月の全レポート"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:126
 msgid ""
-"This is the <strong>OpenStack User Survey</strong> for OpenStack cloud users "
-"and operators."
-msgstr "これは、OpenStack クラウドユーザと運用者用の <strong>OpenStack ユーザ調査</strong>です。"
+"<p>This is the <strong>OpenStack User Survey</strong> for OpenStack cloud users "
+"and operators.</p>"
+msgstr "<p>これは、OpenStack クラウドユーザと運用者用の <strong>OpenStack ユーザ調査</strong>です。</p>"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:132
-msgid "It should only take <strong>10 minutes</strong> to complete."
-msgstr "本調査にかかる時間は<strong>10 分</strong>程度です。"
+msgid "<p>It should only take <strong>10 minutes</strong> to complete."
+msgstr "<p>本調査にかかる時間は<strong>10 分</strong>程度です。</p>"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:138
 msgid ""
-"All of the information you provide is <strong>confidential</strong> to the "
-"Foundation (unless you specify otherwise)."
+"<p>All of the information you provide is <strong>confidential</strong> to the "
+"Foundation (unless you specify otherwise).</p>"
 msgstr ""
-"あなたから提供された全ての情報は、（あなたから特に例外扱いされない限り）OpenStack Foundation 内で<strong>秘密情報</"
-"strong>として扱われます。"
+"<p>あなたから提供された全ての情報は、（あなたから特に例外扱いされない限り）OpenStack Foundation 内で<strong>秘密情報</"
+"strong>として扱われます。</p>"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:153
 msgid ""

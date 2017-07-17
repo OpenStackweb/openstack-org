@@ -331,24 +331,24 @@ msgstr "Oktober 2015 Laporan lengkap"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:126
 msgid ""
-"This is the <strong>OpenStack User Survey</strong> for OpenStack cloud users "
-"and operators."
+"<p>This is the <strong>OpenStack User Survey</strong> for OpenStack cloud users "
+"and operators.</p>"
 msgstr ""
-"Ini adalah <strong> OpenStack User Survey </ strong> untuk pengguna dan "
-"operator awan OpenStack."
+"<p>Ini adalah <strong> OpenStack User Survey </ strong> untuk pengguna dan "
+"operator awan OpenStack.</p>"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:132
-msgid "It should only take <strong>10 minutes</strong> to complete."
+msgid "<p>It should only take <strong>10 minutes</strong> to complete.</p>"
 msgstr ""
-"Hanya perlu waktu <strong> 10 minutes </ strong> untuk menyelesaikannya."
+"<p>anya perlu waktu <strong> 10 minutes </ strong> untuk menyelesaikannya.</p>"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:138
 msgid ""
-"All of the information you provide is <strong>confidential</strong> to the "
-"Foundation (unless you specify otherwise)."
+"<p>All of the information you provide is <strong>confidential</strong> to the "
+"Foundation (unless you specify otherwise).</p>"
 msgstr ""
-"Semua informasi yang Anda berikan adalah <strong> confidential </ strong> ke "
-"Foundation (kecuali Anda menentukan yang lain)."
+"<p>Semua informasi yang Anda berikan adalah <strong> confidential </ strong> ke "
+"Foundation (kecuali Anda menentukan yang lain).</p>"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:153
 msgid ""

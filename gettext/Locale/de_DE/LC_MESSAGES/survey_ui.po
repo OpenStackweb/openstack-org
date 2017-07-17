@@ -334,23 +334,23 @@ msgstr "Oktober 2015 Vollständiger Report"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:126
 msgid ""
-"This is the <strong>OpenStack User Survey</strong> for OpenStack cloud users "
-"and operators."
+"<p>This is the <strong>OpenStack User Survey</strong> for OpenStack cloud users "
+"and operators.</p>"
 msgstr ""
-"Das ist die <strong>OpenStack User Survey</strong> für OpenStack Cloud-"
-"Nutzer und Operatoren."
+"<p>Das ist die <strong>OpenStack User Survey</strong> für OpenStack Cloud-"
+"Nutzer und Operatoren.</p>"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:132
-msgid "It should only take <strong>10 minutes</strong> to complete."
-msgstr "Es sollte nur  <strong>10 Minuten</strong> dauern."
+msgid "<p>It should only take <strong>10 minutes</strong> to complete.</p>"
+msgstr "<p>Es sollte nur  <strong>10 Minuten</strong> dauern.</p>"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:138
 msgid ""
-"All of the information you provide is <strong>confidential</strong> to the "
-"Foundation (unless you specify otherwise)."
+"<p>All of the information you provide is <strong>confidential</strong> to the "
+"Foundation (unless you specify otherwise).</p>"
 msgstr ""
-"Alle Informationen die Sie zur Verfügung stellen, sind für die Foundation "
-"<strong>vertraulich</strong>  (sofern nicht anders angegeben)."
+"<p>Alle Informationen die Sie zur Verfügung stellen, sind für die Foundation "
+"<strong>vertraulich</strong>  (sofern nicht anders angegeben).</p>"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:153
 msgid ""

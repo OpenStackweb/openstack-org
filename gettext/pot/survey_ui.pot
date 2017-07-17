@@ -273,15 +273,15 @@ msgid "October 2015 Full report"
 msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:126
-msgid "This is the <strong>OpenStack User Survey</strong> for OpenStack cloud users and operators."
+msgid "<p>This is the <strong>OpenStack User Survey</strong> for OpenStack cloud users and operators.</p>"
 msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:132
-msgid "It should only take <strong>10 minutes</strong> to complete."
+msgid "<p>It should only take <strong>10 minutes</strong> to complete.</p>"
 msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:138
-msgid "All of the information you provide is <strong>confidential</strong> to the Foundation (unless you specify otherwise)."
+msgid "<p>All of the information you provide is <strong>confidential</strong> to the Foundation (unless you specify otherwise).</p>"
 msgstr ""
 
 
