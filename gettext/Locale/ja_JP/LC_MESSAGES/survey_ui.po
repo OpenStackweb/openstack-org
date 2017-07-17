@@ -325,7 +325,7 @@ msgid ""
 msgstr "<p>これは、OpenStack クラウドユーザと運用者用の <strong>OpenStack ユーザ調査</strong>です。</p>"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:132
-msgid "<p>It should only take <strong>10 minutes</strong> to complete."
+msgid "<p>It should only take <strong>10 minutes</strong> to complete.</p>"
 msgstr "<p>本調査にかかる時間は<strong>10 分</strong>程度です。</p>"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:138

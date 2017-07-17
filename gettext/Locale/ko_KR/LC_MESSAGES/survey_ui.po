@@ -322,7 +322,7 @@ msgid ""
 msgstr "<p>OpenStack 클라우드 사용자 및 운영자를 위한 <strong>OpenStack 사용자 설문</strong> 입니다.</p>"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:132
-msgid "<p>It should only take <strong>10 minutes</strong> to complete."
+msgid "<p>It should only take <strong>10 minutes</strong> to complete.</p>"
 msgstr "<p>(설문을) 완료하는데에는 <strong>10분</strong> 정도만 소요될 것입니다.</p>"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:138
