@@ -317,19 +317,19 @@ msgstr "2015년 10월 전체 보고서"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:126
 msgid ""
-"This is the <strong>OpenStack User Survey</strong> for OpenStack cloud users "
-"and operators."
-msgstr "OpenStack 클라우드 사용자 및 운영자를 위한 <strong>OpenStack 사용자 설문</strong> 입니다."
+"<p>This is the <strong>OpenStack User Survey</strong> for OpenStack cloud users "
+"and operators.</p>"
+msgstr "<p>OpenStack 클라우드 사용자 및 운영자를 위한 <strong>OpenStack 사용자 설문</strong> 입니다.</p>"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:132
-msgid "It should only take <strong>10 minutes</strong> to complete."
-msgstr "(설문을) 완료하는데에는 <strong>10분</strong> 정도만 소요될 것입니다."
+msgid "<p>It should only take <strong>10 minutes</strong> to complete."
+msgstr "<p>(설문을) 완료하는데에는 <strong>10분</strong> 정도만 소요될 것입니다.</p>"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:138
 msgid ""
-"All of the information you provide is <strong>confidential</strong> to the "
-"Foundation (unless you specify otherwise)."
-msgstr "귀하기 제공하는 모든 정보는 귀하기 달리 지정하지 않는한 재단에서는 <strong>기밀 사항</strong>으로 보호됩니다."
+"<p>All of the information you provide is <strong>confidential</strong> to the "
+"Foundation (unless you specify otherwise).</p>"
+msgstr "<p>귀하기 제공하는 모든 정보는 귀하기 달리 지정하지 않는한 재단에서는 <strong>기밀 사항</strong>으로 보호됩니다.</p>"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:153
 msgid ""

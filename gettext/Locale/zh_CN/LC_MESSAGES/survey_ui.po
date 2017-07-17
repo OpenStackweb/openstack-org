@@ -317,19 +317,19 @@ msgstr "2015年10月完整报告"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:126
 msgid ""
-"This is the <strong>OpenStack User Survey</strong> for OpenStack cloud users "
-"and operators."
-msgstr "本 <strong> OpenStack 用户调查</strong> 面向 OpenStack 云用户和运维人员。"
+"<p>This is the <strong>OpenStack User Survey</strong> for OpenStack cloud users "
+"and operators.</p>"
+msgstr "<p>本 <strong> OpenStack 用户调查</strong> 面向 OpenStack 云用户和运维人员。</p>"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:132
-msgid "It should only take <strong>10 minutes</strong> to complete."
-msgstr "只需要 <strong>10 分钟</strong> 即可完成。"
+msgid "<p>It should only take <strong>10 minutes</strong> to complete.</p>"
+msgstr "<p>只需要 <strong>10 分钟</strong> 即可完成。</p>"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:138
 msgid ""
-"All of the information you provide is <strong>confidential</strong> to the "
-"Foundation (unless you specify otherwise)."
-msgstr "基金会将您提供的所有信息视为 <strong>机密</strong> (除非您另行注明)。"
+"<p>All of the information you provide is <strong>confidential</strong> to the "
+"Foundation (unless you specify otherwise).</p>"
+msgstr "<p>基金会将您提供的所有信息视为 <strong>机密</strong> (除非您另行注明)。</p>"
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:153
 msgid ""
