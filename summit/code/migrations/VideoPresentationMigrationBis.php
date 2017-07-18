@@ -306,6 +306,7 @@ class VideoPresentationMigrationBis extends AbstractDBMigrationTask
             'PresentationID' => $p->ID,
             'Name' => $v->Name,
             'DisplayOnSite' => $display,
+            'Processed' => true,
             'YouTubeID' => trim($v->YouTubeID),
             'Featured' => $v->Featured,
             'Created' => $v->LastEdited,
