@@ -311,7 +311,7 @@ class VideoPresentationMigrationBis extends AbstractDBMigrationTask
             'Featured' => $v->Featured,
             'Created' => $v->LastEdited,
             'LastEdited' => $v->LastEdited,
-            'DateUploaded' => $p->StartDate ?: $p->Summit()->SummitBeginDate
+            'DateUploaded' => $v->StartTime ? $v->StartTime : $p->Summit()->SummitBeginDate
         ]);
 
         if ($display) {
