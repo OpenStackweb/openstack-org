@@ -120,35 +120,24 @@ export const postRequest = (
     requestActionCreator,
     receiveActionCreator,
     endpoint,
-    payload
+    payload,
+    errorHandler
 ) => params => dispatch => {
     let url = URI(endpoint).query(params).toString();
     dispatch(requestActionCreator(params));
     const req = http.post(url)
         .send(payload)
-        .end(responseHandler(dispatch, json => {
-            dispatch(receiveActionCreator({
-                response: json
-            }));
-        }))
-
-};
-
-export const deleteRequest = (
-    requestActionCreator,
-    receiveActionCreator,
-    endpoint,
-    payload
-) => params => dispatch => {
-    let url = URI(endpoint).query(params).toString();
-    dispatch(requestActionCreator(params));
-    const req = http.delete(url)
-        .send(payload)
-        .end(responseHandler(dispatch, json => {
-            dispatch(receiveActionCreator({
-                response: json
-            }));
-        }))
+        .end(
+            responseHandler(
+                dispatch,
+                json => {
+                    dispatch(receiveActionCreator({
+                        response: json
+                    }));
+                },
+                errorHandler
+            )
+        )
 
 };
 

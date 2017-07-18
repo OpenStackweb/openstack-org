@@ -66,7 +66,8 @@ class SangriaSurveyFreeTextAnswersListStatsApp extends React.Component {
             chartData: chart_data,
             chartOptions: options,
             select_all: true,
-            isOpenModalMergeTags: false
+            isOpenModalMergeTags: false,
+            replace_tag: ''
         }
 
         this.onMergeTags = this.onMergeTags.bind(this);
@@ -179,6 +180,9 @@ class SangriaSurveyFreeTextAnswersListStatsApp extends React.Component {
                     <hr/>
                     <h4>Merge Tags</h4>
                     <div id="merge-box" className="row">
+                        <div className="col-md-8 caution_merge">
+                            CAUTION! If you merge, selected tags you see on the graph will be merged into a single tag.
+                        </div>
                         <div className="col-md-8">
                             <input type="text" id="merge-tag" className="form-control"
                                 onChange={(e) => this.onReplaceTagChange(e) }
@@ -188,7 +192,7 @@ class SangriaSurveyFreeTextAnswersListStatsApp extends React.Component {
                         <div className="col-md-4">
                             <Confirm
                                 onConfirm={this.onMergeTags}
-                                body="Are you sure you want to merge the selected tags?"
+                                body="CAUTION! If you merge, selected tags you see on the graph will be merged into a single tag. Are you sure you want to merge?"
                                 confirmText="Merge"
                                 title="Merge Tags">
                                     <button type="button" className="btn btn-primary">
