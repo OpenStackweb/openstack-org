@@ -100,7 +100,7 @@ GoogleSiteMapGenerator::getInstance()->registerDataObject($class_name = 'Present
         $page         = SummitVideoApp::get()->first();
         if(!$page) return false;
         $page_url     = $page->Link();
-        $url          = sprintf('%s/%s/%s', $page_url, $video->Presentation()->Summit()->Slug, $video->Presentation()->Slug);
+        $url          = sprintf('%s%s/%s', $page_url, $video->Presentation()->Summit()->Slug, $video->Presentation()->Slug);
         $url          = Director::absoluteURL($url);
         return $url;
     },
