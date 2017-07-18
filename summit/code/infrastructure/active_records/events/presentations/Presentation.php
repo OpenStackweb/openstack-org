@@ -229,16 +229,19 @@ class Presentation extends SummitEvent implements IPresentation
     /**
      *
      */
-    public function assignEventType($type="Presentation")
+    public function assignEventType($type=IPresentationType::Presentation)
     {
         $summit_id = intval($this->SummitID);
         if ($summit_id > 0 && intval($this->TypeID) === 0) {
             Summit::seedBasicEventTypes($summit_id);
-            $event_type = PresentationType::get()->filter(array(
+            $event_type = SummitEventType::get()->filter(array(
                 'Type' => $type,
                 'SummitID' => $summit_id
             ))->first();
-            $this->TypeID = $event_type->ID;
+
+            if ($event_type->Exists()) {
+                $this->TypeID = $event_type->ID;
+            }
         }
     }
 

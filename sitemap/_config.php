@@ -109,3 +109,18 @@ GoogleSiteMapGenerator::getInstance()->registerDataObject($class_name = 'Feature
         $videos = DataObject::get('FeaturedVideo', '`YouTubeID` IS NOT NULL');
         return $videos;
     });
+
+
+GoogleSiteMapGenerator::getInstance()->registerDataObject($class_name = 'PresentationVideo', $change_freq = GoogleSitemapGenerator::CHANGE_FREQ_MONTHLY, $priority = GoogleSitemapGenerator::PRIORITY_0_5, $get_url_function = function($video){
+        $page         = SummitVideoApp::get()->first();
+        if(!$page) return false;
+        $page_url     = $page->Link();
+        $url          = sprintf('%s/%s/%s', $page_url, $video->Presentation()->Summit()->Slug, $video->Presentation()->Slug);
+        $url          = Director::absoluteURL($url);
+        return $url;
+    },
+    function(){
+        $videos = DataObject::get("PresentationVideo", "YouTubeID IS NOT NULL AND YouTubeID != ''");
+        return $videos;
+    }
+);
