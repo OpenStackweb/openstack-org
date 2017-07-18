@@ -43,7 +43,7 @@
             </div>
             <div class="col-xs-12 col-sm-9 col-lg-10 text">
               <h3>Architecture & Ops</h3>
-              <p>Architects and operators attend to improve their current deployment, discover new tools or learn how to get an OpenStack cloud up and running from expert community members OpenStack clouds. <a href="https://www.openstack.org/summit/boston-2017/summit-categories">Learn more</a></p>
+              <p>Architects and operators attend to improve their current deployment, discover new tools or learn how to get an OpenStack cloud up and running from expert community members OpenStack clouds. <a href="https://www.openstack.org/summit/sydney-2017/summit-categories">Learn more</a></p>
             </div>
           </div>
           <div class="row">

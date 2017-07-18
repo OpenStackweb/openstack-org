@@ -54,7 +54,7 @@
             </div>
             <div class="col-xs-12 col-sm-9 col-lg-10 text">
               <h3>Architecture & Ops</h3>
-              <p>Architects and operators attend to improve their current deployment, discover new tools or learn how to get an OpenStack cloud up and running from expert community members OpenStack clouds. <a href="https://www.openstack.org/summit/boston-2017/summit-categories">Learn more</a></p>
+              <p>Architects and operators attend to improve their current deployment, discover new tools or learn how to get an OpenStack cloud up and running from expert community members OpenStack clouds. <a href="https://www.openstack.org/summit/sydney-2017/summit-categories">Learn more</a></p>
             </div>
           </div>
           <div class="row">
@@ -94,7 +94,7 @@
         <li><a href="/summit/boston-2017/travel/#hotels"><i class="fa fa-hotel"></i>Book your hotel</a></li>
         <li><a href="/summit/boston-2017/code-of-conduct" target="_blank"><i class="fa fa-eye"></i>Code of Conduct</a></li>
         <li><a href="/assets/boston-summit/Campus.png" target="_blank"><i class="fa fa-map"></i>Summit Campus Map</a></li>
-        <li><a href="https://spousetivities.ticketleap.com/spousetivities-at-openstack-summit-boston-2017/details" target="_blank"><i class="fa fa-heart"></i>Spousetivities</a></li>
+        <li><a href="https://spousetivities.ticketleap.com/spousetivities-at-openstack-summit-sydney-2017/details" target="_blank"><i class="fa fa-heart"></i>Spousetivities</a></li>
       </ul>
 		</div>
 		</div>
