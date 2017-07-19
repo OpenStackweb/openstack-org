@@ -131,7 +131,7 @@ class PresentationVideo extends PresentationMaterial
 
     protected function onBeforeWrite() {
         parent::onBeforeWrite();
-        if(empty($this->DateUploaded) || $this->ID == 0 ){
+        if(empty($this->DateUploaded)){
             $this->DateUploaded = gmdate("Y-m-d H:i:s");
         }
     }
