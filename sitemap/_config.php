@@ -11,7 +11,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-
 // CMS Pages
 GoogleSiteMapGenerator::getInstance()->registerDataObject($class_name = 'SiteTree', $change_freq = GoogleSitemapGenerator::CHANGE_FREQ_MONTHLY, $priority = GoogleSitemapGenerator::PRIORITY_1_0, $get_url_function = function($page){
     return $page->AbsoluteLink();
@@ -99,13 +98,30 @@ GoogleSiteMapGenerator::getInstance()->registerDataObject($class_name = 'News', 
 GoogleSiteMapGenerator::getInstance()->registerDataObject($class_name = 'PresentationVideo', $change_freq = GoogleSitemapGenerator::CHANGE_FREQ_MONTHLY, $priority = GoogleSitemapGenerator::PRIORITY_0_5, $get_url_function = function($video){
         $page         = SummitVideoApp::get()->first();
         if(!$page) return false;
-        $page_url     = $page->Link();
-        $url          = sprintf('%s%s/%s', $page_url, $video->Presentation()->Summit()->Slug, $video->Presentation()->Slug);
+
+        $url          = sprintf('%s%s/%s', $page->Link(), $video->SummitSlug, $video->PresSlug);
         $url          = Director::absoluteURL($url);
         return $url;
     },
     function(){
-        $videos = DataObject::get("PresentationVideo", "YouTubeID IS NOT NULL AND YouTubeID != ''");
+
+        $sqlQuery = new SQLQuery();
+        $sqlQuery->setSelect(['SummitSlug' => 'S.Slug', 'PresSlug' => 'P.Slug']);
+        $sqlQuery->setFrom("PresentationVideo");
+        $sqlQuery->addLeftJoin('PresentationMaterial','PM.ID = PresentationVideo.ID','PM');
+        $sqlQuery->addLeftJoin('Presentation','PM.PresentationID = P.ID','P');
+        $sqlQuery->addLeftJoin('SummitEvent','PM.PresentationID = SE.ID','SE');
+        $sqlQuery->addLeftJoin('Summit','SE.SummitID = S.ID','S');
+        $sqlQuery->setWhere("PresentationVideo.YouTubeID IS NOT NULL AND PresentationVideo.YouTubeID != '' AND PM.DisplayOnSite = 1");
+        $results = $sqlQuery->execute();
+
+        $videos = array();
+        if( $results ) {
+            foreach( $results as $video ) {
+                $videos[] = new ArrayData($video);
+            }
+        }
+
         return $videos;
     }
 );
