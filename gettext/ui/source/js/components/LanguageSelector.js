@@ -29,7 +29,6 @@ class LanguageSelector extends React.Component {
     render() {
         return <div className="btn-group dropdown lang-dropdown">
             <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                <div className="flag-sm" lang={this.state.currentLanguage}></div>
                 <div className="lang-sm lang-lbl-full" lang={this.state.currentLanguage}></div>
                 <span className="caret"></span>
             </button>
@@ -40,7 +39,6 @@ class LanguageSelector extends React.Component {
                         onMouseLeave={this.hoverEvent}
                         key={i}>
                         <a href="#" onClick={(evt) => { evt.preventDefault(); this.selectedLanguage(lang); }}>
-                            <div className="flag-sm" lang={lang}></div>
                             <div className="lang-sm lang-lbl-full" lang={lang}></div>
                         </a>
                     </li>
