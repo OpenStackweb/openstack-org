@@ -109,11 +109,11 @@
     </p>
     <p>
         The two most recent versions approved by the board are
-        "<a title="2016.08 DefCore Capabilities" href="http://git.openstack.org/cgit/openstack/defcore/tree/2016.08.json" target="_blank">2016.08</a>"
-        and "<a title="Defcore 2017.01 Guideline" href="http://git.openstack.org/cgit/openstack/defcore/tree/2017.01.json">2017.01</a>". These
+        "<a title="2016.08 Interop Capabilities" href="http://git.openstack.org/cgit/openstack/interop/tree/2016.08.json" target="_blank">2016.08</a>"
+        and "<a title="Interop 2017.01 Guideline" href="http://git.openstack.org/cgit/openstack/interop/tree/2017.01.json">2017.01</a>". These
         two guidelines cover five OpenStack releases: Kilo, and Liberty, Mitaka, Newton, and Ocata.
         The list of required capabilities (with must-pass tests) and designated code sections are published on
-        <a title="OpenStack DefCore Repository" href="http://git.openstack.org/cgit/openstack/defcore/tree/" target="_blank">git.openstack.org</a>&nbsp;
+        <a title="OpenStack Interop Working Group Repository" href="http://git.openstack.org/cgit/openstack/interop/tree/" target="_blank">git.openstack.org</a>&nbsp;
         and summarized below. Once a company verifies their products include the appropriate designated sections and submit API test results, they will
         be asked to sign the license agreements.
     </p>
@@ -146,7 +146,7 @@
     </p>
     <p>
         For more detailed instructions to run the tests, please consult
-        <a title="Procedure for Running Defcore Interop Tests" href="http://git.openstack.org/cgit/openstack/defcore/tree/2016.08/procedure.rst">this document</a>.
+        <a title="Procedure for Running Interop Tests" href="http://git.openstack.org/cgit/openstack/interop/tree/2016.08/procedure.rst">this document</a>.
         If you need help getting started, contact Chris Hoge, the Foundation's Interop Engineer, by emailing
         <a href="mailto:interop@openstack.org">interop@openstack.org</a>. The Foundation is looking for feedback from companies
         who are running tests in order to improve the testing process and shape policy in the future.
