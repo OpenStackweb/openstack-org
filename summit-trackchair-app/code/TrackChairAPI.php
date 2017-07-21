@@ -504,10 +504,11 @@ class TrackChairAPI extends AbstractRestfulJsonApi
             	'SummitEvent.SummitID' => $summitID            	
             ]);
 
-        if(!Permission::check('ADMIN')) {
-        	$changeRequests = $changeRequests->filter([
-        		'SummitEvent.CategoryID' => $categories
-        	]);
+        if(!Permission::check('ADMIN') && $categories) {
+            $cat_ids_string = implode(',',$categories);
+        	$changeRequests = $changeRequests->where(
+                "SummitEvent.CategoryID IN (".$cat_ids_string.") OR SummitCategoryChange.NewCategoryID IN(".$cat_ids_string.")"
+        	);
         }
 
         $sortCol = $r->getVar('sortCol') ?: 'status';
