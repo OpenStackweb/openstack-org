@@ -165,6 +165,8 @@ define('COA_UNPROCESSED_EMAIL_ROWS_FROM', '');
 define('COA_UNPROCESSED_EMAIL_ROWS_TO', '');
 define('COA_UNPROCESSED_EMAIL_ROWS_SUBJECT', '');
 
+// track chair tool
+define('TRACK_CHAIR_TOOL_EMAIL_FROM', '');
 
 global $_FILE_TO_URL_MAPPING;
 $_FILE_TO_URL_MAPPING[''] = '';

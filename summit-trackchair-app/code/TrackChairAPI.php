@@ -1094,7 +1094,7 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
             $subject = "Track chair {$current_user->getName()} has a question about your presentation";
             $body = $email;
             $email = EmailFactory::getInstance()->buildEmail(
-            	null,
+            	TRACK_CHAIR_TOOL_EMAIL_FROM,
             	implode(',',$toAddresses),
             	$subject,
             	$body
