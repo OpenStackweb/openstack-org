@@ -90,8 +90,6 @@ ScheduleGrid.propTypes = {
     summit: React.PropTypes.object.isRequired,
     base_url: React.PropTypes.string.isRequired,
     search_url: React.PropTypes.string.isRequired,
-    schedule_api: React.PropTypes.object.isRequired,
-    schedule_filters: React.PropTypes.object.isRequired,
     default_event_color: React.PropTypes.string.isRequired,
 }
 
