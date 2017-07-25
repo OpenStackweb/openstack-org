@@ -535,7 +535,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         		$sortClause = "Status";
         }
 
-        $changeRequests = $changeRequests->sort([$sortClause => $sortDir, 'LastEdited' => 'DESC']);
+        $changeRequests = $changeRequests->sort($sortClause . $sortDir . ", LastEdited DESC");
 
         if($search) {
         	$changeRequests = $changeRequests->filterAny([
