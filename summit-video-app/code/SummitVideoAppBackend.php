@@ -118,73 +118,27 @@ class SummitVideoAppBackend
                     ->leftJoin('PresentationCategory', 'PresentationCategory.ID = SummitEvent.CategoryID');
 
                 $search = trim($criteria);
-                $parts = preg_split('/\s+/', $criteria);
 
-                // sniff out speaker first/last name search
-                if (sizeof($parts) === 2) {
-                    $speakerVideos = $videos->filter([
-                        'PresentationSpeaker.FirstName:PartialMatch' => $parts[0],
-                        'PresentationSpeaker.LastName:PartialMatch' => $parts[1],
-                    ]);
-                } else {
-                    $speakerVideos = $videos->filterAny([
-                        'PresentationSpeaker.FirstName:PartialMatch' => $search,
-                        'PresentationSpeaker.LastName:PartialMatch' => $search
-                    ]);
-                }
-
-                $titleVideos = $videos->filter([
-                    'Presentation.Title:PartialMatch' => $search
-                ])
+                $videos->where("
+                    CONCAT(PresentationSpeaker.FirstName,' ',PresentationSpeaker.LastName) = '$search'
+                    OR PresentationSpeaker.FirstName LIKE '%$search%'
+                    OR PresentationSpeaker.LastName LIKE '%$search%'
+                    OR Presentation.Title LIKE '%$search%'
+                    OR PresentationCategory.Title = '%$search%'
+                    OR Summit.Title LIKE '%$search%'")
                     ->limit($defaultLimit)
                     ->sort('DateUploaded DESC');
 
-                $topicVideos = $videos->filter([
-                    'PresentationCategory.Title:PartialMatch' => $search
-                ])
-                    ->limit($defaultLimit)
-                    ->sort('DateUploaded DESC');
-
-                $summitVideos = $videos->filter([
-                    'Summit.Title:PartialMatch' => $search
-                ])
-                    ->limit($defaultLimit)
-                    ->sort('DateUploaded DESC');
-
-                //group results by youtubeID
-                $speakerVideos = GroupedList::create($speakerVideos)->groupBy('YouTubeID');
-                $titleVideos = GroupedList::create($titleVideos)->groupBy('YouTubeID');
-                $topicVideos = GroupedList::create($topicVideos)->groupBy('YouTubeID');
-                $summitVideos = GroupedList::create($summitVideos)->groupBy('YouTubeID');
+                $match_videos = GroupedList::create($videos)->groupBy('YouTubeID');
 
                 $response = [
-                    'results' => [
-                        'titleMatches' => [],
-                        'speakerMatches' => [],
-                        'topicMatches' => [],
-                        'summitMatches' => []
-                    ]
+                    'results' => []
                 ];
 
-                foreach ($titleVideos as $v) {
+                foreach ($match_videos as $v) {
                     if (is_a($v,'ArrayList'))
                         $v = $v->first();
-                    $response['results']['titleMatches'][] = $this->createVideoJSON($v);
-                }
-                foreach ($speakerVideos as $v) {
-                    if (is_a($v,'ArrayList'))
-                        $v = $v->first();
-                    $response['results']['speakerMatches'][] = $this->createVideoJSON($v);
-                }
-                foreach ($topicVideos as $v) {
-                    if (is_a($v,'ArrayList'))
-                        $v = $v->first();
-                    $response['results']['topicMatches'][] = $this->createVideoJSON($v);
-                }
-                foreach ($summitVideos as $v) {
-                    if (is_a($v,'ArrayList'))
-                        $v = $v->first();
-                    $response['results']['summitMatches'][] = $this->createVideoJSON($v);
+                    $response['results'][] = $this->createVideoJSON($v);
                 }
 
                 return $response;

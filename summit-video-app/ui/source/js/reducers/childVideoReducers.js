@@ -332,30 +332,17 @@ export const searchVideos = (
 	switch(action.type) {
 		case 'REQUEST_SEARCH_VIDEOS':		
 			return {
-				activeTab: state.activeTab,
 				results: null,
 				loading: true
 			};
 
 		case 'RECEIVE_SEARCH_VIDEOS':
 			const {results} = action.payload.response;
-			let tab = state.activeTab;
-
-			// If the current tab is set to something that has no results, find the first tab that has some.
-			if(!results[state.activeTab] || !results[state.activeTab].length) {				
-				for (let k in results) {
-					if(results[k] && results[k].length) {
-						tab = k;
-						break;
-					}
-				}
-			}
 
 			return {
-				activeTab: tab,
-				results: {
+				results: [
 					...results	
-				},
+				],
 				loading: false
 			};
 
