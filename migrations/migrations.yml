@@ -73,4 +73,4 @@ migrations:
   - PopulateMascotsMigration
   - SummitSponsorsMigration
   - AboutExpirePoweredOpenStackImplementationEmailMigration
-  - VideoPresentationMigrationBis
+  - FixVideoPresentationDeprecationMigration

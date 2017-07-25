@@ -43,11 +43,9 @@ class Sluggable extends DataExtension {
     $obj->Slug = $slug;
   }
 
-
   public static function get_by_slug($class, $slug) {
     return DataList::create($class)->filter("Slug",$slug)->first();
   }
-
 
   public function onBeforeWrite() {
     $f = $this->owner->config()->slug_field;
