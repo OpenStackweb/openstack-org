@@ -1642,4 +1642,16 @@ SQL;
     {
         return $this->getField("ExternalEventId");
     }
+
+    /**
+     * @param string $timezone_name
+     * @return string
+     */
+    public function getNiceVotingEnd($timezone_name = 'UTC'){
+        $dt = new DateTime($this->getField('VotingEndDate'), new DateTimeZone('UTC'));
+        $timezone = new DateTimeZone($timezone_name);
+        $dt->setTimezone($timezone);
+        return sprintf("%s at %s %s", $dt->format('l, F d'), $dt->format('H:i A'), $dt->format('T'));
+    }
+
 }

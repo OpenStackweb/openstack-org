@@ -42,9 +42,12 @@ class PresentationVotingPage_Controller extends Page_Controller
         'handleAPI',
         'handleIndex'
     );
-    /**
-     *
-     */
+
+
+    public function getCurrentSummit(){
+        return Summit::get_active();
+    }
+
     public function init()
     {
         parent::init();
@@ -188,9 +191,8 @@ class PresentationVotingPage_API extends RequestHandler
     {
         $presentations = [];
         $offset = $r->getVar('offset') ?: 0;
-        $m = Member::currentUser();
-        $list = $m ? $m->getRandomisedPresentations(null, $this->summit) : $this->summit->VoteablePresentations();
-$list = Presentation::get()->sort('Created DESC')->limit(100);
+        $m      = Member::currentUser();
+        $list   = $m ? $m->getRandomisedPresentations(null, $this->summit) : $this->summit->VoteablePresentations();
         if($list) {
             if ($r->getVar('category')) {
                 $list = $list->filter(['CategoryID' => $r->getVar('category')]);
@@ -227,11 +229,13 @@ $list = Presentation::get()->sort('Created DESC')->limit(100);
      */
     public function handleReadPresentation(SS_HTTPRequest $r)
     {
-        $presentation = $this->getFromFilename($r->param('ID'), 'Presentation');
-        $presentation = Presentation::get()->byID(explode('.', $r->param('ID'))[0]);
-        if (!$presentation) {
+        $id           = intval($r->param('ID'));
+        $presentation = Presentation::get()->byID($id);
+
+        if (!$presentation || !$presentation->Category()->VotingVisible) {
             return $this->httpError(404);
         }
+
         $vote = $presentation->getUserVote();
         $json = [
             'id' => $presentation->ID,
@@ -245,7 +249,7 @@ $list = Presentation::get()->sort('Created DESC')->limit(100);
                 'date' => $vote->obj('Created')->Format('F j, Y'),
                 'ago' => $vote->obj('Created')->Ago()
             ] : null,
-            'abstract' => $presentation->Description,
+            'abstract' => $presentation->Abstract,
             'attendees_expected_learnt' => $presentation->AttendeesExpectedLearnt
         ];
         foreach ($presentation->getSpeakersAndModerators() as $s) {
@@ -293,14 +297,18 @@ $list = Presentation::get()->sort('Created DESC')->limit(100);
         if (!Member::currentUser()) {
             return $this->httpError(403, 'You must be logged in to vote');
         }
-        $presentation = $this->getFromFilename($r->param('ID'), 'Presentation');
-        $presentation = Presentation::get()->byID(explode('.', $r->param('ID'))[0]);
-        if (!$presentation) {
+
+        $id           = intval($r->param('ID'));
+        $presentation = Presentation::get()->byID($id);
+
+        if (!$presentation || !$presentation->Category()->VotingVisible) {
             return $this->httpError(404);
         }
+
         if(!$presentation->Summit()->isVotingOpen()) {
-        //  return $this->httpError(403,'Voting is closed');
+            return $this->httpError(403,'Voting is closed');
         }
+
         $vars = Convert::json2array($r->getBody());
         if (isset($vars['vote'])) {
             $presentation->setUserVote((int)$vars['vote']);
@@ -326,11 +334,14 @@ $list = Presentation::get()->sort('Created DESC')->limit(100);
         if (!Member::currentUser()) {
             return $this->httpError(403, 'You must be logged in to vote');
         }
-        $presentation = $this->getFromFilename($r->param('ID'), 'Presentation');
-        $presentation = Presentation::get()->byID(explode('.', $r->param('ID'))[0]);
-        if (!$presentation) {
+
+        $id           = intval($r->param('ID'));
+        $presentation = Presentation::get()->byID($id);
+
+        if (!$presentation || !$presentation->Category()->VotingVisible) {
             return $this->httpError(404);
         }
+
         if(!$presentation->Summit()->isVotingOpen()) {
             return $this->httpError(403,'Voting is closed');
         }
@@ -364,19 +375,5 @@ $list = Presentation::get()->sort('Created DESC')->limit(100);
         return (new SS_HTTPResponse(Convert::array2json($result), 200))
             ->addHeader('Content-Type', 'application/json');
     }
-    /**
-     * @param $file
-     * @param $class
-     * @return mixed
-     */
-    protected function getFromFilename($file, $class)
-    {
-        $info = pathinfo($file);
-        $id = $info['filename'];
-        $list = $class::get();
-        if ($class === 'Presentation') {
-            $list = $list->filter('Category.VotingVisible', true);
-        }
-        return $list->byID($id);
-    }
+
 }

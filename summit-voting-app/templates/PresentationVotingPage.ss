@@ -60,7 +60,7 @@
                               <h1>
                                  Vote For Presentations
                                  <span>
-                                 Deadline: Tuesday, February 21 at 11:59pm PST / Wednesday, February 22 at 6:59am UTC
+                                 Deadline:  $Top.CurrentSummit.getNiceVotingEnd(America/Los_Angeles) / $Top.CurrentSummit.getNiceVotingEnd(UTC)
                                  </span>
                               </h1>
                            </div>

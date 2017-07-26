@@ -165,10 +165,10 @@ class SummitSecurity extends SummitPage_Controller {
     }
 
     /**
-     * Ensure all root requests go to login
-     * @return SS_HTTPResponse
+     * @param SS_HTTPRequest $request
+     * @return SS_HTTPResponse|void
      */
-    public function index() {
+    public function index(SS_HTTPRequest $request) {
         $back_url = $this->CurrentCallForSpeakersPageUrl();
         if(is_null($back_url))  return $this->httpError(404, "Call for Speakers Page not Found!");
         if(Member::currentUser())
