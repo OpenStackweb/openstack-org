@@ -45,7 +45,7 @@
         <% end_if %>
     </fieldset>
     <p>
-        <a class="roundedButton add-entity-survey-btn" href="$SkipStepUrl">{$_T("survey_template", $CurrentStep.Template.getAddEntityText)}&nbsp;&nbsp;<i class="fa fa-plus-circle" aria-hidden="true"></i></a>&nbsp;
+        <a class="roundedButton add-entity-survey-btn" href="$AddEntityUrl">{$_T("survey_template", $CurrentStep.Template.getAddEntityText)}&nbsp;&nbsp;<i class="fa fa-plus-circle" aria-hidden="true"></i></a>&nbsp;
     </p>
     <% if $Actions %>
         <div class="Actions row">
