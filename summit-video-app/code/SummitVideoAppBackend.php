@@ -107,6 +107,8 @@ class SummitVideoAppBackend
                 break;
 
             case 'search':
+                $search = trim($criteria);
+
                 $videos = $videos
                     ->innerJoin('Presentation', 'Presentation.ID = PresentationMaterial.PresentationID')
                     ->innerJoin('SummitEvent', 'SummitEvent.ID = Presentation.ID')
@@ -115,19 +117,17 @@ class SummitVideoAppBackend
                         'Presentation_Speakers.PresentationID = Presentation.ID')
                     ->innerJoin('PresentationSpeaker',
                         'PresentationSpeaker.ID = Presentation_Speakers.PresentationSpeakerID')
-                    ->leftJoin('PresentationCategory', 'PresentationCategory.ID = SummitEvent.CategoryID');
-
-                $search = trim($criteria);
-
-                $videos->where("
+                    ->leftJoin('PresentationCategory', 'PresentationCategory.ID = SummitEvent.CategoryID')
+                    ->where("
                     CONCAT(PresentationSpeaker.FirstName,' ',PresentationSpeaker.LastName) = '$search'
                     OR PresentationSpeaker.FirstName LIKE '%$search%'
                     OR PresentationSpeaker.LastName LIKE '%$search%'
-                    OR Presentation.Title LIKE '%$search%'
+                    OR SummitEvent.Title LIKE '%$search%'
                     OR PresentationCategory.Title = '%$search%'
                     OR Summit.Title LIKE '%$search%'")
-                    ->limit($defaultLimit)
-                    ->sort('DateUploaded DESC');
+                    ->limit($defaultLimit);
+
+                //die($videos->sql());
 
                 $match_videos = GroupedList::create($videos)->groupBy('YouTubeID');
 
