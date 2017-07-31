@@ -43,7 +43,8 @@ export const getRequest =
 (
     requestActionCreator,
     receiveActionCreator,
-    endpoint
+    endpoint,
+    errorHandler
 ) => params => dispatch => {
     dispatch(requestActionCreator(params));
     const key = `${requestActionCreator().type}_${JSON.stringify(params || {})}`;
@@ -52,11 +53,17 @@ export const getRequest =
     let url = URI(endpoint).query(params).toString();
     console.log(`url is ${url}`);
     const req = http.get(url)
-        .end(responseHandler(dispatch, json => {
-            dispatch(receiveActionCreator({
-                response: json
-            }));
-        }))
+        .end(
+            responseHandler(
+                dispatch,
+                json => {
+                    dispatch(receiveActionCreator({
+                        response: json
+                    }));
+                },
+                errorHandler
+            )
+        )
     schedule(key, req);
 };
 
@@ -64,18 +71,24 @@ export const putRequest = (
     requestActionCreator,
     receiveActionCreator,
     endpoint,
-    payload
+    payload,
+    errorHandler
 ) => params => dispatch => {
     let url = URI(endpoint).toString();
     dispatch(requestActionCreator(params));
     const req = http.put(url)
         .send(payload)
-        .end(responseHandler(dispatch, json => {
-            dispatch(receiveActionCreator({
-                response: json
-            }));
-        }))
-
+        .end(
+            responseHandler(
+                dispatch,
+                json => {
+                    dispatch(receiveActionCreator({
+                        response: json
+                    }));
+                },
+                errorHandler
+            )
+        )
 };
 
 export const clearMessage = createAction('CLEAR_MESSAGE');
