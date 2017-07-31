@@ -91,6 +91,30 @@ export const putRequest = (
         )
 };
 
+export const deleteRequest = (
+    requestActionCreator,
+    receiveActionCreator,
+    endpoint,
+    payload,
+    errorHandler
+) => params => dispatch => {
+    let url = URI(endpoint).toString();
+    dispatch(requestActionCreator(params));
+    const req = http.delete(url)
+        .send(payload)
+        .end(
+            responseHandler(
+                dispatch,
+                json => {
+                    dispatch(receiveActionCreator({
+                        response: json
+                    }));
+                },
+                errorHandler
+            )
+        )
+};
+
 export const clearMessage = createAction('CLEAR_MESSAGE');
 
 export const showMessage = createAction('SHOW_MESSAGE');
