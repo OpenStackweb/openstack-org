@@ -82,8 +82,8 @@ export const summitVideos = (
 ) => {
 	switch(action.type) {
 		case 'REQUEST_SUMMIT_VIDEOS':
-			if( (action.payload.summit && !state.summit) ||
-				(state.summit && +state.summit.slug !== +action.payload.summit)
+			if( (action.payload.id && !state.summit) ||
+				(state.summit && state.summit.slug !== action.payload.id)
 			) {
 				return {
 					summit: null,
@@ -132,8 +132,8 @@ export const tagVideos = (
 ) => {
     switch(action.type) {
         case 'REQUEST_TAG_VIDEOS':
-            if( (action.payload.tag && !state.tag) ||
-                (state.tag && +state.tag.tag !== +action.payload.tag)
+            if( (action.payload.id && !state.tag) ||
+                (state.tag && state.tag.tag !== action.payload.id)
                 ) {
                 return {
                     tag: null,
@@ -181,8 +181,8 @@ export const trackVideos = (
 ) => {
     switch(action.type) {
         case 'REQUEST_TRACK_VIDEOS':
-            if( (action.payload.track && !state.track) ||
-                (state.track && +state.track.slug !== +action.payload.track)
+            if( (action.payload.id && !state.track) ||
+                (state.track && state.track.slug !== action.payload.id)
                 ) {
                 return {
                     track: null,
@@ -231,8 +231,8 @@ export const speakerVideos = (
 ) => {
 	switch(action.type) {
 		case 'REQUEST_SPEAKER_VIDEOS':
-			if( (action.payload.speaker && !state.speaker) ||
-				(state.speaker && +state.speaker.id !== +action.payload.speaker)
+			if( (action.payload.id && !state.speaker) ||
+				(state.speaker && +state.speaker.id !== +action.payload.id)
 			) {
 				return {
 					speaker: null,

@@ -49,7 +49,7 @@ class SpeakerDetail extends React.Component {
 					<div className="row">
 						<div className="col-sm-12 video-breadcrumbs">
 							<RouterLink link='speakers'>All speakers</RouterLink> > 
-							<a href="#" className="active">{this.props.speaker.name}</a>
+							{this.props.speaker.name}
 						</div>
 					</div>
 					<div className="row">

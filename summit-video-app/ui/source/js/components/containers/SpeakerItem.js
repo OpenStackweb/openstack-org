@@ -15,7 +15,7 @@ const SpeakerItem = ({
 		imageHeight={148}	
 		title={`${speaker.name} (${speaker.videoCount} videos)`}
 		subtitle={speaker.jobTitle || ''}
-		link={URL.create(`speakers/${speaker.id}`)}
+		link={URL.create(`speakers/${speaker.id}/${speaker.slug}`)}
 		onItemClicked={onItemClicked}
 	/>
 );

@@ -377,6 +377,23 @@ class SummitVideoAppBackend
         ];
     }
 
+    private function getSummitImage(Summit $s) {
+        $image = null;
+
+        if ($page = SummitPage::get()->filter('SummitID', $s->ID)->first()) {
+            $image = $page->SummitImage()->Image();
+        } else if ($page = ConferencePage::get()->filter('SummitID', $s->ID)->first()) {
+            $image = $page->SummitImage();
+        }
+
+        $image_url = 'summit-video-app/production/images/placeholder-image.jpg';
+
+        if($image && $image->exists() && Director::fileExists($image->Filename)) {
+            $image_url = $image->CroppedImage(263, 148)->URL;
+        }
+
+        return $image_url;
+    }
 
     /**
      * @param Summit $s
@@ -384,12 +401,6 @@ class SummitVideoAppBackend
      */
     protected function createSummitJSON(Summit $s)
     {
-        $page = SummitPage::get()->filter('SummitID', $s->ID)->first();
-        $image = null;
-        if ($page) {
-            $image = $page->SummitImage()->Image();
-        }
-
         $tracks = array_map(function ($t) {
             return [
                 'id'         => $t->ID,
@@ -426,9 +437,7 @@ class SummitVideoAppBackend
                 'Processed' => true,
                 'PresentationID' => $s->Presentations()->column('ID')
             ])->count(),
-            'imageURL' => ($image && $image->exists() && Director::fileExists($image->Filename)) ?
-                $image->CroppedImage(263, 148)->URL :
-                'summit-video-app/production/images/placeholder-image.jpg',
+            'imageURL' => $this->getSummitImage($s),
             'slug' => $s->Slug,
             'tracks' => $tracks
         ];
@@ -444,6 +453,7 @@ class SummitVideoAppBackend
         return [
             'id' => $s->ID,
             'name' => $s->getName(),
+            'slug' => singleton('SiteTree')->generateURLSegment($s->getName()),
             'jobTitle' => $s->Title,
             'imageURL' => ($s->Photo()->exists() && Director::fileExists($s->Photo()->Filename)) ?
                 $s->Photo()->CroppedImage(263, 148)->URL :

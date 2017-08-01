@@ -47,8 +47,8 @@ class SummitDetail extends React.Component {
 				<div className="container">
 					<div className="row">
 						<div className="col-sm-12 video-breadcrumbs">
-							<RouterLink link='summits'>All summits</RouterLink> > 
-							<a href="#" className="active">{this.props.summit.title}</a>
+							<RouterLink link='summits'>All summits</RouterLink> >
+							{this.props.summit.title}
 						</div>
 					</div>
 					<div className="row">

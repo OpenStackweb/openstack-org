@@ -17,7 +17,19 @@ class SummitHomePage extends SummitPage {
         return $fields;
     }
 
-    private static $allowed_children = array ('SummitOverviewPage', 'SummitFutureLanding', 'SummitStaticAboutBostonPage', 'SummitBostonLanding', 'RedirectorPage', 'SummitHighlightsPage', 'SummitStaticAboutPage', 'SummitStaticSponsorPage', 'SummitNewStaticAboutPage');
+    private static $allowed_children = array (
+        'SummitOverviewPage',
+        'SummitFutureLanding',
+        'SummitStaticAboutBostonPage',
+        'SummitBostonLanding',
+        'RedirectorPage',
+        'SummitHighlightsPage',
+        'SummitStaticAboutPage',
+        'SummitStaticSponsorPage',
+        'SummitNewStaticAboutPage',
+        'SummitPage',
+        'ConferencePage'
+    );
 
     private static $default_child = "SummitOverviewPage";
 

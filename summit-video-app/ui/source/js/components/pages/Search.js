@@ -36,7 +36,7 @@ class Search extends React.Component {
 
                     return (
                         <VideoPanel
-                            title={`Videos matching title "${term}"`}
+                            title={`Videos matching "${term}"`}
                             videos={this.props.videos}
                         />
                     );
