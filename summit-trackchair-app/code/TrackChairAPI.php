@@ -1076,12 +1076,12 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
 
         if ($email != null) {
             $current_user = Member::currentUser();
-            
-            $toAdresses = [];
-            $ccAddresses = ['speakersupport@openstack.org'];
+
+            $toAddress = 'speakersupport@openstack.org';
+            $ccAddresses = [];
 
             foreach($this->presentation->getSpeakersAndModerators() as $s) {
-            	$toAddresses[] = $s->getEmail();
+                $ccAddresses[] = $s->getEmail();
             }
             
             $chairs = $this->presentation->Category()->TrackChairs()
@@ -1095,7 +1095,7 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
             $body = $email;
             $email = EmailFactory::getInstance()->buildEmail(
             	TRACK_CHAIR_TOOL_EMAIL_FROM,
-            	implode(',',$toAddresses),
+                $toAddress,
             	$subject,
             	$body
             );
