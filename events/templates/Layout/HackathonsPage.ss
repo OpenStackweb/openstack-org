@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <img class="hackathon-logo" src="/assets/openstack-logo/openstackdays/OpenStack-Logo-Mark-web.png" alt="OpenStack Logo">
+                <img class="hackathon-logo" src="/assets/EventImages/hackathon-logo.png" alt="OpenStack Hackathon">
                 <h1>$Title</h1>
             </div>
         </div>
