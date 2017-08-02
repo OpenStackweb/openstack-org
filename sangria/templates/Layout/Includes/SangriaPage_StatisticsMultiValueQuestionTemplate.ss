@@ -1,4 +1,4 @@
-<div class="col-md-4">
+<div class="col-md-4 "style="height:450px">
     <h3>$Label</h3>
     <p>N =  $Top.ParentPage.SurveyBuilderSurveyCountByQuestion($Top.QuestionID)</p>
     <table class="table">

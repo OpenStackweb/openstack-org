@@ -118,6 +118,8 @@ class SangriaPageSurveyBuilderStatisticsExtension extends Extension
             foreach ($questions_filters as $qid) {
                 if (empty($qid)) {
                     continue;
+                } else if ($qid == 'lang') {
+                    $output .= 'Language,';
                 }
                 $q = $template->getQuestionById($qid);
                 if (is_null($q)) {
@@ -231,6 +233,22 @@ SQL;
             AND FIND_IN_SET('%s', A2.Value) > 0
         )
 SQL;
+
+        $lang_query = <<<SQL
+        AND EXISTS
+        (
+            SELECT * FROM SurveyAnswer A2
+            INNER JOIN SurveyStep S2 ON S2.ID = A2.StepID
+            INNER JOIN Survey I2 ON I2.ID = S2.SurveyID
+            INNER JOIN SurveyTemplate SSTPL2 ON SSTPL2.ID = I2.TemplateID
+            WHERE
+            I2.ClassName = '{$class_name}' AND I2.IsTest = 0
+            AND SSTPL2.ID = %s
+            AND I2.Lang = '%s'
+            AND I2.ID = {$survey_table_prefix}.ID
+        )
+SQL;
+
         $filters_where = '';
 
         if (!empty($from) && !empty($to)) {
@@ -245,11 +263,17 @@ SQL;
                 $t = explode(':', $t);
                 $qid = intval($t[0]);
                 $vid = is_int($t[1]) ? intval($t[1]) : $t[1];
-                if(count($t) === 3)
-                    $vid = sprintf('%s:%s', $t[1], $t[2]);
-                $filter_query_tpl = is_int($vid) ? $filter_query_tpl_int : $filter_query_tpl_str;
-                $filters_where .= sprintf($filter_query_tpl, $template->ID, $qid, $vid);
+                if ($qid == 'lang') {
+                    $filters_where .= sprintf($lang_query, $template->ID, $vid);
+                } else {
+                    if(count($t) === 3)
+                        $vid = sprintf('%s:%s', $t[1], $t[2]);
+                    $filter_query_tpl = is_int($vid) ? $filter_query_tpl_int : $filter_query_tpl_str;
+                    $filters_where .= sprintf($filter_query_tpl, $template->ID, $qid, $vid);
+                }
+
             }
+
         }
 
         return $filters_where;
@@ -516,7 +540,7 @@ SQL;
             }
 
             if (!empty($qid) && !empty($vid)) {
-                $qid = intval($qid);
+                $qid = is_int($qid) ? intval($qid) : $qid;
                 $vid = is_int($vid) ? intval($vid) : $vid;
                 $filters = Session::get(sprintf('SurveyBuilder.%sStatistics.Filters', $class_name));
                 $questions_filters = Session::get(sprintf('SurveyBuilder.%sStatistics.Filters_Questions', $class_name));
@@ -868,6 +892,8 @@ SQL;
                 if (!$single_answer) continue;
 
                 $matrix = explode(':',$single_answer);
+                if (count($matrix) < 2) continue;
+
                 $col = $matrix[0];
                 $row = $matrix[1];
                 if (!$col || !$row) continue;
@@ -921,5 +947,57 @@ SQL;
 
         return $total_answers;
     }
+
+    public function getLanguageValues()
+    {
+        $lang_list = new ArrayList();
+        $template = $this->getCurrentSelectedSurveyTemplate();
+        if (is_null($template)) {
+            return new ArrayList();
+        }
+
+        $languages = GroupedList::create($template->Instances())->groupBy('Lang');
+
+        foreach (array_keys($languages) as $lang) {
+            if ($lang)
+                $lang_list->push(new ArrayData(['Lang' => $lang]));
+        }
+
+
+        return $lang_list;
+
+    }
+
+    public function SurveyBuilderCountLang($lang)
+    {
+        $template    = $this->getCurrentSelectedSurveyTemplate();
+
+        if (is_null($template))
+        {
+            return;
+        }
+
+        $class_name = $this->getCurrentSelectedSurveyClassName();
+
+        $filters_where  = $this->generateFilters();
+
+        $lang_filter = ($lang) ? "AND I.Lang = '{$lang}'" : "AND I.Lang IS NOT NULL";
+
+        $query = <<<SQL
+        SELECT COUNT(DISTINCT I.ID) FROM SurveyAnswer A
+        INNER JOIN SurveyQuestionTemplate Q ON Q.ID = A.QuestionID
+        INNER JOIN SurveyStepTemplate STPL ON STPL.ID = Q.StepID
+        INNER JOIN SurveyTemplate SSTPL ON SSTPL.ID = STPL.SurveyTemplateID
+        INNER JOIN SurveyStep S ON S.ID = A.StepID
+        INNER JOIN Survey I ON I.ID = S.SurveyID
+        WHERE
+        I.ClassName = '{$class_name}' AND I.IsTest = 0
+        {$lang_filter} AND SSTPL.ID = $template->ID
+        {$filters_where};
+SQL;
+
+        return DB::query($query)->value();
+    }
+
 
 }

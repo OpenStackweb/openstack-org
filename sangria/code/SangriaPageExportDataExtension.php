@@ -391,6 +391,7 @@ S.CreatedByID,
 M.Email,
 S.Created,
 S.LastEdited,
+S.Lang,
 SETPL.Name AS Step,
 Q.Name AS Question,
 Q.ID   AS QuestionID,
@@ -462,6 +463,7 @@ SQL;
         $template_1['Email']       = null;
         $template_1['Created']     = null;
         $template_1['LastEdited']  = null;
+        $template_1['Language']  = null;
 
         foreach($res as $row)
         {
@@ -676,6 +678,7 @@ SQL;
                             foreach($tuples as $t)
                             {
                                 $t = explode(':', $t);
+                                if(count($t) < 2) continue;
                                 $r = $t[0];
                                 if(!isset($rows[$r])) continue;
                                 $r = $rows[$r];
@@ -768,6 +771,7 @@ SQL;
                 $line['Email']       = $row['Email'];
                 $line['Created']     = $row['Created'];
                 $line['LastEdited']  = $row['LastEdited'];
+                $line['Language']    = $row['Lang'];
                 $survey_id           = intval($row['SurveyID']);
             }
 

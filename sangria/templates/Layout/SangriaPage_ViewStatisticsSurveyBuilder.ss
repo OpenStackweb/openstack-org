@@ -32,15 +32,18 @@
         <% if SurveyQuestions2Show %>
             <div class="row">
                 <% if $Top.getProjectsUsedCombinedCount() %>
-                <div class="col-md-8 question_container" style="width:100%; margin-bottom: 30px">
-                    <h3> Projects Used (PoC, Testing, and Production) </h3>
-                    <p>N = $Top.getProjectsUsedCombinedCount() </p>
-                    <div id="projects_used_graph" ></div>
-                    <script type="application/javascript">
-                        var pu_answers = $Top.getProjectsUsedCombined();
-                    </script>
+                    <div class="col-md-8 question_container" style="width:100%; margin-bottom: 30px">
+                        <h3> Projects Used (PoC, Testing, and Production) </h3>
+                        <p>N = $Top.getProjectsUsedCombinedCount() </p>
+                        <div id="projects_used_graph" ></div>
+                        <script type="application/javascript">
+                            var pu_answers = $Top.getProjectsUsedCombined();
+                        </script>
+                    </div>
                 <% end_if %>
-                </div>
+
+                <% include SangriaPage_StatisticsLanguage ParentPage=$Top, QuestionID=$ID %>
+
                 <% loop SurveyQuestions2Show %>
                     <% if $ClassName == 'SurveyRadioButtonMatrixTemplateQuestion' %>
                         <% include SangriaPage_StatisticsSurveyRadioButtonMatrixTemplateQuestion ParentPage=$Top, QuestionID=$ID %>
