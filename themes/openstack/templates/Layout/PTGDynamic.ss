@@ -91,9 +91,9 @@
                     <% if $SponsorLogos %>
                     <div class="row">
                         <div class="col-lg-12">
-                            <h3 class="section-title">
+                            <h5 class="section-title">
                                 Denver PTG Sponsors
-                            </h3>
+                            </h5>
                         </div>
                         <div class="col-lg-12">
                             <div class="row"> 
@@ -107,20 +107,14 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
-                            <h3 class="section-title">
+                            <h5 class="section-title">
                                 Travel Support Sponsor
-                            </h3>
+                            </h5>
                         </div>
                         <div class="col-lg-12">
                             <div class="row"> 
-                                <div class="col-lg-3 col-md-3 col-sm-2"><img style="max-width: 100%;" title="" src="assets/companies/main_logo/verizon-lg.png" alt="Verizon Logo" /></div>
+                                <div class="col-lg-12" style="text-align:center;"><img style="max-width: 100%;" title="" src="assets/companies/main_logo/verizon-lg.png" alt="Verizon Logo" /></div>
                             </div>
-                        </div>
-                        <div class="col-lg-12">
-                          <p>&nbsp;</p>
-                          <hr>
-                          <p>&nbsp;</p>
-
                         </div>
                     </div>
                     <% end_if %>
