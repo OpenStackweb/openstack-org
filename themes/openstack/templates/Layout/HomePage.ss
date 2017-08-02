@@ -1,7 +1,7 @@
 </div>
 <!-- <div class="intro-header featured" style="background-image: url({$HeroImageUrl})"> Removed for OpenDev promo-->
     <div class="intro-header featured" style="background: #000;overflow-y:hidden;">
-        <img src="/themes/openstack/opendev-earth.png" alt="" class="opendev-earth">
+        <img src="/themes/openstack/images/opendev-earth.png" alt="" class="opendev-earth">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-3 col-md-offset-3 col-sm-9 col-sm-offset-3 col-xs-12" style="text-align:left;">
