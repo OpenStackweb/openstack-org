@@ -18,7 +18,7 @@
     "rackspace/php-opencloud": "1.12.2",
     "nnnick/chartjs": "dev-master",
     "openid/php-openid": "2.3.0",
-    "silverstripe/geoip": "dev-master",
+    "silverstripe/geoip": "0.1.0",
     "sendgrid/sendgrid": "~5.5",
     "silverstripe-australia/gridfieldextensions": "1.0.3",
     "unclecheese/display-logic": "1.2.1",
