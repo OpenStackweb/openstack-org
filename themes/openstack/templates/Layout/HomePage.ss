@@ -1,11 +1,13 @@
 </div>
-<div class="intro-header featured" style="background-image: url({$HeroImageUrl})">
+<!-- <div class="intro-header featured" style="background-image: url({$HeroImageUrl})"> Removed for OpenDev promo-->
+    <div class="intro-header featured" style="background: #000;overflow-y:hidden;">
+        <img src="/themes/openstack/opendev-earth.png" alt="" class="opendev-earth">
     <div class="container">
         <div class="row">
-            <div class="col-lg-10 col-lg-offset-1 col-sm-12">
+            <div class="col-lg-8 col-lg-offset-3 col-md-offset-3 col-sm-9 col-sm-offset-3 col-xs-12" style="text-align:left;">
                 <% if $PromoIntroMessage %>
                 <div class="intro-message">
-                    <h1>$PromoIntroMessage</h1>
+                    <h1 style="text-align:left;">$PromoIntroMessage</h1>
                 </div>
                 <% end_if %>
                 <% if PromoDatesText %>
@@ -13,7 +15,10 @@
                 <% end_if %>
                 <% if $PromoButtonUrl %>
                 <div class="promo-btn-wrapper">
-                    <a href="{$PromoButtonUrl}" class="promo-btn">$PromoButtonText<i class="fa fa-chevron-right"></i></a>
+                    <a href="{$PromoButtonUrl}" class="promo-btn" style="background:#43B7D9;">$PromoButtonText<i class="fa fa-chevron-right"></i></a>
+                    <div style="font-style:italic;margin-top:5px;">
+                        September 7-8 | San Francisco, CA
+                    </div>
                 </div>
                 <% end_if %>
             </div>
@@ -30,3 +35,4 @@
 <!-- /.intro-header -->
 
 <% include HomePageBottom %>
+

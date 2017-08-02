@@ -3344,3 +3344,22 @@ h5.section-title.guide {
 /*End Visa Steps*/
 /*End PTG */
 
+/* OpenDev Promo */
+.opendev-earth {
+  max-width: 35%;
+  position: absolute;
+  left: -10%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+@media (max-width: 768px) {
+  .opendev-earth {
+    top: 45%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0.5;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+/* End OpenDev Promo */
