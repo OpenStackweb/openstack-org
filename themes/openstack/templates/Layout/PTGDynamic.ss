@@ -88,24 +88,32 @@
         <div role="tabpanel" class="tab-pane" id="sponsor">
             <div class="ptg-body">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h2>What are PTG Events & Why Sponsor?</h2>
-                            $Sponsor
-                            <h2>Steps to Sponsoring the PTG event:</h2>
-                            $SponsorSteps
-                        </div>
-                    </div>
                     <% if $SponsorLogos %>
                     <div class="row">
                         <div class="col-lg-12">
-                            <h5 class="section-title">
-                                Thank you to our Atlanta PTG Sponsors
-                            </h5>
+                            <h3 class="section-title">
+                                Denver PTG Sponsors
+                            </h3>
                         </div>
                         <div class="col-lg-12">
                             <div class="row"> 
                                 $SponsorLogos
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                          <p>&nbsp;</p>
+                          <p>&nbsp;</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h3 class="section-title">
+                                Travel Support Sponsor
+                            </h3>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="row"> 
+                                <div class="col-lg-3 col-md-3 col-sm-2"><img style="max-width: 100%;" title="" src="assets/companies/main_logo/verizon-lg.png" alt="Verizon Logo" /></div>
                             </div>
                         </div>
                         <div class="col-lg-12">
@@ -116,6 +124,14 @@
                         </div>
                     </div>
                     <% end_if %>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h2>What are PTG Events & Why Sponsor?</h2>
+                            $Sponsor
+                            <h2>Steps to Sponsoring the PTG event:</h2>
+                            $SponsorSteps
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
