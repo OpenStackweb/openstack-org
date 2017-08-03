@@ -29,6 +29,10 @@ class SummitVideoAppBackend
      */
     public function getVideos($params = [])
     {
+        foreach($params as $key => $val){
+            $params[$key] = Convert::raw2sql($val);
+        }
+
         $summit = $speaker = $tag = $track = null;
         $start = isset($params['start']) ? $params['start'] : 0;
         $defaultLimit = SummitVideoApp::config()->default_video_limit;
@@ -107,7 +111,7 @@ class SummitVideoAppBackend
                 break;
 
             case 'search':
-                $search = Convert::raw2sql(trim($criteria));
+                $search = trim($criteria);
 
                 $videos = $videos
                     ->innerJoin('Presentation', 'Presentation.ID = PresentationMaterial.PresentationID')
@@ -126,8 +130,6 @@ class SummitVideoAppBackend
                     OR PresentationCategory.Title = '%$search%'
                     OR Summit.Title LIKE '%$search%'")
                     ->limit($defaultLimit);
-
-                //die($videos->sql());
 
                 $match_videos = GroupedList::create($videos)->groupBy('YouTubeID');
 
@@ -217,6 +219,10 @@ class SummitVideoAppBackend
      */
     public function getSpeakers($params = [])
     {
+        foreach($params as $key => $val){
+            $params[$key] = Convert::raw2sql($val);
+        }
+
         $start = isset($params['start']) ? $params['start'] : 0;
         $speakers = PresentationSpeaker::get()
             ->innerJoin('Presentation_Speakers', 'Presentation_Speakers.PresentationSpeakerID = PresentationSpeaker.ID')
@@ -228,7 +234,7 @@ class SummitVideoAppBackend
                 $query->groupby('PresentationSpeaker.ID');
             });
         if (isset($params['letter'])) {
-            $letter = Convert::raw2sql($params['letter']);
+            $letter = $params['letter'];
             $speakers = $speakers->filter(
                 'LastName:StartsWith',
                 $letter
