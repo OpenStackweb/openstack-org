@@ -107,7 +107,7 @@ class SummitVideoAppBackend
                 break;
 
             case 'search':
-                $search = trim($criteria);
+                $search = Convert::raw2sql(trim($criteria));
 
                 $videos = $videos
                     ->innerJoin('Presentation', 'Presentation.ID = PresentationMaterial.PresentationID')
@@ -228,9 +228,10 @@ class SummitVideoAppBackend
                 $query->groupby('PresentationSpeaker.ID');
             });
         if (isset($params['letter'])) {
+            $letter = Convert::raw2sql($params['letter']);
             $speakers = $speakers->filter(
                 'LastName:StartsWith',
-                $params['letter']
+                $letter
             )->sort('LastName ASC');
         }
 
