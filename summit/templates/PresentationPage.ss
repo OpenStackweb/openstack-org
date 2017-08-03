@@ -158,6 +158,7 @@
         </nav>
     </div>
 </div>
+    <% include TwitterUniversalWebsiteTagCode %>
 </body>
 <% require javascript("themes/openstack/javascript/jquery.persistable-form.js") %>
     <% include Page_LinkedinInsightTracker %>

@@ -9,6 +9,7 @@
     <!-- Begin Page Content -->
     $Layout
     <!-- End Page Content -->
+        <% include TwitterUniversalWebsiteTagCode %>
 </body>
 
 </html>

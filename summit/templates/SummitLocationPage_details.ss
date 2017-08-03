@@ -90,7 +90,7 @@
     <!-- Javascript for this page -->
     <script src="/summit/javascript/hotel-landing.js"></script>
 
-
+    <% include TwitterUniversalWebsiteTagCode %>
 </body>
 
 </html>

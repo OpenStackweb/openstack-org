@@ -21,5 +21,6 @@
             window.TrackChairAppConfig = $JSONConfig;
         </script>
         $ModuleJS('main')
+        <% include TwitterUniversalWebsiteTagCode %>
    </body>
 </html>

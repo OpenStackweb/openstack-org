@@ -211,6 +211,7 @@
     </div>
 </div>
     <% include Quantcast %>
+    <% include TwitterUniversalWebsiteTagCode %>
 </body>
 
 <script type="text/javascript" src="/themes/openstack/static/js/jquery.tooltipster.min.js"></script>

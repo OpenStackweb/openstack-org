@@ -25,5 +25,6 @@
 
 <body id="anniversary">
     $Layout
+    <% include TwitterUniversalWebsiteTagCode %>
 </body>
 </html>
