@@ -37,10 +37,6 @@ define("EVENT_REGISTRATION_REQUEST_EMAIL_FROM", '');
 define('REVOCATION_NOTIFICATION_EMAIL_FROM','');
 //used on jobs module.
 define('JOB_REGISTRATION_REQUEST_EMAIL_FROM','');
-//used on openstack/code/UserStoriesHolder.php (submitNewUserStory - ln 102)
-define('USER_STORIES_NEW_SUBMISSION_EMAIL_FROM','');
-//used on openstack/code/UserStoriesHolder.php (submitNewUserStory - ln 102)
-define('USER_STORIES_NEW_SUBMISSION_EMAIL_TO','');
 //used on openstack/code/summit/TrackChairPage.php (EmailTrackChairs - ln 739)
 define('TRACK_CHAIRS_EMAIL_FROM','');
 //used on openstack/code/summit/SpeakerListPage.php (EmailSpeakers - ln 59)

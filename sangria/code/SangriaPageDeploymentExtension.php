@@ -26,7 +26,6 @@ final class SangriaPageDeploymentExtension extends Extension
             'ViewDeploymentSurveyStatistics',
             'ViewDeploymentDetails',
             'AddNewDeployment',
-            'AddUserStory',
             'ViewDeploymentsPerRegion',
             'ViewDeploymentSurveysPerRegion',
             'ViewUsersPerRegion',
@@ -38,7 +37,6 @@ final class SangriaPageDeploymentExtension extends Extension
             'ViewDeploymentSurveyStatistics',
             'ViewDeploymentDetails',
             'AddNewDeployment',
-            'AddUserStory',
             'ViewDeploymentsPerRegion',
             'ViewDeploymentSurveysPerRegion',
             'ViewUsersPerRegion',
@@ -546,37 +544,6 @@ final class SangriaPageDeploymentExtension extends Extension
         }
 
         return $arrayList;
-    }
-
-    function AddUserStory()
-    {
-
-        if (isset($_GET['ID']) && is_numeric($_GET['ID'])) {
-            $ID = $_GET['ID'];
-        } else {
-            die();
-        }
-
-        $parent = UserStoryHolder::get()->first();
-        if (!$parent) {
-            $this->owner->setMessage('Error',
-                'could not add an user story bc there is not any available parent page(UserStoryHolder).');
-            Controller::curr()->redirectBack();
-        }
-        $userStory = new UserStory;
-        $userStory->Title = $_GET['label'];
-        $userStory->DeploymentID = $ID;
-        $userStory->UserStoriesIndustryID = $_GET['industry'];
-        $userStory->CompanyName = $_GET['org'];
-        $userStory->CaseStudyTitle = $_GET['org'];
-        $userStory->ShowInAdmin = 1;
-        $userStory->setParent($parent); // Should set the ID once the Holder is created...
-        $userStory->write();
-        //$userStory->publish("Live", "Stage");
-        $userStory->flushCache();
-        $this->owner->setMessage('Success', '<b>' . $userStory->Title . '</b> added as User Story.');
-
-        Controller::curr()->redirectBack();
     }
 
     function AddNewDeployment()
@@ -1541,4 +1508,5 @@ WHERE CC.ContinentID = {$continent_id} GROUP BY CC.CountryCode; ");
 
         return CSVExporter::getInstance()->export($filename, $data, ',');
     }
+
 }

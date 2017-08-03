@@ -17,7 +17,6 @@
 Object::add_extension('SangriaPage_Controller', 'SangriaPageDeploymentExtension');
 Object::add_extension('SangriaPage_Controller', 'SangriaPageSurveyDetailsExtension');
 Object::add_extension('SangriaPage_Controller', 'SangriaPageStandardizeOrgNamesExtension');
-Object::add_extension('SangriaPage_Controller', 'SangriaPageViewCurrentStoriesExtension');
 Object::add_extension('SangriaPage_Controller', 'SangriaPageExportDataExtension');
 Object::add_extension('SangriaPage_Controller', 'SangriaPageViewSpeakingSubmissionsExtension');
 Object::add_extension('SangriaPage_Controller', 'SangriaSetCategorySponsorsExtension');

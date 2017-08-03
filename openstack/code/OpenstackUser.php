@@ -42,7 +42,6 @@ class OpenstackUser extends Page {
     'Projects' => 'Project'
    );
  
-   static $allowed_children = array('UserStoryPage');
    /** static $icon = "icon/path"; */
    	
 	public function getCMSFields()

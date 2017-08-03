@@ -21,33 +21,12 @@ final class SangriaPageSurveyDetailsExtension  extends Extension {
 	public function onBeforeInit(){
 
 		Config::inst()->update(get_class($this), 'allowed_actions', array(
-			'SetCaseStudy',
 			'SurveyDetails',
 		));
 
 		Config::inst()->update(get_class($this->owner), 'allowed_actions', array(
-			'SetCaseStudy',
 			'SurveyDetails',
 		));
-	}
-
-	function SetCaseStudy() {
-		if(isset($_GET['ID']) && is_numeric($_GET['ID'])) {
-			$UserStory = $_GET['ID'];
-		}else{
-			die();
-		}
-
-		$setCaseStudy = ($_GET['Set'] == 1)? 1 : 0;
-		$story = SiteTree::get_by_id("UserStory",$UserStory);
-
-		$story->ShowCaseStudy = $setCaseStudy;
-		$story->write();
-		$story->publish("Live","Stage");
-
-		$this->owner->setMessage('Success', 'Case Study updated for <b>' . $story->Title . '</b>');
-
-		Controller::curr()->redirectBack();
 	}
 
 	function SurveyDetails(){

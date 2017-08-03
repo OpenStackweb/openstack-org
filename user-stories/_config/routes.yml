@@ -1,0 +1,7 @@
+---
+Name: user-stories-routes
+After: 'framework/routes#coreroutes'
+---
+Director:
+  rules:
+    'api/v1/user-stories': 'UserStoriesResfullApi'

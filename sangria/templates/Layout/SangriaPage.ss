@@ -5,7 +5,7 @@
 </div>
 <div class="span-24 last">
     <h2>Live Metrics</h2>
-		<div class="span-8 featuredUserStory">
+		<div class="span-8 featuredStat">
 			<div class="wrapper">
 			    <div>
 			    <strong>Individual Members:</strong><br/>
@@ -19,10 +19,6 @@
 			    <strong>Newsletter Subscribers:</strong><br/>
 			    $NewsletterMemberCount ($NewsletterPercentage%)
 			    </div>
-			    <div>
-			    <strong>User Stories / Logos:</strong><br/>
-			    $UserStoryCount / $UserLogoCount
-			    </div>
                 <div>
                     <strong># Total Votes</strong><br/>
 					$SpeakerVotesCount
@@ -33,7 +29,7 @@
                 </div>
 			</div>
 		</div>
-      	<div class="span-8 featuredUserStory">
+      	<div class="span-8 featuredStat">
 			<div class="wrapper">
 			    <div>
 			    <strong>Platinum Members:</strong>
@@ -61,7 +57,7 @@
 			    </div>
 			</div>
 		</div>
- 		<div class="span-8 featuredUserStory last">
+ 		<div class="span-8 featuredStat last">
 			<div class="wrapper">
 			    <div>
 			    <strong>Non-US Newsletter Subscribers:</strong><br/>
@@ -147,11 +143,16 @@
                 <li><a href="$Link(ViewDeploymentsPerRegion)">Deployments Per Region</a></li>
                 <li><a href="$Link(ViewDeploymentSurveysPerRegion)">Deployment Surveys Per Region</a></li>
             </ul>
-        <li>User Stories / Deployment Details</li>
+        <li>Deployment Details</li>
             <ul>
-                <li><a href="/sangria/ViewCurrentStories">Manage User Stories</a></li>
                 <li><a href="/sangria/ViewDeploymentDetails">Manage Deployment Details</a></li>
             </ul>
+    </ul>
+
+    <h2>User Stories</h2>
+    <ul>
+        <li><a href="$Top.Link(user-stories)">Manage User Stories</a></li>
+        <li><a href="$Top.Link(user-stories/new)">Add User Story</a></li>
     </ul>
 
     <h2>Events</h2>

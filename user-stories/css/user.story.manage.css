@@ -1,0 +1,10 @@
+.action-story {
+    color: #a9a9a9 !important;
+    cursor: pointer;
+    margin: 0 3px;
+}
+
+.action-story:hover {
+    color: black !important;
+}
+

@@ -16,6 +16,9 @@ import React from 'react';
 
 export const AjaxLoader =  ({
                          show,
+                         relative,
+                         color,
+                         size,
                          children,
                      }) => {
 
@@ -23,16 +26,14 @@ export const AjaxLoader =  ({
         display : show ? 'block': 'none',
         width:'100%',
         height:'100%',
-        position:'fixed',
+        position: relative ? 'absolute' : 'fixed',
         zIndex:10000000,
-        top:0,
-        left:0,
         margin:'auto',
         cursor: 'wait'
     };
 
     let styleSpinner = {
-        fontSize: '150px',
+        fontSize: size + 'px',
         color: 'black',
     };
 
@@ -40,9 +41,9 @@ export const AjaxLoader =  ({
         width: '250px',
         height:'75px',
         textAlign: 'center',
-        position: 'fixed',
-        top:'0',
-        left:'0',
+        position: relative ? 'relative' : 'fixed',
+        top: relative ? '50%' : '0',
+        left: relative ? '' : '0',
         right:'0',
         bottom:'0',
         margin:'auto',
@@ -51,7 +52,7 @@ export const AjaxLoader =  ({
     };
 
     let styleBackground = {
-        background:'#000000',
+        background: color,
         opacity:'0.8',
         width:'100%',
         height:'100%',
