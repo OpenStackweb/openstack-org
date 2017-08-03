@@ -20,12 +20,12 @@ class PresentationVideo extends PresentationMaterial
 	 * @var array
      */
 	private static $db = array (
-        'YouTubeID'    => 'Text',
-        'DateUploaded' => 'SS_DateTime',
-        'Highlighted'  => 'Boolean',
-        'Views'        => 'Int',
+        'YouTubeID'        => 'Text',
+        'DateUploaded'     => 'SS_DateTime',
+        'Highlighted'      => 'Boolean',
+        'Views'            => 'Int',
         'ViewsLastUpdated' => 'SS_DateTime',
-        'Processed'    => 'Boolean'
+        'Processed'        => 'Boolean'
     );
 
     private static $defaults = array(

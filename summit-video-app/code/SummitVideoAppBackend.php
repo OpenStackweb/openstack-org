@@ -186,9 +186,9 @@ class SummitVideoAppBackend
     {
         $video = PresentationVideo::get()
             ->filter([
-                'Featured' => true,
+                'Featured'      => true,
                 'DisplayOnSite' => true,
-                'Processed' => true
+                'Processed'     => true
             ])
             ->first();
 

@@ -202,7 +202,6 @@ class SummitVideoApp_Controller extends Page_Controller
         );
     }
 
-
     /**
      * @param SS_HTTPRequest $r
      * @return mixed

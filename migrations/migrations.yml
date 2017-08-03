@@ -74,3 +74,4 @@ migrations:
   - SummitSponsorsMigration
   - AboutExpirePoweredOpenStackImplementationEmailMigration
   - FixVideoPresentationDeprecationMigration
+  - MigrateFeaturedVideoToPresentationMaterials
