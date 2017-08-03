@@ -50,8 +50,14 @@ class Sponsor extends DataObject implements ISponsor
         return new DropdownField("SponsorshipType_{$this->ID}", "SponsorshipType_{$this->ID}", $types, $type);
     }
 
+    public function getSubmitPageUrl()
+    {
+        if ($this->getField('SubmitPageUrl')) return $this->getField('SubmitPageUrl');
+        else return $this->Company()->URL;
+    }
+
     public function getInputSubmitPageUrl()
     {
-        return new TextField("SubmitPageUrl_{$this->ID}", "SubmitPageUrl_{$this->ID}", $this->SubmitPageUrl, 255);
+        return new TextField("SubmitPageUrl_{$this->ID}", "SubmitPageUrl_{$this->ID}", $this->getSubmitPageUrl(), 255);
     }
 }
