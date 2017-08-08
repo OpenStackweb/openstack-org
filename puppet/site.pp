@@ -18,7 +18,10 @@ $main_packages = [
   'unzip',
   'nginx',
   'mysql-client-core-5.6',
+  'python-dev',
   'python-software-properties',
+  'python-pip',
+  'libmysqlclient-dev',
 ]
 
 # php packages needed for server
@@ -145,6 +148,14 @@ mysql::db { $os_db :
 file { '/var/www/local.openstack.org/_ss_environment.php':
   ensure  => present,
   content => template('site/_ss_environment.php.erb'),
+  owner   => 'vagrant',
+  group   => 'www-data',
+  mode    => '0640',
+}
+
+file { '/var/www/local.openstack.org/survey_builder/code/model/extract_tags/db.ini':
+  ensure  => present,
+  content => template('site/db.ini.erb'),
   owner   => 'vagrant',
   group   => 'www-data',
   mode    => '0640',

@@ -1,4 +1,6 @@
 #!/bin/bash -xe
+# install virtual env for python
+sudo pip install virtualenv;
 # install node js 5.x
 # https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions
 curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -;
@@ -45,3 +47,14 @@ php -r "unlink('composer-setup.php');"
 mkdir -p /var/www/local.openstack.org/silverstripe-cache;
 php composer.phar install --ignore-platform-reqs --prefer-dist;
 sudo ./framework/sake installsake;
+
+
+if [[ -d /var/www/local.openstack.org/survey_builder/code/model/extract_tags ]]; then
+	echo "installing python virtual env for extract tags";
+	cd /var/www/local.openstack.org/survey_builder/code/model/extract_tags && virtualenv env;
+	source /var/www/local.openstack.org/survey_builder/code/model/extract_tags/env/bin/activate;
+	/var/www/local.openstack.org/survey_builder/code/model/extract_tags/env/bin/python env/bin/pip install -r requirements.txt;
+	chmod 770 /var/www/local.openstack.org/survey_builder/code/model/extract_tags/extract_tags_by_rake.sh
+	chmod 770 /var/www/local.openstack.org/survey_builder/code/model/extract_tags/extract_tags_by_kmeans.sh
+fi
+
