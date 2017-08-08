@@ -8,13 +8,6 @@
 
 	<% base_tag %>
 
-	<!-- Google Fonts -->
-	<link href='{$CurrentProtocol}fonts.googleapis.com/css?family=PT+Sans&subset=latin' rel='stylesheet' type='text/css'>
-
-	<!-- Framework CSS -->
-	<link rel="stylesheet" href="/themes/openstack/css/blueprint/screen.css" type="text/css" media="screen, projection">
-	<link rel="stylesheet" href="/themes/openstack/css/blueprint/print.css" type="text/css" media="print">
-
 	<!-- IE CSS -->
 	<!--[if lt IE 8]><link rel="stylesheet" href="/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
 
@@ -46,39 +39,5 @@
 		$Message
 		$Layout
 	</div>
-
-
-<script type="text/javascript">
-jQuery(document).ready(function($){
-
-	$('table.stories').tableDnD({
-		 dragHandle: ".dragHandle"
-	});
-
-
-	$('form.UpdateStories').on('submit',function(e){
-		var i = 1;
-		$(this).find('.order').each(function(){
-			$(this).val(i);
-			i++;
-		})
-	});
-
-	$('td.userStoryTitle').click(function(e){
-		var target = $(e.target);
-		if(!target.is('input') && !target.is('a')){
-			var val = $(this).find('input[type=text]').val();
-			$(this).find('span').html( val ).toggle();
-			$(this).find('input').toggle();
-		}
-	});
-
-	$('td.userStoryTitle').blur(function(){
-		console.log($(this).val());
-		$(this).parent().find('span').html( $(this).val() );
-	});
-
-  });
-</script>
 </body>
 </html>

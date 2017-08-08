@@ -24,19 +24,20 @@ class SurveyAnswer extends DataObject implements ISurveyAnswer
     ];
 
     static $has_one = [
-        'Question' => 'SurveyQuestionTemplate',
-        'Step'     => 'SurveyStep',
+        'Question'  => 'SurveyQuestionTemplate',
+        'Step'      => 'SurveyStep',
+        'UpdatedBy' => 'Member'
     ];
 
-    static $many_many = array(
-    );
+    static $many_many = [
+        'Tags' => 'SurveyAnswerTag',
+    ];
 
-    static $has_many = array(
+    static $has_many = [
 
-    );
+    ];
 
-    private static $defaults = array(
-    );
+    private static $defaults = [];
 
     /**
      * @return int

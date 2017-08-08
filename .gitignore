@@ -89,3 +89,6 @@ autocomplete/
 *.patch
 *.mo
 blog
+db.ini
+env/
+*.pyc

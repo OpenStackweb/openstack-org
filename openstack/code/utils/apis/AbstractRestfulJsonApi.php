@@ -19,6 +19,28 @@ use Openstack\Annotations\CachedMethod;
 abstract class AbstractRestfulJsonApi extends Controller
 {
 
+    private static $api_prefix = null;
+
+    /**
+     * @return bool
+     */
+    protected function isApiCall()
+    {
+        $class   = get_class($this);
+        $request = $this->getRequest();
+
+        if (is_null($request)) {
+            return false;
+        }
+
+        $api_prefix = Config::inst()->get($class, 'api_prefix', Config::UNINHERITED);
+
+        if(!empty($api_prefix))
+            return strpos(strtolower($request->getURL()), $api_prefix) !== false;
+
+        return false;
+    }
+
     /**
      * @param string $action
      * @return CachedMethod
@@ -157,11 +179,6 @@ abstract class AbstractRestfulJsonApi extends Controller
         $this->current_user = Member::currentUser();
         register_shutdown_function(array($this, 'shutdown_function'));
     }
-
-    /**
-     * @return mixed
-     */
-    abstract protected function isApiCall();
 
     /**
      * @param $realm

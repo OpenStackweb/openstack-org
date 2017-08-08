@@ -19,26 +19,23 @@
 final class SangriaPageViewCurrentStoriesExtension extends Extension
 {
 
+    static $allowed_actions = [
+        'ViewCurrentStories',
+        'UpdateStories',
+        'SetAdminSS',
+        'UnPublishFromUserStories',
+    ];
+
     public function onBeforeInit()
     {
 
-        Config::inst()->update(get_class($this), 'allowed_actions', array(
-            'ViewCurrentStories',
-            'UpdateStories',
-            'SetAdminSS',
-            'UnPublishFromUserStories',
-        ));
+        Config::inst()->update(get_class($this), 'allowed_actions', self::$allowed_actions);
 
-        Config::inst()->update(get_class($this->owner), 'allowed_actions', array(
-            'ViewCurrentStories',
-            'UpdateStories',
-            'SetAdminSS',
-            'UnPublishFromUserStories',
-        ));
+        Config::inst()->update(get_class($this->owner), 'allowed_actions', self::$allowed_actions);
     }
 
     public function ViewCurrentStories(){
-        Requirements::javascript("themes/openstack/javascript/sangria/view.current.stories.js");
+        Requirements::javascript("sangria/ui/source/UserStories.js");
         return $this->owner->Customise(array())->renderWith(array('SangriaPage_ViewCurrentStories','SangriaPage','SangriaPage'));
     }
 

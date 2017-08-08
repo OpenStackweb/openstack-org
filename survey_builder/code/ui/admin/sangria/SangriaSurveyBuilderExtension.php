@@ -17,37 +17,46 @@
  */
 final class SangriaSurveyBuilderExtension extends Extension
 {
+
     const SurveysPageSize = 15;
 
+    static $allowed_actions =  [
+        'SurveyBuilderListSurveys',
+        'SurveyBuilderListDeployments',
+        'SurveyDetails',
+        'DeploymentDetails',
+        'ViewSurveyFreeAnswersList',
+        'ViewSurveyFreeAnswersStats',
+    ];
+
     /**
-     * @var SapphireSurveyRepository
+     * @var ISurveyRepository
      */
     private $survey_repository;
     /**
-     * @var SapphireSurveyTemplateRepository
+     * @var ISurveyTemplateRepository
      */
     private $survey_template_repository;
+    /**
+     * @var ISurveyAnswerRepository
+     */
+    private $survey_answer_repository;
 
-    public function __construct()
+
+    public function __construct(ISurveyRepository $survey_repository,
+                                ISurveyTemplateRepository $survey_template_repository,
+                                ISurveyAnswerRepository $survey_answer_repository)
     {
-        $this->survey_repository = new SapphireSurveyRepository();
-        $this->survey_template_repository = new SapphireSurveyTemplateRepository();
+        parent::__construct();
+        $this->survey_repository =  $survey_repository;
+        $this->survey_template_repository = $survey_template_repository;
+        $this->survey_answer_repository = $survey_answer_repository;
     }
 
     public function onBeforeInit()
     {
-        Config::inst()->update(get_class($this), 'allowed_actions', [
-            'SurveyBuilderListSurveys',
-            'SurveyBuilderListDeployments',
-            'SurveyDetails',
-            'DeploymentDetails',
-        ]);
-        Config::inst()->update(get_class($this->owner), 'allowed_actions', [
-            'SurveyBuilderListSurveys',
-            'SurveyBuilderListDeployments',
-            'SurveyDetails',
-            'DeploymentDetails',
-        ]);
+        Config::inst()->update(get_class($this), 'allowed_actions', self::$allowed_actions);
+        Config::inst()->update(get_class($this->owner), 'allowed_actions', self::$allowed_actions);
     }
 
     public function onAfterInit()
@@ -302,6 +311,84 @@ HTML;
             $data
         )->renderWith(array('SangriaPage_SurveyBuilderSurveyDetails', 'SangriaPage', 'SangriaPage'));
 
+    }
+
+    /**
+     * @param SS_HTTPRequest $request
+     */
+    public function ViewSurveyFreeAnswersList(SS_HTTPRequest $request){
+
+        Requirements::clear();
+        Requirements::css('sangria/ui/source/css/sangria.css');
+
+        // js
+        Requirements::javascript("themes/openstack/bower_assets/jquery/dist/jquery.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jquery-migrate/jquery-migrate.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jquery-cookie/jquery.cookie.js");
+        //tags inputs
+        // defined here bc amd/requirejs module definition is broken
+        Requirements::javascript('node_modules/bootstrap-3-typeahead/bootstrap3-typeahead.min.js');
+
+        $now  = MySQLDatabase56::nowRfc2822();
+
+        return $this->owner->getViewer('ViewSurveyFreeAnswersList')->process
+        (
+            $this->owner->Customise([
+                'SurveyTemplates' => SurveyTemplate::get()->filter(
+                    [
+                        'ClassName'        => 'SurveyTemplate',
+                        'EndDate:LessThan' => $now,
+                    ]
+                )->sort('StartDate', 'ASC')
+            ])
+        );
+    }
+
+    /**
+     * @param SS_HTTPRequest $request
+     */
+    public function ViewSurveyFreeAnswersStats(SS_HTTPRequest $request){
+
+        Requirements::clear();
+        Requirements::set_force_js_to_bottom(true);
+        Requirements::css('sangria/ui/source/css/sangria.css');
+        // js
+        Requirements::javascript("themes/openstack/bower_assets/jquery/dist/jquery.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jquery-migrate/jquery-migrate.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jquery-cookie/jquery.cookie.js");
+
+        $query_string = $request->getVars();
+        $template_id  = intval($query_string['template_id']);
+        $question_id  = intval($query_string['question_id']);
+        $question     = SurveyQuestionTemplate::get()->byID($question_id);
+
+        if(is_null($question)) return new SS_HTTPResponse("Question not found", 404);
+
+        $tag_count_results = $this->survey_answer_repository->getCountForTags($question_id);
+        $answer_count = $question->Answers()->Count();
+
+        $results = [];
+        $total_tag_count = 0;
+        foreach ($tag_count_results as $row){
+            $total_tag_count += intval( $row['Qty']);
+            $results[] = new ArrayData([
+                'Count'     => $row['Qty'],
+                'Tag'       => $row['Tag'],
+                'ID'        => $row['ID'],
+                'AnswerIDs' => $row['AnswerIDs']
+            ]);
+        }
+
+        return $this->owner->getViewer('ViewSurveyFreeAnswersStats')->process
+        (
+            $this->owner->Customise([
+                'Data'          => new ArrayList($results),
+                'QuestionTitle' => $question->Label,
+                'AnswerCount'   => $answer_count,
+                'QuestionID'    => $question_id,
+                'TemplateID'    => $template_id
+            ])
+        );
     }
 
 }
