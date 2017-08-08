@@ -10,8 +10,6 @@
     </div>
 </div>
 
-<div class="days-pretext">$EventsYearlyCountText() - <a href="#" class="deep-link" data-tab="events_tab">find an upcoming OpenStack Hackathon in your region!</a></div>
-
 <div class="container slider-container">
     <section class="regular slider">
         <% loop $HeaderPics.Sort(SortOrder) %>
@@ -29,9 +27,6 @@
             <li class="tab-host_tab nav-item">
                 <a href="#host_tab" class="nav-link" role="tab" data-toggle="tab">Host An OpenStack Hackathon</a>
             </li>
-            <li class="tab-events_tab nav-item">
-                <a href="#events_tab" class="nav-link" role="tab" data-toggle="tab">Upcoming Events</a>
-            </li>
         </ul>
     </div>
 </div>
@@ -43,8 +38,14 @@
             <div role="tabpanel" class="tab-pane fade in active" id="about_tab">
                 <div class="row">
                     <div class="col-sm-12"> $AboutDescription </div>
+                </div>
+                <h2 class="tab-title">Coming Up</h2>
+                <div class="row">
                     <div class="col-sm-12">
-                        <p class="mr5-30">$EventsYearlyCountText() - <a href="{$Top.Link()}#tab=events_tab" target="_blank">find an upcoming OpenStack Hackathon in your region!</a> </p>
+                        <p>Our next OpenStack Hackathon is:</p>
+                        <p><a href="http://hackathon.openstack.org.au/" target="_blank">Sydney, Australia</a><br/>
+                        November 3-5, 2017
+                        </p>
                     </div>
                 </div>
                 <h2 class="tab-title">Previous Hackathon Events</h2>
@@ -228,33 +229,7 @@
                 <% end_if %>
             </div>
 
-            <div role="tabpanel" class="tab-pane fade in" id="events_tab">
-                <div class="inner-osdays">
-                    <h2 class="tab-title">Upcoming OpenStack Hackathons</h2>
-                    <div class="osdays-events">
-                        <% if $FutureHackathonsEvents(22) %>
-                            <% loop $FutureHackathonsEvents(22) %>
-                            <div class="row osdays-event">
-                                <div class="col-sm-2 col-xs-3"><div class="osd-date">$formatDateRange</div></div>
-                                <div class="col-sm-4 col-xs-4">$Title</div>
-                                <div class="col-sm-3 col-xs-3">$Location</div>
-                                <div class="col-sm-3 col-xs-2 text-right to-top">
-                                    <a href="$EventLink">More Details</a>
-                                    <a class="more-img" href="$EventLink"></a>
-                                </div>
-                            </div>
-                            <% end_loop %>
-                        <% else %>
-                            <h3>Sorry, there are no upcoming events listed at the moment.</h3>
-                            <p class="details">
-                                Wow! It really rare that we don't have any upcoming events on display.
-                                Somewhere in the world there's sure to be an OpenStack event in the near future&mdash;
-                                We probably just need to update this list. Please check back soon for more details.
-                            </p>
-                        <% end_if %>
-                    </div>
-                </div>
-            </div>
+            
         </div>
     </div>
 </div>
