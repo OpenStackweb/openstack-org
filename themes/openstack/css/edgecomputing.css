@@ -1,6 +1,6 @@
 /* Edge landing */
 .intro-header.edge {
-  background: url(/images/edge/hero-bg.jpg) no-repeat bottom center;
+  background: url(https://www.openstack.org/assets/edge/hero-bg.jpg) no-repeat bottom center;
   background-size: cover;
   padding: 60px 0; }
   .intro-header.edge .intro-message {
