@@ -23,6 +23,7 @@ class EdgeComputingPage_Controller extends Page_Controller {
         parent::init();
 
         Requirements::CSS('themes/openstack/css/edgecomputing.css');
+        Requirements::CSS('themes/openstack/css/enterprise.css');
     }
 
 }
