@@ -15,7 +15,6 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import SangriaOpenStackProductsByRegionApp from './SangriaOpenStackProductsByRegionApp';
-import "../../css/sangria.css";
 import store from './store';
 
 const containerId      = 'openstack-products-by-region-app';
