@@ -622,7 +622,15 @@ class SurveyPage_Controller extends Page_Controller
 
             if (is_null($this->current_entity_survey))
             {
-                throw new LogicException(sprintf('entity survey id is %s - member_id %s', $entity_survey_id, Member::currentUserID()));
+                throw new LogicException
+                (
+                    sprintf
+                    (
+                        "member id %s is not allowed to edit entity survey id %s",
+                        Member::currentUserID(),
+                        $entity_survey_id
+                    )
+                );
             }
 
             $entity_step          = $this->current_entity_survey->currentStep();
@@ -694,6 +702,10 @@ class SurveyPage_Controller extends Page_Controller
                     'EntitySurvey' => $this->current_entity_survey
                 )
             )->renderWith(array('Surveys_CurrentSurveyDynamicEntityContainer', 'SurveyPage'));
+        }
+        catch(LogicException $ex1){
+            SS_Log::log($ex->getMessage(), SS_Log::WARN);
+            return $this->httpError(404);
         }
         catch(Exception $ex)
         {
