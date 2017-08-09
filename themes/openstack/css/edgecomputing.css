@@ -62,7 +62,7 @@
     font-weight: 400; }
 
 .opendev-promo {
-  background: black url(/images/edge/earth.png) no-repeat center left;
+  background: black url(https://www.openstack.org/assets/edge/earth.png) no-repeat center left;
   padding: 40px 0;
   color: white; }
   .opendev-promo .opendev-promo-logo {
@@ -168,7 +168,7 @@ img.etsi {
 .edge-working-group {
   padding: 50px 0;
   color: white;
-  background: url(/images/edge/wg-bkgd.jpg) no-repeat center center; }
+  background: url(https://www.openstack.org/assets/edge/wg-bkgd.jpg) no-repeat center center; }
   .edge-working-group h5 {
     color: white;
     font-style: italic; }
