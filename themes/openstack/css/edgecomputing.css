@@ -196,7 +196,8 @@ img.etsi {
   background: #30739C;
   color: white;
   padding: 60px 0;
-  text-align: center; }
+  text-align: center;
+  margin-bottom: -50px; }
   .edge-email-signup h2 {
     text-align: center;
     color: white;
