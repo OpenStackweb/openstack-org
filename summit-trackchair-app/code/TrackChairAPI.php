@@ -390,7 +390,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
             $max_limit = $list->maxPresentations();
 
             if(!$list->memberCanEdit()) {
-                return $this->httpError(403, 'You cannot edit this list');
+                return $this->validationError('You cannot edit this list');
             }
 
             if (count($idList) > $max_limit) {
