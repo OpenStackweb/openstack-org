@@ -63,4 +63,10 @@ interface IValidatorFactory {
 	 * @return IValidator
 	 */
 	public function buildValidatorForOffice(array $data);
+
+    /**
+     * @param array $data
+     * @return IValidator
+     */
+    public function buildValidatorForBook(array $data);
 } 

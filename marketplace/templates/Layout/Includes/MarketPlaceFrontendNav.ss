@@ -72,6 +72,14 @@
                             </a>
                         </li>
                     <% end_if %>
+                    <% if canViewTab(8) %>
+                        <li id="books">
+                            <a href="{$getMarketPlaceTypeLink(8)}">
+                                <span></span>
+                                 Books
+                            </a>
+                        </li>
+                    <% end_if %>
                 </ul>
             </div>
         </div>

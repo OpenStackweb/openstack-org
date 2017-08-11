@@ -57,6 +57,12 @@ class MarketPlacePage_Controller extends Page_Controller {
                 $repository = new SapphireRemoteCloudRepository();
                 if ($repository->countActives() == 0) return false;
                 break;
+            case 8:
+                /*$class = 'BooksDirectoryPage';
+                $book_count = Book::get()->count();
+                if ($book_count == 0) return false;*/
+                return false;
+                break;
 		}
 		if(!empty($class)){
 			$page  = $class::get()->first();
@@ -102,6 +108,9 @@ class MarketPlacePage_Controller extends Page_Controller {
 				break;
             case 7:
                 $class = 'RemoteCloudsDirectoryPage';
+                break;
+            case 8:
+                $class = 'BooksDirectoryPage';
                 break;
 		}
 		if(!empty($class)){

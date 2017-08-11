@@ -29,16 +29,16 @@
         <h3>OpenStack Online Help</h3>
         <ul class="resource-links">
             <li>
-                <a href="http://docs.openstack.org/" class="outbound-link">Online Docs</a>
+                <a href="{$OnlineDocsUrl}" class="outbound-link">Online Docs</a>
             </li>
             <li>
-                <a href="http://docs.openstack.org/ops/" class="outbound-link">Operations Guide</a>
+                <a href="{$OperationsGuideUrl}" class="outbound-link">Operations Guide</a>
             </li>
             <li>
-                <a href="http://docs.openstack.org/security-guide/" class="outbound-link">Security Guide</a>
+                <a href="{$SecurityGuideUrl}" class="outbound-link">Security Guide</a>
             </li>
             <li>
-                <a href="http://www.openstack.org/software/start/" class="outbound-link">Getting Started</a>
+                <a href="{$GettingStartedUrl}" class="outbound-link">Getting Started</a>
             </li>
         </ul>
         <% if UpcomingCourses %>

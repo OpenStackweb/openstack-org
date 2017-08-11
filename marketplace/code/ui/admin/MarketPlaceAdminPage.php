@@ -179,6 +179,7 @@ class MarketPlaceAdminPage_Controller extends AdminController
             'marketplace/code/ui/admin/js/public_clouds.js',
             'marketplace/code/ui/admin/js/private_clouds.js',
             'marketplace/code/ui/admin/js/consultants.js',
+            'marketplace/code/ui/admin/js/books.js',
             "themes/openstack/javascript/colorpicker.js",
             "themes/openstack/bower_assets/bootstrap/dist/js/bootstrap.min.js",
             "themes/openstack/javascript/datetimepicker/jquery.datetimepicker.js",
@@ -227,6 +228,8 @@ class MarketPlaceAdminPage_Controller extends AdminController
             return Controller::curr()->redirect($this->Link("consultants"));
         } else if ($this->canAdmin('remote_clouds')) {
             return Controller::curr()->redirect($this->Link("remote_clouds"));
+        } else if ($this->canAdmin('books')) {
+            return Controller::curr()->redirect($this->Link("books"));
         }
         return $this->httpError(401, 'Unauthorized: you do not have the proper rights to access this page.');
     }
@@ -243,6 +246,8 @@ class MarketPlaceAdminPage_Controller extends AdminController
         'remote_cloud',
         'consultants',
         'consultant',
+        'books',
+        'book',
         'preview',
         'draft_preview',
         'pdf',
@@ -309,6 +314,9 @@ class MarketPlaceAdminPage_Controller extends AdminController
                 case 5:
                     $current_marketplace_type = IRemoteCloudService::MarketPlaceType;
                     break;
+                case 6:
+                    return Company::get();
+                    break;
             }
         }
         $result = $this->companies_with_marketplace_creation_rights->handle(new CompaniesWithMarketPlaceCreationRightsSpecification($current_marketplace_type));
@@ -342,6 +350,8 @@ class MarketPlaceAdminPage_Controller extends AdminController
             $ds->push($this->marketplace_repository->getByType(IRemoteCloudService::MarketPlaceType));
         if ($this->canAdmin('consultants'))
             $ds->push($this->marketplace_repository->getByType(IConsultant::MarketPlaceType));
+        if ($this->canAdmin('books'))
+            $ds->push($this->marketplace_repository->getByType(IBook::MarketPlaceType));
         return $ds;
     }
 
@@ -488,6 +498,9 @@ class MarketPlaceAdminPage_Controller extends AdminController
                     case IConsultant::MarketPlaceType: {
                         return $this->consultant();
                     }
+                    case IBook::MarketPlaceType: {
+                        return $this->book();
+                    }
                         break;
                 }
             }
@@ -606,6 +619,17 @@ class MarketPlaceAdminPage_Controller extends AdminController
         Requirements::javascript('marketplace/code/ui/admin/js/geocoding.jquery.js');
         Requirements::javascript('marketplace/code/ui/admin/js/consultant.js');
         return $this->getViewer('consultant')->process($this);
+    }
+
+    public function book()
+    {
+        Requirements::css('themes/openstack/bower_assets/sweetalert2/dist/sweetalert2.min.css');
+
+        Requirements::javascript('themes/openstack/bower_assets/sweetalert2/dist/sweetalert2.min.js');
+        Requirements::javascript('marketplace/code/ui/admin/js/utils.js');
+        Requirements::javascript('marketplace/code/ui/admin/js/marketplace.type.header.js');
+        Requirements::javascript('marketplace/code/ui/admin/js/book.js');
+        return $this->getViewer('book')->process($this);
     }
 
     public function getConfigurationManagementTypes()
@@ -1025,6 +1049,54 @@ class MarketPlaceAdminPage_Controller extends AdminController
         }
     }
 
+    public function getBooks()
+    {
+
+        if (!$this->canAdmin('books')) {
+            return $this->httpError(401, 'Unauthorized: you do not have the proper rights to access this page.');
+        }
+
+        $book_name = trim(Convert::raw2sql($this->request->getVar('name')));
+        $company_id = intval($this->request->getVar('company_id'));
+        $sort = $this->request->getVar('sort');
+
+        $books = Book::get();
+
+        if (!empty($book_name)) {
+            $books->where("Title LIKE '%$book_name%'");
+        }
+        if ($company_id > 0) {
+            $books->filter("CompanyID", $company_id);
+        }
+        //set sorting
+        if (!empty($sort)) {
+            $dir = $this->getSortDir('books');
+            $books->sort($sort, $dir);
+        }
+
+        //return on view model
+        return $books;
+
+    }
+
+    public function getCurrentBook()
+    {
+        $book_id = intval($this->request->getVar('id'));
+        $book = false;
+        if ($book_id > 0) {
+            $book = Book::get()->byID($book_id);
+        }
+        return $book;
+    }
+
+    public function getCurrentBookJson()
+    {
+        $book = $this->getCurrentBook();
+        if ($book) {
+            return json_encode(BookAssembler::convertBookToArray($book));
+        }
+    }
+
 
     public function getUsePricingSchema()
     {
@@ -1072,6 +1144,9 @@ class MarketPlaceAdminPage_Controller extends AdminController
                 break;
             case 'remote_clouds':
                 return Member::currentUser()->isMarketPlaceTypeAdmin(IRemoteCloudService::MarketPlaceGroupSlug);
+                break;
+            case 'books':
+                return Member::currentUser()->isMarketPlaceTypeAdmin(IBook::MarketPlaceGroupSlug);
                 break;
         }
         return false;

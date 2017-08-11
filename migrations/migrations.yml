@@ -76,3 +76,5 @@ migrations:
   - FixVideoPresentationDeprecationMigration
   - MigrateFeaturedVideoToPresentationMaterials
   - UpgradeSurveyLangMigration
+  - NewMarketplaceTypeBookSeedTask
+  - AddNewBooksMigration
