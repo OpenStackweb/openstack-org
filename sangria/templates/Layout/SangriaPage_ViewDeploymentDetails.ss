@@ -14,7 +14,6 @@
 
 <div stlye="display:block;clear:both">
     <h1 style="width:50%;float:left;">Public Deployment Details List</h1>
-    <a href="/sangria/ViewCurrentStories" class="roundedButton" style="overflow:hidden;white-space: nowrap;font-weight:normal;float:right;margin-bottom:50px;text-align:center">View User Stories</a>
     <a href="#" class="roundedButton addDeploymentBtn" style="overflow:hidden;white-space: nowrap;font-weight:normal;float:right;margin-bottom:50px;text-align:center;margin-right:50px;">Add New Deployment</a>
 </div>
 
@@ -98,46 +97,26 @@
             <th style="border: 1px solid #ccc;">Industry</th>
             <th style="border: 1px solid #ccc;">Country</th>
             <th style="border: 1px solid #ccc;">Type</th>
-            <th style="border: 1px solid #ccc;"><a href="$Top.Link(ViewDeploymentDetails)?sort=date" title="sort by date"> Date $getSortIcon(deployments)
-            </a></th>
-            <th style="border: 1px solid #ccc;">Select Industry</th>
-            <th style="border: 1px solid #ccc;">Add User Story</th>
+            <th style="border: 1px solid #ccc;"><a href="$Top.Link(ViewDeploymentDetails)?sort=date" title="sort by date">
+                Date $getSortIcon(deployments) </a>
+            </th>
         </tr>
         <% loop Deployments %>
             <tr>
-                <form method="GET" action="$Top.Link(AddUserStory)">
-                    <input type="hidden" value="$ID" name="ID">
-                    <td style="border: 1px solid #ccc;">
-                        <input type="hidden" name="org" value="$Org.Name">
-                        <input type="text" value="$Org.Name" name="label" <% if hasUserStory %>disabled<% end_if %>>
-                    </td>
-                    <td style="border: 1px solid #ccc;">
-                        <a href="$Top.Link(DeploymentDetails)/{$ID}" title="click to see deployment details">$Label</a>
-                    </td>
-                    <td style="border: 1px solid #ccc;">
-                        <a id="dep{$ID}"></a>
-                        $DeploymentSurvey.Industry</td>
-                    <td style="border: 1px solid #ccc;">$getCountry</td>
-                    <td style="border: 1px solid #ccc;">$DeploymentType</td>
-                    <td style="border: 1px solid #ccc; width: 15%">$UpdateDate</td>
-                    <% if hasUserStory %>
-                        <td style="border: 1px solid #ccc;" colspan=2>
-                            User Story:
-                            <br>$getUserStory.Title
-                        </td>
-                    <% else %>
-                        <td style="border: 1px solid #ccc;">
-                            <select name="industry">
-                                <% loop Top.UserStoriesIndustries %>
-                                    <option value="$ID">$IndustryName</option>
-                                <% end_loop %>
-                            </select>
-                        </td>
-                        <td style="border: 1px solid #ccc;">
-                            <input type="submit" class="roundedButton" value="Add as User Story"  style="white-space: nowrap;">
-                        </td>
-                    <% end_if %>
-                </form>
+                <input type="hidden" value="$ID" name="ID">
+                <td style="border: 1px solid #ccc;">
+                    $Org.Name
+                </td>
+                <td style="border: 1px solid #ccc;">
+                    <a href="$Top.Link(DeploymentDetails)/{$ID}" title="click to see deployment details">$Label</a>
+                </td>
+                <td style="border: 1px solid #ccc;">
+                    <a id="dep{$ID}"></a>
+                    $DeploymentSurvey.Industry
+                </td>
+                <td style="border: 1px solid #ccc;">$getCountry</td>
+                <td style="border: 1px solid #ccc;">$DeploymentType</td>
+                <td style="border: 1px solid #ccc; width: 15%">$UpdateDate</td>
             </tr>
         <% end_loop %>
     </table>

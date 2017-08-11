@@ -367,20 +367,6 @@ class Deployment extends DataObject
         return $this->Org()->Name;
     }
 
-    public function getUserStory()
-    {
-        if ($this->hasUserStory()) {
-            return UserStory::get()->filter('DeploymentID', $this->ID)->first();
-        }
-        return false;
-    }
-
-    public function hasUserStory()
-    {
-        $userStory = UserStory::get()->filter('DeploymentID', $this->ID)->first();
-        return ($userStory) ? true : false;
-    }
-
     /**
      * @param int $batch_size
      * @return mixed

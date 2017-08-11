@@ -1,0 +1,14 @@
+---
+Name: 'user-stories-injection'
+---
+Injector:
+  UserStoryRepository:
+      class: SapphireUserStoryRepository
+  UserStoryManager:
+      constructor:
+        0: '%$UserStoryRepository'
+        1: '%$TransactionManager'
+  UserStoriesResfullApi:
+      constructor:
+        0: '%$UserStoryRepository'
+        1: '%$UserStoryManager'

@@ -1,0 +1,279 @@
+//OpenStack Offical Colors
+@darkblue: #2A4E68;
+@darkbluehover: #0C1722;
+@blue: #30739C;
+@red: #DA422F;
+@redhover: #A51B1B;
+@lightblue: #edf2f7;
+@lightbluehover: #D4DCE5;
+@brightblue: #29abe2;
+@projectblue: #248EC7;
+
+#user-stories-container{
+    margin-top: 30px;
+}
+
+.user-stories-nav {
+    border-bottom: 1px solid lightgray;
+    .nav-button-wrapper {
+        text-align: center;
+        height: 38px;
+        top: 2px;
+        border-bottom: none;
+    }
+    .nav-button-wrapper.active {
+        color: black;
+        font-weight: bold;
+        border-bottom: 3px solid @red;
+        .nav-button {
+            color: black;
+        }
+    }
+    .nav-button {
+        height: 30px;
+        text-transform: uppercase;
+        color: gray;
+        cursor: pointer;
+        text-decoration: none;
+        &:hover {
+            color: black;
+            font-weight: bold;
+        }
+    }
+}
+
+.story-search-form {
+    border: 1px solid lightgray;
+    margin-bottom: 5px;
+    border-radius: 15px;
+    padding-left: 20px;
+    input {
+        border: none;
+        width: 86%;
+        height: 30px;
+        padding: 5px;
+        color: black;
+        &:focus {
+            outline:0;
+        }
+    }
+    button {
+        background-color: white;
+        color: lightgray;
+        border: none;
+        &:hover {
+            color: black;
+        }
+        &:focus {
+            outline:0;
+        }
+    }
+}
+
+.distribution-wrapper {
+    font-size: 20px;
+    a {
+        color: lightgray;
+        margin-right: 10px;
+        cursor: pointer;
+        &:hover {
+            color: black;
+        }
+    }
+    .active {
+        color: black;
+    }
+}
+
+.story-app-layout {
+    min-height: 500px;
+    position: relative;
+    margin-top: 30px;
+}
+
+.story-panel {
+    h4 {
+        text-transform: uppercase;
+        margin-bottom: 30px;
+        font-weight: 600;
+    }
+}
+
+a.user-story-square {
+    position: relative;
+    background-color: #333;
+    background-size: cover;
+    background-position: center center;
+    height: 300px;
+    margin-bottom: 20px;
+    display: inline-block;
+    width: 100%;
+    z-index: 100;
+    overflow: hidden;
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+}
+
+a.user-story-square .company {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    right: 15px;
+    text-align: left;
+    background: white;
+    color: #333;
+    padding: 10px;
+    font-size: 1em;
+    font-weight: 600;
+    z-index: 160;
+    .stat {
+        display: block;
+        font-weight: 400;
+        font-size: 0.9em;
+    }
+    .tags {
+        font-size: 10px;
+        font-weight: 400;
+        .tag {
+            border: 1px solid grey;
+            border-radius: 10px;
+            padding: 0 5px;
+            margin-right: 5px;
+            color: grey;
+        }
+    }
+}
+
+
+a.user-story-square .user-story-overlay {
+    background: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 100%;
+    bottom: -100%;
+    left: 0;
+    right: 0;
+    padding: 80px 15px 15px;
+    z-index: 150;
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+    p {
+        color: white;
+    }
+    .tags {
+        font-size: 10px;
+        font-weight: 400;
+        .tag {
+            border: 1px solid white;
+            border-radius: 10px;
+            padding: 0 5px;
+            margin-right: 5px;
+            color: white;
+            &:hover {
+                background-color: rgba(255,255,255,0.5);
+                color: black;
+                text-decoration: none;
+            }
+        }
+    }
+}
+
+a.user-story-square .user-story-overlay .user-story-more-btn {
+    border: 1px solid white;
+    color: white;
+    text-transform: uppercase;
+    font-size: 0.9em;
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 20px;
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+}
+
+a.user-story-square .user-story-overlay .user-story-more-btn:hover {
+    background: #248EC7;
+    border-color: #248EC7;
+}
+
+a.user-story-square:hover .company {
+    background: transparent;
+    bottom: auto;
+    top: 15px;
+    padding: 0;
+    color: white;
+    text-transform: none;
+}
+
+a.user-story-square:hover .company .stat {
+    display: none;
+}
+
+a.user-story-square:hover .company .tags {
+    display: none;
+}
+
+
+a.user-story-square:hover .user-story-overlay {
+    top: 0;
+    bottom: 0;
+}
+
+.user-story-row {
+    .row-image {
+        width: 50px;
+        height: 50px;
+        float: left;
+        img {
+            width: 50px;
+            height: 50px;
+        }
+    }
+    .row-data {
+        margin-left: 70px;
+        color: #333;
+        font-size: 1em;
+        font-weight: 600;
+        .stat {
+            color:gray;
+            font-size: 12px;
+            font-weight: 300;
+        }
+        .tags {
+            font-size: 10px;
+            font-weight: 400;
+            .tag {
+                border: 1px solid grey;
+                border-radius: 10px;
+                padding: 0 5px;
+                margin-right: 5px;
+                color: grey;
+                &:hover {
+                    background-color: lightgray;
+                    color: black;
+                }
+            }
+        }
+    }
+}
+
+button.more-btn {
+    display: block;
+    max-width: 300px;
+    margin: 20px auto;
+    padding: 8px 30px;
+    background: @projectblue;
+    border-radius: 4px;
+    border: none;
+    color: white;
+    text-transform: uppercase;
+    &:after {
+        content: "\f055";
+        font-family: FontAwesome;
+        margin-left: 10px;
+        font-size: 1em;
+    }
+    &:hover, &:focus {
+        background: @blue;
+        text-decoration: none;
+        outline: none;
+    }
+}

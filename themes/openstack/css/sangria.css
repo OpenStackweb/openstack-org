@@ -1,4 +1,4 @@
-div.featuredUserStory div.wrapper {
+div.featuredStat div.wrapper {
 	font-size: 16px;
 	padding: 20px;
 	-moz-border-radius: 3px; 
@@ -10,15 +10,15 @@ div.featuredUserStory div.wrapper {
 	height: 20em;
 }
 
-div.featuredUserStory p, div.otherUsers p {
+div.featuredStat p, div.otherUsers p {
 	margin-bottom: 10px;
 }
 
-div.featuredUserStory h2, div.otherUsers h2 {
+div.featuredStat h2, div.otherUsers h2 {
 	margin-top: 10px;
 }
 
-div.featuredUserStory h2 a, div.otherUsers h2 a {
+div.featuredStat h2 a, div.otherUsers h2 a {
 	color: black;
 	font-size: 1.2em;
 }

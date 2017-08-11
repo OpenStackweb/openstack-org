@@ -1630,7 +1630,7 @@ class MarketPlaceAdminPage_Controller extends AdminController
             $message = array(
                 'errno' => '',
                 'errstr' => $e->__toString(),
-                'errfile' => 'UserStory.php',
+                'errfile' => 'MarketPlaceAdminPage.php',
                 'errline' => '',
                 'errcontext' => ''
             );

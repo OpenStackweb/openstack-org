@@ -117,26 +117,6 @@ final class SangriaPage_Controller extends AdminController implements Permission
         return number_format(($this->NewsletterMemberCount() / $this->IndividualMemberCount()) * 100, 2);
     }
 
-    function UserStoryCount()
-    {
-        return EntityCounterHelper::getInstance()->EntityCount('UserStory', function () {
-            $query = new UserStoriesCountQuery();
-            $res = $query->handle(new UserStoriesCountQuerySpecification(true))->getResult();
-
-            return $res[0];
-        });
-    }
-
-    function UserLogoCount()
-    {
-        return EntityCounterHelper::getInstance()->EntityCount('UserLogo', function () {
-            $query = new UserStoriesCountQuery();
-            $res = $query->handle(new UserStoriesCountQuerySpecification(false))->getResult();
-
-            return $res[0];
-        });
-    }
-
     function PlatinumMemberCount()
     {
         return EntityCounterHelper::getInstance()->EntityCount('PlatinumOrg', function () {
@@ -290,11 +270,6 @@ final class SangriaPage_Controller extends AdminController implements Permission
     function getSortIcon($type)
     {
         return $this->getSortDir($type, true) == 'desc' ? '&blacktriangledown;' : '&blacktriangle;';
-    }
-
-    function UserStoriesPerIndustry($Industry)
-    {
-        return DataObject::get("UserStory", "UserStoriesIndustryID = " . $Industry);
     }
 
     function Countries()
