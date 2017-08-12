@@ -9,10 +9,19 @@ Injector:
   OpenStackIdMySQLStore:
     constructor:
       0: %$OpenStackIdDatabaseConnection
-  MyOpenIDConsumer:
-    class: Auth_OpenID_Consumer
+  Auth_OpenID_Consumer:
     constructor:
-          0: %$OpenStackIdMySQLStore
-          1: %$SilverStripeSessionWrapper
+      0: '%$OpenStackIdMySQLStore'
+      1: '%$SilverStripeSessionWrapper'
   Security:
     class: OpenStackIdSecurityController
+    constructor:
+      0: '%$Auth_OpenID_Consumer'
+  OpenStackIdAuthenticator:
+    constructor:
+      0: '%$MemberRepository'
+      1: '%$OpenStackIdMySQLStore'
+      2: '%$Auth_OpenID_Consumer'
+  OpenStackIdCleanInvalidNoncesAssocsTask:
+    constructor:
+      0: '%$OpenStackIdMySQLStore'

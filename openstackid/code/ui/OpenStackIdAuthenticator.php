@@ -26,15 +26,37 @@ class OpenStackIdAuthenticator extends Controller
      */
     private $member_repository;
 
-    public function __construct()
+    /**
+     * @var Auth_OpenID_Consumer
+     */
+    private $openid_consumer;
+
+    /**
+     * @var Auth_OpenID_OpenIDStore
+     */
+    private $openid_repository;
+
+    /**
+     * OpenStackIdAuthenticator constructor.
+     * @param IMemberRepository $member_repository
+     * @param Auth_OpenID_OpenIDStore $openid_repository
+     * @param Auth_OpenID_Consumer $openid_consumer
+     */
+    public function __construct
+    (
+        IMemberRepository $member_repository,
+        Auth_OpenID_OpenIDStore $openid_repository,
+        Auth_OpenID_Consumer $openid_consumer
+    )
     {
         parent::__construct();
-        $this->member_repository = new SapphireCLAMemberRepository();
+        $this->member_repository = $member_repository;
+        $this->openid_repository = $openid_repository;
+        $this->openid_consumer   = $openid_consumer;
     }
 
     function index()
     {
-
         try {
 
             $member = Member::currentUser();
@@ -43,27 +65,27 @@ class OpenStackIdAuthenticator extends Controller
                 // user is already logged in
                 return $this->redirect(OpenStackIdCommon::getRedirectBackUrl());
             }
-
-            $consumer = Injector::inst()->get('MyOpenIDConsumer');
-
             $query       = Auth_OpenID::getQuery();
+
             $message     = Auth_OpenID_Message::fromPostArgs($query);
             $nonce       = $message->getArg(Auth_OpenID_OPENID2_NS,'response_nonce');
             list($timestamp, $salt) = Auth_OpenID_splitNonce($nonce);
             $claimed_id  = $message->getArg(Auth_OpenID_OPENID2_NS,'claimed_id');
 
-            SS_Log::log(sprintf('OpenStackIdAuthenticator : id %s - salt %s - timestamp %s',$claimed_id, $salt, $timestamp), SS_Log::DEBUG);
+            SS_Log::log(sprintf('OpenStackIdAuthenticator : id %s - salt %s - timestamp %s - query %s',$claimed_id, $salt, $timestamp, implode(', ',$query)), SS_Log::DEBUG);
 
             // Complete the authentication process using the server's response.
-            $response = $consumer->complete(OpenStackIdCommon::getReturnTo());
+            $response = $this->openid_consumer->complete(OpenStackIdCommon::getReturnTo());
 
             if ($response->status == Auth_OpenID_CANCEL) {
                 SS_Log ::log('OpenStackIdAuthenticator : Auth_OpenID_CANCEL', SS_Log::WARN);
                 throw new Exception('The verification was cancelled. Please try again.');
-
             } else if ($response->status == Auth_OpenID_FAILURE) {
-                SS_Log ::log('OpenStackIdAuthenticator : Auth_OpenID_FAILURE', SS_Log::WARN);
-                throw new Exception("The OpenID authentication failed.");
+                SS_Log ::log("OpenStackIdAuthenticator : Auth_OpenID_FAILURE {$response->message}", SS_Log::WARN);
+                // delete associations
+                SS_Log ::log("OpenStackIdAuthenticator : Auth_OpenID_FAILURE cleaning openid_repository ...", SS_Log::WARN);
+                $this->openid_repository->reset();
+                throw new Exception("The OpenID authentication failed");
 
             } else if ($response->status == Auth_OpenID_SUCCESS) {
                 SS_Log ::log('OpenStackIdAuthenticator : Auth_OpenID_SUCCESS', SS_Log::DEBUG);
@@ -98,10 +120,8 @@ class OpenStackIdAuthenticator extends Controller
                 throw new Exception("The OpenID authentication failed: can not find user ".$openid);
             }
         } catch (Exception $ex) {
-            Session::set("Security.Message.message", $ex->getMessage());
-            Session::set("Security.Message.type", "bad");
-            SS_Log ::log($ex, SS_Log::DEBUG);
-            return $this->redirect("Security/badlogin");
+            SS_Log ::log($ex, SS_Log::WARN);
+            return OpenStackIdCommon::error($ex->getMessage(), OpenStackIdCommon::getRedirectBackUrl());
         }
     }
 

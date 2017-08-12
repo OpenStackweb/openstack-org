@@ -21,23 +21,29 @@ if(defined('OPENSTACKID_ENABLED') && OPENSTACKID_ENABLED == true ) {
 class OpenStackIdSecurityController extends CustomPasswordController
 {
 
-    private static $allowed_actions = array(
+    private static $allowed_actions = [
         'login',
         'logout',
-        'badlogin',
+        'error',
         'ping',
         'changepassword',
         'ChangePasswordForm',
-    );
+    ];
 
-    private $consumer;
+    /**
+     * @var Auth_OpenID_Consumer
+     */
+    private $openid_consumer;
 
-    public function __construct()
+    /**
+     * OpenStackIdSecurityController constructor.
+     * @param Auth_OpenID_Consumer $openid_consumer
+     */
+    public function __construct(Auth_OpenID_Consumer $openid_consumer)
     {
         parent::__construct();
-        $this->consumer = Injector::inst()->get('MyOpenIDConsumer');
+        $this->openid_consumer = $openid_consumer;
     }
-
 
     public function init()
     {
@@ -60,17 +66,22 @@ class OpenStackIdSecurityController extends CustomPasswordController
 
             $member = Member::currentUser();
 
+            $back_url = OpenStackIdCommon::getRedirectBackUrl();
             if ($member){
                 // user is already logged in
-                return $this->redirect(OpenStackIdCommon::getRedirectBackUrl());
+                return $this->redirect($back_url);
             }
 
             if (!Director::is_https()) {
                 OpenStackIdCommon::redirectToSSL($_SERVER['REQUEST_URI']);
             }
 
+            // save back url to session
+            if(!empty($back_url))
+                $this->getSession()->set("BackURL", $back_url);
+
             // Begin the OpenID authentication process.
-            $auth_request = $this->consumer->begin(IDP_OPENSTACKID_URL);
+            $auth_request = $this->openid_consumer->begin(IDP_OPENSTACKID_URL);
             //remove jainrain nonce
             unset($auth_request->return_to_args['janrain_nonce']);
 
@@ -137,9 +148,7 @@ class OpenStackIdSecurityController extends CustomPasswordController
             return $form_html;
         } catch (Exception $ex) {
             SS_Log ::log($ex, SS_Log::WARN);
-            Session::set("Security.Message.message", $ex->getMessage());
-            Session::set("Security.Message.type", "bad");
-            return $this->redirect("Security/badlogin?BackURL=".OpenStackIdCommon::getRedirectBackUrl());
+            return OpenStackIdCommon::error($ex->getMessage(), OpenStackIdCommon::getRedirectBackUrl());
         }
     }
 
@@ -192,20 +201,19 @@ SCRIPT;
 
     }
 
-    public function badlogin()
+    public function error()
     {
         return $this->customise
         (
-            array
-            (
+           [
                 "LoginErrorMessage" => Session::get("Security.Message.message"),
                 "OpenStackIdUrl"    => IDP_OPENSTACKID_URL,
                 "ReloginUrl"        => OpenStackIdCommon::getRedirectBackUrl()
-            )
+           ]
         )
         ->renderWith
         (
-            array('OpenStackIdSecurityController_badlogin', 'Page')
+            array('OpenStackIdSecurityController_error', 'Page')
         );
     }
 

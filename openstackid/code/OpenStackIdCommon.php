@@ -21,21 +21,36 @@ final class OpenStackIdCommon {
         die("<h1>Your browser is not accepting header redirects</h1><p>Please <a href=\"$dest\">click here</a>");
     }
 
+    /**
+     * @return string
+     */
     public static function getReturnTo()
     {
         $trust_root    = self::getTrustRoot();
-        $return_to_url = $trust_root . '/OpenStackIdAuthenticator?url=/OpenStackIdAuthenticator';
-        $back_url      = Controller::curr()->getRequest()->getVar('BackURL');
-        if(!empty($back_url)){
-            $back_url = self::cleanBackUrl($back_url);
-            if(!Director::is_site_url($back_url)){
-                $back_url = Director::absoluteBaseURL();
-            }
-            $fragment = Controller::curr()->getRequest()->requestVar('fragment');
-            if(!empty($fragment)) $back_url .= $fragment;
-            $return_to_url .= '&BackURL='.urlencode($back_url);
-        }
-        return $return_to_url;
+        $return_to_url = "{$trust_root}/OpenStackIdAuthenticator?url=/OpenStackIdAuthenticator";
+        // check first on session ...
+        $back_url      = urlencode(self::getRedirectBackUrl());
+        return "{$return_to_url}&BackURL={$back_url}";
+    }
+
+    /**
+     * @return string
+     */
+    public static function getRedirectBackUrl(){
+        // check first on session ...
+        $back_url = Controller::curr()->getSession()->get("BackURL");
+        if(empty($back_url))
+            $back_url = Controller::curr()->getRequest()->requestVar('BackURL');
+        $fragment = Controller::curr()->getRequest()->requestVar('fragment');
+
+        if(empty($back_url))
+            $back_url = Director::baseURL();
+        if(!empty($fragment))
+            $back_url .= $fragment;
+
+        $back_url = Director::absoluteURL($back_url, true);
+
+        return $back_url;
     }
 
     public static function getTrustRoot()
@@ -45,28 +60,6 @@ final class OpenStackIdCommon {
 
     public static function escape($thing) {
         return htmlentities($thing);
-    }
-
-    public static function getRedirectBackUrl(){
-        $url = null;
-        // Don't cache the redirect back ever
-        HTTP::set_cache_age(0);
-        // In edge-cases, this will be called outside of a handleRequest() context; in that case,
-        // redirect to the homepage - don't break into the global state at this stage because we'll
-        // be calling from a test context or something else where the global state is inappropraite
-        if($request = Controller::curr()->getRequest()) {
-            if($request->requestVar('BackURL')) {
-                $url = $request->requestVar('BackURL');
-            } else if($request->isAjax() && $request->getHeader('X-Backurl')) {
-                $url = $request->getHeader('X-Backurl');
-            }
-        }
-
-        $url = self::cleanBackUrl($url);
-
-        if(strpos($url,'/Security/login') !== false ) $url = Director::baseURL();
-
-        return $url;
     }
 
     public static function loginMember($member, $back_url){
@@ -106,5 +99,16 @@ final class OpenStackIdCommon {
         if($back_url == Director::baseURL()."Security/")
             $back_url = Director::baseURL();
         return $back_url;
+    }
+
+    /**
+     * @param string $message
+     * @param string $back_url
+     * @return SS_HTTPResponse
+     */
+    public static function error($message, $back_url){
+        Session::set("Security.Message.message", $message);
+        Session::set("Security.Message.type", "bad");
+        return Controller::curr()->redirect("Security/error?BackURL={$back_url}");
     }
 }

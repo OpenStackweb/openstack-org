@@ -111,3 +111,7 @@ jobs:
     params: "batch_size=10000"
     cron_expression: "59 11 * * *"
     enabled: 0
+
+  - name: "OpenStackIdCleanInvalidNoncesAssocsTask"
+    cron_expression: "00 03 * * *" # run at 0300 AM every day
+    enabled: 1

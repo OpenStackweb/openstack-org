@@ -18,11 +18,25 @@
  */
 class OpenStackIdDatabaseConnection extends Auth_OpenID_DatabaseConnection {
 
+    /**
+     * @var
+     */
+    private $last_affected_rows;
+
     public function query($sql, $params = array()) {
         if(($sql = $this->generateQuery($sql, $params)) === false)
             return false;
 
-        return DB::query($sql);
+        $query = DB::query($sql);
+        $this->last_affected_rows = $query->numRecords();
+        return $query;
+    }
+
+    /**
+     * @return int
+     */
+    public function affectedRows(){
+        return is_null($this->last_affected_rows) ? 0 : intval($this->last_affected_rows);
     }
 
     public function getOne($sql, $params = array()) {
@@ -68,7 +82,6 @@ class OpenStackIdDatabaseConnection extends Auth_OpenID_DatabaseConnection {
     {
         DB::getConn()->transactionStart();
     }
-
 
     public function commit() {
         DB::getConn()->transactionEnd();

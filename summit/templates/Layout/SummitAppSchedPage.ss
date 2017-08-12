@@ -219,6 +219,12 @@
             search_url: "{$Top.Link(global-search)}",
             default_event_color: '#757575'
         };
+        $(function () {
+            $("#MemberLoginForm_LoginForm").submit(function(){
+                console.log("setting fragment");
+                $("#fragment").val(window.location.hash);
+            });
+        });
     </script>
     <div id="os-schedule-react"></div>
 </div>
