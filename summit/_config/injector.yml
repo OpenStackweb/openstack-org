@@ -268,3 +268,9 @@ Injector:
       6: '%$ScheduleEventViewModelMapper'
       7: '%$ScheduleEventSearchViewModelMapper'
       8: '%$FullScheduleViewModelMapper'
+  SpeakerSelectionAnnouncementEmailSenderTask:
+    constructor:
+      0: '%$SpeakerEmailAnnouncementSenderManager'
+  SpeakerSecondBreakoutEmailSenderTask:
+    constructor:
+      0: '%$SpeakerSecondBreakoutAnnouncementSenderManager'

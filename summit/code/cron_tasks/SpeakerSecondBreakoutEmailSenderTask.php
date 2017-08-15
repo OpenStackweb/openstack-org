@@ -15,13 +15,28 @@
 final class SpeakerSecondBreakoutEmailSenderTask extends CronTask
 {
     /**
+     * @var ISpeakerSecondBreakoutAnnouncementSenderManager
+     */
+    private $manager;
+
+    /**
+     * SpeakerSecondBreakoutEmailSenderTask constructor.
+     * @param ISpeakerSecondBreakoutAnnouncementSenderManager $manager
+     */
+    public function __construct(ISpeakerSecondBreakoutAnnouncementSenderManager $manager)
+    {
+        parent::__construct();
+        $this->manager = $manager;
+    }
+
+    /**
      * @return void
      */
     public function run()
     {
         try
         {
-            $batch_size = 100;
+            $batch_size = 1000;
             $init_time  = time();
             $summit     = null;
 
@@ -38,12 +53,8 @@ final class SpeakerSecondBreakoutEmailSenderTask extends CronTask
 
             if(is_null($summit)) throw new Exception('summit_id is not valid!');
 
-            $manager = Injector::inst()->get('SpeakerSecondBreakoutAnnouncementSenderManager');
-            if (!$manager instanceof ISpeakerSecondBreakoutAnnouncementSenderManager) {
-                return;
-            }
 
-            $processed = $manager->send($summit, $batch_size);
+            $processed = $this->manager->send($summit, $batch_size);
             $finish_time = time() - $init_time;
             echo 'processed records ' . $processed. ' - time elapsed : '.$finish_time. ' seconds.';
 

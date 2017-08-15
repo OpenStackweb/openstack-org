@@ -170,13 +170,6 @@ interface IPresentationSpeaker extends IEntity
      * @param string $role
      * @return bool
      */
-    public function hasRejectedPresentations($summit_id = null,  $role = IPresentationSpeaker::RoleSpeaker);
-
-    /**
-     * @param int $summit_id
-     * @param string $role
-     * @return bool
-     */
     public function hasApprovedPresentations($summit_id = null,  $role = IPresentationSpeaker::RoleSpeaker);
 
     /**
@@ -187,13 +180,6 @@ interface IPresentationSpeaker extends IEntity
     public function hasPublishedPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker);
 
     /**
-     * @param int $summit_id
-     * @param string $role
-     * @return bool
-     */
-    public function hasPublishedLightningPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker);
-
-    /**
      * @param string $role
      * @return bool
      */
@@ -202,9 +188,10 @@ interface IPresentationSpeaker extends IEntity
     /**
      * @param int $summit_id
      * @param string $role
+     * @param bool $include_sub_roles
      * @return bool
      */
-    public function hasAlternatePresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker);
+    public function hasAlternatePresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker, $include_sub_roles = false);
 
     /**
      * @param ISpeakerSummitRegistrationPromoCode $promo_code
@@ -347,6 +334,21 @@ interface IPresentationSpeaker extends IEntity
     public function UnacceptedPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker);
 
     /**
+     * @param null $summit_id
+     * @param string $role
+     * @param bool $include_sub_roles
+     * @return ArrayList|bool
+     */
+    public function RejectedPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker, $include_sub_roles = false);
+
+    /**
+     * @param null $summit_id
+     * @param string $role
+     * @param bool $include_sub_roles
+     * @return int
+     */
+    public function hasRejectedPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker, $include_sub_roles = false);
+    /**
      * @param null|int $summit_id
      * @param string $role
      * @return ArrayList|bool
@@ -356,9 +358,10 @@ interface IPresentationSpeaker extends IEntity
     /**
      * @param null $summit_id
      * @param string $role
+     * @param bool $include_sub_roles
      * @return ArrayList|bool
      */
-    public function AlternatePresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker);
+    public function AlternatePresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker, $include_sub_roles = false);
 
     /**
      * @param null|int $summit_id
@@ -384,4 +387,56 @@ interface IPresentationSpeaker extends IEntity
      * @return float
      */
     public function getAvgFeedback(ISummit $summit);
+
+    /**
+     * @param null $summit_id
+     * @param string $role
+     * @param bool $include_sub_roles
+     * @return DataList
+     */
+    public function PublishedRegularPresentations
+    (
+        $summit_id = null,
+        $role = IPresentationSpeaker::RoleSpeaker,
+        $include_sub_roles = false
+    );
+
+    /**
+     * @param null $summit_id
+     * @param string $role
+     * @param bool $include_sub_roles
+     * @return DataList
+     */
+    public function hasPublishedRegularPresentations
+    (
+        $summit_id = null,
+        $role = IPresentationSpeaker::RoleSpeaker,
+        $include_sub_roles = false
+    );
+
+    /**
+     * @param null $summit_id
+     * @param string $role
+     * @param bool $include_sub_roles
+     * @return DataList
+     */
+    public function PublishedLightningPresentations
+    (
+        $summit_id = null,
+        $role = IPresentationSpeaker::RoleSpeaker,
+        $include_sub_roles = false
+    );
+
+    /**
+     * @param null $summit_id
+     * @param string $role
+     * @param bool $include_sub_roles
+     * @return bool
+     */
+    public function hasPublishedLightningPresentations
+    (
+        $summit_id = null,
+        $role = IPresentationSpeaker::RoleSpeaker,
+        $include_sub_roles = false
+    );
 }

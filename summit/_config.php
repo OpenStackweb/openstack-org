@@ -398,8 +398,10 @@ define('PRESENTATION_SPEAKER_ALTERNATE_ONLY_EMAIL', 'presentation-speaker-altern
 define('PRESENTATION_SPEAKER_ALTERNATE_REJECTED_EMAIL', 'presentation-speaker-alternate-rejected');
 define('PRESENTATION_SPEAKER_ACCEPTED_ALTERNATE_EMAIL','presentation-speaker-accepted-alternate');
 define('PRESENTATION_SPEAKER_REJECTED_EMAIL', 'presentation-speaker-rejected-only');
+
 define('PRESENTATION_SPEAKER_NOTIFICATION_ACCEPTANCE_EMAIL_FROM', 'speakersupport@openstack.org');
 define('PRESENTATION_SPEAKER_NOTIFICATION_ACCEPTANCE_SUMMIT_SUPPORT', 'summit@openstack.org');
+
 define('MEMBER_PROMO_CODE_EMAIL', 'member-promo-code');
 define('MEMBER_NOTIFICATION_PROMO_CODE_EMAIL_FROM', 'speakersupport@openstack.org');
 define('SUMMIT_ATTENDEE_RSVP_EMAIL','summit-attendee-rsvp');

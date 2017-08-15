@@ -12,7 +12,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-final class SpeakerSecondBreakoutAnnouncementSenderManager implements ISpeakerSecondBreakoutAnnouncementSenderManager
+final class SpeakerSecondBreakoutAnnouncementSenderManager
+    implements ISpeakerSecondBreakoutAnnouncementSenderManager
 {
     const TaskName = 'SpeakerSecondBreakoutEmailSenderTask';
 

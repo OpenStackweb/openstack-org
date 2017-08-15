@@ -381,17 +381,93 @@ class PresentationSpeaker extends DataObject
        );
     }
 
-    public function PublishedRegularPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker){
-        return $this->PublishedPresentationsByType($summit_id, $role, [IPresentationType::Keynotes, IPresentationType::Panel, IPresentationType::Presentation]);
-    }
-
-    public function PublishedLightningPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker){
-        return $this->PublishedPresentationsByType($summit_id, $role, [IPresentationType::LightingTalks]);
-    }
-
-    public function hasPublishedLightningPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker)
+    /**
+     * @param null $summit_id
+     * @param string $role
+     * @param bool $include_sub_roles
+     * @return DataList
+     */
+    public function PublishedRegularPresentations
+    (
+        $summit_id = null,
+        $role = IPresentationSpeaker::RoleSpeaker,
+        $include_sub_roles = false
+    )
     {
-        return $this->PublishedLightningPresentations($summit_id, $role)->count() > 0;
+        $list =  $this->PublishedPresentationsByType
+        (
+            $summit_id,
+            $role,
+            [IPresentationType::Keynotes, IPresentationType::Panel, IPresentationType::Presentation]
+        );
+
+        if($include_sub_roles && $role == IPresentationSpeaker::RoleModerator){
+            foreach($this->PublishedPresentationsByType
+            (
+                $summit_id,
+                IPresentationSpeaker::RoleSpeaker,
+                [IPresentationType::Keynotes, IPresentationType::Panel, IPresentationType::Presentation]
+            ) as $speaker_presentation)
+                $list->push($speaker_presentation);
+        }
+
+        return $list;
+    }
+
+    /**
+     * @param null $summit_id
+     * @param string $role
+     * @param bool $include_sub_roles
+     * @return DataList
+     */
+    public function hasPublishedRegularPresentations
+    (
+        $summit_id = null,
+        $role = IPresentationSpeaker::RoleSpeaker,
+        $include_sub_roles = false
+    )
+    {
+        return $this->PublishedRegularPresentations($summit_id, $role, $include_sub_roles)->count() > 0;
+    }
+
+    /**
+     * @param null $summit_id
+     * @param string $role
+     * @param bool $include_sub_roles
+     * @return DataList
+     */
+    public function PublishedLightningPresentations
+    (
+        $summit_id = null,
+        $role = IPresentationSpeaker::RoleSpeaker,
+        $include_sub_roles = false
+    )
+    {
+        $list = $this->PublishedPresentationsByType($summit_id, $role, [IPresentationType::LightingTalks]);
+
+        if($include_sub_roles && $role == IPresentationSpeaker::RoleModerator){
+            foreach ($this->PublishedPresentationsByType($summit_id, IPresentationSpeaker::RoleSpeaker, [IPresentationType::LightingTalks]) as $speaker_presentation){
+                $list->push($speaker_presentation);
+            }
+        }
+
+        return $list;
+    }
+
+    /**
+     * @param null $summit_id
+     * @param string $role
+     * @param bool $include_sub_roles
+     * @return bool
+     */
+    public function hasPublishedLightningPresentations
+    (
+        $summit_id = null,
+        $role = IPresentationSpeaker::RoleSpeaker,
+        $include_sub_roles = false
+    )
+    {
+        return $this->PublishedLightningPresentations($summit_id, $role, $include_sub_roles)->count() > 0;
     }
 
     public function PublishedPresentationsByType(
@@ -756,12 +832,18 @@ class PresentationSpeaker extends DataObject
     /**
      * @param null $summit_id
      * @param string $role
+     * @param bool $include_sub_roles
      * @return ArrayList|bool
      */
-    public function AlternatePresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker)
+    public function AlternatePresentations
+    (
+        $summit_id = null,
+        $role = IPresentationSpeaker::RoleSpeaker,
+        $include_sub_roles = false
+    )
     {
         $alternatePresentations = new ArrayList();
-        $summit = is_null($summit_id) ? Summit::get_active() : Summit::get()->byID($summit_id);
+        $summit                 = is_null($summit_id) ? Summit::get_active() : Summit::get()->byID($summit_id);
         if (is_null($summit)) return false;
 
         $presentations = $role == IPresentationSpeaker::RoleSpeaker ?
@@ -773,6 +855,13 @@ class PresentationSpeaker extends DataObject
                 $alternatePresentations->push($p);
             }
         }
+
+        // if role is moderator, add also the ones that belongs to role speaker ( if $include_sub_roles is true)
+        if($include_sub_roles && $role == IPresentationSpeaker::RoleModerator){
+            foreach($this->AlternatePresentations(IPresentationSpeaker::RoleSpeaker) as $speaker_presentation)
+                $alternatePresentations->push($speaker_presentation);
+        }
+
         return $alternatePresentations;
     }
 
@@ -917,14 +1006,32 @@ class PresentationSpeaker extends DataObject
         $email->write();
     }
 
+
+    /**
+     * @param null $summit_id
+     * @param string $role
+     * @param bool $include_sub_roles
+     * @return ArrayList|bool
+     */
+    public function RejectedPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker, $include_sub_roles = false){
+        $list = $this->UnacceptedPresentations($summit_id, $role);
+        if($include_sub_roles && $role == IPresentationSpeaker::RoleModerator){
+            foreach($this->UnacceptedPresentations($summit_id, IPresentationSpeaker::RoleSpeaker) as $speaker_presentation){
+                $list->push($speaker_presentation);
+            }
+        }
+        return $list;
+    }
+
     /**
      * @param int $summit_id
      * @param string $role
+     * @param bool $include_sub_roles
      * @return bool
      */
-    public function hasRejectedPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker)
+    public function hasRejectedPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker, $include_sub_roles = false)
     {
-        return $this->UnacceptedPresentations($summit_id, $role)->count() > 0;
+        return $this->RejectedPresentations($summit_id, $role, $include_sub_roles)->count() > 0;
     }
 
     /**
@@ -939,12 +1046,18 @@ class PresentationSpeaker extends DataObject
 
     /**
      * @param int $summit_id
-     ** @param string $role
+     * @param string $role
+     * @param bool $include_sub_roles
      * @return bool
      */
-    public function hasAlternatePresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker)
+    public function hasAlternatePresentations
+    (
+        $summit_id         = null,
+        $role              = IPresentationSpeaker::RoleSpeaker,
+        $include_sub_roles = false
+    )
     {
-        return $this->AlternatePresentations($summit_id, $role)->count() > 0;
+        return $this->AlternatePresentations($summit_id, $role, $include_sub_roles)->count() > 0;
     }
 
     /**
@@ -1260,7 +1373,6 @@ class PresentationSpeaker extends DataObject
     }
 
     /**
-     * @param int $summit_id
      * @param string $role
      * @return bool
      */

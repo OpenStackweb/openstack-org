@@ -23,31 +23,31 @@ final class SpeakerSelectionAnnouncementEmailSenderFactory implements ISpeakerSe
      */
     public function build(ISummit $summit, IPresentationSpeaker $speaker, $role = IPresentationSpeaker::RoleSpeaker)
     {
-
-        $has_published = $speaker->hasPublishedPresentations($summit->getIdentifier(), $role);
-        $has_rejected  = $speaker->hasRejectedPresentations($summit->getIdentifier(), $role);
-        $has_alternate = $speaker->hasAlternatePresentations($summit->getIdentifier(), $role);
+        $has_published = $speaker->hasPublishedRegularPresentations($summit->getIdentifier(), $role, true) ||
+                         $speaker->hasPublishedLightningPresentations($summit->getIdentifier(), $role, true);
+        $has_rejected  = $speaker->hasRejectedPresentations($summit->getIdentifier(), $role, true);
+        $has_alternate = $speaker->hasAlternatePresentations($summit->getIdentifier(), $role, true);
 
         if($has_published && !$has_rejected && !$has_alternate)
-            return new PresentationSpeakerAcceptedAnnouncementEmailSender;
+            return new PresentationSpeakerAcceptedAnnouncementEmailSender();
 
         if(!$has_published && !$has_rejected && $has_alternate)
-            return new PresentationSpeakerAlternateAnnouncementEmailSender;
+            return new PresentationSpeakerAlternateAnnouncementEmailSender();
 
         if(!$has_published && $has_rejected && !$has_alternate)
-            return new PresentationSpeakerRejectedAnnouncementEmailSender;
+            return new PresentationSpeakerRejectedAnnouncementEmailSender();
 
         if($has_published && !$has_rejected && $has_alternate)
-            return new PresentationSpeakerAcceptedAlternateAnnouncementEmailSender;
+            return new PresentationSpeakerAcceptedAlternateAnnouncementEmailSender();
 
         if($has_published && $has_rejected && !$has_alternate)
-            return new PresentationSpeakerAcceptedRejectedAnnouncementEmailSender;
+            return new PresentationSpeakerAcceptedRejectedAnnouncementEmailSender();
 
         if(!$has_published && $has_rejected && $has_alternate)
-            return new PresentationSpeakerAlternateRejectedAnnouncementEmailSender;
+            return new PresentationSpeakerAlternateRejectedAnnouncementEmailSender();
 
         if($has_published && $has_rejected && $has_alternate)
-            return new PresentationSpeakerAcceptedAlternateAnnouncementEmailSender;
+            return new PresentationSpeakerAcceptedAlternateAnnouncementEmailSender();
 
         return null;
     }
