@@ -12,19 +12,19 @@
  **/
 $(document).ready(function() {
 
-        var form = $('#surveys_list_filter_form');
+        var form        = $('#surveys_list_filter_form');
         var question_id = 0;
 
         var form_validator = form.validate({
             rules: {
                 survey_template_id  : { required: true},
-                question_value: { required: function(){
+                question_text_value: { required: function(){
                     return question_id > 0 &&
-                        $('#question_value').val() == '';
+                        $('#question_text_value').val() == '';
                 }},
-                question_value2: { required: function(){
+                'question_select_values[]': { required: function(){
                     return question_id > 0 &&
-                        ( $('#question_value2').val() == 0 || $('#question_value2').val() == null );
+                        ( $('#question_select_values').val() == 0 || $('#question_select_values').val() == null );
                 }}
             },
             onfocusout: false,
@@ -37,10 +37,10 @@ $(document).ready(function() {
         });
 
         $('#survey_template_id').change(function(){
-            $('#question_value').hide();
-            $('#question_value').val('');
-            $('#question_value2').hide();
-            $('#question_value2').val('');
+            $('#question_text_value').hide();
+            $('#question_text_value').val('');
+            $('#question_select_values').hide();
+            $('#question_select_values').val('');
             $('#question_id').val('');
             form_validator.resetForm();
             form.submit();
@@ -48,13 +48,16 @@ $(document).ready(function() {
 
         //search params
         var question_id = $.QueryString["question_id"];
-
+        var survey_lang = $.QueryString["survey_lang"];
+        if(survey_lang != undefined){
+            $('#survey_lang').val(survey_lang);
+        }
         if(question_id != undefined) {
             var option = $('#question_id option[value="'+question_id+'"]');
 
             var questions_values   = option.data('values');
-            var question_value_txt = $('#question_value');
-            var question_value_ddl = $('#question_value2');
+            var question_value_txt = $('#question_text_value');
+            var question_value_ddl = $('#question_select_values');
 
             if(questions_values == undefined) {
                 question_value_ddl.hide();
@@ -69,7 +72,7 @@ $(document).ready(function() {
                 question_value_ddl.show();
                 question_value_txt.hide();
                 // populate combo box
-                var items = '<option value="">-- set a question value --</option>';
+                var items = '';
 
                 $.each(questions_values,function(key, obj)
                 {
@@ -79,9 +82,16 @@ $(document).ready(function() {
                 question_value_ddl.find('option').remove();
                 question_value_ddl.append(items);
 
-                var question_value2 = $.QueryString["question_value2"];
-                if(question_value2 != undefined){
-                    $('option[value="'+question_value2+'"]', question_value_ddl).prop('selected', true)
+                var question_values = $.QueryString["question_select_values[]"];
+                if(question_values != undefined){
+                    if( Object.prototype.toString.call( question_values ) === '[object Array]' ){
+                        for (let element of question_values){
+                            $('option[value="'+element+'"]', question_value_ddl).prop('selected', true)
+                        }
+                    }
+                    else{
+                         $('option[value="'+question_values+'"]', question_value_ddl).prop('selected', true)
+                    }
                 }
             }
         }
@@ -91,8 +101,8 @@ $(document).ready(function() {
             question_id            = $(this).val();
             var option             = $('option:selected', $(this));
             var questions_values   = option.data('values');
-            var question_value_txt = $('#question_value');
-            var question_value_ddl = $('#question_value2');
+            var question_value_txt = $('#question_text_value');
+            var question_value_ddl = $('#question_select_values');
             form_validator.resetForm();
             question_value_txt.val('');
             question_value_ddl.find('option').remove();
@@ -115,7 +125,7 @@ $(document).ready(function() {
             }
             else{
                 // populate combo box
-                var items = '<option value="">-- set a question value --</option>';
+                var items = '';
 
                 $.each(questions_values,function(key, obj)
                 {

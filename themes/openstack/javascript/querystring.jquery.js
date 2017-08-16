@@ -16,9 +16,20 @@
         var b = {};
         for (var i = 0; i < a.length; ++i)
         {
-            var p=a[i].split('=');
+            var p = a[i].split('=');
+
             if (p.length != 2) continue;
-            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+
+            var key = decodeURIComponent(p[0]);
+            var val = decodeURIComponent(p[1].replace(/\+/g, " "));
+            if(b[key] !== undefined && typeof b[key] === 'string'){
+                b[key] = [b[key]];
+            }
+            if( Object.prototype.toString.call( b[key] ) === '[object Array]' ){
+                b[key].push(val);
+                continue;
+            }
+            b[key] = val;
         }
         return b;
     })(window.location.search.substr(1).split('&'))
