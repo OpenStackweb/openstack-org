@@ -535,7 +535,7 @@ final class Summit extends DataObject implements ISummit
      */
     public function getScheduleLink()
     {
-        $page = SummitAppSchedPage::get()->filter('SummitID', $this->getIdentifier())->first();
+        $page = SummitAppSchedPage::getBy($this);
         return ($page) ? $page->getAbsoluteLiveLink(false) : '#';
     }
 

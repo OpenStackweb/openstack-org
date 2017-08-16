@@ -38,7 +38,7 @@ final class MemberPromoCodeEmailSender implements IMessageSenderService
 
         $email = EmailFactory::getInstance()->buildEmail(MEMBER_NOTIFICATION_PROMO_CODE_EMAIL_FROM, $email_address);
 
-        $schedule_page = SummitAppSchedPage::get()->filter('SummitID', $summit->ID)->first();
+        $schedule_page =  SummitAppSchedPage::getBy($summit);
         if(is_null($schedule_page)) throw new Exception('Summit Schedule page does not exists!');
 
         $email->setUserTemplate(MEMBER_PROMO_CODE_EMAIL)->populateTemplate(

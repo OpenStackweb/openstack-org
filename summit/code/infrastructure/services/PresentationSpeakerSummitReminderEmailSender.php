@@ -39,7 +39,7 @@ final class PresentationSpeakerSummitReminderEmailSender implements IMessageSend
         $email = PermamailTemplate::get()->filter('Identifier', PRESENTATION_SPEAKER_SUMMIT_REMINDER_EMAIL)->first();
         if(is_null($email)) throw new NotFoundEntityException(sprintf('Email Template %s does not exists on DB!', PRESENTATION_SPEAKER_SUMMIT_REMINDER_EMAIL));
 
-        $schedule_page = SummitAppSchedPage::get()->filter('SummitID', $summit->getIdentifier())->first();
+        $schedule_page = SummitAppSchedPage::getBy($summit);
         if(is_null($schedule_page)) throw new NotFoundEntityException('Summit Schedule page does not exists!');
 
         $speaker->registerBreakOutSent($summit->getIdentifier(), 'SECOND_BREAKOUT_REMINDER');

@@ -39,7 +39,7 @@ final class SummitAttendeeRSVPEmailSender implements IMessageSenderService
 
         $email = EmailFactory::getInstance()->buildEmail(SUMMIT_ATTENDEE_RSVP_EMAIL_FROM, $attendee->getMember()->getEmail());
 
-        $schedule_page = SummitAppSchedPage::get()->filter('SummitID', $event->SummitID)->first();
+        $schedule_page = SummitAppSchedPage::getBy($event->Summit());
         if(is_null($schedule_page)) throw new NotFoundEntityException('Summit Schedule page does not exists!');
 
         $email->setUserTemplate(SUMMIT_ATTENDEE_RSVP_EMAIL)->populateTemplate(

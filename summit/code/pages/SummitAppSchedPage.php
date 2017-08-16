@@ -207,7 +207,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         $back_url           = $request->requestVar('BackURL') ;
         if(!Director::is_site_url($back_url) || empty($back_url)) {
             $start_date = new \DateTime($event->getStartDate());
-            $main_schedule_page = SummitAppSchedPage::get()->filter("SummitID", $summit_id)->first();
+            $main_schedule_page = SummitAppSchedPage::getBy($event->getSummit());
             $back_url = $main_schedule_page->getAbsoluteLiveLink(false);
             $back_url .= sprintf("#day=%s-%s-%s&eventid=%s", $start_date->format('Y'), $start_date->format('m'), $start_date->format('d'), $event->ID);
         }
@@ -278,7 +278,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
 
         if(!Director::is_site_url($back_url) || empty($back_url)) {
             $start_date = new \DateTime($event->getStartDate());
-            $main_schedule_page = SummitAppSchedPage::get()->filter("SummitID", $summit_id)->first();
+            $main_schedule_page = SummitAppSchedPage::getBy($event->Summit());
             $back_url = $main_schedule_page->getAbsoluteLiveLink(false);
             $back_url .= sprintf("#day=%s-%s-%s&eventid=%s", $start_date->format('Y'), $start_date->format('m'), $start_date->format('d'), $event->ID);
         }
