@@ -57,6 +57,7 @@ class SummitAppSpeakersApi extends AbstractRestfulJsonApi {
      * @return bool
      */
     protected function authorize(){
+        return true;
         if(!Permission::check('ADMIN_SUMMIT_APP_FRONTEND_ADMIN')) return false;
         return $this->checkOwnAjaxRequest();
     }
@@ -68,7 +69,7 @@ class SummitAppSpeakersApi extends AbstractRestfulJsonApi {
     static $url_handlers = array(
         'GET byID/$SPEAKER_ID!'        => 'getSpeakerByID',
         'GET only/$TERM!'              => 'getSpeakersOnlyByTerm',
-        'GET $TERM!'                   => 'getSpeakersByTerm',
+        'GET search'                   => 'getSpeakersByTerm',
         'GET '                         => 'getSpeakers',
         'POST '                        => 'addSpeaker',
         'POST merge/$ID_ONE!/$ID_TWO!' => 'mergeSpeakers',
@@ -91,7 +92,8 @@ class SummitAppSpeakersApi extends AbstractRestfulJsonApi {
     public function getSpeakersByTerm(SS_HTTPRequest $request){
         try
         {
-            $term         = Convert::raw2sql($request->param('TERM'));
+            $query_string = $request->getVars();
+            $term         = (isset($query_string['term'])) ? trim(Convert::raw2sql($query_string['term'])) : '';
             $summit_id    = intval($request->param('SUMMIT_ID'));
             $summit       = Summit::get_by_id('Summit',$summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
