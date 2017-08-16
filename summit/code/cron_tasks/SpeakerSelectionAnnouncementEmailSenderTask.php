@@ -35,7 +35,7 @@ final class SpeakerSelectionAnnouncementEmailSenderTask extends CronTask
     {
         try
         {
-            $batch_size = 100;
+            $batch_size = 1000;
             $init_time  = time();
             $summit     = null;
 
@@ -51,7 +51,6 @@ final class SpeakerSelectionAnnouncementEmailSenderTask extends CronTask
             }
 
             if(is_null($summit)) throw new Exception('summit_id is not valid!');
-
 
             $processed1  = $this->manager->sendSpeakersSelectionAnnouncementBySummit($summit, $batch_size);
             $processed2  = $this->manager->sendModeratorsSelectionAnnouncementBySummit($summit, $batch_size);

@@ -385,7 +385,7 @@ class PresentationSpeaker extends DataObject
      * @param null $summit_id
      * @param string $role
      * @param bool $include_sub_roles
-     * @return DataList
+     * @return ArrayList
      */
     public function PublishedRegularPresentations
     (
@@ -399,26 +399,29 @@ class PresentationSpeaker extends DataObject
             $summit_id,
             $role,
             [IPresentationType::Keynotes, IPresentationType::Panel, IPresentationType::Presentation]
-        );
+        )->toArray();
 
         if($include_sub_roles && $role == IPresentationSpeaker::RoleModerator){
-            foreach($this->PublishedPresentationsByType
+            $presentations = $this->PublishedPresentationsByType
             (
                 $summit_id,
                 IPresentationSpeaker::RoleSpeaker,
                 [IPresentationType::Keynotes, IPresentationType::Panel, IPresentationType::Presentation]
-            ) as $speaker_presentation)
-                $list->push($speaker_presentation);
+            );
+            if($presentations) {
+                foreach ($presentations as $speaker_presentation)
+                    $list[]= $speaker_presentation;
+            }
         }
 
-        return $list;
+        return new ArrayList($list);
     }
 
     /**
      * @param null $summit_id
      * @param string $role
      * @param bool $include_sub_roles
-     * @return DataList
+     * @return bool
      */
     public function hasPublishedRegularPresentations
     (
@@ -434,7 +437,7 @@ class PresentationSpeaker extends DataObject
      * @param null $summit_id
      * @param string $role
      * @param bool $include_sub_roles
-     * @return DataList
+     * @return ArrayList
      */
     public function PublishedLightningPresentations
     (
@@ -443,15 +446,18 @@ class PresentationSpeaker extends DataObject
         $include_sub_roles = false
     )
     {
-        $list = $this->PublishedPresentationsByType($summit_id, $role, [IPresentationType::LightingTalks]);
+        $list = $this->PublishedPresentationsByType($summit_id, $role, [IPresentationType::LightingTalks])->toArray();
 
         if($include_sub_roles && $role == IPresentationSpeaker::RoleModerator){
-            foreach ($this->PublishedPresentationsByType($summit_id, IPresentationSpeaker::RoleSpeaker, [IPresentationType::LightingTalks]) as $speaker_presentation){
-                $list->push($speaker_presentation);
+            $presentations = $this->PublishedPresentationsByType($summit_id, IPresentationSpeaker::RoleSpeaker, [IPresentationType::LightingTalks]) ;
+            if($presentations) {
+                foreach ($presentations as $speaker_presentation) {
+                    $list[] = $speaker_presentation;
+                }
             }
         }
 
-        return $list;
+        return new ArrayList($list);
     }
 
     /**
@@ -858,8 +864,11 @@ class PresentationSpeaker extends DataObject
 
         // if role is moderator, add also the ones that belongs to role speaker ( if $include_sub_roles is true)
         if($include_sub_roles && $role == IPresentationSpeaker::RoleModerator){
-            foreach($this->AlternatePresentations(IPresentationSpeaker::RoleSpeaker) as $speaker_presentation)
-                $alternatePresentations->push($speaker_presentation);
+            $presentations = $this->AlternatePresentations($summit_id,IPresentationSpeaker::RoleSpeaker);
+            if($presentations) {
+                foreach ($presentations as $speaker_presentation)
+                    $alternatePresentations->push($speaker_presentation);
+            }
         }
 
         return $alternatePresentations;
@@ -1016,8 +1025,11 @@ class PresentationSpeaker extends DataObject
     public function RejectedPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker, $include_sub_roles = false){
         $list = $this->UnacceptedPresentations($summit_id, $role);
         if($include_sub_roles && $role == IPresentationSpeaker::RoleModerator){
-            foreach($this->UnacceptedPresentations($summit_id, IPresentationSpeaker::RoleSpeaker) as $speaker_presentation){
-                $list->push($speaker_presentation);
+            $presentations = $this->UnacceptedPresentations($summit_id, IPresentationSpeaker::RoleSpeaker);
+            if($presentations) {
+                foreach ($presentations as $speaker_presentation) {
+                    $list->push($speaker_presentation);
+                }
             }
         }
         return $list;
