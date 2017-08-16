@@ -139,11 +139,11 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-12">
-                            <h2>Hotel & Travel</h2>
+                            <h2>Travel</h2>
                             $HotelAndTravel
-                            <p>
+                            <!-- <p>
                                 <a class="btn btn-primary hotel-btn" href="$HotelLink" target="_blank">Book Your Room</a>
-                            </p>
+                            </p> -->
                             <hr>
                         </div>
                     </div>
