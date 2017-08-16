@@ -13,25 +13,16 @@
 
 import React from 'react';
 import StoryPanel from '../containers/StoryPanel';
-import moment from 'moment';
 import groupedList from '../../utils/groupedList';
+import {formatTextForHash} from '../../actions';
 
 export default ({
 	stories,
 	distribution,
     group_by
 }) => {
-	const formatTitle = function (date) {
-		return moment(date).format('MMMM D, YYYY');
-	}
 
     const getTitle = function(group_by, group) {
-        if (group_by == 'date') {
-            return formatTitle(group[0].date);
-        } else if (group_by == 'search') {
-            return 'Search Results';
-        }
-
         return group[0][group_by];
     }
 
@@ -42,9 +33,11 @@ export default ({
 			{groupedStories.map((group,i) => (
 				<StoryPanel
                     key={i}
-                    stories={group}
-                    distribution={distribution}
-                    title={getTitle(group_by, group)}
+                    stories = {group}
+                    distribution = {distribution}
+                    title = {getTitle(group_by, group)}
+                    panel_id = {formatTextForHash(getTitle(group_by, group))}
+                    grouped = {true}
                 />
 			))}
 		</div>

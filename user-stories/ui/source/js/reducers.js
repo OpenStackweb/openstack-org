@@ -11,14 +11,18 @@
  * limitations under the License.
  **/
 
-import {REQUEST_ALL_STORIES,
-        RECEIVE_ALL_STORIES,
-        CHANGE_ACTIVE_VIEW,
-        CHANGE_ACTIVE_DIST,
-        REQUEST_SEARCH_STORIES,
-        RECEIVE_SEARCH_STORIES,
-        UPDATE_SEARCH_TEXT,
-        REQUEST_TAG_SEARCH_STORIES} from './actions';
+import {
+    setUrlParams,
+    REQUEST_ALL_STORIES,
+    RECEIVE_ALL_STORIES,
+    CHANGE_ACTIVE_VIEW,
+    CHANGE_ACTIVE_DIST,
+    REQUEST_SEARCH_STORIES,
+    RECEIVE_SEARCH_STORIES,
+    UPDATE_SEARCH_TEXT,
+    REQUEST_TAG_SEARCH_STORIES,
+    RECEIVE_TAG_SEARCH_STORIES
+} from './actions';
 
 export const appReducer = function (
 	state = {
@@ -26,6 +30,7 @@ export const appReducer = function (
         loading: false,
         hasMore: false,
         active_view: 'date',
+        section: '',
         distribution: 'tiles'
 	},
 	action = {}) {
@@ -49,14 +54,28 @@ export const appReducer = function (
                     search: ''
 				};
             case REQUEST_TAG_SEARCH_STORIES:
+                setUrlParams({tag: action.payload.tag});
                 return {
                     ...state,
                     loading: true,
                     search: action.payload.tag
                 };
-            case REQUEST_SEARCH_STORIES:
+            case RECEIVE_TAG_SEARCH_STORIES:
+                response = action.payload.response;
+
                 return {
                     ...state,
+                    loading: false,
+                    stories: response.stories,
+                    has_more: response.has_more,
+                    total: response.total,
+                    active_view: 'search',
+                };
+            case REQUEST_SEARCH_STORIES:
+                setUrlParams({search: action.payload.search_term});
+                return {
+                    ...state,
+                    search: action.payload.search_term,
                     loading: true,
                 };
             case RECEIVE_SEARCH_STORIES:
@@ -71,9 +90,12 @@ export const appReducer = function (
                     active_view: 'search',
                 };
             case CHANGE_ACTIVE_VIEW:
+                setUrlParams({[action.payload.view]: action.payload.section});
+
                 return {
                     ...state,
-                    active_view: action.payload
+                    active_view: action.payload.view,
+                    section: action.payload.section
                 };
             case CHANGE_ACTIVE_DIST:
                 return {
@@ -91,4 +113,6 @@ export const appReducer = function (
 
 		}
 };
+
+
 /*eslint-enable */

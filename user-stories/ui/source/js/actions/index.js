@@ -22,10 +22,45 @@ export const CHANGE_ACTIVE_VIEW = 'CHANGE_ACTIVE_VIEW';
 export const CHANGE_ACTIVE_DIST = 'CHANGE_ACTIVE_DIST';
 export const UPDATE_SEARCH_TEXT = 'UPDATE_SEARCH_TEXT';
 export const REQUEST_TAG_SEARCH_STORIES = 'REQUEST_TAG_SEARCH_STORIES';
+export const RECEIVE_TAG_SEARCH_STORIES = 'RECEIVE_TAG_SEARCH_STORIES';
 
 export const changeStateView = createAction(CHANGE_ACTIVE_VIEW);
 export const changeActiveDist = createAction(CHANGE_ACTIVE_DIST);
 export const updateSearchText = createAction(UPDATE_SEARCH_TEXT);
+
+let hash_tags = ['date','name','tag','search','industry','location'];
+
+export const loadStories = () => (dispatch) => {
+    var url_hash = $(window).url_fragment('getParams');
+    var url_hash_view = '';
+    var url_hash_value = '';
+
+    if(Object.keys(url_hash).length !== 0){
+        hash_tags.forEach((hash) => {
+            if((hash in url_hash) && url_hash[hash]){
+                url_hash_view = hash;
+                url_hash_value = url_hash[hash];
+            }
+        });
+
+        switch (url_hash_view) {
+            case 'tag':
+                dispatch(fetchSearchTagStories(url_hash_value));
+                break;
+            case 'search':
+                dispatch(fetchSearchStories(url_hash_value));
+                break;
+            case 'location':
+            case 'industry':
+                dispatch(changeActiveView(url_hash_view, url_hash_value, true));
+                break;
+            default:
+                dispatch(fetchAllStories(0, 'date'));
+        }
+    } else {
+        dispatch(fetchAllStories(0, 'date'));
+    }
+}
 
 export const fetchAllStories = getRequest(
     createAction(REQUEST_ALL_STORIES),
@@ -44,15 +79,29 @@ export const fetchSearchStories = (search) => {
 export const fetchSearchTagStories = (tag) => {
     return getRequest(
         createAction(REQUEST_TAG_SEARCH_STORIES),
-        createAction(RECEIVE_SEARCH_STORIES),
+        createAction(RECEIVE_TAG_SEARCH_STORIES),
         'api/v1/user-stories'
     )({ tag: tag });
 };
 
-export const changeActiveView = (view, fetch_stories) => (dispatch) => {
-    dispatch(changeStateView(view));
+export const changeActiveView = (view, section, fetch_stories) => (dispatch) => {
+    dispatch(changeStateView({view, section}));
     if (fetch_stories) {
         dispatch(fetchAllStories({start:0, view:view}));
     }
 }
+
+export const setUrlParams = (params) => {
+    hash_tags.forEach((hash) => $(window).url_fragment('setParam', hash, ''));
+
+    Object.keys(params).forEach(param => {
+        $(window).url_fragment('setParam', param, params[param]);
+    });
+
+    window.location.hash = $(window).url_fragment('serialize');
+}
+
+export const formatTextForHash = (text) => {
+    return text.replace(/\s\/\s|\s/g, "-").toLowerCase();
+};
 

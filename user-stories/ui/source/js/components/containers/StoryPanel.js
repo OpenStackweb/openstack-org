@@ -18,10 +18,12 @@ import StoryListItem from './StoryListItem';
 export const StoryPanel = ({
 	title,
 	stories,
-    distribution
+    distribution,
+    panel_id,
+    grouped
 }) => (
 	<div className="container">
-        <div className="story-panel" style={{clear:'both'}}>
+        <div className={"story-panel " + (grouped ? 'grouped' : '')} style={{clear:'both'}} id={panel_id}>
             <h4>{title}</h4>
             <div className="items">
                 {distribution == 'tiles' &&
@@ -46,5 +48,7 @@ export const StoryPanel = ({
 StoryPanel.defaultProps = {
 	stories: []
 };
+
+
 
 export default StoryPanel;

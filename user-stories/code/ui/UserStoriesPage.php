@@ -58,6 +58,7 @@ class UserStoriesPage_Controller extends Page_Controller
     {
         parent::init();
         Requirements::javascript("user-stories/js/user-stories.js");
+        Requirements::javascript('themes/openstack/javascript/urlfragment.jquery.js');
         Requirements::css("user-stories/css/user-stories.css");
     }
 
@@ -70,10 +71,11 @@ class UserStoriesPage_Controller extends Page_Controller
             'baseURL'       => rtrim($this->Link(), '/'),
             'securityToken' => SecurityToken::inst()->getValue(),
             'views'         => [
-                ['label' => 'recent', 'view' => 'date'],
-                ['label' => 'alphabetical', 'view' => 'name'],
-                ['label' => 'location', 'view' => 'location'],
-                ['label' => 'industry', 'view' => 'industry'],
+                ['label' => 'recent', 'view' => 'date', 'grouped' => false, 'show' => true],
+                ['label' => 'alphabetical', 'view' => 'name', 'grouped' => false, 'show' => true],
+                ['label' => 'location', 'view' => 'location', 'grouped' => true, 'show' => true],
+                ['label' => 'industry', 'view' => 'industry', 'grouped' => true, 'show' => true],
+                ['label' => 'search', 'view' => 'search', 'grouped' => false, 'show' => false],
             ]
         ];
 

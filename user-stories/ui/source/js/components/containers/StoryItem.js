@@ -53,12 +53,12 @@ class StoryItem extends React.Component {
                     </span>
                     <span className="user-story-overlay">
                         <span dangerouslySetInnerHTML={{__html: story.description}} />
-                        <span className="tags">
+                        <div className="tags">
                             {story.tags.map((tag, i) => (
                                 <span key={i} className="tag" data-tag={tag} onClick={this.tagClick}>{tag}</span>
                             ))}
-                        </span>
-                        <span className="user-story-more-btn">Read More</span>
+                        </div>
+                        <div className="user-story-more-btn">Read More</div>
                     </span>
                 </a>
             </div>

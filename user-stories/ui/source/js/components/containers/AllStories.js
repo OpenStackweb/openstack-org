@@ -18,7 +18,7 @@ import BlockButton from '../ui/BlockButton';
 import { AjaxLoader } from "~core-components/ajaxloader";
 import StoryGroupedView from '../views/StoryGroupedView';
 import StoryUnGroupedView from '../views/StoryUnGroupedView';
-import { fetchAllStories } from '../../actions';
+import { fetchAllStories, loadStories, setUrlParams } from '../../actions';
 
 class AllStories extends React.Component {
 	
@@ -26,13 +26,25 @@ class AllStories extends React.Component {
 		super(props);
 
 		this.loadMoreStories = this.loadMoreStories.bind(this);
+        this.handleScroll = this.handleScroll.bind(this);
 	}
 
 	componentDidMount () {
 		if(!this.props.stories.length) {
-			this.props.fetchStories(0);
+            this.props.loadStories();
 		}
+
+        window.addEventListener('scroll', this.handleScroll);
 	}
+
+    componentDidUpdate(prevProps, prevState) {
+        // if is first load and is tab location or industry
+        if (this.props.section && this.props.section != 'first' && this.props.stories.length > 0) {
+            $('html, body').animate({
+                scrollTop: $("#"+this.props.section).offset().top - 30
+            }, 2000);
+        }
+    }
 
 	loadMoreStories (e) {
 		e.preventDefault();
@@ -40,6 +52,18 @@ class AllStories extends React.Component {
 			this.props.stories.length
 		)
 	}
+
+    handleScroll(e) {
+        let props = this.props;
+        $('.story-panel.grouped').each(function(){
+            if (
+                $(this).offset().top < window.pageYOffset + 70
+                && $(this).offset().top + $(this).height() > window.pageYOffset + 70
+            ) {
+                props.setUrlParams({[props.active_view]: $(this).attr('id')})
+            }
+        });
+    }
 
 	render () {
 
@@ -58,10 +82,10 @@ class AllStories extends React.Component {
 
 		return (
 			<div>
-				{['location', 'industry'].find(x => x == active_view) &&
+				{this.props.views.filter(v => ( v.grouped )).map((v,i) => v.view).find(x => x == active_view) &&
                     <StoryGroupedView stories={ stories } distribution={ distribution } group_by={ active_view } />
                 }
-                {['date','name','search'].find(x => x == active_view) &&
+                {this.props.views.filter(v => ( !v.grouped )).map((v,i) => v.view).find(x => x == active_view) &&
                     <StoryUnGroupedView stories={ stories } distribution={ distribution } group_by={ active_view } />
                 }
 				{hasMore && !loading &&
@@ -82,11 +106,18 @@ export default connect (
 			stories: state.stories,
 			distribution: state.distribution,
             active_view: state.active_view,
+            section: state.section,
 		}
 	},
 	dispatch => ({
-		fetchStories (start = 0, view = 'recent') {
+		fetchStories (start = 0, view = 'date') {
 			dispatch(fetchAllStories({start, view}));
-		}
+		},
+        loadStories () {
+            dispatch(loadStories());
+		},
+        setUrlParams (params) {
+            setUrlParams(params);
+        }
 	})
 )(AllStories);

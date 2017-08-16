@@ -49,7 +49,8 @@ class UserStoriesApp extends React.Component {
             loading,
             distribution,
             active_view,
-            hasMore
+            hasMore,
+            views
             } = this.props;
 
 		return (
@@ -60,7 +61,7 @@ class UserStoriesApp extends React.Component {
                     <div className="row">
                         <div className="col-sm-8">
                             <div className="row">
-                                {this.props.views.map((v,i) => (
+                                {views.filter(v => ( v.show )).map((v,i) => (
                                     <div key={i} className={"col-sm-2 nav-button-wrapper " + (active_view == v.view ? 'active' : '')}>
                                         <a
                                             onClick={this.changeView}
@@ -98,7 +99,7 @@ class UserStoriesApp extends React.Component {
                 </div>
                 <div className="story-page-main">
                     <div className="story-app-layout">
-                        <AllStories />
+                        <AllStories views={views} />
                     </div>
                 </div>
             </div>
@@ -120,7 +121,7 @@ export default connect (
 	},
 	dispatch => ({
         changeActiveView(active_view, fetch_stories){
-            return dispatch(changeActiveView(active_view, fetch_stories));
+            return dispatch(changeActiveView(active_view, 'first', fetch_stories));
         },
         changeActiveDist(distribution){
             return dispatch(changeActiveDist(distribution));
