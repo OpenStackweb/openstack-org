@@ -75,3 +75,4 @@ migrations:
   - AboutExpirePoweredOpenStackImplementationEmailMigration
   - FixVideoPresentationDeprecationMigration
   - MigrateFeaturedVideoToPresentationMaterials
+  - UpgradeSurveyLangMigration

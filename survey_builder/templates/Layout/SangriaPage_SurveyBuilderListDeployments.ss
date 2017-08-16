@@ -1,12 +1,13 @@
 <h2>Deployments</h2>
-<% include SangriaPage_SurveyBuilderListFilter %>
+<% include SangriaPage_SurveyBuilderListFilter ExportLink=$Top.getExportLink(SurveyBuilderListDeploymentsExport) %>
+<br>
 <hr>
 <div class="row">
-    <div class="col-md-3"> Total: $TotalCount</div>
-    <div class="col-md-3"> Completed: $CompleteCount</div>
+    <div class="col-md-3"> Total: $Total</div>
+    <div class="col-md-3"> Completed: $Completed</div>
 </div>
 <hr>
-<table class="table table-hover">
+<table class="table table-hover" style="width: 100% !important;">
     <thead>
     <tr>
         <th><a href="$Top.Link(SurveyBuilderListDeployments)?$Top.getOrderLink(id)" title="order by Id">Id<i class="fa fa-fw fa-sort"></i></a></th>
@@ -16,6 +17,7 @@
         <th>Label</th>
         <th>Current Step</th>
         <th>Is Completed ?</th>
+        <th>Lang</th>
         <th>&nbsp;</th>
     </tr>
     </thead>
@@ -29,9 +31,21 @@
             <td>$getAnswerFor(Label)</td>
             <td>$CurrentStep.Template.Name</td>
             <td><% if isComplete %>true<% else %>false<% end_if %></td>
+            <td>$Lang</td>
             <td><a href="$Top.Link(DeploymentDetails)/$ID?BackUrl=$Top.Link(SurveyBuilderListDeployments)">view</a></td>
         </tr>
         <% end_loop %>
     </tbody>
 </table>
 $Pager
+<script>
+    $(document).ready(function() {
+        var form = $('#surveys_list_filter_form');
+        $("#ddl_page_size").val($('#page_size').val());
+        $('#ddl_page_size').change(function(){
+            $('#page_size').val($(this).val());
+            form.submit();
+        });
+
+    });
+</script>

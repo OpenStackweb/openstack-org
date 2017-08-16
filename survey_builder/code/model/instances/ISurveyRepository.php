@@ -20,4 +20,15 @@ interface ISurveyRepository extends IEntityRepository {
      * @return ISurvey|null
      */
     public function getByTemplateAndCreator($template_id, $creator_id);
+
+    /**
+     * @param int $template_id
+     * @param int $question_id
+     * @param array $values
+     * @param PagingInfo $page_info
+     * @param Order|null $order
+     * @param string $survey_lang
+     * @return array
+     */
+    public function getByTemplateAndAnswerValue($template_id, $question_id , array $values = [], PagingInfo $page_info, Order $order = null, $survey_lang = 'ALL');
 }
