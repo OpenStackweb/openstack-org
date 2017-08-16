@@ -47,7 +47,8 @@ function initMap() {
     bounds = new google.maps.LatLngBounds();
     map = new google.maps.Map(document.getElementById('map'), {
         scrollwheel: false,
-        zoom: 4
+        zoom: 4,
+        maxZoom: 18
     });
 
     for (var i in primary_locations) {
