@@ -112,6 +112,28 @@ class SummitVideoAppBackend
 
             case 'search':
                 $search = trim($criteria);
+                $search_words = explode(' ',$search);
+
+                foreach ($search_words as $key => $search_word) {
+                    // check for summit
+                    $summit = Summit::get()->filter('Title:PartialMatch', $search_word)->first();
+                    if ($summit) {
+                        $videos = $videos->where('Summit.ID = '.$summit->ID);
+                        unset($search_words[$key]);
+                        continue;
+                    }
+                }
+
+                $search = implode(' ', $search_words);
+                if (!empty($search)) {
+                    $videos = $videos->where("
+                        CONCAT(PresentationSpeaker.FirstName,' ',PresentationSpeaker.LastName) = '$search'
+                        OR PresentationSpeaker.FirstName LIKE '%$search%'
+                        OR PresentationSpeaker.LastName LIKE '%$search%'
+                        OR PresentationCategory.Title LIKE '%$search%'
+                        OR SummitEvent.Title LIKE '%$search%'"
+                    );
+                }
 
                 $videos = $videos
                     ->innerJoin('Presentation', 'Presentation.ID = PresentationMaterial.PresentationID')
@@ -122,28 +144,20 @@ class SummitVideoAppBackend
                     ->innerJoin('PresentationSpeaker',
                         'PresentationSpeaker.ID = Presentation_Speakers.PresentationSpeakerID')
                     ->leftJoin('PresentationCategory', 'PresentationCategory.ID = SummitEvent.CategoryID')
-                    ->where("
-                    CONCAT(PresentationSpeaker.FirstName,' ',PresentationSpeaker.LastName) = '$search'
-                    OR PresentationSpeaker.FirstName LIKE '%$search%'
-                    OR PresentationSpeaker.LastName LIKE '%$search%'
-                    OR SummitEvent.Title LIKE '%$search%'
-                    OR PresentationCategory.Title = '%$search%'
-                    OR Summit.Title LIKE '%$search%'")
                     ->limit($defaultLimit);
 
-                $match_videos = GroupedList::create($videos)->groupBy('YouTubeID');
+                $search_results = $videos->toArray();
+                $unique_youtube_ids = [];
+                $unique_videos = [];
 
-                $response = [
-                    'results' => []
-                ];
-
-                foreach ($match_videos as $v) {
-                    if (is_a($v,'ArrayList'))
-                        $v = $v->first();
-                    $response['results'][] = $this->createVideoJSON($v);
+                foreach ($search_results as $v) {
+                    if (!isset($unique_youtube_ids[$v->YouTubeID])) {
+                        $unique_youtube_ids[$v->YouTubeID] = 1;
+                        $unique_videos[] = $this->createVideoJSON($v);
+                    }
                 }
 
-                return $response;
+                return array( 'results' => $unique_videos );
 
         }
 
