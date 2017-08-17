@@ -335,6 +335,7 @@ jQuery(document).ready(function($) {
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (data,textStatus,jqXHR) {
+                        btn.attr("disabled", false);
                         row.hide('slow', function(){ row.remove();});
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
