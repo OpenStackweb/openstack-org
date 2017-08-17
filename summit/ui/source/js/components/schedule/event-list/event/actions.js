@@ -68,9 +68,9 @@ class EventActions extends Component {
         if (['going', 'watch', 'rsvp'].indexOf(type) >= 0 && ! current_user) {
             return this.showLoginAlert()
         }
-        /*if (['going', 'rsvp'].indexOf(type) >= 0 && ! current_user.is_attendee) {
+        if (['going', 'rsvp'].indexOf(type) >= 0 && ! current_user.is_attendee) {
             return this.showEventBriteAlert()
-        }*/
+        }
 
         return action.click(this.props)
     }

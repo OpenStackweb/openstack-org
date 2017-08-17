@@ -170,26 +170,6 @@
         </div>
     </div>
     <% if CurrentMember %>
-        <% if not CurrentMember.isAttendee($Summit.ID)  %>
-            <script>
-                $(function(){
-                    var cookie = $.cookie('dismiss_not_attendee_alert_summit_{$Summit.ID}');
-                        if(typeof(cookie) == 'undefined'){
-                        swal({
-                            type: 'info',
-                            html:
-                            '<p><%t Summit.RegistrationLine1 member_name=$CurrentMember.FullName summit_name=$Top.Summit.Title summit_registration_link=$Top.Summit.RegistrationLink %></p>'+
-                            '<p><%t Summit.RegistrationLine2 confirm_order_link=$Top.ProfileAttendeeRegistrationLink %></p>',
-                        })
-                        .then(function () {
-                            // dismiss it for 10 days
-                            $.cookie('dismiss_not_attendee_alert_summit_{$Summit.ID}', '1', { expires: 10 });
-                        });
-
-                    }
-                });
-            </script>
-        <% end_if %>
         <div class="row">
             <div class="col-xs-12 logout-container">
                 <a class="action btn btn-default" id="login-button" href="/Security/logout/?BackURL={$Top.Link}"><i class="fa fa-sign-out" aria-hidden="true"></i>Log Out</a>
