@@ -76,35 +76,16 @@ final class SpeakerSecondBreakoutAnnouncementSenderManager
     /**
      * @param ISummit $current_summit
      * @param int $batch_size
-     * @return void
+     * @return int
+     * @throws Exception
      */
     public function send(ISummit $current_summit, $batch_size)
     {
-        $speaker_repository     = $this->speaker_repository;
-        $sender_factory         = $this->sender_breakout_factory;
-        $promo_code_repository  = $this->promo_code_repository;
-        $batch_repository       = $this->batch_repository;
-        $batch_task_factory     = $this->batch_task_factory;
-
-        $not_allowed_categories = [
-            "sponsored sessions",
-            "intensive training",
-            "ceph day",
-            "open vswitch day",
-            "birds of a feather",
-            "working groups"
-        ];
 
         return $this->tx_manager->transaction(function() use
         (
             $current_summit,
-            $batch_size,
-            $speaker_repository,
-            $sender_factory,
-            $promo_code_repository,
-            $batch_repository,
-            $batch_task_factory,
-            $not_allowed_categories
+            $batch_size
         )
         {
             $summit_id = $current_summit->getIdentifier();
@@ -112,18 +93,18 @@ final class SpeakerSecondBreakoutAnnouncementSenderManager
             try {
                 $page      = 1;
                 $page_size = $batch_size;
-                $task      = $batch_repository->findByName(self::TaskName.$summit_id);
+                $task      = $this->batch_repository->findByName(self::TaskName.$summit_id);
 
                 if (is_null($task)) {
                     //create task
-                    $task = $batch_task_factory->buildBatchTask(self::TaskName.$summit_id, 0, $page);
-                    $batch_repository->add($task);
+                    $task = $this->batch_task_factory->buildBatchTask(self::TaskName.$summit_id, 0, $page);
+                    $this->batch_repository->add($task);
                 }
 
                 $page = $task->getCurrentPage();
                 echo "Processing Page " . $page . PHP_EOL;
 
-                list($page, $page_size, $count, $speakers) = $speaker_repository->searchBySummitSchedulePaginated
+                list($page, $page_size, $count, $speakers) = $this->speaker_repository->searchBySummitSchedulePaginated
                 (
                     $current_summit,
                     $page,
@@ -150,19 +131,14 @@ final class SpeakerSecondBreakoutAnnouncementSenderManager
                      * they still need the email, just not the part with the code. Probably a slightly altered verbiage as well
                      */
                     $code           = null;
-                    $presentations  = $speaker->AllPublishedPresentations($current_summit->getIdentifier());
+                    $presentations  = $speaker->AllPublishedPresentations($current_summit->getIdentifier(), $current_summit->getExcludedTracksForPublishedPresentations());
 
-                    if(intval($presentations->Count()) === 1){
-                        $track = strtolower($presentations->first()->Category()->Title);
-
-                        if(in_array($track, $not_allowed_categories))
-                        {
-                            echo sprintf("skipping speaker %s (%s) - track %s", $speaker->getName(), $speaker->getIdentifier(), $track).PHP_EOL;
-                            continue;
-                        }
+                    if($presentations->Count() == 0){
+                        echo sprintf("skipping speaker %s (%s) - no published presentations available", $speaker->getName(), $speaker->getEmail()).PHP_EOL;
+                        continue;
                     }
 
-                    $sender_service = $sender_factory->build($current_summit, $speaker);
+                    $sender_service = $this->sender_factory->build($current_summit, $speaker);
 
                     if (is_null($sender_service)) continue;
 
@@ -177,7 +153,7 @@ final class SpeakerSecondBreakoutAnnouncementSenderManager
                         echo sprintf("speaker %s (%s) has not confirmed assistance for summit.", $speaker->getName(), $speaker->getIdentifier()).PHP_EOL;
                         if (!$speaker->hasSummitPromoCode($current_summit->getIdentifier())) {
                             echo sprintf("speaker %s (%s) has not promo code for summit.", $speaker->getName(), $speaker->getIdentifier()).PHP_EOL;
-                            $code = $promo_code_repository->getNextAvailableByType
+                            $code = $this->promo_code_repository->getNextAvailableByType
                             (
                                 $current_summit,
                                 ISpeakerSummitRegistrationPromoCode::TypeAccepted,

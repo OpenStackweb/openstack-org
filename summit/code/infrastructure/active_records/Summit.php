@@ -77,7 +77,7 @@ final class Summit extends DataObject implements ISummit
         'SummitPackages'               => 'SummitPackage',
         'SummitAddOns'                 => 'SummitAddOn',
         'WIFIConnections'              => 'SummitWIFIConnection',
-        'Sponsors'                     => 'Sponsor'
+        'Sponsors'                     => 'Sponsor',
     ];
 
     /**
@@ -85,7 +85,13 @@ final class Summit extends DataObject implements ISummit
      */
     private static $many_many = array
     (
-        'CategoryDefaultTags' => 'Tag',
+        'CategoryDefaultTags'                          => 'Tag',
+        // summit speaker announcement emails
+        'ExcludedCategoriesForAcceptedPresentations'   => 'PresentationCategory',
+        'ExcludedCategoriesForAlternatePresentations'  => 'PresentationCategory',
+        'ExcludedCategoriesForRejectedPresentations'   => 'PresentationCategory',
+        // summit speaker upload slide deck email
+        'ExcludedTracksForUploadPresentationSlideDeck' => 'PresentationCategory',
     );
 
     private static $many_many_extraFields = array(
@@ -1654,4 +1660,36 @@ SQL;
         return sprintf("%s at %s %s", $dt->format('l, F d'), $dt->format('H:i A'), $dt->format('T'));
     }
 
+    /**
+     * @return int[]
+     */
+    public function getExcludedTracksForPublishedPresentations()
+    {
+
+        return  array_values($this->ExcludedCategoriesForAcceptedPresentations()->getIDList());
+    }
+
+    /**
+     * @return int[]
+     */
+    public function getExcludedTracksForRejectedPresentations()
+    {
+        return  array_values($this->ExcludedCategoriesForRejectedPresentations()->getIDList());
+    }
+
+    /**
+     * @return int[]
+     */
+    public function getExcludedTracksForAlternatePresentations()
+    {
+        return  array_values($this->ExcludedCategoriesForAlternatePresentations()->getIDList());
+    }
+
+    /**
+     * @return int[]
+     */
+    public function getExcludedTracksForUploadPresentationSlideDeck()
+    {
+        return  array_values($this->ExcludedTracksForUploadPresentationSlideDeck()->getIDList());
+    }
 }

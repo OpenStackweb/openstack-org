@@ -330,4 +330,24 @@ interface ISummit extends IEntity
      */
     public function getExternalEventId();
 
+    /**
+     * @return int[]
+     */
+    public function getExcludedTracksForPublishedPresentations();
+
+    /**
+     * @return int[]
+     */
+    public function getExcludedTracksForRejectedPresentations();
+
+    /**
+     * @return int[]
+     */
+    public function getExcludedTracksForAlternatePresentations();
+
+    /**
+     * @return int[]
+     */
+    public function getExcludedTracksForUploadPresentationSlideDeck();
+
 }

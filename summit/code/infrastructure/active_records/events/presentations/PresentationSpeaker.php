@@ -368,16 +368,18 @@ class PresentationSpeaker extends DataObject
      * @param null $summit_id
      * @param string $role
      * @param bool $exclude_privates_tracks
+     * @param array $excluded_tracks
      * @return bool|DataList
      */
-    public function PublishedPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker,  $exclude_privates_tracks = true)
+    public function PublishedPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker,  $exclude_privates_tracks = true, array $excluded_tracks = [])
     {
        return $this->PublishedPresentationsByType
        (
            $summit_id,
            $role,
            [IPresentationType::Keynotes, IPresentationType::Panel, IPresentationType::Presentation, IPresentationType::LightingTalks],
-           $exclude_privates_tracks
+           $exclude_privates_tracks,
+           $excluded_tracks
        );
     }
 
@@ -385,20 +387,24 @@ class PresentationSpeaker extends DataObject
      * @param null $summit_id
      * @param string $role
      * @param bool $include_sub_roles
+     * @param array $excluded_tracks
      * @return ArrayList
      */
     public function PublishedRegularPresentations
     (
         $summit_id = null,
         $role = IPresentationSpeaker::RoleSpeaker,
-        $include_sub_roles = false
+        $include_sub_roles = false,
+        array $excluded_tracks = []
     )
     {
         $list =  $this->PublishedPresentationsByType
         (
             $summit_id,
             $role,
-            [IPresentationType::Keynotes, IPresentationType::Panel, IPresentationType::Presentation]
+            [IPresentationType::Keynotes, IPresentationType::Panel, IPresentationType::Presentation],
+            true,
+            $excluded_tracks
         )->toArray();
 
         if($include_sub_roles && $role == IPresentationSpeaker::RoleModerator){
@@ -406,11 +412,13 @@ class PresentationSpeaker extends DataObject
             (
                 $summit_id,
                 IPresentationSpeaker::RoleSpeaker,
-                [IPresentationType::Keynotes, IPresentationType::Panel, IPresentationType::Presentation]
+                [IPresentationType::Keynotes, IPresentationType::Panel, IPresentationType::Presentation],
+                true,
+                $excluded_tracks
             );
             if($presentations) {
                 foreach ($presentations as $speaker_presentation)
-                    $list[]= $speaker_presentation;
+                    $list[] = $speaker_presentation;
             }
         }
 
@@ -421,35 +429,39 @@ class PresentationSpeaker extends DataObject
      * @param null $summit_id
      * @param string $role
      * @param bool $include_sub_roles
+     * @param array $excluded_tracks
      * @return bool
      */
     public function hasPublishedRegularPresentations
     (
         $summit_id = null,
         $role = IPresentationSpeaker::RoleSpeaker,
-        $include_sub_roles = false
+        $include_sub_roles = false,
+        array $excluded_tracks = []
     )
     {
-        return $this->PublishedRegularPresentations($summit_id, $role, $include_sub_roles)->count() > 0;
+        return $this->PublishedRegularPresentations($summit_id, $role, $include_sub_roles, $excluded_tracks)->count() > 0;
     }
 
     /**
      * @param null $summit_id
      * @param string $role
      * @param bool $include_sub_roles
+     * @param array $excluded_tracks
      * @return ArrayList
      */
     public function PublishedLightningPresentations
     (
         $summit_id = null,
         $role = IPresentationSpeaker::RoleSpeaker,
-        $include_sub_roles = false
+        $include_sub_roles = false,
+        array $excluded_tracks = []
     )
     {
-        $list = $this->PublishedPresentationsByType($summit_id, $role, [IPresentationType::LightingTalks])->toArray();
+        $list = $this->PublishedPresentationsByType($summit_id, $role, [IPresentationType::LightingTalks], true , $excluded_tracks)->toArray();
 
         if($include_sub_roles && $role == IPresentationSpeaker::RoleModerator){
-            $presentations = $this->PublishedPresentationsByType($summit_id, IPresentationSpeaker::RoleSpeaker, [IPresentationType::LightingTalks]) ;
+            $presentations = $this->PublishedPresentationsByType($summit_id, IPresentationSpeaker::RoleSpeaker, [IPresentationType::LightingTalks], true, $excluded_tracks) ;
             if($presentations) {
                 foreach ($presentations as $speaker_presentation) {
                     $list[] = $speaker_presentation;
@@ -464,23 +476,32 @@ class PresentationSpeaker extends DataObject
      * @param null $summit_id
      * @param string $role
      * @param bool $include_sub_roles
+     * @param array $excluded_tracks
      * @return bool
      */
     public function hasPublishedLightningPresentations
     (
         $summit_id = null,
         $role = IPresentationSpeaker::RoleSpeaker,
-        $include_sub_roles = false
+        $include_sub_roles = false,
+        array $excluded_tracks = []
     )
     {
-        return $this->PublishedLightningPresentations($summit_id, $role, $include_sub_roles)->count() > 0;
+        return $this->PublishedLightningPresentations
+                (
+                    $summit_id,
+                    $role,
+                    $include_sub_roles,
+                    $excluded_tracks
+                )->count() > 0;
     }
 
     public function PublishedPresentationsByType(
         $summit_id               = null,
         $role                    = IPresentationSpeaker::RoleSpeaker,
         array $types_slugs       = [IPresentationType::Keynotes, IPresentationType::Panel, IPresentationType::Presentation, IPresentationType::LightingTalks],
-        $exclude_privates_tracks = true
+        $exclude_privates_tracks = true,
+        array $excluded_tracks   = []
     ){
         $summit = !$summit_id ? Summit::get_active() : Summit::get()->byID($summit_id);
         if (!$summit) return false;
@@ -507,7 +528,11 @@ class PresentationSpeaker extends DataObject
         ];
 
         if(count($private_tracks) > 0) {
-            $filter_conditions['CategoryID:ExactMatch:not'] = $private_tracks;
+            $excluded_tracks = array_merge($excluded_tracks, $private_tracks);
+        }
+
+        if(count($excluded_tracks) > 0){
+            $filter_conditions['CategoryID:ExactMatch:not'] = $excluded_tracks;
         }
 
         if($role == IPresentationSpeaker::RoleSpeaker) {
@@ -793,13 +818,15 @@ class PresentationSpeaker extends DataObject
      * @param null|int $summit_id
      * @param string $role
      * @param bool $exclude_privates_tracks
+     * @param array $excluded_tracks
      * @return ArrayList|bool
      */
     public function UnacceptedPresentations
     (
         $summit_id = null,
         $role = IPresentationSpeaker::RoleSpeaker,
-        $exclude_privates_tracks = true
+        $exclude_privates_tracks = true,
+        array $excluded_tracks = []
     )
     {
         $unacceptedPresentations = new ArrayList();
@@ -823,7 +850,11 @@ class PresentationSpeaker extends DataObject
             Presentation::get()->filter(['SummitEvent.SummitID' => $summit->ID, 'ModeratorID' => $this->ID]);
 
         if(count($private_tracks) > 0) {
-            $presentations = $presentations->filter('CategoryID:ExactMatch:not', $private_tracks);
+            $excluded_tracks = array_merge($excluded_tracks, $private_tracks);
+        }
+
+        if(count($excluded_tracks) > 0){
+            $presentations = $presentations->filter('CategoryID:ExactMatch:not', $excluded_tracks);
         }
 
         foreach ($presentations as $p) {
@@ -839,22 +870,30 @@ class PresentationSpeaker extends DataObject
      * @param null $summit_id
      * @param string $role
      * @param bool $include_sub_roles
+     * @param array $excluded_tracks
      * @return ArrayList|bool
      */
     public function AlternatePresentations
     (
         $summit_id = null,
         $role = IPresentationSpeaker::RoleSpeaker,
-        $include_sub_roles = false
+        $include_sub_roles = false,
+        array $excluded_tracks = []
     )
     {
         $alternatePresentations = new ArrayList();
         $summit                 = is_null($summit_id) ? Summit::get_active() : Summit::get()->byID($summit_id);
         if (is_null($summit)) return false;
 
-        $presentations = $role == IPresentationSpeaker::RoleSpeaker ?
-            $this->Presentations()->filter('SummitEvent.SummitID', $summit->ID):
-            Presentation::get()->filter(['SummitEvent.SummitID' => $summit->ID, 'ModeratorID' => $this->ID]);
+        $filters = ['SummitEvent.SummitID' => $summit->ID];
+        if($role == IPresentationSpeaker::RoleModerator)
+            $filters['ModeratorID'] = $this->ID;
+
+        if(count($excluded_tracks) > 0){
+            $filters['CategoryID:ExactMatch:not'] = $excluded_tracks;
+        }
+
+        $presentations = $this->Presentations()->filter($filters);
 
         foreach ($presentations as $p) {
             if ($p->SelectionStatus() == IPresentation::SelectionStatus_Alternate && !$p->isPublished()) {
@@ -864,7 +903,7 @@ class PresentationSpeaker extends DataObject
 
         // if role is moderator, add also the ones that belongs to role speaker ( if $include_sub_roles is true)
         if($include_sub_roles && $role == IPresentationSpeaker::RoleModerator){
-            $presentations = $this->AlternatePresentations($summit_id,IPresentationSpeaker::RoleSpeaker);
+            $presentations = $this->AlternatePresentations($summit_id,IPresentationSpeaker::RoleSpeaker, $include_sub_roles, $excluded_tracks);
             if($presentations) {
                 foreach ($presentations as $speaker_presentation)
                     $alternatePresentations->push($speaker_presentation);
@@ -1020,12 +1059,19 @@ class PresentationSpeaker extends DataObject
      * @param null $summit_id
      * @param string $role
      * @param bool $include_sub_roles
+     * @param array $excluded_tracks
      * @return ArrayList|bool
      */
-    public function RejectedPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker, $include_sub_roles = false){
-        $list = $this->UnacceptedPresentations($summit_id, $role);
+    public function RejectedPresentations
+    (
+        $summit_id = null,
+        $role = IPresentationSpeaker::RoleSpeaker,
+        $include_sub_roles = false,
+        array $excluded_tracks = []
+    ){
+        $list = $this->UnacceptedPresentations($summit_id, $role, true, $excluded_tracks);
         if($include_sub_roles && $role == IPresentationSpeaker::RoleModerator){
-            $presentations = $this->UnacceptedPresentations($summit_id, IPresentationSpeaker::RoleSpeaker);
+            $presentations = $this->UnacceptedPresentations($summit_id, IPresentationSpeaker::RoleSpeaker, true, $excluded_tracks);
             if($presentations) {
                 foreach ($presentations as $speaker_presentation) {
                     $list->push($speaker_presentation);
@@ -1039,11 +1085,18 @@ class PresentationSpeaker extends DataObject
      * @param int $summit_id
      * @param string $role
      * @param bool $include_sub_roles
+     * @param array $excluded_tracks
      * @return bool
      */
-    public function hasRejectedPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker, $include_sub_roles = false)
+    public function hasRejectedPresentations
+    (
+        $summit_id = null,
+        $role = IPresentationSpeaker::RoleSpeaker,
+        $include_sub_roles = false,
+        array $excluded_tracks = []
+    )
     {
-        return $this->RejectedPresentations($summit_id, $role, $include_sub_roles)->count() > 0;
+        return $this->RejectedPresentations($summit_id, $role, $include_sub_roles, $excluded_tracks)->count() > 0;
     }
 
     /**
@@ -1060,16 +1113,18 @@ class PresentationSpeaker extends DataObject
      * @param int $summit_id
      * @param string $role
      * @param bool $include_sub_roles
+     * @param array $excluded_tracks
      * @return bool
      */
     public function hasAlternatePresentations
     (
         $summit_id         = null,
         $role              = IPresentationSpeaker::RoleSpeaker,
-        $include_sub_roles = false
+        $include_sub_roles = false,
+        array $excluded_tracks = []
     )
     {
-        return $this->AlternatePresentations($summit_id, $role, $include_sub_roles)->count() > 0;
+        return $this->AlternatePresentations($summit_id, $role, $include_sub_roles, $excluded_tracks)->count() > 0;
     }
 
     /**
@@ -1407,13 +1462,14 @@ class PresentationSpeaker extends DataObject
 
     /**
      * @param null|int $summit_id
-     * @return mixed
+     * @param array $excluded_tracks
+     * @return ArrayList
      */
-    public function AllPublishedPresentations($summit_id = null)
+    public function AllPublishedPresentations($summit_id = null, array $excluded_tracks = [])
     {
         $res           = [];
-        $p_speaker     = $this->PublishedPresentations($summit_id, IPresentationSpeaker::RoleSpeaker);
-        $p_moderator   = $this->PublishedPresentations($summit_id, IPresentationSpeaker::RoleModerator);
+        $p_speaker     = $this->PublishedPresentations($summit_id, IPresentationSpeaker::RoleSpeaker, true, $excluded_tracks);
+        $p_moderator   = $this->PublishedPresentations($summit_id, IPresentationSpeaker::RoleModerator, true, $excluded_tracks);
         $merge         = array_merge($p_speaker->toArray(), $p_moderator->toArray());
         $already_added = [];
         foreach($merge as $p){

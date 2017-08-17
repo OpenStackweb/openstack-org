@@ -44,12 +44,13 @@ final class PresentationSpeakerAlternateAnnouncementEmailSender implements IMess
         $email->setUserTemplate(PRESENTATION_SPEAKER_ALTERNATE_ONLY_EMAIL)->populateTemplate(
             array
             (
-                'Speaker'              => $speaker,
-                'Role'                 => $role,
-                'ConfirmationLink'     => $speaker->getSpeakerConfirmationLink($summit->ID),
-                'PromoCode'            => $promo_code->getCode(),
-                'Summit'               => $summit,
-                'ScheduleMainPageLink' => $schedule_page->getAbsoluteLiveLink(false),
+                'Speaker'                => $speaker,
+                'Role'                   => $role,
+                'ConfirmationLink'       => $speaker->getSpeakerConfirmationLink($summit->ID),
+                'PromoCode'              => $promo_code->getCode(),
+                'Summit'                 => $summit,
+                'ScheduleMainPageLink'   => $schedule_page->getAbsoluteLiveLink(false),
+                'AlternatePresentations' => $speaker->AlternatePresentations($summit->getIdentifier(), $role,true, $summit->getExcludedTracksForAlternatePresentations())
             )
         )
         ->send();

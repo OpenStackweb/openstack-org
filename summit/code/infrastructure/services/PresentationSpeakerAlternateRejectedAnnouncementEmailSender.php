@@ -44,12 +44,14 @@ final class PresentationSpeakerAlternateRejectedAnnouncementEmailSender implemen
         $email->setUserTemplate(PRESENTATION_SPEAKER_ALTERNATE_REJECTED_EMAIL)->populateTemplate(
             array
             (
-                'Speaker'              => $speaker,
-                'Role'                 => $role,
-                'ConfirmationLink'     => $speaker->getSpeakerConfirmationLink($summit->ID),
-                'PromoCode'            => $promo_code->getCode(),
-                'Summit'               => $summit,
-                'ScheduleMainPageLink' => $schedule_page->getAbsoluteLiveLink(false),
+                'Speaker'                => $speaker,
+                'Role'                   => $role,
+                'ConfirmationLink'       => $speaker->getSpeakerConfirmationLink($summit->ID),
+                'PromoCode'              => $promo_code->getCode(),
+                'Summit'                 => $summit,
+                'ScheduleMainPageLink'   => $schedule_page->getAbsoluteLiveLink(false),
+                'AlternatePresentations' => $speaker->AlternatePresentations($summit->getIdentifier(), $role,true, $summit->getExcludedTracksForAlternatePresentations()),
+                'RejectedPresentations'  => $speaker->RejectedPresentations($summit->getIdentifier(), $role, true, $summit->getExcludedTracksForRejectedPresentations())
             )
         )
         ->send();

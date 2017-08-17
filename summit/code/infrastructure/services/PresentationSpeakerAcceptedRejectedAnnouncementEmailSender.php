@@ -46,12 +46,14 @@ final class PresentationSpeakerAcceptedRejectedAnnouncementEmailSender implement
         $email->setUserTemplate(PRESENTATION_SPEAKER_ACCEPTED_REJECTED_EMAIL)->populateTemplate(
             array
             (
-                'Speaker'              => $speaker,
-                'Role'                 => $role,
-                'ConfirmationLink'     => $speaker->getSpeakerConfirmationLink($summit->ID),
-                'PromoCode'            => $promo_code->getCode(),
-                'Summit'               => $summit,
-                'ScheduleMainPageLink' => $schedule_page->getAbsoluteLiveLink(false),
+                'Speaker'               => $speaker,
+                'Role'                  => $role,
+                'ConfirmationLink'      => $speaker->getSpeakerConfirmationLink($summit->ID),
+                'PromoCode'             => $promo_code->getCode(),
+                'Summit'                => $summit,
+                'ScheduleMainPageLink'  => $schedule_page->getAbsoluteLiveLink(false),
+                'AcceptedPresentations' => $speaker->PublishedRegularPresentations($summit->getIdentifier(), $role,true, $summit->getExcludedTracksForPublishedPresentations()),
+                'RejectedPresentations' => $speaker->RejectedPresentations($summit->getIdentifier(), $role, true, $summit->getExcludedTracksForRejectedPresentations())
             )
         )
         ->send();

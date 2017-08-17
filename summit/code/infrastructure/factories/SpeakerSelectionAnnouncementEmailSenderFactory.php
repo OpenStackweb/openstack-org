@@ -23,10 +23,10 @@ final class SpeakerSelectionAnnouncementEmailSenderFactory implements ISpeakerSe
      */
     public function build(ISummit $summit, IPresentationSpeaker $speaker, $role = IPresentationSpeaker::RoleSpeaker)
     {
-        $has_published = $speaker->hasPublishedRegularPresentations($summit->getIdentifier(), $role, true) ||
-                         $speaker->hasPublishedLightningPresentations($summit->getIdentifier(), $role, true);
-        $has_rejected  = $speaker->hasRejectedPresentations($summit->getIdentifier(), $role, true);
-        $has_alternate = $speaker->hasAlternatePresentations($summit->getIdentifier(), $role, true);
+        $has_published = $speaker->hasPublishedRegularPresentations($summit->getIdentifier(), $role, true, $summit->getExcludedTracksForPublishedPresentations()) ||
+                         $speaker->hasPublishedLightningPresentations($summit->getIdentifier(), $role, true, $summit->getExcludedTracksForPublishedPresentations());
+        $has_rejected  = $speaker->hasRejectedPresentations($summit->getIdentifier(), $role, true, $summit->getExcludedTracksForRejectedPresentations());
+        $has_alternate = $speaker->hasAlternatePresentations($summit->getIdentifier(), $role, true, $summit->getExcludedTracksForAlternatePresentations());
 
         if($has_published && !$has_rejected && !$has_alternate)
             return new PresentationSpeakerAcceptedAnnouncementEmailSender();

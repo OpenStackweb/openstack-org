@@ -39,9 +39,10 @@ final class PresentationSpeakerRejectedAnnouncementEmailSender implements IMessa
         $email->setUserTemplate(PRESENTATION_SPEAKER_REJECTED_EMAIL)->populateTemplate(
             array
             (
-                'Speaker' => $speaker,
-                'Role'    => $role,
-                'Summit'  => $summit,
+                'Speaker'               => $speaker,
+                'Role'                  => $role,
+                'Summit'                => $summit,
+                'RejectedPresentations' => $speaker->RejectedPresentations($summit->getIdentifier(), $role, true, $summit->getExcludedTracksForRejectedPresentations())
             )
         )
         ->send();

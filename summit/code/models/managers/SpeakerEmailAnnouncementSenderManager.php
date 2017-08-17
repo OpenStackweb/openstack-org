@@ -76,6 +76,15 @@ final class SpeakerEmailAnnouncementSenderManager
         $this->promo_code_repository = $promo_code_repository;
     }
 
+    private static $speaker_announcement_excluded_tracks = [
+       23 => [
+           IPresentation::SelectionStatus_Alternate   => [],
+           IPresentation::SelectionStatus_Accepted    => [],
+           IPresentation::SelectionStatus_Unaccepted  => []
+       ]
+    ];
+
+
     public function sendSpeakersSelectionAnnouncementBySummit(ISummit $current_summit, $batch_size)
     {
        return $this->tx_manager->transaction(function () use (
@@ -119,6 +128,7 @@ final class SpeakerEmailAnnouncementSenderManager
                     if ($speaker->announcementEmailAlreadySent($current_summit->ID)) continue;
 
                     $sender_service = $this->sender_factory->build($current_summit, $speaker, IPresentationSpeaker::RoleSpeaker);
+
                     // get registration code
                     if (is_null($sender_service)) {
                         echo sprintf('excluding email to %s', $email).PHP_EOL;
@@ -284,11 +294,6 @@ final class SpeakerEmailAnnouncementSenderManager
         });
     }
 
-    private static $excluded_tracks = [
-        6  => [40, 41, 46, 45, 48],
-        7  => [49, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100],
-        22 => [],
-    ];
 
     /**
      * @param ISummit $current_summit
@@ -298,10 +303,7 @@ final class SpeakerEmailAnnouncementSenderManager
     public function sendUploadSlidesAnnouncementBySummit(ISummit $current_summit, $batch_size)
     {
         return $this->tx_manager->transaction(function () use ($current_summit, $batch_size) {
-            if (!isset(self::$excluded_tracks[$current_summit->getIdentifier()]))
-                throw new EntityValidationException($errors = [sprintf("exclude tracks not set for summit id %s", $current_summit->getIdentifier())]);
-
-            list($count, $speakers) = $this->speaker_repository->searchSpeakerBySummitPaginatedForUploadSlidesAnnouncement($current_summit, 1, $batch_size, self::$excluded_tracks[$current_summit->getIdentifier()]);
+            list($count, $speakers) = $this->speaker_repository->searchSpeakerBySummitPaginatedForUploadSlidesAnnouncement($current_summit, 1, $batch_size, $current_summit->getExcludedTracksForUploadPresentationSlideDeck());
             $send                   = 0;
 
             foreach ($speakers as $speaker) {

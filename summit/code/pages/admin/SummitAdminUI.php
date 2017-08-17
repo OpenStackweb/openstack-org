@@ -72,7 +72,7 @@ final class SummitAdminUI extends DataExtension
 
         $link->setDescription('The link to the site page for this summit. Eg: <em>/summit/vancouver-2015/</em>');
         $f->addFieldToTab('Root.Main', new CheckboxField('Active', 'This is the active summit'));
-        $f->addFieldToTab('Root.Main', new CheckboxField('AvailableOnApi', 'Is this Summit available through API?'));
+        $f->addFieldToTab('Root.Main', new CheckboxField('AvailableOnApi', 'Is this Summit available through API? (If True this Summit will be available to Mobile Apps)'));
 
         $f->addFieldToTab('Root.Main', $date_label = new TextField('DateLabel', 'Date label'));
         $date_label->setDescription('A readable piece of text representing the date, e.g. <em>May 12-20, 2015</em> or <em>December 2016</em>');
@@ -367,7 +367,6 @@ final class SummitAdminUI extends DataExtension
             $config->addComponent(new GridFieldApprovePushNotificationAction);
             $gridField = new GridField('Notifications', 'Notifications', $this->owner->Notifications(), $config);
 
-
             $f->addFieldToTab('Root.PushNotifications', $gridField);
 
             // entity events
@@ -418,6 +417,40 @@ final class SummitAdminUI extends DataExtension
             $gridField = new GridField('WIFIConnections', 'WIFI Connections', $this->owner->WIFIConnections(), $config);
             $f->addFieldToTab('Root.WIFI Connections', $gridField);
 
+            // summit speaker announcement email
+
+            // ExcludedCategoriesForAcceptedPresentations
+            $config = GridFieldConfig_RelationEditor::create(50);
+            $completer = $config->getComponentByType('GridFieldAddExistingAutocompleter');
+            $completer->setResultsFormat('$Title ($ID)');
+            $completer->setSearchFields(array('Title', 'ID'));
+            $completer->setSearchList($this->owner->Categories());
+            $categories = new GridField('ExcludedCategoriesForAcceptedPresentations', 'Excluded Categories For Accepted Presentations (Announcement/Second Break Out Email)', $this->owner->ExcludedCategoriesForAcceptedPresentations(), $config);
+            $f->addFieldToTab('Root.Speakers Emails', $categories);
+            // ExcludedCategoriesForAlternatePresentations
+            $config = GridFieldConfig_RelationEditor::create(50);
+            $completer = $config->getComponentByType('GridFieldAddExistingAutocompleter');
+            $completer->setResultsFormat('$Title ($ID)');
+            $completer->setSearchFields(array('Title', 'ID'));
+            $completer->setSearchList($this->owner->Categories());
+            $categories = new GridField('ExcludedCategoriesForAlternatePresentations', 'Excluded Categories For Alternate Presentations (Announcement Email)', $this->owner->ExcludedCategoriesForAlternatePresentations(), $config);
+            $f->addFieldToTab('Root.Speakers Emails', $categories);
+            // ExcludedCategoriesForRejectedPresentations
+            $config = GridFieldConfig_RelationEditor::create(50);
+            $completer = $config->getComponentByType('GridFieldAddExistingAutocompleter');
+            $completer->setResultsFormat('$Title ($ID)');
+            $completer->setSearchFields(array('Title', 'ID'));
+            $completer->setSearchList($this->owner->Categories());
+            $categories = new GridField('ExcludedCategoriesForRejectedPresentations', 'Excluded Categories For Rejected Presentations (Announcement Email)', $this->owner->ExcludedCategoriesForRejectedPresentations(), $config);
+            $f->addFieldToTab('Root.Speakers Emails', $categories);
+            // ExcludedTracksForUploadPresentationSlideDeck
+            $config = GridFieldConfig_RelationEditor::create(50);
+            $completer = $config->getComponentByType('GridFieldAddExistingAutocompleter');
+            $completer->setResultsFormat('$Title ($ID)');
+            $completer->setSearchFields(array('Title', 'ID'));
+            $completer->setSearchList($this->owner->Categories());
+            $categories = new GridField('ExcludedTracksForUploadPresentationSlideDeck', 'Excluded Tracks For Upload Presentation Slide Deck Email', $this->owner->ExcludedTracksForUploadPresentationSlideDeck(), $config);
+            $f->addFieldToTab('Root.Speakers Emails', $categories);
         }
     }
 

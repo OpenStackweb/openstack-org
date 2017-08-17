@@ -20,5 +20,10 @@ interface ISpeakerSelectionAnnouncementSenderFactory
      * @param string $role
      * @return IMessageSenderService
      */
-    public function build(ISummit $summit, IPresentationSpeaker $speaker, $role = IPresentationSpeaker::RoleSpeaker);
+    public function build
+    (
+        ISummit $summit,
+        IPresentationSpeaker $speaker,
+        $role = IPresentationSpeaker::RoleSpeaker
+    );
 }

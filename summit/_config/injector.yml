@@ -274,3 +274,6 @@ Injector:
   SpeakerSecondBreakoutEmailSenderTask:
     constructor:
       0: '%$SpeakerSecondBreakoutAnnouncementSenderManager'
+  SpeakerUploadSlidesEmailSenderTask:
+    constructor:
+      0: '%$SpeakerEmailAnnouncementSenderManager'

@@ -186,14 +186,6 @@ interface IPresentationSpeaker extends IEntity
     public function hasHadPublishedPresentations($role = IPresentationSpeaker::RoleSpeaker);
 
     /**
-     * @param int $summit_id
-     * @param string $role
-     * @param bool $include_sub_roles
-     * @return bool
-     */
-    public function hasAlternatePresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker, $include_sub_roles = false);
-
-    /**
      * @param ISpeakerSummitRegistrationPromoCode $promo_code
      * @return $this
      */
@@ -334,21 +326,6 @@ interface IPresentationSpeaker extends IEntity
     public function UnacceptedPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker);
 
     /**
-     * @param null $summit_id
-     * @param string $role
-     * @param bool $include_sub_roles
-     * @return ArrayList|bool
-     */
-    public function RejectedPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker, $include_sub_roles = false);
-
-    /**
-     * @param null $summit_id
-     * @param string $role
-     * @param bool $include_sub_roles
-     * @return int
-     */
-    public function hasRejectedPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker, $include_sub_roles = false);
-    /**
      * @param null|int $summit_id
      * @param string $role
      * @return ArrayList|bool
@@ -358,23 +335,18 @@ interface IPresentationSpeaker extends IEntity
     /**
      * @param null $summit_id
      * @param string $role
-     * @param bool $include_sub_roles
-     * @return ArrayList|bool
+     * @param bool $exclude_privates_tracks
+     * @param array $excluded_tracks
+     * @return bool|DataList
      */
-    public function AlternatePresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker, $include_sub_roles = false);
+    public function PublishedPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker,  $exclude_privates_tracks = true, array $excluded_tracks = []);
 
     /**
      * @param null|int $summit_id
-     * @param string $role
-     * @return mixed
+     * @param array $excluded_tracks
+     * @return ArrayList
      */
-    public function PublishedPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker);
-
-    /**
-     * @param null|int $summit_id
-     * @return mixed
-     */
-    public function AllPublishedPresentations($summit_id = null);
+    public function AllPublishedPresentations($summit_id = null, array $excluded_tracks = []);
 
     /**
      * @param ISummit $summit
@@ -392,51 +364,120 @@ interface IPresentationSpeaker extends IEntity
      * @param null $summit_id
      * @param string $role
      * @param bool $include_sub_roles
+     * @param array $excluded_tracks
      * @return DataList
      */
     public function PublishedRegularPresentations
     (
         $summit_id = null,
         $role = IPresentationSpeaker::RoleSpeaker,
-        $include_sub_roles = false
+        $include_sub_roles = false,
+        array $excluded_tracks = []
     );
 
     /**
      * @param null $summit_id
      * @param string $role
      * @param bool $include_sub_roles
+     * @param array $excluded_tracks
      * @return DataList
      */
     public function hasPublishedRegularPresentations
     (
         $summit_id = null,
         $role = IPresentationSpeaker::RoleSpeaker,
-        $include_sub_roles = false
+        $include_sub_roles = false,
+        array $excluded_tracks = []
     );
 
     /**
      * @param null $summit_id
      * @param string $role
      * @param bool $include_sub_roles
+     * @param array $excluded_tracks
      * @return DataList
      */
     public function PublishedLightningPresentations
     (
         $summit_id = null,
         $role = IPresentationSpeaker::RoleSpeaker,
-        $include_sub_roles = false
+        $include_sub_roles = false,
+        array $excluded_tracks = []
     );
 
     /**
      * @param null $summit_id
      * @param string $role
      * @param bool $include_sub_roles
+     * @param array $excluded_tracks
      * @return bool
      */
     public function hasPublishedLightningPresentations
     (
         $summit_id = null,
         $role = IPresentationSpeaker::RoleSpeaker,
-        $include_sub_roles = false
+        $include_sub_roles = false,
+        array $excluded_tracks = []
     );
+
+    /**
+     * @param null $summit_id
+     * @param string $role
+     * @param bool $include_sub_roles
+     * @param array $excluded_tracks
+     * @return ArrayList|bool
+     */
+    public function AlternatePresentations
+    (
+        $summit_id = null,
+        $role = IPresentationSpeaker::RoleSpeaker,
+        $include_sub_roles = false,
+        array $excluded_tracks = []
+    );
+
+    /**
+     * @param int $summit_id
+     * @param string $role
+     * @param bool $include_sub_roles
+     * @param array $excluded_tracks
+     * @return bool
+     */
+    public function hasAlternatePresentations
+    (
+        $summit_id = null,
+        $role = IPresentationSpeaker::RoleSpeaker,
+        $include_sub_roles = false,
+        array $excluded_tracks = []
+    );
+
+    /**
+     * @param null $summit_id
+     * @param string $role
+     * @param bool $include_sub_roles
+     * @param array $excluded_tracks
+     * @return ArrayList|bool
+     */
+    public function RejectedPresentations
+    (
+        $summit_id = null,
+        $role = IPresentationSpeaker::RoleSpeaker,
+        $include_sub_roles = false,
+        array $excluded_tracks = []
+    );
+
+    /**
+     * @param null $summit_id
+     * @param string $role
+     * @param bool $include_sub_roles
+     * @param array $excluded_tracks
+     * @return int
+     */
+    public function hasRejectedPresentations
+    (
+        $summit_id = null,
+        $role = IPresentationSpeaker::RoleSpeaker,
+        $include_sub_roles = false,
+        array $excluded_tracks = []
+    );
+
 }
