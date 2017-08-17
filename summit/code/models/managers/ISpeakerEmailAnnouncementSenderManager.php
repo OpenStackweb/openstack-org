@@ -35,4 +35,13 @@ interface ISpeakerEmailAnnouncementSenderManager
      */
     public function sendUploadSlidesAnnouncementBySummit(ISummit $current_summit, $batch_size);
 
+    /**
+     * @param IPresentationSpeaker $speaker
+     * @param ISummit $current_summit
+     * @param bool|string $role
+     * @param bool $check_email_existance
+     * @return bool
+     */
+    public function sendSelectionAnnouncementEmailForSpeaker(IPresentationSpeaker $speaker, ISummit $current_summit, $role = IPresentationSpeaker::RoleSpeaker, $check_email_existance = true);
+
 }

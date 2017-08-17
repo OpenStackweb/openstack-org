@@ -889,11 +889,14 @@ class PresentationSpeaker extends DataObject
         if($role == IPresentationSpeaker::RoleModerator)
             $filters['ModeratorID'] = $this->ID;
 
+
         if(count($excluded_tracks) > 0){
             $filters['CategoryID:ExactMatch:not'] = $excluded_tracks;
         }
 
-        $presentations = $this->Presentations()->filter($filters);
+        $presentations = $role == IPresentationSpeaker::RoleSpeaker ?
+            $this->Presentations()->filter($filters):
+            Presentation::get()->filter($filters);
 
         foreach ($presentations as $p) {
             if ($p->SelectionStatus() == IPresentation::SelectionStatus_Alternate && !$p->isPublished()) {

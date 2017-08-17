@@ -277,3 +277,6 @@ Injector:
   SpeakerUploadSlidesEmailSenderTask:
     constructor:
       0: '%$SpeakerEmailAnnouncementSenderManager'
+  IndividualSpeakerSelectionAnnouncementEmailSenderTask:
+    constructor:
+      0: '%$SpeakerEmailAnnouncementSenderManager'
