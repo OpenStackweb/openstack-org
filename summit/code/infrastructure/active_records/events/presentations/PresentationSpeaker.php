@@ -917,6 +917,18 @@ class PresentationSpeaker extends DataObject
     }
 
     /**
+     * @param ISummit $summit
+     * @return bool
+     */
+    public function isModeratorFor(ISummit $summit){
+        $filters = [
+            'SummitEvent.SummitID' => $summit->ID,
+            'ModeratorID'          => $this->ID
+        ];
+        return Presentation::get()->filter($filters)->count() > 0;
+    }
+
+    /**
      * @param int $summit_id
      * @return string
      * @throws EntityValidationException

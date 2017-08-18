@@ -480,4 +480,10 @@ interface IPresentationSpeaker extends IEntity
         array $excluded_tracks = []
     );
 
+    /**
+     * @param ISummit $summit
+     * @return bool
+     */
+    public function isModeratorFor(ISummit $summit);
+
 }

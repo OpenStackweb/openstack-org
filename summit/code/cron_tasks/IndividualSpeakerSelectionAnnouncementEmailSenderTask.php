@@ -39,10 +39,20 @@ final class IndividualSpeakerSelectionAnnouncementEmailSenderTask extends CronTa
             $init_time  = time();
             $summit     = null;
             $speaker    = null;
-            $role       = IPresentationSpeaker::RoleSpeaker;
-            if (isset($_GET['member_id']))
+
+            if (isset($_GET['email']))
             {
-                $speaker =  PresentationSpeaker::get()->filter("MemberID", $_GET['member_id'])->first();
+                $email   = $_GET['email'];
+                $speaker =  PresentationSpeaker::get()
+                    ->innerJoin("Member", "Member.ID = PresentationSpeaker.MemberID" )
+                    ->where("Member.Email = '{$email}' ")
+                    ->first();
+                if(is_null($speaker)){
+                    $speaker =  PresentationSpeaker::get()
+                        ->innerJoin("SpeakerRegistrationRequest", "SpeakerRegistrationRequest.ID = PresentationSpeaker.RegistrationRequestID" )
+                        ->where("SpeakerRegistrationRequest.Email = '{$email}' ")
+                        ->first();
+                }
             }
 
             if (isset($_GET['summit_id']))
@@ -50,14 +60,10 @@ final class IndividualSpeakerSelectionAnnouncementEmailSenderTask extends CronTa
                 $summit = Summit::get()->byID(intval($_GET['summit_id']));
             }
 
-            if (isset($_GET['role']))
-            {
-               if($_GET['role'] == 2)
-                   $role       = IPresentationSpeaker::RoleModerator;
-            }
-
             if(is_null($summit)) throw new Exception('summit_id is not valid!');
-            if(is_null($speaker)) throw new Exception('member_id is not valid!');
+            if(is_null($speaker)) throw new Exception('speaker is not valid!');
+
+            $role = $speaker->isModeratorFor($summit) ? IPresentationSpeaker::RoleModerator : IPresentationSpeaker::RoleSpeaker;
 
             echo sprintf("sending individual mail for %s speaker as role %s", $speaker->getEmail(), $role).PHP_EOL;
 
