@@ -107,7 +107,11 @@ final class SpeakerEmailAnnouncementSenderManager
 
             $code = null;
 
-            if ($speaker->hasPublishedPresentations($current_summit->getIdentifier(), $role)) //get approved code
+            $has_published = $speaker->hasPublishedRegularPresentations($current_summit->getIdentifier(), $role, true, $current_summit->getExcludedTracksForPublishedPresentations()) ||
+                             $speaker->hasPublishedLightningPresentations($current_summit->getIdentifier(), $role, true, $current_summit->getExcludedTracksForPublishedPresentations());
+            $has_alternate = $speaker->hasAlternatePresentations($current_summit->getIdentifier(), $role, true, $current_summit->getExcludedTracksForAlternatePresentations());
+
+            if ($has_published) //get approved code
             {
                 $code = $this->promo_code_repository->getNextAvailableByType
                 (
@@ -115,7 +119,7 @@ final class SpeakerEmailAnnouncementSenderManager
                     ISpeakerSummitRegistrationPromoCode::TypeAccepted
                 );
                 if (is_null($code)) throw new Exception('not available promo code!!!');
-            } else if ($speaker->hasAlternatePresentations($current_summit->getIdentifier(), $role)) // get alternate code
+            } else if ($has_alternate) // get alternate code
             {
                 $code = $this->promo_code_repository->getNextAvailableByType
                 (
