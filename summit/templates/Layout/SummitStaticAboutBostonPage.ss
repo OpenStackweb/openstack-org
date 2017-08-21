@@ -154,6 +154,36 @@
         </div>
       </div>
     </div>
+    <div class="row">
+      <div class="col-sm-3 featured">
+        <div class="summit-user-section">
+          <img src="/assets/sydney-summit/speakers/Joseph-Sandoval.jpg" alt="Joseph Sandoval" class="summit-user-image">
+          <div class="name">Joseph Sandoval</div>
+          <div class="title">Cloud Platform Manager, Adobe Marketing Cloud</div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="summit-user-section">
+          <img src="/assets/boston-summit/speakers/Mark-Collier2.jpg" alt="Mark Collier" class="summit-user-image">
+          <div class="name">Mark Collier</div>
+          <div class="title">COO, OpenStack Foundation</div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="summit-user-section">
+          <img src="/assets/sydney-summit/speakers/ecatarinagamanji.jpg" alt="Lauren Sell" class="summit-user-image">
+          <div class="name">Ecatarina Gamanji</div>
+          <div class="title">Infrastructure Automation Engineer, Paddy Power Betfair</div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="summit-user-section">
+          <img src="/assets/boston-summit/speakers/Jonathan-Bryce2.jpg" alt="Jonathan Bryce" class="summit-user-image">
+          <div class="name">Jonathan Bryce</div>
+          <div class="title">Executive Director, OpenStack Foundation</div>
+        </div>
+      </div>
+    </div>
     <!-- <div class="row">
       <div class="col-sm-12">
         <div class="summit-user-section ">
