@@ -91,66 +91,66 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-        <h2>Featured Speakers from the Boston Summit</h2>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-3 featured">
-        <div class="summit-user-section ">
-          <img src="/assets/boston-summit/speakers/Brian-Stevens.jpg" alt="Brian Stevens" class="summit-user-image">
-          <div class="name">Brian Stevens</div>
-          <div class="title">Vice President Cloud Platforms, Google</div>
-        </div>
-      </div>
-      <div class="col-sm-3 featured">
-        <div class="summit-user-section">
-          <img src="/assets/Uploads/Profile-GauravGupta.jpg" alt="Gaurav Gupta" class="summit-user-image">
-          <div class="name">Gaurav Gupta</div>
-          <div class="title">VP of Engineering, Snapdeal</div>
-        </div>
-      </div>
-      <div class="col-sm-3 featured">
-        <div class="summit-user-section">
-          <img src="/assets/boston-summit/speakers/Suneet.jpg" alt="Suneet Nandwani" class="summit-user-image">
-          <div class="name">Suneet Nandwani</div>
-          <div class="title">Sr. Director, Cloud Infrastructure and Platforms, eBay Inc.</div>
-        </div>
-      </div>
-      <div class="col-sm-3">
-        <div class="summit-user-section">
-          <img src="//www.openstack.org/assets/boston-summit/speakers/Mark-Collier3.jpg" alt="Mark Collier" class="summit-user-image">
-          <div class="name">Mark Collier</div>
-          <div class="title">COO, OpenStack Foundation</div>
-        </div>
+        <h2>Featured Speakers</h2>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-3 featured">
         <div class="summit-user-section">
-          <img src="/assets/boston-summit/speakers/Merce-Crosas.jpg" alt="Mercè Crosas" class="summit-user-image">
-          <div class="name">Mercè Crosas</div>
-          <div class="title">Chief Data Science and Technology Officer at IQSS, Harvard University</div>
-        </div>
-      </div>
-      <div class="col-sm-3">
-        <div class="summit-user-section">
-          <img src="//www.openstack.org/assets/boston-summit/speakers/Jonathan-Bryce2.jpg" alt="Jonathan Bryce" class="summit-user-image">
-          <div class="name">Jonathan Bryce</div>
-          <div class="title">Executive Director, OpenStack Foundation</div>
-        </div>
-      </div>
-      <div class="col-sm-3">
-        <div class="summit-user-section">
-          <img src="/assets/barcelona-summit/featured-speakers/annilai.jpg" alt="Anni Lai" class="summit-user-image">
+          <img src="/assets/sydney-summit/speakers/Anni-Lai.jpg" alt="Anni Lai" class="summit-user-image">
           <div class="name">Anni Lai</div>
           <div class="title">Head of Global Business Development, Huawei</div>
         </div>
       </div>
+      <div class="col-sm-3 featured">
+        <div class="summit-user-section">
+          <img src="/assets/sydney-summit/speakers/Jessica-Field.jpg" alt="Jessica Field" class="summit-user-image">
+          <div class="name">Jessica Field</div>
+          <div class="title">OpenStack APAC Ambassador</div>
+        </div>
+      </div>
+      <div class="col-sm-3 featured">
+        <div class="summit-user-section">
+          <img src="/assets/sydney-summit/speakers/Lew-Tucker.jpg" alt="Lew Tucker" class="summit-user-image">
+          <div class="name">Lew Tucker</div>
+          <div class="title">Vice President and CTO, Cloud Computing, Cisco</div>
+        </div>
+      </div>
       <div class="col-sm-3">
         <div class="summit-user-section">
-          <img src="/assets/boston-summit/speakers/JunweiLiu.jpg" alt="Junwei Liu" class="summit-user-image">
-          <div class="name">Junwei Liu</div>
-          <div class="title">Assistant General Manager of Cloud Computing Products Division, China Mobile</div>
+          <img src="/assets/sydney-summit/speakers/Quinton-Anderson.jpg" alt="Quinton Anderson" class="summit-user-image">
+          <div class="name">Quinton Anderson</div>
+          <div class="title">Head of Systems Engineering, Analytics and Information, Commonwealth Bank</div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3 featured">
+        <div class="summit-user-section">
+          <img src="/assets/sydney-summit/speakers/Sorabh-Saxena.jpg" alt="Sorabh Saxena" class="summit-user-image">
+          <div class="name">Sorabh Saxena</div>
+          <div class="title">CIO of Network and Shared Services, AT&T</div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="summit-user-section">
+          <img src="/assets/sydney-summit/speakers/Steven-Armstrong.jpg" alt="Steven Armstrong" class="summit-user-image">
+          <div class="name">Steven Armstrong</div>
+          <div class="title">Principal DevOps Automation Engineer, Paddy Power Betfair</div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="summit-user-section">
+          <img src="/assets/sydney-summit/speakers/Talal-AlBakr.jpg" alt="Talal AlBakr" class="summit-user-image">
+          <div class="name">Talal AlBakr</div>
+          <div class="title">Vice President of Cloud Services, STC Solutions</div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="summit-user-section">
+          <img src="/assets/Uploads/LaurenSell.jpg" alt="Lauren Sell" class="summit-user-image">
+          <div class="name">Lauren Sell</div>
+          <div class="title">Vice President, Marketing and Community Services</div>
         </div>
       </div>
     </div>
