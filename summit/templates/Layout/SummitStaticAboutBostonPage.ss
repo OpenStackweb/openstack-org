@@ -148,7 +148,7 @@
       </div>
       <div class="col-sm-3">
         <div class="summit-user-section">
-          <img src="/assets/Uploads/LaurenSell.jpg" alt="Lauren Sell" class="summit-user-image">
+          <img src="/assets/sydney-summit/speakers/14efec9.jpg" alt="Lauren Sell" class="summit-user-image">
           <div class="name">Lauren Sell</div>
           <div class="title">Vice President, Marketing and Community Services</div>
         </div>
