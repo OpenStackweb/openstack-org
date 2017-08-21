@@ -1110,7 +1110,7 @@ a.promo-btn {
   color: white;
   font-size: 16px;
   font-weight: 400;
-  background: #4CA3EA;
+  background: #DA422F;
   border-radius: 4px;
   padding: 7px 60px;
   margin: 0 auto;
@@ -1123,7 +1123,7 @@ a.promo-btn {
 a.promo-btn:hover, a.promo-btn:focus  {
   text-decoration: none;
   /*background: rgba(255, 255, 255, 0.2);*/
-  background: #3E83BA; 
+  background: #A51B1B; 
   }
 
 .promo-btn-wrapper {
