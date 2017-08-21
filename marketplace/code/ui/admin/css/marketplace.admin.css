@@ -167,3 +167,26 @@ select.error{
 .left-inner-addon input {
     padding-left: 30px;
 }
+
+/* BOOKS */
+
+#book_form #title {
+    width: 540px;
+}
+
+#book_form #link {
+    width: 540px;
+}
+
+#book_form #description {
+    width: 540px;
+    height: 60px
+}
+
+#book_form #image_preview {
+    height: 100px
+}
+
+#book_form label {
+    margin-top: 20px;
+}

@@ -23,6 +23,10 @@ class MarketPlaceDirectoryPage extends MarketPlacePage
 		'GARemarketingOnly'    => 'Boolean',
 		'RatingCompanyID'      => 'Int',
 		'RatingBoxID'          => 'Int',
+        'OnlineDocsLink'       => 'Varchar(255)',
+        'OperationsGuideLink'  => 'Varchar(255)',
+        'SecurityGuideLink'    => 'Varchar(255)',
+        'GettingStartedLink'   => 'Varchar(255)',
 	);
 
 	static $defaults = array(
@@ -44,7 +48,13 @@ class MarketPlaceDirectoryPage extends MarketPlacePage
 		$fields->addFieldToTab("Root.RatingBoxWidget",new LiteralField('Label','** more info at <a href="http://www.rating-system.com/integration/UserGuide.aspx">User Guide</a>'));
 		$fields->addFieldToTab("Root.RatingBoxWidget",new TextField("RatingCompanyID","Company ID",4398));
 		$fields->addFieldToTab("Root.RatingBoxWidget",new TextField("RatingBoxID","Rating Box ID",11919));
-		return $fields;
+
+        $fields->addFieldToTab("Root.Main", new TextField("OnlineDocsLink","OnlineDocs Link"), 'Content');
+        $fields->addFieldToTab("Root.Main", new TextField("OperationsGuideLink","OperationsGuide Link"), 'Content');
+        $fields->addFieldToTab("Root.Main", new TextField("SecurityGuideLink","SecurityGuide Link"), 'Content');
+        $fields->addFieldToTab("Root.Main", new TextField("GettingStartedLink","GettingStarted Link"), 'Content');
+
+        return $fields;
 	}
 
 	static $allowed_children = "none";
@@ -201,5 +211,37 @@ class MarketPlaceDirectoryPage_Controller extends MarketPlacePage_Controller {
     {
         if ($a->Created==$b->Created) return 0;
         return (strtotime($a->Created) < strtotime($b->Created)) ? 1 : -1;
+    }
+
+    public function getOnlineDocsUrl() {
+        $field = $this->OnlineDocsLink;
+        if (empty($field))
+            return 'http://docs.openstack.org';
+        else
+            return $field;
+    }
+
+    public function getOperationsGuideUrl() {
+        $field = $this->OperationsGuideLink;
+        if (empty($field))
+            return 'http://docs.openstack.org/ops';
+        else
+            return $field;
+    }
+
+    public function getSecurityGuideUrl() {
+        $field = $this->SecurityGuideLink;
+        if (empty($field))
+            return 'http://docs.openstack.org/security-guide';
+        else
+            return $field;
+    }
+
+    public function getGettingStartedUrl() {
+        $field = $this->GettingStartedLink;
+        if (empty($field))
+            return 'http://www.openstack.org/software/start';
+        else
+            return $field;
     }
 }

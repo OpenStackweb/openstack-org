@@ -247,4 +247,24 @@ class ValidatorFactory
 
 		return ValidatorService::make($data, $rules, $messages);
 	}
+
+    public function buildValidatorForBook(array $data)
+    {
+        $rules = array(
+            'title'             => 'required|text',
+            'link'              => 'required|url',
+            'company_id'        => 'required|integer',
+        );
+
+        $messages = array(
+            'title.required'             => ':attribute is required',
+            'title.text'                 => ':attribute should be valid text.',
+            'link.required'              => ':attribute is required',
+            'link.url'                   => ':attribute should be valid url.',
+            'company_id.required'        => ':attribute is required',
+            'company_id.boolean'         => ':attribute should be valid integer value',
+        );
+
+        return ValidatorService::make($data, $rules, $messages);
+    }
 }

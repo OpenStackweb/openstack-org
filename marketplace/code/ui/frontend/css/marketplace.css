@@ -715,8 +715,7 @@ ul.marketplace-nav {
     border-right: none;
     text-align: center;
     padding: 5px 0;
-    margin: 5px 0.5%;
-    width: 12.7%; }
+    margin: 5px 0.5%;}
     ul.marketplace-nav li a {
       color: #333;
       padding-bottom: 5px;
@@ -944,3 +943,11 @@ a.marketplace-consider-btn {
 img.marketplace-single-icon {
   width: 70px;
   margin: 0 auto; }
+
+/* books */
+#books-list .company-details-area h4 {
+    margin-bottom: 5px;
+}
+#books-list .company-name {
+    font-size: 10px;
+}
