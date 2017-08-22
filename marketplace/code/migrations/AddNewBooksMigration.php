@@ -34,6 +34,7 @@ final class AddNewBooksMigration extends AbstractDBMigrationTask {
             [
                 'title' => 'OpenStack Administration with Ansible',
                 'link'  => 'https://www.packtpub.com/virtualization-and-cloud/openstack-administration-ansible',
+                'description' => '',
                 'company_id' => $company->ID,
                 'authors' => [
                     ['first_name' => 'Walter', 'last_name' => 'Bentley']
@@ -42,6 +43,7 @@ final class AddNewBooksMigration extends AbstractDBMigrationTask {
             [
                 'title' => 'Troubleshooting OpenStack',
                 'link'  => 'https://www.packtpub.com/virtualization-and-cloud/troubleshooting-openstack',
+                'description' => '',
                 'company_id' => $company->ID,
                 'authors' => [
                     ['first_name' => 'Tony', 'last_name' => 'Campbell']
@@ -50,6 +52,7 @@ final class AddNewBooksMigration extends AbstractDBMigrationTask {
             [
                 'title' => 'OpenStack Trove Essentials',
                 'link'  => 'https://www.packtpub.com/virtualization-and-cloud/openstack-trove-essentials',
+                'description' => '',
                 'company_id' => $company->ID,
                 'authors' => [
                     ['first_name' => 'Alok', 'last_name' => 'Shrivastwa'],
@@ -59,6 +62,7 @@ final class AddNewBooksMigration extends AbstractDBMigrationTask {
             [
                 'title' => 'OpenStack Networking Essentials',
                 'link'  => 'https://www.packtpub.com/virtualization-and-cloud/openstack-networking-essentials',
+                'description' => '',
                 'company_id' => $company->ID,
                 'authors' => [
                     ['first_name' => 'James', 'last_name' => 'Denton']
@@ -67,6 +71,7 @@ final class AddNewBooksMigration extends AbstractDBMigrationTask {
             [
                 'title' => 'OpenStack Sahara Essentials',
                 'link'  => 'https://www.packtpub.com/virtualization-and-cloud/openstack-sahara-essentials',
+                'description' => '',
                 'company_id' => $company->ID,
                 'authors' => [
                     ['first_name' => 'Omar', 'last_name' => 'Khedher']
@@ -75,6 +80,7 @@ final class AddNewBooksMigration extends AbstractDBMigrationTask {
             [
                 'title' => 'OpenStack Essentials - Second Edition',
                 'link'  => 'https://www.packtpub.com/virtualization-and-cloud/openstack-essentials-second-edition',
+                'description' => '',
                 'company_id' => $company->ID,
                 'authors' => [
                     ['first_name' => 'Dan', 'last_name' => 'Radez']
@@ -83,6 +89,7 @@ final class AddNewBooksMigration extends AbstractDBMigrationTask {
             [
                 'title' => 'Software-Defined Networking (SDN) with OpenStack',
                 'link'  => 'https://www.packtpub.com/virtualization-and-cloud/software-defined-networking-sdn-openstack',
+                'description' => '',
                 'company_id' => $company->ID,
                 'authors' => [
                     ['first_name' => 'Sriram', 'last_name' => 'Subramanian'],
@@ -92,6 +99,7 @@ final class AddNewBooksMigration extends AbstractDBMigrationTask {
             [
                 'title' => 'OpenStack: Building a Cloud Environment (Course)',
                 'link'  => 'https://www.packtpub.com/virtualization-and-cloud/openstack-building-cloud-environment',
+                'description' => '',
                 'company_id' => $company->ID,
                 'authors' => [
                     ['first_name' => 'Alok', 'last_name' => 'Shrivastwa'],

@@ -78,3 +78,4 @@ migrations:
   - UpgradeSurveyLangMigration
   - NewMarketplaceTypeBookSeedTask
   - AddNewBooksMigration
+  - AddMarketPlaceHelpLinksMigration

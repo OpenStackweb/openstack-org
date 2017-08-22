@@ -64,6 +64,10 @@ final class BookManager implements IBookManager
     {
         $authors = [];
 
+        $title = (isset($data['title'])) ? Convert::raw2sql($data['title']) : '';
+        $link = (isset($data['link'])) ? Convert::raw2sql($data['link']) : '';
+        $description = (isset($data['description'])) ? Convert::raw2sql($data['description']) : '';
+
         if (array_key_exists('authors', $data) && is_array($data['authors'])) {
             $reference_author_data = $data['authors'];
             foreach ($reference_author_data as $author_data) {
@@ -82,9 +86,9 @@ final class BookManager implements IBookManager
         }
 
         $book = $this->factory->buildBook(
-            Convert::raw2sql($data['title']),
-            Convert::raw2sql($data['link']),
-            Convert::raw2sql($data['description']),
+            $title,
+            $link,
+            $description,
             $company,
             $authors
         );

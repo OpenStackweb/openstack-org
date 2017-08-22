@@ -26,39 +26,25 @@
         <% end_if %>
     </div>
     <div class="col-sm-4">
-        <h3>OpenStack Online Help</h3>
-        <ul class="resource-links">
-            <li>
-                <a href="{$OnlineDocsUrl}" class="outbound-link">Online Docs</a>
-            </li>
-            <li>
-                <a href="{$OperationsGuideUrl}" class="outbound-link">Operations Guide</a>
-            </li>
-            <li>
-                <a href="{$SecurityGuideUrl}" class="outbound-link">Security Guide</a>
-            </li>
-            <li>
-                <a href="{$GettingStartedUrl}" class="outbound-link">Getting Started</a>
-            </li>
-        </ul>
+        <% include MarketPlaceHelpLinks %>
         <% if UpcomingCourses %>
-        <h3>
-            Upcoming Classes <a class="show_all_classes" href="$Top.Link(classes)"> Show All </a>
-        </h3>
-        <ul class="training-updates">
-            <% loop UpcomingCourses %>
-            <li>
-                <p class="date-block">
-                    <span class="month">$StartDateMonth</span>
-                    <span class="day">$StartDateDay</span>
-                </p>
-                <p>
-                    <a href="{$Top.Link}{$BookMark}" class="outbound-link">$CourseName</a><br>
-                    $City
-                </p>
-            </li>
-            <% end_loop %>
-        </ul>
+            <h3>
+                Upcoming Classes <a class="show_all_classes" href="$Top.Link(classes)"> Show All </a>
+            </h3>
+            <ul class="training-updates">
+                <% loop UpcomingCourses %>
+                <li>
+                    <p class="date-block">
+                        <span class="month">$StartDateMonth</span>
+                        <span class="day">$StartDateDay</span>
+                    </p>
+                    <p>
+                        <a href="{$Top.Link}{$BookMark}" class="outbound-link">$CourseName</a><br>
+                        $City
+                    </p>
+                </li>
+                <% end_loop %>
+            </ul>
         <% end_if %>
         <div class="add-your-course">
             <p>

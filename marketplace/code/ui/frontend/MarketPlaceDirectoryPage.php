@@ -23,11 +23,11 @@ class MarketPlaceDirectoryPage extends MarketPlacePage
 		'GARemarketingOnly'    => 'Boolean',
 		'RatingCompanyID'      => 'Int',
 		'RatingBoxID'          => 'Int',
-        'OnlineDocsLink'       => 'Varchar(255)',
-        'OperationsGuideLink'  => 'Varchar(255)',
-        'SecurityGuideLink'    => 'Varchar(255)',
-        'GettingStartedLink'   => 'Varchar(255)',
 	);
+
+    static $has_many = array(
+        'HelpLinks' => 'MarketPlaceHelpLink.MarketPlacePage'
+    );
 
 	static $defaults = array(
 		'RatingCompanyID' => 4398,
@@ -49,10 +49,14 @@ class MarketPlaceDirectoryPage extends MarketPlacePage
 		$fields->addFieldToTab("Root.RatingBoxWidget",new TextField("RatingCompanyID","Company ID",4398));
 		$fields->addFieldToTab("Root.RatingBoxWidget",new TextField("RatingBoxID","Rating Box ID",11919));
 
-        $fields->addFieldToTab("Root.Main", new TextField("OnlineDocsLink","OnlineDocs Link"), 'Content');
-        $fields->addFieldToTab("Root.Main", new TextField("OperationsGuideLink","OperationsGuide Link"), 'Content');
-        $fields->addFieldToTab("Root.Main", new TextField("SecurityGuideLink","SecurityGuide Link"), 'Content');
-        $fields->addFieldToTab("Root.Main", new TextField("GettingStartedLink","GettingStarted Link"), 'Content');
+        $fields->removeByName('Content');
+
+        $config = new GridFieldConfig_RecordEditor(10);
+        $config->addComponent(new GridFieldSortableRows('SortOrder'));
+        $fields->addFieldToTab(
+            'Root.Main',
+            new GridField('HelpLinks', 'Help Links', $this->HelpLinks(), $config)
+        );
 
         return $fields;
 	}
@@ -213,35 +217,4 @@ class MarketPlaceDirectoryPage_Controller extends MarketPlacePage_Controller {
         return (strtotime($a->Created) < strtotime($b->Created)) ? 1 : -1;
     }
 
-    public function getOnlineDocsUrl() {
-        $field = $this->OnlineDocsLink;
-        if (empty($field))
-            return 'http://docs.openstack.org';
-        else
-            return $field;
-    }
-
-    public function getOperationsGuideUrl() {
-        $field = $this->OperationsGuideLink;
-        if (empty($field))
-            return 'http://docs.openstack.org/ops';
-        else
-            return $field;
-    }
-
-    public function getSecurityGuideUrl() {
-        $field = $this->SecurityGuideLink;
-        if (empty($field))
-            return 'http://docs.openstack.org/security-guide';
-        else
-            return $field;
-    }
-
-    public function getGettingStartedUrl() {
-        $field = $this->GettingStartedLink;
-        if (empty($field))
-            return 'http://www.openstack.org/software/start';
-        else
-            return $field;
-    }
 }

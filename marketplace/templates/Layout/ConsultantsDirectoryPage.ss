@@ -28,21 +28,7 @@
         <% end_if %>
     </div>
     <div class="col-lg-4 col-md-4 col-sm-4">
-        <h3>OpenStack Online Help</h3>
-        <ul class="resource-links">
-            <li>
-                <a href="{$OnlineDocsUrl}">Online Docs</a>
-            </li>
-            <li>
-                <a href="{$OperationsGuideUrl}">Operations Guide</a>
-            </li>
-            <li>
-                <a href="{$SecurityGuideUrl}">Security Guide</a>
-            </li>
-            <li>
-                <a href="{$GettingStartedUrl}">Getting Started</a>
-            </li>
-        </ul>
+        <% include MarketPlaceHelpLinks %>
         <div class="add-your-course">
             <p>
                 Does your company offer consulting for OpenStack? Be listed here!
