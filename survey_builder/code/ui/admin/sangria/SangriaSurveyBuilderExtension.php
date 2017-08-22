@@ -202,7 +202,7 @@ final class SangriaSurveyBuilderExtension extends Extension
         $question_value         = !empty($question_text_value) ? $question_text_value: $question_select_values;
         $order                  = Convert::raw2sql($request->getVar('order'));
         $page_size              = Convert::raw2sql($request->getVar('page_size'));
-        $survey_lang            = Convert::raw2sql($request->getVar('survey_lang'));
+        $survey_lang            = ($request->getVar('survey_lang')) ? Convert::raw2sql($request->getVar('survey_lang')) : 'ALL';
 
         if(empty($page_size)) $page_size = 25;
         if($page_size == "ALL") $page_size = PHP_INT_MAX;

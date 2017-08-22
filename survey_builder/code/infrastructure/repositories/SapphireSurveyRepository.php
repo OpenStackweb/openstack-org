@@ -67,8 +67,11 @@ SQL;
 
         $question_values_condition = "";
         foreach($values as $question_val){
-            if(!empty($question_values_condition)) $question_values_condition .= " OR ";
-            $question_values_condition .= "SurveyAnswer.Value LIKE '%{$question_val}%' ";
+            if(!empty($question_values_condition))
+                $question_values_condition .= " OR ";
+
+            if ($question_val)
+                $question_values_condition .= "SurveyAnswer.Value LIKE '%{$question_val}%' ";
         }
 
         if(!empty($question_values_condition)) $question_values_condition = "AND ({$question_values_condition})";
