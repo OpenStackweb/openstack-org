@@ -29,7 +29,7 @@
         <div class="row powered-wrapper">
             <div class="col-sm-12">
                 <div class="powered-image">
-                    <img src="/marketplace/code/ui/frontend/images/openstack-powered.png" alt="">
+                    <img src="/marketplace/code/ui/frontend/images/openstack-powered.png" alt="OpenStack Powered" width="170">
                 </div>
                 <div class="powered-description">
                     <p>
