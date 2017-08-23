@@ -32,6 +32,8 @@ final class NullMailer extends Mailer
             $record->Attachments = json_encode($attachedFiles);
         }
         $record->write();
+
+        return $record;
     }
 
     /* Overwriting SilverStripe's Mailer function */
@@ -47,6 +49,8 @@ final class NullMailer extends Mailer
             $record->Attachments = json_encode($attachedFiles);
         }
         $record->write();
+
+        return $record;
     }
 
 }

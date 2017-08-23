@@ -56,3 +56,13 @@ th .fa {
 .star-rating {
     display: inline;
 }
+
+.rsvp-table {
+    table-layout: fixed;
+    word-wrap: break-word;
+    width: 1500px;
+}
+
+.rsvp-table .email-popover {
+    cursor: pointer;
+}

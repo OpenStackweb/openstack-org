@@ -32,7 +32,9 @@ final class RSVP extends DataObject implements IRSVP
         'Event'        => 'SummitEvent',
     );
 
-    static $many_many = array();
+    static $many_many = array(
+        'Emails' => 'SentEmailSendGrid'
+    );
 
     static $has_many = array
     (

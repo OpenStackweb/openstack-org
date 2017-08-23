@@ -22,6 +22,9 @@ function ReportsAdminViewDispatcher() {
     this.EXPORT_PRESENTATIONS_COMPANY_REPORT   = 'EXPORT_PRESENTATIONS_COMPANY_REPORT';
     this.EXPORT_PRESENTATIONS_BY_TRACK_REPORT  = 'EXPORT_PRESENTATIONS_BY_TRACK_REPORT';
     this.EXPORT_FEEDBACK_REPORT                = 'EXPORT_FEEDBACK_REPORT';
+    this.SEND_EMAIL_RSVP_REPORT                = 'SEND_EMAIL_RSVP_REPORT';
+    this.OPEN_EMAIL_MODAL_RSVP_REPORT          = 'OPEN_EMAIL_MODAL_RSVP_REPORT';
+    this.POPULATE_ALL_EMAILS_RSVP_REPORT       = 'POPULATE_ALL_EMAILS_RSVP_REPORT';
 
     this.saveReport = function(report)
     {
@@ -95,6 +98,25 @@ function ReportsAdminViewDispatcher() {
                 break;
             case 'feedback_report' :
                 this.trigger(this.EXPORT_FEEDBACK_REPORT);
+                break;
+        }
+    }
+
+    this.openEmailModal = function()
+    {
+        this.trigger(this.OPEN_EMAIL_MODAL_RSVP_REPORT);
+    }
+
+    this.populateAllEmails = function()
+    {
+        this.trigger(this.POPULATE_ALL_EMAILS_RSVP_REPORT);
+    }
+
+    this.sendEmail = function(report)
+    {
+        switch (report) {
+            case 'rsvp_report' :
+                this.trigger(this.SEND_EMAIL_RSVP_REPORT);
                 break;
         }
     }

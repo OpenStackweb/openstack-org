@@ -405,8 +405,8 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
                     list($regulars,$reg_count) = $this->rsvp_repository->getByEventAndType($event->ID, 'Regular');
                     list($waitlists,$wait_count) = $this->rsvp_repository->getByEventAndType($event->ID, 'WaitList');
                     list($rsvps,$total) = $this->rsvp_repository->getByEventPaged($event->ID,null,null);
-                    $rsvp_array_template = array();
-                    $headers = array();
+                    $rsvp_array_template = array('Pos' => 0, 'Date' => '');
+                    $headers = array('Pos', 'Date');
 
                     $active_sheet = $objPHPExcel->createSheet();
                     $active_sheet->setTitle('Event '.$event->Location());
@@ -418,6 +418,7 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
                         }
                     }
                     $headers[] = 'Seat Type';
+                    $headers[] = 'Emails';
 
                     $active_sheet->setCellValue('A1', $event->getTitleAndTime());
                     $active_sheet->mergeCells('A1:K1');
@@ -429,18 +430,29 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
                     $active_sheet->setCellValue('D4', $wait_count);
 
                     $active_sheet->fromArray($headers, NULL, 'A6');
-                    $active_sheet->getStyle("A6:K6")->getFont()->setBold(true);
+                    $active_sheet->getStyle("A6:O6")->getFont()->setBold(true);
+                    $active_sheet->getColumnDimension('O')->setWidth(60);;
+                    $active_sheet->getStyle('O')->getAlignment()->setWrapText(true);
 
                     if (count($rsvps)) {
                         foreach($rsvps as $key => $rsvp) {
                             $row = $key + 7;
                             $rsvp_array = $rsvp_array_template;
+                            $rsvp_array['Pos'] = $key + 1;
+                            $rsvp_array['Date'] = $rsvp->LastEdited;
 
                             foreach ($rsvp->Answers() as $answer) {
                                 $rsvp_array[$answer->Question()->Label] = $answer->getFormattedAnswer();
                             }
 
                             $rsvp_array['Seat Type'] = $rsvp->SeatType;
+
+                            $rsvp_array['Emails'] = '';
+                            $sent_emails = $rsvp->Emails()->map('ID','Subject')->toArray();
+                            if ($sent_emails) {
+                                $lfcr = chr(10);
+                                $rsvp_array['Emails'] = implode($lfcr, $sent_emails);
+                            }
 
                             $active_sheet->fromArray($rsvp_array, NULL, 'A'.$row);
                         }

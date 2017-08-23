@@ -107,6 +107,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
     static $url_handlers = array
     (
         'PUT $REPORT!'                      => 'updateReport',
+        'POST rsvp_send_emails'             => 'sendRsvpEmails',
         'GET export'                        => 'handleExport',
         'GET speaker_report'                => 'getSpeakerReport',
         'GET room_report'                   => 'getRoomReport',
@@ -131,6 +132,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
         'getPresentationsCompanyReport',
         'getPresentationsByTrackReport',
         'getFeedbackReport',
+        'sendRsvpEmails',
     );
 
     public function handleExport(SS_HTTPRequest $request)
@@ -438,7 +440,21 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
 
                     if (count($rsvps)) {
                         foreach($rsvps as $rsvp) {
-                            $rsvp_array = array('attendee_id' => $rsvp->SubmittedBy()->ID, 'rsvp' => $rsvp_array_template);
+                            $emailed = boolval($rsvp->Emails()->Count());
+                            $email   = $rsvp->SubmittedBy()->Member()->Email;
+                            $emails  = [];
+
+                            foreach ($rsvp->Emails() as $sent_email) {
+                                $emails[] = ['subject' => $sent_email->Subject, 'body' => $sent_email->Body];
+                            }
+
+                            $rsvp_array = array(
+                                'attendee' => ['id' => $rsvp->SubmittedBy()->ID, 'emailed' => $emailed, 'email' => $email],
+                                'date' => $rsvp->LastEdited,
+                                'emails' => $emails,
+                                'rsvp' => $rsvp_array_template
+                            )
+                            ;
                             foreach ($rsvp->Answers() as $answer) {
                                 $rsvp_array['rsvp'][$answer->Question()->Label] = $answer->getFormattedAnswer();
                             }
@@ -650,6 +666,61 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
         {
             SS_Log::log($ex->getMessage(), SS_Log::ERR);
             return $this->serverError();
+        }
+    }
+
+    public function sendRsvpEmails(SS_HTTPRequest $request){
+        try
+        {
+            if(!$this->isJson()) return $this->validationError(array('invalid content type!'));
+            $email_data   = $this->getJsonRequest();
+
+            $to           = isset($email_data['to']) ? $email_data['to'] : '';
+            $from         = isset($email_data['from']) ? $email_data['from'] : '';
+            $subject      = isset($email_data['subject']) ? $email_data['subject'] : '';
+            $message      = isset($email_data['message']) ? $email_data['message'] : '';
+            $event_id     = isset($email_data['event_id']) ? $email_data['event_id'] : 0;
+
+            if (!$to || !$from || !$subject || !$message || !$event_id) {
+                throw new ValidationException('Complete all fields to send email.', 0);
+            }
+
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $summit       = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+
+            $event = SummitEvent::get()->byID($event_id);
+            if(is_null($event)) throw new NotFoundEntityException('SummitEvent', sprintf(' id %s', $event_id));
+
+            $email = EmailFactory::getInstance()->buildEmail($from, $to, $subject, $message);
+            $sent_email = $email->send();
+
+            if (is_a($sent_email, 'SentEmailSendGrid')) {
+                foreach($event->RSVPSubmissions() as $rsvp) {
+                    if (strpos($to, $rsvp->submittedBy()->Member()->Email) !== false) {
+                        $rsvp->Emails()->add($sent_email);
+                    }
+                }
+            } else {
+                throw new Exception('Email not sent');
+            }
+
+            return $this->ok();
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        }
+        catch(ValidationException $ex3)
+        {
+            SS_Log::log($ex3->getMessage(), SS_Log::WARN);
+            return $this->validationError($ex3->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $ex->getMessage();
         }
     }
 

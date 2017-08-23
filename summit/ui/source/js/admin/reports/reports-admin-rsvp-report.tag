@@ -15,17 +15,27 @@
     <div class="panel panel-default" if={ event_count == 1 }>
         <div class="panel-heading">{ event.event_id } - <strong> { event.title } </strong> - { event.date } ({ page_data.total } attendees)</div>
 
-        <table class="table">
+        <table class="table rsvp-table">
             <thead>
                 <tr>
+                    <th style="width:2%">#</th>
                     <th>Attendee</th>
+                    <th>Date</th>
                     <th each={ header in headers }>{ header }</th>
+                    <th style="width:15%">Emails Sent</th>
                 </tr>
             </thead>
             <tbody>
                 <tr each={ rsvp, i in rsvps }>
-                    <td><a href="{ parent.base_url }/attendees/{ rsvp.attendee_id }">{ rsvp.attendee_id }</a></td>
+                    <td>{(i + 1)}</td>
+                    <td><a href="{ parent.base_url }/attendees/{ rsvp.attendee.id }">{ rsvp.attendee.id }</a></td>
+                    <td>{ rsvp.date }</td>
                     <td each={ label, value in rsvp.rsvp }>{ value }</td>
+                    <td>
+                        <div class="email-popover" each={ email, j in rsvp.emails } data-toggle="popover" data-placement="left" data-html="true" data-content={ email.body }>
+                            * { email.subject }
+                        </div>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -68,8 +78,10 @@
                         self.event = data.event;
                         self.page_data.total = parseInt(data.total);
                         self.headers = data.headers;
+                        $('#send-email').attr('disabled',false);
                     } else if (data.event_count > 1) {
                         self.events = data.data;
+                        $('#send-email').attr('disabled',true);
                     }
 
                     self.event_count = data.event_count;
@@ -89,6 +101,7 @@
                     $('#report-pager').bootstrapPaginator(options);
 
                     self.update();
+                    $('[data-toggle="popover"]').popover();
                     $('body').ajax_loader('stop');
             });
         }
@@ -100,6 +113,57 @@
         self.dispatcher.on(self.dispatcher.EXPORT_RSVP_REPORT,function() {
             var term = $('#search-term').val();
             window.open('api/v1/summits/'+self.summit_id+'/reports/export/rsvp_report?term='+term, '_blank');
+        });
+
+        self.dispatcher.on(self.dispatcher.OPEN_EMAIL_MODAL_RSVP_REPORT,function() {
+            var emails = self.rsvps.filter(a => !a.attendee.emailed ).map(r => r.attendee.email).join(',');
+            $('#email-from').val('');
+            $('#email-to').val(emails);
+            $('#email-subject').val('');
+            $('#email-message').val('');
+        });
+
+        self.dispatcher.on(self.dispatcher.POPULATE_ALL_EMAILS_RSVP_REPORT,function() {
+            var emails = self.rsvps.map(r => r.attendee.email).join(',');
+            $('#email-to').val(emails);
+        });
+
+        self.dispatcher.on(self.dispatcher.SEND_EMAIL_RSVP_REPORT,function() {
+            var from = $('#email-from').val();
+            var to = $('#email-to').val();
+            var subject = $('#email-subject').val();
+            var message = $('#email-message').val();
+
+            $('body').ajax_loader();
+
+            var data = {from: from, to: to, subject: subject, message: message, event_id: self.event.event_id};
+
+            $.ajax({
+                type: 'POST',
+                url: 'api/v1/summits/'+self.summit_id+'/reports/rsvp_send_emails',
+                data: JSON.stringify(data),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            }).done(function(data) {
+                $('body').ajax_loader('stop');
+                swal({
+                    title: "Done!",
+                    text: "email sent successfully",
+                    type: "success"
+                },
+                function(){
+                    self.getReport(1);
+                });
+            }).fail(function(jqXHR) {
+                var responseCode = jqXHR.status;
+                $('body').ajax_loader('stop');
+                if(responseCode == 412) {
+                    var response = $.parseJSON(jqXHR.responseText);
+                    swal('Validation error', response.messages[0].message, 'warning');
+                } else {
+                    swal('Error', 'There was a problem sending the email, please contact admin.', 'warning');
+                }
+            });
         });
 
     </script>

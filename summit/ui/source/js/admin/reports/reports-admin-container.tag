@@ -36,6 +36,9 @@
             <button class="btn btn-primary" id="export-report" if={ show_export } onclick={ exportReport } >Export</button>
             <button class="btn btn-success" id="save-report" if={ show_save } onclick={ saveReport } >Save</button>
         </div>
+        <div class="col-md-2">
+            <button class="btn btn-default" id="send-email" if={ show_email } data-toggle="modal" data-target="#emailModal" onclick={ openEmailModal } >Send Email</button>
+        </div>
     </div>
     <br>
 
@@ -49,6 +52,29 @@
     <reports-admin-presentations-by-track-report if={ report == 'presentations_by_track_report' } page_limit="{ limit }" summit_id="{ summit_id }" tracks="{ tracks }" dispatcher="{ dispatcher }"></reports-admin-presentations-by-track-report>
     <reports-admin-feedback-report if={ report == 'feedback_report' } page_limit="{ limit }" summit_id="{ summit_id }" dispatcher="{ dispatcher }"></reports-admin-feedback-report>
 
+    <div id="emailModal" class="modal fade" role="dialog" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Send Email</h4>
+                </div>
+                <div class="modal-body">
+                    <label>From</label>
+                    <input id="email-from" class="form-control" value="" /><br>
+                    <label>To</label> - <a onClick={ setAllEmails }>All</a>
+                    <textarea id="email-to" class="form-control"></textarea><br>
+                    <label>Subject</label>
+                    <input id="email-subject" class="form-control" value="" /><br>
+                    <label>Message</label>
+                    <textarea id="email-message" class="form-control"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" onclick={ sendEmail }>Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
         this.report             = opts.report;
@@ -62,6 +88,7 @@
         this.show_status_filter = true;
         this.show_save          = true;
         this.show_export        = true;
+        this.show_email         = false;
         var self                = this;
 
         this.on('mount', function() {
@@ -91,6 +118,22 @@
             self.dispatcher.exportReport(self.report);
         }
 
+        openEmailModal(e) {
+            self.dispatcher.openEmailModal();
+        }
+
+        setAllEmails(e) {
+            e.preventDefault();
+            self.dispatcher.populateAllEmails();
+        }
+
+        sendEmail(e) {
+            if (confirm("Are you sure you want to send an email to these attendees?")) {
+                $('#emailModal').modal('toggle');
+                self.dispatcher.sendEmail(self.report);
+            }
+        }
+
         toggleSort(elem) {
             var sort_dir = (elem.data('dir') == 'ASC') ? 'DESC' : 'ASC';
             elem.data('dir',sort_dir);
@@ -116,6 +159,7 @@
             self.show_search = false;
             self.show_save = false;
             self.show_export = false;
+            self.show_email = false;
 
             switch (self.report) {
                 case 'speaker_report':
@@ -133,6 +177,7 @@
                 case 'rsvp_report':
                     self.show_search = true;
                     self.show_export = true;
+                    self.show_email = true;
                     break;
                 case 'track_questions_report':
                     self.show_search = true;

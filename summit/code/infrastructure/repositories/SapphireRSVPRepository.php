@@ -46,6 +46,7 @@ class SapphireRSVPRepository
     {
         $query = new QueryObject();
         $query->addAndCondition(QueryCriteria::equal('EventID', $event_id));
+        $query->addOrder(QueryOrder::asc('LastEdited'));
         $offset = ($page-1) * $page_size;
         return $this->getAll($query, $offset, $page_size);
     }
