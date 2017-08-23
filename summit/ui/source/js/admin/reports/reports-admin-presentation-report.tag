@@ -11,7 +11,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>IDDDDDDD</th>
+                    <th>ID</th>
                     <th class="sortable" data-sort="presentation" data-dir="ASC">Presentation</th>
                     <th class="center_text">Published</th>
                     <th>Track</th>
@@ -44,7 +44,9 @@
                     <td><input type="text" class="phone" value={ presentation.phone } /></td>
                     <td>{ presentation.code_type }</td>
                     <td><input type="text" class="promo_code" value={ presentation.promo_code } /></td>
-                    <td class="center_text"><i class={ fa: true, fa-check: presentation.confirmed, fa-times: !presentation.confirmed } ></i></td>
+                    <td class="center_text">
+                        <input type="checkbox" class="confirmed" checked={ presentation.confirmed } />
+                    </td>
                     <td class="center_text"><input type="checkbox" class="registered" checked={ presentation.registered } /></td>
                     <td class="center_text"><input type="checkbox" class="checked_in" checked={ presentation.checked_in } /></td>
                 </tr>
@@ -115,9 +117,10 @@
                 var speaker_id = $(this).data('speaker-id');
                 var phone      = $('.phone',this).val();
                 var promo_code = $('.promo_code',this).val();
+                var confirmed = $('.confirmed',this).attr('checked') ? 1 : 0;
                 var registered = $('.registered',this).attr('checked') ? 1 : 0;
                 var checked_in = $('.checked_in',this).attr('checked') ? 1 : 0;
-                request.push({speaker_id: speaker_id, phone: phone, promo_code: promo_code, registered: registered, checked_in: checked_in});
+                request.push({speaker_id: speaker_id, phone: phone, promo_code: promo_code, confirmed: confirmed, registered: registered, checked_in: checked_in});
             });
 
             if (request.length) {

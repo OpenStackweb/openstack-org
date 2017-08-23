@@ -582,6 +582,7 @@ final class SummitEventManager implements ISummitEventManager
                 }
 
                 $assistance->OnSitePhoneNumber   = $assistance_data['phone'];
+                $assistance->IsConfirmed         = $assistance_data['confirmed'];
                 $assistance->RegisteredForSummit = $assistance_data['registered'];
                 $assistance->CheckedIn           = $assistance_data['checked_in'];
 

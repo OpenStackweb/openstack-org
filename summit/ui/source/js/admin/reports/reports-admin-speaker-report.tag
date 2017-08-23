@@ -34,9 +34,15 @@
                     <td>{ speaker.company }</td>
                     <td>{ speaker.presentation }</td>
                     <td>{ speaker.track }</td>
-                    <td class="center_text"><i class={ fa: true, fa-check: speaker.confirmed, fa-times: !speaker.confirmed } ></i></td>
-                    <td class="center_text"><input type="checkbox" class="registered" checked={ speaker.registered } /></td>
-                    <td class="center_text"><input type="checkbox" class="checked_in" checked={ speaker.checked_in } /></td>
+                    <td class="center_text">
+                        <input type="checkbox" class="confirmed" checked={ speaker.confirmed } />
+                    </td>
+                    <td class="center_text">
+                        <input type="checkbox" class="registered" checked={ speaker.registered } />
+                    </td>
+                    <td class="center_text">
+                        <input type="checkbox" class="checked_in" checked={ speaker.checked_in } />
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -104,10 +110,11 @@
             $('.changed').each(function(){
                 var speaker_id = $('.speaker-id',this).text();
                 var phone      = $('.phone',this).val();
+                var confirmed = $('.confirmed',this).attr('checked') ? 1 : 0;
                 var registered = $('.registered',this).attr('checked') ? 1 : 0;
                 var checked_in = $('.checked_in',this).attr('checked') ? 1 : 0;
 
-                request.push({speaker_id: speaker_id, phone: phone, registered: registered, checked_in: checked_in});
+                request.push({speaker_id: speaker_id, phone: phone, confirmed: confirmed, registered: registered, checked_in: checked_in});
             });
 
             if (request.length) {
