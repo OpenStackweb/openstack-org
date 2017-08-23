@@ -12,7 +12,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-class SurveyDoubleEntryTableQuestionTemplate extends SurveyMultiValueQuestionTemplate implements IDoubleEntryTableQuestionTemplate
+class SurveyDoubleEntryTableQuestionTemplate
+    extends SurveyMultiValueQuestionTemplate
+    implements IDoubleEntryTableQuestionTemplate
 {
     static $db = array
     (

@@ -816,26 +816,27 @@ SQL;
     public function exportQuestion(SS_HTTPRequest $request)
     {
         $qid           = intval($request->requestVar('qid'));
+        $template      = $this->getCurrentSelectedSurveyTemplate();
+        if(is_null($template)) return $this->owner->httpError(404, "not found");
+        $question      = $template->getQuestionById($qid);
+        if(is_null($question)) return $this->owner->httpError(404, "not found");
+        if(!$question instanceof IDoubleEntryTableQuestionTemplate)  return $this->owner->httpError(403, "not instance");
 
-        $template = $this->getCurrentSelectedSurveyTemplate();
-        $question = $template->getQuestionById($qid);
-        $results_array = array(array($question->Label));
+        $results_array = array(array($question->label()));
         $column_labels = array(' ');
 
-        foreach($question->Columns() as $column) {
-            $column_labels[] = $column->Label;
+        foreach($question->getColumns() as $column) {
+            $column_labels[] = $column->label();
         }
         $results_array[] = $column_labels;
 
-        foreach($question->Rows() as $row) {
-            $rows_array = array($row->Label);
+        foreach($question->getRows() as $row) {
+            $rows_array = array($row->label());
             foreach($row->Columns() as $row_column) {
-                $rows_array[] = $this->SurveyBuilderMatrixCountAnswers($qid,$row->ID, $row_column->ID);
+                $rows_array[] = $this->SurveyBuilderMatrixCountAnswers($qid, $row->ID, $row_column->ID);
             }
             $results_array[] = $rows_array;
         }
-
-
 
         return CSVExporter::getInstance()->export('export_table.csv', $results_array, ',');
     }
