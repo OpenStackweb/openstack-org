@@ -78,7 +78,9 @@
                         self.event = data.event;
                         self.page_data.total = parseInt(data.total);
                         self.headers = data.headers;
-                        $('#send-email').attr('disabled',false);
+                        if (self.rsvps.length)
+                            $('#send-email').attr('disabled',false);
+
                     } else if (data.event_count > 1) {
                         self.events = data.data;
                         $('#send-email').attr('disabled',true);
@@ -116,7 +118,13 @@
         });
 
         self.dispatcher.on(self.dispatcher.OPEN_EMAIL_MODAL_RSVP_REPORT,function() {
-            var emails = self.rsvps.filter(a => !a.attendee.emailed ).map(r => r.attendee.email).join(',');
+            var emails = '';
+            if (self.rsvps[0].rsvp.hasOwnProperty('Email')){
+                emails = self.rsvps.filter(a => !a.attendee.emailed && a.rsvp.Email).map(r => r.rsvp.Email).join(',');
+            } else {
+                emails = self.rsvps.filter(a => !a.attendee.emailed && a.attendee.email).map(r => r.attendee.email).join(',');
+            }
+
             $('#email-from').val('');
             $('#email-to').val(emails);
             $('#email-subject').val('');
@@ -124,7 +132,13 @@
         });
 
         self.dispatcher.on(self.dispatcher.POPULATE_ALL_EMAILS_RSVP_REPORT,function() {
-            var emails = self.rsvps.map(r => r.attendee.email).join(',');
+            var emails = '';
+            if (self.rsvps[0].rsvp.hasOwnProperty('Email')){
+                emails = self.rsvps.filter(a => a.rsvp.Email).map(r => r.rsvp.Email).join(',');
+            } else {
+                emails = self.rsvps.filter(a => a.attendee.email).map(r => r.attendee.email).join(',');
+            }
+
             $('#email-to').val(emails);
         });
 

@@ -440,8 +440,10 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
 
                     if (count($rsvps)) {
                         foreach($rsvps as $rsvp) {
+
                             $emailed = boolval($rsvp->Emails()->Count());
-                            $email   = $rsvp->SubmittedBy()->Member()->Email;
+                            $email   = $rsvp->SubmittedBy()->Email;
+
                             $emails  = [];
 
                             foreach ($rsvp->Emails() as $sent_email) {
@@ -693,11 +695,23 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
             if(is_null($event)) throw new NotFoundEntityException('SummitEvent', sprintf(' id %s', $event_id));
 
             $email = EmailFactory::getInstance()->buildEmail($from, $to, $subject, $message);
-            $sent_email = $email->send();
+            $email->send();
+
+            $sent_email = $email->mailer()->getLastEmail();
 
             if (is_a($sent_email, 'SentEmailSendGrid')) {
+                $email_question = $event->RSVPTemplate()->Questions()->filter('Label','Email')->first();
+
                 foreach($event->RSVPSubmissions() as $rsvp) {
-                    if (strpos($to, $rsvp->submittedBy()->Member()->Email) !== false) {
+                    $submitter_email = $rsvp->SubmittedBy()->Email;
+                    $email_to_check = '';
+                    if ($email_question) {
+                        $email_to_check = $rsvp->Answers()->filter('QuestionID', $email_question->ID)->first()->Value;
+                    }
+
+                    // we check if the Email answer OR the member who submitted the rsvp is in the email address to.
+                    if (($email_to_check && strpos($to, $email_to_check) !== false)
+                        || ($submitter_email && strpos($to, $submitter_email) !== false)) {
                         $rsvp->Emails()->add($sent_email);
                     }
                 }

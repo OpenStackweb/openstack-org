@@ -14,6 +14,8 @@
  **/
 final class NullMailer extends Mailer
 {
+    private $last_email;
+
     function __construct($mailer = null){
         parent::__construct();
         $this->mailer = $mailer;
@@ -33,6 +35,8 @@ final class NullMailer extends Mailer
         }
         $record->write();
 
+        $this->last_email = $record;
+
         return $record;
     }
 
@@ -50,7 +54,12 @@ final class NullMailer extends Mailer
         }
         $record->write();
 
+        $this->last_email = $record;
+
         return $record;
     }
 
+    function getLastEmail() {
+        return $this->last_email;
+    }
 }
