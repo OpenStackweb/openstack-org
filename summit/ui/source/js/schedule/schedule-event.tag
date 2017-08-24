@@ -160,7 +160,8 @@
                     cancelButtonColor: '#d33',
                     confirmButtonText: 'Log in'
                 }).then(function () {
-                    window.location = "/Security/login?BackURL="+self.summit.schedule_link
+                    const url = encodeURIComponent(window.location.href)
+                    window.location = "/Security/login?BackURL="+url;
                 })
 
                 return false;
