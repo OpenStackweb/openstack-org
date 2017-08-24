@@ -55,7 +55,7 @@ FROM SurveyAnswer A
 INNER JOIN SurveyQuestionTemplate Q ON Q.ID = A.QuestionID
 INNER JOIN SurveyStepTemplate STPL ON STPL.ID = Q.StepID
 INNER JOIN SurveyTemplate SSTPL ON SSTPL.ID = STPL.SurveyTemplateID
-INNER JOIN SurveyStep S ON S.ID = A.StepIDROM
+INNER JOIN SurveyStep S ON S.ID = A.StepID
 INNER JOIN Survey I ON I.ID = S.SurveyID
 WHERE 
 A.QuestionID = {$current_id}
