@@ -67,4 +67,10 @@ interface ISurveyQuestionTemplate extends IEntity {
      * @return ISurveyStepTemplate
      */
     public function step();
+
+    /**
+     * @param string $answer_value
+     * @return bool
+     */
+    public function isValidAnswerValue($answer_value);
 }

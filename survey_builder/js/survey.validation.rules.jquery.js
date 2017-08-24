@@ -58,18 +58,19 @@
             question_container.find('*').removeClass('hidden');
             question_container.find('select.chosen').trigger("chosen:updated");
             question_container.find('select.chosen').addClass('chosen-visible');
+            return;
         }
-        else {
-            question_container.addClass('hidden');
-            question_container.find('*').addClass('hidden');
-            //clean controls
-            question_container.find("input[type='text']").val('');
-            question_container.find('select').val('');
-            question_container.find("input[type='radio']").prop('checked', false);
-            question_container.find("input[type='checkbox']").prop('checked', false);
-            question_container.find('textarea').val('');
-            question_container.find('select.chosen').removeClass('chosen-visible');
-        }
+        // hide
+        question_container.addClass('hidden');
+        question_container.find('*').addClass('hidden');
+        //reset controls state
+        question_container.find("input[type='text']").val('');
+        question_container.find("input[type='hidden']").val('');
+        question_container.find('select').val('');
+        question_container.find("input[type='radio']").prop('checked', false);
+        question_container.find("input[type='checkbox']").prop('checked', false);
+        question_container.find('textarea').val('');
+        question_container.find('select.chosen').removeClass('chosen-visible');
     }
 
     var methods = {

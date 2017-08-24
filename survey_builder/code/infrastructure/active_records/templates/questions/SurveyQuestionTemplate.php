@@ -357,4 +357,12 @@ class SurveyQuestionTemplate
     {
         return AssociationFactory::getInstance()->getMany2OneAssociation($this,'Step')->getTarget();
     }
+
+    /**
+     * @param string $answer_value
+     * @return bool
+     */
+    public function isValidAnswerValue($answer_value){
+        return true;
+    }
 }

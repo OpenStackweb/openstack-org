@@ -178,4 +178,12 @@ class SurveyDoubleEntryTableQuestionTemplate
             )
         )->first();
     }
+
+    /**
+     * @param string $answer_value
+     * @return bool
+     */
+    public function isValidAnswerValue($answer_value){
+        return preg_match('~(\d\:\d\,?)+~', $answer_value, $match) == 1;
+    }
 }

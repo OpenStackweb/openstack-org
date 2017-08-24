@@ -170,7 +170,7 @@ final class SurveyManager implements ISurveyManager {
                         $log->FormerValue = $snapshot[$question_name];
                     }
 
-                    if (isset($answers[$question_name]))
+                    if (isset($answers[$question_name]) && !empty($answers[$question_name]) && $q->isValidAnswerValue($answers[$question_name]))
                     {
                         $answer_val = $answers[$question_name];
                         // its has an answer set

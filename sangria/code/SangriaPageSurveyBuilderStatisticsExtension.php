@@ -178,13 +178,13 @@ class SangriaPageSurveyBuilderStatisticsExtension extends Extension
      */
     private function generateFilters($survey_table_prefix = 'I')
     {
-        $request    = Controller::curr()->getRequest();
-        $from       = $request->getVar('From');
-        $to         = $request->getVar('To');
-        $template   = $this->getCurrentSelectedSurveyTemplate();
+        $request = Controller::curr()->getRequest();
+        $from = $request->getVar('From');
+        $to = $request->getVar('To');
+        $template = $this->getCurrentSelectedSurveyTemplate();
         $class_name = $this->getCurrentSelectedSurveyClassName();
 
-        $filters    = Session::get
+        $filters = Session::get
         (
             sprintf
             (
@@ -255,8 +255,7 @@ SQL;
             $filters_where = " AND " . SangriaPage_Controller::generateDateFilters($survey_table_prefix, 'LastEdited');
         }
 
-        if (!empty($filters))
-        {
+        if (!empty($filters)) {
             $filters = trim($filters, ',');
             $filters = explode(',', $filters);
             foreach ($filters as $t) {
@@ -266,7 +265,7 @@ SQL;
                 if ($qid == 'lang') {
                     $filters_where .= sprintf($lang_query, $template->ID, $vid);
                 } else {
-                    if(count($t) === 3)
+                    if (count($t) === 3)
                         $vid = sprintf('%s:%s', $t[1], $t[2]);
                     $filter_query_tpl = is_int($vid) ? $filter_query_tpl_int : $filter_query_tpl_str;
                     $filters_where .= sprintf($filter_query_tpl, $template->ID, $qid, $vid);
@@ -281,12 +280,11 @@ SQL;
 
     public function SurveyBuilderSurveyCount()
     {
-        if($this->total_count > 0 ) return $this->total_count;
+        if ($this->total_count > 0) return $this->total_count;
 
         $template = $this->getCurrentSelectedSurveyTemplate();
 
-        if (is_null($template))
-        {
+        if (is_null($template)) {
             return 0;
         }
 
@@ -327,21 +325,20 @@ SQL;
     public function SurveyBuilderSurveyCountByQuestion($question_id)
     {
 
-        if(isset($this->matrix_count_by_question[$question_id])) return $this->matrix_count_by_question[$question_id];
+        if (isset($this->matrix_count_by_question[$question_id])) return $this->matrix_count_by_question[$question_id];
 
         $template = $this->getCurrentSelectedSurveyTemplate();
 
-        if (is_null($template))
-        {
+        if (is_null($template)) {
             return 0;
         }
 
         $question = $template->getQuestionById($question_id);
-        if(is_null($question)) return 0;
+        if (is_null($question)) return 0;
 
         $dependencies = $question->getDependsOn();
         $dependencies_sql = "";
-        if(count($dependencies)) {
+        if (count($dependencies)) {
             $dependencies_sql = <<<SQL
                AND EXISTS
                (
@@ -353,20 +350,20 @@ SQL;
 SQL;
 
             $index_dep = 0;
-            foreach($dependencies as $dependency){
-                $dep_question_id  = $dependency->ID;
-                $value_id         = $dependency->ValueID;
+            foreach ($dependencies as $dependency) {
+                $dep_question_id = $dependency->ID;
+                $value_id = $dependency->ValueID;
                 $boolean_operator = $dependency->BooleanOperatorOnValues;
                 $dependencies_sql .= sprintf("( A.QuestionID = %s  AND A.Value = '%s' )", $dep_question_id, $value_id);
 
-                if(count($dependencies) - 1 > $index_dep)   $dependencies_sql .= sprintf(" %s ", $boolean_operator);
+                if (count($dependencies) - 1 > $index_dep) $dependencies_sql .= sprintf(" %s ", $boolean_operator);
                 ++$index_dep;
             }
 
             $dependencies_sql .= "  ) GROUP BY S.ID ) ";
         }
 
-        $class_name    = $this->getCurrentSelectedSurveyClassName();
+        $class_name = $this->getCurrentSelectedSurveyClassName();
 
         $filters_where = $this->generateFilters();
 
@@ -402,7 +399,7 @@ SQL;
     {$filters_where};
 SQL;
 
-        $this->matrix_count_by_question[$question_id] =  intval(DB::query($query)->value());
+        $this->matrix_count_by_question[$question_id] = intval(DB::query($query)->value());
         return $this->matrix_count_by_question[$question_id];
     }
 
@@ -415,10 +412,10 @@ SQL;
             return 0;
 
         if ($class_name == 'EntitySurvey') {
-            $question = $template->Parent()->getAllFilterableQuestions()->filter('ClassName','SurveyOrganizationQuestionTemplate')->first();
+            $question = $template->Parent()->getAllFilterableQuestions()->filter('ClassName', 'SurveyOrganizationQuestionTemplate')->first();
             $parent_survey_template_id = $template->ParentID;
         } else {
-            $question = $template->getAllFilterableQuestions()->filter('ClassName','SurveyOrganizationQuestionTemplate')->first();
+            $question = $template->getAllFilterableQuestions()->filter('ClassName', 'SurveyOrganizationQuestionTemplate')->first();
             $parent_survey_template_id = $template->ID;
         }
 
@@ -465,16 +462,16 @@ SQL;
         foreach (DB::query($query) as $company_row) {
             $link = '';
             if ($company_row['SurveyCount'] == 1) {
-                $link = 'sangria/SurveyDetails/'.$company_row['ID'].'?BackUrl='.$back_url;
+                $link = 'sangria/SurveyDetails/' . $company_row['ID'] . '?BackUrl=' . $back_url;
             } else if ($company_row['SurveyCount'] > 1) {
-                $link = 'sangria/SurveyBuilderListSurveys?survey_template_id='.$parent_survey_template_id.'&question_id='.$question->ID.'&question_value='.$company_row['Company'];
+                $link = 'sangria/SurveyBuilderListSurveys?survey_template_id=' . $parent_survey_template_id . '&question_id=' . $question->ID . '&question_value=' . $company_row['Company'];
             }
 
             $companies->push(
                 new ArrayData(
                     array(
                         'Company' => $company_row['Company'],
-                        'Link'    => $link
+                        'Link' => $link
                     )
                 )
             );
@@ -499,13 +496,15 @@ SQL;
     private function ViewStatisticsSurveyBuilder(SS_HTTPRequest $request, $action, $class_name)
     {
         Requirements::javascript('themes/openstack/javascript/sangria/sangria.page.view.statistics.surveybuilder.js');
+        Requirements::css('sangria/ui/source/css/sangria.css');
         Requirements::css('themes/openstack/css/sangria/sangria.page.view.statistics.surveybuilder.css');
-        $qid           = $request->requestVar('qid');
-        $vid           = $request->requestVar('vid');
+
+        $qid = $request->requestVar('qid');
+        $vid = $request->requestVar('vid');
         $clear_filters = $request->requestVar('clear_filters');
-        $from          = $request->requestVar('From');
-        $to            = $request->requestVar('To');
-        $template_id   = intval($request->requestVar('survey_template_id'));
+        $from = $request->requestVar('From');
+        $to = $request->requestVar('To');
+        $template_id = intval($request->requestVar('survey_template_id'));
 
         if (empty($template_id)) {
             if (!$template_id = Session::get(sprintf("SurveyBuilder.%sStatistics.TemplateId", $class_name))) {
@@ -524,39 +523,38 @@ SQL;
             Session::clear(sprintf("SurveyBuilder.%sStatistics.Filters_Questions", $class_name));
 
             return Controller::curr()->redirect(Controller::curr()->Link($action));
-        } else {
-            if (empty($from) || empty($to)) {
-                $template = SurveyTemplate::get()->byID(intval($template_id));
+        }
+        if (empty($from) || empty($to)) {
+            $template = SurveyTemplate::get()->byID(intval($template_id));
 
-                if ($class_name === 'EntitySurveyTemplate') {
-                    $template = $template->Parent();
-                }
+            if ($class_name === 'EntitySurveyTemplate') {
+                $template = $template->Parent();
+            }
 
-                $from = date('Y/m/d H:i', strtotime($template->StartDate));
-                $to = date('Y/m/d H:i', strtotime($template->EndDate));
+            $from = date('Y/m/d H:i', strtotime($template->StartDate));
+            $to = date('Y/m/d H:i', strtotime($template->EndDate));
+            $query_str = sprintf("?From=%s&To=%s", $from, $to);
+
+            return Controller::curr()->redirect(Controller::curr()->Link($action) . $query_str);
+        }
+
+        if (!empty($qid) && !empty($vid)) {
+            $qid = is_int($qid) ? intval($qid) : $qid;
+            $vid = is_int($vid) ? intval($vid) : $vid;
+            $filters = Session::get(sprintf('SurveyBuilder.%sStatistics.Filters', $class_name));
+            $questions_filters = Session::get(sprintf('SurveyBuilder.%sStatistics.Filters_Questions', $class_name));
+            $filters .= sprintf("%s:%s,", $qid, $vid);
+            $questions_filters .= sprintf("%s,", $qid);
+
+            Session::set(sprintf("SurveyBuilder.%sStatistics.Filters", $class_name), $filters);
+            Session::set(sprintf("SurveyBuilder.%sStatistics.Filters_Questions", $class_name), $questions_filters);
+
+            $query_str = '';
+            if (!empty($from) && !empty($to)) {
                 $query_str = sprintf("?From=%s&To=%s", $from, $to);
-
-                return Controller::curr()->redirect(Controller::curr()->Link($action) . $query_str);
             }
 
-            if (!empty($qid) && !empty($vid)) {
-                $qid = is_int($qid) ? intval($qid) : $qid;
-                $vid = is_int($vid) ? intval($vid) : $vid;
-                $filters = Session::get(sprintf('SurveyBuilder.%sStatistics.Filters', $class_name));
-                $questions_filters = Session::get(sprintf('SurveyBuilder.%sStatistics.Filters_Questions', $class_name));
-                $filters .= sprintf("%s:%s,", $qid, $vid);
-                $questions_filters .= sprintf("%s,", $qid);
-
-                Session::set(sprintf("SurveyBuilder.%sStatistics.Filters", $class_name), $filters);
-                Session::set(sprintf("SurveyBuilder.%sStatistics.Filters_Questions", $class_name), $questions_filters);
-
-                $query_str = '';
-                if (!empty($from) && !empty($to)) {
-                    $query_str = sprintf("?From=%s&To=%s", $from, $to);
-                }
-
-                return Controller::curr()->redirect(Controller::curr()->Link($action) . $query_str);
-            }
+            return Controller::curr()->redirect(Controller::curr()->Link($action) . $query_str);
         }
 
         return $this->owner->Customise
@@ -619,7 +617,8 @@ SQL;
         return true;
     }
 
-    private $matrix_count  = array();
+    private $matrix_count = array();
+
     /**
      * @param $question_id
      * @param $row_id
@@ -628,14 +627,13 @@ SQL;
      */
     public function SurveyBuilderMatrixCountAnswers($question_id, $row_id, $column_id)
     {
-        $key = $question_id.'.'.$row_id.'.'.$column_id;
+        $key = $question_id . '.' . $row_id . '.' . $column_id;
 
-        if(isset($this->matrix_count[$key])) return $this->matrix_count[$key];
+        if (isset($this->matrix_count[$key])) return $this->matrix_count[$key];
 
-        $template    = $this->getCurrentSelectedSurveyTemplate();
+        $template = $this->getCurrentSelectedSurveyTemplate();
 
-        if (is_null($template))
-        {
+        if (is_null($template)) {
             return;
         }
 
@@ -663,20 +661,20 @@ SQL;
         return $this->matrix_count[$key];
     }
 
-    private $matrix_dont_answered  = array();
+    private $matrix_dont_answered = array();
 
     private function getDontAnsweredCount($question_id)
     {
-        if(isset($this->matrix_dont_answered[$question_id])) return $this->matrix_dont_answered[$question_id];
+        if (isset($this->matrix_dont_answered[$question_id])) return $this->matrix_dont_answered[$question_id];
 
-        $template     = $this->getCurrentSelectedSurveyTemplate();
-        $question     = $template->getQuestionById($question_id);
+        $template = $this->getCurrentSelectedSurveyTemplate();
+        $question = $template->getQuestionById($question_id);
         $filter_where = $this->generateFilters('S');
         $dependencies = $question->getDependsOn();
 
-        if(count($dependencies) == 0 && $question->isMandatory() && !$question->isHidden()) return 0;
+        if (count($dependencies) == 0 && $question->isMandatory() && !$question->isHidden()) return 0;
 
-        if(count($dependencies) == 0) {
+        if (count($dependencies) == 0) {
             // total of survey that answered this question
             $query = <<<SQL
         SELECT COUNT(ID) FROM
@@ -696,8 +694,7 @@ SQL;
             GROUP BY S.ID
         ) DONT_ANSWERED_QUESTION_N;
 SQL;
-        }
-        else{
+        } else {
 
             $dependencies_sql = <<<SQL
        AND EXISTS
@@ -712,15 +709,15 @@ SQL;
 SQL;
 
             $index_dep = 0;
-            foreach($dependencies as $dependency){
-                $question_id      = $dependency->ID;
-                $visibility       = $dependency->Visibility;
-                $operator         = $dependency->Operator;
-                $value_id         = $dependency->ValueID;
+            foreach ($dependencies as $dependency) {
+                $question_id = $dependency->ID;
+                $visibility = $dependency->Visibility;
+                $operator = $dependency->Operator;
+                $value_id = $dependency->ValueID;
                 $boolean_operator = $dependency->BooleanOperatorOnValues;
                 $dependencies_sql .= sprintf("( A.QuestionID = %s  AND A.Value = '%s' )", $question_id, $value_id);
 
-                if(count($dependencies) - 1 > $index_dep)   $dependencies_sql .= sprintf(" %s ", $boolean_operator);
+                if (count($dependencies) - 1 > $index_dep) $dependencies_sql .= sprintf(" %s ", $boolean_operator);
                 ++$index_dep;
             }
             $dependencies_sql .= " )  GROUP BY S.ID ) ";
@@ -746,37 +743,36 @@ SQL;
 SQL;
         }
 
-        $this->matrix_dont_answered[$question_id]   = intval(DB::query($query)->value());
+        $this->matrix_dont_answered[$question_id] = intval(DB::query($query)->value());
 
         return $this->matrix_dont_answered[$question_id];
     }
 
     public function SurveyBuilderMatrixPercentAnswers($question_id, $row_id, $column_id)
     {
-        $count              = $this->SurveyBuilderMatrixCountAnswers($question_id, $row_id, $column_id);
-        $total_count        = $this->SurveyBuilderSurveyCountByQuestion($question_id);
+        $count = $this->SurveyBuilderMatrixCountAnswers($question_id, $row_id, $column_id);
+        $total_count = $this->SurveyBuilderSurveyCountByQuestion($question_id);
         $count_dont_answers = $this->getDontAnsweredCount($question_id);
-        $div                = $total_count - $count_dont_answers;
-        $percent            = ($div == 0) ? 0 : ($count/ ($div )) * 100;
-        $percent            = sprintf ("%.2f", $percent);
+        $div = $total_count - $count_dont_answers;
+        $percent = ($div == 0) ? 0 : ($count / ($div)) * 100;
+        $percent = sprintf("%.2f", $percent);
 
-        return $percent.'%';
+        return $percent . '%';
     }
 
     public function SurveyBuilderCountAnswers($question_id, $value_id)
     {
         $question_id = intval($question_id);
-        $value_id    = intval($value_id) > 0 ? intval($value_id) : $value_id;
-        $template    = $this->getCurrentSelectedSurveyTemplate();
+        $value_id = intval($value_id) > 0 ? intval($value_id) : $value_id;
+        $template = $this->getCurrentSelectedSurveyTemplate();
 
-        if (is_null($template))
-        {
+        if (is_null($template)) {
             return;
         }
 
         $class_name = $this->getCurrentSelectedSurveyClassName();
 
-        $filters_where  = $this->generateFilters();
+        $filters_where = $this->generateFilters();
 
         $query_str = <<<SQL
         SELECT COUNT(A.Value) FROM SurveyAnswer A
@@ -815,24 +811,24 @@ SQL;
 
     public function exportQuestion(SS_HTTPRequest $request)
     {
-        $qid           = intval($request->requestVar('qid'));
-        $template      = $this->getCurrentSelectedSurveyTemplate();
-        if(is_null($template)) return $this->owner->httpError(404, "not found");
-        $question      = $template->getQuestionById($qid);
-        if(is_null($question)) return $this->owner->httpError(404, "not found");
-        if(!$question instanceof IDoubleEntryTableQuestionTemplate)  return $this->owner->httpError(403, "not instance");
+        $qid = intval($request->requestVar('qid'));
+        $template = $this->getCurrentSelectedSurveyTemplate();
+        if (is_null($template)) return $this->owner->httpError(404, "not found");
+        $question = $template->getQuestionById($qid);
+        if (is_null($question)) return $this->owner->httpError(404, "not found");
+        if (!$question instanceof IDoubleEntryTableQuestionTemplate) return $this->owner->httpError(403, "not instance");
 
         $results_array = array(array($question->label()));
         $column_labels = array(' ');
 
-        foreach($question->getColumns() as $column) {
+        foreach ($question->getColumns() as $column) {
             $column_labels[] = $column->label();
         }
         $results_array[] = $column_labels;
 
-        foreach($question->getRows() as $row) {
+        foreach ($question->getRows() as $row) {
             $rows_array = array($row->label());
-            foreach($row->Columns() as $row_column) {
+            foreach ($row->Columns() as $row_column) {
                 $rows_array[] = $this->SurveyBuilderMatrixCountAnswers($qid, $row->ID, $row_column->ID);
             }
             $results_array[] = $rows_array;
@@ -859,14 +855,14 @@ SQL;
         $answers_query = "  SELECT ANS.`Value` FROM SurveyAnswer ANS
                             INNER JOIN SurveyStep STP ON STP.ID = ANS.StepID
                             INNER JOIN Survey I ON I.ID = STP.SurveyID
-                            WHERE I.IsTest = 0 AND ANS.QuestionID IN (".implode(',',$pu_question_ids).")
+                            WHERE I.IsTest = 0 AND ANS.QuestionID IN (" . implode(',', $pu_question_ids) . ")
                             AND ANS.`Value` IS NOT NULL {$filters_where}";
 
         $answers = DB::query($answers_query);
 
         $question_values = SurveyQuestionValueTemplate::get()
-                            ->where("OwnerID IN (".implode(',',$pu_question_ids).")")
-                            ->map('ID','Value')->toArray();
+            ->where("OwnerID IN (" . implode(',', $pu_question_ids) . ")")
+            ->map('ID', 'Value')->toArray();
 
         // set question labels
         $values = array();
@@ -874,7 +870,7 @@ SQL;
         $total_answers = 0;
 
         foreach ($pu_question_ids as $pu_question_id) {
-            $pu_question = SurveyRadioButtonMatrixTemplateQuestion::get_by_id('SurveyRadioButtonMatrixTemplateQuestion',$pu_question_id);
+            $pu_question = SurveyRadioButtonMatrixTemplateQuestion::get_by_id('SurveyRadioButtonMatrixTemplateQuestion', $pu_question_id);
             foreach ($pu_question->Rows() as $row_value) {
                 $row_values_array[$row_value->Value] = 0;
             }
@@ -883,16 +879,16 @@ SQL;
             }
 
             // calculate total answers
-            $total_answers +=  $this->SurveyBuilderSurveyCountByQuestion($pu_question_id);
+            $total_answers += $this->SurveyBuilderSurveyCountByQuestion($pu_question_id);
         }
 
         // count answers
-        foreach($answers as $answer) {
-            $multi_answer = explode(',',$answer['Value']);
-            foreach($multi_answer as $single_answer) {
+        foreach ($answers as $answer) {
+            $multi_answer = explode(',', $answer['Value']);
+            foreach ($multi_answer as $single_answer) {
                 if (!$single_answer) continue;
 
-                $matrix = explode(':',$single_answer);
+                $matrix = explode(':', $single_answer);
                 if (count($matrix) < 2) continue;
 
                 $col = $matrix[0];
@@ -943,7 +939,7 @@ SQL;
         $total_answers = 0;
 
         foreach ($pu_question_ids as $pu_question_id) {
-            $total_answers +=  $this->SurveyBuilderSurveyCountByQuestion($pu_question_id);
+            $total_answers += $this->SurveyBuilderSurveyCountByQuestion($pu_question_id);
         }
 
         return $total_answers;
@@ -971,16 +967,15 @@ SQL;
 
     public function SurveyBuilderCountLang($lang)
     {
-        $template    = $this->getCurrentSelectedSurveyTemplate();
+        $template = $this->getCurrentSelectedSurveyTemplate();
 
-        if (is_null($template))
-        {
+        if (is_null($template)) {
             return;
         }
 
         $class_name = $this->getCurrentSelectedSurveyClassName();
 
-        $filters_where  = $this->generateFilters();
+        $filters_where = $this->generateFilters();
 
         $lang_filter = ($lang) ? "AND I.Lang = '{$lang}'" : "AND I.Lang IS NOT NULL";
 

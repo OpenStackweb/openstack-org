@@ -103,14 +103,55 @@ final class NewSurveyDataAutopopulationStrategy implements ISurveyAutopopulation
         }
     }
 
-    private function translateAnswerValue($old_value, $old_question, $new_question)
+    /**
+     * @param string $old_value
+     * @param ISurveyQuestionTemplate $old_question
+     * @param ISurveyQuestionTemplate $new_question
+     * @return string
+     */
+    private function translateAnswerValue($old_value, ISurveyQuestionTemplate $old_question, ISurveyQuestionTemplate $new_question)
     {
         $new_value = $old_value;
+
+        if($old_question instanceof IDoubleEntryTableQuestionTemplate && $new_question instanceof IDoubleEntryTableQuestionTemplate){
+            $new_tuples = [];
+
+            foreach (explode(',', $old_value) as $tuple) {
+                list($row_id, $col_id) = explode(':', $tuple);
+                $col     = SurveyQuestionColumnValueTemplate::get()->byID($col_id);
+                if(is_null($col)) continue;
+                $row     = SurveyQuestionRowValueTemplate::get()->byID($row_id);
+                if(is_null($row)) continue;
+
+                $col_val = $col->Value;
+                $row_val = $row->Value;
+
+                $new_col = SurveyQuestionColumnValueTemplate::get()->filter(
+                    [
+                        'Value' => $col_val,
+                        'OwnerID' => $new_question->ID
+                    ]
+                )->first();
+                $new_row = SurveyQuestionRowValueTemplate::get()->filter(
+                    [
+                        'Value'   => $row_val,
+                        'OwnerID' => $new_question->ID
+                    ]
+                )->first();
+
+                if (is_null($new_col) || is_null($new_row)) continue;
+
+                $new_tuples[] = "{$new_row->ID}:{$new_col->ID}";
+            }
+
+            return implode(',', $new_tuples);
+        }
+
         if($old_question instanceof IMultiValueQuestionTemplate && $new_question instanceof IMultiValueQuestionTemplate)
         {
             if($old_question instanceof IDropDownQuestionTemplate && $old_question->isCountrySelector() &&
                 $new_question instanceof IDropDownQuestionTemplate && $new_question->isCountrySelector())
-                return $new_value;
+                return $old_value;
             // need translate value
             $old_value = explode(',', $old_value);
             $new_value =  array();
@@ -129,7 +170,7 @@ final class NewSurveyDataAutopopulationStrategy implements ISurveyAutopopulation
                     array_push($new_value, $new_id  );
                 }
             }
-            $new_value = implode(',',$new_value);
+            return implode(',', $new_value);
         }
         return $new_value;
     }
