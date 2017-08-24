@@ -277,7 +277,7 @@ i.collapse-nav {
     }
     .navbar-days .navbar-collapse
     {
-        left: 7%;
+        left: 10%;
         position: absolute;
     }
 }
