@@ -23,7 +23,11 @@ import {
     REQUEST_TAGS_FREE_TEXT_QUESTIONS_BY_TEMPLATE,
     RECEIVE_TAGS_FREE_TEXT_QUESTIONS_BY_TEMPLATE,
     REQUEST_MERGE_TAGS_FREE_TEXT_QUESTION,
-    RECEIVE_MERGE_TAGS_FREE_TEXT_QUESTION
+    RECEIVE_MERGE_TAGS_FREE_TEXT_QUESTION,
+    REQUEST_LANGUAGES_BY_QUESTION,
+    RECEIVE_LANGUAGES_BY_QUESTION,
+    REQUEST_EXPORT_ANSWERS,
+    RECEIVE_EXPORT_ANSWERS
 } from './actions';
 
 import {
@@ -36,6 +40,8 @@ export const surveyFreeTextAnswersReducer = (
         question_id:0,
         questions: [],
         answers : [],
+        languages : ['All'],
+        selected_languages: [],
         tags: [],
         page_count: 0,
         page_size: 25,
@@ -46,10 +52,12 @@ export const surveyFreeTextAnswersReducer = (
     },
     action = {}
 ) => {
+    let response = '';
+
     switch(action.type){
         case REQUEST_ANSWERS_PAGE:
         {
-            const { page_size, page, question_id, search_term } = action.payload;
+            const { page_size, page, question_id, search_term, languages } = action.payload;
             let loading = search_term == '' ? true : false;
             return {
                 ...state,
@@ -59,13 +67,14 @@ export const surveyFreeTextAnswersReducer = (
                 question_id: question_id,
                 reload: false,
                 open_modal_show_stats: false,
-                search_term: search_term
+                search_term: search_term,
+                selected_languages: languages
             }
         }
         break;
         case RECEIVE_ANSWERS_PAGE:
         {
-            const { response } = action.payload;
+            response = action.payload.response;
             let page_count     = state.page_size > 0 ? parseInt(Math.ceil(response.count/state.page_size)) : 0;
             return {
                 ...state,
@@ -92,7 +101,7 @@ export const surveyFreeTextAnswersReducer = (
         break;
         case RECEIVE_FREE_TEXT_QUESTIONS_BY_TEMPLATE:
         {
-            const { response } = action.payload;
+            response = action.payload.response;
             return {
                 ...state,
                 questions: response.items,
@@ -112,7 +121,7 @@ export const surveyFreeTextAnswersReducer = (
                 loading: false,
                 reload: true,
             }
-        break;
+            break;
         case REQUEST_UPDATE_FREE_TEXT_ANSWER:
             return {
                 ...state,
@@ -124,13 +133,13 @@ export const surveyFreeTextAnswersReducer = (
                 ...state,
                 loading: false,
             }
-        break;
+            break;
         case SHOW_MESSAGE:
             return {
                 ...state,
                 loading: false
             };
-        break;
+            break;
         case REQUEST_TAGS_FREE_TEXT_QUESTIONS_BY_TEMPLATE:
             return {
                 ...state,
@@ -139,8 +148,7 @@ export const surveyFreeTextAnswersReducer = (
             };
             break;
         case RECEIVE_TAGS_FREE_TEXT_QUESTIONS_BY_TEMPLATE:
-            const { response } = action.payload;
-
+            response = action.payload.response;
             let tags = [];
             for(let tag of response.items){
                 tags.push(tag.value);
@@ -160,6 +168,32 @@ export const surveyFreeTextAnswersReducer = (
             break;
         case RECEIVE_MERGE_TAGS_FREE_TEXT_QUESTION:
             window.location.reload();
+            break;
+        case REQUEST_LANGUAGES_BY_QUESTION:
+            return {
+                ...state,
+                loading: true,
+            };
+            break;
+        case RECEIVE_LANGUAGES_BY_QUESTION:
+            response = action.payload.response;
+            return {
+                ...state,
+                languages: response.items,
+                loading: false
+            }
+            break;
+        case REQUEST_EXPORT_ANSWERS:
+            return {
+                ...state,
+                loading: true,
+            };
+            break;
+        case RECEIVE_EXPORT_ANSWERS:
+            return {
+                ...state,
+                loading: false
+            }
             break;
         default:
             return state;

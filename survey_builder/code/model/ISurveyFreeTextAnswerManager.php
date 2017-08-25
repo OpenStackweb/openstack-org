@@ -19,10 +19,11 @@ interface ISurveyFreeTextAnswerManager
      * @param int $page
      * @param int $page_size
      * @param string $search_term
+     * @param string $languages
      * @return array
      * @throws NotFoundEntityException
      */
-    public function getFreeTextAnswerByQuestion($question_id, $page, $page_size, $search_term);
+    public function getFreeTextAnswerByQuestion($question_id, $page, $page_size, $search_term, $languages);
 
     /**
      * @param int $question_id
@@ -69,4 +70,11 @@ interface ISurveyFreeTextAnswerManager
      * @return void
      */
     public function mergeTagsInFreeTextQuestion($template_id, $question_id, $tags, $replace_tag);
+
+    /**
+     * @param int $question_id
+     * @return array
+     * @throws NotFoundEntityException
+     */
+    public function getLanguagesByQuestion($question_id);
 }

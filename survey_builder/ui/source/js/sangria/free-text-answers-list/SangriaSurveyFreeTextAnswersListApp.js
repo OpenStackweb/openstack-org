@@ -26,7 +26,9 @@ import {
     extractTagsByRAKE,
     updateFreeTextAnswer,
     fetchFreeTextAnswersTagsByQuestion,
-    showFreeTextAnswersStatsView
+    showFreeTextAnswersStatsView,
+    fetchLanguagesByQuestion,
+    exportAnswers
 } from './actions';
 
 import {
@@ -40,6 +42,7 @@ import {
 
 import {SurveyTemplateSelector} from './components/SurveyTemplateSelector';
 import {SurveyTemplateQuestionSelector} from './components/SurveyTemplateQuestionSelector';
+import {SurveyLanguageSelector} from './components/SurveyLanguageSelector';
 import {TagInput} from './components/TagInput';
 
 const MAX_CLUSTER_QTY = 25;
@@ -65,6 +68,9 @@ class SangriaSurveyFreeTextAnswersListApp extends React.Component {
     onChangeSurveyTemplateQuestion(e){
         let target = e.currentTarget;
         let val    = target.value;
+
+        this.props.fetchLanguages(this.props.template_id, val);
+
         this.props.fetchFreeTextAnswers
         (
             this.props.template_id,
@@ -72,9 +78,25 @@ class SangriaSurveyFreeTextAnswersListApp extends React.Component {
             this.props.page_size,
             '',
             val,
-            this.props.search_term
+            this.props.search_term,
+            this.props.selected_languages
         );
         $('.filters-container').removeClass('hidden');
+    }
+
+    onChangeLanguage(values){
+        let selected_languages = values;
+
+        this.props.fetchFreeTextAnswers
+            (
+                this.props.template_id,
+                1,
+                this.props.page_size,
+                '',
+                this.props.question_id,
+                this.props.search_term,
+                selected_languages
+            );
     }
 
     componentDidUpdate(prevProps, prevState){
@@ -86,7 +108,8 @@ class SangriaSurveyFreeTextAnswersListApp extends React.Component {
                 this.props.page_size,
                 '',
                 this.props.question_id,
-                this.props.search_term
+                this.props.search_term,
+                this.props.selected_languages
             );
         }
     }
@@ -110,7 +133,8 @@ class SangriaSurveyFreeTextAnswersListApp extends React.Component {
             page_size,
             '',
             this.props.question_id,
-            this.props.search_term
+            this.props.search_term,
+            this.props.selected_languages
         );
     }
 
@@ -126,7 +150,8 @@ class SangriaSurveyFreeTextAnswersListApp extends React.Component {
             this.props.page_size,
             '',
             this.props.question_id,
-            this.props.search_term
+            this.props.search_term,
+            this.props.selected_languages
         );
     }
 
@@ -160,7 +185,13 @@ class SangriaSurveyFreeTextAnswersListApp extends React.Component {
     }
 
     onExportResultsClicked(e){
-
+        this.props.exportFreeTextAnswers
+            (
+                this.props.template_id,
+                this.props.question_id,
+                this.props.search_term,
+                this.props.selected_languages
+            );
     }
 
     onShowStatsClicked(e){
@@ -211,7 +242,8 @@ class SangriaSurveyFreeTextAnswersListApp extends React.Component {
             this.props.page_size,
             '',
             this.props.question_id,
-            val
+            val,
+            this.props.selected_languages
         );
     }
 
@@ -291,18 +323,24 @@ class SangriaSurveyFreeTextAnswersListApp extends React.Component {
 
                 <h3>Survey Free Text Answers</h3>
                 <div className="row">
-                    <div className="col-md-6">
+                    <div className="col-md-4">
                         <SurveyTemplateSelector className="form-control"
                                                 items={this.props.templates}
                                                 onChange={(e) => this.onChangeSurveyTemplate(e)}>
 
                         </SurveyTemplateSelector>
                     </div>
-                    <div className="col-md-6">
+                    <div className="col-md-4">
                         <SurveyTemplateQuestionSelector className="form-control"
                                                         items={this.props.questions}
                                                         onChange={(e) => this.onChangeSurveyTemplateQuestion(e)}>
                         </SurveyTemplateQuestionSelector>
+                    </div>
+                    <div className="col-md-4">
+                        <SurveyLanguageSelector items={this.props.languages}
+                                                defaultValue={this.props.selected_languages}
+                                                onChange={(e) => this.onChangeLanguage(e)}>
+                        </SurveyLanguageSelector>
                     </div>
                 </div>
                 <div>
@@ -405,6 +443,8 @@ export default connect(
             question_id           : state.question_id,
             answers               : state.answers,
             questions             : state.questions,
+            languages             : state.languages,
+            selected_languages    : state.selected_languages,
             page_count            : state.page_count,
             loading               : state.loading,
             current_page          : state.current_page,
@@ -416,11 +456,17 @@ export default connect(
         }
     },
     dispatch => ({
-        fetchFreeTextAnswers (template_id, page = 1, page_size = 25, order = '', question_id = 0, search_term = '') {
-            return dispatch(fetchAnswersPage({ template_id, page, page_size, order, question_id, search_term}));
+        fetchFreeTextAnswers (template_id, page = 1, page_size = 25, order = '', question_id = 0, search_term = '', languages = '') {
+            return dispatch(fetchAnswersPage({ template_id, page, page_size, order, question_id, search_term, languages}));
+        },
+        exportFreeTextAnswers (template_id, question_id = 0, search_term = '', languages = '') {
+            return dispatch(exportAnswers({ template_id, question_id, search_term, languages}));
         },
         fetchQuestions(template_id){
             return dispatch(fetchFreeTextQuestionByTemplate({ template_id }));
+        },
+        fetchLanguages(template_id, question_id){
+            return dispatch(fetchLanguagesByQuestion({ template_id, question_id }));
         },
         addTag(tag, template_id, question_id, answer_id){
             let payload    = { tag };

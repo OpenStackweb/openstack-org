@@ -42,13 +42,14 @@ final class SurveyFreeTextAnswerManager implements ISurveyFreeTextAnswerManager
      * @param int $page
      * @param int $page_size
      * @param string $search_term
+     * @param string $languages
      * @return array
      * @throws NotFoundEntityException
      */
-    public function getFreeTextAnswerByQuestion($question_id, $page, $page_size, $search_term)
+    public function getFreeTextAnswerByQuestion($question_id, $page, $page_size, $search_term, $languages)
     {
-       return $this->tx_manager->transaction(function() use($question_id, $page, $page_size, $search_term){
-          return $this->repository->getPaginatedFreeTextAnswers($question_id, $page, $page_size, $search_term);
+       return $this->tx_manager->transaction(function() use($question_id, $page, $page_size, $search_term, $languages){
+          return $this->repository->getPaginatedFreeTextAnswers($question_id, $page, $page_size, $search_term, $languages);
        });
     }
 
@@ -207,6 +208,18 @@ final class SurveyFreeTextAnswerManager implements ISurveyFreeTextAnswerManager
                     $answer->Tags()->add($replace_tag_obj);
                 }
             }
+        });
+    }
+
+    /**
+     * @param int $question_id
+     * @return array
+     * @throws NotFoundEntityException
+     */
+    public function getLanguagesByQuestion($question_id)
+    {
+        return $this->tx_manager->transaction(function() use($question_id){
+            return $this->repository->getLanguagesByQuestion($question_id);
         });
     }
 }

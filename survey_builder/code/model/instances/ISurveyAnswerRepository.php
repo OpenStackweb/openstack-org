@@ -33,10 +33,11 @@ interface ISurveyAnswerRepository extends IEntityRepository {
      * @param int $page
      * @param int $page_size
      * @param string $search_term
+     * @param string $languages
      * @return array
      * @throws NotFoundEntityException
      */
-    public function getPaginatedFreeTextAnswers($question_id, $page, $page_size, $search_term);
+    public function getPaginatedFreeTextAnswers($question_id, $page, $page_size, $search_term, $languages);
 
     /**
      * @param int $question_id
@@ -49,4 +50,10 @@ interface ISurveyAnswerRepository extends IEntityRepository {
      * @return array
      */
     public function getCountForTags($question_id);
+
+    /**
+     * @param int $question_id
+     * @return array
+     */
+    public function getLanguagesByQuestion($question_id);
 }

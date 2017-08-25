@@ -29,8 +29,12 @@ export const REQUEST_UPDATE_FREE_TEXT_ANSWER         = 'REQUEST_UPDATE_FREE_TEXT
 export const RECEIVE_UPDATE_FREE_TEXT_ANSWER              = 'RECEIVE_UPDATE_FREE_TEXT_ANSWER';
 export const REQUEST_TAGS_FREE_TEXT_QUESTIONS_BY_TEMPLATE = 'REQUEST_TAGS_FREE_TEXT_QUESTIONS_BY_TEMPLATE';
 export const RECEIVE_TAGS_FREE_TEXT_QUESTIONS_BY_TEMPLATE = 'RECEIVE_TAGS_FREE_TEXT_QUESTIONS_BY_TEMPLATE';
-export const REQUEST_MERGE_TAGS_FREE_TEXT_QUESTION = 'REQUEST_MERGE_TAGS_FREE_TEXT_QUESTION';
-export const RECEIVE_MERGE_TAGS_FREE_TEXT_QUESTION = 'RECEIVE_MERGE_TAGS_FREE_TEXT_QUESTION';
+export const REQUEST_MERGE_TAGS_FREE_TEXT_QUESTION    = 'REQUEST_MERGE_TAGS_FREE_TEXT_QUESTION';
+export const RECEIVE_MERGE_TAGS_FREE_TEXT_QUESTION    = 'RECEIVE_MERGE_TAGS_FREE_TEXT_QUESTION';
+export const REQUEST_LANGUAGES_BY_QUESTION            = 'REQUEST_LANGUAGES_BY_QUESTION';
+export const RECEIVE_LANGUAGES_BY_QUESTION            = 'RECEIVE_LANGUAGES_BY_QUESTION';
+export const REQUEST_EXPORT_ANSWERS                   = 'REQUEST_EXPORT_ANSWERS';
+export const RECEIVE_EXPORT_ANSWERS                   = 'RECEIVE_EXPORT_ANSWERS';
 
 export const fetchAnswersPage = (params) => (dispatch) => {
     let {template_id, question_id} = params;
@@ -40,6 +44,18 @@ export const fetchAnswersPage = (params) => (dispatch) => {
         createAction(RECEIVE_ANSWERS_PAGE),
         `api/v1/sangria/survey-templates/${template_id}/questions/${question_id}/free-text-answers`
     )(params)(dispatch);
+};
+
+export const exportAnswers = (params) => (dispatch) => {
+    let {template_id, question_id} = params;
+
+    dispatch(createAction(REQUEST_EXPORT_ANSWERS));
+
+    let url = URI(`api/v1/sangria/survey-templates/${template_id}/questions/${question_id}/export-answers`).query(params).toString();
+    window.open(url);
+
+    dispatch(createAction(RECEIVE_EXPORT_ANSWERS));
+
 };
 
 export const fetchFreeTextQuestionByTemplate = (params) => (dispatch) => {
@@ -142,4 +158,14 @@ export const mergeTags = (params, payload) => (dispatch) => {
         `api/v1/sangria/survey-templates/${template_id}/questions/${question_id}/free-text-answers/merge_tags`,
         payload
     )(params)(dispatch);
+};
+
+export const fetchLanguagesByQuestion = (params) => (dispatch) => {
+    let {template_id, question_id} = params;
+
+    getRequest(
+        createAction(REQUEST_LANGUAGES_BY_QUESTION),
+        createAction(RECEIVE_LANGUAGES_BY_QUESTION),
+        `api/v1/sangria/survey-templates/${template_id}/questions/${question_id}/languages`
+)(params)(dispatch);
 };

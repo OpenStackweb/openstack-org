@@ -226,10 +226,11 @@ final class SapphireAnswerSurveyRepository
      * @param int $page
      * @param int $page_size
      * @param string $search_term
+     * @param string $languages
      * @return array
      * @throws NotFoundEntityException
      */
-    public function getPaginatedFreeTextAnswers($question_id, $page, $page_size, $search_term)
+    public function getPaginatedFreeTextAnswers($question_id, $page, $page_size, $search_term, $languages)
     {
         $question = SurveyQuestionTemplate::get()->byID($question_id);
         if(is_null($question)) throw new NotFoundEntityException('SurveyQuestionTemplate');
@@ -244,14 +245,26 @@ AND EXISTS (
             WHERE SurveyAnswer_Tags.SurveyAnswerID = SurveyAnswer.ID AND SurveyAnswerTag.Value LIKE '%{$search_term}%'
         )
 SQL;
-
         }
+
+        $language_condition = '';
+        if(!empty($languages) && !in_array('All',$languages)){
+            $languages_str = implode("','",$languages);
+            $language_condition = <<<SQL
+AND EXISTS (
+			SELECT * FROM Survey
+            INNER JOIN SurveyStep ON SurveyStep.SurveyID = Survey.ID
+            WHERE SurveyStep.ID = SurveyAnswer.StepID AND Survey.Lang IN ('{$languages_str}')
+        )
+SQL;
+        }
+
         $query = <<<SQL
         SELECT SurveyAnswer.* FROM SurveyAnswer
         WHERE 
         QuestionID = {$question_id} 
         AND SurveyAnswer.Value IS NOT NULL AND SurveyAnswer.Value <> ''
-        {$search_condition}
+        {$search_condition} {$language_condition}
 SQL;
 
         $count = intval(DB::query("SELECT COUNT(*) FROM ( {$query} ) AS T")->value());
@@ -304,5 +317,24 @@ SQL;
 
         $res   = DB::query($query);
         return $res;
+    }
+
+    /**
+     * @param int $question_id
+     * @return array
+     */
+    public function getLanguagesByQuestion($question_id)
+    {
+        $query = <<<SQL
+    SELECT DISTINCT(Lang) FROM Survey S WHERE EXISTS (
+        SELECT * FROM SurveyQuestionTemplate Q
+        LEFT JOIN SurveyStepTemplate ST ON ST.ID = Q.StepID
+        WHERE ST.SurveyTemplateID = S.TemplateID AND Q.ID = {$question_id}
+    );
+SQL;
+
+        $res   = DB::query($query);
+
+        return $res->column();
     }
 }
