@@ -212,14 +212,40 @@
 </div>
     <% include Quantcast %>
     <% include TwitterUniversalWebsiteTagCode %>
+
+    <div id="orderModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Summit Registration</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        Thank you for completing your OpenStack Summit registration.<br>
+                        An email receipt with details of your purchase will be sent to the address that you registered with.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 <script type="text/javascript" src="/themes/openstack/static/js/jquery.tooltipster.min.js"></script>
 <script>
+    var order_complete = false;
+    <% if getOrder() %>
+        order_complete = {$getOrder()};
+    <% end_if %>
+
     $(document).ready(function() {
         $('.tracks-tooltip').tooltipster({
             maxWidth: '300'
         });
+
+        if (order_complete) {
+            $('#orderModal').modal('show');
+        }
     });
 </script>
     <% include Page_LinkedinInsightTracker %>
