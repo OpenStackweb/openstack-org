@@ -22,8 +22,14 @@ class SangriaApi extends AbstractRestfulJsonApi
     protected function authorize()
     {
         //check permissions
-        if(!Permission::check("SANGRIA_ACCESS"))
-            return false;
+        if ($this->request->param('SUBROUTE') == SangriaSurveyBuilderRouterApiExtension::SubRouteSurveyTemplates) {
+            if(!Permission::check("FREE_TEXT_TAGGING_ACCESS"))
+                return false;
+        } else {
+            if(!Permission::check("SANGRIA_ACCESS"))
+                return false;
+        }
+
         return true;
     }
 

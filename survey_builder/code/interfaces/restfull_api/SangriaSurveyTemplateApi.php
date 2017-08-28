@@ -71,8 +71,10 @@ class SangriaSurveyTemplateApi extends AbstractRestfulJsonApi
     protected function authorize()
     {
         //check permissions
-        if(!Permission::check("SANGRIA_ACCESS"))
+        if(!Permission::check("FREE_TEXT_TAGGING_ACCESS")) {
             return false;
+        }
+
         return true;
     }
 

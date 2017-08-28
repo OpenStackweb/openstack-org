@@ -39,9 +39,17 @@ final class SangriaPage_Controller extends AdminController implements Permission
 
     function init()
     {
-        if (!Permission::check("SANGRIA_ACCESS")) {
-            Security::permissionFailure();
+
+        if ($this->request->param('Action') == 'ViewSurveyFreeAnswersList') {
+            if (!Permission::check("FREE_TEXT_TAGGING_ACCESS")) {
+                return Security::permissionFailure();
+            }
+        } else {
+            if (!Permission::check("SANGRIA_ACCESS")) {
+                Security::permissionFailure();
+            }
         }
+
         parent::init();
 
         Requirements::css('fonts.googleapis.com/css?family=PT+Sans&subset=latin');
@@ -76,6 +84,12 @@ final class SangriaPage_Controller extends AdminController implements Permission
                 'category' => 'Sangria',
                 'help'     => '',
                 'sort'     => 0
+            ),
+            'FREE_TEXT_TAGGING_ACCESS' => array(
+                'name'     => 'Access the free text tagging page',
+                'category' => 'Sangria',
+                'help'     => '',
+                'sort'     => 1
             ),
         );
     }

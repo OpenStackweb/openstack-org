@@ -83,3 +83,4 @@ migrations:
   - AddUniqueIndexMemberScheduleFavorites
   - AddONDELETECascadeFKOnInheritanceMappingMigration
   - SurveyDoubleEntryTableQuestionTemplateDataFixMigration
+  - CreateFreeTextTaggingGroupMigration
