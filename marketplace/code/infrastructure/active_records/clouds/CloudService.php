@@ -19,14 +19,12 @@ class CloudService
     implements ICloudService
 {
 
-	static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
-
-	static $has_many = array(
+	static $has_many = [
 		'DataCenters'       => 'DataCenterLocation',
 		//@override
 		'Capabilities'      => 'CloudServiceOffered',
 		'DataCenterRegions' => 'DataCenterRegion',
-	);
+	];
 
 	/**
 	 * @return IDataCenterLocation[]

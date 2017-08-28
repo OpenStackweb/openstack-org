@@ -19,28 +19,26 @@ class DataCenterLocation
 	implements IDataCenterLocation
 {
 
-	static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
-
-	static $db = array(
+	static $db = [
 		'City'    => 'Varchar(125)',
 		'State'   => 'Varchar(50)',
 		'Country' => 'Varchar(5)',
 		'Lat'     => 'Decimal',
 		'Lng'     => 'Decimal',
-	);
+	];
 
-	static $has_one = array(
+	static $has_one = [
 		'CloudService'     => 'CloudService',
 		'DataCenterRegion' => 'DataCenterRegion',
-	);
+	];
 
-	static $has_many = array(
+	static $has_many = [
 		'AvailabilityZones' => 'AvailabilityZone',
-	);
+	];
 
-	static $indexes = array(
-		'City_State_Country_Service_Region' => array('type'=>'unique', 'value'=>'CloudServiceID,DataCenterRegionID,City,Country,State'),
-	);
+	static $indexes = [
+		'City_State_Country_Service_Region' => ['type'=>'unique', 'value'=>'CloudServiceID,DataCenterRegionID,City,Country,State'],
+	];
 
 	public function setCountry($country)
 	{

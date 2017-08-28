@@ -22,7 +22,6 @@ class Region  extends DataObject implements IRegion {
 		'Name'  => 'Varchar',
 	);
 
-
 	static $indexes = array(
 		'Name' => array('type'=>'unique', 'value'=>'Name')
 	);

@@ -16,23 +16,21 @@
  */
 class MarketPlaceVideoType extends DataObject implements IMarketPlaceVideoType {
 
-	static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
 
-	static $db = array(
+	static $db = [
 		'Type'               => 'Varchar',
 		'Title'              => 'Text',
 		'Description'        => 'Text',
 		'MaxTotalVideoTime'  => 'int',
-	);
+	];
 
-	static $indexes = array(
-		'Type' => array('type'=>'unique', 'value'=>'Type')
-	);
+	static $indexes = [
+		'Type' => ['type'=>'unique', 'value'=>'Type']
+	];
 
-	static $summary_fields = array(
+	static $summary_fields = [
 		'Type' => 'Type',
-	);
-
+	];
 
 	/**
 	 * @return int

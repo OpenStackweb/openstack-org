@@ -19,12 +19,13 @@ class CloudServiceOffered
 	implements ICloudServiceOffered
 {
 
-	static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
+    static $db = [
+        'Type'  => 'Varchar',
+    ];
 
-
-	static $many_many = array(
+	static $many_many = [
 		'PricingSchemas' => 'PricingSchemaType',
-	);
+	];
 
 	/**
 	 * @return IPricingSchemaType[]

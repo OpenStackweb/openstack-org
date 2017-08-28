@@ -19,11 +19,10 @@ class ConsultantServiceOfferedType
 	implements IConsultantServiceOfferedType
 {
 
-	static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
-
-	static $db = array(
+	static $db = [
 		'Type' => 'Text',
-	);
+	];
+
 	/**
 	 * @return string
 	 */

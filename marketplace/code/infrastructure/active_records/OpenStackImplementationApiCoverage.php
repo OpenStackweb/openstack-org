@@ -18,16 +18,14 @@ class OpenStackImplementationApiCoverage
 	extends DataObject
 	implements IOpenStackImplementationApiCoverage {
 
-	static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
-
-	static $db = array(
+	static $db = [
 		'CoveragePercent' => 'Int',
-	);
+	];
 
-	static $has_one = array(
+	static $has_one = [
 		'Implementation'             => 'OpenStackImplementation',
 		'ReleaseSupportedApiVersion' => 'OpenStackReleaseSupportedApiVersion',
-	);
+	];
 
 	/**
 	 * @return int

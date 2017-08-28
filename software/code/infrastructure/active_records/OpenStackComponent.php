@@ -20,8 +20,6 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
 
     use SluggableEntity;
 
-    private static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
-
     // IMPORTANT : this fixes the order for categories on software page
     public static $categories = array(
         "Compute",
@@ -35,7 +33,7 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
         "None"
     );
 
-    private static $db = array
+    static $db = array
     (
         'Name'                         => 'Varchar(255)',
         'CodeName'                     => 'Varchar(255)',
@@ -61,13 +59,13 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
         'Slug'                         => 'Varchar(255)'
     );
 
-    private static $has_one = array
+    static $has_one = array
     (
         "LatestReleasePTL" => "Member",
         "Mascot"           => "Mascot"
     );
 
-    private static $has_many = array
+    static $has_many = array
     (
         'Versions'       => 'OpenStackApiVersion',
         'RelatedContent' => 'OpenStackComponentRelatedContent',
@@ -75,12 +73,12 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
     );
 
 
-    private static $belongs_many_many = array
+    static $belongs_many_many = array
     (
         "Releases" => "OpenStackRelease",
     );
 
-    private static $indexes = array
+    static $indexes = array
     (
         'Name'     => array('type' => 'index', 'value' => 'Name'),
         'CodeName' => array('type' => 'index', 'value' => 'CodeName'),
@@ -94,7 +92,7 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
         )
     );
 
-    private static $defaults = array
+    static $defaults = array
     (
         'ShowOnMarketplace' => 1,
     );

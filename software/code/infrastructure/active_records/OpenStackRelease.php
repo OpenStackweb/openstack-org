@@ -20,10 +20,7 @@ class OpenStackRelease
     implements IOpenStackRelease
 {
 
-    static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
-
     static $db = [
-
         'Name'            => 'Varchar',
         'ReleaseNumber'   => 'Varchar',
         'ReleaseDate'     => 'Date',
@@ -32,14 +29,12 @@ class OpenStackRelease
         'HasStatistics'   => 'Boolean',
     ];
 
-    static $summary_fields = array
-    (
+    static $summary_fields = [
         'Name'          => 'Name',
         'ReleaseNumber' => 'Release Number',
         'ReleaseDate'   => 'Release Date',
         'Status'        => 'Status',
-    );
-
+    ];
 
     static $indexes = array
     (
@@ -48,10 +43,9 @@ class OpenStackRelease
         'ReleaseDate'   => array('type' => 'unique', 'value' => 'ReleaseDate'),
     );
 
-    static $many_many = array
-    (
+    static $many_many =[
         'OpenStackComponents' => 'OpenStackComponent',
-    );
+    ];
 
     private static $many_many_extraFields = [
 

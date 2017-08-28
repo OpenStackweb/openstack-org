@@ -14,18 +14,17 @@
 
 class InteropDesignatedSection extends DataObject {
 
-    static $db = array(
-        'Name'  => 'Varchar',
-        'Comment' => 'HTMLText',
+    static $db = [
+        'Name'     => 'Varchar',
+        'Comment'  => 'HTMLText',
         'Guidance' => 'HTMLText',
-        'Status' =>  "Enum('Required, Advisory, Deprecated, Removed, Informational','Required')",
-    );
+        'Status'   =>  "Enum('Required, Advisory, Deprecated, Removed, Informational','Required')",
+    ];
 
-    private static $belongs_many_many = array(
+    static $belongs_many_many = [
         "Version" => "InteropProgramVersion",
         "Program" => "InteropProgramType"
-    );
-
+    ];
 
     function getCMSFields()
     {

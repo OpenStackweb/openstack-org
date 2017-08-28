@@ -1,0 +1,22 @@
+---
+Name: database_config
+After: 'framework/*','cms/*', 'openstack/*'
+---
+Distribution:
+  extensions:
+    - MandatoryDataObject
+Appliance:
+  extensions:
+    - MandatoryDataObject
+Consultant:
+  extensions:
+    - MandatoryDataObject
+PrivateCloudService:
+  extensions:
+    - MandatoryDataObject
+PublicCloudService:
+  extensions:
+    - MandatoryDataObject
+RemoteCloudService:
+  extensions:
+    - MandatoryDataObject

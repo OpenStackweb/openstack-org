@@ -17,8 +17,6 @@
 final class SpokenLanguage extends DataObject
 implements ISpokenLanguage {
 
-	static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
-
 	static $db = array(
 		'Name'  => 'Varchar',
 	);

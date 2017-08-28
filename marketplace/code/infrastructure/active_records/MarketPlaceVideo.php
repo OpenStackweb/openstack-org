@@ -16,20 +16,18 @@
  */
 class MarketPlaceVideo extends DataObject implements IMarketPlaceVideo {
 
-	static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
-
-	static $db = array(
+	static $db = [
 		'Name'         => 'Text',
 		'Description'  => 'Text',
 		'YouTubeID'    => 'Text',
 		//seconds
 		'Length'       => 'int',
-	);
+	];
 
-	static $has_one = array(
+	static $has_one = [
 		'Type'  => 'MarketPlaceVideoType',
 		'Owner' => 'CompanyService',
-	);
+	];
 
 	/**
 	 * @return int
