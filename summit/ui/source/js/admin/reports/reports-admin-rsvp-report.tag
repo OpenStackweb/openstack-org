@@ -23,6 +23,10 @@
                     <th>Date</th>
                     <th each={ header in headers }>{ header }</th>
                     <th style="width:15%">Emails Sent</th>
+                    <th>
+                        Send To
+                        <input type="checkbox" class="send_toggle" onclick={ toggleAllEmail } />
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -36,13 +40,17 @@
                             * { email.subject }
                         </div>
                     </td>
+                    <td class="center_text">
+                        <input type="checkbox" class="send-to" checked={ rsvp.send_email } onclick={ toggleEmail }/>
+                    </td>
                 </tr>
             </tbody>
         </table>
     </div>
-    <nav>
+
+    <!--<nav>
     <ul id="report-pager" class="pagination"></ul>
-    </nav>
+    </nav>-->
 
     <script>
         this.dispatcher      = opts.dispatcher;
@@ -64,6 +72,15 @@
         eventClick(ev) {
             $('#search-term').val(ev.item.event.event_id);
             self.getReport(1);
+        }
+
+        toggleAllEmail(ev) {
+            var checked = ev.target.checked;
+            $('.send-to').attr('checked',checked);
+        }
+
+        toggleEmail(ev) {
+            self.rsvps[ev.item.i].send_email = ev.target.checked;
         }
 
         getReport(page) {
@@ -120,9 +137,9 @@
         self.dispatcher.on(self.dispatcher.OPEN_EMAIL_MODAL_RSVP_REPORT,function() {
             var emails = '';
             if (self.rsvps[0].rsvp.hasOwnProperty('Email')){
-                emails = self.rsvps.filter(a => !a.attendee.emailed && a.rsvp.Email).map(r => r.rsvp.Email).join(',');
+                emails = self.rsvps.filter(a => a.send_email && a.rsvp.Email).map(r => r.rsvp.Email).join(',');
             } else {
-                emails = self.rsvps.filter(a => !a.attendee.emailed && a.attendee.email).map(r => r.attendee.email).join(',');
+                emails = self.rsvps.filter(a => a.send_email && a.attendee.email).map(r => r.attendee.email).join(',');
             }
 
             $('#email-from').val('');

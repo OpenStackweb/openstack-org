@@ -66,3 +66,9 @@ th .fa {
 .rsvp-table .email-popover {
     cursor: pointer;
 }
+
+.rsvp-table .send_toggle {
+    bottom: -3px;
+    position: relative;
+    margin-left: 10px;
+}

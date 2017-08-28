@@ -415,8 +415,8 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
         try
         {
             $query_string = $request->getVars();
-            $page         = (isset($query_string['page'])) ? Convert::raw2sql($query_string['page']) : '';
-            $page_size    = (isset($query_string['items'])) ? Convert::raw2sql($query_string['items']) : '';
+            $page         = 1;//(isset($query_string['page'])) ? Convert::raw2sql($query_string['page']) : '';
+            $page_size    = PHP_INT_MAX;//(isset($query_string['items'])) ? Convert::raw2sql($query_string['items']) : '';
             $search_term  = (isset($query_string['term'])) ? Convert::raw2sql($query_string['term']) : '';
             $summit_id    = intval($request->param('SUMMIT_ID'));
             $summit       = $this->summit_repository->getById($summit_id);
@@ -454,7 +454,8 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
                                 'attendee' => ['id' => $rsvp->SubmittedBy()->ID, 'emailed' => $emailed, 'email' => $email],
                                 'date' => $rsvp->LastEdited,
                                 'emails' => $emails,
-                                'rsvp' => $rsvp_array_template
+                                'rsvp' => $rsvp_array_template,
+                                'send_email' => !$emailed
                             )
                             ;
                             foreach ($rsvp->Answers() as $answer) {
