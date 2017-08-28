@@ -1,5 +1,5 @@
 
-<div class="tokyo-landing-wrapper boston" style="background: url('{$SummitImage.Image.getURL()}') no-repeat right -{$BGImageOffset}px">
+<div class="tokyo-landing-wrapper boston" style="background: url('{$SummitImage.Image.getURL()}') no-repeat center center">
     <div class="container">
     	<div class="row">
     		<div class="col-sm-12">
