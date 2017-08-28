@@ -33,7 +33,7 @@
         <div class="add-your-course">
             <p>
                 Does your company offer an OpenStack public cloud? Be listed here!
-                <a href="mailto:info@openstack.org">Email us for details</a>
+                <a href="mailto:ecosystem@openstack.org">Email us for details</a>
             </p>
         </div>
     </div>
