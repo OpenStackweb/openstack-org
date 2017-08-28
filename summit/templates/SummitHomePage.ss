@@ -35,7 +35,7 @@
         <div class="row summit-row">
 
             <% with $PreviousSummit %>
-            <div class="col-sm-4 small-single-summit">
+            <div class="col-sm-3 small-single-summit">
                 <a href="/videos/summits/boston-2017" class="single-summit past-summit">
                     <h2>Boston</h2>
                     <h4>Watch The Sessions!</h4>
@@ -48,7 +48,7 @@
             <% end_with %>
 
             <% with $CurrentSummit %>
-            <div class="col-sm-4 small-single-summit">
+            <div class="col-sm-3 small-single-summit">
                 <a href="/summit/sydney-2017/" class="single-summit current-summit">
                     <h2>$Title</h2>
                     <div class="btn register-btn-lrg skinny">JOIN US</div>
@@ -59,13 +59,23 @@
                 </div>
             </div>
             <% end_with %>
-            <div class="col-sm-4 small-single-summit">
+            <div class="col-sm-3 small-single-summit">
                 <a href="/summit/vancouver-2018/" class="single-summit future-summit2">
                     <h2>Vancouver</h2>
                     <h4>Get Ready</h4>
                 </a>
                 <div class="single-summit-date future">
                     May 21-24, 2018
+                    <div class="date-circle"></div>
+                </div>
+            </div>
+            <div class="col-sm-3 small-single-summit">
+                <a href="/summit/berlin-2018/" class="single-summit future-summit2">
+                    <h2>Berlin</h2>
+                    <h4>Get Ready</h4>
+                </a>
+                <div class="single-summit-date future">
+                    Nov 13-15, 2018
                     <div class="date-circle"></div>
                 </div>
             </div>
