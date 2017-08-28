@@ -120,6 +120,8 @@ class SangriaPageSurveyBuilderStatisticsExtension extends Extension
                     continue;
                 } else if ($qid == 'lang') {
                     $output .= 'Language,';
+                } else if ($qid == 'nps') {
+                    $output .= 'NPS,';
                 }
                 $q = $template->getQuestionById($qid);
                 if (is_null($q)) {
@@ -249,6 +251,22 @@ SQL;
         )
 SQL;
 
+        $nps_query = <<<SQL
+        AND EXISTS
+        (
+            SELECT * FROM SurveyAnswer A2
+            INNER JOIN SurveyStep S2 ON S2.ID = A2.StepID
+            INNER JOIN Survey I2 ON I2.ID = S2.SurveyID
+            INNER JOIN SurveyTemplate SSTPL2 ON SSTPL2.ID = I2.TemplateID
+            INNER JOIN SurveyQuestionValueTemplate SQVT2 ON SQVT2.ID = A2.`Value`
+            WHERE
+            I2.ClassName = '{$class_name}' AND I2.IsTest = 0
+            AND SSTPL2.ID = %s AND A2.QuestionID = %s
+            AND SQVT2.`Value` >= %s AND SQVT2.`Value` < %s
+            AND I2.ID = {$survey_table_prefix}.ID
+        )
+SQL;
+
         $filters_where = '';
 
         if (!empty($from) && !empty($to)) {
@@ -260,10 +278,24 @@ SQL;
             $filters = explode(',', $filters);
             foreach ($filters as $t) {
                 $t = explode(':', $t);
-                $qid = intval($t[0]);
+                $qid = is_int($t[0]) ? intval($t[0]) : $t[0];
                 $vid = is_int($t[1]) ? intval($t[1]) : $t[1];
                 if ($qid == 'lang') {
                     $filters_where .= sprintf($lang_query, $template->ID, $vid);
+                } else if($qid == 'nps') {
+                    $qid = $t[1];
+                    $vid = $t[2];
+                    if ($vid == 'D') {
+                        $lower = 0;
+                        $upper = 7;
+                    } else if ($vid == 'N') {
+                        $lower = 7;
+                        $upper = 9;
+                    } else { //vid = P
+                        $lower = 9;
+                        $upper = 11;
+                    }
+                    $filters_where .= sprintf($nps_query, $template->ID, $qid, $lower, $upper);
                 } else {
                     if (count($t) === 3)
                         $vid = sprintf('%s:%s', $t[1], $t[2]);
@@ -995,5 +1027,63 @@ SQL;
         return DB::query($query)->value();
     }
 
+    public function SurveyBuilderSurveyNPS($question_id)
+    {
+        $template = $this->getCurrentSelectedSurveyTemplate();
+        if (is_null($template)) return 0;
+
+        $question = $template->getQuestionById($question_id);
+        if (is_null($question)) return 0;
+
+        $class_name = $this->getCurrentSelectedSurveyClassName();
+
+        $filters_where = $this->generateFilters();
+
+        $query = <<<SQL
+    SELECT SUM(IF(V.`Value` < 7, 1, 0)) AS D, SUM(IF(V.`Value` > 6 AND V.`Value` < 9, 1, 0)) AS N, SUM(IF(V.`Value` > 8, 1, 0)) AS P
+    FROM SurveyAnswer A
+    INNER JOIN SurveyQuestionValueTemplate V ON V.ID = A.`Value`
+    LEFT JOIN SurveyStep S ON S.ID = A.StepID
+    LEFT JOIN Survey I ON I.ID = S.SurveyID
+    WHERE A.QuestionID = $question_id AND A.`Value` IS NOT NULL AND
+    I.TemplateID = $template->ID AND I.ClassName = '{$class_name}' AND I.IsTest = 0
+    AND EXISTS
+    (
+        SELECT COUNT(A.ID) AS AnsweredMandatoryQuestionCount
+        FROM SurveyAnswer A
+        INNER JOIN SurveyStep STP ON STP.ID = A.StepID
+        INNER JOIN Survey S ON S.ID = STP.SurveyID
+        WHERE
+        S.ID = I.ID AND S.IsTest = 0 AND
+        A.QuestionID IN
+        (
+            SELECT Q.ID FROM SurveyQuestionTemplate Q
+            INNER JOIN SurveyStepTemplate STP ON STP.ID = Q.StepID AND STP.SurveyTemplateID = $template->ID
+            WHERE Q.Mandatory = 1 AND NOT EXISTS ( SELECT ID FROM SurveyQuestionTemplate_DependsOn DP WHERE SurveyQuestionTemplateID = Q.ID )
+        )
+        GROUP BY S.ID
+    )
+    {$filters_where};
+SQL;
+
+        $results = new ArrayList();
+        $total_count = $this->SurveyBuilderSurveyCountByQuestion($question_id);
+
+        if ($total_count) {
+            foreach(DB::query($query) as $row) {
+                $d = round($row['D']/$total_count,2)*100;
+                $n = round($row['N']/$total_count,2)*100;
+                $p = round($row['P']/$total_count,2)*100;
+
+                $results->push(new ArrayData(['Label' => 'D', 'Value' => $d]));
+                $results->push(new ArrayData(['Label' => 'N', 'Value' => $n]));
+                $results->push(new ArrayData(['Label' => 'P', 'Value' => $p]));
+                $results->push(new ArrayData(['Label' => 'NPS', 'Value' => ($p - $d)]));
+
+            }
+        }
+
+        return $results;
+    }
 
 }

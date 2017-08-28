@@ -45,7 +45,9 @@
                 <% include SangriaPage_StatisticsLanguage ParentPage=$Top, QuestionID=$ID %>
 
                 <% loop SurveyQuestions2Show %>
-                    <% if $ClassName == 'SurveyRadioButtonMatrixTemplateQuestion' %>
+                    <% if $Name == 'NetPromoter' %>
+                        <% include SangriaPage_StatisticsNetPromoter ParentPage=$Top, QuestionID=$ID %>
+                    <% else_if $ClassName == 'SurveyRadioButtonMatrixTemplateQuestion' %>
                         <% include SangriaPage_StatisticsSurveyRadioButtonMatrixTemplateQuestion ParentPage=$Top, QuestionID=$ID %>
                     <% else %>
                         <% include SangriaPage_StatisticsMultiValueQuestionTemplate ParentPage=$Top, QuestionID=$ID %>
