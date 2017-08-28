@@ -475,7 +475,7 @@ SQL;
 
                 foreach($q->Values() as $v)
                 {
-                    $header = sprintf('%s - %s',$name, $v->Value );
+                    $header = self::functionPrepareValueForCSV(sprintf('%s - %s', $name, $v->Value));
                     $template_1[$header] = null;
                 }
             }
@@ -483,7 +483,7 @@ SQL;
                 if (strpos($name,'Country') !== false) {
                     $template_1['Continent'] = null;
                 }
-                $template_1[$name] = null;
+                $template_1[self::functionPrepareValueForCSV($name)] = null;
             }
 
         }
@@ -502,41 +502,39 @@ AND ES.ParentID = {$template_id}
 ORDER BY SS.`Order`, Q.`Order`;
 SQL;
 
-        $res = DB::query($entity_survey_header_query);
-        $template_2 = array( 'DeploymentID' => null);
+        $res        = DB::query($entity_survey_header_query);
+        $template_2 = [ 'DeploymentID' => null];
         foreach($res as $row)
         {
             $name = $row['Name'];
-            if(in_array($name, $flat_fields_entity))
-            {
-                $q = SurveyMultiValueQuestionTemplate::get()->byID(intval($row['QuestionID']));
-                if(is_null($q)) continue;
+            $q = SurveyQuestionTemplate::get()->byID(intval($row['QuestionID']));
+            if(is_null($q)) continue;
 
-                foreach($q->Values() as $v)
-                {
-                    $header = sprintf('%s - %s',$name, $v->Value );
+            if($q instanceof SurveyDoubleEntryTableQuestionTemplate){
+                foreach($q->Rows() as $r) {
+                    $header = self::functionPrepareValueForCSV(sprintf('%s - %s', $name, $r->Value));
+                    $template_2[$header] = null;
+                }
+            }
+            else if($q instanceof  SurveyMultiValueQuestionTemplate && in_array($name, $flat_fields_entity)){
+                foreach($q->Values() as $v){
+                    $header = self::functionPrepareValueForCSV(sprintf('%s - %s', $name, $v->Value));
                     $template_2[$header] = null;
                 }
             }
             else
-            {
-                if($row['ClassName'] === 'SurveyRadioButtonMatrixTemplateQuestion')
-                {
-                    $q = SurveyRadioButtonMatrixTemplateQuestion::get()->byID(intval($row['QuestionID']));
-                    if(is_null($q)) continue;
-                    foreach($q->Rows() as $r)
-                    {
-                        $header = sprintf('%s - %s',$name, $r->Value );
-                        $template_2[$header] = null;
-                    }
-                }
-                else
-                    $template_2[$name] = null;
-            }
+                $template_2[$name] = null;
         }
 
         return array($template_1, $template_2);
+    }
 
+    /**
+     * @param string $value
+     * @return string
+     */
+    private static function functionPrepareValueForCSV($value){
+        return str_replace("," ,"-", $value);
     }
 
     private function getDeploymentsData($survey_id)
@@ -630,14 +628,15 @@ SQL;
     {
         $res        = $this->ExportSurveyResultsDataSurveyBuilder();
         $survey_id  = 0;
-        $file_data  = array();
+        $file_data  = [];
         list($header_template1, $header_template2) = $this->buildSurveyBuilderHeaders($flat_fields, $flat_fields_entity);
 
-        $line = $header_template1;
+        $line                  = $header_template1;
         list($rows, $columns)  = self::getRowsAndColumns();
 
         foreach ($res as $row)
         {
+
             if($survey_id !== intval($row['SurveyID']))
             {
                 // reset
@@ -646,7 +645,7 @@ SQL;
                     $res2                 = $this->getDeploymentsData($survey_id);
                     $line2                = $header_template2;
                     $entity_survey_id     = 0;
-                    $entities_surveys_set = array();
+                    $entities_surveys_set = [];
 
                     foreach($res2 as $row2)
                     {
@@ -656,7 +655,7 @@ SQL;
 
                             if($entity_survey_id > 0)
                             {
-                                array_push($entities_surveys_set, $line2);
+                                $entities_surveys_set[] = $line2;
                             }
 
                             $line2                 = $header_template2;
@@ -673,7 +672,7 @@ SQL;
 
                         if($class === 'SurveyRadioButtonMatrixTemplateQuestion')
                         {
-                            $tuples = explode(',', $answer);
+                            $tuples      = explode(',', $answer);
                             $translation = '';
                             foreach($tuples as $t)
                             {
@@ -687,8 +686,8 @@ SQL;
                                 {
                                    continue;
                                 }
-                                $c = $columns[$c];
-                                $translation .= sprintf("%s:%s",$r, $c). ',';
+                                $c            = $columns[$c];
+                                $translation .= self::functionPrepareValueForCSV(sprintf("%s:%s",  $r, $c)). ',';
                             }
                             $answer = trim($translation,',');
                         }
@@ -701,17 +700,20 @@ SQL;
                                 $q = SurveyRankingQuestionTemplate::get()->byID($question_id);
                                 if(!is_null($q))
                                 {
-                                    $values = $q->Values()->sort('Order', 'ASC');
-                                    $options = array();
+                                    $values  = $q->Values()->sort('Order', 'ASC');
+                                    $options = [];
                                     foreach($values as $v)
                                     {
-                                        array_push($options, $v->Value);
+                                        $options[] = $v->Value;
                                     }
+
                                     $answers = explode('|', $row['Answer']);
                                     foreach($options as $o)
                                     {
                                         $index = array_search($o, $answers);
-                                        $line[sprintf("%s - %s", $question, $o)] =  $index === false ? '0' : ($index + 1);;
+                                        $key   = sef::functionPrepareValueForCSV(sprintf("%s - %s",   $question,  $o));
+                                        if(array_key_exists($key, $line2))
+                                            $line[$key] =  $index === false ? '0' : ($index + 1);;
                                     }
                                 }
                             }
@@ -719,17 +721,20 @@ SQL;
                             {
                                 if($class === 'SurveyRadioButtonMatrixTemplateQuestion')
                                 {
-                                    $answer = preg_split('/,/',$answer);
-                                    foreach($answer as $a)
+                                    foreach(explode(',', $answer) as $tuple)
                                     {
-                                        $a =  preg_split('/:/',$a);
-                                        if( count($a) !== 2) continue;
-                                        $line2[sprintf("%s - %s",$question,$a[0])] = $a[1];
+                                        $elements = explode(':', $tuple);
+                                        if(count($elements) !== 2) continue;
+                                        $key = self::functionPrepareValueForCSV(sprintf("%s - %s", $question, $elements[0]));
+                                        if(array_key_exists($key, $line2))
+                                            $line2[$key] = $elements[1];
                                     }
                                 } else {
                                     $answers = explode('|', $answer);
                                     foreach ($answers as $a) {
-                                        $line2[sprintf("%s - %s", $question, $a)] = '1';
+                                        $key = self::functionPrepareValueForCSV(sprintf("%s - %s",  $question, $a));
+                                        if(array_key_exists($key, $line2))
+                                            $line2[$key] = '1';
                                     }
                                 }
                             }
@@ -738,30 +743,32 @@ SQL;
                         {
                             if($class === 'SurveyRadioButtonMatrixTemplateQuestion')
                             {
-                                $answer = preg_split('/,/',$answer);
-                                foreach($answer as $a)
+
+                                foreach(explode(',', $answer) as $tuple)
                                 {
-                                    $a =  preg_split('/:/',$a);
-                                    if( count($a) !== 2) continue;
-                                    $line2[sprintf("%s - %s",$question,$a[0])] = $a[1];
+                                    $elements =  explode(':', $tuple);
+                                    if( count($elements) !== 2) continue;
+                                    $key = self::functionPrepareValueForCSV(sprintf("%s - %s", $question, $elements[0]));
+                                    if(array_key_exists($key, $line2))
+                                        $line2[$key] = $elements[1];
                                 }
                             }
                             else
-                                $line2[$question] = $answer;
+                                $line2[self::functionPrepareValueForCSV($question)] = $answer;
                         }
                     }
 
                     if(isset($line2['DeploymentID']) && intval($line2['DeploymentID']) > 0)
-                        array_push($entities_surveys_set, $line2);
+                        $entities_surveys_set[] = $line2;
 
                     if(count($entities_surveys_set) === 0)
                     {
-                        array_push($entities_surveys_set, $header_template2);
+                        $entities_surveys_set[] = $header_template2;
                     }
 
                     foreach($entities_surveys_set as $line2)
                     {
-                        array_push($file_data, array_merge($line, $line2));
+                       $file_data[] =array_merge($line, $line2);
                     }
 
                 }
@@ -797,7 +804,7 @@ SQL;
                         foreach($options as $o)
                         {
                             $index = array_search($o, $answers);
-                            $line[sprintf("%s - %s", $question, $o)] =  $index === false ? '0' : ($index + 1);;
+                            $line[self::functionPrepareValueForCSV(sprintf("%s - %s", $question, $o))] =  $index === false ? '0' : ($index + 1);;
                         }
                     }
                 }
@@ -805,7 +812,7 @@ SQL;
                 {
                     $answers = explode('|', $row['Answer']);
                     foreach ($answers as $a) {
-                        $line[sprintf("%s - %s", $question, $a)] = 1;
+                        $line[self::functionPrepareValueForCSV(sprintf("%s - %s", $question, $a))] = 1;
                     }
                 }
             }
@@ -821,7 +828,7 @@ SQL;
         }
 
         if(isset($line['SurveyID']) && intval($line['SurveyID']) > 0)
-            array_push($file_data, array_merge($line, $header_template2));
+            $file_data[] = array_merge($line, $header_template2);
 
         return $file_data;
     }
