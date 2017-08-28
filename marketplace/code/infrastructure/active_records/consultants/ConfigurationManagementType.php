@@ -19,19 +19,17 @@ class ConfigurationManagementType
 	implements IConfigurationManagementType
 {
 
-	static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
-
-	static $db = array(
+	static $db = [
 		'Type'  => 'Varchar',
-	);
+	];
 
-	static $indexes = array(
-		'Type' => array('type'=>'unique', 'value'=>'Type')
-	);
+	static $indexes = [
+		'Type' => ['type'=>'unique', 'value'=>'Type']
+	];
 
-	static $summary_fields = array(
+	static $summary_fields = [
 		'Type' => 'Type',
-	);
+	];
 	/**
 	 * @return string
 	 */

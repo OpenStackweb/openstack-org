@@ -19,8 +19,6 @@ final class Office
 	implements IOffice
 {
 
-	static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
-
 	static $db = array(
 		'Address'  => 'Varchar',
 		'Address2' => 'Varchar',

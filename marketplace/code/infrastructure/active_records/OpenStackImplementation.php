@@ -24,9 +24,9 @@ class OpenStackImplementation
     static $db = [
         'CompatibleWithCompute'             => 'Boolean',
         'CompatibleWithStorage'             => 'Boolean',
+        'CompatibleWithFederatedIdentity'   => 'Boolean',
         'ExpiryDate'                        => 'SS_Datetime',
         'Notes'                             => 'Text',
-        'CompatibleWithFederatedIdentity'   => 'Boolean',
     ];
 
     // OpenStack Powered Program attributes
@@ -49,8 +49,8 @@ class OpenStackImplementation
     ];
 
     private static $defaults = [
-        'CompatibleWithCompute' => false,
-        'CompatibleWithStorage' => false,
+        'CompatibleWithCompute'           => false,
+        'CompatibleWithStorage'           => false,
         'CompatibleWithFederatedIdentity' => false,
     ];
 

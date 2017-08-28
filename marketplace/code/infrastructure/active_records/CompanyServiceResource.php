@@ -16,22 +16,19 @@
  */
 class CompanyServiceResource extends DataObject implements ICompanyServiceResource {
 
-	static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
-
-	static $db = array(
+	static $db = [
 		'Name'      => 'Varchar',
 		'Uri'       => 'Text',
 		'Order'     => 'Int',
-	);
+	];
 
-
-	static $has_one = array(
+	static $has_one = [
 		'Owner' => 'CompanyService',
-	);
+	];
 
-	static $indexes = array(
-		'Owner_Name' => array('type'=>'unique', 'value'=>'Name, OwnerID')
-	);
+	static $indexes = [
+		'Owner_Name' => ['type'=>'unique', 'value'=>'Name, OwnerID'],
+	];
 
 	public function getName()
 	{

@@ -22,7 +22,6 @@ class InteropCapabilityType  extends DataObject {
         'Capabilities' => 'InteropCapability',
     );
 
-
     function getCMSFields()
     {
         $fields =  new FieldList();

@@ -19,9 +19,8 @@ class CompanyService
 	extends DataObject
 	implements ICompanyService {
 
-	private static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
 
-	private static $db = array(
+	static $db = array(
 		'Name'           => 'Varchar(255)',
 		'Slug'           => 'Varchar(255)',
 		'Overview'       => 'HTMLText',
@@ -29,7 +28,7 @@ class CompanyService
 		'Active'         => 'Boolean',
 	);
 
-	private static $has_one = array(
+    static $has_one = array(
 		'Company'          => 'Company',
 		'MarketPlaceType'  => 'MarketPlaceType',
 		'EditedBy'         => 'Member',
@@ -39,7 +38,7 @@ class CompanyService
         'DraftService' => 'CompanyServiceDraft.LiveService'
     );
 
-	private static $indexes = array(
+	static $indexes = array(
 		'Company_Name_Class' => array('type'=>'unique', 'value'=>'Name,CompanyID,ClassName')
 	);
 

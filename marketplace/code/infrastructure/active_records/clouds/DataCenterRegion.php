@@ -17,21 +17,19 @@
 final class DataCenterRegion
 	extends DataObject implements IDataCenterRegion {
 
-	static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
-
-	static $db = array(
+	static $db = [
 		'Name'     => 'Varchar(100)',
 		'Endpoint' => 'Varchar(512)',
 		'Color'    => 'Varchar(6)',
-	);
+	];
 
-	static $has_one = array(
+	static $has_one = [
 		'CloudService' => 'CloudService',
-	);
+	];
 
-	static $has_many = array(
+	static $has_many = [
 		'Locations' => 'DataCenterLocation',
-	);
+	];
 
 	/*static $indexes = array(
 		'Name_CloudService' => array('type'=>'unique', 'value'=>'Name,CloudServiceID'),

@@ -19,28 +19,26 @@ final class Consultant
 	implements IConsultant
 {
 
-	static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
-
-	static $has_many = array(
+	static $has_many = [
 		'Offices'         => 'Office',
 		'PreviousClients' => 'ConsultantClient',
-	);
+	];
 
-	static $many_many = array(
+	static $many_many = [
 		'SpokenLanguages'                   => 'SpokenLanguage',
 		'ConfigurationManagementExpertises' => 'ConfigurationManagementType',
 		'ExpertiseAreas'                    => 'OpenStackComponent',
-		'ServicesOffered'                   => 'ConsultantServiceOfferedType',
-	);
+        'ServicesOffered'                   => 'ConsultantServiceOfferedType',
+	];
 
-	static $many_many_extraFields = array(
-		'ServicesOffered' => array(
+	static $many_many_extraFields = [
+		'ServicesOffered' => [
 			'RegionID' => "Int",
-		),
-		'SpokenLanguages' => array(
+		],
+		'SpokenLanguages' => [
 			'Order' => 'Int',
-		),
-	);
+		],
+	];
 
 	/**
 	 * @return IOffice[]

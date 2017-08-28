@@ -23,7 +23,7 @@ class RegionalSupport extends DataObject implements IRegionalSupport {
 	);
 
 	static $has_one = array(
-		'Region' => 'Region',
+		'Region'  => 'Region',
 		'Service' => 'RegionalSupportedCompanyService'
 	);
 

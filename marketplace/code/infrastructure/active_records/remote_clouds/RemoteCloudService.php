@@ -12,18 +12,18 @@
  * limitations under the License.
  **/
 /**
- * Class Distribution
+ * Class RemoteCloudService
  */
 class RemoteCloudService
 	extends OpenStackImplementation
 	implements IRemoteCloudService {
 
-    static $db = array(
+    static $db = [
         'HardwareSpecifications'    => 'Text',
         'VendorManagedUpgrades'     => 'Boolean',
         'PricingModels'             => 'Text',
         'PublishedSLAs'             => 'Text',
-    );
+    ];
 
     /***
      * @return string

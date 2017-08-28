@@ -1,0 +1,7 @@
+---
+Name: database
+After: 'framework/*'
+---
+Injector:
+  DatabaseAdmin:
+    class: CustomDatabaseAdmin

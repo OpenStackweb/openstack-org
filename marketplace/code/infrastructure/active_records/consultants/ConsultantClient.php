@@ -19,8 +19,6 @@ class ConsultantClient
 	implements IConsultantClient
 {
 
-	static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
-
 	static $db = array(
 		'Name'  => 'Varchar',
 		'Order' => 'Int',

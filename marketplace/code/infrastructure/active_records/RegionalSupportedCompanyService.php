@@ -19,9 +19,9 @@ class RegionalSupportedCompanyService
 	implements IRegionalSupportedCompanyService
 {
 
-	static $has_many = array(
+  	static $has_many = [
 		'RegionalSupports' => 'RegionalSupport',
-	);
+	];
 
 	/**
 	 * @param bool $only_new_ones
