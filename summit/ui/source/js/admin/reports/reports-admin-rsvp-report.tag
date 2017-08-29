@@ -77,6 +77,9 @@
         toggleAllEmail(ev) {
             var checked = ev.target.checked;
             $('.send-to').attr('checked',checked);
+            $.each(self.rsvps, function(idx, rsvp){
+                rsvp.send_email = checked;
+            });
         }
 
         toggleEmail(ev) {
