@@ -336,7 +336,7 @@ const getDefaultViewDay = () => {
 
 const errorHandler = (err, res) => {
     let text = res.body;
-    if(res.body.messages instanceof Array) {
+    if(res.body != null && res.body.messages instanceof Array) {
         let messages = res.body.messages.map( m => {
             if (m instanceof Object) return m.message
             else return m;
@@ -358,7 +358,7 @@ export const unSyncCalendar = () => {
         )();
 }
 
-export const syncCalendar = (cal_type, ios_user, ios_pass ) => {
+export const syncCalendar = (cal_type, ios_user, ios_pass ) => (dispatch) => {
     let summit_id = ScheduleProps.summit.id;
     console.log(`syncCalendar - cal_type ${cal_type}`);
     switch (cal_type) {
@@ -369,10 +369,10 @@ export const syncCalendar = (cal_type, ios_user, ios_pass ) => {
              return putRequest(
                 createAction(''),
                 createAction(CALENDAR_SYNCD),
-                `summit-calendar-sync/login-apple?state=${summit_id}`,
+                 'summit-calendar-sync/login-apple',
                 {ios_user: ios_user, ios_pass: ios_pass},
                 errorHandler
-            )();
+            )({state : summit_id})(dispatch);
             break;
         case 'outlook':
             window.location = `summit-calendar-sync/login-outlook?state=${summit_id}`;

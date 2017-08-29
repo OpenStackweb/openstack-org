@@ -77,7 +77,9 @@ export const putRequest = (
     payload,
     errorHandler
 ) => params => dispatch => {
+    console.log(`endpoint ${endpoint}`);
     let url = URI(endpoint).query(params).toString();
+    console.log(`url ${url}`);
     dispatch(requestActionCreator(params));
     const req = http.put(url)
         .send(payload)
