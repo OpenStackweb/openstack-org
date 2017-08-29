@@ -265,7 +265,7 @@ i.collapse-nav {
     }
     .navbar-days .navbar-collapse
     {
-        left: 8%;
+        left: 11%;
         position: absolute;
     }
 }
@@ -277,7 +277,7 @@ i.collapse-nav {
     }
     .navbar-days .navbar-collapse
     {
-        left: 10%;
+        left: 13%;
         position: absolute;
     }
 }
@@ -290,7 +290,7 @@ i.collapse-nav {
     }
     .navbar-days .navbar-collapse
     {
-        left: 20%;
+        left: 23%;
         position: absolute;
     }
 }
