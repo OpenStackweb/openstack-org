@@ -58,13 +58,13 @@ class SyncCal extends React.Component {
                             <label>Please select your calendar type:</label>
                             <br/>
                             <div className="cal_box">
-                                <div className={"cal_image google " + (this.state.cal_type == 'google' ? 'selected' : '')}
+                                <div title="Google" className={"cal_image google " + (this.state.cal_type == 'google' ? 'selected' : '')}
                                     onClick={e => this.handleCalChange(e, 'google')}>
                                 </div>
-                                <div className={"cal_image apple " + (this.state.cal_type == 'apple' ? 'selected' : '')}
+                                <div title="iCloud" className={"cal_image apple " + (this.state.cal_type == 'apple' ? 'selected' : '')}
                                     onClick={e => this.handleCalChange(e, 'apple')}>
                                 </div>
-                                <div className={"cal_image outlook " + (this.state.cal_type == 'outlook' ? 'selected' : '')}
+                                <div title="Outlook.com" className={"cal_image outlook " + (this.state.cal_type == 'outlook' ? 'selected' : '')}
                                     onClick={e => this.handleCalChange(e, 'outlook')}>
                                 </div>
                             </div>
