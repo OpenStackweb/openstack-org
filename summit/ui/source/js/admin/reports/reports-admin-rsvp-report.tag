@@ -180,6 +180,7 @@
                 dataType: "json"
             }).done(function(data) {
                 $('body').ajax_loader('stop');
+                $('#emailModal').modal('toggle');
                 swal({
                     title: "Done!",
                     text: "email sent successfully",

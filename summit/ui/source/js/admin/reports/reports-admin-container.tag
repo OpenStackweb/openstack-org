@@ -91,6 +91,16 @@
         this.show_email         = false;
         var self                = this;
 
+        tinymce.init({
+            selector:   "#email-message",
+            width:      '99%',
+            height:     150,
+            plugins:    [ "anchor link" ],
+            toolbar:    "bold, italic, underline, bullist, numlist, outdent, indent, removeformat, link",
+            statusbar:  false,
+            menubar:    false,
+        });
+
         this.on('mount', function() {
             self.toggleFilters();
             $("#search-term").val('');
@@ -128,8 +138,11 @@
         }
 
         sendEmail(e) {
+            var text_editor = tinyMCE.get('email-message');
+            if (text_editor)
+                $('#email-message').val(text_editor.getContent());
+
             if (confirm("Are you sure you want to send an email to these attendees?")) {
-                $('#emailModal').modal('toggle');
                 self.dispatcher.sendEmail(self.report);
             }
         }
