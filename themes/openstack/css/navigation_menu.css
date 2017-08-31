@@ -35,9 +35,6 @@ a.navbar-brand {
         width: 135px;
     }
 }
-@media (max-width: 767px), only screen and (max-device-width: 1024px) {
-    a.navbar-brand {
-        margin-left: 15px; } }
 
 .navbar-default {
     border-radius: 0px;

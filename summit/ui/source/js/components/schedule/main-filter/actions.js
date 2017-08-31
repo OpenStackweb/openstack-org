@@ -12,6 +12,8 @@ const MainFilterActions = ({
 }) => {
     const { summit: { current_user }, base_url } = ScheduleProps;
     const { values, expanded, calSync }          = filters;
+    let full_view_url = (values.going) ? `${base_url}mine/` : `${base_url}full/`;
+
     return (
     <div className="row all-events-filter-row">
         <div className="col-md-4 col-xs-12 all-events-filter-link">
@@ -31,50 +33,40 @@ const MainFilterActions = ({
             </div>
         </div>
         <div className="col-md-7 col-xs-12">
-            <div className="col-view-all-schedule">
-                {values.going &&
-                <form action={`${base_url}mine/`} method="POST">
+            <div className="col-view-all-schedule filter-button-col-left">
+                <form action={full_view_url} method="POST">
                     <input type="hidden" name="goback" value="1" />
                     <button type="submit" className="btn btn-default view-all-schedule">
-                        View&nbsp;/&nbsp;Print&nbsp;My&nbsp;Schedule
+                    Full&nbsp;/&nbsp;Print&nbsp;View
                     </button>
                 </form>
-                }
-                {!values.going &&
-                <form action={`${base_url}full/`} method="POST">
-                    <input type="hidden" name="goback" value="1" />
-                    <button type="submit" className="btn btn-default view-all-schedule">
-                        View&nbsp;/&nbsp;Print&nbsp;Full&nbsp;Schedule
+            </div>
+            {current_user && ! values.favorites &&
+                <div className="col-switch-schedule filter-button-col-right">
+                    <button type="button" className="btn btn-primary pull-right switch_schedule"
+                    onClick={() => setFilters({ going: ! values.going })}>
+                        <span className="glyphicon glyphicon-calendar"></span>
+                        &nbsp;
+                        <span className="content">
+                            {values.going ? 'Full Schedule' : 'My Schedule' }
+                        </span>
                     </button>
-                </form>
-                }
-            </div>
-            <div className="col-switch-schedule">
-                {current_user && ! values.favorites &&
-                <button type="button" className="btn btn-primary pull-right switch_schedule"
-                onClick={() => setFilters({ going: ! values.going })}>
-                    <span className="glyphicon glyphicon-calendar"></span>
-                    &nbsp;
-                    <span className="content">
-                        {values.going ? 'Full Schedule' : 'My Schedule' }
-                    </span>
-                </button>
-                }
-            </div>
-            <div className="col-switch-watchlist">
-                {current_user && ! values.going &&
-                <button type="button" className="btn btn-primary pull-right switch_favorites"
-                onClick={() => setFilters({ favorites: ! values.favorites })}>
-                    <span className="glyphicon glyphicon-bookmark"></span>
-                    &nbsp;
-                    <span className="content">
-                        {values.favorites ? 'Full Schedule' : 'Watch Later'}
-                    </span>
-                </button>
-                }
-            </div>
-                <div className="col-toggle-sync">
-                {summit.should_show_venues && current_user &&
+                </div>
+            }
+            {current_user && ! values.going &&
+                <div className="col-switch-watchlist filter-button-col-left">
+                    <button type="button" className="btn btn-primary pull-right switch_favorites"
+                    onClick={() => setFilters({ favorites: ! values.favorites })}>
+                        <span className="glyphicon glyphicon-bookmark"></span>
+                        &nbsp;
+                        <span className="content">
+                            {values.favorites ? 'Full Schedule' : 'Watch Later'}
+                        </span>
+                    </button>
+                </div>
+            }
+            {summit.should_show_venues && current_user &&
+                <div className="col-toggle-sync filter-button-col-right">
                     <ToggleButton
                         onClick={ () => toggleCalSyncClick() }
                         className="toggle_sync"
@@ -83,8 +75,8 @@ const MainFilterActions = ({
                         offstyle="danger"
                         active={calSync}
                     />
+                </div>
             }
-            </div>
         </div>
     </div>
 )}

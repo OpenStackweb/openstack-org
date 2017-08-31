@@ -29,7 +29,7 @@ const EventContent = ({
     return (
     <div className="event-content col-sm-10 col-xs-10">
         <div className="row row_location">
-            <div className="col-sm-3 col-time">
+            <div className="col-sm-4 col-md-3 col-time">
                 <i className="fa fa-clock-o icon-clock" />
                 <span className="event-date">{event.date_nice}</span>
                 ,&nbsp;
@@ -37,7 +37,7 @@ const EventContent = ({
                 &nbsp;-&nbsp;
                 <span className="end-time">{event.end_time}</span>
             </div>
-            <div className="col-sm-8 col-location">
+            <div className="col-sm-8 col-md-9 col-location">
                 {summit.should_show_venues &&
                 <div>
                     <i className="fa fa-map-marker icon-map"></i>&nbsp;

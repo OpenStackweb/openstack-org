@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="container section1">
         <div class="row schedule-title-wrapper">
-            <div class="col-sm-10 col-main-title">
+            <div class="col-md-10 col-xs-12 col-main-title">
                 <h1 style="text-align:left;">Synchronize Calendar</h1>
                 <% if $goback %>
                 <div class="go-back">
@@ -9,7 +9,7 @@
                 </div>
                 <% end_if %>
             </div>
-            <div class="col-sm-2 col-log-in">
+            <div class="col-md-2 col-xs-12 col-log-in">
                 <a class="action btn btn-default" id="login-button" href="/Security/logout/?BackURL={$Top.Link}"><i class="fa fa-sign-out" aria-hidden="true"></i>Log Out</a>
              </div>
         </div>

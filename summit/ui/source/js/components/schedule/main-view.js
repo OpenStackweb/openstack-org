@@ -12,7 +12,7 @@ class MainView extends Component {
         const { view } = this.props
         return (
         <div className="row navbar-container">
-            <div className="col-md-3 view-select-container">
+            <div className="col-md-3 col-sm-3 view-select-container">
                 View by
                 <select id="view-select" value={view.type}
                 onChange={e => this.changeView(e, e.target.value)}>
@@ -21,7 +21,7 @@ class MainView extends Component {
                     <option value={VIEW_LEVELS}>Level</option>
                 </select>
             </div>
-            <div className="col-md-9">
+            <div className="col-md-9 col-sm-9 view-days-container">
             {view.type === VIEW_DAYS   && this.renderDays()}
             {view.type === VIEW_TRACKS && this.renderTracks()}
             {view.type === VIEW_LEVELS && this.renderLevels()}

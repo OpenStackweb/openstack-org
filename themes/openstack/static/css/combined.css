@@ -348,7 +348,7 @@ a.future-summit:hover:after {
   left: 0;
   text-align: center; }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .inner-countdown-wrapper {
     display: none; } }
 
@@ -1264,37 +1264,35 @@ a.current-summit-link {
     margin-bottom: 15px; } }
 
 @media (max-width: 767px) {
-  .summit-hero-wrapper {
-    height: 80px; }
+    .summit-hero-wrapper {
+        height: 80px; }
     .summit-hero-wrapper .summit-hero-logo {
-      width: 115px;
-      left: 20px; }
+        width: 115px;
+        left: 20px; }
     .summit-hero-wrapper .summit-hero-postcard {
-      display: none; }
-  .mobile-city-date .summit-hero-postcard {
-    margin-top: 10px; }
+        display: none; }
+    .mobile-city-date .summit-hero-postcard {
+        margin-top: 10px; }
     .mobile-city-date .summit-hero-postcard p {
-      font-size: 1.1em;
-      line-height: 1.5em;
-      font-weight: 300; }
+        font-size: 1.1em;
+        line-height: 1.5em;
+        font-weight: 300; }
     .mobile-city-date .summit-hero-postcard .landing-action {
-      margin-bottom: 15px; }
+        margin-bottom: 15px; }
+    .mobile-city-date .summit-hero-postcard .landing-action .btn{
+        margin-top: 15px;    }
     .mobile-city-date .summit-hero-postcard .landing-date {
-      width: 100%;
-      padding: 15px 10px 20px; }
-      .mobile-city-date .summit-hero-postcard .landing-date .left, .mobile-city-date .summit-hero-postcard .landing-date .right {
+        width: 100%;
+        padding: 15px 10px 20px; }
+    .mobile-city-date .summit-hero-postcard .landing-date .left, .mobile-city-date .summit-hero-postcard .landing-date .right {
         color: #30739C;
         font-size: 1.5em;
         width: 50%; }
-      .mobile-city-date .summit-hero-postcard .landing-date .left {
-        float: left;
-        text-align: right;
-        padding-right: 30px; }
-      .mobile-city-date .summit-hero-postcard .landing-date .right {
-        display: inline-block;
-        text-align: left;
-        border-left: 1px solid rgba(81, 175, 228, 0.36);
-        padding-left: 30px; } }
+    .mobile-city-date .summit-hero-postcard .landing-date .left {
+        width: 100% }
+    .mobile-city-date .summit-hero-postcard .landing-date .right {
+        width: 100% }
+}
 
 .blue-title {
   background: #29abe2;
