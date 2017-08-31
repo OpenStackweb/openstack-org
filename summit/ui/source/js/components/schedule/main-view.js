@@ -37,7 +37,7 @@ class MainView extends Component {
         } = this.props
         return (
         <nav className="navbar navbar-default navbar-days">
-            <div className="container">
+            <div>
                 {/* Brand and toggle get grouped for better mobile display */}
                 <div className="navbar-header">
                     <button type="button" aria-expanded="false" data-toggle="collapse"
