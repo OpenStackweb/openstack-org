@@ -256,8 +256,20 @@ a.future-summit::after {
   right: 0;
   position: absolute;
   z-index: -1; }
+  opacity: 1; }
 
-a.past-summit:hover:after, a.future-summit:hover:after {
+a.future-summit2::after {
+  background: url('/assets/berlin-summit/images/berlin-square.jpg') no-repeat center center;
+  content: "";
+  opacity: 0.3;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1; }
+
+a.past-summit:hover:after, a.future-summit:hover:after, a.future-summit2:hover:after {
   opacity: 0.8; }
 
 @media (max-width: 767px) {
