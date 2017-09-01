@@ -281,8 +281,12 @@ final class SummitAppAdminController extends Controller implements PermissionPro
     public function dashboard(SS_HTTPRequest $request)
     {
         $summit_id = intval($request->param('SummitID'));
-
         $summit = Summit::get()->byID($summit_id);
+
+        $vote_repository = new SapphirePresentationVoteRepository();
+
+        $votes = $vote_repository->getVoteCountBySummit($summit_id);
+        $voters = $vote_repository->getVotersCountBySummit($summit_id);
 
         Requirements::css('summit/css/simple-sidebar.css');
         Requirements::javascript('summit/javascript/simple-sidebar.js');
@@ -292,7 +296,9 @@ final class SummitAppAdminController extends Controller implements PermissionPro
             (
                 array
                 (
-                    'Summit' => $summit
+                    'Summit' => $summit,
+                    'Votes'  => $votes,
+                    'Voters'  => $voters
                 )
             )
         );

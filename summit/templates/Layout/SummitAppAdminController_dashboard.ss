@@ -94,6 +94,19 @@
 
         <hr>
 
+        <h2> Voting </h2>
+
+        <div class="row">
+            <div class="col-md-6">
+                <i class="fa fa-users"></i>&nbsp;Voters&nbsp;<strong>$Voters</strong>
+            </div>
+            <div class="col-md-6">
+                <i class="fa fa fa-thumbs-o-up"></i>&nbsp;Votes&nbsp;<strong>$Votes</strong>
+            </div>
+        </div>
+
+        <hr>
+
         <h2> Emails </h2>
 
         <div class="row">
