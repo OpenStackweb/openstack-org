@@ -105,7 +105,7 @@ final class SpeakerSecondBreakoutAnnouncementSenderManager
                 );
 
                 $speakers_notified = 0;
-
+                echo "found {$count} speakers with published events on summit {$summit_id}".PHP_EOL;
                 foreach ($speakers as $speaker) {
 
                     if (!$speaker instanceof IPresentationSpeaker) continue;

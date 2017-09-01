@@ -1273,20 +1273,30 @@ SQL;
 
     public function Speakers($only_published = true)
     {
-        $id = $this->ID;
+        $id     = $this->ID;
         $filter = intval($only_published) ? "AND E.Published = 1 " : "";
-        $dl = new DataList('PresentationSpeaker');
+        $dl     = new DataList('PresentationSpeaker');
 
         $dl = $dl->leftJoin('Member', ' Member.ID = PresentationSpeaker.MemberID')
             ->where("EXISTS
             (
-                SELECT E.ID FROM SummitEvent E
+                SELECT 1 FROM SummitEvent E
                 INNER JOIN Presentation P ON E.ID = P.ID
                 INNER JOIN Presentation_Speakers PS ON PS.PresentationID = P.ID
                 WHERE E.SummitID = {$id}
                 {$filter}
                 AND PS.PresentationSpeakerID = PresentationSpeaker.ID
-            )");
+            )
+            OR
+            EXISTS 
+            (
+               SELECT 1 FROM SummitEvent E
+               INNER JOIN Presentation ON Presentation.ID = E.ID
+               WHERE E.SummitID   = {$id}
+               AND Presentation.ModeratorID = PresentationSpeaker.ID
+               {$filter}
+            )
+            ");
 
         return $dl;
     }
@@ -1667,7 +1677,6 @@ SQL;
      */
     public function getExcludedTracksForPublishedPresentations()
     {
-
         return  array_values($this->ExcludedCategoriesForAcceptedPresentations()->getIDList());
     }
 
