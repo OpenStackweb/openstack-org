@@ -278,22 +278,32 @@ i.collapse-nav {
 }
 
 .view-select-container #view-select {
-    background-color: #edf2f7;
+    background-color: #fff;
     margin-left: 10px;
     border-radius: 5px;
     height: 30px;
-    width: 55px;
     cursor: pointer;
+    border: 1px solid #d6d5d5;
+    color: #808080;
+}
 
+.track-nav-container #track-select {
+    background-color: #fff;
+    border-radius: 5px;
+    height: 30px;
+    cursor: pointer;
+    border: 1px solid #d6d5d5;
+    color: #808080;
+    width: 95%;
 }
 
 @media (max-width: 767px) {
     .view-select-container {
-        width: 50%;
+        width: 45%;
         float: left;
     }
     .view-days-container {
-        width: 50%;
+        width: 55%;
         float: left;
         padding-right: 5px;
     }
@@ -308,7 +318,7 @@ i.collapse-nav {
 }
 
 .track-nav-container {
-    padding: 15px;
+    padding: 10px 0 0 0;
 }
 
 @media all and (min-width: 1400px) {
@@ -374,7 +384,9 @@ i.collapse-nav {
 a.navbar-brand.navbar-brand-month
 {
     font-size: 11pt !important;
-    color: #2A4E68 !important
+    color: #2A4E68 !important;
+    float: right;
+    margin-right: 15px;
 }
 
 .navbar-default .navbar-nav > .active.day-selected

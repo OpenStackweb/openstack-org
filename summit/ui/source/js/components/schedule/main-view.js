@@ -13,7 +13,7 @@ class MainView extends Component {
         return (
         <div className="row navbar-container">
             <div className="col-md-3 col-sm-3 view-select-container">
-                View by
+                Filter
                 <select id="view-select" value={view.type}
                 onChange={e => this.changeView(e, e.target.value)}>
                     <option value={VIEW_DAYS}>Day</option>
@@ -100,19 +100,36 @@ class MainView extends Component {
         } = this.props
         return (
         <nav className="navbar navbar-default navbar-days">
-            <div className="container">
+            <div>
+            {/* Brand and toggle get grouped for better mobile display */}
+                <div className="navbar-header">
+                    <button type="button" aria-expanded="false" data-toggle="collapse"
+                    className="navbar-toggle collapsed" data-target="#bs-example-navbar-collapse-1">
+                        <span className="sr-only">
+                        Toggle navigation
+                        </span>
+                        <span className="icon-bar"></span>
+                        <span className="icon-bar"></span>
+                        <span className="icon-bar"></span>
+                    </button>
+                    <a href="#" onClick={e => e.preventDefault()}
+                    className="navbar-brand navbar-brand-month">
+                        Levels
+                    </a>
+                </div>
+                {/* Collect the nav links, forms, and other content for toggling */}
                 <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul className="nav navbar-nav">
                     {Object.keys(summit.presentation_levels).map(levelId => {
                         const level = summit.presentation_levels[levelId]
                         const classes = levelId.toLowerCase() === view.value ? 'active level-selected' : null
                         return (
-                        <li key={levelId} className={classes}>
-                            <a onClick={e => this.changeView(e, view.type, levelId.toLowerCase())}
-                            href="#" className="level-label">
-                                {level.level}
-                            </a>
-                        </li>
+                            <li key={levelId} className={classes}>
+                                <a onClick={e => this.changeView(e, view.type, levelId.toLowerCase())}
+                                href="#" className="level-label">
+                                        {level.level}
+                                </a>
+                            </li>
                     )})}
                     </ul>
                 </div>
