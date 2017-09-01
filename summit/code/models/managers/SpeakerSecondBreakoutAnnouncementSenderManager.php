@@ -38,11 +38,6 @@ final class SpeakerSecondBreakoutAnnouncementSenderManager
     private $speaker_repository;
 
     /**
-     * @var ISpeakerSelectionAnnouncementSenderFactory
-     */
-    private $sender_factory;
-
-    /**
      * @var ISpeakerSecondBreakOutSenderFactory
      */
     private $sender_breakout_factory;
@@ -57,7 +52,6 @@ final class SpeakerSecondBreakoutAnnouncementSenderManager
         IBatchTaskRepository $batch_repository,
         IBatchTaskFactory    $batch_task_factory,
         IEntityRepository    $speaker_repository,
-        ISpeakerSelectionAnnouncementSenderFactory $sender_factory,
         ISpeakerSecondBreakOutSenderFactory $sender_breakout_factory,
         ISpeakerSummitRegistrationPromoCodeRepository $promo_code_repository,
         ITransactionManager  $tx_manager
@@ -68,7 +62,6 @@ final class SpeakerSecondBreakoutAnnouncementSenderManager
         $this->batch_task_factory      = $batch_task_factory;
         $this->speaker_repository      = $speaker_repository;
         $this->tx_manager              = $tx_manager;
-        $this->sender_factory          = $sender_factory;
         $this->sender_breakout_factory = $sender_breakout_factory;
         $this->promo_code_repository   = $promo_code_repository;
     }
@@ -138,7 +131,7 @@ final class SpeakerSecondBreakoutAnnouncementSenderManager
                         continue;
                     }
 
-                    $sender_service = $this->sender_factory->build($current_summit, $speaker);
+                    $sender_service = $this->sender_breakout_factory->build($current_summit, $speaker);
 
                     if (is_null($sender_service)) continue;
 
