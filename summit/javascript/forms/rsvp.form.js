@@ -50,8 +50,8 @@ $(document).ready(function () {
 });
 
 function addRSVP(form, event_id, summit_id, security_id) {
-    var url         = `api/v1/summits/${summit_id}/schedule/${event_id}/rsvp?SecurityID=${security_id}`;
-    var modal_id    = `#rsvpModal_${event_id}`;
+    var url         = 'api/v1/summits/'+summit_id+'/schedule/'+event_id+'/rsvp?SecurityID='+security_id;
+    var modal_id    = '#rsvpModal_'+event_id;
 
     $.ajax({
         type: 'POST',
@@ -75,31 +75,33 @@ function addRSVP(form, event_id, summit_id, security_id) {
                         text:"Your rsvp to this event was sent successfully.",
                         type: "success"
                     }).then(function () {
-
-
+                    
                         var is_mobile              = bowser.mobile || bowser.tablet;
                         var is_ios                 = bowser.ios;
                         var is_android             = bowser.android;
 
                         if(is_android){
-                            var form     = $('.rsvp_form');
-                            var event_id = $('input[name="event_id"]', form).val();
                             window.location = "org.openstack.android.summit://events/"+event_id;
+                            return;
                         }
-                        else {
-                            var url = new URI(window.location);
-                            if (url.hasQuery("BackURL")) {
-                                window.location = url.query(true)['BackURL'];
-                            }
+                        if(is_ios){
+                            window.location = "org.openstack.ios.openstack-summit://events/"+event_id;
+                            return;
                         }
+                        var url = new URI(window.location);
+                        if (url.hasQuery("BackURL")) {
+                            window.location = url.query(true)['BackURL'];
+                            return;
+                        }
+
                     });
+                return;
             }
-            else{
-                // close modal
-                var modal = $('#rsvpModal');
-                if(modal.length > 0)
-                    modal.modal('hide');
-            }
+            // close modal
+            var modal = $('#rsvpModal');
+            if(modal.length > 0)
+                modal.modal('hide');
+
         },
         error: function (jqXHR, textStatus, errorThrown) {
             $(modal_id).modal('hide');
@@ -107,10 +109,9 @@ function addRSVP(form, event_id, summit_id, security_id) {
             if(responseCode == 412) {
                 var response = $.parseJSON(jqXHR.responseText);
                 swal('Validation error', response.messages[0].message, 'warning');
-            } else {
-                swal('Error', 'There was a problem sending the rsvp, please contact admin.', 'warning');
+                return;
             }
-
+            swal('Error', 'There was a problem sending the rsvp, please contact admin.', 'warning');
         }
     });
 }
