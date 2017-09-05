@@ -27,7 +27,6 @@ class SummitFutureLanding extends SummitPage {
         $fields->removeByName('TwitterConversionTracking');
         $fields->removeByName('SummitPageImages');
         $fields->removeFieldFromTab('Root.Main','Content');
-        $fields->removeFieldFromTab('Root.Main','Metadata');
         $fields->removeFieldFromTab('Root.Main','HeroCSSClass');
 
 
