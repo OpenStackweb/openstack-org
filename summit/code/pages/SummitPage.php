@@ -103,6 +103,10 @@ class SummitPage extends Page
 
     public function getOGImage()
     {
+        if ($this->MetaImage()->Exists()) {
+            return $this->MetaImage()->getAbsoluteURL();
+        }
+
         return Director::absoluteURL('/summit/images/summit-logo.png');
     }
 }
