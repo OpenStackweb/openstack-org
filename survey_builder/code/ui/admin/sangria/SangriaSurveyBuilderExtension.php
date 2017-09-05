@@ -448,8 +448,7 @@ HTML;
             $this->owner->Customise([
                 'SurveyTemplates' => SurveyTemplate::get()->filter(
                     [
-                        'ClassName'        => 'SurveyTemplate',
-                        'EndDate:LessThan' => $now,
+                        'ClassName'        => 'SurveyTemplate'
                     ]
                 )->sort('StartDate', 'ASC')
             ])
