@@ -9,8 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="globalsign-domain-verification" content="tWFOHNAA_WMHmHfBMq38uTgupHFugV_dZ2rqyRxNMx" />
         $MetaTags(false)
-
-        <title>$Title &raquo; OpenStack Open Source Cloud Computing Software</title>
+        <title>$Title - OpenStack is open source software for creating private and public clouds.</title>
 
         <% base_tag %>
 

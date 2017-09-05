@@ -232,7 +232,7 @@ class Page extends SiteTree
             if(!empty($title)) return $title;
         }
 
-        return $this->Title." &raquo; OpenStack Open Source Cloud Computing Software";
+        return $this->Title." - OpenStack Open Source Cloud Computing Software";
     }
 }
 
