@@ -13,6 +13,7 @@
 import {
     CLEAR_MESSAGE,
     SHOW_MESSAGE,
+    STOP_LOADING,
 } from './actions';
 
 export const genericReducers  = function (
@@ -34,6 +35,10 @@ action = {}) {
                 ...state,
                 msg: null
             };
+        case STOP_LOADING:  return {
+            ...state,
+            loading: false
+        };
         default:
             return state;
     }

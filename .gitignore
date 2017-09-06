@@ -92,3 +92,4 @@ blog
 db.ini
 env/
 *.pyc
+*.pickle

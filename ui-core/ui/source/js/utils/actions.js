@@ -15,9 +15,10 @@ import request from 'superagent';
 import URI from "urijs";
 let http = request;
 
-const GENERIC_ERROR = "Yikes. Something seems to be broken. Our web team has been notified, and we apologize for the inconvenience.";
+const GENERIC_ERROR        = "Yikes. Something seems to be broken. Our web team has been notified, and we apologize for the inconvenience.";
 export const CLEAR_MESSAGE = 'CLEAR_MESSAGE';
-export const SHOW_MESSAGE = 'SHOW_MESSAGE';
+export const SHOW_MESSAGE  = 'SHOW_MESSAGE';
+export const STOP_LOADING  = 'STOP_LOADING';
 
 export const createAction = type => payload => ({
     type,
@@ -25,7 +26,8 @@ export const createAction = type => payload => ({
 });
 
 export const clearMessage = createAction(CLEAR_MESSAGE);
-export const showMessage = createAction(SHOW_MESSAGE);
+export const showMessage  = createAction(SHOW_MESSAGE);
+export const stopLoading  = createAction(STOP_LOADING);
 
 const xhrs = {};
 
@@ -56,6 +58,10 @@ export const getRequest =
     cancel(key);
     let url = URI(endpoint).query(params).toString();
     const req = http.get(url)
+        .timeout({
+            response: 60000,
+            deadline: 60000,
+        })
         .end(
             responseHandler(
                 dispatch,
@@ -82,6 +88,10 @@ export const putRequest = (
     console.log(`url ${url}`);
     dispatch(requestActionCreator(params));
     const req = http.put(url)
+        .timeout({
+            response: 60000,
+            deadline: 60000,
+        })
         .send(payload)
         .end(
             responseHandler(
@@ -147,14 +157,14 @@ export const postRequest = (
 
 export const responseHandler = (dispatch, success, errorHandler) => {
     return (err, res) => {
+        dispatch(stopLoading());
         if (err || !res.ok) {
             if(errorHandler) {
                 errorHandler(err, res);
+                return;
             }
-            else {
-                console.log(err, res);
-                dispatch(showMessage({msg:GENERIC_ERROR, msg_type:'error'}));
-            }
+            console.log(err, res);
+            dispatch(showMessage({msg:GENERIC_ERROR, msg_type:'error'}));
         }
         else if(typeof success === 'function') {
             success(res.body);

@@ -13,6 +13,8 @@
 
 import { getRequest, putRequest, postRequest, deleteRequest, createAction } from "~core-utils/actions";
 import URI from "urijs";
+import 'sweetalert2/dist/sweetalert2.css';
+import swal from 'sweetalert2';
 
 // actions
 export const REQUEST_ANSWERS_PAGE                    = 'REQUEST_ANSWERS_PAGE';
@@ -35,6 +37,20 @@ export const REQUEST_LANGUAGES_BY_QUESTION            = 'REQUEST_LANGUAGES_BY_QU
 export const RECEIVE_LANGUAGES_BY_QUESTION            = 'RECEIVE_LANGUAGES_BY_QUESTION';
 export const REQUEST_EXPORT_ANSWERS                   = 'REQUEST_EXPORT_ANSWERS';
 export const RECEIVE_EXPORT_ANSWERS                   = 'RECEIVE_EXPORT_ANSWERS';
+export const REQUEST_REBUILD_BAYES                   = 'REQUEST_REBUILD_BAYES';
+export const RECEIVE_REBUILD_BAYES                   = 'RECEIVE_REBUILD_BAYES';
+
+const errorHandler = (err, res) => {
+    let text = res.body;
+    if(res.body != null && res.body.messages instanceof Array) {
+        let messages = res.body.messages.map( m => {
+            if (m instanceof Object) return m.message
+            else return m;
+        })
+        text = messages.join('\n');
+    }
+    swal(res.statusText, text, "error");
+}
 
 export const fetchAnswersPage = (params) => (dispatch) => {
     let {template_id, question_id} = params;
@@ -86,7 +102,7 @@ export const removeTagFromFreeTextAnswer = (params, payload) => (dispatch) => {
         createAction(REQUEST_REMOVE_TAG_FREE_TEXT_ANSWER),
         createAction(RECEIVE_REMOVE_TAG_FREE_TEXT_ANSWER),
         `api/v1/sangria/survey-templates/${template_id}/questions/${question_id}/free-text-answers/${answer_id}/tags`,
-    payload
+        payload
     )(params)(dispatch);
 };
 
@@ -97,18 +113,30 @@ export const extractTagsByKMeans = (params, payload = {}) => (dispatch) => {
         createAction(REQUEST_AUTO_TAG_FREE_TEXT_ANSWER),
         createAction(RECEIVE_AUTO_TAG_FREE_TEXT_ANSWER),
         `api/v1/sangria/survey-templates/${template_id}/questions/${question_id}/free-text-answers/tagging/kmeans`,
-    payload
+        payload,
+        errorHandler
     )(params)(dispatch);
 };
 
-export const extractTagsByRegex = (params, payload = {}) => (dispatch) => {
+export const extractTagsByBayes = (params, payload = {}) => (dispatch) => {
     let {template_id, question_id} = params;
 
     putRequest(
         createAction(REQUEST_AUTO_TAG_FREE_TEXT_ANSWER),
         createAction(RECEIVE_AUTO_TAG_FREE_TEXT_ANSWER),
-        `api/v1/sangria/survey-templates/${template_id}/questions/${question_id}/free-text-answers/tagging/regex`,
-        payload
+        `api/v1/sangria/survey-templates/${template_id}/questions/${question_id}/free-text-answers/tagging/bayes`,
+        payload,
+        errorHandler
+    )(params)(dispatch);
+};
+
+export const rebuildBayesianNaiveModel = (params = {}, payload = {}) => (dispatch) => {
+    putRequest(
+        createAction(REQUEST_REBUILD_BAYES),
+        createAction(RECEIVE_REBUILD_BAYES),
+        "api/v1/sangria/survey-templates/free-text-answers/tagging/bayes/rebuild",
+        payload,
+        errorHandler
     )(params)(dispatch);
 };
 
@@ -119,7 +147,8 @@ export const extractTagsByRAKE = (params, payload = {}) => (dispatch) => {
         createAction(REQUEST_AUTO_TAG_FREE_TEXT_ANSWER),
         createAction(RECEIVE_AUTO_TAG_FREE_TEXT_ANSWER),
         `api/v1/sangria/survey-templates/${template_id}/questions/${question_id}/free-text-answers/tagging/rake`,
-        payload
+        payload,
+        errorHandler
     )(params)(dispatch);
 };
 
