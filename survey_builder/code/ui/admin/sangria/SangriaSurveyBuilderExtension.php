@@ -441,8 +441,6 @@ HTML;
         // defined here bc amd/requirejs module definition is broken
         Requirements::javascript('node_modules/bootstrap-3-typeahead/bootstrap3-typeahead.min.js');
 
-        $now  = MySQLDatabase56::nowRfc2822();
-
         return $this->owner->getViewer('ViewSurveyFreeAnswersList')->process
         (
             $this->owner->Customise([

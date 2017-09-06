@@ -27,7 +27,9 @@ import {
     REQUEST_LANGUAGES_BY_QUESTION,
     RECEIVE_LANGUAGES_BY_QUESTION,
     REQUEST_EXPORT_ANSWERS,
-    RECEIVE_EXPORT_ANSWERS
+    RECEIVE_EXPORT_ANSWERS,
+    REQUEST_REBUILD_BAYES,
+    RECEIVE_REBUILD_BAYES
 } from './actions';
 
 import {
@@ -193,6 +195,20 @@ export const surveyFreeTextAnswersReducer = (
             return {
                 ...state,
                 loading: false
+            }
+            break;
+        case REQUEST_REBUILD_BAYES:
+            return {
+                ...state,
+                loading: true
+            }
+            break;
+        case RECEIVE_REBUILD_BAYES:
+            return {
+                ...state,
+                loading: false,
+                msg: "Bayesian Model rebuilt successfully!",
+                msg_type: "success",
             }
             break;
         default:
