@@ -6,7 +6,7 @@ dataobjects:
   - class: "Appliance"
     insert_sql: "INSERT IGNORE INTO Appliance (ID) SELECT ID from CompanyService where ClassName IN ('Appliance');"
   - class: "Distribution"
-    insert_sql: "INSERT IGNORE INTO Appliance (ID) SELECT ID from CompanyService where ClassName IN ('Distribution');"
+    insert_sql: "INSERT IGNORE INTO Distribution (ID) SELECT ID from CompanyService where ClassName IN ('Distribution');"
   - class: "CloudService"
     insert_sql: "INSERT IGNORE INTO CloudService (ID) SELECT ID from CompanyService where ClassName IN ('PrivateCloudService', 'PublicCloudService');"
   - class: "PrivateCloudService"

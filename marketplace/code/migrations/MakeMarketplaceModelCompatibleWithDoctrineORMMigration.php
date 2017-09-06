@@ -49,7 +49,7 @@ final class MakeMarketplaceModelCompatibleWithDoctrineORMMigration extends Abstr
 
         if(DBSchema::existsTable($database, "Distribution"))
             DB::query("
-            INSERT IGNORE INTO Appliance (ID) SELECT ID from CompanyService where ClassName IN ('Distribution');
+            INSERT IGNORE INTO Distribution (ID) SELECT ID from CompanyService where ClassName IN ('Distribution');
             ");
 
         if(DBSchema::existsTable($database, "CloudService"))
