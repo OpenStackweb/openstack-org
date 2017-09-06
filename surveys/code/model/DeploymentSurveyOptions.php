@@ -12,6 +12,10 @@
  * limitations under the License.
  **/
 
+/**
+ * @deprecated
+ * Class DeploymentSurveyOptions
+ */
 final class DeploymentSurveyOptions {
 
     public static $industry_options = array(

@@ -12,6 +12,10 @@
  * limitations under the License.
  **/
 
+/**
+ * @deprecated
+ * Class SurveyType
+ */
 class SurveyType {
 
     const OLD        = 'OLD';

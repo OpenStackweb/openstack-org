@@ -12,6 +12,10 @@
  * limitations under the License.
  **/
 
+/**
+ * @deprecated
+ * Class AppDevSurveyArchiveOptions
+ */
 final class AppDevSurveyArchiveOptions {
 
     public static $toolkits_options = array (

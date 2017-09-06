@@ -12,6 +12,10 @@
  * limitations under the License.
  **/
 
+/**
+ * @deprecated
+ * Class DeploymentMigrationOptions
+ */
 class DeploymentMigrationOptions {
 
     public static $blank_fields = array('DeploymentType', 'ComputeNodes', 'ComputeCores', 'ComputeInstances', 'BlockStorageTotalSize', 'ObjectStorageSize', 'ObjectStorageNumObjects', 'NetworkNumIPs', 'WhyNovaNetwork');

@@ -12,6 +12,10 @@
  * limitations under the License.
  **/
 
+/**
+ * @deprecated
+ * Class DeploymentOptions
+ */
 final class DeploymentOptions {
 
     public static $deployment_type_options = array(

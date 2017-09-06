@@ -12,6 +12,10 @@
  * limitations under the License.
  **/
 
+/**
+ * @deprecated
+ * Class AppDevSurveyMigrationOptions
+ */
 class AppDevSurveyMigrationOptions {
 
     public static $blank_fields = array();

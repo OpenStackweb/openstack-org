@@ -12,6 +12,10 @@
  * limitations under the License.
  **/
 
+/**
+ * @deprecated
+ * Class DeploymentSurveyMigrationOptions
+ */
 class DeploymentSurveyMigrationOptions {
 
     public static $blank_fields = array('OrgSize', 'BusinessDrivers');

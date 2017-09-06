@@ -12,6 +12,10 @@
  * limitations under the License.
  **/
 
+/**
+ * @deprecated
+ * Class CountryCodes
+ */
 class CountryCodes {
 
 	public static $iso_3166_countryCodes = array(
