@@ -103,7 +103,8 @@ export const setFilters = (values, expanded, calSync) => {
 
 export const clearFilters = () => {
     const { summit } = ScheduleProps
-    return setFilters({ ...DEFAULT_FILTERS }, false, summit.current_user.cal_sync)
+    let cal_sync = (summit.current_user) ? summit.current_user.cal_sync : false;
+    return setFilters({ ...DEFAULT_FILTERS }, false, cal_sync);
 }
 
 export const toggleFilters = () => {

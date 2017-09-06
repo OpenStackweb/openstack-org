@@ -46,7 +46,7 @@ class MainFilterFields extends Component {
             </div>
             <div className="col-sm-15 col-xs-12 single-filter-wrapper">
                 <select ref="ddl_track_groups" name="ddl_track_groups"
-                size="5" multiple="multiple" data-placeholder="Summit Categories"
+                size="5" multiple="multiple" data-placeholder="Summit Categories" placeholder="Summit Categories"
                 value={values.track_groups || []} onChange={() => false}>
                     {Object.keys(summit.category_groups).map(groupId => (
                     <option key={groupId} value={groupId}>
@@ -56,7 +56,7 @@ class MainFilterFields extends Component {
                  </select>
             </div>
             <div className="col-sm-15 col-xs-12 single-filter-wrapper">
-                <select ref="ddl_tracks" multiple="multiple" data-placeholder="Tracks"
+                <select ref="ddl_tracks" multiple="multiple" data-placeholder="Tracks" placeholder="Tracks"
                 value={values.tracks || []} onChange={() => false}>
                     {summit.track_ids.map(trackId => (
                     <option key={trackId} value={trackId}
@@ -68,7 +68,7 @@ class MainFilterFields extends Component {
             </div>
             <div className="col-sm-15 col-xs-12 single-filter-wrapper hide">
                 <select ref="ddl_event_types" name="ddl_event_types"
-                size="7" multiple="multiple" data-placeholder="Event Types"
+                size="7" multiple="multiple" data-placeholder="Event Types" placeholder="Event Types"
                 value={values.event_types || []} onChange={() => false}>
                     {summit.event_type_ids.map(typeId => (
                     <option key={typeId} value={typeId}>
@@ -78,7 +78,7 @@ class MainFilterFields extends Component {
                 </select>
             </div>
             <div className="col-sm-15 col-xs-12 single-filter-wrapper">
-                <select ref="ddl_levels" multiple="multiple" data-placeholder="Presentation Level"
+                <select ref="ddl_levels" multiple="multiple" data-placeholder="Presentation Level" placeholder="Presentation Level"
                 value={values.levels || []} onChange={() => false}>
                     {Object.keys(summit.presentation_levels).map(levelId => (
                     <option key={levelId} value={levelId.toLowerCase()}>
@@ -88,7 +88,7 @@ class MainFilterFields extends Component {
                 </select>
             </div>
             <div className="col-sm-15 col-xs-12 single-filter-wrapper">
-                <select ref="ddl_tags" multiple="multiple" data-placeholder="Tags"
+                <select ref="ddl_tags" multiple="multiple" data-placeholder="Tags" placeholder="Tags"
                 value={values.tags || []} onChange={() => false}>
                     {summit.tag_ids.map(tagId => (
                     <option key={tagId} value={tagId}>
