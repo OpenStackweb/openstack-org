@@ -279,7 +279,7 @@ i.collapse-nav {
 
 .view-select-container #view-select {
     background-color: #fff;
-    margin-left: 10px;
+    margin-left: 5px;
     border-radius: 5px;
     height: 30px;
     cursor: pointer;
@@ -632,6 +632,27 @@ a.navbar-brand {
     padding-top: 10px;
     padding-bottom: 10px;
 }
+
+/* hide label for desktops and laptops */
+@media (max-width: 767px) {
+    .single-filter-wrapper select {
+        width: 100%;
+    }
+}
+
+@media (max-width: 1200px) {
+    .single-filter-wrapper .filter-label {
+        display: block;
+        font-size: 12px;
+    }
+}
+
+@media (min-width: 1201px) {
+    .single-filter-wrapper .filter-label {
+        display: none;
+    }
+}
+
 
 .col-switch-schedule, .col-switch-watchlist, .col-toggle-sync {
     float: right;
