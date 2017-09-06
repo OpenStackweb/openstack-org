@@ -190,7 +190,8 @@
                                 <% end_if %>
                             <% end_loop %>
 
-                            <% loop PublishedPresentations($Top.Summit.ID, 'MODERATOR', 0) %>
+                            <% if PublishedPresentations($Top.Summit.ID, 'MODERATOR', 0) %>
+                                <% loop PublishedPresentations($Top.Summit.ID, 'MODERATOR', 0) %>
 
                             var event_{$ID} =
                                     {
@@ -245,7 +246,9 @@
                                     summit.dic_events[{$ID}] = event_{$ID};
 
                             <% end_loop %>
-                            <% loop PublishedPresentations($Top.Summit.ID, 'SPEAKER', 0) %>
+                            <% end_if %>
+                            <% if PublishedPresentations($Top.Summit.ID, 'SPEAKER', 0) %>
+                                <% loop PublishedPresentations($Top.Summit.ID, 'SPEAKER', 0) %>
                             <% if not $isModeratorByID($Up.ID) %>
                                 var event_{$ID} =   {
                                     id              :  {$ID},
@@ -299,6 +302,7 @@
                                 summit.dic_events[{$ID}] = event_{$ID};
                             <% end_if %>
                             <% end_loop %>
+                            <% end_if %>
                     </script>
                     <event-list summit="{ summit }" default_event_color={'#757575'} search_url="{$Top.Link(global-search)}" base_url="{$Top.Link}" ></event-list>
                 </div>
