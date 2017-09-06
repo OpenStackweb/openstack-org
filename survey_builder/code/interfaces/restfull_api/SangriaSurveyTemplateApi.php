@@ -14,8 +14,18 @@
  **/
 use  Symfony\Component\Process\Process;
 
-class SangriaSurveyTemplateApi extends AbstractRestfulJsonApi
+/**
+ * Class SangriaSurveyTemplateApi
+ */
+final class SangriaSurveyTemplateApi extends AbstractRestfulJsonApi
 {
+
+    const NO_BAYESIAN_MODEL_FILE_ERROR_CODE = 253;
+
+    const NO_BAYESIAN_MODEL_FILE_ERROR_TEXT = <<<TEXT
+There is not any Bayesian Model for this question type so far.\n
+Please complete by hand some training data and perform a model rebuild.
+TEXT;
 
     /**
      * @var ISurveyFreeTextAnswerManager
@@ -27,20 +37,20 @@ class SangriaSurveyTemplateApi extends AbstractRestfulJsonApi
      */
     private $template_manager;
 
-
     static $url_handlers = [
-        'PUT $SURVEY_TEMPLATE_ID/questions/$QUESTION_ID/free-text-answers/tagging/kmeans'     => 'extractTagsByKMeans',
-        'PUT $SURVEY_TEMPLATE_ID/questions/$QUESTION_ID/free-text-answers/tagging/regex'      => 'extractTagsByRegex',
-        'PUT $SURVEY_TEMPLATE_ID/questions/$QUESTION_ID/free-text-answers/tagging/rake'       => 'extractTagsByRake',
-        'GET $SURVEY_TEMPLATE_ID/questions/$QUESTION_ID/free-text-answers/all/tags'           => 'getAllFreeTextAnswersTags',
-        'POST $SURVEY_TEMPLATE_ID/questions/$QUESTION_ID/free-text-answers/$ANSWER_ID/tags'   => 'addFreeTextAnswerTag',
-        'DELETE $SURVEY_TEMPLATE_ID/questions/$QUESTION_ID/free-text-answers/$ANSWER_ID/tags' => 'removeFreeTextAnswerTag',
-        'POST $SURVEY_TEMPLATE_ID/questions/$QUESTION_ID/free-text-answers/merge_tags'        => 'addFreeTextTagMerge',
-        'PUT $SURVEY_TEMPLATE_ID/questions/$QUESTION_ID/free-text-answers/$ANSWER_ID'         => 'updateFreeTextAnswer',
-        'GET $SURVEY_TEMPLATE_ID/questions/$QUESTION_ID/free-text-answers'                    => 'getFreeTextAnswers',
-        'GET $SURVEY_TEMPLATE_ID/questions/$QUESTION_ID/languages'                            => 'getLanguages',
-        'GET $SURVEY_TEMPLATE_ID/questions/$QUESTION_ID/export-answers'                       => 'exportAnswers',
-        'GET $SURVEY_TEMPLATE_ID/questions'                                                   => 'getFreeTextQuestions',
+        'PUT free-text-answers/tagging/bayes/rebuild'                                            => 'rebuildBayesianNaiveModel',
+        'PUT $SURVEY_TEMPLATE_ID/questions/$QUESTION_ID/free-text-answers/tagging/kmeans'        => 'extractTagsByKMeans',
+        'PUT $SURVEY_TEMPLATE_ID/questions/$QUESTION_ID/free-text-answers/tagging/bayes'         => 'extractTagsByBayes',
+        'PUT $SURVEY_TEMPLATE_ID/questions/$QUESTION_ID/free-text-answers/tagging/rake'          => 'extractTagsByRake',
+        'GET $SURVEY_TEMPLATE_ID/questions/$QUESTION_ID/free-text-answers/all/tags'              => 'getAllFreeTextAnswersTags',
+        'POST $SURVEY_TEMPLATE_ID/questions/$QUESTION_ID/free-text-answers/$ANSWER_ID/tags'      => 'addFreeTextAnswerTag',
+        'DELETE $SURVEY_TEMPLATE_ID/questions/$QUESTION_ID/free-text-answers/$ANSWER_ID/tags'    => 'removeFreeTextAnswerTag',
+        'POST $SURVEY_TEMPLATE_ID/questions/$QUESTION_ID/free-text-answers/merge_tags'           => 'addFreeTextTagMerge',
+        'PUT $SURVEY_TEMPLATE_ID/questions/$QUESTION_ID/free-text-answers/$ANSWER_ID'            => 'updateFreeTextAnswer',
+        'GET $SURVEY_TEMPLATE_ID/questions/$QUESTION_ID/free-text-answers'                       => 'getFreeTextAnswers',
+        'GET $SURVEY_TEMPLATE_ID/questions/$QUESTION_ID/languages'                               => 'getLanguages',
+        'GET $SURVEY_TEMPLATE_ID/questions/$QUESTION_ID/export-answers'                          => 'exportAnswers',
+        'GET $SURVEY_TEMPLATE_ID/questions'                                                      => 'getFreeTextQuestions',
     ];
 
     static $allowed_actions = [
@@ -49,7 +59,8 @@ class SangriaSurveyTemplateApi extends AbstractRestfulJsonApi
         'addFreeTextAnswerTag',
         'removeFreeTextAnswerTag',
         'extractTagsByKMeans',
-        'extractTagsByRegex',
+        'extractTagsByBayes',
+        'rebuildBayesianNaiveModel',
         'extractTagsByRake',
         'updateFreeTextAnswer',
         'getAllFreeTextAnswersTags',
@@ -350,15 +361,59 @@ class SangriaSurveyTemplateApi extends AbstractRestfulJsonApi
         $output = $process->getOutput();
 
         if (!$process->isSuccessful()) {
-            throw new Exception();
+            return $this->serverError();
         }
 
         return $this->ok();
     }
 
-    public function extractTagsByRegex(SS_HTTPRequest $request){
-        $template_id = intval($request->param('SURVEY_TEMPLATE_ID'));
-        $question_id = intval($request->param('QUESTION_ID'));
+    public function extractTagsByBayes(SS_HTTPRequest $request){
+        $template_id         = intval($request->param('SURVEY_TEMPLATE_ID'));
+        $question_id         = intval($request->param('QUESTION_ID'));
+        $query_string        = $request->getVars();
+        $delete_former_tags  = isset($query_string['delete_former_tags']) ? intval($query_string['delete_former_tags']) : 1;
+        $model_folder = Director::baseFolder().'/survey_builder/code/model/extract_tags/bayesian_models';
+        $command = sprintf( ' %s/survey_builder/code/model/extract_tags/bayesian_tag_extraction.sh "%s/survey_builder/code/model/extract_tags" %s %s %s', Director::baseFolder(),  Director::baseFolder(), $model_folder, $question_id, $delete_former_tags);
+        $process = new Process($command);
+        $process->setWorkingDirectory(sprintf('%s/survey_builder/code/model/extract_tags', Director::baseFolder()));
+        $process->setTimeout(PHP_INT_MAX);
+        $process->setIdleTimeout(PHP_INT_MAX);
+        $process->run();
+
+        while ($process->isRunning()) {
+        }
+
+        $output = $process->getOutput();
+
+        if (!$process->isSuccessful()) {
+            if($process->getExitCode() == self::NO_BAYESIAN_MODEL_FILE_ERROR_CODE){
+                return $this->validationError(self::NO_BAYESIAN_MODEL_FILE_ERROR_TEXT);
+            }
+            return $this->serverError();
+        }
+
+        return $this->ok();
+    }
+
+    public function rebuildBayesianNaiveModel(SS_HTTPRequest $request){
+        $model_folder = Director::baseFolder().'/survey_builder/code/model/extract_tags/bayesian_models';
+        $command = sprintf( ' %s/survey_builder/code/model/extract_tags/bayesian_model_builder.sh "%s/survey_builder/code/model/extract_tags" "%s"', Director::baseFolder(),  Director::baseFolder(), $model_folder);
+        $process = new Process($command);
+        $process->setWorkingDirectory(sprintf('%s/survey_builder/code/model/extract_tags', Director::baseFolder()));
+        $process->setTimeout(PHP_INT_MAX);
+        $process->setIdleTimeout(PHP_INT_MAX);
+        $process->run();
+
+        while ($process->isRunning()) {
+        }
+
+        $output = $process->getOutput();
+
+        if (!$process->isSuccessful()) {
+            return $this->serverError();
+        }
+
+        return $this->ok();
     }
 
     public function extractTagsByRake(SS_HTTPRequest $request){
@@ -383,7 +438,7 @@ class SangriaSurveyTemplateApi extends AbstractRestfulJsonApi
         $output = $process->getOutput();
 
         if (!$process->isSuccessful()) {
-            throw new Exception();
+            return $this->serverError();
         }
 
         return $this->ok();
