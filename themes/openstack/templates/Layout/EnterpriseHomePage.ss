@@ -116,7 +116,7 @@
                             </p>
                         </div>
                         <p>
-                            <a href="#" class="booklets-btn" data-toggle="modal" data-target="#BookletModalHero">Download now <i class="fa fa-cloud-download"></i></a>
+                            <a href="#" class="booklets-btn" data-toggle="modal" data-target="#PathToCloudModal">Download now <i class="fa fa-cloud-download"></i></a>
                         </p>
                     </div>
                 </div>
@@ -391,6 +391,29 @@
             </p>
                 <a href="//openstack.org/assets/pdf-downloads/business-perspectives.pdf" class="download-btn"><i class="fa fa-desktop fa-2x"></i> View The Booklet <sup>*</sup></a>
                 <a href="//openstack.org/assets/pdf-downloads/business-perspectives-print.pdf" class="download-btn"><i class="fa fa-print fa-2x"></i> Print The Booklet</a>
+                <span class="lrg-btn-note">*Best viewed with Page Display set to single page and Zoom set to page level</span>
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+    <!-- Path to Cloud  Modal -->
+    <div class="modal fade" id="PathToCloudModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title">OpenStack: The Path to Cloud</h4>
+          </div>
+          <div class="modal-body">
+            <p class="download-text">
+                <i class="fa fa-file-pdf-o fa-4x"></i>
+                Provides enterprise architects insights on planning an OpenStack cloud, including selecting the right model, forming your team, choosing workloads, and implementation from proof-of-concept through production.
+            </p>
+                <a href="https://www.amazon.com/OpenStack-Path-Cloud-Foundation/dp/1532709404" class="download-btn"><i class="fa fa-desktop fa-2x"></i> Purchase the Book</a>
+                <a href="//www.openstack.org/assets/path-to-cloud/OpenStack-6x9Booklet-online.pdf" class="download-btn"><i class="fa fa-desktop fa-2x"></i> View The Booklet</a>
                 <span class="lrg-btn-note">*Best viewed with Page Display set to single page and Zoom set to page level</span>
           </div>
           <div class="modal-footer">
