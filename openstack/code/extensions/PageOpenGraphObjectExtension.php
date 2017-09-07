@@ -24,6 +24,8 @@ final class TwitterCardMetadataBuilder
 
 class PageOpenGraphObjectExtension extends OpenGraphObjectExtension
 {
+    public static $default_image = '/themes/openstack/images/openstack-logo-full.png';
+
     public function MetaTags(&$tags)
     {
         parent::MetaTags($tags);
@@ -33,6 +35,55 @@ class PageOpenGraphObjectExtension extends OpenGraphObjectExtension
     protected function buildAppLinksMetaTags(&$tags){
 
         TwitterCardMetadataBuilder::buildTwitterCardMetaTags($tags);
+    }
+
+    public function getMetaValue($field_name) {
+        $field_value = '';
+        $parent = $this->owner->Parent();
+
+        if ($this->owner->hasMethod($field_name)) {
+            if ($field_name == 'MetaImage' && $this->owner->MetaImage()->Exists()) {
+                return $this->owner->MetaImage();
+            } else if ($parent->getField($field_name)) {
+                return $this->owner->getField($field_name);
+            }
+        }
+
+        while( $parent && $parent->exists() ) {
+            if ($parent->hasMethod($field_name)) {
+                if ($field_name == 'MetaImage' && $parent->MetaImage()->Exists()) {
+                    $field_value = $parent->$field_name();
+                    break;
+                } else if ($parent->getField($field_name)) {
+                    $field_value = $parent->getField($field_name);
+                    break;
+                }
+            }
+            $parent = $parent->Parent();
+        }
+
+        return $field_value;
+    }
+
+    public function getOGImage()
+    {
+        $meta_image = $this->getMetaValue('MetaImage');
+        if ($meta_image && $meta_image->Exists())
+            return $meta_image->getURL();
+
+        return Director::absoluteURL(self::$default_image);
+    }
+
+    public function getOGTitle()
+    {
+        $meta_title = $this->getMetaValue('MetaTitle');
+
+        if($meta_title) {
+            $title = trim($meta_title);
+            if(!empty($title)) return $title;
+        }
+
+        return $this->owner->Title." - OpenStack Open Source Cloud Computing Software";
     }
 
 }

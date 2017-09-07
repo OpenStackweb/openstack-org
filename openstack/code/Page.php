@@ -50,6 +50,14 @@ class Page extends SiteTree
         $fields->fieldByName('Root.Main.Metadata')->push(new UploadField("MetaImage",$this->fieldLabel('MetaImage')));
         $fields->fieldByName('Root.Main.Metadata')->push(new TextField("MetaTitle",$this->fieldLabel('MetaTitle')));
 
+        $dev_tools = '<div class="field text">
+	                    <label class="left">Dev Tools: '.$this->AbsoluteLink().'</label>
+                        <div class="middleColumn">
+                            <a href="https://cards-dev.twitter.com/validator" target="_blank">twitter card</a><br>
+                            <a href="https://developers.facebook.com/tools/debug/sharing/?q='.urlencode($this->AbsoluteLink()).'" target="_blank"> facebook card </a>
+                        </div>
+                      </div>';
+        $fields->fieldByName('Root.Main.Metadata')->push(new LiteralField("DevTools",$dev_tools));
 
         $fields->addFieldToTab('Root.Settings', new TextField ('PageCSS', 'Custom CSS File For This Page (must be in CSS directory)'));
 
@@ -216,24 +224,6 @@ class Page extends SiteTree
              unset($this->extension_instances[$extension]);
     }
 
-    public static $default_image = '/themes/openstack/images/openstack-logo-full.png';
-
-    public function getOGImage()
-    {
-        if ($this->hasField('MetaImage') && $this->MetaImage()->Exists())
-            return $this->MetaImage()->getURL();
-        return Director::absoluteURL(self::$default_image);
-    }
-
-    public function getOGTitle()
-    {
-        if($this->hasField('MetaTitle')) {
-            $title = trim($this->MetaTitle);
-            if(!empty($title)) return $title;
-        }
-
-        return $this->Title." - OpenStack Open Source Cloud Computing Software";
-    }
 }
 
 class Page_Controller extends ContentController
