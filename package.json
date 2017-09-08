@@ -51,6 +51,7 @@
     "socket.io-client": "^1.6.0",
     "sortablejs": "^1.4.2",
     "superagent": "^3.5.2",
+    "sweetalert2": "^6.6.10",
     "urijs": "^1.18.10",
     "xhr2": "^0.1.3"
   },

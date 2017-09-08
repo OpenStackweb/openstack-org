@@ -22,13 +22,14 @@ import {
     addTagToFreeTextAnswer,
     removeTagFromFreeTextAnswer,
     extractTagsByKMeans,
-    extractTagsByRegex,
+    extractTagsByBayes,
     extractTagsByRAKE,
     updateFreeTextAnswer,
     fetchFreeTextAnswersTagsByQuestion,
     showFreeTextAnswersStatsView,
     fetchLanguagesByQuestion,
-    exportAnswers
+    exportAnswers,
+    rebuildBayesianNaiveModel,
 } from './actions';
 
 import {
@@ -172,12 +173,17 @@ class SangriaSurveyFreeTextAnswersListApp extends React.Component {
                     this.props.calculateTagsByRAKE(this.props.template_id, this.props.question_id, deleteFormer);
                     this.hideModalExtractTags();
                 break;
-                case 'REGEX':
-                    this.props.calculateTagsByRegex(this.props.template_id, this.props.question_id, deleteFormer);
+                case 'BAYES':
+                    this.props.calculateTagsByBayes(this.props.template_id, this.props.question_id, deleteFormer);
                     this.hideModalExtractTags();
                 break;
             }
         }
+    }
+
+    onRebuildBayesianNaiveModel(e){
+        e.preventDefault();
+        this.props.rebuildBayesianNaiveModel();
     }
 
     onExtractTagsClicked(e){
@@ -218,11 +224,17 @@ class SangriaSurveyFreeTextAnswersListApp extends React.Component {
     onChangeTagExtractionMethod(e){
         let target = e.currentTarget;
         let val    = target.value;
-        if(val == 'KMEANS'){
-            $('.kmean-control-group').toggleClass('hidden');
-        }
-        else{
+        if(!$('.bayes-control-group').hasClass('hidden'))
+            $('.bayes-control-group').addClass('hidden');
+        if(!$('.kmean-control-group').hasClass('hidden'))
             $('.kmean-control-group').addClass('hidden');
+        if(val == 'KMEANS'){
+            $('.kmean-control-group').removeClass('hidden');
+            return;
+        }
+        if(val == 'BAYES'){
+            $('.bayes-control-group').removeClass('hidden');
+            return;
         }
     }
 
@@ -269,7 +281,7 @@ class SangriaSurveyFreeTextAnswersListApp extends React.Component {
         return (
             <div>
                 <Message />
-                <AjaxLoader show={ this.props.loading } />
+                <AjaxLoader show={ this.props.loading } size={ 75 }/>
                 <Modal isOpen={this.state.isOpenModalExtractTags} onRequestHide={(e) => this.hideModalExtractTags()}>
                     <ModalHeader>
                         <ModalClose onClick={ (e) => this.hideModalExtractTags()}/>
@@ -287,7 +299,7 @@ class SangriaSurveyFreeTextAnswersListApp extends React.Component {
                                     <option value="">--SELECT  ONE--</option>
                                     <option value="KMEANS">By Clustering (KMEANS)</option>
                                     <option value="RAKE">By Keyword Extraction (RAKE)</option>
-                                    <option value="REGEX">By Regular Expressions</option>
+                                    <option value="BAYES">By Bayesian Naive Estimator (BAYES)</option>
                                 </select>
                             </div>
                             <div className='form-group hidden kmean-control-group' >
@@ -298,6 +310,9 @@ class SangriaSurveyFreeTextAnswersListApp extends React.Component {
                                         ref={(input) => this.selectTagsExtractionMethodClusters = input} >
                                     { cluster_options }
                                  </select>
+                            </div>
+                            <div className='form-group hidden bayes-control-group' >
+
                             </div>
                             <div className="checkbox">
                                 <label>
@@ -366,6 +381,15 @@ class SangriaSurveyFreeTextAnswersListApp extends React.Component {
                         </button>
                     </div>
 
+                </div>
+                <div className="row main-controls-row">
+                    <div className="col-md-12">
+                        <button className='btn btn-primary'
+                                title="Rebuild Bayesian Model for all answers when new tags are added manually"
+                                onClick={(e) => this.onRebuildBayesianNaiveModel(e)}>
+                            Rebuild Bayesian Naive Model
+                        </button>
+                    </div>
                 </div>
                 <table className="table">
                     <thead>
@@ -479,8 +503,11 @@ export default connect(
         calculateTagsByKMEANS(template_id, question_id, delete_former_tags = 1, clusters = 5){
             return dispatch(extractTagsByKMeans({template_id, question_id, delete_former_tags, clusters}));
         },
-        calculateTagsByRegex(template_id, question_id,  delete_former_tags = 1){
-            return dispatch(extractTagsByRegex({template_id, question_id, delete_former_tags}));
+        calculateTagsByBayes(template_id, question_id,  delete_former_tags = 1){
+            return dispatch(extractTagsByBayes({template_id, question_id, delete_former_tags}));
+        },
+        rebuildBayesianNaiveModel(){
+            return dispatch(rebuildBayesianNaiveModel());
         },
         calculateTagsByRAKE(template_id, question_id, delete_former_tags = 1){
             return dispatch(extractTagsByRAKE({template_id, question_id, delete_former_tags}));

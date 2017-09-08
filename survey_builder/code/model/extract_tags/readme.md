@@ -27,5 +27,11 @@ after that, you should give the proper execution rights to scripts
 ```bash
 chmod 770 extract_tags_by_rake.sh
 chmod 770 extract_tags_by_kmeans.sh
+chmod 770 bayesian_model_builder.sh
+chmod 770 bayesian_tag_extraction.sh
 ```
+
+task to build bayesian naive estimator model
+
+sake BuildBayesianModelTask
 
