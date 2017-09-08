@@ -69,7 +69,7 @@ class PageOpenGraphObjectExtension extends OpenGraphObjectExtension
     {
         $meta_image = $this->getMetaValue('MetaImage');
         if ($meta_image && $meta_image->Exists())
-            return $meta_image->getURL();
+            return Director::absoluteURL($meta_image->getURL());
 
         return Director::absoluteURL(self::$default_image);
     }
