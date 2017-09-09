@@ -256,7 +256,6 @@ a.future-summit::after {
   right: 0;
   position: absolute;
   z-index: -1; }
-  opacity: 1; }
 
 a.future-summit2::after {
   background: url('/assets/berlin-summit/images/berlin-square.jpg') no-repeat center center;
