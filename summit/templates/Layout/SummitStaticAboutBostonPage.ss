@@ -27,7 +27,7 @@
             </li>
             <li>
                 <a href="#hackathon">
-                    <img src="https://www.openstack.org/assets/sydney-summit/images/hackathon-menu-icon.png" class="hackathon-menu-icon"><br>
+                    <img src="https://www.openstack.org/assets/sydney-summit/images/hackathon-menu-icon.png" style="margin-bottom:15px;"><br>
                     Hackathon
                 </a>
             </li>
@@ -282,6 +282,7 @@
         <hr style="margin-top:60px;">
         <h1 style="margin-bottom: 20px;">Hackathon</h1>
         <p><span style="text-align:center;"><img src="https://www.openstack.org/assets/sydney-summit/images/hackathon-section-logo.png"></span></p>
+        <p>&nbsp;</p>
         </div>
         <div class="row">
           <div class="col-sm-8 col-sm-push-2">
