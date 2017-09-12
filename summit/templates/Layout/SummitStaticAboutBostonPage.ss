@@ -258,18 +258,18 @@
       </div>
     </div>
     <div class="row" id="forum">
-                <div class="col-sm-12">
-          <hr style="margin-top:60px;">
-          <h1 style="margin-bottom: 20px;">The Forum</h1>
-          <i class="fa fa-flask" style="color: #3E9B85;font-size: 5.5em;margin-bottom: 20px;"></i>
-          <div class="row">
-            <div class="col-sm-8 col-sm-push-2">
-              <p>
-                At the <a href="http://superuser.openstack.org/articles/openstack-forum/" target="_blank">Forum</a>, OpenStack users and developers will gather to brainstorm the requirements for the next release, gather feedback on the past version and have strategic discussions that go beyond just one release cycle. Development teams, working groups and interested individuals will discuss release requirements, connect with community members about cross-project collaboration, and to exchange feedback between design and operations members.
-              </p>
-            </div>
+      <div class="col-sm-12">
+        <hr style="margin-top:60px;">
+        <h1 style="margin-bottom: 20px;">The Forum</h1>
+        <i class="fa fa-flask" style="color: #3E9B85;font-size: 5.5em;margin-bottom: 20px;"></i>
+        <div class="row">
+          <div class="col-sm-8 col-sm-push-2">
+            <p>
+              At the <a href="http://superuser.openstack.org/articles/openstack-forum/" target="_blank">Forum</a>, OpenStack users and developers will gather to brainstorm the requirements for the next release, gather feedback on the past version and have strategic discussions that go beyond just one release cycle. Development teams, working groups and interested individuals will discuss release requirements, connect with community members about cross-project collaboration, and to exchange feedback between design and operations members.
+            </p>
           </div>
         </div>
+      </div>
     </div>
     <div class="row">
       <div class="col-sm-12">
@@ -291,13 +291,13 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-sm-12">
-          <a href="http://hackathon.openstack.org.au/" class="btn academy-cta" target="_blank">Learn more about the Hackathon</a>
-        </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <a href="http://hackathon.openstack.org.au/" class="btn academy-cta" target="_blank">Learn more about the Hackathon</a>
       </div>
+    </div>
   </div>
-</div>
 </div>
 
 <div class="summit-more-wrapper">
@@ -305,15 +305,15 @@
     <div class="row">
       <div class="col-sm-12">
         <hr style="margin-top:60px;">
-                <h3 class="recap-title">Watch the Keynotes from Barcelona</h3>
-                <div class="about-video-wrapper">
-                    <iframe src="//www.youtube.com/embed/GGxzlLwt6WA?rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe>
-                <p class='video-catpion'>Keynote Day 1</p>
-                </div>
-                <div class="about-video-wrapper">
-                    <iframe src="//www.youtube.com/embed/t8IiULAPKwo?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
-                <p class='video-catpion'>Keynote Day 2</p>
-                </div>
+          <h3 class="recap-title">Watch the Keynotes from Barcelona</h3>
+          <div class="about-video-wrapper">
+              <iframe src="//www.youtube.com/embed/GGxzlLwt6WA?rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe>
+          <p class='video-catpion'>Keynote Day 1</p>
+          </div>
+          <div class="about-video-wrapper">
+              <iframe src="//www.youtube.com/embed/t8IiULAPKwo?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+          <p class='video-catpion'>Keynote Day 2</p>
+          </div>
       </div>
     </div>
   </div>
@@ -329,7 +329,6 @@
                     </p>
                     <img class="summit-type-icon" src="/assets/sydney-summit/images/sydney-schedule-final.png" alt="Summit Timeline">
                 </div>
-
             </div>
         </div>
     </div>
