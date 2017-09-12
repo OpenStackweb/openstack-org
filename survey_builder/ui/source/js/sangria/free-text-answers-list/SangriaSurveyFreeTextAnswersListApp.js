@@ -385,9 +385,9 @@ class SangriaSurveyFreeTextAnswersListApp extends React.Component {
                 <div className="row main-controls-row">
                     <div className="col-md-12">
                         <button className='btn btn-primary'
-                                title="Rebuild Bayesian Model for all answers when new tags are added manually"
+                                title="Train Bayesian Naive Model"
                                 onClick={(e) => this.onRebuildBayesianNaiveModel(e)}>
-                            Rebuild Bayesian Naive Model
+                            Train Bayesian Naive Model
                         </button>
                     </div>
                 </div>
