@@ -85,7 +85,7 @@ ul.secondary-nav-list li i {
     .secondary-nav.fixed ul.secondary-nav-list li a.active:after,
     .secondary-nav.fixed ul.secondary-nav-list li a.active:before { display: none; } }
 
-.secondary-nav.fixed ul.secondary-nav-list li i {
+.secondary-nav.fixed ul.secondary-nav-list li i, .hackathonlogo {
     display: inline-block;
     margin: 0 5px;
     font-size: 1em; }
