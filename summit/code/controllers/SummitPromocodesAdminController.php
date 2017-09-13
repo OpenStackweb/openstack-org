@@ -36,8 +36,8 @@ final class SummitPromocodesAdminController extends Controller
     private static $url_handlers = array
     (
         'sponsors/$SponsorID!'      => 'editPromoCodeSponsor',
-        'sponsors'                  => 'promocodes_sponsors',
-        'bulk'                      => 'promocodes_bulk',
+        'sponsors'                  => 'promocodesSponsors',
+        'bulk'                      => 'promocodesBulk',
         '$Code!'                    => 'editPromoCode',
         'GET '                      => 'promocodes',
     );
