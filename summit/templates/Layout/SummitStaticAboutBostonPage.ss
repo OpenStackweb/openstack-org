@@ -27,7 +27,7 @@
             </li>
             <li>
                 <a href="#hackathon">
-                    <img src="https://www.openstack.org/assets/sydney-summit/images/hackathon-menu-icon.png"><br>
+                    <img src="https://www.openstack.org/assets/sydney-summit/images/hackathon-menu-icon.png" class="hackathonlogo">
                     Hackathon
                 </a>
             </li>
