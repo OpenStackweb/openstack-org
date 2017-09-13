@@ -85,4 +85,5 @@ migrations:
   - SurveyDoubleEntryTableQuestionTemplateDataFixMigration
   - CreateFreeTextTaggingGroupMigration
   - MakeMarketplaceModelCompatibleWithDoctrineORMMigration
+  - DeploymentToolsMergeAnsibleAnswersMigration
 
