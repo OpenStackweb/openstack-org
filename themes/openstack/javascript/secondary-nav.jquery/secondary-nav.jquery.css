@@ -29,9 +29,9 @@ ul.secondary-nav-list li a:hover {
     text-decoration: none;
     opacity: 1; }
 
-ul.secondary-nav-list li i {
+ul.secondary-nav-list li i, .hackathonlogo {
     display: block;
-    margin-bottom: 10px;
+    margin: 0 auto 10px;
     font-size: 2.2em; }
 
 .secondary-nav.fixed {
@@ -85,7 +85,10 @@ ul.secondary-nav-list li i {
     .secondary-nav.fixed ul.secondary-nav-list li a.active:after,
     .secondary-nav.fixed ul.secondary-nav-list li a.active:before { display: none; } }
 
-.secondary-nav.fixed ul.secondary-nav-list li i, .hackathonlogo {
+.secondary-nav.fixed ul.secondary-nav-list li i, .secondary-nav.fixed ul.secondary-nav-list li i .hackathonlogo {
     display: inline-block;
     margin: 0 5px;
     font-size: 1em; }
+.secondary-nav.fixed ul.secondary-nav-list li i .hackathonlogo {
+    width: 35px;
+    margin-right: 8px; }
