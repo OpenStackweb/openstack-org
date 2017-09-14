@@ -105,13 +105,13 @@
     </p>
     <p>
         Products must comply with one of the two most recent guidelines approved by the OpenStack Foundation Board of Directors.
-        These versions are numbered based on the date when they were approved, such as "2017.01"for the version approved in January, 2017.
+        These versions are numbered based on the date when they were approved, such as "2017.09" for the version approved in September, 2017.
     </p>
     <p>
         The two most recent versions approved by the board are
-        "<a title="2016.08 Interop Capabilities" href="http://git.openstack.org/cgit/openstack/interop/tree/2016.08.json" target="_blank">2016.08</a>"
-        and "<a title="Interop 2017.01 Guideline" href="http://git.openstack.org/cgit/openstack/interop/tree/2017.01.json">2017.01</a>". These
-        two guidelines cover five OpenStack releases: Kilo, and Liberty, Mitaka, Newton, and Ocata.
+        "<a title="2017.01 Interop Capabilities" href="http://git.openstack.org/cgit/openstack/interop/tree/2017.01.json" target="_blank">2017.01</a>" and
+        "<a title="Interop 2017.09 Guideline" href="http://git.openstack.org/cgit/openstack/interop/tree/2017.09.json" target="_blank">2017.09</a>". These
+        two guidelines cover five OpenStack releases: Liberty, Mitaka, Newton, Ocata, and Pike.
         The list of required capabilities (with must-pass tests) and designated code sections are published on
         <a title="OpenStack Interop Working Group Repository" href="http://git.openstack.org/cgit/openstack/interop/tree/" target="_blank">git.openstack.org</a>&nbsp;
         and summarized below. Once a company verifies their products include the appropriate designated sections and submit API test results, they will
