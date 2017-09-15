@@ -44,6 +44,10 @@ span.message.bad {
     margin-top: 10px;
 }
 
+.job-registration-form .field input{
+    width: 100%;
+}
+
 #locations_table {
     margin-top: 10px;
 }
