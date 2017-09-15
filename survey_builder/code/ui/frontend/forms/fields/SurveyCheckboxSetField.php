@@ -46,8 +46,27 @@ class SurveyCheckboxSetField extends CustomCheckboxSetField {
         return  $this->visible;
     }
 
-
-    public function __construct($name, $title=null, $source=array(), $value='', $form=null, $emptyString=null, IMultiValueQuestionTemplate $question) {
+    /**
+     * SurveyCheckboxSetField constructor.
+     * @param string $name
+     * @param null $title
+     * @param array $source
+     * @param string $value
+     * @param null $form
+     * @param null $emptyString
+     * @param IMultiValueQuestionTemplate $question
+     */
+    public function __construct
+    (
+        $name,
+        $title=null,
+        $source=[],
+        $value='',
+        $form=null,
+        $emptyString=null,
+        IMultiValueQuestionTemplate $question
+    )
+    {
         parent::__construct($name, $title, $source, $value, $form, $emptyString);
         $this->visible  = true;
         $this->question = $question;
@@ -56,6 +75,56 @@ class SurveyCheckboxSetField extends CustomCheckboxSetField {
     public function addExtraClass($class) {
         if($class === 'hidden') $this->setVisible(false);
         return parent::addExtraClass($class);
+    }
+
+
+    /**
+     * @return array
+     */
+    protected function buildExtraProperties(){
+        $groups  = [];
+        $options = $this->buildOptions();
+
+        if($this->question instanceof SurveyCheckBoxListQuestionTemplate){
+            if($this->question->Groups()->count() > 0) {
+                $options_dic = [];
+                foreach ($options as $opt){
+                    $options_dic[$opt->Value] = $opt;
+                }
+
+                foreach ($this->question->Groups()->sort("Order", "ASC" ) as $group) {
+
+                    $group_options = new ArrayList();
+                    foreach ($group->Values()->sort("Order", "ASC" ) as $val) {
+                        if(isset($options_dic[$val->ID])) {
+                            $group_options->add($options_dic[$val->ID]);
+                            unset($options_dic[$val->ID]);
+                        }
+                    }
+
+                    $groups[] = new ArrayData([
+                        'Slug'    => preg_replace("/[^A-Za-z0-9 ]/", '_', strtolower(strip_tags($group->Label))),
+                        'Label'   => GetTextTemplateHelpers::_t("survey_template", $group->Label),
+                        'Options' => $group_options
+                    ]);
+                }
+
+                $ungrouped_options = new ArrayList();
+                foreach($options_dic as $id => $opt){
+                    $ungrouped_options->add($opt);
+                }
+
+                if($ungrouped_options->count() > 0)
+                    $groups[] = new ArrayData([
+                        'Slug'    => preg_replace("/[^A-Za-z0-9 ]/", '_', strtolower(strip_tags($this->question->getDefaultGroupLabel()))),
+                        'Label'   => GetTextTemplateHelpers::_t("survey_template", $this->question->getDefaultGroupLabel()),
+                        'Options' => $ungrouped_options
+                    ]);
+
+                return ['Groups' => new ArrayList($groups)];
+            }
+        }
+        return ['Options' => new ArrayList($options)];
     }
 
     /**

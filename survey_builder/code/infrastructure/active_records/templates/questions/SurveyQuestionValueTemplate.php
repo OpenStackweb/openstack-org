@@ -29,6 +29,7 @@ class SurveyQuestionValueTemplate
     private static $has_one = array
     (
         'Owner' => 'SurveyMultiValueQuestionTemplate',
+        'Group' => 'SurveyQuestionValueTemplateGroup',
     );
 
     static $indexes = array(
@@ -45,9 +46,8 @@ class SurveyQuestionValueTemplate
     static $has_many = array(
     );
 
-    private static $defaults = array(
+    static $defaults = array(
     );
-
 
     private static $summary_fields = array(
         'Value',

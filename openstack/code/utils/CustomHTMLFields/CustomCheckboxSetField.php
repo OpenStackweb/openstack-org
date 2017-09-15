@@ -14,12 +14,14 @@
 
 class CustomCheckboxSetField extends CheckboxSetField {
 
-    public function Field($properties = array()) {
-        Requirements::css(FRAMEWORK_DIR . '/css/CheckboxSetField.css');
 
+    /**
+     * @return array
+     */
+    protected function buildOptions(){
         $source = $this->source;
         $values = $this->value;
-        $items = array();
+        $items = [];
 
         // Get values from the join, if available
         if(is_object($this->form)) {
@@ -71,8 +73,8 @@ class CustomCheckboxSetField extends CheckboxSetField {
             unset($source['']);
         }
 
-        $odd = 0;
-        $options = array();
+        $odd     = 0;
+        $options = [];
 
         if ($source == null) $source = array();
 
@@ -85,25 +87,35 @@ class CustomCheckboxSetField extends CheckboxSetField {
                     $title = $item;
                 }
 
-                $itemID = $this->ID() . '_' . preg_replace('/[^a-zA-Z0-9]/', '', $value);
-                $odd = ($odd + 1) % 2;
-                $extraClass = $odd ? 'odd' : 'even';
+                $itemID      = $this->ID() . '_' . preg_replace('/[^a-zA-Z0-9]/', '', $value);
+                $odd         = ($odd + 1) % 2;
+                $extraClass  = $odd ? 'odd' : 'even';
                 $extraClass .= ' val' . preg_replace('/[^a-zA-Z0-9\-\_]/', '_', $value);
 
-                $options[] = new ArrayData(array(
-                    'ID' => $itemID,
-                    'Class' => $extraClass,
-                    'Name' => "{$this->name}[]",
-                    'Value' => $value,
-                    'Title' => $title,
-                    'isChecked' => in_array($value, $items) || in_array($value, $this->defaultItems),
+                $options[] = new ArrayData([
+                    'ID'         => $itemID,
+                    'Class'      => $extraClass,
+                    'Name'       => "{$this->name}[]",
+                    'Value'      => $value,
+                    'Title'      => $title,
+                    'isChecked'  => in_array($value, $items) || in_array($value, $this->defaultItems),
                     'isDisabled' => $this->disabled || in_array($value, $this->disabledItems)
-                ));
+                ]);
             }
         }
+        return $options;
+    }
 
-        $properties = array_merge($properties, array('Options' => new ArrayList($options)));
+    /**
+     * @return array
+     */
+    protected function buildExtraProperties(){
+        return ['Options' => new ArrayList($this->buildOptions())];
+    }
 
+    public function Field($properties = []) {
+        Requirements::css(FRAMEWORK_DIR . '/css/CheckboxSetField.css');
+        $properties = array_merge($properties, $this->buildExtraProperties());
         return $this->customise($properties)->renderWith($this->getTemplates());
     }
 } 

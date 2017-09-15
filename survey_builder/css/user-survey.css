@@ -376,6 +376,9 @@ ol.ui-sortable li {
 	margin-bottom: 1em !important;
 }
 
+.option-group-label{
+    font-size: 10px !important;
+}
 
 /*Wes Adjustments - Need to move*/
 .answer_option {
@@ -1094,3 +1097,4 @@ div.field.checkbox input {
 #language-selector{
     padding: 10px;
 }
+
