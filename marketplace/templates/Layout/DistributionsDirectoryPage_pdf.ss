@@ -4,20 +4,14 @@
 <div class="container marketplace-content">
     <table width="540px">
         <tr>
-            <td rowspan="5" valign="top" style="width:140px;padding-right:15px">
+            <td valign="top" style="width:200px;padding-right:15px">
                 $Company.SmallLogoPreview(150)
                 <h2 style="color: {$Company.CompanyColorRGB} !important;">About $Company.Name</h2>
                 <p>$Company.Overview</p>
                 <hr>
-                <div class="pullquote">
-                    <h2 style="color: {$Company.CompanyColorRGB} !important;">$Company.Name Commitment</h2>
-                    <div <% if Company.CommitmentAuthor %>class="commitment"<% end_if %>>$Company.Commitment</div>
-                    <% if Company.CommitmentAuthor %>
-                    <p class="author">&mdash;$Company.CommitmentAuthor, $Company.Name</p>
-                    <% end_if %>
-                </div>
+
             </td>
-            <td colspan="2" valign="top" style="width:400px;padding-left:15px;">
+            <td colspan="2" valign="top" style="width:340px;padding-left:15px;">
                 <div class="info-area">
                     <h1 style="color: {$Company.CompanyColorRGB} !important;">
                         $Name
@@ -27,7 +21,21 @@
             </td>
         </tr>
         <tr>
-            <td valign="top" style="width:200px;padding-left:15px;">
+            <td rowspan="5" valign="top" style="width:200px;padding-right:15px">
+                <div class="pullquote">
+                    <h2 style="color: {$Company.CompanyColorRGB} !important;">$Company.Name Commitment</h2>
+                    <div <% if Company.CommitmentAuthor %>class="commitment"<% end_if %>>
+                        $Company.Commitment
+                    </div>
+                    <% if Company.CommitmentAuthor %>
+                    <p class="author">&mdash;$Company.CommitmentAuthor, $Company.Name</p>
+                    <% end_if %>
+                </div>
+            </td>
+            <td colspan="2" valign="top" style="width:340px;padding-left:15px;"></td>
+        </tr>
+        <tr>
+            <td valign="top" style="width:170px;padding-left:15px;">
                 <div class="info-area">
                     <% if Capabilities %>
                         <h3 style="color: {$Company.CompanyColorRGB} !important;">OpenStack Services Enabled</h3>
@@ -127,7 +135,7 @@
                     <% end_if %>
                 </div>
             </td>
-            <td valign="top" style="width:200px;padding-left:15px;padding-right:15px">
+            <td valign="top" style="width:170px;padding-left:15px;padding-right:15px">
                 <div id="reviews" style="min-height: 400px;">
                     <h3 style="color: {$Company.CompanyColorRGB} !important;">Reviews</h3>
                     <p>* No Reviews available on preview mode.</p>

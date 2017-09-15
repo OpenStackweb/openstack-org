@@ -360,6 +360,7 @@ class MarketPlaceAdminPage_Controller extends AdminController
         $distribution_id = intval($this->request->getVar('id'));
         $is_draft = intval($this->request->getVar('is_draft'));
         $distribution = false;
+
         if ($distribution_id > 0) {
             if ($is_draft) {
                 $distribution = $this->distribution_draft_repository->getById($distribution_id);
@@ -1594,10 +1595,12 @@ class MarketPlaceAdminPage_Controller extends AdminController
         $html_outer = sprintf("<html><head><style>%s</style></head><body><div class='container'>%s</div></body></html>",
             str_replace("@host", $base, $css), $html_inner);
 
+        //die($html_outer);
 
         try {
-            $html2pdf = new HTML2PDF('P', 'A4', 'en', true, 'UTF-8', array(15, 5, 15, 5));
+            $html2pdf = new HTML2PDF('P', 'A4', 'en', true, 'UTF-8', array(5, 5, 5, 5));
             $html2pdf->setTestIsImage(false);
+            $html2pdf->setTestTdInOnePage(false);
             //$html2pdf->addFont('Open Sans', '', $base.'/themes/openstack/assets/fonts/PT-Sans/PTC75F-webfont.ttf');
             $html2pdf->WriteHTML($html_outer);
             //clean output buffer

@@ -83,8 +83,7 @@ th {
 }
 
 .pullquote p{
-    font-size:120%;
-    margin-bottom:16px;
+    margin: 0;
 }
 
 .pullquote p.author{
