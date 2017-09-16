@@ -19,11 +19,18 @@ to compile from .po to .mo files
 there is a custom task
 
 ````
-sake CompilePO2MOTask
+sake dev/tasks/CompilePO2MOTask
 ````
 
 check system language support 
 
 ```
 locale -a
+```
+
+
+download po files from zanata server
+
+```
+sake dev/tasks/ZanataServerPOFilesDownloaderTask
 ```

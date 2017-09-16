@@ -6,3 +6,8 @@ Injector:
     properties:
       filters:
         - '%$GetTextRequestFilter'
+  ZanataServerPOFilesDownloader:
+    class: ZanataServerPOFilesDownloader
+  ZanataServerPOFilesDownloaderTask:
+    constructor:
+      0: "%$ZanataServerPOFilesDownloader"
