@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2017 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,11 +13,25 @@
  **/
 use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Yaml;
-
 /**
- * Class CompilePO2MOTask
+ * Class ZanataServerPOFilesDownloaderTask
  */
-final class CompilePO2MOTask extends BuildTask {
+final class ZanataServerPOFilesDownloaderTask extends BuildTask
+{
+    /**
+     * @var IZanataServerPOFilesDownloader
+     */
+    private $downloader;
+
+    /**
+     * ZanataServerPOFilesDownloaderTask constructor.
+     * @param IZanataServerPOFilesDownloader $downloader
+     */
+    public function __construct(IZanataServerPOFilesDownloader $downloader)
+    {
+        parent::__construct();
+        $this->downloader = $downloader;
+    }
 
     /**
      * @return void
@@ -32,21 +45,26 @@ final class CompilePO2MOTask extends BuildTask {
             if(!is_null($yaml) && count($yaml))
             {
                 foreach($yaml as $project_id => $po_files){
+                    $files = [];
                     foreach ($po_files as $po_file){
                         foreach ($po_file as $doc_id => $languages) {
                             foreach($languages as $language) {
-                                $file_path = sprintf('%s/gettext/Locale/%s/LC_MESSAGES/%s', Director::baseFolder(), $language['lang_local'], $doc_id);
-                                echo sprintf("compiling file %s.po", $file_path).PHP_EOL;
-                                shell_exec(sprintf('msgfmt -c %s.po -o %s.mo', $file_path, $file_path));
+                                $files[] = [
+                                    'doc_id'      => $doc_id,
+                                    'lang_zanata' => $language['lang_zanata'],
+                                    'lang_local'  => $language['lang_local'],
+                                ];
                             }
                         }
                     }
+                    $this->downloader->downloadPOFiles($project_id, $files);
                 }
             }
-            echo "Ending Translation compile process ...".PHP_EOL;
+            echo "Ending Zanata PO Files downloading process ...".PHP_EOL;
         }
         catch (ParseException $e) {
             echo printf("Unable to parse the YAML string: %s", $e->getMessage()).PHP_EOL;
         }
+
     }
 }
