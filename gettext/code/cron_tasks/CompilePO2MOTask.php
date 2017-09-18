@@ -27,20 +27,23 @@ class CompilePO2MOTask extends CronTask
     public function run()
     {
         try {
-            $path = Director::baseFolder() . '/gettext/translations.yml';
+            $path = Director::baseFolder() . '/gettext/_config/translations.yml';
             echo "reading translation list from ".$path.' ...'.PHP_EOL;;
             $yaml = Yaml::parse(file_get_contents($path));
             if(!is_null($yaml) && count($yaml))
             {
-
-                foreach($yaml as $lang => $po_files){
+                foreach($yaml as $project_id => $po_files){
                     foreach ($po_files as $po_file){
-                        $file_path = sprintf('%s/gettext/Locale/%s/LC_MESSAGES/%s',Director::baseFolder(), $lang, $po_file );
-                        shell_exec(sprintf('msgfmt -c %s.po -o %s.mo',$file_path, $file_path));
+                        foreach ($po_file as $doc_id => $languages) {
+                            foreach($languages as $language) {
+                                $file_path = sprintf('%s/gettext/Locale/%s/LC_MESSAGES/%s', Director::baseFolder(), $language['lang_local'], $doc_id);
+                                shell_exec(sprintf('msgfmt -c %s.po -o %s.mo', $file_path, $file_path));
+                            }
+                        }
                     }
                 }
             }
-            echo "Ending Translation compile Proc ...".PHP_EOL;
+            echo "Ending Translation compile process ...".PHP_EOL;
         }
         catch (ParseException $e) {
             echo printf("Unable to parse the YAML string: %s", $e->getMessage()).PHP_EOL;

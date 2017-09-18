@@ -27,3 +27,10 @@ check system language support
 ```
 locale -a
 ```
+
+
+download po files from zanata server
+
+```
+sake ZanataServerPOFilesDownloaderTask
+```

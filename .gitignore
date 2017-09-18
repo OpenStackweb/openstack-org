@@ -93,3 +93,4 @@ db.ini
 env/
 *.pyc
 *.pickle
+*.po
