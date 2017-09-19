@@ -41,6 +41,7 @@ class SangriaPageSurveyBuilderStatisticsExtension extends Extension
 
     public function getSurveyQuestions2Show()
     {
+        $skip_questions = ['NetPromoter'];
         $template = $this->getCurrentSelectedSurveyTemplate();
         if (is_null($template)) {
             return new ArrayList();
@@ -52,13 +53,34 @@ class SangriaPageSurveyBuilderStatisticsExtension extends Extension
             }
 
             foreach ($step->Questions()->sort('Order') as $q) {
-                if ($q->ShowOnSangriaStatistics) {
+                if ($q->ShowOnSangriaStatistics && !in_array($q->Name,$skip_questions)) {
                     array_push($res, $q);
                 }
             }
         }
 
         return new ArrayList($res);
+    }
+
+    public function getQuestionByName($name) {
+        $template = $this->getCurrentSelectedSurveyTemplate();
+        if (is_null($template)) {
+            return null;
+        }
+
+        $questions = $template->getAllQuestions();
+        foreach($questions as $q) {
+            if ($q->Name == $name) return $q;
+        }
+
+        if (is_a($template, 'EntitySurveyTemplate')) {
+            $questions = $template->Parent()->getAllQuestions();
+            foreach($questions as $q) {
+                if ($q->Name == $name) return $q;
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -251,19 +273,26 @@ SQL;
         )
 SQL;
 
+        $entity_join = '';
+        $table_compare = 'I2';
+
+        if ($class_name == 'EntitySurvey') {
+            $table_compare = 'EI2';
+            $entity_join = 'INNER JOIN EntitySurvey EI2 ON EI2.ParentID = I2.ID';
+        }
+
         $nps_query = <<<SQL
         AND EXISTS
         (
             SELECT * FROM SurveyAnswer A2
             INNER JOIN SurveyStep S2 ON S2.ID = A2.StepID
             INNER JOIN Survey I2 ON I2.ID = S2.SurveyID
-            INNER JOIN SurveyTemplate SSTPL2 ON SSTPL2.ID = I2.TemplateID
             INNER JOIN SurveyQuestionValueTemplate SQVT2 ON SQVT2.ID = A2.`Value`
+            $entity_join
             WHERE
-            I2.ClassName = '{$class_name}' AND I2.IsTest = 0
-            AND SSTPL2.ID = %s AND A2.QuestionID = %s
+            I2.IsTest = 0 AND A2.QuestionID = %s
             AND SQVT2.`Value` >= %s AND SQVT2.`Value` < %s
-            AND I2.ID = {$survey_table_prefix}.ID
+            AND $table_compare.ID = {$survey_table_prefix}.ID
         )
 SQL;
 
@@ -295,7 +324,7 @@ SQL;
                         $lower = 9;
                         $upper = 11;
                     }
-                    $filters_where .= sprintf($nps_query, $template->ID, $qid, $lower, $upper);
+                    $filters_where .= sprintf($nps_query, $qid, $lower, $upper);
                 } else {
                     if (count($t) === 3)
                         $vid = sprintf('%s:%s', $t[1], $t[2]);
@@ -310,65 +339,7 @@ SQL;
         return $filters_where;
     }
 
-    public function SurveyBuilderSurveyCount()
-    {
-        if ($this->total_count > 0) return $this->total_count;
-
-        $template = $this->getCurrentSelectedSurveyTemplate();
-
-        if (is_null($template)) {
-            return 0;
-        }
-
-        $class_name = $this->getCurrentSelectedSurveyClassName();
-
-        $filters_where = $this->generateFilters();
-
-        $query = <<<SQL
-    SELECT COUNT(I.ID) FROM Survey I
-    WHERE
-    I.TemplateID = $template->ID AND I.ClassName = '{$class_name}' AND I.IsTest = 0
-    AND EXISTS
-    (
-        SELECT COUNT(A.ID) AS AnsweredMandatoryQuestionCount
-        FROM SurveyAnswer A
-        INNER JOIN SurveyStep STP ON STP.ID = A.StepID
-        INNER JOIN Survey S ON S.ID = STP.SurveyID
-        WHERE
-        S.ID = I.ID AND S.IsTest = 0 AND
-        A.QuestionID IN
-        (
-            SELECT Q.ID FROM SurveyQuestionTemplate Q
-            INNER JOIN SurveyStepTemplate STP ON STP.ID = Q.StepID AND STP.SurveyTemplateID = $template->ID
-            WHERE Q.Mandatory = 1 AND NOT EXISTS ( SELECT ID FROM SurveyQuestionTemplate_DependsOn DP WHERE SurveyQuestionTemplateID = Q.ID )
-        )
-        GROUP BY S.ID
-    )
-    {$filters_where};
-SQL;
-
-        $this->total_count = intval(DB::query($query)->value());
-
-        return $this->total_count;
-    }
-
-    private $matrix_count_by_question = array();
-
-    public function SurveyBuilderSurveyCountByQuestion($question_id)
-    {
-
-        if (isset($this->matrix_count_by_question[$question_id])) return $this->matrix_count_by_question[$question_id];
-
-        $template = $this->getCurrentSelectedSurveyTemplate();
-
-        if (is_null($template)) {
-            return 0;
-        }
-
-        $question = $template->getQuestionById($question_id);
-        if (is_null($question)) return 0;
-
-        $dependencies = $question->getDependsOn();
+    private function generateDependenciesFilter($dependencies) {
         $dependencies_sql = "";
         if (count($dependencies)) {
             $dependencies_sql = <<<SQL
@@ -395,7 +366,78 @@ SQL;
             $dependencies_sql .= "  ) GROUP BY S.ID ) ";
         }
 
+        return $dependencies_sql;
+    }
+
+    private function generateMandatoryAnswersFilter($table_name = 'I') {
+        $filter = <<<SQL
+        AND EXISTS
+        (
+            SELECT COUNT(A.ID) AS AnsweredMandatoryQuestionCount
+            FROM SurveyAnswer A
+            INNER JOIN SurveyStep STP ON STP.ID = A.StepID
+            INNER JOIN Survey S ON S.ID = STP.SurveyID
+            WHERE
+            S.ID = $table_name.ID AND S.IsTest = 0 AND
+            A.QuestionID IN
+            (
+                SELECT Q.ID FROM SurveyQuestionTemplate Q
+                INNER JOIN SurveyStepTemplate STP ON STP.ID = Q.StepID
+                WHERE Q.Mandatory = 1 AND NOT EXISTS ( SELECT ID FROM SurveyQuestionTemplate_DependsOn DP WHERE SurveyQuestionTemplateID = Q.ID )
+            )
+            GROUP BY S.ID
+        )
+SQL;
+
+        return $filter;
+    }
+
+    public function SurveyBuilderSurveyCount()
+    {
+        if ($this->total_count > 0) return $this->total_count;
+
+        $template = $this->getCurrentSelectedSurveyTemplate();
+
+        if (is_null($template)) {
+            return 0;
+        }
+
         $class_name = $this->getCurrentSelectedSurveyClassName();
+
+        $filters_where = $this->generateFilters();
+        $mandatory_filter = $this->generateMandatoryAnswersFilter();
+
+        $query = <<<SQL
+    SELECT COUNT(I.ID) FROM Survey I
+    WHERE
+    I.TemplateID = $template->ID AND I.ClassName = '{$class_name}' AND I.IsTest = 0
+    {$mandatory_filter}
+    {$filters_where};
+SQL;
+
+        $this->total_count = intval(DB::query($query)->value());
+
+        return $this->total_count;
+    }
+
+    private $matrix_count_by_question = array();
+
+    public function SurveyBuilderSurveyCountByQuestion($question_id)
+    {
+
+        if (isset($this->matrix_count_by_question[$question_id])) return $this->matrix_count_by_question[$question_id];
+
+        $template = $this->getCurrentSelectedSurveyTemplate();
+        $class_name = $this->getCurrentSelectedSurveyClassName();
+
+        if (is_null($template)) return 0;
+
+        $question = $template->getQuestionById($question_id);
+        if (is_null($question)) return 0;
+
+        $dependencies = $question->getDependsOn();
+        $dependencies_sql = $this->generateDependenciesFilter($dependencies);
+        $mandatory_filter = $this->generateMandatoryAnswersFilter();
 
         $filters_where = $this->generateFilters();
 
@@ -403,22 +445,7 @@ SQL;
     SELECT COUNT(I.ID) FROM Survey I
     WHERE
     I.TemplateID = $template->ID AND I.ClassName = '{$class_name}' AND I.IsTest = 0
-    AND EXISTS
-    (
-        SELECT COUNT(A.ID) AS AnsweredMandatoryQuestionCount
-        FROM SurveyAnswer A
-        INNER JOIN SurveyStep STP ON STP.ID = A.StepID
-        INNER JOIN Survey S ON S.ID = STP.SurveyID
-        WHERE
-        S.ID = I.ID AND S.IsTest = 0 AND
-        A.QuestionID IN
-        (
-            SELECT Q.ID FROM SurveyQuestionTemplate Q
-            INNER JOIN SurveyStepTemplate STP ON STP.ID = Q.StepID AND STP.SurveyTemplateID = $template->ID
-            WHERE Q.Mandatory = 1 AND NOT EXISTS ( SELECT ID FROM SurveyQuestionTemplate_DependsOn DP WHERE SurveyQuestionTemplateID = Q.ID )
-        )
-        GROUP BY S.ID
-    )
+    {$mandatory_filter}
     AND EXISTS
     (
         SELECT A.ID AS Answers
@@ -453,6 +480,7 @@ SQL;
 
 
         $filters_where = $this->generateFilters();
+        $mandatory_filter = $this->generateMandatoryAnswersFilter();
 
         $query = " SELECT SANS.`Value` AS Company, COUNT(I.ID) AS SurveyCount, I.ID AS ID";
 
@@ -472,21 +500,7 @@ SQL;
         WHERE
         I.TemplateID = $template->ID AND I.IsTest = 0
         AND SQUEST.ClassName = 'SurveyOrganizationQuestionTemplate'
-        AND EXISTS
-        (
-            SELECT COUNT(A.ID) AS AnsweredMandatoryQuestionCount
-            FROM SurveyAnswer A
-            INNER JOIN SurveyStep STP ON STP.ID = A.StepID
-            INNER JOIN Survey S ON S.ID = STP.SurveyID
-            WHERE S.ID = I.ID AND S.IsTest = 0
-            AND A.QuestionID IN
-            (
-                SELECT Q.ID FROM SurveyQuestionTemplate Q
-                INNER JOIN SurveyStepTemplate STP ON STP.ID = Q.StepID AND STP.SurveyTemplateID = $template->ID
-                WHERE Q.Mandatory = 1 AND NOT EXISTS ( SELECT ID FROM SurveyQuestionTemplate_DependsOn DP WHERE SurveyQuestionTemplateID = Q.ID )
-            )
-            GROUP BY S.ID
-        )
+        {$mandatory_filter}
         {$filters_where} GROUP BY SANS.`Value` ORDER BY SANS.`Value`;";
 
 
@@ -797,14 +811,15 @@ SQL;
         $question_id = intval($question_id);
         $value_id = intval($value_id) > 0 ? intval($value_id) : $value_id;
         $template = $this->getCurrentSelectedSurveyTemplate();
-
-        if (is_null($template)) {
-            return;
-        }
-
         $class_name = $this->getCurrentSelectedSurveyClassName();
 
+        if (is_null($template)) return 0;
+
+        $question = $template->getQuestionById($question_id);
+        if (is_null($question)) return 0;
+
         $filters_where = $this->generateFilters();
+        $mandatory_filter = $this->generateMandatoryAnswersFilter();
 
         $query_str = <<<SQL
         SELECT COUNT(A.Value) FROM SurveyAnswer A
@@ -814,11 +829,11 @@ SQL;
         INNER JOIN SurveyStep S ON S.ID = A.StepID
         INNER JOIN Survey I ON I.ID = S.SurveyID
         WHERE
-        I.ClassName = '{$class_name}' AND I.IsTest = 0
+        I.TemplateID = $template->ID AND I.IsTest = 0
         AND FIND_IN_SET('{$value_id}', A.Value) > 0
-        AND SSTPL.ID = $template->ID
         AND Q.ID = {$question_id}
-        {$filters_where};
+        {$filters_where}
+        {$mandatory_filter};
 SQL;
 
         $query_int = <<<SQL
@@ -1029,15 +1044,26 @@ SQL;
 
     public function SurveyBuilderSurveyNPS($question_id)
     {
+        $class_name = $this->getCurrentSelectedSurveyClassName();
         $template = $this->getCurrentSelectedSurveyTemplate();
         if (is_null($template)) return 0;
 
         $question = $template->getQuestionById($question_id);
+
+        // if the question is from survey and the template is entity we need to match ids correctly
+        $table_name = 'I';
+        $entity_join = '';
+        if ($class_name == 'EntitySurvey') {
+            $table_name = 'EIS';
+            $entity_join = 'INNER JOIN EntitySurvey EI ON EI.ParentID = I.ID';
+            $entity_join .= ' INNER JOIN Survey EIS ON EIS.ID = EI.ID';
+            $question = $template->Parent()->getQuestionById($question_id);
+        }
+
         if (is_null($question)) return 0;
 
-        $class_name = $this->getCurrentSelectedSurveyClassName();
-
-        $filters_where = $this->generateFilters();
+        $filters_where = $this->generateFilters($table_name);
+        $mandatory_filter = $this->generateMandatoryAnswersFilter($table_name);
 
         $query = <<<SQL
     SELECT SUM(IF(V.`Value` < 7, 1, 0)) AS D, SUM(IF(V.`Value` > 6 AND V.`Value` < 9, 1, 0)) AS N, SUM(IF(V.`Value` > 8, 1, 0)) AS P
@@ -1045,29 +1071,15 @@ SQL;
     INNER JOIN SurveyQuestionValueTemplate V ON V.ID = A.`Value`
     LEFT JOIN SurveyStep S ON S.ID = A.StepID
     LEFT JOIN Survey I ON I.ID = S.SurveyID
+    $entity_join
     WHERE A.QuestionID = $question_id AND A.`Value` IS NOT NULL AND
-    I.TemplateID = $template->ID AND I.ClassName = '{$class_name}' AND I.IsTest = 0
-    AND EXISTS
-    (
-        SELECT COUNT(A.ID) AS AnsweredMandatoryQuestionCount
-        FROM SurveyAnswer A
-        INNER JOIN SurveyStep STP ON STP.ID = A.StepID
-        INNER JOIN Survey S ON S.ID = STP.SurveyID
-        WHERE
-        S.ID = I.ID AND S.IsTest = 0 AND
-        A.QuestionID IN
-        (
-            SELECT Q.ID FROM SurveyQuestionTemplate Q
-            INNER JOIN SurveyStepTemplate STP ON STP.ID = Q.StepID AND STP.SurveyTemplateID = $template->ID
-            WHERE Q.Mandatory = 1 AND NOT EXISTS ( SELECT ID FROM SurveyQuestionTemplate_DependsOn DP WHERE SurveyQuestionTemplateID = Q.ID )
-        )
-        GROUP BY S.ID
-    )
+    $table_name.TemplateID = $template->ID AND I.IsTest = 0
+    {$mandatory_filter}
     {$filters_where};
 SQL;
 
         $results = new ArrayList();
-        $total_count = $this->SurveyBuilderSurveyCountByQuestion($question_id);
+        $total_count = $this->SurveyBuilderSurveyCountNPS($question_id);
 
         if ($total_count) {
             foreach(DB::query($query) as $row) {
@@ -1084,6 +1096,97 @@ SQL;
         }
 
         return $results;
+    }
+
+    public function SurveyBuilderSurveyCountNPS($question_id)
+    {
+        $template = $this->getCurrentSelectedSurveyTemplate();
+        $class_name = $this->getCurrentSelectedSurveyClassName();
+
+        if (is_null($template)) return 0;
+
+        $question = $template->getQuestionById($question_id);
+
+        // if the question is from survey and the template is entity we need to match ids correctly
+        $id_compare = 'S.ID';
+        $entity_join = '';
+        if ($class_name == 'EntitySurvey') {
+            $id_compare = 'ES.ID';
+            $entity_join = 'INNER JOIN EntitySurvey ES ON ES.ParentID = S.ID';
+            $question = $template->Parent()->getQuestionById($question_id);
+        }
+
+        if (is_null($question)) return 0;
+
+        $dependencies = $question->getDependsOn();
+        $dependencies_sql = $this->generateDependenciesFilter($dependencies);
+
+        $filters_where = $this->generateFilters();
+        $mandatory_filter = $this->generateMandatoryAnswersFilter();
+
+        $query = <<<SQL
+    SELECT COUNT(I.ID) FROM Survey I
+    WHERE
+    I.TemplateID = $template->ID AND I.ClassName = '{$class_name}' AND I.IsTest = 0
+    AND EXISTS
+    (
+        SELECT A.ID AS Answers FROM SurveyAnswer A
+        INNER JOIN SurveyStep STP ON STP.ID = A.StepID
+        INNER JOIN Survey S ON S.ID = STP.SurveyID
+        $entity_join
+        WHERE $id_compare = I.ID AND S.IsTest = 0 AND A.QuestionID = $question_id AND A.`Value` IS NOT NULL
+    )
+    {$dependencies_sql}
+    {$filters_where}
+    {$mandatory_filter};
+SQL;
+
+        //echo $query .'<br><br><br><br>';
+        return intval(DB::query($query)->value());
+    }
+
+
+    public function SurveyBuilderCountNPSAnswers($question_id, $value_id)
+    {
+        $question_id = intval($question_id);
+        $value_id = intval($value_id) > 0 ? intval($value_id) : $value_id;
+        $template = $this->getCurrentSelectedSurveyTemplate();
+        $class_name = $this->getCurrentSelectedSurveyClassName();
+
+        if (is_null($template)) return 0;
+
+        $question = $template->getQuestionById($question_id);
+
+        // if the question is from survey and the template is entity we need to match ids correctly
+        $table_compare = 'I';
+        $entity_join = '';
+        if ($class_name == 'EntitySurvey') {
+            $table_compare = 'ESS';
+            $entity_join = 'INNER JOIN EntitySurvey ES ON ES.ParentID = I.ID';
+            $entity_join .= ' INNER JOIN Survey ESS ON ESS.ID = ES.ID';
+            $question = $template->Parent()->getQuestionById($question_id);
+        }
+
+        if (is_null($question)) return 0;
+
+        $filters_where = $this->generateFilters($table_compare);
+        $mandatory_filter = $this->generateMandatoryAnswersFilter($table_compare);
+
+        $query = <<<SQL
+        SELECT COUNT(A.Value) FROM SurveyAnswer A
+        INNER JOIN SurveyStep S ON S.ID = A.StepID
+        INNER JOIN Survey I ON I.ID = S.SurveyID
+        INNER JOIN SurveyQuestionTemplate Q ON Q.ID = A.QuestionID
+        {$entity_join}
+        WHERE
+        $table_compare.TemplateID =  $template->ID AND I.IsTest = 0
+        AND Q.ID = $question_id AND A.`Value` = {$value_id}
+        {$filters_where}
+        {$mandatory_filter};
+SQL;
+
+        //echo $query .'<br><br><br><br>';
+        return DB::query($query)->value();
     }
 
 }

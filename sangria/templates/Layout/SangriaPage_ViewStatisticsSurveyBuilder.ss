@@ -42,12 +42,12 @@
                     </div>
                 <% end_if %>
 
-                <% include SangriaPage_StatisticsLanguage ParentPage=$Top, QuestionID=$ID %>
+                <% include SangriaPage_StatisticsLanguage ParentPage=$Top %>
+
+                <% include SangriaPage_StatisticsNetPromoter ParentPage=$Top, Question=$getQuestionByName(NetPromoter) %>
 
                 <% loop SurveyQuestions2Show %>
-                    <% if $Name == 'NetPromoter' %>
-                        <% include SangriaPage_StatisticsNetPromoter ParentPage=$Top, QuestionID=$ID %>
-                    <% else_if $ClassName == 'SurveyRadioButtonMatrixTemplateQuestion' %>
+                    <% if $ClassName == 'SurveyRadioButtonMatrixTemplateQuestion' %>
                         <% include SangriaPage_StatisticsSurveyRadioButtonMatrixTemplateQuestion ParentPage=$Top, QuestionID=$ID %>
                     <% else %>
                         <% include SangriaPage_StatisticsMultiValueQuestionTemplate ParentPage=$Top, QuestionID=$ID %>
