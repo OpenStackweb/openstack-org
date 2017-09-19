@@ -454,7 +454,6 @@ SQL;
         INNER JOIN Survey S ON S.ID = STP.SurveyID
         WHERE S.ID = I.ID AND S.IsTest = 0 AND A.QuestionID = $question_id AND A.`Value` IS NOT NULL
     )
-    {$dependencies_sql}
     {$filters_where};
 SQL;
 
@@ -1136,7 +1135,6 @@ SQL;
         $entity_join
         WHERE $id_compare = I.ID AND S.IsTest = 0 AND A.QuestionID = $question_id AND A.`Value` IS NOT NULL
     )
-    {$dependencies_sql}
     {$filters_where}
     {$mandatory_filter};
 SQL;
