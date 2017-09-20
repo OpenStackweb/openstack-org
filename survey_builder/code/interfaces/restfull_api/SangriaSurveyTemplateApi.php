@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2017 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,7 +12,6 @@
  * limitations under the License.
  **/
 use  Symfony\Component\Process\Process;
-
 /**
  * Class SangriaSurveyTemplateApi
  */
@@ -37,6 +35,9 @@ TEXT;
      */
     private $template_manager;
 
+    /**
+     * @var array
+     */
     static $url_handlers = [
         'PUT free-text-answers/tagging/bayes/rebuild'                                            => 'rebuildBayesianNaiveModel',
         'PUT $SURVEY_TEMPLATE_ID/questions/$QUESTION_ID/free-text-answers/tagging/kmeans'        => 'extractTagsByKMeans',
@@ -53,6 +54,9 @@ TEXT;
         'GET $SURVEY_TEMPLATE_ID/questions'                                                      => 'getFreeTextQuestions',
     ];
 
+    /**
+     * @var string[]
+     */
     static $allowed_actions = [
         'getFreeTextQuestions',
         'getFreeTextAnswers',
@@ -348,7 +352,7 @@ TEXT;
         $max_tags            = isset($query_string['max_tags']) ? intval($query_string['max_tags']) : 5;
         $delete_former_tags  = isset($query_string['delete_former_tags']) ? intval($query_string['delete_former_tags']) : 1;
 
-        $command = sprintf( ' %s/survey_builder/code/model/extract_tags/extract_tags_by_kmeans.sh "%s/survey_builder/code/model/extract_tags" %s %s %s %s', Director::baseFolder(),  Director::baseFolder(), $question_id, $max_tags, $delete_former_tags, $clusters_qty);
+        $command = sprintf( '%1$s/survey_builder/code/model/extract_tags/extract_tags_by_kmeans.sh "%1$s/survey_builder/code/model/extract_tags" "%1$s" %2$s %3$s %4$s %5$s', Director::baseFolder(), $question_id, $max_tags, $delete_former_tags, $clusters_qty);
         $process = new Process($command);
         $process->setWorkingDirectory(sprintf('%s/survey_builder/code/model/extract_tags', Director::baseFolder()));
         $process->setTimeout(PHP_INT_MAX);
@@ -373,7 +377,7 @@ TEXT;
         $query_string        = $request->getVars();
         $delete_former_tags  = isset($query_string['delete_former_tags']) ? intval($query_string['delete_former_tags']) : 1;
         $model_folder = Director::baseFolder().'/survey_builder/code/model/extract_tags/bayesian_models';
-        $command = sprintf( ' %s/survey_builder/code/model/extract_tags/bayesian_tag_extraction.sh "%s/survey_builder/code/model/extract_tags" %s %s %s', Director::baseFolder(),  Director::baseFolder(), $model_folder, $question_id, $delete_former_tags);
+        $command = sprintf( '%1$s/survey_builder/code/model/extract_tags/bayesian_tag_extraction.sh "%1$s/survey_builder/code/model/extract_tags" "%1$s" %2$s %3$s %4$s', Director::baseFolder(), $model_folder, $question_id, $delete_former_tags);
         $process = new Process($command);
         $process->setWorkingDirectory(sprintf('%s/survey_builder/code/model/extract_tags', Director::baseFolder()));
         $process->setTimeout(PHP_INT_MAX);
@@ -397,7 +401,7 @@ TEXT;
 
     public function rebuildBayesianNaiveModel(SS_HTTPRequest $request){
         $model_folder = Director::baseFolder().'/survey_builder/code/model/extract_tags/bayesian_models';
-        $command = sprintf( ' %s/survey_builder/code/model/extract_tags/bayesian_model_builder.sh "%s/survey_builder/code/model/extract_tags" "%s"', Director::baseFolder(),  Director::baseFolder(), $model_folder);
+        $command = sprintf( '%1$s/survey_builder/code/model/extract_tags/bayesian_model_builder.sh "%1$s/survey_builder/code/model/extract_tags" "%1$s" "%2$s"', Director::baseFolder(), $model_folder);
         $process = new Process($command);
         $process->setWorkingDirectory(sprintf('%s/survey_builder/code/model/extract_tags', Director::baseFolder()));
         $process->setTimeout(PHP_INT_MAX);
@@ -425,7 +429,7 @@ TEXT;
         $max_tags            = isset($query_string['max_tags']) ? intval($query_string['max_tags']) : 3;
         $delete_former_tags  = isset($query_string['delete_former_tags']) ? intval($query_string['delete_former_tags']) : 1;
 
-        $command = sprintf( ' %s/survey_builder/code/model/extract_tags/extract_tags_by_rake.sh "%s/survey_builder/code/model/extract_tags" %s %s %s', Director::baseFolder(),  Director::baseFolder(), $question_id, $max_tags, $delete_former_tags);
+        $command = sprintf( '%1$s/survey_builder/code/model/extract_tags/extract_tags_by_rake.sh "%s/survey_builder/code/model/extract_tags" "%1$s" %2$s %3$s %4$s', Director::baseFolder(),  $question_id, $max_tags, $delete_former_tags);
         $process = new Process($command);
         $process->setWorkingDirectory(sprintf('%s/survey_builder/code/model/extract_tags', Director::baseFolder()));
         $process->setTimeout(PHP_INT_MAX);

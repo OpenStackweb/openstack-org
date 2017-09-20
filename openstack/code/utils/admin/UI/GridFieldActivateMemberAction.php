@@ -56,14 +56,14 @@ class GridFieldActivateMemberAction implements GridField_ColumnProvider, GridFie
     public function handleAction(GridField $gridField, $actionName, $arguments, $data) {
         if($actionName == 'activatemember') {
             $member = $gridField->getList()->byID($arguments['RecordID']);
-            $former_state = $member->Active;
+            $former_state = $member->isActive();
             $msg  = 'Member Activated!';
             $code = 200;
             try {
                 if ($former_state) {
-                    $member->Active = 0;
+                    $member->deActivate();
                 } else {
-                    $member->Active = 1;
+                    $member->activate();
                 }
                 $member->write();
                 if($former_state){

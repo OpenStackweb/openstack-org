@@ -13,16 +13,15 @@
 # implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 WORK_DIR=$1
 ROOT_DIR=$2
-MODEL_FOLDER=$3
-QUESTION_ID=$4
-DELETE=$5
 
-export NLTK_DATA=/tmp/nltk_data;
 export PYTHONPATH="$PYTHONPATH:$ROOT_DIR/pyutils";
 
 source $ROOT_DIR/env/bin/activate;
 cd $WORK_DIR;
-python bayesian_tag_extraction.py $ROOT_DIR $MODEL_FOLDER $QUESTION_ID $DELETE;
-deactivate
+
+python member_spammer_estimator_process.py $ROOT_DIR;
+
+deactivate;

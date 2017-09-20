@@ -1,37 +1,10 @@
  
- # Survey Answers Extract Tags (KMEANS)
- 
- ## Binary Requirements
- 
- ```bash
+# Survey Answers Extract Tags
 
- sudo apt-get install python-pip python-dev libmysqlclient-dev;
- pip install virtualenv;
- cd survey_builder/code/model/extract_tags;
- virtualenv env;
- source env/bin/activate;
- pip install -r requirements.txt;
  
-```
-
-if your run in any issue bc path is too long
-
-then run
+task to re buil bayesian naive estimator model
 
 ```bash
-env/bin/python env/bin/pip install -r requirements.txt;
-```
-
-after that, you should give the proper execution rights to scripts
-
-```bash
-chmod 770 extract_tags_by_rake.sh
-chmod 770 extract_tags_by_kmeans.sh
-chmod 770 bayesian_model_builder.sh
-chmod 770 bayesian_tag_extraction.sh
-```
-
-task to build bayesian naive estimator model
-
 sake BuildBayesianModelTask
+```
 

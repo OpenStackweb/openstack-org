@@ -11,25 +11,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-use Symfony\Component\Process\Process;
-
+use  Symfony\Component\Process\Process;
 /**
- * Class BuildBayesianModelTask
- * this class run the Bayesian estimator builder
- * for free text questions
+ * Class RebuildMemberSpammerEstimatorTask
  */
-final class BuildBayesianModelTask extends CronTask
+final class RebuildMemberSpammerEstimatorTask extends CronTask
 {
 
-    /**
-     * @throws Exception
-     */
+    protected $title = "RebuildMemberSpammerEstimatorTask";
+
+    protected $description = "RebuildMemberSpammerEstimatorTask";
+
     public function run()
     {
-        $model_folder = Director::baseFolder().'/survey_builder/code/model/extract_tags/bayesian_models';
-        $command = sprintf( '%1$s/survey_builder/code/model/extract_tags/bayesian_model_builder.sh "%1$s/survey_builder/code/model/extract_tags" "%1$s" "%2$s"', Director::baseFolder(), $model_folder);
+
+        $command = sprintf( '%1$s/registration/code/model/member_spammer_estimator/member_spammer_estimator_build.sh "%1$s/registration/code/model/member_spammer_estimator" "%1$s" ', Director::baseFolder());
         $process = new Process($command);
-        $process->setWorkingDirectory(sprintf('%s/survey_builder/code/model/extract_tags', Director::baseFolder()));
         $process->setTimeout(PHP_INT_MAX);
         $process->setIdleTimeout(PHP_INT_MAX);
         $process->run();
@@ -38,12 +35,10 @@ final class BuildBayesianModelTask extends CronTask
         }
 
         $output = $process->getOutput();
-
         echo $output.PHP_EOL;
 
         if (!$process->isSuccessful()) {
-            throw new Exception();
+            throw new Exception("Process Error!");
         }
-
     }
 }

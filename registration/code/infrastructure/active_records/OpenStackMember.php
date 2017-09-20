@@ -12,10 +12,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-class OpenStackMember extends DataExtension
+class OpenStackMember
+    extends DataExtension
+    implements IOpenStackMember
 {
-    private static $db = array
-    (
+    static $db = [
+
         'SecondEmail'            => 'Varchar(254)', // See RFC 5321, Section 4.5.3.1.3. (256 minus the < and > character)
         'ThirdEmail'             => 'Varchar(254)', // See RFC 5321, Section 4.5.3.1.3. (256 minus the < and > character)
         'HasBeenEmailed'         => 'Boolean',
@@ -47,44 +49,45 @@ class OpenStackMember extends DataExtension
         'EmailVerifiedDate'      => 'SS_Datetime',
         'LegacyMember'           => 'Boolean',
         'ProfileLastUpdate'      => 'SS_Datetime',
-    );
+        'Type'                   =>  "Enum('None, Ham, Spam', 'None')",
+    ];
 
-    private static $defaults = array
-    (
+    static $defaults = [
+
         'SubscribedToNewsletter' => true,
         'DisplayOnSite'          => false,
         'Active'                 => true,
         'LegacyMember'           => false,
-    );
+        'Type'                   => 'None',
+    ];
 
-    private static $indexes = array
-    (
+    static $indexes = [
+
         'SecondEmail'       => array('type' => 'index', 'value' => 'SecondEmail'),
         'ThirdEmail'        => array('type' => 'index', 'value' => 'ThirdEmail'),
         'FirstName'         => array('type' => 'index', 'value' => 'FirstName'),
         'Surname'           => array('type' => 'index', 'value' => 'Surname'),
         'FirstName_Surname' => array('type' => 'index', 'value' => 'FirstName,Surname'),
-    );
+    ];
 
-    private static $has_one = array
-    (
+    static $has_one = [
         'Photo' => 'BetterImage',
         'Org'   => 'Org'
-    );
+    ];
 
-    private static $has_many = array
-    (
+    static $has_many = [
+
         'LegalAgreements' => 'LegalAgreement',
         'Affiliations'    => 'Affiliation'
-    );
+    ];
 
-    private static $belongs_to = array(
+    static $belongs_to = [
         'Speaker' => 'PresentationSpeaker.Member'
-    );
+    ];
 
-    private static $belongs_many_many = array(
+    static $belongs_many_many = [
         'ManagedCompanies' => 'Company'
-    );
+    ];
 
     public function onBeforeWrite()
     {
@@ -163,8 +166,8 @@ class OpenStackMember extends DataExtension
             Config::inst()->remove(get_class($owner), 'searchable_fields');
             Config::inst()->update(get_class($owner), 'searchable_fields', array(
                 'FirstName' => 'PartialMatchFilter',
-                'Surname' => 'PartialMatchFilter',
-                'Email' => 'PartialMatchFilter'
+                'Surname'   => 'PartialMatchFilter',
+                'Email'     => 'PartialMatchFilter'
             ));
         }
     }
@@ -236,6 +239,9 @@ class OpenStackMember extends DataExtension
         }
     }
 
+    /**
+     * @return string
+     */
     function getFullName()
     {
         return $this->owner->FirstName . ' ' . $this->owner->Surname;
@@ -360,11 +366,17 @@ class OpenStackMember extends DataExtension
     }
 
 
+    /**
+     * @return Affiliation[]
+     */
     public function OrderedAffiliations()
     {
         return $this->owner->Affiliations("", "Current DESC, StartDate DESC, EndDate DESC");
     }
 
+    /**
+     * @return Affiliation
+     */
     public function getCurrentAffiliation()
     {
         $current_affiliation = $this->getCurrentAffiliations();
@@ -406,6 +418,9 @@ class OpenStackMember extends DataExtension
         return $affiliations->count() > 0;
     }
 
+    /**
+     * @return Org
+     */
     public function getCurrentOrganization()
     {
         $current_affiliation = $this->getCurrentAffiliation();
@@ -484,11 +499,17 @@ class OpenStackMember extends DataExtension
         return $res;
     }
 
+    /**
+     * @return bool
+     */
     public function isAdmin()
     {
         return Permission::checkMember($this->owner, 'ADMIN');
     }
 
+    /**
+     * @return bool
+     */
     public function isTrackChair() {
         return Summit::get_active()
             ->Categories()
@@ -497,6 +518,9 @@ class OpenStackMember extends DataExtension
             ->exists();
     }
 
+    /**
+     * @return String
+     */
     public function generateEmailVerificationToken()
     {
         $generator = new RandomGenerator();
@@ -559,6 +583,9 @@ class OpenStackMember extends DataExtension
             return $validationResult->error('Password is required');
     }
 
+    /**
+     * @return string
+     */
     public function getNameSlug() {
         $slug = preg_replace('/\W+/', '', $this->owner->FirstName).'-'.preg_replace('/\W+/', '', $this->owner->Surname);
         $slug = strtolower($slug);
@@ -569,14 +596,36 @@ class OpenStackMember extends DataExtension
         $this->owner->ProfileLastUpdate = SS_Datetime::now()->Rfc2822();
     }
 
+    /**
+     * @return bool
+     */
     public function isProfileUpdated() {
         $notNull = $this->owner->ProfileLastUpdate != null;
         $isGreater =  strtotime($this->owner->ProfileLastUpdate ) > strtotime('-90 days');
         return $notNull && $isGreater;
     }
 
+
     public function memberLoggedIn(){
         Session::set("Member.showUpdateProfileModal", !$this->isProfileUpdated());
+    }
+
+
+    public function activate(){
+        $this->owner->Active = true;
+        $this->owner->Type   = "Ham";
+        DB::query(sprintf("DELETE FROM MemberEstimatorFeed WHERE Email = '%s';", $this->owner->Email));
+    }
+
+    public function deActivate(){
+        $this->owner->Active = false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isActive(){
+        return $this->owner->Active == true;
     }
 }
 

@@ -180,7 +180,8 @@ define('Encrypter_Cipher', 'AES-256-CBC');
 
 //APPLE CALENDAR
 define('CALDAV_BASE_SERVER_URL', 'https://p01-caldav.icloud.com:443');
-
+//registration/code/model/member_spammer_estimator/MemberSpammerProcessorTask.php:49
+define('MEMBER_SPAM_PROCESSOR_TO', '');
 global $_FILE_TO_URL_MAPPING;
 $_FILE_TO_URL_MAPPING[''] = '';
 
