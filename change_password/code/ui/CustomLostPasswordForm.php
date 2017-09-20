@@ -65,6 +65,7 @@ class CustomLostPasswordForm extends HoneyPotForm
             }
 
             if ($member) {
+                if(!$member->isActive()) throw new EntityValidationException("Member is not active. Please get in touch with our web team.");
                 $token = $this->tx_manager->transaction(function () use ($member) {
                     if(empty($member->Password)){
                         // fix empty password condition

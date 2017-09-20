@@ -31,32 +31,33 @@ if len(sys.argv) < 5:
     print("you must provide a working path , a folder to store bayesian model , and a question id")
     exit(-1)
 
-working_dir = sys.argv[1]  # param
-folder      = sys.argv[2]  # param
-questionId  = int(sys.argv[3])  # param
-mustDeleteFormerAutomaticTags = int(sys.argv[4])  # param
+root_dir = sys.argv[1]  # param
+model_folder = sys.argv[2]  # param
+question_id  = int(sys.argv[3])  # param
+must_delete_former_tags = int(sys.argv[4])  # param
 
-print("must delete former tags %s" % (mustDeleteFormerAutomaticTags))
+print("must delete former tags %s" % (must_delete_former_tags))
 print("")
 
-queryTag = "SELECT ID FROM SurveyAnswerTag WHERE Type='AUTOMATIC' AND Value = '%s' "
-queryInsertTag = "INSERT INTO SurveyAnswerTag (Created,LastEdited, Value, Type, CreatedByID) VALUES(NOW(), NOW(), '%s', 'AUTOMATIC', 0 )"
-queryAnswers = "SELECT ID, Value FROM SurveyAnswer WHERE Value IS NOT NULL AND QuestionID = %d"
-queryInsertAnswerTag = "INSERT INTO SurveyAnswer_Tags(SurveyAnswerID, SurveyAnswerTagID) VALUES(%d, %d)"
-querySelectAnswerTag = "SELECT ID FROM SurveyAnswer_Tags WHERE SurveyAnswerID = %d AND SurveyAnswerTagID = %d"
-queryDeleteFormerTags = "DELETE FROM SurveyAnswer_Tags WHERE SurveyAnswerID = %d"
-queryGetQuestionById = "SELECT Name, ClassName FROM SurveyQuestionTemplate WHERE ID = %s;"
-config = DBConfig(working_dir+"/db.ini").read_db_config()
+QUERY_TAG = "SELECT ID FROM SurveyAnswerTag WHERE Type='AUTOMATIC' AND Value = '%s' "
+QUERY_INSERT_TAG = "INSERT INTO SurveyAnswerTag (Created,LastEdited, Value, Type, CreatedByID) VALUES(NOW(), NOW(), '%s', 'AUTOMATIC', 0 )"
+QUERY_ANSWERS = "SELECT ID, Value FROM SurveyAnswer WHERE Value IS NOT NULL AND QuestionID = %d"
+QUERY_INSERT_ANSWER_TAG = "INSERT INTO SurveyAnswer_Tags(SurveyAnswerID, SurveyAnswerTagID) VALUES(%d, %d)"
+QUERY_SELECT_ANSWER_TAG = "SELECT ID FROM SurveyAnswer_Tags WHERE SurveyAnswerID = %d AND SurveyAnswerTagID = %d"
+QUERY_DELETE_FORMER_TAGS = "DELETE FROM SurveyAnswer_Tags WHERE SurveyAnswerID = %d"
+QUERY_GET_QUESTION_BY_ID = "SELECT Name, ClassName FROM SurveyQuestionTemplate WHERE ID = %s;"
+
+config = DBConfig(root_dir+"/db.ini").read_db_config()
 
 try:
     # Open database connection
     db = MySQLdb.connect(**config)
     cursor = db.cursor()
-    data = sql.read_sql(queryAnswers % questionId, db)
-    cursor.execute(queryGetQuestionById % (questionId))
+    data = sql.read_sql(QUERY_ANSWERS % question_id, db)
+    cursor.execute(QUERY_GET_QUESTION_BY_ID % (question_id))
     row = cursor.fetchone()
     key = row[0].lower()
-    filename= '%s/%s.pickle' % (folder, key)
+    filename= '%s/%s.pickle' % (model_folder, key)
 
     if not os.path.exists(filename):
         print "%s file model does not exists!" % (filename)
@@ -71,31 +72,33 @@ try:
         if len(keywords) == 0:
             exit(-4)
 
-        for idx, answerId in enumerate(data['ID'].tolist()):
+        for idx, answer_id in enumerate(data['ID'].tolist()):
             tags = keywords[idx];
             if len(tags) == 0:
                 continue
-            print("found tags for answer id %s" % (answerId))
-            if mustDeleteFormerAutomaticTags > 0:
-                cursor.execute(queryDeleteFormerTags % (answerId))
+            print("found tags for answer id %s" % (answer_id))
+            if must_delete_former_tags > 0:
+                print("deleting former tags for answer id %s ..." % answer_id)
+                cursor.execute(QUERY_DELETE_FORMER_TAGS % (answer_id))
             # tag processing
             for tag in tags:
                 tag = re.sub(r"[^\w\d]", "", tag)
                 if len(tag) > 2:
-                    cursor.execute(queryTag % (tag))
-                    dbTag = cursor.fetchone()
-                    tagId = None
-                    if dbTag is None:
-                        res = cursor.execute(queryInsertTag % (tag))
-                        tagId = cursor.lastrowid
+                    cursor.execute(QUERY_TAG % (tag))
+                    db_tag = cursor.fetchone()
+                    tag_id = None
+                    if db_tag is None:
+                        res = cursor.execute(QUERY_INSERT_TAG % (tag))
+                        tag_id = cursor.lastrowid
                     else:
-                        tagId = dbTag[0]
-                    cursor.execute(querySelectAnswerTag % (answerId, tagId))
-                    existAnswerTag = cursor.fetchone()
-                    if existAnswerTag is None:
-                        cursor.execute(queryInsertAnswerTag % (answerId, tagId))
+                        tag_id = db_tag[0]
+                    cursor.execute(QUERY_SELECT_ANSWER_TAG % (answer_id, tag_id))
+                    exists_answer_tag = cursor.fetchone()
+                    if exists_answer_tag is None:
+                        cursor.execute(QUERY_INSERT_ANSWER_TAG % (answer_id, tag_id))
     db.commit()
-except:
+except Exception as e:
+   print(e)
    # Rollback in case there is any error
    db.rollback()
    raise

@@ -56,18 +56,19 @@ if len(sys.argv) < 3:
 
 cursor = None
 cursor2 = None
-working_dir = sys.argv[1]  # param
-folder      = sys.argv[2]  # param
+root_dir = sys.argv[1]  # param
+folder   = sys.argv[2]  # param
 
-querySelectGetTags = ("SELECT SurveyAnswer.Value AnswerValue, QuestionID, GROUP_CONCAT(SurveyAnswerTag.Value) AS Tags"
+QUERY_GET_TAGS = ("SELECT SurveyAnswer.Value AnswerValue, QuestionID, GROUP_CONCAT(SurveyAnswerTag.Value) AS Tags"
                      " FROM SurveyAnswer INNER JOIN SurveyAnswer_Tags ON SurveyAnswer_Tags.SurveyAnswerID = SurveyAnswer.ID"
                      " INNER JOIN SurveyAnswerTag ON SurveyAnswerTag.ID = SurveyAnswer_Tags.SurveyAnswerTagID"
                      " GROUP BY  SurveyAnswer.ID, SurveyAnswer.Value, QuestionID ORDER BY QuestionID;")
-queryGetQuestionById = "SELECT Name FROM SurveyQuestionTemplate WHERE ID = %s;"
+QUERY_GET_QUESTION_BY_ID = "SELECT Name FROM SurveyQuestionTemplate WHERE ID = %s;"
+
 answers = []
 tags    = []
 db = None
-config = DBConfig(working_dir+"/db.ini").read_db_config()
+config = DBConfig(root_dir+"/db.ini").read_db_config()
 
 try:
     # Open database connection
@@ -78,7 +79,7 @@ try:
     if os.path.exists(folder):
         shutil.rmtree(folder)
     os.makedirs(folder)
-    cursor.execute(querySelectGetTags)
+    cursor.execute(QUERY_GET_TAGS)
     lastQuestionId = 0
     questionName = None
     questionClass = None
@@ -87,7 +88,7 @@ try:
         if lastQuestionId != QuestionID:
 
             if lastQuestionId != 0:
-                cursor2.execute(queryGetQuestionById % (lastQuestionId))
+                cursor2.execute(QUERY_GET_QUESTION_BY_ID % (lastQuestionId))
                 row  = cursor2.fetchone()
                 key  = row[0].lower()
                 if not key in dict:
@@ -103,7 +104,7 @@ try:
         answers.append(AnswerValue)
         tags.append(Tags.split(","))
 
-    cursor2.execute(queryGetQuestionById % (lastQuestionId))
+    cursor2.execute(QUERY_GET_QUESTION_BY_ID % (lastQuestionId))
     row = cursor2.fetchone()
     key = row[0].lower()
     if not key in dict:
@@ -118,7 +119,8 @@ try:
         create_model(key, values[0], values[1])
     db.commit()
 
-except:
+except Exception as e:
+   print(e)
    # Rollback in case there is any error
    db.rollback()
    raise

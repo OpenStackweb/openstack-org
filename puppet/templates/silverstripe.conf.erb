@@ -6,7 +6,7 @@ location / {
     try_files $uri /framework/main.php?url=$uri&$query_string;
 }
 
-location ~ /(mysite|framework|cms)/.*\.(php|php3|php4|php5|phtml|inc)$ {
+location ~ /(openstack|framework|cms)/.*\.(php|php3|php4|php5|phtml|inc)$ {
     deny all;
 }
 
@@ -23,9 +23,11 @@ location ~ \.ss$ {
 location ~ web\.config$ {
     deny all;
 }
+
 location ~ \.ya?ml$ {
     deny all;
 }
+
 location ^~ /vendor/ {
     deny all;
 }
@@ -39,5 +41,33 @@ location ~* composer\.(json|lock)$ {
 }
 
 location ~* /(cms|framework)/silverstripe_version$ {
+    deny all;
+}
+
+location ~ \.ini$ {
+    deny all;
+}
+
+location ~ \.pickle$ {
+    deny all;
+}
+
+location ~ \.py$ {
+    deny all;
+}
+
+location ~ \.sh$ {
+    deny all;
+}
+
+location ~ \.mo {
+    deny all;
+}
+
+location ~ \.po {
+    deny all;
+}
+
+location ^~ /env/ {
     deny all;
 }

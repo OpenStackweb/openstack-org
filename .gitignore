@@ -90,7 +90,7 @@ autocomplete/
 *.mo
 blog
 db.ini
-env/
+/env
 *.pyc
 *.pickle
 *.po

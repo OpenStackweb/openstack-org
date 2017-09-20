@@ -318,7 +318,10 @@ final class MemberManager implements IMemberManager
             if (is_null($member))
                 throw new NotFoundEntityException('Member', $email);
 
-            if($member->EmailVerified) throw new EntityValidationException('Member already verified!');
+            if($member->EmailVerified) throw new EntityValidationException('Member already verified.');
+
+            if(!$member->isActive()) throw new EntityValidationException("Member is not active. Please get in touch with our web team.");
+
             $sender_service = new MemberRegistrationSenderService();
             $sender_service->send($member);
         });

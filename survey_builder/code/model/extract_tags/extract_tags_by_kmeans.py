@@ -58,6 +58,7 @@ queryAnswers = "SELECT ID, Value FROM SurveyAnswer WHERE Value IS NOT NULL AND Q
 queryInsertAnswerTag = "INSERT INTO SurveyAnswer_Tags(SurveyAnswerID, SurveyAnswerTagID) VALUES(%d, %d)"
 querySelectAnswerTag = "SELECT ID FROM SurveyAnswer_Tags WHERE SurveyAnswerID = %d AND SurveyAnswerTagID = %d"
 queryDeleteFormerTags = "DELETE FROM SurveyAnswer_Tags WHERE SurveyAnswerID = %d AND SurveyAnswerTagID IN (SELECT ID FROM SurveyAnswerTag where Type = 'AUTOMATIC')"
+
 # resources download
 nltk.download('stopwords', download_dir)
 nltk.download('punkt', download_dir)
@@ -195,7 +196,8 @@ except IndexError, e2:
      print(e2)
      traceback.print_exc()
      raise
-except:
+except Exception as e:
+   print(e)
    # Rollback in case there is any error
    if not (db is None):
         db.rollback()

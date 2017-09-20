@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env python
+#
 # Copyright (c) 2017 OpenStack Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,16 +14,16 @@
 # implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-WORK_DIR=$1
-ROOT_DIR=$2
-MODEL_FOLDER=$3
-QUESTION_ID=$4
-DELETE=$5
 
-export NLTK_DATA=/tmp/nltk_data;
-export PYTHONPATH="$PYTHONPATH:$ROOT_DIR/pyutils";
+from sklearn.base import TransformerMixin
 
-source $ROOT_DIR/env/bin/activate;
-cd $WORK_DIR;
-python bayesian_tag_extraction.py $ROOT_DIR $MODEL_FOLDER $QUESTION_ID $DELETE;
-deactivate
+class DataFrameColumnExtracter(TransformerMixin):
+
+    def __init__(self, column):
+        self.column = column
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X, y=None):
+        return X[self.column]

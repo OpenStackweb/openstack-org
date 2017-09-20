@@ -1,4 +1,18 @@
-#!/bin/bash -xe
+#!/bin/bash
+# Copyright (c) 2017 OpenStack Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+# implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 # install virtual env for python
 sudo pip install virtualenv;
 # install node js 5.x
@@ -48,13 +62,9 @@ mkdir -p /var/www/local.openstack.org/silverstripe-cache;
 php composer.phar install --ignore-platform-reqs --prefer-dist;
 sudo ./framework/sake installsake;
 
-
-if [[ -d /var/www/local.openstack.org/survey_builder/code/model/extract_tags ]]; then
-	echo "installing python virtual env for extract tags";
-	cd /var/www/local.openstack.org/survey_builder/code/model/extract_tags && virtualenv env;
-	source /var/www/local.openstack.org/survey_builder/code/model/extract_tags/env/bin/activate;
-	/var/www/local.openstack.org/survey_builder/code/model/extract_tags/env/bin/python env/bin/pip install -r requirements.txt;
-	chmod 770 /var/www/local.openstack.org/survey_builder/code/model/extract_tags/extract_tags_by_rake.sh
-	chmod 770 /var/www/local.openstack.org/survey_builder/code/model/extract_tags/extract_tags_by_kmeans.sh
+if [[ -d scripts/setup_python_env.sh ]]; then
+	echo "installing python virtual env";
+	chmod 775 scripts/setup_python_env.sh;
+	./scripts/setup_python_env.sh "/var/www/local.openstack.org";
 fi
 
