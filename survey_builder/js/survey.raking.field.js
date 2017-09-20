@@ -43,6 +43,7 @@
             selected = true;
         }
         rank.trigger('rank', [selected]);
+        serialize();
     }
 
     function clearRankElement($element){
@@ -57,6 +58,27 @@
             --current_rank;
         $element.text(current_rank);
         $element.attr('data-sort', current_rank);
+    }
+
+    function serialize(){
+        // serialize
+        var sorted  = $('.selected-rank', control);
+        var count   = sorted.length;
+        var values = '';
+        var current_answers = {};
+        for(var i = 0; i < count; i++){
+            var element           = $(sorted[i]);
+            var answer            = element.attr('data-answer');
+            var sort              = element.attr('data-sort');
+            current_answers[sort] = answer;
+        }
+        for(var j = 1 ;j <= count; j++ ){
+            var answer =  current_answers[j];
+            values   +=  answer + ',';
+        }
+        //remove last ,
+        values = values.substring(0, values.length - 1);
+        $('.ctrl_hidden_value', control ).val(values);
     }
 
     //private methods
@@ -83,29 +105,10 @@
                         sorted.trigger('rank', false);
                     }
                 }
+                $('.ctrl_hidden_value', control ).val('');
                 return false;
             });
 
-            form.submit(function (evt){
-               // serialize
-                var sorted  = $('.selected-rank', control);
-                var count   = sorted.length;
-                var values = '';
-                var current_answers = {};
-                for(var i = 0; i < count; i++){
-                    var element           = $(sorted[i]);
-                    var answer            = element.attr('data-answer');
-                    var sort              = element.attr('data-sort');
-                    current_answers[sort] = answer;
-                }
-                for(var j = 1 ;j <= count; j++ ){
-                    var answer =  current_answers[j];
-                    values   +=  answer + ',';
-                }
-                //remove last ,
-                values = values.substring(0, values.length - 1);
-                $('.ctrl_hidden_value', control ).val(values);
-            });
         }
     };
 
