@@ -4,7 +4,7 @@
             <div class="radio <% if $isDisabled %> disabled<% end_if %>">
                 <label>
                     <input type="radio" name="$Name" id="$ID" value="$Value" <% if $isChecked %> checked<% end_if %>>
-                    $Title
+                    $Title.RAW
                 </label>
             </div>
         </li>
