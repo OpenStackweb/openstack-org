@@ -257,7 +257,7 @@ SQL;
     /**
      * @param int $summit_id
      * @param array $sort
-     * @return DataList
+     * @return ArrayList
      */
     public function getScheduleBySummit($summit_id, array $sort = []){
         $member_id =  $this->owner->ID;
@@ -268,7 +268,7 @@ SQL;
                 $sort_by .= sprintf('%s %s', $field, $order_dir);
             }
         }
-        if(!empty($sort_by)) $sort = ' ORDER BY '. $sort_by;
+        if(!empty($sort_by)) $sort_by = ' ORDER BY '. $sort_by;
 
         $query = <<<SQL
 SELECT SummitEvent.* FROM Member_Schedule
@@ -280,7 +280,7 @@ AND SummitEvent.SummitID = $summit_id
 AND SummitEvent.Published = 1
 {$sort_by};
 SQL;
-        $list = new DataList();
+        $list = new ArrayList();
         foreach (DB::query($query) as $row){
             $list->add(new SummitEvent($row));
         }
@@ -348,7 +348,7 @@ SQL;
     /**
      * @param int $summit_id
      * @param array $sort
-     * @return DataList
+     * @return ArrayList
      */
     public function getFavoritesBySummit($summit_id, array $sort = [])
     {
@@ -360,7 +360,7 @@ SQL;
                 $sort_by .= sprintf('%s %s', $field, $order_dir);
             }
         }
-        if(!empty($sort_by)) $sort = ' ORDER BY '. $sort_by;
+        if(!empty($sort_by)) $sort_by = ' ORDER BY '. $sort_by;
 
         $query = <<<SQL
 SELECT SummitEvent.* FROM Member_FavoriteSummitEvents
@@ -372,7 +372,7 @@ AND SummitEvent.SummitID = $summit_id
 AND SummitEvent.Published = 1
 {$sort_by};
 SQL;
-        $list = new DataList();
+        $list = new ArrayList();
         foreach (DB::query($query) as $row){
             $list->add(new SummitEvent($row));
         }
