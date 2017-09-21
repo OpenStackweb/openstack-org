@@ -411,7 +411,7 @@ IF(
 WHEN 'SurveyCheckBoxListQuestionTemplate'
 THEN ( SELECT GROUP_CONCAT(Value SEPARATOR '|') FROM SurveyQuestionValueTemplate WHERE FIND_IN_SET(ID, SA.Value) > 0)
 WHEN 'SurveyRankingQuestionTemplate'
-THEN ( SELECT GROUP_CONCAT(Value SEPARATOR '|') FROM SurveyQuestionValueTemplate WHERE FIND_IN_SET(ID, SA.Value) > 0)
+THEN ( SELECT GROUP_CONCAT(Value ORDER BY FIND_IN_SET(ID, SA.Value) SEPARATOR '|') FROM SurveyQuestionValueTemplate WHERE FIND_IN_SET(ID, SA.Value) > 0)
 WHEN 'SurveyRadioButtonListQuestionTemplate'
 THEN ( SELECT GROUP_CONCAT(Value SEPARATOR '|') FROM SurveyQuestionValueTemplate WHERE FIND_IN_SET(ID, SA.Value) > 0)
 ELSE SA.Value END AS Answer
@@ -804,7 +804,7 @@ SQL;
                         foreach($options as $o)
                         {
                             $index = array_search($o, $answers);
-                            $line[self::functionPrepareValueForCSV(sprintf("%s - %s", $question, $o))] =  $index === false ? '0' : ($index + 1);;
+                            $line[self::functionPrepareValueForCSV(sprintf("%s - %s", $question, $o))] =  $index === false ? '0' : ($index + 1);
                         }
                     }
                 }
