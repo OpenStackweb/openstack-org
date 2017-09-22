@@ -62,9 +62,9 @@ mkdir -p /var/www/local.openstack.org/silverstripe-cache;
 php composer.phar install --ignore-platform-reqs --prefer-dist;
 sudo ./framework/sake installsake;
 
-if [[ -d scripts/setup_python_env.sh ]]; then
+if [[ -f scripts/setup_python_env.sh ]]; then
 	echo "installing python virtual env";
 	chmod 775 scripts/setup_python_env.sh;
-	./scripts/setup_python_env.sh "/var/www/local.openstack.org";
+	./scripts/setup_python_env.sh;
 fi
 
