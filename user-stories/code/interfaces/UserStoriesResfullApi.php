@@ -56,8 +56,15 @@ final class UserStoriesResfullApi extends AbstractRestfulJsonApi
         return true;
     }
 
+    /**
+     * @return bool
+     */
+    protected function authenticate(){
+        return true;
+    }
+
     static $url_handlers = array(
-        'GET '                                       => 'getAllUserStories',
+        'GET '    => 'getAllUserStories',
     );
 
     static $allowed_actions = [
