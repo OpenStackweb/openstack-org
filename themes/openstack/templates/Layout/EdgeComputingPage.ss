@@ -48,9 +48,9 @@
             </div>
             <div class="row">
                 <div class="col-sm-9">
-                    <h2>See how we advanced the future of edge computing at OpenDev 2017</h2>
+                    <h2>How did we advance the future of edge computing at OpenDev 2017?</h2>
                     <p>
-                        A new collaborative event for technical experts and operators with real world edge use cases.
+                        200 technical experts and operators gathered to share real use cases, requirements and plans for future reference architectures around edge computing.
                     </p>
                 </div>
                 <div class="col-sm-3">
