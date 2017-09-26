@@ -12,11 +12,11 @@ adduser [user] docker
 set execution permissions
 
 ```bash
-chmod 775 dockerup.sh
+chmod 775 docker-up.sh
 ```
 
 ```bash
-./dockerup.sh [SERVER_NAME]
+./docker-up.sh [SERVER_NAME]
 ```
 this scripts optionally takes as parameter SERVER_NAME
 is none is given, then default value is "local.openstack.org"
