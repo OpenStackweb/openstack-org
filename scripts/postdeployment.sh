@@ -45,20 +45,20 @@ su vagrant;
 # install local nodejs modules on VM
 mkdir -p /home/vagrant/node_modules;
 chown vagrant:www-data -R /home/vagrant/node_modules;
-ln -sf /home/vagrant/node_modules /var/www/local.openstack.org/node_modules;
+ln -sf /home/vagrant/node_modules /var/www/www.openstack.org/node_modules;
 
 # install local bower modules on VM
 mkdir -p /home/vagrant/bower_modules;
 chown vagrant:www-data -R /home/vagrant/bower_modules;
-ln -sf /home/vagrant/bower_modules /var/www/local.openstack.org/themes/openstack/bower_assets;
+ln -sf /home/vagrant/bower_modules /var/www/www.openstack.org/themes/openstack/bower_assets;
 
-cd /var/www/local.openstack.org;
+cd /var/www/www.openstack.org;
 #composer installation from https://getcomposer.org/download/
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 php composer-setup.php
 php -r "unlink('composer-setup.php');"
 # create local folder for ss cache
-mkdir -p /var/www/local.openstack.org/silverstripe-cache;
+mkdir -p /var/www/www.openstack.org/silverstripe-cache;
 php composer.phar install --ignore-platform-reqs --prefer-dist;
 sudo ./framework/sake installsake;
 

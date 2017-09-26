@@ -9,9 +9,9 @@ server {
     ssl_certificate /etc/nginx/ssl/server.crt;
     ssl_certificate_key /etc/nginx/ssl/server.key;
 	
-    server_name local.openstack.org;
+    server_name <%= @server_name %>;
 
-    root /var/www/local.openstack.org;
+    root /var/www/www.openstack.org;
 
     # Deny all attempts to access hidden files such as .htaccess, .htpasswd, .DS_Store (Mac).
     # Keep logging the requests to parse later (or to pass to firewall utilities such as fail2ban)
@@ -21,8 +21,8 @@ server {
     }
  
     #logs 	    
-    error_log /var/log/nginx/local.openstack.org.error.log;
-    access_log /var/log/nginx/local.openstack.org.access.log;
+    error_log /var/log/nginx/www.openstack.org.error.log;
+    access_log /var/log/nginx/www.openstack.org.access.log;
 
     # Directives to send expires headers and turn off 404 error logging.
     location ~* \.(js|css|png|jpe?g|gif|ico|svg)$ {

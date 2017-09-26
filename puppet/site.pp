@@ -19,6 +19,8 @@ $mysql_root_password = hiera('mysql_root_password')
 $os_db               = hiera('os_db_name')
 $developer_email     = hiera('developer_email')
 $db_dump_url         = hiera('db_dump_url')
+# fact
+notice("server_name ${server_name}")
 
 $main_packages = [
   'curl',
@@ -36,6 +38,7 @@ $main_packages = [
   'python-pip',
   'libmysqlclient-dev',
   'software-properties-common',
+  'nano',
 ]
 
 # php packages needed for server
@@ -137,7 +140,7 @@ exec { 'post-process-db':
   cwd       => '/',
   path      => '/usr/bin:/bin:/usr/local/bin:/usr/lib/node_modules/npm/bin',
   logoutput => on_failure,
-  command   => "cat /var/www/local.openstack.org/scripts/insert_default_admin.sql >> /dump.sql",
+  command   => "cat /var/www/www.openstack.org/scripts/insert_default_admin.sql >> /dump.sql",
   require   => Exec['rename-db'],
 }
 
@@ -165,7 +168,7 @@ mysql::db { $os_db :
   ],
 }
 
-file { '/var/www/local.openstack.org/_ss_environment.php':
+file { '/var/www/www.openstack.org/_ss_environment.php':
   ensure  => present,
   content => template('site/_ss_environment.php.erb'),
   owner   => 'vagrant',
@@ -173,7 +176,7 @@ file { '/var/www/local.openstack.org/_ss_environment.php':
   mode    => '0640',
 }
 
-file { '/var/www/local.openstack.org/db.ini':
+file { '/var/www/www.openstack.org/db.ini':
   ensure  => present,
   content => template('site/db.ini.erb'),
   owner   => 'vagrant',
@@ -195,7 +198,7 @@ service { 'nginx':
     Package[$php5_packages] ,
     Service['mysql'],
     Service['php5.6-fpm'],
-    File['/var/www/local.openstack.org/_ss_environment.php'],
+    File['/var/www/www.openstack.org/_ss_environment.php'],
   ],
 }
 
@@ -223,9 +226,9 @@ file { '/etc/nginx/php5-fpm.conf':
   require => Service['nginx'],
 }
 
-file { '/etc/nginx/sites-available/local.openstack.org':
+file { '/etc/nginx/sites-available/www.openstack.org':
   ensure  => present,
-  content => template('site/local.openstack.org.erb'),
+  content => template('site/www.openstack.org.erb'),
   owner   => 'vagrant',
   group   => 'www-data',
   mode    => '0640',
@@ -246,10 +249,10 @@ file { '/etc/php/5.6/mods-available/xdebug.ini':
   ]
 }
 
-file { '/etc/nginx/sites-enabled/local.openstack.org':
+file { '/etc/nginx/sites-enabled/www.openstack.org':
   ensure    => 'link',
-  target    => '/etc/nginx/sites-available/local.openstack.org',
-  require   => File['/etc/nginx/sites-available/local.openstack.org'],
+  target    => '/etc/nginx/sites-available/www.openstack.org',
+  require   => File['/etc/nginx/sites-available/www.openstack.org'],
 }
 
 cron { 'RssEventsDigestTask':
@@ -278,4 +281,11 @@ cron { 'UpdateFeedTask':
     command => 'php /var/www/www.openstack.org/framework/cli-script.php /UpdateFeedTask',
     user => 'root', 
     minute => '*/5', 
+}
+
+#fact
+if $use_swap == 1 {
+  swap_file::files { 'default':
+    ensure => present,
+  }
 }

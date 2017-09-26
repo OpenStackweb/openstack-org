@@ -2,8 +2,12 @@
 # vi: set ft=ruby :
 # https://github.com/DevNIX/Vagrant-dependency-manager
 VAGRANTFILE_API_VERSION = "2"
-#MYSQL_SERVICE_PROVIDER = "init"
+
+#configuration constants
 MYSQL_SERVICE_PROVIDER = ENV["MYSQL_SERVICE_PROVIDER"] || "upstart"
+USE_SWAP               = ENV["USE_SWAP"] || 1
+SERVER_NAME            = ENV["SERVER_NAME"] || "local.openstack.org"
+
 required_plugins = %w( vagrant-vbguest vagrant-hosts vagrant-hostsupdater )
 require File.dirname(__FILE__)+"/scripts/dependency_manager"
 check_plugins required_plugins
@@ -20,7 +24,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.hostname = "local.openstack.org"
+  config.vm.hostname = SERVER_NAME
 
   # Share an additional folder to the guest VM. The first argument is
   # the path on the host to the actual folder. The second argument is
@@ -30,12 +34,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.synced_folder("puppet/hiera", "/etc/puppet/data")
     config.vm.synced_folder("puppet/certs", "/etc/ssl_certs")	
     config.vm.synced_folder("puppet", "/etc/puppet/modules/site")
-    config.vm.synced_folder ".", "/var/www/local.openstack.org", create: true, owner: "vagrant", group: "www-data", mount_options: ["dmode=777,fmode=777"]
+    config.vm.synced_folder ".", "/var/www/www.openstack.org", create: true, owner: "vagrant", group: "www-data", mount_options: ["dmode=777,fmode=777"]
 
   # virtualbox provider
   config.vm.provider "virtualbox" do |vb, override|
      vb.memory           = "2048"
-     vb.name             = "local.openstack.org"
+     vb.name             = SERVER_NAME
 	 vb.cpus             = 1
 	 override.vm.box     = "ubuntu/trusty64"
      override.vm.box_url = "https://atlas.hashicorp.com/ubuntu/trusty64"
@@ -46,7 +50,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # docker provider
   config.vm.provider "docker" do |d, override|
       d.build_dir = "."
-      d.name = "local.openstack.org"
+      d.name = SERVER_NAME
       d.has_ssh = true
       config.vm.network :forwarded_port, host: 80, guest: 80 #web
   end
@@ -55,7 +59,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # vagrant plugin install vagrant-hosts
   
   config.vm.provision :hosts do |provisioner|
-      provisioner.add_host '127.0.0.1', ['local.openstack.org']
+      provisioner.add_host '127.0.0.1', [SERVER_NAME]
   end
 
   config.vm.provision "bootstrap", type:"shell" do |s|
@@ -67,7 +71,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       puppet.manifest_file = "site.pp"
       puppet.hiera_config_path = "puppet/hiera/hiera.yaml"
       puppet.working_directory = "/etc/puppet/data"
-      puppet.facter   = { "mysql_service_provider" =>  MYSQL_SERVICE_PROVIDER }
+      puppet.facter   = {
+                            "mysql_service_provider" => MYSQL_SERVICE_PROVIDER,
+                            "use_swap"               => USE_SWAP,
+                            "server_name"            => SERVER_NAME
+                        }
       #puppet.options = "--verbose --debug"
   end
   

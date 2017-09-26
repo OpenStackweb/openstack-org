@@ -108,7 +108,7 @@ define('DUPE_EMAIL_FROM','<%= @developer_email %>');
 define('OPENSTACKID_ENABLED',false);
 //set true on production mode, otherwise false
 define('Auth_OpenID_VERIFY_HOST',false);
-define('Auth_OpenID_Realm','https://local.openstack.org');
+define('Auth_OpenID_Realm','https://www.openstack.org');
 
 //survey module
 define('SURVEY_START_DATE','2015-03-09 00:00:00');
@@ -162,4 +162,4 @@ define('ACTIVECOMMITTERSERVICE_GERRIT_USER_SSH_KEY_FILE', '');
 
 global $_FILE_TO_URL_MAPPING;
 
-$_FILE_TO_URL_MAPPING['/var/www/local.openstack.org'] = 'http://local.openstack.org';
+$_FILE_TO_URL_MAPPING['/var/www/www.openstack.org'] = 'http://<%= @server_name %>';
