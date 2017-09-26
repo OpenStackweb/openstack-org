@@ -48,19 +48,19 @@
             </div>
             <div class="row">
                 <div class="col-sm-9">
-                    <h2>Advance the future of edge computing at OpenDev</h2>
+                    <h2>See how we advanced the future of edge computing at OpenDev 2017</h2>
                     <p>
                         A new collaborative event for technical experts and operators with real world edge use cases.
                     </p>
                 </div>
                 <div class="col-sm-3">
-                    <a href="http://opendevconf.com" class="cta">
-                        Learn More
+                    <a href="http://www.opendevconf.com/videos/" class="cta">
+                        Watch Videos
                         <i class="fa fa-chevron-right" aria-hidden="true"></i>
                     </a>
-                    <div class="opendev-dates">
+                    <!-- <div class="opendev-dates">
                         September 7-8 | San Francisco, CA
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -263,15 +263,20 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <a href="http://openedgecomputing.org/" target="_blank">
                         <img src="https://d33wubrfki0l68.cloudfront.net/f395f3eb9e4ad700057f797aebc7cef8b7327a11/19d05/images/edge/open-edge.png" class="open-edge" alt="Open Edge Computing">
                     </a>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <a href="http://www.etsi.org/technologies-clusters/technologies/multi-access-edge-computing" target="_blank">
                         <img src="https://d33wubrfki0l68.cloudfront.net/d50408e3cdce034835af79f645ea4ff563956b09/92b88/images/edge/etsi.png" class="etsi" alt="ETSI">
                     </a>
+                </div>
+                <div class="col-sm-4">
+                    <h3 style="vertical-align:middle;padding-top:30px;"><a href="http://beyondtheclouds.github.io" target="_blank">
+                        The Discovery Initiative
+                        </a></h3>
                 </div>
             </div>
         </div>
