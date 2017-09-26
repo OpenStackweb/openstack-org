@@ -35,6 +35,7 @@ $main_packages = [
   'python-software-properties',
   'python-pip',
   'libmysqlclient-dev',
+  'software-properties-common',
 ]
 
 # php packages needed for server
@@ -68,7 +69,7 @@ exec{ 'add-php-5.6-repository':
   cwd       => '/',
   path      => '/usr/bin:/bin:/usr/local/bin:/usr/lib/node_modules/npm/bin',
   logoutput => on_failure,
-  command   => "add-apt-repository ppa:ondrej/php && apt-get update",
+  command   => "add-apt-repository -y ppa:ondrej/php && apt-get update",
   require   => Package[$main_packages]
 }
 
@@ -86,8 +87,13 @@ $override_options = {
   }
 }
 
+#database server
+notice("mysql_service_provider ${mysql_service_provider}")
+
 class { '::mysql::server':
   package_name            => 'mysql-server-5.6',
+  # came from facter
+  service_provider        => $mysql_service_provider,
   root_password           => $mysql_root_password,
   remove_default_accounts => true,
   override_options        => $override_options
@@ -145,6 +151,7 @@ exec { 'mysql-post-install-cmd':
 }
 
 #create and import db
+
 mysql::db { $os_db :
   user           => $os_db_user,
   password       => $os_db_password,
@@ -174,12 +181,20 @@ file { '/var/www/local.openstack.org/db.ini':
   mode    => '0640',
 }
 
+service { 'php5.6-fpm':
+  ensure    => running,
+  require   => [
+    Package[$php5_packages] ,
+  ],
+}
+
 service { 'nginx':
   ensure    => running,
   require   => [
     Package[$main_packages] ,		
     Package[$php5_packages] ,
     Service['mysql'],
+    Service['php5.6-fpm'],
     File['/var/www/local.openstack.org/_ss_environment.php'],
   ],
 }
@@ -263,8 +278,4 @@ cron { 'UpdateFeedTask':
     command => 'php /var/www/www.openstack.org/framework/cli-script.php /UpdateFeedTask',
     user => 'root', 
     minute => '*/5', 
-}
-
-swap_file::files { 'default':
-  ensure   => present,
 }

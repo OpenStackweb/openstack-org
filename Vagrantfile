@@ -1,6 +1,9 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 # https://github.com/DevNIX/Vagrant-dependency-manager
+VAGRANTFILE_API_VERSION = "2"
+#MYSQL_SERVICE_PROVIDER = "init"
+MYSQL_SERVICE_PROVIDER = ENV["MYSQL_SERVICE_PROVIDER"] || "upstart"
 required_plugins = %w( vagrant-vbguest vagrant-hosts vagrant-hostsupdater )
 require File.dirname(__FILE__)+"/scripts/dependency_manager"
 check_plugins required_plugins
@@ -9,25 +12,15 @@ check_plugins required_plugins
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
-Vagrant.configure(2) do |config|
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
   # The most common configuration options are documented and commented below.
   # For a complete reference, please see the online documentation at
   # https://docs.vagrantup.com.
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "ubuntu/trusty64"
-  config.vm.box_url = "https://atlas.hashicorp.com/ubuntu/trusty64"	
   config.vm.hostname = "local.openstack.org"
-
-  # Create a private network, which allows host-only access to the machine
-  # using a specific IP.
-  config.vm.network "forwarded_port", guest: 3306, host: 3306
-  config.vm.network "private_network", ip: "192.168.33.10"
-  # Create a public network, 	which generally matched to bridged network.
-  # Bridged networks make the machine appear as another physical device on
-  # your network.
-  # config.vm.network "public_network"
 
   # Share an additional folder to the guest VM. The first argument is
   # the path on the host to the actual folder. The second argument is
@@ -38,14 +31,24 @@ Vagrant.configure(2) do |config|
     config.vm.synced_folder("puppet/certs", "/etc/ssl_certs")	
     config.vm.synced_folder("puppet", "/etc/puppet/modules/site")
     config.vm.synced_folder ".", "/var/www/local.openstack.org", create: true, owner: "vagrant", group: "www-data", mount_options: ["dmode=777,fmode=777"]
-  # Provider-specific configuration so you can fine-tune various
-  # backing providers for Vagrant. These expose provider-specific options.
-  # Example for VirtualBox:
-  #
-  config.vm.provider "virtualbox" do |vb|
-        vb.memory = "2048"
-        vb.name   = "local.openstack.org"
-	    vb.cpus	  = 1
+
+  # virtualbox provider
+  config.vm.provider "virtualbox" do |vb, override|
+     vb.memory           = "2048"
+     vb.name             = "local.openstack.org"
+	 vb.cpus             = 1
+	 override.vm.box     = "ubuntu/trusty64"
+     override.vm.box_url = "https://atlas.hashicorp.com/ubuntu/trusty64"
+     override.vm.network "forwarded_port", guest: 3306, host: 3306
+     override.vm.network "private_network", ip: "192.168.33.10"
+  end
+
+  # docker provider
+  config.vm.provider "docker" do |d, override|
+      d.build_dir = "."
+      d.name = "local.openstack.org"
+      d.has_ssh = true
+      config.vm.network :forwarded_port, host: 80, guest: 80 #web
   end
 
   # use https://github.com/oscar-stack/vagrant-hosts
@@ -64,6 +67,7 @@ Vagrant.configure(2) do |config|
       puppet.manifest_file = "site.pp"
       puppet.hiera_config_path = "puppet/hiera/hiera.yaml"
       puppet.working_directory = "/etc/puppet/data"
+      puppet.facter   = { "mysql_service_provider" =>  MYSQL_SERVICE_PROVIDER }
       #puppet.options = "--verbose --debug"
   end
   

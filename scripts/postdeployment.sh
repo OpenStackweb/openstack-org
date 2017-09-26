@@ -38,7 +38,7 @@ for key in memory_limit upload_max_filesize post_max_size max_execution_time max
 do
  sed -i "s/^\($key\).*/\1 $(eval echo \=\${$key})/" /etc/php/5.6/fpm/php.ini
 done
-
+sudo service php5.6-fpm start;
 sudo service php5.6-fpm restart;
 
 su vagrant;
