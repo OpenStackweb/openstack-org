@@ -20,19 +20,25 @@ Injector:
         1: '%$PoweredOpenStackImplementationManager'
         2: 90
   SapphireRegionalServiceRepository:
-        class: SapphireRegionalServiceRepository
+      class: SapphireRegionalServiceRepository
   CompanyServiceResfullApi:
-        constructor:
-          0: '%$SapphireRegionalServiceRepository'
+      constructor:
+        0: '%$SapphireRegionalServiceRepository'
   BookManager:
-          constructor:
-            0: '%$SapphireMarketPlaceTypeRepository'
-            1: '%$BookFactory'
-            2: '%$MarketplaceFactory'
-            3: '%$ValidatorFactory'
-            4: '%$TransactionManager'
+      constructor:
+        0: '%$SapphireMarketPlaceTypeRepository'
+        1: '%$BookFactory'
+        2: '%$MarketplaceFactory'
+        3: '%$ValidatorFactory'
+        4: '%$TransactionManager'
   BooksCrudApi:
-          constructor:
-            0: '%$BookManager'
-            1: '%$BookFactory'
-            2: '%$SapphireMarketPlaceTypeRepository'
+      constructor:
+        0: '%$BookManager'
+        1: '%$BookFactory'
+        2: '%$SapphireMarketPlaceTypeRepository'
+  SapphireMarketPlaceDriverRepository:
+      class: SapphireMarketPlaceDriverRepository
+  DriverRestfullApi:
+      constructor:
+        0: '%$SapphireMarketPlaceDriverRepository'
+

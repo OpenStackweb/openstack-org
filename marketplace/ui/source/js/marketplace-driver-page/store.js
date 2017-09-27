@@ -1,5 +1,5 @@
 /**
- * Copyright 2014 Openstack Foundation
+ * Copyright 2017 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -10,8 +10,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-jQuery(document).ready(function($){
-    $('#drivers','.marketplace-nav').addClass('current');
 
+import { createStore, applyMiddleware, combineReducers, compose} from 'redux';
+import reduceReducers from 'reduce-reducers';
+import thunk from 'redux-thunk';
+import {appReducer} from './reducers';
+import { genericReducers } from "~core-utils/reducers";
 
-});
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+let reducer = reduceReducers(appReducer, genericReducers);
+const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
+
+export default store;

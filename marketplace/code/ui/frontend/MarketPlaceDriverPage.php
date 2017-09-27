@@ -27,18 +27,54 @@ final class MarketPlaceDriverPage_Controller extends MarketPlaceDirectoryPage_Co
     function init() {
         parent::init();
         Requirements::javascript("marketplace/code/ui/frontend/js/driver.page.js");
+        Requirements::javascript('themes/openstack/javascript/urlfragment.jquery.js');
     }
 
-    public static function DriverTable($project = null){
-        if ($project) {
-            return Driver::get()->filter(array('Project' => $project, 'Active' => 1));
-        }
-
+    private function getActiveDrivers() {
         return Driver::get()->filter('Active', 1);
     }
 
     public function getProjects() {
-        return GroupedList::create(Driver::get()->filter('Active', 1)->sort('Project'))->GroupedBy('Project');
+        $drivers = $this->getActiveDrivers()->sort('Project')->column('Project');
+        $projects = [];
+
+        foreach ($drivers as $project) {
+            $projects[] = new ArrayData(['Name' => $project]);
+        }
+
+        return new ArrayList($projects);
+    }
+
+    public function getReleases() {
+        $drivers = $this->getActiveDrivers();
+        $releases = [];
+        $release_list = [];
+
+        foreach ($drivers as $driver) {
+            foreach ($driver->Releases()->column('Name') as $release) {
+                $releases[] = $release;
+            }
+        }
+
+        $releases = array_unique($releases);
+        sort($releases);
+
+        foreach ($releases as $release) {
+            $release_list[] = new ArrayData(['Name' => $release]);
+        }
+
+        return new ArrayList($release_list);
+    }
+
+    public function getVendors() {
+        $drivers = $this->getActiveDrivers()->sort('Vendor')->column('Vendor');
+        $vendors = [];
+
+        foreach ($drivers as $vendor) {
+            $vendors[] = new ArrayData(['Name' => $vendor]);
+        }
+
+        return new ArrayList($vendors);
     }
 
 }

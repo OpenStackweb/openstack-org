@@ -22,3 +22,4 @@ Director:
     'api/v1/marketplace/openstack-powered-implementations': 'OpenStackPoweredImplementionResfullApi'
     'api/v1/marketplace/company-service': 'CompanyServiceResfullApi'
     'api/v1/marketplace/books': 'BooksCrudApi'
+    'api/v1/marketplace/drivers': 'DriverRestfullApi'

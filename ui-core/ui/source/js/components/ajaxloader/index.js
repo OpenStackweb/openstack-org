@@ -29,7 +29,10 @@ export const AjaxLoader =  ({
         position: relative ? 'absolute' : 'fixed',
         zIndex:10000000,
         margin:'auto',
-        cursor: 'wait'
+        cursor: 'wait',
+        backgroundColor: 'rgba(0,0,0,0.2)',
+        top: 0,
+        left: 0
     };
 
     let styleSpinner = {
