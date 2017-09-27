@@ -35,7 +35,7 @@ final class PresentationSpeakerSummitReminderEmailSender implements IMessageSend
         if(!$speaker instanceof IPresentationSpeaker) return;
         if(!$summit instanceof ISummit) return;
 
-        if($speaker->breakoutEmailAlreadySent($summit->getIdentifier()))  throw new EntityValidationException('Speaker Email already Sent!');
+        //if($speaker->breakoutEmailAlreadySent($summit->getIdentifier()))  throw new EntityValidationException('Speaker Email already Sent!');
         $email = PermamailTemplate::get()->filter('Identifier', PRESENTATION_SPEAKER_SUMMIT_REMINDER_EMAIL)->first();
         if(is_null($email)) throw new NotFoundEntityException(sprintf('Email Template %s does not exists on DB!', PRESENTATION_SPEAKER_SUMMIT_REMINDER_EMAIL));
 

@@ -113,7 +113,7 @@ final class SpeakerSecondBreakoutAnnouncementSenderManager
                     $email = $speaker->getEmail();
                     if (empty($email)) continue;
 
-                    if ($speaker->breakoutEmailAlreadySent($current_summit->ID)) continue;
+                    //if ($speaker->breakoutEmailAlreadySent($current_summit->ID)) continue;
 
                     /**
                      * Rules are:

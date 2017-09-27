@@ -1363,9 +1363,9 @@ class PresentationSpeaker extends DataObject
      */
     public function registerBreakOutSent($summit_id, $type)
     {
-        if ($this->breakoutEmailAlreadySent($summit_id)) {
+        /*if ($this->breakoutEmailAlreadySent($summit_id)) {
             throw new Exception('Second Breakout Email already sent');
-        }
+        }*/
 
         $email = SpeakerAnnouncementSummitEmail::create();
         $email->SpeakerID = $this->ID;

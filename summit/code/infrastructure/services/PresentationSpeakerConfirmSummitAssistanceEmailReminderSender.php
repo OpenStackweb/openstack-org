@@ -37,7 +37,7 @@ final class PresentationSpeakerConfirmSummitAssistanceEmailReminderSender implem
         if(!$promo_code instanceof SpeakerSummitRegistrationPromoCode) return;
 
         if($speaker->hasConfirmedAssistanceFor($summit->getIdentifier())) throw new EntityValidationException('Speaker Already confirmed Assistance!');
-        if($speaker->breakoutEmailAlreadySent($summit->getIdentifier()))  throw new EntityValidationException('Speaker Email already Sent!');
+        //if($speaker->breakoutEmailAlreadySent($summit->getIdentifier()))  throw new EntityValidationException('Speaker Email already Sent!');
         $email = PermamailTemplate::get()->filter('Identifier', PRESENTATION_SPEAKER_CONFIRM_SUMMIT_ASSISTANCE_EMAIL)->first();
         if(is_null($email)) throw new NotFoundEntityException(sprintf('Email Template %s does not exists on DB!', PRESENTATION_SPEAKER_CONFIRM_SUMMIT_ASSISTANCE_EMAIL));
 

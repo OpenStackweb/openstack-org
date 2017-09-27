@@ -31,7 +31,7 @@ final class SpeakerSecondBreakOutSenderFactory implements ISpeakerSecondBreakOut
          * If the user is already registered, we shouldn't send their code again: ( confirmed assistance for summit)
          * they still need the email, just not the part with the code. Probably a slightly altered verbiage as well
          */
-        if($speaker->breakoutEmailAlreadySent($summit->getIdentifier())) return null;
+        //if($speaker->breakoutEmailAlreadySent($summit->getIdentifier())) return null;
 
         if($speaker->hasConfirmedAssistanceFor($summit->getIdentifier())){
             // send reminder without code
