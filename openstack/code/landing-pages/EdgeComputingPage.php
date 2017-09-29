@@ -22,6 +22,7 @@ class EdgeComputingPage_Controller extends Page_Controller {
     {
         parent::init();
 
+        Requirements::css("themes/openstack/css/sanfrancisco-font.css");
         Requirements::CSS('themes/openstack/css/edgecomputing.css');
         Requirements::CSS('themes/openstack/css/enterprise.css');
     }

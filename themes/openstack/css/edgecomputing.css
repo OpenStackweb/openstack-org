@@ -1,22 +1,40 @@
 /* Edge landing */
 .intro-header.edge {
-  background: url(https://www.openstack.org/assets/edge/hero-bg.jpg) no-repeat bottom center;
-  background-size: cover;
-  padding: 60px 0; }
-  .intro-header.edge .intro-message {
+    background: url(https://www.openstack.org/assets/edge/hero-bg.jpg) no-repeat bottom center;
+    background-size: cover;
+    padding: 60px 0;
+}
+
+.intro-header.edge .intro-message {
     text-align: left;
-    padding: 0 0 20px; }
-    .intro-header.edge .intro-message h1 {
-      text-align: left;
-      margin-bottom: 20px;
-      font-size: 2.6em; }
-    .intro-header.edge .intro-message p {
-      text-align: left;
-      font-size: 1.4em;
-      font-weight: 300; }
-  .intro-header.edge .edge-video {
-    text-align: center; }
-  .intro-header.edge .edge-video-wrapper .play-button {
+    padding: 0 0 20px;
+}
+
+.intro-header.edge .intro-message h1 {
+    font-family: "SF Display", Helvetica;
+    font-size: 36px;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.intro-header.edge .intro-message p {
+
+    font-family: "SF Display",Helvetica;
+    font-size: 22px;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    text-align: left;
+    font-weight: 300;
+
+}
+
+.edge-video {
+    text-align: center;
+}
+
+.edge-video-wrapper .play-button {
     width: 20%;
     display: block;
     position: absolute;
@@ -25,99 +43,200 @@
     bottom: 0;
     top: 20%;
     margin: auto;
-    opacity: 0.7; }
-  .intro-header.edge .edge-video-wrapper:hover, .intro-header.edge .edge-video-wrapper:focus {
-    cursor: pointer; }
-    .intro-header.edge .edge-video-wrapper:hover .play-button, .intro-header.edge .edge-video-wrapper:focus .play-button {
-      opacity: 1; }
-  .intro-header.edge .edge-video-thumb {
+    opacity: 0.7;
+}
+
+.edge-video-wrapper:hover, .edge-video-wrapper:focus {
+    cursor: pointer;
+}
+
+.edge-video-wrapper:hover .play-button, .edge-video-wrapper:focus .play-button {
+    opacity: 1;
+}
+
+.edge-video-thumb {
     border: 1px solid white;
     display: block;
-    max-width: 100%; }
-  .intro-header.edge .edge-verizon-logo {
+    max-width: 100%;
+}
+
+.intro-header.edge .edge-verizon-logo {
     width: 130px;
     margin: 15px auto 0;
-    display: block; }
+    display: block;
+}
 
 @media (max-width: 767px) {
-  .intro-header.edge .edge-verizon-logo {
-    margin-bottom: 30px; } }
+    .intro-header.edge .edge-verizon-logo {
+        margin-bottom: 30px;
+    }
+}
 
 @media (max-width: 480px) {
-  .intro-header.edge .edge-video-wrapper .play-button img {
-    width: 90px; }
-  .intro-header.edge .edge-verizon-logo {
-    margin-bottom: 30px; } }
+    .edge-video-wrapper .play-button img {
+        width: 90px;
+    }
+
+    .edge-verizon-logo {
+        margin-bottom: 30px;
+    }
+}
+
+
+.video-wall-row{
+    padding-left: 10%;
+}
+
+.video-wall-item{
+    margin-right: 65px;
+    padding: 0;
+}
+
+.video-wall-item .speaker{
+    font-family: Helvetica;
+    font-size: 14px;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    width: 100%;
+    margin-bottom: 0px;
+}
+
+.video-border{
+    /* Rectangle 4: */
+    background: #D8D8D8;
+    border: 1px solid #FFFFFF;
+}
+
+.video-wall-item .company{
+    font-family: Helvetica;
+    font-size: 14px;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    width: 100%;
+}
 
 .edge-overview {
-  background: #29abe2;
-  padding: 40px 0;
-  color: white;
-  text-align: center; }
-  .edge-overview h2 {
+    background: #29abe2;
+    padding: 40px 0;
+    color: white;
+    text-align: center;
+}
+
+.edge-overview h2 {
     color: white;
     text-align: center;
     font-size: 2em;
     margin-top: 0;
-    font-weight: 400; }
+    font-weight: 400;
+}
 
 .opendev-promo {
-  background: black url(https://www.openstack.org/assets/edge/earth.png) no-repeat center left;
-  padding: 40px 0;
-  color: white; }
-  .opendev-promo .opendev-promo-logo {
-    width: 209px; }
-  .opendev-promo h2 {
-    font-size: 2em;
+    background: black url(https://www.openstack.org/assets/edge/earth.png) no-repeat center left;
+    padding: 40px 0;
     color: white;
-    margin-bottom: 20px; }
-  .opendev-promo p {
-    font-size: 15px; }
-  .opendev-promo .cta {
+}
+
+.opendev-promo .opendev-promo-logo {
+    width: 209px;
+    display: block ;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.opendev-promo h2 {
+    margin-bottom: 20px;
+    font-family: Helvetica;
+    font-size: 30px;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    text-align: center;
+}
+
+.opendev-promo p {
+    font-family: Helvetica;
+    font-size: 15px;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    text-align: center;
+    width: 60%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.more-videos-button{
+    float:none;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.more-videos-button-container{
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+.opendev-promo .cta {
     background: #ED285E;
     color: white;
     font-style: italic;
-    padding: 10px 60px;
-    display: inline-block;
+    padding: 10px 70px;
+    display: block;
     border-radius: 4px;
     text-align: center;
-    white-space: nowrap; }
-    .opendev-promo .cta:hover, .opendev-promo .cta:focus {
-      background: #A7123B;
-      text-decoration: none; }
-    .opendev-promo .cta i {
-      margin-left: 10px; }
-  .opendev-promo .opendev-dates {
+    white-space: nowrap;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.opendev-promo .cta:hover, .opendev-promo .cta:focus {
+    background: #A7123B;
+    text-decoration: none;
+}
+
+.opendev-promo .cta i {
+    margin-left: 10px;
+}
+
+.opendev-promo .opendev-dates {
     margin-top: 5px;
     font-style: italic;
-    font-size: 13px; }
+    font-size: 13px;
+}
 
-@media (max-width: 767px) {
-  .opendev-promo .cta {
-    margin-top: 20px; } }
 
 .edge-why-openstack {
-  background: #edf2f7;
-  padding: 60px 0; }
-  .edge-why-openstack .edge-icons-wrapper {
-    text-align: center; }
-  .edge-why-openstack .edge-icons {
+    background: #edf2f7;
+    padding: 60px 0;
+}
+
+.edge-why-openstack .edge-icons-wrapper {
+    text-align: center;
+}
+
+.edge-why-openstack .edge-icons {
     max-width: 100%;
-    margin: 0 auto; }
+    margin: 0 auto;
+}
 
 .edge-resources {
-  text-align: center;
-  padding: 60px 0; }
-  .edge-resources h2 {
     text-align: center;
-    margin-top: 0; }
-  .edge-resources .resource-title-wrapper {
+    padding: 60px 0;
+}
+
+.edge-resources h2 {
+    text-align: center;
+    margin-top: 0;
+}
+
+.edge-resources .resource-title-wrapper {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-align: center;
-        align-items: center;
-    margin: 30px 0 10px; }
-  .edge-resources h4.edge-resource-title {
+    align-items: center;
+    margin: 30px 0 10px;
+}
+
+.edge-resources h4.edge-resource-title {
     text-align: center;
     text-transform: uppercase;
     position: relative;
@@ -125,95 +244,139 @@
     color: #2A4E68;
     font-size: 20px;
     padding-left: 15px;
-    padding-right: 15px; }
-  .edge-resources .line {
+    padding-right: 15px;
+}
+
+.edge-resources .line {
     height: 1px;
     background-color: #CED9E5;
     -ms-flex-positive: 1;
-        flex-grow: 1; }
-  .edge-resources .video-wrapper {
+    flex-grow: 1;
+}
+
+.red-div{
+    /* Rectangle 6: */
+    background: #ED285E;
+    height: 11px !important;
+}
+
+.edge-resources .video-wrapper, .opendev-promo .video-wrapper {
     position: relative;
     width: 100%;
     margin-top: 30px;
-    margin-bottom: 30px; }
-    .edge-resources .video-wrapper .play-button {
-      opacity: 0.7;
-      background: black;
-      border-radius: 4px;
-      padding: 10px 10px;
-      height: 55%;
-      width: 30%;
-      top: 0%; }
-    .edge-resources .video-wrapper:hover .play-button {
-      opacity: 1;
-      display: block;
-      cursor: pointer; }
-  .edge-resources .first-col {
-    margin-left: 5%; }
+    margin-bottom: 30px;
+}
+
+
+.edge-resources .video-wrapper .play-button, .opendev-promo .video-wrapper .play-button {
+    opacity: 0.7;
+    background: black;
+    border-radius: 4px;
+    padding: 10px 10px;
+    height: 55%;
+    width: 30%;
+    top: 0% !important;
+}
+
+.edge-resources .video-wrapper:hover .play-button, .opendev-promo .video-wrapper:hover .play-button {
+    opacity: 1;
+    display: block;
+    cursor: pointer;
+}
+
+.edge-resources .first-col {
+    margin-left: 5%;
+}
 
 @media (max-width: 767px) {
-  .edge-resources .first-col {
-    margin-left: 0; } }
+    .edge-resources .first-col {
+        margin-left: 0;
+    }
+}
 
 img.open-edge {
-  width: 320px;
-  max-width: 100%;
-  margin-top: 30px; }
+    width: 320px;
+    max-width: 100%;
+    margin-top: 30px;
+}
 
 img.etsi {
-  width: 239px;
-  max-width: 100%;
-  margin-top: 30px; }
+    width: 239px;
+    max-width: 100%;
+    margin-top: 30px;
+}
 
 .edge-working-group {
-  padding: 50px 0;
-  color: white;
-  background: url(https://www.openstack.org/assets/edge/wg-bkgd.jpg) no-repeat center center; }
-  .edge-working-group h5 {
+    padding: 50px 0;
     color: white;
-    font-style: italic; }
-  .edge-working-group h2 {
+    background: url(https://www.openstack.org/assets/edge/wg-bkgd.jpg) no-repeat center center;
+}
+
+.edge-working-group h5 {
+    color: white;
+    font-style: italic;
+}
+
+.edge-working-group h2 {
     color: white;
     margin-top: 10px;
-    font-weight: 400; }
-  .edge-working-group .cta {
-    text-align: center; }
-    .edge-working-group .cta .wg-btn {
-      background: #DA422F;
-      color: white;
-      padding: 8px 50px;
-      border-radius: 4px;
-      margin-top: 25px;
-      display: inline-block;
-      white-space: nowrap; }
-      .edge-working-group .cta .wg-btn:hover, .edge-working-group .cta .wg-btn:focus {
-        background: #A51B1B;
-        text-decoration: none; }
-      .edge-working-group .cta .wg-btn i {
-        margin-left: 15px; }
+    font-weight: 400;
+}
+
+.edge-working-group .cta {
+    text-align: center;
+}
+
+.edge-working-group .cta .wg-btn {
+    background: #DA422F;
+    color: white;
+    padding: 8px 50px;
+    border-radius: 4px;
+    margin-top: 25px;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.edge-working-group .cta .wg-btn:hover, .edge-working-group .cta .wg-btn:focus {
+    background: #A51B1B;
+    text-decoration: none;
+}
+
+.edge-working-group .cta .wg-btn i {
+    margin-left: 15px;
+}
 
 .edge-email-signup {
-  background: #30739C;
-  color: white;
-  padding: 60px 0;
-  text-align: center;
-  margin-bottom: -50px; }
-  .edge-email-signup h2 {
+    background: #30739C;
+    color: white;
+    padding: 60px 0;
+    text-align: center;
+    margin-bottom: -50px;
+}
+
+.edge-email-signup h2 {
     text-align: center;
     color: white;
-    margin-bottom: 30px; }
-  .edge-email-signup .edge-interest-btn {
+    margin-bottom: 30px;
+}
+
+.edge-email-signup .edge-interest-btn {
     background: transparent;
     border: 1px solid white;
     border-radius: 4px;
     padding: 8px 35px;
     color: white;
-    display: inline-block; }
-    .edge-email-signup .edge-interest-btn i {
-      margin-left: 10px; }
-    .edge-email-signup .edge-interest-btn:hover, .edge-email-signup .edge-interest-btn:focus {
-      color: white;
-      text-decoration: none;
-      background: rgba(255, 255, 255, 0.3); }
+    display: inline-block;
+}
+
+.edge-email-signup .edge-interest-btn i {
+    margin-left: 10px;
+}
+
+.edge-email-signup .edge-interest-btn:hover, .edge-email-signup .edge-interest-btn:focus {
+    color: white;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.3);
+}
 
 /* End Edge landing */

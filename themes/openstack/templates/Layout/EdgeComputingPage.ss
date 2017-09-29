@@ -26,6 +26,108 @@
         <!-- /.container -->
         <a href="https://unsplash.com/search/photos/cell?photo=b_xciWkK8Pc" class="photo-credit" data-toggle="tooltip" data-placement="left" title="Photo by veeterzy" target="_blank"><i class="fa fa-info-circle"></i></a>
     </div>
+    <div class="red-div"></div>
+    <div class="opendev-promo">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <img src="https://d33wubrfki0l68.cloudfront.net/09a475df567776c51cd4257fe9752933f8856c2b/49731/images/edge/opendev-logo.svg" class="opendev-promo-logo" alt="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2>See how we advanced the future of edge computing at OpenDev 2017</h2>
+                    <p>
+                        Watch the opening keynotes from the new collaborative event for technical experts and operators with real world edge use cases.
+                    </p>
+                </div>
+            </div>
+            <div class="row video-wall-row">
+                <div class="col-md-3 col-sm-6 video-wall-item">
+                    <a href="https://youtu.be/VSj99z5G7Yc" target="_blank">
+                        <div class="video-wrapper small video-border">
+                            <div class="play-button">
+                                <img src="https://d33wubrfki0l68.cloudfront.net/ae6ec7ae079aebf50ba0432743f680ce40c26624/3c5ba/images/play-button.png">
+                            </div>
+                            <img class="video-image" src="https://img.youtube.com/vi/VSj99z5G7Yc/maxresdefault.jpg" alt="OpenDev Opening Keynotes: Jonathan Bryce">
+                        </div>
+                    </a>
+                    <p class="speaker">Jonathan Bryce</p>
+                    <p class="company">OpenStack Foundation</p>
+                </div>
+                <div class="col-md-3 col-sm-6 video-wall-item">
+                    <a href="https://youtu.be/BdIzryvX7gc" target="_blank">
+                        <div class="video-wrapper small video-border">
+                            <div class="play-button">
+                                <img src="https://d33wubrfki0l68.cloudfront.net/ae6ec7ae079aebf50ba0432743f680ce40c26624/3c5ba/images/play-button.png">
+                            </div>
+                            <img class="video-image" src="https://img.youtube.com/vi/BdIzryvX7gc/maxresdefault.jpg" alt="OpenDev Opening Keynotes: Kandan Kathirvel & Rodolfo Pacheco">
+                        </div>
+                    </a>
+                    <p class="speaker">Kandan Kathirvel & Rodolfo Pacheco</p>
+                    <p class="company">AT&T</p>
+                </div>
+                <div class="col-md-3 col-sm-6 video-wall-item">
+                    <a href="https://youtu.be/YHRYdiYRsHI" target="_blank">
+                        <div class="video-wrapper small video-border">
+                            <div class="play-button">
+                                <img src="https://d33wubrfki0l68.cloudfront.net/ae6ec7ae079aebf50ba0432743f680ce40c26624/3c5ba/images/play-button.png">
+                            </div>
+                            <img class="video-image" src="https://img.youtube.com/vi/YHRYdiYRsHI/maxresdefault.jpg" alt="OpenDev Opening Keynotes: Imad Sousou">
+                        </div>
+                    </a>
+                    <p class="speaker">Imad Sousou</p>
+                    <p class="company">Intel</p>
+                </div>
+            </div>
+            <div class="row video-wall-row">
+                <div class="col-md-3 col-sm-6 video-wall-item">
+                    <a href="https://youtu.be/FWVgNBKq-jQ" target="_blank">
+                        <div class="video-wrapper small video-border">
+                            <div class="play-button">
+                                <img src="https://d33wubrfki0l68.cloudfront.net/ae6ec7ae079aebf50ba0432743f680ce40c26624/3c5ba/images/play-button.png">
+                            </div>
+                            <img class="video-image" src="https://img.youtube.com/vi/FWVgNBKq-jQ/maxresdefault.jpg" alt="OpenDev Opening Keynotes: Venkatesh Palani">
+                        </div>
+                    </a>
+                    <p class="speaker">Venkatesh Palani</p>
+                    <p class="company">eBay</p>
+                </div>
+                <div class="col-md-3 col-sm-6 video-wall-item">
+                    <a href="https://youtu.be/BdIzryvX7gc" target="_blank">
+                        <div class="video-wrapper small video-border">
+                            <div class="play-button">
+                                <img src="https://d33wubrfki0l68.cloudfront.net/ae6ec7ae079aebf50ba0432743f680ce40c26624/3c5ba/images/play-button.png">
+                            </div>
+                            <img class="video-image" src="https://img.youtube.com/vi/BdIzryvX7gc/maxresdefault.jpg" alt="OpenDev Opening Keynotes: Kandan Kathirvel & Rodolfo Pacheco">
+                        </div>
+                    </a>
+                    <p class="speaker">Kandan Kathirvel & Rodolfo Pacheco</p>
+                    <p class="company">AT&T</p>
+                </div>
+                <div class="col-md-3 col-sm-6 video-wall-item">
+                    <a href="https://youtu.be/MlojvyJM71I" target="_blank">
+                        <div class="video-wrapper small video-border">
+                            <div class="play-button">
+                                <img src="https://d33wubrfki0l68.cloudfront.net/ae6ec7ae079aebf50ba0432743f680ce40c26624/3c5ba/images/play-button.png">
+                            </div>
+                            <img class="video-image" src="https://img.youtube.com/vi/MlojvyJM71I/maxresdefault.jpg"  alt="OpenDev Opening Keynotes: Mahadev Satyanarayanan" >
+                        </div>
+                    </a>
+                    <p class="speaker">Mahadev Satyanarayanan</p>
+                    <p class="company">Carnegie Mellon University</p>
+                </div>
+            </div>
+            <div class="row more-videos-button-container">
+                <div class="col-sm-12 col-md-3 more-videos-button">
+                    <a href="http://www.opendevconf.com/videos/" class="cta">
+                        Watch More Videos
+                        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- /.intro-header -->
     <div class="edge-overview">
         <div class="container">
@@ -39,32 +141,7 @@
             </div>
         </div>
     </div>
-    <div class="opendev-promo">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <img src="https://d33wubrfki0l68.cloudfront.net/09a475df567776c51cd4257fe9752933f8856c2b/49731/images/edge/opendev-logo.svg" class="opendev-promo-logo" alt="">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-9">
-                    <h2>Learn how we advanced edge computing at OpenDev 2017</h2>
-                    <p>
-                        200 technical experts and operators gathered to share real use cases, requirements and plans for future reference architectures around edge computing.
-                    </p>
-                </div>
-                <div class="col-sm-3">
-                    <a href="http://www.opendevconf.com/videos/" class="cta">
-                        Watch Videos
-                        <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                    </a>
-                    <!-- <div class="opendev-dates">
-                        September 7-8 | San Francisco, CA
-                    </div> -->
-                </div>
-            </div>
-        </div>
-    </div>
+
     <div class="edge-why-openstack">
         <div class="container">
             <div class="row">
@@ -263,20 +340,15 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-6">
                     <a href="http://openedgecomputing.org/" target="_blank">
                         <img src="https://d33wubrfki0l68.cloudfront.net/f395f3eb9e4ad700057f797aebc7cef8b7327a11/19d05/images/edge/open-edge.png" class="open-edge" alt="Open Edge Computing">
                     </a>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-6">
                     <a href="http://www.etsi.org/technologies-clusters/technologies/multi-access-edge-computing" target="_blank">
                         <img src="https://d33wubrfki0l68.cloudfront.net/d50408e3cdce034835af79f645ea4ff563956b09/92b88/images/edge/etsi.png" class="etsi" alt="ETSI">
                     </a>
-                </div>
-                <div class="col-sm-4">
-                    <h3 style="vertical-align:middle;padding-top:30px;"><a href="http://beyondtheclouds.github.io" target="_blank">
-                        The Discovery Initiative
-                        </a></h3>
                 </div>
             </div>
         </div>
