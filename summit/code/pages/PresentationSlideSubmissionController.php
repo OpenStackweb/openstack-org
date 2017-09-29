@@ -79,8 +79,8 @@ class PresentationSlideSubmissionController extends Page_Controller
 
 		Session::set('UploadMedia.SpeakerID', $speaker->ID);
 		
-		$mostRecentSummit = Summit::get_most_recent();
-		$presentations = $speaker->PublishedPresentations($mostRecentSummit->ID);
+		$activeSummit = Summit::get_active();
+		$presentations = $speaker->PublishedPresentations($activeSummit->ID);
 
 		// No presentations
 		if (!$presentations->exists()) {
@@ -129,9 +129,6 @@ class PresentationSlideSubmissionController extends Page_Controller
 			'HasError' => true
 		]);
 	}
-
-
-
 
 }
 

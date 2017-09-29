@@ -1583,4 +1583,28 @@ class PresentationSpeaker extends DataObject
 
         return $count ? round($sum/$count,1) : 0;
     }
+
+    /**
+     * @param ISummit $summit
+     */
+    public function registerUploadSlidesRequestEmail(ISummit $summit){
+        $notification            = new PresentationSpeakerUploadPresentationMaterialEmail();
+        $notification->SpeakerID = $this->ID;
+        $notification->SummitID  = $summit->ID;
+        $notification->SentDate  = MySQLDatabase56::nowRfc2822();
+        $notification->write();
+    }
+
+    /**
+     * @param ISummit $summit
+     * @return bool
+     */
+    public function hasUploadSlidesRequestEmail(ISummit $summit){
+        return PresentationSpeakerUploadPresentationMaterialEmail::get()->filter(
+            [
+                'SummitID'  => $summit->ID,
+                'SpeakerID' => $this->ID
+            ]
+        )->count() > 0;
+    }
 }

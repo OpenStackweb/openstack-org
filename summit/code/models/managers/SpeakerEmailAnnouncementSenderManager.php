@@ -258,47 +258,67 @@ final class SpeakerEmailAnnouncementSenderManager
     public function sendUploadSlidesAnnouncementBySummit(ISummit $current_summit, $batch_size)
     {
         return $this->tx_manager->transaction(function () use ($current_summit, $batch_size) {
-            list($count, $speakers) = $this->speaker_repository->searchSpeakerBySummitPaginatedForUploadSlidesAnnouncement($current_summit, 1, $batch_size, $current_summit->getExcludedTracksForUploadPresentationSlideDeck());
+            $sender_service = new PresentationSpeakerUploadSlidesNotificationEmailMessageSender();
+
+            $page      = 1;
+            $page_size = $batch_size;
+            $task      = $this->batch_repository->findByName(self::TaskName . '_SLIDE_UPLOAD_' . $current_summit->getIdentifier());
+
+            if (is_null($task)) {
+                //create task
+                $task = $this->batch_task_factory->buildBatchTask(self::TaskName . '_SLIDE_UPLOAD_' . $current_summit->getIdentifier(), 0, $page);
+                $this->batch_repository->add($task);
+            }
+
+            $page = $task->getCurrentPage();
+            echo "Processing Page " . $page . PHP_EOL;
+
+            list($page, $page_size, $count, $speakers) = $this->speaker_repository->searchBySummitSchedulePaginated
+            (
+                $current_summit,
+                $page,
+                $page_size
+            );
+
             $send                   = 0;
+            echo sprintf('total speakers %s - page count %s', $count, count($speakers)).PHP_EOL;
 
             foreach ($speakers as $speaker) {
-                /* @var DataList */
                 if(!$speaker instanceof IPresentationSpeaker) continue;
 
-                $presentations = $speaker->PublishedPresentations($current_summit->ID);
-
-                if (!$presentations->exists()) {
-                    echo "Skipping {$speaker->getName()}. Has no published presentations" . PHP_EOL;
+                // we need an email for this speaker ...
+                $email = $speaker->getEmail();
+                if (empty($email) || !EmailValidator::validEmail($email)){
+                    echo sprintf("Skipping %s (%s). Has not valid email", $speaker->getName(), $speaker->ID) . PHP_EOL;
                     continue;
                 }
 
-                if (!$speaker->Member()->exists() || !EmailValidator::validEmail($speaker->Member()->Email)) {
-                    echo $speaker->getName()." (".$speaker->Member()->Email . ") is not a valid email address. Skipping." . PHP_EOL;
+                $presentations  = $speaker->AllPublishedPresentations($current_summit->getIdentifier(), $current_summit->getExcludedTracksForUploadPresentationSlideDeck());
+
+                if($presentations->Count() == 0){
+                    echo sprintf("skipping speaker %s (%s) - no published presentations available", $speaker->getName(), $speaker->getEmail()).PHP_EOL;
                     continue;
                 }
 
-                $to      = $speaker->Member()->Email;
-                $subject = "Important Speaker Information for OpenStack Summit in {$current_summit->Title}";
+                if($speaker->hasUploadSlidesRequestEmail($current_summit)){
+                    echo sprintf("skipping speaker %s (%s) - email already sent!", $speaker->getName(), $speaker->getEmail()).PHP_EOL;
+                    continue;
+                }
 
-                $email = EmailFactory::getInstance()->buildEmail('do-not-reply@openstack.org', $to, $subject);
-
-                $email->setUserTemplate("upload-presentation-slides-email");
-                $email->populateTemplate([
-                    'Speaker'       => $speaker,
+                $sender_service->send([
                     'Presentations' => $presentations,
-                    'Summit'        => $current_summit
+                    'Speaker'       => $speaker,
+                    'Summit'        => $current_summit,
                 ]);
 
-                $email->send();
-
-                $notification            = new PresentationSpeakerUploadPresentationMaterialEmail();
-                $notification->SpeakerID = $speaker->ID;
-                $notification->SummitID  = $current_summit->ID;
-                $notification->SentDate  = MySQLDatabase56::nowRfc2822();
-                $notification->write();
                 ++$send;
-                echo 'Email sent to ' . $to . ' (' . $speaker->getName() . ')' . PHP_EOL;
+
+                echo sprintf('sending email to %s', $email) . PHP_EOL;
             }
+
+            $task->updatePage($count, $page_size);
+            $task->write();
+
             return $send;
         });
     }

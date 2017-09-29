@@ -486,4 +486,15 @@ interface IPresentationSpeaker extends IEntity
      */
     public function isModeratorFor(ISummit $summit);
 
+    /**
+     * @param ISummit $summit
+     */
+    public function registerUploadSlidesRequestEmail(ISummit $summit);
+
+    /**
+     * @param ISummit $summit
+     * @return bool
+     */
+    public function hasUploadSlidesRequestEmail(ISummit $summit);
+
 }

@@ -66,7 +66,7 @@ interface ISpeakerRepository extends IEntityRepository
      * @param string $sort_dir
      * @return array
      */
-    public function searchBySummitSchedulePaginated(ISummit $summit, $page= 1, $page_size = 10, $term = '', $sort_by = 'id', $sort_dir = 'asc');
+    public function searchBySummitSchedulePaginated(ISummit $summit, $page = 1, $page_size = 10, $term = '', $sort_by = 'id', $sort_dir = 'asc');
 
     /**
      * @param int $page
