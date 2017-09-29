@@ -40,7 +40,7 @@ final class SangriaPage_Controller extends AdminController implements Permission
     function init()
     {
 
-        if ($this->request->param('Action') == 'ViewSurveyFreeAnswersList') {
+        if ($this->request->param('Action') == 'ViewSurveyFreeAnswersList' || $this->request->param('Action') == 'ViewSurveyFreeAnswersStats') {
             if (!Permission::check("FREE_TEXT_TAGGING_ACCESS")) {
                 return Security::permissionFailure();
             }
