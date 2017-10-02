@@ -131,7 +131,8 @@
 }
 
 .opendev-promo {
-    background: black url(https://www.openstack.org/assets/edge/earth.png) no-repeat center left;
+    background: black url(https://www.openstack.org/assets/edge/earth.png) no-repeat top left;
+    background-position: -20% 0%;
     padding: 40px 0;
     color: white;
 }
@@ -258,6 +259,12 @@
     /* Rectangle 6: */
     background: #ED285E;
     height: 11px !important;
+}
+
+.white-div{
+    /* Rectangle 6: */
+    background: #fff;
+    height: 5px !important;
 }
 
 .edge-resources .video-wrapper, .opendev-promo .video-wrapper {

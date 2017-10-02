@@ -27,6 +27,7 @@
         <a href="https://unsplash.com/search/photos/cell?photo=b_xciWkK8Pc" class="photo-credit" data-toggle="tooltip" data-placement="left" title="Photo by veeterzy" target="_blank"><i class="fa fa-info-circle"></i></a>
     </div>
     <div class="red-div"></div>
+    <div class="white-div"></div>
     <div class="opendev-promo">
         <div class="container">
             <div class="row">
