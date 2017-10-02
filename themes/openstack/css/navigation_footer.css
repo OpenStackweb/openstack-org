@@ -1,0 +1,256 @@
+footer {
+    background: #333333;
+    padding: 70px 0;
+    margin-top: 50px;
+}
+
+.footer-links h3 {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.footer-links ul {
+    margin-left: 0;
+    padding-start: 0;
+    -webkit-padding-start: 0;
+}
+
+.footer-links ul li a {
+    color: #aaa;
+    font-size: 12px;
+    font-weight: 400;
+    list-style: none;
+    margin-left: 0;
+}
+
+.footer-links ul li {
+    list-style: none;
+}
+
+.social-icons {
+    width: 40px;
+    min-height: 40px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.footer-twitter {
+    background: url('https://www.openstack.org/themes/openstack/images/footer-twitter.png') no-repeat;
+}
+
+.footer-twitter:hover {
+    background: url('https://www.openstack.org/themes/openstack/images/footer-twitter-hover.png') no-repeat;
+}
+
+.footer-facebook {
+    background: url('https://www.openstack.org/themes/openstack/images/footer-facebook.png') no-repeat;
+}
+
+.footer-facebook:hover {
+    background: url('https://www.openstack.org//themes/openstack/images/footer-facebook-hover.png') no-repeat;
+}
+
+.footer-linkedin {
+    background: url('https://www.openstack.org//themes/openstack/images/footer-linkedin.png') no-repeat;
+}
+
+.footer-linkedin:hover {
+    background: url('https://www.openstack.org/https://www.openstack.org//themes/openstack/images/footer-linkedin-hover.png') no-repeat;
+}
+
+.footer-youtube {
+    background: url('https://www.openstack.org//themes/openstack/images/footer-youtube.png') no-repeat;
+}
+
+.footer-youtube:hover {
+    background: url('https://www.openstack.org//themes/openstack/images/footer-youtube-hover.png') no-repeat;
+}
+
+.newsletter-form {
+    margin: 10px 0 30px;
+    width: 100%;
+}
+
+.newsletter-form label {
+    color: #aaa;
+    font-size: 12px;
+    font-weight: 300;
+    display: block;
+}
+
+.newsletter-input {
+    display: inline-block;
+    background: transparent;
+    border: 2px solid #888;
+    border-radius: 4px;
+    color: #888;
+    font-size: 12px;
+    font-weight: 400;
+    padding: 10px 15px;
+    width: 70%;
+}
+
+@media (max-width: 767px) {
+    .newsletter-input {
+        width: 70%;
+    }
+}
+
+.newsletter-input::-webkit-input-placeholder {
+    color: #888;
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+.newsletter-input:-moz-placeholder {
+    /* Firefox 18- */
+    color: #888;
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+.newsletter-input::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #888;
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+.newsletter-input:-ms-input-placeholder {
+    color: #888;
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+.newsletter-input:focus {
+    outline: none;
+    border: 2px solid #666;
+}
+
+.newsletter-btn {
+    margin-left: 1%;
+    display: inline-block;
+    background: transparent;
+    border: 2px solid #30739C;
+    border-radius: 4px;
+    color: #30739C;
+    font-size: 12px;
+    font-weight: 400;
+    padding: 10px 15px;
+    text-transform: uppercase;
+    width: 27%;
+}
+
+@media (max-width: 767px) {
+    .newsletter-btn {
+        width: 18%;
+        margin-left: 2%;
+        padding: 10px;
+    }
+}
+
+.newsletter-btn:hover {
+    border: 2px solid #888;
+    color: #999;
+}
+
+.fine-print {
+    margin-top: 20px;
+    color: #aaa;
+    font-size: 12px;
+}
+
+.fine-print a {
+    color: #aaa;
+    text-decoration: underline;
+}
+
+.fine-print a:hover {
+    color: #fff;
+}
+
+.footer-bottom {
+    background: #222;
+    padding: 15px 0;
+    text-align: center;
+    width: 100%;
+}
+
+.feedback-input {
+    display: inline-block;
+    background: #222;
+    border: 2px solid #444;
+    border-radius: 4px;
+    color: #777;
+    font-size: 12px;
+    font-weight: 400;
+    padding: 10px 20px;
+    width: 310px;
+}
+
+@media (max-width: 767px) {
+    .feedback-input {
+        width: 70%;
+    }
+}
+
+.feedback-input::-webkit-input-placeholder {
+    color: #555;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.feedback-input:-moz-placeholder {
+    /* Firefox 18- */
+    color: #555;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.feedback-input::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #555;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.feedback-input:-ms-input-placeholder {
+    color: #555;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.feedback-input:focus {
+    outline: none;
+    border: 2px solid #666;
+}
+
+.feedback-btn {
+    margin-left: 11px;
+    display: inline-block;
+    background: #222;
+    border: 2px solid #666;
+    border-radius: 4px;
+    color: #777;
+    font-size: 12px;
+    font-weight: 400;
+    padding: 10px 30px;
+}
+
+@media (max-width: 767px) {
+    .feedback-btn {
+        width: 18%;
+        margin-left: 2%;
+        padding: 10px;
+    }
+}
+
+.feedback-btn:hover {
+    border: 2px solid #888;
+    color: #999;
+}

@@ -248,6 +248,7 @@ class Page_Controller extends ContentController
         'logout',
         'FeedbackForm',
         'getNavigationMenu',
+        'getNavigationFooter',
         'dismissUpdateProfileModal',
     );
 
@@ -555,6 +556,17 @@ class Page_Controller extends ContentController
     public function getNavigationMenu() {
         $menu_html = $this->renderWith('Navigation_menu',array('WidgetCall'=>true))->getValue();
         $data = array('html'=>$menu_html);
+        $jsonp = "jsonCallback(".json_encode($data).")";
+        $response = new SS_HTTPResponse();
+        $response->setStatusCode(200);
+        $response->addHeader('Content-Type', 'application/javascript');
+        $response->setBody($jsonp);
+        return $response;
+    }
+
+    public function getNavigationFooter(){
+        $footer_html = $this->renderWith('Navigation_Footer')->getValue();
+        $data = array('html'=> $footer_html);
         $jsonp = "jsonCallback(".json_encode($data).")";
         $response = new SS_HTTPResponse();
         $response->setStatusCode(200);

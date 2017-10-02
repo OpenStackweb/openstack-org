@@ -19,7 +19,7 @@
     var protocol = pathArray[0];
     var host    = pathArray[2];
     var origin     = protocol + '//' + host;
-    console.log('menu-widget: current origin '+ origin);
+    console.log('footer-widget: current origin '+ origin);
     /******** Load jQuery if not present *********/
     if (window.jQuery === undefined || window.jQuery.fn.jquery !== '1.4.2') {
         var script_tag = document.createElement('script');
@@ -55,16 +55,22 @@
     /******** Our main function ********/
     function main() {
         jQuery(document).ready(function($) {
+            var container = $('#footer_widget_container');
+            if(container.length == 0){
+                window.alert("In oder to include footer widget , you need a container with id 'footer_widget_container' defined on page!.");
+                throw 1;
+                return;
+            }
             /******* Load CSS *******/
             var css_link = $("<link>", {
                 rel: "stylesheet",
                 type: "text/css",
-                href: origin+"/themes/openstack/css/navigation_menu.css"
+                href: origin+"/themes/openstack/css/navigation_footer.css"
             });
             css_link.appendTo('head');
 
             /******* Load HTML *******/
-            var jsonp_url = origin+"/home/getNavigationMenu";
+            var jsonp_url = origin+"/home/getNavigationFooter";
 
             $.ajax({
                 type: 'GET',
@@ -74,9 +80,7 @@
                 contentType: "application/json",
                 dataType: 'jsonp',
                 success: function(data) {
-                    $('#menu_widget_container').html(data.html);
-                    $.getScript(origin+"/themes/openstack/javascript/navigation.js");
-
+                    container.html(data.html);
                 },
                 error: function(e) {
                     console.log(e.message);
