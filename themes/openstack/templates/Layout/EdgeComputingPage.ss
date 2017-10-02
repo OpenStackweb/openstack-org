@@ -26,8 +26,18 @@
         <!-- /.container -->
         <a href="https://unsplash.com/search/photos/cell?photo=b_xciWkK8Pc" class="photo-credit" data-toggle="tooltip" data-placement="left" title="Photo by veeterzy" target="_blank"><i class="fa fa-info-circle"></i></a>
     </div>
-    <div class="red-div"></div>
-    <div class="white-div"></div>
+    <!-- /.intro-header -->
+    <div class="edge-overview">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-10 col-sm-push-1">
+                    <p>
+                        Today, almost every industry sector needs near-instant data to be successful. <strong>Edge computing pushes applications, data and computing power services away from centralized points to the logical extremes of a network.</strong> It enables companies to put the right data in the right place at the right time, supporting fast and secure access. The result is an improved client experience and, oftentimes, a valuable strategic advantage. The decision to implement an edge computing architecture is typically driven by the need for location optimization, security, and most of all, speed.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="opendev-promo">
         <div class="container">
             <div class="row">
@@ -125,19 +135,6 @@
                         Watch More Videos
                         <i class="fa fa-chevron-right" aria-hidden="true"></i>
                     </a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- /.intro-header -->
-    <div class="edge-overview">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-8 col-sm-push-2">
-                    <h2>Edge Overview</h2>
-                    <p>
-                        Today, almost every industry sector needs near-instant data to be successful. <strong>Edge computing pushes applications, data and computing power services away from centralized points to the logical extremes of a network.</strong> It enables companies to put the right data in the right place at the right time, supporting fast and secure access. The result is an improved client experience and, oftentimes, a valuable strategic advantage. The decision to implement an edge computing architecture is typically driven by the need for location optimization, security, and most of all, speed.
-                    </p>
                 </div>
             </div>
         </div>
