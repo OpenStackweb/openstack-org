@@ -11,7 +11,7 @@
         </a>
     </div>
     <div class="col-md-4">
-        <img src="assets/rocket.png" />
+        <img src="themes/openstack/images/community/rocket.png" />
     </div>
 </div>
 
@@ -112,7 +112,7 @@
     <div class="col-md-12 help-managers">
         <h4>OpenStack Foundation Community Managers</h4>
         <div class="community-manager">
-            <img src="assets/manager.png" />
+            <img src="themes/openstack/images/community/manager.png" />
             <div class="manager-name">Tom Fifield</div>
             <div class="manager-title">Community Manager</div>
             <div class="manager-location">Taipei City, Taiwan</div>
@@ -121,7 +121,7 @@
     <div class="col-md-12 help-ambassadors">
         <h4>Global OpenStack Ambassadors</h4>
         <div class="ambassador">
-            <img src="assets/ambassador.png" />
+            <img src="themes/openstack/images/community/ambassador.png" />
             <div class="ambassador-name">Akihiro Hasegawa</div>
             <div class="ambassador-location">Tokyo, Japan</div>
         </div>
@@ -131,7 +131,7 @@
 <div class="row communicate">
     <div class="col-md-12 communicate-header">
         <div class="communicate-title">
-            <img class="communicate-icon" src="assets/message.png" />
+            <img class="communicate-icon" src="themes/openstack/images/community/message.png" />
             How to communicate
         </div>
         <p>
@@ -194,7 +194,7 @@
 
 <div class="row quick-links">
     <div class="quick-links-banner">
-        <img src="assets/quicklinks.png" />
+        <img src="themes/openstack/images/community/quicklinks.png" />
     </div>
     <div class="col-md-12 quick-links-header">
         <div class="pre-title"><span>THE QUICK LINKS</span></div>
