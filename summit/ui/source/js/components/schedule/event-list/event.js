@@ -37,7 +37,6 @@ class Event extends PureComponent {
     }
 
     render() {
-        console.log('render event')
 
         const {
             event,

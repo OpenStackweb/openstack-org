@@ -374,3 +374,8 @@ a.profile-pic-wrapper {
     border-radius: 2px;
     margin-top: 10px;
 }
+
+#avgRate{
+    font-size: 22px;
+    vertical-align: middle;
+}

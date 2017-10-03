@@ -59,14 +59,15 @@
                                 has_rsvp        : <%if $Event.hasRSVP() %>true<% else %>false<% end_if %>,
                                 rsvp_external   : <%if $Event.isExternalRSVP() %>true<% else %>false<% end_if %>,
                                 rsvp_seat_type  : "{$Event.CurrentRSVPSubmissionSeatType}",
-                                avg_rate        : "{$Event.getAvgRate()}",
+                                avg_rate        : {$Event.getAvgRate().JS},
                                 allow_feedback  : <% if Event.AllowFeedBack %>true<% else %>false<% end_if %>,
                                 has_ended       : <% if Event.hasEnded %>true<% else %>false<% end_if %>,
+
                                 <% if $Event.ClassName == 'Presentation' %>
+                                    to_record       : <% if $Event.ToRecord == 1 %>true<% else %>false<% end_if %>,
                                     moderator_id: {$Event.ModeratorID},
                                     speakers_id : [<% loop $Event.Speakers %>{$ID},<% end_loop %>],
                                     level       : '{$Event.Level}',
-                                    to_record   : {$Event.ToRecord},
                                 <% end_if %>
 
                                 <% if $CurrentMember && $CurrentMember.isOnMySchedule($Top.Event.ID) %>
@@ -85,13 +86,14 @@
                            <% loop $Event.getFeedback() %>
                                 event.comments.push(
                                     {
-                                        rate:  "{$getRate.JS}",
+                                        id:     $ID,
+                                        rate:   {$getRate.JS},
                                         date : "{$getDateNice.JS}",
                                         note : "{$getNote.JS}",
                                     });
                             <% end_loop %>
                     </script>
-                    <event-action-buttons event="{ event }" current_user="{ current_user }"></event-action-buttons>
+                    <div id="action-buttons-container"></div>
                 <div class="row info_item">
                     <div class="col-md-2 col-xs-2 info_item_icon"><i class="fa fa-clock-o icon-clock"></i></div>
                     <div class="col-md-10 col-xs-10 info_item_text">$Event.DateNice()</div>
@@ -171,7 +173,7 @@
                                     tweet: '<%t Summit.TweetText %>'
                                 };
                     </script>
-                    <share-buttons share_info="{ share_info }"></share-buttons>
+                    <div id="share-buttons-container"></div>
                 </div>
             </div>
         </div>
@@ -201,9 +203,11 @@
     </div>
 <% end_if %>
 
-<feedback-form-comments current_user="{ current_user }" event="{ event }" limit="5"></feedback-form-comments>
+<div id="comments-container"></div>
 
-$ModuleJS('event-detail')
+$ModuleJS('schedule-event-details')
+$ModuleCSS('schedule-event-details')
 $ModuleJS('global-search')
+$ModuleCSS('global-search')
 <div id="fb-root"></div>
 

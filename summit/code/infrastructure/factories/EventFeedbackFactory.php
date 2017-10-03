@@ -26,10 +26,10 @@ final class EventFeedbackFactory implements IEventFeedbackFactory
     {
         $event_feedback           = new SummitEventFeedback();
         $event_feedback->Note     = trim($data['comment']);
-        $event_feedback->Rate     = $data['rating'];
+        $event_feedback->Rate     = intval($data['rating']);
         $event_feedback->Approved = 1;
-        $event_feedback->OwnerID  = $data['member_id'];
-        $event_feedback->EventID  = $data['event_id'];
+        $event_feedback->OwnerID  = intval($data['member_id']);
+        $event_feedback->EventID  = intval($data['event_id']);
 
         return $event_feedback;
     }

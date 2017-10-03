@@ -1,36 +1,5 @@
 <div class="container-fluid">
     <div class="container section1">
-        <div class="row schedule-title-wrapper">
-            <div class="col-sm-5 col-main-title">
-                <h1 style="text-align:left;">Full Schedule</h1>
-                <% if $goback %>
-                <div class="go-back">
-                    <a href="#" onclick="window.history.back(); return false;"><< Go back </a>
-                </div>
-                <% end_if %>
-            </div>
-            <div class="col-sm-2 col-log-in">
-                <% if CurrentMember %>
-                    <a title="logout" class="action btn btn-default" id="login-button" href="/Security/logout/?BackURL={$Top.Link(full)}"><i class="fa fa-sign-out" aria-hidden="true"></i>Log Out</a>
-                <% else %>
-                    <a title="Log in to create your own Schedule and Watch List" class="action btn btn-default" id="login-button" href="Security/login?BackURL={$Top.Link(full)}"><i class="fa fa-user"></i>Log in</a>
-                <% end_if %>
-            </div>
-            <div class="col-sm-5">
-                <form action="{$Top.Link('/full/pdf')}">
-                    <button type="submit" class="btn btn-primary export_schedule" >Export PDF</button>
-                    <select id="full-schedule-filter" name="sort">
-                        <option value="day">Sort By Day</option>
-                        <option value="track">Sort By Track</option>
-                        <option value="event_type">Sort By Event Type</option>
-                    </select>
-                    <label class="btn btn-default" id="show_desc">
-                        <input type="checkbox" autocomplete="off" name="show_desc"> Show Description
-                    </label>
-               </form>
-            </div>
-        </div>
-        <hr/>
         <script type="application/javascript">
             var events       = {};
             var events_by_id = {};
@@ -54,13 +23,16 @@
                 events_by_id[event_{$ID}.id] = event_{$ID};
             <% end_loop %>
 
-            var should_show_venues = <% if $Summit.ShouldShowVenues %> 1 <% else %> 0 <% end_if %>;
-            var is_logged_user     = <% if $CurrentMember %> 1 <% else %> 0 <% end_if %>;
+            var should_show_venues = <% if $Summit.ShouldShowVenues %> true <% else %> false <% end_if %>;
+            var is_logged_user     = <% if $CurrentMember %> true <% else %> false <% end_if %>;
             var summit_id          = {$Summit.ID};
-
+            var base_url           = "{$Top.Link}";
+            var pdfUrl             = "{$Top.Link(/full/pdf)}";
+            var backUrl            = "{$Top.Link(/full)}";
+            var goBack             =  <%if $goback %>true<% else %>false<% end_if %>;
         </script>
-        <schedule-full-schedule is_logged_user="{ is_logged_user }" events="{ events }" base_url="{$Top.Link}" summit_id="{ summit_id }" should_show_venues="{ should_show_venues }"></schedule-full-schedule>
+        <div id="full-schedule-view-container"></div>
     </div>
 </div>
-
 $ModuleJS('full-schedule-view')
+$ModuleCSS('full-schedule-view')

@@ -187,12 +187,6 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         Requirements::block("summit/css/schedule-grid.css");
         Requirements::css("summit/css/summitapp-event.css");
         Requirements::css('themes/openstack/css/validation.errors.css');
-        Requirements::javascript("summit/javascript/schedule/event-detail-page.js");
-
-
-        //JS libraries for feedback form and list
-        Requirements::javascript('marketplace/code/ui/frontend/js/star-rating.min.js');
-        Requirements::css("marketplace/code/ui/frontend/css/star-rating.min.css");
 
         $token = Session::get(self::EventShareByEmailTokenKey);
 
@@ -374,7 +368,6 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         if (is_null($this->Summit())) return $this->httpError(404, 'Sorry, summit not found');
 
         $schedule = $this->Summit()->getSchedule();
-        Requirements::javascript("summit/javascript/schedule/full-schedule-page.js");
 
         return $this->renderWith(
             ['SummitAppFullSchedulePage', 'SummitPage', 'Page'],
