@@ -350,7 +350,7 @@
                 </div>
                 <div class="col-sm-4">
                         <a href="http://beyondtheclouds.github.io" target="_blank">
-                            <img src="themes/images/edge-computing/discovery-sticker.png" class="discover" alt="beyondtheclouds">
+                            <img src="themes/openstack/images/edge-computing/discovery-sticker.png" class="discover" alt="beyondtheclouds">
                         </a>
                 </div>
             </div>
