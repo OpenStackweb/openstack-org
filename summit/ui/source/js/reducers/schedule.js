@@ -7,7 +7,9 @@ import {
     TOGGLE_FILTERS,
     RECEIVE_EVENTS,
     UNSYNC_CALENDAR,
-    CALENDAR_SYNCD
+    CALENDAR_SYNCD,
+    REQUESTING_EVENTS,
+    RECEIVE_EVENTS_FULL
 } from '../actions'
 
 import Filter from './tools/filter'
@@ -29,12 +31,17 @@ const DEFAULT_STATE = {
     bulk: [],
     events: [],
     filtered: [],
+    loading: false,
 }
 
 const ScheduleReducer = (state = DEFAULT_STATE, action) => {
     const { type, payload } = action
     switch (type) {
-
+        case REQUESTING_EVENTS:
+            return {
+                ...state,
+                loading: true,
+            }
         case CHANGE_VIEW:
             var { view } = payload
 
@@ -51,20 +58,21 @@ const ScheduleReducer = (state = DEFAULT_STATE, action) => {
                 [view.type]: view.value
             }, FILTER_URL_EXCLUDE)
 
-
             return { ...state, view, filters, events: [], bulk: [] }
 
-
         case RECEIVE_EVENTS:
-            var { events } = payload
+            var { events } = payload.response;
 
             // Get the new list of filtered events.
             var filtered = Filter.events(
                 state.filters.values, events, ScheduleProps.summit
             )
 
-            return { ...state, events, filtered }
+            return { ...state, events, filtered, loading: false}
 
+        case RECEIVE_EVENTS_FULL:
+
+            return { ...state, events: payload.response, loading: false}
 
         case UPDATE_EVENT:
             var { eventId, mutator } = payload
@@ -83,7 +91,6 @@ const ScheduleReducer = (state = DEFAULT_STATE, action) => {
             })
 
             return { ...state, events, filtered, bulk }
-
 
         case SET_FILTERS:
             var values = { ...state.filters.values, ...payload.values }

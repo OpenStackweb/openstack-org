@@ -10,6 +10,7 @@ import {
 import ScheduleMainView, { VIEW_DAYS, VIEW_TRACKS, VIEW_LEVELS } from './schedule/main-view'
 import ScheduleEventList from './schedule/event-list'
 import ScheduleMainFilter from './schedule/main-filter'
+import { AjaxLoader } from '~core-components/ajaxloader';
 
 class ScheduleGrid extends Component {
 
@@ -47,6 +48,7 @@ class ScheduleGrid extends Component {
         const {view, events, filtered, changeView } = this.props
         return (
         <div>
+            <AjaxLoader show={ this.props.loading } size={ 120 }/>
             <ScheduleMainView
             view={view}
             changeView={changeView}
@@ -95,9 +97,10 @@ ScheduleGrid.propTypes = {
 
 function mapStateToProps(state) {
     return {
-        view: state.schedule.view,
-        events: state.schedule.events,
-        filtered: state.schedule.filtered,
+        view     : state.schedule.view,
+        events   : state.schedule.events,
+        filtered : state.schedule.filtered,
+        loading  : state.schedule.loading,
     }
 }
 

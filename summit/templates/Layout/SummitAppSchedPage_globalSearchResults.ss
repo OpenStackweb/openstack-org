@@ -34,11 +34,16 @@
                             speakers : {},
                             sponsors : {},
                             event_types:{},
+                            event_type_ids: [],
                             locations : {},
                             tags: {},
+                            tag_ids:[],
                             tracks : {},
+                            track_ids : [],
                             category_groups: {},
+                            category_group_ids: [],
                             presentation_levels: {},
+                            presentation_level_ids: [],
                             current_user: null,
                             should_show_venues: <% if $Summit.ShouldShowVenues %>true<% else %>false<% end_if %>
                         };
@@ -165,7 +170,7 @@
                                 moderator_id: {$ModeratorID},
                                 speakers_id : [<% loop Speakers %>{$ID},<% end_loop %>],
                                 level : '{$Level}',
-                                to_record : {$ToRecord},
+                                to_record : <% if $ToRecord %>true<% else %>false<% end_if %>,
                             <% end_if %>
                             <% if $CurrentMember && $CurrentMember.isOnMySchedule($ID) %>
                                 going      : true,
@@ -188,6 +193,7 @@
                             ],
                             url: "{$getLink(show)}",
                             social_summary : "{$SocialSummary.JS}",
+                            summit_id: {$Summit.ID},
                         };
                         summit.events.push(event_{$ID});
                         summit.dic_events[{$ID}] = event_{$ID};
@@ -195,8 +201,28 @@
 
                 </script>
 
-                <event-list summit="{ summit }" default_event_color={'#757575'} search_url="{$Top.Link(global-search)}" base_url="{$Top.Link}" ></event-list>
 
+                <script type="text/javascript">
+                    window.ReactScheduleGridProps = {
+                        ScheduleProps : {
+                            month: "{$Summit.Month}",
+                            summit: summit,
+                            base_url: "{$Top.Link}",
+                            search_url: "{$Top.Link(global-search)}",
+                        },
+                        filtered : [],
+                        events: summit.events,
+                        default_event_color: '#757575'
+                    };
+                    $(function () {
+                        $("#MemberLoginForm_LoginForm").submit(function(){
+                            console.log("setting fragment");
+                            $("#fragment").val(window.location.hash);
+                        });
+                    });
+                </script>
+
+                <div id="search-result-event-list"></div>
             </div>
         </div>
     </div>
@@ -243,5 +269,7 @@
     </div>
     <% end_if %>
 </div>
-$ModuleJS('event-list')
+$ModuleJS('search-result-event-list')
+$ModuleCSS('search-result-event-list')
 $ModuleJS('global-search')
+$ModuleCSS('global-search')

@@ -680,10 +680,6 @@ abstract class AbstractRestfulJsonApi extends Controller
         if (empty($referer)) {
             return false;
         }
-        //validate
-        if (!Director::is_ajax()) {
-            return false;
-        }
         return Director::is_site_url($referer);
     }
 }

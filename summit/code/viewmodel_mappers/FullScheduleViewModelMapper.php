@@ -49,7 +49,8 @@ final class FullScheduleViewModelMapper implements IViewModelMapper
             if (!isset($events[$index])) $events[$index] = array();
 
             $events[$index][] = [
-                'id'          => $event->ID,
+                'id'          => intval($event->ID),
+                'summit_id'   => intval($event->Summit->ID),
                 'start_time'  => $event->getStartTime(),
                 'end_time'    => $event->getEndTime(),
                 'title'       => $event->Title,

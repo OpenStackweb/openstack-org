@@ -1,5 +1,5 @@
-import ScheduleApi from '../schedule/schedule-api';
-import { getRequest, putRequest, createAction, deleteRequest } from "~core-utils/actions";
+import { getRequest, putRequest, createAction, deleteRequest, postRequest } from "~core-utils/actions";
+import URI from "urijs";
 
 export const ScheduleProps = {
     month: null,
@@ -9,13 +9,17 @@ export const ScheduleProps = {
 }
 
 // Reducers
-export const CHANGE_VIEW = 'CHANGE_VIEW'
-export const SET_FILTERS = 'SET_FILTERS'
-export const UPDATE_EVENT = 'UPDATE_EVENT'
-export const TOGGLE_FILTERS = 'TOGGLE_FILTERS'
-export const RECEIVE_EVENTS = 'RECEIVE_EVENTS'
-export const UNSYNC_CALENDAR = 'UNSYNC_CALENDAR'
-export const CALENDAR_SYNCD = 'CALENDAR_SYNCD'
+export const CHANGE_VIEW = 'CHANGE_VIEW';
+export const SET_FILTERS = 'SET_FILTERS';
+export const UPDATE_EVENT = 'UPDATE_EVENT';
+export const TOGGLE_FILTERS = 'TOGGLE_FILTERS';
+export const RECEIVE_EVENTS = 'RECEIVE_EVENTS';
+export const RECEIVE_EVENTS_FULL = 'RECEIVE_EVENTS_FULL';
+export const REQUESTING_EVENTS = 'REQUESTING_EVENTS';
+export const UNSYNC_CALENDAR = 'UNSYNC_CALENDAR';
+export const CALENDAR_SYNCD = 'CALENDAR_SYNCD';
+export const SUBMITING_NEW_COMMENT = 'SUBMITING_NEW_COMMENT';
+export const SUBMITTED_NEW_COMMENT = 'SUBMITTED_NEW_COMMENT';
 
 // Application constants.
 export const DEFAULT_FILTERS = {
@@ -34,18 +38,15 @@ export const DEFAULT_VIEWS = {
     [VIEW_LEVELS]: null,
 }
 
-export const VIEW_DAYS   = 'day'
-export const VIEW_TRACKS = 'track'
-export const VIEW_LEVELS = 'level'
-export const EVENT_FIELD_DETAIL = '_detail'
-export const EVENT_FIELD_LOADED = '_loaded'
-export const EVENT_FIELD_EXPANDED = '_expanded'
+export const VIEW_DAYS   = 'day';
+export const VIEW_TRACKS = 'track';
+export const VIEW_LEVELS = 'level';
+export const EVENT_FIELD_DETAIL = '_detail';
+export const EVENT_FIELD_LOADED = '_loaded';
+export const EVENT_FIELD_EXPANDED = '_expanded';
 
 const CALENDAR_ERROR_MSG = 'Some events failed to update.';
 const API_BASE_URL   = 'api/v1/summits/@SUMMIT_ID/schedule';
-
-
-ScheduleApi.on('error', () => $('#events-container').ajax_loader('stop'))
 
 // Redux Action creators.
 export const loadFilters = () => {
@@ -102,7 +103,7 @@ export const setFilters = (values, expanded, calSync) => {
 }
 
 export const clearFilters = () => {
-    const { summit } = ScheduleProps
+    const { summit } = ScheduleProps;
     let cal_sync = (summit.current_user) ? summit.current_user.cal_sync : false;
     return setFilters({ ...DEFAULT_FILTERS }, false, cal_sync);
 }
@@ -113,34 +114,52 @@ export const toggleFilters = () => {
 
 export const changeView = (type, value) => {
     return dispatch => {
-
-        const { summit } = ScheduleProps
-
-        ScheduleApi.one('beforeEventsRetrieved', schedule => {
-            $('#events-container').ajax_loader()
-        })
-
-        ScheduleApi.one('eventsRetrieved', schedule => {
-            $('#events-container').ajax_loader('stop')
-            dispatch({ type: RECEIVE_EVENTS, payload: schedule })
-        })
-
+        const { summit } = ScheduleProps;
         switch (type) {
             case VIEW_DAYS:
-            value = value || Object.keys(ScheduleProps.summit.dates)[0]
-            ScheduleApi.getEventByDay(summit.id, value); break
+            value = value || Object.keys(ScheduleProps.summit.dates)[0];
+            loadEventsByDay(summit.id, value)(dispatch);
+            break
             case VIEW_TRACKS:
-            value = value || Object.keys(ScheduleProps.summit.tracks)[0]
-            ScheduleApi.getEventByTrack(summit.id, value); break
+            value = value || Object.keys(ScheduleProps.summit.tracks)[0];
+            loadEventsByTrack(summit.id, value)(dispatch);
+            break;
             case VIEW_LEVELS:
-            value = value || Object.keys(ScheduleProps.summit.presentation_levels)[0].toLowerCase()
-            ScheduleApi.getEventByLevel(summit.id, value); break
+            value = value || Object.keys(ScheduleProps.summit.presentation_levels)[0].toLowerCase();
+            loadEventsByLevel(summit.id, value)(dispatch);
+            break;
         }
-
         dispatch({ type: CHANGE_VIEW,
             payload: { view: { type, value } }
-        })
+        });
     }
+}
+
+const loadEventsByDay = (summitId, day) => (dispatch) => {
+    return getRequest(
+        createAction(REQUESTING_EVENTS),
+        createAction(RECEIVE_EVENTS),
+        `api/v1/summits/${summitId}/schedule`,
+        errorHandler
+    )({ day})(dispatch);
+}
+
+const loadEventsByTrack = (summitId, track) => (dispatch) => {
+    return getRequest(
+        createAction(REQUESTING_EVENTS),
+        createAction(RECEIVE_EVENTS),
+        `api/v1/summits/${summitId}/schedule/track`,
+        errorHandler
+    )({ track})(dispatch);
+}
+
+const loadEventsByLevel = (summitId, level) => (dispatch) => {
+    return getRequest(
+        createAction(REQUESTING_EVENTS),
+        createAction(RECEIVE_EVENTS),
+        `api/v1/summits/${summitId}/schedule/level`,
+        errorHandler
+    )({ level})(dispatch);
 }
 
 export const loadEventDetail = eventId => {
@@ -196,7 +215,6 @@ export const addEventToRsvp = event => {
     if (event.rsvp_external) {
         return addEventToSchedule(event);
     }
-
     // our custom one, just navigate
     const url = new URI(event.rsvp_link);
     $(window).url_fragment('setParam','eventId', event.id);
@@ -213,72 +231,116 @@ export const addEventToRsvp = event => {
     }
 }
 
-export const removeEventFromRsvp = event => {
-    ScheduleApi.unRSVPEvent(ScheduleProps.summit.id, event.id);
-
-    return {
-        type: UPDATE_EVENT,
-        payload: {
-            eventId: event.id,
-            mutator: event => ({ ...event, going: false })
-        }
-    }
-
+export const toggleScheduleState = (event) => (dispatch, getState) => {
+    return (event.going) ? removeEventFromSchedule(event)(dispatch) : addEventToSchedule(event)(dispatch);
 }
 
-export const addEventToSchedule = event => {
-
-    if (event.has_rsvp && event.rsvp_external) {
-        // Redicrect to event's RSVP link after schedule add.
-        ScheduleApi.one('addedEvent2MySchedule', (event => {
-            const url = new URI(event.rsvp_link);
-            url.addQuery('BackURL', window.location);
-            window.location = url.toString();
-        }).bind(this, event));
-    }
-
-    ScheduleApi.addEvent2MySchedule(ScheduleProps.summit.id, event.id);
-
-    return {
-        type: UPDATE_EVENT,
-        payload: {
-            eventId: event.id,
-            mutator: event => ({ ...event, going: true })
-        }
-    }
+export const toggleFavoriteState = (event) => (dispatch, getState) =>  {
+    return (event.favorite) ? removeEventFromFavorites(event)(dispatch) : addEventToFavorites(event)(dispatch);
 }
 
-export const removeEventFromSchedule = event => {
-    ScheduleApi.removeEventFromMySchedule(ScheduleProps.summit.id, event.id);
-    return {
-        type: UPDATE_EVENT,
-        payload: {
+export const toggleRSVPState = (event) => (dispatch, getState) =>  {
+    return dispatch(createAction(UPDATE_EVENT)(
+        {
             eventId: event.id,
-            mutator: event => ({ ...event, going: false })
+            mutator: event => ({ ...event, going: !event.going })
         }
-    }
+    ));
 }
 
-export const addEventToFavorites = event => {
-    ScheduleApi.addEvent2MyFavorites(ScheduleProps.summit.id, event.id);
-    return {
-        type: UPDATE_EVENT,
-        payload: {
-            eventId: event.id,
-            mutator: event => ({ ...event, favorite: true })
-        }
-    }
+export const postNewComment = (comment) => (dispatch, getState) =>  {
+   return postRequest(
+       createAction(SUBMITING_NEW_COMMENT),
+       createAction(SUBMITTED_NEW_COMMENT)(comment),
+       `api/v1/summits/${comment.summit_id}/schedule/${comment.event_id}/feedback`,
+       comment,
+       errorHandler,
+   )()(dispatch);
 }
 
-export const removeEventFromFavorites = event => {
-    ScheduleApi.removeEventFromMyFavorites(ScheduleProps.summit.id, event.id);
-    return {
-        type: UPDATE_EVENT,
-        payload: {
-            eventId: event.id,
-            mutator: event => ({ ...event, favorite: false })
-        }
-    }
+export const removeEventFromRsvp = (event) =>  (dispatch) => {
+    return deleteRequest(
+        null,
+        createAction(UPDATE_EVENT)(
+            {
+                eventId: event.id,
+                mutator: event => ({ ...event, going: false })
+            }
+        ),
+        `api/v1/summits/${event.summit_id}/schedule/${event.id}/rsvp`,
+        {},
+        errorHandler,
+    )()(dispatch);
+}
+
+export const addEventToSchedule = (event) => (dispatch) => {
+    return putRequest(
+        null,
+        createAction(UPDATE_EVENT)(
+            {
+                eventId: event.id,
+                mutator: event => ({ ...event, going: true })
+            }
+        ),
+        `api/v1/summits/${event.summit_id}/schedule/${event.id}`,
+        {},
+        errorHandler,
+    )()(dispatch)
+    .then(
+            () => {
+                console.log(`calling then action for ${event.id}`);
+                if (event.has_rsvp && event.rsvp_external){
+                    const url = new URI(event.rsvp_link);
+                    url.addQuery('BackURL', window.location);
+                    window.location = url.toString();
+                }
+            }
+    );
+}
+
+export const removeEventFromSchedule = (event) => (dispatch) =>  {
+    return deleteRequest(
+        null,
+        createAction(UPDATE_EVENT)(
+            {
+                eventId: event.id,
+                mutator: event => ({ ...event, going: false })
+            }
+        ),
+        `api/v1/summits/${event.summit_id}/schedule/${event.id}`,
+        {},
+        errorHandler,
+    )()(dispatch);
+}
+
+export const addEventToFavorites = (event) => (dispatch) => {
+    return putRequest(
+        null,
+        createAction(UPDATE_EVENT)(
+            {
+                eventId: event.id,
+                mutator: event => ({ ...event, favorite: true })
+            }
+        ),
+        `api/v1/summits/${event.summit_id}/schedule/${event.id}/favorite`,
+        {},
+        errorHandler,
+    )()(dispatch);
+}
+
+export const removeEventFromFavorites = event => dispatch => {
+    return deleteRequest(
+        null,
+        createAction(UPDATE_EVENT)(
+            {
+                eventId: event.id,
+                mutator: event => ({ ...event, favorite: false })
+            }
+        ),
+        `api/v1/summits/${event.summit_id}/schedule/${event.id}/favorite`,
+        {},
+        errorHandler,
+    )()(dispatch);
 }
 
 // Helper functions.
@@ -379,4 +441,13 @@ export const syncCalendar = (cal_type, ios_user, ios_pass ) => (dispatch) => {
             window.location = `summit-calendar-sync/login-outlook?state=${summit_id}`;
             break;
     }
+}
+
+export const pullScheduleByViewType = (viewType, summitId) => (dispatch) => {
+    return getRequest(
+        createAction(REQUESTING_EVENTS),
+        createAction(RECEIVE_EVENTS_FULL),
+        `api/v1/summits/${summitId}/schedule/full`,
+        errorHandler
+    )({sort:viewType})(dispatch);
 }

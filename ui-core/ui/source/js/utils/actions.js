@@ -90,34 +90,56 @@ export const getRequest =
     schedule(key, req);
 };
 
+
+const isObjectEmpty = (obj) => {
+    return Object.keys(obj).length === 0 && obj.constructor === Object ;
+}
+
 export const putRequest = (
     requestActionCreator,
     receiveActionCreator,
     endpoint,
     payload,
     errorHandler
-) => params => dispatch => {
+
+) => (params = {}) => dispatch => {
     console.log(`endpoint ${endpoint}`);
-    let url = URI(endpoint).query(params).toString();
-    console.log(`url ${url}`);
-    dispatch(requestActionCreator(params));
-    const req = http.put(url)
-        .timeout({
-            response: 60000,
-            deadline: 60000,
-        })
-        .send(payload)
-        .end(
-            responseHandler(
-                dispatch,
-                json => {
-                    dispatch(receiveActionCreator({
-                        response: json
-                    }));
-                },
-                errorHandler
+
+    let url = URI(endpoint);
+
+    if(!isObjectEmpty(params))
+        url = url.query(params);
+
+    console.log(`url ${url.toString()}`);
+
+    if(requestActionCreator && typeof requestActionCreator === 'function')
+        dispatch(requestActionCreator(params));
+
+    return new Promise((resolve, reject) => {
+        http.put(url.toString())
+            .timeout({
+                response: 60000,
+                deadline: 60000,
+            })
+            .send(payload)
+            .end(
+                responseHandler(
+                    dispatch,
+                    json => {
+                        if(typeof receiveActionCreator === 'function') {
+                            dispatch(receiveActionCreator({
+                                response: json
+                            }));
+                            return resolve();
+                        }
+                        dispatch(receiveActionCreator);
+                        return resolve();
+                    },
+                    errorHandler
+                )
             )
-        )
+    });
+
 };
 
 export const deleteRequest = (
@@ -126,22 +148,32 @@ export const deleteRequest = (
     endpoint,
     payload,
     errorHandler
-) => params => dispatch => {
+) => (params) => (dispatch) => {
     let url = URI(endpoint).toString();
-    dispatch(requestActionCreator(params));
-    const req = http.delete(url)
-        .send(payload)
-        .end(
-            responseHandler(
-                dispatch,
-                json => {
-                    dispatch(receiveActionCreator({
-                        response: json
-                    }));
-                },
-                errorHandler
+
+    if(requestActionCreator && typeof requestActionCreator === 'function')
+        dispatch(requestActionCreator(params));
+
+    return new Promise((resolve, reject) => {
+        http.delete(url)
+            .send(payload)
+            .end(
+                responseHandler(
+                    dispatch,
+                    json => {
+                        if (typeof receiveActionCreator === 'function') {
+                            dispatch(receiveActionCreator({
+                                response: json
+                            }));
+                            return resolve();
+                        }
+                        dispatch(receiveActionCreator);
+                        return resolve();
+                    },
+                    errorHandler
+                )
             )
-        )
+    });
 };
 
 export const postRequest = (
@@ -150,23 +182,33 @@ export const postRequest = (
     endpoint,
     payload,
     errorHandler
-) => params => dispatch => {
-    let url = URI(endpoint).query(params).toString();
-    dispatch(requestActionCreator(params));
+) => (params = {}) => dispatch => {
+
+    let url = URI(endpoint);
+
+    if(!isObjectEmpty(params))
+        url = url.query(params);
+
+    console.log(`url ${url.toString()}`);
+
+    if(requestActionCreator && typeof requestActionCreator === 'function')
+        dispatch(requestActionCreator(params));
     const req = http.post(url)
         .send(payload)
         .end(
             responseHandler(
                 dispatch,
                 json => {
-                    dispatch(receiveActionCreator({
-                        response: json
-                    }));
+                    if(typeof receiveActionCreator === 'function') {
+                        dispatch(receiveActionCreator({
+                            response: json
+                        }));
+                    }
+                    dispatch(receiveActionCreator);
                 },
                 errorHandler
             )
         )
-
 };
 
 export const responseHandler = (dispatch, success, errorHandler) => {
@@ -175,7 +217,6 @@ export const responseHandler = (dispatch, success, errorHandler) => {
         if (err || !res.ok) {
             if(errorHandler) {
                 errorHandler(err, res);
-                return;
             }
             console.log(err, res);
             dispatch(showMessage({msg:GENERIC_ERROR, msg_type:'error'}));

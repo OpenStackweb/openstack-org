@@ -49,6 +49,7 @@ final class ScheduleEventSearchViewModelMapper implements IViewModelMapper
                 'attachment_url' => '',
                 'to_record' => false,
                 'social_summary' => $e->SocialSummary,
+                'summit_id'     => intval($e->Summit->ID),
             );
 
             foreach ($e->Tags() as $t) {

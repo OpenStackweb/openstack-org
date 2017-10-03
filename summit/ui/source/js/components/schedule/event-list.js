@@ -10,7 +10,6 @@ const EventList = ({
     filtered,
     ScheduleProps,
 }) => {
-    console.log('render list')
 
     const noResults = filtered.length && filtered.length === events.length
 
