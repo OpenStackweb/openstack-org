@@ -1,5 +1,8 @@
 <div class="banner row">
-    <div class="col-md-8">
+<div class="col-md-4 col-xs-12 banner-img-wrapper pull-right">
+        <img src="themes/openstack/images/community/rocket.png" />
+    </div>
+    <div class="col-md-8 col-xs-12 banner-text-wrapper pull-right">
         <h2>New to the community?</h2>
         <p>
             Then you are in the right place! This is the best place to start when you're interested in contributing to OpenStack.
@@ -10,46 +13,44 @@
             Quick links to resources <i class="fa fa-chevron-circle-right fa-inverse" aria-hidden="true"></i>
         </a>
     </div>
-    <div class="col-md-4">
-        <img src="themes/openstack/images/community/rocket.png" />
-    </div>
+
 </div>
 
 <div class="row contribute-title">
     Select the way you want to contribute...
 </div>
 <div class="row nav">
-    <div class="col-md-2 nav-button-box">
+    <div class="col-md-2 col-sm-4 col-xs-6 nav-button-box">
         <a class="nav-button" data-toggle="collapse" data-target="#code">
             <i class="fa fa-pencil" aria-hidden="true"></i><br>
             <div>Code</div>
         </a>
     </div>
-    <div class="col-md-2 nav-button-box">
+    <div class="col-md-2 col-sm-4 col-xs-6 nav-button-box">
         <a class="nav-button" data-toggle="collapse" data-target="#documentation">
             <i class="fa fa-book" aria-hidden="true"></i><br>
             <div>Documentation</div>
         </a>
     </div>
-    <div class="col-md-2 nav-button-box">
+    <div class="col-md-2 col-sm-4 col-xs-6 nav-button-box">
         <a class="nav-button" data-toggle="collapse" data-target="#events">
             <i class="fa fa-globe" aria-hidden="true"></i><br>
             <div>Events</div>
         </a>
     </div>
-    <div class="col-md-2 nav-button-box">
+    <div class="col-md-2 col-sm-4 col-xs-6 nav-button-box">
         <a class="nav-button" data-toggle="collapse" data-target="#meetup">
             <i class="fa fa-map-marker" aria-hidden="true"></i><br>
             <div>Meetup</div>
         </a>
     </div>
-    <div class="col-md-2 nav-button-box">
+    <div class="col-md-2 col-sm-4 col-xs-6 nav-button-box">
         <a class="nav-button" data-toggle="collapse" data-target="#users">
             <i class="fa fa-lightbulb-o" aria-hidden="true"></i><br>
             <div>Users</div>
         </a>
     </div>
-    <div class="col-md-2 nav-button-box">
+    <div class="col-md-2 col-sm-4 col-xs-6 nav-button-box">
         <a class="nav-button" data-toggle="collapse" data-target="#sponsorship">
             <i class="fa fa-money" aria-hidden="true"></i><br>
             <div>Sponsorship</div>
@@ -111,20 +112,30 @@
     </div>
     <div class="col-md-12 help-managers">
         <h4>OpenStack Foundation Community Managers</h4>
-        <div class="community-manager">
-            <img src="themes/openstack/images/community/manager.png" />
-            <div class="manager-name">Tom Fifield</div>
-            <div class="manager-title">Community Manager</div>
-            <div class="manager-location">Taipei City, Taiwan</div>
-        </div>
+        <% loop $CommunityManagers %>
+            <div class="community-manager">
+                $ProfilePhoto(180)
+                <div class="manager-name"> $FullName </div>
+                <% if CurrentJobTitle %>
+                    <div class="manager-title"> $CurrentJobTitle </div>
+                <% end_if %>
+                <div class="manager-location"> $City, $Top.CountryName($Country) </div>
+            </div>
+        <% end_loop %>
     </div>
     <div class="col-md-12 help-ambassadors">
         <h4>Global OpenStack Ambassadors</h4>
-        <div class="ambassador">
-            <img src="themes/openstack/images/community/ambassador.png" />
-            <div class="ambassador-name">Akihiro Hasegawa</div>
-            <div class="ambassador-location">Tokyo, Japan</div>
-        </div>
+        <% loop $Ambassadors %>
+            <div class="ambassador">
+                $ProfilePhoto(160)
+                <div class="ambassador-name"> $FullName </div>
+                <div class="ambassador-location"> $City, $Top.CountryName($Country) </div>
+                <div class="ambassador-twitter-veil">
+                    <i class="fa fa-twitter" aria-hidden="true"></i><br>
+                    <span> @$TwitterName </span>
+                </div>
+            </div>
+        <% end_loop %>
     </div>
 </div>
 

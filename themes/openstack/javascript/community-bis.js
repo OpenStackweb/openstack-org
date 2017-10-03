@@ -31,4 +31,10 @@ jQuery(document).ready(function($) {
         $('.project-options').removeClass('in');
     });
 
+    $('.ambassador').hover(function(){
+        $('.ambassador-twitter-veil', this).show();
+    }, function() {
+        $('.ambassador-twitter-veil', this).hide();
+    })
+
 });

@@ -20,14 +20,36 @@ class CommunityPageBis extends Page
 
     static $has_one = array();
 
-    static $has_many = array(
+    static $many_many = array(
         'CommunityManagers' => 'Member',
-        'Embassadors'       => 'Member',
+        'Ambassadors'       => 'Member',
+    );
+
+    static $many_many_extraFields = array(
+        'CommunityManagers' => array(
+            'Order' => "Int",
+        ),
+        'Ambassadors' => array(
+            'Order' => "Int",
+        ),
     );
 
     function getCMSFields()
     {
         $fields = parent::getCMSFields();
+        $fields->removeByName('Content');
+
+        $config = new GridFieldConfig_RelationEditor(5);
+        $config->addComponent($sort = new GridFieldSortableRows('Order'));
+        $config->removeComponentsByType('GridFieldAddNewButton');
+        $managers = new GridField('CommunityManagers', 'Community Managers', $this->CommunityManagers(), $config);
+        $fields->addFieldToTab('Root.Main', $managers);
+
+        $config = new GridFieldConfig_RelationEditor(12);
+        $config->addComponent($sort = new GridFieldSortableRows('Order'));
+        $config->removeComponentsByType('GridFieldAddNewButton');
+        $ambassadors = new GridField('Ambassadors', 'Ambassadors', $this->Ambassadors(), $config);
+        $fields->addFieldToTab('Root.Main', $ambassadors);
 
         return $fields;
     }
@@ -66,4 +88,7 @@ class CommunityPageBis_Controller extends Page_Controller
         return OpenStackComponent::get()->filter('Use', $group);
     }
 
+    function CountryName($code) {
+        return CountryCodes::countryCode2name($code);
+    }
 }

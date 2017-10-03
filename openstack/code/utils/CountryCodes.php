@@ -13,7 +13,6 @@
  **/
 
 /**
- * @deprecated
  * Class CountryCodes
  */
 class CountryCodes {
