@@ -338,15 +338,20 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <a href="http://openedgecomputing.org/" target="_blank">
                         <img src="https://d33wubrfki0l68.cloudfront.net/f395f3eb9e4ad700057f797aebc7cef8b7327a11/19d05/images/edge/open-edge.png" class="open-edge" alt="Open Edge Computing">
                     </a>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <a href="http://www.etsi.org/technologies-clusters/technologies/multi-access-edge-computing" target="_blank">
                         <img src="https://d33wubrfki0l68.cloudfront.net/d50408e3cdce034835af79f645ea4ff563956b09/92b88/images/edge/etsi.png" class="etsi" alt="ETSI">
                     </a>
+                </div>
+                <div class="col-sm-4">
+                        <a href="http://beyondtheclouds.github.io" target="_blank">
+                            <img src="themes/images/edge-computing/discovery-sticker.png" class="discover" alt="beyondtheclouds">
+                        </a>
                 </div>
             </div>
         </div>

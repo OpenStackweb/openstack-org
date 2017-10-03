@@ -95,3 +95,4 @@ db.ini
 *.pickle
 *.po
 gettext/Locale/*
+themes/images

@@ -304,13 +304,18 @@
 img.open-edge {
     width: 320px;
     max-width: 100%;
-    margin-top: 30px;
+    margin-top: 70px;
 }
 
 img.etsi {
     width: 239px;
     max-width: 100%;
-    margin-top: 30px;
+    margin-top: 60px;
+}
+
+img.discover {
+    max-width: 100%;
+    margin-top: -30px;
 }
 
 .edge-working-group {
