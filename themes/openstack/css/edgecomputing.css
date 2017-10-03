@@ -318,6 +318,13 @@ img.discover {
     margin-top: -30px;
 }
 
+@media (max-width: 767px) {
+    img.discover {
+        max-width: 100%;
+        margin-top: 30px;
+    }
+}
+
 .edge-working-group {
     padding: 50px 0;
     color: white;
