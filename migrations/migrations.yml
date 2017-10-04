@@ -87,4 +87,5 @@ migrations:
   - MakeMarketplaceModelCompatibleWithDoctrineORMMigration
   - DeploymentToolsMergeAnsibleAnswersMigration
   - MemberSpammerMigration
+  - CommunityHelpersMigration
 

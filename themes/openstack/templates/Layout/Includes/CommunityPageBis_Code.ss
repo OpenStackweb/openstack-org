@@ -3,7 +3,7 @@
         <h4>Select a project group</h4>
     </div>
     <% loop $ProjectGroups %>
-        <div class="col-md-4">
+        <div class="col-md-4 col-sm-6">
             <a class="project-group-button btn btn-success" data-toggle="collapse" data-target="#projectgroup_{$Key}">
                 $Name
             </a>
@@ -12,11 +12,11 @@
 </div>
 
 <div class="project-groups-selected row">
-    <div class="col-md-4">
+    <div class="col-md-4 col-sm-6">
         <h4>Selected Project Group:</h4>
         <a href="" class="clear-groups">Select another project group</a>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 col-sm-6">
         <div class="project-group-button-selected btn btn-success">
             Compute
         </div>
@@ -33,7 +33,7 @@
             The first step is as easy as that! Don't see the project you are interested in? <a href="" class="clear-groups">Select another project group</a>
         </div>
         <% loop $Top.getComponentsByGroup($Name) %>
-            <div class="col-md-4">
+            <div class="col-md-4 col-sm-6">
                 <a class="project-button btn btn-success" >
                     <img src="$Mascot.getImageDir()/OpenStack_Project_{$Mascot.CodeName}_mascot.jpg" />
                     $CodeName

@@ -37,6 +37,10 @@
     margin: 50px;
 }
 
+.collapsing {
+    transition: height 0.8s;
+}
+
 .nav-button-box {
     text-align: center;
 }
@@ -68,6 +72,11 @@
 }
 
 .nav-button .fa:hover {
+    color: white;
+    background-color: #58a935;
+}
+
+.nav-button .fa.active {
     color: white;
     background-color: #58a935;
 }
@@ -104,7 +113,8 @@
 
 .project-groups-selected {
     display: none;
-    margin: 40px 0;
+    margin-top: 40px;
+    margin-bottom: 40px;
     border-top: 1px solid #d3dee9;
     padding-top: 30px;
 }
@@ -117,6 +127,7 @@
     line-height: 30px;
     font-style: italic;
     font-size: 1.2em;
+    margin-top: 10px;
 }
 
 .project-options {
@@ -168,12 +179,13 @@
     margin-top: 2px;
     border-radius: 0px;
     width: 85%;
+    min-width: 330px;
     text-align: left;
 }
 
 .where-to-start .start-option .fa {
     font-size: 2em;
-    margin: 0 10px 0 15px;
+    margin: 0 10px 0 0px;
 }
 
 .where-to-start .start-option span {
@@ -221,6 +233,11 @@
     width: 20%;
 }
 
+.community-manager:last-of-type {
+    float: none !important;
+    display: inline;
+}
+
 .help .help-managers .community-manager .manager-name {
     font-weight: bold;
     margin-top: 10px;
@@ -232,6 +249,7 @@
 
 .help .help-ambassadors {
     margin-bottom: 50px;
+    clear: both;
 }
 
 .help .help-ambassadors .ambassador img {
@@ -380,6 +398,7 @@
 
 .quick-links .quick-links-item {
     margin-bottom: 40px;
+    height: 130px;
 }
 
 .quick-links .quick-links-item .quick-links-item-title {
@@ -433,6 +452,18 @@
         margin-top: 20px;
     }
 
+    .project-groups {
+        padding: 40px 10px 0 10px;
+    }
+
+    .project-groups .btn {
+        font-size: 1em;
+    }
+
+    .project-groups-selected {
+        text-align: center;
+    }
+
     .where-to-start {
         padding: 10px;
         margin-top: 20px;
@@ -444,6 +475,7 @@
 
     .where-to-start .start-option {
         width: 100%;
+        min-width: auto;
     }
 
     .where-to-start .start-option .fa {
@@ -573,4 +605,103 @@
         margin: 0 15px 10px 0;
     }
 
+}
+
+/* TABLETS */
+
+@media only screen and (max-device-width: 1025px) {
+
+    .banner img {
+        width: 150px;
+    }
+
+    .banner .banner-text-wrapper {
+        margin-top: 5px;
+    }
+
+    .nav-button-box {
+        margin-bottom: 20px;
+    }
+
+    .where-to-start {
+        padding: 20px;
+        margin-top: 30px;
+    }
+
+    .help .help-header {
+        text-align: center;
+        padding: 0 30px;
+    }
+
+    .help .help-managers .community-manager img {
+        width: 100px;
+        height: 105px;
+    }
+
+    .help .help-managers .community-manager {
+        font-size: 1em;
+    }
+
+    .help .help-ambassadors .ambassador img {
+        width: 90px;
+        height: 95px;
+    }
+
+    .help .help-ambassadors .ambassador {
+        font-size: 1em;
+        float: left;
+        width: 24%;
+        height: 145px;
+        margin-right: 1%;
+        margin-bottom: 30px;
+    }
+
+    .ambassador-twitter-veil {
+        width: 90px;
+        height: 95px;
+        top: -130px;
+        left: 0px;
+        padding-top: 35px;
+    }
+
+    .ambassador-twitter-veil i {
+        font-size: 20px;
+    }
+
+    .communicate {
+        padding: 30px 20px;
+    }
+
+    .communicate .communicate-header {
+        margin-bottom: 40px;
+    }
+
+    .communicate .communicate-item {
+        margin-bottom: 25px;
+    }
+
+    .communicate .communicate-item .communicate-item-title {
+        font-size: 1em;
+        padding-bottom: 5px;
+        margin-right: 10px;
+    }
+
+    .communicate .sign-up-input {
+        padding: 0px;
+        width: 65%;
+        float: left;
+    }
+
+    .communicate .sign-up-submit {
+        padding: 8px;
+        font-size: 12px;
+        font-weight: bold;
+        width: 28%;
+        margin-left: 10px;
+    }
+
+    .quick-links .quick-links-item .quick-links-item-title {
+        font-size: 1em;
+        margin: 0 10px 10px 0;
+    }
 }

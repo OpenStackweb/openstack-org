@@ -19,74 +19,76 @@
 <div class="row contribute-title">
     Select the way you want to contribute...
 </div>
+
 <div class="row nav">
     <div class="col-md-2 col-sm-4 col-xs-6 nav-button-box">
-        <a class="nav-button" data-toggle="collapse" data-target="#code">
+        <a class="nav-button" data-toggle="collapse" data-target="#code" data-parent="#accordion-parent">
             <i class="fa fa-pencil" aria-hidden="true"></i><br>
             <div>Code</div>
         </a>
     </div>
     <div class="col-md-2 col-sm-4 col-xs-6 nav-button-box">
-        <a class="nav-button" data-toggle="collapse" data-target="#documentation">
+        <a class="nav-button" data-toggle="collapse" data-target="#documentation" data-parent="#accordion-parent">
             <i class="fa fa-book" aria-hidden="true"></i><br>
             <div>Documentation</div>
         </a>
     </div>
     <div class="col-md-2 col-sm-4 col-xs-6 nav-button-box">
-        <a class="nav-button" data-toggle="collapse" data-target="#events">
+        <a class="nav-button" data-toggle="collapse" data-target="#events" data-parent="#accordion-parent">
             <i class="fa fa-globe" aria-hidden="true"></i><br>
             <div>Events</div>
         </a>
     </div>
     <div class="col-md-2 col-sm-4 col-xs-6 nav-button-box">
-        <a class="nav-button" data-toggle="collapse" data-target="#meetup">
+        <a class="nav-button" data-toggle="collapse" data-target="#meetup" data-parent="#accordion-parent">
             <i class="fa fa-map-marker" aria-hidden="true"></i><br>
             <div>Meetup</div>
         </a>
     </div>
     <div class="col-md-2 col-sm-4 col-xs-6 nav-button-box">
-        <a class="nav-button" data-toggle="collapse" data-target="#users">
+        <a class="nav-button" data-toggle="collapse" data-target="#users" data-parent="#accordion-parent">
             <i class="fa fa-lightbulb-o" aria-hidden="true"></i><br>
             <div>Users</div>
         </a>
     </div>
     <div class="col-md-2 col-sm-4 col-xs-6 nav-button-box">
-        <a class="nav-button" data-toggle="collapse" data-target="#sponsorship">
+        <a class="nav-button" data-toggle="collapse" data-target="#sponsorship" data-parent="#accordion-parent">
             <i class="fa fa-money" aria-hidden="true"></i><br>
             <div>Sponsorship</div>
         </a>
     </div>
-
 </div>
 
-<div id="code" class="collapse">
-    <% include CommunityPageBis_Code %>
-</div>
-<div id="documentation" class="collapse">
-    <% include CommunityPageBis_Documentation %>
-</div>
-<div id="events" class="collapse">
-    <% include CommunityPageBis_Events %>
-</div>
-<div id="meetup" class="collapse">
-    <% include CommunityPageBis_Meetup %>
-</div>
-<div id="users" class="collapse">
-    <% include CommunityPageBis_Users %>
-</div>
-<div id="sponsorship" class="collapse">
-    <% include CommunityPageBis_Sponsorship %>
+<div id="accordion-parent">
+    <div id="code" class="collapse">
+        <% include CommunityPageBis_Code %>
+    </div>
+    <div id="documentation" class="collapse">
+        <% include CommunityPageBis_Documentation %>
+    </div>
+    <div id="events" class="collapse">
+        <% include CommunityPageBis_Events %>
+    </div>
+    <div id="meetup" class="collapse">
+        <% include CommunityPageBis_Meetup %>
+    </div>
+    <div id="users" class="collapse">
+        <% include CommunityPageBis_Users %>
+    </div>
+    <div id="sponsorship" class="collapse">
+        <% include CommunityPageBis_Sponsorship %>
+    </div>
 </div>
 
 <div class="row where-to-start">
-    <div class="col-md-7">
+    <div class="col-md-7 col-sm-6">
         <h2>Where should I start?</h2>
         <p>
             OpenStack is a large community, and it can seem obverwhelming when you don't know where to start.
             The best way to approach it is to get involved with a specific project, working group or local meetup.
         </p>
     </div>
-    <div class="col-md-5 start-options">
+    <div class="col-md-5 col-sm-6 start-options">
         <a class="start-option btn">
             <i class="fa fa-check-square-o" aria-hidden="true"></i>
             <span>Top 5 projects that need contributors</span>
@@ -112,7 +114,7 @@
     </div>
     <div class="col-md-12 help-managers">
         <h4>OpenStack Foundation Community Managers</h4>
-        <% loop $CommunityManagers %>
+        <% loop $CommunityManagers.Sort(Order) %>
             <div class="community-manager">
                 $ProfilePhoto(180)
                 <div class="manager-name"> $FullName </div>
@@ -125,9 +127,9 @@
     </div>
     <div class="col-md-12 help-ambassadors">
         <h4>Global OpenStack Ambassadors</h4>
-        <% loop $Ambassadors %>
+        <% loop $Ambassadors.Sort(Order) %>
             <div class="ambassador">
-                $ProfilePhoto(160)
+                $ProfilePhoto(400)
                 <div class="ambassador-name"> $FullName </div>
                 <div class="ambassador-location"> $City, $Top.CountryName($Country) </div>
                 <div class="ambassador-twitter-veil">
@@ -152,7 +154,7 @@
             into the largest information streams.
         </p>
     </div>
-    <div class="col-md-4 communicate-item">
+    <div class="col-md-4 col-sm-6 communicate-item">
         <div class="communicate-item-title">
             IRC
         </div>
@@ -161,7 +163,7 @@
             <a href=""> #another-dev-channel </a>
         </div>
     </div>
-    <div class="col-md-4 communicate-item">
+    <div class="col-md-4 col-sm-6 communicate-item">
         <div class="communicate-item-title">
             Mailing lists
         </div>
@@ -171,7 +173,7 @@
             <a href=""> one more mailing list </a>
         </div>
     </div>
-    <div class="col-md-4 communicate-item">
+    <div class="col-md-4 col-sm-6 communicate-item">
         <div class="communicate-item-title">
             Info & Forums
         </div>
@@ -181,16 +183,7 @@
             <a href=""> Q&A Forum </a>
         </div>
     </div>
-    <div class="col-md-8 communicate-item">
-        <div class="communicate-item-title">
-            Sign up to hear from the Foundation
-        </div>
-        <div class="form-inline">
-            <input class="form-control sign-up-input" />
-            <a href="" class="sign-up-submit btn"> SUBMIT </a>
-        </div>
-    </div>
-    <div class="col-md-4 communicate-item">
+    <div class="col-md-4 col-sm-6 communicate-item">
         <div class="communicate-item-title">
             Social Channels
         </div>
@@ -201,6 +194,16 @@
             <a href=""> SnapChat </a>
         </div>
     </div>
+    <div class="col-md-8 col-sm-12 communicate-item">
+        <div class="communicate-item-title">
+            Sign up to hear from the Foundation
+        </div>
+        <div class="form-inline">
+            <input class="form-control sign-up-input" />
+            <a href="" class="sign-up-submit btn"> SUBMIT </a>
+        </div>
+    </div>
+
 </div>
 
 <div class="row quick-links">
@@ -211,7 +214,7 @@
         <div class="pre-title"><span>THE QUICK LINKS</span></div>
         <h1>Contributor Resources</h1>
     </div>
-    <div class="col-md-3 quick-links-item">
+    <div class="col-md-3 col-sm-3 quick-links-item">
         <div class="quick-links-item-title">
             Who are we?
         </div>
@@ -220,7 +223,7 @@
             <a href=""> Our guiding principles </a>
         </div>
     </div>
-    <div class="col-md-3 quick-links-item">
+    <div class="col-md-3 col-sm-3 quick-links-item">
         <div class="quick-links-item-title">
             Resources for projects
         </div>
@@ -231,7 +234,7 @@
             <a href=""> Onboarding </a>
         </div>
     </div>
-    <div class="col-md-3 quick-links-item">
+    <div class="col-md-3 col-sm-3 quick-links-item">
         <div class="quick-links-item-title">
             App developers
         </div>
@@ -240,7 +243,7 @@
             <a href=""> Working groups & SIGs </a>
         </div>
     </div>
-    <div class="col-md-3 quick-links-item">
+    <div class="col-md-3 col-sm-3 quick-links-item">
         <div class="quick-links-item-title">
             Getting started
         </div>
@@ -251,7 +254,7 @@
             <a href=""> Report a bug </a>
         </div>
     </div>
-    <div class="col-md-3 quick-links-item">
+    <div class="col-md-3 col-sm-3 quick-links-item">
         <div class="quick-links-item-title">
             Diversity
         </div>
@@ -261,7 +264,7 @@
             <a href=""> Outreachy </a>
         </div>
     </div>
-    <div class="col-md-3 quick-links-item">
+    <div class="col-md-3 col-sm-3 quick-links-item">
         <div class="quick-links-item-title">
             Foundation
         </div>
@@ -273,7 +276,7 @@
             <a href=""> Staff </a>
         </div>
     </div>
-    <div class="col-md-3 quick-links-item">
+    <div class="col-md-3 col-sm-3 quick-links-item">
         <div class="quick-links-item-title">
             Marketing & Branding
         </div>
@@ -284,7 +287,7 @@
             <a href=""> Store </a>
         </div>
     </div>
-    <div class="col-md-3 quick-links-item">
+    <div class="col-md-3 col-sm-3 quick-links-item">
         <div class="quick-links-item-title">
             Career
         </div>

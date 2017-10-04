@@ -14,10 +14,22 @@ jQuery(document).ready(function($) {
 
     var selected = '';
 
+    $('#accordion-parent').on('show.bs.collapse','.collapse', function() {
+        //$('#accordion-parent').find('.collapse.in').collapse('hide');
+    });
+
+    $('.nav-button').click(function(e){
+        $('.fa', '.nav-button').not($('.fa', this)).removeClass('active');
+        $('.fa', this).toggleClass('active');
+        $('#accordion-parent').find('.collapse.in').collapse('hide');
+        $('.clear-groups').click();
+    });
+
     $('.project-group-button').click(function(e){
         e.preventDefault();
-        $('.project-groups-selected').show();
-        $('.project-groups').hide();
+
+        $('.project-groups-selected').slideDown('slow');
+        $('.project-groups').slideUp('slow');
         selected = $(this).html();
         $('.project-group-button-selected').html(selected);
 
@@ -26,8 +38,8 @@ jQuery(document).ready(function($) {
     $('.clear-groups').click(function(e){
         e.preventDefault();
         selected = '';
-        $('.project-groups-selected').hide();
-        $('.project-groups').show();
+        $('.project-groups-selected').slideUp('slow');
+        $('.project-groups').slideDown('slow');
         $('.project-options').removeClass('in');
     });
 
