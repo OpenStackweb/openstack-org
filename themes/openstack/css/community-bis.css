@@ -158,7 +158,7 @@
     padding: 50px;
     margin-top: 50px;
     color: white;
-    background-color: darkslategrey;
+    background-image: url('/themes/openstack/images/community/bg.png');
 }
 
 .where-to-start h2 {
