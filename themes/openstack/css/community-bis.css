@@ -520,6 +520,10 @@
         float: none;
     }
 
+    .community-manager:last-of-type {
+        display: block;
+    }
+
     .help .help-ambassadors {
         margin-top: 30px;
         padding-top: 20px;
@@ -599,6 +603,7 @@
 
     .quick-links .quick-links-item {
         margin-bottom: 30px;
+        height: auto;
     }
 
     .quick-links .quick-links-item .quick-links-item-title {
@@ -609,7 +614,7 @@
 
 /* TABLETS */
 
-@media only screen and (max-device-width: 1025px) {
+@media only screen and (min-device-width: 737px) and (max-device-width: 1025px) {
 
     .banner img {
         width: 150px;
