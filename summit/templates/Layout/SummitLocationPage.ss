@@ -108,7 +108,7 @@
                 <h3>Hyatt Regency</h3>
                 <p>161 Sussex Street</p>
                 <p class="summit-location-message">
-                        BOOK A DISCOUNTED ROOM NOW!
+                        BOOK A (LIMITED SUPPLY) DISCOUNTED ROOM NOW!
                     </p>
                 <p>
                     <a href="https://www.google.com/maps/dir/''/Hyatt+Regency+sydney/@-33.8700072,151.1332169,12z/data=!3m1!4b1!4m8!4m7!1m0!1m5!1m1!1s0x6b12ae39213bf107:0xf782da6282a896be!2m2!1d151.203257!2d-33.870027" class="marker-link" data-location-id="295" alt="View On Map"><i class="fa fa-map-marker"></i> Map</a>
