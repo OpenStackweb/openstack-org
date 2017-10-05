@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function init() {
     if (document.getElementById(containerId)) {
         render(
             <Provider store={store}>
-                <MarketplaceDriverApp filters={filters} />
+                <MarketplaceDriverApp />
             </Provider>,
             document.getElementById(containerId)
         );

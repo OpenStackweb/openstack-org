@@ -79,6 +79,8 @@ final class DriverRestfullApi extends AbstractRestfulJsonApi
             $list = $this->repository->getAllByFilter($order, $filters);
 
             $items = [];
+            // narrowed down filters
+            $filter_options = ['projects' => [], 'vendors' => [], 'releases' => []];
 
             foreach ($list as $item){
                 $driver = Driver::get()->byID($item->ID);
@@ -104,9 +106,48 @@ final class DriverRestfullApi extends AbstractRestfulJsonApi
                     'driver'        => trim($item->Driver),
                     'releases'      => $releases
                 ];
+
+                // narrowed down filters
+                if ($filters['project'] == 'all')
+                    $filter_options['projects'][] = $item->Project;
+
+                if ($filters['vendor'] == 'all')
+                    $filter_options['vendors'][] = $item->Vendor;
+
+                if ($filters['release'] == 'all') {
+                    foreach ($driver->Releases()->column('Name') as $release) {
+                        $filter_options['releases'][] = $release;
+                    }
+                }
+
             }
 
-            return $this->ok($items);
+            // Logic here is:
+            // if the filter is not set, then we narrow down the options to whats available, if it is set we show all options
+
+            if ($filters['project'] != 'all')
+                $filter_options['projects'] = $this->getProjects();
+            else {
+                $filter_options['projects'] = array_unique($filter_options['projects']);
+                sort($filter_options['projects']);
+            }
+
+            if ($filters['vendor'] != 'all')
+                $filter_options['vendors'] = $this->getVendors();
+            else {
+                $filter_options['vendors'] = array_unique($filter_options['vendors']);
+                sort($filter_options['vendors']);
+            }
+
+            if ($filters['release'] != 'all')
+                $filter_options['releases'] = $this->getReleases();
+            else {
+                $filter_options['releases'] = array_unique($filter_options['releases']);
+                sort($filter_options['releases']);
+            }
+
+
+            return $this->ok(['items' => $items, 'filters' => $filter_options]);
         }
         catch(NotFoundEntityException $ex2)
         {
@@ -120,5 +161,34 @@ final class DriverRestfullApi extends AbstractRestfulJsonApi
         }
     }
 
+    private function getActiveDrivers() {
+        return Driver::get()->filter('Active', 1);
+    }
+
+    public function getProjects() {
+        $projects = $this->getActiveDrivers()->sort('Project')->column('Project');
+        return $projects;
+    }
+
+    public function getReleases() {
+        $drivers = $this->getActiveDrivers();
+        $releases = [];
+
+        foreach ($drivers as $driver) {
+            foreach ($driver->Releases()->column('Name') as $release) {
+                $releases[] = $release;
+            }
+        }
+
+        $releases = array_unique($releases);
+        sort($releases);
+
+        return $releases;
+    }
+
+    public function getVendors() {
+        $vendors = $this->getActiveDrivers()->sort('Vendor')->column('Vendor');
+        return $vendors;
+    }
 
 }

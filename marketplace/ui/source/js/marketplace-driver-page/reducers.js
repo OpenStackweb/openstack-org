@@ -16,6 +16,7 @@ import {RECEIVE_DRIVERS, SHOW_LOADING} from './actions';
 export const appReducer = (
     state = {
         items : [],
+        filters : {projects: [], vendors: [], releases: []},
         loading: false,
     },
     action = {}
@@ -34,7 +35,8 @@ export const appReducer = (
             const { response } = action.payload;
             return {
                 ...state,
-                items: response,
+                items: response.items,
+                filters: response.filters,
                 loading: false
             }
         }

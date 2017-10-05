@@ -14,7 +14,7 @@ class FilterSelector extends React.Component{
         let {onChange, className, value} = this.props;
 
         this.props.items.map((item,i) => {
-            options.push(<option key={i} value={item.name.toLowerCase()}>{item.name}</option>);
+            options.push(<option key={i} value={item.toLowerCase()}>{item}</option>);
         });
 
         return (
@@ -187,6 +187,7 @@ export default connect (
     state => {
         return {
             items:      state.items,
+            filters:    state.filters,
             loading:    state.loading
         }
     },
