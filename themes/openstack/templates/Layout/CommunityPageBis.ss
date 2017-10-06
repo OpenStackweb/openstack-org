@@ -13,7 +13,7 @@
         <p>
             Already a contributor and looking for resources?
         </p>
-        <a href="#quicklinks" class="banner-button btn btn-primary">
+        <a href="/community/#quicklinks" class="banner-button btn btn-primary">
             Skip to Quick Links <i class="fa fa-chevron-circle-right fa-inverse" aria-hidden="true"></i>
         </a>
     </div>
@@ -25,25 +25,25 @@
 </div>
 
 <div class="row nav">
-    <div class="col-md-2 col-sm-4 col-xs-6 nav-button-box">
+    <div class="col-md-3 col-sm-6 col-xs-6 nav-button-box">
         <a class="nav-button" data-toggle="collapse" data-target="#code" data-parent="#accordion-parent">
             <i class="fa fa-pencil" aria-hidden="true"></i><br>
             <div>Code & Documentation</div>
         </a>
     </div>
-    <div class="col-md-2 col-sm-4 col-xs-6 nav-button-box">
+    <div class="col-md-3 col-sm-6 col-xs-6 nav-button-box">
         <a class="nav-button" data-toggle="collapse" data-target="#events" data-parent="#accordion-parent">
             <i class="fa fa-globe" aria-hidden="true"></i><br>
             <div>Events</div>
         </a>
     </div>
-    <div class="col-md-2 col-sm-4 col-xs-6 nav-button-box">
+    <div class="col-md-3 col-sm-6 col-xs-6 nav-button-box">
         <a class="nav-button" data-toggle="collapse" data-target="#users" data-parent="#accordion-parent">
             <i class="fa fa-lightbulb-o" aria-hidden="true"></i><br>
             <div>Users</div>
         </a>
     </div>
-    <div class="col-md-2 col-sm-4 col-xs-6 nav-button-box">
+    <div class="col-md-3 col-sm-6 col-xs-6 nav-button-box">
         <a class="nav-button" data-toggle="collapse" data-target="#sponsorship" data-parent="#accordion-parent">
             <i class="fa fa-money" aria-hidden="true"></i><br>
             <div>Sponsorship</div>
@@ -81,15 +81,15 @@
         </p>
     </div>
     <div class="col-md-5 col-sm-6 start-options">
-        <a class="start-option btn">
+        <a href="https://governance.openstack.org/tc/reference/top-5-help-wanted.html" class="start-option btn">
             <i class="fa fa-check-square-o" aria-hidden="true"></i>
             <span>Top 5 projects that need contributors</span>
         </a><br>
-        <a class="start-option btn">
+        <a href="https://docs.openstack.org/upstream-training/" class="start-option btn">
             <i class="fa fa-check-square-o" aria-hidden="true"></i>
             <span>Tutorials & Upstream Institute</span>
         </a><br>
-        <a class="start-option btn">
+        <a href="https://groups.openstack.org/" class="start-option btn">
             <i class="fa fa-check-square-o" aria-hidden="true"></i>
             <span>Find a local user group or attend an event</span>
         </a>

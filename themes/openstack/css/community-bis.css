@@ -23,11 +23,12 @@
     color: white;
 }
 
-.banner-button {
+.banner-button, .banner-button:visited {
     background-color: #30739c;
     font-size: 1.1em;
     padding: 10px 20px;
     margin-top: 20px;
+    color:#fff;
 }
 
 .contribute-title {
