@@ -118,7 +118,7 @@
 
 .project-groups-selected {
     display: none;
-    margin-top: 40px;
+    padding: 40px 40px 0 40px;
     margin-bottom: 40px;
     border-top: 1px solid #d3dee9;
     padding-top: 30px;
@@ -581,6 +581,10 @@
         margin: 0 15px 10px 0;
     }
 
+    .nav-button-box {
+    min-height: 180px;
+    }
+
 }
 
 /* TABLETS */
@@ -680,5 +684,9 @@
     .quick-links .quick-links-item .quick-links-item-title {
         font-size: 1em;
         margin: 0 10px 10px 0;
+    }
+
+    .nav-button-box {
+    min-height: 180px;
     }
 }

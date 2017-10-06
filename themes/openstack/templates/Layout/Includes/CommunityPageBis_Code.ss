@@ -24,7 +24,7 @@
 </div>
 
 <% loop $ProjectGroups %>
-    <div id="projectgroup_{$Key}" class="collapse project-options row">
+    <div id="projectgroup_{$Key}" class="collapse project-options row" style="padding-left:40px;">
         <div class="col-md-12">
             <h2>Select the project you would like to contribute to...</h2>
         </div>
