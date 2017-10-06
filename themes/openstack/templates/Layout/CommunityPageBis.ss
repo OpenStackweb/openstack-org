@@ -110,7 +110,7 @@
             <h4>OpenStack Foundation Community Managers</h4>
             <div class="row">
             <% loop $CommunityManagers.Sort(Order) %>
-                <div class="col-md-2 col-sm-4 col-xs-6 community-manager">
+                <div class="col-md-2 col-sm-3 col-xs-6 community-manager">
                     $ProfilePhoto(180)
                     <strong>$FullName</strong><br/>
                     <% if CurrentJobTitle %>
@@ -125,10 +125,10 @@
             <h4>Global OpenStack Ambassadors</h4>
             <div class="row">
             <% loop $Ambassadors.Sort(Order) %>
-                <div class="col-md-1 col-sm-3 col-xs-6 ambassador">
+                <div class="col-md-2 col-sm-3 col-xs-6 ambassador">
                     $ProfilePhoto(400)
-                    <div class="ambassador-name"> $FullName </div>
-                    <div class="ambassador-location"> $City, $Top.CountryName($Country) </div>
+                    <strong>$FullName</strong><br/>
+                    $City, $Top.CountryName($Country)
                     <div class="ambassador-twitter-veil">
                         <i class="fa fa-twitter" aria-hidden="true"></i><br>
                         <span> @$TwitterName </span>
