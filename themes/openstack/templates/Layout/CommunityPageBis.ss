@@ -9,8 +9,12 @@
             There are lots of benefits to participation, including oportinities to influence the future of the project.
             Find out how to get involved.
         </p>
+        <hr />
+        <p>
+            Already a contributor and looking for resources?
+        </p>
         <a href="#quicklinks" class="banner-button btn btn-primary">
-            Quick links to resources <i class="fa fa-chevron-circle-right fa-inverse" aria-hidden="true"></i>
+            Skip to Quick Links <i class="fa fa-chevron-circle-right fa-inverse" aria-hidden="true"></i>
         </a>
     </div>
 
