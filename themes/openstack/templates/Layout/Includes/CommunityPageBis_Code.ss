@@ -1,4 +1,5 @@
 <div class="project-groups row">
+    <div class="line"><div class="triangle"></div></div>
     <div class="col-md-12">
         <h4>Select a project group</h4>
     </div>
@@ -12,6 +13,7 @@
 </div>
 
 <div class="project-groups-selected row">
+    <div class="line"><div class="triangle"></div></div>
     <div class="col-md-4 col-sm-6">
         <h4>Selected Project Group:</h4>
         <a href="" class="clear-groups">Select another project group</a>
@@ -25,6 +27,7 @@
 
 <% loop $ProjectGroups %>
     <div id="projectgroup_{$Key}" class="collapse project-options row" style="padding-left:40px;">
+        <div class="line"><div class="triangle"></div></div>
         <div class="col-md-12">
             <h2>Select the project you would like to contribute to...</h2>
         </div>
@@ -34,10 +37,17 @@
         </div>
         <% loop $Top.getComponentsByGroup($Name) %>
             <div class="col-md-4 col-sm-6">
-                <a class="project-button btn btn-success" >
-                    <img src="$Mascot.getImageDir()/OpenStack_Project_{$Mascot.CodeName}_mascot.jpg" />
-                    $CodeName
-                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                <a class="project-button btn btn-success" href="https://docs.openstack.org/{$Slug}" >
+                    <div class="col-md-2">
+                        <img src="$Top.MascotImage($Slug)" />
+                    </div>
+                    <div class="col-md-8">
+                        <span class="code-name"> $CodeName </span><br>
+                        <span class="name"> $Name </span>
+                    </div>
+                    <div class="col-md-2">
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </div>
                 </a>
             </div>
         <% end_loop %>

@@ -86,10 +86,36 @@
     background-color: #58a935;
 }
 
+#accordion-parent {
+    position: relative;
+}
+
+#accordion-parent .line {
+    border-bottom: 1px solid #d3dee9;
+    margin-bottom: 30px;
+}
+
+#accordion-parent .triangle {
+    background: white;
+    border: 1px solid #d3dee9;
+    border-width: 0 0 1px 1px;
+    transform: rotate(-45deg);
+    position: relative;
+    top: 16px;
+    width: 30px;
+    height: 30px;
+}
+
+.project-groups .triangle, .project-groups-selected .triangle{
+    left: 10%;
+}
+
+.project-options .triangle{
+    left: 50%;
+}
+
 .project-groups {
     padding: 40px 40px 0 40px;
-    margin-top: 60px;
-    border-top: 1px solid #d3dee9;
 }
 
 .project-groups h4 {
@@ -119,9 +145,6 @@
 .project-groups-selected {
     display: none;
     padding: 40px 40px 0 40px;
-    margin-bottom: 40px;
-    border-top: 1px solid #d3dee9;
-    padding-top: 30px;
 }
 
 .project-groups-selected .project-group-button-selected {
@@ -135,10 +158,6 @@
     margin-top: 10px;
 }
 
-.project-options {
-    border-top: 1px solid #d3dee9;
-}
-
 .project-options .subtitle {
     margin-bottom: 30px;
 }
@@ -146,7 +165,7 @@
 .project-button {
     width: 100%;
     background-color: #f9fcff;
-    height: 50px;
+    height: 55px;
     color: #30739c;
     border-color: #30739c;
     font-size: 1.6em;
@@ -157,6 +176,35 @@
 .project-button:hover {
     background-color: #e4edff;
     border-color: #30739c;
+    color: #30739c;
+}
+
+.project-button img {
+    width: 65px;
+    position: relative;
+    top: -13px;
+    left: -30px
+}
+
+.project-button .code-name {
+    position: relative;
+    top: -6px;
+    left: -20px;
+    font-weight: bold;
+}
+
+.project-button .name {
+    position: relative;
+    top: -20px;
+    left: -20px;
+    font-size: 0.5em;
+}
+
+.project-button .fa {
+    position: relative;
+    top: 3px;
+    left: 20px;
+    font-size: 1.5em;
 }
 
 .where-to-start {

@@ -88,6 +88,11 @@ class CommunityPageBis_Controller extends Page_Controller
         return OpenStackComponent::get()->filter('Use', $group);
     }
 
+    function MascotImage($component_slug) {
+        $slugWithoutSpaces = str_replace(" ", "_", $component_slug);
+        return '/software/images/mascots/' . $slugWithoutSpaces . '.png';
+    }
+
     function CountryName($code) {
         return CountryCodes::countryCode2name($code);
     }
