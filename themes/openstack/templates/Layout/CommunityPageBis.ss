@@ -76,7 +76,7 @@
     <div class="col-md-7 col-sm-6">
         <h2>Where should I start?</h2>
         <p>
-            OpenStack is a large community, and it can seem obverwhelming when you don't know where to start.
+            OpenStack is a large community, and it can seem overwhelming when you don't know where to start.
             The best way to approach it is to get involved with a specific project, working group or local meetup.
         </p>
     </div>
