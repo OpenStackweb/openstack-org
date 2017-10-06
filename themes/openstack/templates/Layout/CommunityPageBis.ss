@@ -9,7 +9,7 @@
             There are lots of benefits to participation, including oportinities to influence the future of the project.
             Find out how to get involved.
         </p>
-        <a class="banner-button btn btn-primary">
+        <a href="#quicklinks" class="banner-button btn btn-primary">
             Quick links to resources <i class="fa fa-chevron-circle-right fa-inverse" aria-hidden="true"></i>
         </a>
     </div>
@@ -24,25 +24,13 @@
     <div class="col-md-2 col-sm-4 col-xs-6 nav-button-box">
         <a class="nav-button" data-toggle="collapse" data-target="#code" data-parent="#accordion-parent">
             <i class="fa fa-pencil" aria-hidden="true"></i><br>
-            <div>Code</div>
-        </a>
-    </div>
-    <div class="col-md-2 col-sm-4 col-xs-6 nav-button-box">
-        <a class="nav-button" data-toggle="collapse" data-target="#documentation" data-parent="#accordion-parent">
-            <i class="fa fa-book" aria-hidden="true"></i><br>
-            <div>Documentation</div>
+            <div>Code & Documentation</div>
         </a>
     </div>
     <div class="col-md-2 col-sm-4 col-xs-6 nav-button-box">
         <a class="nav-button" data-toggle="collapse" data-target="#events" data-parent="#accordion-parent">
             <i class="fa fa-globe" aria-hidden="true"></i><br>
             <div>Events</div>
-        </a>
-    </div>
-    <div class="col-md-2 col-sm-4 col-xs-6 nav-button-box">
-        <a class="nav-button" data-toggle="collapse" data-target="#meetup" data-parent="#accordion-parent">
-            <i class="fa fa-map-marker" aria-hidden="true"></i><br>
-            <div>Meetup</div>
         </a>
     </div>
     <div class="col-md-2 col-sm-4 col-xs-6 nav-button-box">
@@ -156,11 +144,16 @@
     </div>
     <div class="col-md-4 col-sm-6 communicate-item">
         <div class="communicate-item-title">
-            IRC
+            OpenStack IRC channels (chat.freenode.net)
         </div>
         <div>
-            <a href=""> #channel-name </a><br>
-            <a href=""> #another-dev-channel </a>
+            #openstack<br/>
+            #openstack-101<br/>
+            #openstack-dev<br/>
+            #openstack-infra<br/>
+            #openstack-meeting<br/>
+            #openstack-upstream-institute
+
         </div>
     </div>
     <div class="col-md-4 col-sm-6 communicate-item">
@@ -168,9 +161,10 @@
             Mailing lists
         </div>
         <div>
-            <a href=""> dev mailing list </a><br>
-            <a href=""> another mailing list </a><br>
-            <a href=""> one more mailing list </a>
+            <a href="http://lists.openstack.org/cgi-bin/mailman/listinfo/openstack">OpenStack General</a><br>
+            <a href="http://lists.openstack.org/cgi-bin/mailman/listinfo/openstack-dev">OpenStack-dev</a><br>
+            <a href="http://lists.openstack.org/cgi-bin/mailman/listinfo/openstack-docs">OpenStack-docs</a><br>
+            <a href="http://lists.openstack.org/cgi-bin/mailman/listinfo/women-of-openstack">Women-of-OpenStack</a>
         </div>
     </div>
     <div class="col-md-4 col-sm-6 communicate-item">
@@ -178,9 +172,9 @@
             Info & Forums
         </div>
         <div>
-            <a href=""> Superuser Magazine </a><br>
-            <a href=""> Developer Digest </a><br>
-            <a href=""> Q&A Forum </a>
+            <a href="http://superuser.openstack.org/" target="_blank">Superuser Magazine</a><br>
+            <a href="https://www.openstack.org/blog/" target="_blank">Developer Digest</a><br>
+            <a href="https://ask.openstack.org/" target="_blank">Q&A Forum</a>
         </div>
     </div>
     <div class="col-md-4 col-sm-6 communicate-item">
@@ -188,10 +182,10 @@
             Social Channels
         </div>
         <div>
-            <a href=""> Twitter </a><br>
-            <a href=""> Facebook </a><br>
-            <a href=""> LinkedIn </a><br>
-            <a href=""> SnapChat </a>
+            <a href="https://twitter.com/openstack" target="_blank">Twitter</a><br>
+            <a href="https://www.facebook.com/openstack" target="_blank">Facebook</a><br>
+            <a href="https://www.linkedin.com/groups/3239106" target="_blank">LinkedIn</a><br/>
+            <a href="https://www.youtube.com/user/OpenStackFoundation" target="_blank">YouTube Channel</a>
         </div>
     </div>
     <div class="col-md-8 col-sm-12 communicate-item">
@@ -210,7 +204,7 @@
     <div class="quick-links-banner">
         <img src="themes/openstack/images/community/quicklinks.png" />
     </div>
-    <div class="col-md-12 quick-links-header">
+    <div class="col-md-12 quick-links-header"><a name="quicklinks" />
         <div class="pre-title"><span>THE QUICK LINKS</span></div>
         <h1>Contributor Resources</h1>
     </div>
@@ -219,8 +213,8 @@
             Who are we?
         </div>
         <div>
-            <a href=""> Four opens </a><br>
-            <a href=""> Our guiding principles </a>
+            <a href="https://governance.openstack.org/tc/reference/opens.html" target="_blank">Four opens</a><br>
+            <a href="https://governance.openstack.org/tc/reference/principles.html" target="_blank">Our guiding principles</a>
         </div>
     </div>
     <div class="col-md-3 col-sm-3 quick-links-item">
@@ -228,10 +222,10 @@
             Resources for projects
         </div>
         <div>
-            <a href=""> Tags </a><br>
-            <a href=""> Community wide goals </a><br>
-            <a href=""> Release schedule </a><br>
-            <a href=""> Onboarding </a>
+            <a href="https://governance.openstack.org/tc/reference/tags/index.html" target="_blank">Tags</a><br>
+            <a href="https://governance.openstack.org/tc/goals/" target="_blank">Community wide goals</a><br>
+            <a href="https://releases.openstack.org/" target="_blank">Release schedule</a><br>
+            <a href="">Onboarding</a>
         </div>
     </div>
     <div class="col-md-3 col-sm-3 quick-links-item">
@@ -239,8 +233,8 @@
             App developers
         </div>
         <div>
-            <a href=""> SDKs </a><br>
-            <a href=""> Working groups & SIGs </a>
+            <a href="https://developer.openstack.org/" target="_blank">SDKs</a><br>
+            <a href="https://wiki.openstack.org/wiki/Category:Working_Groups" target="_blank">Working groups & SIGs</a>
         </div>
     </div>
     <div class="col-md-3 col-sm-3 quick-links-item">
@@ -248,10 +242,10 @@
             Getting started
         </div>
         <div>
-            <a href=""> Top 5 areas for support </a><br>
-            <a href=""> Tutorials </a><br>
-            <a href=""> OpenStack 101 </a><br>
-            <a href=""> Report a bug </a>
+            <a href="https://governance.openstack.org/tc/reference/top-5-help-wanted.html" target="_blank">Top 5 areas for support</a><br>
+            <a href="https://www.youtube.com/user/OpenStackFoundation" target="_blank">Tutorials</a><br>
+            <a href="https://www.openstack.org/assets/marketing/OpenStack-101-Modular-Deck-1.pptx" target="_blank">OpenStack 101</a><br>
+            <a href="https://storyboard.openstack.org/" target="_blank">Report a bug</a>
         </div>
     </div>
     <div class="col-md-3 col-sm-3 quick-links-item">
@@ -259,9 +253,9 @@
             Diversity
         </div>
         <div>
-            <a href=""> Code of Conduct </a><br>
-            <a href=""> Women of OpenStack mailing list </a><br>
-            <a href=""> Outreachy </a>
+            <a href="/legal/community-code-of-conduct/">Code of Conduct</a><br>
+            <a href="http://lists.openstack.org/cgi-bin/mailman/listinfo/women-of-openstack" target="_blank">Women of OpenStack mailing list</a><br>
+            <a href="https://www.outreachy.org/" target="_blank">Outreachy</a>
         </div>
     </div>
     <div class="col-md-3 col-sm-3 quick-links-item">
@@ -269,11 +263,11 @@
             Foundation
         </div>
         <div>
-            <a href=""> Join </a><br>
-            <a href=""> Technical Committee </a><br>
-            <a href=""> User Committee </a><br>
-            <a href=""> Board of Directors </a><br>
-            <a href=""> Staff </a>
+            <a href="/join">Join</a><br>
+            <a href="/foundation/tech-committee/">Technical Committee</a><br>
+            <a href="/foundation/user-committee/">User Committee</a><br>
+            <a href="/foundation/board-of-directors/">Board of Directors</a><br>
+            <a href="/foundation/staff">Staff</a>
         </div>
     </div>
     <div class="col-md-3 col-sm-3 quick-links-item">
@@ -281,10 +275,10 @@
             Marketing & Branding
         </div>
         <div>
-            <a href=""> Marketing Portal </a><br>
-            <a href=""> Commercial Logos </a><br>
-            <a href=""> Project Mascots </a><br>
-            <a href=""> Store </a>
+            <a href="/marketing">Marketing Portal</a><br>
+            <a href="/brand/">Commercial Logos</a><br>
+            <a href="/project-mascots/">Project Mascots</a><br>
+            <a href="/store">Store</a>
         </div>
     </div>
     <div class="col-md-3 col-sm-3 quick-links-item">
@@ -292,9 +286,9 @@
             Career
         </div>
         <div>
-            <a href=""> Training </a><br>
-            <a href=""> COA </a><br>
-            <a href=""> Jobs </a>
+            <a href="/marketplace/training/">Training</a><br>
+            <a href="/coa">COA</a><br>
+            <a href="/jobs">Jobs</a>
         </div>
     </div>
 
