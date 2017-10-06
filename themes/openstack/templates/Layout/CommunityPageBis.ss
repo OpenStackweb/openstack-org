@@ -1,3 +1,4 @@
+</div>
 <div class="banner row">
 <div class="col-md-4 col-xs-12 banner-img-wrapper pull-right">
         <img src="themes/openstack/images/community/rocket.png" />
@@ -19,56 +20,57 @@
     </div>
 
 </div>
+<div class="container">
+    <div class="row contribute-title">
+        Select the way you want to contribute...
+    </div>
 
-<div class="row contribute-title">
-    Select the way you want to contribute...
-</div>
+    <div class="row nav">
+        <div class="col-md-3 col-sm-6 col-xs-6 nav-button-box">
+            <a class="nav-button" data-toggle="collapse" data-target="#code" data-parent="#accordion-parent">
+                <i class="fa fa-pencil" aria-hidden="true"></i><br>
+                <div>Code & Documentation</div>
+            </a>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-6 nav-button-box">
+            <a class="nav-button" data-toggle="collapse" data-target="#events" data-parent="#accordion-parent">
+                <i class="fa fa-globe" aria-hidden="true"></i><br>
+                <div>Events</div>
+            </a>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-6 nav-button-box">
+            <a class="nav-button" data-toggle="collapse" data-target="#users" data-parent="#accordion-parent">
+                <i class="fa fa-lightbulb-o" aria-hidden="true"></i><br>
+                <div>Users</div>
+            </a>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-6 nav-button-box">
+            <a class="nav-button" data-toggle="collapse" data-target="#sponsorship" data-parent="#accordion-parent">
+                <i class="fa fa-money" aria-hidden="true"></i><br>
+                <div>Sponsorship</div>
+            </a>
+        </div>
+    </div>
 
-<div class="row nav">
-    <div class="col-md-3 col-sm-6 col-xs-6 nav-button-box">
-        <a class="nav-button" data-toggle="collapse" data-target="#code" data-parent="#accordion-parent">
-            <i class="fa fa-pencil" aria-hidden="true"></i><br>
-            <div>Code & Documentation</div>
-        </a>
-    </div>
-    <div class="col-md-3 col-sm-6 col-xs-6 nav-button-box">
-        <a class="nav-button" data-toggle="collapse" data-target="#events" data-parent="#accordion-parent">
-            <i class="fa fa-globe" aria-hidden="true"></i><br>
-            <div>Events</div>
-        </a>
-    </div>
-    <div class="col-md-3 col-sm-6 col-xs-6 nav-button-box">
-        <a class="nav-button" data-toggle="collapse" data-target="#users" data-parent="#accordion-parent">
-            <i class="fa fa-lightbulb-o" aria-hidden="true"></i><br>
-            <div>Users</div>
-        </a>
-    </div>
-    <div class="col-md-3 col-sm-6 col-xs-6 nav-button-box">
-        <a class="nav-button" data-toggle="collapse" data-target="#sponsorship" data-parent="#accordion-parent">
-            <i class="fa fa-money" aria-hidden="true"></i><br>
-            <div>Sponsorship</div>
-        </a>
-    </div>
-</div>
-
-<div id="accordion-parent">
-    <div id="code" class="collapse">
-        <% include CommunityPageBis_Code %>
-    </div>
-    <div id="documentation" class="collapse">
-        <% include CommunityPageBis_Documentation %>
-    </div>
-    <div id="events" class="collapse">
-        <% include CommunityPageBis_Events %>
-    </div>
-    <div id="meetup" class="collapse">
-        <% include CommunityPageBis_Meetup %>
-    </div>
-    <div id="users" class="collapse">
-        <% include CommunityPageBis_Users %>
-    </div>
-    <div id="sponsorship" class="collapse">
-        <% include CommunityPageBis_Sponsorship %>
+    <div id="accordion-parent">
+        <div id="code" class="collapse">
+            <% include CommunityPageBis_Code %>
+        </div>
+        <div id="documentation" class="collapse">
+            <% include CommunityPageBis_Documentation %>
+        </div>
+        <div id="events" class="collapse">
+            <% include CommunityPageBis_Events %>
+        </div>
+        <div id="meetup" class="collapse">
+            <% include CommunityPageBis_Meetup %>
+        </div>
+        <div id="users" class="collapse">
+            <% include CommunityPageBis_Users %>
+        </div>
+        <div id="sponsorship" class="collapse">
+            <% include CommunityPageBis_Sponsorship %>
+        </div>
     </div>
 </div>
 
@@ -95,44 +97,48 @@
         </a>
     </div>
 </div>
-
-<div class="row help">
-    <div class="col-md-12 help-header">
-        <div class="help-title">Don't worry! We're here to help.</div>
-        <p>
-            We want you to have a great experience. OpenStack Foundation staff and volunteer ambassadors around
-            the world are here to help you get plugged in and make an impact.
-        </p>
-    </div>
-    <div class="col-md-12 help-managers">
-        <h4>OpenStack Foundation Community Managers</h4>
-        <% loop $CommunityManagers.Sort(Order) %>
-            <div class="community-manager">
-                $ProfilePhoto(180)
-                <div class="manager-name"> $FullName </div>
-                <% if CurrentJobTitle %>
-                    <div class="manager-title"> $CurrentJobTitle </div>
-                <% end_if %>
-                <div class="manager-location"> $City, $Top.CountryName($Country) </div>
-            </div>
-        <% end_loop %>
-    </div>
-    <div class="col-md-12 help-ambassadors">
-        <h4>Global OpenStack Ambassadors</h4>
-        <% loop $Ambassadors.Sort(Order) %>
-            <div class="ambassador">
-                $ProfilePhoto(400)
-                <div class="ambassador-name"> $FullName </div>
-                <div class="ambassador-location"> $City, $Top.CountryName($Country) </div>
-                <div class="ambassador-twitter-veil">
-                    <i class="fa fa-twitter" aria-hidden="true"></i><br>
-                    <span> @$TwitterName </span>
+<div class="container">
+    <div class="row help">
+        <div class="col-md-12 help-header">
+            <div class="help-title">Don't worry! We're here to help.</div>
+            <p>
+                We want you to have a great experience. OpenStack Foundation staff and volunteer ambassadors around
+                the world are here to help you get plugged in and make an impact.
+            </p>
+        </div>
+        <div class="col-md-12 help-managers">
+            <h4>OpenStack Foundation Community Managers</h4>
+            <div class="row">
+            <% loop $CommunityManagers.Sort(Order) %>
+                <div class="col-md-2 col-sm-4 community-manager">
+                    $ProfilePhoto(180)
+                    <div class="manager-name"> $FullName </div>
+                    <% if CurrentJobTitle %>
+                        <div class="manager-title"> $CurrentJobTitle </div>
+                    <% end_if %>
+                    <div class="manager-location"> $City, $Top.CountryName($Country) </div>
                 </div>
+            <% end_loop %>
             </div>
-        <% end_loop %>
+        </div>
+        <div class="col-md-12 help-ambassadors">
+            <h4>Global OpenStack Ambassadors</h4>
+            <div class="row">
+            <% loop $Ambassadors.Sort(Order) %>
+                <div class="col-md-1 col-sm-3 ambassador">
+                    $ProfilePhoto(400)
+                    <div class="ambassador-name"> $FullName </div>
+                    <div class="ambassador-location"> $City, $Top.CountryName($Country) </div>
+                    <div class="ambassador-twitter-veil">
+                        <i class="fa fa-twitter" aria-hidden="true"></i><br>
+                        <span> @$TwitterName </span>
+                    </div>
+                </div>
+            <% end_loop %>
+            </div>
+        </div>
     </div>
 </div>
-
 <div class="row communicate">
     <div class="col-md-12 communicate-header">
         <div class="communicate-title">
@@ -208,6 +214,8 @@
     <div class="quick-links-banner">
         <img src="themes/openstack/images/community/quicklinks.png" />
     </div>
+</div>
+<div class="container">
     <div class="col-md-12 quick-links-header"><a name="quicklinks" />
         <div class="pre-title"><span>THE QUICK LINKS</span></div>
         <h1>Contributor Resources</h1>
@@ -295,5 +303,4 @@
             <a href="/jobs">Jobs</a>
         </div>
     </div>
-
 </div>

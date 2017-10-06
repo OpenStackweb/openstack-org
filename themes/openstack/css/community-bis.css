@@ -355,7 +355,7 @@
 }
 
 .quick-links .quick-links-banner {
-    margin-top: 5px;
+    margin-top: 0px;
 }
 
 .quick-links .quick-links-banner img {
@@ -543,6 +543,7 @@
     .help .help-ambassadors .ambassador img {
         width: 90px;
         height: 100px;
+        max-width: 100%;
     }
 
     .help .help-ambassadors .ambassador .ambassador-name {
@@ -642,6 +643,7 @@
     .help .help-managers .community-manager img {
         width: 100px;
         height: 105px;
+        max-width: 100%;
     }
 
     .help .help-managers .community-manager {
