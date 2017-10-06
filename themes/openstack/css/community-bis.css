@@ -110,6 +110,11 @@
     left: 10%;
 }
 
+.project-events .triangle, .project-events-selected .triangle{
+    left: 30%;
+}
+
+
 .project-options .triangle{
     left: 50%;
 }
