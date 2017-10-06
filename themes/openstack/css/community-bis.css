@@ -346,16 +346,18 @@
     width: 106px;
 }
 
-.quick-links {
-    color: #2b4d68;
-}
 
-.quick-links .quick-links-banner {
+
+.quick-links-banner {
     margin-top: 0px;
 }
 
-.quick-links .quick-links-banner img {
+.quick-links-banner img {
     width: 100%;
+}
+
+.quick-links {
+    color: #2b4d68;
 }
 
 .quick-links .quick-links-header {

@@ -112,11 +112,11 @@
             <% loop $CommunityManagers.Sort(Order) %>
                 <div class="col-md-2 col-sm-4 col-xs-6 community-manager">
                     $ProfilePhoto(180)
-                    <div class="manager-name"> $FullName </div>
+                    <strong>$FullName</strong><br/>
                     <% if CurrentJobTitle %>
-                        <div class="manager-title"> $CurrentJobTitle </div>
+                        $CurrentJobTitle<br/>
                     <% end_if %>
-                    <div class="manager-location"> $City, $Top.CountryName($Country) </div>
+                    $City, $Top.CountryName($Country)
                 </div>
             <% end_loop %>
             </div>
@@ -210,96 +210,95 @@
 
 </div>
 
-<div class="row quick-links">
-    <div class="quick-links-banner">
+<div class="quick-links-banner">
         <img src="themes/openstack/images/community/quicklinks.png" />
-    </div>
 </div>
-    
-<div class="col-md-12 quick-links-header"><a name="quicklinks" />
-    <div class="pre-title"><span>THE QUICK LINKS</span></div>
-    <h1>Contributor Resources</h1>
-</div>
-<div class="col-md-3 col-sm-3 quick-links-item">
-    <div class="quick-links-item-title">
-        Who are we?
+<div class="row quick-links">
+    <div class="col-md-12 quick-links-header"><a name="quicklinks" />
+        <div class="pre-title"><span>THE QUICK LINKS</span></div>
+        <h1>Contributor Resources</h1>
     </div>
-    <div>
-        <a href="https://governance.openstack.org/tc/reference/opens.html" target="_blank">Four opens</a><br>
-        <a href="https://governance.openstack.org/tc/reference/principles.html" target="_blank">Our guiding principles</a>
+    <div class="col-md-3 col-sm-3 quick-links-item">
+        <div class="quick-links-item-title">
+            Who are we?
+        </div>
+        <div>
+            <a href="https://governance.openstack.org/tc/reference/opens.html" target="_blank">Four opens</a><br>
+            <a href="https://governance.openstack.org/tc/reference/principles.html" target="_blank">Our guiding principles</a>
+        </div>
     </div>
-</div>
-<div class="col-md-3 col-sm-3 quick-links-item">
-    <div class="quick-links-item-title">
-        Resources for projects
+    <div class="col-md-3 col-sm-3 quick-links-item">
+        <div class="quick-links-item-title">
+            Resources for projects
+        </div>
+        <div>
+            <a href="https://governance.openstack.org/tc/reference/tags/index.html" target="_blank">Tags</a><br>
+            <a href="https://governance.openstack.org/tc/goals/" target="_blank">Community wide goals</a><br>
+            <a href="https://releases.openstack.org/" target="_blank">Release schedule</a><br>
+            <a href="">Onboarding</a>
+        </div>
     </div>
-    <div>
-        <a href="https://governance.openstack.org/tc/reference/tags/index.html" target="_blank">Tags</a><br>
-        <a href="https://governance.openstack.org/tc/goals/" target="_blank">Community wide goals</a><br>
-        <a href="https://releases.openstack.org/" target="_blank">Release schedule</a><br>
-        <a href="">Onboarding</a>
+    <div class="col-md-3 col-sm-3 quick-links-item">
+        <div class="quick-links-item-title">
+            App developers
+        </div>
+        <div>
+            <a href="https://developer.openstack.org/" target="_blank">SDKs</a><br>
+            <a href="https://wiki.openstack.org/wiki/Category:Working_Groups" target="_blank">Working groups & SIGs</a>
+        </div>
     </div>
-</div>
-<div class="col-md-3 col-sm-3 quick-links-item">
-    <div class="quick-links-item-title">
-        App developers
+    <div class="col-md-3 col-sm-3 quick-links-item">
+        <div class="quick-links-item-title">
+            Getting started
+        </div>
+        <div>
+            <a href="https://governance.openstack.org/tc/reference/top-5-help-wanted.html" target="_blank">Top 5 areas for support</a><br>
+            <a href="https://www.youtube.com/user/OpenStackFoundation" target="_blank">Tutorials</a><br>
+            <a href="https://www.openstack.org/assets/marketing/OpenStack-101-Modular-Deck-1.pptx" target="_blank">OpenStack 101</a><br>
+            <a href="https://storyboard.openstack.org/" target="_blank">Report a bug</a>
+        </div>
     </div>
-    <div>
-        <a href="https://developer.openstack.org/" target="_blank">SDKs</a><br>
-        <a href="https://wiki.openstack.org/wiki/Category:Working_Groups" target="_blank">Working groups & SIGs</a>
+    <div class="col-md-3 col-sm-3 quick-links-item">
+        <div class="quick-links-item-title">
+            Diversity
+        </div>
+        <div>
+            <a href="/legal/community-code-of-conduct/">Code of Conduct</a><br>
+            <a href="http://lists.openstack.org/cgi-bin/mailman/listinfo/women-of-openstack" target="_blank">Women of OpenStack mailing list</a><br>
+            <a href="https://www.outreachy.org/" target="_blank">Outreachy</a>
+        </div>
     </div>
-</div>
-<div class="col-md-3 col-sm-3 quick-links-item">
-    <div class="quick-links-item-title">
-        Getting started
+    <div class="col-md-3 col-sm-3 quick-links-item">
+        <div class="quick-links-item-title">
+            Foundation
+        </div>
+        <div>
+            <a href="/join">Join</a><br>
+            <a href="/foundation/tech-committee/">Technical Committee</a><br>
+            <a href="/foundation/user-committee/">User Committee</a><br>
+            <a href="/foundation/board-of-directors/">Board of Directors</a><br>
+            <a href="/foundation/staff">Staff</a>
+        </div>
     </div>
-    <div>
-        <a href="https://governance.openstack.org/tc/reference/top-5-help-wanted.html" target="_blank">Top 5 areas for support</a><br>
-        <a href="https://www.youtube.com/user/OpenStackFoundation" target="_blank">Tutorials</a><br>
-        <a href="https://www.openstack.org/assets/marketing/OpenStack-101-Modular-Deck-1.pptx" target="_blank">OpenStack 101</a><br>
-        <a href="https://storyboard.openstack.org/" target="_blank">Report a bug</a>
+    <div class="col-md-3 col-sm-3 quick-links-item">
+        <div class="quick-links-item-title">
+            Marketing & Branding
+        </div>
+        <div>
+            <a href="/marketing">Marketing Portal</a><br>
+            <a href="/brand/">Commercial Logos</a><br>
+            <a href="/project-mascots/">Project Mascots</a><br>
+            <a href="/store">Store</a>
+        </div>
     </div>
-</div>
-<div class="col-md-3 col-sm-3 quick-links-item">
-    <div class="quick-links-item-title">
-        Diversity
-    </div>
-    <div>
-        <a href="/legal/community-code-of-conduct/">Code of Conduct</a><br>
-        <a href="http://lists.openstack.org/cgi-bin/mailman/listinfo/women-of-openstack" target="_blank">Women of OpenStack mailing list</a><br>
-        <a href="https://www.outreachy.org/" target="_blank">Outreachy</a>
-    </div>
-</div>
-<div class="col-md-3 col-sm-3 quick-links-item">
-    <div class="quick-links-item-title">
-        Foundation
-    </div>
-    <div>
-        <a href="/join">Join</a><br>
-        <a href="/foundation/tech-committee/">Technical Committee</a><br>
-        <a href="/foundation/user-committee/">User Committee</a><br>
-        <a href="/foundation/board-of-directors/">Board of Directors</a><br>
-        <a href="/foundation/staff">Staff</a>
-    </div>
-</div>
-<div class="col-md-3 col-sm-3 quick-links-item">
-    <div class="quick-links-item-title">
-        Marketing & Branding
-    </div>
-    <div>
-        <a href="/marketing">Marketing Portal</a><br>
-        <a href="/brand/">Commercial Logos</a><br>
-        <a href="/project-mascots/">Project Mascots</a><br>
-        <a href="/store">Store</a>
-    </div>
-</div>
-<div class="col-md-3 col-sm-3 quick-links-item">
-    <div class="quick-links-item-title">
-        Career
-    </div>
-    <div>
-        <a href="/marketplace/training/">Training</a><br>
-        <a href="/coa">COA</a><br>
-        <a href="/jobs">Jobs</a>
+    <div class="col-md-3 col-sm-3 quick-links-item">
+        <div class="quick-links-item-title">
+            Career
+        </div>
+        <div>
+            <a href="/marketplace/training/">Training</a><br>
+            <a href="/coa">COA</a><br>
+            <a href="/jobs">Jobs</a>
+        </div>
     </div>
 </div>
