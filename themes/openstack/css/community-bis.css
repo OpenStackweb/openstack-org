@@ -31,6 +31,10 @@
     color:#fff;
 }
 
+.contribute-panel {
+    width: 95%;
+}
+
 .contribute-title {
     text-align: center;
     font-size: 1.8em;
@@ -230,13 +234,7 @@
 .help .help-managers .community-manager {
     color: #3979a0 ;
     font-size: 1.1em;
-    float: left;
-    width: 20%;
-}
-
-.community-manager:last-of-type {
-    float: none !important;
-    display: inline;
+    margin:10px;
 }
 
 .help .help-managers .community-manager .manager-name {
@@ -263,8 +261,6 @@
 .help .help-ambassadors .ambassador {
     color: #3979a0 ;
     font-size: 1em;
-    float: left;
-    width: 16%;
     height: 230px;
     margin-right: 0.66%;
     margin-bottom: 30px;
@@ -653,6 +649,7 @@
     .help .help-ambassadors .ambassador img {
         width: 90px;
         height: 95px;
+        max-width: 100%;
     }
 
     .help .help-ambassadors .ambassador {
