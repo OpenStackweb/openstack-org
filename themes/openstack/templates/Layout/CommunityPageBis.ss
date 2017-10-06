@@ -108,11 +108,15 @@
             <% loop $CommunityManagers.Sort(Order) %>
                 <div class="col-md-2 col-sm-3 col-xs-6 community-manager">
                     $ProfilePhoto(180)
-                    <strong>$FullName</strong><br/>
+                    <p><strong>$FullName</strong><br/>
                     <% if CurrentJobTitle %>
                         $CurrentJobTitle<br/>
                     <% end_if %>
-                    $City, $Top.CountryName($Country)
+                    $City, $Top.CountryName($Country)</p>
+                    <div class="ambassador-twitter-veil">
+                        <i class="fa fa-twitter" aria-hidden="true"></i><br>
+                        <span> @$TwitterName </span>
+                    </div>
                 </div>
             <% end_loop %>
             </div>
@@ -123,8 +127,8 @@
             <% loop $Ambassadors.Sort(Order) %>
                 <div class="col-md-2 col-sm-3 col-xs-6 ambassador">
                     $ProfilePhoto(400)
-                    <strong>$FullName</strong><br/>
-                    $City, $Top.CountryName($Country)
+                    <p><strong>$FullName</strong><br/>
+                    $City, $Top.CountryName($Country)</p>
                     <div class="ambassador-twitter-veil">
                         <i class="fa fa-twitter" aria-hidden="true"></i><br>
                         <span> @$TwitterName </span>
