@@ -227,25 +227,15 @@
 }
 
 .help .help-managers .community-manager img {
-    width: 180px;
-    height: 185px;
+    width: 160px;
+    height: 160px;
 }
 
 .help .help-managers .community-manager {
-    color: #3979a0 ;
-    font-size: 1.1em;
-    margin:10px;
+    color: #3979a0;
+    font-size: 1em;
+    height:260px;
 }
-
-.help .help-managers .community-manager .manager-name {
-    font-weight: bold;
-    margin-top: 10px;
-}
-
-.manager-name, .manager-title, .manager-location {
-    line-height: 18px;
-}
-
 
 
 .help .help-ambassadors .ambassador img {
@@ -261,23 +251,13 @@
     height:260px;
 }
 
-.help .help-ambassadors .ambassador .ambassador-name {
-    font-weight: bold;
-    margin-top: 10px;
-}
-
-.ambassador-name, .ambassador-location {
-    line-height: 18px;
-    height: 20px;
-}
-
 .ambassador-twitter-veil {
     width: 160px;
-    height: 165px;
+    height: 160px;
     background-color: rgba(0,0,0,0.5);
     display: none;
     position: relative;
-    top: -205px;
+    top: -200px;
     left: 0px;
     text-align: center;
     padding-top: 65px;
@@ -503,15 +483,16 @@
     }
 
     .help .help-managers {
-        margin-bottom: 30px;
+        margin-top: 30px;
+        padding-top: 20px;
     }
 
     .help .help-managers .community-manager {
-        font-size: 1.1em;
-        width: 100%;
+        font-size: 0.9em;
+        float: left;
+        width: 49%;
+        height: 230px;
         text-align: center;
-        margin-bottom: 25px;
-        float: none;
     }
 
     .help .help-ambassadors .community-manager img {
@@ -530,7 +511,6 @@
         float: left;
         width: 49%;
         height: 230px;
-        margin-bottom: 30px;
         text-align: center;
     }
 
@@ -538,11 +518,6 @@
         width: 90px;
         height: 100px;
         max-width: 100%;
-    }
-
-    .help .help-ambassadors .ambassador .ambassador-name {
-        font-weight: 400;
-        margin-top: 10px;
     }
 
     .ambassador-twitter-veil {
@@ -635,13 +610,15 @@
     }
 
     .help .help-managers .community-manager img {
-        width: 100px;
-        height: 105px;
+        width: 90px;
+        height: 95px;
         max-width: 100%;
     }
 
     .help .help-managers .community-manager {
         font-size: 1em;
+        height: 145px;
+        margin-bottom: 30px;
     }
 
     .help .help-ambassadors .ambassador img {
@@ -652,8 +629,6 @@
 
     .help .help-ambassadors .ambassador {
         font-size: 1em;
-        float: left;
-        width: 24%;
         height: 145px;
         margin-bottom: 30px;
     }
