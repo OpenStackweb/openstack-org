@@ -1,3 +1,4 @@
+
 .banner {
     background-color: #248ec7;
     padding: 0 50px 50px 50px;
@@ -675,7 +676,7 @@
 
 /* TABLETS */
 
-@media only screen and (min-device-width: 737px) and (max-device-width: 1025px) {
+@media only screen and (min-width: 737px) and (max-width: 1025px) {
 
     .banner img {
         width: 150px;
@@ -785,7 +786,7 @@
 
 /* ONLY LARGE SCREENS */
 
-@media only screen and (min-device-width: 1026px) {
+@media only screen and (min-width: 1026px) {
 
     .help .help-managers .community-manager {
         width: 20%;
