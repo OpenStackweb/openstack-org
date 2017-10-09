@@ -45,6 +45,7 @@
 
 .nav-button-box {
     text-align: center;
+    min-height: 140px;
 }
 
 .nav-button {
