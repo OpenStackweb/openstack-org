@@ -297,12 +297,23 @@
     width: 160px;
     height: 160px;
     overflow: hidden;
+    position: relative;
+}
+
+.help .help-managers .community-manager .profile-pic img{
+    position: absolute;
+    top: -500px;
+    bottom: -500px;
+    left: -500px;
+    right: -500px;
+    margin: auto;
 }
 
 .help .help-ambassadors .ambassador .profile-pic {
     width: 130px;
     height: 130px;
     overflow: hidden;
+    position: relative;
 }
 
 .help .help-ambassadors .ambassador img {
@@ -310,6 +321,12 @@
     min-height: 100%;
     -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
     filter: grayscale(100%);
+    position: absolute;
+    top: -500px;
+    bottom: -500px;
+    left: -500px;
+    right: -500px;
+    margin: auto;
 }
 
 .help .help-ambassadors .ambassador {
@@ -633,6 +650,7 @@
     .help .help-ambassadors .ambassador .profile-pic {
         width: 100px;
         height: 100px;
+        margin: auto;
     }
 
     .ambassador-twitter-veil {

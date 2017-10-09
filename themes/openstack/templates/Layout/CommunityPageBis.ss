@@ -128,7 +128,7 @@
                 <% loop $CommunityManagers.Sort(Order) %>
                     <div class=" col-sm-5ths col-xs-6 community-manager">
                         <div class="profile-pic">
-                            $ProfilePhoto(180, true)
+                            $ProfilePhoto(160, true)
                         </div>
                         <p><strong>$FullName</strong><br/>
                         <% if CurrentJobTitle %>
@@ -149,7 +149,7 @@
                 <% loop $Ambassadors.Sort(Order) %>
                     <div class="col-md-2 col-sm-3 col-xs-6 ambassador">
                         <div class="profile-pic">
-                            $ProfilePhoto(150, true)
+                            $ProfilePhoto(130, true)
                         </div>
                         <p><strong>$FullName</strong><br/>
                         $City, $Top.CountryName($Country)</p>
