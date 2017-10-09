@@ -86,6 +86,8 @@
         <div class="col-lg-3 col-md-4 col-sm-4" style="margin-top:30px;">
           <ul class="help-me-menu">
             <li><a href="http://hackathon.openstack.org.au/" target="_blank"><i class="fa fa-puzzle-piece"></i>Sydney Hackathon</a></li>
+            <li><a href="https://openstackfoundation.formstack.com/forms/sydney_summit_discounted_registration" target="_blank"><i class="fa fa-dollar"></i>Student Discounts</a></li>
+            <li><a href="/summit/sydney-2017/mobile-apps" target="_blank"><i class="fa fa-mobile"></i>Download the App</a></li>
             <li><a href="https://spousetivities.ticketleap.com/openstack-summit-sydney-2017/" target="_blank"><i class="fa fa-heart"></i>Spousetivities</a></li>
             <li><a href="/summit/sydney-2017/travel/#visa"><i class="fa fa-plane"></i>Visa Information</a></li>
             <li><a href="/summit/sydney-2017/code-of-conduct"><i class="fa fa-eye"></i>Code of Conduct</a></li>
