@@ -126,7 +126,7 @@
                 <h4>OpenStack Foundation Community Managers</h4>
                 <div class="row">
                 <% loop $CommunityManagers.Sort(Order) %>
-                    <div class="<% if $Pos < 4 %> col-sm-4 <% else %> col-sm-6 <% end_if %> col-xs-6 community-manager">
+                    <div class=" col-sm-5ths col-xs-6 community-manager">
                         <div class="profile-pic">
                             $ProfilePhoto(180, true)
                         </div>
