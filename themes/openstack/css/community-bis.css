@@ -539,6 +539,7 @@
 
     .nav-button-box {
         margin-top: 20px;
+        min-height: 160px;
     }
 
     .nav-first-group {
@@ -714,11 +715,6 @@
     .quick-links .quick-links-item .quick-links-item-title {
         margin: 0 15px 10px 0;
     }
-
-    .nav-button-box {
-        height: 140px;
-    }
-
 }
 
 /* TABLETS */
@@ -734,7 +730,8 @@
     }
 
     .nav-button-box {
-        margin-bottom: 20px;
+        margin-top: 20px;
+        min-height: 160px;
     }
 
     .where-to-start {
@@ -823,10 +820,6 @@
     .quick-links .quick-links-item .quick-links-item-title {
         font-size: 1em;
         margin: 0 10px 10px 0;
-    }
-
-    .nav-button-box {
-        height: 140px;
     }
 }
 
