@@ -196,11 +196,16 @@ class OpenStackMember
         return $result;
     }
 
-    function ProfilePhoto($width = 100)
+    function ProfilePhoto($width = 100, $force_square = false)
     {
         $img = $this->owner->Photo();
         $twitter_name = $this->owner->TwitterName;
         if (!is_null($img) && $img->exists() && Director::fileExists($img->Filename)) {
+            if ($force_square && $img->getOrientation() == Image::ORIENTATION_LANDSCAPE) {
+                $img_width = $img->getWidth();
+                $img = $img->CroppedImage($img_width, $img_width);
+            }
+
             $img = $img->SetWidth($width);
 
             return "<img alt='{$this->owner->ID}_profile_photo' src='{$img->getURL()}' class='member-profile-photo'/>";

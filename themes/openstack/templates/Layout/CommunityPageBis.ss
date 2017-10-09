@@ -31,25 +31,33 @@
         <div class="row nav">
             <div class="col-md-3 col-sm-6 col-xs-6 nav-button-box">
                 <a class="nav-button" data-toggle="collapse" data-target="#code" data-parent="#accordion-parent">
-                    <i class="fa fa-pencil" aria-hidden="true"></i><br>
+                    <div class="nav-button-icon">
+                        <img src="themes/openstack/images/community/pencil.png" />
+                    </div>
                     <div>Code & Documentation</div>
                 </a>
             </div>
             <div class="col-md-3 col-sm-6 col-xs-6 nav-button-box">
                 <a class="nav-button" data-toggle="collapse" data-target="#events" data-parent="#accordion-parent">
-                    <i class="fa fa-globe" aria-hidden="true"></i><br>
+                    <div class="nav-button-icon">
+                        <img src="themes/openstack/images/community/globe.png" />
+                    </div>
                     <div>Events</div>
                 </a>
             </div>
             <div class="col-md-3 col-sm-6 col-xs-6 nav-button-box">
                 <a class="nav-button" data-toggle="collapse" data-target="#users" data-parent="#accordion-parent">
-                    <i class="fa fa-lightbulb-o" aria-hidden="true"></i><br>
+                    <div class="nav-button-icon">
+                        <img src="themes/openstack/images/community/bulb.png" />
+                    </div>
                     <div>Users</div>
                 </a>
             </div>
             <div class="col-md-3 col-sm-6 col-xs-6 nav-button-box">
                 <a class="nav-button" data-toggle="collapse" data-target="#sponsorship" data-parent="#accordion-parent">
-                    <i class="fa fa-money" aria-hidden="true"></i><br>
+                    <div class="nav-button-icon">
+                        <img src="themes/openstack/images/community/wallet.png" />
+                    </div>
                     <div>Sponsorship</div>
                 </a>
             </div>
@@ -120,7 +128,7 @@
                 <% loop $CommunityManagers.Sort(Order) %>
                     <div class="<% if $Pos < 4 %> col-sm-4 <% else %> col-sm-6 <% end_if %> col-xs-6 community-manager">
                         <div class="profile-pic">
-                            $ProfilePhoto(180)
+                            $ProfilePhoto(180, true)
                         </div>
                         <p><strong>$FullName</strong><br/>
                         <% if CurrentJobTitle %>
@@ -141,7 +149,7 @@
                 <% loop $Ambassadors.Sort(Order) %>
                     <div class="col-md-2 col-sm-3 col-xs-6 ambassador">
                         <div class="profile-pic">
-                            $ProfilePhoto(150)
+                            $ProfilePhoto(150, true)
                         </div>
                         <p><strong>$FullName</strong><br/>
                         $City, $Top.CountryName($Country)</p>

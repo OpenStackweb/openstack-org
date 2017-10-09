@@ -34,7 +34,7 @@
 .contribute-title {
     text-align: center;
     font-size: 1.8em;
-    color: #30739c;
+    color: #427FA2;
     margin: 50px;
 }
 
@@ -47,7 +47,7 @@
 }
 
 .nav-button {
-    color: #30739c;
+    color: #427FA2;
     text-align: center;
     cursor: pointer;
 }
@@ -63,21 +63,26 @@
     font-size: 1.2em;
 }
 
-.nav-button .fa {
+.nav-button .nav-button-icon {
     width: 80px;
     height: 75px;
     font-size: 2.2em;
-    border: 1px solid #30739c;
+    border: 1px solid #427FA2;
     border-radius: 5px;
-    line-height: 71px;
+    line-height: 68px;
+    margin: 0 auto;
 }
 
-.nav-button .fa:hover {
+.nav-button .nav-button-icon img {
+    width: 30px;
+}
+
+.nav-button .nav-button-icon:hover {
     color: white;
     background-color: #58a935;
 }
 
-.nav-button .fa.active {
+.nav-button .nav-button-icon.active {
     color: white;
     background-color: #58a935;
 }
@@ -276,7 +281,8 @@
 }
 
 .help .help-managers .community-manager img {
-    width: 100%;
+    min-width: 100%;
+    min-height: 100%;
 }
 
 .help .help-managers .community-manager {
@@ -295,11 +301,12 @@
 .help .help-ambassadors .ambassador .profile-pic {
     width: 130px;
     height: 130px;
+    overflow: hidden;
 }
 
 .help .help-ambassadors .ambassador img {
-    width: 100%;
-    overflow: hidden;
+    min-width: 100%;
+    min-height: 100%;
     -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
     filter: grayscale(100%);
 }

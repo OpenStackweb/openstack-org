@@ -19,8 +19,8 @@ jQuery(document).ready(function($) {
     });
 
     $('.nav-button').click(function(e){
-        $('.fa', '.nav-button').not($('.fa', this)).removeClass('active');
-        $('.fa', this).toggleClass('active');
+        $('.nav-button-icon', '.nav-button').not($('.nav-button-icon', this)).removeClass('active');
+        $('.nav-button-icon', this).toggleClass('active');
         $('#accordion-parent').find('.collapse.in').collapse('hide');
         $('.clear-groups').click();
     });
