@@ -14,23 +14,23 @@
 
 import { getRequest, putRequest, createAction } from "~core-utils/actions";
 
-export const REQUEST_ALL_STORIES = 'REQUEST_ALL_STORIES';
-export const RECEIVE_ALL_STORIES = 'RECEIVE_ALL_STORIES';
-export const REQUEST_SEARCH_STORIES = 'REQUEST_SEARCH_STORIES';
-export const RECEIVE_SEARCH_STORIES = 'RECEIVE_SEARCH_STORIES';
+export const REQUEST_ALL = 'REQUEST_ALL';
+export const RECEIVE_ALL = 'RECEIVE_ALL';
+export const REQUEST_SEARCH = 'REQUEST_SEARCH';
+export const RECEIVE_SEARCH = 'RECEIVE_SEARCH';
 export const CHANGE_ACTIVE_VIEW = 'CHANGE_ACTIVE_VIEW';
 export const CHANGE_ACTIVE_DIST = 'CHANGE_ACTIVE_DIST';
 export const UPDATE_SEARCH_TEXT = 'UPDATE_SEARCH_TEXT';
-export const REQUEST_TAG_SEARCH_STORIES = 'REQUEST_TAG_SEARCH_STORIES';
-export const RECEIVE_TAG_SEARCH_STORIES = 'RECEIVE_TAG_SEARCH_STORIES';
+export const FILTER_ITEMS = 'FILTER_ITEMS';
 
 export const changeStateView = createAction(CHANGE_ACTIVE_VIEW);
 export const changeActiveDist = createAction(CHANGE_ACTIVE_DIST);
 export const updateSearchText = createAction(UPDATE_SEARCH_TEXT);
+export const filterItemsMap = createAction(FILTER_ITEMS);
 
-let hash_tags = ['date','name','tag','search','industry','location'];
+let hash_tags = ['date','search'];
 
-export const loadStories = () => (dispatch) => {
+export const loadItems = () => (dispatch) => {
     var url_hash = $(window).url_fragment('getParams');
     var url_hash_view = '';
     var url_hash_value = '';
@@ -44,50 +44,35 @@ export const loadStories = () => (dispatch) => {
         });
 
         switch (url_hash_view) {
-            case 'tag':
-                dispatch(fetchSearchTagStories(url_hash_value));
-                break;
             case 'search':
-                dispatch(fetchSearchStories(url_hash_value));
-                break;
-            case 'location':
-            case 'industry':
-                dispatch(changeActiveView(url_hash_view, url_hash_value, true));
+                dispatch(fetchSearchItems(url_hash_value));
                 break;
             default:
-                dispatch(fetchAllStories({start:0, view:'date'}));
+                dispatch(fetchAllItems({start:0, view:'date'}));
         }
     } else {
-        dispatch(fetchAllStories({start:0, view:'date'}));
+        dispatch(fetchAllItems({start:0, view:'date'}));
     }
 }
 
-export const fetchAllStories = getRequest(
-    createAction(REQUEST_ALL_STORIES),
-    createAction(RECEIVE_ALL_STORIES),
-	'api/v1/user-stories'
+export const fetchAllItems = getRequest(
+    createAction(REQUEST_ALL),
+    createAction(RECEIVE_ALL),
+	'api/v1/marketplace/public-cloud-passports'
 );
 
-export const fetchSearchStories = (search) => {
+export const fetchSearchItems = (search) => {
 	return getRequest(
-        createAction(REQUEST_SEARCH_STORIES),
-        createAction(RECEIVE_SEARCH_STORIES),
-		'api/v1/user-stories'
+        createAction(REQUEST_SEARCH),
+        createAction(RECEIVE_SEARCH),
+		'api/v1/marketplace/public-cloud-passports'
 	)({ search_term: search });
 };
 
-export const fetchSearchTagStories = (tag) => {
-    return getRequest(
-        createAction(REQUEST_TAG_SEARCH_STORIES),
-        createAction(RECEIVE_TAG_SEARCH_STORIES),
-        'api/v1/user-stories'
-    )({ tag: tag });
-};
-
-export const changeActiveView = (view, section, fetch_stories) => (dispatch) => {
+export const changeActiveView = (view, section, fetch_items) => (dispatch) => {
     dispatch(changeStateView({view, section}));
-    if (fetch_stories) {
-        dispatch(fetchAllStories({start:0, view:view}));
+    if (fetch_items) {
+        dispatch(fetchAllItems({start:0, view:view}));
     }
 }
 

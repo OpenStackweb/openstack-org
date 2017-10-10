@@ -14,6 +14,16 @@ Injector:
       constructor:
         0: '%$PoweredOpenStackServicesRepository'
         1: '%$PoweredOpenStackImplementationManager'
+  PublicCloudPassportRepository:
+        class: SapphirePublicCloudPassportRepository
+  PublicCloudPassportManager:
+        constructor:
+          0: '%$SapphirePublicCloudPassportRepository'
+          1: '%$TransactionManager'
+  PublicCloudPassportResfullApi:
+        constructor:
+          0: '%$PublicCloudPassportRepository'
+          1: '%$PublicCloudPassportManager'
   MarketPlaceOpenStackPoweredExpireServicesDigestTask:
       constructor:
         0: '%$ExpiredPoweredOpenStackImplementationEmailMessageSender'

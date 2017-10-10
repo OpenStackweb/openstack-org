@@ -1,0 +1,11 @@
+input.input_error {
+    border-color: #e81816 !important;
+}
+
+.table {
+    margin-top: 20px;
+}
+
+.table .btn {
+    margin-right: 10px;
+}

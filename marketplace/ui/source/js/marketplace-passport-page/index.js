@@ -12,27 +12,24 @@
  **/
 
 import React from 'react';
-import { connect } from 'react-redux';
-import SimpleSearchForm from "~core-components/simple-search-form";
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import store from './store';
+import PassportsApp from './PassportsApp';
+import './style.less';
 
-import { updateSearchText, fetchSearchStories } from '../../actions';
+const { baseURL, views } = window.AppConfig;
 
-export default connect (
-	state => ({
-		action: 'search',
-		currentSearch: state.search,
-		placeholder: '',
-		className: 'story-search-form',
-        buttonText: <i className="fa fa-search"></i>
-	}),
-	dispatch => ({
-		onSearchTyped (e) {
-			dispatch(updateSearchText(e.target.value));
-		},
-		onSearch (search) {
-            if (search) {
-                dispatch(fetchSearchStories(search));
-            }
-		}
-	})
-)(SimpleSearchForm);
+const containerId      = 'app-container';
+
+document.addEventListener('DOMContentLoaded', function init() {
+    if (document.getElementById(containerId)) {
+        render(
+            <Provider store={store}>
+                <PassportsApp views={views} />
+            </Provider>,
+            document.getElementById(containerId)
+        );
+    }
+});
+

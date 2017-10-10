@@ -175,6 +175,7 @@
         <li><a href="$Top.Link(ViewPoweredOpenStackProducts)">Powered OpenStack Products</a></li>
         <li><a href="$Top.Link(ViewOpenStackProductsByRegion)">OpenStack Products By Region</a></li>
         <li><a href="$Top.Link(ViewCloudsDataCenterLocations)">Data Centers Locations</a></li>
+        <li><a href="$Top.Link(ViewPublicCloudPassports)">Public Cloud Passports</a></li>
     </ul>
 
     <h2>Speakers</h2>

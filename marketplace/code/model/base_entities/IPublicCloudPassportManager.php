@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Copyright 2014 Openstack Foundation
+ * Copyright 2017 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -11,15 +12,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-/**
- * Class PublicCloudService
- */
-final class PublicCloudService
-	extends CloudService
-	implements IPublicCloudService {
-
-    static $belongs_to = array(
-        'PublicCloudPassport' => 'PublicCloudPassport.PublicCloud'
-    );
+interface IPublicCloudPassportManager
+{
+    /**
+     * @param array $data
+     * @param int $service_id
+     * @throws NotFoundEntityException
+     * @return void
+     */
+    function updatePublicCloudPassport(array $data, $service_id);
 
 }
