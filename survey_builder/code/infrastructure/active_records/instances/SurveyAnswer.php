@@ -60,7 +60,7 @@ class SurveyAnswer extends DataObject implements ISurveyAnswer
      */
     public function question()
     {
-       return AssociationFactory::getInstance()->getMany2OneAssociation($this, 'Question')->getTarget();
+       return $this->getComponent('Question');
     }
 
     /**
@@ -68,7 +68,7 @@ class SurveyAnswer extends DataObject implements ISurveyAnswer
      */
     public function step()
     {
-        return AssociationFactory::getInstance()->getMany2OneAssociation($this, 'Step')->getTarget();
+        return $this->getComponent('Step');
     }
 
     /**

@@ -47,7 +47,7 @@ class AbstractSurveyMigrationMapping extends DataObject implements IMigrationMap
      */
     public function getTargetSurvey()
     {
-       return AssociationFactory::getInstance()->getMany2OneAssociation($this, 'TargetSurvey')->getTarget();
+        return $this->getComponent('TargetSurvey');
     }
 
     /**
@@ -55,7 +55,7 @@ class AbstractSurveyMigrationMapping extends DataObject implements IMigrationMap
      */
     public function getTargetQuestion()
     {
-        return AssociationFactory::getInstance()->getMany2OneAssociation($this, 'TargetField')->getTarget();
+        return $this->getComponent('TargetField');
     }
 
     public function getCMSFields()

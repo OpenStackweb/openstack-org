@@ -75,33 +75,30 @@ final class SurveyManager implements ISurveyManager {
     /**
      * @param int $template_id
      * @param int $creator_id
+     * @param string|null $lang
      * @return ISurvey
      */
-    public function buildSurvey($template_id, $creator_id){
+    public function buildSurvey($template_id, $creator_id, $lang = null){
 
-        $template_repository = $this->template_repository;
-        $survey_repository   = $this->survey_repository;
-        $survey_builder      = $this->survey_builder;
-        $member_repository   = $this->member_repository;
 
-        return $this->tx_manager->transaction(function() use($template_id, $creator_id, $survey_builder, $member_repository, $template_repository, $survey_repository){
+        return $this->tx_manager->transaction(function() use($template_id, $creator_id, $lang){
 
-            $template = $template_repository->getById($template_id);
+            $template = $this->template_repository->getById($template_id);
 
             if(is_null($template)) throw new NotFoundEntityException('SurveyTemplate','');
 
-            $owner = $member_repository->getById($creator_id);
+            $owner = $this->member_repository->getById($creator_id);
 
             if(is_null($owner)) throw new NotFoundEntityException('Member','');
 
-            $survey = $survey_repository->getByTemplateAndCreator($template->getIdentifier(), $creator_id);
+            $survey = $this->survey_repository->getByTemplateAndCreator($template->getIdentifier(), $creator_id);
 
             if(is_null($survey)){
-                $survey = $survey_builder->build($template, $owner);
-                $survey_repository->add($survey);
+                $survey = $this->survey_builder->build($template, $owner);
+                $this->survey_repository->add($survey);
             }
-
-            $survey->Lang = GetText::current_locale();
+            if(is_null($lang)) $lang = GetText::current_locale();
+            $survey->Lang = $lang;
 
             return $survey;
 
@@ -111,27 +108,24 @@ final class SurveyManager implements ISurveyManager {
     /**
      * @param ISurveyDynamicEntityStep $step
      * @param int $creator_id
+     * @param string|null $lang
      * @return IEntitySurvey
      */
-    public function buildEntitySurvey(ISurveyDynamicEntityStep $step, $creator_id)
+    public function buildEntitySurvey(ISurveyDynamicEntityStep $step, $creator_id, $lang = null)
     {
-        $template_repository = $this->template_repository;
-        $survey_repository   = $this->survey_repository;
-        $survey_builder      = $this->survey_builder;
-        $member_repository   = $this->member_repository;
 
-        return $this->tx_manager->transaction(function() use($step, $creator_id, $survey_builder, $member_repository, $template_repository, $survey_repository){
+        return $this->tx_manager->transaction(function() use($step, $creator_id, $lang){
 
-            $owner = $member_repository->getById($creator_id);
+            $owner = $this->member_repository->getById($creator_id);
 
             if(is_null($owner)) throw new NotFoundEntityException('Member','');
 
-            $entity_survey = $survey_builder->buildEntitySurvey($step->survey(), $step->template()->getEntity(), $owner);
+            $entity_survey = $this->survey_builder->buildEntitySurvey($step->survey(), $step->template()->getEntity(), $owner);
 
             $step->addEntitySurvey($entity_survey);
             $step->markComplete();
-
-            $entity_survey->Lang = GetText::current_locale();
+            if(is_null($lang)) $lang = GetText::current_locale();
+            $entity_survey->Lang = $lang;
             return $entity_survey;
         });
     }
@@ -139,16 +133,18 @@ final class SurveyManager implements ISurveyManager {
     /**
      * @param array $answers
      * @param ISurveyStep $current_step
+     * @param string|null $lang
      * @return ISurveyStep
      */
-    public function completeStep(ISurveyStep $current_step, array $answers)
+    public function completeStep(ISurveyStep $current_step, array $answers, $lang = null)
     {
-        return $this->tx_manager->transaction(function() use($current_step, $answers){
+        return $this->tx_manager->transaction(function() use($current_step, $answers, $lang){
 
-            $current_survey       = $current_step->survey();
-            $current_survey->Lang = GetText::current_locale();
+            $current_survey          = $current_step->survey();
+            if(is_null($lang)) $lang = GetText::current_locale();
+            $current_survey->Lang = $lang;
             $current_survey->write();
-            $save_later           = isset($answers['SAVE_LATER']) && $answers['SAVE_LATER'] == 1;
+            $save_later           = isset($answers['SAVE_LATER']) && intval($answers['SAVE_LATER']) === 1;
 
             if($current_step instanceof ISurveyRegularStep) {
                 $snapshot = $current_step->getCurrentAnswersSnapshotState();
@@ -234,12 +230,7 @@ final class SurveyManager implements ISurveyManager {
      */
     public function registerCurrentStep(ISurvey $survey, $step_name)
     {
-        $template_repository = $this->template_repository;
-        $survey_repository   = $this->survey_repository;
-        $survey_builder      = $this->survey_builder;
-        $member_repository   = $this->member_repository;
-
-        return $this->tx_manager->transaction(function() use($survey, $step_name, $survey_builder, $member_repository, $template_repository, $survey_repository){
+        return $this->tx_manager->transaction(function() use($survey, $step_name){
             $survey->registerCurrentStep($survey->getStep($step_name));
         });
     }
@@ -268,9 +259,8 @@ final class SurveyManager implements ISurveyManager {
         if(is_null($template))
             throw new InvalidArgumentException('$template is null!');
 
-        $survey_builder      = $this->survey_builder;
 
-        return $this->tx_manager->transaction(function() use($survey, $template, $survey_builder){
+        return $this->tx_manager->transaction(function() use($survey, $template){
 
             $step_templates = $template->getSteps();
             $steps          = $survey->getSteps();
@@ -283,7 +273,7 @@ final class SurveyManager implements ISurveyManager {
                 }
                 if(!$found){
                     //must add this step
-                    $survey->addStep( $survey_builder->buildStep($st) );
+                    $survey->addStep($this->survey_builder->buildStep($st) );
                 }
             }
 
@@ -358,24 +348,20 @@ final class SurveyManager implements ISurveyManager {
         $member_id,
         IMessageSenderService $sender_service = null
     ) {
-        $survey_repository   = $this->survey_repository;
-        $member_repository   = $this->member_repository;
 
         return $this->tx_manager->transaction(function() use
         (
             $entity_survey_id,
             $member_id,
-            $sender_service,
-            $member_repository,
-            $survey_repository
+            $sender_service
         )
         {
 
-            $member = $member_repository->getById($member_id);
+            $member = $this->member_repository->getById($member_id);
 
             if(is_null($member)) throw new NotFoundEntityException('Member','');
 
-            $survey = $survey_repository->getById($entity_survey_id);
+            $survey = $this->survey_repository->getById($entity_survey_id);
 
             if(is_null($survey)) throw new NotFoundEntityException('EntitySurvey','');
 
@@ -404,23 +390,19 @@ final class SurveyManager implements ISurveyManager {
      */
     public function unRegisterTeamMemberOnEntitySurvey($entity_survey_id, $member_id)
     {
-        $survey_repository   = $this->survey_repository;
-        $member_repository   = $this->member_repository;
 
         return $this->tx_manager->transaction(function() use
         (
             $entity_survey_id,
-            $member_id,
-            $member_repository,
-            $survey_repository
+            $member_id
         )
         {
 
-            $member = $member_repository->getById($member_id);
+            $member = $this->member_repository->getById($member_id);
 
             if(is_null($member)) throw new NotFoundEntityException('Member','');
 
-            $survey = $survey_repository->getById($entity_survey_id);
+            $survey = $this->survey_repository->getById($entity_survey_id);
 
             if(is_null($survey)) throw new NotFoundEntityException('EntitySurvey','');
 
@@ -469,11 +451,9 @@ final class SurveyManager implements ISurveyManager {
      */
     public function doAutopopulation(ISurvey $survey, ISurveyAutopopulationStrategy $strategy)
     {
-        $survey_builder = $this->survey_builder;
-        $this_var      = $this;
-        $this->tx_manager->transaction(function() use($survey, $strategy, $survey_builder, $this_var)
+        $this->tx_manager->transaction(function() use($survey, $strategy)
         {
-            $strategy->autoPopulate($survey, $survey_builder, $this_var);
+            $strategy->autoPopulate($survey, $this->survey_builder, $this);
         });
     }
 
@@ -597,6 +577,128 @@ final class SurveyManager implements ISurveyManager {
             }
             return $template_clone;
         });
+    }
+
+    /**
+     * @param array $surveys_2_merge
+     * @param string $merge_result_survey_title
+     * @return void
+     */
+    public function mergeSurveys(array $surveys_2_merge, $merge_result_survey_title = "Total")
+    {
+        $this->tx_manager->transaction(function() use($surveys_2_merge, $merge_result_survey_title){
+
+            $first_id = $surveys_2_merge[0];
+            $last_id  = end($surveys_2_merge);
+            reset($surveys_2_merge);
+
+            $first_template = SurveyTemplate::get()->byID($first_id);
+            $last_template  = SurveyTemplate::get()->byID($last_id);
+
+            $new_template            = $this->doClone($last_template, $merge_result_survey_title);
+            $new_template->StartDate = $first_template->StartDate;
+            $new_template->EndDate   = $last_template->EndDate;
+            $new_template->write();
+
+            $query_ids = implode(",", $surveys_2_merge);
+            $surveys_instances = Survey::get()->filter(
+                ['IsTest' => 0]
+            )->where("TemplateID IN ({$query_ids})")->sort("CreatedByID", "ASC");
+
+            $last_user_id = null;
+            $user_surveys = [];
+
+            foreach($surveys_instances as $survey_instance){
+                $current_user_id = intval($survey_instance->CreatedByID);
+                if(!is_null($last_user_id) && $last_user_id != $current_user_id && count($user_surveys) > 0){
+                    echo sprintf("processing %s surveys for member id %s", count($user_surveys), $current_user_id).PHP_EOL;
+                    $this->processMerge($new_template, $current_user_id, $user_surveys);
+                }
+                $last_user_id   = $current_user_id;
+                $user_surveys[] = $survey_instance;
+            }
+            if(count($user_surveys) > 0){
+                $this->processMerge($new_template, $current_user_id, $user_surveys);
+            }
+        });
+    }
+
+    /**
+     * @param $new_template
+     * @param $current_user_id
+     * @param $user_surveys
+     */
+    private function processMerge($new_template, $current_user_id, &$user_surveys){
+        try {
+            //process
+            $last_user_survey      = end($user_surveys);
+            $new_survey_instance   = $this->buildSurvey($new_template->ID, $current_user_id, $last_user_survey->Lang);
+            $former_entity_surveys = [];
+            reset($user_surveys);
+
+            // get former deployments ...
+            foreach ($user_surveys as $former_survey) {
+                foreach ($former_survey->getSteps() as $step) {
+                    if (!($step instanceof ISurveyDynamicEntityStep)) continue;
+                    foreach ($step->getEntitySurveys() as $former_entity_survey) {
+                        if (isset($former_entity_surveys[$former_entity_survey->getFriendlyName()]))
+                            continue;
+                        echo sprintf("adding deployment %s for member id %s", $former_entity_survey->getFriendlyName(), $current_user_id) . PHP_EOL;
+                        $former_entity_surveys[$former_entity_survey->getFriendlyName()] = $former_entity_survey;
+                    }
+                }
+            }
+            // merge surveys
+            foreach ($new_survey_instance->getSteps() as $step) {
+                if ($step instanceof ISurveyRegularStep) {
+                    $former_step = $last_user_survey->getStep($step->template()->title());
+                    if (is_null($former_step)) continue;
+
+                    $former_answers = [];
+                    foreach ($former_step->Answers() as $answer) {
+                        $new_question = $step->Template()->Questions()->filter('Name', $answer->Question()->Name)->first();
+                        if(is_null($new_question) || is_null($answer->Value)) continue;
+                        $former_answers[$answer->Question()->Name] = SurveyAnswerValueTranslator::translate($answer->Value, $answer->Question(), $new_question);
+                    }
+
+                    echo sprintf("got %s aswers from former step %s", count($former_answers), $former_step->template()->title()) . PHP_EOL;
+                    $this->completeStep($step, $former_answers, $new_survey_instance->Lang);
+                }
+                if ($step instanceof ISurveyDynamicEntityStep && count($former_entity_surveys) > 0) {
+                    echo sprintf("processing deployments for member id %s (%s)", $current_user_id, count($former_entity_surveys)) . PHP_EOL;
+                    foreach ($former_entity_surveys as $key => $former_entity_survey) {
+                        // create new deployment
+                        $new_entity_survey = $this->buildEntitySurvey($step, $current_user_id, $new_survey_instance->Lang);
+                        foreach ($new_entity_survey->getSteps() as $new_survey_instance_step) {
+                            $former_step = $former_entity_survey->getStep($new_survey_instance_step->template()->title());
+                            if (is_null($former_step)) continue;
+
+                            $entity_survey_former_answers = [];
+                            foreach ($former_step->Answers() as $answer) {
+                                $new_question = $new_survey_instance_step->Template()->Questions()->filter('Name', $answer->Question()->Name)->first();
+                                if(is_null($new_question) || is_null($answer->Value)) continue;
+                                $entity_survey_former_answers[$answer->Question()->Name] = SurveyAnswerValueTranslator::translate($answer->Value, $answer->Question(), $new_question);
+                            }
+
+                            echo sprintf("got %s answers from former step %s", count($entity_survey_former_answers), $former_step->template()->title()) . PHP_EOL;
+                            $this->completeStep($new_survey_instance_step, $entity_survey_former_answers, $new_survey_instance->Lang);
+                        }
+
+                        $new_entity_survey->Created    = $former_entity_survey->Created;
+                        $new_entity_survey->LastEdited = $former_entity_survey->LastEdited;
+                        $new_entity_survey->write();
+                    }
+                }
+            }
+            $new_survey_instance->Created    = $last_user_survey->Created;
+            $new_survey_instance->LastEdited = $last_user_survey->LastEdited;
+            $new_survey_instance->write();
+            $user_surveys = [];
+        }
+        catch (Exception $ex){
+            echo $ex->getMessage().PHP_EOL;
+            $user_surveys = [];
+        }
     }
 
 }

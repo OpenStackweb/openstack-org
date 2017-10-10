@@ -29,7 +29,7 @@ class SurveyRegularStep
      */
     public function getAnswers()
     {
-        return AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Answers')->toArray();
+        return $this->Answers()->toArray();
     }
 
     /**
@@ -38,7 +38,7 @@ class SurveyRegularStep
      */
     public function addAnswer(ISurveyAnswer $new_answer)
     {
-        AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Answers')->add($new_answer);
+        return $this->Answers()->add($new_answer);
     }
 
     /**
@@ -72,7 +72,7 @@ class SurveyRegularStep
      */
     public function clearAnswers()
     {
-        AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Answers')->removeAll();
+        $this->Answers()->removeAll();
     }
 
     /**

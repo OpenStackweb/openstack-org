@@ -121,7 +121,7 @@ class NewDataModelSurveyMigrationMapping extends AbstractSurveyMigrationMapping 
      */
     public function getOriginField()
     {
-        return AssociationFactory::getInstance()->getMany2OneAssociation($this, 'OriginField')->getTarget();
+        return $this->getComponent('OriginField');
     }
 
     /**
@@ -129,6 +129,6 @@ class NewDataModelSurveyMigrationMapping extends AbstractSurveyMigrationMapping 
      */
     public function getOriginSurvey()
     {
-        return AssociationFactory::getInstance()->getMany2OneAssociation($this, 'OriginSurvey')->getTarget();
+        return $this->getComponent('OriginSurvey');
     }
 }

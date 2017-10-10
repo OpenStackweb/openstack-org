@@ -242,7 +242,7 @@ class SurveyQuestionTemplate
             $config->getComponentByType('GridFieldAddExistingAutocompleter')->setSearchList($this->getAllowedDependants());
 
             $config->getComponentByType('GridFieldDataColumns')->setDisplayFields(
-                array(
+                [
                     'Type'          => 'Type',
                     'Name'          => 'Name',
                     'DDLOperator'   => 'Operator',
@@ -250,7 +250,7 @@ class SurveyQuestionTemplate
                     'DDLValues'     => 'Values ( on which depends)',
                     'DDLVisibility' => 'Visibility',
                     'TxtValue'      => 'Default Value',
-                ));
+                ]);
 
             $depends = $this->DependsOn()->sort('ID');
             $query   = $depends->dataQuery();
@@ -355,7 +355,7 @@ class SurveyQuestionTemplate
      */
     public function step()
     {
-        return AssociationFactory::getInstance()->getMany2OneAssociation($this,'Step')->getTarget();
+        return $this->getComponent('Step');
     }
 
     /**

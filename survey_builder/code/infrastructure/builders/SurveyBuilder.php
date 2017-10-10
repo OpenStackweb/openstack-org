@@ -27,7 +27,7 @@ final class SurveyBuilder implements ISurveyBuilder {
        $survey              = new Survey();
        $survey->TemplateID  = $template->getIdentifier();
        $survey->CreatedByID = $owner->getIdentifier();
-
+       $survey->write();
        $i = 0;
        foreach($template->getSteps() as $step_template){
            ++$i;
@@ -63,6 +63,8 @@ final class SurveyBuilder implements ISurveyBuilder {
         $survey->TemplateID  = $template->getIdentifier();
         $survey->CreatedByID = $owner->getIdentifier();
         $survey->ParentID    = $parent->getIdentifier();
+        $survey->write();
+
         $i = 0;
         foreach($template->getSteps() as $step_template){
             ++$i;
@@ -92,6 +94,7 @@ final class SurveyBuilder implements ISurveyBuilder {
             $answer->Value = $answer_value;
         }
         $answer->QuestionID = $question->getIdentifier();
+        $answer->write();
         return $answer;
     }
 
@@ -114,7 +117,7 @@ final class SurveyBuilder implements ISurveyBuilder {
         }
 
         $new_step->TemplateID = $step_template->getIdentifier();
-
+        $new_step->write();
         return $new_step;
     }
 }

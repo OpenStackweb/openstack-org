@@ -40,7 +40,6 @@ class SurveyNumberValidationRule extends SurveySingleValueValidationRule{
     {
         $attr = parent::getHtml5Attributes();
 
-
         $attr['data-rule-number'] = 'true';
 
         if(!empty($this->Message)){

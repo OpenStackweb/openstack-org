@@ -52,7 +52,7 @@ class SurveySingleValueTemplateQuestion
      */
     public function getValidationRules()
     {
-        return AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'ValidationRules')->toArray();
+        return $this->ValidationRules()->toArray();
     }
 
     /**
@@ -61,7 +61,7 @@ class SurveySingleValueTemplateQuestion
      */
     public function addValidationRule(ISingleValueValidationRule $validation_rule)
     {
-        AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'ValidationRules')->add($validation_rule);
+        $this->ValidationRules()->add($validation_rule);
     }
 
     /**

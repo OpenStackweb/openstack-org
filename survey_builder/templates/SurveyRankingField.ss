@@ -17,7 +17,7 @@
             <% end_if %>
         </tbody>
      </table>
-    <input type="hidden" name="$Question.Name" id="$Question.Name" value="" class="ctrl_hidden_value" $ValidationAttributesHTML />
+    <input type="hidden" name="$Question.Name" id="$Question.Name" value="{$Value}" class="ctrl_hidden_value" $ValidationAttributesHTML />
 </div>
 <script type="application/javascript">
     jQuery(document).ready(function($) {

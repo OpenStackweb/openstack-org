@@ -83,7 +83,7 @@ class SurveyQuestionValueTemplate
      */
     public function owner()
     {
-        return AssociationFactory::getInstance()->getMany2OneAssociation($this, 'Owner')->getTarget();
+        return $this->getComponent('Owner');
     }
 
     protected function onBeforeWrite() {
