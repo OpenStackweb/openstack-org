@@ -1,11 +1,18 @@
 <% if $Options.Count <= 10  || $isMobileClient %>
-    <ul id="$ID" class="$extraClass">
+    <ul id="{$TopID}" class="$extraClass">
         <% if $Options.Count %>
             <% loop $Options %>
                 <li class="{$EvenOdd}">
                     <div class="checkbox">
                         <label>
-                        <input type="checkbox" class="checkboxset-item" <% if $Top.isVisible == 0 %>hidden<% end_if %>" id="$ID" <% if $Top.IsRequired%>data-rule-required="true" <% end_if %> name="{$Name}" value="$Value"<% if $isChecked %> checked="checked"<% end_if %><% if $isDisabled %> disabled="disabled"<% end_if %> >&nbsp;$Title
+                            <input type="checkbox" class="checkboxset-item <% if $Top.isVisible == 0 %>hidden<% end_if %>"
+                                   id="{$ID}"
+                                <% if $Top.IsRequired%>data-rule-required="true" <% end_if %>
+                                   name="{$Name}"
+                                   value="{$Value}"
+                                <% if $isChecked %> checked="checked"<% end_if %>
+                                <% if $isDisabled %> disabled="disabled"<% end_if %> >&nbsp;
+                            $Title
                         </label>
                     </div>
                 </li>
@@ -15,7 +22,7 @@
         <% end_if %>
     </ul>
 <% else %>
-    <table id="$ID" class="$extraClass">
+    <table id="{$TopID}" class="$extraClass">
         <tr>
             <% loop $Options %>
                 <% if First %>
@@ -24,7 +31,15 @@
                 <li class="{$EvenOdd}">
                     <div class="checkbox">
                         <label>
-                        <input type="checkbox" class="checkboxset-item" <% if $Top.isVisible == 0 %>hidden<% end_if %>" id="$ID" <% if $Top.IsRequired%>data-rule-required="true" <% end_if %> name="{$Name}" value="$Value"<% if $isChecked %> checked="checked"<% end_if %><% if $isDisabled %> disabled="disabled"<% end_if %> >&nbsp;$Title
+                            <input type="checkbox"
+                                   class="checkboxset-item <% if $Top.isVisible == 0 %>hidden<% end_if %>"
+                                   id="{$ID}"
+                                <% if $Top.IsRequired%>data-rule-required="true" <% end_if %>
+                                   name="{$Name}"
+                                   value="{$Value}"
+                                <% if $isChecked %> checked="checked"<% end_if %>
+                                <% if $isDisabled %> disabled="disabled"<% end_if %> >&nbsp;
+                            $Title
                         </label>
                     </div>
                 </li>
