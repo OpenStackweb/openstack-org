@@ -22,24 +22,24 @@ final class SapphireUserStoryRepository
 		parent::__construct(new UserStoryDO());
 	}
 
-    public function getAllStories($sort_by = 'LastEdited') {
-        return UserStoryDO::get()->sort($sort_by);
+    public function getAllStories($sort_by = 'LastEdited', $sort_dir = 'DESC') {
+        return UserStoryDO::get()->sort($sort_by, $sort_dir);
     }
 
-    public function getAllActive($sort_by = 'LastEdited') {
-        return UserStoryDO::get()->filter('Active',1)->sort($sort_by);
+    public function getAllActive($sort_by = 'LastEdited', $sort_dir = 'DESC') {
+        return UserStoryDO::get()->filter('Active',1)->sort($sort_by, $sort_dir);
     }
 
     public function findAllActive($search_term) {
         return UserStoryDO::get()->filter('Active',1)
             ->where("Name LIKE '%$search_term%' OR Description LIKE '%$search_term%'")
-            ->sort('LastEdited');
+            ->sort('LastEdited', 'DESC');
     }
 
     public function findAllActiveByTag($tag) {
         return UserStoryDO::get()
             ->filter(['Active' => 1, 'Tags.Tag' => $tag])
-            ->sort('LastEdited');
+            ->sort('LastEdited', 'DESC');
     }
 
 }

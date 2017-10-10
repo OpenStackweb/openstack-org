@@ -29,11 +29,17 @@ export default ({
     }
 
     const sortStories = function(stories, compareProp) {
+        compareProp = (compareProp == 'search') ? 'date' : compareProp;
+
         let sorted_stories = stories.sort((a,b) => {
             const aName = a[compareProp];
             const bName = b[compareProp];
 
-            return aName > bName ? 1 : (aName < bName ? -1 : 0)
+            if (compareProp == 'date') { // date must be DESC
+                return aName < bName ? 1 : (aName > bName ? -1 : 0)
+            } else {
+                return aName > bName ? 1 : (aName < bName ? -1 : 0)
+            }
         });
 
         return sorted_stories;

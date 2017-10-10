@@ -14,9 +14,9 @@
  **/
 interface IUserStoryRepository
 {
-    public function getAllStories($sort_by = 'LastEdited');
+    public function getAllStories($sort_by = 'LastEdited', $sort_dir = 'DESC');
 
-    public function getAllActive($sort_by = 'LastEdited');
+    public function getAllActive($sort_by = 'LastEdited', $sort_dir = 'DESC');
 
     public function findAllActive($search_term);
 
