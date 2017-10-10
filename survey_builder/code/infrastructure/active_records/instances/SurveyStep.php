@@ -53,7 +53,14 @@ class SurveyStep
      */
     public function template()
     {
-        return AssociationFactory::getInstance()->getMany2OneAssociation($this, 'Template')->getTarget();
+        return $this->getComponent('Template');
+    }
+
+    /**
+     * @param ISurveyStepTemplate $template
+     */
+    public function setTemplate(ISurveyStepTemplate $template){
+        $this->TemplateID = $template->getIdentifier();
     }
 
     /**
@@ -61,7 +68,14 @@ class SurveyStep
      */
     public function survey()
     {
-        return AssociationFactory::getInstance()->getMany2OneAssociation($this, 'Survey')->getTarget();
+        return $this->getComponent('Survey');
+    }
+
+    /**
+     * @param ISurvey $survey
+     */
+    public function setSurvey(ISurvey $survey){
+        $this->SurveyID = $survey->getIdentifier();
     }
 
     /**

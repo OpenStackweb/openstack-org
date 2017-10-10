@@ -74,7 +74,7 @@ class SurveyStepTemplate
      */
     public function survey()
     {
-        return AssociationFactory::getInstance()->getMany2OneAssociation($this, 'SurveyTemplate')->getTarget();
+        return $this->getComponent('SurveyTemplate');
     }
 
     /**

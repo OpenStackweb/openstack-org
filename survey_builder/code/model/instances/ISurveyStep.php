@@ -54,4 +54,14 @@ interface ISurveyStep extends IEntity {
      * @return $this
      */
     public function markIncomplete();
+
+    /**
+     * @param ISurvey $survey
+     */
+    public function setSurvey(ISurvey $survey);
+
+    /**
+     * @param ISurveyStepTemplate $template
+     */
+    public function setTemplate(ISurveyStepTemplate $template);
 }

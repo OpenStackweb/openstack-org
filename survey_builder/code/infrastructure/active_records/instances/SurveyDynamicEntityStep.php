@@ -52,7 +52,7 @@ class SurveyDynamicEntityStep
      * @return ISurveyDynamicEntityStepTemplate
      */
     public function template(){
-        return AssociationFactory::getInstance()->getMany2OneAssociation($this, 'Template')->getTarget();
+        return $this->getComponent('Template');
     }
 
     /**
@@ -60,7 +60,7 @@ class SurveyDynamicEntityStep
      */
     public function getEntitySurveys()
     {
-        return AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'EntitySurveys')->toArray();
+        return $this->EntitySurveys()->toArray();
     }
 
     /**
@@ -69,7 +69,8 @@ class SurveyDynamicEntityStep
      */
     public function addEntitySurvey(IEntitySurvey $entity_survey)
     {
-        AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'EntitySurveys')->add($entity_survey);
+        $this->EntitySurveys()->add($entity_survey);
+        $entity_survey->OwnerID = $this->ID;
     }
 
     /**
@@ -100,7 +101,7 @@ class SurveyDynamicEntityStep
      */
     public function clearEntitiesSurvey()
     {
-        AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'EntitySurveys')->removeAll();
+        $this->EntitySurveys()->removeAll();
     }
 
     /**
@@ -109,9 +110,7 @@ class SurveyDynamicEntityStep
      */
     public function removeEntitySurveyById($entity_survey_id)
     {
-        $entity_survey = $this->getEntitySurvey($entity_survey_id);
-        if($entity_survey)
-            AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'EntitySurveys')->remove($entity_survey);
+        $this->EntitySurveys()->remove($entity_survey_id);
     }
 
     protected function onBeforeDelete() {

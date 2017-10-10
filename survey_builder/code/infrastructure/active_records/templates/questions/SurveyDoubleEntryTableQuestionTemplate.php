@@ -117,7 +117,7 @@ class SurveyDoubleEntryTableQuestionTemplate
      */
     public function addColumn(IQuestionValueTemplate $col)
     {
-        AssociationFactory::getInstance()->getOne2ManyAssociation($this,'Columns')->add($col);
+        $this->Columns()->add($col);
         return $this;
     }
 
@@ -136,7 +136,7 @@ class SurveyDoubleEntryTableQuestionTemplate
      */
     public function addRow(IQuestionValueTemplate $row)
     {
-        AssociationFactory::getInstance()->getOne2ManyAssociation($this,'Rows')->add($row);
+        $this->Rows()->add($row);
         return $this;
     }
 

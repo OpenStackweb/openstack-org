@@ -231,7 +231,7 @@ class SurveyTemplate extends DataObject implements ISurveyTemplate {
      */
     public function owner()
     {
-        return AssociationFactory::getInstance()->getMany2OneAssociation($this, 'CreatedBy')->getTarget();
+        return $this->getComponent('CreatedBy');
     }
 
     /**
@@ -239,9 +239,7 @@ class SurveyTemplate extends DataObject implements ISurveyTemplate {
      */
     public function getSteps()
     {
-        $query = new QueryObject();
-        $query->addOrder(QueryOrder::asc('Order'));
-        return AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Steps', $query)->toArray();
+        return $this->Steps()->sort('Order','ASC')->toArray();
     }
 
     /**
@@ -250,9 +248,7 @@ class SurveyTemplate extends DataObject implements ISurveyTemplate {
      */
     public function addStep(ISurveyStepTemplate $step)
     {
-        $query = new QueryObject();
-        $query->addOrder(QueryOrder::asc('Order'));
-        AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Steps', $query)->add($step);
+        $this->Steps()->add($step);
     }
 
     /**
@@ -297,12 +293,13 @@ class SurveyTemplate extends DataObject implements ISurveyTemplate {
         }
 
         //check dates ranges
-        if($this->StartDate != null && $this->EndDate != null )
-        $start_date = new \DateTime($this->StartDate, new DateTimeZone('UTC'));
-        $end_date   = new \DateTime($this->EndDate, new DateTimeZone('UTC'));
+        if($this->StartDate != null && $this->EndDate != null ) {
+            $start_date = new \DateTime($this->StartDate, new DateTimeZone('UTC'));
+            $end_date = new \DateTime($this->EndDate, new DateTimeZone('UTC'));
 
-        if($start_date >= $end_date){
-            return $valid->error('selected date range is invalid!');
+            if ($start_date >= $end_date) {
+                return $valid->error('selected date range is invalid!');
+            }
         }
 
         return $valid;
@@ -321,7 +318,7 @@ class SurveyTemplate extends DataObject implements ISurveyTemplate {
      */
     public function getAutopopulationMappings()
     {
-        return AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'MigrationMappings')->toArray();
+        return $this->MigrationMappings()->toArray();
     }
 
     /**
@@ -329,7 +326,7 @@ class SurveyTemplate extends DataObject implements ISurveyTemplate {
      */
     public function getEntities()
     {
-        return AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'EntitySurveys')->toArray();
+        return $this->EntitySurveys()->toArray();
     }
 
     /**

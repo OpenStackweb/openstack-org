@@ -57,7 +57,7 @@ final class NewSurveyDataAutopopulationStrategy implements ISurveyAutopopulation
 
             $old_answer = $old_survey->findAnswerByQuestion($origin_field);
             if(is_null($old_answer)) continue;
-            $step->addAnswer($survey_builder->buildAnswer($question, $this->translateAnswerValue( $old_answer->value(), $origin_field, $question)));
+            $step->addAnswer($survey_builder->buildAnswer($question, SurveyAnswerValueTranslator::translate($old_answer->value(), $origin_field, $question)));
         }
 
         //check if we need to auto-populate entities
@@ -95,7 +95,7 @@ final class NewSurveyDataAutopopulationStrategy implements ISurveyAutopopulation
                         }
                         $old_answer = $old_entity->findAnswerByQuestion($origin_field);
                         if(is_null($old_answer)) continue;
-                        $step->addAnswer($survey_builder->buildAnswer($question, $this->translateAnswerValue( $old_answer->value(), $origin_field, $question)));
+                        $step->addAnswer($survey_builder->buildAnswer($question, SurveyAnswerValueTranslator::translate($old_answer->value(), $origin_field, $question)));
                     }
                 }
             }
@@ -103,75 +103,4 @@ final class NewSurveyDataAutopopulationStrategy implements ISurveyAutopopulation
         }
     }
 
-    /**
-     * @param string $old_value
-     * @param ISurveyQuestionTemplate $old_question
-     * @param ISurveyQuestionTemplate $new_question
-     * @return string
-     */
-    private function translateAnswerValue($old_value, ISurveyQuestionTemplate $old_question, ISurveyQuestionTemplate $new_question)
-    {
-        $new_value = $old_value;
-
-        if($old_question instanceof IDoubleEntryTableQuestionTemplate && $new_question instanceof IDoubleEntryTableQuestionTemplate){
-            $new_tuples = [];
-
-            foreach (explode(',', $old_value) as $tuple) {
-                list($row_id, $col_id) = explode(':', $tuple);
-                $col     = SurveyQuestionColumnValueTemplate::get()->byID($col_id);
-                if(is_null($col)) continue;
-                $row     = SurveyQuestionRowValueTemplate::get()->byID($row_id);
-                if(is_null($row)) continue;
-
-                $col_val = $col->Value;
-                $row_val = $row->Value;
-
-                $new_col = SurveyQuestionColumnValueTemplate::get()->filter(
-                    [
-                        'Value' => $col_val,
-                        'OwnerID' => $new_question->ID
-                    ]
-                )->first();
-                $new_row = SurveyQuestionRowValueTemplate::get()->filter(
-                    [
-                        'Value'   => $row_val,
-                        'OwnerID' => $new_question->ID
-                    ]
-                )->first();
-
-                if (is_null($new_col) || is_null($new_row)) continue;
-
-                $new_tuples[] = "{$new_row->ID}:{$new_col->ID}";
-            }
-
-            return implode(',', $new_tuples);
-        }
-
-        if($old_question instanceof IMultiValueQuestionTemplate && $new_question instanceof IMultiValueQuestionTemplate)
-        {
-            if($old_question instanceof IDropDownQuestionTemplate && $old_question->isCountrySelector() &&
-                $new_question instanceof IDropDownQuestionTemplate && $new_question->isCountrySelector())
-                return $old_value;
-            // need translate value
-            $old_value = explode(',', $old_value);
-            $new_value =  array();
-            foreach($old_question->getValues() as $val_aux)
-            {
-                $id = $val_aux->getIdentifier();
-                if(in_array($id, $old_value))
-                {
-                    // this value its present on old answer
-                    $new_val = $new_question->getValueByValue
-                    (
-                        $val_aux->value()
-                    );
-                    if(is_null($new_val)) continue;
-                    $new_id = $new_val->getIdentifier();
-                    array_push($new_value, $new_id  );
-                }
-            }
-            return implode(',', $new_value);
-        }
-        return $new_value;
-    }
 }

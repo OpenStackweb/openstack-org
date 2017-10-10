@@ -20,23 +20,26 @@ interface ISurveyManager {
     /**
      * @param int $template_id
      * @param int $creator_id
+     * @param string|null $lang
      * @return ISurvey
      */
-    public function buildSurvey($template_id, $creator_id);
+    public function buildSurvey($template_id, $creator_id, $lang = null);
 
     /**
      * @param ISurveyDynamicEntityStep $step
      * @param int $creator_id
+     * @param string|null $lang
      * @return IEntitySurvey
      */
-    public function buildEntitySurvey(ISurveyDynamicEntityStep $step, $creator_id);
+    public function buildEntitySurvey(ISurveyDynamicEntityStep $step, $creator_id, $lang = null);
 
     /**
      * @param array $data
      * @param ISurveyStep $current_step
+     * @param string|null $lang
      * @return ISurveyStep
      */
-    public function completeStep(ISurveyStep $current_step, array $data);
+    public function completeStep(ISurveyStep $current_step, array $data, $lang = null);
 
     /**
      * @param ISurvey $survey
@@ -114,4 +117,12 @@ interface ISurveyManager {
      * @return void
      */
     public function emailTeamMembersOnEntitySurvey($entity_survey_id, IMessageSenderService $sender_service );
+
+
+    /**
+     * @param array $surveys_2_merge
+     * @param string $merge_result_survey_title
+     * @return void
+     */
+    public function mergeSurveys(array $surveys_2_merge, $merge_result_survey_title = "Total");
 }

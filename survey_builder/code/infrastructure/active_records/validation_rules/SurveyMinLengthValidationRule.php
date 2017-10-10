@@ -38,7 +38,6 @@ class SurveyMinLengthValidationRule extends SurveySingleValueValidationRule {
         return $this->getField('Name');
     }
 
-
     /**
      * @return array()
      */

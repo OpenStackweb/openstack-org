@@ -171,7 +171,7 @@ class EntitySurveyTemplate extends SurveyTemplate implements IEntitySurveyTempla
      */
     public function getDynamicStepTemplate()
     {
-        return AssociationFactory::getInstance()->getMany2OneAssociation($this, 'Owner')->getTarget();
+        return $this->getComponent('Owner');
     }
 
     /**

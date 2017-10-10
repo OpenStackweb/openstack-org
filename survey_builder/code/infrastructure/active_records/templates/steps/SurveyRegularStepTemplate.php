@@ -43,9 +43,7 @@ class SurveyRegularStepTemplate
      */
     public function getQuestions()
     {
-        $query = new QueryObject();
-        $query->addOrder(QueryOrder::asc('Order'));
-        return AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Questions', $query)->toArray();
+        return $this->Questions()->sort('Order', 'ASC')->toArray();
     }
 
     /**
@@ -54,9 +52,7 @@ class SurveyRegularStepTemplate
      */
     public function addQuestion(ISurveyQuestionTemplate $question)
     {
-        $query = new QueryObject();
-        $query->addOrder(QueryOrder::asc('Order'));
-        return AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Questions', $query)->add($question);
+        $this->Questions()->add($question);
         return $this;
     }
 
@@ -97,7 +93,6 @@ class SurveyRegularStepTemplate
                     'SurveyMemberFirstNameQuestionTemplate'   => 'Current Member FirstName' ,
                     'SurveyMemberLastNameQuestionTemplate'    => 'Current Member LastName' ,
                     'SurveyMemberCountryQuestionTemplate'     => 'Current Member Country' ,
-                    'SurveyTextBoxQuestionTemplate'           => 'TextBox' ,
                     'SurveyEmailQuestionTemplate'             => 'Email' ,
                     'SurveyPercentageQuestionTemplate'        => 'Percentage' ,
                     'SurveyNumericQuestionTemplate'           => 'Numeric' ,

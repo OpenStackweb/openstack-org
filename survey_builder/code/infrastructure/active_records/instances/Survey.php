@@ -19,52 +19,48 @@ class Survey extends DataObject implements ISurvey
 {
     const SurveyTestersGroupSlug = 'survey-testers';
 
-    static $db = array
-    (
+    static $db = [
         'BeenEmailed' => 'Boolean',
         'IsTest'      => 'Boolean',
         'State'       => "Enum('INCOMPLETE,SAVED,COMPLETE','INCOMPLETE')",
         'Lang'        => 'Varchar(10)'
-    );
+    ];
 
-    static $indexes = array();
+    static $indexes = [];
 
-    static $has_one = array
-    (
+    static $has_one = [
         'Template'       => 'SurveyTemplate',
         'CreatedBy'      => 'Member',
         'CurrentStep'    => 'SurveyStep',
         'MaxAllowedStep' => 'SurveyStep',
-    );
+    ];
 
-    static $many_many = array();
+    static $many_many = [];
 
-    static $has_many = array(
+    static $has_many = [
         'Steps' => 'SurveyStep',
-    );
+    ];
 
-    private static $defaults = array(
+    static $defaults = [
         'BeenEmailed' => false,
         'IsTest'      => false,
-    );
+    ];
 
-
-    private static $searchable_fields = array
-    (
+    static $searchable_fields = [
         'ID',
         'Created',
         'IsTest',
-    );
+    ];
 
-    private static $summary_fields = array
-    (
+    static $summary_fields = [
+
         'ID'                        => 'ID',
         'Created'                   => 'Created',
         'CreatedBy.Email'           => 'CreatedBy',
         'CurrentStep.Template.Name' => 'CurrentStep',
         'EntitiesSurveys.Count'     => '# Deployments',
         'IsTest'                    => 'Is Test ?'
-    );
+    ];
 
     protected function onBeforeWrite()
     {
@@ -139,7 +135,7 @@ class Survey extends DataObject implements ISurvey
      */
     public function allowedMaxStep()
     {
-        return AssociationFactory::getInstance()->getMany2OneAssociation($this, 'MaxAllowedStep')->getTarget();
+        return $this->getComponent('MaxAllowedStep');
     }
 
     /**
@@ -147,7 +143,7 @@ class Survey extends DataObject implements ISurvey
      */
     public function currentStep()
     {
-        return AssociationFactory::getInstance()->getMany2OneAssociation($this, 'CurrentStep')->getTarget();
+        return $this->getComponent('CurrentStep');
     }
 
     /**
@@ -155,16 +151,9 @@ class Survey extends DataObject implements ISurvey
      */
     public function getSteps()
     {
-        $query = new QueryObject(new SurveyStep);
-        $query->addAlias(QueryAlias::create('Template'));
-        $query->addOrder(QueryOrder::asc('Template.Order'));
-
-        $list =  new ArrayList
-        (
-            AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Steps',$query)->toArray()
-        );
-
-        return $list;
+        return $this->Steps()
+            ->innerJoin('SurveyStepTemplate', 'SurveyStepTemplate.ID = SurveyStep.TemplateID')
+            ->sort('SurveyStepTemplate.Order', 'ASC');
     }
 
     /**
@@ -172,7 +161,7 @@ class Survey extends DataObject implements ISurvey
      */
     public function template()
     {
-        return AssociationFactory::getInstance()->getMany2OneAssociation($this, 'Template')->getTarget();
+        return $this->getComponent('Template');
     }
 
     /**
@@ -180,7 +169,7 @@ class Survey extends DataObject implements ISurvey
      */
     public function createdBy()
     {
-        return AssociationFactory::getInstance()->getMany2OneAssociation($this, 'CreatedBy')->getTarget();
+        return $this->getComponent('CreatedBy');
     }
 
     /**
@@ -189,7 +178,7 @@ class Survey extends DataObject implements ISurvey
      */
     public function registerAllowedMaxStep(ISurveyStep $max_step)
     {
-        AssociationFactory::getInstance()->getMany2OneAssociation($this, 'MaxAllowedStep')->setTarget($max_step);
+        $this->MaxAllowedStepID = $max_step->ID;
     }
 
     /**
@@ -198,7 +187,9 @@ class Survey extends DataObject implements ISurvey
      */
     public function registerCurrentStep(ISurveyStep $current_step)
     {
-        AssociationFactory::getInstance()->getMany2OneAssociation($this, 'CurrentStep')->setTarget($current_step);
+        SS_Log::log(sprintf("registering current step %s", $current_step->Template()->Name), SS_Log::DEBUG);
+        $this->CurrentStepID = $current_step->ID;
+        $this->write();
     }
 
     /**
@@ -207,7 +198,8 @@ class Survey extends DataObject implements ISurvey
      */
     public function addStep(ISurveyStep $step)
     {
-        AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Steps')->add($step);
+        $this->Steps()->add($step);
+        $step->SurveyID = $this->ID;
     }
 
     /**
@@ -480,7 +472,6 @@ class Survey extends DataObject implements ISurvey
                 }
             }
         }
-
         return null;
     }
 
@@ -491,7 +482,7 @@ class Survey extends DataObject implements ISurvey
     public function removeStep(ISurveyStep $step)
     {
         $step->clear();
-        AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Steps')->remove($step);
+        $this->Steps()->remove($step);
     }
 
     protected function onBeforeDelete()

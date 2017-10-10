@@ -287,6 +287,7 @@ class SurveyPage_Controller extends Page_Controller
         try {
 
             $step_name      = $request->param('STEP_SLUG');
+            SS_Log::log(sprintf("STEP_SLUG %s", $step_name), SS_Log::DEBUG);
 
             $current_survey = $this->getCurrentSurveyInstance();
 
@@ -455,7 +456,7 @@ class SurveyPage_Controller extends Page_Controller
     {
         $current_survey = $this->getCurrentSurveyInstance();
         $current_step   = $current_survey->currentStep();
-
+        SS_Log::log(sprintf("current step %s", $current_survey->currentStep()->Template()->Name), SS_Log::DEBUG);
         $form->clearMessage();
 
         if($current_step instanceof ISurveyRegularStep)
@@ -479,7 +480,7 @@ class SurveyPage_Controller extends Page_Controller
             $this->survey_manager->completeSurvey($current_step);
             $form->sessionMessage(GetTextTemplateHelpers::_t("survey_ui", "Thank you for your submission !!!"), 'good');
         }
-
+        SS_Log::log(sprintf("end current step %s", $current_survey->currentStep()->Template()->Name), SS_Log::DEBUG);
         return $this->redirect($this->Link().$next_step->template()->title());
     }
 

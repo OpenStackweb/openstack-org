@@ -130,7 +130,7 @@ jQuery(document).ready(function($) {
             on_save_later = true;
             $('body').ajax_loader();
             $this.attr('disabled','disabled');
-
+            $("#NEXT_STEP", form).remove();
             $.post(action+'?SAVE_LATER=1', form.serialize(), function(data){
                 $('#ModalSaveLater').modal('toggle');
                 on_save_later                   = false;
@@ -152,6 +152,7 @@ jQuery(document).ready(function($) {
         if(form.length > 0 && default_action.length > 0) {
             $('<input />').attr('type', 'hidden')
                 .attr('name', "NEXT_STEP")
+                .attr('id', "NEXT_STEP")
                 .attr('value', $(this).data('step-name'))
                 .appendTo(form);
             default_action.trigger('click');

@@ -231,9 +231,7 @@ class SurveyMultiValueQuestionTemplate
      */
     public function getValues()
     {
-        $query = new QueryObject();
-        $query->addOrder(QueryOrder::asc('Order'));
-        return AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Values', $query)->toArray();
+        return $this->Values()->sort('Order','ASC')->toArray();
     }
 
     /**
@@ -242,9 +240,7 @@ class SurveyMultiValueQuestionTemplate
      */
     public function addValue(IQuestionValueTemplate $value)
     {
-        $query = new QueryObject();
-        $query->addOrder(QueryOrder::asc('Order'));
-        AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Values', $query)->add($value);
+        $this->Values()->add($value);
         return $this;
     }
 

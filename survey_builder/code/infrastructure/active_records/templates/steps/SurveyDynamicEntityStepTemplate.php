@@ -147,12 +147,12 @@ class SurveyDynamicEntityStepTemplate
      */
     public function getEntity()
     {
-        return AssociationFactory::getInstance()->getMany2OneAssociation($this, 'Entity')->getTarget();
+        return $this->getComponent('Entity');
     }
 
     public function setEntity(IEntitySurveyTemplate $entity)
     {
-        AssociationFactory::getInstance()->getMany2OneAssociation($this, 'Entity')->setTarget($entity);
+        $this->EntityID = $entity->getIdentifier();
         return $this;
     }
 

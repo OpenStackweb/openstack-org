@@ -500,7 +500,9 @@ SQL;
         I.TemplateID = $template->ID AND I.IsTest = 0
         AND SQUEST.ClassName = 'SurveyOrganizationQuestionTemplate'
         {$mandatory_filter}
-        {$filters_where} GROUP BY SANS.`Value` ORDER BY SANS.`Value`;";
+        {$filters_where} 
+        GROUP BY SANS.`Value`, I.ID
+        ORDER BY SANS.`Value`;";
 
 
         $companies = new ArrayList();
