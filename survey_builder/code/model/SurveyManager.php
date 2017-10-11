@@ -605,7 +605,7 @@ final class SurveyManager implements ISurveyManager {
                 [
                     'IsTest' => 0,
                 ]
-            )->where("TemplateID IN ({$query_ids})")->sort("CreatedByID", "ASC");
+            )->where("TemplateID IN ({$query_ids})")->sort(["CreatedByID" =>  "ASC", "TemplateID" => "ASC"]);
 
             $last_user_id = null;
             $user_surveys = [];
@@ -636,6 +636,12 @@ final class SurveyManager implements ISurveyManager {
     private function processMerge($new_template, $current_user_id, &$user_surveys){
         try {
             //process
+            $user_surveys_ids = [];
+            foreach ($user_surveys as $survey)
+                $user_surveys_ids[] = $survey->ID;
+
+            echo sprintf("found %s surveys id for member id %s ....", implode(", ", $user_surveys_ids), $current_user_id).PHP_EOL;
+
             $last_user_survey      = end($user_surveys);
             $new_survey_instance   = $this->buildSurvey($new_template->ID, $current_user_id, $last_user_survey->Lang);
             $former_entity_surveys = [];
@@ -646,15 +652,19 @@ final class SurveyManager implements ISurveyManager {
                 foreach ($former_survey->getSteps() as $step) {
                     if (!($step instanceof ISurveyDynamicEntityStep)) continue;
                     foreach ($step->getEntitySurveys() as $former_entity_survey) {
-                        if (isset($former_entity_surveys[$former_entity_survey->getFriendlyName()]))
+                        $deployment_name = $former_entity_survey->getFriendlyName();
+                        if (isset($former_entity_surveys[$deployment_name]) &&
+                            // if former deployment is recent than current one, skip it
+                            new DateTime($former_entity_surveys[$deployment_name]->LastEdited) > new DateTime($former_entity_survey->LastEdited))
                             continue;
-                        echo sprintf("adding deployment %s for member id %s", $former_entity_survey->getFriendlyName(), $current_user_id) . PHP_EOL;
-                        $former_entity_surveys[$former_entity_survey->getFriendlyName()] = $former_entity_survey;
+                        echo sprintf("adding deployment id %s (%s) for member id %s", $former_entity_survey->ID, $deployment_name, $current_user_id) . PHP_EOL;
+                        $former_entity_surveys[$deployment_name] = $former_entity_survey;
                     }
                 }
             }
             // merge surveys
-            echo sprintf("member id %s - former survey id %s - new survey id %s", $current_user_id, $last_user_survey->ID, $new_survey_instance->ID).PHP_EOL;
+            echo sprintf("created new survey instance for member id %s - former survey id %s - new survey id %s", $current_user_id, $last_user_survey->ID, $new_survey_instance->ID).PHP_EOL;
+            echo sprintf("translating answers values from former survey id %s to new survey id %s", $last_user_survey->ID, $new_survey_instance->ID).PHP_EOL;
             foreach ($new_survey_instance->getSteps() as $step) {
                 if ($step instanceof ISurveyRegularStep) {
                     $former_step = $last_user_survey->getStep($step->template()->title());
@@ -676,7 +686,8 @@ final class SurveyManager implements ISurveyManager {
                         // create new deployment
                         echo sprintf("adding deployment %s for member id %s", $key, $current_user_id) . PHP_EOL;
                         $new_entity_survey = $this->buildEntitySurvey($step, $current_user_id, $new_survey_instance->Lang);
-                        echo sprintf("member id %s - former deployment id %s - new deployment id %s", $current_user_id, $former_entity_survey->ID, $new_entity_survey->ID).PHP_EOL;
+                        echo sprintf("created new deployment for member id %s - former deployment id %s - new deployment id %s", $current_user_id, $former_entity_survey->ID, $new_entity_survey->ID).PHP_EOL;
+                        echo sprintf("translating answers values from former deployment id %s to new deployment id %s", $former_entity_survey->ID, $new_entity_survey->ID).PHP_EOL;
                         foreach ($new_entity_survey->getSteps() as $new_survey_instance_step) {
                             $former_step = $former_entity_survey->getStep($new_survey_instance_step->template()->title());
                             if (is_null($former_step)) continue;
