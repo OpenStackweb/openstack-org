@@ -566,7 +566,7 @@ final class SurveyManager implements ISurveyManager {
                     }
                 }
                 if($clone_step instanceof SurveyThankYouStepTemplate) {
-                   // clone email ?
+                    // clone email ?
                 }
                 if($clone_step instanceof SurveyDynamicEntityStepTemplate && !is_null($cloned_entity))
                 {
@@ -602,7 +602,9 @@ final class SurveyManager implements ISurveyManager {
 
             $query_ids = implode(",", $surveys_2_merge);
             $surveys_instances = Survey::get()->filter(
-                ['IsTest' => 0]
+                [
+                    'IsTest' => 0,
+                ]
             )->where("TemplateID IN ({$query_ids})")->sort("CreatedByID", "ASC");
 
             $last_user_id = null;
@@ -611,14 +613,17 @@ final class SurveyManager implements ISurveyManager {
             foreach($surveys_instances as $survey_instance){
                 $current_user_id = intval($survey_instance->CreatedByID);
                 if(!is_null($last_user_id) && $last_user_id != $current_user_id && count($user_surveys) > 0){
-                    echo sprintf("processing %s surveys for member id %s", count($user_surveys), $current_user_id).PHP_EOL;
-                    $this->processMerge($new_template, $current_user_id, $user_surveys);
+                    echo sprintf("processing %s surveys for member id %s", count($user_surveys), $last_user_id).PHP_EOL;
+                    $this->processMerge($new_template, $last_user_id, $user_surveys);
+                    // resets surveys per user
+                    $user_surveys = [];
                 }
                 $last_user_id   = $current_user_id;
                 $user_surveys[] = $survey_instance;
             }
             if(count($user_surveys) > 0){
-                $this->processMerge($new_template, $current_user_id, $user_surveys);
+                echo sprintf("processing %s surveys for member id %s", count($user_surveys), $last_user_id).PHP_EOL;
+                $this->processMerge($new_template, $last_user_id, $user_surveys);
             }
         });
     }
@@ -649,6 +654,7 @@ final class SurveyManager implements ISurveyManager {
                 }
             }
             // merge surveys
+            echo sprintf("member id %s - former survey id %s - new survey id %s", $current_user_id, $last_user_survey->ID, $new_survey_instance->ID).PHP_EOL;
             foreach ($new_survey_instance->getSteps() as $step) {
                 if ($step instanceof ISurveyRegularStep) {
                     $former_step = $last_user_survey->getStep($step->template()->title());
@@ -661,14 +667,16 @@ final class SurveyManager implements ISurveyManager {
                         $former_answers[$answer->Question()->Name] = SurveyAnswerValueTranslator::translate($answer->Value, $answer->Question(), $new_question);
                     }
 
-                    echo sprintf("got %s aswers from former step %s", count($former_answers), $former_step->template()->title()) . PHP_EOL;
+                    echo sprintf("got %s answers from former step %s", count($former_answers), $former_step->template()->title()) . PHP_EOL;
                     $this->completeStep($step, $former_answers, $new_survey_instance->Lang);
                 }
                 if ($step instanceof ISurveyDynamicEntityStep && count($former_entity_surveys) > 0) {
                     echo sprintf("processing deployments for member id %s (%s)", $current_user_id, count($former_entity_surveys)) . PHP_EOL;
                     foreach ($former_entity_surveys as $key => $former_entity_survey) {
                         // create new deployment
+                        echo sprintf("adding deployment %s for member id %s", $key, $current_user_id) . PHP_EOL;
                         $new_entity_survey = $this->buildEntitySurvey($step, $current_user_id, $new_survey_instance->Lang);
+                        echo sprintf("member id %s - former deployment id %s - new deployment id %s", $current_user_id, $former_entity_survey->ID, $new_entity_survey->ID).PHP_EOL;
                         foreach ($new_entity_survey->getSteps() as $new_survey_instance_step) {
                             $former_step = $former_entity_survey->getStep($new_survey_instance_step->template()->title());
                             if (is_null($former_step)) continue;
@@ -693,11 +701,9 @@ final class SurveyManager implements ISurveyManager {
             $new_survey_instance->Created    = $last_user_survey->Created;
             $new_survey_instance->LastEdited = $last_user_survey->LastEdited;
             $new_survey_instance->write();
-            $user_surveys = [];
         }
         catch (Exception $ex){
             echo $ex->getMessage().PHP_EOL;
-            $user_surveys = [];
         }
     }
 
