@@ -20,7 +20,8 @@ export const genericReducers  = function (
 state = {
     msg: null,
     msg_type: null,
-    params: {}
+    params: {},
+    loading: false,
 },
 action = {}) {
     switch(action.type) {

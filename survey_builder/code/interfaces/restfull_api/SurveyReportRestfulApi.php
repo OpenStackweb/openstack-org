@@ -24,7 +24,6 @@ class SurveyReportRestfulApi extends AbstractRestfulJsonApi
         return  strpos(strtolower($request->getURL()),self::ApiPrefix) !== false;
     }
 
-
     /**
      * @return bool
      */
@@ -51,8 +50,6 @@ class SurveyReportRestfulApi extends AbstractRestfulJsonApi
 
     public function getReportTemplate(SS_HTTPRequest $request)
     {
-        if (!Director::is_ajax()) return $this->forbiddenError();
-
         $template_id = (int)$request->param('SURVEY_TEMPLATE_ID');
 
         try {
@@ -69,8 +66,6 @@ class SurveyReportRestfulApi extends AbstractRestfulJsonApi
 
     public function getReport(SS_HTTPRequest $request)
     {
-        if (!Director::is_ajax()) return $this->forbiddenError();
-
         $template_id = (int)$request->param('SURVEY_TEMPLATE_ID');
         $section_id  = (int)$request->getVar('section_id');
         $filters     = json_decode($request->getVar('filters'));

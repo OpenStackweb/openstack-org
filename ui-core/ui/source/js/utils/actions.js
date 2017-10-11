@@ -60,40 +60,57 @@ const schedule = (key, req) => {
 
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
+const isObjectEmpty = (obj) => {
+    return Object.keys(obj).length === 0 && obj.constructor === Object ;
+}
+
 export const getRequest =
 (
     requestActionCreator,
     receiveActionCreator,
     endpoint,
     errorHandler
-) => params => dispatch => {
-    dispatch(requestActionCreator(params));
+) => (params = {}) => dispatch => {
+
+    console.log(`endpoint ${endpoint}`);
+
+    let url = URI(endpoint);
+
+    if(!isObjectEmpty(params))
+        url = url.query(params);
+
+    console.log(`url ${url.toString()}`);
+
+    if(requestActionCreator && typeof requestActionCreator === 'function')
+        dispatch(requestActionCreator(params));
+
     const key = `${requestActionCreator().type}_${JSON.stringify(params || {})}`;
     cancel(key);
-    let url = URI(endpoint).query(params).toString();
-    const req = http.get(url)
-        .timeout({
-            response: 60000,
-            deadline: 60000,
-        })
-        .end(
-            responseHandler(
-                dispatch,
-                json => {
-                    dispatch(receiveActionCreator({
-                        response: json
-                    }));
-                },
-                errorHandler
+
+    return new Promise((resolve, reject) => {
+        http.get(url.toString())
+            .timeout({
+                response: 60000,
+                deadline: 60000,
+            })
+            .end(
+                responseHandler(
+                    dispatch,
+                    json => {
+                        if(typeof receiveActionCreator === 'function') {
+                            dispatch(receiveActionCreator({
+                                response: json
+                            }));
+                            return resolve();
+                        }
+                        dispatch(receiveActionCreator);
+                        return resolve();
+                    },
+                    errorHandler
+                )
             )
-        )
-    schedule(key, req);
+    });
 };
-
-
-const isObjectEmpty = (obj) => {
-    return Object.keys(obj).length === 0 && obj.constructor === Object ;
-}
 
 export const putRequest = (
     requestActionCreator,
@@ -139,7 +156,6 @@ export const putRequest = (
                 )
             )
     });
-
 };
 
 export const deleteRequest = (
