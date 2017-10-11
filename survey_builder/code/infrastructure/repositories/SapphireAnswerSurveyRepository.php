@@ -120,9 +120,8 @@ final class SapphireAnswerSurveyRepository
                     $col = $matrix[0];
                     $row = $matrix[1];
                     if (!$col || !$row) continue;
-
-                    $answer_value = array('col' => $question_values[$col],'row' => $question_values[$row]);
-                    $answer_values->push($answer_value);
+                    if(!isset($question_values[$col]) || !isset($question_values[$row])) continue;
+                    $answer_values[] = ['col' => $question_values[$col],'row' => $question_values[$row]];
                 } else if ($question->Name == 'NetPromoter') {
                     $answer_value = $question_values[$single_answer];
                     if ($answer_value < 7) {

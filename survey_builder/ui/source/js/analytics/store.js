@@ -10,10 +10,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-import React from 'react';
 
-export const RawHTML = ({children, className = ""}) =>
-    <span className={className}
-         dangerouslySetInnerHTML={{ __html: children.replace(/\n/g, '<br />')}} />
+import { createStore, applyMiddleware, compose} from 'redux';
+import reduceReducers from 'reduce-reducers';
+import thunk from 'redux-thunk';
+import AnalyticReducer from './reducers';
+import { genericReducers } from "~core-utils/reducers";
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
+let reducer = reduceReducers(AnalyticReducer, genericReducers);
+
+const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
+
+export default store;

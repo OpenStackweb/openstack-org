@@ -11,9 +11,15 @@
  * limitations under the License.
  **/
 import React from 'react';
+import { Provider } from 'react-redux';
+import ReactDOM from 'react-dom';
+import SurveyAnalyticsApp from './SurveyAnalyticsApp';
+import store from './store';
+import './style.less';
 
-export const RawHTML = ({children, className = ""}) =>
-    <span className={className}
-         dangerouslySetInnerHTML={{ __html: children.replace(/\n/g, '<br />')}} />
-
-
+ReactDOM.render(
+    <Provider store={store}>
+        <SurveyAnalyticsApp reportTemplates={reportTemplates}/>
+    </Provider>,
+    document.getElementById('survey-analytics-container')
+);
