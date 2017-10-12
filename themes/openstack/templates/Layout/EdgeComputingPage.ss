@@ -158,6 +158,23 @@
             </div>
         </div>
     </div>
+    <div class="content-section-b forrester-promo-row">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <h3>2017 Innovations in Edge Computing and MEC Report
+                    </h3>
+                </div>
+                <div class="col-sm-4">
+                    <p>87% of respondents think OpenStack will be used to manage edge infrastructure 
+                    </p>
+                </div>
+                <div class="col-sm-4">
+                    <a href="http://sdx.io/sdxcentral-mec-report-2017-OS" target="_blank" class="marketplace-btn">Read the SDxCentral Report<i class="fa fa-chevron-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="edge-resources">
         <div class="container">
             <div class="row">
