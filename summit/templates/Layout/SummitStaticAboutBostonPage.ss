@@ -113,9 +113,9 @@
       </div>
       <div class="col-sm-3 featured">
         <div class="summit-user-section">
-          <img src="/assets/sydney-summit/speakers/Jessica-Field.jpg" alt="Jessica Field" class="summit-user-image">
-          <div class="name">Jessica Field</div>
-          <div class="title">OpenStack APAC Ambassador</div>
+          <img src="/assets/sydney-summit/speakers/allison-randall.jpg" alt="Allison Randall" class="summit-user-image">
+          <div class="name">Allison Randall</div>
+          <div class="title">Open Source Strategist</div>
         </div>
       </div>
       <div class="col-sm-3 featured">
