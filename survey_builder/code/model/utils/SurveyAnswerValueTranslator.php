@@ -70,22 +70,19 @@ final class SurveyAnswerValueTranslator
                 $new_question instanceof IDropDownQuestionTemplate && $new_question->isCountrySelector())
                 return $old_value;
             // need translate value
-            $old_value = explode(',', $old_value);
-            $new_value =  array();
-            foreach($old_question->getValues() as $val_aux)
-            {
-                $id = $val_aux->getIdentifier();
-                if(in_array($id, $old_value))
-                {
-                    // this value its present on old answer
-                    $new_val = $new_question->getValueByValue
-                    (
-                        $val_aux->value()
-                    );
-                    if(is_null($new_val)) continue;
-                    $new_id = $new_val->getIdentifier();
-                    array_push($new_value, $new_id  );
-                }
+            $old_values = explode(',', $old_value);
+            $new_value  = [];
+
+            foreach($old_values as $old_value_id){
+                $ov = $old_question->getValueById($old_value_id);
+                if(is_null($ov)) continue;
+                // this value its present on old answer
+                $nv = $new_question->getValueByValue
+                (
+                    $ov->value()
+                );
+                if(is_null($nv)) continue;
+                $new_value[] = $nv->getIdentifier();
             }
             return implode(',', $new_value);
         }
