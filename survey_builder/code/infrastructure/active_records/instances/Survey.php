@@ -65,10 +65,9 @@ class Survey extends DataObject implements ISurvey
     protected function onBeforeWrite()
     {
         parent::onBeforeWrite();
+        // only force IsTest if belongs to Group SurveyTestersGroupSlug
         if ($this->CreatedBy()->inGroup(Survey::SurveyTestersGroupSlug)) {
             $this->IsTest = true;
-        } else {
-            $this->IsTest = false;
         }
     }
 
