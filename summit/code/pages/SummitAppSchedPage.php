@@ -362,7 +362,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         }
 
 
-        $my_schedule = $member->Schedule()->sort(array('StartDate'=>'ASC','Location.Name' => 'ASC'));
+        $my_schedule = $member->getScheduleBySummit($this->Summit()->ID, ['StartDate'=>'ASC','Location.Name' => 'ASC']);
 
         return $this->renderWith(
             ['SummitAppMySchedulePage', 'SummitPage', 'Page'],
