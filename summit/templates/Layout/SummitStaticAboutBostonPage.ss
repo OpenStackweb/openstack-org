@@ -114,13 +114,13 @@
       <div class="col-sm-3 featured">
         <div class="summit-user-section">
           <img src="/assets/sydney-summit/speakers/allison-randall.jpg" alt="Allison Randall" class="summit-user-image">
-          <div class="name">Allison Randall</div>
-          <div class="title">Open Source Strategist</div>
+          <div class="name">Allison Randal</div>
+          <div class="title">PhD, University of Cambridge | OpenStack Board Member</div>
         </div>
       </div>
       <div class="col-sm-3 featured">
         <div class="summit-user-section">
-          <img src="/assets/sydney-summit/speakers/Lew-Tucker.jpg" alt="Lew Tucker" class="summit-user-image">
+          <img src="/assets/sydney-summit/speakers/LewTucker2.png" alt="Lew Tucker" class="summit-user-image">
           <div class="name">Lew Tucker</div>
           <div class="title">Vice President and CTO, Cloud Computing, Cisco</div>
         </div>
@@ -143,9 +143,9 @@
       </div>
       <div class="col-sm-3">
         <div class="summit-user-section">
-          <img src="/assets/sydney-summit/speakers/Steven-Armstrong.jpg" alt="Steven Armstrong" class="summit-user-image">
-          <div class="name">Steven Armstrong</div>
-          <div class="title">Principal DevOps Automation Engineer, Paddy Power Betfair</div>
+          <img src="/assets/sydney-summit/speakers/Jessica-Field.jpg" alt="Jessica Field" class="summit-user-image">
+          <div class="name">Jessica Field</div>
+          <div class="title">Marketing Director, Aptira</div>
         </div>
       </div>
       <div class="col-sm-3">
