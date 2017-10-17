@@ -61,7 +61,7 @@ final class SangriaPageMarketPlaceExtension extends Extension {
         Requirements::css("themes/openstack/bower_assets/bootstrap/dist/css/bootstrap.min.css");
         Requirements::css("themes/openstack/bower_assets/fontawesome/css/font-awesome.min.css");
         Requirements::css('//fonts.googleapis.com/css?family=Open+Sans:300,400,700');
-        Requirements::css('themes/openstack/bower_assets/datetimepicker/build/jquery.datetimepicker.min.css');
+        Requirements::css('node_modules/jquery-datetimepicker/build/jquery.datetimepicker.min.css');
 
         // js
         Requirements::javascript("themes/openstack/bower_assets/jquery/dist/jquery.min.js");
@@ -70,7 +70,7 @@ final class SangriaPageMarketPlaceExtension extends Extension {
         Requirements::javascript("themes/openstack/bower_assets/jquery-cookie/jquery.cookie.js");
         Requirements::javascript('themes/openstack/bower_assets/jquery-mousewheel/jquery.mousewheel.js');
         Requirements::javascript('themes/openstack/bower_assets/php-date-formatter/js/php-date-formatter.min.js');
-        Requirements::javascript("themes/openstack/bower_assets/datetimepicker/build/jquery.datetimepicker.min.js");
+        Requirements::javascript('node_modules/jquery-datetimepicker/build/jquery.datetimepicker.full.min.js');
         Requirements::javascript('themes/openstack/javascript/jquery.tablednd.js');
 
         return $this->owner->getViewer('ViewPoweredOpenStackProducts')->process
@@ -89,7 +89,7 @@ final class SangriaPageMarketPlaceExtension extends Extension {
         Requirements::css("themes/openstack/bower_assets/bootstrap/dist/css/bootstrap.min.css");
         Requirements::css("themes/openstack/bower_assets/fontawesome/css/font-awesome.min.css");
         Requirements::css('//fonts.googleapis.com/css?family=Open+Sans:300,400,700');
-        Requirements::css('themes/openstack/bower_assets/datetimepicker/build/jquery.datetimepicker.min.css');
+        Requirements::css('node_modules/jquery-datetimepicker/build/jquery.datetimepicker.min.css');
         Requirements::css('themes/openstack/bower_assets/sweetalert2/dist/sweetalert2.min.css');
         Requirements::css("themes/openstack/css/validation.errors.css");
 
@@ -103,7 +103,7 @@ final class SangriaPageMarketPlaceExtension extends Extension {
         Requirements::javascript("themes/openstack/bower_assets/jquery-cookie/jquery.cookie.js");
         Requirements::javascript('themes/openstack/bower_assets/jquery-mousewheel/jquery.mousewheel.js');
         Requirements::javascript('themes/openstack/bower_assets/php-date-formatter/js/php-date-formatter.min.js');
-        Requirements::javascript("themes/openstack/bower_assets/datetimepicker/build/jquery.datetimepicker.min.js");
+        Requirements::javascript("node_modules/jquery-datetimepicker/build/jquery.datetimepicker.full.min.js");
         Requirements::javascript('themes/openstack/bower_assets/sweetalert2/dist/sweetalert2.min.js');
         Requirements::javascript("marketplace/code/ui/admin/js/utils.js");
         Requirements::javascript("marketplace/ui/source/js/ViewPoweredOpenStackProductDetail.js");

@@ -51,7 +51,7 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         Requirements::css("themes/openstack/css/dropdown.css");
         Requirements::css('themes/openstack/css/chosen.css');
         Requirements::css('summit/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css');
-        Requirements::css("themes/openstack/javascript/datetimepicker/jquery.datetimepicker.css");
+        Requirements::css("node_modules/jquery-datetimepicker/build/jquery.datetimepicker.min.css");
         Requirements::css('summit/css/summit-admin.css');
 
         Requirements::javascript("themes/openstack/bower_assets/jquery/dist/jquery.min.js");
@@ -60,7 +60,7 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         Requirements::javascript("themes/openstack/bower_assets/bootstrap/dist/js/bootstrap.min.js");
         Requirements::javascript('themes/openstack/javascript/chosen.jquery.min.js');
         Requirements::javascript('themes/openstack/bower_assets/moment/min/moment.min.js');
-        Requirements::javascript("themes/openstack/javascript/datetimepicker/jquery.datetimepicker.js");
+        Requirements::javascript("node_modules/jquery-datetimepicker/build/jquery.datetimepicker.full.min.js");
         Requirements::javascript('themes/openstack/javascript/urlfragment.jquery.js');
 
         Requirements::javascript("themes/openstack/bower_assets/jquery-ui/jquery-ui.min.js");

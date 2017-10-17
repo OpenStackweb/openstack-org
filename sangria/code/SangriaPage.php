@@ -58,12 +58,12 @@ final class SangriaPage_Controller extends AdminController implements Permission
         Requirements::css('themes/openstack/css/dropdown.css', 'screen, projection, print');
 
         Requirements::css(THIRDPARTY_DIR . '/jquery-ui-themes/smoothness/jquery-ui.css');
-        Requirements::css("themes/openstack/javascript/datetimepicker/jquery.datetimepicker.css");
+        Requirements::css("node_modules/jquery-datetimepicker/build/jquery.datetimepicker.min.css");
         Requirements::css("themes/openstack/css/deployment.survey.page.css");
 
         Requirements::javascript(THIRDPARTY_DIR . '/jquery-ui/jquery-ui.js');
         Requirements::javascript('themes/openstack/javascript/jquery.tablednd.js');
-        Requirements::javascript("themes/openstack/javascript/datetimepicker/jquery.datetimepicker.js");
+        Requirements::javascript("node_modules/jquery-datetimepicker/build/jquery.datetimepicker.full.min.js");
         Requirements::javascript("themes/openstack/javascript/deployment.survey.filters.js");
 
         self::$default_start_date = date('Y/m/d', strtotime('-1 months')) . ' 00:00';

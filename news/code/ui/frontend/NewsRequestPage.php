@@ -83,8 +83,8 @@ final class NewsRequestPage_Controller extends Page_Controller {
     }
 
     private function commonScripts(){
-        Requirements::css("themes/openstack/javascript/datetimepicker/jquery.datetimepicker.css");
-        Requirements::javascript("themes/openstack/javascript/datetimepicker/jquery.datetimepicker.js");
+        Requirements::css("node_modules/jquery-datetimepicker/build/jquery.datetimepicker.min.css");
+        Requirements::javascript("node_modules/jquery-datetimepicker/build/jquery.datetimepicker.full.min.js");
 	    Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
     }
 

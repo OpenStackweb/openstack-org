@@ -63,8 +63,8 @@ final class SangriaPageDeploymentExtension extends Extension
             return Controller::curr()->redirect(Controller::curr()->Link("ViewSurveysStatisticsSurveyBuilder"));
         }
         SangriaPage_Controller::generateDateFilters('DS');
-        Requirements::css("themes/openstack/javascript/datetimepicker/jquery.datetimepicker.css");
-        Requirements::javascript("themes/openstack/javascript/datetimepicker/jquery.datetimepicker.js");
+        Requirements::css("node_modules/jquery-datetimepicker/build/jquery.datetimepicker.min.css");
+        Requirements::javascript("node_modules/jquery-datetimepicker/build/jquery.datetimepicker.full.min.js");
         Requirements::css("themes/openstack/css/deployment.survey.page.css");
         Requirements::javascript("themes/openstack/javascript/deployment.survey.filters.js");
         Requirements::javascript("themes/openstack/javascript/sangria/sangria.page.viewdeploymentsurveystatistics.js");
@@ -222,7 +222,7 @@ final class SangriaPageDeploymentExtension extends Extension
         }
         SangriaPage_Controller::generateDateFilters('D');
         Requirements::css("themes/openstack/javascript/datetimepicker/jquery.datetimepicker.css");
-        Requirements::javascript("themes/openstack/javascript/datetimepicker/jquery.datetimepicker.js");
+        Requirements::javascript("node_modules/jquery-datetimepicker/build/jquery.datetimepicker.full.min.js");
         Requirements::css("themes/openstack/css/deployment.survey.page.css");
         Requirements::javascript("themes/openstack/javascript/deployment.survey.filters.js");
         Requirements::javascript('themes/openstack/javascript/sangria/sangria.page.viewdeploymentstatistics.js');

@@ -25,6 +25,7 @@
     "font-awesome": "^4.7.0",
     "has-flag": "^2.0.0",
     "jquery": "^3.2.1",
+    "jquery-datetimepicker": "^2.5.11",
     "moment": "^2.11.2",
     "mousetrap": "^1.6.0",
     "notifyjs-browser": "^0.4.2",

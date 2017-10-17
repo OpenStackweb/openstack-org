@@ -151,7 +151,7 @@ class MarketPlaceAdminPage_Controller extends AdminController
             "themes/openstack/css/chosen.css",
             "themes/openstack/css/colorpicker.css",
             "themes/openstack/bower_assets/bootstrap/dist/css/bootstrap.min.css",
-            "themes/openstack/javascript/datetimepicker/jquery.datetimepicker.css",
+            "node_modules/jquery-datetimepicker/build/jquery.datetimepicker.min.css",
         );
 
         foreach($css_files as $css_file)
@@ -182,7 +182,7 @@ class MarketPlaceAdminPage_Controller extends AdminController
             'marketplace/code/ui/admin/js/books.js',
             "themes/openstack/javascript/colorpicker.js",
             "themes/openstack/bower_assets/bootstrap/dist/js/bootstrap.min.js",
-            "themes/openstack/javascript/datetimepicker/jquery.datetimepicker.js",
+            "node_modules/jquery-datetimepicker/build/jquery.datetimepicker.full.min.js",
         );
 
         foreach($js_files as $js_file)
