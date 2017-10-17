@@ -259,6 +259,15 @@ class SummitPage_Controller extends Page_Controller
         }
     }
 
+    public function getSummitAboutLink() {
+        if($this->ClassName === 'SummitStaticAboutBostonPage')
+            return $this->Link();
+        else{
+            //childs page
+            return $this->Parent()->Link();
+        }
+    }
+
     public function MainNavClass(){
         if($this->ClassName === 'SummitOverviewPage' || $this->ClassName === 'SummitNewStaticAboutPage')
             return 'current';
