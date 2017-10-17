@@ -89,6 +89,7 @@
                     </a>
                     <p class="speaker">Imad Sousou</p>
                     <p class="company">Intel</p>
+                    <p><a href="https://www.openstack.org/assets/edge/slides/Opendev-Imad-Sousou-Keynote.pdf">Download Slides <i class="fa fa-file-pdf-o fa-3" aria-hidden="true"></i></a></p>
                 </div>
             </div>
             <div class="row video-wall-row">
@@ -103,7 +104,6 @@
                     </a>
                     <p class="speaker">Venkatesh Palani</p>
                     <p class="company">eBay</p>
-                    <p><a href="https://www.openstack.org/assets/edge/slides/Opendev-Imad-Sousou-Keynote.pdf">Download Slides <i class="fa fa-file-pdf-o fa-3" aria-hidden="true"></i></a></p>
                 </div>
                 <div class="col-md-3 col-sm-6 video-wall-item">
                     <a href="https://youtu.be/BdIzryvX7gc" target="_blank">
