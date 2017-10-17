@@ -63,7 +63,6 @@
                             <img class="video-image" src="https://img.youtube.com/vi/VSj99z5G7Yc/maxresdefault.jpg" alt="OpenDev Opening Keynotes: Jonathan Bryce">
                         </div>
                     </a>
-                    <p><i class="fa fa-file-pdf-o" aria-hidden="true"></i></p>
                     <p class="speaker">Jonathan Bryce</p>
                     <p class="company">OpenStack Foundation</p>
                 </div>
