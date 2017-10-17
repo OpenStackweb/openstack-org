@@ -63,6 +63,7 @@
                             <img class="video-image" src="https://img.youtube.com/vi/VSj99z5G7Yc/maxresdefault.jpg" alt="OpenDev Opening Keynotes: Jonathan Bryce">
                         </div>
                     </a>
+                    <p><i class="fa fa-file-pdf-o" aria-hidden="true"></i></p>
                     <p class="speaker">Jonathan Bryce</p>
                     <p class="company">OpenStack Foundation</p>
                 </div>
@@ -115,6 +116,7 @@
                     </a>
                     <p class="speaker">Kandan Kathirvel & Rodolfo Pacheco</p>
                     <p class="company">AT&T</p>
+                    <p><a href="https://www.openstack.org/assets/edge/slides/Kandan-AT-T-Edge-Talk-Opendev.pdf">Download Slides <i class="fa fa-file-pdf-o fa-3" aria-hidden="true"></i></a></p>
                 </div>
                 <div class="col-md-3 col-sm-6 video-wall-item">
                     <a href="https://youtu.be/MlojvyJM71I" target="_blank">
@@ -127,6 +129,7 @@
                     </a>
                     <p class="speaker">Mahadev Satyanarayanan</p>
                     <p class="company">Carnegie Mellon University</p>
+                    <p><a href="https://www.openstack.org/assets/edge/slides/2017-09-07-a-satya-opendev-keynote.pdf">Download Slides <i class="fa fa-file-pdf-o fa-3" aria-hidden="true"></i></a></p>
                 </div>
             </div>
             <div class="row more-videos-button-container">
