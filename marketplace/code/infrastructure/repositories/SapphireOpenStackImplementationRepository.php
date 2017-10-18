@@ -28,9 +28,23 @@ abstract class SapphireOpenStackImplementationRepository
 	}
 
 	public function delete(IEntity $entity){
-		$entity->clearCapabilities();
-		$entity->clearHypervisors();
-		$entity->clearGuests();
+	    if($entity instanceof IOpenStackImplementation) {
+            $entity->clearCapabilities();
+            $entity->clearHypervisors();
+            $entity->clearGuests();
+        }
 		parent::delete($entity);
 	}
+
+    /**
+     * @return ICompanyService[]
+     */
+    public function getActivesRandom()
+    {
+        $ds =  OpenStackImplementation::get()->filter([
+            'Active' => 1
+        ])->where("ClassName IN ('Appliance', 'Distribution')")
+            ->sort('RAND()');
+        return is_null($ds)? []:$ds->toArray();
+    }
 }

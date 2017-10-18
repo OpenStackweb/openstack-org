@@ -50,7 +50,6 @@ class DistributionsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Con
      */
     private $distribution_manager;
 
-
     /**
      * @var IQueryHandler
      */
@@ -155,11 +154,8 @@ class DistributionsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Con
 
     public function getImplementations()
     {
-        $list1 = $this->distribution_manager->getActives();
-        $list2 = $this->appliance_manager->getActives();
-
-        //return on view model
-        return new ArrayList(array_merge($list1, $list2));
+        // we need only from one manager
+        return new ArrayList( $this->distribution_manager->getActives());
     }
 
     public function distribution()
