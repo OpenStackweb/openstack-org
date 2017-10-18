@@ -10,3 +10,4 @@
 </div>
 
 $ModuleJS("marketplace-driver-page", false , "marketplace")
+$ModuleCSS("marketplace-driver-page", false , "marketplace")

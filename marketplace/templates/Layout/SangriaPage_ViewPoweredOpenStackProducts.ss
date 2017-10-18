@@ -12,3 +12,4 @@ var program_versions = [
 </script>
 
 $ModuleJS("sangria-marketplace-openstack-powered-products", false , "marketplace")
+$ModuleCSS("sangria-marketplace-openstack-powered-products", false , "marketplace")

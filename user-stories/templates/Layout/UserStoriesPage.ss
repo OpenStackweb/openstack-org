@@ -43,3 +43,4 @@ $ModuleCSS('main')
 	window.UserStoriesConfig = $JSONConfig;
 </script>
 $ModuleJS('main')
+$ModuleCSS('main')

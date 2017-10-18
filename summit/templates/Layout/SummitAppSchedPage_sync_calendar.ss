@@ -51,3 +51,4 @@
 </div>
 
 $ModuleJS('sync-calendar')
+$ModuleCSS('sync-calendar')

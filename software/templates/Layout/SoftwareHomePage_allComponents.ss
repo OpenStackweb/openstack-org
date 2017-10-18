@@ -67,5 +67,8 @@
         <!-- End Page Content -->
     </div>
 </div>
+
 $ModuleJS('software_all_projects')
+$ModuleCSS('software_all_projects')
+
 <!-- Software Tabs UI -->

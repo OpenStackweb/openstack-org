@@ -11,3 +11,4 @@ var regions = [
 </script>
 
 $ModuleJS("sangria-marketplace-openstack-products-by-region", false , "marketplace")
+$ModuleCSS("sangria-marketplace-openstack-products-by-region", false , "marketplace")
