@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-final class CompanyServiceResfullApi extends AbstractRestfulJsonApi
+final class SangriaMarketPlaceRegionalCompanyServiceResfullApi extends AbstractRestfulJsonApi
 {
     /**
      * @var IRegionalServiceRepository
@@ -31,14 +31,6 @@ final class CompanyServiceResfullApi extends AbstractRestfulJsonApi
         $this->regional_repository = $repository;
     }
 
-    const ApiPrefix = 'api/v1/marketplace';
-
-    protected function isApiCall(){
-        $request = $this->getRequest();
-        if(is_null($request)) return false;
-        return  strpos(strtolower($request->getURL()),self::ApiPrefix) !== false;
-    }
-
     /**
      * @return bool
      */
@@ -49,10 +41,10 @@ final class CompanyServiceResfullApi extends AbstractRestfulJsonApi
         return true;
     }
 
-    static $url_handlers = array(
-        'GET regional/export/csv'   => 'getRegionalCompanyServicesExport',
-        'GET regional'              => 'getRegionalCompanyServices'
-    );
+    static $url_handlers = [
+        'GET export/csv'   => 'getRegionalCompanyServicesExport',
+        'GET '             => 'getRegionalCompanyServices'
+    ];
 
     static $allowed_actions = [
        'getRegionalCompanyServices',

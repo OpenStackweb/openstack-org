@@ -4,3 +4,6 @@ Name: marketplaceconfiguration
 SangriaPage_Controller:
   extensions:
     - SangriaPageMarketPlaceExtension
+SangriaApi:
+  extensions:
+    - SangriaMarketplaceRouterApiExtension

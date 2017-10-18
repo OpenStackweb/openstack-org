@@ -10,7 +10,7 @@ Injector:
       constructor:
         0: '%$PoweredOpenStackServicesRepository'
         1: '%$TransactionManager'
-  OpenStackPoweredImplementionResfullApi:
+  SangriaMarketPlaceOpenStackPoweredImplementionResfullApi:
       constructor:
         0: '%$PoweredOpenStackServicesRepository'
         1: '%$PoweredOpenStackImplementationManager'
@@ -21,7 +21,7 @@ Injector:
         2: 90
   SapphireRegionalServiceRepository:
       class: SapphireRegionalServiceRepository
-  CompanyServiceResfullApi:
+  SangriaMarketPlaceRegionalCompanyServiceResfullApi:
       constructor:
         0: '%$SapphireRegionalServiceRepository'
   BookManager:
@@ -38,7 +38,12 @@ Injector:
         2: '%$SapphireMarketPlaceTypeRepository'
   SapphireMarketPlaceDriverRepository:
       class: SapphireMarketPlaceDriverRepository
+  CloudServiceRepository:
+      class: SapphireCloudServiceRepository
   DriverRestfullApi:
       constructor:
         0: '%$SapphireMarketPlaceDriverRepository'
+  SangriaMarketPlaceCloudsRestfullApi:
+      constructor:
+        0: '%$CloudServiceRepository'
 

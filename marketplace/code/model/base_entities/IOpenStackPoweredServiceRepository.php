@@ -18,8 +18,8 @@ interface IOpenStackPoweredServiceRepository
      * @param int $page
      * @param int $page_size
      * @param string $order
-     * @param bool $filters
-     * @param null $search_term
+     * @param array $filters
+     * @param null|string $search_term
      * @param string $service_type
      * @return array
      */

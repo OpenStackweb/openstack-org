@@ -16,14 +16,14 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import SangriaOpenStackPoweredProductsApp from './SangriaOpenStackPoweredProductsApp';
 import store from './store';
-
+import './styles.less';
 const containerId      = 'openstack-powered-products-app';
 
 document.addEventListener('DOMContentLoaded', function init() {
     if (document.getElementById(containerId)) {
         render(
             <Provider store={store}>
-                <SangriaOpenStackPoweredProductsApp page_size={pageSize} program_versions={program_versions}/>
+                <SangriaOpenStackPoweredProductsApp pageSize={pageSize} reportConfig={reportConfig} programVersions={programVersions}/>
             </Provider>,
             document.getElementById(containerId)
         );

@@ -12,24 +12,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-class SangriaApi extends AbstractRestfulJsonApi
+final class SangriaApi extends AbstractRestfulJsonApi
 {
     private static $api_prefix = 'api/v1/sangria';
 
     /**
+     * this method should be implemented on each subapi
+     * with specific access level, at this stage it will
+     * return always true
      * @return bool
      */
     protected function authorize()
     {
-        //check permissions
-        if ($this->request->param('SUBROUTE') == SangriaSurveyBuilderRouterApiExtension::SubRouteSurveyTemplates) {
-            if(!Permission::check("FREE_TEXT_TAGGING_ACCESS"))
-                return false;
-        } else {
-            if(!Permission::check("SANGRIA_ACCESS"))
-                return false;
-        }
-
         return true;
     }
 

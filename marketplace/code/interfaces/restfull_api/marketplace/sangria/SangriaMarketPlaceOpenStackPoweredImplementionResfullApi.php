@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-final class OpenStackPoweredImplementionResfullApi extends AbstractRestfulJsonApi
+final class SangriaMarketPlaceOpenStackPoweredImplementionResfullApi extends AbstractRestfulJsonApi
 {
     /**
      * @var IOpenStackPoweredServiceRepository
@@ -37,14 +37,6 @@ final class OpenStackPoweredImplementionResfullApi extends AbstractRestfulJsonAp
         parent::__construct();
         $this->repository = $repository;
         $this->manager    = $manager;
-    }
-
-    const ApiPrefix = 'api/v1/marketplace';
-
-    protected function isApiCall(){
-        $request = $this->getRequest();
-        if(is_null($request)) return false;
-        return  strpos(strtolower($request->getURL()),self::ApiPrefix) !== false;
     }
 
     /**

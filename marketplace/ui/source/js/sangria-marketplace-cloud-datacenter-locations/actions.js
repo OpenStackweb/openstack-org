@@ -11,19 +11,23 @@
  * limitations under the License.
  **/
 import URI from "urijs";
-import { getRequest, putRequest, createAction } from "~core-utils/actions";
+import { getRequest, createAction, defaultErrorHandler } from "~core-utils/actions";
 
-export const RECEIVE_PRODUCTS_PAGE = 'RECEIVE_PRODUCTS_PAGE';
-export const REQUEST_PRODUCTS_PAGE = 'REQUEST_PRODUCTS_PAGE';
+export const RECEIVE_CLOUDS_PAGE = 'RECEIVE_CLOUDS_PAGE';
+export const REQUEST_CLOUDS_PAGE = 'REQUEST_CLOUDS_PAGE';
 
-export const fetchPage = getRequest(
-    createAction(REQUEST_PRODUCTS_PAGE),
-    createAction(RECEIVE_PRODUCTS_PAGE),
-    'api/v1/sangria/marketplace/regional-services'
-);
+export const fetchPage = (params) => {
+        return dispatch => {
+            return getRequest(
+                createAction(REQUEST_CLOUDS_PAGE),
+                createAction(RECEIVE_CLOUDS_PAGE),
+                'api/v1/sangria/marketplace/cloud-services',
+                defaultErrorHandler
+            )(params)(dispatch);
+        }
+}
 
 export const exportAll = (params) => dispatch => {
-
-    let url = URI('api/v1/sangria/marketplace/regional-services/export/csv').query(params).toString();
+    let url = URI('api/v1/sangria/marketplace/cloud-services/export/csv').query(params).toString();
     window.open(url);
 }

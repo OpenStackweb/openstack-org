@@ -37,7 +37,7 @@ jQuery(document).ready(function($) {
         $.ajax({
             async:true,
             type: 'PUT',
-            url: 'api/v1/marketplace/openstack-powered-implementations/'+service_id,
+            url: 'api/v1/sangria/marketplace/openstack-powered-implementations/'+service_id,
             data: JSON.stringify(payload),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -92,7 +92,7 @@ jQuery(document).ready(function($) {
         $.ajax({
             async:true,
             type: 'POST',
-            url: 'api/v1/marketplace/openstack-powered-implementations/'+service_id+'/'+type,
+            url: 'api/v1/sangria/marketplace/openstack-powered-implementations/'+service_id+'/'+type,
             data: JSON.stringify(payload),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -115,7 +115,7 @@ jQuery(document).ready(function($) {
         $.ajax({
             async:true,
             type: 'DELETE',
-            url: 'api/v1/marketplace/openstack-powered-implementations/'+service_id+'/'+type+'/'+link_id,
+            url: 'api/v1/sangria/marketplace/openstack-powered-implementations/'+service_id+'/'+type+'/'+link_id,
             dataType: "json",
             success: function (data,textStatus,jqXHR) {
                 window.location = window.location;

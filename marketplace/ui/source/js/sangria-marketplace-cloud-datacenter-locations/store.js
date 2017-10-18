@@ -10,20 +10,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-import URI from "urijs";
-import { getRequest, putRequest, createAction } from "~core-utils/actions";
 
-export const RECEIVE_PRODUCTS_PAGE = 'RECEIVE_PRODUCTS_PAGE';
-export const REQUEST_PRODUCTS_PAGE = 'REQUEST_PRODUCTS_PAGE';
+import { createStore, applyMiddleware, combineReducers, compose} from 'redux';
+import reduceReducers from 'reduce-reducers';
+import thunk from 'redux-thunk';
+import {openstackCloudsDataCenterLocations} from './reducers';
+import { genericReducers } from "~core-utils/reducers";
 
-export const fetchPage = getRequest(
-    createAction(REQUEST_PRODUCTS_PAGE),
-    createAction(RECEIVE_PRODUCTS_PAGE),
-    'api/v1/sangria/marketplace/regional-services'
-);
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-export const exportAll = (params) => dispatch => {
+let reducer = reduceReducers(openstackCloudsDataCenterLocations, genericReducers);
+const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
 
-    let url = URI('api/v1/sangria/marketplace/regional-services/export/csv').query(params).toString();
-    window.open(url);
-}
+export default store;

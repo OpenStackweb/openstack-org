@@ -10,12 +10,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import SangriaOpenStackProductsByRegionApp from './SangriaOpenStackProductsByRegionApp';
 import store from './store';
+import './styles.less';
 
 const containerId      = 'openstack-products-by-region-app';
 
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function init() {
     if (document.getElementById(containerId)) {
         render(
             <Provider store={store}>
-                <SangriaOpenStackProductsByRegionApp page_size={pageSize} regions={regions}/>
+                <SangriaOpenStackProductsByRegionApp pageSize={pageSize} reportConfig={reportConfig} regions={regions}/>
             </Provider>,
             document.getElementById(containerId)
         );

@@ -21,7 +21,7 @@ class SapphireRepository extends AbstractEntityRepository
     /**
      * @param IEntity $entity
      */
-    public function __construct(IEntity $entity)
+    public function __construct(IEntity $entity = null)
     {
         parent::__construct($entity);
     }
