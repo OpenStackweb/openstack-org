@@ -18,4 +18,5 @@ interface IPresentationType
     const Keynotes      = 'Keynotes';
     const Panel         = 'Panel';
     const LightingTalks = 'Lightning Talks';
+    const Fishbowl      = 'Fishbowl';
 }

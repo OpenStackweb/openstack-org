@@ -377,7 +377,7 @@ class PresentationSpeaker extends DataObject
        (
            $summit_id,
            $role,
-           [IPresentationType::Keynotes, IPresentationType::Panel, IPresentationType::Presentation, IPresentationType::LightingTalks],
+           [IPresentationType::Keynotes, IPresentationType::Panel, IPresentationType::Presentation, IPresentationType::LightingTalks, IPresentationType::Fishbowl],
            $exclude_privates_tracks,
            $excluded_tracks
        );
