@@ -89,6 +89,7 @@ class WebpackTemplateHelpers implements TemplateGlobalProvider
      */
     public static function module_js($filename, $withRequirements = false, $module_name = null)
     {
+        $withRequirements = filter_var($withRequirements, FILTER_VALIDATE_BOOLEAN);
         $hasCommon  = false;
         $commonLink = null;
         $prodLink   = null;
@@ -156,6 +157,9 @@ class WebpackTemplateHelpers implements TemplateGlobalProvider
      */
     public static function module_css($filename, $withRequirements = true,  $module_name = null)
     {
+        $hasCommon  = false;
+        $commonLink = null;
+        $withRequirements = filter_var($withRequirements, FILTER_VALIDATE_BOOLEAN);
         if(empty($module_name)) $module_name = self::module_name();
 
         // If webpack dev server is running, the CSS is injected with JS
@@ -170,14 +174,30 @@ class WebpackTemplateHelpers implements TemplateGlobalProvider
             self::with_extension($filename, 'css')
         );
 
+        $commonLink = Controller::join_links(
+            $module_name,
+            'ui/production/css/common.css'
+        );
+
+        $hasCommon  = Director::fileExists($commonLink);
+        $commonLink = Director::absoluteURL($commonLink);
+
         if ($withRequirements) {
+            if ($hasCommon) {
+                Requirements::css($commonLink);
+            }
             return Requirements::css($link);
         }
 
-        return DBField::create_field('HTMLText', sprintf(
-            '<link rel="stylesheet" type="text/css" href="%s" />',
-            $link
-        ));
+        $tags = [];
+        $tag  ='<link rel="stylesheet" type="text/css" href="%s" />';
+
+        if ($hasCommon) {
+            $tags[] = sprintf($tag, $commonLink);
+        }
+        $tags[] = sprintf($tag, $link);
+
+        return implode(PHP_EOL, $tags);
     }
 
     /**
