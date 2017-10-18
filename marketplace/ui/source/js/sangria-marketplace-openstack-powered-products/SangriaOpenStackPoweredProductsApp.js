@@ -1,26 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchAllProducts, updateProductField, exportAllProducts, navigateToProductDetails } from './actions';
-import Message from "~core-components/message";
-
-const SortDirectionAsc  = 'ASC';
-const SortDirectionDesc = 'DESC';
+import { fetchPage, updateProductField, exportAll, navigateToProductDetails } from './actions';
+import BaseReport from "~core-components/base_report";
 
 class DatePicker extends React.Component {
     componentDidMount() {
         let _this = this;
+        let {onChange} = this.props;
         $(this.textInput).datetimepicker({
             format: 'Y-m-d H:i:00',
             step: 1,
             formatDate: 'Y-m-d',
             formatTime: 'H:i:00',
-            defaultTime: '23:59:00',
-            onSelectTime:(dp,input) => {
-                console.log(`onChangeDateTime ${input.val()}`);
-                let event = new Event('input', { bubbles: true });
-                _this.textInput.dispatchEvent(event);
-            }
+            defaultTime: '23:59:00'
         });
+
+        $(this.textInput).change(function(){
+            onChange({currentTarget:_this.textInput});
+        })
     }
 
     componentWillUnmount() {
@@ -28,69 +25,65 @@ class DatePicker extends React.Component {
     }
 
     render() {
-        const props = this.props;
-        return <input ref={(input) => { this.textInput = input; }} placeholder="Enter a Date" type="text" {...props} />
+        const {className, defaultValue} = this.props;
+        return <input ref={(input) => { this.textInput = input; }}
+                      placeholder="Enter a Date"
+                      defaultValue={defaultValue}
+                      className={className}
+                      type="text"  />
     }
 }
 
-class OpenStackProgramVersionSelector extends React.Component{
-
-    render() {
-        let options                             = [];
-        let {onChange, className, defaultValue} = this.props;
-
-        for (let program_version of this.props.items) {
-            options.push(<option key={program_version.id} value={program_version.id}>{program_version.name}</option>)
-        }
-
-        return (
-            <select defaultValue={defaultValue} className={className} onChange={onChange}>
-                <option value="">--SELECT ONE --</option>
-                {options}
-            </select>
-        );
+const OpenStackProgramVersionSelector = ({onChange, className, defaultValue, items}) => {
+    let options = [];
+    for (let program_version of items) {
+        options.push(<option key={program_version.id} value={program_version.id}>{program_version.name}</option>)
     }
+
+    return (
+        <select defaultValue={defaultValue} className={className} onChange={onChange}>
+            <option value="">--SELECT ONE --</option>
+            {options}
+        </select>
+    );
 }
 
-class FilterLink extends React.Component {
-
-    render() {
-        let {filter, currentStatus, onClick, children} = this.props;
-        let active = (currentStatus) ? 'active' : '';
-
-        return (
-            <label className={"btn btn-primary btn-sm " + active} onClick={onClick} data-filter={filter}>
-                <input type="checkbox" defaultChecked={currentStatus} autoComplete="off"/> {children}
-            </label>
-        );
-
-    }
+const FilterLink = ({filter, currentStatus, onClick, children} ) => {
+    let active = (currentStatus) ? 'active' : '';
+    return (
+        <label className={"btn btn-primary btn-sm " + active} onClick={onClick} data-filter={filter}>
+            <input type="checkbox" defaultChecked={currentStatus} autoComplete="off"/> {children}
+        </label>
+    );
 }
 
-class SangriaOpenStackPoweredProductsApp extends React.Component
-{
+class SangriaOpenStackPoweredProductsApp extends BaseReport {
+
     constructor(props) {
         super(props);
         this.state = {
-            sort_direction  : SortDirectionAsc,
-            sort_field      : 'name',
-            current_page: 1,
-            page_size: 25,
-            show_expired : 0,
-            show_powered : 0,
-            type: 'ALL',
-            search_term: '',
-            loading: false
+            ...this.state,
+            show_expired: 0,
+            show_powered: 0
+        };
+        this.onCustomPrimaryFilterChange = this.onCustomPrimaryFilterChange.bind(this);
+    }
+
+    componentDidMount() {
+        if (!this.props.items.length) {
+            this.props.fetchPage({
+                page: this.state.current_page,
+                page_size: this.state.page_size,
+                search_term: this.state.search_term,
+                type: this.state.type,
+                order: this.buildSort(),
+                show_expired: this.state.show_expired,
+                show_powered: this.state.show_powered
+            });
         }
     }
 
-    componentDidMount(){
-        if(!this.props.items.length) {
-            this.props.fetchPage(this.state.current_page, this.state.page_size, this.state.show_expired, this.state.show_powered, this.buildSort());
-        }
-    }
-
-    componentDidUpdate(prevProps, prevState){
+    componentDidUpdate(prevProps, prevState) {
         if
         (
             prevState.sort_direction != this.state.sort_direction ||
@@ -98,281 +91,125 @@ class SangriaOpenStackPoweredProductsApp extends React.Component
             prevState.current_page != this.state.current_page ||
             prevState.type != this.state.type ||
             prevState.search_term != this.state.search_term ||
+            prevState.page_size != this.state.page_size ||
             prevState.show_expired != this.state.show_expired ||
-            prevState.show_powered != this.state.show_powered ||
-            prevState.page_size != this.state.page_size
+            prevState.show_powered != this.state.show_powered
         )
-            this.props.fetchPage(this.state.current_page, this.state.page_size, this.state.show_expired, this.state.show_powered, this.buildSort(), this.state.type, this.state.search_term);
+            this.props.fetchPage({
+                page: this.state.current_page,
+                page_size: this.state.page_size,
+                search_term: this.state.search_term,
+                type: this.state.type,
+                order: this.buildSort(),
+                show_expired: this.state.show_expired,
+                show_powered: this.state.show_powered
+            });
     }
 
-    onChangeSorting(e, property){
+    onExport(e) {
         e.preventDefault();
-        this.setState({...this.state, sort_field: property, sort_direction: this.state.sort_direction == SortDirectionAsc ? SortDirectionDesc : SortDirectionAsc });
-        return false;
+        this.props.exportAll({
+            search_term: this.state.search_term,
+            type: this.state.type,
+            order: this.buildSort(),
+            show_expired: this.state.show_expired,
+            show_powered: this.state.show_powered
+        });
     }
 
-    buildSort(){
-        let dir = this.state.sort_direction == SortDirectionAsc ? '+':'-';
-        return `${this.state.sort_field}${dir}`;
-    }
-
-    onChangePage(e){
-        e.preventDefault();
-        let target         = e.currentTarget;
-        let current_page   = target.attributes.getNamedItem('data-page').value;
-        console.log('onChangePage page '+ current_page);
-        this.setState({...this.state, current_page});
-    }
-
-    onProductTypeFilterChange(e){
+    onChangeCheckBoxField(e, product, fieldName) {
         let target = e.currentTarget;
-        let val    = target.value;
-        console.log(`onProductTypeFilterChange value ${val}`);
-        this.setState({...this.state, type: val, current_page: 1});
+        let val = target.checked;
+        let payload = {};
+        payload[fieldName] = val;
+        this.props.updateProductField({product_id: product.id}, payload);
     }
 
-    onFilterByCompanyName(e){
-        let target = e.currentTarget;
-        let val    = target.value;
-        console.log('onFilterByCompanyName value '+ val);
-        this.setState({...this.state, search_term: val, current_page: 1});
+    onChangeValueField(e, product, fieldName) {
+        let target  = e.currentTarget;
+        let val     = target.value;
+        let payload = {};
+        console.log(`onChangeValueField value ${val}`);
+        payload[fieldName] = val;
+        this.props.updateProductField({product_id: product.id}, payload);
     }
 
-    onChangeRequiredForCompute(e, product){
-        let target = e.currentTarget;
-        let val    = target.checked;
-        console.log(`onChangeRequiredForCompute value ${val} productId ${product.id}`);
-        this.props.updateProduct(product, 'required_for_compute', val);
-    }
-
-    onChangeRequiredForStorage(e, product){
-        let target = e.currentTarget;
-        let val    = target.checked;
-        console.log(`onChangeRequiredForStorage value ${val} productId ${product.id}`);
-        this.props.updateProduct(product, 'required_for_storage', val);
-    }
-
-    onChangeFederatedIdentity(e, product){
-        let target = e.currentTarget;
-        let val    = target.checked;
-        console.log(`onChangeFederatedIdentity value ${val} productId ${product.id}`);
-        this.props.updateProduct(product, 'federated_identity', val);
-    }
-
-    onChangeProgramVersion(e, product){
-        let target             = e.currentTarget;
-        let val                = target.value;
-        console.log(`onChangeProgramVersion value ${val} productId ${product.id}`);
-        this.props.updateProduct(product, 'program_version_id', val);
-    }
-
-    onChangeExpiryDate(e, product){
-        let target     = e.currentTarget;
-        let val        = target.value;
-        console.log(`onChangeExpiryDate value ${val} productId ${product.id}`);
-        this.props.updateProduct(product, 'expiry_date', val);
-    }
-
-    onFilterChange(e){
+    onCustomPrimaryFilterChange(e) {
         e.preventDefault();
         let filter = e.target.dataset.filter;
         let status = e.target.firstElementChild.checked ? 1 : 0;
         switch (filter) {
             case 'EXPIRED':
-                this.setState({...this.state, show_expired: status, current_page: 1 });
+                this.setState({...this.state, show_expired: status, current_page: 1});
                 break;
             case 'POWERED':
-                this.setState({...this.state, show_powered: status, current_page: 1 });
+                this.setState({...this.state, show_powered: status, current_page: 1});
                 break;
         }
     }
 
-    onExport(e){
-        e.preventDefault();
-        console.log(`export type ${this.state.type}`);
-        this.props.exportProducts(this.state.show_expired, this.state.show_powered, this.buildSort(), this.state.type, this.state.search_term);
+    // to override if needed
+    renderColumn(item, col){
+        switch(col.name){
+            case 'name':
+                return (<a href={`sangria/ViewPoweredOpenStackProductDetail/${item.id}`} target="_blank">{item.name}</a>);
+            case 'federated_identity':
+            case 'required_for_storage':
+            case 'required_for_compute':
+                return (<input type="checkbox" defaultChecked={item[col.name]} onChange={(e) => this.onChangeCheckBoxField(e, item, col.name)}/>);
+            case 'expiry_date':
+                return (<DatePicker className="expiry-date-selector form-control"
+                                    defaultValue={item.expiry_date}
+                                    onChange={(e) => this.onChangeValueField(e, item, col.name)} />);
+            case 'program_version_id':
+                return (<OpenStackProgramVersionSelector className="form-control"
+                                                         items={this.props.programVersions}
+                                                         defaultValue={item.program_version_id}
+                                                         onChange={(e) => this.onChangeValueField(e, item, col.name)}/>);
+            case 'action_buttons':
+                return (
+                    <button className="btn btn-sm btn-default" onClick={(e) => this.navigate2ProductDetails(e, item)}>
+                        Detail
+                    </button>
+                );
+            default:
+                return item[col.name];
+        }
     }
 
-    navigate2ProductDetails(e, product){
-        e.preventDefault();
-        this.props.navigate2ProductDetails(product);
-    }
-
-    onChangePageSize(e) {
-        let target = e.currentTarget;
-        let val     = target.value;
-        this.setState({...this.state, page_size: val});
-    }
-
-    render() {
-        // build pagination ...
-        let pages = [];
-        for(let i = 0; i < this.props.page_count; i++)
-            pages.push
-            (
-                <li key={i} className={ (i+1) == this.state.current_page ? "active" : "" }>
-                    <a href="#" data-page={i+1} onClick={(e) => this.onChangePage(e)}>{i+1}</a>
-                </li>
-            );
-
-        let filterName = '';
-        if(this.state.sort_field == 'name'){
-            filterName = <span className={ this.state.sort_direction == SortDirectionAsc ? 'glyphicon glyphicon-arrow-up' : 'glyphicon glyphicon-arrow-down' } aria-hidden="true"></span>
-        }
-
-        let filterType = '';
-        if(this.state.sort_field == 'type'){
-            filterType = <span className={ this.state.sort_direction == SortDirectionAsc ? 'glyphicon glyphicon-arrow-up' : 'glyphicon glyphicon-arrow-down' } aria-hidden="true"></span>
-        }
-
-        let filterExpiryDate = '';
-        if(this.state.sort_field == 'expiry_date'){
-            filterExpiryDate = <span className={ this.state.sort_direction == SortDirectionAsc ? 'glyphicon glyphicon-arrow-up' : 'glyphicon glyphicon-arrow-down' } aria-hidden="true"></span>
-        }
-
+    // to override if needed
+    renderCustomPrimaryFilter() {
         return (
-            <div>
-                <Message />
-                <h3>OpenStack Powered Products</h3>
-                <div className="row" style={{ marginBottom: "25px"}}>
-                    <div className="col-md-12">
-                        <div className="btn-group" data-toggle="buttons" style={{ marginRight: "10px"}}>
-                            <FilterLink onClick={(e) => this.onFilterChange(e)} filter='EXPIRED' currentStatus={this.state.show_expired}>
-                                Expired
-                            </FilterLink>
-                            <FilterLink onClick={(e) => this.onFilterChange(e)} filter='POWERED' currentStatus={this.state.show_powered}>
-                                Powered
-                            </FilterLink>
-                        </div>
-                        <button className="btn btn-sm btn-default" onClick={(e) => this.onExport(e)}>Export</button>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-md-6">
-                        <select id="filterProductType" className="form-control" onChange={(e) => this.onProductTypeFilterChange(e)}>
-                            <option value="ALL">--ALL--</option>
-                            <option value="DISTRIBUTION">Distributions</option>
-                            <option value="APPLIANCE">Appliance</option>
-                            <option value="REMOTECLOUD">Remote Cloud</option>
-                            <option value="PUBLICCLOUD">Public Cloud</option>
-                            <option value="PRIVATECLOUD">Private Cloud</option>
-                        </select>
-                    </div>
-                    <div className="col-md-6">
-                        <input type="text" className="form-control" onChange={(e) => this.onFilterByCompanyName(e) } placeholder="Company Name" id="filterProductCompany"/>
-                    </div>
-                </div>
-                <table className="table">
-                    <thead>
-                    <tr>
-                        <th>
-                            <a title="Order by Name" onClick={(e) => this.onChangeSorting(e, 'name')} href="#">
-                            { filterName }&nbsp;Name
-                            </a>
-                        </th>
-                        <th>
-                            <a title="Order by Type" onClick={(e) => this.onChangeSorting(e, 'type')} href="#">
-                            { filterType }&nbsp;Type
-                            </a>
-                        </th>
-                        <th>Company</th>
-                        <th>Required for Compute</th>
-                        <th>Required for Storage</th>
-                        <th>Federated Identity</th>
-                        <th>Program Version Compatibility</th>
-                        <th>
-                            <a title="Order by Expiry Date" onClick={(e) => this.onChangeSorting(e, 'expiry_date')} href="#">
-                            { filterExpiryDate }&nbsp;Expiry Date (CDT)
-                            </a>
-                        </th>
-                        <th>Last Edited By</th>
-                        <th>&nbsp;</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {
-                        this.props.items.map
-                        (
-                            product =>
-
-                            <tr key={product.id}>
-                                <td>
-                                    <a href={`sangria/ViewPoweredOpenStackProductDetail/${product.id}`} target="_blank">{product.name}</a>
-                                </td>
-                                <td>
-                                    {product.type}
-                                </td>
-                                <td>
-                                    {product.company}
-                                </td>
-                                <td>
-                                    <input type="checkbox" defaultChecked={product.required_for_compute} onChange={(e) => this.onChangeRequiredForCompute(e, product)}/>
-                                </td>
-                                <td>
-                                    <input type="checkbox" defaultChecked={product.required_for_storage} onChange={(e) => this.onChangeRequiredForStorage(e, product)}/>
-                                </td>
-                                <td>
-                                    <input type="checkbox" defaultChecked={product.federated_identity} onChange={(e) => this.onChangeFederatedIdentity(e, product)}/>
-                                </td>
-                                <td>
-                                    <OpenStackProgramVersionSelector className="form-control" items={this.props.program_versions} defaultValue={product.program_version_id} onChange={(e) => this.onChangeProgramVersion(e, product)} />
-                                </td>
-                                <td>
-                                    <DatePicker className="expiry-date-selector form-control" defaultValue={product.expiry_date} onChange={(e) => this.onChangeExpiryDate(e, product)} />
-                                </td>
-                                <td>
-                                    {product.edited_by}
-                                </td>
-                                <td>
-                                    <button className="btn btn-sm btn-default" onClick={(e) => this.navigate2ProductDetails(e, product)} >Detail</button>
-                                </td>
-                            </tr>
-                        )
-                    }
-                    </tbody>
-                </table>
-
-                <nav aria-label="Page navigation">
-                    <select defaultValue={this.props.page_size} className="form-control page-size-control"  onChange={(e) => this.onChangePageSize(e)} name="pagination_page_size">
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                        <option value="0">--ALL--</option>
-                    </select>
-                    <ul className="pagination">
-                        {pages}
-                    </ul>
-                </nav>
+            <div className="btn-group" data-toggle="buttons" style={{marginRight: "10px"}}>
+                <FilterLink onClick={this.onCustomPrimaryFilterChange} filter='EXPIRED'
+                            currentStatus={this.state.show_expired}>
+                    Expired
+                </FilterLink>
+                <FilterLink onClick={this.onCustomPrimaryFilterChange} filter='POWERED'
+                            currentStatus={this.state.show_powered}>
+                    Powered
+                </FilterLink>
             </div>
         );
     }
+
+    navigate2ProductDetails(e, product) {
+        e.preventDefault();
+        this.props.navigateToProductDetails(product.id);
+    }
 }
 
-export default connect (
-    state => {
-        return {
-            items:      state.items,
-            page_count: state.page_count,
-            loading:    state.loading
-        }
-    },
-    dispatch => ({
-        fetchPage (page = 1, page_size = 25, show_expired = 0, show_powered = 0, order = '', type = 'ALL', search_term = '') {
-            console.log('fetchPage');
-            return dispatch(fetchAllProducts({page, page_size, show_expired, show_powered, order, type, search_term}));
-        },
-        updateProduct(product, field, value){
-            let payload    = {};
-            payload[field] = value;
-            return dispatch(updateProductField({ product_id: product.id}, payload));
-        },
-        exportProducts(show_expired = 0, show_powered = 0, order = '', type = 'ALL', search_term = ''){
-            return dispatch(exportAllProducts({show_expired, show_powered, order, type, search_term}));
-        },
-        navigate2ProductDetails(product){
-            return dispatch(navigateToProductDetails(product.id));
-        }
-    })
-)(SangriaOpenStackPoweredProductsApp);
+function mapStateToProps(state) {
+    return {
+        items:      state.items,
+        page_count: state.page_count,
+        loading:    state.loading
+    }
+}
+
+export default connect(mapStateToProps, {
+    fetchPage,
+    exportAll,
+    updateProductField,
+    navigateToProductDetails
+})(SangriaOpenStackPoweredProductsApp)

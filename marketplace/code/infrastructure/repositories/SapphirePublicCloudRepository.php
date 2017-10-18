@@ -15,7 +15,7 @@
  * Class SapphirePublicCloudRepository
  */
 class SapphirePublicCloudRepository
-	extends SapphireOpenStackImplementationRepository {
+	extends SapphireCloudServiceRepository {
 
     public function __construct($draft_entity=false){
         $entity = ($draft_entity) ? new PublicCloudServiceDraft() : new PublicCloudService();
@@ -23,8 +23,10 @@ class SapphirePublicCloudRepository
     }
 
 	public function delete(IEntity $entity){
-		$entity->clearDataCenterRegions();
-		$entity->clearDataCentersLocations();
+        if($entity instanceof ICloudService) {
+            $entity->clearDataCenterRegions();
+            $entity->clearDataCentersLocations();
+        }
 		parent::delete($entity);
 	}
 

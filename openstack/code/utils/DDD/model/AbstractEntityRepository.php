@@ -24,7 +24,8 @@ abstract class AbstractEntityRepository implements IEntityRepository {
 	/**
 	 * @param IEntity $entity
 	 */
-	public function __construct(IEntity $entity){
+	public function __construct(IEntity $entity = null){
+	    if(is_null($entity)) return;
 		if($entity instanceof DataExtension)
 			$this->entity_class = get_class($entity->getOwner());
 		else

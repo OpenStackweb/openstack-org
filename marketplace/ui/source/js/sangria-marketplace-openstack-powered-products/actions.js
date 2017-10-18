@@ -21,24 +21,24 @@ export const REQUEST_PRODUCTS_PAGE = 'REQUEST_PRODUCTS_PAGE';
 export const PRODUCT_UPDATING = 'PRODUCT_UPDATING';
 export const PRODUCT_UPDATED  = 'PRODUCT_UPDATED';
 
-export const fetchAllProducts = getRequest(
+export const fetchPage = getRequest(
     createAction(REQUEST_PRODUCTS_PAGE),
     createAction(RECEIVE_PRODUCTS_PAGE),
-    'api/v1/marketplace/openstack-powered-implementations'
+    'api/v1/sangria/marketplace/openstack-powered-implementations'
 );
 
 export const updateProductField = (params, payload) => dispatch => {
     putRequest(
         createAction(PRODUCT_UPDATING),
         createAction(PRODUCT_UPDATED),
-        `api/v1/marketplace/openstack-powered-implementations/${params.product_id}`,
+        `api/v1/sangria/marketplace/openstack-powered-implementations/${params.product_id}`,
         payload
     )(params)(dispatch);
 }
 
-export const exportAllProducts = (params) => dispatch => {
+export const exportAll = (params) => dispatch => {
 
-    let url = URI('api/v1/marketplace/openstack-powered-implementations/export/csv').query(params).toString();
+    let url = URI('api/v1/sangria/marketplace/openstack-powered-implementations/export/csv').query(params).toString();
     window.open(url);
 }
 

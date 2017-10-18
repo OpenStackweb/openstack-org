@@ -28,6 +28,7 @@ final class SangriaPageMarketPlaceExtension extends Extension {
         'ViewPoweredOpenStackProducts',
         'ViewPoweredOpenStackProductDetail',
         'ViewOpenStackProductsByRegion',
+        'ViewCloudsDataCenterLocations',
     ];
 
 	public function onBeforeInit(){
@@ -185,9 +186,37 @@ final class SangriaPageMarketPlaceExtension extends Extension {
         return $this->owner->getViewer('ViewOpenStackProductsByRegion')->process
             (
                 $this->owner->Customise([
-                    'Regions'                => $regions
+                    'Regions' => $regions
                 ])
             );
+    }
+
+    public function ViewCloudsDataCenterLocations(){
+        Requirements::clear();
+        // css
+
+        Requirements::css('sangria/ui/source/css/sangria.css');
+        Requirements::css("themes/openstack/bower_assets/bootstrap/dist/css/bootstrap.min.css");
+        Requirements::css("themes/openstack/bower_assets/fontawesome/css/font-awesome.min.css");
+        Requirements::css('//fonts.googleapis.com/css?family=Open+Sans:300,400,700');
+
+        // js
+        Requirements::javascript("themes/openstack/bower_assets/jquery/dist/jquery.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jquery-migrate/jquery-migrate.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/bootstrap/dist/js/bootstrap.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/jquery-cookie/jquery.cookie.js");
+        Requirements::javascript('themes/openstack/bower_assets/jquery-mousewheel/jquery.mousewheel.js');
+        Requirements::javascript('themes/openstack/bower_assets/php-date-formatter/js/php-date-formatter.min.js');
+
+        $repository = new SapphireRegionalServiceRepository();
+        $regions    = $repository->getAllRegions();
+
+        return $this->owner->getViewer('ViewCloudsDataCenterLocations')->process
+        (
+            $this->owner->Customise([
+                'Regions' => $regions
+            ])
+        );
     }
 
 }

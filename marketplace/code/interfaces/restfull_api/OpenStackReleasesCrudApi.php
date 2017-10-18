@@ -33,7 +33,6 @@ class OpenStackReleasesCrudApi extends  MarketPlaceRestfulApi {
 	 */
 	private $version_repository;
 
-
 	/**
 	 * @var
 	 */
