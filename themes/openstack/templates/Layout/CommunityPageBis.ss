@@ -12,6 +12,9 @@
                     There are lots of benefits to participation, including oportinities to influence the future of the project.
                     Find out how to get involved.
                 </p>
+                <a href="https://docs.openstack.org/contributors" target="_blank" class="banner-button btn btn-primary">
+                    Get Started with our Contributor Guide <i class="fa fa-chevron-circle-right fa-inverse" aria-hidden="true"></i>
+                </a>
                 <hr />
                 <p>
                     Already a contributor and looking for resources?
