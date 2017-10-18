@@ -120,9 +120,9 @@
       </div>
       <div class="col-sm-3 featured">
         <div class="summit-user-section">
-          <img src="/assets/sydney-summit/speakers/LewTucker2.png" alt="Lew Tucker" class="summit-user-image">
-          <div class="name">Lew Tucker</div>
-          <div class="title">Vice President and CTO, Cloud Computing, Cisco</div>
+          <img src="/assets/sydney-summit/speakers/bethcohen.jpg" alt="Beth Cohen" class="summit-user-image">
+          <div class="name">Beth Cohen</div>
+          <div class="title">Cloud Product Technologist, Verizon</div>
         </div>
       </div>
       <div class="col-sm-3">
@@ -190,6 +190,36 @@
           <img src="/assets/boston-summit/speakers/Jonathan-Bryce2.jpg" alt="Jonathan Bryce" class="summit-user-image">
           <div class="name">Jonathan Bryce</div>
           <div class="title">Executive Director, OpenStack Foundation</div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3 featured">
+        <div class="summit-user-section">
+          <img src="/assets/sydney-summit/speakers/Matt-Kean.jpg" alt="Matt Kean" class="summit-user-image">
+          <div class="name">Matt Kean</div>
+          <div class="title">Minister for Innovation and Better Regulation, New South Wales Government</div>
+        </div>
+      </div>
+      <div class="col-sm-3 featured">
+        <div class="summit-user-section">
+          <img src="/assets/sydney-summit/speakers/Manuel-Sopena-Ballesteros.PNG" alt="Manuel Sopena Ballesteros" class="summit-user-image">
+          <div class="name">Manuel Sopena Ballesteros</div>
+          <div class="title">Big Data Engineer, The Garvan Institute</div>
+        </div>
+      </div>
+      <div class="col-sm-3 featured">
+        <div class="summit-user-section">
+          <img src="/assets/sydney-summit/speakers/lew-sm-2.jpg" alt="Lew Tucker" class="summit-user-image">
+          <div class="name">Lew Tucker</div>
+          <div class="title">Vice President and CTO, Cloud Computing, Cisco</div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="summit-user-section">
+          <img src="/assets/sydney-summit/speakers/Steven-Armstrong.jpg" alt="Steven Armstrong" class="summit-user-image">
+          <div class="name">Steven Armstrong</div>
+          <div class="title">Principal DevOps Automation Engineer, Paddy Power Betfair</div>
         </div>
       </div>
     </div>
