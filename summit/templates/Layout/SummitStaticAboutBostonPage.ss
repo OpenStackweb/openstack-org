@@ -120,9 +120,9 @@
       </div>
       <div class="col-sm-3 featured">
         <div class="summit-user-section">
-          <img src="/assets/sydney-summit/speakers/bethcohen.jpg" alt="Beth Cohen" class="summit-user-image">
-          <div class="name">Beth Cohen</div>
-          <div class="title">Cloud Product Technologist, Verizon</div>
+          <img src="/assets/sydney-summit/speakers/Matt-Kean.jpg" alt="Matt Kean" class="summit-user-image">
+          <div class="name">Matt Kean</div>
+          <div class="title">Minister for Innovation and Better Regulation, New South Wales Government</div>
         </div>
       </div>
       <div class="col-sm-3">
@@ -196,9 +196,9 @@
     <div class="row">
       <div class="col-sm-3 featured">
         <div class="summit-user-section">
-          <img src="/assets/sydney-summit/speakers/Matt-Kean.jpg" alt="Matt Kean" class="summit-user-image">
-          <div class="name">Matt Kean</div>
-          <div class="title">Minister for Innovation and Better Regulation, New South Wales Government</div>
+          <img src="/assets/sydney-summit/speakers/bethcohen.jpg" alt="Beth Cohen" class="summit-user-image">
+          <div class="name">Beth Cohen</div>
+          <div class="title">Cloud Product Technologist, Verizon</div>
         </div>
       </div>
       <div class="col-sm-3 featured">
