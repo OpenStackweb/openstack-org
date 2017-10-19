@@ -25,13 +25,6 @@
                     The Forum
                 </a>
             </li>
-            <li>
-                <a href="#hackathon">
-                    <img src="https://www.openstack.org/assets/sydney-summit/images/hackathon-menu-icon.png" class="hackathonlogo">
-                    Hackathon
-                </a>
-            </li>
-            
         </ul>
     </div>
 </div>
@@ -85,7 +78,6 @@
             </div>
         <div class="col-lg-3 col-md-4 col-sm-4" style="margin-top:30px;">
           <ul class="help-me-menu">
-            <li><a href="http://hackathon.openstack.org.au/" target="_blank"><i class="fa fa-puzzle-piece"></i>Sydney Hackathon</a></li>
             <li><a href="https://openstackfoundation.formstack.com/forms/sydney_summit_discounted_registration" target="_blank"><i class="fa fa-dollar"></i>Student Discounts</a></li>
             <li><a href="/summit/sydney-2017/mobile-apps" target="_blank"><i class="fa fa-mobile"></i>Download the App</a></li>
             <li><a href="https://spousetivities.ticketleap.com/openstack-summit-sydney-2017/" target="_blank"><i class="fa fa-heart"></i>Spousetivities</a></li>
@@ -307,27 +299,6 @@
     <div class="row">
       <div class="col-sm-12">
         <a href="https://wiki.openstack.org/wiki/Forum" class="btn academy-cta" target="_blank">Read more about the Forum</a>
-      </div>
-    </div>
-    <div class="row" id="hackathon">
-      <div class="col-sm-12">
-        <hr style="margin-top:60px;">
-        <h1 style="margin-bottom: 20px;">Hackathon</h1>
-        <p><span style="text-align:center;"><img src="https://www.openstack.org/assets/sydney-summit/images/hackathon-section-logo.png"></span></p>
-        <p>&nbsp;</p>
-        <div class="row">
-          <div class="col-sm-8 col-sm-push-2">
-            <p>Join us Nov 3-5, the weekend prior to the Summit, for <a href="http://hackathon.openstack.org.au/" target="_blank">Australia’s first OpenStack application hackathon</a>. This 3-day event--organized by local OpenStack community members--welcomes students and professionals to hack up the stack using the most popular open source cloud platform, along with application orchestration tools like OpenShift and Cloudify.</p>
-            <p>Participants will learn how to build and migrate applications to distributed cloud environments, as well as demonstrate the diverse use cases for OpenStack. Experienced mentors from around the world will be on-site to provide support, and of course there will be plenty of snacks and swag. Winning teams will be showcased at the global OpenStack Summit the following week.</p>
-            <p>Hackers are invited to join as an individual or as part of a team. Sign up now and get ready to compete for some big prizes!</p>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-12">
-        <a href="http://hackathon.openstack.org.au/" class="btn academy-cta" target="_blank">Learn more about the Hackathon</a>
       </div>
     </div>
   </div>
