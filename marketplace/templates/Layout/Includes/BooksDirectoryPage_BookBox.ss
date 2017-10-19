@@ -16,7 +16,7 @@
             </h4>
             <p class="company-name">by <a href="{$Company.URL}">$Company.Name</a></p>
             <p>$Description</p>
-            <a style="background-color: #{$Company.CompanyColor}; padding-left:25px;" href="{$Link}" class="details-button">Buy</a>
+            <a style="background-color: #{$Company.CompanyColor}; padding-left:25px;" href="{$Link}" class="details-button">Get</a>
         </div>
     </div>
 </div>
