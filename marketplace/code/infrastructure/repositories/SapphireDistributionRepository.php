@@ -30,4 +30,16 @@ extends SapphireOpenStackImplementationRepository
 	{
 		return IDistribution::MarketPlaceGroupSlug;
 	}
+
+    /**
+     * @return ICompanyService[]
+     */
+    public function getActivesRandom()
+    {
+        $ds =  OpenStackImplementation::get()->filter([
+            'Active' => 1
+        ])->where("ClassName IN ('Appliance', 'Distribution')")
+            ->sort('RAND()');
+        return is_null($ds)? []:$ds->toArray();
+    }
 }
