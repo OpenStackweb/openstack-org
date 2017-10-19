@@ -42,11 +42,6 @@
                 <h2 class="tab-title">Coming Up</h2>
                 <div class="row">
                     <div class="col-sm-6">
-                        <p><a href="http://hackathon.openstack.org.au/" target="_blank">Sydney, Australia</a><br/>
-                        November 3-5, 2017
-                        </p>
-                    </div>
-                    <div class="col-sm-6">
                         <p><a href="https://www.hackathon.openstackbr.com.br/" target="_blank">Rio de Janeiro, Brazil</a><br/>
                         December 1-3, 2017
                         </p>
