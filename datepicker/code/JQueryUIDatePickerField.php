@@ -33,23 +33,21 @@ class JQueryUIDatePickerField extends TextField {
 
     function Field() {
         $this->addExtraClass('DatePickerField');
-        Requirements::block(SAPPHIRE_DIR .'/thirdparty/jquery/jquery.js');
-        Requirements::javascript('themes/openstack/javascript/jquery-2.0.3.min.js');
-        Requirements::javascript('themes/openstack/javascript/jquery-migrate-1.2.1.min.js');
-	    Requirements::css(THIRDPARTY_DIR . '/jquery-ui-themes/smoothness/jquery-ui.css');
+        JQueryCoreDependencies::renderRequirements();
+        Requirements::css(THIRDPARTY_DIR . '/jquery-ui-themes/smoothness/jquery-ui.css');
 	    Requirements::javascript(THIRDPARTY_DIR . '/jquery-ui/jquery-ui.js');
         Requirements::javascript("datepicker/javascript/datepicker.js");
         
-        $attributes = array(
-            'type' => 'text',
-            'class' => 'text' . ($this->extraClass() ? $this->extraClass() : ''),
-            'id' => $this->id(),
-            'name' => $this->Name(),
-            'value' => $this->Value(),
-            'tabindex' => $this->getTabIndex(),
+        $attributes = [
+            'type'      => 'text',
+            'class'     => 'text' . ($this->extraClass() ? $this->extraClass() : ''),
+            'id'        => $this->id(),
+            'name'      => $this->Name(),
+            'value'     => $this->Value(),
+            'tabindex'  => $this->getTabIndex(),
             'maxlength' => ($this->maxLength) ? $this->maxLength : null,
-            'size' => ($this->maxLength) ? min( $this->maxLength, 10 ) : null,
-        );
+            'size'      => ($this->maxLength) ? min( $this->maxLength, 10 ) : null,
+        ];
         if(!empty($this->data_dependant)){
             $attributes["data-dependant-on"] = $this->data_dependant;
         }

@@ -48,11 +48,7 @@ class BooksDirectoryPage_Controller extends MarketPlaceDirectoryPage_Controller 
             $('#books','.marketplace-nav').addClass('current');
         });");
 
-		Requirements::css("themes/openstack/css/chosen.css", "screen,projection");
-
-        Requirements::combine_files('marketplace_books_directory_page.js', array(
-            "themes/openstack/javascript/chosen.jquery.min.js",
-        ));
+        JSChosenDependencies::renderRequirements();
 
         $this->manager = new BookManager (
 			new SapphireMarketPlaceTypeRepository,

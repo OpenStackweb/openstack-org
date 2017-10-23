@@ -19,19 +19,18 @@ final class PresentationSpeakerAdminController extends Controller
      */
     protected $parent;
 
-    private static $allowed_actions = array
-    (
+    private static $allowed_actions = [
+
         'speakers',
         'editSpeaker',
         'speakersMerge',
-    );
+    ];
 
-    private static $url_handlers = array
-    (
+    private static $url_handlers = [
         'merge'             => 'speakersMerge',
         '$SpeakerID!'       => 'editSpeaker',
         'GET '              => 'speakers',
-    );
+    ];
 
     /**
      * PresentationSpeakerAdminController constructor.
@@ -53,23 +52,15 @@ final class PresentationSpeakerAdminController extends Controller
         $summit_id = intval($request->param('SummitID'));
 
         $summit = Summit::get()->byID($summit_id);
-
+        SweetAlert2Dependencies::renderRequirements();
+        JQueryValidateDependencies::renderRequirements(true, false);
+        BootstrapTagsInputDependencies::renderRequirements();
         Requirements::css('summit/css/simple-sidebar.css');
-        // tag inputes
-        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.css');
-        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css');
-        Requirements::css('themes/openstack/bower_assets/sweetalert/dist/sweetalert.css');
         Requirements::css('summit/css/summitapp-addspeaker.css');
-
         Requirements::javascript('summit/javascript/simple-sidebar.js');
         Requirements::javascript('themes/openstack/javascript/bootstrap-paginator/src/bootstrap-paginator.js');
         Requirements::javascript('themes/openstack/javascript/urlfragment.jquery.js');
         Requirements::javascript('themes/openstack/javascript/jquery-ajax-loader.js');
-        Requirements::javascript('themes/openstack/bower_assets/sweetalert/dist/sweetalert.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/additional-methods.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/typeahead.js/dist/typeahead.bundle.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js');
         Requirements::javascript('themes/openstack/javascript/jquery.cleanform.js');
         Requirements::javascript('summit/javascript/summitapp-addspeaker.js');
 
@@ -77,10 +68,9 @@ final class PresentationSpeakerAdminController extends Controller
             (
                 $this->customise
                     (
-                        array
-                        (
+                        [
                             'Summit' => $summit,
-                        )
+                        ]
                     )
             );
     }
@@ -92,21 +82,15 @@ final class PresentationSpeakerAdminController extends Controller
         $summit = Summit::get()->byID($summit_id);
 
         Requirements::css('summit/css/simple-sidebar.css');
-        // tag inputes
-        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.css');
-        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css');
-        Requirements::css('themes/openstack/bower_assets/sweetalert/dist/sweetalert.css');
+        SweetAlert2Dependencies::renderRequirements();
+        JQueryValidateDependencies::renderRequirements(true, false);
+        BootstrapTagsInputDependencies::renderRequirements();
         Requirements::css('summit/css/summit-admin-speaker-merge.css');
 
         Requirements::javascript('summit/javascript/simple-sidebar.js');
         Requirements::javascript('themes/openstack/javascript/bootstrap-paginator/src/bootstrap-paginator.js');
         Requirements::javascript('themes/openstack/javascript/urlfragment.jquery.js');
         Requirements::javascript('themes/openstack/javascript/jquery-ajax-loader.js');
-        Requirements::javascript('themes/openstack/bower_assets/sweetalert/dist/sweetalert.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/additional-methods.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/typeahead.js/dist/typeahead.bundle.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js');
         Requirements::javascript('themes/openstack/javascript/jquery.cleanform.js');
         Requirements::javascript('summit/javascript/summit-admin-speaker-merge.js');
 
@@ -114,10 +98,9 @@ final class PresentationSpeakerAdminController extends Controller
             (
                 $this->customise
                     (
-                        array
-                        (
+                        [
                             'Summit' => $summit,
-                        )
+                        ]
                     )
             );
     }
@@ -131,30 +114,22 @@ final class PresentationSpeakerAdminController extends Controller
 
         Requirements::css('summit/css/simple-sidebar.css');
         Requirements::css('summit/css/summit-admin-edit-speaker.css');
-        Requirements::css('themes/openstack/bower_assets/chosen/chosen.min.css');
-        Requirements::css('themes/openstack/bower_assets/sweetalert/dist/sweetalert.css');
-        // tag input
-        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.css');
-        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css');
-        Requirements::javascript('themes/openstack/bower_assets/sweetalert/dist/sweetalert.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/additional-methods.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/chosen/chosen.jquery.min.js');
+        SweetAlert2Dependencies::renderRequirements();
+        JSChosenDependencies::renderRequirements();
+        JQueryValidateDependencies::renderRequirements(true, false);
+        BootstrapTagsInputDependencies::renderRequirements();
         Requirements::javascript('summit/javascript/simple-sidebar.js');
         Requirements::javascript('//tinymce.cachefly.net/4.3/tinymce.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/typeahead.js/dist/typeahead.bundle.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js');
         Requirements::javascript('summit/javascript/summitapp-editspeaker.js');
 
         return $this->parent->getViewer('EditSpeaker')->process
             (
                 $this->customise
                     (
-                        array
-                        (
+                        [
                             'Summit'   => $summit,
                             'Speaker' => $speaker,
-                        )
+                        ]
                     )
             );
     }

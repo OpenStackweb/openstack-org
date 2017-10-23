@@ -15,7 +15,7 @@ require("../../../../gettext/css/languages.css");
 require("../../../../gettext/css/flags.css");
 
 // get URI module
-import URI from '../../../../themes/openstack/bower_assets/urijs/src/URI';
+import URI from 'urijs/src/URI';
 
 import React from 'react'
 import ReactDOM from 'react-dom'
@@ -36,7 +36,7 @@ const languages = [
     //"ru_RU", // Russian
 ];
 // get language cookie, is none, then default is en_US
-var lang = $.cookie('GetTextLocale');
+var lang = Cookies.get('GetTextLocale');
 lang     = typeof(lang) == 'undefined' ? 'en_US' : lang;
 console.log('language '+lang);
 const currentLanguage = lang;

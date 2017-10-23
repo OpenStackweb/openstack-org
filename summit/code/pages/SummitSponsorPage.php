@@ -348,11 +348,11 @@ class SummitSponsorPage_Controller extends SummitPage_Controller
     public function init()
     {
         parent::init();
-        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.js");
-        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/additional-methods.js");
+        JQueryValidateDependencies::renderRequirements(true, false);
+        JQueryUIDependencies::renderRequirements();
         Requirements::javascript('themes/openstack/javascript/jquery.cleanform.js');
-        Requirements::javascript('themes/openstack/javascript/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.js');
-        Requirements::javascript('themes/openstack/javascript/pure.min.js');
+
+        Requirements::javascript('node_modules/pure/libs/pure.min.js');
         Requirements::javascript("summit/javascript/Chart.min.js");
 
 

@@ -75,6 +75,14 @@ jQuery(document).ready(function($) {
             form_validator.resetForm();
         });
 
+        $('#EventRegistrationRequestForm_EventRegistrationRequestForm_country',form).chosen({
+            disable_search_threshold: 10,
+            width: '315px'
+        });
+        $('#EventRegistrationRequestForm_EventRegistrationRequestForm_country',form).change(function () {
+            form_validator.resetForm();
+        });
+
         var date_picker_start = $('#EventRegistrationRequestForm_EventRegistrationRequestForm_start_date',form);
         date_picker_start.datepicker({
             dateFormat: 'yy-mm-dd',
@@ -87,13 +95,6 @@ jQuery(document).ready(function($) {
             minDate: 0
         });
 
-        $('#EventRegistrationRequestForm_EventRegistrationRequestForm_country',form).chosen({
-            disable_search_threshold: 10,
-            width: '315px'
-        });
-        $('#EventRegistrationRequestForm_EventRegistrationRequestForm_country',form).change(function () {
-            form_validator.resetForm();
-        });
     }
 
 

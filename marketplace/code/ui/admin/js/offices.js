@@ -91,7 +91,7 @@
                     }
                 );
 
-                $('.remove-additional-office').live('click',function(event){
+                $(document).on('click', '.remove-additional-office',function(event){
                     var remove_btn = $(this);
                     var tr = remove_btn.parent().parent();
                     tr.remove();

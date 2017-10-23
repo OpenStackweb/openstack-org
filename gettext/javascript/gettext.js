@@ -24,7 +24,8 @@ var GetText =  (function () {
     };
 
     function getCurrentLanguage(){
-        var lang = $.cookie('GetTextLocale');
+        var lang = Cookies.get('GetTextLocale');
+        console.log('get lang '+lang);
         return typeof(lang) == 'undefined' ? 'en_US' : lang;
     }
 

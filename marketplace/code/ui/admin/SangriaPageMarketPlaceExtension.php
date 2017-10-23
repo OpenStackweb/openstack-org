@@ -42,9 +42,8 @@ final class SangriaPageMarketPlaceExtension extends Extension {
 	}
 
 	private function commonScripts(){
-		Requirements::css("themes/openstack/css/chosen.css", "screen,projection");
-		Requirements::javascript("themes/openstack/javascript/chosen.jquery.min.js");
-        Requirements::javascript('marketplace/code/ui/admin/js/utils.js');
+        JSChosenDependencies::renderRequirements();
+	    Requirements::javascript('marketplace/code/ui/admin/js/utils.js');
 	}
 
 	public function ViewReviews(){
@@ -57,21 +56,16 @@ final class SangriaPageMarketPlaceExtension extends Extension {
 
 	public function ViewPoweredOpenStackProducts(){
 	    Requirements::clear();
-	    // css
 
-        Requirements::css('marketplace/ui/source/css/sangria.css');
-        Requirements::css("themes/openstack/bower_assets/bootstrap/dist/css/bootstrap.min.css");
-        Requirements::css("themes/openstack/bower_assets/fontawesome/css/font-awesome.min.css");
+        JQueryCoreDependencies::renderRequirements();
+        BootstrapDependencies::renderRequirements();
+        FontAwesomeDependencies::renderRequirements();
         Requirements::css('//fonts.googleapis.com/css?family=Open+Sans:300,400,700');
         Requirements::css('node_modules/jquery-datetimepicker/build/jquery.datetimepicker.min.css');
 
-        // js
-        Requirements::javascript("themes/openstack/bower_assets/jquery/dist/jquery.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jquery-migrate/jquery-migrate.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/bootstrap/dist/js/bootstrap.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jquery-cookie/jquery.cookie.js");
-        Requirements::javascript('themes/openstack/bower_assets/jquery-mousewheel/jquery.mousewheel.js');
-        Requirements::javascript('themes/openstack/bower_assets/php-date-formatter/js/php-date-formatter.min.js');
+        Requirements::javascript("node_modules/js-cookie/src/js.cookie.js");
+        Requirements::javascript('node_modules/jquery-mousewheel/jquery.mousewheel.js');
+        Requirements::javascript('node_modules/php-date-formatter/js/php-date-formatter.min.js');
         Requirements::javascript('node_modules/jquery-datetimepicker/build/jquery.datetimepicker.full.min.js');
         Requirements::javascript('themes/openstack/javascript/jquery.tablednd.js');
 
@@ -85,28 +79,21 @@ final class SangriaPageMarketPlaceExtension extends Extension {
 
     public function ViewPoweredOpenStackProductDetail(SS_HTTPRequest $request){
         Requirements::clear();
-        // css
 
-        Requirements::css('marketplace/ui/source/css/sangria.css');
-        Requirements::css("themes/openstack/bower_assets/bootstrap/dist/css/bootstrap.min.css");
-        Requirements::css("themes/openstack/bower_assets/fontawesome/css/font-awesome.min.css");
+        JQueryCoreDependencies::renderRequirements();
+        BootstrapDependencies::renderRequirements();
+        FontAwesomeDependencies::renderRequirements();
+        JQueryValidateDependencies::renderRequirements();
+
         Requirements::css('//fonts.googleapis.com/css?family=Open+Sans:300,400,700');
         Requirements::css('node_modules/jquery-datetimepicker/build/jquery.datetimepicker.min.css');
-        Requirements::css('themes/openstack/bower_assets/sweetalert2/dist/sweetalert2.min.css');
-        Requirements::css("themes/openstack/css/validation.errors.css");
+        Requirements::css('marketplace/ui/source/css/sangria.css');
 
-        // js
-        Requirements::javascript("themes/openstack/bower_assets/jquery/dist/jquery.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jquery-migrate/jquery-migrate.min.js");
-        Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
-        Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
-        Requirements::javascript("themes/openstack/javascript/jquery.validate.custom.methods.js");
-        Requirements::javascript("themes/openstack/bower_assets/bootstrap/dist/js/bootstrap.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jquery-cookie/jquery.cookie.js");
-        Requirements::javascript('themes/openstack/bower_assets/jquery-mousewheel/jquery.mousewheel.js');
-        Requirements::javascript('themes/openstack/bower_assets/php-date-formatter/js/php-date-formatter.min.js');
+        Requirements::javascript("node_modules/js-cookie/src/js.cookie.js");
+        Requirements::javascript('node_modules/jquery-mousewheel/jquery.mousewheel.js');
+        Requirements::javascript('node_modules/php-date-formatter/js/php-date-formatter.min.js');
         Requirements::javascript("node_modules/jquery-datetimepicker/build/jquery.datetimepicker.full.min.js");
-        Requirements::javascript('themes/openstack/bower_assets/sweetalert2/dist/sweetalert2.min.js');
+        SweetAlert2Dependencies::renderRequirements();
         Requirements::javascript("marketplace/code/ui/admin/js/utils.js");
         Requirements::javascript("marketplace/ui/source/js/ViewPoweredOpenStackProductDetail.js");
 
@@ -165,20 +152,16 @@ final class SangriaPageMarketPlaceExtension extends Extension {
 
     public function ViewOpenStackProductsByRegion(){
         Requirements::clear();
-        // css
 
+        JQueryCoreDependencies::renderRequirements();
+        BootstrapDependencies::renderRequirements();
+        FontAwesomeDependencies::renderRequirements();
         Requirements::css('sangria/ui/source/css/sangria.css');
-        Requirements::css("themes/openstack/bower_assets/bootstrap/dist/css/bootstrap.min.css");
-        Requirements::css("themes/openstack/bower_assets/fontawesome/css/font-awesome.min.css");
         Requirements::css('//fonts.googleapis.com/css?family=Open+Sans:300,400,700');
 
-        // js
-        Requirements::javascript("themes/openstack/bower_assets/jquery/dist/jquery.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jquery-migrate/jquery-migrate.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/bootstrap/dist/js/bootstrap.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jquery-cookie/jquery.cookie.js");
-        Requirements::javascript('themes/openstack/bower_assets/jquery-mousewheel/jquery.mousewheel.js');
-        Requirements::javascript('themes/openstack/bower_assets/php-date-formatter/js/php-date-formatter.min.js');
+        Requirements::javascript("node_modules/js-cookie/src/js.cookie.js");
+        Requirements::javascript('node_modules/jquery-mousewheel/jquery.mousewheel.js');
+        Requirements::javascript('node_modules/php-date-formatter/js/php-date-formatter.min.js');
         Requirements::javascript('themes/openstack/javascript/jquery.tablednd.js');
 
         $repository = new SapphireRegionalServiceRepository();
@@ -194,20 +177,15 @@ final class SangriaPageMarketPlaceExtension extends Extension {
 
     public function ViewCloudsDataCenterLocations(){
         Requirements::clear();
-        // css
-
-        Requirements::css('sangria/ui/source/css/sangria.css');
-        Requirements::css("themes/openstack/bower_assets/bootstrap/dist/css/bootstrap.min.css");
-        Requirements::css("themes/openstack/bower_assets/fontawesome/css/font-awesome.min.css");
+        JQueryCoreDependencies::renderRequirements();
+        BootstrapDependencies::renderRequirements();
+        FontAwesomeDependencies::renderRequirements();
         Requirements::css('//fonts.googleapis.com/css?family=Open+Sans:300,400,700');
+        Requirements::css('sangria/ui/source/css/sangria.css');
 
-        // js
-        Requirements::javascript("themes/openstack/bower_assets/jquery/dist/jquery.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jquery-migrate/jquery-migrate.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/bootstrap/dist/js/bootstrap.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jquery-cookie/jquery.cookie.js");
-        Requirements::javascript('themes/openstack/bower_assets/jquery-mousewheel/jquery.mousewheel.js');
-        Requirements::javascript('themes/openstack/bower_assets/php-date-formatter/js/php-date-formatter.min.js');
+        Requirements::javascript("node_modules/js-cookie/src/js.cookie.js");
+        Requirements::javascript('node_modules/jquery-mousewheel/jquery.mousewheel.js');
+        Requirements::javascript('node_modules/php-date-formatter/js/php-date-formatter.min.js');
 
         $repository = new SapphireRegionalServiceRepository();
         $regions    = $repository->getAllRegions();
@@ -223,16 +201,13 @@ final class SangriaPageMarketPlaceExtension extends Extension {
     public function ViewPublicCloudPassports(){
         Requirements::clear();
         // css
-
+        JQueryCoreDependencies::renderRequirements();
+        BootstrapDependencies::renderRequirements();
+        FontAwesomeDependencies::renderRequirements();
+        FontAwesomeDependencies::renderRequirements();
         Requirements::css('marketplace/code/ui/admin/css/sangria-passports-admin.css');
-        Requirements::css("themes/openstack/bower_assets/bootstrap/dist/css/bootstrap.min.css");
-        Requirements::css("themes/openstack/bower_assets/fontawesome/css/font-awesome.min.css");
         Requirements::css('//fonts.googleapis.com/css?family=Open+Sans:300,400,700');
-        Requirements::css('themes/openstack/bower_assets/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
-
-        // js
-        Requirements::javascript("themes/openstack/bower_assets/jquery/dist/jquery.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/bootstrap/dist/js/bootstrap.min.js");
+        Requirements::css('node_modules/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
 
         return $this->owner->getViewer('ViewPublicCloudPassports')->process($this->owner);
     }

@@ -17,9 +17,8 @@ class ClockTimePickerField extends TimeField
 
     public function Field($properties = array())
     {
-        Requirements::javascript('openstack/code/utils/CustomHTMLFields/js/jquery-clockpicker.js');
+        JQueryClockPickerDependencies::renderRequirements();
         Requirements::javascript('openstack/code/utils/CustomHTMLFields/js/ClockTimePickerField.js');
-        Requirements::css('themes/openstack/bower_assets/clockpicker/dist/jquery-clockpicker.min.css');
         Requirements::css('openstack/code/utils/CustomHTMLFields/css/ClockTimePickerField.css');
 
         $this->addExtraClass('ss-timeclock-field');
@@ -28,8 +27,6 @@ class ClockTimePickerField extends TimeField
         return $this
             ->customise($properties)
             ->renderWith(array("ClockTimePickerField"));
-
-
     }
 
     public function setValue($val) {

@@ -33,7 +33,7 @@
             console.log('uri path '+uri.path());
             if(uri.path().indexOf('/rsvp') !== -1 ) return;
 
-            var install_mobile_app_action = $.cookie('install_mobile_app_action');
+            var install_mobile_app_action = Cookies.get('install_mobile_app_action');
             var show_download_button      = typeof install_mobile_app_action == 'undefined';
             // on ios && safari and ios <= 8 do not show download button
             if(is_ios && is_safari && compare_os_version < 0)
@@ -95,7 +95,7 @@
         });
 
         $(document).on('click', '#btn-download', function() {
-            $.cookie('install_mobile_app_action', 'download', { expires: 7 });
+            Cookies.set('install_mobile_app_action', 'download', { expires: 7 });
             if (is_ios){
                 window.location = $("meta[property='al:ios:url']").attr("content") || $("meta[property='al:android:url']").attr("content");
 
@@ -113,7 +113,7 @@
         });
 
         $(document).on('click', '#btn-launch', function() {
-            $.cookie('install_mobile_app_action', 'launch', { expires: 7 });
+            Cookies.set('install_mobile_app_action', 'launch', { expires: 7 });
             if (is_ios){
                 window.location = $("meta[property='al:ios:url']").attr("content");
             }

@@ -18,7 +18,7 @@ class EditProfileForm extends SafeXSSForm
 
     function __construct($controller, $name)
     {
-        Requirements::css('themes/openstack/bower_assets/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
+        Requirements::css('node_modules/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
 
         // Name Set
         $MemberIDField = new TextField('MemberID', "Member ID");

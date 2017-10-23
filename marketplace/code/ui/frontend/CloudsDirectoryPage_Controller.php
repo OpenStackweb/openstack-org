@@ -149,12 +149,11 @@ abstract class CloudsDirectoryPage_Controller extends MarketPlaceDirectoryPage_C
             $('#{$cloud_type}','.marketplace-nav').addClass('current');
         });");
 
-		Requirements::css("themes/openstack/css/chosen.css", "screen,projection");
+        JSChosenDependencies::renderRequirements();
 
 		$this->InitGoogleMapLibs();
 
         Requirements::combine_files('marketplace_clouds_directory_page.js', array(
-            "themes/openstack/javascript/chosen.jquery.min.js",
             "marketplace/code/ui/frontend/js/clouds.directory.page.js",
         ));
 

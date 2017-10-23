@@ -36,29 +36,11 @@ class SurveyReportPage_Controller extends Page_Controller
 
         //if(!Permission::checkMember(Member::currentUser(),"ADMIN")) Security::permissionFailure($this);
 
-        Requirements::css("themes/openstack/bower_assets/jqplot-bower/dist/jquery.jqplot.min.css");
-        //jqplot and plugins ...
-        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/jquery.jqplot.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.canvasAxisTickRenderer.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.dateAxisRenderer.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.cursor.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.categoryAxisRenderer.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.canvasTextRenderer.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.canvasOverlay.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.enhancedLegendRenderer.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.json2.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.logAxisRenderer.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.pointLabels.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.trendline.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.barRenderer.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.pieRenderer.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.bubbleRenderer.js");
-        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.canvasAxisLabelRenderer.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.highlighter.min.js");
+        JQPlotDependencies::renderRequirements();
         //other js
         Requirements::javascript('themes/openstack/javascript/jquery-ajax-loader.js');
-        Requirements::javascript('themes/openstack/bower_assets/jspdf/dist/jspdf.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/html2canvas/build/html2canvas.min.js');
+        Requirements::javascript('node_modules/jspdf/dist/jspdf.min.js');
+        Requirements::javascript('node_modules/html2canvas/dist/html2canvas.min.js');
         // require custom CSS
         Requirements::css("survey_builder/css/survey-report.css");
         //Requirements::javascript('survey_builder/js/survey_report.js');

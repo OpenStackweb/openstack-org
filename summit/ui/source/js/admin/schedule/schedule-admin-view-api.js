@@ -105,8 +105,7 @@ schedule_admin_view_api.publish = function (summit_id, event, is_published_event
                 title: 'Validation error',
                 text: response.messages[0].message,
                 type: 'warning'
-            },
-                function(){
+            }).then(function(){
                     if (is_published_event) {
                         $('#event_'+event.id).animate({
                             top: $('#event_'+event.id).attr('prev-pos-top'),
@@ -116,7 +115,6 @@ schedule_admin_view_api.publish = function (summit_id, event, is_published_event
                         $('.unpublished-events-refresh').click();
                         $('#event_'+event.id).remove();
                     }
-
                     return false;
                 }
             );

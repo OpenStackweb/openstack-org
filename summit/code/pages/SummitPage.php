@@ -110,14 +110,14 @@ class SummitPage_Controller extends Page_Controller
     public function init()
     {
         parent::init();
-        Requirements::javascript("summit/bower_components/sweetalert/lib/sweet-alert.js");
-        Requirements::css("summit/bower_components/sweetalert/lib/sweet-alert.css");
+        SweetAlert2Dependencies::renderRequirements();
         Requirements::javascript("summit/javascript/summit.js");
         // Summit pages are so different visually we don't pull in the main css file
         Requirements::block("themes/openstack/css/combined.css");
         Requirements::css("summit/css/combined.css");
         Requirements::css("themes/openstack/static/css/combined.css");
-        Requirements::css('//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css');
+        FontAwesomeDependencies::renderRequirements();
+
     }
 
     public function CurrentSummit()

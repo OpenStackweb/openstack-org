@@ -208,7 +208,7 @@ class PresentationPage_Controller extends SummitPage_Controller
     {
         parent::init();
 
-        Requirements::javascript('themes/openstack/bower_assets/clipboard/dist/clipboard.min.js');
+        Requirements::javascript('node_modules/clipboard/dist/clipboard.min.js');
 
         if (!Summit::get_active()->isInDB()) {
             return $this->httpError(404, 'There is no active summit');

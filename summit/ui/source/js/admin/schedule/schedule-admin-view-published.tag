@@ -131,7 +131,7 @@
                         confirmButtonColor: "#DD6B55",
                         confirmButtonText: "Yes, unpublish it!",
                         closeOnConfirm: false
-                        }, function(){
+                        }).then(function(){
                             self.dispatcher.unPublishEvent(self.summit.id, id);
                             $('#event_'+id).remove();
                             swal("Deleted!", "Your event was unpublished.", "success");

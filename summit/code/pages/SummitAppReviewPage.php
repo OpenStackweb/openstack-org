@@ -30,8 +30,7 @@ class SummitAppReviewPage_Controller extends SummitPage_Controller
         if(!Member::currentUser())
             return OpenStackIdCommon::doLogin();
 
-        Requirements::javascript("summit/bower_components/sweetalert/lib/sweet-alert.js");
-        Requirements::css("summit/bower_components/sweetalert/lib/sweet-alert.css");
+        SweetAlert2Dependencies::renderRequirements();
         //Requirements::javascript('//tinymce.cachefly.net/4.3/tinymce.min.js');
         Requirements::javascript('summit/javascript/summitapp-review.js');
         Requirements::javascript('marketplace/code/ui/frontend/js/star-rating.min.js');

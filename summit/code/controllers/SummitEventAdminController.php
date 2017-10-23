@@ -189,25 +189,15 @@ final class SummitEventAdminController extends Controller
         $summit    = Summit::get()->byID($summit_id);
         $event_id  = intval($request->param('EventID'));
         $event     = ($event_id == 0) ? null : SummitEvent::get()->byID($event_id);
-
+        Requirements::css('node_modules/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
         Requirements::css('summit/css/simple-sidebar.css');
-        Requirements::css('themes/openstack/bower_assets/chosen/chosen.min.css');
-        Requirements::css('themes/openstack/bower_assets/sweetalert/dist/sweetalert.css');
-        Requirements::css('themes/openstack/bower_assets/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
+        JSChosenDependencies::renderRequirements();
+        SweetAlert2Dependencies::renderRequirements();
+        BootstrapTagsInputDependencies::renderRequirements();
+        JQueryValidateDependencies::renderRequirements(true, false);
         Requirements::css('summit/css/summit-admin-edit-event.css');
-        // tag inputes
-        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.css');
-        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css');
-
-        Requirements::javascript('themes/openstack/bower_assets/sweetalert/dist/sweetalert.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/additional-methods.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/chosen/chosen.jquery.min.js');
         Requirements::javascript('summit/javascript/simple-sidebar.js');
         Requirements::javascript('//tinymce.cachefly.net/4.3/tinymce.min.js');
-        //tags inputs
-        Requirements::javascript('themes/openstack/bower_assets/typeahead.js/dist/typeahead.bundle.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js');
         Requirements::javascript('summit/javascript/summitapp-editevent.js');
 
         return $this->parent->getViewer('EditEvent')->process
@@ -227,11 +217,9 @@ final class SummitEventAdminController extends Controller
     public function scheduleView(SS_HTTPRequest $request)
     {
         Requirements::css('summit/css/simple-sidebar.css');
-        Requirements::css('themes/openstack/bower_assets/jquery-ui/themes/smoothness/jquery-ui.min.css');
-        Requirements::css('themes/openstack/bower_assets/sweetalert/dist/sweetalert.css');
+        SweetAlert2Dependencies::renderRequirements();
         Requirements::javascript('summit/javascript/simple-sidebar.js');
         Requirements::javascript('themes/openstack/javascript/bootstrap-paginator/src/bootstrap-paginator.js');
-        Requirements::javascript('themes/openstack/bower_assets/sweetalert/dist/sweetalert.min.js');
         Requirements::javascript('themes/openstack/javascript/jquery-ajax-loader.js');
         Requirements::javascript('summit/javascript/summit-admin-schedule.js');
 
@@ -239,29 +227,27 @@ final class SummitEventAdminController extends Controller
         $summit    = Summit::get()->byID($summit_id);
         if(is_null($summit) || $summit->ID <= 0) return $this->httpError(404);
 
-        return $this->parent->getViewer('scheduleView')->process($this, array
-            (
+        return $this->parent->getViewer('scheduleView')->process($this, [
+
                 'Summit'                    => $summit,
                 'PresentationStatusOptions' => new ArrayList
                 (
-                    array
-                    (
+                    [
                         new ArrayData(array('Status'=> 'Non Received')),
                         new ArrayData(array('Status'=> Presentation::STATUS_RECEIVED))
-                    )
+                    ]
                 ),
                 'PresentationSelectionStatusOptions' => new ArrayList
                 (
-                    array
-                    (
+                    [
                         //new ArrayData(array('Status'=> 'unaccepted')),
                         new ArrayData(array('Status'=> 'accepted')),
                         new ArrayData(array('Status'=> 'alternate')),
                         new ArrayData(array('Status'=> 'lightning accepted')),
                         new ArrayData(array('Status'=> 'lightning alternate')),
-                    )
+                    ]
                 ),
-            )
+            ]
         );
     }
 
@@ -290,27 +276,23 @@ final class SummitEventAdminController extends Controller
             if(is_null($event) || $event->SummitID != $summit_id) continue;
             $events->push($event);
         }
-
+        SweetAlert2Dependencies::renderRequirements();
+        BootstrapDatePickerDependencies::renderRequirements();
+        JQueryClockPickerDependencies::renderRequirements();
         Requirements::css('summit/css/simple-sidebar.css');
-        Requirements::css('themes/openstack/bower_assets/clockpicker/dist/bootstrap-clockpicker.min.css');
-        Requirements::css('themes/openstack/bower_assets/sweetalert/dist/sweetalert.css');
-        Requirements::css('themes/openstack/bower_assets/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css');
         Requirements::css('summit/css/bulk-actions.css');
 
         Requirements::javascript('summit/javascript/simple-sidebar.js');
-        Requirements::javascript('themes/openstack/bower_assets/sweetalert/dist/sweetalert.min.js');
         Requirements::javascript('themes/openstack/javascript/jquery-ajax-loader.js');
-        Requirements::javascript('openstack/code/utils/CustomHTMLFields/js/jquery-clockpicker.js');
-        Requirements::javascript('themes/openstack/bower_assets/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/moment/min/moment.min.js');
+        Requirements::javascript('node_modules/moment/min/moment.min.js');
         Requirements::javascript('summit/javascript/summitapp-bulkactions.js');
 
-        return $this->parent->getViewer('scheduleViewEditBulkAction')->process($this, array
-            (
+        return $this->parent->getViewer('scheduleViewEditBulkAction')->process($this,
+            [
                 'Summit'            => $summit,
                 'Events'            => $events,
                 'UnpublishedEvents' => $type === 'unpublished',
-            )
+            ]
         );
     }
 
@@ -320,9 +302,7 @@ final class SummitEventAdminController extends Controller
         $summit = Summit::get()->byID($summit_id);
 
         Requirements::css('summit/css/simple-sidebar.css');
-        Requirements::css('themes/openstack/bower_assets/sweetalert/dist/sweetalert.css');
-        Requirements::css('themes/openstack/bower_assets/jquery-ui/themes/smoothness/jquery-ui.css');
-        Requirements::javascript('themes/openstack/bower_assets/sweetalert/dist/sweetalert.min.js');
+        SweetAlert2Dependencies::renderRequirements();
         Requirements::javascript('summit/javascript/simple-sidebar.js');
         Requirements::javascript('themes/openstack/javascript/bootstrap-paginator/src/bootstrap-paginator.js');
         Requirements::javascript('themes/openstack/javascript/jquery-ajax-loader.js');

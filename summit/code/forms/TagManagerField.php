@@ -30,9 +30,9 @@ class TagManagerField extends FormField
         }
 
         $tags_json = json_encode($tag_array);
-
+        JQueryValidateDependencies::renderRequirements(true, false);
         Requirements::customScript("var category_tags = {$tags_json};");
-        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.min.js');
+
         Requirements::set_write_js_to_body(false);
 
         return parent::FieldHolder($attributes);

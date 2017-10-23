@@ -177,17 +177,16 @@
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "Yes, delete it!",
                     closeOnConfirm: false
-                },
-                function(){
-                    e.preventDefault();
-                    $.ajax({
+                }).then(function(){
+                      e.preventDefault();
+                      $.ajax({
                         url: 'api/v1/summits/'+self.summit_id+'/registration-codes/'+e.item.pcode.id,
                         type: 'DELETE',
                         success: function(result) {
-                            $(e.target).parents('tr').remove();
-                            swal('Deleted', 'Promo Code deleted successfully', 'success');
+                        $(e.target).parents('tr').remove();
+                        swal('Deleted', 'Promo Code deleted successfully', 'success');
                         }
-                    });
+                      });
                 });
 
             return false;

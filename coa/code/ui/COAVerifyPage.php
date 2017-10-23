@@ -66,10 +66,9 @@ class COAVerifyPage_Controller extends Page_Controller
     {
         parent::init();
 
+        SweetAlert2Dependencies::renderRequirements();
         Requirements::css('coa/css/coa-verify.css');
         Requirements::javascript('coa/js/coa-verify.js');
-        Requirements::css('themes/openstack/bower_assets/sweetalert/dist/sweetalert.css');
-        Requirements::javascript('themes/openstack/bower_assets/sweetalert/dist/sweetalert.min.js');
     }
 
     public function index(SS_HTTPRequest $request){

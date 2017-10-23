@@ -11,7 +11,7 @@ $(".open-panel").click(function(event){
 });
 
 // Smooth scroll
-$('a[href^=#]').click(function(e){
+$("a[href^='#']").click(function(e){
     var $this = $(this);
     e.preventDefault();
     var offset = $($this.attr('href')).offset();

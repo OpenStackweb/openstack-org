@@ -17,9 +17,9 @@
  */
 class SangriaPage extends Page
 {
-    private static $db = array();
+    private static $db = [];
 
-    private static $has_one = array();
+    private static $has_one = [];
 }
 
 /**
@@ -376,14 +376,10 @@ final class SangriaPage_Controller extends AdminController implements Permission
         Requirements::clear();
         // css
         Requirements::css('marketplace/ui/source/css/sangria.css');
-        Requirements::css("themes/openstack/css/bootstrap.min.css");
-        Requirements::css("themes/openstack/bower_assets/fontawesome/css/font-awesome.min.css");
+        JQueryCoreDependencies::renderRequirements();
+        BootstrapDependencies::renderRequirements();
+        FontAwesomeDependencies::renderRequirements();
         Requirements::css('//fonts.googleapis.com/css?family=Open+Sans:300,400,700');
-
-        // js
-        Requirements::javascript("themes/openstack/bower_assets/jquery/dist/jquery.min.js");
-        Requirements::javascript("themes/openstack/javascript/bootstrap.min.js");
-
         return $this->getViewer('TagsCrudPage')->process($this);
     }
 

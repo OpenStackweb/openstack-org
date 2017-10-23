@@ -124,7 +124,7 @@ jQuery(document).ready(function($) {
             $('#no_schedules').hide();
         }
 
-        $('.scheduleRow .remove',$training_form).live('click',function(){
+        $($training_form).on('click','.scheduleRow .remove', function(){
             if($('.scheduleRow',$training_form).length > 0){
                 $(this).parent().remove();
             }

@@ -133,7 +133,7 @@
                }
             });
 
-            $('.region-name').live('focusout', function (event) {
+            $(document).on('focusout','.region-name', function (event) {
                 var former_value  = $(this).data('original-value');
                 var current_value = $(this).val();
                 repopulateRegions({
@@ -172,7 +172,7 @@
                 return false;
             });
 
-            $('.remove-additional-region',table_regions).live('click',function(event){
+            $(table_regions).on('click','.remove-additional-region', function(event){
                 var remove_btn = $(this);
                 var tr = remove_btn.parent().parent();
                 tr.remove();
@@ -228,7 +228,7 @@
             });
 
 
-            $('.remove-data-center','#data-center-locations-container').live('click',function(event){
+            $('#data-center-locations-container').on('click', '.remove-data-center',function(event){
                 event.preventDefault();
                 event.stopPropagation();
                 var data_center_slug = $(this).attr('data-slug');
@@ -254,7 +254,7 @@
                 return false;
             });
 
-            $('.remove-az',form).live('click',function(event){
+            $(form).on('click','.remove-az',function(event){
                 event.preventDefault();
                 event.stopPropagation();
                 var remove_btn = $(this);
@@ -263,7 +263,7 @@
                 return false;
             });
 
-            $('.add-az',form).live('click',function(event){
+            $(form).on('click', '.add-az', function(event){
                 event.preventDefault();
                 event.stopPropagation();
                 var location_slug = $(this).attr('data-slug');

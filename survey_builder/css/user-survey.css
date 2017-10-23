@@ -1090,6 +1090,13 @@ table.checkboxset .checkbox label{
     padding-right: 5px;
 }
 
+/* restore bootstrap style */
+input[type="radio"] {
+    margin-left: -20px ; }
+
+input[type="checkbox"] {
+    margin-left: -20px  }
+
 div.field.checkbox input {
     margin-left: 0px;
 }

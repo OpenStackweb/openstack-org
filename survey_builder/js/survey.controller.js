@@ -150,12 +150,15 @@ jQuery(document).ready(function($) {
         // before 2 navigate to another step
         // try to save the current one
         if(form.length > 0 && default_action.length > 0) {
-            $('<input />').attr('type', 'hidden')
-                .attr('name', "NEXT_STEP")
-                .attr('id', "NEXT_STEP")
-                .attr('value', $(this).data('step-name'))
-                .appendTo(form);
-            default_action.trigger('click');
+            if(form.valid()) {
+                $("#NEXT_STEP", form).remove();
+                $('<input />').attr('type', 'hidden')
+                    .attr('name', "NEXT_STEP")
+                    .attr('id', "NEXT_STEP")
+                    .attr('value', $(this).data('step-name'))
+                    .appendTo(form);
+                default_action.trigger('click');
+            }
             event.preventDefault();
             return false;
         }

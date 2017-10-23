@@ -4,7 +4,7 @@ import thunk from 'redux-thunk'
 import { createStore, applyMiddleware } from 'redux'
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
-require("../../../../../themes/openstack/bower_assets/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css");
+require("awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css");
 
 const element = document.getElementById('os-schedule-global-search');
 

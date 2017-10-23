@@ -72,12 +72,11 @@ class ConsultantsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Contr
             $('#consulting','.marketplace-nav').addClass('current');
         });");
 
-		Requirements::css("themes/openstack/css/chosen.css", "screen,projection");
+        JSChosenDependencies::renderRequirements();
 
         $this->InitGoogleMapLibs();
 
         Requirements::combine_files('marketplace_consultants_directory_page.js', array(
-            "themes/openstack/javascript/chosen.jquery.min.js",
             "marketplace/code/ui/frontend/js/consultants.directory.page.js"
         ));
 

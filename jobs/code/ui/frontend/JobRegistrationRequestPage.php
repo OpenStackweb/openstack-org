@@ -20,10 +20,10 @@ final class JobRegistrationRequestPage extends Page {
 
 final class JobRegistrationRequestPage_Controller extends Page_Controller {
 	//Allow our form as an action
-	static $allowed_actions = array(
+	static $allowed_actions = [
 		'JobRegistrationRequestForm',
 		'saveJobRegistrationRequest',
-	);
+	];
 
 	/**
 	 * @var IJobRegistrationRequestManager
@@ -44,32 +44,19 @@ final class JobRegistrationRequestPage_Controller extends Page_Controller {
         Requirements::css(THIRDPARTY_DIR . '/jquery-ui-themes/smoothness/jquery-ui.css');
         Requirements::javascript(THIRDPARTY_DIR . '/jquery-ui/jquery-ui.js');
 
-  		Requirements::css("themes/openstack/css/chosen.css");
-		Requirements::css('jobs/css/job.registration.form.css');
-
-        if (Director::isLive())
-        {
-            Requirements::javascript("themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.min.js");
-            Requirements::javascript("themes/openstack/bower_assets/jquery-validate/dist/additional-methods.min.js");
-        }
-        else
-        {
-            Requirements::javascript("themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.js");
-            Requirements::javascript("themes/openstack/bower_assets/jquery-validate/dist/additional-methods.js");
-        }
+  		Requirements::css('jobs/css/job.registration.form.css');
+        JSChosenDependencies::renderRequirements();
+        JQueryValidateDependencies::renderRequirements();
 
         Requirements::javascript(Director::protocol()."maps.googleapis.com/maps/api/js?sensor=false");
 
-		$js_files = array(
-			"themes/openstack/javascript/chosen.jquery.min.js",
-			"themes/openstack/javascript/jquery.ui.datepicker.validation.package-1.0.1/jquery.ui.datepicker.validation.js",
-			"themes/openstack/javascript/jquery.validate.custom.methods.js",
+		$js_files = [
 			"marketplace/code/ui/admin/js/geocoding.jquery.js",
 			"marketplace/code/ui/admin/js/utils.js",
-			'themes/openstack/javascript/pure.min.js',
+			'node_modules/pure/libs/pure.min.js',
 			"jobs/js/job.registration.request.page.js",
 			"jobs/js/job.registration.form.js"
-		);
+		];
 
 		foreach($js_files as $js_file)
 			Requirements::javascript($js_file);
@@ -100,7 +87,7 @@ final class JobRegistrationRequestPage_Controller extends Page_Controller {
 			$messages = $ex1->getMessages();
 			$msg = $messages[0];
 			$form->addErrorMessage('Title',$msg['message'] ,'bad');
-			SS_Log::log($msg['message'] ,SS_Log::ERR);
+			SS_Log::log($msg['message'] ,SS_Log::INFO);
 			// Load errors into session and post back
 			Session::set("FormInfo.Form_JobRegistrationRequestForm.data", $data);
 			return $this->redirectBack();

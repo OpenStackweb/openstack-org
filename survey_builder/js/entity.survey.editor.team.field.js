@@ -133,7 +133,7 @@
            return false;
         });
 
-        $('.delete-team-member-btn').live('click', function(event){
+        $(document).on('click', '.delete-team-member-btn', function(event){
             event.preventDefault();
             if(window.confirm(GetText._t('Are you sure?')))
             {

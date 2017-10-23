@@ -48,7 +48,7 @@ jQuery(document).ready(function($){
         return false;
     });
 
-    $(".remove-author").live('click',function(event){
+    $(document).on('click',".remove-author", function(event){
         $(this).parent().parent().remove();
         event.preventDefault();
         event.stopPropagation();

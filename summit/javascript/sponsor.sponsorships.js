@@ -226,7 +226,7 @@
                         container.append(summit_package_html);
                     });
 
-                    $('.buy-package').live('click', buySponsorPackage);
+                    $(document).on('click','.buy-package', buySponsorPackage);
 
                 }).fail(function () {
 

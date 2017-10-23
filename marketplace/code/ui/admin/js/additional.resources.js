@@ -114,7 +114,7 @@
                    return false;
                });
 
-               $(".remove-additional-resource").live('click',function(event){
+               $(document).on('click',".remove-additional-resource",function(event){
                    var remove_btn = $(this);
                    var tr = remove_btn.parent().parent();
                    var name = $('input.additional-resource-name',tr);

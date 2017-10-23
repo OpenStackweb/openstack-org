@@ -374,7 +374,7 @@ $(document).ready(function(){
                 return is_publishing || published || end_date != '';
             }},
             end_date: { required: function(){
-                var published = $('#published').val();
+                var published   = $('#published').val();
                 var start_date  = $('#start_date').val();
                 return is_publishing || published || start_date != '';
             }},
@@ -431,40 +431,36 @@ $(document).ready(function(){
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "Yes, UnPublish it!",
                 closeOnConfirm: true,
-                allowEscapeKey: false,
-            },
-            function(isConfirm){
-
-                if (isConfirm) {
-                    $.ajax({
-                            type: 'DELETE',
-                            url: url,
-                            contentType: "application/json; charset=utf-8",
-                            dataType: "json"
-                        })
-                        .done(function () {
-                            swal("Unpublished!", "Your event was unpublished successfully.", "success");
-                            location.reload();
-                            form.find(':submit').removeAttr('disabled');
-                        })
-                        .fail(function (jqXHR) {
-                            var responseCode = jqXHR.status;
-                            if (responseCode == 412) {
-                                var response = $.parseJSON(jqXHR.responseText);
-                                swal('Validation error', response.messages[0].message, 'warning');
-                            }
-                            else {
-                                swal('Error', 'There was a problem saving the event, please contact admin.', 'warning');
-                            }
-                            form.find(':submit').removeAttr('disabled');
-                        });
-                }
-                else {
-                    swal("Cancelled", "", "error");
-                    form.find(':submit').removeAttr('disabled');
-                }
+                allowEscapeKey: false
+            }).then(function(isConfirm){
+            if (isConfirm) {
+                $.ajax({
+                    type: 'DELETE',
+                    url: url,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json"
+                })
+                    .done(function () {
+                        swal("Unpublished!", "Your event was unpublished successfully.", "success");
+                        location.reload();
+                        form.find(':submit').removeAttr('disabled');
+                    })
+                    .fail(function (jqXHR) {
+                        var responseCode = jqXHR.status;
+                        if (responseCode == 412) {
+                            var response = $.parseJSON(jqXHR.responseText);
+                            swal('Validation error', response.messages[0].message, 'warning');
+                        }
+                        else {
+                            swal('Error', 'There was a problem saving the event, please contact admin.', 'warning');
+                        }
+                        form.find(':submit').removeAttr('disabled');
+                    });
+                return;
             }
-        );
+            swal("Cancelled", "", "error");
+            form.find(':submit').removeAttr('disabled');
+        });
 
 
         return false;

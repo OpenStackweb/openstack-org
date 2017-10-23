@@ -25,18 +25,11 @@ class SpeakerForm extends BootstrapForm
         $form_id = $this->FormName();
 
         Requirements::customScript("var form_id = '{$form_id}';");
-        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
-        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
-        Requirements::javascript('themes/openstack/javascript/chosen.jquery.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/typeahead.js/dist/typeahead.bundle.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js');
-        Requirements::javascript('summit/javascript/speaker-form.js');
-
-        Requirements::css('themes/openstack/bower_assets/chosen/chosen.min.css');
-        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.css');
-        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css');
+        JQueryValidateDependencies::renderRequirements(true,false);
+        JSChosenDependencies::renderRequirements();
+        BootstrapTagsInputDependencies::renderRequirements();
         Requirements::css('summit/css/speaker-form.css');
-
+        Requirements::javascript('summit/javascript/speaker-form.js');
     }
 
     protected function getSpeakerFields()

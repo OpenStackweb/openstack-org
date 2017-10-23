@@ -44,12 +44,10 @@ function getVerification() {
                     $('#result_cert').text(data.CertificationNumber);
                     $('#result_date').text(data.PassFailDate);
                     $('#result_status').text(data.CertificationStatus);
-
                     $('#cert_verification').slideDown('slow');
-                } else {
-                    $('#cert_empty').show();
+                    return;
                 }
-
+                $('#cert_empty').show();
             }
         }).fail(function (jqXHR, textStatus, errorThrown) {
             var http_code = jqXHR.status;
@@ -59,8 +57,8 @@ function getVerification() {
                 location.reload();
             }
         });
-    } else {
-        swal('Validation Error','Please fill in the required information and accept the Terms of Use.','warning');
+        return;
     }
-
+    // fail validation
+    swal('Validation Error','Please fill in the required information and accept the Terms of Use.','warning');
 }

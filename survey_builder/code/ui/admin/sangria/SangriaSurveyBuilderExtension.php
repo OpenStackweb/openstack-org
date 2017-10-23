@@ -434,10 +434,9 @@ HTML;
         Requirements::css('sangria/ui/source/css/sangria.css');
 
         // js
-        Requirements::javascript("themes/openstack/bower_assets/jquery/dist/jquery.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jquery-migrate/jquery-migrate.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jquery-cookie/jquery.cookie.js");
-        //tags inputs
+        JQueryCoreDependencies::renderRequirements();
+        Requirements::javascript("node_modules/js-cookie/src/js.cookie.js");
+        // tags inputs
         // defined here bc amd/requirejs module definition is broken
         Requirements::javascript('node_modules/bootstrap-3-typeahead/bootstrap3-typeahead.min.js');
 
@@ -463,9 +462,8 @@ HTML;
         Requirements::set_force_js_to_bottom(true);
         Requirements::css('sangria/ui/source/css/sangria.css');
         // js
-        Requirements::javascript("themes/openstack/bower_assets/jquery/dist/jquery.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jquery-migrate/jquery-migrate.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jquery-cookie/jquery.cookie.js");
+        JQueryCoreDependencies::renderRequirements();
+        Requirements::javascript("node_modules/js-cookie/src/js.cookie.js");
 
         $query_string = $request->getVars();
         $template_id  = intval($query_string['template_id']);

@@ -19,15 +19,24 @@ final class SangriaPageEventExtension extends Extension {
 	private $repository;
     private $event_repository;
 
-	public function __construct(){
+    private static $allowed_actions = [
+        'ViewEventDetails',
+        'ViewPostedEvents',
+        'ViewOpenstackDaysEvents',
+        'ViewHackathonEvents',
+        'FeaturedEventForm',
+        'saveFeaturedEvent',
+    ];
+
+    public function __construct(){
 		parent::__construct();
 		$this->repository = new SapphireEventRegistrationRequestRepository;
         $this->event_repository = new SapphireEventRepository;
 	}
 
 	public function onBeforeInit(){
-		Config::inst()->update(get_class($this), 'allowed_actions', array('ViewEventDetails','ViewPostedEvents','ViewOpenstackDaysEvents','ViewHackathonEvents','FeaturedEventForm','saveFeaturedEvent'));
-		Config::inst()->update(get_class($this->owner), 'allowed_actions', array('ViewEventDetails','ViewPostedEvents','ViewOpenstackDaysEvents','ViewHackathonEvents','FeaturedEventForm','saveFeaturedEvent'));
+		Config::inst()->update(get_class($this), 'allowed_actions', self::$allowed_actions);
+		Config::inst()->update(get_class($this->owner), 'allowed_actions', self::$allowed_actions);
 	}
 
 	public function EventRegistrationRequestForm() {
@@ -116,17 +125,12 @@ final class SangriaPageEventExtension extends Extension {
 	}
 
 	private function commonScripts(){
-		Requirements::css("themes/openstack/css/chosen.css", "screen,projection");
-		Requirements::css(THIRDPARTY_DIR . '/jquery-ui-themes/smoothness/jquery-ui.css');
-		Requirements::javascript(THIRDPARTY_DIR . '/jquery-ui/jquery-ui.js');
+	    JQueryCoreDependencies::renderRequirements();
+	    JSChosenDependencies::renderRequirements();
+	    JQueryValidateDependencies::renderRequirements();
+        Requirements::javascript('themes/openstack/javascript/jquery.cleanform.js');
 		Requirements::css("events/css/sangria.page.view.event.details.css");
-		Requirements::javascript("themes/openstack/javascript/chosen.jquery.min.js");
-		Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
-		Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
-		Requirements::javascript("themes/openstack/javascript/jquery.ui.datepicker.validation.package-1.0.1/jquery.ui.datepicker.validation.js");
-		Requirements::javascript("themes/openstack/javascript/jquery.validate.custom.methods.js");
 		Requirements::javascript('marketplace/code/ui/admin/js/utils.js');
-		Requirements::javascript('themes/openstack/javascript/jquery.cleanform.js');
 	}
 
 	public function ViewEventDetails(){

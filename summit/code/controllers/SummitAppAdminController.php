@@ -42,44 +42,28 @@ final class SummitAppAdminController extends Controller implements PermissionPro
             return OpenStackIdCommon::doLogin();
 
         if(!Permission::check("ADMIN_SUMMIT_APP_FRONTEND_ADMIN")) Security::permissionFailure($this);
+        JQueryCoreDependencies::renderRequirements();
+        BootstrapDependencies::renderRequirements();
+        FontAwesomeDependencies::renderRequirements();
+        JQueryValidateDependencies::renderRequirements(true, false);
+        JSChosenDependencies::renderRequirements();
 
-        Requirements::css("themes/openstack/bower_assets/bootstrap/dist/css/bootstrap.min.css");
-        Requirements::css("themes/openstack/bower_assets/fontawesome/css/font-awesome.min.css");
         Requirements::css('//fonts.googleapis.com/css?family=Open+Sans:300,400,700');
         Requirements::css("themes/openstack/css/combined.css");
         Requirements::css("themes/openstack/css/navigation_menu.css");
         Requirements::css("themes/openstack/css/dropdown.css");
-        Requirements::css('themes/openstack/css/chosen.css');
-        Requirements::css('summit/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css');
+        BootstrapTagsInputDependencies::renderRequirements();
         Requirements::css("node_modules/jquery-datetimepicker/build/jquery.datetimepicker.min.css");
         Requirements::css('summit/css/summit-admin.css');
 
-        Requirements::javascript("themes/openstack/bower_assets/jquery/dist/jquery.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jquery-migrate/jquery-migrate.min.js");
-
-        Requirements::javascript("themes/openstack/bower_assets/bootstrap/dist/js/bootstrap.min.js");
-        Requirements::javascript('themes/openstack/javascript/chosen.jquery.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/moment/min/moment.min.js');
+        Requirements::javascript('node_modules/moment/min/moment.min.js');
         Requirements::javascript("node_modules/jquery-datetimepicker/build/jquery.datetimepicker.full.min.js");
         Requirements::javascript('themes/openstack/javascript/urlfragment.jquery.js');
+        JQueryUIDependencies::renderRequirements(JQueryUIDependencies::SmoothnessTheme);
 
-        Requirements::javascript("themes/openstack/bower_assets/jquery-ui/jquery-ui.min.js");
-        Requirements::javascript("themes/openstack/javascript/jquery-ui-bridge.js");
-        if (Director::isLive())
-        {
-            Requirements::javascript("themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.min.js");
-            Requirements::javascript("themes/openstack/bower_assets/jquery-validate/dist/additional-methods.min.js");
-        }
-        else
-        {
-            Requirements::javascript("themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.js");
-            Requirements::javascript("themes/openstack/bower_assets/jquery-validate/dist/additional-methods.js");
-        }
         Requirements::javascript('summit/javascript/bootstrap-dropdown.js');
-        Requirements::javascript('summit/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js');
+
         Requirements::javascript('themes/openstack/javascript/jquery.serialize.js');
-
-
     }
 
     private static $url_segment = 'summit-admin';
@@ -250,10 +234,8 @@ final class SummitAppAdminController extends Controller implements PermissionPro
 
         Requirements::css('summit/css/simple-sidebar.css');
         Requirements::css('summit/css/summit-admin-reports.css');
-        Requirements::css('themes/openstack/bower_assets/sweetalert/dist/sweetalert.css');
-        Requirements::css('themes/openstack/bower_assets/jquery-ui/themes/smoothness/jquery-ui.css');
-        Requirements::css('themes/openstack/bower_assets/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
-        Requirements::javascript('themes/openstack/bower_assets/sweetalert/dist/sweetalert.min.js');
+        SweetAlert2Dependencies::renderRequirements();
+        Requirements::css('node_modules/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
         Requirements::javascript('summit/javascript/simple-sidebar.js');
         Requirements::javascript('themes/openstack/javascript/bootstrap-paginator/src/bootstrap-paginator.js');
         Requirements::javascript('themes/openstack/javascript/jquery-ajax-loader.js');

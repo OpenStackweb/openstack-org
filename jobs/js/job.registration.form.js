@@ -127,7 +127,7 @@ jQuery(document).ready(function($) {
         else
             $('#locations_table',form).hide();
 
-        $('.delete_location',form).live('click',function(event){
+        $(form).on('click','.delete_location', function(event){
             event.preventDefault();
             event.stopPropagation();
             var row = $(this).parent().parent();
