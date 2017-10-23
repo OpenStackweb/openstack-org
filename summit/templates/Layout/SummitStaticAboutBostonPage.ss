@@ -112,9 +112,9 @@
       </div>
       <div class="col-sm-3 featured">
         <div class="summit-user-section">
-          <img src="/assets/sydney-summit/speakers/Matt-Kean.jpg" alt="Matt Kean" class="summit-user-image">
-          <div class="name">Matt Kean</div>
-          <div class="title">Minister for Innovation and Better Regulation, New South Wales Government</div>
+          <img src="/assets/sydney-summit/speakers/Manuel-Sopena-Ballesteros.PNG" alt="Manuel Sopena Ballesteros" class="summit-user-image">
+          <div class="name">Manuel Sopena Ballesteros</div>
+          <div class="title">Big Data Engineer, The Garvan Institute</div>
         </div>
       </div>
       <div class="col-sm-3">
@@ -188,16 +188,13 @@
     <div class="row">
       <div class="col-sm-3 featured">
         <div class="summit-user-section">
-          <img src="/assets/sydney-summit/speakers/bethcohen.jpg" alt="Beth Cohen" class="summit-user-image">
-          <div class="name">Beth Cohen</div>
-          <div class="title">Cloud Product Technologist, Verizon</div>
         </div>
       </div>
       <div class="col-sm-3 featured">
         <div class="summit-user-section">
-          <img src="/assets/sydney-summit/speakers/Manuel-Sopena-Ballesteros.PNG" alt="Manuel Sopena Ballesteros" class="summit-user-image">
-          <div class="name">Manuel Sopena Ballesteros</div>
-          <div class="title">Big Data Engineer, The Garvan Institute</div>
+          <img src="/assets/sydney-summit/speakers/bethcohen.jpg" alt="Beth Cohen" class="summit-user-image">
+          <div class="name">Beth Cohen</div>
+          <div class="title">Cloud Product Technologist, Verizon</div>
         </div>
       </div>
       <div class="col-sm-3 featured">
@@ -209,9 +206,6 @@
       </div>
       <div class="col-sm-3">
         <div class="summit-user-section">
-          <img src="/assets/sydney-summit/speakers/Steven-Armstrong.jpg" alt="Steven Armstrong" class="summit-user-image">
-          <div class="name">Steven Armstrong</div>
-          <div class="title">Principal DevOps Automation Engineer, Paddy Power Betfair</div>
         </div>
       </div>
     </div>
