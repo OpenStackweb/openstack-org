@@ -17,11 +17,9 @@
                 </a>
                 <hr />
                 <p>
-                    Already a contributor and looking for resources?
+                    Already a contributor and looking for resources? <a href="/community/#quicklinks" class="bannerquicklinks">Skip to Quick Links</a>
                 </p>
-                <a href="/community/#quicklinks" class="banner-button btn btn-primary">
-                    Skip to Quick Links <i class="fa fa-chevron-circle-right fa-inverse" aria-hidden="true"></i>
-                </a>
+                
             </div>
         </div>
     </div>
@@ -32,7 +30,7 @@
             Select the way you want to contribute...
         </div>
         <div class="row nav">
-            <div class="col-md-3 col-sm-6 col-xs-6 nav-button-box">
+            <div class="col-md-5ths col-sm-6 col-xs-6 nav-button-box">
                 <a class="nav-button" data-toggle="collapse" data-target="#code" data-parent="#accordion-parent">
                     <div class="nav-button-icon">
                         <img src="themes/openstack/images/community/pencil.png" />
@@ -40,7 +38,7 @@
                     <div>Code & Documentation</div>
                 </a>
             </div>
-            <div class="col-md-3 col-sm-6 col-xs-6 nav-button-box">
+            <div class="col-md-5ths col-sm-6 col-xs-6 nav-button-box">
                 <a class="nav-button" data-toggle="collapse" data-target="#events" data-parent="#accordion-parent">
                     <div class="nav-button-icon">
                         <img src="themes/openstack/images/community/globe.png" />
@@ -48,7 +46,15 @@
                     <div>Events</div>
                 </a>
             </div>
-            <div class="col-md-3 col-sm-6 col-xs-6 nav-button-box">
+            <div class="col-md-5ths col-sm-6 col-xs-6 nav-button-box">
+                <a href="https://groups.openstack.org/" class="nav-button" data-toggle="collapse" data-target="#users" data-parent="#accordion-parent">
+                    <div class="nav-button-icon">
+                        <img src="themes/openstack/images/community/pin.png" />
+                    </div>
+                    <div>Meet Ups</div>
+                </a>
+            </div>
+            <div class="col-md-5ths col-sm-6 col-xs-6 nav-button-box">
                 <a class="nav-button" data-toggle="collapse" data-target="#users" data-parent="#accordion-parent">
                     <div class="nav-button-icon">
                         <img src="themes/openstack/images/community/bulb.png" />
@@ -56,8 +62,8 @@
                     <div>Users</div>
                 </a>
             </div>
-            <div class="col-md-3 col-sm-6 col-xs-6 nav-button-box">
-                <a class="nav-button" data-toggle="collapse" data-target="#sponsorship" data-parent="#accordion-parent">
+            <div class="col-md-5ths col-sm-6 col-xs-6 nav-button-box">
+                <a href="https://www.openstack.org/join/#sponsor" class="nav-button" data-toggle="collapse" data-target="#sponsorship" data-parent="#accordion-parent">
                     <div class="nav-button-icon">
                         <img src="themes/openstack/images/community/wallet.png" />
                     </div>

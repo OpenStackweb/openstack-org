@@ -32,6 +32,12 @@
     color:#fff;
 }
 
+.bannerquicklinks, .bannerquicklinks:visited  {
+    text-decoration:underline;
+    padding-left: 5px;
+    color:#fff;
+}
+
 .contribute-title {
     text-align: center;
     font-size: 1.8em;
