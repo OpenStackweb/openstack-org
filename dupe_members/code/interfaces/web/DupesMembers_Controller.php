@@ -72,8 +72,7 @@ final class DupesMembers_Controller extends AbstractController {
     {
         parent::init();
         Page_Controller::AddRequirements();
-        Requirements::css('themes/openstack/bower_assets/sweetalert2/dist/sweetalert2.min.css');
-        Requirements::javascript('themes/openstack/bower_assets/sweetalert2/dist/sweetalert2.min.js');
+        SweetAlert2Dependencies::renderRequirements();
         Requirements::javascript("marketplace/code/ui/admin/js/utils.js");
     }
     /**

@@ -36,11 +36,10 @@ final class PresentationForm extends BootstrapForm
         $this->presentation         = $presentation;
         $this->setTemplate('PresentationForm');
 
-        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
-        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
+        JQueryValidateDependencies::renderRequirements(true,false);
         Requirements::javascript('summit/javascript/presentation-form.js');
         Requirements::javascript('summit/javascript/presentation-form-save-actions.js');
-        Requirements::css('themes/openstack/bower_assets/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
+        Requirements::css('node_modules/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
 
         parent::__construct(
             $controller,

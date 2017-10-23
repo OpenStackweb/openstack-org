@@ -81,27 +81,8 @@ class RSVPSingleValueValidationRule
     }
 
     private function registerJS(){
-
-        Requirements::block(SAPPHIRE_DIR . '/thirdparty/behaviour/behaviour.js');
-        Requirements::block(SAPPHIRE_DIR . '/thirdparty/prototype/prototype.js');
-        Requirements::block(SAPPHIRE_DIR . '/javascript/prototype_improvements.js');
-        Requirements::block(SAPPHIRE_DIR . "/javascript/jquery_improvements.js");
-        Requirements::block(FRAMEWORK_DIR . '/thirdparty/jquery/jquery.js');
-        Requirements::block(FRAMEWORK_DIR . '/thirdparty/jquery/jquery.min.js');
-        Requirements::block(THIRDPARTY_DIR . '/jquery-cookie/jquery.cookie.js');
-
-        if(Director::isLive()) {
-            Requirements::javascript('themes/openstack/javascript/jquery.min.js');
-        }
-        else{
-            Requirements::javascript('themes/openstack/javascript/jquery.js');
-        }
-
-        Requirements::javascript('themes/openstack/javascript/jquery-migrate-1.2.1.min.js');
-
-        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.js");
-        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/additional-methods.js");
-
+        JQueryCoreDependencies::renderRequirements();
+        JQueryValidateDependencies::renderRequirements();
     }
 
     protected function validate() {

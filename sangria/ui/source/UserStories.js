@@ -38,7 +38,7 @@ jQuery(document).ready(function($){
         $(this).parent().find('span').html( $(this).val() );
     });
 
-    $('.unpublish_ss').live('click',function(e){
+    $(document).on('click', '.unpublish_ss', function(e){
         if(!window.confirm("Are you sure that you want to unpublish this user story?")){
             e.preventDefault();
             e.stopPropagation();

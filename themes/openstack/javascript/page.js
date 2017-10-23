@@ -1,8 +1,8 @@
 jQuery(document).ready(function($) {
 
-    var d = new Date();
+    var d         = new Date();
     var user_date = d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
-    $.cookie('user_date',user_date , { expires: 360, path: '/' });
+    Cookies.set('user_date', user_date, { expires: 360, path: '/' });
 
     $('body').filetracking();
 

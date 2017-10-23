@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 sudo npm install;
-bower install --allow-root --config.interactive=false
 npm run build-all
 
 echo "installing composer dependencies ...";

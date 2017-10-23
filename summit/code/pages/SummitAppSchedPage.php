@@ -141,24 +141,21 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         $this->top_section = 'short'; //or full
 
         parent::init();
-        Requirements::css('themes/openstack/bower_assets/jquery-loading/dist/jquery.loading.min.css');
-        Requirements::css('themes/openstack/bower_assets/chosen/chosen.min.css');
+        JQueryValidateDependencies::renderRequirements(true, false);
+        JSChosenDependencies::renderRequirements();
         Requirements::css('summit/css/install_mobile_app.css');
         Requirements::css("summit/css/schedule-grid.css");
         Requirements::javascript('themes/openstack/javascript/jquery-ajax-loader.js');
-        Requirements::javascript('themes/openstack/bower_assets/chosen/chosen.jquery.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/additional-methods.min.js');
-        Requirements::javascript('themes/openstack/javascript/urlfragment.jquery.js');
-        Requirements::javascript('themes/openstack/bower_assets/pure-templates/libs/pure.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/jquery-cookie/jquery.cookie.js');
 
+        Requirements::javascript('themes/openstack/javascript/urlfragment.jquery.js');
+        Requirements::javascript('node_modules/pure/libs/pure.min.js');
+        Requirements::javascript('node_modules/js-cookie/src/js.cookie.js');
         // browser detection
-        Requirements::javascript('themes/openstack/bower_assets/bowser/src/bowser.js');
+        Requirements::javascript('node_modules/bowser/bowser.min.js');
         Requirements::javascript('themes/openstack/javascript/jquery.serialize.js');
         Requirements::javascript('themes/openstack/javascript/jquery.cleanform.js');
-        Requirements::javascript('themes/openstack/bower_assets/urijs/src/URI.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/urijs/src/URI.fragmentQuery.js');
+        Requirements::javascript('node_modules/urijs/src/URI.min.js');
+        Requirements::javascript('node_modules/urijs/src/URI.fragmentQuery.js');
         if($this->EnableMobileSupport) {
             Requirements::javascript('summit/javascript/schedule/install_mobile_app.js');
         }
@@ -167,7 +164,6 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
 
     const EventShareByEmailTokenKey = 'SummitAppEventPageShareEmail.Token';
     const EventShareByEmailCountKey = 'SummitAppEventPageShareEmail.Count';
-
 
     /**
      * @param SS_HTTPRequest $request

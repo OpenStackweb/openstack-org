@@ -67,7 +67,7 @@ jQuery(document).ready(function($){
     //pagination
     set_pagination();
 
-    $('.page').live('click',function(e){
+    $(document).on('click', '.page', function(e){
         e.stopPropagation();
         change_page(this);
         return false;

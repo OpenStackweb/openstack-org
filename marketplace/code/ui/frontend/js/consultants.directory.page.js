@@ -49,7 +49,7 @@ jQuery(document).ready(function($){
 
     var last_filter_request = null;
 
-    $('.filter-label').live('click', function (event) {
+    $(document).on('click', '.filter-label', function (event) {
         var params = {
             name_term     : $('#name-term').val(),
             service_term  : $('#service-term').val(),

@@ -104,9 +104,9 @@ class SoftwareHomePage_Controller extends Page_Controller
     {
         parent::init();
 		Requirements::add_i18n_javascript('software/lang');
-        Requirements::css("themes/openstack/bower_assets/webui-popover/dist/jquery.webui-popover.min.css");
+        Requirements::css("node_modules/webui-popover/dist/jquery.webui-popover.min.css");
         Requirements::css("software/css/software.css");
-        Requirements::javascript("themes/openstack/bower_assets/webui-popover/dist/jquery.webui-popover.min.js");
+        Requirements::javascript("node_modules/webui-popover/dist/jquery.webui-popover.min.js");
         Requirements::javascript("software/js/software.js");
     }
 
@@ -156,31 +156,15 @@ class SoftwareHomePage_Controller extends Page_Controller
 
     public function allComponents(SS_HTTPRequest $request)
     {
-        Requirements::css("themes/openstack/bower_assets/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css");
-        Requirements::javascript("themes/openstack/bower_assets/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js");
+        Requirements::css("themes/openstack/javascript/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css");
+        Requirements::javascript("themes/openstack/javascript/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js");
         return $this->render();
     }
 
     public function getComponent(SS_HTTPRequest $request)
     {
-        Requirements::css("themes/openstack/bower_assets/jqplot-bower/dist/jquery.jqplot.min.css");
-        //jqplot and plugins ...
-        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/jquery.jqplot.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.canvasAxisTickRenderer.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.dateAxisRenderer.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.cursor.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.categoryAxisRenderer.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.canvasTextRenderer.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.canvasOverlay.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.enhancedLegendRenderer.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.json2.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.logAxisRenderer.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.pointLabels.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.trendline.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.barRenderer.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.bubbleRenderer.js");
-        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.canvasAxisLabelRenderer.min.js");
-        Requirements::javascript("themes/openstack/bower_assets/jqplot-bower/dist/plugins/jqplot.highlighter.min.js");
+
+        JQPlotDependencies::renderRequirements();
 
         Requirements::javascript('software/js/openstack-component-details.js');
 

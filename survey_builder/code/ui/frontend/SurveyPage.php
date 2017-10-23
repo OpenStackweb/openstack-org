@@ -168,29 +168,24 @@ class SurveyPage_Controller extends Page_Controller
     {
         parent::init();
 
-        Requirements::css(Director::protocol() . '://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css');
-        Requirements::css('survey_builder/css/user-survey.css');
-        Requirements::css("themes/openstack/css/chosen.css", "screen,projection");
-        Requirements::css("themes/openstack/javascript/jquery-ui-1.10.3.custom/css/smoothness/jquery-ui-1.10.3.custom.min.css");
-        Requirements::css('themes/openstack/css/validation.errors.css');
-
         Requirements::block(SAPPHIRE_DIR . '/thirdparty/behaviour/behaviour.js');
         Requirements::block(SAPPHIRE_DIR . '/thirdparty/prototype/prototype.js');
         Requirements::block(SAPPHIRE_DIR . '/javascript/prototype_improvements.js');
         Requirements::block("themes/openstack/javascript/jquery.autocomplete.min.js");
-        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.js");
-        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/additional-methods.js");
-        Requirements::javascript("themes/openstack/javascript/chosen.jquery.min.js");
-        Requirements::javascript("themes/openstack/javascript/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.js");
+
+        FontAwesomeDependencies::renderRequirements();
+        JQueryValidateDependencies::renderRequirements(true, false);
+        JSChosenDependencies::renderRequirements();
+        JQueryUIDependencies::renderRequirements(JQueryUIDependencies::SmoothnessTheme);
+
+        Requirements::css('survey_builder/css/user-survey.css');
         Requirements::javascript('survey_builder/js/survey.validation.rules.jquery.js');
-        Requirements::javascript('themes/openstack/bower_assets/clipboard/dist/clipboard.min.js');
-        Requirements::javascript('themes/openstack/javascript/pure.min.js');
+        Requirements::javascript('node_modules/clipboard/dist/clipboard.min.js');
+        Requirements::javascript('node_modules/pure/libs/pure.min.js');
         Requirements::javascript('themes/openstack/javascript/jquery-ajax-loader.js');
-        Requirements::javascript('survey_builder/js/survey.controller.js');
-        Requirements::javascript("themes/openstack/bower_assets/jquery-cookie/jquery.cookie.js");
+        Requirements::javascript("node_modules/js-cookie/src/js.cookie.js");
         Requirements::javascript('gettext/javascript/gettext.js');
-
-
+        Requirements::javascript('survey_builder/js/survey.controller.js');
         // populate the js messages
 
         $messages_ids = [

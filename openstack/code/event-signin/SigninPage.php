@@ -58,13 +58,10 @@ class SigninPage_Controller extends Page_Controller
         parent::init();
 
         Requirements::css('themes/openstack/css/signin.page.css');
+        JSChosenDependencies::renderRequirements();
+        JQueryValidateDependencies::renderRequirements();
 
-        Requirements::javascript("themes/openstack/javascript/chosen.jquery.min.js");
         Requirements::javascript("themes/openstack/javascript/jquery.autocomplete.min.js");
-
-        Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
-        Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
-
         Requirements::javascript('themes/openstack/javascript/signin.page.js');
     }
 

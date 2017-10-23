@@ -15,7 +15,7 @@
 
 $(document).ready(function ($) {
 
-    $('.reject-purchase-order').live('click', function (evt) {
+    $(document).on('click','.reject-purchase-order', function (evt) {
         evt.preventDefault();
         evt.stopPropagation();
         if(window.confirm('Are you sure?')) {
@@ -45,7 +45,7 @@ $(document).ready(function ($) {
         return false;
     });
 
-    $('.approve-purchase-order').live('click', function (evt) {
+    $(document).on('click', '.approve-purchase-order', function (evt) {
         evt.preventDefault();
         evt.stopPropagation();
         if(window.confirm('Are you sure?')) {

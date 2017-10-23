@@ -65,11 +65,11 @@ class DistributionsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Con
         Requirements::customScript("jQuery(document).ready(function($) {
             $('#distros','.marketplace-nav').addClass('current');
         });");
-        Requirements::css("themes/openstack/css/chosen.css", "screen,projection");
+
+        JSChosenDependencies::renderRequirements();
 
         Requirements::combine_files('marketplace_distros_landing.js',
             array(
-                "themes/openstack/javascript/chosen.jquery.min.js",
                 "marketplace/code/ui/frontend/js/implementation.directory.page.js"
             ));
 

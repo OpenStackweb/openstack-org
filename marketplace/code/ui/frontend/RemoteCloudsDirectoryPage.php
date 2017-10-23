@@ -55,11 +55,11 @@ class RemoteCloudsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Cont
         Requirements::customScript("jQuery(document).ready(function($) {
             $('#remote-clouds','.marketplace-nav').addClass('current');
         });");
-        Requirements::css("themes/openstack/css/chosen.css", "screen,projection");
+
+        JSChosenDependencies::renderRequirements();
 
         Requirements::combine_files('marketplace_remote_clouds_landing.js',
             array(
-                "themes/openstack/javascript/chosen.jquery.min.js",
                 "marketplace/code/ui/frontend/js/implementation.directory.page.js"
             ));
 

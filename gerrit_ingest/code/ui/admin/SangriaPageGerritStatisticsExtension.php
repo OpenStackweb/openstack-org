@@ -23,28 +23,13 @@ class SangriaPageGerritStatisticsExtension extends Extension {
 
     public function GerritStatisticsReport(){
 
-        Requirements::block(SAPPHIRE_DIR . "/javascript/jquery_improvements.js");
-        Requirements::block(FRAMEWORK_DIR . '/thirdparty/jquery/jquery.js');
-        Requirements::block(FRAMEWORK_DIR . '/thirdparty/jquery/jquery.min.js');
-        Requirements::block(THIRDPARTY_DIR . '/jquery-cookie/jquery.cookie.js');
-
-        if(Director::isLive()) {
-            Requirements::javascript('themes/openstack/javascript/jquery.min.js');
-        }
-        else{
-            Requirements::javascript('themes/openstack/javascript/jquery.js');
-        }
-
-
-        Requirements::javascript('themes/openstack/javascript/jquery-migrate-1.2.1.min.js');
-        Requirements::javascript("themes/openstack/javascript/jquery.cookie.js");
-        Requirements::javascript("themes/openstack/javascript/bootstrap.min.js");
+        JQueryCoreDependencies::renderRequirements();
+        BootstrapDependencies::renderRequirements();
         $this->InitGoogleMapLibs();
+        Requirements::css('gerrit_ingest/css/sangria.page.gerrit.statistics.report.css');
         Requirements::javascript("marketplace/code/ui/admin/js/utils.js");
         Requirements::javascript('themes/openstack/javascript/Chart.js');
         Requirements::javascript("gerrit_ingest/js/sangria.page.gerrit.statistics.report.js");
-        Requirements::css('gerrit_ingest/css/sangria.page.gerrit.statistics.report.css');
-
         return $this->owner->getViewer('GerritStatisticsReport')->process($this->owner);
     }
 

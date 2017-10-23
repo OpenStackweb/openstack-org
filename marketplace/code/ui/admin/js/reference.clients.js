@@ -67,7 +67,7 @@
                     return false;
                 });
 
-                $(".remove-additional-customer").live('click',function(event){
+                $(document).on('click', ".remove-additional-customer", function(event){
                     var remove_btn = $(this);
                     var tr = remove_btn.parent().parent();
                     tr.remove();

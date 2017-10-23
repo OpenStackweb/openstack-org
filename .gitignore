@@ -96,3 +96,5 @@ db.ini
 *.po
 gettext/Locale/*
 themes/openstack/images
+npm-debug.log
+*.log

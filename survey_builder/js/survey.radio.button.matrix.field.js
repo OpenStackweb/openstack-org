@@ -37,7 +37,7 @@
                 }
             });
 
-            $('.radio_opt', ctrl_container).live('click', function(evt)
+            $(ctrl_container).on('click', '.radio_opt', function(evt)
             {
                 var parent_row = $(this).parent().parent();
                 parent_row.removeClass('highlited');

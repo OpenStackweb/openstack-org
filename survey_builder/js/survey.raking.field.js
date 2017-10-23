@@ -92,8 +92,8 @@
 
             form    = $('.survey_step_form');
 
-            $('.rank-wrapper').live('click', clickRank );
-            $('.rank-text').live('click', clickRank );
+            $(document).on('click', '.rank-wrapper', clickRank );
+            $(document).on('click', '.rank-text', clickRank );
 
             $('.clear_all_ranking_options', control).click(function(evt){
                 evt.preventDefault();

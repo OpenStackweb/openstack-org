@@ -17,7 +17,7 @@
 final class JobRegistrationRequestForm extends HoneyPotForm {
 
 	function __construct($controller, $name, $use_actions = true) {
-        Requirements::css('themes/openstack/bower_assets/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
+        Requirements::css('node_modules/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
 
 		$fields = new FieldList;
 		//point of contact

@@ -8,7 +8,7 @@ import reducers from '../reducers/index';
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 
-require("../../../../../themes/openstack/bower_assets/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css");
+require("awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css");
 
 const props = {
     ...window.ReactScheduleGridProps,

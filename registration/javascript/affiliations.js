@@ -166,7 +166,7 @@
 
                 // delete handler
 
-                $(".del-affiliation").live('click',function(event){
+                $(document).on('click', ".del-affiliation", function(event){
                     var id = $(this).attr('data-id');
                     if(window.confirm("Are you sure?")){
                         switch(settings.storage){
@@ -204,7 +204,7 @@
 
                 //edit
 
-                $(".edit-affiliation").live('click',function(event){
+                $(document).on('click', ".edit-affiliation", function(event){
                     var current = $('#Current',affiliation_form);
                     current.show();
                     var id = $(this).attr('data-id');

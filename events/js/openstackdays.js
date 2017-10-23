@@ -74,10 +74,10 @@ function getMoreEvents(category) {
                 });
                 var new_div = $(html).hide();
                 $('.featured_events').append(new_div);
-                new_div.slideDown('slow')
-            } else {
-                $('.more-events').fadeOut('slow');
+                new_div.slideDown('slow');
+                return;
             }
+            $('.more-events').fadeOut('slow');
         }
     });
 

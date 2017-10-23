@@ -56,13 +56,13 @@ class TrainingDirectoryPage_Controller extends MarketPlaceDirectoryPage_Controll
     {
         parent::init();
 
-        Requirements::css("themes/openstack/css/chosen.css", "screen,projection");
         Requirements::css(THIRDPARTY_DIR . '/jquery-ui-themes/smoothness/jquery-ui.css');
         Requirements::javascript(THIRDPARTY_DIR . '/jquery-ui/jquery-ui.js');
 
+        JSChosenDependencies::renderRequirements();
+
         Requirements::combine_files('marketplace_training_landing.js',
             array(
-                "themes/openstack/javascript/chosen.jquery.min.js",
                 "marketplace/code/ui/frontend/js/training.directory.page.js"
             ));
 

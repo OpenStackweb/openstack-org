@@ -127,7 +127,7 @@
             $.each(table_group, function(index , entry){
                 var radio_class = '.radio_' + entry.value;
 
-                $(radio_class, entry.field).live('change', function (e) {
+                $(entry.field).on('change', radio_class, function (e) {
                     setQuestionVisibility($(this).is(':checked'), question_container)
                 });
 

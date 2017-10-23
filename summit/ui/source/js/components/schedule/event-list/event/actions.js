@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import 'sweetalert2/dist/sweetalert2.css';
+import swal from 'sweetalert2';
 
 class EventActions extends Component {
 
@@ -84,7 +86,7 @@ class EventActions extends Component {
         }).then(function () {
             const url = encodeURIComponent(window.location.href)
             window.location = "/Security/login?BackURL=" + url
-        })
+        }).catch(swal.noop)
     }
 }
 

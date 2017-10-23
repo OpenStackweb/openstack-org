@@ -157,12 +157,14 @@ class OpenStackDaysPage_Controller extends Page_Controller {
 
 	function init() {
 	    parent::init();
-        Requirements::javascript('themes/openstack/bower_assets/slick-carousel/slick/slick.min.js');
-        Requirements::javascript('themes/openstack/javascript/urlfragment.jquery.js');
-        Requirements::javascript('events/js/openstackdays.js');
-        Requirements::css('themes/openstack/bower_assets/slick-carousel/slick/slick.css');
+
+        Requirements::css('node_modules/slick-carousel/slick/slick.css');
         Requirements::css('software/css/software.css');
         Requirements::css('events/css/openstackdays.css');
+
+        Requirements::javascript('node_modules/slick-carousel/slick/slick.min.js');
+        Requirements::javascript('themes/openstack/javascript/urlfragment.jquery.js');
+        Requirements::javascript('events/js/openstackdays.js');
         $this->buildEventManager();
 	}
 

@@ -27,11 +27,8 @@ final class AddSpeakerForm extends BootstrapForm
         $this->summit = $summit;
 
         $this->setTemplate('AddSpeakerForm');
-
-        Requirements::css('themes/openstack/bower_assets/jquery-ui/themes/ui-lightness/jquery-ui.min.css');
-        Requirements::javascript('themes/openstack/bower_assets/jquery-ui/jquery-ui.min.js');
-        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
-        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
+        JQueryUIDependencies::renderRequirements(JQueryUIDependencies::SmoothnessTheme);
+        JQueryValidateDependencies::renderRequirements(true, false);
         Requirements::javascript('summit/javascript/AddSpeakerForm.js');
         Requirements::javascript('summit/javascript/presentation-form-save-actions.js');
 

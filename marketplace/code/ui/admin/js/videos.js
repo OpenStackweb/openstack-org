@@ -91,7 +91,7 @@
                         return "pending";
                     }
                     return previous.valid;
-                }, jQuery.format("Your YouTube Video must be {0} seconds or less."));
+                }, jQuery.validator.format("Your YouTube Video must be {0} seconds or less."));
 
                 var form_validator = form.validate({
                     focusCleanup: true,

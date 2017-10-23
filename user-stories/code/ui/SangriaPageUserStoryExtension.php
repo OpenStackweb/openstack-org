@@ -43,17 +43,12 @@ final class SangriaPageUserStoryExtension extends Extension {
 
     public function UserStoryForm() {
         $this->commonScripts();
-        Requirements::css('user-stories/css/user.story.form.css');
-        Requirements::css('themes/openstack/bower_assets/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
-        Requirements::css('themes/openstack/bower_assets/sweetalert/dist/sweetalert.css');
-        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.css');
-        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css');
-        Requirements::css('themes/openstack/bower_assets/chosen/chosen.min.css');
+        JSChosenDependencies::renderRequirements();
 
-        Requirements::javascript('themes/openstack/javascript/chosen.jquery.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/typeahead.js/dist/typeahead.bundle.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/sweetalert/dist/sweetalert.min.js');
+        Requirements::css('user-stories/css/user.story.form.css');
+        SweetAlert2Dependencies::renderRequirements();
+        BootstrapTagsInputDependencies::renderRequirements();;
+        Requirements::css('node_modules/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
         Requirements::javascript("user-stories/js/user.story.form.js");
 
         $story_id = intval($this->owner->request->param('ID'));

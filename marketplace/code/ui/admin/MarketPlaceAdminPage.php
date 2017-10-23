@@ -145,31 +145,24 @@ class MarketPlaceAdminPage_Controller extends AdminController
         Requirements::css(Director::protocol() . "code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css");
         Requirements::css(Director::protocol() . "fonts.googleapis.com/css?family=PT+Sans&subset=latin");
 
-        $css_files =  array(
+        $css_files =  [
             "marketplace/code/ui/admin/css/layout.css",
             "marketplace/code/ui/admin/css/marketplace.admin.css",
-            "themes/openstack/css/chosen.css",
             "themes/openstack/css/colorpicker.css",
-            "themes/openstack/bower_assets/bootstrap/dist/css/bootstrap.min.css",
             "node_modules/jquery-datetimepicker/build/jquery.datetimepicker.min.css",
-        );
+        ];
 
         foreach($css_files as $css_file)
             Requirements::css($css_file);
 
-        if (Director::isDev())
-            Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js");
-        else
-            Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
+        JQueryValidateDependencies::renderRequirements();
+        JSChosenDependencies::renderRequirements();
 
-        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
         Requirements::javascript(Director::protocol() . "code.jquery.com/ui/1.10.4/jquery-ui.min.js");
 
         $js_files =  array(
-            "themes/openstack/javascript/chosen.jquery.min.js",
             "themes/openstack/javascript/jquery.jsonp-2.4.0.min.js",
-            "themes/openstack/javascript/jquery.validate.custom.methods.js",
-            "themes/openstack/javascript/pure.min.js",
+            "node_modules/pure/libs/pure.min.js",
             "themes/openstack/javascript/jquery.serialize.js",
             "themes/openstack/javascript/jquery.cleanform.js",
             'marketplace/code/ui/admin/js/utils.js',
@@ -181,7 +174,6 @@ class MarketPlaceAdminPage_Controller extends AdminController
             'marketplace/code/ui/admin/js/consultants.js',
             'marketplace/code/ui/admin/js/books.js',
             "themes/openstack/javascript/colorpicker.js",
-            "themes/openstack/bower_assets/bootstrap/dist/js/bootstrap.min.js",
             "node_modules/jquery-datetimepicker/build/jquery.datetimepicker.full.min.js",
         );
 
@@ -234,7 +226,7 @@ class MarketPlaceAdminPage_Controller extends AdminController
         return $this->httpError(401, 'Unauthorized: you do not have the proper rights to access this page.');
     }
 
-    static $allowed_actions = array(
+    static $allowed_actions = [
         'add',
         'distribution',
         'appliance',
@@ -252,18 +244,18 @@ class MarketPlaceAdminPage_Controller extends AdminController
         'draft_preview',
         'pdf',
         'draft_pdf',
-    );
+    ];
 
 
     /**
      * @var array
      */
-    static $url_handlers = array(
+    static $url_handlers = [
         'GET $MARKETPLACETYPE/$ID/preview' => 'preview',
         'GET $MARKETPLACETYPE/$ID/draft_preview' => 'draft_preview',
         'GET $MARKETPLACETYPE/$ID/pdf' => 'pdf',
         'GET $MARKETPLACETYPE/$ID/draft_pdf' => 'draft_pdf',
-    );
+    ];
 
     public function getCurrentTab()
     {
@@ -624,9 +616,7 @@ class MarketPlaceAdminPage_Controller extends AdminController
 
     public function book()
     {
-        Requirements::css('themes/openstack/bower_assets/sweetalert2/dist/sweetalert2.min.css');
-
-        Requirements::javascript('themes/openstack/bower_assets/sweetalert2/dist/sweetalert2.min.js');
+        SweetAlert2Dependencies::renderRequirements();
         Requirements::javascript('marketplace/code/ui/admin/js/utils.js');
         Requirements::javascript('marketplace/code/ui/admin/js/marketplace.type.header.js');
         Requirements::javascript('marketplace/code/ui/admin/js/book.js');

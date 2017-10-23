@@ -20,11 +20,10 @@ sudo pip install virtualenv;
 curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -;
 sudo apt-get install -y nodejs;
 sudo npm cache clean;
-#install webpack and bower at global level
+
 echo “installing webpack globally …”;
 npm install -g webpack;
-echo “installing bower globally …”;
-npm install -g bower;
+
 # update php.ini settings
 upload_max_filesize=240M
 post_max_size=240M
@@ -46,11 +45,6 @@ su vagrant;
 mkdir -p /home/vagrant/node_modules;
 chown vagrant:www-data -R /home/vagrant/node_modules;
 ln -sf /home/vagrant/node_modules /var/www/www.openstack.org/node_modules;
-
-# install local bower modules on VM
-mkdir -p /home/vagrant/bower_modules;
-chown vagrant:www-data -R /home/vagrant/bower_modules;
-ln -sf /home/vagrant/bower_modules /var/www/www.openstack.org/themes/openstack/bower_assets;
 
 cd /var/www/www.openstack.org;
 #composer installation from https://getcomposer.org/download/

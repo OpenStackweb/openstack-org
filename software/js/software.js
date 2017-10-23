@@ -8,11 +8,13 @@
             setTimeout(function() {
                 $(".open-sample-config-tip").addClass("show");
             }, 1000);
-            $.cookie('software_sample_config_closed_tooltip', true , { expires: 360, path: '/' });
+
+            Cookies.set('software_sample_config_closed_tooltip', true,  { expires: 360, path: '/' });
+
             event.preventDefault();
         });
 
-        var software_sample_config_closed_tooltip  = $.cookie('software_sample_config_closed_tooltip');
+        var software_sample_config_closed_tooltip  = Cookies.get('software_sample_config_closed_tooltip');
         if(software_sample_config_closed_tooltip ===  'true')
         {
             $(".sample-configs-tip").addClass("closed-config-tip");
@@ -104,7 +106,7 @@
 
 
         // Show/Hide Additional Sample Configurations Details
-        $(".more-about-config").live('click', function(event) {
+        $(document).on('click', ".more-about-config", function(event) {
             $(".more-sample-config").toggleClass("show");
             $(this).text(function(i, text){
                 return text === ss.i18n._t('Software.LESS_DETAIL_CONFIG','Less details about this configuration') + ' [-]' ? 
@@ -116,7 +118,7 @@
             return false;
         });
 
-        $('ul.sample-configs-subnav li a').live('click', function(event) {
+        $(document).on('click','ul.sample-configs-subnav li a', function(event) {
             $(this).position({
                 left: "50%"
             });

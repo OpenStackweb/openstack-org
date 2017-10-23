@@ -66,20 +66,15 @@ final class SummitAttendeeAdminController extends Controller
             width: 100% !important;
         }");
         Requirements::css('summit/css/simple-sidebar.css');
-        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.css');
-        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css');
-        Requirements::css('themes/openstack/bower_assets/sweetalert/dist/sweetalert.css');
-        Requirements::javascript('themes/openstack/bower_assets/sweetalert/dist/sweetalert.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/additional-methods.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/typeahead.js/dist/typeahead.bundle.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js');
+        JQueryValidateDependencies::renderRequirements(true, false);
+        SweetAlert2Dependencies::renderRequirements();
+        BootstrapTagsInputDependencies::renderRequirements();
+
         Requirements::javascript('summit/javascript/simple-sidebar.js');
         Requirements::javascript('themes/openstack/javascript/bootstrap-paginator/src/bootstrap-paginator.js');
         Requirements::javascript('themes/openstack/javascript/urlfragment.jquery.js');
         Requirements::javascript('themes/openstack/javascript/jquery-ajax-loader.js');
         Requirements::javascript('summit/javascript/summitapp-addattendee.js');
-
 
         return $this->parent->getViewer('attendees')->process
             (
@@ -99,22 +94,14 @@ final class SummitAttendeeAdminController extends Controller
         $summit    = Summit::get()->byID($summit_id);
 
         Requirements::css('summit/css/simple-sidebar.css');
-        // tag inputes
-        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.css');
-        Requirements::css('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css');
-        Requirements::css('themes/openstack/bower_assets/sweetalert/dist/sweetalert.css');
-        Requirements::css('themes/openstack/bower_assets/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
-        //Requirements::css('summit/css/summit-admin-speaker-merge.css');
-
+        Requirements::css('node_modules/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
+        SweetAlert2Dependencies::renderRequirements();
+        BootstrapTagsInputDependencies::renderRequirements();
+        JQueryValidateDependencies::renderRequirements(true, false);
         Requirements::javascript('summit/javascript/simple-sidebar.js');
         Requirements::javascript('themes/openstack/javascript/bootstrap-paginator/src/bootstrap-paginator.js');
         Requirements::javascript('themes/openstack/javascript/urlfragment.jquery.js');
         Requirements::javascript('themes/openstack/javascript/jquery-ajax-loader.js');
-        Requirements::javascript('themes/openstack/bower_assets/sweetalert/dist/sweetalert.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/additional-methods.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/typeahead.js/dist/typeahead.bundle.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js');
         Requirements::javascript('themes/openstack/javascript/jquery.cleanform.js');
         Requirements::javascript('summit/javascript/summit-admin-attendees-match.js');
 
@@ -141,14 +128,11 @@ final class SummitAttendeeAdminController extends Controller
         $attendee = SummitAttendee::get()->byID($attendee_id);
 
         Requirements::css('summit/css/simple-sidebar.css');
-        Requirements::css('themes/openstack/bower_assets/chosen/chosen.min.css');
-        Requirements::css('themes/openstack/bower_assets/sweetalert/dist/sweetalert.css');
-        Requirements::css('themes/openstack/bower_assets/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
-        Requirements::javascript('themes/openstack/bower_assets/sweetalert/dist/sweetalert.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/additional-methods.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/chosen/chosen.jquery.min.js');
-        Requirements::javascript('themes/openstack/bower_assets/bootstrap3-typeahead/bootstrap3-typeahead.min.js');
+        Requirements::css('node_modules/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
+        SweetAlert2Dependencies::renderRequirements();
+        JQueryValidateDependencies::renderRequirements(true, false);
+        JSChosenDependencies::renderRequirements();
+        Requirements::javascript('node_modules/bootstrap-3-typeahead/bootstrap3-typeahead.min.js');
         Requirements::javascript('summit/javascript/simple-sidebar.js');
         Requirements::javascript('//tinymce.cachefly.net/4.3/tinymce.min.js');
         Requirements::javascript('summit/javascript/summitapp-editattendee.js');
@@ -157,11 +141,10 @@ final class SummitAttendeeAdminController extends Controller
             (
                 $this->customise
                     (
-                        array
-                        (
+                        [
                             'Summit'   => $summit,
                             'Attendee' => $attendee,
-                        )
+                        ]
                     )
             );
     }

@@ -27,7 +27,7 @@ class PresentationCategoryPage extends Page
     private static $has_one = array();
 
     private static $has_many = array(
-        'Presentations' => 'VideoPresentation',
+        'Presentations'  => 'VideoPresentation',
         'FeaturedVideos' => 'FeaturedVideo',
     );
 
@@ -231,7 +231,6 @@ class PresentationCategoryPage_Controller extends Page_Controller
     {
         Requirements::javascript(  "themes/openstack/javascript/navigation.js");
         Requirements::javascript("themes/openstack/javascript/filetracking.jquery.js");
-        Requirements::javascript("themes/openstack/javascript/bootstrap.min.js");
         Requirements::javascript("themes/openstack/javascript/videos.js");
     }
 

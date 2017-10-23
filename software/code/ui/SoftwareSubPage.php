@@ -23,9 +23,10 @@ class SoftwareSubPage_Controller extends Page_Controller
     public function init()
     {
         parent::init();
-        Requirements::css("themes/openstack/bower_assets/webui-popover/dist/jquery.webui-popover.min.css");
+        Requirements::css("node_modules/webui-popover/dist/jquery.webui-popover.min.css");
         Requirements::css("software/css/software.css");
-        Requirements::javascript("themes/openstack/bower_assets/webui-popover/dist/jquery.webui-popover.min.js");
+        Requirements::javascript("node_modules/webui-popover/dist/jquery.webui-popover.min.js");
+
     }
 
     public function getSubMenuPages(){

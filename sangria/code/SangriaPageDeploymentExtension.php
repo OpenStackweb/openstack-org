@@ -437,12 +437,9 @@ final class SangriaPageDeploymentExtension extends Extension
 
     function ViewDeploymentDetails()
     {
-        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
-        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
         Requirements::css(THIRDPARTY_DIR . '/jquery-ui-themes/smoothness/jquery-ui.css');
         Requirements::javascript(THIRDPARTY_DIR . '/jquery-ui/jquery-ui.js');
-        Requirements::javascript("themes/openstack/javascript/jquery.ui.datepicker.validation.package-1.0.1/jquery.ui.datepicker.validation.js");
-        Requirements::javascript("themes/openstack/javascript/jquery.validate.custom.methods.js");
+        JQueryValidateDependencies::renderRequirements();
         Requirements::javascript("themes/openstack/javascript/sangria/view.deployment.details.js");
 
         return $this->owner->getViewer('ViewDeploymentDetails')->process($this->owner);

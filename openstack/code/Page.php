@@ -15,16 +15,16 @@
 class Page extends SiteTree
 {
 
-    private static $db = array(
-        'IncludeJquery' => 'Boolean',
-        'PageJavaScript' => 'Text',
+    private static $db = [
+        'IncludeJquery'    => 'Boolean',
+        'PageJavaScript'   => 'Text',
         'IncludeShadowBox' => 'Boolean',
-        'MetaTitle' => 'Varchar(255)',
-    );
+        'MetaTitle'        => 'Varchar(255)',
+    ];
 
-    private static $has_one = array(
+    private static $has_one = [
         'MetaImage' => 'BetterImage'
-    );
+    ];
 
     public function InPast($fieldname)
     {
@@ -96,14 +96,14 @@ class Page extends SiteTree
             return;
         }
 
-        $customise = array();
+        $customise = [];
 
         /*** SET DEFAULTS ***/
         $customise['category'] = 'Outbound Links';
         //if no name is provided as an option, we'll use the URL instead
         $customise['name'] = $arguments['url'];
         $customise['newwindow'] = FALSE;
-        $customise['cssclass'] = FALSE;
+        $customise['cssclass']  = FALSE;
 
 
         //set the caption
@@ -244,13 +244,13 @@ class Page_Controller extends ContentController
      *
      * @var array
      */
-    private static $allowed_actions = array(
+    private static $allowed_actions = [
         'logout',
         'FeedbackForm',
         'getNavigationMenu',
         'getNavigationFooter',
         'dismissUpdateProfileModal',
-    );
+    ];
 
     /**
      * @var bool
@@ -274,22 +274,19 @@ class Page_Controller extends ContentController
 
     protected function CustomScripts()
     {
-        $js_files = array(
+        $js_files = [
             "themes/openstack/javascript/jquery.ticker.js",
             "themes/openstack/javascript/jquery.tools.min.js",
             "themes/openstack/javascript/jcarousellite.min.js",
             "themes/openstack/javascript/navigation.js",
             "themes/openstack/javascript/filetracking.jquery.js",
             "themes/openstack/javascript/updateProfileModal.js"
-        );
+        ];
 
         if($this->use_jquery_ui)
         {
-            array_push( $js_files, 'themes/openstack/bower_assets/jquery-ui/jquery-ui.js');
-            array_push( $js_files, 'themes/openstack/javascript/jquery-ui-bridge.js');
+            JQueryUIDependencies::renderRequirements();
         };
-
-        array_push($js_files,"themes/openstack/javascript/bootstrap.min.js");
 
         $filename = 'themes/openstack/javascript/' . $this->URLSegment . '.js';
 
@@ -316,13 +313,16 @@ class Page_Controller extends ContentController
     public static function AddRequirements()
     {
 
-        $css_files = array(
-            "themes/openstack/css/bootstrap.min.css",
-            'themes/openstack/bower_assets/fontawesome/css/font-awesome.min.css',
+        Requirements::css('//fonts.googleapis.com/css?family=Open+Sans:300,400,700');
+        FontAwesomeDependencies::renderRequirements();
+        JQueryCoreDependencies::renderRequirements();
+        BootstrapDependencies::renderRequirements();
+
+        $css_files = [
             "themes/openstack/css/combined.css",
             "themes/openstack/css/navigation_menu.css",
             "themes/openstack/css/dropdown.css",
-        );
+        ];
 
         if (Director::get_current_page()->IncludeShadowBox) {
             array_push($css_files, "themes/openstack/javascript/shadowbox/shadowbox.css");
@@ -331,26 +331,11 @@ class Page_Controller extends ContentController
         foreach($css_files as $css_file)
             Requirements::css($css_file);
 
-        Requirements::css('//fonts.googleapis.com/css?family=Open+Sans:300,400,700');
-
-        Requirements::block(SAPPHIRE_DIR . "/javascript/jquery_improvements.js");
-        Requirements::block(FRAMEWORK_DIR . '/thirdparty/jquery/jquery.js');
-        Requirements::block(FRAMEWORK_DIR . '/thirdparty/jquery/jquery.min.js');
-        Requirements::block(THIRDPARTY_DIR . '/jquery-cookie/jquery.cookie.js');
-
-        $jquery_version = 'themes/openstack/javascript/jquery.js';
-
-        if (Director::isLive()) {
-            $jquery_version = 'themes/openstack/javascript/jquery.min.js';
-        }
-
-        $js_files =  array(
-            $jquery_version,
-            'themes/openstack/javascript/jquery-migrate-1.2.1.min.js',
-            "themes/openstack/javascript/jquery.cookie.js",
+        $js_files =  [
+            "node_modules/js-cookie/src/js.cookie.js",
             'themes/openstack/javascript/querystring.jquery.js',
             'themes/openstack/javascript/shadowbox/shadowbox.js',
-        );
+        ];
 
         foreach($js_files as $js_file)
             Requirements::javascript($js_file);

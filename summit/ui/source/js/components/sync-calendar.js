@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {Collapse} from 'react-collapse';
+import 'sweetalert2/dist/sweetalert2.css';
+import swal from 'sweetalert2';
 import {
     ScheduleProps,
     syncCalendar,
