@@ -188,6 +188,11 @@
     <ul>
         <li><a href="/sangria/StandardizeOrgNames" id="stand_orgs">Standardize Organizations</a></li>
     </ul>
+
+    <h2>Misc</h2>
+    <ul>
+        <li><a href="/sangria/ViewTagsCrud" >Tags CRUD</a></li>
+    </ul>
 </div>
 <br>
 <br>

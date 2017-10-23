@@ -33,7 +33,9 @@ final class SangriaPage_Controller extends AdminController implements Permission
     public static $default_end_date;
     public static $date_filter_query;
 
-    static $allowed_actions = array();
+    static $allowed_actions = array(
+        'ViewTagsCrud'
+    );
 
     static $url_handlers = array();
 
@@ -368,6 +370,21 @@ final class SangriaPage_Controller extends AdminController implements Permission
         self::$date_filter_query = $where_query;
 
         return $where_query;
+    }
+
+    public function ViewTagsCrud(){
+        Requirements::clear();
+        // css
+        Requirements::css('marketplace/ui/source/css/sangria.css');
+        Requirements::css("themes/openstack/css/bootstrap.min.css");
+        Requirements::css("themes/openstack/bower_assets/fontawesome/css/font-awesome.min.css");
+        Requirements::css('//fonts.googleapis.com/css?family=Open+Sans:300,400,700');
+
+        // js
+        Requirements::javascript("themes/openstack/bower_assets/jquery/dist/jquery.min.js");
+        Requirements::javascript("themes/openstack/javascript/bootstrap.min.js");
+
+        return $this->getViewer('TagsCrudPage')->process($this);
     }
 
 }
