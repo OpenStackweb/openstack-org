@@ -10,7 +10,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-
 import request from 'superagent';
 import URI from "urijs";
 let http = request;

@@ -145,7 +145,6 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         Requirements::css('themes/openstack/bower_assets/chosen/chosen.min.css');
         Requirements::css('summit/css/install_mobile_app.css');
         Requirements::css("summit/css/schedule-grid.css");
-        Requirements::css('themes/openstack/bower_assets/sweetalert2/dist/sweetalert2.min.css');
         Requirements::javascript('themes/openstack/javascript/jquery-ajax-loader.js');
         Requirements::javascript('themes/openstack/bower_assets/chosen/chosen.jquery.min.js');
         Requirements::javascript('themes/openstack/bower_assets/jquery-validate/dist/jquery.validate.min.js');
@@ -156,7 +155,6 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
 
         // browser detection
         Requirements::javascript('themes/openstack/bower_assets/bowser/src/bowser.js');
-        Requirements::javascript('themes/openstack/bower_assets/sweetalert2/dist/sweetalert2.min.js');
         Requirements::javascript('themes/openstack/javascript/jquery.serialize.js');
         Requirements::javascript('themes/openstack/javascript/jquery.cleanform.js');
         Requirements::javascript('themes/openstack/bower_assets/urijs/src/URI.min.js');
@@ -413,8 +411,6 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
             return $this->redirect($this->Summit()->getScheduleLink());
         }
 
-        Requirements::css('themes/openstack/bower_assets/sweetalert2/dist/sweetalert2.min.css');
-        Requirements::javascript('themes/openstack/bower_assets/sweetalert2/dist/sweetalert2.min.js');
 
         $error_msg = $request->getVar('error_msg');
         if ($error_msg) {
