@@ -47,11 +47,11 @@
                 </a>
             </div>
             <div class="col-md-5ths col-sm-6 col-xs-6 nav-button-box">
-                <a href="https://groups.openstack.org/" class="nav-button" data-toggle="collapse" data-target="#users" data-parent="#accordion-parent">
+                <a href="https://groups.openstack.org/" class="nav-button" data-parent="#accordion-parent">
                     <div class="nav-button-icon">
                         <img src="themes/openstack/images/community/pin.png" />
                     </div>
-                    <div>Meet Ups</div>
+                    <div>User Groups</div>
                 </a>
             </div>
             <div class="col-md-5ths col-sm-6 col-xs-6 nav-button-box">
@@ -63,7 +63,7 @@
                 </a>
             </div>
             <div class="col-md-5ths col-sm-6 col-xs-6 nav-button-box">
-                <a href="https://www.openstack.org/join/#sponsor" class="nav-button" data-toggle="collapse" data-target="#sponsorship" data-parent="#accordion-parent">
+                <a href="https://www.openstack.org/join/#sponsor" class="nav-button" data-parent="#accordion-parent">
                     <div class="nav-button-icon">
                         <img src="themes/openstack/images/community/wallet.png" />
                     </div>

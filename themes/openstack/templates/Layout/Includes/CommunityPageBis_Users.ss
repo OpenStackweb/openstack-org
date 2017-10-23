@@ -19,7 +19,7 @@
         </a>
     </div>
     <div class="col-md-12">
-        <h4>Plug into the vibrant user community:</h4>
+        <h4>Resources for users:</h4>
     </div>
     <div class="col-md-4 col-sm-4 nav-first-group-btn">
         <a class="btn btn-success" href="https://developer.openstack.org/api-guide/quick-start/">
