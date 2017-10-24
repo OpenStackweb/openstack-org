@@ -18,14 +18,14 @@
     <div class="col-md-6 col-sm-6 nav-first-group-btn">
         <a class="btn btn-success" href="https://www.openstack.org/ptg/">
             Project Teams Gathering
-        </a>
             <p>Biannual working sessions for project teams to plan and collaborate the next software release.</p>
+        </a>
     </div>
     <div class="col-md-6 col-sm-6 nav-first-group-btn">
         <a class="btn btn-success" href="http://www.opendevconf.com">
             OpenDev
-        </a>
             <p>Annual cross-community event with visionary keynotes and collaborative working sessions.</p>
+        </a>
     </div>
 </div>
 

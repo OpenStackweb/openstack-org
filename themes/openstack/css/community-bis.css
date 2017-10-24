@@ -156,6 +156,7 @@
 .nav-first-group .btn p {
     font-weight: normal;
     font-size: .8em;
+    line-height: 18px;
 }
 
 .project-groups-selected {
