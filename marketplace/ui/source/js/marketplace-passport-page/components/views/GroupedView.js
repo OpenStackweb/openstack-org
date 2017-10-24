@@ -12,12 +12,12 @@
  **/
 
 import React from 'react';
-import StoryPanel from '../containers/StoryPanel';
+import ListPanel from '../containers/ListPanel';
 import groupedList from "~core-utils/groupedList";
 import {formatTextForHash} from '../../actions';
 
 export default ({
-	stories,
+	items,
 	distribution,
     group_by
 }) => {
@@ -26,14 +26,14 @@ export default ({
         return group[0][group_by];
     }
 
-	const groupedStories = groupedList(stories, group_by);
+	const groupedItems = groupedList(items, group_by);
 
 	return (		
 		<div>
-			{groupedStories.map((group,i) => (
-				<StoryPanel
+			{groupedItems.map((group,i) => (
+				<ListPanel
                     key={i}
-                    stories = {group}
+                    items = {group}
                     distribution = {distribution}
                     title = {getTitle(group_by, group)}
                     panel_id = {formatTextForHash(getTitle(group_by, group))}

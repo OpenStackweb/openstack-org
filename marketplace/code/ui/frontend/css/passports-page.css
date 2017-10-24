@@ -1,0 +1,334 @@
+#app-container {
+    min-height: 500px;
+    position: relative;
+}
+
+.center{
+	text-align: center;
+}
+.link{
+	background-color: transparent;
+	border: none;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+.input{
+	padding: 0.5em 0.5em 0.5em 2.5em;
+}
+
+.icon-input{
+	position: absolute;
+}
+
+.hero{
+      min-height: 5em;
+      background: url('/marketplace/code/ui/frontend/images/hero.jpg') no-repeat;
+      background-size: 100% 100%;
+}
+
+.text {
+	margin-top: 4em;
+	color: #fff;
+}
+
+.text *{
+	color: #fff;
+	line-height: 2em;
+}
+
+.text h5{
+	margin-bottom: 1em;
+	line-height: 1em
+}
+
+.text .btn{
+	background-color: transparent;
+	border: solid 1px #fff;
+	color: #fff;
+}
+
+.text .btn i{
+	margin-left: 0.5em;
+}
+
+
+.columns{
+	padding-top: 1.5em;
+}
+
+.columns *{
+	color: #2a4e68;
+}
+
+.columns h4{
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+.columns p{
+	font-size: 0.9em;
+}
+
+.columns h4 i{
+	width: 2.5em;
+	height: 2.5em;
+	border: solid 2px #2a4e68;
+	border-radius: 100%;
+	text-align: center;
+	margin-right: 1em;
+	
+}
+
+.columns h4 i:before{
+	margin-top: 0.6em;
+    display: inline-block;
+}
+
+
+.columns .row{
+	margin: 0;
+}
+
+
+.light .row{
+	background-color: #edf2f7;
+	text-align: center;
+	padding: 0.5em 0 1.5em;
+	margin: 1em -1em;
+}
+
+.light .row h5{
+	font-weight: bold;
+	color: #2a4e68;
+}
+
+
+.map h5{
+	background-color: #2a4e68;
+	color: #edf2f7;
+	font-weight: 200;
+	text-align: center;
+	padding: 1em 0 1.25em;
+	font-size: 1.2em
+}
+
+
+
+.catalog .items{
+	list-style-type: none;
+	padding: 0;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.catalog .items *{
+	color: #2a4e68;
+}
+
+.catalog .items .logo{
+	height: 6em;
+}
+.catalog .items .logo img{
+	width: 100%;
+	height: 100%
+}
+
+
+.catalog .items .company .content .body h5{
+	text-transform: uppercase;
+	color: #2a4e68;
+	font-size: 1.2em
+}
+
+
+.catalog .items .company.browse .content{
+	background-color: #eef2f6;
+}
+
+.catalog .list {
+    padding-right: 25px;
+}
+
+.catalog .list .company {
+	width: 100%;
+	margin-bottom: 1em;
+	display: flex;
+	clear: both;
+	border: solid 1px #dfe6eb;
+	border-radius: 0.5em;
+	padding: 0;
+}
+
+.catalog .list .company h5{
+	margin-bottom: 1em;
+}
+
+
+.catalog .list .company .body{
+	font-size: 95%;
+}
+
+.catalog .list .company *{
+	float: left;
+}
+
+
+.catalog .list .company .logo{
+	padding: 1.5em 1em;
+
+}
+.catalog .list .company .logo img{
+	
+	
+	text-align: center;
+	width: 100%
+}
+
+.catalog .list .company .body {
+
+	border-left: solid 1px #dfe6eb;
+}
+
+.catalog .list .company .cta span{
+	display: none
+
+}
+
+.catalog .list .company .cta .btn{
+	margin-top: 2em;
+	float: right;
+    width: 40px;
+    height: 40px;
+    padding: 14px;
+
+}
+
+.catalog .items.list .company .content .cta .btn i{
+	margin: 0.5em 0.25em;
+
+}
+
+
+.catalog .grid .company{
+	display: flex;
+}
+
+.catalog .grid .company .content{
+	border: solid 1px #dfe6eb;
+	border-radius: 0.5em;
+	width: 100%;
+	position: relative;
+	padding-bottom: 5em;
+}
+
+
+.catalog .grid .company .content .cta{
+	bottom: 1.5em;
+	width: 100%;
+	position: absolute;
+	display: inline-block;
+	text-align: center;
+	padding: 0;
+	left: 0;
+}
+
+.catalog .items .company .content .cta .btn{
+	background-color: #29abe2;
+	text-transform: uppercase;
+	border: none;
+	color: #fff;
+}
+
+.catalog .items .company .content .cta .btn *{
+
+	color: #fff;
+}
+.catalog .items .company .content .cta .btn i{
+
+	margin-right: 0.5em;
+}
+
+.catalog .grid .company {
+    margin-bottom: 20px;
+}
+
+.catalog .grid .company .content .body{
+	
+	position: relative;
+	width: 100%;
+	padding: 0;
+}
+
+.catalog .grid .company .content .logo{
+	padding: 2em 5em 0;
+	width: 100%;
+}
+
+.catalog .grid .company .content .body .description{
+    height: 130px;
+}
+
+.catalog .grid .company .content .body {
+    height: 315px;
+}
+
+.catalog .grid .company .content .body h5{
+	text-align: center;
+	padding: 0.75em 0 1em 0;
+	margin: 1em 0;
+	border-top: solid 1px #dfe6eb;
+	border-bottom: solid 1px #dfe6eb;
+}
+
+.catalog .grid .company .content .body p, .catalog .grid .company .content .body h6{
+	text-align: center;
+	padding: 0.5em 1em 1em 1em;
+	color: #2a4e68;
+	margin: 1em 0;
+	line-height: 1.6em
+}
+
+
+.container-fluid.resources{
+	background-color: #51a9dd;
+	margin-top: 2em;
+	padding: 2em 0;
+}
+
+.container-fluid.resources *{
+	color: #fff;
+}
+
+
+.container-fluid.resources .icon{
+	background-color: #fff;
+	height: 7em;
+	width: 7em;
+	border-radius: 100%;
+	padding: 1em;
+	margin-bottom: 1em
+}
+
+.container-fluid.resources .btn{
+	background-color: #2a4e68;
+	border: none;
+	margin-top: 1em
+}
+
+
+footer{
+	margin-top: 0;
+}
+
+@media (max-width: 1100px) {
+  .text {
+	margin-top: 2em;
+  }
+  .catalog .list .company .logo {
+    padding: 3em 1em 0 1em;
+}
+.catalog .items .company .content .cta .btn{
+	margin-top: 2em;
+}
+}

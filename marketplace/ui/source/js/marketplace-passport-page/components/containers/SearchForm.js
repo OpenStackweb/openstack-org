@@ -15,14 +15,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import SimpleSearchForm from "~core-components/simple-search-form";
 
-import { updateSearchText, fetchSearchStories } from '../../actions';
+import { updateSearchText, fetchSearchItems } from '../../actions';
 
 export default connect (
 	state => ({
 		action: 'search',
 		currentSearch: state.search,
 		placeholder: '',
-		className: 'story-search-form',
+		className: 'search-form',
         buttonText: <i className="fa fa-search"></i>
 	}),
 	dispatch => ({
@@ -31,7 +31,7 @@ export default connect (
 		},
 		onSearch (search) {
             if (search) {
-                dispatch(fetchSearchStories(search));
+                dispatch(fetchSearchItems(search));
             }
 		}
 	})

@@ -21,3 +21,4 @@ Director:
     'api/v1/marketplace/reviews': 'ReviewCrudApi'
     'api/v1/marketplace/books': 'BooksCrudApi'
     'api/v1/marketplace/drivers': 'DriverRestfullApi'
+    'api/v1/marketplace/public-cloud-passports': 'PublicCloudPassportResfullApi'

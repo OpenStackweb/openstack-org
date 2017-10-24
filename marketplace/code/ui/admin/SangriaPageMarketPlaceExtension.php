@@ -29,6 +29,7 @@ final class SangriaPageMarketPlaceExtension extends Extension {
         'ViewPoweredOpenStackProductDetail',
         'ViewOpenStackProductsByRegion',
         'ViewCloudsDataCenterLocations',
+        'ViewPublicCloudPassports'
     ];
 
 	public function onBeforeInit(){
@@ -217,6 +218,23 @@ final class SangriaPageMarketPlaceExtension extends Extension {
                 'Regions' => $regions
             ])
         );
+    }
+
+    public function ViewPublicCloudPassports(){
+        Requirements::clear();
+        // css
+
+        Requirements::css('marketplace/code/ui/admin/css/sangria-passports-admin.css');
+        Requirements::css("themes/openstack/bower_assets/bootstrap/dist/css/bootstrap.min.css");
+        Requirements::css("themes/openstack/bower_assets/fontawesome/css/font-awesome.min.css");
+        Requirements::css('//fonts.googleapis.com/css?family=Open+Sans:300,400,700');
+        Requirements::css('themes/openstack/bower_assets/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
+
+        // js
+        Requirements::javascript("themes/openstack/bower_assets/jquery/dist/jquery.min.js");
+        Requirements::javascript("themes/openstack/bower_assets/bootstrap/dist/js/bootstrap.min.js");
+
+        return $this->owner->getViewer('ViewPublicCloudPassports')->process($this->owner);
     }
 
 }

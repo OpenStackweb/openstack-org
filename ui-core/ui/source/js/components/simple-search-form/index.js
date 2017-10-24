@@ -12,30 +12,36 @@
  **/
 
 import React from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
 class SimpleSearchForm extends React.Component {
 
 	constructor (props) {
 		super(props);
+
+        this.state = { search_value: '' };
+
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleChange = this.handleChange.bind(this);
 	}
 
 	handleSubmit (e) {
-		ReactDOM.findDOMNode(this.refs.search).blur();
-		console.log('blur');
 		if(this.props.onSearch) {
 			e.preventDefault();
-			this.props.onSearch(this.refs.search.value);
+			this.props.onSearch(this.state.search_value);
 		}
 	}
+
+    handleChange (e) {
+        this.setState({search_value: e.target.value})
+        this.props.onSearchTyped(e);
+    }
+
 	render () {
 		const {
 			className,
 			action,
 			currentSearch,
-			onSearchTyped,
 			placeholder,
 			buttonText
 		} = this.props;
@@ -46,9 +52,8 @@ class SimpleSearchForm extends React.Component {
 					placeholder={placeholder}
 					type="text"
 					name="search"
-					ref="search"
 					value={currentSearch}
-					onChange={onSearchTyped} />
+					onChange={this.handleChange} />
 				<button type="submit">{buttonText}</button>
 			</form>
 		);

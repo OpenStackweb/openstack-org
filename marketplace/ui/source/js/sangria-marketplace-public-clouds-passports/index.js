@@ -12,27 +12,22 @@
  **/
 
 import React from 'react';
-import { connect } from 'react-redux';
-import SimpleSearchForm from "~core-components/simple-search-form";
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import PublicCloudPassportsApp from './PublicCloudPassportsApp';
+import store from './store';
 
-import { updateSearchText, fetchSearchStories } from '../../actions';
+const containerId      = 'public-cloud-passports-app';
 
-export default connect (
-	state => ({
-		action: 'search',
-		currentSearch: state.search,
-		placeholder: '',
-		className: 'story-search-form',
-        buttonText: <i className="fa fa-search"></i>
-	}),
-	dispatch => ({
-		onSearchTyped (e) {
-			dispatch(updateSearchText(e.target.value));
-		},
-		onSearch (search) {
-            if (search) {
-                dispatch(fetchSearchStories(search));
-            }
-		}
-	})
-)(SimpleSearchForm);
+document.addEventListener('DOMContentLoaded', function init() {
+    if (document.getElementById(containerId)) {
+        render(
+            <Provider store={store}>
+                <PublicCloudPassportsApp page_size='25' />
+            </Provider>,
+            document.getElementById(containerId)
+        );
+    }
+});
+
+
