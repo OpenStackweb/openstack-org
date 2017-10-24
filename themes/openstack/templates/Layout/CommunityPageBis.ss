@@ -8,8 +8,7 @@
             <div class="col-md-8 col-xs-12 banner-text-wrapper pull-right">
                 <h2>New to the community?</h2>
                 <p>
-                    Then you are in the right place! This is the best place to start when you're interested in contributing to OpenStack.
-                    There are lots of benefits to participation, including oportinities to influence the future of the project.
+                    Then you are in the right place! There are lots of benefits to participation, including opportinities to influence the future of the project.
                     Find out how to get started:
                 </p>
                 <a href="https://docs.openstack.org/contributors" target="_blank" class="banner-button btn btn-primary">
