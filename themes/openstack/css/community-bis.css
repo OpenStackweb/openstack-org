@@ -148,8 +148,14 @@
     width: 100%;
     text-align: left;
     font-weight: bold;
-    height: 45px;
+    min-height: 45px;
     line-height: 30px;
+    white-space: normal;
+}
+
+.nav-first-group .btn p {
+    font-weight: normal;
+    font-size: .8em;
 }
 
 .project-groups-selected {
