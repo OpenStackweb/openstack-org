@@ -157,6 +157,7 @@
     font-weight: normal;
     font-size: .8em;
     line-height: 18px;
+    min-height: 55px;
 }
 
 .project-groups-selected {
