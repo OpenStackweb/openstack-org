@@ -72,22 +72,22 @@
         </div>
         <div id="accordion-parent">
             <div id="code" class="collapse">
-                <% include CommunityPageBis_Code %>
+                <% include CommunityPageBisCode %>
             </div>
             <div id="documentation" class="collapse">
-                <% include CommunityPageBis_Documentation %>
+                <% include CommunityPageBisDocumentation %>
             </div>
             <div id="events" class="collapse">
-                <% include CommunityPageBis_Events %>
+                <% include CommunityPageBisEvents %>
             </div>
             <div id="meetup" class="collapse">
-                <% include CommunityPageBis_Meetup %>
+                <% include CommunityPageBisMeetup %>
             </div>
             <div id="users" class="collapse">
-                <% include CommunityPageBis_Users %>
+                <% include CommunityPageBisUsers %>
             </div>
             <div id="sponsorship" class="collapse">
-                <% include CommunityPageBis_Sponsorship %>
+                <% include CommunityPageBisSponsorship %>
             </div>
         </div>
     </div>
