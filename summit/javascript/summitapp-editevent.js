@@ -157,6 +157,9 @@ $(document).ready(function(){
         freeInput: false,
         allowDuplicates: false,
         trimValue: true,
+        tagClass: function(item) {
+            return 'label label-info speaker_' + item.speaker_id ;
+        },
         typeaheadjs: [
             {
                 hint: true,
@@ -274,6 +277,9 @@ $(document).ready(function(){
         freeInput: false,
         maxTags: 1,
         trimValue: true,
+        tagClass: function(item) {
+            return 'label label-info speaker_' + item.speaker_id ;
+        },
         typeaheadjs: [
             {
                 hint: true,
@@ -564,6 +570,28 @@ $(document).ready(function(){
             });
         }
     }
+
+    $('.speakers-container').on('click', '.tag', function(){
+        var speaker_class = $.grep(this.className.split(" "), function(v, i){
+            return v.indexOf('speaker_') === 0;
+        }).join();
+        var speaker_id = speaker_class.split('speaker_')[1];
+
+        var url = 'summit-admin/' + summit_id + '/speakers/' + speaker_id;
+        console.log(url);
+        window.open(url, '_blank');
+    });
+
+    $('.moderator-container').on('click', '.tag', function(){
+        var speaker_class = $.grep(this.className.split(" "), function(v, i){
+            return v.indexOf('speaker_') === 0;
+        }).join();
+        var speaker_id = speaker_class.split('speaker_')[1];
+
+        var url = 'summit-admin/' + summit_id + '/speakers/' + speaker_id;
+        console.log(url);
+        window.open(url, '_blank');
+    });
 
 });
 

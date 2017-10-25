@@ -112,6 +112,7 @@ final class PresentationSpeakerAdminController extends Controller
         $speaker_id = intval($request->param('SpeakerID'));
         $speaker    = PresentationSpeaker::get()->byID($speaker_id);
 
+        Requirements::css('node_modules/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
         Requirements::css('summit/css/simple-sidebar.css');
         Requirements::css('summit/css/summit-admin-edit-speaker.css');
         SweetAlert2Dependencies::renderRequirements();

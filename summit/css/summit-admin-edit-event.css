@@ -40,3 +40,19 @@
 .attachment-container{
     padding: 5px;
 }
+
+.speakers-container .tag {
+    cursor: pointer;
+}
+
+.speakers-container .tag:hover {
+    text-decoration: underline;
+}
+
+.moderator-container .tag {
+    cursor: pointer;
+}
+
+.moderator-container .tag:hover {
+    text-decoration: underline;
+}

@@ -36,6 +36,29 @@
             <div class="form-group">
                 <div class="row">
                     <div class="col-md-4">
+                        <div class="checkbox">
+                            <input id="registered" name="registered" type="checkbox" <% if $Speaker.getAssistanceFor($Top.Summit.ID).RegisteredForSummit %> checked <% end_if %>>
+                            <label for="registered">Registered</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="checkbox">
+                            <input id="checked_in" name="checked_in" type="checkbox" <% if $Speaker.getAssistanceFor($Top.Summit.ID).CheckedIn %> checked <% end_if %>>
+                            <label for="checked_in">Checked-In</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="checkbox">
+                            <input id="confirmed" name="confirmed" type="checkbox" <% if $Speaker.getAssistanceFor($Top.Summit.ID).IsConfirmed %> checked <% end_if %>>
+                            <label for="confirmed">Confirmed</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-4">
                         <label>Title</label>
                         <input id="title" name="title" class="form-control" value="$Speaker.Title" />
                     </div>

@@ -219,10 +219,20 @@ final class SpeakerManager implements ISpeakerManager
             $speaker_creation_email_sender->send(['Speaker' => $speaker]);
 
             $onsite_phone = trim($speaker_data['onsite_phone']);
-            if(!empty($onsite_phone)) {
-                $summit_assistance = $speaker->createAssistanceFor($summit->getIdentifier());
-                $summit_assistance->OnSitePhoneNumber = $onsite_phone;
-                $summit_assistance->write();
+            $registered = isset($speaker_data['registered']) ? 1 : 0;
+            $checked_in = isset($speaker_data['checked-in']) ? 1 : 0;
+            $confirmed = isset($speaker_data['onsite_phone']) ? 1 : 0;
+
+            $summit_assistance = $speaker->createAssistanceFor($summit->getIdentifier());
+            $summit_assistance->OnSitePhoneNumber = $onsite_phone;
+            $summit_assistance->RegisteredForSummit = $registered;
+            $summit_assistance->IsConfirmed = $confirmed;
+            $summit_assistance->CheckedIn = $checked_in;
+            $summit_assistance->write();
+
+            $reg_code     = trim($speaker_data['reg_code']);
+            if(!empty($reg_code)){
+                $speaker->registerSummitPromoCodeByValue($reg_code, $summit);
             }
 
             return $speaker;
@@ -273,20 +283,28 @@ final class SpeakerManager implements ISpeakerManager
             $speaker->MemberID    = $member_id;
 
             $onsite_phone = trim($speaker_data['onsite_phone']);
-            $reg_code     = trim($speaker_data['reg_code']);
+            $registered = isset($speaker_data['registered']) ? 1 : 0;
+            $checked_in = isset($speaker_data['checked_in']) ? 1 : 0;
+            $confirmed = isset($speaker_data['confirmed']) ? 1 : 0;
 
-            if(!empty($onsite_phone)) {
-                $summit_assistance = $speaker->getAssistanceFor($summit->getIdentifier());
-                if(is_null($summit_assistance)){
-                    $summit_assistance = $speaker->createAssistanceFor($summit->getIdentifier());
-                }
-                $summit_assistance->OnSitePhoneNumber = $onsite_phone;
-                $summit_assistance->write();
+            $summit_assistance = $speaker->getAssistanceFor($summit->getIdentifier());
+            if(is_null($summit_assistance)){
+                $summit_assistance = $speaker->createAssistanceFor($summit->getIdentifier());
             }
 
+            if(!empty($onsite_phone))
+                $summit_assistance->OnSitePhoneNumber = $onsite_phone;
+
+            $summit_assistance->RegisteredForSummit = $registered;
+            $summit_assistance->IsConfirmed = $confirmed;
+            $summit_assistance->CheckedIn = $checked_in;
+            $summit_assistance->write();
+
+            $reg_code     = trim($speaker_data['reg_code']);
             if(!empty($reg_code)){
                 $speaker->registerSummitPromoCodeByValue($reg_code, $summit);
             }
+
             return $speaker;
 
         });
