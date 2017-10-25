@@ -88,4 +88,5 @@ migrations:
   - DeploymentToolsMergeAnsibleAnswersMigration
   - MemberSpammerMigration
   - CommunityHelpersMigration
+  - MemberLinkedInUrlMigration
 
