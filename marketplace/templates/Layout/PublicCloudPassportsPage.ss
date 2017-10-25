@@ -48,7 +48,7 @@
             <img class="icon" src="/marketplace/code/ui/frontend/images/training.svg" alt="">
             <h4>Resources</h4>
             <p>Dig deep into the the world of OpenStack through the eyes of those who operate and develop OpenStack. Ask, find and answer OpenStack specific questions here.</p>
-            <button class="btn btn-secondary">Explore</button>
+            <a href="{$BaseHref}community" class="btn btn-secondary">Explore</a>
         </div>
     </div>
 </div>

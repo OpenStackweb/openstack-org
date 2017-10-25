@@ -50,10 +50,14 @@ final class PublicCloudPassportResfullApi extends AbstractRestfulJsonApi
     /**
      * @return bool
      */
+    protected function authenticate(){
+        return true;
+    }
+
+    /**
+     * @return bool
+     */
     protected function authorize(){
-        //check permissions
-        if(!Permission::check("SANGRIA_ACCESS"))
-            return false;
         return true;
     }
 
