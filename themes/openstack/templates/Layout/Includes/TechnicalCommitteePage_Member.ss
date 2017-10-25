@@ -6,7 +6,7 @@
             <a class="staff-twitter" target="_blank" href="https://twitter.com/{$TwitterName}"></a>
             <% end_if %>
             <% if LinkedInProfile %>
-            <a class="staff-linkedin" href="http://linkedin.com/in/{$LinkedInProfile}"></a>
+            <a class="staff-linkedin" href="{$LinkedInProfile}"></a>
             <% end_if %>
             <a class="staff-openstack" href="/community/members{$Link}{$ID}"></a>
     </div>
