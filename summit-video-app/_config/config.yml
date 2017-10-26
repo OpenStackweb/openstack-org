@@ -28,7 +28,7 @@ Injector:
     class: GuzzleHttp\Client
     constructor:
       0:
-        base_url: https://www.googleapis.com/youtube/v3/
+        base_uri: https://www.googleapis.com/youtube/v3/
   SummitVideoYouTubeService:
     constructor:
       0: %$SummitVideoHTTPClient
