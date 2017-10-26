@@ -115,6 +115,30 @@
                     </div>
                 <% end_if %>
                 <% if $Event.isPresentation %>
+                    <% if $Event.getMaterialByType(PresentationSlide) || $Event.getMaterialByType(PresentationLink) %>
+                        <div class="row info_item">
+                            <div class="col-md-2 col-xs-2 info_item_icon">
+                                <i class="fa fa-2x fa-book icon-record"></i>
+                            </div>
+                            <div class="col-md-10 col-xs-10 info_item_text">
+                                <% if $Event.getMaterialByType(PresentationSlide) %>
+                                    Slides:
+                                    <% loop $Event.getMaterialByType(PresentationSlide) %>
+                                        <a href="{$getSlideUrl()}" target="_blank">$Name</a>
+                                        <% if not $Last %> | <% end_if %>
+                                    <% end_loop %>
+                                    <br>
+                                <% end_if %>
+                                <% if $Event.getMaterialByType(PresentationLink) %>
+                                    Links:
+                                    <% loop $Event.getMaterialByType(PresentationLink) %>
+                                        <a href="{$Link}" target="_blank">link {$Pos}</a>
+                                        <% if not $Last %> | <% end_if %>
+                                    <% end_loop %>
+                                <% end_if %>
+                            </div>
+                        </div>
+                    <% end_if %>
                     <% if $Event.ToRecord || $Event.getVideoLink() %>
                         <div class="row info_item">
                             <div class="col-md-2 col-xs-2 info_item_icon"><i class="fa fa-2x fa-video-camera icon-record"></i></div>
