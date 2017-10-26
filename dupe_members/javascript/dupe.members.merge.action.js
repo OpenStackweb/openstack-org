@@ -96,7 +96,7 @@ jQuery(document).ready(function ($) {
                     ajaxError(jqXHR, textStatus, errorThrown);
                 }
             });
-        });
+        }).catch(swal.noop);
         return false;
     });
 });

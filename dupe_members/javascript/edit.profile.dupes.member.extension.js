@@ -47,7 +47,7 @@ jQuery(document).ready(function($) {
                     ajaxError( jqXHR, textStatus, errorThrown);
                 }
             });
-        });
+        }).catch(swal.noop);
         return false;
     });
 
@@ -85,7 +85,7 @@ jQuery(document).ready(function($) {
                     ajaxError( jqXHR, textStatus, errorThrown);
                 }
             });
-        });
+        }).catch(swal.noop);
         return false;
     });
 
@@ -110,7 +110,7 @@ jQuery(document).ready(function($) {
                     ajaxError( jqXHR, textStatus, errorThrown);
                 }
             });
-        });
+        }).catch(swal.noop);
     });
 
     // not my account
@@ -142,7 +142,7 @@ jQuery(document).ready(function($) {
                     ajaxError( jqXHR, textStatus, errorThrown);
                 }
             });
-        });
+        }).catch(swal.noop);
         return false;
     });
 });

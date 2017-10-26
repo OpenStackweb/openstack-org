@@ -71,10 +71,10 @@ $(document).ready(function(){
                     confirmButtonText: "Done!",
                     type: "success",
                     html: true
-                },
-                function() {
-                    location.reload();
-                });
+                }).then(
+                    function() {
+                        location.reload();
+                }).catch(swal.noop);
         });
     });
 

@@ -439,35 +439,34 @@ $(document).ready(function(){
                 closeOnConfirm: true,
                 allowEscapeKey: false
             }).then(function(isConfirm){
-            if (isConfirm) {
-                $.ajax({
-                    type: 'DELETE',
-                    url: url,
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json"
-                })
-                    .done(function () {
-                        swal("Unpublished!", "Your event was unpublished successfully.", "success");
-                        location.reload();
-                        form.find(':submit').removeAttr('disabled');
+                if (isConfirm) {
+                    $.ajax({
+                        type: 'DELETE',
+                        url: url,
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json"
                     })
-                    .fail(function (jqXHR) {
-                        var responseCode = jqXHR.status;
-                        if (responseCode == 412) {
-                            var response = $.parseJSON(jqXHR.responseText);
-                            swal('Validation error', response.messages[0].message, 'warning');
-                        }
-                        else {
-                            swal('Error', 'There was a problem saving the event, please contact admin.', 'warning');
-                        }
-                        form.find(':submit').removeAttr('disabled');
-                    });
-                return;
-            }
-            swal("Cancelled", "", "error");
-            form.find(':submit').removeAttr('disabled');
-        });
-
+                        .done(function () {
+                            swal("Unpublished!", "Your event was unpublished successfully.", "success");
+                            location.reload();
+                            form.find(':submit').removeAttr('disabled');
+                        })
+                        .fail(function (jqXHR) {
+                            var responseCode = jqXHR.status;
+                            if (responseCode == 412) {
+                                var response = $.parseJSON(jqXHR.responseText);
+                                swal('Validation error', response.messages[0].message, 'warning');
+                            }
+                            else {
+                                swal('Error', 'There was a problem saving the event, please contact admin.', 'warning');
+                            }
+                            form.find(':submit').removeAttr('disabled');
+                        });
+                    return;
+                }
+                swal("Cancelled", "", "error");
+                form.find(':submit').removeAttr('disabled');
+        }).catch(swal.noop);
 
         return false;
     });

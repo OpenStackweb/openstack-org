@@ -76,7 +76,7 @@ var GoogleCalendarApi = (function () {
                 immediate: false
             },handleAuthResult);
             return false;
-        });
+        }).catch(swal.noop);
     }
 
     my.addEvents = function (events, callback){

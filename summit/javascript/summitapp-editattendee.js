@@ -156,18 +156,18 @@ $(document).ready(function(){
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
             confirmButtonText: "Yes, delete it!"
-        }, function(){
-            $.ajax({
-                type: 'DELETE',
-                url:  'api/v1/summits/'+summit_id+'/attendees/'+attendee_id+'/rsvp/'+rsvp_id,
-                dataType:'json',
-                success: function (data, textStatus, jqXHR) {
-                    element.parents('tr').first().remove();
-                }
-            }).fail(function (jqXHR, textStatus, errorThrown) {
-                swal("Couldn't delete.",'There was an error, please contact your administrator','warning');
-            });
-        });
+        }).then(function(){
+                $.ajax({
+                    type: 'DELETE',
+                    url:  'api/v1/summits/'+summit_id+'/attendees/'+attendee_id+'/rsvp/'+rsvp_id,
+                    dataType:'json',
+                    success: function (data, textStatus, jqXHR) {
+                        element.parents('tr').first().remove();
+                    }
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    swal("Couldn't delete.",'There was an error, please contact your administrator','warning');
+                });
+            }).catch(swal.noop);
 
         return false;
 
@@ -189,18 +189,18 @@ $(document).ready(function(){
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
             confirmButtonText: "Yes, delete it!"
-        }, function(){
-            $.ajax({
-                type: 'DELETE',
-                url:  'api/v1/summits/'+summit_id+'/attendees/'+attendee_id+'/tickets/'+ticket_id,
-                dataType:'json',
-                success: function (data, textStatus, jqXHR) {
-                    element.parent('div').remove();
-                }
-            }).fail(function (jqXHR, textStatus, errorThrown) {
-                swal("Couldn't delete.",'There was an error, please contact your administrator','warning');
-            });
-        });
+        }).then(function(){
+                $.ajax({
+                    type: 'DELETE',
+                    url:  'api/v1/summits/'+summit_id+'/attendees/'+attendee_id+'/tickets/'+ticket_id,
+                    dataType:'json',
+                    success: function (data, textStatus, jqXHR) {
+                        element.parent('div').remove();
+                    }
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    swal("Couldn't delete.",'There was an error, please contact your administrator','warning');
+                });
+            }).catch(swal.noop);
 
         return false;
 
@@ -307,12 +307,13 @@ $(document).ready(function(){
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "Yes, delete it!",
                     closeOnConfirm: false
-                }, function(){
+                }).then(
+                function(){
                     reassignTicket();
                 });
-        } else {
-            reassignTicket();
+            return;
         }
+        reassignTicket();
     });
 
     $('#add_ticket').click(function(){
@@ -372,13 +373,13 @@ $(document).ready(function(){
                 title: "Updated!",
                 text: "Ticket re-assigned successfully.",
                 type: "success"
-            }, function() {
-                if ($('.ticket').length < 2) {
-                    window.location = location.protocol + '//' + location.host + '/summit-admin/' + summit_id + '/attendees';
-                } else {
-                    $('.ticket [data-ticket="'+ticket_id+'"]').remove();
-                }
-            });
+            }).then(function() {
+                    if ($('.ticket').length < 2) {
+                        window.location = location.protocol + '//' + location.host + '/summit-admin/' + summit_id + '/attendees';
+                    } else {
+                        $('.ticket [data-ticket="'+ticket_id+'"]').remove();
+                    }
+                }).catch(swal.noop);
         }).fail(function(jqXHR) {
             var responseCode = jqXHR.status;
             if(responseCode == 412) {

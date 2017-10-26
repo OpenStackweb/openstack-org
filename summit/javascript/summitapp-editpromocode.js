@@ -189,15 +189,13 @@ $(document).ready(function(){
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "Yes, change it!",
                 closeOnConfirm: false
-            },
-            function(){
+            }).then(function(){
                 $('#email_sent').prop('checked', false);
                 savePromocode();
-            });
-        } else {
-            savePromocode();
+            }).catch(swal.noop);
+            return false;
         }
-
+        savePromocode();
         return false;
     });
 
@@ -221,10 +219,9 @@ $(document).ready(function(){
                     title: "Updated!",
                     text: "Promo Code was updated successfully.",
                     type: "success"
-                },
-                function() {
-                    window.location.href = this_url + promocode;
-                });
+                }).then(function() {
+                        window.location.href = this_url + promocode;
+                    }).catch(swal.noop);
         }).fail(function(jqXHR) {
             var responseCode = jqXHR.status;
             if(responseCode == 412) {
@@ -282,10 +279,9 @@ function sendEmail() {
                 title: "Done!",
                 text: "Promo code ("+promocode+") was sent successfully.",
                 type: "success"
-            },
-            function() {
+            }).then(function() {
                 window.location.href = this_url + promocode;
-            });
+            }).catch(swal.noop);
     }).fail(function(jqXHR) {
         var responseCode = jqXHR.status;
         if(responseCode == 412) {

@@ -98,8 +98,7 @@ $(document).ready(function(){
            swal('','Please choose a speaker for all fields.','warning');
            return false;
         }
-        swal(
-            {
+        swal({
                 title: "Attention!",
                 text: "There is no going back. Speaker 1 on the left will have all the green fields and Speaker 2 will be erased",
                 type: "warning",
@@ -107,11 +106,9 @@ $(document).ready(function(){
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "Yes, merge and delete.",
                 closeOnConfirm: true
-            },
-            function(){
+            }).then(function(){
                 mergeSpeakers();
-            }
-        );
+            }).catch(swal.noop);
     });
 
 
@@ -222,15 +219,14 @@ function mergeSpeakers() {
         request[$(this).data('field')] = speakers[$(this).data('speaker')];
     });
 
-
-
     $.ajax({
         type: 'POST',
         url: url,
         data: JSON.stringify(request),
         contentType: "application/json; charset=utf-8",
         dataType: "json"
-    }).done(function(changes) {
+    })
+    .done(function(changes) {
         var changes_html = '';
         $.each(changes,function(idx,val){
             changes_html += '<strong>'+val+':</strong> ';
@@ -240,17 +236,17 @@ function mergeSpeakers() {
                 changes_html += $('*[data-field="'+val+'"][data-speaker="2"]').val()+' <br>';
             }
         });
-
-
         swal({
                 title: "Success! Speakers merged.",
                 text: "Changes made on "+$('#first_name-1').val()+" "+$('#last_name-1').val()+":<br><br>"+changes_html,
                 confirmButtonText: "Done!",
                 type: "success",
                 html: true
-            },
-            function() {
+            }).then(function(){
                 location.reload();
-            });
+            }).catch(swal.noop);
+    })
+    .fail(function( jqXHR, textStatus, errorThrown ) {
+        swal('Validation error', jqXHR.responseJSON.messages[0].message, 'warning');
     });
 }

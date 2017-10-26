@@ -95,7 +95,7 @@
                     confirmButtonText: "Yes, go for it!",
                     closeOnConfirm: true,
                     allowEscapeKey: false,
-                },
+                }).then(
                 function(isConfirm){
 
                     if (isConfirm) {
@@ -149,8 +149,7 @@
                     confirmButtonText: "Yes, go for it!",
                     closeOnConfirm: true,
                     allowEscapeKey: false,
-                },
-                function(isConfirm){
+                }).then(function(isConfirm){
 
                     if (isConfirm) {
                         $('#validation_errors').empty();
@@ -161,8 +160,8 @@
                         var summit_id = $('#summit_id').val();
 
                         var request = {
-                          events : getEvents(),
-                          conflicts : [],
+                            events : getEvents(),
+                            conflicts : [],
                         };
                         $('body').ajax_loader();
                         $.ajax({
@@ -187,8 +186,7 @@
                             swal('Error', 'There was a problem saving the events, please contact admin.', 'warning');
                         });
                     }
-                }
-            );
+                }).catch(swal.noop);
             return false;
         });
 

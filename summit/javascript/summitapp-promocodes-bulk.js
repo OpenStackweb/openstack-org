@@ -185,10 +185,9 @@ $(document).ready(function(){
                 confirmButtonText: "Done!",
                 type: "success",
                 html: true
-            },
-            function() {
+            }).then(function() {
                 location.reload();
-            });
+            }).catch(swal.noop);
         }).fail(function(jqXHR) {
             var responseCode = jqXHR.status;
             if(responseCode == 412) {

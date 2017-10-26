@@ -86,7 +86,7 @@ class EventActions extends Component {
         }).then(function () {
             const url = encodeURIComponent(window.location.href)
             window.location = "/Security/login?BackURL=" + url
-        }).catch(swal.noop)
+        }).catch(swal.noop);
     }
 }
 

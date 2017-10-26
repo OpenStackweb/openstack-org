@@ -95,10 +95,9 @@ $(document).ready(function(){
                     title: "Updated!",
                     text: "Sponsor was updated successfully.",
                     type: "success"
-                },
-                function() {
+                }).then(function() {
                     window.location.href = this_url + sponsor_id;
-                });
+                }).catch(swal.noop);
         }).fail(function(jqXHR) {
             var responseCode = jqXHR.status;
             if(responseCode == 412) {

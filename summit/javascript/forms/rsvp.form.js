@@ -94,7 +94,7 @@ function addRSVP(form, event_id, summit_id, security_id) {
                             return;
                         }
 
-                    });
+                    }).catch(swal.noop);
                 return;
             }
             // close modal
