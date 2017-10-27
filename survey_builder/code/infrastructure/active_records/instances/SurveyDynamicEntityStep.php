@@ -110,7 +110,7 @@ class SurveyDynamicEntityStep
      */
     public function removeEntitySurveyById($entity_survey_id)
     {
-        $this->EntitySurveys()->remove($entity_survey_id);
+        $this->EntitySurveys()->removeByID($entity_survey_id);
     }
 
     protected function onBeforeDelete() {
