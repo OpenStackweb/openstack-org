@@ -169,8 +169,8 @@ class SummitEvent extends DataObject implements ISummitEvent
             $page = SummitAppSchedPage::getBy($this->Summit());
             if ($page) {
                 if($absolute)
-                    return $page->AbsoluteLink() . 'events/' . $this->getIdentifier() . '/' . $this->getTitleForUrl();
-                return $page->RelativeLink(false) . 'events/' . $this->getIdentifier() . '/' . $this->getTitleForUrl();
+                    return Controller::join_links(Director::absoluteBaseURL(), $page->RelativeLink() , 'events' , $this->getIdentifier() ,$this->getTitleForUrl());
+                return Controller::join_links($page->RelativeLink(), 'events' , $this->getIdentifier() , $this->getTitleForUrl());
             }
         }
         return null;
