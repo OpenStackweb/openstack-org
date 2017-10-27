@@ -58,9 +58,46 @@ ScheduleProps.summit = props.ScheduleProps.summit;
 ScheduleProps.base_url = props.ScheduleProps.base_url;
 ScheduleProps.search_url = props.ScheduleProps.search_url;
 
+class SearchResultEventList extends React.Component {
+
+    loadFacebookSdk(appId) {
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId: appId,
+                xfbml: true,
+                status: true,
+                version : 'v2.7'
+            });
+        };
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    }
+
+    componentDidMount() {
+        const { summit } = this.props.ScheduleProps;
+
+        if ( ! ('ontouchstart' in window)) {
+            $('[data-toggle="tooltip"]').tooltip();
+        }
+
+        this.loadFacebookSdk(summit.share_info.fb_app_id)
+    }
+
+    render(){
+        let props = this.props;
+        return(<ScheduleEventList {...props} />);
+    }
+}
+
 ReactDOM.render(
     <Provider store={ store }>
-        <ScheduleEventList {...props} />
+        <SearchResultEventList {...props}></SearchResultEventList>
     </Provider>,
     document.getElementById('search-result-event-list')
 );
