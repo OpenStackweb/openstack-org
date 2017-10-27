@@ -1,8 +1,8 @@
 </div> <!-- Killing the main site .container -->
 
 <div class="container-fluid hero">
-    <div class="col-xs-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
-        <div class="col-xs-4">
+    <div class="col-xs-12 col-sm-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
+        <div class="col-xs-4 logo">
             <img src="/marketplace/code/ui/frontend/images/logo.svg" alt="">
         </div>
         <div class="col-xs-8 text">

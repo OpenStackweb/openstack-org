@@ -25,10 +25,12 @@
       min-height: 5em;
       background: url('/marketplace/code/ui/frontend/images/hero.jpg') no-repeat;
       background-size: 100% 100%;
+      padding: 0;
 }
 
+
 .text {
-	margin-top: 4em;
+	margin-top: 2em;
 	color: #fff;
 }
 
@@ -130,8 +132,8 @@
 	height: 6em;
 }
 .catalog .items .logo img{
-	max-width: 100%;
-	max-height: 100%
+
+	max-height: 100%;
 }
 
 
@@ -332,4 +334,35 @@ footer{
 .catalog .items .company .content .cta .btn{
 	margin-top: 2em;
 }
+}
+
+@media (max-width: 735px) {
+  .text {
+	margin-top: 2em;
+  }
+
+	.text h3{
+		font-size: 1.3em;
+	}
+	.hero .logo{
+		margin-top: 1em;
+	}
+}
+
+
+@media (max-width: 580px) {
+  .text {
+	margin-top: 1em;
+  }
+
+	.text{
+		font-size: 88%;
+	}
+}
+
+@media (max-width: 660px) {
+  .hero img{
+  	margin-bottom: 2em;
+  }
+
 }
