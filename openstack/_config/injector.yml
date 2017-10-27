@@ -17,3 +17,10 @@ Injector:
     class: OrgFactory
   OrgRepository:
     class: SapphireOrgRepository
+  TagManager:
+    constructor:
+      0: '%$TransactionManager'
+  TagsCrudApi:
+    constructor:
+      0: '%$SapphireTagRepository'
+      1: '%$TagManager'

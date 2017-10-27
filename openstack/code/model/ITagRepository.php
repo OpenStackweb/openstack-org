@@ -1,3 +1,5 @@
+<?php
+
 /**
  * Copyright 2017 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -10,24 +12,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-
-import React from 'react';
-import { render } from 'react-dom';
-import { Provider } from 'react-redux';
-import SangriaTagsCrudApp from './SangriaTagsCrudApp';
-import store from './store';
-import './styles.less';
-const containerId      = 'tags-crud-app';
-
-document.addEventListener('DOMContentLoaded', function init() {
-    if (document.getElementById(containerId)) {
-        render(
-            <Provider store={store}>
-                <SangriaTagsCrudApp loading={true} />
-            </Provider>,
-            document.getElementById(containerId)
-        );
-    }
-});
-
-
+interface ITagRepository extends IEntityRepository
+{
+    /**
+     * @param string $search
+     * @return ITag[]
+     */
+    public function getByTag($search);
+}

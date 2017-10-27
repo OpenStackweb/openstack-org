@@ -66,6 +66,7 @@ class TagsCrudApi extends AbstractRestfulJsonApi
      */
     static $url_handlers = array(
         'GET '              => 'getTags',
+        'PUT merge'         => 'mergeTags',
         'PUT $TAG_ID!'      => 'updateTag',
         'POST '             => 'addTag',
         'DELETE $TAG_ID!'   => 'deleteTag',
@@ -79,8 +80,26 @@ class TagsCrudApi extends AbstractRestfulJsonApi
         'updateTag',
         'addTag',
         'deleteTag',
+        'mergeTags',
     );
 
+    /**
+     * @var TagManager
+     */
+    protected $manager;
+
+    /**
+     * @var ITagRepository
+     */
+    protected $repository;
+
+    public function __construct(ITagRepository $repository, TagManager $manager)
+    {
+        $this->manager = $manager;
+        $this->repository = $repository;
+        parent::__construct();
+
+    }
 
     /**
      * @param SS_HTTPRequest $request
@@ -91,18 +110,15 @@ class TagsCrudApi extends AbstractRestfulJsonApi
         $search       = (isset($query_string['search'])) ? Convert::raw2sql($query_string['search']) : '';
 
         try{
-            $tags = Tag::get()->where("Tag.Tag != ''");
-            if (!empty($search)) {
-                $tags = $tags->filter(['Tag:PartialMatch' => $search]);
-            }
-            $tags = $tags->sort('Tag','ASC');
+            $tags = $this->repository->getByTag($search);
 
             $data = [];
             foreach ($tags as $tag) {
 
                 $data[] = [
-                    'id'   => $tag->ID,
-                    'tag' => $tag->Tag
+                    'id'    => $tag['ID'],
+                    'tag'   => $tag['Tag'],
+                    'count' => $tag['ETCount'] + $tag['PCTCount'] + $tag['STCount'] + $tag['USTCount']
                 ];
             }
 
@@ -122,20 +138,15 @@ class TagsCrudApi extends AbstractRestfulJsonApi
     public function updateTag(SS_HTTPRequest $request){
         $query_string = $request->getVars();
         $tag_val      = Convert::raw2sql($query_string['tag']);
+        $is_split     = Convert::raw2sql($query_string['is_split']);
         $tag_id       = $request->param('TAG_ID');
 
         try{
-
-            $tag = Tag::get()->byID($tag_id);
-            if (!$tag)
-                throw new NotFoundEntityException('Tag');
-
-            if (empty($tag_val))
-                throw new ValidationException();
-
-            $tag->Tag = $tag_val;
-            $tag->write();
-
+            if ($is_split) {
+                $this->manager->splitTag($tag_val, $tag_id);
+            } else {
+                $this->manager->updateTag($tag_val, $tag_id);
+            }
 
             return $this->getTags($request);
         }
@@ -155,14 +166,7 @@ class TagsCrudApi extends AbstractRestfulJsonApi
         $tag_val      = Convert::raw2sql($query_string['tag']);
 
         try{
-
-            if (empty($tag_val))
-                throw new ValidationException();
-
-            $tag = new Tag();
-            $tag->Tag = $tag_val;
-            $tag->write();
-
+            $this->manager->addTag($tag_val);
             return $this->getTags($request);
         }
         catch(Exception $ex)
@@ -180,18 +184,39 @@ class TagsCrudApi extends AbstractRestfulJsonApi
         $tag_id       = $request->param('TAG_ID');
 
         try{
-
-            $tag = Tag::get()->byID($tag_id);
-            if (!$tag)
-                throw new NotFoundEntityException('Tag');
-
-            $tag->delete();
-
+            $this->manager->deleteTag($tag_id);
             return $this->getTags($request);
         }
         catch(Exception $ex)
         {
             SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    /**
+     * @param SS_HTTPRequest $request
+     * @return SS_HTTPResponse
+     */
+    public function mergeTags(SS_HTTPRequest $request){
+        $vars               = $this->getJsonRequest();
+        $merge_tag          = Convert::raw2sql($vars['merge_tag']);
+        $selected_tag_ids   = $vars['selected_tags'];
+
+        try{
+            if (count($selected_tag_ids) < 2)
+                throw new ValidationException();
+
+            $tags = Tag::get()->byIDs($selected_tag_ids);
+
+            $this->manager->mergeTags($merge_tag, $tags);
+            return $this->getTags($request);
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            echo $ex->getMessage();
+
             return $this->serverError();
         }
     }

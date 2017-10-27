@@ -19,6 +19,7 @@ export const LOADING = 'LOADING';
 export const RECEIVE_ITEMS = 'RECEIVE_ITEMS';
 export const ITEM_UPDATED  = 'ITEM_UPDATED';
 export const ITEM_DELETED  = 'ITEM_DELETED';
+export const ITEMS_MERGED  = 'ITEMS_MERGED';
 
 export const fetchAll = getRequest(
     createAction(LOADING),
@@ -49,6 +50,15 @@ export const deleteItem = (params) => dispatch => {
         createAction(LOADING),
         createAction(ITEM_DELETED),
         `api/v1/tags/${params.tag_id}`,
+        params
+    )(params)(dispatch);
+}
+
+export const mergeItems = (params) => dispatch => {
+    putRequest(
+        createAction(LOADING),
+        createAction(ITEMS_MERGED),
+        `api/v1/tags/merge`,
         params
     )(params)(dispatch);
 }

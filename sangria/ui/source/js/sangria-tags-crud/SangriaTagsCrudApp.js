@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchAll, saveItem, deleteItem } from './actions';
+import { fetchAll, saveItem, deleteItem, mergeItems } from './actions';
 import Message from "~core-components/message";
 import { AjaxLoader } from '~core-components/ajaxloader';
 import {
@@ -20,15 +20,18 @@ class SangriaTagsCrudApp extends React.Component
         this.state = {
             loading: true,
             modalOpen: false,
+            selected_tags: [],
             search: '',
             edit_tag_id: 0,
-            edit_tag: ''
+            edit_tag: '',
+            merge_tag: ''
         }
 
         this.onSearchTyped = this.onSearchTyped.bind(this);
         this.onClear = this.onClear.bind(this);
         this.onTagEdit = this.onTagEdit.bind(this);
-        this.onSave = this.onSave.bind(this);
+        this.onMergeEdit = this.onMergeEdit.bind(this);
+        this.onMerge = this.onMerge.bind(this);
         this.onDelete = this.onDelete.bind(this);
     }
 
@@ -39,6 +42,20 @@ class SangriaTagsCrudApp extends React.Component
             this.props.fetchItems('');
         }
     }
+
+    toggleTag(tag_id) {
+        let selected_tags = this.state.selected_tags;
+
+        if(selected_tags.find(t => t == tag_id)) {
+            selected_tags = selected_tags.filter(t => t != tag_id);
+        } else {
+            selected_tags.push(tag_id);
+        }
+
+        this.setState({
+            selected_tags: selected_tags,
+        });
+    };
 
     openModal(tag_id, tag) {
         this.setState({
@@ -78,8 +95,24 @@ class SangriaTagsCrudApp extends React.Component
         });
     };
 
-    onSave() {
-        this.props.saveTag(this.state.edit_tag_id, this.state.edit_tag, this.state.search);
+    onMergeEdit(e) {
+        this.setState({
+            merge_tag: e.target.value
+        });
+    };
+
+    onMerge(e) {
+        this.props.mergeTags(this.state.search, this.state.selected_tags, this.state.merge_tag);
+
+        this.setState({
+            merge_tag: '',
+            selected_tags: []
+        });
+
+    };
+
+    onSave(is_split) {
+        this.props.saveTag(this.state.edit_tag_id, this.state.edit_tag, this.state.search, is_split);
 
         this.setState({
             modalOpen: false,
@@ -124,10 +157,16 @@ class SangriaTagsCrudApp extends React.Component
                     </ModalBody>
                     <ModalFooter>
                         { this.state.edit_tag_id != 0 &&
-                            <button className='btn btn-danger pull-left' onClick={this.onDelete}> Delete Tag </button>
+                        <div>
+                            <button className='btn btn-danger btn-sm pull-left' onClick={this.onDelete}> Delete Tag </button>
+                            <button className='btn btn-default btn-sm pull-left' onClick={() => this.onSave(true)}> Save & Split </button>
+                        </div>
                         }
-                        <button className='btn btn-default' onClick={this.hideModal}> Close </button>
-                        <button className='btn btn-primary' onClick={this.onSave}> Save changes </button>
+
+                        <button className='btn btn-primary' onClick={() => this.onSave(false)}> Save changes </button>
+                        <p className="split-info">
+                            * On split the tag will be splitted by spaces into multiple tags
+                        </p>
                     </ModalFooter>
                 </Modal>
 
@@ -146,6 +185,12 @@ class SangriaTagsCrudApp extends React.Component
                     <div className="col-md-2">
                         <button className="btn btn-primary" onClick={() => this.openModal(0, '')}>Add New</button>
                     </div>
+                    {this.state.selected_tags.length > 1 &&
+                    <div className="col-md-4 form-inline">
+                        <input value={this.state.merge_tag} onChange={this.onMergeEdit} className="form-control merge-input"/>
+                        <button className="btn btn-success" onClick={this.onMerge}>Merge</button>
+                    </div>
+                    }
                 </div>
 
                 {items.length > 0 &&
@@ -155,7 +200,15 @@ class SangriaTagsCrudApp extends React.Component
                             (
                                 tag =>
                                 <div key={tag.id} className="col-md-2 tag-wrapper">
-                                    <span onClick={() => this.openModal(tag.id, tag.tag)}>{tag.tag}</span>
+                                    <input
+                                        className="tag-select"
+                                        type="checkbox"
+                                        onClick={() => this.toggleTag(tag.id)}
+                                        checked={this.state.selected_tags.find(t => t == tag.id)}
+                                    />
+                                    <span onClick={() => this.openModal(tag.id, tag.tag)}>
+                                        {tag.tag} ({tag.count})
+                                    </span>
                                 </div>
                             )
                         }
@@ -181,11 +234,14 @@ export default connect (
         fetchItems (search = '') {
             return dispatch(fetchAll({search}));
         },
-        saveTag (tag_id, tag, search) {
-            return dispatch(saveItem({tag_id, tag, search}));
+        saveTag (tag_id, tag, search, is_split) {
+            return dispatch(saveItem({tag_id, tag, search, is_split}));
         },
         deleteTag (tag_id) {
             return dispatch(deleteItem({tag_id}));
+        },
+        mergeTags (search, selected_tags, merge_tag) {
+            return dispatch(mergeItems({search, selected_tags, merge_tag}));
         }
     })
 )(SangriaTagsCrudApp);

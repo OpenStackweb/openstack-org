@@ -11,7 +11,7 @@
  * limitations under the License.
  **/
 
-import {LOADING, RECEIVE_ITEMS, ITEM_UPDATED, ITEM_DELETED} from './actions';
+import {LOADING, RECEIVE_ITEMS, ITEM_UPDATED, ITEM_DELETED, ITEMS_MERGED} from './actions';
 
 export const appReducer = (
     state = {
@@ -46,7 +46,7 @@ export const appReducer = (
                 items: action.payload.response,
                 msg: 'Saved!',
                 msg_type: 'success'
-        }
+            }
         break;
         case ITEM_DELETED:
             return {
@@ -55,7 +55,16 @@ export const appReducer = (
                 items: action.payload.response,
                 msg: 'Deleted!',
                 msg_type: 'success'
-        }
+            }
+        break;
+        case ITEMS_MERGED:
+            return {
+                ...state,
+                loading: false,
+                items: action.payload.response,
+                msg: 'Merged!',
+                msg_type: 'success'
+            }
         break;
         default:
             return state;
