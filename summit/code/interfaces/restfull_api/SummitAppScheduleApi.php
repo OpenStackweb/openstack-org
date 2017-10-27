@@ -602,7 +602,7 @@ final class SummitAppScheduleApi extends AbstractRestfulJsonApi
             }
 
             $subject = 'Fwd: ' . $event->Title;
-            $body    = $event->Title . '<br>' . $event->Abstract . '<br><br>Check it out: ' . $event->getLink();
+            $body    = $event->Title . '<br>' . $event->Abstract . '<br><br>Check it out: ' . $event->getLink('show', true);
 
             $email = EmailFactory::getInstance()->buildEmail($data['from'], $data['to'], $subject, $body);
             $email->send();

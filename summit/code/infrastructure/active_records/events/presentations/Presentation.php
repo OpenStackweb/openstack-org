@@ -267,12 +267,7 @@ class Presentation extends SummitEvent implements IPresentation
             }
         }
         if($type=='show') {
-            $page =  SummitAppSchedPage::getBy($this->Summit());
-            if ($page) {
-                if($absolute)
-                    return $page->AbsoluteLink() . 'events/' . $this->getIdentifier() . '/' . $this->getTitleForUrl();
-                return $page->RelativeLink(false) . 'events/' . $this->getIdentifier() . '/' . $this->getTitleForUrl();
-            }
+          return parent::getLink($type, $absolute);
         }
 
         return null;
