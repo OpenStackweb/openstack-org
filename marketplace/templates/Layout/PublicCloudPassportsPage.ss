@@ -9,7 +9,7 @@
             <h3>The OpenStack Public Cloud Passport</h3>
             <h5>Your wings to roam the cloud.</h5>
             <a id="view-providers" class="btn">
-                View Public providers <i class="fa fa-arrow-circle-down"></i>
+                View Public Cloud Providers <i class="fa fa-arrow-circle-down"></i>
             </a>
         </div>
     </div>
