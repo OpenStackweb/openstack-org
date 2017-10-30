@@ -3,10 +3,10 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from "reac
 import MarkerClusterer from "react-google-maps/lib/components/addons/MarkerClusterer";
 
 const MAP = {
-    defaultZoom: 3,
-    defaultCenter: { lat: 45, lng: -30 },
+    defaultZoom: 2,
+    defaultCenter: { lat: 11, lng: 39 },
     options: {
-        minZoom: 3,
+        minZoom: 1,
         maxZoom: 19
     }
 };
@@ -14,8 +14,8 @@ const MAP = {
 const GoogleMapWrapper = withGoogleMap((props) => {
     return  <GoogleMap
                 ref={props.onMapLoad}
-                defaultZoom={ MAP.defaultZoom }
-                defaultCenter={ MAP.defaultCenter }
+                defaultZoom={ props.defaultZoom }
+                defaultCenter={ props.defaultCenter }
                 onBoundsChanged={props.onMapChange}
             >
                 {props.showMarkers &&
@@ -57,7 +57,21 @@ export class GMap extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({ markers: nextProps.markers });
+        let new_markers = nextProps.markers;
+
+        this.setState({ markers: new_markers });
+
+        let old_markers_str = this.props.markers.map( m => m.id ).sort().join();
+        let new_markers_str = new_markers.map( m => m.id ).sort().join();
+
+        if (new_markers.length > 0 && old_markers_str != new_markers_str) {
+            let markerBounds = new google.maps.LatLngBounds();
+            for (let marker of new_markers) {
+                let marker_loc = new google.maps.LatLng(marker.lat, marker.lng);
+                markerBounds.extend(marker_loc);
+            }
+            this._mapComponent.fitBounds(markerBounds);
+        }
     }
 
     handleMapLoad(map) {
@@ -87,6 +101,8 @@ export class GMap extends React.Component {
             <GoogleMapWrapper
                 showMarkers={this.state.markers.length > 0}
                 markers={this.state.markers}
+                defaultZoom={ this.props.zoom ? this.props.zoom : MAP.defaultZoom }
+                defaultCenter={ this.props.center ? this.props.center : MAP.defaultCenter }
                 loadingElement={<div style={{ height: `100%` }} />}
                 containerElement={<div style={{ height: `400px` }} />}
                 mapElement={<div style={{ height: `100%` }} />}

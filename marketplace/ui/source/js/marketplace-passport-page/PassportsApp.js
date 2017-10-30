@@ -98,6 +98,8 @@ class PassportsApp extends React.Component {
                         <GMap
                             markers={locations}
                             onChangeCallback={ this.onMapChange }
+                            zoom={2}
+                            center={{lat: 32, lng: 14}}
                         />
                     </div>
                 </div>
