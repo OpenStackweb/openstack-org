@@ -365,4 +365,8 @@ footer{
   	margin-bottom: 2em;
   }
 
+  .text .btn {
+    margin-bottom: 40px;
+	}
+
 }
