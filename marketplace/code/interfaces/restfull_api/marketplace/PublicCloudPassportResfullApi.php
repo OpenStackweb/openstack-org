@@ -77,7 +77,7 @@ final class PublicCloudPassportResfullApi extends AbstractRestfulJsonApi
         try
         {
             $query_string = $request->getVars();
-            $page         = intval((isset($query_string['page'])) ? Convert::raw2sql($query_string['page']) : 0);
+            $page         = intval((isset($query_string['page'])) ? Convert::raw2sql($query_string['page']) : 1);
             $page_size    = intval((isset($query_string['page_size'])) ? Convert::raw2sql($query_string['page_size']) : 25);
 
             // zero mean showing all ...
@@ -130,7 +130,7 @@ final class PublicCloudPassportResfullApi extends AbstractRestfulJsonApi
 
             list($list, $total) = $this->repository->getAllPassports(
                 $start,
-                10,
+                PHP_INT_MAX,
                 null,
                 $search_term
             );
