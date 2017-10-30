@@ -379,7 +379,9 @@ SQL;
             INNER JOIN PresentationSpeaker S2 ON S2.ID = PS.PresentationSpeakerID
             INNER JOIN Affiliation A ON A.MemberID = S2.MemberID
             INNER JOIN Org ON Org.ID = A.OrganizationID
-            WHERE PS.PresentationSpeakerID = S.ID AND Org.Name LIKE '%{$term}%'
+            WHERE PS.PresentationSpeakerID = S.ID 
+            AND A.Current = 1
+            AND Org.Name LIKE '%{$term}%'
       )
 SQL;
 
