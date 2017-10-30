@@ -48,7 +48,7 @@ export default ({
 	return (
 		<div>
             <ListPanel
-                items={sortItems(items,group_by)}
+                items={items}
                 distribution={distribution}
                 title={getTitle(group_by)}
             />

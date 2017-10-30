@@ -131,7 +131,7 @@ final class PublicCloudPassportResfullApi extends AbstractRestfulJsonApi
             list($list, $total) = $this->repository->getAllPassports(
                 $start,
                 PHP_INT_MAX,
-                null,
+                'random',
                 $search_term
             );
 

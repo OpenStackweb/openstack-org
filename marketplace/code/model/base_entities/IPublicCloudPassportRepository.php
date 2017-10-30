@@ -40,7 +40,7 @@ interface IPublicCloudPassportRepository
     (
         $start         = 1,
         $limit         = 10,
-        $order         = null,
+        $order         = 'random',
         $search_term   = null
     );
 

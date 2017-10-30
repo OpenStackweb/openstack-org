@@ -97,7 +97,7 @@ SQL;
     (
         $start         = 1,
         $limit         = 10,
-        $order         = null,
+        $order         = 'random',
         $search_term   = null
     )
     {
@@ -105,6 +105,8 @@ SQL;
         if(!empty($order)){
             if(strstr($order, 'name') !== false)
                 $order_by = ' CompanyService.Name '. (strstr($order, '+') !== false ? 'ASC' : 'DESC');
+            if($order == 'random')
+                $order_by = 'RAND()';
         }
 
         $order_by = ' ORDER BY '.$order_by;

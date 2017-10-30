@@ -177,14 +177,19 @@
 
 
 .catalog .list .company .logo{
-	padding: 1.5em 1em;
-
+    padding: 1.5em 1em;
+    min-height: 100%;
+    position: relative;
 }
 .catalog .list .company .logo img{
-	
-	
-	text-align: center;
-	width: 100%
+    max-width: 80%;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-height: 90%;
 }
 
 .catalog .list .company .body {
