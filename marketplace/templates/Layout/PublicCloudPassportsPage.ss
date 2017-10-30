@@ -7,7 +7,7 @@
         </div>
         <div class="col-xs-8 text">
             <h3>The OpenStack Public Cloud Passport</h3>
-            <h5>Your wings to roam any cloud.</h5>
+            <h5>Your wings to roam the cloud.</h5>
             <a id="view-providers" class="btn">
                 View Public providers <i class="fa fa-arrow-circle-down"></i>
             </a>
@@ -23,7 +23,7 @@
         </div>
         <div class="col-xs-12 col-md-4">
             <h4><i class="fa fa-map-marker"></i>Locations Everywhere</h4>
-            <p>With more than 60 availability zones across XX cities, OpenStack providers collectively represent the broadest public cloud footprint, giving you freedom to deploy your applications across more geographies using the same open source infrastructure.</p>
+            <p>With more than 60 availability zones across more than 20 countries, OpenStack providers collectively represent the broadest public cloud footprint, giving you freedom to deploy your applications across more geographies using the same open source infrastructure.</p>
         </div>
         <div class="col-xs-12 col-md-4">
             <h4><i class="fa fa-cloud"></i>Secure Trial Programs</h4>
