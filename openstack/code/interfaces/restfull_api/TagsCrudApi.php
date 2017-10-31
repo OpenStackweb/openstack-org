@@ -69,7 +69,7 @@ class TagsCrudApi extends AbstractRestfulJsonApi
         'PUT merge'         => 'mergeTags',
         'PUT $TAG_ID!'      => 'updateTag',
         'POST '             => 'addTag',
-        'DELETE $TAG_ID!'   => 'deleteTag',
+        'DELETE '           => 'deleteTags',
     );
 
     /**
@@ -79,7 +79,7 @@ class TagsCrudApi extends AbstractRestfulJsonApi
         'getTags',
         'updateTag',
         'addTag',
-        'deleteTag',
+        'deleteTags',
         'mergeTags',
     );
 
@@ -180,11 +180,12 @@ class TagsCrudApi extends AbstractRestfulJsonApi
      * @param SS_HTTPRequest $request
      * @return SS_HTTPResponse
      */
-    public function deleteTag(SS_HTTPRequest $request){
-        $tag_id       = $request->param('TAG_ID');
+    public function deleteTags(SS_HTTPRequest $request){
+        $vars      = $this->getJsonRequest();
+        $tag_ids   = $vars['tag_ids'];
 
         try{
-            $this->manager->deleteTag($tag_id);
+            $this->manager->deleteTags($tag_ids);
             return $this->getTags($request);
         }
         catch(Exception $ex)

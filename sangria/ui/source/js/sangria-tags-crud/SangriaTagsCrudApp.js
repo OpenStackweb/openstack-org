@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchAll, saveItem, deleteItem, mergeItems } from './actions';
+import { fetchAll, saveItem, deleteItems, mergeItems } from './actions';
 import Message from "~core-components/message";
+import Confirm from "~core-components/confirm";
 import { AjaxLoader } from '~core-components/ajaxloader';
 import {
     Modal,
@@ -20,6 +21,7 @@ class SangriaTagsCrudApp extends React.Component
         this.state = {
             loading: true,
             modalOpen: false,
+            confirmOpen: false,
             selected_tags: [],
             search: '',
             edit_tag_id: 0,
@@ -32,6 +34,7 @@ class SangriaTagsCrudApp extends React.Component
         this.onTagEdit = this.onTagEdit.bind(this);
         this.onMergeEdit = this.onMergeEdit.bind(this);
         this.onMerge = this.onMerge.bind(this);
+        this.onDeleteMulti = this.onDeleteMulti.bind(this);
         this.onDelete = this.onDelete.bind(this);
     }
 
@@ -75,7 +78,8 @@ class SangriaTagsCrudApp extends React.Component
 
     onSearchTyped(e) {
         this.setState({
-            search: e.target.value
+            search: e.target.value,
+            selected_tags: []
         });
 
         this.props.fetchItems(e.target.value);
@@ -83,7 +87,8 @@ class SangriaTagsCrudApp extends React.Component
 
     onClear(e) {
         this.setState({
-            search: ''
+            search: '',
+            selected_tags: []
         });
 
         this.props.fetchItems('');
@@ -106,7 +111,8 @@ class SangriaTagsCrudApp extends React.Component
 
         this.setState({
             merge_tag: '',
-            selected_tags: []
+            selected_tags: [],
+            confirmOpen: false
         });
 
     };
@@ -121,13 +127,33 @@ class SangriaTagsCrudApp extends React.Component
         });
     };
 
+    openConfirm(text, handle) {
+        this.setState({
+            confirmOpen: true,
+            confirmText: text,
+            confirmHandle: handle
+        });
+    };
+
     onDelete() {
-        this.props.deleteTag(this.state.edit_tag_id);
+        this.props.deleteTags([this.state.edit_tag_id]);
 
         this.setState({
             modalOpen: false,
+            confirmOpen: false,
             edit_tag_id: 0,
             edit_tag: '',
+            selected_tags: [],
+            search: ''
+        });
+    };
+
+    onDeleteMulti() {
+        this.props.deleteTags(this.state.selected_tags);
+
+        this.setState({
+            confirmOpen: false,
+            selected_tags: [],
             search: ''
         });
     };
@@ -158,7 +184,10 @@ class SangriaTagsCrudApp extends React.Component
                     <ModalFooter>
                         { this.state.edit_tag_id != 0 &&
                         <div>
-                            <button className='btn btn-danger btn-sm pull-left' onClick={this.onDelete}> Delete Tag </button>
+                            <button
+                                className='btn btn-danger btn-sm pull-left'
+                                onClick={() => this.openConfirm('Are you sure you want to delete this tag?', this.onDelete )}
+                            > Delete Tag </button>
                             <button className='btn btn-default btn-sm pull-left' onClick={() => this.onSave(true)}> Save & Split </button>
                         </div>
                         }
@@ -170,25 +199,36 @@ class SangriaTagsCrudApp extends React.Component
                     </ModalFooter>
                 </Modal>
 
+                <Confirm open={this.state.confirmOpen} text={this.state.confirmText} onConfirm={this.state.confirmHandle} />
+
                 <div className="row">
-                    <div className="col-md-4">
+                    <div className="col-md-4 form-inline">
                         <input
-                            className="form-control"
+                            className="form-control search-input"
                             ref={(input) => { this.searchInput = input; }}
                             value={this.state.search}
                             onChange={this.onSearchTyped}
                         />
-                    </div>
-                    <div className="col-md-2">
                         <button className="btn btn-default" onClick={this.onClear}>Clear</button>
                     </div>
                     <div className="col-md-2">
                         <button className="btn btn-primary" onClick={() => this.openModal(0, '')}>Add New</button>
                     </div>
                     {this.state.selected_tags.length > 1 &&
-                    <div className="col-md-4 form-inline">
-                        <input value={this.state.merge_tag} onChange={this.onMergeEdit} className="form-control merge-input"/>
-                        <button className="btn btn-success" onClick={this.onMerge}>Merge</button>
+                    <div className="actions-container">
+                        <div className="col-md-4 form-inline">
+                            <input value={this.state.merge_tag} onChange={this.onMergeEdit} className="form-control merge-input"/>
+                            <button
+                                className="btn btn-success"
+                                onClick={() => this.openConfirm('Are you sure you want to merge selected tags?', this.onMerge )}
+                            > Merge </button>
+                        </div>
+                        <div className="col-md-2">
+                            <button
+                                className="btn btn-danger"
+                                onClick={() => this.openConfirm('Are you sure you want to delete selected tags?', this.onDeleteMulti )}
+                            > Delete </button>
+                        </div>
                     </div>
                     }
                 </div>
@@ -237,8 +277,8 @@ export default connect (
         saveTag (tag_id, tag, search, is_split) {
             return dispatch(saveItem({tag_id, tag, search, is_split}));
         },
-        deleteTag (tag_id) {
-            return dispatch(deleteItem({tag_id}));
+        deleteTags (tag_ids) {
+            return dispatch(deleteItems({tag_ids}));
         },
         mergeTags (search, selected_tags, merge_tag) {
             return dispatch(mergeItems({search, selected_tags, merge_tag}));

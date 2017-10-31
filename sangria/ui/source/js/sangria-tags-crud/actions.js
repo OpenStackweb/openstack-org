@@ -45,11 +45,11 @@ export const saveItem = (params) => dispatch => {
     }
 }
 
-export const deleteItem = (params) => dispatch => {
+export const deleteItems = (params) => dispatch => {
     deleteRequest(
         createAction(LOADING),
         createAction(ITEM_DELETED),
-        `api/v1/tags/${params.tag_id}`,
+        `api/v1/tags`,
         params
     )(params)(dispatch);
 }

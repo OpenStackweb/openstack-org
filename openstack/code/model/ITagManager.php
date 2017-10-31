@@ -28,10 +28,10 @@ interface ITagManager
     public function updateTag($tag_val, $tag_id);
 
     /**
-     * @param Int $tag_id
+     * @param Int[] $tag_ids
      * @return Bool
      */
-    public function deleteTag($tag_id);
+    public function deleteTags($tag_ids);
 
     /**
      * @param String $merge_tag

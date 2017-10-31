@@ -72,13 +72,15 @@ final class TagManager implements ITagManager
      * @param Int $tag_id
      * @return Bool
      */
-    public function deleteTag($tag_id){
-        return $this->tx_manager->transaction(function () use ($tag_id) {
-            $tag = Tag::get()->byID($tag_id);
-            if (!$tag)
-                throw new NotFoundEntityException('Tag');
+    public function deleteTags($tag_ids){
+        return $this->tx_manager->transaction(function () use ($tag_ids) {
+            foreach ($tag_ids as $tag_id) {
+                $tag = Tag::get()->byID($tag_id);
+                if (!$tag)
+                    throw new NotFoundEntityException('Tag');
 
-            $tag->delete();
+                $tag->delete();
+            }
 
             return true;
         });
