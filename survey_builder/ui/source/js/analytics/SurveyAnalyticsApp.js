@@ -46,7 +46,6 @@ class SurveyAnalyticsApp extends React.Component {
     }
 
     onSectionSelected(event){
-        console.log('onSectionSelected');
         let section      = event.target;
         let sectionId    = section.getAttribute('data-section-id');
         let sectionIndex = section.getAttribute('data-section-idx');

@@ -74,8 +74,8 @@ class SurveyReportRestfulApi extends AbstractRestfulJsonApi
             $survey_template = SurveyTemplate::get_by_id('SurveyTemplate',$template_id);
             if(is_null($survey_template)) return $this->httpError(404);
 
-            $section = $survey_template->Report()->Sections()->filter('ID',$section_id)->first();
-
+            $section = $survey_template->Report()->Sections()->filter('ID', $section_id)->first();
+            if(is_null($section)) return $this->httpError(404);
             return $this->ok($section->mapSection($filters));
         }
         catch(Exception $ex)

@@ -23,8 +23,8 @@ class SurveyAnalyticsSections extends React.Component{
                 <div className="section_container">
                     { sections.map((section, index) => (
                         <div key={index} onClick={onSectionSelected} className={"section" + ((index == activeSectionIndex) ? " active": "") } data-section-id={ section.ID } data-section-idx={index}>
-                            <span>{ section.Name }</span>
-                            <span><i className="fa fa-chevron-circle-right"></i></span>
+                            <span data-section-id={ section.ID } data-section-idx={index}>{ section.Name }</span>
+                            <span data-section-id={ section.ID } data-section-idx={index}><i className="fa fa-chevron-circle-right"></i></span>
                         </div>
                     ))}
                 </div>
