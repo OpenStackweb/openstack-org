@@ -20,8 +20,12 @@
                 </div>
                 <div class="col-lg-4 col-sm-4">
                     <div class="download-container">
-                        <div class="download-text"><em>The Crossroads of Cloud and HPC: OpenStack for Scientific Research</em></div>
-                        <a href="#" class="download-btn" data-toggle="modal" data-target="#downloadModal"><i class="fa fa-arrow-circle-down"></i> Read the book now</a>
+                        <div class="download-text">
+                            <em>Version 2 of The Crossroads of Cloud and HPC: OpenStack for Scientific Research</em>
+                        </div>
+                        <a href="#" class="download-btn" data-toggle="modal" data-target="#downloadModal">
+                            <i class="fa fa-arrow-circle-down"></i>  Read the enhanced book now
+                        </a>
                     </div>
                 </div>
             </div>
@@ -52,10 +56,16 @@
             <div class="row">
                 <div class="col-sm-10 col-sm-push-1">
                     <p>
-                        Research and science disciplines are some of the earliest and most prevalent use cases for OpenStack clouds. High-performance computing (HPC) and high-throughput computing (HTC) workloads require massive scaling and cluster networking, access to large volumes of data, and workload and infrastructure manageability. OpenStack software supports these needs today and the development community is rapidly expanding services to fill gaps and scale for exponential future demands.
+                        Research and science disciplines are some of the earliest and most prevalent use cases for OpenStack clouds. OpenStack provides compelling solutions today for the challenges of delivering flexible infrastructure for high-performance computing (HPC) and high-throughput computing (HTC), and the development community is rapidly expanding services to meet exponential future demands.
                     </p>
                     <p>
-                        By managing resources as an OpenStack private cloud, researchers are able to work in environments tailored to their requirements. The dynamic, automated nature of software-defined infrastructure cuts away time wasted on the distractions of setup, and enables researchers to maximize the time they spend on research itself. Explore how to bring the benefits of cloud to HPC workloads in a book, “OpenStack for Scientific Research”, commissioned by the University of Cambridge and supported by the OpenStack Foundation.
+                        OpenStack progress is driven by the astonishing pace of new research projects in radio telemetry, bioinformatics, astronomy, cancer and genome research, and more. One such project, the multinational Square Kilometre Array (SKA) radio telescope, will probe deeper into space and further back in time, to unlock the secrets of phenomena such as pulsars, gravity, and the cosmic dawn.
+                    </p>
+                    <p>
+                        Evolving research cloud federations span geographies and organizations offering secure, tailored, self-service compute power, high-volume data access and collaboration to researchers around the world.
+                    </p>
+                    <p>
+                        Explore how OpenStack is bringing the benefits of cloud and federation to HPC workloads in the second edition of “OpenStack for Scientific Research”.
                     </p>
                 </div>
             </div>
@@ -270,13 +280,13 @@
             </p>
             <ul class="booklets-list">
                 <li>
-                    <a href="//openstack.org/assets/science/OpenStack-CloudandHPC6x9Booklet-v4-online.pdf " taget="_blank">Read the book now</a>
+                    <a href="{$BookPDF.Link}" taget="_blank">Read the book now</a>
                 </li>
                 <li>
-                    <a href="//openstack.org/assets/science/OpenStack-CloudandHPC-6x9Book-v4-print.pdf" taget="_blank">Print (6” W x 9”H format)</a>
+                    <a href="{$PrintPDF.Link}" taget="_blank">Print (6” W x 9”H format)</a>
                 </li>
                 <li>
-                    <a href="https://www.amazon.com/dp/1539673987/" taget="_blank">Order a paperback from Amazon</a>
+                    <a href="{$AmazonLink}" taget="_blank">Order a paperback from Amazon</a>
                 </li>
             </ul>
             <div class="tip">

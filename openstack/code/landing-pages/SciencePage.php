@@ -12,8 +12,29 @@
  * limitations under the License.
  **/
 class SciencePage extends Page {
-   static $db = array(
+    static $db = array(
+        'AmazonLink'    => 'Varchar(255)'
 	);
+
+    static $has_one = array(
+        'BookPDF'   => 'File',
+        'PrintPDF'  => 'File'
+    );
+
+    function getCMSFields()
+    {
+        $fields = parent::getCMSFields();
+        // remove unneeded fields
+        $fields->removeFieldFromTab("Root.Main", "Content");
+
+        $fields->addFieldToTab("Root.Main", $book = new UploadField('BookPDF','Book PDF'));
+        $book->setFolderName('science');
+        $fields->addFieldToTab("Root.Main", $print = new UploadField('PrintPDF','Print PDF'));
+        $print->setFolderName('science');
+        $fields->addFieldToTab("Root.Main", new TextField('AmazonLink','Amazon Link'));
+
+        return $fields;
+    }
 }
  
 class SciencePage_Controller extends Page_Controller {
