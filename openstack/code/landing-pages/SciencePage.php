@@ -29,8 +29,10 @@ class SciencePage extends Page {
 
         $fields->addFieldToTab("Root.Main", $book = new UploadField('BookPDF','Book PDF'));
         $book->setFolderName('science');
+        $book->getValidator()->setAllowedMaxFileSize(40*1024*1024);
         $fields->addFieldToTab("Root.Main", $print = new UploadField('PrintPDF','Print PDF'));
         $print->setFolderName('science');
+        $print->getValidator()->setAllowedMaxFileSize(40*1024*1024);
         $fields->addFieldToTab("Root.Main", new TextField('AmazonLink','Amazon Link'));
 
         return $fields;
