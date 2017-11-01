@@ -88,30 +88,28 @@ jQuery(document).ready(function($) {
         //calendars
         $training_form.find('.dateSelector input').each(function(index) {
 
-            if($(this).hasClass('start')){
-                next_input = $(this).closest('div').parent().next('div').find('input');
-                limit = next_input.val();
-            }else if($(this).hasClass('end')){
-                prev_input = $(this).closest('div').parent().prev('div').find('input');
-                limit = prev_input.val();
-            }
-
             $(this).datepicker({dateFormat : 'yy-mm-dd', buttonImage : '/sapphire/images/calendar-icon.gif', buttonImageOnly : true,
                 onClose: function( selectedDate ) {
                     if($(this).hasClass('start')){
+                        var next_input = $(this).closest('div').parent().next('div').find('input');
                         next_input.datepicker( "option", "minDate", selectedDate );
+                        next_input.datepicker( "refresh" );
                     }else if($(this).hasClass('end')){
+                        var prev_input = $(this).closest('div').parent().prev('div').find('input');
                         prev_input.datepicker( "option", "maxDate", selectedDate );
+                        prev_input.datepicker( "refresh" );
                     }
                 }
             });
 
             if($(this).hasClass('start')){
+                limit = $(this).closest('div').parent().next('div').find('input').val();
                 $(this).datepicker('option', 'maxDate',limit);
-            }
-            else if($(this).hasClass('end')){
+            }else if($(this).hasClass('end')){
+                limit = $(this).closest('div').parent().prev('div').find('input').val();
                 $(this).datepicker('option', 'minDate',limit);
             }
+
         });
 
         $('.scheduleRow',$training_form).each(function(){
