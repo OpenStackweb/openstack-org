@@ -65,7 +65,7 @@
                         Evolving research cloud federations span geographies and organizations offering secure, tailored, self-service compute power, high-volume data access and collaboration to researchers around the world.
                     </p>
                     <p>
-                        Explore how OpenStack is bringing the benefits of cloud and federation to HPC workloads in the second edition of “OpenStack for Scientific Research”.
+                        Explore how OpenStack is bringing the benefits of cloud and federation to HPC workloads in the second edition of “OpenStack for Scientific Research.”
                     </p>
                 </div>
             </div>
