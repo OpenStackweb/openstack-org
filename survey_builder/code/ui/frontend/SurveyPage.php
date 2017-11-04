@@ -44,13 +44,12 @@ class SurveyPage extends Page
 
 class SurveyPage_Controller extends Page_Controller
 {
-    static $allowed_actions_without_auth = array
-    (
+    static $allowed_actions_without_auth = [
         'LandingPage',
         'RegisterForm',
         'MemberStart',
         'StartSurvey'
-    );
+    ];
 
     /**
      * @var IMemberManager
@@ -73,8 +72,7 @@ class SurveyPage_Controller extends Page_Controller
         $this->member_manager = $manager;
     }
 
-    static $allowed_actions = array
-    (
+    static $allowed_actions = [
         'LandingPage',
         'RenderSurvey',
         'SurveyStepForm',
@@ -87,10 +85,9 @@ class SurveyPage_Controller extends Page_Controller
         'AddEntity',
         'EditEntity',
         'DeleteEntity',
-    );
+    ];
 
-    static $url_handlers = array
-    (
+    static $url_handlers = [
         'landing' => 'LandingPage',
         '$STEP_SLUG/add-entity' => 'AddEntity',
         '$STEP_SLUG/skip-step' => 'SkipStep',
@@ -102,7 +99,7 @@ class SurveyPage_Controller extends Page_Controller
         'GET  SurveyDynamicEntityStepForm' => 'SurveyDynamicEntityStepForm',
         'GET  $STEP_SLUG' => 'RenderSurvey',
         'POST $Action//$ID/$OtherID' => 'handleAction',
-    );
+    ];
 
     /**
      * @var ISurvey
@@ -245,8 +242,24 @@ class SurveyPage_Controller extends Page_Controller
      */
     public function LandingPage()
     {
-        return $this->customise(array('BackURL' => $this->request->requestVar('BackURL')))->renderWith(array('SurveyPage_LandingPage', 'Page'));
+        return $this->customise(['BackURL' => $this->request->requestVar('BackURL')])->renderWith(['SurveyPage_LandingPage', 'Page']);
     }
+
+    public function HasOnGoingSurvey(){
+        $current_survey = $this->getCurrentSurveyInstance();
+        return !is_null($current_survey);
+    }
+
+    public function getSurveyLink(){
+        if(!$this->HasOnGoingSurvey()){
+            return null;
+        }
+        $current_survey = $this->getCurrentSurveyInstance();
+        return Controller::join_links(
+            $this->Link() , $current_survey->currentStep()->template()->title()
+        );
+    }
+
 
     /**
      * @param $step_name
@@ -288,7 +301,9 @@ class SurveyPage_Controller extends Page_Controller
 
             if(empty($step_name))
             {
-                return $this->redirect($this->Link() . $current_survey->currentStep()->template()->title());
+                return $this->redirect(
+                    $this->Link("landing")
+                );
             }
 
             $this->survey_manager->registerCurrentStep($this->current_survey, $step_name);

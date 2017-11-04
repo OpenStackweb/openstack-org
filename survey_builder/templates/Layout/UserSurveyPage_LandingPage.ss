@@ -18,7 +18,7 @@
 <div class="container">
 
     
-    <h1>$_T("survey_ui", "Get Started")</h1>
+    <h1>$_T("survey_ui", "Welcome to the OpenStack User Survey")</h1>
     <% if not $Top.SurveyTemplate.isVoid && not $CurrentMember %>
         <div class="row">
             <div class="col-lg-6">
@@ -44,7 +44,11 @@
     <% else %>
      <div class="row">
             <div class="col-lg-12" style="text-align: center">
-                <a href="$Top.Link" title="Start Survey!" class="roundedButton">$_T("survey_ui", "Start Survey!")</a>
+                <% if HasOnGoingSurvey %>
+                    <a href="$Top.SurveyLink" title="Continue Survey" class="roundedButton">$_T("survey_ui", "Continue Survey!")</a>
+                <% else %>
+                    <a href="$Top.SurveyLink" title="Start Survey!" class="roundedButton">$_T("survey_ui", "Start Survey!")</a>
+                <% end_if %>
             </div>
         </div>
     <% end_if %>

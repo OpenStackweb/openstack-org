@@ -491,3 +491,11 @@ msgid ""
 "<br>Find other OpenStack case studies, tutorials and news from relevant open source communities: "
 "<a href=\"http://superuser.openstack.org\" target=\"_blank\">superuser.openstack.org</a></p>"
 msgstr ""
+
+#: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:21
+msgid "Welcome to the OpenStack User Survey"
+msgstr ""
+
+#: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:48
+msgid "Continue Survey"
+msgstr ""
