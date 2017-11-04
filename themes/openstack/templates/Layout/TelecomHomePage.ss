@@ -12,9 +12,9 @@
                     <div class="col-lg-10 col-lg-push-1 col-md-10 col-md-push-1 col-sm-12">
                         <div class="intro-message">
                             <h1>
-                                86% of global telecoms report OpenStack important to their success</h1>
+                                96% of CSPs implementing NFV strategies say OpenStack is essential to their success</h1>
                             <p>
-                                Network Functions Virtualization, Internet of Things and 5G emerge as leading use cases. 
+                                IoT/edge computing emerges as future use case among two-thirds of respondents.
                             </p>
                         </div>
                     </div>
@@ -27,14 +27,16 @@
     <div class="appdev-download-row nfv">
         <div class="container">
             <div class="row">
-                <div class="col-md-8 col-sm-7">
+                <div class="col-md-12 col-sm-7">
                     <p>
-                        A survey recently conducted by Heavy Reading reveals that 85.8 percent of telecom respondents consider OpenStack to be essential or important to their success. The survey, commissioned by the OpenStack Foundation, explores current usage and adoption plans of communications service providers (CSPs).
-                    </p>
-                    <p>
-                        More than 60 percent of telecoms are already using or currently testing new use cases with OpenStack for Network Functions Virtualization (NFV), citing benefits such as offering new services more quickly, faster data center virtualization, and lower operating and software costs. Telecoms also identified Internet of Things (40 percent in production) and 5G (30 percent in production) as major use cases.
-                    </p>
-                    <p>
+                       Heavy Reading research consistently shows that OpenStack is playing an important role  in CSPs’ transformation programs. They recently did a survey for the OpenStack Foundation to get a better understanding of CSPs’ experiences with OpenStack and what use cases will drive usage in the future.</p>
+
+
+                    <p>84% of CSPs say that OpenStack is essential or important to their company’s success. CSPs who are already implementing their NFV and cloud strategies are even more positive, with 96% and 85% respectively saying it is essential or important.  More CSPs have experience with open source software than in last year, with 44% saying they have “a lot” of experience with it, up from 31% last year. Engagement levels with OpenStack also grew, with 84% saying they are actively engaged with or following the project, up from 74% from last year, and the percent contributing directly to the project grew from 17% to 21%. </p>
+
+
+                    <p>Currently, the most common use cases for OpenStack are to manage private cloud, with 37% of CSPs doing so and as the basis for NFV, with 35% of CSPs doing so.  Nearly two-thirds say that they plan to use OpenStack for IoT/edge computing. Edge computing is emerging as an important use case that will drive new deployments and new architectures. CSPs see OpenStack’s open source and modular architecture as the main reasons it will be suitable for edge deployments. More broadly, the most frequently cited benefit of OpenStack for CSPs is that it helps them offer services more quickly.</p>
+                   <!--  <p>
                         Watch the webinar hosted by Heavy Reading senior analyst Roz Roseboro for a deep dive into the results and additional analysis on key findings from the survey.
                     </p>
                 </div>
@@ -43,7 +45,7 @@
                     <a href="https://openstack.webex.com/openstack/lsr.php?RCID=ec304dc157942e4ef39213f35dd43742" class="container-download-btn">WATCH THE WEBINAR <i class="fa fa-chevron-right"></i></a>
                     <p style="margin-top: 10px;">
                         <a style="color:white;" href="//openstack.org/assets/pdf-downloads/OpenStack-survey-results-public-presentation.pdf"><em>Download the Webinar Slides</em></a>
-                    </p>
+                    </p> -->
                 </div>
             </div>
         </div>
