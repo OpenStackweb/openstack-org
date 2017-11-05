@@ -30,9 +30,26 @@ class SurveyAnalyticsApp extends React.Component {
         this.onPdfButtonClicked = this.onPdfButtonClicked.bind(this)
     }
 
-    componentDidMount() {
+
+    getReportData(){
+        let templateId = this.selectReportTemplates.value;
+        this.props.getReport(templateId);
+    }
+
+    getReportTemplateData(){
         let templateId = this.selectReportTemplates.value;
         this.props.getSurveyReportTemplate(templateId);
+    }
+
+    componentDidMount() {
+        this.getReportTemplateData();
+    }
+
+    componentDidUpdate(prevProps, prevState){
+        if(prevProps.activeSectionId != this.props.activeSectionId
+          || prevProps.selectedFilters != this.props.selectedFilters){
+            this.getReportData();
+        }
     }
 
     onFilterSelected(event){
@@ -40,9 +57,7 @@ class SurveyAnalyticsApp extends React.Component {
         let filterValue = ddl.value;
         let questionId  = ddl.getAttribute('data-question-id');
         console.log(`filterValue ${filterValue} - questionId ${questionId} selected`);
-        this.props.selectedFilter({questionId: questionId, value:filterValue})
-        let templateId = this.selectReportTemplates.value;
-        this.props.getReport(templateId);
+        this.props.selectedFilter({questionId: questionId, value:filterValue});
     }
 
     onSectionSelected(event){
@@ -51,8 +66,6 @@ class SurveyAnalyticsApp extends React.Component {
         let sectionIndex = section.getAttribute('data-section-idx');
         console.log(`selected section id ${sectionId}`);
         this.props.onSelectedSection({sectionId, sectionIndex});
-        let templateId = this.selectReportTemplates.value;
-        this.props.getReport(templateId);
     }
 
     onPdfButtonClicked(event){
@@ -108,8 +121,6 @@ class SurveyAnalyticsApp extends React.Component {
     clearFilters(event){
         console.log('clear filters');
         this.props.clearFilters();
-        let templateId = this.selectReportTemplates.value;
-        this.props.getReport(templateId);
     }
 
     onChangeTemplate(event){

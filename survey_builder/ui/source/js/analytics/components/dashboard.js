@@ -48,9 +48,9 @@ class SurveyAnalyticsDashboard extends React.Component {
 
         if (report) {
             for (var key in report.Questions) {
-                var values =  report.Questions[key].Values;
+                var values     =  report.Questions[key].Values;
                 var graph_type = report.Questions[key].Graph;
-                if ( values && Object.keys(values).length) {
+                if ( values && Object.keys(values).length && $('#graph_'+report.Questions[key].ID).length > 0) {
                     this.renderGraph('graph_'+report.Questions[key].ID, values, graph_type);
                 }
             }
