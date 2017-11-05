@@ -260,6 +260,9 @@ class SurveyPage_Controller extends Page_Controller
         );
     }
 
+    public function getHomeLink(){
+        return $this->Link("landing");
+    }
 
     /**
      * @param $step_name

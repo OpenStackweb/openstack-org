@@ -272,6 +272,14 @@ ul.survey-steps li a.completed {
     color: #698296;
 }
 
+.home-tab a {
+    padding: 8px !important;
+}
+
+.home-tab a i {
+    font-size: 30px;
+}
+
 form hr {
 	margin-top: 15px;
 	margin-bottom: 20px;
@@ -1104,4 +1112,3 @@ div.field.checkbox input {
 #language-selector{
     padding: 10px;
 }
-
