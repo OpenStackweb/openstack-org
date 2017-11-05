@@ -104,55 +104,54 @@
         <div class="col-lg-12">
             <h3>$_T("survey_ui", "See the OpenStack community’s opinions, adoption and technology choices")</h3>
             <p>
-                $_T("survey_ui", "Read more from the ninth survey of OpenStack users since April 2013, with a goal of better understanding user perspectives, organizational profiles, use cases, and technology choices across the community’s deployments. This survey offers insights from more than 1,300 users, representing 44% more deployments and 22% more organizations than ever before.")
+                $_T("survey_ui", "Read more from the tenth survey of OpenStack users since April 2013, with a goal of better understanding user perspectives, organizational profiles, use cases, and technology choices across the community’s deployments. This cycle, the survey was translated into seven additional languages and includes analysis comparisons between both the previous cycle and year over year.")
             </p>
             <p>
-                <a class="roundedButton" href="https://www.openstack.org/assets/survey/April2017SurveyReport.pdf" target="_blank">$_T("survey_ui", "Read the April 2017 report")</a>
+                <a class="roundedButton" href="https://www.openstack.org/assets/survey/OpenStack-User-Survey-Nov17.pdf" target="_blank">$_T("survey_ui", "Read the November 2017 report")</a>
             </p>
-            <h3>$_T("survey_ui", "Be your own data scientist")</h3>
+            <h3><a href=\"%s\">$_T("survey_ui", "Analyze the User Survey")</a></h3>
             <p>
                 $_T("survey_ui", "Uncover your own findings by digging into the User Survey data from the past year with a <a href=\"%s\">new analysis tool</a> available to the OpenStack community. Apply multiple filters to virtually every quantitative question from the user survey.", /analytics)
             </p>
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-6">
-            <h3>$_T("survey_ui", "Watch a quick video overview")</h3>
+        <div class="col-sm-10">
+            <!-- <h3>$_T("survey_ui", "Watch a quick video overview")</h3>
             <ul class="list-unstyled">
                 <li><a href="https://www.youtube.com/watch?v=1yerazN3ZHc&feature=youtu.be" target="_blank">$_T("survey_ui", "April 2017 full report")</a></li>
                 <li><a href="https://www.youtube.com/watch?v=m9p8NUMs_PM&feature=youtu.be" target="_blank">$_T("survey_ui", "October 2016 highlights report")</a></li>
                 <li><a href="http://www.amazon.com/dp/1532707053/" target="_blank">$_T("survey_ui", "Order a print copy of the April 2016 full report")</a></li>
                 <li><a href="https://www.youtube.com/watch?v=lmu5r7BCY_U&feature=youtu.be" target="_blank">$_T("survey_ui", "April 2016 full report")</a></li>
-            </ul>
-            <h3>$_T("survey_ui", "See prior surveys")</h3>
+            </ul> -->
+            <h3>$_T("survey_ui", "See prior survey reports")</h3>
             <p>
                 $_T("survey_ui", "Learn more about past User Survey data to see how OpenStack is growing and maturing.")
             </p>
             <ul class="list-unstyled">
+                <li><a href="https://www.openstack.org/assets/survey/April2017SurveyReport.pdf">$_T("survey_ui", "April 2017 full report")</a></li>
                 <li><a href="https://www.openstack.org/assets/survey/October2016SurveyReport.pdf">$_T("survey_ui", "October 2016 highlights report")</a></li>
                 <li><a href="https://www.openstack.org/assets/survey/April-2016-User-Survey-Report.pdf">$_T("survey_ui", "April 2016 full report")</a></li>
                 <li>
-                    <a href="http://www.openstack.org/assets/survey/Public-User-Survey-Report.pdf">$_T("survey_ui", "October 2015 Full report")</a>
+                    <a href="http://www.openstack.org/assets/survey/Public-User-Survey-Report.pdf">$_T("survey_ui", "October 2015 full report")</a>
                 <li>
                     <a href="http://superuser.openstack.org/articles/user-survey-identifies-leading-industries-and-business-drivers-for-openstack-adoption"
-                       target="_blank">$_T("survey_ui", "May 2015 Demographics")</a></li>
+                       target="_blank">$_T("survey_ui", "May 2015 demographics")</a></li>
                 <li>
                     <a href="http://superuser.openstack.org/articles/user-survey-identifies-leading-industries-and-business-drivers-for-openstack-adoption"
-                       target="_blank">$_T("survey_ui", "May 2015 Business drivers")</a></li>
+                       target="_blank">$_T("survey_ui", "May 2015 business drivers")</a></li>
                 <li>
                     <a href="http://superuser.openstack.org/articles/openstack-users-share-how-their-deployments-stack-up"
-                       target="_blank">$_T("survey_ui", "May 2015 Deployments")</a></li>
+                       target="_blank">$_T("survey_ui", "May 2015 deployments")</a></li>
                 <li><a href="http://superuser.openstack.org/articles/openstack-user-survey-insights-november-2014"
-                       target="_blank">$_T("survey_ui", "November 2014 Full report")</a></li>
+                       target="_blank">$_T("survey_ui", "November 2014 full report")</a></li>
             </ul>
             <h3>$_T("survey_ui", "Order the User Survey as a printed book")</h3>
             <ul class="list-unstyled">
-                <li>$_T("survey_ui", "April 2017 full report (coming soon)")</li>
+                <li><a href="https://www.amazon.com/OpenStack-User-Survey-April-2017/dp/1545370052/" target="_blank">$_T("survey_ui", "April 2017 full report")</a></li>
                 <li><a href="https://www.amazon.com/dp/1532707053/" target="_blank">$_T("survey_ui", "April 2016 full report")</a></li>
             </ul>
-        </div>
-        <div class="col-sm-4" style="padding-top:15px;">
-            <a href="https://www.youtube.com/watch?v=1yerazN3ZHc&feature=youtu.be" target="_blank"><img src="https://www.openstack.org/assets/survey/usersurvey-video.jpg"></a>
+            <p>&nbsp;</p>
         </div>
     </div>
     <script>

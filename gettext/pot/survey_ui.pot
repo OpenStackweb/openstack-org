@@ -164,7 +164,7 @@ msgid "OpenStack users share their opinions and deployment choices to inform the
 msgstr ""
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:45
-msgid "Read more from the sixth survey of OpenStack users since April 2013, with a goal of better understanding attitudes, organizational profiles, use cases, and technology choices across the community’s various deployment stages and sizes."
+msgid "Read more from the tenth survey of OpenStack users since April 2013, with a goal of better understanding user perspectives, organizational profiles, use cases, and technology choices across the community’s deployments. This cycle, the survey was translated into seven additional languages and includes analysis comparisons between both the previous cycle and year over year."
 msgstr ""
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:50
@@ -180,19 +180,19 @@ msgid "Learn more about past User Survey data to see how OpenStack is growing an
 msgstr ""
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:67, survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:107
-msgid "May 2015 Demographics"
+msgid "May 2015 demographics"
 msgstr ""
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:70, survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:110
-msgid "May 2015 Business drivers"
+msgid "May 2015 business drivers"
 msgstr ""
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:73, survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:114
-msgid "May 2015 Deployments"
+msgid "May 2015 deployments"
 msgstr ""
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:75, survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:115
-msgid "November 2014 Full report"
+msgid "November 2014 full report"
 msgstr ""
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:104
@@ -232,11 +232,11 @@ msgid "Download the October 2016 highlights report"
 msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:78
-msgid "Download the full April 2016 Report"
+msgid "Download the full April 2016 report"
 msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:80
-msgid "Be your own data scientist"
+msgid "Analyze the User Survey"
 msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:82
@@ -269,7 +269,7 @@ msgid "Slide deck of the April 2016 full report"
 msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:104
-msgid "October 2015 Full report"
+msgid "October 2015 full report"
 msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:126
@@ -445,7 +445,7 @@ msgid "Read more from the ninth survey of OpenStack users since April 2013, with
 msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:46
-msgid "Read the April 2017 report"
+msgid "Read the November 2017 report"
 msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:56
@@ -469,7 +469,7 @@ msgid "Order the User Survey as a printed book"
 msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:86
-msgid "April 2017 full report (coming soon)"
+msgid "April 2017 full report"
 msgstr ""
 
 #: survey_builder/templates/Layout/SurveyPage_FinalLandingPage.ss:3
