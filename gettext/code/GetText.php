@@ -166,8 +166,8 @@ class GetText extends Object implements TemplateGlobalProvider
         foreach ($prioritisedLocales as $priority => $parsedLocales) {
             foreach($parsedLocales as $browserLocale) {
                 foreach (self::locales($domain) as $locale) {
-                    if (stripos(preg_replace('/_/', '-', $locale), $browserLocale) === 0) {
-                        return $locale;
+                    if (stripos(preg_replace('/_/', '-', array_keys($locale)[0]), $browserLocale) === 0) {
+                        return array_keys($locale)[0];
                     }
                 }
             }

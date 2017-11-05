@@ -17,6 +17,8 @@
  */
 class SurveyReport extends DataObject {
 
+    Const LanguageFilterId = PHP_INT_MAX;
+
     static $db = array
     (
         'Name' => 'Varchar(254)',
@@ -92,24 +94,39 @@ class SurveyReport extends DataObject {
 
     public function mapTemplate()
     {
-        $report_map = array();
-
-        $filters = array();
+        $report_map = [];
+        $filters    = [];
         foreach ($this->Filters()->sort('Order') as $filter) {
-            $options = array();
+            $options = [];
 
             if ($filter->Question()->Exists()) {
                 foreach ($filter->Question()->Values() as $option) {
-                    $options[] = array('id' => $option->ID, 'value' => $option->Value);
+                    $options[] = ['id' => $option->ID, 'value' => $option->Value];
                 }
             }
 
-            $filters[] = array(
+            $filters[] = [
                 'Label'    => $filter->Label,
                 'Question' => $filter->Question()->ID,
                 'Options'  => $options,
-            );
+            ];
         }
+
+        // add fixed lang filter
+        $languages_options = [];
+        foreach(GetText::locales() as $lang){
+            $languages_options[] = [
+                'id'    => array_keys($lang)[0],
+                'value' => array_values($lang)[0]
+            ];
+        }
+
+        $filters[] = [
+            'Label'    => 'Survey Language',
+            'Question' => self::LanguageFilterId,
+            'Options'  => $languages_options
+        ];
+
         $report_map['Filters'] = $filters;
 
         $report_map['Sections'] = $this->getSections();

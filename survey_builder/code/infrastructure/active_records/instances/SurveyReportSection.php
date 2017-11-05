@@ -46,16 +46,16 @@ class SurveyReportSection extends DataObject {
     public function mapSection($filters)
     {
         $section_map = $this->toMap();
-        $repository = new SapphireAnswerSurveyRepository();
-        $questions = array();
+        $repository  = new SapphireAnswerSurveyRepository();
+        $questions   = [];
 
         foreach ($this->Graphs()->sort('Order') as $graph) {
-            $values = array();
+            $values      = [];
             $extra_label = '';
 
-            $answers = $repository->getByQuestionAndFilters($graph->Question()->ID, $filters);
+            $answers       = $repository->getByQuestionAndFilters($graph->Question()->ID, $filters);
             $total_answers = $answers['total'];
-            $answers = $answers['answers'];
+            $answers       = $answers['answers'];
 
             // set labels for multibars
             if ($graph->Type == 'multibars') {
@@ -133,15 +133,14 @@ class SurveyReportSection extends DataObject {
                 }
             }
 
-
-            $questions[] = array(
+            $questions[] = [
                 'ID'         => $graph->Question()->ID,
                 'Graph'      => $graph->Type,
                 'Title'      => $graph->Label,
                 'Values'     => $values,
                 'Total'      => $total_answers,
                 'ExtraLabel' => $extra_label,
-            );
+            ];
         }
 
         $section_map['Questions'] = $questions;

@@ -30,9 +30,21 @@ final class SapphireAnswerSurveyRepository
      */
     public function getByQuestionAndFilters($question_id, $filters = null)
     {
-        $q = SurveyQuestionTemplate::get_by_id('SurveyQuestionTemplate',$question_id);
+        $q        = SurveyQuestionTemplate::get_by_id('SurveyQuestionTemplate',$question_id);
         $template = $q->Step()->SurveyTemplate();
-        $filter_query = $this->getFiltersQuery($filters,$q);
+
+        // exclude lang filter
+        $lang          = "ALL";
+        $final_filters = [];
+        foreach($filters as $filter){
+            if($filter->id == SurveyReport::LanguageFilterId){
+                $lang = trim($filter->value);
+                continue;
+            }
+            $final_filters[] = $filter;
+        }
+
+        $filter_query = $this->getFiltersQuery($final_filters, $q);
 
         $answers_query = "  SELECT ANS.`Value` FROM SurveyAnswer ANS
                             LEFT JOIN SurveyStep STP ON STP.ID = ANS.StepID";
@@ -45,15 +57,18 @@ final class SapphireAnswerSurveyRepository
         }
 
         $answers_query .= " WHERE S.IsTest = 0 AND ANS.QuestionID = {$question_id} AND ANS.`Value` IS NOT NULL ";
+        if($lang !== "ALL"){
+            $answers_query .= " AND Lang = '{$lang}' ";
+        }
         $answers_query .= $filter_query;
 
-        $query_result = DB::query($answers_query);
-        $answers = $this->mapAnswers($question_id, $query_result);
+        $query_result   = DB::query($answers_query);
+        $answers       = $this->mapAnswers($question_id, $query_result);
         $total_answers = $this->SurveyBuilderSurveyCountByQuestion($q, $filters);
 
         //die($answers_query);
 
-        return array('answers' => $answers, 'total' => $total_answers);
+        return ['answers' => $answers, 'total' => $total_answers];
     }
 
     public function getFiltersQuery($filters, $question) {
@@ -63,7 +78,7 @@ final class SapphireAnswerSurveyRepository
 
         if ($filters) {
             foreach($filters as $filter) {
-                $filter_q = SurveyQuestionTemplate::get_by_id('SurveyQuestionTemplate',$filter->id);
+                $filter_q        = SurveyQuestionTemplate::get_by_id('SurveyQuestionTemplate', $filter->id);
                 $filter_template = $filter_q->Step()->SurveyTemplate();
 
                 if ($q_survey_template->ClassName == 'SurveyTemplate' || $filter_template == 'SurveyTemplate') {
@@ -146,11 +161,22 @@ final class SapphireAnswerSurveyRepository
 
     public function SurveyBuilderSurveyCountByQuestion($question, $filters)
     {
-        $q_survey_template = $question->Step()->SurveyTemplate();
-        $question_id = $question->ID;
-        $table_join = ($q_survey_template->ClassName == 'EntitySurveyTemplate') ? "ES.ID" : "S.ID";
+        // exclude lang filter
+        $lang          = "ALL";
+        $final_filters = [];
+        foreach($filters as $filter){
+            if($filter->id == SurveyReport::LanguageFilterId){
+                $lang = trim($filter->value);
+                continue;
+            }
+            $final_filters[] = $filter;
+        }
 
-        $filter_query = $this->getFiltersQuery($filters,$question);
+        $q_survey_template = $question->Step()->SurveyTemplate();
+        $question_id       = $question->ID;
+        $table_join        = ($q_survey_template->ClassName == 'EntitySurveyTemplate') ? "ES.ID" : "S.ID";
+
+        $filter_query = $this->getFiltersQuery($final_filters , $question);
 
         $dependencies = $question->getDependsOn();
 
@@ -214,8 +240,14 @@ final class SapphireAnswerSurveyRepository
                 WHERE CS.ID = {$table_join} AND CS.IsTest = 0 AND CA.QuestionID = $question_id AND CA.`Value` IS NOT NULL
             )
             {$dependencies_sql}
-            {$filter_query};
+            {$filter_query}
         ";
+
+
+        if($lang !== "ALL"){
+            $query .= " AND Lang = '{$lang}' ";
+        }
+
 
         return intval(DB::query($query)->value());
     }

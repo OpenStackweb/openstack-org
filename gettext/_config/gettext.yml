@@ -5,9 +5,14 @@ GetText:
   # Don't forget to set i18n->default_locale too!
   default_locale: en_US
   locales:
-    - en_US
-    - zn_CH
-    - fr_FR
+     - en_US : "English / English"
+     - zh_CN : "简体中文& / Simplified Chinese"
+     - zh_TW : "繁體中文 / Traditional Chinese"
+     - ko_KR : "한국어 / Korean"
+     - ja_JP : "日本語 / Japanese"
+     - id_ID : "Bahasa indonesia / Indonesian"
+     - fr_FR : "Français / French"
+     - de_DE : "Deutsch / German"
   # ID to persist the locale in cookies / session in the front end
   persist_id: 'GetTextLocale'
   # ID to persist the locale in cookies / session in the CMS
