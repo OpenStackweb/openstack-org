@@ -57,7 +57,7 @@ export const loadFilters = () => {
         let cal_sync = summit.current_user ? summit.current_user.cal_sync : false;
 
         Object.keys(DEFAULT_FILTERS).forEach(filterName => {
-            const value = getUrlParam(filterName)
+            const value = getUrlParam(filterName);
             if (value) values[filterName] = value.split(',')
         });
 
@@ -83,13 +83,13 @@ export const autoloadEvent = (events, view, filtered) => {
 
         const event = autoloadId && events.filter(
             event => event.id === autoloadId
-        ).shift()
+        ).shift();
 
         if (event) {
             $('html, body').animate({
                 scrollTop: $(`#event_${event.id}`).offset().top
             }, 1000).promise().then(() => {
-                dispatch(toggleEventDetail(event))
+                if(hasEventIdParam()) dispatch(toggleEventDetail(event))
             })
         }
     }
@@ -348,19 +348,26 @@ const getUrlParam = param => {
     return $(window).url_fragment('getParam', param)
 }
 
+const hasEventIdParam = () => {
+    const selectedId = parseInt(
+        $(window).url_fragment('getParam','eventid')
+    );
+    return selectedId > 0;
+}
+
 const getAutoloadEventId = (events, view) => {
     const selectedId = parseInt(
         $(window).url_fragment('getParam','eventid')
     )
 
     // URL eventid parameter takes precedence.
-    if (selectedId) return selectedId
+    if (selectedId) return selectedId;
 
     // Skip checks for other view groupings.
-    if ( ! view.type === VIEW_DAYS) return 0
+    if ( ! view.type === VIEW_DAYS) return 0;
 
     const today = new Date();
-    const day = new Date(view.value.split('-'))
+    const day   = new Date(view.value.split('-'));
 
     // Skip checks for other days.
     if (today.toDateString() !== day.toDateString()) return 0
@@ -370,31 +377,31 @@ const getAutoloadEventId = (events, view) => {
 
     const matched = events.filter(event => {
         return event.start_epoch >= epochNow / 1000
-    }).shift()
+    }).shift();
 
     return matched ? matched.id : 0
 }
 
 const getDefaultViewDay = () => {
-    const { summit } = ScheduleProps
+    const { summit } = ScheduleProps;
 
     const pad = (num, size) => {
-        var s = num.toString()
-        while (s.length < size) s = "0" + s
-        return s
+        let s = num.toString();
+        while (s.length < size) s = "0" + s;
+        return s;
+    };
+
+    let now            = new Date();
+    let year           = now.getFullYear();
+    let month          = pad(now.getMonth()+1,2);
+    let day            = pad(now.getDate(),2);
+    let filterDay      = `${year}-${month}-${day}`;
+
+    if (!summit.dates[filterDay]){
+        filterDay = summit.schedule_default_day;
     }
 
-    var now = new Date();
-    var year = now.getUTCFullYear();
-    var month = pad(now.getUTCMonth()+1,2);
-    var day = pad(now.getUTCDate(),2);
-    let filterDay = `${year}-${month}-${day}`
-
-    if ( ! summit.dates[filterDay]){
-        filterDay = summit.schedule_default_day
-    }
-
-    return filterDay
+    return filterDay;
 }
 
 const errorHandler = (err, res) => {
