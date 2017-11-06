@@ -1734,4 +1734,25 @@ SQL;
             $val =  'Calendar to hold Summit Events';
         return $val;
     }
+
+    /**
+     * @return int
+     */
+    public function getOffset(){
+        $time_zone_id = $this->TimeZone;
+        if (empty($time_zone_id)) {
+            return 0;
+        }
+        $time_zone_list = timezone_identifiers_list();
+
+        if (isset($time_zone_list[$time_zone_id])) {
+            $time_zone_name = $time_zone_list[$time_zone_id];
+            $time_zone      = new \DateTimeZone($time_zone_name);
+            $now            = new \DateTime($this->getSummitBeginDate(), $time_zone);
+            return $time_zone->getOffset($now);
+        }
+
+        return 0;
+
+    }
 }

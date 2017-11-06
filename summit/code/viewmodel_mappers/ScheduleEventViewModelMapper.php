@@ -33,6 +33,7 @@ final class ScheduleEventViewModelMapper implements IViewModelMapper
                 'class_name'         => $e->ClassName,
                 'abstract'           => $e->Abstract,
                 'start_epoch'        => strtotime($e->StartDate),
+                'end_epoch'          => strtotime($e->EndDate),
                 'start_datetime'     => $e->StartDate,
                 'end_datetime'       => $e->EndDate,
                 'start_time'         => $e->StartTime,

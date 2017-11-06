@@ -11,6 +11,7 @@
             track_list_link: "{$Summit.getTrackListLink.JS}",
             title: "{$Summit.Title.JS}",
             year: "{$Summit.getSummitYear().JS}",
+            offset: {$Summit.getOffset.JS},
             dates : {},
             events: {},
             speakers : {},

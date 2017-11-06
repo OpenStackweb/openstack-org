@@ -355,6 +355,22 @@ const hasEventIdParam = () => {
     return selectedId > 0;
 }
 
+const pad = (num, size) => {
+    let s = num.toString();
+    while (s.length < size) s = "0" + s;
+    return s;
+};
+
+const getCurrentDayLabel = () => {
+    let timestamp      = new Date().getTime();
+    let offset         = summit.offset * 1000;
+    let now            = new Date(timestamp + offset);
+    let year           = now.getUTCFullYear();
+    let month          = pad(now.getUTCMonth()+1,2);
+    let day            = pad(now.getUTCDate(),2);
+    return `${year}-${month}-${day}`;
+}
+
 const getAutoloadEventId = (events, view) => {
     const selectedId = parseInt(
         $(window).url_fragment('getParam','eventid')
@@ -366,17 +382,23 @@ const getAutoloadEventId = (events, view) => {
     // Skip checks for other view groupings.
     if ( ! view.type === VIEW_DAYS) return 0;
 
-    const today = new Date();
-    const day   = new Date(view.value.split('-'));
-
     // Skip checks for other days.
-    if (today.toDateString() !== day.toDateString()) return 0
+    if (getCurrentDayLabel() !== view.value) return 0;
 
     // Find current event.
-    const epochNow = Date.now();
-
+    const now = Math.ceil(Date.now()) / 1000;
+    let candidateEndDate = null;
     const matched = events.filter(event => {
-        return event.start_epoch >= epochNow / 1000
+        if(event.class_name !== 'Presentation') return false;
+        let alreadyStarted = event.start_epoch <= now;
+        // if already started and started more than hour ago skip it
+        if(alreadyStarted && (now - event.start_epoch) > 3600 ) return false;
+        let elegible = event.end_epoch >= now;
+        if(elegible && (candidateEndDate == null || candidateEndDate > event.end_epoch)){
+            candidateEndDate = event.end_epoch;
+            return true;
+        }
+        return false;
     }).shift();
 
     return matched ? matched.id : 0
@@ -384,19 +406,8 @@ const getAutoloadEventId = (events, view) => {
 
 const getDefaultViewDay = () => {
     const { summit } = ScheduleProps;
-
-    const pad = (num, size) => {
-        let s = num.toString();
-        while (s.length < size) s = "0" + s;
-        return s;
-    };
-
-    let now            = new Date();
-    let year           = now.getFullYear();
-    let month          = pad(now.getMonth()+1,2);
-    let day            = pad(now.getDate(),2);
-    let filterDay      = `${year}-${month}-${day}`;
-
+    let filterDay = getCurrentDayLabel();
+    console.log(`filterDay ${filterDay}`);
     if (!summit.dates[filterDay]){
         filterDay = summit.schedule_default_day;
     }
