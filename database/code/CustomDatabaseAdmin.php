@@ -21,7 +21,29 @@ class CustomDatabaseAdmin extends DatabaseAdmin
 {
     public function build() {
         parent::build();
+        $this->dropObsoleteTables();
         $this->buildMandatoryTables();
+    }
+
+
+    private function dropObsoleteTables(){
+
+        global $database;
+        echo " ".PHP_EOL;
+        echo " ".PHP_EOL;
+        echo "* cleaning up obsolete tables ... ".PHP_EOL;
+        $query = <<<SQL
+SELECT table_name AS TBL_NAME
+FROM information_schema.tables WHERE
+table_schema='{$database}' AND table_name LIKE '%_obsolete%';
+SQL;
+
+        foreach(DB::query($query) as $row){
+            echo "* deleting table {$row['TBL_NAME']} ...".PHP_EOL;
+            DB::query("DROP TABLE {$row['TBL_NAME']}");
+        }
+        echo " ".PHP_EOL;
+        echo " ".PHP_EOL;
     }
 
     /**
@@ -34,6 +56,9 @@ class CustomDatabaseAdmin extends DatabaseAdmin
     private function buildMandatoryTables(){
         global $database;
         try {
+            echo " ".PHP_EOL;
+            echo " ".PHP_EOL;
+            echo "* creating mandatory tables ... ".PHP_EOL;
             $path = Director::baseFolder(). '/database/_config/mandatory_dataobjects.yml';
             $yaml = Yaml::parse(file_get_contents($path));
             if (!is_null($yaml) && isset($yaml['dataobjects']) && count($yaml['dataobjects'])) {
@@ -69,5 +94,7 @@ class CustomDatabaseAdmin extends DatabaseAdmin
         catch (ParseException $e) {
             echo printf("Unable to parse the YAML string: %s", $e->getMessage());
         }
+        echo " ".PHP_EOL;
+        echo " ".PHP_EOL;
     }
 }
