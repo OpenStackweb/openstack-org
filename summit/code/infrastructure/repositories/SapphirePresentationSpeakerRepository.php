@@ -337,7 +337,8 @@ SQL;
     public function searchBySummitAndTerm(ISummit $summit, $term)
     {
 
-        $speakers        = array();
+        $speakers        = [];
+        if(empty($term)) return [];
         $summit_id       = $summit->getIdentifier();
 
         $sql_speakers = <<<SQL

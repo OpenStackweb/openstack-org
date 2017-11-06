@@ -35,6 +35,7 @@ class SapphireSummitEventRepository extends SapphireRepository implements ISummi
      */
     public function searchBySummitAndTerm(ISummit $summit, $term)
     {
+        if(empty($term)) return [];
         $events    = [];
 
         $summit_id = $summit->getIdentifier();

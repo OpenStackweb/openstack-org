@@ -645,13 +645,7 @@ APP_LINKS;
 
     public function DoGlobalSearch(SS_HTTPRequest $request)
     {
-        $term = Convert::raw2sql($request->requestVar('t'));
-        if (empty($term)) {
-            return $this->httpError(404);
-        }
-
-        $term = urldecode($term);
-
+        $term     = trim(urldecode(Convert::raw2sql($request->requestVar('t'))));
         $speakers = $this->speaker_repository->searchBySummitAndTerm($this->Summit(), $term);
         $events   = $this->event_repository->searchBySummitAndTerm($this->Summit(), $term);
 
