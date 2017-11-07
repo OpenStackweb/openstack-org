@@ -24,21 +24,22 @@ final class ScheduleEventViewModelMapper implements IViewModelMapper
         $summit         = $params[1];
         $events         = [];
         $current_member = Member::currentUser();
-
+        $timezone       = new DateTimeZone("UTC");
         foreach ($schedule as $e) {
-
+            $start_epoch = new DateTime($e->StartDate, $timezone);
+            $end_epoch   = new DateTime($e->EndDate, $timezone);
             $entry = [
                 'id'                 => intval($e->ID),
                 'title'              => trim($e->Title),
                 'class_name'         => $e->ClassName,
                 'abstract'           => $e->Abstract,
-                'start_epoch'        => strtotime($e->StartDate),
-                'end_epoch'          => strtotime($e->EndDate),
+                'start_epoch'        => $start_epoch->getTimestamp(),
+                'end_epoch'          => $end_epoch->getTimestamp(),
                 'start_datetime'     => $e->StartDate,
                 'end_datetime'       => $e->EndDate,
                 'start_time'         => $e->StartTime,
                 'end_time'           => $e->EndTime,
-                'date_nice'          => date('D j', strtotime($e->StartDate)),
+                'date_nice'          => date('D j', $start_epoch->getTimestamp()),
                 'allow_feedback'     => $e->AllowFeedBack,
                 'location_id'        => intval($e->LocationID),
                 'type_id'            => intval($e->TypeID),

@@ -371,6 +371,11 @@ const getCurrentDayLabel = () => {
     return `${year}-${month}-${day}`;
 }
 
+const getLocalNow = () =>{
+    let now = Math.ceil(Date.now()) / 1000;
+    return now + ScheduleProps.summit;
+}
+
 const getAutoloadEventId = (events, view) => {
     const selectedId = parseInt(
         $(window).url_fragment('getParam','eventid')
@@ -386,7 +391,8 @@ const getAutoloadEventId = (events, view) => {
     if (getCurrentDayLabel() !== view.value) return 0;
 
     // Find current event.
-    const now = Math.ceil(Date.now()) / 1000;
+    const now = getLocalNow();
+
     let candidateEndDate = null;
     const matched = events.filter(event => {
         if(event.class_name !== 'Presentation') return false;
