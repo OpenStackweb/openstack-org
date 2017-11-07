@@ -149,7 +149,7 @@ final class PublicCloudPassportResfullApi extends AbstractRestfulJsonApi
                     $locations[] = [
                         'id'                => intval($item->CloudID).'_'.$idx,
                         'item_id'           => intval($item->CloudID),
-                        'name'              => $item->CloudName,
+                        'name'              => trim($item->CompanyName),
                         'lat'               => floatval($lat),
                         'lng'               => floatval($lngs[$idx]),
                         'isInfoWindowOpen'  => false
