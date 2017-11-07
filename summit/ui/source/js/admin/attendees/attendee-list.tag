@@ -44,7 +44,7 @@
                     <td>{ attendee.checked_in }</td>
                     <td>
                         <a href="{ attendee.link }" class="btn btn-default btn-sm" role="button">Edit</a>
-                        <button class="btn btn-primary btn-sm" onclick={ openSchedule }>Schedule</button>
+                        <button if={attendee.schedule_count > 0} class="btn btn-primary btn-sm" onclick={ openSchedule }>Schedule ({attendee.schedule_count})</button>
                     </td>
                 </tr>
             </tbody>

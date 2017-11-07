@@ -130,15 +130,15 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
 
             foreach($attendees as $attendee) {
                 $attendees_array[] = [
-                    'id'            => $attendee->ID,
-                    'member_id'     => $attendee->MemberID,
-                    'name'          => $attendee->Member->FullName,
-                    'email'         => $attendee->Member->Email,
-                    'eventbrite_id' => $attendee->getTicketIDs(),
-                    'ticket_bought' => $attendee->getBoughtDate(),
-                    'checked_in'    => $attendee->SummitHallCheckedIn,
-                    'link'          => 'summit-admin/'.$summit_id.'/attendees/'.$attendee->ID,
-                    'schedule'      => $attendee->Member()->Schedule()->toNestedArray()
+                    'id'                => $attendee->ID,
+                    'member_id'         => $attendee->MemberID,
+                    'name'              => $attendee->Member->FullName,
+                    'email'             => $attendee->Member->Email,
+                    'eventbrite_id'     => $attendee->getTicketIDs(),
+                    'ticket_bought'     => $attendee->getBoughtDate(),
+                    'checked_in'        => $attendee->SummitHallCheckedIn,
+                    'link'              => 'summit-admin/'.$summit_id.'/attendees/'.$attendee->ID,
+                    'schedule_count'    => $attendee->Member()->getScheduleBySummit($summit_id)->Count()
                 ];
             }
 
@@ -286,7 +286,7 @@ class SummitAppAttendeesApi extends AbstractRestfulJsonApi {
             if(is_null($attendee)) throw new NotFoundEntityException('SummitAttendee', sprintf(' id %s', $attendee_id));
 
             $events_array = array();
-            $events = $attendee->Member()->Schedule()->sort('StartDate');
+            $events = $attendee->Member()->getScheduleBySummit($summit_id, ['StartDate' => 'ASC']);
             foreach ($events as $event) {
                 $event_start_unix = strtotime($event->getStartDateUTC());
                 $event_end_unix = strtotime($event->getEndDateUTC());

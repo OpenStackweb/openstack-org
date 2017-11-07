@@ -52,7 +52,8 @@
                         eventbrite_id : "{$TicketIDs().JS}",
                         ticket_bought : "{$BoughtDate().JS}",
                         checked_in : <% if $SummitHallCheckedIn %> "Yes" <% else %> "No" <% end_if %>,
-                        link: "$Top.Link/{$Summit.ID}/attendees/{$ID}"
+                        link: "$Top.Link/{$Summit.ID}/attendees/{$ID}",
+                        schedule_count: $Member.getScheduleBySummit($Top.Summit.ID).Count()
                     });
                 <% end_loop %>
 
