@@ -54,7 +54,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-10 col-sm-push-1">
-                    <h1>Thank You {$Summit.Title}!</h1>
+                    <h1>Thank You, {$Summit.Title}!</h1>
                     <p>
                         {$ThankYouText}
                     </p>
