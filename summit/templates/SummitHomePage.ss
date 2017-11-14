@@ -24,7 +24,7 @@
                     November 6-8, 2017 in Sydney, Australia
                 </div>
                 <div class="landing-action">
-                    <a href="/summit/sydney-2017/" class="btn register-btn-lrg">Join Us <i class="fa fa-chevron-right"></i></a>
+                    <a href="/videos/summits/sydney-2017" class="btn register-btn-lrg">Watch the Sessions<i class="fa fa-chevron-right"></i></a>
                 </div>
             </div>
         </div>
@@ -49,9 +49,9 @@
 
             <% with $CurrentSummit %>
             <div class="col-sm-3 small-single-summit">
-                <a href="/summit/sydney-2017/" class="single-summit current-summit">
+                <a href="/videos/summits/sydney-2017" class="single-summit current-summit">
                     <h2>$Title</h2>
-                    <div class="btn register-btn-lrg skinny">JOIN US</div>
+                    <h4>Watch The Sessions!</h4>
                 </a>
                 <div class="single-summit-date current">
                     $DateLabel
