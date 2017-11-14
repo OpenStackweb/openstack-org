@@ -32,10 +32,13 @@
                     <a href="$Top.Link">Summit Highlights</a>
                 </li>
                 <li class="">
-                    <a href="$Top.Link(videos)">Videos</a>
+                    <a href="$Top.Link(sponsors)">Sponsors</a>
                 </li>
                 <li class="">
-                    <a href="$Top.Link(sponsors)">Sponsors</a>
+                    <a href="$Top.Link(summit-schedule)">Summit Schedule</a>
+                </li>
+                <li class="">
+                    <a href="$Top.Link(videos)">Videos</a>
                 </li>
             </ul>
             <!-- End Microsite Navigation -->
