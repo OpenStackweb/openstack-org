@@ -100,14 +100,22 @@ final class NewsRequestManager {
             $repository->add($news);
 
             //send email
-            $email = EmailFactory::getInstance()->buildEmail(NEWS_SUBMISSION_EMAIL_FROM,
-                NEWS_SUBMISSION_EMAIL_ALERT_TO,
-                NEWS_SUBMISSION_EMAIL_SUBJECT);
+            $news_group = Group::get()->filter('Code','news-managers')->first();
+            $managers_emails = $news_group->Members()->column('Email');
+
+            $email = EmailFactory::getInstance()->buildEmail(
+                NEWS_SUBMISSION_EMAIL_FROM,
+                implode(',',$managers_emails),
+                NEWS_SUBMISSION_EMAIL_SUBJECT
+            );
 
             $email->setTemplate('NewsSubmissionEmail');
             $email->populateTemplate(array(
-                'ArticleHeadline'      => $news->Headline,
-                'ArticleSummary'      => $news->Summary
+                'SubmitterName'     => $submitter->FirstName.' '.$submitter->LastName,
+                'SubmitterEmail'    => $submitter->Email,
+                'ArticleHeadline'   => $news->Headline,
+                'ArticleSummary'    => $news->Summary,
+                'ReviewLink'        => Director::absoluteBaseURL().'news-manage'
             ));
 
             $email->send();

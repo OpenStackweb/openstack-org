@@ -2,7 +2,7 @@ Submitter
 Name: {$SubmitterName}
 Email: {$SubmitterEmail}
 
-<h3>{$ArticleHeadline}:</h3>
-{$ArticleSummary}
+<h3>{$JobTitle}:</h3>
+{$JobSummary}
 
 Review <a href="{$ReviewLink}">here</a>

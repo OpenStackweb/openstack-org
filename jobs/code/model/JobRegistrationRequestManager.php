@@ -96,6 +96,27 @@ final class JobRegistrationRequestManager implements IJobRegistrationRequestMana
 				$new_registration_request->registerUser($current_user);
 			}
 			$repository->add($new_registration_request);
+
+            //send email
+            $jobs_group = Group::get()->filter('Code','jobs-managers')->first();
+            $managers_emails = $jobs_group->Members()->column('Email');
+
+            $email = EmailFactory::getInstance()->buildEmail(
+                JOB_SUBMISSION_EMAIL_FROM,
+                implode(',',$managers_emails),
+                'New job submission'
+            );
+
+            $email->setTemplate('JobSubmissionEmail');
+            $email->populateTemplate(array(
+                'SubmitterName'     => $new_registration_request->PointOfContactName,
+                'SubmitterEmail'    => $new_registration_request->PointOfContactEmail,
+                'JobTitle'          => $new_registration_request->Title,
+                'JobSummary'        => $new_registration_request->Description,
+                'ReviewLink'        => Director::absoluteBaseURL().'sangria/ViewJobsDetails'
+            ));
+
+            $email->send();
 		});
 	}
 
@@ -164,6 +185,8 @@ final class JobRegistrationRequestManager implements IJobRegistrationRequestMana
 
 			if(empty($name_to)  || empty($email_to ))
 				throw new EntityValidationException(array(array('message'=>'invalid point of contact')));
+
+			// email
 			$email = EmailFactory::getInstance()->buildEmail(JOB_REGISTRATION_REQUEST_EMAIL_FROM, $email_to, "Your OpenStack Job is Now Live");
 			$email->setTemplate('JobRegistrationRequestAcceptedEmail');
 			$email->populateTemplate(array(
