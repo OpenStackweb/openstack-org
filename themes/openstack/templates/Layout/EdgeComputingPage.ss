@@ -67,16 +67,16 @@
                     <p class="company">OpenStack Foundation</p>
                 </div>
                 <div class="col-md-3 col-sm-6 video-wall-item">
-                    <a href="https://youtu.be/BdIzryvX7gc" target="_blank">
+                    <a href="https://youtu.be/_NqvjdNCudA" target="_blank">
                         <div class="video-wrapper small video-border">
                             <div class="play-button">
                                 <img src="https://d33wubrfki0l68.cloudfront.net/ae6ec7ae079aebf50ba0432743f680ce40c26624/3c5ba/images/play-button.png">
                             </div>
-                            <img class="video-image" src="https://img.youtube.com/vi/BdIzryvX7gc/maxresdefault.jpg" alt="OpenDev Opening Keynotes: Kandan Kathirvel & Rodolfo Pacheco">
+                            <img class="video-image" src="https://img.youtube.com/vi/_NqvjdNCudA/maxresdefault.jpg" alt="OpenDev Opening Keynotes: Beth Cohen">
                         </div>
                     </a>
-                    <p class="speaker">Kandan Kathirvel & Rodolfo Pacheco</p>
-                    <p class="company">AT&T</p>
+                    <p class="speaker">Beth Cohen</p>
+                    <p class="company">Verizon</p>
                 </div>
                 <div class="col-md-3 col-sm-6 video-wall-item">
                     <a href="https://youtu.be/YHRYdiYRsHI" target="_blank">
