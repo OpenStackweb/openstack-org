@@ -71,7 +71,7 @@ final class NewsArchivedPage_Controller extends Page_Controller {
         );
     }
 
-    public function index(){
+    public function index(SS_HTTPRequest $request){
         $searchTerm = isset($_GET["searchTerm"]) ? $_GET["searchTerm"] : '';
         $archived_news = new ArrayList($this->news_repository->getArchivedNews(0, $this->news_per_page,$searchTerm));
         $archived_news_pages = ceil($this->news_repository->getArchivedNewsCount($searchTerm) / $this->news_per_page);

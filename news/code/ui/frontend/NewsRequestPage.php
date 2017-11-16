@@ -49,7 +49,7 @@ final class NewsRequestPage_Controller extends Page_Controller {
 		return Controller::curr()->redirectBack();
 	}
 
-    public function index(){
+    public function index(SS_HTTPRequest $request){
         Requirements::javascript("news/code/ui/frontend/js/news.request.page.js");
         return $this->renderWith(array('NewsRequestPage','Page'));
     }
