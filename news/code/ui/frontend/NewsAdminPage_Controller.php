@@ -69,7 +69,7 @@ final class NewsAdminPage_Controller extends AdminController {
 		return Controller::curr()->redirectBack();
 	}
 
-    public function index(){
+    public function index(SS_HTTPRequest $request){
 
         $recent_news = $this->news_repository->getRecentNews();
         $standby_news = $this->news_repository->getStandByNews();

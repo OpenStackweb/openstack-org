@@ -58,7 +58,7 @@ final class NewsPage_Controller extends Page_Controller {
 		return Controller::curr()->redirectBack();
 	}
 
-    public function index(){
+    public function index(SS_HTTPRequest $request){
 
         $featured_news = new ArrayList($this->news_repository->getFeaturedNews(true,3));
         $recent_news   = new ArrayList($this->news_repository->getRecentNews());

@@ -1,5 +1,5 @@
 Submitter
-Name: {$SubmitterName}
+Name: {$SubmitterName}<br>
 Email: {$SubmitterEmail}
 
 <h3>{$ArticleHeadline}:</h3>
