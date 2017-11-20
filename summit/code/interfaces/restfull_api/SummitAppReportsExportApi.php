@@ -179,16 +179,17 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
             $room = $event->getLocation()->Name;
             $ext = 'csv';
 
-            $attendees = $event->Attendees();
+            $attendees = Member::get()->filter('Schedule.ID', $event_id);  //$event->Attendees();
             $report_data = array();
+
             foreach ($attendees as $attendee) {
                 $attendee_data = array();
-                if (!$attendee->Member()) continue;
+                if (!$attendee->Exists()) continue;
 
-                $attendee_data['FirstName'] = $attendee->Member()->FirstName;
-                $attendee_data['LastName'] = $attendee->Member()->Surname;
-                $attendee_data['Email'] = $attendee->Member()->Email;
-                $attendee_data['Company'] = ($attendee->Member()->getCurrentOrganization()) ? $attendee->Member()->getCurrentOrganization()->Name : '';
+                $attendee_data['FirstName'] = $attendee->FirstName;
+                $attendee_data['LastName'] = $attendee->Surname;
+                $attendee_data['Email'] = $attendee->Email;
+                $attendee_data['Company'] = ($attendee->getCurrentOrganization()) ? $attendee->getCurrentOrganization()->Name : '';
                 $report_data[] = $attendee_data;
             }
 

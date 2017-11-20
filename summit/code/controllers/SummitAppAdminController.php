@@ -74,7 +74,6 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         'dashboard',
         'reports',
         'ticketTypes',
-        'editSummit',
         'handleEvents',
         'handleAttendees',
         'handleSpeakers',
@@ -86,7 +85,6 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         '$SummitID!/dashboard'                                       => 'dashboard',
         '$SummitID!/reports/$Report'                                 => 'reports',
         '$SummitID!/tickets'                                         => 'ticketTypes',
-        '$SummitID!/edit'                                            => 'editSummit',
         '$SummitID!/events'                                          => 'handleEvents',
         '$SummitID!/attendees'                                       => 'handleAttendees',
         '$SummitID!/speakers'                                        => 'handleSpeakers',
@@ -182,48 +180,6 @@ final class SummitAppAdminController extends Controller implements PermissionPro
                 )
             )
         );
-    }
-
-    public function editSummit(SS_HTTPRequest $request)
-    {
-        Requirements::javascript('summit/javascript/summitapp-summitform.js');
-        Requirements::css('summit/css/summit-admin.css');
-
-        return $this->getViewer('EditSummit')->process($this->owner);
-    }
-
-    public function summitForm()
-    {
-        $summit_id = intval($this->request->param('SummitID'));
-        $summit = Summit::get()->byID($summit_id);
-
-        $form = SummitForm::create($summit,$this, "SummitForm", FieldList::create(FormAction::create('saveSummit','Save')));
-        if($data = Session::get("FormInfo.{$form->FormName()}.data")) {
-            $form->loadDataFrom($data);
-        }
-        else {
-            $form->loadDataFrom($summit);
-        }
-
-        return $form;
-    }
-
-    public function saveSummit($data, $form) {
-        Session::set("FormInfo.{$form->FormName()}.data", $data);
-        /*if(empty(strip_tags($data['Bio']))) {
-            $form->addErrorMessage('Bio','Please enter a bio', 'bad');
-            return $this->redirectBack();
-        }
-
-        $speaker = Member::currentUser()->getCurrentSpeakerProfile();
-        $form->saveInto($speaker);
-        $speaker->write();
-
-        $form->sessionMessage('Your bio has been updated', 'good');
-
-        Session::clear("FormInfo.{$form->FormName()}.data", $data);*/
-
-        return $this->redirectBack();
     }
 
     public function reports(SS_HTTPRequest $request)
