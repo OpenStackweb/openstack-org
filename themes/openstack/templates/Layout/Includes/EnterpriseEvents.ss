@@ -2,7 +2,7 @@
     <div class="banner">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-sm-6">
+                <div class="col-lg-6 col-sm-6">
                     <div class="marketplace-column">
                         <h2>Need an Enterprise Solution?</h2>
                         <p>
@@ -13,13 +13,14 @@
                             <li class="distros">Distros</li>
                             <li class="consulting">Consulting</li>
                             <li class="public-cloud">Public Cloud</li>
+                            <li class="remote-cloud">Remotely Managed Private Cloud</li>
+                            <li class="hosted-cloud">Hosted Private Clouds</li>
                             <li class="drivers">Drivers</li>
-                            <li class="hosted-cloud">Hosted Private Cloud</li>
                         </ul>
-                        <a href="http://www.openstack.org/marketplace/" class="marketplace-btn blue">OpenStack Marketplace</a>
+                        <a href="https://www.openstack.org/marketplace/" class="marketplace-btn blue">OpenStack Marketplace</a>
                     </div>
                 </div>
-                <div class="col-lg-8 col-sm-6">
+                <div class="col-lg-6 col-sm-6">
                     <div class="events-wrapper">
                         <div class="row">
                             <div class="col-lg-12 col-sm-12">
