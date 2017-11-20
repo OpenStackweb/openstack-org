@@ -126,11 +126,8 @@ class MarketPlaceDirectoryPage_Controller extends MarketPlacePage_Controller {
 	}
 
     public function MarketPlaceReviewForm(){
-        Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
-        Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
-
+        JQueryValidateDependencies::renderRequirements();
         Requirements::combine_files('marketplace_review_form.js', array(
-                "themes/openstack/javascript/jquery.validate.custom.methods.js",
                 "marketplace/code/ui/frontend/js/star-rating.min.js",
                 "marketplace/code/ui/frontend/js/marketplace.review.js"
             )

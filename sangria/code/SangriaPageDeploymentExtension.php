@@ -1209,7 +1209,7 @@ SQL;
 
         Requirements::javascript("marketplace/code/ui/admin/js/utils.js");
         $this->InitGoogleMapLibs();
-        Requirements::javascript(Director::protocol() . "ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
+        JQueryValidateDependencies::renderRequirements();
 
         if (!empty($continent)) {
             $continent_name = DB::query("SELECT Name from Continent where ID = {$continent}")->value();
