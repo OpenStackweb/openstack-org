@@ -105,7 +105,6 @@ final class ICLARestfulAPI
 	protected function authorize()
 	{
 		return true;
-		return;
 	}
 
 	/**

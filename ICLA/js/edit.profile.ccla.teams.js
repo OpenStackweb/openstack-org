@@ -109,7 +109,7 @@ jQuery(document).ready(function($) {
         }
     })
 
-    $('.delete_member').live('click',function(event){
+    $(document).on("click", ".delete_member", function (event) {
         event.preventDefault();
         event.stopPropagation();
 

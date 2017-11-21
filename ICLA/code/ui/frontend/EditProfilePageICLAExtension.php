@@ -39,9 +39,6 @@ final class EditProfilePageICLAExtension extends Extension {
 		Requirements::javascript('marketplace/code/ui/admin/js/utils.js');
 		Requirements::customScript('var company_id = '.$this->getCompanyID().';');
 		Requirements::javascript('ICLA/js/edit.profile.ccla.teams.js');
-		Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js");
-		Requirements::javascript(Director::protocol()."ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js");
-		Requirements::javascript("themes/openstack/javascript/jquery.validate.custom.methods.js");
 		Requirements::css('ICLA/css/edit.profile.ccla.teams.css');
 		return $this->owner->getViewer('CCLATeamAdmin')->process($this->owner);
 	}
