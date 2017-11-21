@@ -228,7 +228,7 @@
                     <p>&nbsp;</p>
 
                     <div class="nfv-summit-register-btn">
-                        <a href="/videos/boston-2017/tracks/telecom-nfv-strategy" class="nfv-summit-btn" target="_blank">Watch the session videos <i class="fa fa-chevron-right"></i></a>
+                        <a href="/videos/sydney-2017/tracks/telecom-nfv-strategy" class="nfv-summit-btn" target="_blank">Watch the session videos <i class="fa fa-chevron-right"></i></a>
                     </div>
                 </div>
                 <!-- <div class="col-sm-4">

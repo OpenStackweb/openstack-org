@@ -13,28 +13,28 @@
 
     
     <!-- Begin Page Content -->
-        <div class="intro-header containers-r">
-        <div class="container">
+    <div class="intro-header containers-r">
+    <div class="container">
 
-            <div class="row">
-                <div class="col-sm-8">
-                    <div class="intro-message">
-                        <h1>Deploy production-ready containers today</h1>
-                        <h3>Discover why Kubernetes, OpenShift, Mesos and Swarm run best on open infrastructure</h3>
-                    </div>
-                </div> 
-                <div class="col-sm-4">
-                    <div class="download-container">
-                      <img src="/themes/openstack/images/containers-r/summit-logo-white.svg" class="summit-cta-logo" alt="">
-                        <div class="download-text">Start planning your OpenStack and containers strategy at the OpenStack Summit in Sydney, November 6-8, 2017</div>
-                        <a href="//www.openstack.org/summit/sydney-2017/" class="download-btn">Learn more about the Summit</a>
-                    </div>
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="intro-message">
+                    <h1>Deploy production-ready containers today</h1>
+                    <h3>Discover why Kubernetes, OpenShift, Mesos and Swarm run best on open infrastructure</h3>
+                </div>
+            </div> 
+            <div class="col-sm-4">
+                <div class="download-container">
+                  <img src="/themes/openstack/images/containers-r/summit-logo-white.svg" class="summit-cta-logo" alt="">
+                    <div class="download-text">Want to build a strategy around containers and OpenStack? Check out sessions from OpenStack users in Sydney.</div>
+                    <a href="//www.openstack.org/videos/sydney-2017/tracks/containers" class="download-btn">Watch the Session Videos</a>
                 </div>
             </div>
-
         </div>
-        <a href="https://flic.kr/p/avrpZx" class="photo-credit" data-toggle="tooltip" data-placement="left" title="Photo by cuxclipper" target="_blank"><i class="fa fa-info-circle"></i></a>
-        <!-- /.container -->
+
+    </div>
+    <a href="https://flic.kr/p/avrpZx" class="photo-credit" data-toggle="tooltip" data-placement="left" title="Photo by cuxclipper" target="_blank"><i class="fa fa-info-circle"></i></a>
+    <!-- /.container -->
     </div>
     <!-- /.intro-header -->
 
@@ -293,7 +293,7 @@
                     </p>
                     <p>&nbsp;</p>
                     <div class="nfv-summit-register-btn">
-                        <a href="/videos/boston-2017/tracks/containers" class="nfv-summit-btn" target="_blank">Watch the Session Videos <i class="fa fa-chevron-right"></i></a>
+                        <a href="//www.openstack.org/videos/sydney-2017/tracks/containers" class="nfv-summit-btn" target="_blank">Watch the Session Videos <i class="fa fa-chevron-right"></i></a>
                     </div>
                 </div>
                 <!-- <div class="col-sm-4">
