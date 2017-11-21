@@ -250,6 +250,7 @@ jQuery(document).ready(function($) {
                 'Language[4]':{ValidPlainText:true },
                 'Language[5]':{ValidPlainText:true },
                 WillingToTravel : {required: true},
+                'GitHubUser':{ ValidPlainText:true },
                 'IRCHandle':{ ValidPlainText:true },
                 'TwitterName':{ ValidPlainText:true }
             },

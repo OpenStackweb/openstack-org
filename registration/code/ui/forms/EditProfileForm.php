@@ -87,7 +87,8 @@ class EditProfileForm extends SafeXSSForm
         $OtherFoodField = new TextField('OtherFood', 'Other Food Considerations');
         $OtherFoodField->addExtraClass('other-field');
 
-        // IRC and Twitter
+        // Github, IRC and Twitter
+        $GitHubUserField = new GitHubUserField('GitHubUser', 'GitHub User <em>(Optional)</em>');
         $IRCHandleField = new TextField('IRCHandle', 'IRC Handle <em>(Optional)</em>');
         $TwitterNameField = new TextField('TwitterName', 'Twitter Name <em>(Optional)</em>');
         $LinkedInProfileField = new TextField('LinkedInProfile', 'LinkedIn Profile - full URL <em>(Optional)</em>');
@@ -178,6 +179,7 @@ class EditProfileForm extends SafeXSSForm
             new LiteralField('instructions',
                 '<p>Your statement of interest should be a few words describing your objectives or plans for OpenStack.</p>'),
             new LiteralField('break', '<hr/>'),
+            $GitHubUserField,
             $IRCHandleField,
             $TwitterNameField,
             $LinkedInProfileField,

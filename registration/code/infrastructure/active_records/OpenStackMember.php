@@ -26,6 +26,7 @@ class OpenStackMember
         'Bio'                    => 'HTMLText',
         'FoodPreference'         => 'Text',
         'OtherFood'              => 'Text',
+        'GitHubUser'             => 'Text',
         'IRCHandle'              => 'Text',
         'TwitterName'            => 'Text',
         'Projects'               => 'Text',
@@ -99,6 +100,7 @@ class OpenStackMember
         $this->owner->SecondEmail         = trim($this->owner->SecondEmail);
         $this->owner->ThirdEmail          = trim($this->owner->ThirdEmail);
         $this->owner->StatementOfInterest = trim($this->owner->StatementOfInterest);
+        $this->owner->GitHubUser          = trim($this->owner->GitHubUser);
         $this->owner->IRCHandle           = trim($this->owner->IRCHandle);
         $this->owner->TwitterName         = trim($this->owner->TwitterName);
         $this->owner->LinkedInProfile     = trim($this->owner->LinkedInProfile);
