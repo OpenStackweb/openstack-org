@@ -16,12 +16,13 @@
  */
 class EventHolder extends Page {
     private static $db = array(
-
+        'BannerLink'         => 'Varchar(255)',
+        'HomePageBannerLink' => 'Varchar(255)'
     );
 
     private static $has_one = array(
-       'Banner' => 'BetterImage',
-       'HomePageBanner' => 'BetterImage'
+       'Banner'             => 'BetterImage',
+       'HomePageBanner'     => 'BetterImage'
     );
 
     function getCMSFields() {
@@ -37,12 +38,47 @@ class EventHolder extends Page {
 
         $fields->addFieldToTab(
             'Root.Main',
+             new TextField('BannerLink','Banner Link')
+        );
+
+        $fields->addFieldToTab(
+            'Root.Main',
             $uploadField2 = new UploadField('HomePageBanner','HomePage Banner')
         );
         $uploadField2->setFolderName('openstackdays');
         $uploadField2->setAllowedFileCategories('image');
 
+        $fields->addFieldToTab(
+            'Root.Main',
+            new TextField('HomePageBannerLink','Banner Link')
+        );
+
         return $fields;
+    }
+
+    public function getUpcomingSummitLink() {
+        $summit = Summit::GetUpcoming();
+        if ($summit) {
+            return $summit->Link;
+        } else {
+            return '/summit';
+        }
+    }
+
+    function getBannerLink() {
+        if ($this->getField('BannerLink')) {
+            return $this->getField('BannerLink');
+        } else {
+            return $this->getUpcomingSummitLink();
+        }
+    }
+
+    function getHomePageBannerLink() {
+        if ($this->getField('HomePageBannerLink')) {
+            return $this->getField('HomePageBannerLink');
+        } else {
+            return $this->getUpcomingSummitLink();
+        }
     }
 
       
@@ -199,15 +235,6 @@ class EventHolder_Controller extends Page_Controller {
         }
 
         return $event_type_links;
-    }
-
-    public function getUpcomingSummitLink() {
-        $summit = Summit::GetUpcoming();
-        if ($summit) {
-            return $summit->Link;
-        } else {
-            return '/summit';
-        }
     }
 
 }

@@ -198,13 +198,9 @@ class HomePage_Controller extends Page_Controller
         return $event_page->HomePageBanner();
     }
 
-    function getUpcomingSummitLink() {
-        $summit = Summit::GetUpcoming();
-        if ($summit) {
-            return $summit->Link;
-        } else {
-            return '/summit';
-        }
+    function getEventsBannerLink() {
+        $event_page = EventHolder::get()->sort('ID','DESC')->first();
+        return $event_page->getHomePageBannerLink();
     }
 
     function UpcomingEvents($limit = 1)

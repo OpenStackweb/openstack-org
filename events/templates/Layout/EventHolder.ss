@@ -8,7 +8,7 @@
     </div>
     <div class="row">
         <div class="col-lg-12">
-            <a href="{$getUpcomingSummitLink()}">
+            <a href="{$getBannerLink()}">
                 <div class="event-ad-lrg">
                     <img src="{$Banner.URL}" alt="Don't miss The Summit">
                 </div>

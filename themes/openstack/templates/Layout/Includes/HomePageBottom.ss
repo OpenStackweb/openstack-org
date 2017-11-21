@@ -93,7 +93,7 @@
                 <div class="col-lg-6 col-sm-6 news-wrapper">
                     <h2>Upcoming Events <a href="/community/events/">See All <i class="fa fa-caret-right"></i></a></h2>
                     <% if $getEventsBanner() %>
-                    <a href="{$getUpcomingSummitLink()}">
+                    <a href="{$getEventsBannerLink()}">
                         <img class="event-ad" src="{$getEventsBanner().URL}">
                     </a>
                     <% end_if %>
