@@ -366,12 +366,29 @@ class COALandingPage_Controller extends Page_Controller
     }
 
     public function getStarted(SS_HTTPRequest $request){
+        // get exam type first from session and then from request vars
+        $exam_type = Session::get("ExamType");
+        if(empty($exam_type))
+            $exam_type = $request->param('IDX') ? $request->param('IDX') : '';
         if(Member::currentUser()){
-            $idx = $request->param('IDX') ? $request->param('IDX') : '';
-            $url_var = 'GetStartedURL'.$idx;
+            $url_var = 'GetStartedURL'.$exam_type;
+            if(!empty($exam_type)) {
+                Session::clear("ExamType");
+                Session::save();
+            }
             $this->redirect($this->$url_var);
         }
-        OpenStackIdCommon::doLogin($this->Link('get-started').'/'.$idx);
+        // is exam type is set, save it to sesion
+        if(!empty($exam_type)) {
+            Session::set("ExamType", $exam_type);
+            Session::save();
+        }
+        $back_url = $this->Link('get-started');
+        if(!empty($exam_type))
+        {
+            $back_url .= '/'.$exam_type;
+        }
+        OpenStackIdCommon::doLogin($back_url);
     }
 
     public function alreadyRegistered(){
