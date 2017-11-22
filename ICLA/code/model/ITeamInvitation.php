@@ -49,5 +49,9 @@ interface ITeamInvitation extends IEntity {
 	 */
 	public function getMember();
 
+    /**
+     * @param ICLAMember $invite
+     * @return void
+     */
 	public function updateInvite(ICLAMember $invite);
 }

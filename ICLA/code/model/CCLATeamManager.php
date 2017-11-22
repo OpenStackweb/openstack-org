@@ -118,20 +118,22 @@ final class CCLATeamManager {
 
 	public function verifyInvitations($member_id, ITeamInvitationSender $invitation_sender){
 
-		$member_repository     = $this->member_repository;
-		$invitation_repository = $this->invitation_repository;
+		return $this->tx_manager->transaction(function() use($member_id, $invitation_sender){
 
-		return $this->tx_manager->transaction(function() use($member_id, $invitation_repository, $member_repository, $invitation_sender){
+			$member = $this->member_repository->getById($member_id);
+			if(!$member) throw new NotFoundEntityException('Member',sprintf('id %s', $member_id));
 
-			$member = $member_repository->getById($member_id);
-			if(!$member) throw new NotFoundEntityException('Member',sprintf('id %s',$member_id));
-
-			foreach($invitation_repository->findByInviteEmail($member->Email) as $invitation){
+			foreach($this->invitation_repository->findByInviteEmail($member->Email) as $invitation){
 				$invitation->updateInvite($member);
-				$invitation_sender->sendInvitation($invitation);
+                // generate a token
+                $token = null;
+                do {
+                    $token = $invitation->generateConfirmationToken();
+                } while ($this->invitation_repository->existsConfirmationToken($token));
+                // re send invitation
+                $invitation_sender->sendInvitation($invitation, $token);
 			}
 		});
-
 	}
 
 	/**

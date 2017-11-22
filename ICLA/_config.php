@@ -22,5 +22,5 @@ PublisherSubscriberManager::getInstance()->subscribe('new_user_registered', func
 		new SapphireTeamRepository,
 		SapphireTransactionManager::getInstance());
 
-	$team_manager->verifyInvitations($member_id, new TeamInvitationEmailSender(new SapphireTeamInvitationRepository));
+	$team_manager->verifyInvitations($member_id, new TeamInvitationEmailSender());
 });
