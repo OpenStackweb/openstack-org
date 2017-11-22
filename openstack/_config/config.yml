@@ -14,6 +14,13 @@ SSViewer:
 MySQLDatabase:
   connection_charset: 'utf8'
   web_server_time_zone: 'America/Chicago'
+  sql_mode: 'ANSI'
+
+MySQLDatabase56:
+  sql_mode: 'ANSI'
+
+MySQLDatabase57:
+  sql_mode: 'REAL_AS_FLOAT,PIPES_AS_CONCAT,ANSI_QUOTES,IGNORE_SPACE'
 
 SiteTree:
   nested_urls: true

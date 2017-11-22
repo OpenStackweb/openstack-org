@@ -78,7 +78,7 @@ class Company extends DataObject implements PermissionProvider,IEntity
     private static $plural_name = 'Companies';
 
     private static $summary_fields = array(
-        'Name' => 'Company',
+        'Name'        => 'Company',
         'MemberLevel' => 'MemberLevel'
     );
 
