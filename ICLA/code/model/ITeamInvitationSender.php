@@ -18,7 +18,8 @@ interface ITeamInvitationSender {
 
 	/**
 	 * @param ITeamInvitation $invitation
+     * @param string $token
 	 * @return void
 	 */
-	public function sendInvitation(ITeamInvitation $invitation);
+	public function sendInvitation(ITeamInvitation $invitation, $token = null);
 } 

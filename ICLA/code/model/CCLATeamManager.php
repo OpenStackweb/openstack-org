@@ -74,29 +74,24 @@ final class CCLATeamManager {
 	 */
 	public function sendInvitation(array $data, ITeamInvitationSender $invitation_sender){
 
-		$team_repository       = $this->team_repository;
-		$invitation_factory    = $this->invitation_factory;
-		$validator_factory     = $this->validator_factory;
-		$member_repository     = $this->member_repository;
-		$invitation_repository = $this->invitation_repository;
 
-		return $this->tx_manager->transaction(function() use($data, $invitation_repository,  $team_repository, $invitation_factory , $validator_factory, $member_repository, $invitation_sender){
-			$validator = $validator_factory->buildValidatorForTeamInvitation($data);
+		return $this->tx_manager->transaction(function() use($data, $invitation_sender){
+			$validator = $this->validator_factory->buildValidatorForTeamInvitation($data);
 			if ($validator->fails()) {
 				throw new EntityValidationException($validator->messages());
 			}
 
-			$team = $team_repository->getById((int)$data['team_id']);
+			$team = $this->team_repository->getById((int)$data['team_id']);
 			if(!$team) throw new NotFoundEntityException('Team',sprintf('id %s',$data['team_id']));
 
 			$member = false;
 			//is a already selected ICLA/CCLA Member
 			if(isset($data['member_id'])){
-				$member = $member_repository->getById((int)$data['member_id']);
+				$member = $this->member_repository->getById((int)$data['member_id']);
 				if(!$member) throw new NotFoundEntityException('Member',sprintf('id %s',$data['member_id']));
 			}
 			else {
-				$member = $member_repository->findByEmail(trim($data['email']));
+				$member = $this->member_repository->findByEmail(trim($data['email']));
 				if($member && !$member->hasSignedCLA())
 					throw new MemberNotSignedCCLAException('This user has not yet signed the ICLA. Please ensure they have followed the appropriate steps outlined here: https://wiki.openstack.org/wiki/How_To_Contribute#Contributor_License_Agreement');
 			}
@@ -104,11 +99,17 @@ final class CCLATeamManager {
 			if($member && ($team->isMember($member) || $team->isInvite($member)))
 				throw new TeamMemberAlreadyExistsException('Member Already exists on Team!');
 
-			$invitation = $invitation_factory->buildInvitation(new InvitationDTO($data['first_name'], $data['last_name'], $data['email'], $team, $member ));
+			$invitation = $this->invitation_factory->buildInvitation(new InvitationDTO($data['first_name'], $data['last_name'], $data['email'], $team, $member ));
+            $token      = null;
+            if($invitation->isInviteRegisteredAsUser()){
+                do {
+                    $token = $invitation->generateConfirmationToken();
+                } while ($this->invitation_repository->existsConfirmationToken($token));
+            }
 
-			$invitation_repository->add($invitation);
+			$this->invitation_repository->add($invitation);
 
-			$invitation_sender->sendInvitation($invitation);
+			$invitation_sender->sendInvitation($invitation, $token);
 
 			return $invitation;
 

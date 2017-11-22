@@ -139,7 +139,7 @@ final class ICLARestfulAPI
 	public function addInvitation(){
 		$data = $this->getJsonRequest();
 		try{
-			$entity = $this->team_manager->sendInvitation($data, new TeamInvitationEmailSender($this->invitation_repository));
+			$entity = $this->team_manager->sendInvitation($data, new TeamInvitationEmailSender());
 			return $this->created($entity->getIdentifier());
 		}
 		catch(NotFoundEntityException $ex1){
