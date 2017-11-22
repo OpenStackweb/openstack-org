@@ -36,6 +36,7 @@ final class EditProfilePageICLAExtension extends Extension {
 	}
 
 	public function CCLATeamAdmin(){
+        SweetAlert2Dependencies::renderRequirements();
 		Requirements::javascript('marketplace/code/ui/admin/js/utils.js');
 		Requirements::customScript('var company_id = '.$this->getCompanyID().';');
 		Requirements::javascript('ICLA/js/edit.profile.ccla.teams.js');

@@ -164,7 +164,7 @@ jQuery(document).ready(function($) {
             success: function (data,textStatus,jqXHR) {
                 var row = button.parent().parent();
                 $('.invitation-date', row).html(data);
-                swal('Invitation resent successfully.');
+                swal('Done!', 'Invitation resent successfully.', 'success');
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 ajaxError(jqXHR, textStatus, errorThrown);
