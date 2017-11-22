@@ -79,6 +79,9 @@ final class ICLARestfulAPI
 		$this->addBeforeFilter('deleteInvitation','check_delete_invitation',function() use($this_var){
 			return $this_var->checkCCLAdmin();
 		});
+        $this->addBeforeFilter('resendInvitation','check_resend_invitation',function() use($this_var){
+            return $this_var->checkCCLAdmin();
+        });
 	}
 
 	/**
@@ -119,6 +122,7 @@ final class ICLARestfulAPI
 		'POST teams'                                    => 'addTeam',
 		'DELETE teams/$TEAM_ID'                         => 'deleteTeam',
 		'PUT teams/$TEAM_ID'                            => 'updateTeamName',
+        'PUT invitations/$ID'                           => 'resendInvitation',
 	);
 
 	/**
@@ -134,6 +138,7 @@ final class ICLARestfulAPI
 		'addTeam',
 		'deleteTeam',
 		'updateTeamName',
+		'resendInvitation',
 	);
 
 	public function addInvitation(){
@@ -164,6 +169,28 @@ final class ICLARestfulAPI
 		}
 		if (!$data) return $this->serverError();
 	}
+
+    public function resendInvitation(){
+        $id = (int)$this->request->param('ID');
+
+        try{
+            $invitation = $this->team_manager->resendInvitation($id, new TeamInvitationEmailSender());
+            return $this->created(date('M jS Y', strtotime($invitation->Created)));
+        }
+        catch(NotFoundEntityException $ex1){
+            SS_Log::log($ex1,SS_Log::NOTICE);
+            return $this->notFound($ex1->getMessage());
+        }
+        catch(TeamMemberAlreadyExistsException $ex3){
+            SS_Log::log($ex3,SS_Log::NOTICE);
+            return $this->validationError(array( array('attribute'=>'error', 'message' => $ex3->getMessage())));
+        }
+        catch(Exception $ex){
+            SS_Log::log($ex,SS_Log::ERR);
+            return $this->serverError();
+        }
+        if (!$data) return $this->serverError();
+    }
 
 	public function resignMembership(){
 

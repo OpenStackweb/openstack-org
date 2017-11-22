@@ -116,6 +116,39 @@ final class CCLATeamManager {
 		});
 	}
 
+    /**
+     * @param int $id
+     * @param ITeamInvitationSender $invitation_sender
+     * @return ITeamInvitation
+     */
+    public function resendInvitation($id, ITeamInvitationSender $invitation_sender){
+
+        $invitation_repository = $this->invitation_repository;
+
+        return $this->tx_manager->transaction(function() use($id, $invitation_repository, $invitation_sender){
+            $invitation = $invitation_repository->getById($id);
+            if(!$invitation) throw new NotFoundEntityException('TeamInvitation',sprintf('id %s',$id));
+
+            if ($invitation->isConfirmed) {
+                throw new TeamMemberAlreadyExistsException('This member has already accepted the invitation.');
+            }
+
+            $token      = null;
+            if($invitation->isInviteRegisteredAsUser()){
+                do {
+                    $token = $invitation->generateConfirmationToken();
+                } while ($invitation_repository->existsConfirmationToken($token));
+            }
+
+            $invitation->Created = date('Y-m-d H:i:s');
+
+            $invitation_sender->sendInvitation($invitation, $token);
+
+            return $invitation;
+
+        });
+    }
+
 	public function verifyInvitations($member_id, ITeamInvitationSender $invitation_sender){
 
 		return $this->tx_manager->transaction(function() use($member_id, $invitation_sender){

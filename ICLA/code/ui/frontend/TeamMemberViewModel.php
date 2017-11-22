@@ -66,7 +66,7 @@ final class TeamMemberViewModel extends ViewableData {
 		$this->team_id    = $team_id;
 		$this->status     = $status;
 		$this->id         = $id;
-		$this->date_added = $date_added;
+		$this->date_added = date('M jS Y', strtotime($date_added));
 	}
 
 	/**

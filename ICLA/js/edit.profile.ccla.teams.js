@@ -143,6 +143,38 @@ jQuery(document).ready(function($) {
         return false;
     });
 
+    $(document).on("click", ".resend_invitation", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        var button =  $(this);
+        if(button.prop('disabled')){
+            return false;
+        }
+
+        button.prop('disabled',true);
+
+        var id      = button.attr('data-id');
+
+        $.ajax({
+            type: 'PUT',
+            url: 'api/v1/ccla/invitations/'+id,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data,textStatus,jqXHR) {
+                var row = button.parent().parent();
+                $('.invitation-date', row).html(data);
+                swal('Invitation resent successfully.');
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                ajaxError(jqXHR, textStatus, errorThrown);
+                button.prop('disabled',false);
+            }
+        });
+
+        return false;
+    });
+
     $('#add_member').click(function(event){
         event.preventDefault();
         event.stopPropagation();
