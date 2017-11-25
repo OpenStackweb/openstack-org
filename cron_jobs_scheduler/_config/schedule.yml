@@ -123,3 +123,7 @@ jobs:
   - name: "RebuildMemberSpammerEstimatorTask"
     cron_expression: "00 02 * * *" # run at 0200 AM every day
     enabled: 1
+
+  - name: "AssetsSyncRequestProcessorTask"
+    cron_expression: "*/5 * * * *" # run every 5 minutes
+    enabled: 1

@@ -1,0 +1,7 @@
+---
+Name: 'assets-sync-injection'
+---
+Injector:
+  AssetsSyncRequestProcessorTask:
+    constructor:
+      0: '%$TransactionManager'
