@@ -101,7 +101,7 @@
                 </div>
                 <div class="col-lg-6 col-sm-6 news-wrapper">
                     <h2>News <a href="/news">See More News <i class="fa fa-caret-right"></i></h2>
-                    <a href="/telecoms-and-nfv/"><img class="news-ad" src="/themes/openstack/images/homepage/nfv-homepage-banner.jpg"></a>
+                    <a href="/passport"><img class="news-ad" src="/assets/passport/passport-banner-homepage.png"></a>
                     
                        <% loop NewsItems %>
                             <!-- News Item -->
