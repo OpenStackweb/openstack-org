@@ -34,7 +34,7 @@ final class SendGridEmailSenderTask extends CronTask
 
             $processed = SapphireTransactionManager::getInstance()->transaction(function() use($batch_size ){
 
-                $emails           = SentEmailSendGrid::get()->filter(['IsSent' => 0])->sort('Created', 'ASC')->limit($batch_size, 0);
+                $emails           = SentEmailSendGrid::get()->filter(['IsSent' => 0])->sort('Created', 'DESC')->limit($batch_size, 0);
                 $send_grid_mailer = new SendGridWebMailer(null);
                 $counter          = 0;
 

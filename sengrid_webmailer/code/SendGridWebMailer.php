@@ -60,9 +60,12 @@ class SendGridWebMailer extends Mailer {
         $this->processAttachments($mail, $attachedFiles);
 
         // send mail via sendgrid web API
-        $response = $sendgrid->client->mail()->send()->post($mail);
+        $response      = $sendgrid->client->mail()->send()->post($mail);
+        $response_code = $response->statusCode();
+        $response_body = $response->statusCode();
 
-        return $response->statusCode() == 202;
+        echo sprintf('sendgrid response - status code %s - body %s', $response_code, $response_body).PHP_EOL;
+        return $response_code == 202;
     }
 
     /* Overwriting SilverStripe's Mailer function */
@@ -88,11 +91,14 @@ class SendGridWebMailer extends Mailer {
         $mail->addContent($content);
         $this->processAttachments($mail, $attachedFiles);
 
-
         // send mail via sendgrid web API
-        $response = $sendgrid->client->mail()->send()->post($mail);
 
-        return $response->statusCode() == 202;
+        $response      = $sendgrid->client->mail()->send()->post($mail);
+        $response_code = $response->statusCode();
+        $response_body = $response->statusCode();
+
+        echo sprintf('sendgrid response - status code %s - body %s', $response_code, $response_body).PHP_EOL;
+        return $response_code == 202;
     }
 
     /**
