@@ -91,10 +91,10 @@
 			</div>
 			<div class="col-sm-2 col-xs-6">
 				<a href="/foundation/companies/profile/ovh-group">
-					<div class="img-wrapper">
-						<img src="/assets/Uploads/_resampled/SetWidth138-Group-NORMAL-15-cm-copy.png" alt="OVH Group">
+                	<div class="img-wrapper">
+						<img src="/assets/companies/main_logo/_resampled/SetWidth138-logo-ovh-horizontal-blue.png" alt="logo-ovh-horizontal-blue.png">	
 					</div>
-					<p class="center">OVH Group</p>
+					<p class="center">OVH</p>
 				</a>
 			</div>
 			<div class="col-sm-2 col-xs-6">
