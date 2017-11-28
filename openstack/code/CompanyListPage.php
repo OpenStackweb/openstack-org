@@ -18,7 +18,18 @@ class CompanyListPage extends Page
     static $db = array();
     static $has_one = array();
     static $has_many = array(
-        'Company' => 'Company'
+        'Company'   => 'Company'
+    );
+
+    static $many_many = array(
+        'Donors'    => 'Company'
+    );
+
+    //sponsor type
+    static $many_many_extraFields = array(
+        'Donors' => array(
+            'SortOrder' => 'Int',
+        )
     );
 
     function getCMSFields()
@@ -26,6 +37,14 @@ class CompanyListPage extends Page
         $fields = parent::getCMSFields();
         $companiesTable = new GridField('Company', 'Company',$this->Company());
         $fields->addFieldToTab('Root.Companies', $companiesTable);
+
+        $config = GridFieldConfig_RelationEditor::create(20);
+        $config->addComponent($sort = new GridFieldSortableRows('SortOrder'));
+        $config->removeComponentsByType('GridFieldEditButton');
+        $config->removeComponentsByType('GridFieldAddNewButton');
+        $donorsTable = new GridField('Donors', 'Donors', $this->Donors(), $config);
+        $fields->addFieldToTab('Root.Companies', $donorsTable);
+
         return $fields;
     }
 }
@@ -86,6 +105,12 @@ class CompanyListPage_Controller extends Page_Controller
     {
         $FeaturedCompanies = Company::get()->filter('Featured' , 1)->sort('Name');
         return $FeaturedCompanies;
+    }
+
+    function getDonorsOrdered()
+    {
+        $DonorCompanies = $this->Donors()->sort('SortOrder');
+        return $DonorCompanies;
     }
 
     //Show the Company detail page using the CompanyListPage_show.ss template

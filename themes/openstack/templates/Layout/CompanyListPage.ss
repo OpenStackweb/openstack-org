@@ -56,8 +56,8 @@
 							</div>
 							<p class="center">$Name</p>
 						</a>
-						</div>
-					<% end_loop %>
+					</div>
+				<% end_loop %>
 			</div>
 		<% end_if %>
 
@@ -73,58 +73,18 @@
 		</div>
 
 		<div class="row logos">
-			<div class="col-sm-2 col-xs-6">
-				<a rel="nofollow" href="http://www.rackspace.com/">
-					<div class="img-wrapper">
-						<img src="/assets/Uploads/_resampled/SetWidth138-rackspace-sm.png" alt="Rackspace">
-					</div>
-					<p class="center">Rackspace</p>
-				</a>
-			</div>
-			<div class="col-sm-2 col-xs-6">
-				<a href="/foundation/companies/profile/vexxhost">
-					<div class="img-wrapper">
-						<img src="/assets/logos/vexxhost.jpg" alt="Vexxhost">
-					</div>
-					<p class="center">Vexxhost</p>
-				</a>
-			</div>
-			<div class="col-sm-2 col-xs-6">
-				<a href="/foundation/companies/profile/ovh-group">
-                	<div class="img-wrapper">
-						<img src="/assets/companies/main_logo/_resampled/SetWidth138-logo-ovh-horizontal-blue.png" alt="logo-ovh-horizontal-blue.png">	
-					</div>
-					<p class="center">OVH</p>
-				</a>
-			</div>
-			<div class="col-sm-2 col-xs-6">
-				<a  href="/foundation/companies/profile/hewlett-packard-enterprise">
-					<div class="img-wrapper">
-						<img src="/assets/companies/main_logo/_resampled/SetWidth70-hpe-pri-grn-pos-rgb2.png" alt="Hewlett Packard Enteprise">
-					</div>
-					<p class="center">Hewlett Packard Enteprise</p>
-				</a>
-			</div>
-			<div class="col-sm-2 col-xs-6">
-	                <a href="/foundation/companies/profile/internap">
-	                	<div class="img-wrapper">
-							
-								<img src="/assets/Uploads/_resampled/SetWidth138-internap.png" alt="internap.png">
-							
-						</div>
-						<p class="center">Internap </p>
-			</a>
-			</div>
-			<div class="col-sm-2 col-xs-6">
-	                <a href="/foundation/companies/profile/city-network">
-	                	<div class="img-wrapper">
-							
-								<img src="/assets/companies/main_logo/_resampled/SetWidth138-CityNetwork-Logo-Regular-200px-RGB.png" alt="City Network">
-							
-						</div>
-						<p class="center">City Network </p>
-			</a>
-			</div>
+			<% loop getDonorsOrdered() %>
+                <div class="col-sm-2 col-xs-6">
+                    <a <% if IsExternalUrl %>rel="nofollow"<% end_if %> href="$ShowLink">
+                        <div class="img-wrapper">
+							<% loop Logo %>
+                                <img src="{$SetWidth(138).URL}" alt="$Name">
+							<% end_loop %>
+                        </div>
+                        <p class="center">$Name</p>
+                    </a>
+                </div>
+			<% end_loop %>
 		</div>
 
 		<!-- Corporate & Startup Members -->
