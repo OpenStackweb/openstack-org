@@ -67,16 +67,16 @@
                     <p class="company">OpenStack Foundation</p>
                 </div>
                 <div class="col-md-3 col-sm-6 video-wall-item">
-                    <a href="https://youtu.be/_NqvjdNCudA" target="_blank">
+                    <a href="https://youtu.be/BdIzryvX7gc" target="_blank">
                         <div class="video-wrapper small video-border">
                             <div class="play-button">
                                 <img src="https://d33wubrfki0l68.cloudfront.net/ae6ec7ae079aebf50ba0432743f680ce40c26624/3c5ba/images/play-button.png">
                             </div>
-                            <img class="video-image" src="https://img.youtube.com/vi/_NqvjdNCudA/maxresdefault.jpg" alt="OpenDev Opening Keynotes: Beth Cohen">
+                            <img class="video-image" src="https://img.youtube.com/vi/BdIzryvX7gc/maxresdefault.jpg" alt="OpenDev Opening Keynotes: Kandan Kathirvel & Rodolfo Pacheco">
                         </div>
                     </a>
-                    <p class="speaker">Beth Cohen</p>
-                    <p class="company">Verizon</p>
+                    <p class="speaker">Kandan Kathirvel & Rodolfo Pacheco</p>
+                    <p class="company">AT&T</p>
                 </div>
                 <div class="col-md-3 col-sm-6 video-wall-item">
                     <a href="https://youtu.be/YHRYdiYRsHI" target="_blank">
@@ -394,12 +394,25 @@
             </div>
         </div>
     </div>
+    <div class="container-fluid hero">
+        <div class="col-xs-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
+            <div class="col-xs-12 col-sm-4 logo">
+                <img src="/marketplace/code/ui/frontend/images/logo.svg" alt="">
+            </div>
+            <div class="col-xs-12 col-sm-8 text">
+                <h3>The OpenStack Public Cloud Passport</h3>
+                <h5>With more than <strong>60 availability zones across more than 20 countries</strong>, OpenStack providers collectively represent the broadest public cloud footprint.</h5>
+                <h5>Explore the  OpenStack Global Passport Program, a collaborative effort between OpenStack public cloud providers that lets you experience the freedom, performance and interoperability of open source infrastructure.</h5>
+                <button class="btn">Try Out a Public Cloud <i class="fa fa-arrow-circle-down"></i></button>
+            </div>
+        </div>
+    </div>
     <div class="edge-email-signup">
         <div class="container">
             <div class="row">
                 <div class="col-sm-10 col-sm-push-1">
                     <h2>Interested in learning more about Edge Computing?</h2>
-                    <a href="http://lists.openstack.org/cgi-bin/mailman/listinfo/edge-computing" class="edge-interest-btn" target="_blank">
+                    <a href="mailto:events@openstack.org" class="edge-interest-btn">
                         Sign Up Here
                         <i class="fa fa-chevron-right" aria-hidden="true"></i>
                     </a>
