@@ -21,6 +21,10 @@
                             <i class="fa fa-cloud-download"></i>
                         </a>
                     <% end_if %>
+                        <a href="https://www.openstack.org/assets/summits/vancouver-2017/DRAFT-READ-ONLY-Executable-OpenStack-Event-Sponsorship-Agreement-VANCOUVER-SUMMIT.pdf" class="btn register-btn-lrg" style="margin: 10px;">
+                            Draft Contract
+                            <i class="fa fa-cloud-download"></i>
+                        </a> 
                     <% if RegisterUrl %>
                         <a href="{$RegisterUrl}" class="btn register-btn-lrg" style="margin: 10px;">Register Now</a>
                         <p style="margin-top:30px;">
@@ -28,6 +32,12 @@
                         </p>
                     <% end_if %>
                 </div> 
+                <div>
+                    <a href="https://www.openstack.org/assets/events/2018EventPortfolio-1127.pdf" class="btn register-btn-lrg" style="margin: 10px;">
+                        2018 Event Sponsor Portfolio
+                        <i class="fa fa-cloud-download"></i>
+                    </a> 
+                </div>
                 <div class="landing-social">
                     <a target="_blank" class="social-icons landing-twitter" onclick="return windowpop(this.href, 545, 433)" href="http://twitter.com/share?text={$ShareText}&url={$AbsoluteLink}"></a>
                     <a target="_blank" class="social-icons landing-facebook" onclick="return windowpop(this.href, 545, 433)" 
