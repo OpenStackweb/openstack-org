@@ -407,19 +407,6 @@
             </div>
         </div>
     </div>
-    <div class="edge-email-signup">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-10 col-sm-push-1">
-                    <h2>Interested in learning more about Edge Computing?</h2>
-                    <a href="mailto:events@openstack.org" class="edge-interest-btn">
-                        Sign Up Here
-                        <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
 
