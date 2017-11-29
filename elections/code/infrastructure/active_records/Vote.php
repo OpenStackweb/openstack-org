@@ -18,20 +18,12 @@ final class Vote
 	extends DataObject
 	implements IVote {
 
-	static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
+	static $db = [];
 
-	static $db = array(
-
-	);
-
-	static $has_one = array(
+	static $has_one = [
 		'Voter'    => 'Member',
 		'Election' => 'Election',
-	);
-
-	static $indexes = array(
-		'Voter_Election' => array('type'=>'unique', 'value'=>'VoterID,ElectionID'),
-	);
+	];
 
 	/**
 	 * @return int

@@ -99,6 +99,7 @@ jobs:
     enabled: 1
 
   - name: "RevocationNotificationSenderTask"
+    params: "batch_size=1000"
     cron_expression: "*/5 * * * *"
     enabled: 0
 
@@ -110,7 +111,7 @@ jobs:
   - name: "RevocationExecutorTask"
     params: "batch_size=10000"
     cron_expression: "59 11 * * *"
-    enabled: 0
+    enabled: 1
 
   - name: "OpenStackIdCleanInvalidNoncesAssocsTask"
     cron_expression: "00 03 * * *" # run at 0300 AM every day

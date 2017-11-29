@@ -61,7 +61,7 @@ final class RevocationNotificationAction_Controller extends Page_Controller {
 	public function logout(){
 		$current_member = Member::currentUser();
 		if($current_member){
-			return OpenStackIdCommon::doLogout();
+			return OpenStackIdCommon::doLogout(Director::baseURL());
 		}
 		return Controller::curr()->redirectBack();
 	}

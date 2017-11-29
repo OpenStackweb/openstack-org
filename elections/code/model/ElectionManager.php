@@ -95,69 +95,74 @@ final class ElectionManager {
 	 */
 	public function ingestVotersForElection($filename, $election_id, DateTime $open_date, DateTime $close_date){
 
-		$election_repository          = $this->election_repository;
-		$foundation_member_repository = $this->foundation_member_repository;
-		$vote_factory                 = $this->vote_factory;
-		$vote_repository              = $this->vote_repository;
-		$voter_file_factory           = $this->voter_file_factory;
-		$voter_file_repository        = $this->voter_file_repository;
-		$election_factory             = $this->election_factory;
 
+		return $this->tx_manager->transaction(function() use ($filename, $election_id, $open_date, $close_date){
 
-		return $this->tx_manager->transaction(function() use ($filename, $election_id,$open_date,$close_date, $election_repository, $foundation_member_repository, $vote_factory, $vote_repository, $voter_file_factory, $voter_file_repository, $election_factory){
-
-			if($voter_file_repository->getByFileName($filename))
+			if($this->voter_file_repository->getByFileName($filename))
 				throw new EntityAlreadyExistsException('VoterFile',sprintf('filename = %s',$filename));
 
 
-			$election =  $election_repository->getById($election_id);
+			$election =  $this->election_repository->getById($election_id);
 			if(!$election){
-				$election = $election_factory->build($election_id, $open_date, $close_date);
-				$election_repository->add($election);
+				$election = $this->election_factory->build($election_id, $open_date, $close_date);
+				$election->write();
 			}
 			$reader   = new CSVReader($filename);
 
 			$line          = false;
 			$header        = $reader->getLine();
 			$count         = 0;
-			$not_processed = array();
-
+			$not_processed = [];
+            $already_voted = [];
 			while($line = $reader->getLine()){
 
                 $first_name        = $line[1];
 				$last_name         = $line[2];
 				$member_id         = (int)$line[3];
-                $members_2_process = array();
-				$member            = $foundation_member_repository->getById($member_id);
+				$members_2_process = [];
+				$member            = $this->foundation_member_repository->getById($member_id);
 
-                if(!is_null($member)){
-                    $members_2_process[] = $member;
+                echo sprintf("processing member id %s - first_name %s - last_name %s", $member_id, $first_name, $last_name).PHP_EOL;
+                if(is_null($member)){
+                    echo sprintf("cant find member by id %s. trying by first_name (%s) - last_name (%s)", $member_id, $first_name, $last_name).PHP_EOL;
+                    // possible returns a list (array)
+                    $members_2_process = $this->foundation_member_repository->getByCompleteName($first_name, $last_name);
                 }
-				else {
-                    $members_2_process = $foundation_member_repository->getByCompleteName($first_name, $last_name);
-                }
+                else $members_2_process[] = $member;
 
                 if(count($members_2_process) == 0)
                 {
+                    echo sprintf("cant find matches for member id %s - first_name %s - last_name %s on db. skipping it", $member_id, $first_name, $last_name).PHP_EOL;
                     $not_processed[] = ['id' => $member_id, 'first_name' => $first_name, 'last_name' => $last_name ];
                     continue;
                 }
 
-                foreach($members_2_process as $member) {
-                    if ($member && $member->isFoundationMember()) {
-                        $vote = $vote_factory->buildVote($election, $member);
-                        $vote_repository->add($vote);
-                        $count++;
-                    } else {
-                        $not_processed[] = ['id' => $member_id, 'first_name' => $first_name, 'last_name' => $last_name ];
+                foreach($members_2_process as $member_2_process) {
+
+                    if (!$member_2_process->isFoundationMember()) {
+                        echo sprintf("member id %s - first_name %s - last_name %s is not foundation member. skipping it ...", $member_id, $first_name, $last_name).PHP_EOL;
+                        $not_processed[] = ['id' => $member_id, 'first_name' => $first_name, 'last_name' => $last_name];
+                        continue;
                     }
+
+                    if(in_array($member_2_process->ID, $already_voted)){
+                        echo sprintf("member id %s - first_name %s - last_name %s already voted as member id %s", $member_id, $first_name, $last_name, $member_2_process->ID).PHP_EOL;
+                        $not_processed[] = ['id' => $member_id, 'first_name' => $first_name, 'last_name' => $last_name];
+                        continue;
+                    }
+
+                    echo sprintf("processed member id %s - first_name %s - last_name %s OK", $member_id, $first_name, $last_name).PHP_EOL;
+                    $vote = $this->vote_factory->buildVote($election, $member_2_process);
+                    $vote->write();
+                    $already_voted[] = $member_2_process->ID;
+                    $count++;
                 }
-			}
+         	}
 
-			$voter_file = $voter_file_factory->build($filename);
-			$voter_file_repository->add($voter_file);
+			$voter_file = $this->voter_file_factory->build($filename);
+			$voter_file->write();
 
-			return array($count,$not_processed);
+			return array($count, $not_processed);
 		});
 	}
 } 

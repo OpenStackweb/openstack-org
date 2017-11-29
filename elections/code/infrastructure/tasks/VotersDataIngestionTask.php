@@ -17,26 +17,33 @@
  */
 final class VotersDataIngestionTask extends CronTask {
 
-	function run(){
+    /**
+     * @var ElectionManager
+     */
+    private $manager;
+
+    /**
+     * VotersDataIngestionTask constructor.
+     * @param ElectionManager $manager
+     */
+    public function __construct(ElectionManager $manager)
+    {
+        $this->manager = $manager;
+        parent::__construct();
+    }
+
+    function run(){
 
 		try{
 
 			$election_input_path = Director::baseFolder().'/'. ELECTION_VOTERS_INGEST_PATH;
 			$files               = scandir($election_input_path);
-			$manager             = new ElectionManager(new SapphireElectionRepository,
-										   new SapphireFoundationMemberRepository,
-										   new SapphireVoteRepository,
-										   new SapphireVoterFileRepository,
-										   new VoteFactory,
-										   new VoterFileFactory,
-										   new ElectionFactory,
-										   SapphireTransactionManager::getInstance());
 
 			foreach($files as $file_name){
 				if($this->isCSV($file_name) && list($election_id,$open_date,$close_date) = $this->isValidElectionFileName($file_name)){
 					try{
 						echo printf('processing file %s'.PHP_EOL,$file_name);
-						list($count, $not_processed) = $manager->ingestVotersForElection($election_input_path.'/'.$file_name, $election_id,$open_date,$close_date);
+						list($count, $not_processed) = $this->manager->ingestVotersForElection($election_input_path.'/'.$file_name, $election_id,$open_date,$close_date);
 						echo printf('file %s - processed %d rows - not processed %d rows'.PHP_EOL, $file_name, $count, count($not_processed));
 						
 						if(count($not_processed) > 0){

@@ -1,0 +1,50 @@
+---
+Name: 'elections-injection'
+---
+Injector:
+  ElectionRepository:
+    class: SapphireElectionRepository
+  FoundationMemberRepository:
+    class: SapphireFoundationMemberRepository
+  VoteRepository:
+    class: SapphireVoteRepository
+  VoterFileRepository:
+    class: SapphireVoterFileRepository
+  VoteFactory:
+    class: VoteFactory
+  VoterFileFactory:
+    class: VoterFileFactory
+  ElectionFactory:
+    class: ElectionFactory
+  FoundationMemberRevocationNotificationRepository:
+    class: SapphireFoundationMemberRevocationNotificationRepository
+  RevocationNotificationFactory:
+    class: RevocationNotificationFactory
+  ElectionManager:
+    constructor:
+      0: '%$ElectionRepository'
+      1: '%$FoundationMemberRepository'
+      2: '%$VoteRepository'
+      3: '%$VoterFileRepository'
+      4: '%$VoteFactory'
+      5: '%$VoterFileFactory'
+      6: '%$ElectionFactory'
+      7: '%$TransactionManager'
+  RevocationNotificationManager:
+      constructor:
+        0: '%$FoundationMemberRepository'
+        1: '%$FoundationMemberRevocationNotificationRepository'
+        2: '%$ElectionRepository'
+        3: '%$RevocationNotificationFactory'
+        4: '%$TransactionManager'
+  VotersDataIngestionTask:
+    constructor:
+      0: '%$ElectionManager'
+  RevocationNotificationSenderTask:
+    constructor:
+      0: '%$RevocationNotificationManager'
+  RevocationExecutorTask:
+    constructor:
+      0: '%$RevocationNotificationManager'
+
+

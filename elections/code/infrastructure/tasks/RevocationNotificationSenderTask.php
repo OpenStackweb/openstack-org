@@ -16,6 +16,21 @@
  */
 final class RevocationNotificationSenderTask extends CronTask {
 
+    /**
+     * @var RevocationNotificationManager
+     */
+    private $manager;
+
+    /**
+     * RevocationNotificationSenderTask constructor.
+     * @param RevocationNotificationManager $manager
+     */
+    public function __construct(RevocationNotificationManager $manager)
+    {
+        $this->manager = $manager;
+        parent::__construct();
+    }
+
 	function run(){
 
 		try{
@@ -27,13 +42,7 @@ final class RevocationNotificationSenderTask extends CronTask {
 				$batch_size = intval(trim(Convert::raw2sql($_GET['batch_size'])));
 			}
 
-			$manager = new RevocationNotificationManager(new SapphireFoundationMemberRepository,
-				new SapphireFoundationMemberRevocationNotificationRepository,
-				new SapphireElectionRepository,
-				new RevocationNotificationFactory,
-				SapphireTransactionManager::getInstance());
-
-			$count = $manager->sendOutNotifications
+			$count = $this->manager->sendOutNotifications
             (
                 $max_past_elections,
                 $batch_size,

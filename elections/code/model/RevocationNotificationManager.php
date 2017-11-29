@@ -68,41 +68,32 @@ final class RevocationNotificationManager {
 	 */
 	public function sendOutNotifications($max_past_elections, $batch_size, IRevocationNotificationSender $sender){
 
-		$foundation_member_repository = $this->foundation_member_repository;
-		$notification_factory         = $this->notification_factory;
-		$notification_repository      = $this->notification_repository;
-		$election_repository          = $this->election_repository;
-
 		return $this->tx_manager->transaction(function() use
         (
             $max_past_elections,
             $batch_size,
-            $sender,
-            $foundation_member_repository,
-            $notification_repository,
-            $election_repository,
-            $notification_factory
+            $sender
         )
         {
 
-            $res           = $foundation_member_repository->getMembersThatNotVotedOnLatestNElections
+            $res           = $this->foundation_member_repository->getMembersThatNotVotedOnLatestNElections
                             (
                                 $max_past_elections,
                                 $batch_size,
                                 0,
-                                $election_repository
+                                $this->election_repository
                             );
 
-			$last_election = $election_repository->getLatestNElections(1);
+			$last_election = $this->election_repository->getLatestNElections(1);
 			$last_election = $last_election[0];
 
 			foreach($res as $foundation_member_id){
 
-				$foundation_member = $foundation_member_repository->getById($foundation_member_id);
-				$notification      = $notification_factory->build($foundation_member, $last_election);
+				$foundation_member = $this->foundation_member_repository->getById($foundation_member_id);
+				$notification      = $this->notification_factory->build($foundation_member, $last_election);
 
-				$sender->send($foundation_member, $notification, $notification_repository);
-				$notification_repository->add($notification);
+				$sender->send($foundation_member, $notification, $this->notification_repository);
+				$notification->write();
 			}
 			return count($res);
 		});
@@ -112,9 +103,12 @@ final class RevocationNotificationManager {
 	 * @param int $batch_size
 	 */
 	public function revokeIgnoredNotifications($batch_size){
-		$notification_repository = $this->notification_repository;
-		$this->tx_manager->transaction(function() use($batch_size, $notification_repository){
-			$notifications = $notification_repository->getNotificationsSentXDaysAgo(IFoundationMemberRevocationNotification::DaysBeforeRevocation, $batch_size);
+		$this->tx_manager->transaction(function() use($batch_size){
+			$notifications = $this->notification_repository->getNotificationsSentXDaysAgo
+            (
+                IFoundationMemberRevocationNotification::DaysBeforeRevocation,
+                $batch_size
+            );
 			foreach($notifications as $notification){
 				$notification->revoke();
 			}
@@ -134,9 +128,8 @@ final class RevocationNotificationManager {
 	 * @param IFoundationMemberRevocationNotification $notification
 	 */
 	public function renewNotification(IFoundationMemberRevocationNotification $notification){
-		$election_repository  = $this->election_repository;
-		$this->tx_manager->transaction(function() use($notification , $election_repository){
-			$latest_election  = $election_repository->getLatestNElections(1);
+		$this->tx_manager->transaction(function() use($notification){
+			$latest_election  = $this->election_repository->getLatestNElections(1);
 			$latest_election  = $latest_election[0];
 			$notification->renew($latest_election);
 		});
@@ -146,12 +139,11 @@ final class RevocationNotificationManager {
 	 * @param IFoundationMemberRevocationNotification $notification
 	 */
 	public function deleteAccount(IFoundationMemberRevocationNotification $notification){
-		$foundation_member_repository = $this->foundation_member_repository;
-		$this->tx_manager->transaction(function() use($notification, $foundation_member_repository){
+		$this->tx_manager->transaction(function() use($notification){
 			$notification->resign();
 			$foundation_member = $notification->recipient();
 			$foundation_member->logOut();
-			$foundation_member_repository->delete($foundation_member);
+			$this->foundation_member_repository->delete($foundation_member);
 		});
 	}
 } 
