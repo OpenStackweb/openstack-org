@@ -456,6 +456,9 @@ img.discover {
     .hero .logo{
         margin-top: 3em;
     }
+   .edge-working-group {
+        padding-bottom: 20px;
+   }
 
 }
 
@@ -469,7 +472,7 @@ img.discover {
         font-size: 88%;
     }
    .edge-working-group {
-        padding-top: 20px;
+        padding-bottom: 20px;
    }
 }
 
@@ -481,6 +484,9 @@ img.discover {
   .text .btn {
     margin-bottom: 40px;
     }
+   .edge-working-group {
+        padding-bottom: 20px;
+   }
 
 }
 
