@@ -157,6 +157,9 @@
                     <p>
                         OpenStack is already the most highly distributed infrastructure software, running in thousands of datacenters around the world, and many users in the telecom and retail industries are working now to advance the edge computing use case with OpenStack. 
                     </p>
+                    <p><a href="http://lists.openstack.org/cgi-bin/mailman/listinfo/edge-computing" target="_blank">Sign up here to learn more about Edge Computing</a>.</p>
+
+
                 </div>
             </div>
         </div>
@@ -395,11 +398,11 @@
         </div>
     </div>
     <div class="container-fluid hero">
-        <div class="col-xs-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
-            <div class="col-xs-12 col-sm-4 logo">
+        <div class="col-xs-12 col-md-10 col-lg-12">
+            <div class="col-xs-4 col-sm-3 logo">
                 <img src="/marketplace/code/ui/frontend/images/logo.svg" alt="">
             </div>
-            <div class="col-xs-12 col-sm-8 text">
+            <div class="col-xs-8 col-sm-9 text">
                 <h3>The OpenStack Public Cloud Passport</h3>
                 <h5>With more than <strong>60 availability zones across more than 20 countries</strong>, OpenStack providers collectively represent the broadest public cloud footprint.</h5>
                 <h5>Explore the  OpenStack Global Passport Program, a collaborative effort between OpenStack public cloud providers that lets you experience the freedom, performance and interoperability of open source infrastructure.</h5>
@@ -407,9 +410,6 @@
             </div>
         </div>
     </div>
-
-
-
     <!-- Hero Video Modal -->
     <div class="modal fade" id="VideoModal">
       <div class="modal-dialog">

@@ -405,6 +405,7 @@ img.discover {
       background: url('/marketplace/code/ui/frontend/images/hero.jpg') no-repeat;
       background-size: 100% 100%;
       padding: 0;
+      margin-bottom:-50px;
 }
 
 .hero .logo{
@@ -464,9 +465,12 @@ img.discover {
     margin-top: 1em;
   }
 
-    .text{
+  .text{
         font-size: 88%;
     }
+   .edge-working-group {
+        padding-top: 20px;
+   }
 }
 
 @media (max-width: 660px) {
