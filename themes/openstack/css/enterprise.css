@@ -1611,9 +1611,11 @@ img.global-figures-chart {
   .summit-promo p {
     color: white; }
   .summit-promo.barcelona {
-    background: url('/assets/boston-summit/promo/OS-Boston-WebBanners-Red-Stamp-Theater-1300x576.jpg') no-repeat scroll center center; 
+    background: url(/assets/sydney-summit/images/sydney-red-bkgd.png);
+    padding: 60px 0 90px;
+    margin-bottom: -50px;
     background-size: cover;
-      margin-bottom: -50px;
+    background-position: center bottom;
 }
 .summit-promo .nfv-summit-right {
     margin-top: 10px;

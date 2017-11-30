@@ -134,12 +134,14 @@ a.testimonial-link {
   width: 100%; }
 
 .summit-promo {
-  width: 100%; }
+  width: 100%; 
+}
   .summit-promo.nfv {
-    background: url('/assets/boston-summit/promo/OS-Boston-WebBanners-Red-Stamp-Theater-1300x576.jpg') no-repeat scroll center center; 
-    background-size: cover;
-    padding: 60px 0 80px; 
+    background: url(/assets/sydney-summit/images/sydney-red-bkgd.png);
+    padding: 60px 0 90px;
     margin-bottom: -50px;
+    background-size: cover;
+    background-position: center bottom;
   }
   .summit-promo.nfv h3 {
     color: white; }

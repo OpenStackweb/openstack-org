@@ -212,10 +212,11 @@
     min-height: 200px; } }
 
 .summit-promo.containers {
-  background: url(/themes/openstack/images/containers-r/OS-Boston-WebBanners-Red-Stamp-Theater-1300x576.jpg) no-repeat scroll center center;
-  background-size: cover;
-  padding: 60px 0 90px; 
+  background: url(/assets/sydney-summit/images/sydney-red-bkgd.png);
+  padding: 60px 0 90px;
   margin-bottom: -50px;
+  background-size: cover;
+  background-position: center bottom;
 }
 
 .summit-promo.containers .nfv-summit-right .nfv-summit-dates.containers {

@@ -405,8 +405,8 @@
                 </div>
                 <div class="col-sm-9 text">
                     <h3>The OpenStack Public Cloud Passport</h3>
-                    <h5>With more than <strong>60 availability zones across more than 20 countries</strong>, OpenStack providers collectively represent the broadest public cloud footprint.</h5>
-                    <h5>Explore the  OpenStack Global Passport Program, a collaborative effort between OpenStack public cloud providers that lets you experience the freedom, performance and interoperability of open source infrastructure.</h5>
+                    <p>With more than <strong>60 availability zones across more than 20 countries</strong>, OpenStack providers collectively represent the broadest public cloud footprint.</p>
+                    <p>Explore the  OpenStack Global Passport Program, a collaborative effort between OpenStack public cloud providers that lets you experience the freedom, performance and interoperability of open source infrastructure.</p>
                     <a href="/passport" class="btn">Try Out a Public Cloud <i class="fa fa-arrow-circle-down"></i></a>
                 </div>
             </div>

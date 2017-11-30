@@ -63,7 +63,7 @@
                 <div class="col-lg-8 col-lg-push-2">
                   <img src="/assets/containers/fico-logo-med.png">
                     <blockquote>
-                        OpenStack is very stable with the recent releases and I have no complains for running cloud native applications and containers in my private cloud.
+                        OpenStack is very stable with the recent releases and I have no complaints for running cloud native applications and containers in my private cloud.
                     </blockquote>
                     <div class="testimonial-attribute">
                       <img class="testimonial-author-img" src="/assets/containers/advin-headshot.jpg">
@@ -75,8 +75,6 @@
         </div>
     </div>
     <!-- End Quote -->
-
-
     <div class="containers-highlights r">
         <div class="container">
             <div class="row">
@@ -101,7 +99,9 @@
             <div class="row">
               <div class="col-sm-10 col-sm-push-1">
                 <hr style="margin:30px 0 60px;">
-                <h3 style="margin-bottom:30px;">What containers & Platform-as-a-Service tools are OpenStack users deploying?</h3>
+                <h3>What containers & Platform-as-a-Service tools are OpenStack users deploying?</h3>
+              </div>
+              <div class="col-sm-10 col-sm-push-1" style="margin-top:-100px;margin-bottom:-120px;">
                 <img src="https://www.openstack.org/assets/containers/User-Survey-Chart-Figure1.7.svg" alt="">
               </div>
             </div>
