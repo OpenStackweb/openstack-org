@@ -14,22 +14,31 @@
                    <br>
                    $LocSubtitle
                 </div>
+                <div style="margin-bottom:30px;">
+                    <a href="https://openstacksummit2018vancouver.eventbrite.com" style="margin: 10px;" class="btn register-btn-lrg">
+                        Register Now
+                        <i class="fa fa-cloud-download"></i>
+                    </a> 
+                </div>
+                <h1>SPONSORSHIP INFORMATION</h1>
+                <div style="margin-top:20px;"> 
+                    
+                        <a href="https://www.openstack.org/assets/summits/vancouver-2017/FINAL-Vancouver-2018-Sponsor-Prospectus-1128.pdf" style="margin: 10px;" class="btn register-btn-lrg">
+                            Sponsorship Prospectus
+                            <i class="fa fa-cloud-download"></i>
+                        </a>
+                        <a href="https://www.openstack.org/assets/summits/vancouver-2017/DRAFT-READ-ONLY-Executable-OpenStack-Event-Sponsorship-Agreement-VANCOUVER-SUMMIT.pdf" style="margin: 10px;" class="btn register-btn-lrg">
+                            Draft Contract
+                            <i class="fa fa-cloud-download"></i>
+                        </a> 
+                </div>
+                <!-- 
                 <div> 
                     <% if ProspectusUrl %>
                         <a href="{$ProspectusUrl}" class="btn register-btn-lrg" style="margin: 10px;">
                             Sponsorship Prospectus
                             <i class="fa fa-cloud-download"></i>
                         </a>
-                        <a href="https://www.openstack.org/assets/summits/vancouver-2017/DRAFT-READ-ONLY-Executable-OpenStack-Event-Sponsorship-Agreement-VANCOUVER-SUMMIT.pdf" class="btn register-btn-lrg" style="margin: 10px;">
-                            Draft Contract
-                            <i class="fa fa-cloud-download"></i>
-                        </a> 
-                </div> 
-                <div>
-                    <a href="https://www.openstack.org/assets/events/2018EventPortfolio-1127.pdf" class="btn register-btn-lrg" style="margin: 10px;">
-                        2018 Event Sponsor Portfolio
-                        <i class="fa fa-cloud-download"></i>
-                    </a> 
                     <% end_if %>
                     <% if RegisterUrl %>
                         <a href="{$RegisterUrl}" class="btn register-btn-lrg" style="margin: 10px;">Register Now</a>
@@ -38,6 +47,7 @@
                         </p>
                     <% end_if %>
                 </div>
+                -->
                 <div class="landing-social">
                     <a target="_blank" class="social-icons landing-twitter" onclick="return windowpop(this.href, 545, 433)" href="http://twitter.com/share?text={$ShareText}&url={$AbsoluteLink}"></a>
                     <a target="_blank" class="social-icons landing-facebook" onclick="return windowpop(this.href, 545, 433)" 
