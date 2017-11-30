@@ -1,0 +1,13 @@
+---
+Name: github_webhooks_injector
+---
+Injector:
+  GitHubPullRequestManager:
+    constructor:
+      0: '%$TransactionManager'
+  ValidatePullRequestAPI:
+    constructor:
+      0: "%$GitHubPullRequestManager"
+  GitHubPullRequestProcessorTask:
+    constructor:
+      0: "%$GitHubPullRequestManager"
