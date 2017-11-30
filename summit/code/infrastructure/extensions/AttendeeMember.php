@@ -18,13 +18,16 @@ final class AttendeeMember extends DataExtension implements IAttendeeMember
         'SummitAttendance'          => 'SummitAttendee',
         'RSVPs'                     => 'RSVP',
         'CalendarSync'              => 'CalendarSyncInfo',
-        'ScheduleSync'              => 'ScheduleCalendarSyncInfo'
+        'ScheduleSync'              => 'ScheduleCalendarSyncInfo',
+        'SummitRegistrationCodes'   => 'MemberSummitRegistrationPromoCode',
     ];
 
     private static $many_many = [
         'FavoriteSummitEvents'  => 'SummitEvent',
         'Schedule'              => 'SummitEvent',
     ];
+
+
 
     /**
      * @param int|null $summit_id

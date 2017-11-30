@@ -18,19 +18,43 @@ final class FoundationMemberRevocationNotification
 	extends DataObject
 	implements IFoundationMemberRevocationNotification {
 
-	static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
-
-	static $db = array(
+	static $db = [
 		'Action'       => "Enum('None, Renew, Revoked, Resign','None')",
 		'ActionDate'   => 'SS_Datetime',
 		'SentDate'     => 'SS_Datetime',
 		'Hash'         => 'Text',
-	);
+	];
 
-	static $has_one = array(
+	static $has_one = [
 		'LastElection' => 'Election',
 		'Recipient'    => 'Member',
-	);
+	];
+
+    public function getActionDateDMY()
+    {
+        if(empty($this->ActionDate)) return 'N/A';
+        $date = new DateTime($this->ActionDate);
+
+        return $date->format('d/m/Y');
+    }
+
+    public function getSentDateDMY()
+    {
+        $date = new DateTime($this->SentDate);
+
+        return $date->format('d/m/Y');
+    }
+    /**
+     * @var array
+     */
+    private static $summary_fields = [
+
+        'ID'               => 'Id',
+        'SentDateDMY'      => 'SentDate',
+        'Action'           => 'Action',
+        'ActionDateDMY'    => 'ActionDate',
+        'LastElection.ID'  => 'Election Id'
+    ];
 
 	protected function onBeforeWrite() {
 		parent::onBeforeWrite();
@@ -90,9 +114,10 @@ final class FoundationMemberRevocationNotification
 	 * @param IElection $latest_election
 	 * @return void
 	 */
-	public function renew(IElection $latest_election)
+	public function renew(IElection $latest_election = null)
 	{
-		AssociationFactory::getInstance()->getMany2OneAssociation($this,'LastElection')->setTarget($latest_election);
+	    if(!is_null($latest_election))
+		    AssociationFactory::getInstance()->getMany2OneAssociation($this,'LastElection')->setTarget($latest_election);
 		$this->setField('Action','Renew');
 		$this->setField('ActionDate',gmdate('Y-m-d H:i:s'));
 	}

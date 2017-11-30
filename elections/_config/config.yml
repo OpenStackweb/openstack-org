@@ -1,0 +1,7 @@
+---
+Name: election_module
+After: 'framework/*','cms/*', 'openstack/*'
+---
+Member:
+  extensions:
+    - FoundationMember

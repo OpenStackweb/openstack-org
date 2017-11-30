@@ -29,8 +29,7 @@ final class FoundationMember
     private static $has_many = array
     (
         'RevocationNotifications' => 'FoundationMemberRevocationNotification',
-        'Votes' => 'Vote',
-        'SummitRegistrationCodes' => 'MemberSummitRegistrationPromoCode',
+        'Votes'                   => 'Vote',
     );
 
     private static $defaults = array
@@ -356,6 +355,20 @@ final class FoundationMember
     public function shouldShowDupesOnProfile()
     {
         return $this->owner->getField('ShowDupesOnProfile');
+    }
+
+    public function updateCMSFields(FieldList $fields)
+    {
+        $fields->removeByName("RevocationNotifications");
+
+        // revocation notifications
+        $config = GridFieldConfig_RecordViewer::create(100);
+        $config->removeComponentsByType('GridFieldAddNewButton');
+        $config->addComponent(new GridFieldAjaxRefresh(1000,false));
+        $config->addComponent(new GridFieldRenewFoundationMembershipAction());
+        $gridField = new GridField('RevocationNotifications', 'RevocationNotifications', $this->owner->RevocationNotifications(), $config);
+        $fields->addFieldToTab('Root.RevocationNotifications', $gridField);
+
     }
 
 }
