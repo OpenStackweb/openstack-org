@@ -1611,9 +1611,9 @@ img.global-figures-chart {
   .summit-promo p {
     color: white; }
   .summit-promo.barcelona {
-    background: url(/assets/sydney-summit/images/sydney-red-bkgd.png);
+    background: url(/assets/sydney-summit/images/blue-for-allison.png);
     padding: 60px 0 90px;
-    margin-bottom: -50px;
+    margin-bottom: -52px;
     background-size: cover;
     background-position: center bottom;
 }
@@ -1640,7 +1640,7 @@ img.global-figures-chart {
 .summit-promo.nfv .nfv-summit-right .nfv-summit-register-btn a i {
   margin-left: 5px; }
 .summit-promo.nfv .nfv-summit-right .nfv-summit-register-btn a:hover {
-  background: #A51B1B;
+  background: #b9301d;
   text-decoration: none; }
 
 .summit-promo.containers h3 {

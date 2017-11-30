@@ -137,9 +137,9 @@ a.testimonial-link {
   width: 100%; 
 }
   .summit-promo.nfv {
-    background: url(/assets/sydney-summit/images/sydney-red-bkgd.png);
+    background: url(/assets/sydney-summit/images/blue-for-allison.png);
     padding: 60px 0 90px;
-    margin-bottom: -50px;
+    margin-bottom: -52px;
     background-size: cover;
     background-position: center bottom;
   }
@@ -172,14 +172,14 @@ a.testimonial-link {
   text-align: center;
   max-width: 80%;
   margin: 10px auto;
-  background: #DA422F;
+  background: #b9301d;
   color: white;
   padding: 10px 20px;
   border-radius: 4px; }
 .summit-promo.nfv .nfv-summit-right .nfv-summit-register-btn a i {
   margin-left: 5px; }
 .summit-promo.nfv .nfv-summit-right .nfv-summit-register-btn a:hover {
-  background: #A51B1B;
+  background: #b9301d;
   text-decoration: none; }
 
 @media (max-width: 767px) {

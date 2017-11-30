@@ -286,35 +286,23 @@
       </div>
     </div>
     <!-- End Featured Content -->
-    <!-- Summit Promo -->
-    <div class="summit-promo containers">
+    <!-- Passport Promo -->
+    <div class="hero">
         <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <h3>Everything you need to know about OpenStack + Containers</h3>
-                    <p>Want to build a strategy around containers and OpenStack? Check out sessions from OpenStack users <strong>eBay, AT&amp;T, Yahoo! Japan</strong> and learn more about the Kubernetes roadmap from Google’s David Aronchick. Plus, hear project updates from OpenStack Magnum, Kuryr, Kolla, Murano and more.
-                    </p>
-                    <p>&nbsp;</p>
-                    <div class="nfv-summit-register-btn">
-                        <a href="//www.openstack.org/videos/sydney-2017/tracks/containers" class="nfv-summit-btn" target="_blank">Watch the Session Videos <i class="fa fa-chevron-right"></i></a>
-                    </div>
+            <div class=“row”>
+                <div class="col-sm-3 logo">
+                    <img src="/marketplace/code/ui/frontend/images/logo.svg" alt="">
                 </div>
-                <!-- <div class="col-sm-4">
-                    <div class="nfv-summit-right">
-                        <img class="nfv-summit-logo" src="/themes/openstack/images/summit-logo-small.svg" alt="OpenStack Summit">
-                        <div class="nfv-summit-dates containers">
-                            May 8-11, 2017 in Boston
-                        </div>
-                        <div class="nfv-summit-register-btn">
-                            <a href="https://www.openstack.org/summit/boston-2017/" class="nfv-summit-btn red" target="_blank">Join Us in Boston <i class="fa fa-chevron-right"></i></a>
-                        </div>
-                    </div>
-                </div> -->
+                <div class="col-sm-9 text">
+                    <h3>The OpenStack Public Cloud Passport</h3>
+                    <p>With more than <strong>60 availability zones across more than 20 countries</strong>, OpenStack providers collectively represent the broadest public cloud footprint.</p>
+                    <p>Explore the  OpenStack Global Passport Program, a collaborative effort between OpenStack public cloud providers that lets you experience the freedom, performance and interoperability of open source infrastructure.</p>
+                    <a href="/passport" class="btn">Try Out a Public Cloud <i class="fa fa-arrow-circle-down"></i></a>
+                </div>
             </div>
         </div>
     </div>
-    <!-- End Summit Promo -->
-   
+    <!-- End Passport Promo -->
     <!-- Download Modal -->
     <div class="modal fade" id="downloadModal">
       <div class="modal-dialog">

@@ -6,10 +6,6 @@
           <a href="/appdev/#top" class="enterprise-bar-right">Back to Top</a>
        </div>
     </div>
-
-
-
-
     <!-- Begin Page Content -->
         <div class="intro-header appdev">
         <div class="container">
@@ -328,39 +324,24 @@
             </div>
         </div>
     </div>
-
-    <!-- Summit Promo -->
-    <div class="summit-promo containers" style="background: url(/assets/boston-summit/promo/OS-Boston-WebBanners-Red-Stamp-Theater-1300x576.jpg)">
+    <!-- Passport Promo -->
+    <div class="hero">
         <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <h3>Around 50% of OpenStack users are running CaaS/PaaS on OpenStack</h3>
-                    <p>
-                        A large community of application developers and ecosystem of container management and PaaS tools has grown around OpenStack. At the Boston Summit, there were workshops and sessions for users who are building and deploying applications on OpenStack clouds, and cover topics like automating and managing application deployment, SDKs, tools, PaaS and big data. 
-                    </p>
-                    <p>&nbsp;</p>
-
-                    <div class="nfv-summit-register-btn">
-                        <a href="/videos/boston-2017/tracks/cloud-app-development" class="nfv-summit-btn" target="_blank">Watch the Session Videos <i class="fa fa-chevron-right"></i></a>
-                    </div>
+            <div class=“row”>
+                <div class="col-sm-3 logo">
+                    <img src="/marketplace/code/ui/frontend/images/logo.svg" alt="">
                 </div>
-                <!-- <div class="col-sm-4">
-                    <div class="containers-summit-right">
-                        <img class="containers-summit-logo" src="/themes/openstack/static/images/summit-logo-small.svg" onerror="this.onerror=null; this.src=/themes/openstack/static/images/summit-logo-small.png" alt="OpenStack Summit">
-                        <div class="containers-summit-dates">
-                            May 8-11 in Boston, MA
-                        </div>
-                        <div class="containers-summit-register-btn">
-                            <a href="https://openstacksummit2017boston.eventbrite.com/" class="nfv-summit-btn" target="_blank">Register Now <i class="fa fa-chevron-right"></i></a>
-                        </div>
-                    </div>
-                </div> -->
+                <div class="col-sm-9 text">
+                    <h3>The OpenStack Public Cloud Passport</h3>
+                    <p>With more than <strong>60 availability zones across more than 20 countries</strong>, OpenStack providers collectively represent the broadest public cloud footprint.</p>
+                    <p>Explore the  OpenStack Global Passport Program, a collaborative effort between OpenStack public cloud providers that lets you experience the freedom, performance and interoperability of open source infrastructure.</p>
+                    <a href="/passport" class="btn">Try Out a Public Cloud <i class="fa fa-arrow-circle-down"></i></a>
+                </div>
             </div>
         </div>
     </div>
-    <!-- End Summit Promo -->
-
-   
+    <!-- End Passport Promo -->
+    
     <!-- Video 1 Modal -->
     <div class="modal fade" id="VideoModal1">
       <div class="modal-dialog">

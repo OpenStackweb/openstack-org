@@ -292,4 +292,78 @@ i.appdev-try-icon {
 
 /*End ISV promo*/
 
+
+.hero {
+background: url(/marketplace/code/ui/frontend/images/hero.jpg) no-repeat;
+background-size: cover;
+background-position: center;
+padding: 40px 0;
+margin-bottom: -50px; 
+}
+
+.text {
+    color: #fff;
+}
+
+.text *{
+    color: #fff;
+    line-height: 2em;
+}
+
+.text h5{
+    margin-bottom: 1em;
+    line-height: 1.5em;
+}
+
+.text .btn{
+    background-color: transparent;
+    border: solid 1px #fff;
+    color: #fff;
+}
+
+.text .btn i{
+    margin-left: 0.5em;
+}
+
+
+@media (max-width: 1100px) {
+    .text {
+        margin-top: 2em;
+    }
+}
+
+
+@media (max-width: 766px) {
+    .text {
+        margin-top: 2em;
+    }
+
+    .text h3{
+        font-size: 1.3em;
+    }
+    .hero .logo{
+        margin-top: 3em;
+    }
+
+}
+
+
+@media (max-width: 580px) {
+  .text {
+    margin-top: 1em;
+    font-size: 88%;
+    }
+}
+
+@media (max-width: 660px) {
+  .hero img{
+    margin-bottom: 2em;
+  }
+
+  .text .btn {
+    margin-bottom: 40px;
+    }
+
+}
+
 /*End App Dev Home Page*/
