@@ -102,7 +102,7 @@
               <div class="col-sm-10 col-sm-push-1">
                 <hr style="margin:30px 0 60px;">
                 <h3 style="margin-bottom:30px;">What containers & Platform-as-a-Service tools are OpenStack users deploying?</h3>
-                <img src="/themes/openstack/images/containers-r/containers-chart.svg" alt="">
+                <img src="https://www.openstack.org/assets/containers/User-Survey-Chart-Figure1.7.svg" alt="">
               </div>
             </div>
         </div>
