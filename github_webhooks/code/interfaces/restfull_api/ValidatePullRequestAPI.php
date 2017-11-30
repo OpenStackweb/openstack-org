@@ -18,43 +18,36 @@
 class ValidatePullRequestAPI extends AbstractRestfulJsonApi  {
 
 
-	const ApiPrefix = 'api/v1/pulls';
+    private static $api_prefix = 'api/v1/pull-requests';
 
 	/**
-	 * @var GitHubPullRequestManager
+	 * @var IPullRequestManager
 	 */
 	private $manager;
 
-	public function __construct()
+    /**
+     * ValidatePullRequestAPI constructor.
+     * @param IPullRequestManager $manager
+     */
+	public function __construct(IPullRequestManager $manager)
 	{
 		parent::__construct();
-		$this->manager = new GitHubPullRequestManager();
-	}
-
-	protected function isApiCall()
-	{
-		$request = $this->getRequest();
-		if(is_null($request)) return false;
-		return  strpos(strtolower($request->getURL()),self::ApiPrefix) !== false;
+		$this->manager = $manager;
 	}
 
 	protected function authenticate() {
 		return true;
 	}
 
+	private static $allowed_github_events = ['pull_request', 'ping'];
 	/**
 	 * @return bool
 	 */
 	protected function authorize()
 	{
-		$data                     = $this->getJsonRequest();
 		$request                  = $this->request;
 		$git_hub_event_header     = $request->getHeader('X-Github-Event');
-		$git_hub_signature_header = $request->getHeader('X-Hub-Signature');
-		$res = false;
-		if($git_hub_event_header == 'pull_request' || $git_hub_event_header=='ping')
-			$res = true;
-		return $res;
+		return in_array($git_hub_event_header, self::$allowed_github_events);
 	}
 
     protected function isPullRequestEvent(){
@@ -66,37 +59,43 @@ class ValidatePullRequestAPI extends AbstractRestfulJsonApi  {
 	/**
 	 * @var array
 	 */
-	static $url_handlers = array(
+	static $url_handlers = [
 		'POST ' => 'validatePullRequest',
-	);
+	];
 
 	/**
 	 * @var array
 	 */
-	static $allowed_actions = array(
+	static $allowed_actions = [
 		'validatePullRequest',
-	);
+	];
 
 	public function validatePullRequest(){
-		$data = $this->getJsonRequest();
-		try{
 
-			if( $this->isPullRequestEvent() && $data != null &&
-				isset($data['action']) &&
-				($data['action']=='opened' || $data['action']=='reopened') &&
-				isset($data['pull_request']) &&
-				$pull_request = $data['pull_request']){
-					$this->manager->validatePullRequest($pull_request);
+		try{
+		    $request                  = $this->request;
+            $git_hub_signature_header = $request->getHeader('X-Hub-Signature');
+
+			if( $this->isPullRequestEvent()){
+                $this->manager->registerPullRequest($request->getBody(), ['X-Hub-Signature' => $git_hub_signature_header]);
 			}
+			return $this->ok();
 		}
 		catch(NotFoundEntityException $ex1){
 			SS_Log::log($ex1,SS_Log::NOTICE);
 			return $this->notFound($ex1->getMessage());
 		}
+        catch(SecurityException $ex2){
+            SS_Log::log($ex2,SS_Log::WARN);
+            return $this->permissionFailure();
+        }
+        catch(UnAuthorizedUser $ex3){
+            SS_Log::log($ex3,SS_Log::WARN);
+            return $this->permissionFailure();
+        }
 		catch(Exception $ex){
 			SS_Log::log($ex,SS_Log::ERR);
 			return $this->serverError();
 		}
-		if (!$data) return $this->serverError();
 	}
 }
