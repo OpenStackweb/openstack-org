@@ -17,7 +17,7 @@
                 <div style="margin-bottom:30px;">
                     <a href="https://openstacksummit2018vancouver.eventbrite.com" style="margin: 10px;" class="btn register-btn-lrg">
                         Register Now
-                        <i class="fa fa-cloud-download"></i>
+                        <i class="fa fa-sign-in"></i>
                     </a> 
                 </div>
                 <h1>SPONSORSHIP INFORMATION</h1>
