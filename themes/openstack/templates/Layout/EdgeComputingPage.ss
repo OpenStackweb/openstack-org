@@ -402,12 +402,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
-                    <h3>Everything you need to know about OpenStack + Containers</h3>
-                    <p>Want to build a strategy around containers and OpenStack? Check out sessions from OpenStack users <strong>eBay, AT&amp;T, Yahoo! Japan</strong> and learn more about the Kubernetes roadmap from Google’s David Aronchick. Plus, hear project updates from OpenStack Magnum, Kuryr, Kolla, Murano and more.
+                    <h3>Everything you need to know about OpenStack + Edge Computing</h3>
+                    <p>Learn how organizations like AT&T, Verizon and Vodafone are using OpenStack to implement an edge computing architecture.
                     </p>
                     <p>&nbsp;</p>
                     <div class="nfv-summit-register-btn">
-                        <a href="//www.openstack.org/videos/sydney-2017/tracks/containers" class="nfv-summit-btn" target="_blank">Watch the Session Videos <i class="fa fa-chevron-right"></i></a>
+                        <a href="/summit/sydney-2017/summit-schedule/global-search?t=Edge" class="nfv-summit-btn" target="_blank">Watch the Session Videos <i class="fa fa-chevron-right"></i></a>
                     </div>
                 </div>
                 <!-- <div class="col-sm-4">
