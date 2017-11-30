@@ -403,7 +403,8 @@ img.discover {
 .hero{
       min-height: 5em;
       background: url('/marketplace/code/ui/frontend/images/hero.jpg') no-repeat;
-      background-size: 100% 100%;
+      background-size: cover;
+      background-position: center;
       padding: 0;
       margin-bottom:-50px;
 }
@@ -424,7 +425,7 @@ img.discover {
 
 .text h5{
     margin-bottom: 1em;
-    line-height: 1.5em
+    line-height: 1.5em;
 }
 
 .text .btn{

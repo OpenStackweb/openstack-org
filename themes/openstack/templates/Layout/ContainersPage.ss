@@ -44,10 +44,13 @@
                 <div class="col-sm-10 col-sm-push-1 center">
                     <h1>Run containers on bare metal or virtual machines with full enterprise storage and networking support</h1>
                     <p>
-                        OpenStack is programmable infrastructure that provides API-driven access to bare metal, virtual machines and container resources—all on a single network. 
+                        OpenStack is composable, open infrastructure that provides API-driven access to compute, storage and networking resources. The flexible platform allows you to deploy bare metal, virtual machines and container resources—all on a single network.
                     </p>
                     <p>
-                      OpenStack provides full enterprise storage and networking support for containers today, because the OpenStack community has already done the work to support the largest number of enterprise systems. While OpenStack is widely known as a private cloud platform, you can access the same open infrastructure immediately from dozens of public cloud providers around the world. Whether you want to run containerized applications on bare metal or virtual machines, OpenStack let’s you run containers the way you want to.
+                      OpenStack supports the largest number of enterprise storage and networking systems today, and running Kubernetes with OpenStack allows you to seamless integrate containers into your environment.
+                    </p>
+                    <p>
+                      While OpenStack is widely known as a private cloud platform, you can access the same open infrastructure immediately from dozens of public cloud providers around the world. Whether you want to run containerized applications on bare metal or VMs, OpenStack let’s you run containers the best way for your business.
                     </p>
                 </div>
             </div>
@@ -58,14 +61,14 @@
         <div class="container"> 
             <div class="row">
                 <div class="col-lg-8 col-lg-push-2">
-                  <a href="https://www.openstack.org/assets/containers/LivePerson.pdf" target="_blank"><img src="/themes/openstack/images/containers-r/liveperson-logo.png"></a>
+                  <img src="/assets/containers/fico-logo-med.png">
                     <blockquote>
-                        The important thing for us as a community is to think about OpenStack as an integration engine that’s agnostic. That puts users in the best position for success. Just like we didn’t reinvent the wheel when it comes to compute, storage and networking, we’ll do the same with containers.
+                        OpenStack is very stable with the recent releases and I have no complains for running cloud native applications and containers in my private cloud.
                     </blockquote>
                     <div class="testimonial-attribute">
-                      <img class="testimonial-author-img" src="/themes/openstack/images/containers-r/holzer.png">
-                        <div class="testimonial-name">Koby Holzer</div>
-                        <div class="testimonial-title">Cloud Engineering Director, LivePerson</div>
+                      <img class="testimonial-author-img" src="/assets/containers/advin-headshot.jpg">
+                        <div class="testimonial-name">AsvinChandar Selvaraj</div>
+                        <div class="testimonial-title">Senior Manager of Converged Infrastructure, FICO </div>
                     </div>
                 </div>
             </div>
@@ -108,7 +111,7 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-12">
-            <h2>Learn more about containers directly from users</h2>
+            <h2>Learn more about combining OpenStack and Kubernetes</h2>
           </div>
         </div>
         <div class="row">
@@ -123,13 +126,13 @@
             </p>
           </div>
           <div class="col-sm-5ths col-xs-4">
-            <a href="https://www.openstack.org/videos/video/innovation-at-bbva-next-generation-overlay-for-kubernetes-and-openstack" target="_blank">
+            <a href="https://www.openstack.org/videos/sydney-2017/kubernetes-on-openstack-the-technical-details" target="_blank">
             <div class="video-wrapper small">
-              <img class="video-image" src="/themes/openstack/images/containers-r/users/bbva.jpg" alt="Innovation at BBVA: Next Generation Overlay for Kubernetes and OpenStack">
+              <img class="video-image" src="/assets/containers/sydney-video.jpg" alt="Kubernetes on OpenStack - the Technical Details">
             </div>
             </a>
             <p class="video-title containers">
-                Innovation at BBVA: Next Generation Overlay for Kubernetes and OpenStack
+                Kubernetes on OpenStack - the Technical Details
             </p>
           </div>
           <div class="col-sm-5ths col-xs-4">
@@ -143,23 +146,23 @@
             </p>
           </div>
           <div class="col-sm-5ths col-xs-4">
-            <a href="http://superuser.openstack.org/articles/scaling-magnum-and-kubernetes-2-million-requests-per-second" target="_blank">
+            <a href="https://www.openstack.org/videos/sydney-2017/which-is-the-best-way-to-install-kubernetes-on-openstack " target="_blank">
             <div class="video-wrapper small">
-              <img class="video-image" src="/themes/openstack/images/containers-r/users/cern.jpg" alt="Scaling OpenStack Magnum and Kubernetes: 2 million requests per second">
+              <img class="video-image" src="/assets/containers/sydney-video.jpg" alt="Which is the best way to install Kubernetes on OpenStack?">
             </div>
             </a>
             <p class="video-title containers">
-                Scaling OpenStack Magnum and Kubernetes: 2 million requests per second
+                Which is the best way to install Kubernetes on OpenStack?
             </p>
           </div>
           <div class="col-sm-5ths col-xs-4">
-            <a href="https://www.sap.com/documents/2016/10/304c03e0-917c-0010-82c7-eda71af511fa.html" target="_blank">
+            <a href="https://www.openstack.org/videos/sydney-2017/building-openstack-on-kubernetes-for-zero-downtime-large-scale-production-saas" target="_blank">
             <div class="video-wrapper small">
-              <img class="video-image" src="/themes/openstack/images/containers-r/users/sap.jpg" alt="Bare Metal As a Service Within the Enterprise: A Use Case">
+              <img class="video-image" src="/assets/containers/containers-workday.jpg" alt="Building OpenStack on Kubernetes for Zero Downtime Large Scale Production SaaS">
             </div>
             </a>
             <p class="video-title containers">
-                Bare Metal As a Service Within the Enterprise: A Use Case
+                Building OpenStack on Kubernetes for Zero Downtime Large Scale Production SaaS
             </p>
           </div>
         </div>

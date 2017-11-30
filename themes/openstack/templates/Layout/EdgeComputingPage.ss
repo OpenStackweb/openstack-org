@@ -397,16 +397,18 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid hero">
-        <div class="col-xs-12 col-md-10 col-lg-12">
-            <div class="col-xs-4 col-sm-3 logo">
-                <img src="/marketplace/code/ui/frontend/images/logo.svg" alt="">
-            </div>
-            <div class="col-xs-8 col-sm-9 text">
-                <h3>The OpenStack Public Cloud Passport</h3>
-                <h5>With more than <strong>60 availability zones across more than 20 countries</strong>, OpenStack providers collectively represent the broadest public cloud footprint.</h5>
-                <h5>Explore the  OpenStack Global Passport Program, a collaborative effort between OpenStack public cloud providers that lets you experience the freedom, performance and interoperability of open source infrastructure.</h5>
-                <a href="/passport" class="btn">Try Out a Public Cloud <i class="fa fa-arrow-circle-down"></i></a>
+    <div class="hero">
+        <div class="container">
+            <div class=“row”>
+                <div class="col-sm-3 logo">
+                    <img src="/marketplace/code/ui/frontend/images/logo.svg" alt="">
+                </div>
+                <div class="col-sm-9 text">
+                    <h3>The OpenStack Public Cloud Passport</h3>
+                    <h5>With more than <strong>60 availability zones across more than 20 countries</strong>, OpenStack providers collectively represent the broadest public cloud footprint.</h5>
+                    <h5>Explore the  OpenStack Global Passport Program, a collaborative effort between OpenStack public cloud providers that lets you experience the freedom, performance and interoperability of open source infrastructure.</h5>
+                    <a href="/passport" class="btn">Try Out a Public Cloud <i class="fa fa-arrow-circle-down"></i></a>
+                </div>
             </div>
         </div>
     </div>
