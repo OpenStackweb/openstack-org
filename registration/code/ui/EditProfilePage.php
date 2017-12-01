@@ -134,8 +134,12 @@ class EditProfilePage_Controller extends Page_Controller
     {
         if ($CurrentMember = Member::currentUser()) {
             $EditProfileForm = new EditProfileForm($this, 'EditProfileForm');
-            //Populate the form with the current members data
-            $EditProfileForm->loadDataFrom($CurrentMember->data());
+
+            if (!$this->Error()) {
+                //Populate the form with the current members data
+                $EditProfileForm->loadDataFrom($CurrentMember->data());
+            }
+
             return $EditProfileForm;
         }
     }
@@ -162,7 +166,7 @@ class EditProfilePage_Controller extends Page_Controller
         //Check for another member with the same email address
         if (Member::get()->filter(array('Email' => Convert::raw2sql($data['Email']), 'ID:not' => $CurrentMember->ID))->count() > 0) {
             $form->addErrorMessage("Email", 'Sorry, that email address already exists.', "bad");
-            Session::set("FormInfo.Form_EditProfileForm.data", $data);
+            Session::set("FormInfo.{$form->FormName()}.data", $data);
             return $this->redirect($this->Link('?error=1'));
         }
         //Otherwise save profile
@@ -269,7 +273,10 @@ class EditProfilePage_Controller extends Page_Controller
 
     function Error()
     {
-        return $this->request->getVar('error');
+        $errors = Session::get("FormInfo.EditProfileForm_EditProfileForm.errors");
+        $qs_error = $this->request->getVar('error');
+
+        return !empty($errors) || !empty($qs_error);
     }
 
     function Success()

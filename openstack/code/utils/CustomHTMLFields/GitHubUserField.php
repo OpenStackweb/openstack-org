@@ -17,6 +17,8 @@ class GitHubUserField extends TextField
 {
     public function validate($validator) {
 
+        if ($this->value == '') return true;
+
         $service = new RestfulService('https://api.github.com');
         $response = $service->request('/users/'.$this->value);
 
