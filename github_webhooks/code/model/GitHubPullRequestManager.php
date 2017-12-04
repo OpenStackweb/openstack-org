@@ -19,16 +19,6 @@
 final class GitHubPullRequestManager implements IPullRequestManager
 {
 
-    const NON_MEMBER_REJECT_REASON = 'NON_MEMBER_REJECT_REASON';
-
-    const NON_FOUNDATION_MEMBER_REJECT_REASON = 'NON_FOUNDATION_MEMBER_REJECT_REASON';
-
-    const NON_SIGNED_CLA_REJECT_REASON = 'NON_SIGNED_CLA_REJECT_REASON';
-
-    const DONT_BELONG_CCLA_TEAM_REJECT_REASON = 'DONT_BELONG_CCLA_TEAM_REJECT_REASON';
-
-    const UNAUTHZ_USER_REJECT_REASON = 'UNAUTHZ_USER_REJECT_REASON';
-
     static $allowed_pull_request_actions = ['opened', 'reopened'];
 
     /**
@@ -91,25 +81,28 @@ final class GitHubPullRequestManager implements IPullRequestManager
             $count = 0;
             foreach (GitHubRepositoryPullRequest::get()->filter(['Processed' => 0])->limit($batch_size) as $pr) {
                 try {
-                    $data = json_decode($pr->Body, true);
-                    $pull_request_data = isset($data['pull_request']) ? $data['pull_request'] : null;
-                    $organization_data = isset($data['organization']) ? $data['organization'] : null;
-                    $sender_data = isset($data['sender']) ? $data['sender'] : null;
-                    $github_user = !is_null($sender_data) ? (isset($sender_data['login']) ? $sender_data['login'] : null) : null;
+                    $data              = json_decode($pr->Body, true);
+                    $sender_data       = isset($data['sender']) ? $data['sender'] : null;
+                    $github_user       = !is_null($sender_data) ? (isset($sender_data['login']) ? $sender_data['login'] : null) : null;
+
                     $git_repo = $pr->GitHubRepository();
 
-                    $reject_reason = null;
+                    if(is_null($git_repo))
+                        throw new Exception(sprintf("missing git repo config for PR %s.",$pr->ID ));
+
+                    $reject_reason = GitHubRepositoryPullRequest::RejectReason_Approved;
+
                     if (is_null($github_user)) {
-                        $reject_reason = self::UNAUTHZ_USER_REJECT_REASON;
+                        throw new SecurityException("missing github user");
                     }
 
                     if (empty($reject_reason)) {
                         $member = Member::get()->filter('GitHubUser', $github_user)->first();
                         if (is_null($member)) {
-                            $reject_reason = self::NON_MEMBER_REJECT_REASON;
+                            $reject_reason = GitHubRepositoryPullRequest::RejectReason_NotMember;
                         }
                         if (!$member->isFoundationMember()) {
-                            $reject_reason = self::NON_FOUNDATION_MEMBER_REJECT_REASON;
+                            $reject_reason = GitHubRepositoryPullRequest::RejectReason_NotFoundationMember;
                         }
                     }
 
@@ -123,15 +116,18 @@ final class GitHubPullRequestManager implements IPullRequestManager
                             }
                         }
                         if (!$can_pull_request) {
-                            $reject_reason = self::DONT_BELONG_CCLA_TEAM_REJECT_REASON;
+                            $reject_reason = GitHubRepositoryPullRequest::RejectReason_NotCCLATeam;
                         }
                     }
-                    if(empty($reject_reason)){
-                        throw new Exception("reject reason is empty!");
-                    }
-                    $this->rejectPullRequest($git_repo, $pull_request_data, $reject_reason);
-                    $pr->markAsProcessed();
+
+                    $pr->RejectReason = $reject_reason;
+
+                    if($pr->RejectReason != GitHubRepositoryPullRequest::RejectReason_Approved)
+                        $this->rejectPullRequest($pr);
+
+                    $pr->markAsProcessed($reject_reason);
                     $pr->write();
+
                     $count++;
                 }
                 catch (Exception $ex) {
@@ -143,15 +139,16 @@ final class GitHubPullRequestManager implements IPullRequestManager
     }
 
     /**
-     * @param GitHubRepositoryConfiguration $git_repo
-     * @param array $pull_request_data
-     * @param string $reject_reason
+     * @param GitHubRepositoryPullRequest $pr
      * @throws Exception
      */
-    private function rejectPullRequest(GitHubRepositoryConfiguration $git_repo, array $pull_request_data, $reject_reason)
+    private function rejectPullRequest(GitHubRepositoryPullRequest $pr)
     {
 
-        $client = new \Github\Client();
+        $client            = new \Github\Client();
+        $data              = json_decode($pr->Body, true);
+        $pull_request_data = isset($data['pull_request']) ? $data['pull_request'] : null;
+        $git_repo          = $pr->GitHubRepository();
 
         if (!defined('GITHUB_API_OAUTH2TOKEN'))
             throw new InvalidArgumentException();
@@ -159,30 +156,23 @@ final class GitHubPullRequestManager implements IPullRequestManager
         $client->authenticate(GITHUB_API_OAUTH2TOKEN, null, \Github\Client::AUTH_HTTP_TOKEN);
 
         $comment_body = '';
-        switch ($reject_reason) {
-            case self::NON_MEMBER_REJECT_REASON: {
+        switch ($pr->RejectReason) {
+            case GitHubRepositoryPullRequest::RejectReason_NotMember: {
                 $comment_body = $git_repo->RejectReasonNotMember;
             }
-                break;
-            case self::NON_FOUNDATION_MEMBER_REJECT_REASON: {
+            break;
+            case GitHubRepositoryPullRequest::RejectReason_NotFoundationMember: {
                 $comment_body = $git_repo->RejectReasonNotFoundationMember;
             }
-                break;
-            case self::NON_SIGNED_CLA_REJECT_REASON: {
-                $comment_body = sprintf('User %s has not signed the Contributer License Agreement. Please take a look at How to Contribute to Openstack (https://wiki.openstack.org/wiki/How_To_Contribute) and make sure you sign the CLA (http://docs.openstack.org/infra/manual/developers.html#account-setup).', $user['login']);
-            }
-                break;
-            case self::UNAUTHZ_USER_REJECT_REASON: {
-                $comment_body = "User is not authorized to PR this repository.";
-            }
-                break;
-            case self::DONT_BELONG_CCLA_TEAM_REJECT_REASON: {
+            break;
+            case GitHubRepositoryPullRequest::RejectReason_NotCCLATeam: {
                 $comment_body = $git_repo->RejectReasonNotCCLATeam;
             }
-                break;
+            break;
         }
         if(empty($comment_body))
-            throw new Exception(sprintf("comment_body is empty for reason %s", $reject_reason));
+            throw new Exception(sprintf("comment_body is empty for reason %s", $pr->RejectReason));
+
         // close pull request
         $params = [
             'state' => 'closed'

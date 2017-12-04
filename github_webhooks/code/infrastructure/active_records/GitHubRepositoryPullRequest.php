@@ -17,9 +17,14 @@
  */
 class GitHubRepositoryPullRequest extends DataObject
 {
+    const RejectReason_Approved            = 'Approved';
+    const RejectReason_NotMember           = 'NotMember';
+    const RejectReason_NotFoundationMember = 'NotFoundationMember';
+    const RejectReason_NotCCLATeam         = 'NotCCLATeam';
+
     static $db = [
         'Body'          => 'Text',
-        'RejectReason'  => "Enum('None,NotMember,NotFoundationMember,NotCCLATeam','None')",
+        'RejectReason'  => "Enum('None,Approved,NotMember,NotFoundationMember,NotCCLATeam','None')",
         'Processed'     => 'Boolean',
         'ProcessedDate' => 'SS_Datetime',
     ];
