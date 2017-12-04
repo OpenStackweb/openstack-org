@@ -10,7 +10,7 @@
 	</ul>
 
 	<% if MoreThanTen %>
-		<p>This candidate has enough nominations to appaer on the election ballet.</p>
+		<p>This candidate has enough nominations to appear on the election ballet.</p>
 	<% else %>
 		<p>This candidate needs at least 10 nominations to appear on the election ballet.</p>	
 	<% end_if %>
