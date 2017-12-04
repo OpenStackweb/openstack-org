@@ -136,7 +136,7 @@
             </p>
           </div>
           <div class="col-sm-5ths col-xs-4">
-            <a href="https://www.openstack.org/assets/containers/LivePerson.pdf" target="_blank">
+            <a href="https://www.openstack.org/assets/containers/openstack-containers-12.4.pdf" target="_blank">
             <div class="video-wrapper small">
               <img class="video-image" src="/themes/openstack/images/containers-r/users/liveperson.jpg" alt="Containers and Cloud: Exploring the OpenStack Opportunity with LivePerson">
             </div>

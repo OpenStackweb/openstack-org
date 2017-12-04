@@ -321,11 +321,6 @@ li.hosted-cloud {
 li.remote-cloud {
   background: url('/themes/openstack/images/marketplace/new/remote-private-clouds.svg') 0% 50% no-repeat; }
 
-.marketplace-column ul li.hosted-cloud {
-  padding: 5px 2% 15px 50px; }
-
-li.hosted-cloud {
-  background: url("/themes/openstack/images/hosted-cloud-icon.png") 0% 30% no-repeat; }
 
 .marketplace-btn.blue {
   width: 100%;
