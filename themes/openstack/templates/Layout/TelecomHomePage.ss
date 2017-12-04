@@ -27,7 +27,7 @@
     <div class="appdev-download-row nfv">
         <div class="container">
             <div class="row">
-                <div class="col-md-12 col-sm-7">
+                <div class="col-md-9 col-sm-7">
                     <p>
                        Heavy Reading research consistently shows that OpenStack is playing an important role  in CSPs’ transformation programs. They recently did a survey for the OpenStack Foundation to get a better understanding of CSPs’ experiences with OpenStack and what use cases will drive usage in the future.</p>
 
@@ -36,14 +36,14 @@
 
 
                     <p>Currently, the most common use cases for OpenStack are to manage private cloud, with 37% of CSPs doing so and as the basis for NFV, with 35% of CSPs doing so.  Nearly two-thirds say that they plan to use OpenStack for IoT/edge computing. Edge computing is emerging as an important use case that will drive new deployments and new architectures. CSPs see OpenStack’s open source and modular architecture as the main reasons it will be suitable for edge deployments. More broadly, the most frequently cited benefit of OpenStack for CSPs is that it helps them offer services more quickly.</p>
-                   <!--  <p>
-                        Watch the webinar hosted by Heavy Reading senior analyst Roz Roseboro for a deep dive into the results and additional analysis on key findings from the survey.
+                   <p>
+                        Learn more about the Heavy Reading survey results in a webinar hosted by Roz Roseboro on Thursday, December 14 at 12pm CT.
                     </p>
                 </div>
                 <div class="col-md-3 col-sm-4 center">
                     <i class="fa fa-tv fa-5x nfv-download-icon"></i>
-                    <a href="https://openstack.webex.com/openstack/lsr.php?RCID=ec304dc157942e4ef39213f35dd43742" class="container-download-btn">WATCH THE WEBINAR <i class="fa fa-chevron-right"></i></a>
-                    <p style="margin-top: 10px;">
+                    <a href="https://openstack.webex.com/openstack/j.php?MTID=macf4bf544f2d6a7b8958739041e1763b" class="container-download-btn">WATCH THE WEBINAR <i class="fa fa-chevron-right"></i></a>
+                    <!--  <p style="margin-top: 10px;">
                         <a style="color:white;" href="//openstack.org/assets/pdf-downloads/OpenStack-survey-results-public-presentation.pdf"><em>Download the Webinar Slides</em></a>
                     </p> -->
                 </div>
