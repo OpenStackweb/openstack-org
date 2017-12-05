@@ -57,8 +57,10 @@
                                     <% if $ComingSoonBtnText %>
                                         <button class="btn register-btn-lrg soon" href="#">{$ComingSoonBtnText}</button>
                                     <% end_if %>
+                                    <% if ]$SecondaryRegistrationLink %>
                                     &nbsp;&nbsp;
-                                    <a href="{$SecondaryRegistrationLink}" <% if not $SecondaryRegistrationLink %> disabled <% end_if %> class="btn register-btn-lrg">{$SecondaryRegistrationBtnText}</a>
+                                    <a href="{$SecondaryRegistrationLink}"  disabled  class="btn register-btn-lrg">{$SecondaryRegistrationBtnText}</a>
+                                    <% end_if %>
                                 </div>
                                 <div class="landing-date">
                                     <div class="left">
