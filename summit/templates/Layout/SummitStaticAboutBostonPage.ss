@@ -32,67 +32,67 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-9 col-md-8 col-sm-8">
-        <h1>
-          Who Should Attend?
-        </h1>
-        <div class="who-section-wrapper">
-          <div class="row">
-            <div class="col-xs-12 col-sm-3 col-lg-2 image">
-              <img src="summit/images/boston/who1.svg">
+            <h1>
+              Who Should Attend?
+            </h1>
+            <p>Keynote presentations from notable OpenStack users and industry leaders will take place on Monday and Tuesday. Breakout sessions throughout the week will cover topics including private cloud and multi-cloud strategy, edge computing, NFV, CI/CD and machine learning as well as hands-on-training and networking opportunities.</p>
+            <div class="who-section-wrapper">
+              <div class="row">
+                <div class="col-xs-12 col-sm-3 col-lg-2 image">
+                  <img src="summit/images/boston/who1.svg">
+                </div>
+                <div class="col-xs-12 col-sm-9 col-lg-10 text">
+                  <h3>Architecture & Ops</h3>
+                  <p>Architects and operators attend to improve their current deployment, discover new tools or learn how to get an OpenStack cloud up and running from expert community members OpenStack clouds.</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12 col-sm-3 col-lg-2 image">
+                  <img src="summit/images/boston/who2.svg">
+                </div>
+                <div class="col-xs-12 col-sm-9 col-lg-10 text">
+                  <h3>Business & Strategy</h3>
+                  <p>CIO and IT decision makers attend to hear case studies about how cloud is saving money and creating business impact, and to learn how to evaluate OpenStack providers, build a successful team and develop a successful cloud strategy.</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12 col-sm-3 col-lg-2 image">
+                  <img src="summit/images/boston/who3.svg">
+                </div>
+                <div class="col-xs-12 col-sm-9 col-lg-10 text">
+                  <h3>App Developers</h3>
+                  <p>App developers can get started developing cloud applications, including integrating technologies like containers, or discover how OpenStack can be used to deliver valuable services like big data analytics.</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12 col-sm-3 col-lg-2 image">
+                  <img src="summit/images/boston/who4.svg">
+                </div>
+                <div class="col-xs-12 col-sm-9 col-lg-10 text">
+                  <h3>Upstream Developer</h3>
+                  <p>If you’re an upstream developer looking to reconnect to the community or would like to get started contributing, this is the place to be.</p>
+                </div>
+              </div>
             </div>
-            <div class="col-xs-12 col-sm-9 col-lg-10 text">
-              <h3>Architecture & Ops</h3>
-              <p>Architects and operators attend to improve their current deployment, discover new tools or learn how to get an OpenStack cloud up and running from expert community members OpenStack clouds. <a href="https://www.openstack.org/summit/sydney-2017/summit-categories">Learn more</a></p>
+            <p>Join attendees from over 60 countries to enhance your knowledge of OpenStack and get more involved with the community.</p>
+            <!-- <a class="who-section-cta" href="/summit/sydney-2017/summit-categories">Learn more about the content planned for the OpenStack Summit Sydney</a> -->
+                </div>
+            <div class="col-lg-3 col-md-4 col-sm-4" style="margin-top:30px;">
+              <ul class="help-me-menu">
+                <li><a href="/summit/vancouver-2018/code-of-conduct"><i class="fa fa-eye"></i>Code of Conduct</a></li>
+                <li><a href="/summit/vancouver-2018/travel/#visa"><i class="fa fa-plane"></i>Visa Information</a></li>
+                <li><a href="/summit/vancouver-2018/travel/#travel-support" target="_blank"><i class="fa fa-users"></i>Apply for Travel Support</a></li>
+              </ul>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-12 col-sm-3 col-lg-2 image">
-              <img src="summit/images/boston/who2.svg">
-            </div>
-            <div class="col-xs-12 col-sm-9 col-lg-10 text">
-              <h3>Business & Strategy</h3>
-              <p>CIO and IT decision makers attend to hear case studies about how cloud is saving money and creating business impact, and to learn how to evaluate OpenStack providers, build a successful team and develop a successful cloud strategy.</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-12 col-sm-3 col-lg-2 image">
-              <img src="summit/images/boston/who3.svg">
-            </div>
-            <div class="col-xs-12 col-sm-9 col-lg-10 text">
-              <h3>App Developers</h3>
-              <p>App developers can get started developing cloud applications, including integrating technologies like containers, or discover how OpenStack can be used to deliver valuable services like big data analytics.</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-12 col-sm-3 col-lg-2 image">
-              <img src="summit/images/boston/who4.svg">
-            </div>
-            <div class="col-xs-12 col-sm-9 col-lg-10 text">
-              <h3>Upstream Developer</h3>
-              <p>If you’re an upstream developer looking to reconnect to the community or would like to get started contributing, this is the place to be.</p>
-            </div>
-          </div>
-        </div>
-        <p>Join attendees from over 60 countries to enhance your knowledge of OpenStack and get more involved with the community.</p>
-        <!-- <a class="who-section-cta" href="/summit/sydney-2017/summit-categories">Learn more about the content planned for the OpenStack Summit Sydney</a> -->
-            </div>
-        <div class="col-lg-3 col-md-4 col-sm-4" style="margin-top:30px;">
-          <ul class="help-me-menu">
-            <li><a href="https://openstackfoundation.formstack.com/forms/sydney_summit_discounted_registration" target="_blank"><i class="fa fa-dollar"></i>Student Discounts</a></li>
-            <li><a href="/summit/sydney-2017/mobile-apps" target="_blank"><i class="fa fa-mobile"></i>Download the App</a></li>
-            <li><a href="https://spousetivities.ticketleap.com/openstack-summit-sydney-2017/" target="_blank"><i class="fa fa-heart"></i>Spousetivities</a></li>
-            <li><a href="/summit/sydney-2017/travel/#visa"><i class="fa fa-plane"></i>Visa Information</a></li>
-            <li><a href="/summit/sydney-2017/code-of-conduct"><i class="fa fa-eye"></i>Code of Conduct</a></li>
-          </ul>
-        </div>
         </div>
     </div>
 </div>
+
 <div class="light summit-users-wrapper" id="featured-speakers">
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-        <h2>Featured Speakers</h2>
+        <h2>Featured Speakers in Sydney</h2>
       </div>
     </div>
     <div class="row">
@@ -182,30 +182,6 @@
           <img src="/assets/boston-summit/speakers/Jonathan-Bryce2.jpg" alt="Jonathan Bryce" class="summit-user-image">
           <div class="name">Jonathan Bryce</div>
           <div class="title">Executive Director, OpenStack Foundation</div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-3 featured">
-        <div class="summit-user-section">
-        </div>
-      </div>
-      <div class="col-sm-3 featured">
-        <div class="summit-user-section">
-          <img src="/assets/sydney-summit/speakers/bethcohen.jpg" alt="Beth Cohen" class="summit-user-image">
-          <div class="name">Beth Cohen</div>
-          <div class="title">Cloud Product Technologist, Verizon</div>
-        </div>
-      </div>
-      <div class="col-sm-3 featured">
-        <div class="summit-user-section">
-          <img src="/assets/sydney-summit/speakers/lew-sm-2.jpg" alt="Lew Tucker" class="summit-user-image">
-          <div class="name">Lew Tucker</div>
-          <div class="title">Vice President and CTO, Cloud Computing, Cisco</div>
-        </div>
-      </div>
-      <div class="col-sm-3">
-        <div class="summit-user-section">
         </div>
       </div>
     </div>
