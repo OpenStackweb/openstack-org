@@ -200,7 +200,7 @@
     <div class="row">
       <div class="col-sm-12">
         <div class="gallery-content">
-          <a href="https://openstacksummit2017sydney.eventbrite.com/" target="_blank" class="btn register-btn-lrg" target="_blank">Register Now</a>
+          <a href="https://openstacksummit2018vancouver.eventbrite.com/" target="_blank" class="btn register-btn-lrg" target="_blank">Register Now</a>
         </div>
       </div>
     </div>
