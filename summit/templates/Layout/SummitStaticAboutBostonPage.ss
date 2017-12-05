@@ -279,19 +279,20 @@
     <div class="row">
       <div class="col-sm-12">
         <hr style="margin-top:60px;">
-          <h3 class="recap-title">Watch the Keynotes from Barcelona</h3>
+          <h3 class="recap-title">Watch some highlights from Sydney</h3>
           <div class="about-video-wrapper">
-              <iframe src="//www.youtube.com/embed/GGxzlLwt6WA?rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe>
-          <p class='video-catpion'>Keynote Day 1</p>
+              <iframe src="//www.youtube.com/embed/K7cPpGAp8xM?rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe>
+          <p class='video-catpion'>AT&amp;T-s Strategy for Implementing a Next Generation OpenStack Cloud</p>
           </div>
           <div class="about-video-wrapper">
-              <iframe src="//www.youtube.com/embed/t8IiULAPKwo?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
-          <p class='video-catpion'>Keynote Day 2</p>
+              <iframe src="//www.youtube.com/embed/Y0Ccle0uQnM?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+          <p class='video-catpion'>Tackling the biggest challenge in open source: integration</p>
           </div>
       </div>
     </div>
   </div>
 </div>
+<!--
 <div class="light two-summits">
     <div class="container">
         <div class="row">
@@ -307,6 +308,7 @@
         </div>
     </div>
 </div>
+-->
 <!-- <div class="white testimonial-row">
     <div class="container">
         <div class="row">
@@ -351,12 +353,12 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-8 col-sm-push-2">
-          <h2>Join Us In Sydney!</h2>
+          <h2>Join Us In Vancouver!</h2>
           <p>
             Tickets are selling fast, so register today.
           </p>
           <p>
-            <a href="https://openstacksummit2017sydney.eventbrite.com/" target="_blank" class="btn" target="_blank">Register Now</a>
+            <a href="https://openstacksummit2018vancouver.eventbrite.com/" target="_blank" class="btn" target="_blank">Register Now</a>
           </p>
             </div>
         </div>
