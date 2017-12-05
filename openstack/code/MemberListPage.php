@@ -142,9 +142,10 @@ class MemberListPage_Controller extends Page_Controller
 
         // Grab candidate ID from the URL
         $CandidateID = $this->request->param("ID");
+        $NominationStatus = $this->validateNomination($CandidateID);
 
         // Check to see if the candidate ID is numeric and if the person is logged in
-        if ($this->validateNomation($CandidateID) == 'VALID') {
+        if ($NominationStatus == 'VALID') {
 
             $Nominee = Member::get()->filter(array('ID' => $CandidateID))->first();
             $results["Success"] = true;
@@ -152,7 +153,7 @@ class MemberListPage_Controller extends Page_Controller
             $results["NominateLink"] = $this->Link() . "saveNomination/" . $CandidateID;
             $results["BackLink"] = $this->Link() . "profile/" . $CandidateID . '/' . $Nominee->getNameSlug();
 
-        } elseif ($this->validateNomation($CandidateID) == 'ALREADY NOMINATED') {
+        } elseif ($NominationStatus == 'ALREADY NOMINATED') {
 
             $Nominee = Member::get()->filter(array('ID' => $CandidateID))->first();
 
@@ -165,7 +166,7 @@ class MemberListPage_Controller extends Page_Controller
             $results["BackLink"] = $this->Link() . "profile/" . $CandidateID . '/' . $Nominee->getNameSlug();
 
 
-        } elseif ($this->validateNomation($CandidateID) == 'LIMIT EXCEEDED') {
+        } elseif ($NominationStatus == 'LIMIT EXCEEDED') {
 
             $Nominee = Member::get()->filter(array('ID' => $CandidateID))->first();
 
@@ -175,10 +176,14 @@ class MemberListPage_Controller extends Page_Controller
             $results["BackLink"] = $this->Link() . "profile/" . $CandidateID . '/' . $Nominee->getNameSlug();
 
 
+        } elseif ($NominationStatus = 'INVALID CANDIDATE') {
+
+            $results["Success"] = false;
+            $results["BackLink"] = $this->Link();
         } else {
+
             $results["Success"] = false;
             $results["BackLink"] = $this->Link() . "profile/" . $CandidateID;
-
         }
 
 
@@ -189,18 +194,10 @@ class MemberListPage_Controller extends Page_Controller
 
     // Checks whether a nomination is valid:
     // Requires there to be a current election, the member to be logged in, and the ID of a member that hasn't been nominated yet.
-    function validateNomation($CandidateID)
+    function validateNomination($CandidateID)
     {
 
         $CurrentElection = $this->CurrentElection();
-
-        // Look for nominations for this candidate
-        $CandidateNominations = CandidateNomination::get()->where("CandidateID = " . $CandidateID . " AND ElectionID = " . $CurrentElection->ID);
-        $NumberOfNominations = 0;
-        if ($CandidateNominations) {
-            $NumberOfNominations = $CandidateNominations->Count();
-        }
-
 
         // 1. Check to see if there's a current, active election
         if (!$CurrentElection || !$CurrentElection->NominationsAreOpen()) {
@@ -220,6 +217,13 @@ class MemberListPage_Controller extends Page_Controller
         // 4. Check to see if the member has already nominated this person
         if ($this->alreadyNominated($CandidateID, $CurrentElection)) {
             return 'ALREADY NOMINATED';
+        }
+
+        // Look for nominations for this candidate
+        $CandidateNominations = CandidateNomination::get()->where("CandidateID = " . $CandidateID . " AND ElectionID = " . $CurrentElection->ID);
+        $NumberOfNominations = 0;
+        if ($CandidateNominations) {
+            $NumberOfNominations = $CandidateNominations->Count();
         }
 
         // 5. Check to see if this person already has 10 nominations
@@ -243,7 +247,7 @@ class MemberListPage_Controller extends Page_Controller
     {
         // Grab candidate ID from the URL
         $CandidateID = $this->request->param("ID");
-        $NominationStatus = $this->validateNomation($CandidateID);
+        $NominationStatus = $this->validateNomination($CandidateID);
 
         // Check to see if this is a valid nomination
         if ($NominationStatus == 'VALID') {
