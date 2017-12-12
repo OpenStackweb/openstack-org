@@ -4,7 +4,7 @@ jobs:
     enabled: 1
 
   - name: "EventbriteSummitTicketTypeConciliation"
-    params: "summit_external_id=32888262679"
+    params: "summit_external_id=40845826968"
     cron_expression: "00 01 * * *"
     enabled: 1
 
@@ -78,7 +78,7 @@ jobs:
     enabled: 1
 
   - name: "EventbriteSummitOrderConciliation"
-    params: "summit_external_id=32888262679"
+    params: "summit_external_id=40845826968"
     cron_expression: "00 02 * * *" # run every day at 0200 AM
     enabled: 1
 
