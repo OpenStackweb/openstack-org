@@ -12,7 +12,10 @@
  * limitations under the License.
  **/
 
-final class AssetsSyncRequestProcessorTask extends CronTask
+/**
+ * Class EmailCreationRequestProcessTask
+ */
+final class EmailCreationRequestProcessTask extends CronTask
 {
 
     /**
@@ -39,26 +42,26 @@ final class AssetsSyncRequestProcessorTask extends CronTask
             $init_time   = time();
             $processed   = $this->tx_manager->transaction(function(){
                 $processed = 0;
-                $requests  = AssetsSyncRequest::get()->filter([
+                $requests  = EmailCreationRequest::get()->filter([
                     'Processed' => 0
                 ])->sort('ID', 'ASC');
 
-                foreach($requests as $sync_request){
-                    if(file_exists($requests->From)){
-                        $destination = sprintf("%s/%s", ASSETS_PATH, $requests->To);
-                        $res = copy($requests->From,  $destination);
-                        if(!$res){
-                            echo sprintf("error copying file from %s to %s", $requests->From, $destination).PHP_EOL;
+                foreach($requests as $email_request){
+                    switch($email_request->ClassName){
+                        case "SpeakerCreationEmailCreationRequest":{
+                            $sender = new PresentationSpeakerCreationEmailMessageSender;
+                            $sender->send(['Speaker' => $email_request->Speaker()]);
+                        }
+                        break;
+                        default:
+                        {
                             continue;
                         }
-                        $res = unlink($requests->From);
-                        chown($destination, 'www-data');
-                        if(!$res){
-                            echo sprintf("error removing file from %s", $requests->From).PHP_EOL;
-                        }
+                        break;
                     }
-                    $sync_request->markAsProcessed();
-                    $sync_request->write();
+
+                    $email_request->markAsProcessed();
+                    $email_request->write();
                     $processed++;
                 }
 

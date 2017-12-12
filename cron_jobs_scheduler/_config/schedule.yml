@@ -133,3 +133,8 @@ jobs:
     params: "batch_size=10000"
     cron_expression: "* * * * *" # run every minute
     enabled: 1
+
+  - name: "EmailCreationRequestProcessTask"
+    params: "batch_size=10000"
+    cron_expression: "* * * * *" # run every minute
+    enabled: 1
