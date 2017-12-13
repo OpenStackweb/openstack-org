@@ -13,7 +13,7 @@
 		        “Outside of the US, especially in China, [OpenStack adoption] momentum is increasing across the board and is not limited by industry or company size. The once skeptical and conservative telco industry has gone all in on OpenStack.”
 		        <div class="attribute">
 		        	- Forrester, "<a href="
-https://reprints.forrester.com/#/assets/2/480/'RES136209'/reports" target="_blank">OpenStack Fights To Defend Its Claim As A Standard</a>,” October 2017)
+https://reprints.forrester.com/#/assets/2/480/'RES136209'/reports" target="_blank">OpenStack Fights To Defend Its Claim As A Standard</a>,” October 2017
 		        </div>
 						<div>
 							<a href="
@@ -88,7 +88,7 @@ https://reprints.forrester.com/#/assets/2/480/'RES136209'/reports"class="promo-b
 						We think the progress the Foundation has achieved in seven years is remarkable .... The fact is that existential threats have been largely removed…. Indeed, the Foundation is now sold out of gold sponsorships, and there are mature OpenStack deployments.
 					</blockquote>
 					<div class="testimonial-attribute">
-						- <a href="https://451research.com/report-short?entityId=93746" target="_blank">451 Research</a>, Nov 2017)
+						- <a href="https://451research.com/report-short?entityId=93746" target="_blank">451 Research</a>, Nov 2017
 					</div>
 				</div>
 				<div class="col-sm-6 analysts-links">
@@ -154,7 +154,7 @@ https://reprints.forrester.com/#/assets/2/480/'RES136209'/reports"class="promo-b
 					<li>A <a href="https://suse.lookbookhq.com/market-research-cloud/cloud-research-report" target="_blank">SUSE-sponsored survey</a> of more than 1,400 senior IT professionals found that OpenStack is in production in 23 percent of organizations (up from 15 percent in 2015). A total of <strong>82 percent are using or plan to use OpenStack in the future</strong>.
 					</li>
 				</ul>
-				<p>&nbsp;>
+				<p>&nbsp;</p>
 			</div>
 		</div>
 		<div class="row">
