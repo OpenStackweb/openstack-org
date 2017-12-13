@@ -13,11 +13,11 @@
 		        “Outside of the US, especially in China, [OpenStack adoption] momentum is increasing across the board and is not limited by industry or company size. The once skeptical and conservative telco industry has gone all in on OpenStack.”
 		        <div class="attribute">
 		        	- Forrester, "<a href="
-https://reprints.forrester.com/#/assets/2/480/'RES136209'/reports" target="_blank">OpenStack Fights To Defend Its Claim As A Standard</a>,” October 2017
+https://reprints.forrester.com/#/assets/2/480/RES140151/reports" target="_blank">OpenStack Fights To Defend Its Claim As A Standard</a>,” October 2017
 		        </div>
 						<div>
 							<a href="
-https://reprints.forrester.com/#/assets/2/480/'RES136209'/reports"class="promo-btn" target="_blank">Download the Report <i class="fa fa-chevron-right"></i></a>
+https://reprints.forrester.com/#/assets/2/480/RES140151/reports"class="promo-btn" target="_blank">Download the Report <i class="fa fa-chevron-right"></i></a>
 						</div>
 		      </div>
 		    </div>
