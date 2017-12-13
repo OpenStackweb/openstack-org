@@ -134,9 +134,17 @@ https://reprints.forrester.com/#/assets/2/480/'RES136209'/reports"class="promo-b
 		</div>
 		<div class="row">
 			<div class="col-sm-10 col-sm-push-1">
+				<hr style="border-bottom: 1px solid #D4DCE5;" />
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-10 col-sm-push-1">
 				<h2>OpenStack Adoption, Deployments Surge as Enterprises Increasingly Favor Multi-Cloud Strategies</h2>
 				<p>Surveys conducted by Cloudify, Heavy Reading, SDxCentral, SUSE and the OpenStack Foundation demonstrate growth of OpenStack adoption across industries</p>
-
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-10 col-sm-push-1" style="text-align:left;">
 				<p><strong>Highlights</strong></p>
 				<ul>
 					<li>In the <a href="https://openstack.org/user-survey">OpenStack User Survey</a>, respondents indicated that users from 48 percent of deployments are also interacting with another cloud. Additionally, the diversity of users was demonstrated in year-over-year analysis showing <strong>growth among non-IT, mainstream industries</strong>, including significant growth among the financial and government industries, as well as growth in research, retail and telecom.</li>
@@ -146,6 +154,12 @@ https://reprints.forrester.com/#/assets/2/480/'RES136209'/reports"class="promo-b
 					<li>A <a href="https://suse.lookbookhq.com/market-research-cloud/cloud-research-report" target="_blank">SUSE-sponsored survey</a> of more than 1,400 senior IT professionals found that OpenStack is in production in 23 percent of organizations (up from 15 percent in 2015). A total of <strong>82 percent are using or plan to use OpenStack in the future</strong>.
 					</li>
 				</ul>
+				<p>&nbsp;>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-10 col-sm-push-1">
+				<hr style="border-bottom: 1px solid #D4DCE5;" />
 			</div>
 		</div>
 		<div class="row">
