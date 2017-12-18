@@ -50,7 +50,14 @@ class SummitSponsorPage extends SummitPage
 
     public function getCMSFields()
     {
-        $fields = new FieldList(new TabSet("Root", new Tab('Main')));
+        $fields = parent::getCMSFields();
+
+        $fields->removeByName('GoogleConversionTracking');
+        $fields->removeByName('FacebookConversionTracking');
+        $fields->removeByName('TwitterConversionTracking');
+        $fields->removeByName('SummitPageImages');
+        $fields->removeFieldFromTab('Root.Main','Content');
+
         $fields_array = array();
         HtmlEditorConfig::set_active('simple');
 
