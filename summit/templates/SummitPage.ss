@@ -59,7 +59,7 @@
                                     <% end_if %>
                                     <% if ]$SecondaryRegistrationLink %>
                                     &nbsp;&nbsp;
-                                    <a href="{$SecondaryRegistrationLink}"  disabled  class="btn register-btn-lrg">{$SecondaryRegistrationBtnText}</a>
+                                    <a href="{$SecondaryRegistrationLink}"  class="btn register-btn-lrg">{$SecondaryRegistrationBtnText}</a>
                                     <% end_if %>
                                 </div>
                                 <div class="landing-date">
