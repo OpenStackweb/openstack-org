@@ -14,23 +14,13 @@
                    <br>
                    $LocSubtitle
                 </div>
-                <div style="margin-bottom:30px;">
-                    <a href="https://openstacksummit2018vancouver.eventbrite.com" style="margin: 10px;" class="btn register-btn-lrg">
-                        Register Now
-                        <i class="fa fa-sign-in"></i>
-                    </a> 
-                </div>
                 <h1>SPONSORSHIP INFORMATION</h1>
                 <div style="margin-top:20px;"> 
                     
-                        <a href="https://www.openstack.org/assets/summits/vancouver-2017/FINAL-Vancouver-2018-Sponsor-Prospectus-1128.pdf" style="margin: 10px;" class="btn register-btn-lrg">
-                            Sponsorship Prospectus
+                        <a href="https://www.openstack.org/assets/events/2018EventPortfolio-1127.pdf" style="margin: 10px;" class="btn register-btn-lrg">
+                            2018 Event Portfolio
                             <i class="fa fa-cloud-download"></i>
                         </a>
-                        <a href="https://www.openstack.org/assets/summits/vancouver-2017/DRAFT-READ-ONLY-Executable-OpenStack-Event-Sponsorship-Agreement-VANCOUVER-SUMMIT.pdf" style="margin: 10px;" class="btn register-btn-lrg">
-                            Draft Contract
-                            <i class="fa fa-cloud-download"></i>
-                        </a> 
                 </div>
                 <!-- 
                 <div> 
