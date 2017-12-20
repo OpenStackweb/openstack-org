@@ -15,7 +15,7 @@
 final class AssetsSyncRequest extends DataObject
 {
     private static $db = [
-        'Source'        => 'Text',
+        'Origin'        => 'Text',
         'Destination'   => 'Text',
         'Processed'     => 'Boolean',
         'ProcessedDate' => 'SS_Datetime',

@@ -44,21 +44,24 @@ final class AssetsSyncRequestProcessorTask extends CronTask
                 ])->sort('ID', 'ASC');
 
                 foreach($requests as $sync_request){
-                    if(file_exists($requests->Source)){
-                        echo sprintf("file %s exists!", $requests->Source).PHP_EOL;
-                        $destination = sprintf("%s/%s", ASSETS_PATH, $requests->Destination);
-                        echo sprintf("trying to copying from %s to %s ...", $requests->Source, $destination).PHP_EOL;
-                        $res         = copy($requests->Source,  $destination);
+                    if(file_exists($sync_request->Origin)){
+                        echo sprintf("file %s exists!", $sync_request->Origin).PHP_EOL;
+                        $destination = sprintf("%s/%s", ASSETS_PATH, $sync_request->Destination);
+                        echo sprintf("trying to copying from %s to %s ...", $sync_request->Origin, $destination).PHP_EOL;
+                        $res         = copy($sync_request->Origin,  $destination);
                         if(!$res){
-                            echo sprintf("error copying file from %s to %s", $requests->Source, $destination).PHP_EOL;
+                            echo sprintf("error copying file from %s to %s", $sync_request->Origin, $destination).PHP_EOL;
                             continue;
                         }
-                        echo sprintf("deleting file %s ...", $requests->Source).PHP_EOL;
-                        $res = unlink($requests->Source);
+                        echo sprintf("deleting file %s ...", $sync_request->Origin).PHP_EOL;
+                        $res = unlink($sync_request->Origin);
                         chown($destination, 'www-data');
                         if(!$res){
-                            echo sprintf("error removing file from %s", $requests->Source).PHP_EOL;
+                            echo sprintf("error removing file from %s", $sync_request->Origin).PHP_EOL;
                         }
+                    }
+                    else{
+                        echo sprintf("file %s not exists!", $sync_request->Origin).PHP_EOL;
                     }
                     $sync_request->markAsProcessed();
                     $sync_request->write();
