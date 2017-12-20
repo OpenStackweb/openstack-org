@@ -44,17 +44,20 @@ final class AssetsSyncRequestProcessorTask extends CronTask
                 ])->sort('ID', 'ASC');
 
                 foreach($requests as $sync_request){
-                    if(file_exists($requests->From)){
-                        $destination = sprintf("%s/%s", ASSETS_PATH, $requests->To);
-                        $res = copy($requests->From,  $destination);
+                    if(file_exists($requests->Source)){
+                        echo sprintf("file %s exists!", $requests->Source).PHP_EOL;
+                        $destination = sprintf("%s/%s", ASSETS_PATH, $requests->Destination);
+                        echo sprintf("trying to copying from %s to %s ...", $requests->Source, $destination).PHP_EOL;
+                        $res         = copy($requests->Source,  $destination);
                         if(!$res){
-                            echo sprintf("error copying file from %s to %s", $requests->From, $destination).PHP_EOL;
+                            echo sprintf("error copying file from %s to %s", $requests->Source, $destination).PHP_EOL;
                             continue;
                         }
-                        $res = unlink($requests->From);
+                        echo sprintf("deleting file %s ...", $requests->Source).PHP_EOL;
+                        $res = unlink($requests->Source);
                         chown($destination, 'www-data');
                         if(!$res){
-                            echo sprintf("error removing file from %s", $requests->From).PHP_EOL;
+                            echo sprintf("error removing file from %s", $requests->Source).PHP_EOL;
                         }
                     }
                     $sync_request->markAsProcessed();
