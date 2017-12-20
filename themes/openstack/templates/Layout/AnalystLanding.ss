@@ -85,10 +85,10 @@ https://reprints.forrester.com/#/assets/2/480/RES140151/reports"class="promo-btn
 			<div class="row">
 				<div class="col-sm-6">
 					<blockquote>
-						We think the progress the Foundation has achieved in seven years is remarkable .... The fact is that existential threats have been largely removed…. Indeed, the Foundation is now sold out of gold sponsorships, and there are mature OpenStack deployments.
+						The future of the OpenStack Foundation: The clue is in the stack
 					</blockquote>
 					<div class="testimonial-attribute">
-						- <a href="https://451research.com/report-short?entityId=93746" target="_blank">451 Research</a>, Nov 2017
+						- <a href="/assets/analysts/451-OpenStack.pdf" target="_blank">451 Research</a>, Nov 2017
 					</div>
 				</div>
 				<div class="col-sm-6 analysts-links">
@@ -187,6 +187,8 @@ https://reprints.forrester.com/#/assets/2/480/RES140151/reports"class="promo-btn
 					<p>451 Research, November 2017, Al Sadowski</p>
 					<a href="https://www.gartner.com/doc/3797363/competitive-landscape-openstack-distributions-support">Competitive Landscape: OpenStack Distributions and Support Services Market, 2017</a>
 					<p>Gartner, September 2017, Matthew Cheung</p>
+					<a href="https://www.idc.com/getdoc.jsp?containerId=US43318917">OpenStack Infrastructure Ecosystem: Adoption Patterns, Use Cases, and Market Outlook, Part 4 — Customer Survey Results, Dec 2017</a>
+					<p>Ashish Nadkarni, Brad Casemore, Gary Chen, Laura DuBois</p>
 					<a href="https://www.idc.com/getdoc.jsp?containerId=US43091917">OpenStack Infrastructure Ecosystem: Adoption Patterns, Use Cases, and Market Outlook, Part 3 -- Market Size and Forecast</a>
 					<p>IDC, September 2017, Ashish Nadkarni, Laura DuBois, Gary Chen, Brad Casemore</p>
 					<a href="https://www.idc.com/getdoc.jsp?containerId=US43065717">OpenStack Infrastructure Ecosystem: Adoption Patterns, Use Cases, and Market Outlook, Part 2 -- In-Depth User Deployments</a>
