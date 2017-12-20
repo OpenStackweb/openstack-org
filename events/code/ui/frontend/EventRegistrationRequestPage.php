@@ -103,7 +103,7 @@ final class EventRegistrationRequestPage_Controller extends Page_Controller
             $messages = $ex1->getMessages();
             $msg = $messages[0];
             $form->addErrorMessage('City', $msg['message'], 'bad');
-            SS_Log::log($msg['message'], SS_Log::ERR);
+            SS_Log::log($msg['message'], SS_Log::DEBUG);
             // Load errors into session and post back
             Session::set("FormInfo.Form_EventRegistrationRequestForm.data", $data);
             return $this->redirectBack();

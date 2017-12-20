@@ -63,7 +63,12 @@ final class EventRegistrationRequestForm extends SafeXSSForm {
 		if($use_actions)
 			$actions->push(new FormAction('saveEventRegistrationRequest', 'Save'));
 		// Create validators
-		$validator = new ConditionalAndValidationRule(array(new HtmlPurifierRequiredValidator('title','city'), new RequiredFields('point_of_contact_name','point_of_contact_email','start_date','end_date','country')));
+		$validator = new ConditionalAndValidationRule(
+		    array(
+		        new HtmlPurifierRequiredValidator('title','city'),
+                new RequiredFields('point_of_contact_name','point_of_contact_email','start_date','end_date','country')
+            )
+        );
 		parent::__construct($controller, $name, $fields, $actions, $validator);
 	}
 
