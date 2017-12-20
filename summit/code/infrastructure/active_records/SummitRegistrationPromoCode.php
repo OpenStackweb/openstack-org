@@ -14,26 +14,45 @@
  **/
 class SummitRegistrationPromoCode extends DataObject implements ISummitRegistrationPromoCode
 {
-    private static $db = array
-    (
-        'Code'      => 'Varchar(255)',
-        'EmailSent' => 'Boolean',
-        'Redeemed'  => 'Boolean',
-        'Source'    => "Enum('CSV,ADMIN','CSV')",
-    );
+    private static $db = [
 
-    private static $summary_fields = array (
+        'Code'          => 'Varchar(255)',
+        'EmailSent'     => 'Boolean',
+        'Redeemed'      => 'Boolean',
+        'Source'        => "Enum('CSV,ADMIN','CSV')",
+        "EmailSentDate" => "SS_Datetime",
+    ];
+
+    private static $summary_fields = [
         'Code' => 'Code',
-    );
+    ];
 
-    private static $has_one = array(
+    private static $has_one = [
         'Summit'  => 'Summit',
         'Creator' => 'Member',
-    );
+    ];
 
-    private static $indexes = array(
+    private static $indexes = [
         'SummitID_Code' => array('type'=>'unique', 'value'=>'SummitID,Code')
-    );
+    ];
+
+    /**
+     * @return SummitRegistrationPromoCode
+     */
+    public function markAsSent(){
+        if($this->EmailSent) return $this;
+
+        $this->EmailSent     = true;
+        $this->EmailSentDate = MySQLDatabase56::nowRfc2822();
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEmailSent(){
+        return $this->EmailSent;
+    }
 
     /**
      * @return int

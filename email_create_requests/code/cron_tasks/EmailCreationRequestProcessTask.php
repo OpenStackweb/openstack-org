@@ -53,6 +53,20 @@ final class EmailCreationRequestProcessTask extends CronTask
                             $sender->send(['Speaker' => $email_request->Speaker()]);
                         }
                         break;
+                        case "MemberPromoCodeEmailCreationRequest": {
+                            if (!$email_request->PromoCode()->isEmailSent()) {
+                                $sender = new MemberPromoCodeEmailSender;
+                                $sender->send([
+                                    "Name"      => $email_request->Name,
+                                    "Email"     => $email_request->Email,
+                                    'Summit'    => $email_request->PromoCode()->Summit(),
+                                    'PromoCode' => $email_request->PromoCode()
+                                ]);
+                                $email_request->PromoCode()->markAsSent();
+                                $email_request->PromoCode()->write();
+                            }
+                        }
+                        break;
                         default:
                         {
                             continue;

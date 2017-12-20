@@ -201,9 +201,9 @@ final class SummitPromoCodeManager implements ISummitPromoCodeManager
             if(empty($name))
                 throw new EntityValidationException('cannot find name for the promocode owner!');
 
-            if (!$promocode->EmailSent) {
+            if (!$promocode->isEmailSent()) {
 
-                $promocode->setEmailSent(1);
+                $promocode->markAsSent();
                 $promocode->write();
 
                 $params = array
