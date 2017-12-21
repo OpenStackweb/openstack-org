@@ -49,6 +49,10 @@ $(document).ready(function(){
 
     $("#"+form_id+"_CountriesToTravel").chosen({width: '100%'});
 
+    if ($("#"+form_id+"_WillingToTravel").prop('checked')) {
+        $("#"+form_id+"_CountriesToTravel").prop('disabled', true).trigger("chosen:updated");
+    }
+
     var language_source = ['Afrikaans','Apprenda','Arabic','Armenian','ASL Sign Language','Bahasa','Basque','Belarusian',
         'Bengali','Brazilian Portuguese','Bulgarian','Burmese','Canadian','Cantonese','Catalan','Chinese','Croatian','Czech',
         'Danish','Deutsch','Dutch','English','Esperanto','Estonian','Farsi','Filipino','Finnish','Flemish','French','Georgian',
@@ -98,6 +102,11 @@ $(document).ready(function(){
 
     $('input').change(function(){
        $('#'+form_id+'_HasChanged').val(1);
+    });
+
+    $("#"+form_id+"_WillingToTravel").change(function() {
+        let diabled = $(this).prop('checked');
+        $("#"+form_id+"_CountriesToTravel").prop('disabled', diabled).trigger("chosen:updated");
     });
 
 });

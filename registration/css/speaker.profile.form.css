@@ -29,8 +29,9 @@ input[type="radio"] {
     padding-left: 15px;
 }
 
-.checkbox {
+#EditSpeakerProfileForm_EditSpeakerProfileForm .checkbox {
     top: -3px;
+    padding-left: 35px !important;
 }
 
 .mceLayout {

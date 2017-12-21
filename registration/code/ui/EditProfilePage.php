@@ -148,6 +148,7 @@ class EditProfilePage_Controller extends Page_Controller
     {
         if ($CurrentMember = Member::currentUser()) {
             Requirements::css("registration/css/speaker.profile.form.css");
+            Requirements::css('node_modules/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
             $speaker = PresentationSpeaker::get()->filter('MemberID', $CurrentMember->ID)->first();
             $SpeakerProfileForm = New EditSpeakerProfileForm($this, 'EditSpeakerProfileForm', $speaker, $CurrentMember, null);
             return $SpeakerProfileForm;

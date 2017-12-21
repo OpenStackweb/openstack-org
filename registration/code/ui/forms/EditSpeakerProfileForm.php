@@ -69,13 +69,14 @@ class EditSpeakerProfileForm extends SafeXSSForm {
         $FundedTravelField = new CheckboxField ('FundedTravel',"My Company would be willing to fund my travel to events.");
 
         // Willing to travel
-        $WillingToTravel = new OptionSetField('WillingToTravel', 'I am willing to travel to events:', array(
-            1 => 'Yes',
-            0 => 'No'
-        ));
+        $WillingToTravel = new CheckboxField ('WillingToTravel',"I do not have any travel restrictions and am willing to travel to any country.");
 
         // Countries to travel
-        $CountriesToTravelField = new MultiDropdownField('CountriesToTravel', 'Countries willing to travel to:', $CountryCodes);
+        $CountriesToTravelField = new MultiDropdownField(
+            'CountriesToTravel',
+            'Select individual countries that you are willing to travel to. If you do not check the box above AND do not select any countries, it will be assumed you are not willing to travel.',
+            $CountryCodes
+        );
         $CountriesToTravelField->addExtraClass('travel-field');
 
         // Spoken Languages

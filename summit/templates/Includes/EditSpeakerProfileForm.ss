@@ -59,28 +59,28 @@
 
             <hr>
             <div class="checkbox field">
+                $Fields.dataFieldByName(AvailableForBureau)
                 <label for="$FormName_AvailableForBureau" class="left">
-                    $Fields.dataFieldByName(AvailableForBureau)
                     $Fields.dataFieldByName(AvailableForBureau).Title
-              </label>
+                </label>
             </div>
             <div class="checkbox field">
+                $Fields.dataFieldByName(WillingToPresentVideo)
                 <label for="$FormName_WillingToPresentVideo" class="left">
-                    $Fields.dataFieldByName(WillingToPresentVideo)
                     $Fields.dataFieldByName(WillingToPresentVideo).Title
-              </label>
+                </label>
             </div>
             <div class="checkbox field">
+                $Fields.dataFieldByName(FundedTravel)
                 <label for="$FormName_FundedTravel" class="left">
-                    $Fields.dataFieldByName(FundedTravel)
                     $Fields.dataFieldByName(FundedTravel).Title
-              </label>
+                </label>
             </div>
-            <div class="field">
+            <div class="checkbox field">
+                $Fields.dataFieldByName(WillingToTravel)
                 <label for="$FormName_WillingToTravel" class="left">
                     $Fields.dataFieldByName(WillingToTravel).Title
-              </label>
-              $Fields.dataFieldByName(WillingToTravel)
+                </label>
             </div>
             <div class="field">
                 <label for="$FormName_CountriesToTravel" class="left">$Fields.dataFieldByName(CountriesToTravel).Title</label>

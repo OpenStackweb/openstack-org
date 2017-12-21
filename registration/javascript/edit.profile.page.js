@@ -202,6 +202,14 @@ jQuery(document).ready(function($) {
             country.chosen({width: '100%'});
         }
 
+        var willing_travel = $(speaker_form_id+"_WillingToTravel");
+        country.prop('disabled', willing_travel.prop('checked')).trigger("chosen:updated");
+
+        willing_travel.change(function() {
+            let diabled = $(this).prop('checked');
+            country.prop('disabled', diabled).trigger("chosen:updated");
+        });
+
         //custom validation
         $.validator.addMethod(
             "regex",
@@ -249,7 +257,6 @@ jQuery(document).ready(function($) {
                 'Language[3]':{ValidPlainText:true },
                 'Language[4]':{ValidPlainText:true },
                 'Language[5]':{ValidPlainText:true },
-                WillingToTravel : {required: true},
                 'GitHubUser':{ ValidPlainText:true },
                 'IRCHandle':{ ValidPlainText:true },
                 'TwitterName':{ ValidPlainText:true }

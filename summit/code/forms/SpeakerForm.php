@@ -138,11 +138,11 @@ class SpeakerForm extends BootstrapForm
                     ->addHolderClass('col-md-6 nolabel')
                 ->end()
             ->literal('HR','<div class="clearfix"></div><hr>')
-             ->optionset('WillingToTravel', 'I am willing to travel to events:', array(
-                    1 => 'Yes',
-                    0 => 'No'
-             ))
-            ->multidropdown('CountriesToTravel', 'Countries willing to travel to: ', CountryCodes::$iso_3166_countryCodes)
+            ->checkbox('WillingToTravel', 'I do not have any travel restrictions and am willing to travel to any country')
+            ->multidropdown(
+                'CountriesToTravel',
+                'Select individual countries that you are willing to travel to. If you do not check the box above AND do not select any countries, it will be assumed you are not willing to travel.',
+                CountryCodes::$iso_3166_countryCodes)
                 ->configure()
                     ->addExtraClass('countries-to-travel')
                 ->end()
