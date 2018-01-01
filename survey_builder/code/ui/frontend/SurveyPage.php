@@ -246,8 +246,14 @@ class SurveyPage_Controller extends Page_Controller
     }
 
     public function HasOnGoingSurvey(){
-        $current_survey = $this->getCurrentSurveyInstance();
-        return !is_null($current_survey);
+        try {
+            $current_survey = $this->getCurrentSurveyInstance();
+            return !is_null($current_survey);
+        }
+        catch(Exception $ex){
+            SS_Log::log($ex->getMessage(), SS_Log::WARN);
+            return false;
+        }
     }
 
     public function getSurveyLink(){

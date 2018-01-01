@@ -19,38 +19,46 @@
 
     
     <h1>$_T("survey_ui", "Welcome to the OpenStack User Survey")</h1>
-    <% if not $Top.SurveyTemplate.isVoid && not $CurrentMember %>
-        <div class="row">
-            <div class="col-lg-6">
-                <h3>$_T("survey_ui", "Already have an OpenStack Foundation login?")</h3>
-                <div class="survey-login-wrapper">
-                    <form id="MemberLoginForm_LoginForm" action="Security/login?BackURL={$Link}" method="post"
-                          enctype="application/x-www-form-urlencoded">
-                        <div class="Actions">
-                            <input class="action" id="MemberLoginForm_LoginForm_action_dologin" type="submit"
-                                   name="action_dologin" value="{$_T('survey_ui','Log In')}" title="{$_T('survey_ui','Log In')}">
-                            <p id="ForgotPassword"><a href="Security/lostpassword">$_T("survey_ui", "I've lost my password")</a></p>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <h3>$_T("survey_ui", "Don't have a login? Start here.")</h3>
-                <div class="survey-login-wrapper">
-                    $RegisterForm
-                </div>
-            </div>
+    <% if $Top.SurveyTemplate.isVoid %>
+    <div class="row">
+        <div class="col-lg-12" style="text-align: center">
+            <h3>&nbsp;$_T("survey_ui", "%1$s is Closed", $Top.SurveyTemplate.Title)</h3>
         </div>
+    </div>
     <% else %>
-     <div class="row">
-            <div class="col-lg-12" style="text-align: center">
-                <% if HasOnGoingSurvey %>
-                    <a href="$Top.SurveyLink" title="Continue Survey" class="roundedButton">$_T("survey_ui", "Continue Survey!")</a>
-                <% else %>
-                    <a href="$Top.SurveyLink" title="Start Survey!" class="roundedButton">$_T("survey_ui", "Start Survey!")</a>
-                <% end_if %>
+        <% if not $CurrentMember %>
+            <div class="row">
+                <div class="col-lg-6">
+                    <h3>$_T("survey_ui", "Already have an OpenStack Foundation login?")</h3>
+                    <div class="survey-login-wrapper">
+                        <form id="MemberLoginForm_LoginForm" action="Security/login?BackURL={$Link}" method="post"
+                              enctype="application/x-www-form-urlencoded">
+                            <div class="Actions">
+                                <input class="action" id="MemberLoginForm_LoginForm_action_dologin" type="submit"
+                                       name="action_dologin" value="{$_T('survey_ui','Log In')}" title="{$_T('survey_ui','Log In')}">
+                                <p id="ForgotPassword"><a href="Security/lostpassword">$_T("survey_ui", "I've lost my password")</a></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h3>$_T("survey_ui", "Don't have a login? Start here.")</h3>
+                    <div class="survey-login-wrapper">
+                        $RegisterForm
+                    </div>
+                </div>
             </div>
-        </div>
+        <% else %>
+         <div class="row">
+                <div class="col-lg-12" style="text-align: center">
+                    <% if HasOnGoingSurvey %>
+                        <a href="$Top.SurveyLink" title="Continue Survey" class="roundedButton">$_T("survey_ui", "Continue Survey!")</a>
+                    <% else %>
+                        <a href="$Top.SurveyLink" title="Start Survey!" class="roundedButton">$_T("survey_ui", "Start Survey!")</a>
+                    <% end_if %>
+                </div>
+            </div>
+        <% end_if %>
     <% end_if %>
     <!-- end - user survey report -->
     <% if $LoginPageSlide1Content && $LoginPageSlide2Content && $LoginPageSlide3Content %>
