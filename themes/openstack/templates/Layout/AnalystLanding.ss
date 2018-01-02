@@ -3,7 +3,7 @@
     <!-- Begin Page Content -->
     <div class="analysts-hero">
 	<div class="container">
-		<h1>OpenStack’s global traction expands for its Newton Release</h1>
+		<h1>Global OpenStack adoption increases across industry and company size</h1>
 
 		<div id="analysts-quote-carousel" class="carousel slide" data-ride="carousel">
 		  <!-- Wrapper for slides -->
