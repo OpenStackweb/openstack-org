@@ -83,7 +83,7 @@ class PresentationSlideSubmissionController extends Page_Controller
 		$presentations = $speaker->PublishedPresentations($activeSummit->ID);
 
 		// No presentations
-		if (!$presentations || !$presentations->exists()) {
+		if (!$presentations || $presentations->count() == 0) {
 			return $this->httpError(404, 'Sorry, it does not appear that you have any presentations.');
 		}
 

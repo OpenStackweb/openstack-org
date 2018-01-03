@@ -373,14 +373,22 @@ class PresentationSpeaker extends DataObject
      */
     public function PublishedPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker,  $exclude_privates_tracks = true, array $excluded_tracks = [])
     {
-       return $this->PublishedPresentationsByType
-       (
+        $types = array(
+            IPresentationType::Keynotes,
+            IPresentationType::Panel,
+            IPresentationType::Presentation,
+            IPresentationType::LightingTalks,
+            IPresentationType::Fishbowl
+        );
+
+        return $this->PublishedPresentationsByType
+        (
            $summit_id,
            $role,
-           [IPresentationType::Keynotes, IPresentationType::Panel, IPresentationType::Presentation, IPresentationType::LightingTalks, IPresentationType::Fishbowl],
+           $types,
            $exclude_privates_tracks,
            $excluded_tracks
-       );
+        );
     }
 
     /**
