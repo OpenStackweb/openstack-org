@@ -79,11 +79,11 @@ class PresentationSlideSubmissionController extends Page_Controller
 
 		Session::set('UploadMedia.SpeakerID', $speaker->ID);
 		
-		$activeSummit = Summit::get_active();
+		$activeSummit  = Summit::get_most_recent();
 		$presentations = $speaker->PublishedPresentations($activeSummit->ID);
 
 		// No presentations
-		if (!$presentations->exists()) {
+		if (!$presentations || !$presentations->exists()) {
 			return $this->httpError(404, 'Sorry, it does not appear that you have any presentations.');
 		}
 
