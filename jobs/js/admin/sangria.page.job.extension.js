@@ -477,7 +477,7 @@ jQuery(document).ready(function($) {
         });
     });
 
-    $(document).on('click', '.edit-live-job', function() {
+    $(document).on('click', '.edit-live-job', function(event) {
         event.preventDefault();
         event.stopPropagation();
         var id  = $(this).attr('data-job-id');
@@ -550,7 +550,7 @@ jQuery(document).ready(function($) {
         return false;
     });
 
-    $(document).on('click', '.delete-live-job', function() {
+    $(document).on('click', '.delete-live-job', function(event) {
         event.preventDefault();
         event.stopPropagation();
         var id  = $(this).attr('data-job-id');
