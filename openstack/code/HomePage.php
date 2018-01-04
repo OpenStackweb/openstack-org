@@ -23,10 +23,10 @@ class HomePage extends Page
         'FeedData' => 'HTMLText',
         'EventDate' => 'Date',
         'VideoCurrentlyPlaying' => 'Text',
-        'PromoIntroMessage' => 'Text',
+        'PromoIntroMessage' => 'HTMLText',
         'PromoButtonText' => 'Text',
         'PromoButtonUrl' => 'Text',
-        "PromoDatesText" => 'Text',
+        "PromoDatesText" => 'HTMLText',
         "PromoHeroCredit" => 'Text',
         "PromoHeroCreditUrl" => 'Text',
         "SummitMode" => 'Boolean',
@@ -76,10 +76,13 @@ class HomePage extends Page
         $promo_hero_image->setAllowedFileCategories('image');
 
         $fields->addFieldToTab("Root.IntroHeader", $promo_hero_image);
-        $fields->addFieldToTab("Root.IntroHeader", new TextareaField('PromoIntroMessage', 'Promo Intro Message'));
+        HtmlEditorConfig::set_active('simple');
+        $fields->addFieldToTab("Root.IntroHeader", $introText = new HtmlEditorField('PromoIntroMessage', 'Promo Intro Message'));
+        $introText->setRows(3);
         $fields->addFieldToTab("Root.IntroHeader", new TextareaField('PromoButtonText', 'Promo Button Text'));
         $fields->addFieldToTab("Root.IntroHeader", new TextareaField('PromoButtonUrl', 'Promo Button Url'));
-        $fields->addFieldToTab("Root.IntroHeader", new TextareaField('PromoDatesText', 'Promo Dates Text'));
+        $fields->addFieldToTab("Root.IntroHeader", $introDates = new HtmlEditorField('PromoDatesText', 'Promo Dates Text'));
+        $introDates->setRows(3);
         $fields->addFieldToTab("Root.IntroHeader", new TextareaField('PromoHeroCredit', 'Hero Credit'));
         $fields->addFieldToTab("Root.IntroHeader", new TextareaField('PromoHeroCreditUrl', 'Hero Credit Url'));
         return $fields;
