@@ -99,4 +99,5 @@ migrations:
   - AddOnDeleteCascadeForEventsAndPresentationMaterials
   - AddSummitCalendarSyncErrorEmailMigration
   - RefactorDefaultEventTypesMigration
-
+  - PopulateComponentCategoriesMigration
+  - PopulateSubCategoriesAndTagsMigration

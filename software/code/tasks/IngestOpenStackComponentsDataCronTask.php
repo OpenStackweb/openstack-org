@@ -62,7 +62,6 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                 $this->getInstallationGuideStatus($release);
                 $this->getSDKSupport($release);
                 $this->getQualityOfPackages($release);
-                $this->calculateMaturityPoints($release);
                 $this->getStackAnalytics($release);
             }
         });
@@ -185,6 +184,8 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                 $tags         = isset($info['tags']) ? $info['tags'] : [];
                 $ptl_member   = null;
 
+                $component->WikiUrl = $wiki;
+
                 if(!empty($ptl))
                 {
                     if(is_array($ptl) && isset($ptl['name']))
@@ -223,20 +224,15 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                     }
                 }
 
-                $team_diverse_affiliation     = false;
-                $is_service                   = false;
-                $has_stable_branches          = false;
-                $tc_approved_release          = false;
-                $starter_kit                  = false;
-                $vulnerability_managed        = false;
-                $follows_standard_deprecation = false;
-                $supports_upgrade             = false;
-                $supports_rolling_upgrade     = false;
-
                 foreach($tags as $tag)
                 {
-                    if($tag === "team:diverse-affiliation" )
-                        $team_diverse_affiliation = true;
+                    if( !$tag_obj = OpenStackComponentTag::get()->filter('Name', $tag)->first() ) {
+                        $tag_obj = new OpenStackComponentTag();
+                        $tag_obj->Name = $tag;
+                        $tag_obj->write();
+                    }
+
+                    $component->addTag($tag_obj);
                 }
 
                 $deliverables = isset($info['deliverables']) ? $info['deliverables'] : array();
@@ -245,33 +241,14 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
 
                 foreach($service_tags as $tag)
                 {
-                    if($tag === "type:service" )
-                        $is_service = true;
-                    if($tag === "stable:follows-policy" )
-                        $has_stable_branches = true;
-                    if($tag === "tc-approved-release" )
-                        $tc_approved_release = true;
-                    if($tag === "starter-kit:compute" )
-                        $starter_kit = true;
-                    if($tag === "vulnerability:managed" )
-                        $vulnerability_managed = true;
-                    if($tag === "assert:follows-standard-deprecation" )
-                        $follows_standard_deprecation = true;
-                    if($tag === "assert:supports-upgrade" )
-                        $supports_upgrade = true;
-                    if($tag === "assert:supports-rolling-upgrade" )
-                        $supports_rolling_upgrade = true;
-                }
+                    if( !$tag_obj = OpenStackComponentTag::get()->filter('Name', $tag)->first() ) {
+                        $tag_obj = new OpenStackComponentTag();
+                        $tag_obj->Name = $tag;
+                        $tag_obj->write();
+                    }
 
-                $component->HasStableBranches            = $has_stable_branches;
-                $component->WikiUrl                      = $wiki;
-                $component->TCApprovedRelease            = $tc_approved_release;
-                $component->HasTeamDiversity             = $team_diverse_affiliation;
-                $component->IncludedComputeStarterKit    = $starter_kit;
-                $component->VulnerabilityManaged         = $vulnerability_managed;
-                $component->FollowsStandardDeprecation   = $follows_standard_deprecation;
-                $component->SupportsUpgrade              = $supports_upgrade;
-                $component->SupportsRollingUpgrade       = $supports_rolling_upgrade;
+                    $component->addTag($tag_obj);
+                }
 
                 if(!is_null($ptl_member)) {
                     echo sprintf('setting PTL %s %s (%s) to Component %s', $ptl_member->FirstName, $ptl_member->Surname, $ptl_member->Email, $component->Name).PHP_EOL;
@@ -475,45 +452,6 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
         }
         $release->HasStatistics = true;
         $release->write();
-    }
-
-    private function calculateMaturityPoints(OpenStackRelease $release)
-    {
-        $components = $release->OpenStackComponents();
-
-        foreach($components as $c)
-        {
-            $points = 0;
-            if($c->Adoption > 75)
-            {
-                $points += 1;
-            }
-            if($c->HasInstallationGuide)
-            {
-                $points += 1;
-            }
-            if($c->HasTeamDiversity)
-            {
-                $points += 1;
-            }
-            if($c->HasStableBranches)
-            {
-                $points += 1;
-            }
-            if($c->FollowsStandardDeprecation)
-            {
-                $points += 1;
-            }
-            if($c->SupportsUpgrade)
-            {
-                $points += 1;
-            }
-            if($c->SupportsRollingUpgrade)
-            {
-                $points += 1;
-            }
-            $components->add($c, array('MaturityPoints' => $points));
-        }
     }
 
     private function getSDKSupport(OpenStackRelease $release)

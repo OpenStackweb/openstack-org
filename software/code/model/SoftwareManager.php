@@ -80,15 +80,23 @@ final class SoftwareManager implements ISoftwareManager
     public function getComponentsGroupedByCategory(IOpenStackRelease $release , $term = '', $adoption = 0, $maturity = 0, $age = 0, $sort = '', $sort_dir = '')
     {
         $components     = $release->getOpenStackComponentsFiltered($term, $adoption, $maturity, $age);
-        $cat_enum       = OpenStackComponent::$categories;
-        $categories     = array_fill_keys($cat_enum, array());
+        $categories     = OpenStackComponentCategory::get()->sort('Order');
+        $subcategories  = new DataList('OpenStackComponentSubCategory');
+
+        foreach ($categories as $category) {
+            $subcategories->addMany($category->SubCategories());
+        }
+
+        $component_categories = array_fill_keys($subcategories->column('Name'), array());
 
         foreach($components as $c)
         {
-            $categories[$c->Use][] = $this->serializer->serialize($c);
+            if ($c->SubCategory()->Exists()) {
+                $component_categories[$c->SubCategory()->Name][] = $this->serializer->serialize($c);
+            }
         }
 
-        return array_filter($categories);
+        return array_filter($component_categories);
     }
 
     /**
