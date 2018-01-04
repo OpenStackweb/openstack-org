@@ -171,6 +171,7 @@ final class SummitAdminUI extends DataExtension
                 DropdownField::create('ManyMany[Group]', 'Group', array(
                     'topics' => 'Topics',
                     'speaker' => 'Speaker',
+                    'sessiontype' => 'Session Type',
                     'openstack projects mentioned' => 'OpenStack Projects Mentioned'))
             ));
 
