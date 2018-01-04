@@ -26,4 +26,4 @@ AUCActiveCommitterService:
 AUCMetric:
   expiry: '+6 months'
 AUCMetricTask:
-  email_to: 'jimmy@openstack.org'
+  email_to: 'jimmy@openstack.org,sebastian@tipit.net'
