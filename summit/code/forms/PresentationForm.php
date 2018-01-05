@@ -153,6 +153,10 @@ final class PresentationForm extends BootstrapForm
 
         $CategoryGroupField = new CategoryGroupField('GroupID','Select the <a href="'.$this->summit->Link.'categories" target="_blank">Summit Category</a> of your presentation');
         $CategoryGroupField->setSource($category_groups_map);
+        if(count($category_groups_map) < 2) {
+            $CategoryGroupField->setValue($category_groups_map[0]['id']);
+            $CategoryGroupField->addHolderClass('hidden');
+        }
         $fields->insertAfter($CategoryGroupField,'TypeID');
 
         return $fields;
