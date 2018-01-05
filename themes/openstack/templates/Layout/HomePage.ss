@@ -5,11 +5,11 @@
             <div class="col-lg-10 col-lg-offset-1 col-sm-12">
                 <% if $PromoIntroMessage %>
                 <div class="intro-message">
-                    <h1>$PromoIntroMessage</h1>
+                    <h1 style="font-size:{$PromoIntroSize}em">$PromoIntroMessage</h1>
                 </div>
                 <% end_if %>
                 <% if PromoDatesText %>
-                <p class="promo-dates">$PromoDatesText</p>
+                <p class="promo-dates" style="font-size:{$PromoDatesSize}em">$PromoDatesText</p>
                 <% end_if %>
                 <% if $PromoButtonUrl %>
                 <div class="promo-btn-wrapper">

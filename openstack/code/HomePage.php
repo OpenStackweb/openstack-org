@@ -23,16 +23,18 @@ class HomePage extends Page
         'FeedData' => 'HTMLText',
         'EventDate' => 'Date',
         'VideoCurrentlyPlaying' => 'Text',
-        'PromoIntroMessage' => 'HTMLText',
+        'PromoIntroMessage' => 'Text',
+        'PromoIntroSize' => 'Varchar(20)',
         'PromoButtonText' => 'Text',
         'PromoButtonUrl' => 'Text',
-        "PromoDatesText" => 'HTMLText',
-        "PromoHeroCredit" => 'Text',
-        "PromoHeroCreditUrl" => 'Text',
-        "SummitMode" => 'Boolean',
-        "NextPresentationStartTime" => 'HTMLText',
-        "NextPresentationStartDate" => 'Text',
-        "LiveStreamURL" => 'Text'
+        'PromoDatesText' => 'Text',
+        'PromoDatesSize' => 'Varchar(20)',
+        'PromoHeroCredit' => 'Text',
+        'PromoHeroCreditUrl' => 'Text',
+        'SummitMode' => 'Boolean',
+        'NextPresentationStartTime' => 'HTMLText',
+        'NextPresentationStartDate' => 'Text',
+        'LiveStreamURL' => 'Text'
     );
 
     private static $has_one  = array(
@@ -75,14 +77,25 @@ class HomePage extends Page
         $promo_hero_image->setFolderName('homepage');
         $promo_hero_image->setAllowedFileCategories('image');
 
+        $title_font_sizes = array('0.8' => '0.8em', '1' => '1em', '1.4' => '1.4em', '1.8' => '1.8em', '2.2' => '2.2em', '2.8' => '2.8em', '3.6' => '3.6em');
+        $subtitle_font_sizes = array('0.8' => '0.8em', '1' => '1em', '1.2' => '1.2em', '1.4' => '1.4em', '1.8' => '1.8em', '2' => '2em', '2.2' => '2.2em');
+
         $fields->addFieldToTab("Root.IntroHeader", $promo_hero_image);
-        HtmlEditorConfig::set_active('simple');
-        $fields->addFieldToTab("Root.IntroHeader", $introText = new HtmlEditorField('PromoIntroMessage', 'Promo Intro Message'));
-        $introText->setRows(3);
+        $fields->addFieldToTab("Root.IntroHeader",  new FieldGroup(
+            $promoIntroMessage = new TextareaField('PromoIntroMessage', 'Promo Intro Text'),
+            new DropdownField('PromoIntroSize', 'Font Size', $title_font_sizes)
+        ));
+        $promoIntroMessage->setColumns(50);
+
         $fields->addFieldToTab("Root.IntroHeader", new TextareaField('PromoButtonText', 'Promo Button Text'));
         $fields->addFieldToTab("Root.IntroHeader", new TextareaField('PromoButtonUrl', 'Promo Button Url'));
-        $fields->addFieldToTab("Root.IntroHeader", $introDates = new HtmlEditorField('PromoDatesText', 'Promo Dates Text'));
-        $introDates->setRows(3);
+
+        $fields->addFieldToTab("Root.IntroHeader",  new FieldGroup(
+            $promoDatesText = new TextareaField('PromoDatesText', 'Promo Dates Text'),
+            new DropdownField('PromoDatesSize', 'Font Size', $subtitle_font_sizes)
+        ));
+        $promoDatesText->setColumns(50);
+
         $fields->addFieldToTab("Root.IntroHeader", new TextareaField('PromoHeroCredit', 'Hero Credit'));
         $fields->addFieldToTab("Root.IntroHeader", new TextareaField('PromoHeroCreditUrl', 'Hero Credit Url'));
         return $fields;
