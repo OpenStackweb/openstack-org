@@ -49,7 +49,7 @@ final class AddSpeakerForm extends BootstrapForm
 
         $fields = FieldList::create(
             LiteralField::create('SpeakerNote',
-                '<p class="at-least-one">Each '.$presentation_type.' needs at least one '.$speaker_type.'.</p>'),
+                '<p class="at-least-one">Each '.$presentation_type.' needs at least one speaker. You cannot submit your '.$presentation_type.' without a speaker. If you are speaking AND you are the '.$presentation_type.' owner, you still must add yourself as a speaker.</p>'),
             OptionsetField::create('SpeakerType', '', array(
                 'Me'   => 'Add yourself as a '.$speaker_type.' to this '.$presentation_type,
                 'Else' => 'Add someone else'

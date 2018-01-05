@@ -42,7 +42,7 @@
                     <% end_if %>
                 </li>
                 <li class="{$Top.getStepClass($CurrentStep,4,$Presentation.getProgress())}">
-                    <% if $Presentation %>
+                    <% if $Presentation && $Presentation.Speakers().Count() > 0 %>
                         <a data-step='4' id="step-4" href="$Presentation.EditConfirmLink" class="presentation-step {$Top.getStepClass($CurrentStep,4,$Presentation.getProgress())}">
                             Review&nbsp;&&nbsp;Submit&nbsp;&nbsp;
                             <i class="navigation-icon fa {$Top.getStepClassIcon($CurrentStep,4,$Presentation.getProgress())}" aria-hidden="true"></i>
