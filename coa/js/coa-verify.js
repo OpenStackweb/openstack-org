@@ -23,17 +23,20 @@ jQuery(document).ready(function($){
 });
 
 function getVerification() {
-    var cert_id = $('#cert_id').val();
+    var cert_id   = $('#cert_id').val();
     var last_name = $('#last_name').val();
-    var terms = $('#terms').prop('checked');
-    var username = $('#username').val();
+    var terms     = $('#terms').prop('checked');
+    var username  = $('#username').val();
 
     if (username != '') return false;
 
     if (terms && cert_id && last_name) {
+        last_name = encodeURI(last_name);
+        cert_id   = encodeURI(cert_id);
+
         $.ajax({
             type: "GET",
-            url: 'api/v1/coa/'+cert_id+'/'+last_name,
+            url: 'api/v1/coa?id='+cert_id+'&lname='+last_name,
             contentType: "application/json; charset=utf-8",
             success: function (data) {
                 $('#cert_empty').hide();

@@ -54,20 +54,20 @@ final class COACrudApi
 	/**
 	 * @var array
 	 */
-	static $url_handlers = array(
-        'GET $CERT_ID!/$LAST_NAME!' => 'getCOAExam',
-	);
+	static $url_handlers = [
+        'GET ' => 'getCOAExam',
+	];
 
 	/**
 	 * @var array
 	 */
-	static $allowed_actions = array(
+	static $allowed_actions = [
 		'getCOAExam',
-	);
+	];
 
 	public function getCOAExam(){
-		$cert_id   = trim(Convert::raw2sql($this->request->param('CERT_ID')));
-		$last_name = trim(Convert::raw2sql(html_entity_decode($this->request->param('LAST_NAME'))));
+		$cert_id   = trim(Convert::raw2sql($this->request->getVar('id')));
+		$last_name = trim(Convert::raw2sql(html_entity_decode($this->request->getVar('lname'))));
 
 		try{
 			$exam = $this->repository->getByCertAndLastName($cert_id, $last_name);
