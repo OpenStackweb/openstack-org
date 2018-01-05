@@ -98,7 +98,7 @@ class Summit extends DataObject implements ISummit
 
     private static $many_many_extraFields = array(
         'CategoryDefaultTags' => array(
-            'Group' => "Enum('topics, speaker, sessiontype, openstack projects mentioned', 'topics')", // if change see also getcms
+            'Group' => "Varchar(255)",
         ),
     );
 

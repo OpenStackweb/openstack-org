@@ -34,6 +34,18 @@ final class SummitAdminUI extends DataExtension
         'FriendlyApiAvailability' => 'Is Available through API ?'
     );
 
+    /**
+     * @var array
+     */
+    public static $tag_groups = array
+    (
+        // Tags in CFP will show up grouped in this order, also the key will be the group label
+        'session type'                  => 'Session Type',
+        'topics'                        => 'Topics',
+        'speaker'                       => 'Speaker',
+        'openstack projects mentioned'  => 'OpenStack Projects Mentioned'
+    );
+
     public function getFriendlyType(){
         return $this->owner->TypeID > 0 ? $this->owner->Type()->Type : 'NOT SET';
     }
@@ -156,7 +168,7 @@ final class SummitAdminUI extends DataExtension
             $categories = new GridField('Categories', 'Presentation Categories', $this->owner->getCategories(), $config);
             $f->addFieldToTab('Root.Presentation Categories', $categories);
 
-            $config = GridFieldConfig_RelationEditor::create(50);
+            $config = GridFieldConfig_RelationEditor::create(100);
             $config->removeComponentsByType(new GridFieldDataColumns());
             $config->removeComponentsByType(new GridFieldDetailForm());
             $config->addComponent(new GridFieldUpdateDefaultCategoryTags);
@@ -168,11 +180,7 @@ final class SummitAdminUI extends DataExtension
             $editconf = new GridFieldDetailForm();
             $editconf->setFields(FieldList::create(
                 TextField::create('Tag','Tag'),
-                DropdownField::create('ManyMany[Group]', 'Group', array(
-                    'topics' => 'Topics',
-                    'speaker' => 'Speaker',
-                    'sessiontype' => 'Session Type',
-                    'openstack projects mentioned' => 'OpenStack Projects Mentioned'))
+                DropdownField::create('ManyMany[Group]', 'Group', self::$tag_groups)
             ));
 
             $summaryfieldsconf = new GridFieldDataColumns();

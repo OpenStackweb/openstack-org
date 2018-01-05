@@ -52,8 +52,8 @@ class PresentationCategory extends DataObject
 
     private static $many_many_extraFields = array(
         'AllowedTags' => array(
-            'Group' => "Enum('topics, speaker, openstack projects mentioned', 'topics')", // if change see also getcms
-            'IsDefault' => "Boolean",
+            'Group'     => 'Varchar(255)',
+            'IsDefault' => 'Boolean',
         ),
     );
 
@@ -99,10 +99,7 @@ class PresentationCategory extends DataObject
             $editconf = new GridFieldDetailForm();
             $editconf->setFields(FieldList::create(
                 TextField::create('Tag','Tag'),
-                DropdownField::create('ManyMany[Group]', 'Group', array(
-                    'topics' => 'Topics',
-                    'speaker' => 'Speaker',
-                    'openstack projects mentioned' => 'OpenStack Projects Mentioned'))
+                DropdownField::create('ManyMany[Group]', 'Group', SummitAdminUI::$tag_groups)
             ));
 
             $summaryfieldsconf = new GridFieldDataColumns();
