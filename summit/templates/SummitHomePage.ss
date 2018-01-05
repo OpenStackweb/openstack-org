@@ -24,7 +24,7 @@
                     May 21-24, 2018 in Vancouver, BC
                 </div>
                 <div class="landing-action">
-                    <a href="/videos/summits/vancouver-2018" class="btn register-btn-lrg">Join Us<i class="fa fa-chevron-right"></i></a>
+                    <a href="/summit/vancouver-2018/" class="btn register-btn-lrg">Join Us<i class="fa fa-chevron-right"></i></a>
                 </div>
             </div>
         </div>
