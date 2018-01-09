@@ -64,4 +64,16 @@ interface IMemberManager
      */
     public function resetEmailVerification(Member $member, IMessageSenderService $sender_service);
 
+    /**
+     * @param Member $member
+     * @return void
+     */
+    public function activate(Member $member);
+
+    /**
+     * @param Member $member
+     * @return void
+     */
+    public function deactivate(Member $member);
+
 }

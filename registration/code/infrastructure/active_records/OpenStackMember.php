@@ -54,7 +54,6 @@ class OpenStackMember
     ];
 
     static $defaults = [
-
         'SubscribedToNewsletter' => true,
         'DisplayOnSite'          => false,
         'Active'                 => true,
@@ -130,6 +129,17 @@ class OpenStackMember
             $log->MemberID      = $this->owner->ID;
             $log->PerformedByID = Member::currentUserID();
             $log->write();
+        }
+
+        // reset spam check
+
+        if(isset($fields['Bio']))
+        {
+            $bio_old  = trim($fields['Bio']['before']);
+            $bio_new  = trim($fields['Bio']['after']);
+            if($bio_old != $bio_new){
+                $this->resetTypeClassification();
+            }
         }
     }
 
@@ -622,10 +632,19 @@ class OpenStackMember
         $this->owner->Active = true;
         $this->owner->Type   = "Ham";
         DB::query(sprintf("DELETE FROM MemberEstimatorFeed WHERE Email = '%s';", $this->owner->Email));
+        DB::query(sprintf("INSERT INTO MemberEstimatorFeed (Email, FirstName, Surname, Bio, Type) VALUES('%s', '%s', '%s', '%s', '%s');", $this->owner->Email, $this->owner->FirstName, $this->owner->Surname, $this->owner->Bio, 'Ham'));
     }
 
     public function deActivate(){
         $this->owner->Active = false;
+        $this->owner->Type   = "Spam";
+        DB::query(sprintf("DELETE FROM MemberEstimatorFeed WHERE Email = '%s';", $this->owner->Email));
+        DB::query(sprintf("INSERT INTO MemberEstimatorFeed (Email, FirstName, Surname, Bio, Type) VALUES('%s', '%s', '%s', '%s', '%s');", $this->owner->Email, $this->owner->FirstName, $this->owner->Surname, $this->owner->Bio, 'Spam'));
+    }
+
+    public function resetTypeClassification(){
+        $this->owner->Type   = "None";
+        DB::query(sprintf("DELETE FROM MemberEstimatorFeed WHERE Email = '%s';", $this->owner->Email));
     }
 
     /**

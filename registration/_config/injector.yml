@@ -13,6 +13,9 @@ EditProfilePage_Controller:
 MemberVerificationController:
   dependencies:
     MemberManager: '%$MemberManager'
+MemberActivationController:
+  dependencies:
+    MemberManager: '%$MemberManager'
 Injector:
   MemberRepository:
     class: SapphireMemberRepository

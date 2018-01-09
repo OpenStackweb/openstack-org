@@ -20,8 +20,9 @@
                         <input type="text" class="form-control" id="EndDate" name="EndDate" placeholder="End Date">
                     </div>
                     <div class="checkbox">
-                        <input type="checkbox" id="Current" name="Current">
-                        <label for="Current"> Is Current? </label>
+                        <label>
+                            <input type="checkbox" id="Current" name="Current"> Is Current?
+                        </label>
                     </div>
                     <input type="hidden" id="Id" name="Id" value="0"/>
                 </form>

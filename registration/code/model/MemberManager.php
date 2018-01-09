@@ -430,4 +430,28 @@ final class MemberManager implements IMemberManager
             throw $ex;
         }
     }
+
+    /**
+     * @param Member $member
+     * @return void
+     */
+    public function activate(Member $member)
+    {
+        return $this->tx_manager->transaction(function () use ($member){
+            $member->activate();
+            $member->write();
+        });
+    }
+
+    /**
+     * @param Member $member
+     * @return void
+     */
+    public function deactivate(Member $member)
+    {
+        return $this->tx_manager->transaction(function () use ($member){
+            $member->deActivate();
+            $member->write();
+        });
+    }
 }

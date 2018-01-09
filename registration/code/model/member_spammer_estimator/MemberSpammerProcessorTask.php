@@ -36,11 +36,37 @@ final class MemberSpammerProcessorTask extends CronTask
         while ($process->isRunning()) {
         }
 
-        $output = $process->getOutput();
-        echo $output.PHP_EOL;
+        $csv_content = $process->getOutput();
+        echo $csv_content.PHP_EOL;
 
         if (!$process->isSuccessful()) {
             throw new Exception("Process Error!");
+        }
+
+        $rows   = CSVReader::load($csv_content);
+        $output = "<p>Nothing to process</p>";
+
+        if(count($rows) > 0)
+        {   $output = '<ul>';
+            foreach($rows as $row){
+                $member_id = intval($row["ID"]);
+                $member    = Member::get()->byID($member_id);
+
+                if(!$member) continue;
+                $action_url  = $row["Type"] == "Ham"? "/members-spammers/%s/deactivate": "/members-spammers/%s/activate";
+                $action_url  = sprintf($action_url, $member->ID);
+                $action_text = $row["Type"] == "Ham"? "Mark as Spam": "Mark as Ham";
+                $output .= sprintf(
+                    "<li>[%s] - %s, %s (%s). <a href='%s'>%s</a></li>",
+                    $row["Type"],
+                    $member->FirstName,
+                    $member->Surname,
+                    $member->Email,
+                    $action_url,
+                    $action_text
+                );
+            }
+            $output .= '</ul>';
         }
 
         $email = EmailFactory::getInstance()->buildEmail

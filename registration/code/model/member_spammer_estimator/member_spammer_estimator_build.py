@@ -21,14 +21,15 @@ from dbutils import DBConfig
 import pandas.io.sql as sql
 import numpy as np
 from sklearn.naive_bayes import MultinomialNB, BernoulliNB, GaussianNB
-from sklearn.feature_extraction.text import HashingVectorizer, CountVectorizer, TfidfVectorizer
+from sklearn.feature_extraction.text import HashingVectorizer, CountVectorizer, TfidfTransformer
 import pickle
 from sklearn.pipeline import Pipeline, FeatureUnion
 from data_frame_column_extracter import DataFrameColumnExtracter
 from sklearn.svm import SVC
 import sys
+from html_preprocessor import StripHTMLTransformer
 
-queryGetClassifiedMembers = ("SELECT Email, FirstName, Surname, Type FROM MemberEstimatorFeed; ")
+queryGetClassifiedMembers = ("SELECT Email, FirstName, Surname, Bio, Type FROM MemberEstimatorFeed; ")
 root_dir = sys.argv[1]  # param
 
 cursor = None
@@ -59,18 +60,26 @@ try:
         ('vectorizer', HashingVectorizer(non_negative=True))
     ])
 
+    bio_pipe = Pipeline([
+        ('data', DataFrameColumnExtracter('Bio')),
+        ('preprocessor', StripHTMLTransformer()),
+        ('vectorizer', CountVectorizer(strip_accents='unicode', stop_words='english', ngram_range=(1, 3))),
+        ('tfidf', TfidfTransformer())
+    ])
+
     features = FeatureUnion(
         n_jobs=1,
         transformer_list=[
             ('email_pipe', email_pipe),
             ('fname_pipe', fname_pipe),
-            ('lname_pipe', lname_pipe)
+            ('lname_pipe', lname_pipe),
+            ('bio_pipe',   bio_pipe)
         ],
         transformer_weights=None)
 
     classifier = Pipeline([
         ('features', features),
-        ('model', SVC(kernel='rbf', C=100,gamma=0.001))
+        ('model', MultinomialNB(alpha=0.0001, fit_prior=True))
     ])
 
     classifier.fit(trainData, labels)

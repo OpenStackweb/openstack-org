@@ -22,15 +22,22 @@ from dbutils import DBConfig
 import pandas.io.sql as sql
 import numpy as np
 import sys
+from html_preprocessor import HTMLStripper
 
-SELECT_QUERY = ("SELECT ID, Email, FirstName, Surname FROM Member WHERE Type = 'None';")
-UPDATE_MEMBER = ("UPDATE Member SET Type = '%s', Active = %s WHERE ID = %s ;")
-SELECT_EXISTS = ("SELECT * FROM MemberEstimatorFeed WHERE Email='%s' AND FirstName ='%s' AND Surname ='%s'")
-INSERT_MEMBER_TRAINING_DATA = ("INSERT INTO MemberEstimatorFeed (Email, FirstName, Surname, Type) VALUES('%s', '%s', '%s', '%s');")
 
 root_dir = sys.argv[1]  # param
 cursor = None
 config = DBConfig(root_dir+"/db.ini").read_db_config()
+
+def stripHtmlFromBody(doc):
+    s = HTMLStripper()
+    s.feed(doc)
+    return s.get_data()
+
+SELECT_QUERY = ("SELECT ID, Email, FirstName, Surname, Bio FROM Member WHERE Type = 'None' AND Bio IS NOT NULL AND Bio <> '';")
+UPDATE_MEMBER = ("UPDATE Member SET Type = '%s', Active = %s WHERE ID = %s ;")
+SELECT_EXISTS = ("SELECT * FROM MemberEstimatorFeed WHERE Email='%s' AND FirstName ='%s' AND Surname ='%s'")
+INSERT_MEMBER_TRAINING_DATA = ("INSERT INTO MemberEstimatorFeed (Email, FirstName, Surname, Bio, Type) VALUES('%s', '%s', '%s', '%s', '%s');")
 
 try:
     # Open database connection
@@ -39,30 +46,21 @@ try:
     cursor = db.cursor()
     df = sql.read_sql(SELECT_QUERY, db)
     X_test = df.replace(np.nan, '', regex=True)
-
+    X_test['Bio'] = X_test['Bio'].apply(stripHtmlFromBody)
+    print("ID,Type")
     if not X_test.empty:
-        print("Member classification process excerpt :")
-        print("")
-        print("")
-
-        classifier = pickle.load(open('member_classifier.pickle', 'rb'))
-
-        predicted  = classifier.predict(X_test.drop(['ID'], axis = 1 ))
-
-        for item, type in zip(X_test.to_dict( orient = 'records'), predicted):
-            cursor.execute(UPDATE_MEMBER % (type, 1 if type == 'Ham' else 0, item['ID']))
-            if type == 'Spam':
-                print("[SPAM] - marking member (%s,%s,%s,%s) as spammer and deactivating it.") % (item['Email'].encode('utf-8'), item['FirstName'].encode('utf-8'), item['Surname'].encode('utf-8'), item['ID'])
-                cursor.execute(SELECT_EXISTS % (item['Email'],item['FirstName'],item['Surname']))
-                exists = cursor.fetchone();
-                if exists is None:
-                    cursor.execute(INSERT_MEMBER_TRAINING_DATA % (item['Email'], item['FirstName'], item['Surname'], type))
-            else:
-                print("[HAM] - marking member (%s,%s,%s,%s) as nom spammer.") % (item['Email'].encode('utf-8'), item['FirstName'].encode('utf-8'), item['Surname'].encode('utf-8'), item['ID'])
-
-    else:
-        print("nothing to process ... ")
-
+            classifier = pickle.load(open('member_classifier.pickle', 'rb'))
+            predicted  = classifier.predict(X_test.drop(['ID'], axis = 1 ))
+            for item, type in zip(X_test.to_dict( orient = 'records'), predicted):
+                cursor.execute(UPDATE_MEMBER % (type, 1 if type == 'Ham' else 0, item['ID']))
+                if type == 'Spam':
+                    print("%s,%s") % (item['ID'],'Spam')
+                    cursor.execute(SELECT_EXISTS % (item['Email'],item['FirstName'],item['Surname']))
+                    exists = cursor.fetchone();
+                    if exists is None:
+                        cursor.execute(INSERT_MEMBER_TRAINING_DATA % (item['Email'], item['FirstName'], item['Surname'], item['Bio'], type))
+                else:
+                     print("%s,%s") % (item['ID'],'Ham')
     db.commit()
 except Exception as e:
    print e
@@ -70,7 +68,6 @@ except Exception as e:
    db.rollback()
    raise
 finally:
-
     if not (cursor is None):
         cursor.close()
     # disconnect from server

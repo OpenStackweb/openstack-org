@@ -22,6 +22,7 @@ final class MemberEstimatorFeed extends DataObject
         'FirstName'=> 'Varchar',
         'Surname'  => 'Varchar',
         'Email'    => 'Varchar(254)',
-        'Type'     =>  "Enum('None, Ham, Spam', 'None')",
+        'Bio'      => 'HTMLText',
+        'Type'     => "Enum('None, Ham, Spam', 'None')",
     ];
 }
