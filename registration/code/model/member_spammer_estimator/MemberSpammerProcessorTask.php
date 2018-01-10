@@ -48,20 +48,25 @@ final class MemberSpammerProcessorTask extends CronTask
 
         if(count($rows) > 0)
         {   $output = '<ul>';
+
             foreach($rows as $row){
                 $member_id = intval($row["ID"]);
                 $member    = Member::get()->byID($member_id);
 
                 if(!$member) continue;
+
                 $action_url  = $row["Type"] == "Ham"? "/members-spammers/%s/deactivate": "/members-spammers/%s/activate";
-                $action_url  = sprintf($action_url, $member->ID);
+                $action_url  = Director::absoluteURL(sprintf($action_url, $member->ID));
                 $action_text = $row["Type"] == "Ham"? "Mark as Spam": "Mark as Ham";
+                $edit_url    = Director::absoluteURL(sprintf("/admin/security/EditForm/field/Members/item/%s/edit", $member->ID));
+
                 $output .= sprintf(
-                    "<li>[%s] - %s, %s (%s). <a href='%s'>%s</a></li>",
+                    "<li>[%s] - %s, %s (%s).<a href='%s'>Edit</a> <a href='%s'>%s</a></li>",
                     $row["Type"],
                     $member->FirstName,
                     $member->Surname,
                     $member->Email,
+                    $edit_url,
                     $action_url,
                     $action_text
                 );

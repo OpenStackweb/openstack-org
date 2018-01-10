@@ -119,3 +119,5 @@ $simple_tinyMCE->setButtonsForLine(2,array());
 if(defined('SERVER_TIME_ZONE')) {
     date_default_timezone_set(SERVER_TIME_ZONE);
 }
+
+$test_url = Director::absoluteURL('/admin/edit/1');
