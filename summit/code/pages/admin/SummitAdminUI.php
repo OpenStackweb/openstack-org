@@ -34,18 +34,6 @@ final class SummitAdminUI extends DataExtension
         'FriendlyApiAvailability' => 'Is Available through API ?'
     );
 
-    /**
-     * @var array
-     */
-    public static $tag_groups = array
-    (
-        // Tags in CFP will show up grouped in this order, also the key will be the group label
-        'session type'                  => 'Session Type',
-        'topics'                        => 'Topics',
-        'speaker'                       => 'Speaker',
-        'openstack projects mentioned'  => 'OpenStack Projects Mentioned'
-    );
-
     public function getFriendlyType(){
         return $this->owner->TypeID > 0 ? $this->owner->Type()->Type : 'NOT SET';
     }
@@ -180,7 +168,7 @@ final class SummitAdminUI extends DataExtension
             $editconf = new GridFieldDetailForm();
             $editconf->setFields(FieldList::create(
                 TextField::create('Tag','Tag'),
-                DropdownField::create('ManyMany[Group]', 'Group', self::$tag_groups)
+                DropdownField::create('ManyMany[Group]', 'Group', TagGroup::getGroups())
             ));
 
             $summaryfieldsconf = new GridFieldDataColumns();
@@ -205,6 +193,12 @@ final class SummitAdminUI extends DataExtension
             $config->addComponent($multi_class_selector);
             $categories = new GridField('CategoryGroups', 'Category Groups', $this->owner->CategoryGroups(), $config);
             $f->addFieldToTab('Root.Category Groups', $categories);
+
+            // tag groups
+            $config = GridFieldConfig_RecordEditor::create(10);
+            $config->addComponent($sort = new GridFieldSortableRows('Order'));
+            $tag_groups = new GridField('TagGroups', 'Tag Groups', TagGroup::get(), $config);
+            $f->addFieldToTab('Root.Tag Groups', $tag_groups);
 
             // locations
             $config = GridFieldConfig_RecordEditor::create(50);

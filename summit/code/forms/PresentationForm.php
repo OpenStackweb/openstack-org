@@ -104,11 +104,6 @@ final class PresentationForm extends BootstrapForm
                     ->setEmptyString('-- Select one --')
                     ->setSource(Presentation::create()->dbObject('Level')->enumValues())
                 ->end()
-            ->optionset('FeatureCloud','Does this talk feature an OpenStack cloud?', array( 1 => 'Yes', 0 => 'No' ))
-                ->configure()
-                    ->setTemplate('BootstrapAwesomeOptionsetField')
-                    ->setInline(true)
-                ->end()
             ->optionset('LightningTalk',
                 'Would you be willing to present your presentation as a Lightning Talk in the event your submission is not chosen? Note: panels are ineligible for Lightning Talks.',
                 array(

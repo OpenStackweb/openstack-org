@@ -99,7 +99,7 @@ class PresentationCategory extends DataObject
             $editconf = new GridFieldDetailForm();
             $editconf->setFields(FieldList::create(
                 TextField::create('Tag','Tag'),
-                DropdownField::create('ManyMany[Group]', 'Group', SummitAdminUI::$tag_groups)
+                DropdownField::create('ManyMany[Group]', 'Group', TagGroup::getGroups())
             ));
 
             $summaryfieldsconf = new GridFieldDataColumns();

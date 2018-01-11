@@ -19,7 +19,7 @@ class TagManagerField extends FormField
     public function FieldHolder($attributes = array ())
     {
         //$tags_json = json_encode($this->Category->AllowedTags()->column('Tag'));
-        $tag_array = array_fill_keys(array_keys(SummitAdminUI::$tag_groups), array());
+        $tag_array = array_fill_keys(array_keys(TagGroup::getGroups()), array());
 
         foreach ($this->Category->AllowedTags() as $tag) {
             if(!isset($tag_array[$tag->Group])) $tag_array[$tag->Group] = array();
