@@ -40,4 +40,13 @@ final class TagGroup extends DataObject implements ITagGroup
         return TagGroup::get()->sort('Order')->map('Name', 'Label')->toArray();
     }
 
+
+    public function getCMSFields() {
+        $fields = new FieldList();
+        $fields->add(new LiteralField('namelabel', 'Name is the label used in CFP, use only lowercase'));
+        $fields->add(new TextField('Name', 'Name (lowercase)'));
+        $fields->add(new TextField('Label'));
+
+        return $fields;
+    }
 }
