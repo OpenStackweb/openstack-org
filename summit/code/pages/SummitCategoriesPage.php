@@ -20,9 +20,6 @@ class SummitCategoriesPage extends SummitPage {
         $fields->removeByName('TwitterConversionTracking');
         $fields->removeByName('SummitPageImages');
         $fields->removeFieldFromTab('Root.Main','Content');
-        $fields->removeFieldFromTab('Root.Main','SummitImageID');
-        $fields->removeFieldFromTab('Root.Main','SummitID');
-        $fields->removeFieldFromTab('Root.Main','HeroCSSClass');
 
         $fields->addFieldsToTab('Root.Main', new LiteralField('breakline', '<br>'));
         $fields->addFieldsToTab('Root.Main', new TextField('HeaderTitle', 'H1 Title'));
