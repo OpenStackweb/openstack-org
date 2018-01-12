@@ -413,7 +413,7 @@ class MemberListPage_Controller extends Page_Controller
             $filter = "(MATCH (FirstName, Surname) AGAINST ('{$query}')
 					OR FirstName LIKE '%{$query}%'
 					OR Surname LIKE '%{$query}%'
-					OR IRCHandle LIKE '%{$query}%') AND Group_Members.GroupID=5";
+					OR IRCHandle LIKE '%{$query}%') AND Group_Members.GroupID=5 AND Member.Active = 1";
 
             $Results = Member::get()
                 ->where($filter)
@@ -441,7 +441,7 @@ class MemberListPage_Controller extends Page_Controller
                 $filter = "(MATCH (FirstName, Surname) AGAINST ('{$query}')
 					OR FirstName LIKE '%{$query}%'
 					OR Surname LIKE '%{$query}%'
-					OR IRCHandle LIKE '%{$query}%') AND Group_Members.GroupID=5";
+					OR IRCHandle LIKE '%{$query}%') AND Group_Members.GroupID=5 AND Member.Active = 1";
 
                 $OneMember = Member::get()
                     ->where($filter)
