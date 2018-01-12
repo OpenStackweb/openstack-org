@@ -14,7 +14,7 @@
             <p>Here are three steps you should take as a potential speaker:</p>
 
             <ul class="submit-steps">
-                <li><span>1</span> <a href="summit/vancouver-2018/categories/" target="_blank">Review the list of Summit Categories &amp; Tracks.</a></li>
+                <li><span>1</span> <a href="summit/vancouver-2018/summit-categories" target="_blank">Review the list of Summit Categories &amp; Tracks.</a></li>
                 <li><span>2</span> <a href="#process">Learn about the selection process.</a></li>
                 <li><span>3</span> <a href="#submit">Submit your session proposal below. (Limit of 3 per speaker)</a></li>
             </ul>
