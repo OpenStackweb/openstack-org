@@ -126,7 +126,7 @@ class MemberListPage_Controller extends Page_Controller
         if(!is_null($member))
         {
             // Check to make sure they are in the foundation membership group
-            If ($member->inGroup(5, true))
+            If ($member->inGroup(5, true) && $member->isActive())
             {
                 return $member;
             }
