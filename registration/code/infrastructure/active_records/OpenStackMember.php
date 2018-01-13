@@ -631,15 +631,38 @@ class OpenStackMember
     public function activate(){
         $this->owner->Active = true;
         $this->owner->Type   = "Ham";
+
         DB::query(sprintf("DELETE FROM MemberEstimatorFeed WHERE Email = '%s';", $this->owner->Email));
-        DB::query(sprintf("INSERT INTO MemberEstimatorFeed (Email, FirstName, Surname, Bio, Type) VALUES('%s', '%s', '%s', '%s', '%s');", $this->owner->Email, $this->owner->FirstName, $this->owner->Surname, $this->owner->Bio, 'Ham'));
+        DB::query
+        (
+            sprintf
+            (
+                "INSERT INTO MemberEstimatorFeed (Email, FirstName, Surname, Bio, Type) VALUES('%s', '%s', '%s', '%s', '%s');",
+                DB::getConn()->addslashes($this->owner->Email),
+                DB::getConn()->addslashes($this->owner->FirstName),
+                DB::getConn()->addslashes($this->owner->Surname),
+                DB::getConn()->addslashes($this->owner->Bio),
+                $this->owner->Type
+            )
+        );
     }
 
     public function deActivate(){
         $this->owner->Active = false;
         $this->owner->Type   = "Spam";
         DB::query(sprintf("DELETE FROM MemberEstimatorFeed WHERE Email = '%s';", $this->owner->Email));
-        DB::query(sprintf("INSERT INTO MemberEstimatorFeed (Email, FirstName, Surname, Bio, Type) VALUES('%s', '%s', '%s', '%s', '%s');", $this->owner->Email, $this->owner->FirstName, $this->owner->Surname, $this->owner->Bio, 'Spam'));
+        DB::query
+        (
+            sprintf
+            (
+                "INSERT INTO MemberEstimatorFeed (Email, FirstName, Surname, Bio, Type) VALUES('%s', '%s', '%s', '%s', '%s');",
+                DB::getConn()->addslashes($this->owner->Email),
+                DB::getConn()->addslashes($this->owner->FirstName),
+                DB::getConn()->addslashes($this->owner->Surname),
+                DB::getConn()->addslashes($this->owner->Bio),
+                $this->owner->Type
+            )
+        );
     }
 
     public function resetTypeClassification(){
