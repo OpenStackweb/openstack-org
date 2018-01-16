@@ -1,9 +1,10 @@
-            <div class="sessions-landing-intro">
+<div class="sessions-landing-intro">
     <div class="container">
         <div class="row">
             <div class="col-sm-10 col-sm-push-1">
                 <h1>$HeaderTitle</h1>
-                $HeaderText
+                <h3>The Summit</h3>
+                <p>The Summit is a collection of presentations, panels and workshops organized by Track. Among the presentations and panels, there are case studies, architecture / operations sessions, upstream development, 101 and demos.</p>
             </div>
         </div>
     </div>
@@ -11,7 +12,7 @@
 <div class="all-sessions-wrapper">
     <div class="container">
             <!-- Start Categories -->
-            <% loop $Summit.getPublicCategoryGroups().Sort(Name) %>
+            <!-- <% loop $Summit.getPublicCategoryGroups().Sort(Name) %>
                 <% if $Odd %> <div class="row session-list-row"> <% end_if %>
                 <div class="col-sm-6">
                     <div class="session-wrapper" id="containers">
@@ -56,7 +57,7 @@
             <div class="col-sm-12">
                 <p>* Note: these are not selected though the Call for Presentations process</p>
             </div>
-        </div>
+        </div> -->
         <!-- Full track definitions -->
         <div class="row">
             <div class="col-sm-12">
@@ -68,6 +69,17 @@
                     $Description
                 </p>
                 <% end_loop %>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="sessions-landing-intro">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-10 col-sm-push-1">
+                
+                <h3>The Forum</h3>
+                <p>OpenStack users and developers gather at the Forum to brainstorm the requirements for the next release, gather feedback on the past version and have strategic discussions that go beyond just one release cycle. Sessions are submitted outside of the Summit Call for Presentations and are more collaborative, discussion-oriented.</p>
             </div>
         </div>
     </div>
