@@ -31,7 +31,7 @@
                 </td>
                 <td class="submitter-email">
                     <% if $RegistrationRequest %>
-                        $RegistrationRequest.PointOfContactEmail
+                        <a href="mailto:$RegistrationRequest.PointOfContactEmail">email</a>
                     <% else %>
                         Admin
                     <% end_if %>

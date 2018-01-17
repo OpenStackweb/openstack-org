@@ -19,7 +19,9 @@
                 <td class="title"><a id="job{$ID}" href="#"></a>$Title</td>
                 <td class="post-date">$PostDate</td>
                 <td class="submitter">$PointOfContactName</td>
-                <td class="submitter-email">$PointOfContactEmail</td>
+                <td class="submitter-email">
+                    <a href="mailto:$PointOfContactEmail">email</a>
+                </td>
                 <td class="url"><a href="$Url">Link</a></td>
                 <td class="company-name">$CompanyName</td>
                 <td class="location_type">$LocationType</td>
