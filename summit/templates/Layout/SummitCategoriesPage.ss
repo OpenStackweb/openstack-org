@@ -4,7 +4,7 @@
             <div class="col-sm-12">
                 <h1>$HeaderTitle</h1>
                 <h3>The Summit</h3>
-                <p>The Summit is a collection of presentations, panels and workshops organized by Track. Among the presentations and panels, there are case studies, architecture / operations sessions, upstream development, 101 and demos.</p>
+                <p>The OpenStack Summit is a four-day event covering everything Open Infrastructure. Content includes keynotes, presentations, panels, hands-on workshops, and collaborative working sessions. Expect to hear about the intersection of many open source infrastructure projects, including Ansible, Ceph, Kata Containers, Kubernetes, ONAP, OpenStack and more.</p>
             </div>
         </div>
     </div>
