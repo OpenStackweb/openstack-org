@@ -8,6 +8,8 @@
         <tr>
             <th class="title">Title</th>
             <th class="post-date">Post Date</th>
+            <th class="submitter">Submitter</th>
+            <th class="submitter-email">Submitter Email</th>
             <th class="url">Url</th>
             <th class="company-name">Company</th>
             <th class="location_type">Job Location</th>
@@ -20,6 +22,20 @@
             <tr>
                 <td class="title"><a id="job{$ID}" href="#"></a>$Title</td>
                 <td class="post-date">$PostedDate</td>
+                <td class="submitter">
+                    <% if $RegistrationRequest %>
+                        $RegistrationRequest.PointOfContactName
+                    <% else %>
+                        Admin
+                    <% end_if %>
+                </td>
+                <td class="submitter-email">
+                    <% if $RegistrationRequest %>
+                        $RegistrationRequest.PointOfContactEmail
+                    <% else %>
+                        Admin
+                    <% end_if %>
+                </td>
                 <td class="url"><a href="{$BaseHref}community/jobs/view/{$ID}/{$Slug}">Link</a></td>
                 <td class="company-name">$CompanyName</td>
                 <td class="location_type">$FormattedLocation</td>
