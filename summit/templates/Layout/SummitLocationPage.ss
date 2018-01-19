@@ -142,17 +142,6 @@
         <% end_if %>
     </div>
 </div>
-<% if CityIntro %>
-<div class="white city-intro">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                $CityIntro
-            </div>
-        </div>
-    </div>
-</div>
-<% end_if %>
 <% if $Venue %>
     <div id="venue">
         <div class="venue-row tokyo" style="background: rgba(0, 0, 0, 0) url('{$Top.VenueBackgroundImageUrl}') no-repeat scroll left top / cover ;">
@@ -171,6 +160,17 @@
             </a>
         </div>
     </div>
+<% end_if %>
+<% if CityIntro %>
+<div class="white city-intro">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                $CityIntro
+            </div>
+        </div>
+    </div>
+</div>
 <% end_if %>
 <!-- <div class="blue" id="getting-around">
     <div class="container">
