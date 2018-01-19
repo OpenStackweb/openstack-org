@@ -133,16 +133,11 @@
                 <div class="span-4 checkbox_item">
                     <strong>Willing to present via video conference: </strong><% if WillingToPresentVideo %> Yes <% else %> No <% end_if %>
                 </div>
-                <div class="span-4 checkbox_item">
-                    <strong>Willing to travel to any country: </strong>
-                    <% if $WillingToTravel %>
-                        Yes <% if FundedTravel %> (My company will fund my travel) <% end_if %>
-                    <% else %>
-                        No
-                    <% end_if %>
-                </div>
-
-                <% if not $WillingToTravel %>
+                <% if $WillingToTravel %>
+                    <div class="span-4 checkbox_item">
+                        <strong>Willing to travel to any country:</strong> Yes
+                    </div>
+                <% else_if TravelPreferences.Count %>
                     <div class="span-4">
                         <strong>I'm willing to travel to:</strong>
                     </div>
