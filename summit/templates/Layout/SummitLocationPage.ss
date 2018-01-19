@@ -172,3 +172,73 @@
         </div>
     </div>
 <% end_if %>
+<!-- <div class="blue" id="getting-around">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-push-2">
+                <h1>Getting Around In Austin</h1>
+                <p>
+                    There are several safe and reliable transportation options in Austin. Here are a few options to consider.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="getting-options">
+                    <div class="getting-around-item">
+                        <a href="//www.capmetro.org/airport/" target="_blank"><i class="fa fa-bus"></i>MetroAirport<span>(bus)</span></a>
+                    </div>
+                    <div class="getting-around-item">
+                        <a href="//www.uber.com/cities/austin" target="_blank"><i class="fa fa-car"></i>Uber</a>
+                    </div>
+                    <div class="getting-around-item">
+                        <a href="//www.lyft.com/cities/austin" target="_blank"><i class="fa fa-car"></i>Lyft</a>
+                    </div>
+                    <div class="getting-around-item">
+                        <a href="//www.austintexas.gov/department/ground-transportation" target="_blank"><i class="fa fa-plane"></i>Airport Transportation</a>
+                    </div>
+                    <div class="getting-around-item">
+                        <a href="#" target="_blank"><i class="fa fa-car"></i>Rental Cars</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+-->
+<% if TravelSupport  %>
+    <div class="light" id="travel-support">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-push-2">
+                    $TravelSupport
+                </div>
+            </div>
+        </div>
+    </div>
+<% end_if %>
+<% if VisaInformation  %>
+<div class="white visa-row" id="visa">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-push-2">
+                $VisaInformation
+            </div>
+        </div>
+    </div>
+</div>
+<% end_if %>
+<% if Locals %>
+<div class="about-city-row austin" style="background: rgba(0, 0, 0, 0) url('{$AboutTheCityBackgroundImageUrl}') no-repeat scroll left top / cover ">
+    <p>
+        Legendary music, epic BBQ, history, food trucks and neon...
+    </p>
+    <h1>Come Join Us In Austin</h1>
+    <a href="{$AboutTheCityBackgroundImageHeroSource}" class="photo-credit" data-toggle="tooltip" data-placement="left" title="{$AboutTheCityBackgroundImageHero}" target="_blank"><i class="fa fa-info-circle"></i></a>
+</div>
+<div class="white locals-row" id="locals">
+    <div class="container">
+        $Locals
+    </div>
+</div>
+<% end_if %>
