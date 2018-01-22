@@ -133,7 +133,7 @@ class OpenStackMember
 
         // reset spam check
 
-        if(isset($fields['Bio']))
+        if(isset($fields['Bio']) && $this->owner->Type != 'Spam')
         {
             $bio_old  = trim($fields['Bio']['before']);
             $bio_new  = trim($fields['Bio']['after']);
