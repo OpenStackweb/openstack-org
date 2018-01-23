@@ -14,6 +14,7 @@
 
 class EmailCreationRequest extends DataObject
 {
+
     private static $db = [
         'TemplateName'  => 'Varchar(100)',
         'Processed'     => 'Boolean',

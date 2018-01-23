@@ -14,9 +14,12 @@
 
 class MemberPromoCodeEmailCreationRequest extends EmailCreationRequest
 {
-    private static $has_one = [
-        'PromoCode' => 'SummitRegistrationPromoCode',
+    private static $db = [
         'Name'      => 'Varchar(254)',
         'Email'     => 'Varchar(254)'
+    ];
+
+    private static $has_one = [
+        'PromoCode' => 'SummitRegistrationPromoCode',
     ];
 }
