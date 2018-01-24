@@ -35,9 +35,6 @@ def stripHtmlFromBody(doc):
     return s.get_data()
 
 SELECT_QUERY = ("SELECT ID, Email, FirstName, Surname, Bio FROM Member WHERE Type = 'None' AND Bio IS NOT NULL AND Bio <> '';")
-UPDATE_MEMBER = ("UPDATE Member SET Type = '%s', Active = %s WHERE ID = %s ;")
-SELECT_EXISTS = ("SELECT * FROM MemberEstimatorFeed WHERE Email='%s' AND FirstName ='%s' AND Surname ='%s'")
-INSERT_MEMBER_TRAINING_DATA = ("INSERT INTO MemberEstimatorFeed (Email, FirstName, Surname, Bio, Type) VALUES('%s', '%s', '%s', '%s', '%s');")
 
 try:
     # Open database connection
@@ -52,13 +49,8 @@ try:
             classifier = pickle.load(open('member_classifier.pickle', 'rb'))
             predicted  = classifier.predict(X_test.drop(['ID'], axis = 1 ))
             for item, type in zip(X_test.to_dict( orient = 'records'), predicted):
-                cursor.execute(UPDATE_MEMBER % (type, 1 if type == 'Ham' else 0, item['ID']))
                 if type == 'Spam':
                     print("%s,%s") % (item['ID'],'Spam')
-                    cursor.execute(SELECT_EXISTS % (item['Email'],item['FirstName'],item['Surname']))
-                    exists = cursor.fetchone();
-                    if exists is None:
-                        cursor.execute(INSERT_MEMBER_TRAINING_DATA % (item['Email'], item['FirstName'], item['Surname'], item['Bio'], type))
                 else:
                      print("%s,%s") % (item['ID'],'Ham')
     db.commit()

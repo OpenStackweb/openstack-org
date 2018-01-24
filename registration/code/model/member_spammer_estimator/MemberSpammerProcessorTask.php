@@ -27,61 +27,77 @@ final class MemberSpammerProcessorTask extends CronTask
      */
     public function run()
     {
-        $command = sprintf( '%1$s/registration/code/model/member_spammer_estimator/member_spammer_estimator_process.sh "%1$s/registration/code/model/member_spammer_estimator" "%1$s"', Director::baseFolder());
-        $process = new Process($command);
-        $process->setTimeout(PHP_INT_MAX);
-        $process->setIdleTimeout(PHP_INT_MAX);
-        $process->run();
+        SapphireTransactionManager::getInstance()->transaction(function(){
+            $command = sprintf( '%1$s/registration/code/model/member_spammer_estimator/member_spammer_estimator_process.sh "%1$s/registration/code/model/member_spammer_estimator" "%1$s"', Director::baseFolder());
+            $process = new Process($command);
+            $process->setTimeout(PHP_INT_MAX);
+            $process->setIdleTimeout(PHP_INT_MAX);
+            $process->run();
 
-        while ($process->isRunning()) {
-        }
-
-        $csv_content = $process->getOutput();
-        echo $csv_content.PHP_EOL;
-
-        if (!$process->isSuccessful()) {
-            throw new Exception("Process Error!");
-        }
-
-        $rows   = CSVReader::load($csv_content);
-        $output = "<p>Nothing to process</p>";
-
-        if(count($rows) > 0)
-        {   $output = '<ul>';
-
-            foreach($rows as $row){
-                $member_id = intval($row["ID"]);
-                $member    = Member::get()->byID($member_id);
-
-                if(!$member) continue;
-
-                $action_url  = $row["Type"] == "Ham"? "/members-spammers/%s/deactivate": "/members-spammers/%s/activate";
-                $action_url  = Director::absoluteURL(sprintf($action_url, $member->ID));
-                $action_text = $row["Type"] == "Ham"? "Mark as Spam": "Mark as Ham";
-                $edit_url    = Director::absoluteURL(sprintf("/admin/security/EditForm/field/Members/item/%s/edit", $member->ID));
-
-                $output .= sprintf(
-                    "<li>[%s] - %s, %s (%s).<a href='%s'>Edit</a> <a href='%s'>%s</a></li>",
-                    $row["Type"],
-                    $member->FirstName,
-                    $member->Surname,
-                    $member->Email,
-                    $edit_url,
-                    $action_url,
-                    $action_text
-                );
+            while ($process->isRunning()) {
             }
-            $output .= '</ul>';
-        }
 
-        $email = EmailFactory::getInstance()->buildEmail
-        (
-            "noreply@openstack.org",
-            MEMBER_SPAM_PROCESSOR_TO,
-            "Member Spammer Processor Task Results",
-            $output
-        );
+            $csv_content = $process->getOutput();
+            echo $csv_content.PHP_EOL;
 
-        $email->send();
+            if (!$process->isSuccessful()) {
+                throw new Exception("Process Error!");
+            }
+
+            $rows   = CSVReader::load($csv_content);
+            $output = "<p>Nothing to process</p>";
+
+            if(count($rows) > 0)
+            {   $output = '<ul>';
+
+                foreach($rows as $row){
+                    $member_id = intval($row["ID"]);
+                    $type      = $row["Type"];
+                    $member    = Member::get()->byID($member_id);
+
+                    if(!$member) continue;
+                    // member processing
+                    if($type == 'Spam'){
+                        echo sprintf("Marking Member %s as Spam", $member->Email).PHP_EOL;
+                        $member->deActivate();
+                    }
+                    else{
+                        echo sprintf("Marking Member %s as Ham", $member->Email).PHP_EOL;
+                        $member->activate();
+                    }
+
+                    $member->write();
+
+                    $action_url  = $type == "Ham"? "/members-spammers/%s/deactivate": "/members-spammers/%s/activate";
+                    $action_url  = Director::absoluteURL(sprintf($action_url, $member->ID));
+                    $action_text = $type == "Ham"? "Mark as Spam": "Mark as Ham";
+                    $edit_url    = Director::absoluteURL(sprintf("/admin/security/EditForm/field/Members/item/%s/edit", $member->ID));
+
+                    $output .= sprintf(
+                        "<li>[%s] - %s, %s (%s).<a href='%s'>Edit</a> <a href='%s'>%s</a></li>",
+                        $row["Type"],
+                        $member->FirstName,
+                        $member->Surname,
+                        $member->Email,
+                        $edit_url,
+                        $action_url,
+                        $action_text
+                    );
+
+
+                }
+                $output .= '</ul>';
+            }
+
+            $email = EmailFactory::getInstance()->buildEmail
+            (
+                "noreply@openstack.org",
+                MEMBER_SPAM_PROCESSOR_TO,
+                "Member Spammer Processor Task Results",
+                $output
+            );
+
+            $email->send();
+        });
     }
 }

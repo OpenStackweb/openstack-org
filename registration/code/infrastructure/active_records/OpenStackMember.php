@@ -133,7 +133,7 @@ class OpenStackMember
 
         // reset spam check
 
-        if(isset($fields['Bio']) && $this->owner->Type != 'Spam')
+        if(isset($fields['Bio']) && !$this->isSpam())
         {
             $bio_old  = trim($fields['Bio']['before']);
             $bio_new  = trim($fields['Bio']['after']);
@@ -666,8 +666,23 @@ class OpenStackMember
     }
 
     public function resetTypeClassification(){
+        error_log(sprintf("resetting Member %s TypeClassification", $this->owner->Email).PHP_EOL);
         $this->owner->Type   = "None";
         DB::query(sprintf("DELETE FROM MemberEstimatorFeed WHERE Email = '%s';", $this->owner->Email));
+    }
+
+    /**
+     * @return bool
+     */
+    public function isHam(){
+        return $this->owner->Type == 'Ham';
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSpam(){
+        return $this->owner->Type == 'Spam';
     }
 
     /**
