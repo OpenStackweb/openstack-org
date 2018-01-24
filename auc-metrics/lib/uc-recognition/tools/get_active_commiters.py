@@ -51,7 +51,7 @@ def get_account(accounts, num):
     return a
 
 
-def repo_stats(repo, output, begin, end, keyfile, user):
+def repo_stats(repo, output, begin, end, keyfile, user, keyfilepassword):
     username_accounts = {}
     atcs = []
 
@@ -60,9 +60,10 @@ def repo_stats(repo, output, begin, end, keyfile, user):
     client = paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     client.load_system_host_keys()
+
     client.connect(
         'review.openstack.org', port=29418,
-        key_filename=os.path.expanduser(keyfile), username=user)
+        key_filename=os.path.expanduser(keyfile), username=user, password=keyfilepassword)
     stdin, stdout, stderr = client.exec_command(
         'gerrit query %s --all-approvals --format JSON' % QUERY)
 
@@ -145,6 +146,9 @@ def main():
         '-k', '--keyfile', default='~/.ssh/id_rsa',
         help='SSH key (default is ~/.ssh/id_rsa)')
     optparser.add_option(
+            '-s', '--password', default=None,
+            help='SSH key Password(default is blank)')
+    optparser.add_option(
    	    '-p', '--path', default='.',
    	    help='Output path, e.g. /path/to/output')
 
@@ -161,7 +165,7 @@ def main():
     for repo in projects:
         output = '%s/%s.csv' % (options.path, repo.split('/')[-1])
         repo_stats(repo, output, options.begin, options.end,
-                   options.keyfile, user)
+                   options.keyfile, user, options.password)
 
 
 if __name__ == "__main__":

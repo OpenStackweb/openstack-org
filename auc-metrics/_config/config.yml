@@ -20,6 +20,12 @@ Injector:
 Member:
   extensions:
     - AUCMetricMember
+SangriaPage_Controller:
+  extensions:
+    - SangriaAUCExtension
+SangriaApi:
+  extensions:
+    - SangriaAUCRouterApiExtension
 AUCActiveCommitterService:
   user: openstackdev
   keyfile: '/root/.ssh/id_rsa'

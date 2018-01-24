@@ -62,6 +62,16 @@ class BaseReport
         }
     }
 
+    fetchPage(){
+        this.props.fetchPage({
+            page : this.state.current_page,
+            page_size: this.state.page_size,
+            search_term: this.state.search_term,
+            type: this.state.type,
+            order: this.buildSort()
+        });
+    }
+
     componentDidUpdate(prevProps, prevState){
         if
         (
@@ -72,13 +82,7 @@ class BaseReport
             prevState.search_term != this.state.search_term ||
             prevState.page_size != this.state.page_size
         )
-            this.props.fetchPage({
-                page : this.state.current_page,
-                page_size: this.state.page_size,
-                search_term: this.state.search_term,
-                type: this.state.type,
-                order: this.buildSort()
-            });
+            this.fetchPage();
     }
 
     onFilterFreeText(e){
@@ -158,9 +162,17 @@ class BaseReport
         return null;
     }
 
+    // to override if needed
+    renderOnFooter(){
+        return null;
+    }
+
     render(){
         // build pagination ...
         let {reportConfig} = this.props;
+        if(!reportConfig.hasOwnProperty('useExport')){
+            reportConfig.useExport = true;
+        }
         let pages = [];
         for(let i = 0; i < this.props.page_count; i++)
             pages.push
@@ -177,7 +189,10 @@ class BaseReport
                 <div className="row" style={{ marginBottom: "25px"}}>
                     <div className="col-md-12">
                         {this.renderCustomPrimaryFilter()}
-                        <button className="btn btn-sm btn-default" onClick={this.onExport}>Export</button>
+                        {
+                            reportConfig.useExport &&
+                            <button className="btn btn-sm btn-default" onClick={this.onExport}>Export</button>
+                        }
                     </div>
                 </div>
                 <div className="row">
@@ -243,6 +258,7 @@ class BaseReport
                         {pages}
                     </ul>
                 </nav>
+                {this.renderOnFooter()}
             </div>
         );
     }

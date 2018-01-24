@@ -69,18 +69,40 @@ class OfficialUserGroupOrganizerService extends BaseService implements MetricSer
 
         $this->results = ResultList::create();
         foreach ($parser as $row) {
-            $email = $row['Email'];
+
+            $email  = $row['Email'];
             $member = Member::get()->filterAny([
-                'Email' => $email,
+                'Email'       => $email,
                 'SecondEmail' => $email,
-                'ThirdEmail' => $email
+                'ThirdEmail'  => $email
             ])->first();
 
-            if ($member) {
-                $this->results->push(Result::create($member));
-            } else {
-                $this->logError("Member with email " . $row['Email'] . " not found");
+
+            if(!$member){
+                // check translation table
+                $trans = \AUCMetricTranslation::get()->filter(['UserIdentifier' => $email])->first();
+                $member = $trans ? $trans->MappedFoundationMember() : null;
             }
+
+            if(!$member){
+                if(\AUCMetricMissMatchError::get()->filter
+                    (
+                        [
+                            "ServiceIdentifier" => $this->getMetricIdentifier(),
+                            "UserIdentifier"    => $email
+                        ]
+                    )->count() == 0 ) {
+                    $error = new \AUCMetricMissMatchError();
+                    $error->ServiceIdentifier = $this->getMetricIdentifier();
+                    $error->UserIdentifier = $email;
+                    $error->write();
+                }
+                $this->logError("Member with email " . $row['Email'] . " not found");
+                continue;
+            }
+
+            $this->results->push(Result::create($member));
+
         }
 
         unlink($csvPath);

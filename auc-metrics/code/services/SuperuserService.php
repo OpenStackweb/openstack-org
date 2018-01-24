@@ -42,22 +42,53 @@ class SuperUserService extends BaseService implements MetricService
 			$members = Member::get()->where("
             	CONCAT_WS(' ', Member.FirstName, Member.Surname) LIKE '%{$author->name}%'
 			");
-			
-			$count = (int) $members->count();
-			if($count === 0) {
+			$member = $members->first();
+			$count  = (int) $members->count();
+
+            if($count === 0 && !$member) {
+                // check translation table
+                $trans  = \AUCMetricTranslation::get()->filter(['UserIdentifier' => $author->name])->first();
+                $member = $trans ? $trans->MappedFoundationMember() : null;
+            }
+
+			if($count === 0 && !$member) {
+                if(\AUCMetricMissMatchError::get()->filter
+                    (
+                        [
+                            "ServiceIdentifier" => $this->getMetricIdentifier(),
+                            "UserIdentifier"    => $author->name
+                        ]
+                    )->count() == 0 ) {
+                    $error = new \AUCMetricMissMatchError();
+                    $error->ServiceIdentifier = $this->getMetricIdentifier();
+                    $error->UserIdentifier = $author->name;
+                    $error->write();
+                }
 				$this->logError("Could not find member $author");
+				continue;
 			}
 
-			else if($count > 1) {
+            if($count > 1) {
+                if(\AUCMetricMissMatchError::get()->filter
+                    (
+                        [
+                            "ServiceIdentifier" => $this->getMetricIdentifier(),
+                            "UserIdentifier"    => $author->name
+                        ]
+                    )->count() == 0 ) {
+                    $error = new \AUCMetricMissMatchError();
+                    $error->ServiceIdentifier = $this->getMetricIdentifier();
+                    $error->UserIdentifier = $author->name;
+                    $error->write();
+                }
 				$this->logError("Author $author matched multiple Member records (".implode(', ', $members->column('Email')).")");
+				continue;
 			}
 
-			else {
-				$this->results->push(Result::create(
-					$members->first(),
-					$item->get_title()
-				));
-			}
+			$this->results->push(Result::create(
+			    $member,
+				$item->get_title()
+            ));
         }
     }
 

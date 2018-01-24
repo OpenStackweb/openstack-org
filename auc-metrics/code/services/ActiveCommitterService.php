@@ -46,17 +46,21 @@ class ActiveCommitterService extends BaseService implements MetricService
         @mkdir($outputDir, 0755, true);
 
         $sixMonthsAgo = date('YmdHis', strtotime('-6 months'));
+        $cmd =  sprintf(
+            "lib/uc-recognition/tools/get_active_commiters.py %s -b %s -p %s -k %s",
+            ACTIVECOMMITTERSERVICE_GERRIT_USER,
+            $sixMonthsAgo,
+            $outputDir,
+            ACTIVECOMMITTERSERVICE_GERRIT_USER_SSH_KEY_FILE
+        );
+
+        if(defined('ACTIVECOMMITTERSERVICE_GERRIT_USER_SSH_KEY_FILE_PASSWORD') && ACTIVECOMMITTERSERVICE_GERRIT_USER_SSH_KEY_FILE_PASSWORD != '')
+            $cmd .=' -s '.ACTIVECOMMITTERSERVICE_GERRIT_USER_SSH_KEY_FILE_PASSWORD;
 
         $execPath = Controller::join_links(
             BASE_PATH,
             AUC_METRICS_DIR,
-            sprintf(
-                "lib/uc-recognition/tools/get_active_commiters.py %s -b %s -p %s -k %s",
-                ACTIVECOMMITTERSERVICE_GERRIT_USER,
-                $sixMonthsAgo,
-                $outputDir,
-                ACTIVECOMMITTERSERVICE_GERRIT_USER_SSH_KEY_FILE
-            )
+            $cmd
         );
 
         $process = $this->getProcess($execPath);
@@ -83,14 +87,35 @@ class ActiveCommitterService extends BaseService implements MetricService
                     'ThirdEmail' => $email
                 ])->first();
 
-                if ($member) {
-                    if (!isset($memberMap[$member->Email])) {
-                        $memberMap[$member->Email] = [];
-                    }
-                    $memberMap[$member->Email][] = basename($filename, '.csv');
-                } else {
-                    $this->logError("Member with email " . $row['Email'] . " not found");
+                if(!$member){
+                    // check translation table
+                    $trans = \AUCMetricTranslation::get()->filter(['UserIdentifier' => $email])->first();
+                    $member = $trans ? $trans->MappedFoundationMember() : null;
                 }
+
+                if(!$member){
+
+                    if(\AUCMetricMissMatchError::get()->filter
+                        (
+                            [
+                                "ServiceIdentifier" => $this->getMetricIdentifier(),
+                                "UserIdentifier"    => $email
+                            ]
+                        )->count() == 0)
+                    {
+                        $error = new \AUCMetricMissMatchError();
+                        $error->ServiceIdentifier = $this->getMetricIdentifier();
+                        $error->UserIdentifier    = $email;
+                        $error->write();
+                    }
+                    $this->logError("Member with email " . $row['Email'] . " not found");
+                    continue;
+                }
+
+                if (!isset($memberMap[$member->Email])) {
+                    $memberMap[$member->Email] = [];
+                }
+                $memberMap[$member->Email][] = basename($filename, '.csv');
             }
 
             unlink($filename);
@@ -99,6 +124,10 @@ class ActiveCommitterService extends BaseService implements MetricService
         foreach ($memberMap as $email => $repos) {
             $member = Member::get()->filter('Email', $email)->first();
             if (!$member) {
+                $error = new \AUCMetricMissMatchError();
+                $error->ServiceIdentifier = $this->getMetricIdentifier();
+                $error->UserIdentifier    = $email;
+                $error->write();
             	$this->logError("Member $email not found.");
                 continue;
             }
