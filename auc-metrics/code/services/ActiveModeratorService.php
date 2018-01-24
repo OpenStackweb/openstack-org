@@ -59,7 +59,7 @@ class ActiveModeratorService extends BaseService implements MetricService
             }
 
             $username = trim($matches[1]);
-            $value = trim($matches[2]);
+            $value    = trim($matches[2]);
 
             $member = Member::get()->filterAny([
             	'AskOpenStackUsername' => $username,
@@ -70,14 +70,33 @@ class ActiveModeratorService extends BaseService implements MetricService
                 'TwitterName' => $username
             ])->first();
 
-            if ($member) {
-                $this->results->push(
-                    Result::create($member, $value)
-                );
+            if(!$member){
+                // check translation table
+                $trans = \AUCMetricTranslation::get()->filter(['UserIdentifier' => $username])->first();
+                $member = $trans ? $trans->MappedFoundationMember() : null;
             }
-            else {
-            	$this->logError("Member $username not found.");
+
+            if(!$member){
+                if(\AUCMetricMissMatchError::get()->filter
+                    (
+                        [
+                            "ServiceIdentifier" => $this->getMetricIdentifier(),
+                            "UserIdentifier"    => $username
+                        ]
+                    )->count() == 0 ) {
+                    $error = new \AUCMetricMissMatchError();
+                    $error->ServiceIdentifier = $this->getMetricIdentifier();
+                    $error->UserIdentifier = $username;
+                    $error->write();
+                }
+                $this->logError("Member $username not found.");
+                continue;
             }
+
+            $this->results->push
+            (
+                Result::create($member, $value)
+            );
         }
     }
 }

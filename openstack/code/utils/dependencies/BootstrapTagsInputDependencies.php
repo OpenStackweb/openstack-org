@@ -15,7 +15,7 @@
 final class BootstrapTagsInputDependencies
 {
 
-    public static function renderRequirements($use_typeaheadjs =true){
+    public static function renderRequirements($use_typeaheadjs = true){
 
         Requirements::css("node_modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.css");
         Requirements::css("node_modules/bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css");

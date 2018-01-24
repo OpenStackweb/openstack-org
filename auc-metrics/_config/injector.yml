@@ -1,0 +1,22 @@
+---
+Name: 'auc-metrics-injection'
+---
+Injector:
+  MemberRepository:
+    class: SapphireMemberRepository
+  AUCMetricRepository:
+    class: SapphireAUCMetricRepository
+  AUCMetricMissMatchErrorRepository:
+    class: SapphireAUCMetricMissMatchErrorRepository
+  AUCMetricService:
+    constructor:
+      0: '%$AUCMetricMissMatchErrorRepository'
+      1: '%$MemberRepository'
+      2: '%$TransactionManager'
+  SangriaAucMetricsRestfullApi:
+    constructor:
+      0: '%$AUCMetricRepository'
+  SangriaAucMetricsUserMissMatchesRestfullApi:
+    constructor:
+      0: '%$AUCMetricMissMatchErrorRepository'
+      1: '%$AUCMetricService'

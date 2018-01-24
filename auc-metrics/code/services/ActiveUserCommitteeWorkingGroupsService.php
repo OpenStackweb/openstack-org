@@ -97,19 +97,40 @@ class ActiveUserCommitteeWorkingGroupsService extends BaseService implements Met
         $this->results = ResultList::create();
 
         foreach ($parser as $row) {
-            $nickname = $row['Username'];
+            $nickname        = $row['Username'];
             $attendanceCount = $row['AttendanceCount'];
-            $linesSaid = $row['LinesSaid'];
+            $linesSaid       = $row['LinesSaid'];
 
             $member = Member::get()->filter('IRCHandle', $nickname)->first();
-            if ($member) {
-                $this->results->push(Result::create(
-                    $member,
-                    "$attendanceCount / $linesSaid"
-                ));
-            } else {
-                $this->logError("No member with nickname {$nickname}");
+
+            if(!$member){
+                // check translation table
+                $trans = \AUCMetricTranslation::get()->filter(['UserIdentifier' => $nickname])->first();
+                $member = $trans ? $trans->MappedFoundationMember() : null;
             }
+
+            if(!$member){
+                if(\AUCMetricMissMatchError::get()->filter
+                    (
+                        [
+                            "ServiceIdentifier" => $this->getMetricIdentifier(),
+                            "UserIdentifier"    => $nickname
+                        ]
+                    )->count() == 0 ) {
+                    $error = new \AUCMetricMissMatchError();
+                    $error->ServiceIdentifier = $this->getMetricIdentifier();
+                    $error->UserIdentifier = $nickname;
+                    $error->write();
+                }
+                $this->logError("No member with nickname {$nickname}");
+                continue;
+            }
+
+            $this->results->push(Result::create(
+                $member,
+                "$attendanceCount / $linesSaid"
+            ));
+
         }
     }
 }

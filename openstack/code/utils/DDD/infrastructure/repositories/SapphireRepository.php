@@ -18,6 +18,29 @@
 class SapphireRepository extends AbstractEntityRepository
 {
 
+    const AllowedFilterOperatorsRegex = "/(\=\=|\=\@|\>\=|\<\=|\>|\<)/";
+
+    /**
+     * @param array $filters
+     * @return array
+     */
+    public static function parseFilters(array $filters){
+        $res = [];
+        if(count($filters)){
+            foreach ($filters as $filter){
+                $elements = preg_split( self::AllowedFilterOperatorsRegex, $filter );
+                if(count($elements) != 2) continue;
+                preg_match(self::AllowedFilterOperatorsRegex, $filter, $op);
+                $res[] = [
+                    $elements[0],
+                    $op[0],
+                    $elements[1]
+                ];
+            }
+        }
+        return $res;
+    }
+
     /**
      * @param IEntity $entity
      */

@@ -158,6 +158,7 @@ define('FIREBASE_MESSAGING_SENDER_ID', '');
 //auc-metrics/code/services/ActiveCommitterService.php
 define('ACTIVECOMMITTERSERVICE_GERRIT_USER', '');
 define('ACTIVECOMMITTERSERVICE_GERRIT_USER_SSH_KEY_FILE', '');
+define('ACTIVECOMMITTERSERVICE_GERRIT_USER_SSH_KEY_FILE_PASSWORD', '');
 
 define('SERVER_TIME_ZONE', 'America/Chicago');
 
@@ -183,6 +184,8 @@ define('Encrypter_Cipher', 'AES-256-CBC');
 define('CALDAV_BASE_SERVER_URL', 'https://p01-caldav.icloud.com:443');
 //registration/code/model/member_spammer_estimator/MemberSpammerProcessorTask.php:49
 define('MEMBER_SPAM_PROCESSOR_TO', '');
+
+define('OPENSTACK_RESOURCE_API_BASE_URL', '');
 global $_FILE_TO_URL_MAPPING;
 $_FILE_TO_URL_MAPPING[''] = '';
 

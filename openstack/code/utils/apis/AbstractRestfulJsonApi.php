@@ -223,6 +223,7 @@ abstract class AbstractRestfulJsonApi extends Controller
      */
     protected function authenticate()
     {
+        $this->current_user = Member::currentUser();
         if ($this->current_user) {
             return $this->current_user;
         }
