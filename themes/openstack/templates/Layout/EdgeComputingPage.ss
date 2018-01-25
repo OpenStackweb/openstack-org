@@ -384,7 +384,7 @@
             <div class="row">
                 <div class="col-sm-8">
                     <h5>Get more involved with the</h5>
-                    <h2>Fog Edge Massively Distributed Working Group</h2>
+                    <h2>Fog Edge Massively Distributed Computing SIG</h2>
                 </div>
                 <div class="col-sm-4">
                     <div class="cta">
