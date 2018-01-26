@@ -953,8 +953,16 @@ class PresentationSpeaker extends DataObject
         if ($this->hasAssistanceFor($summit_id)) {
             throw new EntityValidationException(sprintf('this is already an assistance request for speaker %s on summit id %s',$this->ID, $summit_id));
         }
-
-        $request = $this->createAssistanceFor($summit_id);
+        // first try to get one
+        $request = PresentationSpeakerSummitAssistanceConfirmationRequest::get()->filter(
+            [
+                'SpeakerID' => $this->ID,
+                'SummitID'  => $summit_id
+            ]
+        )->first();
+        // if does not exist create it!
+        if(!$request)
+            $request = $this->createAssistanceFor($summit_id);
         $token = null;
         $already_exists = false;
 
