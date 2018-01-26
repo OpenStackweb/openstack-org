@@ -48,7 +48,6 @@ class AUCMetricTask extends CronTask
             $expiryDate = date('Y-m-d', strtotime(AUCMetric::config()->expiry));
             $newMetricCount = 0;
             $errorData = ArrayList::create();
-            $this->services = [$this->services[count($this->services) -1 ]];
             foreach ($this->services as $service) {
                 $identifier = $service->getMetricIdentifier();
                 $this->writeHeader("Running service $identifier");
