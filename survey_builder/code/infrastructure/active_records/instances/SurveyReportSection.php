@@ -49,31 +49,60 @@ class SurveyReportSection extends DataObject {
         $repository  = new SapphireAnswerSurveyRepository();
         $questions   = [];
 
+        // some questions have dependant questions that we need to show
+        $expand_questions = ['NetworkDrivers'];
+
         foreach ($this->Graphs()->sort('Order') as $graph) {
             $values      = [];
             $extra_label = '';
+            $question    = $graph->Question();
 
-            $answers       = $repository->getByQuestionAndFilters($graph->Question()->ID, $filters);
+            $answers       = $repository->getByQuestionAndFilters($question->ID, $filters);
             $total_answers = $answers['total'];
             $answers       = $answers['answers'];
+
+
+            if (in_array($question->Name, $expand_questions)) {
+                foreach ($question->getDependers() as $depender_question) {
+                    if ($depender_question->is_a('SurveyCheckBoxListQuestionTemplate')) {
+                        $dep_answers   = $repository->getByQuestionAndFilters($depender_question->ID, $filters);
+                        $answers->merge($dep_answers['answers']);
+                    }
+                }
+            }
 
             // set labels for multibars
             if ($graph->Type == 'multibars') {
                 //fill up template
                 $row_values_array = array();
-                foreach ($graph->Question()->Rows() as $row_value) {
+                foreach ($question->Rows() as $row_value) {
                     $row_values_array[$row_value->Value] = 0;
                 }
-                foreach ($graph->Question()->Columns() as $col_value) {
+                foreach ($question->Columns() as $col_value) {
                     $values[$col_value->Value] = $row_values_array;
                 }
             } else {
-                if ($graph->Question()->Name == 'NetPromoter') {
+                if ($question->Name == 'NetPromoter') {
                     $values = array('Detractor' => 0, 'Neutral' => 0, 'Promoter' => 0);
                 } else {
-                    foreach ($graph->Question()->Values() as $value_temp) {
+                    foreach ($question->Values() as $value_temp) {
                         $values[$value_temp->Value] = 0;
                     }
+
+                    if (in_array($question->Name, $expand_questions)) {
+                        foreach ($question->getDependers() as $depender_question) {
+                            if ($depender_question->is_a('SurveyCheckBoxListQuestionTemplate')) {
+                                // remove the value that will be expanded from the answers
+                                unset($values[$depender_question->ValueID]);
+                                // add expanded values
+                                foreach ($depender_question->Values() as $dep_value_temp) {
+                                    if (in_array($dep_value_temp->Value, $answers->toArray()))
+                                        $values[$dep_value_temp->Value] = 0;
+                                }
+                            }
+                        }
+                    }
+
                 }
             }
 

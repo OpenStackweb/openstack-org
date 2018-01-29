@@ -59,6 +59,11 @@ interface ISurveyQuestionTemplate extends IEntity {
     public function getDependsOn();
 
     /**
+     * @return ISurveyQuestionTemplate[]
+     */
+    public function getDependers();
+
+    /**
      * @return string
      */
     public function Type();

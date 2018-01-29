@@ -186,6 +186,33 @@ class SurveyQuestionTemplate
         return $list;
     }
 
+    /**
+     * @return ISurveyQuestionTemplate[]
+     */
+    public function getDependers()
+    {
+        $result = DB::query("
+        SELECT SurveyQuestionTemplate.ClassName, SurveyQuestionTemplateID AS ID, ValueID, Operator, Visibility, DefaultValue, BooleanOperatorOnValues
+        FROM SurveyQuestionTemplate_DependsOn
+        INNER JOIN SurveyQuestionTemplate ON SurveyQuestionTemplate.ID = SurveyQuestionTemplateID
+        WHERE ChildID = $this->ID
+        ");
+        $list   = array();
+        foreach($result as $row)
+        {
+            $class                      = $row['ClassName'];
+            $question_id                = intval($row['ID']);
+            $q                          = $class::get()->byID($question_id);
+            $q->ValueID                 = $row['ValueID'];
+            $q->Operator                = $row['Operator'];
+            $q->Visibility              = $row['Visibility'];
+            $q->DependantDefaultValue   = $row['DefaultValue'];
+            $q->BooleanOperatorOnValues = $row['BooleanOperatorOnValues'];
+            $list[] = $q;
+        }
+        return $list;
+    }
+
     protected function validate()
     {
         $valid = parent::validate();
