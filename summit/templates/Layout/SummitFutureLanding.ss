@@ -15,14 +15,6 @@
                    $LocSubtitle
                 </div>
                 <h1>SPONSORSHIP INFORMATION</h1>
-                <div style="margin-top:20px;"> 
-                    
-                        <a href="https://www.openstack.org/assets/events/2018EventPortfolio-1127.pdf" style="margin: 10px;" class="btn register-btn-lrg">
-                            2018 Event Portfolio
-                            <i class="fa fa-cloud-download"></i>
-                        </a>
-                </div>
-                <!-- 
                 <div> 
                     <% if ProspectusUrl %>
                         <a href="{$ProspectusUrl}" class="btn register-btn-lrg" style="margin: 10px;">
@@ -37,7 +29,6 @@
                         </p>
                     <% end_if %>
                 </div>
-                -->
                 <div class="landing-social">
                     <a target="_blank" class="social-icons landing-twitter" onclick="return windowpop(this.href, 545, 433)" href="http://twitter.com/share?text={$ShareText}&url={$AbsoluteLink}"></a>
                     <a target="_blank" class="social-icons landing-facebook" onclick="return windowpop(this.href, 545, 433)" 
