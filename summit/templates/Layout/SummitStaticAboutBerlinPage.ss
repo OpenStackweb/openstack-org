@@ -353,7 +353,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-8 col-sm-push-2">
-          <h2>Join Us In Vancouver!</h2>
+          <h2>Join Us In Berlin!</h2>
           <p>
             Tickets are selling fast, so register today.
           </p>
