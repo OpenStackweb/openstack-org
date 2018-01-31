@@ -48,7 +48,7 @@
                             </h1>
                             <div class="summit-hero-postcard">
                                 <p>
-                                    The world runs on open infrastructure. At the OpenStack Summit, you’ll learn about the mix of open technologies building the modern infrastructure stack, including OpenStack, Kubernetes, Kata Containers, Docker, Ansible, Ceph, OVS, OpenContrail, OPNFV, and more. Whether you are pursuing a private, public or multi-cloud approach, the OpenStack Summit is the place to network, skill up and plan your cloud strategy.
+                                    The open infrastructure landscape is changing, and so is the Summit. Now that users are integrating dozens of open source tools into a modern stack that reaches well beyond the scope of OpenStack, we’re re-organizing the event to focus on specific problem domains like container infrastructure, edge computing and CI/CD and we are focusing on the hard work of integrating all of these tools developed in disparate communities. This is the essential work of 2018 and beyond, to ensure that open infrastructure is truly a viable path for operators.
                                 </p>
                                 <div class="landing-action">
                                     <% if $RegistrationLink %>
