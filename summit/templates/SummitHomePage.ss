@@ -47,7 +47,7 @@
             </div>
             <% end_with %>
             <div class="col-sm-3 small-single-summit">
-                <a href="/videos/summits/sydney-2017" class="single-summit current-summit">
+                <a href="/videos/summits/sydney-2017" class="single-summit past-summit">
                     <h2>Sydney</h2>
                     <h4>Watch The Sessions!</h4>
                 </a>
@@ -57,9 +57,9 @@
                 </div>
             </div>
             <div class="col-sm-3 small-single-summit">
-                <a href="/summit/vancouver-2018/" class="single-summit future-summit">
+                <a href="/summit/vancouver-2018/" class="single-summit current-summit">
                     <h2>Vancouver</h2>
-                    <h4>Get Ready</h4>
+                    <h4>Coming Soon</h4>
                 </a>
                 <div class="single-summit-date future">
                     May 21-24, 2018
