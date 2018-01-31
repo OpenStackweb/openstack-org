@@ -172,9 +172,13 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
     public function ViewEvent(SS_HTTPRequest $request)
     {
         $event              = $this->getSummitEntity($request);
-        $summit_id          = $event->SummitID;
+        if (is_null($event) || !$event->isPublished() || !ScheduleManager::allowToSee($event) || !$event->SummitID) {
+            return $this->httpError(404, 'Sorry that event could not be found');
+        }
+
         $main_schedule_page = SummitAppSchedPage::getBy($event->getSummit());
-        if (is_null($event) || !$event->isPublished() || !ScheduleManager::allowToSee($event) || !$event->SummitID || !$main_schedule_page) {
+
+        if(!$main_schedule_page){
             return $this->httpError(404, 'Sorry that event could not be found');
         }
 
@@ -226,7 +230,6 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
         Requirements::javascript("summit/javascript/schedule/event-detail-page.js");
         $mobile_detect = new Mobile_Detect();
         $event         = $this->getSummitEntity($request);
-        $summit_id     = $event->SummitID;
 
         if(is_null($event) ||
             !$event->isPublished() ||
@@ -237,6 +240,12 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
 
         if (!Member::currentUser()){
             return $this->redirect('Security/login?BackURL='.$event->getRSVPURL(false));
+        }
+
+        $main_schedule_page = SummitAppSchedPage::getBy($event->getSummit());
+
+        if(!$main_schedule_page){
+            return $this->httpError(404, 'Sorry that event could not be found');
         }
 
         $has_rsvp_submission = Member::currentUser()->hasRSVPSubmission($event->getIdentifier());
@@ -267,7 +276,6 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
 
         if(!Director::is_site_url($back_url) || empty($back_url)) {
             $start_date = new \DateTime($event->getStartDate());
-            $main_schedule_page = SummitAppSchedPage::getBy($event->Summit());
             $back_url = $main_schedule_page->getAbsoluteLiveLink(false);
             $back_url .= sprintf("#day=%s-%s-%s&eventid=%s", $start_date->format('Y'), $start_date->format('m'), $start_date->format('d'), $event->ID);
         }
