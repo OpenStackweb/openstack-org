@@ -30,11 +30,12 @@ final class PresentationSpeakerAlternateAnnouncementEmailSender implements IMess
         if(!$speaker instanceof IPresentationSpeaker) return;
         if(!$summit instanceof ISummit) return;
         if(!$promo_code instanceof SpeakerSummitRegistrationPromoCode) return;
+        $check_email_existance = isset($subject['CheckMailExistance'])? boolval($subject['CheckMailExistance']) : true;
 
         $email = PermamailTemplate::get()->filter('Identifier', PRESENTATION_SPEAKER_ALTERNATE_ONLY_EMAIL)->first();
         if(is_null($email)) throw new Exception(sprintf('Email Template %s does not exists on DB!', PRESENTATION_SPEAKER_ALTERNATE_ONLY_EMAIL));
 
-        $speaker->registerAnnouncementEmailTypeSent(IPresentationSpeaker::AnnouncementEmailAlternate, $summit->ID);
+        $speaker->registerAnnouncementEmailTypeSent(IPresentationSpeaker::AnnouncementEmailAlternate, $summit->ID, $check_email_existance);
 
         $email = EmailFactory::getInstance()->buildEmail(PRESENTATION_SPEAKER_NOTIFICATION_ACCEPTANCE_EMAIL_FROM, $speaker->getEmail());
 

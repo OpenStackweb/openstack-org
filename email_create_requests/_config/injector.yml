@@ -1,0 +1,7 @@
+---
+Name: 'email-create-request-injection'
+---
+Injector:
+  EmailCreationRequestProcessTask:
+    constructor:
+      0: '%$TransactionManager'

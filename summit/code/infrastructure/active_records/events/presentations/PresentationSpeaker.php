@@ -966,9 +966,6 @@ class PresentationSpeaker extends DataObject
 
         $url = $confirmation_page->getAbsoluteLiveLink(false);
 
-        if ($this->hasAssistanceFor($summit_id)) {
-            throw new EntityValidationException(sprintf('this is already an assistance request for speaker %s on summit id %s',$this->ID, $summit_id));
-        }
         // first try to get one
         $request = PresentationSpeakerSummitAssistanceConfirmationRequest::get()->filter(
             [
@@ -1076,7 +1073,7 @@ class PresentationSpeaker extends DataObject
     {
         $email = $this->AnnouncementSummitEmails()
             ->filter('SummitID', $summit_id)
-            ->where("AnnouncementEmailTypeSent <> 'SECOND_BREAKOUT' ")
+            ->where("AnnouncementEmailTypeSent NOT IN ('SECOND_BREAKOUT_REMINDER','SECOND_BREAKOUT_REGISTER','CREATE_MEMBERSHIP')")
             ->first();
         return !is_null($email) ? $email->AnnouncementEmailTypeSent : null;
     }
@@ -1084,12 +1081,14 @@ class PresentationSpeaker extends DataObject
     /***
      * @param string $email_type
      * @param int $summit_id
+     * @param bool $check_existance
      * @return $this|void
      * @throws Exception
      */
-    public function registerAnnouncementEmailTypeSent($email_type, $summit_id)
+    public function registerAnnouncementEmailTypeSent($email_type, $summit_id, $check_existance = true)
     {
-        if ($this->announcementEmailAlreadySent($summit_id)) {
+
+        if ($check_existance && $this->announcementEmailAlreadySent($summit_id)) {
             throw new Exception('Announcement Email already sent');
         }
 

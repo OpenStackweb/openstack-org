@@ -15,6 +15,6 @@
 class SpeakerCreationEmailCreationRequest extends EmailCreationRequest
 {
     private static $has_one = [
-        'Speaker' => 'Speaker',
+        'Speaker' => 'PresentationSpeaker',
     ];
 }

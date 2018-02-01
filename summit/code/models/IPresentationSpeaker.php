@@ -161,9 +161,10 @@ interface IPresentationSpeaker extends IEntity
     /**
      * @param string $email_type
      * @param int $summit_id
+     * @param bool $check_existance
      * @return $this
      */
-    public function registerAnnouncementEmailTypeSent($email_type, $summit_id);
+    public function registerAnnouncementEmailTypeSent($email_type, $summit_id, $check_existance = true);
 
     /**
      * @param int $summit_id

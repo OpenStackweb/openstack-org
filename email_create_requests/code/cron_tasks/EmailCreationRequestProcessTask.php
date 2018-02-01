@@ -28,8 +28,8 @@ final class EmailCreationRequestProcessTask extends CronTask
      * @param ITransactionManager $tx_manager
      */
     public function __construct(ITransactionManager $tx_manager){
-        $this->tx_manager = $tx_manager;
         parent::__construct();
+        $this->tx_manager = $tx_manager;
     }
 
     /**
@@ -47,48 +47,53 @@ final class EmailCreationRequestProcessTask extends CronTask
                 ])->sort('ID', 'ASC');
 
                 foreach($requests as $email_request){
-                    switch($email_request->ClassName){
-                        case "SpeakerCreationEmailCreationRequest":{
-                            $sender = new PresentationSpeakerCreationEmailMessageSender;
-                            $sender->send(['Speaker' => $email_request->Speaker()]);
-                        }
-                        break;
-                        case "MemberPromoCodeEmailCreationRequest": {
-                            if (!$email_request->PromoCode()->isEmailSent()) {
-                                $sender = new MemberPromoCodeEmailSender;
+                    try {
+                        switch ($email_request->ClassName) {
+                            case "SpeakerCreationEmailCreationRequest": {
+                                $sender = new PresentationSpeakerCreationEmailMessageSender;
+                                $speaker = $email_request->Speaker();
+                                $sender->send(['Speaker' => $speaker]);
+                            }
+                                break;
+                            case "MemberPromoCodeEmailCreationRequest": {
+                                if (!$email_request->PromoCode()->isEmailSent()) {
+                                    $sender = new MemberPromoCodeEmailSender;
+                                    $sender->send([
+                                        "Name" => $email_request->Name,
+                                        "Email" => $email_request->Email,
+                                        'Summit' => $email_request->PromoCode()->Summit(),
+                                        'PromoCode' => $email_request->PromoCode()
+                                    ]);
+                                    $email_request->PromoCode()->markAsSent();
+                                    $email_request->PromoCode()->write();
+                                }
+                            }
+                                break;
+                            case 'SpeakerSelectionAnnouncementEmailCreationRequest': {
+                                $sender = SpeakerSelectionAnnouncementEmailCreationRequestSenderServiceFactory::build($email_request);
+                                if (is_null($sender)) continue;
                                 $sender->send([
-                                    "Name"      => $email_request->Name,
-                                    "Email"     => $email_request->Email,
-                                    'Summit'    => $email_request->PromoCode()->Summit(),
-                                    'PromoCode' => $email_request->PromoCode()
+                                    "Role"               => $email_request->SpeakerRole,
+                                    "Speaker"            => $email_request->Speaker(),
+                                    "Summit"             => $email_request->Summit(),
+                                    'PromoCode'          => $email_request->PromoCode(),
+                                    'CheckMailExistance' => false
                                 ]);
                                 $email_request->PromoCode()->markAsSent();
                                 $email_request->PromoCode()->write();
                             }
+                                break;
+                            default: {
+                                continue;
+                            }
+                                break;
                         }
-                        break;
-                        case 'SpeakerSelectionAnnouncementEmailCreationRequest':
-                        {
-                            $sender = SpeakerSelectionAnnouncementEmailCreationRequestSenderServiceFactory::build($email_request);
-                            if(is_null($sender)) continue;
-                            if($email_request->Speaker()->announcementEmailAlreadySent($email_request->Summit()->ID)) continue;
-                            $sender->send([
-                                "Role"      => $email_request->Role,
-                                "Speaker"   => $email_request->Speaker(),
-                                "Summit"    => $email_request->Summit(),
-                                'PromoCode' => $email_request->PromoCode()
-                            ]);
-                            $email_request->PromoCode()->markAsSent();
-                            $email_request->PromoCode()->write();
-                        }
-                        break;
-                        default:
-                        {
-                            continue;
-                        }
-                        break;
                     }
-
+                    catch(Exception $ex)
+                    {
+                        SS_Log::log($ex->getMessage(), SS_Log::ERR);
+                        echo sprintf("error %s", $ex->getMessage()).PHP_EOL;
+                    }
                     $email_request->markAsProcessed();
                     $email_request->write();
                     $processed++;

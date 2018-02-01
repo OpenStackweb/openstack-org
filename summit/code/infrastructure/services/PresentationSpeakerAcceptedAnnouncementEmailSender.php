@@ -24,10 +24,11 @@ final class PresentationSpeakerAcceptedAnnouncementEmailSender implements IMessa
         if(!is_array($subject)) return;
         if(!isset($subject['Summit'])  || !isset($subject['Speaker']) || !isset($subject['PromoCode']) ) return;
 
-        $summit     = $subject['Summit'];
-        $speaker    = $subject['Speaker'];
-        $role       = $subject['Role'];
-        $promo_code = $subject['PromoCode'];
+        $summit                = $subject['Summit'];
+        $speaker               = $subject['Speaker'];
+        $role                  = $subject['Role'];
+        $promo_code            = $subject['PromoCode'];
+        $check_email_existance = isset($subject['CheckMailExistance'])? boolval($subject['CheckMailExistance']) : true;
 
         if(!$speaker instanceof IPresentationSpeaker) return;
         if(!$summit instanceof ISummit) return;
@@ -36,13 +37,19 @@ final class PresentationSpeakerAcceptedAnnouncementEmailSender implements IMessa
         $email = PermamailTemplate::get()->filter('Identifier', PRESENTATION_SPEAKER_ACCEPTED_ONLY_EMAIL)->first();
         if(is_null($email)) throw new Exception(sprintf('Email Template %s does not exists on DB!', PRESENTATION_SPEAKER_ACCEPTED_ONLY_EMAIL));
 
-        $speaker->registerAnnouncementEmailTypeSent(IPresentationSpeaker::AnnouncementEmailAccepted, $summit->ID);
+        $speaker->registerAnnouncementEmailTypeSent(IPresentationSpeaker::AnnouncementEmailAccepted, $summit->ID, $check_email_existance);
 
         $email = EmailFactory::getInstance()->buildEmail(PRESENTATION_SPEAKER_NOTIFICATION_ACCEPTANCE_EMAIL_FROM, $speaker->getEmail());
 
         $schedule_page = SummitAppSchedPage::getBy($summit);
 
         if(is_null($schedule_page)) throw new Exception('Summit Schedule page does not exists!');
+
+        $accepted_presentations = new ArrayList(array_merge
+        (
+            $speaker->PublishedRegularPresentations($summit->getIdentifier(), $role,true, $summit->getExcludedTracksForPublishedPresentations())->toArray(),
+            $speaker->PublishedLightningPresentations($summit->getIdentifier(), $role,true, $summit->getExcludedTracksForPublishedPresentations())->toArray()
+        ));
 
         $email->setUserTemplate(PRESENTATION_SPEAKER_ACCEPTED_ONLY_EMAIL)->populateTemplate(
             array
@@ -53,7 +60,7 @@ final class PresentationSpeakerAcceptedAnnouncementEmailSender implements IMessa
                 'PromoCode'              => $promo_code->getCode(),
                 'Summit'                 => $summit,
                 'ScheduleMainPageLink'   => $schedule_page->getAbsoluteLiveLink(false),
-                'AcceptedPresentations'  => $speaker->PublishedRegularPresentations($summit->getIdentifier(), $role,true, $summit->getExcludedTracksForPublishedPresentations())
+                'AcceptedPresentations'  => $accepted_presentations
             )
         )
         ->send();
