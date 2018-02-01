@@ -309,7 +309,9 @@ final class SummitAdminUI extends DataExtension
 
             // tickets types
 
-            $config = GridFieldConfig_RecordEditor::create(50);
+            $config = GridFieldConfig_RecordEditor::create(100);
+            $config->removeComponentsByType('GridFieldAddNewButton');
+            $config->addComponent(new GridFieldAddTicketTypesFromEventbrite);
             $gridField = new GridField('SummitTicketTypes', 'Ticket Types', $this->owner->SummitTicketTypes(), $config);
             $f->addFieldToTab('Root.TicketTypes', $gridField);
 

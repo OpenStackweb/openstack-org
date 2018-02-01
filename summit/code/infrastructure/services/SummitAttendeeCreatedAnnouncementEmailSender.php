@@ -22,19 +22,22 @@ final class SummitAttendeeCreatedAnnouncementEmailSender implements IMessageSend
      */
     public function send($subject)
     {
-        if(!$subject instanceof ISummitAttendee) return;
+        if(!is_array($subject)) return;
+        if(!isset($subject['Summit'])  || !isset($subject['Attendee'])) return;
 
+        $summit   = $subject['Summit'];
+        $attendee = $subject['Attendee'];
 
         $email_template = PermamailTemplate::get_by_identifier(SUMMIT_ATTENDEE_CREATED_EMAIL_TEMPLATE);
         if(is_null($email_template)) return;
 
-        $email = EmailFactory::getInstance()->buildEmail(null, $subject->getMember()->getEmail());
+        $email = EmailFactory::getInstance()->buildEmail(null, $attendee->getMember()->getEmail());
 
         $email->setUserTemplate('summit-attendee-created')->populateTemplate(
             array
             (
-                'Attendee' => $subject,
-                'Summit'   => Summit::get_active()
+                'Attendee' => $attendee,
+                'Summit'   => $summit
             )
         )
         ->send();

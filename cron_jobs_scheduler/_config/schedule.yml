@@ -49,7 +49,7 @@ jobs:
     enabled: 1
 
   - name: "EventbriteEventConsumerTask"
-    params: "batch_size=100"
+    params: "batch_size=1000"
     cron_expression: "*/15 * * * *" # run every 15 minutes
     enabled: 1
 
@@ -78,7 +78,6 @@ jobs:
     enabled: 1
 
   - name: "EventbriteSummitOrderConciliation"
-    params: "summit_external_id=40845826968"
     cron_expression: "00 02 * * *" # run every day at 0200 AM
     enabled: 1
 

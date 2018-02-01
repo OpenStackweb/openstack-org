@@ -126,6 +126,15 @@ class Summit extends DataObject implements ISummit
             ->first();
     }
 
+    /**
+     * @return Summit[]
+     */
+    public static function getNotFinished(){
+        return Summit::get()
+            ->where(' SummitEndDate > UTC_TIMESTAMP() ')
+            ->sort('SummitEndDate ASC');
+    }
+
     private function populateDefaultTags()
     {
         global $database;

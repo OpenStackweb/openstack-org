@@ -1,7 +1,6 @@
 <?php
-
 /**
- * Copyright 2015 OpenStack Foundation
+ * Copyright 2018 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,13 +11,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-class GridFieldAddDefaultEventTypes implements GridField_HTMLProvider, GridField_URLHandler, GridField_ActionProvider {
+
+/**
+ * Class GridFieldAddTicketTypesFromEventbrite
+ */
+final class GridFieldAddTicketTypesFromEventbrite
+    implements GridField_HTMLProvider, GridField_URLHandler, GridField_ActionProvider {
 
     protected $targetFragment;
 
-    private static $allowed_actions = array(
-        'handleAddDefaultEventTypes'
-    );
+    private static $allowed_actions = [
+        'handleAddTicketTypesFromEventbrite'
+    ];
 
     public function __construct($targetFragment = 'before') {
         $this->targetFragment = $targetFragment;
@@ -28,15 +32,15 @@ class GridFieldAddDefaultEventTypes implements GridField_HTMLProvider, GridField
     public function getHTMLFragments($gridField) {
         $button = new GridField_FormAction(
             $gridField,
-            'defaultEventTypes',
-            'Add Default Event Types',
-            'addDefaultEventTypes',
+            'ticketTypesFromEventbrite',
+            'Add Ticket Types From Eventbrite',
+            'addTicketTypesFromEventbrite',
             null
         );
         $button->setAttribute('data-icon', 'chain--plus');
-        return array(
+        return [
             $this->targetFragment =>  $button->Field() ,
-        );
+        ];
     }
     /**
      * Return URLs to be handled by this grid field, in an array the same form
@@ -46,28 +50,32 @@ class GridFieldAddDefaultEventTypes implements GridField_HTMLProvider, GridField
      */
     public function getURLHandlers($gridField)
     {
-        return array(
-            'addDefaultEventTypes' => 'handleAddDefaultEventTypes'
-        );
+        return [
+            'addTicketTypesFromEventbrite' => 'handleAddTicketTypesFromEventbrite'
+        ];
     }
 
-    public function handleAddDefaultEventTypes($grid, $request, $data = null) {
+    public function handleAddTicketTypesFromEventbrite($grid, $request, $data = null) {
 
         $summit_id = intval($request->param('ID'));
         if($summit_id > 0 && $summit = Summit::get()->byID($summit_id))
         {
-            Summit::seedBasicEventTypes($summit_id);
+            $manager = Injector::inst()->get('EventbriteEventManager');
+
+            if(is_null($manager) || !$manager instanceof IEventbriteEventManager) return;
+
+            $manager->populateSummitTicketTypes($summit);
         }
     }
 
     public function getActions($gridField) {
-        return array('addDefaultEventTypes');
+        return ['addTicketTypesFromEventbrite'];
     }
 
     public function handleAction(GridField $gridField, $actionName, $arguments, $data)
     {
-        if($actionName == 'adddefaulteventtypes') {
-            return $this->handleAddDefaultEventTypes($gridField,Controller::curr()->getRequest(), $data);
+        if($actionName == 'addtickettypesfromeventbrite') {
+            return $this->handleAddTicketTypesFromEventbrite($gridField,Controller::curr()->getRequest(), $data);
         }
     }
 }

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2015 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,6 +11,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+
+/**
+ * Class EventbriteEventManager
+ */
 final class EventbriteEventManager implements IEventbriteEventManager
 {
 
@@ -60,6 +63,18 @@ final class EventbriteEventManager implements IEventbriteEventManager
      */
     private $ticket_repository;
 
+    /**
+     * EventbriteEventManager constructor.
+     * @param IEventbriteEventRepository $repository
+     * @param IEventbriteEventFactory $factory
+     * @param IEventbriteRestApi $api
+     * @param IMemberRepository $member_repository
+     * @param ISummitAttendeeFactory $attendee_factory
+     * @param ISummitAttendeeRepository $attendee_repository
+     * @param ISummitRepository $summit_repository
+     * @param ISummitAttendeeTicketRepository $ticket_repository
+     * @param ITransactionManager $tx_manager
+     */
     public function __construct
     (
         IEventbriteEventRepository $repository,
@@ -114,36 +129,21 @@ final class EventbriteEventManager implements IEventbriteEventManager
      * @param int $bach_size
      * @param IMessageSenderService $invite_sender
      * @param IMessageSenderService $create_sender
-     * @return mixed
+     * @return int
      */
     public function ingestEvents($bach_size, IMessageSenderService $invite_sender, IMessageSenderService $create_sender)
     {
-        $repository          = $this->repository;
-        $api                 = $this->api;
-        $member_repository   = $this->member_repository;
-        $attendee_factory    = $this->attendee_factory;
-        $attendee_repository = $this->attendee_repository;
-        $summit_repository   = $this->summit_repository;
-        $ticket_repository   = $this->ticket_repository;
-
         return $this->tx_manager->transaction(function () use (
             $bach_size,
-            $repository,
-            $api,
-            $member_repository,
-            $attendee_factory,
-            $attendee_repository,
-            $summit_repository,
-            $ticket_repository,
             $invite_sender,
             $create_sender
         ) {
 
-            list($list, $count) = $repository->getUnprocessed(0, $bach_size);
+            list($list, $count) = $this->repository->getUnprocessed(0, $bach_size);
             $qty = 0;
             foreach ($list as $event)
             {
-                $json_data = $api->getEntity($event->getApiUrl(), array('expand' => 'attendees'));
+                $json_data = $this->api->getEntity($event->getApiUrl(), array('expand' => 'attendees'));
                 if (isset($json_data['attendees']))
                 {
                     $order_date       = $json_data['created'];
@@ -173,15 +173,19 @@ final class EventbriteEventManager implements IEventbriteEventManager
                             {
                                 continue;
                             }
-                            $member = $member_repository->findByEmail($email);
+
+                            $member         = $this->member_repository->findByEmail($email);
+                            $current_summit = $this->summit_repository->getByExternalEventId($event_id);
 
                             if (is_null($member)) {
                                 // member not found ... send email to invite to openstack.org membership
-                                echo sprintf("sending email (invite) to %s", $email).PHP_EOL;
-                                $invite_sender->send($email);
+                                echo sprintf("sending email (invite) to %s - summit id %s", $email, $current_summit->ID).PHP_EOL;
+                                $invite_sender->send([
+                                    'Summit' => $current_summit,
+                                    'To'     => $email
+                                ]);
                                 continue;
                             }
-                            $current_summit = $summit_repository->getByExternalEventId($event_id);
 
                             if (!$current_summit)
                             {
@@ -195,19 +199,19 @@ final class EventbriteEventManager implements IEventbriteEventManager
                                 continue;
                             }
 
-                            $old_attendee = $attendee_repository->getByMemberAndSummit
+                            $old_attendee = $this->attendee_repository->getByMemberAndSummit
                             (
                                 $member->getIdentifier(),
                                 $current_summit->getIdentifier()
                             );
 
-                            $old_ticket = $ticket_repository->getByExternalOrderIdAndExternalAttendeeId
+                            $old_ticket = $this->ticket_repository->getByExternalOrderIdAndExternalAttendeeId
                             (
                                 $order_id,
                                 $external_id
                             );
 
-                            $ticket     = $attendee_factory->buildTicket($external_id , $order_id, $bought_date, $changed_date, $ticket_type);
+                            $ticket     = $this->attendee_factory->buildTicket($external_id , $order_id, $bought_date, $changed_date, $ticket_type);
                             if(!is_null($old_ticket)){
                                 $former_attendee = $old_ticket->Owner();
                                 if(is_null($old_attendee) || $old_attendee->getIdentifier() != $former_attendee->getIdentifier()){
@@ -227,22 +231,27 @@ final class EventbriteEventManager implements IEventbriteEventManager
                             }
                             else
                             {
-                                $attendee = $attendee_factory->build
+                                $attendee = $this->attendee_factory->build
                                 (
                                     $member,
                                     $current_summit
                                 );
                                 // send email informing that u became attendee...
-                                echo sprintf("sending email (association) to %s (%s)", $attendee->getMemberFullName(), $email).PHP_EOL;
-                                $create_sender->send($attendee);
+                                echo sprintf("sending email (association) to %s (%s) - summit id %s", $attendee->getMemberFullName(), $email, $current_summit->ID).PHP_EOL;
+                                $create_sender->send(
+                                    [
+                                        'Summit'    => $current_summit,
+                                        'Attendee'  => $attendee
+                                    ]
+                                );
                             }
                             $attendee->addTicket($ticket);
-                            $attendee_repository->add($attendee);
+                            $this->attendee_repository->add($attendee);
                         }
 
                         $external_summit_id = $json_data['event_id'];
                         // associate the corresponding summit
-                        $summit             = $summit_repository->getByExternalEventId($external_summit_id);
+                        $summit             = $this->summit_repository->getByExternalEventId($external_summit_id);
                         if(is_null(!$summit))
                             $event->SummitID = $summit->getIdentifier();
                     }
@@ -339,8 +348,7 @@ final class EventbriteEventManager implements IEventbriteEventManager
      * @param string $bought_date
      * @param ISummitTicketType $ticket_type
      * @param $member
-     * @throws NotFoundEntityException
-     * @throws RedeemTicketException
+     * @return ISummitAttendeeTicket
      */
     public function createTicket($external_order_id, $external_attendee_id, $bought_date, $ticket_type, $member) {
 
@@ -392,9 +400,7 @@ final class EventbriteEventManager implements IEventbriteEventManager
                 $old_ticket->delete();
             }
 
-            $ticket = $attendee_factory->buildTicket($external_attendee_id , $external_order_id, $bought_date, $bought_date, $ticket_type);
-
-            return $ticket;
+            return $attendee_factory->buildTicket($external_attendee_id , $external_order_id, $bought_date, $bought_date, $ticket_type);
         });
 
     }
@@ -478,6 +484,110 @@ final class EventbriteEventManager implements IEventbriteEventManager
 
                 return $attendee;
             }
+        });
+    }
+
+    /**
+     * @param ISummit $summit
+     * @return int
+     */
+    public function populateSummitTicketTypes(ISummit $summit){
+
+        return $this->tx_manager->transaction(function() use($summit){
+            $count    = 0;
+            $response = $this->api->getTicketTypes($summit);
+
+            if (!isset($response['ticket_classes'])) return $count;
+
+            $ticket_classes = $response['ticket_classes'];
+
+            foreach ($ticket_classes as $ticket_class) {
+
+                $id              = $ticket_class['id'];
+                $old_ticket_type = SummitTicketType::get()->filter(['SummitID' => $summit->ID, 'ExternalId' => $id])->first();
+
+                if (!is_null($old_ticket_type)) {
+
+                    $old_ticket_type->Name        = trim($ticket_class['name']);
+                    $old_ticket_type->Description = isset($ticket_class['description']) ? trim($ticket_class['description']) : '';
+                    $old_ticket_type->write();
+
+                    continue;
+                }
+
+                $new_ticket_type              = new SummitTicketType();
+                $new_ticket_type->SummitID    = $summit->ID;
+                $new_ticket_type->ExternalId  = $id;
+                $new_ticket_type->Name        = trim($ticket_class['name']);
+                $new_ticket_type->Description = isset($ticket_class['description']) ? trim($ticket_class['description']) : '';
+                $new_ticket_type->write();
+
+                ++$count;
+            }
+
+            return $count;
+        });
+    }
+
+    /**
+     * @param ISummit $summit
+     * @return mixed
+     */
+    public function conciliateEventbriteOrders(ISummit $summit){
+
+        return $this->tx_manager->transaction(function() use($summit){
+            $page    = 1;
+            $process = true;
+            do {
+
+                $response = $this->api->getOrdersBySummit($summit, $page);
+                if(!isset($response['pagination'])) break;
+                if(!isset($response['orders'])) break;
+
+                $page_info  = $response['pagination'];
+                $page_count = $page_info['page_count'];
+                $orders     = $response['orders'];
+
+                echo sprintf("processing page %s of %s", $page, $page_count).PHP_EOL;
+
+                foreach($orders as $order){
+
+                    $uri       = $order['resource_uri'];
+                    $api_event = EventbriteEvent::get()->filter('ApiUrl', $uri)->first();
+
+                    if(is_null($api_event)){
+                        $api_event = new EventbriteEvent();
+                        $api_event->ApiUrl      = $uri;
+                        $api_event->EventType   = 'ORDER_PLACED';
+                        $api_event->FinalStatus =  $order['status'];
+                    }
+
+                    $api_event->ExternalOrderId = $order['id'];
+                    $api_event->SummitID        = $summit->getIdentifier();
+                    $api_event->write();
+
+                    DB::query("DELETE FROM EventbriteAttendee WHERE EventbriteOrderID = {$api_event->ID};");
+
+                    foreach($order['attendees']as $attendee){
+                        $profile     = $attendee['profile'];
+                        $costs       = $attendee['costs'];
+                        $db_attendee = new EventbriteAttendee();
+                        $db_attendee->FirstName             = $profile['first_name'];
+                        $db_attendee->LastName              = $profile['last_name'];
+                        $db_attendee->Email                 = $profile['email'];
+                        $db_attendee->EventbriteOrderID     = $api_event->ID;
+                        $db_attendee->Price                 = $costs['base_price']['major_value'];
+                        $db_attendee->ExternalAttendeeId    = $attendee['id'];
+                        $db_attendee->ExternalTicketClassId = $attendee['ticket_class_id'];
+                        $db_attendee->Status                = $attendee['status'];
+                        $db_attendee->write();
+                    }
+                }
+
+                ++$page;
+                if($page > $page_count) $process = false;
+            }
+            while($process);
         });
     }
 }

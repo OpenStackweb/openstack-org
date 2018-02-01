@@ -16,6 +16,21 @@ final class EventbriteEventConsumerTask extends CronTask
 {
 
     /**
+     * @var IEventbriteEventManager
+     */
+    private $manager;
+
+    /**
+     * EventbriteEventConsumerTask constructor.
+     * @param IEventbriteEventManager $manager
+     */
+    public function __construct(IEventbriteEventManager $manager)
+    {
+        parent::__construct();
+        $this->manager = $manager;
+    }
+
+    /**
      * @return void
      */
     public function run()
@@ -25,14 +40,14 @@ final class EventbriteEventConsumerTask extends CronTask
 
             $init_time  = time();
             $batch_size = 100;
+
             if (isset($_GET['batch_size']))
             {
                 $batch_size = intval(trim(Convert::raw2sql($_GET['batch_size'])));
                 echo sprintf('batch_size set to %s', $batch_size);
             }
 
-            $manager   = Injector::inst()->get('EventbriteEventManager');
-            $processed = $manager->ingestEvents
+            $processed = $this->manager->ingestEvents
             (
                 $batch_size,
                 new SummitAttendeeCreateMembershipAnnouncementEmailSender,

@@ -25,7 +25,7 @@ interface IEventbriteEventManager
      * @param int $bach_size
      * @param IMessageSenderService $invite_sender
      * @param IMessageSenderService $create_sender
-     * @return mixed
+     * @return int
      */
     public function ingestEvents($bach_size, IMessageSenderService $invite_sender, IMessageSenderService $create_sender);
 
@@ -57,6 +57,7 @@ interface IEventbriteEventManager
      * @param string $bought_date
      * @param ISummitTicketType $ticket_type
      * @param $member
+     * @return ISummitAttendeeTicket
      * @throws NotFoundEntityException
      * @throws RedeemTicketException
      */
@@ -75,4 +76,16 @@ interface IEventbriteEventManager
      * @return mixed
      */
     public function reassignTicket(ISummit $summit, $ticket_id, $member_id);
+
+    /**
+     * @param ISummit $summit
+     * @return int
+     */
+    public function populateSummitTicketTypes(ISummit $summit);
+
+    /**
+     * @param ISummit $summit
+     * @return mixed
+     */
+    public function conciliateEventbriteOrders(ISummit $summit);
 }

@@ -12,85 +12,45 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-class EventbriteSummitOrderConciliation extends CronTask
+final class EventbriteSummitOrderConciliation extends CronTask
 {
+
+    /**
+     * @var IEventbriteEventManager
+     */
+    private $manager;
+
+    /**
+     * EventbriteSummitOrderConciliation constructor.
+     * @param IEventbriteEventManager $manager
+     */
+    public function __construct(IEventbriteEventManager $manager)
+    {
+        parent::__construct();
+        $this->manager = $manager;
+    }
 
     /**
      * @return void
      */
     public function run()
     {
-        $api = new EventbriteRestApi();
-        $api->setCredentials(array('token' => EVENTBRITE_PERSONAL_OAUTH2_TOKEN));
-
-        if (!isset($_GET['summit_external_id']))
+        try
         {
-            echo "you must provide a summit_external_id!".PHP_EOL;
-            return -1;
-        }
-
-        $repository = new SapphireSummitRepository();
-        $summit     = $repository->getByExternalEventId($_GET['summit_external_id']);
-        if(is_null($summit)){
-            echo "summit not found!".PHP_EOL;
-            return -1;
-        }
-
-        SapphireTransactionManager::getInstance()->transaction(function() use($summit, $api ){
-
-            $page    = 1;
-            $process = true;
-            do {
-
-                $response = $api->getOrdersBySummit($summit, $page);
-                if(!isset($response['pagination'])) break;
-                if(!isset($response['orders'])) break;
-
-                $page_info  = $response['pagination'];
-                $page_count = $page_info['page_count'];
-                $orders     = $response['orders'];
-
-                echo sprintf("processing page %s of %s", $page, $page_count).PHP_EOL;
-
-                foreach($orders as $order){
-
-                    $uri       = $order['resource_uri'];
-                    $api_event = EventbriteEvent::get()->filter('ApiUrl', $uri)->first();
-
-                    if(is_null($api_event)){
-                        $api_event = new EventbriteEvent();
-                        $api_event->ApiUrl      = $uri;
-                        $api_event->EventType   = 'ORDER_PLACED';
-                        $api_event->FinalStatus =  $order['status'];
-                    }
-
-                    $api_event->ExternalOrderId = $order['id'];
-                    $api_event->SummitID = $summit->getIdentifier();
-                    $api_event->write();
-
-                    DB::query("DELETE FROM EventbriteAttendee WHERE EventbriteOrderID = {$api_event->ID};");
-
-                    foreach($order['attendees']as $attendee){
-                        $profile     = $attendee['profile'];
-                        $costs       = $attendee['costs'];
-                        $db_attendee = new EventbriteAttendee();
-                        $db_attendee->FirstName             = $profile['first_name'];
-                        $db_attendee->LastName              = $profile['last_name'];
-                        $db_attendee->Email                 = $profile['email'];
-                        $db_attendee->EventbriteOrderID     = $api_event->ID;
-                        $db_attendee->Price                 = $costs['base_price']['major_value'];
-                        $db_attendee->ExternalAttendeeId    = $attendee['id'];
-                        $db_attendee->ExternalTicketClassId = $attendee['ticket_class_id'];
-                        $db_attendee->Status                = $attendee['status'];
-                        $db_attendee->write();
-                    }
+            $init_time  = time();
+            foreach(Summit::getNotFinished() as $summit) {
+                if(empty($summit->ExternalEventId)){
+                    echo sprintf("skipping summit id %s bc ExternalEventId is not set", $summit->ID).PHP_EOL;
                 }
-
-                ++$page;
-                if($page > $page_count) $process = false;
+                echo sprintf("conciliating order for summit id %s - ExternalEventId %s", $summit->ID, $summit->ExternalEventId).PHP_EOL;
+                $this->manager->conciliateEventbriteOrders($summit);
             }
-            while($process);
-        });
-
+            $finish_time = time() - $init_time;
+            echo 'time elapsed : '.$finish_time. ' seconds.'.PHP_EOL;
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+        }
     }
 }

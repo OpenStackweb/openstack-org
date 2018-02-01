@@ -279,3 +279,9 @@ Injector:
   IndividualSpeakerSelectionAnnouncementEmailSenderTask:
     constructor:
       0: '%$SpeakerEmailAnnouncementSenderManager'
+  EventbriteEventConsumerTask:
+    constructor:
+      0: '%$EventbriteEventManager'
+  EventbriteSummitOrderConciliation:
+    constructor:
+      0: '%$EventbriteEventManager'
