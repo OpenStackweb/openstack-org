@@ -58,8 +58,7 @@ class SummitSponsorPage extends SummitPage
         $fields->removeByName('SummitPageImages');
         $fields->removeFieldFromTab('Root.Main','Content');
 
-        $fields_array = array();
-        HtmlEditorConfig::set_active('simple');
+        $fields_array = [];
 
         // Main
         $fields_array[] = new TextField('SponsorAlert', 'Sponsor Alert');

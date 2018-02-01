@@ -116,6 +116,8 @@ $simple_tinyMCE->setButtonsForLine(1, array(
 ));
 $simple_tinyMCE->setButtonsForLine(2,array());
 
+HtmlEditorConfig::set_active('cms');
+
 if(defined('SERVER_TIME_ZONE')) {
     date_default_timezone_set(SERVER_TIME_ZONE);
 }
