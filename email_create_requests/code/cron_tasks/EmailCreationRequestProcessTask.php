@@ -67,6 +67,21 @@ final class EmailCreationRequestProcessTask extends CronTask
                             }
                         }
                         break;
+                        case 'SpeakerSelectionAnnouncementEmailCreationRequest':
+                        {
+                            $sender = SpeakerSelectionAnnouncementEmailCreationRequestSenderServiceFactory::build($email_request);
+                            if(is_null($sender)) continue;
+                            if($email_request->Speaker()->announcementEmailAlreadySent($email_request->Summit()->ID)) continue;
+                            $sender->send([
+                                "Role"      => $email_request->Role,
+                                "Speaker"   => $email_request->Speaker(),
+                                "Summit"    => $email_request->Summit(),
+                                'PromoCode' => $email_request->PromoCode()
+                            ]);
+                            $email_request->PromoCode()->markAsSent();
+                            $email_request->PromoCode()->write();
+                        }
+                        break;
                         default:
                         {
                             continue;

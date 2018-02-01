@@ -854,8 +854,19 @@ class PresentationSpeaker extends DataObject
         }
 
         $presentations = $role == IPresentationSpeaker::RoleSpeaker ?
-            $this->Presentations()->filter('SummitEvent.SummitID', $summit->ID):
-            Presentation::get()->filter(['SummitEvent.SummitID' => $summit->ID, 'ModeratorID' => $this->ID]);
+            $this->Presentations()->filter(
+                [
+                    'SummitEvent.SummitID'  => $summit->ID,
+                    'SummitEvent.Published' => 0
+                ]
+            ):
+            Presentation::get()->filter
+            (
+                [ 'SummitEvent.SummitID'  => $summit->ID,
+                  'SummitEvent.Published' => 0,
+                  'ModeratorID'           => $this->ID
+                ]
+            );
 
         if(count($private_tracks) > 0) {
             $excluded_tracks = array_merge($excluded_tracks, $private_tracks);
@@ -866,7 +877,7 @@ class PresentationSpeaker extends DataObject
         }
 
         foreach ($presentations as $p) {
-            if ($p->SelectionStatus() == IPresentation::SelectionStatus_Unaccepted && !$p->isPublished()) {
+            if ($p->SelectionStatus() == IPresentation::SelectionStatus_Unaccepted) {
                 $unacceptedPresentations->push($p);
             }
         }
@@ -879,6 +890,7 @@ class PresentationSpeaker extends DataObject
      * @param string $role
      * @param bool $include_sub_roles
      * @param array $excluded_tracks
+     * @param bool $published_ones
      * @return ArrayList|bool
      */
     public function AlternatePresentations
@@ -886,14 +898,18 @@ class PresentationSpeaker extends DataObject
         $summit_id = null,
         $role = IPresentationSpeaker::RoleSpeaker,
         $include_sub_roles = false,
-        array $excluded_tracks = []
+        array $excluded_tracks = [],
+        $published_ones = false
     )
     {
         $alternatePresentations = new ArrayList();
         $summit                 = is_null($summit_id) ? Summit::get_active() : Summit::get()->byID($summit_id);
         if (is_null($summit)) return false;
 
-        $filters = ['SummitEvent.SummitID' => $summit->ID];
+        $filters   = [
+            'SummitEvent.SummitID'  => $summit->ID,
+            'SummitEvent.Published' => $published_ones ? 1 : 0
+        ];
         if($role == IPresentationSpeaker::RoleModerator)
             $filters['ModeratorID'] = $this->ID;
 
@@ -907,7 +923,7 @@ class PresentationSpeaker extends DataObject
             Presentation::get()->filter($filters);
 
         foreach ($presentations as $p) {
-            if ($p->SelectionStatus() == IPresentation::SelectionStatus_Alternate && !$p->isPublished()) {
+            if ($p->SelectionStatus() == IPresentation::SelectionStatus_Alternate) {
                 $alternatePresentations->push($p);
             }
         }
