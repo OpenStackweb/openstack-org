@@ -105,18 +105,6 @@
                           <p>&nbsp;</p>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <h5 class="section-title">
-                                Travel Support Sponsor
-                            </h5>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="row"> 
-                                <div class="col-lg-12" style="text-align:center;"><img style="max-width: 100%;" title="" src="assets/companies/main_logo/verizon-lg.png" alt="Verizon Logo" /></div>
-                            </div>
-                        </div>
-                    </div>
                     <% end_if %>
                     <div class="row">
                         <div class="col-sm-12">
