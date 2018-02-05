@@ -92,7 +92,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <h5 class="section-title">
-                                Denver PTG Sponsors
+                               PTG Sponsors
                             </h5>
                         </div>
                         <div class="col-lg-12">
