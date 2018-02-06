@@ -54,58 +54,77 @@ class PresentationSlideSubmissionController extends Page_Controller
 		);
 	}
 
-    /**
-     * @param SS_HTTPRequest $r
-     * @return SS_HTTPResponse|ViewableData_Customised|void
-     */
-	public function presentations(SS_HTTPRequest $r)
+
+	public function presentations(SS_HTTPRequest $request)
 	{
-		$data    = [];
-		$speaker = null;
-		$key     = $r->getVar('key');
 
-		if ($key) {
-			$username = PresentationSpeaker::hash_to_username($key);
-			$speaker  = PresentationSpeaker::get()->filter('Member.Email', $username)->first();
+        try {
 
-		} elseif ($speakerID = Session::get('UploadMedia.SpeakerID')) {
-			$speaker = PresentationSpeaker::get()->byID($speakerID);
-		}
+            $token = Session::get('PresentationSlideSubmission.Token');
 
-		// Speaker not found
-		if (!$speaker) {
-			return $this->httpError(404, 'Sorry, that does not appear to be a valid token.');
-		}
+            if (isset($_REQUEST['t'])) {
+                $token = base64_decode($_REQUEST['t']);
+                Session::set('PresentationSlideSubmission.Token', $token);
+                return $this->redirect(Director::absoluteURL('submit-slides/presentations'));
+            }
 
-		Session::set('UploadMedia.SpeakerID', $speaker->ID);
-		
-		$activeSummit  = Summit::get_most_recent();
-		$presentations = $speaker->PublishedPresentations($activeSummit->ID);
+            if(empty($token))
+                throw new InvalidArgumentException('missing token!');
 
-		// No presentations
-		if (!$presentations || $presentations->count() == 0) {
-			return $this->httpError(404, 'Sorry, it does not appear that you have any presentations.');
-		}
+            $email = PresentationSpeakerUploadPresentationMaterialEmail::get()
+                ->filter('Hash', PresentationSpeakerUploadPresentationMaterialEmail::HashConfirmationToken($token))
+                ->first();
 
-		// IF there's only one presentation with no media, go ahead and forward to it's page
-		if ($presentations->count() == 1) {
-			$slide = $presentations->first()->MaterialType('PresentationSlide');
-			if(!$slide) {
-				$presentationID = $presentations->first()->ID;
-				return $this->redirect(Controller::join_links(
-					$this->Link(),
-					'/presentation/',
-					$presentationID,
-					'upload'
-				));
-			}
-		}
 
-		$data['Speaker']       = $speaker;
-		$data['Presentations'] = $presentations;
+            if (is_null($email)) {
+                throw new NotFoundEntityException('PresentationSpeakerUploadPresentationMaterialEmail','');
+            }
 
-		return $this->customise($data);
+            if(!$email->alreadyRedeemed()) {
+                $email->redeem($token);
+                $email->write();
+            }
+
+            $presentations = $email->Speaker()->PublishedPresentations($email->Summit()->ID);
+
+            // No presentations
+            if (!$presentations || $presentations->count() == 0) {
+                $this->clearSessionState();
+                return $this->httpError(404, 'Sorry, it does not appear that you have any presentations.');
+            }
+
+            // IF there's only one presentation with no media, go ahead and forward to it's page
+            if ($presentations->count() == 1) {
+                $slide = $presentations->first()->MaterialType('PresentationSlide');
+                if(!$slide) {
+                    $presentationID = $presentations->first()->ID;
+                    return $this->redirect(Controller::join_links(
+                        $this->Link(),
+                        '/presentation/',
+                        $presentationID,
+                        'upload'
+                    ));
+                }
+            }
+
+            $data['Speaker']       = $email->Speaker();
+            $data['Presentations'] = $presentations;
+            Session::set('PresentationSlideSubmission.SpeakerID', $email->Speaker()->ID);
+            return $this->customise($data);
+
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::WARN);
+            $this->clearSessionState();
+            return $this->httpError(404, 'Sorry, this speaker upload slide token does not seem to be correct.');
+        }
 	}
+
+	private function clearSessionState(){
+        Session::clear("PresentationSlideSubmission.Token");
+        Session::clear("PresentationSlideSubmission.SpeakerID");
+    }
 
 	/**
 	 * @param SS_HTTPRequest $r
@@ -117,7 +136,7 @@ class PresentationSlideSubmissionController extends Page_Controller
 		// make sure there's a presentation by that id
 		$presentation = Presentation::get()->byID($presentationID);
 		// pull the speaker from the session and make sure they are a speaker for this presentation
-		$speakerID = Session::get('UploadMedia.SpeakerID');
+		$speakerID = Session::get('PresentationSlideSubmission.SpeakerID');
 
 		if ($presentation && $speakerID && $presentation->Speakers()->find('ID', $speakerID)) {
 			$request = PresentationSlideSubmissionController_PresentationRequest::create($this, $presentation);
@@ -248,24 +267,23 @@ class PresentationSlideSubmissionController_PresentationRequest extends Controll
 	}
 
 
-	/**
-	 * @param SS_HTTPRequest $r
-	 * @return mixed
-     */
-	public function success(SS_HTTPRequest $r)
+	public function success(SS_HTTPRequest $request)
 	{
-		if(!SecurityToken::inst()->check($r->getVar('key'))) {
+	    // check security token generate on
+        // summit/code/forms/PresentationLinkToForm.php Line 92
+        // @link PresentationLinkToForm::saveLink
+		if(!SecurityToken::inst()->check($request->getVar('key'))) {
 			$this->httpError(404);
 		}
 
-		$material = PresentationSlide::get()->byID($r->getVar('material'));
+		$material = PresentationSlide::get()->byID($request->getVar('material'));
 
 		if(!$material) {
 			$this->httpError(404);
 		}
 
 		return $this->customise([
-			'Material' => $material,
+			'Material'     => $material,
 			'Presentation' => $this->presentation
 		])->renderWith([
 			'PresentationSlideSubmissionController_success',

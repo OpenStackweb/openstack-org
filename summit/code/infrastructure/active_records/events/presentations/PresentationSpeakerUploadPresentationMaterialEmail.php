@@ -14,21 +14,65 @@
  **/
 class PresentationSpeakerUploadPresentationMaterialEmail extends DataObject
 {
-    static $db = array
-    (
-        'SentDate' => 'SS_Datetime',
-    );
+    static $db = [
+        'SentDate'     => 'SS_Datetime',
+        'IsRedeemed'   => 'Boolean',
+        'RedeemedDate' => 'SS_Datetime',
+        'Hash'         => 'Text',
+    ];
 
-    static $has_one = array
-    (
+    static $has_one = [
         'Summit'  => 'Summit',
         'Speaker' => 'PresentationSpeaker',
-    );
+    ];
 
-    private static $indexes = array(
-        'Summit_Speaker_IDX' => array(
-            'type' => 'unique',
+    private static $indexes = [
+        'Summit_Speaker_IDX' => [
+            'type'  => 'unique',
             'value' => '"SummitID","SpeakerID"'
-        )
-    );
+        ]
+    ];
+
+    /**
+     * @var string
+     */
+    private $token;
+
+    /**
+     * @param $token
+     * @return bool
+     * @throws InvalidHashPresentationSpeakerUploadPresentationMaterialEmailException
+     * @throws PresentationSpeakerUploadPresentationMaterialEmailAlreadyRedeemedException
+     */
+    public function redeem($token)
+    {
+        $original_hash = $this->getField('Hash');
+        if($this->IsRedeemed) throw new PresentationSpeakerUploadPresentationMaterialEmailAlreadyRedeemedException;
+        if(self::HashConfirmationToken($token) === $original_hash){
+            $this->IsRedeemed    = true;
+            $this->RedeemedDate  = SS_Datetime::now()->Rfc2822();
+            return true;
+        }
+        throw new InvalidHashPresentationSpeakerUploadPresentationMaterialEmailException;
+    }
+
+    /**
+     * @return string
+     */
+    public function generateConfirmationToken() {
+        $generator   = new RandomGenerator();
+        $this->token = $generator->randomToken();
+        $hash        = self::HashConfirmationToken($this->token);
+        $this->setField('Hash',$hash);
+        return $this->token;
+    }
+
+    public static function HashConfirmationToken($token){
+        return md5($token);
+    }
+
+    public function alreadyRedeemed()
+    {
+        return $this->IsRedeemed;
+    }
 }

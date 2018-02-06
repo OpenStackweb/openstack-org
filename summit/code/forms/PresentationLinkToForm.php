@@ -88,6 +88,7 @@ class PresentationLinkToForm extends Form
 		])->removeAll();
     	
     	$this->presentation->Materials()->add($material);
+    	// generate security token
     	$token = SecurityToken::inst()->getValue();
 
         return $this->Controller()->redirect(Controller::join_links(

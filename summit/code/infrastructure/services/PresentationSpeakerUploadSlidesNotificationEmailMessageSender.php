@@ -40,10 +40,12 @@ implements IMessageSenderService
         }
 
         $from    = null;
-        $subject = null;
+        $subject = sprintf("Action Required! Upload your slides for the OpenStack Summit %s", $summit->Title);
+
         $email   = EmailFactory::getInstance()->buildEmail($from, $speaker->getEmail(), $subject);
 
         $email->setUserTemplate('upload-presentation-slides-email');
+
 
         $email->populateTemplate
         (
@@ -53,12 +55,11 @@ implements IMessageSenderService
                 'Speaker'         => $speaker,
                 'Summit'          => $summit,
                 // @see class PresentationSlideSubmissionController::presentations
-                'UploadSlidesURL' => Director::absoluteURL("submit-slides/presentations")
+                'UploadSlidesURL' => $speaker->getSpeakerUploadSlideLink($summit)
             ]
         );
 
         $email->send();
 
-        $speaker->registerUploadSlidesRequestEmail($summit);
     }
 }

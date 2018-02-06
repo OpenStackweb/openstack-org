@@ -30,10 +30,11 @@ interface ISpeakerEmailAnnouncementSenderManager
 
     /**
      * @param ISummit $current_summit
+     * @param IMessageSenderService $sender_service
      * @param int $batch_size
      * @return int
      */
-    public function sendUploadSlidesAnnouncementBySummit(ISummit $current_summit, $batch_size);
+    public function sendUploadSlidesAnnouncementBySummit(ISummit $current_summit, IMessageSenderService $sender_service, $batch_size);
 
     /**
      * @param IPresentationSpeaker $speaker

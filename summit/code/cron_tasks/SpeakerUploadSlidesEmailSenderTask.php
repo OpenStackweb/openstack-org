@@ -54,7 +54,12 @@ final class SpeakerUploadSlidesEmailSenderTask extends CronTask
             if(is_null($summit)) throw new Exception('summit_id is not valid!');
 
 
-            $processed  = $this->manager->sendUploadSlidesAnnouncementBySummit($summit, $batch_size);
+            $processed  = $this->manager->sendUploadSlidesAnnouncementBySummit
+            (
+                $summit,
+                new PresentationSpeakerUploadSlidesNotificationEmailMessageSender,
+                $batch_size
+            );
 
             $finish_time = time() - $init_time;
             echo 'processed records (speakers) ' . $processed.' processed records (speakers) ' . $processed. ' - time elapsed : '.$finish_time. ' seconds.'.PHP_EOL;

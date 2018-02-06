@@ -1617,14 +1617,54 @@ class PresentationSpeaker extends DataObject
 
     /**
      * @param ISummit $summit
+     * @return PresentationSpeakerUploadPresentationMaterialEmail
      */
     public function registerUploadSlidesRequestEmail(ISummit $summit){
+
         $notification            = new PresentationSpeakerUploadPresentationMaterialEmail();
         $notification->SpeakerID = $this->ID;
         $notification->SummitID  = $summit->ID;
         $notification->SentDate  = MySQLDatabase56::nowRfc2822();
         $notification->write();
+        return $notification;
     }
+
+    /**
+     * @param ISummit $summit
+     * @return string
+     */
+    public function getSpeakerUploadSlideLink(ISummit $summit)
+    {
+        $url = Director::absoluteURL("submit-slides/presentations");
+
+        // first try to get one
+        $email = PresentationSpeakerUploadPresentationMaterialEmail::get()->filter(
+            [
+                'SpeakerID' => $this->ID,
+                'SummitID'  => $summit->ID
+            ]
+        )->first();
+        // if does not exist create it!
+        if(!$email)
+            $email = $this->registerUploadSlidesRequestEmail($summit);
+        $token = null;
+        $already_exists = false;
+
+        do {
+            $token = $email->generateConfirmationToken();
+            $already_exists = intval(PresentationSpeakerUploadPresentationMaterialEmail::get()
+                    ->filter([
+                        'SummitID'                 => intval($summit->ID),
+                        'SpeakerID:ExactMatch:not' => $this->ID,
+                        'ConfirmationHash'         => PresentationSpeakerUploadPresentationMaterialEmail::HashConfirmationToken($token)
+                    ])
+                    ->count()) > 1;
+        } while ($already_exists);
+
+        $email->write();
+        return $url . '?t=' . base64_encode($token);
+    }
+
 
     /**
      * @param ISummit $summit
