@@ -780,15 +780,15 @@ SQL;
      */
     public function canEdit($member = null)
     {
-        $res = Permission::check("ADMIN") || Permission::check("ADMIN_SUMMIT_APP") || Permission::check("ADMIN_SUMMIT_APP_SCHEDULE");
-        if ($res) {
-            return $res;
-        }
-
+        $member = Member::currentUser();
+        if(!$member) return false;
+        if(Permission::check("ADMIN") || Permission::check("ADMIN_SUMMIT_APP") || Permission::check("ADMIN_SUMMIT_APP_SCHEDULE"))
+            return true;
+        $speaker = $member->getSpeakerProfile();
         return
-            ( Member::currentUser() && Member::currentUser()->IsSpeaker($this) ) ||
-            Member::currentUserID() == $this->CreatorID ||
-            ( Member::currentUser() && Member::currentUser()->getSpeakerProfile() && $this->ModeratorID == Member::currentUser()->getSpeakerProfile()->ID );
+            $member->isSpeakerOn($this) ||
+            $member->ID == $this->CreatorID ||
+            ( $speaker && $this->ModeratorID == $speaker->ID );
     }
 
     /**

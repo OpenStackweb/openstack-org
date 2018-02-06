@@ -88,28 +88,14 @@ class PresentationMemberExtension extends DataExtension
 
 
     /**
-     * Returns true if the user is a speaker in a given presentation
-     * @param boolean
+     * @param Presentation $presentation
+     * @return bool
      */
-    public function IsSpeaker($presentation = null) {
-        if($presentation === null) {
-            return Presentation::get()
-                    ->relation('Speakers')
-                    ->find('MemberID', $this->owner->ID);
-        }
-
-        if(is_numeric($presentation)) {
-            $p = Presentation::get()->byID($presentation);
-        }
-        else if($presentation instanceof Presentation) {
-            $p = $presentation;
-        }
-
-        if($p) {
-            return $p->Speakers()->find('MemberID', $this->owner->ID);
-        }
+    public function isSpeakerOn(Presentation $presentation) {
+        return intval($presentation->Speakers()->filter(array(
+            'MemberID' => $this->owner->ID
+        ))->count()) > 0;
     }
-
 
     /**
      * Gets arbitrary state for a given summit, such as "bureau" for having

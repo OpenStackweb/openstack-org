@@ -76,7 +76,7 @@ final class AddSpeakerForm extends BootstrapForm
             )
         );
 
-        if (Member::currentUser()->IsSpeaker($this->presentation)
+        if (Member::currentUser()->isSpeakerOn($this->presentation)
             || $this->presentation->ModeratorID == Member::currentUser()->getSpeakerProfile()->ID) {
             $fields->replaceField('SpeakerType', HiddenField::create('SpeakerType', '', 'Else'));
             $fields->field('EmailAddress')
