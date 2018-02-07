@@ -49,18 +49,18 @@ SQL;
         $query3 = <<<SQL
         
 UPDATE PermamailTemplate set Content =
-'<p>Thank you for your RSVP to {\$Event.Title} at {\$Event.getDateNice} . For your convenience, we have added this to My Schedule within the Summit Management tool.</p>
+'<p>Thank you for your RSVP to <strong>{\$Event.Title}</strong> on {\$Event.getDateNice} . For your convenience, we have added this to My Schedule within the Summit Management tool.</p>
 <p>Be sure to synch it to your calendar by going <a href="{\$ScheduleURL}">here</a>.</p>
 
-Please present a printed copy of this email at the entrance where the event is beign held.
+Please present a printed copy of this email at the entrance where the event is beign held.<br/><br/>
 
-******************************
-
-Attendee: {\$Member.FirstName} {\$Member.Surname}
-Event: {\$Event.Title}
-Confirmation #: {\$ConfirmationNbr}
-
-******************************
+****************************************************************************************** <br/>
+<p>
+Attendee: {\$Member.FirstName} {\$Member.Surname} <br/>
+Event: {\$Event.Title} <br/>
+Confirmation #: {\$ConfirmationNbr} <br/>
+</p>
+****************************************************************************************** <br/>
 
 <p>Cheers,</p><p>OpenStack Summit Team</p>'
 WHERE Identifier = 'summit-attendee-rsvp';
