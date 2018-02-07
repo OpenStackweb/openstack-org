@@ -93,4 +93,5 @@ migrations:
   - TagGroupMigration
   - AddOnDeleteCascadeFKPromoCodesMigration
   - UpdateUploadPresentationSlidesEmailMigration
+  - PresentationTagBugMigration
 

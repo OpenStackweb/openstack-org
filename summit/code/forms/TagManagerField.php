@@ -23,7 +23,7 @@ class TagManagerField extends FormField
 
         foreach ($this->Category->AllowedTags() as $tag) {
             if(!isset($tag_array[$tag->Group])) $tag_array[$tag->Group] = array();
-            $tag_array[$tag->Group][] = $tag->Tag;
+            $tag_array[$tag->Group][] = ['tag' => $tag->Tag, 'id' => $tag->ID];
         }
 
         foreach ($tag_array as $group => &$tags) {
@@ -49,12 +49,8 @@ class TagManagerField extends FormField
             $record->Tags()->removeAll();
             foreach($tags as $t)
             {
-                $tag = Tag::get()->filter('Tag', $t)->first();
-                if(is_null($tag))
-                {
-                    $tag = Tag::create(array('Tag' => $t));
-                    $tag->write();
-                }
+                $tag = Tag::get()->byID($t);
+                if(is_null($tag)) continue;
                 $record->Tags()->add($tag);
             }
         }
@@ -65,7 +61,8 @@ class TagManagerField extends FormField
             $tags = $value->toArray();
             $list = array();
             foreach ($tags as $t) {
-                array_push($list, $t->Tag);
+                if ($t->Tag != '')
+                    array_push($list, $t->ID);
             }
             $this->value = implode(',', $list);
         }
@@ -73,6 +70,7 @@ class TagManagerField extends FormField
         {
             $this->value = $value;
         }
+
         return $this;
     }
 

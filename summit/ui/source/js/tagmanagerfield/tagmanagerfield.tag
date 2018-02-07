@@ -29,10 +29,9 @@ require('./clicktag.tag')
             </div>
         </div>
         <script>
-
             this.allowed_tags        = opts.allowed_tags;
             this.value               = opts.value;
-            this.selected_tags       = (this.value) ? this.value.split(',') : new Array();
+            this.selected_tags       = (this.value) ? this.value.split(',').map(t => parseInt(t)) : new Array();
             this.selected_tag_count  = this.selected_tags.length;
             var self                 = this;
 
@@ -62,14 +61,14 @@ require('./clicktag.tag')
 
             addTag(tag) {
                 self.selected_tag_count++;
-                self.selected_tags.push(tag);
+                self.selected_tags.push(tag.id);
                 self.value = self.selected_tags.join();
                 self.update();
             }
 
             removeTag(tag) {
                 self.selected_tag_count--;
-                delete self.selected_tags[self.selected_tags.indexOf(tag)];
+                delete self.selected_tags[self.selected_tags.indexOf(tag.id)];
                 self.value = self.selected_tags.join();
                 self.update();
             }
