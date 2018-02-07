@@ -225,6 +225,12 @@ class TrackChairAPI extends AbstractRestfulJsonApi
             $presentations = Presentation::apply_search_query($presentations, $r->getVar('keyword'));
         }
 
+        $types = array();
+        foreach ($presentations as $p) {
+            if (array_search($p->Type()->ID, array_column($types, 'id')) === false)
+                $types[] = ['id' => $p->Type()->ID, 'type' => $p->Type()->Type];
+        }
+
         $offset = ($page - 1) * $page_size;
         $count = $presentations->count();
         $presentations = $presentations->limit($page_size, $offset);
@@ -235,7 +241,8 @@ class TrackChairAPI extends AbstractRestfulJsonApi
             'total_pages' => ceil($count / $page_size),
             'has_more' => $count > ($page_size * ($page)),
             'total' => $count,
-            'remaining' => $count - ($page_size * ($page))
+            'remaining' => $count - ($page_size * ($page)),
+            'types' => $types
         ];
 
         foreach ($presentations as $p) {
@@ -257,7 +264,8 @@ class TrackChairAPI extends AbstractRestfulJsonApi
                 'total_points' => $p->CalcTotalPoints(),
                 'moved_to_category' => $p->movedToThisCategory(),
                 'speakers' => $p->getSpeakersCSV(),
-                'lightning_wannabe' => $p->isLightningWannabe()
+                'lightning_wannabe' => $p->isLightningWannabe(),
+                'type' => $p->Type()->Type
             ];
         }
 
@@ -1021,6 +1029,7 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
         		'Status' => SummitCategoryChange::STATUS_PENDING
         	])->count();
         $data['lightning_wannabe'] = $p->isLightningWannabe();
+        $data['tags'] = $p->getTags()->toNestedArray();
 
 
         return (new SS_HTTPResponse(

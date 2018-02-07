@@ -38,8 +38,20 @@ export const getFilteredPresentations = createSelector(
 			case 'pass':
 				filterFunc = p => p.selected === 'pass';
 				break;
-            case 'presentation_lightning':
-                filterFunc = p => !!p.lightning_wannabe;
+            case 'Presentation':
+                filterFunc = p => p.type === 'Presentation';
+                break;
+            case 'Keynotes':
+                filterFunc = p => p.type === 'Keynotes';
+                break;
+			case 'Panel':
+                filterFunc = p => p.type === 'Panel';
+                break;
+            case 'Lightning Talks':
+                filterFunc = p => p.type === 'Lightning Talks';
+                break;
+            case 'Workshop':
+                filterFunc = p => p.type === 'Workshop';
                 break;
 			default:
 				filterFunc = p => p

@@ -73,11 +73,20 @@ class Presentation extends SummitEvent implements IPresentation
                 "Moderator.ID = Presentation.ModeratorID",
                 "Moderator"
             )
+            ->leftJoin(
+                "SummitEvent_Tags",
+                "Presentation.ID = SummitEvent_Tags.SummitEventID"
+            )
+            ->leftJoin(
+                "Tag",
+                "Tag.ID = SummitEvent_Tags.TagID"
+            )
             ->where("
                   	SummitEvent.Title LIKE '%{$k}%'
                   	OR SummitEvent.Abstract LIKE '%{$k}%'
                     OR (CONCAT_WS(' ', Speaker.FirstName, Speaker.LastName)) LIKE '%{$k}%'
                     OR (CONCAT_WS(' ', Moderator.FirstName, Moderator.LastName)) LIKE '%{$k}%'
+                    OR Tag.Tag = '{$k}'
                 ");
     }
 

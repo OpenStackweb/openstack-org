@@ -11,6 +11,7 @@ import {
 import PresentationCommentForm from '../containers/PresentationCommentForm';
 import PresentationEmailForm from '../containers/PresentationEmailForm';
 import PresentationMeta from '../views/PresentationMeta';
+import PresentationTags from '../views/PresentationTags';
 import PresentationActivity from '../views/PresentationActivity';
 import PresentationSpeakers from '../views/PresentationSpeakers';
 import SelectionButtonBar from '../containers/SelectionButtonBar';
@@ -141,6 +142,7 @@ class BrowseDetail extends React.Component {
 			               </div>
 			            </div>
 			         </div>
+					<PresentationTags tags={p.tags} />
 					<PresentationMeta presentation={p} />
 					<h3>Speakers</h3>
 					<PresentationSpeakers speakers={speakers} />

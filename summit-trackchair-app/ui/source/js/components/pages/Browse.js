@@ -59,7 +59,7 @@ class Browse extends React.Component {
             <div>
                <div className="col-md-4">
                   <div className="ibox float-e-margins">
-                  	<PresentationSearchForm />
+                  	<PresentationSearchForm keyword={this.props.keyword}/>
                   	<div className="row">
                   		<div className="col-md-2">
                   			<PresentationFilterDropdown />
@@ -100,6 +100,7 @@ export default connect(
 			search: state.routing.locationBeforeTransitions.query.search,
 			hasMore: state.presentations.has_more,
 			currentPage: +state.presentations.page,
+			keyword: state.presentations.keyword,
 			loading: state.presentations.loading
 		}
 	},

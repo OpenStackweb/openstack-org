@@ -7,7 +7,8 @@ import {activatePresentationFilter} from '../../actions';
 const PresentationFilterDropdown = ({
 	activeFilter,
 	onSelect,
-	category
+	category,
+	types
 }) => (
 	<Dropdown
 		onItemSelected={onSelect}
@@ -27,14 +28,18 @@ const PresentationFilterDropdown = ({
 		<DropdownItem eventKey='maybe'><i className='fa fa-thumbs-up warning' /> Vote: Interested</DropdownItem>
 		<DropdownItem eventKey='pass'><i className='fa fa-thumbs-down danger' /> Vote: No thanks</DropdownItem>
         <DropdownItem divider />
-        <DropdownItem eventKey='presentation_lightning'><i className='fa fa-bolt' /> Lightning Talk </DropdownItem>
+		{types.map(t =>
+			<DropdownItem eventKey={t.type}> {t.type} </DropdownItem>
+		)}
+
 	</Dropdown>
 );
 
 export default connect(
 	state => ({
 		category: state.routing.locationBeforeTransitions.query.category,
-		activeFilter: state.presentations.filter
+		activeFilter: state.presentations.filter,
+        types: state.presentations.types
 	}),
 
 	dispatch => ({

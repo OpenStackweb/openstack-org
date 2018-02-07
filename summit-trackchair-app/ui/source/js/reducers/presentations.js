@@ -7,13 +7,16 @@ export const presentations = function (
         loading: false,
         page: 0,
         total: 0,
-        filter: 'all'
+        filter: 'all',
+		keyword: '',
+		types: []
     },
     action = {}) {	
     switch(action.type) {
         case 'REQUEST_PRESENTATIONS':
             return {
                 ...state,
+				keyword: action.payload.keyword,
                 loading: true
             };
         case 'RECEIVE_PRESENTATIONS':
@@ -27,7 +30,8 @@ export const presentations = function (
                 has_more: action.payload.response.has_more,
                 page: action.payload.response.page,
                 total: action.payload.response.total,
-                loading: false
+                loading: false,
+				types: action.payload.response.types
             };
 
         case 'CLEAR_PRESENTATIONS':
@@ -37,7 +41,8 @@ export const presentations = function (
     			loading:true,
     			page: 0,
     			total: 0,
-    			filter: 'all'
+    			filter: 'all',
+                types: []
     		};        	
         case 'ACTIVATE_PRESENTATION_FILTER':
         	return {

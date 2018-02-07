@@ -15,6 +15,14 @@ class PresentationSearchForm extends React.Component {
 		this.doSearch = this.doSearch.bind(this);
 	}
 
+    componentWillReceiveProps(nextProps) {
+		if (nextProps.keyword != this.state.value) {
+            this.setState({
+                value: nextProps.keyword
+            });
+		}
+    }
+
 	updateValue(e) {
 		this.setState({
 			value: e.target.value
