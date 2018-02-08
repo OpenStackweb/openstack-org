@@ -52,6 +52,8 @@ define('MARKETPLACE_REVIEWS_EMAIL_TO','');
 define('MARKETPLACE_ADMIN_UPDATE_EMAIL_TO','');
 
 define('DEPLOYMENT_SURVEY_THANK_U_FROM_EMAIL','');
+
+define('SURVEY_COMPLETE_EMAIL_TO','');
 //used on openstack/code/FeedbackForm.php (submitFeedback - ln 46)
 define('FEEDBACK_FORM_FROM_EMAIL','');
 define('FEEDBACK_FORM_TO_EMAIL','');

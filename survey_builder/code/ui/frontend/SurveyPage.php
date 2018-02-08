@@ -496,6 +496,7 @@ class SurveyPage_Controller extends Page_Controller
         if ($current_survey->isLastStep() && $current_step->template()->getType() == 'SurveyReviewStepTemplate') {
             if(!$current_survey->isEmailSent())
                 $this->survey_manager->sendFinalStepEmail(new SurveyThankYouEmailSenderService, $current_survey);
+
             $this->survey_manager->completeSurvey($current_step);
             $form->sessionMessage(GetTextTemplateHelpers::_t("survey_ui", "Thank you for your submission !!!"), 'good');
         }

@@ -244,6 +244,24 @@ final class SurveyManager implements ISurveyManager {
     {
         return $this->tx_manager->transaction(function() use($sender_service, $survey){
             $survey->sentEmail($sender_service);
+
+            // send email to admin
+            $survey_url = Director::absoluteBaseUrl().'sangria/SurveyDetails/'.$survey->ID;
+            $body = 'Respondent: '.$survey->CreatedBy()->getName().'<br/>';
+            $body .= 'Template: '.$survey->Template()->Title.'<br/>';
+            $body .= 'State: '.$survey->State.'<br/>';
+            $body .= 'Lang: '.$survey->Lang.'<br/>';
+            $body .= '<a href="'.$survey_url.'">Review</a>';
+            $email = EmailFactory::getInstance()->buildEmail
+            (
+                "noreply@openstack.org",
+                SURVEY_COMPLETE_EMAIL_TO,
+                "New Survey Submitted",
+                $body
+            );
+
+            $email->send();
+
         });
     }
 
