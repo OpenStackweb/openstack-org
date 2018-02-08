@@ -160,6 +160,7 @@ final class SummitAdminUI extends DataExtension
             $config->removeComponentsByType(new GridFieldDataColumns());
             $config->removeComponentsByType(new GridFieldDetailForm());
             $config->addComponent(new GridFieldUpdateDefaultCategoryTags);
+            $config->removeComponentsByType('GridFieldAddNewButton');
             $default_tags = new GridField('CategoryDefaultTags', 'Category Default Tags', $this->owner->CategoryDefaultTags(), $config);
             $completer = $config->getComponentByType('GridFieldAddExistingAutocompleter');
             $completer->setResultsFormat('$Tag');

@@ -107,6 +107,7 @@ class PresentationCategory extends DataObject
 
             $config->addComponent($editconf);
             $config->addComponent($summaryfieldsconf, new GridFieldFilterHeader());
+            $config->removeComponentsByType('GridFieldAddNewButton');
 
             $tags = new GridField('AllowedTags', 'Tags', $this->AllowedTags(), $config);
             $fields->addFieldToTab('Root.Main', $tags);
