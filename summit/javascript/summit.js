@@ -41,20 +41,19 @@ $('.photo-credit').tooltip();
 $('a[data-confirm]').on('click', function (e) {
     e.preventDefault();
     var $t = $(this);
-    sweetAlert({
+    swal({
         title: $t.data('confirm'),
         text: $t.data('confirm-text'),
         showCancelButton: true,
         confirmButtonText: $t.data('confirm-ok') || "Yes",
         cancelButtonText: $t.data('confirm-cancel') || "Nope",
-        confirmButtonColor: $t.data('confirm-color') || "#DD6B55", 
-        closeOnConfirm: true,
-        closeOnCancel: true
-    }, function(isConfirmed) {
-        if(isConfirmed) {
+        confirmButtonColor: $t.data('confirm-color') || "#DD6B55"
+    }).then((result) => {
+        if (result) {
             window.location = $t.attr('href');
         }
-    });
+    }).catch(swal.noop);
+
 });
 
 var MAX_WORDS = 450;
