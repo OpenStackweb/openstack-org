@@ -476,4 +476,11 @@ class SummitSecurity extends SummitPage_Controller {
         $page   = PresentationPage::get()->filter('SummitID', $summit->ID)->first();
         return $page->PresentationDeadlineText;
     }
+
+    public function MetaTags()
+    {
+        $summit_page = $this->CurrentSummitPage();
+        $tags = $summit_page->MetaTags();
+        return $tags;
+    }
 }
