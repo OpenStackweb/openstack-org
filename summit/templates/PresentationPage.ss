@@ -159,6 +159,7 @@
     </div>
 </div>
     <% include TwitterUniversalWebsiteTagCode %>
+    <% include GoogleAdWordsSnippet %>
 </body>
 <% require javascript("themes/openstack/javascript/jquery.persistable-form.js") %>
     <% include Page_LinkedinInsightTracker %>

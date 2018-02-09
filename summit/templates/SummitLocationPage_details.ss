@@ -91,6 +91,7 @@
     <script src="/summit/javascript/hotel-landing.js"></script>
 
     <% include TwitterUniversalWebsiteTagCode %>
+    <% include GoogleAdWordsSnippet %>
 </body>
 
 </html>

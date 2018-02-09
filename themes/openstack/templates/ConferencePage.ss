@@ -3,7 +3,7 @@
    "http://www.w3.org/TR/html4/strict.dtd">
 
 <html lang="en">
-      <head>
+    <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,22 +36,27 @@
         <% include Page_GoogleAnalytics %>
         $FBTrackingCode
 
-      </head>
+        <!-- GoogleAdWords Start -->
+        $GATrackingCode
+        <!-- GoogleAdWords End -->
 
-      <body id="$URLSegment">
-          <% include SiteBanner %>
-          <% include Navigation %>
+    </head>
 
-          <!-- Page Content -->
-          $Message
-          $Layout
+    <body id="$URLSegment">
+        <% include SiteBanner %>
+        <% include Navigation %>
 
+        <!-- Page Content -->
+        $Message
+        $Layout
 
         <% include Footer %>
         $TrackingLinkScript
         <% include Quantcast %>
         <% include TwitterUniversalWebsiteTagCode %>
-      </body>
-      <% include Page_LinkedinInsightTracker %>
+        <% include GoogleAdWordsSnippet %>
+    </body>
+
+    <% include Page_LinkedinInsightTracker %>
 
 </html>

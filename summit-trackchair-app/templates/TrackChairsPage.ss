@@ -22,5 +22,6 @@
         </script>
         $ModuleJS('main')
         <% include TwitterUniversalWebsiteTagCode %>
+        <% include GoogleAdWordsSnippet %>
    </body>
 </html>

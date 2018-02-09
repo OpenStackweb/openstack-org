@@ -84,6 +84,7 @@
       </div>
       <% include Quantcast %>
       <% include TwitterUniversalWebsiteTagCode %>
+      <% include GoogleAdWordsSnippet %>
    </body>
        <% include Page_LinkedinInsightTracker %>
 </html>

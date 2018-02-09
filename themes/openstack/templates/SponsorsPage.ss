@@ -35,6 +35,10 @@
 
     <% include Page_GoogleAnalytics %>
 
+    <!-- GoogleAdWords Start -->
+    $GATrackingCode
+    <!-- GoogleAdWords End -->
+
   </head>
 
   <body id="$URLSegment">
@@ -50,6 +54,7 @@
     $TrackingLinkScript
     <% include Quantcast %>
       <% include TwitterUniversalWebsiteTagCode %>
+      <% include GoogleAdWordsSnippet %>
   </body>
       <% include Page_LinkedinInsightTracker %>
 </html>

@@ -95,7 +95,8 @@ class ConferencePage_Controller extends Page_Controller
         $request = $this->request;
         $order = $request->requestVar("order");
         $tracking_code = '';
-        if(isset($order) && $order=="complete"){
+
+        if(isset($order) && $order == "complete"){
             //add GA tracking script
             $page = ConferencePage::get()->byID($this->ID);
             if($page && !empty($page->GAConversionId)

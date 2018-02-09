@@ -16,11 +16,13 @@
         </script>
 
         <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
-        <noscript>
-            <div style="display:inline;">
-                <img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/$GAConversionId/?value=$GAConversionValue&amp;label=$GAConversionLabel&amp;guid=ON&amp;script=0"/>
-            </div>
-        </noscript>
+
+        <script>
+            gtag('event', 'conversion', {
+                'send_to': 'AW-' + google_conversion_id + '/' + google_conversion_label,
+                'transaction_id': ''
+            });
+        </script>
         <!-- End Google Code for HK_TICKET_ADWORDS Conversion Page -->
     <% end_with %>
 <% end_if %>

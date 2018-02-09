@@ -6,6 +6,9 @@
     <% include Page_GoogleAnalytics %>
     $FBTrackingCode
     $TwitterTrackingCode
+    <!-- GoogleAdWords Start -->
+    $GATrackingCode
+    <!-- GoogleAdWords End -->
     <link rel="stylesheet" type="text/css" href="/themes/openstack/static/css/tooltipster.css" />
 </head>
 
@@ -214,6 +217,7 @@
 </div>
     <% include Quantcast %>
     <% include TwitterUniversalWebsiteTagCode %>
+    <% include GoogleAdWordsSnippet %>
 
     <div id="orderModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -251,5 +255,4 @@
     });
 </script>
     <% include Page_LinkedinInsightTracker %>
-    $GATrackingCode
 </html>

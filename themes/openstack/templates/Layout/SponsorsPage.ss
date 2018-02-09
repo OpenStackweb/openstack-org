@@ -125,5 +125,3 @@
 
     </div>
 </div>
-
-$GATrackingCode
