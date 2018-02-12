@@ -676,6 +676,7 @@ SQL;
             LEFT JOIN Member AS M3 ON M3.ID = P.CreatorID
             LEFT JOIN Affiliation AS A ON A.MemberID=M.ID
             LEFT JOIN Org ON Org.ID = A.OrganizationID AND A.Current = 1
+            LEFT JOIN SummitEventType AS ET ON ET.ID = E.TypeID 
 SQL;
 
         $query_where = <<<SQL
@@ -720,6 +721,7 @@ SQL;
         P.ID AS id,
         E.Title AS title,
         PC.Title AS track,
+        ET.Type AS type,
 SQL;
 
         if (in_array('speaker',$filters['show_col'])) {
@@ -735,6 +737,10 @@ SQL;
 
         if (in_array('owner',$filters['show_col'])) {
             $query .= "M3.Email AS owner_email,";
+        }
+
+        if (in_array('abstract',$filters['show_col'])) {
+            $query .= "E.Abstract AS abstract,";
         }
 
         $query .= "P.Status AS status";

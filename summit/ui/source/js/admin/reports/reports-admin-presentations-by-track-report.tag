@@ -12,6 +12,7 @@
                     <option value="speaker">Speakers</option>
                     <option value="owner">Owner</option>
                     <option value="moderator">Moderator</option>
+                    <option value="abstract">Abstract</option>
                 </select>
             </div>
             <div class="col-md-2">
@@ -60,12 +61,15 @@
                     <th>ID</th>
                     <th class="sortable sorted" data-sort="title" data-dir="ASC">Presentation<i class="fa fa-caret-up"></i></th>
                     <th class="sortable" data-sort="track">Category</th>
+                    <th>Status</th>
+                    <th>Type</th>
                     <th class="sortable" data-sort="last_name" if={ showThis('speaker') }>Speaker</th>
                     <th if={ showThis('speaker') }>Email</th>
                     <th if={ showThis('moderator') }>Moderator</th>
                     <th if={ showThis('owner') }>Owner</th>
                     <th class="sortable" data-sort="company" if={ showThis('speaker') }>Org</th>
-                    <th>Status</th>
+
+                    <th if={ showThis('abstract') }>Abstract</th>
                 </tr>
             </thead>
             <tbody>
@@ -73,12 +77,16 @@
                     <td>{ presentation.id }</td>
                     <td>{ presentation.title }</td>
                     <td>{ presentation.track }</td>
+                    <td>{ presentation.status }</td>
+                    <td>{ presentation.type }</td>
                     <td if={ showThis('speaker') }>{ presentation.first_name } { presentation.last_name }</td>
                     <td if={ showThis('speaker') }>{ presentation.email }</td>
                     <td if={ showThis('moderator') }>{ presentation.moderator_email }</td>
                     <td if={ showThis('owner') }>{ presentation.owner_email }</td>
                     <td if={ showThis('speaker') }>{ presentation.company }</td>
-                    <td>{ presentation.status }</td>
+                    <td if={ showThis('abstract') }>
+                        <raw content={ presentation.abstract }></raw>
+                    </td>
                 </tr>
             </tbody>
         </table>

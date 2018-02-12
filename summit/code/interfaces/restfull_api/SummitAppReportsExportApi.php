@@ -563,6 +563,8 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
                         $show_header = false;
                     }
 
+                    $event['abstract'] = strip_tags($event['abstract']);
+
                     $active_sheet->fromArray($event, NULL, 'A'.$row2);
                 }
 
