@@ -23,7 +23,7 @@ final class VoteFactory implements IVoteFactory {
 	 */
 	public function buildVote(IElection $election, IFoundationMember $voter)
 	{
-		$vote = new Vote;
+		$vote = new ElectionVote;
 		$vote->ElectionID = $election->getIdentifier();
 		$vote->VoterID    = $voter->getIdentifier();
 		return $vote;

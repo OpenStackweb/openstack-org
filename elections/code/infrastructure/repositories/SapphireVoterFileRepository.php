@@ -17,7 +17,7 @@
 final class SapphireVoterFileRepository extends SapphireRepository implements IVoterFileRepository {
 
 	public function __construct(){
-		parent::__construct(new VoterFile());
+		parent::__construct(new ElectionVoterFile());
 	}
 
 	/**
@@ -26,7 +26,7 @@ final class SapphireVoterFileRepository extends SapphireRepository implements IV
 	 */
 	public function getByFileName($filename)
 	{
-		$query = new QueryObject(new VoterFile);
+		$query = new QueryObject(new ElectionVoterFile);
 		$query->addAndCondition(QueryCriteria::equal('FileName',$filename));
 		return $this->getBy($query);
 	}

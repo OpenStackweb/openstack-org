@@ -29,7 +29,7 @@ final class FoundationMember
     private static $has_many = array
     (
         'RevocationNotifications' => 'FoundationMemberRevocationNotification',
-        'Votes'                   => 'Vote',
+        'Votes'                   => 'ElectionVote',
     );
 
     private static $defaults = array
@@ -172,11 +172,10 @@ final class FoundationMember
      */
     public function getCurrentCandidate()
     {
-        $res = null;
-        $election = ElectionSystem::get()->first();
-        if ($election && $election->CurrentElectionID != 0) {
-            $current_election = $election->CurrentElection();
-            if (!is_null($current_election)) {
+        $res              = null;
+        $current_election = Election::getCurrent();
+
+        if ($current_election) {
                 $candidate = Candidate::get()->filter(array(
                     'MemberID' => $this->getIdentifier(),
                     'ElectionID' => $current_election->ID))->first();
@@ -186,7 +185,7 @@ final class FoundationMember
                     UnitOfWork::getInstance()->setToCache($candidate);
                     UnitOfWork::getInstance()->scheduleForUpdate($candidate);
                 }
-            }
+
         }
         return $res;
     }
@@ -199,21 +198,6 @@ final class FoundationMember
         return (int)$this->owner->getField('ID');
     }
 
-    /**
-     * @return bool
-     */
-    public function hasDeploymentSurveys()
-    {
-        return DeploymentSurvey::get()->filter(array('MemberID' => $this->getIdentifier()))->count() > 0;
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasAppDevSurveys()
-    {
-        return AppDevSurvey::get()->filter(array('MemberID' => $this->getIdentifier()))->count() > 0;
-    }
 
     /**
      * @return bool

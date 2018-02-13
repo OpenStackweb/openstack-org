@@ -22,7 +22,7 @@ final class VoterFileFactory implements IVoterFileFactory {
 	 */
 	public function build($filename)
 	{
-		$file = new VoterFile();
+		$file = new ElectionVoterFile();
 		$file->FileName = $filename;
 		return $file;
 	}

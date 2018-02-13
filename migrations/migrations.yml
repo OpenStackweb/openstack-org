@@ -94,4 +94,6 @@ migrations:
   - AddOnDeleteCascadeFKPromoCodesMigration
   - UpdateUploadPresentationSlidesEmailMigration
   - PresentationTagBugMigration
+  - NewElectionSchemaMigrationTask
+  - RepublishElectionPagesMigration
 

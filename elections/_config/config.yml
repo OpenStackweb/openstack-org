@@ -5,3 +5,9 @@ After: 'framework/*','cms/*', 'openstack/*'
 Member:
   extensions:
     - FoundationMember
+EditProfilePage_Controller:
+  extensions:
+    - EditProfilePageElectionsExtension
+MemberListPage_Controller:
+  extensions:
+    - MemberListPageElectionsExtension

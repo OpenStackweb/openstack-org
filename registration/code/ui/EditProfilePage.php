@@ -43,7 +43,6 @@ class EditProfilePage_Controller extends Page_Controller
     (
         'EditProfileForm',
         'LoginForm',
-        'election',
         'agreements',
         'resign',
         'CandidateApplication',
@@ -303,161 +302,10 @@ class EditProfilePage_Controller extends Page_Controller
         }
     }
 
-    // look up the current election if there is one
-
     function CompanyAdmin()
     {
         return Member::currentUser()->getManagedCompanies();
     }
-
-
-    // Uses the twitter name of the person to fetch and set a profile image
-
-    function CurrentElection()
-    {
-
-        // Query the election system to look for a current election
-        $Elections = ElectionSystem::get()->first();
-        if ($Elections) {
-            // See if the current election is open.
-            // An election is open if either nominations are open or the election voting is open.
-            if (!$Elections->CurrentElectionID == 0) {
-                return $Elections->CurrentElection();
-            }
-        }
-    }
-
-    // Candidate Application Form
-
-    function CandidateApplicationForm()
-    {
-
-        $CandidateApplicationForm = new CandidateApplicationForm($this, 'CandidateApplicationForm');
-        $CandidateApplicationForm->disableSecurityToken();
-
-        // Load the election system
-        $Elections = ElectionSystem::get()->first();
-        $CurrentElection = $Elections->CurrentElection();
-        $currentMember = Member::currentUser();
-
-
-        // Check for login
-        if ($currentMember) {
-
-            $Candidate = Candidate::get()->filter(array('MemberID' => $currentMember->ID, 'ElectionID' => $CurrentElection->ID))->first();
-
-            // Fill in the form
-            if ($Candidate) {
-                $CandidateApplicationForm->loadDataFrom($Candidate, False);
-                $CandidateApplicationForm->loadDataFrom($currentMember, False);
-                return $CandidateApplicationForm;
-            } elseif ($this->request->isPost()) {
-                // SS is returning to the form controller to post data
-                return $CandidateApplicationForm;
-            } else {
-                // No candidate for this member; create a new candidate entry
-                $Candidate = new Candidate();
-                $Candidate->MemberID = $currentMember->ID;
-                $Candidate->ElectionID = $CurrentElection->ID;
-                $Candidate->write();
-                $CandidateApplicationForm->loadDataFrom($currentMember, False);
-                return $CandidateApplicationForm;
-            }
-        }
-
-
-    }
-
-    // Save an edited candidate
-    function saveCandidateApplicationForm($data, $form)
-    {
-
-
-        $currentMember = Member::currentUser();
-
-        // A user is logged in
-        if ($currentMember) {
-
-            // Load the election system
-            $Elections = ElectionSystem::get()->first();
-            $CurrentElection = $Elections->CurrentElection();
-
-            if ($Candidate = Candidate::get()->filter(array('MemberID' => $currentMember->ID, 'ElectionID' => $CurrentElection->ID))->first()) {
-                // Candidate profile exists
-
-                // Clean up entries ////////////////
-
-                // Set up HTML Purifier
-
-                $config = HTMLPurifier_Config::createDefault();
-
-                // Remove any CSS or inline styles
-                $config->set('CSS.AllowedProperties', array());
-                $purifier = new HTMLPurifier($config);
-
-                // Clean Bio field
-                if ($data["Bio"]) {
-                    $currentMember->Bio = $purifier->purify($data["Bio"]);
-                    $currentMember->write();
-                }
-
-                // Clean RelationshipToOpenStack field
-                if ($toClean = $data["RelationshipToOpenStack"]) {
-                    $Candidate->RelationshipToOpenStack = $purifier->purify($toClean);
-                }
-
-                // Clean Experience field
-                if ($toClean = $data["Experience"]) {
-                    $Candidate->Experience = $purifier->purify($toClean);
-                }
-
-                // Clean BoardsRole field
-                if ($toClean = $data["BoardsRole"]) {
-                    $Candidate->BoardsRole = $purifier->purify($toClean);
-                }
-
-                // Clean HasAcceptedNomination field
-                if ($toClean = $data["TopPriority"]) {
-                    $Candidate->TopPriority = $purifier->purify($toClean);
-                }
-
-                $Candidate->write();
-                $questions = array('Bio' => 'Bio', 'RelationshipToOpenStack' => 'RelationshipToOpenStack', 'Experience' => 'Experience', 'BoardsRole' => 'BoardsRole', 'TopPriority' => 'TopPriority');
-                // Must answer all questions, but can save work as they go, so we're going to check here rather than set up validators
-
-                if (
-                    (strlen($data['Bio'])) < 4 ||
-                    (strlen($data['RelationshipToOpenStack'])) < 4 ||
-                    (strlen($data['Experience'])) < 4 ||
-                    (strlen($data['BoardsRole'])) < 4 ||
-                    (strlen($data['TopPriority'])) < 4
-
-                ) {
-
-                    $Candidate->HasAcceptedNomination = FALSE;
-                    $form->saveInto($Candidate);
-                    $Candidate->write();
-
-                    $form->clearMessage();
-                    $form->sessionMessage("Your edits have been saved but you will need to provide full answers to all these questions to be eligible as a candidate.", "bad");
-                    $this->redirectBack();
-                    return;
-                }
-
-                $Candidate->HasAcceptedNomination = TRUE;
-                $Candidate->write();
-                $form->clearMessage();
-                $this->redirect($this->Link() . 'election/');
-            } else {
-                $form->clearMessage();
-                $form->sessionMessage('There was an error saving your edits.', "bad");
-                $this->redirectBack();
-            }
-
-        }
-
-    }
-
 
     // Resigning membership in the foundation removes the member from the database entirely.
     function resign()

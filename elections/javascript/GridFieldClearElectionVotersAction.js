@@ -1,6 +1,5 @@
-<?php
 /**
- * Copyright 2014 Openstack Foundation
+ * Copyright 2018 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -11,23 +10,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-/**
- * Class ElectionFactory
- */
-final class ElectionFactory implements IElectionFactory {
+(function($) {
 
-	/**
-	 * @param int    $id
-	 * @param DateTime $open_date
-	 * @param DateTime $end_date
-	 * @return IElection
-	 */
-	public function build($id, DateTime $open_date, DateTime $end_date)
-	{
-		$election                 = new Election();
-		$election->ID             = $id;
-		$election->ElectionsOpen  = $open_date->format('Y-m-d');
-		$election->ElectionsClose = $end_date->format('Y-m-d');
-		return $election;
-	}
-}
+    $(".clear-election-voters").onclick
+
+    $.entwine('ss', function($) {
+        $('.ss-gridfield button.clear-election-voters.action').entwine({
+            //show upload field when button is clicked
+            onclick: function(e){
+                if(confirm("Are you sure? this action is irreversible")){
+                    this._super(e);
+                    return;
+                }
+                e.preventDefault();
+            }
+        });
+    });
+
+}(jQuery));
