@@ -4,38 +4,57 @@
         <div class="intro-header edge">
         <div class="container">
             <div class="row">
-                <div class="col-sm-4 edge-video">
-                    <a class="edge-video-wrapper" href="" data-toggle="modal" data-target="#VideoModal">
-                        <div class="play-button">
-                            <img src="https://d33wubrfki0l68.cloudfront.net/ae6ec7ae079aebf50ba0432743f680ce40c26624/3c5ba/images/play-button.png">
-                        </div>
-                        <img src="https://d33wubrfki0l68.cloudfront.net/7ddcb6d9c927505040ebbdb989cb26edf6ed188a/9c5e0/images/edge/video-thumb.png" alt="" class="video-image edge-video-thumb">
-                    </a>
-                    <img src="https://d33wubrfki0l68.cloudfront.net/b023c6712e858de69e0e4eb51b987a3639c9d8b6/99a32/images/edge/verizon-logo.png" class="edge-verizon-logo" alt="" class="verizon-logo">
-                </div> 
                 <div class="col-sm-8">
                     <div class="intro-message"> 
-                        <h1>OpenStack at the Edge around the globe</h1>
+                        <h1>Pushing cloud infrastructure to the edge</h1>
                         <p>
-                            “OpenStack in a Box,” as Beth Cohen of Verizon called it, is being used at the edge around the globe to deliver cloud-based services like WAN optimization, security, and routing, with more services in the works.
+                            The Edge Computing Working Group shared cases, challenges and a community call-to-action around the fundamental requirements of a fully functional edge computing cloud infrastructure.
                         </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-4">
+                    <div class="download-container">
+                        <div class="download-text">
+                            Download the whitepaper<br>
+                            <strong><em>Cloud Edge Computing: Beyond the Data Center</em></strong>
+                        </div>
+                        <a href="#" class="download-btn" data-toggle="modal" data-target="#downloadModal">
+                            <i class="fa fa-arrow-circle-down"></i> Read the booklet now
+                        </a>
                     </div>
                 </div>
             </div>
         </div> 
-        <!-- /.container -->
-        <a href="https://unsplash.com/search/photos/cell?photo=b_xciWkK8Pc" class="photo-credit" data-toggle="tooltip" data-placement="left" title="Photo by veeterzy" target="_blank"><i class="fa fa-info-circle"></i></a>
+        <a href="https://unsplash.com/photos/2B6kzKhoPaQ" class="photo-credit" data-toggle="tooltip" data-placement="left" title="Photo by Med Badr Chemmaoui" target="_blank"><i class="fa fa-info-circle"></i></a>
     </div>
     <!-- /.intro-header -->
     <div class="edge-overview">
         <div class="container">
             <div class="row">
                 <div class="col-sm-10 col-sm-push-1">
-                    <p>
-                        Today, almost every industry sector needs near-instant data to be successful. <strong>Edge computing pushes applications, data and computing power services away from centralized points to the logical extremes of a network.</strong> It enables companies to put the right data in the right place at the right time, supporting fast and secure access. The result is an improved client experience and, oftentimes, a valuable strategic advantage. The decision to implement an edge computing architecture is typically driven by the need for location optimization, security, and most of all, speed.
-                    </p>
+                    <h1>Join the edge computing initiative.</h1>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-sm-4 col-sm-offset-1">
+                  <img src="https://www.openstack.org/assets/edge/lilearth.png">
+                </div>
+                <div class="col-sm-4 col-sm-offset-2">
+                  <img src="https://www.openstack.org/assets/edge/daplane.png" class="plane">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 col-sm-offset-1">
+                  <p>Attend the weekly Edge Computing Working Group calls <strong>every Tuesday at 15:00 UTC</strong>.</p>
+                  <a href="#" class="download-btn"><em>Join the Meeting</em></a>
+                </div>
+                <div class="col-sm-4 col-sm-offset-2">
+                  <p>Attend the <strong>Vancouver Summit</strong> to meet and collaborate with the Edge Computing Working Group.</p>
+                  <a href="https://www.openstack.org/summit/vancouver-2018/" class="download-btn"><em>About the Summit</em>
+                </div>
+            </div>
+        </div>
+        <div class="edgebg">
         </div>
     </div>
     <div class="opendev-promo">

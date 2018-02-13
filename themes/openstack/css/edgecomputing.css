@@ -1,6 +1,6 @@
 /* Edge landing */
 .intro-header.edge {
-    background: url(https://www.openstack.org/assets/edge/hero-bg.jpg) no-repeat bottom center;
+    background: url(https://www.openstack.org/assets/edge/edgebg-wp.jpg) no-repeat bottom center;
     background-size: cover;
     padding: 60px 0;
 }
@@ -30,58 +30,26 @@
 
 }
 
-.edge-video {
-    text-align: center;
+.download-container {
+    background-color: rgba(5, 54, 86, 0.7);
+    border-radius: 2px;
+    width: 90%;
+    margin: 80px auto 0;
+    padding-left: 30px;
 }
 
-.edge-video-wrapper .play-button {
-    width: 20%;
-    display: block;
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 20%;
-    margin: auto;
-    opacity: 0.7;
+.download-text {
+    font-size: 16px;
+    font-weight: 300;
 }
 
-.edge-video-wrapper:hover, .edge-video-wrapper:focus {
-    cursor: pointer;
+a.download-btn {
+    background: #EC1944;
+    padding: 12px 20px;
+    width: 90%;
+    font-weight: normal;
+    font-size: 16px;
 }
-
-.edge-video-wrapper:hover .play-button, .edge-video-wrapper:focus .play-button {
-    opacity: 1;
-}
-
-.edge-video-thumb {
-    border: 1px solid white;
-    display: block;
-    max-width: 100%;
-}
-
-.intro-header.edge .edge-verizon-logo {
-    width: 130px;
-    margin: 15px auto 0;
-    display: block;
-}
-
-@media (max-width: 767px) {
-    .intro-header.edge .edge-verizon-logo {
-        margin-bottom: 30px;
-    }
-}
-
-@media (max-width: 480px) {
-    .edge-video-wrapper .play-button img {
-        width: 90px;
-    }
-
-    .edge-verizon-logo {
-        margin-bottom: 30px;
-    }
-}
-
 
 .video-wall-row{
     padding-left: 10%;
@@ -116,18 +84,34 @@
 }
 
 .edge-overview {
-    background: #29abe2;
+    background: #EDF2F7;
     padding: 30px 0;
     color: white;
     text-align: center;
 }
 
-.edge-overview h2 {
-    color: white;
-    text-align: center;
-    font-size: 2em;
-    margin-top: 0;
-    font-weight: 400;
+.edge-overview h1 {
+    color: #2A4E68;
+}
+
+.edge-overview a {
+    background: #29ABE2;
+    font-size: 14px;
+    width: 60%;
+}
+
+.plane {
+    padding-top:50px;
+}
+
+.earth {
+    padding-bottom:15px;
+}
+
+.edgebg {
+    background:#ED285E;
+    height:11px;
+    margin-bottom:5px;
 }
 
 .opendev-promo {
