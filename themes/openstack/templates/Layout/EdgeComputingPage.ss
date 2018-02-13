@@ -8,7 +8,7 @@
                     <div class="intro-message"> 
                         <h1>Open infrastructure operators deliver requirements, use cases for edge computing</h1>
                         <p>
-                            Whitepaper among the latest deliverables as operators collaborate to define use cases, technology requirements for edge computing.
+                            Whitepaper among the latest deliverables where operators identified fundamental requirements and issued a challenge to the open infra community to create or adapt the tools that are needed to enable broad adoption.
                         </p>
                     </div>
                 </div>
