@@ -6,9 +6,9 @@
             <div class="row">
                 <div class="col-sm-8">
                     <div class="intro-message"> 
-                        <h1>Pushing cloud infrastructure to the edge</h1>
+                        <h1>Open infrastructure operators deliver requirements, use cases for edge computing</h1>
                         <p>
-                            The Edge Computing Working Group shared cases, challenges and a community call-to-action around the fundamental requirements of a fully functional edge computing cloud infrastructure.
+                            Whitepaper among the latest deliverables as operators collaborate to define use cases, technology requirements for edge computing.
                         </p>
                     </div>
                 </div>
@@ -18,8 +18,8 @@
                             Download the whitepaper<br>
                             <strong><em>Cloud Edge Computing: Beyond the Data Center</em></strong>
                         </div>
-                        <a href="#" class="edge-download-btn" data-toggle="modal" data-target="#downloadModal">
-                            <i class="fa fa-arrow-circle-down"></i> Read the booklet now
+                        <a href="https://www.openstack.org/assets/edge/OpenStack-EdgeWhitepaper-v3-online.pdf" class="edge-download-btn" target="_blank">
+                            <i class="fa fa-arrow-circle-down"></i> Read the whitepaper
                         </a>
                     </div>
                 </div>
@@ -38,12 +38,12 @@
             <div class="row">
                 <div class="col-sm-4 col-sm-offset-1">
                   <div class="earth"><img src="https://www.openstack.org/assets/edge/lilearth.png"></div>
-                  <p>Attend the weekly Edge Computing Working Group calls <strong>every Tuesday at 15:00 UTC</strong>.</p>
-                  <a href="#" class="download-btn"><em>Join the Meeting</em></a>
+                  <p>Attend the weekly Edge Computing Group calls <strong>every Tuesday at 15:00 UTC</strong>.</p>
+                  <a href="https://zoom.us/j/777719876" target="_blank" class="download-btn"><em>Join the Meeting</em></a>
                 </div>
                 <div class="col-sm-4 col-sm-offset-2">
                   <div class="plane"><img src="https://www.openstack.org/assets/edge/daplane.png"></div>
-                  <p>Attend the <strong>Vancouver Summit</strong> to meet and collaborate with the Edge Computing Working Group.</p>
+                  <p>Attend the <strong>Vancouver Summit</strong> to meet and collaborate with the Edge Computing Group.</p>
                   <a href="https://www.openstack.org/summit/vancouver-2018/" class="download-btn"><em>About the Summit</em></a>
                 </div>
             </div>
