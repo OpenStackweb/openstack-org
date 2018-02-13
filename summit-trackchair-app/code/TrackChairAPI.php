@@ -1030,6 +1030,7 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
         	])->count();
         $data['lightning_wannabe'] = $p->isLightningWannabe();
         $data['tags'] = $p->getTags()->toNestedArray();
+        $data['type'] = $p->Type()->Type;
 
 
         return (new SS_HTTPResponse(
