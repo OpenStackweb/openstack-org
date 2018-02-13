@@ -12,7 +12,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-sm-4">
+                <div class="col-lg-4 col-sm-6">
                     <div class="edge-download-container">
                         <div class="edge-download-text">
                             Download the whitepaper<br>
