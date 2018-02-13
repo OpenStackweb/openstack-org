@@ -13,12 +13,12 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-sm-4">
-                    <div class="download-container">
-                        <div class="download-text">
+                    <div class="edge-download-container">
+                        <div class="edge-download-text">
                             Download the whitepaper<br>
                             <strong><em>Cloud Edge Computing: Beyond the Data Center</em></strong>
                         </div>
-                        <a href="#" class="download-btn" data-toggle="modal" data-target="#downloadModal">
+                        <a href="#" class="edge-download-btn" data-toggle="modal" data-target="#downloadModal">
                             <i class="fa fa-arrow-circle-down"></i> Read the booklet now
                         </a>
                     </div>
