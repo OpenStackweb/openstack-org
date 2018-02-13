@@ -46,5 +46,14 @@ Injector:
   RevocationExecutorTask:
     constructor:
       0: '%$RevocationNotificationManager'
+  MemberListPageElectionsExtension:
+    constructor:
+      0: '%$FoundationMemberRepository'
+      1: '%$ElectionManager'
+  EditProfilePageElectionsExtension:
+    constructor:
+      0: '%$FoundationMemberRepository'
+      1: '%$ElectionManager'
+
 
 

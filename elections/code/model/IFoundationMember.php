@@ -55,16 +55,6 @@ interface IFoundationMember extends IEntity
     /**
      * @return bool
      */
-    public function hasDeploymentSurveys();
-
-    /**
-     * @return bool
-     */
-    public function hasAppDevSurveys();
-
-    /**
-     * @return bool
-     */
     public function isCompanyAdmin();
 
     /**

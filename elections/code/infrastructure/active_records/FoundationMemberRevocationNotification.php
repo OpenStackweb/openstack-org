@@ -61,7 +61,6 @@ final class FoundationMemberRevocationNotification
 		$this->setField('SentDate',gmdate('Y-m-d H:i:s'));
 	}
 
-
 	/**
 	 * @return int
 	 */

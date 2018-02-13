@@ -19,7 +19,7 @@ implements IVoteRepository
 {
 
 	public function __construct(){
-		parent::__construct(new Vote);
+		parent::__construct(new ElectionVote);
 	}
 
 	/**

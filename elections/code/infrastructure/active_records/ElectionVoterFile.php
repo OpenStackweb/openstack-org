@@ -12,22 +12,32 @@
  * limitations under the License.
  **/
 /**
- * Class ElectionFactory
+ * Class ElectionVoterFile
  */
-final class ElectionFactory implements IElectionFactory {
+final class ElectionVoterFile extends DataObject implements IVoterFile {
+
+
+	static $db = [
+		'FileName'  => 'Varchar(255)',
+	];
+
+	static $indexes = [
+		'FileName' => ['type'=>'unique', 'value'=>'FileName'],
+	];
 
 	/**
-	 * @param int    $id
-	 * @param DateTime $open_date
-	 * @param DateTime $end_date
-	 * @return IElection
+	 * @return int
 	 */
-	public function build($id, DateTime $open_date, DateTime $end_date)
+	public function getIdentifier()
 	{
-		$election                 = new Election();
-		$election->ID             = $id;
-		$election->ElectionsOpen  = $open_date->format('Y-m-d');
-		$election->ElectionsClose = $end_date->format('Y-m-d');
-		return $election;
+		return (int)$this->getField('ID');
+	}
+
+	/**
+	 * @return string
+	 */
+	public function name()
+	{
+		return (string)$this->getField('FileName');
 	}
 }

@@ -15,12 +15,10 @@
  * Interface IElection
  */
 interface IElection extends IEntity {
-	/**
-	 * @return DateTime
-	 */
-	public function startDate();
-	/**
-	 * @return DateTime
-	 */
-	public function endDate();
+
+    const StatusClosed           = 'Closed';
+    const StatusNominationsOpen  = 'Nominations Open';
+    const StatusElectionUpcoming = 'Election UpComing';
+    const StatusElectionOpen     = 'Election Open';
+
 } 
