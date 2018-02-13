@@ -37,25 +37,13 @@
             </div>
             <div class="row">
                 <div class="col-sm-4 col-sm-offset-1">
-                  <img src="https://www.openstack.org/assets/edge/lilearth.png" class="earth">
-                </div>
-                <div class="col-sm-4 col-sm-offset-2">
-                  <img src="https://www.openstack.org/assets/edge/daplane.png" class="plane">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4 col-sm-offset-1">
+                  <div class="earth"><img src="https://www.openstack.org/assets/edge/lilearth.png"></div>
                   <p>Attend the weekly Edge Computing Working Group calls <strong>every Tuesday at 15:00 UTC</strong>.</p>
-                </div>
-                <div class="col-sm-4 col-sm-offset-2">
-                  <p>Attend the <strong>Vancouver Summit</strong> to meet and collaborate with the Edge Computing Working Group.</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4 col-sm-offset-1">
                   <a href="#" class="download-btn"><em>Join the Meeting</em></a>
                 </div>
                 <div class="col-sm-4 col-sm-offset-2">
+                  <div class="plane"><img src="https://www.openstack.org/assets/edge/daplane.png"></div>
+                  <p>Attend the <strong>Vancouver Summit</strong> to meet and collaborate with the Edge Computing Working Group.</p>
                   <a href="https://www.openstack.org/summit/vancouver-2018/" class="download-btn"><em>About the Summit</em></a>
                 </div>
             </div>

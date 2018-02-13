@@ -108,6 +108,11 @@ a.edge-download-btn {
 }
 
 .plane {
+    height: 167px;
+    padding-bottom: 15px;
+}
+
+.plane img {
     padding-top:50px;
 }
 
