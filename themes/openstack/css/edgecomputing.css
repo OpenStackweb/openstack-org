@@ -31,24 +31,24 @@
 }
 
 .download-container {
-    background-color: rgba(5, 54, 86, 0.7);
-    border-radius: 2px;
-    width: 90%;
-    margin: 80px auto 0;
-    padding-left: 30px;
+    background-color: none !important;
+    border-radius: 0px !important;
+    width: 90% !important;
+    margin: 80px auto 0 !important;
+    padding-left: 30px !important;
 }
 
 .download-text {
-    font-size: 16px;
-    font-weight: 300;
+    font-size: 16px !important;
+    font-weight: 300 !important;
 }
 
 a.download-btn {
-    background: #EC1944;
-    padding: 12px 20px;
-    width: 90%;
-    font-weight: normal;
-    font-size: 16px;
+    background: #EC1944 !important;
+    padding: 12px 20px !important;
+    width: 90% !important;
+    font-weight: normal !important;
+    font-size: 16px !important;
 }
 
 .video-wall-row{
@@ -86,7 +86,7 @@ a.download-btn {
 .edge-overview {
     background: #EDF2F7;
     padding: 30px 0;
-    color: white;
+    color: #000000;
     text-align: center;
 }
 
@@ -95,9 +95,9 @@ a.download-btn {
 }
 
 .edge-overview a {
-    background: #29ABE2;
-    font-size: 14px;
-    width: 60%;
+    background: #29ABE2 !important;
+    font-size: 14px !important;
+    width: 60% !important;
 }
 
 .plane {
