@@ -229,11 +229,22 @@ a.past-summit::after {
   position: absolute;
   z-index: -1; }
 
+a.past-summit2::after {
+  background: url('/summit/images/sydney/sydney-square.jpg') no-repeat center center;
+  content: "";
+  opacity: 0.3;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1; }
+
 a.current-summit {
   padding-top: 10px; }
 
 a.current-summit::after {
-  background: url('/summit/images/sydney/sydney-wide.jpg') no-repeat center center;
+  background: url('/summit/images/vancouver/vancouver-wide.jpg') no-repeat center center;
   content: "";
   opacity: 0.8;
   top: 0;

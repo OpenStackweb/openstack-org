@@ -8,7 +8,7 @@
                     <div class="intro-message"> 
                         <h1>Open infrastructure operators deliver requirements, use cases for edge computing</h1>
                         <p>
-                            Whitepaper among the latest deliverables where operators identified fundamental requirements and issued a challenge to the open infra community to create or adapt the tools that are needed to enable broad adoption.
+                            Whitepaper, among the latest deliverables where operators identify fundamental requirements, issues a challenge to the open infra community to create or adapt the tools that are needed to enable broad adoption.
                         </p>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                 <div class="col-sm-4 col-sm-offset-1">
                   <div class="earth"><img src="https://www.openstack.org/assets/edge/lilearth.png"></div>
                   <p>Attend the weekly Edge Computing Group calls <strong>every Tuesday at 15:00 UTC</strong>.</p>
-                  <a href="https://zoom.us/j/777719876" target="_blank" class="download-btn"><em>Join the Meeting</em></a>
+                  <a href="https://etherpad.openstack.org/p/2017_edge_computing_working_sessions" target="_blank" class="download-btn"><em>Join the Meeting</em></a>
                 </div>
                 <div class="col-sm-4 col-sm-offset-2">
                   <div class="plane"><img src="https://www.openstack.org/assets/edge/daplane.png"></div>
@@ -163,6 +163,7 @@
                     <img src="https://d33wubrfki0l68.cloudfront.net/0c68ec72140768d188c9928db17864a7d320cf7d/bf866/images/edge/edge-icons.svg" alt="" class="edge-icons">
                 </div>
                 <div class="col-sm-8">
+                    
                     <h2>Why is OpenStack ideal for edge computing?</h2>
                     <p>
                         OpenStack provides fundamental infrastructure building blocks that can be deployed anywhere, including the edge of the network. The flexible and modular nature of OpenStack means you can efficiently run the minimal services required at the edge, yet provide robust support for bare metal, container technologies and virtual machines. 
@@ -170,7 +171,10 @@
                     <p>
                         OpenStack is already the most highly distributed infrastructure software, running in thousands of datacenters around the world, and many users in the telecom and retail industries are working now to advance the edge computing use case with OpenStack. 
                     </p>
-                    <p><a href="http://lists.openstack.org/cgi-bin/mailman/listinfo/edge-computing" target="_blank">Sign up here to learn more about Edge Computing</a>.</p>
+                    <p>
+                        Subscribe to our maililng list to learn more about Edge Computing.
+                    </p>
+                    <a href="#" data-toggle="modal" data-target="#downloadModal" class="edgeml-download-btn">Join the mailing list  <i class="fa fa-chevron-circle-right"></i></a>
 
 
                 </div>

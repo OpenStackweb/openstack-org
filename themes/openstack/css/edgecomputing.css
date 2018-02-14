@@ -40,7 +40,7 @@
     font-weight: 300;
 }
 
-a.edge-download-btn {
+a.edge-download-btn, a.edgeml-download-btn {
     display: block;
     border-radius: 2px;
     margin: 25px auto 0;
@@ -50,6 +50,10 @@ a.edge-download-btn {
     width: 90%;
     font-weight: normal;
     font-size: 16px;
+}
+
+a.edgeml-download-btn {
+    width: 27%;
 }
 
 .video-wall-row{

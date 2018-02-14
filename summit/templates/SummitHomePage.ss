@@ -47,7 +47,7 @@
             </div>
             <% end_with %>
             <div class="col-sm-3 small-single-summit">
-                <a href="/videos/summits/sydney-2017" class="single-summit past-summit">
+                <a href="/videos/summits/sydney-2017" class="single-summit past-summit2">
                     <h2>Sydney</h2>
                     <h4>Watch The Sessions!</h4>
                 </a>
