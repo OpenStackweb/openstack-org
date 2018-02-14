@@ -54,6 +54,7 @@ a.edge-download-btn, a.edgeml-download-btn {
 
 a.edgeml-download-btn {
     width: 27%;
+    float: left;
 }
 
 .video-wall-row{
