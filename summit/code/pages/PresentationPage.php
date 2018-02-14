@@ -209,6 +209,8 @@ class PresentationPage_Controller extends SummitPage_Controller
         parent::init();
 
         Requirements::javascript('node_modules/clipboard/dist/clipboard.min.js');
+        Requirements::javascript('summit/javascript/presentation-page.js');
+        Requirements::javascript('themes/openstack/javascript/jquery.persistable-form.js');
 
         if (!Summit::get_active()->isInDB()) {
             return $this->httpError(404, 'There is no active summit');

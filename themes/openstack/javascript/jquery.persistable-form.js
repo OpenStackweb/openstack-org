@@ -13,8 +13,10 @@
 
 (function( $ ){
 
-    var form     = null;
-    var settings = {};
+    var form        = null;
+    var settings    = {};
+    var storageKey  = 'new';
+    var localObj    = {};
 
     // localStorage feature detect
     function supportsLocalStorage() {
@@ -23,6 +25,30 @@
 
     function isInArray(value, array) {
         return array.indexOf(value) > -1;
+    }
+
+    function initLocalObj() {
+        var entityIdVal = $('#'+settings.entityId, form).val();
+        storageKey = entityIdVal ? entityIdVal : 'new';
+
+        var retrievedObject = localStorage.getItem(storageKey);
+        localObj = (retrievedObject) ? JSON.parse(retrievedObject) : {};
+    }
+
+    function storeLocalObj() {
+        localStorage.setItem(storageKey, JSON.stringify(localObj));
+    }
+
+    function getLocalItem(id) {
+        if(!isInArray(id, settings.ignoreFields) && localObj) {
+            return (localObj.hasOwnProperty(id) ? localObj[id] : null);
+        } else {
+            return null;
+        }
+    }
+
+    function setLocalItem(id, value) {
+        localObj[id] = value;
     }
 
     function _innerReload(){
@@ -34,8 +60,8 @@
         selects.each(function () {
             var select = $(this);
             var id     = select.prop("id");
-            if(isInArray(id, settings.ignoreFields)) return;
-            var val = localStorage.getItem(id);
+            var val = getLocalItem(id);
+
             if(val != null && val != '')
                 select.val(val).change();
         });
@@ -43,14 +69,14 @@
         inputs.each(function () {
             var input = $(this);
             var id    = input.prop("id");
-            if(isInArray(id, settings.ignoreFields)) return;
-            var val = localStorage.getItem(id);
+            var val = getLocalItem(id);
+
             if(val == null) return;
             if(input.is(':radio')){
-                input.prop('checked', (val === 'true')).change();
+                input.prop('checked', (val === true)).change();
             }
             else if(input.is(':checkbox')){
-                input.prop('checked', (val === 'true')).change();
+                input.prop('checked', (val === true)).change();
             }
             else{
                 input.val(val);
@@ -60,8 +86,8 @@
         textareas.each(function () {
             var textarea = $(this);
             var id       = textarea.prop("id");
-            if(isInArray(id, settings.ignoreFields)) return;
-            val = localStorage.getItem(id);
+            val = getLocalItem(id);
+
             if(val == null || val == '') return;
             textarea.val(val);
         });
@@ -73,6 +99,7 @@
 
             // Establish our default settings
             settings = $.extend({
+                entityId: '',
                 ignoreFields : []
             }, options);
 
@@ -80,6 +107,13 @@
                 console.log('HTML5 local storage not supported!');
                 return;
             }
+
+            if(!settings.entityId){
+                console.log('Need to set the entity id.');
+                return;
+            }
+
+            initLocalObj();
 
             window.setInterval(function(){
                 var selects   = $('select', form);
@@ -90,8 +124,8 @@
                     selects.each(function () {
                         var select = $(this);
                         var id     = select.prop("id");
-                        if(isInArray(id, settings.ignoreFields)) return;
-                        localStorage.setItem(id, select.val());
+
+                        setLocalItem(id, select.val());
                     });
 
                     inputs.each(function () {
@@ -110,7 +144,7 @@
                         }
 
                         if(val != null)
-                            localStorage.setItem(id, val);
+                            setLocalItem(id, val);
                     });
 
                     textareas.each(function () {
@@ -124,8 +158,10 @@
                         else
                             val = textarea.val();
 
-                        localStorage.setItem(id, val);
+                        setLocalItem(id, val);
                     });
+
+                    storeLocalObj();
                 }
                 catch (e) {
 
@@ -152,21 +188,21 @@
 
                 var id    = controls2Reload[i];
                 var input =  $('#'+id, form);
-                var val   = localStorage.getItem(id);
+                var val   = getLocalItem(id);
 
                 if(val == null) return;
                 if(input.is(':radio')){
-                   input.prop('checked', (val === 'true'));
+                   input.prop('checked', (val === true));
                 }
                 else if(input.is(':checkbox')){
-                   input.prop('checked', (val === 'true'));
+                   input.prop('checked', (val === true));
                 }
                 else{
                    input.val(val);
                 }
 
                 // trigger change only when val is true
-                if (val === 'true') {
+                if (val === true) {
                     input.change();
                 }
 
@@ -180,6 +216,15 @@
             }
             console.log('clearing local storage ...');
             localStorage.clear();
+        },
+        clearOne: function(id){
+
+            if(!supportsLocalStorage()){
+                console.log('HTML5 local storage not supported!');
+                return;
+            }
+            console.log('clearing local storage for '+id);
+            localStorage.removeItem(id);
         }
     };
 
