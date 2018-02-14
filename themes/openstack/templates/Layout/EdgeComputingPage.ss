@@ -202,7 +202,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
-                    <h2>Some great edge resources to check out…</h2>
+                    <h2>Check out these great edge resources</h2>
                     <div class="resource-title-wrapper">
                         <span class="line"></span>
                         <h4 class="edge-resource-title">Videos</h4>
