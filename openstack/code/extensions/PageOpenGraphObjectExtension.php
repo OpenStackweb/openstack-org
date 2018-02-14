@@ -41,10 +41,10 @@ class PageOpenGraphObjectExtension extends OpenGraphObjectExtension
         $field_value = '';
         $parent = $this->owner->Parent();
 
-        if ($this->owner->hasMethod($field_name)) {
+        if ($this->owner->hasMethod($field_name) || $this->owner->getField($field_name)) {
             if ($field_name == 'MetaImage' && $this->owner->MetaImage()->Exists()) {
                 return $this->owner->MetaImage();
-            } else if ($parent->getField($field_name)) {
+            } else if ($this->owner->getField($field_name) != '') {
                 return $this->owner->getField($field_name);
             }
         }
