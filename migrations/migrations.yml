@@ -96,4 +96,5 @@ migrations:
   - PresentationTagBugMigration
   - NewElectionSchemaMigrationTask
   - RepublishElectionPagesMigration
+  - AddOnDeleteCascadeForEventsAndPresentationMaterials
 
