@@ -360,7 +360,7 @@
                         <div class="play-button">
                             <img src="https://d33wubrfki0l68.cloudfront.net/90ed7324cc5f065ddfbd41aeade1f7e4b3cab2ac/4d6ef/images/read.png">
                         </div>
-                        <img class="video-image" src="https://storage.googleapis.com/cdn.thenewstack.io/media/2018/02/e26e3e72-beth-cohen_openstack-boston-keynote-1024x735.jpeg" alt="image">
+                        <img class="video-image" src="https://www.openstack.org/assets/edge/openinfraedge.jpg" alt="image">
                     </div>
                     </a>
                     <p class="video-title">
@@ -373,7 +373,7 @@
                             <div class="play-button">
                                 <img src="https://d33wubrfki0l68.cloudfront.net/90ed7324cc5f065ddfbd41aeade1f7e4b3cab2ac/4d6ef/images/read.png">
                             </div>
-                            <img class="video-image" src="https://photos-3.dropbox.com/t/2/AAAwH1oCAfHwdfD0zpjPmZ945WcbqyfdZyTsOnKhHasUEA/12/280546275/jpeg/32x32/3/1518670800/0/2/edge-hero-bkgd.jpg/EPzzgI0CGKt_IAIoAg/5wpCL6tsA_NfFpXDf9uX1Pml1f6UPo7--r9pL9wb-G4?dl=0&size=1600x1200&size_mode=3" alt="image">
+                            <img class="video-image" src="https://www.openstack.org/assets/edge/opensourcecollaboration.jpg" alt="image">
                         </div>
                     </a>
                     <p class="video-title">
