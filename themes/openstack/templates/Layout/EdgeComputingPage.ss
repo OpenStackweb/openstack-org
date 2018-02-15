@@ -225,7 +225,7 @@
                     </p>
                 </div>
                 <div class="col-md-3 col-sm-6">
-                    <a href="http://superuser.openstack.org/articles/edge-computing-verizon-openstack/" target="_blank">
+                    <a href="https://www.openstack.org/videos/boston-2017/taking-openstack-out-to-the-network-edges" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
                             <img src="https://d33wubrfki0l68.cloudfront.net/ae6ec7ae079aebf50ba0432743f680ce40c26624/3c5ba/images/play-button.png">
@@ -234,7 +234,7 @@
                     </div>
                     </a>
                     <p class="video-title">
-                        Pushing the edges with OpenStack
+                        Taking OpenStack Out to the Network Edges
                     </p>
                 </div>
                 <div class="col-md-3 col-sm-6">
@@ -328,43 +328,56 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-3 col-sm-6 col-md-push-1 first-col">
+                <div class="col-md-3 col-sm-6">
                     <a href="http://www.futureofbusinessandtech.com/business-solutions/why-edge-computing-is-the-clouds-next-frontier" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
                             <img src="https://d33wubrfki0l68.cloudfront.net/90ed7324cc5f065ddfbd41aeade1f7e4b3cab2ac/4d6ef/images/read.png">
                         </div>
-                        <img class="video-image" src="https://d33wubrfki0l68.cloudfront.net/f8e4ecf1b4a0efe56e6adaa961985e94d7b8efde/47f6e/images/edge/articles/article1.jpg" alt="Edge Computing: Cloud’s Next Frontier">
+                        <img class="video-image" src="https://d33wubrfki0l68.cloudfront.net/f8e4ecf1b4a0efe56e6adaa961985e94d7b8efde/47f6e/images/edge/articles/article1.jpg" alt="image">
                     </div>
                     </a>
                     <p class="video-title">
                         Edge Computing: Cloud’s Next Frontier
                     </p>
                 </div>
-                <div class="col-md-3 col-sm-6 col-md-push-1">
-                    <a href="http://superuser.openstack.org/articles/edge-computing-verizon-openstack/" target="_blank">
-                    <div class="video-wrapper small">
-                        <div class="play-button">
-                            <img src="https://d33wubrfki0l68.cloudfront.net/90ed7324cc5f065ddfbd41aeade1f7e4b3cab2ac/4d6ef/images/read.png">
-                        </div>
-                        <img class="video-image" src="https://d33wubrfki0l68.cloudfront.net/19c20d0d631afa6530bca41b8f38c58571c8d298/9904d/images/edge/articles/article2.jpg" alt="Verizon case study">
-                    </div>
-                    </a>
-                    <p class="video-title">
-                        Verizon case study
-                    </p>
-                </div>
-                <div class="col-md-3 col-sm-6 col-md-push-1">
+                <div class="col-md-3 col-sm-6">
                     <a href="https://opensource.com/article/17/5/openstack-summit-news" target="_blank">
-                    <div class="video-wrapper small">
-                        <div class="play-button">
-                            <img src="https://d33wubrfki0l68.cloudfront.net/90ed7324cc5f065ddfbd41aeade1f7e4b3cab2ac/4d6ef/images/read.png">
+                        <div class="video-wrapper small">
+                            <div class="play-button">
+                                <img src="https://d33wubrfki0l68.cloudfront.net/90ed7324cc5f065ddfbd41aeade1f7e4b3cab2ac/4d6ef/images/read.png">
+                            </div>
+                            <img class="video-image" src="https://d33wubrfki0l68.cloudfront.net/b19180f1123bf709a5333b58ffd5c859f5ef2adc/c7805/images/edge/articles/article3.jpg" alt="image">
                         </div>
-                        <img class="video-image" src="https://d33wubrfki0l68.cloudfront.net/b19180f1123bf709a5333b58ffd5c859f5ef2adc/c7805/images/edge/articles/article3.jpg" alt="Why OpenStack is living on the edge">
-                    </div>
                     </a>
                     <p class="video-title">
                         Why OpenStack is living on the edge
+                    </p>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <a href="https://thenewstack.io/open-infrastructure-operators-rally-around-edge-computing/" target="_blank">
+                    <div class="video-wrapper small">
+                        <div class="play-button">
+                            <img src="https://d33wubrfki0l68.cloudfront.net/90ed7324cc5f065ddfbd41aeade1f7e4b3cab2ac/4d6ef/images/read.png">
+                        </div>
+                        <img class="video-image" src="https://storage.googleapis.com/cdn.thenewstack.io/media/2018/02/e26e3e72-beth-cohen_openstack-boston-keynote-1024x735.jpeg" alt="image">
+                    </div>
+                    </a>
+                    <p class="video-title">
+                        Open Infrastructure Operators Rally Around Edge Computing
+                    </p>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <a href="http://www.computerweekly.com/news/252435050/OpenStack-Overcoming-edge-computing-adoption-barriers-demands-open-source-community-collaboration" target="_blank">
+                        <div class="video-wrapper small">
+                            <div class="play-button">
+                                <img src="https://d33wubrfki0l68.cloudfront.net/90ed7324cc5f065ddfbd41aeade1f7e4b3cab2ac/4d6ef/images/read.png">
+                            </div>
+                            <img class="video-image" src="https://photos-3.dropbox.com/t/2/AAAwH1oCAfHwdfD0zpjPmZ945WcbqyfdZyTsOnKhHasUEA/12/280546275/jpeg/32x32/3/1518670800/0/2/edge-hero-bkgd.jpg/EPzzgI0CGKt_IAIoAg/5wpCL6tsA_NfFpXDf9uX1Pml1f6UPo7--r9pL9wb-G4?dl=0&size=1600x1200&size_mode=3" alt="image">
+                        </div>
+                    </a>
+                    <p class="video-title">
+                        OpenStack: Open source community collaboration needed to overcome edge computing adoption barriers
                     </p>
                 </div>
             </div>
@@ -419,7 +432,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
-                    <h3>Everything you need to know about OpenStack + Edge Computing</h3>
+                    <h3>Everything you need to know about Open Infrastructure + Edge Computing</h3>
                     <p>Learn how organizations like AT&T, Verizon and Vodafone are using OpenStack to implement an edge computing architecture.
                     </p>
                     <p>&nbsp;</p>

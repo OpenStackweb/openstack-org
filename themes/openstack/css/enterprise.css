@@ -757,7 +757,9 @@ img.event-logo.lrg {
 
 .video-image {
   z-index: 1;
-  width: 100%; }
+  width: 100%;
+  height: 150px;
+}
 
 .play-button {
   width: 20%;
