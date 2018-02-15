@@ -166,4 +166,9 @@ interface IPresentation extends ISummitEvent
      */
     public function isLightningWannabe();
 
+    /**
+     * @return String[]
+     */
+    public function getWordCloud();
+
 }

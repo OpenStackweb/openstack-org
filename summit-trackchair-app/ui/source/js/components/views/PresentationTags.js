@@ -13,7 +13,7 @@ export default class PresentationTags extends React.Component {
 		e.preventDefault();
 
         browserHistory.push(
-            URL.create('/browse', {search: tag})
+            URL.create('/browse', {search: 'Tag:'+tag})
         );
 	}
 

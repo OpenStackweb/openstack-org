@@ -5,6 +5,7 @@ import {fetchPresentations, fetchLists, clearPresentations} from '../../actions'
 import CategoryNavigator from '../containers/CategoryNavigator';
 import PresentationSearchForm from '../containers/PresentationSearchForm';
 import PresentationFilterDropdown from '../containers/PresentationFilterDropdown';
+import PresentationTagCloud from '../containers/PresentationTagCloud';
 import FeedItem from '../ui/FeedItem';
 import {browserHistory} from 'react-router';
 import URL from '../../utils/url';
@@ -55,18 +56,37 @@ class Browse extends React.Component {
 	}
 
     render () {
+        let {search, category} = this.props;
+
+        let exportUrl = URL.create(
+            '/trackchairs/api/v1/export/presentations',
+            {
+                category: category,
+                search: search
+            },
+			'/'
+		);
+
         return (
             <div>
                <div className="col-md-4">
                   <div className="ibox float-e-margins">
-                  	<PresentationSearchForm keyword={this.props.keyword}/>
-                  	<div className="row">
+                  	<PresentationSearchForm search={search}/>
+                  	<div className="row category-filters">
                   		<div className="col-md-2">
                   			<PresentationFilterDropdown />
                   		</div>
-                  		<div className="col-md-10">
+						<div className="pull-left tag-cloud-filter">
+							<PresentationTagCloud />
+						</div>
+                  		<div className="pull-left">
                   			<CategoryNavigator />
                   		</div>
+						<div className="col-md-2">
+							<a href={exportUrl} className="btn btn-default buttons-html5">
+								<span><i className="fa fa-download" /> Export CSV</span>
+							</a>
+						</div>
                   	</div>
                   	{this.props.presentations &&
 	                <PresentationList 
@@ -100,7 +120,6 @@ export default connect(
 			search: state.routing.locationBeforeTransitions.query.search,
 			hasMore: state.presentations.has_more,
 			currentPage: +state.presentations.page,
-			keyword: state.presentations.keyword,
 			loading: state.presentations.loading
 		}
 	},

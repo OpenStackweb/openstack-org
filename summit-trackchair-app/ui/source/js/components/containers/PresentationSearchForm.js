@@ -16,9 +16,9 @@ class PresentationSearchForm extends React.Component {
 	}
 
     componentWillReceiveProps(nextProps) {
-		if (nextProps.keyword != this.state.value) {
+		if (nextProps.search != this.state.value) {
             this.setState({
-                value: nextProps.keyword
+                value: nextProps.search
             });
 		}
     }

@@ -85,8 +85,8 @@ class Presentation extends SummitEvent implements IPresentation
                   	SummitEvent.Title LIKE '%{$k}%'
                   	OR SummitEvent.Abstract LIKE '%{$k}%'
                     OR (CONCAT_WS(' ', Speaker.FirstName, Speaker.LastName)) LIKE '%{$k}%'
-                    OR (CONCAT_WS(' ', Moderator.FirstName, Moderator.LastName)) LIKE '%{$k}%'
-                    OR Tag.Tag = '{$k}'
+                    OR (CONCAT_WS(' ', Moderator.FirstName, Moderator.LastName)) LIKE '%{$k}%' 
+                    OR Tag.Tag = '{$k}' 
                 ");
     }
 
@@ -877,5 +877,28 @@ SQL;
         }
 
         return null;
+    }
+
+    /**
+     * @return String[]
+     */
+    public function getWordCloud() {
+        $cloud_array = [];
+        $rake = new Rake();
+
+        foreach ($this->Tags() as $tag) {
+            $tag_word = strval(trim(strtolower($tag->Tag)));
+            if (empty($tag_word)) continue;
+            if(!isset($cloud_array[$tag_word])) $cloud_array[$tag_word] = 0;
+            $cloud_array[$tag_word]++;
+        }
+
+        $title_array = $rake->extract_words($this->Title);
+        foreach ($title_array as $word => $count) {
+            if(!isset($cloud_array[$word])) $cloud_array[$word] = 0;
+            $cloud_array[$word] += $count;
+        }
+
+        return $cloud_array;
     }
 }

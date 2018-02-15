@@ -20,6 +20,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         'DELETE chair/destroy' => 'handleDeleteChair',
         'PUT categorychange/resolve/$ID' => 'handleResolveCategoryChange',
         'GET export/chairs' => 'handleChairExport',
+        'GET export/presentations' => 'handlePresentationsExport',
         'GET restoreorders' => 'handleRestoreOrders',
         'GET presentationcomments' => 'handlePresentationsWithComments',
         'GET findmember' => 'handleFindMember'
@@ -40,6 +41,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         'handleDeleteChair' => 'ADMIN',
         'handleRestoreOrders' => 'ADMIN',
         'handleChairExport' => 'ADMIN',
+        'handlePresentationsExport' => 'ADMIN',
         'handlePresentationsWithComments' => 'ADMIN',
         'handleFindMember' => 'ADMIN'
     ];
@@ -221,8 +223,20 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         if ($r->getVar('category')) {
             $presentations = $presentations->filter('CategoryID', (int) $r->getVar('category'));
         }
-        if ($r->getVar('keyword')) {            
-            $presentations = Presentation::apply_search_query($presentations, $r->getVar('keyword'));
+        if ($keyword = $r->getVar('keyword')) {
+            if (strpos($keyword, 'Tag:') === 0) {
+                $tag = substr($keyword, 4);
+                $presentations = $presentations->leftJoin(
+                    "SummitEvent_Tags",
+                    "Presentation.ID = SummitEvent_Tags.SummitEventID"
+                )
+                ->leftJoin(
+                    "Tag",
+                    "Tag.ID = SummitEvent_Tags.TagID"
+                )->where("Tag.Tag = '{$tag}' ");
+            } else {
+                $presentations = Presentation::apply_search_query($presentations, $keyword);
+            }
         }
 
         $types = array();
@@ -230,6 +244,22 @@ class TrackChairAPI extends AbstractRestfulJsonApi
             if (array_search($p->Type()->ID, array_column($types, 'id')) === false)
                 $types[] = ['id' => $p->Type()->ID, 'type' => $p->Type()->Type];
         }
+
+        $cloud_data = [];
+        foreach($presentations as $pres) {
+            foreach ($pres->getWordCloud() as $word => $count) {
+                $key = array_search($word, array_column($cloud_data, 'value'));
+                if($key === false) {
+                    $cloud_data[] = ['value' => $word, 'count' => $count];
+                } else {
+                    $cloud_data[$key]['count'] += $count ;
+                }
+            }
+        }
+
+        $cloud_data = array_values(array_filter($cloud_data, function($v) {
+            return $v['count'] > 1;
+        }));
 
         $offset = ($page - 1) * $page_size;
         $count = $presentations->count();
@@ -242,7 +272,8 @@ class TrackChairAPI extends AbstractRestfulJsonApi
             'has_more' => $count > ($page_size * ($page)),
             'total' => $count,
             'remaining' => $count - ($page_size * ($page)),
-            'types' => $types
+            'types' => $types,
+            'cloud_data' => $cloud_data
         ];
 
         foreach ($presentations as $p) {
@@ -820,6 +851,78 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         header("Content-type: application/force-download");
         header("Content-transfer-encoding: binary\n");
         header("Content-disposition: attachment; filename=\"track-chairs.csv\"");
+        header("Content-Length: " . filesize($filepath));
+        readfile($filepath);
+    }
+
+    public function handlePresentationsExport(SS_HTTPRequest $r)
+    {
+        $activeSummit = Summit::get_active();
+        $summitID = $activeSummit->ID;
+        $filepath = Controller::join_links(
+        	BASE_PATH,
+        	ASSETS_DIR,
+        	'track-chairs-presentations.csv'
+        );
+
+        // Get a collection of chair-visible presentation categories
+        $presentations = Presentation::get()
+            ->filter([
+                'Category.ChairVisible' => true,
+                'SummitEvent.SummitID' => $summitID,
+                'Presentation.Status' => Presentation::STATUS_RECEIVED
+            ]);
+
+        if ($r->getVar('category')) {
+            $presentations = $presentations->filter('CategoryID', (int) $r->getVar('category'));
+        }
+        if ($keyword = $r->getVar('search')) {
+            if (strpos($keyword, 'Tag:') === 0) {
+                $tag = substr($keyword, 4);
+                $presentations = $presentations->leftJoin(
+                    "SummitEvent_Tags",
+                    "Presentation.ID = SummitEvent_Tags.SummitEventID"
+                )
+                    ->leftJoin(
+                        "Tag",
+                        "Tag.ID = SummitEvent_Tags.TagID"
+                    )->where("Tag.Tag = '{$tag}' ");
+            } else {
+                $presentations = Presentation::apply_search_query($presentations, $keyword);
+            }
+        }
+
+        $fp = fopen($filepath, 'w');
+
+        // Setup file to be UTF8
+        fprintf($fp, chr(0xEF) . chr(0xBB) . chr(0xBF));
+
+        fputcsv($fp, ['ID', 'Title', 'Speakers', 'Type', 'Track', 'Abstract']);
+
+        foreach($presentations as $pres) {
+            $speakers = [];
+            foreach($pres->Speakers() as $speaker) {
+                $speakers[] = $speaker->getName();
+            }
+
+            $fields = [
+                $pres->ID,
+                $pres->Title,
+                implode(', ', $speakers),
+                $pres->Type()->Type,
+                $pres->Category()->Title,
+                strip_tags($pres->Abstract)
+            ];
+
+            fputcsv($fp, $fields);
+        }
+
+        fclose($fp);
+
+        header("Cache-control: private");
+        header("Content-type: application/force-download");
+        header("Content-transfer-encoding: binary\n");
+        header("Content-disposition: attachment; filename=\"track-chairs-presentations.csv\"");
         header("Content-Length: " . filesize($filepath));
         readfile($filepath);
     }
