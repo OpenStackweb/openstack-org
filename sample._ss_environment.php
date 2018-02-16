@@ -188,6 +188,8 @@ define('CALDAV_BASE_SERVER_URL', 'https://p01-caldav.icloud.com:443');
 define('MEMBER_SPAM_PROCESSOR_TO', '');
 
 define('OPENSTACK_RESOURCE_API_BASE_URL', '');
+define('SUMMIT_CALENDAR_SYNC_ERROR_EMAIL_FROM', '');
+
 global $_FILE_TO_URL_MAPPING;
 $_FILE_TO_URL_MAPPING[''] = '';
 

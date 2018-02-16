@@ -54,7 +54,7 @@ final class EmailCreationRequestProcessTask extends CronTask
                                 $speaker = $email_request->Speaker();
                                 $sender->send(['Speaker' => $speaker]);
                             }
-                                break;
+                            break;
                             case "MemberPromoCodeEmailCreationRequest": {
                                 if (!$email_request->PromoCode()->isEmailSent()) {
                                     $sender = new MemberPromoCodeEmailSender;
@@ -68,7 +68,7 @@ final class EmailCreationRequestProcessTask extends CronTask
                                     $email_request->PromoCode()->write();
                                 }
                             }
-                                break;
+                            break;
                             case 'SpeakerSelectionAnnouncementEmailCreationRequest': {
                                 $sender = SpeakerSelectionAnnouncementEmailCreationRequestSenderServiceFactory::build($email_request);
                                 if (is_null($sender)) continue;
@@ -82,11 +82,16 @@ final class EmailCreationRequestProcessTask extends CronTask
                                 $email_request->PromoCode()->markAsSent();
                                 $email_request->PromoCode()->write();
                             }
-                                break;
+                            break;
+                            case "CalendarSyncErrorEmailRequest": {
+                                $sender = new CalendarSyncErrorEmailMessageSender;
+                                $sender->send(['CalendarSyncInfo' => $email_request->CalendarSyncInfo()]);
+                            }
+                            break;
                             default: {
                                 continue;
                             }
-                                break;
+                            break;
                         }
                     }
                     catch(Exception $ex)

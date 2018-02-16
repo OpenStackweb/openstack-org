@@ -525,3 +525,7 @@ define('SUMMIT_ATTENDEE_RSVP_EMAIL_FROM','summit@openstack.org');
 define('PRESENTATION_SPEAKER_CREATE_MEMBERSHIP_EMAIL', 'presentation-speaker-create-membership-email');
 define('PRESENTATION_SPEAKER_CONFIRM_SUMMIT_ASSISTANCE_EMAIL', 'presentation-speaker-confirm-assistance-email');
 define('PRESENTATION_SPEAKER_SUMMIT_REMINDER_EMAIL', 'presentation-speaker-summit-reminder-email');
+
+// Summit Calendar Sync error emails
+define("SUMMIT_CALENDAR_SYNC_ERROR_EMAIL_TEMPLATE", "summit-calendar-sync-error");
+define("SUMMIT_CALENDAR_SYNC_ERROR_EMAIL_SUBJECT", "OpenStack Summit - Relink your %s calendar account with OpenStack Summit %s Calendar");
