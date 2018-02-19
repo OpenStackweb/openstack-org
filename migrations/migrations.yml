@@ -98,4 +98,5 @@ migrations:
   - RepublishElectionPagesMigration
   - AddOnDeleteCascadeForEventsAndPresentationMaterials
   - AddSummitCalendarSyncErrorEmailMigration
+  - RefactorDefaultEventTypesMigration
 

@@ -25,30 +25,24 @@ class SummitEventType extends DataObject implements ISummitEventType
         'UseSponsors'          => 'Boolean',
         'AreSponsorsMandatory' => 'Boolean',
         'AllowsAttachment'     => 'Boolean',
+        'IsDefault'            => 'Boolean',
     );
 
-    private static $has_many = array
-    (
-    );
+    private static $has_many = [];
 
-    private static $defaults = array
-    (
-    );
+    private static $defaults = [];
 
-    private static $has_one = array
-    (
+    private static $has_one = [
         'Summit' => 'Summit'
-    );
+    ];
 
-    private static $summary_fields = array
-    (
+    private static $summary_fields = [
         'Type'
-    );
+    ];
 
-    private static $searchable_fields = array
-    (
+    private static $searchable_fields = [
         'Type'
-    );
+    ];
     /**
      * @return int
      */
@@ -74,7 +68,7 @@ class SummitEventType extends DataObject implements ISummitEventType
     }
 
     public function canDelete($member=null) {
-        if (Summit::isDefaultEventType($this->Type))
+        if ($this->IsDefault)
         {
             return false;
         }
@@ -84,7 +78,7 @@ class SummitEventType extends DataObject implements ISummitEventType
     public function getCMSFields() {
         $fields = new FieldList();
         $fields->add($type_txt = new TextField('Type','Type'));
-        if($this->ID > 0  && Summit::isDefaultEventType($this->Type))
+        if($this->ID > 0  && $this->IsDefault)
         {
             $type_txt->setReadonly(true);
         }

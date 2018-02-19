@@ -1072,6 +1072,7 @@ class Summit extends DataObject implements ISummit
         $presentation->AreSpeakersMandatory = false;
         $presentation->UseModerator = false;
         $presentation->IsModeratorMandatory = false;
+        $presentation->IsDefault = true;
         $presentation->write();
 
         $key_note = SummitEventType::get()->filter(['Type' => IPresentationType::Keynotes, 'SummitID' => $summit_id])->first();
@@ -1090,6 +1091,7 @@ class Summit extends DataObject implements ISummit
         $key_note->AreSpeakersMandatory   = false;
         $key_note->UseModerator           = true;
         $key_note->IsModeratorMandatory   = false;
+        $key_note->IsDefault = true;
         $key_note->write();
 
         $panel = SummitEventType::get()->filter(['Type' => IPresentationType::Panel, 'SummitID' => $summit_id])->first();
@@ -1108,6 +1110,7 @@ class Summit extends DataObject implements ISummit
         $panel->AreSpeakersMandatory   = false;
         $panel->UseModerator           = true;
         $panel->IsModeratorMandatory   = false;
+        $panel->IsDefault = true;
         $panel->write();
 
         $lighting_talks = SummitEventType::get()->filter(['Type' => IPresentationType::LightingTalks, 'SummitID' => $summit_id])->first();
@@ -1126,6 +1129,7 @@ class Summit extends DataObject implements ISummit
         $lighting_talks->AreSpeakersMandatory = false;
         $lighting_talks->UseModerator = false;
         $lighting_talks->IsModeratorMandatory = false;
+        $lighting_talks->IsDefault = true;
         $lighting_talks->write();
 
         $hand_on_labs = SummitEventType::get()->filter(['Type' => ISummitEventType::HandonLabs, 'SummitID' => $summit_id])->first();
@@ -1136,6 +1140,7 @@ class Summit extends DataObject implements ISummit
 
         $hand_on_labs->Type = ISummitEventType::HandonLabs;
         $hand_on_labs->SummitID = $summit_id;
+        $hand_on_labs->IsDefault = true;
         $hand_on_labs->write();
 
         $lunch = SummitEventType::get()->filter(['Type' => ISummitEventType::Lunch, 'SummitID' => $summit_id])->first();
@@ -1145,6 +1150,7 @@ class Summit extends DataObject implements ISummit
 
         $lunch->Type = ISummitEventType::Lunch;
         $lunch->SummitID = $summit_id;
+        $lunch->IsDefault = true;
         $lunch->write();
 
         $breaks = SummitEventType::get()->filter(['Type' => ISummitEventType::Breaks, 'SummitID' => $summit_id])->first();
@@ -1154,8 +1160,8 @@ class Summit extends DataObject implements ISummit
 
         $breaks->Type = ISummitEventType::Breaks;
         $breaks->SummitID = $summit_id;
+        $breaks->IsDefault = true;
         $breaks->write();
-
 
         $evening_events = SummitEventType::get()->filter(['Type' => ISummitEventType::EveningEvents, 'SummitID' => $summit_id])->first();
         if (is_null($evening_events)) {
@@ -1164,6 +1170,7 @@ class Summit extends DataObject implements ISummit
 
         $evening_events->Type     = ISummitEventType::EveningEvents;
         $evening_events->SummitID = $summit_id;
+        $breaks->IsDefault = true;
         $evening_events->write();
 
 
@@ -1172,24 +1179,10 @@ class Summit extends DataObject implements ISummit
             $groups_events = new SummitEventType();
         }
 
-        $groups_events->Type     = ISummitEventType::GroupsEvents;
-        $groups_events->SummitID = $summit_id;
+        $groups_events->Type      = ISummitEventType::GroupsEvents;
+        $groups_events->SummitID  = $summit_id;
+        $groups_events->IsDefault = true;
         $groups_events->write();
-    }
-
-    public static function isDefaultEventType($event_type)
-    {
-        return in_array($event_type,
-            [
-                IPresentationType::Presentation,
-                IPresentationType::Keynotes,
-                IPresentationType::Panel,
-                IPresentationType::LightingTalks,
-                ISummitEventType::HandonLabs,
-                ISummitEventType::EveningEvents,
-                ISummitEventType::Lunch_Breaks,
-                ISummitEventType::GroupsEvents,
-            ]);
     }
 
     /**
