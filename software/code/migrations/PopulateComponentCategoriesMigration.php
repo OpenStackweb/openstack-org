@@ -50,10 +50,10 @@ class PopulateComponentCategoriesMigration extends AbstractDBMigrationTask
             $new_category->write();
         }
 
-        /*$SQL = <<<SQL
+        $SQL = <<<SQL
         ALTER TABLE OpenStackComponent DROP COLUMN `Use`
 SQL;
-        DB::query($SQL);*/
+        DB::query($SQL);
     }
 
     function doDown()
