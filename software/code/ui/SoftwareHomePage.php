@@ -124,7 +124,7 @@ class SoftwareHomePage_Controller extends Page_Controller
                     array
                     (
                         'IsCoreService' => true,
-                        'Use' => 'Object Storage'
+                        'Category.Name' => 'Object Storage'
                     )
                 )->sort('Order','ASC'),
                 'ComputeCoreServices' => $release->OpenStackComponents()->filter
@@ -132,7 +132,7 @@ class SoftwareHomePage_Controller extends Page_Controller
                     array
                     (
                         'IsCoreService' => true,
-                        'Use' => 'Compute'
+                        'Category.Name' => 'Compute'
                     )
                 )->sort('Order','ASC'),
                 'NoneCoreServices' => $release->OpenStackComponents()->filter
@@ -140,7 +140,7 @@ class SoftwareHomePage_Controller extends Page_Controller
                     array
                     (
                         'IsCoreService' => true,
-                        'Use' => 'None'
+                        'Category.Name' => 'None'
                     )
                 )->sort('Order','ASC'),
                 'OptionalServices' => $release->OpenStackComponents()->filter
@@ -228,19 +228,15 @@ class SoftwareHomePage_Controller extends Page_Controller
 
         $has_maturity_indicators = ($component->Adoption > 75)
             || ($component->SDKSupport > 7)
-            || ($component->HasInstallationGuide)
-            || ($component->HasTeamDiversity)
-            || ($component->HasStableBranches)
-            || ($component->FollowsStandardDeprecation)
-            || ($component->SupportsUpgrade)
-            || ($component->SupportsRollingUpgrade);
+            || ($component->HasInstallationGuide);
 
         $has_release_desc = $component->ReleaseMileStones
             || $component->ReleaseCycleWithIntermediary
             || $component->ReleaseTrailing
             || $component->ReleaseIndependent;
 
-        $has_additional_info = $component->VulnerabilityManaged || $has_release_desc;
+
+        $has_additional_info = (count($component->getInfoTags()) > 0) || $has_release_desc;
 
         return $this->render
         (

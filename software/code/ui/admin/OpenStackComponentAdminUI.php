@@ -37,7 +37,7 @@ final class OpenStackComponentAdminUI extends DataExtension
         $fields->push(new LiteralField("Title", "<h2>OpenStack Component</h2>"));
         $fields->push(new TextField("Name", "Name"));
         $fields->push(new TextField("CodeName", "Code Name"));
-        $fields->push(new DropdownField('Mascot', 'Mascot',  Mascot::get()->map()));
+        $fields->push(new DropdownField('MascotID', 'Mascot',  Mascot::get()->map('ID', 'Name')));
         $fields->push(new TextField("Description", "Description"));
         $fields->push(new TextField("YouTubeID", "Video (YouTubeID)"));
         $fields->push(new TextField("VideoTitle", "Video Title"));
@@ -46,14 +46,12 @@ final class OpenStackComponentAdminUI extends DataExtension
         $fields->push(new CheckboxField('SupportsExtensions', 'Supports Extensions?'));
         $fields->push(new CheckboxField('IsCoreService', 'Is Core Service?'));
         $fields->push(new CheckboxField('ShowOnMarketplace', 'Show On Marketplace?'));
-        $fields->push(new DropdownField('Use', 'Project Category',  $this->owner->dbObject('Use')->enumValues()));
+        $categories = OpenStackComponentSubCategory::get()->map('ID', 'Name');
+        $fields->push(new DropdownField('SubCategoryID', 'Project Sub Category',  $categories));
 
         if ($this->owner->getSupportsVersioning()) {
-
             $versions_config = new GridFieldConfig_RecordEditor();
-
             $versions = new GridField("Versions", "Versions", $this->owner->Versions(), $versions_config);
-
             $fields->push($versions);
         }
 
@@ -61,6 +59,11 @@ final class OpenStackComponentAdminUI extends DataExtension
         $config->addComponent(new GridFieldSortableRows('Order'));
         $related_content = new GridField("RelatedContent", "RelatedContent", $this->owner->RelatedContent(), $config);
         $fields->push($related_content);
+
+        $config = new GridFieldConfig_RecordEditor();
+        $config->addComponent(new GridFieldSortableRows('SortOrder'));
+        $component_tags = new GridField("Tags", "Component Tags", $this->owner->Tags(), $config);
+        $fields->push($component_tags);
 
         return $fields;
     }

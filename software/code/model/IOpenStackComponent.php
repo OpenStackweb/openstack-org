@@ -82,4 +82,20 @@ interface IOpenStackComponent extends IEntity
      */
     public function getAge($unit = 'Yrs');
 
+    /**
+     * @param IOpenStackComponentTag $new_tag
+     * @return void
+     */
+    public function addTag(IOpenStackComponentTag $new_tag);
+
+    /**
+     * @return IOpenStackComponentTag[]
+     */
+    public function getMaturityTags();
+
+    /**
+     * @return IOpenStackComponentTag[]
+     */
+    public function getInfoTags();
+
 } 

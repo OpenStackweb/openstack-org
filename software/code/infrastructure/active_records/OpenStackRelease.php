@@ -71,7 +71,7 @@ class OpenStackRelease
     (
         'SupportedApiVersions'     => 'OpenStackReleaseSupportedApiVersion',
         'SampleConfigurationTypes' => 'OpenStackSampleConfigurationType',
-        'Caveats'                  => 'OpenStackComponentReleaseCaveat',
+        'Caveats'                  => 'OpenStackComponentReleaseCaveat'
     );
 
 
@@ -458,7 +458,7 @@ class OpenStackRelease
         }
 
         $final = array();
-        $res   = $query->sort(array('Use'=>'ASC','IsCoreService'=>'DESC', 'Order'=>'ASC'))->toArray();
+        $res   = $query->sort(array('Category.Name'=>'ASC','IsCoreService'=>'DESC', 'Order'=>'ASC'))->toArray();
         foreach($res as $c)
         {
             if($c->getAge() >= $age)

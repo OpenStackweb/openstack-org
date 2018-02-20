@@ -27,7 +27,6 @@ class OpenStackReleaseSupportedApiVersion
     ];
 
     static $has_one = [
-
         'OpenStackComponent' => 'OpenStackComponent',
         'ApiVersion'         => 'OpenStackApiVersion',
         'Release'            => 'OpenStackRelease',

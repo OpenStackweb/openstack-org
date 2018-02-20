@@ -20,19 +20,6 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
 
     use SluggableEntity;
 
-    // IMPORTANT : this fixes the order for categories on software page
-    public static $categories = array(
-        "Compute",
-        "Storage, Backup & Recovery",
-        "Networking & Content Delivery",
-        "Data & Analytics",
-        "Security, Identity & Compliance",
-        "Management Tools",
-        "Deployment Tools",
-        "Application Services",
-        "None"
-    );
-
     static $db = array
     (
         'Name'                         => 'Varchar(255)',
@@ -41,37 +28,38 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
         'SupportsVersioning'           => 'Boolean',
         'SupportsExtensions'           => 'Boolean',
         'IsCoreService'                => 'Boolean',
-        'Use'                          => 'Enum(array("Application Services","Compute","Data & Analytics","Deployment Tools","Management Tools","Monitoring & Metering","Networking & Content Delivery","Security, Identity & Compliance","Storage, Backup & Recovery","None"), "None")',
-        'HasStableBranches'            => 'Boolean',
         'WikiUrl'                      => 'Text',
-        'TCApprovedRelease'            => 'Boolean',
-        'HasTeamDiversity'             => 'Boolean',
-        'IncludedComputeStarterKit'    => 'Boolean',
-        'VulnerabilityManaged'         => 'Boolean',
         'Order'                        => 'Int',
         'YouTubeID'                    => 'Varchar',
         'VideoDescription'             => 'Text',
         'VideoTitle'                   => 'Varchar',
-        'FollowsStandardDeprecation'   => 'Boolean',
-        'SupportsUpgrade'              => 'Boolean',
-        'SupportsRollingUpgrade'       => 'Boolean',
         'ShowOnMarketplace'            => 'Boolean(1)',
         'Slug'                         => 'Varchar(255)'
     );
 
     static $has_one = array
     (
-        "LatestReleasePTL" => "Member",
-        "Mascot"           => "Mascot"
+        "LatestReleasePTL"  => "Member",
+        "Mascot"            => "Mascot",
+        "SubCategory"       => "OpenStackComponentSubCategory"
     );
 
     static $has_many = array
     (
-        'Versions'       => 'OpenStackApiVersion',
-        'RelatedContent' => 'OpenStackComponentRelatedContent',
-        'Caveats'        => 'OpenStackComponentReleaseCaveat',
+        'Versions'          => 'OpenStackApiVersion',
+        'RelatedContent'    => 'OpenStackComponentRelatedContent',
+        'Caveats'           => 'OpenStackComponentReleaseCaveat'
     );
 
+    static $many_many = array
+    (
+        'Tags'  => 'OpenStackComponentTag'
+    );
+
+    private static $many_many_extraFields = array
+    (
+        'Tags' => array( 'SortOrder' => 'Int' )
+    );
 
     static $belongs_many_many = array
     (
@@ -298,5 +286,30 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
                 'ComponentID' => $this->ID
             )
         );
+    }
+
+    /**
+     * @param IOpenStackComponentTag $new_tag
+     * @return void
+     */
+    public function addTag(IOpenStackComponentTag $new_tag)
+    {
+        AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'Tags')->add($new_tag);
+    }
+
+    /**
+     * @return IOpenStackComponentTag[]
+     */
+    public function getMaturityTags()
+    {
+        return $this->Tags()->filter('Type', 'maturity');
+    }
+
+    /**
+     * @return IOpenStackComponentTag[]
+     */
+    public function getInfoTags()
+    {
+        return $this->Tags()->filter('Type', 'info');
     }
 }
