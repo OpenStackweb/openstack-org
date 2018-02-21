@@ -1,7 +1,5 @@
-<?php
-
 /**
- * Copyright 2015 OpenStack Foundation
+ * Copyright 2018 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,24 +10,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-interface ISummitEventType extends IEntity
-{
-    /**
-     * @return string
-     */
-    public function getType();
+(function($) {
+    $.entwine('ss', function($){
 
-    // default types
-
-    const HandonLabs    = 'Hand-on Labs';
-
-    const Lunch_Breaks  = 'Lunch & Breaks';
-
-    const Lunch         = 'Lunch';
-
-    const Breaks        = 'Breaks';
-
-    const EveningEvents = 'Evening Events';
-
-    const GroupsEvents  = 'Groups Events';
-}
+    });
+})(jQuery);

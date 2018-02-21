@@ -26,11 +26,19 @@ class SummitEventType extends DataObject implements ISummitEventType
         'AreSponsorsMandatory' => 'Boolean',
         'AllowsAttachment'     => 'Boolean',
         'IsDefault'            => 'Boolean',
+        'IsPrivate'            => 'Boolean',
     );
 
     private static $has_many = [];
 
-    private static $defaults = [];
+    private static $defaults = [
+        'UseSponsors'          => 0,
+        'AreSponsorsMandatory' => 0,
+        'AllowsAttachment'     => 0,
+        'BlackoutTimes'        => 0,
+        'IsPrivate'            => 0,
+        'Color'                => 'f0f0ee',
+    ];
 
     private static $has_one = [
         'Summit' => 'Summit'
@@ -146,8 +154,8 @@ class SummitEventType extends DataObject implements ISummitEventType
      * @return bool
      */
     static public function isPrivate($type){
-        $private_types = [ISummitEventType::GroupsEvents];
-        return in_array($type, $private_types);
+       $event_type = SummitEventType::get()->filter(['Type' => $type])->first();
+       return is_null($event_type) ? false : boolval($event_type->IsPrivate);
     }
 
 }

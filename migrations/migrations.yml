@@ -100,3 +100,4 @@ migrations:
   - AddSummitCalendarSyncErrorEmailMigration
   - RefactorDefaultEventTypesMigration
   - PopulateSubCategoriesAndTagsMigration
+  - AddDefaultEventTypesPresentationTypesMigration

@@ -484,11 +484,11 @@ class Summit extends DataObject implements ISummit
     {
         $now = new \DateTime('now', new DateTimeZone('UTC'));
 
-        return Summit::get()->filter(array(
+        return Summit::get()->filter([
             'SummitBeginDate:GreaterThanOrEqual' => $now->format('Y-m-d H:i:s'),
             'SummitEndDate:GreaterThanOrEqual' => $now->format('Y-m-d H:i:s'),
             'Active' => 1
-        ))->first();
+        ])->first();
     }
 
     private $must_seed = false;
@@ -1056,133 +1056,14 @@ class Summit extends DataObject implements ISummit
      */
     public static function seedBasicEventTypes($summit_id)
     {
-        $presentation = SummitEventType::get()->filter(['Type' => IPresentationType::Presentation, 'SummitID' => $summit_id])->first();
-        if (is_null($presentation)) {
-            $presentation = new PresentationType();
+        foreach(DefaultSummitEventType::get() as $default_event_type){
+            if(SummitEventType::get()->filter([
+                'Type' => $default_event_type->Type,
+                'SummitID' => $summit_id
+            ])->count() > 0 ) continue;
+            $event_type = $default_event_type->buildEventType($summit_id);
+            $event_type->write();
         }
-
-        $presentation->Type = IPresentationType::Presentation;
-        $presentation->SummitID = $summit_id;
-        $presentation->MinSpeakers = 1;
-        $presentation->MaxSpeakers = 3;
-        $presentation->MinModerators = 0;
-        $presentation->MaxModerators = 0;
-        $presentation->UseSpeakers = true;
-        $presentation->ShouldBeAvailableOnCFP = true;
-        $presentation->AreSpeakersMandatory = false;
-        $presentation->UseModerator = false;
-        $presentation->IsModeratorMandatory = false;
-        $presentation->IsDefault = true;
-        $presentation->write();
-
-        $key_note = SummitEventType::get()->filter(['Type' => IPresentationType::Keynotes, 'SummitID' => $summit_id])->first();
-        if (is_null($key_note)) {
-            $key_note = new PresentationType();
-        }
-
-        $key_note->Type = IPresentationType::Keynotes;
-        $key_note->SummitID = $summit_id;
-        $key_note->MinSpeakers            = 1;
-        $key_note->MaxSpeakers            = 3;
-        $key_note->MinModerators          = 0;
-        $key_note->MaxModerators          = 1;
-        $key_note->ShouldBeAvailableOnCFP = false;
-        $key_note->UseSpeakers            = true;
-        $key_note->AreSpeakersMandatory   = false;
-        $key_note->UseModerator           = true;
-        $key_note->IsModeratorMandatory   = false;
-        $key_note->IsDefault = true;
-        $key_note->write();
-
-        $panel = SummitEventType::get()->filter(['Type' => IPresentationType::Panel, 'SummitID' => $summit_id])->first();
-        if (is_null($panel)) {
-            $panel = new PresentationType();
-        }
-
-        $panel->Type = IPresentationType::Panel;
-        $panel->SummitID = $summit_id;
-        $panel->MinSpeakers            = 1;
-        $panel->MaxSpeakers            = 3;
-        $panel->MinModerators          = 0;
-        $panel->MaxModerators          = 1;
-        $panel->ShouldBeAvailableOnCFP = true;
-        $panel->UseSpeakers            = true;
-        $panel->AreSpeakersMandatory   = false;
-        $panel->UseModerator           = true;
-        $panel->IsModeratorMandatory   = false;
-        $panel->IsDefault = true;
-        $panel->write();
-
-        $lighting_talks = SummitEventType::get()->filter(['Type' => IPresentationType::LightingTalks, 'SummitID' => $summit_id])->first();
-        if (is_null($lighting_talks)) {
-            $lighting_talks = new PresentationType();
-        }
-
-        $lighting_talks->Type = IPresentationType::LightingTalks;
-        $lighting_talks->SummitID = $summit_id;
-        $lighting_talks->MinSpeakers = 1;
-        $lighting_talks->MaxSpeakers = 3;
-        $lighting_talks->MinModerators = 0;
-        $lighting_talks->MaxModerators = 0;
-        $lighting_talks->UseSpeakers = true;
-        $lighting_talks->ShouldBeAvailableOnCFP = true;
-        $lighting_talks->AreSpeakersMandatory = false;
-        $lighting_talks->UseModerator = false;
-        $lighting_talks->IsModeratorMandatory = false;
-        $lighting_talks->IsDefault = true;
-        $lighting_talks->write();
-
-        $hand_on_labs = SummitEventType::get()->filter(['Type' => ISummitEventType::HandonLabs, 'SummitID' => $summit_id])->first();
-        if (is_null($hand_on_labs)) {
-            $hand_on_labs = new SummitEventType();
-
-        }
-
-        $hand_on_labs->Type = ISummitEventType::HandonLabs;
-        $hand_on_labs->SummitID = $summit_id;
-        $hand_on_labs->IsDefault = true;
-        $hand_on_labs->write();
-
-        $lunch = SummitEventType::get()->filter(['Type' => ISummitEventType::Lunch, 'SummitID' => $summit_id])->first();
-        if (is_null($lunch)) {
-            $lunch = new SummitEventType();
-        }
-
-        $lunch->Type = ISummitEventType::Lunch;
-        $lunch->SummitID = $summit_id;
-        $lunch->IsDefault = true;
-        $lunch->write();
-
-        $breaks = SummitEventType::get()->filter(['Type' => ISummitEventType::Breaks, 'SummitID' => $summit_id])->first();
-        if (is_null($breaks)) {
-            $breaks = new SummitEventType();
-        }
-
-        $breaks->Type = ISummitEventType::Breaks;
-        $breaks->SummitID = $summit_id;
-        $breaks->IsDefault = true;
-        $breaks->write();
-
-        $evening_events = SummitEventType::get()->filter(['Type' => ISummitEventType::EveningEvents, 'SummitID' => $summit_id])->first();
-        if (is_null($evening_events)) {
-            $evening_events = new SummitEventType();
-        }
-
-        $evening_events->Type     = ISummitEventType::EveningEvents;
-        $evening_events->SummitID = $summit_id;
-        $breaks->IsDefault = true;
-        $evening_events->write();
-
-
-        $groups_events = SummitEventType::get()->filter(['Type' => ISummitEventType::GroupsEvents, 'SummitID' => $summit_id])->first();
-        if (is_null($groups_events)) {
-            $groups_events = new SummitEventType();
-        }
-
-        $groups_events->Type      = ISummitEventType::GroupsEvents;
-        $groups_events->SummitID  = $summit_id;
-        $groups_events->IsDefault = true;
-        $groups_events->write();
     }
 
     /**
