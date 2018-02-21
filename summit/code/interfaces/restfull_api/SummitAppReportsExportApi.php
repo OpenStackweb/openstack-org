@@ -566,6 +566,9 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
                     if (isset($event['abstract']))
                         $event['abstract'] = strip_tags($event['abstract']);
 
+                    if (isset($event['expect_to_learn']))
+                        $event['expect_to_learn'] = strip_tags($event['expect_to_learn']);
+
                     $active_sheet->fromArray($event, NULL, 'A'.$row2);
                 }
 

@@ -743,6 +743,10 @@ SQL;
             $query .= "E.Abstract AS abstract,";
         }
 
+        if (in_array('expect_to_learn',$filters['show_col'])) {
+            $query .= "P.AttendeesExpectedLearnt AS expect_to_learn,";
+        }
+
         $query .= "P.Status AS status";
 
         $query .= $query_body . $query_where . $query_group . " ORDER BY {$sort} {$sort_dir}";

@@ -13,6 +13,7 @@
                     <option value="owner">Owner</option>
                     <option value="moderator">Moderator</option>
                     <option value="abstract">Abstract</option>
+                    <option value="expect_to_learn">Expect to learn</option>
                 </select>
             </div>
             <div class="col-md-2">
@@ -68,8 +69,8 @@
                     <th if={ showThis('moderator') }>Moderator</th>
                     <th if={ showThis('owner') }>Owner</th>
                     <th class="sortable" data-sort="company" if={ showThis('speaker') }>Org</th>
-
                     <th if={ showThis('abstract') }>Abstract</th>
+                    <th if={ showThis('expect_to_learn') }>Expect to Learn</th>
                 </tr>
             </thead>
             <tbody>
@@ -86,6 +87,9 @@
                     <td if={ showThis('speaker') }>{ presentation.company }</td>
                     <td if={ showThis('abstract') }>
                         <raw content={ presentation.abstract }></raw>
+                    </td>
+                    <td if={ showThis('expect_to_learn') }>
+                        <raw content={ presentation.expect_to_learn }></raw>
                     </td>
                 </tr>
             </tbody>
