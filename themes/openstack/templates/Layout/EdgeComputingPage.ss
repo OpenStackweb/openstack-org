@@ -38,7 +38,7 @@
             <div class="row">
                 <div class="col-sm-4 col-sm-offset-1">
                   <div class="earth"><img src="https://www.openstack.org/assets/edge/lilearth.png"></div>
-                  <p>Attend the weekly Edge Computing Group calls <strong>every Tuesday at 15:00 UTC</strong>.</p>
+                  <p>Attend the weekly Edge Computing Group calls.</p>
                   <a href="https://etherpad.openstack.org/p/2017_edge_computing_working_sessions" target="_blank" class="download-btn"><em>Join the Meeting</em></a>
                 </div>
                 <div class="col-sm-4 col-sm-offset-2">
