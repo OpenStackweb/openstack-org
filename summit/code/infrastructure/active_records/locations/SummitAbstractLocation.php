@@ -14,17 +14,17 @@
  **/
 class SummitAbstractLocation extends DataObject implements ISummitLocation
 {
-    private static $db = array
-    (
+    private static $db = [
+
         'Name'         => 'Varchar(255)',
         'Description'  => 'HTMLText',
         'Order'        => 'Int',
         'LocationType' => 'Enum(array("External","Internal", "None"), "None")',
-    );
+    ];
 
-    private static $has_many = array
-    (
-    );
+    private static $has_many = [
+        'Banners' => 'LocationBanner'
+    ];
 
     public function getFullName()
     {
@@ -32,10 +32,10 @@ class SummitAbstractLocation extends DataObject implements ISummitLocation
     }
 
 
-    private static $has_one = array
-    (
+    private static $has_one = [
+
         'Summit' => 'Summit'
-    );
+    ];
 
     private static $summary_fields = array
     (
@@ -108,6 +108,22 @@ class SummitAbstractLocation extends DataObject implements ISummitLocation
                 $_REQUEST['RoomID'] = $this->ID;
             else
                 $_REQUEST['LocationID'] = $this->ID;
+
+            $config = GridFieldConfig_RecordEditor::create();
+            $gridField = new GridField('Banners', 'Banners', $this->Banners(), $config);
+
+            $config->removeComponentsByType('GridFieldAddNewButton');
+            $multi_class_selector = new GridFieldAddNewMultiClass();
+            $multi_class_selector->setClasses
+            (
+                [
+                    'LocationBanner'          => 'Banner',
+                    'ScheduledLocationBanner' => 'Scheduled Banner',
+                ]
+            );
+            $config->addComponent($multi_class_selector);
+
+            $f->addFieldToTab('Root.Banners', $gridField);
         }
         return $f;
     }
