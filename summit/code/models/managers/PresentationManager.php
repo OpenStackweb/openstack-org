@@ -434,6 +434,8 @@ final class PresentationManager implements IPresentationManager
             $presentation->CreatorID     = $creator->ID;
             $presentation->Progress      = Presentation::PHASE_SUMMARY;
             $presentation->LightningTalk = isset($data['LightningTalk']) ? intval($data['LightningTalk']) : 0;
+            // add creator as speaker
+            $presentation->Speakers()->Add($speaker);
             $presentation->write();
 
             if(isset($data["PresentationLink"]))
