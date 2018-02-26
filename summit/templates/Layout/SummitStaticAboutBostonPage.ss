@@ -82,7 +82,7 @@
                 <li><a href="https://openstackfoundation.formstack.com/forms/vancouver18_summit_discounted_registration"><i class="fa fa-graduation-cap"></i> Student / Government Discounted Registration</a></li>
                 <li><a href="/summit/vancouver-2018/travel/#travel-support" target="_blank"><i class="fa fa-users"></i>Apply for Travel Support</a></li>
                 <li><a href="/summit/vancouver-2018/code-of-conduct"><i class="fa fa-eye"></i>Code of Conduct</a></li>
-                <li><a href="/summit/vancouver-2018/travel/#visa"><i class="fa fa-plane"></i>Visa Information</a></li>
+                <li><a href="/summit/vancouver-2018/visa-and-travel-support/"><i class="fa fa-plane"></i>Visa Information</a></li>
               </ul>
             </div>
         </div>
