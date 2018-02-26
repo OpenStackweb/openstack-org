@@ -340,6 +340,9 @@ class TrackChairAPI extends AbstractRestfulJsonApi
             return $this->validationError(sprintf('Category id %s not found!', $categoryID));
         }
 
+        $results['accepted_count'] = $category->SessionCount;
+        $results['alternate_count'] = $category->AlternateCount;
+
         $summitID = (int) Summit::get_active()->ID;
         if (intval($category->SummitID) !== $summitID) {
             return $this->validationError(sprintf('Category id %s does not belong to current summit!', $categoryID));

@@ -5,6 +5,8 @@ export const lists = function (
         results: null,        
         loading: false,
         showDrawer: false,
+		acceptedCount: 0,
+		alternateCount: 0
     },
     action = {}) {	
 
@@ -23,6 +25,8 @@ export const lists = function (
                                 return !a.is_group;
                             })
                 ],
+				acceptedCount: action.payload.response.accepted_count,
+				alternateCount:action.payload.response.alternate_count,
                 loading: false
             };
 

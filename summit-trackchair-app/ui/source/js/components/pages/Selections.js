@@ -10,7 +10,9 @@ import Bounce from '../ui/loaders/Bounce';
 class Selections extends React.Component {
 
     render () {
-    	if(!this.props.lists) {
+    	let {acceptedCount, alternateCount} = this.props;
+
+        if(!this.props.lists) {
     		return <Bounce />
     	}
 
@@ -27,6 +29,9 @@ class Selections extends React.Component {
 					<div className="col-md-3">
 						<strong>Category</strong>: <CategoryNavigator />
 					</div>
+                    <div className="col-md-3">
+                        <strong>Count</strong>: {acceptedCount} / {alternateCount}
+                    </div>
                 </div>
             </div>
             {this.props.category &&
@@ -43,7 +48,9 @@ export default connect(
 		return {
 			lists: state.lists.results,
 			category: state.routing.locationBeforeTransitions.query.category,
-            list_class: state.routing.locationBeforeTransitions.query.list_class
+            list_class: state.routing.locationBeforeTransitions.query.list_class,
+            acceptedCount: state.lists.acceptedCount,
+            alternateCount: state.lists.alternateCount
 		};
 	},
 	dispatch => ({
