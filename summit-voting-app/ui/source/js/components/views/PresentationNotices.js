@@ -22,7 +22,7 @@ export default ({
    		return (
 			<div className="alert alert-danger alert-dismissible" role="alert">
 			    <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			    Community Voting is closed. Thanks and we’ll see you next Summit.
+			    Community Voting has closed. Thanks and we’ll see you at the next Summit.
 			</div>
 		);
    	}
