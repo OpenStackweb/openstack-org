@@ -30,7 +30,8 @@ class Selections extends React.Component {
 						<strong>Category</strong>: <CategoryNavigator />
 					</div>
                     <div className="col-md-3">
-                        <strong>Count</strong>: {acceptedCount} / {alternateCount}
+                        <strong>Selection Count:</strong>: {acceptedCount} <br/>
+                        <strong>Alternate Count:</strong>: {alternateCount}
                     </div>
                 </div>
             </div>
