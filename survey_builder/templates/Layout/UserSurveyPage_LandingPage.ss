@@ -117,7 +117,7 @@
             <p>
                 <a class="roundedButton" href="https://www.openstack.org/assets/survey/OpenStack-User-Survey-Nov17.pdf" target="_blank">$_T("survey_ui", "Read the November 2017 report")</a>
             </p>
-            <h3><a href=\"%s\">$_T("survey_ui", "Analyze the User Survey")</a></h3>
+            <h3><a href="/analytics">$_T("survey_ui", "Analyze the User Survey")</a></h3>
             <p>
                 $_T("survey_ui", "Uncover your own findings by digging into the User Survey data from the past year with a <a href=\"%s\">new analysis tool</a> available to the OpenStack community. Apply multiple filters to virtually every quantitative question from the user survey.", /analytics)
             </p>
