@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2014 Openstack Foundation
+ * Copyright 2018 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,40 +13,36 @@
  **/
 
 /**
- * Class TagGroup
+ * Class DefaultTrackTagGroup
  */
-final class TagGroup extends DataObject implements ITagGroup
+final class DefaultTrackTagGroup extends DataObject
 {
-
-    static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
-
-    static $db = array
-    (
+    static $db = [
         'Name'      => 'Varchar',
         'Label'     => 'Varchar',
         'Order'     => 'Int',
         'Mandatory' => 'Boolean(0)'
-    );
+    ];
 
-    /**
-     * @return int
-     */
-    public function getIdentifier()
-    {
-        return (int)$this->getField('ID');
-    }
+    private static $has_one = [
+    ];
 
-    static function getGroups() {
-        return TagGroup::get()->sort('Order')->map('Name', 'Label')->toArray();
-    }
-
+    private static $many_many = [
+        'AllowedTags' => 'Tag'
+    ];
 
     public function getCMSFields() {
         $fields = new FieldList();
+
         $fields->add(new LiteralField('namelabel', 'Name is the label used in CFP, use only lowercase'));
         $fields->add(new TextField('Name', 'Name (lowercase)'));
         $fields->add(new TextField('Label'));
-
+        if($this->ID > 0) {
+            $fields->tag('AllowedTags', 'Allowed Tags', Tag::get(), $this->AllowedTags())
+                ->configure()
+                ->setTitleField('Tag')
+                ->end();
+        }
         return $fields;
     }
 }

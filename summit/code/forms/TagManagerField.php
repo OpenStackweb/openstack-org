@@ -18,12 +18,18 @@ class TagManagerField extends FormField
 
     public function FieldHolder($attributes = array ())
     {
-        //$tags_json = json_encode($this->Category->AllowedTags()->column('Tag'));
-        $tag_array = array_fill_keys(array_keys(TagGroup::getGroups()), array());
+        $current_summit = $this->Category->Summit();
+        $tag_groups     = [];
+        foreach($current_summit->TrackTagGroups() as $group){
+            $tag_groups[$group->Label] = $group;
+        }
+
+        $tag_array = array_fill_keys(array_keys($tag_groups), []);
 
         foreach ($this->Category->AllowedTags() as $tag) {
-            if(!isset($tag_array[$tag->Group])) $tag_array[$tag->Group] = array();
-            $tag_array[$tag->Group][] = ['tag' => $tag->Tag, 'id' => $tag->ID];
+            $tag_group = $current_summit->getTagGroupFor($tag);
+            if(is_null($tag_group)) continue;
+            $tag_array[$tag_group->Label][] = ['tag' => $tag->Tag, 'id' => $tag->ID];
         }
 
         foreach ($tag_array as $group => &$tags) {

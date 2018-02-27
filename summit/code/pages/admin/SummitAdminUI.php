@@ -156,28 +156,12 @@ final class SummitAdminUI extends DataExtension
             $categories = new GridField('Categories', 'Presentation Categories', $this->owner->getCategories(), $config);
             $f->addFieldToTab('Root.Presentation Categories', $categories);
 
-            $config = GridFieldConfig_RelationEditor::create(100);
-            $config->removeComponentsByType(new GridFieldDataColumns());
-            $config->removeComponentsByType(new GridFieldDetailForm());
-            $config->addComponent(new GridFieldUpdateDefaultCategoryTags);
-            $config->removeComponentsByType('GridFieldAddNewButton');
-            $default_tags = new GridField('CategoryDefaultTags', 'Category Default Tags', $this->owner->CategoryDefaultTags(), $config);
-            $completer = $config->getComponentByType('GridFieldAddExistingAutocompleter');
-            $completer->setResultsFormat('$Tag');
-            $completer->setSearchFields(array('Tag'));
-            $completer->setSearchList(Tag::get());
-            $editconf = new GridFieldDetailForm();
-            $editconf->setFields(FieldList::create(
-                TextField::create('Tag','Tag'),
-                DropdownField::create('ManyMany[Group]', 'Group', TagGroup::getGroups())
-            ));
-
-            $summaryfieldsconf = new GridFieldDataColumns();
-            $summaryfieldsconf->setDisplayFields(array( 'Tag' => 'Tag', 'Group' => 'Group'));
-
-            $config->addComponent($editconf);
-            $config->addComponent($summaryfieldsconf, new GridFieldFilterHeader());
-            $f->addFieldToTab('Root.Presentation Categories', $default_tags);
+            // track tag groups
+            $config = GridFieldConfig_RecordEditor::create(100);
+            $track_tag_groups = new GridField('TrackTagGroups', 'Track Tag Groups', $this->owner->TrackTagGroups(), $config);
+            $config->addComponent($sort = new GridFieldSortableRows('Order'));
+            $config->addComponent(new GridFieldSeedDefaultTrackTagGroupsAction);
+            $f->addFieldToTab('Root.Track Tag Groups', $track_tag_groups);
 
             // track groups
             $config = GridFieldConfig_RecordEditor::create(50);
@@ -194,12 +178,6 @@ final class SummitAdminUI extends DataExtension
             $config->addComponent($multi_class_selector);
             $categories = new GridField('CategoryGroups', 'Category Groups', $this->owner->CategoryGroups(), $config);
             $f->addFieldToTab('Root.Category Groups', $categories);
-
-            // tag groups
-            $config = GridFieldConfig_RecordEditor::create(10);
-            $config->addComponent($sort = new GridFieldSortableRows('Order'));
-            $tag_groups = new GridField('TagGroups', 'Tag Groups', TagGroup::get(), $config);
-            $f->addFieldToTab('Root.Tag Groups', $tag_groups);
 
             // locations
             $config = GridFieldConfig_RecordEditor::create(50);

@@ -15,8 +15,8 @@
 class Summit extends DataObject implements ISummit
 {
 
-    private static $db = array
-    (
+    private static $db =
+    [
         'Title' => 'Varchar',
         'SummitBeginDate' => 'SS_Datetime',
         'SummitEndDate' => 'SS_Datetime',
@@ -45,19 +45,19 @@ class Summit extends DataObject implements ISummit
         'AvailableOnApi' => 'Boolean',
         'CalendarSyncName'        => 'Varchar(255)',
         'CalendarSyncDescription' => 'Text',
-    );
+    ];
 
-    private static $defaults = array
-    (
-        'MaxSubmissionAllowedPerUser' => 3,
+    private static $defaults =
+    [
+        'MaxSubmissionAllowedPerUser'  => 3,
         'SecondaryRegistrationBtnText' => 'Book Hotel',
-    );
+    ];
 
-    private static $has_one = array
-    (
+    private static $has_one = [
+
         'Logo' => 'BetterImage',
         'Type' => 'SummitType',
-    );
+    ];
 
     private static $has_many = [
         'Presentations'                => 'Presentation',
@@ -80,33 +80,22 @@ class Summit extends DataObject implements ISummit
         'SummitAddOns'                 => 'SummitAddOn',
         'WIFIConnections'              => 'SummitWIFIConnection',
         'Sponsors'                     => 'Sponsor',
+        'TrackTagGroups'               => 'TrackTagGroup'
     ];
 
     /**
      * @var array
      */
-    private static $many_many = array
-    (
-        'CategoryDefaultTags'                          => 'Tag',
+    private static $many_many = [
         // summit speaker announcement emails
         'ExcludedCategoriesForAcceptedPresentations'   => 'PresentationCategory',
         'ExcludedCategoriesForAlternatePresentations'  => 'PresentationCategory',
         'ExcludedCategoriesForRejectedPresentations'   => 'PresentationCategory',
         // summit speaker upload slide deck email
         'ExcludedTracksForUploadPresentationSlideDeck' => 'PresentationCategory',
-    );
+    ];
 
-    private static $many_many_extraFields = array(
-        'CategoryDefaultTags' => array(
-            'Group' => "Varchar(255)",
-        ),
-    );
-
-    public function populateDefaults()
-    {
-        $this->populateDefaultTags();
-        parent::populateDefaults();
-    }
+    private static $many_many_extraFields = [];
 
     public static function get_active()
     {
@@ -133,20 +122,6 @@ class Summit extends DataObject implements ISummit
         return Summit::get()
             ->where(' SummitEndDate > UTC_TIMESTAMP() ')
             ->sort('SummitEndDate ASC');
-    }
-
-    private function populateDefaultTags()
-    {
-        global $database;
-        if(!DBSchema::existsTable($database, "Summit")) return;
-        // had to use literal query to avoid infinite loop
-        $id = DB::query("SELECT ID FROM Summit WHERE SummitEndDate < DATE(NOW()) ORDER BY SummitEndDate DESC LIMIT 1")->value();
-        if($id > 0) {
-            $default_tags = DB::query("SELECT * FROM Summit_CategoryDefaultTags AS DT WHERE SummitID = $id");
-            foreach ($default_tags as $dtag) {
-                $this->CategoryDefaultTags()->add($dtag['TagID'], array('Group' => $dtag['Group']));
-            }
-        }
     }
 
     public function checkRange($key)
@@ -1636,6 +1611,75 @@ SQL;
         }
 
         return 0;
+    }
 
+    /**
+     * @param Summit $summit
+     * @return ArrayList
+     */
+    public static function getAllowedTagsForTracksBy(Summit $summit){
+        $list = new ArrayList();
+        $map  = [];
+        foreach($summit->TrackTagGroups() as $trackTagGroup){
+            foreach($trackTagGroup->AllowedTags() as $tag){
+                if(isset($map[$tag->ID])) continue;
+                $map[$tag->ID] = $tag->ID;
+                $list->add($tag);
+            }
+        }
+        return $list;
+    }
+
+    /**
+     * @param Summit $summit
+     * @param Tag $tag
+     */
+    public static function seedTagOnAllTracksAllowedTags(Summit $summit, Tag $tag){
+        foreach($summit->Categories() as $track){
+            $track->AllowedTags()->add($tag);
+        }
+    }
+
+    /**
+     * @param Summit $summit
+     * @param Tag $tag
+     */
+    public static function unSeedTagOnAllTracksAllowedTags(Summit $summit, Tag $tag){
+        foreach($summit->Categories() as $track){
+            $track->AllowedTags()->remove($tag);
+        }
+    }
+
+    public static function seedDefaultTrackTagGroups(Summit $summit){
+        foreach(DefaultTrackTagGroup::get() as $default_track_tag_group){
+            $new_group = new TrackTagGroup();
+            // if already exists ...
+            if($summit->TrackTagGroups()->where(sprintf("Label = '%s'", $default_track_tag_group->Label))->count() > 0)
+                continue;
+            $new_group->Name      = $default_track_tag_group->Name;
+            $new_group->Label     = $default_track_tag_group->Label;
+            $new_group->Order     = $default_track_tag_group->Order;
+            $new_group->Mandatory = $default_track_tag_group->Mandatory;
+            $summit->TrackTagGroups()->add($new_group);
+
+            $new_group->SummitID = $summit->ID;
+            $new_group->write();
+            foreach ($default_track_tag_group->AllowedTags() as $tag){
+                $new_group->AllowedTags()->add($tag, ['IsDefault' => true]);
+            }
+        }
+    }
+
+    /**
+     * @param Tag $tag
+     * @return TrackTagGroup|null
+     */
+    public function getTagGroupFor(Tag $tag){
+        $res = DB::query(sprintf("SELECT TrackTagGroup.* from TrackTagGroup 
+INNER JOIN TrackTagGroup_AllowedTags ON TrackTagGroup_AllowedTags.TrackTagGroupID = TrackTagGroup.ID
+INNER JOIN Tag ON Tag.ID = TrackTagGroup_AllowedTags.TagID
+WHERE TrackTagGroup.SummitID = %s AND Tag.ID = %s; 
+", $this->ID, $tag->ID))->first();
+        return $res ? new TrackTagGroup($res): null;
     }
 }

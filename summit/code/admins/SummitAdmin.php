@@ -26,6 +26,7 @@ final class SummitAdmin extends ModelAdmin implements PermissionProvider
         'Summit',
         'SummitType',
         'DefaultSummitEventType'  => ['title' => "Default Event Types"],
+        'DefaultTrackTagGroup'    => ['title' => "Default Track Tag Groups"],
     ];
 
     public function init()

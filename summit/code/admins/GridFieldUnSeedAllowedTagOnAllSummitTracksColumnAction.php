@@ -1,7 +1,6 @@
 <?php
-
 /**
- * Copyright 2016 OpenStack Foundation
+ * Copyright 2018 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,7 +11,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-class GridFieldApprovePushNotificationAction
+
+class GridFieldUnSeedAllowedTagOnAllSummitTracksColumnAction
     implements GridField_ColumnProvider, GridField_ActionProvider
 {
     public function augmentColumns($gridField, &$columns)
@@ -24,13 +24,13 @@ class GridFieldApprovePushNotificationAction
 
     public function getColumnAttributes($gridField, $record, $columnName)
     {
-        return array('class' => 'col-buttons');
+        return ['class' => 'col-buttons'];
     }
 
     public function getColumnMetadata($gridField, $columnName)
     {
         if ($columnName == 'Actions') {
-            return array('title' => '');
+            return ['title' => ''];
         }
     }
 
@@ -43,44 +43,38 @@ class GridFieldApprovePushNotificationAction
     {
         if (!$record->canEdit()) return;
 
-        $notification = $gridField->getList()->byID($record->ID);
-        if($notification->isAlreadySent()) return;
+        $title = 'Remove Tag from All Tracks Allowed Tags';
+        $icon  = 'cross-circle' ;
 
-        $title        = $notification->Approved ? "Approved Notification" : "Approve Notification";
-        $icon         = $notification->Approved ? 'accept' : 'accept_disabled';
-
-        $field = GridField_FormAction::create($gridField, 'approvesummitnotification' . $record->ID, false, "approvesummitnotification",
-            array('RecordID' => $record->ID))
+        $field = GridField_FormAction::create($gridField, 'unseedallowedtagonallsummittracks' . $record->ID, false, "unseedallowedtagonallsummittracks",
+            ['RecordID' => $record->ID])
             ->setAttribute('title', $title)
             ->setAttribute('data-icon', $icon)
-            ->addExtraClass('gridfield-button-approve-summit-notification')
             ->setDescription($title);
-        if($notification->Approved){
-            $field->addExtraClass("disabled");
-        }
+
         return $field->Field();
     }
 
     public function getActions($gridField)
     {
-        return array('approvesummitnotification');
+        return ['unseedallowedtagonallsummittracks'];
     }
 
     public function handleAction(GridField $gridField, $actionName, $arguments, $data)
     {
-        if ($actionName == 'approvesummitnotification') {
+        if ($actionName == 'unseedallowedtagonallsummittracks') {
 
-            $notification = $gridField->getList()->byID($arguments['RecordID']);
-            $former_state = $notification->Approved;
-            $msg          = 'Push notification Approved!';
-            $code         = 200;
+            $tag       = $gridField->getList()->byID($arguments['RecordID']);
+            $summit_id = $_REQUEST['SummitID'];
+
+            Summit::unSeedTagOnAllTracksAllowedTags(
+                Summit::get()->byID($summit_id),
+                $tag
+            );
+            $code = 200;
+            $msg  = 'tag removed sucessfull from all summit tracks';
 
             try {
-                if ($former_state || $notification->isAlreadySent()) {
-                    return;
-                }
-                $notification->approve();
-                $notification->write();
 
             } catch (Exception $ex) {
                 throw new ValidationException($ex->getMessage(), 0);

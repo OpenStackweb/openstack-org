@@ -31,6 +31,8 @@ final class RefactorDefaultEventTypesMigration extends AbstractDBMigrationTask
             ISummitEventType::HandonLabs,
             ISummitEventType::EveningEvents,
             ISummitEventType::Lunch_Breaks,
+            ISummitEventType::Lunch,
+            ISummitEventType::Breaks,
             ISummitEventType::GroupsEvents,
         ];
 

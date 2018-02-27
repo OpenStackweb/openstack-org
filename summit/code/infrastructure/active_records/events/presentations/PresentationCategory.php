@@ -45,17 +45,13 @@ class PresentationCategory extends DataObject
         'ChangeRequests' => 'SummitCategoryChange',
     );
 
-    private static $many_many = array(
+    private static $many_many = [
         'AllowedTags'    => 'Tag',
         'ExtraQuestions' => 'TrackQuestionTemplate',
-    );
+    ];
 
-    private static $many_many_extraFields = array(
-        'AllowedTags' => array(
-            'Group'     => 'Varchar(255)',
-            'IsDefault' => 'Boolean',
-        ),
-    );
+    private static $many_many_extraFields = [
+    ];
 
     private static $belongs_many_many = array(
         'TrackChairs'   => 'SummitTrackChair',
@@ -86,31 +82,15 @@ class PresentationCategory extends DataObject
 
         if($this->ID > 0)
         {
-            //tags
-            $config = new GridFieldConfig_RelationEditor(100);
-            $config->removeComponentsByType(new GridFieldDataColumns());
-            $config->removeComponentsByType(new GridFieldDetailForm());
+            // allowed tags
 
-            $completer = $config->getComponentByType('GridFieldAddExistingAutocompleter');
-            $completer->setResultsFormat('$Tag');
-            $completer->setSearchFields(array('Tag'));
-            $completer->setSearchList(Tag::get());
-
-            $editconf = new GridFieldDetailForm();
-            $editconf->setFields(FieldList::create(
-                TextField::create('Tag','Tag'),
-                DropdownField::create('ManyMany[Group]', 'Group', TagGroup::getGroups())
-            ));
-
-            $summaryfieldsconf = new GridFieldDataColumns();
-            $summaryfieldsconf->setDisplayFields(array( 'Tag' => 'Tag', 'Group' => 'Group'));
-
-            $config->addComponent($editconf);
-            $config->addComponent($summaryfieldsconf, new GridFieldFilterHeader());
-            $config->removeComponentsByType('GridFieldAddNewButton');
-
-            $tags = new GridField('AllowedTags', 'Tags', $this->AllowedTags(), $config);
-            $fields->addFieldToTab('Root.Main', $tags);
+            $fields->tag('AllowedTags',
+                sprintf('Allowed Tags <a target="_blank" href="%sadmin/summits/Summit/EditForm/field/Summit/item/%s#Root_TrackTagGroups">( Depends on Tracks Tag Groups)<a>', Director::absoluteBaseURL(), $_REQUEST['SummitID']),
+                Summit::getAllowedTagsForTracksBy($this->Summit()),
+                $this->AllowedTags())
+                ->configure()
+                ->setTitleField('Tag')
+                ->end();
 
             // extra questions for call-for-presentations
             $config = new GridFieldConfig_RelationEditor();
@@ -277,6 +257,10 @@ class PresentationCategory extends DataObject
         }
 
         return false;
+    }
+
+    protected function onBeforeDelete() {
+        parent::onBeforeDelete();
     }
 
 }
