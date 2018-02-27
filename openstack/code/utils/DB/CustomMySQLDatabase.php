@@ -97,8 +97,6 @@ class CustomMySQLDatabase extends BaseMySQLDatabase
 
     public function query($sql, $errorLevel = E_USER_ERROR) {
         $query = parent::query($sql, $errorLevel);
-        if(Director::isDev())
-            SS_Log::log($sql, SS_Log::DEBUG);
         return $query;
     }
 
