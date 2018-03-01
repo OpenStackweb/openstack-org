@@ -5,7 +5,7 @@
     </div>
     <% loop $ProjectGroups %>
         <div class="col-md-4 col-sm-6 nav-first-group-btn">
-            <a class="project-group-button btn btn-success" data-toggle="collapse" data-target="#projectgroup_{$Key}">
+            <a class="project-group-button btn btn-success" data-toggle="collapse" data-target="#projectgroup_{$ID}">
                 $Name
             </a>
         </div>
@@ -26,7 +26,7 @@
 </div>
 
 <% loop $ProjectGroups %>
-    <div id="projectgroup_{$Key}" class="collapse project-options row">
+    <div id="projectgroup_{$ID}" class="collapse project-options row">
         <div class="line"><div class="triangle"></div></div>
         <div class="col-md-12">
             <h2>Select the project you would like to contribute to...</h2>
@@ -35,7 +35,7 @@
             Once you select the project you are interested in contributing to, you will see an in depth guide to contributing.
             The first step is as easy as that! Don't see the project you are interested in? <a href="" class="clear-groups">Select another project group</a>
         </div>
-        <% loop $Top.getComponentsByGroup($Name) %>
+        <% loop $OpenStackComponents() %>
             <div class="col-md-4 col-sm-6">
                 <a class="project-button btn btn-success" href="https://docs.openstack.org/{$Slug}" >
                     <div class="col-md-2 col-sm-2 col-xs-2">

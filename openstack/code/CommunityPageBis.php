@@ -71,6 +71,12 @@ class CommunityPageBis_Controller extends Page_Controller
         Requirements::javascript('themes/openstack/javascript/community-bis.js');
     }
 
+    function getProjectGroups() {
+        $groups = OpenStackComponentSubCategory::get();
+
+        return $groups;
+    }
+
     function getComponentsByGroup($group) {
         return OpenStackComponent::get()->filter('Use', $group);
     }
