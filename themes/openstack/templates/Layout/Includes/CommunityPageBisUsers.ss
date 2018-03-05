@@ -16,7 +16,7 @@
         </a>
     </div>
     <div class="col-md-4 col-sm-4 nav-first-group-btn">
-        <a class="btn btn-success" href="https://wiki.openstack.org/wiki/OpenStack_SIGs" title="SIGs are teams that collaborate around common interests, whether it’s sharing knowledge or advocating for features upstream.">
+        <a class="btn btn-success" href="https://governance.openstack.org/sigs/" title="SIGs are teams that collaborate around common interests, whether it’s sharing knowledge or advocating for features upstream.">
             OpenStack Special Interest Groups
             <p>SIGs are teams that collaborate around common interests, whether it’s sharing knowledge or advocating for features upstream.</p>
         </a>
