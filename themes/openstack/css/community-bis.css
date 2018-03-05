@@ -204,7 +204,7 @@
 .project-button img {
     width: 65px;
     position: relative;
-    top: -13px;
+    top: -5px;
     left: -30px
 }
 
@@ -219,7 +219,7 @@
     position: relative;
     top: -20px;
     left: -20px;
-    font-size: 0.5em;
+    font-size: 0.4em;
 }
 
 .project-button .fa {

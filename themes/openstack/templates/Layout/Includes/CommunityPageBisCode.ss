@@ -19,9 +19,9 @@
         <a href="" class="clear-groups">Select another project group</a>
     </div>
     <div class="col-md-4 col-sm-6">
-        <div class="project-group-button-selected btn btn-success">
+        <h3 class="project-group-button-selected btn btn-success">
             Compute
-        </div>
+        </h3>
     </div>
 </div>
 
