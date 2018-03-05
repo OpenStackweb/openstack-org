@@ -187,8 +187,8 @@ final class ElectionManager implements IElectionManager {
      */
 	public function isValidNomination($member_id){
         return $this->tx_manager->transaction(function() use($member_id){
-            $current_member   = Member::currentUser();
-            if (!$current_member->isFoundationMember()) {
+            $current_member  = Member::currentUser();
+            if (is_null($current_member) || !$current_member->isFoundationMember()) {
                 throw new EntityValidationException("INVALID VOTER");
             }
 

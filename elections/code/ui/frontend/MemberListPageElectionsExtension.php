@@ -60,6 +60,9 @@ final class MemberListPageElectionsExtension extends Extension
 
         $results = [];
         try {
+            $current_member = Member::currentUser();
+            if(is_null($current_member))
+                return $this->owner->httpError(413,'User is not logged');
             // Grab candidate ID from the URL
             $candidate_id = $request->param("ID");
             $res = $this->manager->isValidNomination($candidate_id);
@@ -106,6 +109,9 @@ final class MemberListPageElectionsExtension extends Extension
             $results["Success"] = false;
             $results["BackLink"] = $this->owner->Link();
             SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+        }
+        catch(SS_HTTPResponse_Exception $ex3){
+            throw $ex3;
         }
         catch (Exception $ex){
             $results["Success"] = false;
