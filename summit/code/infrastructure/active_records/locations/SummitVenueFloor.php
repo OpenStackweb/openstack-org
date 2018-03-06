@@ -67,7 +67,7 @@ class SummitVenueFloor extends DataObject implements ISummitVenueFloor
             $f->add(new LiteralField('br','<br>'));
             $config = GridFieldConfig_RelationEditor::create();
             $config->getComponentByType('GridFieldAddExistingAutocompleter')->setSearchList($this->Venue()->Rooms());
-            $gridField = new GridField('Rooms', 'Rooms', $this->Rooms(), $config);
+            $gridField = new GridField('Rooms', 'Rooms', $this->Rooms()->sort('Order', 'ASC'), $config);
             $f->add($gridField);
         }
 

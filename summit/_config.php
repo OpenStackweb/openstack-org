@@ -194,20 +194,11 @@ PublisherSubscriberManager::getInstance()->subscribe(ISummitEntityEvent::Deleted
             'pub_new' => intval($entity->Published)
         ]);
 
-
         $request = new AdminSummitEventActionSyncWorkRequest();
         $request->SummitEventID = $entity->ID;
         $request->Type = ICalendarSyncWorkRequest::TypeRemove;
         $request->CreatedByID = Member::currentUserID();
         $request->write();
-
-        //remove from site schedule
-
-        DB::query("DELETE FROM Member_Schedule WHERE SummitEventID = {$entity->ID};");
-
-        // remove from site favorite
-
-        DB::query("DELETE FROM Member_FavoriteSummitEvents WHERE SummitEventID = {$entity->ID};");
     }
 
     if($entity instanceof SummitAbstractLocation){
@@ -220,9 +211,6 @@ PublisherSubscriberManager::getInstance()->subscribe(ISummitEntityEvent::Deleted
             $request->CreatedByID     = Member::currentUserID();
             $request->write();
         }
-
-        //remove locations from all events ...
-        DB::query("UPDATE SummitEvent SET LocationID = 0 WHERE LocationID = {$entity->ID} AND SummitID = {$entity->SummitID};");
     }
 
     if($entity instanceof SummitVenueFloor){

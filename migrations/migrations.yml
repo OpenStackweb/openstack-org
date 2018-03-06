@@ -102,3 +102,4 @@ migrations:
   - PopulateSubCategoriesAndTagsMigration
   - AddDefaultEventTypesPresentationTypesMigration
   - CFPTrackTagGroupsRefactoringMigration
+  - SummitReferencialIntegrityMigration
