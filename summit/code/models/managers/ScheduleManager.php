@@ -282,16 +282,7 @@ final class ScheduleManager implements IScheduleManager
             $rsvp->SeatType       = $event->getCurrentRSVPSubmissionSeatType();
 
             if (!$event->couldAddSeatType($rsvp->SeatType))
-                throw new EntityValidationException
-                (
-                    sprintf
-                    (
-                        "you reach the limit of rsvp items for current event %s ( regular seats %s - wait list seats %s)",
-                        $event_id,
-                        $event->getCurrentSeatsCountByType(IRSVP::SeatTypeRegular),
-                        $event->getCurrentSeatsCountByType(IRSVP::SeatTypeWaitList)
-                    )
-                );
+                throw new EntityValidationException("This event is now full and we are no longer adding to the waitlist.");
 
             $this->createRSVP($event, $rsvp, $data);
 
