@@ -18,7 +18,7 @@
                         <a href="/software/" class="overview-btn left-btn">How It Works <i class="fa fa-arrow-circle-o-right"></i></a>
                         <a href="/software/start/" class="overview-btn right-btn">Get The Software <i class="fa fa-arrow-circle-o-down"></i></a>
                     </div>
-                    <div class="release-text">Latest Release: <a href="/software/pike/">Pike</a> (August 2017)</div>
+                    <div class="release-text">Latest Release: <a href="/software/queens/">Queens</a> (March 2018)</div>
                 </div>
                 <div class="col-lg-6 col-sm-12 overview-right">
                     <img class="img-responsive control-cloud-graphic" src="/themes/openstack/images/control-your-cloud.svg" onerror="this.onerror=null; this.src=/images/control-your-cloud.png" alt="OpenStack Cloud Software">
