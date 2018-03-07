@@ -23,7 +23,7 @@ class SummitAbstractLocation extends DataObject implements ISummitLocation
     ];
 
     private static $has_many = [
-        'Banners' => 'LocationBanner'
+        'Banners' => 'SummitLocationBanner'
     ];
 
     public function getFullName()

@@ -13,9 +13,9 @@
  **/
 
 /**
- * Class ScheduledLocationBanner
+ * Class ScheduledSummitLocationBanner
  */
-final class ScheduledLocationBanner extends LocationBanner
+final class ScheduledSummitLocationBanner extends SummitLocationBanner
 {
     private static $db = [
         'StartDate' => 'SS_Datetime',
@@ -128,7 +128,6 @@ final class ScheduledLocationBanner extends LocationBanner
         $fields->addFieldToTab('Root.Dates', $date = new DatetimeField('EndDate', "When does this Banner should stop to be shown?"));
         $date->getDateField()->setConfig('showcalendar', true);
         $date->getDateField()->setConfig('dateformat', 'dd/MM/yyyy');
-
 
         return $fields;
     }

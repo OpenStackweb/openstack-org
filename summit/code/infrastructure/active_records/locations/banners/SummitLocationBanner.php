@@ -13,14 +13,15 @@
  **/
 
 /**
- * Class LocationBanner
+ * Class SummitLocationBanner
  */
-class LocationBanner extends DataObject
+class SummitLocationBanner extends DataObject
 {
     private static $db = [
         'Title'   => 'Text',
         'Content' => 'HTMLText',
         'Enabled' => 'Boolean',
+        'Type'    => 'Enum(array("Primary","Secondary"), "Primary")',
     ];
 
     private static $has_one = [
