@@ -16,9 +16,11 @@
             var promo_codes = [];
 
             <% loop $Summit.SummitRegistrationPromoCodes().Limit(20) %>
+
                 promo_codes.push(
                     {
                         id: {$ID},
+                        created : moment("{$Created}").format('l'),
                         code : "{$Code}",
                         <% if $ClassName == 'SpeakerSummitRegistrationPromoCode' %>
                         owner: "{$Speaker().FirstName} {$Speaker().LastName}",

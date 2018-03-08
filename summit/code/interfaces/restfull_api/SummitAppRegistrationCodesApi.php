@@ -467,6 +467,7 @@ final class SummitAppRegistrationCodesApi extends AbstractRestfulJsonApi
             $results = array();
             foreach ($codes as $row) {
                 $code_array = array(
+                    'Created' => $row['created'],
                     'Code' => $row['code'],
                     'Type' => $row['type'],
                     'Owner' => $row['owner'],
@@ -493,6 +494,9 @@ final class SummitAppRegistrationCodesApi extends AbstractRestfulJsonApi
                 $objPHPExcel->getProperties()->setCreator("OpenStack");
                 $objPHPExcel->getProperties()->setTitle("PromoCodes");
                 $sheet_no = 0;
+
+                $filename = "promocodes_report-" . date('Ymd') . ".xls";
+
                 foreach ($results as $type => $codes) {
                     if($sheet_no > 0){
                         $active_sheet = $objPHPExcel->createSheet();

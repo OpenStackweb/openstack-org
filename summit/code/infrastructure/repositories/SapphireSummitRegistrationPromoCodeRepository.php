@@ -38,6 +38,7 @@ class SapphireSummitRegistrationPromoCodeRepository
 SELECT 
 SPC.ID,
 PC.ClassName,
+PC.Created,
 CONCAT(SP.FirstName, ' ',SP.LastName) AS FullName,
 IFNULL(SPRR.Email, SM.Email) AS Email,
 SPC.SpeakerID AS OwnerID,
@@ -59,6 +60,7 @@ WHERE SummitID = {$summit_id} AND PC.ClassName = 'SpeakerSummitRegistrationPromo
 UNION
 SELECT MC.ID,
 PC.ClassName,
+PC.Created,
 CONCAT(IFNULL(O.FirstName,MC.FirstName), ' ',IFNULL(O.Surname,MC.LastName)) AS FullName,
 IFNULL(O.Email,MC.Email) AS Email, 
 MC.OwnerID,
@@ -78,6 +80,7 @@ WHERE SummitID = {$summit_id} AND PC.ClassName = 'MemberSummitRegistrationPromoC
 UNION
 SELECT MC.ID,
 PC.ClassName,
+PC.Created,
 CONCAT(IFNULL(O.FirstName,MC.FirstName), ' ',IFNULL(O.Surname,MC.LastName)) AS FullName,
 IFNULL(O.Email,MC.Email) AS Email, 
 MC.OwnerID,
@@ -110,6 +113,9 @@ SQL;
                 break;
             case 'type':
                 $sort = ' ORDER BY PROMO_CODES.Type '.strtoupper($sort_dir);
+                break;
+            case 'created':
+                $sort = ' ORDER BY PROMO_CODES.Created '.strtoupper($sort_dir);
                 break;
         }
 
@@ -146,6 +152,7 @@ SQL;
 
             $code_array = [
                 'id'          =>  intval($code['ID']),
+                'created'     => $code['Created'],
                 'code'        => $code['Code'],
                 'email_sent'  => intval($code['EmailSent']),
                 'redeemed'    => intval($code['Redeemed']),

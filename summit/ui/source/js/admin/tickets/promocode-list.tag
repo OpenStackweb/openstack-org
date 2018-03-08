@@ -34,6 +34,7 @@
         <table id="promocode-table" class="table">
             <thead>
                 <tr>
+                    <th><a title="sort by Date" style="cursor:pointer;" onclick="{ sortBy }" data-field='created' data-dir='asc'>Created</a></th>
                     <th><a title="sort by Code" style="cursor:pointer;" onclick="{ sortBy }" data-field='code' data-dir='asc'>Code</a></th>
                     <th><a title="sort by Type" style="cursor:pointer;" onclick="{ sortBy }" data-field='class' data-dir='asc'>Type</a></th>
                     <th>Owner</th>
@@ -46,6 +47,7 @@
             </thead>
             <tbody>
                 <tr each={ pcode, i in promo_codes }>
+                    <td>{ moment(pcode.created).format('l') }</td>
                     <td>{ pcode.code }</td>
                     <td>{ pcode.type }</td>
                     <td>{ pcode.owner }</td>
