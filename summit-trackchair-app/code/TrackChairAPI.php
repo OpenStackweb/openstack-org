@@ -37,11 +37,11 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         'handleReorderList',
         'handleChangeRequests',
         'handleResolveCategoryChange',
+        'handlePresentationsExport',
         'handleAddChair' => 'ADMIN',
         'handleDeleteChair' => 'ADMIN',
         'handleRestoreOrders' => 'ADMIN',
         'handleChairExport' => 'ADMIN',
-        'handlePresentationsExport' => 'ADMIN',
         'handlePresentationsWithComments' => 'ADMIN',
         'handleFindMember' => 'ADMIN'
     ];

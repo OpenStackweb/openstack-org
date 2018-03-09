@@ -29,7 +29,7 @@ const PresentationFilterDropdown = ({
 		<DropdownItem eventKey='pass'><i className='fa fa-thumbs-down danger' /> Vote: No thanks</DropdownItem>
         <DropdownItem divider />
 		{types.map(t =>
-			<DropdownItem eventKey={t.type}> {t.type} </DropdownItem>
+			<DropdownItem key={'type_' + t.id} eventKey={t.type}> {t.type} </DropdownItem>
 		)}
 
 	</Dropdown>
