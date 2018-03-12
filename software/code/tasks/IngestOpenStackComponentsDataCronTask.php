@@ -58,7 +58,6 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                 echo sprintf('processing release %s ...', $release->Name).PHP_EOL;
                 $this->processApiVersionsPerRelease($release);
                 $this->processProjectPerRelease($release);
-                $this->getProductionUseStatus($release);
                 $this->getInstallationGuideStatus($release);
                 $this->getSDKSupport($release);
                 $this->getQualityOfPackages($release);
@@ -389,69 +388,6 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
             }
             $cs->add($component, $data);
         }
-    }
-
-    private function getProductionUseStatus(OpenStackRelease $release)
-    {
-
-        $template_url = '%s/%s/ops-production-use.json';
-        $response     = null;
-        try
-        {
-            $response = $this->client->get
-            (
-                sprintf($template_url, OpsTagsTeamRepositoryUrl, strtolower($release->Name))
-            );
-        }
-        catch (Exception $ex)
-        {
-            SS_Log::log($ex->getMessage(), SS_Log::WARN);
-        }
-
-        if(is_null($response)) return;
-        if($response->getStatusCode() != 200) return;
-        $body =  $response->getBody();
-        if(is_null($body)) return;
-        $content = $body->getContents();
-        if(empty($content)) return;
-        $production_use_status_json = json_decode($content, true);
-        if(is_null($production_use_status_json))
-        {
-            return;
-        }
-        $cs = $release->getManyManyComponents('OpenStackComponents');
-
-        foreach($production_use_status_json as $component_name => $entry)
-        {
-            preg_match("/\((\w*)\)/", $component_name, $output_array);
-            if(count($output_array) !== 2) continue;
-            $code_name = $output_array[1];
-            $component = $release->supportsComponent($code_name);
-            if(is_null($component)) continue;
-            $status = $entry['status'];
-            $percentage =preg_split("/\%/", $status);
-            if(count($percentage) !== 2) continue;
-            $percentage  = intval($percentage[0]);
-
-            if(isset($entry['caveats'])) {
-                $caveats = $entry['caveats'];
-                foreach($caveats as $caveat)
-                {
-                    $c               = new OpenStackComponentReleaseCaveat();
-                    $c->ReleaseID   = $release->ID;
-                    $c->ComponentID = $component->ID;
-                    $c->Status      = isset($caveat['status'])?$caveat['status']:'';
-                    $c->Label       = isset($caveat['label'])?$caveat['label'] : '';
-                    $c->Description = isset($caveat['description'])?$caveat['description']:'';
-                    $c->Type        = 'ProductionUse';
-                    $c->write();
-                }
-            }
-
-            $cs->add($component, array( 'Adoption' => $percentage ));
-        }
-        $release->HasStatistics = true;
-        $release->write();
     }
 
     private function getSDKSupport(OpenStackRelease $release)

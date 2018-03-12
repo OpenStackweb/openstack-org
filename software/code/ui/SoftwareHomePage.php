@@ -256,13 +256,7 @@ class SoftwareHomePage_Controller extends Page_Controller
 
     public function getReleases()
     {
-        $releases = OpenStackRelease::get()->filter
-        (
-            array
-            (
-                'HasStatistics' => true,
-            )
-        )->sort('ReleaseDate','DESC');
+        $releases = OpenStackRelease::get()->sort('ReleaseDate','DESC');
 
         $res1 = array();
 
