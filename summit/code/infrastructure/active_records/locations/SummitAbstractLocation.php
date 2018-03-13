@@ -117,8 +117,8 @@ class SummitAbstractLocation extends DataObject implements ISummitLocation
             $multi_class_selector->setClasses
             (
                 [
-                    'LocationBanner'          => 'Banner',
-                    'ScheduledLocationBanner' => 'Scheduled Banner',
+                    'SummitLocationBanner'          => 'Banner',
+                    'ScheduledSummitLocationBanner' => 'Scheduled Banner',
                 ]
             );
             $config->addComponent($multi_class_selector);
