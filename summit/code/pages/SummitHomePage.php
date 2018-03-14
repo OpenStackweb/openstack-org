@@ -28,7 +28,8 @@ class SummitHomePage extends SummitPage {
         'SummitStaticSponsorPage',
         'SummitNewStaticAboutPage',
         'SummitPage',
-        'ConferencePage'
+        'ConferencePage',
+        'SummitAboutPage'
     );
 
     private static $default_child = "SummitOverviewPage";

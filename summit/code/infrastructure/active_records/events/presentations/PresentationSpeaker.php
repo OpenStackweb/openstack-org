@@ -1288,9 +1288,7 @@ class PresentationSpeaker extends DataObject
             $img2 = (($size - $width) < 200) ? $img2 : $img2->SetRatioSize($width, $width);
             return is_null($img2) ? $generic_url : $img2->getAbsoluteURL();
         } elseif (!empty($twitter_name)) {
-            if ($width < 100)
-                return 'https://twitter.com/' . trim(trim($twitter_name, '@')) . '/profile_image?size=normal';
-            return 'https://twitter.com/' . trim(trim($twitter_name, '@')) . '/profile_image?size=bigger';
+            return 'https://twitter.com/' . trim(trim($twitter_name, '@')) . '/profile_image?size=original';
         }
         return $generic_url;
     }
