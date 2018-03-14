@@ -1364,10 +1364,16 @@ a.who-section-cta {
     text-align: center;
     margin-bottom: 60px; }
     .summit-users-wrapper .summit-user-section img.summit-user-image {
+      position: relative;
+      height: 150px;
+    }
+    .summit-users-wrapper .summit-user-section .summit-user-image-box {
       border-radius: 50%;
       width: 150px;
       height: 150px;
-      margin-bottom: 20px; }
+      overflow: hidden;
+      margin: 0 auto 20px auto;
+    }
     .summit-users-wrapper .summit-user-section .name {
       font-weight: 600;
       text-transform: uppercase; }
