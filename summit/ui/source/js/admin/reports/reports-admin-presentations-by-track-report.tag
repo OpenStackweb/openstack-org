@@ -67,6 +67,7 @@
                     <th class="sortable" data-sort="last_name" if={ showThis('speaker') }>Speaker</th>
                     <th if={ showThis('speaker') }>Email</th>
                     <th if={ showThis('moderator') }>Moderator</th>
+                    <th if={ showThis('moderator') }>Email</th>
                     <th if={ showThis('owner') }>Owner</th>
                     <th class="sortable" data-sort="company" if={ showThis('speaker') }>Org</th>
                     <th if={ showThis('abstract') }>Abstract</th>
@@ -82,6 +83,7 @@
                     <td>{ presentation.type }</td>
                     <td if={ showThis('speaker') }>{ presentation.first_name } { presentation.last_name }</td>
                     <td if={ showThis('speaker') }>{ presentation.email }</td>
+                    <td if={ showThis('moderator') }>{ presentation.moderator_first_name } { presentation.moderator_last_name }</td>
                     <td if={ showThis('moderator') }>{ presentation.moderator_email }</td>
                     <td if={ showThis('owner') }>{ presentation.owner_email }</td>
                     <td if={ showThis('speaker') }>{ presentation.company }</td>

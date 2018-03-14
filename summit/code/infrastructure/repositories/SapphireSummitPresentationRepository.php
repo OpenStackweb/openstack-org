@@ -670,9 +670,11 @@ SQL;
             INNER JOIN PresentationCategory AS PC ON E.CategoryID = PC.ID
             LEFT JOIN Presentation_Speakers AS PS ON PS.PresentationID = P.ID
             LEFT JOIN PresentationSpeaker AS S ON PS.PresentationSpeakerID = S.ID
+            LEFT JOIN PresentationSpeaker AS S2 ON P.ModeratorID = S2.ID
             LEFT JOIN SpeakerRegistrationRequest AS SR ON SR.SpeakerID = S.ID
+            LEFT JOIN SpeakerRegistrationRequest AS SR2 ON SR2.SpeakerID = S2.ID
             LEFT JOIN Member AS M ON M.ID = S.MemberID
-            LEFT JOIN Member AS M2 ON M2.ID = P.ModeratorID
+            LEFT JOIN Member AS M2 ON M2.ID = S2.MemberID
             LEFT JOIN Member AS M3 ON M3.ID = P.CreatorID
             LEFT JOIN Affiliation AS A ON A.MemberID=M.ID
             LEFT JOIN Org ON Org.ID = A.OrganizationID AND A.Current = 1
@@ -727,12 +729,14 @@ SQL;
         if (in_array('speaker',$filters['show_col'])) {
             $query .= "S.FirstName AS first_name,
                        S.LastName AS last_name,
-                       M.Email AS email,
+                       IFNULL(M.Email, SR.Email) AS email,
                        GROUP_CONCAT(Org.Name SEPARATOR ', ') AS company,";
         }
 
         if (in_array('moderator',$filters['show_col'])) {
-            $query .= "M2.Email AS moderator_email,";
+            $query .= "IFNULL(M2.Email, SR2.Email) AS moderator_email, 
+                       S2.FirstName AS moderator_first_name,
+                       S2.LastName AS moderator_last_name,";
         }
 
         if (in_array('owner',$filters['show_col'])) {
