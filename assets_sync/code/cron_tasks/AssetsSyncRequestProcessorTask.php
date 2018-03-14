@@ -48,7 +48,13 @@ final class AssetsSyncRequestProcessorTask extends CronTask
                         echo sprintf("file %s exists!", $sync_request->Origin).PHP_EOL;
                         $destination = sprintf("%s/%s", ASSETS_PATH, $sync_request->Destination);
                         echo sprintf("trying to copying from %s to %s ...", $sync_request->Origin, $destination).PHP_EOL;
-                        $res         = copy($sync_request->Origin,  $destination);
+                        // check if the destination path exists
+                        $destination_path = dirname($destination);
+                        if (!file_exists($destination_path)) {
+                            echo sprintf("destination path %s does not exists ... creating it", $sync_request->Origin, $destination).PHP_EOL;
+                            mkdir($destination_path, 0755, true);
+                        }
+                        $res = copy($sync_request->Origin,  $destination);
                         if(!$res){
                             echo sprintf("error copying file from %s to %s", $sync_request->Origin, $destination).PHP_EOL;
                             continue;
