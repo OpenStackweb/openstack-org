@@ -66,7 +66,7 @@ class SearchResultEventList extends React.Component {
                 appId: appId,
                 xfbml: true,
                 status: true,
-                version : 'v2.7'
+                version : 'v2.12'
             });
         };
 
