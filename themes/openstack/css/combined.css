@@ -1894,6 +1894,45 @@ footer {
 #home .top-site-banner {
   display: none; }
 
+.summit-banner {
+  height: 70px;
+}
+
+.summit-banner div {
+  background-color: transparent;
+}
+
+.summit-banner .logo-box {
+  padding-top: 5px;
+}
+
+.summit-banner .line{
+  height: 54px;
+  margin: 8px 35px;
+  float: left;
+  border-right: 1px solid white;
+}
+
+.summit-banner .main-text-box {
+  padding-top: 8px;
+  color: white;
+}
+
+.summit-banner .button-box {
+  padding-top: 18px;
+  text-align: right;
+  color: white;
+}
+
+.summit-banner .button-box .btn {
+  border: none;
+  font-size: 16px;
+}
+
+.summit-banner .button-box .btn i{
+  margin-left: 15px;
+}
+
 /*End General Inner Page Styles*/
 /*Events Page*/
 .eventsBanner {

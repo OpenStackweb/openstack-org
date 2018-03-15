@@ -41,6 +41,10 @@ class HomePage extends Page
         'PromoImage' => 'BetterImage',
     );
 
+    private static $has_many = array(
+        'SummitBanners' => 'SummitBanner'
+    );
+
     function getCMSFields()
     {
         $fields = parent::getCMSFields();
@@ -98,6 +102,11 @@ class HomePage extends Page
 
         $fields->addFieldToTab("Root.IntroHeader", new TextareaField('PromoHeroCredit', 'Hero Credit'));
         $fields->addFieldToTab("Root.IntroHeader", new TextareaField('PromoHeroCreditUrl', 'Hero Credit Url'));
+
+        $config = GridFieldConfig_RecordEditor::create(4);
+        $gridField = new GridField('SummitBanners', 'Summit Banners', $this->SummitBanners(), $config);
+        $fields->addFieldToTab('Root.Banners', $gridField);
+
         return $fields;
     }
 
@@ -347,5 +356,10 @@ class HomePage_Controller extends Page_Controller
     {
         $date = $this->EventDate;
         return (isset($date)) ? floor((strtotime($date) - time()) / 60 / 60 / 24) : FALSE;
+    }
+
+    function getRandomSummitBanner() {
+        $banner = $this->SummitBanners()->sort('RAND()')->first();
+        return $banner;
     }
 }
