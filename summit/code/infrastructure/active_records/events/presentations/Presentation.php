@@ -687,8 +687,12 @@ class Presentation extends SummitEvent implements IPresentation
         $end_date = $summit->convertDateFromTimeZone2UTC($this->getEndDate());
 
         $presentation_id = $this->getIdentifier();
-        $location_id = $this->LocationID;
-        $speakers_id = array();
+
+        $location_id     = intval($this->LocationID);
+        $speakers_id     = [];
+        if($location_id <= 0){
+            return $valid;
+        }
 
         $speakers = $this->Speakers();
         foreach ($speakers as $speaker) {
@@ -722,6 +726,7 @@ SQL;
         if ($qty > 0) {
             return $valid->error('There is a speaker assigned to another presentation on that date/time range !');
         }
+
         return $valid;
     }
 
