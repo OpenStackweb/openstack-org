@@ -36,7 +36,7 @@ final class SapphireTagRepository extends SapphireRepository implements ITagRepo
             Tag.Tag,
             (SELECT COUNT(*) FROM SummitEvent_Tags ET WHERE ET.TagID = Tag.ID) AS ETCount,
             (SELECT COUNT(*) FROM PresentationCategory_AllowedTags PCT WHERE PCT.TagID = Tag.ID) AS PCTCount,
-            (SELECT COUNT(*) FROM Summit_CategoryDefaultTags ST WHERE ST.TagID = Tag.ID) AS STCount,
+            (SELECT COUNT(*) FROM TrackTagGroup_AllowedTags ST WHERE ST.TagID = Tag.ID) AS STCount,
             (SELECT COUNT(*) FROM UserStoryDO_Tags UST WHERE UST.TagID = Tag.ID) AS USTCount
             FROM Tag
             {$where}
