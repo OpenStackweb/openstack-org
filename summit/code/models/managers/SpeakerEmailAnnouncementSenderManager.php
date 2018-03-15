@@ -110,30 +110,34 @@ final class SpeakerEmailAnnouncementSenderManager
             $has_published = $speaker->hasPublishedRegularPresentations($current_summit->getIdentifier(), $role, true, $current_summit->getExcludedTracksForPublishedPresentations()) ||
                              $speaker->hasPublishedLightningPresentations($current_summit->getIdentifier(), $role, true, $current_summit->getExcludedTracksForPublishedPresentations());
             $has_alternate = $speaker->hasAlternatePresentations($current_summit->getIdentifier(), $role, true, $current_summit->getExcludedTracksForAlternatePresentations());
-
-            if ($has_published) //get approved code
-            {
-                $code = $this->promo_code_repository->getNextAvailableByType
-                (
-                    $current_summit,
-                    ISpeakerSummitRegistrationPromoCode::TypeAccepted
-                );
-                if (is_null($code)) throw new Exception('not available promo code!!!');
-            } else if ($has_alternate) // get alternate code
-            {
-                $code = $this->promo_code_repository->getNextAvailableByType
-                (
-                    $current_summit,
-                    ISpeakerSummitRegistrationPromoCode::TypeAlternate
-                );
-                if (is_null($code)) throw new Exception('not available alternate promo code!!!');
+            if(!$speaker->hasSummitPromoCode($current_summit->getIdentifier())) {
+                if ($has_published) //get approved code
+                {
+                    $code = $this->promo_code_repository->getNextAvailableByType
+                    (
+                        $current_summit,
+                        ISpeakerSummitRegistrationPromoCode::TypeAccepted
+                    );
+                    if (is_null($code)) throw new Exception('not available promo code!!!');
+                } else if ($has_alternate) // get alternate code
+                {
+                    $code = $this->promo_code_repository->getNextAvailableByType
+                    (
+                        $current_summit,
+                        ISpeakerSummitRegistrationPromoCode::TypeAlternate
+                    );
+                    if (is_null($code)) throw new Exception('not available alternate promo code!!!');
+                }
+            }
+            else{
+                $code = $speaker->getSummitPromoCode($current_summit->getIdentifier());
             }
 
             $params = [
-
-                'Speaker' => $speaker,
-                'Summit'  => $current_summit,
-                "Role"    => $role
+                'Speaker'            => $speaker,
+                'Summit'             => $current_summit,
+                'Role'               => $role,
+                'CheckMailExistance' => $check_email_existance
             ];
 
             if (!is_null($code)) {
@@ -142,8 +146,10 @@ final class SpeakerEmailAnnouncementSenderManager
                 $code->write();
                 $params['PromoCode'] = $code;
             }
+
             echo sprintf('sending email to %s', $email) . PHP_EOL;
             $sender_service->send($params);
+
             return true;
         });
     }

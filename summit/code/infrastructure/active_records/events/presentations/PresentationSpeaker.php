@@ -373,13 +373,14 @@ class PresentationSpeaker extends DataObject
      */
     public function PublishedPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker,  $exclude_privates_tracks = true, array $excluded_tracks = [])
     {
-        $types = array(
+        $types = [
             IPresentationType::Keynotes,
             IPresentationType::Panel,
             IPresentationType::Presentation,
             IPresentationType::LightingTalks,
+            IPresentationType::Workshop,
             IPresentationType::Fishbowl
-        );
+        ];
 
         return $this->PublishedPresentationsByType
         (
@@ -410,7 +411,12 @@ class PresentationSpeaker extends DataObject
         (
             $summit_id,
             $role,
-            [IPresentationType::Keynotes, IPresentationType::Panel, IPresentationType::Presentation],
+            [
+                IPresentationType::Keynotes,
+                IPresentationType::Panel,
+                IPresentationType::Presentation,
+                IPresentationType::Workshop
+            ],
             true,
             $excluded_tracks
         )->toArray();
@@ -420,7 +426,12 @@ class PresentationSpeaker extends DataObject
             (
                 $summit_id,
                 IPresentationSpeaker::RoleSpeaker,
-                [IPresentationType::Keynotes, IPresentationType::Panel, IPresentationType::Presentation],
+                [
+                    IPresentationType::Keynotes,
+                    IPresentationType::Panel,
+                    IPresentationType::Presentation,
+                    IPresentationType::Workshop
+                ],
                 true,
                 $excluded_tracks
             );
@@ -507,7 +518,13 @@ class PresentationSpeaker extends DataObject
     public function PublishedPresentationsByType(
         $summit_id               = null,
         $role                    = IPresentationSpeaker::RoleSpeaker,
-        array $types_slugs       = [IPresentationType::Keynotes, IPresentationType::Panel, IPresentationType::Presentation, IPresentationType::LightingTalks],
+        array $types_slugs       = [
+            IPresentationType::Keynotes,
+            IPresentationType::Panel,
+            IPresentationType::Presentation,
+            IPresentationType::Workshop,
+            IPresentationType::LightingTalks
+        ],
         $exclude_privates_tracks = true,
         array $excluded_tracks   = []
     ){

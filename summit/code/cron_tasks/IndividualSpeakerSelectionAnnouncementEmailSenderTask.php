@@ -38,20 +38,15 @@ final class IndividualSpeakerSelectionAnnouncementEmailSenderTask extends CronTa
         {
             $init_time  = time();
             $summit     = null;
-            $speaker    = null;
+            $speakers   = [];
 
-            if (isset($_GET['email']))
+            if (isset($_GET['speaker_ids']))
             {
-                $email   = $_GET['email'];
-                $speaker =  PresentationSpeaker::get()
-                    ->innerJoin("Member", "Member.ID = PresentationSpeaker.MemberID" )
-                    ->where("Member.Email = '{$email}' ")
-                    ->first();
-                if(is_null($speaker)){
-                    $speaker =  PresentationSpeaker::get()
-                        ->innerJoin("SpeakerRegistrationRequest", "SpeakerRegistrationRequest.ID = PresentationSpeaker.RegistrationRequestID" )
-                        ->where("SpeakerRegistrationRequest.Email = '{$email}' ")
-                        ->first();
+                $speakers_ids   = $_GET['speaker_ids'];
+                foreach (explode(',', $speakers_ids) as $speaker_id){
+                    $speaker = PresentationSpeaker::get()->byID($speaker_id);
+                    if(is_null($speaker)) continue;
+                    $speakers[] = $speaker;
                 }
             }
 
@@ -61,17 +56,18 @@ final class IndividualSpeakerSelectionAnnouncementEmailSenderTask extends CronTa
             }
 
             if(is_null($summit)) throw new Exception('summit_id is not valid!');
-            if(is_null($speaker)) throw new Exception('speaker is not valid!');
+            if(count($speakers) == 0) throw new Exception('speakers set is empty valid!');
+            $processed = 0;
 
-            $role = $speaker->isModeratorFor($summit) ? IPresentationSpeaker::RoleModerator : IPresentationSpeaker::RoleSpeaker;
+            foreach($speakers as $speaker) {
+                $role = $speaker->isModeratorFor($summit) ? IPresentationSpeaker::RoleModerator : IPresentationSpeaker::RoleSpeaker;
 
-            echo sprintf("sending individual mail for %s speaker as role %s", $speaker->getEmail(), $role).PHP_EOL;
-
-            $processed1  = $this->manager->sendSelectionAnnouncementEmailForSpeaker($speaker, $summit, $role, false);
+                echo sprintf("sending individual mail for %s speaker as role %s", $speaker->getEmail(), $role) . PHP_EOL;
+                $processed += $this->manager->sendSelectionAnnouncementEmailForSpeaker($speaker, $summit, $role, false);
+            }
 
             $finish_time = time() - $init_time;
-            echo 'processed records (speakers) ' . $processed1.' - time elapsed : '.$finish_time. ' seconds.'.PHP_EOL;
-
+            echo 'processed records (speakers) ' . $processed . ' - time elapsed : ' . $finish_time . ' seconds.' . PHP_EOL;
         }
         catch(Exception $ex)
         {
