@@ -20,7 +20,8 @@ class SummitAboutPage extends SummitPage {
     private static $many_many = array(
         'FeaturedSpeakers'   => 'PresentationSpeaker',
         'Highlights'         => 'VideoLink',
-        'Links'              => 'Link'
+        'Links'              => 'Link',
+        'ExtraSections'      => 'PageSection'
     );
 
     private static $has_one = array(
@@ -35,6 +36,9 @@ class SummitAboutPage extends SummitPage {
             'Order' => 'Int',
         ),
         'Links' => array(
+            'Order' => 'Int',
+        ),
+        'ExtraSections' => array(
             'Order' => 'Int',
         )
     );
@@ -92,6 +96,11 @@ class SummitAboutPage extends SummitPage {
         $config = GridFieldConfig_RecordEditor::create(4);
         $config->addComponent(new GridFieldSortableRows('Order'));
         $gridField = new BetterGridField('Links', 'Links', $this->Links(), $config);
+        $fields->addFieldToTab('Root.Main', $gridField);
+
+        $config = GridFieldConfig_RecordEditor::create(4);
+        $config->addComponent(new GridFieldSortableRows('Order'));
+        $gridField = new BetterGridField('ExtraSections', 'ExtraSections', $this->ExtraSections(), $config);
         $fields->addFieldToTab('Root.Main', $gridField);
 
         return $fields;

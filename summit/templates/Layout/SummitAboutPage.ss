@@ -25,6 +25,14 @@
                     The Forum
                 </a>
             </li>
+            <% loop $ExtraSections().Sort('Order') %>
+                <li>
+                    <a href="#{$Name}">
+                        <i class="fa {$IconClass}"></i>
+                        $Label
+                    </a>
+                </li>
+            <% end_loop %>
         </ul>
     </div>
 </div>
@@ -158,6 +166,33 @@
         </div>
     </div>
 </div>
+
+
+<% loop $ExtraSections().Sort('Order') %>
+    <div class="summit-more-wrapper" id="{$Name}">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <hr style="margin-top:60px;">
+                    <h3 class="recap-title">{$Label}</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <% if $Text %>
+                        $Text
+                    <% end_if %>
+                    <% if $Picture %>
+                        <div style="text-align: center">
+                            $Picture.getTag()
+                        </div>
+                    <% end_if %>
+                </div>
+            </div>
+        </div>
+    </div>
+<% end_loop %>
+
 <div class="register-promo-wrapper">
     <div class="container">
         <div class="row">
