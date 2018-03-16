@@ -174,8 +174,9 @@
                     <p>
                         Subscribe to our maililng list to learn more about Edge Computing.
                     </p>
-                    <a href="#" data-toggle="modal" data-target="#downloadModal" class="edgeml-download-btn">Join the mailing list  <i class="fa fa-chevron-circle-right"></i></a>
-
+                    <a href="http://lists.openstack.org/cgi-bin/mailman/listinfo/edge-computing" class="edgeml-download-btn">
+                        Join the mailing list  <i class="fa fa-chevron-circle-right"></i>
+                    </a>
 
                 </div>
             </div>
