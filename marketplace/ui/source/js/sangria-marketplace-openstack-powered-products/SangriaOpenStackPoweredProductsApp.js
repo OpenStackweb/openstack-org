@@ -28,7 +28,7 @@ class DatePicker extends React.Component {
         const {className, defaultValue} = this.props;
         return <input ref={(input) => { this.textInput = input; }}
                       placeholder="Enter a Date"
-                      defaultValue={defaultValue}
+                      value={defaultValue}
                       className={className}
                       type="text"  />
     }
