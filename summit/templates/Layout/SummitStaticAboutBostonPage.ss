@@ -127,10 +127,10 @@
       <div class="col-sm-3 featured">
         <div class="summit-user-section">
             <div class="summit-user-image-box">
-                <img src="themes/openstack/images/summit/vancouver/speakers/timothy-randles.jpeg" alt="Timothy Randles" class="summit-user-image">
+                <img src="themes/openstack/images/summit/vancouver/speakers/michael-stair.jpeg" alt="Michael Stair" class="summit-user-image">
             </div>
-            <div class="name">Timothy Randles</div>
-            <div class="title">Computer Scientist, Los Alamos National Laboratory</div>
+            <div class="name">Michael Stair</div>
+            <div class="title">Lead Member of Technical Staff, AT&T</div>
         </div>
       </div>
     </div>
