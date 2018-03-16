@@ -86,12 +86,12 @@ class SummitAboutPage extends SummitPage {
 
         $config = GridFieldConfig_RecordEditor::create(4);
         $config->addComponent(new GridFieldSortableRows('Order'));
-        $gridField = new GridField('Highlights', 'Highlights', $this->Highlights(), $config);
+        $gridField = new BetterGridField('Highlights', 'Highlights', $this->Highlights(), $config);
         $fields->addFieldToTab('Root.Main', $gridField);
 
         $config = GridFieldConfig_RecordEditor::create(4);
         $config->addComponent(new GridFieldSortableRows('Order'));
-        $gridField = new GridField('Links', 'Links', $this->Links(), $config);
+        $gridField = new BetterGridField('Links', 'Links', $this->Links(), $config);
         $fields->addFieldToTab('Root.Main', $gridField);
 
         return $fields;
