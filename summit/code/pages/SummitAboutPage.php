@@ -4,10 +4,6 @@
 class SummitAboutPage extends SummitPage {
     private static $db = array(
         'WhoShouldAttendText'   => 'HTMLText',
-        'StudentLink'           => 'Varchar(255)',
-        'TravelSupportLink'     => 'Varchar(255)',
-        'CodeConductLink'       => 'Varchar(255)',
-        'VisaInfoLink'          => 'Varchar(255)',
         'RegisterLink'          => 'Varchar(255)',
         'AcademyText'           => 'HTMLText',
         'AcademyLink'           => 'Varchar(255)',
@@ -23,7 +19,8 @@ class SummitAboutPage extends SummitPage {
 
     private static $many_many = array(
         'FeaturedSpeakers'   => 'PresentationSpeaker',
-        'Highlights'         => 'VideoLink'
+        'Highlights'         => 'VideoLink',
+        'Links'              => 'Link'
     );
 
     private static $has_one = array(
@@ -36,6 +33,9 @@ class SummitAboutPage extends SummitPage {
         ),
         'Highlights' => array(
             'Order' => 'Int',
+        ),
+        'Links' => array(
+            'Order' => 'Int',
         )
     );
 
@@ -47,10 +47,6 @@ class SummitAboutPage extends SummitPage {
         $fields->removeByName('Content');
         $fields->addFieldToTab('Root.Main', $text = new HtmlEditorField('WhoShouldAttendText','Who Should Attend Text'));
         $text->setRows(4);
-        $fields->addFieldToTab('Root.Main', new TextField('StudentLink','Student Link'));
-        $fields->addFieldToTab('Root.Main', new TextField('TravelSupportLink','Travel Support Link'));
-        $fields->addFieldToTab('Root.Main', new TextField('CodeConductLink','Code of Conduct Link'));
-        $fields->addFieldToTab('Root.Main', new TextField('VisaInfoLink','Visa Info Link'));
 
         $fields->addFieldToTab('Root.Main', new TextField('RegisterLink','Register Link'));
 
@@ -83,15 +79,19 @@ class SummitAboutPage extends SummitPage {
             [
                 'FirstName' => 'FirstName',
                 'LastName'  => 'LastName',
-                'Email'     => 'Email',
                 'Title'     => 'Title',
             ]);
-        $gridField = new GridField('FeaturedSpeakers', 'Featured Speakers', $this->FeaturedSpeakers(), $config);
+        $gridField = new BetterGridField('FeaturedSpeakers', 'Featured Speakers', $this->FeaturedSpeakers(), $config);
         $fields->addFieldToTab('Root.Main', $gridField);
 
         $config = GridFieldConfig_RecordEditor::create(4);
         $config->addComponent(new GridFieldSortableRows('Order'));
         $gridField = new GridField('Highlights', 'Highlights', $this->Highlights(), $config);
+        $fields->addFieldToTab('Root.Main', $gridField);
+
+        $config = GridFieldConfig_RecordEditor::create(4);
+        $config->addComponent(new GridFieldSortableRows('Order'));
+        $gridField = new GridField('Links', 'Links', $this->Links(), $config);
         $fields->addFieldToTab('Root.Main', $gridField);
 
         return $fields;

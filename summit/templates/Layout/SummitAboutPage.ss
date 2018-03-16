@@ -39,10 +39,14 @@
             </div>
             <div class="col-lg-3 col-md-4 col-sm-4" style="margin-top:30px;">
               <ul class="help-me-menu">
-                <li><a href="{$StudentLink}"><i class="fa fa-graduation-cap"></i> Student / Government Discounted Registration</a></li>
-                <li><a href="{$TravelSupportLink}" target="_blank"><i class="fa fa-users"></i>Apply for Travel Support</a></li>
-                <li><a href="{$CodeConductLink}"><i class="fa fa-eye"></i>Code of Conduct</a></li>
-                <li><a href="{$VisaInfoLink}"><i class="fa fa-plane"></i>Visa Information</a></li>
+                <% loop $Links().Sort('Order') %>
+                  <li>
+                      <a href="{$URL}">
+                          <% if $IconClass %> <i class="fa {$IconClass}"></i> <% end_if %>
+                          $Label
+                      </a>
+                  </li>
+                <% end_loop %>
               </ul>
             </div>
         </div>
@@ -60,9 +64,11 @@
         <% loop $FeaturedSpeakers().Sort('Order') %>
             <div class="col-sm-3 featured">
                 <div class="summit-user-section">
-                  <img src="{$ProfilePhoto(400)}" alt="{$getName()}" class="summit-user-image">
-                  <div class="name">{$getName()}</div>
-                  <div class="title">{$getTitleNice()}</div>
+                    <div class="summit-user-image-box">
+                      <img src="{$ProfilePhoto(400)}" alt="{$getName()}" class="summit-user-image">
+                    </div>
+                    <div class="name">{$getName()}</div>
+                    <div class="title">{$getTitleNice()}</div>
                 </div>
             </div>
         <% end_loop %>

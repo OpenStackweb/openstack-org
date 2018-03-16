@@ -16,6 +16,7 @@ class Link extends DataObject {
 	static $db = array(
 		'Label' => 'Text',
 		'URL' => 'Text',
+		'IconClass' => 'Varchar(255)',
 		'Description' => 'HTMLText'
 	);
 	
@@ -35,6 +36,7 @@ class Link extends DataObject {
 		$fields = new FieldList (
 			new TextField('Label','Label this link (this will be the text displayed):'),
 			new TextField ('URL','Full URL (ex: http://www.photos.com/photo.jpg) for image'),
+			new TextField ('IconClass','Icon class for the label (optional)'),
 			new TextField ('Description','Short description / text for this link (optional)')
 		);
 		return $fields;
