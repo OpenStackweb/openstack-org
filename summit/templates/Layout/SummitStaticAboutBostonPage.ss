@@ -16,7 +16,7 @@
             <li>
                 <a href="#openstackacademy">
                     <i class="fa fa-graduation-cap"></i>
-                    OpenStack Academy
+                    Trainings and Workshops
                 </a>
             </li>
             <li>
@@ -235,7 +235,7 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-        <h2>Get Hands On With OpenStack Academy</h2>
+        <h2>Trainings and Workshops</h2>
       </div>
     </div>
     <div class="row">
@@ -274,7 +274,7 @@
     </div>
     <div class="row">
       <div class="col-sm-12">
-        <a href="/summit/sydney-2017/openstack-academy/" class="btn academy-cta">Read more about OpenStack Academy</a>
+        <a href="/summit/sydney-2017/openstack-academy/" class="btn academy-cta">Read more about Trainings and Workshops</a>
       </div>
     </div>
     <div class="row" id="forum">
