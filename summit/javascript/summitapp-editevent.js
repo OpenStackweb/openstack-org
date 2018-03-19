@@ -169,7 +169,8 @@ $(document).ready(function(){
             {
                 name: 'speakers_source',
                 displayKey: 'name',
-                source: speakers_source
+                source: speakers_source,
+                limit: 20
             }
         ]
     });
@@ -216,7 +217,8 @@ $(document).ready(function(){
             {
                 name: 'tags_source',
                 displayKey: 'name',
-                source: tags_source
+                source: tags_source,
+                limit: 20
             }
         ]
     });
@@ -252,7 +254,8 @@ $(document).ready(function(){
             {
                 name: 'sponsors_source',
                 displayKey: 'name',
-                source: sponsors_source
+                source: sponsors_source,
+                limit: 20
             }
         ]
     });
@@ -289,7 +292,8 @@ $(document).ready(function(){
             {
                 name: 'moderators_source',
                 displayKey: 'name',
-                source: moderators_source
+                source: moderators_source,
+                limit: 20
             }
         ]
     });
@@ -325,7 +329,8 @@ $(document).ready(function(){
             {
                 name: 'groups_source',
                 displayKey: 'name',
-                source: groups_source
+                source: groups_source,
+                limit: 20
             }
         ]
     });

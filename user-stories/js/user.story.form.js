@@ -81,7 +81,8 @@ $(document).ready(function(){
             {
                 name: 'companies',
                 displayKey: 'name',
-                source: companies
+                source: companies,
+                limit: 20
             }
         ]
     });
@@ -111,7 +112,8 @@ $(document).ready(function(){
             {
                 name: 'tags_source',
                 displayKey: 'name',
-                source: tags_source
+                source: tags_source,
+                limit: 20
             }
         ]
     });

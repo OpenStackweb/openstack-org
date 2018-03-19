@@ -54,7 +54,8 @@ $(document).ready(function(){
             {
                 name: 'members_source',
                 displayKey: 'name',
-                source: members_source
+                source: members_source,
+                limit: 20
             }
         ]
     });

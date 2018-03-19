@@ -138,7 +138,8 @@ $(document).ready(function(){
             {
                 name: 'sponsor_source',
                 displayKey: 'name',
-                source: sponsor_source
+                source: sponsor_source,
+                limit: 20
             }
         ]
     });
