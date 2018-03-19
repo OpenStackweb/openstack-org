@@ -1,0 +1,7 @@
+---
+Name: news_module
+---
+
+News:
+  extensions:
+    - NewsOpenGraphObjectExtension

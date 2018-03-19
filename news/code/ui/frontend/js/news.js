@@ -14,4 +14,32 @@ jQuery(document).ready(function($){
     $('#news-slider').carousel({
        interval: 20000
     });
+
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId: fbAppId,
+            xfbml: true,
+            status: true,
+            version : 'v2.12'
+        });
+    };
+
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
 });
+
+function shareFacebook(url) {
+    FB.ui({method: 'share', href: url}, response => {})
+}
+
+function shareTwitter(url) {
+    const full_url = `https://twitter.com/intent/tweet?url=${url}`;
+    const dim = 'left=50,top=50,width=600,height=260,toolbar=1,resizable=0'
+    window.open(full_url, 'mywin', dim)
+}

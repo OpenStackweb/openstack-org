@@ -24,7 +24,7 @@
 
 .grey-bar.news {
     margin-bottom: 0;
-    padding: 20px;
+    padding: 15px;
     width: 100%;
 }
 
@@ -917,4 +917,14 @@ h3.largeHeadline {
     h3.largeHeadline {
         font-size: 1.5em;
     }
+}
+
+.share_icon {
+    float:right;
+    color: grey;
+    cursor: pointer;
+}
+
+.share_icon:hover {
+    color: #132539;
 }

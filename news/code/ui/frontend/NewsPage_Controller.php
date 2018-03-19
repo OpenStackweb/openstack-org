@@ -39,6 +39,9 @@ final class NewsPage_Controller extends Page_Controller {
     function init() {
         parent::init();
         $this->securityToken = new SecurityToken();
+        $config = SiteConfig::current_site_config();
+        Requirements::customScript("var fbAppId = ".$config->getOGApplicationID());
+
         Requirements::css('news/code/ui/frontend/css/news.css');
         Requirements::css(Director::protocol().'://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css');
         Requirements::javascript('news/code/ui/frontend/js/news.js');
@@ -98,7 +101,12 @@ final class NewsPage_Controller extends Page_Controller {
             return $this->httpError(404, 'Sorry that article could not be found');
         }
 
-        return $this->renderWith(array('NewsArticlePage','Page'), array('Article' => $article, 'IsArchivedNews' => $this->isArchivedNews()) );
+        $article_url = Director::absoluteBaseURL().'news/view/'.$article->ID.'/'.$article->HeadlineForUrl;
+
+        return $this->renderWith(
+            array('NewsArticlePage','Page'),
+            array('Article' => $article, 'IsArchivedNews' => $this->isArchivedNews(), 'ArticleUrl' => $article_url)
+        );
     }
 
     function isArchivedNews() {
@@ -135,5 +143,19 @@ final class NewsPage_Controller extends Page_Controller {
         $email->populateTemplate(array('UserName' => $user_name, 'NewsUpdateEmailFrom' => $news_update_email_from));
         $email->send();
         return 'OK';
+    }
+
+    public function MetaTags()
+    {
+        $article_id = intval($this->request->param('NEWS_ID'));
+        $article = $this->news_repository->getNewsByID($article_id);
+
+        if(!is_null($article)){
+            return $article->MetaTags();
+        }
+
+        $tags = parent::MetaTags();
+
+        return $tags;
     }
 } 

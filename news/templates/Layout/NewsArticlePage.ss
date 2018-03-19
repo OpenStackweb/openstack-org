@@ -3,8 +3,22 @@
 <div class="grey-bar news">
     <div class="container">
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-6">
                 <a href="/news<% if $IsArchivedNews %>/archived<% end_if %>">< Back to <% if $IsArchivedNews %>Archived<% end_if %> News</a>
+            </div>
+            <div class="col-sm-6">
+                <div class="facebook share_icon" onclick="shareFacebook('{$ArticleUrl}')">
+                    <span class="fa-stack fa-lg">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                    </span>
+                </div>
+                <div class="twitter share_icon" onclick="shareTwitter('{$ArticleUrl}')">
+                    <span class="fa-stack fa-lg">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                    </span>
+                </div>
             </div>
         </div>
     </div>

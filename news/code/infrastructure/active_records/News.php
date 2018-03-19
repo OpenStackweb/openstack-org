@@ -356,5 +356,11 @@ final class News extends DataObject implements INews
         $this->DateExpire = $date_expire;
     }
 
+    public function MetaTags()
+    {
+        $tags = "";
+        $this->extend('MetaTags', $tags);
+        return $tags;
+    }
 
 }
