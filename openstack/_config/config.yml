@@ -37,3 +37,7 @@ Page:
   extensions:
     - PageOpenGraphObjectExtension
     - FuturePublishDate
+
+LeftAndMain:
+  extra_requirements_css:
+    - themes/openstack/css/custom-cms.css

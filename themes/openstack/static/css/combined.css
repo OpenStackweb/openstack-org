@@ -1446,6 +1446,23 @@ a.who-section-cta {
   .academy-wrapper .academy-section p {
     padding: 0; } }
 
+.forum-wrapper {
+  padding: 0;
+  text-align: center; }
+.forum-wrapper h2 {
+  text-align: center;
+  margin: 0 0 60px; }
+.forum-wrapper a.academy-cta {
+  background: #DA422F;
+  color: white;
+  text-align: center;
+  margin: 20px auto 0;
+  border-radius: 4px;
+  padding: 10px 20px; }
+.forum-wrapper a.academy-cta:hover, .forum-wrapper a.academy-cta:focus {
+  text-decoration: none;
+  background: #A51B1B; }
+
 .summit-more-wrapper {
   padding-bottom: 90px; }
   .summit-more-wrapper .single-summit-stats {

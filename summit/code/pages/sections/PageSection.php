@@ -11,37 +11,41 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+
 class PageSection extends DataObject {
 
-	static $db = array(
-		'Name' => 'Varchar(255)',
-		'Label' => 'Varchar(255)',
-		'Text' => 'HTMLText',
-		'IconClass' => 'Varchar(50)'
-	);
-	
-	static $has_one = array(
-		'Picture' => 'BetterImage'
-	);
-	
-	static $singular_name = 'Section';
-	static $plural_name = 'Sections';
-	
-	static $summary_fields = array( 
-        'Label' => 'Label'
+    static $db = array(
+        'Name'          => 'Varchar(100)',
+        'Title'         => 'Varchar(255)',
+        'IconClass'     => 'Varchar(50)',
+        'WrapperClass'  => 'Varchar(100)',
+        'ShowInNav'     => 'Boolean',
+        'Enabled'       => 'Boolean(1)',
+    );
+
+    static $singular_name = 'Section';
+    static $plural_name = 'Sections';
+
+    static $summary_fields = array(
+        'Name'  => 'Name',
+        'Title' => 'Title',
+        'Enabled' => 'Enabled'
     );
 
     function getCMSFields() {
-        $join_image = new UploadField('Picture', 'Picture instead of text');
-        $join_image->setAllowedMaxFileNumber(1);
-
         $fields = new FieldList (
             new TextField('Name','Name this section (no spaces):'),
-            new TextField('Label','Label to show:'),
+            new TextField('Title','Title:'),
             new TextField ('IconClass','Fontawesome class for the label icon (optional)'),
-            new HtmlEditorField('Text','Text to display (optional)'),
-            $join_image
+            new TextField ('WrapperClass','Class for the wrapper div (optional)'),
+            new CheckboxField('ShowInNav', 'Show in Navigation'),
+            new CheckboxField('Enabled', 'Enabled')
         );
+
         return $fields;
+    }
+
+    function isClass($className) {
+        return $this->is_a($className);
     }
 }
