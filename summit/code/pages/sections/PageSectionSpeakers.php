@@ -37,7 +37,7 @@ class PageSectionSpeakers extends PageSectionText {
                 'LastName'  => 'LastName',
                 'Title'     => 'Title',
             ]);
-        $gridField = new BetterGridField('FeaturedSpeakers', 'Featured Speakers', $this->FeaturedSpeakers(), $config);
+        $gridField = new BetterGridField('Speakers', 'Speakers', $this->Speakers(), $config);
 
         if ($this->ID) {
             $fields->add($gridField);
