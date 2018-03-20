@@ -100,7 +100,7 @@
       <div class="col-sm-3 featured">
         <div class="summit-user-section">
             <div class="summit-user-image-box">
-                <img src="themes/openstack/images/summit/vancouver/speakers/tony-campbell.jpeg" alt="Tony Campbell" class="summit-user-image" style="right: 25%;">
+                <img src="summit/images/vancouver/speakers/tony-campbell.jpeg" alt="Tony Campbell" class="summit-user-image" style="right: 25%;">
             </div>
             <div class="name">Tony Campbell</div>
             <div class="title">Director of Field Engineering, CoreOS</div>
@@ -109,7 +109,7 @@
         <div class="col-sm-3 featured">
             <div class="summit-user-section">
                 <div class="summit-user-image-box">
-                    <img src="themes/openstack/images/summit/vancouver/speakers/lin-sun.png" alt="Lin Sun" class="summit-user-image">
+                    <img src="summit/images/vancouver/speakers/lin-sun.png" alt="Lin Sun" class="summit-user-image">
                 </div>
                 <div class="name">Lin Sun</div>
                 <div class="title">Core Contributor, Istio</div>
@@ -118,7 +118,7 @@
       <div class="col-sm-3 featured">
         <div class="summit-user-section">
             <div class="summit-user-image-box">
-                <img src="themes/openstack/images/summit/vancouver/speakers/allison-randal.jpeg" alt="Allison Randall" class="summit-user-image">
+                <img src="summit/images/vancouver/speakers/allison-randal.jpeg" alt="Allison Randall" class="summit-user-image">
             </div>
             <div class="name">Allison Randal</div>
             <div class="title">OpenStack Board Member</div>
@@ -127,10 +127,10 @@
       <div class="col-sm-3 featured">
         <div class="summit-user-section">
             <div class="summit-user-image-box">
-                <img src="themes/openstack/images/summit/vancouver/speakers/michael-stair.jpeg" alt="Michael Stair" class="summit-user-image">
+                <img src="summit/images/vancouver/speakers/mark-shuttleworth.jpg" alt="Mark Shuttleworth" class="summit-user-image">
             </div>
-            <div class="name">Michael Stair</div>
-            <div class="title">Lead Member of Technical Staff, AT&T</div>
+            <div class="name">Mark Shuttleworth</div>
+            <div class="title">CEO, Canonical</div>
         </div>
       </div>
     </div>
@@ -138,7 +138,7 @@
         <div class="col-sm-3 featured">
             <div class="summit-user-section">
                 <div class="summit-user-image-box">
-                    <img src="themes/openstack/images/summit/vancouver/speakers/julia-kreger.jpeg" alt="Julia Kreger" class="summit-user-image">
+                    <img src="summit/images/vancouver/speakers/julia-kreger.jpeg" alt="Julia Kreger" class="summit-user-image">
                 </div>
                 <div class="name">Julia Kreger</div>
                 <div class="title">Principal Software Engineer, Red Hat</div>
@@ -147,7 +147,7 @@
       <div class="col-sm-3 featured">
         <div class="summit-user-section">
             <div class="summit-user-image-box">
-                <img src="themes/openstack/images/summit/vancouver/speakers/kevin-zhao.jpeg" alt="Kevin Zhao" class="summit-user-image">
+                <img src="summit/images/vancouver/speakers/kevin-zhao.jpeg" alt="Kevin Zhao" class="summit-user-image">
             </div>
             <div class="name">Kevin Zhao</div>
             <div class="title">Software Engineer, ARM</div>
@@ -156,7 +156,7 @@
       <div class="col-sm-3 featured">
         <div class="summit-user-section">
             <div class="summit-user-image-box">
-                <img src="themes/openstack/images/summit/vancouver/speakers/nati-shalom.jpeg" alt="Nati Shalom" class="summit-user-image" style="width: 150px; bottom: 15%; height: auto">
+                <img src="summit/images/vancouver/speakers/nati-shalom.jpeg" alt="Nati Shalom" class="summit-user-image" style="width: 150px; bottom: 15%; height: auto">
             </div>
             <div class="name">Nati Shalom</div>
             <div class="title">CTO & Founder, Cloudify</div>
@@ -165,7 +165,7 @@
       <div class="col-sm-3 featured">
         <div class="summit-user-section">
             <div class="summit-user-image-box">
-                <img src="themes/openstack/images/summit/vancouver/speakers/belmiro-moreira.jpeg" alt="Belmiro Moreira" class="summit-user-image">
+                <img src="summit/images/vancouver/speakers/belmiro-moreira.jpeg" alt="Belmiro Moreira" class="summit-user-image">
             </div>
             <div class="name">Belmiro Moreira</div>
             <div class="title">Cloud Architect, CERN</div>
@@ -176,7 +176,7 @@
       <div class="col-sm-3 featured">
         <div class="summit-user-section">
             <div class="summit-user-image-box">
-                <img src="themes/openstack/images/summit/vancouver/speakers/colleen-murphy.jpeg" alt="Colleen	Murphy" class="summit-user-image">
+                <img src="summit/images/vancouver/speakers/colleen-murphy.jpeg" alt="Colleen	Murphy" class="summit-user-image">
             </div>
             <div class="name">Colleen Murphy</div>
             <div class="title">Cloud Developer, SUSE</div>
@@ -185,7 +185,7 @@
       <div class="col-sm-3">
         <div class="summit-user-section">
             <div class="summit-user-image-box">
-                <img src="themes/openstack/images/summit/vancouver/speakers/amy-wheelus.jpeg" alt="Amy Wheelus" class="summit-user-image">
+                <img src="summit/images/vancouver/speakers/amy-wheelus.jpeg" alt="Amy Wheelus" class="summit-user-image">
             </div>
             <div class="name">Amy Wheelus</div>
             <div class="title">VP Clouod & D2 Platform Integration, AT&T</div>
@@ -194,7 +194,7 @@
       <div class="col-sm-3">
         <div class="summit-user-section">
             <div class="summit-user-image-box">
-                <img src="themes/openstack/images/summit/vancouver/speakers/andrew-hendrickson.jpeg" alt="Andrew Hendrickson" class="summit-user-image">
+                <img src="summit/images/vancouver/speakers/andrew-hendrickson.jpeg" alt="Andrew Hendrickson" class="summit-user-image">
             </div>
             <div class="name">Andrew Hendrickson</div>
             <div class="title">Director of Technology, Verizon</div>
@@ -203,7 +203,7 @@
       <div class="col-sm-3">
         <div class="summit-user-section">
             <div class="summit-user-image-box">
-                <img src="themes/openstack/images/summit/vancouver/speakers/elijah-elliot.jpg" alt="Elijah Elliott" class="summit-user-image">
+                <img src="summit/images/vancouver/speakers/elijah-elliot.jpg" alt="Elijah Elliott" class="summit-user-image">
             </div>
             <div class="name">Elijah Elliott</div>
             <div class="title">Domain Architect, Gap Inc.</div>
