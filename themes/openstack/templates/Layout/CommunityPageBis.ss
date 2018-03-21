@@ -189,7 +189,7 @@
             </div>
             <div class="col-md-4 col-sm-6 communicate-item">
                 <div class="communicate-item-title">
-                    OpenStack IRC channels (on Freenode)
+                    IRC channels (on Freenode)
                 </div>
                 <div>
                     <a href="https://webchat.freenode.net/?channels=openstack">#openstack</a> (usage questions)<br/>
