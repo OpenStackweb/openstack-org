@@ -215,8 +215,8 @@
                     Info & Forums
                 </div>
                 <div>
+                    <a href="https://www.openstack.org/blog/" target="_blank">Planet OpenStack (blog aggregator)</a><br>
                     <a href="http://superuser.openstack.org/" target="_blank">Superuser Magazine</a><br>
-                    <a href="https://www.openstack.org/blog/" target="_blank">Developer Digest</a><br>
                     <a href="https://ask.openstack.org/" target="_blank">Q&A Forum</a>
                 </div>
             </div>
