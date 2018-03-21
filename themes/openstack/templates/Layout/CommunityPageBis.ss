@@ -103,9 +103,9 @@
                 </p>
             </div>
             <div class="col-md-5 col-sm-6 start-options">
-                <a href="https://governance.openstack.org/tc/reference/top-5-help-wanted.html" class="start-option btn">
+                <a href="https://governance.openstack.org/tc/reference/help-most-needed.html" class="start-option btn">
                     <i class="fa fa-check-square-o" aria-hidden="true"></i>
-                    <span>Top 5 projects that need contributors</span>
+                    <span>Areas where help is most needed</span>
                 </a><br>
                 <a href="https://docs.openstack.org/upstream-training/" class="start-option btn">
                     <i class="fa fa-check-square-o" aria-hidden="true"></i>
