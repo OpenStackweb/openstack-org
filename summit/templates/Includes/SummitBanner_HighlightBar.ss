@@ -1,13 +1,13 @@
 
 <% with $Banner %>
-<div class="summit-banner" style="background-color: #{$BackgroundColor}">
+<div class="summit-banner highlight" style="background-color: #{$BackgroundColor}">
     <div class="container">
         <div class="row">
             <div class="col-md-2 logo-box">
                 <img class="logo" src="{$Logo().getUrl()}" />
             </div>
             <div class="line"></div>
-            <div class="col-md-6 main-text-box" style="font-size:{$MainTextFontSize}px">
+            <div class="col-md-6 main-text-box" style="color:#{$MainTextColor}">
                 {$MainText}
             </div>
             <div class="col-md-3 button-box">

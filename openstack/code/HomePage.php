@@ -359,7 +359,7 @@ class HomePage_Controller extends Page_Controller
     }
 
     function getRandomSummitBanner() {
-        $banner = $this->SummitBanners()->sort('RAND()')->first();
+        $banner = $this->SummitBanners()->filter('Enabled',1)->sort('RAND()')->first();
         return $banner;
     }
 }

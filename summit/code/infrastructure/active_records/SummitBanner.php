@@ -26,20 +26,26 @@ class SummitBanner extends DataObject implements ISummitBanner
         'ButtonText'        => 'Text',
         'ButtonLink'        => 'Varchar(255)',
         'ButtonColor'       => 'Color',
-        'ButtonTextColor'   => 'Color'
+        'ButtonTextColor'   => 'Color',
+        'SmallText'         => 'Text',
+        'SmallTextColor'    => 'Color',
+        'Template'          => 'Enum(array("HighlightBar","Editorial"), "HighlightBar")',
+        'Enabled'           => 'Boolean(1)',
     );
 
     static $has_one = array
     (
         'Logo'          => 'File',
-        'BkgrdImage'    => 'File',
+        'Picture'       => 'File',
         'ParentPage'    => 'Page'
     );
 
     private static $summary_fields = array
     (
-        'ID'   => 'ID',
-        'Name' => 'Name',
+        'ID'        => 'ID',
+        'Name'      => 'Name',
+        'Template'  => 'Template',
+        'Enabled'   => 'Enabled'
     );
 
     /**
@@ -50,6 +56,10 @@ class SummitBanner extends DataObject implements ISummitBanner
         return (int)$this->getField('ID');
     }
 
-
+    public function renderBanner() {
+        return $this->renderWith('SummitBanner_'.$this->Template, array(
+            'Banner'  => $this
+        ));
+    }
 
 }

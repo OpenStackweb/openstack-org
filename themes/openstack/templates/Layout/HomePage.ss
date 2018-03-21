@@ -29,8 +29,8 @@
 </div>
 <!-- /.intro-header -->
 
-<% if $SummitBanners().Count %>
-    <% include HomePageSummitBanner Banner=$getRandomSummitBanner() %>
+<% if $getRandomSummitBanner().Exists() %>
+    $getRandomSummitBanner().renderBanner()
 <% end_if %>
 
 <% include HomePageBottom %>

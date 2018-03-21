@@ -1894,43 +1894,67 @@ footer {
 #home .top-site-banner {
   display: none; }
 
-.summit-banner {
-  height: 70px;
+.summit-banner.highlight{
+  height: 85px;
 }
 
 .summit-banner div {
   background-color: transparent;
 }
 
-.summit-banner .logo-box {
-  padding-top: 5px;
-}
-
-.summit-banner .line{
-  height: 54px;
-  margin: 8px 35px;
-  float: left;
-  border-right: 1px solid white;
-}
-
-.summit-banner .main-text-box {
+.summit-banner.highlight .logo-box {
   padding-top: 8px;
-  color: white;
 }
 
-.summit-banner .button-box {
+.summit-banner .logo-box img {
+  width: 100%;
+}
+
+.summit-banner.highlight .line{
+  height: 60px;
+  margin: 12px 35px;
+  float: left;
+  border-right: 1px solid #80d3f2;
+}
+
+.summit-banner.highlight .main-text-box {
+  padding-top: 8px;
+}
+
+.summit-banner.highlight .button-box {
   padding-top: 18px;
   text-align: right;
-  color: white;
 }
 
-.summit-banner .button-box .btn {
+.summit-banner .btn {
   border: none;
   font-size: 16px;
+  font-weight: bold;
+  padding: 12px;
+  width: 100%;
 }
 
 .summit-banner .button-box .btn i{
   margin-left: 15px;
+}
+
+.summit-banner.editorial .picture-box {
+  margin: 24px 0 0 0;
+}
+
+.summit-banner.editorial .picture-box img{
+  width: 100%;
+}
+
+.summit-banner.editorial .btn {
+  margin-top: 10px;
+}
+
+.summit-banner.editorial .small-text-box {
+  text-align: center;
+  margin-top: 8px;
+  font-weight: bold;
+  font-size: 16px;
 }
 
 /*End General Inner Page Styles*/
