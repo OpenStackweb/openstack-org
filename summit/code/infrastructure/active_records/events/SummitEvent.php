@@ -91,6 +91,14 @@ class SummitEvent extends DataObject implements ISummitEvent
         return html_entity_decode($this->getField('Title'));
     }
 
+    public function getAbstractJson(){
+        return json_encode($this->Abstract);
+    }
+
+    public function getTitleJson(){
+        return json_encode($this->Title);
+    }
+
     public function getSummitTitle()
     {
         return $this->Summit->Title;
