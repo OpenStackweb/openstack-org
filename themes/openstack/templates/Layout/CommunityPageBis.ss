@@ -203,11 +203,11 @@
                     Mailing lists
                 </div>
                 <div>
-                    <a href="http://lists.openstack.org/cgi-bin/mailman/listinfo/openstack">OpenStack General</a><br>
-                    <a href="http://lists.openstack.org/cgi-bin/mailman/listinfo/openstack-dev">OpenStack Development</a><br>
-                    <a href="http://lists.openstack.org/cgi-bin/mailman/listinfo/openstack-docs">OpenStack Documentation</a><br>
-                    <a href="http://lists.openstack.org/cgi-bin/mailman/listinfo/openstack-sigs">OpenStack Special Interest Groups</a><br>
-                    <a href="http://lists.openstack.org/cgi-bin/mailman/listinfo/women-of-openstack">Women of OpenStack</a>
+                    <a href="http://lists.openstack.org/cgi-bin/mailman/listinfo/openstack">OpenStack general list</a><br>
+                    <a href="http://lists.openstack.org/cgi-bin/mailman/listinfo/openstack-dev">OpenStack development list</a><br>
+                    <a href="http://lists.openstack.org/cgi-bin/mailman/listinfo/openstack-operators">OpenStack operators list</a><br>
+                    <a href="http://lists.openstack.org/cgi-bin/mailman/listinfo/openstack-sigs">OpenStack Special Interest Groups list</a><br>
+                    <a href="http://lists.openstack.org/cgi-bin/mailman/listinfo">List of all available mailing-lists</a>
                 </div>
             </div>
             <div class="col-md-4 col-sm-6 communicate-item">
