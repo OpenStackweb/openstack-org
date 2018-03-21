@@ -408,18 +408,18 @@
 }
 
 .communicate .sign-up-input {
-    padding: 23px;
+    padding: 10px;
     margin-top: 15px;
-    width: 70%;
+    width: 54%;
 }
 
 .communicate .sign-up-submit {
     background-color: #276024;
     margin-top: 15px;
-    padding: 12px;
-    font-size: 16px;
+    padding: 7px;
+    font-size: 12px;
     font-weight: bold;
-    width: 106px;
+    width: 75px;
 }
 
 

@@ -212,6 +212,18 @@
             </div>
             <div class="col-md-4 col-sm-6 communicate-item">
                 <div class="communicate-item-title">
+                    Other tools
+                </div>
+                <div>
+                    <a href="https://wiki.openstack.org/" target="_blank">Wiki</a><br>
+                    <a href="https://etherpad.openstack.org/" target="_blank">Etherpad</a><br>
+                    <a href="https://ethercalc.openstack.org/" target="_blank">Ethercalc</a><br>
+                    <a href="https://paste.openstack.org/" target="_blank">Pastebin</a><br>
+                    <a href="https://wiki.openstack.org/wiki/Infrastructure/Conferencing" target="_blank">Conference call bridge</a>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 communicate-item">
+                <div class="communicate-item-title">
                     Info & Forums
                 </div>
                 <div>
@@ -231,9 +243,9 @@
                     <a href="https://www.youtube.com/user/OpenStackFoundation" target="_blank">YouTube Channel</a>
                 </div>
             </div>
-            <div class="col-md-8 col-sm-12 communicate-item">
+            <div class="col-md-4 col-sm-6 communicate-item">
                 <div class="communicate-item-title">
-                    Sign up to hear from the Foundation
+                    Sign up to hear from us
                 </div>
                 <div class="form-inline">
                     <input class="form-control sign-up-input" />
