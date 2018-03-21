@@ -272,28 +272,11 @@
                     Who are we?
                 </div>
                 <div>
-                    <a href="https://governance.openstack.org/tc/reference/opens.html" target="_blank">Four opens</a><br>
-                    <a href="https://governance.openstack.org/tc/reference/principles.html" target="_blank">Our guiding principles</a>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3 quick-links-item">
-                <div class="quick-links-item-title">
-                    Resources for projects
-                </div>
-                <div>
-                    <a href="https://governance.openstack.org/tc/reference/tags/index.html" target="_blank">Tags</a><br>
-                    <a href="https://governance.openstack.org/tc/goals/" target="_blank">Community wide goals</a><br>
-                    <a href="https://releases.openstack.org/" target="_blank">Release schedule</a><br>
-                    <a href="">Onboarding</a>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3 quick-links-item">
-                <div class="quick-links-item-title">
-                    App developers
-                </div>
-                <div>
-                    <a href="https://developer.openstack.org/" target="_blank">SDKs</a><br>
-                    <a href="https://wiki.openstack.org/wiki/Category:Working_Groups" target="_blank">Working groups & SIGs</a>
+                    <a href="https://governance.openstack.org/tc/reference/opens.html" target="_blank">The Four Opens</a><br>
+                    <a href="https://governance.openstack.org/tc/reference/principles.html" target="_blank">Our guiding principles</a><br>
+                    <a href="https://governance.openstack.org/sigs/" target="_blank">Special Interest Groups (SIGs)</a><br>
+                    <a href="https://governance.openstack.org/tc/reference/projects/index.html" target="_blank">Project Teams</a><br>
+                    <a href="https://governance.openstack.org/uc/#teams" target="_blank">User committee working groups</a>
                 </div>
             </div>
             <div class="col-md-3 col-sm-3 quick-links-item">
@@ -301,32 +284,46 @@
                     Getting started
                 </div>
                 <div>
-                    <a href="https://governance.openstack.org/tc/reference/top-5-help-wanted.html" target="_blank">Top 5 areas for support</a><br>
-                    <a href="https://www.youtube.com/user/OpenStackFoundation" target="_blank">Tutorials</a><br>
+                    <a href="https://releases.openstack.org/" target="_blank">Releases and release schedule</a><br>
+                    <a href="https://docs.openstack.org" target="_blank">OpenStack documentation</a><br>
                     <a href="https://www.openstack.org/assets/marketing/OpenStack-101-Modular-Deck-1.pptx" target="_blank">OpenStack 101</a><br>
-                    <a href="https://storyboard.openstack.org/" target="_blank">Report a bug</a>
+                    <a href="https://wiki.openstack.org/wiki/First_Contact_SIG" target="_blank">First Contact SIG</a><br>
+                    <a href="https://governance.openstack.org/tc/reference/help-most-needed.html" target="_blank">Areas where help is most needed</a>
                 </div>
             </div>
             <div class="col-md-3 col-sm-3 quick-links-item">
                 <div class="quick-links-item-title">
-                    Diversity
+                    Developer resources
                 </div>
                 <div>
-                    <a href="/legal/community-code-of-conduct/">Code of Conduct</a><br>
-                    <a href="http://lists.openstack.org/cgi-bin/mailman/listinfo/women-of-openstack" target="_blank">Women of OpenStack mailing list</a><br>
-                    <a href="https://www.outreachy.org/" target="_blank">Outreachy</a>
+                    <a href="https://git.openstack.org/" target="_blank">Git repositories</a><br>
+                    <a href="https://docs.openstack.org/project-team-guide/" target="_blank">Project team guide</a><br>
+                    <a href="https://governance.openstack.org/tc/goals/" target="_blank">Community-wide goals</a><br>
+                    <a href="http://specs.openstack.org/" target="_blank">Specs</a> and <a href="https://review.openstack.org/" target="_blank">Code reviews</a><br>
+                    <a href="http://codesearch.openstack.org/ target="_blank">Search all OpenStack code</a>
                 </div>
             </div>
             <div class="col-md-3 col-sm-3 quick-links-item">
                 <div class="quick-links-item-title">
-                    Foundation
+                    User resources
                 </div>
                 <div>
-                    <a href="/join">Join</a><br>
-                    <a href="/foundation/tech-committee/">Technical Committee</a><br>
-                    <a href="/foundation/user-committee/">User Committee</a><br>
+                    Bug reports on <a href="https://storyboard.openstack.org/" target="_blank">StoryBoard</a> or <a href="https://launchpad.net/openstack/" target="_blank">Launchpad</a><br>
+                    <a href="https://security.openstack.org/" target="_blank">Security advisories</a><br>
+                    <a href="https://translate.openstack.org/" target="_blank">Contribute translations</a><br>
+                    <a href="https://refstack.openstack.org/" target="_blank">Interoperability testing</a><br>
+                    <a href="https://developer.openstack.org/" /target="_blank">App developer resources</a>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3 quick-links-item">
+                <div class="quick-links-item-title">
+                    Governance
+                </div>
+                <div>
                     <a href="/foundation/board-of-directors/">Board of Directors</a><br>
-                    <a href="/foundation/staff">Staff</a>
+                    <a href="https://governance.openstack.org/tc/">Technical Committee</a><br>
+                    <a href="https://governance.openstack.org/uc/">User Committee</a><br>
+                    <a href="https://governance.openstack.org/election/">Community elections</a>
                 </div>
             </div>
             <div class="col-md-3 col-sm-3 quick-links-item">
@@ -346,8 +343,18 @@
                 </div>
                 <div>
                     <a href="/marketplace/training/">Training</a><br>
-                    <a href="/coa">COA</a><br>
-                    <a href="/jobs">Jobs</a>
+                    <a href="/coa">Certified administrator program</a><br>
+                    <a href="/jobs">OpenStack Jobs board</a>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3 quick-links-item">
+                <div class="quick-links-item-title">
+                    Diversity
+                </div>
+                <div>
+                    <a href="/legal/community-code-of-conduct/">Code of Conduct</a><br>
+                    <a href="http://lists.openstack.org/cgi-bin/mailman/listinfo/women-of-openstack" target="_blank">Women of OpenStack mailing list</a><br>
+                    <a href="https://www.outreachy.org/" target="_blank">Outreachy</a>
                 </div>
             </div>
         </div>
