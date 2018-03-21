@@ -1682,4 +1682,36 @@ WHERE TrackTagGroup.SummitID = %s AND Tag.ID = %s;
 ", $this->ID, $tag->ID))->first();
         return $res ? new TrackTagGroup($res): null;
     }
+
+
+    public function copyPreviousRsvpTemplates() {
+
+        $previous_summits = Summit::get()
+            ->where("SummitBeginDate < '".$this->SummitBeginDate."'")
+            ->sort('SummitBeginDate DESC');
+
+        $summit_source = null;
+
+        foreach($previous_summits as $prev_summit) {
+            if($prev_summit->RSVPTemplates()->count() > 0) {
+                $summit_source = $prev_summit;
+                break;
+            }
+        }
+
+        if ($summit_source) {
+            foreach($summit_source->RSVPTemplates() as $rsvp_template) {
+                $cloned_rsvp = $rsvp_template->duplicate(false);
+                $cloned_rsvp->SummitID = $this->ID;
+                $cloned_rsvp->write();
+
+                foreach ($rsvp_template->Questions() as $rsvp_question) {
+                    $rsvp_question->RSVPTemplateID = $cloned_rsvp->ID;
+                    $rsvp_question->duplicate();
+                }
+            }
+        }
+    }
 }
+
+

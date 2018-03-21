@@ -350,4 +350,7 @@ interface ISummit extends IEntity
      */
     public function getExcludedTracksForUploadPresentationSlideDeck();
 
+
+    public function copyPreviousRsvpTemplates();
+
 }

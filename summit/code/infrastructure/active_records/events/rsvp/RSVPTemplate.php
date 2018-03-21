@@ -162,8 +162,9 @@ class RSVPTemplate extends DataObject implements IRSVPTemplate {
         }
         $title = $this->Title;
         $id    = $this->ID;
+        $summit_id = $this->SummitID;
 
-        $res = DB::query("SELECT COUNT(ID) FROM RSVPTemplate WHERE Title = '{$title}' AND ID <> {$id}")->value();
+        $res = DB::query("SELECT COUNT(ID) FROM RSVPTemplate WHERE Title = '{$title}' AND ID <> {$id} AND SummitID = {$summit_id}")->value();
         if(intval($res) > 0 )
         {
             return $valid->error('There is already another rsvp template with that name!');

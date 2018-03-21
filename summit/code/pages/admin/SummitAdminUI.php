@@ -374,6 +374,7 @@ final class SummitAdminUI extends DataExtension
             //RSVP templates
 
             $config = GridFieldConfig_RecordEditor::create(50);
+            $config->addComponent(new GridFieldSeedWithPreviousTemplates);
             $config->addComponent(new GridFieldAjaxRefresh(1000, false));
             $gridField = new GridField('RSVPTemplates', 'RSVPTemplates', $this->owner->RSVPTemplates(), $config);
             $f->addFieldToTab('Root.RSVPTemplates', $gridField);
