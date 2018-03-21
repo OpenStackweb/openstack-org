@@ -189,16 +189,13 @@
             </div>
             <div class="col-md-4 col-sm-6 communicate-item">
                 <div class="communicate-item-title">
-                    OpenStack IRC channels (chat.freenode.net)
+                    OpenStack IRC channels (on Freenode)
                 </div>
                 <div>
-                    #openstack<br/>
-                    #openstack-101<br/>
-                    #openstack-dev<br/>
-                    #openstack-infra<br/>
-                    #openstack-meeting<br/>
-                    #openstack-upstream-institute
-
+                    <a href="https://webchat.freenode.net/?channels=openstack">#openstack</a> (usage questions)<br/>
+                    <a href="https://webchat.freenode.net/?channels=openstack-dev">#openstack-dev</a> (development questions)<br/>
+                    <a href="https://webchat.freenode.net/?channels=openstack-infra">#openstack-infra</a> (project infrastructure)<br/>
+                    <a href="http://eavesdrop.openstack.org/">List of IRC meetings and channel logs</a>
                 </div>
             </div>
             <div class="col-md-4 col-sm-6 communicate-item">
