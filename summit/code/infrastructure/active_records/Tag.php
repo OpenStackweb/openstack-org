@@ -26,10 +26,11 @@ final class Tag extends DataObject implements ITag
     );
 
     static $belongs_many_many = array(
-        'Events'        => 'SummitEvent',
-        'Categories'    => 'PresentationCategory',
-        'Summits'       => 'Summit',
-        'UserStories'   => 'UserStoryDO'
+        'Events'                    => 'SummitEvent',
+        'Categories'                => 'PresentationCategory',
+        'TrackTagGroups'            => 'TrackTagGroup',
+        'UserStories'               => 'UserStoryDO',
+        'DefaultTrackTagGroups'     => 'DefaultTrackTagGroup'
     );
 
     private static $summary_fields = array
