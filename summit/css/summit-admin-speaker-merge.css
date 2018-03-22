@@ -65,3 +65,7 @@
     max-height: 600px;
     overflow: auto;
 }
+
+.twitter-typeahead {
+    width: 100%;
+}

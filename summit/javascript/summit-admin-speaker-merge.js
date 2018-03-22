@@ -77,7 +77,7 @@ $(document).ready(function(){
         populateSpeaker(event.item.speaker_id, '2');
     });
 
-    $('.selectable').click(function(){
+    $('.selectable').click(function(event){
         if (event.target.nodeName != 'A') {
             if (!$('#speaker-search-1').val() || !$('#speaker-search-2').val()) return false;
 
