@@ -38,13 +38,15 @@ class GetTextTemplateHelpers implements TemplateGlobalProvider
     }
 
     public static function _t($domain, $msgid){
+
         $args = [];
         if(func_num_args() > 2)
         {
             $args = func_get_args();
             $args = array_slice($args, 2);
         }
-        if(empty($msgid)) return "";
+
+        if(!isset($msgid) || $msgid === false) return "";
 
         $msgid    = str_replace("\r\n", '', $msgid);
         $msgid    = str_replace("\n", '', $msgid);
