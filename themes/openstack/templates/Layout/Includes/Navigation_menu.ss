@@ -1,4 +1,14 @@
 <li>
+    <a href="{$BaseHref}summit/vancouver-2018/" class="drop" id="dropdownMenuEvents">The Summit <i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
+    <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuEvents">
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}other-summits/">Other Summits</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}ptg/">Project Teams Gathering</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/events/">Community Events</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/events/openstackdays">OpenStack Days</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/events/openstackhackathons">OpenStack App Hackathons</a></li>
+    </ul>
+</li>
+<li>
     <a href="{$BaseHref}software/" class="drop" id="dropdownMenuSoftware">Software <i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
     <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuSoftware">
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/">Overview</a></li>
@@ -45,16 +55,6 @@
     <a href="{$BaseHref}marketplace/">Marketplace</a>
 </li>
 <li>
-    <a href="{$BaseHref}events/" class="drop" id="dropdownMenuEvents">Events <i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
-    <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuEvents">
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/events/">Overview</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}summit/">The OpenStack Summit</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}ptg/">Project Teams Gathering</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/events/openstackdays">OpenStack Days</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/events/openstackhackathons">OpenStack App Hackathons</a></li>
-    </ul>
-</li>
-<li>
     <a href="{$BaseHref}learn/" class="drop" id="dropdownMenuLearn">Learn <i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
     <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuEvents">
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}marketplace/training/">Training</a></li>
@@ -76,6 +76,7 @@
     <a href="#" id="dropdownMenuJoin">Join <i class="fa fa-caret-down"></i></a>
     <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuJoin" style="display: none;">
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}join/register/?membership-type=foundation">Sign up for Foundation Membership</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}summit/vancouver-2018/">Join us at the Summit</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}join/#sponsor">Sponsor the Foundation</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}foundation">More about the Foundation</a></li>
     </ul>
