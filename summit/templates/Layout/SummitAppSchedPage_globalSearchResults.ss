@@ -149,8 +149,8 @@
                     <% loop EventResults %>
                         var event_{$ID} =   {
                             id              : {$ID},
-                            title           : "{$Title.JS}",
-                            abstract        : "{$Abstract.JS}",
+                            title           : {$TitleJson},
+                            abstract        : {$AbstractJson},
                             date_nice       : "{$StartDate().Format(D j)}",
                             start_datetime  : "{$StartDate}",
                             end_datetime    : "{$EndDate}",
@@ -192,17 +192,14 @@
                                 <% end_if %>
                             ],
                             url: "{$getLink(show)}",
-                            social_summary : "{$SocialSummary.JS}",
+                            social_summary : {$SocialSummaryJson},
                             summit_id: {$Summit.ID},
                         };
                         summit.events.push(event_{$ID});
                         summit.dic_events[{$ID}] = event_{$ID};
                     <% end_loop %>
 
-                </script>
 
-
-                <script type="text/javascript">
                     window.ReactScheduleGridProps = {
                         ScheduleProps : {
                             month: "{$Summit.Month}",

@@ -99,6 +99,10 @@ class SummitEvent extends DataObject implements ISummitEvent
         return json_encode($this->Title);
     }
 
+    public function getSocialSummaryJson(){
+        return json_encode($this->SocialSummary);
+    }
+
     public function getSummitTitle()
     {
         return $this->Summit->Title;
