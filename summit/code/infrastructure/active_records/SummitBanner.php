@@ -62,4 +62,15 @@ class SummitBanner extends DataObject implements ISummitBanner
         ));
     }
 
+
+    public function getCMSFields()
+    {
+        $fields = parent::getCMSFields();
+
+        $fields->add(new TextField('ParentPageID','ParentPageID'));
+
+        return $fields;
+
+    }
+
 }

@@ -42,7 +42,7 @@ class HomePage extends Page
     );
 
     private static $has_many = array(
-        'SummitBanners' => 'SummitBanner'
+        'SummitBanners' => 'SummitBanner.ParentPage'
     );
 
     function getCMSFields()
