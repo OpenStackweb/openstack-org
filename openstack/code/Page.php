@@ -566,6 +566,15 @@ class Page_Controller extends ContentController
         return $tags;
     }
 
+    public function getPageTitle()
+    {
+        if ($this->MetaTitle) {
+            return $this->MetaTitle;
+        } else {
+            return parent::getTitle(). ' - OpenStack is open source software for creating private and public clouds.';
+        }
+    }
+
     public function showUpdateProfileModal(){
         return (Member::currentUser() && Session::get("Member.showUpdateProfileModal"));
     }
