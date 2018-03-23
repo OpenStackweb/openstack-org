@@ -30,7 +30,12 @@ class NewsOpenGraphObjectExtension extends OpenGraphObjectExtension
         $image = $this->owner->Image();
         $default_image = Director::absoluteURL('/themes/openstack/images/summit/openstacklogo-fb.png');
 
-        return $image->Exists() ? Director::absoluteURL($image->getURL()) : $default_image;
+        $og_image = new OGImage();
+        $og_image->Width = 200;
+        $og_image->Height = 200;
+        $og_image->AbsoluteURL = Director::absoluteURL($image->getURL());
+
+        return $image->Exists() ? $og_image : $default_image;
     }
 
     public function getOGTitle()
