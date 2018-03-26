@@ -1910,6 +1910,10 @@ footer {
 }
 
 .summit-banner .logo-box img {
+  width: 100%;
+}
+
+.summit-banner.editorial .logo-box img {
   width: 90%;
   margin-top:15px;
 }
