@@ -22,6 +22,7 @@ class SummitBanner extends DataObject implements ISummitBanner
         'Name'              => 'Varchar(255)',
         'MainText'          => 'HTMLText',
         'MainTextColor'     => 'Color',
+        'SeparatorColor'    => 'Color',
         'BackgroundColor'   => 'Color',
         'ButtonText'        => 'Text',
         'ButtonLink'        => 'Varchar(255)',

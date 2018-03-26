@@ -6,7 +6,7 @@
             <div class="col-md-2 logo-box">
                 <img class="logo" src="{$Logo().getUrl()}" />
             </div>
-            <div class="line"></div>
+            <div class="line" style="border-color: #{$SeparatorColor}"></div>
             <div class="col-md-6 main-text-box" style="color:#{$MainTextColor}">
                 {$MainText}
             </div>
