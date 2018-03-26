@@ -1907,14 +1907,15 @@ footer {
 }
 
 .summit-banner .logo-box img {
-  width: 100%;
+  width: 90%;
+  margin-top:15px;
 }
 
 .summit-banner.highlight .line{
   height: 60px;
   margin: 12px 35px;
   float: left;
-  border-right: 1px solid #80d3f2;
+  border-right: 1px solid #fff;
 }
 
 .summit-banner.highlight .main-text-box {
