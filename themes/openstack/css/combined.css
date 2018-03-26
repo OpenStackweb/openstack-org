@@ -1894,6 +1894,9 @@ footer {
 #home .top-site-banner {
   display: none; }
 
+#home-2 .top-site-banner {
+  display: none; }
+
 .summit-banner.highlight{
   height: 85px;
 }
@@ -1937,6 +1940,10 @@ footer {
 
 .summit-banner .button-box .btn i{
   margin-left: 15px;
+}
+
+.summit-banner.editorial {
+  padding: 30px 0 0;
 }
 
 .summit-banner.editorial .picture-box {
