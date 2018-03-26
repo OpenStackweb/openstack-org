@@ -28,7 +28,6 @@ final class AddOnDeleteCascadeForEventsAndPresentationMaterials extends Abstract
             "DELETE FROM Presentation WHERE NOT EXISTS ( SELECT SummitEvent.ID FROM SummitEvent WHERE SummitEvent.ID = Presentation.ID);",
             "ALTER TABLE Presentation ADD CONSTRAINT FK_760FE6EC280A331N FOREIGN KEY (ID) REFERENCES SummitEvent (ID) ON DELETE CASCADE;",
             "DELETE from PresentationMaterial WHERE NOT EXISTS ( SELECT Presentation.ID From Presentation where Presentation.ID = PresentationID);",
-            "ALTER TABLE PresentationMaterial ADD CONSTRAINT FK_760FE6EC280A3317 FOREIGN KEY (PresentationID) REFERENCES Presentation (ID);",
             "DELETE from PresentationLink WHERE NOT EXISTS ( SELECT PresentationMaterial.ID From PresentationMaterial where PresentationMaterial.ID = PresentationLink.ID);",
             "ALTER TABLE PresentationLink ADD CONSTRAINT FK_DDDF040D11D3633A FOREIGN KEY (ID) REFERENCES PresentationMaterial (ID) ON DELETE CASCADE;",
             "DELETE from PresentationVideo WHERE NOT EXISTS ( SELECT PresentationMaterial.ID From PresentationMaterial where PresentationMaterial.ID = PresentationVideo.ID);",
