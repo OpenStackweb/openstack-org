@@ -1,5 +1,5 @@
 <ul class="nav nav-tabs">
-    <li class="{$MainNavClass} {$LinkingMode}">
+    <li class="{$MainNavClass} <% if $ClassName == 'SummitAboutPage' %> current<% end_if %>">
         <a href="$SummitAboutLink">About The Summit</a>
     </li>
     <% loop $Menu(3) %>
