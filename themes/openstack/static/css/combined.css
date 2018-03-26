@@ -436,6 +436,57 @@ a.future-summit:hover:after {
   .hero-tab-wrapper {
     display: none; } }
 
+.summit-hero-wrapper.small-header .text-wrapper {
+  margin-top: 20px;
+}
+
+.summit-hero-wrapper.small-header .logo-box img {
+  width: 200px;
+}
+
+.summit-hero-wrapper.small-header .line {
+  height: 80px;
+  margin: 20px 20px 0px 40px;
+  float: left;
+  border-right: 1px solid #fff;
+}
+
+.summit-hero-wrapper.small-header .title-box {
+  margin: 20px 0 0 4%;
+  padding: 0 0 0 4%;
+  height: 80px;
+  border-left: 1px solid #fff;
+  width: 54%;
+}
+
+.summit-hero-wrapper.small-header .summit-title {
+  color: white;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 2em;
+  text-align: left;
+}
+
+.summit-hero-wrapper.small-header .summit-date {
+  text-align: left;
+  margin: 0;
+  font-size: 1.4em;
+  line-height: 15px;
+}
+
+.summit-hero-wrapper.small-header .button-wrapper {
+  width: 100%;
+  margin-top: 30px;
+}
+
+.summit-hero-wrapper.small-header .button-wrapper .btn {
+  width: 100%;
+}
+
+.summit-hero-wrapper.small-header .hero-tab-wrapper {
+  margin-top: 50px;
+}
+
 /*End Summit Inner Layout*/
 /*Hero Tabs and Navigation*/
 .hero-tab-wrapper ul.nav-tabs {
@@ -3500,6 +3551,26 @@ a.news-story:hover {
 @media (max-width: 767px) {
   .about-summit-action {
     text-align: center; } }
+
+.about-summit-header {
+  padding: 40px 0;
+}
+
+.about-summit-header .about-buttons {
+  margin-top: 30px;
+}
+
+.about-summit-header .about-buttons .btn{
+  width: 100%;
+  color: white !important;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px;
+  margin-bottom: 5px;
+  white-space: normal;
+  line-height: 16px;
+  height: 50px;
+}
 
 h3.recap-title {
   text-align: center;

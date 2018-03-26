@@ -1,5 +1,5 @@
 <ul class="nav nav-tabs">
-    <li class="{$MainNavClass}">
+    <li class="{$MainNavClass} {$LinkingMode}">
         <a href="$SummitAboutLink">About The Summit</a>
     </li>
     <% loop $Menu(3) %>
