@@ -440,6 +440,10 @@ a.future-summit:hover:after {
   margin-top: 20px;
 }
 
+.summit-hero-wrapper.small-header .logo-box {
+  height: 80px;
+}
+
 .summit-hero-wrapper.small-header .logo-box img {
   width: 200px;
 }
@@ -456,7 +460,6 @@ a.future-summit:hover:after {
   padding: 0 0 0 4%;
   height: 80px;
   border-left: 1px solid #fff;
-  width: 54%;
 }
 
 .summit-hero-wrapper.small-header .summit-title {
@@ -1312,9 +1315,38 @@ a.current-summit-link {
 
 @media (min-width: 768px) and (max-width: 992px) {
   .summit-hero-wrapper .summit-hero-postcard {
-    margin-bottom: 15px; } }
+    margin-bottom: 15px; }
+  .summit-hero-wrapper.small-header .text-wrapper {
+    margin-top: 0;
+  }
+  .summit-hero-wrapper.small-header {
+    height: 120px;
+  }
+  .summit-hero-wrapper.small-header .title-box {
+
+  }
+
+}
 
 @media (max-width: 767px) {
+    .summit-hero-wrapper.small-header .logo-box {
+      display: none;
+    }
+    .summit-hero-wrapper.small-header .text-wrapper {
+      margin-top: 0;
+    }
+    .summit-hero-wrapper.small-header .title-box {
+      margin: 0;
+      padding: 0 ;
+      border: none;
+      width: auto;
+    }
+    .summit-hero-wrapper.small-header .title-box div {
+      text-align: center;
+    }
+    .summit-hero-wrapper.small-header .button-box {
+      display: none;
+    }
     .summit-hero-wrapper {
         height: 80px; }
     .summit-hero-wrapper .summit-hero-logo {

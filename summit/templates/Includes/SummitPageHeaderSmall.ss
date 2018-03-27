@@ -2,16 +2,16 @@
     <div class="container">
         <div class="row text-wrapper">
             <% with $Summit %>
-            <div class="col-md-2 logo-box">
+            <div class="col-md-2 col-sm-3 logo-box">
                 <a href="/summit">
                     <img class="summit-hero-logo" src="/themes/openstack/static/images/summit-logo-small-white.svg" alt="OpenStack Summit">
                 </a>
             </div>
-            <div class="col-md-7 title-box">
+            <div class="col-md-6 col-sm-5 title-box">
                 <div class="summit-title">{$Title}</div>
                 <div class="summit-date">{$getSummitDateRange()}</div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 col-sm-3 button-box pull-right">
                 <% if IsUpComing %>
                     <div class="button-wrapper">
                         <a href="{$RegistrationLink}" class="btn register-btn-lrg">Register Now</a>
