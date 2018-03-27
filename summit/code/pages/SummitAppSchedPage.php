@@ -182,7 +182,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
             return $this->httpError(404, 'Sorry that event could not be found');
         }
 
-        // only send meta tags
+        // only send meta tags ( needed for android deep linking)
         if($request->getHeader("Prefer-Html-Meta-Tags")){
             return $this->buildOnlyMetaTagsResponse($event->MetaTags());
         }
@@ -594,7 +594,7 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
             return $this->httpError(404, 'Sorry that speaker could not be found');
         }
 
-        // only send meta tags
+        // only send meta tags ( needed for android deep linking)
         if($request->getHeader("Prefer-Html-Meta-Tags")){
             return $this->buildOnlyMetaTagsResponse($speaker->MetaTags());
         }
@@ -657,6 +657,11 @@ APP_LINKS;
         $speakers = $this->speaker_repository->searchBySummitAndTerm($this->Summit(), $term);
         $events   = $this->event_repository->searchBySummitAndTerm($this->Summit(), $term);
 
+        // only send meta tags ( needed for android deep linking)
+        if($request->getHeader("Prefer-Html-Meta-Tags")){
+            return $this->buildOnlyMetaTagsResponse($this->MetaTags());
+        }
+
         return $this->renderWith
         (
             array
@@ -706,7 +711,7 @@ APP_LINKS;
     }
 
     public function index(SS_HTTPRequest $request){
-        // only send meta tags
+        // only send meta tags ( needed for android deep linking)
         if($request->getHeader("Prefer-Html-Meta-Tags")){
             return $this->buildOnlyMetaTagsResponse($this->MetaTags());
         }
