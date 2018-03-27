@@ -9,7 +9,7 @@
             </div>
             <div class="col-md-6 col-sm-5 title-box">
                 <div class="summit-title">{$Title}</div>
-                <div class="summit-date">{$getSummitDateRange()}</div>
+                <div class="summit-date">{$DateLabel}</div>
             </div>
             <div class="col-md-3 col-sm-3 button-box pull-right">
                 <% if IsUpComing %>
