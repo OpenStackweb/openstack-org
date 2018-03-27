@@ -15,24 +15,20 @@
 
 <% loop $getPageSections() %>
     <% if $isClass('PageSectionLinks') %>
-    <div class="white about-summit with-arrow" id="{$Name}">
+    <div class="{$WrapperClass}" id="{$Name}">
         <div class="container">
             <div class="row">
                 <div class="col-lg-9 col-md-8 col-sm-8">
-                    <h1> {$Title} </h1>
+                    <h2> {$Title} </h2>
                     {$Text}
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-4" style="margin-top:30px;">
-                    <ul class="help-me-menu">
-                        <% loop $Links().Sort('Order') %>
-                            <li>
-                                <a href="{$URL}">
-                                    <% if $IconClass %> <i class="fa {$IconClass}"></i> <% end_if %>
-                                    $Label
-                                </a>
-                            </li>
-                        <% end_loop %>
-                    </ul>
+                <div class="col-lg-3 col-md-4 col-sm-4 about-buttons" style="margin-top:30px;">
+                    <% loop $Links().Sort('Order') %>
+                        <a href="{$URL}" class="btn btn-default" style="background-color:#{$ButtonColor}">
+                            <% if $IconClass %> <i class="fa {$IconClass}"></i> <% end_if %>
+                            $Label
+                        </a>
+                    <% end_loop %>
                 </div>
             </div>
         </div>

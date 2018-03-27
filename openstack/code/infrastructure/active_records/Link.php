@@ -17,6 +17,7 @@ class Link extends DataObject {
 		'Label' => 'Text',
 		'URL' => 'Text',
 		'IconClass' => 'Varchar(50)',
+		'ButtonColor' => 'Color',
 		'Description' => 'HTMLText'
 	);
 	
@@ -37,9 +38,12 @@ class Link extends DataObject {
 			new TextField('Label','Label this link (this will be the text displayed):'),
 			new TextField ('URL','Full URL (ex: http://www.photos.com/photo.jpg) for image'),
 			new TextField ('IconClass','Fontawesome class for the label icon (optional)'),
+			new ColorField ('ButtonColor','Button Color (optional)'),
 			new TextField ('Description','Short description / text for this link (optional)')
 		);
 		return $fields;
 	}
+
+
 	
 }
