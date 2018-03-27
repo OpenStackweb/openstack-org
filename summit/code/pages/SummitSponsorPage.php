@@ -102,22 +102,25 @@ class SummitSponsorPage extends SummitPage
             $fields->addFieldsToTab("Root.Images&Files", [$upload_0,$upload_1,$prospectusField,$contractField]);
 
             // sponsors
-            $companies = new GridField('Sponsors', 'Sponsors', $this->Summit()->Sponsors(), GridFieldConfig_RelationEditor::create(PHP_INT_MAX));
-            $companies->getConfig()->removeComponentsByType('GridFieldEditButton');
-            $companies->getConfig()->removeComponentsByType('GridFieldAddNewButton');
-            $companies->getConfig()->removeComponentsByType('GridFieldAddExistingAutocompleter');
+            $sponsor_config = GridFieldConfig_RelationEditor::create(PHP_INT_MAX);
+            $sponsor_config->addComponent($sort = new GridFieldSortableRows('Order'));
+            $sponsor_config->removeComponentsByType('GridFieldEditButton');
+            $sponsor_config->removeComponentsByType('GridFieldAddNewButton');
+            $sponsor_config->removeComponentsByType('GridFieldAddExistingAutocompleter');
             $completer = new SponsorsGridFieldAddExistingAutocompleter();
             $completer->setSearchList(Company::get());
             $completer->setPlaceholderText('Search by Company Name');
             $completer->setSummitID($this->Summit()->ID);
-            $companies->getConfig()->addComponent($completer);
-            $companies->getConfig()->getComponentByType('GridFieldDataColumns')->setDisplayFields(
+            $sponsor_config->addComponent($completer);
+            $sponsor_config->getComponentByType('GridFieldDataColumns')->setDisplayFields(
                 [
                     'Company.Name'       => 'Name',
                     'DDLSponsorshipType' => 'Sponsorship Type',
                     'InputSubmitPageUrl' => 'Sponsor Link'
                 ]
             );
+            $companies = new GridField('Sponsors', 'Sponsors', $this->Summit()->Sponsors(), $sponsor_config);
+
 
             $config = GridFieldConfig_RecordEditor::create();
             $config->addComponent($sort = new GridFieldSortableRows('Order'));
@@ -283,7 +286,8 @@ class SummitSponsorPage extends SummitPage
         $page = SummitSponsorPage::get()->byID($page_id);
         $res = $page->Summit()->Sponsors()
                 ->leftJoin('SponsorshipType', 'SponsorshipType.ID = Sponsor.SponsorshipTypeID')
-                ->where("SponsorshipType.Name='{$type}'");
+                ->where("SponsorshipType.Name='{$type}'")
+                ->sort('Order');
 
         return $res;
     }

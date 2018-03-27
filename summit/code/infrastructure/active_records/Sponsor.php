@@ -20,6 +20,7 @@ class Sponsor extends DataObject implements ISponsor
     static $db = array
     (
         'SubmitPageUrl' => 'Text',
+        'Order'         => 'Int'
     );
 
     static $has_one = array
