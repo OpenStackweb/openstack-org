@@ -480,7 +480,6 @@ class SummitSecurity extends SummitPage_Controller {
     public function MetaTags()
     {
         $summit_page = $this->CurrentSummitPage();
-        $tags = $summit_page->MetaTags();
-        return $tags;
+        return is_null($summit_page) ? '' : $summit_page->MetaTags();
     }
 }
