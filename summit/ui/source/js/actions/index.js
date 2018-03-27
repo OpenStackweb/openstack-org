@@ -412,8 +412,12 @@ const getAutoloadEventId = (events, view) => {
 
 const getDefaultViewDay = () => {
     const { summit } = ScheduleProps;
-    let filterDay = getCurrentDayLabel();
+    // try to get from fragment
+    let filterDay = getUrlParam('day');
+    if(filterDay == null ) // get current day
+        filterDay = getCurrentDayLabel();
     console.log(`filterDay ${filterDay}`);
+
     if (!summit.dates[filterDay]){
         filterDay = summit.schedule_default_day;
     }
