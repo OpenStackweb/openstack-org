@@ -1,6 +1,4 @@
-.mobile-city-date{
-	display: none;
-}
+
 .featured-guide-row span{
 	display: none;
 }
@@ -27,8 +25,5 @@
 	}
 	.featured-guide-row .featured .featured-content p{
 		font-size: 1em;
-	}
-	.main-body .mobile-city-date{
-		display: none;
 	}
 }

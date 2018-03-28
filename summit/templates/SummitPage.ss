@@ -17,35 +17,6 @@
 
     <% include SummitPageHeaderSmall %>
 
-    <div class="mobile-city-date">
-        <% with $Summit %>
-        <h2>The Must-Attend</h2>
-        <h1>Open Infrastructure Event</h1>
-        <div class="summit-hero-postcard">
-            <p>
-                Join the movement behind the most widely deployed open source cloud platform. Whether you are pursuing a private, hybrid or multi-cloud approach, the OpenStack Summit is the place to network, skill up and plan your cloud strategy.
-            </p>
-            <div class="landing-action">
-                <% if $RegistrationLink %>
-                    <a href="{$RegistrationLink}" class="btn register-btn-lrg">Register Now</a>
-                <% end_if %>
-                <% if $ComingSoonBtnText %>
-                    <button class="btn register-btn-lrg soon" href="#">{$ComingSoonBtnText}</button>
-                <% end_if %>
-                &nbsp;&nbsp;
-                <a href="{$SecondaryRegistrationLink}" <% if not $SecondaryRegistrationLink %> disabled <% end_if %> class="btn register-btn-lrg">{$SecondaryRegistrationBtnText}</a>
-            </div>
-            <div class="landing-date">
-                <div class="left">
-                    $Title
-                </div>
-                <div class="right">
-                    $DateLabel
-                </div>
-            </div>
-        </div>
-        <% end_with %>
-    </div>
     <div id="wrap">
 
         <!-- Begin Page Content -->

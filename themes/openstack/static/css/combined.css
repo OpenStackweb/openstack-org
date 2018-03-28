@@ -1354,27 +1354,6 @@ a.current-summit-link {
         left: 20px; }
     .summit-hero-wrapper .summit-hero-postcard {
         display: none; }
-    .mobile-city-date .summit-hero-postcard {
-        margin-top: 10px; }
-    .mobile-city-date .summit-hero-postcard p {
-        font-size: 1.1em;
-        line-height: 1.5em;
-        font-weight: 300; }
-    .mobile-city-date .summit-hero-postcard .landing-action {
-        margin-bottom: 15px; }
-    .mobile-city-date .summit-hero-postcard .landing-action .btn{
-        margin-top: 15px;    }
-    .mobile-city-date .summit-hero-postcard .landing-date {
-        width: 100%;
-        padding: 15px 10px 20px; }
-    .mobile-city-date .summit-hero-postcard .landing-date .left, .mobile-city-date .summit-hero-postcard .landing-date .right {
-        color: #30739C;
-        font-size: 1.5em;
-        width: 50%; }
-    .mobile-city-date .summit-hero-postcard .landing-date .left {
-        width: 100% }
-    .mobile-city-date .summit-hero-postcard .landing-date .right {
-        width: 100% }
 }
 
 .blue-title {
@@ -3951,28 +3930,7 @@ img.about-summit-legend {
     background: #DA422F; }
 
 /*End About The Summit Page*/
-/*Show City and Date on Mobile*/
-.mobile-city-date {
-  display: none;
-  text-align: center;
-  border-bottom: 1px solid #eee;
-  margin-bottom: 30px;
-  padding-bottom: 30px; }
-  .mobile-city-date h1 {
-    margin: 5px 0 20px;
-    text-transform: uppercase;
-    font-weight: 700;
-    font-size: 2.3em; }
-  .mobile-city-date h2 {
-    margin-bottom: 0;
-    font-size: 1.5em;
-    text-align: center; }
 
-@media (max-width: 767px) {
-  .mobile-city-date {
-    display: block; } }
-
-/*End Show City and Date on Mobile*/
 /*Hotel Landing Page*/
 .hotel-landing-header {
   background: #0F1017;

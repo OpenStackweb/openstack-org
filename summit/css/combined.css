@@ -3572,34 +3572,6 @@ a.outline-btn.inactive:hover {
 
 /*End About The Summit Page*/
 
-/*Show City and Date on Mobile*/
-.mobile-city-date {
-    display: none;
-    text-align: center;
-    border-bottom: 1px solid #eee;
-    margin-bottom: 30px;
-    padding-bottom: 30px;
-}
-
-.mobile-city-date h1 {
-    margin: 5px 0 20px;
-    text-transform: uppercase;
-    font-weight: 700;
-    font-size: 2.3em;
-}
-
-.mobile-city-date h2 {
-    margin-bottom: 0;
-    font-size: 1.5em;
-    text-align: center;
-}
-
-@media (max-width: 767px) {
-    .mobile-city-date {
-        display: block;
-    }
-}
-/*End Show City and Date on Mobile*/
 /*Hotel Landing Page*/
 .hotel-landing-header {
   background: #0F1017;
