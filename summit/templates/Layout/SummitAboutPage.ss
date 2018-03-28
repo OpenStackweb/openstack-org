@@ -49,7 +49,7 @@
                             <img src="{$ProfilePhoto(400)}" alt="{$getName()}" class="summit-user-image">
                         </div>
                         <div class="name">{$getName()}</div>
-                        <div class="title">{$getTitleNice()}</div>
+                        <div class="title">{$Title}</div>
                     </div>
                 </div>
                 <% end_loop %>
