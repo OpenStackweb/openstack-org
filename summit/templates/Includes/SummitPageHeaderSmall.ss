@@ -37,5 +37,9 @@
         <% include SummitNav %>
         <!-- End Microsite Navigation -->
     </div>
-    <% if $SummitImage %><a href="#" class="photo-credit" data-toggle="tooltip" data-placement="left" title="{$SummitImage.Attribution}"><i class="fa fa-info-circle"></i></a><% end_if %>
+    <% if $SummitImage %>
+        <a href="#" class="photo-credit" title="{$SummitImage.Attribution}">
+            <i class="fa fa-info-circle"></i>
+        </a>
+    <% end_if %>
 </div>

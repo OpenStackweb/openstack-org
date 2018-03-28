@@ -36,7 +36,7 @@ $('.edit-presentation-button').click(function() {
 })
 
 // Photo Credit Tooltip
-$('.photo-credit').tooltip();
+//$('.photo-credit').tooltip();
 
 $('a[data-confirm]').on('click', function (e) {
     e.preventDefault();
