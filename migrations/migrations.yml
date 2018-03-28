@@ -104,3 +104,4 @@ migrations:
   - CFPTrackTagGroupsRefactoringMigration
   - SummitReferencialIntegrityMigration
   - UpdateRSVPReferencialIntegrityMigration
+  - FixedCategoryGroupReferencialIntegrityMigration
