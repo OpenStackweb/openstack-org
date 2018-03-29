@@ -124,13 +124,11 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Summit Registration</h4>
+                    <h4 class="modal-title">Thanks for Registering! What's Next?</h4>
                 </div>
                 <div class="modal-body">
-                    <p>
-                        Thank you for completing your OpenStack Summit registration.<br>
-                        An email receipt with details of your purchase will be sent to the address that you registered with.
-                    </p>
+                    <p><b><a href="https://www.openstack.org/summit/vancouver-2018/travel/">Book your hotel room now at a discounted rate</a></b> through our hotel blocks.</p>
+                    <p>An email receipt with details of your Summit registration and purchase will be sent to the address that you registered with.</p>
                 </div>
             </div>
         </div>
