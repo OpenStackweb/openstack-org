@@ -19,18 +19,18 @@ class SurveyQuestionValueTemplate
     extends DataObject
     implements IQuestionValueTemplate {
 
-    private static $db = array
-    (
+    private static $db = [
+
         'Value' => 'Varchar(255)',
         'Order' => 'Int',
         'Label' => 'HTMLText',
-    );
+    ];
 
-    private static $has_one = array
-    (
+    private static $has_one = [
+
         'Owner' => 'SurveyMultiValueQuestionTemplate',
         'Group' => 'SurveyQuestionValueTemplateGroup',
-    );
+    ];
 
     static $indexes = array(
 

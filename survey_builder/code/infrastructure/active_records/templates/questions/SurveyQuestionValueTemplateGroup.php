@@ -24,7 +24,7 @@ class SurveyQuestionValueTemplateGroup extends DataObject
     ];
 
     static $has_one = [
-        'Owner' => 'SurveyCheckBoxListQuestionTemplate',
+        'Owner' => 'SurveyMultiValueQuestionTemplate',
     ];
 
     static $has_many = [
@@ -32,9 +32,29 @@ class SurveyQuestionValueTemplateGroup extends DataObject
     ];
 
     private static $summary_fields = [
-        'ID',
-        'Label',
+        'ID'             => 'Id',
+        'LabelNice'      => 'Label',
+        'ValuesNiceList' => 'Values'
     ];
+
+    public function getOrderedValues(){
+        return $this->Values()->sort('Order','ASC');
+    }
+
+    public function LabelNice(){
+        return strip_tags($this->Label);
+    }
+
+    /**
+     * @return string
+     */
+    public function ValuesNiceList(){
+        $res = [];
+        foreach($this->getOrderedValues() as $val){
+            $res[] = $val->Value;
+        }
+        return implode(', ', $res);
+    }
 
     public function getCMSFields() {
 
@@ -48,9 +68,7 @@ class SurveyQuestionValueTemplateGroup extends DataObject
             $config->removeComponentsByType('GridFieldEditButton');
             $config->addComponent(new GridFieldSortableRows('Order'));
             $config->getComponentByType('GridFieldAddExistingAutocompleter')->setSearchList(
-                SurveyQuestionValueTemplate::get()->filter([
-                    'OwnerID' => $this->OwnerID,
-                ])
+                $this->Owner()->getAllowedValuesForGroups()
             );
             $config->getComponentByType('GridFieldAddExistingAutocompleter')->setResultsFormat('$Label ($ID)');
             $gridField = new GridField('Values', 'Values', $this->Values(), $config);
@@ -70,6 +88,14 @@ class SurveyQuestionValueTemplateGroup extends DataObject
         }
 
         return $valid;
+    }
+
+    /**
+     * @param SurveyQuestionValueTemplate $value
+     * @return bool
+     */
+    public function hasQuestionValue(SurveyQuestionValueTemplate $value){
+        return intval($this->Values()->filter(['ID' => $value->ID])->count()) > 0;
     }
 
 }

@@ -1,0 +1,9 @@
+ul.horizontal
+{
+    display:inline-block;
+}
+
+ul.horizontal li.horizontal{
+    float: left;
+    padding-right: 10px;
+}

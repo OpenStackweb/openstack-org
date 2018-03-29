@@ -8,3 +8,14 @@ tr.highlited
 {
     background-color: yellow;
 }
+
+tr.group-header{
+    background-color: lightblue;
+    font-weight: bold;
+}
+
+tr.group-header td{
+    vertical-align: middle;
+    padding-left: 10px;
+    padding-top: 10px;
+}

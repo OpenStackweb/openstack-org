@@ -14,5 +14,25 @@
  **/
 class SurveyRadioButtonSetField extends OptionsetField
 {
+    const OrientationVertical   = 'Vertical';
+    const OrientationHorizontal = 'Horizontal';
 
+    private $orientation        = self::OrientationVertical;
+
+    public function setOrientation($orientation){
+        $this->orientation = $orientation;
+    }
+
+    public function getOrientation(){
+        return $this->orientation;
+    }
+
+    public function getOrientationClass(){
+        return $this->orientation == self::OrientationVertical || empty($this->orientation) ? 'vertical' : 'horizontal';
+    }
+
+    public function Field($properties = array()) {
+        Requirements::css('survey_builder/css/SurveyRadioButtonSetField.css');
+        return parent::Field($properties);
+    }
 }

@@ -16,37 +16,38 @@ class SurveyMultiValueQuestionTemplate
     extends SurveyQuestionTemplate
     implements IMultiValueQuestionTemplate {
 
-    static $db = array
-    (
-        'EmptyString' => 'VarChar(255)'
-    );
+    static $db = [
+        'EmptyString'       => 'VarChar(255)',
+        'DefaultGroupLabel' => 'HTMLText',
+    ];
 
-    static $has_one = array
-    (
+    static $has_one = [
         'DefaultValue' => 'SurveyQuestionValueTemplate',
-    );
+    ];
 
-    static $indexes = array
-    (
-    );
+    static $indexes = [];
 
-    static $belongs_to = array
-    (
-    );
+    static $belongs_to = [];
 
-    static $many_many = array
-    (
-    );
+    static $many_many = [];
 
-    static $has_many = array
-    (
-        'Values' => 'SurveyQuestionValueTemplate'
-    );
+    static $has_many = [
 
-    private static $defaults = array
-    (
+        'Values' => 'SurveyQuestionValueTemplate',
+        'Groups' => 'SurveyQuestionValueTemplateGroup'
+    ];
+
+    private static $defaults = [
         'EmptyString' => '-- Select One --'
-    );
+    ];
+
+    /**
+     * @return mixed|string
+     */
+    public function getDefaultGroupLabel(){
+        $val = $this->getField('DefaultGroupLabel');
+        return empty($val) ? '<p>Others</p>' : $val;
+    }
 
     public function getCMSFields() {
 
@@ -71,6 +72,23 @@ class SurveyMultiValueQuestionTemplate
                 ));
                 $ddl_default->setEmptyString('-- select --');
             }
+
+            //
+            $fields->add(new HtmlEditorField("DefaultGroupLabel", "Default Group Label <small>( this group will include all values without group assigned)</small>") );
+            $config = GridFieldConfig_RecordEditor::create(PHP_INT_MAX);
+            $config->addComponent(new GridFieldSortableRows('Order'));
+            $gridField = new GridField('Groups', 'Values Groups', $this->Groups(), $config);
+            $add_button = $config->getComponentByType('GridFieldAddNewButton');
+            $add_button->setButtonName('Add New Values Group');
+            $config->getComponentByType('GridFieldDataColumns')->setDisplayFields(
+                [
+                    'ID'    => 'ID',
+                    'LabelNice' => 'Label',
+                    'ValuesNiceList' => 'Values',
+                ]
+            );
+
+            $fields->add($gridField);
         }
 
         return $fields;
@@ -288,6 +306,12 @@ class SurveyMultiValueQuestionTemplate
                 return $v;
         }
         return null;
+    }
+
+    public function getAllowedValuesForGroups(){
+        return SurveyQuestionValueTemplate::get()->filter([
+            'OwnerID' => $this->ID,
+        ]);
     }
 
 }
