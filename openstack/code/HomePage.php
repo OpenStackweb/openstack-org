@@ -19,7 +19,7 @@
 class HomePage extends Page
 {
 
-    static $db = array(
+    static $db = [
         'FeedData'                  => 'HTMLText',
         'EventDate'                 => 'Date',
         'VideoCurrentlyPlaying'     => 'Text',
@@ -35,7 +35,7 @@ class HomePage extends Page
         'NextPresentationStartTime' => 'HTMLText',
         'NextPresentationStartDate' => 'Text',
         'LiveStreamURL'             => 'Text'
-    );
+    ];
 
     private static $has_one  = array(
         'PromoImage' => 'BetterImage',
@@ -114,45 +114,9 @@ class HomePage extends Page
         $image = $this->PromoImage();
         if(!is_null($image) && $image->exists())
             return $image->Link();
-        return '/assets/homepage/homepage-parissummit.png';
+        return '#';
     }
 
-    public function getPromoIntroMessage(){
-        $value = $this->getField('PromoIntroMessage');
-        return $value; //!empty($value)? $value : self::PromoIntroMessageDefault;
-    }
-
-    public function getPromoButtonText(){
-        $value = $this->getField('PromoButtonText');
-        return !empty($value)? $value : self::PromoButtonTextDefault;
-    }
-
-    public function getPromoButtonUrl(){
-        $value = $this->getField('PromoButtonUrl');
-        return !empty($value)? $value : self::PromoButtonUrlDefault;
-    }
-
-    public function getPromoDatesText(){
-        $value = $this->getField('PromoDatesText');
-        return $value; //!empty($value)? $value : self::PromoDatesTextDefault;
-    }
-
-    public function getPromoHeroCredit(){
-        $value = $this->getField('PromoHeroCredit');
-        return !empty($value)? $value : self::PromoHeroCreditDefault;
-    }
-
-    public function getPromoHeroCreditUrl(){
-        $value = $this->getField('PromoHeroCreditUrl');
-        return !empty($value)? $value : self::PromoHeroCreditUrlDefault;
-    }
-
-    const PromoIntroMessageDefault = '"OpenStack has a true community around it."';
-    const PromoButtonTextDefault   = 'See how @WalmartLabs puts 100,000 cores to work';
-    const PromoButtonUrlDefault = 'http://awe.sm/jM31y';
-    const PromoDatesTextDefault = '...we plan to contribute aggressively to the open source community.';
-    const PromoHeroCreditDefault = 'Photo by Claire Massey';
-    const PromoHeroCreditUrlDefault = 'https://www.flickr.com/groups/1574695@N22/';
 }
 
 class HomePage_Controller extends Page_Controller
