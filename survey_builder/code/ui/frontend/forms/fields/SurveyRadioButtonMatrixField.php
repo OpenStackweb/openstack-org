@@ -78,6 +78,7 @@ class SurveyRadioButtonMatrixField extends FormField
 
         $cols                          = new ArrayList($this->question->getColumns());
         $rows                          = new ArrayList($this->question->getRows());
+        $groups                        = $this->question->getOrderedGroups();
         $already_added_additional_rows = new ArrayList();
         $additional_rows               = new ArrayList($this->question->getAlternativeRows());
         $answer_value                  = $this->AnswerValue();
@@ -85,7 +86,7 @@ class SurveyRadioButtonMatrixField extends FormField
         if(!empty($answer_value))
         {
             $tuples           = explode(',', $answer_value);
-            $exclude_row_list = array();
+            $exclude_row_list = [];
 
             foreach($tuples as $t)
             {
@@ -94,7 +95,7 @@ class SurveyRadioButtonMatrixField extends FormField
                 {
                     //already added
                     $already_added_additional_rows->add($this->question->getAlternativeRow($row_id));
-                    array_push($exclude_row_list, $row_id);
+                    $exclude_row_list[] = $row_id;
                 }
             }
             if(count($exclude_row_list))
@@ -103,9 +104,13 @@ class SurveyRadioButtonMatrixField extends FormField
             }
         }
 
+        $filtered_rows = new ArrayList();
+        // filter rows, if they belongs to a group skip then bc they will be already show on a group
         foreach($rows as $r)
         {
             $r->Columns = $cols;
+            if($this->question->belongToValueGroup($r)) continue;
+            $filtered_rows->add($r);
         }
 
         foreach($additional_rows as $r)
@@ -119,7 +124,8 @@ class SurveyRadioButtonMatrixField extends FormField
         }
 
         $properties['Columns']                    = $cols;
-        $properties['Rows']                       = $rows;
+        $properties['Rows']                       = $filtered_rows;
+        $properties['HasRows']                    = intval($filtered_rows->count()) > 0;
         $properties['AdditionalRows']             = $additional_rows;
         $properties['AlreadyAddedAdditionalRows'] = $already_added_additional_rows;
         // all this is translated on survey_builder/templates/SurveyRadioButtonMatrixField.ss
@@ -127,10 +133,12 @@ class SurveyRadioButtonMatrixField extends FormField
         $properties['AdditionalRowsLabel']        = $this->question->AdditionalRowsLabel;
         $properties['AdditionalRowsDescription']  = $this->question->AdditionalRowsDescription;
         $properties['EmptyString']                = $this->question->EmptyString;
-
+        $properties['Groups']                     = $groups;
+        $properties['HasGroups']                  = intval($groups->count()) > 0;
+        $properties['DefaultGroupLabel']          = $this->question->DefaultGroupLabel;
         return $this
             ->customise($properties)
-            ->renderWith(array("SurveyRadioButtonMatrixField"));
+            ->renderWith(["SurveyRadioButtonMatrixField"]);
     }
 
     /**

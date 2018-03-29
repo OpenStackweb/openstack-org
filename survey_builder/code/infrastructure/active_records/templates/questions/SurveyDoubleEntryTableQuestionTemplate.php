@@ -16,18 +16,16 @@ class SurveyDoubleEntryTableQuestionTemplate
     extends SurveyMultiValueQuestionTemplate
     implements IDoubleEntryTableQuestionTemplate
 {
-    static $db = array
-    (
+    static $db = [
         'RowsLabel'                 => 'Text',
         'AdditionalRowsLabel'       => 'Text',
         'AdditionalRowsDescription' => 'HTMLText',
-    );
+    ];
 
-    static $has_many = array
-    (
+    static $has_many = [
         'Rows'           => 'SurveyQuestionRowValueTemplate',
         'Columns'        => 'SurveyQuestionColumnValueTemplate',
-    );
+    ];
 
     /**
      * @param int $id
@@ -53,6 +51,17 @@ class SurveyDoubleEntryTableQuestionTemplate
                 return $v;
         }
         return null;
+    }
+
+    /**
+     * @param SurveyQuestionRowValueTemplate $row
+     * @return bool
+     */
+    public function belongToValueGroup(SurveyQuestionRowValueTemplate $row){
+        foreach($this->Groups() as $group){
+            if($group->hasQuestionValue($row)) return true;
+        }
+        return false;
     }
 
     public function getCMSFields() {
@@ -129,6 +138,16 @@ class SurveyDoubleEntryTableQuestionTemplate
         return $this->Rows()->filter('IsAdditional', 0)->sort('Order','ASC')->toArray();
     }
 
+    public function getOrderedGroups(){
+        return $this->Groups()->sort('Order','ASC');
+    }
+
+    public function getAllowedValuesForGroups(){
+        return SurveyQuestionValueTemplate::get()->filter([
+            'OwnerID'   => $this->ID,
+            'ClassName' => 'SurveyQuestionRowValueTemplate'
+        ])->leftJoin('SurveyQuestionRowValueTemplate', 'SurveyQuestionRowValueTemplate.ID = SurveyQuestionValueTemplate.ID')->where('SurveyQuestionRowValueTemplate.IsAdditional = 0');
+    }
     /**
      * @param IQuestionValueTemplate $row
      * @return $this

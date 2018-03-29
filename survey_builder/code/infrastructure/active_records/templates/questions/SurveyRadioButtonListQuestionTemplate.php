@@ -19,6 +19,10 @@ class SurveyRadioButtonListQuestionTemplate
     extends SurveyMultiValueQuestionTemplate
     implements ISurveyClickableQuestion {
 
+    static $db = [
+        'Orientation' => "Enum('Horizontal,Vertical','Vertical')",
+    ];
+
     public function Type(){
         return 'RadioButtonList';
     }
@@ -27,6 +31,7 @@ class SurveyRadioButtonListQuestionTemplate
 
         $fields = parent::getCMSFields();
         $fields->removeByName('EmptyString');
+        $fields->add(new DropdownField('Orientation', 'Orientation', $this->dbObject('Orientation')->enumValues()));
         return $fields;
     }
 

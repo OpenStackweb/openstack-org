@@ -16,14 +16,6 @@ class SurveyCheckBoxListQuestionTemplate
     extends SurveyMultiValueQuestionTemplate
     implements ISurveyClickableQuestion {
 
-    static $db = array
-    (
-        'DefaultGroupLabel' => 'HTMLText',
-    );
-
-    static $has_many = [
-        'Groups' => 'SurveyQuestionValueTemplateGroup'
-    ];
 
     public function Type(){
         return 'CheckBoxList';
@@ -36,20 +28,7 @@ class SurveyCheckBoxListQuestionTemplate
 
         if($this->ID > 0 ){
             $fields->removeByName('DefaultValueID');
-            $fields->add(new HtmlEditorField("DefaultGroupLabel", "Default Group Label <small>( this group will include all values without group assigned)</small>") );
-            $config = GridFieldConfig_RecordEditor::create(PHP_INT_MAX);
-            $config->addComponent(new GridFieldSortableRows('Order'));
-            $gridField = new GridField('Groups', 'Values Groups', $this->Groups(), $config);
-            $add_button = $config->getComponentByType('GridFieldAddNewButton');
-            $add_button->setButtonName('Add New Values Group');
-            $config->getComponentByType('GridFieldDataColumns')->setDisplayFields(
-                [
-                    'ID'    => 'ID',
-                    'Label' => 'Label',
-                ]
-            );
 
-            $fields->add($gridField);
         }
 
         return $fields;

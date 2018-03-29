@@ -105,3 +105,4 @@ migrations:
   - SummitReferencialIntegrityMigration
   - UpdateRSVPReferencialIntegrityMigration
   - FixedCategoryGroupReferencialIntegrityMigration
+  - UpdatedSurveyQuestionsMigration

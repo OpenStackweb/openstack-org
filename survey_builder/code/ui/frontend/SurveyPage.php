@@ -725,7 +725,7 @@ class SurveyPage_Controller extends Page_Controller
             )->renderWith(array('Surveys_CurrentSurveyDynamicEntityContainer', 'SurveyPage'));
         }
         catch(LogicException $ex1){
-            SS_Log::log($ex->getMessage(), SS_Log::WARN);
+            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
             return $this->httpError(404);
         }
         catch(Exception $ex)
