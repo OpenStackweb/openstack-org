@@ -45,8 +45,9 @@ class PresentationMaterial extends DataObject
 
     private static $summary_fields = array
     (
-        'Name'      => 'Presentation Name',
-        'ClassName' => 'Type'
+        'Name'          => 'Presentation Name',
+        'ClassName'     => 'Type',
+        'DisplayOnSite' => 'DisplayOnSite',
     );
 
     private static $searchable_fields = array

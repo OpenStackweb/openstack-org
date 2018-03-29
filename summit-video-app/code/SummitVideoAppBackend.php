@@ -376,6 +376,14 @@ class SummitVideoAppBackend
         $track = ['id' => $track_obj->ID, 'title' => $track_obj->Title, 'slug' => $track_obj->Slug];
 
         $slide = $v->Presentation()->MaterialType('PresentationSlide');
+        $links = [];
+
+        foreach( $v->Presentation()->getMaterialByType('PresentationLink') as $link){
+            $links[] = [
+              'url'   => $link->Link,
+              'title' => $link->Name
+            ];
+        }
 
         return [
             'id'            => $v->ID,
@@ -394,7 +402,8 @@ class SummitVideoAppBackend
             'slides'        => $slide ? $slide->getSlideURL() : null,
             'slug'          => $v->Presentation()->Slug ?: $v->ID,
             'tags'          => $tags,
-            'track'        => $track
+            'track'         => $track,
+            'links'         => $links,
         ];
     }
 

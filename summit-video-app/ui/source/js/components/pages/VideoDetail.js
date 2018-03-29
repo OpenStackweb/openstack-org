@@ -100,7 +100,18 @@ class VideoDetail extends React.Component {
                                         <a href={video.slides}>Download</a>
                                     </div>
                                 }
-
+                                {video.links && video.links.length > 0 &&
+								<div className="detail-panel-section">
+									<h5 className="section-title">Additional Materials</h5>
+									<ul className="additional-materials-list">
+										{ video.links.map((link, i) => (
+											<li key={i}>
+												<a href={link.url}>{link.title}</a>
+											</li>
+										))}
+									</ul>
+								</div>
+                                }
 								<div className="detail-panel-section">
 									<h5 className="section-title">Share</h5>
 									<ul className="videos-share-list">
