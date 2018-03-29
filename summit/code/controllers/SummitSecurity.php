@@ -99,7 +99,7 @@ class SummitSecurity extends SummitPage_Controller {
      * A list of allowed actions
      * @var array
      */
-    private static $allowed_actions = array(
+    private static $allowed_actions = [
         'login',        
         'lostpassword',
         'passwordsent',
@@ -108,7 +108,7 @@ class SummitSecurity extends SummitPage_Controller {
         'LoginForm',
         'doRegister',
         'registration',
-    );
+    ];
 
     /**
      * Throw a 403 and redirect to this controller. Replaces Security::permissionFailure()  
@@ -126,7 +126,6 @@ class SummitSecurity extends SummitPage_Controller {
             )
         ), 403);
     }
-
 
     public function CurrentCallForSpeakersPageUrl(){
         $current_summit = Summit::get_active();
@@ -260,7 +259,7 @@ class SummitSecurity extends SummitPage_Controller {
     public function RegistrationForm() {
 
         $speaker_registration_token = Session::get(SpeakerRegistrationRequest::ConfirmationTokenParamName);
-
+        Requirements::css('summit/css/summit-security-registration-form.css');
         $fields =   FieldList::create(
             $first_name = TextField::create('FirstName','Your First Name'),
             $last_name  = TextField::create('Surname','Your Last Name'),
@@ -294,7 +293,7 @@ class SummitSecurity extends SummitPage_Controller {
 
         $data = Session::get("FormInfo.{$form->getName()}.data");
         
-        return $form->loadDataFrom($data ?: array ());
+        return $form->loadDataFrom($data ?: []);
     }
 
     /**
@@ -443,7 +442,7 @@ class SummitSecurity extends SummitPage_Controller {
                 return $this->httpError(404, 'speaker registration request not found!');
         }
 
-        return $this->customiseSummitPage(array())->renderWith(
+        return $this->customiseSummitPage([])->renderWith(
             array(
                 'SummitSecurity_registration',
                 'SummitPage'

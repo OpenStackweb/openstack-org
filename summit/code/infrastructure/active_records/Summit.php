@@ -427,11 +427,11 @@ class Summit extends DataObject implements ISummit
     {
         $now = new \DateTime('now', new DateTimeZone('UTC'));
 
-        return Summit::get()->filter(array(
+        return Summit::get()->filter([
             'SummitBeginDate:LessThanOrEqual' => $now->format('Y-m-d H:i:s'),
             'SummitEndDate:GreaterThanOrEqual' => $now->format('Y-m-d H:i:s'),
             'Active' => 1
-        ))->first();
+        ])->first();
     }
 
     /**

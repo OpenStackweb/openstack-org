@@ -1,8 +1,13 @@
-<div class="presentation-app-header">
-    <div class="container">
-        <p class="status"><i class="fa fa-calendar"></i>&nbsp;Currently accepting presentation submissions until <strong>$CurrentSummit.SubmissionEndDate.Format('F jS, Y')</strong>.</p>
-    </div>
-</div>
+<% if $Top.ActiveSummit %>
+    <% if $Top.ActiveSummit.isCallForSpeakersOpen %>
+        <div class="presentation-app-header">
+            <div class="container">
+                <p class="status"><i class="fa fa-calendar"></i>&nbsp;
+                Currently accepting presentation submissions until <strong>$ActiveSummit.SubmissionEndDate.Format('F jS, Y')</strong>.</p>
+            </div>
+        </div>
+    <% end_if %>
+<% end_if %>
 <div class="presentation-app-body">
     <div class="container">
         <h1>Would you like to speak at the OpenStack Summit?</h1>
