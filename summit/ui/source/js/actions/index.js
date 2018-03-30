@@ -30,17 +30,18 @@ export const DEFAULT_FILTERS = {
     levels       : null,
     going        : false,
     favorites    : false,
-}
+};
+
+export const VIEW_DAYS   = 'day';
+export const VIEW_TRACKS = 'track';
+export const VIEW_LEVELS = 'level';
 
 export const DEFAULT_VIEWS = {
     [VIEW_DAYS]: null,
     [VIEW_TRACKS]: null,
     [VIEW_LEVELS]: null,
-}
+};
 
-export const VIEW_DAYS   = 'day';
-export const VIEW_TRACKS = 'track';
-export const VIEW_LEVELS = 'level';
 export const EVENT_FIELD_DETAIL = '_detail';
 export const EVENT_FIELD_LOADED = '_loaded';
 export const EVENT_FIELD_EXPANDED = '_expanded';
@@ -115,6 +116,7 @@ export const toggleFilters = () => {
 export const changeView = (type, value) => {
     return dispatch => {
         const { summit } = ScheduleProps;
+        $(window).url_fragment('clear');
         switch (type) {
             case VIEW_DAYS:
             value = value || Object.keys(ScheduleProps.summit.dates)[0];

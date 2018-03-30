@@ -52,6 +52,11 @@
                 res += key+'='+val;
             }
             return res;
+        },
+        clear:function(){
+            window.location.hash = '';
+            original_hash = '';
+            hash = {};
         }
     };
 
