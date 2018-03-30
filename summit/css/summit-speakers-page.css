@@ -1,0 +1,20 @@
+#nav-char {
+    text-align: center;
+    font-size: 1.4em;
+    line-height: 3em;
+    background-color: #abcdef;
+    color: white;
+    cursor: pointer;
+    width: 100%;
+    z-index: 9999999999999;
+}
+.nav-char-item
+{
+    font-weight: bold;
+    font-size: 20pt;
+}
+
+.inactive {
+    color: grey;
+    cursor: default;
+}

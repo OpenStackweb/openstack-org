@@ -144,6 +144,13 @@ class PresentationSpeaker extends DataObject
     }
 
     /**
+     * @return bool|string
+     */
+    public function getFirstLetterFromName(){
+        return substr($this->FirstName, 0, 1);
+    }
+
+    /**
      * Gets a url label for the speaker
      *
      * @return  string

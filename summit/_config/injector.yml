@@ -9,6 +9,10 @@ PresentationPage_Controller:
     SpeakerManager: '%$SpeakerManager'
     SpeakerRepository: '%$SpeakerRepository'
     MemberRepository: '%$MemberRepository'
+SummitSpeakersPage_Controller:
+  dependencies:
+    SpeakerRepository: '%$SpeakerRepository'
+
 SummitSecurity:
   dependencies:
     SpeakerRegistrationRequestRepository: '%$SpeakerRegistrationRequestRepository'
