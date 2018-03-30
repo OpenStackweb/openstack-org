@@ -14,7 +14,14 @@
     font-size: 20pt;
 }
 
-.inactive {
-    color: grey;
+.inactive,.inactive:visited,.inactive:hover {
+    color: grey !important;
+    cursor: pointer;
+    text-decoration: none !important;
+}
+
+.active, .active:visited, .active:hover {
+    color: white !important;
     cursor: default;
+    text-decoration: none !important;
 }

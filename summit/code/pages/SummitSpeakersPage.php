@@ -40,6 +40,7 @@ class SummitSpeakersPage_Controller extends SummitPage_Controller {
         Requirements::css('themes/openstack/javascript/secondary-nav.jquery/secondary-nav.jquery.css');
         Requirements::css('summit/css/summit-speakers-page.css');
         Requirements::javascript('themes/openstack/javascript/secondary-nav.jquery/secondary-nav.jquery.js');
+        Requirements::javascript('summit/javascript/summit-speakers-page.js');
     }
 
     /**
