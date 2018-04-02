@@ -43,7 +43,7 @@
             </div>
             <div class="row">
                 <% loop $Speakers.Sort('Order') %>
-                <div class="col-lg-3 featured">
+                <div class="col-lg-3 col-md-4 col-sm-6 col-xsm-6 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
                             <img src="{$ProfilePhoto(400)}" alt="{$getName()}" class="summit-user-image">
