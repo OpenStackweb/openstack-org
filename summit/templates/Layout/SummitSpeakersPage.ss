@@ -14,7 +14,7 @@
                 <%if $First %>
                     <div class="row">
                 <% end_if %>
-                <div class="col-lg-3 featured" id="{$getFirstLetterFromName}">
+                <div class="col-lg-3 col-md-4 col-sm-6 col-xsm-6 featured" id="{$getFirstLetterFromName}">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
                             <a title="see {$getName()}'s sessions" href="{$Top.getScheduleGlobalSearchPageLink($getName)}">
