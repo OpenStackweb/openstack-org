@@ -21,6 +21,11 @@ class PageSection extends DataObject {
         'WrapperClass'  => 'Varchar(100)',
         'ShowInNav'     => 'Boolean',
         'Enabled'       => 'Boolean(1)',
+        'Order'         => 'Int'
+    );
+
+    private static $has_one = array (
+        'ParentPage' => 'Page'
     );
 
     static $singular_name = 'Section';
@@ -39,7 +44,8 @@ class PageSection extends DataObject {
             new TextField ('IconClass','Fontawesome class for the label icon (optional)'),
             new TextField ('WrapperClass','Class for the wrapper div (optional)'),
             new CheckboxField('ShowInNav', 'Show in Navigation'),
-            new CheckboxField('Enabled', 'Enabled')
+            new CheckboxField('Enabled', 'Enabled'),
+            new HiddenField('ParentPageID','ParentPageID')
         );
 
         return $fields;

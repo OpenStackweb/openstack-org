@@ -5,14 +5,8 @@ class SummitAboutPage extends SummitPage {
 
     private static $db = array();
 
-    private static $many_many = array(
+    private static $has_many = array(
         'PageSections' => 'PageSection'
-    );
-
-    private static $many_many_extraFields = array(
-        'PageSections' => array(
-            'Order' => 'Int',
-        )
     );
 
     public function getCMSFields()
@@ -53,11 +47,16 @@ class SummitAboutPage extends SummitPage {
         foreach ($previousPages as $page) {
             if ($page->PageSections()->Exists()) {
                 $lastPage = $page;
+                break;
             }
         }
 
         if ($lastPage) {
-            $this->PageSections()->setByIDList($lastPage->getIDList());
+            foreach($lastPage->PageSections() as $page_section) {
+                $clone = $page_section->duplicate();
+                $clone->ParentPageID = $this->ID;
+                $clone->write();
+            }
         }
     }
 }

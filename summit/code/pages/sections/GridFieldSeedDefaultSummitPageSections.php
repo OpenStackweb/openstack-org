@@ -57,7 +57,7 @@ final class GridFieldSeedDefaultSummitPageSections
 
     public function handleSeedDefaultSummitPageSectionsAction($grid, $request, $data = null) {
 
-        $page_id = intval($request->param('ID'));
+        $page_id = intval($request->postVar('ID'));
         if($page_id > 0 && $page = SummitAboutPage::get()->byID($page_id))
         {
             $page->seedDefaultPageSections();
