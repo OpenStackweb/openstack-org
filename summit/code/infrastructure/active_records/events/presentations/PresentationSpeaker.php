@@ -209,6 +209,11 @@ class PresentationSpeaker extends DataObject
         return (trim($title) != '') ? $title : $this->Title;
     }
 
+    public function getTitle()
+    {
+        return html_entity_decode($this->getField('Title'));
+    }
+
     /**
      * Helper method to link to this speaker, given an action
      *
