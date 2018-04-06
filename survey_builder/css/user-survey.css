@@ -1116,6 +1116,8 @@ div.field.checkbox input {
 .back-home-button, .back-home-button:visited
 {
     color: white;
+    margin-top: 30px;
+    margin-bottom: 70px;
 }
 
 .container-thx-u-end{

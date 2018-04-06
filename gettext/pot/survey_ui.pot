@@ -503,7 +503,7 @@ msgstr ""
 #: survey_builder/templates/Layout/UserSurveyPage_ThankYou.ss:6
 msgid ""
       "Thank you for your submission. The OpenStack User Survey is open all year. As your "
-      "cloud grows, visit <a href=\"%1$s\">%1$s</a> to update your deployment profile or update your existing "
+      "cloud grows, visit <a href=\"%1$s\">www.openstack.org/user-survey/</a> to update your deployment profile or update your existing "
       "survey."
 msgstr ""
 

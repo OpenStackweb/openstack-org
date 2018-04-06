@@ -4,7 +4,7 @@
         <div class="col-md-12 col-lg-12">
             <p class="thx-u-end-txt">
                 $_T("survey_ui", "Thank you for your submission. The OpenStack User Survey is open all year. As your
-                cloud grows, visit <a href=\"%1$s\">%1$s</a> to update your deployment profile or update your existing
+                cloud grows, visit <a href=\"%1$s\">www.openstack.org/user-survey/</a> to update your deployment profile or update your existing
                 survey.", $Link)
             </p>
             <p class="thx-u-end-txt">
