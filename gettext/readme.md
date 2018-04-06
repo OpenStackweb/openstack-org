@@ -34,3 +34,8 @@ download po files from zanata server
 ```
 sake dev/tasks/ZanataServerPOFilesDownloaderTask
 ```
+
+# Workflow
+
+once that a .pot file is updated, should be uploaded to zanata
+for new translations

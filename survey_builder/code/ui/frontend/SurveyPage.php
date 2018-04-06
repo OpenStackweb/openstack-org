@@ -85,6 +85,7 @@ class SurveyPage_Controller extends Page_Controller
         'AddEntity',
         'EditEntity',
         'DeleteEntity',
+        'RenderSurveyEnd',
     ];
 
     static $url_handlers = [
@@ -97,6 +98,7 @@ class SurveyPage_Controller extends Page_Controller
         'GET  SurveyStepForm' => 'SurveyStepForm',
         'POST SurveyDynamicEntityStepForm' => 'SurveyDynamicEntityStepForm',
         'GET  SurveyDynamicEntityStepForm' => 'SurveyDynamicEntityStepForm',
+        'GET thank-you-end' => 'RenderSurveyEnd',
         'GET  $STEP_SLUG' => 'RenderSurvey',
         'POST $Action//$ID/$OtherID' => 'handleAction',
     ];
@@ -322,9 +324,9 @@ class SurveyPage_Controller extends Page_Controller
                 $this->survey_manager->sendFinalStepEmail(new SurveyThankYouEmailSenderService, $current_survey);
             }
 
-            return $this->customise(array(
+            return $this->customise([
                 'Survey' => $current_survey,
-            ))->renderWith(array('Surveys_CurrentSurveyContainer', 'SurveyPage'));
+            ])->renderWith(['Surveys_CurrentSurveyContainer', 'SurveyPage']);
         }
         catch(NotFoundEntityException $ex1){
             SS_Log::log($ex1, SS_Log::WARN);
@@ -334,6 +336,15 @@ class SurveyPage_Controller extends Page_Controller
             SS_Log::log($ex, SS_Log::ERR);
             return $this->httpError(404, "Survey not found!");
         }
+    }
+
+    public function RenderSurveyEnd(SS_HTTPRequest $request){
+        $current_survey = $this->getCurrentSurveyInstance();
+
+        return $this->customise([
+            'Survey' => $current_survey,
+            'SurveyReportPage' => SurveyReportPage::getLive()
+        ])->renderWith(['UserSurveyPage_ThankYou', 'SurveyPage']);
     }
 
     /**
@@ -498,7 +509,8 @@ class SurveyPage_Controller extends Page_Controller
                 $this->survey_manager->sendFinalStepEmail(new SurveyThankYouEmailSenderService, $current_survey);
 
             $this->survey_manager->completeSurvey($current_step);
-            $form->sessionMessage(GetTextTemplateHelpers::_t("survey_ui", "Thank you for your submission !!!"), 'good');
+
+            return $this->redirect($this->Link().'thank-you-end');
         }
         SS_Log::log(sprintf("end current step %s", $current_survey->currentStep()->Template()->Name), SS_Log::DEBUG);
         return $this->redirect($this->Link().$next_step->template()->title());

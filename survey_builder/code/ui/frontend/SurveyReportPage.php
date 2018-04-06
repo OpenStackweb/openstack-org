@@ -17,11 +17,18 @@
  */
 class SurveyReportPage extends Page
 {
-    static $db = array(
-    );
+    static $db = [];
+    static $has_one  = [];
 
-    static $has_one = array();
-
+    /**
+     * @return SurveyReportPage
+     */
+    static public function getLive(){
+        $page = Versioned::get_by_stage('SurveyReportPage', 'Live')->first();
+        if(is_null($page))
+            $page = Versioned::get_by_stage('SurveyReportPage', 'Stage')->first();
+        return $page;
+    }
 }
 
 class SurveyReportPage_Controller extends Page_Controller

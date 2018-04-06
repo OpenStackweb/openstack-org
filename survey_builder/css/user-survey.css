@@ -1112,3 +1112,13 @@ div.field.checkbox input {
 #language-selector{
     padding: 10px;
 }
+
+.back-home-button, .back-home-button:visited
+{
+    color: white;
+}
+
+.container-thx-u-end{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}

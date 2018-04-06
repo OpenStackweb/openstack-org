@@ -499,3 +499,20 @@ msgstr ""
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:48
 msgid "Continue Survey"
 msgstr ""
+
+#: survey_builder/templates/Layout/UserSurveyPage_ThankYou.ss:6
+msgid ""
+      "Thank you for your submission. The OpenStack User Survey is open all year. As your "
+      "cloud grows, visit <a href=\"%1$s\">%1$s</a> to update your deployment profile or update your existing "
+      "survey."
+msgstr ""
+
+#: survey_builder/templates/Layout/UserSurveyPage_ThankYou.ss:11
+msgid ""
+      "If you'd like to review the results of the survey to see how other deployments stack "
+      "up, check out our <a href=\"%1$s\">Survey Analytics page</a>."
+msgstr ""
+
+#: survey_builder/templates/Layout/UserSurveyPage_ThankYou.ss:18
+msgid "Back to Home"
+msgstr ""
