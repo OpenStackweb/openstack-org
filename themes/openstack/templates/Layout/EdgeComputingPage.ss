@@ -440,26 +440,26 @@
     <div class="summit-promo containers">
         <div class="container">
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-sm-8">
                     <h3>Everything you need to know about Open Infrastructure + Edge Computing</h3>
                     <p>Learn how organizations like AT&T, Verizon and Vodafone are using OpenStack to implement an edge computing architecture.
                     </p>
                     <p>&nbsp;</p>
                     <div class="nfv-summit-register-btn">
-                        <a href="/summit/sydney-2017/summit-schedule/global-search?t=Edge" class="nfv-summit-btn" target="_blank">Watch the Session Videos <i class="fa fa-chevron-right"></i></a>
+                        <a href="/summit/vancouver-2018/summit-schedule/global-search?t=Edge" class="nfv-summit-btn" target="_blank">Watch the Session Videos <i class="fa fa-chevron-right"></i></a>
                     </div>
                 </div>
-                <!-- <div class="col-sm-4">
+                <div class="col-sm-4">
                     <div class="nfv-summit-right">
                         <img class="nfv-summit-logo" src="/themes/openstack/images/summit-logo-small.svg" alt="OpenStack Summit">
                         <div class="nfv-summit-dates containers">
-                            May 8-11, 2017 in Boston
+                            May 21-24, 2018 in Vancouver
                         </div>
                         <div class="nfv-summit-register-btn">
-                            <a href="https://www.openstack.org/summit/boston-2017/" class="nfv-summit-btn red" target="_blank">Join Us in Boston <i class="fa fa-chevron-right"></i></a>
+                            <a href="https://www.openstack.org/summit/vancouver-2018/" class="nfv-summit-btn red" target="_blank">Join Us in Vancouver <i class="fa fa-chevron-right"></i></a>
                         </div>
                     </div>
-                </div> -->
+                </div>
             </div>
         </div>
     </div>

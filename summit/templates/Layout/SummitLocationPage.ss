@@ -27,9 +27,6 @@
 </div>
 
 <div class="white hotels-row" id="hotels">
-    <% if not $Top.CampusGraphic %>
-        <div class="venue-map" id="map-canvas"></div>
-    <% end_if %>
     <div class="container">
         <% if AlternateHotels %>
             <div class="row">
@@ -141,6 +138,9 @@
         </div>
         <% end_if %>
     </div>
+<% if not $Top.CampusGraphic %>
+    <div class="venue-map" id="map-canvas"></div>
+<% end_if %>
 </div>
 <% if $Venue %>
     <div id="venue">
