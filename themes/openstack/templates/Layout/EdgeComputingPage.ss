@@ -12,14 +12,22 @@
                         </p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-sm-6">
+                <div class="col-lg-4 col-sm-6" style="margin-top: 20px;">
                     <div class="edge-download-container">
                         <div class="edge-download-text">
-                            Download the whitepaper<br>
                             <strong><em>Cloud Edge Computing: Beyond the Data Center</em></strong>
                         </div>
                         <a href="https://www.openstack.org/assets/edge/OpenStack-EdgeWhitepaper-v3-online.pdf" class="edge-download-btn" target="_blank">
-                            <i class="fa fa-arrow-circle-down"></i> Read the whitepaper
+                            <div><i class="fa fa-arrow-circle-down"></i> Read the whitepaper</div>
+                        </a>
+                    </div>
+                    <div class="edge-hr-line"></div>
+                    <div class="edge-download-container">
+                        <div class="edge-download-text">
+                            边缘计算：跨越传统数据中心
+                        </div>
+                        <a href="https://www.openstack.org/assets/edge/EdgeWhitepaper_Chinese.pdf " class="edge-download-btn" target="_blank">
+                            <div><i class="fa fa-arrow-circle-down"></i> 阅读白皮书</div>
                         </a>
                     </div>
                 </div>

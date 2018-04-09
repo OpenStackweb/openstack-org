@@ -31,30 +31,35 @@
 }
 
 .edge-download-container {
-    width: 90%;
-    padding-left: 50px;
+    padding-left: 10px;
+    margin-bottom: 20px;
 }
 
 .edge-download-text {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 300;
 }
 
 a.edge-download-btn, a.edgeml-download-btn {
     display: block;
     border-radius: 2px;
-    margin: 25px auto 0;
+    margin: 10px auto 0;
     color: #fff;
     background: #EC1944;
-    padding: 12px 20px;
+    padding: 8px 0px;
     width: 90%;
     font-weight: normal;
-    font-size: 16px;
+    font-size: 15px;
 }
 
 a.edgeml-download-btn {
     width: 27%;
     float: left;
+}
+
+.edge-hr-line {
+    border: 0.5px solid white;
+    margin: 15px 35%;
 }
 
 .video-wall-row{
