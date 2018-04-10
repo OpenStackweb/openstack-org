@@ -26,7 +26,7 @@
                         <div class="edge-download-text">
                             边缘计算：跨越传统数据中心
                         </div>
-                        <a href="https://www.openstack.org/assets/edge/EdgeWhitepaper_Chinese.pdf " class="edge-download-btn" target="_blank">
+                        <a href="https://www.openstack.org/assets/edge/EdgeWhitepaper-Chinese.pdf " class="edge-download-btn" target="_blank">
                             <div><i class="fa fa-arrow-circle-down"></i> 阅读白皮书</div>
                         </a>
                     </div>
