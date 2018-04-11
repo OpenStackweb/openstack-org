@@ -176,40 +176,40 @@
                     <div class="col-sm-12">
                         <h2>Frequently Asked Questions</h2>
                         <p>
-                            <strong>Q: Why change?</strong>
+                            <strong>Q: Are OpenStack operators welcome to the PTG?</strong>
                         </p>
                         <p>
-                            A: In the past, the OpenStack community has published the latest release, hosted the OpenStack Conference for users, and held the Design Summit for contributors to plan the next version—all in the same feverish, two-week timespan. There have been a few problems with this approach. It has been hard on users because there was very little time get acquainted with the new release before the conference. It has been hard for strategic discussions, because they happened too late in the cycle to be taken into account. It has been hard on upstream contributors, torn between the opportunity to reach out beyond their team, and the necessity to get a lot of things down with your team. And it has been hard on downstream companies who are working to build product based on the new releases.
-                        </p>
-                        <p>So we’re making adjustments to create time between the OpenStack Conference and the release of the software. Going forward, the releases will happen months before each summit. And a new event will be also held between summits called the Project Teams Gathering (PTG). PTGs will be the new venue for planning, organizing, and kickstarting the work on a new development cycle.</p>
+                            A: Yes! Engaged operators and developers are all contributors helping to make OpenStack better. If the teams, workgroups or SIGs they are involved with are taking the opportunity to meet at the PTG, all team members should join to get work done with their co-workers.</p>
 
                         <p>
-                            <strong>Q: When are those events happening?</strong>
+                            <strong>Q: Which groups can meet at the PTG?</strong>
                         </p>
                         <p>
-                            A: Project Teams Gatherings happen in Q1 and Q3 of each year. OpenStack Summits happen in Q2 and Q4 of each year. You can see how this plays out in the timeline below.</p>
-                        <p>
-                            <a href="/assets/Uploads/summit-ptg-timeline-revised.png" target="_blank">
-                                <img class="ptg-release-timeline" src="/assets/Uploads/summit-ptg-timeline-revised.png" alt="Project Teams Gathering vs Design Summit">
-                            </a></p>
+                            A: Contributing to OpenStack and helping to make it better comes in various shapes and forms. We have upstream project teams, User Committee working groups, Special Interest Groups (SIGs), pop-up work groups around a specific issue, and other styles of teams. Event organizers have taken a pretty liberal approach as to which group can request a “track” at the event: if you’re engaged and openly collaborating to make OpenStack better, your team can meet at the PTG!</p>
 
                         <p>
-                            <strong>Q: Attendance to Design Summits used to be free for ATCs. Why do I have to pay to attend the Project Teams Gathering?</strong>
+                            <strong>Q: Is my workgroup forced to meet at the PTG?</strong>
                         </p>
                         <p>
-                            A: In the past, the OpenStack Foundation gave discounted Summit passes to a subset of upstream contributors (not all ATCs) who contributed in the last six months, so that they could more easily attend the Summit. Most ATCs retrieved their Summit pass just in case, and an unpredictable portion of them would actually use them to attend. The PTG space is limited, so we charge a base fee in order to increase the chances that people registering will actually show up, optimizing our usage of the space. The funds will also help keep sponsorship presence at the event to a minimum. Anyone who physically attends the Project Teams Gathering will receive a discount code to attend the next Summit, in order to keep costs low for people who will attend both events. At the same time, we are beefing up our Travel Support Program in order to ensure we can get all the needed people at the right events. If the base fee for the PTG registration is an issue, you should consider applying to that program.
+                            A: Each team is free to decide if they want to leverage the PTG to meet in-person or not. Sometimes a team is small, or dominated by one organization, or coming from the same far-away geographic region and it does not make much sense for team members to travel to the PTG to meet. And sometimes it would benefit from getting together to build trust and get work done more effectively over the next 6 months. The decision to participate is theirs.
                         </p>
                         <p>
-                            <strong>Q: Is the PTG a capped event? How did you set expected attendance?</strong>
+                            We still encourage leaders and cross-team liaisons from all workgroups to participate to the event to represent their team, whether their team actually meets at the PTG or not
                         </p>
                         <p>
-                            A: This is the first event of this kind. We had to make an educated guess on how many people would show up, to plan space accordingly and keep costs under control. The PTG is targeted to existing project team members, like the team mid-cycle meetups and the Fridays contributors meetups at the Summit. We looked at attendance to those events and similar dev-oriented events in the industry, and settled for 500 people. 500 people represent about 80% of the commits to OpenStack in any given release, and way more people than ever showed up at team mid-cycles.
+                            <strong>Q: Why are you running PTGs separately from Summits?</strong>
                         </p>
                         <p>
-                            <strong>Q: How is the change helping upstream developers?</strong>
+                            A: In the past, the OpenStack community has published the latest release, hosted the OpenStack Conference, and held the Design Summit for contributors to plan the next version—all in the same feverish, two-week timespan. There have been a few problems with this approach. It has been hard on users because there was very little time get acquainted with the new release before the conference. It has been hard for strategic discussions, because they happened too late in the cycle to be taken into account. It has been hard on contributors, torn between the opportunity to reach out beyond their team, and the necessity to get a lot of things done with your team. And it has been hard on downstream companies who are working to build product based on the new releases.
                         </p>
                         <p>
-                            A: When everything was held in a single Summit week, upstream developers had a lot of different goals for that week. We leveraged the Summit to communicate new things (give presentations), learn new things (attend presentations), get feedback from users and operators over our last release, gather pain points and priorities for upcoming development, propose changes and see what the community thinks of them, recruit and onboard new team members, have essential cross-project discussions, meet with our existing project team members, kickstart the work on the new cycle, and get things done. There was just not enough time in 4 or 5 days to do all of that, so we usually dropped half of those goals. Most skipped attending presentations. Some abandoned the idea of presenting. Some dropped cross-project discussions, resulting in them not having the critical mass of representation to actually serve their purpose. Some dropped out of their project team meeting to run somewhere else. The time conflicts made us jump between sessions, resulting in us being generally unavailable for listening to feedback, pain points, or newcomers. By the end of the week we were so tired we could not get anything done. We needed to free up time during the week. There are goals that can only be reached in the Summit setting, where all of our community is represented — we keep those goals in the Summit week. There are goals that are better reached in a distraction-free setting — we organize a separate event for them.
+                            As a result, we moved Summits further away from release dates, and focus on cross-community communication and strategic discussions there. We created a separate event at the start of the development part of the release cycle for team meetings in a productive, distraction-free setting.
+                        </p>
+                        <p>
+                            <strong>Q: Why are you merging the Ops Meetup with the PTG?</strong>
+                        </p>
+                        <p>
+                            A: The Ops meetup is a bi-annual event where operators get together to discuss common pain points and priorities, and meet within working groups to get work done. It happened a few weeks away from the PTG, in a different location. It made it quite costly to travel to both events, and therefore discouraged operators from participating in other work groups and SIGs that were meeting at the PTG (or the other way around). The format of the Ops meetup being compatible with the format of the PTG, the User Committee decided to try to run the Ops meetup at the PTG.
                         </p>
                         <p>
                             <strong>Q: What is the Forum?</strong>
@@ -219,84 +219,35 @@
 
                         </p>
                         <p>
-                            <strong>Q: What is the Project Teams Gathering (PTG)?</strong>
+                            <strong>Q: What is the difference between PTGs and Forums?</strong>
                         </p>
                         <p>
-                            A: Project Teams Gathering is the name for the part of the Design Summit that happens as a separate event. It provides space for project teams to meet, make implementation decisions and start development work (the “how”). This is where we’ll have essential cross-project discussions, meet with our existing project team members, generate shared understanding, kickstart the development work on the new cycle, and generally get things done. At this event, OpenStack project teams are given separate rooms to meet for one or more days, in a loose format (no 40-min slots). If you self-identify as a member of a specific OpenStack project team, you should definitely join. If you are not part of a specific project team (or can’t pick one team), you could still come but your experience of the event would likely not be optimal, since the goal of the attendees at this event is to get things done rather than listen to feedback or engage with newcomers. This event happens at (or just around) the previous release time, when developers are ready to fully switch development work to the new cycle.
+                            A: he Forum is a part of the OpenStack Summit event. It’s organized in 40-min slots to discuss specific topics. The Forum takes advantage of having a larger cross-section of our community present to gather wide feedback on strategic issues, helping to shape the future of OpenStack and set priorities. At the Forum, we discuss the “what”, we take the pulse of the community, we engage outside of our existing teams and established contributor base.
                         </p>
                         <p>
-                            <strong>Q: How is the change helping OpenStack as a whole?</strong>
-                        </p>
-                        <p>
-                            A: Putting the larger Summit event further away from last release dramatically improves the feedback loop. In the past, calling for feedback at the Summit was not working: users hadn’t had time to use the last release at all, so most of the feedback we collected was based on the 7-month old previous release. It was also the wrong timing to push for new features: we were already well into the new cycle and it was too late to add new priorities to the mix. The new position of the “Forum” event with respect to the development cycle makes it late enough to get feedback from the previous release and early enough to influence what gets done on the next cycle. By freeing up developers time during the Summit week, we also improve the Summit experience for all attendees: developers will be more available to engage and listen. The technical content at the conference also benefits from having more upstream developers available to give talks and participate in panels. Finally, placing the Summit further away from the release date helps vendors prepare and announce products based on the latest release, making the Summit marketplace more attractive and relevant.
-                        </p>
-                        <p>
-                            <strong>Q: What about mid-cycles?</strong>
-                        </p>
-                        <p>
-                            A: In the past, mid-cycle sprints were organized in separate events by project teams as a way to gather team members and get things done. They grew in popularity as the distractions at the main Summit increased and it became hard for project teams to get together, build social bonds and generally be productive at the Design Summit. We hope that the Project Teams Gathering event will fulfill those productivity and social bonding needs, eliminating the need for separate team-specific sprints.
-                        </p>
-                        <p>
-                            <strong>Q: This Project Teams Gathering thing is likely to be a huge event too. How am I expected to be productive there? Or to be able to build social bonds with my small team?</strong>
-                        </p>
-                        <p>
-                            A: Project Teams Gatherings are much smaller events compared to Summits (think 500 people rather than 7000). Each project teams will be allocated a specific, separate room, in which they will be able to organize their work however they see fit. The only moment where everyone will meet should be around lunch. There will be no evening parties: project teams will be encouraged to organize separate team dinners and build strong social bonds.
+                            In contrast, the PTG is more to discuss within our teams, between people engaged to actively work on making OpenStack better. At the PTGs, we discuss the “how”, get agreement, build trust, assign work items and get work done. Of course there is a grey area and some key topics end up being discussed in both venues.
 
                         </p>
                         <p>
-                            <strong>Q: Does that new format actually help with cross-project work?</strong>
+                            <strong>Q: Are ops and devs still needed at the main Summit?</strong>
                         </p>
                         <p>
-                            A: Cross-project work was unfortunately one of the things a lot of attendees dropped as they struggled with all the things they had to do during the Summit week. Cross-project workshops ended up being less and less productive, especially in getting to decisions or work produced. Mid-cycle sprints ended up being where the work can be done, but them being organized separately meant it is very costly for a member of a cross-project team (infrastructure, docs, QA, release management…) to attend them all. We basically set up our events in a way that made cross-project work prohibitively expensive, and then wondered why we had so much trouble recruiting people to do it. The new format ensures that we have a place to actually do cross-project work, without anything running against it, at the Project Teams Gathering. It dramatically reduces the number of places a Documentation person (for example) needs to travel to get some work done in-person with project team members. It gives project team members in vertical teams an option to break out of their silo and join such a cross-project team. It allows us to dedicate separate rooms to specific cross-project initiatives, beyond existing horizontal teams, to get specific cross-project work done. 
+                            A: Operators and developers are still very much needed at the main Summit. The Summit is where all of the OpenStack community gets together and where the feedback loop happens. All OpenStack teams need to be represented there, to engage in strategic discussions, collect the feedback on their project, communicate about their group work, discuss cross-community topics, reach out to new people and onboard new developers. We also very much want to have operators and developers give presentations at the conference portion of the Summit.
                         </p>
                         <p>
-                            <strong>Q: Are devs still needed at the main Summit?</strong>
+                            <strong>Q: The Project Teams Gathering sounds like a huge event. How am I expected to be productive there? Or to be able to build social bonds with my small team?</strong>
                         </p>
                         <p>
-                            A: Upstream developers are still very much needed at the main Summit. The Summit is where all of the OpenStack community gets together and where the feedback loop happens. All project teams need to be represented there, to engage in strategic discussions, collect the feedback on their project, discuss cross-community topics, reach out to new people and onboard new developers. We also very much want to have developers give presentations at the conference portion of the Summit (we actually expect that more of them will have free time to present at the conference, and that the technical content at the Summit will therefore improve). So yes, developers are still very much needed at the main Summit.
+                            A: Project Teams Gatherings are much smaller events compared to Summits (think 400 people rather than 5000). Each workgroup is allocated a specific, separate meeting area, in which they will be able to organize their schedule and work however they see fit. Past attendees have described the PTG as one of the most productive events they ever attended. The only moment where everyone meets is around lunch. We organize a limited number of social events (happy hours, karaoke, game night) and encourage teams to organize team dinners and build strong social bonds.
                         </p>
                         <p>
-                            <strong>Q: My project team falls apart if the whole team doesn’t meet in person every 3 months (at the Design Summit and our separate mid-cycle project team meeting). With this change aren’t we losing our ability to all get together every 3 months ?</strong>
+                            <strong>Q: I heard that you were reconsidering Project Teams Gatherings for 2019. What is the future of this event?</strong>
                         </p>
                         <p>
-                            A: As mentioned earlier, we hope the Project Teams Gathering to be a lot more productive than the current Design Summit, reducing the need for mid-cycle sprints. That said, if you really still need to organize a separate mid-cycle sprint, you should definitely feel free to do so. We plan to provide space at the main Summit event so that you can hold mid-cycle sprints there and take advantage of the critical mass of people already around. If you decide to host a mid-cycle sprint, you should communicate that your team mid-cycle will be co-located with the Summit and that team member attendance is strongly encouraged.
+                            A: Project Teams Gatherings are very popular with attendees, who praise the productivity of the event coming from a distraction-free environment. However, not everyone can attend the event, especially when they need to prioritize attendance to the Summit for business reasons. Those contributors feel excluded, and would prefer if the PTG would happen directly around (or concurrently to) Summits.
                         </p>
                         <p>
-                            <strong>Q: We are a small team. We don’t do mid-cycles currently. Now we’ll have to travel to four events per year instead of two?</strong>
-                        </p>
-                        <p>
-                            A: Each team needs to decide if it needs to get together to build trust and get work done over the next 6 months. If it does, it should participate (as a team) to the Project Teams Gathering. If it doesn’t, the team can skip it. The PTL and individual team members interested in engaging with other teams (or participating in cross-project efforts) should still definitely come to the Project Teams Gathering, but you don’t need to get every single team member there if you don’t have a dedicated team room. Note that in all cases, your project wants to have some developers present at the Summit to engage with the rest of the community.
-
-                        </p>
-                        <p>
-                            <strong>Q: The project I’m involved with is mostly driven by a single vendor, most of us work from the same office. How does it make sense for all of us to travel to a remote location to get some work done?</strong>
-                        </p>
-                        <p>
-                            A: It doesn’t make a lot of sense, and as a result we expect single-vendor teams in that situation to not request a team room at the PTG. The PTL (and whoever else is interested) should probably still come to the Project Teams Gathering to participate in cross-project work. And you should also definitely come to the Summit to engage with other organizations and contributors and increase your affiliation diversity to the point where you can take advantage of the Project Teams Gathering.
-                        </p>
-                        <p>
-                            <strong>Q: I’m a translator, should I come to the Project Teams Gathering?</strong>
-                        </p>
-                        <p>
-                            A: The I18n team is of course free to meet at the Project Teams Gathering. However, given the nature of the team (large number of members, geographically-dispersed, coming from all over our community, ops, devs, users), it probably makes sense to leverage the Summit to get translators together instead. The Summit constantly reaches out to new communities and countries, while the Project Teams Gathering is likely to focus on major developer areas. We’ll likely get better outreach results by holding I18n sessions or workshops at the “Forum” instead.
-                        </p>
-                        <p>
-                            <strong>Q: A lot of people attend some sessions at the current Design Summit to get a peek at how the sausage is made. How do we preserve that education aspect in the new model?</strong>
-                        </p>
-                        <p>
-                            A: It is true that the Design Summit was an essential piece in showing how open design worked to the rest of the world. However this created a lot of tension, as it is difficult to educate and reach out at the same time you try to get some work done. We tried to separate fishbowls and workrooms at the Design Summit, to separate discussion/feedback sessions from team-members work sessions. That worked for a time, but the context switch can be hard, and people started working around it, making some work rooms look like overcrowded fishbowl rooms. In the end that resulted in a miserable experience for everyone involved. In the new format, the “Forum” sessions will still allow people to witness open design at work, and since those are specifically set up as listening/outreach sessions (rather than team-introspective “get things done” sessions), we can take the time to properly engage and listen. It will also free up time for upstream contributors to present in the general conference and explain how the model works, rather than solely rely on the potentially-frustrating direct experience
-                        </p>
-                        <p>
-                            <strong>Q: Having the Design Summit at the same time as the Summit allowed us to transform users and other community members into potential contributors. Doesn’t the new format jeopardize that seamless onboarding?</strong>
-                        </p>
-                        <p>
-                            A: It is fair to say that by separating project teams gatherings from the general summit event, we make it more difficult for new potential contributors to informally join an existing team during the summit week. On the other hand, the week was so intense that team members could not really dedicate time (or space) specifically to reach out to and recruit new potential contributors: those new members had to hit the ground running. We could not spend half the time in a 40-min session to introduce or summarize the history of the topic to newcomers. By not running the work sessions during the summit week, we free up time for dedicated onboarding and education activities. Project teams will be able to request specific sessions to introduce a given project to newcomers in a classroom setting, where a few team members will spend the necessary time to explain things out. If the new contributor is interested and decides to get involved, their next step would be to start contributing and attend the project team gathering event, only 3 months away (rather than 6 months away). Beyond that, fewer conflicts during the week means we won’t be always running to our next sessions and will likely be more available to reach out to others in the hallway track, extending our recruitment sphere to people who might not have attended the Design Summit at all in the previous setup.
-                        </p>
-                        <p>
-                            <strong>Q: What about the Ops mid-cycle meetup?</strong>
-                        </p>
-                        <p>
-                            A: The Ops meetups are still happening, and for the next year or two probably won’t change much at all. An “Ops Meetups Team” was started to answer the questions about the future of the meetups, and also actively organize the upcoming ones. Part of that team’s definition: “Keeping the spirit of the ops meetup alive” – the meetups are run by ops, for ops and will continue to be. If you have interest, join the team and talk about the number and regional location of the meetups, as well as their content.
+                            Holding Project Teams Gatherings is therefore a complex trade-off between productivity and inclusion. After having held 3 of those events (and committing to hold a 4th one in September 2018), the OpenStack Foundation is gathering wide feedback before deciding on the 2019 strategy.
                         </p>
                     </div>
                 </div>
