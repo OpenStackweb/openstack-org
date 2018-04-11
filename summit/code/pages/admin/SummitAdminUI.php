@@ -54,9 +54,8 @@ final class SummitAdminUI extends DataExtension
         $f->add($rootTab = new TabSet("Root", $tabMain = new Tab('Main')));
 
         $summit_time_zone = null;
-        if($this->owner->TimeZone) {
-            $time_zone_list = timezone_identifiers_list();
-            $summit_time_zone = $time_zone_list[$this->owner->TimeZone];
+        if($this->owner->TimeZoneIdentifier) {
+            $summit_time_zone = $this->owner->TimeZoneIdentifier;
         }
 
         if ($this->owner->RandomVotingLists()->exists()) {
@@ -85,7 +84,7 @@ final class SummitAdminUI extends DataExtension
         $secondary_registration_link->setDescription('Link to the site where you book a hotel.');
 
         $f->addFieldsToTab('Root.Dates',
-            $ddl_timezone = new DropdownField('TimeZone', 'Time Zone', DateTimeZone::listIdentifiers()));
+        $ddl_timezone = new DropdownField('TimeZoneIdentifier', 'Time Zone', $this->owner->getTimezones()));
         $ddl_timezone->setEmptyString('-- Select a Timezone --');
 
         if($summit_time_zone) {

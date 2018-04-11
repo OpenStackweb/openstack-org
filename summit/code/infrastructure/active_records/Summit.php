@@ -15,6 +15,8 @@
 class Summit extends DataObject implements ISummit
 {
 
+    use TimeZoneEntity;
+
     private static $db =
     [
         'Title' => 'Varchar',
@@ -38,7 +40,8 @@ class Summit extends DataObject implements ISummit
         'SecondaryRegistrationBtnText' => 'Text',
         // https://www.eventbrite.com
         'ExternalEventId' => 'Text',
-        'TimeZone' => 'Text',
+        // @see http://php.net/manual/en/timezones.php
+        'TimeZoneIdentifier'    => 'VarChar(255)',
         'StartShowingVenuesDate' => 'SS_Datetime',
         'MaxSubmissionAllowedPerUser' => 'Int',
         'ScheduleDefaultStartDate' => 'SS_Datetime',
@@ -650,95 +653,27 @@ class Summit extends DataObject implements ISummit
         return $blackouts;
     }
 
-    /**
-     * @param $value
-     * @param $format
-     * @return null|string
-     */
-    public function convertDateFromTimeZone2UTC($value, $format = "Y-m-d H:i:s")
-    {
-        $time_zone_id = $this->TimeZone;
-        if (empty($time_zone_id)) {
-            return $value;
-        }
-        $time_zone_list = timezone_identifiers_list();
-
-        if (isset($time_zone_list[$time_zone_id]) && !empty($value)) {
-            $utc_timezone = new DateTimeZone("UTC");
-            $time_zone_name = $time_zone_list[$time_zone_id];
-            $time_zone = new \DateTimeZone($time_zone_name);
-            $date = new \DateTime($value, $time_zone);
-            $date->setTimezone($utc_timezone);
-
-            return $date->format($format);
-        }
-
-        return null;
-    }
 
     /**
-     * @param $value
-     * @param $format
-     * @return null|string
-     */
-    public function convertDateFromUTC2TimeZone($value, $format = "Y-m-d H:i:s")
-    {
-        $time_zone_id = $this->TimeZone;
-        if (empty($time_zone_id)) {
-            return $value;
-        }
-        $time_zone_list = timezone_identifiers_list();
-
-        if (isset($time_zone_list[$time_zone_id]) && !empty($value)) {
-            $utc_timezone = new DateTimeZone("UTC");
-            $time_zone_name = $time_zone_list[$time_zone_id];
-            $time_zone = new \DateTimeZone($time_zone_name);
-            $date = new \DateTime($value, $utc_timezone);
-
-            $date->setTimezone($time_zone);
-
-            return $date->format($format);
-        }
-
-        return null;
-    }
-
-    /**
-     * @return null|string
-     */
-    public function getTimeZoneName()
-    {
-        $time_zone_id = $this->TimeZone;
-        if (empty($time_zone_id)) {
-            return null;
-        }
-        $time_zone_list = timezone_identifiers_list();
-        return isset($time_zone_list[$time_zone_id]) ? $time_zone_list[$time_zone_id] : null;
-    }
-
-    /**
+     * @param string $format
      * @return null|string
      */
     public function getLocalTime($format = "Y-m-d H:i:s")
     {
-        $time_zone_id = $this->TimeZone;
-        if (empty($time_zone_id)) {
-            return 'Timezone not set';
+        $time_zone_identifier = $this->TimeZoneIdentifier;
+        if (empty($time_zone_identifier)) {
+            return 'Time Zone Not Set';
         }
-        $time_zone_list = timezone_identifiers_list();
-
-        if (isset($time_zone_list[$time_zone_id])) {
-            $utc_timezone = new DateTimeZone("UTC");
-            $time_zone_name = $time_zone_list[$time_zone_id];
-            $time_zone = new \DateTimeZone($time_zone_name);
-            $date = new \DateTime('now', $utc_timezone);
-
-            $date->setTimezone($time_zone);
-
+        try{
+            $utc_timezone    = new DateTimeZone("UTC");
+            $local_time_zone = new \DateTimeZone($time_zone_identifier);
+            $date            = new \DateTime('now', $utc_timezone);
+            $date->setTimezone($local_time_zone);
             return $date->format($format);
         }
-
-        return null;
+        catch (Exception $ex) {
+            return null;
+        }
     }
 
     /**
@@ -928,7 +863,7 @@ class Summit extends DataObject implements ISummit
             return $valid->error(sprintf('Summit Title %s already exists!. please set another one', $this->Title));
         }
 
-        $time_zone = $this->TimeZone;
+        $time_zone = TimeZoneIdentifier;
         if (empty($time_zone)) {
             return $valid->error('Time Zone is required!');
         }
@@ -1005,14 +940,24 @@ class Summit extends DataObject implements ISummit
         if (is_null($registration_begin_date) || is_null($registration_end_date)) {
             return false;
         }
-        $time_zone_list = timezone_identifiers_list();
-        $summit_time_zone = new DateTimeZone($time_zone_list[$this->TimeZone]);
 
-        $registration_begin_date = new DateTime($registration_begin_date, $summit_time_zone);
-        $registration_end_date = new DateTime($registration_end_date, $summit_time_zone);
-        $now = new DateTime("now", $summit_time_zone);
+        $time_zone_identifier = $this->TimeZoneIdentifier;
+        if(empty($time_zone_identifier)){
+            return false;
+        }
 
-        return $now >= $registration_begin_date && $now <= $registration_end_date;
+        try {
+            $local_time_zone = new DateTimeZone($time_zone_identifier);
+
+            $registration_begin_date = $this->convertDateFromUTC2TimeZone($this->getField("RegistrationBeginDate"));
+            $registration_end_date   = $this->convertDateFromUTC2TimeZone($this->getField("RegistrationEndDate"));
+            $now                     = new DateTime("now", $local_time_zone);
+
+            return $now >= $registration_begin_date && $now <= $registration_end_date;
+        }
+        catch (Exception $ex){
+            return false;
+        }
     }
 
     /**
@@ -1597,20 +1542,19 @@ SQL;
      * @return int
      */
     public function getOffset(){
-        $time_zone_id = $this->TimeZone;
-        if (empty($time_zone_id)) {
+        $time_zone_identifier = $this->TimeZoneIdentifier;
+        if (empty($time_zone_identifier)) {
             return 0;
         }
-        $time_zone_list = timezone_identifiers_list();
 
-        if (isset($time_zone_list[$time_zone_id])) {
-            $time_zone_name = $time_zone_list[$time_zone_id];
-            $time_zone      = new \DateTimeZone($time_zone_name);
-            $now            = new \DateTime($this->getSummitBeginDate(), $time_zone);
-            return $time_zone->getOffset($now);
+        try{
+            $local_time_zone = new \DateTimeZone($time_zone_identifier);
+            $now             = new \DateTime($this->getSummitBeginDate(), $local_time_zone);
+            return $local_time_zone->getOffset($now);
         }
-
-        return 0;
+        catch(Exception $ex){
+            return 0;
+        }
     }
 
     /**

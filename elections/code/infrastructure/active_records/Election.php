@@ -23,7 +23,8 @@ final class Election extends DataObject implements IElection {
         'NominationAppDeadline' => 'SS_Datetime', // When a candidate must have completed the application in order to be listed
         'ElectionsOpen'         => 'SS_Datetime', // The day elections start
         'ElectionsClose'        => 'SS_Datetime', // The day they close
-        'TimeZone'              => 'Text',
+        // @see http://php.net/manual/en/timezones.php
+        'TimeZoneIdentifier'    => 'VarChar(255)',
     ];
 
     static $has_one = [
@@ -123,13 +124,13 @@ final class Election extends DataObject implements IElection {
         // Dates
 
         $fields->addFieldsToTab('Root.Dates',
-        $ddl_timezone = new DropdownField('TimeZone', 'Time Zone', DateTimeZone::listIdentifiers()));
+        $ddl_timezone = new DropdownField('TimeZoneIdentifier', 'Time Zone', $this->getTimezones()));
         $ddl_timezone->setEmptyString('-- Select a Timezone --');
 
         $election_time_zone = null;
-        if($this->TimeZone) {
-            $time_zone_list = timezone_identifiers_list();
-            $election_time_zone = $time_zone_list[$this->TimeZone];
+
+        if(!empty($this->TimeZoneIdentifier)) {
+            $election_time_zone = $this->TimeZoneIdentifier;
         }
 
         if($election_time_zone) {
@@ -266,7 +267,7 @@ final class Election extends DataObject implements IElection {
         }
 
 
-        $time_zone = $this->TimeZone;
+        $time_zone = $this->TimeZoneIdentifier;
         if (empty($time_zone)) {
             return $valid->error('Time Zone is required!');
         }

@@ -106,3 +106,4 @@ migrations:
   - UpdateRSVPReferencialIntegrityMigration
   - FixedCategoryGroupReferencialIntegrityMigration
   - UpdatedSurveyQuestionsMigration
+  - SummitTimeZoneMigration

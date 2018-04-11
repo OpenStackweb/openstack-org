@@ -30,19 +30,20 @@ trait TimeZoneEntity
     /**
      * @return DateTimeZone|null
      */
-    public function getEntityTimeZone(){
-        $time_zone_id = $this->TimeZone;
-        if (empty($time_zone_id)) {
+    public function getEntityTimeZone()
+    {
+        // @see http://php.net/manual/en/timezones.php
+        $time_zone_identifier = $this->TimeZoneIdentifier;
+        if (empty($time_zone_identifier)) {
             return null;
         }
-        $time_zone_list = timezone_identifiers_list();
-        if (isset($time_zone_list[$time_zone_id])) {
-            $time_zone_name = $time_zone_list[$time_zone_id];
-            return $time_zone = new DateTimeZone($time_zone_name);
+        try {
+            return new DateTimeZone($time_zone_identifier);
+        } catch (Exception $ex) {
+            return null;
         }
-
-        return null;
     }
+
     /**
      * @param $value
      * @param $format
@@ -50,23 +51,25 @@ trait TimeZoneEntity
      */
     public function convertDateFromTimeZone2UTC($value, $format = "Y-m-d H:i:s")
     {
-        $time_zone_id = $this->TimeZone;
-        if (empty($time_zone_id)) {
+        $time_zone_identifier = $this->TimeZoneIdentifier;
+        if (empty($time_zone_identifier)) {
             return $value;
         }
-        $time_zone_list = timezone_identifiers_list();
 
-        if (isset($time_zone_list[$time_zone_id]) && !empty($value)) {
-            $utc_timezone = new DateTimeZone("UTC");
-            $time_zone_name = $time_zone_list[$time_zone_id];
-            $time_zone = new DateTimeZone($time_zone_name);
-            $date = new DateTime($value, $time_zone);
-            $date->setTimezone($utc_timezone);
-
-            return $date->format($format);
+        if (empty($value)) {
+            return null;
         }
 
-        return null;
+        try {
+            $local_time_zone = new DateTimeZone($time_zone_identifier);
+        } catch (Exception $ex) {
+            return null;
+        }
+
+        $utc_timezone = new DateTimeZone("UTC");
+        $date = new DateTime($value, $local_time_zone);
+        $date->setTimezone($utc_timezone);
+        return $date->format($format);
     }
 
     /**
@@ -76,52 +79,65 @@ trait TimeZoneEntity
      */
     public function convertDateFromUTC2TimeZone($value, $format = "Y-m-d H:i:s")
     {
-        $time_zone_id = $this->TimeZone;
-        if (empty($time_zone_id)) {
+        $time_zone_identifier = $this->TimeZoneIdentifier;
+        if (empty($time_zone_identifier)) {
             return $value;
         }
-        $time_zone_list = timezone_identifiers_list();
 
-        if (isset($time_zone_list[$time_zone_id]) && !empty($value)) {
-            $utc_timezone = new DateTimeZone("UTC");
-            $time_zone_name = $time_zone_list[$time_zone_id];
-            $time_zone = new DateTimeZone($time_zone_name);
-            $date = new DateTime($value, $utc_timezone);
-
-            $date->setTimezone($time_zone);
-
-            return $date->format($format);
+        if (empty($value)) {
+            return null;
         }
 
-        return null;
+        try {
+            $local_time_zone = new DateTimeZone($time_zone_identifier);
+        } catch (Exception $ex) {
+            return null;
+        }
+
+        $utc_timezone = new DateTimeZone("UTC");
+        $date = new DateTime($value, $utc_timezone);
+        $date->setTimezone($local_time_zone);
+
+        return $date->format($format);
+
     }
 
     /**
      * @return string
      */
-    public function getTimeZoneName(){
-        $time_zone_id = $this->TimeZone;
-        if (empty($time_zone_id)) {
+    public function getTimeZoneName()
+    {
+        $time_zone_identifier = $this->TimeZoneIdentifier;
+        if (empty($time_zone_identifier)) {
             return 'Not Set';
         }
-        $time_zone_list = timezone_identifiers_list();
-        $time_zone_name = $time_zone_list[$time_zone_id];
-        return $time_zone_name;
+        return $time_zone_identifier;
     }
 
-    public function getTimeZoneOffsetFriendly(){
-        $time_zone_id = $this->TimeZone;
-        if (empty($time_zone_id)) {
+    public function getTimeZoneOffsetFriendly()
+    {
+        $time_zone_identifier = $this->TimeZoneIdentifier;
+        if (empty($time_zone_identifier)) {
             return 'Not Set';
         }
-        $time_zone_list = timezone_identifiers_list();
-        if(!isset($time_zone_list[$time_zone_id]))
-            return 'Not Set';
-        $time_zone_name = $time_zone_list[$time_zone_id];
-        $tz = new DateTimeZone($time_zone_name);
-        $now = new DateTime("now", $tz);
-        $offset = $tz->getOffset( $now ) / 3600;
-        return "GMT" . ($offset < 0 ? $offset : "+".$offset);
+        try {
+            $local_time_zone = new DateTimeZone($time_zone_identifier);
+            $now = new DateTime("now", $local_time_zone);
+            $offset = $local_time_zone->getOffset($now) / 3600;
+            return "GMT" . ($offset < 0 ? $offset : "+" . $offset);
+        } catch (Exception $ex) {
+            return null;
+        }
+    }
 
+    /**
+     * @return array
+     */
+    public function getTimezones(){
+        $timezones_list = [];
+        foreach(DateTimeZone::listIdentifiers() as $timezone_identifier){
+            $timezones_list[$timezone_identifier] = $timezone_identifier;
+        }
+        return $timezones_list;
     }
 }
