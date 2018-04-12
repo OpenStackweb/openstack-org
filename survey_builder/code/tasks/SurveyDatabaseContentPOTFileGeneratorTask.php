@@ -100,6 +100,10 @@ POT_FILE_ENTRY_TPL;
                                 self::addEntryToPOT($pot_file_dic, $pot_file_entries, addslashes($question->EmptyString), sprintf("question %s empty string", $question->Name));
                             }
 
+                            if(!empty($question->DefaultGroupLabel)) {
+                                self::addEntryToPOT($pot_file_dic, $pot_file_entries, addslashes($question->DefaultGroupLabel), sprintf("question %s default group label", $question->Name));
+                            }
+
                             if($question->DefaultValueID > 0) {
                                 self::addEntryToPOT($pot_file_dic, $pot_file_entries, addslashes($question->DefaultValue()->Label), sprintf("question %s default value", $question->Name));
                             }
@@ -109,6 +113,11 @@ POT_FILE_ENTRY_TPL;
                             foreach ($question->getValues() as $value){
                                 $key                = !empty($value->Label) ? addslashes($value->Label) : addslashes($value->Value);
                                 self::addEntryToPOT($pot_file_dic, $pot_file_entries, $key, sprintf("question %s value %s label", $question->Name, $value->Value));
+                            }
+
+                            foreach($question->Groups() as $group){
+                                $key                = addslashes($group->Label);
+                                self::addEntryToPOT($pot_file_dic, $pot_file_entries, $key, sprintf("question %s group %s label", $question->Name, strip_tags($group->Label)));
                             }
 
                             if($question->Type() == 'Ranking'){
@@ -123,6 +132,10 @@ POT_FILE_ENTRY_TPL;
                             self::addEntryToPOT($pot_file_dic, $pot_file_entries, addslashes($question->RowsLabel), sprintf("question %s rows label", $question->Name));
                             self::addEntryToPOT($pot_file_dic, $pot_file_entries, addslashes($question->AdditionalRowsLabel), sprintf("question %s rows additional label", $question->Name));
                             self::addEntryToPOT($pot_file_dic, $pot_file_entries, addslashes($question->AdditionalRowsDescription), sprintf("question %s rows description", $question->Name));
+                            self::addEntryToPOT($pot_file_dic, $pot_file_entries, addslashes($question->AdditionalRowsDescription), sprintf("question %s rows description", $question->Name));
+                            if(!empty($question->DefaultGroupLabel)) {
+                                self::addEntryToPOT($pot_file_dic, $pot_file_entries, addslashes($question->DefaultGroupLabel), sprintf("question %s default group label", $question->Name));
+                            }
 
                             foreach($question->Columns() as $col){
                                 $key                = !empty($col->Label) ? addslashes($col->Label) : addslashes($col->Value);
@@ -133,6 +146,12 @@ POT_FILE_ENTRY_TPL;
                                 $key                = !empty($row->Label) ? addslashes($row->Label) : addslashes($row->Value);
                                 self::addEntryToPOT($pot_file_dic, $pot_file_entries, $key, sprintf("question %s row %s label", $question->Name, $row->Value));
                             }
+
+                            foreach($question->Groups() as $group){
+                                $key                = addslashes($group->Label);
+                                self::addEntryToPOT($pot_file_dic, $pot_file_entries, $key, sprintf("question %s group %s label", $question->Name, strip_tags($group->Label)));
+                            }
+
                             break;
                     }
                 }

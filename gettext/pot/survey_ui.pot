@@ -1,20 +1,9 @@
-# Translations template for OpenStack WWW site user survey.
-# Copyright (C) 2017 ORGANIZATION
-# This file is distributed under the same license as the OpenStack www site project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
-#
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: openstack-user-survey\n"
-"POT-Creation-Date: 2017-04-18 18:38-0300\n"
-"PO-Revision-Date: 2017-04-18 18:41-0300\n"
-"Last-Translator: \n"
-"Language-Team: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.4\n"
-"X-Poedit-Basepath: .\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 
 #: survey_builder/templates/Layout/Includes/EntitySurvey_TeamModal.ss:6
 msgid "Add team member to this deployment"
@@ -32,7 +21,8 @@ msgstr ""
 msgid "Add"
 msgstr ""
 
-#: survey_builder/templates/Layout/Includes/EntitySurvey_TeamModal.ss:24, survey_builder/templates/EntitySurveyEditorTeamField.ss:20
+#: survey_builder/templates/Layout/Includes/EntitySurvey_TeamModal.ss:24
+#:  survey_builder/templates/EntitySurveyEditorTeamField.ss:20
 msgid "Delete"
 msgstr ""
 
@@ -66,7 +56,9 @@ msgid "Save & Come Back Later"
 msgstr ""
 
 #: survey_builder/templates/Layout/Includes/Surveys_SaveLaterModal.ss:10
-msgid "Your progress has been saved! Come back by going to the url below. <strong>See you soon!</strong>"
+msgid ""
+"Your progress has been saved! Come back by going to the url below. "
+"<strong>See you soon!</strong>"
 msgstr ""
 
 #: survey_builder/templates/Layout/Includes/Surveys_SaveLaterModal.ss:15
@@ -77,9 +69,10 @@ msgstr ""
 msgid "Create A Password For Return Visits"
 msgstr ""
 
-
 #: survey_builder/templates/Layout/Includes/ThankYouStepForm.ss:7
-msgid "If you'd like to be able to return and update this information in the future, you may choose a password below."
+msgid ""
+"If you'd like to be able to return and update this information in the "
+"future, you may choose a password below."
 msgstr ""
 
 #: survey_builder/templates/EntitySurveyEditorTeamField.ss:5
@@ -90,7 +83,8 @@ msgstr ""
 msgid "+ Add Team Member"
 msgstr ""
 
-#: survey_builder/templates/EntitySurveyEditorTeamField.ss:19, survey_builder/code/ui/frontend/forms/SurveyRegistrationForm.php:30
+#: survey_builder/templates/EntitySurveyEditorTeamField.ss:19
+#:  survey_builder/code/ui/frontend/forms/SurveyRegistrationForm.php:30
 msgid "First Name"
 msgstr ""
 
@@ -102,43 +96,45 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: survey_builder/templates/EntitySurveyEditorTeamField.ss:20, survey_builder/code/ui/frontend/forms/SurveyRegistrationForm.php:31
+#: survey_builder/templates/EntitySurveyEditorTeamField.ss:20
+#:  survey_builder/code/ui/frontend/forms/SurveyRegistrationForm.php:31
 msgid "Last Name"
 msgstr ""
 
-#:survey_builder/js/SurveyRegistrationForm.js:53
+#: survey_builder/js/SurveyRegistrationForm.js:53
 msgid "First Name is required."
 msgstr ""
 
-#:survey_builder/js/SurveyRegistrationForm.js:54
+#: survey_builder/js/SurveyRegistrationForm.js:54
 msgid "First Name is not valid."
 msgstr ""
 
-#:survey_builder/js/SurveyRegistrationForm.js:57
+#: survey_builder/js/SurveyRegistrationForm.js:57
 msgid "Last Name is required."
 msgstr ""
 
-#:survey_builder/js/SurveyRegistrationForm.js:58
+#: survey_builder/js/SurveyRegistrationForm.js:58
 msgid "Last Name is not valid."
 msgstr ""
 
-#:survey_builder/js/SurveyRegistrationForm.js:61
+#: survey_builder/js/SurveyRegistrationForm.js:61
 msgid "Primary Email Address is required."
 msgstr ""
 
-#:survey_builder/js/SurveyRegistrationForm.js:62
+#: survey_builder/js/SurveyRegistrationForm.js:62
 msgid "Primary Email Address is not valid."
 msgstr ""
 
-#:survey_builder/js/SurveyRegistrationForm.js:63
+#: survey_builder/js/SurveyRegistrationForm.js:63
 msgid "That address is already in use by another user."
 msgstr ""
 
-#:survey_builder/js/SurveyRegistrationForm.js:65
+#: survey_builder/js/SurveyRegistrationForm.js:65
 msgid "Please confirm that you are not a robot."
 msgstr ""
 
-#: survey_builder/templates/SurveyCheckboxSetField.ss:14, survey_builder/templates/SurveyRankingField.ss:16
+#: survey_builder/templates/SurveyCheckboxSetField.ss:14
+#:  survey_builder/templates/SurveyRankingField.ss:16
 msgid "No options available"
 msgstr ""
 
@@ -151,47 +147,65 @@ msgstr ""
 msgid "Click your options to rank them. Select at least one."
 msgstr ""
 
-#: survey_builder/templates/SurveyRankingField.ss:4, survey_builder/templates/SurveyRadioButtonMatrixField.ss:10
+#: survey_builder/templates/SurveyRankingField.ss:4
+#:  survey_builder/templates/SurveyRadioButtonMatrixField.ss:10
 msgid "clear all"
 msgstr ""
 
-#: survey_builder/templates/Layout/Surveys_LandingPage.ss:26, survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:59
+#: survey_builder/templates/Layout/Surveys_LandingPage.ss:26
+#:  survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:59
 msgid "See the results from the latest User Survey"
 msgstr ""
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:39
-msgid "OpenStack users share their opinions and deployment choices to inform the roadmap"
+msgid ""
+"OpenStack users share their opinions and deployment choices to inform the "
+"roadmap"
 msgstr ""
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:45
-msgid "Read more from the tenth survey of OpenStack users since April 2013, with a goal of better understanding user perspectives, organizational profiles, use cases, and technology choices across the community’s deployments. This cycle, the survey was translated into seven additional languages and includes analysis comparisons between both the previous cycle and year over year."
+msgid ""
+"Read more from the tenth survey of OpenStack users since April 2013, with a "
+"goal of better understanding user perspectives, organizational profiles, use "
+"cases, and technology choices across the community’s deployments. This "
+"cycle, the survey was translated into seven additional languages and "
+"includes analysis comparisons between both the previous cycle and year over "
+"year."
 msgstr ""
 
 #: survey_builder/templates/Layout/Surveys_LandingPage.ss:50
 msgid "Download the report"
 msgstr ""
 
-#: survey_builder/templates/Layout/Surveys_LandingPage.ss:56, survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:98
+#: survey_builder/templates/Layout/Surveys_LandingPage.ss:56
+#:  survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:98
 msgid "See prior surveys"
 msgstr ""
 
-#: survey_builder/templates/Layout/Surveys_LandingPage.ss:62, survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:100
-msgid "Learn more about past User Survey data to see how OpenStack is growing and maturing."
+#: survey_builder/templates/Layout/Surveys_LandingPage.ss:62
+#:  survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:100
+msgid ""
+"Learn more about past User Survey data to see how OpenStack is growing and "
+"maturing."
 msgstr ""
 
-#: survey_builder/templates/Layout/Surveys_LandingPage.ss:67, survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:107
+#: survey_builder/templates/Layout/Surveys_LandingPage.ss:67
+#:  survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:107
 msgid "May 2015 demographics"
 msgstr ""
 
-#: survey_builder/templates/Layout/Surveys_LandingPage.ss:70, survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:110
+#: survey_builder/templates/Layout/Surveys_LandingPage.ss:70
+#:  survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:110
 msgid "May 2015 business drivers"
 msgstr ""
 
-#: survey_builder/templates/Layout/Surveys_LandingPage.ss:73, survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:114
+#: survey_builder/templates/Layout/Surveys_LandingPage.ss:73
+#:  survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:114
 msgid "May 2015 deployments"
 msgstr ""
 
-#: survey_builder/templates/Layout/Surveys_LandingPage.ss:75, survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:115
+#: survey_builder/templates/Layout/Surveys_LandingPage.ss:75
+#:  survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:115
 msgid "November 2014 full report"
 msgstr ""
 
@@ -199,32 +213,44 @@ msgstr ""
 msgid "Get Started"
 msgstr ""
 
-#: survey_builder/templates/Layout/Surveys_LandingPage.ss:107, survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:26
+#: survey_builder/templates/Layout/Surveys_LandingPage.ss:107
+#:  survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:26
 msgid "Already have an OpenStack Foundation login?"
 msgstr ""
 
-#: survey_builder/templates/Layout/Surveys_LandingPage.ss:115, survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:30
+#: survey_builder/templates/Layout/Surveys_LandingPage.ss:115
+#:  survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:30
 msgid "Log In"
 msgstr ""
 
-#: survey_builder/templates/Layout/Surveys_LandingPage.ss:115, survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:33
+#: survey_builder/templates/Layout/Surveys_LandingPage.ss:115
+#:  survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:33
 msgid "I've lost my password"
 msgstr ""
 
-#: survey_builder/templates/Layout/Surveys_LandingPage.ss:121, survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:39
+#: survey_builder/templates/Layout/Surveys_LandingPage.ss:121
+#:  survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:39
 msgid "Don't have a login? Start here."
 msgstr ""
 
-#: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:48, survey_builder/code/ui/frontend/forms/SurveyRegistrationForm.php:37
+#: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:48
+#:  survey_builder/code/ui/frontend/forms/SurveyRegistrationForm.php:37
 msgid "Start Survey!"
 msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:72
-msgid "See the OpenStack community’s opinions, adoption and technology choices"
+msgid ""
+"See the OpenStack community’s opinions, adoption and technology choices"
 msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:74
-msgid "Read more from the eighth survey of OpenStack users since April 2013, with a goal of better understanding attitudes, organizational profiles, use cases, and technology choices across the community’s various deployment stages and sizes. This round of the survey offers highlights only, including a selection of charts most widely used by the community, and focuses only on deployments."
+msgid ""
+"Read more from the eighth survey of OpenStack users since April 2013, with a "
+"goal of better understanding attitudes, organizational profiles, use cases, "
+"and technology choices across the community’s various deployment stages and "
+"sizes. This round of the survey offers highlights only, including a "
+"selection of charts most widely used by the community, and focuses only on "
+"deployments."
 msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:77
@@ -241,7 +267,11 @@ msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:82
 #, php-format
-msgid "Uncover your own findings by digging into the User Survey data from the past year with a <a href=\"%s\">new analysis tool</a> available to the OpenStack community. Apply multiple filters to virtually every quantitative question from the user survey."
+msgid ""
+"Uncover your own findings by digging into the User Survey data from the past "
+"year with a <a href=\"%s\">new analysis tool</a> available to the OpenStack "
+"community. Apply multiple filters to virtually every quantitative question "
+"from the user survey."
 msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:88
@@ -273,7 +303,9 @@ msgid "October 2015 full report"
 msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:126
-msgid "<p>This is the <strong>OpenStack User Survey</strong> for OpenStack cloud users and operators.</p>"
+msgid ""
+"<p>This is the <strong>OpenStack User Survey</strong> for OpenStack cloud "
+"users and operators.</p>"
 msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:132
@@ -281,12 +313,17 @@ msgid "<p>It should only take <strong>10 minutes</strong> to complete.</p>"
 msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:138
-msgid "<p>All of the information you provide is <strong>confidential</strong> to the Foundation (unless you specify otherwise).</p>"
+msgid ""
+"<p>All of the information you provide is <strong>confidential</strong> to "
+"the Foundation (unless you specify otherwise).</p>"
 msgstr ""
 
-
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:153
-msgid "This survey provides users an opportunity to influence the community and software direction. By sharing information about your configuration and requirements, the OpenStack Foundation User Committee will be able to advocate on your behalf."
+msgid ""
+"This survey provides users an opportunity to influence the community and "
+"software direction. By sharing information about your configuration and "
+"requirements, the OpenStack Foundation User Committee will be able to "
+"advocate on your behalf."
 msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:156
@@ -295,7 +332,9 @@ msgstr ""
 
 #: survey_builder/templates/Layout/Includes/DynamicEntityStepForm.ss:16
 #, php-format
-msgid "If you do not wish to answer these questions, you may <a href=\"%s\">skip to the next section.</a>"
+msgid ""
+"If you do not wish to answer these questions, you may <a href=\"%s\">skip to "
+"the next section.</a>"
 msgstr ""
 
 #: survey_builder/templates/Layout/Includes/DynamicEntityStepForm.ss:18
@@ -305,11 +344,15 @@ msgstr ""
 
 #: survey_builder/templates/Layout/Includes/DynamicEntityStepForm.ss:21
 #, php-format
-msgid "You do not have any OpenStack deployment yet. <a href=\"%s\">Want to add one?</a>"
+msgid ""
+"You do not have any OpenStack deployment yet. <a href=\"%s\">Want to add "
+"one?</a>"
 msgstr ""
 
 #: survey_builder/templates/Layout/Includes/ReviewStepForm.ss:10
-msgid "Review your completed sections and Submit Your Survey when ready. Thank you for helping create a better OpenStack!"
+msgid ""
+"Review your completed sections and Submit Your Survey when ready. Thank you "
+"for helping create a better OpenStack!"
 msgstr ""
 
 #: survey_builder/templates/Layout/Includes/ReviewStepForm.ss:22
@@ -334,7 +377,9 @@ msgstr ""
 
 #: survey_builder/code/ui/frontend/builders/SurveyRegularStepTemplateUIBuilder.php:57
 #, php-format
-msgid "<p><strong>If you do not wish to answer these questions, you may <a href=\"%s\">skip to the next section</a>.</strong></p>"
+msgid ""
+"<p><strong>If you do not wish to answer these questions, you may <a href="
+"\"%s\">skip to the next section</a>.</strong></p>"
 msgstr ""
 
 #: survey_builder/code/ui/frontend/builders/SurveyReviewStepTemplateUIBuilder.php:23
@@ -349,7 +394,8 @@ msgstr ""
 msgid "Save &amp; Come Back Later"
 msgstr ""
 
-#: survey_builder/code/ui/frontend/builders/SurveyAbstractStepTemplateUIBuilder.php:65, survey_builder/code/ui/frontend/builders/SurveyAbstractStepTemplateUIBuilder.php:66
+#: survey_builder/code/ui/frontend/builders/SurveyAbstractStepTemplateUIBuilder.php:65
+#:  survey_builder/code/ui/frontend/builders/SurveyAbstractStepTemplateUIBuilder.php:66
 msgid "Go Back"
 msgstr ""
 
@@ -358,7 +404,8 @@ msgstr ""
 msgid "STEP %s"
 msgstr ""
 
-#: survey_builder/code/ui/frontend/builders/fields/SurveyRadioButtonMatrixTemplateQuestionUIBuilder.php:34, survey_builder/code/ui/frontend/builders/fields/SurveyRankingQuestionTemplateUIBuilder.php:37
+#: survey_builder/code/ui/frontend/builders/fields/SurveyRadioButtonMatrixTemplateQuestionUIBuilder.php:34
+#:  survey_builder/code/ui/frontend/builders/fields/SurveyRankingQuestionTemplateUIBuilder.php:37
 #, php-format
 msgid "you must select at least one item (%s)"
 msgstr ""
@@ -370,7 +417,6 @@ msgstr ""
 #: survey_builder/templates/Layout/Includes/Surveys_Header.ss:3
 msgid "Step <strong>%1$s of %2$s</strong> for <strong>%3$s</strong>"
 msgstr ""
-
 
 #: survey_builder/js/survey.controller.js:55
 msgid "This field is required."
@@ -441,7 +487,12 @@ msgid "You must select a valid member!"
 msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:43
-msgid "Read more from the ninth survey of OpenStack users since April 2013, with a goal of better understanding user perspectives, organizational profiles, use cases, and technology choices across the community’s deployments. This survey offers insights from more than 1,300 users, representing 44% more deployments and 22% more organizations than ever before."
+msgid ""
+"Read more from the ninth survey of OpenStack users since April 2013, with a "
+"goal of better understanding user perspectives, organizational profiles, use "
+"cases, and technology choices across the community’s deployments. This "
+"survey offers insights from more than 1,300 users, representing 44% more "
+"deployments and 22% more organizations than ever before."
 msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:46
@@ -469,7 +520,7 @@ msgid "Order the User Survey as a printed book"
 msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:86
-msgid "April 2017 full report"
+msgid "April 2017 full report (coming soon)"
 msgstr ""
 
 #: survey_builder/templates/Layout/SurveyPage_FinalLandingPage.ss:3
@@ -478,18 +529,25 @@ msgstr ""
 
 #: survey_builder/templates/Layout/SurveyPage_FinalLandingPage.ss:4
 msgid ""
-"<p>Thank you for participating in the 10th OpenStack User Survey. Your feedback is valuable to OpenStack's development "
-"teams and our entire community. Make sure to register for the OpenStack Summit in Sydney, November 6-8, where you can "
-"meet fellow users, share feedback with developers at the Forum, hear findings from the User Survey and learn more from "
-"other open infrastructure communities like Kubernetes, Ceph, Cloud Foundry and more.</p><p>Other helpful resources:"
-"<br>Q&amp;A Site: <a class=\"external\" href=\"http://ask.openstack.org\">ask.openstack.org</a><br>OpenStack documentation: "
-"<a class=\"external\" href=\"http://docs.openstack.org/\">http://docs.openstack.org/</a><br>Join your local user group: "
-"groups.openstack.org<br>Find a nagios/sensu plugin, ELK filters, useful scripts or add an example config: "
-"<a class=\"external\" href=\"https://wiki.openstack.org/wiki/Osops\">https://wiki.openstack.org/wiki/Osops</a><br>"
-"Join detailed technical discussions: "
-"<a class=\"external\" href=\"http://lists.openstack.org/cgi-bin/mailman/listinfo/openstack-operators\">http://lists.openstack.org/cgi-bin/mailman/listinfo/openstack-operators</a>"
-"<br>Find other OpenStack case studies, tutorials and news from relevant open source communities: "
-"<a href=\"http://superuser.openstack.org\" target=\"_blank\">superuser.openstack.org</a></p>"
+"<p>Thank you for participating in the 10th OpenStack User Survey. Your "
+"feedback is valuable to OpenStack's development teams and our entire "
+"community. Make sure to register for the OpenStack Summit in Sydney, "
+"November 6-8, where you can meet fellow users, share feedback with "
+"developers at the Forum, hear findings from the User Survey and learn more "
+"from other open infrastructure communities like Kubernetes, Ceph, Cloud "
+"Foundry and more.</p><p>Other helpful resources:<br>Q&amp;A Site: <a class="
+"\"external\" href=\"http://ask.openstack.org\">ask.openstack.org</"
+"a><br>OpenStack documentation: <a class=\"external\" href=\"http://docs."
+"openstack.org/\">http://docs.openstack.org/</a><br>Join your local user "
+"group: groups.openstack.org<br>Find a nagios/sensu plugin, ELK filters, "
+"useful scripts or add an example config: <a class=\"external\" href=\"https:/"
+"/wiki.openstack.org/wiki/Osops\">https://wiki.openstack.org/wiki/Osops</"
+"a><br>Join detailed technical discussions: <a class=\"external\" href=\"http:"
+"//lists.openstack.org/cgi-bin/mailman/listinfo/openstack-operators\">http://"
+"lists.openstack.org/cgi-bin/mailman/listinfo/openstack-operators</a><br>Find "
+"other OpenStack case studies, tutorials and news from relevant open source "
+"communities: <a href=\"http://superuser.openstack.org\" target="
+"\"_blank\">superuser.openstack.org</a></p>"
 msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:21
@@ -502,15 +560,15 @@ msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_ThankYou.ss:6
 msgid ""
-      "Thank you for your submission. The OpenStack User Survey is open all year. As your "
-      "cloud grows, visit <a href=\"%1$s\">www.openstack.org/user-survey/</a> to update your deployment profile or update your existing "
-      "survey."
+"Thank you for your submission. The OpenStack User Survey is open all year. As your "
+"cloud grows, visit <a href=\"%1$s\">www.openstack.org/user-survey/</a> to update your deployment profile or update your existing "
+"survey."
 msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_ThankYou.ss:11
 msgid ""
-      "If you'd like to review the results of the survey to see how other deployments stack "
-      "up, check out our <a href=\"%1$s\">Survey Analytics page</a>."
+"If you'd like to review the results of the survey to see how other deployments stack "
+"up, check out our <a href=\"%1$s\">Survey Analytics page</a>."
 msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_ThankYou.ss:18

@@ -32,7 +32,6 @@ class SurveyMultiValueQuestionTemplate
     static $many_many = [];
 
     static $has_many = [
-
         'Values' => 'SurveyQuestionValueTemplate',
         'Groups' => 'SurveyQuestionValueTemplateGroup'
     ];
