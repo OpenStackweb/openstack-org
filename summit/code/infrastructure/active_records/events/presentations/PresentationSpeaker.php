@@ -6,6 +6,21 @@
 class PresentationSpeaker extends DataObject
     implements IPresentationSpeaker
 {
+    static $default_published_presentation_types = [
+        IPresentationType::Keynotes,
+        IPresentationType::Panel,
+        IPresentationType::Presentation,
+        IPresentationType::LightingTalks,
+        IPresentationType::Workshop,
+        IPresentationType::Fishbowl
+    ];
+
+    static $default_regular_presentation_types = [
+        IPresentationType::Keynotes,
+        IPresentationType::Panel,
+        IPresentationType::Presentation,
+        IPresentationType::Workshop
+    ];
 
     use SummitEntityMetaTagGenerator;
 
@@ -385,20 +400,23 @@ class PresentationSpeaker extends DataObject
      */
     public function PublishedPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker,  $exclude_privates_tracks = true, array $excluded_tracks = [])
     {
-        $types = [
-            IPresentationType::Keynotes,
-            IPresentationType::Panel,
-            IPresentationType::Presentation,
-            IPresentationType::LightingTalks,
-            IPresentationType::Workshop,
-            IPresentationType::Fishbowl
-        ];
+        $regular_types = [];
+
+        if(is_null(!$summit_id))
+        {
+            $summit = Summit::get()->byID($summit_id);
+            if($summit)
+                $regular_types = $summit->getPublishedPresentationTypesList();
+        }
+
+        if(count($regular_types))
+            $regular_types = self::$default_published_presentation_types;
 
         return $this->PublishedPresentationsByType
         (
            $summit_id,
            $role,
-           $types,
+            $regular_types,
            $exclude_privates_tracks,
            $excluded_tracks
         );
@@ -419,16 +437,23 @@ class PresentationSpeaker extends DataObject
         array $excluded_tracks = []
     )
     {
+        $regular_types = [];
+
+        if(is_null(!$summit_id))
+        {
+            $summit = Summit::get()->byID($summit_id);
+            if($summit)
+                $regular_types = $summit->getRegularPresentationTypesList();
+        }
+
+        if(count($regular_types))
+            $regular_types = self::$default_regular_presentation_types;
+
         $list =  $this->PublishedPresentationsByType
         (
             $summit_id,
             $role,
-            [
-                IPresentationType::Keynotes,
-                IPresentationType::Panel,
-                IPresentationType::Presentation,
-                IPresentationType::Workshop
-            ],
+            $regular_types,
             true,
             $excluded_tracks
         )->toArray();
@@ -438,12 +463,7 @@ class PresentationSpeaker extends DataObject
             (
                 $summit_id,
                 IPresentationSpeaker::RoleSpeaker,
-                [
-                    IPresentationType::Keynotes,
-                    IPresentationType::Panel,
-                    IPresentationType::Presentation,
-                    IPresentationType::Workshop
-                ],
+                $regular_types,
                 true,
                 $excluded_tracks
             );
@@ -530,16 +550,23 @@ class PresentationSpeaker extends DataObject
     public function PublishedPresentationsByType(
         $summit_id               = null,
         $role                    = IPresentationSpeaker::RoleSpeaker,
-        array $types_slugs       = [
-            IPresentationType::Keynotes,
-            IPresentationType::Panel,
-            IPresentationType::Presentation,
-            IPresentationType::Workshop,
-            IPresentationType::LightingTalks
-        ],
+        array $types_slugs       = [],
         $exclude_privates_tracks = true,
         array $excluded_tracks   = []
     ){
+        if(!count($types_slugs)){
+
+            if(is_null(!$summit_id))
+            {
+                $summit = Summit::get()->byID($summit_id);
+                if($summit)
+                    $types_slugs = $summit->getRegularPresentationTypesList();
+            }
+
+            if(count($types_slugs))
+                $types_slugs = self::$default_regular_presentation_types;
+        }
+
         $summit = !$summit_id ? Summit::get_active() : Summit::get()->byID($summit_id);
         if (!$summit) return false;
 

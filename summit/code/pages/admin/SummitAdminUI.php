@@ -206,17 +206,62 @@ final class SummitAdminUI extends DataExtension
 
             $multi_class_selector->setClasses
             (
-                array
-                (
-                    'SummitEventType' => 'Event Type',
+                [
+                    'SummitEventType'  => 'Event Type',
                     'PresentationType' => 'Presentation Type',
-                )
+                ]
             );
 
             $config->addComponent($multi_class_selector);
+
+            $config->getComponentByType('GridFieldDataColumns')->setDisplayFields
+            (
+                [
+                    'ID' => 'ID',
+                    'Type'  => 'Type',
+                    'ClassName'  => 'ClassName',
+                ]
+            );
+
             $gridField = new GridField('EventTypes', 'EventTypes', $this->owner->EventTypes(), $config);
             $f->addFieldToTab('Root.EventTypes', $gridField);
 
+            $config = GridFieldConfig_RelationEditor::create(50);
+            $config->removeComponentsByType("GridFieldAddNewButton");
+            $completer = $config->getComponentByType('GridFieldAddExistingAutocompleter');
+
+            $completer->setResultsFormat('$Type ($ID)');
+            $completer->setSearchFields(['Type', 'ID']);
+            $config->getComponentByType('GridFieldDataColumns')->setDisplayFields
+            (
+                [
+                    'ID' => 'ID',
+                    'Type'  => 'Type',
+                ]
+            );
+            $completer->setSearchList(PresentationType::get()->filter(['SummitID' => $this->owner->ID]));
+            $categories = new GridField('RegularPresentationTypes',
+                'Regular Presentation Types (Presentation types used to calculate regular speakers published presentations)',
+                $this->owner->RegularPresentationTypes(), $config);
+            $f->addFieldToTab('Root.EventTypes', $categories);
+
+            $config = GridFieldConfig_RelationEditor::create(50);
+            $config->removeComponentsByType("GridFieldAddNewButton");
+            $completer = $config->getComponentByType('GridFieldAddExistingAutocompleter');
+            $completer->setResultsFormat('$Type ($ID)');
+            $completer->setSearchFields(['Type', 'ID']);
+            $config->getComponentByType('GridFieldDataColumns')->setDisplayFields
+            (
+                [
+                    'ID' => 'ID',
+                    'Type'  => 'Type',
+                ]
+            );
+            $completer->setSearchList(PresentationType::get()->filter(['SummitID' => $this->owner->ID]));
+            $categories = new GridField('PublishedPresentationTypes',
+                'Published Presentation Types (Presentation types used to calculate speakers published presentations)',
+                $this->owner->PublishedPresentationTypes(), $config);
+            $f->addFieldToTab('Root.EventTypes', $categories);
             //schedule
 
             $config = GridFieldConfig_RecordEditor::create(50);
@@ -437,6 +482,7 @@ final class SummitAdminUI extends DataExtension
             $completer->setSearchList($this->owner->Categories());
             $categories = new GridField('ExcludedTracksForUploadPresentationSlideDeck', 'Excluded Tracks For Upload Presentation Slide Deck Email', $this->owner->ExcludedTracksForUploadPresentationSlideDeck(), $config);
             $f->addFieldToTab('Root.Speakers Emails', $categories);
+
         }
     }
 

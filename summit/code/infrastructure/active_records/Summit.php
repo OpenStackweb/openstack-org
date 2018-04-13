@@ -96,6 +96,8 @@ class Summit extends DataObject implements ISummit
         'ExcludedCategoriesForRejectedPresentations'   => 'PresentationCategory',
         // summit speaker upload slide deck email
         'ExcludedTracksForUploadPresentationSlideDeck' => 'PresentationCategory',
+        'RegularPresentationTypes'                     => 'PresentationType',
+        'PublishedPresentationTypes'                   => 'PresentationType',
     ];
 
     private static $many_many_extraFields = [];
@@ -1655,6 +1657,28 @@ WHERE TrackTagGroup.SummitID = %s AND Tag.ID = %s;
                 }
             }
         }
+    }
+
+    /**
+     * @return array
+     */
+    public function getRegularPresentationTypesList(){
+        $list = [];
+        foreach($this->RegularPresentationTypes() as $et){
+            $list[] = $et->Type;
+        }
+        return $list;
+    }
+
+    /**
+     * @return array
+     */
+    public function getPublishedPresentationTypesList(){
+        $list = [];
+        foreach($this->PublishedPresentationTypes() as $et){
+            $list[] = $et->Type;
+        }
+        return $list;
     }
 }
 
