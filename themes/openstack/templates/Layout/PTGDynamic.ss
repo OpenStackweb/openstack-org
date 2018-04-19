@@ -127,11 +127,11 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-12">
-                            <h2>Travel</h2>
+                            <h2>Hotel Info</h2>
                             $HotelAndTravel
-                            <!-- <p>
+                            <p>
                                 <a class="btn btn-primary hotel-btn" href="$HotelLink" target="_blank">Book Your Room</a>
-                            </p> -->
+                            </p>
                             <hr>
                         </div>
                     </div>
@@ -175,6 +175,20 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <h2>Frequently Asked Questions</h2>
+                        <p>
+                            <strong>Q: What is the price of registration?</strong>
+                        </p>
+                        <p>
+                            A: Ticket prices for this PTG will be tiered, and are significantly subsidized to help cover part of the overall event cost:
+                            <ul>
+                                <li>Early Bird: USD $199 (Deadline May 11 at 6:59 UTC)</li>
+                                <li>Regular: USD $399 (Deadline August 23 at 6:59 UTC)</li>
+                                <li>Late/Onsite: USD $599</li>
+                            </ul>
+                        </p>
+
+                        <p>
+
                         <p>
                             <strong>Q: Are OpenStack operators welcome to the PTG?</strong>
                         </p>
