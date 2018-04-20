@@ -11,7 +11,7 @@
                 <div class="speaker-name-row">
                     <div class="col-sm-12">
                         <div class="speaker-photo-left">
-                            <a href="{$Top.Link(speakers)}/{$ID}" class="profile-pic-wrapper" style="background-image: url('{$ProfilePhoto(60)}')">
+                            <a href="{$Top.Link(speakers)}/{$ID}" class="profile-pic-wrapper" style="background-image: url('{$ProfilePhoto(120)}')">
                             </a>
                         </div>
                         <div class="speaker-name-right">
