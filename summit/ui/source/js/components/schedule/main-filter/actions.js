@@ -18,9 +18,7 @@ const MainFilterActions = ({
     <div className="row all-events-filter-row">
         <div className="col-md-4 col-xs-12 all-events-filter-link">
             <div className="col-filter-btn">
-                <i title="" id="toggle-all-events-filters" data-placement="right"
-                data-toggle="tooltip" data-original-title="Toggle Advanced Filters"
-                className={`fa fa-filter ${expanded ? 'active' : ''}`}
+                <i title="" id="toggle-all-events-filters" className={`fa fa-filter ${expanded ? 'active' : ''}`}
                 onClick={e => { e.preventDefault(); toggleFilters() }} />
             </div>
             <div className="col-filter-title">

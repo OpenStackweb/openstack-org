@@ -23,7 +23,7 @@ const EventContent = ({
         : '#'
 
     const eventTypeSearchLink = summit.event_types[event.type_id]
-        ? summit.event_types[event.type_id].type
+        ? getSearchLink(summit.event_types[event.type_id].type)
         : '#'
 
     return (
