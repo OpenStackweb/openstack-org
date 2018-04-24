@@ -36,7 +36,7 @@ final class ScheduledSummitLocationBanner extends SummitLocationBanner
 
         if(!empty($start_date) && !empty($end_date)) {
             $summit   = $this->Location()->Summit();
-            $timezone = $summit->TimeZone;
+            $timezone = $summit->TimeZoneIdentifier;
 
             if (empty($timezone)) {
                 return $valid->error('Invalid Summit TimeZone!');

@@ -629,7 +629,7 @@ class SummitEvent extends DataObject implements ISummitEvent
 
         if(!empty($start_date) && !empty($end_date))
         {
-            $timezone = $summit->TimeZone;
+            $timezone = $summit->TimeZoneIdentifier;
 
             if(empty($timezone)){
                 return $valid->error('Invalid Summit TimeZone!');
