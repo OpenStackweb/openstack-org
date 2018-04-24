@@ -110,9 +110,8 @@ final class ScheduledSummitLocationBanner extends SummitLocationBanner
         $location_id = $this->LocationID > 0 ? $this->LocationID : $_REQUEST['LocationID'];
         $location    = SummitAbstractLocation::get()->byID($location_id);
         $summit      = $location->Summit();
-        if($summit->TimeZone) {
-            $time_zone_list = timezone_identifiers_list();
-            $summit_time_zone = $time_zone_list[$summit->TimeZone];
+        if($summit->TimeZoneIdentifier) {
+            $summit_time_zone = $summit->TimeZoneIdentifier;
         }
 
         if($summit_time_zone) {
