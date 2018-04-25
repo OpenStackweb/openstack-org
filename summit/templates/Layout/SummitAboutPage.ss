@@ -54,6 +54,11 @@
                 </div>
                 <% end_loop %>
             </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    {$Text}
+                </div>
+            </div>
         </div>
     </div>
     <% else_if $isClass('PageSectionVideos') %>
