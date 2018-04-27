@@ -27,43 +27,11 @@
                 <p>
                     <%t Software.PROJECT_NAVIGATOR_DESCRIPTION 'The Project Navigator is aimed at helping users make informed decisions about how to consume the software. Data used to power the Project Navigator website is provided by the OpenStack Technical and User Committees.' %>
                 </p>
-                <p>
-                    <a data-target="#statsInfoModal" data-toggle="modal" href="#"><%t Software.STATS_MEANING_PROJECT 'What do the stats shown on each project mean?' %></a>
-                </p>
-                <hr>
+                <p></p>
             </div>
         </div>
         <project-services base_url="{$Top.Link}" groups="{ components.grouped_components }" max_maturity_points="{ components.max_maturity_points }" tilemode="{ tileMode }">
         </project-services>
-        <!-- Stats 'what does this mean?' Modal -->
-        <div id="statsInfoModal" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only"><%t Openstack.CLOSE 'Close' %></span></button>
-                        <h4 class="modal-title"><%t Software.STATS_MEANING 'What Do These Stats Mean?' %></h4>
-                    </div>
-                    <div class="modal-body">
-                        <p class="download-text">
-                        </p>
-                        <hr>
-                        <p>
-                            <%t Software.ADOPTION_DESCRIPTION '<strong>Adoption</strong> is the percentage of production deployments running the project based on the latest biannual user survey results.' %>
-                        </p>
-                        <p>
-                            <%t Software.MATURITY_DESCRIPTION '<strong>Maturity</strong> comes from looking at {points} distinct tags that indicate stability and sustainability. The current criteria includes whether or not the project has an install guide, whether it is supported by 7 or more SDKs, if the adoption percentage is greater than 75%, whether or not the team has achieved corporate diversity and whether or not there are stable branches.' points=$Top.getMaxAllowedMaturityPoints %>
-                        </p>
-                        <p>
-                            <%t Software.AGE_DESCRIPTION '<strong>Age</strong> is the number of years the project has been in development.' %>
-                        </p>
-                    </div>
-                    <div class="modal-footer">
-                        <button data-dismiss="modal" class="btn btn-default" type="button"><%t Openstack.CLOSE 'Close' %></button>
-                    </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div>
-        <!-- End Modal -->
         <!-- End Page Content -->
     </div>
 </div>
