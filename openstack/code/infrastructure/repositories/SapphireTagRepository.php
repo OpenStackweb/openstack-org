@@ -46,4 +46,57 @@ SQL;
 
         return DB::query($query);
     }
+
+
+    /**
+     * @param int $summit_id
+     * @param int $page
+     * @param int $page_size
+     * @param string $sort
+     * @param string $sort_dir
+     * @param string $id
+     * @return ISummitEventFeedback[]
+     */
+    public function searchAllPaged($summit_id,$page,$page_size,$sort,$sort_dir,$search_term)
+    {
+        $query_body = <<<SQL
+            FROM Tag 
+            INNER JOIN SummitEvent_Tags AS ET ON ET.TagID = Tag.ID
+            INNER JOIN SummitEvent AS E ON E.ID = ET.SummitEventID
+SQL;
+
+        $query_where = <<<SQL
+            WHERE E.SummitID = {$summit_id}
+SQL;
+
+        if ($search_term) {
+            $query_where .= " AND (Tag.Tag LIKE '%{$search_term}%')";
+        }
+
+        $query_count = "SELECT COUNT(*) FROM (SELECT Tag.ID ";
+
+        $query = <<<SQL
+        SELECT
+        Tag.Tag AS tag,
+        COUNT(ET.ID) AS tag_count
+SQL;
+
+        $query .= $query_body . $query_where . " GROUP BY Tag.ID ORDER BY {$sort} {$sort_dir}";
+        $query_count .= $query_body . $query_where . " GROUP BY Tag.ID ) AS Q1";
+
+        if ($page && $page_size) {
+            $offset = ($page - 1 ) * $page_size;
+            $query .= " LIMIT {$offset}, {$page_size}";
+        }
+
+        $data = array();
+        foreach (DB::query($query) as $row) {
+            $data[] = $row;
+        }
+
+        $total = DB::query($query_count)->value();
+
+        $result = array('total' => $total, 'data' => $data);
+        return $result;
+    }
 }

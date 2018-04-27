@@ -51,6 +51,7 @@
     <reports-admin-presentations-company-report if={ report == 'presentations_company_report' } page_limit="{ limit }" summit_id="{ summit_id }" dispatcher="{ dispatcher }"></reports-admin-presentations-company-report>
     <reports-admin-presentations-by-track-report if={ report == 'presentations_by_track_report' } page_limit="{ limit }" summit_id="{ summit_id }" tracks="{ tracks }" dispatcher="{ dispatcher }"></reports-admin-presentations-by-track-report>
     <reports-admin-feedback-report if={ report == 'feedback_report' } page_limit="{ limit }" summit_id="{ summit_id }" dispatcher="{ dispatcher }"></reports-admin-feedback-report>
+    <reports-admin-tag-report if={ report == 'tag_report' } page_limit="{ limit }" summit_id="{ summit_id }" dispatcher="{ dispatcher }"></reports-admin-tag-report>
 
     <div id="emailModal" class="modal fade" role="dialog" data-backdrop="static">
         <div class="modal-dialog">
@@ -212,6 +213,10 @@
                     self.show_export = true;
                     break;
                 case 'feedback_report':
+                    self.show_search = true;
+                    self.show_export = true;
+                    break;
+                case 'tag_report':
                     self.show_search = true;
                     self.show_export = true;
                     break;

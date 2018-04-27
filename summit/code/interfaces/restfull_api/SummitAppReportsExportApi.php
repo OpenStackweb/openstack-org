@@ -56,6 +56,11 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
     private $feedback_repository;
 
     /**
+     * @var IEntityRepository
+     */
+    private $tag_repository;
+
+    /**
      * @var ISummitEventManager
      */
     private $summit_manager;
@@ -70,6 +75,7 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
         IPresentationCategoryRepository $category_repository,
         ISummitPresentationRepository $presentation_repository,
         ISummitEventFeedBack $feedback_repository,
+        ITagRepository $tag_repository,
         ISummitEventManager $summit_manager
     )
     {
@@ -82,6 +88,7 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
         $this->category_repository           = $category_repository;
         $this->presentation_repository       = $presentation_repository;
         $this->feedback_repository           = $feedback_repository;
+        $this->tag_repository                = $tag_repository;
         $this->summit_manager                = $summit_manager;
     }
 
@@ -115,6 +122,7 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
         'GET presentations_company_report'     => 'exportPresentationsCompanyReport',
         'GET presentations_by_track_report'    => 'exportPresentationsByTrackReport',
         'GET feedback_report/$SOURCE/$ID'      => 'exportFeedbackReport',
+        'GET tag_report'                       => 'exportTagReport',
     );
 
     static $allowed_actions = array(
@@ -128,6 +136,7 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
         'exportPresentationsCompanyReport',
         'exportPresentationsByTrackReport',
         'exportFeedbackReport',
+        'exportTagReport',
     );
 
     public function exportSpeakerReport(SS_HTTPRequest $request){
@@ -634,6 +643,38 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
 
             $delimiter = ($ext == 'xls') ? "\t" : ",";
             return CSVExporter::getInstance()->export($filename, $feedbacks['data'], $delimiter);
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    public function exportTagReport(SS_HTTPRequest $request){
+        try
+        {
+            $query_string = $request->getVars();
+            $sort         = (isset($query_string['sort'])) ? Convert::raw2sql($query_string['sort']) : 'tag';
+            $sort_dir     = (isset($query_string['sort_dir'])) ? Convert::raw2sql($query_string['sort_dir']) : 'DESC';
+            $search_term  = (isset($query_string['term'])) ? Convert::raw2sql($query_string['term']) : '';
+
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $summit       = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+            $ext = 'csv';
+
+            $filename = "tag_report_". date('Ymd') . "." . $ext;
+
+            $tags = $this->tag_repository->searchAllPaged($summit_id,null,null,$sort,$sort_dir,$search_term);
+
+            $delimiter = ($ext == 'xls') ? "\t" : ",";
+            return CSVExporter::getInstance()->export($filename, $tags['data'], $delimiter);
         }
         catch(NotFoundEntityException $ex2)
         {

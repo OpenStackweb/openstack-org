@@ -19,4 +19,15 @@ interface ITagRepository extends IEntityRepository
      * @return ITag[]
      */
     public function getByTag($search);
+
+    /**
+     * @param int $summit_id
+     * @param int $page
+     * @param int $page_size
+     * @param string $sort
+     * @param string $sort_dir
+     * @param string $id
+     * @return ISummitEventFeedback[]
+     */
+    public function searchAllPaged($summit_id,$page,$page_size,$sort,$sort_dir,$search_term);
 }

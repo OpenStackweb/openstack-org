@@ -10,6 +10,7 @@ function ReportsAdminViewDispatcher() {
     this.GET_PRESENTATIONS_COMPANY_REPORT      = 'GET_PRESENTATIONS_COMPANY_REPORT';
     this.GET_PRESENTATIONS_BY_TRACK_REPORT     = 'GET_PRESENTATIONS_BY_TRACK_REPORT';
     this.GET_FEEDBACK_REPORT                   = 'GET_FEEDBACK_REPORT';
+    this.GET_TAG_REPORT                        = 'GET_TAG_REPORT';
     this.SAVE_SPEAKER_REPORT                   = 'SAVE_SPEAKER_REPORT';
     this.SAVE_ROOM_REPORT                      = 'SAVE_ROOM_REPORT';
     this.SAVE_VIDEO_REPORT                     = 'SAVE_VIDEO_REPORT';
@@ -22,6 +23,7 @@ function ReportsAdminViewDispatcher() {
     this.EXPORT_PRESENTATIONS_COMPANY_REPORT   = 'EXPORT_PRESENTATIONS_COMPANY_REPORT';
     this.EXPORT_PRESENTATIONS_BY_TRACK_REPORT  = 'EXPORT_PRESENTATIONS_BY_TRACK_REPORT';
     this.EXPORT_FEEDBACK_REPORT                = 'EXPORT_FEEDBACK_REPORT';
+    this.EXPORT_TAG_REPORT                     = 'EXPORT_TAG_REPORT';
     this.SEND_EMAIL_RSVP_REPORT                = 'SEND_EMAIL_RSVP_REPORT';
     this.OPEN_EMAIL_MODAL_RSVP_REPORT          = 'OPEN_EMAIL_MODAL_RSVP_REPORT';
     this.POPULATE_ALL_EMAILS_RSVP_REPORT       = 'POPULATE_ALL_EMAILS_RSVP_REPORT';
@@ -69,6 +71,9 @@ function ReportsAdminViewDispatcher() {
             case 'feedback_report' :
                 this.trigger(this.GET_FEEDBACK_REPORT);
                 break;
+            case 'tag_report' :
+                this.trigger(this.GET_TAG_REPORT);
+                break;
         }
     }
 
@@ -98,6 +103,9 @@ function ReportsAdminViewDispatcher() {
                 break;
             case 'feedback_report' :
                 this.trigger(this.EXPORT_FEEDBACK_REPORT);
+                break;
+            case 'tag_report' :
+                this.trigger(this.EXPORT_TAG_REPORT);
                 break;
         }
     }

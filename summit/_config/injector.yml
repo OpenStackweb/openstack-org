@@ -100,7 +100,8 @@ Injector:
         5: '%$CategoryRepository'
         6: '%$PresentationRepository'
         7: '%$EventFeedbackRepository'
-        8: '%$SummitEventManager'
+        8: '%$TagRepository'
+        9: '%$SummitEventManager'
   SummitAppReportsExportApi:
     constructor:
       0: '%$SummitRepository'
@@ -111,7 +112,8 @@ Injector:
       5: '%$CategoryRepository'
       6: '%$PresentationRepository'
       7: '%$EventFeedbackRepository'
-      8: '%$SummitEventManager'
+      8: '%$TagRepository'
+      9: '%$SummitEventManager'
   SummitAppEventsApi:
     constructor:
       0: '%$SummitRepository'
@@ -244,6 +246,8 @@ Injector:
     class: EventFeedbackFactory
   EventFeedbackRepository:
     class: SapphireEventFeedbackRepository
+  TagRepository:
+      class: SapphireTagRepository
   ScheduleManager:
     constructor:
       0: '%$EventRepository'

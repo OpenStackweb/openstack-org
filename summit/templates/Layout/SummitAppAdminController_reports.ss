@@ -33,6 +33,7 @@
                         <a href="$Top.Link/{$Summit.ID}/reports/room_report" class="list-group-item">Room Report</a>
                         <a href="$Top.Link/{$Summit.ID}/reports/speaker_report" class="list-group-item">Speaker Report </a>
                         <a href="$Top.Link/{$Summit.ID}/reports/video_report" class="list-group-item">Video Output List</a>
+                        <a href="$Top.Link/{$Summit.ID}/reports/tag_report" class="list-group-item">Tag Report</a>
                     </div>
                 </div>
             </div>

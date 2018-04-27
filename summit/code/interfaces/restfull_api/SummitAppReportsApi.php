@@ -56,6 +56,11 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
     private $feedback_repository;
 
     /**
+     * @var IEntityRepository
+     */
+    private $tag_repository;
+
+    /**
      * @var ISummitEventManager
      */
     private $summit_manager;
@@ -70,6 +75,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
         IPresentationCategoryRepository $category_repository,
         ISummitPresentationRepository $presentation_repository,
         IEventFeedbackRepository $feedback_repository,
+        ITagRepository $tag_repository,
         ISummitEventManager $summit_manager
     )
     {
@@ -82,6 +88,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
         $this->category_repository           = $category_repository;
         $this->presentation_repository       = $presentation_repository;
         $this->feedback_repository           = $feedback_repository;
+        $this->tag_repository                = $tag_repository;
         $this->summit_manager                = $summit_manager;
     }
 
@@ -118,6 +125,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
         'GET presentations_company_report'  => 'getPresentationsCompanyReport',
         'GET presentations_by_track_report' => 'getPresentationsByTrackReport',
         'GET feedback_report/$SOURCE/$ID'   => 'getFeedbackReport',
+        'GET tag_report'                    => 'getTagReport',
     );
 
     static $allowed_actions = array(
@@ -132,6 +140,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
         'getPresentationsCompanyReport',
         'getPresentationsByTrackReport',
         'getFeedbackReport',
+        'getTagReport',
         'sendRsvpEmails',
     );
 
@@ -659,6 +668,36 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
             }
 
             return $this->ok($feedbacks);
+        }
+        catch(NotFoundEntityException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            return $this->notFound($ex2->getMessage());
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->serverError();
+        }
+    }
+
+    public function getTagReport(SS_HTTPRequest $request){
+        try
+        {
+            $query_string = $request->getVars();
+            $page         = (isset($query_string['page'])) ? Convert::raw2sql($query_string['page']) : '';
+            $page_size    = (isset($query_string['items'])) ? Convert::raw2sql($query_string['items']) : '';
+            $sort         = (isset($query_string['sort'])) ? Convert::raw2sql($query_string['sort']) : 'tag';
+            $sort_dir     = (isset($query_string['sort_dir'])) ? Convert::raw2sql($query_string['sort_dir']) : 'ASC';
+            $search_term  = (isset($query_string['term'])) ? Convert::raw2sql($query_string['term']) : '';
+
+            $summit_id    = intval($request->param('SUMMIT_ID'));
+            $summit       = $this->summit_repository->getById($summit_id);
+            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+
+            $tags = $this->tag_repository->searchAllPaged($summit_id,$page,$page_size,$sort,$sort_dir,$search_term);
+
+            return $this->ok($tags);
         }
         catch(NotFoundEntityException $ex2)
         {
