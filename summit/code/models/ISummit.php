@@ -24,15 +24,6 @@ interface ISummit extends IEntity
      */
     public function getName();
 
-    /**
-     * @return DateTime
-     */
-    public function getBeginDate();
-
-    /**
-     * @return DateTime
-     */
-    public function getEndDate();
 
     /**
      * @return string
@@ -45,6 +36,11 @@ interface ISummit extends IEntity
     public function getTrackListLink();
 
     /**
+     * @return STAGE_UNSTARTED , STAGE_OPEN , STAGE_FINISHED, null
+     */
+    public function getStageStatus($stage);
+
+    /**
      * @return string
      */
     public function getCallForPresentationsLink();
@@ -54,35 +50,6 @@ interface ISummit extends IEntity
      */
     public function getStartShowingVenuesDate();
 
-    /**
-     * @return DateTime
-     */
-    public function getSubmissionBeginDate();
-
-    /**
-     * @return DateTime
-     */
-    public function getSubmissionEndDate();
-
-    /**
-     * @return DateTime
-     */
-    public function getVotingBeginDate();
-
-    /**
-     * @return DateTime
-     */
-    public function getVotingEndDate();
-
-    /**
-     * @return DateTime
-     */
-    public function getSelectionBeginDate();
-
-    /**
-     * @return DateTime
-     */
-    public function getSelectionEndDate();
 
     /**
      * @return ISummitAirport[]
@@ -218,10 +185,6 @@ interface ISummit extends IEntity
      */
     public function isSelectionOpen();
 
-    /**
-     * @return bool
-     */
-    public function isSelectionOver();
 
     /**
      * @return bool
@@ -249,12 +212,6 @@ interface ISummit extends IEntity
      * @throws Exception
      */
     public function getScheduleByTrack($track = null);
-
-    /**
-     * @param string $day
-     * @return bool
-     */
-    public function isDayBelongs($day);
 
     /**
      * @param string $day

@@ -150,7 +150,6 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         $data['status'] = $summit->getStatus();
         $data['on_voting_period'] = $summit->isVotingOpen();
         $data['on_selection_period'] = $summit->isSelectionOpen();
-        $data['is_selection_period_over'] = $summit->isSelectionOver();
 
         $data['categories'] = [];
         $data['track_chair'] = $this->trackChairDetails();

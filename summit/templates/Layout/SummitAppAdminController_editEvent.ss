@@ -220,9 +220,9 @@
             <script>
                 var speakers          = [];
                 var moderator         = {};
-                var summit_begin_date = '{$Summit.BeginDateYMD}';
-                var summit_end_date   = '{$Summit.EndDateYMD}';
-                var summit_start_time = '{$Summit.BeginTime}';
+                var summit_begin_date = '{$Summit.getSummitBeginDate("Y-m-d")}';
+                var summit_end_date   = '{$Summit.getSummitEndDate("Y-m-d")}';
+                var summit_start_time = '{$Summit.getSummitBeginDate("H:i:s")}';
             </script>
 
             <div class="form-group speakers-container" style="display:none;">

@@ -518,7 +518,7 @@ final class SummitAdminUI extends DataExtension
         )
             ->setRedirectType(BetterButtonCustomAction::REFRESH)
         );
-        if (!$this->owner->checkRange("Voting")) {
+        if (!$this->owner->isVotingOpen()) {
             $random->setConfirmation('You are randomising the presentations outside of the voting phase. If there are more presentations coming, this could cause errors. Are you sure you want to do this?');
         }
         return $f;

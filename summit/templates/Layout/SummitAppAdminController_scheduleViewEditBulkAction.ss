@@ -207,8 +207,8 @@
         $('.input-group.date').datepicker({
             autoclose: true,
             format: "yyyy-mm-dd",
-            startDate: "{$Summit.BeginDateYMD}",
-            endDate: "{$Summit.EndDateYMD}",
+            startDate: "{$Summit.getSummitBeginDate('Y-m-d')}",
+            endDate: "{$Summit.getSummitEndDate('Y-m-d')}",
         });
     </script>
     $ModuleJS('schedule-admin-view')
