@@ -17,7 +17,8 @@
  * Class PresentationSpeakerConfirmSummitAssistanceEmailReminderSender
  * Send reminder with code
  */
-final class PresentationSpeakerConfirmSummitAssistanceEmailReminderSender implements IMessageSenderService
+final class PresentationSpeakerConfirmSummitAssistanceEmailReminderSender
+    implements IMessageSenderService
 {
     /**
      * @param mixed $subject
@@ -28,9 +29,10 @@ final class PresentationSpeakerConfirmSummitAssistanceEmailReminderSender implem
     {
         if(!is_array($subject)) return;
         if(!isset($subject['Summit'])  || !isset($subject['Speaker'])) return;
-        $summit     = $subject['Summit'];
-        $speaker    = $subject['Speaker'];
-        $promo_code = $subject['PromoCode'];
+        $summit                  = $subject['Summit'];
+        $speaker                 = $subject['Speaker'];
+        $promo_code              = $subject['PromoCode'];
+        $published_presentations = $subject['PublishedPresentations'];
 
         if(!$speaker instanceof IPresentationSpeaker) return;
         if(!$summit instanceof ISummit) return;
@@ -55,11 +57,12 @@ final class PresentationSpeakerConfirmSummitAssistanceEmailReminderSender implem
         $email->setUserTemplate(PRESENTATION_SPEAKER_CONFIRM_SUMMIT_ASSISTANCE_EMAIL)->populateTemplate(
             array
             (
-                'Speaker'              => $speaker,
-                'ConfirmationLink'     => $confirmation_link,
-                'PromoCode'            => $promo_code->getCode(),
-                'Summit'               => $summit,
-                'ScheduleMainPageLink' => $schedule_page->getAbsoluteLiveLink(false),
+                'Speaker'                => $speaker,
+                'ConfirmationLink'       => $confirmation_link,
+                'PromoCode'              => $promo_code->getCode(),
+                'Summit'                 => $summit,
+                'ScheduleMainPageLink'   => $schedule_page->getAbsoluteLiveLink(false),
+                'PublishedPresentations' => $published_presentations,
             )
         )->send();
     }

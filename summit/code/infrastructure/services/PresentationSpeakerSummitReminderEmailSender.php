@@ -29,8 +29,9 @@ final class PresentationSpeakerSummitReminderEmailSender implements IMessageSend
     {
         if(!is_array($subject)) return;
         if(!isset($subject['Summit'])  || !isset($subject['Speaker'])) return;
-        $summit     = $subject['Summit'];
-        $speaker    = $subject['Speaker'];
+        $summit                  = $subject['Summit'];
+        $speaker                 = $subject['Speaker'];
+        $published_presentations = $subject['PublishedPresentations'];
 
         if(!$speaker instanceof IPresentationSpeaker) return;
         if(!$summit instanceof ISummit) return;
@@ -49,9 +50,10 @@ final class PresentationSpeakerSummitReminderEmailSender implements IMessageSend
         $email->setUserTemplate(PRESENTATION_SPEAKER_SUMMIT_REMINDER_EMAIL)->populateTemplate(
             array
             (
-                'Speaker'              => $speaker,
-                'Summit'               => $summit,
-                'ScheduleMainPageLink' => $schedule_page->getAbsoluteLiveLink(false),
+                'Speaker'                => $speaker,
+                'Summit'                 => $summit,
+                'ScheduleMainPageLink'   => $schedule_page->getAbsoluteLiveLink(false),
+                'PublishedPresentations' => $published_presentations,
             )
         )->send();
     }

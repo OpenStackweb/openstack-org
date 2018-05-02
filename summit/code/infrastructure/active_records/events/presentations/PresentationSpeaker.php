@@ -402,14 +402,14 @@ class PresentationSpeaker extends DataObject
     {
         $regular_types = [];
 
-        if(is_null(!$summit_id))
+        if(intval($summit_id) > 0)
         {
-            $summit = Summit::get()->byID($summit_id);
+            $summit = Summit::get()->byID(intval($summit_id));
             if($summit)
                 $regular_types = $summit->getPublishedPresentationTypesList();
         }
 
-        if(count($regular_types))
+        if(count($regular_types) == 0)
             $regular_types = self::$default_published_presentation_types;
 
         return $this->PublishedPresentationsByType
@@ -439,14 +439,14 @@ class PresentationSpeaker extends DataObject
     {
         $regular_types = [];
 
-        if(is_null(!$summit_id))
+        if(intval($summit_id) > 0)
         {
             $summit = Summit::get()->byID($summit_id);
             if($summit)
                 $regular_types = $summit->getRegularPresentationTypesList();
         }
 
-        if(count($regular_types))
+        if(count($regular_types) == 0)
             $regular_types = self::$default_regular_presentation_types;
 
         $list =  $this->PublishedPresentationsByType
@@ -556,14 +556,14 @@ class PresentationSpeaker extends DataObject
     ){
         if(!count($types_slugs)){
 
-            if(is_null(!$summit_id))
+            if(intval($summit_id) > 0)
             {
                 $summit = Summit::get()->byID($summit_id);
                 if($summit)
                     $types_slugs = $summit->getRegularPresentationTypesList();
             }
 
-            if(count($types_slugs))
+            if(count($types_slugs) == 0)
                 $types_slugs = self::$default_regular_presentation_types;
         }
 

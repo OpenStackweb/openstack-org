@@ -17,8 +17,15 @@ interface ISpeakerSecondBreakoutAnnouncementSenderManager
     /**
      * @param ISummit $current_summit
      * @param int $batch_size
-     * @return void
+     * @return int
      */
     public function send(ISummit $current_summit, $batch_size);
+
+    /**
+     * @param ISummit $current_summit
+     * @param $batch_size
+     * @return int
+     */
+    public function sendNonConfirmed(ISummit $current_summit, $batch_size);
 
 }

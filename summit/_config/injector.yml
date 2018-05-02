@@ -12,7 +12,6 @@ PresentationPage_Controller:
 SummitSpeakersPage_Controller:
   dependencies:
     SpeakerRepository: '%$SpeakerRepository'
-
 SummitSecurity:
   dependencies:
     SpeakerRegistrationRequestRepository: '%$SpeakerRegistrationRequestRepository'
@@ -279,6 +278,9 @@ Injector:
     constructor:
       0: '%$SpeakerEmailAnnouncementSenderManager'
   SpeakerSecondBreakoutEmailSenderTask:
+    constructor:
+      0: '%$SpeakerSecondBreakoutAnnouncementSenderManager'
+  NonConfirmedSpeakerSecondBreakoutEmailSenderTask:
     constructor:
       0: '%$SpeakerSecondBreakoutAnnouncementSenderManager'
   SpeakerUploadSlidesEmailSenderTask:
