@@ -443,8 +443,11 @@ msgstr ""
 
 # survey template 12 - survey step your-openstack-deployments content
 msgid ""
-"<p>A deployment profile tracks information about an individual OpenStack deployment.</p><ul><li>An organization may have multiple deployment profiles for each OpenStack deployment they have.</li><li>Once you have created a deployment profile, you can return to the site to update the data in it.</li><li>You will be the default administrator for any deployment "
-"profiles you create.</li></ul><p>As always, the information you provide is confidential and will only be presented in aggregate unless you consent to making it public.</p>"
+"<p>A deployment profile tracks information about an individual OpenStack deployment.</p>"
+"<ul><li>An organization may have multiple deployment profiles for each OpenStack deployment they have.</li>"
+"<li>Once you have created a deployment profile, you can return to the site to update the data in it.</li>"
+"<li>You will be the default administrator for any deployment profiles you create.</li>"
+"</ul><p>As always, the information you provide is confidential and will only be presented in aggregate unless you consent to making it public.</p>"
 msgstr ""
 
 # survey template 12 - survey step your-openstack-deployments friendly name, survey template 13 - survey step your-openstack-deployments friendly name
@@ -480,11 +483,11 @@ msgid "Each deployment profile can be marked public or confidential.*"
 msgstr ""
 
 # question IsPublic value 1 label
-msgid "<strong>Public:</strong> The information I provide on this page only may be shared on openstack.org."
+msgid "<strong>Public:</strong> My organization name, location and the OpenStack projects we're using can be published on openstack.org."
 msgstr ""
 
 # question IsPublic value 0 label
-msgid "<strong>Confidential:</strong> All information provided, including my organization name, should be kept confidential to the OpenStack Foundation."
+msgid "<strong>Confidential:</strong> All information provided, including my organization name, should be kept confidential."
 msgstr ""
 
 # step your-openstack-deployments - question DeploymentStage label
@@ -992,7 +995,10 @@ msgid "Deployment Decisions"
 msgstr ""
 
 # question Break8 literal content
-msgid "<h3>What’s the size of this cloud?</h3><p>All of these questions are optional and confidential. We appreciate you providing your best estimate of cloud size so that we may reflect this back to the community in aggregate.</p><hr>"
+msgid ""
+"<h3>What’s the size of this cloud?</h3>"
+"<p>All of these questions are optional and confidential. We appreciate you providing your best estimate of cloud size so that we may reflect this back to the community in aggregate.</p>"
+"<hr>"
 msgstr ""
 
 # step deployment-decisions - question NumCloudUsers label
@@ -1310,9 +1316,8 @@ msgstr ""
 # question break7 literal content
 msgid ""
 "<p><span style=\"color: #0083c8; font-size: 1.6em;\">Deployment Decisions</span></p>"
-"<p>The information below will help us better understand the most common configuration and component "
-"choices OpenStack deployments are using. This information is optional, but will be kept confidential "
-"and never published in connection with you or your organization.</p><hr>"
+"<p>The information below will help us better understand the most common configuration and component choices OpenStack deployments are using. This information is optional, but will be kept confidential and never published in connection with you or your organization.</p>"
+"<hr>"
 msgstr ""
 
 # step deployment-decisions - question UsedPackages label
