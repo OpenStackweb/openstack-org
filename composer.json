@@ -51,7 +51,7 @@
     "peppeocchi/php-cron-scheduler": "2.*",
     "paragonie/random_compat": "^2.0",
     "league/oauth2-client": "^2.2",
-    "smarcet/caldavclient": "1.1.1",
+    "smarcet/caldavclient": "1.1.2",
     "unclecheese/silverstripe-permamail": "dev-3.1-compat"
   },
   "require-dev": {
