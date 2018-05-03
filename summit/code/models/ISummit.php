@@ -14,6 +14,10 @@
  **/
 interface ISummit extends IEntity
 {
+    const STAGE_UNSTARTED = -1;
+    const STAGE_OPEN = 0;
+    const STAGE_FINISHED = 1;
+
     /**
      * @return string
      */

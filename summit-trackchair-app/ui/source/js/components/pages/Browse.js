@@ -56,7 +56,7 @@ class Browse extends React.Component {
 	}
 
     render () {
-        let {search, category} = this.props;
+        let {search, category, summit} = this.props;
 
         let exportUrl = URL.create(
             '/trackchairs/api/v1/export/presentations',
@@ -100,12 +100,13 @@ class Browse extends React.Component {
 	                	<Bounce />
 	                }
 	               </div>
-                </div>
-                <div className="col-md-8">
-
-						<div>{this.props.children}</div>
-
-                </div>
+			   </div>
+               <div className="col-md-8">
+                   {!summit.data.on_selection_period &&
+				   	<div className="selection-closed"> SELECTION CLOSED </div>
+                   }
+				   <div>{this.props.children}</div>
+               </div>
             </div>
         );
     }
@@ -114,6 +115,7 @@ class Browse extends React.Component {
 export default connect(
 	state => {
 		return {
+			summit: state.summit,
 			presentations: getFilteredPresentations(state),
 			detailPresentation: state.detailPresentation.id ? state.detailPresentation : null,			
 			category: state.routing.locationBeforeTransitions.query.category,

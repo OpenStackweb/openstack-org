@@ -83,64 +83,6 @@ final class PresentationManager implements IPresentationManager
     }
 
     /**
-     * returns all available categories for member
-     * it consider public ones plus private ones
-     * @param Member $member
-     * @param ISummit $summit
-     * @return PresentationCategory[]
-     * @throws NotFoundEntityException
-     */
-    public function getAvailableCategoriesFor(Member $member, ISummit $summit)
-    {
-        $res    = array();
-        if(!$summit->Active) return array();
-
-        $private_groups     = $summit->getPrivateCategoryGroups();
-        $speaker            = $member->getSpeakerProfile();
-
-        if(is_null($speaker)) throw new NotFoundEntityException('Speaker not found!');
-
-        $presentation_count = intval($speaker->getPublicCategoryPresentationsBySummitCount($summit)) +
-                              intval($speaker->getPublicCategoryOwnedPresentationsBySummitCount($summit)) +
-                              intval($speaker->getPublicCategoryModeratedPresentationsBySummitCount($summit));
-
-        //check public categories and check count limits
-        if($summit->isCallForSpeakersOpen() && $presentation_count < intval($summit->MaxSubmissionAllowedPerUser))
-        {
-            foreach($summit->Categories() as $category){
-                $is_public = true;
-                foreach($private_groups as $private_group){
-                   if(!$private_group->hasCategory($category)) continue;
-                   // if a category is on a private group , then is private
-                   $is_public = false;
-                   break;
-                }
-                if($is_public) array_push($res, $category);
-            }
-        }
-
-        // private categories
-
-        $private_groups = $this->getPrivateCategoryGroupsFor($member, $summit);
-
-        foreach($private_groups as $private_group)
-        {
-            if(!$private_group->isSubmissionOpen()) continue;
-
-            $presentation_count = intval($speaker->getPrivateCategoryPresentationsBySummitCount($summit, $private_group)) +
-                                  intval($speaker->getPrivateCategoryOwnedPresentationsBySummitCount($summit, $private_group)) +
-                                  intval($speaker->getPrivateCategoryModeratedPresentationsBySummitCount($summit, $private_group));
-
-            // check current submission limit for the group
-            if(!($presentation_count < intval($private_group->MaxSubmissionAllowedPerUser))) continue;
-
-            $res = array_merge($res, $private_group->Categories()->toArray());
-        }
-
-        return $res;
-    }
-
-    /**
      * @param PresentationSpeaker $speaker
      * @param ISummit $summit
      * @return bool
@@ -269,7 +211,10 @@ final class PresentationManager implements IPresentationManager
     public function getPrivateCategoryGroupsFor(Member $member, ISummit $summit){
 
         $groups         = array();
-        $private_groups = $summit->getPrivateCategoryGroups();
+        $selection_plan = $summit->getOpenSelectionPlanForStage('Submission');
+        if (!$selection_plan) return $groups;
+
+        $private_groups = $selection_plan->getPrivateCategoryGroups();
 
         foreach($private_groups as $private_group)
         {

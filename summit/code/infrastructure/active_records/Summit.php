@@ -59,6 +59,7 @@ class Summit extends DataObject implements ISummit
     private static $has_many = [
         'Presentations'                => 'Presentation',
         'Categories'                   => 'PresentationCategory',
+        'CategoryGroups'               => 'PresentationCategoryGroup',
         'Locations'                    => 'SummitAbstractLocation',
         'EventTypes'                   => 'SummitEventType',
         'Events'                       => 'SummitEvent',
@@ -95,12 +96,6 @@ class Summit extends DataObject implements ISummit
     ];
 
     private static $many_many_extraFields = [];
-
-    const STAGE_UNSTARTED = -1;
-    const STAGE_OPEN = 0;
-    const STAGE_FINISHED = 1;
-    const SUMMIT_DATES = ['Summit', 'Registration'];
-    const SELECTION_PLAN_DATES = ['Submission', 'Voting', 'Selection'];
 
     private $must_seed = false;
     public static $validation_enabled = true;
@@ -285,6 +280,10 @@ class Summit extends DataObject implements ISummit
         $this->setDateTimeFromLocalToUTC($value, 'ScheduleDefaultStartDate');
     }
 
+    public function getActiveSelectionPlans() {
+        return $this->SelectionPlans()->filter('Enabled', true);
+    }
+
 
 
     // DATES HELPERS
@@ -423,11 +422,11 @@ class Summit extends DataObject implements ISummit
         $now = new \DateTime('now', new DateTimeZone('UTC'));
 
         if ($now > $end_date) {
-            return STAGE_FINISHED;
+            return self::STAGE_FINISHED;
         } else if ($now < $start_date) {
-            return STAGE_UNSTARTED;
+            return self::STAGE_UNSTARTED;
         } else {
-            return STAGE_OPEN;
+            return self::STAGE_OPEN;
         }
     }
 
@@ -439,7 +438,7 @@ class Summit extends DataObject implements ISummit
             return "INACTIVE";
         }
 
-        foreach ($this->SelectionPlans() as $plan) {
+        foreach ($this->getActiveSelectionPlans() as $plan) {
             if ($plan->isCallForPresentationsOpen()) {
                 $status[] = "ACCEPTING SUBMISSIONS ".$plan->Name;
             }
@@ -467,17 +466,17 @@ class Summit extends DataObject implements ISummit
 
     public function isRegistrationOpen()
     {
-        return $this->getStageStatus('Registration') == STAGE_OPEN;
+        return $this->getStageStatus('Registration') === self::STAGE_OPEN;
     }
 
     public function isSummitOpen()
     {
-        return $this->getStageStatus('Summit') == STAGE_OPEN;
+        return $this->getStageStatus('Summit') === self::STAGE_OPEN;
     }
 
     public function isCallForSpeakersOpen()
     {
-        foreach ($this->SelectionPlans() as $plan) {
+        foreach ($this->getActiveSelectionPlans() as $plan) {
             if ($plan->isCallForPresentationsOpen())
                 return true;
         }
@@ -492,7 +491,7 @@ class Summit extends DataObject implements ISummit
 
     public function isVotingOpen()
     {
-        foreach ($this->SelectionPlans() as $plan) {
+        foreach ($this->getActiveSelectionPlans() as $plan) {
             if ($plan->isVotingOpen())
                 return true;
         }
@@ -509,13 +508,111 @@ class Summit extends DataObject implements ISummit
 
     public function isSelectionOpen()
     {
-        foreach ($this->SelectionPlans() as $plan) {
+        foreach ($this->getActiveSelectionPlans() as $plan) {
             if ($plan->isSelectionOpen())
                 return true;
         }
 
         return false;
     }
+
+    public function getOpenSelectionPlanForStage($stage)
+    {
+        foreach ($this->getActiveSelectionPlans() as $plan) {
+            if ($plan->getStageStatus($stage) === self::STAGE_OPEN) {
+                return $plan;
+            }
+        }
+
+        return null;
+    }
+
+
+
+    // CATEGORIES & CATEGORY GROUPS
+
+    public function getCategories()
+    {
+        return $this->Categories()->sort('Title');
+    }
+
+    public function getActiveCategoryGroups()
+    {
+        $groups = [];
+        foreach ($this->getActiveSelectionPlans() as $plan) {
+            $groups = array_merge($groups, $plan->CategoryGroups()->toArray());
+        }
+        return $groups;
+    }
+
+    public function getPublicCategoryGroups()
+    {
+        return $this->CategoryGroups()->filter('ClassName', 'PresentationCategoryGroup');
+    }
+
+    public function getPrivateCategoryGroups()
+    {
+        return $this->CategoryGroups()->filter('ClassName', 'PrivatePresentationCategoryGroup');
+    }
+
+    public function getPublicCategories()
+    {
+        $categories = new ArrayList();
+        $private_groups = $this->getPrivateCategoryGroups();
+
+        foreach ($this->getCategories()->sort('Title') as $cat) {
+            $is_private = false;
+            foreach ($private_groups as $private_group) {
+                if ($private_group->hasCategory($cat)) {
+                    $is_private = true;
+                    break;
+                }
+            }
+            if (!$is_private)
+                $categories->push($cat);
+        }
+        return $categories;
+    }
+
+    public function isPublicCategory(PresentationCategory $category)
+    {
+        return !$this->isPrivateCategory($category);
+    }
+
+    public function isPrivateCategory(PresentationCategory $category)
+    {
+        $res = false;
+        $private_groups = $this->getPrivateCategoryGroups();
+        foreach ($private_groups as $private_group) {
+            if ($private_group->hasCategory($category)) {
+                $res = true;
+                break;
+            }
+        }
+        return $res;
+    }
+
+    public function getPrivateGroupFor(PresentationCategory $category)
+    {
+        $private_groups = $this->getPrivateCategoryGroups();
+        foreach ($private_groups as $private_group) {
+            if ($private_group->hasCategory($category)) {
+                return $private_group;
+            }
+        }
+        return null;
+    }
+
+    public function TrackGroupLists()
+    {
+        return SummitSelectedPresentationList::get()
+            ->filter('ListType', 'Group')
+            ->innerJoin('PresentationCategory', 'PresentationCategory.ID = SummitSelectedPresentationList.CategoryID')
+            ->where('PresentationCategory.SummitID = ' . $this->ID)
+            ->sort('PresentationCategory.Title', 'ASC');
+    }
+
+
 
 
     // ACTIVE SUMMIT HELPERS
@@ -1026,90 +1123,6 @@ SQL;
             ");
 
         return $dl;
-    }
-
-
-
-    // CATEGORIES & CATEGORY GROUPS
-
-    public function getCategories()
-    {
-        return $this->Categories()->sort('Title');
-    }
-
-    public function getPublicCategoryGroups()
-    {
-        $groups = [];
-        foreach ($this->SelectionPlans() as $plan) {
-            $groups = array_merge($groups, $plan->getPublicCategoryGroups());
-        }
-        return $groups;
-    }
-
-    public function getPrivateCategoryGroups()
-    {
-        $groups = [];
-        foreach ($this->SelectionPlans() as $plan) {
-            $groups = array_merge($groups, $plan->getPrivateCategoryGroups());
-        }
-        return $groups;
-    }
-
-    public function getPublicCategories()
-    {
-        $categories = new ArrayList();
-        $private_groups = $this->getPrivateCategoryGroups();
-
-        foreach ($this->getCategories()->sort('Title') as $cat) {
-            $is_private = false;
-            foreach ($private_groups as $private_group) {
-                if ($private_group->hasCategory($cat)) {
-                    $is_private = true;
-                    break;
-                }
-            }
-            if (!$is_private)
-                $categories->push($cat);
-        }
-        return $categories;
-    }
-
-    public function isPublicCategory(PresentationCategory $category)
-    {
-        return !$this->isPrivateCategory($category);
-    }
-
-    public function isPrivateCategory(PresentationCategory $category)
-    {
-        $res = false;
-        $private_groups = $this->getPrivateCategoryGroups();
-        foreach ($private_groups as $private_group) {
-            if ($private_group->hasCategory($category)) {
-                $res = true;
-                break;
-            }
-        }
-        return $res;
-    }
-
-    public function getPrivateGroupFor(PresentationCategory $category)
-    {
-        $private_groups = $this->getPrivateCategoryGroups();
-        foreach ($private_groups as $private_group) {
-            if ($private_group->hasCategory($category)) {
-                return $private_group;
-            }
-        }
-        return null;
-    }
-
-    public function TrackGroupLists()
-    {
-        return SummitSelectedPresentationList::get()
-            ->filter('ListType', 'Group')
-            ->innerJoin('PresentationCategory', 'PresentationCategory.ID = SummitSelectedPresentationList.CategoryID')
-            ->where('PresentationCategory.SummitID = ' . $this->ID)
-            ->sort('PresentationCategory.Title', 'ASC');
     }
 
 

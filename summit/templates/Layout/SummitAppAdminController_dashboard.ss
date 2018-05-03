@@ -35,43 +35,42 @@
             <div class="col-md-4" id="timezone_clock">  </div>
         </div>
 
-        <div class="row $Summit.isSummitStageTime($Summit, 'Summit')">
+        <div class="row $getStageStatusClass($Summit.getStageStatus('Summit'))">
             <div class="col-md-2"> <i class="fa fa-calendar"></i> Summit </div>
             <div class="col-md-4"> $Summit.getSummitBeginDate('F jS Y, h:i:s a') </div>
             <div class="col-md-1"><i class="fa fa-angle-double-right" aria-hidden="true"></i></div>
             <div class="col-md-4"> $Summit.getSummitEndDate('F jS Y, h:i:s a') </div>
         </div>
-        <% loop $Summit.SelectionPlans() %>
-            <div class="row">
-                <div class="col-md-12"> $Name </div>
-            </div>
-            <div class="row $isPlanStageTime($Summit, $Me, 'Submission')">
-                <div class="col-md-2"> <i class="fa fa-calendar"></i> Submission </div>
-                <div class="col-md-4"> $getSubmissionBeginDate('F jS Y, h:i:s a') </div>
-                <div class="col-md-1"><i class="fa fa-angle-double-right" aria-hidden="true"></i></div>
-                <div class="col-md-4"> $getSubmissionEndDate('F jS Y, h:i:s a') </div>
-            </div>
-            <div class="row $isPlanStageTime($Summit, $Me, 'Voting')">
-                <div class="col-md-2"> <i class="fa fa-calendar"></i> Voting </div>
-                <div class="col-md-4"> $getVotingBeginDate('F jS Y, h:i:s a') </div>
-                <div class="col-md-1"><i class="fa fa-angle-double-right" aria-hidden="true"></i></div>
-                <div class="col-md-4"> $getVotingEndDate('F jS Y, h:i:s a') </div>
-            </div>
-            <div class="row $$isPlanStageTime($Summit, $Me, 'Selection')">
-                <div class="col-md-2"> <i class="fa fa-calendar"></i> Selection </div>
-                <div class="col-md-4"> $getSelectionBeginDate('F jS Y, h:i:s a') </div>
-                <div class="col-md-1"><i class="fa fa-angle-double-right" aria-hidden="true"></i></div>
-                <div class="col-md-4"> $getSelectionEndDate('F jS Y, h:i:s a') </div>
-            </div>
-        <% end_loop %>
-
-        <div class="row $isSummitStageTime($Summit, 'Registration')">
+        <div class="row $getStageStatusClass($Summit.getStageStatus('Registration'))">
             <div class="col-md-2"> <i class="fa fa-calendar"></i> Registration </div>
             <div class="col-md-4"> $Summit.getRegistrationBeginDate('F jS Y, h:i:s a') </div>
             <div class="col-md-1"><i class="fa fa-angle-double-right" aria-hidden="true"></i></div>
             <div class="col-md-4"> $Summit.getRegistrationEndDate('F jS Y, h:i:s a') </div>
         </div>
 
+        <% loop $Summit.getActiveSelectionPlans() %>
+            <div class="row">
+                <div class="col-md-12"> $Name: </div>
+            </div>
+            <div class="row $Top.getStageStatusClass($getStageStatus('Submission'))">
+                <div class="col-md-2"> <i class="fa fa-calendar"></i> Submission </div>
+                <div class="col-md-4"> $getSubmissionBeginDate('F jS Y, h:i:s a') </div>
+                <div class="col-md-1"><i class="fa fa-angle-double-right" aria-hidden="true"></i></div>
+                <div class="col-md-4"> $getSubmissionEndDate('F jS Y, h:i:s a') </div>
+            </div>
+            <div class="row $Top.getStageStatusClass($getStageStatus('Voting'))">
+                <div class="col-md-2"> <i class="fa fa-calendar"></i> Voting </div>
+                <div class="col-md-4"> $getVotingBeginDate('F jS Y, h:i:s a') </div>
+                <div class="col-md-1"><i class="fa fa-angle-double-right" aria-hidden="true"></i></div>
+                <div class="col-md-4"> $getVotingEndDate('F jS Y, h:i:s a') </div>
+            </div>
+            <div class="row $Top.getStageStatusClass($getStageStatus('Selection'))">
+                <div class="col-md-2"> <i class="fa fa-calendar"></i> Selection </div>
+                <div class="col-md-4"> $getSelectionBeginDate('F jS Y, h:i:s a') </div>
+                <div class="col-md-1"><i class="fa fa-angle-double-right" aria-hidden="true"></i></div>
+                <div class="col-md-4"> $getSelectionEndDate('F jS Y, h:i:s a') </div>
+            </div>
+        <% end_loop %>
         <hr>
 
         <h2> Events & Attendees </h2>

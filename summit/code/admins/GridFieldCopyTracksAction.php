@@ -74,48 +74,36 @@ class GridFieldCopyTracksAction implements GridField_HTMLProvider, GridField_URL
         $source_summit = Summit::get()->byID($source_summit_id);
         $summit = Summit::get()->byID($summit_id);
 
-        foreach($source_summit->CategoryGroups() as $track_group) {
-            if ( !$new_track_group = $summit->CategoryGroups()->find('Name', $track_group->Name)) {
-                $new_track_group = $track_group->duplicate(false);
-                $new_track_group->SummitID = $summit_id;
-                $new_track_group->write();
-            }
-
-            foreach ($track_group->Categories() as $cat) {
-                if ( !$new_cat = $summit->Categories()->find('Title', $cat->Title)) {
-                    $new_cat = $cat->duplicate(false);
-                    $new_cat->SummitID = $summit_id;
-                    $new_cat->write();
-                }
-
-                foreach ($cat->ExtraQuestions() as $extraq) {
-                    if (strpos($extraq->Name, '_copy_')) {
-                        $new_name = substr($extraq->Name, 0, -1).$summit_id;
-                    } else {
-                        $new_name = $extraq->Name.'_copy_'.$summit_id;
-                    }
-
-                    if ( !$new_extraq = TrackQuestionTemplate::get()->filter('Name', $new_name)->first()) {
-                        $new_extraq = $extraq->duplicate(false);
-                        $new_extraq->Name = $new_name;
-                        $new_extraq->write();
-                    }
-
-                    $new_cat->ExtraQuestions()->add($new_extraq);
-                }
-
-                foreach ($cat->AllowedTags() as $tag) {
-                    if ( $summit->getTagGroupFor($tag) ) {
-                        $new_cat->AllowedTags()->add($tag);
-                    }
-                }
-
+        foreach ($source_summit->getCategories() as $cat) {
+            if ( !$new_cat = $summit->Categories()->find('Title', $cat->Title)) {
+                $new_cat = $cat->duplicate(false);
+                $new_cat->SummitID = $summit_id;
                 $new_cat->write();
-
-                $new_track_group->Categories()->add($new_cat);
             }
 
-            $new_track_group->write();
+            foreach ($cat->ExtraQuestions() as $extraq) {
+                if (strpos($extraq->Name, '_copy_')) {
+                    $new_name = substr($extraq->Name, 0, -1).$summit_id;
+                } else {
+                    $new_name = $extraq->Name.'_copy_'.$summit_id;
+                }
+
+                if ( !$new_extraq = TrackQuestionTemplate::get()->filter('Name', $new_name)->first()) {
+                    $new_extraq = $extraq->duplicate(false);
+                    $new_extraq->Name = $new_name;
+                    $new_extraq->write();
+                }
+
+                $new_cat->ExtraQuestions()->add($new_extraq);
+            }
+
+            foreach ($cat->AllowedTags() as $tag) {
+                if ( $summit->getTagGroupFor($tag) ) {
+                    $new_cat->AllowedTags()->add($tag);
+                }
+            }
+
+            $new_cat->write();
         }
 
         $response = new SS_HTTPResponse();

@@ -34,7 +34,7 @@ class SelectionPlan extends DataObject implements ISelectionPlan
         'Summit'    => 'Summit',
     );
 
-    static $has_many = array
+    static $many_many = array
     (
         'CategoryGroups'    => 'PresentationCategoryGroup',
     );
@@ -45,13 +45,75 @@ class SelectionPlan extends DataObject implements ISelectionPlan
         'Name'      => 'Name'
     );
 
-    const STAGE_UNSTARTED = -1;
-    const STAGE_OPEN = 0;
-    const STAGE_FINISHED = 1;
+    protected function validate()
+    {
+        $valid = parent::validate();
+        if (!$valid->valid()) {
+            return $valid;
+        }
 
-    /**
-     * @return int
-     */
+        if ($this->Enabled) {
+            $other_selection_plans = $this->Summit()->getActiveSelectionPlans()->filter('ID:not', $this->ID);
+            foreach ($other_selection_plans as $plan) {
+                if ($plan->SubmissionBeginDate < $this->SubmissionEndDate && $plan->SubmissionEndDate > $this->SubmissionBeginDate) {
+                    return $valid->error('Submission Dates are in conflict with plan ' . $plan->Name);
+                }
+                if ($plan->VotingBeginDate < $this->VotingEndDate && $plan->VotingEndDate > $this->VotingBeginDate) {
+                    return $valid->error('Voting Dates are in conflict with plan ' . $plan->Name);
+                }
+                if ($plan->SelectionBeginDate < $this->SelectionEndDate && $plan->SelectionEndDate > $this->SelectionBeginDate) {
+                    return $valid->error('Selection Dates are in conflict with plan ' . $plan->Name);
+                }
+            }
+        }
+
+        return $valid;
+    }
+
+    public function getCMSFields()
+    {
+        $fields = FieldList::create(TabSet::create('Root'));
+
+        $fields->addFieldToTab('Root.Main', new CheckboxField('Enabled', 'Enabled', 1));
+        $fields->addFieldToTab('Root.Main', new TextField('Name'));
+
+        $summit_time_zone = $this->Summit()->TimeZoneIdentifier;
+        $fields->addFieldToTab('Root.Main', new HeaderField("All dates below are in <span style='color:red;'>$summit_time_zone</span> time."));
+
+        $fields->addFieldToTab('Root.Main', $date = new DatetimeField('SubmissionBeginDate', "When do submissions begin?"));
+        $date->getDateField()->setConfig('showcalendar', true);
+        $date->getDateField()->setConfig('dateformat', 'dd/MM/yyyy');
+        $fields->addFieldToTab('Root.Main', $date = new DatetimeField('SubmissionEndDate', "When do submissions end?"));
+        $date->getDateField()->setConfig('showcalendar', true);
+        $date->getDateField()->setConfig('dateformat', 'dd/MM/yyyy');
+        $fields->addFieldToTab('Root.Main', $date = new DatetimeField('VotingBeginDate', "When does voting begin?"));
+        $date->getDateField()->setConfig('showcalendar', true);
+        $date->getDateField()->setConfig('dateformat', 'dd/MM/yyyy');
+        $fields->addFieldToTab('Root.Main', $date = new DatetimeField('VotingEndDate', "When does voting end?"));
+        $date->getDateField()->setConfig('showcalendar', true);
+        $date->getDateField()->setConfig('dateformat', 'dd/MM/yyyy');
+        $fields->addFieldToTab('Root.Main', $date = new DatetimeField('SelectionBeginDate', "When do selections begin?"));
+        $date->getDateField()->setConfig('showcalendar', true);
+        $date->getDateField()->setConfig('dateformat', 'dd/MM/yyyy');
+        $fields->addFieldToTab('Root.Main', $date = new DatetimeField('SelectionEndDate', "When do selections end?"));
+        $date->getDateField()->setConfig('showcalendar', true);
+        $date->getDateField()->setConfig('dateformat', 'dd/MM/yyyy');
+        $fields->addFieldToTab('Root.Main', new HiddenField('SummitID'));
+
+
+        if($this->ID > 0)
+        {
+            $config = GridFieldConfig_RelationEditor::create(10);
+            $config->removeComponentsByType('GridFieldAddNewButton');
+            $completer = $config->getComponentByType('GridFieldAddExistingAutocompleter');
+            $completer->setSearchList(PresentationCategoryGroup::get()->filter('SummitID', $this->Summit()->ID));
+            $categories = new GridField('CategoryGroups', 'Category Groups', $this->CategoryGroups(), $config);
+            $fields->addFieldToTab('Root.Main', $categories);
+        }
+
+        return $fields;
+    }
+
     public function getIdentifier()
     {
         return (int)$this->getField('ID');
@@ -141,7 +203,7 @@ class SelectionPlan extends DataObject implements ISelectionPlan
     public function getVotingCategories()
     {
         $categories = $this->getCategories();
-
+        //die('c:'.count($categories));
         $voting_categories = array_filter($categories, function($obj){
             return $obj->VotingVisible;
         });
@@ -174,26 +236,26 @@ class SelectionPlan extends DataObject implements ISelectionPlan
         $now = new \DateTime('now', new DateTimeZone('UTC'));
 
         if ($now > $end_date) {
-            return STAGE_FINISHED;
+            return Summit::STAGE_FINISHED;
         } else if ($now < $start_date) {
-            return STAGE_UNSTARTED;
+            return Summit::STAGE_UNSTARTED;
         } else {
-            return STAGE_OPEN;
+            return Summit::STAGE_OPEN;
         }
     }
 
     public function isVotingOpen()
     {
-        return $this->getStageStatus('Voting') == STAGE_OPEN;
+        return $this->getStageStatus('Voting') === Summit::STAGE_OPEN;
     }
 
     public function isCallForPresentationsOpen()
     {
-        return $this->getStageStatus('Submission') == STAGE_OPEN;
+        return $this->getStageStatus('Submission') === Summit::STAGE_OPEN;
     }
 
     public function isSelectionOpen()
     {
-        return $this->getStageStatus('Selection') == STAGE_OPEN;
+        return $this->getStageStatus('Selection') === Summit::STAGE_OPEN;
     }
 }

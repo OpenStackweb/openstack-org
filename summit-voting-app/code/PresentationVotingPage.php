@@ -52,6 +52,8 @@ class PresentationVotingPage_Controller extends Page_Controller
     {
         parent::init();
         Requirements::clear();
+        JQueryCoreDependencies::renderRequirements();
+        
         $summit = Summit::get_active();
         $randomList = $summit
             ->RandomVotingLists()
@@ -366,12 +368,17 @@ class PresentationVotingPage_API extends RequestHandler
     public function handleCategories(SS_HTTPRequest $r)
     {
         $result = [];
-        foreach ($this->summit->getCategories()->filter('VotingVisible', true) as $c) {
-            $result[] = [
-                'id' => $c->ID,
-                'title' => $c->Title
-            ];
+        $selection_plan = $this->summit->getOpenSelectionPlanForStage('Voting');
+
+        if ($selection_plan) {
+            foreach ($selection_plan->getVotingCategories() as $c) {
+                $result[] = [
+                    'id' => $c->ID,
+                    'title' => $c->Title
+                ];
+            }
         }
+
         return (new SS_HTTPResponse(Convert::array2json($result), 200))
             ->addHeader('Content-Type', 'application/json');
     }

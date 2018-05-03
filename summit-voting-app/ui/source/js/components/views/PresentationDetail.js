@@ -19,7 +19,7 @@ class PresentationDetail extends React.Component {
 	_getPresentation (props) {
 		props = props || this.props;
 		if(
-			!props.presentation || (props.requestedPresentationID !== this.props.presentation.id)
+            props.requestedPresentationID && (!props.presentation || (props.requestedPresentationID !== this.props.presentation.id))
 		) {
 			this.props.requestPresentation(
 				props.requestedPresentationID

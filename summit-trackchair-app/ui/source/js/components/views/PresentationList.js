@@ -21,7 +21,7 @@ const PresentationList = ({
 	        	<RouterLink link={link} key={presentation.id}>
 	            	<FeedItem
 	            		className={`presentation-feed-item ${presentation.selected}`}
-	            		key={presentation.id} 
+	            		key={'pres_'+presentation.id}
 	            		active={presentation.active}
 	            		description={presentation.speakers}
 	            		muted={!!presentation.viewed}

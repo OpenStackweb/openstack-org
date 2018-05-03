@@ -104,25 +104,6 @@ final class SummitAdminUI extends DataExtension
         $date->getDateField()->setConfig('showcalendar', true);
         $date->getDateField()->setConfig('dateformat', 'dd/MM/yyyy');
 
-        $f->addFieldToTab('Root.Dates', $date = new DatetimeField('SubmissionBeginDate', "When do submissions begin?"));
-        $date->getDateField()->setConfig('showcalendar', true);
-        $date->getDateField()->setConfig('dateformat', 'dd/MM/yyyy');
-        $f->addFieldToTab('Root.Dates', $date = new DatetimeField('SubmissionEndDate', "When do submissions end?"));
-        $date->getDateField()->setConfig('showcalendar', true);
-        $date->getDateField()->setConfig('dateformat', 'dd/MM/yyyy');
-
-        $f->addFieldToTab('Root.Dates', $date = new DatetimeField('VotingBeginDate', "When does voting begin?"));
-        $date->getDateField()->setConfig('showcalendar', true);
-        $date->getDateField()->setConfig('dateformat', 'dd/MM/yyyy');
-        $f->addFieldToTab('Root.Dates', $date = new DatetimeField('VotingEndDate', "When does voting end?"));
-        $date->getDateField()->setConfig('showcalendar', true);
-        $date->getDateField()->setConfig('dateformat', 'dd/MM/yyyy');
-        $f->addFieldToTab('Root.Dates', $date = new DatetimeField('SelectionBeginDate', "When do selections begin?"));
-        $date->getDateField()->setConfig('showcalendar', true);
-        $date->getDateField()->setConfig('dateformat', 'dd/MM/yyyy');
-        $f->addFieldToTab('Root.Dates', $date = new DatetimeField('SelectionEndDate', "When do selections end?"));
-        $date->getDateField()->setConfig('showcalendar', true);
-        $date->getDateField()->setConfig('dateformat', 'dd/MM/yyyy');
         $f->addFieldToTab('Root.Dates', $date = new DatetimeField('RegistrationBeginDate', "When does registration begin?"));
         $date->getDateField()->setConfig('showcalendar', true);
         $date->getDateField()->setConfig('dateformat', 'dd/MM/yyyy');
@@ -145,10 +126,14 @@ final class SummitAdminUI extends DataExtension
         $f->addFieldToTab('Root.Main', new TextField('ComingSoonBtnText', 'Coming Soon Btn Text'));
         $f->addFieldToTab('Root.Main', new TextField('ExternalEventId', 'Eventbrite Event Id'));
 
-        $f->addFieldsToTab("Root.ExternalCalendarSync", new TextField("CalendarSyncName", "External Calendar Display Name"));
-        $f->addFieldsToTab("Root.ExternalCalendarSync", new TextareaField("CalendarSyncDescription", "External Calendar Description"));
+
         if ($this->owner->ID > 0) {
             $summit_id = $this->owner->ID;
+            // selection plans
+            $config = GridFieldConfig_RecordEditor::create(5);
+            $plans = new GridField('SelectionPlans', 'Selection Plans', $this->owner->SelectionPlans(), $config);
+            $f->addFieldToTab('Root.Selection Plans', $plans);
+
             // tracks
             $config = GridFieldConfig_RecordEditor::create(50);
             $config->addComponent(new GridFieldCopyTracksAction($summit_id));
@@ -168,11 +153,11 @@ final class SummitAdminUI extends DataExtension
             $multi_class_selector = new GridFieldAddNewMultiClass();
             $multi_class_selector->setClasses
             (
-                array
-                (
-                    'PresentationCategoryGroup'        => 'Category Group',
-                    'PrivatePresentationCategoryGroup' => 'Private Category Group',
-                )
+             array
+             (
+                 'PresentationCategoryGroup'        => 'Category Group',
+                 'PrivatePresentationCategoryGroup' => 'Private Category Group',
+             )
             );
             $config->addComponent($multi_class_selector);
             $categories = new GridField('CategoryGroups', 'Category Groups', $this->owner->CategoryGroups(), $config);
@@ -483,6 +468,8 @@ final class SummitAdminUI extends DataExtension
             $categories = new GridField('ExcludedTracksForUploadPresentationSlideDeck', 'Excluded Tracks For Upload Presentation Slide Deck Email', $this->owner->ExcludedTracksForUploadPresentationSlideDeck(), $config);
             $f->addFieldToTab('Root.Speakers Emails', $categories);
 
+            $f->addFieldsToTab("Root.ExternalCalendarSync", new TextField("CalendarSyncName", "External Calendar Display Name"));
+            $f->addFieldsToTab("Root.ExternalCalendarSync", new TextareaField("CalendarSyncDescription", "External Calendar Description"));
         }
     }
 

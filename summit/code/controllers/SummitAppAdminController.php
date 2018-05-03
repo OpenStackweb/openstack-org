@@ -261,4 +261,15 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         }
     }
 
+    public function getStageStatusClass($code) {
+
+        if ($code == -1) {
+            return 'future';
+        } else if ($code == 1) {
+            return 'past';
+        } else {
+            return 'present';
+        }
+    }
+
 }

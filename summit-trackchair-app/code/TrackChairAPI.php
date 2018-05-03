@@ -157,35 +157,38 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         $chairlist = [];
         $categoriesIsChair = [];
         $categoriesNotChair = [];
+        $selectionPlan = $summit->getOpenSelectionPlanForStage('Selection');
 
-        foreach ($summit->Categories()->filter('ChairVisible', true) as $c) {
-            $isChair = ($c->isTrackChair(Member::currentUserID()) === 1);
-            $categoryDetials = [
-                'id' => $c->ID,
-                'title' => $c->Title,
-                'description' => $c->Description,
-                'session_count' => $c->SessionCount,
-                'alternate_count' => $c->AlternateCount,
-                'summit_id' => $c->SummitID,
-                'user_is_chair' => $isChair
-            ];
+        if ($selectionPlan) {
+            foreach ($selectionPlan->getSelectionCategories() as $c) {
+                $isChair = ($c->isTrackChair(Member::currentUserID()) === 1);
+                $categoryDetials = [
+                    'id' => $c->ID,
+                    'title' => $c->Title,
+                    'description' => $c->Description,
+                    'session_count' => $c->SessionCount,
+                    'alternate_count' => $c->AlternateCount,
+                    'summit_id' => $c->SummitID,
+                    'user_is_chair' => $isChair
+                ];
 
-            if ($isChair) {
-                $categoriesIsChair[] = $categoryDetials;
-            } else {
-                $categoriesNotChair[] = $categoryDetials;
-            }
+                if ($isChair) {
+                    $categoriesIsChair[] = $categoryDetials;
+                } else {
+                    $categoriesNotChair[] = $categoryDetials;
+                }
 
-            $chairs = $c->TrackChairs();
-            foreach ($chairs as $chair) {
-                $chairdata = [];
-                $chairdata['chair_id'] = $chair->ID;
-                $chairdata['first_name'] = $chair->Member()->FirstName;
-                $chairdata['last_name'] = $chair->Member()->Surname;
-                $chairdata['email'] = $chair->Member()->Email;
-                $chairdata['category'] = $c->Title;
-                $chairdata['category_id'] = $c->ID;
-                $chairlist[] = $chairdata;
+                $chairs = $c->TrackChairs();
+                foreach ($chairs as $chair) {
+                    $chairdata = [];
+                    $chairdata['chair_id'] = $chair->ID;
+                    $chairdata['first_name'] = $chair->Member()->FirstName;
+                    $chairdata['last_name'] = $chair->Member()->Surname;
+                    $chairdata['email'] = $chair->Member()->Email;
+                    $chairdata['category'] = $c->Title;
+                    $chairdata['category_id'] = $c->ID;
+                    $chairlist[] = $chairdata;
+                }
             }
         }
 
@@ -209,60 +212,65 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         // Gets a list of presentations that have chair comments
         $page_size = $r->getVar('page_size') ?: $this->config()->default_page_size;
         $page = $r->getVar('page') ?: 1;
-        $summitID = Summit::get_active()->ID;
-
-        // Get a collection of chair-visible presentation categories
-        $presentations = Presentation::get()
-            ->filter([
-                'Category.ChairVisible' => true,
-                'SummitEvent.SummitID' => $summitID,
-                'Presentation.Status' => Presentation::STATUS_RECEIVED
-            ]);
-        
-        if ($r->getVar('category')) {
-            $presentations = $presentations->filter('CategoryID', (int) $r->getVar('category'));
-        }
-        if ($keyword = $r->getVar('keyword')) {
-            if (strpos($keyword, 'Tag:') === 0) {
-                $tag = substr($keyword, 4);
-                $presentations = $presentations->leftJoin(
-                    "SummitEvent_Tags",
-                    "Presentation.ID = SummitEvent_Tags.SummitEventID"
-                )
-                ->leftJoin(
-                    "Tag",
-                    "Tag.ID = SummitEvent_Tags.TagID"
-                )->where("Tag.Tag = '{$tag}' ");
-            } else {
-                $presentations = Presentation::apply_search_query($presentations, $keyword);
-            }
-        }
-
-        $types = array();
-        foreach ($presentations as $p) {
-            if (array_search($p->Type()->ID, array_column($types, 'id')) === false)
-                $types[] = ['id' => $p->Type()->ID, 'type' => $p->Type()->Type];
-        }
-
+        $count = 0;
+        $types = [];
         $cloud_data = [];
-        foreach($presentations as $pres) {
-            foreach ($pres->getWordCloud() as $word => $count) {
-                $key = array_search($word, array_column($cloud_data, 'value'));
-                if($key === false) {
-                    $cloud_data[] = ['value' => $word, 'count' => $count];
+        $presentations = [];
+        $summit = Summit::get_active();
+        $summitID = $summit->ID;
+
+        if ($summit->isSelectionOpen()) {
+            // Get a collection of chair-visible presentation categories
+            $presentations = Presentation::get()
+                ->filter([
+                    'Category.ChairVisible' => true,
+                    'SummitEvent.SummitID' => $summitID,
+                    'Presentation.Status' => Presentation::STATUS_RECEIVED
+                ]);
+
+            if ($r->getVar('category')) {
+                $presentations = $presentations->filter('CategoryID', (int)$r->getVar('category'));
+            }
+            if ($keyword = $r->getVar('keyword')) {
+                if (strpos($keyword, 'Tag:') === 0) {
+                    $tag = substr($keyword, 4);
+                    $presentations = $presentations->leftJoin(
+                        "SummitEvent_Tags",
+                        "Presentation.ID = SummitEvent_Tags.SummitEventID"
+                    )
+                        ->leftJoin(
+                            "Tag",
+                            "Tag.ID = SummitEvent_Tags.TagID"
+                        )->where("Tag.Tag = '{$tag}' ");
                 } else {
-                    $cloud_data[$key]['count'] += $count ;
+                    $presentations = Presentation::apply_search_query($presentations, $keyword);
                 }
             }
+
+            foreach ($presentations as $p) {
+                if (array_search($p->Type()->ID, array_column($types, 'id')) === false)
+                    $types[] = ['id' => $p->Type()->ID, 'type' => $p->Type()->Type];
+            }
+
+            foreach ($presentations as $pres) {
+                foreach ($pres->getWordCloud() as $word => $count) {
+                    $key = array_search($word, array_column($cloud_data, 'value'));
+                    if ($key === false) {
+                        $cloud_data[] = ['value' => $word, 'count' => $count];
+                    } else {
+                        $cloud_data[$key]['count'] += $count;
+                    }
+                }
+            }
+
+            $cloud_data = array_values(array_filter($cloud_data, function ($v) {
+                return $v['count'] > 1;
+            }));
+
+            $offset = ($page - 1) * $page_size;
+            $count = $presentations->count();
+            $presentations = $presentations->limit($page_size, $offset);
         }
-
-        $cloud_data = array_values(array_filter($cloud_data, function($v) {
-            return $v['count'] > 1;
-        }));
-
-        $offset = ($page - 1) * $page_size;
-        $count = $presentations->count();
-        $presentations = $presentations->limit($page_size, $offset);
 
         $data = [
             'results' => [],
@@ -1025,114 +1033,117 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
         $p = $this->presentation;
         $speakers = [];
         $current_summit = $p->Summit();
+        $data = [];
 
-        foreach ($p->getSpeakersAndModerators() as $s) {
-            // if($s->Bio == NULL) $s->Bio = "&nbsp;";
-            $s->Bio = str_replace(array("\r", "\n"), "", $s->Bio);
-            $speakerData = $s->toJSON();
-            $speakerData['photo_url'] = $s->ProfilePhoto();
-            $speakerData['available_for_bureau'] = intval($speakerData['available_for_bureau']);
-            $speakerData['is_moderator'] = (boolean) $s->ModeratorPresentations()->byID($p->ID);
-            $speakerData['profile_link'] = $s->getProfileLink();
-            $speakerData['avg_rate_width'] = (float)($s->getAvgFeedback($current_summit)*20);
+        if ($current_summit->isSelectionOpen()) {
+            foreach ($p->getSpeakersAndModerators() as $s) {
+                // if($s->Bio == NULL) $s->Bio = "&nbsp;";
+                $s->Bio = str_replace(array("\r", "\n"), "", $s->Bio);
+                $speakerData = $s->toJSON();
+                $speakerData['photo_url'] = $s->ProfilePhoto();
+                $speakerData['available_for_bureau'] = intval($speakerData['available_for_bureau']);
+                $speakerData['is_moderator'] = (boolean)$s->ModeratorPresentations()->byID($p->ID);
+                $speakerData['profile_link'] = $s->getProfileLink();
+                $speakerData['avg_rate_width'] = (float)($s->getAvgFeedback($current_summit) * 20);
 
-            $expertise_areas = [];
-            foreach ($s->AreasOfExpertise() as $a) {
-                array_push($expertise_areas, [
-                    'id' => $a->ID,
-                    'expertise' => $a->Expertise
-                ]);
-            }
-            $speakerData['expertise_areas'] = $expertise_areas;
+                $expertise_areas = [];
+                foreach ($s->AreasOfExpertise() as $a) {
+                    array_push($expertise_areas, [
+                        'id' => $a->ID,
+                        'expertise' => $a->Expertise
+                    ]);
+                }
+                $speakerData['expertise_areas'] = $expertise_areas;
 
-            $former_presentations = [];
-            $formerList = $s->Presentations()
-                            ->exclude('SummitID', $current_summit->ID)
-                            ->limit(5)
-                            ->sort('StartDate', 'DESC');
-            foreach ($formerList as $pf) {
-                array_push($former_presentations, [
-                    'id' => $pf->ID,
-                    'title' => $pf->Title,
-                    'url' => $pf->Link
-                ]);
-            }
-            $speakerData['former_presentations'] = $former_presentations;
+                $former_presentations = [];
+                $formerList = $s->Presentations()
+                    ->exclude('SummitID', $current_summit->ID)
+                    ->limit(5)
+                    ->sort('StartDate', 'DESC');
+                foreach ($formerList as $pf) {
+                    array_push($former_presentations, [
+                        'id' => $pf->ID,
+                        'title' => $pf->Title,
+                        'url' => $pf->Link
+                    ]);
+                }
+                $speakerData['former_presentations'] = $former_presentations;
 
-            $links = [];
-            foreach ($s->OtherPresentationLinks() as $l) {
-                array_push($links, [
-                    'id' => $l->ID,
-                    'title' => $l->Title,
-                    'url' => $l->LinkUrl
-                ]);
-            }
-            $speakerData['other_links'] = $links;
+                $links = [];
+                foreach ($s->OtherPresentationLinks() as $l) {
+                    array_push($links, [
+                        'id' => $l->ID,
+                        'title' => $l->Title,
+                        'url' => $l->LinkUrl
+                    ]);
+                }
+                $speakerData['other_links'] = $links;
 
-            $travel_preferences = [];
-            foreach ($s->TravelPreferences() as $t) {
-                array_push($travel_preferences, [
-                    'id' => $t->ID,
-                    'country' => $t->Country
-                ]);
+                $travel_preferences = [];
+                foreach ($s->TravelPreferences() as $t) {
+                    array_push($travel_preferences, [
+                        'id' => $t->ID,
+                        'country' => $t->Country
+                    ]);
+                }
+                $speakerData['travel_preferences'] = $travel_preferences;
+                $languages = [];
+                foreach ($s->Languages() as $l) {
+                    array_push($languages, [
+                        'id' => $l->ID,
+                        'language' => $l->Language
+                    ]);
+                }
+                $speakerData['languages'] = $languages;
+                $speakers[] = $speakerData;
             }
-            $speakerData['travel_preferences'] = $travel_preferences;
-            $languages = [];
-            foreach ($s->Languages() as $l) {
-                array_push($languages, [
-                    'id' => $l->ID,
-                    'language' => $l->Language
-                ]);
+
+            $comments = [];
+
+            foreach ($p->Comments() as $c) {
+                $comment = $c->toJSON();
+                $comment['name'] = $c->Commenter()->FirstName . ' ' . $c->Commenter()->Surname;
+                $comment['ago'] = $c->obj('Created')->Ago(false);
+                $comment['is_activity'] = (boolean)$c->IsActivity;
+                $comments[] = $comment;
             }
-            $speakerData['languages'] = $languages;
-            $speakers[] = $speakerData;
+
+            // remove unsafe character for JSON
+            $p->Abstract = ($p->Abstract != null) ? str_replace(array("\r", "\n"), "",
+                $p->Abstract) : '(no description provided)';
+            $p->ProblemAddressed = ($p->ProblemAddressed != null) ? str_replace(array("\r", "\n"), "",
+                $p->ProblemAddressed) : '(no answer provided)';
+            $p->AttendeesExpectedLearnt = ($p->AttendeesExpectedLearnt != null) ? str_replace(array("\r", "\n"), "",
+                $p->AttendeesExpectedLearnt) : '(no answer provided)';
+
+            $data = $p->toJSON();
+            $data['title'] = $p->Title;
+            $data['description'] = ($p->Abstract != null) ? $p->Abstract : '(no description provided)';
+            $data['social_desc'] = ($p->SocialSummary != null) ? $p->SocialSummary : '(no description provided)';
+            $data['category_name'] = $p->Category()->Title;
+            $data['speakers'] = $speakers;
+            $data['total_votes'] = $p->Votes()->count();
+            $data['vote_count'] = $p->CalcVoteCount();
+            $data['vote_average'] = $p->CalcVoteAverage();
+            $data['total_points'] = ($p->CalcTotalPoints() > 0) ? $p->CalcTotalPoints() : '0';
+            $data['creator'] = $p->Creator()->getName();
+            $data['user_vote'] = $p->getUserVote() ? $p->getUserVote()->Vote : null;
+            $data['comments'] = $comments;
+            $data['can_assign'] = $p->canAssign(1) ? $p->canAssign(1) : null;
+            $data['selected'] = $p->getSelectionType();
+            $data['selectors'] = array_keys($p->getSelectors()->map('Name', 'Name')->toArray());
+            $data['likers'] = array_keys($p->getLikers()->map('Name', 'Name')->toArray());
+            $data['passers'] = array_keys($p->getPassers()->map('Name', 'Name')->toArray());
+            $data['popularity'] = $p->getPopularityScore();
+            $data['group_selected'] = $p->isGroupSelected();
+            $data['moved_to_category'] = $p->movedToThisCategory();
+            $data['change_requests_count'] = SummitCategoryChange::get()->filter([
+                'PresentationID' => $p->ID,
+                'Status' => SummitCategoryChange::STATUS_PENDING
+            ])->count();
+            $data['tags'] = $p->getTags()->toNestedArray();
+            $data['type'] = $p->Type()->Type;
         }
-
-        $comments = [];
-
-        foreach ($p->Comments() as $c) {
-            $comment = $c->toJSON();
-            $comment['name'] = $c->Commenter()->FirstName . ' ' . $c->Commenter()->Surname;
-            $comment['ago'] =  $c->obj('Created')->Ago(false);
-            $comment['is_activity'] = (boolean) $c->IsActivity;
-            $comments[] = $comment;
-        }
-
-        // remove unsafe character for JSON
-        $p->Abstract = ($p->Abstract != null) ? str_replace(array("\r", "\n"), "",
-            $p->Abstract) : '(no description provided)';
-        $p->ProblemAddressed = ($p->ProblemAddressed != null) ? str_replace(array("\r", "\n"), "",
-            $p->ProblemAddressed) : '(no answer provided)';
-        $p->AttendeesExpectedLearnt = ($p->AttendeesExpectedLearnt != null) ? str_replace(array("\r", "\n"), "",
-            $p->AttendeesExpectedLearnt) : '(no answer provided)';
-
-        $data = $p->toJSON();
-        $data['title'] = $p->Title;
-        $data['description'] = ($p->Abstract != null) ? $p->Abstract : '(no description provided)';
-        $data['social_desc'] = ($p->SocialSummary != null) ? $p->SocialSummary : '(no description provided)';
-        $data['category_name'] = $p->Category()->Title;
-        $data['speakers'] = $speakers;
-        $data['total_votes'] = $p->Votes()->count();
-        $data['vote_count'] = $p->CalcVoteCount();
-        $data['vote_average'] = $p->CalcVoteAverage();
-        $data['total_points'] = ($p->CalcTotalPoints() > 0) ? $p->CalcTotalPoints() : '0';
-        $data['creator'] = $p->Creator()->getName();
-        $data['user_vote'] = $p->getUserVote() ? $p->getUserVote()->Vote : null;
-        $data['comments'] = $comments;
-        $data['can_assign'] = $p->canAssign(1) ? $p->canAssign(1) : null;
-        $data['selected'] = $p->getSelectionType();
-        $data['selectors'] = array_keys($p->getSelectors()->map('Name','Name')->toArray());
-        $data['likers'] = array_keys($p->getLikers()->map('Name','Name')->toArray());
-        $data['passers'] = array_keys($p->getPassers()->map('Name','Name')->toArray());
-        $data['popularity'] = $p->getPopularityScore();
-        $data['group_selected'] = $p->isGroupSelected();
-        $data['moved_to_category'] = $p->movedToThisCategory();
-        $data['change_requests_count'] = SummitCategoryChange::get()->filter([
-        		'PresentationID' => $p->ID,
-        		'Status' => SummitCategoryChange::STATUS_PENDING
-        	])->count();
-        $data['tags'] = $p->getTags()->toNestedArray();
-        $data['type'] = $p->Type()->Type;
 
 
         return (new SS_HTTPResponse(
