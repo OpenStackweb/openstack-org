@@ -34,6 +34,7 @@ class PTGDynamic extends Page {
         'PTGSchedule'        => 'HTMLText',
         'CodeOfConduct'      => 'HTMLText',
         'FindOutMore'        => 'HTMLText',
+        'FAQText'            => 'HTMLText',
     );
 
     private static $has_one = array(
@@ -82,6 +83,9 @@ class PTGDynamic extends Page {
         $fields->addFieldToTab('Root.Main', $coc = new HtmlEditorField('CodeOfConduct','Code of Conduct'));
         $coc->setRows(5);
         $fields->addFieldToTab('Root.Main', $findout = new HtmlEditorField('FindOutMore','Find Out More'));
+        $findout->setRows(5);
+
+        $fields->addFieldToTab('Root.Main', $findout = new HtmlEditorField('FAQText','FAQs'));
         $findout->setRows(5);
 
         return $fields;
