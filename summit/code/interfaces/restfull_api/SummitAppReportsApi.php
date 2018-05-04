@@ -254,6 +254,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
             $summit       = $this->summit_repository->getById($summit_id);
             $query_string = $request->getVars();
             $event_type   = (isset($query_string['event_type'])) ? Convert::raw2sql($query_string['event_type']) : 'all';
+            $sort_by      = (isset($query_string['sort_by'])) ? Convert::raw2sql($query_string['sort_by']) : 'start_date';
             $venues       = (isset($query_string['venues'])) ? $query_string['venues'] : '';
 
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
@@ -263,7 +264,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
             $report_array = array();
 
             foreach($days as $day) {
-                $day_report = $this->assistance_repository->getRoomsBySummitAndDay($summit_id,$day->Date,$event_type,$venues);
+                $day_report = $this->assistance_repository->getRoomsBySummitAndDay($summit_id,$day->Date,$event_type,$venues,$sort_by);
                 $report_array[$day->Label] = array();
                 foreach ($day_report as $rooms) {
 

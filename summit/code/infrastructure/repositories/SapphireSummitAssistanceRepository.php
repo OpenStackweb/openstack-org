@@ -121,7 +121,7 @@ SQL;
         return $result;
     }
 
-    public function getRoomsBySummitAndDay($summit_id, $date, $event_type='all', $venues='')
+    public function getRoomsBySummitAndDay($summit_id, $date, $event_type='all', $venues='',$sort_by)
     {
 
         $query = <<<SQL
@@ -163,8 +163,12 @@ SQL;
 SQL;
         }
 
+        if ($sort_by != 'start_date') {
+            $sort_by = $sort_by . ', start_date';
+        }
+
         $query .= <<<SQL
- GROUP BY E.ID ORDER BY E.StartDate
+ GROUP BY E.ID ORDER BY {$sort_by}
 SQL;
 
         return DB::query($query);

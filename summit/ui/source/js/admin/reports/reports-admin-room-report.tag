@@ -12,10 +12,17 @@
                 <option value="all">All Events</option>
             </select>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-3">
             <select id="select_venue" style="width:100%" multiple data-placeholder="Choose one or more rooms...">
                 <option value="0">TBA</option>
                 <option value="{ id }" title="{ getLocationOptionTitle(class_name) }" each={ locations } class="{ getLocationOptionCSSClass(class_name) }">{ name }</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <select id="sort_by" style="width:100%">
+                <option value="start_date">Time</option>
+                <option value="room">Room</option>
+                <option value="code">Code</option>
             </select>
         </div>
         <div class="col-md-3" style="text-align: right; padding-right: 20px;">
@@ -78,6 +85,10 @@
                 self.getReport();
             });
 
+            $('#sort_by').change(function(){
+                self.getReport();
+            });
+
             $('#select_venue').change(function(){
                 self.getReport();
             });
@@ -89,14 +100,16 @@
 
             $('#select_venue').chosen();
             $('#event_type').chosen({disable_search: true});
+            $('#sort_by').chosen({disable_search: true});
         });
 
         getReport() {
             $('body').ajax_loader();
             var event_type = $('#event_type').val();
+            var sort_by = $('#sort_by').val();
             var venues = ($('#select_venue').val()) ? $('#select_venue').val().join(',') : '';
 
-            $.getJSON('api/v1/summits/'+self.summit_id+'/reports/room_report', {event_type: event_type, venues: venues}, function(data){
+            $.getJSON('api/v1/summits/'+self.summit_id+'/reports/room_report', {event_type: event_type, sort_by: sort_by, venues: venues}, function(data){
                 self.report_data = data.report;
                 self.calendar_count = data.calendar_count;
                 self.update();
@@ -136,9 +149,10 @@
 
         self.dispatcher.on(self.dispatcher.EXPORT_ROOM_REPORT,function() {
             var event_type = $('#event_type').val();
+            var sort_by = $('#sort_by').val();
             var venues = ($('#select_venue').val()) ? $('#select_venue').val().join(',') : '';
 
-            window.open('api/v1/summits/'+self.summit_id+'/reports/export/room_report?event_type='+event_type+'&venues='+venues, '_blank');
+            window.open('api/v1/summits/'+self.summit_id+'/reports/export/room_report?event_type='+event_type+'&sort_by='+sort_by+'&venues='+venues, '_blank');
         });
 
         getLocationOptionCSSClass(class_name) {
