@@ -81,17 +81,18 @@
                 $(this).parents('tr').addClass('changed');
             });
 
-            $('#event_type').change(function(){
+            $('.reports-wrapper').on('change', '#event_type', function(){
                 self.getReport();
             });
 
-            $('#sort_by').change(function(){
+            $('.reports-wrapper').on('change', '#sort_by', function(){
                 self.getReport();
             });
 
-            $('#select_venue').change(function(){
+            $('.reports-wrapper').on('change', '#select_venue', function(){
                 self.getReport();
             });
+
 
             $('.reports-wrapper').on('click','.export_room_attendees',function(){
                 var event_id = $(this).parents('tr').data('id');
