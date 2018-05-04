@@ -121,7 +121,7 @@ SQL;
         return $result;
     }
 
-    public function getRoomsBySummitAndDay($summit_id, $date, $event_type='all', $venues='',$sort_by)
+    public function getRoomsBySummitAndDay($summit_id, $date, $event_type='all', $venues='', $tracks='' ,$sort_by)
     {
 
         $query = <<<SQL
@@ -160,6 +160,12 @@ SQL;
         if ($venues) {
             $query .= <<<SQL
  AND E.LocationID IN ( {$venues} )
+SQL;
+        }
+
+        if ($tracks) {
+            $query .= <<<SQL
+ AND E.CategoryID IN ( {$tracks} )
 SQL;
         }
 

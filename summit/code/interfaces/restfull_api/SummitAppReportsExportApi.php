@@ -225,6 +225,7 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
             $event_type = (isset($query_string['event_type'])) ? Convert::raw2sql($query_string['event_type']) : 'all';
             $sort_by      = (isset($query_string['sort_by'])) ? Convert::raw2sql($query_string['sort_by']) : 'start_date';
             $venues = (isset($query_string['venues'])) ? $query_string['venues'] : '';
+            $tracks       = (isset($query_string['tracks'])) ? $query_string['tracks'] : '';
             $summit_id = intval($request->param('SUMMIT_ID'));
             $summit = $this->summit_repository->getById($summit_id);
             if (is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
@@ -253,7 +254,7 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
                 $active_sheet = $objPHPExcel->createSheet();
                 $active_sheet->setTitle(date('n-d',strtotime($day->Date)));
                 $active_sheet->fromArray(array('Date','Time','Code','Event','Room','Venue','Capacity','Speakers','Headcount','Total','Speaker Names'), NULL, 'A1');
-                $day_report = $this->assistance_repository->getRoomsBySummitAndDay($summit_id, $day->Date, $event_type, $venues, $sort_by);
+                $day_report = $this->assistance_repository->getRoomsBySummitAndDay($summit_id, $day->Date, $event_type, $venues, $tracks, $sort_by);
                 foreach ($day_report as $key2 => $val) {
                     $row = $key2 + 2;
                     $start_time = $summit->convertDateFromUTC2TimeZone($val['start_date'], 'g:ia');

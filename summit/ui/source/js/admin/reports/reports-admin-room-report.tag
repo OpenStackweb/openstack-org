@@ -7,25 +7,36 @@
 
     <div class="row" style="margin-bottom:30px;">
         <div class="col-md-3">
+            <label>Filter by Event Type</label>
             <select id="event_type" style="width:100%">
                 <option value="presentation">Presentations Only</option>
                 <option value="all">All Events</option>
             </select>
         </div>
         <div class="col-md-3">
+            <label>Filter by Room</label>
             <select id="select_venue" style="width:100%" multiple data-placeholder="Choose one or more rooms...">
                 <option value="0">TBA</option>
                 <option value="{ id }" title="{ getLocationOptionTitle(class_name) }" each={ locations } class="{ getLocationOptionCSSClass(class_name) }">{ name }</option>
             </select>
         </div>
         <div class="col-md-3">
-            <select id="sort_by" style="width:100%">
+            <label>Filter by Category</label>
+            <select id="select_track" style="width:100%" multiple data-placeholder="Choose one or more categories...">
+                <option value="{ id }" each={ tracks } >{ title }</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label>Sort by</label>
+            <select id="sort_by" style="width:100%" placeholder="Sort By">
                 <option value="start_date">Time</option>
                 <option value="room">Room</option>
                 <option value="code">Code</option>
             </select>
         </div>
-        <div class="col-md-3" style="text-align: right; padding-right: 20px;">
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             Users with calendar: { calendar_count }
         </div>
     </div>
@@ -71,6 +82,7 @@
         this.report_data     = [];
         this.calendar_count  = 0;
         this.locations       = opts.locations;
+        this.tracks          = opts.tracks;
         var self             = this;
 
 
@@ -93,6 +105,10 @@
                 self.getReport();
             });
 
+            $('.reports-wrapper').on('change', '#select_track', function(){
+                self.getReport();
+            });
+
 
             $('.reports-wrapper').on('click','.export_room_attendees',function(){
                 var event_id = $(this).parents('tr').data('id');
@@ -100,6 +116,7 @@
             });
 
             $('#select_venue').chosen();
+            $('#select_track').chosen();
             $('#event_type').chosen({disable_search: true});
             $('#sort_by').chosen({disable_search: true});
         });
@@ -109,8 +126,9 @@
             var event_type = $('#event_type').val();
             var sort_by = $('#sort_by').val();
             var venues = ($('#select_venue').val()) ? $('#select_venue').val().join(',') : '';
+            var tracks = ($('#select_track').val()) ? $('#select_track').val().join(',') : '';
 
-            $.getJSON('api/v1/summits/'+self.summit_id+'/reports/room_report', {event_type: event_type, sort_by: sort_by, venues: venues}, function(data){
+            $.getJSON('api/v1/summits/'+self.summit_id+'/reports/room_report', {event_type: event_type, tracks: tracks, sort_by: sort_by, venues: venues}, function(data){
                 self.report_data = data.report;
                 self.calendar_count = data.calendar_count;
                 self.update();
@@ -152,8 +170,9 @@
             var event_type = $('#event_type').val();
             var sort_by = $('#sort_by').val();
             var venues = ($('#select_venue').val()) ? $('#select_venue').val().join(',') : '';
+            var tracks = ($('#select_track').val()) ? $('#select_track').val().join(',') : '';
 
-            window.open('api/v1/summits/'+self.summit_id+'/reports/export/room_report?event_type='+event_type+'&sort_by='+sort_by+'&venues='+venues, '_blank');
+            window.open('api/v1/summits/'+self.summit_id+'/reports/export/room_report?event_type='+event_type+'&sort_by='+sort_by+'&venues='+venues+'&tracks='+tracks, '_blank');
         });
 
         getLocationOptionCSSClass(class_name) {
