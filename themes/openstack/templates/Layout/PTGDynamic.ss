@@ -181,7 +181,7 @@
                         <p>
                             A: Ticket prices for this PTG will be tiered, and are significantly subsidized to help cover part of the overall event cost:
                             <ul>
-                                <li>Early Bird: USD $199 (Deadline May 11 at 6:59 UTC)</li>
+                                <li>Early Bird: USD $199 (Deadline May 18 at 6:59 UTC)</li>
                                 <li>Regular: USD $399 (Deadline August 23 at 6:59 UTC)</li>
                                 <li>Late/Onsite: USD $599</li>
                             </ul>
