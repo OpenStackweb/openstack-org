@@ -266,7 +266,6 @@ final class SummitEventManager implements ISummitEventManager
             $event->Abstract         = html_entity_decode($event_data['abstract']);
             $event->SocialSummary    = strip_tags($event_data['social_summary']);
             $event->AllowFeedBack    = isset($event_data['allow_feedback']) ? $event_data['allow_feedback'] : 0;
-            $event->FeatureCloud     = isset($event_data['feature_cloud']) ? $event_data['feature_cloud'] : null;
             $event->LocationID       = intval($event_data['location_id']);
             $event->TypeID           = $event_type_id;
 
@@ -370,6 +369,7 @@ final class SummitEventManager implements ISummitEventManager
             $event->AttendeesExpectedLearnt = html_entity_decode($event_data['expect_learn']);
             $event->Level                   = $event_data['level'];
             $event->ToRecord                = isset($event_data['to_record'])? $event_data['to_record'] : 0;
+            $event->AttendingMedia          = isset($event_data['attending_media'])? $event_data['attending_media'] : 0;
             // speakers ...
             $speaker_ids = [];
 

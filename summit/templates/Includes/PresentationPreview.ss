@@ -14,6 +14,8 @@
         <div class="confirm-item">$Category.getCategoryGroups().First().Name</div>
         <label>Track</label>
         <div class="confirm-item">$Category.Title</div>
+        <label>Allow attending media?</label>
+        <div class="confirm-item"><% if $AttendingMedia %>Yes<% else %>No<% end_if %></div>
     </div>
 
     <% if $Moderator %>

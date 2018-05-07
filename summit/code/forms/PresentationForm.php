@@ -104,17 +104,6 @@ final class PresentationForm extends BootstrapForm
                     ->setEmptyString('-- Select one --')
                     ->setSource(Presentation::create()->dbObject('Level')->enumValues())
                 ->end()
-            ->optionset('LightningTalk',
-                'Would you be willing to present your presentation as a Lightning Talk in the event your submission is not chosen? Note: panels are ineligible for Lightning Talks.',
-                array(
-                    1 => 'Yes',
-                    0 => 'No'
-                )
-            )
-            ->configure()
-                ->setTemplate('BootstrapAwesomeOptionsetField')
-                ->setInline(true)
-            ->end()
             ->tinyMCEEditor('Abstract','Abstract (1000 chars)')
                 ->configure()
                     ->setRows(20)
@@ -131,6 +120,17 @@ final class PresentationForm extends BootstrapForm
                     ->setRows(20)
                     ->setColumns(8)
                 ->end()
+            ->optionset('AttendingMedia',
+                'Are you available to discuss the topic of this presentation with attending media?',
+                array(
+                    1 => 'Yes',
+                    0 => 'No'
+                )
+            )
+            ->configure()
+            ->setTemplate('BootstrapAwesomeOptionsetField')
+            ->setInline(true)
+            ->end()
             ->literal('PresentationMaterialsTitle','<h3>Please provide any relevant links to additional information, such as code repositories, case studies, papers, blog posts etc. (Up to 5 links)</h3>')
             ->text('PresentationLink[1]','#1')
             ->text('PresentationLink[2]','#2')

@@ -400,7 +400,6 @@ final class PresentationManager implements IPresentationManager
             $presentation->Title                   = trim($data['Title']);
             $presentation->TypeID                  = intval($data['TypeID']);
             $presentation->Level                   = trim($data['Level']);
-            $presentation->FeatureCloud            = intval($data['FeatureCloud']);
             $presentation->Abstract                = trim($data['Abstract']);
             $presentation->SocialSummary           = trim($data['SocialSummary']);
             $presentation->AttendeesExpectedLearnt = trim($data['AttendeesExpectedLearnt']);
@@ -433,7 +432,6 @@ final class PresentationManager implements IPresentationManager
             $presentation->SummitID      = $summit->getIdentifier();
             $presentation->CreatorID     = $creator->ID;
             $presentation->Progress      = Presentation::PHASE_SUMMARY;
-            $presentation->LightningTalk = isset($data['LightningTalk']) ? intval($data['LightningTalk']) : 0;
             // add creator as speaker
             $presentation->Speakers()->Add($speaker);
             $presentation->write();
@@ -487,12 +485,10 @@ final class PresentationManager implements IPresentationManager
             $presentation->Title                   = trim($data['Title']);
             $presentation->TypeID                  = intval($data['TypeID']);
             $presentation->Level                   = trim($data['Level']);
-            $presentation->FeatureCloud            = intval($data['FeatureCloud']);
             $presentation->Abstract                = trim($data['Abstract']);
             $presentation->SocialSummary           = trim($data['SocialSummary']);
             $presentation->AttendeesExpectedLearnt = trim($data['AttendeesExpectedLearnt']);
             $presentation->CategoryID              = intval(trim($data['CategoryID']));
-            $presentation->LightningTalk           = isset($data['LightningTalk']) ? intval($data['LightningTalk']) : 0;
 
             // remove moderator if its not needed
             if (!$presentation->Type()->UseModerator) {

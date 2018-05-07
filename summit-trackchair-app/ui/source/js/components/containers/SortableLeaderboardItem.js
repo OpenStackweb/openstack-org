@@ -125,7 +125,6 @@ class SortableLeaderboardItem extends Component {
         </div>
         <div className="selection-meta">
             {p.level}
-            {p.lightning_wannabe && <span className="selection-lightning"><i className="fa fa-bolt" /></span> }
         </div>
 
       </div>

@@ -7,14 +7,12 @@ export default ({
     active,
     muted,
     rank,
-    className,
-    lightning_wannabe
+    className
 }) => (
     <div className={`feed-element ${active ? 'active' : ''} ${muted ? 'muted' : ''} ${className}`}>
         <div>
             <strong>
                 {title}
-                {lightning_wannabe && <span className="selection-lightning"><i className="fa fa-bolt" /></span> }
             </strong>
             <div>{description}</div>
             <small className="text-navy">{notes}</small>

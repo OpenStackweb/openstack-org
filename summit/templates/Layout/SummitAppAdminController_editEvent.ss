@@ -148,14 +148,14 @@
                     <div class="col-md-4">
                         <label>Feedback</label><br>
                         <div class="checkbox">
-                            <input type="checkbox" id="allow_feedback" name="allow_feedback" <% if $Event.AllowFeedBack = 1 %> checked <% end_if %>>
+                            <input type="checkbox" id="allow_feedback" name="allow_feedback" <% if $Event.AllowFeedBack %> checked <% end_if %>>
                             <label for="allow_feedback">
                                 Allow feedback ?
                             </label>
                         </div>
                     </div>
                     <div class="col-md-4 to_record_container" style="display: none;">
-                        <!-- https://github.com/flatlogic/awesome-bootstrap-checkbox -->
+                        <label>Record</label><br>
                         <div class="checkbox">
                             <input type="checkbox" id="to_record" name="to_record" <% if $Event.ToRecord %> checked <% end_if %>>
                             <label for="to_record">
@@ -164,14 +164,12 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <label>Does this talk feature an OpenStack cloud?</label><br>
-                        <div class="radio radio-inline">
-                            <input type="radio" name="feature_cloud" id="feature_cloud_yes" value="1" <% if $Event.FeatureCloud %> checked <% end_if %>>
-                            <label for="featured_cloud_yes"> Yes </label>
-                        </div>
-                        <div class="radio radio-inline">
-                            <input type="radio" name="feature_cloud" id="feature_cloud_no" value="0" <% if $Event.FeatureCloud == 0 %> checked <% end_if %>>
-                            <label for="featured_cloud_no"> No </label>
+                        <label>Attending Media</label><br>
+                        <div class="checkbox">
+                            <input type="checkbox" id="attending_media" name="attending_media" <% if $Event.AttendingMedia %> checked <% end_if %>>
+                            <label for="attending_media">
+                                Allow attending media ?
+                            </label>
                         </div>
                     </div>
                 </div>

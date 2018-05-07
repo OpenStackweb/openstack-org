@@ -295,7 +295,6 @@ class TrackChairAPI extends AbstractRestfulJsonApi
                 'total_points' => $p->CalcTotalPoints(),
                 'moved_to_category' => $p->movedToThisCategory(),
                 'speakers' => $p->getSpeakersCSV(),
-                'lightning_wannabe' => $p->isLightningWannabe(),
                 'type' => $p->Type()->Type
             ];
         }
@@ -392,8 +391,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
 		                'passers' => array_keys($p->getPassers()->map('Name','Name')->toArray()),
 		                'group_selected' => $is_group_selected,
 		                'comment_count' => $p->Comments()->count(),
-		                'level' => $p->Level,
-                        'lightning_wannabe' => $p->isLightningWannabe()
+		                'level' => $p->Level
 		            ],
                     'order' => $s->Order,
                     'id' => $s->PresentationID
@@ -1134,7 +1132,6 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
         		'PresentationID' => $p->ID,
         		'Status' => SummitCategoryChange::STATUS_PENDING
         	])->count();
-        $data['lightning_wannabe'] = $p->isLightningWannabe();
         $data['tags'] = $p->getTags()->toNestedArray();
         $data['type'] = $p->Type()->Type;
 

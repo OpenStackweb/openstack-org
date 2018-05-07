@@ -139,9 +139,10 @@ class Presentation extends SummitEvent implements IPresentation
         'ProblemAddressed'        => 'HTMLText',
         'AttendeesExpectedLearnt' => 'HTMLText',
         'Legacy'                  => 'Boolean',
-        'FeatureCloud'            => 'Boolean',
-        'LightningTalk'           => 'Boolean',
+        'FeatureCloud'            => 'Boolean', //TODO remove when tix 14061 is done
+        'LightningTalk'           => 'Boolean', //TODO remove when tix 14061 is done
         'ToRecord'                => 'Boolean',
+        'AttendingMedia'          => 'Boolean'
     );
 
     /**
@@ -252,14 +253,6 @@ class Presentation extends SummitEvent implements IPresentation
                 $this->TypeID = $event_type->ID;
             }
         }
-    }
-
-    /**
-     * @return bool
-     */
-    public function isLightningWannabe()
-    {
-        return boolval($this->LightningTalk);
     }
 
     /**
@@ -536,11 +529,8 @@ class Presentation extends SummitEvent implements IPresentation
         $f->removeByName('TypeID');
         $f
             ->checkbox('ToRecord', 'To Record ?')
+            ->checkbox('Attending Media', 'Available to discuss with attending media?')
             ->dropdown('Level', 'Level', $this->dbObject('Level')->enumValues())
-            ->optionset('FeatureCloud','Does this talk feature an OpenStack cloud?', array(
-                1 => 'Yes',
-                0 => 'No'
-            ))
             ->listbox('Topics', 'Topics', PresentationTopic::get()->map('ID', 'Title')->toArray())
             ->configure()
             ->setMultiple(true)

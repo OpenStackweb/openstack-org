@@ -497,7 +497,6 @@ $(document).ready(function(){
             level: $('#level').val(),
             track: $('#track').val(),
             allow_feedback: ($('#allow_feedback').prop('checked')) ? 1 : 0,
-            feature_cloud: $('input[name=feature_cloud]:checked').val(),
             tags: $('#tags').val(),
             sponsors: $('#sponsors').val(),
             speakers: $('#speakers').tagsinput('items'),
@@ -505,6 +504,7 @@ $(document).ready(function(){
             groups: $('#groups').tagsinput('items'),
             publish: publish,
             to_record: ($('#to_record').prop('checked')) ? 1 : 0,
+            attending_media: ($('#attending_media').prop('checked')) ? 1 : 0,
         };
 
         $.ajax({
