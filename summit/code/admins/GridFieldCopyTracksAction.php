@@ -104,8 +104,18 @@ class GridFieldCopyTracksAction implements GridField_HTMLProvider, GridField_URL
                     $new_cat->ExtraQuestions()->add($new_extraq);
                 }
 
+                foreach ($cat->AllowedTags() as $tag) {
+                    if ( $summit->getTagGroupFor($tag) ) {
+                        $new_cat->AllowedTags()->add($tag);
+                    }
+                }
+
+                $new_cat->write();
+
                 $new_track_group->Categories()->add($new_cat);
             }
+
+            $new_track_group->write();
         }
 
         $response = new SS_HTTPResponse();
