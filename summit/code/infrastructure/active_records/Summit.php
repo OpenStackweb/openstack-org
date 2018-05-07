@@ -487,6 +487,7 @@ class Summit extends DataObject implements ISummit
         parent::onAfterWrite();
         if ($this->must_seed) {
             self::seedBasicEventTypes($this->ID);
+            self::seedDefaultTrackTagGroups($this);
         }
     }
 
