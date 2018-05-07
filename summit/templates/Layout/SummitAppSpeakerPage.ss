@@ -245,6 +245,7 @@
                                                 ],
                                                 url: "{$getLink(show)}",
                                                 social_summary : "{$SocialSummary.JS}",
+                                                summit_id : {$SummitID}
                                             };
 
                                     summit.events.push(event_{$ID});
@@ -301,6 +302,7 @@
                                             ],
                                             url: "{$getLink(show)}",
                                             social_summary : "{$SocialSummary.JS}",
+                                            summit_id : {$SummitID}
                                         };
 
                                         summit.events.push(event_{$ID});
