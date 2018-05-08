@@ -75,7 +75,7 @@ HTML;
     {
         $res = (string)$this->getField('LoginPageSlide2Content');
         if (empty($res)) {
-            $res = 'It should only take <strong>10 minutes</strong> to complete.';
+            $res = 'For most users, it does not take long to complete. Timing may vary based on number of deployments.';
         }
         return $res;
     }

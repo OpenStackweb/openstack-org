@@ -309,7 +309,7 @@ msgid ""
 msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:132
-msgid "<p>It should only take <strong>10 minutes</strong> to complete.</p>"
+msgid "<p>For most users, it does not take long to complete. Timing may vary based on number of deployments.</p>"
 msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:138
