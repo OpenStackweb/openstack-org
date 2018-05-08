@@ -139,8 +139,6 @@ class Presentation extends SummitEvent implements IPresentation
         'ProblemAddressed'        => 'HTMLText',
         'AttendeesExpectedLearnt' => 'HTMLText',
         'Legacy'                  => 'Boolean',
-        'FeatureCloud'            => 'Boolean', //TODO remove when tix 14061 is done
-        'LightningTalk'           => 'Boolean', //TODO remove when tix 14061 is done
         'ToRecord'                => 'Boolean',
         'AttendingMedia'          => 'Boolean'
     );
