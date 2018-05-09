@@ -1,4 +1,4 @@
-<div  class="summit-hero-wrapper small-header <% if HeroCSSClass %>$HeroCSSClass<% end_if %>" <% if $SummitImage %>style="background: url('{$SummitImage.Image.link}') -360px -140px ;"<% end_if %> >
+<div class="summit-hero-wrapper small-header <% if HeroCSSClass %>$HeroCSSClass<% end_if %>" <% if $SummitImage %>style="background: url('{$SummitImage.Image.link}') -360px -140px ;"<% end_if %> >
     <div class="container">
         <div class="row text-wrapper">
             <% with $Summit %>
@@ -11,7 +11,7 @@
                 <div class="summit-title">{$Title}</div>
                 <div class="summit-date">{$DateLabel}</div>
             </div>
-            <div class="col-md-3 col-sm-3 button-box pull-right">
+            <div class="col-md-3 col-sm-3 button-box">
                 <% if IsUpComing %>
                     <div class="button-wrapper">
                         <a href="{$RegistrationLink}" class="btn register-btn-lrg">Register Now</a>

@@ -770,7 +770,7 @@ form.all-events-search-form .all-events-search-wrapper i {
 @media (max-width: 767px) {
     .login-container, .logout-container {
         position: relative;
-        top: -160px;
+        top: -116px;
         right: 0px;
         text-align: right;
     }

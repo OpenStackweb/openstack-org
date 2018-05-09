@@ -315,9 +315,6 @@ a.future-summit:hover:after {
     float: right;
     margin-top: 25px; } }
 
-@media (max-width: 980px) {
-  .summit-hero-wrapper.condensed .landing-action {
-    display: none; } }
 
 @media (max-width: 767px) {
   .summit-hero-wrapper .landing-action {
@@ -433,8 +430,7 @@ a.future-summit:hover:after {
 @media (max-width: 980px) {
   .landing-action {
     margin-bottom: 50px; }
-  .hero-tab-wrapper {
-    display: none; } }
+}
 
 .summit-hero-wrapper.small-header .text-wrapper {
   margin-top: 20px;
@@ -487,7 +483,66 @@ a.future-summit:hover:after {
 }
 
 .summit-hero-wrapper.small-header .hero-tab-wrapper {
-  margin-top: 50px;
+  margin-top: 50px ;
+}
+
+
+.summit-hero-wrapper.small-header {
+  min-height: 220px;
+}
+
+#summit-main-nav {
+  margin-bottom: 0;
+  border-bottom: none;
+}
+
+
+#summit-main-nav .navbar-toggle .icon-bar {
+  background-color: white;
+  height: 3px;
+  border-radius: 3px; }
+
+@media (max-width: 1000px) {
+  #header-navbar-collapse:not(.in) {
+    display: none;
+  }
+  #summit-main-nav .navbar-toggle {
+    display: block;
+  }
+
+  .hero-tab-wrapper {
+    margin-top: 10px !important;
+  }
+}
+
+@media (min-width: 1001px) {
+  #header-navbar-collapse {
+    display: block;
+  }
+  #summit-main-nav .navbar-toggle {
+    display: none;
+  }
+}
+
+@media (max-width: 1200px) {
+  #bs-example-navbar-collapse-1 {
+    display: none !important;
+  }
+  #schedule-navbar-button {
+    display: block !important;
+  }
+  .navbar-days .navbar-header {
+    width: 100%;
+  }
+}
+
+@media (min-width: 1201px) {
+  #bs-example-navbar-collapse-1 {
+    display: block !important;
+  }
+  #schedule-navbar-button {
+    display: none !important;
+  }
 }
 
 /*End Summit Inner Layout*/
@@ -1319,9 +1374,6 @@ a.current-summit-link {
   .summit-hero-wrapper.small-header .text-wrapper {
     margin-top: 0;
   }
-  .summit-hero-wrapper.small-header {
-    height: 120px;
-  }
   .summit-hero-wrapper.small-header .title-box {
 
   }
@@ -1344,11 +1396,6 @@ a.current-summit-link {
     .summit-hero-wrapper.small-header .title-box div {
       text-align: center;
     }
-    .summit-hero-wrapper.small-header .button-box {
-      display: none;
-    }
-    .summit-hero-wrapper {
-        height: 80px; }
     .summit-hero-wrapper .summit-hero-logo {
         width: 115px;
         left: 20px; }

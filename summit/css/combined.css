@@ -522,12 +522,14 @@ a.past-summit:hover:after, a.future-summit:hover:after, a.future-summit2:hover:a
 
 @media (max-width: 980px) {
   .summit-hero-wrapper.condensed .summit-hero-logo {
-    margin: 0; } }*/
+    margin: 0; } }
 
 @media (max-width: 767px) {
   .summit-hero-wrapper .summit-hero-logo {
     float: left;
-    margin: 20px 0 30px; } }
+    margin: 20px 0 30px;
+  }
+}
 
 .hero-tab-wrapper {
   margin: 130px auto 0; }
@@ -542,8 +544,7 @@ a.past-summit:hover:after, a.future-summit:hover:after, a.future-summit2:hover:a
 @media (max-width: 980px) {
   .landing-action {
     margin-bottom: 50px; }
-  .hero-tab-wrapper {
-    display: none; } }
+}
 
 /*End Summit Inner Layout*/
 /*Hero Tabs and Navigation*/

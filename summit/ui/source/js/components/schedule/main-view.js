@@ -40,7 +40,7 @@ class MainView extends Component {
             <div>
                 {/* Brand and toggle get grouped for better mobile display */}
                 <div className="navbar-header">
-                    <button type="button" aria-expanded="false" data-toggle="collapse"
+                    <button id="schedule-navbar-button" type="button" aria-expanded="false" data-toggle="collapse"
                     className="navbar-toggle collapsed" data-target="#bs-example-navbar-collapse-1">
                         <span className="sr-only">
                             Toggle navigation
@@ -103,7 +103,7 @@ class MainView extends Component {
             <div>
             {/* Brand and toggle get grouped for better mobile display */}
                 <div className="navbar-header">
-                    <button type="button" aria-expanded="false" data-toggle="collapse"
+                    <button id="schedule-navbar-button" type="button" aria-expanded="false" data-toggle="collapse"
                     className="navbar-toggle collapsed" data-target="#bs-example-navbar-collapse-1">
                         <span className="sr-only">
                         Toggle navigation
