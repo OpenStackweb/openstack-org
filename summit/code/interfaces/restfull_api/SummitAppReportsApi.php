@@ -265,7 +265,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
             $report_array = array();
 
             foreach($days as $day) {
-                $day_report = $this->assistance_repository->getRoomsBySummitAndDay($summit_id,$day->Date,$event_type,$venues,$tracks,$sort_by);
+                $day_report = $this->assistance_repository->getRoomsBySummitAndDay($summit,$day->Date,$event_type,$venues,$tracks,$sort_by);
                 $report_array[$day->Label] = array();
                 foreach ($day_report as $rooms) {
 

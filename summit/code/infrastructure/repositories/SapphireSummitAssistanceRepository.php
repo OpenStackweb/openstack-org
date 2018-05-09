@@ -121,8 +121,10 @@ SQL;
         return $result;
     }
 
-    public function getRoomsBySummitAndDay($summit_id, $date, $event_type='all', $venues='', $tracks='' ,$sort_by)
+    public function getRoomsBySummitAndDay($summit, $date, $event_type='all', $venues='', $tracks='' ,$sort_by)
     {
+        $start_date = $summit->convertDateFromTimeZone2UTC($date.' 00:00:00');
+        $end_date = $summit->convertDateFromTimeZone2UTC($date.' 23:59:59');
 
         $query = <<<SQL
 SELECT E.ID AS id ,
@@ -143,13 +145,13 @@ FROM SummitEvent AS E
 LEFT JOIN Presentation AS P ON P.ID = E.ID
 LEFT JOIN PresentationCategory AS PC ON E.CategoryID = PC.ID
 LEFT JOIN Presentation_Speakers AS PS ON PS.PresentationID = P.ID
-LEFT JOIN PresentationSpeakerSummitAssistanceConfirmationRequest AS SA ON PS.PresentationSpeakerID = SA.SpeakerID AND SA.SummitID = {$summit_id}
+LEFT JOIN PresentationSpeakerSummitAssistanceConfirmationRequest AS SA ON PS.PresentationSpeakerID = SA.SpeakerID AND SA.SummitID = {$summit->ID}
 INNER JOIN SummitAbstractLocation AS L ON L.ID = E.LocationID
 LEFT JOIN SummitVenueRoom AS R ON R.ID = L.ID
 LEFT JOIN SummitAbstractLocation AS L2 ON L2.ID = R.VenueID
 LEFT JOIN Member_Schedule AS A ON A.SummitEventID = E.ID
 LEFT JOIN PresentationSpeaker AS S ON S.ID = PS.PresentationSpeakerID
-WHERE E.Published = 1 AND DATE(E.StartDate) = '{$date}' AND E.SummitID = {$summit_id}
+WHERE E.Published = 1 AND E.StartDate > '{$start_date}' AND E.StartDate < '{$end_date}' AND E.SummitID = {$summit->ID}
 SQL;
         if ($event_type == 'presentation') {
             $query .= <<<SQL
