@@ -28,70 +28,79 @@ final class SapphireSummitAssistanceRepository extends SapphireRepository implem
     {
 
         $select = <<<SQL
-            SELECT
-            S.ID AS speaker_id,
-            Member.ID AS member_id,
-            IFNULL(CONCAT(Member.FirstName ,' ',Member.Surname), CONCAT(S.FirstName ,' ',S.LastName)) AS name,
-            IFNULL(Member.Email, SpeakerRegistrationRequest.Email) AS email,
-            O.Name AS company,
-            E.Title AS presentation,
-            PresentationCategory.Title AS track,
-            ACR.OnSitePhoneNumber AS phone,
-            ACR.IsConfirmed AS confirmed,
-            ACR.RegisteredForSummit AS registered,
-            ACR.CheckedIn AS checked_in
+SELECT 
+Q1.EventID as presentation_id,
+Q1.EventTitle as presentation, 
+Q1.SpeakerID as speaker_id,
+M.ID AS member_id,
+IFNULL(CONCAT(M.FirstName ,' ',M.Surname), CONCAT(SP.FirstName ,' ', SP.LastName)) AS name,
+IFNULL(M.Email, SPRR.Email) AS email,
+ACR.OnSitePhoneNumber AS phone,
+IFNULL(ACR.IsConfirmed, 0) AS confirmed,
+IFNULL(ACR.RegisteredForSummit, 0) AS registered,
+IFNULL(ACR.CheckedIn, 0) AS checked_in,
+O.Name AS company,
+PresentationCategory.Title AS track
 SQL;
 
         $from = <<<SQL
-            FROM SummitEvent AS E
-            INNER JOIN Presentation ON Presentation.ID = E.ID
-            %s
-            INNER JOIN PresentationCategory  ON PresentationCategory.ID = E.CategoryID
-            LEFT JOIN Member ON Member.ID = S.MemberID
-            LEFT JOIN SpeakerRegistrationRequest ON SpeakerRegistrationRequest.SpeakerID = S.ID
-            LEFT JOIN PresentationSpeakerSummitAssistanceConfirmationRequest AS ACR ON ACR.SpeakerID = S.ID AND ACR.SummitID = {$summit_id}
-            LEFT JOIN Affiliation AS A ON A.ID = (
+         FROM ( 
+SELECT E.ID AS EventID, E.Title AS EventTitle, IFNULL(SP.ID, SP2.ID) as SpeakerID, E.CategoryID 
+FROM SummitEvent AS E
+INNER JOIN Presentation AS P ON P.ID = E.ID
+LEFT JOIN Presentation_Speakers AS PS ON PS.PresentationID = P.ID
+LEFT JOIN PresentationSpeaker SP ON SP.ID = PS.PresentationSpeakerID
+LEFT JOIN PresentationSpeaker SP2 ON SP2.ID = P.ModeratorID
+WHERE 
+E.SummitID = {$summit_id}
+AND E.Published = 1 
+) 
+AS Q1
+INNER JOIN PresentationSpeaker SP ON SP.ID = Q1.SpeakerID
+INNER JOIN Member M ON SP.MemberID = M.ID
+INNER JOIN PresentationCategory  ON PresentationCategory.ID = Q1.CategoryID
+LEFT JOIN SpeakerRegistrationRequest SPRR ON SPRR.SpeakerID = SP.ID
+LEFT JOIN PresentationSpeakerSummitAssistanceConfirmationRequest ACR ON ACR.SpeakerID = SP.ID AND ACR.SummitID = {$summit_id}
+LEFT JOIN Affiliation AS A ON A.ID = (
                 SELECT ID FROM Affiliation
                 WHERE
-                Affiliation.MemberID = Member.ID
+                Affiliation.MemberID = M.ID
                 AND Affiliation.Current = 1
                 ORDER BY EndDate DESC
                 LIMIT 1
-            )
-            LEFT JOIN Org AS O ON O.ID = A.OrganizationID
-            WHERE
-            E.SummitID = {$summit_id}
-            AND E.Published = 1
+)
+LEFT JOIN Org AS O ON O.ID = A.OrganizationID
 SQL;
 
-        if ($search_term) {
-            $from .= " AND (SpeakerRegistrationRequest.Email = '$search_term' OR Member.Email = '$search_term'
-                       OR Member.Surname = '$search_term' OR S.LastName = '$search_term' OR O.Name = '$search_term')";
+$where = '';
+        if (!empty($search_term)) {
+            $search_term = Convert::raw2sql($search_term);
+            $where = "(SPRR.Email LIKE '%$search_term%' OR M.Email LIKE '%$search_term%'
+                       OR M.Surname LIKE '%$search_term%' OR SP.LastName LIKE '%$search_term%' OR O.Name LIKE '%$search_term%') ";
         }
 
         if ($filter != 'all') {
+
+            if(!empty($where))
+                $where .= 'AND ';
+
             if ($filter == 'hide_confirmed')
-                $from .= " AND ACR.IsConfirmed = 0";
+                $where .= " ACR.IsConfirmed = 0 ";
             else if ($filter == 'hide_registered')
-                $from .= " AND ACR.RegisteredForSummit = 0";
+                $where .= " ACR.RegisteredForSummit = 0 ";
             else if ($filter == 'hide_checkedin')
-                $from .= " AND ACR.CheckedIn = 0";
+                $where .= " ACR.CheckedIn = 0 ";
             else if ($filter == 'hide_all')
-                $from .= " AND ACR.IsConfirmed = 0 AND ACR.RegisteredForSummit = 0 AND ACR.CheckedIn = 0";
+                $where .= "  ( ACR.IsConfirmed = 0 AND ACR.RegisteredForSummit = 0 AND ACR.CheckedIn = 0 ) ";
         }
 
-        $from_1 = sprintf($from,'INNER JOIN Presentation_Speakers ON Presentation_Speakers.PresentationID = Presentation.ID
-            INNER JOIN PresentationSpeaker AS S ON S.ID = Presentation_Speakers.PresentationSpeakerID');
-
-        $from_2 = sprintf($from,'INNER JOIN PresentationSpeaker AS S ON S.ID = Presentation.ModeratorID');
-
+        if(!empty($where))
+            $where = ' WHERE '.$where;
 
         $query = <<<SQL
             {$select}
-            {$from_1}
-            UNION
-            {$select}
-            {$from_2}
+            {$from}
+            {$where}
             ORDER BY {$sort} {$sort_dir}
 SQL;
 
@@ -99,10 +108,8 @@ SQL;
         $query_count = <<<SQL
             SELECT COUNT(*) FROM (
                 {$select}
-                {$from_1}
-                UNION
-                {$select}
-                {$from_2}
+                {$from}
+                {$where}
             ) as q1
 SQL;
 
