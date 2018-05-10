@@ -85,13 +85,13 @@ $where = '';
                 $where .= 'AND ';
 
             if ($filter == 'hide_confirmed')
-                $where .= " ACR.IsConfirmed = 0 ";
+                $where .= " ( ACR.IsConfirmed = 0 OR ACR.IsConfirmed IS NULL) ";
             else if ($filter == 'hide_registered')
-                $where .= " ACR.RegisteredForSummit = 0 ";
+                $where .= " ( ACR.RegisteredForSummit = 0 OR ACR.RegisteredForSummit IS NULL ) ";
             else if ($filter == 'hide_checkedin')
-                $where .= " ACR.CheckedIn = 0 ";
+                $where .= " ( ACR.CheckedIn = 0 OR ACR.CheckedIn IS NULL ) ";
             else if ($filter == 'hide_all')
-                $where .= "  ( ACR.IsConfirmed = 0 AND ACR.RegisteredForSummit = 0 AND ACR.CheckedIn = 0 ) ";
+                $where .= "  ( ( ACR.IsConfirmed = 0 OR ACR.IsConfirmed IS NULL) AND ( ACR.RegisteredForSummit = 0 OR ACR.RegisteredForSummit IS NULL ) AND  ( ACR.CheckedIn = 0 OR ACR.CheckedIn IS NULL ) ) ";
         }
 
         if(!empty($where))
