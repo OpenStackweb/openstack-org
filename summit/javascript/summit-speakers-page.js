@@ -16,13 +16,13 @@ $(window).on("scroll", function(e) {
     var windows_scroll_top = $(window).scrollTop();
     if (windows_scroll_top > 147) {
         nav_char.css({top: 0, position:'fixed'});
-    }
-    else if(windows_scroll_top < 20){
-        $('.char-link').removeClass('active');
-        $('.char-link').addClass('inactive');
-    }
-    else {
+    } else {
         nav_char.css({top: 0, position:'relative'});
+
+        if(windows_scroll_top < 20){
+            $('.char-link').removeClass('active');
+            $('.char-link').addClass('inactive');
+        }
     }
 });
 
