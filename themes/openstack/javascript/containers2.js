@@ -79,5 +79,10 @@ $(document).ready(function(){
         scrollToSection(next_section, 0);
     });
 
+    $('#case-studies-btn').click(function(ev){
+        ev.preventDefault();
+        scrollToSection('case-studies', 0);
+    });
+
     window.onscroll = function () { scrollFunction() };
 });

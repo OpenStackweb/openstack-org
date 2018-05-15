@@ -622,7 +622,7 @@
                     </div>
                 </div>
                 <div class="studies">
-                    <a class="btn btn-primary" href="#case-studies" i title="Go to top">
+                    <a class="btn btn-primary" href="#" id="case-studies-btn" title="Go to top">
                         <span> Select Another Case Study </span>
                         <i class="fa fa-caret-up"></i>
                     </a>
