@@ -35,14 +35,9 @@ function topFunction() {
     $('.dropdown-toggle').html($('#ddl-intro').html());
 }
 
-// Open the Modal
-function openModal() {
-    document.getElementById('lightbox').style.display = "block";
-}
-
 // Close the Modal
 function closeModal() {
-    document.getElementById('lightbox').style.display = "none";
+    $('#lightbox').hide();
 }
 
 function scrollToSection(target, offset) {
@@ -82,6 +77,22 @@ $(document).ready(function(){
     $('#case-studies-btn').click(function(ev){
         ev.preventDefault();
         scrollToSection('case-studies', 0);
+    });
+
+    $('.dropdown-toggle').click(function () {
+        $('.navigation').addClass('highlighted')
+    });
+
+    $(window).click(function () {
+        $('.navigation').removeClass('highlighted');
+    });
+
+    $('.clickable-image').click(function(){
+        $('#lightbox').hide();
+
+        $('img', '#lightbox').attr('src', $(this).attr('src'));
+
+        $('#lightbox').show();
     });
 
     window.onscroll = function () { scrollFunction() };

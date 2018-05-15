@@ -68,6 +68,10 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
   box-shadow: none;
   padding: 0;
   margin-top: 2em;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
 .containers-page .navigation .dropdown .dropdown-menu li a {
@@ -131,7 +135,6 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
 }
 
 .containers-page .content .hover-shadow {
-
   border: solid 1px #E5E5E5;
 }
 
@@ -410,7 +413,15 @@ img.hover-shadow {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
 }
 
+
+
+.navigation.highlighted{
+  background-color: #30739C;
+}
+
+
 #btn-top {
   display: none;
 }
+
   

@@ -39,21 +39,16 @@
                         <a class="nav-link" href="#" data-target="case-studies">III. Case Studies</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" data-target="proyect-index">IV. Open Source Project Index</a>
+                        <a class="nav-link" href="#" data-target="conclusion">IV. Conclusion</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" data-target="conclusion">V. Conclusion</a>
+                        <a class="nav-link" href="#" data-target="proyect-index">V. Open Source Project Index</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" data-target="authors">VI. Authors</a>
                     </li>
                 </ul>
             </div>
-
-
-
-
-
 
         </div>
     </div>
@@ -87,6 +82,9 @@
                     and OpenStack offers the most comprehensive open source infrastructure for hosting applications.
                     OpenStack’s multi-tenant cloud infrastructure is a natural fit for Kubernetes, with several integration
                     points, deployment solutions, and ability to federate across multiple clouds.
+                </p>
+                <p class="text-center">
+                    <img src="themes/openstack/images/containers2/diagram.svg" alt="Table 1" class="hover-shadow clickable-image">
                 </p>
             </div>
         </div>
@@ -287,7 +285,7 @@
                     device pass through capabilities. Kata Containers delivers enhanced security, scalability and higher
                     resource utilization, while at the same time leading to an overall simplified stack.</p>
                 <p class="text-center">
-                    <img class="small-img" src="themes/openstack/images/containers2/containers.jpg" alt="Table 1">
+                    <img src="themes/openstack/images/containers2/kata-diagram.svg" alt="Intro" class="hover-shadow clickable-image">
                 </p>
             </div>
         </div>
@@ -630,9 +628,30 @@
             </div>
         </div>
 
+        <div class="row section" id="conclusion">
+            <div class="col-lg-12">
+
+
+                <h3 class="text-center title">IV. Conclusion</h3>
+                <p>Over the past few years, as containers have become an important tool for developers and organizations
+                    alike, OpenStack has leveraged its modular design and expansive community to integrate container
+                    technologies at many levels. This can be seen both by the various organizations bringing containers
+                    and OpenStack into production, and the number of projects that work alongside containers to deliver
+                    new capabilities. The OpenStack Foundation is committed to ensuring that emerging technologies can
+                    be incorporated and utilized within OpenStack, and containers are an important example of that commitment.</p>
+                <p>To learn more, visit the
+                    <a href="https://www.openstack.org/containers/"> Containers Landing Page </a>, where you can find a copy of this document as well as links to dozens
+                    of videos focused on the integrations of OpenStack and containers.
+                    <a href="https://github.com/kubernetes/community/tree/master/sig-openstack">
+                        Kubernetes SIG-OpenStack</a> has a Slack channel, mailing list, and weekly meeting if you engage
+                    directly with the community that’s building Kubernetes and OpenStack integrations.</p>
+            </div>
+
+        </div>
+
         <div class="row section" id="proyect-index">
             <div class="col-lg-12">
-                <h3 class="text-center title">IV. Open Source Project Index</h3>
+                <h3 class="text-center title">V. Open Source Project Index</h3>
 
                 <div id="accordion" class="panel-group">
                     <div class="panel">
@@ -954,26 +973,6 @@
                 </div>
             </div>
         </div>
-        <div class="row section" id="conclusion">
-            <div class="col-lg-12">
-
-
-                <h3 class="text-center title">V. Conclusion</h3>
-                <p>Over the past few years, as containers have become an important tool for developers and organizations
-                    alike, OpenStack has leveraged its modular design and expansive community to integrate container
-                    technologies at many levels. This can be seen both by the various organizations bringing containers
-                    and OpenStack into production, and the number of projects that work alongside containers to deliver
-                    new capabilities. The OpenStack Foundation is committed to ensuring that emerging technologies can
-                    be incorporated and utilized within OpenStack, and containers are an important example of that commitment.</p>
-                <p>To learn more, visit the
-                    <a href="https://www.openstack.org/containers/"> Containers Landing Page </a>, where you can find a copy of this document as well as links to dozens
-                    of videos focused on the integrations of OpenStack and containers.
-                    <a href="https://github.com/kubernetes/community/tree/master/sig-openstack">
-                        Kubernetes SIG-OpenStack</a> has a Slack channel, mailing list, and weekly meeting if you engage
-                    directly with the community that’s building Kubernetes and OpenStack integrations.</p>
-            </div>
-
-        </div>
 
         <div class="row section" id="authors">
             <div class="col-lg-12">
@@ -1046,9 +1045,8 @@
 <div id="lightbox" class="modal">
     <span class="close cursor" onclick="closeModal()">&times;</span>
     <div class="modal-content">
-
         <div class="mySlides">
-            <img src="themes/openstack/images/containers2/diagram.svg" style="width:100%">
+            <img src="" style="width:100%">
         </div>
     </div>
 </div>
