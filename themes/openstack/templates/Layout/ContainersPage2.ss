@@ -1,9 +1,11 @@
 </div>
 
 <div class="intro-header text-center">
-    <h1>Leveraging Containers and OpenStack:</h1>
+    <h1>Leveraging Containers and OpenStack</h1>
     <h2>A Comprehensive Review</h2>
 </div>
+
+
 
 
 
@@ -11,15 +13,12 @@
     <div class="navigation stick-top">
         <div class="container">
             <div class="group">
-
-                <button id="btnPrv" class="btn btn-link" disabled>
+                <button id="btnPrv" class="btn" disabled>
                     <i class="fa fa-caret-left"></i>
                 </button>
                 <button id="btnNxt" class="btn">
                     <i class="fa fa-caret-right"></i>
                 </button>
-
-
             </div>
 
             <div class="dropdown" role="tablist" id="chapters">
@@ -28,22 +27,25 @@
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                     <li class="nav-item">
-                        <a class="nav-link" href="#introduction" data-toggle="tab" role="tab" aria-controls="introduction" aria-selected="true">Introduction</a>
+                        <a class="nav-link" href="#" id="ddl-intro" data-target="introduction">Introduction</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#high-level" data-toggle="tab" role="tab" aria-controls="high-level" aria-selected="true">I. A High Level View of Containers in OpenStack</a>
+                        <a class="nav-link" href="#" data-target="high-level">I. A High Level View of Containers in OpenStack</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#integration-points" data-toggle="tab" role="tab" aria-controls="integration-points" aria-selected="true">II. OpenStack Container Integration Points</a>
+                        <a class="nav-link" href="#" data-target="integration-points">II. OpenStack Container Integration Points</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#case-studies" data-toggle="tab" role="tab" aria-controls="case-studies" aria-selected="true">III. Case Studies</a>
+                        <a class="nav-link" href="#" data-target="case-studies">III. Case Studies</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#proyect-index" data-toggle="tab" role="tab" aria-controls="project-index" aria-selected="true">IV. Open Source Project Index</a>
+                        <a class="nav-link" href="#" data-target="proyect-index">IV. Open Source Project Index</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#authors" data-toggle="tab" role="tab" aria-controls="authors" aria-selected="true">V. Authors</a>
+                        <a class="nav-link" href="#" data-target="conclusion">V. Conclusion</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-target="authors">VI. Authors</a>
                     </li>
                 </ul>
             </div>
@@ -52,12 +54,13 @@
 
 
 
+
         </div>
     </div>
     <div class="container content">
-        <div class="row tab-pane active" role="tabpanel" aria-labelledby="introduction" id="introduction">
+        <div class="row section" id="introduction">
             <div class="col-lg-12">
-                <h3 class="text-center">Introduction</h3>
+                <h3 class="text-center title">Introduction</h3>
                 <p>Imagine that you are tasked to build an entire private cloud infrastructure from the ground up. You have
                     a limited budget, a small but dedicated team, and are asked to pull off a miracle.
                 </p>
@@ -85,14 +88,11 @@
                     OpenStack’s multi-tenant cloud infrastructure is a natural fit for Kubernetes, with several integration
                     points, deployment solutions, and ability to federate across multiple clouds.
                 </p>
-                <p class="text-center">
-                    <img src="themes/openstack/images/containers2/intro.jpg" alt="Intro">
-                </p>
             </div>
         </div>
-        <div class="row tab-pane" role="tabpanel" aria-labelledby="high-level" id="high-level">
+        <div class="row section" id="high-level">
             <div class="col-lg-12">
-                <h3 class="text-center">I. A High Level View of Containers in OpenStack</h3>
+                <h3 class="text-center title">I. A High Level View of Containers in OpenStack</h3>
                 <p>There are three primary scenarios where containers and OpenStack intersect.</p>
                 <p>The first scenario, called infrastructure containers, allows operators to leverage containers in a way
                     that improves cloud infrastructure deployment, management, and operation. In this scenario, containers
@@ -134,9 +134,9 @@
             </div>
         </div>
 
-        <div class="row tab-pane" role="tabpanel" aria-labelledby="integration-points" id="integration-points">
+        <div class="row section" id="integration-points">
             <div class="col-lg-12">
-                <h3 class="text-center">II. OpenStack Container Integration Points</h3>
+                <h3 class="text-center title">II. OpenStack Container Integration Points</h3>
                 <h4 class="subtitle">Deploying OpenStack Infrastructure on Containers</h4>
                 <p>As noted in the introduction, the deployment and management of OpenStack has changed significantly with
                     the rise of containers, because containers unlock new approaches to managing infrastructure code.
@@ -159,7 +159,7 @@
                     systems for orchestration or a more modern approach like Kubernetes. Table 1 summarizes the existing
                     OpenStack deployment projects and their underlying technologies.</p>
                 <p class="text-center">
-                    <img src="themes/openstack/images/containers2/table.svg" alt="Table 1">
+                    <img src="themes/openstack/images/containers2/table.svg" alt="Table 1" >
                 </p>
                 <p>Underlying each of these deployment systems are different approaches to building a set of containers
                     for the OpenStack code and supporting services. The OpenStack Ansible (OSA) and Kolla projects provide
@@ -291,9 +291,9 @@
                 </p>
             </div>
         </div>
-        <div class="row tab-pane" role="tabpanel" aria-labelledby="case-studies" id="case-studies">
+        <div class="row section" id="case-studies">
             <div class="col-lg-12">
-                <h3 class="text-center">III. Case Studies</h3>
+                <h3 class="text-center title">III. Case Studies</h3>
                 <p>Many members of the OpenStack community are contributing new code to various OpenStack projects, evaluating
                     the implications and benefits of containers, and using containers in production to solve challenges
                     and unlock new capabilities. This section highlights some of the most interesting case studies.</p>
@@ -622,14 +622,17 @@
                     </div>
                 </div>
                 <div class="studies">
-                    <button class="btn btn-primary" onclick="topFunction()" id="btn-top" title="Go to top">  <span> Select Another Case Study </span><i class="fa fa-caret-up"></i></button>
+                    <a class="btn btn-primary" href="#case-studies" i title="Go to top">
+                        <span> Select Another Case Study </span>
+                        <i class="fa fa-caret-up"></i>
+                    </a>
                 </div>
             </div>
         </div>
 
-        <div class="row tab-pane" role="tabpanel" aria-labelledby="proyect-index" id="proyect-index">
+        <div class="row section" id="proyect-index">
             <div class="col-lg-12">
-                <h3 class="text-center">IV. Open Source Project Index</h3>
+                <h3 class="text-center title">IV. Open Source Project Index</h3>
 
                 <div id="accordion" class="panel-group">
                     <div class="panel">
@@ -949,7 +952,13 @@
                         </div>
                     </div>
                 </div>
-                <h4 class="subtitle">Conclusion</h4>
+            </div>
+        </div>
+        <div class="row section" id="conclusion">
+            <div class="col-lg-12">
+
+
+                <h3 class="text-center title">V. Conclusion</h3>
                 <p>Over the past few years, as containers have become an important tool for developers and organizations
                     alike, OpenStack has leveraged its modular design and expansive community to integrate container
                     technologies at many levels. This can be seen both by the various organizations bringing containers
@@ -963,11 +972,12 @@
                         Kubernetes SIG-OpenStack</a> has a Slack channel, mailing list, and weekly meeting if you engage
                     directly with the community that’s building Kubernetes and OpenStack integrations.</p>
             </div>
+
         </div>
 
-        <div class="row tab-pane" role="tabpanel" aria-labelledby="authors" id="authors">
+        <div class="row section" id="authors">
             <div class="col-lg-12">
-                <h3 class="text-center">V. Authors</h3>
+                <h3 class="text-center title">VI. Authors</h3>
                 <h4 class="subtitle">Members of the OpenStack SIG-Kubernetes Community</h4>
                 <p>
                     <small class="italic">(alphabetical by surname)</small>
@@ -1026,6 +1036,19 @@
         </div>
     </div>
     <div class="scroll-top">
-        <button class="btn btn-default" onclick="topFunction()" id="btn-top" title="Go to top"> <i class="fa fa-angle-up"></i> <span> Top</span></button>
+        <button class="btn btn-default" id="btn-top" onclick="topFunction()">
+            <i class="fa fa-angle-up"></i>
+            <span> Top</span>
+        </button>
     </div>
 </section>
+
+<div id="lightbox" class="modal">
+    <span class="close cursor" onclick="closeModal()">&times;</span>
+    <div class="modal-content">
+
+        <div class="mySlides">
+            <img src="themes/openstack/images/containers2/diagram.svg" style="width:100%">
+        </div>
+    </div>
+</div>
