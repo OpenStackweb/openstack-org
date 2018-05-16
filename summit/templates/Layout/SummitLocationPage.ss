@@ -51,7 +51,7 @@
                         <i class="fa fa-hotel fa-4x"></i>
                     </p>
                 <% end_if %>
-                $LocationsTextHeader
+                <!-- $LocationsTextHeader -->
             </div>
         </div>
         <% loop Hotels %>
