@@ -84,7 +84,7 @@
                     points, deployment solutions, and ability to federate across multiple clouds.
                 </p>
                 <p class="text-center">
-                    <img src="themes/openstack/images/containers2/diagram.svg" alt="Table 1" class="hover-shadow clickable-image">
+                    <img src="themes/openstack/images/containers2/intro-diagram.svg" alt="Table 1" class="hover-shadow clickable-image">
                 </p>
             </div>
         </div>
@@ -285,7 +285,7 @@
                     device pass through capabilities. Kata Containers delivers enhanced security, scalability and higher
                     resource utilization, while at the same time leading to an overall simplified stack.</p>
                 <p class="text-center">
-                    <img src="themes/openstack/images/containers2/kata-diagram.svg" alt="Intro" class="hover-shadow clickable-image">
+                    <img src="themes/openstack/images/containers2/kata-diagram-2.svg" alt="Intro" class="hover-shadow clickable-image">
                 </p>
             </div>
         </div>
