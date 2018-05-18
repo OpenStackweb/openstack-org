@@ -55,8 +55,21 @@ class SummitEntityOpenGraphObjectExtension extends OpenGraphObjectExtension
         return "";
     }
 
+    /**
+     * @return string
+     */
     public function getOGImage()
     {
-        return Director::absoluteURL('/themes/openstack/images/summit/openstacklogo-fb.png');
+        $summit = $this->owner->Summit();
+        if(is_null($summit))
+            return Director::absoluteURL('/themes/openstack/images/summit/openstacklogo-fb.png');
+
+        $page = SummitAppSchedPage::getBy($summit);
+
+        if(is_null($page))
+            return Director::absoluteURL('/themes/openstack/images/summit/openstacklogo-fb.png');
+
+        return $page->getOGImage();
+
     }
 }
