@@ -12,12 +12,17 @@ class PresentationPage extends SummitPage
         'LegalAgreement'           => 'HTMLText',
         'PresentationDeadlineText' => 'HTMLText',
         'VideoLegalConsent'        => 'HTMLText',
+        'PresentationSuccessText'  => 'HTMLText',
     );
 
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
-        $fields->addFieldsToTab('Root.Main', new HtmlEditorField('PresentationDeadlineText', 'Presentation Deadline Text'));
+        $fields->removeFieldFromTab("Root.Main","Content");
+        $fields->addFieldsToTab('Root.Main', $text = new HtmlEditorField('PresentationDeadlineText', 'Presentation Deadline Text'));
+        $text->setRows(5);
+        $fields->addFieldsToTab('Root.Main', $text = new HtmlEditorField('PresentationSuccessText', 'Presentation Success Text'));
+        $text->setRows(5);
         $fields->addFieldsToTab('Root.LegalAgreement', new HtmlEditorField('LegalAgreement', 'Legal Agreement'));
         $fields->addFieldsToTab('Root.VideoLegalConsent', new HtmlEditorField('VideoLegalConsent', 'Video Legal Consent'));
 
