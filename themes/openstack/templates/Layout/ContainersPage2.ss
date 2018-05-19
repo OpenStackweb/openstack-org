@@ -404,7 +404,7 @@
                                 <a href="#ansible" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion">Ansible</a>
                             </h4>
                         </div>
-                        <div id="ansible" class="panel-collapse collapse in">
+                        <div id="ansible" class="panel-collapse collapse">
                             <div class="panel-body">
                                 <p>Ansible is a commonly used orchestration tool used to deploy and manage OpenStack installations.</p>
                             </div>
