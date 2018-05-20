@@ -144,7 +144,7 @@
                 <p>Kata Containers is an excellent fit for both on-demand, event-based deployments such as continuous integration/continuous delivery, as well as longer running web server applications. Kata also enables an easier transition to containers from traditional virtualized environments, as it supports legacy guest kernels and device pass through capabilities. Kata Containers deliver enhanced security, scalability and higher resource utilization, while at the same time leading to an overall simplified stack.
                 </p>
                 <p class="text-center">
-                    <img src="themes/openstack/images/containers2/kata-diagram-2.svg" alt="Intro" class="hover-shadow clickable-image">
+                    <img src="themes/openstack/images/containers2/kata-diagram5-r2.svg" alt="Intro" class="hover-shadow clickable-image">
                 </p>
                 <h4 class="subtitle">Side-by-Side OpenStack and Kubernetes Integrations</h4>
                 <p>One of the primary benefits of choosing open source platforms is in the stability of interfaces across standard deployments of those platforms. Both the OpenStack Foundation and the Cloud Native Computing Foundation (CNCF) maintain interoperability standards for OpenStack clouds and Kubernetes clusters, guaranteeing that libraries, applications, and drivers will work across all platforms regardless of where they are deployed. This creates opportunities for side-by-side integrations, allowing both OpenStack and Kubernetes to take advantage of the resources provided by the other.
