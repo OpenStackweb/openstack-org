@@ -262,13 +262,13 @@ export const postNewComment = (comment) => (dispatch, getState) =>  {
 
 export const removeEventFromRsvp = (event) =>  (dispatch) => {
     return deleteRequest(
-        null,
         createAction(UPDATE_EVENT)(
             {
                 eventId: event.id,
                 mutator: event => ({ ...event, going: false })
             }
         ),
+        null,
         `api/v1/summits/${event.summit_id}/schedule/${event.id}/rsvp`,
         {},
         errorHandler,
@@ -277,13 +277,13 @@ export const removeEventFromRsvp = (event) =>  (dispatch) => {
 
 export const addEventToSchedule = (event) => (dispatch) => {
     return putRequest(
-        null,
         createAction(UPDATE_EVENT)(
             {
                 eventId: event.id,
                 mutator: event => ({ ...event, going: true })
             }
         ),
+        null,
         `api/v1/summits/${event.summit_id}/schedule/${event.id}`,
         {},
         errorHandler,
@@ -302,13 +302,13 @@ export const addEventToSchedule = (event) => (dispatch) => {
 
 export const removeEventFromSchedule = (event) => (dispatch) =>  {
     return deleteRequest(
-        null,
         createAction(UPDATE_EVENT)(
             {
                 eventId: event.id,
                 mutator: event => ({ ...event, going: false })
             }
         ),
+        null,
         `api/v1/summits/${event.summit_id}/schedule/${event.id}`,
         {},
         errorHandler,
@@ -317,13 +317,13 @@ export const removeEventFromSchedule = (event) => (dispatch) =>  {
 
 export const addEventToFavorites = (event) => (dispatch) => {
     return putRequest(
-        null,
         createAction(UPDATE_EVENT)(
             {
                 eventId: event.id,
                 mutator: event => ({ ...event, favorite: true })
             }
         ),
+        null,
         `api/v1/summits/${event.summit_id}/schedule/${event.id}/favorite`,
         {},
         errorHandler,
@@ -332,13 +332,13 @@ export const addEventToFavorites = (event) => (dispatch) => {
 
 export const removeEventFromFavorites = event => dispatch => {
     return deleteRequest(
-        null,
         createAction(UPDATE_EVENT)(
             {
                 eventId: event.id,
                 mutator: event => ({ ...event, favorite: false })
             }
         ),
+        null,
         `api/v1/summits/${event.summit_id}/schedule/${event.id}/favorite`,
         {},
         errorHandler,

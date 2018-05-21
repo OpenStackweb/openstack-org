@@ -81,8 +81,12 @@ export const getRequest =
 
     console.log(`url ${url.toString()}`);
 
-    if(requestActionCreator && typeof requestActionCreator === 'function')
-        dispatch(requestActionCreator(params));
+    if(requestActionCreator){
+        if(typeof requestActionCreator === 'function')
+            dispatch(requestActionCreator(params));
+        else
+            dispatch(requestActionCreator);
+    }
 
     const key = `${requestActionCreator().type}_${JSON.stringify(params || {})}`;
     cancel(key);
@@ -97,13 +101,15 @@ export const getRequest =
                 responseHandler(
                     dispatch,
                     json => {
-                        if(typeof receiveActionCreator === 'function') {
-                            dispatch(receiveActionCreator({
-                                response: json
-                            }));
-                            return resolve();
+                        if(receiveActionCreator){
+                            if(typeof receiveActionCreator === 'function') {
+                                dispatch(receiveActionCreator({
+                                    response: json
+                                }));
+                            }
+                            else
+                                dispatch(receiveActionCreator);
                         }
-                        dispatch(receiveActionCreator);
                         return resolve();
                     },
                     errorHandler
@@ -129,8 +135,12 @@ export const putRequest = (
 
     console.log(`url ${url.toString()}`);
 
-    if(requestActionCreator && typeof requestActionCreator === 'function')
-        dispatch(requestActionCreator(params));
+    if(requestActionCreator){
+        if(typeof requestActionCreator === 'function')
+            dispatch(requestActionCreator(params));
+        else
+            dispatch(requestActionCreator);
+    }
 
     return new Promise((resolve, reject) => {
         http.put(url.toString())
@@ -143,13 +153,15 @@ export const putRequest = (
                 responseHandler(
                     dispatch,
                     json => {
-                        if(typeof receiveActionCreator === 'function') {
-                            dispatch(receiveActionCreator({
-                                response: json
-                            }));
-                            return resolve();
+                        if(receiveActionCreator){
+                            if(typeof receiveActionCreator === 'function') {
+                                dispatch(receiveActionCreator({
+                                    response: json
+                                }));
+                            }
+                            else
+                                dispatch(receiveActionCreator);
                         }
-                        dispatch(receiveActionCreator);
                         return resolve();
                     },
                     errorHandler
@@ -167,8 +179,12 @@ export const deleteRequest = (
 ) => (params) => (dispatch) => {
     let url = URI(endpoint).toString();
 
-    if(requestActionCreator && typeof requestActionCreator === 'function')
-        dispatch(requestActionCreator(params));
+    if(requestActionCreator){
+        if(typeof requestActionCreator === 'function')
+            dispatch(requestActionCreator(params));
+        else
+            dispatch(requestActionCreator);
+    }
 
     return new Promise((resolve, reject) => {
         http.delete(url)
@@ -177,13 +193,15 @@ export const deleteRequest = (
                 responseHandler(
                     dispatch,
                     json => {
-                        if (typeof receiveActionCreator === 'function') {
-                            dispatch(receiveActionCreator({
-                                response: json
-                            }));
-                            return resolve();
+                        if(receiveActionCreator){
+                            if(typeof receiveActionCreator === 'function') {
+                                dispatch(receiveActionCreator({
+                                    response: json
+                                }));
+                            }
+                            else
+                                dispatch(receiveActionCreator);
                         }
-                        dispatch(receiveActionCreator);
                         return resolve();
                     },
                     errorHandler
@@ -207,20 +225,30 @@ export const postRequest = (
 
     console.log(`url ${url.toString()}`);
 
-    if(requestActionCreator && typeof requestActionCreator === 'function')
-        dispatch(requestActionCreator(params));
+    if(requestActionCreator){
+        if(typeof requestActionCreator === 'function')
+            dispatch(requestActionCreator(params));
+        else
+            dispatch(requestActionCreator);
+    }
+
     const req = http.post(url)
         .send(payload)
         .end(
             responseHandler(
                 dispatch,
                 json => {
-                    if(typeof receiveActionCreator === 'function') {
-                        dispatch(receiveActionCreator({
-                            response: json
-                        }));
+
+                    if(receiveActionCreator){
+                        if(typeof receiveActionCreator === 'function') {
+                            dispatch(receiveActionCreator({
+                                response: json
+                            }));
+                        }
+                        else
+                            dispatch(receiveActionCreator);
                     }
-                    dispatch(receiveActionCreator);
+
                 },
                 errorHandler
             )
