@@ -526,10 +526,10 @@ a.future-summit:hover:after {
 
 @media (max-width: 1200px) {
   #bs-example-navbar-collapse-1 {
-    display: none !important;
+    /*display: none !important;*/
   }
   #schedule-navbar-button {
-    display: block !important;
+    /*display: block !important;*/
   }
   .navbar-days .navbar-header {
     width: 100%;
@@ -538,10 +538,10 @@ a.future-summit:hover:after {
 
 @media (min-width: 1201px) {
   #bs-example-navbar-collapse-1 {
-    display: block !important;
+    /*display: block !important;*/
   }
   #schedule-navbar-button {
-    display: none !important;
+    /*display: none !important;*/
   }
 }
 
