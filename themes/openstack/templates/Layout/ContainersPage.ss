@@ -19,15 +19,15 @@
         <div class="row">
             <div class="col-sm-8">
                 <div class="intro-message">
-                    <h1>Deploy production-ready containers today</h1>
-                    <h3>Discover why Kubernetes, OpenShift, Mesos and Swarm run best on open infrastructure</h3>
+                    <h1>Leveraging OpenStack and Containers: A Comprehensive Review</h1>
+                    <h3>Download the white paper featuring case studies that illustrate the power of OpenStack and Kubernetes integration, as well as recent cross-community development milestones.</h3>
                 </div>
             </div> 
             <div class="col-sm-4">
                 <div class="download-container">
-                  <img src="/themes/openstack/images/containers-r/summit-logo-white.svg" class="summit-cta-logo" alt="">
-                    <div class="download-text">Want to build a strategy around containers and OpenStack? Check out sessions from OpenStack users in Sydney.</div>
-                    <a href="//www.openstack.org/videos/sydney-2017/tracks/containers" class="download-btn">Watch the Session Videos</a>
+                  <!-- <img src="/themes/openstack/images/containers-r/summit-logo-white.svg" class="summit-cta-logo" alt="">
+                    <div class="download-text">Get the whitepaper here.</div> -->
+                    <a href="//www.openstack.org/containers/whitepaper" class="download-btn">Download the Whitepaper</a>
                 </div>
             </div>
         </div>
