@@ -416,13 +416,17 @@ class SummitVideoAppBackend
             $image = $page->SummitImage();
         }
 
-        $image_url = 'summit-video-app/production/images/placeholder-image.jpg';
+        $default_image_url = 'summit-video-app/ui/production/images/placeholder-image.jpg';
+        $summit_image_url = 'summit-video-app/ui/production/images/summit-'.$s->ID.'.jpg';
 
-        if($image && $image->exists() && Director::fileExists($image->Filename)) {
-            $image_url = $image->CroppedImage(263, 148)->URL;
+        if (Director::fileExists($summit_image_url)) {
+            return $summit_image_url;
+        } else if($image && $image->exists() && Director::fileExists($image->Filename)) {
+            return $image->CroppedImage(263, 148)->URL;
+        } else {
+            return $default_image_url;
         }
 
-        return $image_url;
     }
 
     /**

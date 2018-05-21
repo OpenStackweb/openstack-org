@@ -352,11 +352,13 @@ button.more-btn {
             overflow: hidden;
             margin-bottom: 40px;
             box-sizing: border-box;
+            height: 220px;
             .gallery-image {
                 position: relative;
                 overflow: hidden;
                 img {
                     width: 100%;
+                    height: 148px;
                     z-index: 1;
                     margin: 0;
                 }
@@ -460,6 +462,11 @@ button.more-btn {
                 margin-right: 5px;
                 padding: 0 1px;
                 color: @blue;
+            }
+        }
+        .gallery-image {
+            &:before {
+                display: none;
             }
         }
     }
