@@ -21,7 +21,7 @@ trait Colorable
     {
         $color = $this->getField('Color');
         if(empty($color))
-            $color = 'f0f0ee';
+            $color = 'dbdbd6';
         if (strpos($color,'#') === false) {
             $color = '#'.$color;
         }
@@ -35,7 +35,7 @@ trait Colorable
     {
         $color = $this->getField('Color');
         if(empty($color))
-            $color = 'f0f0ee';
+            $color = 'dbdbd6';
         return $color;
     }
 }
