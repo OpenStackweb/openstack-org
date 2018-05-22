@@ -25,8 +25,8 @@
             </div> 
             <div class="col-sm-4">
                 <div class="download-container">
-                  <!-- <img src="/themes/openstack/images/containers-r/summit-logo-white.svg" class="summit-cta-logo" alt="">
-                    <div class="download-text">Get the whitepaper here.</div> -->
+                  <!-- <img src="/themes/openstack/images/containers-r/summit-logo-white.svg" class="summit-cta-logo" alt=""> -->
+                    <div class="download-text">Leveraging OpenStack and Containers: A Comprehensive Review</div>
                     <a href="//www.openstack.org/containers/whitepaper" class="download-btn">Download the Whitepaper</a>
                 </div>
             </div>
