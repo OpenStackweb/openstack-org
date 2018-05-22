@@ -378,29 +378,45 @@ class SummitVideoAppBackend
         $slide = $v->Presentation()->MaterialType('PresentationSlide');
         $links = [];
 
-        foreach( $v->Presentation()->getMaterialByType('PresentationLink') as $link){
-            $links[] = [
-              'url'   => $link->Link,
-              'title' => $link->Name
+        $raw_links = $v->Presentation()->getMaterialByType('PresentationLink');
+
+        if ($raw_links) {
+            foreach( $raw_links as $link){
+                $links[] = [
+                    'url'   => $link->Link,
+                    'title' => $link->Name
+                ];
+            }
+        }
+
+        $has_presentation = $v->Presentation()->Exists();
+        $summit_array = [];
+
+        if ($has_presentation) {
+            $summit_array = [
+                'id' => $v->Presentation()->SummitID,
+                'title' => $v->Presentation()->Summit()->Title,
+                'slug' => $v->Presentation()->Summit()->Slug
             ];
+        }
+
+        $video_date = date('Y-m-d', strtotime($v->DateUploaded));
+        if ($has_presentation) {
+            $video_date = $v->Presentation()->Summit()->convertDateFromUTC2TimeZone($v->DateUploaded, 'Y-m-d');
         }
 
         return [
             'id'            => $v->ID,
             'title'         => $v->Name,
-            'date'          => $v->Presentation()->Summit()->convertDateFromUTC2TimeZone($v->DateUploaded, 'Y-m-d'),
+            'date'          => $video_date,
             'dateUTC'       => $v->DateUploaded,
             'thumbnailURL'  => "//img.youtube.com/vi/{$v->YouTubeID}/mqdefault.jpg",
-            'summit'        => [
-                'id' => $v->Presentation()->SummitID,
-                'title' => $v->Presentation()->Summit()->Title,
-                'slug' => $v->Presentation()->Summit()->Slug
-            ],
+            'summit'        => $summit_array,
             'views'         => $v->Views,
             'youtubeID'     => $v->YouTubeID,
             'speakers'      => $speakers,
             'slides'        => $slide ? $slide->getSlideURL() : null,
-            'slug'          => $v->Presentation()->Slug ?: $v->ID,
+            'slug'          => $has_presentation ? $v->Presentation()->Slug : $v->ID,
             'tags'          => $tags,
             'track'         => $track,
             'links'         => $links,
