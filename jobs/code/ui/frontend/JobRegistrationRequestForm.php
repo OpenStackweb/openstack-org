@@ -77,7 +77,7 @@ final class JobRegistrationRequestForm extends HoneyPotForm {
         (
             [
                 new HtmlPurifierRequiredValidator('title','instructions','description'),
-                new RequiredFields('job_type','point_of_contact_name','point_of_contact_email')
+                new RequiredFields('job_type')
             ]
         );
 

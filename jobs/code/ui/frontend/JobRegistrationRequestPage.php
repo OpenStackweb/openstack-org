@@ -41,6 +41,9 @@ final class JobRegistrationRequestPage_Controller extends Page_Controller {
 	function init()	{
 		parent::init();
 
+        if(!Member::currentUser())
+            return OpenStackIdCommon::doLogin();
+
         Requirements::css(THIRDPARTY_DIR . '/jquery-ui-themes/smoothness/jquery-ui.css');
         Requirements::javascript(THIRDPARTY_DIR . '/jquery-ui/jquery-ui.js');
 

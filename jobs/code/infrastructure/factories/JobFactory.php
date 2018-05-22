@@ -99,7 +99,8 @@ final class JobFactory implements IJobFactory {
 	 * @return JobPointOfContact
 	 */
 	public function buildJobPointOfContact(array $data){
-		$contact = new JobPointOfContact(trim($data['point_of_contact_name']), trim($data['point_of_contact_email']));
+	    $member = Member::currentUser();
+		$contact = new JobPointOfContact($member->getName(), $member->Email);
 		return $contact;
 	}
 

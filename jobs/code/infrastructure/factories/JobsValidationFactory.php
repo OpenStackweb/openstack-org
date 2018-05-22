@@ -28,8 +28,6 @@ final class JobsValidationFactory implements IJobsValidationFactory{
 			'description'            => 'required|htmltext',
 			'instructions'           => 'required|htmltext',
 			'company'                => 'required|text',
-            'point_of_contact_name'  => 'required|text',
-			'point_of_contact_email' => 'required|email',
             'job_type'               => 'required|text',
 		);
 
@@ -40,10 +38,6 @@ final class JobsValidationFactory implements IJobsValidationFactory{
             'job_type.text'                   => ':attribute should be valid text.',
 			'title.max'                       => ':attribute should have less than 100 chars.',
 			'url.required'                    => ':attribute is required',
-			'point_of_contact_name.required'  => ':attribute is required',
-			'point_of_contact_name.text'      => ':attribute should be valid text.',
-			'point_of_contact_email.required' => ':attribute is required',
-			'point_of_contact_email.email'    => ':attribute should be valid email.',
 			'description.required'            => ':attribute is required',
 			'description.text'                => ':attribute should be valid text.',
 			'instructions.required'           => ':attribute is required',

@@ -14,6 +14,10 @@
  **/
 interface IJobRegistrationRequestManager
 {
+
+    const AutoAcceptJobPostPermissionSlug = 'AUTO_ACCEPT_JOB_POST';
+    const AutoRejectJobPostPermissionSlug = 'AUTO_REJECT_JOB_POST';
+
     /**
      * @param array $data
      * @return IJob

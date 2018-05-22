@@ -95,7 +95,18 @@ final class JobRegistrationRequestManager implements IJobRegistrationRequestMana
 			if($current_user){
 				$new_registration_request->registerUser($current_user);
 			}
-			$repository->add($new_registration_request);
+
+			$new_request_id = $new_registration_request->write();
+			$rejected = false;
+
+			if (!$current_user->isAdmin()) {
+                if (Permission::check(IJobRegistrationRequestManager::AutoAcceptJobPostPermissionSlug)) {  // Accept by default
+                    $this->postJobRegistrationRequest($new_request_id, Director::absoluteURL('community/jobs/'));
+                } else if (Permission::check(IJobRegistrationRequestManager::AutoRejectJobPostPermissionSlug)) {  // Reject by default
+                    $new_registration_request->markAsRejected();
+                    $rejected = true;
+                }
+            }
 
             //send email
             $jobs_group = Group::get()->filter('Code','jobs-managers')->first();
@@ -113,7 +124,8 @@ final class JobRegistrationRequestManager implements IJobRegistrationRequestMana
                 'SubmitterEmail'    => $new_registration_request->PointOfContactEmail,
                 'JobTitle'          => $new_registration_request->Title,
                 'JobSummary'        => $new_registration_request->Description,
-                'ReviewLink'        => Director::absoluteBaseURL().'sangria/ViewJobsDetails'
+                'ReviewLink'        => Director::absoluteBaseURL().'sangria/ViewJobsDetails',
+                'Rejected'          => $rejected
             ));
 
             $email->send();

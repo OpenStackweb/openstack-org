@@ -14,7 +14,7 @@
         <% if Legend %>
             <legend>$Legend</legend>
         <% end_if %>
-        <div id="point_of_contact_container" class="field text">
+        <%--<div id="point_of_contact_container" class="field text">
             <h2>Point Of Contact</h2>
 
             <p>Contact information will not be displayed on live site</p>
@@ -33,7 +33,7 @@
                     $Fields.dataFieldByName(point_of_contact_email)
                 </div>
             </div>
-        </div>
+        </div>--%>
 
         <div class="section_container">
             <h2>Job Information</h2>
