@@ -32,7 +32,7 @@ class SummitVideoOpenGraphObjectExtension extends PageOpenGraphObjectExtension
 
     public function getOGImage()
     {
-        return '//img.youtube.com/vi/'.$this->owner->YouTubeID.'/mqdefault.jpg';
+        return 'https://img.youtube.com/vi/'.$this->owner->YouTubeID.'/mqdefault.jpg';
     }
 
 }

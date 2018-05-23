@@ -5,6 +5,10 @@
     {
       "type": "vcs",
       "url": "https://github.com/smarcet/silverstripe-green"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/OpenStackweb/silverstripe-opengraph"
     }
   ],
   "require": {
@@ -34,7 +38,7 @@
     "fzaninotto/Faker": "^1.5",
     "phpoffice/phpexcel": "1.8.1",
     "google/apiclient": "^2.2",
-    "tractorcow/silverstripe-opengraph": "3.1.*@dev",
+    "tractorcow/silverstripe-opengraph": "dev-master",
     "symfony/process": "^3.1",
     "tractorcow/silverstripe-autocomplete": "^3.4",
     "unclecheese/silverstripe-green": "*",
