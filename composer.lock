@@ -3311,12 +3311,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/OpenStackweb/silverstripe-opengraph.git",
-                "reference": "3c993ff5cf132a697b08951a8190b6b73dc0088b"
+                "reference": "a5e36e14c5ab203ce199fcfc37eb323c920bd153"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OpenStackweb/silverstripe-opengraph/zipball/3c993ff5cf132a697b08951a8190b6b73dc0088b",
-                "reference": "3c993ff5cf132a697b08951a8190b6b73dc0088b",
+                "url": "https://api.github.com/repos/OpenStackweb/silverstripe-opengraph/zipball/a5e36e14c5ab203ce199fcfc37eb323c920bd153",
+                "reference": "a5e36e14c5ab203ce199fcfc37eb323c920bd153",
                 "shasum": ""
             },
             "require": {
@@ -3346,7 +3346,7 @@
                 "issues": "http://github.com/tractorcow/silverstripe-opengraph/issues",
                 "source": "https://github.com/OpenStackweb/silverstripe-opengraph/tree/master"
             },
-            "time": "2018-05-23 18:27:31"
+            "time": "2018-05-23 20:35:59"
         },
         {
             "name": "unclecheese/betterbuttons",
@@ -5323,12 +5323,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dependency-injection.git",
-                "reference": "c2741b26377804e3d70775a3ef29335685ee9b71"
+                "reference": "7a7861b03e66078baf90d0f94ca04ecd07276d55"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/c2741b26377804e3d70775a3ef29335685ee9b71",
-                "reference": "c2741b26377804e3d70775a3ef29335685ee9b71",
+                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/7a7861b03e66078baf90d0f94ca04ecd07276d55",
+                "reference": "7a7861b03e66078baf90d0f94ca04ecd07276d55",
                 "shasum": ""
             },
             "require": {
@@ -5386,7 +5386,7 @@
             ],
             "description": "Symfony DependencyInjection Component",
             "homepage": "https://symfony.com",
-            "time": "2018-05-18 01:58:36"
+            "time": "2018-05-24 07:11:23"
         },
         {
             "name": "symfony/dom-crawler",
