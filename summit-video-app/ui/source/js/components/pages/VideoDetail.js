@@ -54,6 +54,14 @@ class VideoDetail extends React.Component {
 						</div>
 						<div className="col-sm-4">
 							<div className="video-detail-panel">
+                                {video.moderator &&
+								<div className="detail-panel-section">
+									<h5 className="section-title">Moderator</h5>
+									<ul className="video-speakers-list">
+										<li><RouterLink link={`speakers/${video.moderator.id}/${video.moderator.name_slug}`}>{video.moderator.name}</RouterLink></li>
+									</ul>
+								</div>
+                                }
 								{video.speakers && video.speakers.length > 0 &&
                                 <div className="detail-panel-section">
                                     <h5 className="section-title">Speakers</h5>

@@ -357,6 +357,16 @@ class SummitVideoAppBackend
      */
     protected function createVideoJSON(PresentationVideo $v)
     {
+        $moderator = null;
+        $m = $v->Presentation()->Moderator();
+        if ($m->Exists()) {
+            $moderator = [
+                'id' => $m->ID,
+                'name' => $m->getName(),
+                'name_slug' => $m->getNameSlug()
+            ];
+        }
+
         $speakers = array_map(function ($s) {
             return [
                 'id' => $s->ID,
@@ -415,6 +425,7 @@ class SummitVideoAppBackend
             'views'         => $v->Views,
             'youtubeID'     => $v->YouTubeID,
             'speakers'      => $speakers,
+            'moderator'     => $moderator,
             'slides'        => $slide ? $slide->getSlideURL() : null,
             'slug'          => $has_presentation ? $v->Presentation()->Slug : $v->ID,
             'tags'          => $tags,
