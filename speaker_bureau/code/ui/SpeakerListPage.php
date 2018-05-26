@@ -54,7 +54,7 @@ class SpeakerListPage_Controller extends Page_Controller
 
         if (isset($_GET['letter'])) {
 
-            $requestedLetter = Convert::raw2xml($_GET['letter']);
+            $requestedLetter = Convert::raw2sql($_GET['letter']);
 
             if ($requestedLetter == 'intl') {
                 $likeString = "NOT LastName REGEXP '[A-Za-z0-9]'";

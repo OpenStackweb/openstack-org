@@ -5,7 +5,7 @@
 
             <div class="search_input">
                 <input id="search_form_input" class="text form-control acInput" name="search_query"
-                       placeholder="first name, last name, expertise, or company" value="{$getSearchQuery('search_query')}"/>
+                       placeholder="first name, last name, expertise, or company" value="{ $getSearchQuery('search_query').XML}"/>
             </div>
 
             <label class="left" for="filters" style="margin: 20px 0 10px 0;">Or Filter</label>
