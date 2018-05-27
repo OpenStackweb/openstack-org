@@ -112,11 +112,11 @@ class SummitVideoAppBackend
 
             case 'search':
                 $search = trim($criteria);
-                $search_words = explode(' ',$search);
+                /*$search_words = explode(' ',$search);
 
                 foreach ($search_words as $key => $search_word) {
                     // check for summit
-                    $summit = Summit::get()->filter('Title:PartialMatch', $search_word)->first();
+                    $summit = Summit::get()->filter('Title', $search_word)->first();
                     if ($summit) {
                         $videos = $videos->where('Summit.ID = '.$summit->ID);
                         unset($search_words[$key]);
@@ -124,12 +124,13 @@ class SummitVideoAppBackend
                     }
                 }
 
-                $search = implode(' ', $search_words);
+                $search = implode(' ', $search_words);*/
                 if (!empty($search)) {
                     $videos = $videos->where("
                         CONCAT(PresentationSpeaker.FirstName,' ',PresentationSpeaker.LastName) = '$search'
-                        OR PresentationSpeaker.FirstName LIKE '%$search%'
                         OR PresentationSpeaker.LastName LIKE '%$search%'
+                        OR CONCAT(Moderator.FirstName,' ',Moderator.LastName) = '$search'
+                        OR Moderator.LastName LIKE '%$search%'
                         OR PresentationCategory.Title LIKE '%$search%'
                         OR SummitEvent.Title LIKE '%$search%'"
                     );
@@ -143,8 +144,12 @@ class SummitVideoAppBackend
                         'Presentation_Speakers.PresentationID = Presentation.ID')
                     ->innerJoin('PresentationSpeaker',
                         'PresentationSpeaker.ID = Presentation_Speakers.PresentationSpeakerID')
+                    ->leftJoin('PresentationSpeaker',
+                        'Moderator.ID = Presentation.ModeratorID',
+                        'Moderator')
                     ->leftJoin('PresentationCategory', 'PresentationCategory.ID = SummitEvent.CategoryID')
                     ->limit($defaultLimit);
+
 
                 $search_results = $videos->toArray();
                 $unique_youtube_ids = [];
@@ -357,9 +362,12 @@ class SummitVideoAppBackend
      */
     protected function createVideoJSON(PresentationVideo $v)
     {
+        $speaker_list = $v->Presentation()->Speakers();
         $moderator = null;
         $m = $v->Presentation()->Moderator();
-        if ($m->Exists()) {
+
+
+        if ($m->Exists() && !$speaker_list->filter('ID', $m->ID)->Exists()) {
             $moderator = [
                 'id' => $m->ID,
                 'name' => $m->getName(),
@@ -373,7 +381,7 @@ class SummitVideoAppBackend
                 'name' => $s->getName(),
                 'name_slug' => $s->getNameSlug(),
             ];
-        }, $v->Presentation()->Speakers()->toArray());
+        }, $speaker_list->toArray());
 
         $tags = array_map(function ($t) {
             return [
