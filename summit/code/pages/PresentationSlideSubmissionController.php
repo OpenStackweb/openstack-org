@@ -93,6 +93,7 @@ class PresentationSlideSubmissionController extends Page_Controller
                 return $this->httpError(404, 'Sorry, it does not appear that you have any presentations.');
             }
 
+            Session::set('PresentationSlideSubmission.SpeakerID', $email->Speaker()->ID);
             // IF there's only one presentation with no media, go ahead and forward to it's page
             if ($presentations->count() == 1) {
                 $slide = $presentations->first()->MaterialType('PresentationSlide');
@@ -109,9 +110,7 @@ class PresentationSlideSubmissionController extends Page_Controller
 
             $data['Speaker']       = $email->Speaker();
             $data['Presentations'] = $presentations;
-            Session::set('PresentationSlideSubmission.SpeakerID', $email->Speaker()->ID);
             return $this->customise($data);
-
         }
         catch(Exception $ex)
         {

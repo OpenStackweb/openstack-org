@@ -1710,7 +1710,7 @@ class PresentationSpeaker extends DataObject
                     ->filter([
                         'SummitID'                 => intval($summit->ID),
                         'SpeakerID:ExactMatch:not' => $this->ID,
-                        'ConfirmationHash'         => PresentationSpeakerUploadPresentationMaterialEmail::HashConfirmationToken($token)
+                        'Hash'                     => PresentationSpeakerUploadPresentationMaterialEmail::HashConfirmationToken($token)
                     ])
                     ->count()) > 1;
         } while ($already_exists);
