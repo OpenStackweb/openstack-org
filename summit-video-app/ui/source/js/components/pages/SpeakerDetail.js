@@ -6,6 +6,7 @@ import Loader from '../ui/Loader';
 import BlockButton from '../ui/BlockButton';
 import RouterLink from '../containers/RouterLink';
 import Helmet from 'react-helmet';
+import VideoPanel from '../containers/VideoPanel';
 
 class SpeakerDetail extends React.Component {
 
@@ -59,7 +60,7 @@ class SpeakerDetail extends React.Component {
 					</div>
 				</div>
 				}
-				<DateGroupedVideoList videos={this.props.videos} />
+				<VideoPanel videos={this.props.videos} title='' />
 				{this.props.hasMore && !this.props.loading &&
 					<BlockButton onButtonClicked={this.loadMoreVideos} className="more-btn">
 						More videos

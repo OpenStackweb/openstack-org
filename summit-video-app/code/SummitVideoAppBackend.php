@@ -96,7 +96,10 @@ class SummitVideoAppBackend
                     $videos = $videos
                         ->innerJoin('Presentation', 'Presentation.ID = PresentationMaterial.PresentationID')
                         ->innerJoin('Presentation_Speakers', 'Presentation_Speakers.PresentationID = Presentation.ID')
-                        ->filter('Presentation_Speakers.PresentationSpeakerID', $speaker->ID);
+                        ->where("
+                            Presentation_Speakers.PresentationSpeakerID = $speaker->ID
+                            OR Presentation.ModeratorID = $speaker->ID 
+                        ");
                 } else {
                     $videos = ArrayList::create();
                 }
