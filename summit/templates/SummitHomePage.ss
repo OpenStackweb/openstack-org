@@ -21,10 +21,10 @@
                     A four-day conference for IT business leaders, cloud operators and developers covering the open infrastructure landscape.
                 </p>
                 <div class="summit-home-dates">
-                    May 21-24, 2018 in Vancouver, BC
+                    Nov 13-15, 2018 in Berlin
                 </div>
                 <div class="landing-action">
-                    <a href="/summit/vancouver-2018/" class="btn register-btn-lrg">Join Us<i class="fa fa-chevron-right"></i></a>
+                    <a href="/summit/berlin-2018/" class="btn register-btn-lrg">Join Us<i class="fa fa-chevron-right"></i></a>
                 </div>
             </div>
         </div>
@@ -57,9 +57,9 @@
                 </div>
             </div>
             <div class="col-sm-3 small-single-summit">
-                <a href="/summit/vancouver-2018/" class="single-summit current-summit">
+                <a href="/videos/summits/vancouver-2018/" class="single-summit current-summit">
                     <h2>Vancouver</h2>
-                    <h4>Coming Soon</h4>
+                    <h4>Watch The Sessions!</h4>
                 </a>
                 <div class="single-summit-date future">
                     May 21-24, 2018
@@ -69,7 +69,7 @@
             <div class="col-sm-3 small-single-summit">
                 <a href="/summit/berlin-2018/" class="single-summit future-summit2">
                     <h2>Berlin</h2>
-                    <h4>Get Ready</h4>
+                    <h4>Join Us</h4>
                 </a>
                 <div class="single-summit-date future">
                     Nov 13-15, 2018
