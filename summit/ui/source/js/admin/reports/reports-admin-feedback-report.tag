@@ -96,7 +96,11 @@
             self.getReport(1);
 
             $('#group-by').change(function(){
-                self.getReport(1);
+                if ($(this).val() == 'feedback') {
+                    self.getReportBySource(1);
+                } else {
+                    self.getReport(1);
+                }
             });
 
             $('.reports-wrapper').on('click','.sortable',function(){
