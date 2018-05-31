@@ -115,4 +115,3 @@
 </div>
 
 $ModuleJS('software_sample_configs')
-$ModuleCSS('software_sample_configs')

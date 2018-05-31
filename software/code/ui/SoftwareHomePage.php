@@ -281,7 +281,7 @@ class SoftwareHomePage_Controller extends Page_Controller
         (
             array
             (
-                'HasStatistics' => true,
+                'Status' => 'Current',
             )
         )->sort('ReleaseDate','DESC')->first();
     }

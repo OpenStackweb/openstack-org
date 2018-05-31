@@ -40,47 +40,16 @@ require('./t.tag');
             <div each={ current_config.core_components } class="col-md-4 col-sm-6">
                 <div class="core-services-single-full" onclick={ onComponentDetails }>
                     <div class="core-top">
-                    <div class="core-title" style="background: url({mascotImage(slug)}) no-repeat center center;">
-                        { code_name }
-                    </div>
+                        <div class="core-title" style="background: url({mascotImage(slug)}) no-repeat center center;">
+                            { code_name }
+                        </div>
                         <div class="core-service">
-                        { name }
+                            { name }
                         </div>
                         <div class="core-service-icon">
                             <i class="fa { icon_class }"></i>
                         </div>
                     </div>
-
-                <div class="core-stats-wrapper">
-                <div class="row">
-                <div class="col-sm-4 col-xs-4">
-                <div class="core-stat-graphic" if={ adoption > 0 }>
-                { adoption }%
-                </div>
-                <div class="core-stat-graphic off" if={ adoption == 0 }></div>
-                <div class={ core-stat-title:true, off:(adoption == 0) }>
-                	<t entity="Software.ADOPTION" text="Adoption" />
-                </div>
-                </div>
-                <div class="col-sm-4 col-xs-4">
-                <div class="core-stat-graphic" if={ maturity_points > 0 }>
-                { maturity_points } <span><t entity="Openstack.RANGE_OF" text="of" /></span> { this.max_maturity_points }
-                </div>
-                <div class="core-stat-graphic off" if={ maturity_points == 0 }></div>
-                <div class={ core-stat-title:true, off:(maturity_points == 0) }>
-                	<t entity="Software.MATURITY" text="Maturity" />
-                </div>
-                </div>
-                <div class="col-sm-4 col-xs-4">
-                <div class="core-stat-graphic">
-                { age} <span><t entity="Software.YEARS_ABBR" text="yrs" /></span>
-                </div>
-                <div class="core-stat-title">
-                	<t entity="Software.AGE" text="Age" />
-                </div>
-                </div>
-                </div>
-                </div>
                 </div>
             </div>
             

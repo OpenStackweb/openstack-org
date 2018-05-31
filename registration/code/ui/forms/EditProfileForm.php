@@ -95,7 +95,7 @@ class EditProfileForm extends SafeXSSForm
         $LinkedInProfileField->setAttribute('type', 'url')->setAttribute('pattern', 'https?://.+');
 
         // Associated Projects
-        $release = OpenStackRelease::get()->filter('HasStatistics', true)->sort('ReleaseDate','DESC')->first();
+        $release = OpenStackRelease::get()->filter('Status', 'Current')->sort('ReleaseDate','DESC')->first();
         $components = $release->OpenStackComponents()->sort(array('IsCoreService'=>'DESC', 'Order'=>'ASC'))->map('CodeName','Name')->toArray();
         $component_list = array();
         array_walk($components, function (&$value,$key) use (&$component_list) {
