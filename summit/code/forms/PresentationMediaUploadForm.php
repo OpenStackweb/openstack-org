@@ -74,9 +74,10 @@ class PresentationMediaUploadForm extends Form
      */
     public function doUpload($data, $form)
     {
-        $material          = PresentationSlide::create();
-        $material->Name    = $this->presentation->Title;
-        $material->SlideID = $data['Slide'];
+        $material                = PresentationSlide::create();
+        $material->Name          = $this->presentation->Title;
+        $material->DisplayOnSite = true;
+        $material->SlideID       = $data['Slide'];
         $material->write();
 
         $this->presentation->Materials()->filter([

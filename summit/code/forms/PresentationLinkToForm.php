@@ -79,10 +79,12 @@ class PresentationLinkToForm extends Form
             return $this->Controller()->redirectBack();
         }
 
-    	$material        = PresentationSlide::create();
-        $material->Name = $this->presentation->Title;
-    	$material->Link = $url;
+    	$material                = PresentationSlide::create();
+        $material->DisplayOnSite = true;
+        $material->Name          = $this->presentation->Title;
+    	$material->Link          = $url;
     	$material->write();
+
 		$this->presentation->Materials()->filter([
 			'ClassName' => 'PresentationSlide'
 		])->removeAll();
