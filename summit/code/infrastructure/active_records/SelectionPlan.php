@@ -18,14 +18,12 @@ class SelectionPlan extends DataObject implements ISelectionPlan
     use TimeZoneEntity;
 
     /**
-     * @var  string
+     * @return string
      */
-    private $TimeZoneIdentifier;
-
-    public function __construct($record = null, $isSingleton = false, $model = null) {
-        parent::__construct($record, $isSingleton, $model);
+    public function getTimeZoneIdentifier(){
         if($this->SummitID > 0)
-            $this->setTimeZoneIdentifier($this->Summit()->TimeZoneIdentifier);
+            return $this->Summit()->TimeZoneIdentifier;
+        return "";
     }
 
     static $db = array
