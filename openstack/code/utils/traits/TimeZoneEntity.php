@@ -14,6 +14,20 @@
 
 trait TimeZoneEntity
 {
+    /**
+     * @return string
+     */
+    public function getTimeZoneIdentifier(){
+        return $this->TimeZoneIdentifier;
+    }
+
+    /**
+     * @param string $time_zone_identifier
+     */
+    public function setTimeZoneIdentifier($time_zone_identifier){
+        $this->TimeZoneIdentifier = $time_zone_identifier;
+    }
+
     public function setDateTimeFromLocalToUTC($value, $field)
     {
         if (!empty($value)) {
@@ -33,7 +47,7 @@ trait TimeZoneEntity
     public function getEntityTimeZone()
     {
         // @see http://php.net/manual/en/timezones.php
-        $time_zone_identifier = $this->TimeZoneIdentifier;
+        $time_zone_identifier = $this->getTimeZoneIdentifier();
         if (empty($time_zone_identifier)) {
             return null;
         }
@@ -51,7 +65,7 @@ trait TimeZoneEntity
      */
     public function convertDateFromTimeZone2UTC($value, $format = "Y-m-d H:i:s")
     {
-        $time_zone_identifier = $this->TimeZoneIdentifier;
+        $time_zone_identifier = $this->getTimeZoneIdentifier();
         if (empty($time_zone_identifier)) {
             return $value;
         }
@@ -79,7 +93,7 @@ trait TimeZoneEntity
      */
     public function convertDateFromUTC2TimeZone($value, $format = "Y-m-d H:i:s")
     {
-        $time_zone_identifier = $this->TimeZoneIdentifier;
+        $time_zone_identifier = $this->getTimeZoneIdentifier();
         if (empty($time_zone_identifier)) {
             return $value;
         }
@@ -107,7 +121,7 @@ trait TimeZoneEntity
      */
     public function getTimeZoneName()
     {
-        $time_zone_identifier = $this->TimeZoneIdentifier;
+        $time_zone_identifier = $this->getTimeZoneIdentifier();
         if (empty($time_zone_identifier)) {
             return 'Not Set';
         }
@@ -116,7 +130,7 @@ trait TimeZoneEntity
 
     public function getTimeZoneOffsetFriendly()
     {
-        $time_zone_identifier = $this->TimeZoneIdentifier;
+        $time_zone_identifier = $this->getTimeZoneIdentifier();
         if (empty($time_zone_identifier)) {
             return 'Not Set';
         }
