@@ -25,8 +25,8 @@ final class SapphireSummitRepository extends SapphireRepository implements ISumm
 
     public function isDuplicated(ISummit $summit)
     {
-        $start_date = $summit->getBeginDate();
-        $end_date = $summit->getEndDate();
+        $start_date = $summit->getSummitBeginDate();
+        $end_date = $summit->getSummitEndDate();
         $dupe = Summit::get_one("Summit",
             "Name = '" . $summit->getName() . "' AND SummitBeginDate = '" . $start_date . "'  AND SummitEndDate = '" . $end_date . "'");
 

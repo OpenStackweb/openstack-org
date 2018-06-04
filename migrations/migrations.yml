@@ -109,3 +109,4 @@ migrations:
   - SummitTimeZoneMigration
   - SummitAboutPageSectionsMigration
   - CreateJobPostersGroupMigration
+  - SummitSelectionPlansMigration

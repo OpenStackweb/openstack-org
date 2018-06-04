@@ -38,7 +38,7 @@ final class EventbriteSummitOrderConciliation extends CronTask
         try
         {
             $init_time  = time();
-            foreach(Summit::getNotFinished() as $summit) {
+            foreach(Summit::get_not_finished() as $summit) {
                 if(empty($summit->ExternalEventId)){
                     echo sprintf("skipping summit id %s bc ExternalEventId is not set", $summit->ID).PHP_EOL;
                 }

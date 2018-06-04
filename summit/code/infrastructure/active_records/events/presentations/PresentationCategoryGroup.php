@@ -32,6 +32,10 @@ class PresentationCategoryGroup extends DataObject
         'Categories' => 'PresentationCategory'
     );
 
+    private static $belongs_many_many = array(
+        'SelectionPlans' => 'SelectionPlan'
+    );
+
     private static $has_one = array
     (
         'Summit'   => 'Summit'
@@ -90,9 +94,7 @@ class PresentationCategoryGroup extends DataObject
 
         if($this->ID > 0) {
             $config = new GridFieldConfig_RelationEditor(100);
-            $config->removeComponentsByType('GridFieldEditButton');
             $config->removeComponentsByType('GridFieldAddNewButton');
-            $config->addComponent(new GridFieldDeleteAction('unlinkrelation'));
             $completer = $config->getComponentByType('GridFieldAddExistingAutocompleter');
             $completer->setSearchList(PresentationCategory::get()->filter('SummitID', $summit_id));
             $categories = new GridField('Categories', 'Presentation Category', $this->Categories(), $config);
@@ -100,9 +102,7 @@ class PresentationCategoryGroup extends DataObject
         }
 
         $f->addFieldToTab('Root.Main', new HtmlEditorField('Description','Description'));
-
         $f->addFieldToTab('Root.Main', new HiddenField('SummitID','SummitID'));
-
 
         return $f;
     }
@@ -117,7 +117,6 @@ class PresentationCategoryGroup extends DataObject
         if(!$valid->valid()) return $valid;
 
         $summit_id = isset($_REQUEST['SummitID']) ?  $_REQUEST['SummitID'] : $this->SummitID;
-
         $summit   = Summit::get()->byID($summit_id);
 
         if(!$summit){

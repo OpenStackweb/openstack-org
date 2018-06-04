@@ -28,7 +28,7 @@ export default class PresentationTags extends React.Component {
 						{
 							if (t.Tag != '') {
 								return (
-									<a className="btn btn-xs btn-default" href="" onClick={(e) => this.handleClick(e, t.Tag)}>
+									<a key={'tag_'+t.Tag} className="btn btn-xs btn-default" href="" onClick={(e) => this.handleClick(e, t.Tag)}>
                                         {t.Tag}
 									</a>
 								);

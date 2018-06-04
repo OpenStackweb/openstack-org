@@ -63,12 +63,6 @@ final class SummitAppLocationsApi extends AbstractRestfulJsonApi
 
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
 
-            if(!$summit->isDayBelongs($day))
-                throw new EntityValidationException
-                (
-                    sprintf('day %s does not belongs to summit id %s', $day, $summit_id)
-                );
-
             $response = array
             (
                 'day'       => $day,

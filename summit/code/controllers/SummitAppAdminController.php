@@ -220,4 +220,56 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         return time();
     }
 
+    /**
+     * @return string past,present,future
+     */
+    public function isPlanStageTime($summit, $plan, $stage)
+    {
+        $start = $stage . 'BeginDate';
+        $end = $stage . 'EndDate';
+        $start_date = strtotime($plan->convertDateFromUTC2TimeZone($plan->getField($start)));
+        $end_date = strtotime($plan->convertDateFromUTC2TimeZone($plan->getField($end)));
+        $local_date = strtotime($summit->getLocalTime());
+
+        if ($local_date > $end_date) {
+            return 'past';
+        } else if ($local_date < $start_date) {
+            return 'future';
+        } else {
+            return 'present';
+        }
+    }
+
+    /**
+     * @return string past,present,future
+     */
+    public function isSummitStageTime($summit, $stage)
+    {
+
+        $start = $stage . 'BeginDate';
+        $end = $stage . 'EndDate';
+        $start_date = strtotime($summit->convertDateFromUTC2TimeZone($summit->getField($start)));
+        $end_date = strtotime($summit->convertDateFromUTC2TimeZone($summit->getField($end)));
+        $local_date = strtotime($summit->getLocalTime());
+
+        if ($local_date > $end_date) {
+            return 'past';
+        } else if ($local_date < $start_date) {
+            return 'future';
+        } else {
+            return 'present';
+        }
+    }
+
+    public function getStageStatusClass($code) {
+
+        if ($code == -1) {
+            return 'future';
+        } else if ($code == 1) {
+            return 'past';
+        } else {
+            return 'present';
+        }
+    }
+
 }

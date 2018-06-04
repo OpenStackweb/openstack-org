@@ -3,7 +3,9 @@
         <div class="presentation-app-header">
             <div class="container">
                 <p class="status"><i class="fa fa-calendar"></i>&nbsp;
-                Currently accepting presentation submissions until <strong>$ActiveSummit.SubmissionEndDate.Format('F jS, Y')</strong>.</p>
+                    Currently accepting presentation submissions until
+                    <strong>$ActiveSummit.getOpenSelectionPlanForStage().SubmissionEndDate.Format('F jS, Y')</strong>.
+                </p>
             </div>
         </div>
     <% end_if %>
