@@ -149,6 +149,7 @@
                         capacity   : {$Capacity},
                         venue_id   : {$Up.VenueID},
                         link       : "{$Link.JS}",
+                        floor      : "{$Up.Name.JS}"
                     };
                 <% end_loop %>
             <% end_loop %>

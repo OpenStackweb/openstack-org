@@ -14,6 +14,8 @@ class MainFilterFields extends Component {
         $(this.refs.ddl_tags).on('change', e => route(e, 'tags'))
         $(this.refs.ddl_levels).chosen({ width: '100%' })
         $(this.refs.ddl_levels).on('change', e => route(e, 'levels'))
+        $(this.refs.ddl_rooms).chosen({ width: '100%' })
+        $(this.refs.ddl_rooms).on('change', e => route(e, 'room'))
 
         const { setFilters } = this.props
 
@@ -28,6 +30,7 @@ class MainFilterFields extends Component {
         $(this.refs.ddl_tracks).trigger("chosen:updated")
         $(this.refs.ddl_tags).trigger("chosen:updated")
         $(this.refs.ddl_levels).trigger("chosen:updated")
+        $(this.refs.ddl_rooms).trigger("chosen:updated")
     }
 
     render() {
@@ -35,6 +38,17 @@ class MainFilterFields extends Component {
             ScheduleProps: { summit },
             filters: { values, expanded, allowedTracks }
         } = this.props;
+
+        let grouped_locations = {};
+
+        for (var room_id in summit.locations ) {
+            let room = summit.locations[room_id];
+            room.id = room_id;
+            if (room.class_name == 'SummitVenueRoom') {
+                if (!grouped_locations[room.floor]) grouped_locations[room.floor] = [];
+                grouped_locations[room.floor].push(room);
+            }
+        }
 
         return (
         <div id="all-events-filter-wrapper" style={{display: 'block'}}
@@ -102,6 +116,29 @@ class MainFilterFields extends Component {
                     ))}
                 </select>
             </div>
+            {summit.should_show_venues &&
+            <div className="col-sm-15 col-xs-12 single-filter-wrapper">
+                <label className="filter-label">Rooms</label>
+                <select ref="ddl_rooms" data-placeholder="Rooms" value={values.room || ''} onChange={() => false}>
+                    <option value=""> All Rooms </option>
+                    {Object.keys(grouped_locations).map(
+                        (floor, index) => {
+                            let rooms = grouped_locations[floor];
+                            let room_opts = rooms.map(r => (
+                                <option key={'room_' + r.id} value={r.id}>
+                                    {r.name}
+                                </option>
+                            ));
+                            return (
+                                <optgroup label={floor} key={'floor_'+index}>
+                                    {room_opts}
+                                </optgroup>
+                            );
+                        }
+                    )}
+                </select>
+            </div>
+            }
         </div>
     )}
 }

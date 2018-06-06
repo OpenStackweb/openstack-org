@@ -202,7 +202,7 @@
 
                     window.ReactScheduleGridProps = {
                         ScheduleProps : {
-                            month: "{$Summit.Month}",
+                            month: "{$Summit.Month()}",
                             summit: summit,
                             base_url: "{$Top.Link}",
                             search_url: "{$Top.Link(global-search)}",

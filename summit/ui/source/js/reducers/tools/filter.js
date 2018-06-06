@@ -1,7 +1,7 @@
 const EventListFilter = {
 
     events(filters, events, summit) {
-        const { tags, going, tracks, levels, favorites,
+        const { tags, room, going, tracks, levels, favorites,
                 event_types, track_groups } = filters
 
         const unmatchedEvents = events.filter(event => {
@@ -11,6 +11,7 @@ const EventListFilter = {
                 tracks       && ! this.matchTracks(event, tracks) ||
                 levels       && ! this.matchLevels(event, levels) ||
                 tags         && ! this.matchTags(event, tags) ||
+                room         && ! this.matchRoom(event, room) ||
                 going        && ! this.matchGoing(event, going) ||
                 favorites    && ! this.matchFavorites(event, favorites)
             )
@@ -52,6 +53,13 @@ const EventListFilter = {
         return event.tags_id.some(tagId => {
             return filterValue.indexOf(tagId.toString()) >= 0
         });
+    },
+
+    matchRoom(event, filterValue) {
+        if ( ! event.hasOwnProperty('location_id')) {
+            return false;
+        }
+        return filterValue.indexOf(event.location_id) >= 0
     },
 
     matchGoing(event, filterValue) {
