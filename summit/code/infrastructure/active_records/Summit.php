@@ -137,7 +137,7 @@ class Summit extends DataObject implements ISummit
             return $valid->error(sprintf('Summit Title %s already exists!. please set another one', $this->Title));
         }
 
-        $time_zone = TimeZoneIdentifier;
+        $time_zone = $this->TimeZoneIdentifier;
         if (empty($time_zone)) {
             return $valid->error('Time Zone is required!');
         }
