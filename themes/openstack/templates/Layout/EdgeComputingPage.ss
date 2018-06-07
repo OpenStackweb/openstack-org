@@ -442,21 +442,21 @@
             <div class="row">
                 <div class="col-sm-8">
                     <h3>Everything you need to know about Open Infrastructure + Edge Computing</h3>
-                    <p>Learn how organizations like AT&T, Verizon and Vodafone are using OpenStack to implement an edge computing architecture.
+                    <p>Open infrastructure operators and developers shared architectures, technology requirements and the open source components required for edge computing.
                     </p>
                     <p>&nbsp;</p>
                     <div class="nfv-summit-register-btn">
-                        <a href="/summit/vancouver-2018/summit-schedule/global-search?t=Edge" class="nfv-summit-btn" target="_blank">Watch the Session Videos <i class="fa fa-chevron-right"></i></a>
+                        <a href="/videos/vancouver-2018/tracks/edge-infra" class="nfv-summit-btn" target="_blank">Watch the Session Videos <i class="fa fa-chevron-right"></i></a>
                     </div>
                 </div>
                 <div class="col-sm-4">
                     <div class="nfv-summit-right">
                         <img class="nfv-summit-logo" src="/themes/openstack/images/summit-logo-small.svg" alt="OpenStack Summit">
                         <div class="nfv-summit-dates containers">
-                            May 21-24, 2018 in Vancouver
+                            Nov 13-15, 2018 in Berlin
                         </div>
                         <div class="nfv-summit-register-btn">
-                            <a href="https://www.openstack.org/summit/vancouver-2018/" class="nfv-summit-btn red" target="_blank">Join Us in Vancouver <i class="fa fa-chevron-right"></i></a>
+                            <a href="https://www.openstack.org/summit/berlin-2018/" class="nfv-summit-btn red" target="_blank">Join Us in Berlin <i class="fa fa-chevron-right"></i></a>
                         </div>
                     </div>
                 </div>

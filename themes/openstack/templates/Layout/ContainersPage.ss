@@ -288,16 +288,27 @@
     <!-- End Featured Content -->
     <!-- Passport Promo -->
     <div class="hero">
-        <div class="container">
-            <div class=“row”>
-                <div class="col-sm-3 logo">
-                    <img src="/marketplace/code/ui/frontend/images/logo.svg" alt="">
+      <div class="summit-promo containers">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3>Everything you need to know about Containers and Open Infrastructure</h3>
+                    <p>From container security to use cases combining Kubernetes or Kata Containers with other technologies, over 100 sessions share how organizations are achieving results with container technologies.  
+                    </p>
+                    <p>&nbsp;</p>
+                    <div class="nfv-summit-register-btn">
+                        <a href="/videos/vancouver-2018/tracks/container-infra" class="nfv-summit-btn" target="_blank">Watch the Session Videos <i class="fa fa-chevron-right"></i></a>
+                    </div>
                 </div>
-                <div class="col-sm-9 text">
-                    <h3>The OpenStack Public Cloud Passport</h3>
-                    <p>With more than <strong>60 availability zones across more than 20 countries</strong>, OpenStack providers collectively represent the broadest public cloud footprint.</p>
-                    <p>Explore the  OpenStack Global Passport Program, a collaborative effort between OpenStack public cloud providers that lets you experience the freedom, performance and interoperability of open source infrastructure.</p>
-                    <a href="/passport" class="btn">Try Out a Public Cloud <i class="fa fa-arrow-circle-down"></i></a>
+                <div class="col-sm-4">
+                    <div class="nfv-summit-right">
+                        <img class="nfv-summit-logo" src="/themes/openstack/images/summit-logo-small.svg" alt="OpenStack Summit">
+                        <div class="nfv-summit-dates containers">
+                            Nov 13-15, 2018 in Berlin
+                        </div>
+                        <div class="nfv-summit-register-btn">
+                            <a href="https://www.openstack.org/summit/berlin-2018/" class="nfv-summit-btn red" target="_blank">Join Us in Berlin <i class="fa fa-chevron-right"></i></a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

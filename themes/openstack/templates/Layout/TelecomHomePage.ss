@@ -221,27 +221,27 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
-                    <h3>Everything you need to know about OpenStack and Edge Computing</h3>
+                    <h3>Hear how the world’s leading telecoms are using Open Infrastructure for NFV and Edge Computing</h3>
                     <p>
-                        Operators from 10 organizations including AT&T, Verizon, Walmart Lab, Ericsson and Red Hat collaborated to define technology requirements and use cases for edge computing. Download Cloud Edge Computing: Beyond the Data Center. 
+                        Telecoms including AT&T, Verizon, Orange, China Mobile and T-Mobile shared how they’re integrating open source technologies to power their infrastructure for use cases ranging from edge computing and NFV to 5G. 
                     </p>
                     <p>&nbsp;</p>
 
                     <div class="nfv-summit-register-btn">
-                        <a href="/edge" class="nfv-summit-btn" target="_blank">Learn More <i class="fa fa-chevron-right"></i></a>
+                        <a href="/videos/vancouver-2018/tracks/telecom-nfv " class="nfv-summit-btn" target="_blank">Learn More <i class="fa fa-chevron-right"></i></a>
                     </div>
                 </div>
-                <!-- <div class="col-sm-4">
+                <div class="col-sm-4">
                     <div class="nfv-summit-right">
-                        <img class="nfv-summit-logo" src="/themes/openstack/static/images/summit-logo-small-white.svg" alt="OpenStack Summit">
-                        <div class="nfv-summit-dates">
-                            May 8-11, 2017 in Boston
+                        <img class="nfv-summit-logo" src="/themes/openstack/images/summit-logo-small.svg" alt="OpenStack Summit">
+                        <div class="nfv-summit-dates containers">
+                            Nov 13-15, 2018 in Berlin
                         </div>
                         <div class="nfv-summit-register-btn">
-                            <a href="" class="nfv-summit-btn" target="_blank">NFV Sessions Coming Soon <i class="fa fa-chevron-right"></i></a>
+                            <a href="https://www.openstack.org/summit/berlin-2018/" class="nfv-summit-btn red" target="_blank">Join Us in Berlin <i class="fa fa-chevron-right"></i></a>
                         </div>
                     </div>
-                </div> -->
+                </div>
             </div>
         </div>
     </div>
