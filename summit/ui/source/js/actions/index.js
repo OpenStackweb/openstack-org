@@ -28,6 +28,7 @@ export const DEFAULT_FILTERS = {
     tracks       : null,
     tags         : null,
     levels       : null,
+    room         : null,
     going        : false,
     favorites    : false,
 };

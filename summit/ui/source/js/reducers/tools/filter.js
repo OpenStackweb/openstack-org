@@ -59,7 +59,10 @@ const EventListFilter = {
         if ( ! event.hasOwnProperty('location_id')) {
             return false;
         }
-        return filterValue.indexOf(event.location_id) >= 0
+
+        let room_id = (Array.isArray(filterValue)) ? filterValue[0] : filterValue;
+
+        return parseInt(room_id) == event.location_id;
     },
 
     matchGoing(event, filterValue) {
