@@ -136,13 +136,24 @@ a.testimonial-link {
 .summit-promo {
   width: 100%; 
 }
-  .summit-promo.nfv {
-    background: url(/assets/edge/edgebg-wp.jpg);
-    padding: 60px 0 90px;
-    margin-bottom: -52px;
-    background-size: cover;
-    background-position: center bottom;
-  }
+
+.summit-promo.containers {
+  background: url(/assets/Uploads/YVR-hero-image2.jpg);
+  padding: 60px 0 90px;
+  margin-bottom: -52px;
+  background-size: cover;
+  background-position: center bottom;
+}
+
+.summit-promo.containers .nfv-summit-right .nfv-summit-dates.containers {
+  color: white;
+  font-size: 1.1em;
+  margin-bottom: 20px;
+  font-style: italic; }
+
+.summit-promo.containers .nfv-summit-right .nfv-summit-btn.red {
+  background: #b9301d; }
+
   .summit-promo.nfv h3 {
     color: white; }
   .summit-promo.nfv p {

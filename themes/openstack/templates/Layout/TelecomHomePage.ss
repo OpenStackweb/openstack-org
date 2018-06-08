@@ -217,10 +217,10 @@
     <!-- End Featured Content -->
 
     <!-- Summit Promo -->
-    <div class="summit-promo nfv">
+    <div class="summit-promo containers">
         <div class="container">
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-sm-8">
                     <h3>Hear how the world’s leading telecoms are using Open Infrastructure for NFV and Edge Computing</h3>
                     <p>
                         Telecoms including AT&T, Verizon, Orange, China Mobile and T-Mobile shared how they’re integrating open source technologies to power their infrastructure for use cases ranging from edge computing and NFV to 5G. 
