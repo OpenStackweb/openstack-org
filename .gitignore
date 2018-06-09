@@ -98,4 +98,3 @@ gettext/Locale/*
 themes/openstack/images
 npm-debug.log
 *.log
-package-lock.json
