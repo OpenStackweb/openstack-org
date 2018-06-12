@@ -28,15 +28,15 @@ class SelectionPlan extends DataObject implements ISelectionPlan
 
     static $db = array
     (
-        'Name'                  => 'Varchar(255)',
-        'Enabled'               => 'Boolean(1)',
-        'SubmissionBeginDate'   => 'SS_Datetime',
-        'SubmissionEndDate'     => 'SS_Datetime',
-        'VotingBeginDate'       => 'SS_Datetime',
-        'VotingEndDate'         => 'SS_Datetime',
-        'SelectionBeginDate'    => 'SS_Datetime',
-        'SelectionEndDate'      => 'SS_Datetime',
-        'MaxSubmissionsPerUser' => 'Int'
+        'Name'                          => 'Varchar(255)',
+        'Enabled'                       => 'Boolean(1)',
+        'SubmissionBeginDate'           => 'SS_Datetime',
+        'SubmissionEndDate'             => 'SS_Datetime',
+        'VotingBeginDate'               => 'SS_Datetime',
+        'VotingEndDate'                 => 'SS_Datetime',
+        'SelectionBeginDate'            => 'SS_Datetime',
+        'SelectionEndDate'              => 'SS_Datetime',
+        'MaxSubmissionAllowedPerUser'   => 'Int'
     );
 
     static $has_one = array
@@ -110,7 +110,7 @@ class SelectionPlan extends DataObject implements ISelectionPlan
         $date->getDateField()->setConfig('dateformat', 'dd/MM/yyyy');
         $fields->addFieldToTab('Root.Main', new HiddenField('SummitID'));
 
-        $fields->addFieldToTab('Root.Main', new NumericField('MaxSubmissionsPerUser', 'Max. Submissions Per User'));
+        $fields->addFieldToTab('Root.Main', new NumericField('MaxSubmissionAllowedPerUser', 'Max. Submissions Per User'));
 
         if($this->ID > 0)
         {
@@ -271,7 +271,7 @@ class SelectionPlan extends DataObject implements ISelectionPlan
     }
 
     public function getMaxSubmissions() {
-        $max_submissions = $this->getField('MaxSubmissionsPerUser');
+        $max_submissions = $this->MaxSubmissionAllowedPerUser;
         if (!$max_submissions && $this->SummitID) {
             $max_submissions = $this->Summit()->MaxSubmissionAllowedPerUser;
         }
