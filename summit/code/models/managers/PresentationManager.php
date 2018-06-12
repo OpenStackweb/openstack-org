@@ -94,7 +94,7 @@ final class PresentationManager implements IPresentationManager
 
         if($summit->isCallForSpeakersOpen())
         {
-            $max_per_summit = intval($summit->MaxSubmissionAllowedPerUser);
+            $max_per_summit = intval($summit->getOpenSelectionPlanForStage('Submission')->getMaxSubmissions());
             // zero means infinity
             if ($max_per_summit === 0) $max_per_summit = PHP_INT_MAX;
 
@@ -139,7 +139,7 @@ final class PresentationManager implements IPresentationManager
 
         if($summit->isCallForSpeakersOpen() && $summit->isPublicCategory($category))
         {
-            $max_per_summit     = intval($summit->MaxSubmissionAllowedPerUser);
+            $max_per_summit     = intval($summit->getOpenSelectionPlanForStage('Submission')->getMaxSubmissions());
             //zero means infinity
             if($max_per_summit === 0) $max_per_summit = PHP_INT_MAX;
 
@@ -182,7 +182,7 @@ final class PresentationManager implements IPresentationManager
         $found_private = false;
 
         if($summit->isCallForSpeakersOpen() && $summit->isPublicCategory($category)) {
-            $res          = intval($summit->MaxSubmissionAllowedPerUser);
+            $res          = intval($summit->getOpenSelectionPlanForStage('Submission')->getMaxSubmissions());
             $found_public = true;
         }
 

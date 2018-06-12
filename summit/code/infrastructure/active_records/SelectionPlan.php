@@ -36,6 +36,7 @@ class SelectionPlan extends DataObject implements ISelectionPlan
         'VotingEndDate'         => 'SS_Datetime',
         'SelectionBeginDate'    => 'SS_Datetime',
         'SelectionEndDate'      => 'SS_Datetime',
+        'MaxSubmissionsPerUser' => 'Int'
     );
 
     static $has_one = array
@@ -109,6 +110,7 @@ class SelectionPlan extends DataObject implements ISelectionPlan
         $date->getDateField()->setConfig('dateformat', 'dd/MM/yyyy');
         $fields->addFieldToTab('Root.Main', new HiddenField('SummitID'));
 
+        $fields->addFieldToTab('Root.Main', new NumericField('MaxSubmissionsPerUser', 'Max. Submissions Per User'));
 
         if($this->ID > 0)
         {
@@ -266,5 +268,14 @@ class SelectionPlan extends DataObject implements ISelectionPlan
     public function isSelectionOpen()
     {
         return $this->getStageStatus('Selection') === Summit::STAGE_OPEN;
+    }
+
+    public function getMaxSubmissions() {
+        $max_submissions = $this->getField('MaxSubmissionsPerUser');
+        if (!$max_submissions && $this->SummitID) {
+            $max_submissions = $this->Summit()->MaxSubmissionAllowedPerUser;
+        }
+
+        return $max_submissions;
     }
 }
