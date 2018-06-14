@@ -44,9 +44,12 @@
                                             <a href="$PreviewLink"> $getTitleNice() </a>
                                         <% end_if %>
                                     </td>
+                                    <td class="item-selection-plan">
+                                        <% if $SelectionPlan.Exists() %> $SelectionPlan.Name <% end_if %>
+                                    </td>
                                     <% if $Status %>
                                         <td class="status <% if isPublished() %> accepted <% end_if %>">
-                                            <i class="fa fa-tag"></i> $getStatusNice()
+                                            <i class="fa fa-tag"></i>&nbsp;$getStatusNice()
                                         </td>
                                     <% else %>
                                         <td class="status"></td>
@@ -84,9 +87,16 @@
                                             <a href="$PreviewLink"> $getTitleNice() </a>
                                         <% end_if %>
                                     </td>
-                                    <td class="status <% if isPublished() %> accepted <% end_if %>">
-                                        <i class="fa fa-tag"></i> $getStatusNice()
+                                    <td>
+                                        <% if $SelectionPlan.Exists() %> $SelectionPlan.Name <% end_if %>
                                     </td>
+                                    <% if $Status %>
+                                        <td class="status <% if isPublished() %> accepted <% end_if %>">
+                                            <i class="fa fa-tag"></i>&nbsp;$getStatusNice()
+                                        </td>
+                                    <% else %>
+                                        <td class="status"></td>
+                                    <% end_if %>
                                     <td class="action">
                                         <% if $CanDelete && $Top.canEditPresentation($ID) %><a href="$DeleteLink">Delete</a><% end_if %>
                                     </td>
@@ -113,9 +123,16 @@
                                             <a href="$PreviewLink"> $getTitleNice() </a>
                                         <% end_if %>
                                     </td>
-                                    <td class="status <% if isPublished() %> accepted <% end_if %>">
-                                        <i class="fa fa-tag"></i> $getStatusNice()
+                                    <td>
+                                        <% if $SelectionPlan.Exists() %> $SelectionPlan.Name <% end_if %>
                                     </td>
+                                    <% if $Status %>
+                                        <td class="status <% if isPublished() %> accepted <% end_if %>">
+                                            <i class="fa fa-tag"></i>&nbsp;$getStatusNice()
+                                        </td>
+                                    <% else %>
+                                        <td class="status"></td>
+                                    <% end_if %>
                                     <td class="action">
                                         <% if $CanDelete && $Top.canEditPresentation($ID) %><a href="$DeleteLink">Delete</a><% end_if %>
                                     </td>

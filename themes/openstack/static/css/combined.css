@@ -1712,13 +1712,23 @@ a.who-section-cta {
 
 td.item-name {
   padding-left: 20px !important;
-  width: 70%; }
+  width: 60%; }
   td.item-name .fa {
     padding-right: 7px;
     margin-left: -20px; }
 
 td.action {
-  text-align: right; }
+  text-align: right;
+  width: 60px;
+}
+
+td.status {
+  text-align: right;
+}
+
+td.status .fa {
+  display: inline;
+}
 
 .presentation-title, .presentation-status {
   float: left; }

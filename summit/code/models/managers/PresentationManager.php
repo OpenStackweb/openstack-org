@@ -270,8 +270,9 @@ final class PresentationManager implements IPresentationManager
         $summit = $presentation->Summit();
         if(!$summit->Active) return false;
         $category = $presentation->Category();
+        $selection_plan = $presentation->SelectionPlan();
 
-        if($summit->isCallForSpeakersOpen() && $summit->isPublicCategory($category)) return true;
+        if($selection_plan && $selection_plan->isCallForPresentationsOpen() && $summit->isPublicCategory($category)) return true;
 
         // check member private categories groups
         if($speaker->Member()->exists() && $groups = $this->getPrivateCategoryGroupsFor($speaker->Member(), $summit))
@@ -374,9 +375,10 @@ final class PresentationManager implements IPresentationManager
             if(isset($data['OtherTopic']))
                 $presentation->OtherTopic = trim($data['OtherTopic']);
 
-            $presentation->SummitID      = $summit->getIdentifier();
-            $presentation->CreatorID     = $creator->ID;
-            $presentation->Progress      = Presentation::PHASE_SUMMARY;
+            $presentation->SummitID         = $summit->getIdentifier();
+            $presentation->SelectionPlanID  = $summit->getOpenSelectionPlanForStage('Submission')->ID;
+            $presentation->CreatorID        = $creator->ID;
+            $presentation->Progress         = Presentation::PHASE_SUMMARY;
             // add creator as speaker
             $presentation->Speakers()->Add($speaker);
             $presentation->write();
