@@ -49,6 +49,10 @@ class SelectionPlan extends DataObject implements ISelectionPlan
         'CategoryGroups'    => 'PresentationCategoryGroup',
     );
 
+    private static $has_many = [
+        'Presentations'                => 'Presentation',
+    ];
+
     private static $summary_fields = array
     (
         'ID'        => 'ID',
@@ -63,16 +67,22 @@ class SelectionPlan extends DataObject implements ISelectionPlan
         }
 
         if ($this->Enabled) {
-            $other_selection_plans = $this->Summit()->getActiveSelectionPlans()->filter('ID:not', $this->ID);
-            foreach ($other_selection_plans as $plan) {
-                if ($plan->SubmissionBeginDate < $this->SubmissionEndDate && $plan->SubmissionEndDate > $this->SubmissionBeginDate) {
-                    return $valid->error('Submission Dates are in conflict with plan ' . $plan->Name);
-                }
-                if ($plan->VotingBeginDate < $this->VotingEndDate && $plan->VotingEndDate > $this->VotingBeginDate) {
-                    return $valid->error('Voting Dates are in conflict with plan ' . $plan->Name);
-                }
-                if ($plan->SelectionBeginDate < $this->SelectionEndDate && $plan->SelectionEndDate > $this->SelectionBeginDate) {
-                    return $valid->error('Selection Dates are in conflict with plan ' . $plan->Name);
+            // we neeed to test against all current and future summits
+            $utc_now = new DateTime('now', new DateTimeZone('UTC'));
+            $summits = Summit::get()->where("( SummitBeginDate <= '".$utc_now->format('Y-m-d H:i:s'). "' AND SummitEndDate >= '".$utc_now->format('Y-m-d H:i:s')."') OR ( SummitBeginDate > '".$utc_now->format('Y-m-d H:i:s')."' )")->toArray();
+            $summits = array_merge($summits, [$this->Summit()]);
+            foreach($summits as $summit) {
+                $other_selection_plans = $summit->getActiveSelectionPlans()->filter('ID:not', $this->ID);
+                foreach ($other_selection_plans as $plan) {
+                    if ($plan->SubmissionBeginDate < $this->SubmissionEndDate && $plan->SubmissionEndDate > $this->SubmissionBeginDate) {
+                        return $valid->error('Submission Dates are in conflict with plan ' . $plan->Name .' from Summit '.$summit->Title);
+                    }
+                    if ($plan->VotingBeginDate < $this->VotingEndDate && $plan->VotingEndDate > $this->VotingBeginDate) {
+                        return $valid->error('Voting Dates are in conflict with plan ' . $plan->Name.' from Summit '.$summit->Title);
+                    }
+                    if ($plan->SelectionBeginDate < $this->SelectionEndDate && $plan->SelectionEndDate > $this->SelectionBeginDate) {
+                        return $valid->error('Selection Dates are in conflict with plan ' . $plan->Name.' from Summit '.$summit->Title);
+                    }
                 }
             }
         }
