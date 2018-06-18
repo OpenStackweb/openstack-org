@@ -97,6 +97,8 @@
     justify-content: center; }
 .coa-partners .coa-partner-logo {
     text-align: center;
+    height: 90px;
+    margin-top: 2%;
 }
 .coa-partners .coa-partner-logo img {
     max-width: 100%;
@@ -106,6 +108,8 @@
 @media (max-width: 767px) {
     .coa-partners .coa-partner-logo {
         max-width: 100%;
+        height: 50px;
+        margin-top: 1%;
     }
 /*    .coa-partners .coa-partners-row .coa-partner-logo img {
         max-width: 100%; }*/
