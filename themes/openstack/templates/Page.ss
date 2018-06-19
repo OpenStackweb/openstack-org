@@ -21,8 +21,12 @@
     <link rel="manifest" href="/favicon/manifest.json"> 
     <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#5bbad5"> 
 
+    <!-- Cookie Bot -->
+    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="e11e4375-71b9-426d-a76d-61eae3ddc08f" type="text/javascript" async></script>
+    <script id="CookieDeclaration" src="https://consent.cookiebot.com/e11e4375-71b9-426d-a76d-61eae3ddc08f/cd.js" type="text/javascript" async></script>
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+      <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
         <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -46,7 +50,6 @@
     <% include Quantcast %>
     <% include TwitterUniversalWebsiteTagCode %>
     <% include GoogleAdWordsSnippet %>
-
 
   </body>
     <% include Page_LinkedinInsightTracker %>
