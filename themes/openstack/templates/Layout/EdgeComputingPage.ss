@@ -182,7 +182,6 @@
                     <p>
                     <a href="http://lists.openstack.org/cgi-bin/mailman/listinfo/edge-computing" class="edgeml-download-btn">
                         Join the mailing list  <i class="fa fa-chevron-circle-right"></i>
-                    </a>&nbsp;&nbsp;<a href="http://lists.openstack.org/cgi-bin/mailman/listinfo/edge-computing" class="edgeml-download-btn">Join the mailing list  <i class="fa fa-chevron-circle-right"></i>
                     </a>
                     </p>
 
