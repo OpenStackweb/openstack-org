@@ -46,8 +46,8 @@
             <div class="row">
                 <div class="col-sm-4 col-sm-offset-1">
                   <div class="earth"><img src="https://www.openstack.org/assets/edge/lilearth.png"></div>
-                  <p>Attend the weekly Edge Computing Group calls.</p>
-                  <a href="https://etherpad.openstack.org/p/2017_edge_computing_working_sessions" target="_blank" class="download-btn"><em>Join the Meeting</em></a>
+                  <p>Catch us on IRC, or see the schedule and agenda for Edge Computing Group calls.</p>
+                  <a href="https://wiki.openstack.org/wiki/Edge_Computing_Group" target="_blank" class="download-btn"><em>Learn more about Edge Computing Group</em></a>
                 </div>
                 <div class="col-sm-4 col-sm-offset-2">
                   <div class="plane"><img src="https://www.openstack.org/assets/edge/daplane.png"></div>
@@ -180,11 +180,11 @@
                         OpenStack is already the most highly distributed infrastructure software, running in thousands of datacenters around the world, and many users in the telecom and retail industries are working now to advance the edge computing use case with OpenStack. 
                     </p>
                     <p>
-                        Subscribe to our maililng list to learn more about Edge Computing.
-                    </p>
                     <a href="http://lists.openstack.org/cgi-bin/mailman/listinfo/edge-computing" class="edgeml-download-btn">
                         Join the mailing list  <i class="fa fa-chevron-circle-right"></i>
+                    </a>&nbsp;&nbsp;<a href="http://lists.openstack.org/cgi-bin/mailman/listinfo/edge-computing" class="edgeml-download-btn">Join the mailing list  <i class="fa fa-chevron-circle-right"></i>
                     </a>
+                    </p>
 
                 </div>
             </div>

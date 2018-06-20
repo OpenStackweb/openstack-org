@@ -50,6 +50,8 @@ a.edge-download-btn, a.edgeml-download-btn {
     width: 90%;
     font-weight: normal;
     font-size: 15px;
+    text-align: center;
+
 }
 
 a.edgeml-download-btn {
