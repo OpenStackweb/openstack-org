@@ -31,15 +31,19 @@ class HotKeyOption extends React.Component {
 		}
 	}
 	selectOption () {
-		const { onSelected, eventKey } = this.props;
-		onSelected && onSelected(eventKey);
+		const { onSelected, eventKey, disabled } = this.props;
+
+		if (!disabled) {
+            onSelected && onSelected(eventKey);
+		}
 	}
 
 
 	render () {
 		let classes = [
 			this.props.className,
-			this.props.selected ? 'current-vote' : ''
+			this.props.selected ? 'current-vote' : '',
+			this.props.disabled ? 'disabled' : ''
 		].join(' ');
 
 		return React.createElement(

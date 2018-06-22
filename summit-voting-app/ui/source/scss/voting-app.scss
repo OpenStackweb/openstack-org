@@ -508,6 +508,9 @@ li.voting-rate-single:hover,
 li.current-vote {
     background: #29abe2;
 }
+li.voting-rate-single.disabled a {
+    cursor: not-allowed !important;
+}
 li.voting-rate-single a {
     text-transform: uppercase;
     text-align: center;

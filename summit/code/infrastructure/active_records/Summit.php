@@ -492,15 +492,17 @@ class Summit extends DataObject implements ISummit
     public function isVotingOpen()
     {
         foreach ($this->getActiveSelectionPlans() as $plan) {
-            if ($plan->isVotingOpen())
+            if ($plan->isVotingOpen()) {
                 return true;
+            }
         }
-
         return false;
     }
 
     public function getNiceVotingEnd($timezone_name = 'UTC'){
-        $dt = new DateTime($this->getField('VotingEndDate'), new DateTimeZone('UTC'));
+        $end_date = $this->getOpenSelectionPlanForStage('Voting')->VotingEndDate;
+
+        $dt = new DateTime($end_date, new DateTimeZone('UTC'));
         $timezone = new DateTimeZone($timezone_name);
         $dt->setTimezone($timezone);
         return sprintf("%s at %s %s", $dt->format('l, F d'), $dt->format('H:i A'), $dt->format('T'));

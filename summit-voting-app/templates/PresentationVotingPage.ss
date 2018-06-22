@@ -59,9 +59,11 @@
                            <div class="voting-app-title">
                               <h1>
                                  Vote For Presentations
-                                 <span>
-                                 Deadline:  $Top.CurrentSummit.getNiceVotingEnd(America/Los_Angeles) / $Top.CurrentSummit.getNiceVotingEnd(UTC)
-                                 </span>
+                                 <% if $Top.CurrentSummit.isVotingOpen %>
+                                     <span>
+                                       Deadline:  $Top.CurrentSummit.getNiceVotingEnd(America/Los_Angeles) / $Top.CurrentSummit.getNiceVotingEnd(UTC)
+                                     </span>
+                                 <% end_if %>
                               </h1>
                            </div>
                         </div>

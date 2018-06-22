@@ -194,10 +194,18 @@ class PresentationVotingPage_API extends RequestHandler
         $presentations = [];
         $offset = $r->getVar('offset') ?: 0;
         $m      = Member::currentUser();
+        $selection_plan = $this->summit->getOpenSelectionPlanForStage('Voting');
+        $category = $r->getVar('category');
+
+        if (!$category && $selection_plan) {
+            $category_ids = array_map(function($cat){ return $cat->ID; }, $selection_plan->getVotingCategories());
+            $category = implode(',', $category_ids);
+        }
+
         $list   = $m ? $m->getRandomisedPresentations(null, $this->summit) : $this->summit->VoteablePresentations();
         if($list) {
-            if ($r->getVar('category')) {
-                $list = $list->filter(['CategoryID' => $r->getVar('category')]);
+            if ($category) {
+                $list = $list->where('CategoryID IN (' . $category . ')');
             }
             if ($r->getVar('search')) {
                 $list = Presentation::apply_search_query($list, $r->getVar('search'));
