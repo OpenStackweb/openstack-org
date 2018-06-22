@@ -3,21 +3,19 @@
     <!-- Begin Page Content -->
     <div class="analysts-hero">
 	<div class="container">
-		<h1>Global OpenStack adoption increases across industry and company size</h1>
+		<h1>Insights from Analysts Covering OpenStack</h1>
 
 		<div id="analysts-quote-carousel" class="carousel slide" data-ride="carousel">
 		  <!-- Wrapper for slides -->
 		  <div class="carousel-inner" role="listbox">
 		    <div class="item active">
 		      <div class="carousel-caption">
-		        “Outside of the US, especially in China, [OpenStack adoption] momentum is increasing across the board and is not limited by industry or company size. The once skeptical and conservative telco industry has gone all in on OpenStack.”
+		        &quot;The numbers speak for themselves: More than 50% of the Fortune 100 use OpenStack, …. And a third of global enterprise infrastructure decision makers see expanding the use of open source as a critical or high priority.&quot;
 		        <div class="attribute">
-		        	- Forrester, "<a href="
-https://reprints.forrester.com/#/assets/2/480/RES140151/reports" target="_blank">OpenStack Fights To Defend Its Claim As A Standard</a>,” October 2017
+		        	- Forrester, "<a href="https://reprints.forrester.com/#/assets/2/480/RES140932/reports" target="_blank">The I&O Pro’s Guide to Enterprise Open Source Cloud Adoption, Q1 2018</a>", March 2018
 		        </div>
 						<div>
-							<a href="
-https://reprints.forrester.com/#/assets/2/480/RES140151/reports"class="promo-btn" target="_blank">Download the Report <i class="fa fa-chevron-right"></i></a>
+							<a href="https://reprints.forrester.com/#/assets/2/480/RES140932/reports" target="_blank">Download the Report <i class="fa fa-chevron-right"></i></a>
 						</div>
 		      </div>
 		    </div>
