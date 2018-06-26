@@ -50,9 +50,9 @@
                   <a href="https://wiki.openstack.org/wiki/Edge_Computing_Group" target="_blank" class="download-btn"><em>Learn more about Edge Computing Group</em></a>
                 </div>
                 <div class="col-sm-4 col-sm-offset-2">
-                  <div class="plane"><img src="https://www.openstack.org/assets/edge/daplane.png"></div>
-                  <p>Attend the <strong>Vancouver Summit</strong> to meet and collaborate with the Edge Computing Group.</p>
-                  <a href="https://www.openstack.org/summit/vancouver-2018/" class="download-btn"><em>About the Summit</em></a>
+                  <div class="plane"><img src="/assets/summits/logos/red-circle.png"></div>
+                  <p>Attend the <strong>Berlin Summit</strong> to meet and collaborate with the Edge Computing Group.</p>
+                  <a href="https://www.openstack.org/summit/berlin-2018/" class="download-btn"><em>About the Summit</em></a>
                 </div>
             </div>
         </div>
