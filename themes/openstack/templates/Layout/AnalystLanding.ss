@@ -15,7 +15,7 @@
 		        	- Forrester, "<a href="https://reprints.forrester.com/#/assets/2/480/RES140932/reports" target="_blank">The I&O Pro’s Guide to Enterprise Open Source Cloud Adoption, Q1 2018</a>", March 2018
 		        </div>
 						<div>
-							<a href="https://reprints.forrester.com/#/assets/2/480/RES140932/reports" target="_blank">Download the Report <i class="fa fa-chevron-right"></i></a>
+							<a href="https://reprints.forrester.com/#/assets/2/480/RES140932/reports" target="_blank" class="promo-btn">Download the Report <i class="fa fa-chevron-right"></i></a>
 						</div>
 		      </div>
 		    </div>
