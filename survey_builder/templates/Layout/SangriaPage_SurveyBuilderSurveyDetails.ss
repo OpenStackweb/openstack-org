@@ -11,7 +11,8 @@
 <% end_if %>
 <% loop Steps %>
         <% if hasAnswers %>
-            <h2>$Template.Name</h2>
+            <br/>
+            <h2>$Template.FriendlyName</h2>
             <% loop Answers %>
                 <% if $Value %>
                 <div>
@@ -25,6 +26,7 @@
         <% end_if %>
 <% end_loop %>
 <% if EntitiesSurveys %>
+    <br/>
     <h2>Deployments</h2>
     <ul>
     <% loop EntitiesSurveys %>
@@ -33,3 +35,7 @@
     </ul>
 <% end_if %>
 <% end_with %>
+<br/>
+<br/>
+<br/>
+<hr/>

@@ -464,9 +464,11 @@ SQL;
 
         if (is_null($template)) return 0;
 
+        $join_survey_entity = '';
         if ($class_name == 'EntitySurvey') {
             $question = $template->Parent()->getAllFilterableQuestions()->filter('ClassName', 'SurveyOrganizationQuestionTemplate')->first();
             $template_id = $template->ParentID;
+            $join_survey_entity = 'INNER JOIN EntitySurvey EI ON EI.ParentID = I.ID';
         } else {
             $question = $template->getAllFilterableQuestions()->filter('ClassName', 'SurveyOrganizationQuestionTemplate')->first();
             $template_id = $template->ID;
@@ -481,13 +483,13 @@ SQL;
         LEFT JOIN SurveyStep AS SSTEP ON SSTEP.SurveyID = I.ID
         LEFT JOIN SurveyAnswer AS A ON A.StepID = SSTEP.ID
         LEFT JOIN SurveyQuestionTemplate AS Q ON Q.ID = A.QuestionID
+        $join_survey_entity
         WHERE I.TemplateID = $template_id AND I.IsTest = 0
         AND Q.ClassName = 'SurveyOrganizationQuestionTemplate'
         {$mandatory_filter}
         {$filters_where} 
         GROUP BY A.`Value`, I.ID
         ORDER BY A.`Value`;";
-
 
         $companies = new ArrayList();
         foreach (DB::query($query) as $company_row) {
@@ -987,14 +989,19 @@ SQL;
     public function SurveyBuilderCountLang($lang)
     {
         $template = $this->getCurrentSelectedSurveyTemplate();
-
-        if (is_null($template)) {
-            return;
-        }
-
         $class_name = $this->getCurrentSelectedSurveyClassName();
+        if (is_null($template)) return;
+
+        $template_id = $template->ID;
 
         $filters_where = $this->generateFilters('SurveyTemplate');
+
+        // if the question is from survey and the template is entity we need to match ids correctly
+        $join_survey_entity = '';
+        if ($class_name == 'EntitySurvey') {
+            $template_id = $template->Parent()->ID;
+            $join_survey_entity = 'INNER JOIN EntitySurvey EI ON EI.ParentID = I.ID';
+        }
 
         $lang_filter = ($lang) ? "AND I.Lang = '{$lang}'" : "AND I.Lang IS NOT NULL";
 
@@ -1005,9 +1012,9 @@ SQL;
         INNER JOIN SurveyTemplate SSTPL ON SSTPL.ID = STPL.SurveyTemplateID
         INNER JOIN SurveyStep S ON S.ID = A.StepID
         INNER JOIN Survey I ON I.ID = S.SurveyID
-        WHERE
-        I.ClassName = '{$class_name}' AND I.IsTest = 0
-        {$lang_filter} AND SSTPL.ID = $template->ID
+        $join_survey_entity
+        WHERE I.IsTest = 0
+        {$lang_filter} AND SSTPL.ID = $template_id
         {$filters_where};
 SQL;
 
@@ -1022,9 +1029,11 @@ SQL;
         $template_id = $template->ID;
 
         // if the question is from survey and the template is entity we need to match ids correctly
+        $join_survey_entity = '';
         if ($class_name == 'EntitySurvey') {
             $question = $template->Parent()->getQuestionById($question_id);
             $template_id = $template->Parent()->ID;
+            $join_survey_entity = 'INNER JOIN EntitySurvey EI ON EI.ParentID = I.ID';
         } else {
             $question = $template->getQuestionById($question_id);
         }
@@ -1040,6 +1049,7 @@ SQL;
     INNER JOIN SurveyQuestionValueTemplate V ON V.ID = A.`Value`
     LEFT JOIN SurveyStep S ON S.ID = A.StepID
     LEFT JOIN Survey I ON I.ID = S.SurveyID
+    $join_survey_entity
     WHERE A.QuestionID = $question_id AND A.`Value` IS NOT NULL AND
     I.TemplateID = $template_id AND I.IsTest = 0
     {$mandatory_filter}
@@ -1075,9 +1085,11 @@ SQL;
 
 
         // if the question is from survey and the template is entity we need to match ids correctly
+        $join_survey_entity = '';
         if ($class_name == 'EntitySurvey') {
             $template_id = $template->Parent()->ID;
             $question = $template->Parent()->getQuestionById($question_id);
+            $join_survey_entity = 'INNER JOIN EntitySurvey EI ON EI.ParentID = I.ID';
         } else {
             $question = $template->getQuestionById($question_id);
         }
@@ -1091,7 +1103,8 @@ SQL;
         $mandatory_filter = $this->generateMandatoryAnswersFilter();
 
         $query = <<<SQL
-    SELECT COUNT(I.ID) FROM Survey I
+    SELECT COUNT(DISTINCT I.ID) FROM Survey I
+    $join_survey_entity
     WHERE I.TemplateID = $template_id AND I.IsTest = 0
     AND EXISTS
     (
@@ -1119,9 +1132,11 @@ SQL;
         $template_id = $template->ID;
 
         // if the question is from survey and the template is entity we need to match ids correctly
+        $join_survey_entity = '';
         if ($class_name == 'EntitySurvey') {
             $question = $template->Parent()->getQuestionById($question_id);
             $template_id = $template->Parent()->ID;
+            $join_survey_entity = 'INNER JOIN EntitySurvey EI ON EI.ParentID = I.ID';
         } else {
             $question = $template->getQuestionById($question_id);
         }
@@ -1132,10 +1147,11 @@ SQL;
         $mandatory_filter = $this->generateMandatoryAnswersFilter();
 
         $query = <<<SQL
-        SELECT COUNT(A.Value) FROM SurveyAnswer A
+        SELECT COUNT(DISTINCT I.ID) FROM SurveyAnswer A
         INNER JOIN SurveyStep S ON S.ID = A.StepID
         INNER JOIN Survey I ON I.ID = S.SurveyID
         INNER JOIN SurveyQuestionTemplate Q ON Q.ID = A.QuestionID
+        $join_survey_entity
         WHERE
         I.TemplateID = $template_id AND I.IsTest = 0
         AND Q.ID = $question_id AND A.`Value` = {$value_id}
