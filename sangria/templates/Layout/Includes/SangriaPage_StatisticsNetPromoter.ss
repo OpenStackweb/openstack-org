@@ -1,4 +1,4 @@
-<div class="col-md-4 "style="height:450px">
+<div class="col-md-4 "style="height:450px;">
     <h3>$Question.Label</h3>
     <p>
         N =  $Top.ParentPage.SurveyBuilderSurveyCountNPS($Top.Question.ID)
@@ -19,8 +19,8 @@
         <% end_loop %>
     </p>
 
-    <div class="row" style="text-align:center">
-        <div class="col-md-4">
+    <div class="row" style="text-align:center; height: 325px; overflow-y: auto">
+        <div class="col-md-12">
         <% loop $Question.getFormattedValues %>
             <% if $Label == 7 || $Label == 9 %>
                 </div>

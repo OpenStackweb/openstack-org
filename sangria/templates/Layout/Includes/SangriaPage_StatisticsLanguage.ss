@@ -1,4 +1,4 @@
-<div class="col-md-4" style="height:450px">
+<div class="col-md-4" style="height:450px;">
     <h3>Language</h3>
     <p>N =  $Top.ParentPage.SurveyBuilderCountLang(0)</p>
     <table class="table">

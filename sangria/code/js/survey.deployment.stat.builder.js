@@ -11,7 +11,9 @@
  * limitations under the License.
  **/
 $(document).ready(function() {
-    renderGraph(pu_answers);
+    if (typeof pu_answers != 'undefined') {
+        renderGraph(pu_answers);
+    }
 });
 
 function renderGraph(values) {
