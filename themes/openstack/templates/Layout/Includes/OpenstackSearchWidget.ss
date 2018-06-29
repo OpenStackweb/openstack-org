@@ -1,5 +1,12 @@
 
-<div id="openstack-search-bar" style="width: 100%; margin: 9px 0 0 10px;"></div>
+<div id="openstack-search-bar"
+     style="width: 100%; margin: 9px 0 0 10px;"
+     data-baseUrl="devbranch.search.openstack.org"
+     data-context="www-openstack">
+
+</div>
+
+
 <script>
     (function (window, document) {
         var loader = function () {
