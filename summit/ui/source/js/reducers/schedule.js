@@ -183,7 +183,7 @@ const getVisibleEvents = state => {
 const setUrlParams = (params, exclude = []) => {
     Object.keys(params).forEach(param => {
         if (exclude.indexOf(param) < 0) {
-            $(window).url_fragment('setParam', param, params[param])
+            $(window).url_fragment('setParam', param, params[param]);
         }
     })
 

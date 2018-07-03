@@ -2,7 +2,7 @@ const EventListFilter = {
 
     events(filters, events, summit) {
         const { tags, room, going, tracks, levels, favorites,
-                event_types, track_groups } = filters
+                event_types, track_groups, recorded } = filters
 
         const unmatchedEvents = events.filter(event => {
             return (
@@ -13,6 +13,7 @@ const EventListFilter = {
                 tags         && ! this.matchTags(event, tags) ||
                 room         && ! this.matchRoom(event, room) ||
                 going        && ! this.matchGoing(event, going) ||
+                recorded     && ! this.matchRecorded(event, recorded) ||
                 favorites    && ! this.matchFavorites(event, favorites)
             )
         });
@@ -71,6 +72,10 @@ const EventListFilter = {
 
     matchFavorites(event, filterValue) {
         return event.favorite === true
+    },
+
+    matchRecorded(event, filterValue) {
+        return event.to_record === true
     },
 }
 

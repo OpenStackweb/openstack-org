@@ -633,6 +633,19 @@ a.navbar-brand {
     padding-bottom: 10px;
 }
 
+.single-filter-wrapper .checkbox {
+    margin-top: 2px;
+    margin-bottom: 0px;
+}
+
+.single-filter-wrapper .checkbox label {
+    cursor: default;
+}
+
+.single-filter-wrapper .checkbox input {
+    cursor: pointer;
+}
+
 /* hide label for desktops and laptops */
 @media (max-width: 767px) {
     .single-filter-wrapper select {

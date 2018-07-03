@@ -31,6 +31,7 @@ export const DEFAULT_FILTERS = {
     room         : null,
     going        : false,
     favorites    : false,
+    recorded     : false
 };
 
 export const VIEW_DAYS   = 'day';
@@ -60,7 +61,10 @@ export const loadFilters = () => {
 
         Object.keys(DEFAULT_FILTERS).forEach(filterName => {
             const value = getUrlParam(filterName);
-            if (value) values[filterName] = value.split(',')
+            const filter_type = typeof DEFAULT_FILTERS[filterName]
+            if (value) {
+                values[filterName] = (filter_type == 'boolean') ? (value == 'true') : value.split(',')
+            }
         });
 
         Object.keys(DEFAULT_VIEWS).forEach(type => {

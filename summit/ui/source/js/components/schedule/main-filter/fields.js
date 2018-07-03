@@ -3,6 +3,12 @@ import React, { Component } from 'react'
 class MainFilterFields extends Component {
 
     componentDidMount() {
+        const { setFilters } = this.props
+
+        const route = (e, filterName) => setFilters({
+            [filterName]: $(e.currentTarget).val()
+        })
+
         // React's onChange doesn't play well with chosen so use jQuery.
         $(this.refs.ddl_track_groups).chosen({ width: '100%' })
         $(this.refs.ddl_track_groups).on('change', e => route(e, 'track_groups'))
@@ -16,12 +22,10 @@ class MainFilterFields extends Component {
         $(this.refs.ddl_levels).on('change', e => route(e, 'levels'))
         $(this.refs.ddl_rooms).chosen({ width: '100%' })
         $(this.refs.ddl_rooms).on('change', e => route(e, 'room'))
-
-        const { setFilters } = this.props
-
-        const route = (e, filterName) => setFilters({
-            [filterName]: $(e.currentTarget).val()
+        $(this.refs.chk_recorded).on('click', e => {
+            setFilters({'recorded': $(e.currentTarget).prop('checked')})
         })
+
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -58,7 +62,7 @@ class MainFilterFields extends Component {
                     Learn more about the {summit.title} Summit Categories and Tracks.
                 </a>
             </div>
-            <div className="col-sm-15 col-xs-12 single-filter-wrapper">
+            <div className="col-sm-4 col-xs-12 single-filter-wrapper">
                 <label className="filter-label">Summit Categories</label>
                 <select ref="ddl_track_groups" name="ddl_track_groups"
                 size="5" multiple="multiple" data-placeholder="Summit Categories"
@@ -70,7 +74,7 @@ class MainFilterFields extends Component {
                     ))}
                  </select>
             </div>
-            <div className="col-sm-15 col-xs-12 single-filter-wrapper">
+            <div className="col-sm-4 col-xs-12 single-filter-wrapper">
                 <label className="filter-label">Tracks</label>
                 <select ref="ddl_tracks" multiple="multiple" data-placeholder="Tracks"
                 value={values.tracks || []} onChange={() => false}>
@@ -82,7 +86,7 @@ class MainFilterFields extends Component {
                     ))}
                 </select>
             </div>
-            <div className="col-sm-15 col-xs-12 single-filter-wrapper hide">
+            <div className="col-sm-4 col-xs-12 single-filter-wrapper hide">
                 <label className="filter-label">Event Types</label>
                 <select ref="ddl_event_types" name="ddl_event_types"
                 size="7" multiple="multiple" data-placeholder="Event Types"
@@ -94,7 +98,7 @@ class MainFilterFields extends Component {
                     ))}
                 </select>
             </div>
-            <div className="col-sm-15 col-xs-12 single-filter-wrapper">
+            <div className="col-sm-4 col-xs-12 single-filter-wrapper">
                 <label className="filter-label">Presentation Level</label>
                 <select ref="ddl_levels" multiple="multiple" data-placeholder="Presentation Level"
                 value={values.levels || []} onChange={() => false}>
@@ -105,7 +109,7 @@ class MainFilterFields extends Component {
                     ))}
                 </select>
             </div>
-            <div className="col-sm-15 col-xs-12 single-filter-wrapper">
+            <div className="col-sm-4 col-xs-12 single-filter-wrapper">
                 <label className="filter-label">Tags</label>
                 <select ref="ddl_tags" multiple="multiple" data-placeholder="Tags"
                 value={values.tags || []} onChange={() => false}>
@@ -117,7 +121,7 @@ class MainFilterFields extends Component {
                 </select>
             </div>
             {summit.should_show_venues &&
-            <div className="col-sm-15 col-xs-12 single-filter-wrapper">
+            <div className="col-sm-4 col-xs-12 single-filter-wrapper">
                 <label className="filter-label">Rooms</label>
                 <select ref="ddl_rooms" data-placeholder="Rooms" value={values.room || ''} onChange={() => false}>
                     <option value=""> All Rooms </option>
@@ -139,6 +143,12 @@ class MainFilterFields extends Component {
                 </select>
             </div>
             }
+            <div className="col-sm-4 col-xs-12 single-filter-wrapper">
+                <div className="checkbox">
+                    <input type="checkbox" id="recorded_filter" ref="chk_recorded" checked={values.recorded} onChange={() => false} />
+                    <label for="recorded_filter">Show only recorded sessions</label>
+                </div>
+            </div>
         </div>
     )}
 }
