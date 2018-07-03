@@ -153,7 +153,7 @@
                     <% end_if %>
                     <div class="row info_item">
                         <div class="col-md-2 col-xs-2 info_item_icon"><i class="fa fa-2x fa-signal icon-level"></i></div>
-                        <div class="col-md-10 col-xs-10 info_item_text">Level: $Event.Level</div>
+                        <div class="col-md-10 col-xs-10 info_item_text">Difficulty Level: $Event.Level</div>
                     </div>
                 <% end_if %>
 

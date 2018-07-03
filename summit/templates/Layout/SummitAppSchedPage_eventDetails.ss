@@ -32,7 +32,7 @@
         <div class="level-row">
             <div class="col-sm-12 col-level-content">
                 <i class="fa fa-signal level-icon"></i>
-                <span>Level:</span>
+                <span>Difficulty Level:</span>
                 <span class="presentation-level'">
                     <a class="search-link" title="Search Presentation Level" href="{$Top.Link(global-search)}?t={$Event.Level}">{$Event.Level}</a>
                 </span>
