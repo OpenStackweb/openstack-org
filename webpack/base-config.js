@@ -1,5 +1,6 @@
 var webpack = require('webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const UglifyJSPlugin    = require('uglifyjs-webpack-plugin');
 var path = require('path');
 var PRODUCTION = process.env.NODE_ENV === 'production';
 
@@ -25,7 +26,7 @@ var devPlugins = [];
  * @type {*[]}
  */
 var productionPlugins = [
-    new webpack.optimize.UglifyJsPlugin({minimize: true}),
+    new UglifyJSPlugin(),
     new webpack.DefinePlugin({
         'process.env': {
             'NODE_ENV': JSON.stringify('production')
