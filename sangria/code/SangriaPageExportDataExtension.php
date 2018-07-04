@@ -372,16 +372,10 @@ SQL;
     // Export CSV of all Deployment Surveys and Associated Deployments
 
 
-    private function ExportSurveyResultsDataSurveyBuilder()
+    private function ExportSurveyResultsDataSurveyBuilder($template_id, $filters)
     {
-        SangriaPage_Controller::generateDateFilters('REPORT', 'LastEdited');
-
-        $date_filter = SangriaPage_Controller::$date_filter_query;
-
-        $template_id = intval(Controller::curr()->getRequest()->getVar('Range'));
 
 $query = <<<SQL
--- surveys
 SELECT * FROM (
 SELECT
 S.ID AS SurveyID,
@@ -396,7 +390,6 @@ Q.ID   AS QuestionID,
 SETPL.`Order` AS StepOrder,
 Q.`Order` AS QuestionOrder,
 Q.ClassName AS QuestionClass,
--- SA.ID,
 CASE Q.ClassName
 WHEN 'SurveyDropDownQuestionTemplate'
 THEN (
@@ -424,9 +417,12 @@ WHERE
 S.ClassName = 'Survey' AND S.IsTest = 0
 AND ST.ID = {$template_id}
 ) REPORT
-WHERE {$date_filter}
+WHERE 1=1 {$filters}
 ORDER BY SurveyID ASC , StepOrder ASC, QuestionOrder ASC;
 SQL;
+
+        //die($query);
+
         return DB::query($query);
     }
 
@@ -434,15 +430,17 @@ SQL;
     function ExportSurveyResults()
     {
         $fileDate = date('Ymdhis');
-        $data = $this->getSurveyBuilderExportData();
+        $template_id = intval(Controller::curr()->getRequest()->getVar('Range'));
+        SangriaPage_Controller::generateDateFilters('REPORT', 'LastEdited');
+        $date_filter = 'AND '.SangriaPage_Controller::$date_filter_query;
+
+        $data = $this->getSurveyBuilderExportData($template_id, $date_filter);
         $filename = "Survey_" . $fileDate . ".csv";
         return CSVExporter::getInstance()->export($filename, $data, ',');
     }
 
-    private function buildSurveyBuilderHeaders($flat_fields = array(), $flat_fields_entity = array())
+    private function buildSurveyBuilderHeaders($template_id, $flat_fields = array(), $flat_fields_entity = array())
     {
-        $template_id = intval(Controller::curr()->getRequest()->getVar('Range'));
-
         $survey_header_query = <<<SQL
 SELECT SS.Name, Q.ID AS QuestionID, Q.Name, Q.ClassName FROM SurveyTemplate S
 INNER JOIN SurveyStepTemplate SS ON SS.SurveyTemplateID = S.ID
@@ -535,11 +533,10 @@ SQL;
         return str_replace("," ,"-", $value);
     }
 
-    private function getDeploymentsData($survey_id)
+    private function getDeploymentsData($survey_id, $filters='')
     {
         $query = <<<SQL
 
-        -- deployments
 SELECT * FROM (
 SELECT
 ES.ParentID AS SurveyID,
@@ -552,7 +549,6 @@ Q.Name AS Question,
 SETPL.`Order` AS StepOrder,
 Q.`Order` AS QuestionOrder,
 Q.ClassName AS QuestionClass,
--- SA.ID,
 CASE Q.ClassName
 WHEN 'SurveyDropDownQuestionTemplate'
 THEN (
@@ -580,11 +576,13 @@ WHERE
 S.ClassName = 'EntitySurvey' AND S.IsTest = 0
 AND EST.EntityName = 'Deployment'
 AND ES.ParentID = {$survey_id}
-
+{$filters}
 ) REPORT
 ORDER BY EntityID ASC , StepOrder ASC, QuestionOrder ASC;
 
 SQL;
+
+        //die($query);
 
         $res = DB::query($query);
 
@@ -622,12 +620,12 @@ SQL;
         return array($rows, $columns);
     }
 
-    private function getSurveyBuilderExportData($flat_fields = array(), $flat_fields_entity = array())
+    public function getSurveyBuilderExportData($template_id, $survey_filters='', $deployment_filters='', $flat_fields = array(), $flat_fields_entity = array())
     {
-        $res        = $this->ExportSurveyResultsDataSurveyBuilder();
-        $survey_id  = 0;
-        $file_data  = [];
-        list($header_template1, $header_template2) = $this->buildSurveyBuilderHeaders($flat_fields, $flat_fields_entity);
+        $res         = $this->ExportSurveyResultsDataSurveyBuilder($template_id, $survey_filters);
+        $survey_id   = 0;
+        $file_data   = [];
+        list($header_template1, $header_template2) = $this->buildSurveyBuilderHeaders($template_id, $flat_fields, $flat_fields_entity);
 
         $line                  = $header_template1;
         list($rows, $columns)  = self::getRowsAndColumns();
@@ -640,7 +638,7 @@ SQL;
                 // reset
                 if($survey_id > 0)
                 {
-                    $res2                 = $this->getDeploymentsData($survey_id);
+                    $res2                 = $this->getDeploymentsData($survey_id, $deployment_filters);
                     $line2                = $header_template2;
                     $entity_survey_id     = 0;
                     $entities_surveys_set = [];
@@ -834,33 +832,40 @@ SQL;
     function ExportSurveyResultsFlat()
     {
         $fileDate = date('Ymdhis');
+        $template_id = intval(Controller::curr()->getRequest()->getVar('Range'));
+        SangriaPage_Controller::generateDateFilters('REPORT', 'LastEdited');
+        $date_filter = 'AND '.SangriaPage_Controller::$date_filter_query;
+
 
         $file_data = $this->getSurveyBuilderExportData
         (
-                array
-                (
-                    "OpenStackActivity",
-                    "BusinessDrivers",
-                    "InteractingClouds",
-                    "Stacks",
-                ),
-                array
-                (
-                    "CurrentReleases",
-                    "UsedPackages",
-                    "IdentityDrivers",
-                    "WorkloadsCategories",
-                    "DeploymentTools",
-                    "PaasTools",
-                    "Hypervisors",
-                    "UsedDBForOpenStackComponents",
-                    "NetworkDrivers",
-                    "OperatingSystems",
-                    "SupportedFeatures",
-                    "WhyNovaNetwork",
-                    "ProjectsUsed",
-                    "ProjectsUsedPoC",
-                )
+            $template_id,
+            $date_filter,
+            '',
+            array
+            (
+                "OpenStackActivity",
+                "BusinessDrivers",
+                "InteractingClouds",
+                "Stacks",
+            ),
+            array
+            (
+                "CurrentReleases",
+                "UsedPackages",
+                "IdentityDrivers",
+                "WorkloadsCategories",
+                "DeploymentTools",
+                "PaasTools",
+                "Hypervisors",
+                "UsedDBForOpenStackComponents",
+                "NetworkDrivers",
+                "OperatingSystems",
+                "SupportedFeatures",
+                "WhyNovaNetwork",
+                "ProjectsUsed",
+                "ProjectsUsedPoC",
+            )
         );
 
         $filename = "Survey_Flat_" . $fileDate . ".csv";

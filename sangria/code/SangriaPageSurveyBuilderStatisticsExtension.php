@@ -20,12 +20,14 @@ class SangriaPageSurveyBuilderStatisticsExtension extends Extension
             'ViewDeploymentStatisticsSurveyBuilder',
             'ViewSurveysStatisticsSurveyBuilder',
             'exportQuestion',
+            'ExportStatisticsSurveyBuilder'
         ));
 
         Config::inst()->update(get_class($this->owner), 'allowed_actions', array(
             'ViewDeploymentStatisticsSurveyBuilder',
             'ViewSurveysStatisticsSurveyBuilder',
             'exportQuestion',
+            'ExportStatisticsSurveyBuilder'
         ));
     }
 
@@ -197,7 +199,7 @@ class SangriaPageSurveyBuilderStatisticsExtension extends Extension
      * @param bool $matchClass
      * @return array|null|Session|string
      */
-    private function generateFilters($matchClass)
+    private function generateFilters($matchClass, $tablePrefix = 'I', $matchID = 'ID')
     {
         $request = Controller::curr()->getRequest();
         $from = $request->getVar('From');
@@ -249,9 +251,9 @@ SQL;
         )
 SQL;
 
-        $survey_compare = 'I.ID';
+        $survey_compare = $tablePrefix.'.ID';
         if ($matchClass == 'EntitySurveyTemplate') {
-            $survey_compare = 'EI.ParentID';
+            $survey_compare = 'E'.$tablePrefix.'.ParentID';
         }
 
         $lang_query = <<<SQL
@@ -282,7 +284,7 @@ SQL;
         $filters_where = '';
 
         if (!empty($from) && !empty($to)) {
-            $filters_where = " AND " . SangriaPage_Controller::generateDateFilters('I', 'LastEdited');
+            $filters_where = " AND " . SangriaPage_Controller::generateDateFilters($tablePrefix, 'LastEdited');
         }
 
         if (!empty($filters)) {
@@ -316,12 +318,12 @@ SQL;
                     $question_template_class = SurveyQuestionTemplate::get()->byID($qid)->Step()->SurveyTemplate()->ClassName;
 
                     if ($question_template_class == $matchClass) {
-                        $survey_compare = 'I2.ID = I.ID';
+                        $survey_compare = 'I2.ID = '.$tablePrefix.'.'.$matchID;
                     } else {
                         if ($question_template_class == 'EntitySurveyTemplate') {
-                            $survey_compare = 'EI2.ParentID = I.ID';
+                            $survey_compare = 'EI2.ParentID = '.$tablePrefix.'.'.$matchID;
                         } else {
-                            $survey_compare = 'I2.ID = EI.ParentID';
+                            $survey_compare = 'I2.ID = E'.$tablePrefix.'.ParentID';
                         }
                     }
 
@@ -1185,6 +1187,26 @@ SQL;
 
         //echo $query .'<br><br><br><br>';
         return DB::query($query)->value();
+    }
+
+    public function ExportStatisticsSurveyBuilder(SS_HTTPRequest $request) {
+        $fileDate = date('Ymdhis');
+        $template = $this->getCurrentSelectedSurveyTemplate();
+        $deployment_filter = $this->generateFilters('EntitySurveyTemplate', 'S');
+        $survey_filter = $this->generateFilters('SurveyTemplate', 'REPORT', 'SurveyID');
+
+
+        $data = $this->owner->getSurveyBuilderExportData($template->ParentID, $survey_filter, $deployment_filter);
+        $filename = "Survey_" . $fileDate . ".csv";
+        return CSVExporter::getInstance()->export($filename, $data, ',');
+    }
+
+    public function LinkToExport() {
+        $req = Controller::curr()->getRequest(); // get the current http request object
+        $req->setURL(Controller::curr()->Link('ExportStatisticsSurveyBuilder')); // set the url of it to our new Link (while ignoring query params)
+        $url = $req->getURL(TRUE); // get the url back but with querystr intact.
+
+        return $url ;
     }
 
 }

@@ -19,6 +19,9 @@
                 <% if $SurveyBuilderDeploymentCompanyList %>
                     &mdash; <a href="" data-toggle="modal" data-target="#companiesModal">view companies</a>
                 <% end_if %>
+                <% if $Action == 'ViewDeploymentStatisticsSurveyBuilder' %>
+                    &mdash; <a href="$Top.LinkToExport()">export flat csv</a>
+                <% end_if %>
             </h2>
             $DateFilters
             $RenderCurrentFilters
