@@ -25,7 +25,7 @@ jQuery(document).ready(function($){
     }
 
     // Close header search bar
-    $(".close-search").click(function() {
+    $("body").on('click', ".ossw-search-bar-close", function() {
         $(".navbar-main").toggleClass("show");
         $(".search-container").toggleClass("show")
         $(".search-icon").toggleClass("show");
@@ -35,11 +35,8 @@ jQuery(document).ready(function($){
     $(".search-icon").click(function() {
         $(".navbar-main").toggleClass("show");
         $(".search-container").toggleClass("show");
-        $(".header-search").focus();
+        $("#search-bar-input").focus();
         $(".search-icon").toggleClass("show");
-        $('#gsc-i-id1').focus();
-        // Show placeholder text in Google Search
-        $(".gsc-input").attr("placeholder", "search openstack");
     });
 
     $(window).resize(function () {
