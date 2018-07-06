@@ -27,7 +27,7 @@ jQuery(document).ready(function($){
     // Close header search bar
     $("body").on('click', ".ossw-search-bar-close", function() {
         $(".navbar-main").toggleClass("show");
-        $(".search-container").toggleClass("show")
+        $(".search-container").removeClass("show")
         $(".search-icon").toggleClass("show");
     });
 
@@ -35,7 +35,7 @@ jQuery(document).ready(function($){
     $(".search-icon").click(function() {
         $(".navbar-main").toggleClass("show");
         $(".search-container").toggleClass("show");
-        $("#search-bar-input").focus();
+        $("input", '.openstack-search-bar').first().focus();
         $(".search-icon").toggleClass("show");
     });
 

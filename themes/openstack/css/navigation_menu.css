@@ -11,7 +11,16 @@ a.navbar-brand {
     height: 35px;
     width: 135px; }
 
-@media (min-width: 768px) and (max-width: 1025px) {
+.openstack-search-bar {
+    width: 100%;
+    margin: 9px 0 0 10px;
+}
+
+.ossw-mobile {
+    display: none;
+}
+
+@media (min-width: 1024px) and (max-width: 1310px) {
     .brand-wrapper {
         width: 75px;
         min-width: 75px;
@@ -20,7 +29,9 @@ a.navbar-brand {
         background: url('/themes/openstack/images/openstack-logo-vert.svg') left no-repeat;
         margin-left: 0px !important;
         height: 54px;
-        width: 59px; } }
+        width: 59px; }
+}
+
 @media only screen and (max-device-width: 1024px) {
     .brand-wrapper {
         margin: 10px 0;
@@ -88,10 +99,15 @@ ul.navbar-main {
     background: #286A9D;
     color: #fff; }
 
-@media (max-width: 1025px) {
+@media (max-width: 1024px) {
     .navbar-default ul.navbar-main > li > a.sign-in-btn {
         padding: 5px 10px;
-        margin-top: 9px; } }
+        margin-top: 9px; }
+    .ossw-mobile {
+        display: block;
+    }
+
+}
 
 @media (max-width: 767px), only screen and (max-device-width: 1024px) {
     .navbar-default ul.navbar-main > li > a.sign-in-btn {
