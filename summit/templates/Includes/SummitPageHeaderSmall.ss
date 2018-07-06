@@ -1,4 +1,4 @@
-<div class="summit-hero-wrapper small-header <% if HeroCSSClass %>$HeroCSSClass<% end_if %>" <% if $SummitImage %>style="background: url('{$SummitImage.Image.link}') -360px -140px ;"<% end_if %> >
+<div class="summit-hero-wrapper small-header <% if HeroCSSClass %>$HeroCSSClass<% end_if %>" <% if $SummitImage %>style="background: url('{$SummitImage.Image.link}') -20px -140px ;"<% end_if %> >
     <div class="container">
         <div class="row text-wrapper">
             <% with $Summit %>
