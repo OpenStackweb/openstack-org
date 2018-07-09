@@ -1219,7 +1219,9 @@ a.overview-btn.right-btn {
   font-size: 13px; }
 
 .overview-section .img-responsive {
-  max-width: 550px; }
+  max-width: 550px;
+  width: 100%;
+}
 
 .overview-right {
   text-align: center; }
