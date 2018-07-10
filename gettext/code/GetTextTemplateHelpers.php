@@ -15,6 +15,7 @@ use Gettext\GettextTranslator;
  **/
 class GetTextTemplateHelpers implements TemplateGlobalProvider
 {
+    const MAX_MSG_ID_LEN = 4096;
     /**
      * @return array
      */
@@ -37,7 +38,41 @@ class GetTextTemplateHelpers implements TemplateGlobalProvider
         return sprintf('%s.utf8', $locale);
     }
 
+
+    /**
+     * Given the current controller, determine the module name.
+     * If the template and controller are in different modules (e.g. themes/),
+     * this probably won't produce the expected result on a template.
+     *
+     * @return string
+     */
+    public static function module_name()
+    {
+        $class = Controller::curr()->class;
+        $file = SS_ClassLoader::instance()->getItemPath($class);
+
+        if ($file) {
+            $dir = dirname($file);
+            while (dirname($dir) != BASE_PATH) {
+                $dir = dirname($dir);
+            }
+
+            $module = basename($dir);
+            if ($module == 'openstack') {
+                $module = Injector::inst()->get('ViewableData')->ThemeDir();
+            }
+
+            return $module;
+        }
+
+        return null;
+    }
+
     public static function _t($domain, $msgid){
+
+        // @see https://github.com/php/php-src/commit/6d2dfa4eb047d9a2463ee3873ecea06f6e94fa94
+        if(strlen($msgid) > self::MAX_MSG_ID_LEN)
+            throw new InvalidArgumentException(sprintf("msgid is too large (%s)!", self::MAX_MSG_ID_LEN));
 
         $args = [];
         if(func_num_args() > 2)
@@ -55,7 +90,11 @@ class GetTextTemplateHelpers implements TemplateGlobalProvider
 
         $t        = new GettextTranslator();
         $language = self::convertLocale(i18n::get_locale());
-        $path     = Director::baseFolder().'/gettext/Locale';
+        $current_module = self::module_name();
+
+        $path = sprintf("%s/%s/Locale", Director::baseFolder(), $current_module);
+        if(!is_dir($path))
+            $path = Director::baseFolder().'/gettext/Locale';
 
         $t->setLanguage($language);
         $t->loadDomain($domain, $path);

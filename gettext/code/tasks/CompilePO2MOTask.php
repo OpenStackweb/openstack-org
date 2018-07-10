@@ -26,7 +26,12 @@ final class CompilePO2MOTask extends BuildTask {
     public function run($request)
     {
         try {
-            $path = Director::baseFolder() . '/gettext/_config/translations.yml';
+            $module = $request->requestVar('module');
+            if(empty($module)) {
+                $module = 'gettext';
+            }
+
+            $path =sprintf("%s/%s/_config/translations.yml", Director::baseFolder(), $module);
             echo "reading translation list from ".$path.' ...'.PHP_EOL;;
             $yaml = Yaml::parse(file_get_contents($path));
             if(!is_null($yaml) && count($yaml))
@@ -35,7 +40,7 @@ final class CompilePO2MOTask extends BuildTask {
                     foreach ($po_files as $po_file){
                         foreach ($po_file as $doc_id => $languages) {
                             foreach($languages as $language) {
-                                $file_path = sprintf('%s/gettext/Locale/%s/LC_MESSAGES/%s', Director::baseFolder(), $language['lang_local'], $doc_id);
+                                $file_path = sprintf('%s/%s/Locale/%s/LC_MESSAGES/%s', Director::baseFolder(), $module, $language['lang_local'], $doc_id);
                                 echo sprintf("compiling file %s.po", $file_path).PHP_EOL;
                                 shell_exec(sprintf('msgfmt -c %s.po -o %s.mo', $file_path, $file_path));
                             }

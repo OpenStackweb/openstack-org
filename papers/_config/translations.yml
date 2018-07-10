@@ -1,0 +1,5 @@
+# here are all available po file to compile to mo files per language code
+papers:
+  - leveraging-containers-and-openstack:
+    - lang_local: de_DE
+      lang_zanata: de

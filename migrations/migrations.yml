@@ -110,3 +110,4 @@ migrations:
   - SummitAboutPageSectionsMigration
   - CreateJobPostersGroupMigration
   - SummitSelectionPlansMigration
+  - CreateContainersPaperMigration

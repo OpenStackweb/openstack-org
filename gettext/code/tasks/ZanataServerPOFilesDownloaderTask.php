@@ -39,7 +39,12 @@ final class ZanataServerPOFilesDownloaderTask extends BuildTask
     public function run($request)
     {
         try {
-            $path = Director::baseFolder() . '/gettext/_config/translations.yml';
+            $module = $request->requestVar('module');
+            if(empty($module)) {
+                $module = 'gettext';
+            }
+
+            $path =sprintf("%s/%s/_config/translations.yml", Director::baseFolder(), $module);
             echo "reading translation list from ".$path.' ...'.PHP_EOL;;
             $yaml = Yaml::parse(file_get_contents($path));
             if(!is_null($yaml) && count($yaml))
@@ -57,7 +62,7 @@ final class ZanataServerPOFilesDownloaderTask extends BuildTask
                             }
                         }
                     }
-                    $this->downloader->downloadPOFiles($project_id, $files);
+                    $this->downloader->downloadPOFiles($module, $project_id, $files);
                 }
             }
             echo "Ending Zanata PO Files downloading process ...".PHP_EOL;

@@ -29,13 +29,14 @@ final class ZanataServerPOFilesDownloader implements IZanataServerPOFilesDownloa
     }
 
     /**
+     * @param string $module
      * @param string $project_id
      * @param array $files
      * @return void
      */
-    public function downloadPOFiles($project_id, $files = [])
+    public function downloadPOFiles($module, $project_id, $files = [])
     {
-        $dir = Director::baseFolder() ."/gettext/Locale/%s/LC_MESSAGES/";
+        $dir = Director::baseFolder() ."/".$module."/Locale/%s/LC_MESSAGES/";
         foreach ($files as $file) {
 
             if (!file_exists(sprintf($dir, $file['lang_local']))) {

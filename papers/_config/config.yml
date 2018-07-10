@@ -1,0 +1,28 @@
+---
+Name: papers_module
+After: 'framework/*','cms/*', 'openstack/*'
+---
+Paper:
+  extensions:
+    - PaperAdminUI
+PaperSection:
+  extensions:
+    - PaperSectionAdminUI
+CaseOfStudySection:
+  extensions:
+    - CaseOfStudySectionAdminUI
+IndexSection:
+  extensions:
+    - IndexSectionAdminUI
+CaseOfStudy:
+  extensions:
+    - CaseOfStudyAdminUI
+IndexItem:
+  extensions:
+    - IndexItemAdminUI
+PaperParagraph:
+  extensions:
+    - PaperParagraphAdminUI
+CaseOfStudyParagraph:
+  extensions:
+    - CaseOfStudyParagraphAdminUI
