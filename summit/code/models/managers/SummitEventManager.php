@@ -371,7 +371,6 @@ final class SummitEventManager implements ISummitEventManager
             $event->ToRecord                = isset($event_data['to_record'])? $event_data['to_record'] : 0;
             $event->AttendingMedia          = isset($event_data['attending_media'])? $event_data['attending_media'] : 0;
 
-            die(print_r($event_data));
             // speakers ...
             $speaker_ids = [];
 
