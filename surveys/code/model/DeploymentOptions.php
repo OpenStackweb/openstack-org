@@ -322,7 +322,7 @@ final class DeploymentOptions {
         '10,000 to 99,999 objects' => '10,000 to 99,999 objects',
         '100,000 to 999,999 objects' => '100,000 to 999,999 objects',
         '1 million to 9 million objects' => '1 million to 9 million objects',
-        '10 million to 999 million objects' => '10 million to 999 million objects',
+        '10 million to 99 million objects' => '10 million to 99 million objects',
         '100 million to 999 million objects' => '100 million to 999 million objects',
         '1 billion to 9 billion objects' => '1 billion to 9 billion objects',
         '10 billion to 99 billion objects' => '10 billion to 99 billion objects',
