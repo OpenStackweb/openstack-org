@@ -25,15 +25,21 @@ class PaperSection extends DataObject
 
     static $has_one = [
         'Paper' => 'Paper',
+        'ParentSection' => 'PaperSection',
     ];
 
     static $has_many = [
-        'Contents' => 'PaperParagraph'
+        'Contents' => 'PaperParagraph',
+        'SubSections' => 'PaperSection',
     ];
 
     public function getSlug(){
         $slug = singleton('SiteTree')->generateURLSegment($this->Title);
         return $slug;
+    }
+
+    public function getOrderedSubSections(){
+        return $this->SubSections()->sort('Order','ASC');
     }
 
     public function getOrderedContents(){

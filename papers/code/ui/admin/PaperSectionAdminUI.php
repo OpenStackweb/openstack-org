@@ -46,8 +46,15 @@ class PaperSectionAdminUI extends DataExtension
             $config->addComponent($sort = new GridFieldSortableRows('Order'));
             $contents = new GridField('Contents', 'Contents', $this->owner->Contents(), $config);
             $f->addFieldToTab('Root.Main', $contents);
+
+            // sub sections
+            $config = GridFieldConfig_RecordEditor::create(50);
+            $config->addComponent($sort = new GridFieldSortableRows('Order'));
+            $subSections = new GridField('SubSections', 'SubSections', $this->owner->SubSections(), $config);
+            $f->addFieldToTab('Root.Main', $subSections);
         }
 
         $f->addFieldToTab('Root.Main', new HiddenField('PaperID', 'PaperID'));
+        $f->addFieldToTab('Root.Main', new HiddenField('ParentID', 'ParentID'));
     }
 }

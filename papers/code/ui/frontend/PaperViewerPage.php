@@ -41,11 +41,20 @@ class PaperViewerPage extends Page {
     }
 
     public function renderSection($section){
+        $output = '';
+
         if($section instanceof CaseOfStudySection)
-            return $section->renderWith('CasesOfStudy_Section');
-        if($section instanceof IndexSection)
-            return $section->renderWith('Index_Section');
-        return $section->renderWith('Regular_Section');
+            $output =  $section->renderWith('CasesOfStudy_Section');
+        else if($section instanceof IndexSection)
+            $output = $section->renderWith('Index_Section');
+        else
+            $output = $section->renderWith('Regular_Section');
+
+        foreach($section->getOrderedSubSections() as $subSection){
+            $output .= $this->renderSection($subSection);
+        }
+
+        return $output;
     }
 }
 
