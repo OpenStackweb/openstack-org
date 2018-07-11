@@ -1241,8 +1241,8 @@ msgstr ""
 msgid "1 million to 9 million objects"
 msgstr ""
 
-# question ObjectStorageNumObjects value 10 million to 999 million objects label
-msgid "10 million to 999 million objects"
+# question ObjectStorageNumObjects value 10 million to 99 million objects label
+msgid "10 million to 99 million objects"
 msgstr ""
 
 # question ObjectStorageNumObjects value 100 million to 999 million objects label
