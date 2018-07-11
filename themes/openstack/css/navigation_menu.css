@@ -20,7 +20,7 @@ a.navbar-brand {
     display: none;
 }
 
-@media (min-width: 1024px) and (max-width: 1310px) {
+@media (min-width: 768px) and (max-width: 1310px) {
     .brand-wrapper {
         width: 75px;
         min-width: 75px;
@@ -30,6 +30,9 @@ a.navbar-brand {
         margin-left: 0px !important;
         height: 54px;
         width: 59px; }
+    .search-container {
+        left: 95px;
+    }
 }
 
 @media only screen and (max-device-width: 1024px) {
@@ -54,7 +57,9 @@ a.navbar-brand {
     padding: 20px 0; }
 
 .navbar-default .container {
-    background-color: white; }
+    background-color: white;
+    position: relative;
+}
 
 @media (min-width: 768px) and (max-width: 1200px) {
     .navbar-default .container {
@@ -65,15 +70,23 @@ ul.navbar-main {
     float: right; }
 
 @media (min-width: 768px) and (max-width: 1097px) {
-    ul.navbar-main {
-        display: block; } }
+    ul.navbar-main.show {
+        display: block;
+    }
+    .navbar-default .container {
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+}
 
 @media (max-width: 767px) {
-    ul.navbar-main {
+    ul.navbar-main.show {
         display: block;
         margin-right: 0;
         margin-left: 0;
-        width: 100%; } }
+        width: 100%;
+    }
+}
 
 .navbar-default ul.navbar-main > li > a {
     color: #8a959e;
@@ -99,7 +112,7 @@ ul.navbar-main {
     background: #286A9D;
     color: #fff; }
 
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
     .navbar-default ul.navbar-main > li > a.sign-in-btn {
         padding: 5px 10px;
         margin-top: 9px; }

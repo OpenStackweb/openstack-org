@@ -834,10 +834,11 @@ a, a:visited {
 /*Header Navigation more styles in navigation_menu.css */
 
 .search-container {
-  position: relative;
+  position: absolute;
   display: none;
-  float: left;
-  width: 84%; }
+  width: 80%;
+  left: 165px;
+}
 
 @media (min-width: 768px) and (max-width: 1200px) {
     .search-container
@@ -880,7 +881,7 @@ a, a:visited {
   }
 }
 
-@media (max-width: 1040px) {
+@media (max-width: 1060px) {
   .header-search-text
   {
     display: none;
