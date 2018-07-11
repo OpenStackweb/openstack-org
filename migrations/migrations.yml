@@ -90,7 +90,6 @@ migrations:
   - CommunityHelpersMigration
   - MemberLinkedInUrlMigration
   - CreateJobsManagerGroup
-  - TagGroupMigration
   - AddOnDeleteCascadeFKPromoCodesMigration
   - UpdateUploadPresentationSlidesEmailMigration
   - PresentationTagBugMigration
