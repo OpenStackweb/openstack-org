@@ -39,7 +39,7 @@ where ClassName ='ElectionSystem';",
 `NominationsOpen`,
 `NominationsClose`,
 `NominationAppDeadline`,
-`TimeZone`
+`TimeZoneIdentifier`
 )
 VALUES
 (
@@ -86,7 +86,7 @@ ElectionsClose =  CONCAT(DATE(ElectionsClose), ' 07:59:00'),
 NominationsOpen =  CONCAT(DATE(NominationsOpen), ' 08:00:00'),
 NominationsClose =  CONCAT(DATE(NominationsClose), ' 07:59:00'),
 NominationAppDeadline =  CONCAT(DATE(NominationAppDeadline), ' 07:59:00'),
-TimeZone = '133';"
+TimeZoneIdentifier = 'America/Los_Angeles';"
         ];
 
         foreach($queries as $sql)
