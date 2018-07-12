@@ -26,12 +26,13 @@ class TrainingDirectoryPage extends MarketPlaceDirectoryPage
 class TrainingDirectoryPage_Controller extends MarketPlaceDirectoryPage_Controller
 {
 
-    private static $allowed_actions = array('classes', 'handleIndex', 'handleFilter');
+    private static $allowed_actions = array('classes', 'handleIndex', 'handleFilter', 'FeedbackForm');
 
     static $url_handlers = array(
-        'classes' => 'classes',
-        'f/$Loc/$Level/$Keyword' => 'handleFilter',
-        '$Company!/$Slug' => 'handleIndex',
+        'classes'                   => 'classes',
+        'f/$Loc/$Level/$Keyword'    => 'handleFilter',
+        'FeedbackForm'              => 'FeedbackForm',
+        '$Company!/$Slug'           => 'handleIndex',
     );
 
     /**
