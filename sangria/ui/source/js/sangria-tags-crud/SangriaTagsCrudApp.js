@@ -68,7 +68,7 @@ class SangriaTagsCrudApp extends React.Component
         });
     };
 
-    hideModal = () => {
+    hideModal() {
         this.setState({
             modalOpen: false,
             edit_tag_id: 0,

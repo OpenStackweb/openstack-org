@@ -9,6 +9,12 @@ import {
     ModalFooter
 } from 'react-modal-bootstrap';
 
+const styleText = {
+    fontSize: '16px',
+    color: 'black',
+    textAlign: 'center'
+};
+
 export default class Confirm extends React.Component {
 
     constructor (props) {
@@ -25,19 +31,14 @@ export default class Confirm extends React.Component {
         });
     }
 
-    hide = () => {
+    hide() {
         this.setState({
             open: false
         });
-    };
-
-    styleText = {
-        fontSize: '16px',
-        color: 'black',
-        textAlign: 'center'
-    };
+    }
 
     render () {
+
         return (
             <Modal isOpen={this.state.open} onRequestHide={this.hide}>
                 <ModalHeader>
@@ -45,7 +46,7 @@ export default class Confirm extends React.Component {
                     <ModalTitle>Attention</ModalTitle>
                 </ModalHeader>
                 <ModalBody>
-                        <p style={this.styleText}>{this.props.text}</p>
+                        <p style={styleText}>{this.props.text}</p>
                 </ModalBody>
                 <ModalFooter>
                     <button className='btn btn-default' onClick={this.hide}> Cancel </button>

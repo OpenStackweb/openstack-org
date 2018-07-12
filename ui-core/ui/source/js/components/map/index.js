@@ -78,7 +78,7 @@ export class GMap extends React.Component {
         this._mapComponent = map;
     }
 
-    handleMapChange = () => {
+    handleMapChange() {
         let visible_markers = this.props.markers.filter(m => {
             let marker_loc = new google.maps.LatLng(m.lat, m.lng);
             return (this._mapComponent.getBounds().contains(marker_loc)) ;
@@ -87,7 +87,7 @@ export class GMap extends React.Component {
         this.props.onChangeCallback(visible_markers);
     };
 
-    handleMarkerClick = (marker_id) => {
+    handleMarkerClick(marker_id) {
         let markers = this.state.markers;
         let is_open = markers.find(m => m.id == marker_id).isInfoWindowOpen;
         markers.find(m => m.id == marker_id).isInfoWindowOpen = !is_open;
