@@ -529,7 +529,7 @@ a.profile-pic-wrapper {
     border-radius: 4px;
 }
 
-a.navbar-brand {
+.navbar-days a.navbar-brand {
     background: none !important;
     height: auto !important;
     width: auto !important;
