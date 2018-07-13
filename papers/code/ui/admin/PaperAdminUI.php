@@ -65,7 +65,7 @@ final class PaperAdminUI extends DataExtension
             );
             $config->addComponent($multi_class_selector);
             $config->addComponent($sort = new GridFieldSortableRows('Order'));
-            $gridField = new GridField('Sections', 'Sections', $this->owner->Sections(), $config);
+            $gridField = new GridField('Sections', 'Sections', $this->owner->Sections()->where('ParentSectionID = 0')->sort('Order'), $config);
             $f->addFieldToTab('Root.Sections', $gridField);
 
             // contributors

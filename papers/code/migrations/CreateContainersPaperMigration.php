@@ -12,6 +12,9 @@
  * limitations under the License.
  **/
 
+/**
+ * Class CreateContainersPaperMigration
+ */
 final class CreateContainersPaperMigration extends AbstractDBMigrationTask
 {
     protected $title = "CreateContainersPaperMigration";
@@ -55,9 +58,8 @@ final class CreateContainersPaperMigration extends AbstractDBMigrationTask
           '<p>A few years ago, you’d build an infrastructure with applications running in virtual machines, with some bare-metal machines for legacy applications. As infrastructure has evolved, virtual machines (VMs) enabled greater levels of efficiency and agility, but VMs alone don’t completely meet the needs of an agile approach to application deployment. They continue to serve as a foundation for running many applications, but increasingly, developers are looking toward the emerging trend of containers for leading-edge application development and deployment because containers offer increased levels of agility and efficiency.</p>',
           '<p>Container technologies like <a href="https://www.docker.com/open-source-0" target="_blank">Docker</a> and <a href="https://kubernetes.io" target="_blank">Kubernetes</a> are becoming the leading standards for building containerized applications. They help free organizations from complexity that limits development agility. Containers, container infrastructure, and container deployment technologies have proven themselves to be very powerful abstractions that can be applied to a number of different use cases. Using something like Kubernetes, an organization can deliver a cloud that solely uses containers for application delivery.</p>',
           '<p>But a leading-edge private cloud isn’t just about containers, and containers aren’t appropriate for all workloads and use cases. Today, most private cloud infrastructures need to encompass bare-metal machines for managing infrastructure, virtual machines for legacy applications, and containers for newer applications. The ability to support, manage and orchestrate all three approaches is the key to operational efficiency.</p>',
-          '<p><a href="https://openstack.org" target="_blank">OpenStack</a> is currently the best available option for building private clouds, with the ability to manage networking, storage and compute infrastructure, with support for virtual machines, bare-metal, and containers from one control plane. While Kubernetes is arguably the most popular container orchestrator and has changed application delivery, it depends on the availability of a solid cloud infrastructure, and OpenStack offers the most comprehensive open source infrastructure for hosting applications. OpenStack’s multi-tenant cloud infrastructure is a natural fit for Kubernetes, with several integration points, deployment solutions, and ability to federate across multiple clouds.</p>',
           '<p>In this paper, we’re going to explore how containers work within OpenStack, examine various use cases, and provide an overview of open source projects, from OpenStack and elsewhere, that help make containers a technology that’s easily adopted and utilized.</p>',
-          '<p class="text-center"><img src="https://www.openstack.org/themes/openstack/images/containers2/intro-diagram.svg" alt="Table 1" class="hover-shadow clickable-image"></p>',
+          '<p>The Edge Computing Group sees this evolution of cloud computing as very exciting, though we recognize that OpenStack’s ability to support cloud edge computing is in its early days. Based on initial community interest expressed at the OpenStack Summit Boston, a two-day workshop was held in September 2017 that brought together over 200 users and developers to start the hard work of defining relevant use cases and considering the tools and architectures needed to support them. Proof of concepts have been done and the community has a few early deployments in place. The Edge Computing Group has now taken up the challenge to describe fundamental requirements of a fully functional edge computing cloud infrastructure.</p>',
         ];
 
         $idx = 1;
@@ -110,17 +112,17 @@ final class CreateContainersPaperMigration extends AbstractDBMigrationTask
             '<p class="text-center"><img src="https://www.openstack.org/themes/openstack/images/containers2/table.svg" alt="Table 1" ></p>',
             '<p>Underlying each of these deployment systems are different approaches to building a set of containers for the OpenStack code and supporting services. The OpenStack Ansible (OSA) and Kolla projects provide their own project-hosted build systems, while LOCI focuses on building project application containers, without a specific orchestration system in mind. At a high level, the differences are: </p>',
             '<ol>
-                    <li>
-                        <p>OSA is unique in that it relies on lower-level LXC containers, and has a custom build system for creating LXC application containers.</p>
-                    </li>
-                    <li>
-                        <p>The Kolla build system produces Docker containers, one for each service, along with supporting containers for initializing and managing an OpenStack deployment. Kolla containers are highly configurable, with a choice of base operating system, source or package installations, and a template engine for even further customization. </p>
-                    </li>
-                    <li>
-                        <p>The final option for building OpenStack application containers is LOCI. LOCI also builds Docker containers, and delivers one container for each project. LOCI is focused on producing compact and secure containers quickly, for all common distributions, with the expectation that they will be used as a foundation to build upon by the deployment system.
-                        </p>
-                    </li>
-                </ol>',
+<li>
+<p>OSA is unique in that it relies on lower-level LXC containers, and has a custom build system for creating LXC application containers.</p>
+</li>
+<li>
+<p>The Kolla build system produces Docker containers, one for each service, along with supporting containers for initializing and managing an OpenStack deployment. Kolla containers are highly configurable, with a choice of base operating system, source or package installations, and a template engine for even further customization. </p>
+</li>
+<li>
+<p>The final option for building OpenStack application containers is LOCI. LOCI also builds Docker containers, and delivers one container for each project. LOCI is focused on producing compact and secure containers quickly, for all common distributions, with the expectation that they will be used as a foundation to build upon by the deployment system.
+</p>
+</li>
+</ol>',
             '<h5 class="highlight">Bare-Metal Infrastructure - OpenStack and Solving the Bootstrap Problem</h5>',
             '<p>At the foundation of every cloud, there exists a data center of bare-metal servers that host the infrastructure services. Even “serverless computing” is running software on a cloud on hardware in a data center. The problem of how to bootstrap hardware infrastructure is a critical problem that OpenStack software is uniquely qualified to address in a way that gives cloud-like qualities to bare-metal management.</p>',
             '<p><a href="https://docs.openstack.org/ironic/latest/" target="_blank">OpenStack Ironic</a> provides bare-metal as a service. As a standalone service it can discover bare-metal nodes, catalog them in a management database, and manage the entire server lifecycle including enrolling, provisioning, maintenance, and decommissioning. When used as a driver to <a href="https://docs.openstack.org/nova/latest/" target="_blank">OpenStack Nova</a> and combined with the full suite of OpenStack services, it delivers a powerful, cloud-like service for managing your entire bare-metal infrastructure.</p>',
@@ -141,7 +143,11 @@ final class CreateContainersPaperMigration extends AbstractDBMigrationTask
             '<h4 class="subtitle">Side-by-Side OpenStack and Kubernetes Integrations</h4>',
             '<p>One of the primary benefits of choosing open source platforms is in the stability of interfaces across standard deployments of those platforms. Both the OpenStack Foundation and the Cloud Native Computing Foundation (CNCF) maintain interoperability standards for OpenStack clouds and Kubernetes clusters, guaranteeing that libraries, applications, and drivers will work across all platforms regardless of where they are deployed. This creates opportunities for side-by-side integrations, allowing both OpenStack and Kubernetes to take advantage of the resources provided by the other.</p>',
             '<p>The OpenStack Special Interest Group (SIG-OpenStack) in the Kubernetes community maintains the Cloud Provider OpenStack plugin. In addition to cloud provider interface for running Kubernetes on OpenStack, it also maintains several drivers that allows Kubernetes to take advantage of individual OpenStack services. These drivers include:</p>',
-            '<ul><li><p>Two standalone Cinder drivers. A Flex Volume driver uses an exec-based model to interface with drivers, and a Container Storage Interface (CSI) driver which uses a standard interface for container orchestration systems to expose arbitrary storage systems to their container workloads. With support for over 70 storage drivers, these drivers make it possible to interface a wealth of battle tested proprietary and open source storage devices through a single Cinder API.</p></li><li><p>A webhook-based authentication and authorization interface to Keystone. Each mode, authentication and authorization, can be configured independently of one another. Though a work in progress, the interface supports a soft-multi-tenancy that backs Kubernetes RBAC with OpenStack Keystone.</p></li></ul>',
+            '<ul>
+<li>
+<p>Two standalone Cinder drivers. A Flex Volume driver uses an exec-based model to interface with drivers, and a Container Storage Interface (CSI) driver which uses a standard interface for container orchestration systems to expose arbitrary storage systems to their container workloads. With support for over 70 storage drivers, these drivers make it possible to interface a wealth of battle tested proprietary and open source storage devices through a single Cinder API.</p></li><li><p>A webhook-based authentication and authorization interface to Keystone. Each mode, authentication and authorization, can be configured independently of one another. Though a work in progress, the interface supports a soft-multi-tenancy that backs Kubernetes RBAC with OpenStack Keystone.</p>
+</li>
+</ul>',
             '<p>Both OpenStack and Kubernetes support highly dynamic networking models that are backed by a variety of drivers. Because of these standard network interfaces, it’s easy to build standalone OpenStack and Kubernetes clusters with strong network integrations. Within OpenStack, the Kuryr project produces a Common Network Interface (CNI) driver that delivers Neutron networking to Docker and Kubernetes. On the flip side, there projects like Calico offer Neutron drivers, providing direct access to popular Kubernetes network overlays through standard Neutron APIs.</p>',
         ];
 
@@ -222,55 +228,53 @@ final class CreateContainersPaperMigration extends AbstractDBMigrationTask
           '<p class="text-center"><img class="medium-img" src="https://www.openstack.org/themes/openstack/images/containers2/cern-diagram2.jpg" alt="Cern"></p>',
           '<p>At CERN, several workloads run within containers provisioned by Magnum, these include:</p>',
           '<ul>
-                            <li>
-                                <p>Reana/Recast
-                                    <ul>
-                                        <li>
-                                    <p>These tools provide a framework for executing reusable workflows in <a href="https://github.com/recast-hep"> High Energy Physics</a>. Containers offer the ability to package the analysis software and data in a single, easily shareable unit as well as easy scaling out both on-premises and using external resources. Work is scheduled as Kubernetes jobs based on Yadage Workflows supporting analysis and data preservation activities.
-                                    </p>
-                                    </li>
-                                </ul>
-                            </p>
-                        </li>
-                        <li>
-                            <p>Spark as a Service
-                                <ul>
-                                    <li>
-                                    <p>Recently, Kubernetes was added as a resource manager for Spark. Spark can spawn drivers and executors as pods and Kubernetes is responsible for the scheduling and lifecycle. A team in the CERN IT department is developing a service where users can create Kubernetes clusters on demand with OpenStack Magnum and deploy Spark on Kubernetes, providing all the required integrations with CERN’s specialized filesystems and data sources in a secure way. Users with a few commands can effectively create a Spark deployment with the desired size, only for the time they need it and with the option to scale up or down their deployment while running.</p>
-                                    </li>
-                                </ul>
-                            </p>
-                        </li>
-                        <li>
-                            <p>LHC experiment detector trigger simulation for LHC upgrade
-                                <ul>
-                                    <li>
-                            <p>The LHC is due to be upgraded to higher luminosity during the 2020s which requires significant enhancements in the experiment trigger farms which filter the collisions. Large scale Kubernetes clusters have been created to simulate the different approaches for the <a href="http://atlas.cern/" target="_blank">ATLAS</a> experiment and validate the design, resulting in some fine tuning of Kubernetes and OpenStack components.
-                            </p>
-                        </li>
-                        </ul>
-                        </p>
-                        </li>
-                        <li>
-                            <p>Gitlab Continuous Integration Runners
-                                <ul>
-                                    <li>
-                            <p>Gitlab enables users to build CI/CD jobs and execute them on shared or project specific runners. CERN users can leverage the CERN Container Service to test and build software, build and publish container images and documentation or set complex pipelines managing the full application lifecycle, including automated deployments into different environments.
-                            </p>
-                        </li>
-                        </ul>
-                        </p>
-                        <p>Federated Kubernetes compute farms with external clouds
-                            <ul>
-                                <li>
-                        <p>CERN uses federations of Kubernetes clusters to support multi-cloud operations. Multiple clusters can be seamlessly integrated across clouds of varying technologies, including AWS, GCE and OpenStack clouds such as CERN and the T-Systems Open Telekom Cloud <a href="https://www.youtube.com/watch?v=2PRGUOxL36M" target="_blank">as demonstrated at Kubecon 2018</a>.
-
-                        </p>
-                        </li>
-                        </ul>
-                        </p>
-                        </li>
-                        </ul>',
+<li>
+<p>Reana/Recast
+<ul>
+<li>
+<p>These tools provide a framework for executing reusable workflows in <a href="https://github.com/recast-hep"> High Energy Physics</a>. Containers offer the ability to package the analysis software and data in a single, easily shareable unit as well as easy scaling out both on-premises and using external resources. Work is scheduled as Kubernetes jobs based on Yadage Workflows supporting analysis and data preservation activities.
+</p>
+</li>
+</ul>
+</p>
+</li>
+<li>
+<p>Spark as a Service
+<ul>
+<li>
+<p>Recently, Kubernetes was added as a resource manager for Spark. Spark can spawn drivers and executors as pods and Kubernetes is responsible for the scheduling and lifecycle. A team in the CERN IT department is developing a service where users can create Kubernetes clusters on demand with OpenStack Magnum and deploy Spark on Kubernetes, providing all the required integrations with CERN’s specialized filesystems and data sources in a secure way. Users with a few commands can effectively create a Spark deployment with the desired size, only for the time they need it and with the option to scale up or down their deployment while running.</p>
+</li>
+</ul>
+</p>
+</li>
+<li>
+<p>LHC experiment detector trigger simulation for LHC upgrade
+<ul>
+<li>
+<p>The LHC is due to be upgraded to higher luminosity during the 2020s which requires significant enhancements in the experiment trigger farms which filter the collisions. Large scale Kubernetes clusters have been created to simulate the different approaches for the <a href="http://atlas.cern/" target="_blank">ATLAS</a> experiment and validate the design, resulting in some fine tuning of Kubernetes and OpenStack components.
+</p>
+</li>
+</ul>
+</p>
+</li>
+<li>
+<p>Gitlab Continuous Integration Runners
+<ul>
+<li>
+<p>Gitlab enables users to build CI/CD jobs and execute them on shared or project specific runners. CERN users can leverage the CERN Container Service to test and build software, build and publish container images and documentation or set complex pipelines managing the full application lifecycle, including automated deployments into different environments.
+</p>
+</li>
+</ul>
+</p>
+<p>Federated Kubernetes compute farms with external clouds
+<ul>
+<li>
+<p>CERN uses federations of Kubernetes clusters to support multi-cloud operations. Multiple clusters can be seamlessly integrated across clouds of varying technologies, including AWS, GCE and OpenStack clouds such as CERN and the T-Systems Open Telekom Cloud <a href="https://www.youtube.com/watch?v=2PRGUOxL36M" target="_blank">as demonstrated at Kubecon 2018</a>.</p>
+</li>
+</ul>
+</p>
+</li>
+</ul>',
            '<p>Integrating virtual machines, container engines and bare-metal under a single framework provides for easy views on usage accounting, ownership and quota. Manila storage drivers for Kubernetes allow transparent provisioning of file shares. This supports both the IT department in capacity planning and the experiment resource coordinators in defining the priorities for their working groups. Resource management policies such as reassignment or expiry of resources on departure of staff are handled in consistent workflows.</p>',
         ];
 
@@ -300,9 +304,44 @@ final class CreateContainersPaperMigration extends AbstractDBMigrationTask
             '<p class="text-center"><img class="medium-img" src="https://www.openstack.org/themes/openstack/images/containers2/sk-diagram2.jpg" alt="SK Telecom"></p>',
             '<p>SKT automates its deployments with <a href="https://github.com/att-comdev/armada">Armada</a>, a sub-project of <a href="http://www.airshipit.org" target="_blank">Airship</a>, which was introduced in the community as a new open infrastructure project by AT&T. SKT is collaborating in community to provide enhancements to the project based on their production uses.</p>',
             '<p>In practical use, SKT has already seen a large number of benefits from deploying OpenStack on Kubernetes including:</p>',
-            '<ul><li><p>Simple and Easy Installations.</p></li><li><p>Cluster Auto-Healing.</p></li><li><p>An ability to upgrade and update OpenStack with minimal impact to running services.</p></li><li><p>Rapid adoption of advanced release methodologies, including blue-green deployment, canary releases.</p></li><li><p>Complete automated management of Python dependencies through container isolation.</p></li><li><p>Secure secret and configuration management.</p></li><li><p>Fast and flexible roll-outs of cluster updates.</p></li></ul>',
+            '<ul>
+<li>
+<p>Simple and Easy Installations.</p>
+</li>
+<li>
+<p>Cluster Auto-Healing.</p>
+</li>
+<li>
+<p>An ability to upgrade and update OpenStack with minimal impact to running services.</p>
+</li>
+<li>
+<p>Rapid adoption of advanced release methodologies, including blue-green deployment, canary releases.</p>
+</li>
+<li>
+<p>Complete automated management of Python dependencies through container isolation.</p>
+</li>
+<li>
+<p>Secure secret and configuration management.</p>
+</li>
+<li>
+<p>Fast and flexible roll-outs of cluster updates.</p>
+</li>
+</ul>',
             '<p>SKT is still testing the approach, but is actively moving towards running their OpenStack-Helm deployments in production. By end of this year, SKT will have at least three production clusters, with the fourth and largest coming online in 2019. These use cases include:</p>',
-            '<ul><li><p>ABigDataplatform(plannedtogoliveQ42018)</p></li><li><p>Avirtualdesktopinfrastructureplatform(productionreadybyQ42018)</p></li><li><p>AGeneralpurposeInternalPrivateCloud(plannedtogoliveQ32018)</p></li><li><p>Atelconetworkinfrastructurebuiltonvirtualnetworkfunctions(plannedtoopensometimein2019)<p></li></ul>',
+            '<ul>
+<li>
+<p>ABigDataplatform(plannedtogoliveQ42018)</p>
+</li>
+<li>
+<p>Avirtualdesktopinfrastructureplatform(productionreadybyQ42018)</p>
+</li>
+<li>
+<p>AGeneralpurposeInternalPrivateCloud(plannedtogoliveQ32018)</p>
+</li>
+<li>
+<p>Atelconetworkinfrastructurebuiltonvirtualnetworkfunctions(plannedtoopensometimein2019)<p>
+</li>
+</ul>',
             '<p>SKT is also trying to improve automation on telecom infrastructure operation by utilizing containerized VNFs and leveraging containers’ auto healing and fast scale-out features. In order to allow interaction between virtual machine based VNFs and containerized VNFs, <a href="https://wiki.onosproject.org/display/ONOS/SONA%3A+DC+Network+Virtualization">Simplified Overlay Network Architecture</a> (SONA), which is a virtual network solution for OpenStack, will support communication between VMs and containers. SONA uses the Kuryr project for integration of OpenStack and Kubernetes, and it optimizes network performance using software defined networking technologies.</p>',
             '<p>Overall, SKT is finding that Kubernetes helps solve many of the complexities of deploying and operating OpenStack. Simplifying OpenStack gives them a powerful approach to deliver advanced infrastructure innovation for the 5G era. Focusing efforts on Openstack on Kubernetes dramatically increased their internal capability to deal with the evolving shift toward microservices in containers and become a critical infrastructure for delivering Artificial Intelligence, Internet of Things, and Machine Learning.</p>',
         ];
@@ -404,7 +443,7 @@ final class CreateContainersPaperMigration extends AbstractDBMigrationTask
         $idx = 1;
         foreach($section_6_items as $title => $content){
             $c = new IndexItem();
-            $c->Titlw = $title;
+            $c->Title = $title;
             $c->Content = self::cleanContent($content);
             $c->Order = $idx;
             $c->SectionID = $section5->ID;
@@ -420,63 +459,63 @@ final class CreateContainersPaperMigration extends AbstractDBMigrationTask
         $section7->write();
 
         $section_7_contents = [
-            ' <h4 class="subtitle">Members of the OpenStack SIG-Kubernetes Community</h4>
-                <ul>
-                    <li>
-                        <p>Jaesuk Ahn, SK Telecom</p>
-                    </li>
-                    <li>
-                        <p>Christian Berendt, Betacloud Solutions GmbH</p>
-                    </li>
-                    <li>
-                        <p>Anne Bertucio, OpenStack Foundation</p>
-                    </li>
-                    <li>
-                        <p>Pete Birley, AT&#38;T</p>
-                    </li>
-                    <li>
-                        <p>Chris Hoge, OpenStack Foundation</p>
-                    </li>
-                    <li>
-                        <p>Lingxian Kong, Catalyst Cloud</p>
-                    </li>
-                    <li>
-                        <p>Hongbin Lu, Huawei</p>
-                    </li>
-                    <li>
-                        <p>Daniel Mellado, Red Hat, Inc.</p>
-                    </li>
-                    <li>
-                        <p>Allison Price, OpenStack Foundation</p>
-                    </li>
-                    <li>
-                        <p>David Rabel, B1 Systems GmbH</p>
-                    </li>
-                    <li>
-                        <p>Sangho Shin, SK Telecom</p>
-                    </li>
-                    <li>
-                        <p>Davanum Srinivas, Huawei</p>
-                    </li>
-                    <li>
-                        <p>Luis Tomás, Red Hat, Inc.</p>
-                    </li>
-                    <li>
-                        <p>Sam Yaple, Verizon Digital Media Services</p>
-                    </li>
-                    <li>
-                        <p>Mikhail Fedosin, Red Hat, Inc.</p>
-                    </li>
-                    <li>
-                        <p>Flavio Percoco, Red Hat, Inc.</p>
-                    </li>
-                </ul>',
+            '<h4 class="subtitle">Members of the OpenStack SIG-Kubernetes Community</h4>
+<ul>
+<li>
+<p>Jaesuk Ahn, SK Telecom</p>
+</li>
+<li>
+<p>Christian Berendt, Betacloud Solutions GmbH</p>
+</li>
+<li>
+<p>Anne Bertucio, OpenStack Foundation</p>
+</li>
+<li>
+<p>Pete Birley, AT&T</p>
+</li>
+<li>
+<p>Chris Hoge, OpenStack Foundation</p>
+</li>
+<li>
+<p>Lingxian Kong, Catalyst Cloud</p>
+</li>
+<li>
+<p>Hongbin Lu, Huawei</p>
+</li>
+<li>
+<p>Daniel Mellado, Red Hat, Inc.</p>
+</li>
+<li>
+<p>Allison Price, OpenStack Foundation</p>
+</li>
+<li>
+<p>David Rabel, B1 Systems GmbH</p>
+</li>
+<li>
+<p>Sangho Shin, SK Telecom</p>
+</li>
+<li>
+<p>Davanum Srinivas, Huawei</p>
+</li>
+<li>
+<p>Luis Tomás, Red Hat, Inc.</p>
+</li>
+<li>
+<p>Sam Yaple, Verizon Digital Media Services</p>
+</li>
+<li>
+<p>Mikhail Fedosin, Red Hat, Inc.</p>
+</li>
+<li>
+<p>Flavio Percoco, Red Hat, Inc.</p>
+</li>
+</ul>',
             '<h4 class="subtitle">Editor</h4>
-                <ul>
-                    <li>
-                        <p>Brian E Whitaker, Zettabyte Content LLC</p>
-                    </li>
-                </ul>'
+<ul>
+<li>
+<p>Brian E Whitaker, Zettabyte Content LLC</p>
+</li>
+</ul>'
         ];
 
         $idx = 1;

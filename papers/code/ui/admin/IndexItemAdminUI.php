@@ -26,6 +26,8 @@ class IndexItemAdminUI extends DataExtension
 
         $f->addFieldToTab('Root.Main', new TextField('Title', 'Title'));
 
+        $f->addFieldToTab('Root.Main', new TextField('Link', 'Link'));
+
         $f->addFieldToTab('Root.Main', new HtmlEditorField('Content', 'Content'));
 
         $f->addFieldToTab('Root.Main', new HiddenField('SectionID', 'SectionID'));

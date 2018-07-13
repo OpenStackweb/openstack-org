@@ -4,7 +4,7 @@
         <% if $Subtitle %>
             <h4 class="subtitle">{$_T($Paper.I18nContext, $Subtitle)}</h4>
         <% end_if %>
-        <% loop OrderedContents %>
+        <% loop $OrderedContents %>
             $_T($Top.Paper.I18nContext, $Content)
         <% end_loop %>
     </div>

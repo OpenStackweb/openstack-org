@@ -19,6 +19,7 @@ class IndexItem extends DataObject
 {
     private static $db = [
         'Title' => 'Text',
+        'Link'     => 'Text',
         'Content' => 'HTMLText',
         'Order' => 'Int',
     ];

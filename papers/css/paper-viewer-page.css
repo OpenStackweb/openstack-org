@@ -77,13 +77,15 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     border: none;
     background: transparent;
     box-shadow: none;
-    padding: 0;
     list-style: none;
-    padding-left: 5%;
     -webkit-transition: all 0.5s ease-in-out;
     -moz-transition: all 0.5s ease-in-out;
     -o-transition: all 0.5s ease-in-out;
     transition: all 0.5s ease-in-out;
+}
+
+.containers-page .navigation .dropdown .sub-dropdown-menu li a{
+    display: block;
 }
 
 .containers-page .navigation .dropdown .dropdown-menu li a,
@@ -436,4 +438,12 @@ img.hover-shadow {
 
 #language-selector {
     padding: 10px;
+}
+
+.index-link {
+    float: right !important;
+    display: inline  !important;
+    text-decoration: none  !important;;
+    padding: 0  !important;;
+    border: 0  !important;;
 }

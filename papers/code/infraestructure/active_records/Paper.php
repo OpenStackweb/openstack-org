@@ -54,11 +54,11 @@ final class Paper extends DataObject
     }
 
     public function getOrderedSections(){
-        return $this->Sections()->sort('Order','ASC');
+        return $this->Sections()->where('ParentSectionID = 0')->sort('Order','ASC');
     }
 
     public function getFirstSection(){
-        return $this->Sections()->sort('Order','ASC')->first();
+        return $this->Sections()->where('ParentSectionID = 0')->sort('Order','ASC')->first();
     }
 
     public function getI18nContext(){

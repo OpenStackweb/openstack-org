@@ -110,3 +110,4 @@ migrations:
   - CreateJobPostersGroupMigration
   - SummitSelectionPlansMigration
   - CreateContainersPaperMigration
+  - CreateEdgeComputingPaperMigration
