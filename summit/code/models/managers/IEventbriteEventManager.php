@@ -18,6 +18,7 @@ interface IEventbriteEventManager
      * @param string $type
      * @param string $api_url
      * @return IEventbriteEvent
+     * @throws EntityAlreadyExistsException
      */
     public function registerEvent($type, $api_url);
 

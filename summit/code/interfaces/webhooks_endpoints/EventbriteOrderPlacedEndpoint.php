@@ -80,6 +80,10 @@ class EventbriteOrderPlacedEndpoint extends AbstractRestfulJsonApi
         {
             $this->manager->registerEvent('ORDER_PLACED', $json_request['api_url']);
         }
+        catch (EntityAlreadyExistsException $ex1){
+            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
+            return $this->httpError(412);
+        }
         catch(Exception $ex)
         {
             SS_Log::log($ex->getMessage(), SS_Log::ERR);
