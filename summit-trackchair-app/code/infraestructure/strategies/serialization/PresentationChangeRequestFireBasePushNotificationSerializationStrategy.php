@@ -71,10 +71,14 @@ final class PresentationChangeRequestFireBasePushNotificationSerializationStrate
      */
     private function serializePresentation()
     {
-        $presentation_array = array();
-        $presentation_array['id']                    = $this->notification->Presentation()->ID;
-        $presentation_array['change_requests_count'] = $this->notification->Presentation()->ChangeRequests()->filter('Status', SummitCategoryChange::STATUS_PENDING)->Count();
-        $presentation_array['comment_count']         = $this->notification->Presentation()->Comments()->Count();
+        $presentation_array = [];
+        $presentation_id = intval($this->notification->PresentationID);
+        $presentation = Presentation::get()->byID($presentation_id);
+        if(is_null($presentation))
+            throw new InvalidArgumentException("Presentation does not exists!");
+        $presentation_array['id']                    = $presentation_id;
+        $presentation_array['change_requests_count'] = $presentation->ChangeRequests()->filter('Status', SummitCategoryChange::STATUS_PENDING)->Count();
+        $presentation_array['comment_count']         = $presentation->Comments()->Count();
 
         return json_encode($presentation_array);
     }

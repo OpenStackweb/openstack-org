@@ -91,6 +91,9 @@ class PushNotificationManager
                         ++$qty;
                     }
                 }
+                catch (InvalidArgumentException $ex1){
+                    SS_Log::log($ex1->getMessage(), SS_Log::WARN);
+                }
                 catch(Exception $ex)
                 {
                     SS_Log::log($ex->getMessage(), SS_Log::ERR);
