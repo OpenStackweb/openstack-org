@@ -17,19 +17,19 @@
  */
 class PaperSection extends DataObject
 {
-    static $db = [
+    private static $db = [
         'Title' => 'Text',
         'Subtitle' => 'Text',
         'Order' => 'Int',
     ];
 
-    static $has_one = [
-        'Paper' => 'Paper',
+    private static $has_one = [
+        'Paper'         => 'Paper',
         'ParentSection' => 'PaperSection',
     ];
 
-    static $has_many = [
-        'Contents' => 'PaperParagraph',
+    private static $has_many = [
+        'Contents'    => 'PaperParagraph',
         'SubSections' => 'PaperSection',
     ];
 

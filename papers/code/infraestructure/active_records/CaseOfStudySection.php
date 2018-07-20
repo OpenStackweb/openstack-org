@@ -17,7 +17,7 @@
  */
 final class CaseOfStudySection extends PaperSection
 {
-    static $has_many = [
-        'CasesOfStudy' => 'CaseOfStudy',
-    ];
+    public function getOrderedCasesOfStudy(){
+        return $this->SubSections()->sort('Order','ASC');
+    }
 }

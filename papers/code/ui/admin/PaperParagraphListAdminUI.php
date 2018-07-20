@@ -12,16 +12,8 @@
  * limitations under the License.
  **/
 
-class CaseOfStudyParagraphAdminUI extends DataExtension
+class PaperParagraphListAdminUI extends PaperParagraphAdminUI
 {
-    /**
-     * @var array
-     */
-    private static $summary_fields = [
-        'ID'                   => 'ID',
-        'Content'           => 'Content',
-    ];
-
     public function updateCMSFields(FieldList $f)
     {
         //clear all fields
@@ -31,7 +23,14 @@ class CaseOfStudyParagraphAdminUI extends DataExtension
         }
 
         $f->add($rootTab = new TabSet("Root", $tabMain = new Tab('Main')));
-        $f->addFieldToTab('Root.Main', new HtmlEditorField('Content', 'Content'));
-        $f->addFieldToTab('Root.Main', new HiddenField('CaseOfStudyID', 'CaseOfStudyID'));
+        $f->addFieldToTab('Root.Main', new DropdownField('SubType', 'SubType', $this->owner->dbObject('SubType')->enumValues()));
+
+        if($this->owner->ID > 0){
+            // sub sections
+            $config = GridFieldConfig_RecordEditor::create(50);
+            $config->addComponent($sort = new GridFieldSortableRows('Order'));
+            $items = new GridField('Items', 'Items', $this->owner->getOrderedItems(), $config);
+            $f->addFieldToTab('Root.Main', $items);
+        }
     }
 }

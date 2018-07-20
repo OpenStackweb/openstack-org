@@ -12,16 +12,18 @@
  * limitations under the License.
  **/
 
-class PaperContributor extends DataObject
+class PaperParagraphList extends PaperParagraph
 {
-    static $db = [
-        'FirstName' => 'Text',
-        'Surname' => 'Text',
-        'Role' => 'Text',
+
+    private static $db = [
+        'SubType' => "Enum('UL,OL','UL')",
     ];
 
-    static $has_one = [
-        'Member' => 'Member',
-        'Paper' => 'Paper',
+    private static $has_many = [
+        'Items' => 'PaperParagraphListItem',
     ];
+
+    public function getOrderedItems(){
+        return $this->Items()->where('ParentID = 0')->sort('Order','ASC');
+    }
 }

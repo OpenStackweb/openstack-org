@@ -14,14 +14,20 @@
 
 class PaperParagraph extends DataObject
 {
-    static $db = [
+    private static $db = [
+        'Type'    => "Enum('P,LIST,IMG,H5,H4','P')",
         'Content' => 'HTMLText',
-        'Order' => 'Int',
+        'Order'   => 'Int',
     ];
 
-    static $has_one = [
+    private static $has_one = [
         'Section' => 'PaperSection',
     ];
+
+    public function setContent($value){
+        $value = preg_replace ( "/<p[^>]*?>(.*)<\/p>/" , "$1" , $value );
+        $this->setField('Content', $value);
+    }
 
     protected function validate()
     {

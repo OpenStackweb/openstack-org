@@ -21,6 +21,9 @@
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                     <% loop $Top.Paper.OrderedSections %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-target="{$Slug}">$_T($Top.Paper.I18nContext, $Title)</a>
+                        </li>
                         <% if $SubSections %>
                             <ul class="sub-dropdown-menu">
                                 <% loop $OrderedSubSections %>
@@ -30,9 +33,6 @@
                                 <% end_loop %>
                             </ul>
                         <% end_if %>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-target="{$Slug}">$_T($Top.Paper.I18nContext, $Title)</a>
-                        </li>
                     <% end_loop %>
                 </ul>
             </div>

@@ -28,6 +28,11 @@ class IndexItem extends DataObject
         'Section' => 'IndexSection',
     ];
 
+    public function setContent($value){
+        $value = preg_replace ( "/<p[^>]*?>(.*)<\/p>/" , "$1" , $value );
+        $this->setField('Content', $value);
+    }
+
     public function getSlug(){
         $slug = singleton('SiteTree')->generateURLSegment($this->Title);
         return $slug;

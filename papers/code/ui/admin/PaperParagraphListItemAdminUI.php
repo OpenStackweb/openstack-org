@@ -12,17 +12,13 @@
  * limitations under the License.
  **/
 
-/**
- * Class PaperParagraphAdminUI
- */
- class PaperParagraphAdminUI extends DataExtension
+class PaperParagraphListItemAdminUI extends DataExtension
 {
     /**
      * @var array
      */
     private static $summary_fields = [
         'ID'       => 'ID',
-        'Type'     => 'Type',
         'Content'  => 'Content',
     ];
 
@@ -35,8 +31,18 @@
         }
 
         $f->add($rootTab = new TabSet("Root", $tabMain = new Tab('Main')));
-        $f->addFieldToTab('Root.Main', new DropdownField('Type', 'Type', $this->owner->dbObject('Type')->enumValues()));
         $f->addFieldToTab('Root.Main', new HtmlEditorField('Content', 'Content'));
-        $f->addFieldToTab('Root.Main', new HiddenField('SectionID', 'SectionID'));
+        $f->addFieldToTab('Root.Main', new HiddenField('OwnerID', 'OwnerID'));
+        $f->addFieldToTab('Root.Main', new HiddenField('ParentID', 'ParentID'));
+
+        $f->addFieldToTab('Root.Main', new DropdownField('SubItemsContainerType', 'Sub Items Container Type', $this->owner->dbObject('SubItemsContainerType')->enumValues()));
+
+        if($this->owner->ID > 0){
+            // sub sections
+            $config = GridFieldConfig_RecordEditor::create(50);
+            $config->addComponent($sort = new GridFieldSortableRows('Order'));
+            $items = new GridField('SubItems', 'SubItems', $this->owner->SubItems(), $config);
+            $f->addFieldToTab('Root.Main', $items);
+        }
     }
 }

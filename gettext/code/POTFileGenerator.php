@@ -56,6 +56,7 @@ POT_FILE_ENTRY_TPL;
      */
      public function addEntry($msgid, $comment){
         $msgid = trim($msgid);
+        if(empty($msgid)) return;
 
         $_arr = preg_split("/[\r\n]+/",$msgid,-1,PREG_SPLIT_NO_EMPTY);
 

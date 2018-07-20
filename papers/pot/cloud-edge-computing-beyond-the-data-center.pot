@@ -10,263 +10,234 @@ msgstr ""
 # paper 2 Subtitle
 msgid "Beyond the Data Center"
 msgstr ""
-# paper 2 - section 8 title
+# paper 2 - section 12 title
 msgid "INTRODUCTION"
 msgstr ""
-# paper 2 - section 8 paragraph 45
-msgid "<p>For over a decade, centralized cloud computing has been considered a standard IT delivery platform. Though cloud computing is ubiquitous, emerging requirements and workloads are beginning to expose its limitations. With its strong data center centric view, where compute and storage resources are relatively plentiful and centralized, little or no thought was ever given to the optimization of the supporting hypervisor and management platform footprint. Few cloud developers seriously considered the requirements needed to support resource-constrained nodes reachable only over unreliable or bandwidth-limited network connections, or thought about the needs of applications that demand very high bandwidth, low latency, or widespread compute capacity across many sites.</p>"
+# paper 2 - section 12 paragraph 87
+msgid "For over a decade, centralized cloud computing has been considered a standard IT delivery platform. Though cloud computing is ubiquitous, emerging requirements and workloads are beginning to expose its limitations. With its strong data center centric view, where compute and storage resources are relatively plentiful and centralized, little or no thought was ever given to the optimization of the supporting hypervisor and management platform footprint. Few cloud developers seriously considered the requirements needed to support resource-constrained nodes reachable only over unreliable or bandwidth-limited network connections, or thought about the needs of applications that demand very high bandwidth, low latency, or widespread compute capacity across many sites."
 msgstr ""
-# paper 2 - section 8 paragraph 46
-msgid "<p>New applications, services, and workloads increasingly demand a different kind of architecture, one that’s built to directly support a distributed infrastructure. New requirements for availability and cloud capability at remote sites are needed to support both today’s requirements (retail data analytics, network services) and tomorrow’s innovations (smart cities, AR/VR). The maturity, robustness, flexibility, and simplicity of cloud now needs to be extended across multiple sites and networks in order to cope with evolving demands.</p>"
+# paper 2 - section 12 paragraph 88
+msgid "New applications, services, and workloads increasingly demand a different kind of architecture, one that’s built to directly support a distributed infrastructure. New requirements for availability and cloud capability at remote sites are needed to support both today’s requirements (retail data analytics, network services) and tomorrow’s innovations (smart cities, AR/VR). The maturity, robustness, flexibility, and simplicity of cloud now needs to be extended across multiple sites and networks in order to cope with evolving demands."
 msgstr ""
-# paper 2 - section 8 paragraph 47
-msgid "<p>Container technologies like <a href=\"https://www.docker.com/open-source-0\" target=\"_blank\">Docker</a> and <a href=\"https://kubernetes.io\" target=\"_blank\">Kubernetes</a> are becoming the leading standards for building containerized applications. They help free organizations from complexity that limits development agility. Containers, container infrastructure, and container deployment technologies have proven themselves to be very powerful abstractions that can be applied to a number of different use cases. Using something like Kubernetes, an organization can deliver a cloud that solely uses containers for application delivery.</p>"
+# paper 2 - section 12 paragraph 89
+msgid "Recently companies have begun to apply the simplified administration and flexibility of cloud computing architectures to distributed infrastructures that span across multiple sites and networks. Organizations have an emerging need to take cloud capabilities across WAN networks and into increasingly smaller deployments out at the network edge. Though this approach is in its early days, it is becoming clear that many emerging use cases and scenarios would benefit from distributed architectures."
 msgstr ""
-# paper 2 - section 8 paragraph 48
-msgid "<p>Recently companies have begun to apply the simplified administration and flexibility of cloud computing architectures to distributed infrastructures that span across multiple sites and networks. Organizations have an emerging need to take cloud capabilities across WAN networks and into increasingly smaller deployments out at the network edge. Though this approach is in its early days, it is becoming clear that many emerging use cases and scenarios would benefit from distributed architectures.</p>"
+# paper 2 - section 12 paragraph 90
+msgid "In this paper, we explore this emerging need. It has been called many names: distributed cloud, fog computing, 4th generation data centers, but for the purposes of this document, we will stick with a common, easily understood term—cloud edge computing."
 msgstr ""
-# paper 2 - section 8 paragraph 49
-msgid "<p>In this paper, we explore this emerging need. It has been called many names: distributed cloud, fog computing, 4th generation data centers, but for the purposes of this document, we will stick with a common, easily understood term—cloud edge computing. </p>"
+# paper 2 - section 12 paragraph 91
+msgid "The OSF Edge Computing Group sees this evolution of cloud computing as very exciting, though we recognize that OpenStack’s ability to support cloud edge computing is in its early days. Based on initial community interest expressed at the OpenStack Summit Boston, a two-day workshop was held in September 2017 that brought together over 200 users and developers to start the hard work of defining relevant use cases and considering the tools and architectures needed to support them. Proof of concepts have been done and the community has a few early deployments in place. The OSF Edge Computing Group has now taken up the challenge to describe fundamental requirements of a fully functional edge computing cloud infrastructure"
 msgstr ""
-# paper 2 - section 8 paragraph 50
-msgid "<p>In this document, we aim to accomplish several important tasks:</p>"
+# paper 2 - section 12 paragraph 92
+msgid "In this document, we aim to accomplish several important tasks:"
 msgstr ""
-# paper 2 - section 8 paragraph 51
-msgid ""
-"<ol>"
-"<li>"
-"<p>Cultivate a conversation around cloud edge computing, including some basic definitions, stimulating interest and engagement from the open source community.</p>"
-"</li>"
-"<li>"
-"<p>Guide both the broader open source and OpenStack communities in developing tools and standards needed for broad adoption.</p>"
-"</li>"
-"<li>"
-"<p>Explore how current tools, standards and architectures may need to change to accommodate this distributed cloud model.</p>"
-"</li>"
-"</ol>"
+# paper 2 - section 12 list 93 item 44
+msgid "Cultivate a conversation around cloud edge computing, including some basic definitions, stimulating interest and engagement from the open source community."
 msgstr ""
-# paper 2 - section 8 paragraph 52
-msgid "<p>There is much work to be done to achieve our goals, and we welcome and encourage the entire open source community to join in both the effort and the opportunity of creating or adapting tools to meet the new requirements of cloud edge computing.</p>"
+# paper 2 - section 12 list 93 item 45
+msgid "Guide both the broader open source and OpenStack communities in developing tools and standards needed for broad adoption."
 msgstr ""
-# paper 2 - section 9 title
+# paper 2 - section 12 list 93 item 46
+msgid "Explore how current tools, standards and architectures may need to change to accommodate this distributed cloud model."
+msgstr ""
+# paper 2 - section 12 paragraph 94
+msgid "There is much work to be done to achieve our goals, and we welcome and encourage the entire open source community to join in both the effort and the opportunity of creating or adapting tools to meet the new requirements of cloud edge computing."
+msgstr ""
+# paper 2 - section 13 title
 msgid "WHAT IS CLOUD EDGE COMPUTING?"
 msgstr ""
-# paper 2 - section 9 paragraph 53
-msgid "<p>It is worth highlighting that many overlapping and sometimes conflicting definitions of edge computing exist—edge computing means many things to many people. But for our purposes, the most mature view of edge computing is that it is offering application developers and service providers cloud computing capabilities, as well as an IT service environment at the edge of a network.</p>"
+# paper 2 - section 13 paragraph 95
+msgid "It is worth highlighting that many overlapping and sometimes conflicting definitions of edge computing exist—edge computing means many things to many people. But for our purposes, the most mature view of edge computing is that it is offering application developers and service providers cloud computing capabilities, as well as an IT service environment at the edge of a network."
 msgstr ""
-# paper 2 - section 9 paragraph 54
-msgid "<p>The aim is to deliver compute, storage, and bandwidth much closer to data inputs and/or end users. An edge computing environment is characterized by potentially high latency among all the sites and low and unreliable bandwidth—alongside distinctive service delivery and application functionality possibilities that cannot be met with a pool of centralized cloud resources in distant data centers. By moving some or all of the processing functions closer to the end user or data collection point, cloud edge computing can mitigate the effects of widely distributed sites by minimizing the effect of latency on the applications.</p>"
+# paper 2 - section 13 paragraph 96
+msgid "The aim is to deliver compute, storage, and bandwidth much closer to data inputs and/or end users. An edge computing environment is characterized by potentially high latency among all the sites and low and unreliable bandwidth—alongside distinctive service delivery and application functionality possibilities that cannot be met with a pool of centralized cloud resources in distant data centers. By moving some or all of the processing functions closer to the end user or data collection point, cloud edge computing can mitigate the effects of widely distributed sites by minimizing the effect of latency on the applications."
 msgstr ""
-# paper 2 - section 9 paragraph 55
-msgid "<p>Edge computing first emerged by virtualizing network services over WAN networks, taking a step away from the data center. The initial use cases were driven by a desire to leverage a platform that delivered the flexibility and simple tools that cloud computing users have become accustomed to.</p>"
+# paper 2 - section 13 paragraph 97
+msgid "Edge computing first emerged by virtualizing network services over WAN networks, taking a step away from the data center. The initial use cases were driven by a desire to leverage a platform that delivered the flexibility and simple tools that cloud computing users have become accustomed to."
 msgstr ""
-# paper 2 - section 9 paragraph 56
-msgid "<p>As new edge computing capabilities emerge, we see a changing paradigm for computing—one that is no longer necessarily bound by the need to build centralized data centers. Instead, for certain applications, cloud edge computing is taking the lessons of virtualization and cloud computing and creating the capability to have potentially thousands of massively distributed nodes that can be applied to diverse use cases, such as industrial IoT or even far-flung monitoring networks for tracking real time water resource usage over thousands, or millions, of locations.</p>"
+# paper 2 - section 13 paragraph 98
+msgid "As new edge computing capabilities emerge, we see a changing paradigm for computing—one that is no longer necessarily bound by the need to build centralized data centers. Instead, for certain applications, cloud edge computing is taking the lessons of virtualization and cloud computing and creating the capability to have potentially thousands of massively distributed nodes that can be applied to diverse use cases, such as industrial IoT or even far-flung monitoring networks for tracking real time water resource usage over thousands, or millions, of locations."
 msgstr ""
-# paper 2 - section 9 paragraph 57
-msgid "<p>Many proprietary and open source edge computing capabilities already exist without relying on distributed cloud—some vendors refer to this as “device edge.” Components of this approach include elements such as IoT gateways or NFV appliances. But increasingly, applications need the versatility of cloud at the edge, although the tools and architectures needed to build distributed edge infrastructures are still in their infancy. Our view is that the market will continue to demand better capabilities for cloud edge computing.</p>"
+# paper 2 - section 13 paragraph 99
+msgid "Many proprietary and open source edge computing capabilities already exist without relying on distributed cloud—some vendors refer to this as “device edge.” Components of this approach include elements such as IoT gateways or NFV appliances. But increasingly, applications need the versatility of cloud at the edge, although the tools and architectures needed to build distributed edge infrastructures are still in their infancy. Our view is that the market will continue to demand better capabilities for cloud edge computing."
 msgstr ""
-# paper 2 - section 9 paragraph 58
-msgid "<p>Edge computing capabilities include, but are not limited to:</p>"
+# paper 2 - section 13 paragraph 100
+msgid "Edge computing capabilities include, but are not limited to:"
 msgstr ""
-# paper 2 - section 9 paragraph 59
-msgid ""
-"<ol>"
-"<li>"
-"<p>A consistent operating paradigm across diverse infrastructures.</p>"
-"</li>"
-"<li>"
-"<p>The ability to perform in a massively distributed (think thousands of global locations) environment.</p>"
-"</li>"
-"<li>"
-"<p>The need to deliver network services to customers located at globally distributed remote locations.</p>"
-"</li>"
-"<li>"
-"<p>Application integration, orchestration and service delivery requirements.</p>"
-"</li>"
-"<li>"
-"<p>Hardware limitations and cost constraints.</p>"
-"</li>"
-"<li>"
-"<p>Limited or intermittent network connections.</p>"
-"</li>"
-"<li>"
-"<p>Methods to address applications with strict low latency requirements (AR/VR, voice, and so forth).</p>"
-"</li>"
-"<li>"
-"<p>Geofencing and requirements for keeping sensitive private data local.</p>"
-"</li>"
-"</ol>"
+# paper 2 - section 13 list 101 item 47
+msgid "A consistent operating paradigm across diverse infrastructures."
 msgstr ""
-# paper 2 - section 11 title
-msgid "EXPLORING CHARACTERISTICS"
+# paper 2 - section 13 list 101 item 48
+msgid "The ability to perform in a massively distributed (think thousands of global locations) environment."
 msgstr ""
-# paper 2 - section 11 paragraph 70
-msgid "<p>So what do we know so far about edge computing characteristics, use cases, and scenarios? </p>"
+# paper 2 - section 13 list 101 item 49
+msgid "The need to deliver network services to customers located at globally distributed remote locations."
 msgstr ""
-# paper 2 - section 11 paragraph 71
-msgid "<p>The defining need that drives cloud edge computing is the need for service delivery to be closer to users or end-point data sources. Edge computing environments will work in conjunction with core capacity, but aim to deliver an improved end user experience without putting unreasonable demands on connectivity to the core. Improvements result from:</p>"
+# paper 2 - section 13 list 101 item 50
+msgid "Application integration, orchestration and service delivery requirements."
 msgstr ""
-# paper 2 - section 11 paragraph 72
-msgid ""
-"<ol>"
-"<li>"
-"<p>"
-"<span>Reducing latency:</span>The latency to the end user could be lower than it would be if the compute was farther away—making, for instance, responsive remote desktops possible, or successful AR, or better gaming."
-"</p>"
-"</li>"
-"<li>"
-"<p>"
-"<span>Mitigating bandwidth limits:</span>The ability to move workloads closer to the end users or data collection points reduces the effect of limited bandwidth at a site. This is especially useful if the service on the edge node reduces the need to transmit large amounts of data to the core for processing, as is often the case with IoT and NFV workloads. Data reduction and local processing can be translated into both more responsive applications and reduces the cost of transporting terabytes of data over long distances."
-"</p>"
-"</li>"
-"</ol>"
+# paper 2 - section 13 list 101 item 51
+msgid "Hardware limitations and cost constraints."
 msgstr ""
-# paper 2 - section 11 paragraph 73
-msgid "<p>But there are trade-offs. To deliver edge computing, it is necessary to vastly increase the number of deployments. This institutes a significant challenge to widespread edge deployments. If managing a single cloud takes a team of ten, how can an organization cope with hundreds or even thousands of small clouds? Some requirements include:</p>"
+# paper 2 - section 13 list 101 item 52
+msgid "Limited or intermittent network connections."
 msgstr ""
-# paper 2 - section 11 paragraph 74
-msgid ""
-"<ol>"
-"<li>"
-"<p>"
-"Standardization and infrastructure consistency are needed. Each location has to be similar; a known quantity."
-"</p>"
-"</li>"
-"<li>"
-"<p>"
-"Manageability needs to be automated; deployment, replacement and any recoverable failures should be simple and straightforward."
-"</p>"
-"</li>"
-"<li>"
-"<p>"
-"Simple, cost-effective plans need to be laid for when hardware fails."
-"</p>"
-"</li>"
-"<li>"
-"<p>"
-"Locally fault-tolerant designs might be important, particularly in environments that are remote or unreachable—zero touch infrastructure is desirable. This is a question that balances the cost of buying and running redundant hardware against the cost of outages and emergency repairs. Considerations include:"
-"<ol>"
-"<li><p>Do these locations need to be self-sufficient?</p></li>"
-"<li><p>If a location has a failure, no one is going to be on-site to fix it, and local spares are unlikely.</p></li>"
-"<li><p>Does it need to tolerate failures? And if it does, how long is it going to be before someone will be available  to repair it—two hours, a week, a month? </p></li>"
-"</ol>"
-"</p></li>"
-"<li><p>Maintainability needs to be straightforward—untrained technicians perform manual repairs and replacements, while a skilled remote administrator re-installs or maintains software.</p></li>"
-"<li><p>Physical designs may need a complete rethink. Most edge computing environments won’t be ideal—limited power, dirt, humidity and vibration have to be considered.</p></li>"
-"</ol>"
+# paper 2 - section 13 list 101 item 53
+msgid "Methods to address applications with strict low latency requirements (AR/VR, voice, and so forth)."
+msgstr ""
+# paper 2 - section 13 list 101 item 54
+msgid "Geofencing and requirements for keeping sensitive private data local."
 msgstr ""
 # paper 2 - section 15 title
-msgid "CONCLUSION AND CALL TO ACTION"
+msgid "EXPLORING CHARACTERISTICS"
+msgstr ""
+# paper 2 - section 15 paragraph 112
+msgid "So what do we know so far about edge computing characteristics, use cases, and scenarios?"
 msgstr ""
 # paper 2 - section 15 paragraph 113
-msgid "<p>Edge computing is not and should not be limited to just the components and architectures of OpenStack, but there are some reasons that OpenStack is particularly attractive as a platform for cloud edge computing. The Edge Computing Group is asking the open source community to begin exploring these challenges and possibilities. We recognize that there is work to be done to achieve our goals of creating the tools to meet these new requirements. We welcome and encourage the entire open source community to join in the opportunity to define and develop cloud edge computing. You can find more information about the group activities on the <a href=\"https://www.openstack.org/edge-computing/\">OpenStack Edge Computing</a> web page.</p>"
+msgid "The defining need that drives cloud edge computing is the need for service delivery to be closer to users or end-point data sources. Edge computing environments will work in conjunction with core capacity, but aim to deliver an improved end user experience without putting unreasonable demands on connectivity to the core. Improvements result from:"
 msgstr ""
-# paper 2 - section 15 paragraph 114
-msgid "<p>Visit <a href=\"https://www.openstack.org\">www.openstack.org</a> to get started with OpenStack or click on these resources for more information:</p>"
+# paper 2 - section 15 list 114 item 73
+msgid "<b>Reducing latency:</b> The latency to the end user could be lower than it would be if the compute was farther away—making, for instance, responsive remote desktops possible, or successful AR, or better gaming."
 msgstr ""
-# paper 2 - section 15 item 25 title
+# paper 2 - section 15 list 114 item 74
+msgid "<b>Mitigating bandwidth limits:</b> The ability to move workloads closer to the end users or data collection points reduces the effect of limited bandwidth at a site. This is especially useful if the service on the edge node reduces the need to transmit large amounts of data to the core for processing, as is often the case with IoT and NFV workloads. Data reduction and local processing can be translated into both more responsive applications and reduces the cost of transporting terabytes of data over long distances."
+msgstr ""
+# paper 2 - section 15 paragraph 115
+msgid "But there are trade-offs. To deliver edge computing, it is necessary to vastly increase the number of deployments. This institutes a significant challenge to widespread edge deployments. If managing a single cloud takes a team of ten, how can an organization cope with hundreds or even thousands of small clouds? Some requirements include:"
+msgstr ""
+# paper 2 - section 15 list 116 item 75
+msgid "Standardization and infrastructure consistency are needed. Each location has to be similar; a known quantity."
+msgstr ""
+# paper 2 - section 15 list 116 item 76
+msgid "Manageability needs to be automated; deployment, replacement and any recoverable failures should be simple and straightforward."
+msgstr ""
+# paper 2 - section 15 list 116 item 77
+msgid "Simple, cost-effective plans need to be laid for when hardware fails."
+msgstr ""
+# paper 2 - section 15 list 116 item 78
+msgid "Locally fault-tolerant designs might be important, particularly in environments that are remote or unreachable—zero touch infrastructure is desirable. This is a question that balances the cost of buying and running redundant hardware against the cost of outages and emergency repairs. Considerations include:"
+msgstr ""
+# paper 2 - section 15 list 116 item 78 subitem 79
+msgid "Do these locations need to be self-sufficient?"
+msgstr ""
+# paper 2 - section 15 list 116 item 78 subitem 80
+msgid "If a location has a failure, no one is going to be on-site to fix it, and local spares are unlikely."
+msgstr ""
+# paper 2 - section 15 list 116 item 78 subitem 81
+msgid "Does it need to tolerate failures? And if it does, how long is it going to be before someone will be available  to repair it—two hours, a week, a month?"
+msgstr ""
+# paper 2 - section 15 list 116 item 82
+msgid "Maintainability needs to be straightforward—untrained technicians perform manual repairs and replacements, while a skilled remote administrator re-installs or maintains software."
+msgstr ""
+# paper 2 - section 15 list 116 item 83
+msgid "Physical designs may need a complete rethink. Most edge computing environments won’t be ideal—limited power, dirt, humidity and vibration have to be considered."
+msgstr ""
+# paper 2 - section 19 title
+msgid "CONCLUSION AND CALL TO ACTION"
+msgstr ""
+# paper 2 - section 19 paragraph 155
+msgid "Edge computing is not and should not be limited to just the components and architectures of OpenStack, but there are some reasons that OpenStack is particularly attractive as a platform for cloud edge computing. The Edge Computing Group is asking the open source community to begin exploring these challenges and possibilities. We recognize that there is work to be done to achieve our goals of creating the tools to meet these new requirements. We welcome and encourage the entire open source community to join in the opportunity to define and develop cloud edge computing. You can find more information about the group activities on the <a href=\"https://www.openstack.org/edge-computing/\">OpenStack Edge Computing</a> web page."
+msgstr ""
+# paper 2 - section 19 paragraph 156
+msgid "Visit <a href=\"https://www.openstack.org\">www.openstack.org</a> to get started with OpenStack or click on these resources for more information:"
+msgstr ""
+# paper 2 - section 19 item 25 title
 msgid "OSF Edge Computing web page"
 msgstr ""
 # 36
-msgid "<p>A central place to find pointers to videos of previous events, articles and further content on edge computing.</p>"
+msgid "A central place to find pointers to videos of previous events, articles and further content on edge computing."
 msgstr ""
-# paper 2 - section 15 item 26 title
+# paper 2 - section 19 item 26 title
 msgid "OSF Edge Computing mailing list"
 msgstr ""
 # 36
-msgid "<p>A forum for discussions concerning edge and edge computing (not exclusively to OpenStack) and to receive information about ongoing activities and calls for action.</p>"
+msgid "A forum for discussions concerning edge and edge computing (not exclusively to OpenStack) and to receive information about ongoing activities and calls for action."
 msgstr ""
-# paper 2 - section 15 item 27 title
+# paper 2 - section 19 item 27 title
 msgid "OpenStack Open Infrastructure Summit"
 msgstr ""
 # 36
-msgid "<p>A four-day conference for IT business leaders, cloud operators and developers covering the open infrastructure landscape..Look for edge-related tracks and sessions at upcoming Summits.</p>"
+msgid "A four-day conference for IT business leaders, cloud operators and developers covering the open infrastructure landscape..Look for edge-related tracks and sessions at upcoming Summits."
 msgstr ""
-# paper 2 - section 15 item 28 title
+# paper 2 - section 19 item 28 title
 msgid "IRC"
 msgstr ""
 # 36
-msgid "<p>Fog/Edge/Massively Distributed Clouds (FEMDC) SIG IRC meetings (online) are held every two weeks (odd weeks), 1500 UTC on Wednesday, on the IRC channel #openstack-meeting.</p>"
+msgid "Fog/Edge/Massively Distributed Clouds (FEMDC) SIG IRC meetings (online) are held every two weeks (odd weeks), 1500 UTC on Wednesday, on the IRC channel #openstack-meeting."
 msgstr ""
-# paper 2 - section 15 item 29 title
+# paper 2 - section 19 item 29 title
 msgid "OSF events"
 msgstr ""
 # 36
-msgid "<p>Global schedule of events including the popular OpenStack Summits and regional OpenStack Days.</p>"
+msgid "Global schedule of events including the popular OpenStack Summits and regional OpenStack Days."
 msgstr ""
-# paper 2 - section 15 item 30 title
+# paper 2 - section 19 item 30 title
 msgid "OpenStack Marketplace"
 msgstr ""
 # 36
-msgid "<p> One-stop resource to the skilled global ecosystem for distributions, drivers, training, services and more.</p>"
+msgid "One-stop resource to the skilled global ecosystem for distributions, drivers, training, services and more."
 msgstr ""
-# paper 2 - section 15 item 31 title
+# paper 2 - section 19 item 31 title
 msgid "Complete OpenStack documentation"
 msgstr ""
 # 36
-msgid "<p> Index to all documentation, for every role and step in planning and operating an OpenStack cloud.</p>"
+msgid "Index to all documentation, for every role and step in planning and operating an OpenStack cloud."
 msgstr ""
-# paper 2 - section 15 item 32 title
+# paper 2 - section 19 item 32 title
 msgid "Welcome to the community!"
 msgstr ""
 # 36
-msgid "<p>Join mailing lists and IRC channels, find jobs and events, access the source code and more.</p>"
+msgid "Join mailing lists and IRC channels, find jobs and events, access the source code and more."
 msgstr ""
-# paper 2 - section 15 item 33 title
+# paper 2 - section 19 item 33 title
 msgid "User groups"
 msgstr ""
 # 36
-msgid "<p>Find a user group near you, attend meetups and hackathons—or organize one!</p>"
+msgid "Find a user group near you, attend meetups and hackathons—or organize one!"
 msgstr ""
-# paper 2 - section 16 title
+# paper 2 - section 20 title
 msgid "AUTHORS"
 msgstr ""
-# paper 2 - section 16 paragraph 115
-msgid ""
-"<h4 class=\"subtitle\">CONTRIBUTORS</h4>"
-"<ul>"
-"<li>"
-"<p>Beth Cohen, Distinguished Member of Technical Staff, Verizon</p>"
-"</li>"
-"<li>"
-"<p>Gnanavelkandan Kathirvel, Director – Cloud Strategy & Architecture, AT&T and Board of Directors, OpenStack Foundation (OSF)</p>"
-"</li>"
-"<li>"
-"<p>Gregory Katsaros, Senior System Architect, Inmarsat</p>"
-"</li>"
-"<li>"
-"<p>Adrien Lebre, Ass. Prof., IMT Atlantique/Inria/LS2N, France</p>"
-"</li>"
-"<li>"
-"<p>Andrew Mitry, Sr. Distinguished Engineer, Walmart Labs</p>"
-"</li>"
-"<li>"
-"<p>Christopher Price, President, Ericsson Software Technology</p>"
-"</li>"
-"<li>"
-"<p>Paul-André Raymond, SVP Technology, B.Yond</p>Brian E. Whitaker, Founder, Zettabyte Content"
-"</li>"
-"<li>"
-"<p>Alex Reznik, Enterprise Architect, HPE and Chair, ETSI ISG MEC</p>"
-"</li>"
-"<li>"
-"<p>Pasi Vaananen, Systems Architect, NFV, Red Hat</p>"
-"</li>"
-"<li>"
-"<p>Ildiko Vansca, Ecosystem Technical Lead, OpenStack Foundation (OSF)</p>"
-"</li>"
-"<li>"
-"<p>Ian Wells, Distinguished Engineer, Cisco</p>"
-"</li>"
-"</ul>"
+# paper 2 - section 20 paragraph 157
+msgid "CONTRIBUTORS"
 msgstr ""
-# paper 2 - section 16 paragraph 116
-msgid ""
-"<h4 class=\"subtitle\">TECHNICAL WRITER</h4>"
-"<ul>"
-"<li>"
-"<p>Brian E. Whitaker, Founder, Zettabyte Content</p>"
-"</li>"
-"</ul>"
+# paper 2 - section 20 list 158 item 104
+msgid "Beth Cohen, Distinguished Member of Technical Staff, Verizon"
+msgstr ""
+# paper 2 - section 20 list 158 item 105
+msgid "Gnanavelkandan Kathirvel, Director – Cloud Strategy & Architecture, AT&T and Board of Directors, OpenStack Foundation (OSF)"
+msgstr ""
+# paper 2 - section 20 list 158 item 106
+msgid "Gregory Katsaros, Senior System Architect, Inmarsat"
+msgstr ""
+# paper 2 - section 20 list 158 item 107
+msgid "Adrien Lebre, Ass. Prof., IMT Atlantique/Inria/LS2N, France"
+msgstr ""
+# paper 2 - section 20 list 158 item 108
+msgid "Andrew Mitry, Sr. Distinguished Engineer, Walmart Labs"
+msgstr ""
+# paper 2 - section 20 list 158 item 109
+msgid "Christopher Price, President, Ericsson Software Technology"
+msgstr ""
+# paper 2 - section 20 list 158 item 110
+msgid "Paul-André Raymond, SVP Technology, B.Yond"
+msgstr ""
+# paper 2 - section 20 list 158 item 111
+msgid "Alex Reznik, Enterprise Architect, HPE and Chair, ETSI ISG MEC"
+msgstr ""
+# paper 2 - section 20 list 158 item 112
+msgid "Pasi Vaananen, Systems Architect, NFV, Red Hat"
+msgstr ""
+# paper 2 - section 20 list 158 item 113
+msgid "Ildiko Vansca, Ecosystem Technical Lead, OpenStack Foundation (OSF)"
+msgstr ""
+# paper 2 - section 20 list 158 item 114
+msgid "Ian Wells, Distinguished Engineer, Cisco"
+msgstr ""
+# paper 2 - section 20 paragraph 159
+msgid "TECHNICAL WRITER"
+msgstr ""
+# paper 2 - section 20 list 160 item 115
+msgid "Brian E. Whitaker, Founder, Zettabyte Content"
 msgstr ""

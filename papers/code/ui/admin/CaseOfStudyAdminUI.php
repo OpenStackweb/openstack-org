@@ -12,38 +12,16 @@
  * limitations under the License.
  **/
 
-class CaseOfStudyAdminUI extends DataExtension
+class CaseOfStudyAdminUI extends PaperSectionAdminUI
 {
     public function updateCMSFields(FieldList $f)
     {
-        //clear all fields
-        $oldFields = $f->toArray();
-        foreach ($oldFields as $field) {
-            $f->remove($field);
-        }
-
-        $f->add($rootTab = new TabSet("Root", $tabMain = new Tab('Main')));
-
-        $f->addFieldToTab('Root.Main', new TextField('Title', 'Title'));
-
-        if ($this->owner->ID > 0) {
-            // contents
-            $config = GridFieldConfig_RecordEditor::create(50);
-            $config->addComponent($sort = new GridFieldSortableRows('Order'));
-            $contents = new GridField('Contents', 'Contents', $this->owner->Contents(), $config);
-            $f->addFieldToTab('Root.Main', $contents);
-        }
-
-
+        parent::updateCMSFields($f);
         $logo_field = new UploadField('Logo', 'Logo');
         $logo_field->setAllowedMaxFileNumber(1);
         $logo_field->setAllowedFileCategories('image');
         $logo_field->setFolderName('papers/logos/cases_of_study');
         $logo_field->getValidator()->setAllowedMaxFileSize(1024*1024*1);
         $f->addFieldToTab('Root.Main', $logo_field);
-
-        $f->addFieldToTab('Root.Main', new HiddenField('SectionID', 'SectionID'));
-
-
     }
 }

@@ -17,15 +17,24 @@ class CaseOfStudySectionAdminUI extends PaperSectionAdminUI
     public function updateCMSFields(FieldList $f)
     {
         parent::updateCMSFields($f);
-
-
-        if ($this->owner->ID > 0) {
-
-            // case of studies
+        $f->removeFieldFromTab('Root.Main', "Contents");
+        if($this->owner->ID > 0)
+        {
+            $f->removeFieldFromTab('Root.Main', 'SubSections');
+            // sub sections
             $config = GridFieldConfig_RecordEditor::create(50);
+            $config->removeComponentsByType('GridFieldAddNewButton');
+            $multi_class_selector = new GridFieldAddNewMultiClass();
+            $multi_class_selector->setClasses
+            (
+                [
+                    'CaseOfStudy'     => 'Case of Study',
+                ]
+            );
+            $config->addComponent($multi_class_selector);
             $config->addComponent($sort = new GridFieldSortableRows('Order'));
-            $cases_of_study = new GridField('CasesOfStudy', 'CasesOfStudy', $this->owner->CasesOfStudy(), $config);
-            $f->addFieldToTab('Root.CasesOfStudy', $cases_of_study);
+            $subSections = new GridField('SubSections', 'Case of Studies', $this->owner->SubSections(), $config);
+            $f->addFieldToTab('Root.Main', $subSections);
         }
     }
 }

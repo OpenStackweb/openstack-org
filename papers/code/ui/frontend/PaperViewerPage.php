@@ -44,7 +44,7 @@ class PaperViewerPage extends Page {
         $output = '';
 
         if($section instanceof CaseOfStudySection)
-            $output =  $section->renderWith('CasesOfStudy_Section');
+           return $section->renderWith('CasesOfStudy_Section');
         else if($section instanceof IndexSection)
             $output = $section->renderWith('Index_Section');
         else

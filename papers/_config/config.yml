@@ -23,6 +23,9 @@ IndexItem:
 PaperParagraph:
   extensions:
     - PaperParagraphAdminUI
-CaseOfStudyParagraph:
+PaperParagraphListItem:
   extensions:
-    - CaseOfStudyParagraphAdminUI
+    - PaperParagraphListItemAdminUI
+PaperParagraphList:
+  extensions:
+    - PaperParagraphListAdminUI

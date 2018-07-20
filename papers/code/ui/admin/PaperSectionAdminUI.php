@@ -43,6 +43,16 @@ class PaperSectionAdminUI extends DataExtension
         if ($this->owner->ID > 0) {
             // contents
             $config = GridFieldConfig_RecordEditor::create(50);
+            $config->removeComponentsByType('GridFieldAddNewButton');
+            $multi_class_selector = new GridFieldAddNewMultiClass();
+            $multi_class_selector->setClasses
+            (
+                [
+                    'PaperParagraph'     => 'Paragraph',
+                    'PaperParagraphList' => 'List',
+                ]
+            );
+            $config->addComponent($multi_class_selector);
             $config->addComponent($sort = new GridFieldSortableRows('Order'));
             $contents = new GridField('Contents', 'Contents', $this->owner->Contents(), $config);
             $f->addFieldToTab('Root.Main', $contents);

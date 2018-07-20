@@ -15,32 +15,14 @@
 /**
  * Class CaseOfStudy
  */
-final class CaseOfStudy extends DataObject
+final class CaseOfStudy extends PaperSection
 {
-    private static $db = [
-        'Title' => 'Text',
-        'Order' => 'Int',
-    ];
-
     private static $has_one = [
         'Logo' => 'BetterImage',
-        'Section' => 'CaseOfStudySection',
-    ];
-
-    static $has_many = [
-        'Contents' => 'CaseOfStudyParagraph'
     ];
 
     public function getLogoUrl(){
         return Director::absoluteURL($this->Logo()->Url);
     }
 
-    public function getSlug(){
-        $slug = singleton('SiteTree')->generateURLSegment($this->Title);
-        return $slug;
-    }
-
-    public function getOrderedContents(){
-        return $this->Contents()->sort('Order','ASC');
-    }
 }

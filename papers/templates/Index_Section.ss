@@ -3,7 +3,26 @@
         <h3 class="text-center title">{$_T($Paper.I18nContext, $Title)}</h3>
         <% if $Contents %>
             <% loop $Contents %>
-                $_T($Top.Paper.I18nContext, $Content)
+                <% if $Type == P %>
+                    <p>$_T($Top.Paper.I18nContext, $Content)</p>
+                <% end_if %>
+                <% if $Type == IMG %>
+                    <p class="text-center">$_T($Top.Paper.I18nContext, $Content)</p>
+                <% end_if %>
+                <% if $Type == H4 %>
+                    <h4 class="subtitle">$_T($Top.Paper.I18nContext, $Content)</h4>
+                <% end_if %>
+                <% if $Type == H5 %>
+                    <h5 class="highlight">$_T($Top.Paper.I18nContext, $Content)</h5>
+                <% end_if %>
+                <% if $Type == LIST %>
+                    <% if $SubType == UL %>
+                        <% include UnorderedList Paper=$Top.Paper,Items=$Items %>
+                    <% end_if %>
+                    <% if $SubType == OL %>
+                        <% include OrderedList Paper=$Top.Paper,Items=$Items %>
+                    <% end_if %>
+                <% end_if %>
             <% end_loop %>
         <% end_if %>
         <div id="accordion" class="panel-group">

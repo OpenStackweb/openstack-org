@@ -12,29 +12,26 @@
  * limitations under the License.
  **/
 
-class CaseOfStudyParagraph extends DataObject
+class PaperParagraphListItem extends DataObject
 {
     static $db = [
+        'SubItemsContainerType' => "Enum('UL,OL,NONE','NONE')",
         'Content' => 'HTMLText',
         'Order' => 'Int',
     ];
 
     static $has_one = [
-        'CaseOfStudy' => 'CaseOfStudy',
+        'Owner' => 'PaperParagraphList',
+        'Parent' => 'PaperParagraphListItem',
     ];
 
-    protected function validate()
-    {
-        $valid = parent::validate();
-        if (!$valid->valid()) {
-            return $valid;
-        }
-
-        $content = trim($this->Content);
-        if (strlen($content) > GetTextTemplateHelpers::MAX_MSG_ID_LEN) {
-            return $valid->error('Content is too long!');
-        }
-
-        return $valid;
+    public function setContent($value){
+        $value = preg_replace ( "/<p[^>]*?>(.*)<\/p>/" , "$1" , $value );
+        $this->setField('Content', $value);
     }
+
+    private static $has_many = [
+        'SubItems' => 'PaperParagraphListItem',
+    ];
+
 }

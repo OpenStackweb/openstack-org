@@ -24,6 +24,16 @@ final class Paper extends DataObject
         'Footer'    => 'HTMLText',
     ];
 
+    public function setAbstract($value){
+        $value = preg_replace ( "/<p[^>]*?>(.*)<\/p>/" , "$1" , $value );
+        $this->setField('Abstract', $value);
+    }
+
+    public function setFooter($value){
+        $value = preg_replace ( "/<p[^>]*?>(.*)<\/p>/" , "$1" , $value );
+        $this->setField('Footer', $value);
+    }
+
     static $has_one = [
         'Creator' => 'Member',
         'UpdatedBy' => 'Member',
@@ -31,7 +41,6 @@ final class Paper extends DataObject
     ];
 
     static $has_many = [
-        'Contributors' => 'PaperContributor',
         'Sections' => 'PaperSection'
     ];
 
