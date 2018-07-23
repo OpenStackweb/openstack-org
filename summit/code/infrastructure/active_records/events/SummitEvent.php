@@ -31,6 +31,7 @@ class SummitEvent extends DataObject implements ISummitEvent
         'RSVPLink'                  => 'Text',
         'RSVPMaxUserNumber'         => 'Int',
         'RSVPMaxUserWaitListNumber' => 'Int',
+        'Occupancy'                 => 'Enum(array("Empty","25%","50%", "75%", "100%" "FULL"), "Empty")',
     );
 
     private static $has_many = array
@@ -70,6 +71,7 @@ class SummitEvent extends DataObject implements ISummitEvent
         'EndDate'                => 'Event End Date',
         'Location.Name'          => 'Location',
         'Type.Type'              => 'Event Type',
+        'Occupancy'              => 'Room Occupancy',
     );
 
     protected function onBeforeDelete()
@@ -395,6 +397,7 @@ class SummitEvent extends DataObject implements ISummitEvent
         $f->addFieldToTab('Root.Main', new TextField('SocialSummary','Social Summary (100 Chars)'));
         $f->addFieldToTab('Root.Main', new TextField('HeadCount','HeadCount'));
         $f->addFieldToTab('Root.Main', $ddl_track = new DropdownField('CategoryID','Category', PresentationCategory::get()->filter('SummitID', $summit_id)->map('ID', 'Title')));
+        $f->addFieldToTab('Root.Main', new DropdownField('Occupancy','Room Occupancy', $this->dbObject('Occupancy')->enumValues()));
 
         $ddl_track->setEmptyString("-- Select a Category --");
 
