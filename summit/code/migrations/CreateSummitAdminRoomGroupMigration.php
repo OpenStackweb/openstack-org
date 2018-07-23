@@ -23,12 +23,10 @@ final class CreateSummitAdminRoomGroupMigration extends AbstractDBMigrationTask
         global $database;
 
         $group = new Group();
-        $group->setTitle('Summit Room Admin');
-        $group->setDescription('Summit Room Admin');
-        $group->setSlug('summit-room-admin');
+        $group->setTitle('Summit Room Administrators');
+        $group->setDescription('Summit Room Administrators');
+        $group->setSlug('summit-room-administrators');
         $group->write();
-
-
 
     }
 
