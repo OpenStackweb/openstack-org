@@ -51,7 +51,7 @@
         <% end_if %>
         <div class="row">
             <div class="col-lg-8 col-lg-push-2">
-                <h5 class="section-title">Nearby Hotels</h5>
+                <h5 class="section-title">Recommended Hotels</h5>
                 <% if not $Top.AlternateHotels %>
                     <p style="margin-bottom:30px;">
                         <i class="fa fa-hotel fa-4x"></i>
