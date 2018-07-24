@@ -42,7 +42,9 @@
         </div>
     </div>
     <% end_if %>
-    <p>$_T("survey_ui", "This survey provides users an opportunity to influence the community</a> and software direction. By sharing information about your configuration and requirements, the OpenStack Foundation User Committee will be able to advocate on your behalf.")</p>
+    <p>
+        $_T("survey_ui", "This survey provides users an opportunity to influence the community and software direction. By sharing information about your configuration and requirements, the OpenStack Foundation User Committee will be able to advocate on your behalf. The 2018 survey results will be presented at the Berlin Summit, November 13-15. Take the OpenStack User Survey by Tuesday, August 21 to be included in this round of analysis.")
+    </p>
     <p><a href="/user-survey/faq" target="_blank">$_T("survey_ui", "More Information About The Survey")</a></p>
     <% if $Top.SurveyTemplate.isVoid %>
     <div class="row">
