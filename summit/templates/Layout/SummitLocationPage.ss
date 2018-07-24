@@ -14,6 +14,12 @@
                     Venue
                 </a>
             </li>
+            <li>
+                <a href="#travel-support">
+                    <i class="fa fa-plane"></i>
+                    Travel Support &amp; Visa Info
+                </a>
+            </li>
             <% if Locals  %>
             <li>
                 <a href="#locals">

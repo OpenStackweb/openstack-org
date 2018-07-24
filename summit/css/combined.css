@@ -2542,7 +2542,8 @@ a.close-modal-btn {
 
 .hotels-row {
   padding-top: 0;
-  text-align: center; }
+  text-align: center; 
+  margin-bottom: -90px;}
 
 .hotels-row h5.section-title {
   margin-top: 40px;
