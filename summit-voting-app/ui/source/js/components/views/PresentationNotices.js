@@ -9,7 +9,7 @@ export default ({
 		  	<div>
 		      <h5>Login to vote</h5>
 			  <div className="login-to-vote">
-			     <h3>Help this presentation get to the Summit in Vancouver!</h3>
+			     <h3>Help this presentation get to the OpenStack Summit!</h3>
 			     <p>We received hundreds of high-quality submissions and your votes can help determine which presentations are included in the Summit schedule.</p>
 			     <a className="btn" href={`/Security/login?BackURL=${Config.get('baseURL')}`}>I already have an account</a>&nbsp; | &nbsp;
 			     <a href="/summit-login/login" className="btn">Sign up now</a>
