@@ -19,6 +19,30 @@
 
     
     <h1>$_T("survey_ui", "Welcome to the OpenStack User Survey")</h1>
+    <% if $LoginPageSlide1Content && $LoginPageSlide2Content && $LoginPageSlide3Content %>
+    <div class="row">
+
+        <div class="col-lg-4">
+            <div id="user">
+                <p>$_T("survey_ui", $LoginPageSlide1Content)</p>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div id="time">
+                <p>$_T("survey_ui", $LoginPageSlide2Content)</p>
+            </div>
+        </div>
+
+        <div class="survey-box col-lg-4">
+            <div id="private">
+                <p>$_T("survey_ui", $LoginPageSlide3Content)</p>
+            </div>
+        </div>
+    </div>
+    <% end_if %>
+    <p>$_T("survey_ui", "This survey provides users an opportunity to influence the community and software direction. By sharing information about your configuration and requirements, the OpenStack Foundation User Committee will be able to advocate on your behalf.")</p>
+    <p><a href="/user-survey/faq" class="roundedButton">$_T("survey_ui", "More Information About The Survey")</a></p>
     <% if $Top.SurveyTemplate.isVoid %>
     <div class="row">
         <div class="col-lg-12" style="text-align: center">
@@ -61,31 +85,6 @@
         <% end_if %>
     <% end_if %>
     <!-- end - user survey report -->
-    <% if $LoginPageSlide1Content && $LoginPageSlide2Content && $LoginPageSlide3Content %>
-    <hr/>
-    <div class="row">
-
-        <div class="col-lg-4">
-            <div id="user">
-                <p>$_T("survey_ui", $LoginPageSlide1Content)</p>
-            </div>
-        </div>
-
-        <div class="col-lg-4">
-            <div id="time">
-                <p>$_T("survey_ui", $LoginPageSlide2Content)</p>
-            </div>
-        </div>
-
-        <div class="survey-box col-lg-4">
-            <div id="private">
-                <p>$_T("survey_ui", $LoginPageSlide3Content)</p>
-            </div>
-        </div>
-    </div>
-    <% end_if %>
-    <p>$_T("survey_ui", "This survey provides users an opportunity to influence the community and software direction. By sharing information about your configuration and requirements, the OpenStack Foundation User Committee will be able to advocate on your behalf.")</p>
-    <p><a href="/user-survey/faq" class="roundedButton">$_T("survey_ui", "More Information About The Survey")</a></p>
     <hr />
 
 
