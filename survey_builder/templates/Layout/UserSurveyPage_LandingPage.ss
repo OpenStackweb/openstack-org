@@ -19,6 +19,7 @@
 
     
     <h1>$_T("survey_ui", "Welcome to the OpenStack User Survey")</h1>
+    <p>The User Survey deadline is August 21, 2018</p>
     <% if $LoginPageSlide1Content && $LoginPageSlide2Content && $LoginPageSlide3Content %>
     <div class="row">
 
@@ -41,8 +42,8 @@
         </div>
     </div>
     <% end_if %>
-    <p>$_T("survey_ui", "This survey provides users an opportunity to influence the community and software direction. By sharing information about your configuration and requirements, the OpenStack Foundation User Committee will be able to advocate on your behalf.")</p>
-    <p><a href="/user-survey/faq" class="roundedButton">$_T("survey_ui", "More Information About The Survey")</a></p>
+    <p>$_T("survey_ui", "<a href="/user-survey/faq" class="roundedButton" target="_blank">This survey provides users an opportunity to influence the community</a> and software direction. By sharing information about your configuration and requirements, the OpenStack Foundation User Committee will be able to advocate on your behalf.")</p>
+    <!-- <p>$_T("survey_ui", "More Information About The Survey")</a></p> -->
     <% if $Top.SurveyTemplate.isVoid %>
     <div class="row">
         <div class="col-lg-12" style="text-align: center">

@@ -23,56 +23,15 @@
 		</div>
 	</div>
 </div>
-<div class="analysts-videos">
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-12">
-				<h2>See what analysts were saying at OpenStack Summits in 2017</h2>	
-			</div>
-		</div>
-        <div class="row">
-            <div class="col-sm-4">
-                <a href="https://www.openstack.org/videos/sydney-2017/what-telecom-operators-really-think-about-openstack" target="_blank">
-                <div class="video-wrapper">
-                	<div class="video-img-wrapper">
-                		<img class="video-image" src="https://img.youtube.com/vi/wXfUGhQ24aQ/maxresdefault.jpg" alt="What Telecom Operators Really Think About OpenStack">
-                	</div>
-                    <div class="gallery-title">What Telecom Operators Really Think About OpenStack</div>
-                    <div class="gallery-subtitle">Roz Roseboro, Heavy Reading</div>
-                </div>
-                </a>
-            </div>
-            <div class="col-sm-4">
-                <a href="https://www.openstack.org/videos/boston-2017/openstacks-digital-transformation-opportunity" target="_blank">
-                <div class="video-wrapper">
-                	<div class="video-img-wrapper">
-                		<img class="video-image" src="https://img.youtube.com/vi/pP90jJbqSI0/maxresdefault.jpg" alt="OpenStack’s Digital Transformation Opportunity">
-                	</div>
-                    <div class="gallery-title">OpenStack’s Digital Transformation Opportunity</div>
-                    <div class="gallery-subtitle">Al Sadowski, 451 Research</div>
-                </div>
-                </a>
-            </div>
-            <div class="col-sm-4">
-                <a href="https://www.openstack.org/videos/sydney-2017/building-an-intelligent-edge-software-defined-ot-with-openstack" target="_blank">
-                <div class="video-wrapper">
-                	<div class="video-img-wrapper">
-                		<img class="video-image" src="https://img.youtube.com/vi/F6Bpl_FI3GE/maxresdefault.jpg" alt="Building an Intelligent Edge - Software-defined OT with OpenStack">
-                	</div>
-                    <div class="gallery-title">Building an Intelligent Edge - Software-defined OT with OpenStack</div>
-                    <div class="gallery-subtitle">Ashish Nadkarni, IDC</div>
-                </div>
-                </a>
-            </div>
-        </div>
-	</div>
-</div>
 <div class="analysts-list">
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-10 col-sm-push-1" style="text-align:left;">
 				<h2>OpenStack User Momentum Continues to Build</h2>
-				<p>According to 451 Research: Voice of the Service Provider...</p>
+				<h3>Updates from the OpenStack Foundation</h3>
+				<p>The OpenStack Foundation highlighted recent market share statistics, new users and updates from the broader open infrastructure community at its recent OpenStack Summit in May 2018. <a href="/assets/analysts/Vancouver-Summit-FoundationUpdate.pdf" target="_blank">Download the presentation</a>.</p>
+
+				<h3>According to 451 Research: Voice of the Service Provider</h3>
  
 				<p>Globally,  71%  of  service  providers  are  either  in  production  or  plan  to  be  in  production 
 				with  OpenStack  in  the  next  12  months.  That  number  goes  up  to  80%  if  you  include 
@@ -159,6 +118,50 @@
 				<div class="testimonial-attribute"><a href="https://451research.com/report-short?entityId=95044">Enthusiasm for OpenStack gives rise to new competitive forces in China</a>, Agatha Poon, June 2018, 451 Research</div>
 			</div>
 		</div>
+	</div>
+</div>
+<div class="analysts-videos">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<h2>See what analysts were saying at OpenStack Summits in 2017</h2>	
+			</div>
+		</div>
+        <div class="row">
+            <div class="col-sm-4">
+                <a href="https://www.openstack.org/videos/sydney-2017/what-telecom-operators-really-think-about-openstack" target="_blank">
+                <div class="video-wrapper">
+                	<div class="video-img-wrapper">
+                		<img class="video-image" src="https://img.youtube.com/vi/wXfUGhQ24aQ/maxresdefault.jpg" alt="What Telecom Operators Really Think About OpenStack">
+                	</div>
+                    <div class="gallery-title">What Telecom Operators Really Think About OpenStack</div>
+                    <div class="gallery-subtitle">Roz Roseboro, Heavy Reading</div>
+                </div>
+                </a>
+            </div>
+            <div class="col-sm-4">
+                <a href="https://www.openstack.org/videos/boston-2017/openstacks-digital-transformation-opportunity" target="_blank">
+                <div class="video-wrapper">
+                	<div class="video-img-wrapper">
+                		<img class="video-image" src="https://img.youtube.com/vi/pP90jJbqSI0/maxresdefault.jpg" alt="OpenStack’s Digital Transformation Opportunity">
+                	</div>
+                    <div class="gallery-title">OpenStack’s Digital Transformation Opportunity</div>
+                    <div class="gallery-subtitle">Al Sadowski, 451 Research</div>
+                </div>
+                </a>
+            </div>
+            <div class="col-sm-4">
+                <a href="https://www.openstack.org/videos/sydney-2017/building-an-intelligent-edge-software-defined-ot-with-openstack" target="_blank">
+                <div class="video-wrapper">
+                	<div class="video-img-wrapper">
+                		<img class="video-image" src="https://img.youtube.com/vi/F6Bpl_FI3GE/maxresdefault.jpg" alt="Building an Intelligent Edge - Software-defined OT with OpenStack">
+                	</div>
+                    <div class="gallery-title">Building an Intelligent Edge - Software-defined OT with OpenStack</div>
+                    <div class="gallery-subtitle">Ashish Nadkarni, IDC</div>
+                </div>
+                </a>
+            </div>
+        </div>
 	</div>
 </div>
     <!-- End Page Content -->
