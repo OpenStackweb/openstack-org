@@ -7,12 +7,10 @@
     $FBTrackingCode
     $TwitterTrackingCode
     <link rel="stylesheet" type="text/css" href="/themes/openstack/static/css/tooltipster.css" />
-    <link rel="stylesheet" type="text/css" href="/themes/openstack/css/navigation_menu.css" />
 </head>
 
 <body class="presentation-page">
 <div class="main-body">
-    <% include Navigation %>
     <div id="wrap">
          <div  class="summit-hero-wrapper<% if $top_section != 'full' %> condensed<% end_if %><% if HeroCSSClass %> $HeroCSSClass<% end_if %>" <% if $SummitImage %>style="background: rgba(0, 0, 0, 0) url('{$SummitImage.Image.link}') no-repeat scroll center center / cover ;"<% end_if %> >
             <div class="container">

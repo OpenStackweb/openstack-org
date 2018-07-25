@@ -6,7 +6,6 @@
     <% include Page_GoogleAnalytics %>
 </head>
 <body class="summit-landing-body">
-    <% include Navigation %>
     <!-- Begin Page Content -->
     <div class="summit-landing-wrapper boston">
     <div class="container">
