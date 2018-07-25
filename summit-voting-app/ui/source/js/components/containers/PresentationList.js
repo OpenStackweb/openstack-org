@@ -45,6 +45,13 @@ class PresentationList extends React.Component {
 		}
 	}
 
+	componentWillReceiveProps(newProps) {
+        if(newProps.presentations.length && this.props.filter != newProps.filter && parseInt(newProps.filter) != newProps.requestedPresentationID) {
+            var presentationId = newProps.filter != 'none' ? parseInt(newProps.filter) : newProps.presentations[0].id;
+			this.props.dispatch(goToPresentation(presentationId));
+        }
+	}
+
 	render () {
 		const {
 			presentations, 
@@ -86,7 +93,7 @@ class PresentationList extends React.Component {
 				{searchQuery &&
 					<h5>Search results for "{searchQuery}"</h5>
 				}
-			    <FullHeightScroller ref="scroller" pad={30} component="ul" className="presentation-list">
+			    <FullHeightScroller ref="scroller" pad={30} component="ul" id="presentation-list" className="presentation-list">
 			    	{!!children.length && children}
 			    	{!children.length && !loading &&
 			    		<li>There are no presentations that match your criteria.</li>
