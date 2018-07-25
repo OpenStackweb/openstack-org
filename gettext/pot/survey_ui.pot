@@ -318,15 +318,18 @@ msgid ""
 "the Foundation (unless you specify otherwise).</p>"
 msgstr ""
 
-#: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:153
+#: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:46
+#, php-format
 msgid ""
-"This survey provides users an opportunity to influence the community and "
-"software direction. By sharing information about your configuration and "
-"requirements, the OpenStack Foundation User Committee will be able to "
+"This survey provides users an opportunity to influence the community and software direction. "
+"By sharing information about your configuration and requirements, the OpenStack Foundation "
+"User Committee will be able to advocate on your behalf. The %1$s survey results will be presented at "
+"the %2$s Summit, November %3$s. Take the OpenStack User Survey by %4$s to be included in this round "
+"of analysis. requirements, the OpenStack Foundation User Committee will be able to "
 "advocate on your behalf."
 msgstr ""
 
-#: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:156
+#: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:48
 msgid "More Information About The Survey"
 msgstr ""
 
@@ -552,6 +555,10 @@ msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:21
 msgid "Welcome to the OpenStack User Survey"
+msgstr ""
+
+#: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:22
+msgid "The User Survey deadline is %1$s"
 msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:48
