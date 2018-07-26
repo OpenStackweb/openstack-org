@@ -259,7 +259,6 @@ final class DupesMembersManager {
         });
     }
 
-
     public function mergeAccount(ICommunityMember $current_member, $token, array $merge_data, IMergeAccountBulkQueryFactory $query_factory){
 
         $member_repository             = $this->member_repository;
@@ -399,6 +398,7 @@ final class DupesMembersManager {
         return $this->tx_manager->transaction(function() use( $merge_request_repository, $delete_request_repository, $batch_size, $older_than_x_hours) {
 
             $query1 = new QueryObject();
+            $query1->addAndCondition(QueryCriteria::equal('IsRevoked', 0));
             $query1->addAndCondition(QueryCriteria::greaterOrEqual("ADDDATE(Created, INTERVAL {$older_than_x_hours}  HOUR)",'NOW()', false));
             list($list1,$size)  = $merge_request_repository->getAll($query1, 0, $batch_size);
             foreach($list1 as $res){
@@ -406,6 +406,7 @@ final class DupesMembersManager {
             }
 
             $query2 = new QueryObject();
+            $query2->addAndCondition(QueryCriteria::equal('IsRevoked', 0));
             $query2->addAndCondition(QueryCriteria::greaterOrEqual("ADDDATE(Created, INTERVAL {$older_than_x_hours}  HOUR)",'NOW()', false));
             list($list2,$size) = $delete_request_repository->getAll($query2, 0, $batch_size);
             foreach($list2 as $res){

@@ -19,18 +19,17 @@ class DupeMemberActionRequest
     extends DataObject
     implements IDupeMemberActionAccountRequest {
 
-    static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
-
-    static $db = array(
+    static $db = [
         'ConfirmationHash' => 'Text',
         'IsConfirmed'      => 'Boolean',
         'ConfirmationDate' => 'SS_Datetime',
-    );
+        'IsRevoked'        => 'Boolean'
+    ];
 
-    static $has_one = array(
-        'DupeAccount' => 'Member',
+    static $has_one = [
+        'DupeAccount'    => 'Member',
         'PrimaryAccount' => 'Member'
-    );
+    ];
 
     /**
      * @return string
@@ -56,6 +55,9 @@ class DupeMemberActionRequest
         return md5($token);
     }
 
+    public function revoke(){
+        $this->IsRevoked = true;
+    }
 
     /**
      * @param ICommunityMember $member
@@ -96,7 +98,7 @@ class DupeMemberActionRequest
      */
     public function isVoid()
     {
-       return $this->IsConfirmed;
+       return $this->IsConfirmed || $this->IsRevoked;
     }
 
     /**
@@ -124,4 +126,4 @@ class DupeMemberActionRequest
         }
         throw new InvalidHashInvitationException;
     }
-} 
+}

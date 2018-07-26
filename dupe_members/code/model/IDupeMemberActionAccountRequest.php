@@ -55,6 +55,11 @@ interface IDupeMemberActionAccountRequest extends IEntity {
     public function isVoid();
 
     /**
+     * @return void
+     */
+    public function revoke();
+
+    /**
      * @param string $token
      * @return bool
      * @throws DuperMemberActionRequestVoid
