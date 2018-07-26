@@ -23,11 +23,20 @@ const cardSource = {
         const canDrop = !(props.column == 'team' && monitor.getItem().column != 'team');
 
         if (didDrop && canDrop) {
-            props.dropSelection(
-                monitor.getItem().targetListID,
-                monitor.getItem().column,
-                monitor.getItem().targetListHash
-            );
+            if (props.column == 'team') {
+                props.dropSelection(
+                    props.listID,
+                    'team',
+                    props.listHash
+                );
+            } else {
+                props.dropSelection(
+                    monitor.getItem().targetListID,
+                    monitor.getItem().column,
+                    monitor.getItem().targetListHash
+                );
+            }
+
         }
     }
 };
@@ -106,6 +115,8 @@ class SortableLeaderboardItem extends Component {
     
     const p = this.props.presentation;
     const metrics = <PresentationMetrics presentation={p} />;
+
+    if (!p) return(<div></div>);
 
     return connectDragPreview(connectDropTarget(
       <div className={'selection-container' + (isDragging ? ' dragging' : '') + (isAlternate ? ' alternate' : '')}>

@@ -6,13 +6,18 @@ const listTarget = {
   hover(props, monitor, component) {
     const itemID = monitor.getItem().id;
     const dragIndex = monitor.getItem().index;    
-    const dragList = monitor.getItem().column;    
+    const dragList = monitor.getItem().column;
+    const canDrop = !(monitor.getItem().column == 'team' && props.column != 'team');
 
-    //props.onMove(monitor.getItem(), dragList, dragIndex, props.column, 0);
-    monitor.getItem().index = 0;
-    monitor.getItem().column = props.column;
-    monitor.getItem().targetListID = props.listID;
-    monitor.getItem().targetListHash = props.listHash;
+    if (canDrop) {
+        props.onMove(monitor.getItem(), dragList, dragIndex, props.column, 0);
+
+        monitor.getItem().index = 0;
+        monitor.getItem().column = props.column;
+        monitor.getItem().targetListID = props.listID;
+        monitor.getItem().targetListHash = props.listHash;
+    }
+
   }
 };
 

@@ -80,7 +80,6 @@ export const lists = function (
         		throw new Error('Tried to add a presentation when your category is not selected');
         	}
 
-        	list
         	return {
         		...state,
         		results: state.results.map(l => {

@@ -12,6 +12,10 @@ export const Pass = () => (
 	<i className="fa fa-thumbs-down" />
 );
 
+export const Clear = () => (
+	<i className="fa fa-times" />
+);
+
 export const Help = () => (
 	<i className="fa fa-question-circle" />
 );

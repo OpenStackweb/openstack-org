@@ -49,11 +49,33 @@ export const detailPresentation = function (
         		})
         	}
 
-        case 'TOGGLE_FOR_ME':
-        	return {
-        		...state,
-        		selected: action.payload.type
-        	};
+		case 'TOGGLE_FOR_ME':
+            const metrics = {
+                selected: 'selectors',
+                maybe: 'likers',
+                pass: 'passers'
+            };
+        	let {type, name} = action.payload;
+        	let newState = {...state};
+
+        	let newType = (type == 'clear') ? false : type;
+
+        	if (newType) {
+        		let addTo = metrics[newType];
+                let subtractFrom = metrics[state.selected];
+        		newState[addTo] = [...state[addTo], name];
+        		if (state.selected) { //if was selected
+                    newState[subtractFrom] = state[subtractFrom].filter(n => n !== name);
+				}
+			} else {
+        		newState.selectors = state.selectors.filter(s => s != name);
+        		newState.passers = state.passers.filter(p => p != name);
+        		newState.likers = state.likers.filter(l => l != name);
+			}
+
+            newState.selected = newType;
+
+        	return newState;
 
         case 'TOGGLE_FOR_GROUP':
         	return {

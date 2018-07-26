@@ -61,16 +61,22 @@ export const presentations = function (
         		...state,
         		results: state.results.map(p => {
         			if(+p.id === +action.payload.presentationID) {
+        				let {type, name} = action.payload;
         				let subtractFrom = metrics[p.selected];
-        				let addTo = metrics[action.payload.type];        				
+                        let addTo = metrics[type];
+
         				let newPresentation = {
         					...p,
-        					selected: action.payload.type,
-        					[addTo]: [...p[addTo], action.payload.name]
+        					selected: ((type == 'clear') ? false : type),
         				};
+
+        				if (addTo) {
+							newPresentation[addTo] = [...p[addTo], name];
+                        }
+
         				if(subtractFrom) {
-        					newPresentation[subtractFrom] = newPresentation[subtractFrom].filter(name => (
-        						name !== action.payload.name
+        					newPresentation[subtractFrom] = newPresentation[subtractFrom].filter(n => (
+        						n !== name
         					))
         				}
 

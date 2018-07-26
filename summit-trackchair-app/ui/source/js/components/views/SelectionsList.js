@@ -111,6 +111,8 @@ class SelectionsList extends React.Component {
 					<ListPlaceholder 
 						onMove={this.handleDrag}
 						column={this.props.column}
+						listID={this.props.list.id}
+						listHash={this.props.list.list_hash}
 						/>
 				}
 				{selections.map((s,i) => (

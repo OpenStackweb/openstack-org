@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import ButtonGroup from '../ui/ButtonGroup';
 import ButtonOption from '../ui/ButtonOption';
 import {postMySelection} from '../../actions';
-import {Selected, Maybe, Pass} from '../ui/Icons';
+import {Selected, Maybe, Pass, Clear} from '../ui/Icons';
 
 class SelectionButtonBar extends React.Component {
 
@@ -82,6 +82,7 @@ class SelectionButtonBar extends React.Component {
 				<ButtonOption disabled={!canAdd} eventKey='selected' className={successClass} ><Selected /> Yes</ButtonOption>
 				<ButtonOption eventKey='maybe' className={warningClass}><Maybe /> Interested</ButtonOption>
 				<ButtonOption eventKey='pass' className='damyListnger'><Pass /> No thanks</ButtonOption>
+				<ButtonOption eventKey='clear' className='damyListnger'><Clear /> Clear</ButtonOption>
 			</ButtonGroup>
 		);		
 	}

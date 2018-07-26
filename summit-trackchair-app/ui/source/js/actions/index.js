@@ -131,8 +131,10 @@ export const postMySelection = (presentationID, type, name) => {
 		dispatch(toggleForMe({presentationID, type, name}));
 		cancel(key);
 
+		let selection = (type == 'clear') ? 'unselect' : 'select';
+
 		const url = URL.create(
-			`presentation/${presentationID}/select`,
+			`presentation/${presentationID}/${selection}`,
 			{type},
 			'/trackchairs/api/v1'
 		);

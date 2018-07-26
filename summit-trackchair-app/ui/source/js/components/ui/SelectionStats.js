@@ -11,8 +11,10 @@ export default({
 	};
 
 	selections.forEach(s => {
-		const l = s.presentation.level || 'N/A';
-		stats[l]++;
+		if (s.presentation) {
+            const l = s.presentation.level || 'N/A';
+            stats[l]++;
+        }
 	});
 	return (		
 		<div className="selection-stats">
