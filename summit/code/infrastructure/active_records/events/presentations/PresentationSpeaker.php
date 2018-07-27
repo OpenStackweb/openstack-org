@@ -656,124 +656,24 @@ class PresentationSpeaker extends DataObject
     }
 
     /**
-     * @param ISummit $summit
-     * @return DataList
+     * @param ISelectionPlan $selectionPlan
+     * @return ArrayList
      */
-    public function getPublicCategoryPresentationsBySummit(ISummit $summit){
+    public function getPresentationsByPlan(ISelectionPlan $selectionPlan) {
 
-        $categories_ids = array(0);
-        foreach($summit->getPublicCategories() as $cat)
-            array_push($categories_ids, $cat->ID);
-        if(count($categories_ids) == 0) return null;
-        $categories_ids = implode(',', $categories_ids);
+        $pres = DB::query("
+          SELECT DISTINCT P.* FROM Presentation P
+          LEFT JOIN Presentation_Speakers PS ON PS.PresentationID = P.ID
+          WHERE P.SelectionPlanID = {$selectionPlan->ID} 
+          AND (PS.PresentationSpeakerID = {$this->ID} OR P.CreatorID = {$this->MemberID} OR P.ModeratorID = {$this->ID} )
+        ");
 
-        return $this->Presentations()->filter([
-            'SummitID' => $summit->ID
-        ])
-            ->exclude(['CreatorID' => $this->MemberID])
-            ->exclude(['ModeratorID' => $this->ID])
-            ->where(" SummitEvent.CategoryID IN ({$categories_ids})");
+        $presentations = new ArrayList();
+        foreach ($pres as $row) {
+            $presentations->add(new Presentation($row));
+        }
 
-    }
-
-    /**
-     * @param ISummit $summit
-     * @return DataList
-     */
-    // NOTE: THIS ONE INCLUDES CREATED, MODERATED AND SPEAKER PRESENTATIONS
-    public function getPublicCategoryOwnedPresentationsBySummit(ISummit $summit){
-        $categories_ids = array(0);
-        foreach($summit->getPublicCategories() as $cat)
-            array_push($categories_ids, $cat->ID);
-
-        if(count($categories_ids) == 0) return null;
-
-        $categories_ids = implode(',', $categories_ids);
-
-        return Presentation::get()->filter([
-            'CreatorID' => $this->MemberID,
-            'SummitID' => $summit->ID
-        ])->where(" SummitEvent.CategoryID IN ({$categories_ids})");
-    }
-
-    /**
-     * @param ISummit $summit
-     * @return DataList
-     */
-    public function getPublicCategoryModeratedPresentationsBySummit(ISummit $summit){
-        $categories_ids = array(0);
-        foreach($summit->getPublicCategories() as $cat)
-            array_push($categories_ids, $cat->ID);
-        if(count($categories_ids) == 0) return null;
-        $categories_ids = implode(',', $categories_ids);
-
-        return Presentation::get()->filter([
-            'ModeratorID' => $this->ID,
-            'SummitID' => $summit->ID
-        ])
-            ->exclude(['CreatorID' => $this->MemberID])
-            ->where(" SummitEvent.CategoryID IN ({$categories_ids})");
-    }
-
-    /**
-     * @param ISummit $summit
-     * @param PrivatePresentationCategoryGroup $private_group
-     * @return DataList
-     */
-    public function getPrivateCategoryPresentationsBySummit(ISummit $summit, PrivatePresentationCategoryGroup $private_group){
-
-        $categories_ids = array();
-        foreach($private_group->Categories() as $cat)
-            array_push($categories_ids, $cat->ID);
-        if(count($categories_ids) == 0) return null;
-        $categories_ids = implode(',', $categories_ids);
-
-        return $this->Presentations()
-            ->filter(['SummitID' => $summit->ID])
-            ->exclude(['CreatorID' => $this->MemberID])
-            ->exclude(['ModeratorID' => $this->ID])
-            ->where(" SummitEvent.CategoryID IN ({$categories_ids})");
-    }
-
-    /**
-     * @param ISummit $summit
-     * @param PrivatePresentationCategoryGroup $private_group
-     * @return DataList
-     */
-    // NOTE: THIS ONE INCLUDES CREATED, MODERATED AND SPEAKER PRESENTATIONS
-    public function getPrivateCategoryOwnedPresentationsBySummit(ISummit $summit, PrivatePresentationCategoryGroup $private_group){
-
-        $categories_ids = array();
-        foreach($private_group->Categories() as $cat)
-            array_push($categories_ids, $cat->ID);
-        if(count($categories_ids) == 0) return null;
-        $categories_ids = implode(',', $categories_ids);
-
-        return Presentation::get()->filter([
-            'CreatorID' => $this->MemberID,
-            'SummitID' => $summit->ID
-        ])->where(" SummitEvent.CategoryID IN ({$categories_ids})");
-    }
-
-    /**
-     * @param ISummit $summit
-     * @param PrivatePresentationCategoryGroup $private_group
-     * @return DataList
-     */
-    public function getPrivateCategoryModeratedPresentationsBySummit(ISummit $summit, PrivatePresentationCategoryGroup $private_group){
-
-        $categories_ids = array();
-        foreach($private_group->Categories() as $cat)
-            array_push($categories_ids, $cat->ID);
-        if(count($categories_ids) == 0) return null;
-        $categories_ids = implode(',', $categories_ids);
-
-        return Presentation::get()->filter([
-            'ModeratorID' => $this->ID,
-            'SummitID' => $summit->ID
-        ])
-            ->exclude(['CreatorID' => $this->MemberID])
-            ->where(" SummitEvent.CategoryID IN ({$categories_ids})");
+        return $presentations;
     }
 
     /**
@@ -1580,62 +1480,6 @@ class PresentationSpeaker extends DataObject
         return new ArrayList($res);
     }
 
-    /**
-     * @param ISummit $summit
-     * @return int
-     */
-    public function getPublicCategoryOwnedPresentationsBySummitCount(ISummit $summit){
-        $list = $this->getPublicCategoryOwnedPresentationsBySummit($summit);
-        return is_null($list) ? 0 : $list->count();
-    }
-
-    /**
-     * @param ISummit $summit
-     * @return int
-     */
-    public function getPublicCategoryPresentationsBySummitCount(ISummit $summit){
-        $list = $this->getPublicCategoryPresentationsBySummit($summit);
-        return is_null($list) ? 0 : $list->count();
-    }
-
-    /**
-     * @param ISummit $summit
-     * @return int
-     */
-    public function getPublicCategoryModeratedPresentationsBySummitCount(ISummit $summit){
-        $list = $this->getPublicCategoryModeratedPresentationsBySummit($summit);
-        return is_null($list) ? 0 : $list->count();
-    }
-
-    /**
-     * @param ISummit $summit
-     * @param PrivatePresentationCategoryGroup $private_group
-     * @return int
-     */
-    public function getPrivateCategoryPresentationsBySummitCount(ISummit $summit, PrivatePresentationCategoryGroup $private_group){
-        $list = $this->getPrivateCategoryPresentationsBySummit($summit, $private_group);
-        return is_null($list) ? 0 : intval($list->count());
-    }
-
-    /**
-     * @param ISummit $summit
-     * @param PrivatePresentationCategoryGroup $private_group
-     * @return int
-     */
-    public function getPrivateCategoryOwnedPresentationsBySummitCount(ISummit $summit, PrivatePresentationCategoryGroup $private_group){
-        $list = $this->getPrivateCategoryOwnedPresentationsBySummit($summit, $private_group);
-        return is_null($list) ? 0 : intval($list->count());
-    }
-
-    /**
-     * @param ISummit $summit
-     * @param PrivatePresentationCategoryGroup $private_group
-     * @return int
-     */
-    public function getPrivateCategoryModeratedPresentationsBySummitCount(ISummit $summit, PrivatePresentationCategoryGroup $private_group){
-        $list = $this->getPrivateCategoryModeratedPresentationsBySummit($summit, $private_group);
-        return is_null($list) ? 0 : intval($list->count());
-    }
 
     /**
      * @param ISummit $summit

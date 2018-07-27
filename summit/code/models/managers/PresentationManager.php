@@ -89,42 +89,17 @@ final class PresentationManager implements IPresentationManager
      */
     public function isPresentationSubmissionAllowedFor(PresentationSpeaker $speaker, ISummit $summit)
     {
-        $res = false;
-        $res_private = false;
-
         if($summit->isCallForSpeakersOpen())
         {
-            $max_per_summit = intval($summit->getOpenSelectionPlanForStage('Submission')->getMaxSubmissions());
-            // zero means infinity
-            if ($max_per_summit === 0) $max_per_summit = PHP_INT_MAX;
+            $selectionPlan = $summit->getOpenSelectionPlanForStage('Submission');
+            $max_per_summit = intval($selectionPlan->getMaxSubmissions());
 
-            $presentation_count = intval($speaker->getPublicCategoryPresentationsBySummitCount($summit)) +
-                                  intval($speaker->getPublicCategoryOwnedPresentationsBySummitCount($summit)) +
-                                  intval($speaker->getPublicCategoryModeratedPresentationsBySummitCount($summit));
+            $presentation_count = intval($speaker->getPresentationsByPlan($selectionPlan)->count());
 
-            $res = $presentation_count < $max_per_summit;
+            return $presentation_count < $max_per_summit;
         }
 
-        if($speaker->Member()->exists() && $groups = $this->getPrivateCategoryGroupsFor($speaker->Member(), $summit))
-        {
-            // check private groups
-            foreach($groups as $g)
-            {
-                if(!$g->isSubmissionOpen()) continue;
-                $max_per_group = intval($g->MaxSubmissionAllowedPerUser);
-                if($max_per_group === 0) $max_per_group = PHP_INT_MAX; /// infinite
-                // we need to check
-
-                $group_presentation_count = intval($speaker->getPrivateCategoryPresentationsBySummitCount($summit, $g)) +
-                                            intval($speaker->getPrivateCategoryOwnedPresentationsBySummitCount($summit, $g)) +
-                                            intval($speaker->getPrivateCategoryModeratedPresentationsBySummitCount($summit, $g));
-
-                $res_private = $group_presentation_count < $max_per_group;
-                if($res_private) break;
-            }
-        }
-
-        return ($res || $res_private);
+        return false;
     }
 
     /**
@@ -137,100 +112,35 @@ final class PresentationManager implements IPresentationManager
         $category = $presentation->Category();
         $summit   = $category->Summit();
 
-        if($summit->isCallForSpeakersOpen() && $summit->isPublicCategory($category))
+        if($summit->isCallForSpeakersOpen())
         {
-            $max_per_summit     = intval($summit->getOpenSelectionPlanForStage('Submission')->getMaxSubmissions());
-            //zero means infinity
-            if($max_per_summit === 0) $max_per_summit = PHP_INT_MAX;
+            $selectionPlan = $summit->getOpenSelectionPlanForStage('Submission');
+            $max_per_summit     = intval($selectionPlan->getMaxSubmissions());
 
-            $presentation_count = intval($speaker->getPublicCategoryPresentationsBySummitCount($summit)) +
-                                  intval($speaker->getPublicCategoryOwnedPresentationsBySummitCount($summit)) +
-                                  intval($speaker->getPublicCategoryModeratedPresentationsBySummitCount($summit));
+            $presentation_count = intval($speaker->getPresentationsByPlan($selectionPlan)->count());
 
             return $presentation_count < $max_per_summit;
-        }
-
-        if($summit->isPrivateCategory($category) && $group = $summit->getPrivateGroupFor($category)) {
-
-            if($group->isSubmissionOpen()){
-                $max_per_group = intval($group->MaxSubmissionAllowedPerUser);
-                //zero means infinity
-                if ($max_per_group === 0) $max_per_group = PHP_INT_MAX;
-
-                $group_presentation_count = intval($speaker->getPrivateCategoryPresentationsBySummitCount($summit, $group)) +
-                                            intval($speaker->getPrivateCategoryOwnedPresentationsBySummitCount($summit, $group)) +
-                                            intval($speaker->getPrivateCategoryModeratedPresentationsBySummitCount($summit, $group));
-
-                return $group_presentation_count < $max_per_group;
-            }
         }
 
         return false;
     }
 
     /**
-     * @param PresentationSpeaker $speaker
-     * @param PresentationCategory $category
      * @throws EntityValidationException
      * @return int
      */
-    public function getSubmissionLimitFor(PresentationSpeaker $speaker, PresentationCategory $category)
+    public function getSubmissionLimitFor(ISummit $summit)
     {
-        $summit        = $category->Summit();
         $res           = -1;
-        $found_public  = false;
-        $found_private = false;
-
-        if($summit->isCallForSpeakersOpen() && $summit->isPublicCategory($category)) {
-            $res          = intval($summit->getOpenSelectionPlanForStage('Submission')->getMaxSubmissions());
-            $found_public = true;
-        }
-
-        if($speaker->Member()->exists() && $groups = $this->getPrivateCategoryGroupsFor($speaker->Member(), $summit)){
-            foreach($groups as $g) {
-                if (!$g->isSubmissionOpen()) continue;
-                if (!$g->hasCategory($category)) continue;
-                $res = intval($g->MaxSubmissionAllowedPerUser);
-                $found_private = true;
-                break;
-            }
-        }
-        // zero means infinity
-        $res = $res === 0 ? PHP_INT_MAX : $res;
-        if(!$found_public && !$found_private){
+        if($summit->isCallForSpeakersOpen()) {
+            $res = intval($summit->getOpenSelectionPlanForStage('Submission')->getMaxSubmissions());
+        } else {
             throw new EntityValidationException("Call for speaker is closed!");
         }
+
+        // zero means infinity
+        $res = $res === 0 ? PHP_INT_MAX : $res;
         return $res;
-    }
-
-    /**
-     * @param Member $member
-     * @param ISummit $summit
-     * @return PrivatePresentationCategoryGroup[]
-     */
-    public function getPrivateCategoryGroupsFor(Member $member, ISummit $summit){
-
-        $groups         = array();
-        $selection_plan = $summit->getOpenSelectionPlanForStage('Submission');
-        if (!$selection_plan) return $groups;
-
-        $private_groups = $selection_plan->getPrivateCategoryGroups();
-
-        foreach($private_groups as $private_group)
-        {
-            foreach($private_group->AllowedGroups() as $user_group)
-            {
-                $already_added = false;
-                if($member->inGroup($user_group))
-                {
-                    array_push($groups, $private_group);
-                    $already_added = true;
-                    break;
-                }
-                if($already_added) break;
-            }
-        }
-        return $groups;
     }
 
     /**
@@ -243,17 +153,6 @@ final class PresentationManager implements IPresentationManager
         if(!$summit->Active) return false;
         $res = $summit->isCallForSpeakersOpen();
 
-        if(!$res && $speaker->Member()->exists())
-        {
-            $groups = $this->getPrivateCategoryGroupsFor($speaker->Member(), $summit);
-            foreach($groups as $g)
-            {
-                if(!$g->isSubmissionOpen()) continue;
-                if($g->Categories()->count() == 0) continue;
-                $res = true;
-                break;
-            }
-        }
         return $res;
     }
 
@@ -269,31 +168,10 @@ final class PresentationManager implements IPresentationManager
 
         $summit = $presentation->Summit();
         if(!$summit->Active) return false;
-        $category = $presentation->Category();
         $selection_plan = $presentation->SelectionPlan();
 
-        if($selection_plan && $selection_plan->isCallForPresentationsOpen() && $summit->isPublicCategory($category)) return true;
+        if($selection_plan && $selection_plan->isCallForPresentationsOpen()) return true;
 
-        // check member private categories groups
-        if($speaker->Member()->exists() && $groups = $this->getPrivateCategoryGroupsFor($speaker->Member(), $summit))
-        {
-
-            foreach($groups as $g)
-            {
-                if(!$g->hasCategory($category)) continue;
-                if(!$g->isSubmissionOpen()) continue;
-                return true;
-            }
-        }
-        //check if we have presentations for the current summit that are private categories
-        foreach($speaker->Presentations() as $presentation){
-            $category = $presentation->Category();
-            if(!$summit->isPrivateCategory($category)) continue;
-            $group = $summit->getPrivateGroupFor($category);
-            if(is_null($group)) continue;
-            if(!$group->isSubmissionOpen()) continue;
-            return true;
-        }
         return false;
     }
 
@@ -304,29 +182,7 @@ final class PresentationManager implements IPresentationManager
      */
     public function isPresentationEditionAllowed(Member $member, ISummit $summit)
     {
-        if($summit->isPresentationEditionAllowed()) return true;
-        //check our groups
-        $groups = $this->getPrivateCategoryGroupsFor($member, $summit);
-        foreach($groups as $g)
-        {
-            if(!$g->isSubmissionOpen()) continue;
-            if($g->Categories()->count() == 0) continue;
-            return true;
-        }
-        //check if we have presentations for the current summit that are private categories
-        $speaker = $member->getSpeakerProfile();
-        if(!is_null($speaker))
-        {
-            foreach($speaker->Presentations() as $presentation){
-                $category = $presentation->Category();
-                if(!$summit->isPrivateCategory($category)) continue;
-                $group = $summit->getPrivateGroupFor($category);
-                if(is_null($group)) continue;
-                if(!$group->isSubmissionOpen()) continue;
-                return true;
-            }
-        }
-        return false;
+        return $summit->isPresentationEditionAllowed();
     }
 
     /**
@@ -339,10 +195,21 @@ final class PresentationManager implements IPresentationManager
     {
         return $this->tx_manager->transaction(function() use($summit, $creator, $data){
 
-            $speaker                               = $creator->getSpeakerProfile();
+            if(!$summit->isCallForSpeakersOpen()) {
+                throw new EntityValidationException('Call for Presentations is closed!');
+            }
+
+            $selectionPlan  = $summit->getOpenSelectionPlanForStage('Submission');
+            $speaker        = $creator->getSpeakerProfile();
+
+            $limit    = intval($selectionPlan->getMaxSubmissions());
+            $count    = intval($speaker->getPresentationsByPlan($selectionPlan)->count());
+
+            if ($count >= $limit)
+                throw new EntityValidationException(sprintf('You reached the limit (%s) of presentations.', $limit));
+
 
             $presentation                          = Presentation::create();
-
             $presentation->Title                   = trim($data['Title']);
             $presentation->TypeID                  = intval($data['TypeID']);
             $presentation->Level                   = trim($data['Level']);
@@ -352,32 +219,11 @@ final class PresentationManager implements IPresentationManager
             $presentation->CategoryID              = intval(trim($data['CategoryID']));
             $presentation->AttendingMedia          = isset($data['AttendingMedia']) ? $data['AttendingMedia'] : 0;
 
-            if(intval($presentation->CategoryID) > 0) {
-                $category = PresentationCategory::get()->byID($presentation->CategoryID);
-                if(is_null($category)) throw new NotFoundEntityException('category not found!.');
-                $limit    = $this->getSubmissionLimitFor($speaker, $category);
-
-                $count    = $summit->isPublicCategory($category) ?
-                    (
-                        intval($speaker->getPublicCategoryPresentationsBySummitCount($summit)) +
-                        intval($speaker->getPublicCategoryOwnedPresentationsBySummitCount($summit)) +
-                        intval($speaker->getPublicCategoryModeratedPresentationsBySummitCount($summit))
-                    ):
-                    (
-                        intval($speaker->getPrivateCategoryPresentationsBySummitCount($summit, $summit->getPrivateGroupFor($category))) +
-                        intval($speaker->getPrivateCategoryOwnedPresentationsBySummitCount($summit, $summit->getPrivateGroupFor($category))) +
-                        intval($speaker->getPrivateCategoryModeratedPresentationsBySummitCount($summit, $summit->getPrivateGroupFor($category)))
-                    );
-
-                if ($count >= $limit)
-                    throw new EntityValidationException(sprintf('You reached the limit (%s) of presentations.', $limit));
-            }
-
             if(isset($data['OtherTopic']))
                 $presentation->OtherTopic = trim($data['OtherTopic']);
 
             $presentation->SummitID         = $summit->getIdentifier();
-            $presentation->SelectionPlanID  = $summit->getOpenSelectionPlanForStage('Submission')->ID;
+            $presentation->SelectionPlanID  = $selectionPlan->ID;
             $presentation->CreatorID        = $creator->ID;
             $presentation->Progress         = Presentation::PHASE_SUMMARY;
             // add creator as speaker

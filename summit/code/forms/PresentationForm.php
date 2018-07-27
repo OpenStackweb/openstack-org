@@ -51,19 +51,15 @@ final class PresentationForm extends BootstrapForm
     }
 
     protected function getPresentationFields() {
+        $category_groups = [];
 
-        $private_groups = $this->presentation_manager->getPrivateCategoryGroupsFor(Member::currentUser(), $this->summit);
         if ($this->summit->isCallForSpeakersOpen()) {
-            $public_groups = $this->summit->getOpenSelectionPlanForStage('Submission')->getPublicCategoryGroups();
-            $category_groups = array_merge($public_groups,$private_groups);
-        } else {
-            $category_groups = $private_groups;
+            $category_groups = $this->summit->getOpenSelectionPlanForStage('Submission')->getPublicCategoryGroups();
         }
 
         $category_groups_map = array();
         foreach ($category_groups as $group) {
-            $group_type = ($group->ClassName == 'PrivatePresentationCategoryGroup') ? 'private' : 'public';
-
+            $group_type = 'public';
             if (!$group->Categories()->count()) continue;
             if (!$group->hasCategoryVisible() && $group_type == 'public') continue;
 

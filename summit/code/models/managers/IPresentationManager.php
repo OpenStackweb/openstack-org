@@ -26,11 +26,10 @@ interface IPresentationManager
     public function isPresentationSubmissionAllowedFor(PresentationSpeaker $speaker, ISummit $summit);
 
     /**
-     * @param PresentationSpeaker $speaker
-     * @param PresentationCategory $category
+     * @param ISummit $summit
      * @return int
      */
-    public function getSubmissionLimitFor(PresentationSpeaker $speaker, PresentationCategory $category);
+    public function getSubmissionLimitFor(ISummit $summit);
 
     /**
      * @param ISummit $summit
@@ -38,13 +37,6 @@ interface IPresentationManager
      * @return bool
      */
     public function isCallForSpeakerOpen(ISummit $summit, PresentationSpeaker $speaker);
-
-    /**
-     * @param Member $member
-     * @param ISummit $summit
-     * @return PrivatePresentationCategoryGroup[]
-     */
-    public function getPrivateCategoryGroupsFor(Member $member, ISummit $summit);
 
     /**
      * @param Member $member

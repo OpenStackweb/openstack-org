@@ -282,42 +282,10 @@ interface IPresentationSpeaker extends IEntity
     public function registerSummitPromoCodeByValue($promo_code_value, ISummit $summit);
 
     /**
-     * @param ISummit $summit
-     * @return DataList
+     * @param ISelectionPlan $selectionPlan
+     * @return ArrayList
      */
-    public function getPublicCategoryPresentationsBySummit(ISummit $summit);
-
-    /**
-     * @param ISummit $summit
-     * @return DataList
-     */
-    public function getPublicCategoryOwnedPresentationsBySummit(ISummit $summit);
-
-    /**
-     * @param ISummit $summit
-     * @return DataList
-     */
-    public function getPublicCategoryModeratedPresentationsBySummit(ISummit $summit);
-    /**
-     * @param ISummit $summit
-     * @param PrivatePresentationCategoryGroup $private_group
-     * @return DataList
-     */
-    public function getPrivateCategoryPresentationsBySummit(ISummit $summit, PrivatePresentationCategoryGroup $private_group);
-
-    /**
-     * @param ISummit $summit
-     * @param PrivatePresentationCategoryGroup $private_group
-     * @return DataList
-     */
-    public function getPrivateCategoryOwnedPresentationsBySummit(ISummit $summit, PrivatePresentationCategoryGroup $private_group);
-
-    /**
-     * @param ISummit $summit
-     * @param PrivatePresentationCategoryGroup $private_group
-     * @return DataList
-     */
-    public function getPrivateCategoryModeratedPresentationsBySummit(ISummit $summit, PrivatePresentationCategoryGroup $private_group);
+    public function getPresentationsByPlan(ISelectionPlan $selectionPlan);
 
     /**
      * @param null|int $summit_id

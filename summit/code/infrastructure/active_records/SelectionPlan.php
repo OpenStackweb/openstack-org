@@ -267,17 +267,17 @@ class SelectionPlan extends DataObject implements ISelectionPlan
 
     public function isVotingOpen()
     {
-        return $this->getStageStatus('Voting') === Summit::STAGE_OPEN;
+        return $this->Enabled && $this->getStageStatus('Voting') === Summit::STAGE_OPEN;
     }
 
     public function isCallForPresentationsOpen()
     {
-        return $this->getStageStatus('Submission') === Summit::STAGE_OPEN;
+        return $this->Enabled && $this->getStageStatus('Submission') === Summit::STAGE_OPEN;
     }
 
     public function isSelectionOpen()
     {
-        return $this->getStageStatus('Selection') === Summit::STAGE_OPEN;
+        return $this->Enabled && $this->getStageStatus('Selection') === Summit::STAGE_OPEN;
     }
 
     public function getMaxSubmissions() {
@@ -285,6 +285,8 @@ class SelectionPlan extends DataObject implements ISelectionPlan
         if (!$max_submissions && $this->SummitID) {
             $max_submissions = $this->Summit()->MaxSubmissionAllowedPerUser;
         }
+
+        if ($max_submissions === 0) $max_submissions = PHP_INT_MAX;
 
         return $max_submissions;
     }
