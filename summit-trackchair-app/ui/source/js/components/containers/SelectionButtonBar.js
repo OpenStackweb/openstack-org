@@ -66,12 +66,14 @@ class SelectionButtonBar extends React.Component {
 	render() {
 		let activeKey, successClass, warningClass;
 		let canAdd = true;
+		let canClear = true;
 		const {myList} = this.props;
 		const {id, selected} = this.props.presentation;
 
 		if(myList) {
 			activeKey = selected;
 			canAdd = (myList.slots > myList.selections.length);
+			canClear = !!selected;
 		}
 
         successClass = 'success';
@@ -82,7 +84,7 @@ class SelectionButtonBar extends React.Component {
 				<ButtonOption disabled={!canAdd} eventKey='selected' className={successClass} ><Selected /> Yes</ButtonOption>
 				<ButtonOption eventKey='maybe' className={warningClass}><Maybe /> Interested</ButtonOption>
 				<ButtonOption eventKey='pass' className='damyListnger'><Pass /> No thanks</ButtonOption>
-				<ButtonOption eventKey='clear' className='damyListnger'><Clear /> Clear</ButtonOption>
+				<ButtonOption disabled={!canClear} eventKey='clear' className='damyListnger'><Clear /> Clear</ButtonOption>
 			</ButtonGroup>
 		);		
 	}

@@ -128,7 +128,7 @@ class PresentationTrackChairFeatures extends DataExtension
                 $mySelections = SummitSelectedPresentationList::getMemberList($this->owner->CategoryID, $list_class);
                 // See if the presentation has already been assigned
                 $alreadyAssigned = $mySelections->SummitSelectedPresentations()->filter('PresentationID', $this->owner->ID)->first();
-                if($alreadyAssigned->exists()) {
+                if($alreadyAssigned && $alreadyAssigned->exists()) {
                     $alreadyAssigned->delete();
                 }
             }
