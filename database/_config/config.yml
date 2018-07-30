@@ -20,3 +20,24 @@ PublicCloudService:
 RemoteCloudService:
   extensions:
     - MandatoryDataObject
+RSVPTextBoxQuestionTemplate:
+  extensions:
+    - MandatoryDataObject
+RSVPTextAreaQuestionTemplate:
+  extensions:
+    - MandatoryDataObject
+RSVPMemberEmailQuestionTemplate:
+  extensions:
+    - MandatoryDataObject
+RSVPMemberFirstNameQuestionTemplate:
+  extensions:
+    - MandatoryDataObject
+RSVPMemberLastNameQuestionTemplate:
+  extensions:
+    - MandatoryDataObject
+RSVPCheckBoxListQuestionTemplate:
+  extensions:
+    - MandatoryDataObject
+RSVPRadioButtonListQuestionTemplate:
+  extensions:
+    - MandatoryDataObject
