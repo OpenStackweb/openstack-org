@@ -88,6 +88,84 @@ msgstr ""
 # paper 2 - section 13 list 101 item 54
 msgid "Geofencing and requirements for keeping sensitive private data local."
 msgstr ""
+# paper 2 - section 14 title
+msgid "A DEEPER EXPLORATION OF EDGE COMPUTING CONSIDERATIONS"
+msgstr ""
+# paper 2 - section 14 paragraph 102
+msgid "The \"edge\" in edge computing refers to the outskirts of an administrative domain, as close as possible to discrete data sources or end users. This concept applies to telecom networks, to large enterprises with distributed points of presence such as retail, or to other applications, in particular in the context of IoT."
+msgstr ""
+# paper 2 - section 14 paragraph 103
+msgid "<img src=\"https://www.openstack.org/assets/papers/edge-computing/1-edge-fog-diagram7.svg\" alt=\"Table 1\" >"
+msgstr ""
+# paper 2 - section 14 paragraph 104
+msgid "One of the characteristics of edge computing is that the application is strongly associated with the edge location. For telecoms, “the edge” would refer to a point close to the end user but controlled by the provider, potentially having some elements of workloads running on end user devices. For large enterprises, “the edge” is the point where the application, service or workload is used (e.g. a retail store or a factory). For the purposes of this definition, the edge is not an end device with extremely limited capacity for supporting even a minimal cloud architecture, such as an IoT or sensor device. This is an important consideration, because many discussions of edge computing do not make that distinction."
+msgstr ""
+# paper 2 - section 14 paragraph 105
+msgid "Edge computing is similar to data center computing in that:"
+msgstr ""
+# paper 2 - section 14 list 106 item 55
+msgid "It includes compute, storage and networking resources."
+msgstr ""
+# paper 2 - section 14 list 106 item 56
+msgid "Its resources may be shared by many users and many applications."
+msgstr ""
+# paper 2 - section 14 list 106 item 57
+msgid "It benefits from virtualization and abstraction of the resource pool."
+msgstr ""
+# paper 2 - section 14 list 106 item 58
+msgid "It benefits from the ability to leverage commodity hardware."
+msgstr ""
+# paper 2 - section 14 list 106 item 59
+msgid "It uses APIs to support interoperability."
+msgstr ""
+# paper 2 - section 14 paragraph 107
+msgid "Edge computing differs from computing in large data centers in that:"
+msgstr ""
+# paper 2 - section 14 list 108 item 60
+msgid "Edge sites are as close as possible to end users. They improve the experience over high latency and unreliable connections."
+msgstr ""
+# paper 2 - section 14 list 108 item 61
+msgid "May require specialized hardware, such as GPU/FPGA platforms for AR/VR functionality."
+msgstr ""
+# paper 2 - section 14 list 108 item 62
+msgid "Edge can scale to large numbers of sites, distributed in distinct locations."
+msgstr ""
+# paper 2 - section 14 list 108 item 63
+msgid "An edge site’s location and the identity of the access links it terminates are significant. An application that needs to run close to its users, needs to be in the right part of the edge. It is common for the application location to matter in edge computing."
+msgstr ""
+# paper 2 - section 14 list 108 item 64
+msgid "The entire pool of sites can be considered to be dynamic. Because of their physical separation, edge sites will, in some cases, be connected to each other and the core with WAN connections. Edge sites will join and leave the pool of infrastructure over time."
+msgstr ""
+# paper 2 - section 14 list 108 item 65
+msgid "Edge sites are remote and potentially unmanned, and therefore must be administered remotely. Tools need to support intermittent network access to the site."
+msgstr ""
+# paper 2 - section 14 list 108 item 66
+msgid "Edge supports large differences in site size and scale, from data center scale down to a single device."
+msgstr ""
+# paper 2 - section 14 list 108 item 67
+msgid "Edge sites may be resource constrained; adding capacity to an existing site is restricted due to space or power requirements."
+msgstr ""
+# paper 2 - section 14 list 108 item 68
+msgid "Multi-tenancy on a massive scale is required for some of the use cases."
+msgstr ""
+# paper 2 - section 14 list 108 item 69
+msgid "Isolation of edge computing from data center clouds may be required to ensure that compromises in the “external cloud” domain cannot impact services."
+msgstr ""
+# paper 2 - section 14 paragraph 109
+msgid "The concept of edge computing must cover both the edge site (e.g. the compute, network and storage infrastructure), but also the applications (workloads) that run on it. It is worth noting that any applications in an edge computing environment could potentially leverage any or all of the capabilities provided by a cloud—compute, block storage, object storage, virtual networking, bare metal, or containers."
+msgstr ""
+# paper 2 - section 14 paragraph 110
+msgid "The essential features that define and separate edge computing from cloud computing are:"
+msgstr ""
+# paper 2 - section 14 list 111 item 70
+msgid "The ability to support a dynamic pool of multiple potentially widely distributed sites,"
+msgstr ""
+# paper 2 - section 14 list 111 item 71
+msgid "Potentially unreliable network connections, and"
+msgstr ""
+# paper 2 - section 14 list 111 item 72
+msgid "the likelihood of difficult-to-resolve resource constraints at sites across the network."
+msgstr ""
 # paper 2 - section 15 title
 msgid "EXPLORING CHARACTERISTICS"
 msgstr ""
@@ -132,6 +210,183 @@ msgid "Maintainability needs to be straightforward—untrained technicians perfo
 msgstr ""
 # paper 2 - section 15 list 116 item 83
 msgid "Physical designs may need a complete rethink. Most edge computing environments won’t be ideal—limited power, dirt, humidity and vibration have to be considered."
+msgstr ""
+# paper 2 - section 16 title
+msgid "USE CASES"
+msgstr ""
+# paper 2 - section 16 paragraph 117
+msgid "There are probably dozens of ways to characterize use cases and this paper is too short to provide an exhaustive list. But here are some examples to help clarify thinking and highlight opportunities for collaboration."
+msgstr ""
+# paper 2 - section 16 paragraph 118
+msgid "Four major categories of workload requirements that benefit from a distributed architecture are analytics, compliance, security, and NFV."
+msgstr ""
+# paper 2 - section 16 paragraph 119
+msgid "DATA COLLECTION AND ANALYTICS"
+msgstr ""
+# paper 2 - section 16 paragraph 120
+msgid "IoT, where data is often collected from a large network of microsites, is an example of an application that benefits from the edge computing model. Sending masses of data over often limited network connections to an analytics engine located in a centralized data center is counterproductive; it may not be responsive enough, could contribute to excessive latency, and wastes precious bandwidth. Since edge devices can also produce terabytes of data, taking the analytics closer to the source of the data on the edge can be more cost-effective by analyzing data near the source and only sending small batches of condensed information back to the centralized systems. There is a tradeoff here—balancing the cost of transporting data to the core against losing some information."
+msgstr ""
+# paper 2 - section 16 paragraph 121
+msgid "SECURITY"
+msgstr ""
+# paper 2 - section 16 paragraph 122
+msgid "Unfortunately, as edge devices proliferate––including mobile handsets and IoT sensors––new attack vectors are emerging that take advantage of the proliferation of endpoints. Edge computing offers the ability to move security elements closer to the originating source of attack, enables higher performance security applications, and increases the number of layers that help defend the core against breaches and risk."
+msgstr ""
+# paper 2 - section 16 paragraph 123
+msgid "COMPLIANCE REQUIREMENTS"
+msgstr ""
+# paper 2 - section 16 paragraph 124
+msgid "Compliance covers a broad range of requirements, ranging from geofencing, data sovereignty, and copyright enforcement. Restricting access to data based on geography and political boundaries, limiting data streams depending on copyright limitations, and storing data in places with specific regulations are all achievable and enforceable with edge computing infrastructure."
+msgstr ""
+# paper 2 - section 16 paragraph 125
+msgid "NETWORK FUNCTION VIRTUALIZATION (NFV)"
+msgstr ""
+# paper 2 - section 16 paragraph 126
+msgid "Network Function Virtualization (NFV) is at its heart the quintessential edge computing application because it provides infrastructure functionality. Telecom operators are looking to transform their service delivery models by running virtual network functions as part of, or layered on top of, an edge computing infrastructure. To maximize efficiency and minimize cost/complexity, running NFV on edge computing infrastructure makes sense."
+msgstr ""
+# paper 2 - section 16 paragraph 127
+msgid "REAL-TIME"
+msgstr ""
+# paper 2 - section 16 paragraph 128
+msgid "Real-time applications, such as AR/VR, connected cars, telemedicine, tactile internet Industry 4.0 and smart cities, are unable to tolerate more than a few milliseconds of latency and can be extremely  sensitive to jitter, or latency variation. As an example, connected cars will require low latency and high bandwidth, and depend on computation and content caching near the user, making edge capacity a necessity. In many scenarios, particularly where closed-loop automation is used to maintain high availability, response times in tens of milliseconds are needed, and cannot be met without edge computing infrastructure."
+msgstr ""
+# paper 2 - section 16 paragraph 129
+msgid "IMMERSIVE"
+msgstr ""
+# paper 2 - section 16 paragraph 130
+msgid "Edge computing expands bandwidth capabilities, unlocking the potential of new immersive applications. Some of these include AR/VR, 4K video, and 360° imaging for verticals like healthcare. Caching and optimizing content at the edge is already becoming a necessity since protocols like TCP don’t respond well to sudden changes in radio network traffic. Edge computing infrastructure, tied into real-time access to radio/network information can reduce stalls and delays in video by up to 20% during peak viewing hours, and can also vary the video feed bitrate based on radio conditions."
+msgstr ""
+# paper 2 - section 16 paragraph 131
+msgid "NETWORK EFFICIENCY"
+msgstr ""
+# paper 2 - section 16 paragraph 132
+msgid "Many applications are not sensitive to latency and do not require large amounts of nearby compute or storage capacity, so they could theoretically run in a centralized cloud, but the bandwidth requirements and/or compute requirements may still make edge computing a more efficient approach. Some of these workloads are common today, including video surveillance and IoT gateways, while others, including facial recognition and vehicle number plate recognition, are emerging capabilities. With many of these, the edge computing infrastructure not only reduces bandwidth requirements, but can also provide a platform for functions that enable the value of the application—for example, video surveillance motion detection and threat recognition. In many of these applications, 90% of the data is routine and irrelevant, so sending it to a centralized cloud is prohibitively expensive and wasteful of often scarce network bandwidth. It makes more sense to sort the data at the edge for anomalies and changes, and only report on the actionable data."
+msgstr ""
+# paper 2 - section 16 paragraph 133
+msgid "SELF-CONTAINED AND AUTONOMOUS SITE OPERATIONS"
+msgstr ""
+# paper 2 - section 16 paragraph 134
+msgid "Many environments, even today, have limited, unreliable or unpredictable connectivity. These could include transportation (planes, buses, ships), mining operations (oil rigs, pipelines, mines), power infrastructure (wind farms, solar power plants), and even environments that should typically have good connectivity, like stores. Edge computing neatly supports such environments by allowing sites to remain semi-autonomous and functional when needed or when the network connectivity is not available. The best example of this approach is the need for retail locations to maintain their point of sales (POS) systems, even when there is temporarily no network connectivity."
+msgstr ""
+# paper 2 - section 16 paragraph 135 few years ago,
+msgid "PRIVACY"
+msgstr ""
+# paper 2 - section 16 paragraph 136
+msgid "Enterprises may have needs for edge computing capacity depending on workloads, connectivity limits and privacy. For example, medical applications that need to anonymize personal health information (PHI) before sending it to the cloud could do this utilizing edge computing infrastructure."
+msgstr ""
+# paper 2 - section 16 paragraph 137
+msgid "Another way to look at requirements that would benefit from cloud edge computing is by the type of company that would deploy them. Operator applications are workloads put on edge computing infrastructure that is built and managed by operators—telecommunications companies, for example. Third-party applications are built by organizations to run on existing edge infrastructure, in order to leverage others’ edge computing infrastructure. It is worth noting that any applications could leverage any or all of the capabilities provided by a cloud—compute, block storage, object storage, virtual networking, bare metal, or containers."
+msgstr ""
+# paper 2 - section 17 title
+msgid "SCENARIOS"
+msgstr ""
+# paper 2 - section 17 paragraph 138
+msgid "The basic characteristic of the edge computing paradigm is that the infrastructure is located closer to the end user, that the scale of site distribution is high and that the edge nodes are connected by WAN network connections. Examining a few scenarios in additional depth helps us evaluate current capabilities that map to the use case, as well as highlighting weaknesses and opportunities for improvement."
+msgstr ""
+# paper 2 - section 17 paragraph 139
+msgid "1. Retail/finance/remote location “cloud in a box”: Edge computing infrastructure that supports a suite of applications customized to the specific company or industry vertical. Often used by the enterprise, edge computing infrastructure, ultimately coupled together into distributed infrastructure, to reduce the hardware footprint, standardize deployments at many sites, deliver greater flexibility to replace applications located at the edge (and to have the same application running uniformly in all nodes irrespective of HW), boost resiliency, and address concerns about intermittent WAN connections. Caching content or providing compute, storage, and networking for self-contained applications are obvious uses for edge computing in settings with limited connectivity."
+msgstr ""
+# paper 2 - section 17 paragraph 140
+msgid "2. Mobile connectivity: Mobile/wireless networks are likely to be a common environmental element for cloud edge computing, as mobile networks will remain characterized by limited and unpredictable bandwidth, at least until 5G becomes widely available. Applications such as augmented reality for remote repair and telemedicine, IoT devices for capturing utility (water, gas, electric, facilities management) data, inventory, supply chain and transportation solutions, smart cities, smart roads and remote security applications will all rely on the mobile network to greater or lesser degrees. They will all benefit from edge computing’s ability to move workloads closer to the end user."
+msgstr ""
+# paper 2 - section 17 paragraph 141
+msgid "<img src=\"https://www.openstack.org/assets/papers/edge-computing/2-edge-diagram-2.svg\" alt=\"Table 2\" >"
+msgstr ""
+# paper 2 - section 17 paragraph 142
+msgid "3. Network-as-a-Service (NaaS): Coming from the need to deliver an identical network service application experience in radically different environments, the NaaS use case requires both a small footprint of its distributed platform at the edges, and strong centralized management tools that cross over unreliable or limited WAN network connections in support of the services out on the edge. The main characteristics of this scenario are: small hardware footprint, moving (changing network connections) and constantly changing workloads, hybrid locations of data and applications. This is one of the cases that needs infrastructure to support micro nodes—small doses of compute in non-traditional packages (not all 19in rack in a cooled data center). NaaS will require support for thousands or tens of thousands of nodes at the edge and must support mesh and/or hierarchical architectures as well as on demand sites that might spin up as they are needed and shutdown when they are done. APIs and GUIs will have to change to reflect that large numbers of compute nodes will have different locations instead of being present in the same data center."
+msgstr ""
+# paper 2 - section 17 paragraph 143
+msgid "<img src=\"https://www.openstack.org/assets/papers/edge-computing/3-edge-network-transport-diagram2.svg\" alt=\"Table 3\">"
+msgstr ""
+# paper 2 - section 17 paragraph 144
+msgid "4. Universal Customer Premises Equipment (uCPE): This scenario, already being deployed today, demands support for appliance-sized hardware footprints and is characterized by limited network connections with generally stable workloads requiring high availability. It also requires a method of supporting hybrid locations of data and applications across hundreds or thousands of nodes and scaling existing uCPE deployments will be an emerging requirement."
+msgstr ""
+# paper 2 - section 17 paragraph 145
+msgid "This is particularly applicable to NFV applications where different sites might need a different set of service chained applications, or sites with a different set of required applications that still need to work in concert. Mesh or hierarchical architectures would need to be supported with localized capacity and the need to store and forward data processing due to intermittent network connections. Self-healing and self-administration combined with the ability to remotely administer the node are musts."
+msgstr ""
+# paper 2 - section 17 paragraph 146
+msgid "5. Satellite enabled communication (SATCOM): This scenario is characterized by numerous capable terminal devices, often distributed to the most remote and harsh conditions. At the same time, it makes sense to utilize these distributed platforms for hosting services, especially considering the extremely high latency, limited bandwidth and the cost of over-the-satellite communications. Specific examples of such use cases might include vessels (from fishing boats to tanker ships), aircrafts, oil rigs, mining operations or military grade infrastructure."
+msgstr ""
+# paper 2 - section 18 title
+msgid "CHALLENGES"
+msgstr ""
+# paper 2 - section 18 paragraph 147
+msgid "Though there are plenty of examples of edge deployments already in progress around the world, widespread adoption will require new ways of thinking to solve emerging and already existing challenges and limitations."
+msgstr ""
+# paper 2 - section 18 paragraph 148
+msgid "We have established that the edge computing platform has to be, by design, much more fault tolerant and robust than a traditional data center centric cloud, both in terms of the hardware as well as the platform services that support the application lifecycle. We cannot assume that such edge use cases will have the maintenance and support facilities that standard data center infrastructure does. Zero touch provisioning, automation, and autonomous orchestration in all infrastructure and platform stacks are crucial requirements in these scenarios."
+msgstr ""
+# paper 2 - section 18 paragraph 149
+msgid "But there are other challenges that need to be taken under consideration."
+msgstr ""
+# paper 2 - section 18 paragraph 150
+msgid "For one, edge resource management systems should deliver a set of high-level mechanisms whose assembly results in a system capable of operating and using a geo-distributed IaaS infrastructure relying on WAN interconnects. In other words, the challenge is to revise (and extend when needed) IaaS core services in order to deal with aforementioned edge specifics—network disconnections/bandwidth, limited capacities in terms of compute and storage, unmanned deployments, and so forth."
+msgstr ""
+# paper 2 - section 18 paragraph 151
+msgid "Some foreseeable needs include:"
+msgstr ""
+# paper 2 - section 18 list 152 item 84
+msgid "A virtual-machine/container/bare-metal manager in charge of managing machine/container lifecycle (configuration, scheduling, deployment, suspend/resume, and shutdown)."
+msgstr ""
+# paper 2 - section 18 list 152 item 85
+msgid "An image manager in charge of template files (a.k.a. virtual-machine/container images)."
+msgstr ""
+# paper 2 - section 18 list 152 item 86
+msgid "A network manager in charge of providing connectivity to the infrastructure: virtual networks and external access for users."
+msgstr ""
+# paper 2 - section 18 list 152 item 87
+msgid "A storage manager, providing storage services to edge applications."
+msgstr ""
+# paper 2 - section 18 list 152 item 88
+msgid "Administrative tools, providing user interfaces to operate and use the dispersed infrastructure."
+msgstr ""
+# paper 2 - section 18 paragraph 153
+msgid "These needs are relatively obvious and could likely be met by leveraging and adapting existing projects. But other needs for edge computing are more challenging. These include, but are not limited to:"
+msgstr ""
+# paper 2 - section 18 list 154 item 89
+msgid "Addressing storage latency over WAN connections."
+msgstr ""
+# paper 2 - section 18 list 154 item 90
+msgid "Reinforced security at the edge—monitoring the physical and application integrity of each site, with the ability to autonomously enable corrective actions when necessary."
+msgstr ""
+# paper 2 - section 18 list 154 item 91
+msgid "Monitoring resource utilization across all nodes simultaneously."
+msgstr ""
+# paper 2 - section 18 list 154 item 92
+msgid "Orchestration tools that manage and coordinate many edge sites and workloads, potentially leading toward a peering control plane or \"self-organizing edge.\""
+msgstr ""
+# paper 2 - section 18 list 154 item 93
+msgid "Orchestration of a federation of edge platforms (or cloud-of-clouds) has to be explored and introduced to the IaaS core services."
+msgstr ""
+# paper 2 - section 18 list 154 item 93 subitem 94
+msgid "Automated edge commission/decommission operations, including initial software deployment and upgrades of the resource management system’s components."
+msgstr ""
+# paper 2 - section 18 list 154 item 93 subitem 95
+msgid "Automated data and workload relocations—load balancing across geographically distributed hardware."
+msgstr ""
+# paper 2 - section 18 list 154 item 96
+msgid "Some form of synchronization of abstract state propagation should be needed at the \"core\" of the infrastructure to cope with discontinuous network links."
+msgstr ""
+# paper 2 - section 18 list 154 item 97
+msgid "New ways to deal with network partitioning issues due to limited connectivity—coping with short disconnections and long disconnections alike."
+msgstr ""
+# paper 2 - section 18 list 154 item 98
+msgid "Tools to manage edge application life cycles, including:"
+msgstr ""
+# paper 2 - section 18 list 154 item 98 subitem 99
+msgid "The definition of advanced placement constraints in order to cope with latency requirements of application components."
+msgstr ""
+# paper 2 - section 18 list 154 item 98 subitem 100
+msgid "The provisioning/scheduling of applications in order to satisfy placement requirements (initial placement)."
+msgstr ""
+# paper 2 - section 18 list 154 item 98 subitem 101
+msgid "Data and workload relocations according to internal/external events (mobility use-cases, failures, performance considerations, and so forth)."
+msgstr ""
+# paper 2 - section 18 list 154 item 102
+msgid "Integration location awareness: Not all edge deployments will require the same application at the same moment. Location and demand awareness are a likely need."
+msgstr ""
+# paper 2 - section 18 list 154 item 103
+msgid "Discrete hardware with limited resources and limited ability to expand at the remote site needs to be taken into consideration when designing both the overall architecture at the macro level and the administrative tools. The concept of being able to grab remote resources on demand from other sites, either neighbors over a mesh network or from core elements in a hierarchical network, means that fluctuations in local demand can be met without inefficiency in hardware deployments."
 msgstr ""
 # paper 2 - section 19 title
 msgid "CONCLUSION AND CALL TO ACTION"
@@ -184,7 +439,7 @@ msgstr ""
 # 36
 msgid "Index to all documentation, for every role and step in planning and operating an OpenStack cloud."
 msgstr ""
-# paper 2 - section 19 item 32 title
+# paper 2 - section 19 item 32A DEEPER EXPLORATION OF EDGE COMPUTING CONSIDERATIONS title
 msgid "Welcome to the community!"
 msgstr ""
 # 36

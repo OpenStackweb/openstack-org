@@ -54,53 +54,62 @@ final class PaperContentPOTFileGeneratorTask extends BuildTask {
 
         foreach($paper->getOrderedSections() as $section){
 
-            $generator->addEntry(addslashes($section->Title), sprintf("paper %s - section %s title", $paper->ID, $section->ID));
+            self::generateSection($section, $paper, $generator);
 
-            if(!empty($section->Subtitle)) {
-                $generator->addEntry(addslashes($section->Subtitle), sprintf("paper %s - section %s subtitle", $paper->ID, $section->ID));
-            }
+        }
 
-            foreach ($section->getOrderedContents() as $content) {
-                $generator->addEntry(addslashes($content->Content), sprintf("paper %s - section %s paragraph %s", $paper->ID, $section->ID, $content->ID));
-                if($content instanceof PaperParagraphList){
-                    // list
-                    foreach($content->getOrderedItems() as $item){
-                        $generator->addEntry(addslashes($item->Content), sprintf("paper %s - section %s list %s item %s", $paper->ID, $section->ID, $content->ID, $item->ID));
-                        foreach($item->SubItems() as $subItem){
-                            $generator->addEntry(addslashes($subItem->Content), sprintf("paper %s - section %s list %s item %s subitem %s", $paper->ID, $section->ID, $content->ID, $item->ID, $subItem->ID));
-                        }
+    }
+
+    private static function generateSection(PaperSection $section, Paper $paper, POTFileGenerator $generator){
+        $generator->addEntry(addslashes($section->Title), sprintf("paper %s - section %s title", $paper->ID, $section->ID));
+
+        if(!empty($section->Subtitle)) {
+            $generator->addEntry(addslashes($section->Subtitle), sprintf("paper %s - section %s subtitle", $paper->ID, $section->ID));
+        }
+
+        foreach ($section->getOrderedContents() as $content) {
+            $generator->addEntry(addslashes($content->Content), sprintf("paper %s - section %s paragraph %s", $paper->ID, $section->ID, $content->ID));
+            if($content instanceof PaperParagraphList){
+                // list
+                foreach($content->getOrderedItems() as $item){
+                    $generator->addEntry(addslashes($item->Content), sprintf("paper %s - section %s list %s item %s", $paper->ID, $section->ID, $content->ID, $item->ID));
+                    foreach($item->SubItems() as $subItem){
+                        $generator->addEntry(addslashes($subItem->Content), sprintf("paper %s - section %s list %s item %s subitem %s", $paper->ID, $section->ID, $content->ID, $item->ID, $subItem->ID));
                     }
                 }
             }
+        }
 
-            if($section instanceof CaseOfStudySection){
-                foreach ($section->getOrderedCasesOfStudy() as $cs) {
-                    $generator->addEntry(addslashes($cs->Title), sprintf("paper %s - section %s case of study %s title", $paper->ID, $section->ID, $cs->ID));
+        if($section instanceof CaseOfStudySection){
+            foreach ($section->getOrderedCasesOfStudy() as $cs) {
+                $generator->addEntry(addslashes($cs->Title), sprintf("paper %s - section %s case of study %s title", $paper->ID, $section->ID, $cs->ID));
 
-                    foreach ($cs->getOrderedContents() as $content) {
-                        $generator->addEntry(addslashes($content->Content), sprintf("paper %s - case of study %s paragraph %s", $paper->ID, $cs->ID, $content->ID));
-                        if($content instanceof PaperParagraphList){
-                            // list
-                            foreach($content->getOrderedItems() as $item){
-                                $generator->addEntry(addslashes($item->Content), sprintf("paper %s - case of study %s list %s item %s", $paper->ID, $cs->ID, $content->ID, $item->ID));
-                                foreach($item->SubItems() as $subItem){
-                                    $generator->addEntry(addslashes($subItem->Content), sprintf("paper %s - case of study %s list %s item %s subitem %s", $paper->ID, $cs->ID, $content->ID, $item->ID, $subItem->ID));
-                                }
+                foreach ($cs->getOrderedContents() as $content) {
+                    $generator->addEntry(addslashes($content->Content), sprintf("paper %s - case of study %s paragraph %s", $paper->ID, $cs->ID, $content->ID));
+                    if($content instanceof PaperParagraphList){
+                        // list
+                        foreach($content->getOrderedItems() as $item){
+                            $generator->addEntry(addslashes($item->Content), sprintf("paper %s - case of study %s list %s item %s", $paper->ID, $cs->ID, $content->ID, $item->ID));
+                            foreach($item->SubItems() as $subItem){
+                                $generator->addEntry(addslashes($subItem->Content), sprintf("paper %s - case of study %s list %s item %s subitem %s", $paper->ID, $cs->ID, $content->ID, $item->ID, $subItem->ID));
                             }
                         }
                     }
                 }
             }
+        }
 
-            if($section instanceof IndexSection){
-                foreach ($section->Items() as $i) {
-                    $generator->addEntry(addslashes($i->Title), sprintf("paper %s - section %s item %s title", $paper->ID, $section->ID, $i->ID));
+        if($section instanceof IndexSection){
+            foreach ($section->Items() as $i) {
+                $generator->addEntry(addslashes($i->Title), sprintf("paper %s - section %s item %s title", $paper->ID, $section->ID, $i->ID));
 
-                    if(!empty($i->Content))
-                        $generator->addEntry(addslashes($i->Content), printf("paper %s - section %s item %s content", $paper->ID, $section->ID, $i->ID));
-                }
+                if(!empty($i->Content))
+                    $generator->addEntry(addslashes($i->Content), printf("paper %s - section %s item %s content", $paper->ID, $section->ID, $i->ID));
             }
         }
 
+        foreach($section->getOrderedSubSections() as $subSection){
+            self::generateSection($subSection, $paper, $generator);
+        }
     }
 }

@@ -17,8 +17,9 @@ interface IZanataServerPOFilesDownloader
     /**
      * @param string $module
      * @param string $project_id
+     * @param string $version_id
      * @param array $files
      * @return void
      */
-    public function downloadPOFiles($module, $project_id, $files = []);
+    public function downloadPOFiles($module, $project_id, $version_id, $files = []);
 }

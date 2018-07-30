@@ -36,7 +36,9 @@ final class CompilePO2MOTask extends BuildTask {
             $yaml = Yaml::parse(file_get_contents($path));
             if(!is_null($yaml) && count($yaml))
             {
-                foreach($yaml as $project_id => $po_files){
+                foreach($yaml as $project_id => $info){
+                    $version_id = $info['version_id'];
+                    $po_files = $info['po_files'];
                     foreach ($po_files as $po_file){
                         foreach ($po_file as $doc_id => $languages) {
                             foreach($languages as $language) {

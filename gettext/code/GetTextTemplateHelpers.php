@@ -68,7 +68,7 @@ class GetTextTemplateHelpers implements TemplateGlobalProvider
         return null;
     }
 
-    public static function _t($domain, $msgid){
+    public static function _t($domain, $msgid, $decode_html = 0){
 
         // @see https://github.com/php/php-src/commit/6d2dfa4eb047d9a2463ee3873ecea06f6e94fa94
         if(strlen($msgid) > self::MAX_MSG_ID_LEN)
@@ -99,6 +99,9 @@ class GetTextTemplateHelpers implements TemplateGlobalProvider
         $t->setLanguage($language);
         $t->loadDomain($domain, $path);
         $t->register();
+
+        if($decode_html)
+            $msgid = html_entity_decode($msgid);
 
         $msgstr = call_user_func_array("__", array_merge([$msgid], $args));
 

@@ -49,8 +49,10 @@ final class ZanataServerPOFilesDownloaderTask extends BuildTask
             $yaml = Yaml::parse(file_get_contents($path));
             if(!is_null($yaml) && count($yaml))
             {
-                foreach($yaml as $project_id => $po_files){
+                foreach($yaml as $project_id => $info){
                     $files = [];
+                    $version_id = $info['version_id'];
+                    $po_files = $info['po_files'];
                     foreach ($po_files as $po_file){
                         foreach ($po_file as $doc_id => $languages) {
                             foreach($languages as $language) {
@@ -62,7 +64,7 @@ final class ZanataServerPOFilesDownloaderTask extends BuildTask
                             }
                         }
                     }
-                    $this->downloader->downloadPOFiles($module, $project_id, $files);
+                    $this->downloader->downloadPOFiles($module, $project_id, $version_id, $files);
                 }
             }
             echo "Ending Zanata PO Files downloading process ...".PHP_EOL;

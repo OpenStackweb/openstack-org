@@ -1,28 +1,30 @@
 # here are all available po file to compile to mo files per language code
 openstack-user-survey:
-  - survey_template:
-    - lang_local: zh_TW
-      lang_zanata: zh-TW
-    - lang_local: ja_JP
-      lang_zanata: ja
-    - lang_local: ko_KR
-      lang_zanata: ko-KR
-    - lang_local: de_DE
-      lang_zanata: de
-    - lang_local: id_ID
-      lang_zanata: id
-    - lang_local: zh_CN
-      lang_zanata: zh-CN
-  - survey_ui:
-    - lang_local: zh_TW
-      lang_zanata: zh-TW
-    - lang_local: ja_JP
-      lang_zanata: ja
-    - lang_local: ko_KR
-      lang_zanata: ko-KR
-    - lang_local: de_DE
-      lang_zanata: de
-    - lang_local: id_ID
-      lang_zanata: id
-    - lang_local: zh_CN
-      lang_zanata: zh-CN
+  version_id: openstack-user-survey
+  po_files:
+    - survey_template:
+      - lang_local: zh_TW
+        lang_zanata: zh-TW
+      - lang_local: ja_JP
+        lang_zanata: ja
+      - lang_local: ko_KR
+        lang_zanata: ko-KR
+      - lang_local: de_DE
+        lang_zanata: de
+      - lang_local: id_ID
+        lang_zanata: id
+      - lang_local: zh_CN
+        lang_zanata: zh-CN
+    - survey_ui:
+      - lang_local: zh_TW
+        lang_zanata: zh-TW
+      - lang_local: ja_JP
+        lang_zanata: ja
+      - lang_local: ko_KR
+        lang_zanata: ko-KR
+      - lang_local: de_DE
+        lang_zanata: de
+      - lang_local: id_ID
+        lang_zanata: id
+      - lang_local: zh_CN
+        lang_zanata: zh-CN

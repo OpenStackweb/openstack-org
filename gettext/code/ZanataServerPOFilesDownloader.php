@@ -31,12 +31,13 @@ final class ZanataServerPOFilesDownloader implements IZanataServerPOFilesDownloa
     /**
      * @param string $module
      * @param string $project_id
+     * @param string $version_id
      * @param array $files
      * @return void
      */
-    public function downloadPOFiles($module, $project_id, $files = [])
+    public function downloadPOFiles($module, $project_id, $version_id, $files = [])
     {
-        $dir = Director::baseFolder() ."/".$module."/Locale/%s/LC_MESSAGES/";
+        $dir = Director::baseFolder() ."/".$module."/Locale/%s/LC_MESSAGES";
         foreach ($files as $file) {
 
             if (!file_exists(sprintf($dir, $file['lang_local']))) {
@@ -44,7 +45,7 @@ final class ZanataServerPOFilesDownloader implements IZanataServerPOFilesDownloa
             }
 
             $filename  = sprintf($dir, $file['lang_local']).'/'.$file['doc_id'].'.po';
-            $file_url  = sprintf("https://translate.openstack.org/rest/file/translation/%s/%s/%s/po?docId=%s", $project_id, $project_id, $file['lang_zanata'], $file['doc_id']);
+            $file_url  = sprintf("https://translate.openstack.org/rest/file/translation/%s/%s/%s/po?docId=%s", $project_id, $version_id, $file['lang_zanata'], $file['doc_id']);
             echo sprintf("downloading file %s", $file_url).PHP_EOL;
             $response  = $this->client->get(
                 $file_url,

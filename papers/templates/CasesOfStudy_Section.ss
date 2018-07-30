@@ -1,18 +1,18 @@
 <div class="row section" id="{$Slug}">
     <div class="col-lg-12">
-        <h3 class="text-center title">{$_T($Paper.I18nContext, $Title)}</h3>
+        <h3 class="text-center title">{$_T($Paper.I18nContext, $Title, 1)}</h3>
         <% loop OrderedContents %>
             <% if $Type == P %>
-                <p>$_T($Top.Paper.I18nContext, $Content)</p>
+                <p>$_T($Top.Paper.I18nContext, $Content, 1)</p>
             <% end_if %>
             <% if $Type == IMG %>
-                <p class="text-center">$_T($Top.Paper.I18nContext, $Content)</p>
+                <p class="text-center">$_T($Top.Paper.I18nContext, $Content, 1)</p>
             <% end_if %>
             <% if $Type == H4 %>
-                <h4 class="subtitle">$_T($Top.Paper.I18nContext, $Content)</h4>
+                <h4 class="subtitle">$_T($Top.Paper.I18nContext, $Content, 1)</h4>
             <% end_if %>
             <% if $Type == H5 %>
-                <h5 class="highlight">$_T($Top.Paper.I18nContext, $Content)</h5>
+                <h5 class="highlight">$_T($Top.Paper.I18nContext, $Content, 1)</h5>
             <% end_if %>
             <% if $Type == LIST %>
                 <% if $SubType == UL %>
@@ -28,7 +28,7 @@
             <% loop OrderedCasesOfStudy %>
                 <li class="<% if $First %>active<% end_if %> col-lg-3 col-sm-6 col-xs-12">
                     <a data-toggle="tab" href="#{$Slug}">
-                        <img class="logo" src="{$LogoUrl}" alt="{$_T($Top.Paper.I18nContext, $Title)}">
+                        <img class="logo" src="{$LogoUrl}" alt="{$_T($Top.Paper.I18nContext, $Title, 1)}">
                     </a>
                 </li>
             <% end_loop %>
@@ -36,19 +36,19 @@
         <div class="tab-content">
             <% loop OrderedCasesOfStudy %>
                 <div id="$Slug" class="tab-pane fade<% if $First %> in active<% end_if %>">
-                <h4 class="subtitle">$_T($Top.Paper.I18nContext, $Title)</h4>
+                <h4 class="subtitle">$_T($Top.Paper.I18nContext, $Title, 1)</h4>
                     <% loop $OrderedContents %>
                         <% if $Type == P %>
-                            <p>$_T($Top.Paper.I18nContext, $Content)</p>
+                            <p>$_T($Top.Paper.I18nContext, $Content, 1)</p>
                         <% end_if %>
                         <% if $Type == IMG %>
-                            <p class="text-center">$_T($Top.Paper.I18nContext, $Content)</p>
+                            <p class="text-center">$_T($Top.Paper.I18nContext, $Content, 1)</p>
                         <% end_if %>
                         <% if $Type == H4 %>
-                            <h4 class="subtitle">$_T($Top.Paper.I18nContext, $Content)</h4>
+                            <h4 class="subtitle">$_T($Top.Paper.I18nContext, $Content, 1)</h4>
                         <% end_if %>
                         <% if $Type == H5 %>
-                            <h5 class="highlight">$_T($Top.Paper.I18nContext, $Content)</h5>
+                            <h5 class="highlight">$_T($Top.Paper.I18nContext, $Content, 1)</h5>
                         <% end_if %>
                         <% if $Type == LIST %>
                             <% if $SubType == UL %>

@@ -1,8 +1,8 @@
 </div>
 
 <div class="intro-header text-center" style="background: url($Top.Paper.BackgroundImageUrl) center; ">
-    <h1>$_T($Top.Paper.I18nContext, $Top.Paper.Title)</h1>
-    <h2>$_T($Top.Paper.I18nContext, $Top.Paper.Subtitle)</h2>
+    <h1>$_T($Top.Paper.I18nContext, $Top.Paper.Title, 1)</h1>
+    <h2>$_T($Top.Paper.I18nContext, $Top.Paper.Subtitle, 1)</h2>
 </div>
 <section class="containers-page">
     <div id="paper-nav" class="navigation stick-top">
