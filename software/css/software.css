@@ -663,7 +663,7 @@ p.category-section-title {
   padding-bottom: 20px; }
 
 p.service-section-title {
-  text-align: center;
+  text-align: left;
   color: #2A4E68;
   margin-top: 30px;
   font-size: 1.4em;
@@ -711,7 +711,7 @@ p.service-section-title {
   .project-table-code-name {
   	font-weight: bold;
   	text-transform: uppercase;
-  	width: 35%;
+  	width: 30%;
   	float: left;
     vertical-align: middle;
   }
@@ -728,7 +728,7 @@ p.service-section-title {
   .project-table-description {
   	color: grey;	
   	cursor: pointer;
-    width:60%;
+    width:70%;
   }
   
 	div.project-table-row {
@@ -750,10 +750,9 @@ p.service-section-title {
 }
   
   .toggle-wrapper {
-  	max-width: 400px;
-  	margin: auto;
   	text-align: center;
   	background-color: white;
+    visibility:hidden;
   }
       
   .toggle {
@@ -763,6 +762,7 @@ p.service-section-title {
   	background: url(/software/images/icons/toggle-left.png) no-repeat center bottom;
   	background-size: 100%;
   	cursor: pointer;
+    margin-top:-50px;
   }
   
   .tiles {
