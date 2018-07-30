@@ -5,19 +5,31 @@ require('./t.tag');
 <service-group>
     <div class="row" id={ getGroupId(group_title) }>
         <div class="col-sm-12">
-            <p class="service-section-title">
+            <p class="category-section-title">
                 <strong>
                     <t entity="Software.SERVICES_SECTION_TITLE" text={ group_title } />
                 </strong>
-                { ' ( '+components.length+' Results )' }
             </p>
         </div>
-        <div class="col-sm-12" show="{ opts.tiles }">
-            <service-box each="{ components }" ></service-box>
+        <div class="col-md-12">
+            <div class="row" each="{ subcat_title, components in subcategories }" >
+                <div class="col-sm-12">
+                    <p class="service-section-title">
+                        <strong>
+                            <t entity="Software.SERVICES_SECTION_TITLE" text={ subcat_title } />
+                        </strong>
+                        { ' ( '+components.length+' Results )' }
+                    </p>
+                </div>
+                <div class="col-sm-12" show="{ opts.tiles }">
+                    <service-box each="{ components }" ></service-box>
+                </div>
+                <div class="col-sm-12" show="{ !opts.tiles }">
+                    <service-row each="{ components }"></service-row>
+                </div>
+            </div>
         </div>
-        <div class="col-sm-12" show="{ !opts.tiles }">
-            <service-row each="{ components }"></service-row>
-        </div>
+
     </div>
 
     <script>

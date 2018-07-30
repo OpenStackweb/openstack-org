@@ -9,7 +9,7 @@ require('./service-group.tag')
         <span>Tiles View</span>
     </div>
 
-    <service-group each="{ group_title, components in groups }" tiles="{ tileMode }"></service-group>
+    <service-group each="{ group_title, subcategories in groups }" tiles="{ tileMode }"></service-group>
 
     <script>
 

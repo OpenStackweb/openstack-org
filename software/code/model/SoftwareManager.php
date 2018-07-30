@@ -101,6 +101,41 @@ final class SoftwareManager implements ISoftwareManager
 
     /**
      * @param IOpenStackRelease $release
+     * @param string $term
+     * @param int $adoption
+     * @param int $maturity
+     * @param int $age
+     * @param string $sort
+     * @param string $sort_dir
+     * @return array
+     */
+    public function getComponentsGroupedByCategoryAndSubcategory(IOpenStackRelease $release , $term = '', $adoption = 0, $maturity = 0, $age = 0, $sort = '', $sort_dir = '')
+    {
+        $components     = $release->getOpenStackComponentsFiltered($term, $adoption, $maturity, $age);
+        $categories     = OpenStackComponentCategory::get()->sort('Order');
+
+        $component_categories = array_fill_keys($categories->column('Name'), array());
+
+        foreach($components as $c)
+        {
+            if ($c->SubCategory()->Exists() && $c->SubCategory()->Categories()->First()->Exists()) {
+
+                $subcat = $c->SubCategory() ;
+                $cat = $subcat->Categories()->First();
+
+                if (!array_key_exists($subcat->Name, $component_categories[$cat->Name])) {
+                    $component_categories[$cat->Name][$subcat->Name] = [];
+                }
+
+                $component_categories[$cat->Name][$subcat->Name][] = $this->serializer->serialize($c);
+            }
+        }
+
+        return array_filter($component_categories);
+    }
+
+    /**
+     * @param IOpenStackRelease $release
      * @return IOpenStackRelease
      */
     public function cloneRelease(IOpenStackRelease $release){

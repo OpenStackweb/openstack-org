@@ -653,12 +653,22 @@ a.more-about-config {
   -webkit-transition: max-height 0.5s ease-out;
   transition: max-height 0.5s ease-out; }
 
+p.category-section-title {
+  text-align: center;
+  color: #2A4E68;
+  margin-top: 80px;
+  font-size: 1.8em;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #EAEAEA;
+  padding-bottom: 20px; }
+
 p.service-section-title {
   text-align: center;
   color: #2A4E68;
   margin-top: 30px;
   font-size: 1.4em;
   margin-bottom: 30px; }
+
 
 .core-services-single-full {
   cursor: pointer;

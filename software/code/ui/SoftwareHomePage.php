@@ -309,7 +309,7 @@ class SoftwareHomePage_Controller extends Page_Controller
 
     public function getComponentsByCategoryJSON()
     {
-        $components = $this->manager->getComponentsGroupedByCategory($this->getDefaultRelease());
+        $components = $this->manager->getComponentsGroupedByCategoryAndSubcategory($this->getDefaultRelease());
 
         return json_encode
         (

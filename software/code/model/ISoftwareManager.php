@@ -40,6 +40,19 @@ interface ISoftwareManager
 
     /**
      * @param IOpenStackRelease $release
+     * @param string $term
+     * @param int $adoption
+     * @param int $maturity
+     * @param int $age
+     * @param string $sort
+     * @param string $sort_dir
+     * @return array
+     */
+    public function getComponentsGroupedByCategoryAndSubcategory(IOpenStackRelease $release , $term = '', $adoption = 0, $maturity = 0, $age = 0, $sort = '', $sort_dir = '');
+
+
+    /**
+     * @param IOpenStackRelease $release
      * @return IOpenStackRelease
      */
     public function cloneRelease(IOpenStackRelease $release);
