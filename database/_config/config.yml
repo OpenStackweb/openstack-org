@@ -41,3 +41,15 @@ RSVPCheckBoxListQuestionTemplate:
 RSVPRadioButtonListQuestionTemplate:
   extensions:
     - MandatoryDataObject
+TrackCheckBoxListQuestionTemplate:
+  extensions:
+    - MandatoryDataObject
+TrackCheckBoxQuestionTemplate:
+  extensions:
+    - MandatoryDataObject
+TrackRadioButtonListQuestionTemplate:
+  extensions:
+    - MandatoryDataObject
+TrackTextBoxQuestionTemplate:
+  extensions:
+    - MandatoryDataObject
