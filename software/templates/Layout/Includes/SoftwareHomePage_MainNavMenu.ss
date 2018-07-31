@@ -7,11 +7,6 @@
             <% if $Top.HasAvailableSampleConfigTypes %>
             <li <% if Active == 2 %>class="active"<% end_if %>><a href="$Top.Link(sample-configs)"><%t Software.SAMPLE_CONFIGURATIONS 'Sample Configurations' %></a></li>
             <% end_if %>
-            <% if SubMenuPages %>
-                <% loop SubMenuPages.Sort(Order, ASC) %>
-                    <li <% if Active == $Top.getCurrentIdx($Pos) %>class="active"<% end_if %>><a href="$Url">$Label</a></li>
-                <% end_loop %>
-            <% end_if %>
         </ul>
     </div>
 </div>
@@ -27,11 +22,8 @@
             <% if $Top.HasAvailableSampleConfigTypes %>
                 <li <% if Active == 2 %>class="active"<% end_if %>><a href="$Top.Link(sample-configs)"><%t Software.SAMPLE_CONFIGURATIONS 'Sample Configurations' %></a></li>
             <% end_if %>
-            <% if SubMenuPages %>
-                <% loop SubMenuPages.Sort(Order, ASC) %>
-                    <li <% if Active == $Top.getCurrentIdx($Pos) %>class="active"<% end_if %>><a href="$Url">$Label</a></li>
-                <% end_loop %>
-            <% end_if %>
         </ul>
     </div>
 </div>
+
+

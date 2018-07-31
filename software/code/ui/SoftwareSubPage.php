@@ -35,9 +35,6 @@ class SoftwareSubPage_Controller extends Page_Controller
 
     public function getActive()
     {
-        $base_index = 1;
-        if($this->getHasAvailableSampleConfigTypes())
-            $base_index = 2;
         $parent = SoftwareHomePage::get()->byID($this->ParentID);
         if(is_null($parent)) return -1;
         $pos = 0;
@@ -49,7 +46,7 @@ class SoftwareSubPage_Controller extends Page_Controller
                 break;
             }
         }
-        return $base_index+$pos;
+        return $pos;
     }
 
     public function getHasAvailableSampleConfigTypes()

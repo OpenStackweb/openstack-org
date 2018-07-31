@@ -1,8 +1,10 @@
 <% include SoftwareHomePage_MainNavMenu Active=0 %>
+
 <div class="software-main-wrapper">
     <!-- Projects Subnav -->
-    <div class="container"></div>
-    <div class="container inner-software">
+    <% include SoftwareHomePage_SubNavMenu Active=1 %>
+
+    <div class="container inner-software" role="tabpanel" id="overview">
         <!-- Begin Page Content -->
         <div class="row">
             <div class="col-sm-10 col-sm-push-1 center">
@@ -128,5 +130,6 @@
 
         <!-- End Page Content -->
     </div>
+
 </div>
 <!-- Software Tabs UI -->

@@ -39,7 +39,7 @@
             event.preventDefault();
         });
 
-        $('ul.sample-configs-subnav li a').click(function(event) {
+        $('#sample_configurations_wrapper ul.sample-configs-subnav li a').click(function(event) {
             $(this).position({
                 left: "50%"
             });
@@ -118,7 +118,7 @@
             return false;
         });
 
-        $(document).on('click','ul.sample-configs-subnav li a', function(event) {
+        $(document).on('click','#sample_configurations_wrapper ul.sample-configs-subnav li a', function(event) {
             $(this).position({
                 left: "50%"
             });
