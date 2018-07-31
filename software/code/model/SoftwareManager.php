@@ -125,16 +125,13 @@ final class SoftwareManager implements ISoftwareManager
 
         foreach($components as $c)
         {
-            if ($c->SubCategory()->Exists() && $c->SubCategory()->Categories()->First()->Exists()) {
-
+            if ($c->SubCategory() && $c->SubCategory()->Exists()) {
                 $subcat = $c->SubCategory() ;
-                $cat = $subcat->Categories()->First();
-
-                if (!array_key_exists($subcat->Name, $component_categories[$cat->Name])) {
-                    $component_categories[$cat->Name][$subcat->Name] = [];
+                foreach ($component_categories as $category => $subcategories) {
+                    if (array_key_exists($subcat->Name, $subcategories)) {
+                        $component_categories[$category][$subcat->Name][] = $this->serializer->serialize($c);
+                    }
                 }
-
-                $component_categories[$cat->Name][$subcat->Name][] = $this->serializer->serialize($c);
             }
         }
 
