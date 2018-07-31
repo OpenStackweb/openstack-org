@@ -113,8 +113,15 @@ final class SoftwareManager implements ISoftwareManager
     {
         $components     = $release->getOpenStackComponentsFiltered($term, $adoption, $maturity, $age);
         $categories     = OpenStackComponentCategory::get()->sort('Order');
+        $component_categories = [];
 
-        $component_categories = array_fill_keys($categories->column('Name'), array());
+        foreach ($categories as $cat) {
+            $component_categories[$cat->Name] = [];
+            $subcats = $cat->SubCategories()->sort('SubCatOrder');
+            foreach ($subcats as $subcat) {
+                $component_categories[$cat->Name][$subcat->Name] = [];
+            }
+        }
 
         foreach($components as $c)
         {
@@ -131,7 +138,17 @@ final class SoftwareManager implements ISoftwareManager
             }
         }
 
-        return array_filter($component_categories);
+        foreach ($component_categories as $category => $subcategories) {
+            foreach ($subcategories as $subcategory => $components) {
+                if(count($components) == 0)
+                    unset($component_categories[$category][$subcategory]);
+            }
+
+            if(count($component_categories[$category]) == 0)
+                unset($component_categories[$category]);
+        }
+
+        return $component_categories;
     }
 
     /**
