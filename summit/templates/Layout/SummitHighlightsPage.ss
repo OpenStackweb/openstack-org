@@ -2,7 +2,7 @@
     <p>
         <i class="fa fa-exclamation-circle"></i>
         The OpenStack community had an amazing time in {$Summit.Title}, so don't miss the OpenStack Summit in {$Top.NextSummit.Name}!
-        <a href="<% if $Summit.Next.RegistrationLink %>$Summit.Next.RegistrationLink<% else %>#<% end_if %>">More on the Summit in {$Top.NextSummit.Name}.</a>
+        <a href="<% if $Summit.Next.Link %>$Summit.Next.Link<% else %>#<% end_if %>">More on the Summit in {$Top.NextSummit.Name}.</a>
     </p>
 </div>
 <div id="wrap">
@@ -209,9 +209,9 @@
         <div class="summit-date">
             {$NextSummitText}
         </div>
-        <% if $Summit.Next.RegistrationLink %>
+        <% if $Summit.Next.Link %>
         <div>
-            <br/><a class="btn register-btn-lrg" href="$Summit.Next.RegistrationLink">Join Us</a>
+            <br/><a class="btn register-btn-lrg" href="$Summit.Next.Link">Learn More</a>
         </div>
         <% end_if %>
         <% if NextSummitBackgroundImage %>
