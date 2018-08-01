@@ -3,29 +3,29 @@ require('./service-row.tag')
 require('./t.tag');
 
 <service-group>
-    <div class="row" id={ getGroupId(group_title) }>
-        <div class="col-sm-12">
-            <p class="category-section-title">
-                <strong>
-                    <t entity="Software.SERVICES_SECTION_TITLE" text={ group_title } />
-                </strong>
-            </p>
+    <div class="row">
+        <div class="col-sm-12 all-projects-wrapper">
+            <h3><t entity="Software.SERVICES_SECTION_TITLE" text={ category.Name } /></h3>
+            <p><t entity="Software.SERVICES_SECTION_DESCRIPTION" text={ category.Description } /></p>
+            <p></p>
         </div>
+    </div>
+    <div class="row" id={ "cat_" + category.ID }>
         <div class="col-md-12">
-            <div class="row" each="{ subcat_title, components in subcategories }" >
+            <div class="row" each="{ subcatId, subcategory in subcategories }" >
                 <div class="col-sm-12">
                     <p class="service-section-title">
                         <strong>
-                            <t entity="Software.SERVICES_SECTION_TITLE" text={ subcat_title } />
+                            <t entity="Software.SERVICES_SECTION_TITLE" text={ subcategory.subcategory.Name } />
                         </strong>
-                        { ' ( '+components.length+' Results )' }
+                        { ' ( '+subcategory.components.length+' Results )' }
                     </p>
                 </div>
                 <div class="col-sm-12" show="{ opts.tiles }">
-                    <service-box each="{ components }" ></service-box>
+                    <service-box each="{ subcategory.components }" ></service-box>
                 </div>
                 <div class="col-sm-12" show="{ !opts.tiles }">
-                    <service-row each="{ components }"></service-row>
+                    <service-row each="{ subcategory.components }"></service-row>
                 </div>
             </div>
         </div>
@@ -34,13 +34,15 @@ require('./t.tag');
 
     <script>
 
-        this.base_url = this.parent.base_url;
+        this.base_url       = this.parent.base_url;
+        this.category       = opts.category;
+        this.subcategories  = opts.subcategories;
         var self = this;
 
-        getGroupId(group_title) {
-            var group_split = group_title.split(/[ ,]+/);
-            return group_split[0].toLowerCase();
-        }
+        this.on('update', function(){
+            self.category = this.opts.category;
+            self.subcategories = this.opts.subcategories;
+        });
 
     </script>
 </service-group>

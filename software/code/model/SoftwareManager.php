@@ -116,10 +116,13 @@ final class SoftwareManager implements ISoftwareManager
         $component_categories = [];
 
         foreach ($categories as $cat) {
-            $component_categories[$cat->Name] = [];
+            $component_categories[$cat->ID] = [ 'category' => $cat->toMap(), 'subcategories' => [] ];
             $subcats = $cat->SubCategories()->sort('SubCatOrder');
             foreach ($subcats as $subcat) {
-                $component_categories[$cat->Name][$subcat->Name] = [];
+                $component_categories[$cat->ID]['subcategories'][$subcat->ID] = [
+                    'subcategory' => $subcat->toMap(),
+                    'components' => []
+                ];
             }
         }
 
@@ -127,22 +130,22 @@ final class SoftwareManager implements ISoftwareManager
         {
             if ($c->SubCategory() && $c->SubCategory()->Exists()) {
                 $subcat = $c->SubCategory() ;
-                foreach ($component_categories as $category => $subcategories) {
-                    if (array_key_exists($subcat->Name, $subcategories)) {
-                        $component_categories[$category][$subcat->Name][] = $this->serializer->serialize($c);
+                foreach ($component_categories as $categoryId => $category) {
+                    if (array_key_exists($subcat->ID, $category['subcategories'])) {
+                        $component_categories[$categoryId]['subcategories'][$subcat->ID]['components'][] = $this->serializer->serialize($c);
                     }
                 }
             }
         }
 
-        foreach ($component_categories as $category => $subcategories) {
-            foreach ($subcategories as $subcategory => $components) {
-                if(count($components) == 0)
-                    unset($component_categories[$category][$subcategory]);
+        foreach ($component_categories as $categoryId => $category) {
+            foreach ($category['subcategories'] as $subcategoryId => $subcategory) {
+                if(count($subcategory['components']) == 0)
+                    unset($component_categories[$categoryId]['subcategories'][$subcategoryId]);
             }
 
-            if(count($component_categories[$category]) == 0)
-                unset($component_categories[$category]);
+            if(count($component_categories[$categoryId]['subcategories']) == 0)
+                unset($component_categories[$categoryId]);
         }
 
         return $component_categories;

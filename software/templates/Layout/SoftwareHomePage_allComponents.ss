@@ -19,17 +19,12 @@
         </div>
         <openstack-components-filters max_maturity_points="{ components.max_maturity_points }"></openstack-components-filters>
     </div>
+
+    <openstack-category-nav groups="{ components.grouped_components }"></openstack-category-nav>
+
+
     <div class="container inner-software">
         <!-- Begin Page Content -->
-        <div class="row">
-            <div class="col-sm-12 all-projects-wrapper">
-                <h3><%t Software.BROWSE_ALL_OS_PROJECTS 'Browse All OpenStack Projects' %></h3>
-                <p>
-                    <%t Software.PROJECT_NAVIGATOR_DESCRIPTION 'The Project Navigator is aimed at helping users make informed decisions about how to consume the software. Data used to power the Project Navigator website is provided by the OpenStack Technical and User Committees.' %>
-                </p>
-                <p></p>
-            </div>
-        </div>
         <project-services base_url="{$Top.Link}" groups="{ components.grouped_components }" max_maturity_points="{ components.max_maturity_points }" tilemode="{ tileMode }">
         </project-services>
         <!-- End Page Content -->

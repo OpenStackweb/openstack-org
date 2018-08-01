@@ -9,7 +9,11 @@ require('./service-group.tag')
         <span>Tiles View</span>
     </div>
 
-    <service-group each="{ group_title, subcategories in groups }" tiles="{ tileMode }"></service-group>
+    <div if={ Object.keys(groups).length > 0 }>
+        <service-group category={activeCat.category} subcategories={activeCat.subcategories} tiles="{ tileMode }"></service-group>
+    </div>
+
+    <div if={ Object.keys(groups).length == 0 }> No Components for this search </div>
 
     <script>
 
@@ -17,12 +21,9 @@ require('./service-group.tag')
         this.groups              = opts.groups;
         this.base_url            = opts.base_url;
         this.max_maturity_points = opts.max_maturity_points;
+        this.activeCat           = this.groups[Object.keys(this.groups)[0]];
 
         var self = this;
-
-        getCurrentReleaseId() {
-            return $('#openstack_releases option:selected').text().toLowerCase();
-        }
 
         toggleTileMode() {
             self.tileMode = !self.tileMode;
@@ -37,6 +38,11 @@ require('./service-group.tag')
         opts.api.on('loaded-components-by-release',function(data) {            
             self.groups =  data;
             self.update();
+        });
+
+        opts.api.on('change-category',function(categoryId) {
+              self.activeCat = self.groups[categoryId];
+              self.update();
         });
 
     </script>
