@@ -15,10 +15,11 @@
                 <div class="col-lg-4 col-sm-6" style="margin-top: 20px;">
                     <div class="edge-download-container">
                         <div class="edge-download-text">
-                            <strong><em>Cloud Edge Computing: Beyond the Data Center</em></strong>
+                            <strong><em>Cloud Edge Computing: Beyond the Data Center</em></strong><br/>
+                            Now available in multiple languages!
                         </div>
-                        <a href="https://www.openstack.org/assets/edge/OpenStack-EdgeWhitepaper-v3-online.pdf" class="edge-download-btn" target="_blank">
-                            <div><i class="fa fa-arrow-circle-down"></i> Read the whitepaper</div>
+                        <a href="/edge-computing/cloud-edge-computing-beyond-the-data-center?lang=en_US" class="edge-download-btn" target="_blank">
+                            <div><i class="fa fa-arrow-circle-right"></i> Read the whitepaper</div>
                         </a>
                     </div>
                     <div class="edge-hr-line"></div>

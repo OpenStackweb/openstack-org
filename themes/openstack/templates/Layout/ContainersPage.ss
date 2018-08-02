@@ -26,8 +26,8 @@
             <div class="col-sm-4">
                 <div class="download-container">
                   <!-- <img src="/themes/openstack/images/containers-r/summit-logo-white.svg" class="summit-cta-logo" alt=""> -->
-                    <div class="download-text">Leveraging OpenStack and Containers: A Comprehensive Review</div>
-                    <a href="//www.openstack.org/containers/whitepaper" class="download-btn">Download the Whitepaper</a>
+                    <div class="download-text"><strong>Leveraging OpenStack and Containers: A Comprehensive Review</strong><br/>Now available in multiple languages!</div>
+                    <a href="//www.openstack.org/containers/whitepaper" class="download-btn"><i class="fa fa-arrow-circle-right"></i> Read the Whitepaper</a>
                 </div>
             </div>
         </div>
