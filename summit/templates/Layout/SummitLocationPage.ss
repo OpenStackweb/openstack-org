@@ -93,10 +93,10 @@
                             <a href="{$Top.Link}details/$ID" alt="Visit Bookings Site"><i class="fa fa-home"></i>
                                 Booking Info</a>
                         <% else_if $BookingLink %>
-                            <a href="{$BookingLink}" target="_blank" alt="Visit Bookings Site"><i class="fa fa-home"></i>
+                            <a href="{$BookingLink}" target="_blank" alt="Book a Room"><i class="fa fa-home"></i>
                                 Book a Room</a>
                         <% else %>
-                            <a href="#" data-toggle="modal" data-target="#Hotel{$ID}"><i class="fa fa-home"></i> Website</a>
+                            <a href="{$WebsiteUrl}" data-toggle="modal" alt="Visit Website"><i class="fa fa-home"></i> Website</a>
                         <% end_if %>
                     <% end_if %>
                 </p>
