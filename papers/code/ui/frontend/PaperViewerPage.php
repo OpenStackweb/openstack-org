@@ -11,15 +11,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+use Symfony\Component\Yaml\Exception\ParseException;
+use Symfony\Component\Yaml\Yaml;
 
-class PaperViewerPage extends Page {
+class PaperViewerPage extends Page
+{
 
-   static $db = [];
+    static $db = [];
 
-   static $has_one = [
+    static $has_one = [
         'Paper' => 'Paper',
-   ];
-
+    ];
 
     public function getCMSFields()
     {
@@ -32,25 +34,27 @@ class PaperViewerPage extends Page {
         return $fields;
     }
 
-    public function renderSections(){
+    public function renderSections()
+    {
         $output = '';
-        foreach($this->Paper()->getOrderedSections() as $section){
+        foreach ($this->Paper()->getOrderedSections() as $section) {
             $output .= $this->renderSection($section);
         }
         return $output;
     }
 
-    public function renderSection($section){
+    public function renderSection($section)
+    {
         $output = '';
 
-        if($section instanceof CaseOfStudySection)
-           return $section->renderWith('CasesOfStudy_Section');
-        else if($section instanceof IndexSection)
+        if ($section instanceof CaseOfStudySection)
+            return $section->renderWith('CasesOfStudy_Section');
+        else if ($section instanceof IndexSection)
             $output = $section->renderWith('Index_Section');
         else
             $output = $section->renderWith('Regular_Section');
 
-        foreach($section->getOrderedSubSections() as $subSection){
+        foreach ($section->getOrderedSubSections() as $subSection) {
             $output .= $this->renderSection($subSection);
         }
 
@@ -58,7 +62,8 @@ class PaperViewerPage extends Page {
     }
 }
 
-class PaperViewerPage_Controller extends Page_Controller {
+class PaperViewerPage_Controller extends Page_Controller
+{
 
     function init()
     {
@@ -68,6 +73,39 @@ class PaperViewerPage_Controller extends Page_Controller {
 
         Requirements::javascript('themes/openstack/javascript/filetracking.jquery.js');
         Requirements::javascript('papers/javascript/paper-viewer-page.js');
+    }
+
+    function getAvailableLanguages(){
+        $paper = $this->Paper();
+        $available_langs = [];
+        $path =sprintf("%s/%s/_config/translations.yml", Director::baseFolder(), "papers");
+        $yaml = Yaml::parse(file_get_contents($path));
+        if(!is_null($yaml) && count($yaml))
+        {
+            foreach($yaml as $project_id => $info){
+                $id = intval($info['id']);
+                if($paper->ID != $id) continue;
+
+                $po_files = $info['po_files'];
+                foreach ($po_files as $po_file){
+                    foreach ($po_file as $doc_id => $languages) {
+                        foreach($languages as $language) {
+                            $available_langs[] = $language['lang_local'];
+                        }
+                    }
+                }
+
+            }
+        }
+
+        $res = '';
+
+        foreach($available_langs as $lang){
+            if(!empty($res)) $res .=', ';
+            $res .= sprintf("'%s'", $lang);
+        }
+
+        return sprintf("[%s]", $res);
     }
 
 }

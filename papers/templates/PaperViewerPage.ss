@@ -36,6 +36,9 @@
     <% include GoogleAdWordsSnippet %>
 </body>
     <% include Page_LinkedinInsightTracker %>
+    <script>
+        var extraLanguages = $Top.getAvailableLanguages;
+    </script>
     $ModuleJS('paper-page')
     $ModuleCSS('paper-page')
 </html>

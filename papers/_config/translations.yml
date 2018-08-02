@@ -1,33 +1,21 @@
 # here are all available po file to compile to mo files per language code
 leveraging-containers-openstack:
   version_id: paper
+  id: 1
   po_files:
     - leveraging-containers-and-openstack:
-      - lang_local: zh_TW
-        lang_zanata: zh-TW
-      - lang_local: ja_JP
-        lang_zanata: ja
       - lang_local: ko_KR
         lang_zanata: ko-KR
       - lang_local: de_DE
         lang_zanata: de
-      - lang_local: id_ID
-        lang_zanata: id
-      - lang_local: zh_CN
-        lang_zanata: zh-CN
 edge-computing:
+  id: 2
   version_id: pot-translation
   po_files:
     - cloud-edge-computing-beyond-the-data-center:
-      - lang_local: zh_TW
-        lang_zanata: zh-TW
       - lang_local: ja_JP
         lang_zanata: ja
       - lang_local: ko_KR
         lang_zanata: ko-KR
       - lang_local: de_DE
         lang_zanata: de
-      - lang_local: id_ID
-        lang_zanata: id
-      - lang_local: zh_CN
-        lang_zanata: zh-CN
