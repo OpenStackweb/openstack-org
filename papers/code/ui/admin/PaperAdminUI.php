@@ -68,11 +68,11 @@ final class PaperAdminUI extends DataExtension
             $gridField = new GridField('Sections', 'Sections', $this->owner->Sections()->where('ParentSectionID = 0')->sort('Order'), $config);
             $f->addFieldToTab('Root.Sections', $gridField);
 
-            // contributors
+            // translators
 
-            //$config = GridFieldConfig_RecordEditor::create(50);
-            //$contributors = new GridField('Contributors', 'Contributors', $this->owner->Contributors(), $config);
-            //$f->addFieldToTab('Root.Contributors', $contributors);
+            $config = GridFieldConfig_RecordEditor::create(50);
+            $translators = new GridField('Translators', 'Translators', $this->owner->Translators(), $config);
+            $f->addFieldToTab('Root.Translators', $translators);
         }
     }
 }

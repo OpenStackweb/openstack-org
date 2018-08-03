@@ -41,7 +41,8 @@ final class Paper extends DataObject
     ];
 
     static $has_many = [
-        'Sections' => 'PaperSection'
+        'Sections' => 'PaperSection',
+        'Translators' => 'PaperTranslator',
     ];
 
     public function onBeforeWrite(){
@@ -73,6 +74,11 @@ final class Paper extends DataObject
     public function getI18nContext(){
         $slug = singleton('SiteTree')->generateURLSegment($this->Title);
         return $slug;
+    }
+
+    public function getTranslatorsByCurrentLocale(){
+        $current_locale = GetTextTemplateHelpers::_currentLocale();
+        return $this->Translators()->filter('LanguageCode', $current_locale);
     }
 
     protected function validate()

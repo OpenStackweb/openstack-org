@@ -34,12 +34,18 @@
                             </ul>
                         <% end_if %>
                     <% end_loop %>
+                    <% if $Top.Paper.getTranslatorsByCurrentLocale %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-target="translators">$_T("papers_ui", "Translators")</a>
+                    </li>
+                    <% end_if %>
                 </ul>
             </div>
         </div>
     </div>
     <div class="container content">
         $Top.renderSections
+      
     </div>
     <div class="scroll-top">
         <button class="btn btn-default" id="btn-top" onclick="topFunction()">

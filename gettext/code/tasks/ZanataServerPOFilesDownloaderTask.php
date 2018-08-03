@@ -72,6 +72,5 @@ final class ZanataServerPOFilesDownloaderTask extends BuildTask
         catch (ParseException $e) {
             echo printf("Unable to parse the YAML string: %s", $e->getMessage()).PHP_EOL;
         }
-
     }
 }

@@ -26,6 +26,10 @@ class GetTextTemplateHelpers implements TemplateGlobalProvider
                 'method' => '_t',
                 'casting' => 'HTMLText',
             ],
+            'CurrentLocale' => [
+                'method' => '_currentLocale',
+                'casting' => 'Text',
+            ],
         ];
     }
 
@@ -37,7 +41,6 @@ class GetTextTemplateHelpers implements TemplateGlobalProvider
         $locale = Locales::process($locale);
         return sprintf('%s.utf8', $locale);
     }
-
 
     /**
      * Given the current controller, determine the module name.
@@ -66,6 +69,13 @@ class GetTextTemplateHelpers implements TemplateGlobalProvider
         }
 
         return null;
+    }
+
+    /**
+     * @return string
+     */
+    public static function _currentLocale(){
+        return Locales::process(i18n::get_locale());
     }
 
     public static function _t($domain, $msgid, $decode_html = 0){

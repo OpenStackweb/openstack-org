@@ -64,7 +64,7 @@
         </div>
         <div class="studies">
             <a class="btn btn-primary" href="#" id="case-studies-btn" data-section="{$Slug}" title="{$_T($Paper.I18nContext, "Go to top")}">
-                <span>{$_T($Paper.I18nContext, "Select Another Case Study")}</span>
+                <span>{$_T("papers_ui", "Select Another Case Study")}</span>
                 <i class="fa fa-caret-up"></i>
             </a>
         </div>

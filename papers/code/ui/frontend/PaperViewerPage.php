@@ -40,6 +40,13 @@ class PaperViewerPage extends Page
         foreach ($this->Paper()->getOrderedSections() as $section) {
             $output .= $this->renderSection($section);
         }
+        $translators = $this->Paper()->getTranslatorsByCurrentLocale();
+        if($translators->count() > 0){
+            $data = new ArrayData([
+                'Translators' => $translators,
+            ]);
+            $output .= $data->renderWith('Translators_Section');
+        }
         return $output;
     }
 
