@@ -41,6 +41,7 @@ final class SangriaPageExportDataExtension extends Extension
             'ExportSpeakersData',
             'ExportSpeakersSubmissions',
             'ExportSurveyResultsByCompany',
+            'ExportReleaseContributors'
         ));
 
         Config::inst()->update(get_class($this->owner), 'allowed_actions', array(
@@ -59,6 +60,7 @@ final class SangriaPageExportDataExtension extends Extension
             'ExportSpeakersData',
             'ExportSpeakersSubmissions',
             'ExportSurveyResultsByCompany',
+            'ExportReleaseContributors'
         ));
 
         set_time_limit(0);
@@ -1160,5 +1162,46 @@ SQL;
         $filename = "Marketplace_Admins_" . $fileDate . ".csv";
 
         return CSVExporter::getInstance()->export($filename, $data, ',');
+    }
+
+    public function ExportReleaseContributors(SS_HTTPRequest $request) {
+        $releaseIds = Convert::raw2sql($request->getVar('releaseIds'));
+        $sort       = Convert::raw2sql($request->getVar('order'));
+        $sort_dir   = Convert::raw2sql($request->getVar('orderDir'));
+        $sort_dir   = ($sort_dir == 1) ? 'ASC' : 'DESC';
+
+        switch($sort) {
+            case 'last_name':
+                $sort = 'LastName';
+                break;
+            case 'first_name':
+                $sort = 'FirstName';
+                break;
+            case 'release':
+                $sort = 'OpenStackRelease.Name';
+                break;
+        }
+
+        $contributors = ReleaseCycleContributor::get();
+
+        if ($releaseIds) {
+            $contributors = $contributors->where("ReleaseID IN ({$releaseIds})");
+        }
+
+        $contributors = $contributors
+            ->leftJoin('OpenStackRelease', 'ReleaseID = OpenStackRelease.ID')
+            ->sort($sort, $sort_dir);
+
+        $result = [];
+
+        foreach ($contributors as $contributor) {
+            $result[] = $contributor->toJsonReady();
+        }
+
+        $filename = "release_cycle_contributors_". date('Ymd') . ".csv";
+        $delimiter = ",";
+
+        return CSVExporter::getInstance()->export($filename, $result, $delimiter);
+
     }
 }

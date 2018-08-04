@@ -57,4 +57,10 @@ interface ISoftwareManager
      */
     public function cloneRelease(IOpenStackRelease $release);
 
+    /**
+     * @param File $file
+     * @return null
+     */
+    public function ingestContributors($file);
+
 }

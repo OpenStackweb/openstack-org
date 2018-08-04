@@ -199,6 +199,7 @@
     <h2>Misc</h2>
     <ul>
         <li><a href="/sangria/ViewTagsCrud" >Tags CRUD</a></li>
+        <li><a href="/sangria/ViewReleaseContributorsAdmin" >Release Contributors</a></li>
     </ul>
 </div>
 <br>

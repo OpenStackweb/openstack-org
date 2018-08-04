@@ -34,7 +34,8 @@ final class SangriaPage_Controller extends AdminController implements Permission
     public static $date_filter_query;
 
     static $allowed_actions = array(
-        'ViewTagsCrud'
+        'ViewTagsCrud',
+        'ViewReleaseContributorsAdmin'
     );
 
     static $url_handlers = array();
@@ -381,6 +382,17 @@ final class SangriaPage_Controller extends AdminController implements Permission
         FontAwesomeDependencies::renderRequirements();
         Requirements::css('//fonts.googleapis.com/css?family=Open+Sans:300,400,700');
         return $this->getViewer('TagsCrudPage')->process($this);
+    }
+
+    public function ViewReleaseContributorsAdmin(){
+        Requirements::clear();
+        // css
+        Requirements::css('marketplace/ui/source/css/sangria.css');
+        JQueryCoreDependencies::renderRequirements();
+        BootstrapDependencies::renderRequirements();
+        FontAwesomeDependencies::renderRequirements();
+        //Requirements::css('//fonts.googleapis.com/css?family=Open+Sans:300,400,700');
+        return $this->getViewer('ReleaseContributorsAdmin')->process($this);
     }
 
 }

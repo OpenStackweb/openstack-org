@@ -12,6 +12,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+
+use Symfony\Component\Yaml\Yaml;
+
 final class SoftwareManager implements ISoftwareManager
 {
 
@@ -233,6 +236,86 @@ final class SoftwareManager implements ISoftwareManager
             }
 
             return $clone;
+        });
+    }
+
+    /**
+     * @param File $file
+     * @return null
+     */
+    public function ingestContributors($file){
+
+        $member_repository = new SapphireMemberRepository();
+
+        return $this->tx_manager->transaction(function () use ($file, $member_repository) {
+
+            $content = file_get_contents($file['tmp_name']);
+            $filename = $file['name'];
+            $releaseName = ucfirst(explode('_', $filename)[0]);
+
+            $release = OpenStackRelease::get()->filter('Name', $releaseName)->first();
+            $entries = Yaml::parse($content); //Spyc::YAMLLoadString($content);
+
+            if (!$release) {
+                throw new EntityValidationException('Release not found');
+            }
+
+            foreach($entries as $entryId => $contributor) {
+                if (!$contributor || count($contributor) == 0) continue;
+
+                $email = (isset($contributor['preferred'])) ? $contributor['preferred'] : '';
+                $name = explode(' ', $contributor['name']);
+                $firstName = array_shift($name);
+                $lastName = implode(' ', $name);
+
+                $contributorObj = ReleaseCycleContributor::get()->filter(['Email' => $email, 'ReleaseID' => $release->ID])->first();
+                if (!$contributorObj) {
+                    $contributorObj = new ReleaseCycleContributor();
+                }
+                $contributorObj->FirstName = $firstName;
+                $contributorObj->LastName = $lastName;
+
+                $contributorObj->LastCommit = $contributor['newest'];
+                $contributorObj->FirstCommit = $contributor['oldest'];
+                $contributorObj->Email = $contributor['preferred'];
+                $contributorObj->IRCHandle = $contributor['username'];
+                $contributorObj->CommitCount = $contributor['count'];
+                if (count($contributor['extra'])) {
+                    $contributorObj->ExtraEmails = implode(',', $contributor['extra']);
+                }
+
+                $memberFound = false;
+                if (isset($contributor['member']) && $contributor['member']) {
+                    if($member = Member::get()->byID($contributor['member'])) {
+                        $contributorObj->MemberID = $member->ID;
+                        $memberFound = true;
+                    }
+                }
+
+                // find by irc
+                if (!$memberFound && $contributor['username'] != '_non_code_contributor') {
+                    $member = Member::get()->filter('IRCHandle', $contributor['username'])->first();
+                    if ($member) {
+                        $contributorObj->MemberID = $member->ID;
+                        $memberFound = true;
+                    }
+                }
+
+                // find by email
+                if (!$memberFound) {
+                    $emails = array_merge([$email], $contributor['extra']);
+                    foreach ($emails as $an_email) {
+                        $member = $member_repository->findByEmail($an_email);
+                        if ($member) {
+                            $contributorObj->MemberID = $member->ID;
+                            break;
+                        }
+                    }
+                }
+
+                $contributorObj->ReleaseID = $release->ID;
+                $contributorObj->write();
+            }
         });
     }
 }
