@@ -155,7 +155,7 @@
                             <div class="title">
                                 OpenStack release being tested
                             </div>
-                            <img src="/assets/software/newton/newton-logo.png" alt="" class="logo">
+                            <img src="assets/software/pike/openstack-pike-logo.png" alt="OpenStack Pike Release" class="logo">
                         </div>
                     </div>
                 </div>
