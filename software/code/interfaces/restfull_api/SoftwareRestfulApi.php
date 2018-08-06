@@ -159,51 +159,15 @@ class SoftwareRestfulApi extends AbstractRestfulJsonApi
 
     }
 
-    public function ingestContributors(SS_HTTPRequest $request)
+    public function ingestContributors()
     {
-        try {
-            $files = FileUtils::reArrayFiles($_FILES['file']);
-
-            foreach ($files as $file) {
-                switch ($file['error']) {
-                    case UPLOAD_ERR_OK:
-                        $this->manager->ingestContributors($file);
-                        break;
-                    case UPLOAD_ERR_NO_FILE:
-                        throw new RuntimeException('No file sent.');
-                    case UPLOAD_ERR_INI_SIZE:
-                    case UPLOAD_ERR_FORM_SIZE:
-                        throw new RuntimeException('Exceeded filesize limit.');
-                    default:
-                        throw new RuntimeException('Unknown errors.');
-                }
-            }
-        } catch(EntityValidationException $ex1) {
-            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
-            return $this->validationError($ex1->getMessages());
-        } catch(NotFoundEntityException $ex2) {
-            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
-            return $this->notFound($ex2->getMessage());
-        } catch(Exception $ex) {
-            SS_Log::log($ex->getMessage(), SS_Log::ERR);
-            die(print_r($ex));
-            return $this->serverError();
+        if (!Permission::check("SANGRIA_ACCESS")) {
+            return $this->validationError('You need sangria access to ingest.');
         }
 
-        $contributors = ReleaseCycleContributor::get();
-        $count = $contributors->count();
-        $totalPages = ($count) ? floor($count/10) : 1;
-        $contributors = $contributors->sort('LastName')->limit(10);
+        exec('php '.BASE_PATH.'/framework/cli-script.php /IngestReleaseContributorsTask >/dev/null 2>&1 &');
 
-
-        $result = [];
-        foreach ($contributors as $contributor) {
-            $result[] = $contributor->toJsonReady();
-        }
-
-        return $this->ok(['data' => $result, 'total' => $count, 'totalPages' => $totalPages]);
-
-
+        return $this->ok();
     }
 
 }

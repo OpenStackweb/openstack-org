@@ -11,7 +11,7 @@
  * limitations under the License.
  **/
 
-import {RECEIVE_ITEMS, REQUEST_ITEMS, RECEIVE_META} from './actions';
+import {RECEIVE_ITEMS, REQUEST_ITEMS, RECEIVE_META, INGEST_CONTRIBUTORS} from './actions';
 import { START_LOADING, STOP_LOADING } from "openstack-uicore-foundation/lib/actions";
 
 export const appReducer = (
@@ -23,7 +23,8 @@ export const appReducer = (
         lastPage: 10,
         order: 'last_name',
         orderDir: 1,
-        allReleases: []
+        allReleases: [],
+        totalItems: 0,
     },
     action = {}
 ) => {
@@ -50,7 +51,8 @@ export const appReducer = (
             return {
                 ...state,
                 items: response.data,
-                lastPage: response.totalPages
+                lastPage: response.totalPages,
+                totalItems: response.total
             }
         }
         break;

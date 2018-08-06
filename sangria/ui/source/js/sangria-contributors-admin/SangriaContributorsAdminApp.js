@@ -64,7 +64,7 @@ class SangriaContributorsAdminApp extends React.Component
 
 
     render() {
-        let {items, order, orderDir, lastPage, page, selectedReleases, allReleases} = this.props;
+        let {items, order, orderDir, lastPage, page, selectedReleases, allReleases, totalItems} = this.props;
 
         let releases_ddl = allReleases.map(r => ({label: r.Name, value: r.ID}));
 
@@ -91,6 +91,8 @@ class SangriaContributorsAdminApp extends React.Component
             <div>
                 <AjaxLoader show={this.props.loading} size={ 75 } />
 
+                <h2>Release Cycle Contributors Admin (total: {totalItems})</h2>
+
                 <div className="row">
                     <div className="col-md-4 form-inline">
                         <Select
@@ -107,7 +109,7 @@ class SangriaContributorsAdminApp extends React.Component
                         <button className="btn btn-default" onClick={this.handleExport}>Export</button>
                     </div>
                     <div className="col-md-4">
-                        <input multiple className="btn btn-primary" type="file" onChange={this.handleIngest} />
+                        <button className="btn btn-primary" onClick={this.handleIngest}>Ingest</button>
                     </div>
                 </div>
 

@@ -11,6 +11,9 @@ Injector:
   IngestOpenStackComponentsDataCronTask:
     constructor:
       0: '%$TransactionManager'
+  IngestReleaseContributorsTask:
+      constructor:
+        0: '%$TransactionManager'
 
 SoftwareHomePage_Controller:
   dependencies:

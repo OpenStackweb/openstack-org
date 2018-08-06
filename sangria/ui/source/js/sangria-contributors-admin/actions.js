@@ -23,6 +23,7 @@ import {
 export const REQUEST_ITEMS = 'REQUEST_ITEMS';
 export const RECEIVE_ITEMS = 'RECEIVE_ITEMS';
 export const RECEIVE_META  = 'RECEIVE_META';
+export const INGEST_CONTRIBUTORS  = 'INGEST_CONTRIBUTORS';
 
 export const errorHandler = (err, res) => (dispatch) => {
     let code = err.status;
@@ -104,15 +105,15 @@ export const fetchReleases = () => (dispatch) => {
     );;
 }
 
-export const ingestContributors = (files) => (dispatch) => {
+export const ingestContributors = () => (dispatch) => {
 
     dispatch(startLoading());
 
     postRequest(
         null,
-        createAction(RECEIVE_ITEMS),
+        createAction(INGEST_CONTRIBUTORS),
         `api/v1/software/contributors/ingest`,
-        files,
+        {},
         errorHandler
     )({})(dispatch)
         .then(() => {
