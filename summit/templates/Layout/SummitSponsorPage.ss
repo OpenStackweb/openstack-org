@@ -85,7 +85,7 @@
                     <div class="col-lg-12">
                         <div class="row">
                             <% loop $Top.getSponsorsByType($Name) %>
-                                <div class="{$SponsorshipType.getSizeClass()}">
+                                <div class="{$SponsorshipType.getSizeClass()} centered-column">
                                     <a rel="nofollow" href="{$SubmitPageUrl}">$Company.SubmitLogo</a>
                                 </div>
                             <% end_loop %>

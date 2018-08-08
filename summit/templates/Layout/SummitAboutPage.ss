@@ -89,7 +89,7 @@
                 <div class="col-sm-12" style="margin: 40px 0;">
                     <div class="row">
                         <% loop $Sponsors().Sort('Order')  %>
-                            <div class="col-md-4 col-sm-12">
+                            <div class="col-lg-4 col-md-4 col-sm-4 centered-column">
                                 <a href="{$URL}">
                                     <img src="{$BigLogo.getURL()}" />
                                 </a>

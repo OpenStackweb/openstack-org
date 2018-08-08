@@ -50,6 +50,10 @@ a:visited {
 .center {
   text-align: center; }
 
+.centered-column {
+  float: none; 
+  display: inline-block; }
+
 p.danger {
   color: red;
   font-weight: bold; }
