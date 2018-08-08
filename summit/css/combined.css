@@ -122,7 +122,9 @@ a.register-btn-lrg, .register-btn-lrg {
   text-transform: uppercase;
   font-size: 1.1em;
   font-weight: 400;
-  padding: 12px 30px; }
+  padding: 12px 30px; 
+  white-space:normal;
+}
 
 a.register-btn-lrg:hover, .register-btn-lrg:hover {
   background: #A51B1B;
