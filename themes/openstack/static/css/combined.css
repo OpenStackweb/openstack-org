@@ -1474,8 +1474,7 @@ a.who-section-cta {
     margin: 0 0 60px;
     text-align: center; }
   .summit-users-wrapper .summit-user-section {
-    text-align: center;
-    margin-bottom: 60px; }
+    text-align: center; }
     .summit-users-wrapper .summit-user-section img.summit-user-image {
       position: relative;
       height: 150px;
@@ -1492,7 +1491,10 @@ a.who-section-cta {
       text-transform: uppercase; }
     .summit-users-wrapper .summit-user-section .title {
       font-style: italic;
-      margin-bottom: 10px; }
+      margin-bottom: 0px; }
+    .summit-users-wrapper .featured {
+      height: 290px;
+    }
   .summit-users-wrapper:after {
     top: 100%;
     left: 50%;

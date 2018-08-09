@@ -50,6 +50,7 @@
                         </div>
                         <div class="name">{$getName()}</div>
                         <div class="title">{$Title}</div>
+                        <div class="title">{$Topic}</div>
                     </div>
                 </div>
                 <% end_loop %>

@@ -28,6 +28,7 @@ class PresentationSpeaker extends DataObject
         'FirstName'             => 'Varchar(100)',
         'LastName'              => 'Varchar(100)',
         'Title'                 => 'Varchar(100)',
+        'Topic'                 => 'Varchar(255)',
         'Bio'                   => 'HTMLText',
         'IRCHandle'             => 'Varchar',
         'TwitterName'           => 'Varchar',
@@ -317,6 +318,7 @@ class PresentationSpeaker extends DataObject
             ->text('FirstName', "Speaker's first name")
             ->text('LastName', "Speaker's last name")
             ->text('Title', "Speaker's title")
+            ->text('Topic', "Topic (featured speakers)")
             ->htmleditor('Bio', "Speaker's Bio")
             ->text('IRCHandle', 'IRC Handle (optional)')
             ->text('TwitterName', 'Twitter Handle (optional)')
