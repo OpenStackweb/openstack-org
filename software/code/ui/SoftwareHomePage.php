@@ -265,6 +265,7 @@ class SoftwareHomePage_Controller extends Page_Controller
                 'MostActiveCompanyContributors'    => $companies_contrib,
                 'Release'                          => $release,
                 'Component'                        => $component,
+                'ParentCategory'                   => $component->getParentCategory(),
                 'Releases'                         => $component->Releases()->where("Status <>'Deprecated' AND Name <> 'Trunk' ")->sort('ReleaseDate', 'DESC'),
                 'HasMaturityIndicators'            => $has_maturity_indicators,
                 'HasReleaseDesc'                   => $has_release_desc,

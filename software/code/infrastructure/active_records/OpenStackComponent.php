@@ -312,4 +312,12 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
     {
         return $this->Tags()->filter('Type', 'info');
     }
+
+    public function getParentCategory() {
+        if ($this->Category()->Exists()) {
+            return $this->Category()->getParentCategory();
+        } else {
+            return null;
+        }
+    }
 }

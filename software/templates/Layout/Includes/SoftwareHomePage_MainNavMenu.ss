@@ -2,10 +2,13 @@
 <div class="software-tab-wrapper">
     <div class="container">
         <ul class="nav nav-tabs project-tabs">
-            <li <% if Active == 0 %>class="active"<% end_if %>><a href="$Top.Link"><%t Software.OVERVIEW 'Overview' %></a></li>
+            <li <% if Active == 'overview' %>class="active"<% end_if %>><a href="$Top.Link"><%t Software.OVERVIEW 'Overview' %></a></li>
             <% loop getParentComponentCategories %>
-                <li class=""><a href="$Top.Link('project-navigator')/{$Slug}">$Name</a></li>
+                <li <% if Active == $ID %>class="active"<% end_if %>><a href="$Top.Link('project-navigator')/{$Slug}">$Name</a></li>
             <% end_loop %>
+            <% if $Top.HasAvailableSampleConfigTypes %>
+                <li <% if Active == 'sample-configs' %>class="active"<% end_if %>><a href="$Top.Link(sample-configs)"><%t Software.SAMPLE_CONFIGURATIONS 'Sample Configurations' %></a></li>
+            <% end_if %>
         </ul>
     </div>
 </div>
@@ -16,7 +19,13 @@
             <i class="fa fa-caret-down"></i>
         </button>
         <ul class="dropdown-menu">
-            <li <% if Active == 0 %>class="active"<% end_if %>><a href="$Top.Link"><%t Software.OVERVIEW 'Overview' %></a></li>
+            <li <% if Active == 'overview' %>class="active"<% end_if %>><a href="$Top.Link"><%t Software.OVERVIEW 'Overview' %></a></li>
+            <% loop getParentComponentCategories %>
+                <li <% if Active == $ID %>class="active"<% end_if %>><a href="$Top.Link('project-navigator')/{$Slug}">$Name</a></li>
+            <% end_loop %>
+            <% if $Top.HasAvailableSampleConfigTypes %>
+                <li <% if Active == 'sample-configs' %>class="active"<% end_if %>><a href="$Top.Link(sample-configs)"><%t Software.SAMPLE_CONFIGURATIONS 'Sample Configurations' %></a></li>
+            <% end_if %>
         </ul>
     </div>
 </div>

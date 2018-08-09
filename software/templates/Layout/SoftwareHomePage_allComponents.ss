@@ -5,7 +5,7 @@
     var tileMode = (window.location.hash == '#tiles');
 </script>
 
-<% include SoftwareHomePage_MainNavMenu Active=1 %>
+<% include SoftwareHomePage_MainNavMenu Active=$CategoryId %>
 
 <div class="software-main-wrapper">
     <!-- Projects Subnav -->

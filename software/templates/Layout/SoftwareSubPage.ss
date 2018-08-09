@@ -1,4 +1,4 @@
-<% include SoftwareHomePage_MainNavMenu Active=0 %>
+<% include SoftwareHomePage_MainNavMenu Active='overview' %>
 
 <div class="software-main-wrapper">
     <!-- Projects Subnav -->

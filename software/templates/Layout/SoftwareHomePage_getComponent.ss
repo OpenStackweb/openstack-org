@@ -1,4 +1,4 @@
-<% include SoftwareHomePage_MainNavMenu Active=1 %>
+<% include SoftwareHomePage_MainNavMenu Active=$ParentCategory.ID %>
 <div class="software-main-wrapper">
     <div class="container">
         <div class="outer-project-back">

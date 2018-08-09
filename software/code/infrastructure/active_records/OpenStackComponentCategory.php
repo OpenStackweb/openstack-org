@@ -197,6 +197,14 @@ class OpenStackComponentCategory extends DataObject implements IOpenStackCompone
         return $map;
     }
 
+    public function getParentCategory() {
+        if ($this->ParentCategory()->Exists()) {
+            return $this->ParentCategory()->getParentCategory();
+        } else {
+            return $this;
+        }
+    }
+
     public static function getParentCategories() {
         return OpenStackComponentCategory::get()->filter('ParentCategoryID', 0);
     }
