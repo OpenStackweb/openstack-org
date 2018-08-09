@@ -57,6 +57,10 @@ class SoftwareSubPage_Controller extends Page_Controller
         return $controller->HasAvailableSampleConfigTypes();
     }
 
+    public function getParentComponentCategories() {
+        return OpenStackComponentCategory::get()->filter('ParentCategoryID', 0)->sort('Order');
+    }
+
     public function getCurrentIdx($pos)
     {
         $base_index = 1;

@@ -25,7 +25,7 @@ require('./t.tag');
                     <service-box each="{ subcategory.components }" ></service-box>
                 </div>
                 <div class="col-sm-12" show="{ !opts.tiles }">
-                    <service-row each="{ subcategory.components }"></service-row>
+                    <service-row each="{ subcategory.components }" ></service-row>
                 </div>
             </div>
         </div>
@@ -35,6 +35,7 @@ require('./t.tag');
     <script>
 
         this.base_url       = this.parent.base_url;
+        this.release_id     = this.parent.release_id;
         this.category       = opts.category;
         this.subcategories  = opts.subcategories;
         var self = this;

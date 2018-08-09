@@ -1159,7 +1159,8 @@ p.service-section-title {
     margin-left: 10px; } }
 
 .outer-project-back {
-  margin-top: -45px; }
+  margin-top: 10px;
+  margin-bottom: 10px; }
 
 .outer-project-back a {
   color: #2A4E68;

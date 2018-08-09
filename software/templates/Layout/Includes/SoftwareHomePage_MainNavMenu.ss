@@ -3,7 +3,7 @@
     <div class="container">
         <ul class="nav nav-tabs project-tabs">
             <li <% if Active == 'overview' %>class="active"<% end_if %>><a href="$Top.Link"><%t Software.OVERVIEW 'Overview' %></a></li>
-            <% loop getParentComponentCategories %>
+            <% loop $Top.getParentComponentCategories() %>
                 <li <% if Active == $ID %>class="active"<% end_if %>><a href="$Top.Link('project-navigator')/{$Slug}">$Name</a></li>
             <% end_loop %>
             <% if $Top.HasAvailableSampleConfigTypes %>
@@ -20,7 +20,7 @@
         </button>
         <ul class="dropdown-menu">
             <li <% if Active == 'overview' %>class="active"<% end_if %>><a href="$Top.Link"><%t Software.OVERVIEW 'Overview' %></a></li>
-            <% loop getParentComponentCategories %>
+            <% loop $Top.getParentComponentCategories() %>
                 <li <% if Active == $ID %>class="active"<% end_if %>><a href="$Top.Link('project-navigator')/{$Slug}">$Name</a></li>
             <% end_loop %>
             <% if $Top.HasAvailableSampleConfigTypes %>

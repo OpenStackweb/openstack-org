@@ -25,8 +25,7 @@ require('./t.tag');
         }
 
         coreServiceDetailsURL() {
-            var release = self.parent.parent.getCurrentReleaseId();
-            var url = self.parent.base_url+'releases/'+release+'/components/'+self.slug;
+            var url = self.parent.base_url+'releases/'+self.parent.release_id+'/components/'+self.slug;
             return url;
         }
 

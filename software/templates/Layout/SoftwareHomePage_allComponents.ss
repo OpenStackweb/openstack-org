@@ -1,8 +1,10 @@
 <script>
     var components = $getComponentsByCategoryJSON($CategoryId);
     var releases   = $getReleases;
+    var releaseId  = '{$getDefaultRelease().getSlug().JS}';
     components.max_maturity_points = $Top.getMaxAllowedMaturityPoints;
     var tileMode = (window.location.hash == '#tiles');
+
 </script>
 
 <% include SoftwareHomePage_MainNavMenu Active=$CategoryId %>
@@ -27,11 +29,11 @@
         <openstack-category-nav groups="{ components.subcategories }"></openstack-category-nav>
 
         <div class="container inner-software">
-            <project-services-with-nav groups="{ components.subcategories }" ></project-services-with-nav>
+            <project-services-with-nav base_url="{$Top.Link}" groups="{ components.subcategories }" release_id="{ releaseId }" ></project-services-with-nav>
         </div>
     <% else %>
         <div class="container inner-software">
-            <project-services groups="{ components.subcategories }"  category="{ components.category }"></project-services>
+            <project-services base_url="{$Top.Link}" groups="{ components.subcategories }" category="{ components.category }" release_id="{ releaseId }" ></project-services>
         </div>
     <% end_if %>
     <!-- End Page Content -->
