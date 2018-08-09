@@ -3,10 +3,9 @@
     <div class="container">
         <ul class="nav nav-tabs project-tabs">
             <li <% if Active == 0 %>class="active"<% end_if %>><a href="$Top.Link"><%t Software.OVERVIEW 'Overview' %></a></li>
-            <li <% if Active == 1 %>class="active"<% end_if %>><a href="$Top.Link(project-navigator)"><%t Software.PROJECT_NAVIGATOR 'Project Navigator' %></a></li>
-            <% if $Top.HasAvailableSampleConfigTypes %>
-            <li <% if Active == 2 %>class="active"<% end_if %>><a href="$Top.Link(sample-configs)"><%t Software.SAMPLE_CONFIGURATIONS 'Sample Configurations' %></a></li>
-            <% end_if %>
+            <% loop getParentComponentCategories %>
+                <li class=""><a href="$Top.Link('project-navigator')/{$Slug}">$Name</a></li>
+            <% end_loop %>
         </ul>
     </div>
 </div>
@@ -18,10 +17,6 @@
         </button>
         <ul class="dropdown-menu">
             <li <% if Active == 0 %>class="active"<% end_if %>><a href="$Top.Link"><%t Software.OVERVIEW 'Overview' %></a></li>
-            <li <% if Active == 1 %>class="active"<% end_if %>><a href="$Top.Link(project-navigator)"><%t Software.PROJECT_NAVIGATOR 'Project Naviagator' %></a></li>
-            <% if $Top.HasAvailableSampleConfigTypes %>
-                <li <% if Active == 2 %>class="active"<% end_if %>><a href="$Top.Link(sample-configs)"><%t Software.SAMPLE_CONFIGURATIONS 'Sample Configurations' %></a></li>
-            <% end_if %>
         </ul>
     </div>
 </div>

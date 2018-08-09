@@ -94,7 +94,7 @@ class SoftwareHomePage_Controller extends Page_Controller
 
     static $url_handlers = array
     (
-        'GET project-navigator'                    => 'allComponents',
+        'GET project-navigator/$CATEGORY!'         => 'allComponents',
         'GET sample-configs'                       => 'getSampleConfigurations',
         'GET releases/$RELEASE_ID/components/$ID!' => 'getComponent',
         'GET releases/$RELEASE_ID/components'      => 'getComponentsbyRelease',
@@ -156,9 +156,28 @@ class SoftwareHomePage_Controller extends Page_Controller
 
     public function allComponents(SS_HTTPRequest $request)
     {
+        $categorySlug   = Convert::raw2sql($request->param('CATEGORY'));
+        $category       = OpenStackComponentCategory::get()->filter('Slug', $categorySlug)->first();
+
+        if(is_null($category)) return $this->httpError(404);
+
+        $categoryId     = $category->ID;
+
+        $depth = 1;
+        while($category->SubCategories()->count()) {
+            $depth++;
+            $category = $category->SubCategories()->first();
+        }
+
         Requirements::css("themes/openstack/javascript/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css");
         Requirements::javascript("themes/openstack/javascript/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js");
-        return $this->render();
+
+        return $this->render(array
+            (
+                'CategoryId'    => $categoryId,
+                'CategoryDepth' => $depth
+            )
+        );
     }
 
     public function getComponent(SS_HTTPRequest $request)
@@ -307,17 +326,11 @@ class SoftwareHomePage_Controller extends Page_Controller
         );
     }
 
-    public function getComponentsByCategoryJSON()
+    public function getComponentsByCategoryJSON($categoryId)
     {
         $components = $this->manager->getComponentsGroupedByCategoryAndSubcategory($this->getDefaultRelease());
 
-        return json_encode
-        (
-            array
-            (
-                'grouped_components' => $components,
-            )
-        );
+        return (isset($components[$categoryId])) ? json_encode($components[$categoryId]) : '';
     }
 
     public function getComponentCategories()
@@ -361,5 +374,9 @@ class SoftwareHomePage_Controller extends Page_Controller
         $release = $this->getDefaultRelease();
         if(is_null($release)) return false;
         return intval($release->SampleConfigurationTypes()->count()) > 0;
+    }
+
+    public function getParentComponentCategories() {
+        return OpenStackComponentCategory::get()->filter('ParentCategoryID', 0)->sort('Order');
     }
 }

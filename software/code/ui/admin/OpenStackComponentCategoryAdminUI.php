@@ -34,10 +34,18 @@ final class OpenStackComponentCategoryAdminUI extends DataExtension
         $fields->push(new TextField("Name", "Name"));
         $fields->push(new TextField("Description", "Description"));
 
-        $config = new GridFieldConfig_RelationEditor();
-        $config->addComponent(new GridFieldSortableRows('SubCatOrder'));
-        $sub_categories = new GridField("SubCategories", "Sub-Categories", $this->owner->SubCategories(), $config);
-        $fields->push($sub_categories);
+        if($this->owner->ID) {
+            $config = new GridFieldConfig_RelationEditor();
+            $config->addComponent(new GridFieldSortableRows('Order'));
+            $sub_categories = new GridField("SubCategories", "Sub-Categories", $this->owner->SubCategories(), $config);
+            $fields->push($sub_categories);
+
+            $config = new GridFieldConfig_RelationEditor();
+            $config->addComponent(new GridFieldSortableRows('Order'));
+            $components = new GridField("OpenStackComponents", "Components", $this->owner->OpenStackComponents(), $config);
+            $fields->push($components);
+        }
+
 
     }
 

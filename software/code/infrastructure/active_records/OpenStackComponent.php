@@ -41,7 +41,7 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
     (
         "LatestReleasePTL"  => "Member",
         "Mascot"            => "Mascot",
-        "SubCategory"       => "OpenStackComponentSubCategory"
+        "Category"          => "OpenStackComponentCategory"
     );
 
     static $has_many = array

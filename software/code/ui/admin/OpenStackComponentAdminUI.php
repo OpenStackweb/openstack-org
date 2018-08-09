@@ -46,8 +46,8 @@ final class OpenStackComponentAdminUI extends DataExtension
         $fields->push(new CheckboxField('SupportsExtensions', 'Supports Extensions?'));
         $fields->push(new CheckboxField('IsCoreService', 'Is Core Service?'));
         $fields->push(new CheckboxField('ShowOnMarketplace', 'Show On Marketplace?'));
-        $categories = OpenStackComponentSubCategory::get()->map('ID', 'Name');
-        $fields->push(new DropdownField('SubCategoryID', 'Project Sub Category',  $categories));
+        $categories = OpenStackComponentCategory::get()->map('ID', 'Name');
+        $fields->push(new DropdownField('CategoryID', 'Category',  $categories));
 
         if ($this->owner->getSupportsVersioning()) {
             $versions_config = new GridFieldConfig_RecordEditor();

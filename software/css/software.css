@@ -112,7 +112,7 @@
 
 .software-main-wrapper {
   background: #edf2f7;
-  padding: 75px 0 65px;
+  padding: 30px 0 65px;
   margin-bottom: -50px; }
 
 .software-main-wrapper .inner-software {
@@ -462,20 +462,16 @@ a.more-configs-link:hover {
   color: #29abe2; }
 
 .outer-project-subnav {
-  margin-top: -45px;
+  margin-top: 10px;
   width: 100%; }
 
-.sample-configs-slider, .category-slider {
+.sample-configs-slider, .category-slider, .subpage-slider {
   width: 93%;
   position: relative;
   float: left;
   display: inline-block;
   height: 40px;
   overflow-x: hidden; }
-
-.category-slider {
-  margin-top: 50px;
-}
 
 .sample-config-slider-control {
   background: #edf2f7;
@@ -498,24 +494,24 @@ a.more-configs-link:hover {
   color: #2A4E68;
   cursor: pointer; }
 
-ul.sample-configs-subnav, ul.category-subnav {
+ul.sample-configs-subnav, ul.category-subnav, ul.subpage-subnav {
   margin: 0;
   padding: 0;
   white-space: nowrap;
   height: 100%; }
 
-ul.sample-configs-subnav li, ul.category-subnav li {
+ul.sample-configs-subnav li, ul.category-subnav li, ul.subpage-subnav li {
   list-style: none;
   display: inline-block;
   margin-right: 50px;
   position: relative; }
 
-ul.sample-configs-subnav li a, ul.category-subnav li a {
+ul.sample-configs-subnav li a, ul.category-subnav li a, ul.subpage-subnav li a {
   color: #2B4D68;
   padding-bottom: 5px;
   border-bottom: 4px solid transparent; }
 
-ul.sample-configs-subnav li.active a, ul.category-subnav li.active a {
+ul.sample-configs-subnav li.active a, ul.category-subnav li.active a, ul.subpage-subnav li.active a {
   color: #2A4E68;
   font-weight: 700;
   border-bottom: 4px solid #2A4E68;
@@ -525,6 +521,9 @@ ul.sample-configs-subnav li a:hover, ul.sample-configs-subnav li.active a:hover 
   text-decoration: none; }
 
 ul.category-subnav li a:hover, ul.category-subnav li.active a:hover {
+  text-decoration: none; }
+
+ul.subpage-subnav li a:hover, ul.subpage-subnav li.active a:hover {
   text-decoration: none; }
 
 .all-projects-wrapper {

@@ -18,7 +18,6 @@ define('OpsTagsTeamRepositoryUrl', 'https://raw.githubusercontent.com/openstack/
 
 Object::add_extension('OpenStackComponent', 'OpenStackComponentAdminUI');
 Object::add_extension('OpenStackComponentCategory', 'OpenStackComponentCategoryAdminUI');
-Object::add_extension('OpenStackComponentSubCategory', 'OpenStackComponentSubCategoryAdminUI');
 Object::add_extension('OpenStackComponentTag', 'OpenStackComponentTagAdminUI');
 Object::add_extension('OpenStackApiVersion', 'OpenStackApiVersionAdminUI');
 Object::add_extension('OpenStackRelease', 'OpenStackReleaseAdminUI');

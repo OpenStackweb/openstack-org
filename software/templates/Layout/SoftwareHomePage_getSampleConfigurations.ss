@@ -1,4 +1,4 @@
-<% include SoftwareHomePage_MainNavMenu Active=2%>
+<% include SoftwareHomePage_MainNavMenu Active=0%>
 <script type="application/javascript">
 
     var configuration_types              = new Object();
@@ -97,6 +97,7 @@
 
 </script>
 <div class="software-main-wrapper" id="sample_configurations_wrapper">
+    <% include SoftwareHomePage_SubNavMenu Active=sample_configs %>
     <openstack-config-samples-types-nav default_configuration_type="{ default_configuration_type }" configuration_types_menu_list="{ configuration_types_menu_list }" configuration_types="{ configuration_types }"></openstack-config-samples-types-nav>
 
     <div class="container inner-software">

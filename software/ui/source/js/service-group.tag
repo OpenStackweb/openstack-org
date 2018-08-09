@@ -16,7 +16,7 @@ require('./t.tag');
                 <div class="col-sm-12">
                     <p class="service-section-title">
                         <strong>
-                            <t entity="Software.SERVICES_SECTION_TITLE" text={ subcategory.subcategory.Name } />
+                            <t entity="Software.SERVICES_SECTION_TITLE" text={ subcategory.category.Name } />
                         </strong>
                         { ' ( '+subcategory.components.length+' Results )' }
                     </p>

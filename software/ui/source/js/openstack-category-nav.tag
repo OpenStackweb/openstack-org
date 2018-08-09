@@ -5,7 +5,7 @@
             <div class="category-slider">
                 <ul class="category-subnav">
                     <li class="category-item" each={ categories } >
-                        <a id="{ 'category_' + ID }" data-slug={ getSlug(Name) } href="#" data-id="{ ID }" onclick={ selectedCategory }>{ Name }</a>
+                        <a id="{ 'category_' + ID }" data-slug={ Slug } href="#" data-id="{ ID }" onclick={ selectedCategory }>{ Name }</a>
                     </li>
                 </ul>
             </div>

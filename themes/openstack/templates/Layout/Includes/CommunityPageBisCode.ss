@@ -3,7 +3,7 @@
     <div class="col-md-12">
         <h4>Select a project group</h4>
     </div>
-    <% loop $ProjectGroups %>
+    <% loop $getCategoriesWithComponents %>
         <div class="col-md-4 col-sm-6 nav-first-group-btn">
             <a class="project-group-button btn btn-success" data-toggle="collapse" data-target="#projectgroup_{$ID}">
                 $Name
@@ -25,7 +25,7 @@
     </div>
 </div>
 
-<% loop $ProjectGroups %>
+<% loop $getCategoriesWithComponents %>
     <div id="projectgroup_{$ID}" class="collapse project-options row">
         <div class="line"><div class="triangle"></div></div>
         <div class="col-md-12">

@@ -84,7 +84,7 @@ final class SoftwareManager implements ISoftwareManager
     {
         $components     = $release->getOpenStackComponentsFiltered($term, $adoption, $maturity, $age);
         $categories     = OpenStackComponentCategory::get()->sort('Order');
-        $subcategories  = new DataList('OpenStackComponentSubCategory');
+        $subcategories  = new DataList('OpenStackComponentCategory');
 
         foreach ($categories as $category) {
             $subcategories->addMany($category->SubCategories());
@@ -94,8 +94,8 @@ final class SoftwareManager implements ISoftwareManager
 
         foreach($components as $c)
         {
-            if ($c->SubCategory()->Exists()) {
-                $component_categories[$c->SubCategory()->Name][] = $this->serializer->serialize($c);
+            if ($c->Category()->Exists()) {
+                $component_categories[$c->Category()->Name][] = $this->serializer->serialize($c);
             }
         }
 
@@ -115,41 +115,10 @@ final class SoftwareManager implements ISoftwareManager
     public function getComponentsGroupedByCategoryAndSubcategory(IOpenStackRelease $release , $term = '', $adoption = 0, $maturity = 0, $age = 0, $sort = '', $sort_dir = '')
     {
         $components     = $release->getOpenStackComponentsFiltered($term, $adoption, $maturity, $age);
-        $categories     = OpenStackComponentCategory::get()->sort('Order');
-        $component_categories = [];
+        $categories     = OpenStackComponentCategory::getParentCategories()->sort('Order');
+        $componentIds   = array_map(function($c) { return $c->ID; }, $components);
 
-        foreach ($categories as $cat) {
-            $component_categories[$cat->ID] = [ 'category' => $cat->toMap(), 'subcategories' => [] ];
-            $subcats = $cat->SubCategories()->sort('SubCatOrder');
-            foreach ($subcats as $subcat) {
-                $component_categories[$cat->ID]['subcategories'][$subcat->ID] = [
-                    'subcategory' => $subcat->toMap(),
-                    'components' => []
-                ];
-            }
-        }
-
-        foreach($components as $c)
-        {
-            if ($c->SubCategory() && $c->SubCategory()->Exists()) {
-                $subcat = $c->SubCategory() ;
-                foreach ($component_categories as $categoryId => $category) {
-                    if (array_key_exists($subcat->ID, $category['subcategories'])) {
-                        $component_categories[$categoryId]['subcategories'][$subcat->ID]['components'][] = $this->serializer->serialize($c);
-                    }
-                }
-            }
-        }
-
-        foreach ($component_categories as $categoryId => $category) {
-            foreach ($category['subcategories'] as $subcategoryId => $subcategory) {
-                if(count($subcategory['components']) == 0)
-                    unset($component_categories[$categoryId]['subcategories'][$subcategoryId]);
-            }
-
-            if(count($component_categories[$categoryId]['subcategories']) == 0)
-                unset($component_categories[$categoryId]);
-        }
+        $component_categories = OpenStackComponentCategory::getFilteredCategoryMap($categories, $componentIds, $this->serializer);
 
         return $component_categories;
     }

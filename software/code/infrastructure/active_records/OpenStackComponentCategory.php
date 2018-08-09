@@ -22,19 +22,36 @@ class OpenStackComponentCategory extends DataObject implements IOpenStackCompone
     (
         'Name'              => 'Varchar(255)',
         'Description'       => 'Text',
+        'Slug'              => 'Varchar(255)',
         'Order'             => 'Int'
     );
 
-    static $many_many = array
+    static $has_many = array
     (
-        'SubCategories' => 'OpenStackComponentSubCategory'
+        'OpenStackComponents'   => 'OpenStackComponent',
+        'SubCategories'         => 'OpenStackComponentCategory'
     );
 
-    static $many_many_extraFields = array(
-        'SubCategories' => array(
-            'SubCatOrder' => 'Int'
-        )
+    static $has_one = array
+    (
+        "ParentCategory"        => "OpenStackComponentCategory"
     );
+
+    protected function onBeforeWrite()
+    {
+        parent::onBeforeWrite();
+        if ($this->Order == 0) {
+            $siblings_count = $this->getSiblings()->count();
+            $this->Order = $siblings_count + 1;
+        }
+
+        $slug = strtolower($this->Name);
+        $slug = preg_replace("/[^a-z0-9_\s-]/", "", $slug);
+        $slug = preg_replace("/[\s-]+/", " ", $slug);
+        $slug = preg_replace("/[\s_]/", "-", $slug);
+
+        $this->Slug = $slug;
+    }
 
     /**
      * @return int
@@ -80,16 +97,34 @@ class OpenStackComponentCategory extends DataObject implements IOpenStackCompone
      */
     public function getSubCategories()
     {
-        return AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'SubCategories')->toArray();
+        return AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'SubCategories')->toArray();
     }
 
     /**
-     * @param IOpenStackComponentSubCategory $new_sub_category
+     * @param IOpenStackComponentCategory $new_sub_category
      * @throws Exception
      */
-    public function addSubCategory(IOpenStackComponentSubCategory $new_sub_category)
+    public function addSubCategory(IOpenStackComponentCategory $new_sub_category)
     {
-        AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'SubCategories')->add($new_sub_category);
+        AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'SubCategories')->add($new_sub_category);
+    }
+
+    /**
+     * @return array
+     * @throws Exception
+     */
+    public function getOpenStackComponents()
+    {
+        return AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'OpenStackComponents')->toArray();
+    }
+
+    /**
+     * @param IOpenStackComponent $new_component
+     * @throws Exception
+     */
+    public function addOpenStackComponent(IOpenStackComponent $new_component)
+    {
+        AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'OpenStackComponents')->add($new_component);
     }
 
     /**
@@ -105,6 +140,65 @@ class OpenStackComponentCategory extends DataObject implements IOpenStackCompone
         }
 
         return false;
+    }
+
+    public function getSiblings()
+    {
+        if ($this->ParentCategoryID != 0) {
+            $siblings =  OpenStackComponentCategory::get()
+                ->filter('ParentCategoryID', $this->ParentCategoryID);
+
+            if ($this->ID) {
+                $siblings = $siblings->exclude('ID', $this->ID);
+            }
+
+            return $siblings;
+        }
+
+        return [];
+    }
+
+    public static function getFilteredCategoryMap($categories, $componentIds, $serializer) {
+        $map = [];
+
+        foreach($categories as $category) {
+            $components = [];
+            $subcategories = [];
+
+            if ($category->SubCategories()->count() > 0) {
+                $subcategories = OpenStackComponentCategory::getFilteredCategoryMap($category->SubCategories(), $componentIds, $serializer);
+            } else if ($category->OpenStackComponents()->count() > 0) {
+                foreach ($category->OpenStackComponents()->filter('ID', $componentIds) as $component) {
+                    $components[] = $serializer->serialize($component);
+                }
+            }
+
+            // clean-up
+            if (!count($components) && !count($subcategories)) {
+                continue;
+            }
+
+            $map[$category->ID] = [];
+            $map[$category->ID]['category'] = $category->toMap();
+
+            if (count($components)) {
+                $map[$category->ID]['components'] = $components;
+            }
+
+            $depth = 1;
+            if (count($subcategories)) {
+                $map[$category->ID]['subcategories'] = $subcategories;
+                $depth = array_values($subcategories)[0]['depth'] + 1;
+            }
+
+            $map[$category->ID]['depth'] = $depth;
+        }
+
+        return $map;
+    }
+
+    public static function getParentCategories() {
+        return OpenStackComponentCategory::get()->filter('ParentCategoryID', 0);
     }
 
 }

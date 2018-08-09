@@ -71,14 +71,22 @@ class CommunityPageBis_Controller extends Page_Controller
         Requirements::javascript('themes/openstack/javascript/community-bis.js');
     }
 
-    function getProjectGroups() {
-        $groups = OpenStackComponentSubCategory::get();
+    function getCategoriesWithComponents() {
+        $categories     = OpenStackComponentCategory::get();
+        $parentCatIds   = [];
 
-        return $groups;
-    }
+        foreach($categories as $category) {
+            if ($category->OpenStackComponents()->count() > 0) {
+                $parentCatIds[] = $category->ID;
+            }
+        }
 
-    function getComponentsByGroup($group) {
-        return OpenStackComponent::get()->filter('Use', $group);
+        if (count($parentCatIds)) {
+            $ids = implode(',', $parentCatIds);
+            return $categories->where("ID IN ({$ids})");
+        }
+
+        return [];
     }
 
     function MascotImage($component_slug) {

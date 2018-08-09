@@ -20,7 +20,6 @@ class SoftwareModelAdmin extends ModelAdmin
         'OpenStackRelease',
         'OpenStackSampleConfig',
         'OpenstackComponentCategory',
-        'OpenstackComponentSubCategory',
         'OpenstackComponentTag',
         'Mascot'
     );
@@ -40,11 +39,17 @@ class SoftwareModelAdmin extends ModelAdmin
         $form = parent:: getEditForm($id, $fields);
 
         if($this->modelClass === 'OpenStackComponent' ||
-            $this->modelClass === 'OpenStackSampleConfig' ||
-            $this->modelClass === 'OpenstackComponentCategory') {
+            $this->modelClass === 'OpenStackSampleConfig') {
                 $gridField = $form->Fields()->fieldByName($this->sanitiseClassName($this->modelClass));
                 $config = $gridField->getConfig();
                 $config->addComponent(new GridFieldSortableRows('Order'));
+        }
+
+        if($this->modelClass === 'OpenstackComponentCategory') {
+            $gridField = $form->Fields()->fieldByName($this->sanitiseClassName($this->modelClass));
+            $gridField->setList(OpenStackComponentCategory::getParentCategories());
+            $config = $gridField->getConfig();
+            $config->addComponent(new GridFieldSortableRows('Order'));
         }
 
         if($this->modelClass === 'OpenStackRelease') {

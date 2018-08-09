@@ -1,13 +1,15 @@
 <script>
-    var components = $getComponentsByCategoryJSON;
+    var components = $getComponentsByCategoryJSON($CategoryId);
     var releases   = $getReleases;
     components.max_maturity_points = $Top.getMaxAllowedMaturityPoints;
     var tileMode = (window.location.hash == '#tiles');
 </script>
+
 <% include SoftwareHomePage_MainNavMenu Active=1 %>
+
 <div class="software-main-wrapper">
     <!-- Projects Subnav -->
-    <div class="container">
+    <%--<div class="container">
         <div class="row outer-all-projects-subnav">
             <form class="all-projects-search-form">
                 <openstack-components-free-search></openstack-components-free-search>
@@ -18,17 +20,23 @@
             </form>
         </div>
         <openstack-components-filters max_maturity_points="{ components.max_maturity_points }"></openstack-components-filters>
-    </div>
+    </div>--%>
 
-    <openstack-category-nav groups="{ components.grouped_components }"></openstack-category-nav>
+    <!-- Begin Page Content -->
+    <% if $CategoryDepth > 2 %>
+        <openstack-category-nav groups="{ components.subcategories }"></openstack-category-nav>
+
+        <div class="container inner-software">
+            <project-services-with-nav groups="{ components.subcategories }" ></project-services-with-nav>
+        </div>
+    <% else %>
+        <div class="container inner-software">
+            <project-services groups="{ components.subcategories }"  category="{ components.category }"></project-services>
+        </div>
+    <% end_if %>
+    <!-- End Page Content -->
 
 
-    <div class="container inner-software">
-        <!-- Begin Page Content -->
-        <project-services base_url="{$Top.Link}" groups="{ components.grouped_components }" max_maturity_points="{ components.max_maturity_points }" tilemode="{ tileMode }">
-        </project-services>
-        <!-- End Page Content -->
-    </div>
 </div>
 
 $ModuleJS('software_all_projects')

@@ -198,9 +198,10 @@ class PopulateSubCategoriesAndTagsMigration extends AbstractDBMigrationTask
             $cat_obj->Order = $cat['Order'];
 
             foreach ($cat['SubCategories'] as $sub_cat) {
-                if (!$sub_cat_obj = OpenStackComponentSubCategory::get()->filter('Name', $sub_cat['Name'])->first()) {
-                    $sub_cat_obj = new OpenStackComponentSubCategory();
+                if (!$sub_cat_obj = OpenStackComponentCategory::get()->filter('Name', $sub_cat['Name'])->first()) {
+                    $sub_cat_obj = new OpenStackComponentCategory();
                     $sub_cat_obj->Name = $sub_cat['Name'];
+                    $sub_cat_obj->Order = $sub_cat['Order'];
                     $sub_cat_obj->write();
                 }
 
@@ -212,7 +213,7 @@ class PopulateSubCategoriesAndTagsMigration extends AbstractDBMigrationTask
                 }
 
                 $sub_cat_obj->write();
-                $cat_obj->SubCategories()->add($sub_cat_obj, ['SubCatOrder' => $sub_cat['Order'] ]);
+                $cat_obj->SubCategories()->add($sub_cat_obj);
             }
 
             $cat_obj->write();

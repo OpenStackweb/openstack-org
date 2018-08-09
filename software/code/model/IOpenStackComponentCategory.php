@@ -37,10 +37,10 @@ interface IOpenStackComponentCategory extends IEntity
     public function getSubCategories();
 
     /**
-     * @param IOpenStackComponent $new_sub_category
+     * @param IOpenStackComponentCategory $new_sub_category
      * @throws Exception
      */
-    public function addSubCategory(IOpenStackComponentSubCategory $new_sub_category);
+    public function addSubCategory(IOpenStackComponentCategory $new_sub_category);
 
     /**
      * @param int $component_id
