@@ -107,9 +107,9 @@ final class SpeakerEmailAnnouncementSenderManager
 
             $code = null;
 
-            $has_published = $speaker->hasPublishedRegularPresentations($current_summit->getIdentifier(), $role, true, $current_summit->getExcludedTracksForPublishedPresentations()) ||
-                             $speaker->hasPublishedLightningPresentations($current_summit->getIdentifier(), $role, true, $current_summit->getExcludedTracksForPublishedPresentations());
-            $has_alternate = $speaker->hasAlternatePresentations($current_summit->getIdentifier(), $role, true, $current_summit->getExcludedTracksForAlternatePresentations());
+            $has_published = $speaker->hasPublishedRegularPresentations($current_summit->getIdentifier(), $role, true, $current_summit->getExcludedTracksForPublishedPresentations());
+            $has_alternate = $speaker->hasAlternatePresentations($current_summit->getIdentifier(), $role, true, $current_summit->getExcludedTracksForAlternatePresentations(), true);
+
             if(!$speaker->hasSummitPromoCode($current_summit->getIdentifier())) {
                 if ($has_published) //get approved code
                 {

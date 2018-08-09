@@ -1116,6 +1116,7 @@ class PresentationSpeaker extends DataObject
      * @param string $role
      * @param bool $include_sub_roles
      * @param array $excluded_tracks
+     * @param bool $published_ones
      * @return bool
      */
     public function hasAlternatePresentations
@@ -1123,10 +1124,11 @@ class PresentationSpeaker extends DataObject
         $summit_id         = null,
         $role              = IPresentationSpeaker::RoleSpeaker,
         $include_sub_roles = false,
-        array $excluded_tracks = []
+        array $excluded_tracks = [],
+        $published_ones = false
     )
     {
-        return $this->AlternatePresentations($summit_id, $role, $include_sub_roles, $excluded_tracks)->count() > 0;
+        return $this->AlternatePresentations($summit_id, $role, $include_sub_roles, $excluded_tracks, $published_ones)->count() > 0;
     }
 
     /**

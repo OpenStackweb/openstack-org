@@ -23,32 +23,88 @@ final class SpeakerSelectionAnnouncementEmailSenderFactory implements ISpeakerSe
      */
     public function build(ISummit $summit, IPresentationSpeaker $speaker, $role = IPresentationSpeaker::RoleSpeaker)
     {
-        $has_published = $speaker->hasPublishedRegularPresentations($summit->getIdentifier(), $role, true, $summit->getExcludedTracksForPublishedPresentations()) ||
-                         $speaker->hasPublishedLightningPresentations($summit->getIdentifier(), $role, true, $summit->getExcludedTracksForPublishedPresentations());
+        $has_published = $speaker->hasPublishedRegularPresentations($summit->getIdentifier(), $role, true, $summit->getExcludedTracksForPublishedPresentations());
         $has_rejected  = $speaker->hasRejectedPresentations($summit->getIdentifier(), $role, true, $summit->getExcludedTracksForRejectedPresentations());
-        $has_alternate = $speaker->hasAlternatePresentations($summit->getIdentifier(), $role, true, $summit->getExcludedTracksForAlternatePresentations());
+        $has_alternate = $speaker->hasAlternatePresentations($summit->getIdentifier(), $role, true, $summit->getExcludedTracksForAlternatePresentations(), true);
 
-        if($has_published && !$has_rejected && !$has_alternate)
+        echo sprintf(
+            "speaker %s (%s) got following flags has_published %b has_rejected %b has_alternate %b",
+            $speaker->getEmail(),
+            $speaker->ID,
+            $has_published,
+            $has_rejected,
+            $has_alternate
+        ).PHP_EOL;
+
+        if($has_published && !$has_rejected && !$has_alternate) {
+
+            echo sprintf(
+                "speaker %s (%s) will get a presentation-speaker-accepted-only email",
+                $speaker->getEmail(),
+                $speaker->ID
+            ).PHP_EOL;
             return new PresentationSpeakerAcceptedAnnouncementEmailSender();
+        }
 
-        if(!$has_published && !$has_rejected && $has_alternate)
+        if(!$has_published && !$has_rejected && $has_alternate) {
+            echo sprintf(
+                "speaker %s (%s) will get a presentation-speaker-alternate-only email",
+                $speaker->getEmail(),
+                    $speaker->ID
+            ).PHP_EOL;
             return new PresentationSpeakerAlternateAnnouncementEmailSender();
+        }
 
-        if(!$has_published && $has_rejected && !$has_alternate)
+        if(!$has_published && $has_rejected && !$has_alternate) {
+            echo sprintf(
+                "speaker %s (%s) will get a presentation-speaker-rejected-only email",
+                $speaker->getEmail(),
+                    $speaker->ID
+            ).PHP_EOL;
             return new PresentationSpeakerRejectedAnnouncementEmailSender();
+        }
 
-        if($has_published && !$has_rejected && $has_alternate)
+        if($has_published && !$has_rejected && $has_alternate) {
+            echo sprintf(
+                "speaker %s (%s) will get a presentation-speaker-accepted-alternate email",
+                $speaker->getEmail(),
+                    $speaker->ID
+            ).PHP_EOL;
             return new PresentationSpeakerAcceptedAlternateAnnouncementEmailSender();
+        }
 
-        if($has_published && $has_rejected && !$has_alternate)
+        if($has_published && $has_rejected && !$has_alternate) {
+            echo sprintf(
+                "speaker %s (%s) will get a presentation-speaker-accepted-rejected email",
+                $speaker->getEmail(),
+                    $speaker->ID
+            ).PHP_EOL;
             return new PresentationSpeakerAcceptedRejectedAnnouncementEmailSender();
+        }
 
-        if(!$has_published && $has_rejected && $has_alternate)
+        if(!$has_published && $has_rejected && $has_alternate) {
+            echo sprintf(
+                "speaker %s (%s) will get a presentation-speaker-alternate-rejected email",
+                $speaker->getEmail(),
+                    $speaker->ID
+            ).PHP_EOL;
             return new PresentationSpeakerAlternateRejectedAnnouncementEmailSender();
+        }
 
-        if($has_published && $has_rejected && $has_alternate)
+        if($has_published && $has_rejected && $has_alternate) {
+            echo sprintf(
+                "speaker %s (%s) will get a presentation-speaker-accepted-alternate email",
+                $speaker->getEmail(),
+                    $speaker->ID
+            ).PHP_EOL;
             return new PresentationSpeakerAcceptedAlternateAnnouncementEmailSender();
+        }
 
+        echo sprintf(
+            "speaker %s (%s) will not get an email",
+            $speaker->getEmail(),
+            $speaker->ID
+        );
         return null;
     }
 }
