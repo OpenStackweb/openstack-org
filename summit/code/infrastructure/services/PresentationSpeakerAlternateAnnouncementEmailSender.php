@@ -51,7 +51,7 @@ final class PresentationSpeakerAlternateAnnouncementEmailSender implements IMess
                 'PromoCode'              => $promo_code->getCode(),
                 'Summit'                 => $summit,
                 'ScheduleMainPageLink'   => $schedule_page->getAbsoluteLiveLink(false),
-                'AlternatePresentations' => $speaker->AlternatePresentations($summit->getIdentifier(), $role,true, $summit->getExcludedTracksForAlternatePresentations())
+                'AlternatePresentations' => $speaker->AlternatePresentations($summit->getIdentifier(), $role,true, $summit->getExcludedTracksForAlternatePresentations(), true)
             )
         )
         ->send();

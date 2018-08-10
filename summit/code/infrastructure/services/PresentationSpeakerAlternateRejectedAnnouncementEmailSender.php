@@ -51,7 +51,7 @@ final class PresentationSpeakerAlternateRejectedAnnouncementEmailSender implemen
                 'PromoCode'              => $promo_code->getCode(),
                 'Summit'                 => $summit,
                 'ScheduleMainPageLink'   => $schedule_page->getAbsoluteLiveLink(false),
-                'AlternatePresentations' => $speaker->AlternatePresentations($summit->getIdentifier(), $role,true, $summit->getExcludedTracksForAlternatePresentations()),
+                'AlternatePresentations' => $speaker->AlternatePresentations($summit->getIdentifier(), $role,true, $summit->getExcludedTracksForAlternatePresentations(), true),
                 'RejectedPresentations'  => $speaker->RejectedPresentations($summit->getIdentifier(), $role, true, $summit->getExcludedTracksForRejectedPresentations())
             )
         )

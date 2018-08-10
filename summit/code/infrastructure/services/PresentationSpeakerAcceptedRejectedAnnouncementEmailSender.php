@@ -45,12 +45,6 @@ final class PresentationSpeakerAcceptedRejectedAnnouncementEmailSender implement
         if(is_null($schedule_page))
             throw new Exception('Summit Schedule page does not exists!');
 
-        $accepted_presentations = new ArrayList(array_merge
-        (
-            $speaker->PublishedRegularPresentations($summit->getIdentifier(), $role,true, $summit->getExcludedTracksForPublishedPresentations())->toArray(),
-            $speaker->PublishedLightningPresentations($summit->getIdentifier(), $role,true, $summit->getExcludedTracksForPublishedPresentations())->toArray()
-        ));
-
         $email->setUserTemplate(PRESENTATION_SPEAKER_ACCEPTED_REJECTED_EMAIL)->populateTemplate(
             array
             (
@@ -60,7 +54,7 @@ final class PresentationSpeakerAcceptedRejectedAnnouncementEmailSender implement
                 'PromoCode'             => $promo_code->getCode(),
                 'Summit'                => $summit,
                 'ScheduleMainPageLink'  => $schedule_page->getAbsoluteLiveLink(false),
-                'AcceptedPresentations' => $accepted_presentations,
+                'AcceptedPresentations' => $speaker->PublishedRegularPresentations($summit->getIdentifier(), $role,true, $summit->getExcludedTracksForPublishedPresentations()),
                 'RejectedPresentations' => $speaker->RejectedPresentations($summit->getIdentifier(), $role, true, $summit->getExcludedTracksForRejectedPresentations())
             )
         )
