@@ -29,5 +29,5 @@ interface ITagRepository extends IEntityRepository
      * @param string $id
      * @return ISummitEventFeedback[]
      */
-    public function searchAllPaged($summit_id,$page,$page_size,$sort,$sort_dir,$search_term);
+    public function searchAllPaged($summit_id,$page,$page_size,$sort,$sort_dir,$search_term, $published);
 }

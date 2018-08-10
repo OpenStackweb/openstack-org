@@ -39,13 +39,14 @@ ACR.OnSitePhoneNumber AS phone,
 IFNULL(ACR.IsConfirmed, 0) AS confirmed,
 IFNULL(ACR.RegisteredForSummit, 0) AS registered,
 IFNULL(ACR.CheckedIn, 0) AS checked_in,
+Q1.AttendingMedia AS attending_media,
 O.Name AS company,
 PresentationCategory.Title AS track
 SQL;
 
         $from = <<<SQL
          FROM ( 
-SELECT E.ID AS EventID, E.Title AS EventTitle, IFNULL(SP.ID, SP2.ID) as SpeakerID, E.CategoryID 
+SELECT E.ID AS EventID, E.Title AS EventTitle, IFNULL(SP.ID, SP2.ID) as SpeakerID, E.CategoryID, P.AttendingMedia AS AttendingMedia
 FROM SummitEvent AS E
 INNER JOIN Presentation AS P ON P.ID = E.ID
 LEFT JOIN Presentation_Speakers AS PS ON PS.PresentationID = P.ID
@@ -90,6 +91,8 @@ $where = '';
                 $where .= " ( ACR.RegisteredForSummit = 0 OR ACR.RegisteredForSummit IS NULL ) ";
             else if ($filter == 'hide_checkedin')
                 $where .= " ( ACR.CheckedIn = 0 OR ACR.CheckedIn IS NULL ) ";
+            else if ($filter == 'show_media')
+                $where .= " ( Q1.AttendingMedia = 1 ) ";
             else if ($filter == 'hide_all')
                 $where .= "  ( ( ACR.IsConfirmed = 0 OR ACR.IsConfirmed IS NULL) AND ( ACR.RegisteredForSummit = 0 OR ACR.RegisteredForSummit IS NULL ) AND  ( ACR.CheckedIn = 0 OR ACR.CheckedIn IS NULL ) ) ";
         }

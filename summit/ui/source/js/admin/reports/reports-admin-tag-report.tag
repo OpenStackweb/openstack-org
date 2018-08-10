@@ -50,9 +50,10 @@
             var sort = $('.sorted').data('sort');
             var sort_dir = $('.sorted').data('dir');
             var term = $('#search-term').val();
+            var published = $('#show-published').prop('checked');
 
             $.getJSON('api/v1/summits/'+self.summit_id+'/reports/tag_report',
-                {page:page, items: self.page_data.limit, sort: sort, sort_dir: sort_dir, term: term},
+                {page:page, items: self.page_data.limit, sort: sort, sort_dir: sort_dir, term: term, published: published},
                 function(data){
                     self.tags = data.data;
                     self.page_data.page = page;
@@ -84,7 +85,9 @@
             var sort     = ($('.sorted').length) ? $('.sorted').data('sort') : 'tag';
             var sort_dir = ($('.sorted').length) ? $('.sorted').data('dir') : 'ASC';
             var term = $('#search-term').val();
-            window.open('api/v1/summits/'+self.summit_id+'/reports/export/tag_report?term='+term+'&sort='+sort+'&sort_dir='+sort_dir, '_blank');
+            var published = $('#show-published').prop('checked');
+
+            window.open('api/v1/summits/'+self.summit_id+'/reports/export/tag_report?term='+term+'&sort='+sort+'&sort_dir='+sort_dir+'&published='+published, '_blank');
         });
 
     </script>

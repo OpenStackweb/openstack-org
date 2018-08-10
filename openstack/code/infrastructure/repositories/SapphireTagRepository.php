@@ -57,7 +57,7 @@ SQL;
      * @param string $id
      * @return ISummitEventFeedback[]
      */
-    public function searchAllPaged($summit_id,$page,$page_size,$sort,$sort_dir,$search_term)
+    public function searchAllPaged($summit_id,$page,$page_size,$sort,$sort_dir,$search_term, $published)
     {
         $query_body = <<<SQL
             FROM Tag 
@@ -71,6 +71,10 @@ SQL;
 
         if ($search_term) {
             $query_where .= " AND (Tag.Tag LIKE '%{$search_term}%')";
+        }
+
+        if ($published) {
+            $query_where .= " AND (E.Published = 1)";
         }
 
         $query_count = "SELECT COUNT(*) FROM (SELECT Tag.ID ";

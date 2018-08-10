@@ -22,6 +22,7 @@
                 <option value="hide_confirmed">Hide Confirmed</option>
                 <option value="hide_registered">Hide Registered</option>
                 <option value="hide_checkedin">Hide Checked In</option>
+                <option value="show_media">Show Only Attending Media</option>
                 <option value="hide_all">Hide Both</option>
             </select>
         </div>
@@ -36,8 +37,12 @@
             <button class="btn btn-primary" id="export-report" if={ show_export } onclick={ exportReport } >Export</button>
             <button class="btn btn-success" id="save-report" if={ show_save } onclick={ saveReport } >Save</button>
         </div>
-        <div class="col-md-2">
-            <button class="btn btn-default" id="send-email" if={ show_email } data-toggle="modal" data-target="#emailModal" onclick={ openEmailModal } >Send Email</button>
+        <div class="col-md-2" if={ show_email }>
+            <button class="btn btn-default" id="send-email" data-toggle="modal" data-target="#emailModal" onclick={ openEmailModal } >Send Email</button>
+        </div>
+        <div class="col-md-2 checkbox" if={ show_published }>
+            <input type="checkbox" id="show-published" onchange={ searchReport } />
+            <label for="show-published">Only&nbsp;Published</label>
         </div>
     </div>
     <br>
@@ -90,6 +95,7 @@
         this.show_save          = true;
         this.show_export        = true;
         this.show_email         = false;
+        this.show_published     = false;
         var self                = this;
 
         tinymce.init({
@@ -174,6 +180,7 @@
             self.show_save = false;
             self.show_export = false;
             self.show_email = false;
+            self.show_published = false;
 
             switch (self.report) {
                 case 'speaker_report':
@@ -219,6 +226,7 @@
                 case 'tag_report':
                     self.show_search = true;
                     self.show_export = true;
+                    self.show_published = true;
                     break;
             }
         }

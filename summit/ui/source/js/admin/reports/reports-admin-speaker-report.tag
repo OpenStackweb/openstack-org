@@ -22,6 +22,7 @@
                     <th class="center_text">Confirmed?</th>
                     <th data-sort="registered" data-dir="ASC" class="center_text sortable">Registered?</th>
                     <th data-sort="checked_in" data-dir="ASC" class="center_text sortable">Checked In?</th>
+                    <th>Media</th>
                 </tr>
             </thead>
             <tbody>
@@ -43,6 +44,7 @@
                     <td class="center_text">
                         <input type="checkbox" class="checked_in" checked={ speaker.checked_in } />
                     </td>
+                    <td>{ speaker.attending_media ? 'Yes' : 'No' }</td>
                 </tr>
             </tbody>
         </table>
