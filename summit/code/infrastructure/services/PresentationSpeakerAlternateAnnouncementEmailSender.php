@@ -42,6 +42,7 @@ final class PresentationSpeakerAlternateAnnouncementEmailSender implements IMess
         $schedule_page = SummitAppSchedPage::getBy($summit);
         if(is_null($schedule_page)) throw new Exception('Summit Schedule page does not exists!');
 
+        $alternates_presentations = $speaker->AlternatePresentations($summit->getIdentifier(), $role,true, $summit->getExcludedTracksForAlternatePresentations(), true);
         $email->setUserTemplate(PRESENTATION_SPEAKER_ALTERNATE_ONLY_EMAIL)->populateTemplate(
             array
             (
@@ -51,7 +52,7 @@ final class PresentationSpeakerAlternateAnnouncementEmailSender implements IMess
                 'PromoCode'              => $promo_code->getCode(),
                 'Summit'                 => $summit,
                 'ScheduleMainPageLink'   => $schedule_page->getAbsoluteLiveLink(false),
-                'AlternatePresentations' => $speaker->AlternatePresentations($summit->getIdentifier(), $role,true, $summit->getExcludedTracksForAlternatePresentations(), true)
+                'AlternatePresentations' => $alternates_presentations
             )
         )
         ->send();

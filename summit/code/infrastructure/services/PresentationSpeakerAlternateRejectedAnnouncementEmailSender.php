@@ -42,6 +42,8 @@ final class PresentationSpeakerAlternateRejectedAnnouncementEmailSender implemen
         $schedule_page = SummitAppSchedPage::getBy($summit);
         if(is_null($schedule_page)) throw new Exception('Summit Schedule page does not exists!');
 
+        $alternates_presentations = $speaker->AlternatePresentations($summit->getIdentifier(), $role,true, $summit->getExcludedTracksForAlternatePresentations(), true);
+
         $email->setUserTemplate(PRESENTATION_SPEAKER_ALTERNATE_REJECTED_EMAIL)->populateTemplate(
             array
             (
@@ -51,7 +53,7 @@ final class PresentationSpeakerAlternateRejectedAnnouncementEmailSender implemen
                 'PromoCode'              => $promo_code->getCode(),
                 'Summit'                 => $summit,
                 'ScheduleMainPageLink'   => $schedule_page->getAbsoluteLiveLink(false),
-                'AlternatePresentations' => $speaker->AlternatePresentations($summit->getIdentifier(), $role,true, $summit->getExcludedTracksForAlternatePresentations(), true),
+                'AlternatePresentations' => $alternates_presentations,
                 'RejectedPresentations'  => $speaker->RejectedPresentations($summit->getIdentifier(), $role, true, $summit->getExcludedTracksForRejectedPresentations())
             )
         )
