@@ -142,6 +142,9 @@ class OpenStackComponentCategory extends DataObject implements IOpenStackCompone
         return false;
     }
 
+    /**
+     * @return DataList
+     */
     public function getSiblings()
     {
         if ($this->ParentCategoryID != 0) {
@@ -155,7 +158,7 @@ class OpenStackComponentCategory extends DataObject implements IOpenStackCompone
             return $siblings;
         }
 
-        return [];
+        return new ArrayList();
     }
 
     public static function getFilteredCategoryMap($categories, $componentIds, $serializer) {
