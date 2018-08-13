@@ -1,24 +1,27 @@
 </div>
-<div class="banner">
+<div class="where-to-start">
     <div class="container">
         <div class="row">
-            <div class="col-md-4 col-xs-12 banner-img-wrapper pull-right">
-                <img src="themes/openstack/images/community/rocket.png" />
+            <div class="col-md-7 col-sm-6">
+                <h2>Where should I start?</h2>
+                <p>
+                    OpenStack is a large community, and it can seem overwhelming when you don't know where to start.
+                    The best way to approach it is to get involved with a specific project, working group or local meetup.
+                </p>
             </div>
-            <div class="col-md-8 col-xs-12 banner-text-wrapper pull-right">
-                <h2>New to the community?</h2>
-                <p>
-                    Then you are in the right place! There are lots of benefits to participation, including opportinities to influence the future of the project.
-                    Find out how to get started:
-                </p>
-                <a href="https://docs.openstack.org/contributors" target="_blank" class="banner-button btn btn-primary">
-                    Contributor Guide <i class="fa fa-chevron-circle-right fa-inverse" aria-hidden="true"></i>
+            <div class="col-md-5 col-sm-6 start-options">
+                <a href="https://governance.openstack.org/tc/reference/help-most-needed.html" class="start-option btn">
+                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                    <span>Areas where help is most needed</span>
+                </a><br>
+                <a href="https://docs.openstack.org/upstream-training/" class="start-option btn">
+                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                    <span>Tutorials & Upstream Institute</span>
+                </a><br>
+                <a href="https://groups.openstack.org/" class="start-option btn">
+                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                    <span>Find a local user group or attend an event</span>
                 </a>
-                <hr />
-                <p>
-                    Already a contributor and looking for resources? <a href="/community/#quicklinks" class="bannerquicklinks">Skip to Quick Links</a>
-                </p>
-                
             </div>
         </div>
     </div>
@@ -62,11 +65,11 @@
                 </a>
             </div>
             <div class="col-md-5ths col-sm-6 col-xs-6 nav-button-box">
-                <a href="https://www.openstack.org/join/#sponsor" class="nav-button" target="_blank">
+                <a class="nav-button" data-toggle="collapse" data-target="#sponsor" data-parent="#accordion-parent">
                     <div class="nav-button-icon">
-                        <img src="themes/openstack/images/community/wallet.png" />
+                        <img src="themes/openstack/images/community/book.png" />
                     </div>
-                    <div>Sponsorship</div>
+                    <div>Operators</div>
                 </a>
             </div>
         </div>
@@ -92,42 +95,37 @@
         </div>
     </div>
 </div>
-<div class="where-to-start">
+<div class="banner">
     <div class="container">
         <div class="row">
-            <div class="col-md-7 col-sm-6">
-                <h2>Where should I start?</h2>
-                <p>
-                    OpenStack is a large community, and it can seem overwhelming when you don't know where to start.
-                    The best way to approach it is to get involved with a specific project, working group or local meetup.
-                </p>
+            <div class="col-md-4 col-xs-12 banner-img-wrapper pull-right">
+                <img src="themes/openstack/images/community/rocket.png" />
             </div>
-            <div class="col-md-5 col-sm-6 start-options">
-                <a href="https://governance.openstack.org/tc/reference/help-most-needed.html" class="start-option btn">
-                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
-                    <span>Areas where help is most needed</span>
-                </a><br>
-                <a href="https://docs.openstack.org/upstream-training/" class="start-option btn">
-                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
-                    <span>Tutorials & Upstream Institute</span>
-                </a><br>
-                <a href="https://groups.openstack.org/" class="start-option btn">
-                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
-                    <span>Find a local user group or attend an event</span>
+            <div class="col-md-8 col-xs-12 banner-text-wrapper pull-right">
+                <h2>New to the community?</h2>
+                <p>
+                    Then you are in the right place! There are lots of benefits to participation, including opportinities to influence the future of the project.
+                    Find out how to get started:
+                </p>
+                <a href="https://docs.openstack.org/contributors" target="_blank" class="banner-button btn btn-primary">
+                    Contributor Guide <i class="fa fa-chevron-circle-right fa-inverse" aria-hidden="true"></i>
                 </a>
+                <hr />
+                <p>
+                    Already a contributor and looking for resources? <a href="/community/#quicklinks" class="bannerquicklinks">Skip to Quick Links</a>
+                </p>
+                
             </div>
         </div>
     </div>
 </div>
-
 <div class="help">
     <div class="container">
         <div class="row">
             <div class="col-md-12 help-header">
                 <div class="help-title">Don't worry! We're here to help.</div>
                 <p>
-                    We want you to have a great experience. OpenStack Foundation staff and volunteer ambassadors around
-                    the world are here to help you get plugged in and make an impact.
+                    We want you to have a great experience. OpenStack Foundation staff are here to help you!
                 </p>
             </div>
             <div class="col-md-12 help-managers">
@@ -142,24 +140,6 @@
                         <% if CurrentJobTitle %>
                             $CurrentJobTitle<br/>
                         <% end_if %>
-                        $City, $Top.CountryName($Country)</p>
-                        <div class="ambassador-twitter-veil">
-                            <i class="fa fa-twitter" aria-hidden="true"></i><br>
-                            <span> @$TwitterName </span>
-                        </div>
-                    </div>
-                <% end_loop %>
-                </div>
-            </div>
-            <div class="col-md-12 help-ambassadors">
-                <h4>Global OpenStack Ambassadors</h4>
-                <div class="row">
-                <% loop $Ambassadors.Sort(Order) %>
-                    <div class="col-md-2 col-sm-3 col-xs-6 ambassador">
-                        <div class="profile-pic">
-                            $ProfilePhoto(130, true)
-                        </div>
-                        <p><strong>$FullName</strong><br/>
                         $City, $Top.CountryName($Country)</p>
                         <div class="ambassador-twitter-veil">
                             <i class="fa fa-twitter" aria-hidden="true"></i><br>
@@ -256,6 +236,36 @@
     </div>
 </div>
 
+<div class="help">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 help-header">
+                <div class="help-title">Don't worry! We're here to help.</div>
+                <p>
+                    Our global volunteer ambassadors are here to help you get plugged in and make an impact.
+                </p>
+            </div>
+            <div class="col-md-12 help-ambassadors">
+                <h4>Global OpenStack Ambassadors</h4>
+                <div class="row">
+                <% loop $Ambassadors.Sort(Order) %>
+                    <div class="col-md-2 col-sm-3 col-xs-6 ambassador">
+                        <div class="profile-pic">
+                            $ProfilePhoto(130, true)
+                        </div>
+                        <p><strong>$FullName</strong><br/>
+                        $City, $Top.CountryName($Country)</p>
+                        <div class="ambassador-twitter-veil">
+                            <i class="fa fa-twitter" aria-hidden="true"></i><br>
+                            <span> @$TwitterName </span>
+                        </div>
+                    </div>
+                <% end_loop %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="quick-links">
     <div class="quick-links-banner">
