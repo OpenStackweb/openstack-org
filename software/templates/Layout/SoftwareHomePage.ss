@@ -19,7 +19,7 @@
                 </div>
             </div>
         </div>
-
+        <!-- 
         <hr/>
 
         <div class="project-category-section">
@@ -27,7 +27,7 @@
             <div class="row">
                 <% loop getComponentCategories() %>
                 <div class="col-md-4">
-                    <a href="$Top.Link(project-navigator)#{$Id}">
+                    <a href="/software/project-navigator/openstack-components/">
                         <div class="project-category-tile">
                             <h4>{$Name}</h4>
                             <p class="number-of-projects">
@@ -39,7 +39,7 @@
                 <% end_loop %>
             </div>
         </div>
-
+        -->
         <div class="row">
             <div class="col-sm-12">
                 <a href="$Top.Link(project-navigator)" class="red-btn-lrg">Browse All OpenStack Projects</a>
@@ -53,37 +53,37 @@
                 <h3 class="header-center">Popular Project Set</h3>
                 <ul>
                     <li class="nova">
-                        <a href="/software/releases/ocata/components/nova">
+                        <a href="/software/releases/queens/components/nova">
                             <h4>Nova</h4>
                             <p>Compute</p>
                         </a>
                     </li>
                     <li class="neutron">
-                        <a href="/software/releases/ocata/components/neutron">
+                        <a href="/software/releases/queens/components/neutron">
                             <h4>Neutron</h4>
                             <p>Networking</p>
                         </a>
                     </li>                     
                     <li class="swift">
-                        <a href="/software/releases/ocata/components/swift">
+                        <a href="/software/releases/queens/components/swift">
                             <h4>Swift</h4>
                             <p>Object Storage</p>
                         </a>
                     </li>
                     <li class="glance">
-                        <a href="/software/releases/ocata/components/glance">
+                        <a href="/software/releases/queens/components/glance">
                             <h4>Glance</h4>
                             <p>Image Service</p>
                         </a>
                     </li>
                     <li class="keystone">
-                        <a href="/software/releases/ocata/components/keystone">
+                        <a href="/software/releases/queens/components/keystone">
                             <h4>Keystone</h4>
                             <p>Identity Service</p>
                         </a>
                     </li>          
                     <li class="cinder">
-                        <a href="/software/releases/ocata/components/cinder">
+                        <a href="/software/releases/queens/components/cinder">
                             <h4>Cinder</h4>
                             <p>Block Storage</p>
                         </a>
