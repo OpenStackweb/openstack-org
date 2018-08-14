@@ -110,6 +110,13 @@ implements IJobRegistrationRequest {
 		$this->PointOfContactEmail = $point_of_contact->getEmail();
 	}
 
+    /**
+     * @return bool
+     */
+	function hasPointOfContact(){
+	    return !empty($this->PointOfContactEmail);
+    }
+
 	/**
 	 * @param Member $user
 	 * @return void

@@ -111,24 +111,25 @@ final class JobRegistrationRequestManager implements IJobRegistrationRequestMana
             //send email
             $jobs_group = Group::get()->filter('Code','jobs-managers')->first();
             $managers_emails = $jobs_group->Members()->column('Email');
+            if(!empty($managers_emails)) {
+                $email = EmailFactory::getInstance()->buildEmail(
+                    JOB_SUBMISSION_EMAIL_FROM,
+                    implode(',', $managers_emails),
+                    'New job submission'
+                );
 
-            $email = EmailFactory::getInstance()->buildEmail(
-                JOB_SUBMISSION_EMAIL_FROM,
-                implode(',',$managers_emails),
-                'New job submission'
-            );
+                $email->setTemplate('JobSubmissionEmail');
+                $email->populateTemplate(array(
+                    'SubmitterName' => $new_registration_request->PointOfContactName,
+                    'SubmitterEmail' => $new_registration_request->PointOfContactEmail,
+                    'JobTitle' => $new_registration_request->Title,
+                    'JobSummary' => $new_registration_request->Description,
+                    'ReviewLink' => Director::absoluteBaseURL() . 'sangria/ViewJobsDetails',
+                    'Rejected' => $rejected
+                ));
 
-            $email->setTemplate('JobSubmissionEmail');
-            $email->populateTemplate(array(
-                'SubmitterName'     => $new_registration_request->PointOfContactName,
-                'SubmitterEmail'    => $new_registration_request->PointOfContactEmail,
-                'JobTitle'          => $new_registration_request->Title,
-                'JobSummary'        => $new_registration_request->Description,
-                'ReviewLink'        => Director::absoluteBaseURL().'sangria/ViewJobsDetails',
-                'Rejected'          => $rejected
-            ));
-
-            $email->send();
+                $email->send();
+            }
 		});
 	}
 
@@ -162,7 +163,8 @@ final class JobRegistrationRequestManager implements IJobRegistrationRequestMana
 			foreach($locations as $location)
 				$request->registerLocation($location);
 
-			$request->registerPointOfContact($factory->buildJobPointOfContact($data));
+            if(!$request->hasPointOfContact())
+			    $request->registerPointOfContact($factory->buildJobPointOfContact($data));
 
 			return $request;
 		});
