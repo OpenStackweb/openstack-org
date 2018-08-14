@@ -66,6 +66,9 @@ final class PresentationForm extends BootstrapForm
             $category_groups_map[] = array('id' => $group->ID,'title' => $group->Name, 'group_type' => $group_type);
         }
 
+        if(!count($category_groups_map))
+            throw new RuntimeException("not available categories (tracks)!");
+
         usort($category_groups_map, function($a, $b) { return strcmp($a["title"], $b["title"]); });
         $types = PresentationType::get()
                     ->filter('SummitID', $this->summit->ID)
@@ -144,7 +147,7 @@ final class PresentationForm extends BootstrapForm
 
         $CategoryGroupField = new CategoryGroupField('GroupID','Select the <a href="'.$this->summit->Link.'categories" target="_blank">Summit Category</a> of your presentation');
         $CategoryGroupField->setSource($category_groups_map);
-        if(count($category_groups_map) < 2) {
+        if(count($category_groups_map) < 2 && count($category_groups_map) > 0 ) {
             $CategoryGroupField->setValue($category_groups_map[0]['id']);
             $CategoryGroupField->addHolderClass('hidden');
         }
