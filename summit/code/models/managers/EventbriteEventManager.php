@@ -178,6 +178,7 @@ final class EventbriteEventManager implements IEventbriteEventManager
                             $current_summit = $this->summit_repository->getByExternalEventId($event_id);
 
                             if (is_null($member)) {
+                                if(!is_string($email)) break;
                                 // member not found ... send email to invite to openstack.org membership
                                 echo sprintf("sending email (invite) to %s - summit id %s", $email, $current_summit->ID).PHP_EOL;
                                 $invite_sender->send([
