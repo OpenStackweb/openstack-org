@@ -65,7 +65,7 @@
                 </a>
             </div>
             <div class="col-md-5ths col-sm-6 col-xs-6 nav-button-box">
-                <a class="nav-button" data-toggle="collapse" data-target="#sponsor" data-parent="#accordion-parent">
+                <a class="nav-button" data-toggle="collapse" data-target="#sponsorship" data-parent="#accordion-parent">
                     <div class="nav-button-icon">
                         <img src="themes/openstack/images/community/book.png" />
                     </div>

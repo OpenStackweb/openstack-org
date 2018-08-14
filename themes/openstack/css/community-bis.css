@@ -4,6 +4,7 @@
     padding: 0 50px 50px 50px;
     color: white;
     font-size: 1.2em;
+    margin-top: 50px;
 }
 
 .banner .banner-text-wrapper {
@@ -231,7 +232,7 @@
 
 .where-to-start {
     padding: 50px;
-    margin-top: 50px;
+    /*margin-top: 50px;*/
     color: white;
     background-image: url('/themes/openstack/images/community/bg.png');
 }
