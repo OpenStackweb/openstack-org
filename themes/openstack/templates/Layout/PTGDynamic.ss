@@ -85,7 +85,7 @@
     </div>
     <!--Sponsor tab-->
     <% if $Sponsor %>
-        <div role="tabpanel" class="tab-pane" id="sponsor">
+        <div role="tabpanel" class="tab-pane" id="sponsor" style="text-align:center;">
             <div class="ptg-body">
                 <div class="container">
                     <% if $SponsorLogos %>
