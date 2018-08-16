@@ -509,11 +509,11 @@ class SurveyPage_Controller extends Page_Controller
         }
 
         if ($current_survey->isLastStep() && $current_step->template()->getType() == 'SurveyReviewStepTemplate') {
-            if(!$current_survey->isEmailSent())
-                $this->survey_manager->sendFinalStepEmail(new SurveyThankYouEmailSenderService, $current_survey);
-
             if(!$current_survey->isComplete())
                 $this->survey_manager->completeSurvey($current_step);
+
+            if(!$current_survey->isEmailSent())
+                $this->survey_manager->sendFinalStepEmail(new SurveyThankYouEmailSenderService, $current_survey);
 
             if(!$should_move_to_next_step)
                 return $this->redirect($this->Link().'thank-you-end');
