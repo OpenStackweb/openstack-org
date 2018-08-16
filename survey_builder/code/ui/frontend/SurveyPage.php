@@ -499,10 +499,13 @@ class SurveyPage_Controller extends Page_Controller
                 $next_step = $current_step;
         }
 
+        $should_move_to_next_step = false;
         if(isset($data['NEXT_STEP']) &&
             $desired_step = $current_survey->getStep($data['NEXT_STEP'])) {
-            if ($current_survey->canShowStep($desired_step))
+            if ($current_survey->canShowStep($desired_step)) {
                 $next_step = $desired_step;
+                $should_move_to_next_step = true;
+            }
         }
 
         if ($current_survey->isLastStep() && $current_step->template()->getType() == 'SurveyReviewStepTemplate') {
@@ -512,7 +515,7 @@ class SurveyPage_Controller extends Page_Controller
             if(!$current_survey->isComplete())
                 $this->survey_manager->completeSurvey($current_step);
 
-            if(is_null($next_step))
+            if(!$should_move_to_next_step)
                 return $this->redirect($this->Link().'thank-you-end');
         }
         SS_Log::log(sprintf("end current step %s", $current_survey->currentStep()->Template()->Name), SS_Log::DEBUG);
