@@ -25,6 +25,11 @@ a:hover {
     height: 34px;
 }
 
+.centered-column {
+    float: none;
+    display: inline-block;
+}
+
 /* @group Navigation */
 #navigation {
   display: block;
