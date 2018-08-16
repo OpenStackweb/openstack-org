@@ -488,6 +488,7 @@ class SurveyPage_Controller extends Page_Controller
         $current_step   = $current_survey->currentStep();
         SS_Log::log(sprintf("current step %s", $current_survey->currentStep()->Template()->Name), SS_Log::DEBUG);
         $form->clearMessage();
+        $next_step = null;
 
         if($current_step instanceof ISurveyRegularStep)
             $next_step = $this->survey_manager->completeStep($current_step, $data);
@@ -508,9 +509,11 @@ class SurveyPage_Controller extends Page_Controller
             if(!$current_survey->isEmailSent())
                 $this->survey_manager->sendFinalStepEmail(new SurveyThankYouEmailSenderService, $current_survey);
 
-            $this->survey_manager->completeSurvey($current_step);
+            if(!$current_survey->isComplete())
+                $this->survey_manager->completeSurvey($current_step);
 
-            return $this->redirect($this->Link().'thank-you-end');
+            if(is_null($next_step))
+                return $this->redirect($this->Link().'thank-you-end');
         }
         SS_Log::log(sprintf("end current step %s", $current_survey->currentStep()->Template()->Name), SS_Log::DEBUG);
         return $this->redirect($this->Link().$next_step->template()->title());

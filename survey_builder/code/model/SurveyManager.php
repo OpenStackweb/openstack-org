@@ -219,7 +219,9 @@ final class SurveyManager implements ISurveyManager {
         $this->tx_manager->transaction(function() use($current_step){
             $current_survey = $current_step->survey();
             $current_step->markComplete();
+            $current_step->write();
             $current_survey->markComplete();
+            $current_survey->write();
         });
     }
 
