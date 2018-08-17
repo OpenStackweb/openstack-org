@@ -39,12 +39,12 @@
                 <% end_loop %>
             </div>
         </div>
-        -->
         <div class="row">
             <div class="col-sm-12">
                 <a href="$Top.Link(project-navigator)" class="red-btn-lrg">Browse All OpenStack Projects</a>
             </div>
         </div>
+        -->
 
         <hr/>
 
