@@ -12,7 +12,8 @@
     <a href="{$BaseHref}software/" class="drop" id="dropdownMenuSoftware">Software <i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
     <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuSoftware">
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/">Overview</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/project-navigator/openstack-components">Project Map</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/project-navigator/openstack-components">Project Navigator</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}assets/software/projectmap/openstack-map.pdf" target="_blank">Project Map</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/sample-configs/">Sample Configs</a></li>
         <li role="presentation" class="divider"></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}software/security/">Security</a></li>
