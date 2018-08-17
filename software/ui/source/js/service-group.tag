@@ -18,7 +18,6 @@ require('./t.tag');
                         <strong>
                             <t entity="Software.SERVICES_SECTION_TITLE" text={ subcategory.category.Name } />
                         </strong>
-                        { ' ( '+subcategory.components.length+' Results )' }
                     </p>
                 </div>
                 <div class="col-sm-12" show="{ opts.tiles }">

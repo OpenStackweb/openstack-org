@@ -4,7 +4,6 @@ require('./t.tag');
     <div class="col-sm-12">
     <p class="service-section-title">
     	<strong><t entity="Software.OPTIONAL_SERVICES" text="Optional Services" /></strong>
-    	( {components.length} <t entity="Openstack.RESULTS" text="Results" /> )
     </p>
     </div>
     </div>
