@@ -53,6 +53,7 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
             $releases = OpenStackRelease::get()->where(" Name <> 'Trunk' ")->sort('ReleaseDate', 'DESC');
             DB::query('DELETE FROM OpenStackComponentReleaseCaveat;');
             $this->processProjects();
+            $this->processCategories();
             foreach($releases as $release)
             {
                 echo sprintf('processing release %s ...', $release->Name).PHP_EOL;
@@ -261,6 +262,98 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
             SS_Log::log($ex->getMessage(), SS_Log::ERR);
             return;
         }
+    }
+
+    private function processCategories()
+    {
+        // disable all categories
+        DB::query("UPDATE `OpenStackComponentCategory` SET `Enabled` = 0 ");
+
+        try {
+            // iterate between files in repo
+            $feed = new RestfulService("https://api.github.com/repos/ttx/openstack-map/contents/", 3600);
+            $response = $feed->request();
+
+            if ($response->getStatusCode() == 200) {
+                $files = json_decode($response->getBody());
+                foreach ($files as $file) {
+                    // now read yaml file of parent category and extract subcategories and components
+                    echo sprintf("processing file %s ", $file->name).PHP_EOL;
+                    $yamlResponse = $this->client->get($file->download_url);
+
+                    if (is_null($yamlResponse)) continue;
+                    if ($yamlResponse->getStatusCode() != 200) continue;
+                    $body = $yamlResponse->getBody();
+                    if (is_null($body)) continue;
+                    $content = $body->getContents();
+                    if (empty($content)) continue;
+
+                    $categoryYaml = Spyc::YAMLLoadString($content);
+
+                    // create parent category per file
+                    $categoryName = $categoryYaml['name'];
+                    $category = OpenStackComponentCategory::get()->filter('Name', $categoryName)->first();
+                    if (!$category) {
+                        $category = new OpenStackComponentCategory();
+                        $category->Name = $categoryName;
+                    }
+
+                    $category->Enabled = 1;
+                    $category->write();
+
+                    foreach($categoryYaml['tabs'] as $tab) {
+                        $subcatName = $tab['name'];
+                        //echo sprintf("- cat %s ", $subcatName).PHP_EOL;
+
+                        // one level categories will have a tab with same name as category, so we skip the level
+                        if ($subcatName == $categoryName) {
+                            $subcat = $category;
+                        } else {
+                            $subcat = OpenStackComponentCategory::get()->filter('Name', $subcatName)->first();
+                            if (!$subcat) {
+                                $subcat = new OpenStackComponentCategory();
+                                $subcat->Name = $subcatName;
+                            }
+                            $subcat->Enabled = 1;
+                            $subcat->ParentCategoryID = $category->ID;
+                            $subcat->write();
+                        }
+
+                        foreach($tab['categories'] as $subcategory) {
+                            $subcatName2 = $subcategory['category'];
+                            //echo sprintf("-- cat %s ", $subcatName2).PHP_EOL;
+
+                            $subcat2 = OpenStackComponentCategory::get()->filter('Name', $subcatName2)->first();
+                            if (!$subcat2) {
+                                $subcat2 = new OpenStackComponentCategory();
+                                $subcat2->Name = $subcatName2;
+                            }
+                            $subcat2->Enabled = 1;
+                            $subcat2->ParentCategoryID = $subcat->ID;
+                            $subcat2->write();
+
+                            foreach($subcategory['components'] as $component) {
+                                $compSlug = $component['name'];
+                                //echo sprintf("--- comp %s ", $compSlug).PHP_EOL;
+
+                                $comp = OpenStackComponent::get()->filter('Slug', $compSlug)->first();
+                                if (!$comp) continue;
+
+                                $comp->CategoryID = $subcat2->ID;
+                                $comp->write();
+                            }
+                        }
+                    }
+                }
+            }
+
+        } catch (Exception $ex) {
+            echo $ex->getMessage() . PHP_EOL;
+            SS_Log::log($ex->getMessage(), SS_Log::WARN);
+        }
+
+
+
     }
 
     private function processProjectPerRelease($release)

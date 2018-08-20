@@ -83,11 +83,11 @@ final class SoftwareManager implements ISoftwareManager
     public function getComponentsGroupedByCategory(IOpenStackRelease $release , $term = '', $adoption = 0, $maturity = 0, $age = 0, $sort = '', $sort_dir = '')
     {
         $components     = $release->getOpenStackComponentsFiltered($term, $adoption, $maturity, $age);
-        $categories     = OpenStackComponentCategory::get()->sort('Order');
+        $categories     = OpenStackComponentCategory::get()->filter('Enabled', 1)->sort('Order');
         $subcategories  = new DataList('OpenStackComponentCategory');
 
         foreach ($categories as $category) {
-            $subcategories->addMany($category->SubCategories());
+            $subcategories->addMany($category->getActiveSubCategories());
         }
 
         $component_categories = array_fill_keys($subcategories->column('Name'), array());
@@ -115,7 +115,7 @@ final class SoftwareManager implements ISoftwareManager
     public function getComponentsGroupedByCategoryAndSubcategory(IOpenStackRelease $release , $term = '', $adoption = 0, $maturity = 0, $age = 0, $sort = '', $sort_dir = '')
     {
         $components     = $release->getOpenStackComponentsFiltered($term, $adoption, $maturity, $age);
-        $categories     = OpenStackComponentCategory::getParentCategories()->sort('Order');
+        $categories     = OpenStackComponentCategory::getParentCategories();
         $componentIds   = array_map(function($c) { return $c->ID; }, $components);
 
         $component_categories = OpenStackComponentCategory::getFilteredCategoryMap($categories, $componentIds, $this->serializer);

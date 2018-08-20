@@ -23,7 +23,8 @@ class OpenStackComponentCategory extends DataObject implements IOpenStackCompone
         'Name'              => 'Varchar(255)',
         'Description'       => 'Text',
         'Slug'              => 'Varchar(255)',
-        'Order'             => 'Int'
+        'Order'             => 'Int',
+        'Enabled'           => 'Boolean(1)'
     );
 
     static $has_many = array
@@ -97,7 +98,8 @@ class OpenStackComponentCategory extends DataObject implements IOpenStackCompone
      */
     public function getSubCategories()
     {
-        return AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'SubCategories')->toArray();
+        return AssociationFactory::getInstance()
+            ->getOne2ManyAssociation($this, 'SubCategories')->toArray();
     }
 
     /**
@@ -145,11 +147,20 @@ class OpenStackComponentCategory extends DataObject implements IOpenStackCompone
     /**
      * @return DataList
      */
+    public function getActiveSubCategories()
+    {
+        return $this->SubCategories()->filter('Enabled', 1)->sort('Order');
+    }
+
+    /**
+     * @return DataList
+     */
     public function getSiblings()
     {
         if ($this->ParentCategoryID != 0) {
             $siblings =  OpenStackComponentCategory::get()
-                ->filter('ParentCategoryID', $this->ParentCategoryID);
+                ->filter(['Enabled' => 1, 'ParentCategoryID' => $this->ParentCategoryID])
+                ->sort('Order');
 
             if ($this->ID) {
                 $siblings = $siblings->exclude('ID', $this->ID);
@@ -168,10 +179,10 @@ class OpenStackComponentCategory extends DataObject implements IOpenStackCompone
             $components = [];
             $subcategories = [];
 
-            if ($category->SubCategories()->count() > 0) {
-                $subcategories = OpenStackComponentCategory::getFilteredCategoryMap($category->SubCategories(), $componentIds, $serializer);
+            if ($category->getActiveSubCategories()->count() > 0) {
+                $subcategories = OpenStackComponentCategory::getFilteredCategoryMap($category->getActiveSubCategories(), $componentIds, $serializer);
             } else if ($category->OpenStackComponents()->count() > 0) {
-                foreach ($category->OpenStackComponents()->filter('ID', $componentIds) as $component) {
+                foreach ($category->OpenStackComponents()->filter('ID', $componentIds)->sort('Order') as $component) {
                     $components[] = $serializer->serialize($component);
                 }
             }
@@ -181,20 +192,17 @@ class OpenStackComponentCategory extends DataObject implements IOpenStackCompone
                 continue;
             }
 
-            $map[$category->ID] = [];
-            $map[$category->ID]['category'] = $category->toMap();
+            $catKey = $category->Slug;
+            $map[$catKey] = [];
+            $map[$catKey]['category'] = $category->toMap();
 
             if (count($components)) {
-                $map[$category->ID]['components'] = $components;
+                $map[$catKey]['components'] = $components;
             }
 
-            $depth = 1;
             if (count($subcategories)) {
-                $map[$category->ID]['subcategories'] = $subcategories;
-                $depth = array_values($subcategories)[0]['depth'] + 1;
+                $map[$catKey]['subcategories'] = $subcategories;
             }
-
-            $map[$category->ID]['depth'] = $depth;
         }
 
         return $map;
@@ -209,7 +217,7 @@ class OpenStackComponentCategory extends DataObject implements IOpenStackCompone
     }
 
     public static function getParentCategories() {
-        return OpenStackComponentCategory::get()->filter('ParentCategoryID', 0);
+        return OpenStackComponentCategory::get()->filter(['ParentCategoryID' => 0, 'Enabled' => 1])->sort('Order');
     }
 
 }

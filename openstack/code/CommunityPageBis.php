@@ -72,7 +72,7 @@ class CommunityPageBis_Controller extends Page_Controller
     }
 
     function getCategoriesWithComponents() {
-        $categories     = OpenStackComponentCategory::get();
+        $categories     = OpenStackComponentCategory::get()->filter('Enabled', 1)->sort('Order');
         $parentCatIds   = [];
 
         foreach($categories as $category) {

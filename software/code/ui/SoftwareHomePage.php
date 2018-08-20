@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+
 class SoftwareHomePage extends Page
 {
     static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');
@@ -162,11 +163,12 @@ class SoftwareHomePage_Controller extends Page_Controller
         if(is_null($category)) return $this->httpError(404);
 
         $categoryId     = $category->ID;
+        $categorySlug   = $category->Slug;
 
         $depth = 1;
-        while($category->SubCategories()->count()) {
+        while($category->getActiveSubCategories()->count()) {
             $depth++;
-            $category = $category->SubCategories()->first();
+            $category = $category->getActiveSubCategories()->first();
         }
 
         Requirements::css("themes/openstack/javascript/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css");
@@ -175,6 +177,7 @@ class SoftwareHomePage_Controller extends Page_Controller
         return $this->render(array
             (
                 'CategoryId'    => $categoryId,
+                'CategorySlug'  => $categorySlug,
                 'CategoryDepth' => $depth
             )
         );
@@ -327,11 +330,11 @@ class SoftwareHomePage_Controller extends Page_Controller
         );
     }
 
-    public function getComponentsByCategoryJSON($categoryId)
+    public function getComponentsByCategoryJSON($categoryKey)
     {
         $components = $this->manager->getComponentsGroupedByCategoryAndSubcategory($this->getDefaultRelease());
 
-        return (isset($components[$categoryId])) ? json_encode($components[$categoryId]) : '';
+        return (isset($components[$categoryKey])) ? json_encode($components[$categoryKey]) : 0;
     }
 
     public function getComponentCategories()
@@ -378,6 +381,6 @@ class SoftwareHomePage_Controller extends Page_Controller
     }
 
     public function getParentComponentCategories() {
-        return OpenStackComponentCategory::get()->filter('ParentCategoryID', 0)->sort('Order');
+        return OpenStackComponentCategory::get()->filter(['ParentCategoryID' => 0, 'Enabled' => 1])->sort('Order');
     }
 }

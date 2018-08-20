@@ -15,7 +15,7 @@
 
     <script>
 
-        this.categories = Object.keys(opts.groups).map(catId => opts.groups[catId].category);
+        this.categories = Object.keys(opts.groups).map(key => opts.groups[key].category);
         this.ctrl       = riot.observable();
         this.api        = opts.api;
         this.default    = this.categories[0].ID;
@@ -39,7 +39,7 @@
             $('#category_'+ id).parent().addClass('active');
             window.location.hash = slug;
             // change view
-            self.api.trigger('change-category', id)
+            self.api.trigger('change-category', slug)
         }
 
         handleDeepLink() {

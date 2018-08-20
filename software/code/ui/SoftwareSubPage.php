@@ -58,7 +58,7 @@ class SoftwareSubPage_Controller extends Page_Controller
     }
 
     public function getParentComponentCategories() {
-        return OpenStackComponentCategory::get()->filter('ParentCategoryID', 0)->sort('Order');
+        return OpenStackComponentCategory::get()->filter(['ParentCategoryID' => 0, 'Enabled' => 1])->sort('Order');
     }
 
     public function getCurrentIdx($pos)

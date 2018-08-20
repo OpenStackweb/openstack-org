@@ -450,7 +450,7 @@ class OpenStackRelease
     {
         $query = $this->OpenStackComponents();
 
-        $query = $query->where(" Adoption >= {$adoption} AND  MaturityPoints >= {$maturity}");
+        $query = $query->where(" Adoption >= {$adoption} AND MaturityPoints >= {$maturity}");
 
         if(!empty($term))
         {
