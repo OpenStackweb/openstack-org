@@ -72,3 +72,11 @@ th .fa {
     position: relative;
     margin-left: 10px;
 }
+
+.tag_item {
+    cursor: pointer;
+}
+
+.tag_item:hover {
+    background-color: whitesmoke;
+}

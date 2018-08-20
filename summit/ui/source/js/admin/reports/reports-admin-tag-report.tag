@@ -5,7 +5,7 @@
 
 <reports-admin-tag-report>
 
-    <div class="panel panel-default">
+    <div class="panel panel-default" if={ tags.length > 0 }>
         <div class="panel-heading">Tags ({ page_data.total })</div>
 
         <table class="table">
@@ -16,13 +16,37 @@
                 </tr>
             </thead>
             <tbody>
-                <tr each={ tag, i in tags }>
+                <tr class="tag_item" each={ tag, i in tags } onclick={ tagClick }>
                     <td>{ tag.tag }</td>
                     <td>{ tag.tag_count }</td>
                 </tr>
             </tbody>
         </table>
     </div>
+
+    <div class="panel panel-default" if={ events.length > 0 }>
+            <div class="panel-heading">Events ({ page_data.total })</div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Event ID</th>
+                        <th class="sortable" data-sort="event" data-dir="ASC">Event</th>
+                        <th>Attending Media</th>
+                        <th>Speakers</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr each={ e, i in events }>
+                        <td>{ e.id }</td>
+                        <td>{ e.title }</td>
+                        <td>{ e.attending_media }</td>
+                        <td>{ e.speakers }</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
     <nav>
     <ul id="report-pager" class="pagination"></ul>
     </nav>
@@ -32,6 +56,7 @@
         this.page_data       = {total: 100, limit: opts.page_limit, page: 1};
         this.summit_id       = opts.summit_id;
         this.tags            = [];
+        this.events          = [];
         var self             = this;
 
 
@@ -55,7 +80,8 @@
             $.getJSON('api/v1/summits/'+self.summit_id+'/reports/tag_report',
                 {page:page, items: self.page_data.limit, sort: sort, sort_dir: sort_dir, term: term, published: published},
                 function(data){
-                    self.tags = data.data;
+                    self.tags = data.tags ? data.tags : [];
+                    self.events = data.events ? data.events : [];
                     self.page_data.page = page;
                     self.page_data.total = parseInt(data.total);
 
@@ -77,12 +103,18 @@
             });
         }
 
+        tagClick(ev) {
+            $('#search-term').val('tagID:'+ev.item.tag.id);
+            console.log(ev.item);
+            self.getReport(1);
+        }
+
         self.dispatcher.on(self.dispatcher.GET_TAG_REPORT,function() {
             self.getReport(1);
         });
 
         self.dispatcher.on(self.dispatcher.EXPORT_TAG_REPORT,function() {
-            var sort     = ($('.sorted').length) ? $('.sorted').data('sort') : 'tag';
+            var sort     = ($('.sorted').length) ? $('.sorted').data('sort') : '';
             var sort_dir = ($('.sorted').length) ? $('.sorted').data('dir') : 'ASC';
             var term = $('#search-term').val();
             var published = $('#show-published').prop('checked');

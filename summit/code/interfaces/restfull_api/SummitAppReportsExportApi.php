@@ -662,10 +662,15 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
         try
         {
             $query_string = $request->getVars();
-            $sort         = (isset($query_string['sort'])) ? Convert::raw2sql($query_string['sort']) : 'tag';
+            $sort         = (isset($query_string['sort'])) ? Convert::raw2sql($query_string['sort']) : '';
             $sort_dir     = (isset($query_string['sort_dir'])) ? Convert::raw2sql($query_string['sort_dir']) : 'DESC';
             $search_term  = (isset($query_string['term'])) ? Convert::raw2sql($query_string['term']) : '';
             $published    = (isset($query_string['published'])) ? Convert::raw2sql($query_string['published']) == 'true' : 0;
+            $tag_id       = 0;
+
+            if (strpos($search_term, 'tagID:') === 0) {
+                $tag_id = intval(substr($search_term, 6));
+            }
 
             $summit_id    = intval($request->param('SUMMIT_ID'));
             $summit       = $this->summit_repository->getById($summit_id);
@@ -674,10 +679,16 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
 
             $filename = "tag_report_". date('Ymd') . "." . $ext;
 
-            $tags = $this->tag_repository->searchAllPaged($summit_id,null,null,$sort,$sort_dir,$search_term, $published);
+            if ($tag_id) {
+                $data = $this->tag_repository->getEventsByTag($summit_id,null, null,$sort,$sort_dir,$published,$tag_id);
+                $items = $data['events'];
+            } else {
+                $data = $this->tag_repository->searchAllPaged($summit_id,null, null,$sort,$sort_dir,$search_term,$published);
+                $items = $data['tags'];
+            }
 
             $delimiter = ($ext == 'xls') ? "\t" : ",";
-            return CSVExporter::getInstance()->export($filename, $tags['data'], $delimiter);
+            return CSVExporter::getInstance()->export($filename, $items, $delimiter);
         }
         catch(NotFoundEntityException $ex2)
         {

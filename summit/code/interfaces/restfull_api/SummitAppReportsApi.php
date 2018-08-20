@@ -690,18 +690,28 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
             $query_string = $request->getVars();
             $page         = (isset($query_string['page'])) ? Convert::raw2sql($query_string['page']) : '';
             $page_size    = (isset($query_string['items'])) ? Convert::raw2sql($query_string['items']) : '';
-            $sort         = (isset($query_string['sort'])) ? Convert::raw2sql($query_string['sort']) : 'tag';
+            $sort         = (isset($query_string['sort'])) ? Convert::raw2sql($query_string['sort']) : '';
             $sort_dir     = (isset($query_string['sort_dir'])) ? Convert::raw2sql($query_string['sort_dir']) : 'ASC';
             $search_term  = (isset($query_string['term'])) ? Convert::raw2sql($query_string['term']) : '';
             $published    = (isset($query_string['published'])) ? Convert::raw2sql($query_string['published']) == 'true' : 0;
+            $tag_id       = 0;
+
+            if (strpos($search_term, 'tagID:') === 0) {
+                $tag_id = intval(substr($search_term, 6));
+            }
 
             $summit_id    = intval($request->param('SUMMIT_ID'));
             $summit       = $this->summit_repository->getById($summit_id);
             if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
 
-            $tags = $this->tag_repository->searchAllPaged($summit_id,$page,$page_size,$sort,$sort_dir,$search_term,$published);
+            if ($tag_id) {
+                $events = $this->tag_repository->getEventsByTag($summit_id,$page,$page_size,$sort,$sort_dir,$published,$tag_id);
+                return $this->ok($events);
+            } else {
+                $tags = $this->tag_repository->searchAllPaged($summit_id,$page,$page_size,$sort,$sort_dir,$search_term,$published);
+                return $this->ok($tags);
+            }
 
-            return $this->ok($tags);
         }
         catch(NotFoundEntityException $ex2)
         {

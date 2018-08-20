@@ -59,6 +59,8 @@ SQL;
      */
     public function searchAllPaged($summit_id,$page,$page_size,$sort,$sort_dir,$search_term, $published)
     {
+        $sort = $sort ? $sort : 'tag';
+
         $query_body = <<<SQL
             FROM Tag 
             INNER JOIN SummitEvent_Tags AS ET ON ET.TagID = Tag.ID
@@ -82,6 +84,7 @@ SQL;
         $query = <<<SQL
         SELECT
         Tag.Tag AS tag,
+        Tag.ID AS id,
         COUNT(ET.ID) AS tag_count
 SQL;
 
@@ -100,7 +103,67 @@ SQL;
 
         $total = DB::query($query_count)->value();
 
-        $result = array('total' => $total, 'data' => $data);
+        $result = array('total' => $total, 'tags' => $data);
+        return $result;
+    }
+
+
+    /**
+     * @param int $summit_id
+     * @param int $page
+     * @param int $page_size
+     * @param string $sort
+     * @param string $sort_dir
+     * @param bool $published
+     * @param string $tag_id
+     * @return ISummitEvent[]
+     */
+    public function getEventsByTag($summit_id,$page,$page_size,$sort,$sort_dir,$published, $tag_id)
+    {
+        $sort = $sort ? $sort : 'E.ID';
+
+        $query_body = <<<SQL
+            FROM SummitEvent E 
+            INNER JOIN SummitEvent_Tags AS ET ON ET.SummitEventID = E.ID
+            INNER JOIN Presentation_Speakers AS PS ON PS.PresentationID = E.ID
+            INNER JOIN PresentationSpeaker AS S ON S.ID = PS.PresentationSpeakerID
+            INNER JOIN Presentation AS P ON P.ID = E.ID
+SQL;
+
+        $query_where = <<<SQL
+            WHERE E.SummitID = {$summit_id} AND ET.TagID = {$tag_id}
+SQL;
+
+        if ($published) {
+            $query_where .= " AND (E.Published = 1)";
+        }
+
+        $query_count = "SELECT COUNT(*) FROM (SELECT E.ID ";
+
+        $query = <<<SQL
+        SELECT
+        E.ID AS id,
+        E.Title AS title,
+        P.AttendingMedia AS attending_media,
+        GROUP_CONCAT(DISTINCT CONCAT(S.FirstName,' ',S.LastName) SEPARATOR ', ') AS speakers
+SQL;
+
+        $query .= $query_body . $query_where . " GROUP BY E.ID ORDER BY {$sort} {$sort_dir}";
+        $query_count .= $query_body . $query_where . " GROUP BY E.ID ) AS Q1";
+
+        if ($page && $page_size) {
+            $offset = ($page - 1 ) * $page_size;
+            $query .= " LIMIT {$offset}, {$page_size}";
+        }
+
+        $data = array();
+        foreach (DB::query($query) as $row) {
+            $data[] = $row;
+        }
+
+        $total = DB::query($query_count)->value();
+
+        $result = array('total' => $total, 'events' => $data);
         return $result;
     }
 }
