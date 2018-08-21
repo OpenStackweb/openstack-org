@@ -1195,6 +1195,7 @@ SQL;
         $deployment_filter = $this->generateFilters('EntitySurveyTemplate', 'S');
         $survey_filter = $this->generateFilters('SurveyTemplate', 'REPORT', 'SurveyID');
 
+        if (!$template) die('Please select a template');
 
         $data = $this->owner->getSurveyBuilderExportData($template->ParentID, $survey_filter, $deployment_filter);
         $filename = "Survey_" . $fileDate . ".csv";
