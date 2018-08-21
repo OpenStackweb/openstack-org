@@ -4,8 +4,8 @@
 VAGRANTFILE_API_VERSION = "2"
 
 #configuration constants
-MYSQL_SERVICE_PROVIDER = ENV["MYSQL_SERVICE_PROVIDER"] || "upstart"
-USE_SWAP               = ENV["USE_SWAP"] || 1
+MYSQL_SERVICE_PROVIDER = ENV["MYSQL_SERVICE_PROVIDER"] || "init"
+USE_SWAP               = ENV["USE_SWAP"] || 0
 SERVER_NAME            = ENV["SERVER_NAME"] || "local.openstack.org"
 
 required_plugins = %w( vagrant-vbguest vagrant-hosts vagrant-hostsupdater )
