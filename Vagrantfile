@@ -38,7 +38,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # virtualbox provider
   config.vm.provider "virtualbox" do |vb, override|
-     vb.memory           = "2048"
+     vb.memory           = "4096"
      vb.name             = SERVER_NAME
 	 vb.cpus             = 1
 	 override.vm.box     = "ubuntu/trusty64"
