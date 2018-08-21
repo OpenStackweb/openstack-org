@@ -330,6 +330,7 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                             }
                             $subcat2->Enabled = 1;
                             $subcat2->ParentCategoryID = $subcat->ID;
+                            $subcat2->OpenStackComponents()->removeAll();
                             $subcat2->write();
 
                             foreach($subcategory['components'] as $component) {
