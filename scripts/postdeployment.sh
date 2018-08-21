@@ -15,14 +15,10 @@
 # limitations under the License.
 # install virtual env for python
 sudo pip install virtualenv;
-# install node js 5.x
-# https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions
-curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -;
+# https://github.com/OpenStackweb/openstack-org/blob/master/scripts/postdeployment.sh
+curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 sudo apt-get install -y nodejs;
-sudo npm cache clean;
-
-echo “installing webpack globally …”;
-npm install -g webpack;
+sudo npm install -g npm;
 
 # update php.ini settings
 upload_max_filesize=240M

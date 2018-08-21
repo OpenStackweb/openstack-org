@@ -1,5 +1,6 @@
 #!/usr/bin/ruby
 # @Author: Dev_NIX
+# https://raw.githubusercontent.com/DevNIX/Vagrant-dependency-manager/master/dependency_manager.rb
 
 require 'getoptlong'
 
@@ -21,13 +22,13 @@ def check_plugins(dependencies)
 		raw_output = `vagrant plugin list`
 		raw_list = raw_output.split("\n")
 
-		raw_list.each do |plugin|
+		raw_list.each do |plugin| 
 			if plugin.index("\e[0m") != nil
 				first = plugin.index("\e[0m")  + 4
 			else
 				first = 0
 			end
-			installed_dependencies.push plugin.slice((first)..(plugin.index("(")-1)).strip
+			installed_dependencies.push plugin.slice((first)..(plugin.index("(").to_i-1)).strip
 		end
 
 		dependencies_already_satisfied = true

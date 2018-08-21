@@ -255,34 +255,6 @@ file { '/etc/nginx/sites-enabled/www.openstack.org':
   require   => File['/etc/nginx/sites-available/www.openstack.org'],
 }
 
-cron { 'RssEventsDigestTask':
-    ensure  => 'present',
-    command => 'php /var/www/www.openstack.org/framework/cli-script.php /RssEventsDigestTask',
-    user => 'root', 
-    minute => '*/5', 
-}
-
-cron { 'RssNewsDigestTask':
-    ensure  => 'present',
-    command => 'php /var/www/www.openstack.org/framework/cli-script.php /RssNewsDigestTask',
-    user => 'root', 
-    minute => '*/5', 
-}
-
-cron { 'NewsArticlesUpdateTask':
-    ensure  => 'present',
-    command => 'php /var/www/www.openstack.org/framework/cli-script.php /NewsArticlesUpdateTask',
-    user => 'root', 
-    minute => '*/5', 
-}
-
-cron { 'UpdateFeedTask':
-    ensure  => 'present',
-    command => 'php /var/www/www.openstack.org/framework/cli-script.php /UpdateFeedTask',
-    user => 'root', 
-    minute => '*/5', 
-}
-
 #fact
 if $use_swap == 1 {
   swap_file::files { 'default':
