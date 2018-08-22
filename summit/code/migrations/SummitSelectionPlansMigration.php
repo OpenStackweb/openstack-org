@@ -21,12 +21,13 @@ final class SummitSelectionPlansMigration extends AbstractDBMigrationTask
     function doUp()
     {
         global $database;
-
-
         $res = DB::query("SELECT * FROM PresentationCategoryGroup;");
+        $summit = null;
 
         foreach($res as $row) {
+            $prevSummit = $summit;
             $summit = Summit::get()->byID($row['SummitID']);
+            $firstSelPlan = !$prevSummit || $prevSummit->ID != $summit->ID;
             $summit_row = DB::query("SELECT * FROM Summit WHERE ID = ".$summit->ID)->first();
             $cat_group = PresentationCategoryGroup::get()->byID($row['ID']);
 
@@ -34,32 +35,38 @@ final class SummitSelectionPlansMigration extends AbstractDBMigrationTask
                 $plan = $summit->SelectionPlans()->First();
                 if ( !$plan ) {
                     $plan = new SelectionPlan();
-                    $plan->SummitID = $summit->ID;
-                    $plan->Name = 'Selection Plan 1';
-                    $plan->SubmissionBeginDate = $summit_row['SubmissionBeginDate'];
-                    $plan->SubmissionEndDate = $summit_row['SubmissionEndDate'];
-                    $plan->VotingBeginDate = $summit_row['VotingBeginDate'];
-                    $plan->VotingEndDate = $summit_row['VotingEndDate'];
-                    $plan->SelectionBeginDate = $summit_row['SelectionBeginDate'];
-                    $plan->SelectionEndDate = $summit_row['SelectionEndDate'];
+                    $plan->SummitID             = $summit->ID;
+                    $plan->Name                 = 'Selection Plan 1';
+                    $plan->SubmissionBeginDate  = $summit_row['SubmissionBeginDate'];
+                    $plan->SubmissionEndDate    = $summit_row['SubmissionEndDate'];
+                    $plan->VotingBeginDate      = $summit_row['VotingBeginDate'];
+                    $plan->VotingEndDate        = $summit_row['VotingEndDate'];
+                    $plan->SelectionBeginDate   = $summit_row['SelectionBeginDate'];
+                    $plan->SelectionEndDate     = $summit_row['SelectionEndDate'];
                     $plan->write();
                 }
             } else {
-                $plan = new SelectionPlan();
-                $plan->SummitID = $summit->ID;
-                $plan->Name = $cat_group->Name;
-                $plan->SubmissionBeginDate = $summit_row['SubmissionBeginDate'];
-                $plan->SubmissionEndDate = $summit_row['SubmissionEndDate'];
-                $plan->VotingBeginDate = $summit_row['VotingBeginDate'];
-                $plan->VotingEndDate = $summit_row['VotingEndDate'];
-                $plan->SelectionBeginDate = $summit_row['SelectionBeginDate'];
-                $plan->SelectionEndDate = $summit_row['SelectionEndDate'];
-
-                if ($plan->validate()) {
-                    $plan->Enabled = false;
+                if (!$plan = $summit->SelectionPlans()->filter('Name', $cat_group->Name)->first()) {
+                    $plan = new SelectionPlan();
+                    $plan->SummitID             = $summit->ID;
+                    $plan->Name                 = $cat_group->Name;
+                    $plan->SubmissionBeginDate  = $summit_row['SubmissionBeginDate'];
+                    $plan->SubmissionEndDate    = $summit_row['SubmissionEndDate'];
+                    $plan->VotingBeginDate      = $summit_row['VotingBeginDate'];
+                    $plan->VotingEndDate        = $summit_row['VotingEndDate'];
+                    $plan->SelectionBeginDate   = $summit_row['SelectionBeginDate'];
+                    $plan->SelectionEndDate     = $summit_row['SelectionEndDate'];
+                    $plan->Enabled              = false;
+                    $plan->write();
                 }
 
-                $plan->write();
+                if ($firstSelPlan) {
+                    DB::query(
+                        "UPDATE Presentation P
+                             SET P.SelectionPlanID = {$plan->ID} 
+                             WHERE EXISTS (SELECT * FROM SummitEvent SE WHERE SE.ID = P.ID AND SE.SummitID = {$summit->ID})"
+                    );
+                }
             }
 
             $plan->CategoryGroups()->add($cat_group);
