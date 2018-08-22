@@ -589,6 +589,10 @@ SQL;
     public function searchByCompanyPaged($summit_id,$page,$page_size,$sort,$sort_dir,$search_term)
     {
         $status_received = Presentation::STATUS_RECEIVED;
+        $summit = Summit::get()->byID($summit_id);
+        $schedule_page = SummitAppSchedPage::getBy($summit);
+        $scheduleLink = $schedule_page->getAbsoluteLiveLink(false);
+
         $query_body = <<<SQL
             FROM SummitEvent AS E
             INNER JOIN Presentation AS P ON E.ID = P.ID
@@ -623,7 +627,7 @@ SQL;
         $query = <<<SQL
         SELECT
         P.ID AS presentation_id,
-        CONCAT('https://www.openstack.org/summit/barcelona-2016/summit-schedule/events/',P.ID,'/') AS url ,
+        CONCAT('{$scheduleLink}','events/',P.ID,'/') AS url ,
         E.Title AS title,
         E.Abstract AS description,
         PC.Title AS track,

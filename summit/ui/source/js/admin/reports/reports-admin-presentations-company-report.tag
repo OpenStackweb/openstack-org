@@ -23,7 +23,7 @@
             </thead>
             <tbody>
                 <tr each={ presentation, i in presentations }>
-                    <td>{ presentation.url }</td>
+                    <td><a href="{ presentation.url }">link</a></td>
                     <td>{ presentation.title }</td>
                     <td style="width: 40%;">
                         <raw content="{ presentation.description }"/>
