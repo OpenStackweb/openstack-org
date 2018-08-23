@@ -28,7 +28,8 @@ class SummitAboutPage extends SummitPage {
                 'PageSectionSpeakers'   => 'Speakers' ,
                 'PageSectionSponsors'   => 'Sponsors' ,
                 'PageSectionVideos'     => 'Videos' ,
-                'PageSectionMovement'   => 'Join Movement'
+                'PageSectionMovement'   => 'Join Movement',
+                'PageSectionBoxes'      => 'Boxes'
             )
         );
 

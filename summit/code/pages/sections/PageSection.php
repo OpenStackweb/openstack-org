@@ -34,6 +34,7 @@ class PageSection extends DataObject {
     static $summary_fields = array(
         'Name'  => 'Name',
         'Title' => 'Title',
+        'ClassName' => 'Class',
         'Enabled' => 'Enabled'
     );
 
