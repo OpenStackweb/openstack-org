@@ -115,9 +115,8 @@ class AffiliationController extends Page_Controller
     {
         $params = $request->allParams();
 
-        if ($CurrentMember = Member::currentUser() && isset($params["ID"]) && is_int($params["ID"])) {
-            $affilliation_id = $params["ID"];
-            $affilliation_id = Convert::raw2sql($affilliation_id);
+        if ($CurrentMember = Member::currentUser() && isset($params["ID"]) && is_numeric($params["ID"])) {
+            $affilliation_id = Convert::raw2sql($params["ID"]);
 
             $results = DB::query("SELECT A.ID,A.StartDate,A.EndDate,A.JobTitle,A.Role,A.Current,O.Name AS OrgName
                                   FROM Affiliation A
@@ -138,6 +137,7 @@ class AffiliationController extends Page_Controller
                 exit();
             }
         }
+
         echo json_encode('ERROR');
     }
 

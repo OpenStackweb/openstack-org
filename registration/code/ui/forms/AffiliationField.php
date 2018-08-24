@@ -31,6 +31,7 @@ class AffiliationField extends FormField
 
     public function FieldHolder($attributes = array ()) {
         Requirements::css(THIRDPARTY_DIR . '/jquery-ui-themes/smoothness/jquery-ui.css');
+        Requirements::css('node_modules/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
         Requirements::javascript(THIRDPARTY_DIR . '/jquery-ui/jquery-ui.js');
         Requirements::css("registration/css/affiliations.css");
         JSChosenDependencies::renderRequirements();
