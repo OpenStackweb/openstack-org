@@ -8,6 +8,8 @@ leveraging-containers-openstack:
         lang_zanata: ko-KR
       - lang_local: de_DE
         lang_zanata: de
+      - lang_local: id_ID
+        lang_zanata: id
 edge-computing:
   id: 2
   version_id: pot-translation
@@ -19,3 +21,5 @@ edge-computing:
         lang_zanata: ko-KR
       - lang_local: de_DE
         lang_zanata: de
+      - lang_local: id_ID
+        lang_zanata: id
