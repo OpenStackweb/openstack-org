@@ -38,15 +38,17 @@
         <% loop $OpenStackComponents() %>
             <div class="col-md-4 col-sm-6">
                 <a class="project-button btn btn-success" href="https://docs.openstack.org/{$Slug}" >
-                    <div class="col-md-2 col-sm-2 col-xs-2">
-                        <img src="$Top.MascotImage($Slug)" />
-                    </div>
-                    <div class="col-md-8 col-sm-8 col-xs-8">
-                        <span class="code-name"> $CodeName </span><br>
-                        <span class="name"> $Name </span>
-                    </div>
-                    <div class="col-md-2 col-sm-2 col-xs-2">
-                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <img src="$Top.MascotImage($Slug)" />
+                        </div>
+                        <div class="col-xs-7">
+                            <span class="code-name"> $CodeName </span><br>
+                            <span class="name"> $Name </span>
+                        </div>
+                        <div class="col-xs-2">
+                            <i class="fa fa-angle-right" aria-hidden="true"></i>
+                        </div>
                     </div>
                 </a>
             </div>
