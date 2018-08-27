@@ -53,7 +53,7 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
             $releases = OpenStackRelease::get()->where(" Name <> 'Trunk' ")->sort('ReleaseDate', 'DESC');
             DB::query('DELETE FROM OpenStackComponentReleaseCaveat;');
             $this->processProjects();
-            $this->processCategories();
+            //$this->processCategories();
             foreach($releases as $release)
             {
                 echo sprintf('processing release %s ...', $release->Name).PHP_EOL;
