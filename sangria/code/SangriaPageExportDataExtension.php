@@ -1184,7 +1184,7 @@ SQL;
 
         $contributors = ReleaseCycleContributor::get();
 
-        if ($releaseIds) {
+        if ($releaseIds && $releaseIds != 'null') {
             $contributors = $contributors->where("ReleaseID IN ({$releaseIds})");
         }
 
