@@ -88,7 +88,7 @@ class VideoDetail extends React.Component {
                                     </RouterLink>
                                 </div>
                                 }
-                                {video.tags.length > 0 &&
+                                {video.tags && video.tags.length > 0 &&
                                 <div className="detail-panel-section">
                                     <h5 className="section-title">Tags</h5>
                                     {video.tags && video.tags.map(tag => (
