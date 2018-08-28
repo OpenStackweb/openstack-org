@@ -51,7 +51,37 @@ class OpenStackComponentCategory extends DataObject implements IOpenStackCompone
         $slug = preg_replace("/[\s-]+/", " ", $slug);
         $slug = preg_replace("/[\s_]/", "-", $slug);
 
+        $checkSlug = $slug;
+        $counter = 0;
+        while($slugExists = OpenStackComponentCategory::get()->filter('Slug', $checkSlug)->count()) {
+            $counter++;
+            $checkSlug = $slug . '-' . $counter;
+        }
+
+        if($checkSlug) {
+            $slug = $checkSlug;
+        }
+
         $this->Slug = $slug;
+
+        // if removed from a collection of subcategories we disable the category
+        if (!$this->ParentCategoryID && $this->isChanged('ParentCategoryID')) {
+            $this->Enabled = 0;
+        }
+    }
+
+    protected function validate() {
+        $valid = parent::validate();
+        if(!$valid->valid()) return $valid;
+
+        $parentIds = $this->getAllParentIds();
+
+        // DO NOT ALLOW A CLOSED LOOP
+        if (in_array($this->ID, $parentIds)) {
+            return $valid->error('Loop relation! Category belongs to the same category');
+        }
+
+        return $valid;
     }
 
     /**
@@ -213,6 +243,32 @@ class OpenStackComponentCategory extends DataObject implements IOpenStackCompone
             return $this->ParentCategory()->getParentCategory();
         } else {
             return $this;
+        }
+    }
+
+    public function getAllParentIds() {
+        $ids = [];
+        $parentCat = $this->ParentCategory();
+
+        while($parentCat->Exists()) {
+            $ids[] = $parentCat->ID;
+            $parentCat = $parentCat->ParentCategory();
+        }
+
+        return $ids;
+    }
+
+    public function getDepth() {
+        $subCats = $this->getActiveSubCategories();
+
+        if ($subCats->count() > 0) {
+            $maxDepth = 0;
+            foreach ($subCats as $subCat) {
+                $maxDepth = max($maxDepth, $subCat->getDepth());
+            }
+            return $maxDepth + 1;
+        } else {
+            return 1;
         }
     }
 

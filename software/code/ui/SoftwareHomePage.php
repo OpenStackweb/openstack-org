@@ -162,23 +162,14 @@ class SoftwareHomePage_Controller extends Page_Controller
 
         if(is_null($category)) return $this->httpError(404);
 
-        $categoryId     = $category->ID;
-        $categorySlug   = $category->Slug;
-
-        $depth = 1;
-        while($category->getActiveSubCategories()->count()) {
-            $depth++;
-            $category = $category->getActiveSubCategories()->first();
-        }
-
         Requirements::css("themes/openstack/javascript/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css");
         Requirements::javascript("themes/openstack/javascript/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js");
 
         return $this->render(array
             (
-                'CategoryId'    => $categoryId,
-                'CategorySlug'  => $categorySlug,
-                'CategoryDepth' => $depth
+                'CategoryId'    => $category->ID,
+                'CategorySlug'  => $category->Slug,
+                'CategoryDepth' => $category->getDepth()
             )
         );
     }

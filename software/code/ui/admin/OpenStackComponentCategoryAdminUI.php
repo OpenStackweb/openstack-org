@@ -39,6 +39,11 @@ final class OpenStackComponentCategoryAdminUI extends DataExtension
         if($this->owner->ID) {
             $config = new GridFieldConfig_RelationEditor();
             $config->addComponent(new GridFieldSortableRows('Order'));
+
+            $excludeIds = array_merge([$this->owner->ID], $this->owner->getAllParentIds());
+            $sub_cat_options = OpenStackComponentCategory::get()->exclude('ID', $excludeIds);
+            $config->getComponentByType('GridFieldAddExistingAutocompleter')->setSearchList($sub_cat_options);
+
             $sub_categories = new GridField("SubCategories", "Sub-Categories", $this->owner->SubCategories(), $config);
             $fields->push($sub_categories);
 

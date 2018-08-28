@@ -53,10 +53,6 @@
             }
         }
 
-        getSlug(category_name) {
-            return category_name.replace(/[^\w\s]/g,'').replace(/\s+/g, '-').toLowerCase();
-        }
-
         opts.api.on('loaded-components-by-release',function(data) {
             self.categories = Object.keys(data).map(catId => data[catId].category);
             self.update();

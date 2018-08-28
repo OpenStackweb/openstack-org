@@ -47,7 +47,7 @@ class SoftwareModelAdmin extends ModelAdmin
 
         if($this->modelClass === 'OpenstackComponentCategory') {
             $gridField = $form->Fields()->fieldByName($this->sanitiseClassName($this->modelClass));
-            $gridField->setList(OpenStackComponentCategory::getParentCategories());
+            $gridField->setList(OpenStackComponentCategory::get()->filter(['ParentCategoryID' => 0])->sort('Order'));
             $config = $gridField->getConfig();
             $config->addComponent(new GridFieldSortableRows('Order'));
         }
