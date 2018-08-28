@@ -1,0 +1,1259 @@
+/* fonts */
+
+@import url("//hello.myfonts.net/count/376f4a");
+
+@font-face {
+    font-family: 'GoldanaScript';
+    src: url("../fonts/goldana/376F4A_0_0.eot");
+    src: url("../fonts/goldana/376F4A_0_0.eot?#iefix") format("embedded-opentype"), url("../fonts/goldana/376F4A_0_0.woff2") format("woff2"), url("../fonts/goldana/376F4A_0_0.woff") format("woff"), url("../fonts/goldana/376F4A_0_0.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: 'GoldanaInline';
+    src: url("../fonts/goldana/376F4A_1_0.eot");
+    src: url("../fonts/goldana/376F4A_1_0.eot?#iefix") format("embedded-opentype"), url("../fonts/goldana/376F4A_1_0.woff2") format("woff2"), url("../fonts/goldana/376F4A_1_0.woff") format("woff"), url("../fonts/goldana/376F4A_1_0.ttf") format("truetype");
+}
+
+.script {
+    font-family: "GoldanaScript";
+}
+
+.inline {
+    font-family: "GoldanaInline";
+}
+
+/*some general rules */
+
+button.btn, a.btn {
+    border-radius: 0.1em;
+}
+
+button.btn i, a.btn i {
+    margin-top: 0.2em;
+}
+
+.main-body .title-section {
+    font-weight: bold;
+    margin-bottom: 1em;
+    text-align: left;
+}
+
+.summit-hero-landing {
+    background: url("../images/berlin.jpg") center no-repeat;
+    height: 80vh;
+    display: block;
+    background-size: cover;
+    position: relative;
+}
+
+.summit-hero-landing .navbar {
+    background: transparent;
+    width: 100%;
+    display: inline-block;
+    padding: 1em;
+}
+
+.summit-hero-landing .logo-box {
+    display: inline-block;
+    float: left;
+    margin: 2em 1em 1em 1em;
+}
+
+.summit-hero-landing .navbar .link.button-box {
+    position: absolute;
+    right: 1em;
+}
+
+.summit-hero-landing .summit-hero-logo {
+    background: url("../images/summit-logo-red.svg") center no-repeat;
+    height: 2.5em;
+    width: 2.5em;
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    top: 0;
+}
+
+.summit-hero-landing .navbar {
+    border: none;
+    display: inline-block;
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1170px;
+    float: left;
+}
+
+.summit-hero-landing .navbar.scrolled-nav {
+    background-color: #00468b;
+    margin: 0;
+    min-width: 100%;
+    z-index: 9999999;
+}
+
+.summit-hero-landing .navbar .nav {
+    border: none;
+}
+
+.summit-hero-landing .navbar .nav > li > a {
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.summit-banner {
+    width: 100%;
+    margin: 10em auto 0;
+    max-width: 80vw;
+    text-align: center;
+}
+
+
+.summit-banner h4 {
+    color: #fff;
+    font-size: 2.5em;
+    margin: 0;
+}
+
+.summit-banner h1 {
+    font-size: 12em;
+    display: block;
+    line-height: 0.75em;
+    margin-bottom: 0.2em;
+    font-weight: 1;
+    margin-top: 0;
+    color: #fff;
+}
+
+
+@media all and (max-width: 500px) {
+    .text-wrapper .title-box {
+        font-size: 70%;
+    }
+
+
+.summit-banner h1 {
+    font-size: 9em;
+}
+
+.summit-hero-landing{
+    height: 50vh;
+}
+}
+
+.summit-banner h5 {
+    color: #fff;
+    font-size: 2em;
+    text-transform: uppercase;
+}
+
+.summit-banner h5 strong {
+    max-width: 40%;
+    display: inline-block;
+    text-align: center;
+    margin-left: 0.25em;
+}
+
+.summit-banner h5 span {
+    width: 5em;
+    height: 1em;
+    display: inline-block;
+    margin: 0 0.5em;
+}
+
+@media all and (max-width: 600px) {
+    .summit-banner h5 span {
+        width: 30%;
+        margin: 0;
+    }
+}
+
+.summit-banner h5 span.arrow.right {
+    background: url("../images/arrow-right.svg") bottom left no-repeat;
+    background-size: cover;
+}
+
+.summit-banner h5 span.arrow.left {
+    background: url("../images/arrow-left.svg") bottom left no-repeat;
+    background-size: cover;
+}
+
+.link.button-box .btn {
+    background-color: #ed1944;
+    font-size: 0.85em;
+    padding: 1em;
+}
+
+
+.summit-hero-landing .nav li.button-box .btn:hover{
+    font-weight: bold;
+    background-color: #ed1944;
+    color: #fff;
+}
+
+.summit-hero-landing .nav {
+    background: transparent;
+}
+
+.summit-hero-landing .nav li.link {
+    border: none;
+}
+
+.summit-hero-landing .nav li.link a {
+    border: none;
+    font-size: 0.9em;
+    padding: 1em;
+}
+.summit-hero-landing .nav li.link a:hover{
+    color: #ffd602;
+    font-weight: bold;
+
+}
+
+.summit-hero-landing .nav li.link.current a {
+    background: transparent;
+    color: #ffd602;
+}
+
+.summit-hero-landing .navbar-toggle {
+    margin-top: 0.5em;
+}
+
+.summit-hero-landing .collapse.in {
+    width: 100%;
+    background-color: #00468b;
+    z-index: 999999;
+}
+
+@media all and (max-width: 768px) {
+    #summit-main-nav .navbar-toggle {
+        display: block !important;
+    }
+
+    .summit-hero-landing .navbar .nav {
+        height: 14.5em;
+        padding: 0 1em;
+    }
+
+    .summit-hero-landing .navbar .link.button-box {
+        position: relative;
+        right: auto;
+    }
+
+    .summit-hero-landing .navbar .link.button-box .btn {
+        width: 100%;
+    }
+
+    .summit-hero-landing .navbar .link.button-box .btn i {
+        margin-right: 1em;
+    }
+
+    .summit-hero-landing .navbar .nav > li > a {
+        padding: 0.5em 0;
+    }
+}
+
+@media all and (min-width: 768px) {
+    #summit-main-nav .navbar-toggle {
+        display: none;
+    }
+}
+
+.collapse.in {
+    position: relative;
+    display: inline-block;
+}
+
+.text-wrapper.blue {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #00468b;
+    margin: 0;
+}
+
+.text-wrapper.blue .highlight {
+    max-width: 870px;
+    margin: 0 auto;
+    position: relative;
+}
+
+@media all and (max-width: 815px) {
+    .text-wrapper.blue .highlight {
+        max-width: 100%;
+        height: auto;
+        padding: 1em;
+    }
+
+    .text-wrapper.blue .highlight h5 {
+        padding: 0;
+        line-height: 1.4em;
+    }
+
+    .text-wrapper.blue .megaphone {
+        display: none;
+    }
+}
+
+.text-wrapper.blue h5 {
+    color: #fff;
+    padding-left: 5em;
+    padding-bottom: 2em;
+    padding-top: 0.75em;
+    text-align: center;
+}
+
+.text-wrapper.blue h5 strong {
+    color: #ffd602;
+}
+
+.text-wrapper.blue .megaphone {
+    background: url("../images/megaphone.svg") center no-repeat;
+    width: 10em;
+    height: 10em;
+    position: absolute;
+    top: -4em;
+    left: 0;
+}
+
+.about-summit-header {
+    background: #ed1944 url("../images/berlin-city.svg") center bottom no-repeat;
+    color: #fff;
+    min-height: 80vh;
+    padding-top: 7em;
+}
+
+.about-summit-header .about-buttons {
+    display: inline-block;
+}
+
+.about-summit-header .summit-title {
+    color: #ffd602;
+    font-size: 4em;
+    margin: 0;
+}
+
+.about-summit-header h2 {
+    font-size: 4em;
+    color: #fff;
+    font-weight: bold;
+    margin-top: 0;
+}
+
+@media all and (max-width: 450px) {
+    .about-summit-header h2 {
+        font-size: 3.6em;
+        word-wrap: break-word; 
+    }
+}
+
+@media all and (min-width: 1200px) {
+    .about-summit-header h2 {
+        font-size: 85px;
+    }
+}
+
+@media (min-width: 500px) and (max-width: 676px) {
+    .about-summit-header h2 {
+        font-size: 63px;
+    }
+}
+
+@media (min-width: 677px) and (max-width: 991px) {
+    .about-summit-header h2 {
+        font-size: 90px;
+    }
+}
+
+.about-summit-header .about-buttons .btn {
+    letter-spacing: 0.025em;
+    text-transform: uppercase;
+    font-weight: normal;
+    position: relative;
+    margin-top: 1em;
+    border: none;
+}
+
+@media (min-width: 500px) and (max-width: 1024px) {
+    .about-summit-header .about-buttons .btn {
+        width: 46%;
+        float: left;
+        font-size: 0.99em;
+    }
+
+    .about-summit-header .about-buttons .btn:first-child {
+        margin-right: 3%;
+    }
+
+    .about-summit-header .about-buttons .btn:last-child {
+        margin-left: 3%;
+    }
+}
+
+.about-summit-header .about-buttons .btn i {
+    float: right;
+    margin-top: 0.2em;
+}
+
+.about-summit-header .about-buttons .btn-default {
+    background-color: #fff;
+    color: #00468b !important;
+}
+
+.about-summit-header .about-buttons .btn-primary {
+    background-color: #ffd602;
+    color: #00468b !important;
+}
+
+.about-summit-header .session-box h3 {
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+    margin: 3em 0 1.5em 0;
+}
+
+.about-summit-header .bird {
+    width: 100%;
+    display: inline-block;
+}
+
+.about-summit-header h5 {
+    padding-left: 1em;
+    color: #fff;
+    float: left;
+}
+
+.about-summit-header .bird span {
+    background: url("../images/bird.svg") center no-repeat;
+    display: inline-block;
+    width: 3em;
+    height: 3em;
+    float: left;
+}
+
+.about-summit-header .bird strong {
+    color: #ffd602;
+    margin-top: 0.5em;
+    display: inline-block;
+}
+
+.sessions {
+    padding: 0;
+    margin: 0;
+}
+
+.session {
+    display: inline-block;
+    color: #fff;
+    text-align: center;
+    max-width: 12.5%;
+    min-width: 12.5%;
+    margin-top: 2em;
+    float: left;
+}
+
+@media all and (max-width: 768px) {
+    .session {
+        max-width: 25%;
+        min-width: 25%;
+    }
+}
+
+.session span {
+    background: url("../images/stock.svg") center top no-repeat;
+    width: 100%;
+    height: 3em;
+    display: inline-block;
+}
+
+.what-to-expect {
+    padding: 5em 0 3em;
+}
+
+.what-to-expect .row {
+    margin: 0;
+}
+
+/* .what-to-expect .video-container, .what-to-expect .text-container {
+    width: 50%;
+    display: inline-block;
+    float: left;
+
+    @media (max-width: 1024px) {
+        width: 100%;
+    }
+} */
+
+.what-to-expect .video-container {
+    margin-bottom: 3em;
+}
+
+.what-to-expect .video-container .video {
+    background: url("../images/thumb_video.jpg") center top no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 20em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.what-to-expect .text-container .attends {
+    padding: 0;
+    margin: 1em 0 0 0;
+}
+
+.what-to-expect .text-container .attends li {
+    display: inline-block;
+    width: 25%;
+    float: left;
+    max-width: 25%;
+    text-align: center;
+    color: #ed1944;
+    font-weight: bold;
+}
+
+.what-to-expect .text-container .attends li span {
+    background: center top no-repeat;
+    width: 100%;
+    height: 3em;
+    display: inline-block;
+    margin: 1em 0;
+}
+
+.what-to-expect .text-container .attends li span.architecture {
+    background-image: url("../images/stock-red.svg");
+}
+
+.what-to-expect .text-container .attends li span.platform {
+    background-image: url("../images/cell.svg");
+}
+
+.what-to-expect .text-container .attends li span.bussiness {
+    background-image: url("../images/suitcase.svg");
+}
+
+.what-to-expect .text-container .attends li span.upstream {
+    background-image: url("../images/code.svg");
+}
+
+.summit-users-wrapper {
+    padding-top: 5em;
+}
+
+.summit-users-wrapper .summit-user-section {
+    background-color: #fff;
+    height: 19em;
+}
+
+@media (min-width: 570px) and (max-width: 720px) {
+    .summit-users-wrapper .summit-user-section {
+        height: 21em;
+    }
+}
+
+@media all and (max-width: 569px) {
+    .summit-users-wrapper .summit-user-section {
+        height: 17em;
+    }
+}
+
+@media (min-width: 720px) and (max-width: 1200px) {
+    .summit-users-wrapper .summit-user-section {
+        height: 23em;
+    }
+}
+
+.summit-users-wrapper .summit-user-section .summit-user-image-box {
+    margin: 0 0 0.5em 0;
+    border-radius: 0;
+    width: 100%;
+    height: auto;
+}
+
+.overview {
+    margin: 0;
+    list-style: none;
+    padding: 0;
+}
+
+.overview li a {
+    width: 100%;
+    background-color: #ed1944;
+    display: inline-block;
+    color: #fff;
+    text-align: left;
+    padding: 1em;
+    text-transform: uppercase;
+    position: relative;
+}
+
+.overview li a h5 {
+    color: #fff;
+    line-height: 1.2em;
+    font-size: 1.25em;
+    margin-top: 0;
+}
+
+.overview li a i {
+    position: absolute;
+    right: 1em;
+    top: 1em;
+    font-size: 1.5em;
+}
+
+.summit-users-wrapper .featured {
+    height: auto;
+    padding: 0 0.5em;
+    margin-bottom: 1em;
+}
+
+.summit-users-wrapper .summit-user-section img.summit-user-image {
+    height: auto;
+    width: 100%;
+}
+
+.summit-users-wrapper .summit-user-section .info {
+    padding: 0.25em 0.75em;
+    text-align: left;
+}
+
+.summit-users-wrapper .summit-user-section .name {
+    color: #ed1944;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 0.5em;
+    line-height: 1.2em;
+    word-break: break-word;
+}
+
+.summit-users-wrapper .summit-user-section .title {
+    font-size: 0.8em;
+    text-transform: uppercase;
+    font-style: normal;
+    text-align: left;
+}
+
+.summit-users-wrapper .summit-user-section .topic {
+    font-size: 0.8em;
+    text-align: left;
+    font-weight: bold;
+}
+
+.summit-users-wrapper .btn {
+    background-color: transparent;
+    color: #000;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-top: 1em;
+}
+
+.summit-users-wrapper .btn i {
+    margin-left: 1em;
+}
+
+.academy-wrapper .recap-title {
+    margin: 2em 0 1em;
+}
+
+.academy-wrapper .carousel {
+    width: 100%;
+    display: inline-block;
+}
+
+.academy-wrapper .carousel .item {
+    min-height: 40em;
+}
+
+.academy-wrapper .carousel .carousel-indicators {
+    display: none;
+}
+
+.academy-wrapper .carousel .carousel-control {
+    opacity: 1;
+    margin-top: 1em;
+}
+
+.academy-wrapper .carousel .carousel-control.left {
+    background-image: -webkit-linear-gradient(left, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.0001) 100%);
+    background-image: -o-linear-gradient(left, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.0001) 100%);
+    background-image: -webkit-gradient(linear, left top, right top, from(rgba(255, 255, 255, 0.5)), to(rgba(255, 255, 255, 0.0001)));
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.0001) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#8ffffff', endColorstr='#00ffffff', GradientType=1);
+    background-repeat: repeat-x;
+}
+
+.academy-wrapper .carousel .carousel-control.right {
+    background-image: -webkit-linear-gradient(left, rgba(255, 255, 255, 0.0001) 0%, rgba(255, 255, 255, 0.5) 100%);
+    background-image: -o-linear-gradient(left, rgba(255, 255, 255, 0.0001) 0%, rgba(255, 255, 255, 0.5) 100%);
+    background-image: -webkit-gradient(linear, left top, right top, from(rgba(255, 255, 255, 0.0001)), to(rgba(255, 255, 255, 0.5)));
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.0001) 0%, rgba(255, 255, 255, 0.5) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#8ffffff', endColorstr='#00ffffff', GradientType=1);
+}
+
+.academy-wrapper .carousel .carousel-control span {
+    color: #ed1944;
+    text-shadow: none;
+    position: absolute;
+}
+
+.academy-wrapper .carousel .carousel-control.left span {
+    right: 0;
+}
+
+.academy-wrapper .carousel .carousel-control.right span {
+    left: 0;
+}
+
+.academy-wrapper .carousel h3 {
+    margin-top: 0;
+    color: #ed1944;
+    font-weight: bold;
+    font-size: 52px;
+}
+
+.sponsor .title {
+    font-weight: bold;
+    margin-top: 2em;
+}
+
+.sponsor .text {
+    width: 50%;
+    margin: 2em auto;
+}
+
+.sponsor .btn.register-btn-lrg {
+    color: #ed1944;
+    border: solid 2px #ed1944;
+    background-color: transparent;
+    font-weight: bold;
+    letter-spacing: 0.025em;
+}
+
+.sponsor .btn.register-btn-lrg i {
+    color: #ed1944;
+    margin-left: 1em;
+}
+
+.diverse {
+    background-color: #00468b;
+    display: flex;
+    min-height: 80vh;
+}
+
+.diverse .image {
+    right: 0;
+}
+
+.diverse .blue-div, .diverse .image {
+    display: inline-block;
+    float: left;
+    width: 50%;
+    position: absolute;
+}
+
+.diverse .text span {
+    background: url(../images/dialog.svg) no-repeat left bottom;
+    width: 20%;
+    display: inline-block;
+    height: 5em;
+    margin-top: 6em;
+}
+
+.diverse .text {
+    margin-bottom: 3em;
+}
+
+.diverse .image {
+    background: url("../images/inclusive.jpg") center top no-repeat;
+    background-size: cover;
+    min-height: 80vh;
+}
+
+@media all and (max-width: 991px) {
+    .diverse .image {
+        display: none;
+    }
+}
+
+.diverse .text h2 {
+    color: #fff;
+    font-size: 60px;
+    font-weight: bold;
+}
+
+.diverse .text p a {
+    color: #ffd602;
+    font-weight: bold;
+}
+
+.diverse .text p {
+    color: #fff;
+    padding: 0 1em 0 0;
+}
+
+.summit-insights .box {
+    padding: 1.5em;
+    margin-bottom: 2em;
+    background-color: #fff;
+    position: relative;
+    min-height: 16em;
+    max-height: 16em;
+}
+
+.summit-insights .box.big {
+    min-height: 34em;
+}
+
+.summit-insights .item .btn {
+    margin: 0 auto;
+}
+
+
+
+.summit-insights .last-column .box{
+    width: 50%;
+    display: inline-block;
+}
+
+.summit-insights .box .insight {
+    color: #ed1944;
+    font-weight: bold;
+    line-height: 1.4em;
+    margin-bottom: 2em;
+}
+
+.summit-insights .pink.box {
+    background-color: #ed1944;
+    color: #fff;
+}
+
+.summit-insights .pink.box button {
+    border: solid 2px #fff;
+    color: #fff;
+    background-color: transparent;
+    margin-top: 1em;
+    width: 100%;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.summit-insights .pink.box h4 {
+    color: #fff;
+    font-weight: bold;
+}
+
+
+
+.summit-insights .video iframe{
+    height: 16em;
+}
+
+.summit-insights .video .video-cover * {
+    color: #fff;
+    text-align: center;
+}
+
+.summit-insights .video .video-cover h5 {
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.2em;
+    line-height: 1.5em;
+}
+
+.summit-insights .video .video-cover span {
+    display: inline-block;
+    width: 100%;
+    margin: 1em 0;
+}
+
+.summit-insights .video .video-cover i {
+    display: inline-block;
+    border-radius: 100%;
+    padding: 0.5em;
+    font-size: 1.5em;
+    border: solid 2px #fff;
+    width: 2em;
+    height: 2em;
+    line-height: 0.8em;
+    margin: 0 auto;
+}
+
+.summit-insights .video .video-cover i::before {
+    margin-left: 0.1em;
+    margin-top: 0.1em;
+}
+
+.summit-insights .signature .photo {
+    display: inline-block;
+    height: 4em;
+    background: url("../images/face.png") center no-repeat;
+    float: left;
+}
+
+.summit-insights .signature .photo.photo-bis {
+    background: url("../images/face2.png") center no-repeat;
+}
+
+
+.signature > * {
+    flex: 1 100%;
+    padding: 0;
+}
+
+.signature .photo, .signature .brand {
+    flex: 1 auto;
+}
+
+.signature .info {
+    flex: 3 0px;
+}
+
+.signature .photo {
+    order: 1;
+}
+
+.signature .info {
+    order: 2;
+    text-align: left;
+}
+
+.signature .brand {
+    order: 3;
+    background: url("../images/brand1.jpg") center no-repeat;
+    width: 4em;
+}
+
+
+.summit-insights .container {
+    padding: 0;
+}
+
+.summit-insights {
+    background-color: #000;
+    padding-top: 5em;
+    padding-bottom: 5em;
+    position: relative;
+}
+
+.summit-insights .box {
+    padding: 1.5em;
+    margin-bottom: 2em;
+    background-color: #fff;
+    position: relative;
+}
+
+.summit-insights .box button.btn {
+    border: solid 2px #ed1944;
+    color: #ed1944;
+    background-color: transparent;
+    margin-top: 1em;
+    width: auto;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 0.75em 2em;
+}
+
+.summit-insights .box .btn {
+    margin: 0 auto;
+}
+
+.summit-insights .box .btn i {
+    margin-left: 1em;
+}
+
+.summit-insights .box h4 {
+    font-weight: bold;
+    color: black;
+    font-size: 1.5em;
+    line-height: 1.5em;
+    margin: 0 0 1em;
+}
+
+.summit-insights .box .insight {
+    color: #ed1944;
+    font-weight: normal;
+    line-height: 1.3em;
+    margin-bottom: 1em;
+    font-size: 1.3em;
+    margin-top: 0;
+}
+
+
+.summit-insights .box.spec h4, .summit-insights .box.spec p {
+    margin-bottom: 0.5em;
+}
+
+.summit-insights .pink.box {
+    background-color: #ed1944;
+    color: #fff;
+}
+
+.summit-insights .pink.box button.btn {
+    border-color: #fff;
+    color: #fff;
+}
+
+.summit-insights .pink.box h4 {
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.5em;
+    line-height: 1.5em;
+}
+
+.summit-insights .video {
+    margin-bottom: 2em;
+    height: 16em;
+    position: relative;
+}
+
+.summit-insights .video .embed-video {
+    background-size: cover;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    height: 16em;
+}
+
+.summit-insights .video .video-cover {
+    position: absolute;
+    z-index: 9999;
+    background-color: rgba(0, 9, 0, 0.3);
+    color: #fff;
+    bottom: 0;
+    width: 100%;
+    height: 16em;
+    padding: 0.5em;
+}
+
+.summit-insights .video .video-cover * {
+    color: #fff;
+    text-align: center;
+}
+
+.summit-insights .video .video-cover h5 {
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.2em;
+    line-height: 1.5em;
+    margin-top: 8em;
+    margin-bottom: 0;
+}
+
+.summit-insights .video .video-cover span {
+    display: inline-block;
+    width: 100%;
+    margin: 3em 0 0;
+}
+
+.summit-insights .video .video-cover i, .what-to-expect .video-container .video i {
+    display: inline-block;
+    border-radius: 100%;
+    padding: 0.5em;
+    font-size: 1.5em;
+    border: solid 2px #fff;
+    width: 2em;
+    height: 2em;
+    line-height: 0.8em;
+    margin: 0 auto;
+    color: #fff;
+}
+
+.summit-insights .video .video-cover i::before, .what-to-expect .video-container .video i::before {
+    margin-left: 0.1em;
+    margin-top: 0.1em;
+    display: inline-block;
+}
+
+.summit-insights .signature .photo {
+    display: inline-block;
+    height: 4em;
+    background: url("../images/face.png") center no-repeat;
+    float: left;
+}
+
+.video.item:hover .video-cover {
+    display: none;
+}​
+
+.signature {
+    display: flex;
+    flex-flow: row wrap;
+    font-weight: bold;
+    text-align: center;
+    position: absolute;
+    width: 87%;
+    bottom: 1em;
+}
+
+.signature > * {
+    flex: 1 100%;
+    padding: 0;
+}
+
+.signature .photo, .signature .brand {
+    flex: 1 auto;
+}
+
+.signature .info {
+    flex: 3 0px;
+}
+
+.signature .photo {
+    order: 1;
+}
+
+.signature .info {
+    order: 2;
+    text-align: left;
+}
+
+.signature .info .name {
+    color: #000;
+    font-weight: bold;
+}
+
+.signature .info .company {
+    font-weight: normal;
+}
+
+.signature .brand {
+    order: 3;
+    background: url("../images/brand1.jpg") center no-repeat;
+    width: 4em;
+}
+
+.signature .brand.second {
+    background: url("../images/brand2.jpg") center no-repeat;
+}
+
+.static-summit-about-page #push {
+    height: 150px;
+}
+
+
+
+
+@media (min-width: 991px) and (max-width: 1200px) {
+    .summit-insights .box {
+        min-height: 18.25em;
+        max-height: 18.25em;}
+
+        .summit-insights .video {
+            height: 18em;
+        }
+
+        .summit-insights .video iframe{
+            height: 18em;
+        }
+
+
+        .summit-insights .video .embed-video{
+            height: 18em;
+        }
+
+        .summit-insights .video .video-cover{
+            height: 18em;
+        }
+
+        .summit-insights .box.big {
+            min-height: 38.5em;
+        }
+}
+
+
+@media all and (max-width: 991px) {
+    .summit-insights .box {
+        min-height: 12em;
+        max-height: 15em;}
+
+        .summit-insights .video {
+            height: 25em;
+        }
+
+        .summit-insights .video iframe{
+            height: 20em;
+        }
+
+
+        .summit-insights .video .embed-video{
+            height: 20em;
+        }
+
+        .summit-insights .video .video-cover{
+            height: 5em;
+        }
+
+        .summit-insights .video .video-cover h5{
+            margin-top: 0
+        }
+
+        .video.item:hover .video-cover {
+            display: inline-block;
+            width:100%;
+        }​
+
+
+        .summit-insights .box.big {
+            min-height: 23em;
+            max-height: 35em;
+        }
+}
+
+
+
+
+
+/* footer */
+
+footer * {
+    color: #fff;
+    text-transform: uppercase;
+}
+
+footer .logo {
+    text-align: right;
+}
+
+footer .logo a {
+    background: url("../images/summit-logo-red.svg") center no-repeat;
+    height: 3.5em;
+    width: 3.5em;
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    text-align: right;
+}
+
+footer .links a {
+    color: #fff;
+    padding: 0.25em 0.5em 0 0;
+    display: inline-block;
+}
+
+footer .openstack .links a {
+    text-align: right;
+    padding: 0.25em 0 0 0.25em;
+    font-size: 12px;
+}
+
+footer .openstack .links span {
+    padding: 0.25em 0 0 0.25em;
+}
+
+footer .openstack .links {
+    float: right;
+    text-align: right;
+}
+
+footer .btn {
+    background-color: #ed1944;
+    margin-bottom: 1em;
+    letter-spacing: 0.02em;
+}
+
+
+footer .btn:hover{
+    font-weight: bold;
+    background-color: #ed1944;
+
+}

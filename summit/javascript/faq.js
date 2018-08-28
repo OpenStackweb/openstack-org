@@ -36,7 +36,7 @@
 })(jQuery);
 
 // Fix sidebar menu on scroll
-var num = 320; //number of pixels before modifying styles
+var num = 700; //number of pixels before modifying styles
 
 $(window).bind('scroll', function () {
     if ($(window).scrollTop() > num) {

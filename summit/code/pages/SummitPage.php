@@ -118,6 +118,8 @@ class SummitPage_Controller extends Page_Controller
         Requirements::css("themes/openstack/static/css/combined.css");
         FontAwesomeDependencies::renderRequirements();
 
+        Requirements::css('summit/css/static-summit-about-page.css');
+
     }
 
     public function CurrentSummit()

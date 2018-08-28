@@ -1495,7 +1495,7 @@ a.who-section-cta {
     .summit-users-wrapper .featured {
       height: 290px;
     }
-  .summit-users-wrapper:after {
+  /*.summit-users-wrapper:after {
     top: 100%;
     left: 50%;
     border: solid transparent;
@@ -1514,7 +1514,7 @@ a.who-section-cta {
     -webkit-transform: rotate(-45deg);
             transform: rotate(-45deg);
     box-shadow: -3px 3px 3px 0 rgba(0, 0, 0, 0.3); }
-
+*/
 .summit-gallery-section {
   background: url("/themes/openstack/static/images/boston/gallery-bkgd.jpg") no-repeat center center;
   background-size: cover;
@@ -2633,7 +2633,7 @@ p.checklist-item-details {
 
 .faq-sidebar.fixed {
   position: fixed;
-  top: 30px;
+  top: 105px;
   display: block; }
 
 @media (min-width: 768px) and (max-width: 1000px) {
