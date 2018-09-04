@@ -9,8 +9,8 @@
             <div class="col-lg-9 col-md-9">
                 <div class="presentation-main-panel">
                     <div class="main-panel-section">
-                        <h2><% if $Presentation.Speakers %>Presentation Speakers<% else %>Add a
-                            speaker<% end_if %></h2>
+                        <h2><% if $Presentation.Speakers %>Forum Session Moderators<% else %>Add a
+                            Moderator<% end_if %></h2>
                     </div>
 
                     <% if $Presentation.Moderator %>
@@ -34,8 +34,7 @@
                     <% end_if %>
 
                     <% if $Presentation.Speakers %>
-                        <h3>Speakers included in this presentation</h3>
-                        <p>IMPORTANT! We have added new questions to the speaker bio form. Please review the bios for all speakers before submitting.</p>
+                        <h3>Session Leaders included in this presentation</h3>
                         <table class="table">
                             <tbody>
                                 <% loop $Presentation.Speakers %>
@@ -52,7 +51,6 @@
                                 <% end_loop %>
                             </tbody>
                         </table>
-                        <p>Please Note: We have added new questions to the speaker bio form. Please review the bios for all speakers before submitting.</p>
                     <% end_if %>
                     $AddSpeakerForm
                 </div>

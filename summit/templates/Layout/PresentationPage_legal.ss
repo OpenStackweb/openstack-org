@@ -8,7 +8,7 @@
                 <div class="presentation-main-panel">
                     <% if VideoLegalConsent %>
                         <div class="main-panel-section">
-                            <h2>Speaker Video Consent</h2>
+                            <h2>Speaker/Moderator Video Consent</h2>
                         </div>
                         <p class="panel-note"><strong>Note:</strong>{$Top.VideoLegalConsent}</strong></p>
                         <p><strong>Please read the terms below and indicate that you agree to be recorded.</strong></p>

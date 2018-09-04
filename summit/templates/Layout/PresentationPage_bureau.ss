@@ -7,7 +7,7 @@
 			<div class="col-lg-9 col-md-9">
 				<div class="presentation-main-panel">
 					<div class="main-panel-section">				
-						<h2>Edit Your Speaker Information</h2>
+						<h2>Edit Your Speaker/Moderator Information</h2>
 					</div>
 					$BureauForm
 				</div>

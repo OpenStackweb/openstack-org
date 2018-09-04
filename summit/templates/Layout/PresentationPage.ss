@@ -9,28 +9,28 @@
                     <div class="main-panel-section">
                         <div class="row">
                             <div class="col-lg-6 col-md-6">
-                                <h2>Presentations</h2>
+                                <h2>Forum Sessions and Presentations</h2>
                             </div>
                             <div class="col-lg-6 col-md-6">
                                 <% if $Top.isCallForSpeakerOpen %>
                                     <% if $Top.isPresentationSubmissionAllowed  %>
-                                        <a href="$Link('manage/new')" class="btn btn-success add-presentation-button">Add New Presentation</a>
+                                        <a href="$Link('manage/new')" class="btn btn-success add-presentation-button">Add New</a>
                                     <% else %>
                                         <div class="alert alert-danger alert-dismissible" role="alert">
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <strong>Warning!</strong> You have reached the presentation submission limit.
+                                            <strong>Warning!</strong> You have reached the submission limit.
                                         </div>
                                     <% end_if %>
                                 <% else %>
                                     <div class="alert alert-danger alert-dismissible" role="alert">
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <strong>Warning!</strong> Call for Presentations is closed!.
+                                        <strong>Warning!</strong> CFP is closed!.
                                     </div>
                                 <% end_if %>
                             </div>
                         </div>
                     </div>
-                    <h3>Presentations <strong>You</strong> Submitted</h3>
+                    <h3>Presentations/Forum Sessions <strong>You</strong> Submitted</h3>
                     <table class="table">
                         <tbody>
                             <% if $CurrentMember.SpeakerProfile.MyPresentations($Top.Summit.ID) %>
@@ -57,7 +57,7 @@
                                     <td class="action">
                                         <% if $CanDelete && $Top.canEditPresentation($ID) %>
                                             <a data-confirm="Whoa, there..."
-                                               data-confirm-text="Are you sure you want to delete this presentation?"
+                                               data-confirm-text="Are you sure you want to delete this?"
                                                data-confirm-ok="Yup. Get rid of it."
                                                data-confirm-cancel="Nope. My bad."
                                                data-confirm-color="#b80000"
@@ -68,7 +68,7 @@
                                 <% end_loop %>
                             <% else %>
                             <tr>
-                                <td><i>You have not submitted any presentations.</i></td>
+                                <td><i>You have not submitted any presentations/sessions.</i></td>
                             </tr>
                             <% end_if %>
                         </tbody>
@@ -109,7 +109,7 @@
                             <% end_if %>
                         </tbody>
                     </table>
-                    <h3>Presentations <strong>Others</strong> Submitted With You As A Moderator</h3>
+                    <h3>Presentations/Forum Sessions <strong>Others</strong> Submitted With You As A Moderator</h3>
                     <table class="table">
                         <tbody>
                             <% if $CurrentMember.SpeakerProfile.OtherModeratorPresentations($Top.Summit.ID) %>
@@ -140,7 +140,7 @@
                                 <% end_loop %>
                             <% else %>
                             <tr>
-                                <td><i>There are no presentations submitted by others with you as a moderator.</i></td>
+                                <td><i>There are no presentations/sessions submitted by others with you as a moderator.</i></td>
                             </tr>
                             <% end_if %>
                         </tbody>

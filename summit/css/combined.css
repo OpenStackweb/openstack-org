@@ -1422,7 +1422,7 @@ td.action {
 }
 
 td.status {
-  text-align: right;
+  text-align: left;
 }
 
 td.status .fa {

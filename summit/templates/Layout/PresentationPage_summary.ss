@@ -10,9 +10,9 @@
                 <div class="presentation-main-panel">
                     <div class="main-panel-section">
                         <% if $Presentation.exists %>
-                            <h2>Edit Your Presentation</h2>
+                            <h2>Edit Your Forum Session</h2>
                         <% else %>
-                            <h2>Add New Presentation</h2>
+                            <h2>Add New Forum Session</h2>
                         <% end_if %>
                     </div>
                     $PresentationForm

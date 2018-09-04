@@ -13,8 +13,8 @@
 					    <h2>Thank you!</h2>
 					</div>
 					<div class="main-panel-section">
-					    <p class="panel-note">Your presentation has been saved and is ready for review.</p>
-						<p class="panel-note">Once you've completed adding in the details of your talk a confirmation email will be sent to you and all speakers on this talk. Check inbox and junk folders for an email sent from speakersupport@openstack.org.</p>
+					    <p class="panel-note">Your submission has been saved and is ready for review.</p>
+						<p class="panel-note">Once you've completed adding in the details, a confirmation email will be sent to you and all associated speakers/moderators. Check inbox and junk folders for an email sent from speakersupport@openstack.org.</p>
 					</div>
 
 					{$Me.PresentationSuccessText}
