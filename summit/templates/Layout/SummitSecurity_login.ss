@@ -1,4 +1,3 @@
-</div>
     <div class="presentation-app-header">
         <% if $Top.ActiveSummit %>
             <% if $Top.ActiveSummit.isCallForSpeakersOpen %>
