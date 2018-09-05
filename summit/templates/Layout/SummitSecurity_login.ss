@@ -12,9 +12,9 @@
 
     <div class="presentation-app-body">
         <div class="container">
-            <h1>Would you like to present at the OpenStack Summit?</h1>
+            <h1>Would you like to submit a session to the Forum at the OpenStack Summit?</h1>
 
-            <p>Here are three steps you should take as a potential speaker:</p>
+            <!-- <p>Here are three steps you should take as a potential speaker:</p>
 
             <ul class="submit-steps">
                 <li><span>1</span> <a href="summit/berlin-2018/summit-categories" target="_blank">Review the list of Summit Categories &amp; Tracks.</a></li>
@@ -22,9 +22,9 @@
                 <li><span>3</span> <a href="#submit">Submit your session proposal below. (Limit of 3 per speaker)</a></li>
             </ul>
 
-            <hr/>
+            <hr/> -->
             <a id="submit"></a>
-            <h2>Submit Your Speaking Proposal</h2>
+            <h2>Submit Your Forum Proposal</h2>
 
             <div class="row">
 
@@ -50,7 +50,20 @@
 
             <hr/>
 
-            <a id="process"></a>
+            <h2>How does the Forum work?</h2>
+            <p>The Forum is a part of the OpenStack Summit. It is not a classic conference track with speakers and presentations. OpenStack community members (participants in development teams or working groups, and other interested individuals) discuss the topics they want to cover and get alignment on.</p>
+
+            <p>Those scheduled sessions can include the presentation of a few slides but are generally a 40-min long, open brainstorming discussion on a given subject or feature. If you care about a particular subject, please join. Due to the nature of the event, the schedule is a bit dynamic, so check out the summit schedule pages often.</p>
+
+            <p>If you suggest a session, you should be ready to moderate that session and make sure the discussion stays on track. Experienced attendees will generally help in that endeavour, but you should plan to attend that session yourself.</p>
+
+            <p>The Forum is not the right place to get started or learn the basics of OpenStack. For that it's better to check the various OpenStack meetups organized by user groups around the world, attend talks in the 'Conference' part of the OpenStack Summit, or participate in classes in the 'Academy' part of the OpenStack Summit.</p>
+
+            <p>For additional information, <a href="https://wiki.openstack.org/wiki/Forum" target="_blank">please take a look at the Forum Wiki</a>.</p>
+
+
+
+            <!-- <a id="process"></a>
             <h2>About The Summit Submission and Selection Process</h2>
             <p>On average, the OpenStack Foundation receives more than 1,000 submissions for the Summit. Of those, we are only able to select 25-30% for participation. To decide which talks are accepted, we rely on a Programming Committee as well as a community voting process that will open in July 2018.</p>
             <p>The Summit is organized around Tracks, which are focused on specific open infrastructure problem domains, including Edge Computing, CI/CD, and Private & Hybrid Cloud. Presentations for each Track are determined by a Program Committee for each Track. The Foundation selects the Program Committee members from a list of people nominated by the community. The Foundation strives to recruit Programming Committee members from a diverse set of companies, open source communities, regions and roles across communities (i.e., contributing developers, users and business leaders). To nominate someone for the Summit Programming Committee for a specific Track, please fill out the <a href="https://openstackfoundation.formstack.com/forms/openstackberlin2018_programmingcommitteenom">nomination form</a>.</p>
@@ -82,7 +95,7 @@
             <p class="submit-button-area"><a href="#submit" class="btn btn-default">Submit Your Presentation Proposal</a></p>
 
 
-            <hr/>
+            <hr/> -->
 
 
 
