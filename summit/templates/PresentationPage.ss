@@ -11,7 +11,7 @@
 
 <body class="presentation-page">
 <div class="main-body">
-    <% include StaticSummitPageHeader %>
+    <% include StaticSummitPageHeaderSmall %>
 
     <div id="wrap">
 
