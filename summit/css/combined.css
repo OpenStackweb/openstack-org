@@ -2344,7 +2344,7 @@ p.checklist-item-details {
 
 .faq-sidebar.fixed {
   position: fixed;
-  top: 30px;
+  top: 105px;
   display: block; }
 
 @media (min-width: 768px) and (max-width: 1000px) {

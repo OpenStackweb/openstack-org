@@ -14,7 +14,7 @@
 
 <body>
 <div class="main-body">
-    <% include SummitPageHeaderSmall %>
+    <% include StaticSummitPageHeader %>
 
     <div id="wrap">
 
@@ -32,7 +32,7 @@
 
     <% include DownloadAppModal %>
 
-    <% include SummitPageFooter %>
+    <% include StaticSummitPageFooter %>
 
     <!-- Hidden Sidebar Nav -->
     <div class="sidebar-nav">
