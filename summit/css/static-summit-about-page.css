@@ -669,9 +669,6 @@ button.btn i, a.btn i {
     display: inline-block;
 }
 
-.academy-wrapper .carousel .item {
-    min-height: 40em;
-}
 
 .academy-wrapper .carousel .carousel-indicators {
     display: none;
@@ -901,6 +898,12 @@ button.btn i, a.btn i {
 
 .summit-insights .signature .photo.photo-bis {
     background: url("../images/face2.png") center no-repeat;
+}
+
+
+
+.signature{
+    display: flex;
 }
 
 
