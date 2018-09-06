@@ -74,7 +74,7 @@ final class AddSpeakerForm extends BootstrapForm
             LiteralField::create('LegalOther', sprintf('
                 <div id="legal-other" style="display: none;">
                  <label>
-                    '.ucfirst($speaker_type).'s agree that OpenStack Foundation may record and publish their talks presented during the %s OpenStack Summit. If you submit a proposal on behalf of a '.$speaker_type.', you represent to OpenStack Foundation that you have the authority to submit the proposal on the '.$speaker_type.'’s behalf and agree to the recording and publication of their presentation.
+                    Speakers and moderators agree that OpenStack Foundation may record and publish their talks presented during the %s OpenStack Summit. If you submit a proposal on behalf of a '.$speaker_type.', you represent to OpenStack Foundation that you have the authority to submit the proposal on the '.$speaker_type.'’s behalf and agree to the recording and publication of their presentation.
                 </label>
                 </div>', $this->summit->Title)
             )
@@ -84,14 +84,14 @@ final class AddSpeakerForm extends BootstrapForm
             || $this->presentation->ModeratorID == Member::currentUser()->getSpeakerProfile()->ID) {
             $fields->replaceField('SpeakerType', HiddenField::create('SpeakerType', '', 'Else'));
             $fields->field('EmailAddress')
-                ->setTitle('Enter the first name, last name or email address of your '.$speaker_type.' (*)')
+                ->setTitle('Enter the first name, last name or email address of your presenter/moderator (*)')
                 ->setDisplayLogicCriteria(null);
         }
 
         if ( (!$use_speakers || $speakers_exists) && (!$use_moderator || $moderator_exists) ) {
             if ( ($use_speakers && !$max_speakers_reached) || ($use_moderator && !$max_moderators_reached) ) {
                 $fields->insertBefore(
-                    LiteralField::create('MoreSpeakers', '<h3 class="more-speakers">Any more '.$speaker_type.'s to add?</h3>'),
+                    LiteralField::create('MoreSpeakers', '<h3 class="more-speakers">Any more presenters/moderators to add?</h3>'),
                     'SpeakerNote'
                 );
                 $fields->removeField('SpeakerNote');
@@ -124,7 +124,7 @@ final class AddSpeakerForm extends BootstrapForm
 
         if ( (!$use_speakers || $speakers_exists) && (!$use_moderator || $moderator_exists) ) {
             if (($use_speakers && !$max_speakers_reached) || ($use_moderator && !$max_moderators_reached)) {
-                $actions[] = FormAction::create('doAddSpeaker', '<i class="fa fa-plus fa-start"></i> Add another '.$speaker_type);
+                $actions[] = FormAction::create('doAddSpeaker', '<i class="fa fa-plus fa-start"></i> Add another moderator');
             }
 
             $default_actions = $controller->createSaveActions('doFinishSpeaker', 3);
