@@ -38,7 +38,7 @@ button.btn i, a.btn i {
     text-align: left;
 }
 
-.summit-hero-landing {
+.summit-hero-landing, .summit-hero-landing-short {
     background: url("../images/berlin.jpg") center no-repeat;
     height: 80vh;
     display: block;
@@ -46,25 +46,30 @@ button.btn i, a.btn i {
     position: relative;
 }
 
-.summit-hero-landing .navbar {
+.summit-hero-landing-short {
+    height: 67vh;
+    top:-30px;
+}
+
+.summit-hero-landing .navbar, .summit-hero-landing-short .navbar  {
     background: transparent;
     width: 100%;
     display: inline-block;
     padding: 1em;
 }
 
-.summit-hero-landing .logo-box {
+.summit-hero-landing .logo-box, .summit-hero-landing-short .logo-box  {
     display: inline-block;
     float: left;
     margin: 2em 1em 1em 1em;
 }
 
-.summit-hero-landing .navbar .link.button-box {
+.summit-hero-landing .navbar .link.button-box, .summit-hero-landing-short .navbar .link.button-box  {
     position: absolute;
     right: 1em;
 }
 
-.summit-hero-landing .summit-hero-logo {
+.summit-hero-landing .summit-hero-logo, .summit-hero-landing-short .summit-hero-logo  {
     background: url("../images/summit-logo-red.svg") center no-repeat;
     height: 2.5em;
     width: 2.5em;
@@ -74,7 +79,7 @@ button.btn i, a.btn i {
     top: 0;
 }
 
-.summit-hero-landing .navbar {
+.summit-hero-landing .navbar, .summit-hero-landing-short .navbar  {
     border: none;
     display: inline-block;
     width: 100%;
@@ -83,18 +88,18 @@ button.btn i, a.btn i {
     float: left;
 }
 
-.summit-hero-landing .navbar.scrolled-nav {
+.summit-hero-landing .navbar.scrolled-nav, .summit-hero-landing-short .navbar.scrolled-nav {
     background-color: #00468b;
     margin: 0;
     min-width: 100%;
     z-index: 9999999;
 }
 
-.summit-hero-landing .navbar .nav {
+.summit-hero-landing .navbar .nav, .summit-hero-landing-short .navbar .nav  {
     border: none;
 }
 
-.summit-hero-landing .navbar .nav > li > a {
+.summit-hero-landing .navbar .nav > li > a, .summit-hero-landing-short .navbar .nav > li > a  {
     color: #fff;
     text-transform: uppercase;
 }
@@ -104,6 +109,10 @@ button.btn i, a.btn i {
     margin: 10em auto 0;
     max-width: 80vw;
     text-align: center;
+}
+
+.summit-hero-landing-short .summit-banner {
+    margin: 9em auto 0;
 }
 
 
@@ -134,7 +143,7 @@ button.btn i, a.btn i {
     font-size: 9em;
 }
 
-.summit-hero-landing{
+.summit-hero-landing, .summit-hero-landing-short{
     height: 50vh;
 }
 }
@@ -183,41 +192,41 @@ button.btn i, a.btn i {
 }
 
 
-.summit-hero-landing .nav li.button-box .btn:hover{
+.summit-hero-landing .nav li.button-box .btn:hover, .summit-hero-landing-short .nav li.button-box .btn:hover{
     font-weight: bold;
     background-color: #ed1944;
     color: #fff;
 }
 
-.summit-hero-landing .nav {
+.summit-hero-landing .nav, .summit-hero-landing-short .nav {
     background: transparent;
 }
 
-.summit-hero-landing .nav li.link {
+.summit-hero-landing .nav li.link, .summit-hero-landing-short .nav li.link {
     border: none;
 }
 
-.summit-hero-landing .nav li.link a {
+.summit-hero-landing .nav li.link a, .summit-hero-landing-short .nav li.link a {
     border: none;
     font-size: 0.9em;
     padding: 1em;
 }
-.summit-hero-landing .nav li.link a:hover{
+.summit-hero-landing .nav li.link a:hover, .summit-hero-landing-short .nav li.link a:hover {
     color: #ffd602;
     font-weight: bold;
 
 }
 
-.summit-hero-landing .nav li.link.current a {
+.summit-hero-landing .nav li.link.current a, .summit-hero-landing-short .nav li.link.current a {
     background: transparent;
     color: #ffd602;
 }
 
-.summit-hero-landing .navbar-toggle {
+.summit-hero-landing .navbar-toggle, .summit-hero-landing-short .navbar-toggle {
     margin-top: 0.5em;
 }
 
-.summit-hero-landing .collapse.in {
+.summit-hero-landing .collapse.in, .summit-hero-landing-short .collapse.in {
     width: 100%;
     background-color: #00468b;
     z-index: 999999;
@@ -228,25 +237,25 @@ button.btn i, a.btn i {
         display: block !important;
     }
 
-    .summit-hero-landing .navbar .nav {
+    .summit-hero-landing .navbar .nav, .summit-hero-landing-short .navbar .nav {
         height: 14.5em;
         padding: 0 1em;
     }
 
-    .summit-hero-landing .navbar .link.button-box {
+    .summit-hero-landing .navbar .link.button-box, .summit-hero-landing-short .navbar .link.button-box, {
         position: relative;
         right: auto;
     }
 
-    .summit-hero-landing .navbar .link.button-box .btn {
+    .summit-hero-landing .navbar .link.button-box .btn, .summit-hero-landing-short .navbar .link.button-box .btn {
         width: 100%;
     }
 
-    .summit-hero-landing .navbar .link.button-box .btn i {
+    .summit-hero-landing .navbar .link.button-box .btn i, .summit-hero-landing-short .navbar .link.button-box .btn i {
         margin-right: 1em;
     }
 
-    .summit-hero-landing .navbar .nav > li > a {
+    .summit-hero-landing .navbar .nav > li > a, .summit-hero-landing-short .navbar .nav > li > a {
         padding: 0.5em 0;
     }
 }
