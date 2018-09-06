@@ -19,13 +19,12 @@
     // This is the easiest way to have default options.
     var settings = {
         // These are the defaults.
-
     };
 
     $.validator.addMethod("ValidNewOrgName", function (value, element, arg) {
         value = value.trim();
-        var field = arg[0];
-        if(value == '0' && field.val().trim() === '')
+        var ddl = arg[0];
+        if(ddl.val() == '0' && value.trim() === '')
             return false;
         return true;
     }, GetText._t("You Must Specify a New Organization Name!."));
@@ -56,8 +55,11 @@
                 input.val( $('option:selected', ddl).text() );
 
                 ddl.rules('add',{
-                    required:true,
-                    ValidNewOrgName:[input]
+                    required:true
+                });
+
+                input.rules('add',{
+                    ValidNewOrgName:[ddl]
                 });
 
                 ddl.change(function(event){
@@ -77,7 +79,6 @@
             else if(input.length > 0) {
                 input.rules('add',{required:true});
             }
-
         }
     };
 
