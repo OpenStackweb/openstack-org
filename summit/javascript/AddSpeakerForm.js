@@ -14,43 +14,47 @@
 (function($) {
     $(document).ready(function() {
         var cache = {};
-        $( "#AddSpeakerForm_AddSpeakerForm_EmailAddress" ).autocomplete({
-            minLength: 2,
-            source: function( request, response ) {
-                var term = request.term;
-                if ( term in cache ) {
-                    response( cache[ term ] );
-                    return;
+
+        if ($( "#AddSpeakerForm_AddSpeakerForm_EmailAddress" ).length) {
+            $( "#AddSpeakerForm_AddSpeakerForm_EmailAddress" ).autocomplete({
+                minLength: 2,
+                source: function( request, response ) {
+                    var term = request.term;
+                    if ( term in cache ) {
+                        response( cache[ term ] );
+                        return;
+                    }
+
+                    $.getJSON(speaker_search_url, request, function( data, status, xhr ) {
+                        cache[ term ] = data;
+                        response( data );
+                    });
+                },
+                select: function( event, ui ) {
+                    $( "#AddSpeakerForm_AddSpeakerForm_EmailAddress" ).val(ui.item.name);
+                    $( "#AddSpeakerForm_AddSpeakerForm_MemberId" ).val(ui.item.member_id );
+                    $( "#AddSpeakerForm_AddSpeakerForm_SpeakerId" ).val(ui.item.speaker_id);
+                    return false;
                 }
 
-                $.getJSON(speaker_search_url, request, function( data, status, xhr ) {
-                    cache[ term ] = data;
-                    response( data );
-                });
-            },
-            select: function( event, ui ) {
-                $( "#AddSpeakerForm_AddSpeakerForm_EmailAddress" ).val(ui.item.name);
-                $( "#AddSpeakerForm_AddSpeakerForm_MemberId" ).val(ui.item.member_id );
-                $( "#AddSpeakerForm_AddSpeakerForm_SpeakerId" ).val(ui.item.speaker_id);
-                return false;
-            }
+            }).data("ui-autocomplete")._renderItem = function(ul, item) {
+                // ul is the unordered suggestion list
+                // item is a object in the data object that was send to the response function
+                // after the JSON request
+                // We append a custom formatted list item to the suggestion list
+                var html = '<span><img width="50" height="50" src="'+item.pic+'"/>&nbsp;';
 
-        }).data("ui-autocomplete")._renderItem = function(ul, item) {
-            // ul is the unordered suggestion list
-            // item is a object in the data object that was send to the response function
-            // after the JSON request
-            // We append a custom formatted list item to the suggestion list
-            var html = '<span><img width="50" height="50" src="'+item.pic+'"/>&nbsp;';
+                if( item.title != '')
+                    html+= item.title +'&nbsp;-&nbsp;';
 
-            if( item.title != '')
-                html+= item.title +'&nbsp;-&nbsp;';
+                html += item.name +'&nbsp;('+item.email+')';
 
-            html += item.name +'&nbsp;('+item.email+')';
+                if(item.company != '')
+                    html += '&nbsp;-&nbsp;' + item.company + '</span>';
 
-            if(item.company != '')
-                html += '&nbsp;-&nbsp;' + item.company + '</span>';
+                return $("<li></li>").data("item.autocomplete", item).append(html).appendTo(ul);
+            };
+        }
 
-            return $("<li></li>").data("item.autocomplete", item).append(html).appendTo(ul);
-        };;
     });
 })(jQuery);

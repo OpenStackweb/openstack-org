@@ -226,8 +226,7 @@ final class PresentationManager implements IPresentationManager
             $presentation->SelectionPlanID  = $selectionPlan->ID;
             $presentation->CreatorID        = $creator->ID;
             $presentation->Progress         = Presentation::PHASE_SUMMARY;
-            // add creator as speaker
-            $presentation->Speakers()->Add($speaker);
+
             $presentation->write();
 
             if(isset($data["PresentationLink"]))

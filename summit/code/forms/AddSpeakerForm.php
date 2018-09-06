@@ -44,12 +44,16 @@ final class AddSpeakerForm extends BootstrapForm
     protected function getFormFields() {
         $presentation_type      = $this->presentation->getTypeName();
         $max_speakers_reached   = $this->presentation->maxSpeakersReached();
+        $use_speakers           = $this->presentation->Type()->UseSpeakers;
+        $speakers_exists        = $this->presentation->Speakers()->exists();
         $max_moderators_reached = $this->presentation->maxModeratorsReached();
-        $speaker_type           = (!$max_moderators_reached) ? 'Moderator' : 'Speaker';
+        $use_moderator          = $this->presentation->Type()->UseModerator;
+        $moderator_exists       = $this->presentation->Moderator()->exists();
+        $speaker_type           = ($use_moderator && (!$max_moderators_reached || !$use_speakers)) ? 'moderator' : 'speaker';
 
         $fields = FieldList::create(
             LiteralField::create('SpeakerNote',
-                '<p class="at-least-one">Each '.$presentation_type.' needs at least one speaker. You cannot submit your '.$presentation_type.' without a speaker. If you are speaking AND you are the '.$presentation_type.' owner, you still must add yourself as a speaker.</p>'),
+                '<p class="at-least-one">Each '.$presentation_type.' needs at least one '.$speaker_type.'. You cannot submit your '.$presentation_type.' without a '.$speaker_type.'. If you are speaking AND you are the '.$presentation_type.' owner, you still must add yourself as a '.$speaker_type.'.</p>'),
             OptionsetField::create('SpeakerType', '', array(
                 'Me'   => 'Add yourself as a '.$speaker_type.' to this '.$presentation_type,
                 'Else' => 'Add someone else'
@@ -57,7 +61,7 @@ final class AddSpeakerForm extends BootstrapForm
             LiteralField::create('LegalMe', sprintf('
                 <div id="legal-me" style="display: none;">
                  <label>
-                    '.$speaker_type.'s agree that OpenStack Foundation may record and publish their talks presented during the %s OpenStack Summit. If you submit a proposal on behalf of a speaker, you represent to OpenStack Foundation that you have the authority to submit the proposal on the speaker’s behalf and agree to the recording and publication of their presentation.
+                    '.ucfirst($speaker_type).'s agree that OpenStack Foundation may record and publish their talks presented during the %s OpenStack Summit. If you submit a proposal on behalf of a '.$speaker_type.', you represent to OpenStack Foundation that you have the authority to submit the proposal on the '.$speaker_type.'’s behalf and agree to the recording and publication of their presentation.
                 </label>
                 </div>', $this->summit->Title)),
             TextField::create('EmailAddress',
@@ -70,7 +74,7 @@ final class AddSpeakerForm extends BootstrapForm
             LiteralField::create('LegalOther', sprintf('
                 <div id="legal-other" style="display: none;">
                  <label>
-                    '.$speaker_type.'s agree that OpenStack Foundation may record and publish their talks presented during the %s OpenStack Summit. If you submit a proposal on behalf of a speaker, you represent to OpenStack Foundation that you have the authority to submit the proposal on the speaker’s behalf and agree to the recording and publication of their presentation.
+                    '.ucfirst($speaker_type).'s agree that OpenStack Foundation may record and publish their talks presented during the %s OpenStack Summit. If you submit a proposal on behalf of a '.$speaker_type.', you represent to OpenStack Foundation that you have the authority to submit the proposal on the '.$speaker_type.'’s behalf and agree to the recording and publication of their presentation.
                 </label>
                 </div>', $this->summit->Title)
             )
@@ -84,16 +88,16 @@ final class AddSpeakerForm extends BootstrapForm
                 ->setDisplayLogicCriteria(null);
         }
 
-        if ($this->presentation->Speakers()->exists() && $max_moderators_reached) {
-            if (!$max_speakers_reached) {
+        if ( (!$use_speakers || $speakers_exists) && (!$use_moderator || $moderator_exists) ) {
+            if ( ($use_speakers && !$max_speakers_reached) || ($use_moderator && !$max_moderators_reached) ) {
                 $fields->insertBefore(
-                    LiteralField::create('MoreSpeakers', '<h3 class="more-speakers">Any more speakers to add?</h3>'),
+                    LiteralField::create('MoreSpeakers', '<h3 class="more-speakers">Any more '.$speaker_type.'s to add?</h3>'),
                     'SpeakerNote'
                 );
                 $fields->removeField('SpeakerNote');
             } else {
                 $fields->insertBefore(
-                    LiteralField::create('LimitSpeakers', '<h3 class="limit-speakers">You have reached the maximum of speakers.</h3>'),
+                    LiteralField::create('LimitSpeakers', '<h3 class="limit-speakers">You have reached the maximum of '.$speaker_type.'s.</h3>'),
                     'SpeakerNote'
                 );
                 $fields->removeField('SpeakerNote');
@@ -110,13 +114,17 @@ final class AddSpeakerForm extends BootstrapForm
 
     protected function getFormActions($controller) {
         $max_speakers_reached   = $this->presentation->maxSpeakersReached();
+        $use_speakers           = $this->presentation->Type()->UseSpeakers;
+        $speakers_exists        = $this->presentation->Speakers()->exists();
         $max_moderators_reached = $this->presentation->maxModeratorsReached();
-        $speaker_type           = (!$max_moderators_reached) ? 'Moderator' : 'Speaker';
+        $use_moderator          = $this->presentation->Type()->UseModerator;
+        $moderator_exists       = $this->presentation->Moderator()->exists();
+        $speaker_type           = ($use_moderator && (!$max_moderators_reached || !$use_speakers)) ? 'moderator' : 'speaker';
         $actions = array();
 
-        if ($this->presentation->Speakers()->exists() && $max_moderators_reached) {
-            if (!$max_speakers_reached) {
-                $actions[] = FormAction::create('doAddSpeaker', '<i class="fa fa-plus fa-start"></i> Add another speaker');
+        if ( (!$use_speakers || $speakers_exists) && (!$use_moderator || $moderator_exists) ) {
+            if (($use_speakers && !$max_speakers_reached) || ($use_moderator && !$max_moderators_reached)) {
+                $actions[] = FormAction::create('doAddSpeaker', '<i class="fa fa-plus fa-start"></i> Add another '.$speaker_type);
             }
 
             $default_actions = $controller->createSaveActions('doFinishSpeaker', 3);
