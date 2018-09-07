@@ -5,8 +5,8 @@
                 <h4 class="summit-title script">The Summit</h4>
                 <h2>Home of Open Infrastructure</h2>
                 <div class="bird"> <span></span>
-                    <h5>Get your early bird ticket now! <br>
-                        <strong>$699 until august 21</strong></h5>
+                    <h5>Purchase your ticket now! <br>
+                        <strong>$999 until October 24</strong></h5>
                 </div>
             </div>
             <div class="col-lg-5 col-md-6 col-sm-12 about-buttons">
@@ -26,7 +26,7 @@
                     <li class="session"> <span></span> AI</li>
                     <li class="session"> <span></span> CI/CD</li>
                     <li class="session"> <span></span> Containers</li>
-                    <li class="session"> <span></span> Edge</li>
+                    <li class="session"> <span></span> Edge Computing</li>
                     <li class="session"> <span></span> Hybrid Cloud</li>
                     <li class="session"> <span></span> HPC</li>
                     <li class="session"> <span></span> NFV</li>
@@ -41,7 +41,7 @@
     <div class="container">
         <div class="row">
             <div class="video-container col-md-7 col-sm-12">
-                <h3 class="title-section">What to expect at the summit</h3>
+                <h3 class="title-section">What to Expect at the Summit</h3>
                 <a href="https://www.openstack.org/videos/austin-2016/bending-ironic-for-big-iron" class="video">
 
 
@@ -54,17 +54,14 @@
             <div class="text-container col-md-5 col-sm-12">
                 <h3 class="title-section">Who attends the summit</h3>
 
-                <p>Keynote presentations from notable openstack users and industry leaders will take place on monday and
-                    tuesday. breakout sessions throughout the week will cover topics including private cloud and multi-cloud
-                    strategy, edge computing, nfv, ci/cd and machine learning as well as hands-on-training and networking
-                    opportunities.
+                <p>Keynote presentations from the individuals building and operating open infrastructure will take place on Tuesday and Wednesday. Breakout sessions throughout the week will cover topics including public, private and hybrid cloud strategies, edge computing, container infrastructure integration, CI/CD and machine learning in addition to hands-on-training and networking opportunities. 
                 </p>
 
                 <ul class="attends">
-                    <li><span class="architecture"></span>Architecture & OPS</li>
+                    <li><span class="architecture"></span>Architecture & Ops</li>
                     <li><span class="platform"></span>Platform Developers</li>
-                    <li><span class="bussiness"></span>Bussiness & Strategy</li>
-                    <li><span class="upstream"></span>Upstream Developer</li>
+                    <li><span class="bussiness"></span>Business & Strategy</li>
+                    <li><span class="upstream"></span>Upstream Developers</li>
                 </ul>
             </div>
         </div>
@@ -231,8 +228,20 @@
                 <h3 class="title-section">Summit Overview</h3>
                 <div class="col-12 col-md-12 col-sm-6 col-xs-12 featured">
                     <ul class="overview">
-                        <li><a href=""><h5>Edge computing Hackaton</h5>
+                        <li><a href="https://www.openstack.org/summit/berlin-2018/summit-schedule/events/22723/berlin-hackathon-hacking-the-edge-hosted-by-open-telekom-cloud "><h5>Edge computing Hackaton</h5>
                                 <p><small>Saturday - Sunday</small></p> <i class="fal fa-info-circle"></i></a></li>
+                        <li><a href="https://www.openstack.org/summit/berlin-2018/summit-schedule/events/22721/openstack-upstream-institute-sponsored-by-lenovo-day-1-rsvp-required"><h5>OpenStack Upstream Institute</h5>
+                                <p><small>Sunday - Monday</small></p> <i class="fal fa-info-circle"></i></a></li>
+                        <li><a href="https://www.openstack.org/summit/berlin-2018/summit-schedule/#track=261 "><h5>Keynotes</h5>
+                                <p><small>Tuesday - Wednesday</small></p> <i class="fal fa-info-circle"></i></a></li>
+                        <li><a href="https://www.openstack.org/summit/berlin-2018/summit-schedule"><h5>Breakout Sessions</h5>
+                                <p><small>Tuesday - Thursday</small></p> <i class="fal fa-info-circle"></i></a></li>
+                        <li><a href="https://wiki.openstack.org/wiki/Forum"><h5>The Forum</h5>
+                                <p><small>Tuesday - Thursday</small></p> <i class="fal fa-info-circle"></i></a></li>
+                        <li><a href="https://www.openstack.org/summit/berlin-2018/summit-schedule/#track=254"><h5>Workshops and Trainings</h5>
+                                <p><small>Tuesday - Thursday</small></p> <i class="fal fa-info-circle"></i></a></li>
+                        <li><a href="https://www.openstack.org/summit/berlin-2018/summit-schedule/global-search?t=Marketplace"><h5>Open Infrastructure Marketplace</h5>
+                                <p><small>Tuesday - Thursday</small></p> <i class="fal fa-info-circle"></i></a></li>
                     </ul>
 
                 </div>
@@ -254,8 +263,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <h3 class="recap-title script">Thank you to our berlin 2018 sponsors!
-
+                <h3 class="recap-title script">Thank You to our Berlin 2018 Sponsors!
                 </h3>
             </div>
 
@@ -481,14 +489,14 @@
 
 
             <div class="col-sm-12 sponsor">
-                <h4 class="title">Become a summit sponsor</h4>
+                <h4 class="title">Become a Summit Sponsor</h4>
                 <p class="text">
                     Meet the open source users, IT decision makers and passionate developers, administrators and operators building the modern
                     infrastructure stack. Content and attendees span more than 30 open source communities including Ceph,
                     Docker, Kata Containers, Kubernetes, OpenStack, OPNFV, Zuul and more.
                 </p>
                 <p style="text-align: center;">
-                    <a class="btn register-btn-lrg" href="summit/berlin-2018/sponsors/">Sponsor the Summit <i class="fa fa-arrow-right"></i></a>
+                    <a class="btn register-btn-lrg" href="/summit/berlin-2018/sponsors/">Sponsor the Summit <i class="fa fa-arrow-right"></i></a>
                 </p>
             </div>
         </div>
@@ -504,9 +512,9 @@
                 <span></span>
                 <h2>Inclusive.<br>Diverse.<br>Open.</h2>
                 <p>We are a diverse community of professionals, and the OpenStack Foundation is dedicated to providing an
-                    inclusive and safe Summit experience for everyone. View the Summit Code of Conduct for more information.</p>
+                    inclusive and safe Summit experience for everyone. View the <a href="https://www.openstack.org/summit/berlin-2018/code-of-conduct/" target="_blank">Summit Code of Conduct</a> for more information.</p>
 
-                <p>Want to attend the Summit but don’t have the resources? <a href="">Apply for the travel support program.</a>
+                <p>Want to support community members who don’t have the resources to attend the Summit?  <a href="https://www.eventbrite.com/e/openstack-summit-november-2018-berlin-tickets-41880169715" target="_blank">Donate to the travel support program.</a>
                 </p>
             </div>
         </div>
@@ -520,18 +528,13 @@
 
                 <div class="pink box item big">
                     <h4>Get buy in from your boss</h4>
-                    <p>Justifying your trip to berlin this november is easier with when armed with the right information.</p>
-
-                    <p>Get budget info and other goodies to help convince your boss that you need to be at the Summit. </p>
-
-                    <p>Whether you’re interested in ci/cd, containers, edge, hpc, nfv, or public and private cloud, the summit
-                        is the place to be.</p>
-
-                    <p>To make it even easier, here’s a sample letter filled with demographics, attending companies, featured
-                        speakers and more that is bound to send you and your coworkers to the home of open infrastructure.
+                    <p>Justifying your trip to Berlin this November is easier with when armed with the right information.</p>
+                    <p>Get budget info and other goodies to help convince your boss that you need to be at the Summit.</p>
+                    <p>Whether you’re interested in CI/CD, Containers, Edge Computing, NFV, or Hybrid Cloud Strategy or you’re looking to collaborate with fellow operators and developers at the Forum, the Summit is the place to be. </p>
+                    <p>To make it even easier, here’s a sample letter filled with attendee demographics, sponsoring companies, featured speakers and more that is bound to send you and your coworkers to the home of open infrastructure.
                     </p>
 
-                    <button class="btn">Sponsor the summit <i class="fa fa-arrow-right"></i></button>
+                    <button class="btn">Sample Letter <i class="fa fa-arrow-right"></i></button>
                 </div>
                 <div class="video item">
                     <div class="embed-video"><iframe src="//www.youtube.com/embed/xZwqtldjJRQ?rel=0&showinfo=0" frameborder="0"
@@ -555,41 +558,33 @@
                         <p class='video-catpion'>{$Caption}</p>
                     </div>
                     <div class="video-cover">
-                        <h5>Lets Build the Open Infrastructure Economy
+                        <h5>Download the Summmit App Today
                         </h5>
                         <h6>Vancouver 2018</h6>
                     </div>
                 </div>
-                <div class="box light item">
-                    <h5 class="insight">“The Summit is a great opportunity for a member company to show, share and learn
-                        from communities and users.”</h5>
+                <div class="box light item  spec">
+                    <h4>Get the Summit Mobile App</h4>
+                    <p>Download for iOS and Android today</p>
 
-                    <div class="signature">
-                        <span class="photo"></span>
-                        <div class="info">
-                            <h5 class="name">Rob Hirschfield</h5>
-                            <div class="company">Inspur</div>
-                        </div>
-
-                        <span class="brand"></span>
-                    </div>
+                    <button class="btn" href="https://www.openstack.org/mobile">Get the App<i class="fa fa-arrow-right"></i></button>
                 </div>
 
                 <div class="box light item  spec">
-                    <h4>How are OpenStack Summit sessions selected?</h4>
-                    <p>What’s new and time-tested tips for the July 17 deadline</p>
+                    <h4>Get involved with the Forum</h4>
+                    <p>Formal topic submission opens September 12th.</p>
 
-                    <button class="btn">Read the article <i class="fa fa-arrow-right"></i></button>
+                    <button class="btn" href="https://www.openstack.org/summit/berlin-2018/call-for-presentations">Learn more <i class="fa fa-arrow-right"></i></button>
                 </div>
             </div>
 
             <div class="col-lg-4 col-md-4 col-sm-12">
                 <div class="box light item">
-                    <h4>Request your visa invitation letter</h4>
-                    <p>How are OpenStack Summit sessions selected?
+                    <h4>Visa Information</h4>
+                    <p>Check to see if you require a visa for Germany and request your letter by October 30, 2018.
                     </p>
 
-                    <button class="btn">Learn more <i class="fa fa-arrow-right"></i></button>
+                    <button class="btn" href="https://www.openstack.org/summit/berlin-2018/travel/#travel-support">Learn more <i class="fa fa-arrow-right"></i></button>
                 </div>
 
 
@@ -608,8 +603,8 @@
                     <div class="signature">
                         <span class="photo photo-bis"></span>
                         <div class="info">
-                            <h5 class="name">Johan</h5>
-                            <div class="company">Cumulus Networks</div>
+                            <h5 class="name">Johan Christenson</h5>
+                            <div class="company">City Networks</div>
                         </div>
 
                         <span class="brand  second"></span>

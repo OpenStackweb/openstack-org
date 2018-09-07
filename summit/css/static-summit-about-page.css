@@ -1143,7 +1143,7 @@ button.btn i, a.btn i {
 }
 
 .signature .brand.second {
-    background: url("../images/brand2.jpg") center no-repeat;
+    background: url("/assets/summits/homepageimages/citynetwork-tiny.jpg") center no-repeat;
 }
 
 .static-summit-about-page #push {

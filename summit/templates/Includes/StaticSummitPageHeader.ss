@@ -51,8 +51,7 @@
         <div class="highlight">
             <span class="megaphone"></span>
             <h5>
-                <strong>Register for $699</strong> before prices increase on August 21 at 11:59pm PT (August 22 at 6:59am
-                UTC)
+                <strong>Register for $999</strong> USD before prices increase on October 24 at 11:59pm PT (October 25 at 6:59am UTC)
             </h5>
         </div>
     </div>
