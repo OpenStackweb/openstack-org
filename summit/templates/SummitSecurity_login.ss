@@ -6,8 +6,8 @@
 </head>
 
 <body class="presentation-page">
-<div class="main-body">
-    <% include SummitPageHeaderSmall %>
+<div class="main-body" style="width: auto;height: auto;position: initial;">
+    <% include StaticSummitPageHeaderSmall %>
 
     <div id="wrap">
         <!-- Begin Page Content -->
@@ -15,7 +15,7 @@
         <!-- End Page Content -->
     </div>
 
-    <% include SummitPageFooter %>
+    <% include StaticSummitPageFooter %>
 
     <!-- Hidden Sidebar Nav -->
     <div class="sidebar-nav">
