@@ -44,6 +44,7 @@ button.btn i, a.btn i {
     display: block;
     background-size: cover;
     position: relative;
+    padding-bottom:120px;
 }
 
 .summit-hero-landing-short {
