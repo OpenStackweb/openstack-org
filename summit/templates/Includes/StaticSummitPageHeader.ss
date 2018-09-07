@@ -25,7 +25,7 @@
                         <% end_loop %>
 
                             <li class="link button-box">
-                                <a href="{$RegistrationLink}" class="btn register-btn-lrg">Get your tickets <i class="fa fa-arrow-right"></i>
+                                <a href="https://www.eventbrite.com/e/openstack-summit-november-2018-berlin-tickets-41880169715" class="btn register-btn-lrg">Get your tickets <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
                 </ul>

@@ -107,6 +107,7 @@ button.btn i, a.btn i {
 .summit-hero-landing .navbar .nav > li > a, .summit-hero-landing-short .navbar .nav > li > a  {
     color: #fff;
     text-transform: uppercase;
+    font-size: 0.9em;
 }
 
 .summit-banner {
@@ -198,6 +199,7 @@ button.btn i, a.btn i {
     background-color: #ed1944;
     font-size: 0.85em;
     padding: 1em;
+    font-size: 0.9em;
 }
 
 
@@ -217,16 +219,13 @@ button.btn i, a.btn i {
 
 .summit-hero-landing .nav li.link a, .summit-hero-landing-short .nav li.link a {
     border: none;
-    font-size: 0.9em;
-    padding: 1em;
 }
 .summit-hero-landing .nav li.link a:hover, .summit-hero-landing-short .nav li.link a:hover {
     color: #ffd602;
-    font-weight: bold;
 
 }
 
-.summit-hero-landing .nav li.link.current a, .summit-hero-landing-short .nav li.link.current a {
+.summit-hero-landing .nav li.current a, .summit-hero-landing-short .nav li.current a {
     background: transparent;
     color: #ffd602;
 }
@@ -1270,11 +1269,4 @@ footer .btn {
     background-color: #ed1944;
     margin-bottom: 1em;
     letter-spacing: 0.02em;
-}
-
-
-footer .btn:hover{
-    font-weight: bold;
-    background-color: #ed1944;
-
 }

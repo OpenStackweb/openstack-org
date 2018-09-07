@@ -9,32 +9,30 @@
                     </a>
                     <div class="links">
 
-                        <a href="http://openstack.org/projects/openstack-faq/">FAQ</a>
+                        <a href="https://www.openstack.org/summit/berlin-2018/faq/">FAQ</a>
                         <a href="/code-of-conduct">Code of Conduct</a>
-                        <a href="">Travel Support Program</a>
-                        <a href="">Spousivities</a>
-                        <a href="">Venue</a>
-                        <a href="">Nearby Hotels</a>
-                        <a href="">Visa Support</a>
-                        <a href="">Call For Presentations</a>
-                        <a href="">Past Summit Videos</a>
+                        <a href="https://www.openstack.org/summit/berlin-2018/travel/#travel-support">Travel Support & Visa</a>
+                        <a href="https://www.openstack.org/summit/berlin-2018/travel/#venue">Venue</a>
+                        <a href="https://www.openstack.org/summit/berlin-2018/travel/#hotels">Nearby Hotels</a>
+                        <a href="https://www.openstack.org/summit/berlin-2018/call-for-presentations">Call For Presentations</a>
+                        <a href="https://www.openstack.org/videos/summits">Past Summit Videos</a>
                     </div>
 
                 </div>
             </div>
             <div class="col-md-6 col-sm-12 openstack">
                 <div class="logo">
-                    <a href="/home"></a>
+                    <a href="https://www.openstack.org"></a>
                     <h5>Organized by the openstack foundation</h5>
                 </div>
 
                 <div class="links">
 
-                    <a href="">OpenstackSoftware</a> <span>|</span>
-                    <a href="">Kata Containers</a> <span>|</span>
-                    <a href="">Zuul</a> <span>|</span>
-                    <a href="">AirShip</a> <span>|</span>
-                    <a href="">StarLingx</a></div>
+                    <a href="https://www.openstack.org">Openstack Software</a> <span>|</span>
+                    <a href="https://katacontainers.io/">Kata Containers</a> <span>|</span>
+                    <a href="https://zuul-ci.org/">Zuul</a> <span>|</span>
+                    <a href="https://www.airshipit.org/">AirShip</a> <span>|</span>
+                    <a href="https://www.starlingx.io/">StarLingx</a></div>
             </div>
         </div>
     </div>

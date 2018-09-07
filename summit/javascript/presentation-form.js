@@ -144,7 +144,7 @@ function getCategories() {
             timeout:120000,
             dataType:'json',
             success: function (data, textStatus, jqXHR) {
-                var html     = '<label for="PresentationForm_PresentationForm_CategoryID">What is the general topic of the presentation?</label>';
+                var html     = '<label for="PresentationForm_PresentationForm_CategoryID">What is the general topic of this session?</label>';
                 var controls = [];
                 if (!$.isEmptyObject(data)) {
                     for(var key in data) {
