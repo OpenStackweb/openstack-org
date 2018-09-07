@@ -58,7 +58,11 @@ button.btn i, a.btn i {
     padding: 1em;
 }
 
-.summit-hero-landing .logo-box, .summit-hero-landing-short .logo-box  {
+.summit-hero-landing .navbar .container, .summit-hero-landing-short .navbar .container{
+    background: transparent;
+}
+
+.summit-hero-landing .logo-box, .summit-hero-landing-short .logo-box {
     display: inline-block;
     float: left;
     margin: 2em 1em 1em 1em;
