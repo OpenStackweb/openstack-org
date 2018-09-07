@@ -1,4 +1,4 @@
-<div class="summit-hero-landing-short">
+<div class="summit-hero-landing">
 
     <nav class="navbar navbar-default navbar-fixed-top" id="summit-main-nav">
         <div class="navbar-header">
