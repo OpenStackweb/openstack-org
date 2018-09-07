@@ -49,7 +49,7 @@ final class AddSpeakerForm extends BootstrapForm
         $max_moderators_reached = $this->presentation->maxModeratorsReached();
         $use_moderator          = $this->presentation->Type()->UseModerator;
         $moderator_exists       = $this->presentation->Moderator()->exists();
-        $speaker_type           = ($use_moderator && (!$max_moderators_reached || !$use_speakers)) ? 'moderator' : 'speaker';
+        $speaker_type           = ($use_moderator && (!$max_moderators_reached || !$use_speakers)) ? 'moderator' : 'moderator';
 
         $fields = FieldList::create(
             LiteralField::create('SpeakerNote',
@@ -84,14 +84,14 @@ final class AddSpeakerForm extends BootstrapForm
             || $this->presentation->ModeratorID == Member::currentUser()->getSpeakerProfile()->ID) {
             $fields->replaceField('SpeakerType', HiddenField::create('SpeakerType', '', 'Else'));
             $fields->field('EmailAddress')
-                ->setTitle('Enter the first name, last name or email address of your presenter/moderator (*)')
+                ->setTitle('Enter the first name, last name or email address of your '.$speaker_type.' (*)')
                 ->setDisplayLogicCriteria(null);
         }
 
         if ( (!$use_speakers || $speakers_exists) && (!$use_moderator || $moderator_exists) ) {
             if ( ($use_speakers && !$max_speakers_reached) || ($use_moderator && !$max_moderators_reached) ) {
                 $fields->insertBefore(
-                    LiteralField::create('MoreSpeakers', '<h3 class="more-speakers">Any more presenters/moderators to add?</h3>'),
+                    LiteralField::create('MoreSpeakers', '<h3 class="more-speakers">Any more '.$speaker_type.' to add?</h3>'),
                     'SpeakerNote'
                 );
                 $fields->removeField('SpeakerNote');
@@ -119,12 +119,12 @@ final class AddSpeakerForm extends BootstrapForm
         $max_moderators_reached = $this->presentation->maxModeratorsReached();
         $use_moderator          = $this->presentation->Type()->UseModerator;
         $moderator_exists       = $this->presentation->Moderator()->exists();
-        $speaker_type           = ($use_moderator && (!$max_moderators_reached || !$use_speakers)) ? 'moderator' : 'speaker';
+        $speaker_type           = ($use_moderator && (!$max_moderators_reached || !$use_speakers)) ? 'moderator' : 'moderator';
         $actions = array();
 
         if ( (!$use_speakers || $speakers_exists) && (!$use_moderator || $moderator_exists) ) {
             if (($use_speakers && !$max_speakers_reached) || ($use_moderator && !$max_moderators_reached)) {
-                $actions[] = FormAction::create('doAddSpeaker', '<i class="fa fa-plus fa-start"></i> Add another moderator');
+                $actions[] = FormAction::create('doAddSpeaker', '<i class="fa fa-plus fa-start"></i> Add another '.$speaker_type);
             }
 
             $default_actions = $controller->createSaveActions('doFinishSpeaker', 3);

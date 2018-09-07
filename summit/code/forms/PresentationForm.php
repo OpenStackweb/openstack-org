@@ -78,7 +78,7 @@ final class PresentationForm extends BootstrapForm
         foreach($types as $type){
             $instructions .= $type->Type;
             if(intval($type->MaxSpeakers > 0))
-                $instructions .= sprintf(" Max %s speakers", $type->MaxSpeakers);
+                $instructions .= sprintf(" Max %s moderators", $type->MaxSpeakers);
 
             if(intval($type->MaxModerators > 0))
                 $instructions .= sprintf(" %s moderator", $type->MaxModerators);
@@ -87,7 +87,7 @@ final class PresentationForm extends BootstrapForm
         }
         $instructions .= ')';
         $fields = FieldList::create()
-            ->text('Title', 'Proposed Presentation Title')
+            ->text('Title', 'Proposed Title')
                 ->configure()
                     ->setAttribute('autofocus','TRUE')
                 ->end()
@@ -98,7 +98,7 @@ final class PresentationForm extends BootstrapForm
                     ->setSource($types->map('ID', 'Type'))
                 ->end()
             ->literal('CategoryContainer','<div id="category_options"></div>')
-            ->dropdown('Level','Select the technical level of your presentation content')
+            ->dropdown('Level','Select the technical level of your session')
                 ->configure()
                     ->setEmptyString('-- Select one --')
                     ->setSource(Presentation::create()->dbObject('Level')->enumValues())
@@ -114,13 +114,13 @@ final class PresentationForm extends BootstrapForm
                     ->setRows(10)
                     ->setColumns(8)
                 ->end()
-            ->tinyMCEEditor('AttendeesExpectedLearnt','What should attendees expect to learn? (1000 chars)')
+            ->tinyMCEEditor('AttendeesExpectedLearnt','Why is this session useful? (1000 chars)')
                 ->configure()
                     ->setRows(20)
                     ->setColumns(8)
                 ->end()
             ->optionset('AttendingMedia',
-                'Are you available to discuss the topic of this presentation with attending media?',
+                'Are you available to discuss this topic with attending media?',
                 array(
                     1 => 'Yes',
                     0 => 'No'
@@ -145,7 +145,7 @@ final class PresentationForm extends BootstrapForm
                 ->end()
             ->literal('EndHr','<hr>');
 
-        $CategoryGroupField = new CategoryGroupField('GroupID','Select the <a href="'.$this->summit->Link.'categories" target="_blank">Summit Category</a> of your presentation');
+        $CategoryGroupField = new CategoryGroupField('GroupID','Select the <a href="'.$this->summit->Link.'categories" target="_blank">Summit Category</a> of your session');
         $CategoryGroupField->setSource($category_groups_map);
         if(count($category_groups_map) < 2 && count($category_groups_map) > 0 ) {
             $CategoryGroupField->setValue($category_groups_map[0]['id']);

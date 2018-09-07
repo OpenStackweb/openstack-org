@@ -19,7 +19,7 @@
         <% if $IsWelcome %>
             <div class="presentation-app-header success">
                 <div class="container">
-                    <p class="status">Welcome to OpenStack!</p>
+                    <p class="status">Welcome to the OpenStack CFP!</p>
                 </div>
             </div>
         <% end_if %>
