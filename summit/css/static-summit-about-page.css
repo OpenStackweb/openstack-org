@@ -39,16 +39,16 @@ button.btn i, a.btn i {
 }
 
 .summit-hero-landing, .summit-hero-landing-short {
-    background: url("../images/berlin.jpg") center no-repeat;
-    height: 80vh;
+    background: url("../images/berlin.jpg") center bottom no-repeat;
+    height: auto;
     display: block;
     background-size: cover;
     position: relative;
 }
 
 .summit-hero-landing-short {
-    height: 67vh;
-    top:-30px;
+    height: auto;
+    padding-bottom: 100px;
 }
 
 .summit-hero-landing .navbar, .summit-hero-landing-short .navbar  {
@@ -116,7 +116,7 @@ button.btn i, a.btn i {
 }
 
 .summit-hero-landing-short .summit-banner {
-    margin: 9em auto 0;
+    margin: 6em auto 0;
 }
 
 
@@ -134,6 +134,10 @@ button.btn i, a.btn i {
     font-weight: 1;
     margin-top: 0;
     color: #fff;
+}
+
+.summit-hero-landing-short .summit-banner h1 {
+    font-size: 7em;
 }
 
 
