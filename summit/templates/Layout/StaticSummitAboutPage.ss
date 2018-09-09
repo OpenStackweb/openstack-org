@@ -16,8 +16,8 @@
                     communities like Ansible, Ceph, Docker, Kata Containers, Kubernetes, ONAP, OpenStack, Open vSwitch, OPNFV
                     and Zuul.</p>
 
-                <button class="btn btn-default">Sponsor the Summit <i class="fal fa-arrow-right"></i></button>
-                <button class="btn btn-primary">Register for $699 Now <i class="fal fa-arrow-right"></i></button>
+                <button class="btn btn-default" href="/summit/berlin-2018/sponsors/">Sponsor the Summit <i class="fal fa-arrow-right"></i></button>
+                <button class="btn btn-primary" href="https://www.eventbrite.com/e/openstack-summit-november-2018-berlin-tickets-41880169715" target="_blank">Register for $999 Now <i class="fal fa-arrow-right"></i></button>
 
             </div>
             <div class="col-md-12 session-box">
@@ -221,7 +221,7 @@
                     </div>
                 </div>
                 <div class="col-xs-12">
-                    <button class="btn">See all summit speakers <i class="fa fa-arrow-right"></i></button>
+                    <button class="btn" href="/summit/berlin-2018/speakers">See all summit speakers <i class="fa fa-arrow-right"></i></button>
                 </div>
             </div>
             <div class="col-sm-12 col-lg-4 col-md-6 col-xs-12">
@@ -247,7 +247,7 @@
                 </div>
 
                 <div class="col-xs-12">
-                    <button class="btn">Full Summit Schedule<i class="fa fa-arrow-right"></i></button>
+                    <button class="btn" href="/summit/berlin-2018/summit-schedule/">Full Summit Schedule<i class="fa fa-arrow-right"></i></button>
                 </div>
             </div>
         </div>
@@ -530,11 +530,10 @@
                     <h4>Get buy in from your boss</h4>
                     <p>Justifying your trip to Berlin this November is easier with when armed with the right information.</p>
                     <p>Get budget info and other goodies to help convince your boss that you need to be at the Summit.</p>
-                    <p>Whether you’re interested in CI/CD, Containers, Edge Computing, NFV, or Hybrid Cloud Strategy or you’re looking to collaborate with fellow operators and developers at the Forum, the Summit is the place to be. </p>
                     <p>To make it even easier, here’s a sample letter filled with attendee demographics, sponsoring companies, featured speakers and more that is bound to send you and your coworkers to the home of open infrastructure.
                     </p>
 
-                    <button class="btn">Sample Letter <i class="fa fa-arrow-right"></i></button>
+                    <button class="btn" href="/summit/berlin-2018/sample-letter/">Sample Letter <i class="fa fa-arrow-right"></i></button>
                 </div>
                 <div class="video item">
                     <div class="embed-video"><iframe src="//www.youtube.com/embed/xZwqtldjJRQ?rel=0&showinfo=0" frameborder="0"
@@ -593,7 +592,7 @@
                     <p>Community leaders share tips and need-to-knows for the Summit-curious.
                     </p>
 
-                    <button class="btn">Read the article<i class="fa fa-arrow-right"></i></button>
+                    <button class="btn" href="http://superuser.openstack.org/articles/first-openstack-summit-vancouver-2/" target="_blank">Read the article<i class="fa fa-arrow-right"></i></button>
                 </div>
 
                 <div class="box light item">

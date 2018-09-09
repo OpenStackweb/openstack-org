@@ -592,6 +592,11 @@ button.btn i, a.btn i {
     padding: 0;
 }
 
+.overview li {
+    padding-bottom:1px;
+
+}
+
 .overview li a {
     width: 100%;
     background-color: #ed1944;
