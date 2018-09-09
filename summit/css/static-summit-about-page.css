@@ -967,7 +967,7 @@ button.btn i, a.btn i {
     position: relative;
 }
 
-.summit-insights .box button.btn {
+.summit-insights .box button.btn, .summit-insights .box a.btn {
     border: solid 2px #ed1944;
     color: #ed1944;
     background-color: transparent;
@@ -1013,7 +1013,7 @@ button.btn i, a.btn i {
     color: #fff;
 }
 
-.summit-insights .pink.box button.btn {
+.summit-insights .pink.box button.btn, .summit-insights .pink.box a.btn  {
     border-color: #fff;
     color: #fff;
 }

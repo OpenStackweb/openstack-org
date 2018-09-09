@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-7 col-md-6 col-sm-12">
-                <h4 class="summit-title script">The Summit</h4>
+                <h4 class="summit-title script">The OpenStack Summit</h4>
                 <h2>Home of Open Infrastructure</h2>
                 <div class="bird"> <span></span>
                     <h5>Purchase your ticket now! <br>
@@ -16,8 +16,8 @@
                     communities like Ansible, Ceph, Docker, Kata Containers, Kubernetes, ONAP, OpenStack, Open vSwitch, OPNFV
                     and Zuul.</p>
 
-                <button class="btn btn-default" href="/summit/berlin-2018/sponsors/">Sponsor the Summit <i class="fal fa-arrow-right"></i></button>
-                <button class="btn btn-primary" href="https://www.eventbrite.com/e/openstack-summit-november-2018-berlin-tickets-41880169715" target="_blank">Register for $999 Now <i class="fal fa-arrow-right"></i></button>
+                <a class="btn btn-default" href="/summit/berlin-2018/sponsors/">Sponsor the Summit <i class="fal fa-arrow-right"></i></a>
+                <a class="btn btn-primary" href="https://www.eventbrite.com/e/openstack-summit-november-2018-berlin-tickets-41880169715" target="_blank">Register for $999 Now <i class="fal fa-arrow-right"></i></a>
 
             </div>
             <div class="col-md-12 session-box">
@@ -221,7 +221,7 @@
                     </div>
                 </div>
                 <div class="col-xs-12">
-                    <button class="btn" href="/summit/berlin-2018/speakers">See all summit speakers <i class="fa fa-arrow-right"></i></button>
+                    <a class="btn" href="/summit/berlin-2018/speakers">See all summit speakers <i class="fa fa-arrow-right"></i></a>
                 </div>
             </div>
             <div class="col-sm-12 col-lg-4 col-md-6 col-xs-12">
@@ -247,7 +247,7 @@
                 </div>
 
                 <div class="col-xs-12">
-                    <button class="btn" href="/summit/berlin-2018/summit-schedule/">Full Summit Schedule<i class="fa fa-arrow-right"></i></button>
+                    <a class="btn" href="/summit/berlin-2018/summit-schedule/">Full Summit Schedule<i class="fa fa-arrow-right"></i></a>
                 </div>
             </div>
         </div>
@@ -533,7 +533,7 @@
                     <p>To make it even easier, here’s a sample letter filled with attendee demographics, sponsoring companies, featured speakers and more that is bound to send you and your coworkers to the home of open infrastructure.
                     </p>
 
-                    <button class="btn" href="/summit/berlin-2018/sample-letter/">Sample Letter <i class="fa fa-arrow-right"></i></button>
+                    <a class="btn" href="/summit/berlin-2018/sample-letter/">Sample Letter <i class="fa fa-arrow-right"></i></a>
                 </div>
                 <div class="video item">
                     <div class="embed-video"><iframe src="//www.youtube.com/embed/xZwqtldjJRQ?rel=0&showinfo=0" frameborder="0"
@@ -566,14 +566,14 @@
                     <h4>Get the Summit Mobile App</h4>
                     <p>Download for iOS and Android today</p>
 
-                    <button class="btn" href="https://www.openstack.org/mobile">Get the App<i class="fa fa-arrow-right"></i></button>
+                    <a class="btn" href="https://www.openstack.org/mobile">Get the App<i class="fa fa-arrow-right"></i></a>
                 </div>
 
                 <div class="box light item  spec">
                     <h4>Get involved with the Forum</h4>
                     <p>Formal topic submission opens September 12th.</p>
 
-                    <button class="btn" href="https://www.openstack.org/summit/berlin-2018/call-for-presentations">Learn more <i class="fa fa-arrow-right"></i></button>
+                    <a class="btn" href="https://www.openstack.org/summit/berlin-2018/call-for-presentations">Learn more <i class="fa fa-arrow-right"></i></a>
                 </div>
             </div>
 
@@ -583,7 +583,7 @@
                     <p>Check to see if you require a visa for Germany and request your letter by October 30, 2018.
                     </p>
 
-                    <button class="btn" href="https://www.openstack.org/summit/berlin-2018/travel/#travel-support">Learn more <i class="fa fa-arrow-right"></i></button>
+                    <a class="btn" href="https://www.openstack.org/summit/berlin-2018/travel/#travel-support">Learn more <i class="fa fa-arrow-right"></i></a>
                 </div>
 
 
@@ -592,7 +592,7 @@
                     <p>Community leaders share tips and need-to-knows for the Summit-curious.
                     </p>
 
-                    <button class="btn" href="http://superuser.openstack.org/articles/first-openstack-summit-vancouver-2/" target="_blank">Read the article<i class="fa fa-arrow-right"></i></button>
+                    <a class="btn" href="http://superuser.openstack.org/articles/first-openstack-summit-vancouver-2/" target="_blank">Read the article<i class="fa fa-arrow-right"></i></a>
                 </div>
 
                 <div class="box light item">
