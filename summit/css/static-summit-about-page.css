@@ -673,6 +673,10 @@ button.btn i, a.btn i {
     margin-left: 1em;
 }
 
+h3.recap-title {
+    font-size:3em;
+}
+
 .academy-wrapper .recap-title {
     margin: 2em 0 1em;
 }
@@ -727,7 +731,7 @@ button.btn i, a.btn i {
     margin-top: 0;
     color: #ed1944;
     font-weight: bold;
-    font-size: 52px;
+    font-size: 40px;
 }
 
 .sponsor .title {
