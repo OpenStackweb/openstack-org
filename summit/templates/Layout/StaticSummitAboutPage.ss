@@ -6,22 +6,21 @@
                 <h2>Home of Open Infrastructure</h2>
                 <div class="bird"> <span></span>
                     <h5>Purchase your ticket now! <br>
-                        <strong>$999 until October 24</strong></h5>
+                        <strong>$999 USD until October 24</strong></h5>
                 </div>
             </div>
             <div class="col-lg-5 col-md-6 col-sm-12 about-buttons">
 
                 <p>Join the people building and operating open infrastructure, with over 200 sessions and workshops on Container
                     Infrastructure, CI/CD, Telecom + NFV, Public Cloud, Private & Hybrid Cloud and members of open source
-                    communities like Ansible, Ceph, Docker, Kata Containers, Kubernetes, ONAP, OpenStack, Open vSwitch, OPNFV
-                    and Zuul.</p>
+                    communities like Ansible, Ceph, Docker, Kata Containers, Kubernetes, ONAP, OpenStack, Open vSwitch, OPNFV, Zuul, and more.</p>
 
                 <a class="btn btn-default" href="/summit/berlin-2018/sponsors/">Sponsor the Summit <i class="fal fa-arrow-right"></i></a>
-                <a class="btn btn-primary" href="https://www.eventbrite.com/e/openstack-summit-november-2018-berlin-tickets-41880169715" target="_blank">Register for $999 Now <i class="fal fa-arrow-right"></i></a>
+                <a class="btn btn-primary" href="https://www.eventbrite.com/e/openstack-summit-november-2018-berlin-tickets-41880169715" target="_blank">Register for $999 USD Now <i class="fal fa-arrow-right"></i></a>
 
             </div>
             <div class="col-md-12 session-box">
-                <h3>200 sessions and workshops</h3>
+                <h3>200 Sessions and Workshops</h3>
                 <ul class="sessions">
                     <li class="session"> <span></span> AI</li>
                     <li class="session"> <span></span> CI/CD</li>
@@ -52,7 +51,7 @@
                 </a>
             </div>
             <div class="text-container col-md-5 col-sm-12">
-                <h3 class="title-section">Who attends the summit</h3>
+                <h3 class="title-section">Who Attends the Summit</h3>
 
                 <p>Keynote presentations from the individuals building and operating open infrastructure will take place on Tuesday and Wednesday. Breakout sessions throughout the week will cover topics including public, private and hybrid cloud strategies, edge computing, container infrastructure integration, CI/CD and machine learning in addition to hands-on-training and networking opportunities. 
                 </p>
@@ -112,18 +111,6 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="https://www.openstack.org/assets/profile-images/DianeMuellerTwitterProfilePic2014.jpeg" alt="Diane Mueller" class="summit-user-image">
-                        </div>
-                        <div class="info">
-                            <div class="name">Diane Mueller</div>
-                            <div class="title">Red Hat</div>
-                            <div class="topic">OpenStack on Kubernetes</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
-                    <div class="summit-user-section">
-                        <div class="summit-user-image-box">
                             <img src="https://www.openstack.org/assets/profile-images/_resampled/SetRatioSize400400-kubecon2017.jpg" alt="Xu Wang" class="summit-user-image">
                         </div>
                         <div class="info">
@@ -143,6 +130,18 @@
                             <div class="name">Adrien Lebre</div>
                             <div class="title">IMT Atlantique</div>
                             <div class="topic">Edge Computing</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="https://www.openstack.org/assets/profile-images/DianeMuellerTwitterProfilePic2014.jpeg" alt="Diane Mueller" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Diane Mueller</div>
+                            <div class="title">Red Hat</div>
+                            <div class="topic">OpenStack on Kubernetes</div>
                         </div>
                     </div>
                 </div>
@@ -458,7 +457,7 @@
 
                     </div>
                     <div class="item">
-                        <h3>Media Sponsors</h3>
+                        <h3>Media Partners</h3>
 
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
                             <a rel="nofollow" href="http://thenewstack.io/"><img alt="The New Stack_big_logo" src="/assets/companies/main_logo/thenewstack-sp-lg.jpg"
@@ -564,16 +563,16 @@
                 </div>
                 <div class="box light item  spec">
                     <h4>Get the Summit Mobile App</h4>
-                    <p>Download for iOS and Android today</p>
+                    <p>Download the official Summit app (iOS or Android) and build your personal Summit schedule.</p>
 
                     <a class="btn" href="https://www.openstack.org/mobile">Get the App<i class="fa fa-arrow-right"></i></a>
                 </div>
 
                 <div class="box light item  spec">
                     <h4>Get involved with the Forum</h4>
-                    <p>Formal topic submission opens September 12th.</p>
+                    <p>Operators and developers attend the Forum to share feedback and collaboratively brainstorm requirements for the next release.</p>
 
-                    <a class="btn" href="https://www.openstack.org/summit/berlin-2018/call-for-presentations">Learn more <i class="fa fa-arrow-right"></i></a>
+                    <a class="btn" href="https://www.openstack.org/summit/berlin-2018/call-for-presentations">Get involved <i class="fa fa-arrow-right"></i></a>
                 </div>
             </div>
 

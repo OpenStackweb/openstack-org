@@ -4,7 +4,7 @@
             <div class="col-md-6 col-sm-12">
                 <div class="button-wrapper">
                     <a href="{$RegistrationLink}" class="btn register-btn-lrg">
-                        Get your early bird ticket now!
+                        Register for $999 USD now
                         <i class="fa fa-arrow-right"></i>
                     </a>
                     <div class="links">
