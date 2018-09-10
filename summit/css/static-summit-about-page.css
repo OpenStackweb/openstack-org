@@ -486,36 +486,42 @@ button.btn i, a.btn i {
 
 .session span {
     width: 100%;
-    height: 3em;
+    min-height: 4em;
+    height: auto;
     display: inline-block;
+    margin-bottom: 10px;
 }
 
 .session span.ai {
-    background: url("../images/ai.svg") center top no-repeat;
+    background: url("../images/ai.svg") center center no-repeat;
 }
 
 .session span.cicd {
-    background: url("../images/cicd.svg") center top no-repeat;
+    background: url("../images/cicd.svg") center center no-repeat;
 }
 
 .session span.container {
-    background: url("../images/container.svg") center top no-repeat;
+    background: url("../images/container.svg") center center no-repeat;
 }
 
 .session span.edge {
-    background: url("../images/edge.svg") center top no-repeat;
+    background: url("../images/edge.svg") center center no-repeat;
 }
 
 .session span.hpc {
-    background: url("../images/hpc.svg") center top no-repeat;
+    background: url("../images/hpc.svg") center center no-repeat;
 }
 
 .session span.hybrid {
-    background: url("../images/hybrid.svg") center top no-repeat;
+    background: url("../images/hybrid.svg") center center no-repeat;
 }
 
 .session span.nfv {
-    background: url("../images/nfv.svg") center top no-repeat;
+    background: url("../images/nfv.svg") center center no-repeat;
+}
+
+.session span.cloud {
+    background: url("../images/cloud.svg") center center no-repeat;
 }
 
 .what-to-expect {
