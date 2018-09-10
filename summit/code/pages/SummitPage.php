@@ -252,29 +252,14 @@ class SummitPage_Controller extends Page_Controller
         return $tracking_code;
     }
 
-    public function getSummitRoot(){
-        if($this->ClassName === 'SummitOverviewPage')
-            return $this->Link();
-        else{
-            //childs page
-            return $this->Parent()->Link();
-        }
+    public function getSummitAboutPageLink() {
+        return $this->Summit()->Link;
     }
 
-    public function getSummitAboutLink() {
-        if($this->ClassName === 'SummitStaticAboutBostonPage')
-            return $this->Link();
-        else{
-            //childs page
-            return $this->Parent()->Link();
-        }
-    }
-
-    public function MainNavClass(){
-        if($this->ClassName === 'SummitOverviewPage' || $this->ClassName === 'SummitNewStaticAboutPage')
+    public function getAboutPageNavClass(){
+        if($this->Summit()->Link == $this->Link())
             return 'current';
-        else{
-            //childs page
+        else {
             return 'link';
         }
     }

@@ -19,4 +19,12 @@ class StaticSummitAboutPage_Controller extends Page_Controller {
 		Requirements::javascript('summit/javascript/static-summit-about-page.js');
 
     }
+
+    public function getSummitAboutPageLink() {
+        return $this->Link();
+    }
+
+    public function getAboutPageNavClass(){
+        return 'current';
+    }
 }
