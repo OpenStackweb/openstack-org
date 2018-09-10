@@ -39,7 +39,7 @@
             <div class="summit-banner">
                 <h4 class="script">Join us November 13-15, 2018 in</h4>
                 <h1 class="inline">Berlin, Germany</h1>
-                <h5> <span class="arrow left"></span><strong>CityCube</strong> <span class="arrow right"></span></h5>
+                <h5><span class="arrow left"></span><strong>CityCube</strong><span class="arrow right"></span></h5>
             </div>
         </div>
     </div>
