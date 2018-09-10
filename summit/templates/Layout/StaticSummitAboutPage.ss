@@ -13,7 +13,7 @@
 
                 <p>Join the people building and operating open infrastructure, with over 200 sessions and workshops on Container
                     Infrastructure, CI/CD, Telecom + NFV, Public Cloud, Private & Hybrid Cloud and members of open source
-                    communities like Ansible, Ceph, Docker, Kata Containers, Kubernetes, ONAP, OpenStack, Open vSwitch, OPNFV, Zuul, and more.</p>
+                    communities like Ansible, Ceph, Docker, Kata Containers, Kubernetes, ONAP, OpenStack, Open vSwitch, OPNFV, Zuul and more.</p>
 
                 <a class="btn btn-default" href="/summit/berlin-2018/sponsors/">Sponsor the Summit <i class="fal fa-arrow-right"></i></a>
                 <a class="btn btn-primary" href="https://www.eventbrite.com/e/openstack-summit-november-2018-berlin-tickets-41880169715" target="_blank">Register for $999 USD Now <i class="fal fa-arrow-right"></i></a>
@@ -53,7 +53,7 @@
             <div class="text-container col-md-5 col-sm-12">
                 <h3 class="title-section">Who Attends the Summit</h3>
 
-                <p>Keynote presentations from the individuals building and operating open infrastructure will take place on Tuesday and Wednesday. Breakout sessions throughout the week will cover topics including public, private and hybrid cloud strategies, edge computing, container infrastructure integration, CI/CD and machine learning in addition to hands-on-training and networking opportunities. 
+                <p>Thousands of IT decision makers, operators and the developers will gather at the Summit to collaborate across common use cases and solve real problems. In Berlin, you can meet people from over 50 countries and 600 companies using and contributing to over 35 open source projects. 
                 </p>
 
                 <ul class="attends">
@@ -104,7 +104,7 @@
                         <div class="info">
                             <div class="name">Luca Cervigni</div>
                             <div class="title">Pawsey Supercomputing Centre</div>
-                            <div class="topic">Openstack & Openshift</div>
+                            <div class="topic">GPUs on OpenStack</div>
                         </div>
                     </div>
                 </div>
@@ -154,7 +154,7 @@
                         <div class="info">
                             <div class="name">Thomas Lunkwitz</div>
                             <div class="title">Metronom</div>
-                            <div class="topic">OpenStack at large retail enterprise</div>
+                            <div class="topic">OpenStack for Retail</div>
                         </div>
                     </div>
                 </div>
@@ -166,7 +166,7 @@
                         <div class="info">
                             <div class="name">Feilong Wang</div>
                             <div class="title">Catalyst Cloud</div>
-                            <div class="topic">Kubernetes on OpenStack public cloud</div>
+                            <div class="topic">Kubernetes on OpenStack</div>
                         </div>
                     </div>
                 </div>
@@ -177,8 +177,8 @@
                         </div>
                         <div class="info">
                             <div class="name">Stefan Kroll</div>
-                            <div class="title">Volkswagen</div>
-                            <div class="topic">Data protection</div>
+                            <div class="title">Volkswagen Financial Services</div>
+                            <div class="topic">Data Protection</div>
                         </div>
                     </div>
                 </div>
@@ -527,9 +527,9 @@
 
                 <div class="pink box item big">
                     <h4>Get buy in from your boss</h4>
-                    <p>Justifying your trip to Berlin this November is easier with when armed with the right information.</p>
-                    <p>Get budget info and other goodies to help convince your boss that you need to be at the Summit.</p>
-                    <p>To make it even easier, here’s a sample letter filled with attendee demographics, sponsoring companies, featured speakers and more that is bound to send you and your coworkers to the home of open infrastructure.
+                    <p>Justifying your trip to Berlin this November is easier when armed with the right information.</p>
+                    <p>Get budget info and event details to help convince your boss that you need to attend the Summit.</p>
+                    <p>To make it even easier, here’s a sample letter filled with info on who you can expect to meet, information on hands-on training opportunities, collaborative sessions, networking events and more that is bound to send you and your coworkers to the home of open infrastructure. 
                     </p>
 
                     <a class="btn" href="/summit/berlin-2018/sample-letter/">Sample Letter <i class="fa fa-arrow-right"></i></a>

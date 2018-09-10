@@ -36,7 +36,7 @@
     <div class="row text-wrapper">
         <div class="col-md-12  title-box">
             <div class="summit-banner">
-                <h4 class="script">Join us November 13-15 2018 in</h4>
+                <h4 class="script">Join us November 13-15, 2018 in</h4>
                 <h1 class="inline">Berlin, Germany</h1>
                 <h5> <span class="arrow left"></span><strong>CityCube</strong> <span class="arrow right"></span></h5>
             </div>
