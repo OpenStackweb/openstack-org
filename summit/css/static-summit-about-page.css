@@ -173,19 +173,17 @@ button.btn i, a.btn i {
 .summit-banner h5 strong:before, .summit-banner h5 strong:after  {
     position: absolute;
     content: '';
-    background-size: cover;
-    background-position-y: 7px;
     width: 5em;
     height: 1em;
     display: inline-block;
     margin: 0 0.5em;
 }
 .summit-banner h5 strong:before {
-    left: -5px;
+    left: 100%;
     background: url("../images/arrow-right.svg") bottom left no-repeat;
 }
 .summit-banner h5 strong:after {
-    right: -5px;
+    right: 64%;
     background: url("../images/arrow-left.svg") bottom left no-repeat;
 }
 
