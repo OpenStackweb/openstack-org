@@ -277,6 +277,9 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
             if ($response->getStatusCode() == 200) {
                 $files = json_decode($response->getBody());
                 foreach ($files as $file) {
+                    $extension = pathinfo($file->name, PATHINFO_EXTENSION);
+                    if( !in_array($extension, ['yml','yaml']) ) continue;
+
                     // now read yaml file of parent category and extract subcategories and components
                     echo sprintf("processing file %s ", $file->name).PHP_EOL;
                     $yamlResponse = $this->client->get($file->download_url);
@@ -344,9 +347,9 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                                 }
 
                                 $comp->Name = (isset($component['title'])) ? $component['title'] : '';
-                                $comp->CodeName = (isset($component['title'])) ? ucfirst($component['name']) : '';
-                                $comp->Description = (isset($component['title'])) ? $component['desc'] : '';
-                                $comp->Since = (isset($component['title'])) ? $component['since'] : '';
+                                $comp->CodeName = (isset($component['name'])) ? ucfirst($component['name']) : '';
+                                $comp->Description = (isset($component['desc'])) ? $component['desc'] : '';
+                                $comp->Since = (isset($component['since'])) ? $component['since'] : '';
 
 
                                 $comp->CategoryID = $subcat2->ID;
