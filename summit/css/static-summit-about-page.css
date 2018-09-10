@@ -357,9 +357,13 @@ button.btn i, a.btn i {
 
 @media all and (max-width: 450px) {
     .about-summit-header h2 {
-        font-size: 3.6em;
+        font-size: 3em;
         word-wrap: break-word; 
     }
+    .about-summit-header .summit-title {
+    font-size: 2em;
+    }
+
 }
 
 @media all and (min-width: 1200px) {
@@ -370,13 +374,19 @@ button.btn i, a.btn i {
 
 @media (min-width: 500px) and (max-width: 676px) {
     .about-summit-header h2 {
-        font-size: 63px;
+        font-size: 3.2em;
+    }
+    .about-summit-header .summit-title {
+    font-size: 2.2em;
     }
 }
 
 @media (min-width: 677px) and (max-width: 991px) {
     .about-summit-header h2 {
-        font-size: 90px;
+        font-size: 3.4em;
+    }
+    .about-summit-header .summit-title {
+    font-size: 2.4em;
     }
 }
 
@@ -982,6 +992,19 @@ h3.recap-title {
     padding: 0.75em 2em;
 }
 
+@media all and (max-width: 450px) {
+    .summit-insights .box button.btn, .summit-insights .box a.btn {
+    margin-top: .3em;
+}
+
+}
+
+@media (min-width: 500px) and (max-width: 676px) {
+    .summit-insights .box button.btn, .summit-insights .box a.btn {
+    margin-top: .3em;
+}
+}
+
 .summit-insights .box .btn {
     margin: 0 auto;
 }
@@ -996,6 +1019,21 @@ h3.recap-title {
     font-size: 1.5em;
     line-height: 1.5em;
     margin: 0 0 1em;
+}
+
+@media all and (max-width: 450px) {
+    .summit-insights .box h4 {
+    font-size: 1.2em;
+    line-height: 1.2em;
+}
+
+}
+
+@media (min-width: 500px) and (max-width: 676px) {
+    .summit-insights .box h4 {
+    font-size: 1.2em;
+    line-height: 1.2em;
+}
 }
 
 .summit-insights .box .insight {

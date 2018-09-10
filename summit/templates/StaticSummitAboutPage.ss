@@ -14,7 +14,7 @@
 
     <body>
         <div class="main-body static-summit-about-page">
-            <% include StaticSummitPageHeader %>
+            <% include StaticSummitPageHeaderSmall %>
 
             <div id="wrap">
 

@@ -41,7 +41,7 @@
         <div class="row">
             <div class="video-container col-md-7 col-sm-12">
                 <h3 class="title-section">What to Expect at the Summit</h3>
-                <a href="https://www.openstack.org/videos/austin-2016/bending-ironic-for-big-iron" class="video">
+                <a href="https://youtu.be/8I2P1QKxUZA" class="video">
 
 
                     <span>
