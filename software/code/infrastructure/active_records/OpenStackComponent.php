@@ -34,7 +34,8 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
         'VideoDescription'             => 'Text',
         'VideoTitle'                   => 'Varchar',
         'ShowOnMarketplace'            => 'Boolean(1)',
-        'Slug'                         => 'Varchar(255)'
+        'Slug'                         => 'Varchar(255)',
+        'Since'                        => 'Varchar(255)'
     );
 
     static $has_one = array

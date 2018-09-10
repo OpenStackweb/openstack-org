@@ -53,15 +53,15 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
             $releases = OpenStackRelease::get()->where(" Name <> 'Trunk' ")->sort('ReleaseDate', 'DESC');
             DB::query('DELETE FROM OpenStackComponentReleaseCaveat;');
             $this->processProjects();
-            //$this->processCategories();
+            $this->processComponentsAndCategories();
             foreach($releases as $release)
             {
                 echo sprintf('processing release %s ...', $release->Name).PHP_EOL;
                 $this->processApiVersionsPerRelease($release);
                 $this->processProjectPerRelease($release);
-                $this->getInstallationGuideStatus($release);
-                $this->getSDKSupport($release);
-                $this->getQualityOfPackages($release);
+                //$this->getInstallationGuideStatus($release);
+                //$this->getSDKSupport($release);
+                //$this->getQualityOfPackages($release);
                 $this->getStackAnalytics($release);
             }
         });
@@ -264,7 +264,7 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
         }
     }
 
-    private function processCategories()
+    private function processComponentsAndCategories()
     {
         // disable all categories
         DB::query("UPDATE `OpenStackComponentCategory` SET `Enabled` = 0 ");
@@ -338,7 +338,16 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                                 //echo sprintf("--- comp %s ", $compSlug).PHP_EOL;
 
                                 $comp = OpenStackComponent::get()->filter('Slug', $compSlug)->first();
-                                if (!$comp) continue;
+                                if (!$comp) {
+                                    $comp = new OpenStackComponent();
+                                    $comp->Slug = $compSlug;
+                                }
+
+                                $comp->Name = (isset($component['title'])) ? $component['title'] : '';
+                                $comp->CodeName = (isset($component['title'])) ? ucfirst($component['name']) : '';
+                                $comp->Description = (isset($component['title'])) ? $component['desc'] : '';
+                                $comp->Since = (isset($component['title'])) ? $component['since'] : '';
+
 
                                 $comp->CategoryID = $subcat2->ID;
                                 $comp->write();
