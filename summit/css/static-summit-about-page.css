@@ -168,7 +168,6 @@ button.btn i, a.btn i {
     max-width: 40%;
     display: inline-block;
     text-align: center;
-    margin-left: 0.25em;
 }
 
 .summit-banner h5 span {
@@ -188,11 +187,13 @@ button.btn i, a.btn i {
 .summit-banner h5 span.arrow.right {
     background: url("../images/arrow-right.svg") bottom left no-repeat;
     background-size: cover;
+    background-position-y: 7px;
 }
 
 .summit-banner h5 span.arrow.left {
     background: url("../images/arrow-left.svg") bottom left no-repeat;
     background-size: cover;
+    background-position-y: 7px;
 }
 
 .link.button-box .btn {
@@ -362,6 +363,9 @@ button.btn i, a.btn i {
     }
     .about-summit-header .summit-title {
     font-size: 2em;
+    }
+    .about-summit-header {
+        padding-top: 4em;
     }
 
 }
