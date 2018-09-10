@@ -46,23 +46,21 @@ class OpenStackComponentCategory extends DataObject implements IOpenStackCompone
             $this->Order = $siblings_count + 1;
         }
 
-        $slug = strtolower($this->Name);
-        $slug = preg_replace("/[^a-z0-9_\s-]/", "", $slug);
-        $slug = preg_replace("/[\s-]+/", " ", $slug);
-        $slug = preg_replace("/[\s_]/", "-", $slug);
+        if (empty($this->Slug)) {
+            $slug = strtolower($this->Name);
+            $slug = preg_replace("/[^a-z0-9_\s-]/", "", $slug);
+            $slug = preg_replace("/[\s-]+/", " ", $slug);
+            $slug = preg_replace("/[\s_]/", "-", $slug);
 
-        $checkSlug = $slug;
-        $counter = 0;
-        while($slugExists = OpenStackComponentCategory::get()->filter('Slug', $checkSlug)->count()) {
-            $counter++;
-            $checkSlug = $slug . '-' . $counter;
+            $checkSlug = $slug;
+            $counter = 0;
+            while ($slugExists = OpenStackComponentCategory::get()->exclude('ID', $this->ID)->filter('Slug', $checkSlug)->count()) {
+                $counter++;
+                $checkSlug = $slug . '-' . $counter;
+            }
+
+            $this->Slug = $checkSlug;
         }
-
-        if($checkSlug) {
-            $slug = $checkSlug;
-        }
-
-        $this->Slug = $slug;
 
         // if removed from a collection of subcategories we disable the category
         if (!$this->ParentCategoryID && $this->isChanged('ParentCategoryID')) {
