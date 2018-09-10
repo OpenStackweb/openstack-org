@@ -729,6 +729,12 @@ h3.recap-title {
     position: absolute;
 }
 
+@media all and (max-width: 600px) {
+    .academy-wrapper .carousel .carousel-control span {
+    margin-top:-15px;
+}
+}
+
 .academy-wrapper .carousel .carousel-control.left span {
     right: 0;
 }
@@ -741,7 +747,13 @@ h3.recap-title {
     margin-top: 0;
     color: #ed1944;
     font-weight: bold;
-    font-size: 40px;
+    font-size: 3.4em;
+}
+
+@media all and (max-width: 600px) {
+    .academy-wrapper .carousel h3 {
+    font-size: 2.1em;
+    }
 }
 
 .sponsor .title {
