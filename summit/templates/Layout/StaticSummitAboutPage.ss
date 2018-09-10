@@ -22,14 +22,14 @@
             <div class="col-md-12 session-box">
                 <h3>200 Sessions and Workshops</h3>
                 <ul class="sessions">
-                    <li class="session"> <span></span> AI</li>
-                    <li class="session"> <span></span> CI/CD</li>
-                    <li class="session"> <span></span> Containers</li>
-                    <li class="session"> <span></span> Edge Computing</li>
-                    <li class="session"> <span></span> Hybrid Cloud</li>
-                    <li class="session"> <span></span> HPC</li>
-                    <li class="session"> <span></span> NFV</li>
-                    <li class="session"> <span></span> Public & Private Cloud</li>
+                    <li class="session"> <span class="ai"></span> AI</li>
+                    <li class="session"> <span class="cicd"></span> CI/CD</li>
+                    <li class="session"> <span class="container"></span> Containers</li>
+                    <li class="session"> <span class="edge"></span> Edge Computing</li>
+                    <li class="session"> <span class="hybrid"></span> Hybrid Cloud</li>
+                    <li class="session"> <span class="hpc"></span> HPC</li>
+                    <li class="session"> <span class="nfv"></span> NFV</li>
+                    <li class="session"> <span class="cloud"></span> Public & Private Cloud</li>
                 </ul>
             </div>
         </div>
