@@ -303,6 +303,7 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
 
                     $category->Enabled = 1;
                     $category->write();
+                    $subCatOrder = 1;
 
                     foreach($categoryYaml['tabs'] as $tab) {
                         $subcatName = $tab['name'];
@@ -319,9 +320,13 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                             }
                             $subcat->Enabled = 1;
                             $subcat->ParentCategoryID = $category->ID;
+                            $subcat->Order = $subCatOrder;
                             $subcat->write();
+
+                            $subCatOrder++;
                         }
 
+                        $subSubCatOrder = 1;
                         foreach($tab['categories'] as $subcategory) {
                             $subcatName2 = $subcategory['category'];
                             //echo sprintf("-- cat %s ", $subcatName2).PHP_EOL;
@@ -334,8 +339,12 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                             $subcat2->Enabled = 1;
                             $subcat2->ParentCategoryID = $subcat->ID;
                             $subcat2->OpenStackComponents()->removeAll();
+                            $subcat2->Order = $subSubCatOrder;
                             $subcat2->write();
 
+                            $subSubCatOrder++;
+
+                            $compOrder = 1;
                             foreach($subcategory['components'] as $component) {
                                 $compSlug = $component['name'];
                                 //echo sprintf("--- comp %s ", $compSlug).PHP_EOL;
@@ -350,10 +359,11 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                                 $comp->CodeName = (isset($component['name'])) ? ucfirst($component['name']) : '';
                                 $comp->Description = (isset($component['desc'])) ? $component['desc'] : '';
                                 $comp->Since = (isset($component['since'])) ? $component['since'] : '';
-
-
                                 $comp->CategoryID = $subcat2->ID;
+                                $comp->Order = $compOrder;
                                 $comp->write();
+
+                                $compOrder++;
                             }
                         }
                     }
