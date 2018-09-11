@@ -361,6 +361,26 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                                 $comp->Since = (isset($component['since'])) ? $component['since'] : '';
                                 $comp->CategoryID = $subcat2->ID;
                                 $comp->Order = $compOrder;
+
+                                $comp->Links()->removeAll();
+
+                                if (isset($component['links'])) {
+                                    foreach ($component['links'] as $linkArray) {
+                                        foreach ($linkArray as $label => $link) {
+                                            $linkObj = Link::get()->filter(['Label' => $label, 'URL' => $link])->First();
+
+                                            if (!$linkObj) {
+                                                $linkObj = new Link();
+                                                $linkObj->Label = $label;
+                                                $linkObj->URL = $link;
+                                                $linkObj->write();
+                                            }
+
+                                            $comp->Links()->add($linkObj);
+                                        }
+                                    }
+                                }
+
                                 $comp->write();
 
                                 $compOrder++;

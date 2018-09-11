@@ -1593,3 +1593,7 @@ th.maturity, td.maturity {
   color:  #1F78BC!important;
 	width: 45px;
 }
+
+.component-link {
+  margin-right: 10px;
+}

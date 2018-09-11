@@ -28,7 +28,7 @@
                     </p>
                     <% end_if %>
                     <p>
-                        <a href="/marketplace" target="_blank"><%t Software.FIND_SERVICE_MARKETPLACE 'Find this service in the Marketplace' %></a>
+                        <%t Software.FIRST_APPEARANCE 'First appear in ' %> $Component.Since
                     </p>
                 </div>
             </div>
@@ -37,6 +37,19 @@
             <div class="col-sm-12 about-project-details">
                 <h4><%t Software.ABOUT_PROJECT 'About this project' %></h4>
                 $Component.Description
+
+                <% if $Component.Links().Count %>
+                    <hr style="margin: 40px 0;">
+                    <h4><%t Software.RELATED_LINKS 'Related Links' %></h4>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <% loop $Component.Links() %>
+                                <a class="component-link" href="{$URL}">{$Label}</a>
+                            <% end_loop %>
+                        </div>
+                    </div>
+                <% end_if %>
+
                 <% if $HasAdditionalInfo || $HasMaturityIndicators %>
                     <hr style="margin: 40px 0;">
                     <h4><%t Software.PROJECT_DETAILS 'Project details' %></h4>
@@ -240,14 +253,6 @@
                     <% end_loop %>
                 </ul>
                 <% end_if %>
-                <% if $MostActiveIndividualContributors %>
-                <h4>Most Active Individual Contributors</h4>
-                <ul>
-                    <% loop $MostActiveIndividualContributors %>
-                        <li>$Name</li>
-                    <% end_loop %>
-                </ul>
-                <% end_if %>
                 <% if $Component.RelatedContent %>
                 <h4><%t Software.RELATED_CONTENT 'Related Content' %></h4>
                 <ul>
@@ -258,21 +263,14 @@
                 <% end_if %>
             </div>
             <div class="col-sm-6 right">
-                <h4><%t Software.API_HISTORY 'API Version History' %></h4>
-                <div class="project-timeline">
+                <% if $MostActiveIndividualContributors %>
+                    <h4>Most Active Individual Contributors</h4>
                     <ul>
-                        <% loop Releases %>
-                            <li <% if $Status == Current %>class="timeline-current"<% end_if %><% if $Status == Future %>class="timeline-future"<% end_if %>>
-                                <a href="https://releases.openstack.org/{$Slug}/index.html#{$Slug}-{$Top.Component.Slug}" target="_blank">
-                                    <%t Software.VERSION 'Version' %> {$getCurrentSupportedApiVersionLabel($Top.Component.ID)} ({$Name}) <% if $Status == Current %>- LATEST RELEASE<% end_if %>
-                                </a>
-                            </li>
+                        <% loop $MostActiveIndividualContributors %>
+                            <li>$Name</li>
                         <% end_loop %>
-                        <li class="timeline-past">
-                            <%t Software.PREVIOUS_DEPRECATED 'Previous Versions Deprecated' %>
-                        </li>
                     </ul>
-                </div>
+                <% end_if %>
             </div>
         </div>
         <div class="row">

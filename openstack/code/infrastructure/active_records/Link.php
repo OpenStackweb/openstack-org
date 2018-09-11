@@ -22,7 +22,7 @@ class Link extends DataObject {
 	);
 	
 	static $has_one = array(
-		'Page' => 'Page'
+		'Page' => 'DataObject'
 	);
 	
 	static $singular_name = 'Link';
