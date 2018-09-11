@@ -27,9 +27,11 @@
                         </a>
                     </p>
                     <% end_if %>
+                    <% if $Component.Since %>
                     <p>
-                        <%t Software.FIRST_APPEARANCE 'First appear in ' %> $Component.Since
+                        <%t Software.FIRST_APPEARANCE 'First appeared in ' %> $Component.Since
                     </p>
+                    <% end_if %>
                 </div>
             </div>
         </div>
