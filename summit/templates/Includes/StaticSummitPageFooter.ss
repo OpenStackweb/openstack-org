@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-6 col-sm-12">
                 <div class="button-wrapper">
-                    <a href="{$RegistrationLink}" class="btn register-btn-lrg">
+                    <a href="https://openstacksummit2018berlin.eventbrite.com/?aff=BerlinSummit2018" class="btn register-btn-lrg">
                         Register for $999 USD now
                         <i class="fa fa-arrow-right"></i>
                     </a>
