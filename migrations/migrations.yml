@@ -112,3 +112,4 @@ migrations:
   - CreateContainersPaperMigration
   - CreateEdgeComputingPaperMigration
   - CreateSummitAdminRoomGroupMigration
+  - UpdateTrackTemplateQuestionIntegrityMigration
