@@ -113,3 +113,4 @@ migrations:
   - CreateEdgeComputingPaperMigration
   - CreateSummitAdminRoomGroupMigration
   - UpdateTrackTemplateQuestionIntegrityMigration
+  - Survey2017To2018Migration
