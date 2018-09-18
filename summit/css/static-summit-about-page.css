@@ -201,6 +201,15 @@ button.btn i, a.btn i {
     }
 }
 
+@media all and (max-width: 400px) {
+    .summit-banner h5 strong:before, .summit-banner h5 strong:after  {
+        margin-top: .2em;
+    }
+    .summit-banner h5 strong:after {
+        right: 98%;
+    }
+}
+
 .summit-banner h5 span.arrow.right {
     background: url("../images/arrow-right.svg") bottom left no-repeat;
     background-size: cover;
