@@ -50,7 +50,13 @@ SQL;
                 );
             }
 
+            if($old_survey->isComplete())
+                $new_survey->markComplete();
+
             $new_survey->write();
+
+            DB::query(sprintf("UPDATE Survey SET Created='2018-08-20 00:00:00', LastEdited = '2018-08-20 00:00:00' WHERE ID = %s", $new_survey->ID));
+
         }
     }
 }
