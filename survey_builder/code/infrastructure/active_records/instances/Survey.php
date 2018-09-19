@@ -23,7 +23,8 @@ class Survey extends DataObject implements ISurvey
         'BeenEmailed' => 'Boolean',
         'IsTest'      => 'Boolean',
         'State'       => "Enum('INCOMPLETE,SAVED,COMPLETE','INCOMPLETE')",
-        'Lang'        => 'Varchar(10)'
+        'Lang'        => 'Varchar(10)',
+        'IsMigrated'  => 'Boolean',
     ];
 
     static $indexes = [];
@@ -44,6 +45,7 @@ class Survey extends DataObject implements ISurvey
     static $defaults = [
         'BeenEmailed' => false,
         'IsTest'      => false,
+        'IsMigrated'  => false,
     ];
 
     static $searchable_fields = [
