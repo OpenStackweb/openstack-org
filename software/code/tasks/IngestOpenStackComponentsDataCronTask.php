@@ -271,120 +271,114 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
 
         try {
             // iterate between files in repo
-            $feed = new RestfulService("https://api.github.com/repos/ttx/openstack-map/contents/", 3600);
-            $response = $feed->request();
+            $fileUrl = 'https://raw.githubusercontent.com/openstack/openstack-map/master/';
+            $files = ['deployment_tools.yaml','openstack_components.yaml','sdks.yaml'];
 
-            if ($response->getStatusCode() == 200) {
-                $files = json_decode($response->getBody());
-                foreach ($files as $file) {
-                    $extension = pathinfo($file->name, PATHINFO_EXTENSION);
-                    if( !in_array($extension, ['yml','yaml']) ) continue;
+            foreach ($files as $file) {
+                // now read yaml file of parent category and extract subcategories and components
+                echo sprintf("processing file %s ", $file).PHP_EOL;
+                $yamlResponse = $this->client->get($fileUrl.$file);
 
-                    // now read yaml file of parent category and extract subcategories and components
-                    echo sprintf("processing file %s ", $file->name).PHP_EOL;
-                    $yamlResponse = $this->client->get($file->download_url);
+                if (is_null($yamlResponse)) continue;
+                if ($yamlResponse->getStatusCode() != 200) continue;
+                $body = $yamlResponse->getBody();
+                if (is_null($body)) continue;
+                $content = $body->getContents();
+                if (empty($content)) continue;
 
-                    if (is_null($yamlResponse)) continue;
-                    if ($yamlResponse->getStatusCode() != 200) continue;
-                    $body = $yamlResponse->getBody();
-                    if (is_null($body)) continue;
-                    $content = $body->getContents();
-                    if (empty($content)) continue;
+                $categoryYaml = Spyc::YAMLLoadString($content);
 
-                    $categoryYaml = Spyc::YAMLLoadString($content);
+                // create parent category per file
+                $categoryName = $categoryYaml['name'];
+                $category = OpenStackComponentCategory::get()->filter('Name', $categoryName)->first();
+                if (!$category) {
+                    $category = new OpenStackComponentCategory();
+                    $category->Name = $categoryName;
+                }
 
-                    // create parent category per file
-                    $categoryName = $categoryYaml['name'];
-                    $category = OpenStackComponentCategory::get()->filter('Name', $categoryName)->first();
-                    if (!$category) {
-                        $category = new OpenStackComponentCategory();
-                        $category->Name = $categoryName;
+                $category->Enabled = 1;
+                $category->write();
+                $subCatOrder = 1;
+
+                foreach($categoryYaml['tabs'] as $tab) {
+                    $subcatName = $tab['name'];
+                    //echo sprintf("- cat %s ", $subcatName).PHP_EOL;
+
+                    // one level categories will have a tab with same name as category, so we skip the level
+                    if ($subcatName == $categoryName) {
+                        $subcat = $category;
+                    } else {
+                        $subcat = OpenStackComponentCategory::get()->filter('Name', $subcatName)->first();
+                        if (!$subcat) {
+                            $subcat = new OpenStackComponentCategory();
+                            $subcat->Name = $subcatName;
+                        }
+                        $subcat->Enabled = 1;
+                        $subcat->ParentCategoryID = $category->ID;
+                        $subcat->Order = $subCatOrder;
+                        $subcat->write();
+
+                        $subCatOrder++;
                     }
 
-                    $category->Enabled = 1;
-                    $category->write();
-                    $subCatOrder = 1;
+                    $subSubCatOrder = 1;
+                    foreach($tab['categories'] as $subcategory) {
+                        $subcatName2 = $subcategory['category'];
+                        //echo sprintf("-- cat %s ", $subcatName2).PHP_EOL;
 
-                    foreach($categoryYaml['tabs'] as $tab) {
-                        $subcatName = $tab['name'];
-                        //echo sprintf("- cat %s ", $subcatName).PHP_EOL;
-
-                        // one level categories will have a tab with same name as category, so we skip the level
-                        if ($subcatName == $categoryName) {
-                            $subcat = $category;
-                        } else {
-                            $subcat = OpenStackComponentCategory::get()->filter('Name', $subcatName)->first();
-                            if (!$subcat) {
-                                $subcat = new OpenStackComponentCategory();
-                                $subcat->Name = $subcatName;
-                            }
-                            $subcat->Enabled = 1;
-                            $subcat->ParentCategoryID = $category->ID;
-                            $subcat->Order = $subCatOrder;
-                            $subcat->write();
-
-                            $subCatOrder++;
+                        $subcat2 = OpenStackComponentCategory::get()->filter('Name', $subcatName2)->first();
+                        if (!$subcat2) {
+                            $subcat2 = new OpenStackComponentCategory();
+                            $subcat2->Name = $subcatName2;
                         }
+                        $subcat2->Enabled = 1;
+                        $subcat2->ParentCategoryID = $subcat->ID;
+                        $subcat2->OpenStackComponents()->removeAll();
+                        $subcat2->Order = $subSubCatOrder;
+                        $subcat2->write();
 
-                        $subSubCatOrder = 1;
-                        foreach($tab['categories'] as $subcategory) {
-                            $subcatName2 = $subcategory['category'];
-                            //echo sprintf("-- cat %s ", $subcatName2).PHP_EOL;
+                        $subSubCatOrder++;
 
-                            $subcat2 = OpenStackComponentCategory::get()->filter('Name', $subcatName2)->first();
-                            if (!$subcat2) {
-                                $subcat2 = new OpenStackComponentCategory();
-                                $subcat2->Name = $subcatName2;
+                        $compOrder = 1;
+                        foreach($subcategory['components'] as $component) {
+                            $compSlug = $component['name'];
+                            //echo sprintf("--- comp %s ", $compSlug).PHP_EOL;
+
+                            $comp = OpenStackComponent::get()->filter('Slug', $compSlug)->first();
+                            if (!$comp) {
+                                $comp = new OpenStackComponent();
+                                $comp->Slug = $compSlug;
                             }
-                            $subcat2->Enabled = 1;
-                            $subcat2->ParentCategoryID = $subcat->ID;
-                            $subcat2->OpenStackComponents()->removeAll();
-                            $subcat2->Order = $subSubCatOrder;
-                            $subcat2->write();
 
-                            $subSubCatOrder++;
+                            $comp->Name = (isset($component['title'])) ? $component['title'] : '';
+                            $comp->CodeName = (isset($component['name'])) ? ucfirst($component['name']) : '';
+                            $comp->Description = (isset($component['desc'])) ? $component['desc'] : '';
+                            $comp->Since = (isset($component['since'])) ? $component['since'] : '';
+                            $comp->CategoryID = $subcat2->ID;
+                            $comp->Order = $compOrder;
 
-                            $compOrder = 1;
-                            foreach($subcategory['components'] as $component) {
-                                $compSlug = $component['name'];
-                                //echo sprintf("--- comp %s ", $compSlug).PHP_EOL;
+                            $comp->Links()->removeAll();
 
-                                $comp = OpenStackComponent::get()->filter('Slug', $compSlug)->first();
-                                if (!$comp) {
-                                    $comp = new OpenStackComponent();
-                                    $comp->Slug = $compSlug;
-                                }
+                            if (isset($component['links'])) {
+                                foreach ($component['links'] as $linkArray) {
+                                    foreach ($linkArray as $label => $link) {
+                                        $linkObj = Link::get()->filter(['Label' => $label, 'URL' => $link])->First();
 
-                                $comp->Name = (isset($component['title'])) ? $component['title'] : '';
-                                $comp->CodeName = (isset($component['name'])) ? ucfirst($component['name']) : '';
-                                $comp->Description = (isset($component['desc'])) ? $component['desc'] : '';
-                                $comp->Since = (isset($component['since'])) ? $component['since'] : '';
-                                $comp->CategoryID = $subcat2->ID;
-                                $comp->Order = $compOrder;
-
-                                $comp->Links()->removeAll();
-
-                                if (isset($component['links'])) {
-                                    foreach ($component['links'] as $linkArray) {
-                                        foreach ($linkArray as $label => $link) {
-                                            $linkObj = Link::get()->filter(['Label' => $label, 'URL' => $link])->First();
-
-                                            if (!$linkObj) {
-                                                $linkObj = new Link();
-                                                $linkObj->Label = $label;
-                                                $linkObj->URL = $link;
-                                                $linkObj->write();
-                                            }
-
-                                            $comp->Links()->add($linkObj);
+                                        if (!$linkObj) {
+                                            $linkObj = new Link();
+                                            $linkObj->Label = $label;
+                                            $linkObj->URL = $link;
+                                            $linkObj->write();
                                         }
+
+                                        $comp->Links()->add($linkObj);
                                     }
                                 }
-
-                                $comp->write();
-
-                                $compOrder++;
                             }
+
+                            $comp->write();
+
+                            $compOrder++;
                         }
                     }
                 }
