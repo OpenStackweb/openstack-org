@@ -277,7 +277,7 @@
         </div>
         <div class="row">
             <div class="col-sm-12 project-details-footnotes">
-                <h6><a target="_blank" href="http://stackalytics.com"><%t Software.CHARTS_ATTR 'Statistics and charts provided by stackalytics.com' %></a></h6>
+                <a href="https://git.openstack.org/cgit/openstack/openstack-map" target="_blank">Propose changes to this page</a> | <a target="_blank" href="http://stackalytics.com"><%t Software.CHARTS_ATTR 'Statistics and charts provided by stackalytics.com' %></a>
             </div>
         </div>
         <!-- Stats 'what does this mean?' Modal -->
