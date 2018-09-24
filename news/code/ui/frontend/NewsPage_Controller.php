@@ -145,13 +145,32 @@ final class NewsPage_Controller extends Page_Controller {
         return 'OK';
     }
 
+
+    /**
+     * @return string
+     */
+    public function getPageTitle()
+    {
+        $article_id = intval($this->request->param('NEWS_ID'));
+        $article = $this->news_repository->getNewsByID($article_id);
+
+        if(!is_null($article)){
+            return Convert::raw2att($article->Headline);
+        }
+
+        return parent::getPageTitle();
+    }
+
     public function MetaTags()
     {
         $article_id = intval($this->request->param('NEWS_ID'));
         $article = $this->news_repository->getNewsByID($article_id);
 
         if(!is_null($article)){
-            return $article->MetaTags();
+            $tags = "<meta name=\"title\" content=\"" . Convert::raw2att($article->Headline) . "\" />".PHP_EOL;
+            $tags.= "<meta name=\"description\" content=\"" . Convert::raw2att($article->Summary) . "\" />".PHP_EOL;
+            $tags .= $article->MetaTags();
+            return $tags;
         }
 
         $tags = parent::MetaTags();
