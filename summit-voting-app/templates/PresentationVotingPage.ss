@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
    <head>
-   	  <% base_tag %>
+      <% base_tag %>
+      <title>$PageTitle</title>
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta name="description" content="">
-      <meta name="author" content="">
       $MetaTags(false)
 
-      <title>Vote For $Parent.Title Summit Presentations | OpenStack Open Source Cloud Computing Software</title>
       <!-- Bootstrap Core CSS -->
       <% require css("themes/openstack/css/bootstrap3.css") %>
       <!-- Custom CSS -->

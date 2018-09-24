@@ -15,6 +15,8 @@
 class Page extends SiteTree
 {
 
+    const PageCustomTitle = 'OpenStack is open source software for creating private and public clouds.';
+
     private static $db = [
         'IncludeJquery'    => 'Boolean',
         'PageJavaScript'   => 'Text',
@@ -562,17 +564,20 @@ class Page_Controller extends ContentController
 
     public function MetaTags()
     {
-        $tags = parent::MetaTags(false);
+        $tags = "<meta name=\"title\" content=\"" . Convert::raw2att($this->getPageTitle()) . "\" />".PHP_EOL;
+        $tags .= parent::MetaTags(false);
         return $tags;
     }
 
+    /**
+     * @return string
+     */
     public function getPageTitle()
     {
-        if ($this->MetaTitle) {
-            return $this->MetaTitle;
-        } else {
-            return parent::getTitle(). ' - OpenStack is open source software for creating private and public clouds.';
-        }
+        $meta_title = $this->MetaTitle;
+        if(!empty($meta_title))
+            return trim($meta_title);
+        return parent::getTitle(). ' - ' .Page::PageCustomTitle;
     }
 
     public function showUpdateProfileModal(){

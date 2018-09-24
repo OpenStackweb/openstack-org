@@ -684,6 +684,20 @@ APP_LINKS;
         return Presentation::getLevels();
     }
 
+    public function getPageTitle()
+    {
+        $entity  = $this->getSummitEntity($this->getRequest());
+
+        if(!is_null($entity)) {
+            $title = Convert::raw2att($entity->getOGTitle());
+            if (!empty($title)) {
+                return SummitPage::PageCustomTitle .' | ' .$title;
+            }
+        }
+
+        return parent::getPageTitle();
+    }
+
     public function MetaTags()
     {
         $request = $this->getRequest();
@@ -691,8 +705,14 @@ APP_LINKS;
         $entity  = $this->getSummitEntity($request);
 
         if(!is_null($entity)){
-            return $entity->MetaTags();
+            $tags = "<meta name=\"title\" content=\"" . Convert::raw2att($entity->getOGTitle()) . "\" />".PHP_EOL;
+            $description = $entity->getOGDescription();
+            if(!empty($description))
+                $tags .= "<meta name=\"description\" content=\"" . Convert::raw2att($description) . "\" />".PHP_EOL;
+            $tags .= $entity->MetaTags();
+            return $tags;
         }
+
         $tags = parent::MetaTags();
         // default one
         $url_path = "schedule";

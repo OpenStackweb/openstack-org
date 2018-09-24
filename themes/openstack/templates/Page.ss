@@ -4,15 +4,13 @@
 
 <html lang="en">
   <head>
+    <% base_tag %>
+    <title>$PageTitle</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="globalsign-domain-verification" content="tWFOHNAA_WMHmHfBMq38uTgupHFugV_dZ2rqyRxNMx" />
-    <title>$getPageTitle()</title>
-
     $MetaTags(false)
-
-    <% base_tag %>
 
     <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://www.openstack.org/blog/feed/" />
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png"> 

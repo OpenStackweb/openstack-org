@@ -28,6 +28,15 @@ class PresentationVotingPage extends Page
  */
 class PresentationVotingPage_Controller extends Page_Controller
 {
+
+    /**
+     * @return string
+     */
+    public function getPageTitle()
+    {
+        $page_name = $this->Parent->Title;
+        return "Vote For ${$page_name}  Summit Presentations | OpenStack Open Source Cloud Computing Software";
+    }
     /**
      * @var array
      */

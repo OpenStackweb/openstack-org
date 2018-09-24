@@ -3,10 +3,10 @@
 
 <html lang="en">
   <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>$Title &raquo; OpenStack Open Source Cloud Computing Software</title>
+	  <% base_tag %>
+      <title>$PageTitle</title>
 
-	<% base_tag %>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
 	<!-- IE CSS -->
 	<!--[if lt IE 8]><link rel="stylesheet" href="/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->

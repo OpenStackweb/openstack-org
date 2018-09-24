@@ -12,6 +12,14 @@ class TrackChairsPage extends Page
 class TrackChairsPage_Controller extends Page_Controller
 {
 
+    /**
+     * @return string
+     */
+    public function getPageTitle()
+    {
+       return "Track Chairs App | OpenStack.org";
+    }
+
 	private static $url_handlers = [
         '$Page/$Action/$ID' => 'handleIndex'
 	];

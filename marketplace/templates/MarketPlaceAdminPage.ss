@@ -3,10 +3,9 @@
 
 <html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>$Title &raquo; OpenStack Open Source Cloud Computing Software</title>
-
     <% base_tag %>
+    <title>$PageTitle</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 <body id="$URLSegment">
 

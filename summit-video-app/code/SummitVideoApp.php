@@ -327,8 +327,14 @@ class SummitVideoApp_Controller extends Page_Controller
                 'Presentation.Slug' => trim($presentation_slug),
             ])->first();
 
-            if(!is_null($video))
-                return $video->MetaTags();
+            if(!is_null($video)) {
+                $tags = "<meta name=\"title\" content=\"" . Convert::raw2att($video->Name) . "\" />".PHP_EOL;
+                $description = $video->getSocialSummary();
+                if(!empty($description))
+                    $tags .= "<meta name=\"description\" content=\"" . Convert::raw2att($description) . "\" />".PHP_EOL;
+                $tags .= $video->MetaTags();
+                return $tags;
+            }
         }
 
         return parent::MetaTags();

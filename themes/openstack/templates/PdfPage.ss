@@ -4,13 +4,11 @@
 
 <html lang="en">
   <head>
+	<% base_tag %>
+    <title>$PageTitle</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>$Title</title>
-    
-    <% base_tag %>
 
-    
-    <!-- Google Fonts -->
+  <!-- Google Fonts -->
 	<link href='http://fonts.googleapis.com/css?family=PT+Sans&subset=latin' rel='stylesheet' type='text/css'>
     
     <!-- OpenStack Specific CSS -->

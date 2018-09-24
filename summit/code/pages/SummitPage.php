@@ -4,6 +4,8 @@
 class SummitPage extends Page
 {
 
+    const PageCustomTitle = 'OpenStack Summit';
+
     private static $has_one = array(
         'SummitImage'   => 'SummitImage',
         'Summit'        => 'Summit',
@@ -129,6 +131,10 @@ class SummitPage_Controller extends Page_Controller
         return $summit->isInDB() ? $summit : false;
     }
 
+    public function getPageTitle()
+    {
+        return SummitPage::PageCustomTitle ." | {$this->Title}";
+    }
 
     public function PreviousSummit()
     {
