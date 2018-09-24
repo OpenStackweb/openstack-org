@@ -170,22 +170,6 @@ button.btn i, a.btn i {
     text-align: center;
     position: relative;
 }
-.summit-banner h5 strong:before, .summit-banner h5 strong:after  {
-    position: absolute;
-    content: '';
-    width: 5em;
-    height: 1em;
-    display: inline-block;
-    margin: 0 0.5em;
-}
-.summit-banner h5 strong:before {
-    left: 100%;
-    background: url("../images/arrow-right.svg") bottom left no-repeat;
-}
-.summit-banner h5 strong:after {
-    right: 64%;
-    background: url("../images/arrow-left.svg") bottom left no-repeat;
-}
 
 .summit-banner h5 span {
     width: 5em;
