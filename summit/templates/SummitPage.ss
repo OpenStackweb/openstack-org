@@ -14,7 +14,12 @@
 
 <body>
 <div class="main-body">
-    <% include StaticSummitPageHeaderSmall %>
+
+    <% if $Summit.Active %>
+        <% include StaticSummitPageHeaderSmall %>
+    <% else %>
+        <% include SummitPageHeaderSmall %>
+    <% end_if %>
 
     <div id="wrap">
 
@@ -24,7 +29,7 @@
         <div id="push"></div>
     </div>
 
-    <% if not Summit.RegistrationLink %>
+    <% if not $Summit.RegistrationLink %>
 
         <% include RegistrationModal %>
 
@@ -32,7 +37,12 @@
 
     <% include DownloadAppModal %>
 
-    <% include StaticSummitPageFooter %>
+
+    <% if $Summit.Active %>
+        <% include StaticSummitPageFooter %>
+    <% else %>
+        <% include SummitPageFooter %>
+    <% end_if %>
 
     <!-- Hidden Sidebar Nav -->
     <div class="sidebar-nav">
