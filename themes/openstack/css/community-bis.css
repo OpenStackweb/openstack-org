@@ -228,10 +228,10 @@
 }
 
 .where-to-start {
-    padding: 50px;
-    margin-top: 50px;
+    padding: 80px;
     color: white;
     background-image: url('/themes/openstack/images/community/bg.png');
+    background-position-y: -80px;
 }
 
 .where-to-start h2 {
@@ -370,17 +370,19 @@
     background-color: #63bb5e;
     color: white;
     padding: 30px 0px;
+    margin-top: 20px;
 }
 
 .communicate .communicate-header {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 .communicate .communicate-title {
     text-align: center;
     font-size: 2.5em;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    margin-top: 20px;
 }
 
 .communicate .communicate-item .communicate-item-title {
@@ -388,7 +390,7 @@
     font-size: 1.2em;
     border-bottom: 1px solid white;
     padding-bottom: 5px;
-    margin: 0px 75px 5px 0px;
+    margin: 0px 40px 5px 0px;
 }
 
 .communicate .communicate-item {
@@ -406,24 +408,24 @@
 }
 
 .communicate .sign-up-input {
-    padding: 10px;
+    padding: 25px;
     margin-top: 15px;
-    width: 54%;
+    width: 75%;
 }
 
 .communicate .sign-up-submit {
     background-color: #276024;
     margin-top: 15px;
-    padding: 7px;
-    font-size: 12px;
+    padding: 14px;
+    font-size: 15px;
     font-weight: bold;
-    width: 75px;
+    width: 15%;
 }
 
 
 
 .quick-links-banner {
-    margin-top: 0px;
+    margin-top: 50px;
 }
 
 .quick-links-banner img {
@@ -432,6 +434,9 @@
 
 .quick-links {
     color: #2b4d68;
+    background: #F3F7FB;
+    margin-top: 80px;
+    padding-bottom: 40px;
 }
 
 .quick-links .quick-links-header {
@@ -445,11 +450,14 @@
     width: 300px;
     margin: auto;
     font-weight: bold;
+    margin-bottom: 20px;
 }
 
 .quick-links .quick-links-header .pre-title span{
-    background-color: white;
     padding: 0 10px;
+    z-index: 1;
+    background-color: #F3F7FB;
+    position: relative;
 }
 
 .quick-links .quick-links-header .pre-title:after{
@@ -460,13 +468,14 @@
     right: 0;
     height: 0.7em;
     border-top: 1px solid #2b4d68;
-    z-index: -1;
+    z-index: 0;
 }
 
 .quick-links .quick-links-header h1 {
     font-weight: 400;
     margin-top: 10px;
     font-size: 2.2em;
+    margin-bottom: 50px;
 }
 
 .quick-links .quick-links-item {
@@ -486,6 +495,9 @@
     text-decoration: underline;
 }
 
+#community footer {
+    margin-top: 0px !important;
+}
 
 /*Five column layout*/
 .col-xs-5ths, .col-sm-5ths, .col-md-5ths, .col-lg-5ths {
@@ -587,8 +599,7 @@
     }
 
     .where-to-start {
-        padding: 10px;
-        margin-top: 20px;
+        padding: 30px;
     }
 
     .where-to-start h2 {
@@ -748,8 +759,7 @@
     }
 
     .where-to-start {
-        padding: 20px;
-        margin-top: 30px;
+        padding: 40px;
     }
 
     .project-options {

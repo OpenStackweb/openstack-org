@@ -2,23 +2,15 @@
 <div class="banner">
     <div class="container">
         <div class="row">
-            <div class="col-md-4 col-xs-12 banner-img-wrapper pull-right">
-                <img src="themes/openstack/images/community/rocket.png" />
-            </div>
-            <div class="col-md-8 col-xs-12 banner-text-wrapper pull-right">
-                <h2>New to the community?</h2>
+            <div class="col-md-12 banner-text-wrapper text-center">
+                <h2 class="text-center">Welcome to the OpenStack Community</h2>
                 <p>
-                    Then you are in the right place! There are lots of benefits to participation, including opportinities to influence the future of the project.
-                    Find out how to get started:
+                    We’re glad you’re here! If you’re looking for resources, contacts,
+                    documentation or ways to communicate then you’re in the right place.
+                    We know that getting involved (or more involved) can be a little overwhelming,
+                    so we’ll do our best to guide you through. To start things off,
+                    we’re even making it easy to find your way around this page. Enjoy!
                 </p>
-                <a href="https://docs.openstack.org/contributors" target="_blank" class="banner-button btn btn-primary">
-                    Contributor Guide <i class="fa fa-chevron-circle-right fa-inverse" aria-hidden="true"></i>
-                </a>
-                <hr />
-                <p>
-                    Already a contributor and looking for resources? <a href="/community/#quicklinks" class="bannerquicklinks">Skip to Quick Links</a>
-                </p>
-                
             </div>
         </div>
     </div>
@@ -92,11 +84,106 @@
         </div>
     </div>
 </div>
+<div class="quick-links">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 quick-links-header">
+                <div class="pre-title">
+                    <span>THE QUICK LINKS</span><a name="quicklinks"></a>
+                </div>
+                <h1>Contributor Resources</h1>
+            </div>
+            <div class="col-md-3 col-sm-3 quick-links-item">
+                <div class="quick-links-item-title">
+                    Who are we?
+                </div>
+                <div>
+                    <a href="https://governance.openstack.org/tc/reference/opens.html" target="_blank">Four Opens</a><br>
+                    <a href="https://governance.openstack.org/tc/reference/principles.html" target="_blank">Our guiding principles</a><br>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3 quick-links-item">
+                <div class="quick-links-item-title">
+                    Resources for projects
+                </div>
+                <div>
+                    <a href="#" target="_blank">Tags</a><br>
+                    <a href="https://governance.openstack.org/tc/goals/" target="_blank">Community wide goals</a><br>
+                    <a href="https://releases.openstack.org/" target="_blank">Release schedule</a><br>
+                    <a href="#" target="_blank">Onboarding</a><br>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3 quick-links-item">
+                <div class="quick-links-item-title">
+                    App developers
+                </div>
+                <div>
+                    <a href="#" target="_blank">SDKs</a><br>
+                    <a href="https://governance.openstack.org/sigs/" target="_blank">Working groups & SIGs</a><br>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3 quick-links-item">
+                <div class="quick-links-item-title">
+                    Getting started
+                </div>
+                <div>
+                    <a href="https://governance.openstack.org/tc/reference/help-most-needed.html" target="_blank">Top 5 projects that need contributors</a><br>
+                    <a href="https://docs.openstack.org" target="_blank">Tutorials</a><br>
+                    <a href="https://www.openstack.org/assets/marketing/OpenStack-101-Modular-Deck-1.pptx" target="_blank">OpenStack 101</a><br>
+                    <a href="https://storyboard.openstack.org/" target="_blank">Report a bug</a><br>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3 quick-links-item">
+                <div class="quick-links-item-title">
+                    Diversity
+                </div>
+                <div>
+                    <a href="/legal/community-code-of-conduct/">Code of Conduct</a><br>
+                    <a href="http://lists.openstack.org/cgi-bin/mailman/listinfo/women-of-openstack" target="_blank">Women of OpenStack mailing list</a><br>
+                    <a href="https://www.outreachy.org/" target="_blank">Outreachy</a>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3 quick-links-item">
+                <div class="quick-links-item-title">
+                    Foundation
+                </div>
+                <div>
+                    <a href="https://www.openstack.org/join/" target="_blank">Join</a><br>
+                    <a href="https://governance.openstack.org/tc/">Technical Committee</a><br>
+                    <a href="https://governance.openstack.org/uc/">User Committee</a><br>
+                    <a href="https://www.openstack.org/foundation/board-of-directors/">Board of Directors</a><br>
+                    <a href="https://www.openstack.org/foundation/staff" target="_blank">Staff</a>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3 quick-links-item">
+                <div class="quick-links-item-title">
+                    Marketing & Branding
+                </div>
+                <div>
+                    <a href="/marketing">Marketing Portal</a><br>
+                    <a href="/brand/">Commercial Logos</a><br>
+                    <a href="/project-mascots/">Project Mascots</a><br>
+                    <a href="/store">Store</a>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3 quick-links-item">
+                <div class="quick-links-item-title">
+                    Career
+                </div>
+                <div>
+                    <a href="/marketplace/training/">Training</a><br>
+                    <a href="/coa">COA</a><br>
+                    <a href="/jobs">Jobs</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="where-to-start">
     <div class="container">
         <div class="row">
             <div class="col-md-7 col-sm-6">
-                <h2>Where should I start?</h2>
+                <h2>How can I get more involved?</h2>
                 <p>
                     OpenStack is a large community, and it can seem overwhelming when you don't know where to start.
                     The best way to approach it is to get involved with a specific project, working group or local meetup.
@@ -119,7 +206,6 @@
         </div>
     </div>
 </div>
-
 <div class="help">
     <div class="container">
         <div class="row">
@@ -172,6 +258,9 @@
         </div>
     </div>
 </div>
+<div class="quick-links-banner">
+    <img src="themes/openstack/images/community/quicklinks.png" />
+</div>
 <div class="communicate">
     <div class="container">
         <div class="row">
@@ -189,7 +278,7 @@
             </div>
             <div class="col-md-4 col-sm-6 communicate-item">
                 <div class="communicate-item-title">
-                    IRC channels (on Freenode)
+                    IRC
                 </div>
                 <div>
                     <a href="https://docs.openstack.org/contributors/common/irc.html" target="_blank">How to set up IRC</a>
@@ -213,24 +302,21 @@
             </div>
             <div class="col-md-4 col-sm-6 communicate-item">
                 <div class="communicate-item-title">
-                    Other tools
-                </div>
-                <div>
-                    <a href="https://wiki.openstack.org/" target="_blank">Wiki</a><br>
-                    <a href="https://etherpad.openstack.org/" target="_blank">Etherpad</a><br>
-                    <a href="https://ethercalc.openstack.org/" target="_blank">Ethercalc</a><br>
-                    <a href="https://paste.openstack.org/" target="_blank">Pastebin</a><br>
-                    <a href="https://wiki.openstack.org/wiki/Infrastructure/Conferencing" target="_blank">Conference call bridge</a>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6 communicate-item">
-                <div class="communicate-item-title">
                     Info & Forums
                 </div>
                 <div>
-                    <a href="https://www.openstack.org/blog/" target="_blank">Planet OpenStack (blog aggregator)</a><br>
                     <a href="http://superuser.openstack.org/" target="_blank">Superuser Magazine</a><br>
+                    <a href="https://www.openstack.org/blog/" target="_blank">Developer Digest</a><br>
                     <a href="https://ask.openstack.org/" target="_blank">Q&A Forum</a>
+                </div>
+            </div>
+            <div class="col-md-8 col-sm-6 communicate-item">
+                <div class="communicate-item-title">
+                    Sign up to hear from the Foundation
+                </div>
+                <div class="form-inline">
+                    <input class="form-control sign-up-input" placeholder="Email Address" />
+                    <a href="" class="sign-up-submit btn"> SUBMIT </a>
                 </div>
             </div>
             <div class="col-md-4 col-sm-6 communicate-item">
@@ -241,123 +327,13 @@
                     <a href="https://twitter.com/openstack" target="_blank">Twitter</a><br>
                     <a href="https://www.facebook.com/openstack" target="_blank">Facebook</a><br>
                     <a href="https://www.linkedin.com/groups/3239106" target="_blank">LinkedIn</a><br/>
-                    <a href="https://www.youtube.com/user/OpenStackFoundation" target="_blank">YouTube Channel</a>
+                    <a href="#" target="_blank">SnapChat</a>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6 communicate-item">
-                <div class="communicate-item-title">
-                    Sign up to hear from us
-                </div>
-                <div class="form-inline">
-                    <input class="form-control sign-up-input" />
-                    <a href="" class="sign-up-submit btn"> SUBMIT </a>
-                </div>
-            </div>
+
         </div>
     </div>
 </div>
 
 
-<div class="quick-links">
-    <div class="quick-links-banner">
-        <img src="themes/openstack/images/community/quicklinks.png" />
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 quick-links-header">
-                <div class="pre-title"><span>THE QUICK LINKS</span><a name="quicklinks"></a></div>
-                <h1>Contributor Resources</h1>
-            </div>
-            <div class="col-md-3 col-sm-3 quick-links-item">
-                <div class="quick-links-item-title">
-                    Who are we?
-                </div>
-                <div>
-                    <a href="https://governance.openstack.org/tc/reference/opens.html" target="_blank">The Four Opens</a><br>
-                    <a href="https://governance.openstack.org/tc/reference/principles.html" target="_blank">Our guiding principles</a><br>
-                    <a href="https://governance.openstack.org/sigs/" target="_blank">Special Interest Groups (SIGs)</a><br>
-                    <a href="https://governance.openstack.org/tc/reference/projects/index.html" target="_blank">Project Teams</a><br>
-                    <a href="https://governance.openstack.org/uc/#teams" target="_blank">User committee working groups</a>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3 quick-links-item">
-                <div class="quick-links-item-title">
-                    Getting started
-                </div>
-                <div>
-                    <a href="https://releases.openstack.org/" target="_blank">Releases and release schedule</a><br>
-                    <a href="https://docs.openstack.org" target="_blank">OpenStack documentation</a><br>
-                    <a href="https://www.openstack.org/assets/marketing/OpenStack-101-Modular-Deck-1.pptx" target="_blank">OpenStack 101</a><br>
-                    <a href="https://wiki.openstack.org/wiki/First_Contact_SIG" target="_blank">First Contact SIG</a><br>
-                    <a href="https://governance.openstack.org/tc/reference/help-most-needed.html" target="_blank">Areas where help is most needed</a>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3 quick-links-item">
-                <div class="quick-links-item-title">
-                    Developer resources
-                </div>
-                <div>
-                    <a href="https://git.openstack.org/" target="_blank">Git repositories</a><br>
-                    <a href="https://docs.openstack.org/project-team-guide/" target="_blank">Project team guide</a><br>
-                    <a href="https://governance.openstack.org/tc/goals/" target="_blank">Community-wide goals</a><br>
-                    <a href="http://specs.openstack.org/" target="_blank">Specs</a> and <a href="https://review.openstack.org/" target="_blank">Code reviews</a><br>
-                    <a href="http://codesearch.openstack.org/" target="_blank">Search all OpenStack code</a>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3 quick-links-item">
-                <div class="quick-links-item-title">
-                    User resources
-                </div>
-                <div>
-                    Bug reports on <a href="https://storyboard.openstack.org/" target="_blank">StoryBoard</a> or <a href="https://launchpad.net/openstack/" target="_blank">Launchpad</a><br>
-                    <a href="https://security.openstack.org/" target="_blank">Security advisories</a><br>
-                    <a href="https://translate.openstack.org/" target="_blank">Contribute translations</a><br>
-                    <a href="https://refstack.openstack.org/" target="_blank">Interoperability testing</a><br>
-                    <a href="https://developer.openstack.org/" /target="_blank">App developer resources</a>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3 quick-links-item">
-                <div class="quick-links-item-title">
-                    Governance
-                </div>
-                <div>
-                    <a href="/foundation/board-of-directors/">Board of Directors</a><br>
-                    <a href="https://governance.openstack.org/tc/">Technical Committee</a><br>
-                    <a href="https://governance.openstack.org/uc/">User Committee</a><br>
-                    <a href="https://governance.openstack.org/election/">Community elections</a>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3 quick-links-item">
-                <div class="quick-links-item-title">
-                    Marketing & Branding
-                </div>
-                <div>
-                    <a href="/marketing">Marketing Portal</a><br>
-                    <a href="/brand/">Commercial Logos</a><br>
-                    <a href="/project-mascots/">Project Mascots</a><br>
-                    <a href="/store">Store</a>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3 quick-links-item">
-                <div class="quick-links-item-title">
-                    Career
-                </div>
-                <div>
-                    <a href="/marketplace/training/">Training</a><br>
-                    <a href="/coa">Certified administrator program</a><br>
-                    <a href="/jobs">OpenStack Jobs board</a>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3 quick-links-item">
-                <div class="quick-links-item-title">
-                    Diversity
-                </div>
-                <div>
-                    <a href="/legal/community-code-of-conduct/">Code of Conduct</a><br>
-                    <a href="http://lists.openstack.org/cgi-bin/mailman/listinfo/women-of-openstack" target="_blank">Women of OpenStack mailing list</a><br>
-                    <a href="https://www.outreachy.org/" target="_blank">Outreachy</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
