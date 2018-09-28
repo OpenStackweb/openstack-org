@@ -10,6 +10,10 @@
     margin-top: 50px;
 }
 
+.banner .banner-text-wrapper a, .banner .banner-text-wrapper a:visited {
+    color:#fff;
+}
+
 .banner .banner-img-wrapper {
     text-align: center;
     margin-top: 20px;
@@ -415,7 +419,7 @@ a.staff-openstack{background:url(../images/foundation-staff/icon_openstack.png) 
 .communicate .sign-up-input {
     padding: 25px;
     margin-top: 15px;
-    width: 75%;
+    width: 65%;
 }
 
 .communicate .sign-up-submit {
@@ -424,7 +428,7 @@ a.staff-openstack{background:url(../images/foundation-staff/icon_openstack.png) 
     padding: 14px;
     font-size: 15px;
     font-weight: bold;
-    width: 15%;
+    width: 25%;
 }
 
 
@@ -484,8 +488,7 @@ a.staff-openstack{background:url(../images/foundation-staff/icon_openstack.png) 
 }
 
 .quick-links .quick-links-item {
-    margin-bottom: 40px;
-    height: 130px;
+    margin-bottom: 25px;
 }
 
 .quick-links .quick-links-item .quick-links-item-title {
