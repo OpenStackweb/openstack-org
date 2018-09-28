@@ -251,7 +251,7 @@
     font-style: italic;
     margin-top: 2px;
     border-radius: 0px;
-    width: 85%;
+    width: 95%;
     min-width: 330px;
     text-align: left;
 }
@@ -259,10 +259,12 @@
 .where-to-start .start-option .fa {
     font-size: 2em;
     margin: 0 10px 0 0px;
+    float: right;
 }
 
 .where-to-start .start-option span {
-    top: -5px;
+    top: 5px;
+    margin-left: 10px;
     position: relative;
 }
 
@@ -365,6 +367,10 @@
 .ambassador-twitter-veil i {
     font-size: 20px;
 }
+
+a.staff-twitter{background:url(../images/foundation-staff/icon_twitter.png) center no-repeat;display:inline-block;width:25px;height:25px;margin-right:10px}
+a.staff-linkedin{background:url(../images/foundation-staff/icon_linkedin.png) center no-repeat;display:inline-block;width:25px;height:25px;margin-right:10px}
+a.staff-openstack{background:url(../images/foundation-staff/icon_openstack.png) center no-repeat;display:inline-block;width:25px;height:25px}
 
 .communicate {
     background-color: #63bb5e;
