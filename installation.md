@@ -161,7 +161,15 @@ You will be prompted as to whether you would like to delete the VM files from yo
 
 * Your SQL client should use a Standard connection: - Host: localhost - Username: root - Password: root - Database: os_local - Port: 3306
 
+* to update the build run ( once you had a sucessfull build)
+
+````
+vagrant up --provision-with=update 
+````
+
 ## **About the database**
 
 OpenStack will provide a database dump on a weekly basis, purged of protected data. The database will create one default admin user. All other data will need to be populated by the user.
+
+
 

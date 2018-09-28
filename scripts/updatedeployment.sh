@@ -6,6 +6,7 @@ php composer.phar update --ignore-platform-reqs --prefer-dist;
 #run ss tasks
 sake dev/build;
 sake dev/tasks/DBMigrateTask;
+sudo rm -Rf node_modules;
 sudo npm install;
 sudo npm run build-all;
 chown vagrant:www-data -R /home/vagrant/node_modules;
