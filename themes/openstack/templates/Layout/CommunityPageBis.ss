@@ -5,7 +5,7 @@
             <div class="col-md-12 banner-text-wrapper text-center">
                 <h2 class="text-center">Welcome to the OpenStack Community</h2>
                 <p>
-                    Welcome to the OpenStack Contributor Community! We're glad you're here. If you know how you want to contribute, get started below. If you need some advice, we're <a href="#help">here to help</a>!
+                    Welcome to the OpenStack Contributor Community! We're glad you're here. If you know how you want to contribute, get started below. If you need some advice, we're <a href="https://www.openstack.org/community#help">here to help</a>!
                 </p>
             </div>
         </div>
@@ -209,11 +209,11 @@
         </div>
     </div>
 </div>
-<div class="help">
+<div class="help" id="help">
     <div class="container">
         <div class="row">
             <div class="col-md-12 help-header">
-                <div class="help-title">Don't worry! We're here to help.<a name="help"></a></div>
+                <div class="help-title">Don't worry! We're here to help.</div>
                 <p>
                     We want you to have a great experience. OpenStack Foundation staff and volunteer ambassadors around
                     the world are here to help you get plugged in and make an impact.
