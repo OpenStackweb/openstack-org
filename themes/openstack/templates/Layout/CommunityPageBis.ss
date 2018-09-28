@@ -194,15 +194,15 @@
             </div>
             <div class="col-md-5 col-sm-6 start-options">
                 <a href="https://governance.openstack.org/tc/reference/help-most-needed.html" class="start-option btn">
-                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
                     <span>Areas where help is most needed</span>
                 </a><br>
                 <a href="https://docs.openstack.org/upstream-training/" class="start-option btn">
-                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
                     <span>Tutorials & Upstream Institute</span>
                 </a><br>
                 <a href="https://groups.openstack.org/" class="start-option btn">
-                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
                     <span>Find a local user group or attend an event</span>
                 </a>
             </div>
