@@ -83,6 +83,8 @@ final class SpeakerSecondBreakoutAnnouncementSenderManager
 
             try {
                 $page = 1;
+                $count_not_confirmed = 0;
+                $count_confirmed = 0;
                 $page_size = $batch_size;
                 $task = $this->batch_repository->findByName(self::TaskName . $summit_id);
 
@@ -133,6 +135,11 @@ final class SpeakerSecondBreakoutAnnouncementSenderManager
 
                     if (is_null($sender_service)) continue;
 
+                    if($sender_service instanceof  PresentationSpeakerSummitReminderEmailSender)
+                        ++$count_confirmed;
+                    else
+                        ++$count_not_confirmed;
+
                     $params = [
                         'Speaker'                => $speaker,
                         'Summit'                 => $current_summit,
@@ -163,6 +170,7 @@ final class SpeakerSecondBreakoutAnnouncementSenderManager
 
                 $task->updatePage($count, $page_size);
                 $task->write();
+                echo sprintf("confirmed speakers %s - non confirmed speakers %s", $count_confirmed, $count_not_confirmed).PHP_EOL;
                 return $speakers_notified;
             } catch (Exception $ex) {
                 SS_Log::log($ex->getMessage(), SS_Log::ERR);

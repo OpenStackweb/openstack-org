@@ -35,10 +35,12 @@ final class SpeakerSecondBreakOutSenderFactory implements ISpeakerSecondBreakOut
 
         if($speaker->hasConfirmedAssistanceFor($summit->getIdentifier())){
             // send reminder without code
+            echo sprintf("%s (%s) will receive email presentation-speaker-summit-reminder-email (already confirmed assistance)", $speaker->getName(), $speaker->getEmail()).PHP_EOL;
             return new PresentationSpeakerSummitReminderEmailSender();
         }
 
         // send reminder with code
+        echo sprintf("%s (%s) will receive email presentation-speaker-confirm-assistance-email (not confirmed assistance yet)", $speaker->getName(), $speaker->getEmail()).PHP_EOL;
         return new PresentationSpeakerConfirmSummitAssistanceEmailReminderSender();
     }
 }
