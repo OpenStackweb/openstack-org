@@ -19,9 +19,6 @@
                 <% if $SurveyBuilderDeploymentCompanyList %>
                     &mdash; <a href="" data-toggle="modal" data-target="#companiesModal">view companies</a>
                 <% end_if %>
-                <% if $Action == 'ViewDeploymentStatisticsSurveyBuilder' %>
-                    &mdash; <a href="$Top.LinkToExport()">export flat csv</a>
-                <% end_if %>
             </h2>
             $DateFilters
             $RenderCurrentFilters
@@ -32,24 +29,13 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-        <% if SurveyQuestions2Show %>
+        <% if SurveyQuestionsForReport %>
             <div class="row">
-                <% if $Top.getProjectsUsedCombinedCount() %>
-                    <div class="col-md-8 question_container" style="width:100%; margin-bottom: 30px">
-                        <h3> Projects Used (PoC, Testing, and Production) </h3>
-                        <p>N = $Top.getProjectsUsedCombinedCount() </p>
-                        <div id="projects_used_graph" ></div>
-                        <script type="application/javascript">
-                            var pu_answers = $Top.getProjectsUsedCombined();
-                        </script>
-                    </div>
-                <% end_if %>
-
                 <% include SangriaPage_StatisticsLanguage ParentPage=$Top %>
 
                 <% include SangriaPage_StatisticsNetPromoter ParentPage=$Top, Question=$getQuestionByName(NetPromoter) %>
 
-                <% loop SurveyQuestions2Show %>
+                <% loop SurveyQuestionsForReport() %>
                     <% if $ClassName == 'SurveyRadioButtonMatrixTemplateQuestion' %>
                         <% include SangriaPage_StatisticsSurveyRadioButtonMatrixTemplateQuestion ParentPage=$Top, QuestionID=$ID %>
                     <% else %>
