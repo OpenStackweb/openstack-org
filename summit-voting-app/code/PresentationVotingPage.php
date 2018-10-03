@@ -325,7 +325,7 @@ class PresentationVotingPage_API extends RequestHandler
         }
 
         if(!$presentation->Summit()->isVotingOpen()) {
-            return $this->httpError(403,'Voting is closed');
+            return $this->httpError(412,'Voting is closed');
         }
 
         $vars = Convert::json2array($r->getBody());
@@ -362,7 +362,7 @@ class PresentationVotingPage_API extends RequestHandler
         }
 
         if(!$presentation->Summit()->isVotingOpen()) {
-            return $this->httpError(403,'Voting is closed');
+            return $this->httpError(412,'Voting is closed');
         }
         $userVote = $presentation->getUserVote();
         $userVote->Content = null;

@@ -7,8 +7,8 @@ import scrollToElement from '../utils/scrollToElement';
 require('array.prototype.findindex');
 require('array.prototype.find');
 
-const GENERIC_ERROR = "There seems to have been a problem. Please contact support@openstack.org for assitance.";
-
+const GENERIC_ERROR = "There seems to have been a problem. Please contact support@openstack.org for assistance.";
+const SUMMIT_CLOSED = "Community Voting has closed. Thanks and we’ll see you at the next Summit.";
 const xhrs = {};
 
 const cancelPending = (xhrs, key) => {
@@ -27,10 +27,9 @@ const responseHandler = (dispatch, success, errorHandler) => {
         if (err || !res.ok) {
         	if(errorHandler) {
 				errorHandler(err, res);
+				return
         	}
-        	else {
-				dispatch(throwError(GENERIC_ERROR));
-        	}
+        	dispatch(throwError(GENERIC_ERROR));
         }
         else if(typeof success === 'function') {
         	dispatch(endXHR());
@@ -212,6 +211,12 @@ export function requestVote (id, vote) {
 					dispatch, 
 					null,
 					(err, res) => {
+						if(err.status === 412){
+                            dispatch(throwError(SUMMIT_CLOSED));
+                            dispatch(votePresentation(id, originalVote));
+                            window.setTimeout(window.location.reload(), 5000);
+                            return;
+                        }
 						dispatch(throwError(GENERIC_ERROR));
 						dispatch(votePresentation(id, originalVote));
 					}
@@ -235,7 +240,13 @@ export function postComment (id, comment) {
 					dispatch, 
 					null,
 					(err, res) => {
-						dispatch(throwError(GENERIC_ERROR));
+                        if(err.status === 412){
+                            dispatch(throwError(SUMMIT_CLOSED));
+                            dispatch(commentPresentation(id, originalComment));
+                            window.setTimeout(window.location.reload(), 5000);
+                            return;
+                        }
+                        dispatch(throwError(GENERIC_ERROR));
 						dispatch(commentPresentation(id, originalComment));
 					}
 				));
@@ -256,8 +267,13 @@ export function destroyUserComment (id) {
 					dispatch, 
 					null,
 					(err, res) => {
-						dispatch(throwError(GENERIC_ERROR));						
-					}
+                        if(err.status === 412){
+                            dispatch(throwError(SUMMIT_CLOSED));
+                            window.setTimeout(window.location.reload(), 5000);
+                            return;
+                        }
+                        dispatch(throwError(GENERIC_ERROR));
+                  	}
 				));
 
 		return xhrs['REMOVE_USER_COMMENT'] = req;
