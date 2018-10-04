@@ -40,4 +40,16 @@ interface ISurveyRegularStepTemplate extends ISurveyStepTemplate {
      */
     public function getQuestionByClassName($question_class_name);
 
+    /**
+     * @param $question_name
+     * @return mixed
+     */
+    public function getQuestionByName($question_name);
+
+    /**
+     * @param $question_id
+     * @return mixed
+     */
+    public function getQuestionById($question_id);
+
 }

@@ -66,6 +66,15 @@ class SurveyRegularStepTemplate
     }
 
     /**
+     * @param $question_name
+     * @return mixed
+     */
+    public function getQuestionByName($question_name)
+    {
+        return $this->Questions()->filter('SurveyQuestionTemplate.Name', $question_name)->first();
+    }
+
+    /**
      * @param string $question_class_name
      * @return mixed
      */

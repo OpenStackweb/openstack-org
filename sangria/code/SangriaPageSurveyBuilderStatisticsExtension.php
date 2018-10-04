@@ -175,19 +175,11 @@ class SangriaPageSurveyBuilderStatisticsExtension extends Extension
             return null;
         }
 
-        $questions = $template->getAllQuestions();
-        foreach($questions as $q) {
-            if ($q->Name == $name) return $q;
-        }
-
         if (is_a($template, 'EntitySurveyTemplate')) {
-            $questions = $template->Parent()->getAllQuestions();
-            foreach($questions as $q) {
-                if ($q->Name == $name) return $q;
-            }
+            $template = $template->Parent();
         }
 
-        return null;
+        return $template->getQuestionByName($name);
     }
 
     /**
@@ -245,18 +237,20 @@ class SangriaPageSurveyBuilderStatisticsExtension extends Extension
                 if (empty($qid)) {
                     continue;
                 } else if ($qid == 'lang') {
-                    $output .= 'Language,';
+                    $output .= 'Language - ';
                 } else if ($qid == 'nps') {
-                    $output .= 'NPS,';
+                    $output .= 'NPS - ';
+                } else if ($qid == 'continent') {
+                    $output .= 'Continent - ';
                 }
                 $q = SurveyQuestionTemplate::get()->byID($qid);
                 if (is_null($q)) {
                     continue;
                 }
-                $output .= $q->Name . ',';
+                $output .= $q->Name . ' - ';
             }
 
-            return trim($output, ',');
+            return substr($output, 0, -3);
         }
 
         return '';
@@ -645,7 +639,6 @@ SQL;
         $question_id = intval($question_id);
         $value_id = intval($value_id) > 0 ? intval($value_id) : $value_id;
         $template = $this->getCurrentSelectedSurveyTemplate();
-        $class_name = $this->getCurrentSelectedSurveyClassName();
 
         if (is_null($template)) return 0;
 
@@ -886,7 +879,10 @@ SQL;
         $template = $this->getCurrentSelectedSurveyTemplate();
         if (is_null($template)) return;
 
-        $question = $template->getAllQuestions()->filter('Name', ['PrimaryCountry','PrimaryCountrySydney'])->First();
+        if (!$question = $this->getQuestionByName('PrimaryCountry')) {
+            $question = $this->getQuestionByName('PrimaryCountrySydney');
+        }
+
 
         $filters_where = $this->generateFilters('SurveyTemplate');
         $mandatory_filter = $this->generateMandatoryAnswersFilter('SurveyTemplate');
@@ -902,7 +898,7 @@ SQL;
         INNER JOIN Survey I ON I.ID = S.SurveyID
         INNER JOIN Continent_Countries CC ON CC.CountryCode = A.Value
         INNER JOIN Continent C ON C.ID = CC.ContinentID
-        WHERE I.IsTest = 0 Q.ID = {$question->ID}
+        WHERE I.IsTest = 0 AND Q.ID = {$question->ID}
         {$continent_filter} 
         {$filters_where}
         {$mandatory_filter};

@@ -343,6 +343,19 @@ class SurveyTemplate extends DataObject implements ISurveyTemplate {
     }
 
     /**
+     * @param $name
+     * @return ISurveyQuestionTemplate
+     */
+    public function getQuestionByName($name) {
+        foreach($this->getSteps() as $step){
+            if(!$step instanceof ISurveyRegularStepTemplate) continue;
+            $q = $step->getQuestionByName($name);
+            if(!is_null($q)) return $q;
+        }
+        return null;
+    }
+
+    /**
      * @return ISurveyQuestionTemplate[]
      */
     public function getAllQuestions(){

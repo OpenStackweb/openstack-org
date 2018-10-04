@@ -78,4 +78,21 @@ interface ISurveyTemplate extends IEntity {
      */
     public function QualifiedName();
 
+    /**
+     * @param $name
+     * @return ISurveyQuestionTemplate
+     */
+    public function getQuestionByName($name);
+
+    /**
+     * @param $question_id
+     * @return ISurveyQuestionTemplate
+     */
+    public function getQuestionById($question_id);
+
+    /**
+     * @return ISurveyQuestionTemplate[]
+     */
+    public function getAllQuestions();
+
 }

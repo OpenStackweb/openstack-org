@@ -18,16 +18,16 @@ class DeploymentStatModel
     public function getSurveyQuestionsForReport($template)
     {
         $survey_questions = [
-            'Industry', 'IndustrySydney', 'ITActivity', 'ITActivitySydney', 'PrimaryCountry',
-            'PrimaryCountrySydney', 'OpenStackActivity', 'OpenStackActivitySydney', 'BusinessDrivers',
+            'PrimaryCountry', 'PrimaryCountrySydney', 'Industry', 'IndustrySydney', 'ITActivity',
+            'ITActivitySydney', 'OpenStackActivity', 'OpenStackActivitySydney', 'BusinessDrivers',
             'OrgSize', 'OrgSizeSydney', 'ContainerFormat', 'InteractingClouds'
         ];
 
         $res = array();
 
-        foreach ($template->Parent()->getAllQuestions() as $q) {
-            if (in_array($q->Name, $survey_questions)) {
-                array_push($res, $q);
+        foreach ($survey_questions as $question_name) {
+            if ($question = $template->Parent()->getQuestionByName($question_name)) {
+                array_push($res, $question);
             }
         }
 
@@ -56,6 +56,32 @@ class DeploymentStatModel
         //$res = array_slice($res, 0, 1);
 
         return new ArrayList($res);
+    }
+
+    /**
+     * @return SurveyTemplate|null
+     */
+    private function getCurrentSelectedSurveyTemplate()
+    {
+
+        $template_id = Session::get
+        (
+            sprintf
+            (
+                "SurveyBuilder.%sStatistics.TemplateId",
+                Session::get('SurveyBuilder.Statistics.ClassName')
+            )
+        );
+
+        $template = null;
+        if (!empty($template_id)) {
+            $template = SurveyTemplate::get()->byID(intval($template_id));
+            if (!is_null($template) && $template->ClassName === 'EntitySurveyTemplate') {
+                $template = EntitySurveyTemplate::get()->byID(intval($template_id));
+            }
+        }
+
+        return $template;
     }
 
     /**
@@ -116,6 +142,8 @@ SQL;
                     $filters_where .= $this->getLanguageFilter($vid, $matchClass, $tablePrefix, $matchID);
                 } else if($qid == 'nps') {
                     $filters_where .= $this->getNPSFilter($t[1], $t[2], $matchClass, $tablePrefix, $matchID);
+                } else if($qid == 'continent') {
+                    $filters_where .= $this->getContinentFilter($vid, $matchClass, $tablePrefix, $matchID);
                 } else {
                     if (count($t) === 3)
                         $vid = sprintf('%s:%s', $t[1], $t[2]);
@@ -161,6 +189,42 @@ SQL;
         )
 SQL;
         return $lang_query;
+    }
+
+    public function getContinentFilter($value, $matchClass, $tablePrefix, $matchID) {
+        $template = $this->getCurrentSelectedSurveyTemplate();
+        if (is_null($template)) return null;
+
+        $countryQuestionNames = ['PrimaryCountry', 'PrimaryCountrySydney'];
+
+        foreach ($countryQuestionNames as $question_name) {
+            if ($question = $template->Parent()->getQuestionByName($question_name)) {
+                break;
+            }
+        }
+
+        if (is_null($question)) return null;
+
+        if ($matchClass == 'SurveyTemplate') {
+            $survey_compare = "I2.ID = {$tablePrefix}.{$matchID}";
+        } else {
+            $survey_compare = "I2.ID = E{$tablePrefix}.ParentID";
+        }
+
+        $cont_query = <<<SQL
+        AND EXISTS
+        (
+            SELECT * FROM SurveyAnswer A2
+            INNER JOIN SurveyQuestionTemplate Q2 ON Q2.ID = A2.QuestionID
+            INNER JOIN SurveyStep S2 ON S2.ID = A2.StepID
+            INNER JOIN Survey I2 ON I2.ID = S2.SurveyID
+            INNER JOIN Continent_Countries CC ON CC.CountryCode = A2.Value
+            INNER JOIN Continent C ON C.ID = CC.ContinentID
+            WHERE I2.IsTest = 0 AND Q2.ID = {$question->ID}
+            AND {$survey_compare} AND C.Name = '{$value}'
+        )
+SQL;
+        return $cont_query;
     }
 
     public function getNPSFilter($question, $value, $matchClass, $tablePrefix, $matchID) {

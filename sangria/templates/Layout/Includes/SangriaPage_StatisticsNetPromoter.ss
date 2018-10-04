@@ -19,7 +19,7 @@
         <% end_loop %>
     </p>
 
-    <div class="row" style="text-align:center; height: 325px; overflow-y: auto">
+    <div class="row" style="text-align:center; height: 280px; overflow-y: auto; width: 100%">
         <div class="col-md-12">
         <% loop $Question.getFormattedValues %>
             <% if $Label == 7 || $Label == 9 %>
