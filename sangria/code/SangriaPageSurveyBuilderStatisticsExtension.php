@@ -412,7 +412,7 @@ SQL;
         {$mandatory_filter};
 SQL;
 
-        //if ($question_id == 614) die('Q: '.$query);
+        //if ($question_id == 633) die('Q: '.$query);
 
         $this->matrix_count_by_question[$template->ID.'-'.$question_id] = intval(DB::query($query)->value());
         return $this->matrix_count_by_question[$template->ID.'-'.$question_id];
@@ -656,19 +656,17 @@ SQL;
         $filters_where = $this->generateFilters($question->Step()->SurveyTemplate()->ClassName);
         $mandatory_filter = $this->generateMandatoryAnswersFilter($question_class);
 
-        $value_compare = is_int($value_id) ? "A.Value = {$value_id}" : "FIND_IN_SET('{$value_id}', A.Value) > 0";
-
         $query = <<<SQL
         SELECT COUNT(DISTINCT I.ID) FROM SurveyAnswer A
         INNER JOIN SurveyStep S ON S.ID = A.StepID
         INNER JOIN Survey I ON I.ID = S.SurveyID
         LEFT JOIN EntitySurvey EI ON EI.ID = I.ID
-        WHERE I.IsTest = 0 AND A.QuestionID = {$question_id} AND {$value_compare}
+        WHERE I.IsTest = 0 AND A.QuestionID = {$question_id} AND FIND_IN_SET('{$value_id}', A.Value) > 0
         {$filters_where}
         {$mandatory_filter};
 SQL;
 
-        //if ($question_id == 614) die('Q: '.$query);
+        //if ($question_id == 633) die('Q: '.$query);
 
         return DB::query($query)->value();
     }
@@ -881,6 +879,41 @@ SQL;
 SQL;
 
         return DB::query($query)->value();
+    }
+
+    public function SurveyBuilderCountContinent($continent)
+    {
+        $template = $this->getCurrentSelectedSurveyTemplate();
+        if (is_null($template)) return;
+
+        $question = $template->getAllQuestions()->filter('Name', ['PrimaryCountry','PrimaryCountrySydney'])->First();
+
+        $filters_where = $this->generateFilters('SurveyTemplate');
+        $mandatory_filter = $this->generateMandatoryAnswersFilter('SurveyTemplate');
+
+        $continent_filter = ($continent) ? "AND C.Name = '{$continent}'" : "AND A.Value IS NOT NULL";
+
+        $query = <<<SQL
+        SELECT COUNT(DISTINCT I.ID) FROM SurveyAnswer A
+        INNER JOIN SurveyQuestionTemplate Q ON Q.ID = A.QuestionID
+        INNER JOIN SurveyStepTemplate STPL ON STPL.ID = Q.StepID
+        INNER JOIN SurveyTemplate SSTPL ON SSTPL.ID = STPL.SurveyTemplateID
+        INNER JOIN SurveyStep S ON S.ID = A.StepID
+        INNER JOIN Survey I ON I.ID = S.SurveyID
+        INNER JOIN Continent_Countries CC ON CC.CountryCode = A.Value
+        INNER JOIN Continent C ON C.ID = CC.ContinentID
+        WHERE I.IsTest = 0 Q.ID = {$question->ID}
+        {$continent_filter} 
+        {$filters_where}
+        {$mandatory_filter};
+SQL;
+
+        return DB::query($query)->value();
+    }
+
+    public function getContinentValues()
+    {
+        return Continent::get();
     }
 
     public function SurveyBuilderSurveyNPS($question_id)

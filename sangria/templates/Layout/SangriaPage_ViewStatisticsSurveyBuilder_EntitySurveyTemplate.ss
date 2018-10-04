@@ -38,6 +38,8 @@
 
                 <% include SangriaPage_StatisticsLanguage ParentPage=$Top %>
 
+                <%--<% include SangriaPage_StatisticsContinent ParentPage=$Top %>--%>
+
                 <% include SangriaPage_StatisticsNetPromoter ParentPage=$Top, Question=$getQuestionByName(NetPromoter) %>
 
                 <% loop SurveyQuestionsForReport() %>

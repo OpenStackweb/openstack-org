@@ -102,38 +102,6 @@ SQL;
         )
 SQL;
 
-        if ($matchClass == 'SurveyTemplate') {
-            $survey_compare = "I2.ID = {$tablePrefix}.{$matchID}";
-        } else {
-            $survey_compare = "I2.ID = E{$tablePrefix}.ParentID";
-        }
-
-        $lang_query = <<<SQL
-        AND EXISTS
-        (
-            SELECT * FROM SurveyAnswer A2
-            INNER JOIN SurveyStep S2 ON S2.ID = A2.StepID
-            INNER JOIN Survey I2 ON I2.ID = S2.SurveyID
-            LEFT JOIN EntitySurvey EI2 ON EI2.ID = I2.ID
-            WHERE I2.IsTest = 0
-            AND {$survey_compare}
-            AND I2.Lang = '%s'
-        )
-SQL;
-
-        $nps_query = <<<SQL
-        AND EXISTS
-        (
-            SELECT * FROM SurveyAnswer A2
-            INNER JOIN SurveyStep S2 ON S2.ID = A2.StepID
-            INNER JOIN Survey I2 ON I2.ID = S2.SurveyID
-            INNER JOIN SurveyQuestionValueTemplate SQVT2 ON SQVT2.ID = A2.`Value`
-            WHERE {$survey_compare}
-            AND I2.IsTest = 0 AND A2.QuestionID = %s
-            AND SQVT2.`Value` >= %s AND SQVT2.`Value` < %s
-        )
-SQL;
-
         $filters_where = '';
 
         if (!empty($filters)) {
@@ -145,21 +113,9 @@ SQL;
                 $vid = is_int($t[1]) ? intval($t[1]) : $t[1];
 
                 if ($qid == 'lang') {
-                    $filters_where .= sprintf($lang_query, $vid);
+                    $filters_where .= $this->getLanguageFilter($vid, $matchClass, $tablePrefix, $matchID);
                 } else if($qid == 'nps') {
-                    $qid = $t[1];
-                    $vid = $t[2];
-                    if ($vid == 'D') {
-                        $lower = 0;
-                        $upper = 7;
-                    } else if ($vid == 'N') {
-                        $lower = 7;
-                        $upper = 9;
-                    } else { //vid = P
-                        $lower = 9;
-                        $upper = 11;
-                    }
-                    $filters_where .= sprintf($nps_query, $qid, $lower, $upper);
+                    $filters_where .= $this->getNPSFilter($t[1], $t[2], $matchClass, $tablePrefix, $matchID);
                 } else {
                     if (count($t) === 3)
                         $vid = sprintf('%s:%s', $t[1], $t[2]);
@@ -183,6 +139,62 @@ SQL;
         }
 
         return $filters_where;
+    }
+
+    public function getLanguageFilter($value, $matchClass, $tablePrefix, $matchID) {
+        if ($matchClass == 'SurveyTemplate') {
+            $survey_compare = "I2.ID = {$tablePrefix}.{$matchID}";
+        } else {
+            $survey_compare = "I2.ID = E{$tablePrefix}.ParentID";
+        }
+
+        $lang_query = <<<SQL
+        AND EXISTS
+        (
+            SELECT * FROM SurveyAnswer A2
+            INNER JOIN SurveyStep S2 ON S2.ID = A2.StepID
+            INNER JOIN Survey I2 ON I2.ID = S2.SurveyID
+            LEFT JOIN EntitySurvey EI2 ON EI2.ID = I2.ID
+            WHERE I2.IsTest = 0
+            AND {$survey_compare}
+            AND I2.Lang = '{$value}'
+        )
+SQL;
+        return $lang_query;
+    }
+
+    public function getNPSFilter($question, $value, $matchClass, $tablePrefix, $matchID) {
+        if ($matchClass == 'SurveyTemplate') {
+            $survey_compare = "I2.ID = {$tablePrefix}.{$matchID}";
+        } else {
+            $survey_compare = "I2.ID = E{$tablePrefix}.ParentID";
+        }
+
+        if ($value == 'D') {
+            $lower = 0;
+            $upper = 7;
+        } else if ($value == 'N') {
+            $lower = 7;
+            $upper = 9;
+        } else { //vid = P
+            $lower = 9;
+            $upper = 11;
+        }
+
+        $nps_query = <<<SQL
+        AND EXISTS
+        (
+            SELECT * FROM SurveyAnswer A2
+            INNER JOIN SurveyStep S2 ON S2.ID = A2.StepID
+            INNER JOIN Survey I2 ON I2.ID = S2.SurveyID
+            INNER JOIN SurveyQuestionValueTemplate SQVT2 ON SQVT2.ID = A2.`Value`
+            WHERE {$survey_compare}
+            AND I2.IsTest = 0 AND A2.QuestionID = {$question}
+            AND SQVT2.`Value` >= {$lower} AND SQVT2.`Value` < {$upper}
+        )
+SQL;
+
+        return $nps_query;
     }
 
     public function getMandatoryAnswersFilter($matchClass) {
