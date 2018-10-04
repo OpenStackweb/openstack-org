@@ -31,4 +31,19 @@ class SurveyAnswerTag extends DataObject
     static $belongs_many_many = [
       'Answers' => 'SurveyAnswer',
     ];
+
+    public function onBeforeWrite()
+    {
+        parent::onBeforeWrite();
+        // remove quotes to avoid js errors
+        $this->Value = $this->trimTag($this->Value);
+    }
+
+    static public function trimTag($tag)
+    {
+        $tag = strtolower(trim($tag));
+        $tag = str_replace('"', '', $tag);
+        $tag = str_replace('\'', '', $tag);
+        return $tag;
+    }
 }

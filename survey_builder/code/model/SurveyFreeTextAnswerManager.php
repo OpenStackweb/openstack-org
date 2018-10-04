@@ -108,7 +108,7 @@ final class SurveyFreeTextAnswerManager implements ISurveyFreeTextAnswerManager
             if($survey_id != $template_id)
                 throw new NotFoundEntityException('SurveyTemplate');
 
-            $tag_value = strtolower(trim($tag));
+            $tag_value = SurveyAnswerTag::trimTag($tag);
 
             $tag = SurveyAnswerTag::get()->filter('Value', $tag_value)->first();
 
@@ -149,9 +149,9 @@ final class SurveyFreeTextAnswerManager implements ISurveyFreeTextAnswerManager
             if($survey_id != $template_id)
                 throw new NotFoundEntityException('SurveyTemplate');
 
-            $tag_value = strtolower(trim($tag));
+            $tag_value = SurveyAnswerTag::trimTag($tag);
 
-            $tag = SurveyAnswerTag::get()->filter('Value', $tag_value)->first();
+            $tag = $answer->Tags()->filter('Value', $tag_value)->first();
             if(is_null($tag))
                 throw new EntityValidationException('tag does not belong to answer');
 
@@ -189,7 +189,7 @@ final class SurveyFreeTextAnswerManager implements ISurveyFreeTextAnswerManager
             if($survey_id != $template_id)
                 throw new NotFoundEntityException('SurveyTemplate');
 
-            $replace_tag_value = strtolower(trim($replace_tag));
+            $replace_tag_value = SurveyAnswerTag::trimTag($replace_tag);
 
             $replace_tag_obj = SurveyAnswerTag::get()->filter('Value', $replace_tag)->first();
 
