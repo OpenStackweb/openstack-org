@@ -25,7 +25,7 @@
 
                         swal({
                             title: "Done!",
-                            text:"You already signed rsvp for this event!",
+                            text:"You already signed up for this event.",
                             type: "success"
                         }).then(function () {
 
