@@ -295,7 +295,7 @@ button.btn i, a.btn i {
     bottom: 0;
     width: 100%;
     background-color: #00468b;
-    margin: 0;
+    /*margin: 0;*/
 }
 
 .text-wrapper.blue .highlight {
@@ -609,34 +609,34 @@ button.btn i, a.btn i {
     background-image: url("../images/code.svg");
 }
 
-.summit-users-wrapper {
+.about-summit-users-wrapper {
     padding-top: 5em;
 }
 
-.summit-users-wrapper .summit-user-section {
+.about-summit-users-wrapper .summit-user-section {
     background-color: #fff;
     height: 19em;
 }
 
 @media (min-width: 570px) and (max-width: 720px) {
-    .summit-users-wrapper .summit-user-section {
+    .about-summit-users-wrapper .summit-user-section {
         height: 21em;
     }
 }
 
 @media all and (max-width: 569px) {
-    .summit-users-wrapper .summit-user-section {
+    .about-summit-users-wrapper .summit-user-section {
         height: 17em;
     }
 }
 
 @media (min-width: 720px) and (max-width: 1200px) {
-    .summit-users-wrapper .summit-user-section {
+    .about-summit-users-wrapper .summit-user-section {
         height: 23em;
     }
 }
 
-.summit-users-wrapper .summit-user-section .summit-user-image-box {
+.about-summit-users-wrapper .summit-user-section .summit-user-image-box {
     margin: 0 0 0.5em 0;
     border-radius: 0;
     width: 100%;
@@ -679,23 +679,23 @@ button.btn i, a.btn i {
     font-size: 1.5em;
 }
 
-.summit-users-wrapper .featured {
+.about-summit-users-wrapper .featured {
     height: auto;
     padding: 0 0.5em;
     margin-bottom: 1em;
 }
 
-.summit-users-wrapper .summit-user-section img.summit-user-image {
+.about-summit-users-wrapper .summit-user-section img.summit-user-image {
     height: auto;
     width: 100%;
 }
 
-.summit-users-wrapper .summit-user-section .info {
+.about-summit-users-wrapper .summit-user-section .info {
     padding: 0.25em 0.75em;
     text-align: left;
 }
 
-.summit-users-wrapper .summit-user-section .name {
+.about-summit-users-wrapper .summit-user-section .name {
     color: #ed1944;
     font-weight: bold;
     text-align: left;
@@ -704,20 +704,20 @@ button.btn i, a.btn i {
     word-break: break-word;
 }
 
-.summit-users-wrapper .summit-user-section .title {
+.about-summit-users-wrapper .summit-user-section .title {
     font-size: 0.8em;
     text-transform: uppercase;
     font-style: normal;
     text-align: left;
 }
 
-.summit-users-wrapper .summit-user-section .topic {
+.about-summit-users-wrapper .summit-user-section .topic {
     font-size: 0.8em;
     text-align: left;
     font-weight: bold;
 }
 
-.summit-users-wrapper .btn {
+.about-summit-users-wrapper .btn {
     background-color: transparent;
     color: #000;
     font-weight: bold;
@@ -726,7 +726,7 @@ button.btn i, a.btn i {
     margin-top: 1em;
 }
 
-.summit-users-wrapper .btn i {
+.about-summit-users-wrapper .btn i {
     margin-left: 1em;
 }
 

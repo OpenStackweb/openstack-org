@@ -66,7 +66,7 @@
         </div>
     </div>
 </div>
-<div class="light summit-users-wrapper" id="{$Name}">
+<div class="light about-summit-users-wrapper" id="{$Name}">
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-lg-8 col-md-6">
