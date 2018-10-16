@@ -157,7 +157,7 @@
                     <div class="span-6 last">
                         <ul>
                             <% loop Languages %>
-                                <li>$Language</li>
+                                <li>$Name</li>
                             <% end_loop %>
                         </ul>
                     </div>

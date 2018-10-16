@@ -53,7 +53,6 @@ class PresentationSpeaker extends DataObject
         'AreasOfExpertise'         => 'SpeakerExpertise',
         'OtherPresentationLinks'   => 'SpeakerPresentationLink',
         'TravelPreferences'        => 'SpeakerTravelPreference',
-        'Languages'                => 'SpeakerLanguage',
         'PromoCodes'               => 'SpeakerSummitRegistrationPromoCode',
         'AnnouncementSummitEmails' => 'SpeakerAnnouncementSummitEmail',
         'SummitAssistances'        => 'PresentationSpeakerSummitAssistanceConfirmationRequest',
@@ -85,7 +84,8 @@ class PresentationSpeaker extends DataObject
 
     private static $many_many = [
         'OrganizationalRoles' => 'SpeakerOrganizationalRole',
-        'ActiveInvolvements' => 'SpeakerActiveInvolvement'
+        'ActiveInvolvements' => 'SpeakerActiveInvolvement',
+        'Languages'          => 'Language',
     ];
 
     private static $summary_fields = [

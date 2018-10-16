@@ -53,25 +53,17 @@ $(document).ready(function(){
         $("#"+form_id+"_CountriesToTravel").prop('disabled', true).trigger("chosen:updated");
     }
 
-    var language_source = ['Afrikaans','Apprenda','Arabic','Armenian','ASL Sign Language','Bahasa','Basque','Belarusian',
-        'Bengali','Brazilian Portuguese','Bulgarian','Burmese','Canadian','Cantonese','Catalan','Chinese','Croatian','Czech',
-        'Danish','Deutsch','Dutch','English','Esperanto','Estonian','Farsi','Filipino','Finnish','Flemish','French','Georgian',
-        'German','Gibberish','Greek','Gujrathi','Haitian Creole','Hebrew','Hindi','Indian','Italian','Japanese','Kannada',
-        'Kapampangan','Kiswahili','Konkani','Korean','Lithuanian','Mandarin','Magyar','Malagasy','Malayalam','Marathi',
-        'Nigerian','Norwegian','Odiya','Panjabi','Polish','Portuguese','Punjabi','Ripuarian','Romanian','Russian','Sanskrit',
-        'Serbian','Slovenian','Spanish','Sundanese','Svenska','Swedish','Taiwanese','Tamazight','Tamil','Telugu','Turkish',
-        'Ukrainian','Urdu','Uyghur','Uzbek','Vietnamese'
-    ];
-
     var languages = new Bloodhound({
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
         queryTokenizer: Bloodhound.tokenizers.whitespace,
         local: $.map(language_source, function (language) {
             return {
-                name: language
+                name: language.name,
+                id: language.id
             };
         })
     });
+
     languages.initialize();
 
     $('#'+form_id+'_Language').tagsinput({
@@ -88,7 +80,7 @@ $(document).ready(function(){
                 minlength: 3,
                 name: 'languages',
                 displayKey: 'name',
-                valueKey: 'name',
+                valueKey: 'id',
                 source: languages.ttAdapter()
             }
         ]

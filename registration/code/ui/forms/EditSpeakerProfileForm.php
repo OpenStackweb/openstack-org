@@ -269,14 +269,13 @@ class EditSpeakerProfileForm extends SafeXSSForm {
             $speaker->AskedAboutBureau = TRUE;
 
             // Languages
-            foreach ($speaker->Languages() as $currentlang) {
-                $currentlang->delete();
-            }
+
+            $speaker->removeAll();
+
             foreach ($data['Language'] as $lang) {
                 if (trim($lang) != '') {
-                    $spoken_lang = SpeakerLanguage::create(array(
-                        'Language' => $lang
-                    ));
+                    $spoken_lang = Language::get()->filter(['Name' => trim($lang)])->first();
+                    if(is_null($spoken_lang)) continue;
                     $speaker->Languages()->add( $spoken_lang );
                 }
             }

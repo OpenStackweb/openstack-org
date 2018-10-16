@@ -29,6 +29,14 @@ class SpeakerForm extends BootstrapForm
         JSChosenDependencies::renderRequirements();
         BootstrapTagsInputDependencies::renderRequirements();
         Requirements::css('summit/css/speaker-form.css');
+
+        // languages
+        $languages_source = 'var language_source = [];'.PHP_EOL;
+        foreach(Language::get() as $lang){
+            $languages_source .= sprintf("language_source.push({id: %s, name:'%s'});".PHP_EOL, $lang->ID, $lang->Name);
+        }
+
+        Requirements::customScript($languages_source);
         Requirements::javascript('summit/javascript/speaker-form.js');
     }
 
@@ -249,24 +257,12 @@ class SpeakerForm extends BootstrapForm
         }
         $speaker->AreasOfExpertise()->setByIdList($exp_ids);
 
-        $language_csv = $this->fields->fieldByName("Language")->Value();
-        $language_array = explode(',',$language_csv);
-        $lang_ids = array();
-        if ($language_array) {
-            foreach ($language_array as $language) {
-                if(empty($language)) continue;
-                $language = Convert::raw2sql(trim($language));
-                if (!$alang = $speaker->Languages()->find('Language',$language)) {
-                    $alang = SpeakerLanguage::create(array('Language' => $language));
-                }
+        $language = $this->fields->fieldByName("Language")->Value();
+        $speaker->Languages()->removeAll();
+        foreach(explode(',',$language) as $lang_id) ;
+            $speaker->Languages()->add($lang_id);
 
-                $alang->write();
-                $lang_ids[] = $alang->ID;
-            }
-        }
-        $speaker->Languages()->setByIdList($lang_ids);
-
-        $link_ids = array();
+        $link_ids = [];
         for($i = 1 ; $i <= 5 ; $i++ ){
             $link = $this->fields->fieldByName("PresentationLink[{$i}]");
             $title = $this->fields->fieldByName("PresentationTitle[{$i}]");

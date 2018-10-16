@@ -189,7 +189,7 @@ class SpeakerListPage_Controller extends Page_Controller
         if ($spoken_language = $this->getSearchQuery('spoken_language')) {
             $empty_search = false;
             $languages = "'" . implode("','", $spoken_language) . "'";
-            $where_string .= " AND SpeakerLanguage.Language IN ({$languages})";
+            $where_string .= " AND Language.Name IN ({$languages})";
         }
 
         if ($country_origin = $this->getSearchQuery('country_origin')) {
@@ -232,7 +232,8 @@ class SpeakerListPage_Controller extends Page_Controller
                 ->leftJoin("Member", "Member.ID = PresentationSpeaker.MemberID")
                 ->leftJoin("Affiliation", "Affiliation.MemberID = Member.ID")
                 ->leftJoin("Org", "Org.ID = Affiliation.OrganizationID")
-                ->leftJoin("SpeakerLanguage", "SpeakerLanguage.SpeakerID = PresentationSpeaker.ID")
+                ->leftJoin("PresentationSpeaker_Languages", "PresentationSpeaker_Languages.PresentationSpeakerID = PresentationSpeaker.ID")
+                ->leftJoin("Language", "Language.ID = PresentationSpeaker_Languages.LanguageID")
                 ->leftJoin("SpeakerTravelPreference", "SpeakerTravelPreference.SpeakerID = PresentationSpeaker.ID")
                 ->leftJoin("Countries", "Countries2.Code = SpeakerTravelPreference.Country", "Countries2")
                 ->where($where_string);
@@ -311,13 +312,14 @@ class SpeakerListPage_Controller extends Page_Controller
 
     function AvailableLanguages()
     {
-        $query = DB::Query("SELECT DISTINCT SL.Language FROM SpeakerLanguage AS SL
-                            RIGHT JOIN PresentationSpeaker AS PS ON PS.ID = SL.SpeakerID
+        $query = DB::Query("SELECT DISTINCT L.Name FROM `Language` AS L
+                            INNER JOIN PresentationSpeaker_Languages SL ON SL.LanguageID = L.ID
+                            INNER JOIN PresentationSpeaker AS PS ON PS.ID = SL.PresentationSpeakerID
                             WHERE PS.AvailableForBureau = 1");
 
-        $language_list = array();
+        $language_list = [];
         foreach ($query as $language) {
-            $language_list[] = new ArrayData(array("Language" => $language['Language']));
+            $language_list[] = new ArrayData(array("Language" => $language['Name']));
         }
 
         return new ArrayList($language_list);
