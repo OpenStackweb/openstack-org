@@ -1,5 +1,5 @@
 <link rel="stylesheet" type="text/css" href="summit/css/summitapp-event.css">
-<div class="container">
+<div class="container" id="schedule-page-wrapper">
 
     <script type="application/javascript">
 

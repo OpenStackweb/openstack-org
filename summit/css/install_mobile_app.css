@@ -15,6 +15,7 @@
     text-align:center;
     position: fixed;
     padding-bottom: 5%;
+    z-index: 1100;
 }
 
 .mobile-message p {

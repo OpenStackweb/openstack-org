@@ -12,16 +12,17 @@ class MainView extends Component {
         const { view } = this.props
         return (
         <div className="row navbar-container">
-            <div className="col-md-3 col-sm-2 view-select-container">
-                Filter
+            <div className="col-lg-3 col-md-2 col-sm-1 view-select-container">
+                <span className="view-filter-label">Filter</span>
                 <select id="view-select" value={view.type}
+
                 onChange={e => this.changeView(e, e.target.value)}>
                     <option value={VIEW_DAYS}>Day</option>
                     <option value={VIEW_TRACKS}>Track</option>
                     <option value={VIEW_LEVELS}>Level</option>
                 </select>
             </div>
-            <div className="col-md-9 col-sm-10 view-days-container">
+            <div className="col-lg-9 col-md-10 col-sm-11 view-days-container">
             {view.type === VIEW_DAYS   && this.renderDays()}
             {view.type === VIEW_TRACKS && this.renderTracks()}
             {view.type === VIEW_LEVELS && this.renderLevels()}
@@ -41,7 +42,7 @@ class MainView extends Component {
                 {/* Brand and toggle get grouped for better mobile display */}
                 <div className="navbar-header">
                     <button id="schedule-navbar-button" type="button" aria-expanded="false" data-toggle="collapse"
-                    className="navbar-toggle collapsed" data-target="#bs-example-navbar-collapse-1">
+                    className="navbar-toggle collapsed" data-target="#day-navbar-colapse">
                         <span className="sr-only">
                             Toggle navigation
                         </span>
@@ -55,7 +56,7 @@ class MainView extends Component {
                     </a>
                 </div>
                 {/* Collect the nav links, forms, and other content for toggling */}
-                <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <div className="collapse navbar-collapse" id="day-navbar-colapse">
                     <ul className="nav navbar-nav">
                     {Object.keys(summit.dates).map(dateId => {
                         const day = summit.dates[dateId]
@@ -104,7 +105,7 @@ class MainView extends Component {
             {/* Brand and toggle get grouped for better mobile display */}
                 <div className="navbar-header">
                     <button id="schedule-navbar-button" type="button" aria-expanded="false" data-toggle="collapse"
-                    className="navbar-toggle collapsed" data-target="#bs-example-navbar-collapse-1">
+                    className="navbar-toggle collapsed" data-target="#level-navbar-colapse">
                         <span className="sr-only">
                         Toggle navigation
                         </span>
@@ -118,7 +119,7 @@ class MainView extends Component {
                     </a>
                 </div>
                 {/* Collect the nav links, forms, and other content for toggling */}
-                <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <div className="collapse navbar-collapse" id="level-navbar-colapse">
                     <ul className="nav navbar-nav">
                     {Object.keys(summit.presentation_levels).map(levelId => {
                         const level = summit.presentation_levels[levelId]

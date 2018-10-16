@@ -19,6 +19,12 @@ body
     font-family: Montserrat, Sans-serif;
 }*/
 
+@media (max-width: 1200px) {
+    #schedule-page-wrapper {
+        width: auto;
+    }
+}
+
 i.collapse-nav {
     color: white;
 }
@@ -297,6 +303,12 @@ i.collapse-nav {
     width: 95%;
 }
 
+@media (max-width: 991px) {
+    .view-select-container .view-filter-label {
+        display: none;
+    }
+}
+
 @media (max-width: 767px) {
     .view-select-container {
         width: 45%;
@@ -374,7 +386,7 @@ i.collapse-nav {
     color: #2A4E68;
 }
 
-@media (max-width: 1000px) and (min-width: 768px) {
+@media (max-width: 1045px) and (min-width: 768px) {
     .navbar-days .navbar-nav>li>a {
         font-size: 0.8em;
         padding: 15px 10px;
