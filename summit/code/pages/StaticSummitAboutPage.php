@@ -1,11 +1,22 @@
 <?php
+/**
+ * Copyright 2018 OpenStack Foundation
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ **/
 
-class StaticSummitAboutPage extends Page {
+class StaticSummitAboutPage extends SummitPage {
 
 }
 
-
-class StaticSummitAboutPage_Controller extends Page_Controller {
+class StaticSummitAboutPage_Controller extends SummitPage_Controller {
 
     public function init()
     {
@@ -17,99 +28,5 @@ class StaticSummitAboutPage_Controller extends Page_Controller {
         Requirements::css('summit/css/static-summit-about-page.css');
 		Requirements::javascript('summit/javascript/in-view.min.js');
 		Requirements::javascript('summit/javascript/static-summit-about-page.js');
-
-    }
-
-    public function getSummitAboutPageLink() {
-        return $this->Link();
-    }
-
-    public function getAboutPageNavClass(){
-        return 'current';
-    }
-
-    public function getOrder(){
-        $order = $this->request->getVar('order');
-        return isset($order) && $order == "complete";
-    }
-
-    /*
-    * Return google tracking script if ?order=complete query string param is present
-    *  using settings of current conference page
-    */
-    function GATrackingCode()
-    {
-        $request = $this->request;
-        $order = $request->requestVar("order");
-        $tracking_code = '';
-        if (isset($order) && $order == "complete") {
-            //add GA tracking script
-            $page = SummitPage::get()->filter('SummitID', 25)->first();
-            if ($page && !empty($page->GAConversionId)
-                && !empty($page->GAConversionLanguage)
-                && !empty($page->GAConversionFormat)
-                && !empty($page->GAConversionColor)
-                && !empty($page->GAConversionLabel)
-            ) {
-                $tracking_code = $this->renderWith("SummitPage_GA", array(
-                    "GA_Data" => new ArrayData(array(
-                        "GAConversionId" => $page->GAConversionId,
-                        "GAConversionLanguage" => $page->GAConversionLanguage,
-                        "GAConversionFormat" => $page->GAConversionFormat,
-                        "GAConversionColor" => $page->GAConversionColor,
-                        "GAConversionLabel" => $page->GAConversionLabel,
-                        "GAConversionValue" => $page->GAConversionValue,
-                        "GARemarketingOnly" => $page->GARemarketingOnly ? "true" : "false",
-                    ))
-                ));
-            }
-        }
-        return $tracking_code;
-    }
-
-    function FBTrackingCode()
-    {
-        $request       = $this->request;
-        $order         = $request->requestVar("order");
-        $tracking_code = '';
-
-        if (isset($order) && $order == "complete") {
-            //add FB tracking script
-            $page = SummitPage::get()->filter('SummitID', 25)->first();
-            if ($page && !empty($page->FBPixelId)) {
-                $tracking_code = $this->renderWith("SummitPage_FBPixelCode",[
-                    "FB_Data" => new ArrayData([
-                        "FBPixelId" => $page->FBPixelId,
-                    ])
-                ]);
-            }
-        }
-        return $tracking_code;
-    }
-
-    function TwitterTrackingCode()
-    {
-        $request = $this->request;
-        $order = $request->requestVar("order");
-        $tracking_code = '';
-        if (isset($order) && $order == "complete") {
-            //add FB tracking script
-            $page = SummitPage::get()->filter('SummitID', 25)->first();
-            if ($page && !empty($page->TwitterPixelId)
-            ) {
-                $tracking_code = $this->renderWith("SummitPage_Twitter", array(
-                    "Twitter_Data" => new ArrayData(array(
-                        "TwitterPixelId" => $page->TwitterPixelId,
-                    ))
-                ));
-            }
-        }
-        return $tracking_code;
-    }
-
-    public function MetaTags()
-    {
-        $tags = parent::MetaTags();
-        return $tags;
     }
 }
