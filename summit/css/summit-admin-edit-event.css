@@ -56,3 +56,15 @@
 .moderator-container .tag:hover {
     text-decoration: underline;
 }
+
+.published-flag {
+    text-align: center;
+    color: green;
+    font-size: 20px;
+}
+
+.not-published-flag {
+    text-align: center;
+    color: red;
+    font-size: 20px;
+}

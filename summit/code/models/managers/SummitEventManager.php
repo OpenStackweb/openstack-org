@@ -96,10 +96,10 @@ final class SummitEventManager implements ISummitEventManager
                 throw new NotFoundEntityException('Summit Event', sprintf('id %s', $event_id));
 
             if(intval($event->SummitID) !== intval($summit->getIdentifier()))
-                throw new EntityValidationException('event doest not belongs to summit');
+                throw new EntityValidationException('event does not belong to summit');
 
             if(!$event->Type()->exists())
-                throw new EntityValidationException('event doest not have a valid event type');
+                throw new EntityValidationException('event does not have a valid event type');
 
             $event->setStartDate($event_data['start_datetime']);
             $event->setEndDate($event_data['end_datetime']);
@@ -151,8 +151,11 @@ final class SummitEventManager implements ISummitEventManager
 
             // validate speaker conflict
             if ($event instanceof Presentation && $c_event instanceof Presentation && $event->ID != $c_event->ID) {
-                foreach ($event->Speakers() as $speaker) {
-                    if ($c_event->Speakers()->find('ID', $speaker->ID)) {
+                $all_speakers = $event->Speakers()->toArray();
+                if ($event->ModeratorID) $all_speakers->push($event->Moderator());
+
+                foreach ($all_speakers as $speaker) {
+                    if ($c_event->Speakers()->find('ID', $speaker->ID) || $c_event->ModeratorID == $speaker->ID) {
                         throw new EntityValidationException
                         (
                             sprintf

@@ -12,7 +12,9 @@ class PresentationSpeaker extends DataObject
         IPresentationType::Presentation,
         IPresentationType::LightingTalks,
         IPresentationType::Workshop,
-        IPresentationType::Fishbowl
+        IPresentationType::Fishbowl,
+        IPresentationType::CollabDiscussion,
+        IPresentationType::HandOnLabs
     ];
 
     static $default_regular_presentation_types = [
@@ -56,6 +58,7 @@ class PresentationSpeaker extends DataObject
         'PromoCodes'               => 'SpeakerSummitRegistrationPromoCode',
         'AnnouncementSummitEmails' => 'SpeakerAnnouncementSummitEmail',
         'SummitAssistances'        => 'PresentationSpeakerSummitAssistanceConfirmationRequest',
+        'ModeratedPresentations'   => 'Presentation.Moderator'
     ];
 
     private static $searchable_fields = [
@@ -368,9 +371,20 @@ class PresentationSpeaker extends DataObject
         $summit = !$summit_id ? Summit::get_active() : Summit::get()->byID($summit_id);
         if (!$summit) return false;
 
-        return $this->Presentations()->filter(array(
+        $speaker_presentations = $this->Presentations()->filter(array(
             'SummitID' => $summit->ID
         ));
+
+        $moderated_presentations = $this->ModeratedPresentations()->filter(array(
+            'SummitID' => $summit->ID
+        ));
+
+        $all_presentations = new ArrayList();
+
+        $all_presentations->merge($speaker_presentations);
+        $all_presentations->merge($moderated_presentations);
+
+        return $all_presentations;
     }
 
     public function MyPresentations($summit_id = null)
@@ -418,7 +432,7 @@ class PresentationSpeaker extends DataObject
         (
            $summit_id,
            $role,
-            $regular_types,
+           $regular_types,
            $exclude_privates_tracks,
            $excluded_tracks
         );
@@ -496,58 +510,6 @@ class PresentationSpeaker extends DataObject
         return $this->PublishedRegularPresentations($summit_id, $role, $include_sub_roles, $excluded_tracks)->count() > 0;
     }
 
-    /**
-     * @param null $summit_id
-     * @param string $role
-     * @param bool $include_sub_roles
-     * @param array $excluded_tracks
-     * @return ArrayList
-     */
-    public function PublishedLightningPresentations
-    (
-        $summit_id = null,
-        $role = IPresentationSpeaker::RoleSpeaker,
-        $include_sub_roles = false,
-        array $excluded_tracks = []
-    )
-    {
-        $list = $this->PublishedPresentationsByType($summit_id, $role, [IPresentationType::LightingTalks], true , $excluded_tracks)->toArray();
-
-        if($include_sub_roles && $role == IPresentationSpeaker::RoleModerator){
-            $presentations = $this->PublishedPresentationsByType($summit_id, IPresentationSpeaker::RoleSpeaker, [IPresentationType::LightingTalks], true, $excluded_tracks) ;
-            if($presentations) {
-                foreach ($presentations as $speaker_presentation) {
-                    $list[] = $speaker_presentation;
-                }
-            }
-        }
-
-        return new ArrayList($list);
-    }
-
-    /**
-     * @param null $summit_id
-     * @param string $role
-     * @param bool $include_sub_roles
-     * @param array $excluded_tracks
-     * @return bool
-     */
-    public function hasPublishedLightningPresentations
-    (
-        $summit_id = null,
-        $role = IPresentationSpeaker::RoleSpeaker,
-        $include_sub_roles = false,
-        array $excluded_tracks = []
-    )
-    {
-        return $this->PublishedLightningPresentations
-                (
-                    $summit_id,
-                    $role,
-                    $include_sub_roles,
-                    $excluded_tracks
-                )->count() > 0;
-    }
 
     public function PublishedPresentationsByType(
         $summit_id               = null,
@@ -608,6 +570,7 @@ class PresentationSpeaker extends DataObject
         }
 
         $filter_conditions['ModeratorID'] = $this->ID;
+
         return Presentation::get()->filter(
             $filter_conditions
         );

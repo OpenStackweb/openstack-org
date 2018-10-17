@@ -58,7 +58,7 @@ const EventContent = ({
                     <i className="search-link fa fa-download" />
                 </a>
                 }
-                {event.to_record &&
+                {event.to_record == true &&
                 <span className="record-icon">
                     <i className="fa fa-video-camera" />
                 </span>

@@ -364,36 +364,6 @@ interface IPresentationSpeaker extends IEntity
      * @param string $role
      * @param bool $include_sub_roles
      * @param array $excluded_tracks
-     * @return DataList
-     */
-    public function PublishedLightningPresentations
-    (
-        $summit_id = null,
-        $role = IPresentationSpeaker::RoleSpeaker,
-        $include_sub_roles = false,
-        array $excluded_tracks = []
-    );
-
-    /**
-     * @param null $summit_id
-     * @param string $role
-     * @param bool $include_sub_roles
-     * @param array $excluded_tracks
-     * @return bool
-     */
-    public function hasPublishedLightningPresentations
-    (
-        $summit_id = null,
-        $role = IPresentationSpeaker::RoleSpeaker,
-        $include_sub_roles = false,
-        array $excluded_tracks = []
-    );
-
-    /**
-     * @param null $summit_id
-     * @param string $role
-     * @param bool $include_sub_roles
-     * @param array $excluded_tracks
      * @param bool $published_ones
      * @return ArrayList|bool
      */

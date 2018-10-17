@@ -14,10 +14,12 @@
  **/
 interface IPresentationType
 {
-    const Presentation  = 'Presentation';
-    const Keynotes      = 'Keynotes';
-    const Panel         = 'Panel';
-    const LightingTalks = 'Lightning Talks';
-    const Fishbowl      = 'Fishbowl';
-    const Workshop      = 'Workshop';
+    const Presentation      = 'Presentation';
+    const Keynotes          = 'Keynotes';
+    const Panel             = 'Panel';
+    const LightingTalks     = 'Lightning Talks';
+    const HandOnLabs        = 'Hand-on Labs';
+    const Fishbowl          = 'Fishbowl';
+    const Workshop          = 'Workshop';
+    const CollabDiscussion  = 'Collab Discussion';
 }

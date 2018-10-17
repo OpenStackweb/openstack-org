@@ -16,7 +16,7 @@
             <input type="hidden" id="event_id"  value="{$Event.ID}" />
             <input type="hidden" id="published" value="{$Event.IsPublished}" />
             <% if $Event %>
-            <div class="form-group">
+            <div class="form-group <% if $Event.IsPublished %>published-flag<% else %>not-published-flag<% end_if %>">
                 <span><% if $Event.IsPublished %>Published<% else %>Not Published<% end_if %></span>
             </div>
             <% end_if %>
