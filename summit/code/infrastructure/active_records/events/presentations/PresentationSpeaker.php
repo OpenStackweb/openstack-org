@@ -412,7 +412,7 @@ class PresentationSpeaker extends DataObject
      * @param string $role
      * @param bool $exclude_privates_tracks
      * @param array $excluded_tracks
-     * @return bool|DataList
+     * @return DataList
      */
     public function PublishedPresentations($summit_id = null, $role = IPresentationSpeaker::RoleSpeaker,  $exclude_privates_tracks = true, array $excluded_tracks = [])
     {
@@ -511,6 +511,14 @@ class PresentationSpeaker extends DataObject
     }
 
 
+    /**
+     * @param null $summit_id
+     * @param string $role
+     * @param array $types_slugs
+     * @param bool $exclude_privates_tracks
+     * @param array $excluded_tracks
+     * @return DataList
+     */
     public function PublishedPresentationsByType(
         $summit_id               = null,
         $role                    = IPresentationSpeaker::RoleSpeaker,
@@ -532,10 +540,10 @@ class PresentationSpeaker extends DataObject
         }
 
         $summit = !$summit_id ? Summit::get_active() : Summit::get()->byID($summit_id);
-        if (!$summit) return false;
+        if (!$summit) return new ArrayList();
 
         $types = PresentationType::get()->filter(['Type' =>  $types_slugs ,'SummitID'  => $summit->ID ] );
-        if($types->count() == 0 ) return false;
+        if($types->count() == 0 ) return new ArrayList();
 
         $private_tracks          = [];
         $exclude_privates_tracks = boolval($exclude_privates_tracks);
