@@ -1,0 +1,92 @@
+.logo h1{
+	font-weight: bold;
+}
+
+.logo .brand{
+	background-color: #2A4E68;
+	color: #fff;
+	text-align: center;
+	padding: 0.5em;
+	margin-top: 2em;
+}
+
+.assestsArea{
+	display: inline-block;
+	width:100%;
+}
+
+.item{
+	padding-bottom: 3em;
+	border: solid 1px #eee;
+	max-width: 49%;
+
+	margin: 1em 0 0.5em 0;
+	margin-right: 1%;
+}
+
+
+.item:nth-child(odd){
+	margin-right: 0;
+	margin-left: 1%
+}
+
+@media (max-width: 1024px) {
+
+	.item{
+		border: none;
+		margin: 0 !important;
+		max-width: inherit;
+	}
+
+}
+
+.item .span-4{
+	text-align: center;
+	height: 10em;
+}
+.item h5{
+	color: #2A4E68;
+	text-align: center;
+	font-size: 2em;
+	margin: 2em 0 1em;
+
+}
+.item img{
+	max-width: 100%;
+	margin-bottom: 1em;
+
+}
+
+.item .horizontal img{
+	max-height: 6em;
+	padding-top: 2em;
+
+}
+.item .vertical img{
+	max-height: 7em;
+
+}
+.file-types{
+	padding: 0 10%;
+}
+
+
+.file-types a{
+	padding: 0;
+	min-width: 20%;
+	display: inline-block;
+	margin: 0;
+	border: none;
+	text-align: center;
+	color: #30739C;
+	box-shadow: none;
+	text-shadow: none;
+	background: #D8D8D8;
+	margin-right: 5%;
+	line-height: 2em;
+}
+
+
+.file-types a.last{
+	margin-right: 0;
+}

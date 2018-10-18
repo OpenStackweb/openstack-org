@@ -15,7 +15,9 @@
 		static $db = array(
 		);
 		static $has_one = array(
-	     );		
+	     );
+
+        static $logos_dir = 'themes/openstack/images/openstack-logos/';
 	     
 		function getCMSFields() {
 			$fields = parent::getCMSFields();
@@ -32,7 +34,10 @@
 			// Populate the backURL session variable so login form sends us back to this page
 			Session::set('BackURL', $this->Link());
 			parent::init();
-		}
+
+            Requirements::css('themes/openstack/css/logo-page.css');
+
+        }
 		
 		function BrandingMenu() {
 			return TRUE;
