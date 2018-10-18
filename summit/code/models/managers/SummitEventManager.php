@@ -152,7 +152,7 @@ final class SummitEventManager implements ISummitEventManager
             // validate speaker conflict
             if ($event instanceof Presentation && $c_event instanceof Presentation && $event->ID != $c_event->ID) {
                 $all_speakers = $event->Speakers()->toArray();
-                if ($event->ModeratorID) $all_speakers->push($event->Moderator());
+                if ($event->ModeratorID) $all_speakers[] = $event->Moderator();
 
                 foreach ($all_speakers as $speaker) {
                     if ($c_event->Speakers()->find('ID', $speaker->ID) || $c_event->ModeratorID == $speaker->ID) {
