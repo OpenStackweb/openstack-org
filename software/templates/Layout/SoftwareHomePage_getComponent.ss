@@ -15,10 +15,21 @@
                 <h2>$Component.CodeName <i class="<% if $Component.Mascot %>$Component.Mascot.Name<% else %>Barbican<% end_if %>"></i></h2>
                 <h4>$Component.Name</h4>
                 <div class="project-intro-links">
-                    <% if $Component.WikiUrl %>
+                    <% if $Component.DocsLink().Exists() %>
                     <p>
-                        <a href="{$Component.WikiUrl}" target="_blank"><%t Software.PROJECT_WIKI 'Project wiki page' %></a>
+                        <a href="{$Component.DocsLink().URL}" target="_blank">
+                            <i class="fa fa-book" aria-hidden="true"></i>
+                            {$Component.DocsLink().Label}
+                        </a>
                     </p>
+                    <% end_if %>
+                    <% if $Component.DownloadLink().Exists() %>
+                        <p>
+                            <a href="{$Component.DownloadLink().URL}" target="_blank">
+                                <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                                {$Component.DownloadLink().Label}
+                            </a>
+                        </p>
                     <% end_if %>
                     <% if $Component.HasInstallationGuide %>
                     <p>

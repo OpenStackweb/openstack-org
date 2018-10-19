@@ -357,6 +357,30 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                             $comp->CategoryID = $subcat2->ID;
                             $comp->Order = $compOrder;
 
+                            if (isset($component['docs-title']) && isset($component['docs-url'])) {
+                                if (!$docsLink = $comp->DocsLink()) {
+                                    $docsLink = new Link();
+                                }
+                                $docsLink->Label = $component['docs-title'];
+                                $docsLink->URL = $component['docs-url'];
+                                $docsLink->write();
+                                $comp->DocsLinkID = $docsLink->ID;
+                            } else {
+                                $comp->DocsLinkID = null;
+                            }
+
+                            if (isset($component['download-title']) && isset($component['download-url'])) {
+                                if (!$downloadLink = $comp->DownloadLink()) {
+                                    $downloadLink = new Link();
+                                }
+                                $downloadLink->Label = $component['download-title'];
+                                $downloadLink->URL = $component['download-url'];
+                                $downloadLink->write();
+                                $comp->DownloadLinkID = $downloadLink->ID;
+                            } else {
+                                $comp->DownloadLinkID = null;
+                            }
+
                             $comp->Links()->removeAll();
 
                             if (isset($component['links'])) {
