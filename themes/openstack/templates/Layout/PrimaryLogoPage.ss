@@ -6,13 +6,13 @@
         <p>
 			Here you’ll find logos of the projects managed by the OpenStack Foundation. Look carefully to make sure you
             choose the right format for your needs. Generally speaking, it is best use a PNG or JPG format for web content or
-            slides and EPS or AI format for print projects. Please contact us for any file formats not listed. Each of these
-            marks is subject to the terms and conditions found here.
+            slides and EPS for print projects. Please contact us for any file formats not listed. Each of these
+            marks is subject to the <a href="/brand/openstack-logo/">terms and conditions found here</a>.
 		</p>
     </div>
 
     <div class="span-13 assestsArea">
-        <h3 class="brand">Openstack</h3>
+        <h3 class="brand">OpenStack</h3>
         <div class="col-lg-6 col-sm-6 col-xs-12 item">
             <h5>Full Color Horizontal</h5>
             <div class="span-4 horizontal">
@@ -217,7 +217,7 @@
         </div>
     </div>
     <div class="span-13 assestsArea">
-        <h3 class="brand">Starlingx</h3>
+        <h3 class="brand">StarlingX</h3>
         <div class="col-lg-6 col-sm-6 col-xs-12 item">
             <h5>Full Color Horizontal</h5>
             <div class="span-4 horizontal">
