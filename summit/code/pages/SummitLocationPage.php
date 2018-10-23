@@ -28,8 +28,8 @@ class SummitLocationPage extends SummitPage
     );
 
     private static $has_one = array(
-        'VenueBackgroundImage' => 'BetterImage',
-        'AboutTheCityBackgroundImage' => 'BetterImage'
+        'VenueBackgroundImage' => 'CloudImage',
+        'AboutTheCityBackgroundImage' => 'CloudImage'
     );
 
     private static $has_many = array
@@ -58,7 +58,7 @@ class SummitLocationPage extends SummitPage
             // Summit Question Categories
 
             $fields->addFieldsToTab('Root.Main',
-                $venue_back = new UploadField('VenueBackgroundImage', 'Venue Background Image'));
+                $venue_back = UploadField::create('VenueBackgroundImage', 'Venue Background Image'));
             $venue_back->setFolderName('summits/locations');
             $venue_back->setAllowedMaxFileNumber(1);
             $venue_back->setAllowedFileCategories('image');
@@ -69,7 +69,7 @@ class SummitLocationPage extends SummitPage
                 new TextField('VenueBackgroundImageHeroSource', 'Venue Background Image Author Url'));
 
             $fields->addFieldsToTab('Root.CityInfo',
-                $about_back = new UploadField('AboutTheCityBackgroundImage', 'About The City Background Image'));
+                $about_back = UploadField::create('AboutTheCityBackgroundImage', 'About The City Background Image'));
             $about_back->setFolderName('summits/location/about');
             $about_back->setAllowedMaxFileNumber(1);
             $about_back->setAllowedFileCategories('image');

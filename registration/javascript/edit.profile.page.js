@@ -186,10 +186,7 @@ jQuery(document).ready(function($) {
             }
         });
 
-
     }
-
-
 
     var speaker_form_id ="#EditSpeakerProfileForm_EditSpeakerProfileForm";
 

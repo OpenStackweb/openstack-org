@@ -46,7 +46,7 @@ class VideoPresentation extends DataObject
 		'PresentationCategoryPage' => 'PresentationCategoryPage',
 		'Summit' => 'Summit',
 		'Member' => 'Member',
-		'UploadedMedia' => 'File'
+		'UploadedMedia' => 'CloudFile'
 	);
 
 

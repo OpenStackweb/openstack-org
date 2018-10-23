@@ -64,17 +64,17 @@ final class MemberVerificationController extends AbstractController
 
             $member = $this->member_manager->verify($token, new MemberRegistrationVerifiedSenderService);
 
-            return $this->renderWith
+            return $this->customise(
+                [
+
+                    'Member' => $member,
+                ]
+            )->renderWith
             (
-                array
-                (
+                [
                     'MemberVerification_verified',
                     'Page'
-                ),
-                array
-                (
-                    'Member' => $member,
-                )
+                ]
             );
         }
         catch (NotFoundEntityException $ex1) {

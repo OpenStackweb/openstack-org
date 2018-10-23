@@ -1,0 +1,7 @@
+---
+Name: openstackidroutes
+---
+Director:
+  rules:
+    'OpenStackIdAuthenticator': 'OpenStackIdAuthenticator'
+

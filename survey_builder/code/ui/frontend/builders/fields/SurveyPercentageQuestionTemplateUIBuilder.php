@@ -34,7 +34,7 @@ class SurveyPercentageQuestionTemplateUIBuilder extends SurveyNumericQuestionTem
      * @param ISurveyAnswer $answer
      * @return FormField
      */
-    public function build(ISurveyStep $current_step, ISurveyQuestionTemplate $question, ISurveyAnswer $answer)
+    public function build(ISurveyStep $current_step, ISurveyQuestionTemplate $question, ?ISurveyAnswer $answer)
     {
         $field = parent::build($current_step, $question, $answer);
         $field->addExtraClass('percentage-input');

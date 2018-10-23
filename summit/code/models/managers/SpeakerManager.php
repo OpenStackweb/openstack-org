@@ -314,7 +314,7 @@ final class SpeakerManager implements ISpeakerManager
      * @param ISummit $summit
      * @param $speaker_id
      * @param $tmp_file
-     * @return BetterImage
+     * @return CloudImage
      */
     public function uploadSpeakerPic(ISummit $summit, $speaker_id, $tmp_file)
     {
@@ -324,7 +324,7 @@ final class SpeakerManager implements ISpeakerManager
             $speaker    = $this->speaker_repository->getById($speaker_id);
             if(is_null($speaker)) throw new NotFoundEntityException('PresentationSpeaker');
 
-            $image = new BetterImage();
+            $image = new CloudImage();
             $upload = new Upload();
             $validator = new Upload_Validator();
             $validator->setAllowedExtensions(array('png','jpg','jpeg','gif'));

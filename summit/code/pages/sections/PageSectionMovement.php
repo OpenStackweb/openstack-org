@@ -20,7 +20,7 @@ class PageSectionMovement extends PageSection {
     );
 
     static $has_one = array(
-        'Picture' => 'File'
+        'Picture' => 'CloudFile'
     );
 
     function getCMSFields() {
@@ -29,7 +29,7 @@ class PageSectionMovement extends PageSection {
         $fields->add(new HtmlEditorField('TextTop','Text Top'));
         $fields->add(new HtmlEditorField('TextBottom','Text Bottom'));
 
-        $join_image = new UploadField('Picture', 'Picture');
+        $join_image = UploadField::create('Picture', 'Picture');
         $join_image->setAllowedMaxFileNumber(1);
 
         $fields->add($join_image);

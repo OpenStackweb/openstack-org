@@ -14,11 +14,11 @@
 
 
 //sangria configuration
-Object::add_extension('SangriaPage_Controller', 'SangriaPageDeploymentExtension');
-Object::add_extension('SangriaPage_Controller', 'SangriaPageSurveyDetailsExtension');
-Object::add_extension('SangriaPage_Controller', 'SangriaPageStandardizeOrgNamesExtension');
-Object::add_extension('SangriaPage_Controller', 'SangriaPageExportDataExtension');
-Object::add_extension('SangriaPage_Controller', 'SangriaPageViewSpeakingSubmissionsExtension');
-Object::add_extension('SangriaPage_Controller', 'SangriaSetCategorySponsorsExtension');
-Object::add_extension('SangriaPage_Controller', 'SangriaPageInvolvementTypeExtension');
-Object::add_extension('SangriaPage_Controller', 'SangriaPageSurveyBuilderStatisticsExtension');
+SS_Object::add_extension('SangriaPage_Controller', 'SangriaPageDeploymentExtension');
+SS_Object::add_extension('SangriaPage_Controller', 'SangriaPageSurveyDetailsExtension');
+SS_Object::add_extension('SangriaPage_Controller', 'SangriaPageStandardizeOrgNamesExtension');
+SS_Object::add_extension('SangriaPage_Controller', 'SangriaPageExportDataExtension');
+SS_Object::add_extension('SangriaPage_Controller', 'SangriaPageViewSpeakingSubmissionsExtension');
+SS_Object::add_extension('SangriaPage_Controller', 'SangriaSetCategorySponsorsExtension');
+SS_Object::add_extension('SangriaPage_Controller', 'SangriaPageInvolvementTypeExtension');
+SS_Object::add_extension('SangriaPage_Controller', 'SangriaPageSurveyBuilderStatisticsExtension');

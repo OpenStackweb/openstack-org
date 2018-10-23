@@ -41,7 +41,6 @@ class SurveyRankingField extends OptionsetField {
         $this->question = $question;
     }
 
-
     public function Field($properties = array()) {
 
         Requirements::css('survey_builder/css/survey.ranking.field.css');
@@ -132,4 +131,33 @@ class SurveyRankingField extends OptionsetField {
         return implode(' ', $parts);
     }
 
+    public function validate($validator) {
+
+        if (!$this->value) {
+            return true;
+        }
+
+        $source = $this->getSourceAsArray();
+        $disabled = $this->getDisabledItems();
+
+        $values = explode(',' , $this->value);
+        foreach($values as $value) {
+            if (!array_key_exists($value, $source) || in_array($value, $disabled)) {
+                if ($this->getHasEmptyDefault() && !$value) {
+                    return true;
+                }
+                $validator->validationError(
+                    $this->name,
+                    _t(
+                        'DropdownField.SOURCE_VALIDATION',
+                        "Please select a value within the list provided. {value} is not a valid option",
+                        array('value' => $value)
+                    ),
+                    "validation"
+                );
+                return false;
+            }
+        }
+        return true;
+    }
 }

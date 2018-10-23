@@ -19,7 +19,7 @@ interface ICompanyServiceUpdateRecord extends IEntity {
 
     public function getCompanyService();
 
-    public function setEditor(IFoundationMember $member);
+    public function setEditor(Member $member);
 
     public function getEditor();
 

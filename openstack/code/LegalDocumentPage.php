@@ -15,7 +15,7 @@
 		static $db = array(
 		);
 		static $has_one = array(
-			'LegalDocumentFile' => 'File'
+			'LegalDocumentFile' => 'CloudFile'
 	     );
 
 	 	function getCMSFields() {

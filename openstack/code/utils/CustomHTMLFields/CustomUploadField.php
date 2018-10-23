@@ -14,7 +14,7 @@
 /**
  * Class CustomUploadField
  */
-final class CustomUploadField extends UploadField {
+final class CustomUploadField extends CloudAwareUploadField {
 
 	/**
 	 * @var array

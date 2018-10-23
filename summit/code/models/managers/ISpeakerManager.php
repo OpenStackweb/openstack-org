@@ -50,7 +50,7 @@ interface ISpeakerManager
      * @param ISummit $summit
      * @param $speaker_id
      * @param $tmp_file
-     * @return BetterImage
+     * @return CloudImage
      */
     public function uploadSpeakerPic(ISummit $summit, $speaker_id, $tmp_file);
 

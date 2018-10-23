@@ -5,11 +5,13 @@
         <tbody style="display: block; height: 325px; overflow-y: auto">
             <% loop $Top.ParentPage.getLanguageValues %>
             <tr>
+
                 <td>
+
                     <% if $Top.ParentPage.IsQuestionOnFiltering(lang) %>
                         <span>$Lang</span>
                     <% else %>
-                        <a href="$Top.ParentPage.Link($Top.ParentPage.Action)?qid=lang&vid={$Lang}{$Top.ParentPage.SurveyBuilderDateFilterQueryString}">$Lang</a>
+                        <a href="$Up.ParentPage.Link($Up.ParentPage.Action)?qid=lang&vid={$Lang}{$Top.ParentPage.SurveyBuilderDateFilterQueryString}">$Lang</a>
                     <% end_if %>
                 </td>
                 <td>$Top.ParentPage.SurveyBuilderCountLang($Lang)</td>

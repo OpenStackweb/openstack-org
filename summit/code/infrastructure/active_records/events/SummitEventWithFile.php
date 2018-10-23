@@ -27,14 +27,14 @@ final class SummitEventWithFile extends SummitEvent
 
     private static $has_one = array
     (
-        'Attachment'  => 'File',
+        'Attachment'  => 'CloudFile',
     );
 
     public function getCMSFields()
     {
         $f = parent::getCMSFields();
 
-        $file = new UploadField('Attachment','Attachment');
+        $file = UploadField::create('Attachment','Attachment');
         $file->setFolderName('summit-event-attachments');
         $file->getValidator()->setAllowedMaxFileSize(4*1024*1024);
 

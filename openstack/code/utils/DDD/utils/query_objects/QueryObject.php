@@ -29,17 +29,17 @@ final class QueryObject
 
     /**
      * QueryObject constructor.
-     * @param IEntity|null $base_entity
+     * @param null|object $base_entity
      */
-    public function __construct(IEntity $base_entity = null)
+    public function __construct(?object $base_entity = null)
     {
         $this->base_entity = $base_entity;
     }
 
     /**
-     * @param IEntity $base_entity
+     * @param $base_entity
      */
-    public function setBaseEntity(IEntity $base_entity)
+    public function setBaseEntity($base_entity)
     {
         $this->base_entity = $base_entity;
     }

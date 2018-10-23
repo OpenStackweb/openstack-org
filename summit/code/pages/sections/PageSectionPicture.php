@@ -15,13 +15,13 @@
 class PageSectionPicture extends PageSectionText {
 
     static $has_one = array(
-        'Picture' => 'BetterImage'
+        'Picture' => 'CloudImage'
     );
 
     function getCMSFields() {
         $fields = parent::getCMSFields();
 
-        $join_image = new UploadField('Picture', 'Picture');
+        $join_image = UploadField::create('Picture', 'Picture');
         $join_image->setAllowedMaxFileNumber(1);
         $fields->add($join_image);
 

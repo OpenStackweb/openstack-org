@@ -138,7 +138,7 @@ class SapphireCourseRepository
 SQL;
         $sql .= ($limit) ? " LIMIT 3 " : ";";
         $results = DB::query($sql);
-        $courses_id = array();
+        $courses_id = [];
 
         for ($i = 0; $i < $results->numRecords(); $i++) {
             $record = $results->nextRecord();
@@ -204,8 +204,9 @@ SQL;
         ORDER BY StartDate ASC LIMIT {$limit};
 SQL;
 
-		$results = DB::query($sql);
-		for ($i = 0; $i < $results->numRecords(); $i++) {
+        $results = DB::query($sql);
+
+        for ($i = 0; $i < $results->numRecords(); $i++) {
 			$record = $results->nextRecord();
 			array_push($courses,new CourseDTO (
 				(int)$record['ID'],

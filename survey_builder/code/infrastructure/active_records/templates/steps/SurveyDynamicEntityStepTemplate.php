@@ -28,7 +28,7 @@ class SurveyDynamicEntityStepTemplate
 
     static $has_one = array
     (
-        'EntityIcon' => 'BetterImage',
+        'EntityIcon' => 'CloudImage',
         'Entity'     => 'EntitySurveyTemplate',
     );
 
@@ -53,7 +53,7 @@ class SurveyDynamicEntityStepTemplate
         $fields->add(new TextField('DeleteEntityText', 'Delete Text'));
         $fields->add(new TextField('EditEntityText', 'Edit Text'));
 
-        $icon = new UploadField('EntityIcon', 'Upload Entity Icon');
+        $icon = UploadField::create('EntityIcon', 'Upload Entity Icon');
         $icon->setCanAttachExisting(false);
         $icon->setAllowedMaxFileNumber(1);
         $icon->setAllowedFileCategories('image');

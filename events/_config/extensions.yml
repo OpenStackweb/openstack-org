@@ -1,0 +1,6 @@
+---
+Name: eventsextensions
+---
+SangriaPage_Controller:
+  extensions:
+    - SangriaPageEventExtension

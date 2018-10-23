@@ -28,7 +28,7 @@ i18n::set_locale('en_US');
 //Turn on Silverstripe Translation
 
 // Search index for Orgs
-Object::add_extension('Org', 'AutocompleteOrgDecorator');
+SS_Object::add_extension('Org', 'AutocompleteOrgDecorator');
 
 Page::remove_extension('OpenGraphObjectExtension');
 
@@ -84,11 +84,10 @@ SS_Cache::pick_backend('file-level', 'any', 10);
 SS_Cache::set_cache_lifetime($for = 'cache_entity_count', $lifetime = 3600, $priority = 100);
 
 //entity counter extension
-Object::add_extension('HomePage_Controller', 'EntityCounter');
-Object::add_extension('AnniversaryPage_Controller', 'EntityCounter');
-Object::add_extension('Group', 'GroupDecorator');
-Object::add_extension('SecurityAdmin', 'SecurityAdminExtension');
-
+SS_Object::add_extension('HomePage_Controller', 'EntityCounter');
+SS_Object::add_extension('AnniversaryPage_Controller', 'EntityCounter');
+SS_Object::add_extension('Group', 'GroupDecorator');
+SS_Object::add_extension('SecurityAdmin', 'SecurityAdminExtension');
 
 //Force cache to flush on page load if in Dev mode (prevents needing ?flush=1 on the end of a URL)
 if (Director::isDev()) {
@@ -123,3 +122,4 @@ if(defined('SERVER_TIME_ZONE')) {
 }
 
 $test_url = Director::absoluteURL('/admin/edit/1');
+

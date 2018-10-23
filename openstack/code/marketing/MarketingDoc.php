@@ -24,8 +24,8 @@ class MarketingDoc extends DataObject {
         'TShirts'          => 'MarketingPage',
         'Banners'          => 'MarketingPage',
         'Templates'        => 'MarketingPage',
-        'Thumbnail'        => 'BetterImage',
-        'Doc'              => 'File',
+        'Thumbnail'        => 'CloudImage',
+        'Doc'              => 'CloudFile',
         'ParentPage'       => 'MarketingPage',
     );
 
@@ -38,11 +38,11 @@ class MarketingDoc extends DataObject {
     public function getCMSFields() {
         $fields = new FieldList;
 
-        $image = new UploadField('Thumbnail','Thumbnail');
+        $image = UploadField::create('Thumbnail','Thumbnail');
         $image->setFolderName('marketing');
         $image->setAllowedFileCategories('image');
 
-        $doc = new UploadField('Doc','Doc');
+        $doc = UploadField::create('Doc','Doc');
         $doc->setFolderName('marketing');
         $doc->getValidator()->setAllowedMaxFileSize(40*1024*1024);
 

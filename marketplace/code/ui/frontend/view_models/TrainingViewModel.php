@@ -21,7 +21,7 @@ class TrainingViewModel extends ViewableData {
 	 */
 	private $courses;
 	/**
-	 * @var ICompany
+	 * @var Company
 	 */
 	private $company;
 	/**
@@ -41,9 +41,9 @@ class TrainingViewModel extends ViewableData {
 	 * @param int      $id
 	 * @param string   $name
 	 * @param string   $description
-	 * @param ICompany $company
+	 * @param Company $company
 	 */
-	public function __construct($id,$name,$description, ICompany $company){
+	public function __construct($id,$name,$description, Company $company){
 		$this->id          = $id;
 		$this->name        = $name;
 		$this->description = $description;
@@ -72,7 +72,7 @@ class TrainingViewModel extends ViewableData {
 	}
 
 	/**
-	 * @return ICompany
+	 * @return Company
 	 */
 	public function getCompany(){
 		return $this->company;

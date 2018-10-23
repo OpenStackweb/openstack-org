@@ -91,7 +91,6 @@ class EmailUtilsPage_Controller extends Page_Controller {
         header("Content-disposition: attachment; filename=\"speaker-notifications.csv\"");
         header("Content-Length: ".filesize($filepath));
         readfile($filepath);
-
     }
 
     public function ClearMailingList() {

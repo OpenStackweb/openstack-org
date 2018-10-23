@@ -46,7 +46,6 @@ class JobPage_Controller extends Page_Controller {
         Requirements::javascript("marketplace/code/ui/admin/js/utils.js");
         Requirements::javascript('node_modules/pure/libs/pure.min.js');
         Requirements::javascript("jobs/js/job.registration.request.page.js");
-
     }
 
     function JobForm(){
@@ -63,6 +62,10 @@ class JobPage_Controller extends Page_Controller {
             SpamProtectorManager::update_form($form);
         }
         return $form;
+    }
+
+    public function EditorToolbar() {
+        return HtmlEditorField_Toolbar::create($this, "EditorToolbar");
     }
 
     function saveJob($data, Form $form){

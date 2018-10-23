@@ -20,7 +20,7 @@ final class PublicCloudsServicesQueryHandler
 	 * @param IQuerySpecification $specification
 	 * @return IQueryResult
 	 */
-	public function handle(IQuerySpecification $specification){
+	public function handle(?IQuerySpecification $specification){
 
 		$sql1    = <<< SQL
         SELECT OpenStackComponent.Name, OpenStackComponent.CodeName FROM CompanyService

@@ -30,7 +30,7 @@ class SummitVenueRoom extends SummitAbstractLocation implements ISummitVenueRoom
     (
         'Venue' => 'SummitVenue',
         'Floor' => 'SummitVenueFloor',
-        'Image' => 'BetterImage',
+        'Image' => 'CloudImage',
     );
 
     public function getFullName()
@@ -87,7 +87,7 @@ class SummitVenueRoom extends SummitAbstractLocation implements ISummitVenueRoom
         $f->addFieldToTab('Root.Main', new HiddenField('VenueID','VenueID'));
         $f->addFieldToTab('Root.Main', $ddl_floor = new DropdownField('FloorID','Floor', SummitVenueFloor::get()->filter('VenueID', $this->VenueID )->map("ID", "FullName")));
         $ddl_floor->setEmptyString("-- SELECT A FLOOR --");
-        $f->addFieldToTab('Root.Main', $upload_field = new UploadField('Image','Map'));
+        $f->addFieldToTab('Root.Main', $upload_field = UploadField::create('Image','Map'));
         $upload_field->setAllowedMaxFileNumber(1);
         $upload_field->setFolderName(sprintf('summits/%s/locations/%s/rooms/', $_REQUEST['SummitID'], $_REQUEST['LocationID']));
         $upload_field->getValidator()->setAllowedMaxFileSize(array('*' => 512 * 1024));

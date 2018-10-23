@@ -116,7 +116,7 @@ final class SummitAdminUI extends DataExtension
 
         $f->addFieldsToTab('Root.Main', new NumericField('MaxSubmissionAllowedPerUser', 'Max. Submission Allowed Per User'));
 
-        $logo_field = new UploadField('Logo', 'Logo');
+        $logo_field = UploadField::create('Logo', 'Logo');
         $logo_field->setAllowedMaxFileNumber(1);
         $logo_field->setAllowedFileCategories('image');
         $logo_field->setFolderName('summits/logos/');

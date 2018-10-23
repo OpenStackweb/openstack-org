@@ -33,7 +33,7 @@ class SurveyNumericQuestionTemplateUIBuilder extends SurveyTextBoxQuestionTempla
      * @param ISurveyAnswer $answer
      * @return FormField
      */
-    public function build(ISurveyStep $current_step, ISurveyQuestionTemplate $question, ISurveyAnswer $answer)
+    public function build(ISurveyStep $current_step, ISurveyQuestionTemplate $question, ?ISurveyAnswer $answer)
     {
         $field = parent::build($current_step, $question, $answer);
         $field->addExtraClass('number-input');

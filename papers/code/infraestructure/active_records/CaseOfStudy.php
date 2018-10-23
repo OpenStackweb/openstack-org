@@ -18,7 +18,7 @@
 final class CaseOfStudy extends PaperSection
 {
     private static $has_one = [
-        'Logo' => 'BetterImage',
+        'Logo' => 'CloudImage',
     ];
 
     public function getLogoUrl(){

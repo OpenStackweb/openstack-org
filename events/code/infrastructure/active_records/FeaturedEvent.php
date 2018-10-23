@@ -21,7 +21,7 @@ class FeaturedEvent extends DataObject {
 
     private static $has_one = array(
         'Event'   => 'EventPage',
-        'Picture' => 'BetterImage'
+        'Picture' => 'CloudImage'
     );
 
 

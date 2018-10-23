@@ -33,3 +33,40 @@ Information for installation to a local machine environment can be found at:
 Information on publishing a page on OpenStackweb and working with the development environment can be found at:
 [Publishing a new web page](./publishing.md)
 
+## Cloud storage
+
+assets folder is now using cloud storage (swift object storage)
+
+configuration file for this should be located here
+
+openstack/_config/cloudassets.yml
+
+and with following content 
+
+
+
+```yaml
+
+---
+name: assetsconfig
+---
+
+CloudAssets:
+  wrappers:
+    File : CloudFile
+    BetterImage: CloudImage
+    Image: CloudImage
+    Image_Cached: CloudImageCached
+  map:
+    'assets':
+      Type: SwiftBucket
+      BaseURL: 'bucket base url'
+      AuthURL: 'keystone base url'
+      Container: 'container name'
+      Region: 'region nane'
+      Username: 'user name'
+      ApiKey: 'api key'
+      ProjectName: 'project name'
+      LocalCopy: true
+      
+```

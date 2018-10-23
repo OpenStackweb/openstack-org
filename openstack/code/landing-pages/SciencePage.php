@@ -17,8 +17,8 @@ class SciencePage extends Page {
 	);
 
     static $has_one = array(
-        'BookPDF'   => 'File',
-        'PrintPDF'  => 'File'
+        'BookPDF'   => 'CloudFile',
+        'PrintPDF'  => 'CloudFile'
     );
 
     function getCMSFields()
@@ -27,10 +27,10 @@ class SciencePage extends Page {
         // remove unneeded fields
         $fields->removeFieldFromTab("Root.Main", "Content");
 
-        $fields->addFieldToTab("Root.Main", $book = new UploadField('BookPDF','Book PDF'));
+        $fields->addFieldToTab("Root.Main", $book = UploadField::create('BookPDF','Book PDF'));
         $book->setFolderName('science');
         $book->getValidator()->setAllowedMaxFileSize(40*1024*1024);
-        $fields->addFieldToTab("Root.Main", $print = new UploadField('PrintPDF','Print PDF'));
+        $fields->addFieldToTab("Root.Main", $print = UploadField::create('PrintPDF','Print PDF'));
         $print->setFolderName('science');
         $print->getValidator()->setAllowedMaxFileSize(40*1024*1024);
         $fields->addFieldToTab("Root.Main", new TextField('AmazonLink','Amazon Link'));

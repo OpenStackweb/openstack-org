@@ -43,7 +43,7 @@ class SummitRegistrationPromoCode extends DataObject implements ISummitRegistrat
         if($this->EmailSent) return $this;
 
         $this->EmailSent     = true;
-        $this->EmailSentDate = MySQLDatabase56::nowRfc2822();
+        $this->EmailSentDate = CustomMySQLDatabase::nowRfc2822();
         return $this;
     }
 

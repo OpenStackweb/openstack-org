@@ -38,7 +38,7 @@ class HomePage extends Page
     ];
 
     private static $has_one  = array(
-        'PromoImage' => 'BetterImage',
+        'PromoImage' => 'CloudImage',
     );
 
     private static $has_many = array(

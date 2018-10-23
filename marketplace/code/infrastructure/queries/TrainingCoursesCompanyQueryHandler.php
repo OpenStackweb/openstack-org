@@ -20,7 +20,7 @@ final class TrainingCoursesCompanyQueryHandler implements IQueryHandler {
 	 * @param IQuerySpecification $specification
 	 * @return IQueryResult
 	 */
-	public function handle(IQuerySpecification $specification){
+	public function handle(?IQuerySpecification $specification){
 
         $params = $specification->getSpecificationParams();
         $current_date   = @$params['name_pattern'];

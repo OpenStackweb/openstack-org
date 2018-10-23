@@ -25,8 +25,8 @@ class Company extends DataObject implements PermissionProvider,IEntity
     static $has_one = array(
 
         'CompanyListPage' => 'CompanyListPage',
-        'Logo'            => 'BetterImage',
-        'BigLogo'         => 'BetterImage',
+        'Logo'            => 'CloudImage',
+        'BigLogo'         => 'CloudImage',
         'Submitter'       => 'Member',
         'CompanyAdmin'    => 'Member'
     );
@@ -65,7 +65,7 @@ class Company extends DataObject implements PermissionProvider,IEntity
     );
 
     private static $has_many = array(
-        'Photos'   => 'BetterImage',
+        'Photos'    => 'CloudImage',
         'Contracts' => 'Contract',
         'Services'  => 'CompanyService',
     );
@@ -148,11 +148,11 @@ class Company extends DataObject implements PermissionProvider,IEntity
 
         $_REQUEST["CompanyId"] = $this->ID;
 
-        $large_logo = new UploadField('BigLogo', 'Large Company Logo');
+        $large_logo = UploadField::create('BigLogo', 'Large Company Logo');
         $large_logo->setFolderName('companies/main_logo');
         $large_logo->setAllowedFileCategories('image');
 
-        $small_logo = new UploadField('Logo', 'Small Company Logo');
+        $small_logo = UploadField::create('Logo', 'Small Company Logo');
         $small_logo->setAllowedFileCategories('image');
         //logo validation rules
         $large_logo_validator = new Upload_Image_Validator();

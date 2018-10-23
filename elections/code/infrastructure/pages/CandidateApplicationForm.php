@@ -39,7 +39,6 @@ final class CandidateApplicationForm extends HoneyPotForm {
        $actions = new FieldList(
           $actionButton
        );
-
    
       parent::__construct($controller, $name, $fields, $actions);
 

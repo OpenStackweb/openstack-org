@@ -24,7 +24,7 @@ class SurveyCheckBoxQuestionTemplateUIBuilder
      * @param ISurveyAnswer $answer
      * @return FormField
      */
-    public function build(ISurveyStep $current_step, ISurveyQuestionTemplate $question, ISurveyAnswer $answer)
+    public function build(ISurveyStep $current_step, ISurveyQuestionTemplate $question, ?ISurveyAnswer $answer)
     {
         $field = new CheckboxField($question->name(), GetTextTemplateHelpers::_t("survey_template", $question->label()));
         $field->setValue($question->initialValue());

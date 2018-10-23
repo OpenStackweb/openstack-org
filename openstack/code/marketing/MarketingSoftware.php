@@ -23,8 +23,8 @@ class MarketingSoftware extends DataObject {
 
 	private  static $has_one = array(
         'ParentPage'   => 'MarketingPage',
-		'Logo'         => 'BetterImage',
-		'Presentation' => 'File',
+		'Logo'         => 'CloudImage',
+		'Presentation' => 'CloudFile',
 	);
 
 	private static $default_sort = 'SortOrder';
@@ -52,7 +52,7 @@ class MarketingSoftware extends DataObject {
         $image->setValidator($image_validator);
         $fields->push($image);
 
-        $presentation = new UploadField('Presentation','Presentation');
+        $presentation = UploadField::create('Presentation','Presentation');
         $presentation->setFolderName('marketing');
         $presentation->getValidator()->setAllowedMaxFileSize(40*1024*1024);
         $fields->push($presentation);

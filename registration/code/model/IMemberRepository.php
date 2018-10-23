@@ -26,7 +26,7 @@ interface IMemberRepository extends IEntityRepository
     /**
      * @param string $first_name
      * @param string $last_name
-     * @return ICommunityMember[]
+     * @return array
      */
     public function getAllByName($first_name, $last_name);
 

@@ -32,14 +32,14 @@ final class PersistentCollection extends RelationList
 
     /**
      * @param string $owner
-     * @param RelationList $component_set
+     * @param SS_List $component_set
      * @param QueryObject $query
      * @param string $type
      * @param              $association_name
      */
     public function __construct(
         $owner,
-        RelationList $component_set,
+        SS_List $component_set,
         QueryObject $query,
         $type = '1-to-many',
         $association_name

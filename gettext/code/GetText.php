@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-class GetText extends Object implements TemplateGlobalProvider
+class GetText extends SS_Object implements TemplateGlobalProvider
 {
     static $last_set_locale = [];
     /**

@@ -29,7 +29,7 @@ class OpenstackUser extends Page {
    	"UseCase" => "Enum('Unknown, Saas, TestDev, BigDataAnalytics')"
    );
    static $has_one = array(
-   	'Logo' => 'Image'
+   	'Logo' => 'CloudImage'
    );
    static $has_many = array (
    	'Attachments' => 'AttachmentFile',

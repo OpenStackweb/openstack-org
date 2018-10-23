@@ -20,7 +20,7 @@ final class TrainingCoursesTopicQueryHandler implements IQueryHandler{
 	 * @param IQuerySpecification $specification
 	 * @return IQueryResult
 	 */
-	public function handle(IQuerySpecification $specification)
+	public function handle(?IQuerySpecification $specification)
 	{
 		$params = $specification->getSpecificationParams();
 		$term   = @$params['term'];

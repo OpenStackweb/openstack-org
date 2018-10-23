@@ -49,28 +49,28 @@ abstract class OpenStackImplementationManager
      */
     protected $supported_version_repository;
 
-    public function __construct(IEntityRepository $repository,
-                                IEntityRepository $video_type_repository,
-                                IMarketplaceTypeRepository $marketplace_type_repository,
-                                IEntityRepository $guest_os_repository,
-                                IEntityRepository $hypervisor_type_repository,
-                                IOpenStackApiVersionRepository $api_version_repository,
-                                IOpenStackComponentRepository $component_repository,
-                                IOpenStackReleaseRepository $release_repository,
-                                IEntityRepository $region_repository,
-                                IEntityRepository $support_channel_type_repository,
-                                IOpenStackReleaseSupportedApiVersionRepository $supported_version_repository,
+    public function __construct(?IEntityRepository $repository,
+                                ?IEntityRepository $video_type_repository,
+                                ?IMarketplaceTypeRepository $marketplace_type_repository,
+                                ?IEntityRepository $guest_os_repository,
+                                ?IEntityRepository $hypervisor_type_repository,
+                                ?IOpenStackApiVersionRepository $api_version_repository,
+                                ?IOpenStackComponentRepository $component_repository,
+                                ?IOpenStackReleaseRepository $release_repository,
+                                ?IEntityRepository $region_repository,
+                                ?IEntityRepository $support_channel_type_repository,
+                                ?IOpenStackReleaseSupportedApiVersionRepository $supported_version_repository,
         //policies
-                                IMarketPlaceTypeAddPolicy $add_policy,
-                                ICompanyServiceCanAddResourcePolicy $add_resource_policy,
-                                ICompanyServiceCanAddVideoPolicy $add_video_policy,
+                                ?IMarketPlaceTypeAddPolicy $add_policy,
+                                ?ICompanyServiceCanAddResourcePolicy $add_resource_policy,
+                                ?ICompanyServiceCanAddVideoPolicy $add_video_policy,
         //factories
-                                IOpenStackImplementationFactory $factory,
-                                IMarketplaceFactory $marketplace_factory,
-                                IValidatorFactory $validator_factory,
-                                IOpenStackApiFactory $api_factory,
-                                IMarketPlaceTypeCanShowInstancePolicy $show_policy,
-                                ICacheService $cache_service,
+                                ?IOpenStackImplementationFactory $factory,
+                                ?IMarketplaceFactory $marketplace_factory,
+                                ?IValidatorFactory $validator_factory,
+                                ?IOpenStackApiFactory $api_factory,
+                                ?IMarketPlaceTypeCanShowInstancePolicy $show_policy,
+                                ?ICacheService $cache_service,
                                 ITransactionManager $tx_manager
     )
     {

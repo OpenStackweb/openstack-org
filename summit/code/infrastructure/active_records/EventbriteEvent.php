@@ -48,7 +48,7 @@ class EventbriteEvent extends DataObject implements IEventbriteEvent
         if($this->Processed) throw new Exception('EventbriteEvent already processed!');
 
         $this->Processed     = true;
-        $this->ProcessedDate = MySQLDatabase56::nowRfc2822();
+        $this->ProcessedDate = CustomMySQLDatabase::nowRfc2822();
         $this->FinalStatus   = $status;
     }
 

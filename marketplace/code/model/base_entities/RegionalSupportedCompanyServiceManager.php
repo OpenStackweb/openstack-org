@@ -43,19 +43,19 @@ abstract class RegionalSupportedCompanyServiceManager extends CompanyServiceMana
      * @param ITransactionManager $tx_manager
      */
     public function __construct(
-        IEntityRepository $repository,
-        IEntityRepository $video_type_repository,
-        IMarketplaceTypeRepository $marketplace_type_repository,
-        IEntityRepository $region_repository,
-        IEntityRepository $support_channel_type_repository,
-        IMarketPlaceTypeAddPolicy $add_policy,
-        ICompanyServiceCanAddResourcePolicy $add_resource_policy,
-        ICompanyServiceCanAddVideoPolicy $add_video_policy,
-        ICompanyServiceFactory $factory,
-        IMarketplaceFactory $marketplace_factory,
-        IValidatorFactory $validator_factory,
-        IMarketPlaceTypeCanShowInstancePolicy $show_policy,
-        ICacheService $cache_service,
+        ?IEntityRepository $repository,
+        ?IEntityRepository $video_type_repository,
+        ?IMarketplaceTypeRepository $marketplace_type_repository,
+        ?IEntityRepository $region_repository,
+        ?IEntityRepository $support_channel_type_repository,
+        ?IMarketPlaceTypeAddPolicy $add_policy,
+        ?ICompanyServiceCanAddResourcePolicy $add_resource_policy,
+        ?ICompanyServiceCanAddVideoPolicy $add_video_policy,
+        ?ICompanyServiceFactory $factory,
+        ?IMarketplaceFactory $marketplace_factory,
+        ?IValidatorFactory $validator_factory,
+        ?IMarketPlaceTypeCanShowInstancePolicy $show_policy,
+        ?ICacheService $cache_service,
         ITransactionManager $tx_manager
     ) {
 
@@ -71,6 +71,7 @@ abstract class RegionalSupportedCompanyServiceManager extends CompanyServiceMana
             $show_policy,
             $cache_service,
             $tx_manager);
+
         $this->region_repository = $region_repository;
         $this->support_channel_type_repository = $support_channel_type_repository;
     }

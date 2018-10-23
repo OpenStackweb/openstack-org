@@ -20,7 +20,7 @@ class VideoLink extends DataObject {
     );
 
     private static $has_one = array(
-        'Thumbnail' => 'Image',
+        'Thumbnail' => 'CloudImage',
     );
 
 	private static $default_sort = 'SortOrder';

@@ -27,7 +27,7 @@ class UserStoryDO extends DataObject implements IUserStory
 		'Industry'      => 'UserStoriesIndustry',
         'Organization'  => 'Org',
         'Location'      => 'Continent',
-        'Image'         => 'Image'
+        'Image'         => 'CloudImage'
 	);
 
     private static $many_many = array

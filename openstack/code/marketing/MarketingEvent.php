@@ -24,7 +24,7 @@ class MarketingEvent extends DataObject {
 	private  static $has_one = array(
         'SponsorEvents' => 'MarketingPage',
         'PromoteEvents' => 'MarketingPage',
-		'Image'         => 'BetterImage',
+		'Image'         => 'CloudImage',
         'ParentPage'    => 'MarketingPage', //dummy
 
     );

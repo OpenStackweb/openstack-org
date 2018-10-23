@@ -53,7 +53,7 @@ final class UnitOfWork {
 		$this->loaded_many_2_one_identity_map[$owner_key] = $associations;
 	}
 
-	public function getMany2OneAssociation(IEntity $owner, $name){
+	public function getMany2OneAssociation($owner, $name){
 		$owner_key       = spl_object_hash($owner);
 		$association_key = md5(sprintf('%s_%s',$owner_key,$name));
 		if(array_key_exists($owner_key,$this->loaded_many_2_one_identity_map)){
@@ -65,7 +65,7 @@ final class UnitOfWork {
 		return false;
 	}
 
-	public function getCollection(IEntity $owner, $child_class,QueryObject $query, $type){
+	public function getCollection($owner, $child_class, QueryObject $query, $type){
 		$owner_key      = spl_object_hash($owner);
 		$query_key      = md5(sprintf("%s_%s_%s", $query->__toString() , implode(',',$query->getAlias()), implode(',',$query->getOrder())));
 		$collection_key = md5(sprintf('%s_%s_%s',$owner_key,$child_class,$query_key));
@@ -111,7 +111,7 @@ final class UnitOfWork {
 		}
 	}
 
-	public function getCollectionsForEntity(IEntity $entity){
+	public function getCollectionsForEntity($entity){
 		$owner_key = spl_object_hash($entity);
 		if(array_key_exists($owner_key,$this->loaded_collections_one_2_many_identity_map)){
 			$one_2_many = $this->loaded_collections_one_2_many_identity_map[$owner_key];
@@ -122,12 +122,12 @@ final class UnitOfWork {
 		return array($one_2_many,$many_2_many);
 	}
 
-	public function scheduleForInsert(IEntity $entity){
+	public function scheduleForInsert($entity){
 		$key = spl_object_hash($entity);
 		$this->new_entities_identity_map[$key] = $entity;
 	}
 
-	public function scheduleForUpdate(IEntity $entity){
+	public function scheduleForUpdate($entity){
 		$key        = spl_object_hash($entity);
 
 		if (isset($this->delete_entities_identity_map[$key])) {
@@ -152,7 +152,7 @@ final class UnitOfWork {
 		return null;
 	}
 
-	public function setToCache(IEntity $entity){
+	public function setToCache($entity){
 		$id         = $entity->getIdentifier();
 		$class_name = get_class($entity);
 		if(!array_key_exists($class_name,$this->identity_map))
@@ -160,7 +160,7 @@ final class UnitOfWork {
 		$this->identity_map[$class_name][$id] = $entity;
 	}
 
-	public function scheduleForDelete(IEntity $entity){
+	public function scheduleForDelete($entity){
 		$key = spl_object_hash($entity);
 		if (isset($this->new_entities_identity_map[$key])) {
 			unset($this->new_entities_identity_map[$key]);
@@ -346,8 +346,7 @@ final class UnitOfWork {
 					$to_insert = $collection->getInsertDiff();
 					if(count($to_insert)>0){
 						foreach($to_insert as $entity){
-
-							$entity->$info['joinField'] = $info['ownerObj']->getIdentifier();
+							$entity->{$info['joinField'] }= $info['ownerObj']->getIdentifier();
 							$entity->write();
 						}
 					}

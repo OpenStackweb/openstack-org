@@ -126,25 +126,25 @@ class EntitySurvey extends Survey implements IEntitySurvey
     }
 
     /**
-     * @param ICommunityMember $member
+     * @param Member $member
      * @return void
      */
-    public function addTeamMember(ICommunityMember $member, $extraFields = null)
+    public function addTeamMember(Member $member, $extraFields = null)
     {
         $this->EditorTeam()->add($member, $extraFields);
     }
 
     /**
-     * @param ICommunityMember $member
+     * @param Member $member
      * @return void
      */
-    public function removeTeamMember(ICommunityMember $member)
+    public function removeTeamMember(Member $member)
     {
         $this->EditorTeam()->remove($member);
     }
 
     /**
-     * @return ICommunityMember
+     * @return Member
      */
     public function getUpdateBy()
     {
@@ -152,7 +152,7 @@ class EntitySurvey extends Survey implements IEntitySurvey
     }
 
     /**
-     * @return ICommunityMember[]
+     * @return Member[]
      */
     public function getTeamMembers()
     {
@@ -174,10 +174,10 @@ class EntitySurvey extends Survey implements IEntitySurvey
     }
 
     /**
-     * @param ICommunityMember $member
+     * @param Member $member
      * @return bool
      */
-    public function isTeamMember(ICommunityMember $member)
+    public function isTeamMember(Member $member)
     {
         $member = $this->EditorTeam()->filter('MemberID', $member->getIdentifier())->first();
 

@@ -28,9 +28,8 @@ class PresentationSlide extends PresentationMaterial
      * @var array
      */
     private static $has_one = [
-        'Slide' => 'File'
+        'Slide' => 'CloudFile'
     ];
-
 
     /**
      * @return FieldList
@@ -39,7 +38,7 @@ class PresentationSlide extends PresentationMaterial
     {
         $f = parent::getCMSFields();
         $f->addFieldToTab('Root.Main', new TextField('Link', 'Slide Link'));
-        $f->addFieldToTab('Root.Main', $upload_field = new UploadField('Slide', 'Slide File'));
+        $f->addFieldToTab('Root.Main', $upload_field = UploadField::create('Slide', 'Slide File'));
         $upload_field->setAllowedMaxFileNumber(1);
         $upload_field->getValidator()->setAllowedMaxFileSize(['*' => self::FileSizeLimitAdmin * 1024 * 1024]);
         $upload_field->setFolderName(sprintf('summits/%s/presentations/%s/slides/', $_REQUEST['SummitID'], $_REQUEST['SummitEventID']));

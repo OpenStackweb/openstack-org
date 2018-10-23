@@ -59,15 +59,15 @@ final class NewsRequestForm extends HoneyPotForm {
 		$size = $sizeMB * 1024 * 1024; // 1 MB in bytes
 		$DocumentField->getValidator()->setAllowedMaxFileSize($size);
 		$DocumentField->setCanPreviewFolder(false); // Don't show target filesystem folder on upload field
-		$DocumentField->setRecordClass('File');
+		$DocumentField->setRecordClass('CloudFile');
 
-		$ImageField = new CustomUploadField('Image', 'Image (Max size 2Mb - Suggested size 300x250px - jpg, gif, png, jpeg)');
+		$ImageField = CustomUploadField::create('Image', 'Image (Max size 2Mb - Suggested size 300x250px - jpg, gif, png, jpeg)');
         $ImageField->setCanAttachExisting(false);
 		$ImageField->setAllowedMaxFileNumber(1);
 		$ImageField->setAllowedFileCategories('image');
 		$ImageField->setTemplateFileButtons('CustomUploadField_FrontEndFIleButtons');
 		$ImageField->setFolderName('news-images');
-		$ImageField->setRecordClass('BetterImage');
+		$ImageField->setRecordClass('CloudImage');
         $ImageField->getUpload()->setReplaceFile(false);
         $ImageField->setOverwriteWarning(false);
 		$sizeMB = 2; // 2 MB
@@ -192,6 +192,20 @@ final class NewsRequestForm extends HoneyPotForm {
 
 	    $this->addExtraClass('news-registration-form');
 		parent::__construct($controller, $name, $fields, $actions, $validator = null);
+        // tiny MCE Config
+        $tinyMCE = HtmlEditorConfig::get('cms');
+        $tinyMCE->setOption('content_css', 'news/code/ui/frontend/css/htmleditor.css');
+        $tinyMCE->setOption('theme', 'advanced');
+        $tinyMCE->setOption('theme_advanced_toolbar_location', 'top');
+        $tinyMCE->setOption('theme_advanced_buttons1', 'bold,italic,underline,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,outdent,indent,separator,bullist,link,undo,redo,code');
+        $tinyMCE->setOption('theme_advanced_buttons2', '');
+        $tinyMCE->setOption('theme_advanced_buttons3', '');
+        $tinyMCE->setOption('plugins', 'paste');
+        $tinyMCE->setOption('forced_root_block', 'p');
+        $tinyMCE->setOption('height', '250px');
+        $tinyMCE->setOption('width', '800px');
+        $tinyMCE->setOption('paste_preprocess', 'TinyMCENewsPasteProcess');
+        $tinyMCE->setOption('setup', 'OnSetupTinyMCENewsForm');
 	}
 
 	function forTemplate() {

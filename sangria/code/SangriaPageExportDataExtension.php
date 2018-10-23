@@ -96,24 +96,37 @@ final class SangriaPageExportDataExtension extends Extension
             return $this->httpError('412', 'missing required param fields');
         }
 
-        $query = new SQLQuery();
-        $query->setFrom('Member');
-        $query->addLeftJoin('Group_Members', 'GM.MemberID = Member.ID','GM');
-        $query->addLeftJoin('Group', 'Group.ID = GM.GroupID');
-        $query->addLeftJoin('Continent_Countries', 'Continent_Countries.CountryCode = Member.Country');
-        $query->addLeftJoin('Continent', 'Continent.ID = Continent_Countries.ContinentID');
-        $query->addLeftJoin('Countries', 'Countries.Code = Member.Country');
-        //$query->addWhere('Member.GerritID IS NOT NULL');
-        $query->addWhere('GM.GroupID IN ('.implode(',',$groups).')');
-        $fields['Groups'] = "GROUP_CONCAT(Group.Code SEPARATOR ' | ')";
-        $query->setSelect($fields);
-        $query->addGroupBy('Member.ID');
-        $query->addOrderBy(array('Member.Surname','Member.FirstName'));
+        $query = <<<SQL
+SELECT Member.ID AS "Member Id", Member.FirstName AS "FirstName", Member.Surname AS "Surname",
+       Member.Gender AS "Gender", Member.Email AS "Email", Member.SecondEmail AS "SecondEmail",
+       Member.ThirdEmail AS "ThirdEmail", Member.Address AS "Address", Member.Suburb AS "Suburb",
+       Member.City AS "City", Member.State AS "State", Member.PostCode AS "PostCode", Countries.Name AS "Country",
+       Continent.Name AS "Continent", Member.JobTitle AS "JobTitle", Member.Role AS "Role",
+       Member.Projects AS "Projects", Member.OtherProject AS "OtherProject",
+       Member.CompanyAffliations AS "CompanyAffliations", Member.StatementOfInterest AS "StatementOfInterest",
+       Member.IRCHandle AS "IRCHandle", Member.TwitterName AS "TwitterName", Member.LinkedInProfile AS "LinkedInProfile",
+       Member.ShirtSize AS "ShirtSize", Member.FoodPreference AS "FoodPreference", Member.OtherFood AS "OtherFood",
+       Member.SubscribedToNewsletter AS "SubscribedToNewsletter", GROUP_CONCAT(Group.Code SEPARATOR ' | ') AS "Groups"
+FROM Member
+       LEFT JOIN Group_Members AS GM ON GM.MemberID = Member.ID
+       LEFT JOIN `Group` ON `Group`.ID = GM.GroupID
+       LEFT JOIN Continent_Countries ON Continent_Countries.CountryCode = Member.Country
+       LEFT JOIN Continent ON Continent.ID = Continent_Countries.ContinentID
+       LEFT JOIN Countries ON Countries.Code = Member.Country
+WHERE (GM.GroupID IN ( %s ))
+GROUP BY Member.ID ORDER BY Member.Surname ASC, Member.FirstName ASC
+SQL;
 
-        $result = $query->execute();
+        $result = DB::query(sprintf($query, implode(',',$groups )));
         $filename = "MembersByRole-" . date('Ymd') . "." . $ext;
         $delimiter = ($ext == 'xls') ? "\t" : "," ;
-        return CSVExporter::getInstance()->export($filename, $result, $delimiter);
+
+        $data = [];
+        foreach ($result as $row) {
+            $data[] = $row;
+        }
+
+        return CSVExporter::getInstance()->export($filename, $data, $delimiter);
     }
 
     function ExportDataGerritUsers()
@@ -317,6 +330,7 @@ ORDER BY UpdatedDate DESC LIMIT 0,1) AS LastCodeCommitDate,
 SQL;
 
         $res = DB::query($sql);
+
         $fields = array('FirstName', 'Surname', 'Email', 'Secondary_Email', 'GerritIds', 'LastCodeCommitDate', 'Member_Status', 'FoundationMemberJoinDate', 'DateMemberStatusChanged', 'Company_Affiliations');
         $data = array();
 
@@ -358,6 +372,7 @@ SQL;
         $sql = <<<SQL
 		SELECT Name,Slug,AdminGroupID FROM MarketPlaceType WHERE Active = 1 ORDER BY AdminGroupID;
 SQL;
+
         $result = DB::query($sql);
 
         // let Silverstripe work the magic
@@ -377,7 +392,7 @@ SQL;
     private function ExportSurveyResultsDataSurveyBuilder($template_id, $filters)
     {
 
-$query = <<<SQL
+        $sql = <<<SQL
 SELECT * FROM (
 SELECT
 S.ID AS SurveyID,
@@ -423,11 +438,9 @@ WHERE 1=1 {$filters}
 ORDER BY SurveyID ASC , StepOrder ASC, QuestionOrder ASC;
 SQL;
 
-        //die($query);
-
-        return DB::query($query);
+        $result = DB::query($sql);
+        return $result;
     }
-
 
     function ExportSurveyResults()
     {
@@ -455,6 +468,7 @@ ORDER BY SS.`Order`, Q.`Order`;
 SQL;
 
         $res = DB::query($survey_header_query);
+
         $template_1 = array();
         $template_1['SurveyID']    = null;
         $template_1['CreatedByID'] = null;
@@ -500,7 +514,7 @@ AND ES.ParentID = {$template_id}
 ORDER BY SS.`Order`, Q.`Order`;
 SQL;
 
-        $res        = DB::query($entity_survey_header_query);
+        $res = DB::query($entity_survey_header_query);
         $template_2 = [ 'DeploymentID' => null];
         foreach($res as $row)
         {
@@ -584,8 +598,6 @@ ORDER BY EntityID ASC , StepOrder ASC, QuestionOrder ASC;
 
 SQL;
 
-        //die($query);
-
         $res = DB::query($query);
 
         return $res;
@@ -610,6 +622,7 @@ SQL;
 SQL;
 
         $res = DB::query($query);
+
         $columns = array();
         foreach($res as $row)
         {
@@ -898,6 +911,7 @@ ORDER BY Org ASC;
 
 SQL;
         $res = DB::query($query);
+
         $file_data = array();
 
         foreach($res as $row)
@@ -964,7 +978,7 @@ SQL;
     {
         $params = $this->owner->getRequest()->getVars();
 
-        if (!isset($params['report_name']) || empty($params['report_name']) || !count($params['report_name']))
+        if (!isset($params['report_name']) || empty($params['report_name']))
             return $this->owner->httpError('412', 'missing required param report_name');
 
         if (!isset($params['extension']) || empty($params['extension']))
@@ -1081,11 +1095,16 @@ SQL;
             }
         }
 
-        //die($query->sql());
         $result = $query->execute();
+
         $delimiter = ($ext == 'xls') ? "\t" : "," ;
 
-        return CSVExporter::getInstance()->export($filename, $result, $delimiter);
+        $data = [];
+        foreach ($result as $row) {
+            $data[] = $row;
+        }
+
+        return CSVExporter::getInstance()->export($filename, $data, $delimiter);
     }
 
     public function exportDupUsers()
@@ -1095,7 +1114,7 @@ SQL;
 
         SangriaPage_Controller::generateDateFilters('s');
 
-        $sql = <<< SQL
+        $query = <<< SQL
 select FirstName, Surname, count(FirstName) AS Qty , group_concat(Email SEPARATOR '|') AS Emails,group_concat(ID SEPARATOR '|') AS MemberIds
 from Member
 group by FirstName, Surname
@@ -1103,7 +1122,7 @@ having count(FirstName) > 1
 order by FirstName, Surname;
 SQL;
 
-        $res = DB::query($sql);
+        $res = DB::query($query);
 
         $fields = array('FirstName', 'Surname', 'Qty', 'Emails', 'MemberIds');
         $data = array();
@@ -1136,7 +1155,7 @@ SQL;
 
         SangriaPage_Controller::generateDateFilters('s');
 
-        $sql = <<< SQL
+        $query = <<< SQL
 SELECT M.FirstName, M.Surname, M.Email, C.Name AS Company, GROUP_CONCAT(MT.Name ORDER BY MT.Name ASC SEPARATOR ' - ') AS Marketplace
 FROM Member AS M
 INNER JOIN ( SELECT MemberID, CompanyID, GroupID FROM Company_Administrators WHERE Company_Administrators.GroupID IN ('{$filters_string}') ) AS CA ON CA.MemberID = M.ID
@@ -1146,7 +1165,7 @@ GROUP BY M.FirstName, M.Surname, M.Email, C.Name
 ORDER BY M.Email, C.Name ;
 SQL;
 
-        $res = DB::query($sql);
+        $res = DB::query($query);
 
         $fields = array('FirstName', 'Surname', 'Email', 'Company', 'Marketplace');
         $data = array();

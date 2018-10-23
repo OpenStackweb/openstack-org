@@ -1,7 +1,7 @@
 <?php
 
 
-class SchedAPI extends Object {
+class SchedAPI extends SS_Object {
 
 
 	protected $restfulService = null;

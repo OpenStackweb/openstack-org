@@ -31,7 +31,7 @@ class SupportChannelType extends DataObject implements ISupportChannelType {
 	);
 
 	static $has_one = array(
-		'Icon' => 'BetterImage',
+		'Icon' => 'CloudImage',
 	);
 
 	/**

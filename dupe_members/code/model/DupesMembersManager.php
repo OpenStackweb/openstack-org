@@ -95,14 +95,18 @@ final class DupesMembersManager {
         $this->query_registry                = $query_registry;
     }
 
-    public function HasDupes(ICommunityMember $member) {
+    public function HasDupes(Member $member) {
         $res = $this->getDupes($member);
         return count($res) > 0;
     }
 
-    public function getDupes(ICommunityMember $member){
+    /**
+     * @param Member $member
+     * @return array
+     */
+    public function getDupes(Member $member){
 
-        list($res,$count) = $this->member_repository->getAllByName($member->getFirstName(), $member->getLastName());
+        list($res, $count) = $this->member_repository->getAllByName($member->getFirstName(), $member->getLastName());
         $unset  = array();
         for($i = 0 ; $i < count($res);$i++){
             if($res[$i]->getIdentifier() == $member->getIdentifier()){
@@ -129,7 +133,7 @@ final class DupesMembersManager {
         return $res;
     }
 
-    public function registerMergeAccountRequest(ICommunityMember $member, $account_id, IDupeMemberActionRequestNotificationSender $notification_sender) {
+    public function registerMergeAccountRequest(Member $member, $account_id, IDupeMemberActionRequestNotificationSender $notification_sender) {
 
         $member_repository        = $this->member_repository ;
         $merge_request_factory    = $this->merge_request_factory;
@@ -157,7 +161,7 @@ final class DupesMembersManager {
         });
     }
 
-    public function registerDeleteAccountRequest(ICommunityMember $member, $account_id, IDupeMemberActionRequestNotificationSender $notification_sender) {
+    public function registerDeleteAccountRequest(Member $member, $account_id, IDupeMemberActionRequestNotificationSender $notification_sender) {
 
         $member_repository         = $this->member_repository ;
         $delete_request_factory    = $this->delete_request_factory;
@@ -185,7 +189,7 @@ final class DupesMembersManager {
         });
     }
 
-    public function deleteAccount(ICommunityMember $current_member, $token){
+    public function deleteAccount(Member $current_member, $token){
 
         $delete_request_repository     = $this->delete_request_repository;
         $member_repository             = $this->member_repository ;
@@ -222,7 +226,7 @@ final class DupesMembersManager {
 
     }
 
-    public function keepAccount(ICommunityMember $current_member, $token){
+    public function keepAccount(Member $current_member, $token){
 
         $delete_request_repository = $this->delete_request_repository;
         $member_repository         = $this->member_repository ;
@@ -249,7 +253,7 @@ final class DupesMembersManager {
 
     }
 
-    public function upgradeDeleteRequest2Merge(ICommunityMember $current_member, $token, IDupeMemberActionRequestNotificationSender $notification_sender) {
+    public function upgradeDeleteRequest2Merge(Member $current_member, $token, IDupeMemberActionRequestNotificationSender $notification_sender) {
         $_this = $this;
 
         $this->tx_manager->transaction(function() use($_this, $current_member, $token, $notification_sender){

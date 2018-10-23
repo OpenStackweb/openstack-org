@@ -19,7 +19,6 @@
                                 <tr>
                                     <td>$Name</td>
                                     <td>$Level.Level</td>
-    
                                     <td><a href="/profile/trainingEdit?course_id={$ID}" class="roundedButton">Edit</a></td>
                                     <td><a href="/profile/trainingDelete?course_id={$ID}" class="delete-course roundedButton">Delete</a></td>
                                 </tr>
@@ -28,6 +27,7 @@
                         <a href="/profile/TrainingAddCourse?training_id={$ID}" class="roundedButton">Add New Course</a>
                         <hr>
                     <% end_loop %>
+
                 </fieldset>
             </form>
         <% else %>

@@ -29,8 +29,8 @@ class ReviewStepForm extends ThankYouStepForm
         return $this->Controller()->SurveyStepClassIcon($step_name);
     }
 
-
-    public function Link($action){
+    public function Link(){
+        $action = func_num_args() ? func_get_arg(0) : null;
         return $this->Controller()->Link($action);
     }
 

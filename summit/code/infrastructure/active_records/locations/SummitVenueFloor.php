@@ -30,7 +30,7 @@ class SummitVenueFloor extends DataObject implements ISummitVenueFloor
     private static $has_one = array
     (
         'Venue' => 'SummitVenue',
-        'Image' => 'BetterImage',
+        'Image' => 'CloudImage',
     );
 
 
@@ -58,7 +58,7 @@ class SummitVenueFloor extends DataObject implements ISummitVenueFloor
         $f->add(new TextField('Name','Name'));
         $f->add(new TextareaField('Description','Description'));
         $f->add(new NumericField('Number','Number'));
-        $f->add($upload_field = new UploadField('Image','Map'));
+        $f->add($upload_field = UploadField::create('Image','Map'));
         $f->add(new HiddenField('VenueID','VenueID'));
         $upload_field->setAllowedMaxFileNumber(1);
         $upload_field->getValidator()->setAllowedMaxFileSize(array('*' => 512 * 1024));

@@ -27,7 +27,7 @@ class CustomHasManyList extends HasManyList
         {
             foreach(ClassInfo::ancestry($class_type) as $parent_class)
             {
-                if(in_array($parent_class, array('ViewableData', 'Object', 'DataObject'))) continue;
+                if(in_array($parent_class, array('ViewableData', 'SS_Object', 'DataObject'))) continue;
                 $class_type_parent = $parent_class::create();
                 $has_field  =  !is_null( $class_type_parent->hasOwnTableDatabaseField($this->foreignKey));
                 if($has_field){

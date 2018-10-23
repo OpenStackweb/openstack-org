@@ -73,7 +73,7 @@ class OpenStackMember
     ];
 
     static $has_one = [
-        'Photo' => 'BetterImage',
+        'Photo' => 'CloudImage',
         'Org'   => 'Org'
     ];
 

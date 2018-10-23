@@ -91,7 +91,7 @@ abstract class AbstractRestfulJsonApi extends Controller
     protected function loadJSONResponseFromCache(SS_HTTPRequest $request)
     {
         if ($body = $this->loadRAWResponseFromCache($request))
-            return $this->ok(json_decode($body));
+            return $this->ok(json_decode($body, true));
         return null;
     }
 
@@ -477,32 +477,9 @@ abstract class AbstractRestfulJsonApi extends Controller
         $response->setStatusCode(200);
         $response->addHeader('Content-Type', 'application/json');
         if (is_null($res)) {
-            $res = array();
+            $res = [];
         }
-
         $response->setBody(json_encode($res));
-        //conditional get Request (etags)
-        if ($this->request->isGET() && $use_etag) {
-            $etag = md5($response->getBody());
-            $requestETag = $this->request->getHeader('If-None-Match');
-            foreach (array(
-                         'Expires',
-                         'Cache-Control'
-                     ) as $header) {
-                $response->removeHeader($header);
-            }
-
-            $lastmod = gmdate('D, d M Y 0:0:0 \G\M\T', time());
-            $response->addHeader('Cache-Control', 'max-age=3600');
-            $response->addHeader('Last-Modified', $lastmod);
-            $response->addHeader('Expires', gmdate('D, d M Y H:m:i \G\M\T', time() + 3600));
-            $response->addHeader('ETag', $etag);
-            if (!empty($requestETag) && $requestETag == $etag) {
-                $response->setStatusCode(304);
-                $response->addHeader('ETag', $etag);
-                $response->setBody(null);
-            }
-        }
         return $response;
     }
 
@@ -515,7 +492,6 @@ abstract class AbstractRestfulJsonApi extends Controller
         $response->setStatusCode(204);
         $response->addHeader('Content-Type', 'application/json');
         $response->setBody('');
-
         return $response;
     }
 
@@ -554,7 +530,6 @@ abstract class AbstractRestfulJsonApi extends Controller
         $response->setStatusCode(500);
         $response->addHeader('Content-Type', 'application/json');
         $response->setBody(json_encode("Server Error"));
-
         return $response;
     }
 

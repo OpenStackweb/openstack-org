@@ -36,8 +36,8 @@ class SummitBanner extends DataObject implements ISummitBanner
 
     static $has_one = array
     (
-        'Logo'          => 'File',
-        'Picture'       => 'File',
+        'Logo'          => 'CloudFile',
+        'Picture'       => 'CloudFile',
         'ParentPage'    => 'Page'
     );
 

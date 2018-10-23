@@ -197,7 +197,7 @@ final class JSRulesStrategy implements IDependantRulesStrategy {
      * @param array $js_rules
      * @param FormField $field
      */
-    public function apply( ISurveyStep $current_step ,ISurveyQuestionTemplate $question, array $js_rules, FormField $field ){
+    public function apply(ISurveyStep $current_step ,ISurveyQuestionTemplate $question, array $js_rules, FormField $field ){
 
         if(count($js_rules)) {
 

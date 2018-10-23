@@ -19,7 +19,7 @@ final class ConsultantsOfficesLocationsQueryHandler implements IConsultantsOffic
 	 * @param IQuerySpecification $specification
 	 * @return IQueryResult
 	 */
-	public function handle(IQuerySpecification $specification)
+	public function handle(?IQuerySpecification $specification)
 	{
 		$params = $specification->getSpecificationParams();
 		$term   = @$params['name_pattern'];

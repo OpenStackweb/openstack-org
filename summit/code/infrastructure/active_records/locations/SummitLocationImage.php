@@ -29,7 +29,7 @@ class SummitLocationImage extends DataObject
 
     private static $has_one = array
     (
-        'Picture'  => 'BetterImage',
+        'Picture'  => 'CloudImage',
         'Location' => 'SummitGeoLocatedLocation'
     );
 
@@ -60,7 +60,7 @@ class SummitLocationImage extends DataObject
         $f->add(new TextField('Name','Name'));
         $f->add(new HtmlEditorField('Description','Description'));
 
-        $map_field = new UploadField('Picture','Picture');
+        $map_field = UploadField::create('Picture','Picture');
         $map_field->setAllowedMaxFileNumber(1);
         $map_field->setFolderName(sprintf('summits/%s/locations/%s/images/', $_REQUEST['SummitID'], $_REQUEST['LocationID']));
         $map_field->getValidator()->setAllowedMaxFileSize(array('*' => 500 * 1024));

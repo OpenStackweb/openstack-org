@@ -71,12 +71,12 @@
 
                         var summit =
                         {
-                            id:   $Summit.ID,
-                            link: "{$Summit.Link.JS}",
-                            schedule_link: "{$Summit.getScheduleLink.JS}",
-                            track_list_link: "{$Summit.getTrackListLink.JS}",
-                            title: "{$Summit.Title.JS}",
-                            year: "{$Summit.getSummitYear().JS}",
+                            id:   $Top.Summit.ID,
+                            link: "{$Top.Summit.Link.JS}",
+                            schedule_link: "{$Top.Summit.getScheduleLink.JS}",
+                            track_list_link: "{$Top.Summit.getTrackListLink.JS}",
+                            title: "{$Top.Summit.Title.JS}",
+                            year: "{$Top.Summit.getSummitYear().JS}",
                             dates : [],
                             events: [],
                             dic_events: {},
@@ -94,13 +94,13 @@
                             presentation_levels: {},
                             presentation_level_ids: [],
                             current_user: null,
-                            should_show_venues: <% if $Summit.ShouldShowVenues %>true<% else %>false<% end_if %>
+                            should_show_venues: <% if $Top.Summit.ShouldShowVenues %>true<% else %>false<% end_if %>
                         };
 
                         summit.share_info =   {
                             fb_app_name: "OpenStack",
                             fb_app_id : "{$Top.SiteConfig.getOGApplicationID()}",
-                            tweet: '<%t Summit.TweetText %>'
+                            tweet: '<%t Top.Summit.TweetText %>'
                         };
 
                             <% if $CurrentMember %>

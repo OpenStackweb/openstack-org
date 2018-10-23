@@ -14,5 +14,6 @@
 <% else %>
     <div>
         $JobRegistrationRequestForm
+        $EditorToolbar
     </div>
 <% end_if %>

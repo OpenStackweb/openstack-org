@@ -54,6 +54,7 @@
 <% end_if %>
 <div id="edit_live_dialog" title="Edit Job Post" style="display: none;">
     $JobForm
+    $EditorToolbar
 </div>
 
 <div id="dialog-delete-post" title="Delete Post ?" style="display: none">

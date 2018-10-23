@@ -80,7 +80,7 @@ abstract class CompanyServiceManager
 
     /**
      * @param IEntityRepository $repository
-     * @param IEntityRepository $video_type_repository
+     * @param IEntityRepository|null $video_type_repository
      * @param IMarketplaceTypeRepository $marketplace_type_repository
      * @param IMarketPlaceTypeAddPolicy $add_policy
      * @param ICompanyServiceCanAddResourcePolicy $add_resource_policy
@@ -93,17 +93,17 @@ abstract class CompanyServiceManager
      * @param ITransactionManager $tx_manager
      */
     public function __construct(
-        IEntityRepository $repository,
-        IEntityRepository $video_type_repository,
-        IMarketplaceTypeRepository $marketplace_type_repository,
-        IMarketPlaceTypeAddPolicy $add_policy,
-        ICompanyServiceCanAddResourcePolicy $add_resource_policy,
-        ICompanyServiceCanAddVideoPolicy $add_video_policy,
-        ICompanyServiceFactory $factory,
-        IMarketplaceFactory $marketplace_factory,
-        IValidatorFactory $validator_factory,
-        IMarketPlaceTypeCanShowInstancePolicy $show_policy,
-        ICacheService $cache_service,
+        ?IEntityRepository $repository,
+        ?IEntityRepository $video_type_repository,
+        ?IMarketplaceTypeRepository $marketplace_type_repository,
+        ?IMarketPlaceTypeAddPolicy $add_policy,
+        ?ICompanyServiceCanAddResourcePolicy $add_resource_policy,
+        ?ICompanyServiceCanAddVideoPolicy $add_video_policy,
+        ?ICompanyServiceFactory $factory,
+        ?IMarketplaceFactory $marketplace_factory,
+        ?IValidatorFactory $validator_factory,
+        ?IMarketPlaceTypeCanShowInstancePolicy $show_policy,
+        ?ICacheService $cache_service,
         ITransactionManager $tx_manager
     ) {
 

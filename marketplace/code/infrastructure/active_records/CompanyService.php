@@ -79,7 +79,7 @@ class CompanyService
         return $this->DraftService()->Published;
     }
 
-	public function setCompany(ICompany $company)
+	public function setCompany(Company $company)
 	{
 		AssociationFactory::getInstance()->getMany2OneAssociation($this,'Company')->setTarget($company);
 	}

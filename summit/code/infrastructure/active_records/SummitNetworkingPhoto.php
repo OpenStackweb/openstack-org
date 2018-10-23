@@ -15,7 +15,7 @@
 class SummitNetworkingPhoto extends DataObject {
 
     private static $has_one = array(
-        'Image' => 'BetterImage',
+        'Image' => 'CloudImage',
         'Owner' => 'SummitOverviewPage'
     );
 
@@ -26,7 +26,7 @@ class SummitNetworkingPhoto extends DataObject {
     public function getCMSFields()
     {
         $fields = new FieldList();
-        $fields->add($upload_0 = new UploadField('Image','Photo'));
+        $fields->add($upload_0 = UploadField::create('Image','Photo'));
         $upload_0->setFolderName('summits/overview/networking');
         $upload_0->setAllowedMaxFileNumber(1);
         $upload_0->setAllowedFileCategories('image');

@@ -51,7 +51,7 @@ class COALandingPage extends Page
 
     static $has_one = array
     (
-        'HeroImage' => 'BetterImage',
+        'HeroImage' => 'CloudImage',
     );
 
     static $many_many = array
@@ -306,7 +306,7 @@ HTML;
 
         if ($this->ID > 0) {
 
-            $logo_field = new UploadField('HeroImage', 'Hero Image');
+            $logo_field = UploadField::create('HeroImage', 'Hero Image');
             $logo_field->setAllowedMaxFileNumber(1);
             $logo_field->setAllowedFileCategories('image');
             $logo_field->setFolderName('coa/hero_images/');

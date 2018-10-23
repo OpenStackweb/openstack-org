@@ -108,4 +108,8 @@ final class JobRegistrationRequestPage_Controller extends Page_Controller {
 	function Saved(){
 		return $this->request->getVar('saved');
 	}
+
+    public function EditorToolbar() {
+        return HtmlEditorField_Toolbar::create($this, "EditorToolbar");
+    }
 }

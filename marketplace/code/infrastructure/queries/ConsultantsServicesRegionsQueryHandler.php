@@ -20,7 +20,7 @@ final class ConsultantsServicesRegionsQueryHandler implements IConsultantsServic
      * @param IQuerySpecification $specification
      * @return IQueryResult
      */
-    public function handle(IQuerySpecification $specification){
+    public function handle(?IQuerySpecification $specification){
         $params = $specification->getSpecificationParams();
         $topics = array();
         $sql    = <<< SQL

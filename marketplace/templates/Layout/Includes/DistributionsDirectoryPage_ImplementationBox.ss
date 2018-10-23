@@ -22,7 +22,7 @@
                     <div class="tested-listing-description">OpenStack Powered $TestedCapabilityTypeLabel $ProgramVersion.Name</div>
                 </div>
             <% end_if %>
-            <a style="background-color: #{$Company.CompanyColor}" href="<% with $MarketPlace  %><% if Name == "Appliance"  %>$ApplianceLink<% end_if %><% if Name == "Distribution"  %>$DistroLink<% end_if %><% end_with %>/{$Company.URLSegment}/{$Slug}" class="details-button">Details</a>
+            <a style="background-color: #{$Company.CompanyColor}" href="<% with $MarketPlace  %><% if Name == "Appliance"  %>$Top.ApplianceLink<% end_if %><% if Name == "Distribution"  %>$Top.DistroLink<% end_if %><% end_with %>/{$Company.URLSegment}/{$Slug}" class="details-button">Details</a>
         </div>
     </div>
 </div>

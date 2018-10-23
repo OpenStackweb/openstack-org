@@ -1,0 +1,6 @@
+---
+Name: jobsextensions
+---
+SangriaPage_Controller:
+  extensions:
+    - SangriaPageJobsExtension

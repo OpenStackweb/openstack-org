@@ -6,27 +6,27 @@
 class SummitOverviewPage extends SummitPage {
 
     private static $has_one = array(
-        'GrowthBoxBackground'     => 'BetterImage',
-        'GrowthBoxChartLegend'    => 'File',
-        'GrowthBoxChartLegendPng' => 'BetterImage',
-        'GrowthBoxChart'          => 'File',
-        'GrowthBoxChartPng'       => 'BetterImage',
-        'EventOneLogo'            => 'File',
-        'EventOneLogoPng'         => 'BetterImage',
-        'EventTwoLogo'            => 'File',
-        'EventTwoLogoPng'         => 'BetterImage',
-        'Atendees1Chart'          => 'File',
-        'Atendees1ChartPng'       => 'BetterImage',
-        'Atendees2Chart'          => 'File',
-        'Atendees2ChartPng'       => 'BetterImage',
-        'Atendees3Chart'          => 'File',
-        'Atendees3ChartPng'       => 'BetterImage',
-        'Atendees4Chart'          => 'File',
-        'Atendees4ChartPng'       => 'BetterImage',
-        'AtendeesChartRef'        => 'File',
-        'AtendeesChartRefPng'     => 'BetterImage',
-        'TimelineImage'           => 'File',
-        'TimelineImagePng'        => 'BetterImage',
+        'GrowthBoxBackground'     => 'CloudImage',
+        'GrowthBoxChartLegend'    => 'CloudFile',
+        'GrowthBoxChartLegendPng' => 'CloudImage',
+        'GrowthBoxChart'          => 'CloudFile',
+        'GrowthBoxChartPng'       => 'CloudImage',
+        'EventOneLogo'            => 'CloudFile',
+        'EventOneLogoPng'         => 'CloudImage',
+        'EventTwoLogo'            => 'CloudFile',
+        'EventTwoLogoPng'         => 'CloudImage',
+        'Atendees1Chart'          => 'CloudFile',
+        'Atendees1ChartPng'       => 'CloudImage',
+        'Atendees2Chart'          => 'CloudFile',
+        'Atendees2ChartPng'       => 'CloudImage',
+        'Atendees3Chart'          => 'CloudFile',
+        'Atendees3ChartPng'       => 'CloudImage',
+        'Atendees4Chart'          => 'CloudFile',
+        'Atendees4ChartPng'       => 'CloudImage',
+        'AtendeesChartRef'        => 'CloudFile',
+        'AtendeesChartRefPng'     => 'CloudImage',
+        'TimelineImage'           => 'CloudFile',
+        'TimelineImagePng'        => 'CloudImage',
     );
 
     private static $db = array(
@@ -104,11 +104,11 @@ class SummitOverviewPage extends SummitPage {
         // GrowthBox
         $fields->addFieldToTab("Root.GrowthBox", new HtmlEditorField('GrowthBoxTextTop','Text Top'));
         $fields->addFieldToTab("Root.GrowthBox", new HtmlEditorField('GrowthBoxTextBottom','Text Bottom'));
-        $fields->addFieldsToTab("Root.GrowthBox", $upload_0 = new UploadField('GrowthBoxBackground','Background Image'));
-        $fields->addFieldsToTab("Root.GrowthBox", $upload_1 = new UploadField('GrowthBoxChartLegend','Chart Legend (SVG)'));
-        $fields->addFieldsToTab("Root.GrowthBox", $upload_2 = new UploadField('GrowthBoxChartLegendPng','Chart Legend (PNG)'));
-        $fields->addFieldsToTab("Root.GrowthBox", $upload_3 = new UploadField('GrowthBoxChart','Chart (SVG)'));
-        $fields->addFieldsToTab("Root.GrowthBox", $upload_4 = new UploadField('GrowthBoxChartPng','Chart (PNG)'));
+        $fields->addFieldsToTab("Root.GrowthBox", $upload_0 = UploadField::create('GrowthBoxBackground','Background Image'));
+        $fields->addFieldsToTab("Root.GrowthBox", $upload_1 = UploadField::create('GrowthBoxChartLegend','Chart Legend (SVG)'));
+        $fields->addFieldsToTab("Root.GrowthBox", $upload_2 = UploadField::create('GrowthBoxChartLegendPng','Chart Legend (PNG)'));
+        $fields->addFieldsToTab("Root.GrowthBox", $upload_3 = UploadField::create('GrowthBoxChart','Chart (SVG)'));
+        $fields->addFieldsToTab("Root.GrowthBox", $upload_4 = UploadField::create('GrowthBoxChartPng','Chart (PNG)'));
 
         $upload_0->setFolderName('summits/overview');
         $upload_0->setAllowedMaxFileNumber(1);
@@ -149,10 +149,10 @@ class SummitOverviewPage extends SummitPage {
         $fields->addFieldsToTab('Root.TwoMainEvents', new TextField('EventTwoSubTitle','Event Two - SubTitle'));
         $fields->addFieldsToTab('Root.TwoMainEvents', new HtmlEditorField('EventTwoContent','Event Two - Content'));
 
-        $fields->addFieldsToTab("Root.TwoMainEvents", $upload_5 = new UploadField('EventOneLogo','Event Two Logo (SVG)'));
-        $fields->addFieldsToTab("Root.TwoMainEvents", $upload_6 = new UploadField('EventOneLogoPng','Event Two Logo (PNG)'));
-        $fields->addFieldsToTab("Root.TwoMainEvents", $upload_7 = new UploadField('EventTwoLogo','Event Two Logo (SVG)'));
-        $fields->addFieldsToTab("Root.TwoMainEvents", $upload_8 = new UploadField('EventTwoLogoPng','Event Two Logo (PNG)'));
+        $fields->addFieldsToTab("Root.TwoMainEvents", $upload_5 = UploadField::create('EventOneLogo','Event Two Logo (SVG)'));
+        $fields->addFieldsToTab("Root.TwoMainEvents", $upload_6 = UploadField::create('EventOneLogoPng','Event Two Logo (PNG)'));
+        $fields->addFieldsToTab("Root.TwoMainEvents", $upload_7 = UploadField::create('EventTwoLogo','Event Two Logo (SVG)'));
+        $fields->addFieldsToTab("Root.TwoMainEvents", $upload_8 = UploadField::create('EventTwoLogoPng','Event Two Logo (PNG)'));
 
         $upload_5->setFolderName('summits/overview/events');
         $upload_5->setAllowedMaxFileNumber(1);
@@ -179,20 +179,20 @@ class SummitOverviewPage extends SummitPage {
         $upload_8->getUpload()->setReplaceFile(true);
 
         //atendees chart
-        $fields->addFieldsToTab("Root.AtendeesChart", $upload_13 = new UploadField('AtendeesChartRef','Atendees Chart Legend (SVG)'));
-        $fields->addFieldsToTab("Root.AtendeesChart", $upload_19 = new UploadField('AtendeesChartRefPng','Atendees Chart Legend (PNG)'));
+        $fields->addFieldsToTab("Root.AtendeesChart", $upload_13 = UploadField::create('AtendeesChartRef','Atendees Chart Legend (SVG)'));
+        $fields->addFieldsToTab("Root.AtendeesChart", $upload_19 = UploadField::create('AtendeesChartRefPng','Atendees Chart Legend (PNG)'));
         $fields->addFieldToTab("Root.AtendeesChart", new TextField('Atendees1Label','Atendees 1 Label'));
-        $fields->addFieldsToTab("Root.AtendeesChart", $upload_9 = new UploadField('Atendees1Chart','Atendees 1 Chart (SVG)'));
-        $fields->addFieldsToTab("Root.AtendeesChart", $upload_15 = new UploadField('Atendees1ChartPng','Atendees 1 Chart (PNG)'));
+        $fields->addFieldsToTab("Root.AtendeesChart", $upload_9 = UploadField::create('Atendees1Chart','Atendees 1 Chart (SVG)'));
+        $fields->addFieldsToTab("Root.AtendeesChart", $upload_15 = UploadField::create('Atendees1ChartPng','Atendees 1 Chart (PNG)'));
         $fields->addFieldToTab("Root.AtendeesChart", new TextField('Atendees2Label','Atendees 2 Label'));
-        $fields->addFieldsToTab("Root.AtendeesChart", $upload_10 = new UploadField('Atendees2Chart','Atendees 2 Chart (SVG)'));
-        $fields->addFieldsToTab("Root.AtendeesChart", $upload_16 = new UploadField('Atendees2ChartPng','Atendees 2 Chart (PNG)'));
+        $fields->addFieldsToTab("Root.AtendeesChart", $upload_10 = UploadField::create('Atendees2Chart','Atendees 2 Chart (SVG)'));
+        $fields->addFieldsToTab("Root.AtendeesChart", $upload_16 = UploadField::create('Atendees2ChartPng','Atendees 2 Chart (PNG)'));
         $fields->addFieldToTab("Root.AtendeesChart", new TextField('Atendees3Label','Atendees 3 Label'));
-        $fields->addFieldsToTab("Root.AtendeesChart", $upload_11 = new UploadField('Atendees3Chart','Atendees 3 Chart (SVG)'));
-        $fields->addFieldsToTab("Root.AtendeesChart", $upload_17 = new UploadField('Atendees3ChartPng','Atendees 3 Chart (PNG)'));
+        $fields->addFieldsToTab("Root.AtendeesChart", $upload_11 = UploadField::create('Atendees3Chart','Atendees 3 Chart (SVG)'));
+        $fields->addFieldsToTab("Root.AtendeesChart", $upload_17 = UploadField::create('Atendees3ChartPng','Atendees 3 Chart (PNG)'));
         $fields->addFieldToTab("Root.AtendeesChart", new TextField('Atendees4Label','Atendees 4 Label'));
-        $fields->addFieldsToTab("Root.AtendeesChart", $upload_12 = new UploadField('Atendees4Chart','Atendees 4 Chart (SVG)'));
-        $fields->addFieldsToTab("Root.AtendeesChart", $upload_18 = new UploadField('Atendees4ChartPng','Atendees 4 Chart (PNG)'));
+        $fields->addFieldsToTab("Root.AtendeesChart", $upload_12 = UploadField::create('Atendees4Chart','Atendees 4 Chart (SVG)'));
+        $fields->addFieldsToTab("Root.AtendeesChart", $upload_18 = UploadField::create('Atendees4ChartPng','Atendees 4 Chart (PNG)'));
 
         $upload_9->setFolderName('summits/overview');
         $upload_9->setAllowedMaxFileNumber(1);
@@ -256,8 +256,8 @@ class SummitOverviewPage extends SummitPage {
 
         //summit timeline
         $fields->addFieldToTab("Root.Timeline", new TextField('TimelineCaption','Timeline Caption'));
-        $fields->addFieldsToTab("Root.Timeline", $upload_14 = new UploadField('TimelineImage','Timeline (SVG)'));
-        $fields->addFieldsToTab("Root.Timeline", $upload_20 = new UploadField('TimelineImagePng','Timeline (PNG)'));
+        $fields->addFieldsToTab("Root.Timeline", $upload_14 = UploadField::create('TimelineImage','Timeline (SVG)'));
+        $fields->addFieldsToTab("Root.Timeline", $upload_20 = UploadField::create('TimelineImagePng','Timeline (PNG)'));
 
         $upload_14->setFolderName('summits/overview');
         $upload_14->setAllowedMaxFileNumber(1);

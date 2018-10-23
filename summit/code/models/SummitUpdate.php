@@ -16,7 +16,7 @@ class SummitUpdate extends DataObject
 
     private static $has_one = array (
         'SummitUpdatesPage' => 'SummitUpdatesPage',
-        'Image' => 'Image'
+        'Image' => 'CloudImage'
     );
     
     private static $summary_fields = array(

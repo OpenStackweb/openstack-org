@@ -35,7 +35,7 @@ class SentEmailSendGrid extends DataObject
         if($this->IsSent) return $this;
 
         $this->IsSent   = true;
-        $this->SentDate = MySQLDatabase56::nowRfc2822();
+        $this->SentDate = CustomMySQLDatabase::nowRfc2822();
         return $this;
     }
 }

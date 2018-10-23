@@ -16,11 +16,11 @@ define('MAX_ALLOWED_MATURITY_POINTS', 7);
 define('OpsTagsTeamRepositoryUrl', 'https://raw.githubusercontent.com/openstack/ops-tags-team/master');
 
 
-Object::add_extension('OpenStackComponent', 'OpenStackComponentAdminUI');
-Object::add_extension('OpenStackComponentCategory', 'OpenStackComponentCategoryAdminUI');
-Object::add_extension('OpenStackComponentTag', 'OpenStackComponentTagAdminUI');
-Object::add_extension('OpenStackApiVersion', 'OpenStackApiVersionAdminUI');
-Object::add_extension('OpenStackRelease', 'OpenStackReleaseAdminUI');
-Object::add_extension('OpenStackReleaseSupportedApiVersion', 'OpenStackReleaseSupportedApiVersionAdminUI');
-Object::add_extension('OpenStackSampleConfig', 'OpenStackSampleConfigAdminUI');
-Object::add_extension('OpenStackSampleConfigurationType', 'OpenStackSampleConfigurationTypeAdminUI');
+SS_Object::add_extension('OpenStackComponent', 'OpenStackComponentAdminUI');
+SS_Object::add_extension('OpenStackComponentCategory', 'OpenStackComponentCategoryAdminUI');
+SS_Object::add_extension('OpenStackComponentTag', 'OpenStackComponentTagAdminUI');
+SS_Object::add_extension('OpenStackApiVersion', 'OpenStackApiVersionAdminUI');
+SS_Object::add_extension('OpenStackRelease', 'OpenStackReleaseAdminUI');
+SS_Object::add_extension('OpenStackReleaseSupportedApiVersion', 'OpenStackReleaseSupportedApiVersionAdminUI');
+SS_Object::add_extension('OpenStackSampleConfig', 'OpenStackSampleConfigAdminUI');
+SS_Object::add_extension('OpenStackSampleConfigurationType', 'OpenStackSampleConfigurationTypeAdminUI');
