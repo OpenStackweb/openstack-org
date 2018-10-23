@@ -43,8 +43,8 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
         "LatestReleasePTL"  => "Member",
         "Mascot"            => "Mascot",
         "Category"          => "OpenStackComponentCategory",
-        "DocsLink"          => "Link",
-        "DownloadLink"      => "Link"
+        "DocsLink"          => "OpenStackComponentLink",
+        "DownloadLink"      => "OpenStackComponentLink"
     );
 
     static $has_many = array
@@ -52,7 +52,7 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
         'Versions'          => 'OpenStackApiVersion',
         'RelatedContent'    => 'OpenStackComponentRelatedContent',
         'Caveats'           => 'OpenStackComponentReleaseCaveat',
-        'Links'             => 'Link'
+        'Links'             => 'OpenStackComponentLink'
     );
 
     static $many_many = array
