@@ -12,7 +12,7 @@ class UserStoriesPage extends Page
     );
 
     private static $has_one = array(
-        'HeroImage'     => 'Image'
+        'HeroImage'     => 'CloudImage'
     );
 
     public function getCMSFields()
@@ -25,7 +25,7 @@ class UserStoriesPage extends Page
         $hero_text->setRows(4);
         $fields->addFieldToTab('Root.Main', new TextField('YouTubeID', 'YouTubeID'));
 
-        $hero_image = new UploadField('HeroImage','Hero Image');
+        $hero_image = UploadField::create('HeroImage','Hero Image');
         $hero_image->setAllowedMaxFileNumber(1);
         $hero_image->setAllowedFileCategories('image');
         $fields->addFieldToTab('Root.Main', $hero_image);

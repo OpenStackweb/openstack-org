@@ -25,7 +25,6 @@ class QueryCriteria
     protected $is_id;
     protected $base_entity;
 
-
     /**
      * @param      $field
      * @param      $operator
@@ -42,7 +41,10 @@ class QueryCriteria
         $this->is_id = $is_id;
     }
 
-    public function setBaseEntity(IEntity $base_entity)
+    /**
+     * @param mixed $base_entity
+     */
+    public function setBaseEntity($base_entity = null)
     {
         $this->base_entity = $base_entity;
     }

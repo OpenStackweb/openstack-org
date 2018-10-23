@@ -1,7 +1,10 @@
 ---
 Name: news_module
+After: 'framework/*','cms/*', 'openstack/*'
 ---
-
 News:
   extensions:
     - NewsOpenGraphObjectExtension
+Member:
+  extensions:
+    - NewsManager

@@ -18,10 +18,8 @@ class StartPage extends Page {
    static $db = array(
       'Summary' => 'HTMLText'
    );
-   static $has_one = array(
-   );
- 
-   static $allowed_children = array(NULL);
+   static $has_one = [];
+   static $allowed_children = [];
    /** static $icon = "icon/path"; */
 
    function getCMSFields() {

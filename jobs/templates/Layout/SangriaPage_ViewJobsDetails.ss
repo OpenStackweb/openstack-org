@@ -41,6 +41,7 @@
 <% end_if %>
 <div id="edit_dialog" title="Edit Job Registration Request" style="display: none;">
     $JobRegistrationRequestForm
+    $EditorToolbar
 </div>
 
 <div id="dialog-confirm-post" title="Post Job?" style="display: none;">

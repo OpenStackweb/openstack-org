@@ -20,7 +20,7 @@ final class FoundationMembersSubscribedToNewsLetterCountQuery implements IQueryH
 	 * @param IQuerySpecification $specification
 	 * @return IQueryResult
 	 */
-	public function handle(IQuerySpecification $specification)
+	public function handle(?IQuerySpecification $specification)
 	{
 		$res = 0;
 

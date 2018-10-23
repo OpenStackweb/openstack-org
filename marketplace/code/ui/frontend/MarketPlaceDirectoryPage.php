@@ -88,7 +88,6 @@ class MarketPlaceDirectoryPage_Controller extends MarketPlacePage_Controller {
 
         $this->review_manager = new ReviewManager(
             new SapphireReviewRepository,
-            new SapphireJobAlertEmailRepository,
             new ReviewFactory,
             SapphireTransactionManager::getInstance()
         );

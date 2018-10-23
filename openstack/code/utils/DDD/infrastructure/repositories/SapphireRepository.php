@@ -42,9 +42,9 @@ class SapphireRepository extends AbstractEntityRepository
     }
 
     /**
-     * @param IEntity $entity
+     * @param mixed $entity
      */
-    public function __construct(IEntity $entity = null)
+    public function __construct($entity = null)
     {
         parent::__construct($entity);
     }

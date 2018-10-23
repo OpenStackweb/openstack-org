@@ -55,7 +55,7 @@ class CompanyServiceUpdateRecord extends DataObject implements ICompanyServiceUp
         return AssociationFactory::getInstance()->getMany2OneAssociation($this,'CompanyService')->getTarget();
     }
 
-    public function setEditor(IFoundationMember $member)
+    public function setEditor(Member $member)
     {
         AssociationFactory::getInstance()->getMany2OneAssociation($this,'Editor')->setTarget($member);
     }

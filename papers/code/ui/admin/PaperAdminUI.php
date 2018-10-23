@@ -35,7 +35,7 @@ final class PaperAdminUI extends DataExtension
 
         $f->add($rootTab = new TabSet("Root", $tabMain = new Tab('Main')));
 
-        $logo_field = new UploadField('BackgroundImage', 'Header Background Image');
+        $logo_field = UploadField::create('BackgroundImage', 'Header Background Image');
         $logo_field->setAllowedMaxFileNumber(1);
         $logo_field->setAllowedFileCategories('image');
         $logo_field->setFolderName('papers/headers');

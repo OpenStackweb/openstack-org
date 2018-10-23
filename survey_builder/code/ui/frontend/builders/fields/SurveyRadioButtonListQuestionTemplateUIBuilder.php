@@ -23,7 +23,7 @@ final class SurveyRadioButtonListQuestionTemplateUIBuilder extends AbstractSurve
      * @param ISurveyAnswer $answer
      * @return FormField
      */
-    public function build(ISurveyStep $current_step, ISurveyQuestionTemplate $question, ISurveyAnswer $answer)
+    public function build(ISurveyStep $current_step, ISurveyQuestionTemplate $question, ?ISurveyAnswer $answer)
     {
         $options = array();
         foreach($question->Values()->sort('Order') as $val)

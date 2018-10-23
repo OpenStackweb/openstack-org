@@ -32,6 +32,9 @@ File:
 Injector:
   TransactionManager:
     factory: SapphireTransactionManagerFactory
+  # Reverting to the old specification ( Form Naming convertion )
+  FormTemplateHelper:
+    class: FormTemplateHelper_Pre32
 
 Page:
   extensions:

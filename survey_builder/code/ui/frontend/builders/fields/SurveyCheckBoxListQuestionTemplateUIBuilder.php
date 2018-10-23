@@ -24,7 +24,7 @@ class SurveyCheckBoxListQuestionTemplateUIBuilder
      * @param ISurveyAnswer $answer
      * @return FormField
      */
-    public function build(ISurveyStep $current_step, ISurveyQuestionTemplate $question, ISurveyAnswer $answer)
+    public function build(ISurveyStep $current_step, ISurveyQuestionTemplate $question, ?ISurveyAnswer $answer)
     {
         $options = [];
         foreach($question->Values()->sort('Order') as $val)

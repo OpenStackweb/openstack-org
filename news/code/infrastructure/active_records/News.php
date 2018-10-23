@@ -54,8 +54,8 @@ final class News extends DataObject implements INews
 
     static $has_one = array(
         'Submitter' => 'Submitter',
-        'Document' => 'File',
-        'Image' => 'BetterImage',
+        'Document' => 'CloudFile',
+        'Image' => 'CloudImage',
     );
 
     static $many_many = array(

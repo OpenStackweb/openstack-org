@@ -20,7 +20,7 @@ class CommMember extends DataObject
 	
 	static $has_one = array (
 		'CommPage' => 'CommPage',
-		'Photo' => 'Image'
+		'Photo' => 'CloudImage'
 	);
 	
 	//Fields to show in the DOM

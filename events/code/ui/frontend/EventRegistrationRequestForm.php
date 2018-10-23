@@ -18,7 +18,7 @@ final class EventRegistrationRequestForm extends SafeXSSForm {
 
 	function __construct($controller, $name, $use_actions = true) {
         $event_manager = new EventManager(
-            $this->repository,
+            new SapphireEventRepository,
             new EventRegistrationRequestFactory,
             null,
             new SapphireEventPublishingService,

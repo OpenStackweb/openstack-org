@@ -58,7 +58,7 @@ jQuery(document).ready(function($) {
                 Surname:{required: true,regex:'[\"()=<>]+'},
                 Email: {required: true,email: true, remote: '/RegistrationPage_Controller/CheckEmail'},
                 'Password[_Password]': {required: true,minlength: 5},
-                'Password[_ConfirmPassword]': {required: true,minlength: 5,equalTo: '#Password-_Password'},
+                'Password[_ConfirmPassword]': {required: true,minlength: 5,equalTo: '#Password_Password'},
                 'g_recaptcha_hidden': {required: true}
             },
             messages: {

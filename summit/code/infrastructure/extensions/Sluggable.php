@@ -22,9 +22,9 @@ class Sluggable extends DataExtension {
     $original_slug = $slug;
     $i = 0;
     $class = $obj->class;
-    if(!Object::has_extension($class, "Sluggable")) {
+    if(!SS_Object::has_extension($class, "Sluggable")) {
       while($parent = get_parent_class($obj)) {
-        if(Object::has_extension($parent,"Sluggable")) {
+        if(SS_Object::has_extension($parent,"Sluggable")) {
           $class = $parent;
           break;
         }

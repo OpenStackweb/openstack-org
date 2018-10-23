@@ -38,8 +38,6 @@ interface ICompany extends IEntity  {
 	 */
 	public function getTrainings();
 
-
-
 	/**
 	 * @param IMarketPlaceType $type
 	 * @return int

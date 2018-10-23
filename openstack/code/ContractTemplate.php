@@ -26,7 +26,7 @@ class ContractTemplate extends DataObject {
 	static $defaults = array('AutoRenew' => false);
 
     static $has_one = array(
-        'PDF'             => 'File',
+        'PDF'             => 'CloudFile',
     );
 
 	static $has_many = array(

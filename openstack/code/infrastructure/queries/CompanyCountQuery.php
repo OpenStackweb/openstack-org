@@ -20,7 +20,7 @@ final class CompanyCountQuery implements IQueryHandler {
 	 * @param IQuerySpecification $specification
 	 * @return IQueryResult
 	 */
-	public function handle(IQuerySpecification $specification)
+	public function handle(?IQuerySpecification $specification)
 	{
 		$res = 0;
 		if($specification instanceof CompanyCountQuerySpecification){

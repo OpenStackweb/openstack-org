@@ -44,8 +44,8 @@ class SummitSponsorPage extends SummitPage
     ];
 
     private static $has_one = [
-        'CrowdImage'   => 'BetterImage',
-        'ExhibitImage' => 'BetterImage'
+        'CrowdImage'   => 'CloudImage',
+        'ExhibitImage' => 'CloudImage'
     ];
 
     public function getCMSFields()
@@ -89,11 +89,11 @@ class SummitSponsorPage extends SummitPage
             $_REQUEST["PageId"] = $this->ID;
 
             // Images and Files
-            $upload_0 = new UploadField('CrowdImage','Crowd Image');
+            $upload_0 = UploadField::create('CrowdImage','Crowd Image');
             $upload_0->setFolderName('summits/sponsorship/background');
             $upload_0->setAllowedMaxFileNumber(1);
             $upload_0->setAllowedFileCategories('image');
-            $upload_1 = new UploadField('ExhibitImage','Exhibit Image');
+            $upload_1 = UploadField::create('ExhibitImage','Exhibit Image');
             $upload_1->setFolderName('summits/sponsorship/background');
             $upload_1->setAllowedMaxFileNumber(1);
             $upload_1->setAllowedFileCategories('image');

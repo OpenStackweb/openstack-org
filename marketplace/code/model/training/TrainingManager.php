@@ -125,13 +125,13 @@ final class TrainingManager extends CompanyServiceManager {
 	}
 
 	/**
-	 * @param ITrainingAdministrator $user
+	 * @param Member $member
 	 * @return ITraining[]
 	 */
-	public function getAllowedTrainings(ITrainingAdministrator $user){
+	public function getAllowedTrainings(Member $member){
 		$res = array();
 		//get all companies on where member is training admin
-		$companies = $user->getAdministeredTrainingCompanies();
+		$companies = $member->getAdministeredTrainingCompanies();
 		foreach($companies as $company){
 			$trainings = $company->getTrainings();
 			foreach($trainings as $training){

@@ -48,7 +48,7 @@ class GitHubRepositoryPullRequest extends DataObject
     ];
 
     public function markAsProcessed(){
-        $this->ProcessedDate = MySQLDatabase56::nowRfc2822();
+        $this->ProcessedDate = CustomMySQLDatabase::nowRfc2822();
         $this->Processed = 1;
     }
 

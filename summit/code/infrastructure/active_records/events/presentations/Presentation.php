@@ -760,15 +760,6 @@ SQL;
     }
 
     /**
-     * @return bool|PersistentCollection
-     * @throws Exception
-     */
-    public function getTopics()
-    {
-        return AssociationFactory::getInstance()->getMany2ManyAssociation($this, 'Topics');
-    }
-
-    /**
      * @param Member $member
      * @return boolean
      */

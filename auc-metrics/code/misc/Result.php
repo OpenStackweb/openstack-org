@@ -2,14 +2,13 @@
 
 namespace OpenStack\AUC;
 
-use \Object;
 use \Member;
 
 /**
  * Class Result
  * @package OpenStack\AUC
  */
-class Result extends Object
+class Result extends SS_Object
 {
 
     /**

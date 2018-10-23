@@ -5,7 +5,6 @@ if(defined('OPENSTACKID_ENABLED')) {
     require_once __ROOT__ . '/vendor/openid/php-openid/Auth/OpenID/SReg.php';
 }
 
-
 /**
  * Copyright 2014 Openstack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -137,11 +136,14 @@ class OpenStackIdAuthenticator extends Controller
             // Get registration informations
             $ax = new Auth_OpenID_AX_FetchResponse();
             $obj = $ax->fromSuccessResponse($response);
-            $email = $obj->data["http://axschema.org/contact/email"][0];
-            if (isset($obj->data["http://axschema.org/namePerson/first"]))
-                $full_name = $obj->data["http://axschema.org/namePerson/first"][0] . ' ' . $obj->data["http://axschema.org/namePerson/last"][0];
+            $email = $obj->getSingle("http://axschema.org/contact/email");
+            $fname = $obj->getSingle("http://axschema.org/namePerson/first", null);
+            if (!empty($fname)){
+                $lname =  $obj->getSingle("http://axschema.org/namePerson/last", null);
+                $full_name = sprintf("%s %s", $fname, $lname);
+            }
             else
-                $full_name = $obj->data["http://axschema.org/namePerson"][0];
+                $full_name =  $obj->getSingle("http://axschema.org/namePerson", null);
         }
         return array($email, $full_name);
     }

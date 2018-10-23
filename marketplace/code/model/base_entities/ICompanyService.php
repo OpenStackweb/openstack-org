@@ -21,13 +21,13 @@ interface ICompanyService extends IManipulableEntity
     public function isDraft();
 
     /**
-     * @param ICompany $company
+     * @param Company $company
      * @return void
      */
-    public function setCompany(ICompany $company);
+    public function setCompany(Company $company);
 
     /**
-     * @return ICompany
+     * @return Company
      */
     public function getCompany();
 

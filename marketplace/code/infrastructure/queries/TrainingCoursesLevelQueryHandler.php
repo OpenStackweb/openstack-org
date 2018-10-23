@@ -20,7 +20,7 @@ final class TrainingCoursesLevelQueryHandler implements IQueryHandler {
 	 * @param IQuerySpecification $specification
 	 * @return IQueryResult
 	 */
-	public function handle(IQuerySpecification $specification){
+	public function handle(?IQuerySpecification $specification){
 
 		$levels = array();
 		$result = TrainingCourseLevel::get();

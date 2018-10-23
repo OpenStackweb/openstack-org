@@ -23,14 +23,14 @@ class SummitHighlightPic extends DataObject
     private static $has_one = array
     (
         'SummitHighlightsPage' => 'SummitHighlightsPage',
-        'Image'                => 'BetterImage',
+        'Image'                => 'CloudImage',
     );
 
     public function getCMSFields()
     {
         $f = new FieldList();
         $f->add(new TextField('Title','Title'));
-        $image = new UploadField('Image','Pic');
+        $image = UploadField::create('Image','Pic');
         $image->setAllowedMaxFileNumber(1);
         $image->setFolderName(sprintf('summits/%s/highlights/pics', $this->SummitHighlightsPage()->SummitID));
         $f->add($image);

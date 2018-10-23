@@ -44,7 +44,7 @@ class PushNotificationMessage extends DataObject implements IPushNotificationMes
     {
         if($this->isAlreadySent()) throw new EntityValidationException('Push notification already sent!.');
         $this->IsSent   = true;
-        $this->SentDate = MySQLDatabase56::nowRfc2822();
+        $this->SentDate = CustomMySQLDatabase::nowRfc2822();
     }
 
     public function approve(){

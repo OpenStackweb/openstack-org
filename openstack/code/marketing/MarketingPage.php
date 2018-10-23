@@ -55,7 +55,7 @@ class MarketingPage extends Page{
         // Get Involved
         $fields->addFieldToTab(
             'Root.GetInvolved',
-            $involved_images = new UploadField('InvolvedImages', 'Involved Images')
+            $involved_images = UploadField::create('InvolvedImages', 'Involved Images')
         );
         $involved_images->setFolderName('marketing');
         $involved_images->getValidator()->setAllowedMaxFileSize(40*1024*1024);

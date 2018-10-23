@@ -25,8 +25,8 @@ class OpenStackDaysDoc extends DataObject {
         'Artwork'            => 'OpenStackDaysPage',
         'Media'              => 'OpenStackDaysPage',
         'Collaterals'        => 'OpenStackDaysPage',
-        'Doc'                => 'File',
-        'Thumbnail'          => 'BetterImage',
+        'Doc'                => 'CloudFile',
+        'Thumbnail'          => 'CloudImage',
         'ParentPage'         => 'OpenStackDaysPage', //dummy
     );
 
@@ -39,11 +39,11 @@ class OpenStackDaysDoc extends DataObject {
     public function getCMSFields() {
         $fields = new FieldList;
 
-        $image = new UploadField('Thumbnail','Thumbnail');
+        $image = UploadField::create('Thumbnail','Thumbnail');
         $image->setFolderName('openstackdays');
         $image->setAllowedFileCategories('image');
 
-        $doc = new UploadField('Doc','Doc');
+        $doc = UploadField::create('Doc','Doc');
         $doc->setFolderName('openstackdays');
         $doc->getValidator()->setAllowedMaxFileSize(40*1024*1024);
 

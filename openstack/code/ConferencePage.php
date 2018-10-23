@@ -50,7 +50,7 @@ class ConferencePage extends Page
 
     static $has_one = array(
         'Summit' => 'Summit',
-        'SummitImage' => 'BetterImage'
+        'SummitImage' => 'CloudImage'
     );
 
     function getCMSFields()
@@ -64,7 +64,7 @@ class ConferencePage extends Page
         $SummitDropDownField = new DropdownField("SummitID", "Summit", $summits->map("ID", "Name"));
         $fields->addFieldToTab('Root.Main', $SummitDropDownField);
 
-        $SummitImageField = new UploadField('SummitImage','Summit Image');
+        $SummitImageField = UploadField::create('SummitImage','Summit Image');
         $fields->addFieldToTab('Root.Main', $SummitImageField);
 
         //Google Conversion Tracking params

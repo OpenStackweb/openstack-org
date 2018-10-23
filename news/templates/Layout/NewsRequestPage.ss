@@ -38,5 +38,6 @@
     <% end_if %>
     <div>
         $NewsRequestForm
+        $EditorToolbar
     </div>
 <% end_if %>

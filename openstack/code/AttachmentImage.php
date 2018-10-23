@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-class AttachmentImage extends BetterImage {
+class AttachmentImage extends CloudImage {
 	
 	static $has_one = array ( 
 	'Page' => 'Page' 

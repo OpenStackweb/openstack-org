@@ -38,8 +38,8 @@ class PTGDynamic extends Page {
     );
 
     private static $has_one = array(
-        'Graph' => 'BetterImage',
-        'ScheduleImage' => 'BetterImage',
+        'Graph' => 'CloudImage',
+        'ScheduleImage' => 'CloudImage',
     );
 
     function getCMSFields(){
@@ -51,7 +51,7 @@ class PTGDynamic extends Page {
         $whychange->setRows(5);
         $fields->addFieldToTab(
             'Root.Main',
-            $graph = new UploadField('Graph', 'Graph')
+            $graph = UploadField::create('Graph', 'Graph')
         );
         $fields->addFieldToTab('Root.Main', $hotel = new HtmlEditorField('HotelAndTravel','Hotel & Travel'));
         $hotel->setRows(5);
@@ -78,7 +78,7 @@ class PTGDynamic extends Page {
         $schedule->setRows(5);
         $fields->addFieldToTab(
             'Root.Main',
-            $schedule_image = new UploadField('ScheduleImage', 'Schedule')
+            $schedule_image = UploadField::create('ScheduleImage', 'Schedule')
         );
         $fields->addFieldToTab('Root.Main', $coc = new HtmlEditorField('CodeOfConduct','Code of Conduct'));
         $coc->setRows(5);

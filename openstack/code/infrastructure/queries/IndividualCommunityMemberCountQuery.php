@@ -20,7 +20,7 @@ final class IndividualCommunityMemberCountQuery implements IQueryHandler {
 	 * @param IQuerySpecification $specification
 	 * @return IQueryResult
 	 */
-	public function handle(IQuerySpecification $specification)
+	public function handle(?IQuerySpecification $specification)
 	{
 		$code = IFoundationMember::CommunityMemberGroupSlug;
 		$sql = <<< SQL

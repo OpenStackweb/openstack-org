@@ -12,7 +12,7 @@
  * limitations under the License.
  **/
 
-final class SurveyLiteralQuestionTemplateUIBuilder implements ISurveyQuestionTemplateUIBuilder{
+final class SurveyLiteralQuestionTemplateUIBuilder implements ISurveyQuestionTemplateUIBuilder {
 
     /**
      * @param ISurveyStep $current_step
@@ -20,7 +20,7 @@ final class SurveyLiteralQuestionTemplateUIBuilder implements ISurveyQuestionTem
      * @param ISurveyAnswer $answer
      * @return FormField
      */
-    public function build(ISurveyStep $current_step, ISurveyQuestionTemplate $question, ISurveyAnswer $answer)
+    public function build(ISurveyStep $current_step, ISurveyQuestionTemplate $question, ?ISurveyAnswer $answer)
     {
         $field = new LiteralField($question->name(), GetTextTemplateHelpers::_t("survey_template" , $question->Content));
         return $field;

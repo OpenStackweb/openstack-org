@@ -72,7 +72,10 @@ class CompanyListPage_Controller extends Page_Controller
         Requirements::combine_files('company_list.js', array(
             "themes/openstack/javascript/jquery.autocomplete.min.js",
         ));
+    }
 
+    public function EditorToolbar() {
+        return HtmlEditorField_Toolbar::create($this, "EditorToolbar");
     }
 
     function DisplayedCompanies($type)

@@ -46,7 +46,7 @@ class PresentationSpeaker extends DataObject
     ];
 
     private static $has_one = [
-        'Photo'               => 'Image',
+        'Photo'               => 'CloudImage',
         'Member'              => 'Member',
         'RegistrationRequest' => 'SpeakerRegistrationRequest',
     ];
@@ -1030,7 +1030,7 @@ class PresentationSpeaker extends DataObject
         $email->SpeakerID = $this->ID;
         $email->SummitID = $summit_id;
         $email->AnnouncementEmailTypeSent = $email_type;
-        $email->AnnouncementEmailSentDate = MySQLDatabase56::nowRfc2822();
+        $email->AnnouncementEmailSentDate = CustomMySQLDatabase::nowRfc2822();
         $email->write();
     }
 
@@ -1336,7 +1336,7 @@ class PresentationSpeaker extends DataObject
         $email->SpeakerID = $this->ID;
         $email->SummitID = $summit_id;
         $email->AnnouncementEmailTypeSent = $type;
-        $email->AnnouncementEmailSentDate = MySQLDatabase56::nowRfc2822();
+        $email->AnnouncementEmailSentDate = CustomMySQLDatabase::nowRfc2822();
         $email->write();
 
         return $this;
@@ -1356,7 +1356,7 @@ class PresentationSpeaker extends DataObject
         $email->SpeakerID = $this->ID;
         $email->SummitID = 0;
         $email->AnnouncementEmailTypeSent = 'CREATE_MEMBERSHIP';
-        $email->AnnouncementEmailSentDate = MySQLDatabase56::nowRfc2822();
+        $email->AnnouncementEmailSentDate = CustomMySQLDatabase::nowRfc2822();
         $email->write();
 
         return $this;
@@ -1502,7 +1502,7 @@ class PresentationSpeaker extends DataObject
         $notification            = new PresentationSpeakerUploadPresentationMaterialEmail();
         $notification->SpeakerID = $this->ID;
         $notification->SummitID  = $summit->ID;
-        $notification->SentDate  = MySQLDatabase56::nowRfc2822();
+        $notification->SentDate  = CustomMySQLDatabase::nowRfc2822();
         $notification->write();
         return $notification;
     }

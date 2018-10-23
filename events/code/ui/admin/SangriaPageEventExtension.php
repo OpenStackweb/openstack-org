@@ -91,7 +91,7 @@ final class SangriaPageEventExtension extends Extension {
         $ImageField->setAllowedFileCategories('image');
         $ImageField->setTemplateFileButtons('CustomUploadField_FrontEndFIleButtons');
         $ImageField->setFolderName('news-images');
-        $ImageField->setRecordClass('BetterImage');
+        $ImageField->setRecordClass('CloudImage');
         $ImageField->getUpload()->setReplaceFile(false);
         $ImageField->setOverwriteWarning(false);
         $sizeMB = 2; // 2 MB

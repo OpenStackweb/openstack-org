@@ -31,7 +31,7 @@ class SurveyTextBoxQuestionTemplateUIBuilder
      * @param ISurveyAnswer $answer
      * @return FormField
      */
-    public function build(ISurveyStep $current_step, ISurveyQuestionTemplate $question, ISurveyAnswer $answer)
+    public function build(ISurveyStep $current_step, ISurveyQuestionTemplate $question, ?ISurveyAnswer $answer)
     {
         $field = $this->buildField($question->name(), $question->label());
         $field->setValue($question->initialValue());

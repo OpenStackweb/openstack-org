@@ -33,7 +33,7 @@ class SummitLocationMap extends SummitLocationImage
     {
         $f = parent::getCMSFields();
         $f->removeByName('Picture');
-        $map_field = new UploadField('Picture','Map');
+        $map_field = UploadField::create('Picture','Map');
         $map_field->setAllowedMaxFileNumber(1);
         $map_field->setFolderName(sprintf('summits/%s/locations/%s/maps/', $_REQUEST['SummitID'], $_REQUEST['LocationID']));
         $map_field->getValidator()->setAllowedMaxFileSize(array('*' => 500 * 1024));

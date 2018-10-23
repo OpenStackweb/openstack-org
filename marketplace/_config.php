@@ -15,23 +15,23 @@ require_once(Director::baseFolder().'/marketplace/code/utils/helpers.php');
 
 //extensions
 
-Object::add_extension('Company', 'MarketPlaceCompany');
-Object::add_extension('Member', 'MarketPlaceAdminMember');
-Object::add_extension('Project', 'TrainingCourseRelatedProject');
+SS_Object::add_extension('Company', 'MarketPlaceCompany');
+SS_Object::add_extension('Member', 'MarketPlaceAdminMember');
+SS_Object::add_extension('Project', 'TrainingCourseRelatedProject');
 
 //Admin UI
-Object::add_extension('MarketPlaceType', 'MarketPlaceTypeAdminUI');
-Object::add_extension('TrainingService', 'TrainingServiceAdminUI');
-Object::add_extension('TrainingCourse', 'TrainingCourseAdminUI');
-Object::add_extension('TrainingCourseSchedule', 'TrainingCourseScheduleAdminUI');
-Object::add_extension('GuestOSType', 'GuestOSTypeAdminUI');
-Object::add_extension('HyperVisorType', 'HyperVisorTypeAdminUI');
-Object::add_extension('PricingSchemaType', 'PricingSchemaTypeAdminUI');
-Object::add_extension('SpokenLanguage', 'SpokenLanguageAdminUI');
-Object::add_extension('Region', 'RegionAdminUI');
-Object::add_extension('ConfigurationManagementType', 'ConfigurationManagementTypeAdminUI');
-Object::add_extension('SupportChannelType', 'SupportChannelTypeAdminUI');
-Object::add_extension('MarketPlaceVideoType', 'MarketPlaceVideoTypeAdminUI');
-Object::add_extension('MarketPlaceAllowedInstance', 'MarketPlaceAllowedInstanceAdminUI');
+SS_Object::add_extension('MarketPlaceType', 'MarketPlaceTypeAdminUI');
+SS_Object::add_extension('TrainingService', 'TrainingServiceAdminUI');
+SS_Object::add_extension('TrainingCourse', 'TrainingCourseAdminUI');
+SS_Object::add_extension('TrainingCourseSchedule', 'TrainingCourseScheduleAdminUI');
+SS_Object::add_extension('GuestOSType', 'GuestOSTypeAdminUI');
+SS_Object::add_extension('HyperVisorType', 'HyperVisorTypeAdminUI');
+SS_Object::add_extension('PricingSchemaType', 'PricingSchemaTypeAdminUI');
+SS_Object::add_extension('SpokenLanguage', 'SpokenLanguageAdminUI');
+SS_Object::add_extension('Region', 'RegionAdminUI');
+SS_Object::add_extension('ConfigurationManagementType', 'ConfigurationManagementTypeAdminUI');
+SS_Object::add_extension('SupportChannelType', 'SupportChannelTypeAdminUI');
+SS_Object::add_extension('MarketPlaceVideoType', 'MarketPlaceVideoTypeAdminUI');
+SS_Object::add_extension('MarketPlaceAllowedInstance', 'MarketPlaceAllowedInstanceAdminUI');
 
 define('EXPIRED_POWERED_OPENSTACK_IMPLEMENTATION_EMAIL','EXPIRED_POWERED_OPENSTACK_IMPLEMENTATION_EMAIL');

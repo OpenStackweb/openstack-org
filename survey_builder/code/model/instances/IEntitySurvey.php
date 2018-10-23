@@ -38,24 +38,24 @@ interface IEntitySurvey extends ISurvey {
     public function isTeamEditionAllowed();
 
     /**
-     * @param ICommunityMember $member
+     * @param Member $member
      * @return void
      */
-    public function addTeamMember(ICommunityMember $member);
+    public function addTeamMember(Member $member);
 
     /**
-     * @param ICommunityMember $member
+     * @param Member $member
      * @return void
      */
-    public function removeTeamMember(ICommunityMember $member);
+    public function removeTeamMember(Member $member);
 
     /**
-     * @return ICommunityMember[]
+     * @return Member[]
      */
     public function getTeamMembers();
 
     /**
-     * @return ICommunityMember
+     * @return Member
      */
     public function getUpdateBy();
 
@@ -65,10 +65,10 @@ interface IEntitySurvey extends ISurvey {
     public function iAmOwner();
 
     /**
-     * @param ICommunityMember $member
+     * @param Member $member
      * @return bool
      */
-    public function isTeamMember(ICommunityMember $member);
+    public function isTeamMember(Member $member);
 
     /**
      * @return string|null

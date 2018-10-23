@@ -50,13 +50,13 @@ final class SummitHighlightsPage extends SummitPage
 
     private static $has_one = array
     (
-        'ReleaseAnnouncedImage'           => 'BetterImage',
-        'CurrentSummitBackgroundImage'    => 'BetterImage',
-        'NextSummitTinyBackgroundImage'   => 'BetterImage',
+        'ReleaseAnnouncedImage'           => 'CloudImage',
+        'CurrentSummitBackgroundImage'    => 'CloudImage',
+        'NextSummitTinyBackgroundImage'   => 'CloudImage',
         'NextSummitBackgroundImage'       => 'SummitImage',
-        'StatisticsVideoPoster'           => 'BetterImage',
-        'StatisticsVideoPoster'           => 'BetterImage',
-        'StatisticsVideo'                 => 'File',
+        'StatisticsVideoPoster'           => 'CloudImage',
+        'StatisticsVideoPoster'           => 'CloudImage',
+        'StatisticsVideo'                 => 'CloudFile',
     );
 
     public function getStatisticsVideoUrl()
@@ -133,7 +133,7 @@ final class SummitHighlightsPage extends SummitPage
         $f->addFieldToTab('Root.CurrentSummit', new HtmlEditorField('ThankYouText', 'ThankYouText'));
         $f->addFieldToTab('Root.CurrentSummit', new TextField('CurrentSummitFlickrUrl', 'Flickr Url'));
 
-        $image = new UploadField('CurrentSummitBackgroundImage','Background Image');
+        $image = UploadField::create('CurrentSummitBackgroundImage','Background Image');
         $image->setAllowedMaxFileNumber(1);
         $image->setFolderName(sprintf('summits/%s/highlights/', $this->SummitID));
         $f->addFieldToTab('Root.CurrentSummit', $image);
@@ -151,13 +151,13 @@ final class SummitHighlightsPage extends SummitPage
         $f->addFieldToTab('Root.Statistics', new TextField('StatisticsVideoUrl3', 'Youtube ID'));
         $f->addFieldToTab('Root.Statistics', new TextField('StatisticsVideoUrl4', 'Youtube ID'));
 
-        $file = new UploadField('StatisticsVideo','Video');
+        $file = UploadField::create('StatisticsVideo','Video');
         $file->setAllowedMaxFileNumber(1);
         $file->setAllowedExtensions(array('mp4'));
         $file->setFolderName(sprintf('summits/%s/highlights/statistics', $this->SummitID));
         $f->addFieldToTab('Root.Statistics', $file);
 
-        $image = new UploadField('StatisticsVideoPoster','Video Poster');
+        $image = UploadField::create('StatisticsVideoPoster','Video Poster');
         $image->setAllowedMaxFileNumber(1);
         $image->setFolderName(sprintf('summits/%s/highlights/statistics', $this->SummitID));
         $f->addFieldToTab('Root.Statistics', $image);
@@ -173,7 +173,7 @@ final class SummitHighlightsPage extends SummitPage
         ->setEmptyString('(None)');
         $f->addFieldToTab('Root.NextSummit', $dropdown);
 
-        $image = new UploadField('NextSummitTinyBackgroundImage','Promo Background Image');
+        $image = UploadField::create('NextSummitTinyBackgroundImage','Promo Background Image');
         $image->setAllowedMaxFileNumber(1);
         $image->setFolderName(sprintf('summits/%s/highlights/next_summit/', $this->SummitID));
         $f->addFieldToTab('Root.NextSummit', $image);
@@ -183,7 +183,7 @@ final class SummitHighlightsPage extends SummitPage
         $f->addFieldToTab('Root.ReleaseAnnounced', new HtmlEditorField('ReleaseAnnouncedDescription', 'Description'));
         $f->addFieldToTab('Root.ReleaseAnnounced', new TextField('ReleaseAnnouncedButtonTitle', 'Button Text'));
         $f->addFieldToTab('Root.ReleaseAnnounced', new TextField('ReleaseAnnouncedButtonLink', 'Button Link'));
-        $release_image = new UploadField('ReleaseAnnouncedImage','Image');
+        $release_image = UploadField::create('ReleaseAnnouncedImage','Image');
         $release_image->setAllowedMaxFileNumber(1);
         $release_image->setFolderName(sprintf('summits/%s/highlights/release/', $this->SummitID));
         $f->addFieldToTab('Root.ReleaseAnnounced', $release_image);

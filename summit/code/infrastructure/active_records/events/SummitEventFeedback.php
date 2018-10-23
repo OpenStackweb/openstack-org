@@ -148,7 +148,7 @@ class SummitEventFeedback extends DataObject implements ISummitEventFeedBack
             throw new Exception('Already approved feedback Summit Event');
 
         $this->Approved = true;
-        $this->ApprovedDate = MySQLDatabase56::nowRfc2822();
+        $this->ApprovedDate = CustomMySQLDatabase::nowRfc2822();
         $this->ApprovedByID = Member::currentUserID();
     }
 

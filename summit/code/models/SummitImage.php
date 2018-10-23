@@ -16,7 +16,7 @@ class SummitImage extends DataObject
     );
 
     private static $has_one = array (
-        'Image' => 'Image'
+        'Image' => 'CloudImage'
     );
     
     private static $has_many = array (

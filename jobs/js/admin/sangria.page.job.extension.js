@@ -504,13 +504,13 @@ jQuery(document).ready(function($) {
                 $('#'+form_id+'_expiration_date',form).val(data.expiration_date);
                 $('#'+form_id+'_location_type',form).val(data.location_type);
                 $('#'+form_id+'_expiration_date',form).prop('disabled',true);
-                form.find('textarea').each(function() {
-                    var text_area = $(this);
-                    var text_editor = tinyMCE.get(text_area.attr('id'));
-                    if (text_editor)
-                        text_editor.setContent(text_area.val());
+                tinymce.init({
+                    selector: "textarea",
+                    width:      '100%',
+                    height:     270,
+                    statusbar:  false,
+                    menubar:    false
                 });
-
                 //erase all rows...
 
                 $("#locations_table > tbody",form).html("");

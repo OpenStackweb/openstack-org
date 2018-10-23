@@ -51,8 +51,7 @@ class Summit extends DataObject implements ISummit
     ];
 
     private static $has_one = [
-
-        'Logo' => 'BetterImage',
+        'Logo' => 'CloudImage',
         'Type' => 'SummitType',
     ];
 
@@ -758,7 +757,7 @@ class Summit extends DataObject implements ISummit
 
     public function getSchedule($day = null, $location = null)
     {
-        $query = new QueryObject();
+        $query = new QueryObject(new SummitEvent());
         $query->addAndCondition(QueryCriteria::equal('Published', 1));
         if (!is_null($day)) {
             if (!$day instanceof DateTime) {

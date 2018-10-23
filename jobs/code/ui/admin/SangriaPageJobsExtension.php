@@ -98,6 +98,10 @@ final class SangriaPageJobsExtension extends Extension {
 		return $form;
 	}
 
+    public function EditorToolbar() {
+        return HtmlEditorField_Toolbar::create($this, "EditorToolbar");
+    }
+
     function JobForm(){
         $this->commonScripts();
         GoogleMapScriptBuilder::renderRequirements('false');
@@ -115,6 +119,10 @@ final class SangriaPageJobsExtension extends Extension {
             SpamProtectorManager::update_form($form);
         }
         return $form;
+    }
+
+    public function Link($action = null){
+	    $this->owner->Link($action);
     }
 
 }

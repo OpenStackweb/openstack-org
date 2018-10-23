@@ -28,7 +28,7 @@ final class Book
 
     private static $has_one = array(
         'Company' => 'Company',
-        'Image'   => 'Image'
+        'Image'   => 'CloudImage'
     );
 
 	static $create_table_options = array('MySQLDatabase' => 'ENGINE=InnoDB');

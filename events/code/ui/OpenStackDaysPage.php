@@ -49,7 +49,7 @@ class OpenStackDaysPage extends Page {
         $fields->removeByName('Content');
         $fields->addFieldToTab(
             'Root.Main',
-            $uploadField = new UploadField('HeaderPics','Header Pictures')
+            $uploadField = UploadField::create('HeaderPics','Header Pictures')
         );
         $uploadField->setAllowedMaxFileNumber(10);
         $uploadField->setFolderName('openstackdays');

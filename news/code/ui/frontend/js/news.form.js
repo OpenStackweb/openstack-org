@@ -26,64 +26,7 @@ jQuery(document).ready(function($){
         });
 
         $('#NewsRequestForm_NewsRequestForm_date_expire').datetimepicker({
-            format: 'm/d/Y h:i a',
-        });
-
-        var allowed_keys = [8, 13, 16, 17, 18, 20, 33, 34, 35,36, 37, 38, 39, 40, 46];
-
-        tinyMCE.init({
-            content_css : "news/code/ui/frontend/css/htmleditor.css",
-            theme: "advanced",
-            mode : "textareas",
-            theme_advanced_toolbar_location: "top",
-            theme_advanced_buttons1: "bold,italic,underline,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,outdent,indent,separator,bullist,link,undo,redo,code",
-            theme_advanced_buttons2: "",
-            theme_advanced_buttons3: "",
-            plugins : "paste",
-            paste_preprocess : function(pl, o) {
-                var tmp = $('<div />', {
-                    html: o.content
-                })
-                var $elements = tmp.find("*").not("a,br");
-
-                for (var i = $elements.length - 1; i >= 0; i--) {
-                    var e = $elements[i];
-                    $(e).replaceWith(e.innerHTML);
-                }
-
-                o.content = tmp.html();
-            },
-            setup : function(ed) {
-                ed.onKeyDown.add(function(ed, evt) {
-                    var key = evt.keyCode;
-                    var max_chars = $(tinyMCE.get(tinyMCE.activeEditor.id).getElement()).attr('max_chars');
-                    if(allowed_keys.indexOf(key) == -1 && max_chars){
-                        var text_length = ed.getContent({ 'format' : 'text' }).length;
-                        if ( text_length+1 > max_chars){
-                            evt.preventDefault();
-                            evt.stopPropagation();
-                            return false;
-                        }
-                    }
-                });
-                ed.onPaste.add(function(ed, evt) {
-                    var max_chars = $(tinyMCE.get(tinyMCE.activeEditor.id).getElement()).attr('max_chars');
-                    var content = ((evt.originalEvent || evt).clipboardData || window.clipboardData).getData('Text');
-
-                    if (max_chars) {
-                        evt.preventDefault();
-                        if (content.length > parseInt(max_chars)) {
-                            alert('Summary is too long!');
-                            return false;
-                        } else {
-                            ed.execCommand('mceInsertContent', false, content);
-                        }
-                    }
-                });
-            },
-            forced_root_block : "p",
-            height: "250px",
-            width: "800px"
+            format: 'm/d/Y h:i a'
         });
 
         //main form validation
@@ -174,3 +117,50 @@ jQuery(document).ready(function($){
     });
 
 });
+
+var allowed_keys = [8, 13, 16, 17, 18, 20, 33, 34, 35,36, 37, 38, 39, 40, 46];
+
+function TinyMCENewsPasteProcess(pl, o) {
+    var tmp = $('<div />', {
+        html: o.content
+    })
+    var $elements = tmp.find("*").not("a,br");
+
+    for (var i = $elements.length - 1; i >= 0; i--) {
+        var e = $elements[i];
+        $(e).replaceWith(e.innerHTML);
+    }
+
+    o.content = tmp.html();
+}
+
+function OnSetupTinyMCENewsForm (ed) {
+
+    ed.onKeyDown.add(function(ed, evt) {
+        var key = evt.keyCode;
+        var max_chars = $(tinyMCE.get(tinyMCE.activeEditor.id).getElement()).attr('max_chars');
+        if(allowed_keys.indexOf(key) == -1 && max_chars){
+            var text_length = ed.getContent({ 'format' : 'text' }).length;
+            if ( text_length+1 > max_chars){
+                evt.preventDefault();
+                evt.stopPropagation();
+                return false;
+            }
+        }
+    });
+
+    ed.onPaste.add(function(ed, evt) {
+        var max_chars = $(tinyMCE.get(tinyMCE.activeEditor.id).getElement()).attr('max_chars');
+        var content = ((evt.originalEvent || evt).clipboardData || window.clipboardData).getData('Text');
+
+        if (max_chars) {
+            evt.preventDefault();
+            if (content.length > parseInt(max_chars)) {
+                alert('Summary is too long!');
+                return false;
+            } else {
+                ed.execCommand('mceInsertContent', false, content);
+            }
+        }
+    });
+}

@@ -4,6 +4,8 @@ After: 'framework/routes#coreroutes'
 ---
 Director:
   rules:
+    # needed for crontask ( CliController )
+    '$Controller//$Action/$ID/$OtherID':  '*'
     'depsurvey': 'DeploymentSurveyController'
     'profile_images': 'ProfileImageApi'
     'api/v1/groups': 'GroupsApi'

@@ -13,23 +13,22 @@
  **/
 class Link extends DataObject {
 
-	static $db = [
+	private static $db = [
 		'Label' => 'Text',
 		'URL' => 'Text',
 		'IconClass' => 'Varchar(50)',
 		'ButtonColor' => 'Color',
 		'Description' => 'HTMLText'
 	];
-	
 
 	static $singular_name = 'Link';
 	static $plural_name = 'Links';
 	
-	static $summary_fields = array( 
+	private static $summary_fields = array(
 	      'Label' => 'Label', 
 	      'URL' => 'URL'
 	   );
-	
+
 	function getCMSFields() {
 		$fields = new FieldList (
 			new TextField('Label','Label this link (this will be the text displayed):'),
@@ -41,6 +40,4 @@ class Link extends DataObject {
 		return $fields;
 	}
 
-
-	
 }

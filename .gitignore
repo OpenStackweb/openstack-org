@@ -98,3 +98,7 @@ gettext/Locale/*
 themes/openstack/images
 npm-debug.log
 *.log
+reports
+cloudassets
+cloudassets-swift
+openstack/_config/cloudassets.yml

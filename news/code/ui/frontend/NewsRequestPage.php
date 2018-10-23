@@ -54,6 +54,10 @@ final class NewsRequestPage_Controller extends Page_Controller {
         return $this->renderWith(array('NewsRequestPage','Page'));
     }
 
+    public function EditorToolbar() {
+        return HtmlEditorField_Toolbar::create($this, "EditorToolbar");
+    }
+
     public function NewsRequestForm() {
         $this->commonScripts();
         Requirements::css('news/code/ui/frontend/css/news.form.css');
@@ -79,7 +83,7 @@ final class NewsRequestPage_Controller extends Page_Controller {
             SpamProtectorManager::update_form($form);
         }
 
-	       return $form;
+        return $form;
     }
 
     private function commonScripts(){

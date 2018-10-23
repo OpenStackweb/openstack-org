@@ -37,7 +37,7 @@ final class Paper extends DataObject
     static $has_one = [
         'Creator' => 'Member',
         'UpdatedBy' => 'Member',
-        'BackgroundImage' => 'BetterImage',
+        'BackgroundImage' => 'CloudImage',
     ];
 
     static $has_many = [

@@ -27,7 +27,7 @@ class Bio extends DataObject {
 	Static $defaults = array('DisplayOnSite' => TRUE);
 	
 	static $has_one = array(
-		'Photo' => 'BetterImage',
+		'Photo' => 'CloudImage',
 		'BioPage' => 'BioPage'
 	);
 

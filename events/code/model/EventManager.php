@@ -51,11 +51,11 @@ final class EventManager {
 	 * @param IEventValidatorFactory           $validator_factory
 	 * @param ITransactionManager              $tx_manager
 	 */
-	public function __construct(IEntityRepository $event_repository,
-	                            IEventRegistrationRequestFactory $factory,
-								IGeoCodingService $geo_coding_service,
-								IEventPublishingService $event_publishing_service,
-								IEventValidatorFactory $validator_factory,
+	public function __construct(?IEntityRepository $event_repository,
+	                            ?IEventRegistrationRequestFactory $factory,
+								?IGeoCodingService $geo_coding_service,
+								?IEventPublishingService $event_publishing_service,
+								?IEventValidatorFactory $validator_factory,
 	                            ITransactionManager $tx_manager){
 		$this->event_repository                      = $event_repository;
 		$this->tx_manager                            = $tx_manager;

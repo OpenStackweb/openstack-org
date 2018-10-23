@@ -21,7 +21,7 @@ final class CompaniesWithMarketplaceCreationRightsSapphireQueryHandler
 	 * @param IQuerySpecification $specification
 	 * @return IQueryResult
 	 */
-	public function handle(IQuerySpecification $specification)
+	public function handle(?IQuerySpecification $specification)
 	{
 		$params           = $specification->getSpecificationParams();
 		$marketplace_type = $params[0];

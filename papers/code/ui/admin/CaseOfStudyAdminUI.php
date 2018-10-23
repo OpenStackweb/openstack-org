@@ -17,7 +17,7 @@ class CaseOfStudyAdminUI extends PaperSectionAdminUI
     public function updateCMSFields(FieldList $f)
     {
         parent::updateCMSFields($f);
-        $logo_field = new UploadField('Logo', 'Logo');
+        $logo_field = UploadField::create('Logo', 'Logo');
         $logo_field->setAllowedMaxFileNumber(1);
         $logo_field->setAllowedFileCategories('image');
         $logo_field->setFolderName('papers/logos/cases_of_study');

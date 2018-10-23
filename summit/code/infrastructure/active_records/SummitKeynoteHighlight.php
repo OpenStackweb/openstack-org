@@ -25,8 +25,8 @@ final class SummitKeynoteHighlight extends DataObject
     private static $has_one = array
     (
         'SummitHighlightsPage' => 'SummitHighlightsPage',
-        'Image'                => 'BetterImage',
-        'Thumbnail'            => 'BetterImage',
+        'Image'                => 'CloudImage',
+        'Thumbnail'            => 'CloudImage',
     );
 
     public function getCMSFields()
@@ -36,12 +36,12 @@ final class SummitKeynoteHighlight extends DataObject
         $f->add(new DropdownField('Day', 'Day',  $this->dbObject('Day')->enumValues()));
         $f->add(new HtmlEditorField('Description','Description'));
 
-        $image = new UploadField('Image','Pic');
+        $image = UploadField::create('Image','Pic');
         $image->setAllowedMaxFileNumber(1);
         $image->setFolderName(sprintf('summits/%s/keynotes/pics', $this->SummitHighlightsPage()->SummitID));
         $f->add($image);
 
-        $image = new UploadField('Thumbnail','Thumbnail');
+        $image = UploadField::create('Thumbnail','Thumbnail');
         $image->setAllowedMaxFileNumber(1);
         $image->setFolderName(sprintf('summits/%s/keynotes/thumbs', $this->SummitHighlightsPage()->SummitID));
         $f->add($image);

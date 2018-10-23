@@ -1,0 +1,6 @@
+---
+Name: userstoriesextensions
+---
+SangriaPage_Controller:
+  extensions:
+    - SangriaPageUserStoryExtension

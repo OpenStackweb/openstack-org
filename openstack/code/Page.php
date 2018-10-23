@@ -25,7 +25,7 @@ class Page extends SiteTree
     ];
 
     private static $has_one = [
-        'MetaImage' => 'BetterImage'
+        'MetaImage' => 'CloudImage'
     ];
 
     public function InPast($fieldname)
@@ -49,7 +49,7 @@ class Page extends SiteTree
 
 
         // metadata
-        $fields->fieldByName('Root.Main.Metadata')->push(new UploadField("MetaImage",$this->fieldLabel('MetaImage')));
+        $fields->fieldByName('Root.Main.Metadata')->push(UploadField::create("MetaImage",$this->fieldLabel('MetaImage')));
         $fields->fieldByName('Root.Main.Metadata')->push(new TextField("MetaTitle",$this->fieldLabel('MetaTitle')));
 
         $dev_tools = '<div class="field text">

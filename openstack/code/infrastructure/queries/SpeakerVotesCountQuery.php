@@ -18,7 +18,7 @@ final class SpeakerVotesCountQuery implements IQueryHandler {
      * @param IQuerySpecification $specification
      * @return IQueryResult
      */
-    public function handle(IQuerySpecification $specification)
+    public function handle(?IQuerySpecification $specification)
     {
         $res = 0;
         if($specification instanceof SummitQuerySpecification) {

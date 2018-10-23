@@ -92,4 +92,5 @@ SQL;
 SQL;
         return intval(DB::query($sql)->value()) > 0;
     }
+
 }

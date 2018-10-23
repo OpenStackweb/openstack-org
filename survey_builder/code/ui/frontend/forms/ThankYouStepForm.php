@@ -15,7 +15,7 @@
 class ThankYouStepForm extends AbstractStepForm {
 
     /**
-     * @var ISurveyRegularStep
+     * @var ISurveyStep
      */
     protected $step;
 
@@ -24,22 +24,19 @@ class ThankYouStepForm extends AbstractStepForm {
      * @param String $name
      * @param FieldList $fields
      * @param FieldList $actions
-     * @param ISurveyRegularStep $step
+     * @param ISurveyStep $step
      * @param null $validator
      */
-    function __construct($controller, $name, FieldList $fields, FieldList $actions, ISurveyRegularStep $step, $validator = null) {
+    function __construct($controller, $name, FieldList $fields, FieldList $actions, ISurveyStep $step, $validator = null) {
         parent::__construct($controller, $name, $fields, $actions, $validator);
         $this->step = $step;
     }
 
     /**
-     * @return ISurveyRegularStep
+     * @return ISurveyStep
      */
     public function CurrentStep(){
         return $this->step;
     }
 
-    public function SavePasswordForm(){
-        return new DeploymentSurveySavePasswordForm($this, 'SavePasswordForm');
-    }
 }

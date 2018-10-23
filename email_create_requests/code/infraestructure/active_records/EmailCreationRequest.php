@@ -22,13 +22,13 @@ class EmailCreationRequest extends DataObject
     ];
 
     /**
-     * @return Object
+     * @return EmailCreationRequest
      */
     public function markAsProcessed(){
         if($this->Processed) return $this;
 
         $this->Processed     = true;
-        $this->ProcessedDate = MySQLDatabase56::nowRfc2822();
+        $this->ProcessedDate = CustomMySQLDatabase::nowRfc2822();
         return $this;
     }
 }

@@ -21,7 +21,7 @@ class SurveyOrganizationQuestionTemplateUIBuilder
      * @param ISurveyAnswer $answer
      * @return FormField
      */
-    public function build(ISurveyStep $current_step, ISurveyQuestionTemplate $question, ISurveyAnswer $answer)
+    public function build(ISurveyStep $current_step, ISurveyQuestionTemplate $question, ?ISurveyAnswer $answer)
     {
         $value = null;
         if(!is_null($answer)){

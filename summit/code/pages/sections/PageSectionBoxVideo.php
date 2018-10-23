@@ -19,7 +19,7 @@ class PageSectionBoxVideo extends PageSectionBox {
     );
 
     static $has_one = array(
-        'Thumbnail' => 'BetterImage'
+        'Thumbnail' => 'CloudImage'
     );
 
     function getCMSFields() {
@@ -27,7 +27,7 @@ class PageSectionBoxVideo extends PageSectionBox {
 
         $fields->add(new TextField('YoutubeID', 'YoutubeID'));
 
-        $join_image = new UploadField('Thumbnail', 'Thumbnail');
+        $join_image = UploadField::create('Thumbnail', 'Thumbnail');
         $join_image->setAllowedMaxFileNumber(1);
         $fields->add($join_image);
 

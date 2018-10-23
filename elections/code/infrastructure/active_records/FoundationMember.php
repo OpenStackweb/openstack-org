@@ -64,7 +64,7 @@ final class FoundationMember
             }
         }
 
-        $this->owner->ResignDate = MySQLDatabase56::nowRfc2822();
+        $this->owner->ResignDate = CustomMySQLDatabase::nowRfc2822();
     }
 
     public function onBeforeDelete()

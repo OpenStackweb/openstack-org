@@ -69,7 +69,6 @@ class EditProfileForm extends SafeXSSForm
         $PhotoField->getValidator()->setAllowedMaxFileSize($size);
         $PhotoField->setCanPreviewFolder(false); // Don't show target filesystem folder on upload field
 
-
         // Biography
         $BioField = new TextAreaField('Bio', 'Bio: A Little Bit About You <em>(Optional)</em>', 10, 15);
 

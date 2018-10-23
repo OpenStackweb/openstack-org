@@ -32,7 +32,7 @@ class PresentationMediaUploadForm extends Form
 
         $fields = FieldList::create(
             FileAttachmentField::create('Slide', 'File')
-                ->setFolderName('/presentation-media/')
+                ->setFolderName(sprintf('summits/%s/presentations/%s/slides/', $presentation->SummitID, $presentation->ID))
                 ->setMaxFilesize(PresentationSlide::FileSizeLimitFrontEnd) // set up to 30 MB
                 ->setPermissions([
                     'upload' => true,

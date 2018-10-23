@@ -24,8 +24,8 @@ class CompanyEditForm extends BootstrapForm
                 new TextField ('URL', 'Company Web Address (URL)'),
                 new LiteralField('Break', '<p></p>'),
                 new LiteralField('Break', '<hr/>'),
-                $big_logo   = new FileAttachmentField('BigLogo', 'Large Company Logo'),
-	            $small_logo = new FileAttachmentField('Logo', 'Small Company Logo'),
+                $big_logo   = FileAttachmentField::create('BigLogo', 'Large Company Logo'),
+	            $small_logo = FileAttachmentField::create('Logo', 'Small Company Logo'),
                 new LiteralField('Break', '<p></p>'),
                 new LiteralField('Break', '<hr/>'),
                 new TextField('Industry', 'Industry (less than 4 Words)'),
@@ -78,8 +78,14 @@ class CompanyEditForm extends BootstrapForm
             $actionButton
         );
 
-
         parent::__construct($controller, $name, $fields, $actions);
+
+        // tiny MCE Config
+        $tinyMCE = HtmlEditorConfig::get('cms');
+        $tinyMCE->setOption('resize', 'false');
+        $tinyMCE->setOption('menubar', 'false');
+        $tinyMCE->setOption('statusbar', 'false');
+        $tinyMCE->setOption('setup', 'OnSetupTinyCompanyEditForm');
 
     }
 

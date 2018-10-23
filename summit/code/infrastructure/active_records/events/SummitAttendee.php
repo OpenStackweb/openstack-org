@@ -137,7 +137,7 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
        if($this->SummitHallCheckedIn) return;
 
        $this->SummitHallCheckedIn      = true;
-       $this->SummitHallCheckedInDate =  MySQLDatabase56::nowRfc2822();
+       $this->SummitHallCheckedInDate =  CustomMySQLDatabase::nowRfc2822();
     }
 
     public function getCMSFields()

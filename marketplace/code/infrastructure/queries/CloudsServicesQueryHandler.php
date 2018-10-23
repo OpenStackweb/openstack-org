@@ -25,7 +25,7 @@ abstract class CloudsServicesQueryHandler implements IQueryHandler {
 	 * @param IQuerySpecification $specification
 	 * @return IQueryResult
 	 */
-	public function handle(IQuerySpecification $specification){
+	public function handle(?IQuerySpecification $specification){
 
 		$class_name = $this->getClassName();
 		$sql1    = <<< SQL

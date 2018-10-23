@@ -552,7 +552,7 @@ class SummitEvent extends DataObject implements ISummitEvent
             throw new EntityValidationException('To publish this event you must define a start/end datetime!');
 
         $this->Published     = true;
-        $this->PublishedDate = MySQLDatabase56::nowRfc2822();
+        $this->PublishedDate = CustomMySQLDatabase::nowRfc2822();
     }
 
     public function setStartDate($value)

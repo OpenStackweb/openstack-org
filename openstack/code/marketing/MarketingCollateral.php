@@ -22,7 +22,7 @@ class MarketingCollateral extends DataObject {
 
     private static $has_one = array(
         'ParentPage'     => 'MarketingPage',
-        'Image'          => 'BetterImage'
+        'Image'          => 'CloudImage'
     );
 
     private static $has_many = array(
@@ -50,7 +50,7 @@ class MarketingCollateral extends DataObject {
         $image->setValidator($image_validator);
         $fields->push($image);
 
-        $files = new UploadField('CollateralFiles','Files', $this->CollateralFiles());
+        $files = UploadField::create('CollateralFiles','Files', $this->CollateralFiles());
         $files->setFolderName('marketing');
         $files->getValidator()->setAllowedMaxFileSize(40*1024*1024);
         $fields->push($files);

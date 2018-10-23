@@ -21,20 +21,20 @@ class CourseViewModel extends ViewableData {
 	 */
 	private $dto;
 	/**
-	 * @var ArrayList
+	 * @var SS_List
 	 */
 	private $locations;
 	/**
-	 * @var ArrayList
+	 * @var SS_List
 	 */
 	private $related_projects;
 
 	/**
 	 * @param CourseDTO     $dto
-	 * @param ArrayList $locations
-	 * @param ArrayList $related_projects
+	 * @param SS_List $locations
+	 * @param SS_List $related_projects
 	 */
-	public function __construct(CourseDTO $dto, ArrayList $locations = null,ArrayList $related_projects = null){
+	public function __construct(CourseDTO $dto, SS_List $locations = null, SS_List $related_projects = null){
 		$this->dto              = $dto;
 		$this->locations        = $locations;
 		$this->related_projects = $related_projects;
@@ -170,14 +170,14 @@ class CourseViewModel extends ViewableData {
 	 * @return string
 	 */
 	public function getStartDateMonth(){
-		return !is_null($this->getStartDate())?DateTimeUtils::getMonthShortName($this->getStartDate()):'';
+		return !is_null($this->getStartDate()) ? DateTimeUtils::getMonthShortName($this->getStartDate()):'';
 	}
 
 	/**
 	 * @return bool|string
 	 */
 	public function getStartDateDay(){
-		return !is_null($this->getStartDate())?DateTimeUtils::getDay($this->getStartDate()):'';
+		return !is_null($this->getStartDate()) ? DateTimeUtils::getDay($this->getStartDate()):'';
 	}
 
 	/**
@@ -195,14 +195,14 @@ class CourseViewModel extends ViewableData {
 	}
 
 	/**
-	 * @return ArrayList
+	 * @return SS_List
 	 */
 	public function getCurrentLocations(){
 		return $this->locations;
 	}
 
 	/**
-	 * @return ArrayList
+	 * @return SS_List
 	 */
 	public function getProjects(){
 		return $this->related_projects;

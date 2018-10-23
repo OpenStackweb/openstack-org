@@ -250,7 +250,7 @@ class EditProfilePage_Controller extends Page_Controller
 
                 if (!Image::get()->filter('Name', $thumbnailName)->count()) //checks if dataObject already exists, stops multiple records being created.
                 {
-                    $thumbnailObject = Object::create('BetterImage');
+                    $thumbnailObject = SS_Object::create('CloudImage');
                     $thumbnailObject->ParentID = $folderObject->ID; //assign folder of image as parent
                     $thumbnailObject->Name = $thumbnailName; //this function also sets the images Filename and title in a round about way. (see setName() in File.php)
                     $thumbnailObject->OwnerID = (Member::currentUser() ? Member::currentUser()->ID : 0); //assign current user as Owner

@@ -24,3 +24,11 @@ Injector:
     constructor:
       0: '%$SapphireTagRepository'
       1: '%$TagManager'
+  MySQLSchemaManager:
+    class: 'CustomMySQLSchemaManager'
+  CustomMySQLDatabase:
+    class: 'CustomMySQLDatabase'
+    properties:
+      connector: %$MySQLiConnector
+      schemaManager: %$MySQLSchemaManager
+      queryBuilder: %$MySQLQueryBuilder

@@ -22,7 +22,7 @@ class SummitPackagePurchaseOrder
     public function __construct($record = null, $isSingleton = false, $model = null) {
         parent::__construct($record, $isSingleton, $model);
         if($this->getIdentifier() === 0) {
-            $this->Created = MySQLDatabase56::nowRfc2822();
+            $this->Created = CustomMySQLDatabase::nowRfc2822();
         }
     }
 
@@ -70,7 +70,7 @@ class SummitPackagePurchaseOrder
     {
         if(!is_null($sender_service)) $sender_service->send($this);
         $this->Approved     = true;
-        $this->ApprovedDate = MySQLDatabase56::nowRfc2822();
+        $this->ApprovedDate = CustomMySQLDatabase::nowRfc2822();
         $this->ApprovedByID = Member::currentUserID();
     }
 
@@ -82,7 +82,7 @@ class SummitPackagePurchaseOrder
     {
         if(!is_null($sender_service)) $sender_service->send($this);
         $this->Rejected     = true;
-        $this->RejectedDate = MySQLDatabase56::nowRfc2822();
+        $this->RejectedDate = CustomMySQLDatabase::nowRfc2822();
         $this->RejectedByID = Member::currentUserID();
     }
 

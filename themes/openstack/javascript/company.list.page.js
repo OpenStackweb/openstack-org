@@ -10,6 +10,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+
+function OnSetupTinyCompanyEditForm(ed){
+    ed.onChange.add(function(ed, evt) {
+        tinyMCE.triggerSave();
+        $("#" + evt.target.id).valid();
+    });
+}
+
 jQuery(document).ready(function ($) {
 
     var tabs = $("#tabs");
@@ -42,46 +50,6 @@ jQuery(document).ready(function ($) {
     var company_edit_form = $('#CompanyEditForm_CompanyEditForm');
 
     if(company_edit_form.length>0){
-
-        tinymce.init({
-            selector: "textarea.company-description",
-            resize: false,
-            menubar: false,
-            statusbar: false,
-            setup : function(ed) {
-                ed.on('change', function(event) {
-                    tinymce.triggerSave();
-                    $("#" + event.target.id).valid();
-                });
-            }
-        });
-
-        tinymce.init({
-            selector: "textarea.company-contributions",
-            resize: false,
-            menubar: false,
-            statusbar: false,
-            setup : function(ed) {
-                ed.on('change', function(event) {
-                    tinymce.triggerSave();
-                    $("#" + event.target.id).valid();
-                });
-            }
-        });
-
-        tinymce.init({
-            selector: "textarea.company-products",
-            resize: false,
-            menubar: false,
-            statusbar: false,
-            // update validation status on change
-            setup : function(ed) {
-                ed.on('change', function(event) {
-                    tinymce.triggerSave();
-                    $("#" + event.target.id).valid();
-                });
-            }
-        });
 
         company_edit_form.validate({
             ignore: [],
