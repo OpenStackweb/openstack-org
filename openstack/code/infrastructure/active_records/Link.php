@@ -13,18 +13,15 @@
  **/
 class Link extends DataObject {
 
-	static $db = array(
+	static $db = [
 		'Label' => 'Text',
 		'URL' => 'Text',
 		'IconClass' => 'Varchar(50)',
 		'ButtonColor' => 'Color',
 		'Description' => 'HTMLText'
-	);
+	];
 	
-	static $has_one = array(
-		'Page' => 'DataObject'
-	);
-	
+
 	static $singular_name = 'Link';
 	static $plural_name = 'Links';
 	

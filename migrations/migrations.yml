@@ -116,3 +116,4 @@ migrations:
   - Survey2017To2018Migration
   - LanguagesSeedMigration
   - PresentationSpeakerLanguageMigration
+  - PageLinkMigration

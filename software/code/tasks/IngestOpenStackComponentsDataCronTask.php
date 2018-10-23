@@ -359,7 +359,7 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
 
                             if (isset($component['docs-title']) && isset($component['docs-url'])) {
                                 if (!$docsLink = $comp->DocsLink()) {
-                                    $docsLink = new Link();
+                                    $docsLink = new OpenStackComponentLink();
                                 }
                                 $docsLink->Label = $component['docs-title'];
                                 $docsLink->URL = $component['docs-url'];
@@ -371,7 +371,7 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
 
                             if (isset($component['download-title']) && isset($component['download-url'])) {
                                 if (!$downloadLink = $comp->DownloadLink()) {
-                                    $downloadLink = new Link();
+                                    $downloadLink = new OpenStackComponentLink();
                                 }
                                 $downloadLink->Label = $component['download-title'];
                                 $downloadLink->URL = $component['download-url'];
@@ -386,10 +386,10 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                             if (isset($component['links'])) {
                                 foreach ($component['links'] as $linkArray) {
                                     foreach ($linkArray as $label => $link) {
-                                        $linkObj = Link::get()->filter(['Label' => $label, 'URL' => $link])->First();
+                                        $linkObj = OpenStackComponentLink::get()->filter(['Label' => $label, 'URL' => $link])->First();
 
                                         if (!$linkObj) {
-                                            $linkObj = new Link();
+                                            $linkObj = new OpenStackComponentLink();
                                             $linkObj->Label = $label;
                                             $linkObj->URL = $link;
                                             $linkObj->write();
