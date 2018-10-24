@@ -13,4 +13,4 @@ $('a').click(function(){
 });
 
 // Photo Credit Tooltip
-$('.photo-credit').tooltip()
+$('.photo-credit').tooltip({ placement: 'left' })

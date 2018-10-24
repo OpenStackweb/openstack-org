@@ -44,7 +44,7 @@
         </div>
     </div>
 
-    <a href="#" class="photo-credit">
+    <a href="{$SummitImage.OriginalURL}" target="_blank" class="photo-credit" title="{$SummitImage.Attribution}">
         <i class="fa fa-info-circle"></i>
     </a>
 
