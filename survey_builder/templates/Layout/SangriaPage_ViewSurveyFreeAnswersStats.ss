@@ -4,7 +4,7 @@
 <script>
     var data = {
         tags: [],
-        question_title: '{$QuestionTitle}',
+        question_title: "{$QuestionTitle}",
         total_answers: {$AnswerCount},
         template_id: {$TemplateID},
         question_id: {$QuestionID}
@@ -13,10 +13,10 @@
     <% loop $Data %>
         data.tags.push({
             id: {$ID},
-            name: '{$Tag}',
-            qty: '{$Count}',
+            name: "{$Tag}",
+            qty: "{$Count}",
             active: true,
-            answer_ids: '{$AnswerIDs}'.split(',')
+            answer_ids: "{$AnswerIDs}".split(',')
         });
     <% end_loop %>
 
