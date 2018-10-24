@@ -25,13 +25,13 @@
         var compare_os_version     = is_ios ? bowser.compareVersions([os_version, '9']): 0
         var uri                    = URI(current_url);
         var hide_banner            = localStorage.hide_app_banner;
-
+        
         var has_meta_app_links = (typeof $("meta[property='al:android:url']").attr("content") != "undefined" || typeof $("meta[property='al:ios:url']").attr("content") != "undefined");
         if (is_mobile && has_meta_app_links && !hide_banner){
             var os = is_android ? 'Android' : 'IOS';
             // check if we are on RSVP page, dont show it
             console.log('uri path '+uri.path());
-            if(uri.path().indexOf('/rsvp') !== -1 ) return;
+            if(uri.path().endsWith('/rsvp')) return;
 
             var install_mobile_app_action = Cookies.get('install_mobile_app_action');
             var show_download_button      = typeof install_mobile_app_action == 'undefined';
