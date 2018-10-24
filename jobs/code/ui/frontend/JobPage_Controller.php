@@ -41,7 +41,8 @@ class JobPage_Controller extends Page_Controller {
         Requirements::javascript(THIRDPARTY_DIR . '/jquery-ui/jquery-ui.js');
         JSChosenDependencies::renderRequirements();
         JQueryValidateDependencies::renderRequirements();
-        Requirements::javascript(Director::protocol()."maps.googleapis.com/maps/api/js?sensor=false");
+        $google_map_lib_url = sprintf("https://maps.googleapis.com/maps/api/js?key=%s&sensor=false", GOOGLE_MAP_KEY);
+        Requirements::javascript($google_map_lib_url);
         Requirements::javascript("marketplace/code/ui/admin/js/geocoding.jquery.js");
         Requirements::javascript("marketplace/code/ui/admin/js/utils.js");
         Requirements::javascript('node_modules/pure/libs/pure.min.js');

@@ -51,7 +51,8 @@ final class JobRegistrationRequestPage_Controller extends Page_Controller {
         JSChosenDependencies::renderRequirements();
         JQueryValidateDependencies::renderRequirements();
 
-        Requirements::javascript(Director::protocol()."maps.googleapis.com/maps/api/js?sensor=false");
+        $google_map_lib_url = sprintf("https://maps.googleapis.com/maps/api/js?key=%s&sensor=false", GOOGLE_MAP_KEY);
+        Requirements::javascript($google_map_lib_url);
 
 		$js_files = [
 			"marketplace/code/ui/admin/js/geocoding.jquery.js",
