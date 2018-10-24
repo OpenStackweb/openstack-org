@@ -81,8 +81,7 @@ final class SangriaPageJobsExtension extends Extension {
 
 	function JobRegistrationRequestForm(){
 		$this->commonScripts();
-        $google_map_lib_url = sprintf("https://maps.googleapis.com/maps/api/js?key=%s&sensor=false", GOOGLE_MAP_KEY);
-        Requirements::javascript($google_map_lib_url);
+        GoogleMapScriptBuilder::build('false');
 		Requirements::javascript("marketplace/code/ui/admin/js/geocoding.jquery.js");
 		Requirements::css('jobs/css/job.registration.form.css');
 		Requirements::javascript("jobs/js/job.registration.form.js");
@@ -101,8 +100,7 @@ final class SangriaPageJobsExtension extends Extension {
 
     function JobForm(){
         $this->commonScripts();
-        $google_map_lib_url = sprintf("https://maps.googleapis.com/maps/api/js?key=%s&sensor=false", GOOGLE_MAP_KEY);
-        Requirements::javascript($google_map_lib_url);
+        GoogleMapScriptBuilder::renderRequirements('false');
         Requirements::javascript("marketplace/code/ui/admin/js/geocoding.jquery.js");
         Requirements::css('jobs/css/job.registration.form.css');
         Requirements::javascript("jobs/js/job.registration.form.js");

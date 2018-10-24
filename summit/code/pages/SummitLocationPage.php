@@ -389,8 +389,7 @@ class SummitLocationPage_Controller extends SummitPage_Controller
         Requirements::css('themes/openstack/javascript/secondary-nav.jquery/secondary-nav.jquery.css');
         Requirements::javascript('themes/openstack/javascript/secondary-nav.jquery/secondary-nav.jquery.js');
         if (empty($this->CampusGraphic)) {
-            $google_map_lib_url = sprintf("https://maps.googleapis.com/maps/api/js?key=%s&v=3.exp", GOOGLE_MAP_KEY);
-            Requirements::javascript($google_map_lib_url);
+            GoogleMapScriptBuilder::renderRequirements(null,"3.exp");
             Requirements::javascript("summit/javascript/host-city-map.js");
             Requirements::customScript($this->MapScript());
         }

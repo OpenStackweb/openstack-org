@@ -38,13 +38,10 @@ class PublicCloudPassportsPage_Controller extends Page_Controller
      */
     private static $allowed_actions = [];
 
-    use GoogleMapLibs;
-
     public function init()
     {
         parent::init();
-        $this->InitGoogleMapLibs();
-
+        GoogleMapScriptBuilder::renderMarkersClustered();
         Requirements::javascript('themes/openstack/javascript/urlfragment.jquery.js');
         Requirements::css("marketplace/code/ui/frontend/css/passports-page.css");
     }

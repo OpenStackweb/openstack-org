@@ -16,8 +16,6 @@
  */
 abstract class CloudsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Controller {
 
-	use GoogleMapLibs;
-
 	private static $allowed_actions = array('handleIndex','handleFilter');
 
 	/**
@@ -151,7 +149,7 @@ abstract class CloudsDirectoryPage_Controller extends MarketPlaceDirectoryPage_C
 
         JSChosenDependencies::renderRequirements();
 
-		$this->InitGoogleMapLibs();
+        GoogleMapScriptBuilder::renderMarkersClustered();
 
         Requirements::combine_files('marketplace_clouds_directory_page.js', array(
             "marketplace/code/ui/frontend/js/clouds.directory.page.js",

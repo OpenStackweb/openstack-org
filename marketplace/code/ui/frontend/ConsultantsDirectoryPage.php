@@ -23,8 +23,6 @@ class ConsultantsDirectoryPage extends MarketPlaceDirectoryPage
  */
 class ConsultantsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Controller {
 
-	use GoogleMapLibs;
-
 	static $allowed_actions = array(
         'getCurrentOfficesLocationsJson','handleIndex','handleFilter',
 	);
@@ -74,7 +72,7 @@ class ConsultantsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Contr
 
         JSChosenDependencies::renderRequirements();
 
-        $this->InitGoogleMapLibs();
+        GoogleMapScriptBuilder::renderMarkersClustered();
 
         Requirements::combine_files('marketplace_consultants_directory_page.js', array(
             "marketplace/code/ui/frontend/js/consultants.directory.page.js"

@@ -17,8 +17,6 @@
  */
 final class SangriaPageDeploymentExtension extends Extension
 {
-    use GoogleMapLibs;
-
     public function onBeforeInit()
     {
         Config::inst()->update(get_class($this), 'allowed_actions', array(
@@ -628,7 +626,7 @@ final class SangriaPageDeploymentExtension extends Extension
         $country = Convert::raw2sql(Controller::curr()->request->getVar('country'));
         Requirements::javascript("marketplace/code/ui/admin/js/utils.js");
 
-        $this->InitGoogleMapLibs();
+        GoogleMapScriptBuilder::renderMarkersClustered();
 
         if (!empty($continent)) {
             $continent_name = DB::query("SELECT Name from Continent where ID = {$continent}")->value();
@@ -969,7 +967,7 @@ SQL;
         $continent = intval(Convert::raw2sql(Controller::curr()->request->getVar('continent')));
         $country = Convert::raw2sql(Controller::curr()->request->getVar('country'));
         Requirements::javascript("marketplace/code/ui/admin/js/utils.js");
-        $this->InitGoogleMapLibs();
+        GoogleMapScriptBuilder::renderMarkersClustered();
         $template_id = self::getSurveyRange('ViewDeploymentSurveysPerRegion');
 
         if (!empty($continent)) {
@@ -1208,7 +1206,7 @@ SQL;
         $country = Convert::raw2sql(Controller::curr()->request->getVar('country'));
 
         Requirements::javascript("marketplace/code/ui/admin/js/utils.js");
-        $this->InitGoogleMapLibs();
+        GoogleMapScriptBuilder::renderMarkersClustered();
         JQueryValidateDependencies::renderRequirements();
 
         if (!empty($continent)) {

@@ -75,7 +75,6 @@
       "openstack/code/utils/traits",
       "openstack/code/utils/apis/traits",
       "openstack/code/utils/apis",
-      "googlemaps/code/traits",
       "summit/code/pages/summit_entities/traits",
       "openstack/code/utils/DB/traits",
       "openstack/code/utils/DDD/model/traits"

@@ -27,14 +27,12 @@ final class MarketPlaceLandingPage_Controller extends MarketPlacePage_Controller
 	 */
 	private $public_cloud_repository;
 
-	use GoogleMapLibs;
-
 	function init(){
 		parent::init();
 
         Requirements::css("marketplace/code/ui/frontend/css/marketplace.landing.css");
 
-		$this->InitGoogleMapLibs();
+        GoogleMapScriptBuilder::renderMarkersClustered();
 
         Requirements::combine_files('marketplace_landing.js',
             array(

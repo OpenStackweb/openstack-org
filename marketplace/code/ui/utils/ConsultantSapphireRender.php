@@ -5,7 +5,6 @@
  */
 final class ConsultantSapphireRender
 {
-    use GoogleMapLibs;
     /**
      * @var IConsultant
      */
@@ -24,8 +23,7 @@ final class ConsultantSapphireRender
 
     public function draw()
     {
-        $this->InitGoogleMapLibs();
-
+        GoogleMapScriptBuilder::renderMarkersClustered();
         Requirements::css("marketplace/code/ui/frontend/css/marketplace.css");
         Requirements::javascript("marketplace/code/ui/frontend/js/consultant.page.js");
 

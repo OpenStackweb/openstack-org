@@ -14,8 +14,6 @@
 
 class SangriaPageGerritStatisticsExtension extends Extension {
 
-    use GoogleMapLibs;
-
     public function onBeforeInit(){
         Config::inst()->update(get_class($this), 'allowed_actions', array('GerritStatisticsReport'));
         Config::inst()->update(get_class($this->owner), 'allowed_actions', array('GerritStatisticsReport'));
@@ -25,7 +23,7 @@ class SangriaPageGerritStatisticsExtension extends Extension {
 
         JQueryCoreDependencies::renderRequirements();
         BootstrapDependencies::renderRequirements();
-        $this->InitGoogleMapLibs();
+        GoogleMapScriptBuilder::renderMarkersClustered();
         Requirements::css('gerrit_ingest/css/sangria.page.gerrit.statistics.report.css');
         Requirements::javascript("marketplace/code/ui/admin/js/utils.js");
         Requirements::javascript('themes/openstack/javascript/Chart.js');

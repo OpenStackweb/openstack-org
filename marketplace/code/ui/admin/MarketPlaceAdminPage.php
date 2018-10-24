@@ -549,8 +549,7 @@ class MarketPlaceAdminPage_Controller extends AdminController
         Requirements::javascript('marketplace/code/ui/admin/js/pricing.schemas.js');
         Requirements::javascript('marketplace/code/ui/admin/js/datacenter.locations.js');
         Requirements::javascript('marketplace/code/ui/admin/js/marketplace.type.header.js');
-        $google_map_lib_url = sprintf("https://maps.googleapis.com/maps/api/js?key=%s&sensor=false", GOOGLE_MAP_KEY);
-        Requirements::javascript($google_map_lib_url);
+        GoogleMapScriptBuilder::renderRequirements('false');
         Requirements::javascript('marketplace/code/ui/admin/js/geocoding.jquery.js');
         HtmlEditorField::include_js();
         Requirements::javascript('marketplace/code/ui/admin/js/public_cloud.js');
@@ -571,8 +570,7 @@ class MarketPlaceAdminPage_Controller extends AdminController
         Requirements::javascript('marketplace/code/ui/admin/js/pricing.schemas.js');
         Requirements::javascript('marketplace/code/ui/admin/js/datacenter.locations.js');
         Requirements::javascript('marketplace/code/ui/admin/js/marketplace.type.header.js');
-        $google_map_lib_url = sprintf("https://maps.googleapis.com/maps/api/js?key=%s&sensor=false", GOOGLE_MAP_KEY);
-        Requirements::javascript($google_map_lib_url);
+        GoogleMapScriptBuilder::renderRequirements('false');
         Requirements::javascript('marketplace/code/ui/admin/js/geocoding.jquery.js');
         HtmlEditorField::include_js();
         Requirements::javascript('marketplace/code/ui/admin/js/private_cloud.js');
@@ -610,8 +608,7 @@ class MarketPlaceAdminPage_Controller extends AdminController
         Requirements::javascript('marketplace/code/ui/admin/js/spoken.languages.js');
         Requirements::javascript('marketplace/code/ui/admin/js/offices.js');
         Requirements::javascript('marketplace/code/ui/admin/js/marketplace.type.header.js');
-        $google_map_lib_url = sprintf("https://maps.googleapis.com/maps/api/js?key=%s&sensor=false", GOOGLE_MAP_KEY);
-        Requirements::javascript($google_map_lib_url);
+        GoogleMapScriptBuilder::renderRequirements('false');
         Requirements::javascript('marketplace/code/ui/admin/js/geocoding.jquery.js');
         Requirements::javascript('marketplace/code/ui/admin/js/consultant.js');
         return $this->getViewer('consultant')->process($this);
