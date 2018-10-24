@@ -14,7 +14,9 @@
 <div class="contribute-panel">
     <div class="container">
         <div class="row contribute-title">
-            Select the way you want to contribute...
+            Select a project group or view the <a href="https://docs.openstack.org/contributors/" target="_blank" style="text-decoration:underline;">Contributor Guide</a> <a href="https://docs.openstack.org/contributors/" target="_blank" class="photo-credit" title="Start with the contributor guide to get your accounts ,tools, and environments setup for developing code or documentation.">
+            <i class="fa fa-info-circle"></i>
+            </a>
         </div>
         <div class="row nav">
             <div class="col-md-5ths col-xs-6 nav-button-box">

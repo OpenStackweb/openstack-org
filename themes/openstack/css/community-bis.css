@@ -570,6 +570,11 @@ a.staff-openstack{background:url(../images/foundation-staff/icon_openstack.png) 
         margin: 10px;
     }
 
+    .contribute-title .fa {
+        font-size:.6em;
+        color:#999;
+    }
+
     .nav-button-box {
         margin-top: 20px;
         min-height: 160px;
