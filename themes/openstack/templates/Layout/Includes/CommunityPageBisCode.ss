@@ -1,7 +1,7 @@
 <div class="nav-first-group project-groups row">
     <div class="line"><div class="triangle"></div></div>
     <div class="col-md-12">
-        <h4>Select a project group</h4>
+        <h4>Select a project group or view the <a href="https://docs.openstack.org/contributors/" target="_blank">Contributor Guide</a> <a href="https://docs.openstack.org/contributors/" target="_blank" class="photo-credit" title="Start with the contributor guide to get your accounts ,tools, and environments setup for developing code or documentation."><i class="fa fa-info-circle"></i></a></h4>
     </div>
     <% loop $getCategoriesWithComponents %>
         <div class="col-md-4 col-sm-6 nav-first-group-btn">

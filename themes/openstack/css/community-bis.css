@@ -139,6 +139,16 @@
     margin-bottom: 30px;
 }
 
+.nav-first-group  a {
+    color:#3a7a1e;
+    text-decoration:underline;
+}
+
+.nav-first-group  a .fa {
+    font-size:.6em;
+    color:#999;
+}
+
 .nav-first-group .nav-first-group-btn {
     margin-bottom: 20px;
 }
@@ -568,11 +578,6 @@ a.staff-openstack{background:url(../images/foundation-staff/icon_openstack.png) 
 
     .contribute-title {
         margin: 10px;
-    }
-
-    .contribute-title .fa {
-        font-size:.6em;
-        color:#999;
     }
 
     .nav-button-box {
