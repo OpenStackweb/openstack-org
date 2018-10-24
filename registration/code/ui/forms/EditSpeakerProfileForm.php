@@ -51,15 +51,15 @@ class EditSpeakerProfileForm extends SafeXSSForm {
 
         // Upload Speaker Photo
         $PhotoField = new CustomUploadField('Photo', 'Upload a speaker photo');
-	    $PhotoField->setCanAttachExisting(false);
-	    $PhotoField->setAllowedMaxFileNumber(1);
-	    $PhotoField->setAllowedFileCategories('image');
+        $PhotoField->setCanAttachExisting(false);
+        $PhotoField->setAllowedMaxFileNumber(1);
+        $PhotoField->setAllowedFileCategories('image');
         $PhotoField->setTemplateFileButtons('CustomUploadField_FrontEndFIleButtons');
-	    $PhotoField->setFolderName('profile-images');
-	    $sizeMB = 2; // 1 MB
-	    $size = $sizeMB * 1024 * 1024; // 1 MB in bytes
-	    $PhotoField->getValidator()->setAllowedMaxFileSize($size);
-	    $PhotoField->setCanPreviewFolder(false); // Don't show target filesystem folder on upload field
+        $PhotoField->setFolderName('profile-images');
+        $sizeMB = 2; // 1 MB
+        $size = $sizeMB * 1024 * 1024; // 1 MB in bytes
+        $PhotoField->getValidator()->setAllowedMaxFileSize($size);
+        $PhotoField->setCanPreviewFolder(false); // Don't show target filesystem folder on upload field
 
         // Opt In Field
         $OptInField = new CheckboxField ('AvailableForBureau',"I'd like to be in the speaker bureau.");
@@ -110,7 +110,7 @@ class EditSpeakerProfileForm extends SafeXSSForm {
 
         // Load Existing Data if present
         if($speaker) {
-	        $this->record = $speaker;
+            $this->record = $speaker;
             $FirstNameField->setValue($speaker->FirstName);
             $LastNameField->setValue($speaker->LastName);
             $BioField->setValue($speaker->Bio);
@@ -133,7 +133,7 @@ class EditSpeakerProfileForm extends SafeXSSForm {
 
             foreach ($speaker->Languages() as $key => $language) {
                 if ($key > 4) break;
-                ${'LanguageField'.($key+1)}->setValue($language->Language);
+                ${'LanguageField'.($key+1)}->setValue($language->Name);
             }
 
             $country_array = array();
@@ -258,7 +258,7 @@ class EditSpeakerProfileForm extends SafeXSSForm {
 
             $member->write();
 
-			$form->saveInto($speaker);
+            $form->saveInto($speaker);
             $speaker->MemberID = $member->ID;
             $speaker->AdminID = Member::currentUser()->ID;
             // Attach Photo
@@ -270,11 +270,11 @@ class EditSpeakerProfileForm extends SafeXSSForm {
 
             // Languages
 
-            $speaker->removeAll();
+            $speaker->Languages()->removeAll();
 
             foreach ($data['Language'] as $lang) {
                 if (trim($lang) != '') {
-                    $spoken_lang = Language::get()->filter(['Name' => trim($lang)])->first();
+                    $spoken_lang = Language::get()->where(sprintf("LOWER(Name) = '%s'", strtolower(trim($lang))))->first();
                     if(is_null($spoken_lang)) continue;
                     $speaker->Languages()->add( $spoken_lang );
                 }
