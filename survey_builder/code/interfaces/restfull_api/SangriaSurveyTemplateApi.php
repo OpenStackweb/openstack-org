@@ -126,6 +126,7 @@ TEXT;
                     'member_email' => trim($answer->Step()->Survey()->CreatedBy()->Email),
                     'value' => trim($answer->Value),
                     'tags' => $tags,
+                    'survey_id' => intval($answer->SurveyID)
                 ];
             }
 

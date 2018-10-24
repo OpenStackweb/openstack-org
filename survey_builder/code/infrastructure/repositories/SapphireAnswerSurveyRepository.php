@@ -291,7 +291,9 @@ SQL;
         }
 
         $query = <<<SQL
-        SELECT SurveyAnswer.* FROM SurveyAnswer
+        SELECT SurveyAnswer.*, Step.SurveyID AS SurveyID
+        FROM SurveyAnswer
+        LEFT JOIN SurveyStep Step ON Step.ID = SurveyAnswer.StepID
         WHERE 
         QuestionID = {$question_id} 
         AND SurveyAnswer.Value IS NOT NULL AND SurveyAnswer.Value <> ''

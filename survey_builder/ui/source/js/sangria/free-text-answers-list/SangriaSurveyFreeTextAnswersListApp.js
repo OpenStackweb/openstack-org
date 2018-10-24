@@ -243,6 +243,10 @@ class SangriaSurveyFreeTextAnswersListApp extends React.Component {
         this.props.updateAnswerValue(this.props.template_id, this.props.question_id, answerId, val);
     }
 
+    onViewSurveyClicked(e, surveyId){
+        window.open(`/sangria/SurveyDetails/${surveyId}`, '_blank');
+    }
+
     onFilterByTag(e){
         let target = e.currentTarget;
         let val    = target.value;
@@ -416,7 +420,13 @@ class SangriaSurveyFreeTextAnswersListApp extends React.Component {
 
                             <tr key={answer.id}>
                                 <td>
-                                    <a href={`mailto:${answer.member_email}`} title={`answered by ${answer.member_email}`}>{answer.id}</a>
+                                    {answer.member_email ? (
+                                        <a href={`mailto:${answer.member_email}`} title={`answered by ${answer.member_email}`}>
+                                            {answer.id}
+                                        </a>
+                                    ) : (
+                                        <span>{answer.id}</span>
+                                    )}
                                 </td>
                                 <td className="answer-value-cell">
                                     <textarea className="answer-value-textarea" id={`answer_value_textarea_${answer.id}`} defaultValue={answer.value}>
@@ -432,8 +442,19 @@ class SangriaSurveyFreeTextAnswersListApp extends React.Component {
                                     <button type="button"
                                             title="Update Answer Value"
                                             onClick={(e) => this.onUpdateAnswerValueClicked(e, answer.id)}
-                                            className="btn btn-primary btn-sm">Update
+                                            className="btn btn-primary btn-sm">
+                                        Update
                                     </button>
+                                    {answer.survey_id > 0 &&
+                                    <button type="button"
+                                            title="View Survey"
+                                            onClick={(e) => this.onViewSurveyClicked(e, answer.survey_id)}
+                                            className="btn btn-default btn-sm"
+                                            style={{marginLeft: '10px'}}
+                                    >
+                                        View
+                                    </button>
+                                    }
                                 </td>
                             </tr>
                         )
