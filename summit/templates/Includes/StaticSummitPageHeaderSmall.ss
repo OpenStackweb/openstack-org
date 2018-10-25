@@ -55,7 +55,7 @@
         <div class="highlight">
             <span class="megaphone"></span>
             <h5>
-                <strong>Register for $999 USD</strong> before prices increase on October 24 at 11:59pm PT (October 25 at 6:59am UTC)
+                <strong>Register for $1199 USD.</strong> Day passes are also available for $499 USD.
             </h5>
         </div>
     </div>
