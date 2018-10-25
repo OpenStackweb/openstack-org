@@ -25,15 +25,17 @@ final class GoogleMapScriptBuilder
 
         if(!defined('GOOGLE_MAP_KEY'))
             throw new InvalidArgumentException('you must provide a valid google maps api key (GOOGLE_MAP_KEY) !');
-
-        Requirements::javascript(Director::protocol()."maps.googleapis.com/maps/api/js?sensor=false");
+        // base url
         $google_map_lib_url = sprintf(Director::protocol()."maps.googleapis.com/maps/api/js?key=%s", GOOGLE_MAP_KEY);
+
         if(!empty($sensor)){
             $google_map_lib_url .=  "&sensor=".$sensor;
         }
+
         if(!empty($version)){
             $google_map_lib_url .= "&v=".$version;
         }
+
         Requirements::javascript($google_map_lib_url);
     }
 
