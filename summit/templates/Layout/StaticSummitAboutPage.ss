@@ -5,8 +5,8 @@
                 <h4 class="summit-title script">The OpenStack Summit</h4>
                 <h2>Home of Open Infrastructure</h2>
                 <div class="bird"> <span></span>
-                    <h5>Purchase your ticket now! <br>
-                        <strong>$999 USD until October 24</strong></h5>
+                    <h5>Purchase your ticket now!<br>
+                        <strong>Just $1199 USD or $499 USD for Day Passes.</strong></h5>
                 </div>
             </div>
             <div class="col-lg-5 col-md-6 col-sm-12 about-buttons">
@@ -16,7 +16,7 @@
                     communities like Ansible, Ceph, Docker, Kata Containers, Kubernetes, ONAP, OpenStack, Open vSwitch, OPNFV, Zuul and more.</p>
 
                 <a class="btn btn-default" href="/summit/berlin-2018/sponsors/">Sponsor the Summit <i class="fal fa-arrow-right"></i></a>
-                <a class="btn btn-primary" href="https://openstacksummit2018berlin.eventbrite.com/?aff=BerlinSummit18" target="_blank">Register for $999 USD Now <i class="fal fa-arrow-right"></i></a>
+                <a class="btn btn-primary" href="https://openstacksummit2018berlin.eventbrite.com/?aff=BerlinSummit18" target="_blank">Register now for $1199 USD <i class="fal fa-arrow-right"></i></a>
 
             </div>
             <div class="col-md-12 session-box">
