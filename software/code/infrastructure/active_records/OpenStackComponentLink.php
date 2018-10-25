@@ -15,6 +15,6 @@
 final class OpenStackComponentLink extends Link
 {
     static $has_one = array(
-        'Component' => 'OpenStackComponen'
+        'Component' => 'OpenStackComponent'
     );
 }
