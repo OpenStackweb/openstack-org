@@ -197,13 +197,13 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="https://www.openstack.org/assets/Uploads/_resampled/SetRatioSize400400-CroppedImage28482848-Monty-Taylor-Headshot-small.jpg"
-                                alt="Monty Taylor" class="summit-user-image">
+                            <img src="https://www.openstack.org/assets/profile-images/_resampled/CroppedImage150150-Lauren-Nelson.png"
+                                alt="Lauren Nelson" class="summit-user-image">
                         </div>
                         <div class="info">
-                            <div class="name">Monty Taylor</div>
-                            <div class="title">Red Hat</div>
-                            <div class="topic">Zuul</div>
+                            <div class="name">Lauren Nelson</div>
+                            <div class="title">Forrester</div>
+                            <div class="topic">Private Cloud</div>
                         </div>
                     </div>
                 </div>
