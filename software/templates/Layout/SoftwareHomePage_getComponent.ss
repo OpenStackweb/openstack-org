@@ -18,16 +18,16 @@
                     <% if $Component.DocsLink().Exists() %>
                     <p>
                         <a href="{$Component.DocsLink().URL}" target="_blank">
-                            <i class="fa fa-book" aria-hidden="true"></i>
-                            {$Component.DocsLink().Label}
+                            <%-- do not separate icon from label --%>
+                            <i class="fa fa-book" aria-hidden="true" style="margin-right: 8px"></i><span>{$Component.DocsLink().Label}</span>
                         </a>
                     </p>
                     <% end_if %>
                     <% if $Component.DownloadLink().Exists() %>
                         <p>
                             <a href="{$Component.DownloadLink().URL}" target="_blank">
-                                <i class="fa fa-cloud-download" aria-hidden="true"></i>
-                                {$Component.DownloadLink().Label}
+                                <%-- do not separate icon from label --%>
+                                <i class="fa fa-cloud-download" aria-hidden="true" style="margin-right: 8px"></i><span>{$Component.DownloadLink().Label}</span>
                             </a>
                         </p>
                     <% end_if %>
@@ -58,6 +58,7 @@
                         <div class="col-sm-12">
                             <% loop $Component.Links() %>
                                 <a class="component-link" href="{$URL}">{$Label}</a>
+                                <% if not $Last %><span style="margin-right:10px">|</span><% end_if %>
                             <% end_loop %>
                         </div>
                     </div>
