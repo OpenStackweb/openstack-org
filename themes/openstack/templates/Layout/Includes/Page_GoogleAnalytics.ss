@@ -33,6 +33,8 @@ function recordOutboundLink(link, category, action) {
     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
     ga('create', 'UA-17511903-1', 'auto');
+    ga('require', 'linker');
+    ga('linker:autoLink', ['openstack.org, eventbrite.com'] );
     ga('require', 'GTM-5F7R6N4');
     ga('send', 'pageview');
 
