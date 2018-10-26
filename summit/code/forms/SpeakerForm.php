@@ -196,8 +196,8 @@ class SpeakerForm extends BootstrapForm
             if(empty($speaker->TwitterName))  $this->fields->fieldByName('TwitterName')->setValue($speaker->Member()->TwitterName);
         }
 
-        $this->fields->fieldByName('Expertise')->setValue(implode(',',$speaker->AreasOfExpertise()->map('ID','Expertise')->toArray()));
-        $this->fields->fieldByName('Language')->setValue(implode(',',$speaker->Languages()->map('ID','Language')->toArray()));
+        $this->fields->fieldByName('Expertise')->setValue(implode(',', $speaker->AreasOfExpertise()->map('ID','Expertise')->toArray()));
+        $this->fields->fieldByName('Language')->setValue(implode(',', $speaker->Languages()->map('ID','Name')->toArray()));
 
         $country_array = array();
         foreach ($speaker->TravelPreferences() as $pref_country) {
@@ -259,8 +259,11 @@ class SpeakerForm extends BootstrapForm
 
         $language = $this->fields->fieldByName("Language")->Value();
         $speaker->Languages()->removeAll();
-        foreach(explode(',',$language) as $lang_id) ;
-            $speaker->Languages()->add($lang_id);
+        foreach(explode(',',$language) as $lang_name) {
+            $lang = Language::get()->where(sprintf("LOWER(Name) = '%s'", strtolower($lang_name)))->first();
+            if(!$lang) continue;
+            $speaker->Languages()->add($lang);
+        }
 
         $link_ids = [];
         for($i = 1 ; $i <= 5 ; $i++ ){

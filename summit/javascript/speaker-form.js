@@ -80,7 +80,7 @@ $(document).ready(function(){
                 minlength: 3,
                 name: 'languages',
                 displayKey: 'name',
-                valueKey: 'id',
+                valueKey: 'name',
                 source: languages.ttAdapter()
             }
         ]

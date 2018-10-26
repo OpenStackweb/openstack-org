@@ -345,7 +345,6 @@ class PresentationPage_Controller extends SummitPage_Controller
         ))->renderWith(array('PresentationPage_preview', 'PresentationPage'));
     }
 
-
     /**
      * Action that shows the presentation details, readonly
      * @param   $r SS_HTTPRequest
