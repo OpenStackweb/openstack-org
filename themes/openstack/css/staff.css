@@ -16,7 +16,13 @@ h4.role {
 .staff-text-wrapper{margin-bottom:30px}
 .staff-text-wrapper h3{margin:0 0 20px}
 .staff-text-wrapper h5{color:#2A4E68;font-weight:700;margin-top:10px}
-a.staff-twitter{background:url(../images/foundation-staff/icon_twitter.png) center no-repeat;display:inline-block;width:25px;height:25px;margin-right:10px}
-a.staff-linkedin{background:url(../images/foundation-staff/icon_linkedin.png) center no-repeat;display:inline-block;width:25px;height:25px;margin-right:10px}
-a.staff-openstack{background:url(../images/foundation-staff/icon_openstack.png) center no-repeat;display:inline-block;width:25px;height:25px}
+a.staff-twitter{display:inline-block;width:25px;height:25px;top: -3px;position: relative;}
+a.staff-twitter .fa{color:#1DA1F2;font-size: 20px}
+a.staff-linkedin{display:inline-block;width:25px;height:25px;top: -3px;position: relative;}
+a.staff-linkedin .fa{color:#0077B5;font-size: 20px;}
+a.staff-wechat{display:inline-block;width:25px;height:25px;top: -3px;position: relative;}
+a.staff-wechat .fa{color:#7bb32e;font-size: 20px;}
+a.staff-contact-email{display:inline-block;margin-right:2px;width:25px;height:25px;top: -3px;position: relative;}
+a.staff-contact-email .fa{color:grey;font-size: 20px;}
+a.staff-openstack{background:url(../images/foundation-staff/icon_openstack.png) bottom / 20px 20px no-repeat;display:inline-block;width:25px;height:25px}
 .light{background:#edf2f7;width:100%;padding:60px;margin:60px 0 0;border-radius:4px;text-align:center}

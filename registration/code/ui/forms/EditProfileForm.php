@@ -93,6 +93,9 @@ class EditProfileForm extends SafeXSSForm
         $TwitterNameField = new TextField('TwitterName', 'Twitter Name <em>(Optional)</em>');
         $LinkedInProfileField = new TextField('LinkedInProfile', 'LinkedIn Profile - full URL <em>(Optional)</em>');
         $LinkedInProfileField->setAttribute('type', 'url')->setAttribute('pattern', 'https?://.+');
+        $ContactEmailField = new TextField('ContactEmail', 'Contact Email <em>(Optional)</em>');
+        $WeChatUserField = new TextField('WeChatUser', 'WeChat User <em>(Optional)</em>');
+
 
         // Associated Projects
         $release = OpenStackRelease::get()->filter('Status', 'Current')->sort('ReleaseDate','DESC')->first();
@@ -179,10 +182,12 @@ class EditProfileForm extends SafeXSSForm
             new LiteralField('instructions',
                 '<p>Your statement of interest should be a few words describing your objectives or plans for OpenStack.</p>'),
             new LiteralField('break', '<hr/>'),
+            $ContactEmailField,
             $GitHubUserField,
             $IRCHandleField,
             $TwitterNameField,
             $LinkedInProfileField,
+            $WeChatUserField,
             $BioField,
             $PhotoField,
 

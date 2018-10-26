@@ -2,24 +2,37 @@
 <div class="row">
     <div class="col-sm-2 staff-photo-wrapper">
         <div class="photo">$ProfilePhoto</div>
-            <% if TwitterName %>
-            <a class="staff-twitter" target="_blank" href="https://twitter.com/{$TwitterName}"></a>
-            <% end_if %>
-            <% if LinkedInProfile %>
-            <a class="staff-linkedin" href="{$LinkedInProfile}"></a>
-            <% end_if %>
-            <a class="staff-openstack" href="/community/members{$Link}{$ID}"></a>
+        <% if $TwitterName %>
+            <a class="staff-twitter" target="_blank" href="https://twitter.com/{$TwitterName}">
+                <i class="fa fa-twitter" aria-hidden="true"></i>
+            </a>
+        <% end_if %>
+        <% if $LinkedInProfile %>
+            <a class="staff-linkedin" href="{$LinkedInProfile}">
+                <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+            </a>
+        <% end_if %>
+        <% if $WeChatUser %>
+            <a class="staff-wechat" href="{$WeChatUser}">
+                <i class="fa fa-weixin" aria-hidden="true"></i>
+            </a>
+        <% end_if %>
+        <% if $ContactEmail %>
+            <a class="staff-contact-email" href="mailto:{$ContactEmail}">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+            </a>
+        <% end_if %>
+        <a class="staff-openstack" href="/community/members{$Link}{$ID}"></a>
     </div>
     <div class="col-sm-10 staff-text-wrapper">
         <h3>$FirstName $Surname</h3>
-        <% if Role %>
-            <h4 class="role">$Role</h4>
+        <% if $CurrentCompanies %>
+            <h4>
+                <% if $Role %> $Role at <% end_if %>
+                $CurrentCompanies
+            </h4>
         <% end_if %>
-        <h5>Company</h5>
-        <div>$CurrentCompanies&nbsp;</div>
         <h5>Bio</h5>
-        <div>
-            $Bio
-        </div>
+        <div> $Bio </div>
     </div>
 </div>

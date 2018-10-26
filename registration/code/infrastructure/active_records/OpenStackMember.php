@@ -29,6 +29,8 @@ class OpenStackMember
         'GitHubUser'             => 'Text',
         'IRCHandle'              => 'Text',
         'TwitterName'            => 'Text',
+        'ContactEmail'           => 'Text',
+        'WeChatUser'             => 'Text',
         'Projects'               => 'Text',
         'OtherProject'           => 'Text',
         'SubscribedToNewsletter' => 'Boolean',
@@ -275,6 +277,21 @@ class OpenStackMember
         $job_title = $current->JobTitle;
         if(!empty($job_title))
             $res .= ', '.$job_title;
+        return $res;
+    }
+
+    function getCurrentPositionBis()
+    {
+        $current = $this->getCurrentAffiliation();
+        if(is_null($current) || !$current) return '';
+        $org = $current->Organization();
+        $job_title = $current->JobTitle;
+        $res = '';
+        if(!empty($job_title))
+            $res .= $job_title;
+        if(!is_null($org))
+            $res = ' at '.$org->Name;
+
         return $res;
     }
 
