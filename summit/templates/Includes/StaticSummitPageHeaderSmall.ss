@@ -25,7 +25,7 @@
                     <% end_loop %>
 
                     <li class="link button-box">
-                        <a href="https://openstacksummit2018berlin.eventbrite.com/?aff=BerlinSummit" class="btn register-btn-lrg">
+                        <a href="https://www.eventbrite.com/e/openstack-summit-november-2018-berlin-tickets-41880169715?aff=BerlinSummit" class="btn register-btn-lrg">
                             Get your tickets <i class="fa fa-arrow-right"></i>
                         </a>
                     </li>
