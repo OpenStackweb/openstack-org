@@ -822,7 +822,7 @@ class Summit extends DataObject implements ISummit
             ->addOrder(QueryOrder::asc('EndDate'))
             ->addOrder(QueryOrder::asc('Title'));
 
-        $raw_schedule      = AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Presentations', $query)->toArray();
+        $raw_schedule      = AssociationFactory::getInstance()->getOne2ManyAssociation($this, 'Events', $query)->toArray();
         $filtered_schedule = [];
         foreach($raw_schedule as $event){
             if(!ScheduleManager::allowToSee($event)) continue;
