@@ -4,7 +4,7 @@
     	<div class="row">
     		<div class="col-sm-12">
                 <a href="/summit/">
-                    <img class="tokyo-landing-logo" src="/summit/images/summit-logo.svg" onerror="this.onerror=null; this.src=/summit/images/summit-logo.png" alt="OpenStack Summit">
+                    <img class="tokyo-landing-logo" src="/summit/images/summit-logo-red.svg" onerror="this.onerror=null; this.src=/summit/images/summit-logo.png" alt="OpenStack Infrastructure Summit">
                 </a>
                 <div class="save-the-date"> Save The Date! </div>
     			<h1> $IntroText </h1>
