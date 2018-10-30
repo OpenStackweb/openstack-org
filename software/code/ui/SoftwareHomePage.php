@@ -91,12 +91,14 @@ class SoftwareHomePage_Controller extends Page_Controller
         'getComponent',
         'getComponentsbyRelease',
         'getSampleConfigurations',
+        'getGovernance'
     );
 
     static $url_handlers = array
     (
         'GET project-navigator/$CATEGORY!'         => 'allComponents',
         'GET sample-configs'                       => 'getSampleConfigurations',
+        'GET governance'                           => 'getGovernance',
         'GET releases/$RELEASE_ID/components/$ID!' => 'getComponent',
         'GET releases/$RELEASE_ID/components'      => 'getComponentsbyRelease',
     );
@@ -168,7 +170,7 @@ class SoftwareHomePage_Controller extends Page_Controller
         return $this->render(array
             (
                 'CategoryId'    => $category->ID,
-                'CategorySlug'  => $category->Slug,
+                'CategorySlug'  => $categorySlug,
                 'CategoryDepth' => $category->getDepth()
             )
         );
@@ -328,6 +330,13 @@ class SoftwareHomePage_Controller extends Page_Controller
         return (isset($components[$categoryKey])) ? json_encode($components[$categoryKey]) : 0;
     }
 
+    public function getAllComponentsJSON()
+    {
+        $components = $this->manager->getAllComponents($this->getDefaultRelease());
+
+        return json_encode($components);
+    }
+
     public function getComponentCategories()
     {
         $categories = $this->manager->getComponentsGroupedByCategory($this->getDefaultRelease());
@@ -346,6 +355,20 @@ class SoftwareHomePage_Controller extends Page_Controller
     }
 
     public function getSampleConfigurations()
+    {
+        $release = $this->getDefaultRelease();
+        if(is_null($release)) return 'Default Release not set!';
+
+        return $this->render
+        (
+            array
+            (
+                'Release' => $release,
+            )
+        );
+    }
+
+    public function getGovernance()
     {
         $release = $this->getDefaultRelease();
         if(is_null($release)) return 'Default Release not set!';

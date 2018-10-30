@@ -24,7 +24,7 @@ require('./t.tag');
                     <service-box each="{ subcategory.components }" ></service-box>
                 </div>
                 <div class="col-sm-12" show="{ !opts.tiles }">
-                    <service-row each="{ subcategory.components }" ></service-row>
+                    <service-row each="{ subcategory.components }" base_url="{base_url}" release_id="{release_id}" ></service-row>
                 </div>
             </div>
         </div>

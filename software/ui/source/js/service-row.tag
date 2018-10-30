@@ -13,10 +13,12 @@ require('./t.tag');
 
     <script>
 
-        var self = this;
+        this.base_url   = opts.base_url;
+        this.release_id = opts.release_id;
+        var self        = this;
 
         coreServiceDetailsURL() {
-            var url = self.parent.base_url+'releases/'+self.parent.release_id+'/components/'+self.slug;
+            var url = self.base_url+'releases/'+self.release_id+'/components/'+self.slug;
             return url;
         }
 

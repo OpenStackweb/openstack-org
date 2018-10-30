@@ -53,6 +53,13 @@ interface ISoftwareManager
 
     /**
      * @param IOpenStackRelease $release
+     * @return array
+     */
+    public function getAllComponents(IOpenStackRelease $release);
+
+
+    /**
+     * @param IOpenStackRelease $release
      * @return IOpenStackRelease
      */
     public function cloneRelease(IOpenStackRelease $release);

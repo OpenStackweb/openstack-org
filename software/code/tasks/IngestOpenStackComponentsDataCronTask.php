@@ -169,14 +169,30 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
 
             foreach($projects as $project_name => $info)
             {
-                $component    = OpenStackComponent::get()->filter('CodeName', ucfirst($project_name))->first();
-                if(is_null($component)){
-                    $component    = OpenStackComponent::get()->filter('Name', ucfirst($project_name))->first();
-                }
                 echo sprintf('processing component %s', $project_name).PHP_EOL;
+
+                $componentCodeName = ucfirst($project_name);
+                $componentName = isset($info['service']) ? $info['service'] : $componentCodeName;
+                $componentSlug = str_replace(' ','-', strtolower($project_name));
+
+                $component = OpenStackComponent::get()
+                    ->filterAny([
+                        'CodeName'  => $componentCodeName,
+                        'Name'      => $componentName,
+                        'Slug'      => $componentSlug
+                    ])
+                    ->first();
+
                 if(is_null($component)){
-                    echo sprintf('component %s not found!', $project_name).PHP_EOL;
-                    continue;
+                    $component = new OpenStackComponent();
+                }
+
+                $component->Slug = $componentSlug;
+                $component->CodeName = $componentCodeName;
+                $component->Name = $componentName;
+
+                if (isset($info['mission'])) {
+                    $component->Description = $info['mission'];
                 }
 
                 $ptl          = isset($info['ptl']) ? $info['ptl']   : null;
