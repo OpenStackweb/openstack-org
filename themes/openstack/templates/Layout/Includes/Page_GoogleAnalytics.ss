@@ -34,7 +34,7 @@ function recordOutboundLink(link, category, action) {
 
     ga('create', 'UA-17511903-1', 'auto');
     ga('require', 'linker');
-    ga('linker:autoLink', ['openstack.org, eventbrite.com'] );
+    ga('linker:autoLink', ['openstack.org', 'eventbrite.com'] );
     ga('require', 'GTM-5F7R6N4');
     ga('send', 'pageview');
 
