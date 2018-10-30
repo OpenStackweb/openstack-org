@@ -224,6 +224,8 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                     }
                 }
 
+                $component->Tags()->removeAll();
+
                 foreach($tags as $tag)
                 {
                     if( !$tag_obj = OpenStackComponentTag::get()->filter('Name', $tag)->first() ) {
