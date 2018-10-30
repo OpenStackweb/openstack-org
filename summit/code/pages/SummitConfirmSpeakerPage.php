@@ -93,10 +93,14 @@ class SummitConfirmSpeakerPage_Controller extends SummitPage_Controller
             Session::set('Current.PresentationSpeakerSummitAssistanceConfirmationRequest', $request);
             return $this->customise($data)->renderWith(array('SummitConfirmSpeakerPage', 'SummitPage'), $this->parent);
         }
+        catch(NotFoundEntityException $ex1){
+            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
+            return $this->renderWith(array('SummitConfirmSpeakerPage_VoidToken', 'SummitPage'), $this->parent);
+        }
         catch(Exception $ex)
         {
-            SS_Log::log($ex->getMessage(), SS_Log::WARN);
-            return $this->httpError(404, 'Sorry, this speaker confirmation token does not seem to be correct.');
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            return $this->renderWith(array('SummitConfirmSpeakerPage_Error', 'SummitPage'), $this->parent);
         }
     }
 
