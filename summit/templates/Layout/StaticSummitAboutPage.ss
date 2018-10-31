@@ -326,144 +326,181 @@
                     <div class="item">
                         <h3>Spotlight Sponsors</h3>
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="http://www.emc.com"><img alt="Dell EMC_big_logo" src="/assets/companies/main_logo/EMC-lg.jpg"
-                                    class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="http://www.emc.com"><img alt="Dell EMC_big_logo" src="/assets/companies/main_logo/EMC-lg.jpg" class="big-logo-company company-logo"></a>
                         </div>
-
+                    
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="http://www.symkloud.com"><img alt="Kontron_big_logo" src="/assets/companies/main_logo/kontron-lg.jpg"
-                                    class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="http://www.symkloud.com"><img alt="Kontron_big_logo" src="/assets/companies/main_logo/kontron-lg.jpg" class="big-logo-company company-logo"></a>
                         </div>
-
+                    
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="https://www.mirantis.com/"><img alt="Mirantis_big_logo" src="/assets/companies/main_logo/mirantis-lg-van.jpg"
-                                    class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="https://www.mirantis.com/"><img alt="Mirantis_big_logo" src="/assets/companies/main_logo/mirantis-lg-van.jpg" class="big-logo-company company-logo"></a>
                         </div>
-
+                    
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="https://www.rackspace.com/cloud/openstack"><img alt="Rackspace_big_logo"
-                                    src="/assets/companies/main_logo/rackspace-lg-2016.jpg" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="https://www.nokia.com/en_int"><img alt="Nokia_big_logo" src="/assets/companies/main_logo/nokia-lg.jpg" class="big-logo-company company-logo"></a>
                         </div>
-
-
+                    
+                        <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
+                            <a rel="nofollow" href="https://www.rackspace.com/cloud/openstack"><img alt="Rackspace_big_logo" src="/assets/companies/main_logo/rackspace-lg-2016.jpg" class="big-logo-company company-logo"></a>
+                        </div>
+                    
+                        <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
+                            <a rel="nofollow" href="https://intl.cloud.tencent.com/"><img alt="Tencent Cloud_big_logo" src="/assets/companies/main_logo/Tencent-vert-lg.jpg" class="big-logo-company company-logo"></a>
+                        </div>
+                    
+                        <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
+                            <a rel="nofollow" href="http://wwwen.zte.com.cn/en/"><img alt="ZTE Corporation_big_logo" src="/assets/companies/main_logo/zte-lg.jpg" class="big-logo-company company-logo"></a>
+                        </div>
                     </div>
                     <div class="item">
                         <h3>Exhibitor Sponsors</h3>
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="http://www.ambedded.com/"><img alt="Ambedded_big_logo" src="/assets/companies/main_logo/ambedded-lg.jpg"
-                                    class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="http://www.ambedded.com/"><img alt="Ambedded_big_logo" src="/assets/companies/main_logo/ambedded-lg.jpg" class="big-logo-company company-logo"></a>
                         </div>
-
+                    
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="https://www.avinetworks.com/"><img alt="Avi Networks_big_logo" src="/assets/companies/main_logo/avi-lg.jpg"
-                                    class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="http://www.arm.com/"><img alt="ARM_big_logo" src="/assets/companies/main_logo/arm-lg2.jpg" class="big-logo-company company-logo"></a>
                         </div>
-
+                    
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="http://www.b1-systems.de/"><img alt="B1 Systems_big_logo" src="/assets/companies/main_logo/BSystems.jpg"
-                                    class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="https://www.avinetworks.com/"><img alt="Avi Networks_big_logo" src="/assets/companies/main_logo/avi-lg.jpg" class="big-logo-company company-logo"></a>
                         </div>
-
+                    
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="http://www.cloudbase.it"><img alt="Cloudbase Solutions_big_logo" src="/assets/companies/main_logo/cloudbase-lg.jpg"
-                                    class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="http://www.b1-systems.de/"><img alt="B1 Systems_big_logo" src="/assets/companies/main_logo/BSystems.jpg" class="big-logo-company company-logo"></a>
                         </div>
-
+                    
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="https://www.cumulusnetworks.com"><img alt="Cumulus Networks_big_logo"
-                                    src="/assets/companies/main_logo/cumulus-networks-lg.jpg" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="https://www.citynetworkhosting.com"><img alt="City Network_big_logo" src="/assets/companies/main_logo/_resampled/SetWidth300-CityNetwork-Logo-Regular-500px-RGB.png" class="big-logo-company company-logo"></a>
                         </div>
-
+                    
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="https://www.datadoghq.com"><img alt="Datadog Inc_big_logo" src="/assets/companies/main_logo/datadog-lg.jpg"
-                                    class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="http://www.cloudbase.it"><img alt="Cloudbase Solutions_big_logo" src="/assets/companies/main_logo/cloudbase-lg.jpg" class="big-logo-company company-logo"></a>
                         </div>
-
+                    
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="http://www.easystack.io"><img alt="EasyStack_big_logo" src="/assets/companies/main_logo/easystack-lg2.jpg"
-                                    class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="http://www.componentsoft.eu"><img alt="Component Soft_big_logo" src="/assets/companies/main_logo/componentsoft-lg-09-04.jpg" class="big-logo-company company-logo"></a>
                         </div>
-
+                    
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="https://hyper.sh/"><img alt="HyperHQ Inc._big_logo" src="/assets/companies/main_logo/hyper-lg-2.jpg"
-                                    class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="https://www.cumulusnetworks.com"><img alt="Cumulus Networks_big_logo" src="/assets/companies/main_logo/cumulus-networks-lg.jpg" class="big-logo-company company-logo"></a>
                         </div>
-
+                    
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="https://www.innovo-cloud.de/"><img alt="iNNOVO Cloud_big_logo" src="/assets/companies/main_logo/iNNOVO-logo-lg.jpg"
-                                    class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="https://www.datadoghq.com"><img alt="Datadog Inc_big_logo" src="/assets/companies/main_logo/datadog-lg.jpg" class="big-logo-company company-logo"></a>
                         </div>
-
+                    
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="https://www.juniper.net"><img alt="Juniper Networks_big_logo" src="/assets/companies/main_logo/juniper-sp-lg.jpg"
-                                    class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="http://www.easystack.io"><img alt="EasyStack_big_logo" src="/assets/companies/main_logo/easystack-lg2.jpg" class="big-logo-company company-logo"></a>
                         </div>
-
+                    
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="https://www.lenovo.com/"><img alt="Lenovo_big_logo" src="/assets/companies/main_logo/lenovo-lg.jpg"
-                                    class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="http://www.entercloudsuite.com/"><img alt="Enter Cloud Suite_big_logo" src="/assets/companies/main_logo/cloudsuite-lg-2.jpg" class="big-logo-company company-logo"></a>
                         </div>
-
+                    
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="https://www.mellanox.com/"><img alt="Mellanox_big_logo" src="/assets/companies/main_logo/mellanox-lg623.jpg"
-                                    class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="http://fairbanks.nl/"><img alt="Fairbanks_big_logo" src="/assets/companies/main_logo/_resampled/SetWidth300-FAIR-Fairbanks-logo-2016-Website-RGB-3.jpg" class="big-logo-company company-logo"></a>
                         </div>
-
+                    
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="http://www.netapp.com/us/"><img alt="NetApp_big_logo" src="/assets/companies/main_logo/netapp-sp-lg4.jpg"
-                                    class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="https://hyper.sh/"><img alt="HyperHQ Inc._big_logo" src="/assets/companies/main_logo/hyper-lg-2.jpg" class="big-logo-company company-logo"></a>
                         </div>
-
+                    
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="http://www.objectif-libre.com/"><img alt="Objectif Libre_big_logo" src="/assets/companies/main_logo/objectiflibre.jpg"
-                                    class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="https://www.innovo-cloud.de/"><img alt="iNNOVO Cloud_big_logo" src="/assets/companies/main_logo/iNNOVO-logo-lg.jpg" class="big-logo-company company-logo"></a>
                         </div>
-
+                    
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="http://www.quobyte.com/"><img alt="Quobyte Inc._big_logo" src="/assets/companies/main_logo/quobyte-lg.jpg"
-                                    class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="https://www.juniper.net"><img alt="Juniper Networks_big_logo" src="/assets/companies/main_logo/juniper-sp-lg.jpg" class="big-logo-company company-logo"></a>
                         </div>
-
+                    
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="https://www.scaleuptech.com"><img alt="ScaleUp Technologies_big_logo"
-                                    src="/assets/companies/main_logo/_resampled/SetWidth300-SU-openstack-500px.png" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="https://www.kaloom.com/"><img alt="Kaloom_big_logo" src="/assets/companies/main_logo/kaloom-lg.jpg" class="big-logo-company company-logo"></a>
                         </div>
-
+                    
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="https://www.sevone.com"><img alt="SevOne_big_logo" src="/assets/companies/main_logo/sevone.jpg"
-                                    class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="https://www.lenovo.com/"><img alt="Lenovo_big_logo" src="/assets/companies/main_logo/lenovo-lg.jpg" class="big-logo-company company-logo"></a>
                         </div>
-
+                    
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="http://storagemadeeasy.com"><img alt="Storage Made Easy_big_logo" src="/assets/companies/main_logo/sme-large.jpg"
-                                    class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="https://www.mellanox.com/"><img alt="Mellanox_big_logo" src="/assets/companies/main_logo/mellanox-lg623.jpg" class="big-logo-company company-logo"></a>
                         </div>
-
+                    
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="http://storpool.com"><img alt="StorPool Storage_big_logo" src="/assets/companies/main_logo/storpool.jpg"
-                                    class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="http://www.netapp.com/us/"><img alt="NetApp_big_logo" src="/assets/companies/main_logo/netapp-sp-lg4.jpg" class="big-logo-company company-logo"></a>
                         </div>
-
+                    
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="http://www.triliodata.com"><img alt="TrilioData_big_logo" src="/assets/companies/main_logo/trilionew-lg2.jpg"
-                                    class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="http://www.nttdata.co.jp/en/"><img alt="NTT Data_big_logo" src="/assets/companies/main_logo/NTT-Data-lg.jpg" class="big-logo-company company-logo"></a>
                         </div>
-
+                    
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="http://vexxhost.com"><img alt="VEXXHOST, Inc._big_logo" src="/assets/companies/main_logo/vexxhost-new-lg.png"
-                                    class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="http://www.objectif-libre.com/"><img alt="Objectif Libre_big_logo" src="/assets/companies/main_logo/objectiflibre.jpg" class="big-logo-company company-logo"></a>
                         </div>
-
-
+                    
+                        <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
+                            <a rel="nofollow" href="https://www.oerlikon.com/en/"><img alt="Oerlikon_big_logo" src="/assets/companies/main_logo/oerlikon-lg.jpg" class="big-logo-company company-logo"></a>
+                        </div>
+                    
+                        <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
+                            <a rel="nofollow" href="https://www.ovh.com"><img alt="OVH_big_logo" src="/assets/companies/main_logo/ovh-lg.jpg" class="big-logo-company company-logo"></a>
+                        </div>
+                    
+                        <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
+                            <a rel="nofollow" href="http://www.purestorage.com/"><img alt="Pure Storage_big_logo" src="/assets/companies/main_logo/purestorage-lg.jpg" class="big-logo-company company-logo"></a>
+                        </div>
+                    
+                        <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
+                            <a rel="nofollow" href="http://www.quobyte.com/"><img alt="Quobyte Inc._big_logo" src="/assets/companies/main_logo/quobyte-lg.jpg" class="big-logo-company company-logo"></a>
+                        </div>
+                    
+                        <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
+                            <a rel="nofollow" href="https://www.scaleuptech.com"><img alt="ScaleUp Technologies_big_logo" src="/assets/companies/main_logo/_resampled/SetWidth300-SU-openstack-500px.png" class="big-logo-company company-logo"></a>
+                        </div>
+                    
+                        <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
+                            <a rel="nofollow" href="https://www.sevone.com"><img alt="SevOne_big_logo" src="/assets/companies/main_logo/sevone.jpg" class="big-logo-company company-logo"></a>
+                        </div>
+                    
+                        <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
+                            <a rel="nofollow" href="https://softiron.com/"><img alt="SoftIron_big_logo" src="/assets/companies/main_logo/SoftIron-lg.jpg" class="big-logo-company company-logo"></a>
+                        </div>
+                    
+                        <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
+                            <a rel="nofollow" href="http://storagemadeeasy.com"><img alt="Storage Made Easy_big_logo" src="/assets/companies/main_logo/sme-large.jpg" class="big-logo-company company-logo"></a>
+                        </div>
+                    
+                        <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
+                            <a rel="nofollow" href="http://storpool.com"><img alt="StorPool Storage_big_logo" src="/assets/companies/main_logo/storpool.jpg" class="big-logo-company company-logo"></a>
+                        </div>
+                    
+                        <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
+                            <a rel="nofollow" href="http://supermicro.com"><img alt="Supermicro_big_logo" src="/assets/companies/main_logo/supermicro-lg.jpg" class="big-logo-company company-logo"></a>
+                        </div>
+                    
+                        <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
+                            <a rel="nofollow" href="https://www.syseleven.de/"><img alt="SysEleven_big_logo" src="/assets/companies/main_logo/syseleven-lg3.jpg" class="big-logo-company company-logo"></a>
+                        </div>
+                    
+                        <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
+                            <a rel="nofollow" href="http://www.triliodata.com"><img alt="TrilioData_big_logo" src="/assets/companies/main_logo/trilionew-lg2.jpg" class="big-logo-company company-logo"></a>
+                        </div>
+                    
+                        <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
+                            <a rel="nofollow" href="http://vexxhost.com"><img alt="VEXXHOST, Inc._big_logo" src="/assets/companies/main_logo/vexxhost-new-lg.png" class="big-logo-company company-logo"></a>
+                        </div>
+                    
+                        <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
+                            <a rel="nofollow" href="http://www.windriver.com"><img alt="Wind River_big_logo" src="/assets/companies/main_logo/windriverlg.jpg" class="big-logo-company company-logo"></a>
+                        </div>
+                    
+                        <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
+                            <a rel="nofollow" href="https://www.zenko.io/"><img alt="Zenko_big_logo" src="/assets/companies/main_logo/zenko-lg2.jpg" class="big-logo-company company-logo"></a>
+                        </div>
                     </div>
                     <div class="item">
                         <h3>Media Partners</h3>
-
-                        <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="http://thenewstack.io/"><img alt="The New Stack_big_logo" src="/assets/companies/main_logo/thenewstack-sp-lg.jpg"
-                                    class="big-logo-company company-logo"></a>
-                        </div>
-
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
                             <a rel="nofollow" href="www.superuser.openstack.org"><img alt="Superuser Long Logo_big_logo"
                                     src="/assets/companies/main_logo/superuser-lg.jpg" class="big-logo-company company-logo"></a>
