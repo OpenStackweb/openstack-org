@@ -125,11 +125,13 @@ final class SoftwareManager implements ISoftwareManager
 
     /**
      * @param IOpenStackRelease $release
+     * @param string $sort
+     * @param string $sort_dir
      * @return array
      */
-    public function getAllComponents(IOpenStackRelease $release)
+    public function getAllComponents(IOpenStackRelease $release, $sort = 'CodeName', $sort_dir = 'ASC')
     {
-        $components         = $release->getOpenStackComponentsFiltered();
+        $components         = $release->OpenStackComponents()->sort($sort, $sort_dir);
         $components_array   = [];
 
         foreach ($components as $component) {

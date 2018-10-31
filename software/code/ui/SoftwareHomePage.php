@@ -332,7 +332,7 @@ class SoftwareHomePage_Controller extends Page_Controller
 
     public function getAllComponentsJSON()
     {
-        $components = $this->manager->getAllComponents($this->getDefaultRelease());
+        $components = $this->manager->getAllComponents($this->getDefaultRelease(), 'CodeName', 'ASC');
 
         return json_encode($components);
     }

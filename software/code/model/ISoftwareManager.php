@@ -53,9 +53,11 @@ interface ISoftwareManager
 
     /**
      * @param IOpenStackRelease $release
+     * @param string $sort
+     * @param string $sort_dir
      * @return array
      */
-    public function getAllComponents(IOpenStackRelease $release);
+    public function getAllComponents(IOpenStackRelease $release, $sort = 'CodeName', $sort_dir = 'ASC');
 
 
     /**
