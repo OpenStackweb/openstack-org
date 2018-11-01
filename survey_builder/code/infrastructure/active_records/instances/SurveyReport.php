@@ -96,11 +96,12 @@ class SurveyReport extends DataObject {
     {
         $report_map = [];
         $filters    = [];
+
         foreach ($this->Filters()->sort('Order') as $filter) {
             $options = [];
 
             if ($filter->Question()->Exists()) {
-                foreach ($filter->Question()->Values() as $option) {
+                foreach ($filter->Question()->getValues() as $option) {
                     $options[] = ['id' => $option->ID, 'value' => $option->Value];
                 }
             }

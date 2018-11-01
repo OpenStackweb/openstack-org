@@ -61,7 +61,6 @@ class SurveyReportSection extends DataObject {
             $total_answers = $answers['total'];
             $answers       = $answers['answers'];
 
-
             if (in_array($question->Name, $expand_questions)) {
                 foreach ($question->getDependers() as $depender_question) {
                     if ($depender_question->is_a('SurveyCheckBoxListQuestionTemplate')) {
@@ -85,7 +84,7 @@ class SurveyReportSection extends DataObject {
                 if ($question->Name == 'NetPromoter') {
                     $values = array('Detractor' => 0, 'Neutral' => 0, 'Promoter' => 0);
                 } else {
-                    foreach ($question->Values() as $value_temp) {
+                    foreach ($question->getValues() as $value_temp) {
                         $values[$value_temp->Value] = 0;
                     }
 
