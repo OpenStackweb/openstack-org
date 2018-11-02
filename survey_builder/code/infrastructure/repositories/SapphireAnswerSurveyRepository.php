@@ -71,6 +71,60 @@ final class SapphireAnswerSurveyRepository
         return ['answers' => $answers, 'total' => $total_answers];
     }
 
+    /**
+     * @param int $question_id
+     * @param array $filters
+     * @return ArrayList
+     */
+    public function getContinentAnswers($question_id, $filters = null)
+    {
+        $q        = SurveyQuestionTemplate::get_by_id('SurveyQuestionTemplate',$question_id);
+        $template = $q->Step()->SurveyTemplate();
+
+        // exclude lang filter
+        $lang          = "ALL";
+        $final_filters = [];
+        foreach($filters as $filter){
+            if($filter->id == SurveyReport::LanguageFilterId){
+                $lang = trim($filter->value);
+                continue;
+            }
+            $final_filters[] = $filter;
+        }
+
+        $filter_query = $this->getFiltersQuery($final_filters, $q);
+
+        $answers_query = "  SELECT C.Name AS `Value`
+                            FROM Continent_Countries CC LEFT JOIN Continent C ON C.ID = CC.ContinentID, 
+                            SurveyAnswer ANS
+                            LEFT JOIN SurveyStep STP ON STP.ID = ANS.StepID";
+
+        if ($template->ClassName == 'EntitySurveyTemplate') {
+            $answers_query .= " LEFT JOIN EntitySurvey ES ON ES.ID = STP.SurveyID
+                               LEFT JOIN Survey S ON S.ID = ES.ParentID";
+        } else {
+            $answers_query .= " LEFT JOIN Survey S ON S.ID = STP.SurveyID";
+        }
+
+        $answers_query .= " WHERE S.IsTest = 0 
+            AND ANS.QuestionID = {$question_id} 
+            AND ANS.`Value` IS NOT NULL 
+            AND ANS.Value LIKE CONCAT('%', CC.CountryCode, '%')";
+
+        if($lang !== "ALL"){
+            $answers_query .= " AND Lang = '{$lang}' ";
+        }
+        $answers_query .= $filter_query;
+
+        $query_result   = DB::query($answers_query);
+        $answers       = $this->mapAnswers($question_id, $query_result);
+        $total_answers = $this->SurveyBuilderSurveyCountByQuestion($q, $filters);
+
+        //die($answers_query);
+
+        return ['answers' => $answers, 'total' => $total_answers];
+    }
+
     public function getFiltersQuery($filters, $question) {
         $filter_query = "";
         $q_survey_template = $question->Step()->SurveyTemplate();
@@ -87,23 +141,47 @@ final class SapphireAnswerSurveyRepository
                     $table_join = "FES.ID = ES.ID";
                 }
 
-                $filter_query .= "
+                if ($filter_q->is_a('SurveyDropDownQuestionTemplate') && $filter_q->isCountrySelector()) {
+                    $filter_query .= "
+                    AND EXISTS (
+                    SELECT FANS.ID AS FilterAnswers
+                    FROM Continent_Countries CC, SurveyAnswer FANS
+                    INNER JOIN SurveyStep FSTP ON FSTP.ID = FANS.StepID";
+                    if ($filter_template->ClassName == 'EntitySurveyTemplate') {
+                        $filter_query .= "
+                    INNER JOIN EntitySurvey FES ON FES.ID = FSTP.SurveyID
+                    INNER JOIN Survey FS ON FS.ID = FES.ParentID";
+                    } else {
+                        $filter_query .= "
+                    INNER JOIN Survey FS ON FS.ID = FSTP.SurveyID";
+                    }
+                    $filter_query .= "
+                    WHERE {$table_join} AND FS.IsTest = 0
+                    AND FANS.QuestionID = {$filter->id}
+                    AND FANS.Value LIKE  CONCAT('%', CC.CountryCode, '%') AND CC.ContinentID ='{$filter->value}'
+                    GROUP BY FANS.ID)";
+
+                } else {
+                    $filter_query .= "
                     AND EXISTS (
                     SELECT FANS.ID AS FilterAnswers
                     FROM SurveyAnswer FANS
                     INNER JOIN SurveyStep FSTP ON FSTP.ID = FANS.StepID";
-                if ($filter_template->ClassName == 'EntitySurveyTemplate') {
-                    $filter_query .= "
+                    if ($filter_template->ClassName == 'EntitySurveyTemplate') {
+                        $filter_query .= "
                     INNER JOIN EntitySurvey FES ON FES.ID = FSTP.SurveyID
                     INNER JOIN Survey FS ON FS.ID = FES.ParentID";
-                } else {
-                    $filter_query .= "
+                    } else {
+                        $filter_query .= "
                     INNER JOIN Survey FS ON FS.ID = FSTP.SurveyID";
-                }
-                $filter_query .= "
+                    }
+                    $filter_query .= "
                     WHERE {$table_join} AND FS.IsTest = 0
                     AND FANS.QuestionID = {$filter->id}
                     AND FIND_IN_SET('{$filter->value}',FANS.`Value`) > 0)";
+                }
+
+
             }
         }
 

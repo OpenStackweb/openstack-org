@@ -99,11 +99,19 @@ class SurveyReport extends DataObject {
 
         foreach ($this->Filters()->sort('Order') as $filter) {
             $options = [];
+            $question = $filter->Question();
 
-            if ($filter->Question()->Exists()) {
-                foreach ($filter->Question()->getValues() as $option) {
-                    $options[] = ['id' => $option->ID, 'value' => $option->Value];
+            if ($question->Exists()) {
+                if($question->is_a('SurveyDropDownQuestionTemplate') && $question->isCountrySelector()) {
+                    foreach(Continent::get() as $option) {
+                        $options[] = ['id' => $option->ID, 'value' => $option->Name];
+                    }
+                } else {
+                    foreach ($question->getValues() as $option) {
+                        $options[] = ['id' => $option->ID, 'value' => $option->Value];
+                    }
                 }
+
             }
 
             $filters[] = [
