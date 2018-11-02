@@ -15,7 +15,7 @@
                     Infrastructure, CI/CD, Telecom + NFV, Public Cloud, Private & Hybrid Cloud and members of open source
                     communities like Ansible, Ceph, Docker, Kata Containers, Kubernetes, ONAP, OpenStack, Open vSwitch, OPNFV, Zuul and more.</p>
 
-                <a class="btn btn-default" href="/summit/berlin-2018/sponsors/">Sponsor the Summit <i class="fal fa-arrow-right"></i></a>
+                <a class="btn btn-default" href="/summit/berlin-2018/sponsors/">Meet the Sponsors <i class="fal fa-arrow-right"></i></a>
                 <a class="btn btn-primary" href="https://www.eventbrite.com/e/openstack-summit-november-2018-berlin-tickets-41880169715?aff=BerlinSummit18" target="_blank">Register now for $1199 USD <i class="fal fa-arrow-right"></i></a>
 
             </div>
@@ -615,11 +615,11 @@
 
             <div class="col-lg-4 col-md-4 col-sm-12">
                 <div class="box light item">
-                    <h4>Visa Information</h4>
-                    <p>Check to see if you require a visa for Germany and request your letter by October 30, 2018.
+                    <h4>Berlin Travel Guide</h4>
+                    <p>You're going to Berlin! Where should you go? Take a look at this handy travel guide.
                     </p>
 
-                    <a class="btn" href="https://www.openstack.org/summit/berlin-2018/travel/#travel-support">Learn more <i class="fa fa-arrow-right"></i></a>
+                    <a class="btn" href="https://www.openstack.org/assets/berlin-summit/Berlin18-Summit-City-Guide-112.pdf">Download <i class="fa fa-download"></i></a>
                 </div>
 
 
