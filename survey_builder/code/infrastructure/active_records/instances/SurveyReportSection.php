@@ -91,6 +91,7 @@ class SurveyReportSection extends DataObject {
                     $values = array('Detractor' => 0, 'Neutral' => 0, 'Promoter' => 0);
                 } else if ($question->is_a('SurveyDropDownQuestionTemplate') && $question->isCountrySelector()) {
                     $values = array_combine(Continent::get()->column('Name'), [0,0,0,0,0,0,0,0]);
+                    $values['Prefer not to say'] = 0;
                 } else {
                     foreach ($question->getValues() as $value_temp) {
                         $values[$value_temp->Value] = 0;
@@ -167,6 +168,11 @@ class SurveyReportSection extends DataObject {
                         }
                     }
                 }
+            }
+
+            // remove empty continents
+            if ($question->is_a('SurveyDropDownQuestionTemplate') && $question->isCountrySelector()) {
+                $values = array_filter($values);
             }
 
             $questions[] = [

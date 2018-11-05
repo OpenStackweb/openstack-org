@@ -79,7 +79,6 @@ final class SapphireAnswerSurveyRepository
     public function getContinentAnswers($question_id, $filters = null)
     {
         $q        = SurveyQuestionTemplate::get_by_id('SurveyQuestionTemplate',$question_id);
-        $template = $q->Step()->SurveyTemplate();
 
         // exclude lang filter
         $lang          = "ALL";
@@ -99,25 +98,41 @@ final class SapphireAnswerSurveyRepository
                             SurveyAnswer ANS
                             LEFT JOIN SurveyStep STP ON STP.ID = ANS.StepID";
 
-        if ($template->ClassName == 'EntitySurveyTemplate') {
-            $answers_query .= " LEFT JOIN EntitySurvey ES ON ES.ID = STP.SurveyID
+        $answers_query .= " LEFT JOIN EntitySurvey ES ON ES.ID = STP.SurveyID
                                LEFT JOIN Survey S ON S.ID = ES.ParentID";
-        } else {
-            $answers_query .= " LEFT JOIN Survey S ON S.ID = STP.SurveyID";
-        }
 
         $answers_query .= " WHERE S.IsTest = 0 
             AND ANS.QuestionID = {$question_id} 
             AND ANS.`Value` IS NOT NULL 
-            AND ANS.Value LIKE CONCAT('%', CC.CountryCode, '%')";
+            AND ANS.`Value` REGEXP CONCAT('(^|,)', CC.CountryCode,'(,|$)')";
 
         if($lang !== "ALL"){
             $answers_query .= " AND Lang = '{$lang}' ";
         }
         $answers_query .= $filter_query;
 
+        // count 'Prefer not to say'
+
+        $not_answers_query = "
+          SELECT 'Prefer not to say' AS `Value` FROM SurveyAnswer ANS 
+          LEFT JOIN SurveyStep STP ON STP.ID = ANS.StepID
+          LEFT JOIN EntitySurvey ES ON ES.ID = STP.SurveyID
+          LEFT JOIN Survey S ON S.ID = ES.ParentID
+          WHERE S.IsTest = 0
+          AND ANS.QuestionID = {$question_id} 
+          AND ANS.`Value` LIKE '%Prefer not to say%'";
+
+        if($lang !== "ALL"){
+            $not_answers_query .= " AND Lang = '{$lang}' ";
+        }
+
+        $not_answers_query .= $filter_query;
+
+        $not_answers = DB::query($not_answers_query)->column();
+
         $query_result   = DB::query($answers_query);
         $answers       = $this->mapAnswers($question_id, $query_result);
+        $answers->merge($not_answers);
         $total_answers = $this->SurveyBuilderSurveyCountByQuestion($q, $filters);
 
         //die($answers_query);
