@@ -760,7 +760,9 @@ class Summit extends DataObject implements ISummit
         $query->addAndCondition(QueryCriteria::equal('Published', 1));
         if (!is_null($day)) {
             if (!$day instanceof DateTime) {
-                $day = new DateTime($day);
+                $day = DateTime::createFromFormat('Y-m-d', $day);
+                if($day === false)
+                    $day = DateTime::createFromFormat("Y-m-d H:i:s", $this->ScheduleDefaultStartDate);
             }
 
             $start = $day->setTime(0, 0, 0)->format("Y-m-d H:i:s");

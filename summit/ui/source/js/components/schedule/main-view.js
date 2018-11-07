@@ -35,7 +35,17 @@ class MainView extends Component {
         const {
             view,
             ScheduleProps: { month, summit }
-        } = this.props
+        } = this.props;
+
+        let currentValue = summit.schedule_default_day;
+        for(var day of Object.keys(summit.dates)){
+            if(view.value == day){
+                currentValue = view.value;
+                break;
+            }
+        }
+        // check if current value belongs to summit
+
         return (
         <nav className="navbar navbar-default navbar-days">
             <div>
@@ -61,7 +71,7 @@ class MainView extends Component {
                     {Object.keys(summit.dates).map(dateId => {
                         const day = summit.dates[dateId]
                         return (
-                        <li key={dateId} className={dateId === view.value ? 'active day-selected' : null}>
+                        <li key={dateId} className={dateId === currentValue ? 'active day-selected' : null}>
                             <a onClick={e => this.changeView(e, view.type, dateId)}
                             href="#" className="day-label">
                                 {day.label}
