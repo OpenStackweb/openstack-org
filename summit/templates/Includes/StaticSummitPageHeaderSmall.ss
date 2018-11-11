@@ -55,7 +55,7 @@
         <div class="highlight">
             <span class="megaphone"></span>
             <h5>
-                <strong>The Berlin Summit is now underway</strong> with 200+ sessions, workshops and trainings! Join the conversation #OpenStackSummit.
+                <strong>The Berlin Summit is underway</strong> with 200+ sessions, workshops and trainings! Join the conversation #OpenStackSummit.
             </h5>
         </div>
     </div>

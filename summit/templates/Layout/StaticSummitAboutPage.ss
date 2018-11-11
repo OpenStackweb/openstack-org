@@ -5,7 +5,7 @@
                 <h4 class="summit-title script">The OpenStack Summit</h4>
                 <h2>Home of Open Infrastructure</h2>
                 <div class="bird"> <span></span>
-                    <h5>JJoin the conversation<br>
+                    <h5>Join the conversation<br>
                         <strong>#OpenStackSummit</strong></h5>
                 </div>
             </div>
