@@ -49,6 +49,7 @@
     float: left;
     margin-bottom: -1px;
     position: relative;
+    height: 43px;
 }
 .software-tab-wrapper ul.project-tabs li.active a {
     background: #edf2f7;
