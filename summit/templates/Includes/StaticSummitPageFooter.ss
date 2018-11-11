@@ -3,10 +3,10 @@
         <div class="row">
             <div class="col-md-6 col-sm-12">
                 <div class="button-wrapper">
-                    <a href="https://www.eventbrite.com/e/openstack-summit-november-2018-berlin-tickets-41880169715?aff=BerlinSummit2018" class="btn register-btn-lrg">
+                    <!-- <a href="https://www.eventbrite.com/e/openstack-summit-november-2018-berlin-tickets-41880169715?aff=BerlinSummit2018" class="btn register-btn-lrg">
                         Register for $1199 USD now
                         <i class="fa fa-arrow-right"></i>
-                    </a>
+                    </a> -->
                     <div class="links">
 
                         <a href="https://www.openstack.org/summit/berlin-2018/faq/">FAQ</a>

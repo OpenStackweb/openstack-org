@@ -24,11 +24,11 @@
                     </li>
                     <% end_loop %>
 
-                    <li class="link button-box">
+                    <!-- <li class="link button-box">
                         <a href="https://www.eventbrite.com/e/openstack-summit-november-2018-berlin-tickets-41880169715?aff=BerlinSummit" class="btn register-btn-lrg">
                             Get your tickets <i class="fa fa-arrow-right"></i>
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </div>
@@ -55,7 +55,7 @@
         <div class="highlight">
             <span class="megaphone"></span>
             <h5>
-                <strong>Register for $1199 USD.</strong> Day passes are also available for $499 USD.
+                <strong>The Berlin Summit is now underway</strong> with 200+ sessions, workshops and trainings! Join the conversation #OpenStackSummit.
             </h5>
         </div>
     </div>
