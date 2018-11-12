@@ -4,7 +4,7 @@
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-                    aria-expanded="false">
+                        aria-expanded="false">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -19,16 +19,15 @@
                         <a href="{$getSummitAboutPageLink}">About</a>
                     </li>
                     <% loop $Menu(3) %>
-                    <li class="{$LinkingMode}">
-                        <a href="{$Link}">$MenuTitle</a>
-                    </li>
+                        <li class="{$LinkingMode}">
+                            <a href="{$Link}">$MenuTitle</a>
+                        </li>
                     <% end_loop %>
-
-                    <!-- <li class="link button-box">
-                        <a href="https://www.eventbrite.com/e/openstack-summit-november-2018-berlin-tickets-41880169715?aff=BerlinSummit" class="btn register-btn-lrg">
-                            Get your tickets <i class="fa fa-arrow-right"></i>
+                    <li class="link button-box">
+                        <a href="/summit/berlin-2018/summit-schedule/global-search?t=Registration" class="btn register-btn-lrg">
+                            Register OnSite <i class="fa fa-arrow-right"></i>
                         </a>
-                    </li> -->
+                    </li>
                 </ul>
             </div>
         </div>
@@ -42,7 +41,7 @@
                 <h5>
                     <strong>CityCube</strong>
                 </h5>
-                 <!-- <span class="arrow left"></span><span class="arrow right"></span> -->
+                <!-- <span class="arrow left"></span><span class="arrow right"></span> -->
             </div>
         </div>
     </div>
@@ -55,7 +54,7 @@
         <div class="highlight">
             <span class="megaphone"></span>
             <h5>
-                <strong>The Berlin Summit is underway</strong> with 200+ sessions, workshops and trainings! Join the conversation #OpenStackSummit.
+                <strong>OnSite registration opens today</strong> at 1pm at the CityCube.
             </h5>
         </div>
     </div>
