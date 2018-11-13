@@ -54,7 +54,7 @@
         <div class="highlight">
             <span class="megaphone"></span>
             <h5>
-                <strong>OnSite registration opens today</strong> at 1pm at the CityCube.
+                <strong>OnSite registration is open</strong> at CityCube.
             </h5>
         </div>
     </div>
