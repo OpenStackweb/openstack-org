@@ -143,7 +143,7 @@ class SurveyAnalyticsApp extends React.Component {
         return(
             <div>
                 <AjaxLoader show={ this.props.loading } size={ 120 }/>
-                <h1>OpenStack Survey Report - BETA</h1>
+                <h1>OpenStack Survey Report</h1>
                 <div className="container">
                     <div className="report_templates_container">
                         <select ref={(input) => this.selectReportTemplates = input}  id="report-templates" className="form-control" onChange={this.onChangeTemplate}>
