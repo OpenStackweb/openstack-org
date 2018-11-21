@@ -14,6 +14,8 @@
  **/
 class PresentationSlide extends PresentationMaterial
 {
+    const FileSizeLimitAdmin = 100; // in MB
+    const FileSizeLimitFrontEnd = 50; // in MB
     /**
      * @var array
      */
@@ -39,7 +41,7 @@ class PresentationSlide extends PresentationMaterial
         $f->addFieldToTab('Root.Main', new TextField('Link', 'Slide Link'));
         $f->addFieldToTab('Root.Main', $upload_field = new UploadField('Slide', 'Slide File'));
         $upload_field->setAllowedMaxFileNumber(1);
-        $upload_field->getValidator()->setAllowedMaxFileSize(array('*' => 5 * 1024 * 1024));
+        $upload_field->getValidator()->setAllowedMaxFileSize(['*' => self::FileSizeLimitAdmin * 1024 * 1024]);
         $upload_field->setFolderName(sprintf('summits/%s/presentations/%s/slides/', $_REQUEST['SummitID'], $_REQUEST['SummitEventID']));
         return $f;
     }
