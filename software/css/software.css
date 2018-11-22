@@ -1368,11 +1368,11 @@ img.openstack-diagram {
   color: white;
   border-radius: 4px;
   -moz-border-radius: 4px;
-  -webkit-border-radius: 4px; }
+  -webkit-border-radius: 4px;
+  opacity: 1;
+  white-space: nowrap;
+}
 
-.tooltip {
-  background: none;
-  white-space: nowrap; }
 
 img.security-badge {
   width: 165px;

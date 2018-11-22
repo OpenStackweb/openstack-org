@@ -8,10 +8,10 @@
     <div class="container inner-software">
         <!-- Begin Page Content -->
         <div class="row project-details-intro">
-            <div class="col-lg-2 col-md-2 col-sm-2">
+            <div class="col-md-2 col-sm-2">
                 <img src="/software/images/mascots/{$Component.MascotRef}.png" width="100%">
             </div>
-            <div class="col-lg-6 col-md-5 col-sm-4">
+            <div class="col-md-10 col-sm-10">
                 <h2>$Component.CodeName <i class="<% if $Component.Mascot %>$Component.Mascot.Name<% else %>Barbican<% end_if %>"></i></h2>
                 <h4>$Component.Name</h4>
                 <div class="project-intro-links">
@@ -57,6 +57,19 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <% loop $Component.Links() %>
+                                <a class="component-link" href="{$URL}">{$Label}</a>
+                                <% if not $Last %><span style="margin-right:10px">|</span><% end_if %>
+                            <% end_loop %>
+                        </div>
+                    </div>
+                <% end_if %>
+
+                <% if $Component.SupportTeamsLinks().Count %>
+                    <hr style="margin: 40px 0;">
+                    <h4><%t Software.SUPPORTING_TEAMS 'Suporting Teams' %></h4>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <% loop $Component.SupportTeamsLinks() %>
                                 <a class="component-link" href="{$URL}">{$Label}</a>
                                 <% if not $Last %><span style="margin-right:10px">|</span><% end_if %>
                             <% end_loop %>

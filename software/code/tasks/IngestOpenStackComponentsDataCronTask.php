@@ -374,6 +374,15 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                             $comp->Since = (isset($component['since'])) ? $component['since'] : '';
                             $comp->CategoryID = $subcat2->ID;
                             $comp->Order = $compOrder;
+                            $comp->YouTubeID = '';
+                            $comp->VideoDescription = '';
+                            $comp->VideoTitle = '';
+
+                            if (isset($component['video'])) {
+                                $comp->YouTubeID = (isset($component['video']['id'])) ? $component['video']['id'] : '';
+                                $comp->VideoDescription = (isset($component['video']['desc'])) ? $component['video']['desc'] : '';
+                                $comp->VideoTitle = (isset($component['video']['title'])) ? $component['video']['title'] : '';
+                            }
 
                             if (isset($component['docs-title']) && isset($component['docs-url'])) {
                                 if (!$docsLink = $comp->DocsLink()) {
@@ -415,6 +424,26 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                                         }
 
                                         $comp->Links()->add($linkObj);
+                                    }
+                                }
+                            }
+
+                            $comp->SupportTeamsLinks()->removeAll();
+
+                            if (isset($component['support-teams'])) {
+                                foreach ($component['support-teams'] as $linkArray) {
+                                    if (!is_array($linkArray)) continue;
+                                    foreach ($linkArray as $label => $link) {
+                                        $linkObj = OpenStackComponentLink::get()->filter(['Label' => $label, 'URL' => $link])->First();
+
+                                        if (!$linkObj) {
+                                            $linkObj = new OpenStackComponentLink();
+                                            $linkObj->Label = $label;
+                                            $linkObj->URL = $link;
+                                            $linkObj->write();
+                                        }
+
+                                        $comp->SupportTeamsLinks()->add($linkObj);
                                     }
                                 }
                             }

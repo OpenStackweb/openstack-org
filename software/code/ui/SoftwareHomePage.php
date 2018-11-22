@@ -91,7 +91,8 @@ class SoftwareHomePage_Controller extends Page_Controller
         'getComponent',
         'getComponentsbyRelease',
         'getSampleConfigurations',
-        'getGovernance'
+        'getGovernance',
+        'test'
     );
 
     static $url_handlers = array
