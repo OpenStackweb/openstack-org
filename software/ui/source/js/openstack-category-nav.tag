@@ -10,7 +10,19 @@
                 </ul>
             </div>
         </div>
-
+        <div class="software-category-dropdown">
+            <div class="dropdown">
+                <button aria-expanded="true" aria-haspopup="true" data-toggle="dropdown" id="dropdownMenu1" type="button" class="dropdown-toggle category-dropdown-button">
+                    Select a Category
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <ul class="dropdown-menu">
+                    <li class="category-item" each={ categories } >
+                        <a id="{ 'category_' + ID }" data-slug={ Slug } href="#" data-id="{ ID }" onclick={ selectedCategory }>{ Name }</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 
     <script>
