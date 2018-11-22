@@ -19,7 +19,7 @@
 
     
     <h1>$_T("survey_ui", "Welcome to the OpenStack User Survey")</h1>
-    <p>$_T("survey_ui", "The User Survey deadline is %1$s", "August 21, 2018")</p>
+    <p>$_T("survey_ui", "The User Survey deadline is %1$s", "Thursday, August 22, 2019")</p>
     <% if $LoginPageSlide1Content && $LoginPageSlide2Content && $LoginPageSlide3Content %>
     <div class="row">
 
@@ -43,7 +43,7 @@
     </div>
     <% end_if %>
     <p>
-        $_T("survey_ui", "This survey provides users an opportunity to influence the community and software direction. By sharing information about your configuration and requirements, the OpenStack Foundation User Committee will be able to advocate on your behalf. The %1$s survey results will be presented at the %2$s Summit, November %3$s. Take the OpenStack User Survey by %4$s to be included in this round of analysis. requirements, the OpenStack Foundation User Committee will be able to advocate on your behalf.", "2018", "Berlin", "November 13-15", "Tuesday, August 21")
+        $_T("survey_ui", "This survey provides users an opportunity to influence the community and software direction. By sharing information about your configuration and requirements, the OpenStack Foundation User Committee will be able to advocate on your behalf. The %1$s survey results will be presented at the %2$s Summit, %3$s. Take the OpenStack User Survey by %4$s to be included in this round of analysis. requirements, the OpenStack Foundation User Committee will be able to advocate on your behalf.", "2019", "Denver", "Week of April, 2019", "Thursday, August 22, 2019")
     </p>
     <p><a href="/user-survey/faq" target="_blank">$_T("survey_ui", "More Information About The Survey")</a></p>
     <% if $Top.SurveyTemplate.isVoid %>
@@ -117,7 +117,7 @@
                 $_T("survey_ui", "Read more from the tenth survey of OpenStack users since April 2013, with a goal of better understanding user perspectives, organizational profiles, use cases, and technology choices across the community’s deployments. This cycle, the survey was translated into seven additional languages and includes analysis comparisons between both the previous cycle and year over year.")
             </p>
             <p>
-                <a class="roundedButton" href="https://www.openstack.org/assets/survey/OpenStack-User-Survey-Nov17.pdf" target="_blank">$_T("survey_ui", "Read the November 2017 report")</a>
+                <a class="roundedButton" href="https://www.openstack.org/assets/survey/OpenStack-User-Survey-Nov17.pdf" target="_blank">$_T("survey_ui", "Read the 2018 Full Report")</a>
             </p>
             <h3><a href="/analytics">$_T("survey_ui", "Analyze the User Survey")</a></h3>
             <p>
