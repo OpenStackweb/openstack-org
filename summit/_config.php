@@ -507,6 +507,7 @@ define('PRESENTATION_SPEAKER_NOTIFICATION_ACCEPTANCE_SUMMIT_SUPPORT', 'summit@op
 define('MEMBER_PROMO_CODE_EMAIL', 'member-promo-code');
 define('MEMBER_NOTIFICATION_PROMO_CODE_EMAIL_FROM', 'speakersupport@openstack.org');
 define('SUMMIT_ATTENDEE_RSVP_EMAIL','summit-attendee-rsvp');
+define('SUMMIT_ATTENDEE_RSVP_WAITLIST_EMAIL','summit-attendee-rsvp-waitlist');
 define('SUMMIT_ATTENDEE_RSVP_EMAIL_FROM','summit@openstack.org');
 
 // Second Break Out Email Templates

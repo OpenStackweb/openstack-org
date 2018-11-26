@@ -101,6 +101,7 @@ Injector:
         7: '%$EventFeedbackRepository'
         8: '%$TagRepository'
         9: '%$SummitEventManager'
+        10: '%$TransactionManager'
   SummitAppReportsExportApi:
     constructor:
       0: '%$SummitRepository'

@@ -159,7 +159,7 @@ class HackathonsPage_Controller extends Page_Controller {
 	    parent::init();
 
         Requirements::css('node_modules/slick-carousel/slick/slick.css');
-        Requirements::css('software/css/software.css');
+        //Requirements::css('software/css/software.css');
         Requirements::css('events/css/openstackdays.css');
 
         Requirements::javascript('node_modules/slick-carousel/slick/slick.min.js');

@@ -57,10 +57,15 @@ class SurveyReportSection extends DataObject {
             $extra_label = '';
             $question    = $graph->Question();
 
-            $answers       = $repository->getByQuestionAndFilters($question->ID, $filters);
+            $answers       = [];
+            if ($question->is_a('SurveyDropDownQuestionTemplate') && $question->isCountrySelector()) {
+                $answers       = $repository->getContinentAnswers($question->ID, $filters);
+            } else {
+                $answers       = $repository->getByQuestionAndFilters($question->ID, $filters);
+            }
+
             $total_answers = $answers['total'];
             $answers       = $answers['answers'];
-
 
             if (in_array($question->Name, $expand_questions)) {
                 foreach ($question->getDependers() as $depender_question) {
@@ -84,8 +89,11 @@ class SurveyReportSection extends DataObject {
             } else {
                 if ($question->Name == 'NetPromoter') {
                     $values = array('Detractor' => 0, 'Neutral' => 0, 'Promoter' => 0);
+                } else if ($question->is_a('SurveyDropDownQuestionTemplate') && $question->isCountrySelector()) {
+                    $values = array_combine(Continent::get()->column('Name'), [0,0,0,0,0,0,0,0]);
+                    $values['Prefer not to say'] = 0;
                 } else {
-                    foreach ($question->Values() as $value_temp) {
+                    foreach ($question->getValues() as $value_temp) {
                         $values[$value_temp->Value] = 0;
                     }
 
@@ -160,6 +168,11 @@ class SurveyReportSection extends DataObject {
                         }
                     }
                 }
+            }
+
+            // remove empty continents
+            if ($question->is_a('SurveyDropDownQuestionTemplate') && $question->isCountrySelector()) {
+                $values = array_filter($values);
             }
 
             $questions[] = [

@@ -76,38 +76,37 @@
     border-left: 1px solid transparent;
     border-radius: 4px; } }
 
-.software-tab-dropdown {
+.software-tab-dropdown, .software-category-dropdown {
   display: none; }
 
 @media (max-width: 790px) {
-  .software-tab-dropdown {
+  .software-tab-dropdown, .software-category-dropdown {
     display: block;
     width: 98%;
     margin: 0 1% 15px 1%;
-    border-bottom: 1px solid #D4DCE5;
     padding-bottom: 15px; }
-  .software-tab-dropdown .dropdown {
+  .software-tab-dropdown .dropdown, .software-category-dropdown .dropdown {
     width: 100%; }
-  .software-tab-dropdown .dropdown .projects-dropdown-btn {
+  .software-tab-dropdown .dropdown .projects-dropdown-btn, .software-category-dropdown .dropdown .category-dropdown-button {
     width: 100%;
     border-radius: 4px;
     outline: 0;
-    background: #edf2f7;
+    background: #c9dcef;
     border: 1px solid #D4DCE5;
     padding: 8px;
     color: #2A4E68;
     text-transform: uppercase; }
-  .software-tab-dropdown .dropdown .projects-dropdown-btn i {
+  .software-tab-dropdown .dropdown .projects-dropdown-btn i, .software-category-dropdown .dropdown i {
     margin-left: 10px; }
-  .software-tab-dropdown .dropdown ul.dropdown-menu {
+  .software-tab-dropdown .dropdown ul.dropdown-menu, .software-category-dropdown .dropdown ul.dropdown-menu {
     right: 0; }
-  .software-tab-dropdown .dropdown ul.dropdown-menu > li > a {
+  .software-tab-dropdown .dropdown ul.dropdown-menu > li > a, .software-category-dropdown .dropdown ul.dropdown-menu > li > a {
     padding: 5px 20px;
     color: #2A4E68; }
-  .software-tab-dropdown .dropdown ul.dropdown-menu > li.active > a {
+  .software-tab-dropdown .dropdown ul.dropdown-menu > li.active > a, .software-category-dropdown .dropdown ul.dropdown-menu > li.active > a {
     background: #248EC7;
     color: white; }
-  .software-tab-wrapper {
+  .software-tab-wrapper, .outer-project-subnav {
     display: none; } }
 
 .software-main-wrapper {
@@ -717,8 +716,6 @@ p.service-section-title {
   .project-table-code-name {
   	font-weight: bold;
   	text-transform: uppercase;
-  	width: 30%;
-  	float: left;
     vertical-align: middle;
   }
   
@@ -734,7 +731,6 @@ p.service-section-title {
   .project-table-description {
   	color: grey;	
   	cursor: pointer;
-    width:70%;
   }
   
 	div.project-table-row {
@@ -747,10 +743,6 @@ p.service-section-title {
 
   div.project-table-row {
     min-height: 60px;
-  }  
-
-  .project-table-description {
-    float:right;
   }
 
 }
@@ -1343,11 +1335,26 @@ a.projects-stats-tip i {
   padding-top: 30px;
   padding-bottom: 30px; }
 
+.projects-overview {
+  margin-top: 20px;
+}
+
 .projects-overview h3 {
   text-align: center; }
 
 .projects-overview p {
   text-align: left; }
+
+.projects-overview .promo-btn {
+  margin-top: 10px;
+}
+
+@media (max-width: 684px) {
+  .projects-overview .promo-btn {
+    width: 100%;
+  }
+}
+
 
 img.openstack-diagram {
   max-width: 100%;
@@ -1368,11 +1375,11 @@ img.openstack-diagram {
   color: white;
   border-radius: 4px;
   -moz-border-radius: 4px;
-  -webkit-border-radius: 4px; }
+  -webkit-border-radius: 4px;
+  opacity: 1;
+  white-space: nowrap;
+}
 
-.tooltip {
-  background: none;
-  white-space: nowrap; }
 
 img.security-badge {
   width: 165px;
@@ -1512,7 +1519,7 @@ h3.header-center {
   padding: 0.5em;
   display: block;
   float: left;
-  width: 23%;
+  width: 250px;
   text-align: left;
  }
 
@@ -1547,6 +1554,8 @@ h3.header-center {
     display: block;
     float: left;
     width: 23%;
+    height: 215px;
+    min-width: 130px;
    }
    
    .starter-pack li a:hover {

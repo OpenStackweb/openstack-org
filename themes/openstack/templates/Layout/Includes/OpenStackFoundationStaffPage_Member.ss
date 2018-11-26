@@ -20,7 +20,7 @@
             </a>
         <% end_if %>
         <% if $ContactEmail %>
-            <a class="staff-contact-email" href="mailto:{$ContactEmail}">
+            <a class="staff-contact-email" rel="nofollow" href="mailto:{$ContactEmail}">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
             </a>
         <% end_if %>

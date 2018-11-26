@@ -290,7 +290,7 @@ final class ScheduleManager implements IScheduleManager
 
             if (!is_null($sender_service)) {
                 $rsvp->BeenEmailed = true;
-                $sender_service->send(['Event' => $event, 'Member' => $member, 'RsvpID' => $rsvp->ID]);
+                $sender_service->send(['Event' => $event, 'Member' => $member, 'Rsvp' => $rsvp]);
             }
 
             return $rsvp;
@@ -387,7 +387,7 @@ final class ScheduleManager implements IScheduleManager
 
             if (!is_null($sender_service)) {
                 $rsvp->BeenEmailed = true;
-                $sender_service->send(['Event' => $event, 'Member' => $member, 'RsvpID' => $rsvp->ID]);
+                $sender_service->send(['Event' => $event, 'Member' => $member, 'Rsvp' => $rsvp]);
             }
 
             return $rsvp;

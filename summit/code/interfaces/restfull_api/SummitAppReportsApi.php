@@ -65,6 +65,25 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
      */
     private $summit_manager;
 
+    /**
+     * @var ITransactionManager
+     */
+    private $tx_manager;
+
+    /**
+     * SummitAppReportsApi constructor.
+     * @param ISummitRepository $summit_repository
+     * @param ISummitAssistanceRepository $assistance_repository
+     * @param ISummitReportRepository $report_repository
+     * @param IRSVPRepository $rsvp_repository
+     * @param ISummitEventRepository $event_repository
+     * @param IPresentationCategoryRepository $category_repository
+     * @param ISummitPresentationRepository $presentation_repository
+     * @param IEventFeedbackRepository $feedback_repository
+     * @param ITagRepository $tag_repository
+     * @param ISummitEventManager $summit_manager
+     * @param ITransactionManager $tx_manager
+     */
     public function __construct
     (
         ISummitRepository $summit_repository,
@@ -76,7 +95,8 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
         ISummitPresentationRepository $presentation_repository,
         IEventFeedbackRepository $feedback_repository,
         ITagRepository $tag_repository,
-        ISummitEventManager $summit_manager
+        ISummitEventManager $summit_manager,
+        ITransactionManager $tx_manager
     )
     {
         parent::__construct();
@@ -90,6 +110,7 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
         $this->feedback_repository           = $feedback_repository;
         $this->tag_repository                = $tag_repository;
         $this->summit_manager                = $summit_manager;
+        $this->tx_manager                    = $tx_manager;
     }
 
 
@@ -731,48 +752,59 @@ class SummitAppReportsApi extends AbstractRestfulJsonApi {
             if(!$this->isJson()) return $this->validationError(array('invalid content type!'));
             $email_data   = $this->getJsonRequest();
 
-            $to           = isset($email_data['to']) ? $email_data['to'] : '';
-            $from         = isset($email_data['from']) ? $email_data['from'] : '';
-            $subject      = isset($email_data['subject']) ? $email_data['subject'] : '';
-            $message      = isset($email_data['message']) ? $email_data['message'] : '';
-            $event_id     = isset($email_data['event_id']) ? $email_data['event_id'] : 0;
+            $to           = isset($email_data['to']) ? trim(Convert::raw2sql($email_data['to'])) : '';
+            $from         = isset($email_data['from']) ? trim(Convert::raw2sql($email_data['from'])) : '';
+            $subject      = isset($email_data['subject']) ? trim(Convert::raw2sql($email_data['subject'])) : '';
+            $message      = isset($email_data['message']) ? trim(Convert::raw2sql($email_data['message'])) : '';
+            $event_id     = isset($email_data['event_id']) ? intval($email_data['event_id']) : 0;
 
-            if (!$to || !$from || !$subject || !$message || !$event_id) {
+            if (empty($to) || empty($from) || empty($subject) || empty($message) || !$event_id) {
                 throw new ValidationException('Complete all fields to send email.', 0);
             }
 
-            $summit_id    = intval($request->param('SUMMIT_ID'));
-            $summit       = $this->summit_repository->getById($summit_id);
-            if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
+            $this->tx_manager->transaction(function () use($request, $to, $from, $subject, $message, $event_id){
 
-            $event = SummitEvent::get()->byID($event_id);
-            if(is_null($event)) throw new NotFoundEntityException('SummitEvent', sprintf(' id %s', $event_id));
 
-            $email = EmailFactory::getInstance()->buildEmail($from, $to, $subject, $message);
-            $email->send();
+                $summit_id    = intval($request->param('SUMMIT_ID'));
+                $summit       = $this->summit_repository->getById($summit_id);
+                if(is_null($summit)) throw new NotFoundEntityException('Summit', sprintf(' id %s', $summit_id));
 
-            $sent_email = $email->mailer()->getLastEmail();
+                $event = SummitEvent::get()->byID($event_id);
+                if(is_null($event)) throw new NotFoundEntityException('SummitEvent', sprintf(' id %s', $event_id));
+                // check to for valid emails
 
-            if (is_a($sent_email, 'SentEmailSendGrid')) {
-                $email_question = $event->RSVPTemplate()->Questions()->filter('Label','Email')->first();
-
-                foreach($event->RSVPSubmissions() as $rsvp) {
-                    $submitter_email = $rsvp->SubmittedBy()->Email;
-                    $email_to_check = '';
-                    if ($email_question) {
-                        $email_to_check = $rsvp->Answers()->filter('QuestionID', $email_question->ID)->first()->Value;
-                    }
-
-                    // we check if the Email answer OR the member who submitted the rsvp is in the email address to.
-                    if (($email_to_check && strpos($to, $email_to_check) !== false)
-                        || ($submitter_email && strpos($to, $submitter_email) !== false)) {
-                        $rsvp->Emails()->add($sent_email);
+                foreach(explode(',', $to) as $to_email){
+                    if(filter_var($to_email, FILTER_VALIDATE_EMAIL) === false){
+                        throw new ValidationException(sprintf("to_email %s is invalid!", $to_email));
                     }
                 }
-            } else {
-                throw new Exception('Email not sent');
-            }
 
+                $email = EmailFactory::getInstance()->buildEmail($from, $to, $subject, $message);
+                $email->send();
+
+                $sent_email = $email->mailer()->getLastEmail();
+
+                if (is_a($sent_email, 'SentEmailSendGrid')) {
+                    $email_question = $event->RSVPTemplate()->Questions()->filter('Label','Email')->first();
+
+                    foreach($event->RSVPSubmissions() as $rsvp) {
+                        $submitter_email = $rsvp->SubmittedBy()->Email;
+                        $email_to_check = '';
+                        if ($email_question) {
+                            $email_to_check = $rsvp->Answers()->filter('QuestionID', $email_question->ID)->first()->Value;
+                        }
+
+                        // we check if the Email answer OR the member who submitted the rsvp is in the email address to.
+                        if (($email_to_check && strpos($to, $email_to_check) !== false)
+                            || ($submitter_email && strpos($to, $submitter_email) !== false)) {
+                            $rsvp->Emails()->add($sent_email);
+                        }
+                    }
+
+                    return;
+                }
+                throw new Exception('Email not sent');
+            });
             return $this->ok();
         }
         catch(NotFoundEntityException $ex2)

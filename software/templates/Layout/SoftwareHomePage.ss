@@ -49,7 +49,7 @@
         <hr/>
 
         <div class="row">
-            <div class="starter-pack">
+            <div class="starter-pack  col-md-12">
                 <h3 class="header-center">Popular Project Set</h3>
                 <ul>
                     <li class="nova">
@@ -94,7 +94,7 @@
 
         <div class="row">
 
-            <div class="workloads-section">
+            <div class="workloads-section col-md-12">
 
             <h3 class="header-center">Sample OpenStack Configurations</h3>
 

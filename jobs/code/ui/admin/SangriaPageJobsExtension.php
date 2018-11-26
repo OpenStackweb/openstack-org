@@ -81,7 +81,7 @@ final class SangriaPageJobsExtension extends Extension {
 
 	function JobRegistrationRequestForm(){
 		$this->commonScripts();
-        GoogleMapScriptBuilder::build('false');
+        GoogleMapScriptBuilder::renderRequirements('false');
 		Requirements::javascript("marketplace/code/ui/admin/js/geocoding.jquery.js");
 		Requirements::css('jobs/css/job.registration.form.css');
 		Requirements::javascript("jobs/js/job.registration.form.js");

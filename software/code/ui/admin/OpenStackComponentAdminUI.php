@@ -37,7 +37,8 @@ final class OpenStackComponentAdminUI extends DataExtension
         $fields->push(new LiteralField("Title", "<h2>OpenStack Component</h2>"));
         $fields->push(new TextField("Name", "Name"));
         $fields->push(new TextField("CodeName", "Code Name"));
-        $fields->push(new DropdownField('MascotID', 'Mascot',  Mascot::get()->map('ID', 'Name')));
+        $fields->push($mascot_ddl = new DropdownField('MascotID', 'Mascot',  Mascot::get()->map('ID', 'Name')));
+        $mascot_ddl->setEmptyString("-- Select Mascot --");
         $fields->push(new TextField("Description", "Description"));
         $fields->push(new TextField("YouTubeID", "Video (YouTubeID)"));
         $fields->push(new TextField("VideoTitle", "Video Title"));
@@ -47,7 +48,8 @@ final class OpenStackComponentAdminUI extends DataExtension
         $fields->push(new CheckboxField('IsCoreService', 'Is Core Service?'));
         $fields->push(new CheckboxField('ShowOnMarketplace', 'Show On Marketplace?'));
         $categories = OpenStackComponentCategory::get()->map('ID', 'Name');
-        $fields->push(new DropdownField('CategoryID', 'Category',  $categories));
+        $fields->push($cat_ddl = new DropdownField('CategoryID', 'Category',  $categories));
+        $cat_ddl->setEmptyString("-- Select Category --");
 
         if ($this->owner->getSupportsVersioning()) {
             $versions_config = new GridFieldConfig_RecordEditor();

@@ -159,7 +159,7 @@ class MarketingPage_Controller extends Page_Controller{
 
     function init() {
         parent::init();
-        Requirements::css('software/css/software.css');
+        //Requirements::css('software/css/software.css');
         Requirements::css('themes/openstack/css/marketing-page.css');
         Requirements::javascript('themes/openstack/javascript/urlfragment.jquery.js');
 

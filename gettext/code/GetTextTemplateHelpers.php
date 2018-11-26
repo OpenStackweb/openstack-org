@@ -113,6 +113,9 @@ class GetTextTemplateHelpers implements TemplateGlobalProvider
         if($decode_html)
             $msgid = html_entity_decode($msgid);
 
+        // scape % bc its has special meaning on sprintf
+        $msgid = preg_replace('[%(?!(\d\$[s]))]', '%%', $msgid);
+        //$msgid  = str_replace("%", "%%", $msgid);
         $msgstr = call_user_func_array("__", array_merge([$msgid], $args));
 
         return $msgstr;

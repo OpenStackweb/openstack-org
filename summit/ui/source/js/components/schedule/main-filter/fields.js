@@ -146,7 +146,7 @@ class MainFilterFields extends Component {
             <div className="col-sm-4 col-xs-12 single-filter-wrapper">
                 <div className="checkbox">
                     <input type="checkbox" id="recorded_filter" ref="chk_recorded" checked={values.recorded} onChange={() => false} />
-                    <label for="recorded_filter">Show only recorded sessions</label>
+                    <label htmlFor="recorded_filter">Show only recorded sessions</label>
                 </div>
             </div>
         </div>
