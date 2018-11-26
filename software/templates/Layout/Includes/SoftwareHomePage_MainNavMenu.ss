@@ -9,7 +9,9 @@
             <% if $Top.HasAvailableSampleConfigTypes %>
                 <li <% if Active == 'sample-configs' %>class="active"<% end_if %>><a href="$Top.Link(sample-configs)"><%t Software.SAMPLE_CONFIGURATIONS 'Sample Configurations' %></a></li>
             <% end_if %>
+<%--
             <li <% if Active == 'governance' %>class="active"<% end_if %>><a href="$Top.Link(governance)"><%t Software.GOVERNANCE 'Governance' %></a></li>
+--%>
         </ul>
     </div>
 </div>
@@ -27,7 +29,9 @@
             <% if $Top.HasAvailableSampleConfigTypes %>
                 <li <% if Active == 'sample-configs' %>class="active"<% end_if %>><a href="$Top.Link(sample-configs)"><%t Software.SAMPLE_CONFIGURATIONS 'Sample Configurations' %></a></li>
             <% end_if %>
+<%--
             <li <% if Active == 'governance' %>class="active"<% end_if %>><a href="$Top.Link(governance)"><%t Software.GOVERNANCE 'Governance' %></a></li>
+--%>
         </ul>
     </div>
 </div>
