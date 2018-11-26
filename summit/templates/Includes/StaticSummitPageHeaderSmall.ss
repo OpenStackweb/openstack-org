@@ -14,9 +14,14 @@
             </div>
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav navbar-main show">
                     <li class="{$getAboutPageNavClass}">
-                        <a href="{$getSummitAboutPageLink}">About</a>
+                        <a href="{$getSummitAboutPageLink}" class="drop">About<i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
+                            <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuEvents">
+                                <li><a>Link 1</a></li>
+                                <li><a>Link 2</a></li>
+                                <li><a>Link 3</a></li>
+                            </ul>
                     </li>
                     <% loop $Menu(3) %>
                         <li class="{$LinkingMode}">
