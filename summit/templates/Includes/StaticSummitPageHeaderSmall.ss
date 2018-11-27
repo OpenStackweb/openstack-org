@@ -17,22 +17,25 @@
                 <ul class="nav navbar-nav navbar-main show">
                     <li class="{$getAboutPageNavClass}">
                         <a href="{$getSummitAboutPageLink}" class="drop">About<i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
-                            <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuEvents">
-                                <li><a>Link 1</a></li>
-                                <li><a>Link 2</a></li>
-                                <li><a>Link 3</a></li>
-                            </ul>
                     </li>
                     <% loop $Menu(3) %>
                         <li class="{$LinkingMode}">
                             <a href="{$Link}">$MenuTitle</a>
                         </li>
                     <% end_loop %>
-                    <li class="link button-box">
+                    <li class="{$LinkingMode}">
+                        <a href="/summit" class="drop">Other Summits<i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
+                            <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuEvents">
+                                <li><a href="/summit/vancouver-2018/">Vancouver 2018</a></li>
+                                <li><a href="/summit/berlin-2018/">Berlin 2018</a></li>
+                                <li><a href="/summit/denver-2019/">Denver 2019</a></li>
+                            </ul>
+                    </li>
+                    <!-- <li class="link button-box">
                         <a href="/summit/berlin-2018/summit-schedule/global-search?t=Registration" class="btn register-btn-lrg">
                             Register OnSite <i class="fa fa-arrow-right"></i>
                         </a>
-                    </li>
+                    </li>-->
                 </ul>
             </div>
         </div>
