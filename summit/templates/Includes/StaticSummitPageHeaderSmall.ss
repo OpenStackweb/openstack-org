@@ -59,7 +59,7 @@
         <div class="highlight">
             <span class="megaphone"></span>
             <h5>
-                <strong>OnSite registration is open</strong> at CityCube.
+                <strong>Summit Videos will be available mid-December</strong>. Stay tuned!
             </h5>
         </div>
     </div>

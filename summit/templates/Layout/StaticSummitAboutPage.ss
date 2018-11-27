@@ -16,7 +16,7 @@
                     communities like Ansible, Ceph, Docker, Kata Containers, Kubernetes, ONAP, OpenStack, Open vSwitch, OPNFV, Zuul and more.</p>
 
                 <a class="btn btn-default" href="/summit/berlin-2018/sponsors/">Meet the Sponsors <i class="fal fa-arrow-right"></i></a>
-                <a class="btn btn-primary" href="/summit/berlin-2018/summit-schedule/global-search?t=Registration" target="_blank">Register On Site in Berlin <i class="fal fa-arrow-right"></i></a>
+                <a class="btn btn-primary" href="https://www.openstack.org/videos/summits/berlin-2018" target="_blank">Summit Videos <i class="fal fa-arrow-right"></i></a>
 
             </div>
             <div class="col-md-12 session-box">
