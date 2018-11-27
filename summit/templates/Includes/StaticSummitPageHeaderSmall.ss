@@ -16,14 +16,14 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-main show">
                     <li class="{$getAboutPageNavClass}">
-                        <a href="{$getSummitAboutPageLink}" class="drop">About
+                        <a href="{$getSummitAboutPageLink}" class="drop">About</a>
                     </li>
                     <% loop $Menu(3) %>
                         <li class="{$LinkingMode}">
                             <a href="{$Link}">$MenuTitle</a>
                         </li>
                     <% end_loop %>
-                    <li class="{$LinkingMode}">
+                    <li class="link">
                         <a href="/summit" class="drop">Other Summits<i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
                             <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuEvents">
                                 <li><a href="/summit/vancouver-2018/">Vancouver 2018</a></li>
