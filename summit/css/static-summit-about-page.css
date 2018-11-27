@@ -249,15 +249,19 @@ button.btn i, a.btn i {
     width: 100%;
     background-color: #00468b;
     z-index: 999999;
+    border: none;
 }
 
-@media all and (max-width: 768px) {
+@media all and (max-width: 767px) {
     #summit-main-nav .navbar-toggle {
         display: block !important;
     }
-
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a{
+        color: #fff;
+        padding: 0.2em 0
+    }
     .summit-hero-landing .navbar .nav, .summit-hero-landing-short .navbar .nav {
-        height: 14.5em;
+ 
         padding: 0 1em;
     }
 
@@ -277,11 +281,41 @@ button.btn i, a.btn i {
     .summit-hero-landing .navbar .nav > li > a, .summit-hero-landing-short .navbar .nav > li > a {
         padding: 0.5em 0;
     }
+
+    .navbar-default ul.navbar-main > li > a i.fa-caret-down{
+        display: inline-block;
+
+    }
+
+    .navbar-default ul.navbar-main > li.open > a i.fa-caret-down{
+        display: none;
+        
+    }
+    .navbar-default ul.navbar-main > li > a i.fa-caret-up{
+        display: none;
+
+    }
+
+    .navbar-default ul.navbar-main > li.open > a i.fa-caret-down{
+        display: inline-block;
+        
+    }
 }
 
-@media all and (min-width: 768px) {
+@media all and (min-width: 767px) {
     #summit-main-nav .navbar-toggle {
         display: none;
+    }
+}
+
+@media all and (max-width: 767px) {
+    #summit-main-nav .navbar-toggle {
+        display: none;
+    }
+    .summit-hero-landing-short .navbar .link.button-box{
+        position: relative;
+        right: 0;
+        margin: 0.5em 0;
     }
 }
 
@@ -491,7 +525,7 @@ button.btn i, a.btn i {
     float: left;
 }
 
-@media all and (max-width: 768px) {
+@media all and (max-width: 767px) {
     .session {
         max-width: 25%;
         min-width: 25%;
@@ -1375,4 +1409,17 @@ footer .btn {
     background-color: #ed1944;
     margin-bottom: 1em;
     letter-spacing: 0.02em;
+}
+
+ul.navbar-main{
+    float: none;    
+}
+
+.summit-hero-landing-short .navbar-main .dropdown-menu li a{
+    color:  #2A4E68;
+    cursor: pointer;
+}
+
+.navbar-main .drop i{
+    margin-left: 0.5em;
 }
