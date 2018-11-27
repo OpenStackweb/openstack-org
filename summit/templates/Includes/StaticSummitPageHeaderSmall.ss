@@ -16,7 +16,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-main show">
                     <li class="{$getAboutPageNavClass}">
-                        <a href="{$getSummitAboutPageLink}" class="drop">About<i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
+                        <a href="{$getSummitAboutPageLink}" class="drop">About
                     </li>
                     <% loop $Menu(3) %>
                         <li class="{$LinkingMode}">
