@@ -11,10 +11,12 @@
                 <div class="summit-location">$MainTitle</div>
                 <div class="summit-date">
                    $Summit.DateLabel
-                   <br>
-                   $LocSubtitle
+                    <% if LocSubtitle %>
+                     <br>
+                     $LocSubtitle
+                    <% end_if %>
                 </div>
-                <h1>SPONSORSHIP INFORMATION</h1>
+                <h1>SPONSORSHIP & REGISTRATION INFORMATION</h1>
                 <div> 
                     <% if ProspectusUrl %>
                         <a href="{$ProspectusUrl}" class="btn register-btn-lrg" style="margin: 10px;">
