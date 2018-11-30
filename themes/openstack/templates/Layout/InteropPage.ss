@@ -105,17 +105,10 @@
     </p>
     <p>
         Products must comply with one of the two most recent guidelines approved by the OpenStack Foundation Board of Directors.
-        These versions are numbered based on the date when they were approved, such as "2018.02" for the version approved in February, 2018.
+        These versions are numbered based on the date when they were approved, such as "2018.11" for the version approved in November, 2018.
     </p>
     <p>
-        The two most recent versions approved by the board are
-        "<a title="2018.01 Interop Capabilities" href="http://git.openstack.org/cgit/openstack/interop/tree/2018.02.json" target="_blank">2018.02</a>" and
-        "<a title="Interop 2017.09 Guideline" href="http://git.openstack.org/cgit/openstack/interop/tree/2017.09.json" target="_blank">2017.09</a>". These
-        two guidelines cover five OpenStack releases: Mitaka, Newton, Ocata, Pike, and Queens.
-        The list of required capabilities (with must-pass tests) and designated code sections are published on
-        <a title="OpenStack Interop Working Group Repository" href="http://git.openstack.org/cgit/openstack/interop/tree/" target="_blank">git.openstack.org</a>&nbsp;
-        and summarized below. Once a company verifies their products include the appropriate designated sections and submit API test results, they will
-        be asked to sign the license agreements.
+        The two most recent versions approved by the board are <a title="2018.11 Interop Capabilities" href="http://git.openstack.org/cgit/openstack/interop/tree/2018.11.json" target="_blank">2018.11</a> and <a title="2018.02 Interop Capabilities" href="http://git.openstack.org/cgit/openstack/interop/tree/2018.02.json" target="_blank">2018.02</a>. These two guidelines cover six OpenStack releases: Newton, Ocata, Pike, Queens, Rocky, and Stein. The list of required capabilities (with must-pass tests) and designated code sections are published on git.openstack.org  and summarized below. Once a company verifies their products include the appropriate designated sections and submit API test results, they will be asked to sign the license agreements.
     </p>
     <p>
         You'll note that the "Platform" program technical requirements are essentially the combination of "Compute" and "Object Storage" requirements.
