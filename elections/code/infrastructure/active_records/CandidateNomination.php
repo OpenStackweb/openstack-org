@@ -71,7 +71,7 @@ class CandidateNomination
             return $valid;
         }
 
-        $already_exist_another_candidate = Candidate::get()->filter([
+        $already_exist_another_candidate = CandidateNomination::get()->filter([
                 'ID:ExactMatch:not' => $this->ID,
                 'ElectionID'        => $this->ElectionID,
                 'MemberID'          => $this->MemberID,
