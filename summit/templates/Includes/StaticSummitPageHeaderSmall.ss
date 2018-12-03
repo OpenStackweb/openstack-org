@@ -44,7 +44,7 @@
     <div class="row text-wrapper">
         <div class="col-md-12  title-box">
             <div class="summit-banner">
-                $HeaderText
+                $getSummitPageText(HeaderText)
                 <!-- <span class="arrow left"></span><span class="arrow right"></span> -->
             </div>
         </div>
@@ -57,7 +57,7 @@
     <div class="row text-wrapper blue">
         <div class="highlight">
             <span class="megaphone"></span>
-            $HeaderMessage
+            $getSummitPageText(HeaderMessage)
         </div>
     </div>
 </div>

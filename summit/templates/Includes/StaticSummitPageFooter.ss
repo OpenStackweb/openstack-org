@@ -8,7 +8,7 @@
                         <i class="fa fa-arrow-right"></i>
                     </a> -->
                     <div class="links">
-                        $FooterLinksLeft
+                        $getSummitPageText(FooterLinksLeft)
                     </div>
 
                 </div>
@@ -20,7 +20,7 @@
                 </div>
 
                 <div class="links">
-                    $FooterLinksRight
+                    $getSummitPageText(FooterLinksRight)
                 </div>
             </div>
         </div>

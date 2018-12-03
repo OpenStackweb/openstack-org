@@ -15,7 +15,7 @@
 <body>
 <div class="main-body">
 
-    <% if $Summit.Active %>
+    <% if $Summit.ID > 24 %>
         <% include StaticSummitPageHeaderSmall %>
     <% else %>
         <% include SummitPageHeaderSmall %>
@@ -38,7 +38,7 @@
     <% include DownloadAppModal %>
 
 
-    <% if $Summit.Active %>
+    <% if $Summit.ID > 24 %>
         <% include StaticSummitPageFooter %>
     <% else %>
         <% include SummitPageFooter %>

@@ -290,4 +290,16 @@ class SummitPage_Controller extends Page_Controller
         return $tags;
     }
 
+    public function getSummitPageText($field) {
+        $header_text = $this->getField($field);
+
+        if ($header_text) {
+            return $header_text;
+        } else if (is_a($this->Parent(),'SummitPage')) {
+            return $this->Parent()->getField($field);
+        }
+
+        return '';
+    }
+
 }
