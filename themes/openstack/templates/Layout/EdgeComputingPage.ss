@@ -52,8 +52,9 @@
                 </div>
                 <div class="col-sm-4 col-sm-offset-2">
                   <div class="plane"><img src="/assets/summits/logos/red-circle.png"></div>
-                  <p>Attend the <strong>Berlin Summit</strong> to meet and collaborate with the Edge Computing Group.</p>
-                  <a href="https://www.openstack.org/summit/berlin-2018/" class="download-btn"><em>About the Summit</em></a>
+                  <p>Add the <strong>Weekly Edge Computing Group Meetings</strong> to your calendar.</p>
+                  <a href="https://www.openstack.org/assets/edge/OSF-Edge-Computing-Group-Weekly-Calls.ics" class="download-ml1"><em>WG Weekly Calls</em>&nbsp;<i class="fa fa-calendar"></i></a>
+                  <a href="https://www.openstack.org/assets/edge/OSF-Edge-WG-Use-Cases-Weekly-Calls.ics" class="download-ml2"><em>Use Cases Weekly Calls</em>&nbsp;<i class="fa fa-calendar"></i></a>
                 </div>
             </div>
         </div>

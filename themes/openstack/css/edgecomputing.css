@@ -40,7 +40,7 @@
     font-weight: 300;
 }
 
-a.edge-download-btn, a.edgeml-download-btn {
+a.edge-download-btn, a.edgeml-download-btn, a.download-ml1, a.download-ml2 {
     display: block;
     border-radius: 2px;
     margin: 10px auto 0;
@@ -118,6 +118,21 @@ a.edgeml-download-btn {
     border-radius: 2px;
     display: block;
 }
+
+a.download-ml1 {
+    width:42% !important;
+    float:left;
+    padding: 12px 9px !important;
+    margin-top:-2px;
+}
+
+a.download-ml2 {
+    width:54% !important;
+    float:right;
+    padding: 12px 9px !important;
+    margin-top:-2px;
+}
+
 
 .plane {
     height: 167px;
