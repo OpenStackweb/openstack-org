@@ -52,7 +52,8 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
         'Versions'          => 'OpenStackApiVersion',
         'RelatedContent'    => 'OpenStackComponentRelatedContent',
         'Caveats'           => 'OpenStackComponentReleaseCaveat',
-        'Links'             => 'OpenStackComponentLink'
+        'Links'             => 'OpenStackComponentLink.Links',
+        'SupportTeamsLinks' => 'OpenStackComponentLink.Teams'
     );
 
     static $many_many = array
