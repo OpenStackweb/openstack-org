@@ -44,11 +44,7 @@
     <div class="row text-wrapper">
         <div class="col-md-12  title-box">
             <div class="summit-banner">
-                <h4 class="script">Join us November 13-15, 2018 in</h4>
-                <h1 class="inline">Berlin, Germany</h1>
-                <h5>
-                    <strong>CityCube</strong>
-                </h5>
+                $HeaderText
                 <!-- <span class="arrow left"></span><span class="arrow right"></span> -->
             </div>
         </div>
@@ -61,9 +57,7 @@
     <div class="row text-wrapper blue">
         <div class="highlight">
             <span class="megaphone"></span>
-            <h5>
-                <strong>Summit Videos will be available mid-December</strong>. Stay tuned!
-            </h5>
+            $HeaderMessage
         </div>
     </div>
 </div>

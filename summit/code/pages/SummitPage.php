@@ -26,6 +26,10 @@ class SummitPage extends Page
         //https://support.twitter.com/articles/20170807-conversion-tracking-for-websites#
         'TwitterPixelId' => 'Text',
         'HeroCSSClass' => 'Text',
+        'HeaderText' => 'HTMLText',
+        'HeaderMessage' => 'HTMLText',
+        'FooterLinksLeft' => 'HTMLText',
+        'FooterLinksRight' => 'HTMLText',
     );
 
     static $defaults = array(
@@ -69,6 +73,16 @@ class SummitPage extends Page
             $fields->addFieldsToTab('Root.Main', $ddl_summit = new DropdownField('SummitID', 'Summit', Summit::get()->map('ID', 'Name')));
 
             $ddl_summit->setEmptyString('(None)');
+
+            $fields->addFieldToTab('Root.Header&Footer', $header_text = new HtmlEditorField('HeaderText','Header Text'));
+            $header_text->setRows(5);
+            $fields->addFieldToTab('Root.Header&Footer', $header_msg = new HtmlEditorField('HeaderMessage','Header Message'));
+            $header_msg->setRows(3);
+
+            $fields->addFieldToTab('Root.Header&Footer', $footer_left = new HtmlEditorField('FooterLinksLeft','Footer Links Left'));
+            $footer_left->setRows(5);
+            $fields->addFieldToTab('Root.Header&Footer', $footer_right = new HtmlEditorField('FooterLinksRight','Footer Links Right'));
+            $footer_right->setRows(5);
 
         }
         $fields->addFieldsToTab('Root.Main', new TextField('HeroCSSClass', 'Hero CSS Class'));
