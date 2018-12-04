@@ -10,12 +10,15 @@ class SummitQuestionsPage extends SummitPage {
     public function getCMSFields() {
         $fields = parent::getCMSFields();
         if($this->ID) {
-            
+
+
+
             // Summit Questions
             $questionFields = singleton('SummitQuestion')->getCMSFields();
             $config = GridFieldConfig_RelationEditor::create();
             $config->getComponentByType('GridFieldDetailForm')->setFields($questionFields);
             $config->addComponent(new GridFieldSortableRows('Order'));
+            $config->addComponent(new GridFieldSeedWithPreviousQuestionsAction);
             $gridField = new GridField('Questions', 'Questions', $this->Questions(), $config);
             $fields->addFieldToTab('Root.Questions',$gridField);
             

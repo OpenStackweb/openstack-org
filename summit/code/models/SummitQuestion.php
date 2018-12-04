@@ -22,7 +22,8 @@ class SummitQuestion extends DataObject
     
     private static $summary_fields = array(
         'Question',
-        'Answer'
+        'Answer',
+        'Category.Name'
     ); 
     
     public function getCategoryName() {

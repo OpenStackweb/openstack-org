@@ -21,6 +21,22 @@ class SummitQuestionCategory extends DataObject
         'Questions' => 'SummitQuestion'
     );
 
+    public function getCMSFields() {
+        $f = new FieldList();
+
+        $f->add(new ReadonlyField('SummitQuestionsPageID'));
+        $f->add(new TextField('Order'));
+        $f->add(new TextField('Name'));
+
+        if ($this->ID > 0) {
+            $config = GridFieldConfig_RecordEditor::create(10);
+            $gridField = new GridField('Questions', 'Questions', $this->Questions(), $config);
+            $f->add($gridField);
+        }
+
+        return $f;
+    }
+
     public function canEdit($member = null) {
         return Permission::check('ADMIN') || Permission::check('CMS_ACCESS_CMSMain');
     }
