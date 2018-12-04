@@ -83,7 +83,7 @@ class VideoDetail extends React.Component {
                                 {video.track && video.track.title &&
                                 <div className="detail-panel-section">
                                     <h5 className="section-title">Track</h5>
-                                    <RouterLink link={`${video.summit.slug}/tracks/${video.track.slug}`}>
+                                    <RouterLink link={`summits/${video.summit.slug}/tracks/${video.track.slug}`}>
                                         {video.track.title}
                                     </RouterLink>
                                 </div>

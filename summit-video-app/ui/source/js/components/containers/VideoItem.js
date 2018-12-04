@@ -26,7 +26,7 @@ const VideoItem = ({
 				imageCaption={video.summit ? video.summit.title : ''}
 				title={video.title}
 				subtitle={speakers}
-				link={URL.create(`${video.summit.slug}/${video.slug}`)}
+				link={URL.create(`summits/${video.summit.slug}/${video.slug}`)}
 				onItemClicked={onItemClicked}
 				badge={video.isNew ? 'new' : null}
 			/>

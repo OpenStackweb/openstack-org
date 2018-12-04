@@ -37,13 +37,14 @@ class SummitVideoApp_Controller extends Page_Controller
      * @var array
      */
     private static $url_handlers = [
-        'api/video/$Type'       => 'handleVideo',
-        'api/videos'            => 'handleVideos',
-        'api/summits'           => 'handleSummits',
-        'api/speakers'          => 'handleSpeakers',
-        'PUT api/view/$VideoID' => 'handleVideoViewed',
-        '$Summit/$Page/$ID'     => 'handleIndex',
-        '$Page/$ID'             => 'handleIndex'
+        'api/video/$Type'               => 'handleVideo',
+        'api/videos'                    => 'handleVideos',
+        'api/summits'                   => 'handleSummits',
+        'api/speakers'                  => 'handleSpeakers',
+        'PUT api/view/$VideoID'         => 'handleVideoViewed',
+        'summits/$Summit/$Page/$ID'     => 'handleIndex',
+        '$Summit/$Page/$ID'             => 'handleIndex',
+        '$Page/$ID'                     => 'handleIndex'
     ];
 
     /*

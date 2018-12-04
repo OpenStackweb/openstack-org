@@ -47,7 +47,7 @@ class TagDetail extends React.Component {
 				<div className="container">
 					<div className="row">
 						<div className="col-sm-12 video-breadcrumbs">
-							<RouterLink link='videos'>All videos</RouterLink> > &nbsp; TAGS &nbsp; >
+							<RouterLink link='/'>All videos</RouterLink> > &nbsp; TAGS &nbsp; >
 							<a href="#" className="active">{this.props.tag.tag}</a>
 						</div>
 					</div>

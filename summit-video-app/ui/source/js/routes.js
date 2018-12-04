@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route, browserHistory, IndexRoute } from 'react-router';
+import { Router, Route, browserHistory, IndexRoute, Redirect } from 'react-router';
 import URL from './utils/url';
 
 import App from './components/pages/App';
@@ -26,16 +26,18 @@ const Routes = (baseURL) => (
       <Route path={baseURL} component={App}>
       	<IndexRoute component={AllVideos} />
         <Route path="summits" component={Summits}/>
-        <Route path="summits/show/:slug" component={SummitDetail}/>
-        <Route path="summits/:slug" component={SummitDetail}/>
+        <Route path="summits/show/:summit" component={SummitDetail} />
+        <Route path="summits/:summit" component={SummitDetail} />
+        <Route path="summits/:summit/tracks/:slug" component={TrackDetail} />
+        <Route path="summits/:summit/:slug" component={VideoDetail} />
         <Route path="speakers" component={Speakers} />
         <Route path="speakers/:id/:slug" component={SpeakerDetail} />
         <Route path="speakers/show/:id" component={SpeakerDetail} />
         <Route path="featured" component={Featured} />
         <Route path="search" component={Search} />
         <Route path="tags/:tag" component={TagDetail}/>
-        <Route path=":summit/tracks/:slug" component={TrackDetail}/>
-        <Route path=":summit/:slug" component={VideoDetail} />
+        <Redirect from=":summit/tracks/:slug" to="summits/:summit/tracks/:slug" />
+        <Redirect from=":summit/:slug" to="summits/:summit/:slug" />
       </Route>
     </Router>
 );

@@ -45,7 +45,7 @@ class Featured extends React.Component {
 				<div className="container">
 					<div className="row">
 						<div className="col-sm-12">
-							<RouterLink link={`${featuredVideo.summit.slug}/${featuredVideo.slug}`}>
+							<RouterLink link={`summits/${featuredVideo.summit.slug}/${featuredVideo.slug}`}>
 								<div className='featured-video'>	
 									<h3>Don't Miss</h3>
 									<FeatureImagePanel

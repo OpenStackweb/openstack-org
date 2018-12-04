@@ -62,7 +62,7 @@ class SummitDetail extends React.Component {
                             {this.props.summit.tracks && this.props.summit.tracks.map(track => (
                                 <RouterLink key={track.id}
                                     className={"track btn btn-default btn-xs " + (track.has_videos ? '' : 'disabled')}
-                                    link={`${this.props.summit.slug}/tracks/${track.slug}`}>
+                                    link={`summits/${this.props.summit.slug}/tracks/${track.slug}`}>
                                     {track.title}
                                 </RouterLink>
                             ), this)}
@@ -96,7 +96,7 @@ export default connect (
 	(dispatch, ownProps) => {
 		return {
 			requestVideos (start = 0) {
-				dispatch(fetchSummitVideos(ownProps.params.slug, start));
+				dispatch(fetchSummitVideos(ownProps.params.summit, start));
 			}
 		}
 	}
