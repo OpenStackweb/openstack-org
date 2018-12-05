@@ -100,9 +100,6 @@ final class GridFieldSeedWithPreviousQuestionsAction
             }
         }
 
-        $response = new SS_HTTPResponse();
-        $response->setStatusCode(200);
-        return $response;
     }
 
     public function getActions($gridField) {
