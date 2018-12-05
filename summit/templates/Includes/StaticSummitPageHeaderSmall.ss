@@ -1,4 +1,4 @@
-<div class="summit-hero-landing-short container-fluid">
+<div class="summit-hero-landing-short container-fluid" style="background: url('{$SummitImage.Image().getURL()}') center center no-repeat">
 
     <nav class="navbar navbar-default navbar-fixed-top" id="summit-main-nav">
         <div class="container">
