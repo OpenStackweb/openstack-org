@@ -300,6 +300,30 @@ button.btn i, a.btn i {
         display: inline-block;
         
     }
+
+    /* keep open Other Summits */
+    .navbar-default ul.navbar-main > li.other-summits a {
+        background: transparent;
+        color: #ffd602;
+    }
+
+    .navbar-default ul.navbar-main > li.other-summits .dropdown-menu {
+        position: static;
+        float: none;
+        width: auto;
+        margin: 0px;
+        padding: 0px 10px;
+        background-color: transparent;
+        border: 0;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        display: block;
+    }
+
+    .navbar-default ul.navbar-main > li.other-summits .dropdown-menu > li > a {
+        color: #fff;
+        padding: 0.2em 0;
+    }
 }
 
 @media all and (min-width: 767px) {
