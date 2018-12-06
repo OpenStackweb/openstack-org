@@ -69,7 +69,7 @@ jQuery(document).ready(function($) {
                 var errors = validator.numberOfInvalids();
                 if (errors) {
                     var element = validator.errorList[0].element;
-                    var offset = (element.name == 'Affiliations') ? $(element).prev().offset().top : $(element).offset().top;
+                    var offset = (element.name == 'HiddenAffiliations') ? $(element).prev().offset().top : $(element).offset().top;
 
                     if(element.name == 'g_recaptcha_hidden'){
                         offset = $('#g-recaptcha-container').offset().top;
