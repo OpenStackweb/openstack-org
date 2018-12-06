@@ -41,7 +41,7 @@ button.btn i, a.btn i {
 .summit-hero-landing, .summit-hero-landing-short {
     background-image: url("../images/berlin.jpg");
     background-size: cover;
-    background-position: center center;
+    background-position: bottom center;
     background-repeat: no-repeat;
     -webkit-background-size: cover;
     -moz-background-size: cover;
