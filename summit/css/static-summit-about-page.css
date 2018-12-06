@@ -39,10 +39,15 @@ button.btn i, a.btn i {
 }
 
 .summit-hero-landing, .summit-hero-landing-short {
-    background: url("../images/berlin.jpg") center bottom no-repeat;
+    background-image: url("../images/berlin.jpg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     height: auto;
     display: block;
-    background-size: cover;
     position: relative;
     padding-bottom:120px;
 }

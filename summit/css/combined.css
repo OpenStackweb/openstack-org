@@ -1110,8 +1110,13 @@ footer {
   height: 100%;
   text-align: center;
   padding: 70px 0;
-  background: url('/themes/openstack/static/images/boston/boston-bkgd.jpg') no-repeat right top;
-  background-size: cover; 
+  background-image: url('/themes/openstack/static/images/boston/boston-bkgd.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
   overflow: scroll;}
 
 /*Tokyo Summit Landing Page*/
