@@ -31,11 +31,11 @@
                                 <li><a href="/summit/denver-2019/">Denver 2019</a></li>
                             </ul>
                     </li>
-                    <!-- <li class="link button-box">
-                        <a href="/summit/berlin-2018/summit-schedule/global-search?t=Registration" class="btn register-btn-lrg">
-                            Register OnSite <i class="fa fa-arrow-right"></i>
+                    <li class="link button-box">
+                        <a href="https://openinfrasummitandptgdenver.eventbrite.com/" class="btn register-btn-lrg">
+                            Register Now <i class="fa fa-arrow-right"></i>
                         </a>
-                    </li>-->
+                    </li>
                 </ul>
             </div>
         </div>
