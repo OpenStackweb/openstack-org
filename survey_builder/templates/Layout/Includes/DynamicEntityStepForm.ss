@@ -15,7 +15,7 @@
         <% if CanSkipStep %>
         <p>$_T("survey_ui", "If you do not wish to answer these questions, you may <a href=\"%s\">skip to the next section.</a>" , $SkipStepUrl)</p>
         <% end_if %>
-        <h2 class="entities-surveys-count-title">$_T("survey_ui", "Your deployments (%s)", $EntitiesSurveys.Count )</h2>
+        <h2 class="entities-surveys-count-title">$_T("survey_ui", "Your deployments (%1$s)", $EntitiesSurveys.Count )</h2>
         <hr/>
         <% if EntitiesSurveys.Count == 0%>
         <p class="entites-surveys-subtitle">$_T("survey_ui", "You do not have any OpenStack deployment yet. <a href=\"%s\">Want to add one?</a>", $AddEntityUrl)</p>

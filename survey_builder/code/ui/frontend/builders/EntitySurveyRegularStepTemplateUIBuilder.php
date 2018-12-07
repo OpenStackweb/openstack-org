@@ -24,7 +24,7 @@ class EntitySurveyRegularStepTemplateUIBuilder extends SurveyRegularStepTemplate
     {
 
         if (!$step->survey()->isLastStep())
-            $this->setNextButtonTitle(GetTextTemplateHelpers::_t("survey_ui",'STEP %s', $step->survey()->getCurrentStepIndexNice() + 1));
+            $this->setNextButtonTitle(GetTextTemplateHelpers::_t("survey_ui",'STEP %1$s', $step->survey()->getCurrentStepIndexNice() + 1));
 
         $form          = parent::build($step, $action, $form_name);
         $entity_survey = $step->survey();
