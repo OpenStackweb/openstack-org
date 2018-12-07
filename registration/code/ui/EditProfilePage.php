@@ -148,6 +148,16 @@ class EditProfilePage_Controller extends Page_Controller
         if ($CurrentMember = Member::currentUser()) {
             Requirements::css("registration/css/speaker.profile.form.css");
             Requirements::css('node_modules/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
+            BootstrapTagsInputDependencies::renderRequirements();
+
+            // languages
+            $languages_source = 'var language_source = [];'.PHP_EOL;
+            foreach(Language::get() as $lang){
+                $languages_source .= sprintf("language_source.push({id: %s, name:'%s'});".PHP_EOL, $lang->ID, $lang->Name);
+            }
+
+            Requirements::customScript($languages_source);
+
             $speaker = PresentationSpeaker::get()->filter('MemberID', $CurrentMember->ID)->first();
             $SpeakerProfileForm = New EditSpeakerProfileForm($this, 'EditSpeakerProfileForm', $speaker, $CurrentMember, null);
             return $SpeakerProfileForm;

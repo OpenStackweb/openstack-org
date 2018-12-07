@@ -22,6 +22,7 @@ class EditSpeakerProfileForm extends SafeXSSForm {
             $country = '';
         }
 
+
         // Fields
         $FirstNameField = new TextField('FirstName', "First Name");
         $LastNameField  = new TextField('LastName', "Last Name");
@@ -80,18 +81,10 @@ class EditSpeakerProfileForm extends SafeXSSForm {
         $CountriesToTravelField->addExtraClass('travel-field');
 
         // Spoken Languages
-        $LanguageField1 = new TextField('Language[1]','#1');
-        $LanguageField2 = new TextField('Language[2]','#2');
-        $LanguageField3 = new TextField('Language[3]','#3');
-        $LanguageField4 = new TextField('Language[4]','#4');
-        $LanguageField5 = new TextField('Language[5]','#5');
+        $LanguageField = new TextField('Languages','Languages');
 
         // Area of Expertise
-        $ExpertiseField1 = new TextField('Expertise[1]','#1');
-        $ExpertiseField2 = new TextField('Expertise[2]','#2');
-        $ExpertiseField3 = new TextField('Expertise[3]','#3');
-        $ExpertiseField4 = new TextField('Expertise[4]','#4');
-        $ExpertiseField5 = new TextField('Expertise[5]','#5');
+        $ExpertiseField = new TextField('Expertise','Expertise');
 
         // Links To Presentations
         $PresentationLinkField1  = new TextField('PresentationLink[1]','#1');
@@ -126,15 +119,11 @@ class EditSpeakerProfileForm extends SafeXSSForm {
             $WillingToTravel->setValue($speaker->WillingToTravel);
             $NotesField->setValue($speaker->Notes);
 
-            foreach ($speaker->AreasOfExpertise() as $key => $expertise) {
-                if ($key > 4) break;
-                ${'ExpertiseField'.($key+1)}->setValue($expertise->Expertise);
-            }
+            $expertise = implode(',', $speaker->AreasOfExpertise()->limit(5)->column('Expertise'));
+            $ExpertiseField->setValue($expertise);
 
-            foreach ($speaker->Languages() as $key => $language) {
-                if ($key > 4) break;
-                ${'LanguageField'.($key+1)}->setValue($language->Name);
-            }
+            $languages = implode(',', $speaker->Languages()->limit(5)->column('Name'));
+            $LanguageField->setValue($languages);
 
             $country_array = array();
             foreach ($speaker->TravelPreferences() as $pref_country) {
@@ -176,16 +165,8 @@ class EditSpeakerProfileForm extends SafeXSSForm {
             $FundedTravelField,
             $WillingToTravel,
             $CountriesToTravelField,
-            $LanguageField1,
-            $LanguageField2,
-            $LanguageField3,
-            $LanguageField4,
-            $LanguageField5,
-            $ExpertiseField1,
-            $ExpertiseField2,
-            $ExpertiseField3,
-            $ExpertiseField4,
-            $ExpertiseField5,
+            $LanguageField,
+            $ExpertiseField,
             $PresentationLinkField1,
             $PresentationTitleField1,
             $PresentationLinkField2,
@@ -269,27 +250,35 @@ class EditSpeakerProfileForm extends SafeXSSForm {
             $speaker->AskedAboutBureau = TRUE;
 
             // Languages
-
             $speaker->Languages()->removeAll();
-
-            foreach ($data['Language'] as $lang) {
-                if (trim($lang) != '') {
-                    $spoken_lang = Language::get()->where(sprintf("LOWER(Name) = '%s'", strtolower(trim($lang))))->first();
-                    if(is_null($spoken_lang)) continue;
-                    $speaker->Languages()->add( $spoken_lang );
+            if ($data['Languages']) {
+                $languages = explode(',', $data['Languages']);
+                foreach ($languages as $lang) {
+                    if (trim($lang) != '') {
+                        $spoken_lang = Language::get()->where(sprintf("LOWER(Name) = '%s'", strtolower(trim($lang))))->first();
+                        if(is_null($spoken_lang)) continue;
+                        $speaker->Languages()->add( $spoken_lang );
+                    }
                 }
             }
+
 
             // Expertise
             $speaker->AreasOfExpertise()->removeAll();
-            foreach ($data['Expertise'] as $exp) {
-                if (trim($exp) != '') {
-                    $expertise = SpeakerExpertise::create(array(
-                        'Expertise' => $exp
-                    ));
-                    $speaker->AreasOfExpertise()->add( $expertise );
+            if ($data['Expertise']) {
+                $expertise = explode(',', $data['Expertise']);
+
+                foreach ($expertise as $exp) {
+                    if (trim($exp) != '') {
+                        if(!$expertise = SpeakerExpertise::get()->filter(['SpeakerID' => 0, 'Expertise' => $exp])->first()) {
+                            $expertise = SpeakerExpertise::create(['Expertise' => $exp]);
+                        }
+
+                        $speaker->AreasOfExpertise()->add( $expertise );
+                    }
                 }
             }
+
 
             // Presentation Link
             $speaker->OtherPresentationLinks()->removeAll();

@@ -92,50 +92,16 @@
             <hr>
 
             <div class="field text ">
-                <label for="$FormName_Laguages" class="left">Spoken Languages</label>
-                <div class=" expertise">
-                    <span> $Fields.dataFieldByName(Language[1]).Title </span>
-                    $Fields.dataFieldByName(Language[1])
-                </div>
-                <div class=" expertise">
-                    <span> $Fields.dataFieldByName(Language[2]).Title </span>
-                    $Fields.dataFieldByName(Language[2])
-                </div>
-                <div class=" expertise">
-                    <span> $Fields.dataFieldByName(Language[3]).Title </span>
-                    $Fields.dataFieldByName(Language[3])
-                </div>
-                <div class=" expertise">
-                    <span> $Fields.dataFieldByName(Language[4]).Title </span>
-                    $Fields.dataFieldByName(Language[4])
-                </div>
-                <div class=" expertise">
-                    <span> $Fields.dataFieldByName(Language[5]).Title </span>
-                    $Fields.dataFieldByName(Language[5])
+                <label for="$FormName_Languages" class="left">Spoken Languages (up to 5)</label>
+                <div class="language">
+                    $Fields.dataFieldByName(Languages)
                 </div>
             </div>
 
             <div class="field text ">
-                <label for="$FormName_Expertise" class="left">Area Of Expertise</label>
+                <label for="$FormName_Expertise" class="left">Area Of Expertise (up to 5)</label>
                 <div class=" expertise">
-                    <span> $Fields.dataFieldByName(Expertise[1]).Title </span>
-                    $Fields.dataFieldByName(Expertise[1])
-                </div>
-                <div class=" expertise">
-                    <span> $Fields.dataFieldByName(Expertise[2]).Title </span>
-                    $Fields.dataFieldByName(Expertise[2])
-                </div>
-                <div class=" expertise">
-                    <span> $Fields.dataFieldByName(Expertise[3]).Title </span>
-                    $Fields.dataFieldByName(Expertise[3])
-                </div>
-                <div class=" expertise">
-                    <span> $Fields.dataFieldByName(Expertise[4]).Title </span>
-                    $Fields.dataFieldByName(Expertise[4])
-                </div>
-                <div class=" expertise">
-                    <span> $Fields.dataFieldByName(Expertise[5]).Title </span>
-                    $Fields.dataFieldByName(Expertise[5])
+                    $Fields.dataFieldByName(Expertise)
                 </div>
             </div>
 

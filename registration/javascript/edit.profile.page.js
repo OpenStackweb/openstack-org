@@ -210,6 +210,47 @@ jQuery(document).ready(function($) {
             country.prop('disabled', diabled).trigger("chosen:updated");
         });
 
+        var languages = new Bloodhound({
+            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            local: $.map(language_source, function (language) {
+                return {
+                    name: language.name,
+                    id: language.id
+                };
+            })
+        });
+
+        languages.initialize();
+
+        $(speaker_form_id+'_Languages').tagsinput({
+            freeInput: false,
+            maxTags: 5,
+            trimValue: true,
+            typeaheadjs: [
+                {
+                    hint: true,
+                    highlight: true,
+                    minLength: 3
+                },
+                {
+                    minlength: 3,
+                    name: 'languages',
+                    displayKey: 'name',
+                    valueKey: 'name',
+                    source: languages.ttAdapter()
+                }
+            ]
+        });
+
+        // Areas of Expertise
+
+        $(speaker_form_id+'_Expertise').tagsinput({
+            freeInput: true,
+            maxTags: 5,
+            trimValue: true
+        });
+
         //custom validation
         $.validator.addMethod(
             "regex",
@@ -237,11 +278,7 @@ jQuery(document).ready(function($) {
                 Surname:{required: true, ValidPlainText:true },
                 Title: {required: true, ValidPlainText:true},
                 Bio:{required: true},
-                'Expertise[1]':{required: true, ValidPlainText:true },
-                'Expertise[2]':{ValidPlainText:true },
-                'Expertise[3]':{ValidPlainText:true },
-                'Expertise[4]':{ValidPlainText:true },
-                'Expertise[5]':{ValidPlainText:true },
+                'Expertise':{required: true, ValidPlainText:true },
                 'PresentationLink[1]' : {url: true},
                 'PresentationLink[2]' : {url: true},
                 'PresentationLink[3]' : {url: true},
@@ -252,11 +289,7 @@ jQuery(document).ready(function($) {
                 'PresentationTitle[3]' : {ValidPlainText: true},
                 'PresentationTitle[4]' : {ValidPlainText: true},
                 'PresentationTitle[5]' : {ValidPlainText: true},
-                'Language[1]' : {required: true,ValidPlainText:true},
-                'Language[2]':{ValidPlainText:true },
-                'Language[3]':{ValidPlainText:true },
-                'Language[4]':{ValidPlainText:true },
-                'Language[5]':{ValidPlainText:true },
+                'Languages' : {required: true,ValidPlainText:true},
                 'GitHubUser':{ ValidPlainText:true },
                 'IRCHandle':{ ValidPlainText:true },
                 'TwitterName':{ ValidPlainText:true }
