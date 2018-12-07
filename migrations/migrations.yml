@@ -117,3 +117,4 @@ migrations:
   - LanguagesSeedMigration
   - PresentationSpeakerLanguageMigration
   - PageLinkMigration
+  - LanguagesUpdateMigration
