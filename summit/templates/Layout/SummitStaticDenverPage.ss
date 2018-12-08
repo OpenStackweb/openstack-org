@@ -15,8 +15,8 @@
                     Infrastructure, CI/CD, Telecom + NFV, Public Cloud, Private & Hybrid Cloud and members of open source
                     communities like Ansible, Ceph, Docker, Kata Containers, Kubernetes, ONAP, OpenStack, Open vSwitch, OPNFV, Zuul and more.</p>
 
-                <a class="btn btn-default" href="/summit/berlin-2018/sponsors/">Meet the Sponsors <i class="fal fa-arrow-right"></i></a>
-                <a class="btn btn-primary" href="https://www.openstack.org/videos/summits/berlin-2018" target="_blank">Summit Videos <i class="fal fa-arrow-right"></i></a>
+                <a class="btn btn-default" href="/summit/denver-2019/sponsors/">Sponsor the Summit <i class="fal fa-arrow-right"></i></a>
+                <a class="btn btn-primary" href="https://openinfrasummitandptgdenver.eventbrite.com/" target="_blank">Register Now <i class="fal fa-arrow-right"></i></a>
 
             </div>
             <div class="col-md-12 session-box">
@@ -70,7 +70,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-lg-8 col-md-6">
-                <h3 class="title-section">Featured Speakers</h3>
+                <h3 class="title-section">Featured Speakers from the Berlin 2018 Summit</h3>
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
@@ -219,35 +219,43 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12">
-                    <a class="btn" href="/summit/berlin-2018/speakers">See all summit speakers <i class="fa fa-arrow-right"></i></a>
-                </div>
+                <!-- <div class="col-xs-12">
+                    <a class="btn" href="/summit/denver-2019
+/speakers">See all summit speakers <i class="fa fa-arrow-right"></i></a>
+                </div> -->
             </div>
             <div class="col-sm-12 col-lg-4 col-md-6 col-xs-12">
-                <h3 class="title-section">Summit Overview</h3>
+                <!-- <h3 class="title-section">Summit Overview</h3>
                 <div class="col-12 col-md-12 col-sm-6 col-xs-12 featured">
                     <ul class="overview">
-                        <li><a href="https://www.openstack.org/summit/berlin-2018/summit-schedule/events/22723/berlin-hackathon-hacking-the-edge-hosted-by-open-telekom-cloud "><h5>Edge computing Hackaton</h5>
+                        <li><a href="https://www.openstack.org/summit/denver-2019
+/summit-schedule/events/22723/berlin-hackathon-hacking-the-edge-hosted-by-open-telekom-cloud "><h5>Edge computing Hackaton</h5>
                             <p><small>Saturday - Sunday</small></p> <i class="fal fa-info-circle"></i></a></li>
-                        <li><a href="https://www.openstack.org/summit/berlin-2018/summit-schedule/events/22721/openstack-upstream-institute-sponsored-by-lenovo-day-1-rsvp-required"><h5>OpenStack Upstream Institute</h5>
+                        <li><a href="https://www.openstack.org/summit/denver-2019
+/summit-schedule/events/22721/openstack-upstream-institute-sponsored-by-lenovo-day-1-rsvp-required"><h5>OpenStack Upstream Institute</h5>
                             <p><small>Sunday - Monday</small></p> <i class="fal fa-info-circle"></i></a></li>
-                        <li><a href="https://www.openstack.org/summit/berlin-2018/summit-schedule/#track=261 "><h5>Keynotes</h5>
+                        <li><a href="https://www.openstack.org/summit/denver-2019
+/summit-schedule/#track=261 "><h5>Keynotes</h5>
                             <p><small>Tuesday - Wednesday</small></p> <i class="fal fa-info-circle"></i></a></li>
-                        <li><a href="https://www.openstack.org/summit/berlin-2018/summit-schedule"><h5>Breakout Sessions</h5>
+                        <li><a href="https://www.openstack.org/summit/denver-2019
+/summit-schedule"><h5>Breakout Sessions</h5>
                             <p><small>Tuesday - Thursday</small></p> <i class="fal fa-info-circle"></i></a></li>
                         <li><a href="https://wiki.openstack.org/wiki/Forum"><h5>The Forum</h5>
                             <p><small>Tuesday - Thursday</small></p> <i class="fal fa-info-circle"></i></a></li>
-                        <li><a href="https://www.openstack.org/summit/berlin-2018/summit-schedule/#track=254"><h5>Workshops and Trainings</h5>
+                        <li><a href="https://www.openstack.org/summit/denver-2019
+/summit-schedule/#track=254"><h5>Workshops and Trainings</h5>
                             <p><small>Tuesday - Thursday</small></p> <i class="fal fa-info-circle"></i></a></li>
-                        <li><a href="https://www.openstack.org/summit/berlin-2018/summit-schedule/global-search?t=Marketplace"><h5>Open Infrastructure Marketplace</h5>
+                        <li><a href="https://www.openstack.org/summit/denver-2019
+/summit-schedule/global-search?t=Marketplace"><h5>Open Infrastructure Marketplace</h5>
                             <p><small>Tuesday - Thursday</small></p> <i class="fal fa-info-circle"></i></a></li>
                     </ul>
 
                 </div>
 
                 <div class="col-xs-12">
-                    <a class="btn" href="/summit/berlin-2018/summit-schedule/">Full Summit Schedule<i class="fa fa-arrow-right"></i></a>
-                </div>
+                    <a class="btn" href="/summit/denver-2019
+/summit-schedule/">Full Summit Schedule<i class="fa fa-arrow-right"></i></a>
+                </div> -->
             </div>
         </div>
         <div class="row">
@@ -261,7 +269,7 @@
 <div class="academy-wrapper" id="Sponsors">
     <div class="container">
         <div class="row">
-            <div class="col-sm-12">
+            <!-- <div class="col-sm-12">
                 <h3 class="recap-title script">Thank You to our Berlin 2018 Sponsors!
                 </h3>
             </div>
@@ -520,7 +528,7 @@
                     <span class="fa fa-chevron-right"></span>
                 </a>
             </div>
-
+-->
 
 
 
@@ -532,14 +540,15 @@
                     Docker, Kata Containers, Kubernetes, OpenStack, OPNFV, Zuul and more.
                 </p>
                 <p style="text-align: center;">
-                    <a class="btn register-btn-lrg" href="/summit/berlin-2018/sponsors/">Sponsor the Summit <i class="fa fa-arrow-right"></i></a>
+                    <a class="btn register-btn-lrg" href="/summit/denver-2019
+/sponsors/">Sponsor the Summit <i class="fa fa-arrow-right"></i></a>
                 </p>
             </div>
         </div>
     </div>
 </div>
 
-<div class="diverse">]
+<div class="diverse">
     <div class="blue-div"></div>
     <div class="image"></div>
     <div class="container">
@@ -548,9 +557,9 @@
                 <span></span>
                 <h2>Inclusive.<br>Diverse.<br>Open.</h2>
                 <p>We are a diverse community of professionals, and the OpenStack Foundation is dedicated to providing an
-                    inclusive and safe Summit experience for everyone. View the <a href="https://www.openstack.org/summit/berlin-2018/code-of-conduct/" target="_blank">Summit Code of Conduct</a> for more information.</p>
+                    inclusive and safe Summit experience for everyone. View the <a href="https://www.openstack.org/summit/denver-2019/code-of-conduct/" target="_blank">Summit Code of Conduct</a> for more information.</p>
 
-                <p>Want to support community members who don’t have the resources to attend the Summit?  <a href="https://www.eventbrite.com/e/openstack-summit-november-2018-berlin-tickets-41880169715" target="_blank">Donate to the travel support program.</a>
+                <p>Want to support community members who don’t have the resources to attend the Summit?  <a href="https://www.eventbrite.com/e/open-infrastructure-summit-project-teams-gathering-tickets-52606153421" target="_blank">Donate to the travel support program.</a>
                 </p>
             </div>
         </div>
@@ -564,12 +573,12 @@
 
                 <div class="pink box item big">
                     <h4>Get buy in from your boss</h4>
-                    <p>Justifying your trip to Berlin this November is easier when armed with the right information.</p>
+                    <p>Justifying your trip to Denver this April is easier when armed with the right information.</p>
                     <p>Get budget info and event details to help convince your boss that you need to attend the Summit.</p>
                     <p>To make it even easier, here’s a sample letter filled with info on who you can expect to meet, information on hands-on training opportunities, collaborative sessions, networking events and more that is bound to send you and your coworkers to the home of open infrastructure.
                     </p>
 
-                    <a class="btn" href="/summit/berlin-2018/sample-letter/">Sample Letter <i class="fa fa-arrow-right"></i></a>
+                    <a class="btn" href="/summit/denver-2019/sample-letter/">Sample Letter <i class="fa fa-arrow-right"></i></a>
                 </div>
                 <div class="video item">
                     <div class="embed-video"><iframe src="//www.youtube.com/embed/xZwqtldjJRQ?rel=0&showinfo=0" frameborder="0"
@@ -593,8 +602,6 @@
                         <p class='video-catpion'>{$Caption}</p>
                     </div>
                     <div class="video-cover">
-                        <h5>Download the Summmit App Today
-                        </h5>
                         <h6>Vancouver 2018</h6>
                     </div>
                 </div>
@@ -609,17 +616,17 @@
                     <h4>Get involved with the Forum</h4>
                     <p>Operators and developers attend the Forum to share feedback and collaboratively brainstorm requirements for the next release.</p>
 
-                    <a class="btn" href="https://www.openstack.org/summit/berlin-2018/call-for-presentations">Get involved <i class="fa fa-arrow-right"></i></a>
+                    <!-- <a class="btn" href="https://www.openstack.org/summit/denver-2019/call-for-presentations">Get involved <i class="fa fa-arrow-right"></i></a> -->
                 </div>
             </div>
 
             <div class="col-lg-4 col-md-4 col-sm-12">
                 <div class="box light item">
-                    <h4>Berlin Travel Guide</h4>
-                    <p>You're going to Berlin! Where should you go? Take a look at this handy travel guide.
+                    <h4>Denver Travel Guide</h4>
+                    <p>You're going to Denver! Where should you go? Take a look at this handy travel guide.
                     </p>
 
-                    <a class="btn" href="https://www.openstack.org/assets/berlin-summit/Berlin18-Summit-City-Guide-112.pdf">Download <i class="fa fa-download"></i></a>
+                    <!-- <a class="btn" href="https://www.openstack.org/assets/berlin-summit/Berlin18-Summit-City-Guide-112.pdf">Download <i class="fa fa-download"></i></a> -->
                 </div>
 
 
