@@ -406,7 +406,7 @@ button.btn i, a.btn i {
 }
 
 .about-summit-header {
-    background: #ed1944 url("../images/berlin-city.svg") center bottom no-repeat;
+    background: #ed1944 url("/assets/summits/denver-2019/Denver-Mountain-BG.svg") center bottom no-repeat;
     color: #fff;
     min-height: 80vh;
     padding-top: 7em;
