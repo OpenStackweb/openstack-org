@@ -10,7 +10,7 @@
       <meta name="author" content="">
       
       <title>
-        Vote For Vancouver Summit Presentations | OpenStack Open Source Cloud Computing Software
+        Vote For Berlin Summit Presentations | OpenStack Open Source Cloud Computing Software
       </title>
       
       <!-- Bootstrap Core CSS -->

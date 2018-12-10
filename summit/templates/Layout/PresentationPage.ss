@@ -9,7 +9,7 @@
                     <div class="main-panel-section">
                         <div class="row">
                             <div class="col-lg-6 col-md-6">
-                                <h2>Forum Sessions and Presentations</h2>
+                                <h2>Presentations</h2>
                             </div>
                             <div class="col-lg-6 col-md-6">
                                 <% if $Top.isCallForSpeakerOpen %>
@@ -30,7 +30,7 @@
                             </div>
                         </div>
                     </div>
-                    <h3>Presentations/Forum Sessions <strong>You</strong> Submitted</h3>
+                    <h3>Presentations <strong>You</strong> Submitted</h3>
                     <table class="table">
                         <tbody>
                             <% if $CurrentMember.SpeakerProfile.MyPresentations($Top.Summit.ID) %>
@@ -109,7 +109,7 @@
                             <% end_if %>
                         </tbody>
                     </table>
-                    <h3>Presentations/Forum Sessions <strong>Others</strong> Submitted With You As A Moderator</h3>
+                    <h3>Presentations <strong>Others</strong> Submitted With You As A Moderator</h3>
                     <table class="table">
                         <tbody>
                             <% if $CurrentMember.SpeakerProfile.OtherModeratorPresentations($Top.Summit.ID) %>

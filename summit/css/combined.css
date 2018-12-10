@@ -1310,7 +1310,12 @@ a.current-summit-link {
   .presentation-app-header .status {
     text-transform: uppercase;
     padding-bottom: 10px;
-    padding-top: 20px; }
+    padding-top: 20px;
+    margin-left: 325px; }
+
+    @media (max-width: 767px) {
+    .presentation-app-header .status {
+      margin-left: -225px; } }
 
 .presentation-app-body {
   padding-top: 20px;
