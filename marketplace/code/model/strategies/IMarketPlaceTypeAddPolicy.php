@@ -17,9 +17,9 @@
 interface IMarketPlaceTypeAddPolicy {
 
 	/**
-	 * @param ICompany $company
+	 * @param Company $company
 	 * @return bool
 	 * @throws PolicyException
 	 */
-	public function canAdd(ICompany $company);
+	public function canAdd(Company $company);
 } 

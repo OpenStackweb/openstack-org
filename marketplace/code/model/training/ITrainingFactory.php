@@ -17,10 +17,10 @@ interface ITrainingFactory extends ICompanyServiceFactory {
 	 * @param string  $name
 	 * @param string $description
 	 * @param bool $active
-	 * @param ICompany $company
+	 * @param Company $company
 	 * @return ITraining|TrainingService
 	 */
-	public function buildTraining($name,$description,$active, ICompany $company);
+	public function buildTraining($name ,$description, $active, Company $company);
 
 	/**
 	 * @param string $city
