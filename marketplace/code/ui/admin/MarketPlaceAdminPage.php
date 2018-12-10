@@ -155,7 +155,7 @@ class MarketPlaceAdminPage_Controller extends AdminController
         foreach($css_files as $css_file)
             Requirements::css($css_file);
 
-        JQueryValidateDependencies::renderRequirements();
+        JQueryValidateDependencies::renderRequirements(true, false);
         JSChosenDependencies::renderRequirements();
 
         Requirements::javascript(Director::protocol() . "code.jquery.com/ui/1.10.4/jquery-ui.min.js");

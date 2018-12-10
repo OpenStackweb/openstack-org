@@ -18,13 +18,13 @@ final class PrivateCloudFactory extends CloudFactory {
 	/**
 	 * @param string           $name
 	 * @param string           $overview
-	 * @param ICompany         $company
+	 * @param Company          $company
 	 * @param bool             $active
 	 * @param IMarketPlaceType $marketplace_type
 	 * @param null|string      $call_2_action_url
 	 * @return ICompanyService
 	 */
-	public function buildCompanyService($name, $overview, ICompany $company, $active, IMarketPlaceType $marketplace_type, $call_2_action_url = null,  $live_service = null, $published = null)
+	public function buildCompanyService($name, $overview, Company $company, $active, IMarketPlaceType $marketplace_type, $call_2_action_url = null,  $live_service = null, $published = null)
 	{
 		$private_cloud = new PrivateCloudService;
 		$private_cloud->setName($name);

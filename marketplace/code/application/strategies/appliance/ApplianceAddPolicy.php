@@ -32,11 +32,11 @@ final class ApplianceAddPolicy implements IMarketPlaceTypeAddPolicy {
 	}
 
 	/**
-	 * @param ICompany $company
+	 * @param Company $company
 	 * @return bool
 	 * @throws PolicyException
 	 */
-	public function canAdd(ICompany $company)
+	public function canAdd(Company $company)
 	{
 		$current = $this->repository->countByCompany($company->getIdentifier());
 		$allowed = $company->getAllowedMarketplaceTypeInstances($this->marketplace_type_repository->getByType(IAppliance::MarketPlaceType));

@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-interface IRegionalSupportedCompanyServiceFactory extends ICompanyServiceFactory{
+interface IRegionalSupportedCompanyServiceFactory extends ICompanyServiceFactory {
 	/**
 	 * @param IRegion                  $region
 	 * @param IRegionalSupportedCompanyService $service
