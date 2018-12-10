@@ -2,8 +2,8 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-7 col-md-6 col-sm-12">
-                <!-- <h4 class="summit-title script">The Open Infrastructure Summit</h4> -->
-                <h2>Home of Open Infrastructure</h2>
+                <h4 class="summit-title script">The Open Infrastructure Summit</h4>
+                <h2>Home of Open Development</h2>
                 <div class="bird"> 
                     <h5>Join the conversation <br><strong><a href="http://twitter.com/openstack" target="_blank"><i class="fab fa-twitter" style="font-size: 24px;color:#ffd602;"></a></i>
                     &nbsp;&nbsp;&nbsp;&nbsp;<a href="https://www.facebook.com/openstack/" target="_blank"><i class="fab fa-facebook-f" style="font-size: 24px;color:#ffd602;"></i></a></strong>
