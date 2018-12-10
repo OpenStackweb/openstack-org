@@ -2,25 +2,24 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-7 col-md-6 col-sm-12">
-                <h4 class="summit-title script">The OpenStack Summit</h4>
+                <!-- <h4 class="summit-title script">The Open Infrastructure Summit</h4> -->
                 <h2>Home of Open Infrastructure</h2>
-                <div class="bird"> <span></span>
-                    <h5>Join the conversation<br>
-                        <strong>#OpenStackSummit</strong></h5>
+                <div class="bird"> 
+                    <h5>Join the conversation <br><strong><a href="http://twitter.com/openstack" target="_blank"><i class="fab fa-twitter" style="font-size: 24px;color:#ffd602;"></a></i>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<a href="https://www.facebook.com/openstack/" target="_blank"><i class="fab fa-facebook-f" style="font-size: 24px;color:#ffd602;"></i></a></strong>
+                    </h5>
                 </div>
             </div>
             <div class="col-lg-5 col-md-6 col-sm-12 about-buttons">
 
-                <p>Join the people building and operating open infrastructure, with over 200 sessions and workshops on Container
-                    Infrastructure, CI/CD, Telecom + NFV, Public Cloud, Private & Hybrid Cloud and members of open source
-                    communities like Ansible, Ceph, Docker, Kata Containers, Kubernetes, ONAP, OpenStack, Open vSwitch, OPNFV, Zuul and more.</p>
+                <p>Join the people building and operating open infrastructure, with over 300 sessions and workshops on Container Infrastructure, CI/CD, Telecom + NFV, Public Cloud, Private & Hybrid Cloud, Security and members of open source communities like Airship, Ansible, Ceph, Docker, Kata Containers, Kubernetes, ONAP, OpenStack, Open vSwitch, OPNFV, StarlingX, Zuul and more.</p>
 
                 <a class="btn btn-default" href="/summit/denver-2019/sponsors/">Sponsor the Summit <i class="fal fa-arrow-right"></i></a>
                 <a class="btn btn-primary" href="https://openinfrasummitandptgdenver.eventbrite.com/" target="_blank">Register Now <i class="fal fa-arrow-right"></i></a>
 
             </div>
             <div class="col-md-12 session-box">
-                <h3>200 Sessions and Workshops</h3>
+                <h3>Over 300 Presentations, Workshops, and Collaborative Sesssions</h3>
                 <ul class="sessions">
                     <li class="session"> <span class="ai"></span> AI</li>
                     <li class="session"> <span class="cicd"></span> CI/CD</li>
