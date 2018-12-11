@@ -49,7 +49,7 @@ final class AddSpeakerForm extends BootstrapForm
         $max_moderators_reached = $this->presentation->maxModeratorsReached();
         $use_moderator          = $this->presentation->Type()->UseModerator;
         $moderator_exists       = $this->presentation->Moderator()->exists();
-        $speaker_type           = ($use_moderator && (!$max_moderators_reached || !$use_speakers)) ? 'moderator' : 'moderator';
+        $speaker_type           = ($use_moderator && (!$max_moderators_reached || !$use_speakers)) ? 'moderator' : 'speaker';
 
         $fields = FieldList::create(
             LiteralField::create('SpeakerNote',
@@ -61,7 +61,7 @@ final class AddSpeakerForm extends BootstrapForm
             LiteralField::create('LegalMe', sprintf('
                 <div id="legal-me" style="display: none;">
                  <label>
-                    '.ucfirst($speaker_type).'s agree that OpenStack Foundation may record and publish their talks presented during the %s OpenStack Summit. If you submit a proposal on behalf of a '.$speaker_type.', you represent to OpenStack Foundation that you have the authority to submit the proposal on the '.$speaker_type.'’s behalf and agree to the recording and publication of their presentation.
+                    '.ucfirst($speaker_type).'s agree that OpenStack Foundation may record and publish their talks presented during the %s Open Infrastructure Summit. If you submit a proposal on behalf of a '.$speaker_type.', you represent to OpenStack Foundation that you have the authority to submit the proposal on the '.$speaker_type.'’s behalf and agree to the recording and publication of their presentation.
                 </label>
                 </div>', $this->summit->Title)),
             TextField::create('EmailAddress',
@@ -74,7 +74,7 @@ final class AddSpeakerForm extends BootstrapForm
             LiteralField::create('LegalOther', sprintf('
                 <div id="legal-other" style="display: none;">
                  <label>
-                    Speakers and moderators agree that OpenStack Foundation may record and publish their talks presented during the %s OpenStack Summit. If you submit a proposal on behalf of a '.$speaker_type.', you represent to OpenStack Foundation that you have the authority to submit the proposal on the '.$speaker_type.'’s behalf and agree to the recording and publication of their presentation.
+                    Speakers and moderators agree that OpenStack Foundation may record and publish their talks presented during the %s Open Infrastructure Summit. If you submit a proposal on behalf of a '.$speaker_type.', you represent to OpenStack Foundation that you have the authority to submit the proposal on the '.$speaker_type.'’s behalf and agree to the recording and publication of their presentation.
                 </label>
                 </div>', $this->summit->Title)
             )
@@ -119,7 +119,7 @@ final class AddSpeakerForm extends BootstrapForm
         $max_moderators_reached = $this->presentation->maxModeratorsReached();
         $use_moderator          = $this->presentation->Type()->UseModerator;
         $moderator_exists       = $this->presentation->Moderator()->exists();
-        $speaker_type           = ($use_moderator && (!$max_moderators_reached || !$use_speakers)) ? 'moderator' : 'moderator';
+        $speaker_type           = ($use_moderator && (!$max_moderators_reached || !$use_speakers)) ? 'moderator' : 'speaker';
         $actions = array();
 
         if ( (!$use_speakers || $speakers_exists) && (!$use_moderator || $moderator_exists) ) {

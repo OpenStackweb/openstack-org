@@ -1,5 +1,5 @@
 <div class="container">
-    <h1> Call for Forum Submissions</h1>
+    <h1> Call for Presentations</h1>
 
     <div class="row presentation-header-subtitle">
         <div class="col-sm-12">
