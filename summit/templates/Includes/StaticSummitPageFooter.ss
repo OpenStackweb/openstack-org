@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-6 col-sm-12">
                 <div class="button-wrapper">
-                    <a href="https://openinfrasummitandptgdenver.eventbrite.com/" class="btn register-btn-lrg">
+                    <a href="https://openinfrasummitandptgdenver.eventbrite.com/?aff=DenverSummit19" class="btn register-btn-lrg">
                         Register Now
                         <i class="fa fa-arrow-right"></i>
                     </a>
