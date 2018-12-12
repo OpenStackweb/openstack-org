@@ -1739,8 +1739,8 @@ footer {
 }
 
 .summit-banner.editorial .logo-box img {
-  width: 90%;
-  margin-top:15px;
+width: 50%;
+margin: 15px auto 0;
 }
 
 .summit-banner.highlight .line{
