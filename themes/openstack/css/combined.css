@@ -1728,6 +1728,7 @@ footer {
 
 .summit-banner div {
   background-color: transparent;
+  text-align:center;
 }
 
 .summit-banner.highlight .logo-box {
@@ -1741,7 +1742,6 @@ footer {
 .summit-banner.editorial .logo-box img {
 width: 50%;
 margin: 15px auto 0;
-text-align:center;
 }
 
 .summit-banner.highlight .line{
