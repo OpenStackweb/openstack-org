@@ -1,67 +1,20 @@
-<div class="sessions-landing-intro">
+<div class="all-sessions-wrapper">
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
                 <h1>$HeaderTitle</h1>
-                <h3>The Summit</h3>
-                <p>The OpenStack Summit is a four-day event covering everything Open Infrastructure. Content includes keynotes, presentations, panels, hands-on workshops, and collaborative working sessions. Expect to hear about the intersection of many open source infrastructure projects, including Ansible, Ceph, Kata Containers, Kubernetes, ONAP, OpenStack and more.</p>
             </div>
         </div>
-    </div>
-</div>
-<div class="all-sessions-wrapper">
-    <div class="container">
-            <!-- Start Categories -->
-            <!-- <% loop $Summit.getPublicCategoryGroups().Sort(Name) %>
-                <% if $Odd %> <div class="row session-list-row"> <% end_if %>
-                <div class="col-sm-6">
-                    <div class="session-wrapper" id="containers">
-                        <h3>
-                            <a href="{$Top.Summit.getScheduleLink()}#track_groups={$ID}">
-                                <span class="dot" style="background:#{$Color};"></span> $Name
-                            </a>
-                        </h3>
-                        <div class="session-list-description">
-                            <div class="session-list-text" style="margin-bottom:10px;">
-                                <p> $Description </p>
-                            </div>
-                        </div>
-                        <div class="session-list-wrapper">
-                            <div class="session-tracks-title">Tracks</div>
-                            <div class="session-list-tracks">
-                                <ul>
-                                    <% loop Categories() %>
-                                    <li class="tracks-tooltip" title="{$Description}">
-                                        $Title <% if not $VotingVisible %> * <% end_if %>
-                                    </li>
-                                    <% end_loop %>
-                                </ul>
-                            </div>
-                        </div>
-                        <% if $Top.Summit.isCallForSpeakersOpen() %>
-                            <a href="{$Top.Summit.getCallForPresentationsLink()}" class="all-sessions-btn">
-                                Submit a Presentation <i class="fa fa-chevron-right"></i>
-                            </a>
-                        <% else_if $Top.Summit.isScheduleDisplayed() %>
-                            <a href="{$Top.Summit.getScheduleLink()}#track_groups={$ID}" class="all-sessions-btn">
-                                View On Summit Schedule <i class="fa fa-chevron-right"></i>
-                            </a>
-                        <% end_if %>
-                    </div>
-                </div>
-                <% if $Even || $Last %> </div> <% end_if %>
-            <% end_loop %> -->
-            <!-- End Categories -->
-
-        <!-- <div class="row">
+        <% loop $Summit.CategoryGroups() %>
+        <div class="row sessions-landing-intro">
             <div class="col-sm-12">
-                <p>* Note: these are not selected though the Call for Presentations process</p>
+                <h3>$Name</h3>
+                <p>$Description</p>
             </div>
-        </div> -->
-        <!-- Full track definitions -->
+        </div>
         <div class="row">
             <div class="col-sm-12">
-                <% loop $Summit.getPublicCategories() %>
+                <% loop $Categories() %>
                     <% if $VotingVisible && $ChairVisible %>
                         <p>
                             <strong> $Title </strong><br>
@@ -69,7 +22,20 @@
                         </p>
                     <% end_if %>
                 <% end_loop %>
-                <hr />
+            </div>
+        </div>
+        <% end_loop %>
+    </div>
+</div>
+
+
+<%--<div class="sessions-landing-intro">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1>$HeaderTitle</h1>
+                <h3>The Summit</h3>
+                <p>The OpenStack Summit is a four-day event covering everything Open Infrastructure. Content includes keynotes, presentations, panels, hands-on workshops, and collaborative working sessions. Expect to hear about the intersection of many open source infrastructure projects, including Ansible, Ceph, Kata Containers, Kubernetes, ONAP, OpenStack and more.</p>
             </div>
         </div>
     </div>
@@ -84,4 +50,4 @@
             </div>
         </div>
     </div>
-</div>
+</div>--%>
