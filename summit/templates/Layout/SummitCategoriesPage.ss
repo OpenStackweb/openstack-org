@@ -62,10 +62,12 @@
         <div class="row">
             <div class="col-sm-12">
                 <% loop $Summit.getPublicCategories() %>
-                <p>
-                    <strong> $Title </strong><br>
-                    $Description
-                </p>
+                    <% if $VotingVisible && $ChairVisible %>
+                        <p>
+                            <strong> $Title </strong><br>
+                            $Description
+                        </p>
+                    <% end_if %>
                 <% end_loop %>
                 <hr />
             </div>
