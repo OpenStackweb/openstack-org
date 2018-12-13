@@ -121,7 +121,7 @@
             </p>
             <h3><a href="/analytics">$_T("survey_ui", "Analyze the User Survey")</a></h3>
             <p>
-                $_T("survey_ui", "Uncover your own findings by digging into the User Survey data from the past year with a <a href=\"%s\">new analysis tool</a> available to the OpenStack community. Apply multiple filters to virtually every quantitative question from the user survey.", /analytics)
+                $_T("survey_ui", "Uncover your own findings by digging into the User Survey data from the past year with a <a href=\"%1$s\">new analysis tool</a> available to the OpenStack community. Apply multiple filters to virtually every quantitative question from the user survey.", /analytics)
             </p>
         </div>
     </div>

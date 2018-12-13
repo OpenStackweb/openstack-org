@@ -1,5 +1,5 @@
 <div id="$ID" class="ranking_container">
-    <p>$_T("survey_ui","Please rank up to %s", $Question.MaxItemsToRank)</p>
+    <p>$_T("survey_ui","Please rank up to %1$s", $Question.MaxItemsToRank)</p>
     $_T("survey_template", $Question.Intro)
     <p><strong>$_T("survey_ui", "Click your options to rank them. Select at least one.")</strong>&nbsp;&nbsp;<a title="clear all options." href="#" class="clear_all_ranking_options">$_T("survey_ui","clear all")</a></p>
     <table class="ranking-table">
