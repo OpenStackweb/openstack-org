@@ -22,8 +22,7 @@ class CategoryGroupField extends DropdownField
             if(is_object($source) && $this->emptyString) {
                 $options[] = new ArrayData(array(
                     'Value' => '',
-                    'Title' => $this->emptyString,
-                    'GroupType' => ''
+                    'Title' => $this->emptyString
                 ));
             }
 
@@ -51,7 +50,6 @@ class CategoryGroupField extends DropdownField
                 $options[] = new ArrayData(array(
                     'Title' => $data['title'],
                     'Value' => $value,
-                    'GroupType' => $data['group_type'],
                     'Selected' => $selected,
                     'Disabled' => $disabled,
                 ));
@@ -69,5 +67,28 @@ class CategoryGroupField extends DropdownField
         $this->extend('onBeforeRender', $this);
 
         return $context->renderWith($this->getTemplates());
+    }
+
+    public function validate($validator) {
+        $source = array_column($this->getSourceAsArray(), 'id');
+        $disabled = $this->getDisabledItems();
+
+
+        if (!in_array($this->value, $source) || in_array($this->value, $disabled)) {
+            if ($this->getHasEmptyDefault() && !$this->value) {
+                return true;
+            }
+            $validator->validationError(
+                $this->name,
+                _t(
+                    'DropdownField.SOURCE_VALIDATION',
+                    "Please select a value within the list provided. {value} is not a valid option",
+                    array('value' => $this->value)
+                ),
+                "validation"
+            );
+            return false;
+        }
+        return true;
     }
 }
