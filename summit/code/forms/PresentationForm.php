@@ -59,11 +59,10 @@ final class PresentationForm extends BootstrapForm
 
         $category_groups_map = array();
         foreach ($category_groups as $group) {
-            $group_type = 'public';
             if (!$group->Categories()->count()) continue;
-            if (!$group->hasCategoryVisible() && $group_type == 'public') continue;
+            if (!$group->hasCategoryVisible()) continue;
 
-            $category_groups_map[] = array('id' => $group->ID,'title' => $group->Name, 'group_type' => $group_type);
+            $category_groups_map[] = array('id' => $group->ID,'title' => $group->Name);
         }
 
         if(!count($category_groups_map))

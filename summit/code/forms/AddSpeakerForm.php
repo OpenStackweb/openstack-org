@@ -83,9 +83,7 @@ final class AddSpeakerForm extends BootstrapForm
         if (Member::currentUser()->isSpeakerOn($this->presentation)
             || $this->presentation->ModeratorID == Member::currentUser()->getSpeakerProfile()->ID) {
             $fields->replaceField('SpeakerType', HiddenField::create('SpeakerType', '', 'Else'));
-            $fields->field('EmailAddress')
-                ->setTitle('Enter the first name, last name or email address of your '.$speaker_type.' (*)')
-                ->setDisplayLogicCriteria(null);
+            $fields->replaceField('EmailAddress', TextField::create('EmailAddress', 'Enter the first name, last name or email address of your '.$speaker_type.' (*)'));
         }
 
         if ( (!$use_speakers || $speakers_exists) && (!$use_moderator || $moderator_exists) ) {
