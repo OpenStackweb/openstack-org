@@ -698,7 +698,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
      * @throws ValidationException
      * @throws null
      */
-    public function handleResolveCategoryChange(SS_HTTPResponse $r)
+    public function handleResolveCategoryChange(SS_HTTPRequest $r)
     {
 
         if (!is_numeric($r->param('ID'))) {
@@ -1015,9 +1015,9 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
     /**
      * TrackChairAPI_PresentationRequest constructor.
      * @param Presentation $presentation
-     * @param PresentationAPI $parent
+     * @param AbstractRestfulJsonApi $parent
      */
-    public function __construct(Presentation $presentation, PresentationAPI $parent)
+    public function __construct(Presentation $presentation, AbstractRestfulJsonApi $parent)
     {
         parent::__construct();
         $this->presentation = $presentation;
@@ -1246,7 +1246,7 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
      * @param SS_HTTPResponse $r
      * @throws SS_HTTPResponse_Exception
      */
-    public function handleSelect(SS_HTTPResponse $r)
+    public function handleSelect(SS_HTTPRequest $r)
     {
         if (!Member::currentUser()) {
             return $this->httpError(403);
@@ -1286,7 +1286,7 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
      * @return SS_HTTPResponse|void
      * @throws SS_HTTPResponse_Exception
      */
-    public function handleUnselect(SS_HTTPResponse $r)
+    public function handleUnselect(SS_HTTPRequest $r)
     {
         if (!Member::currentUser()) {
             return $this->httpError(403);
@@ -1298,7 +1298,7 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
 
     }
 
-    public function handleMarkAsViewed(SS_HTTPResponse $r) 
+    public function handleMarkAsViewed(SS_HTTPRequest $r)
     {
     	try {
     		$this->presentation->markAsViewedByTrackChair();
@@ -1312,7 +1312,7 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
      * @param SS_HTTPResponse $r
      * @throws SS_HTTPResponse_Exception
      */
-    public function handleGroupSelect(SS_HTTPResponse $r)
+    public function handleGroupSelect(SS_HTTPRequest $r)
     {
         if (!Member::currentUser()) {
             return $this->httpError(403);
@@ -1332,7 +1332,7 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
      * @return SS_HTTPResponse|void
      * @throws SS_HTTPResponse_Exception
      */
-    public function handleGroupUnselect(SS_HTTPResponse $r)
+    public function handleGroupUnselect(SS_HTTPRequest $r)
     {
         if (!Member::currentUser()) {
             return $this->httpError(403);
@@ -1348,13 +1348,13 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
     }
 
     /**
-     * @param SS_HTTPResponse $r
+     * @param SS_HTTPRequest $r
      * @return SS_HTTPResponse|void
      * @throws SS_HTTPResponse_Exception
      * @throws ValidationException
      * @throws null
      */
-    public function handleCategoryChangeRequest(SS_HTTPResponse $r)
+    public function handleCategoryChangeRequest(SS_HTTPRequest $r)
     {
 
         if (!Member::currentUser()) {
