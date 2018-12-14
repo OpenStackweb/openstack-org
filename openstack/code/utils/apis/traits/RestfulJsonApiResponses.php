@@ -17,7 +17,7 @@
  */
 trait RestfulJsonApiResponses
 {
-    protected function ok(array $res = null, $use_etag = true)
+    protected function ok($res = null, $use_etag = true)
     {
         $response = new SS_HTTPResponse();
         $response->setStatusCode(200);
