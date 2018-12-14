@@ -44,3 +44,6 @@ Page:
 LeftAndMain:
   extra_requirements_css:
     - themes/openstack/css/custom-cms.css
+
+Versioned:
+  use_session: false
