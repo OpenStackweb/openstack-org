@@ -43,7 +43,7 @@
     </div>
     <% end_if %>
     <p>
-        $_T("survey_ui", "This survey provides users an opportunity to influence the community and software direction. By sharing information about your configuration and requirements, the OpenStack Foundation User Committee will be able to advocate on your behalf. The %1$s survey results will be presented at the %2$s Summit, %3$s. Take the OpenStack User Survey by %4$s to be included in this round of analysis. requirements, the OpenStack Foundation User Committee will be able to advocate on your behalf.", "2019", "Denver", "Week of April, 2019", "Thursday, August 22, 2019")
+        $_T("survey_ui", "This survey provides users an opportunity to influence the community and software direction. By sharing information about your configuration and requirements, the OpenStack Foundation User Committee will be able to advocate on your behalf. The %1$s survey results will be presented at the %2$s Summit, %3$s. Take the OpenStack User Survey by %4$s to be included in this round of analysis.", "2019", "China", "November, 2019", "Thursday, August 22, 2019")
     </p>
     <p><a href="/user-survey/faq" target="_blank">$_T("survey_ui", "More Information About The Survey")</a></p>
     <% if $Top.SurveyTemplate.isVoid %>
