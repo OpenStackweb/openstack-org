@@ -92,11 +92,25 @@
 
                 <p><a href="summit/denver-2019/categories/" target="_blank">Plan your week! See how the session tracks are grouped into audience categories, by day.</a></p>
 
-                <% loop ActiveSummit.getCategories %>
-                    <p>
-                        <strong>$Title</strong><br/>
-                        $Description
-                    </p>
+                <% loop $ActiveSummit.CategoryGroups() %>
+                    <div class="row sessions-landing-intro">
+                        <div class="col-sm-12">
+                            <h3>$Name</h3>
+                            <p>$Description</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <% loop $Categories() %>
+                                <% if $VotingVisible && $ChairVisible %>
+                                    <p>
+                                        <strong> $Title </strong><br>
+                                        $Description
+                                    </p>
+                                <% end_if %>
+                            <% end_loop %>
+                        </div>
+                    </div>
                 <% end_loop %>
 
                 <hr>
