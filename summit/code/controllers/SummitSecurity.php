@@ -144,7 +144,7 @@ class SummitSecurity extends SummitPage_Controller {
     }
 
     public function Summit(){
-        return Summit::get_active();
+        return Summit::ActiveSummit();
     }
 
     public function ActiveSummit(){
@@ -184,7 +184,8 @@ class SummitSecurity extends SummitPage_Controller {
             array(
                 'Title' => 'Login',
                 'ClassName' => 'SummitSecurity',
-                'Form' => $this->LoginForm()
+                'Form' => $this->LoginForm(),
+                'SummitImage' => $this->getSummitImage()
             )
         )->renderWith(
             array(
@@ -480,5 +481,33 @@ class SummitSecurity extends SummitPage_Controller {
     {
         $summit_page = $this->CurrentSummitPage();
         return is_null($summit_page) ? '' : $summit_page->MetaTags();
+    }
+
+    public function getSummitPageText($field) {
+        $activeSummit = Summit::ActiveSummit();
+        $summitPage = SummitPage::get()->filter('SummitID', $activeSummit->ID)->first();
+        $header_text = $summitPage->getField($field);
+
+        if ($header_text) {
+            return $header_text;
+        } else if (is_a($summitPage->Parent(),'SummitPage')) {
+            return $summitPage->Parent()->getField($field);
+        }
+
+        return '';
+    }
+
+    public function getSummitImage() {
+        $activeSummit = Summit::ActiveSummit();
+        $summitPage = SummitPage::get()->filter('SummitID', $activeSummit->ID)->first();
+        $image = $summitPage->summitImage();
+
+        if ($image) {
+            return $image;
+        } else if (is_a($summitPage->Parent(),'SummitPage')) {
+            return $summitPage->Parent()->summitImage();
+        }
+
+        return '';
     }
 }
