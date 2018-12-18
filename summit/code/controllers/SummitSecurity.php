@@ -9,9 +9,56 @@
 class SummitSecurity extends SummitPage_Controller {
 
     /**
+     * The URL segment of this controller
+     * @var string
+     */
+    private static $url_segment = 'summit-login';
+
+    /**
+     * A list of allowed actions
+     * @var array
+     */
+    private static $allowed_actions = [
+        'login',
+        'lostpassword',
+        'passwordsent',
+        'LostPasswordForm',
+        'RegistrationForm',
+        'LoginForm',
+        'doRegister',
+        'registration',
+    ];
+
+
+    /**
      * @var ISpeakerRegistrationRequestRepository
      */
     private $speaker_registration_request_repository;
+
+    /**
+     * @var IMemberManager
+     */
+    private $member_manager;
+
+    /**
+     * @var ITransactionManager
+     */
+    private $tx_manager;
+
+    /**
+     * @var ISpeakerRegistrationRequestManager
+     */
+    private $speaker_registration_request_manager;
+
+
+    private $summit_page;
+
+
+    public function init()
+    {
+        parent::init();
+        $this->summit_page = $this->currentSummitPage();
+    }
 
     /**
      * @return ISpeakerRegistrationRequestRepository
@@ -29,11 +76,6 @@ class SummitSecurity extends SummitPage_Controller {
     }
 
     /**
-     * @var ISpeakerRegistrationRequestManager
-     */
-    private $speaker_registration_request_manager;
-
-    /**
      * @return ISpeakerRegistrationRequestManager
      */
     public function getSpeakerRegistrationRequestManager(){
@@ -48,16 +90,6 @@ class SummitSecurity extends SummitPage_Controller {
         $this->speaker_registration_request_manager = $speaker_registration_request_manager;;
     }
 
-
-    /**
-     * @var IMemberManager
-     */
-    private $member_manager;
-
-    /**
-     * @var ITransactionManager
-     */
-    private $tx_manager;
 
     /**
      * @param ITransactionManager $tx_manager
@@ -88,27 +120,6 @@ class SummitSecurity extends SummitPage_Controller {
     {
         $this->member_manager = $manager;
     }
-
-    /**
-     * The URL segment of this controller
-     * @var string
-     */
-    private static $url_segment = 'summit-login';
-
-    /**
-     * A list of allowed actions
-     * @var array
-     */
-    private static $allowed_actions = [
-        'login',        
-        'lostpassword',
-        'passwordsent',
-        'LostPasswordForm',
-        'RegistrationForm',
-        'LoginForm',
-        'doRegister',
-        'registration',
-    ];
 
     /**
      * Throw a 403 and redirect to this controller. Replaces Security::permissionFailure()  
@@ -184,8 +195,7 @@ class SummitSecurity extends SummitPage_Controller {
             array(
                 'Title' => 'Login',
                 'ClassName' => 'SummitSecurity',
-                'Form' => $this->LoginForm(),
-                'SummitImage' => $this->getSummitImage()
+                'Form' => $this->LoginForm()
             )
         )->renderWith(
             array(
@@ -395,8 +405,9 @@ class SummitSecurity extends SummitPage_Controller {
      * @return string
      */
     protected function customiseSummitPage($data = array ()) {
+
         return ModelAsController::controller_for(
-            SummitOverviewPage::get()->first()
+            $this->summit_page
         )->customise($data);
     }
 
@@ -453,22 +464,27 @@ class SummitSecurity extends SummitPage_Controller {
     }
 
     public function CurrentSummitPage(){
-        $summit = Summit::get_active();
-        $page = SummitOverviewPage::get()->filter('SummitID', $summit->ID)->first();
-        if(is_null($page)) $page = SummitStaticAboutBostonPage::get()->filter('SummitID', $summit->ID)->first();
-        return $page;
+        $activeSummit = Summit::ActiveSummit();
+        $summitPage = SummitPage::get()->filter('SummitID', $activeSummit->ID)->first();
+        if (is_a($summitPage->Parent(),'SummitPage')) {
+            $summitPage = $summitPage->Parent();
+        }
+
+        if(is_null($summitPage))
+            $summitPage = SummitPage::get()->sort('CreatedDate', 'DESC')->first();
+
+        return $summitPage;
     }
 
     /**
      * Returns the associated database record
      */
     public function data() {
-        return $this->CurrentSummitPage();
+        return $this->summit_page;
     }
 
     public function SummitRoot(){
-        $summit_page = $this->CurrentSummitPage();
-        return !is_null($summit_page)? $summit_page->Link(): '#';
+        return !is_null($this->summit_page)? $this->summit_page->Link(): '#';
     }
 
     public function PresentationDeadlineText(){
@@ -479,35 +495,11 @@ class SummitSecurity extends SummitPage_Controller {
 
     public function MetaTags()
     {
-        $summit_page = $this->CurrentSummitPage();
-        return is_null($summit_page) ? '' : $summit_page->MetaTags();
+        return ModelAsController::controller_for($this->summit_page)->MetaTags();
     }
 
     public function getSummitPageText($field) {
-        $activeSummit = Summit::ActiveSummit();
-        $summitPage = SummitPage::get()->filter('SummitID', $activeSummit->ID)->first();
-        $header_text = $summitPage->getField($field);
-
-        if ($header_text) {
-            return $header_text;
-        } else if (is_a($summitPage->Parent(),'SummitPage')) {
-            return $summitPage->Parent()->getField($field);
-        }
-
-        return '';
+        return ModelAsController::controller_for($this->summit_page)->getSummitPageText($field);
     }
 
-    public function getSummitImage() {
-        $activeSummit = Summit::ActiveSummit();
-        $summitPage = SummitPage::get()->filter('SummitID', $activeSummit->ID)->first();
-        $image = $summitPage->summitImage();
-
-        if ($image) {
-            return $image;
-        } else if (is_a($summitPage->Parent(),'SummitPage')) {
-            return $summitPage->Parent()->summitImage();
-        }
-
-        return '';
-    }
 }
