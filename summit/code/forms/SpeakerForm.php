@@ -89,10 +89,12 @@ class SpeakerForm extends BootstrapForm
             ->checkbox('AvailableForBureau', "I'd like to be in the speaker bureau")
                 ->configure()
                     ->addExtraClass('bureau-checkbox')
+                    ->setFieldHolderTemplate('BootstrapAwesomeCheckboxField')
                 ->end()
             ->checkbox('WillingToPresentVideo', "Willing to present via video conference")
                 ->configure()
                     ->addExtraClass('bureau-checkbox')
+                    ->setFieldHolderTemplate('BootstrapAwesomeCheckboxField')
                 ->end()
             ->literal('SpokenLanguagesTitle','<hr><label>Spoken Languages ( Up to 5)</label>')
             ->text('Language','')
@@ -147,6 +149,9 @@ class SpeakerForm extends BootstrapForm
                 ->end()
             ->literal('HR','<div class="clearfix"></div><hr>')
             ->checkbox('WillingToTravel', 'I do not have any travel restrictions and am willing to travel to any country')
+                ->configure()
+                    ->setFieldHolderTemplate('BootstrapAwesomeCheckboxField')
+                ->end()
             ->multidropdown(
                 'CountriesToTravel',
                 'Select individual countries that you are willing to travel to. If you do not check the box above AND do not select any countries, it will be assumed you are not willing to travel.',
@@ -156,9 +161,13 @@ class SpeakerForm extends BootstrapForm
                 ->end()
             ->checkbox('FundedTravel', 'My Company would be willing to fund my travel to events')
                 ->configure()
+                    ->setFieldHolderTemplate('BootstrapAwesomeCheckboxField')
                     ->addExtraClass('bureau-checkbox')
                 ->end()
             ->checkboxset('OrganizationalRole','What is your current Organizational Role at your company? (check all that apply):',$organizational_roles)
+                ->configure()
+                    ->setTemplate('BootstrapAwesomeCheckboxsetField')
+                ->end()
             ->text('OtherOrganizationalRole','Please specify your role:')
                 ->configure()
                     ->displayIf('OrganizationalRole')
@@ -170,6 +179,9 @@ class SpeakerForm extends BootstrapForm
                 1 => 'Yes',
                 0 => 'No'
             ))
+                ->configure()
+                    ->setTemplate('BootstrapAwesomeOptionsetField')
+                ->end()
             ->hidden('HasChanged',0);
 
         return $fields;
