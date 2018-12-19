@@ -361,7 +361,7 @@ class PresentationPage_Controller extends SummitPage_Controller
         );
     }
 
-    public function BioForm(SS_HTTPRequest $r)
+    public function BioForm()
     {
         Requirements::css("themes/openstack/css/chosen.css");
         Requirements::javascript("themes/openstack/javascript/chosen.jquery.min.js");
