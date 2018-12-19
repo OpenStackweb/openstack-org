@@ -24,6 +24,7 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
     (
         'Name'                         => 'Varchar(255)',
         'CodeName'                     => 'Varchar(255)',
+        'ProjectTeam'                  => 'Varchar(255)',
         'Description'                  => 'Text',
         'SupportsVersioning'           => 'Boolean',
         'SupportsExtensions'           => 'Boolean',

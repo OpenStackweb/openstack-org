@@ -59,9 +59,6 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                 echo sprintf('processing release %s ...', $release->Name).PHP_EOL;
                 $this->processApiVersionsPerRelease($release);
                 $this->processProjectPerRelease($release);
-                //$this->getInstallationGuideStatus($release);
-                //$this->getSDKSupport($release);
-                //$this->getQualityOfPackages($release);
                 $this->getStackAnalytics($release);
             }
         });
@@ -83,8 +80,9 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                     $url
                 );
             } catch (Exception $ex) {
-                echo $ex->getMessage() . PHP_EOL;
-                SS_Log::log($ex->getMessage(), SS_Log::WARN);
+                echo 'NOT FOUND'.PHP_EOL;
+                //echo $ex->getMessage() . PHP_EOL;
+                //SS_Log::log($ex->getMessage(), SS_Log::WARN);
             }
 
             if (is_null($response)) continue;
@@ -163,117 +161,99 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
         $content = $body->getContents();
         if(empty($content)) return;
 
+        echo 'processing file projects.yaml' . PHP_EOL;
+
         try {
 
             $projects = Spyc::YAMLLoadString($content);
 
             foreach($projects as $project_name => $info)
             {
-                echo sprintf('processing component %s', $project_name).PHP_EOL;
+                // DEBUG
+                // echo sprintf('processing component %s', $project_name).PHP_EOL;
 
-                $componentCodeName = ucfirst($project_name);
-                $componentName = isset($info['service']) ? $info['service'] : $componentCodeName;
-                $componentSlug = str_replace(' ','-', strtolower($project_name));
+                $components = OpenStackComponent::get()
+                    ->filter([ 'ProjectTeam'  => $project_name ]);
 
-                $component = OpenStackComponent::get()
-                    ->filterAny([
-                        'CodeName'  => $componentCodeName,
-                        'Name'      => $componentName,
-                        'Slug'      => $componentSlug
-                    ])
-                    ->first();
-
-                if(is_null($component)){
-                    $component = new OpenStackComponent();
+                if($components->Count() == 0){
+                    // DEBUG
+                    // echo 'project team missing: '.$project_name.PHP_EOL;
+                    continue;
                 }
 
-                $component->Slug = $componentSlug;
-                $component->CodeName = $componentCodeName;
-                $component->Name = $componentName;
+                foreach($components as $component) {
+                    $ptl            = isset($info['ptl']) ? $info['ptl'] : null;
+                    $wiki           = isset($info['url']) ? $info['url'] : null;
+                    $deliverables   = isset($info['deliverables']) ? $info['deliverables'] : null;
+                    $ptl_member     = null;
 
-                if (isset($info['mission'])) {
-                    $component->Description = $info['mission'];
-                }
+                    $component->Description = (isset($info['mission'])) ? $info['mission'] : $component->Description;
+                    $component->WikiUrl = $wiki;
 
-                $ptl          = isset($info['ptl']) ? $info['ptl']   : null;
-                $wiki         = isset($info['url']) ? $info['url']   : null;
-                $tags         = isset($info['tags']) ? $info['tags'] : [];
-                $ptl_member   = null;
+                    if(!empty($ptl) && is_array($ptl)) {
+                        $fname = null;
+                        $lname = null;
+                        $email = null;
 
-                $component->WikiUrl = $wiki;
+                        if(isset($ptl['name'])) {
+                            $ptl_names = preg_split("/\s/", $ptl['name']);
+                            $fname = $ptl_names[0];
+                            $lname = $ptl_names[1];
+                        }
 
-                if(!empty($ptl))
-                {
-                    if(is_array($ptl) && isset($ptl['name']))
-                    {
-                        $ptl_names = preg_split("/\s/", $ptl['name']);
-                        $fname = $ptl_names[0];
-                        $lname = $ptl_names[1];
-                    }
-                    else
-                    {
-                        $ptl_names = preg_split("/\s/", $ptl);
-                        $fname = $ptl_names[0];
-                        $lname = $ptl_names[1];
-                    }
-                    $email = isset($ptl['email']) ? trim($ptl['email']) : null;
-                    echo sprintf('PTL %s %s (%s)', $fname, $lname, $email).PHP_EOL;
-                    if(!empty($email)){
-                        $ptl_member = Member::get()->filter
-                        (
-                            array
+                        if(isset($ptl['email'])) {
+                            $email = trim($ptl['email']);
+                        }
+
+                        if(!empty($email)) {
+                            $ptl_member = Member::get()->filter
                             (
-                                'Email' => $email,
-                            )
-                        )->first();
-                    }
+                                array
+                                (
+                                    'Email' => $email,
+                                )
+                            )->first();
+                        }
 
-                    if(is_null($ptl_member)) {
-                        $ptl_member = Member::get()->filter
-                        (
-                            array
+                        if(is_null($ptl_member)) {
+                            $ptl_member = Member::get()->filter
                             (
-                                'FirstName' => $fname,
-                                'Surname'   => $lname,
-                            )
-                        )->first();
-                    }
-                }
-
-                $component->Tags()->removeAll();
-
-                foreach($tags as $tag)
-                {
-                    if( !$tag_obj = OpenStackComponentTag::get()->filter('Name', $tag)->first() ) {
-                        $tag_obj = new OpenStackComponentTag();
-                        $tag_obj->Name = $tag;
-                        $tag_obj->write();
+                                array
+                                (
+                                    'FirstName' => $fname,
+                                    'Surname'   => $lname,
+                                )
+                            )->first();
+                        }
                     }
 
-                    $component->addTag($tag_obj);
-                }
-
-                $deliverables = isset($info['deliverables']) ? $info['deliverables'] : array();
-                $service_info = isset($deliverables[$project_name]) ? $deliverables[$project_name] : array();
-                $service_tags = isset($service_info['tags']) ? $service_info['tags'] : array();
-
-                foreach($service_tags as $tag)
-                {
-                    if( !$tag_obj = OpenStackComponentTag::get()->filter('Name', $tag)->first() ) {
-                        $tag_obj = new OpenStackComponentTag();
-                        $tag_obj->Name = $tag;
-                        $tag_obj->write();
+                    if(!is_null($ptl_member) && $component->LatestReleasePTLID != $ptl_member->ID) {
+                        echo sprintf('setting PTL %s %s (%s) to Component %s', $ptl_member->FirstName, $ptl_member->Surname, $ptl_member->Email, $component->Name).PHP_EOL;
+                        $component->LatestReleasePTLID = $ptl_member->ID;
                     }
 
-                    $component->addTag($tag_obj);
+                    if (!empty($deliverables) && is_array($deliverables) && $component->Slug) {
+                        $deliverablesComponent = isset($deliverables[$component->Slug]) ? $deliverables[$component->Slug] : null;
+
+                        if ($deliverablesComponent && isset($deliverablesComponent['tags'])) {
+                            $component->Tags()->removeAll();
+
+                            foreach ($deliverablesComponent['tags'] as $tag) {
+                                if( !$tag_obj = OpenStackComponentTag::get()->filter('Name', $tag)->first() ) {
+                                    $tag_obj = new OpenStackComponentTag();
+                                    $tag_obj->Name = $tag;
+                                    $tag_obj->write();
+                                }
+
+                                $component->addTag($tag_obj);
+                            }
+                        }
+                    }
+
+                    $component->write();
                 }
 
-                if(!is_null($ptl_member)) {
-                    echo sprintf('setting PTL %s %s (%s) to Component %s', $ptl_member->FirstName, $ptl_member->Surname, $ptl_member->Email, $component->Name).PHP_EOL;
-                    $component->LatestReleasePTLID = $ptl_member->ID;
-                }
 
-                $component->write();
             }
         } catch (Exception $ex) {
             echo $ex->getMessage().PHP_EOL;
@@ -366,6 +346,10 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                         foreach($subcategory['components'] as $component) {
                             // DEBUG
                             //echo '--- Processing component ' . $component['name'] . PHP_EOL;
+                            if(!isset($component['project-team']) || !$component['project-team']) {
+                                echo 'project team missing: '.$component['project-team'].PHP_EOL;
+                                continue;
+                            }
 
                             $compSlug = $component['name'];
 
@@ -377,6 +361,7 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
 
                             $comp->Name = (isset($component['title'])) ? $component['title'] : '';
                             $comp->CodeName = (isset($component['name'])) ? ucfirst($component['name']) : '';
+                            $comp->ProjectTeam = (isset($component['project-team'])) ? ucfirst($component['project-team']) : '';
                             $comp->Description = (isset($component['desc'])) ? $component['desc'] : '';
                             $comp->Since = (isset($component['since'])) ? $component['since'] : '';
                             $comp->CategoryID = $subcat2->ID;
@@ -464,8 +449,9 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
             }
 
         } catch (Exception $ex) {
-            echo $ex->getMessage() . PHP_EOL;
-            SS_Log::log($ex->getMessage(), SS_Log::WARN);
+            echo 'NOT FOUND'.PHP_EOL;
+            // echo $ex->getMessage() . PHP_EOL;
+            // SS_Log::log($ex->getMessage(), SS_Log::WARN);
         }
 
 
@@ -488,8 +474,9 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                     $url
                 );
             } catch (Exception $ex) {
-                echo $ex->getMessage() . PHP_EOL;
-                SS_Log::log($ex->getMessage(), SS_Log::WARN);
+                echo 'NOT FOUND'.PHP_EOL;
+                // echo $ex->getMessage() . PHP_EOL;
+                // SS_Log::log($ex->getMessage(), SS_Log::WARN);
             }
 
             if (is_null($response)) continue;
@@ -536,8 +523,9 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                 ]);
 
             } catch (Exception $ex) {
-                echo $ex->getMessage() . PHP_EOL;
-                SS_Log::log($ex->getMessage(), SS_Log::WARN);
+                echo 'NOT FOUND'.PHP_EOL;
+                // echo $ex->getMessage() . PHP_EOL;
+                // SS_Log::log($ex->getMessage(), SS_Log::WARN);
             }
         }
     }
@@ -556,7 +544,9 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
         }
         catch (Exception $ex)
         {
-            SS_Log::log($ex->getMessage(), SS_Log::WARN);
+            echo 'NOT FOUND'.PHP_EOL;
+            // echo $ex->getMessage() . PHP_EOL;
+            // SS_Log::log($ex->getMessage(), SS_Log::WARN);
         }
 
         if(is_null($response)) return;
@@ -613,7 +603,9 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
         }
         catch (Exception $ex)
         {
-            SS_Log::log($ex->getMessage(), SS_Log::WARN);
+            echo 'NOT FOUND'.PHP_EOL;
+            // echo $ex->getMessage() . PHP_EOL;
+            // SS_Log::log($ex->getMessage(), SS_Log::WARN);
         }
 
         if(is_null($response)) return;
@@ -669,7 +661,9 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
         }
         catch (Exception $ex)
         {
-            SS_Log::log($ex->getMessage(), SS_Log::WARN);
+            echo 'NOT FOUND'.PHP_EOL;
+            // echo $ex->getMessage() . PHP_EOL;
+            // SS_Log::log($ex->getMessage(), SS_Log::WARN);
         }
 
         if(is_null($response)) return;
@@ -726,16 +720,22 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
             $engineers_contrib_json = null;
             $response               = null;
 
+            $timeline_url = sprintf($timeline_stats_url_template, strtolower($c->ProjectTeam), strtolower($release->Name));
+            $company_url = sprintf($company_contrib_url_template, strtolower($c->ProjectTeam), strtolower($release->Name));
+            $engineers_url = sprintf($engineers_contrib_url_template, strtolower($c->ProjectTeam), strtolower($release->Name));
+
+
+            echo sprintf("processing url %s ", $timeline_url).PHP_EOL;
+
             try
             {
-                $response = $this->client->get
-                (
-                    sprintf($timeline_stats_url_template, strtolower($c->CodeName), strtolower($release->Name))
-                );
+                $response = $this->client->get($timeline_url);
             }
             catch (Exception $ex)
             {
-                SS_Log::log($ex->getMessage(), SS_Log::WARN);
+                echo 'NOT FOUND'.PHP_EOL;
+                // echo $ex->getMessage() . PHP_EOL;
+                // SS_Log::log($ex->getMessage(), SS_Log::WARN);
             }
 
             if (!is_null($response) && $response->getStatusCode() === 200) {
@@ -749,16 +749,17 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
 
             }
 
+            echo sprintf("processing url %s ", $company_url).PHP_EOL;
+
             try
             {
-                $response = $this->client->get
-                (
-                    sprintf($company_contrib_url_template, strtolower($c->CodeName), strtolower($release->Name))
-                );
+                $response = $this->client->get($company_url);
             }
             catch (Exception $ex)
             {
-                SS_Log::log($ex->getMessage(), SS_Log::WARN);
+                echo 'NOT FOUND'.PHP_EOL;
+                // echo $ex->getMessage() . PHP_EOL;
+                // SS_Log::log($ex->getMessage(), SS_Log::WARN);
             }
 
             if (!is_null($response) && $response->getStatusCode() === 200) {
@@ -772,16 +773,17 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
 
             }
 
+            echo sprintf("processing url %s ", $engineers_url).PHP_EOL;
+
             try
             {
-                $response = $this->client->get
-                (
-                    sprintf($engineers_contrib_url_template, strtolower($c->CodeName), strtolower($release->Name))
-                );
+                $response = $this->client->get($engineers_url);
             }
             catch (Exception $ex)
             {
-                SS_Log::log($ex->getMessage(), SS_Log::WARN);
+                echo 'NOT FOUND'.PHP_EOL;
+                // echo $ex->getMessage() . PHP_EOL;
+                // SS_Log::log($ex->getMessage(), SS_Log::WARN);
             }
 
             if (!is_null($response) && $response->getStatusCode() === 200)
