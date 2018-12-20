@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "2e408d3d43a15169ea9eda45bcd46759",
+    "content-hash": "58d79f88f7a90eb319c0e11cd7e7dbce",
     "packages": [
         {
             "name": "composer/installers",
@@ -3741,16 +3741,16 @@
         },
         {
             "name": "unclecheese/bootstrap-forms",
-            "version": "1.1.11",
+            "version": "1.1.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/unclecheese/silverstripe-bootstrap-forms.git",
-                "reference": "508f1ed430272bf5263f9eebd27db2cb4a6e2c27"
+                "reference": "524b7e2ffb7b9ae6b015a0981bb174c507728e75"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/unclecheese/silverstripe-bootstrap-forms/zipball/508f1ed430272bf5263f9eebd27db2cb4a6e2c27",
-                "reference": "508f1ed430272bf5263f9eebd27db2cb4a6e2c27",
+                "url": "https://api.github.com/repos/unclecheese/silverstripe-bootstrap-forms/zipball/524b7e2ffb7b9ae6b015a0981bb174c507728e75",
+                "reference": "524b7e2ffb7b9ae6b015a0981bb174c507728e75",
                 "shasum": ""
             },
             "require": {
@@ -3778,7 +3778,7 @@
                 "silverstripe",
                 "twitter"
             ],
-            "time": "2016-01-20T23:44:19+00:00"
+            "time": "2016-10-26T06:08:54+00:00"
         },
         {
             "name": "unclecheese/bootstrap-tagfield",
@@ -3821,20 +3821,20 @@
         },
         {
             "name": "unclecheese/display-logic",
-            "version": "1.6.0",
+            "version": "1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/unclecheese/silverstripe-display-logic.git",
-                "reference": "ca910ac39076c48477091985317e1ba50b6872c6"
+                "reference": "0fb06bf0acec704ce75964267a7ae5330a99a17c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/unclecheese/silverstripe-display-logic/zipball/ca910ac39076c48477091985317e1ba50b6872c6",
-                "reference": "ca910ac39076c48477091985317e1ba50b6872c6",
+                "url": "https://api.github.com/repos/unclecheese/silverstripe-display-logic/zipball/0fb06bf0acec704ce75964267a7ae5330a99a17c",
+                "reference": "0fb06bf0acec704ce75964267a7ae5330a99a17c",
                 "shasum": ""
             },
             "require": {
-                "silverstripe/framework": "~3.7"
+                "silverstripe/framework": "^3.1"
             },
             "replace": {
                 "silverstripe/display-logic": "*"
@@ -3861,7 +3861,7 @@
                 "logic",
                 "silverstripe"
             ],
-            "time": "2018-09-05T09:14:52+00:00"
+            "time": "2018-10-24T01:03:55+00:00"
         },
         {
             "name": "unclecheese/dropzone",
