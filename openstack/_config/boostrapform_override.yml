@@ -6,3 +6,7 @@ BootstrapForm:
   bootstrap_included: true
   jquery_included: true
   bootstrap_form_included: true
+  inline_fields:
+    - CheckboxSetField
+    - CheckboxField
+    - FormAction
