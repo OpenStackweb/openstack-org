@@ -32,7 +32,7 @@
                             </ul>
                     </li>
                     <li class="link button-box">
-                        <a href="{$RegistrationLink}" class="btn register-btn-lrg">
+                        <a href="https://openinfrasummitandptgdenver.eventbrite.com/?aff=DenverSummit" class="btn register-btn-lrg">
                             Register Now <i class="fa fa-arrow-right"></i>
                         </a>
                     </li>
