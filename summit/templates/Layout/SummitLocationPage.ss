@@ -51,10 +51,7 @@
         <% end_if %>
         <div class="row">
             <div class="col-lg-8 col-lg-push-2">
-                <h5 class="section-title">Recommended Hotels</h5>
-                <p class="center">
-                   There are no official hotel blocks for the OpenStack Summit Berlin. Listed below are recommended hotels around CityCube.
-                </p>
+                <h5 class="section-title">Official Summit Hotel</h5>
                 <% if not $Top.AlternateHotels %>
                     <p style="margin-bottom:30px;">
                         <i class="fa fa-hotel fa-4x"></i>
