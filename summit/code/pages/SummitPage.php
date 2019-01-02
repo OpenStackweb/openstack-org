@@ -4,7 +4,7 @@
 class SummitPage extends Page
 {
 
-    const PageCustomTitle = 'OpenStack Summit';
+    const PageCustomTitle = 'Open Infrastructure Summit';
 
     private static $has_one = array(
         'SummitImage'   => 'SummitImage',
