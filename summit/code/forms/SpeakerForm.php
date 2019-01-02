@@ -29,6 +29,7 @@ class SpeakerForm extends BootstrapForm
         JSChosenDependencies::renderRequirements();
         BootstrapTagsInputDependencies::renderRequirements();
         Requirements::css('summit/css/speaker-form.css');
+        Requirements::css('node_modules/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
 
         // languages
         $languages_source = 'var language_source = [];'.PHP_EOL;
