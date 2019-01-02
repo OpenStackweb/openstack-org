@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "58d79f88f7a90eb319c0e11cd7e7dbce",
+    "content-hash": "7e1154336a92d10afd528e3be94a5a13",
     "packages": [
         {
             "name": "composer/installers",
@@ -3821,16 +3821,16 @@
         },
         {
             "name": "unclecheese/display-logic",
-            "version": "1.7",
+            "version": "1.7.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/unclecheese/silverstripe-display-logic.git",
-                "reference": "0fb06bf0acec704ce75964267a7ae5330a99a17c"
+                "url": "https://github.com/OpenStackweb/silverstripe-display-logic.git",
+                "reference": "7442f31c6ecb6d9b867c6651bd93cf59b1a926ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/unclecheese/silverstripe-display-logic/zipball/0fb06bf0acec704ce75964267a7ae5330a99a17c",
-                "reference": "0fb06bf0acec704ce75964267a7ae5330a99a17c",
+                "url": "https://api.github.com/repos/OpenStackweb/silverstripe-display-logic/zipball/7442f31c6ecb6d9b867c6651bd93cf59b1a926ff",
+                "reference": "7442f31c6ecb6d9b867c6651bd93cf59b1a926ff",
                 "shasum": ""
             },
             "require": {
@@ -3843,7 +3843,6 @@
             "extra": {
                 "installer-name": "display_logic"
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -3855,13 +3854,16 @@
             ],
             "description": "Allows assignment of conditions for display and hide of specific form fields based on client side behavior.",
             "keywords": [
-                "Forms",
                 "cms",
                 "display",
+                "forms",
                 "logic",
                 "silverstripe"
             ],
-            "time": "2018-10-24T01:03:55+00:00"
+            "support": {
+                "source": "https://github.com/OpenStackweb/silverstripe-display-logic/tree/hotfix/pre_ss32_ids"
+            },
+            "time": "2019-01-07T20:05:44+00:00"
         },
         {
             "name": "unclecheese/dropzone",
