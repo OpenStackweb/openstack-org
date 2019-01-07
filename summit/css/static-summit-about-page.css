@@ -80,7 +80,7 @@ button.btn i, a.btn i {
 }
 
 .summit-hero-landing .summit-hero-logo, .summit-hero-landing-short .summit-hero-logo  {
-    background: url("../images/summit-logo-red.svg") center no-repeat;
+    background: url("/assets/Uploads/arrows.svg") center no-repeat;
     height: 2.5em;
     width: 2.5em;
     position: relative;
