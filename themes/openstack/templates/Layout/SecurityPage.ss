@@ -260,20 +260,20 @@
                         <p>&nbsp;</p>
 
                         <div class="nfv-summit-register-btn">
-                            <a href="/summit/sydney-2017/summit-schedule/global-search?t=Security" class="nfv-summit-btn" target="_blank">Learn More <i class="fa fa-chevron-right"></i></a>
+                            <a href="/summit/berlin-2018/summit-schedule/global-search?t=Security" class="nfv-summit-btn" target="_blank">Learn More <i class="fa fa-chevron-right"></i></a>
                         </div>
                     </div>
-                    <!-- <div class="col-sm-4">
-                        <div class="nfv-summit-right">
-                            <img class="nfv-summit-logo" src="/themes/openstack/images/summit-logo-small.svg" onerror="this.onerror=null; this.src=/themes/openstack/images/summit-logo-small.png" alt="OpenStack Summit">
-                            <div class="nfv-summit-dates">
-                                May 8-11, 2017 in Boston
-                            </div>
-                            <div class="nfv-summit-register-btn">
-                                <a href="/videos/boston-2017/tracks/security" class="nfv-summit-btn" target="_blank">Learn More <i class="fa fa-chevron-right"></i></a>
-                            </div>
-                        </div>
-                    </div> -->
+                      <div class="col-sm-4">
+                          <div class="nfv-summit-right">
+                              <img class="nfv-summit-logo" src="/assets/Uploads/arrows.svg" alt="Open Infrastructure Summit">
+                              <div class="nfv-summit-dates containers"><strong>Open Infrastructure Summit</strong>
+                                  April 29 - May 1
+                              </div>
+                              <div class="nfv-summit-register-btn">
+                                  <a href="https://www.openstack.org/summit/denver-2018/" class="nfv-summit-btn red" target="_blank">Join Us in Denver <i class="fa fa-chevron-right"></i></a>
+                              </div>
+                          </div>
+                      </div>
                 </div>
             </div>
         </div>

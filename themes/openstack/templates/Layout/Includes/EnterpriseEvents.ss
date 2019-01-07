@@ -24,15 +24,15 @@
                     <div class="events-wrapper">
                         <div class="row">
                             <div class="col-lg-12 col-sm-12">
-                                <h2>You Can Also Find Us At Our Upcoming Summits</h2>
+                                <h2>You Can Also Find Us At Our Upcoming Open Infrastructure Summits</h2>
                             </div>
                         </div>
                         <div class="row events">
                             <div class="col-lg-6 events-col">
                                 <% with SummitEvent %>
                                 <a href="$EventLink" class="featured-event-link">
-                                    <img class="event-logo paris" src="$EventSponsorLogoUrl" alt="OpenStack Summit in $EventLocation">
-                                    <span>OpenStack Summit</span>
+                                    <img class="event-logo paris" src="$EventSponsorLogoUrl" alt="Open Infrastructure Summit in $EventLocation">
+                                    <span><strong>Open Infrastructure Summit</strong></span>
                                     <span>$formatDateRange() in $EventLocation</span> 
                                 </a>
                                 <% end_with %>

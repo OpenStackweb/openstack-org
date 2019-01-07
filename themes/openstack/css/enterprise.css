@@ -691,7 +691,9 @@ li.remote-cloud {
   font-weight: 300; }
 
 img.event-logo {
-  margin: 50px 0 20px; }
+  margin: 50px 0 20px; 
+  width: 150px;
+}
 
 img.event-logo.lrg {
   max-width: 170px;
@@ -1613,7 +1615,7 @@ img.global-figures-chart {
   .summit-promo p {
     color: white; }
   .summit-promo.barcelona {
-    background: url(/assets/sydney-summit/images/blue-for-allison.png);
+    background: url(https://www.openstack.org/assets/Uploads/Denver-Hero-1440x600.jpg)
     padding: 60px 0 90px;
     margin-bottom: -52px;
     background-size: cover;
@@ -1624,7 +1626,7 @@ img.global-figures-chart {
     text-align: center;
 }
 .summit-promo .nfv-summit-right img.nfv-summit-logo {
-    max-width: 130px;
+    max-width: 100px;
     margin-bottom: 5px;
 }
 .summit-promo .nfv-summit-right .nfv-summit-dates {
@@ -1679,7 +1681,7 @@ img.global-figures-chart {
 .summit-promo.containers .containers-summit-right .containers-summit-register-btn a i {
   margin-left: 5px; }
 .summit-promo.containers .containers-summit-right .containers-summit-register-btn a:hover {
-  background: #A51B1B;
+  background: #ec1944;
   text-decoration: none; }
 
 @media (max-width: 767px) {
