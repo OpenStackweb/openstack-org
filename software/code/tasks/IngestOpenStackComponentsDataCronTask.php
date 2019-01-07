@@ -425,13 +425,13 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                             if (isset($component['support-teams'])) {
                                 foreach ($component['support-teams'] as $linkArray) {
                                     if (!is_array($linkArray)) continue;
-                                    foreach ($linkArray as $label => $link) {
-                                        $linkObj = OpenStackComponentLink::get()->filter(['Label' => $label, 'URL' => $link])->First();
+                                    foreach ($linkArray as $label) {
+                                        $linkObj = OpenStackComponentLink::get()->filter(['Label' => $label, 'ComponentID' => $comp->ID])->First();
 
                                         if (!$linkObj) {
                                             $linkObj = new OpenStackComponentLink();
                                             $linkObj->Label = $label;
-                                            $linkObj->URL = $link;
+                                            $linkObj->URL = `https://governance.openstack.org/tc/reference/projects/${label}.html`;
                                             $linkObj->write();
                                         }
 
