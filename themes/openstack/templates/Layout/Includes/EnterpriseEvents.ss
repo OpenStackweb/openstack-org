@@ -24,7 +24,7 @@
                     <div class="events-wrapper">
                         <div class="row">
                             <div class="col-lg-12 col-sm-12">
-                                <h2>You Can Also Find Us At Our Upcoming Open Infrastructure Summits</h2>
+                                <h2>Join us at an upcoming Open Infrastructure Summit</h2>
                             </div>
                         </div>
                         <div class="row events">

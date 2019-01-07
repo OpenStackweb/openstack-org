@@ -252,7 +252,7 @@
     <div class="summit-promo barcelona">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-sm-8">
                         <h3>Learn more about OpenStack security</h3>
                         <p>
                             Hear from enterprise and government users on how they secure their OpenStack clouds as well as from the upstream community on their security updates.
@@ -263,17 +263,17 @@
                             <a href="/summit/berlin-2018/summit-schedule/global-search?t=Security" class="nfv-summit-btn" target="_blank">Learn More <i class="fa fa-chevron-right"></i></a>
                         </div>
                     </div>
-                      <div class="col-sm-4">
-                          <div class="nfv-summit-right">
-                              <img class="nfv-summit-logo" src="/assets/Uploads/arrows.svg" alt="Open Infrastructure Summit">
-                              <div class="nfv-summit-dates containers"><strong>Open Infrastructure Summit</strong>
-                                  April 29 - May 1
-                              </div>
-                              <div class="nfv-summit-register-btn">
-                                  <a href="https://www.openstack.org/summit/denver-2018/" class="nfv-summit-btn red" target="_blank">Join Us in Denver <i class="fa fa-chevron-right"></i></a>
-                              </div>
+                    <div class="col-sm-4">
+                        <div class="nfv-summit-right">
+                            <img class="nfv-summit-logo" src="/assets/Uploads/arrows.svg" alt="Open Infrastructure Summit">
+                            <div class="nfv-summit-dates containers"><strong>Open Infrastructure Summit</strong><br/>
+                              April 29 - May 1
+                            </div>
+                            <div class="nfv-summit-register-btn">
+                              <a href="https://www.openstack.org/summit/denver-2018/" class="nfv-summit-btn red" target="_blank">Join Us in Denver <i class="fa fa-chevron-right"></i></a>
                           </div>
-                      </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

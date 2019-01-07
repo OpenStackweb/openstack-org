@@ -1615,7 +1615,7 @@ img.global-figures-chart {
   .summit-promo p {
     color: white; }
   .summit-promo.barcelona {
-    background: url(https://www.openstack.org/assets/Uploads/Denver-Hero-1440x600.jpg)
+    background: url(https://www.openstack.org/assets/Uploads/Denver-Hero-1440x600.jpg);
     padding: 60px 0 90px;
     margin-bottom: -52px;
     background-size: cover;
@@ -1636,7 +1636,7 @@ img.global-figures-chart {
     text-align: center;
     min-width: 200px;
     margin: 10px auto;
-    background: #30739C;
+    background: #ec1944;
     color: white;
     padding: 10px 20px;
     border-radius: 4px; 
