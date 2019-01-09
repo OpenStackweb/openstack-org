@@ -10,15 +10,6 @@
                 $Top.BannerText
                 <hr>
                 <div class="coa-action-top">
-                    <% if $HideHowGetStarted == 0 %>
-                        <a href="/coa#coa-get-started" class="coa-action-btn">
-                            $bannerGetStartedLabel() <i class="fa fa-chevron-right"></i>
-                        </a>
-                    <% else %>
-                        <a href="{$Top.Link(get-started)}" data-show-modal="{$multipleGetStarted()}" class="coa-link coa-action-btn">
-                            $bannerGetStartedLabel() <i class="fa fa-chevron-right"></i>
-                        </a>
-                    <% end_if %>
                     <% if $HideFee == 0 %>
                         <% if ExamSpecialCost %>
                         <span style="text-decoration: line-through; opacity:0.7;">$Top.ExamCost</span><strong> $Top.ExamSpecialCost</strong></span> &nbsp; | &nbsp;
