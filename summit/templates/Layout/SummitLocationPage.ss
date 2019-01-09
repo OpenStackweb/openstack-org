@@ -53,7 +53,7 @@
             <div class="col-lg-8 col-lg-push-2">
                 <h5 class="section-title">Official Summit Hotel</h5>
                 <% if not $Top.AlternateHotels %>
-                    <p style="margin-bottom:30px;">
+                    <p>
                         <i class="fa fa-hotel fa-4x"></i>
                     </p>
                 <% end_if %>
@@ -64,7 +64,7 @@
             <% if $First() %>
             <div class="row">
             <% end_if %>
-            <div class="col-lg-4 col-md-4 col-sm-4 hotel-block">
+            <div class="col-lg-8 col-lg-push-2">
                 <h3><!-- {$Pos}. -->$Name</h3>
                 <p>
                     $Address
