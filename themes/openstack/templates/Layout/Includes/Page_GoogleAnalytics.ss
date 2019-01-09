@@ -38,4 +38,13 @@ function recordOutboundLink(link, category, action) {
     ga('require', 'GTM-5F7R6N4');
     ga('send', 'pageview');
 
+    ga(function(tracker) {
+        var googleClientID = tracker.get('clientId');
+
+        $("a.eventbrite-register-link").each(function() {
+            var href = $(this).attr("href");
+            $(this).attr("href", href + '&_eboga=' + googleClientID);
+        });
+    });
+
 </script>

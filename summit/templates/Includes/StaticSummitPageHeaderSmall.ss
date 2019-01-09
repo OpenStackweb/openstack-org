@@ -32,9 +32,7 @@
                             </ul>
                     </li>
                     <li class="link button-box">
-                        <a href="https://openinfrasummitandptgdenver.eventbrite.com/?aff=DenverSummit" class="btn register-btn-lrg">
-                            Register Now <i class="fa fa-arrow-right"></i>
-                        </a>
+                        <% include EventbriteRegisterLink Position='h' %>
                     </li>
                 </ul>
             </div>

@@ -15,8 +15,8 @@
                 <p>Join the people building and operating open infrastructure, with over 300 sessions and workshops on Container Infrastructure, CI/CD, Telecom + NFV, Public Cloud, Private & Hybrid Cloud, Security and members of open source communities like Airship, Ansible, Ceph, Docker, Kata Containers, Kubernetes, ONAP, OpenStack, Open vSwitch, OPNFV, StarlingX, Zuul and more.</p>
 
                 <a class="btn btn-default" href="/summit/denver-2019/sponsors/">Sponsor the Summit <i class="fal fa-arrow-right"></i></a>
-                <a class="btn btn-primary" href="https://openinfrasummitandptgdenver.eventbrite.com/?aff=DenverSummit2019 " target="_blank">Register Now <i class="fal fa-arrow-right"></i></a>
 
+                <% include EventbriteRegisterLink Position='m',ExtraClass='btn-primary' %>
             </div>
             <div class="col-md-12 session-box">
                 <h3>Over 300 Presentations, Workshops, and Collaborative Sesssions</h3>

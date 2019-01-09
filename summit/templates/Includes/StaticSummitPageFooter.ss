@@ -3,10 +3,8 @@
         <div class="row">
             <div class="col-md-6 col-sm-12">
                 <div class="button-wrapper">
-                    <a href="https://openinfrasummitandptgdenver.eventbrite.com/?aff=DenverSummit19" class="btn register-btn-lrg">
-                        Register Now
-                        <i class="fa fa-arrow-right"></i>
-                    </a>
+                    <% include EventbriteRegisterLink Position='f' %>
+
                     <div class="links">
                         $getSummitPageText(FooterLinksLeft)
                     </div>
