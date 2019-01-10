@@ -28,7 +28,6 @@ SiteTree:
 File:
   extensions:
     - FileExt
-    - CloudFileExtension
 
 Injector:
   TransactionManager:
