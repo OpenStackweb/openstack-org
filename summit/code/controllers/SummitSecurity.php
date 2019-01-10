@@ -488,7 +488,7 @@ class SummitSecurity extends SummitPage_Controller {
     }
 
     public function PresentationDeadlineText(){
-        $summit = Summit::get_active();
+        $summit = Summit::ActiveSummit();
         $page   = PresentationPage::get()->filter('SummitID', $summit->ID)->first();
         return $page->PresentationDeadlineText;
     }

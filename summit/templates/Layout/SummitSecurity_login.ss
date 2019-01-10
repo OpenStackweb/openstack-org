@@ -1,15 +1,15 @@
 
-<div class="presentation-app-header">
-    <% if $Top.ActiveSummit %>
-        <% if $Top.ActiveSummit.isCallForSpeakersOpen %>
+<% if $Top.ActiveSummit %>
+    <% if $Top.ActiveSummit.isCallForSpeakersOpen &&  $Top.PresentationDeadlineText %>
+        <div class="presentation-app-header">
             <div class="container">
                 <p class="status">
                     <i class="fa fa-calendar"></i>&nbsp;{$Top.PresentationDeadlineText}
                 </p>
             </div>
-        <% end_if %>
+        </div>
     <% end_if %>
-</div>
+<% end_if %>
 
 
 <div class="presentation-app-body" style="margin-bottom:300px;">
