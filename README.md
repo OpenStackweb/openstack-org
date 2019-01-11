@@ -44,29 +44,24 @@ openstack/_config/cloudassets.yml
 and with following content 
 
 
+* https://docs.openstack.org/keystone/rocky/user/application_credentials.html
+
 
 ```yaml
 
 ---
 name: assetsconfig
 ---
-
 CloudAssets:
-  wrappers:
-    File : CloudFile
-    BetterImage: CloudImage
-    Image: CloudImage
-    Image_Cached: CloudImageCached
   map:
     'assets':
       Type: SwiftBucket
-      BaseURL: 'bucket base url'
-      AuthURL: 'keystone base url'
-      Container: 'container name'
-      Region: 'region nane'
-      Username: 'user name'
-      ApiKey: 'api key'
-      ProjectName: 'project name'
-      LocalCopy: true
-      
-```
+      BaseURL: 'http://yourcdnbaseurl.com/'
+      Container: site-uploads
+      Region: Region Name
+      ApplicationCredentialId: application credential id
+      ApplicationCredentialSecret: application credential secret
+      ProjectName: your project name
+      AuthURL: keystone base url 
+      LocalCopy: false     
+````

@@ -72,7 +72,7 @@
     "paragonie/random_compat": "^2.0",
     "league/oauth2-client": "^2.2",
     "smarcet/caldavclient": "1.1.2",
-    "smarcet/silverstripe-cloudassets-swift": "dev-master",
+    "smarcet/silverstripe-cloudassets-swift": "1.0.0",
     "markguinn/silverstripe-cloudassets": "dev-master"
   },
   "require-dev": {
