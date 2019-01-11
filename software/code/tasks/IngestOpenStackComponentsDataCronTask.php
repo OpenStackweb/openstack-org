@@ -303,11 +303,14 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
 
                 foreach($categoryYaml['tabs'] as $tab) {
                     $subcatName = $tab['name'];
-                    //echo sprintf("- cat %s ", $subcatName).PHP_EOL;
+                    $subcatDesc = $tab['prelude'];
+                    //echo sprintf("- cat %s - %s ", $subcatName, $subcatDesc).PHP_EOL;
 
                     // one level categories will have a tab with same name as category, so we skip the level
                     if ($subcatName == $categoryName) {
                         $subcat = $category;
+                        $subcat->Description = $subcatDesc;
+                        $subcat->write();
                     } else {
                         $subcat = OpenStackComponentCategory::get()->filter('Name', $subcatName)->first();
                         if (!$subcat) {
@@ -315,12 +318,14 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                             $subcat->Name = $subcatName;
                         }
                         $subcat->Enabled = 1;
+                        $subcat->Description = $subcatDesc;
                         $subcat->ParentCategoryID = $category->ID;
                         $subcat->Order = $subCatOrder;
                         $subcat->write();
 
                         $subCatOrder++;
                     }
+
 
                     $subSubCatOrder = 1;
                     foreach($tab['categories'] as $subcategory) {

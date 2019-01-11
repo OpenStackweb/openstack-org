@@ -5,7 +5,7 @@ require('./t.tag');
 <service-group>
     <div class="row">
         <div class="col-sm-12 all-projects-wrapper">
-            <h3><t entity="Software.SERVICES_SECTION_TITLE" text={ category.Name } /></h3>
+            <h3><t entity="Software.SERVICES_SECTION_TITLE" text={ category.Label } /></h3>
             <p><t entity="Software.SERVICES_SECTION_DESCRIPTION" text={ category.Description } /></p>
             <p></p>
         </div>
@@ -16,7 +16,7 @@ require('./t.tag');
                 <div class="col-sm-12">
                     <p class="service-section-title">
                         <strong>
-                            <t entity="Software.SERVICES_SECTION_TITLE" text={ subcategory.category.Name } />
+                            <t entity="Software.SERVICES_SECTION_TITLE" text={ subcategory.category.Label } />
                         </strong>
                     </p>
                 </div>

@@ -17,6 +17,7 @@ final class OpenStackComponentCategoryAdminUI extends DataExtension
 
     private static $summary_fields = [
         'Name'          => 'Name',
+        'Label'         => 'Label',
         'Description'   => 'Description',
         'Enabled'       => 'Enabled'
     ];
@@ -34,6 +35,7 @@ final class OpenStackComponentCategoryAdminUI extends DataExtension
         $fields->push(new LiteralField("Title", "<h2>OpenStack Component Category</h2>"));
         $fields->push(new CheckboxField("Enabled", "Enabled"));
         $fields->push(new TextField("Name", "Name"));
+        $fields->push(new TextField("Label", "Label"));
         $fields->push(new TextField("Slug", "Slug"));
         $fields->push(new TextField("Description", "Description"));
 

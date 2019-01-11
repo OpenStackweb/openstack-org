@@ -21,6 +21,7 @@ class OpenStackComponentCategory extends DataObject implements IOpenStackCompone
     static $db = array
     (
         'Name'              => 'Varchar(255)',
+        'Label'             => 'Varchar(255)',
         'Description'       => 'Text',
         'Slug'              => 'Varchar(255)',
         'Order'             => 'Int',
@@ -60,6 +61,10 @@ class OpenStackComponentCategory extends DataObject implements IOpenStackCompone
             }
 
             $this->Slug = $checkSlug;
+        }
+
+        if (empty($this->Label)) {
+            $this->Label = $this->Name;
         }
 
         // if removed from a collection of subcategories we disable the category

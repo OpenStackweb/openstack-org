@@ -18,7 +18,7 @@
                 </button>
                 <ul class="dropdown-menu">
                     <li class="category-item" each={ categories } >
-                        <a id="{ 'category_' + ID }" data-slug={ Slug } href="#" data-id="{ ID }" onclick={ selectedCategory }>{ Name }</a>
+                        <a id="{ 'category_' + ID }" data-slug={ Slug } href="#" data-id="{ ID }" onclick={ selectedCategory }>{ Label }</a>
                     </li>
                 </ul>
             </div>
