@@ -25,6 +25,10 @@
     {
       "type": "vcs",
       "url": "https://github.com/OpenStackweb/silverstripe-display-logic"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/OpenStackweb/openstack"
     }
   ],
   "require": {
@@ -73,7 +77,8 @@
     "league/oauth2-client": "^2.2",
     "smarcet/caldavclient": "1.1.2",
     "smarcet/silverstripe-cloudassets-swift": "1.0.0",
-    "markguinn/silverstripe-cloudassets": "dev-master"
+    "markguinn/silverstripe-cloudassets": "dev-master",
+    "php-opencloud/openstack": "dev-master"
   },
   "require-dev": {
     "behat/behat": "@stable",
