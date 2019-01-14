@@ -1,11 +1,11 @@
 <% if PricingSchemas %>
-        <form id="pricing_schema_form" name="pricing_schema_form">
-        <table class="admin-table" style="max-width:99%"  width="100%">
+        <form id="pricing_schema_form" name="pricing_schema_form" style="margin-bottom: 30px">
+        <table class="admin-table" width="100%">
             <thead>
             <tr>
-                <th style=";width:20%;">Pricing Scheme</th>
+                <th style="text-align: center;width:20%;">Pricing Scheme</th>
                 <% loop PricingSchemas %>
-                    <th style="max-width:100px;" width="10%">
+                    <th style="text-align: center; width:16%;" >
                         $Type
                     </th>
                 <% end_loop %>

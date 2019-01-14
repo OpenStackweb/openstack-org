@@ -1,11 +1,11 @@
 <% if getHyperVisors %>
-    <form name="hypervisors_form" id="hypervisors_form">
-        <table class="admin-table" style="max-width:99%;" width="100%">
+    <form name="hypervisors_form" id="hypervisors_form" style="margin-bottom: 30px">
+        <table class="admin-table" width="100%">
             <thead>
             <tr>
-                <th style=";width:20%;">Hypervisors</th>
+                <th style="text-align: center;width:20%;">Hypervisors</th>
                 <% loop getHyperVisors %>
-                    <th style="width:10%;">$Type</th>
+                    <th style="text-align: center;width:8%;">$Type</th>
                 <% end_loop %>
             </tr>
             </thead>

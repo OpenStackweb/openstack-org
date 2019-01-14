@@ -1,11 +1,11 @@
 <% if GuestsOS %>
     <form name="guest_os_form" id="guest_os_form">
-            <table style="border: 1px solid #ccc; border-collapse:collapse;clear:both;max-width:35%;" width="100%">
+            <table style="border: 1px solid #ccc; border-collapse:collapse;clear:both;" width="100%">
             <tbody>
             <tr>
-            <th style="border: 1px solid #ccc;width:20%;">Guest OS Support</th>
+            <th style="text-align: center;border: 1px solid #ccc;background:#eaeaea;width:20%;">Guest OS Support</th>
             <% loop getGuestsOS %>
-                <th style="border: 1px solid #ccc;background:#eaeaea;width:10%;">$Type</th>
+                <th style="text-align: center;border: 1px solid #ccc;background:#eaeaea;">$Type</th>
             <% end_loop %>
             </tr>
             <tr>
