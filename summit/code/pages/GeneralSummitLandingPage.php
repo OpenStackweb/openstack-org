@@ -26,13 +26,6 @@ class GeneralSummitLandingPage_Controller extends Page_Controller
 
     }
 
-    public function CurrentSummit()
-    {
-        $summit = Summit::get_active();
-
-        return $summit->isInDB() ? $summit : false;
-    }
-
     public function getPageTitle()
     {
         return SummitPage::PageCustomTitle;
