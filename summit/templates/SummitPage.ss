@@ -65,7 +65,6 @@
 </div>
     <% include Quantcast %>
     <% include TwitterUniversalWebsiteTagCode %>
-    <% include GoogleAdWordsSnippet %>
 
     <div id="orderModal" class="modal fade" role="dialog">
         <div class="modal-dialog">

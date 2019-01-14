@@ -1,0 +1,1899 @@
+/* fonts */
+
+@import url("//hello.myfonts.net/count/376f4a");
+
+@font-face {
+    font-family: 'GoldanaScript';
+    src: url("../fonts/goldana/376F4A_0_0.eot");
+    src: url("../fonts/goldana/376F4A_0_0.eot?#iefix") format("embedded-opentype"), url("../fonts/goldana/376F4A_0_0.woff2") format("woff2"), url("../fonts/goldana/376F4A_0_0.woff") format("woff"), url("../fonts/goldana/376F4A_0_0.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: 'GoldanaInline';
+    src: url("../fonts/goldana/376F4A_1_0.eot");
+    src: url("../fonts/goldana/376F4A_1_0.eot?#iefix") format("embedded-opentype"), url("../fonts/goldana/376F4A_1_0.woff2") format("woff2"), url("../fonts/goldana/376F4A_1_0.woff") format("woff"), url("../fonts/goldana/376F4A_1_0.ttf") format("truetype");
+}
+
+.script {
+    font-family: "GoldanaScript";
+}
+
+.inline {
+    font-family: "GoldanaInline";
+}
+
+/*some general rules */
+
+button.btn, a.btn {
+    border-radius: 0.1em;
+}
+
+button.btn i, a.btn i {
+    margin-top: 0.2em;
+}
+
+.main-body .title-section {
+    font-weight: bold;
+    margin-bottom: 1em;
+    text-align: left;
+}
+
+#wrap {
+    margin: 0;
+}
+
+footer {
+    background: #040508;
+    padding: 70px 0;
+    height: auto;
+    margin-top: 0;
+}
+
+.summit-hero-landing, .summit-hero-landing-short {
+    background-image: url("../images/berlin.jpg");
+    background-size: cover;
+    background-position: bottom center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    height: auto;
+    display: block;
+    position: relative;
+    padding-bottom: 120px;
+}
+
+.summit-hero-landing-short {
+    height: auto;
+    padding-bottom: 100px;
+}
+
+.summit-hero-landing .navbar, .summit-hero-landing-short .navbar {
+    background: transparent;
+    width: 100%;
+    display: inline-block;
+    padding: 1em;
+}
+
+.summit-hero-landing .navbar .container, .summit-hero-landing-short .navbar .container {
+    background: transparent;
+}
+
+.summit-hero-landing .logo-box, .summit-hero-landing-short .logo-box {
+    display: inline-block;
+    float: left;
+    margin: 2em 1em 1em 1em;
+}
+
+.summit-hero-landing .navbar .link.button-box, .summit-hero-landing-short .navbar .link.button-box {
+    position: absolute;
+    right: 1em;
+}
+
+.summit-hero-landing .summit-hero-logo, .summit-hero-landing-short .summit-hero-logo {
+    background: url("../images/summit-logo-red.svg") center no-repeat;
+    height: 2.5em;
+    width: 2.5em;
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    top: 0;
+}
+
+.summit-hero-landing .navbar, .summit-hero-landing-short .navbar {
+    border: none;
+    display: inline-block;
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1170px;
+    float: left;
+}
+
+.summit-hero-landing .navbar.scrolled-nav, .summit-hero-landing-short .navbar.scrolled-nav {
+    background-color: #00468b;
+    margin: 0;
+    min-width: 100%;
+    z-index: 9999999;
+}
+
+.summit-hero-landing .navbar .nav, .summit-hero-landing-short .navbar .nav {
+    border: none;
+}
+
+.summit-hero-landing .navbar .nav > li > a, .summit-hero-landing-short .navbar .nav > li > a {
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 0.9em;
+}
+
+.summit-banner {
+    width: 100%;
+    margin: 10em auto 0;
+    max-width: 80vw;
+    text-align: center;
+}
+
+.summit-hero-landing-short .summit-banner {
+    margin: 6em auto 0;
+}
+
+.summit-banner h4 {
+    color: #fff;
+    font-size: 2.5em;
+    margin: 0;
+}
+
+.summit-banner h1 {
+    font-size: 12em;
+    display: block;
+    line-height: 0.75em;
+    margin-bottom: 0.2em;
+    font-weight: 1;
+    margin-top: 0;
+    color: #fff;
+}
+
+.summit-hero-landing-short .summit-banner h1 {
+    font-size: 7em;
+}
+
+@media all and (max-width: 500px) {
+    .text-wrapper .title-box {
+        font-size: 70%;
+    }
+
+    .summit-banner h1 {
+        font-size: 9em;
+    }
+
+    .summit-hero-landing, .summit-hero-landing-short {
+        height: 50vh;
+    }
+}
+
+.summit-banner h5 {
+    color: #fff;
+    font-size: 2em;
+    text-transform: uppercase;
+}
+
+.summit-banner h5 strong {
+    max-width: 40%;
+    display: inline-block;
+    text-align: center;
+    position: relative;
+}
+
+.summit-banner h5 span {
+    width: 5em;
+    height: 1em;
+    display: inline-block;
+    margin: 0 0.5em;
+}
+
+@media all and (max-width: 600px) {
+    .summit-banner h5 span {
+        width: 30%;
+        margin: 0;
+    }
+}
+
+@media all and (max-width: 400px) {
+    .summit-banner h5 strong:before, .summit-banner h5 strong:after {
+        margin-top: .2em;
+    }
+
+    .summit-banner h5 strong:after {
+        right: 98%;
+    }
+}
+
+.summit-banner h5 span.arrow.right {
+    background: url("../images/arrow-right.svg") bottom left no-repeat;
+    background-size: cover;
+    background-position-y: 7px;
+}
+
+.summit-banner h5 span.arrow.left {
+    background: url("../images/arrow-left.svg") bottom left no-repeat;
+    background-size: cover;
+    background-position-y: 7px;
+}
+
+.link.button-box .btn {
+    background-color: #ed1944;
+    font-size: 0.85em;
+    padding: 1em;
+    font-size: 0.9em;
+}
+
+.summit-hero-landing .nav li.button-box .btn:hover, .summit-hero-landing-short .nav li.button-box .btn:hover {
+    font-weight: bold;
+    background-color: #ed1944;
+    color: #fff;
+}
+
+.summit-hero-landing .nav, .summit-hero-landing-short .nav {
+    background: transparent;
+}
+
+.summit-hero-landing .nav li.link, .summit-hero-landing-short .nav li.link {
+    border: none;
+}
+
+.summit-hero-landing .nav li.link a, .summit-hero-landing-short .nav li.link a {
+    border: none;
+}
+
+.summit-hero-landing .nav li.link a:hover, .summit-hero-landing-short .nav li.link a:hover {
+    color: #ffd602;
+}
+
+.summit-hero-landing .nav li.current a, .summit-hero-landing-short .nav li.current a {
+    background: transparent;
+    color: #ffd602;
+}
+
+.summit-hero-landing .navbar-toggle, .summit-hero-landing-short .navbar-toggle {
+    margin-top: 0.5em;
+}
+
+.summit-hero-landing .collapse.in, .summit-hero-landing-short .collapse.in {
+    width: 100%;
+    background-color: #00468b;
+    z-index: 999999;
+    border: none;
+}
+
+@media all and (max-width: 767px) {
+    #summit-main-nav .navbar-toggle {
+        display: block !important;
+    }
+
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+        color: #fff;
+        padding: 0.2em 0;
+    }
+
+    .summit-hero-landing .navbar .nav, .summit-hero-landing-short .navbar .nav {
+        padding: 0 1em;
+    }
+
+    .summit-hero-landing .navbar .link.button-box, .summit-hero-landing-short .navbar .link.button-box {
+        position: relative;
+        right: auto;
+    }
+
+    .summit-hero-landing .navbar .link.button-box .btn, .summit-hero-landing-short .navbar .link.button-box .btn {
+        width: 100%;
+    }
+
+    .summit-hero-landing .navbar .link.button-box .btn i, .summit-hero-landing-short .navbar .link.button-box .btn i {
+        margin-right: 1em;
+    }
+
+    .summit-hero-landing .navbar .nav > li > a, .summit-hero-landing-short .navbar .nav > li > a {
+        padding: 0.5em 0;
+    }
+
+    .navbar-default ul.navbar-main > li > a i.fa-caret-down {
+        display: inline-block;
+    }
+
+    .navbar-default ul.navbar-main > li.open > a i.fa-caret-down {
+        display: none;
+    }
+
+    .navbar-default ul.navbar-main > li > a i.fa-caret-up {
+        display: none;
+    }
+
+    .navbar-default ul.navbar-main > li.open > a i.fa-caret-down {
+        display: inline-block;
+    }
+
+    /* keep open Other Summits */
+    .navbar-default ul.navbar-main > li.other-summits a {
+        background: transparent;
+        color: #ffd602;
+    }
+
+    .navbar-default ul.navbar-main > li.other-summits .dropdown-menu {
+        position: static;
+        float: none;
+        width: auto;
+        margin: 0px;
+        padding: 0px 10px;
+        background-color: transparent;
+        border: 0;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        display: block;
+    }
+
+    .navbar-default ul.navbar-main > li.other-summits .dropdown-menu > li > a {
+        color: #fff;
+        padding: 0.2em 0;
+    }
+}
+
+@media all and (min-width: 767px) {
+    #summit-main-nav .navbar-toggle {
+        display: none;
+    }
+}
+
+@media all and (max-width: 767px) {
+    #summit-main-nav .navbar-toggle {
+        display: none;
+    }
+
+    .summit-hero-landing-short .navbar .link.button-box {
+        position: relative;
+        right: 0;
+        margin: 0.5em 0;
+    }
+}
+
+.collapse.in {
+    position: relative;
+    display: inline-block;
+}
+
+.text-wrapper.blue {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #00468b;
+
+    /*margin: 0;*/
+}
+
+.text-wrapper.blue .highlight {
+    max-width: 870px;
+    margin: 0 auto;
+    position: relative;
+}
+
+@media all and (max-width: 815px) {
+    .text-wrapper.blue .highlight {
+        max-width: 100%;
+        height: auto;
+        padding: 1em;
+    }
+
+    .text-wrapper.blue .highlight h5 {
+        padding: 0;
+        line-height: 1.4em;
+    }
+
+    .text-wrapper.blue .megaphone {
+        display: none;
+    }
+}
+
+.text-wrapper.blue h5 {
+    color: #fff;
+    padding-left: 5em;
+    padding-bottom: 2em;
+    padding-top: 0.75em;
+    text-align: center;
+}
+
+.text-wrapper.blue h5 strong {
+    color: #ffd602;
+}
+
+.text-wrapper.blue .megaphone {
+    background: url("../images/megaphone.svg") center no-repeat;
+    width: 10em;
+    height: 10em;
+    position: absolute;
+    top: -4em;
+    left: 0;
+}
+
+.about-summit-header {
+    background: #ed1944 url("/assets/summits/denver-2019/Denver-Mountain-BG.svg") center bottom no-repeat;
+    color: #fff;
+    min-height: 80vh;
+    padding-top: 7em;
+}
+
+.about-summit-header .about-buttons {
+    display: inline-block;
+}
+
+.about-summit-header .summit-title {
+    color: #ffd602;
+    font-size: 4em;
+    margin: 0;
+}
+
+.about-summit-header h2 {
+    font-size: 4em;
+    color: #fff;
+    font-weight: bold;
+    margin-top: 0;
+}
+
+@media all and (max-width: 450px) {
+    .about-summit-header h2 {
+        font-size: 3em;
+        word-wrap: break-word;
+    }
+
+    .about-summit-header .summit-title {
+        font-size: 2em;
+    }
+
+    .about-summit-header {
+        padding-top: 4em;
+    }
+}
+
+@media all and (min-width: 1200px) {
+    .about-summit-header h2 {
+        font-size: 85px;
+    }
+}
+
+@media (min-width: 500px) and (max-width: 676px) {
+    .about-summit-header h2 {
+        font-size: 3.2em;
+    }
+
+    .about-summit-header .summit-title {
+        font-size: 2.2em;
+    }
+}
+
+@media (min-width: 677px) and (max-width: 991px) {
+    .about-summit-header h2 {
+        font-size: 3.4em;
+    }
+
+    .about-summit-header .summit-title {
+        font-size: 2.4em;
+    }
+}
+
+.about-summit-header .about-buttons .btn {
+    letter-spacing: 0.025em;
+    text-transform: uppercase;
+    font-weight: normal;
+    position: relative;
+    margin-top: 1em;
+    border: none;
+}
+
+@media (min-width: 500px) and (max-width: 1024px) {
+    .about-summit-header .about-buttons .btn {
+        width: 46%;
+        float: left;
+        font-size: 0.99em;
+    }
+
+    .about-summit-header .about-buttons .btn:first-child {
+        margin-right: 3%;
+    }
+
+    .about-summit-header .about-buttons .btn:last-child {
+        margin-left: 3%;
+    }
+}
+
+.about-summit-header .about-buttons .btn i {
+    float: right;
+    margin-top: 0.2em;
+}
+
+.about-summit-header .about-buttons .btn-default {
+    background-color: #fff;
+    color: #00468b !important;
+}
+
+.about-summit-header .about-buttons .btn-primary {
+    background-color: #ffd602;
+    color: #00468b !important;
+}
+
+.about-summit-header .session-box h3 {
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+    margin: 3em 0 1.5em 0;
+}
+
+.about-summit-header .bird {
+    width: 100%;
+    display: inline-block;
+}
+
+.about-summit-header h5 {
+    padding-left: 1em;
+    color: #fff;
+    float: left;
+}
+
+.about-summit-header .bird span {
+    background: url("../images/bird.svg") center no-repeat;
+    display: inline-block;
+    width: 3em;
+    height: 3em;
+    float: left;
+}
+
+.about-summit-header .bird strong {
+    color: #ffd602;
+    margin-top: 0.5em;
+    display: inline-block;
+}
+
+.sessions {
+    padding: 0;
+    margin: 0;
+}
+
+.session {
+    display: inline-block;
+    color: #fff;
+    text-align: center;
+    max-width: 12.5%;
+    min-width: 12.5%;
+    margin-top: 2em;
+    float: left;
+}
+
+@media all and (max-width: 767px) {
+    .session {
+        max-width: 25%;
+        min-width: 25%;
+    }
+}
+
+.session span {
+    width: 100%;
+    min-height: 4em;
+    height: auto;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.session span.ai {
+    background: url("../images/ai.svg") center center no-repeat;
+}
+
+.session span.cicd {
+    background: url("../images/cicd.svg") center center no-repeat;
+}
+
+.session span.container {
+    background: url("../images/container.svg") center center no-repeat;
+}
+
+.session span.edge {
+    background: url("../images/edge.svg") center center no-repeat;
+}
+
+.session span.hpc {
+    background: url("../images/hpc.svg") center center no-repeat;
+}
+
+.session span.hybrid {
+    background: url("../images/hybrid.svg") center center no-repeat;
+}
+
+.session span.nfv {
+    background: url("../images/nfv.svg") center center no-repeat;
+}
+
+.session span.cloud {
+    background: url("../images/cloud.svg") center center no-repeat;
+}
+
+.what-to-expect {
+    padding: 5em 0 3em;
+}
+
+.what-to-expect .row {
+    margin: 0;
+}
+
+/* .what-to-expect .video-container, .what-to-expect .text-container {
+    width: 50%;
+    display: inline-block;
+    float: left;
+
+    @media (max-width: 1024px) {
+        width: 100%;
+    }
+} */
+
+.what-to-expect .video-container {
+    margin-bottom: 3em;
+}
+
+.what-to-expect .video-container .video {
+    background: url("../images/thumb_video.jpg") center top no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 20em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.what-to-expect .text-container .attends {
+    padding: 0;
+    margin: 1em 0 0 0;
+}
+
+.what-to-expect .text-container .attends li {
+    display: inline-block;
+    width: 25%;
+    float: left;
+    max-width: 25%;
+    text-align: center;
+    color: #ed1944;
+    font-weight: bold;
+}
+
+.what-to-expect .text-container .attends li span {
+    background: center top no-repeat;
+    width: 100%;
+    height: 3em;
+    display: inline-block;
+    margin: 1em 0;
+    background-size: contain;
+}
+
+.what-to-expect .text-container .attends li span.architecture {
+    background-image: url("../images/stock-red.svg");
+}
+
+.what-to-expect .text-container .attends li span.platform {
+    background-image: url("../images/cell-red.svg");
+}
+
+.what-to-expect .text-container .attends li span.bussiness {
+    background-image: url("../images/suitcase-red.svg");
+}
+
+.what-to-expect .text-container .attends li span.upstream {
+    background-image: url("../images/code-red.svg");
+}
+
+.about-summit-users-wrapper {
+    padding-top: 5em;
+}
+
+.about-summit-users-wrapper .summit-user-section {
+    background-color: #fff;
+    height: 19em;
+}
+
+@media (min-width: 570px) and (max-width: 720px) {
+    .about-summit-users-wrapper .summit-user-section {
+        height: 21em;
+    }
+}
+
+@media all and (max-width: 569px) {
+    .about-summit-users-wrapper .summit-user-section {
+        height: 17em;
+    }
+}
+
+@media (min-width: 720px) and (max-width: 1200px) {
+    .about-summit-users-wrapper .summit-user-section {
+        height: 23em;
+    }
+}
+
+.about-summit-users-wrapper .summit-user-section .summit-user-image-box {
+    margin: 0 0 0.5em 0;
+    border-radius: 0;
+    width: 100%;
+    height: auto;
+}
+
+.overview {
+    margin: 0;
+    list-style: none;
+    padding: 0;
+}
+
+.overview li {
+    padding-bottom: 1px;
+}
+
+.overview li a {
+    width: 100%;
+    background-color: #ed1944;
+    display: inline-block;
+    color: #fff;
+    text-align: left;
+    padding: 1em;
+    text-transform: uppercase;
+    position: relative;
+}
+
+.overview li a h5 {
+    color: #fff;
+    line-height: 1.2em;
+    font-size: 1.25em;
+    margin-top: 0;
+}
+
+.overview li a i {
+    position: absolute;
+    right: 1em;
+    top: 1em;
+    font-size: 1.5em;
+}
+
+.about-summit-users-wrapper .featured {
+    height: auto;
+    padding: 0 0.5em;
+    margin-bottom: 1em;
+}
+
+.about-summit-users-wrapper .summit-user-section img.summit-user-image {
+    height: auto;
+    width: 100%;
+}
+
+.about-summit-users-wrapper .summit-user-section .info {
+    padding: 0.25em 0.75em;
+    text-align: left;
+}
+
+.about-summit-users-wrapper .summit-user-section .name {
+    color: #ed1944;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 0.5em;
+    line-height: 1.2em;
+    word-break: break-word;
+}
+
+.about-summit-users-wrapper .summit-user-section .title {
+    font-size: 0.8em;
+    text-transform: uppercase;
+    font-style: normal;
+    text-align: left;
+}
+
+.about-summit-users-wrapper .summit-user-section .topic {
+    font-size: 0.8em;
+    text-align: left;
+    font-weight: bold;
+}
+
+.about-summit-users-wrapper .btn {
+    background-color: transparent;
+    color: #000;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-top: 1em;
+}
+
+.about-summit-users-wrapper .btn i {
+    margin-left: 1em;
+}
+
+h3.recap-title {
+    font-size: 3em;
+}
+
+.academy-wrapper .recap-title {
+    margin: 2em 0 1em;
+}
+
+.academy-wrapper .carousel {
+    width: 100%;
+    display: inline-block;
+}
+
+.academy-wrapper .carousel .carousel-indicators {
+    display: none;
+}
+
+.academy-wrapper .carousel .carousel-control {
+    opacity: 1;
+    margin-top: 1em;
+}
+
+.academy-wrapper .carousel .carousel-control.left {
+    background-image: -webkit-linear-gradient(left, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.0001) 100%);
+    background-image: -o-linear-gradient(left, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.0001) 100%);
+    background-image: -webkit-gradient(linear, left top, right top, from(rgba(255, 255, 255, 0.5)), to(rgba(255, 255, 255, 0.0001)));
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.0001) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#8ffffff', endColorstr='#00ffffff', GradientType=1);
+    background-repeat: repeat-x;
+}
+
+.academy-wrapper .carousel .carousel-control.right {
+    background-image: -webkit-linear-gradient(left, rgba(255, 255, 255, 0.0001) 0%, rgba(255, 255, 255, 0.5) 100%);
+    background-image: -o-linear-gradient(left, rgba(255, 255, 255, 0.0001) 0%, rgba(255, 255, 255, 0.5) 100%);
+    background-image: -webkit-gradient(linear, left top, right top, from(rgba(255, 255, 255, 0.0001)), to(rgba(255, 255, 255, 0.5)));
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.0001) 0%, rgba(255, 255, 255, 0.5) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#8ffffff', endColorstr='#00ffffff', GradientType=1);
+}
+
+.academy-wrapper .carousel .carousel-control span {
+    color: #ed1944;
+    text-shadow: none;
+    position: absolute;
+}
+
+@media all and (max-width: 600px) {
+    .academy-wrapper .carousel .carousel-control span {
+        margin-top: -15px;
+    }
+}
+
+.academy-wrapper .carousel .carousel-control.left span {
+    right: 0;
+}
+
+.academy-wrapper .carousel .carousel-control.right span {
+    left: 0;
+}
+
+.academy-wrapper .carousel h3 {
+    margin-top: 0;
+    color: #ed1944;
+    font-weight: bold;
+    font-size: 3.4em;
+}
+
+@media all and (max-width: 600px) {
+    .academy-wrapper .carousel h3 {
+        font-size: 2.1em;
+    }
+}
+
+.sponsor .title {
+    font-weight: bold;
+    margin-top: 2em;
+}
+
+.sponsor .text {
+    width: 50%;
+    margin: 2em auto;
+}
+
+.sponsor .btn.register-btn-lrg {
+    color: #ed1944;
+    border: solid 2px #ed1944;
+    background-color: transparent;
+    font-weight: bold;
+    letter-spacing: 0.025em;
+}
+
+.sponsor .btn.register-btn-lrg i {
+    color: #ed1944;
+    margin-left: 1em;
+}
+
+.diverse {
+    background-color: #00468b;
+    display: flex;
+    min-height: 80vh;
+}
+
+.diverse .image {
+    right: 0;
+}
+
+.diverse .blue-div, .diverse .image {
+    display: inline-block;
+    float: left;
+    width: 50%;
+    position: absolute;
+}
+
+.diverse .text span {
+    background: url(../images/dialog.svg) no-repeat left bottom;
+    width: 20%;
+    display: inline-block;
+    height: 5em;
+    margin-top: 6em;
+}
+
+.diverse .text {
+    margin-bottom: 3em;
+}
+
+.diverse .image {
+    background: url("../images/inclusive.jpg") center top no-repeat;
+    background-size: cover;
+    min-height: 80vh;
+}
+
+@media all and (max-width: 991px) {
+    .diverse .image {
+        display: none;
+    }
+}
+
+.diverse .text h2 {
+    color: #fff;
+    font-size: 60px;
+    font-weight: bold;
+}
+
+.diverse .text p a {
+    color: #ffd602;
+    font-weight: bold;
+}
+
+.diverse .text p {
+    color: #fff;
+    padding: 0 1em 0 0;
+}
+
+.summit-insights .box {
+    padding: 1.5em;
+    margin-bottom: 2em;
+    background-color: #fff;
+    position: relative;
+    min-height: 16em;
+    max-height: 16em;
+}
+
+.summit-insights .box.big {
+    min-height: 34em;
+}
+
+.summit-insights .item .btn {
+    margin: 0 auto;
+}
+
+.summit-insights .last-column .box {
+    width: 50%;
+    display: inline-block;
+}
+
+.summit-insights .box .insight {
+    color: #ed1944;
+    font-weight: bold;
+    line-height: 1.4em;
+    margin-bottom: 2em;
+}
+
+.summit-insights .pink.box {
+    background-color: #ed1944;
+    color: #fff;
+}
+
+.summit-insights .pink.box button {
+    border: solid 2px #fff;
+    color: #fff;
+    background-color: transparent;
+    margin-top: 1em;
+    width: 100%;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.summit-insights .pink.box h4 {
+    color: #fff;
+    font-weight: bold;
+}
+
+.summit-insights .video iframe {
+    height: 16em;
+}
+
+.summit-insights .video .video-cover * {
+    color: #fff;
+    text-align: center;
+}
+
+.summit-insights .video .video-cover h5 {
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.2em;
+    line-height: 1.5em;
+}
+
+.summit-insights .video .video-cover span {
+    display: inline-block;
+    width: 100%;
+    margin: 1em 0;
+}
+
+.summit-insights .video .video-cover i {
+    display: inline-block;
+    border-radius: 100%;
+    padding: 0.5em;
+    font-size: 1.5em;
+    border: solid 2px #fff;
+    width: 2em;
+    height: 2em;
+    line-height: 0.8em;
+    margin: 0 auto;
+}
+
+.summit-insights .video .video-cover i::before {
+    margin-left: 0.1em;
+    margin-top: 0.1em;
+}
+
+.summit-insights .signature .photo {
+    display: inline-block;
+    height: 4em;
+    background: url("../images/face.png") center no-repeat;
+    float: left;
+}
+
+.summit-insights .signature .photo.photo-bis {
+    background: url("../images/face2.png") center no-repeat;
+}
+
+.signature {
+    display: flex;
+}
+
+.signature > * {
+    flex: 1 100%;
+    padding: 0;
+}
+
+.signature .photo, .signature .brand {
+    flex: 1 auto;
+}
+
+.signature .info {
+    flex: 3 0px;
+}
+
+.signature .photo {
+    order: 1;
+}
+
+.signature .info {
+    order: 2;
+    text-align: left;
+}
+
+.signature .brand {
+    order: 3;
+    background: url("../images/brand1.jpg") center no-repeat;
+    width: 4em;
+}
+
+.summit-insights .container {
+    padding: 0;
+}
+
+.summit-insights {
+    background-color: #000;
+    padding-top: 5em;
+    padding-bottom: 5em;
+    position: relative;
+}
+
+.summit-insights .box {
+    padding: 1.5em;
+    margin-bottom: 2em;
+    background-color: #fff;
+    position: relative;
+}
+
+.summit-insights .box button.btn, .summit-insights .box a.btn {
+    border: solid 2px #ed1944;
+    color: #ed1944;
+    background-color: transparent;
+    margin-top: 1em;
+    width: auto;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 0.75em 2em;
+}
+
+@media all and (max-width: 450px) {
+    .summit-insights .box button.btn, .summit-insights .box a.btn {
+        margin-top: .3em;
+    }
+}
+
+@media (min-width: 500px) and (max-width: 676px) {
+    .summit-insights .box button.btn, .summit-insights .box a.btn {
+        margin-top: .3em;
+    }
+}
+
+.summit-insights .box .btn {
+    margin: 0 auto;
+}
+
+.summit-insights .box .btn i {
+    margin-left: 1em;
+}
+
+.summit-insights .box h4 {
+    font-weight: bold;
+    color: black;
+    font-size: 1.5em;
+    line-height: 1.5em;
+    margin: 0 0 1em;
+}
+
+@media all and (max-width: 450px) {
+    .summit-insights .box h4 {
+        font-size: 1.2em;
+        line-height: 1.2em;
+    }
+}
+
+@media (min-width: 500px) and (max-width: 676px) {
+    .summit-insights .box h4 {
+        font-size: 1.2em;
+        line-height: 1.2em;
+    }
+}
+
+.summit-insights .box .insight {
+    color: #ed1944;
+    font-weight: normal;
+    line-height: 1.3em;
+    margin-bottom: 1em;
+    font-size: 1.3em;
+    margin-top: 0;
+}
+
+.summit-insights .box.spec h4, .summit-insights .box.spec p {
+    margin-bottom: 0.5em;
+}
+
+.summit-insights .pink.box {
+    background-color: #ed1944;
+    color: #fff;
+}
+
+.summit-insights .pink.box button.btn, .summit-insights .pink.box a.btn {
+    border-color: #fff;
+    color: #fff;
+}
+
+.summit-insights .pink.box h4 {
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.5em;
+    line-height: 1.5em;
+}
+
+.summit-insights .video {
+    margin-bottom: 2em;
+    height: 16em;
+    position: relative;
+}
+
+.summit-insights .video .embed-video {
+    background-size: cover;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    height: 16em;
+}
+
+.summit-insights .video .video-cover {
+    position: absolute;
+    z-index: 9999;
+    background-color: rgba(0, 9, 0, 0.3);
+    color: #fff;
+    bottom: 0;
+    width: 100%;
+    height: 16em;
+    padding: 0.5em;
+}
+
+.summit-insights .video .video-cover * {
+    color: #fff;
+    text-align: center;
+}
+
+.summit-insights .video .video-cover h5 {
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.2em;
+    line-height: 1.5em;
+    margin-top: 8em;
+    margin-bottom: 0;
+}
+
+.summit-insights .video .video-cover span {
+    display: inline-block;
+    width: 100%;
+    margin: 3em 0 0;
+}
+
+.summit-insights .video .video-cover i, .what-to-expect .video-container .video i {
+    display: inline-block;
+    border-radius: 100%;
+    padding: 0.5em;
+    font-size: 1.5em;
+    border: solid 2px #fff;
+    width: 2em;
+    height: 2em;
+    line-height: 0.8em;
+    margin: 0 auto;
+    color: #fff;
+}
+
+.summit-insights .video .video-cover i::before, .what-to-expect .video-container .video i::before {
+    margin-left: 0.1em;
+    margin-top: 0.1em;
+    display: inline-block;
+}
+
+.summit-insights .signature .photo {
+    display: inline-block;
+    height: 4em;
+    background: url("../images/face.png") center no-repeat;
+    float: left;
+}
+
+.video.item:hover .video-cover {
+    display: none;
+}
+
+​
+.signature {
+    display: flex;
+    flex-flow: row wrap;
+    font-weight: bold;
+    text-align: center;
+    position: absolute;
+    width: 87%;
+    bottom: 1em;
+}
+
+.signature > * {
+    flex: 1 100%;
+    padding: 0;
+}
+
+.signature .photo, .signature .brand {
+    flex: 1 auto;
+}
+
+.signature .info {
+    flex: 3 0px;
+}
+
+.signature .photo {
+    order: 1;
+}
+
+.signature .info {
+    order: 2;
+    text-align: left;
+}
+
+.signature .info .name {
+    color: #000;
+    font-weight: bold;
+}
+
+.signature .info .company {
+    font-weight: normal;
+}
+
+.signature .brand {
+    order: 3;
+    background: url("../images/brand1.jpg") center no-repeat;
+    width: 4em;
+}
+
+.signature .brand.second {
+    background: url("/assets/summits/homepageimages/citynetwork-tiny.jpg") center no-repeat;
+}
+
+.static-summit-about-page #push {
+    height: 150px;
+}
+
+@media (min-width: 991px) and (max-width: 1200px) {
+    .summit-insights .box {
+        min-height: 18.25em;
+        max-height: 18.25em;
+    }
+
+    .summit-insights .video {
+        height: 18em;
+    }
+
+    .summit-insights .video iframe {
+        height: 18em;
+    }
+
+    .summit-insights .video .embed-video {
+        height: 18em;
+    }
+
+    .summit-insights .video .video-cover {
+        height: 18em;
+    }
+
+    .summit-insights .box.big {
+        min-height: 38.5em;
+    }
+}
+
+@media all and (max-width: 991px) {
+    .summit-insights .box {
+        min-height: 12em;
+        max-height: 15em;
+    }
+
+    .summit-insights .video {
+        height: 25em;
+    }
+
+    .summit-insights .video iframe {
+        height: 20em;
+    }
+
+    .summit-insights .video .embed-video {
+        height: 20em;
+    }
+
+    .summit-insights .video .video-cover {
+        height: 5em;
+    }
+
+    .summit-insights .video .video-cover h5 {
+        margin-top: 0;
+    }
+
+    .video.item:hover .video-cover {
+        display: inline-block;
+        width: 100%;
+    }
+
+    ​
+    .summit-insights .box.big {
+        min-height: 23em;
+        max-height: 35em;
+    }
+}
+
+/* footer */
+
+footer * {
+    color: #fff;
+    text-transform: uppercase;
+}
+
+footer .logo {
+    text-align: right;
+}
+
+footer .logo a {
+    background: url("../images/summit-logo-red.svg") center no-repeat;
+    height: 3.5em;
+    width: 3.5em;
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    text-align: right;
+}
+
+footer .links a {
+    color: #fff;
+    padding: 0.25em 0.5em 0 0;
+    display: inline-block;
+}
+
+footer .openstack .links a {
+    text-align: right;
+    padding: 0.25em 0 0 0.25em;
+    font-size: 12px;
+}
+
+footer .openstack .links span {
+    padding: 0.25em 0 0 0.25em;
+}
+
+footer .openstack .links {
+    float: right;
+    text-align: right;
+}
+
+footer .btn {
+    background-color: #ed1944;
+    margin-bottom: 1em;
+    letter-spacing: 0.02em;
+}
+
+ul.navbar-main {
+    float: none;
+}
+
+.summit-hero-landing-short .navbar-main .dropdown-menu li a {
+    color: #2A4E68;
+    cursor: pointer;
+}
+
+.navbar-main .drop i {
+    margin-left: 0.5em;
+}
+
+.all-summit .summit-hero-landing-short {
+    padding-bottom: 0;
+    background-size: auto;
+    background-position: right top;
+    background-color: #00468b;
+}
+
+.all-summit .summit-hero-landing-short .text-wrapper {
+    font-size: 60%;
+}
+
+.all-summit .summit-hero-landing-short.about-summit-header h2 {
+    font-size: 60px;
+    margin: 0em 0 0.2em;
+}
+
+.all-summit .summit-hero-landing-short .navbar .link.button-box {
+    position: relative;
+    right: 0;
+    float: right;
+}
+
+.all-summit .summit-hero-landing-short.about-summit-header h5 {
+    padding: 0;
+    margin: 1em 0 2em;
+    font-size: 16px;
+}
+
+.all-summit .summit-hero-landing-short .container > .navbar-header {
+    margin: 0;
+}
+
+.all-summit .summit-hero-landing-short .container > .navbar-header .navbar-toggle {
+    margin-right: 0;
+}
+
+.all-summit .summit-hero-landing-short .navbar {
+    padding: 1em 0;
+}
+
+.all-summit .navbar > .container .navbar-brand, .navbar > .all-summit .container-fluid .navbar-brand {
+    margin: 0;
+}
+
+.all-summit .about-summit-header {
+    min-height: auto;
+}
+
+.all-summit .about-summit-header.white {
+    padding: 0;
+    background-image: none;
+}
+
+.all-summit .about-summit-header.white .container {
+    padding: 0 0 3em;
+}
+
+.all-summit .about-summit-header.white .container .session-box {}
+
+.all-summit .about-summit-header.white .container h3 {
+    margin: 2em 0 1.5em 0;
+}
+
+.all-summit .summits-wrap {
+    background-color: #EDF2F7;
+    padding: 3em 0 0;
+}
+
+.all-summit .container {}
+
+.all-summit .summits-wrap .video-container .item {
+    background-color: #fff;
+    text-align: center;
+    padding-bottom: 1em;
+}
+
+.all-summit .summits-wrap .video-container .item .video {
+    height: 15em;
+    position: relative;
+    background-size: cover !important;
+}
+
+.all-summit .summits-wrap .video-container .item .video .triangle {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 100px 100px 0 0;
+    border-color: #ED1944 transparent transparent transparent;
+    left: 0;
+    top: 0;
+    position: absolute;
+}
+
+.all-summit .summits-wrap .video-container .item .video .triangle p {
+    text-align: center;
+    transform: rotate(-45deg);
+    top: -70px;
+    position: absolute;
+    color: #fff;
+    left: 0;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.all-summit .summits-wrap .video-container .item h5 {
+    color: #00468B;
+    margin-bottom: 1em;
+}
+
+.all-summit .summits-wrap .video-container .item h4 {
+    color: #00468B;
+    font-weight: bold;
+    margin: 1em 0 0.2em;
+}
+
+.all-summit .summits-wrap .video-container .item .btn {
+    background-color: #00468B;
+    text-transform: capitalize;
+}
+
+.all-summit .summits-wrap .video-container .item .btn.odd {
+    background-color: #ED1944;
+}
+
+.all-summit .summits-wrap .video-container.first .video {
+    background: url(../images/home/berlin.jpg) center top no-repeat;
+}
+
+.all-summit .summits-wrap .video-container.second .video {
+    background: url(../images/home/denver.jpg) center top no-repeat;
+}
+
+.all-summit .summits-wrap .video-container.last .video {
+    background: url(../images/home/shangai.jpg) center top no-repeat;
+}
+
+.all-summit .summits-wrap .timeline h4 {
+    font-weight: bold;
+    text-align: center;
+}
+
+.all-summit .summits-wrap .timeline span {
+    background: url(../images/home/timeline.svg) center top no-repeat;
+    height: 18em;
+    width: 100%;
+    display: inline-block;
+    background-size: 100%;
+    margin-top: 4em;
+}
+
+.all-summit .what-to-expect {
+    background-color: #000;
+    color: #fff;
+}
+
+.all-summit .what-to-expect h4 {
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 3em;
+}
+
+.all-summit .what-to-expect .text-container {
+    background-color: #00468B;
+    color: #fff;
+    height: 20em;
+    padding: 2em 3em;
+}
+
+.all-summit .what-to-expect .text-container h3 {
+    color: #fff;
+}
+
+.all-summit .what-to-expect .text-container .btn {
+    color: #fff;
+    text-decoration: underline;
+    font-weight: bold;
+    padding: 0;
+    margin-top: 1em;
+}
+
+.all-summit .what-to-expect .video-container {
+    padding: 0;
+    margin: 0;
+}
+
+.all-summit .what-to-expect .video-container .video {
+    background-size: cover !important;
+}
+
+.all-summit .what-to-expect .video-container .video.first {
+    background: url(../images/home/what-1.jpg) center top no-repeat;
+}
+
+.all-summit .what-to-expect .video-container .video.second {
+    background: url(../images/home/what-2.jpg) center top no-repeat;
+}
+
+.all-summit .what-to-expect .video-container .video.third {
+    background: url(../images/home/what-3.jpg) center top no-repeat;
+}
+
+.all-summit .what-to-expect .video-container .video.last {
+    background: url(../images/home/what-4.jpg) center top no-repeat;
+}
+
+.all-summit .diverse.what-to-expect {
+    background-color: #00468B;
+    padding: 0;
+    height: 70vh;
+    text-align: center;
+}
+
+.all-summit .diverse.what-to-expect .image {
+    background: url(../images/home/who.jpg) center no-repeat;
+    padding: 0;
+    height: 70vh;
+    background-size: cover;
+}
+
+.all-summit .diverse.what-to-expect .text-container h3 {
+    text-align: center;
+    margin: 1em 0 2em;
+}
+
+.all-summit .diverse.what-to-expect .text-container h4 {
+    text-align: center;
+    margin: 2em 0;
+}
+
+.all-summit .diverse.what-to-expect .text-container .attends li {
+    color: #fff;
+}
+
+.all-summit .diverse.what-to-expect .text-container .attends li span.architecture {
+    background-image: url("../images/stock-white.svg");
+}
+
+.all-summit .diverse.what-to-expect .text-container .attends li span.platform {
+    background-image: url("../images/cell-white.svg");
+}
+
+.all-summit .diverse.what-to-expect .text-container .attends li span.bussiness {
+    background-image: url("../images/suitcase-white.svg");
+}
+
+.all-summit .diverse.what-to-expect .text-container .attends li span.upstream {
+    background-image: url("../images/code-white.svg");
+}
+
+.all-summit .diverse.what-to-expect .text-container {
+    background-color: transparent;
+    color: #fff;
+    height: auto;
+    padding: 7em 7em 2em 2em;
+}
+
+.all-summit .summit-sponsor {
+    background-color: #ED1944;
+    color: #fff;
+    text-align: center;
+    padding: 1em 0 2em;
+}
+
+.all-summit .summit-sponsor h4 {
+    color: #fff;
+}
+
+.all-summit .summit-sponsor .btn {
+    border-color: #fff;
+    color: #fff;
+}
+
+.all-summit .summit-sponsor .btn i {
+    color: #fff;
+}
+
+.all-summit .summit-sponsor .text {
+    width: 80%;
+}
+
+.all-summit .summit-register {
+    background-color: #00468B;
+    text-align: center;
+    color: #fff;
+    padding: 1em 0 2em;
+}
+
+.all-summit .summit-register h4 {
+    color: #fff;
+}
+
+.all-summit .summit-register .btn {
+    border-color: #fff;
+    color: #fff;
+    margin-top: 2em;
+}
+
+.all-summit .summit-register .btn i {
+    color: #fff;
+}
+
+.all-summit .academy-wrapper .carousel .carousel-control span i {
+    color: #e0e0e0;
+    font-size: 3em;
+}
+
+.all-summit .academy-wrapper .carousel .carousel-control.left {
+    float: left;
+}
+
+.all-summit .academy-wrapper .carousel .carousel-control.right {
+    float: right;
+}
+
+.all-summit .academy-wrapper .carousel .carousel-control.left span {
+    left: 0;
+    right: auto;
+}
+
+.all-summit .academy-wrapper .carousel .carousel-control.right span {
+    right: 0;
+    left: auto;
+}
+
+.all-summit .academy-wrapper .carousel .carousel-control.left span i {
+    left: 0;
+}
+
+.all-summit .academy-wrapper .carousel .carousel-control.right span i {
+    right: 0;
+}
+
+.all-summit .academy-wrapper .carousel .centered-column {
+    height: 10em;
+    float: left;
+}
+
+.all-summit .academy-wrapper .recap-title {
+    font-weight: bold;
+}
+
+.all-summit .academy-wrapper .carousel .carousel-indicators {
+    display: inline-block;
+    position: absolute;
+    bottom: 0;
+}
+
+.all-summit .academy-wrapper .carousel .carousel-indicators li.active {
+    background-color: #00468B;
+    border-color: #00468B;
+}
+
+.all-summit .academy-wrapper .carousel .carousel-indicators li {
+    border-color: #979797;
+}
+
+.all-summit .summit-insights .video iframe {
+    width: 100%;
+}
+
+.all-summit .summit-insights .box .insight {
+    color: inherit;
+    line-height: 1.4em;
+}
+
+.all-summit .summit-insights .box.community h4 {
+    margin-bottom: 0.75em;
+}
+
+.all-summit .summit-insights .box .signature {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    bottom: 0.5em;
+    left: 0.5em;
+}
+
+@media (max-width: 1200px) {
+    .all-summit .about-summit-header {
+        background-position: 150% top;
+    }
+}
+
+@media (max-width: 1000px) {
+    .all-summit .about-summit-header {
+        background-position: 200% top;
+    }
+}
+
+@media (max-width: 800px) {
+    .all-summit .about-summit-header {
+        background-image: none !important;
+    }
+    .about-summit-header .summit-title{
+        font-size: 3em;
+        margin: 0 0 1em 0;
+    }
+    .all-summit .summit-hero-landing-short.about-summit-header h2{
+        font-size: 5em;
+    }
+
+    .all-summit .about-summit-header {
+        padding-top: 6em
+    }
+}
+
+@media (max-width: 991px) {
+    .all-summit .summits-wrap .video-container.second {
+        margin: 1.5em 0;
+    }
+
+    .all-summit .what-to-expect .video-container, .all-summit .what-to-expect .text-container {
+        margin: 1em 0;
+        height: 25em;
+    }
+    .all-summit .what-to-expect .video-container .video{
+        height: 25em;
+        margin: 0
+    }
+    .all-summit .summits-wrap .container{
+        width: 100%;
+    }
+
+    .all-summit .what-to-expect .row {
+        margin: 0 0 -1em 0;
+    }
+    .all-summit .summits-wrap .timeline span{
+        height: 10em;
+        margin-top: 2em;
+    }
+
+    .all-summit .diverse.what-to-expect .text-container{
+        padding: 2em
+    }
+    .all-summit .academy-wrapper .carousel .centered-column{
+        width: 30%;
+        display: inline-block;
+    }
+    .all-summit .academy-wrapper .carousel .space{
+        display: none;
+    }
+    .all-summit .summit-insights .box{
+        min-height: 16em;
+    }
+}
+
+@media (min-width: 500px) and (max-width: 676px) {
+    .all-summit .about-summit-header .summit-title {
+        font-size: 4em;
+    }
+}

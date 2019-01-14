@@ -10,7 +10,6 @@
     $Layout
     <!-- End Page Content -->
         <% include TwitterUniversalWebsiteTagCode %>
-        <% include GoogleAdWordsSnippet %>
 </body>
 
 </html>

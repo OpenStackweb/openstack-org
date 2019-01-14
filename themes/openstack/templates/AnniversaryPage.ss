@@ -26,7 +26,6 @@
     <body id="anniversary">
         $Layout
         <% include TwitterUniversalWebsiteTagCode %>
-        <% include GoogleAdWordsSnippet %>
     </body>
     <% include Page_LinkedinInsightTracker %>
 </html>

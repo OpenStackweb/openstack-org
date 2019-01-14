@@ -281,6 +281,5 @@
 </div>
 
         <% include TwitterUniversalWebsiteTagCode %>
-        <% include GoogleAdWordsSnippet %>
   </body>
 </html>

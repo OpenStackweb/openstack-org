@@ -16,7 +16,6 @@
     $Layout
     <!-- End Page Content -->
         <% include TwitterUniversalWebsiteTagCode %>
-        <% include GoogleAdWordsSnippet %>
 
 
     <div id="orderModal" class="modal fade" role="dialog">
