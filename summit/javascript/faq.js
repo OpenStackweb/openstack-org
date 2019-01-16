@@ -32,6 +32,14 @@
                 results.show();
             });
         });
+
+        $(".faq-link").click(function(ev) {
+            ev.preventDefault();
+            var target = $(this).data('target');
+            $('html, body').animate({
+                scrollTop: $(target).offset().top - 100
+            }, 1000);
+        });
     });
 })(jQuery);
 

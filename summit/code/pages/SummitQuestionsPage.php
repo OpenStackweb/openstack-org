@@ -48,7 +48,8 @@ class SummitQuestionsPage_Controller extends SummitPage_Controller {
 		parent::init();
 		Requirements::javascript("summit/javascript/jquery-livesearch.js");		         
         Requirements::javascript("summit/javascript/faq.js");
-	}    
+        Requirements::css("summit/css/faq.css");
+	}
 
     public function getCategorySlug($CategoryName) {
         $clean = preg_replace("/[^a-zA-Z0-9\/_|+ -]/", '', $CategoryName);

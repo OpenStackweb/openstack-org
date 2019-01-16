@@ -18,7 +18,7 @@
                     <div class="sub-h3">Topics</div>
                     <ul>
                         <% loop $GroupedQuestions.GroupedBy(CategoryName) %>
-                        <li><a href="#Category-{$Pos}">$CategoryName</a></li>
+                        <li><a class="faq-link" data-target="#{$Top.getCategorySlug($CategoryName)}">$CategoryName</a></li>
                         <% end_loop %>                        
                     </ul>
                 </div>
@@ -43,7 +43,7 @@
 
             <% loop $GroupedQuestions.GroupedBy(CategoryName) %>
             <div class="section">
-            <h5 class="section-title" id="Category-$Pos">$CategoryName</h5>
+            <h5 class="section-title" id="{$Top.getCategorySlug($CategoryName)}">$CategoryName</h5>
                 <% loop $Children %>
                     <div class="section-item">
                             <p class="question">
