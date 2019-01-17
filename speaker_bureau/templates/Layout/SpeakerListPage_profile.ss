@@ -22,8 +22,16 @@
                     <strong>Date Joined: </strong> $Created.Month $Created.format(d), $Created.Year
                 </div>
                 <div class="span-4">
-                    <strong>Country: </strong> $Country
+                    <strong>Country: </strong> $CountryName
                 </div>
+                <% if $Member.Exists %>
+                <div class="span-4">
+                    <strong>Home Town: </strong> $Member.City
+                </div>
+                <div class="span-4">
+                    <strong>Zip Code: </strong> $Member.Postcode
+                </div>
+                <% end_if %>
                 <div class="span-4">
                     <strong>Registered for Upcoming
                         Summit: </strong> <% if RegisteredForSummit %> $Summit.Name <% else %> No <% end_if %>
