@@ -105,10 +105,6 @@ final class ElectionManager implements IElectionManager {
 				throw new NotFoundEntityException('Election');
 			}
 
-			if($election->VoterFileID > 0){
-			    throw new EntityValidationException("Election already processed a voter file!");
-            }
-
 			$reader        = new CSVReader($filename);
 			$line          = false;
 			$header        = $reader->getLine();
@@ -156,6 +152,17 @@ final class ElectionManager implements IElectionManager {
                     }
 
                     if(in_array($member_2_process->ID, $already_voted)){
+                        $output .= sprintf("member id %s - first_name %s - last_name %s already voted as member id %s", $member_id, $first_name, $last_name, $member_2_process->ID).PHP_EOL;
+                        $not_processed[] = ['id' => $member_id, 'first_name' => $first_name, 'last_name' => $last_name];
+                        continue;
+                    }
+
+                    if(ElectionVote::get()->filter([
+                        'VoterID' => $member_2_process->ID,
+                        'ElectionID' => $election->ID,
+
+                        ])->count() > 0 )
+                    {
                         $output .= sprintf("member id %s - first_name %s - last_name %s already voted as member id %s", $member_id, $first_name, $last_name, $member_2_process->ID).PHP_EOL;
                         $not_processed[] = ['id' => $member_id, 'first_name' => $first_name, 'last_name' => $last_name];
                         continue;
