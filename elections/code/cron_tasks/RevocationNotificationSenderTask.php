@@ -35,12 +35,16 @@ final class RevocationNotificationSenderTask extends CronTask {
 
 		try{
 
-			$batch_size         = 100;
+			$batch_size         = 1000;
             $max_past_elections = 2 ;
 
 			if(isset($_GET['batch_size'])){
 				$batch_size = intval(trim(Convert::raw2sql($_GET['batch_size'])));
 			}
+
+            if(isset($_GET['max_past_elections'])){
+                $max_past_elections = intval(trim(Convert::raw2sql($_GET['max_past_elections'])));
+            }
 
 			$count = $this->manager->sendOutNotifications
             (

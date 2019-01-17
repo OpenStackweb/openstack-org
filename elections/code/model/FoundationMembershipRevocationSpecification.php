@@ -67,10 +67,11 @@ final class FoundationMembershipRevocationSpecification {
 		foreach($elections as $election)
 			array_push($elections_id, $election->getIdentifier());
 
-		$elections_id = implode(',',$elections_id);
+		$elections_id       = implode(',',$elections_id);
         $election_time_zone = $latest_election->getEntityTimeZone();
         $cut_date           = new DateTime('2014-01-13', $election_time_zone);
         $election_open_date = new DateTime($latest_election->getElectionsOpen(), $election_time_zone);
+
 		if($election_open_date <= $cut_date) { // until January 2014
 			$sql = <<<SQL
 					-- members that did not vote on any latest election
