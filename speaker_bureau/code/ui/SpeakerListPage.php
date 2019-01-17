@@ -94,6 +94,8 @@ class SpeakerListPage_Controller extends Page_Controller
         if (is_numeric($SpeakerID)) {
             // Check to make sure there's a member with the current id
             if ($Profile = $this->findSpeaker($SpeakerID)) {
+                $country = $Profile->Member() ? $Profile->Member()->Country : $Profile->Country;
+                $Profile->CountryName = CountryCodes::countryCode2name($country);
                 $data["Profile"] = $Profile;
                 //return our $Data to use on the page
                 return $this->getViewer('profile')->process
@@ -185,7 +187,6 @@ class SpeakerListPage_Controller extends Page_Controller
         $empty_search = true;
         $where_string = "PresentationSpeaker.AvailableForBureau = 1";
 
-
         if ($spoken_language = $this->getSearchQuery('spoken_language')) {
             $empty_search = false;
             $languages = "'" . implode("','", $spoken_language) . "'";
@@ -198,10 +199,14 @@ class SpeakerListPage_Controller extends Page_Controller
             $where_string .= " AND Countries.Name IN ({$countries})";
         }
 
-        if ($travel_preference = $this->getSearchQuery('travel_preference')) {
+        if ($city = $this->getSearchQuery('city')) {
             $empty_search = false;
-            $preferences = "'" . implode("','", $travel_preference) . "'";
-            $where_string .= " AND Countries2.Name IN ({$preferences})";
+            $where_string .= " AND Member.City = '{$city}'";
+        }
+
+        if ($zipcode = $this->getSearchQuery('zipcode')) {
+            $empty_search = false;
+            $where_string .= " AND Member.Postcode = '{$zipcode}'";
         }
 
         if ($query = $this->getSearchQuery('search_query')) {
@@ -236,7 +241,8 @@ class SpeakerListPage_Controller extends Page_Controller
                 ->leftJoin("Language", "Language.ID = PresentationSpeaker_Languages.LanguageID")
                 ->leftJoin("SpeakerTravelPreference", "SpeakerTravelPreference.SpeakerID = PresentationSpeaker.ID")
                 ->leftJoin("Countries", "Countries2.Code = SpeakerTravelPreference.Country", "Countries2")
-                ->where($where_string);
+                ->where($where_string)
+                ->sort('PresentationSpeaker.LastName');
 
             // No Member was found
             if (!isset($Results) || $Results->count() == 0) {

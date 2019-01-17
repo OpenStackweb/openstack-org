@@ -11,27 +11,32 @@
             <label class="left" for="filters" style="margin: 20px 0 10px 0;">Or Filter</label>
             (search results will match at least one of the options selected for every filter)
 
-            <div class="filters">
-                Spoken Language:
-                <select id="spoken_language" name="spoken_language[]" multiple="multiple">
-                    <% loop AvailableLanguages %>
-                        <option value="$Language" $Top.optionSelected('spoken_language',$Language) >$Language</option>
-                    <% end_loop %>
-                </select>
+            <div class="filters row">
+                <div class="col-md-3">
+                    Spoken Language:
+                    <select id="spoken_language" name="spoken_language[]" multiple="multiple">
+                        <% loop AvailableLanguages %>
+                            <option value="$Language" $Top.optionSelected('spoken_language',$Language) >$Language</option>
+                        <% end_loop %>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    Country of Origin:
+                    <select id="country_origin" name="country_origin[]" multiple="multiple">
+                        <% loop AvailableCountries %>
+                            <option value="$Country" $Top.optionSelected('country_origin',$Country) >$Country</option>
+                        <% end_loop %>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    City:
+                    <input class="form-control input-sm" id="city" name="city" value="{$Top.getSearchQuery('city')}">
+                </div>
+                <div class="col-md-3">
+                    Zip Code:
+                    <input class="form-control input-sm" id="zipcode" name="zipcode" value="{$Top.getSearchQuery('zipcode')}">
+                </div>
 
-                Country of Origin:
-                <select id="country_origin" name="country_origin[]" multiple="multiple">
-                    <% loop AvailableCountries %>
-                        <option value="$Country" $Top.optionSelected('country_origin',$Country) >$Country</option>
-                    <% end_loop %>
-                </select>
-
-                Travel Preference:
-                <select id="travel_preference" name="travel_preference[]" multiple="multiple">
-                    <% loop AvailableTravelCountries %>
-                        <option value="$Country" $Top.optionSelected('travel_preference',$Country) >$Country</option>
-                    <% end_loop %>
-                </select>
             </div>
 
             <input type="submit" class="btn btn-default" value="Go"/>
