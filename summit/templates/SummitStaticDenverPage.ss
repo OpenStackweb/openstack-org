@@ -46,7 +46,7 @@
                         <h4 class="modal-title">Thanks for Registering! What's Next?</h4>
                     </div>
                     <div class="modal-body">
-                        <p><b><a href="https://www.openstack.org/summit/berlin-2018/travel/">Book your hotel room now</a></b> through one of our recommended hotels.</p>
+                        <p><b><a href="https://www.openstack.org/summit/denver-2019/travel/">Book your hotel room now</a></b> through one of our recommended hotels.</p>
                         <p>An email receipt with details of your Summit registration and purchase will be sent to the address that you registered with.</p>
                     </div>
                 </div>
