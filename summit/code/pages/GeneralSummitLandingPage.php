@@ -60,9 +60,10 @@ class GeneralSummitLandingPage_Controller extends Page_Controller
     function getMenuItems() {
         $summitPage = $this->getCurrentSummitPage();
 
-        $menu = $this->getCurrentSummitPageController()->Menu(3);
-        $menu->unshift($summitPage);
+        //$menu = $this->getCurrentSummitPageController()->Menu(3);
+        //$menu->unshift($summitPage);
 
+        $menu = new ArrayList([$summitPage]);
         return $menu;
     }
 
