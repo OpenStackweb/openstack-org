@@ -14,37 +14,26 @@
     src: url("../fonts/goldana/376F4A_1_0.eot?#iefix") format("embedded-opentype"), url("../fonts/goldana/376F4A_1_0.woff2") format("woff2"), url("../fonts/goldana/376F4A_1_0.woff") format("woff"), url("../fonts/goldana/376F4A_1_0.ttf") format("truetype");
 }
 
-
-
 @font-face {
     font-family: 'Gotham Narrow Book';
-    src: url('../fonts/gotham/GothamNarrow-Book.eot');
-    src: url('../fonts/gotham/GothamNarrow-Book.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/gotham/GothamNarrow-Book.woff2') format('woff2'),
-        url('../fonts/gotham/GothamNarrow-Book.woff') format('woff'),
-        url('../fonts/gotham/GothamNarrow-Book.svg#GothamNarrow-Book') format('svg');
+    src: url("../fonts/gotham/GothamNarrow-Book.eot");
+    src: url("../fonts/gotham/GothamNarrow-Book.eot?#iefix") format("embedded-opentype"), url("../fonts/gotham/GothamNarrow-Book.woff2") format("woff2"), url("../fonts/gotham/GothamNarrow-Book.woff") format("woff"), url("../fonts/gotham/GothamNarrow-Book.svg#GothamNarrow-Book") format("svg");
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Gotham Narrow Bold';
-    src: url('../fonts/gotham/GothamNarrow-Bold.eot');
-    src: url('../fonts/gotham/GothamNarrow-Bold.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/gotham/GothamNarrow-Bold.woff2') format('woff2'),
-        url('../fonts/gotham/GothamNarrow-Bold.woff') format('woff'),
-        url('../fonts/gotham/GothamNarrow-Bold.svg#GothamNarrow-Bold') format('svg');
+    src: url("../fonts/gotham/GothamNarrow-Bold.eot");
+    src: url("../fonts/gotham/GothamNarrow-Bold.eot?#iefix") format("embedded-opentype"), url("../fonts/gotham/GothamNarrow-Bold.woff2") format("woff2"), url("../fonts/gotham/GothamNarrow-Bold.woff") format("woff"), url("../fonts/gotham/GothamNarrow-Bold.svg#GothamNarrow-Bold") format("svg");
     font-weight: bold;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Gotham Narrow';
-    src: url('../fonts/gotham/GothamNarrow-Medium.eot');
-    src: url('../fonts/gotham/GothamNarrow-Medium.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/gotham/GothamNarrow-Medium.woff2') format('woff2'),
-        url('../fonts/gotham/GothamNarrow-Medium.woff') format('woff'),
-        url('../fonts/gotham/GothamNarrow-Medium.svg#GothamNarrow-Medium') format('svg');
+    src: url("../fonts/gotham/GothamNarrow-Medium.eot");
+    src: url("../fonts/gotham/GothamNarrow-Medium.eot?#iefix") format("embedded-opentype"), url("../fonts/gotham/GothamNarrow-Medium.woff2") format("woff2"), url("../fonts/gotham/GothamNarrow-Medium.woff") format("woff"), url("../fonts/gotham/GothamNarrow-Medium.svg#GothamNarrow-Medium") format("svg");
     font-weight: 500;
     font-style: normal;
 }
@@ -57,21 +46,17 @@
     font-family: "GoldanaInline";
 }
 
-h1, h2, h3, h4, a, h5{
+h1, h2, h3, h4, a, h5 {
     font-family: 'Gotham Narrow Bold';
 }
 
-a.btn, button.btn{
+a.btn, button.btn {
     font-family: 'Gotham Narrow';
 }
 
-p, span, li a,  li, h6{
+p, span, li a, li, h6 {
     font-family: 'Gotham Narrow Book';
 }
-
-
-
-
 
 /*some general rules */
 
@@ -279,7 +264,6 @@ footer {
 }
 
 .summit-hero-landing .nav li.button-box .btn:hover, .summit-hero-landing-short .nav li.button-box .btn:hover {
-
     background-color: #ed1944;
     color: #fff;
 }
@@ -294,6 +278,12 @@ footer {
 
 .summit-hero-landing .nav li.link a, .summit-hero-landing-short .nav li.link a {
     border: none;
+    padding-left: 0;
+    padding-right: 2em;
+}
+
+.summit-hero-landing .nav li.link a, .summit-hero-landing-short .nav li.link a.btn {
+    padding: 1em;
 }
 
 .summit-hero-landing .nav li.link a:hover, .summit-hero-landing-short .nav li.link a:hover {
@@ -478,7 +468,7 @@ footer {
 .about-summit-header .summit-title {
     color: #ffd602;
     font-size: 4em;
-    margin: 0;
+    margin: 0 0 0.5em 0;
 }
 
 .about-summit-header h2 {
@@ -662,7 +652,7 @@ footer {
 }
 
 .what-to-expect {
-    padding: 5em 0 3em;
+    padding: 4em 0;
 }
 
 .what-to-expect .row {
@@ -691,6 +681,8 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0;
+    font-size: inherit;
 }
 
 .what-to-expect .text-container .attends {
@@ -710,7 +702,7 @@ footer {
 .what-to-expect .text-container .attends li span {
     background: center top no-repeat;
     width: 100%;
-    height: 3em;
+    height: 4em;
     display: inline-block;
     margin: 1em 0;
     background-size: contain;
@@ -849,7 +841,6 @@ footer {
     margin-left: 1em;
 }
 
-
 .academy-wrapper h3 {
     margin: 0 0 1em;
 }
@@ -930,12 +921,11 @@ footer {
     color: #ed1944;
     border: solid 2px #ed1944;
     background-color: transparent;
-    
 }
 
 .sponsor .btn.register-btn-lrg i {
     color: #ed1944;
-    margin-left: 1em;
+    margin-left: 0.5em;
 }
 
 .diverse {
@@ -994,6 +984,7 @@ footer {
     padding: 0 1em 0 0;
     text-align: left;
 }
+
 .diverse.what-to-expect .text p {
     text-align: center;
 }
@@ -1003,12 +994,12 @@ footer {
     margin-bottom: 2em;
     background-color: #fff;
     position: relative;
-    min-height: 16em;
-    max-height: 16em;
+    min-height: 20em;
+    max-height: 20em;
 }
 
 .summit-insights .box.big {
-    min-height: 34em;
+    min-height: 42em;
 }
 
 .summit-insights .item .btn {
@@ -1132,7 +1123,7 @@ footer {
 .summit-insights {
     background-color: #000;
     padding-top: 5em;
-    padding-bottom: 5em;
+    padding-bottom: 3em;
     position: relative;
 }
 
@@ -1148,10 +1139,10 @@ footer {
     border: solid 2px #ed1944;
     color: #ed1944;
     background-color: transparent;
-    margin-top: 1em;
+    margin-top: 0.5em;
     width: auto;
     text-transform: uppercase;
-    padding: 0.75em 2em;
+    padding: 0.75em 1.5em;
 }
 
 @media all and (max-width: 450px) {
@@ -1178,18 +1169,18 @@ footer {
     color: black;
     font-size: 1.5em;
     line-height: 1.25em;
-    margin: 0 0 1em;
+    margin: 0;
 }
 
 @media (min-width: 1200px) {
-    .summit-insights .pink.box.big a.btn{
-        margin-top: 5em;
+    .summit-insights .pink.box.big a.btn {
+        margin-top: 1em;
     }
 }
 
 @media (max-width: 991px) {
     .summit-insights .pink.box.big {
-        min-height: 22em;
+        min-height: 30em;
     }
 }
 
@@ -1230,16 +1221,30 @@ footer {
     color: #fff;
 }
 
-.summit-insights .pink.box h4 {
+.summit-insights .box h4 {
+    font-size: 2.2em;
+}
+
+.summit-insights .box.big h4 {
+    padding-right: 1em;
+}
+
+
+.summit-insights .box p {
+    font-size: 1.2em;
+    margin: 1em 0;
+}
+
+    .summit-insights .pink.box h4 {
     color: #fff;
-    font-size: 1.5em;
     line-height: 1.25em;
 }
 
 .all-summit .summit-insights .video {
     margin-bottom: 2em;
-    height: 16em;
+    height: 20em;
     position: relative;
+    text-align: center;
 }
 
 .summit-insights .video .embed-video {
@@ -1272,7 +1277,8 @@ footer {
     width: 100%;
     margin: 3em 0 0;
 }
-.video-container.video .play i {
+
+.video-container .play i {
     display: inline-block;
     border-radius: 100%;
     padding: 0.5em;
@@ -1285,14 +1291,13 @@ footer {
     color: #fff;
 }
 
-
-.video .play  {
+.video-container .play {
     display: inline-block;
     margin-top: 3em;
     font-size: 1.5em;
 }
 
-.video-cover .play i::before, .video-container.video .play i::before {
+.video-cover .play i::before, .video-container .play i::before {
     display: inline-block;
     margin-top: 0.1em;
     margin-left: 0.1em;
@@ -1300,17 +1305,16 @@ footer {
 
 .summit-insights .signature .photo {
     display: inline-block;
-    height: 4em;
+    height: 3.5em;
     background: url("../images/face.png") center no-repeat;
     float: left;
+    max-width: 5em;
 }
-
 
 .all-summit .summit-insights .video-container.video.first {
     background: url(../images/home/insight-2.jpg) center no-repeat;
     background-size: cover;
 }
-
 
 .all-summit .summit-insights .video-container.video.second {
     background: url(../images/home/insight-1.jpg) center no-repeat;
@@ -1517,16 +1521,18 @@ ul.navbar-main {
     position: relative;
     right: 0;
     float: right;
+    display: none;
 }
 
 .all-summit .summit-hero-landing-short.about-summit-header h5 {
     padding: 0;
     margin: 1em 0 2em;
     font-size: 16px;
+    font-family: "Gotham Narrow Book";
 }
 
 .all-summit .summit-hero-landing-short .container > .navbar-header {
-    margin: 0;
+    margin: 0 0 0 -5em;
 }
 
 .all-summit .summit-hero-landing-short .container > .navbar-header .navbar-toggle {
@@ -1562,13 +1568,16 @@ ul.navbar-main {
 
 .all-summit .summits-wrap {
     background-color: #EDF2F7;
-    padding: 3em 0;
+    padding: 4em 0;
 }
 
 .all-summit .summits-wrap.odd {
     background-color: #fff;
 }
-.all-summit .container {}
+
+.all-summit .summits-wrap .video-container .item p{
+    font-size: 1.1em;
+}
 
 .all-summit .summits-wrap .video-container .item {
     background-color: #fff;
@@ -1577,7 +1586,7 @@ ul.navbar-main {
 }
 
 .all-summit .summits-wrap .video-container .item .video {
-    height: 15em;
+    height: 11em;
     position: relative;
     background-size: cover !important;
 }
@@ -1616,9 +1625,12 @@ ul.navbar-main {
 .all-summit .summits-wrap .video-container .item .btn {
     background-color: #00468B;
     text-transform: capitalize;
+    padding: 0.5em 1em;
+    font-size: 1.2em;
+    font-family: "Gotham Narrow Book";
 }
 
-.all-summit .summits-wrap .video-container .item .btn.odd {
+.all-summit .summits-wrap .video-container.second .item .btn {
     background-color: #ED1944;
 }
 
@@ -1636,6 +1648,7 @@ ul.navbar-main {
 
 .all-summit .summits-wrap .timeline h3 {
     text-align: center;
+    margin: 0;
 }
 
 .all-summit .summits-wrap .timeline span {
@@ -1644,11 +1657,11 @@ ul.navbar-main {
     width: 100%;
     display: inline-block;
     background-size: 100%;
-    margin-top: 4em;
+    margin-top: 2em;
+    max-height: 215px;
 }
 
-.all-summit .summits-wrap .video-container{
-
+.all-summit .summits-wrap .video-container {
     padding-right: 15px;
     padding-left: 15px;
 }
@@ -1661,34 +1674,35 @@ ul.navbar-main {
 .all-summit .what-to-expect h3 {
     color: #fff;
     text-align: center;
-    margin-bottom: 3em;
+    margin: 0 0 2em;
 }
 
 .all-summit .what-to-expect .text-container {
     background-color: #00468B;
     color: #fff;
     height: 20em;
-    padding: 2em 3em;
+    padding: 3em 4em;
 }
 
 .all-summit .what-to-expect .text-container h4 {
     color: #fff;
     font-size: 1.5em;
-    margin-bottom: 2em;
+    margin-bottom: 1.5em;
 }
 
 .all-summit .what-to-expect .text-container .btn {
     color: #fff;
     padding: 0;
     margin-top: 1em;
+    text-decoration: underline;
 }
 
-.all-summit  .video-container {
+.all-summit .video-container {
     padding: 0;
     margin: 0;
 }
 
-.all-summit  .video-container .video {
+.all-summit .video-container .video {
     background-size: cover !important;
 }
 
@@ -1711,22 +1725,23 @@ ul.navbar-main {
 .all-summit .diverse {
     background-color: #00468B;
     padding: 0;
-    height: 70vh;
+    height: 80vh;
     text-align: left;
     max-height: 620px;
-    min-height: auto;
+    min-height: 600px;
 }
 
 .all-summit .diverse .image {
     padding: 0;
-    height: 70vh;
+    height: 80vh;
     background-size: cover;
     max-height: 620px;
-    min-height: auto;
+    min-height: 600px;
 }
 
 .all-summit .diverse.what-to-expect .image {
     background: url(../images/home/who.jpg) center no-repeat;
+    background-size: cover;
 }
 
 .all-summit .diverse.what-to-expect .text-container h3 {
@@ -1738,7 +1753,7 @@ ul.navbar-main {
     text-align: center;
     margin: 2em 0;
     color: #fff;
-    font-size: 1.2em
+    font-size: 1.2em;
 }
 
 .all-summit .diverse.what-to-expect .text-container .attends li {
@@ -1765,7 +1780,7 @@ ul.navbar-main {
     background-color: transparent;
     color: #fff;
     height: auto;
-    padding: 7em 7em 2em 2em;
+    padding: 6em 7em 2em 2em;
 }
 
 .all-summit .summit-sponsor {
@@ -1796,7 +1811,7 @@ ul.navbar-main {
     background-color: #00468B;
     text-align: center;
     color: #fff;
-    padding: 1em 0 2em;
+    padding: 1em 0 4em;
 }
 
 .all-summit .summit-register h3 {
@@ -1807,6 +1822,7 @@ ul.navbar-main {
     border-color: #fff;
     color: #fff;
     margin-top: 2em;
+    padding: 0.75em 1.5em;
 }
 
 .all-summit .summit-register .btn i {
@@ -1820,10 +1836,15 @@ ul.navbar-main {
 
 .all-summit .academy-wrapper .carousel .carousel-control.left {
     float: left;
+
+    margin-left: 1em;
+    margin-top: 2em;
 }
 
 .all-summit .academy-wrapper .carousel .carousel-control.right {
     float: right;
+    margin-right: 1em;
+    margin-top: 2em;
 }
 
 .all-summit .academy-wrapper .carousel .carousel-control.left span {
@@ -1870,18 +1891,16 @@ ul.navbar-main {
 
 .all-summit .summit-insights .box .insight {
     color: inherit;
-    line-height: 1.4em;
-}
-
-.all-summit .summit-insights .box.community h4 {
-    margin-bottom: 0.75em;
+    line-height: 1.3em;
+    font-family: "Gotham Narrow";
+    font-size: 1.7em;
 }
 
 .all-summit .summit-insights .box .signature {
     display: flex;
     position: absolute;
     width: 100%;
-    bottom: 0.5em;
+    bottom: 0.75em;
     left: 0.5em;
 }
 
@@ -1901,16 +1920,18 @@ ul.navbar-main {
     .all-summit .about-summit-header {
         background-image: none !important;
     }
-    .about-summit-header .summit-title{
+
+    .about-summit-header .summit-title {
         font-size: 3em;
         margin: 0 0 1em 0;
     }
-    .all-summit .summit-hero-landing-short.about-summit-header h2{
+
+    .all-summit .summit-hero-landing-short.about-summit-header h2 {
         font-size: 5em;
     }
 
     .all-summit .about-summit-header {
-        padding-top: 6em
+        padding-top: 6em;
     }
 }
 
@@ -1923,40 +1944,45 @@ ul.navbar-main {
         margin: 1em 0;
         height: 25em;
     }
-    .all-summit .what-to-expect .video-container .video{
+
+    .all-summit .what-to-expect .video-container .video {
         height: 25em;
-        margin: 0
+        margin: 0;
     }
-    .all-summit .summits-wrap .container{
+
+    .all-summit .summits-wrap .container {
         width: 100%;
     }
 
     .all-summit .what-to-expect .row {
         margin: 0 0 -1em 0;
     }
-    .all-summit .summits-wrap .timeline span{
+
+    .all-summit .summits-wrap .timeline span {
         height: 10em;
         margin-top: 2em;
     }
 
-    .all-summit .diverse.what-to-expect .text-container{
-        padding: 2em
+    .all-summit .diverse.what-to-expect .text-container {
+        padding: 2em;
     }
-    .all-summit .academy-wrapper .carousel .centered-column{
+
+    .all-summit .academy-wrapper .carousel .centered-column {
         width: 30%;
         display: inline-block;
     }
-    .all-summit .academy-wrapper .carousel .space{
+
+    .all-summit .academy-wrapper .carousel .space {
         display: none;
     }
-    .all-summit .summit-insights .box{
-        min-height: 11em;
+
+    .all-summit .summit-insights .box {
+        min-height: 14em;
     }
 }
 
-
 .all-summit .about-summit-header {
-    background-image:  url("../images/home/hero.png") ;
+    background-image: url("../images/home/hero.png");
 }
 
 @media (min-width: 500px) and (max-width: 676px) {
@@ -1967,33 +1993,51 @@ ul.navbar-main {
 
 @media (min-width: 1480px) and (max-width: 1800px) {
     .all-summit .about-summit-header {
-        background-position: 130%;
+        background-position: 100%;
     }
 }
 
 @media (min-width: 1300px) and (max-width: 1480px) {
     .all-summit .about-summit-header {
-        background-position: 150%;
+        background-position: 100%;
     }
 }
 
 @media (min-width: 1200px) and (max-width: 1300px) {
     .all-summit .about-summit-header {
-        background-position: 170%;
+        background-position: 100%;
     }
 }
 
-@media (min-width: 768px) and (max-width: 1200px) {
-    .all-summit .about-summit-header {
-        background-image: none;
+@media (max-width: 1300px) {
+    .all-summit .summit-hero-landing-short .container > .navbar-header {
+        margin: 0 1em 0 0;
     }
-    .summit-hero-landing-short .nav li.link a{
-        font-size: 0.75em;
-        padding: 0.75em;
+}
 
+@media (max-width: 768px) {
+    .all-summit .summit-hero-landing-short .navbar .link.button-box {
+        width: 100%;
+        margin-top: 1em;
     }
-    .all-summit .navbar > .container .navbar-brand{
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .all-summit .about-summit-header {
+        background-position: 200%;
+    }
+
+    .summit-hero-landing-short .nav li.link a {
+        padding: 0.75em;
+        letter-spacing: 0;
+    }
+
+    .all-summit .navbar > .container .navbar-brand {
         width: 2em;
         height: 2em;
+    }
+
+    a.register-btn-lrg i, .register-btn-lrg i {
+        margin-left: 0.35em;
     }
 }
