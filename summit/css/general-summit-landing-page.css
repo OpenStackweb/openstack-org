@@ -14,6 +14,41 @@
     src: url("../fonts/goldana/376F4A_1_0.eot?#iefix") format("embedded-opentype"), url("../fonts/goldana/376F4A_1_0.woff2") format("woff2"), url("../fonts/goldana/376F4A_1_0.woff") format("woff"), url("../fonts/goldana/376F4A_1_0.ttf") format("truetype");
 }
 
+
+
+@font-face {
+    font-family: 'Gotham Narrow Book';
+    src: url('../fonts/gotham/GothamNarrow-Book.eot');
+    src: url('../fonts/gotham/GothamNarrow-Book.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/gotham/GothamNarrow-Book.woff2') format('woff2'),
+        url('../fonts/gotham/GothamNarrow-Book.woff') format('woff'),
+        url('../fonts/gotham/GothamNarrow-Book.svg#GothamNarrow-Book') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gotham Narrow Bold';
+    src: url('../fonts/gotham/GothamNarrow-Bold.eot');
+    src: url('../fonts/gotham/GothamNarrow-Bold.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/gotham/GothamNarrow-Bold.woff2') format('woff2'),
+        url('../fonts/gotham/GothamNarrow-Bold.woff') format('woff'),
+        url('../fonts/gotham/GothamNarrow-Bold.svg#GothamNarrow-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gotham Narrow';
+    src: url('../fonts/gotham/GothamNarrow-Medium.eot');
+    src: url('../fonts/gotham/GothamNarrow-Medium.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/gotham/GothamNarrow-Medium.woff2') format('woff2'),
+        url('../fonts/gotham/GothamNarrow-Medium.woff') format('woff'),
+        url('../fonts/gotham/GothamNarrow-Medium.svg#GothamNarrow-Medium') format('svg');
+    font-weight: 500;
+    font-style: normal;
+}
+
 .script {
     font-family: "GoldanaScript";
 }
@@ -22,10 +57,27 @@
     font-family: "GoldanaInline";
 }
 
+h1, h2, h3, h4, a, h5{
+    font-family: 'Gotham Narrow Bold';
+}
+
+a.btn, button.btn{
+    font-family: 'Gotham Narrow';
+}
+
+p, span, li a,  li, h6{
+    font-family: 'Gotham Narrow Book';
+}
+
+
+
+
+
 /*some general rules */
 
 button.btn, a.btn {
     border-radius: 0.1em;
+    letter-spacing: 0.05em;
 }
 
 button.btn i, a.btn i {
@@ -33,7 +85,6 @@ button.btn i, a.btn i {
 }
 
 .main-body .title-section {
-    font-weight: bold;
     margin-bottom: 1em;
     text-align: left;
 }
@@ -228,7 +279,7 @@ footer {
 }
 
 .summit-hero-landing .nav li.button-box .btn:hover, .summit-hero-landing-short .nav li.button-box .btn:hover {
-    font-weight: bold;
+
     background-color: #ed1944;
     color: #fff;
 }
@@ -433,7 +484,6 @@ footer {
 .about-summit-header h2 {
     font-size: 4em;
     color: #fff;
-    font-weight: bold;
     margin-top: 0;
 }
 
@@ -520,7 +570,6 @@ footer {
 
 .about-summit-header .session-box h3 {
     text-align: center;
-    font-weight: bold;
     color: #fff;
     margin: 3em 0 1.5em 0;
 }
@@ -656,7 +705,6 @@ footer {
     max-width: 25%;
     text-align: center;
     color: #ed1944;
-    font-weight: bold;
 }
 
 .what-to-expect .text-container .attends li span {
@@ -771,7 +819,6 @@ footer {
 
 .about-summit-users-wrapper .summit-user-section .name {
     color: #ed1944;
-    font-weight: bold;
     text-align: left;
     margin-bottom: 0.5em;
     line-height: 1.2em;
@@ -788,13 +835,11 @@ footer {
 .about-summit-users-wrapper .summit-user-section .topic {
     font-size: 0.8em;
     text-align: left;
-    font-weight: bold;
 }
 
 .about-summit-users-wrapper .btn {
     background-color: transparent;
     color: #000;
-    font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 0.03em;
     margin-top: 1em;
@@ -804,12 +849,9 @@ footer {
     margin-left: 1em;
 }
 
-h3.recap-title {
-    font-size: 3em;
-}
 
-.academy-wrapper .recap-title {
-    margin: 2em 0 1em;
+.academy-wrapper h3 {
+    margin: 0 0 1em;
 }
 
 .academy-wrapper .carousel {
@@ -866,7 +908,6 @@ h3.recap-title {
 .academy-wrapper .carousel h3 {
     margin-top: 0;
     color: #ed1944;
-    font-weight: bold;
     font-size: 3.4em;
 }
 
@@ -877,7 +918,6 @@ h3.recap-title {
 }
 
 .sponsor .title {
-    font-weight: bold;
     margin-top: 2em;
 }
 
@@ -890,8 +930,7 @@ h3.recap-title {
     color: #ed1944;
     border: solid 2px #ed1944;
     background-color: transparent;
-    font-weight: bold;
-    letter-spacing: 0.025em;
+    
 }
 
 .sponsor .btn.register-btn-lrg i {
@@ -943,17 +982,20 @@ h3.recap-title {
 .diverse .text h2 {
     color: #fff;
     font-size: 60px;
-    font-weight: bold;
+    text-align: left;
 }
 
 .diverse .text p a {
     color: #ffd602;
-    font-weight: bold;
 }
 
 .diverse .text p {
     color: #fff;
     padding: 0 1em 0 0;
+    text-align: left;
+}
+.diverse.what-to-expect .text p {
+    text-align: center;
 }
 
 .summit-insights .box {
@@ -980,7 +1022,6 @@ h3.recap-title {
 
 .summit-insights .box .insight {
     color: #ed1944;
-    font-weight: bold;
     line-height: 1.4em;
     margin-bottom: 2em;
 }
@@ -996,13 +1037,11 @@ h3.recap-title {
     background-color: transparent;
     margin-top: 1em;
     width: 100%;
-    font-weight: bold;
     text-transform: uppercase;
 }
 
 .summit-insights .pink.box h4 {
     color: #fff;
-    font-weight: bold;
 }
 
 .summit-insights .video iframe {
@@ -1016,7 +1055,6 @@ h3.recap-title {
 
 .summit-insights .video .video-cover h5 {
     color: #fff;
-    font-weight: bold;
     font-size: 1.2em;
     line-height: 1.5em;
 }
@@ -1103,6 +1141,7 @@ h3.recap-title {
     margin-bottom: 2em;
     background-color: #fff;
     position: relative;
+    text-align: left;
 }
 
 .summit-insights .box button.btn, .summit-insights .box a.btn {
@@ -1111,7 +1150,6 @@ h3.recap-title {
     background-color: transparent;
     margin-top: 1em;
     width: auto;
-    font-weight: bold;
     text-transform: uppercase;
     padding: 0.75em 2em;
 }
@@ -1137,11 +1175,22 @@ h3.recap-title {
 }
 
 .summit-insights .box h4 {
-    font-weight: bold;
     color: black;
     font-size: 1.5em;
-    line-height: 1.5em;
+    line-height: 1.25em;
     margin: 0 0 1em;
+}
+
+@media (min-width: 1200px) {
+    .summit-insights .pink.box.big a.btn{
+        margin-top: 5em;
+    }
+}
+
+@media (max-width: 991px) {
+    .summit-insights .pink.box.big {
+        min-height: 22em;
+    }
 }
 
 @media all and (max-width: 450px) {
@@ -1183,12 +1232,11 @@ h3.recap-title {
 
 .summit-insights .pink.box h4 {
     color: #fff;
-    font-weight: bold;
     font-size: 1.5em;
-    line-height: 1.5em;
+    line-height: 1.25em;
 }
 
-.summit-insights .video {
+.all-summit .summit-insights .video {
     margin-bottom: 2em;
     height: 16em;
     position: relative;
@@ -1203,14 +1251,7 @@ h3.recap-title {
 }
 
 .summit-insights .video .video-cover {
-    position: absolute;
-    z-index: 9999;
-    background-color: rgba(0, 9, 0, 0.3);
-    color: #fff;
-    bottom: 0;
-    width: 100%;
-    height: 16em;
-    padding: 0.5em;
+    padding: 1em;
 }
 
 .summit-insights .video .video-cover * {
@@ -1220,10 +1261,9 @@ h3.recap-title {
 
 .summit-insights .video .video-cover h5 {
     color: #fff;
-    font-weight: bold;
     font-size: 1.2em;
     line-height: 1.5em;
-    margin-top: 8em;
+    margin-top: 0em;
     margin-bottom: 0;
 }
 
@@ -1232,8 +1272,7 @@ h3.recap-title {
     width: 100%;
     margin: 3em 0 0;
 }
-
-.summit-insights .video .video-cover i, .what-to-expect .video-container .video i {
+.video-container.video .play i {
     display: inline-block;
     border-radius: 100%;
     padding: 0.5em;
@@ -1246,10 +1285,17 @@ h3.recap-title {
     color: #fff;
 }
 
-.summit-insights .video .video-cover i::before, .what-to-expect .video-container .video i::before {
-    margin-left: 0.1em;
-    margin-top: 0.1em;
+
+.video .play  {
     display: inline-block;
+    margin-top: 3em;
+    font-size: 1.5em;
+}
+
+.video-cover .play i::before, .video-container.video .play i::before {
+    display: inline-block;
+    margin-top: 0.1em;
+    margin-left: 0.1em;
 }
 
 .summit-insights .signature .photo {
@@ -1259,15 +1305,22 @@ h3.recap-title {
     float: left;
 }
 
-.video.item:hover .video-cover {
-    display: none;
+
+.all-summit .summit-insights .video-container.video.first {
+    background: url(../images/home/insight-2.jpg) center no-repeat;
+    background-size: cover;
+}
+
+
+.all-summit .summit-insights .video-container.video.second {
+    background: url(../images/home/insight-1.jpg) center no-repeat;
+    background-size: cover;
 }
 
 ​
 .signature {
     display: flex;
     flex-flow: row wrap;
-    font-weight: bold;
     text-align: center;
     position: absolute;
     width: 87%;
@@ -1298,7 +1351,6 @@ h3.recap-title {
 
 .signature .info .name {
     color: #000;
-    font-weight: bold;
 }
 
 .signature .info .company {
@@ -1510,9 +1562,12 @@ ul.navbar-main {
 
 .all-summit .summits-wrap {
     background-color: #EDF2F7;
-    padding: 3em 0 0;
+    padding: 3em 0;
 }
 
+.all-summit .summits-wrap.odd {
+    background-color: #fff;
+}
 .all-summit .container {}
 
 .all-summit .summits-wrap .video-container .item {
@@ -1546,7 +1601,6 @@ ul.navbar-main {
     color: #fff;
     left: 0;
     text-transform: uppercase;
-    font-weight: bold;
 }
 
 .all-summit .summits-wrap .video-container .item h5 {
@@ -1556,7 +1610,6 @@ ul.navbar-main {
 
 .all-summit .summits-wrap .video-container .item h4 {
     color: #00468B;
-    font-weight: bold;
     margin: 1em 0 0.2em;
 }
 
@@ -1581,8 +1634,7 @@ ul.navbar-main {
     background: url(../images/home/shangai.jpg) center top no-repeat;
 }
 
-.all-summit .summits-wrap .timeline h4 {
-    font-weight: bold;
+.all-summit .summits-wrap .timeline h3 {
     text-align: center;
 }
 
@@ -1595,14 +1647,19 @@ ul.navbar-main {
     margin-top: 4em;
 }
 
+.all-summit .summits-wrap .video-container{
+
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
 .all-summit .what-to-expect {
     background-color: #000;
     color: #fff;
 }
 
-.all-summit .what-to-expect h4 {
+.all-summit .what-to-expect h3 {
     color: #fff;
-    font-weight: bold;
     text-align: center;
     margin-bottom: 3em;
 }
@@ -1614,24 +1671,24 @@ ul.navbar-main {
     padding: 2em 3em;
 }
 
-.all-summit .what-to-expect .text-container h3 {
+.all-summit .what-to-expect .text-container h4 {
     color: #fff;
+    font-size: 1.5em;
+    margin-bottom: 2em;
 }
 
 .all-summit .what-to-expect .text-container .btn {
     color: #fff;
-    text-decoration: underline;
-    font-weight: bold;
     padding: 0;
     margin-top: 1em;
 }
 
-.all-summit .what-to-expect .video-container {
+.all-summit  .video-container {
     padding: 0;
     margin: 0;
 }
 
-.all-summit .what-to-expect .video-container .video {
+.all-summit  .video-container .video {
     background-size: cover !important;
 }
 
@@ -1651,18 +1708,25 @@ ul.navbar-main {
     background: url(../images/home/what-4.jpg) center top no-repeat;
 }
 
-.all-summit .diverse.what-to-expect {
+.all-summit .diverse {
     background-color: #00468B;
     padding: 0;
     height: 70vh;
-    text-align: center;
+    text-align: left;
+    max-height: 620px;
+    min-height: auto;
+}
+
+.all-summit .diverse .image {
+    padding: 0;
+    height: 70vh;
+    background-size: cover;
+    max-height: 620px;
+    min-height: auto;
 }
 
 .all-summit .diverse.what-to-expect .image {
     background: url(../images/home/who.jpg) center no-repeat;
-    padding: 0;
-    height: 70vh;
-    background-size: cover;
 }
 
 .all-summit .diverse.what-to-expect .text-container h3 {
@@ -1670,9 +1734,11 @@ ul.navbar-main {
     margin: 1em 0 2em;
 }
 
-.all-summit .diverse.what-to-expect .text-container h4 {
+.all-summit .diverse.what-to-expect .text-container h5 {
     text-align: center;
     margin: 2em 0;
+    color: #fff;
+    font-size: 1.2em
 }
 
 .all-summit .diverse.what-to-expect .text-container .attends li {
@@ -1709,7 +1775,7 @@ ul.navbar-main {
     padding: 1em 0 2em;
 }
 
-.all-summit .summit-sponsor h4 {
+.all-summit .summit-sponsor h3 {
     color: #fff;
 }
 
@@ -1733,7 +1799,7 @@ ul.navbar-main {
     padding: 1em 0 2em;
 }
 
-.all-summit .summit-register h4 {
+.all-summit .summit-register h3 {
     color: #fff;
 }
 
@@ -1783,14 +1849,10 @@ ul.navbar-main {
     float: left;
 }
 
-.all-summit .academy-wrapper .recap-title {
-    font-weight: bold;
-}
-
 .all-summit .academy-wrapper .carousel .carousel-indicators {
     display: inline-block;
     position: absolute;
-    bottom: 0;
+    bottom: -2em;
 }
 
 .all-summit .academy-wrapper .carousel .carousel-indicators li.active {
@@ -1888,12 +1950,50 @@ ul.navbar-main {
         display: none;
     }
     .all-summit .summit-insights .box{
-        min-height: 16em;
+        min-height: 11em;
     }
+}
+
+
+.all-summit .about-summit-header {
+    background-image:  url("../images/home/hero.png") ;
 }
 
 @media (min-width: 500px) and (max-width: 676px) {
     .all-summit .about-summit-header .summit-title {
         font-size: 4em;
+    }
+}
+
+@media (min-width: 1480px) and (max-width: 1800px) {
+    .all-summit .about-summit-header {
+        background-position: 130%;
+    }
+}
+
+@media (min-width: 1300px) and (max-width: 1480px) {
+    .all-summit .about-summit-header {
+        background-position: 150%;
+    }
+}
+
+@media (min-width: 1200px) and (max-width: 1300px) {
+    .all-summit .about-summit-header {
+        background-position: 170%;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1200px) {
+    .all-summit .about-summit-header {
+        background-image: none;
+    }
+    .summit-hero-landing-short .nav li.link a{
+        font-size: 0.75em;
+        padding: 0.75em;
+
+    }
+    .all-summit .navbar > .container .navbar-brand{
+        width: 2em;
+        height: 2em;
     }
 }
