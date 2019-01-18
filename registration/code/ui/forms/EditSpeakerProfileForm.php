@@ -264,43 +264,81 @@ class EditSpeakerProfileForm extends SafeXSSForm {
 
 
             // Expertise
-            $speaker->AreasOfExpertise()->removeAll();
-            if ($data['Expertise']) {
+            if (isset($data['Expertise'])) {
                 $expertise = explode(',', $data['Expertise']);
 
                 foreach ($expertise as $exp) {
                     if (trim($exp) != '') {
-                        if(!$expertise = SpeakerExpertise::get()->filter(['SpeakerID' => 0, 'Expertise' => $exp])->first()) {
+                        if(!$expertise = $speaker->AreasOfExpertise()->find('Expertise', $exp)) {
                             $expertise = SpeakerExpertise::create(['Expertise' => $exp]);
+                            $speaker->AreasOfExpertise()->add( $expertise );
                         }
-
-                        $speaker->AreasOfExpertise()->add( $expertise );
                     }
+                }
+                // remove missing
+                foreach($speaker->AreasOfExpertise() as $exp){
+                    if (!in_array($exp->Expertise, $expertise)) {
+                        $exp->delete();
+                    }
+                }
+            } else {
+                // remove all
+                foreach($speaker->AreasOfExpertise() as $exp){
+                    $exp->delete();
                 }
             }
 
 
             // Presentation Link
-            $speaker->OtherPresentationLinks()->removeAll();
-            foreach ($data['PresentationLink'] as $key => $link) {
-                if (trim($link) != '') {
-                    $presentation_title = trim($data['PresentationTitle'][$key]);
-                    $presentation_link = SpeakerPresentationLink::create(array(
-                        'LinkUrl' => $link,
-                        'Title'   => $presentation_title
-                    ));
-                    $speaker->OtherPresentationLinks()->add( $presentation_link );
+            if(isset($data['PresentationLink'])) {
+                foreach ($data['PresentationLink'] as $key => $link) {
+                    if (trim($link) != '') {
+                        $presentation_title = trim($data['PresentationTitle'][$key]);
+                        if ($has_link = $speaker->OtherPresentationLinks()->find('LinkUrl',$link)) {
+                            $has_link->Title = $presentation_title;
+                            $has_link->write();
+                        } else {
+                            $presentation_link = SpeakerPresentationLink::create(array(
+                                'LinkUrl' => $link,
+                                'Title'   => $presentation_title
+                            ));
+                            $speaker->OtherPresentationLinks()->add( $presentation_link );
+                        }
+
+                    }
+                }
+                // remove missing
+                foreach($speaker->OtherPresentationLinks() as $pl){
+                    if (!in_array($pl->LinkUrl, $data['PresentationLink'])) {
+                        $pl->delete();
+                    }
                 }
             }
 
+
             // Travel Preferences
-            $speaker->TravelPreferences()->removeAll();
+            $current_items = $speaker->TravelPreferences()->column('Country');
             if(isset($data['CountriesToTravel'])) {
-                foreach ($data['CountriesToTravel'] as $travel_country) {
-                    $travel_pref = SpeakerTravelPreference::create(array(
-                        'Country' => $travel_country
-                    ));
-                    $speaker->TravelPreferences()->add($travel_pref);
+                $countries = explode(',', $data['CountriesToTravel']);
+                foreach ($countries as $travel_country) {
+                    if (!in_array($travel_country, $current_items)) {
+                        $travel_pref = SpeakerTravelPreference::create(array(
+                            'Country' => $travel_country
+                        ));
+                        $speaker->TravelPreferences()->add($travel_pref);
+                    }
+                }
+
+                // remove missing
+                foreach($speaker->TravelPreferences() as $tp){
+                    if (!in_array($tp->Country, $countries)) {
+                        $tp->delete();
+                    }
+                }
+            } else {
+                // remove all
+                foreach($speaker->TravelPreferences() as $tp){
+                    $tp->delete();
                 }
             }
 
