@@ -115,9 +115,6 @@ class PresentationSpeaker extends DataObject
         foreach($this->TravelPreferences() as $e){
             $e->delete();
         }
-        foreach($this->Languages() as $e){
-            $e->delete();
-        }
         foreach($this->PromoCodes() as $e){
             $e->delete();
         }
@@ -131,6 +128,7 @@ class PresentationSpeaker extends DataObject
         $this->Presentations()->removeAll();
         $this->OrganizationalRoles()->removeAll();
         $this->ActiveInvolvements()->removeAll();
+        $this->Languages()->removeAll();
 
         // set moderator to zero
 
@@ -351,7 +349,7 @@ class PresentationSpeaker extends DataObject
             $fields->addFieldToTab('Root.Main', $gridField);
 
             // Languages
-            $config = GridFieldConfig_RecordEditor::create();
+            $config = GridFieldConfig_RelationEditor::create();
             $gridField = new GridField('Languages', 'Languages', $this->Languages(), $config);
             $fields->addFieldToTab('Root.Main', $gridField);
 

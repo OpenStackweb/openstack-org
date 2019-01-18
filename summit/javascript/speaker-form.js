@@ -67,9 +67,8 @@ $(document).ready(function(){
     languages.initialize();
 
     $('#'+form_id+'_Language').tagsinput({
-        freeInput: true,
+        freeInput: false,
         maxTags: 5,
-        trimValue: true,
         typeaheadjs: [
             {
                 hint: true,
