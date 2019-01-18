@@ -38,7 +38,7 @@
     <div class="container">
 
         <div class="row text-wrapper">
-            <div class="col-lg-7 col-md-6 col-sm-12">
+            <div class="col-lg-6 col-md-6 col-sm-12">
                 <h4 class="summit-title script">The OpenStack Summit’s new name:</h4>
                 <h2>The Open Infrastructure Summit</h2>
                 <h5>Communities Collaborating in the Open</h5>
