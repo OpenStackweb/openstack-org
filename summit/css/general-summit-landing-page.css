@@ -1179,22 +1179,61 @@ footer {
 }
 
 @media (max-width: 991px) {
-    .summit-insights .pink.box.big {
-        min-height: 30em;
+    .all-summit .summit-insights .pink.box.big {
+        min-height: 24em;
+    }
+    .all-summit .summit-insights .box p {
+        font-size: 1.1em;
+    }
+    .carousel-inner > .item{
+        width: 90%;
+        margin: 0 auto;
+    }
+    .academy-wrapper .container {
+        width: 100%;
     }
 }
 
 @media all and (max-width: 450px) {
-    .summit-insights .box h4 {
-        font-size: 1.2em;
+    .all-summit .summit-insights .box h4 {
+        font-size: 1.8em;
         line-height: 1.2em;
+    }
+    .all-summit .summit-insights .box p {
+        font-size: 1.1em;
+    }
+    .all-summit .summit-insights .box p {
+        font-size: 95%;
+    }
+    .all-summit .summit-register a.btn{
+        padding: 0.5em 0.75em;
+    }
+    .all-summit .summit-insights .box.light .insight{
+        line-height: 1.25em;
+        font-size: 1.5em;
+    }
+    .all-summit .summit-insights .light.box.more-text .insight {
+        line-height: 1.15em;
+        font-size: 1.3em;
     }
 }
 
 @media (min-width: 500px) and (max-width: 676px) {
-    .summit-insights .box h4 {
-        font-size: 1.2em;
+    .all-summit .summit-insights .box h4 {
+        font-size: 1.8em;
         line-height: 1.2em;
+    }
+}
+@media (min-width: 510px) and (max-width: 715px) {
+    
+    .all-summit .summit-insights .pink.box.big {
+        min-height: 27em;
+    }
+}
+@media (max-width: 510px) {
+    
+    .all-summit .summit-insights .pink.box.big {
+        min-height: 30em;
     }
 }
 
@@ -1376,30 +1415,21 @@ footer {
 }
 
 @media (min-width: 991px) and (max-width: 1200px) {
-    .summit-insights .box {
-        min-height: 18.25em;
-        max-height: 18.25em;
-    }
+    .summit-insights .box p {
+        font-size: 1em;}
 
-    .summit-insights .video {
-        height: 18em;
-    }
+        .summit-insights .box h4 {
+            font-size: 1.9em;
+        }
 
-    .summit-insights .video iframe {
-        height: 18em;
-    }
+        .all-summit .summit-insights .box .insight {
+            font-size: 1.6em;
+        }
 
-    .summit-insights .video .embed-video {
-        height: 18em;
-    }
+        .all-summit .summit-insights .box.more-text .insight {
+            font-size: 1.45em;
+        }
 
-    .summit-insights .video .video-cover {
-        height: 18em;
-    }
-
-    .summit-insights .box.big {
-        min-height: 38.5em;
-    }
 }
 
 @media all and (max-width: 991px) {
@@ -1942,12 +1972,22 @@ ul.navbar-main {
 
     .all-summit .what-to-expect .video-container, .all-summit .what-to-expect .text-container {
         margin: 1em 0;
-        height: 25em;
+        height: 20em;
+    }
+
+
+     .all-summit .what-to-expect .text-container {
+        padding: 2em;
+        font-size: 90%;
     }
 
     .all-summit .what-to-expect .video-container .video {
-        height: 25em;
+        height: 20em;
         margin: 0;
+    }
+
+    .all-summit .summits-wrap {
+        padding: 3em 0;
     }
 
     .all-summit .summits-wrap .container {
@@ -1959,8 +1999,9 @@ ul.navbar-main {
     }
 
     .all-summit .summits-wrap .timeline span {
-        height: 10em;
+        min-height: 6em;
         margin-top: 2em;
+        height: auto;
     }
 
     .all-summit .diverse.what-to-expect .text-container {
@@ -1968,7 +2009,7 @@ ul.navbar-main {
     }
 
     .all-summit .academy-wrapper .carousel .centered-column {
-        width: 30%;
+        width: 20%;
         display: inline-block;
     }
 
