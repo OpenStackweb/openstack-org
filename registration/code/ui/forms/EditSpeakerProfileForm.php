@@ -278,12 +278,14 @@ class EditSpeakerProfileForm extends SafeXSSForm {
                 // remove missing
                 foreach($speaker->AreasOfExpertise() as $exp){
                     if (!in_array($exp->Expertise, $expertise)) {
+                        if(!$exp->exists()) continue;
                         $exp->delete();
                     }
                 }
             } else {
                 // remove all
                 foreach($speaker->AreasOfExpertise() as $exp){
+                    if(!$exp->exists()) continue;
                     $exp->delete();
                 }
             }
@@ -310,6 +312,7 @@ class EditSpeakerProfileForm extends SafeXSSForm {
                 // remove missing
                 foreach($speaker->OtherPresentationLinks() as $pl){
                     if (!in_array($pl->LinkUrl, $data['PresentationLink'])) {
+                        if(!$pl->exists()) continue;
                         $pl->delete();
                     }
                 }
@@ -332,12 +335,14 @@ class EditSpeakerProfileForm extends SafeXSSForm {
                 // remove missing
                 foreach($speaker->TravelPreferences() as $tp){
                     if (!in_array($tp->Country, $countries)) {
+                        if(!$tp->exists()) continue;
                         $tp->delete();
                     }
                 }
             } else {
                 // remove all
                 foreach($speaker->TravelPreferences() as $tp){
+                    if(!$tp->exists()) continue;
                     $tp->delete();
                 }
             }
@@ -351,8 +356,6 @@ class EditSpeakerProfileForm extends SafeXSSForm {
             return $this->controller()->redirectBack();
 
         }
-        else {
-            return Security::PermissionFailure($this->controller, 'You must be <a href="/join">registered</a> and logged in to edit your profile:');
-        }
+        return Security::PermissionFailure($this->controller, 'You must be <a href="/join">registered</a> and logged in to edit your profile:');
     }
 }
