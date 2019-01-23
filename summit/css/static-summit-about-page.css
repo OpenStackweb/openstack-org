@@ -548,8 +548,8 @@ button.btn i, a.btn i {
     display: inline-block;
     color: #fff;
     text-align: center;
-    max-width: 12.5%;
-    min-width: 12.5%;
+    max-width: 10.5%;
+    min-width: 10.5%;
     margin-top: 2em;
     float: left;
 }
@@ -599,6 +599,10 @@ button.btn i, a.btn i {
 
 .session span.cloud {
     background: url("../images/cloud.svg") center center no-repeat;
+}
+
+.session span.security {
+    background: url("../images/security.svg") center center no-repeat;
 }
 
 .what-to-expect {

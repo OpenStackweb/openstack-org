@@ -29,6 +29,7 @@
                     <li class="session"> <span class="hpc"></span> HPC</li>
                     <li class="session"> <span class="nfv"></span> NFV</li>
                     <li class="session"> <span class="cloud"></span> Public & Private Cloud</li>
+                    <li class="session"> <span class="security"></span> Security</li>
                 </ul>
             </div>
         </div>
@@ -165,7 +166,7 @@
                         <div class="info">
                             <div class="name">Doina Cristina Duma</div>
                             <div class="title">INFN National Center (CNAF)</div>
-                            <div class="topic">CI/CD<</div>
+                            <div class="topic">CI/CD</div>
                         </div>
                     </div>
                 </div>
