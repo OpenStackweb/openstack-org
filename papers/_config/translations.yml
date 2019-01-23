@@ -10,6 +10,8 @@ leveraging-containers-openstack:
         lang_zanata: de
       - lang_local: id_ID
         lang_zanata: id
+      - lang_local: ja_JP
+        lang_zanata: ja
 edge-computing:
   id: 2
   version_id: pot-translation
