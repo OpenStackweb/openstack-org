@@ -135,7 +135,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="https://www.openstack.org/assets/Uploads/DSC-7065.JPG" alt="ChangBo Guo" class="summit-user-image">
+                            <img src="https://www.openstack.org/assets/summits/denver-2019/programming-commitee/EricGuo.JPG" alt="ChangBo Guo" class="summit-user-image">
                         </div>
                         <div class="info">
                             <div class="name">ChangBo Guo</div>
@@ -160,7 +160,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="" alt="Doina Cristina Duma" class="summit-user-image">
+                            <img src="https://www.openstack.org/assets/1px.png" height="174" alt="Doina Cristina Duma" class="summit-user-image">
                         </div>
                         <div class="info">
                             <div class="name">Doina Cristina Duma</div>
@@ -450,7 +450,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="https://www.openstack.org/assets/profile-images/arkady.png" alt="Arkady Kanevsky" class="summit-user-image">
+                            <img src="https://www.openstack.org/assets/summits/denver-2019/programming-commitee/arkadyk-2.jpeg" alt="Arkady Kanevsky" class="summit-user-image">
                         </div>
                         <div class="info">
                             <div class="name">Arkady Kanevsky</div>
