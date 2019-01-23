@@ -73,7 +73,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="https://www.openstack.org/assets/profile-images/photo200.jpg" alt="Armstrong Foundjem" class="summit-user-image">
+                            <img src="https://www.openstack.org/assets/summits/denver-2019/programming-commitee/ArmstrongFoundjem2.png" alt="Armstrong Foundjem" class="summit-user-image">
                         </div>
                         <div class="info">
                             <div class="name">Armstrong Foundjem</div>
