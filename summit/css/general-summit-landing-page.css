@@ -127,7 +127,7 @@ footer {
 }
 
 .summit-hero-landing .summit-hero-logo, .summit-hero-landing-short .summit-hero-logo {
-    background: url("../images/summit-logo-red.svg") center no-repeat;
+    background: url("/assets/Uploads/arrows.svg") center no-repeat;
     height: 2.5em;
     width: 2.5em;
     position: relative;
@@ -649,6 +649,10 @@ footer {
 
 .session span.cloud {
     background: url("../images/cloud.svg") center center no-repeat;
+}
+
+.session span.security {
+    background: url("../images/security.svg") center center no-repeat;
 }
 
 .what-to-expect {
@@ -1603,6 +1607,20 @@ ul.navbar-main {
 
 .all-summit .summits-wrap.odd {
     background-color: #fff;
+}
+
+@media all and (max-width: 600px) {
+
+    .all-summit .summits-wrap.odd {
+        display: none;
+    }
+}
+
+@media all and (max-width: 400px) {
+
+    .all-summit .summits-wrap.odd {
+        display: none;
+    }
 }
 
 .all-summit .summits-wrap .video-container .item p{

@@ -50,7 +50,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 session-box">
-                <h3>200 Sessions and Workshops</h3>
+                <h3>Hundreds of Presentations, Workshops, and Collaborative Sesssions</h3>
                 <ul class="sessions">
                     <li class="session"> <span class="ai"></span> AI</li>
                     <li class="session"> <span class="cicd"></span> CI/CD</li>
@@ -60,6 +60,7 @@
                     <li class="session"> <span class="hpc"></span> HPC</li>
                     <li class="session"> <span class="nfv"></span> NFV</li>
                     <li class="session"> <span class="cloud"></span> Public & Private Cloud</li>
+                    <li class="session"> <span class="security"></span> Security</li>
                 </ul>
             </div>
         </div>
