@@ -19,6 +19,9 @@
             <div class="video-container second col-md-4 col-sm-12">
                 <div class="item">
                     <div class="video">
+                        <a href="https://www.flickr.com/photos/sgerner/22636377307" target="_blank" class="photo-credit" title="Steven Gerner">
+                            <i class="fa fa-info-circle"></i>
+                        </a>
                     </div>
                     <h4>Denver, Colorado</h4>
                     <p>May 23-25, 2019</p>
@@ -81,7 +84,7 @@
                 <p>Join us in the morning to hear from community leadership, users, demos, project updates…...The
                     keynotes will help you understand the open infrastructure vision, trends and latest news, so you
                     can dig in to learn more throughout the week. </p>
-                <p><button class="btn btn-link">Cta goes here <i class="fa fa-chevron-right"></i></button></p>
+                <p><a class="btn btn-link">Cta goes here <i class="fa fa-chevron-right"></i></a></p>
             </div>
             <div class="video-container col-md-6 col-sm-12">
                 <a href="https://youtu.be/8I2P1QKxUZA" class="play video first">
@@ -103,7 +106,7 @@
                 <h4 class="title-section">Learn from your peers in Breakout Sessions & Lightning Talks</h4>
                 <p>There are more than 300 panels, presentations & lightning talks throughout the week at the Open
                     Infrastructure Summit.</p>
-                <p><button class="btn btn-link">Cta goes here <i class="fa fa-chevron-right"></i></button></p>
+                <p><a class="btn btn-link">Cta goes here <i class="fa fa-chevron-right"></i></a></p>
             </div>
         </div>
         <div class="row">
@@ -112,7 +115,7 @@
                 <p>There are dozens of opportunities for workshops and trainings to skill up at the Open Infrastructure
                     Summit. Whether it’s a 40-minute workshop or all-day training session, getting hands-on with the
                     technology is the best way to learn and take home knowledge.</p>
-                <p><button class="btn btn-link">Cta goes here <i class="fa fa-chevron-right"></i></button></p>
+                <p><a class="btn btn-link">Cta goes here <i class="fa fa-chevron-right"></i></a></p>
             </div>
             <div class="video-container col-md-6 col-sm-12">
                 <a href="https://youtu.be/8I2P1QKxUZA" class="play video third">
@@ -133,7 +136,7 @@
             <div class="text-container col-md-6 col-sm-12">
                 <h4 class="title-section">Collaborate and influence the roadmap in the Forum sessions.</h4>
                 <p>Evaluate infrastructure vendors in the Marketplace and meet new people at evening events.</p>
-                <p><button class="btn btn-link">Cta goes here <i class="fa fa-chevron-right"></i></button></p>
+                <p><a class="btn btn-link">Cta goes here <i class="fa fa-chevron-right"></i></a></p>
             </div>
         </div>
     </div>
