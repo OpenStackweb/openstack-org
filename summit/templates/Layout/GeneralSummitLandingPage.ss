@@ -76,19 +76,19 @@
             </div>
         </div>
         <div class="row">
-            <div class="video-container col-lg-pull-6 col-md-6 col-sm-12">
-                <a href="https://youtu.be/8I2P1QKxUZA" class="play video first">
-                    <span>
-                        <i class="fal fa-play"></i>
-                    </span>
-                </a>
-            </div>
-            <div class="text-container col-lg-push-6 col-md-6 col-sm-12">
+            <div class="text-container col-md-6 col-sm-12">
                 <h4 class="title-section">Get Inspired by the Keynotes</h4>
                 <p>Join us in the morning to hear from community leadership, users, demos, project updates…...The
                     keynotes will help you understand the open infrastructure vision, trends and latest news, so you
                     can dig in to learn more throughout the week. </p>
                 <p><button class="btn btn-link">Cta goes here <i class="fa fa-chevron-right"></i></button></p>
+            </div>
+            <div class="video-container col-md-6 col-sm-12">
+                <a href="https://youtu.be/8I2P1QKxUZA" class="play video first">
+                    <span>
+                        <i class="fal fa-play"></i>
+                    </span>
+                </a>
             </div>
         </div>
         <div class="row">
@@ -107,19 +107,19 @@
             </div>
         </div>
         <div class="row">
-            <div class="video-container col-lg-pull-6 col-md-6 col-sm-12">
-                <a href="https://youtu.be/8I2P1QKxUZA" class="play video third">
-                    <span>
-                        <i class="fal fa-play"></i>
-                    </span>
-                </a>
-            </div>
-            <div class="text-container col-lg-push-6 col-md-6 col-sm-12">
+            <div class="text-container col-md-6 col-sm-12">
                 <h4 class="title-section">Get Started Contributing with Mentoring and Workshops</h4>
                 <p>There are dozens of opportunities for workshops and trainings to skill up at the Open Infrastructure
                     Summit. Whether it’s a 40-minute workshop or all-day training session, getting hands-on with the
                     technology is the best way to learn and take home knowledge.</p>
                 <p><button class="btn btn-link">Cta goes here <i class="fa fa-chevron-right"></i></button></p>
+            </div>
+            <div class="video-container col-md-6 col-sm-12">
+                <a href="https://youtu.be/8I2P1QKxUZA" class="play video third">
+                    <span>
+                        <i class="fal fa-play"></i>
+                    </span>
+                </a>
             </div>
         </div>
         <div class="row">
