@@ -1075,8 +1075,7 @@ footer {
   background-size: cover; }
 
 img.tokyo-landing-logo {
-  max-width: 200px;
-  margin-bottom: 40px; }
+  width:80%; }
 
 .save-the-date {
   color: white;

@@ -2,11 +2,11 @@
 <div class="tokyo-landing-wrapper boston" style="background-image: url('{$SummitImage.Image.getURL()}')">
     <div class="container">
     	<div class="row">
-    		<div class="col-sm-12">
-                <a href="/summit/">
-                    <img class="tokyo-landing-logo" src="/summit/images/summit-logo-red.svg" onerror="this.onerror=null; this.src=/summit/images/summit-logo.png" alt="OpenStack Infrastructure Summit">
-                </a>
-                <div class="save-the-date"> Save The Date! </div>
+    		<div class="landingintro">
+                    <h4 class="script">Join us in Shanghai!</h4>
+                    <img class="tokyo-landing-logo" src="/assets/summits/shanghai/Shanghai2019-Summit-Logo-Web.svg" onerror="this.onerror=null; this.src=/assets/summits/shanghai/Shanghai2019-Summit-Logo-Web.svg" alt="OpenStack Infrastructure Summit">
+                    <script id="e2ma-embed">window.e2ma=window.e2ma||{};e2ma.accountId='1771360';</script><script src="//dk98ddgl0znzm.cloudfront.net/e2ma.js" async="async"></script>
+                <!-- <div class="save-the-date"> Save The Date! </div>
     			<h1> $IntroText </h1>
                 <div class="summit-location">$MainTitle</div>
                 <div class="summit-date">
@@ -43,6 +43,7 @@
                               &redirect_uri=https://facebook.com" ></a>
                     <a href="http://www.linkedin.com/shareArticle?mini=true&url={$AbsoluteLink}&title=OpenStack Summit&summary={$ShareText}" target="_blank" class="social-icons landing-linkedin"></a>
                 </div>
+                -->
             </div>
         </div>
     </div>

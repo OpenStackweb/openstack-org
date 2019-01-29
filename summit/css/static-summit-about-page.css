@@ -52,6 +52,14 @@ button.btn i, a.btn i {
     padding-bottom:120px;
 }
 
+.landingintro h4
+{
+    font-family: "GoldanaScript";
+    color: #ffd602;
+    font-size: 2.5em;
+    margin-bottom:40px;
+}
+
 .summit-hero-landing-short {
     height: auto;
     padding-bottom: 100px;
