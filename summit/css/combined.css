@@ -1318,13 +1318,13 @@ a.current-summit-link {
   color: white;
 }
 .e2ma_signup_message {
-  display: none;
-}
-.e2ma_signup_form_label {
   font-size: 1.2em;
   text-transform: uppercase;
   margin-bottom: 0.5em;
   font-weight: bold;
+}
+.e2ma_signup_form_label {
+  display: none;
 }
 .e2ma_signup_form_element {
   display: inline-block;
