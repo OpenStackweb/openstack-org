@@ -1304,6 +1304,7 @@ a.current-summit-link {
 .landingintro {
   bottom: 0;
   height: auto;
+  min-height: 390px;
   left: 0;
   margin: auto;
   position: absolute;
