@@ -8,7 +8,7 @@
                     <script type="text/javascript" src="https://signup.e2ma.net/tts_signup/1892782/dc3896463a1fcdd2f57f993be48d29f6/1771360/"></script><div id="load_check" class="signup_form_message" >This form needs Javascript to display, which your browser doesn't support. <a href="https://signup.e2ma.net/signup/1892782/1771360/"> Sign up here</a> instead </div><script type="text/javascript">signupFormObj.drawForm();</script>
                     <p>&nbsp;</p>
                     <p>&nbsp;</p>
-                    <p><a href="mailto:summit@openstack.org" style="color:#fff;text-decoration:underline;">Interested in sponsoring the Summit?</a> | <a href="" style="color:#fff;text-decoration:underline;">View the Prospectus</a></p>
+                    <p><a href="mailto:summit@openstack.org" style="color:#fff;text-decoration:underline;">Interested in sponsoring the Summit?</a> | <a href="/assets/summits/shanghai/preliminaryshanghaiprospectus.pdf" style="color:#fff;text-decoration:underline;">View the Prospectus</a></p>
                 <!-- <div class="save-the-date"> Save The Date! </div>
     			<h1> $IntroText </h1>
                 <div class="summit-location">$MainTitle</div>
