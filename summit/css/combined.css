@@ -1299,6 +1299,66 @@ a.current-summit-link {
   margin-top: 20px; }
 
 /*End Austin Landing*/
+
+/* Shanghai landing */
+.landingintro {
+  bottom: 0;
+  height: auto;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  width: 100%;
+  max-width: 1110px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.e2ma_signup_form {
+  margin-top: 6rem;
+  color: white;
+}
+.e2ma_signup_message {
+  display: none;
+}
+.e2ma_signup_form_label {
+  font-size: 1.2em;
+  text-transform: uppercase;
+  margin-bottom: 0.5em;
+  font-weight: bold;
+}
+.e2ma_signup_form_element {
+  display: inline-block;
+}
+.e2ma_signup_form_required_asterix {
+  display: none;
+}
+#id_email {
+  width: 400px;
+  height: 3em;
+  color: #333;
+  text-align: center;
+}
+.e2ma_signup_form_required_footnote {
+  display: none;
+}
+.e2ma_signup_form_button {
+  border: none;
+  padding: 1rem 6rem;
+  text-decoration: none;
+  background: #ffd602;
+  color: #111111;
+  font-family: sans-serif;
+  font-size: 1.5rem;
+  cursor: pointer;
+  text-align: center;
+  transition: background 250ms ease-in-out, transform 150ms ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  margin-top: 1rem;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+/*End Shanghai landing */
 /* Presentation App */
 .presentation-app-header {
   border-bottom: 1px solid #CCCCCC; }
