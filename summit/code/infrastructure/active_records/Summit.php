@@ -281,6 +281,8 @@ class Summit extends DataObject implements ISummit
     }
 
     public function getActiveSelectionPlans() {
+        // check if summit exists or not bc u cant filter on a unsaved list
+        if(!$this->exists()) return [];
         return $this->SelectionPlans()->filter('Enabled', true);
     }
 

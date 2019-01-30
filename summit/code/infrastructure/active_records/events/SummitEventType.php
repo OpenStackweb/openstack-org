@@ -108,7 +108,7 @@ class SummitEventType extends DataObject implements ISummitEventType
         $valid = parent::validate();
         if(!$valid->valid()) return $valid;
 
-        $summit_id = isset($_REQUEST['SummitID']) ?  $_REQUEST['SummitID'] : $this->SummitID;
+        $summit_id = isset($_REQUEST['SummitID']) &&  intval($_REQUEST['SummitID']) > 0 ?  $_REQUEST['SummitID'] : $this->SummitID;
 
         $summit   = Summit::get()->byID($summit_id);
 
