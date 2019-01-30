@@ -1130,7 +1130,9 @@ footer {
   background-size: cover; }
 
 img.tokyo-landing-logo {
-  width:80%; }
+  width:80%; 
+  margin-bottom: 7rem;
+}
 
 .save-the-date {
   color: white;
@@ -1302,17 +1304,12 @@ a.current-summit-link {
 
 /* Shanghai landing */
 .landingintro {
-  bottom: 0;
-  height: auto;
-  min-height: 390px;
-  left: 0;
-  margin: auto;
-  position: absolute;
-  right: 0;
-  width: 100%;
-  max-width: 1110px;
-  top: 50%;
-  transform: translateY(-50%);
+  margin-top: 3rem;
+}
+.join-us-text {
+  color: #ffd602;
+  font-size: 1.5em;
+  font-weight: bold;
 }
 .e2ma_signup_form {
   margin-top: 6rem;
