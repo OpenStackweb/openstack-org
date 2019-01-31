@@ -153,7 +153,7 @@
                         </div>
                         <div class="info">
                             <div class="name">James E. Blair</div>
-                            <div class="title">Hewlett Packard</div>
+                            <div class="title">Red Hat</div>
                             <div class="topic">CI/CD</div>
                         </div>
                     </div>
@@ -287,7 +287,7 @@
                         </div>
                         <div class="info">
                             <div class="name">Keith Berger</div>
-                            <div class="title">Hewlett Packard Enterprise</div>
+                            <div class="title">SUSE</div>
                             <div class="topic">Hands-On Workshops</div>
                         </div>
                     </div>
