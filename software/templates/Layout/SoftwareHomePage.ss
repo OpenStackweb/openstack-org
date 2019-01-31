@@ -30,7 +30,7 @@
                 <img class="header-bullet" width="100%" src="/software/images/bullets/bullet-2.svg" onerror="this.onerror=null; this.src=/software/images/bullets/bullet-2.png" alt="Bullet 2">
                 <h3 class="has-bullet is-upprcs strong">The OpenStack Landscape</h3>
                 <p>OpenStack is broken up into projects to allow you to plug and play components depending on your needs. the openstack map gives you an “at a glance” view of the openstack landscpace to see where projects fit and how they can work together.</p>
-                <p><a href="#">Download the map <i class="fa fa-chevron-right"></i></a></p>
+                <p><a href="https://www.openstack.org/assets/software/projectmap/openstack-map.pdf">Download the map <i class="fa fa-chevron-right"></i></a></p>
                 <p>&nbsp; </p>
                 <p>
                     <img class="openstack-map" width="100%" src="/software/images/map/openstack-map-v20180601.svg" onerror="this.onerror=null; this.src=/software/images/map/openstack-map-v20180601.png" alt="OpenStack Cloud landscape map">
@@ -45,7 +45,7 @@
                     <div class="software-card-body card-body">
                         <h5 class="software-card-title card-title has-icon"><img class="card-header-icon" width="100%" src="/software/images/icons/openstack-logo.svg" onerror="this.onerror=null; this.src=/software/images/icons/openstack-logo.png" alt="Openstack white logo icon"> OpenStack Components</h5>
                 <p class="software-card-text card-text">Core OpenStack Components including OpenStack Services, Operations Services, Add-Ons to Services and Bridges for Adjacent Tech.</p>
-                <p><a href="#" class="software-card-link card-link">View these projects <i class="fa fa-chevron-right"></i></a></p>
+                <p><a href="https://www.openstack.org/software/project-navigator/openstack-components/" class="software-card-link card-link">View these projects <i class="fa fa-chevron-right"></i></a></p>
                     </div>
                 </div>
             </div>
@@ -54,7 +54,7 @@
                     <div class="software-card-body card-body">
                         <h5 class="software-card-title card-title"><img class="card-header-icon" width="100%" src="/software/images/icons/sdk-icon.svg" onerror="this.onerror=null; this.src=/software/images/icons/sdk-icon.png" alt="SDK icon"> SDKs</h5>
                         <p class="software-card-text card-text">SDKs (software development kits) that extend Openstack through user centric services.<br>&nbsp; </p>
-                        <p><a href="#" class="software-card-link card-link">View these projects <i class="fa fa-chevron-right"></i></a></p>
+                        <p><a href="https://www.openstack.org/software/project-navigator/sdks-1/" class="software-card-link card-link">View these projects <i class="fa fa-chevron-right"></i></a></p>
                     </div>
                 </div>
             </div>
@@ -63,7 +63,7 @@
                     <div class="software-card-body card-body">
                         <h5 class="software-card-title card-title"><img class="card-header-icon" width="100%" src="/software/images/icons/deploy-icon.svg" onerror="this.onerror=null; this.src=/software/images/icons/deploy-icon.png" alt="Deployment icon"> Deployment Tools</h5>
                         <p class="software-card-text card-text">Tools and recipes that deployers may choose to help them deploy and maintain the lifecycle of their OpenStack deployment.</p>
-                        <p><a href="#" class="software-card-link card-link">View these projects <i class="fa fa-chevron-right"></i></a></p>
+                        <p><a href="https://www.openstack.org/software/project-navigator/deployment-tools/" class="software-card-link card-link">View these projects <i class="fa fa-chevron-right"></i></a></p>
                     </div>
                 </div>
             </div>
@@ -78,7 +78,7 @@
                 <p class="minheight100">Think of these as curated playlists of OpenStack configurations. These sample configurations are based on OpenStack case studies and real-world reference architectures across industries and workloads. Each configuration will give you a good idea of which core and optional projects can be used for different environments.</p>
                 <p>&nbsp; </p>
                 <p>
-                    <a href="/sample-configs/" class="btn btn-info software-link-button" role="button">See Sample Configurations 
+                    <a href="https://www.openstack.org/software/sample-configs/" class="btn btn-info software-link-button" role="button">See Sample Configurations 
                         <span class="fa-stack fa-lg">
                             <i class="fa fa-circle fa-stack-2x"></i>
                             <i class="fa fa-chevron-right fa-stack-1x fa-inverse"></i>
@@ -92,7 +92,7 @@
                 <p class="minheight100">If you're looking for OpenStack related products and services such as Distributions, Appliances, Public Clouds, Consultants, or Training check out our OpenStack Marketplace.</p>
                 <p>&nbsp; </p>
                 <p>
-                    <a href="#" class="btn btn-info software-link-button" role="button">Visit the Marketplace 
+                    <a href="https://www.openstack.org/marketplace/" class="btn btn-info software-link-button" role="button">Visit the Marketplace 
                         <span class="fa-stack fa-lg">
                             <i class="fa fa-circle fa-stack-2x"></i>
                             <i class="fa fa-chevron-right fa-stack-1x fa-inverse"></i>
