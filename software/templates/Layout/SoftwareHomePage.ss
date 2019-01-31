@@ -7,125 +7,102 @@
     <div class="container inner-software" role="tabpanel" id="overview">
         <!-- Begin Page Content -->
         <div class="row">
-            <div class="col-sm-10 col-sm-push-1 center">
-                <h3>$IntroTitle</h3>
+            <div class="col-sm-6">
+                <img class="header-bullet" width="100%" src="/software/images/bullets/bullet-1.svg" onerror="this.onerror=null; this.src=/software/images/bullets/bullet-1.png" alt="Bullet 1">
+                <h3 class="has-bullet is-upprcs strong">What is OpenStack?</h3>
+<p>OpenStack is a cloud operating system that controls large pools of compute, storage, and networking resources throughout a datacenter, all managed through a dashboard that gives administrators control while empowering their users to provision resources through a web interface.</p>
+
+<p>Learn more about OpenStack's compute, storage, networking, take a tour of the dashboard, or dive in and learn how to get started with OpenStack today.</p>
+
+<p>Based on five generations of production software, this seed code will be the base for future fully open source implementations that can be productized. In addition to standard cloud functionality, the project components provide fault management and service management amongst others to ensure high availability of user applications.</p>
+            </div>
+            <div class="col-sm-6">
                 <p>
-                    <img class="overview-diagram" width="100%" src="/software/images/diagram/overview-diagram.svg" onerror="this.onerror=null; this.src=/software/images/diagram/overview-diagram.png" alt="OpenStack Cloud Software">
+                    <img class="overview-diagram" width="100%" src="/software/images/diagram/overview-diagram-new.svg" onerror="this.onerror=null; this.src=/software/images/diagram/overview-diagram-new.png" alt="OpenStack Cloud Software">
                 </p>
-                <div class="row projects-overview">
-                    <div class="col-sm-12">
-                     $IntroText
+            </div>
+        </div>
+        <p>&nbsp; </p>
+        <hr/>
+        <p>&nbsp; </p>
+        <div class="row">
+            <div class="col-sm-12">
+                <img class="header-bullet" width="100%" src="/software/images/bullets/bullet-2.svg" onerror="this.onerror=null; this.src=/software/images/bullets/bullet-2.png" alt="Bullet 2">
+                <h3 class="has-bullet is-upprcs strong">The OpenStack Landscape</h3>
+                <p>OpenStack is broken up into projects to allow you to plug and play components depending on your needs. the openstack map gives you an “at a glance” view of the openstack landscpace to see where projects fit and how they can work together.</p>
+                <p><a href="https://www.openstack.org/assets/software/projectmap/openstack-map.pdf">Download the map <i class="fa fa-chevron-right"></i></a></p>
+                <p>&nbsp; </p>
+                <p>
+                    <img class="openstack-map" width="100%" src="/software/images/map/openstack-map-v20180601.svg" onerror="this.onerror=null; this.src=/software/images/map/openstack-map-v20180601.png" alt="OpenStack Cloud landscape map">
+                </p>
+            </div>
+            <p>&nbsp; </p>
+        </div>
+        <div class="row">
+            <h4 class="is-centered header-center">Browse the Projects</h4>
+            <div class="col-sm-4">
+                <div class="card software-card">
+                    <div class="software-card-body card-body">
+                        <h5 class="software-card-title card-title has-icon"><img class="card-header-icon" width="100%" src="/software/images/icons/openstack-logo.svg" onerror="this.onerror=null; this.src=/software/images/icons/openstack-logo.png" alt="Openstack white logo icon"> OpenStack Components</h5>
+                <p class="software-card-text card-text">Core OpenStack Components including OpenStack Services, Operations Services, Add-Ons to Services and Bridges for Adjacent Tech.</p>
+                <p><a href="https://www.openstack.org/software/project-navigator/openstack-components/" class="software-card-link card-link">View these projects <i class="fa fa-chevron-right"></i></a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                 <div class="card software-card">
+                    <div class="software-card-body card-body">
+                        <h5 class="software-card-title card-title"><img class="card-header-icon" width="100%" src="/software/images/icons/sdk-icon.svg" onerror="this.onerror=null; this.src=/software/images/icons/sdk-icon.png" alt="SDK icon"> SDKs</h5>
+                        <p class="software-card-text card-text">SDKs (software development kits) that extend Openstack through user centric services.<br>&nbsp; </p>
+                        <p><a href="https://www.openstack.org/software/project-navigator/sdks-1/" class="software-card-link card-link">View these projects <i class="fa fa-chevron-right"></i></a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card software-card">
+                    <div class="software-card-body card-body">
+                        <h5 class="software-card-title card-title"><img class="card-header-icon" width="100%" src="/software/images/icons/deploy-icon.svg" onerror="this.onerror=null; this.src=/software/images/icons/deploy-icon.png" alt="Deployment icon"> Deployment Tools</h5>
+                        <p class="software-card-text card-text">Tools and recipes that deployers may choose to help them deploy and maintain the lifecycle of their OpenStack deployment.</p>
+                        <p><a href="https://www.openstack.org/software/project-navigator/deployment-tools/" class="software-card-link card-link">View these projects <i class="fa fa-chevron-right"></i></a></p>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- 
+        <p>&nbsp; </p>
         <hr/>
-
-        <div class="project-category-section">
-            <h3 class="header-center">What can OpenStack Automate?</h3>
-            <div class="row">
-                <% loop getComponentCategories() %>
-                <div class="col-md-4">
-                    <a href="/software/project-navigator/openstack-components/">
-                        <div class="project-category-tile">
-                            <h4>{$Name}</h4>
-                            <p class="number-of-projects">
-                                {$Count} OpenStack Projects
-                            </p>
-                        </div>
+        <p>&nbsp; </p>
+        <div class="row">
+            <div class="col-sm-6">
+                <img class="header-bullet" width="100%" src="/software/images/bullets/bullet-3.svg" onerror="this.onerror=null; this.src=/software/images/bullets/bullet-3.png" alt="Bullet 3">
+                <h3 class="has-bullet is-upprcs strong">Sample Configurations</h3>
+                <p class="minheight100">Think of these as curated playlists of OpenStack configurations. These sample configurations are based on OpenStack case studies and real-world reference architectures across industries and workloads. Each configuration will give you a good idea of which core and optional projects can be used for different environments.</p>
+                <p>&nbsp; </p>
+                <p>
+                    <a href="https://www.openstack.org/software/sample-configs/" class="btn btn-info software-link-button" role="button">See Sample Configurations 
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-chevron-right fa-stack-1x fa-inverse"></i>
+                        </span>
                     </a>
-                </div>
-                <% end_loop %>
+                </p>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <a href="$Top.Link(project-navigator)" class="red-btn-lrg">Browse All OpenStack Projects</a>
-            </div>
-        </div>
-        -->
-
-        <hr/>
-
-        <div class="row">
-            <div class="starter-pack  col-md-12">
-                <h3 class="header-center">Popular Project Set</h3>
-                <ul>
-                    <li class="nova">
-                        <a href="/software/releases/queens/components/nova">
-                            <h4>Nova</h4>
-                            <p>Compute</p>
-                        </a>
-                    </li>
-                    <li class="neutron">
-                        <a href="/software/releases/queens/components/neutron">
-                            <h4>Neutron</h4>
-                            <p>Networking</p>
-                        </a>
-                    </li>                     
-                    <li class="swift">
-                        <a href="/software/releases/queens/components/swift">
-                            <h4>Swift</h4>
-                            <p>Object Storage</p>
-                        </a>
-                    </li>
-                    <li class="glance">
-                        <a href="/software/releases/queens/components/glance">
-                            <h4>Glance</h4>
-                            <p>Image Service</p>
-                        </a>
-                    </li>
-                    <li class="keystone">
-                        <a href="/software/releases/queens/components/keystone">
-                            <h4>Keystone</h4>
-                            <p>Identity Service</p>
-                        </a>
-                    </li>          
-                    <li class="cinder">
-                        <a href="/software/releases/queens/components/cinder">
-                            <h4>Cinder</h4>
-                            <p>Block Storage</p>
-                        </a>
-                    </li>                                                                                                      
-                </ul>
-            </div>
-        </div>
-
-        <div class="row">
-
-            <div class="workloads-section col-md-12">
-
-            <h3 class="header-center">Sample OpenStack Configurations</h3>
-
-                <ul>
-                    <li> <a href="/software/sample-configs#web-applications"> <img class="workloads-icon" src="/software/images/icons/sample-config.svg" onerror="this.onerror=null; this.src=/software/images/icons/sample-config.png"> Web Applications</a></li>    
-
-                    <li> <a href="/software/sample-configs#big-data"> <img class="workloads-icon" src="/software/images/icons/sample-config.svg" onerror="this.onerror=null; this.src=/software/images/icons/sample-config.png"> Big Data</a></li>
-
-                    <li> <a href="/software/sample-configs#ecommerce"> <img class="workloads-icon" src="/software/images/icons/sample-config.svg" onerror="this.onerror=null; this.src=/software/images/icons/sample-config.png"> eCommerce</a></li>
-
-                    <li> <a href="/software/sample-configs#video-processing-and-content-delivery"> <img class="workloads-icon" src="/software/images/icons/sample-config.svg" onerror="this.onerror=null; this.src=/software/images/icons/sample-config.png"> Video Processing and Content Delivery</a></li>
-
-                    <li> <a href="/software/sample-configs#high-throughput-computing"> <img class="workloads-icon" src="/software/images/icons/sample-config.svg" onerror="this.onerror=null; this.src=/software/images/icons/sample-config.png"> High Throughput Computing</a></li>
-
-                    <li> <a href="/software/sample-configs#container-optimized"> <img class="workloads-icon" src="/software/images/icons/sample-config.svg" onerror="this.onerror=null; this.src=/software/images/icons/sample-config.png"> Container Optimized</a></li>
-                    
-                    <li> <a href="/software/sample-configs#web-hosting"> <img class="workloads-icon" src="/software/images/icons/sample-config.svg" onerror="this.onerror=null; this.src=/software/images/icons/sample-config.png"> Web Hosting</a></li>
-
-                    <li> <a href="/software/sample-configs#public-cloud"> <img class="workloads-icon" src="/software/images/icons/sample-config.svg" onerror="this.onerror=null; this.src=/software/images/icons/sample-config.png"> Public Cloud</a></li>
-
-                    <li> <a href="/software/sample-configs#compute-starter-kit"> <img class="workloads-icon" src="/software/images/icons/sample-config.svg" onerror="this.onerror=null; this.src=/software/images/icons/sample-config.png"> Compute Starter Kit</a></li>
-
-                    <li> <a href="/software/sample-configs#dbaas"> <img class="workloads-icon" src="/software/images/icons/sample-config.svg" onerror="this.onerror=null; this.src=/software/images/icons/sample-config.png"> DBaaS</a></li>
-                </ul>
+            <div class="col-sm-6">
+                <img class="header-bullet" width="100%" src="/software/images/bullets/bullet-4.svg" onerror="this.onerror=null; this.src=/software/images/bullets/bullet-3.png" alt="Bullet 4">
+                <h3 class="has-bullet is-upprcs strong">The Marketplace</h3>
+                <p class="minheight100">If you're looking for OpenStack related products and services such as Distributions, Appliances, Public Clouds, Consultants, or Training check out our OpenStack Marketplace.</p>
+                <p>&nbsp; </p>
+                <p>
+                    <a href="https://www.openstack.org/marketplace/" class="btn btn-info software-link-button" role="button">Visit the Marketplace 
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-chevron-right fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </p>
 
             </div>
         </div>
 
-        <hr/>
-
-        <p>Find more products, support, and services in the <a href="/marketplace/">OpenStack Marketplace</a></p>
 
 
         <!-- End Page Content -->
