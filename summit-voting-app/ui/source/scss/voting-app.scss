@@ -4,7 +4,7 @@ $desktop-width: 768px;
 $darkblue: #2A4E68;
 $darkbluehover: #0C1722;
 $blue: #30739C;
-$red: #DA422F;
+$red: #ed1944;
 $redhover: #A51B1B;
 $lightblue: #edf2f7;
 $lightbluehover: #D4DCE5;
@@ -86,7 +86,7 @@ h3 {
     color: #2A4E68;
 }
 h5 {
-    color: #DA422F;
+    color: #ed1944;
     margin-bottom: 0;
 }
 a,
@@ -226,6 +226,7 @@ a.voting-btn:hover {
 .voting-app-logo .summit-hero-logo {
     margin: 0;
     float: none;
+    width: 40%;
 }
 .voting-app-title {
     float: left;
@@ -333,7 +334,7 @@ a.voting-btn:hover {
     margin-bottom: 30px;
 }
 .voting-dropdown .btn {
-    background: #DA422F;
+    background: #ed1944;
     color: white;
     padding: 10px;
     width: 100%;
