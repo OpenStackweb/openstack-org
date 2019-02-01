@@ -1687,6 +1687,15 @@ a.software-link-button {
   padding: 5px 25px;
 }
 
+@media (max-width: 790px) {
+  p.minheight100 {
+  min-height: 0px;
+  }
+  a.software-link-button {
+  margin-bottom:40px;
+  }
+}
+
 .fa-chevron-right.fa-inverse {
   color: #2B4D68;
   position: relative;
