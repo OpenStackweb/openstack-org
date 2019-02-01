@@ -69,7 +69,7 @@ class PresentationDetail extends React.Component {
 									<h5>Cast Your Vote</h5>
 									<VotingBar presentation={presentation} />
 									<div className="voting-tip">
-										<strong>TIP:</strong> You can vote quickly with your keyboard using the numbers below each option. You can navigate between presentations by using your left and right arrow keys (< and >).
+										<strong>TIP:</strong> You can vote quickly with your keyboard using the numbers below each option. You can navigate between presentations by using your left and right arrow keys (&larr; and &rarr;).
 									</div>
 								</div>
 							}
@@ -101,7 +101,7 @@ class PresentationDetail extends React.Component {
 						      			<h5>Cast Your Vote</h5>						      	
 							      		<VotingBar />
 								      	<div className="voting-tip">
-								        	<strong>TIP:</strong> You can vote quickly with your keyboard using the numbers below each option.
+								        	<strong>TIP:</strong> You can vote quickly with your keyboard using the numbers below each option. You can navigate between presentations by using your left and right arrow keys (&larr; and &rarr;).
 								      	</div>
 							      		
 							      		{presentation.user_comment &&
