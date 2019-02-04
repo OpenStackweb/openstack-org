@@ -105,14 +105,14 @@
                 </a>
             </div>
             <div class="text-container col-md-6 col-sm-12">
-                <h4 class="title-section">Learn from your peers in Breakout Sessions & Lightning Talks</h4>
+                <h4 class="title-section">Learn from your Peers in Breakout Sessions & Lightning Talks</h4>
                 <p>After keynotes, the week is full of presentations and panels covering open infrastructure use cases ranging from CI/CD, edge computing, and AI / machine learning to hybrid cloud and more. Expect to hear technical deep dives and use cases covering more than 35 open source projects that are used to build open infrastructure.</p>
                 <p><a class="btn btn-link" href="https://www.openstack.org/videos/">Check out past Summit session videos <i class="fa fa-chevron-right"></i></a></p>
             </div>
         </div>
         <div class="row">
             <div class="text-container col-md-6 col-sm-12">
-                <h4 class="title-section">Get Started Contributing with Mentoring and Workshops</h4>
+                <h4 class="title-section">Get Started Contributing with Mentoring and Hands-on Trainings</h4>
                 <p>New to open source or want to learn new skills from community experts? The Summit offers dozens of on-site training opportunities—at no additional cost—where you can begin contributing upstream, find a mentor, or learn best practices for upgrades, bare metal, container strategy, and more.</p>
             </div>
             <div class="video-container col-md-6 col-sm-12">
@@ -126,7 +126,7 @@
                 </a>
             </div>
             <div class="text-container col-md-6 col-sm-12">
-                <h4 class="title-section">Collaborate and influence the roadmap in the Forum sessions.</h4>
+                <h4 class="title-section">Collaborate and Influence Project Roadmaps at the Forum</h4>
                 <p>Join fellow operators and developers to collaborate and brainstorm the requirements for upcoming software releases, gather feedback for existing releases, and engage in strategic discussions about the direction of open infrastructure projects.</p>
             </div>
         </div>
