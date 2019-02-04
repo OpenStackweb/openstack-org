@@ -445,7 +445,7 @@
                     <div class="signature">
                         <span class="photo"></span>
                         <div class="info">
-                            <h5 class="name">Rob Hirschfeld</h5>
+                            <h5 class="name">Hellen Hao</h5>
                             <div class="company">Inspur</div>
                         </div>
 
