@@ -39,10 +39,10 @@
                 <div class="item">
                     <div class="video">
                     </div>
-                    <h4>Shangai, China</h4>
+                    <h4>Shanghai, China</h4>
                     <hp>Nov 2019</p>
                         <p>
-                            <a class="btn register-btn-lrg" href="/summit/shangai-2019">Learn More <i class="fa fa-arrow-right"></i></a>
+                            <a class="btn register-btn-lrg" href="/summit/shanghai-2019">Learn More <i class="fa fa-arrow-right"></i></a>
                         </p>
 
                 </div>
@@ -174,7 +174,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <h3>These organizations are coming together at the summit</h3>
+                <h3>These organizations are coming together at the Summit</h3>
             </div>
 
 

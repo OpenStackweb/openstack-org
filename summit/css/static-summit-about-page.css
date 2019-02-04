@@ -1417,7 +1417,8 @@ footer .logo {
 }
 
 footer .logo a {
-    background: url("../images/summit-logo-red.svg") center no-repeat;
+    background: url("/assets/Uploads/arrows.svg") center no-repeat;
+    background-size:100%;
     height: 3.5em;
     width: 3.5em;
     position: relative;
