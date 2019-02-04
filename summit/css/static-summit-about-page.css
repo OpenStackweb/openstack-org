@@ -88,9 +88,9 @@ button.btn i, a.btn i {
 }
 
 .summit-hero-landing .summit-hero-logo, .summit-hero-landing-short .summit-hero-logo  {
-    background: url("/assets/Uploads/arrows.svg") center no-repeat;
-    height: 2.5em;
-    width: 2.5em;
+    background: url(/assets/Uploads/arrows.svg) center no-repeat;
+    height: 4.5em;
+    width: 4.5em;
     position: relative;
     display: inline-block;
     margin: 0;
@@ -115,6 +115,7 @@ button.btn i, a.btn i {
 
 .summit-hero-landing .navbar .nav, .summit-hero-landing-short .navbar .nav  {
     border: none;
+    margin-top: 20px;
 }
 
 .summit-hero-landing .navbar .nav > li > a, .summit-hero-landing-short .navbar .nav > li > a  {
