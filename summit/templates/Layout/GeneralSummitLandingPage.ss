@@ -443,13 +443,13 @@
                         communities and users.”
                     </h5>
                     <div class="signature">
-                        <span class="photo photo-bis"></span>
+                        <span class="photo"></span>
                         <div class="info">
                             <h5 class="name">Rob Hirschfeld</h5>
                             <div class="company">Inspur</div>
                         </div>
 
-                        <span class="brand  second"></span>
+                        <span class="brand"></span>
                     </div>
                 </div>
 
@@ -466,7 +466,7 @@
                 <div class="box light item">
                     <h4>Contribute Upstream at the Project Teams Gathering</h4>
                     <p>Contributors and users will gather for extended working sessions for their projects.</p>
-                    <a class="btn" href="https://www.openstack.org/assets/berlin-summit/Berlin18-Summit-City-Guide-112.pdf">
+                    <a class="btn" href="https://www.openstack.org/ptg">
                         Learn More <i class="fa fa-arrow-right"></i>
                     </a>
                 </div>
@@ -490,7 +490,7 @@
                         <span class="photo photo-bis"></span>
                         <div class="info">
                             <h5 class="name">Johan Christenson</h5>
-                            <div class="company">City Networks</div>
+                            <div class="company">City Network</div>
                         </div>
 
                         <span class="brand  second"></span>
