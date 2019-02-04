@@ -297,10 +297,7 @@
                     Mailing lists
                 </div>
                 <div>
-                    <a href="http://lists.openstack.org/cgi-bin/mailman/listinfo/openstack" target="_blank">OpenStack general list</a><br>
-                    <a href="http://lists.openstack.org/cgi-bin/mailman/listinfo/openstack-dev" target="_blank">OpenStack development list</a><br>
-                    <a href="http://lists.openstack.org/cgi-bin/mailman/listinfo/openstack-operators" target="_blank">OpenStack operators list</a><br>
-                    <a href="http://lists.openstack.org/cgi-bin/mailman/listinfo/openstack-sigs" target="_blank">OpenStack Special Interest Groups list</a><br>
+                    <a href="http://lists.openstack.org/cgi-bin/mailman/listinfo/openstack-discuss" target="_blank">OpenStack Discussion list</a><br>
                     <a href="http://lists.openstack.org/cgi-bin/mailman/listinfo" target="_blank">List of all available mailing-lists</a>
                 </div>
             </div>

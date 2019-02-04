@@ -407,8 +407,8 @@ button.btn i, a.btn i {
 
 .text-wrapper.blue .megaphone {
     background: url("../images/megaphone.svg") center no-repeat;
-    width: 10em;
-    height: 10em;
+    width: 8em;
+    height: 8em;
     position: absolute;
     top: -4em;
     left: 0;
