@@ -204,7 +204,7 @@ footer {
     }
 
     .summit-hero-landing, .summit-hero-landing-short {
-        height: 50vh;
+        height: 60vh;
     }
 }
 
@@ -662,6 +662,14 @@ footer {
 
 .what-to-expect .row {
     margin: 0;
+}
+
+.what-to-expect a {
+    white-space: pre-wrap; /* css-3 */
+    white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+    white-space: -pre-wrap; /* Opera 4-6 */
+    white-space: -o-pre-wrap; /* Opera 7 */
+    word-wrap: break-word; /* Internet Explorer 5.5+ */
 }
 
 /* .what-to-expect .video-container, .what-to-expect .text-container {
@@ -1368,12 +1376,12 @@ footer {
     max-width: 5em;
 }
 
-.all-summit .summit-insights .video-container.video.first {
+.all-summit .summit-insights .video-container .video.first {
     background: url(../images/home/insight-2.jpg) center no-repeat;
     background-size: cover;
 }
 
-.all-summit .summit-insights .video-container.video.second {
+.all-summit .summit-insights .video-container .video.second {
     background: url(../images/home/insight-1.jpg) center no-repeat;
     background-size: cover;
 }
@@ -2055,7 +2063,7 @@ a.photo-credit {
     }
 
     .all-summit .summit-insights .box {
-        min-height: 14em;
+        min-height: 16em;
         margin-bottom: 1em;
     }
 
