@@ -1594,12 +1594,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/smarcet/silverstripe-cloudassets.git",
-                "reference": "6884d0d3fd8211241cab835d369cd977a30205f8"
+                "reference": "80de808df1671bcfa3f71f56547b3c82cd1b2ea8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/smarcet/silverstripe-cloudassets/zipball/6884d0d3fd8211241cab835d369cd977a30205f8",
-                "reference": "6884d0d3fd8211241cab835d369cd977a30205f8",
+                "url": "https://api.github.com/repos/smarcet/silverstripe-cloudassets/zipball/80de808df1671bcfa3f71f56547b3c82cd1b2ea8",
+                "reference": "80de808df1671bcfa3f71f56547b3c82cd1b2ea8",
                 "shasum": ""
             },
             "require": {
@@ -1639,7 +1639,7 @@
             "support": {
                 "source": "https://github.com/smarcet/silverstripe-cloudassets/tree/master"
             },
-            "time": "2018-11-20T20:33:59+00:00"
+            "time": "2019-02-05T13:28:48+00:00"
         },
         {
             "name": "mikemccabe/json-patch-php",
@@ -2145,12 +2145,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/OpenStackweb/openstack.git",
-                "reference": "ed23384532b7a984fc7d8df8d0216dfb94ca1732"
+                "reference": "eafc3de006ad505355556c0d2f3c4af2c6b5a44e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OpenStackweb/openstack/zipball/ed23384532b7a984fc7d8df8d0216dfb94ca1732",
-                "reference": "ed23384532b7a984fc7d8df8d0216dfb94ca1732",
+                "url": "https://api.github.com/repos/OpenStackweb/openstack/zipball/eafc3de006ad505355556c0d2f3c4af2c6b5a44e",
+                "reference": "eafc3de006ad505355556c0d2f3c4af2c6b5a44e",
                 "shasum": ""
             },
             "require": {
@@ -2208,7 +2208,7 @@
             "support": {
                 "source": "https://github.com/OpenStackweb/openstack/tree/master"
             },
-            "time": "2019-01-11T16:48:14+00:00"
+            "time": "2019-02-04T18:27:20+00:00"
         },
         {
             "name": "phpoffice/phpexcel",
@@ -5482,12 +5482,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "34fac14396f67b2401a35c3ea1e7eaf5ec404966"
+                "reference": "a6abdfaae74791e6c1f02b5d8f1038b4f117160f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/34fac14396f67b2401a35c3ea1e7eaf5ec404966",
-                "reference": "34fac14396f67b2401a35c3ea1e7eaf5ec404966",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a6abdfaae74791e6c1f02b5d8f1038b4f117160f",
+                "reference": "a6abdfaae74791e6c1f02b5d8f1038b4f117160f",
                 "shasum": ""
             },
             "require": {
@@ -5558,7 +5558,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2019-02-03T06:19:06+00:00"
+            "time": "2019-02-05T07:19:10+00:00"
         },
         {
             "name": "psr/container",
