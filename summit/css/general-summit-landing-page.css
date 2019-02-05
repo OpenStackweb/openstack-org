@@ -1135,10 +1135,6 @@ footer {
     width: 4em;
 }
 
-.summit-insights .container {
-    padding: 0;
-}
-
 .summit-insights {
     background-color: #000;
     padding-top: 5em;
@@ -1604,10 +1600,6 @@ ul.navbar-main {
 .all-summit .about-summit-header.white {
     padding: 0;
     background-image: none;
-}
-
-.all-summit .about-summit-header.white .container {
-    padding: 0 0 3em;
 }
 
 .all-summit .about-summit-header.white .container .session-box {}
