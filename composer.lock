@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "a43f53c632785afd7914256309b125fa",
+    "content-hash": "5b62c76e0e224082c1f76f62e337f23f",
     "packages": [
         {
             "name": "composer/installers",
@@ -3268,20 +3268,20 @@
         },
         {
             "name": "smarcet/silverstripe-cloudassets-swift",
-            "version": "1.0.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/smarcet/silverstripe-cloudassets-swift.git",
-                "reference": "308de3eee0705f6678eb9b7a62ecf47f594014dd"
+                "reference": "7dc2787bf7857f32956ef298ec8cd2e74726024e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/smarcet/silverstripe-cloudassets-swift/zipball/308de3eee0705f6678eb9b7a62ecf47f594014dd",
-                "reference": "308de3eee0705f6678eb9b7a62ecf47f594014dd",
+                "url": "https://api.github.com/repos/smarcet/silverstripe-cloudassets-swift/zipball/7dc2787bf7857f32956ef298ec8cd2e74726024e",
+                "reference": "7dc2787bf7857f32956ef298ec8cd2e74726024e",
                 "shasum": ""
             },
             "require": {
-                "markguinn/silverstripe-cloudassets": "~1.0",
+                "markguinn/silverstripe-cloudassets": "dev-master",
                 "php-opencloud/openstack": "dev-master",
                 "silverstripe/framework": "~3.1"
             },
@@ -3292,7 +3292,6 @@
                     "dev-master": "1.0.x-dev"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -3313,7 +3312,11 @@
                 "silverstripe",
                 "swift"
             ],
-            "time": "2019-01-11T17:27:47+00:00"
+            "support": {
+                "source": "https://github.com/smarcet/silverstripe-cloudassets-swift/tree/master",
+                "issues": "https://github.com/smarcet/silverstripe-cloudassets-swift/issues"
+            },
+            "time": "2019-02-04T18:51:56+00:00"
         },
         {
             "name": "symbiote/silverstripe-gridfieldextensions",
@@ -5482,12 +5485,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "a6abdfaae74791e6c1f02b5d8f1038b4f117160f"
+                "reference": "ca165740350f32e92ab37338848707bcd8ce8479"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a6abdfaae74791e6c1f02b5d8f1038b4f117160f",
-                "reference": "a6abdfaae74791e6c1f02b5d8f1038b4f117160f",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/ca165740350f32e92ab37338848707bcd8ce8479",
+                "reference": "ca165740350f32e92ab37338848707bcd8ce8479",
                 "shasum": ""
             },
             "require": {
@@ -5558,7 +5561,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2019-02-05T07:19:10+00:00"
+            "time": "2019-02-05T14:59:24+00:00"
         },
         {
             "name": "psr/container",
@@ -7015,6 +7018,7 @@
         "nnnick/chartjs": 20,
         "openid/php-openid": 20,
         "google/recaptcha": 20,
+        "smarcet/silverstripe-cloudassets-swift": 20,
         "markguinn/silverstripe-cloudassets": 20,
         "php-opencloud/openstack": 20,
         "behat/behat": 0,
