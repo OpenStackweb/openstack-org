@@ -29,6 +29,10 @@
     {
       "type": "vcs",
       "url": "https://github.com/OpenStackweb/openstack"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/smarcet/silverstripe-cloudassets-swift"
     }
   ],
   "require": {
@@ -76,7 +80,7 @@
     "paragonie/random_compat": "^2.0",
     "league/oauth2-client": "^2.2",
     "smarcet/caldavclient": "1.1.2",
-    "smarcet/silverstripe-cloudassets-swift": "1.0.0",
+    "smarcet/silverstripe-cloudassets-swift": "dev-master",
     "markguinn/silverstripe-cloudassets": "dev-master",
     "php-opencloud/openstack": "dev-master"
   },
