@@ -204,7 +204,8 @@ footer {
     }
 
     .summit-hero-landing, .summit-hero-landing-short {
-        height: 60vh;
+        height: auto;
+        min-height: 50vh;
     }
 }
 
