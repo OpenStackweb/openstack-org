@@ -2144,6 +2144,7 @@ a.photo-credit {
 .row-eq-height > [class*='col-'] {
     display: flex;
     flex-direction: column;
+    -webkit-flex: 1 1 15em;
 }
 
 .row-eq-height .item {
