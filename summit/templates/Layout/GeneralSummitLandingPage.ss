@@ -24,7 +24,7 @@
                         </a>
                     </div>
                     <h4>Denver, Colorado</h4>
-                    <p>May 23-25, 2019</p>
+                    <p>Apr 29-May 4, 2019</p>
                     <p>
                         <a href="/summit/denver-2019" target="_blank" class="btn register-btn-lrg eventbrite-register-link ">
                             Learn More
