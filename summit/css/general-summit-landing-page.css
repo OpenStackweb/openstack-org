@@ -682,7 +682,8 @@ footer {
     background: url("../images/thumb_video.jpg") center top no-repeat;
     background-size: cover;
     width: 100%;
-    height: 20em;
+    /*height: 20em;*/
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1014,7 +1015,7 @@ footer {
     background-color: #fff;
     position: relative;
     min-height: 20em;
-    max-height: 20em;
+    /*max-height: 20em;*/
 }
 
 .summit-insights .box.big {
@@ -1190,6 +1191,8 @@ footer {
 @media (min-width: 1200px) {
     .summit-insights .pink.box.big a.btn {
         margin-top: 1em;
+        bottom: 20px;
+        position: absolute;
     }
 }
 
@@ -1296,9 +1299,9 @@ footer {
 
 .all-summit .summit-insights .video {
     margin-bottom: 2em;
-    height: 20em;
     position: relative;
     text-align: center;
+    min-height: 18em;
 }
 
 .summit-insights .video .embed-video {
@@ -1450,7 +1453,6 @@ footer {
 @media all and (max-width: 991px) {
     .summit-insights .box {
         min-height: 12em;
-        max-height: 15em;
     }
 
     .summit-insights .video {
@@ -2006,15 +2008,14 @@ a.photo-credit {
     }
 
     .all-summit .what-to-expect .video-container, .all-summit .what-to-expect .text-container {
-        margin: 1em 0;
-        height: 20em;
+        margin: 0.5em 0;
+        /*height: 20em;*/
     }
-
 
      .all-summit .what-to-expect .text-container {
         padding: 2em;
         font-size: 90%;
-        min-height:28em;
+        min-height:10em;
     }
 
     .all-summit .what-to-expect .video-container .video {
@@ -2031,7 +2032,7 @@ a.photo-credit {
     }
 
     .all-summit .what-to-expect .row {
-        margin: 0 0 -1em 0;
+        margin: 0;
     }
 
     .all-summit .summits-wrap .timeline span {
@@ -2055,6 +2056,11 @@ a.photo-credit {
 
     .all-summit .summit-insights .box {
         min-height: 14em;
+        margin-bottom: 1em;
+    }
+
+    .all-summit .summit-insights .video {
+        margin-bottom: 1em;
     }
 }
 
@@ -2117,4 +2123,20 @@ a.photo-credit {
     a.register-btn-lrg i, .register-btn-lrg i {
         margin-left: 0.35em;
     }
+}
+
+.row-eq-height {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display:         flex;
+    flex-wrap: wrap;
+}
+.row-eq-height > [class*='col-'] {
+    display: flex;
+    flex-direction: column;
+}
+
+.row-eq-height .item {
+    height: 100%
 }

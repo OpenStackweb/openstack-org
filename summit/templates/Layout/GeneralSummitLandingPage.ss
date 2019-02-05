@@ -82,7 +82,7 @@
                 <h3>What to Expect</h3>
             </div>
         </div>
-        <div class="row">
+        <div class="row row-eq-height">
             <div class="text-container col-md-6 col-sm-12">
                 <h4 class="title-section">Get Inspired by the Keynotes</h4>
                 <p>Kick off the Summit by joining thousands of community members to witness open infrastructure in action: hear project updates from technical leaders, learn how operators are running open infrastructure in production, and brace yourself for the live demos. The keynotes will set you up to understand the open infrastructure vision, trends and latest news, so you can be prepared to have a successful Summit week.</p>
@@ -96,21 +96,21 @@
                 </a>
             </div>
         </div>
-        <div class="row">
-            <div class="video-container col-md-6 col-sm-12">
+        <div class="row row-eq-height">
+            <div class="text-container col-md-6 col-sm-12 col-md-push-6">
+                <h4 class="title-section">Learn from your Peers in Breakout Sessions & Lightning Talks</h4>
+                <p>After keynotes, the week is full of presentations and panels covering open infrastructure use cases ranging from CI/CD, edge computing, and AI / machine learning to hybrid cloud and more. Expect to hear technical deep dives and use cases covering more than 35 open source projects that are used to build open infrastructure.</p>
+                <p><a class="btn btn-link" href="https://www.openstack.org/videos/">Check out past Summit session videos <i class="fa fa-chevron-right"></i></a></p>
+            </div>
+            <div class="video-container col-md-6 col-sm-12 col-md-pull-6">
                 <a href="https://www.openstack.org/videos/" class="play video second">
                     <span>
                         <i class="fal fa-play"></i>
                     </span>
                 </a>
             </div>
-            <div class="text-container col-md-6 col-sm-12">
-                <h4 class="title-section">Learn from your Peers in Breakout Sessions & Lightning Talks</h4>
-                <p>After keynotes, the week is full of presentations and panels covering open infrastructure use cases ranging from CI/CD, edge computing, and AI / machine learning to hybrid cloud and more. Expect to hear technical deep dives and use cases covering more than 35 open source projects that are used to build open infrastructure.</p>
-                <p><a class="btn btn-link" href="https://www.openstack.org/videos/">Check out past Summit session videos <i class="fa fa-chevron-right"></i></a></p>
-            </div>
         </div>
-        <div class="row">
+        <div class="row row-eq-height">
             <div class="text-container col-md-6 col-sm-12">
                 <h4 class="title-section">Get Started Contributing with Mentoring and Hands-on Trainings</h4>
                 <p>New to open source or want to learn new skills from community experts? The Summit offers dozens of on-site training opportunities—at no additional cost—where you can begin contributing upstream, find a mentor, or learn best practices for upgrades, bare metal, container strategy, and more.</p>
@@ -120,14 +120,14 @@
                 </a>
             </div>
         </div>
-        <div class="row">
-            <div class="video-container col-md-6 col-sm-12">
-                <a class="play video last">
-                </a>
-            </div>
-            <div class="text-container col-md-6 col-sm-12">
+        <div class="row row-eq-height">
+            <div class="text-container col-md-6 col-sm-12 col-md-push-6">
                 <h4 class="title-section">Collaborate and Influence Project Roadmaps at the Forum</h4>
                 <p>Join fellow operators and developers to collaborate and brainstorm the requirements for upcoming software releases, gather feedback for existing releases, and engage in strategic discussions about the direction of open infrastructure projects.</p>
+            </div>
+            <div class="video-container col-md-6 col-sm-12 col-md-pull-6">
+                <a class="play video last">
+                </a>
             </div>
         </div>
     </div>
@@ -388,9 +388,8 @@
 
 <div class="summit-insights">
     <div class="container">
-        <div class="row">
+        <div class="row row-eq-height">
             <div class="col-lg-4 col-md-4 col-sm-12">
-
                 <div class="pink box item big">
                     <h4>Get buy in from your boss</h4>
                     <p>Justifying your trip to Denver this April is easier when armed with the right information.</p>
@@ -410,6 +409,64 @@
 
                     <a class="btn" href="{$CurrentSummit.Link}sample-letter/">Sample Letter <i class="fa fa-arrow-right"></i></a>
                 </div>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-12">
+                <div class="row row-eq-height">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="video-container video second item">
+                            <a href="https://youtu.be/8I2P1QKxUZA" class="play">
+                        <span>
+                            <i class="fa fa-play"></i>
+                        </span>
+                            </a>
+                            <div class="video-cover">
+                                <h5>Lets Build the Open Infrastructure Economy</h5>
+                                <h6>Vancouver 2018</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="box light item">
+                            <h4>Contribute Upstream at the Project Teams Gathering</h4>
+                            <p>Contributors and users will gather for extended working sessions for their projects.</p>
+                            <a class="btn" href="https://www.openstack.org/ptg">
+                                Learn More <i class="fa fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-eq-height">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="box light item">
+                            <h5 class="insight">
+                                “The Summit is a great opportunity for a member company to show, share and learn from
+                                communities and users.”
+                            </h5>
+                            <div class="signature">
+                                <span class="photo"></span>
+                                <div class="info">
+                                    <h5 class="name">Hellen Hao</h5>
+                                    <div class="company">Inspur</div>
+                                </div>
+
+                                <span class="brand"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="pink box item community">
+                            <h4>What to expect from your first OpenStack Summit</h4>
+                            <p>Community leaders share tips and need-to-knows for the Summit-curious.</p>
+
+                            <a class="btn" href="http://superuser.openstack.org/articles/first-openstack-summit-vancouver-2/"
+                               target="_blank">Read the article<i class="fa fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row row-eq-height">
+            <div class="col-lg-4 col-md-4 col-sm-12">
                 <div class="video-container video first item">
                     <a href="https://youtu.be/8I2P1QKxUZA" class="play">
                         <span>
@@ -421,38 +478,8 @@
                         <h6>Vancouver 2018</h6>
                     </div>
                 </div>
-
             </div>
             <div class="col-lg-4 col-md-4 col-sm-12">
-
-                <div class="video-container video second item">
-                    <a href="https://youtu.be/8I2P1QKxUZA" class="play">
-                        <span>
-                            <i class="fa fa-play"></i>
-                        </span>
-                    </a>
-                    <div class="video-cover">
-                        <h5>Lets Build the Open Infrastructure Economy</h5>
-                        <h6>Vancouver 2018</h6>
-                    </div>
-                </div>
-
-                <div class="box light item">
-                    <h5 class="insight">
-                        “The Summit is a great opportunity for a member company to show, share and learn from
-                        communities and users.”
-                    </h5>
-                    <div class="signature">
-                        <span class="photo"></span>
-                        <div class="info">
-                            <h5 class="name">Hellen Hao</h5>
-                            <div class="company">Inspur</div>
-                        </div>
-
-                        <span class="brand"></span>
-                    </div>
-                </div>
-
                 <div class="box light item  spec">
                     <h4>How are OpenStack Summit sessions selected?</h4>
                     <p>What’s new and time-tested tips for the July 17 deadline</p>
@@ -461,25 +488,7 @@
                     </a>
                 </div>
             </div>
-
             <div class="col-lg-4 col-md-4 col-sm-12">
-                <div class="box light item">
-                    <h4>Contribute Upstream at the Project Teams Gathering</h4>
-                    <p>Contributors and users will gather for extended working sessions for their projects.</p>
-                    <a class="btn" href="https://www.openstack.org/ptg">
-                        Learn More <i class="fa fa-arrow-right"></i>
-                    </a>
-                </div>
-
-
-                <div class="pink box item community">
-                    <h4>What to expect from your first OpenStack Summit</h4>
-                    <p>Community leaders share tips and need-to-knows for the Summit-curious.</p>
-
-                    <a class="btn" href="http://superuser.openstack.org/articles/first-openstack-summit-vancouver-2/"
-                        target="_blank">Read the article<i class="fa fa-arrow-right"></i></a>
-                </div>
-
                 <div class="box more-text light item">
                     <h5 class="insight">
                         “The overall quality of leads is spot on. The conversations were extremely valuable,
@@ -496,9 +505,7 @@
                         <span class="brand  second"></span>
                     </div>
                 </div>
-
             </div>
-
         </div>
     </div>
 </div>
