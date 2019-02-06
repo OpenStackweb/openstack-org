@@ -657,7 +657,7 @@ class PresentationPage_ManageRequest extends RequestHandler
         }
 
         if ($speaker->isInDB() &&
-           (!$speaker->Presentations()->byID($this->presentation->ID) && $this->presentation->ModeratorID != $speaker->ID)) {
+           !$speaker->Presentations()->byID($this->presentation->ID)) {
             return $this->httpError(403, 'That speaker is not part of this presentation');
         }
 
@@ -1006,6 +1006,31 @@ class PresentationPage_ManageRequest extends RequestHandler
      */
     public function doAddSpeaker($data, $form)
     {
+        return $this->doAddSpeakerByRole(IPresentationSpeaker::RoleSpeaker, $data, $form);
+    }
+
+
+    /**
+     * Handles the form submission that creates a new speaker.
+     * Checks for existence, and uses existing if found
+     * @param   $data array
+     * @param   $form Form
+     * @return  SSViewer
+     */
+    public function doAddModerator($data, $form)
+    {
+        return $this->doAddSpeakerByRole(IPresentationSpeaker::RoleModerator, $data, $form);
+    }
+
+
+    /**
+     * @param $role
+     * @param $data
+     * @param $form
+     * @return SS_HTTPResponse
+     */
+    public function doAddSpeakerByRole($role, $data, $form)
+    {
 
         try
         {
@@ -1051,7 +1076,8 @@ class PresentationPage_ManageRequest extends RequestHandler
                 $this->presentation,
                 $email,
                 $member,
-                $speaker
+                $speaker,
+                $role
             );
 
             return $this->parent->redirect

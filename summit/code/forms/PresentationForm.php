@@ -77,7 +77,7 @@ final class PresentationForm extends BootstrapForm
         foreach($types as $type){
             $instructions .= $type->Type;
             if(intval($type->MaxSpeakers > 0))
-                $instructions .= sprintf(" Max %s moderators", $type->MaxSpeakers);
+                $instructions .= sprintf(" Max %s speakers", $type->MaxSpeakers);
 
             if(intval($type->MaxModerators > 0))
                 $instructions .= sprintf(" %s moderator", $type->MaxModerators);

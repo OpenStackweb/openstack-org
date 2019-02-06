@@ -95,10 +95,10 @@ $(document).ready(function(){
             else $('.moderator-container').hide();
 
             if(moderatorMandatory){
-                $('#moderator').rules('add',{ required : true});
+                $('#moderators').rules('add',{ required : true});
             }
             else{
-                $('#moderator').rules("remove");
+                $('#moderators').rules("remove");
             }
             $('.moderator-label').text(moderatorLabel);
             $('.level_container').show();
@@ -116,7 +116,7 @@ $(document).ready(function(){
             $('.moderator-container').hide();
             $('.speakers-container').hide();
             $('.to_record_container').hide();
-            $('#moderator').rules("remove");
+            $('#moderators').rules("remove");
             $('#speakers').rules("remove");
 
             // only prepopulate on new
@@ -175,10 +175,49 @@ $(document).ready(function(){
         ]
     });
 
+    // moderators autocomplete
+
+    var moderators_source = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: {
+            url: 'api/v1/summits/'+summit_id+'/speakers/search?term=%QUERY',
+            wildcard: '%QUERY'
+        }
+    });
+
+    $('#moderators').tagsinput({
+        itemValue: 'unique_id',
+        itemText: 'name',
+        freeInput: false,
+        allowDuplicates: false,
+        trimValue: true,
+        tagClass: function(item) {
+            return 'label label-info speaker_' + item.speaker_id ;
+        },
+        typeaheadjs: [
+            {
+                hint: true,
+                highlight: true,
+                minLength: 1
+            },
+            {
+                name: 'moderators_source',
+                displayKey: 'name',
+                source: moderators_source,
+                limit: 20
+            }
+        ]
+    });
+
     var speakers_emails = [];
     $.each(speakers, function(index, value) {
         $('#speakers').tagsinput('add', value);
         speakers_emails.push(value.email);
+    });
+
+    $.each(moderators, function(index, value) {
+        $('#moderators').tagsinput('add', value);
     });
 
     var email_href = $('#email-speakers').attr('href')+speakers_emails.join();
@@ -186,6 +225,12 @@ $(document).ready(function(){
     $('#email-speakers').attr('href',email_href);
 
     $("#speakers").bind("paste", function(e){
+        // access the clipboard using the api
+        var pastedData = e.originalEvent.clipboardData.getData('text');
+        alert(pastedData);
+    } );
+
+    $("#moderators").bind("paste", function(e){
         // access the clipboard using the api
         var pastedData = e.originalEvent.clipboardData.getData('text');
         alert(pastedData);
@@ -263,44 +308,6 @@ $(document).ready(function(){
     $.each(sponsors, function(index, value) {
         $('#sponsors').tagsinput('add', value);
     });
-    // moderator autocomplete
-
-    var moderators_source = new Bloodhound({
-        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
-        queryTokenizer: Bloodhound.tokenizers.whitespace,
-        remote: {
-            url: 'api/v1/summits/'+summit_id+'/speakers/search?term=%QUERY',
-            wildcard: '%QUERY'
-        }
-    });
-
-    $('#moderator').tagsinput({
-        itemValue: 'unique_id',
-        itemText: 'name',
-        freeInput: false,
-        maxTags: 1,
-        trimValue: true,
-        tagClass: function(item) {
-            return 'label label-info speaker_' + item.speaker_id ;
-        },
-        typeaheadjs: [
-            {
-                hint: true,
-                highlight: true,
-                minLength: 3
-            },
-            {
-                name: 'moderators_source',
-                displayKey: 'name',
-                source: moderators_source,
-                limit: 20
-            }
-        ]
-    });
-
-    if (!$.isEmptyObject(moderator)) {
-        $('#moderator').tagsinput('add', moderator);
-    }
 
     // groups autocomplete
 
@@ -500,7 +507,7 @@ $(document).ready(function(){
             tags: $('#tags').val(),
             sponsors: $('#sponsors').val(),
             speakers: $('#speakers').tagsinput('items'),
-            moderator: $('#moderator').tagsinput('items')[0],
+            moderators: $('#moderators').tagsinput('items'),
             groups: $('#groups').tagsinput('items'),
             publish: publish,
             to_record: ($('#to_record').prop('checked')) ? 1 : 0,

@@ -26,6 +26,9 @@
             <% if $Actions.dataFieldByName(action_doAddSpeaker).Exists() %>
                 $Actions.dataFieldByName(action_doAddSpeaker)
             <% end_if %>
+            <% if $Actions.dataFieldByName(action_doAddModerator).Exists() %>
+                $Actions.dataFieldByName(action_doAddModerator)
+            <% end_if %>
             <br><hr><br>
             <div class="col-md-4 col-xs-12 col-sm-4">
                 $Actions.dataFieldByName(action_PrevStep)

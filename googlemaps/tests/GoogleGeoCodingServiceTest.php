@@ -21,7 +21,7 @@ class GoogleGeoCodingServiceTest extends SapphireTest
     }
 
     public function testCityCoordinates(){
-        $repository_mock = Mockery::mock(IGeoCodingQueryRepository::class);
+        $repository_mock = Mockery::mock("IGeoCodingQueryRepository");
         $repository_mock->shouldReceive("getByGeoQuery")->andReturnNull();
         $repository_mock->shouldReceive("add")->andReturnNull();
         $service = new GoogleGeoCodingService

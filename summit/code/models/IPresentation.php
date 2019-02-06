@@ -133,10 +133,6 @@ interface IPresentation extends ISummitEvent
      */
     public function setComplete();
 
-    /**
-     * @return void
-     */
-    public function unsetModerator();
 
     /**
      * @param IPresentationSpeaker $speaker
@@ -166,4 +162,114 @@ interface IPresentation extends ISummitEvent
      */
     public function getWordCloud();
 
+    /**
+     * @return bool
+     */
+    public function useModerators():bool;
+
+    /**
+     * @return bool
+     */
+    public function UseSpeakers():bool;
+
+    /**
+     * @return bool
+     */
+    public function maxModeratorsReached():bool;
+
+    /**
+     * @param string $role
+     * @return bool
+     */
+    public function minSpeakerReachedPerRole(string $role):bool;
+
+    /**
+     * @param string $role
+     * @return bool
+     */
+    public function maxSpeakerReachedPerRole(string $role):bool;
+
+    /**
+     * @return int
+     */
+    public function getModeratorsCount():int;
+
+    /**
+     * @return bool
+     */
+    public function hasModerators():bool;
+
+    /**
+     * @return int
+     */
+    public function getSpeakersCount():int;
+
+    /**
+     * @return bool
+     */
+    public function hasSpeakers():bool;
+
+    /**
+     * @return bool
+     */
+    public function areSpeakersMandatory():bool;
+
+    /**
+     * @return bool
+     */
+    public function areModeratorsMandatory():bool;
+
+    /**
+     * @return int
+     */
+    public function maxModerators():int;
+
+    /**
+     * @return int
+     */
+    public function maxSpeakers():int;
+
+    /**
+     * @return int
+     */
+    public function minModerators():int;
+
+    /**
+     * @return int
+     */
+    public function minSpeakers():int;
+
+    /**
+     * @return string
+     */
+    public function getNextSpeakerRoleToAdd():string;
+
+    /**
+     * @param string $role
+     * @return bool
+     */
+    public function isSpeakerRoleMandatory(string $role):bool;
+
+    /**
+     * @param string $role
+     * @return bool
+     */
+    public function existsSpeakersPerRole(string $role): bool;
+
+    /**
+     * @param string $role
+     * @return int
+     */
+    public function getMinQtyPerRole(string $role):int;
+
+    /**
+     * @return array
+     */
+    public function getSpeakersAllowedRoles(): array;
+
+    /**
+     * @param string $role
+     * @return bool
+     */
+    public function hasSpeakerInRole(string $role):bool;
 }

@@ -219,7 +219,7 @@
             </div>
             <script>
                 var speakers          = [];
-                var moderator         = {};
+                var moderators        = [];
                 var summit_begin_date = '{$Summit.getSummitBeginDate("Y-m-d")}';
                 var summit_end_date   = '{$Summit.getSummitEndDate("Y-m-d")}';
                 var summit_start_time = '{$Summit.getSummitBeginDate("H:i:s")}';
@@ -238,17 +238,15 @@
             </div>
             <div class="form-group moderator-container" style="display:none;">
                 <div class="row">
-                    <div class="col-md-12">
-                        <label for="moderator" class="moderator-label">
-                            Moderator
-                        </label><br>
-                        <input id="moderator" name="moderator"/>
+                    <div class="col-md-10">
+                        <label for="moderators">Moderators</label><br>
+                        <input id="moderators" name="moderators"/>
                     </div>
                 </div>
             </div>
             <script>
                 <% if $Event && $Event.isPresentation && $Event.Speakers() %>
-                    <% loop $Event.Speakers() %>
+                    <% loop $Event.getSpeakersByRole(Speaker) %>
                     speakers.push({
                         unique_id : "{$MemberID}_{$ID}",
                         name : "{$FirstName.JS} {$LastName.JS}  ({$getEmail})",
@@ -258,15 +256,18 @@
                     });
                     <% end_loop %>
                 <% end_if %>
-                <% if $Event && $Event.isPresentation && $Event.Moderator().Exists %>
-                moderator = {
-                                unique_id : "{$Event.Moderator.MemberID}_{$Event.Moderator.ID}",
-                                name : "{$Event.Moderator.FirstName.JS} {$Event.Moderator.LastName.JS}  ({$Event.Moderator.getEmail})",
-                                speaker_id : $Event.Moderator.ID,
-                                member_id:  $Event.Moderator.MemberID,
-                                email: "$Event.Moderator.getEmail"
-                            };
-                <% end_if %>
+               <% if $Event && $Event.isPresentation && $Event.Speakers() %>
+                        <% loop $Event.getSpeakersByRole(Moderator) %>
+                        moderators.push({
+                            unique_id : "{$MemberID}_{$ID}",
+                            name : "{$FirstName.JS} {$LastName.JS}  ({$getEmail})",
+                            speaker_id : $ID,
+                            member_id: $MemberID,
+                            email:"$getEmail"
+                        });
+                        <% end_loop %>
+               <% end_if %>
+
             </script>
             <% if $Event%>
                 <% if $Event.isPublished %>

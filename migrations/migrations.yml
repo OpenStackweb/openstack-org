@@ -119,3 +119,4 @@ migrations:
   - PageLinkMigration
   - LanguagesUpdateMigration
   - CleanupSpeakerEmptyRelations
+  - PresentationModeratorsMigration

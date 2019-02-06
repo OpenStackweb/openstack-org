@@ -68,13 +68,17 @@ final class ScheduleEventSearchViewModelMapper implements IViewModelMapper
             }
 
             if ($e instanceof Presentation) {
-                $speakers = array();
-                foreach ($e->Speakers() as $s) {
-                    array_push($speakers, $s->ID);
+                $speakers = [];
+                $moderators = [];
+                foreach ($e->getSpeakersByRole(IPresentationSpeaker::RoleSpeaker) as $s) {
+                    $speakers[] = $s->ID;
+                }
+                foreach ($e->getSpeakersByRole(IPresentationSpeaker::RoleModerator) as $s) {
+                    $moderators[] = $s->ID;
                 }
 
                 $entry['speakers_id'] = $speakers;
-                $entry['moderator_id'] = $e->ModeratorID;
+                $entry['moderators_id'] = $moderators;
                 $entry['track_id'] = $e->CategoryID;
                 $entry['level'] = $e->Level;
                 $entry['to_record'] = boolval($e->ToRecord);

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Class AddSpeakerForm
  */
@@ -42,34 +41,31 @@ final class AddSpeakerForm extends BootstrapForm
     }
 
     protected function getFormFields() {
-        $presentation_type      = $this->presentation->getTypeName();
-        $max_speakers_reached   = $this->presentation->maxSpeakersReached();
-        $use_speakers           = $this->presentation->Type()->UseSpeakers;
-        $min_speakers           = intval($this->presentation->Type()->MinSpeakers);
-        $min_moderators         = intval($this->presentation->Type()->MinModerators);
-        $moderator_count        = $this->presentation->Moderator()->exists() ? 1 : 0;
-        $speaker_mandatory      = $this->presentation->Type()->AreSpeakersMandatory || $min_speakers > 0;
-        $moderator_mandatory    = $this->presentation->Type()->IsModeratorMandatory || $min_moderators > 0;
-        $speakers_count         = $this->presentation->Speakers()->count();
-        $max_moderators_reached = $this->presentation->maxModeratorsReached();
-        $use_moderator          = $this->presentation->Type()->UseModerator;
-        $speaker_type           = ($use_moderator && (!$max_moderators_reached || !$use_speakers)) ? 'moderator' : 'speaker';
+        $presentation_type = $this->presentation->getTypeName();
+        $role              = $this->presentation->getNextSpeakerRoleToAdd();
+        $min_qty           = $this->presentation->getMinQtyPerRole($role);
+        $formatter         = new NumberFormatter("en", NumberFormatter::SPELLOUT);
 
         $fields = FieldList::create(
             LiteralField::create('SpeakerNote',
-                '<p class="at-least-one">Each '.$presentation_type.' needs at least one '.$speaker_type.'. You cannot submit your '.$presentation_type.' without a '.$speaker_type.'. If you are speaking AND you are the '.$presentation_type.' owner, you still must add yourself as a '.$speaker_type.'.</p>'),
+                '<p class="at-least-one">Each '.$presentation_type.' needs at least '.$formatter->format($min_qty).' '.$role.
+                '. You cannot submit your '.$presentation_type.' without a '.$role.
+                '. If you are speaking AND you are the '.$presentation_type.' owner, you still must add yourself as a '.$role.'.</p>'),
             OptionsetField::create('SpeakerType', '', array(
-                'Me'   => 'Add yourself as a '.$speaker_type.' to this '.$presentation_type,
+                'Me'   => 'Add yourself as a '.$role.' to this '.$presentation_type,
                 'Else' => 'Add someone else'
             ))->setValue('Me'),
             LiteralField::create('LegalMe', sprintf('
                 <div id="legal-me" style="display: none;">
                  <label>
-                    '.ucfirst($speaker_type).'s agree that OpenStack Foundation may record and publish their talks presented during the %s Open Infrastructure Summit. If you submit a proposal on behalf of a '.$speaker_type.', you represent to OpenStack Foundation that you have the authority to submit the proposal on the '.$speaker_type.'’s behalf and agree to the recording and publication of their presentation.
+                    '.ucfirst($role).'s agree that OpenStack Foundation may record and publish their talks presented '.
+                    'during the %s Open Infrastructure Summit. If you submit a proposal on behalf of a '.$role.
+                    ', you represent to OpenStack Foundation that you have the authority to submit the proposal on the '.
+                    $role.'’s behalf and agree to the recording and publication of their presentation.
                 </label>
                 </div>', $this->summit->Title)),
             TextField::create('EmailAddress',
-                "To add another person as a ".$speaker_type.", you will need their first name, last name or email address. (*)")
+                "To add another person as a ".$role.", you will need their first name, last name or email address. (*)")
                 ->displayIf('SpeakerType')
                 ->isEqualTo('Else')
                 ->end(),
@@ -78,7 +74,10 @@ final class AddSpeakerForm extends BootstrapForm
             LiteralField::create('LegalOther', sprintf('
                 <div id="legal-other" style="display: none;">
                  <label>
-                    Speakers and moderators agree that OpenStack Foundation may record and publish their talks presented during the %s Open Infrastructure Summit. If you submit a proposal on behalf of a '.$speaker_type.', you represent to OpenStack Foundation that you have the authority to submit the proposal on the '.$speaker_type.'’s behalf and agree to the recording and publication of their presentation.
+                    Speakers and moderators agree that OpenStack Foundation may record and publish their talks presented'.
+                    'during the %s Open Infrastructure Summit. If you submit a proposal on behalf of a '.$role.
+                    ', you represent to OpenStack Foundation that you have the authority to submit the proposal on the '.
+                    $role.'’s behalf and agree to the recording and publication of their presentation.
                 </label>
                 </div>', $this->summit->Title)
             )
@@ -87,32 +86,50 @@ final class AddSpeakerForm extends BootstrapForm
         if (Member::currentUser()->isSpeakerOn($this->presentation)
             || $this->presentation->ModeratorID == Member::currentUser()->getSpeakerProfile()->ID) {
             $fields->replaceField('SpeakerType', HiddenField::create('SpeakerType', '', 'Else'));
-            $fields->replaceField('EmailAddress', TextField::create('EmailAddress', 'Enter the first name, last name or email address of your '.$speaker_type.' (*)'));
+            $fields->replaceField('EmailAddress', TextField::create
+            (
+                'EmailAddress',
+                'Enter the first name, last name or email address of your '.$role.' (*)')
+            );
         }
 
-        $exists_speakers = $speaker_type == 'speaker' ? $speakers_count > 0 : $moderator_count > 0;
-        $reached_max = $speaker_type == 'speaker' ? $max_speakers_reached : $max_moderators_reached;
+        $removeSpeakerNoteField  = false;
+        $removeEmailAddressField = false;
+        $removeSpeakerTypeField  = false;
 
-        if ($exists_speakers) {
-            if ($reached_max) {
+        foreach ($this->presentation->getSpeakersAllowedRoles() as $role) {
+            if(!$this->presentation->hasSpeakerInRole($role)) continue;
+            if($this->presentation->maxSpeakerReachedPerRole($role)){
                 $fields->insertBefore(
-                    LiteralField::create('LimitSpeakers', '<h3 class="limit-speakers">You have reached the maximum of '.$speaker_type.'s.</h3>'),
+                    LiteralField::create
+                    (
+                        'LimitSpeakers'.$role,
+                        '<h3 class="limit-speakers">You have reached the maximum of '.$role .'s.</h3>'
+                    ),
                     'SpeakerNote'
                 );
-                $fields->removeField('SpeakerNote');
-                $fields->removeField('EmailAddress');
-                $fields->removeField('SpeakerType');
-
+                $removeSpeakerNoteField  = true;
+                $removeEmailAddressField = true;
+                $removeSpeakerTypeField  = true;
             }
             else // can add more ...
             {
                 $fields->insertBefore(
-                    LiteralField::create('MoreSpeakers', '<h3 class="more-speakers">Any more '.$speaker_type.' to add?</h3>'),
+                    LiteralField::create('MoreSpeakers', '<h3 class="more-speakers">Any more '.$role.' to add?</h3>'),
                     'SpeakerNote'
                 );
-                $fields->removeField('SpeakerNote');
+                $removeSpeakerNoteField  = true;
+                $removeEmailAddressField = false;
+                $removeSpeakerTypeField  = false;
             }
         }
+
+        if($removeSpeakerNoteField)
+            $fields->removeField('SpeakerNote');
+        if($removeEmailAddressField)
+            $fields->removeField('EmailAddress');
+        if($removeSpeakerTypeField)
+            $fields->removeField('SpeakerType');
 
         $fields->add($continue_field = new HiddenField('Continue','',1));
         $continue_field->addExtraClass('continue_field');
@@ -122,35 +139,31 @@ final class AddSpeakerForm extends BootstrapForm
 
     protected function getFormActions($controller) {
 
-        $max_speakers_reached   = $this->presentation->maxSpeakersReached();
-        $use_speakers           = $this->presentation->Type()->UseSpeakers;
-        $min_speakers           = intval($this->presentation->Type()->MinSpeakers);
-        $min_moderators         = intval($this->presentation->Type()->MinModerators);
-        $moderator_count        = $this->presentation->Moderator()->exists() ? 1 : 0;
-        $speaker_mandatory      = $this->presentation->Type()->AreSpeakersMandatory || $min_speakers > 0;
-        $moderator_mandatory    = $this->presentation->Type()->IsModeratorMandatory || $min_moderators > 0;
-        $speakers_count         = $this->presentation->Speakers()->count();
-        $max_moderators_reached = $this->presentation->maxModeratorsReached();
-        $use_moderator          = $this->presentation->Type()->UseModerator;
-        $speaker_type           = ($use_moderator && (!$max_moderators_reached || !$use_speakers)) ? 'moderator' : 'speaker';
-        $actions                = [];
+        $current_role      = $this->presentation->getNextSpeakerRoleToAdd();
+        $actions           = [];
+        $is_role_mandatory = $this->presentation->isSpeakerRoleMandatory($current_role);
+        $reached_minimun   = $this->presentation->minSpeakerReachedPerRole($current_role);
+        $exists_speakers   = $this->presentation->existsSpeakersPerRole($current_role);
 
-        $should_add = $speaker_type == 'speaker' ? $speaker_mandatory : $moderator_mandatory;
-        $reached_minimun = $speaker_type == 'speaker' ? $min_speakers <= $speakers_count : $min_moderators <= $moderator_count;
-        $exists_speakers = $speaker_type == 'speaker' ? $speakers_count > 0 : $moderator_count > 0;
+        if(empty($current_role))
+            return new FieldList([
+                $controller->createSaveActions('doFinishSpeaker', 3)
+            ]);
 
-        if($should_add && !$reached_minimun){
-            $action_text = 'Add '.(($speaker_type == 'speaker') ? 'first ' : 'a ').$speaker_type;
+        if($is_role_mandatory && !$reached_minimun){
+            $action_text = 'Add '.(($current_role == IPresentationSpeaker::RoleSpeaker) ? 'first ' : 'a ').$current_role;
             $actions[] = $exists_speakers ?
-                FormAction::create('doAddSpeaker', '<i class="fa fa-plus fa-start"></i> Add another '.$speaker_type):
-                FormAction::create('doAddSpeaker', '<i class="fa fa-plus fa-start"></i> '.$action_text);
+                FormAction::create('doAdd'.ucfirst($current_role), '<i class="fa fa-plus fa-start"></i> Add another '.$current_role):
+                FormAction::create('doAdd'.ucfirst($current_role), '<i class="fa fa-plus fa-start"></i> '.$action_text);
         }
         else{
-            if (($use_speakers && !$max_speakers_reached) || ($use_moderator && !$max_moderators_reached)) {
-                $actions[] = FormAction::create('doAddSpeaker', '<i class="fa fa-plus fa-start"></i> Add another '.$speaker_type);
+            foreach ($this->presentation->getSpeakersAllowedRoles() as $role) {
+                if(!$this->presentation->maxSpeakerReachedPerRole($role))
+                    $actions[] = FormAction::create('doAdd'.ucfirst($role), '<i class="fa fa-plus fa-start"></i> Add another ' . $role);
             }
+
             $default_actions = $controller->createSaveActions('doFinishSpeaker', 3);
-            $actions = array_merge($actions,$default_actions);
+            $actions = array_merge($actions, $default_actions);
         }
 
         return new FieldList($actions);

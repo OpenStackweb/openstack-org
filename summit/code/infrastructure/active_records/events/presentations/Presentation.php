@@ -69,11 +69,6 @@ class Presentation extends SummitEvent implements IPresentation
                 "Speaker"
             )
             ->leftJoin(
-                "PresentationSpeaker",
-                "Moderator.ID = Presentation.ModeratorID",
-                "Moderator"
-            )
-            ->leftJoin(
                 "SummitEvent_Tags",
                 "Presentation.ID = SummitEvent_Tags.SummitEventID"
             )
@@ -85,9 +80,7 @@ class Presentation extends SummitEvent implements IPresentation
                   	SummitEvent.Title LIKE '%{$k}%'
                   	OR SummitEvent.Abstract LIKE '%{$k}%'
                     OR (CONCAT_WS(' ', Speaker.FirstName, Speaker.LastName)) LIKE '%{$k}%'
-                    OR (CONCAT_WS(' ', Moderator.FirstName, Moderator.LastName)) LIKE '%{$k}%' 
-                    OR Tag.Tag = '{$k}' 
-                ");
+                    OR Tag.Tag = '{$k}'");
     }
 
     /**
@@ -169,21 +162,21 @@ class Presentation extends SummitEvent implements IPresentation
     /**
      * @var array
      */
-    private static $many_many = array
-    (
+    private static $many_many = [
+
         'Speakers' => 'PresentationSpeaker',
         'Topics'   => 'PresentationTopic',
-    );
+    ];
 
     /**
      * @var array
      */
-    static $many_many_extraFields = array(
-        'Speakers' => array
-        (
+    static $many_many_extraFields = [
+        'Speakers' => [
             'IsCheckedIn' => "Boolean",
-        ),
-    );
+            "Role"        => 'Enum(array("Speaker","Moderator"), "Speaker")',
+        ],
+    ];
 
     /**
      * @var array
@@ -191,7 +184,6 @@ class Presentation extends SummitEvent implements IPresentation
     private static $has_one = array
     (
         'Creator'       => 'Member',
-        'Moderator'     => 'PresentationSpeaker',
         'SelectionPlan' => 'SelectionPlan'
     );
 
@@ -545,41 +537,64 @@ class Presentation extends SummitEvent implements IPresentation
             ));
 
         $f->addFieldToTab('Root.Main',
-            $ddl_type = new DropdownField('TypeID', 'Event Type', SummitEventType::get()->filter
+            $ddl_type = new DropdownField('TypeID', 'Event Type', PresentationType::get()->filter
             (
-                array
-                (
-                    'SummitID' => $summit_id,
-                )
+              [
+                  'SummitID' => $summit_id,
+              ]
             )->where(" Type ='Presentation' OR Type ='Keynotes' OR Type ='Panel' ")->map('ID', 'Type')));
+
+        $f->addFieldToTab('Root.Main', new ReadonlyField("CreatorID", "Creator (Member ID) "));
 
         $ddl_type->setEmptyString('-- Select a Presentation Type --');
 
         if ($this->ID > 0) {
             // speakers
-            $config = new GridFieldConfig_RelationEditor(100);
-            $config->removeComponentsByType('GridFieldAddNewButton');
+            $config = new GridFieldConfig_RelationEditor(PHP_INT_MAX);
+            $config->removeComponentsByType(new GridFieldDetailForm());
+            $config->removeComponentsByType(new GridFieldDataColumns());
+            $config->removeComponentsByType(new GridFieldAddNewButton());
+
+            $edittest = new GridFieldDetailForm();
+            /**
+             *   'IsCheckedIn' => "Boolean",
+             *   "Role"        => 'Enum(array("Speaker","Moderator"), "Speaker")',
+             */
+            $edittest->setFields(FieldList::create(
+                new ReadonlyField('FirstName','First Name'),
+                new ReadonlyField('LastName','Last Name'),
+                new ReadonlyField('Email','Email'),
+                new ReadonlyField('MemberID','Member ID'),
+                new DropdownField('ManyMany[Role]', 'Role', [
+                    'Speaker' => 'Speaker',
+                    'Moderator' => 'Moderator'
+                ])
+            ));
+            $summaryfieldsconf = new GridFieldDataColumns();
+            $summaryfieldsconf->setDisplayFields(
+                [ 'FirstName' => 'First Name',
+                    'LastName' => 'Last Name',
+                    'Email' => 'Email',
+                    'Role' => 'Role',
+            ]);
+
+            $config->addComponent($edittest);
+            $config->addComponent($summaryfieldsconf, new GridFieldFilterHeader());
+
             $speakers = new GridField('Speakers', 'Speakers', $this->Speakers(), $config);
             $f->addFieldToTab('Root.Speakers', $speakers);
             $config->getComponentByType('GridFieldAddExistingAutocompleter')->setResultsFormat('$Name - $Member.Email')->setSearchList($this->getAllowedSpeakers());
-            // moderator
-
-            $f->addFieldToTab('Root.Speakers',
-                $ddl_moderator = new DropdownField('ModeratorID', 'Moderator', $this->Speakers()->map('ID', 'Name')));
-            $ddl_moderator->setEmptyString('-- Select a Moderator --');
-
-
+            // materials
             $config = GridFieldConfig_RecordEditor::create(100);
             $config->removeComponentsByType('GridFieldAddNewButton');
             $multi_class_selector = new GridFieldAddNewMultiClass();
             $multi_class_selector->setClasses
             (
-                array
-                (
+               [
                     'PresentationVideo' => 'Video',
                     'PresentationSlide' => 'Slide',
-                    'PresentationLink' => 'Link',
-                )
+                    'PresentationLink'  => 'Link',
+               ]
             );
             $config->addComponent($multi_class_selector);
             $config->addComponent($sort = new GridFieldSortableRows('Order'));
@@ -599,23 +614,7 @@ class Presentation extends SummitEvent implements IPresentation
 
     public function getSpeakersAndModerators()
     {
-        $result       = [];
-        $moderator_id = 0;
-        if($this->Moderator()->exists()) {
-            $result[]     = $this->Moderator();
-            $moderator_id = $this->Moderator()->ID;
-        }
-
-        if($this->Speakers()->exists()) {
-			$result =  array_merge(
-				$result, 
-				$this->Speakers()->exclude([
-					'ID' => $moderator_id
-				])->toArray()
-			);        	
-        }
-    	
-    	return new ArrayList($result);
+        return $this->Speakers();
     }
 
     /**
@@ -731,22 +730,65 @@ SQL;
 
     /**
      * @return bool
-     * @throws Exception
      */
     public function maxSpeakersReached()
     {
-        return ($this->Type()->getMaxSpeakers() == $this->Speakers()->count());
+        if(!$this->Type()->exists()) return false;
+        return ($this->Type()->getMaxSpeakers() == $this->getSpeakersCount());
+    }
+
+    /**
+     * @return int
+     */
+    public function getSpeakersCount():int{
+        return intval($this->Speakers()->filter('Role', IPresentationSpeaker::RoleSpeaker)->count());
+    }
+
+    /**
+     * @param $role
+     * @return mixed
+     */
+    public function getSpeakersByRole($role){
+        return $this->Speakers()->filter('Role', $role);
+    }
+    /**
+     * @return bool
+     */
+    public function hasSpeakers():bool {
+        return $this->getSpeakersCount() > 0;
+    }
+
+    public function useModerators():bool{
+        if(!$this->Type()->exists()) return false;
+        return $this->Type()->UseModerator;
+    }
+
+    public function UseSpeakers():bool{
+        if(!$this->Type()->exists()) return false;
+        return $this->Type()->UseSpeakers;
     }
 
     /**
      * @return bool
-     * @throws Exception
      */
-    public function maxModeratorsReached()
+    public function maxModeratorsReached():bool
     {
-        $max_moderators  = $this->Type()->getMaxModerators();
-        $moderator_count = ($this->Moderator()->exists() ? 1 : 0);
-        return ($max_moderators == $moderator_count);
+        if(!$this->Type()->exists()) return false;
+        return ($this->Type()->getMaxModerators() == $this->getModeratorsCount());
+    }
+
+    /**
+     * @return int
+     */
+    public function getModeratorsCount():int {
+        return intval($this->Speakers()->filter('Role', IPresentationSpeaker::RoleModerator)->count());
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasModerators(): bool {
+        return $this->getModeratorsCount() > 0;
     }
 
     /**
@@ -781,8 +823,7 @@ SQL;
         $speaker = $member->getSpeakerProfile();
         return
             $member->isSpeakerOn($this) ||
-            $member->ID == $this->CreatorID ||
-            ( $speaker && $this->ModeratorID == $speaker->ID );
+            $member->ID == $this->CreatorID;
     }
 
     /**
@@ -816,10 +857,6 @@ SQL;
         return $this;
     }
 
-    public function unsetModerator(){
-        $this->ModeratorID = null;
-    }
-
     /**
      * @param IPresentationSpeaker $speaker
      * @return bool
@@ -835,7 +872,7 @@ SQL;
      */
     public function isModeratorByID($speaker_id)
     {
-        return intval($this->ModeratorID) === intval($speaker_id);
+        return intval($this->Speakers()->filter(["PresentationSpeakerID" =>intval($speaker_id), "Role" => IPresentationSpeaker::RoleModerator])->count()) > 0;
     }
 
     /**
@@ -885,5 +922,153 @@ SQL;
         }
 
         return $cloud_array;
+    }
+
+    /**
+     * @return bool
+     */
+    public function areSpeakersMandatory(): bool
+    {
+        if(!$this->Type()->exists()) return false;
+        $min_speakers = $this->Type()->MinSpeakers;
+        return $this->UseSpeakers() && ($this->Type()->AreSpeakersMandatory || $min_speakers > 0);
+    }
+
+    /**
+     * @return bool
+     */
+    public function areModeratorsMandatory(): bool
+    {
+        if(!$this->Type()->exists()) return false;
+        $min_speakers = $this->Type()->MinModerators;
+        return $this->useModerators() && ($this->Type()->IsModeratorMandatory || $min_speakers > 0);
+    }
+
+    /**
+     * @return int
+     */
+    public function maxModerators(): int
+    {
+        if(!$this->Type()->exists()) return -1;
+        return intval($this->Type()->MaxModerators);
+    }
+
+    /**
+     * @return int
+     */
+    public function maxSpeakers(): int
+    {
+        if(!$this->Type()->exists()) return -1;
+        return intval($this->Type()->MaxSpeakers);
+    }
+
+    /**
+     * @return int
+     */
+    public function minModerators(): int
+    {
+        if(!$this->Type()->exists()) return 0;
+        return intval($this->Type()->MinModerators);
+    }
+
+    /**
+     * @return int
+     */
+    public function minSpeakers(): int
+    {
+        if(!$this->Type()->exists()) return 0;
+        return intval($this->Type()->MinSpeakers);
+    }
+
+
+    /**
+     * returns which role should be added next
+     * @return string
+     */
+    public function getNextSpeakerRoleToAdd(): string
+    {
+        if($this->useModerators()){
+            if($this->areModeratorsMandatory() && !$this->minSpeakerReachedPerRole(IPresentationSpeaker::RoleModerator))
+                return IPresentationSpeaker::RoleModerator;
+        }
+
+        return IPresentationSpeaker::RoleSpeaker;
+    }
+
+    /**
+     * @param string $role
+     * @return bool
+     */
+    public function minSpeakerReachedPerRole(string $role): bool
+    {
+        return $role ==  IPresentationSpeaker::RoleSpeaker ?
+            $this->minSpeakers() <= $this->getSpeakersCount() :
+            $this->minModerators() <= $this->getModeratorsCount();
+    }
+
+    /**
+     * @param string $role
+     * @return bool
+     */
+    public function isSpeakerRoleMandatory(string $role):bool{
+        return $role == IPresentationSpeaker::RoleSpeaker  ?
+            $this->areSpeakersMandatory(): $this->areModeratorsMandatory();
+    }
+
+    /**
+     * @param string $role
+     * @return bool
+     */
+    public function existsSpeakersPerRole(string $role): bool{
+        return $role == IPresentationSpeaker::RoleSpeaker  ?
+            $this->getSpeakersCount() > 0: $this->getModeratorsCount() > 0;
+    }
+
+    /**
+     * @param string $role
+     * @return bool
+     */
+    public function maxSpeakerReachedPerRole(string $role):bool{
+        return $role ==  IPresentationSpeaker::RoleSpeaker ?
+            $this->maxSpeakersReached():
+            $this->maxModeratorsReached();
+    }
+
+    /**
+     * @param string $role
+     * @return int
+     */
+    public function getMinQtyPerRole(string $role): int
+    {
+        return $role ==  IPresentationSpeaker::RoleSpeaker ?
+            $this->minSpeakers() : $this->minModerators();
+    }
+
+    /**
+     * @return array
+     */
+    public function getSpeakersAllowedRoles(): array
+    {
+        $res = [];
+        if($this->useModerators()){
+            $res[] = IPresentationSpeaker::RoleModerator;
+        }
+
+        if($this->UseSpeakers()){
+            if(!($this->useModerators() && $this->areModeratorsMandatory() &&!$this->hasModerators()))
+                $res[] =  IPresentationSpeaker::RoleSpeaker;
+        }
+
+        return $res;
+     }
+
+    /**
+     * @param string $role
+     * @return bool
+     */
+    public function hasSpeakerInRole(string $role): bool
+    {
+        return $role ==  IPresentationSpeaker::RoleSpeaker ?
+            $this->hasSpeakers() : $this->hasModerators();
     }
 }

@@ -152,10 +152,9 @@ final class SummitEventManager implements ISummitEventManager
             // validate speaker conflict
             if ($event instanceof Presentation && $c_event instanceof Presentation && $event->ID != $c_event->ID) {
                 $all_speakers = $event->Speakers()->toArray();
-                if ($event->ModeratorID) $all_speakers[] = $event->Moderator();
 
                 foreach ($all_speakers as $speaker) {
-                    if ($c_event->Speakers()->find('ID', $speaker->ID) || $c_event->ModeratorID == $speaker->ID) {
+                    if ($c_event->Speakers()->find('ID', $speaker->ID)) {
                         throw new EntityValidationException
                         (
                             sprintf
@@ -312,7 +311,7 @@ final class SummitEventManager implements ISummitEventManager
      * @param int $max_file_size
      * @return File
      */
-    public function uploadAttachment(ISummit $summit, $event_id, $tmp_file, $max_file_size = 10*1024*1024)
+    public function uploadAttachment(ISummit $summit, $event_id, $tmp_file, $max_file_size = 10485760)
     {
 
         return $this->tx_service->transaction(function () use ($summit, $event_id, $tmp_file, $max_file_size) {
@@ -375,7 +374,8 @@ final class SummitEventManager implements ISummitEventManager
             $event->AttendingMedia          = isset($event_data['attending_media'])? $event_data['attending_media'] : 0;
 
             // speakers ...
-            $speaker_ids = [];
+            $speaker_ids    = [];
+            $moderators_ids = [];
 
             if($event_type->UseSpeakers) {
 
@@ -390,9 +390,9 @@ final class SummitEventManager implements ISummitEventManager
                             throw new EntityValidationException('missing parameter on speakers collection!');
 
                         $speaker_id = intval($speaker['speaker_id']);
-                        $member_id = intval($speaker['member_id']);
-                        $speaker = $speaker_id > 0 ? PresentationSpeaker::get()->byID($speaker_id) : null;
-                        $speaker = is_null($speaker) && $member_id > 0 ? PresentationSpeaker::get()->filter('MemberID', $member_id)->first() : $speaker;
+                        $member_id  = intval($speaker['member_id']);
+                        $speaker    = $speaker_id > 0 ? PresentationSpeaker::get()->byID($speaker_id) : null;
+                        $speaker   = is_null($speaker) && $member_id > 0 ? PresentationSpeaker::get()->filter('MemberID', $member_id)->first() : $speaker;
 
                         if (is_null($speaker)) {
                             $member = Member::get()->byID($member_id);
@@ -410,38 +410,44 @@ final class SummitEventManager implements ISummitEventManager
                 }
             }
 
-            $event->Speakers()->setByIDList($speaker_ids);
+            foreach($speaker_ids as $speaker_id)
+                $event->Speakers()->add($speaker_id, ["Role" => IPresentationSpeaker::RoleSpeaker]);
 
             // moderators
 
-            $event->ModeratorID = 0;
 
             if($event_type->UseModerator)
             {
-                if($event_type->IsModeratorMandatory && !isset($event_data['moderator']))
+                if($event_type->IsModeratorMandatory && !isset($event_data['moderators']))
                     throw new EntityValidationException('moderator is required!');
 
-                if(isset($event_data['moderator'])) {
-                    $moderator = $event_data['moderator'];
+                if(isset($event_data['moderators'])) {
 
-                    if (!isset($moderator['member_id']) || !isset($moderator['speaker_id']))
-                        throw new EntityValidationException('missing parameter on moderator!');
+                    foreach ($event_data['moderators'] as $moderator) {
 
-                    $speaker_id = intval($moderator['speaker_id']);
-                    $member_id = intval($moderator['member_id']);
-                    $moderator = $speaker_id > 0 ? PresentationSpeaker::get()->byID($speaker_id) : null;
-                    $moderator = is_null($moderator) && $member_id > 0 ? PresentationSpeaker::get()->filter('MemberID', $member_id)->first() : $moderator;
 
-                    if (is_null($moderator)) {
-                        $member = Member::get()->byID($member_id);
-                        if (is_null($member)) throw new NotFoundEntityException('Member', sprintf(' member id %s', $member_id));
-                        $moderator = PresentationSpeaker::create();
-                        $moderator->FirstName = $member->FirstName;
-                        $moderator->LastName = $member->Surname;
-                        $moderator->MemberID = $member->ID;
-                        $moderator->write();
+                        if (!isset($moderator['member_id']) || !isset($moderator['speaker_id']))
+                            throw new EntityValidationException('missing parameter on moderator!');
+
+                        $speaker_id = intval($moderator['speaker_id']);
+                        $member_id  = intval($moderator['member_id']);
+                        $moderator  = $speaker_id > 0 ? PresentationSpeaker::get()->byID($speaker_id) : null;
+                        $moderator  = is_null($moderator) && $member_id > 0 ? PresentationSpeaker::get()->filter('MemberID', $member_id)->first() : $moderator;
+
+                        if (is_null($moderator)) {
+                            $member = Member::get()->byID($member_id);
+                            if (is_null($member)) throw new NotFoundEntityException('Member', sprintf(' member id %s', $member_id));
+                            $moderator = PresentationSpeaker::create();
+                            $moderator->FirstName = $member->FirstName;
+                            $moderator->LastName = $member->Surname;
+                            $moderator->MemberID = $member->ID;
+                            $moderator->write();
+                        }
+                        $moderators_ids[] = $moderator->ID;
                     }
-                    $event->ModeratorID = $moderator->ID;
+
+                    foreach($moderators_ids as $speaker_id)
+                        $event->Speakers()->add($speaker_id, ["Role" => IPresentationSpeaker::RoleModerator]);
                 }
             }
 

@@ -64,9 +64,7 @@ final class SapphireSummitPresentationRepository extends SapphireSummitEventRepo
             $where_clause .= " AND (SummitEvent.Title LIKE '%{$search_term}%' OR SummitEvent.Abstract LIKE '%{$search_term}%'";
             $where_clause .= " OR PS.FirstName LIKE '%{$search_term}%' OR PS.LastName LIKE '%{$search_term}%'";
             $where_clause .= " OR CONCAT(PS.FirstName,' ',PS.LastName) LIKE '%{$search_term}%'";
-            $where_clause .= " OR PS2.FirstName LIKE '%{$search_term}%' OR PS2.LastName LIKE '%{$search_term}%'";
-            $where_clause .= " OR CONCAT(PS2.FirstName,' ',PS2.LastName) LIKE '%{$search_term}%'";
-            $where_clause .= " OR PS.ID = '{$search_term}' OR PS2.ID = '{$search_term}' OR SummitEvent.ID = '{$search_term}'";
+            $where_clause .= " OR PS.ID = '{$search_term}' OR SummitEvent.ID = '{$search_term}'";
             $where_clause .= " OR M.Email LIKE '%{$search_term}%' OR M2.Email LIKE '%{$search_term}%' OR SRR.Email LIKE '%{$search_term}%' )";
         }
 
@@ -102,9 +100,7 @@ final class SapphireSummitPresentationRepository extends SapphireSummitEventRepo
         $list = Presentation::get()
             ->leftJoin('Presentation_Speakers','Presentation_Speakers.PresentationID = Presentation.ID')
             ->leftJoin('PresentationSpeaker','Presentation_Speakers.PresentationSpeakerID = PS.ID','PS')
-            ->leftJoin('PresentationSpeaker','Presentation.ModeratorID = PS2.ID','PS2')
             ->leftJoin('Member','M.ID = PS.MemberID','M')
-            ->leftJoin('Member','M2.ID = PS2.MemberID','M2')
             ->leftJoin('SpeakerRegistrationRequest','SRR.SpeakerID = PS.ID','SRR')
             ->leftJoin('SummitEventType','SummitEventType.ID = SummitEvent.TypeID')
             ->leftJoin('SummitSelectedPresentation','SSP.PresentationID = Presentation.ID','SSP')
@@ -176,9 +172,7 @@ final class SapphireSummitPresentationRepository extends SapphireSummitEventRepo
             $where_clause .= " AND (SummitEvent.Title LIKE '%{$search_term}%' OR SummitEvent.Abstract LIKE '%{$search_term}%'";
             $where_clause .= " OR PS.FirstName LIKE '%{$search_term}%' OR PS.LastName LIKE '%{$search_term}%'";
             $where_clause .= " OR CONCAT(PS.FirstName,' ',PS.LastName) LIKE '%{$search_term}%'";
-            $where_clause .= " OR PS2.FirstName LIKE '%{$search_term}%' OR PS2.LastName LIKE '%{$search_term}%'";
-            $where_clause .= " OR CONCAT(PS2.FirstName,' ',PS2.LastName) LIKE '%{$search_term}%'";
-            $where_clause .= " OR PS.ID = '{$search_term}' OR PS2.ID = '{$search_term}' OR SummitEvent.ID = '{$search_term}'";
+            $where_clause .= " OR PS.ID = '{$search_term}' OR SummitEvent.ID = '{$search_term}'";
             $where_clause .= " OR M.Email LIKE '%{$search_term}%' OR M2.Email LIKE '%{$search_term}%' OR SRR.Email LIKE '%{$search_term}%' )";
         }
 
@@ -187,9 +181,7 @@ final class SapphireSummitPresentationRepository extends SapphireSummitEventRepo
         $list      = Presentation::get()
             ->leftJoin('Presentation_Speakers','Presentation_Speakers.PresentationID = Presentation.ID')
             ->leftJoin('PresentationSpeaker','Presentation_Speakers.PresentationSpeakerID = PS.ID','PS')
-            ->leftJoin('PresentationSpeaker','Presentation.ModeratorID = PS2.ID','PS2')
             ->leftJoin('Member','M.ID = PS.MemberID','M')
-            ->leftJoin('Member','M2.ID = PS2.MemberID','M2')
             ->leftJoin('SpeakerRegistrationRequest','SRR.SpeakerID = PS.ID','SRR')
             ->leftJoin("SummitEventType","SummitEventType.ID = SummitEvent.TypeID")
             ->filter($filter)
@@ -253,21 +245,6 @@ final class SapphireSummitPresentationRepository extends SapphireSummitEventRepo
                             OR M.Email LIKE '%{$search_term}%'
                         )
                 )
-            OR EXISTS
-                (
-                        SELECT 1 FROM PresentationSpeaker
-                        LEFT JOIN Member AS M ON M.ID = PresentationSpeaker.MemberID
-                        WHERE
-                        PresentationSpeaker.ID = Presentation.ModeratorID AND
-                        (
-                            PresentationSpeaker.FirstName LIKE '%{$search_term}%'
-                            OR PresentationSpeaker.LastName LIKE '%{$search_term}%'
-                            OR CONCAT(PresentationSpeaker.FirstName,' ',PresentationSpeaker.LastName) LIKE '%{$search_term}%'
-                            OR PresentationSpeaker.ID = '{$search_term}'
-                            OR M.Email LIKE '%{$search_term}%'
-                        )
-                )
-            )
             ";
 
         }
@@ -366,9 +343,7 @@ SQL;
             $where_clause .= " AND (SummitEvent.Title LIKE '%{$search_term}%' OR SummitEvent.Abstract LIKE '%{$search_term}%'";
             $where_clause .= " OR PS.FirstName LIKE '%{$search_term}%' OR PS.LastName LIKE '%{$search_term}%'";
             $where_clause .= " OR CONCAT(PS.FirstName,' ',PS.LastName) LIKE '%{$search_term}%'";
-            $where_clause .= " OR PS2.FirstName LIKE '%{$search_term}%' OR PS2.LastName LIKE '%{$search_term}%'";
-            $where_clause .= " OR CONCAT(PS2.FirstName,' ',PS2.LastName) LIKE '%{$search_term}%'";
-            $where_clause .= " OR PS.ID = '{$search_term}' OR PS2.ID = '{$search_term}' OR SummitEvent.ID = '{$search_term}'";
+            $where_clause .= " OR PS.ID = '{$search_term}' OR SummitEvent.ID = '{$search_term}'";
             $where_clause .= " OR M.Email LIKE '%{$search_term}%' OR M2.Email LIKE '%{$search_term}%' OR SRR.Email LIKE '%{$search_term}%' )";
         }
 
@@ -377,9 +352,7 @@ SQL;
         $list = Presentation::get()->filter($filter)->where($where_clause)
             ->leftJoin('Presentation_Speakers','Presentation_Speakers.PresentationID = Presentation.ID')
             ->leftJoin('PresentationSpeaker','Presentation_Speakers.PresentationSpeakerID = PS.ID','PS')
-            ->leftJoin('PresentationSpeaker','Presentation.ModeratorID = PS2.ID','PS2')
             ->leftJoin('Member','M.ID = PS.MemberID','M')
-            ->leftJoin('Member','M2.ID = PS2.MemberID','M2')
             ->leftJoin('SpeakerRegistrationRequest','SRR.SpeakerID = PS.ID','SRR')
             ->sort("TRIM({$order})");
 
@@ -674,11 +647,9 @@ SQL;
             INNER JOIN PresentationCategory AS PC ON E.CategoryID = PC.ID
             LEFT JOIN Presentation_Speakers AS PS ON PS.PresentationID = P.ID
             LEFT JOIN PresentationSpeaker AS S ON PS.PresentationSpeakerID = S.ID
-            LEFT JOIN PresentationSpeaker AS S2 ON P.ModeratorID = S2.ID
             LEFT JOIN SpeakerRegistrationRequest AS SR ON SR.SpeakerID = S.ID
             LEFT JOIN SpeakerRegistrationRequest AS SR2 ON SR2.SpeakerID = S2.ID
             LEFT JOIN Member AS M ON M.ID = S.MemberID
-            LEFT JOIN Member AS M2 ON M2.ID = S2.MemberID
             LEFT JOIN Member AS M3 ON M3.ID = P.CreatorID
             LEFT JOIN Affiliation AS A ON A.MemberID=M.ID
             LEFT JOIN Org ON Org.ID = A.OrganizationID AND A.Current = 1
@@ -735,12 +706,6 @@ SQL;
                        S.LastName AS last_name,
                        IFNULL(M.Email, SR.Email) AS email,
                        GROUP_CONCAT(Org.Name SEPARATOR ', ') AS company,";
-        }
-
-        if (in_array('moderator',$filters['show_col'])) {
-            $query .= "IFNULL(M2.Email, SR2.Email) AS moderator_email, 
-                       S2.FirstName AS moderator_first_name,
-                       S2.LastName AS moderator_last_name,";
         }
 
         if (in_array('owner',$filters['show_col'])) {

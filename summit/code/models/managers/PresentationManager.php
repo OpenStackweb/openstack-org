@@ -284,11 +284,6 @@ final class PresentationManager implements IPresentationManager
             $presentation->CategoryID              = intval(trim($data['CategoryID']));
             $presentation->AttendingMedia          = isset($data['AttendingMedia']) ? $data['AttendingMedia'] : 0;
 
-            // remove moderator if its not needed
-            if (!$presentation->Type()->UseModerator) {
-                $presentation->ModeratorID = 0;
-            }
-
             if(isset($data['OtherTopic']))
                 $presentation->OtherTopic = trim($data['OtherTopic']);
 
@@ -370,12 +365,13 @@ final class PresentationManager implements IPresentationManager
      * @param string $email
      * @param Member|null $member
      * @param IPresentationSpeaker|null $speaker
+     * @param string|null $role
      * @return IPresentationSpeaker
      */
-    public function addSpeakerByEmailTo(IPresentation $presentation, $email, Member $member = null, IPresentationSpeaker $speaker = null)
+    public function addSpeakerByEmailTo(IPresentation $presentation, $email, Member $member = null, IPresentationSpeaker $speaker = null, $role = null)
     {
 
-        return $this->tx_manager->transaction(function() use($presentation, $email, $member, $speaker){
+        return $this->tx_manager->transaction(function() use($presentation, $email, $member, $speaker, $role){
 
             $speaker = !is_null($speaker)? $speaker : $this->speaker_repository->getByEmail($email);
 
@@ -421,18 +417,14 @@ final class PresentationManager implements IPresentationManager
                 );
             }
 
-            if($speaker->Presentations()->filter('PresentationID', $presentation->ID)->count() > 0
-                || $presentation->ModeratorID == $speaker->ID)
+            if($speaker->Presentations()->filter('PresentationID', $presentation->ID)->count() > 0)
                 throw new EntityValidationException('Speaker already assigned to this presentation!.');
 
-            // The first one is the moderator.
-            if (!$presentation->maxModeratorsReached()) {
-                $presentation->ModeratorID = $speaker->ID;
-            } else {
-                $speaker->Presentations()->add($presentation);
-                $speaker->write();
+            if($presentation->maxSpeakerReachedPerRole($role)){
+                throw new EntityValidationException(sprintf("reached max. per role %s", $role   ));
             }
-
+            $speaker->Presentations()->add($presentation, [ "Role" => $role]);
+            $speaker->write();
             return $speaker;
         });
 
@@ -499,11 +491,6 @@ final class PresentationManager implements IPresentationManager
 
             if (!$presentation->canRemoveSpeakers())
                 throw new EntityValidationException('You cannot remove speakers from this presentation');
-
-            if($presentation->isModerator($speaker)) {
-                $presentation->unsetModerator();
-                return;
-            }
 
             $presentation->removeSpeaker($speaker);
 

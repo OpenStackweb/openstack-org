@@ -167,8 +167,8 @@
                             tags_id         : [<% loop Tags %>{$ID},<% end_loop %>],
                             track_id : {$CategoryID},
                             <% if ClassName == Presentation %>
-                                moderator_id: {$ModeratorID},
-                                speakers_id : [<% loop Speakers %>{$ID},<% end_loop %>],
+                                moderators_id:  [<% loop getSpeakersByRole(Moderator) %>{$ID},<% end_loop %>],
+                                speakers_id : [<% loop getSpeakersByRole(Speaker) %>{$ID},<% end_loop %>],
                                 level : '{$Level}',
                                 to_record : <% if $ToRecord %>true<% else %>false<% end_if %>,
                             <% end_if %>

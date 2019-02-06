@@ -58,7 +58,6 @@ class PresentationSpeaker extends DataObject
         'PromoCodes'               => 'SpeakerSummitRegistrationPromoCode',
         'AnnouncementSummitEmails' => 'SpeakerAnnouncementSummitEmail',
         'SummitAssistances'        => 'PresentationSpeakerSummitAssistanceConfirmationRequest',
-        'ModeratedPresentations'   => 'Presentation.Moderator'
     ];
 
     private static $searchable_fields = [
@@ -129,10 +128,6 @@ class PresentationSpeaker extends DataObject
         $this->OrganizationalRoles()->removeAll();
         $this->ActiveInvolvements()->removeAll();
         $this->Languages()->removeAll();
-
-        // set moderator to zero
-
-        DB::query("UPDATE Presentation SET ModeratorID = 0 WHERE ModeratorID = {$this->ID};");
     }
 
     protected function onBeforeWrite()
@@ -373,14 +368,9 @@ class PresentationSpeaker extends DataObject
             'SummitID' => $summit->ID
         ));
 
-        $moderated_presentations = $this->ModeratedPresentations()->filter(array(
-            'SummitID' => $summit->ID
-        ));
-
         $all_presentations = new ArrayList();
 
         $all_presentations->merge($speaker_presentations);
-        $all_presentations->merge($moderated_presentations);
 
         return $all_presentations;
     }
@@ -398,11 +388,7 @@ class PresentationSpeaker extends DataObject
 
     public function AllRelatedPresentations()
     {
-        $presentations = $this->Presentations()->toArray();
-        $moderator_pres = Presentation::get()->filter('ModeratorID',$this->ID)->toArray();
-        $all_presentations = array_merge($presentations, $moderator_pres);
-
-        return $all_presentations;
+        return $this->Presentations()->toArray();
     }
 
     /**
@@ -582,8 +568,6 @@ class PresentationSpeaker extends DataObject
             );
         }
 
-        $filter_conditions['ModeratorID'] = $this->ID;
-
         return Presentation::get()->filter(
             $filter_conditions
         );
@@ -606,10 +590,12 @@ class PresentationSpeaker extends DataObject
         $summit = !$summit_id ? Summit::get_active() : Summit::get()->byID($summit_id);
         if (!$summit) return false;
 
-        return Presentation::get()->filter([
-            'ModeratorID' => $this->ID,
-            'SummitID'    => $summit->ID
-        ]);
+        return $this->presentations()->filter(
+            [
+                'SummitID'    => $summit->ID,
+                'Role'        => 'Moderator',
+            ]
+        );
     }
 
     public function OtherModeratorPresentations($summit_id = null)
@@ -617,13 +603,14 @@ class PresentationSpeaker extends DataObject
         $summit = !$summit_id ? Summit::get_active() : Summit::get()->byID($summit_id);
         if (!$summit) return false;
 
-        return Presentation::get()->filter([
-            'ModeratorID' => $this->ID,
-            'SummitID'    => $summit->ID
-        ])
-            ->exclude([
-                'CreatorID' => $this->MemberID,
-            ]);
+        return $this->presentations()->filter(
+            [
+                'SummitID'    => $summit->ID,
+                'Role'        => 'Moderator',
+            ]
+        )->exclude([
+            'CreatorID' => $this->MemberID,
+        ]);
     }
 
     public function getPresentationsCount($summit_id = null)
@@ -643,7 +630,7 @@ class PresentationSpeaker extends DataObject
           SELECT DISTINCT P.* FROM Presentation P
           LEFT JOIN Presentation_Speakers PS ON PS.PresentationID = P.ID
           WHERE P.SelectionPlanID = {$selectionPlan->ID} 
-          AND (PS.PresentationSpeakerID = {$this->ID} OR P.CreatorID = {$this->MemberID} OR P.ModeratorID = {$this->ID} )
+          AND (PS.PresentationSpeakerID = {$this->ID} OR P.CreatorID = {$this->MemberID})
         ");
 
         $presentations = new ArrayList();
@@ -740,9 +727,11 @@ class PresentationSpeaker extends DataObject
         $acceptedPresentations = new ArrayList();
         $summit = !$summit_id ? Summit::get_active() : Summit::get()->byID($summit_id);
         if (!$summit) return false;
-        $presentations = $role == IPresentationSpeaker::RoleSpeaker ?
-            $this->Presentations()->filter('SummitEvent.SummitID', $summit->ID):
-            Presentation::get()->filter(['SummitEvent.SummitID' => $summit->ID, 'ModeratorID' => $this->ID]);
+        $presentations = $this->Presentations()->filter(
+                [
+                    'SummitEvent.SummitID', $summit->ID,
+                    'Role' => $role
+                ]);
 
         $presentations_hash = [];
         foreach ($presentations as $p) {
@@ -787,18 +776,12 @@ class PresentationSpeaker extends DataObject
             }
         }
 
-        $presentations = $role == IPresentationSpeaker::RoleSpeaker ?
+        $presentations =
             $this->Presentations()->filter(
                 [
                     'SummitEvent.SummitID'  => $summit->ID,
-                    'SummitEvent.Published' => 0
-                ]
-            ):
-            Presentation::get()->filter
-            (
-                [ 'SummitEvent.SummitID'  => $summit->ID,
-                  'SummitEvent.Published' => 0,
-                  'ModeratorID'           => $this->ID
+                    'SummitEvent.Published' => 0,
+                    'Role' => $role
                 ]
             );
 
@@ -842,19 +825,16 @@ class PresentationSpeaker extends DataObject
 
         $filters   = [
             'SummitEvent.SummitID'  => $summit->ID,
-            'SummitEvent.Published' => $published_ones ? 1 : 0
+            'SummitEvent.Published' => $published_ones ? 1 : 0,
+            'Role'                  => $role
         ];
-        if($role == IPresentationSpeaker::RoleModerator)
-            $filters['ModeratorID'] = $this->ID;
-
 
         if(count($excluded_tracks) > 0){
             $filters['CategoryID:ExactMatch:not'] = $excluded_tracks;
         }
 
-        $presentations = $role == IPresentationSpeaker::RoleSpeaker ?
-            $this->Presentations()->filter($filters):
-            Presentation::get()->filter($filters);
+        $presentations = $this->Presentations()->filter($filters);
+
 
         foreach ($presentations as $p) {
             if ($p->SelectionStatus() == IPresentation::SelectionStatus_Alternate) {
@@ -881,9 +861,9 @@ class PresentationSpeaker extends DataObject
     public function isModeratorFor(ISummit $summit){
         $filters = [
             'SummitEvent.SummitID' => $summit->ID,
-            'ModeratorID'          => $this->ID
+            'Role'                 => IPresentationSpeaker::RoleModerator
         ];
-        return Presentation::get()->filter($filters)->count() > 0;
+        return intval($this->Presentations()->filter($filters)->count()) > 0;
     }
 
     /**
@@ -1425,19 +1405,10 @@ class PresentationSpeaker extends DataObject
      */
     public function hasHadPublishedPresentations($role = IPresentationSpeaker::RoleSpeaker)
     {
-        $presentations = null;
-        if($role == IPresentationSpeaker::RoleSpeaker) {
-            $presentations = $this->Presentations()->filter([
-                'Published' => 1
-            ]);
-        } else {
-            $presentations = Presentation::get()->filter([
+        return intval($this->Presentations()->filter([
                 'Published' => 1,
-                'ModeratorID' => $this->ID
-            ]);
-        }
-
-        return $presentations->count() > 0;
+                'Role' => $role
+            ])->count()) > 0;
     }
 
     /**

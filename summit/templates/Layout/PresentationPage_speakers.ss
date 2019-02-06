@@ -18,25 +18,7 @@
                         </h2>
                     </div>
 
-                    <% if $Presentation.Moderator %>
-                        <h3>Moderator for this presentation</h3>
-                        <table class="table">
-                            <tbody>
-                                <% with $Presentation.Moderator %>
-                                <tr>
-                                    <td class="item-name"><i class="fa fa-user"></i><a
-                                            href="$EditLink($Top.Presentation.ID)">$Name</a></td>
-                                    <td class="action">
-                                        <% if $Top.Presentation.CanRemoveSpeakers %>
-                                            <a class='delete-speaker'
-                                               href="$DeleteLink($Top.Presentation.ID)">Remove</a>
-                                        <% end_if %>
-                                    </td>
-                                </tr>
-                                <% end_with %>
-                            </tbody>
-                        </table>
-                    <% end_if %>
+
 
                     <% if $Presentation.Speakers %>
                         <h3>Speakers/Moderators included in this presentation</h3>
@@ -44,8 +26,13 @@
                             <tbody>
                                 <% loop $Presentation.Speakers %>
                                 <tr>
-                                    <td class="item-name"><i class="fa fa-user"></i><a
-                                            href="$EditLink($Top.Presentation.ID)">$Name</a></td>
+                                    <td class="item-name">
+                                        <i class="fa fa-user"></i><a
+                                            href="$EditLink($Top.Presentation.ID)">$Name</a>
+                                    </td>
+                                    <td>
+                                        $Role
+                                    </td>
                                     <td class="action">
                                         <% if $Top.Presentation.CanRemoveSpeakers %>
                                             <a class='delete-speaker'

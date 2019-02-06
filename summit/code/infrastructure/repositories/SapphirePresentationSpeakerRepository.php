@@ -526,13 +526,16 @@ SQL;
                 INNER JOIN Presentation_Speakers ON Presentation_Speakers.PresentationID = Presentation.ID
                 WHERE SummitEvent.SummitID = {$summit->ID}
                 AND Presentation_Speakers.PresentationSpeakerID  = PresentationSpeaker.ID
+                AND Presentation_Speakers.Role = 'Speaker'
          )
          AND NOT EXISTS
          (
-            SELECT 1 FROM SummitEvent
-            INNER JOIN Presentation ON Presentation.ID = SummitEvent.ID
-            WHERE SummitEvent.SummitID = {$summit->ID}
-            AND Presentation.ModeratorID  = PresentationSpeaker.ID
+           SELECT 1 FROM SummitEvent
+                INNER JOIN Presentation ON Presentation.ID = SummitEvent.ID
+                INNER JOIN Presentation_Speakers ON Presentation_Speakers.PresentationID = Presentation.ID
+                WHERE SummitEvent.SummitID = {$summit->ID}
+                AND Presentation_Speakers.PresentationSpeakerID  = PresentationSpeaker.ID
+                AND Presentation_Speakers.Role = 'Moderator'
         )
         {$where_having}
 SQL;
@@ -572,8 +575,10 @@ SQL;
             (
                 SELECT 1 FROM SummitEvent
                 INNER JOIN Presentation ON Presentation.ID = SummitEvent.ID
+                INNER JOIN Presentation_Speakers ON Presentation_Speakers.PresentationID = Presentation.ID
                 WHERE SummitEvent.SummitID = {$summit->ID}
-                AND Presentation.ModeratorID  = PresentationSpeaker.ID
+                AND Presentation_Speakers.PresentationSpeakerID  = PresentationSpeaker.ID
+                AND Presentation_Speakers.Role = 'Moderator'
             )
             {$where_having}
 SQL;
@@ -622,15 +627,6 @@ SQL;
                         WHERE SummitEvent.SummitID = {$summit->ID}
                         AND SummitEvent.Published = 1
                         AND Presentation_Speakers.PresentationSpeakerID  = PresentationSpeaker.ID
-                    )
-                    OR 
-                    EXISTS
-                    (
-                        SELECT 1 FROM SummitEvent
-                        INNER JOIN Presentation ON Presentation.ID = SummitEvent.ID
-                        WHERE SummitEvent.SummitID   = {$summit->ID}
-                        AND Presentation.ModeratorID = PresentationSpeaker.ID
-                        AND SummitEvent.Published = 1
                     )
               )
             {$where_having}

@@ -73,10 +73,7 @@ class SpeakerListPage_Controller extends Page_Controller
                                 SELECT * FROM Presentation_Speakers PS
                                 INNER JOIN SummitEvent E ON PS.PresentationID = E.ID
                                 WHERE PS.PresentationSpeakerID = PresentationSpeaker.ID AND E.Published = 1
-                            ) OR EXISTS (
-                                SELECT * FROM Presentation P INNER JOIN SummitEvent E ON P.ID = E.ID
-                                WHERE P.ModeratorID = PresentationSpeaker.ID AND E.Published = 1
-                            )
+                            ) 
                           )";
 
         $list = PresentationSpeaker::get()
@@ -222,9 +219,6 @@ class SpeakerListPage_Controller extends Page_Controller
                                 SELECT * FROM Presentation_Speakers PS
                                 INNER JOIN SummitEvent E ON PS.PresentationID = E.ID
                                 WHERE PS.PresentationSpeakerID = PresentationSpeaker.ID AND E.Published = 1
-                            ) OR EXISTS (
-                                SELECT * FROM Presentation P INNER JOIN SummitEvent E ON P.ID = E.ID
-                                WHERE P.ModeratorID = PresentationSpeaker.ID AND E.Published = 1
                             )
                           )";
 

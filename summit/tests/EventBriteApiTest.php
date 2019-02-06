@@ -27,7 +27,7 @@ class EventBriteApiTest extends SapphireTest
         $client = new EventbriteRestApi();
         $client->setCredentials(array('token' => EVENTBRITE_PERSONAL_OAUTH2_TOKEN));
         $page = 1;
-        $summit_mock = Mockery::mock(Summit::class);
+        $summit_mock = Mockery::mock("Summit");
         $summit_mock->shouldReceive("getExternalEventId")->andReturn("28375675409");
         $response = $client->getOrdersBySummit($summit_mock, $page);
         $this->assertTrue(isset($response['orders']));
@@ -37,7 +37,7 @@ class EventBriteApiTest extends SapphireTest
     public function testGetTicketTypes(){
         $client = new EventbriteRestApi();
         $client->setCredentials(array('token' => EVENTBRITE_PERSONAL_OAUTH2_TOKEN));
-        $summit_mock = Mockery::mock(Summit::class);
+        $summit_mock = Mockery::mock("Summit");
         $summit_mock->shouldReceive("getExternalEventId")->andReturn("28375675409");
         $response = $client->getTicketTypes($summit_mock);
         $this->assertTrue(isset($response['ticket_classes']));

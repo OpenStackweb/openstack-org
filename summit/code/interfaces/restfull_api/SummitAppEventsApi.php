@@ -160,21 +160,35 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
 
                 if ($e instanceof Presentation)
                 {
-                    $speakers = array();
+                    $speakers = [];
+                    $moderators = [];
                     if(!empty($expand) && strstr($expand, 'speakers')!== false)
                     {
-                        foreach ($e->Speakers() as $s) {
-                            array_push($speakers, array('id' => intval($s->ID), 'name' => $s->getName()));
+                        foreach ($e->getSpeakersByRole(IPresentationSpeaker::RoleSpeaker) as $s) {
+                            $speakers[] = ['id' => intval($s->ID), 'name' => $s->getName()];
                         }
                         $entry['speakers'] = $speakers;
                     }
                     else {
-                        foreach ($e->Speakers() as $s) {
-                            array_push($speakers, $s->ID);
+                        foreach ($e->getSpeakersByRole(IPresentationSpeaker::RoleSpeaker) as $s) {
+                            $speakers[] = $s->ID;
                         }
                         $entry['speakers_id'] = $speakers;
                     }
-                    $entry['moderator_id'] = intval($e->ModeratorID);
+
+                    if(!empty($expand) && strstr($expand, 'moderators')!== false)
+                    {
+                        foreach ($e->getSpeakersByRole(IPresentationSpeaker::RoleModerator) as $s) {
+                            $moderators[] = ['id' => intval($s->ID), 'name' => $s->getName()];
+                        }
+                        $entry['moderators'] = $speakers;
+                    }
+                    else {
+                        foreach ($e->getSpeakersByRole(IPresentationSpeaker::RoleModerator) as $s) {
+                            $moderators[] = $s->ID;
+                        }
+                        $entry['moderators_id'] = $moderators;
+                    }
 
                     $entry['level']        = $e->Level;
                     $entry['status']       = $e->SelectionStatus();
@@ -185,14 +199,13 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
             $total_pages = ($page_size) ? ceil($count/$page_size) : 1;
 
             return $this->ok(
-                array
-                (
+                [
                     'data'        => $events,
                     'page'        => $page,
                     'page_size'   => $page_size,
                     'total_pages' => $total_pages,
                     'total'       => $count,
-                )
+                ]
             );
         }
         catch(Exception $ex)
@@ -243,21 +256,36 @@ class SummitAppEventsApi extends AbstractRestfulJsonApi {
 
                 if ($e instanceof Presentation)
                 {
-                    $speakers = array();
+                    $speakers = [];
+                    $moderators = [];
                     if(!empty($expand) && strstr($expand, 'speakers')!== false)
                     {
-                        foreach ($e->Speakers() as $s) {
-                            array_push($speakers, array('id' => intval($s->ID), 'name' => $s->getName()));
+                        foreach ($e->getSpeakersByRole(IPresentationSpeaker::RoleSpeaker) as $s) {
+                            $speakers[] = ['id' => intval($s->ID), 'name' => $s->getName()];
                         }
                         $entry['speakers'] = $speakers;
                     }
                     else {
-                        foreach ($e->Speakers() as $s) {
-                            array_push($speakers, $s->ID);
+                        foreach ($e->getSpeakersByRole(IPresentationSpeaker::RoleSpeaker) as $s) {
+                            $speakers[] = $s->ID;
                         }
                         $entry['speakers_id'] = $speakers;
                     }
-                    $entry['moderator_id'] = intval($e->ModeratorID);
+
+                    if(!empty($expand) && strstr($expand, 'moderators')!== false)
+                    {
+                        foreach ($e->getSpeakersByRole(IPresentationSpeaker::RoleModerator) as $s) {
+                            $moderators[] = ['id' => intval($s->ID), 'name' => $s->getName()];
+                        }
+                        $entry['moderators'] = $speakers;
+                    }
+                    else {
+                        foreach ($e->getSpeakersByRole(IPresentationSpeaker::RoleModerator) as $s) {
+                            $moderators[] = $s->ID;
+                        }
+                        $entry['moderators_id'] = $moderators;
+                    }
+
                     $entry['track_id']     = intval($e->CategoryID);
                     $entry['level']        = $e->Level;
                     $entry['status']       = $e->SelectionStatus();

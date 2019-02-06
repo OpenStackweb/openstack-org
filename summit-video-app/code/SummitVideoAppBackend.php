@@ -96,10 +96,7 @@ class SummitVideoAppBackend
                     $videos = $videos
                         ->innerJoin('Presentation', 'Presentation.ID = PresentationMaterial.PresentationID')
                         ->innerJoin('Presentation_Speakers', 'Presentation_Speakers.PresentationID = Presentation.ID')
-                        ->where("
-                            Presentation_Speakers.PresentationSpeakerID = $speaker->ID
-                            OR Presentation.ModeratorID = $speaker->ID 
-                        ");
+                        ->where("Presentation_Speakers.PresentationSpeakerID = $speaker->ID");
                 } else {
                     $videos = ArrayList::create();
                 }
@@ -147,9 +144,6 @@ class SummitVideoAppBackend
                         'Presentation_Speakers.PresentationID = Presentation.ID')
                     ->innerJoin('PresentationSpeaker',
                         'PresentationSpeaker.ID = Presentation_Speakers.PresentationSpeakerID')
-                    ->leftJoin('PresentationSpeaker',
-                        'Moderator.ID = Presentation.ModeratorID',
-                        'Moderator')
                     ->leftJoin('PresentationCategory', 'PresentationCategory.ID = SummitEvent.CategoryID')
                     ->limit($defaultLimit);
 

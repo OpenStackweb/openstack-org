@@ -23,10 +23,10 @@ class FireBaseGCMApiTest extends SapphireTest
 
     public function test(){
         $client = new FireBaseGCMApi(FIREBASE_GCM_SERVER_KEY);
-        $serializer_mock = Mockery::mock(IFireBasePushNotificationSerializationStrategy::class);
+        $serializer_mock = Mockery::mock("IFireBasePushNotificationSerializationStrategy");
         $serializer_mock->shouldReceive("getToField")->andReturn(['smarcet']);
         $serializer_mock->shouldReceive("getDataField")->andReturn(['title' => 'test']);
-        $notification_mock = Mockery::mock(PushNotificationMessage::class);
+        $notification_mock = Mockery::mock("PushNotificationMessage");
         $notification_mock->shouldReceive("getPlatform")->andReturn('MOBILE');
 
         $response = $client->sendPush

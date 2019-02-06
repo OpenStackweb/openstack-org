@@ -92,9 +92,10 @@ interface IPresentationManager
      * @param string $email
      * @param Member|null $member
      * @param IPresentationSpeaker|null $speaker
+     * @param string|null $role
      * @return IPresentationSpeaker
      */
-    public function addSpeakerByEmailTo(IPresentation $presentation, $email, Member $member = null, IPresentationSpeaker $speaker = null);
+    public function addSpeakerByEmailTo(IPresentation $presentation, $email, Member $member = null, IPresentationSpeaker $speaker = null, $role = null);
 
     /**
      * @param IPresentation $presentation

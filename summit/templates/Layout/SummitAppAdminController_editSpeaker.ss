@@ -125,7 +125,7 @@
                          <% loop $Speaker.AllPresentations($Top.Summit.ID) %>
                              <li>
                                 <a href="{$Top.Link}/{$Top.Summit.ID}/events/{$ID}">$Title</a>
-                                 - <% if $ModeratorID == $Top.Speaker.ID %> Moderator <% else %> Speaker <% end_if %>
+                                 - <% if isModeratorByID($Top.Speaker.ID) %> Moderator <% else %> Speaker <% end_if %>
                                  - $getStatusNice()
                             </li>
                          <% end_loop %>

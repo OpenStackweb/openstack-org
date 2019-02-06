@@ -48,7 +48,7 @@ interface ISummitEventManager
      * @param int $max_file_size
      * @return File
      */
-    public function uploadAttachment(ISummit $summit, $event_id, $tmp_file, $max_file_size = 10*1024*1024);
+    public function uploadAttachment(ISummit $summit, $event_id, $tmp_file, $max_file_size = 10485760);
 
     /**
      * @param ISummit $summit

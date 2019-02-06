@@ -102,28 +102,6 @@ class SapphireSummitEventRepository extends SapphireRepository implements ISummi
                     LEFT JOIN Org ON Org.ID = A.OrganizationID
                     WHERE P.ID = E.ID AND (S.ID = '{$term}' OR M.Email LIKE '{$term}' OR Org.Name LIKE '%{$term}%')
                 )
-            UNION SELECT DISTINCT E.* FROM SummitEvent E
-                WHERE E.SummitID = {$summit_id} AND E.Published = 1
-                AND EXISTS
-                (
-                    SELECT P.ID, CONCAT(S.FirstName,' ',S.LastName) AS SpeakerFullName  From Presentation P
-                    INNER JOIN PresentationSpeaker S ON S.ID = P.ModeratorID
-                    LEFT JOIN Member M ON M.ID = S.MemberID
-                    LEFT JOIN Affiliation A ON A.MemberID = S.MemberID
-                    LEFT JOIN Org ON Org.ID = A.OrganizationID
-                    WHERE P.ID = E.ID AND (S.ID = '{$term}' OR M.Email LIKE '{$term}' OR Org.Name LIKE '%{$term}%')
-                )
-            UNION SELECT DISTINCT E.* FROM SummitEvent E
-                WHERE E.SummitID = {$summit_id} AND E.Published = 1
-                AND EXISTS
-                (
-                    SELECT P.ID, CONCAT(S.FirstName,' ',S.LastName) AS SpeakerFullName  From Presentation P
-                    INNER JOIN PresentationSpeaker S ON S.ID = P.ModeratorID
-                    WHERE P.ID = E.ID
-                    HAVING
-                        SpeakerFullName LIKE '%{$term}%'
-                        OR SOUNDEX(SpeakerFullName) = SOUNDEX('{$term}')
-                )
 SQL;
 
         foreach(DB::query($sql_events.") AS Q1 ORDER BY StartDate ASC, EndDate ASC ;") as $row)

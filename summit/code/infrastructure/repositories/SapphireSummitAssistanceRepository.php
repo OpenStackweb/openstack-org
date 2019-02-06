@@ -51,7 +51,6 @@ FROM SummitEvent AS E
 INNER JOIN Presentation AS P ON P.ID = E.ID
 LEFT JOIN Presentation_Speakers AS PS ON PS.PresentationID = P.ID
 LEFT JOIN PresentationSpeaker SP ON SP.ID = PS.PresentationSpeakerID
-LEFT JOIN PresentationSpeaker SP2 ON SP2.ID = P.ModeratorID
 WHERE 
 E.SummitID = {$summit_id}
 AND E.Published = 1 
@@ -147,7 +146,7 @@ E.Title AS event,
 L.Name AS room,
 L2.Name AS venue,
 R.Capacity AS capacity,
-(COUNT(DISTINCT(SA.SpeakerID), SA.SpeakerID IS NOT NULL) + IF(P.ModeratorID != 0, 1, 0)) AS speakers,
+(COUNT(DISTINCT(SA.SpeakerID), SA.SpeakerID IS NOT NULL)) AS speakers,
 E.HeadCount AS headcount,
 COUNT(DISTINCT A.ID) AS total,
 GROUP_CONCAT(DISTINCT CONCAT(S.FirstName,' ',S.LastName) SEPARATOR ', ') AS speaker_list

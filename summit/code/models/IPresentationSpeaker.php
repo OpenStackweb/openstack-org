@@ -24,8 +24,8 @@ interface IPresentationSpeaker extends IEntity
     const AnnouncementEmailAcceptedAlternate = 'ACCEPTED_ALTERNATE';
     const AnnouncementEmailAcceptedRejected  = 'ACCEPTED_REJECTED';
     const AnnouncementEmailAlternateRejected = 'ALTERNATE_REJECTED';
-    const RoleSpeaker                        = 'SPEAKER';
-    const RoleModerator                      = 'MODERATOR';
+    const RoleSpeaker                        = 'Speaker';
+    const RoleModerator                      = 'Moderator';
 
     /**
      * @return  string

@@ -1119,17 +1119,7 @@ SQL;
                 WHERE E.SummitID = {$id}
                 {$filter}
                 AND PS.PresentationSpeakerID = PresentationSpeaker.ID
-            )
-            OR
-            EXISTS 
-            (
-               SELECT 1 FROM SummitEvent E
-               INNER JOIN Presentation ON Presentation.ID = E.ID
-               WHERE E.SummitID   = {$id}
-               AND Presentation.ModeratorID = PresentationSpeaker.ID
-               {$filter}
-            )
-            ");
+            )");
 
         return $dl;
     }
