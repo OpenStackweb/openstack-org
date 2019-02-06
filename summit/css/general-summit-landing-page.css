@@ -2028,7 +2028,7 @@ a.photo-credit {
     }
 
     .all-summit .what-to-expect .video-container .video {
-        height: 20em;
+        min-height: 20em;
         margin: 0;
     }
 
