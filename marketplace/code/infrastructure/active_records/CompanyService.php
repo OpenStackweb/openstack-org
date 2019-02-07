@@ -58,6 +58,20 @@ class CompanyService
 		parent::onBeforeWrite();
 	}
 
+    function validate()
+    {
+        $valid = parent::validate();
+        if (!$valid->valid()) {
+            return $valid;
+        }
+
+        if($this->Active && ($this->Company() && $this->Company()->isDeleted)) {
+            return $valid->error('Cannot activate if Company is marked as deleted');
+        }
+
+        return $valid;
+    }
+
 	/**
 	 * @return IMarketPlaceType
 	 */

@@ -28,4 +28,16 @@ class CompanyAdmin extends ModelAdmin
         parent::init();
         Requirements::css(THEMES_DIR . "/openstack/css/company_admin.css");
     }
+
+    public function getEditForm($id = null, $fields = null)
+    {
+        $form = parent::getEditForm($id, $fields);
+
+        /** @var GridField $grid */
+        if ($grid = $form->Fields()->dataFieldByName('Company')) {
+            $grid->getConfig()->removeComponentsByType('GridFieldDeleteAction');
+        }
+
+        return $form;
+    }
 }

@@ -18,25 +18,6 @@
 class Company extends DataObject implements PermissionProvider,IEntity
 {
 
-    public function getIdentifier() {
-        return $this->ID;
-    }
-
-    static $has_one = array(
-
-        'CompanyListPage' => 'CompanyListPage',
-        'Logo'            => 'BetterImage',
-        'BigLogo'         => 'BetterImage',
-        'Submitter'       => 'Member',
-        'CompanyAdmin'    => 'Member'
-    );
-
-    static $many_many_extraFields = array(
-        'Administrators' => array(
-            'GroupID' => "Int",
-        ),
-    );
-
     private static $db = array(
         'Name' => 'Text',
         'URL' => 'Text',
@@ -54,10 +35,25 @@ class Company extends DataObject implements PermissionProvider,IEntity
         'AdminEmail' => 'Text',
         'URLSegment' => 'Text',
         'Color' => 'Text',
-        //marketplace updates
         'Overview' => 'HTMLText',
         'Commitment' => 'HTMLText',
         'CommitmentAuthor' => 'Varchar(255)',
+        'isDeleted' => 'Boolean(0)'
+    );
+
+    static $has_one = array(
+
+        'CompanyListPage' => 'CompanyListPage',
+        'Logo'            => 'BetterImage',
+        'BigLogo'         => 'BetterImage',
+        'Submitter'       => 'Member',
+        'CompanyAdmin'    => 'Member'
+    );
+
+    static $many_many_extraFields = array(
+        'Administrators' => array(
+            'GroupID' => "Int",
+        ),
     );
 
     private static $defaults = array(
@@ -82,6 +78,37 @@ class Company extends DataObject implements PermissionProvider,IEntity
         'MemberLevel' => 'MemberLevel'
     );
 
+    public function getIdentifier() {
+        return $this->ID;
+    }
+
+    function onBeforeWrite() {
+        parent::onBeforeWrite();
+
+        // Assign an Admin using the provided email address
+        if ($this->AdminEmail) {
+            $EmailAddress = Convert::raw2sql($this->AdminEmail);
+            $Member = Member::get()->filter('Email',$EmailAddress)->first();
+            if ($Member) {
+                $this->CompanyAdminID = $Member->ID;
+            }
+        } else {
+            $this->CompanyAdminID = "";
+        }
+
+        if($this->isDeleted) {
+            $sql = <<< SQL
+			UPDATE CompanyService SET Active = 0 WHERE CompanyID = {$this->ID};
+SQL;
+            DB::query($sql);
+
+            $sql = <<< SQL
+			UPDATE CompanyServiceDraft SET Active = 0 WHERE CompanyID = {$this->ID};
+SQL;
+            DB::query($sql);
+        }
+
+    }
 
     function providePermissions()
     {
@@ -171,6 +198,7 @@ class Company extends DataObject implements PermissionProvider,IEntity
             new Tab(
                 $title = 'Company',
                 new HeaderField("Company Data"),
+                new CheckboxField('isDeleted', 'Deleted'),
                 new TextField('Name', 'Company Name'),
                 new TextField('URLSegment', 'Unique page name for this company profile (ie: company-name)'),
                 new TextField ('URL', 'Company Web Address (URL)'),
@@ -248,9 +276,9 @@ class Company extends DataObject implements PermissionProvider,IEntity
         $MemberID = Member::currentUserID();
 
         return $this->CompanyAdminID == $MemberID || Permission::check("MANAGE_COMPANY_LOGOS") || Permission::check("MANAGE_COMPANY_PROFILE") || $this->PermissionCheck(array(
-            "MANAGE_COMPANY_PROFILE",
-            'MANAGE_COMPANY_LOGOS'
-        ));
+                "MANAGE_COMPANY_PROFILE",
+                'MANAGE_COMPANY_LOGOS'
+            ));
     }
 
     private function PermissionCheck(array $permission_2_check)
@@ -337,21 +365,6 @@ class Company extends DataObject implements PermissionProvider,IEntity
         return $this->DisplayOnSite ? 'Yes' : 'No';
     }
 
-    function onBeforeWrite() {
-        parent::onBeforeWrite();
-
-        // Assign an Admin using the provided email address
-        if ($this->AdminEmail) {
-            $EmailAddress = Convert::raw2sql($this->AdminEmail);
-            $Member = Member::get()->filter('Email',$EmailAddress)->first();
-            if ($Member) {
-                $this->CompanyAdminID = $Member->ID;
-            }
-        } else {
-            $this->CompanyAdminID = "";
-        }
-
-    }
     //Test whether the URLSegment exists already on another Product
     function LookForExistingURLSegment($URLSegment)
     {
