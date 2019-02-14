@@ -13,7 +13,7 @@
             </a>
         <% end_if %>
         <% if $WeChatUser %>
-            <a class="staff-wechat" href="{$WeChatUser}">
+            <a class="staff-wechat" href="javascript:copyWeChatID('{$WeChatUser}')">
                 <i class="fa fa-weixin" aria-hidden="true"></i>
             </a>
         <% end_if %>

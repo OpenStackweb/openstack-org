@@ -56,5 +56,7 @@ class OpenStackFoundationStaffPage_Controller extends Page_Controller{
     public function init() {
         parent::init();
         Requirements::css(THEMES_DIR ."/openstack/css/bio.css");
+        SweetAlert2Dependencies::renderRequirements();
+        Requirements::javascript(THEMES_DIR ."/openstack/javascript/foundation.js");
     }
 }

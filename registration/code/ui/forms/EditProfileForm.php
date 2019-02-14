@@ -94,7 +94,7 @@ class EditProfileForm extends SafeXSSForm
         $LinkedInProfileField = new TextField('LinkedInProfile', 'LinkedIn Profile - full URL <em>(Optional)</em>');
         $LinkedInProfileField->setAttribute('type', 'url')->setAttribute('pattern', 'https?://.+');
         $ContactEmailField = new TextField('ContactEmail', 'Contact Email <em>(Optional)</em>');
-        $WeChatUserField = new TextField('WeChatUser', 'WeChat User <em>(Optional)</em>');
+        $WeChatUserField = new TextField('WeChatUser', 'WeChat ID <em>(Optional)</em>');
 
 
         // Associated Projects

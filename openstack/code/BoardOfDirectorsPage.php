@@ -38,5 +38,7 @@ class BoardOfDirectorsPage_Controller extends  Page_Controller{
         parent::init();
         Requirements::css(THEMES_DIR ."/openstack/css/bio.css");
         Requirements::css(THEMES_DIR ."/openstack/css/staff.css");
+        SweetAlert2Dependencies::renderRequirements();
+        Requirements::javascript(THEMES_DIR ."/openstack/javascript/foundation.js");
     }
 }
