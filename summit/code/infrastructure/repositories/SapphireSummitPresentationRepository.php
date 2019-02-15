@@ -591,7 +591,7 @@ SQL;
         $status_received = Presentation::STATUS_RECEIVED;
         $summit = Summit::get()->byID($summit_id);
         $schedule_page = SummitAppSchedPage::getBy($summit);
-        $scheduleLink = $schedule_page->getAbsoluteLiveLink(false);
+        $scheduleLink =  $schedule_page ? $schedule_page->getAbsoluteLiveLink(false) : '';
 
         $query_body = <<<SQL
             FROM SummitEvent AS E
