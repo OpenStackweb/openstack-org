@@ -99,6 +99,10 @@ class OpenStackRelease
         return (int)$this->getField('ID');
     }
 
+    public static function getDefaultRelease() {
+        return  OpenStackRelease::get()->filter('Status', 'Current')->sort('ReleaseDate','DESC')->first();
+    }
+
     /**
      * @return string
      */

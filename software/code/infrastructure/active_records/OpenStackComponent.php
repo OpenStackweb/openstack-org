@@ -59,7 +59,9 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
 
     static $many_many = array
     (
-        'Tags'  => 'OpenStackComponentTag'
+        'Tags'  => 'OpenStackComponentTag',
+        'Dependencies' => 'OpenStackComponent',
+        'RelatedComponents' => 'OpenStackComponent'
     );
 
     private static $many_many_extraFields = array
@@ -325,5 +327,12 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
         } else {
             return null;
         }
+    }
+
+    public function getLink() {
+        $default_release = OpenStackRelease::getDefaultRelease();
+        $software_page = SoftwareHomePage::get()->first();
+
+        return $software_page->Link().'releases/'.strtolower($default_release->Name).'/components/'.$this->Slug;
     }
 }

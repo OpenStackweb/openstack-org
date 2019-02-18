@@ -405,8 +405,8 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                                 $comp->DownloadLinkID = null;
                             }
 
+                            // LINKS
                             $comp->Links()->removeAll();
-
                             if (isset($component['links'])) {
                                 foreach ($component['links'] as $linkArray) {
                                     if (!is_array($linkArray)) continue;
@@ -425,25 +425,43 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                                 }
                             }
 
+                            // SUPPORT TEAMS
                             $comp->SupportTeamsLinks()->removeAll();
-
                             if (isset($component['support-teams'])) {
-                                foreach ($component['support-teams'] as $linkArray) {
-                                    if (!is_array($linkArray)) continue;
-                                    foreach ($linkArray as $label) {
-                                        $linkObj = OpenStackComponentLink::get()->filter(['Label' => $label, 'ComponentID' => $comp->ID])->First();
+                                foreach ($component['support-teams'] as $label) {
+                                    $linkObj = OpenStackComponentLink::get()->filter(['Label' => $label, 'ComponentID' => $comp->ID])->First();
 
-                                        if (!$linkObj) {
-                                            $linkObj = new OpenStackComponentLink();
-                                            $linkObj->Label = $label;
-                                            $linkObj->URL = `https://governance.openstack.org/tc/reference/projects/${label}.html`;
-                                            $linkObj->write();
-                                        }
-
-                                        $comp->SupportTeamsLinks()->add($linkObj);
+                                    if (!$linkObj) {
+                                        $linkObj = new OpenStackComponentLink();
+                                        $linkObj->Label = $label;
+                                        $linkObj->URL = 'https://governance.openstack.org/tc/reference/projects/'.$label.'.html';
+                                        $linkObj->write();
                                     }
+
+                                    $comp->SupportTeamsLinks()->add($linkObj);
                                 }
                             }
+
+                            // DEPENDENCIES
+                            $comp->Dependencies()->removeAll();
+                            if (isset($component['dependencies'])) {
+                                foreach ($component['dependencies'] as $dep) {
+                                    $compObj = OpenStackComponent::get()->filter('CodeName', $dep)->First();
+                                    if (!$compObj) continue;
+                                    $comp->Dependencies()->add($compObj);
+                                }
+                            }
+
+                            // SEE ALSO - RELATED
+                            $comp->RelatedComponents()->removeAll();
+                            if (isset($component['see-also'])) {
+                                foreach ($component['see-also'] as $related) {
+                                    $compObj = OpenStackComponent::get()->filter('CodeName', $related)->First();
+                                    if (!$compObj) continue;
+                                    $comp->RelatedComponents()->add($compObj);
+                                }
+                            }
+
 
                             $comp->write();
 

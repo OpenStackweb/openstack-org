@@ -294,13 +294,7 @@ class SoftwareHomePage_Controller extends Page_Controller
      */
     public function getDefaultRelease()
     {
-        return  OpenStackRelease::get()->filter
-        (
-            array
-            (
-                'Status' => 'Current',
-            )
-        )->sort('ReleaseDate','DESC')->first();
+        return  OpenStackRelease::getDefaultRelease();
     }
 
     public function getCurrentRelease()

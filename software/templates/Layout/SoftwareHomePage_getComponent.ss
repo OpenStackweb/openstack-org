@@ -40,7 +40,7 @@
                     <% end_if %>
                     <% if $Component.Since %>
                     <p>
-                        <%t Software.FIRST_APPEARANCE 'First appeared in ' %> $Component.Since
+                        <%t Software.FIRST_APPEARANCE 'First appeared in OpenStack' %> '$Component.Since' release
                     </p>
                     <% end_if %>
                 </div>
@@ -71,6 +71,32 @@
                         <div class="col-sm-12">
                             <% loop $Component.SupportTeamsLinks() %>
                                 <a class="component-link" href="{$URL}">{$Label}</a>
+                                <% if not $Last %><span style="margin-right:10px">|</span><% end_if %>
+                            <% end_loop %>
+                        </div>
+                    </div>
+                <% end_if %>
+
+                <% if $Component.Dependencies().Count %>
+                    <hr style="margin: 40px 0;">
+                    <h4><%t Software.DEPENDS_ON 'Depends on' %></h4>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <% loop $Component.Dependencies() %>
+                                <a class="component-link" href="{$getLink}">{$CodeName}</a>
+                                <% if not $Last %><span style="margin-right:10px">|</span><% end_if %>
+                            <% end_loop %>
+                        </div>
+                    </div>
+                <% end_if %>
+
+                <% if $Component.RelatedComponents().Count %>
+                    <hr style="margin: 40px 0;">
+                    <h4><%t Software.SEE_ALSO 'See also' %></h4>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <% loop $Component.RelatedComponents() %>
+                                <a class="component-link" href="{$getLink}">{$CodeName}</a>
                                 <% if not $Last %><span style="margin-right:10px">|</span><% end_if %>
                             <% end_loop %>
                         </div>
