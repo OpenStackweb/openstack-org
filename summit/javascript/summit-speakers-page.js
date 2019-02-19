@@ -27,9 +27,17 @@ $(window).on("scroll", function(e) {
 });
 
 $(function() {
-   $('.char-link').live('click', function(event){
+   $('.char-link').on('click', function(event){
+       event.preventDefault();
+
        $('.char-link').removeClass('active');
        $('.char-link').addClass('inactive');
        $(event.target).addClass('active');
+
+       var charLink = $(this).data('char');
+
+       $('html, body').animate({
+           scrollTop: $('#'+charLink).offset().top - 150
+       }, 2000);
    });
 });

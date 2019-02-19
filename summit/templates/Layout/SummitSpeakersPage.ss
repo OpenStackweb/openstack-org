@@ -3,7 +3,7 @@
     <div id="nav-char">
         <% loop getNavLetters %>
             <span class="nav-char-item">
-                <a class="char-link inactive" href="#{$Char}">$Char</a>
+                <a class="char-link inactive" href="" data-char="{$Char}" >$Char</a>
             </span>
         <% end_loop %>
     </div>
@@ -14,7 +14,7 @@
                 <%if $First %>
                     <div class="row">
                 <% end_if %>
-                <div class="col-lg-3 col-md-4 col-sm-6 col-xsm-6 featured" id="{$getFirstLetterFromName}">
+                <div class="col-lg-3 col-md-4 col-sm-6 col-xsm-6 featured" id="{$getFirstLetterFromName}" name="{$getFirstLetterFromName}">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
                             <a title="see {$getName()}'s sessions" href="{$Top.getScheduleGlobalSearchPageLink($getName)}">
@@ -33,4 +33,5 @@
             <% end_loop %>
         </div>
     </div>
+
 <% end_cached %>
