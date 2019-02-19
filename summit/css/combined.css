@@ -1318,7 +1318,7 @@ a.current-summit-link {
   color: #ffd602;
 }
 
-.sponsors_button {
+a.sponsors_button {
     border: none;
     padding: 1.3rem 3.5rem;
     text-decoration: none;
