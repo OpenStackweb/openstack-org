@@ -1399,7 +1399,7 @@ a.sponsors_button, a:visited.sponsors_button  {
     margin:0 !important;
 }
 @media (min-width: 1200px) {
-    .tokyo-landing-wrapper.boston {
+    .future-text-wrapper.blue {
       height:100%;
       max-height: 700px;
     }
