@@ -1121,6 +1121,12 @@ footer {
   max-height: 600px;
   }
 
+  @media (min-width: 1200px) {
+    .tokyo-landing-wrapper.boston {
+      max-height: 0px;
+    }
+  }
+
 /*Tokyo Summit Landing Page*/
 .tokyo-landing-wrapper {
   position: relative;
@@ -1318,7 +1324,7 @@ a.current-summit-link {
   color: #ffd602;
 }
 
-a.sponsors_button {
+a.sponsors_button, a:visited.sponsors_button  {
     border: none;
     padding: 1.3rem 3.5rem;
     text-decoration: none;
