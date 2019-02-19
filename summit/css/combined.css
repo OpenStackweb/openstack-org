@@ -1117,7 +1117,9 @@ footer {
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  overflow: scroll;}
+  overflow: scroll;
+  max-height: 600px;
+  }
 
 /*Tokyo Summit Landing Page*/
 .tokyo-landing-wrapper {
@@ -1306,11 +1308,35 @@ a.current-summit-link {
 .landingintro {
   margin-top: 3rem;
 }
-.join-us-text {
+.join-us-text, .join-us-text-yellow {
   color: #ffd602;
   font-size: 1.5em;
   font-weight: bold;
 }
+
+.join-us-text-yellow {
+  color: #ffd602;
+}
+
+.sponsors_button {
+    border: none;
+    padding: 1rem 6rem;
+    text-decoration: none;
+    background: #ffd602;
+    color: #111111;
+    font-family: sans-serif;
+    font-size: 1.5rem;
+    cursor: pointer;
+    text-align: center;
+    transition: background 250ms ease-in-out, transform 150ms ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    margin-top: 1rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 25px;
+}
+
 .e2ma_signup_form {
   margin-top: 6rem;
   color: white;
@@ -1343,8 +1369,8 @@ a.current-summit-link {
   border: none;
   padding: 1rem 6rem;
   text-decoration: none;
-  background: #ffd602;
-  color: #111111;
+  background: #ed1944;
+  color: #ffffff;
   font-family: sans-serif;
   font-size: 1.5rem;
   cursor: pointer;
@@ -1355,6 +1381,19 @@ a.current-summit-link {
   margin-top: 1rem;
   text-transform: uppercase;
   font-weight: bold;
+  border-radius: 25px;
+}
+.future-text-wrapper.blue {
+    min-height:200px;
+    width: 100%;
+    background-color: #00468b;
+    text-align: center;
+}
+.future-text-wrapper.yellow {
+    min-height:2px;
+    width: 100%;
+    background-color: #ffd602;
+    text-align: center;
 }
 /*End Shanghai landing */
 /* Presentation App */

@@ -4,13 +4,13 @@
     	<div class="row">
     		<div class="landingintro">
                     <img class="tokyo-landing-logo" src="/assets/summits/shanghai/Shanghai2019-Summit-Logo-Web.svg" onerror="this.onerror=null; this.src=/assets/summits/shanghai/Shanghai2019-Summit-Logo-Web.svg" alt="OpenStack Infrastructure Summit">
-                    <p class="join-us-text">Join us in Shanghai!</p>
+                    <p><span class="join-us-text-yellow">Join us in Shanghai!</span></p>
                     <p class="join-us-text">到上海加入我们</p>
-                    <script type="text/javascript" src="https://signup.e2ma.net/tts_signup/1892782/dc3896463a1fcdd2f57f993be48d29f6/1771360/"></script><div id="load_check" class="signup_form_message" >This form needs Javascript to display, which your browser doesn't support. <a href="https://signup.e2ma.net/signup/1892782/1771360/"> Sign up here</a> instead </div><script type="text/javascript">signupFormObj.drawForm();</script>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p><a href="mailto:summit@openstack.org" style="color:#fff;text-decoration:underline;">Interested in sponsoring the Summit?</a> | <a href="/assets/summits/shanghai/preliminaryshanghaiprospectus.pdf" style="color:#fff;text-decoration:underline;">View the Prospectus</a></p>
-                <!-- <div class="save-the-date"> Save The Date! </div>
+                    <p><a href="/summit/shanghai-2019/sponsors/" class="sponsors_button" style="margin: 10px;">
+                            SPONSOR THE SUMMIT
+                            <i class="fa fa-cloud-download"></i>
+                        </a></p>
+                    <!-- <div class="save-the-date"> Save The Date! </div>
     			<h1> $IntroText </h1>
                 <div class="summit-location">$MainTitle</div>
                 <div class="summit-date">
@@ -54,4 +54,10 @@
     <a href="{$PhotoUrl}" class="photo-credit" data-toggle="tooltip" data-placement="left" title="{$PhotoTitle}" target="_blank">
         <i class="fa fa-info-circle"></i>
     </a>
+</div>
+<div class="row future-wrapper yellow">
+    
+</div>
+<div class="row future-wrapper blue">
+    <script type="text/javascript" src="https://signup.e2ma.net/tts_signup/1892782/dc3896463a1fcdd2f57f993be48d29f6/1771360/"></script><div id="load_check" class="signup_form_message" >This form needs Javascript to display, which your browser doesn't support. <a href="https://signup.e2ma.net/signup/1892782/1771360/"> Sign up here</a> instead </div><script type="text/javascript">signupFormObj.drawForm();</script>
 </div>
