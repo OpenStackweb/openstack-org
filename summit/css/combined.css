@@ -1123,7 +1123,7 @@ footer {
 
   @media (min-width: 1200px) {
     .tokyo-landing-wrapper.boston {
-      max-height: 0px;
+      max-height: 900px;
     }
   }
 
@@ -1390,12 +1390,20 @@ a.sponsors_button, a:visited.sponsors_button  {
   border-radius: 25px;
 }
 .future-text-wrapper.blue {
+    height:100%;
     min-height:200px;
+    max-height:300px;
     width: 100%;
     background-color: #00468b;
     text-align: center;
     margin:0 !important;
 }
+@media (min-width: 1200px) {
+    .tokyo-landing-wrapper.boston {
+      height:100%;
+      max-height: 700px;
+    }
+  }
 .future-text-wrapper.yellow {
     min-height:2px;
     width: 100%;
