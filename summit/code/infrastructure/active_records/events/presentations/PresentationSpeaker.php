@@ -487,7 +487,14 @@ class PresentationSpeaker extends DataObject
             }
         }
 
-        return new ArrayList($list);
+        $result = [];
+        foreach ($list as $p) {
+            if ($p->SelectionStatus() == IPresentation::SelectionStatus_Accepted) {
+                $result[] = $p;
+            }
+        }
+
+        return new ArrayList($result);
     }
 
     /**
