@@ -1388,12 +1388,14 @@ a.current-summit-link {
     width: 100%;
     background-color: #00468b;
     text-align: center;
+    margin:0 !important;
 }
 .future-text-wrapper.yellow {
     min-height:2px;
     width: 100%;
     background-color: #ffd602;
     text-align: center;
+    margin:0 !important;
 }
 /*End Shanghai landing */
 /* Presentation App */
