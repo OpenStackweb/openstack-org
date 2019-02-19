@@ -6,9 +6,12 @@
                     <img class="tokyo-landing-logo" src="/assets/summits/shanghai/Shanghai2019-Summit-Logo-Web.svg" onerror="this.onerror=null; this.src=/assets/summits/shanghai/Shanghai2019-Summit-Logo-Web.svg" alt="OpenStack Infrastructure Summit">
                     <p><span class="join-us-text-yellow">Join us in Shanghai!</span></p>
                     <p class="join-us-text">到上海加入我们</p>
+                    <p>&nbsp;</p>
                     <p><a href="/summit/shanghai-2019/sponsors/" class="sponsors_button" style="margin: 10px;">
                             SPONSOR THE SUMMIT
                         </a></p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
                     <!-- <div class="save-the-date"> Save The Date! </div>
     			<h1> $IntroText </h1>
                 <div class="summit-location">$MainTitle</div>
@@ -54,9 +57,10 @@
         <i class="fa fa-info-circle"></i>
     </a>
 </div>
-<div class="row future-wrapper yellow">
+<div class="row future-text-wrapper yellow">
     
 </div>
-<div class="row future-wrapper blue">
+<div class="row future-text-wrapper blue">
     <script type="text/javascript" src="https://signup.e2ma.net/tts_signup/1892782/dc3896463a1fcdd2f57f993be48d29f6/1771360/"></script><div id="load_check" class="signup_form_message" >This form needs Javascript to display, which your browser doesn't support. <a href="https://signup.e2ma.net/signup/1892782/1771360/"> Sign up here</a> instead </div><script type="text/javascript">signupFormObj.drawForm();</script>
+    <p>&nbsp;</p>
 </div>
