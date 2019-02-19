@@ -8,7 +8,6 @@
                     <p class="join-us-text">到上海加入我们</p>
                     <p><a href="/summit/shanghai-2019/sponsors/" class="sponsors_button" style="margin: 10px;">
                             SPONSOR THE SUMMIT
-                            <i class="fa fa-cloud-download"></i>
                         </a></p>
                     <!-- <div class="save-the-date"> Save The Date! </div>
     			<h1> $IntroText </h1>
