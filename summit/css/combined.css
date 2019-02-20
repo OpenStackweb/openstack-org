@@ -1117,14 +1117,7 @@ footer {
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  overflow: scroll;
   max-height: 600px;
-  }
-
-  @media (min-width: 1200px) {
-    .tokyo-landing-wrapper.boston {
-      max-height: 900px;
-    }
   }
 
 /*Tokyo Summit Landing Page*/
@@ -1398,10 +1391,10 @@ a.sponsors_button, a:visited.sponsors_button  {
     text-align: center;
     margin:0 !important;
 }
-@media (min-width: 1200px) {
+@media (min-width: 1300px) {
     .future-text-wrapper.blue {
       height:100%;
-      max-height: 700px;
+      max-height: 500px;
     }
   }
 .future-text-wrapper.yellow {
