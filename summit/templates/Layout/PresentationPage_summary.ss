@@ -9,11 +9,7 @@
             <div class="col-lg-9 col-md-9">
                 <div class="presentation-main-panel">
                     <div class="main-panel-section">
-                        <% if $Presentation.exists %>
-                            <h2>Edit Your Presentation</h2>
-                        <% else %>
-                            <h2>Add New Presentation</h2>
-                        <% end_if %>
+                        <h2>{$HeaderTitle}</h2>
                     </div>
                     $PresentationForm
                 </div>

@@ -698,7 +698,8 @@ class PresentationPage_ManageRequest extends RequestHandler
     public function summary(SS_HTTPRequest $r)
     {
         return $this->customise(array(
-            'Presentation' => $this->presentation
+            'Presentation' => $this->presentation,
+            'HeaderTitle' => $this->getSubmissionTitle()
         ))->renderWith(array('PresentationPage_summary', 'PresentationPage'), $this->parent);
     }
 
@@ -717,7 +718,8 @@ class PresentationPage_ManageRequest extends RequestHandler
     public function tags(SS_HTTPRequest $r)
     {
         return $this->customise(array(
-            'Presentation' => $this->presentation
+            'Presentation' => $this->presentation,
+            'HeaderTitle' => $this->getSubmissionTitle()
         ))->renderWith(array('PresentationPage_tags', 'PresentationPage'), $this->parent);
     }
 
@@ -1103,6 +1105,21 @@ class PresentationPage_ManageRequest extends RequestHandler
             $vars = '?GoBackStep=manage/'.$this->presentation->ID.'/speakers';
             return $this->parent->redirect($this->parent->Link().$vars);
         }
+    }
+
+    public function getSubmissionTitle()
+    {
+        $title = $this->presentation->Exists() ? 'Edit Your' : 'Add New';
+        
+        if ($selection_plan = $this->Summit()->getOpenSelectionPlanForStage('Submission')) {
+            if (strpos(strtolower($selection_plan->Name), 'forum') !== false) {
+                $title .= ' Forum Session';
+            } else {
+                $title .= ' Presentation';
+            }
+        }
+
+        return $title;
     }
 }
 

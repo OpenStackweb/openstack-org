@@ -9,8 +9,13 @@
             <div class="col-lg-9 col-md-9">
                 <div class="presentation-main-panel">
                     <div class="main-panel-section">
-                        <h2><% if $Presentation.Speakers %>Speakers<% else %>Add a
-                            Speaker<% end_if %></h2>
+                        <h2>
+                            <% if $Presentation.Speakers %>
+                                Speakers
+                            <% else %>
+                                Add a Speaker
+                            <% end_if %>
+                        </h2>
                     </div>
 
                     <% if $Presentation.Moderator %>
