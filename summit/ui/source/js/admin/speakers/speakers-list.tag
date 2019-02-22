@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-md-6" style="margin:0  0 20px 0;">
             <div class="input-group" style="width: 100%;">
-                <input data-rule-required="true" data-rule-minlength="3" type="text" id="speakers_search_term" class="form-control input-global-search" placeholder="Search by Name">
+                <input data-rule-required="true" data-rule-minlength="3" type="text" id="speakers_search_term" class="form-control input-global-search" placeholder="Search by Name or Email">
                 <span class="input-group-btn" style="width: 5%;">
                     <button class="btn btn-default btn-global-search" id="search_speakers"><i class="fa fa-search"></i></button>
                     <button class="btn btn-default btn-global-search-clear" onclick="{ clearClicked }">
