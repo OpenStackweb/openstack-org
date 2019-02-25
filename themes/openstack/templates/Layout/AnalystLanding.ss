@@ -29,7 +29,7 @@
 			<div class="col-sm-10 col-sm-push-1" style="text-align:left;">
 				<h2>OpenStack User Momentum Continues to Build</h2>
 				<h3>Updates from the OpenStack Foundation</h3>
-				<p>The OpenStack Foundation highlighted recent market share statistics, new users and updates from the broader open infrastructure community at its recent OpenStack Summit in May 2018. <a href="/assets/analysts/Vancouver-Summit-FoundationUpdate.pdf" target="_blank">Download the presentation</a>.</p>
+				<p>The OpenStack Foundation highlighted recent market share statistics, new users and updates from the broader open infrastructure community at its recent OpenStack Summit in May 2018. <a href="{$Top.CloudUrl('assets/analysts/Vancouver-Summit-FoundationUpdate.pdf')}" target="_blank">Download the presentation</a>.</p>
 
 				<h3>According to 451 Research: Voice of the Service Provider</h3>
  
@@ -57,7 +57,7 @@
 				<blockquote>Fast and easy deployment, no compulsion of vendor lock-in, and advantage of wide community support are the factors driving the growth of the market across the globe.</blockquote>
 				<div class="testimonial-attribute"><a href="https://www.marketsandmarkets.com/Market-Reports/openstack-services-market-188374872.html" target="_blank">OpenStack Service Market by Component (Solution, Service), Organization Size (Large Enterprises, Small & Medium Enterprises), Vertical (IT, Telecommunication, Academic & Research, BFSI, Retail & E-Commerce), and Region - Global Forecast to 2022, Markets and Markets</a>, Feb 2018</div>
 				<p>&nbsp;</p>
-				<img src="https://www.openstack.org/assets/analysts/analystgraph.png" width="90%">
+				<img src="{$Top.CloudUrl('assets/analysts/analystgraph.png')}" width="90%">
 				<p>&nbsp;</p>
 				<p>Global OpenStack service market is estimated to reach USD 8 billion at CAGR 29% through the forecast period 2023.</p>
 				<p style="font-size=.8em"><a href="https://www.marketresearchfuture.com/reports/openstack-service-market-5778" target="_blank">OpenStack Service Market Research Report - Forecast to 2023, Market Research Future</a>, June 2018</p>

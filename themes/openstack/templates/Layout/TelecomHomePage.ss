@@ -44,7 +44,7 @@
                     <i class="fa fa-tv fa-5x nfv-download-icon"></i>
                     <a href="https://openstack.webex.com/openstack/j.php?MTID=macf4bf544f2d6a7b8958739041e1763b" class="container-download-btn">WATCH THE WEBINAR <i class="fa fa-chevron-right"></i></a>
                     <!--  <p style="margin-top: 10px;">
-                        <a style="color:white;" href="//openstack.org/assets/pdf-downloads/OpenStack-survey-results-public-presentation.pdf"><em>Download the Webinar Slides</em></a>
+                        <a style="color:white;" href="{$Top.CloudUrl('assets/pdf-downloads/OpenStack-survey-results-public-presentation.pdf')}"><em>Download the Webinar Slides</em></a>
                     </p> -->
                 </div>
             </div>
@@ -233,7 +233,7 @@
                 </div>
                   <div class="col-sm-4">
                       <div class="nfv-summit-right">
-                          <img class="nfv-summit-logo" src="/assets/Uploads/arrows.svg" alt="Open Infrastructure Summit">
+                          <img class="nfv-summit-logo" src="{$Top.CloudUrl('assets/Uploads/arrows.svg')}" alt="Open Infrastructure Summit">
                           <div class="nfv-summit-dates containers"><strong>Open Infrastructure Summit</strong>
                               April 29 - May 1
                           </div>
@@ -260,7 +260,7 @@
                 <i class="fa fa-file-pdf-o fa-4x"></i>
                 Read Accelerating NFV Delivery with OpenStack, a report created by the OpenStack Foundation in collaboration with ten global communications companies, to learn more about Network Functions Virtualization.
             </p>
-                <a href="/assets/telecoms-and-nfv/OpenStack-Foundation-NFV-Report.pdf" class="download-btn" download="OpenStack-Foundation-NFV-Report.pdf"><i class="fa fa-arrow-circle-down fa-2x"></i> Download the NFV Foundation Report</a>
+                <a href="{$Top.CloudUrl('assets/telecoms-and-nfv/OpenStack-Foundation-NFV-Report.pdf')}" class="download-btn" download="OpenStack-Foundation-NFV-Report.pdf"><i class="fa fa-arrow-circle-down fa-2x"></i> Download the NFV Foundation Report</a>
             <hr>
             <p>
 

@@ -93,7 +93,7 @@
         <li><a href="http://openstackfoundation.formstack.com/forms/boston_summit_discounted_registration"><i class="fa fa-bicycle"></i>Apply for a student discount</a></li>
         <li><a href="/summit/boston-2017/travel/#hotels"><i class="fa fa-hotel"></i>Book your hotel</a></li>
         <li><a href="/summit/boston-2017/code-of-conduct" target="_blank"><i class="fa fa-eye"></i>Code of Conduct</a></li>
-        <li><a href="/assets/boston-summit/Campus.png" target="_blank"><i class="fa fa-map"></i>Summit Campus Map</a></li>
+        <li><a href="{$Top.CloudUrl('assets/boston-summit/Campus.png')}" target="_blank"><i class="fa fa-map"></i>Summit Campus Map</a></li>
         <li><a href="https://spousetivities.ticketleap.com/spousetivities-at-openstack-summit-sydney-2017/details" target="_blank"><i class="fa fa-heart"></i>Spousetivities</a></li>
       </ul>
 		</div>
@@ -110,28 +110,28 @@
     <div class="row">
       <div class="col-sm-3 featured">
         <div class="summit-user-section ">
-          <img src="//www.openstack.org/assets/boston-summit/speakers/Brian-Stevens.jpg" alt="Brian Stevens" class="summit-user-image">
+          <img src="{$Top.CloudUrl('assets/boston-summit/speakers/Brian-Stevens.jpg')}" alt="Brian Stevens" class="summit-user-image">
           <div class="name">Brian Stevens</div>
           <div class="title">Vice President Cloud Platforms, Google</div>
         </div>
       </div>
       <div class="col-sm-3">
         <div class="summit-user-section">
-          <img src="//www.openstack.org/assets/boston-summit/speakers/Daniela-Rus.jpg" alt="Daniela Rus" class="summit-user-image">
+          <img src="{$Top.CloudUrl('assets/boston-summit/speakers/Daniela-Rus.jpg')}" alt="Daniela Rus" class="summit-user-image">
           <div class="name">Daniela Rus</div>
           <div class="title">MIT Computer Science and Artificial Intelligence Laboratory</div>
         </div>
       </div>
       <div class="col-sm-3 featured">
         <div class="summit-user-section">
-          <img src="//www.openstack.org/assets/boston-summit/speakers/Suneet.jpg" alt="Suneet Nandwani" class="summit-user-image">
+          <img src="{$Top.CloudUrl('assets/boston-summit/speakers/Suneet.jpg')}" alt="Suneet Nandwani" class="summit-user-image">
           <div class="name">Suneet Nandwani</div>
           <div class="title">Sr. Director, Cloud Infrastructure and Platforms, eBay Inc.</div>
         </div>
       </div>
       <div class="col-sm-3 featured">
         <div class="summit-user-section">
-          <img src="//www.openstack.org/assets/boston-summit/speakers/Patrick-Weeks.jpg" alt="Patrick Weeks" class="summit-user-image">
+          <img src="{$Top.CloudUrl('assets/boston-summit/speakers/Patrick-Weeks.jpg')}" alt="Patrick Weeks" class="summit-user-image">
           <div class="name">Patrick Weeks</div>
           <div class="title">Senior Director of Cloud, Automation and Operations, GE Healthcare</div>
         </div>
@@ -140,28 +140,28 @@
     <div class="row">
       <div class="col-sm-3 featured">
         <div class="summit-user-section ">
-          <img src="//www.openstack.org/assets/boston-summit/speakers/Martin-Casado.jpg" alt="Martin Casado" class="summit-user-image">
+          <img src="{$Top.CloudUrl('assets/boston-summit/speakers/Martin-Casado.jpg')}" alt="Martin Casado" class="summit-user-image">
           <div class="name">Martin Casado</div>
           <div class="title">General Partner, Andreessen Horowitz</div>
         </div>
       </div>
       <div class="col-sm-3 featured">
         <div class="summit-user-section">
-          <img src="//www.openstack.org/assets/boston-summit/speakers/Jimy-Whitehurst.jpg" alt="Jim Whitehurst" class="summit-user-image">
+          <img src="{$Top.CloudUrl('assets/boston-summit/speakers/Jimy-Whitehurst.jpg')}" alt="Jim Whitehurst" class="summit-user-image">
           <div class="name">Jim Whitehurst</div>
           <div class="title">CEO, Red Hat</div>
         </div>
       </div>
       <div class="col-sm-3 featured">
         <div class="summit-user-section">
-          <img src="//www.openstack.org/assets/boston-summit/speakers/Month-Taylor.jpg" alt="Monty Taylor" class="summit-user-image">
+          <img src="{$Top.CloudUrl('assets/boston-summit/speakers/Month-Taylor.jpg')}" alt="Monty Taylor" class="summit-user-image">
           <div class="name">Monty Taylor</div>
           <div class="title">Member of OpenStack Technical Committee</div>
         </div>
       </div>
       <div class="col-sm-3 featured">
         <div class="summit-user-section">
-          <img src="//www.openstack.org/assets/boston-summit/speakers/Elijah-Elliot2.jpg" alt="Elijah Elliot" class="summit-user-image">
+          <img src="{$Top.CloudUrl('assets/boston-summit/speakers/Elijah-Elliot2.jpg')}" alt="Elijah Elliot" class="summit-user-image">
           <div class="name">Elijah Elliott</div>
           <div class="title">Domain Architect, Cloud, Gap Inc</div>
         </div>
@@ -170,28 +170,28 @@
     <div class="row">
       <div class="col-sm-3 featured">
         <div class="summit-user-section">
-          <img src="//www.openstack.org/assets/boston-summit/speakers/Merce-Crosas.jpg" alt="Mercè Crosas" class="summit-user-image">
+          <img src="{$Top.CloudUrl('assets/boston-summit/speakers/Merce-Crosas.jpg')}" alt="Mercè Crosas" class="summit-user-image">
           <div class="name">Mercè Crosas</div>
           <div class="title">Chief Data Science and Technology Officer at IQSS, Harvard University</div>
         </div>
       </div>
       <div class="col-sm-3">
         <div class="summit-user-section">
-          <img src="//www.openstack.org/assets/boston-summit/speakers/JacobRosenberg.jpg" alt="Jacob Rosenberg" class="summit-user-image">
+          <img src="{$Top.CloudUrl('assets/boston-summit/speakers/JacobRosenberg.jpg')}" alt="Jacob Rosenberg" class="summit-user-image">
           <div class="name">Jacob Rosenberg</div>
           <div class="title">Head of Infrastructure Engineering, Bloomberg</div>
         </div>
       </div>
       <div class="col-sm-3">
         <div class="summit-user-section">
-          <img src="//www.openstack.org/assets/barcelona-summit/featured-speakers/annilai.jpg" alt="Anni Lai" class="summit-user-image">
+          <img src="{$Top.CloudUrl('assets/barcelona-summit/featured-speakers/annilai.jpg')}" alt="Anni Lai" class="summit-user-image">
           <div class="name">Anni Lai</div>
           <div class="title">Head of Global Business Development, Huawei</div>
         </div>
       </div>
       <div class="col-sm-3">
         <div class="summit-user-section">
-          <img src="//www.openstack.org/assets/boston-summit/speakers/JunweiLiu.jpg" alt="Junwei Liu" class="summit-user-image">
+          <img src="{$Top.CloudUrl('assets/boston-summit/speakers/JunweiLiu.jpg')}" alt="Junwei Liu" class="summit-user-image">
           <div class="name">Junwei Liu</div>
           <div class="title">Assistant General Manager of Cloud Computing Products Division, China Mobile</div>
         </div>
@@ -200,28 +200,28 @@
     <div class="row">
       <div class="col-sm-3">
         <div class="summit-user-section">
-          <img src="//www.openstack.org/assets/boston-summit/speakers/JuliannaRodriguez.jpg" alt="Major Julianna Rodriguez" class="summit-user-image">
+          <img src="{$Top.CloudUrl('assets/boston-summit/speakers/JuliannaRodriguez.jpg')}" alt="Major Julianna Rodriguez" class="summit-user-image">
           <div class="name">Major Julianna Rodriguez</div>
           <div class="title">Director, Technical College, U.S. Army Cyber School</div>
         </div>
       </div>
       <div class="col-sm-3">
         <div class="summit-user-section">
-          <img src="//www.openstack.org/assets/boston-summit/speakers/Mark-Collier3.jpg" alt="Mark Collier" class="summit-user-image">
+          <img src="{$Top.CloudUrl('assets/boston-summit/speakers/Mark-Collier3.jpg')}" alt="Mark Collier" class="summit-user-image">
           <div class="name">Mark Collier</div>
           <div class="title">COO, OpenStack Foundation</div>
         </div>
       </div>
       <div class="col-sm-3">
         <div class="summit-user-section">
-          <img src="//www.openstack.org/assets/Uploads/_resampled/CroppedImage136136-malini.jpg" alt="Malini Bhandaru" class="summit-user-image">
+          <img src="{$Top.CloudUrl('assets/Uploads/_resampled/CroppedImage136136-malini.jpg')}" alt="Malini Bhandaru" class="summit-user-image">
           <div class="name">Malini Bhandaru</div>
           <div class="title">Cloud Architect & Principal Engineer, Intel</div>
         </div>
       </div>
       <div class="col-sm-3">
         <div class="summit-user-section">
-          <img src="//www.openstack.org/assets/boston-summit/speakers/Jonathan-Bryce2.jpg" alt="Jonathan Bryce" class="summit-user-image">
+          <img src="{$Top.CloudUrl('assets/boston-summit/speakers/Jonathan-Bryce2.jpg')}" alt="Jonathan Bryce" class="summit-user-image">
           <div class="name">Jonathan Bryce</div>
           <div class="title">Executive Director, OpenStack Foundation</div>
         </div>
@@ -361,7 +361,7 @@
 					<p>
             You can access everything the Boston Summit has to offer with one pass!
           </p>
-					<img class="summit-type-icon" src="/assets/boston-summit/images/boston-schedule-final.png" alt="Summit Timeline">
+					<img class="summit-type-icon" src="{$Top.CloudUrl('assets/boston-summit/images/boston-schedule-final.png')}" alt="Summit Timeline">
 				</div>
 
 			</div>

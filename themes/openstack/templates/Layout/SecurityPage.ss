@@ -265,7 +265,7 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="nfv-summit-right">
-                            <img class="nfv-summit-logo" src="/assets/Uploads/arrows.svg" alt="Open Infrastructure Summit">
+                            <img class="nfv-summit-logo" src="{$Top.CloudUrl('assets/Uploads/arrows.svg')}" alt="Open Infrastructure Summit">
                             <div class="nfv-summit-dates containers"><strong>Open Infrastructure Summit</strong><br/>
                               April 29 - May 1
                             </div>
@@ -291,7 +291,7 @@
                 <i class="fa fa-file-pdf-o fa-4x"></i>
                 The OpenStack Security community answers the most commonly asked questions about cloud security, including where to find best practices for deployment, code checking tools and vulnerability reports with fixes.
             </p>
-                <a href="//openstack.org/assets/securing-openstack-clouds/OpenStack-SecurityBrief-letteronline.pdf" class="download-btn"><i class="fa fa-arrow-circle-down fa-2x"></i> Download the Q&A brief now</a>
+                <a href="{$Top.CloudUrl('assets/securing-openstack-clouds/OpenStack-SecurityBrief-letteronline.pdf')}" class="download-btn"><i class="fa fa-arrow-circle-down fa-2x"></i> Download the Q&A brief now</a>
             <hr>
             <p>
 

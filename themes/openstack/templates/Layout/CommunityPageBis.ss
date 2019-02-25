@@ -108,7 +108,7 @@
                 <div>
                     <a href="https://releases.openstack.org/" target="_blank">Releases and release schedule</a><br>
                     <a href="https://docs.openstack.org" target="_blank">OpenStack documentation</a><br>
-                    <a href="https://www.openstack.org/assets/marketing/OpenStack-101-Modular-Deck-1.pptx" target="_blank">OpenStack 101</a><br>
+                    <a href="{$Top.CloudUrl('assets/marketing/OpenStack-101-Modular-Deck-1.pptx')}" target="_blank">OpenStack 101</a><br>
                     <a href="https://wiki.openstack.org/wiki/First_Contact_SIG" target="_blank">First Contact SIG</a><br>
                     <a href="https://governance.openstack.org/tc/reference/help-most-needed.html" target="_blank">Areas where help is most needed</a>
                 </div>

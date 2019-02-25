@@ -61,12 +61,12 @@
         <div class="container"> 
             <div class="row">
                 <div class="col-lg-8 col-lg-push-2">
-                  <img src="/assets/containers/fico-logo-med.png">
+                  <img src="{$Top.CloudUrl('assets/containers/fico-logo-med.png')}">
                     <blockquote>
                         OpenStack is very stable with the recent releases and I have no complaints for running cloud native applications and containers in my private cloud.
                     </blockquote>
                     <div class="testimonial-attribute">
-                      <img class="testimonial-author-img" src="/assets/containers/advin-headshot.jpg">
+                      <img class="testimonial-author-img" src="{$Top.CloudUrl('assets/containers/advin-headshot.jpg')}">
                         <div class="testimonial-name">AsvinChandar Selvaraj</div>
                         <div class="testimonial-title">Senior Manager of Converged Infrastructure, FICO </div>
                     </div>
@@ -102,7 +102,7 @@
                 <h3>What containers & Platform-as-a-Service tools are OpenStack users deploying?</h3>
               </div>
               <div class="col-sm-10 col-sm-push-1" style="margin-top:-100px;margin-bottom:-120px;">
-                <img src="https://www.openstack.org/assets/containers/User-Survey-Chart-Figure1.7.svg" alt="">
+                <img src="{$Top.CloudUrl('assets/containers/User-Survey-Chart-Figure1.7.svg')}" alt="">
               </div>
             </div>
         </div>
@@ -128,7 +128,7 @@
           <div class="col-sm-5ths col-xs-4">
             <a href="https://www.openstack.org/videos/sydney-2017/kubernetes-on-openstack-the-technical-details" target="_blank">
             <div class="video-wrapper small">
-              <img class="video-image" src="/assets/containers/sydney-video.jpg" alt="Kubernetes on OpenStack - the Technical Details">
+              <img class="video-image" src="{$Top.CloudUrl('assets/containers/sydney-video.jpg')}" alt="Kubernetes on OpenStack - the Technical Details">
             </div>
             </a>
             <p class="video-title containers">
@@ -136,7 +136,7 @@
             </p>
           </div>
           <div class="col-sm-5ths col-xs-4">
-            <a href="https://www.openstack.org/assets/containers/openstack-containers-12.4.pdf" target="_blank">
+            <a href="{$Top.CloudUrl('assets/containers/openstack-containers-12.4.pdf')}" target="_blank">
             <div class="video-wrapper small">
               <img class="video-image" src="/themes/openstack/images/containers-r/users/liveperson.jpg" alt="Containers and Cloud: Exploring the OpenStack Opportunity with LivePerson">
             </div>
@@ -148,7 +148,7 @@
           <div class="col-sm-5ths col-xs-4">
             <a href="https://www.openstack.org/videos/sydney-2017/which-is-the-best-way-to-install-kubernetes-on-openstack " target="_blank">
             <div class="video-wrapper small">
-              <img class="video-image" src="/assets/containers/sydney-video.jpg" alt="Which is the best way to install Kubernetes on OpenStack?">
+              <img class="video-image" src="{$Top.CloudUrl('assets/containers/sydney-video.jpg')}" alt="Which is the best way to install Kubernetes on OpenStack?">
             </div>
             </a>
             <p class="video-title containers">
@@ -158,7 +158,7 @@
           <div class="col-sm-5ths col-xs-4">
             <a href="https://www.openstack.org/videos/sydney-2017/building-openstack-on-kubernetes-for-zero-downtime-large-scale-production-saas" target="_blank">
             <div class="video-wrapper small">
-              <img class="video-image" src="/assets/containers/containers-workday.jpg" alt="Building OpenStack on Kubernetes for Zero Downtime Large Scale Production SaaS">
+              <img class="video-image" src="{$Top.CloudUrl('assets/containers/containers-workday.jpg')}" alt="Building OpenStack on Kubernetes for Zero Downtime Large Scale Production SaaS">
             </div>
             </a>
             <p class="video-title containers">
@@ -301,7 +301,7 @@
               </div>
               <div class="col-sm-4">
                   <div class="nfv-summit-right">
-                      <img class="nfv-summit-logo" src="/assets/Uploads/arrows.svg" alt="Open Infrastructure Summit">
+                      <img class="nfv-summit-logo" src="{$Top.CloudUrl('assets/Uploads/arrows.svg')}" alt="Open Infrastructure Summit">
                       <div class="nfv-summit-dates containers"><strong>Open Infrastructure Summit</strong>
                           April 29 - May 1
                       </div>
@@ -327,7 +327,7 @@
                 <i class="fa fa-file-pdf-o fa-4x"></i>
                 Download the new OpenStack white paper, highlighting containers as an evolving technology and OpenStack's evolving support for them.
             </p>
-                <a href="//www.openstack.org/assets/pdf-downloads/Containers-and-OpenStack.pdf" target="_blank" class="download-btn"><i class="fa fa-arrow-circle-down fa-2x"></i> Download This White Paper</a>
+                <a href="{$Top.CloudUrl('assets/pdf-downloads/Containers-and-OpenStack.pdf')}" target="_blank" class="download-btn"><i class="fa fa-arrow-circle-down fa-2x"></i> Download This White Paper</a>
             <hr>
             <p>
 

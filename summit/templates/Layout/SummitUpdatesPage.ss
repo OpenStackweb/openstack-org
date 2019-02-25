@@ -93,7 +93,7 @@
 	<p>
 		<a href="/summit/tokyo-2015/tokyo-and-travel/" class="btn orange-btn">More About The Host City</a>
 	</p>
-	<a href="/assets/summits/locations/tokyo-venue-bkgd.jpg" class="photo-credit" target="_blank"></a>
+	<a href="{$Top.CloudUrl('assets/summits/locations/tokyo-venue-bkgd.jpg')}" class="photo-credit" target="_blank"></a>
 </div>
 
     <!-- Pass Modal -->

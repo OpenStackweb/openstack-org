@@ -217,7 +217,7 @@
             </div>
             <div class="row">
                 <div class="ptl-left">
-                    <img alt="" src="https://www.openstack.org/assets/profile-images/_resampled/SetWidth100-BryantJayx07.jpg" class="ptl-bio-pic">
+                    <img alt="" src="{$Top.CloudUrl('assets/profile-images/_resampled/SetWidth100-BryantJayx07.jpg')}" class="ptl-bio-pic">
                     <div class="ptl-details">
                         <h4>Jay Bryant</h4>
                         <p>

@@ -123,8 +123,8 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="thumbnails" data-toggle="lightbox">
-                        <a href="//openstack.org/assets/enterprise/digital-workflow/dft-workflow-diagram.svg" class="thumbnail">
-                            <img src="//openstack.org/assets/enterprise/digital-workflow/dft-workflow-diagram.svg" onerror="///openstack.org/assets/enterprise/digital-workflow/dft-workflow-diagram.jpg" alt="Digital FilmTree OpenStack workflow"/>
+                        <a href="{$Top.CloudUrl('assets/enterprise/digital-workflow/dft-workflow-diagram.svg')}" class="thumbnail">
+                            <img src="{$Top.CloudUrl('assets/enterprise/digital-workflow/dft-workflow-diagram.svg')}" onerror="{$Top.CloudUrl('assets/enterprise/digital-workflow/dft-workflow-diagram.jpg')}" alt="Digital FilmTree OpenStack workflow"/>
                         </a>
                     </div>
                 </div>
@@ -347,17 +347,17 @@
                     <a href="http://superuser.openstack.org/articles/lew-tucker-a-world-of-many-openstack-clouds">
                     <div class="video-wrapper">
                          <div class="play-button">
-                            <img src="//openstack.org/assets/enterprise/read-dark.png">
+                            <img src="{$Top.CloudUrl('assets/enterprise/read-dark.png')}">
                         </div>
                         <div class="video-overlay">
                              <div class="small-play-button">
-                                <img src="//openstack.org/assets/enterprise/read.png">
+                                <img src="{$Top.CloudUrl('assets/enterprise/read.png')}">
                             </div>
                             <p>
                                 Lew Tucker: A World of Many (OpenStack) Clouds
                             </p>
                         </div>
-                        <img class="video-image" src="//openstack.org/assets/enterprise/digital-workflow/feature1.jpg" alt="Lew Tucker: A World of Many (OpenStack) Clouds">
+                        <img class="video-image" src="{$Top.CloudUrl('assets/enterprise/digital-workflow/feature1.jpg')}" alt="Lew Tucker: A World of Many (OpenStack) Clouds">
                     </div>
                     </a>
                 </div>
@@ -365,17 +365,17 @@
                     <a href="http://superuser.openstack.org/articles/case-study-intel-uses-openstack">
                     <div class="video-wrapper">
                         <div class="play-button">
-                            <img src="//openstack.org/assets/enterprise/read-dark.png">
+                            <img src="{$Top.CloudUrl('assets/enterprise/read-dark.png')}">
                         </div>
                         <div class="video-overlay">
                             <div class="small-play-button">
-                                <img src="//openstack.org/assets/enterprise/read.png">
+                                <img src="{$Top.CloudUrl('assets/enterprise/read.png')}">
                             </div>
                             <p>
                                Case Study: Intel Uses OpenStack
                             </p>
                         </div>
-                        <img class="video-image" src="//openstack.org/assets/enterprise/digital-workflow/feature2.jpg" alt="Case Study: Intel Uses OpenStack">
+                        <img class="video-image" src="{$Top.CloudUrl('assets/enterprise/digital-workflow/feature2.jpg')}" alt="Case Study: Intel Uses OpenStack">
                     </div>
                     </a>
                 </div>
@@ -383,17 +383,17 @@
                     <a href="#" data-toggle="modal" data-target="#VideoModalDF3">
                     <div class="video-wrapper">
                         <div class="play-button">
-                            <img src="//openstack.org/assets/enterprise/play-button.png">
+                            <img src="{$Top.CloudUrl('assets/enterprise/play-button.png')}">
                         </div>
                         <div class="video-overlay">
                             <div class="small-play-button">
-                                <img src="//openstack.org/assets/enterprise/play-button.png">
+                                <img src="{$Top.CloudUrl('assets/enterprise/play-button.png')}">
                             </div>
                             <p>
                                 Federated Identity & Federated Service Provider Support for OpenStack Clouds.
                             </p>
                         </div>
-                        <img class="video-image" src="//openstack.org/assets/enterprise/digital-workflow/video-3.jpg" alt="Federated Identity and Federated Service Provider Support for OpenStack Clouds">
+                        <img class="video-image" src="{$Top.CloudUrl('assets/enterprise/digital-workflow/video-3.jpg')}" alt="Federated Identity and Federated Service Provider Support for OpenStack Clouds">
                     </div>
                     </a>
                 </div>
@@ -418,7 +418,7 @@
                 <i class="fa fa-file-pdf-o fa-4x"></i>
                  Download the new OpenStack white paper to learn more about digital workflow with OpenStack and how an enterprise like DigitalFilm Tree can maximize business benefit with their innovative post-production process.
             </p>
-                <a href="//openstack.org/assets/pdf-downloads/OpenStack-Workflow-White-Paper-Letter-Final.pdf" class="download-btn"><i class="fa fa-arrow-circle-down fa-2x"></i> Download This White Paper</a>
+                <a href="{$Top.CloudUrl('assets/pdf-downloads/OpenStack-Workflow-White-Paper-Letter-Final.pdf')}" class="download-btn"><i class="fa fa-arrow-circle-down fa-2x"></i> Download This White Paper</a>
             <hr>
             <p>
 

@@ -8,8 +8,8 @@
                 </p>
                 <div class="row">
                     <div class="col-lg-12 prospectus-wrapper">
-                        <a class="btn register-btn-lrg sponsor" href="//openstack.org/assets/austin-summit/FINAL-Austin-Prospectus-April-2016-KW-11-11.pdf" style="margin-right:30px;">Sponsor Prospectus</a>
-                        <a class="btn register-btn-lrg sponsor" href="//openstack.org/assets/austin-summit/TuesdayCommunityEveningEvent.pdf">Tuesday Party Sponsor Prospectus</a>
+                        <a class="btn register-btn-lrg sponsor" href="{$Top.CloudUrl('assets/austin-summit/FINAL-Austin-Prospectus-April-2016-KW-11-11.pdf')}" style="margin-right:30px;">Sponsor Prospectus</a>
+                        <a class="btn register-btn-lrg sponsor" href="{$Top.CloudUrl('assets/austin-summit/TuesdayCommunityEveningEvent.pdf')}">Tuesday Party Sponsor Prospectus</a>
                     </div>
                 </div>
             </div>
@@ -52,8 +52,8 @@
         <div class="row">
             <div class="col-sm-8 col-sm-push-2 center">
                 <h1>How To Sponsor</h1>
-                        <a class="btn register-btn-lrg sponsor" href="//openstack.org/assets/austin-summit/FINAL-Austin-Prospectus-April-2016-KW-11-11.pdf" style="margin-right:30px;">Sponsor Prospectus</a>
-                        <a class="btn register-btn-lrg sponsor" href="//openstack.org/assets/austin-summit/TuesdayCommunityEveningEvent.pdf">Tuesday Party Sponsor Prospectus</a>
+                        <a class="btn register-btn-lrg sponsor" href="{$Top.CloudUrl('ssets/austin-summit/FINAL-Austin-Prospectus-April-2016-KW-11-11.pdf')}" style="margin-right:30px;">Sponsor Prospectus</a>
+                        <a class="btn register-btn-lrg sponsor" href="{$Top.CloudUrl('assets/austin-summit/TuesdayCommunityEveningEvent.pdf')}">Tuesday Party Sponsor Prospectus</a>
             </div>
         </div>
         <div class="row">
@@ -64,10 +64,10 @@
                 </p>
                 <ul>
                     <li>
-                        <a href="//openstack.org/assets/austin-summit/FINAL-Austin-Prospectus-April-2016-KW-11-11.pdf" target="_blank">Sponsorship Prospectus (PDF File)</a>
+                        <a href="{$Top.CloudUrl('assets/austin-summit/FINAL-Austin-Prospectus-April-2016-KW-11-11.pdf')}" target="_blank">Sponsorship Prospectus (PDF File)</a>
                     </li>
                     <li>
-                        <a href="//openstack.org/assets/austin-summit/WATERMARK-OpenStack-Event-Sponsorship-Agreement-AUSTIN-SUMMIT.pdf" target="_blank">Read Only Draft Version of the OpenStack Summit April 2016 Austin Contract</a>
+                        <a href="{$Top.CloudUrl('assets/austin-summit/WATERMARK-OpenStack-Event-Sponsorship-Agreement-AUSTIN-SUMMIT.pdf')}" target="_blank">Read Only Draft Version of the OpenStack Summit April 2016 Austin Contract</a>
                     </li>
                 </ul>
                 <p>
@@ -76,7 +76,7 @@
                 <h3>What to do before signing:</h3>
                 <ul>
                     <li>
-                        Review the <a href="//openstack.org/assets/austin-summit/FINAL-Austin-Prospectus-April-2016-KW-11-11.pdf" target="_blank">Prospectus</a> and decide which sponsorship levels and add-ons you are interested in.
+                        Review the <a href="{$Top.CloudUrl('assets/austin-summit/FINAL-Austin-Prospectus-April-2016-KW-11-11.pdf')}" target="_blank">Prospectus</a> and decide which sponsorship levels and add-ons you are interested in.
                     </li>
                     <li>
                         Review the list of sponsorships to see which ones are still available.

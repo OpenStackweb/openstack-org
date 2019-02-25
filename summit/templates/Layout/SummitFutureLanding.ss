@@ -3,7 +3,8 @@
     <div class="container">
     	<div class="row">
     		<div class="landingintro">
-                    <img class="tokyo-landing-logo" src="/assets/summits/shanghai/Shanghai2019-Summit-Logo-Web.svg" onerror="this.onerror=null; this.src=/assets/summits/shanghai/Shanghai2019-Summit-Logo-Web.svg" alt="OpenStack Infrastructure Summit">
+                    <img class="tokyo-landing-logo" src="{$Top.CloudUrl('assets/summits/shanghai/Shanghai2019-Summit-Logo-Web.svg')}"
+                         onerror="this.onerror=null; this.src={$Top.CloudUrl('assets/summits/shanghai/Shanghai2019-Summit-Logo-Web.svg')}" alt="OpenStack Infrastructure Summit">
                     <p><span class="join-us-text-yellow">Join us in Shanghai!</span></p>
                     <p class="join-us-text">到上海加入我们</p>
                     <p>&nbsp;</p>

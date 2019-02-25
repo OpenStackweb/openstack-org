@@ -51,43 +51,43 @@
     </div>
     <div class="row">
         <div class="col-lg-5 col-md-5 col-sm-6">
-            <div class="company-logo"><img src="/assets/boston-summit/images/openswitch-344-lg.png" alt="Open Switch"></div>
+            <div class="company-logo"><img src="{$Top.CloudUrl('assets/boston-summit/images/openswitch-344-lg.png')}" alt="Open Switch"></div>
             <p class="company-desc">OpenSwitch is a Linux Foundation project aims to deliver an open and fully-featured Linux-based Networking Operation System (NOS). OpenSwitch has been specifically designed to serve the evolving disaggregated switching market needs from the aspects of usability, performance and cost savings.</p>
             <p class="learn-more-button"><a href="http://www.openswitch.net/" class="btn btn-primary" role="button">Learn More</a>&nbsp;&nbsp;<a href="/summit/boston-2017/summit-schedule/#track=136" class="btn btn-primary" role="button">View on Schedule</a></p>
         </div>
         <div class="col-lg-5 col-lg-push-2 col-md-5 col-md-push-2 col-sm-6">
-            <div class="company-logo"><img src="/assets/boston-summit/images/ovs-344-lg.png" alt="Open vSwitch"></div>
+            <div class="company-logo"><img src="{$Top.CloudUrl('assets/boston-summit/images/ovs-344-lg.png')}" alt="Open vSwitch"></div>
             <p class="company-desc">Open vSwitch and OVN provide virtual networking to OpenStack for VMs, containers, and beyond.  Join us for talks and tutorials on what's available and what's coming up next.</p>
             <p class="learn-more-button"><a href="http://www.openvswitch.net/" class="btn btn-primary" role="button">Learn More</a>&nbsp;&nbsp;<a href="/summit/boston-2017/summit-schedule/#track=135" class="btn btn-primary" role="button">View on Schedule</a></p>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-5 col-md-5 col-sm-6">
-            <div class="company-logo"><img src="/assets/boston-summit/images/ansible-344-lg.png" alt="Ansible"></div>
+            <div class="company-logo"><img src="{$Top.CloudUrl('assets/boston-summit/images/ansible-344-lg.png')}" alt="Ansible"></div>
             <p class="company-desc">Ansible is the simplest way to automate IT — and the top choice of operators for deployment and configuration of OpenStack.  Join us for a day of learning and collaboration at OpenStack Summit in Boston, and hear from the contributors, operators, and users who are making the use of OpenStack even better with Ansible.</p>
             <p class="learn-more-button"><a href="http://www.ansible.com/" class="btn btn-primary" role="button">Learn More</a>&nbsp;&nbsp;<a href="/summit/boston-2017/summit-schedule/#track=137" class="btn btn-primary" role="button">View on Schedule</a></p>
         </div>
         <div class="col-lg-5 col-lg-push-2 col-md-5 col-md-push-2 col-sm-6">
-            <div class="company-logo"><img src="/assets/boston-summit/images/juniper-344-lg.png" alt="OpenContrail"></div>
+            <div class="company-logo"><img src="{$Top.CloudUrl('assets/boston-summit/images/juniper-344-lg.png')}" alt="OpenContrail"></div>
             <p class="company-desc">Learn real-world case studies of how scale-out operators are using the software for hybrid cloud networking with VMs and containers with Docker and Kubernetes. OpenContrail's infrastructure-agnostic design makes it perfect for multi-cloud connectivity and the ideal SDN for production across multiple cloud devices and ISSs.</p>
             <p class="learn-more-button"><a href="http://www.opencontrail.org/" class="btn btn-primary" role="button">Learn More</a>&nbsp;&nbsp;<a href="/summit/boston-2017/summit-schedule/#track=138" class="btn btn-primary" role="button">View on Schedule</a></p>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-5 col-md-5 col-sm-6">
-            <div class="company-logo"><img src="/assets/boston-summit/images/fdio-osd.png" alt="FD.io"></div>
+            <div class="company-logo"><img src="{$Top.CloudUrl('assets/boston-summit/images/fdio-osd.png')}" alt="FD.io"></div>
             <p class="company-desc">FD.io (Fast Data) is the first truly open data plane project focusing on data IO speed and efficiency for more flexible and scalable network and storage. Join us at the FD.io Mini summit to hear and learn from FD.io community experts who will be sharing information about the projects, use cases, capabilities, integration with other communities, tools and many more exciting topics.</p>
             <p class="learn-more-button"><a href="https://fd.io/" class="btn btn-primary" role="button">Learn More</a>&nbsp;&nbsp;<a href="/summit/boston-2017/summit-schedule/#track=144" class="btn btn-primary" role="button">View on Schedule</a></p>
         </div>
         <div class="col-lg-5 col-lg-push-2 col-md-5 col-md-push-2 col-sm-6">
-            <div class="company-logo"><img src="/assets/boston-summit/images/opendaylight-osd.png" alt="Open Daylight"></div>
+            <div class="company-logo"><img src="{$Top.CloudUrl('assets/boston-summit/images/opendaylight-osd.png')}" alt="Open Daylight"></div>
             <p class="company-desc">As the open source networking initiatives associated with networking proliferate, it becomes necessary to take stock of the various options in defining a so-called "Nirvana Stack" for open networking. The recent emergence of orchestration initiatives such as ONAP, coupled with the Gluon Network Extensibility project in OpenStack, broadening use cases for the ODL controller, and the FD.io forwarding plane provide a compelling new set of options for meeting carrier needs.</p>
             <p class="learn-more-button"><a href="https://www.opendaylight.org/" class="btn btn-primary" role="button">Learn More</a>&nbsp;&nbsp;<a href="/summit/boston-2017/summit-schedule/#track=143" class="btn btn-primary" role="button">View on Schedule</a></p>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-5 col-md-5 col-sm-6">
-            <div class="company-logo"><img src="/assets/boston-summit/images/cloudify.png" alt="Cloudify"></div>
+            <div class="company-logo"><img src="{$Top.CloudUrl('assets/boston-summit/images/cloudify.png')}" alt="Cloudify"></div>
             <p class="company-desc">Cloudify is an open source, multi-cloud management platform that is model-driven, being based on TOSCA, providing developers and IT operators common tooling to build applications, deploy them onto any infrastructure, all without compromising on governance and control. Join us for a full day of informative, collaborative, and community-driven sessions where you will hear from architects, developers, and executives about this open, pluggable orchestration project.</p>
             <p class="learn-more-button"><a href="http://cloudify.co/" class="btn btn-primary" role="button">Learn More</a>&nbsp;&nbsp;<a href="/summit/boston-2017/summit-schedule/#track=150" class="btn btn-primary" role="button">View on Schedule</a></p>
         </div>

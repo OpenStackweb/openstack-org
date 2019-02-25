@@ -35,7 +35,7 @@
                         For infrastructure and operations (I&O) professionals about to kick off their OpenStack initiatives, it’s hard to make sense of the key decisions, top challenges, and the team you need to get started. Forrester interviewed eight OpenStack end users and 10 OpenStack ecosystem vendors to discuss the best practices and common pitfalls I&O pros face when adopting OpenStack.
                     </p>
                     <p>
-                        This report guides I&O pros along the early days of their OpenStack deployment to set them off on the right path to success in winning, serving, and retaining customers as part of the larger Business Transformation agenda. <a href="//openstack.org/assets/pdf-downloads/Brief-OpenStack-Is-Now-Ready.pdf" style="text-decoration:underline;">Read the full brief for free</a>, or <a href="https://www.forrester.com/OpenStack+Is+Ready+8212+Are+You/fulltext/-/E-RES122728" target="_blank" style="text-decoration:underline;">purchase the full report from Forrester</a>.
+                        This report guides I&O pros along the early days of their OpenStack deployment to set them off on the right path to success in winning, serving, and retaining customers as part of the larger Business Transformation agenda. <a href="{$Top.CloudUrl('assets/pdf-downloads/Brief-OpenStack-Is-Now-Ready.pdf')}" style="text-decoration:underline;">Read the full brief for free</a>, or <a href="https://www.forrester.com/OpenStack+Is+Ready+8212+Are+You/fulltext/-/E-RES122728" target="_blank" style="text-decoration:underline;">purchase the full report from Forrester</a>.
                     </p>
                 </div>
                 <div class="col-sm-5 right">
@@ -45,7 +45,7 @@
                             Learn from the lessons of the OpenStack masters to help you succeed with the popular private cloud platform 
                         </p>
                         <p>
-                            <a href="//openstack.org/assets/pdf-downloads/Brief-OpenStack-Is-Now-Ready.pdf" target="_blank" class="forrester-download-btn">Download The Forrester Report Brief</a>
+                            <a href="{$Top.CloudUrl('assets/pdf-downloads/Brief-OpenStack-Is-Now-Ready.pdf')}" target="_blank" class="forrester-download-btn">Download The Forrester Report Brief</a>
                         </p>
                     </div>
                 </div>
@@ -123,7 +123,7 @@
                         As shown in the July 2015 study, this enterprise expects quantifiable benefits of more than $7.2 million as compared to implementation and ongoing costs of $3.6 million over 3 years, in addition to these results:
                     </p>
                     <p>
-                         <a href="//www.openstack.org/assets/pdf-downloads/ForresterOpenStackTEIStudy-20150701.pdf" class="highligh-btn">READ THE FORRESTER TEI STUDY <i class="fa fa-chevron-right"></i></a>
+                         <a href="{$Top.CloudUrl('assets/pdf-downloads/ForresterOpenStackTEIStudy-20150701.pdf')}" class="highligh-btn">READ THE FORRESTER TEI STUDY <i class="fa fa-chevron-right"></i></a>
                     </p>
                 </div>
             </div>
@@ -166,10 +166,10 @@
                 <i class="fa fa-file-pdf-o fa-4x"></i>
                  Select the paper(s) you want to download.
             </p>
-                <a href="https://www.openstack.org/assets/pdf-downloads/Brief-OpenStack-Is-Now-Ready.pdf" class="download-btn half"><i class="fa fa-arrow-circle-down fa-2x"></i> Download<br/>"Brief: OpenStack Is Now Ready For Business"</a>
-                <a href="https://www.openstack.org/assets/pdf-downloads/ForresterOpenStackTEIStudy-20150701.pdf" class="download-btn half"><i class="fa fa-arrow-circle-down fa-2x"></i> Download<br/>"Total Economic Impact of OpenStack"*</a>
+                <a href="{$Top.CloudUrl('assets/pdf-downloads/Brief-OpenStack-Is-Now-Ready.pdf')}" class="download-btn half"><i class="fa fa-arrow-circle-down fa-2x"></i> Download<br/>"Brief: OpenStack Is Now Ready For Business"</a>
+                <a href="{$Top.CloudUrl('assets/pdf-downloads/ForresterOpenStackTEIStudy-20150701.pdf')}" class="download-btn half"><i class="fa fa-arrow-circle-down fa-2x"></i> Download<br/>"Total Economic Impact of OpenStack"*</a>
                 <div class="center" style="margin-bottom:10px;">
-                    <a href="http://openstack.org/assets/pdf-downloads/OpenStackForresterReports.zip">Download Both Papers (zip)</a>
+                    <a href="{$Top.CloudUrl('assets/pdf-downloads/OpenStackForresterReports.zip')}">Download Both Papers (zip)</a>
                 </div>
                 <p class="modal-footnote">
                     *Read a commissioned study conducted by Forrester Consulting, The Total Economic Impact Of OpenStack.

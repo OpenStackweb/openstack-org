@@ -264,7 +264,7 @@
             </div>
             <div class="row">
                 <div class="col-md-4">
-                    <a href="http://www.openstack.org/assets/survey/April-2016-User-Survey-Report.pdf" target="_blank">
+                    <a href="{$Top.CloudUrl('assets/survey/April-2016-User-Survey-Report.pdf')}" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
                             <img src="/themes/openstack/images/read.png">
@@ -333,7 +333,7 @@
                         <sup>2</sup> Source: Apps Run the World, “Worldwide Cloud Applications Market Forecast 2015-2019”, <a href="https://www.appsruntheworld.com/worldwide-cloud-applications-market-forecast-2015-2019/" target="_blank">https://www.appsruntheworld.com/worldwide-cloud-applications-market-forecast-2015-2019/</a>
                     </p>
                     <p>
-                        <sup>3</sup> OpenStack is Ready--Are You?, Lauren E. Nelson, May 18, 2015, https://www.forrester.com/report/OpenStack+Is+Ready+Are+You/-/E-RES122728.  Read the brief at <a href="http://www.openstack.org/assets/pdf-downloads/Brief-OpenStack-Is-Now-Ready.pdf" target="_blank">http://www.openstack.org/assets/pdf-downloads/Brief-OpenStack-Is-Now-Ready.pdf</a>
+                        <sup>3</sup> OpenStack is Ready--Are You?, Lauren E. Nelson, May 18, 2015, https://www.forrester.com/report/OpenStack+Is+Ready+Are+You/-/E-RES122728.  Read the brief at <a href="{$Top.CloudUrl('ssets/pdf-downloads/Brief-OpenStack-Is-Now-Ready.pdf'}" target="_blank">{$Top.CloudUrl('assets/pdf-downloads/Brief-OpenStack-Is-Now-Ready.pdf'}</a>
                     </p>
                 </div>
             </div>

@@ -140,11 +140,11 @@
             </p>
             <ul class="list-unstyled">
                 <li><a href="https://www.openstack.org/user-survey/2018-user-survey-report">$_T("survey_ui", "2018 full report")</a></li>
-                <li><a href="https://www.openstack.org/assets/survey/April2017SurveyReport.pdf">$_T("survey_ui", "April 2017 full report")</a></li>
-                <li><a href="https://www.openstack.org/assets/survey/October2016SurveyReport.pdf">$_T("survey_ui", "October 2016 highlights report")</a></li>
-                <li><a href="https://www.openstack.org/assets/survey/April-2016-User-Survey-Report.pdf">$_T("survey_ui", "April 2016 full report")</a></li>
+                <li><a href="{$Top.CloudUrl('assets/survey/April2017SurveyReport.pdf')}">$_T("survey_ui", "April 2017 full report")</a></li>
+                <li><a href="{$Top.CloudUrl('assets/survey/October2016SurveyReport.pdf')}">$_T("survey_ui", "October 2016 highlights report")</a></li>
+                <li><a href="{$Top.CloudUrl('assets/survey/April-2016-User-Survey-Report.pdf')}">$_T("survey_ui", "April 2016 full report")</a></li>
                 <li>
-                    <a href="http://www.openstack.org/assets/survey/Public-User-Survey-Report.pdf">$_T("survey_ui", "October 2015 full report")</a>
+                    <a href="{$Top.CloudUrl('assets/survey/Public-User-Survey-Report.pdf')}">$_T("survey_ui", "October 2015 full report")</a>
                 <li>
                     <a href="http://superuser.openstack.org/articles/user-survey-identifies-leading-industries-and-business-drivers-for-openstack-adoption"
                        target="_blank">$_T("survey_ui", "May 2015 demographics")</a></li>

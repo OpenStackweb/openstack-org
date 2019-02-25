@@ -50,7 +50,7 @@
                      <div class="voting-header">
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                            <div class="voting-app-logo">
-                              <img class="summit-hero-logo" src="/assets/Uploads/arrows.svg" alt="Open Infrastructure Summit" />
+                              <img class="summit-hero-logo" src="{$Top.CloudUrl('assets/Uploads/arrows.svg')}" alt="Open Infrastructure Summit" />
                            </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-9">

@@ -6,7 +6,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
-                  <img class="ptg-logo" src="/assets/ptg/ptglogo-sansos.png" alt="Project Teams Gathering">
+                  <img class="ptg-logo" src="{$Top.CloudUrl('assets/ptg/ptglogo-sansos.png')}" alt="Project Teams Gathering">
                 </div>
             </div>
             <div class="row">

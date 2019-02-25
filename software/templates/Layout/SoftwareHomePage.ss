@@ -30,7 +30,7 @@
                 <img class="header-bullet" width="100%" src="/software/images/bullets/bullet-2.svg" onerror="this.onerror=null; this.src=/software/images/bullets/bullet-2.png" alt="Bullet 2">
                 <h3 class="has-bullet is-upprcs strong">The OpenStack Landscape</h3>
                 <p>OpenStack is broken up into projects to allow you to plug and play components depending on your needs. the openstack map gives you an “at a glance” view of the openstack landscpace to see where projects fit and how they can work together.</p>
-                <p><a href="https://www.openstack.org/assets/software/projectmap/openstack-map.pdf">Download the map <i class="fa fa-chevron-right"></i></a></p>
+                <p><a href="{$Top.CloudUrl('assets/software/projectmap/openstack-map.pdf')}">Download the map <i class="fa fa-chevron-right"></i></a></p>
                 <p>&nbsp; </p>
                 <p>
                     <img class="openstack-map" width="100%" src="/software/images/map/openstack-map-v20180601.svg" onerror="this.onerror=null; this.src=/software/images/map/openstack-map-v20180601.png" alt="OpenStack Cloud landscape map">

@@ -362,7 +362,7 @@
                     </p>
                 </div>
                 <div class="growth-map-wrapper">
-                    <img class="growth-map tokyo" src="/assets/sydney-summit/images/map-about-summit-sydney.svg" alt="OpenStack Summit Growth Chart"> 
+                    <img class="growth-map tokyo" src="{$Top.CloudUrl('assets/sydney-summit/images/map-about-summit-sydney.svg')}" alt="OpenStack Summit Growth Chart">
                     <img class="growth-chart-legend map" src="/themes/openstack/static/images/tokyo/map-legend.svg" alt="OpenStack Summit Map Legend"> 
                 </div>
                 <div class="growth-text-bottom map">

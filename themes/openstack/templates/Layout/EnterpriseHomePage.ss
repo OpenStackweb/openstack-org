@@ -389,8 +389,8 @@
                 <i class="fa fa-file-pdf-o fa-4x"></i>
                 Page through a booklet prepared <em>for</em> IT executives, <em>by</em> current OpenStack users. It offers planning tips and use cases with real business results from cloud computing with OpenStack.
             </p>
-                <a href="//openstack.org/assets/pdf-downloads/business-perspectives.pdf" class="download-btn"><i class="fa fa-desktop fa-2x"></i> View The Booklet <sup>*</sup></a>
-                <a href="//openstack.org/assets/pdf-downloads/business-perspectives-print.pdf" class="download-btn"><i class="fa fa-print fa-2x"></i> Print The Booklet</a>
+                <a href="{$Top.CloudUrl('assets/pdf-downloads/business-perspectives.pdf')}" class="download-btn"><i class="fa fa-desktop fa-2x"></i> View The Booklet <sup>*</sup></a>
+                <a href="{$Top.CloudUrl('assets/pdf-downloads/business-perspectives-print.pdf')}" class="download-btn"><i class="fa fa-print fa-2x"></i> Print The Booklet</a>
                 <span class="lrg-btn-note">*Best viewed with Page Display set to single page and Zoom set to page level</span>
           </div>
           <div class="modal-footer">
@@ -413,7 +413,7 @@
                 Provides enterprise architects insights on planning an OpenStack cloud, including selecting the right model, forming your team, choosing workloads, and implementation from proof-of-concept through production.
             </p>
                 <a href="https://www.amazon.com/OpenStack-Path-Cloud-Foundation/dp/1532709404" class="download-btn"><i class="fa fa-desktop fa-2x"></i> Purchase the Book</a>
-                <a href="//www.openstack.org/assets/path-to-cloud/OpenStack-6x9Booklet-online.pdf" class="download-btn"><i class="fa fa-desktop fa-2x"></i> View The Booklet</a>
+                <a href="{$Top.CloudUrl('assets/path-to-cloud/OpenStack-6x9Booklet-online.pdf')}" class="download-btn"><i class="fa fa-desktop fa-2x"></i> View The Booklet</a>
                 <span class="lrg-btn-note">*Best viewed with Page Display set to single page and Zoom set to page level</span>
           </div>
           <div class="modal-footer">
@@ -436,10 +436,10 @@
             </p>
             <ul class="booklets-list">
                 <li>
-                    <a href="/assets/enterprise/OpenStack-AppDevMigration8x10Booklet-v10-online.pdf" taget="_blank">View the book online</a>
+                    <a href="{$Top.CloudUrl('assets/enterprise/OpenStack-AppDevMigration8x10Booklet-v10-online.pdf')}" taget="_blank">View the book online</a>
                 </li>
                 <li>
-                    <a href="/assets/enterprise/OpenStack-AppDevMigration8x10Booklet-v10-press-withcover.pdf" taget="_blank">Print the booklet in 8”W x 10”H format</a>
+                    <a href="{$Top.CloudUrl('assets/enterprise/OpenStack-AppDevMigration8x10Booklet-v10-press-withcover.pdf')}" taget="_blank">Print the booklet in 8”W x 10”H format</a>
                 </li>
                 <li>
                     <a href="http://www.amazon.com/dp/1545369887" taget="_blank">Order a paperback from Amazon</a>

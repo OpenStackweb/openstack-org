@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <img class="hackathon-logo" src="/assets/EventImages/hackathon-logo.png" alt="OpenStack Hackathon">
+                <img class="hackathon-logo" src="{$Top.CloudUrl('assets/EventImages/hackathon-logo.png')}" alt="OpenStack Hackathon">
                 <h1>$Title</h1>
             </div>
         </div>

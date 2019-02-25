@@ -134,7 +134,7 @@
       </div> <!--End User Story tile-->
 
       <div class="col-lg-4 col-md-6"> <!--Start User Story tile-->
-        <a href="http://www.openstack.org/assets/containers/LivePerson.pdf" class="user-story-square" style="background-image: url('/themes/openstack/images/user-stories/liveperson.jpg')">
+        <a href="{$Top.CloudUrl('assets/containers/LivePerson.pdf')}" class="user-story-square" style="background-image: url('/themes/openstack/images/user-stories/liveperson.jpg')">
           <span class="company">
             LivePerson
             <span class="stat">The most popular website chat service is using OpenStack as a path to production for Kubernetes</span>

@@ -41,8 +41,8 @@
                 <p>
                     A: Project Teams Gatherings happen in Q1 and Q3 of each year. OpenStack Summits happen in Q2 and Q4 of each year. You can see how this plays out in the timeline below.</p>
                 <p>
-                    <a href="/assets/Uploads/summit-ptg-timeline-revised.png" target="_blank">
-                        <img class="ptg-release-timeline" src="/assets/Uploads/summit-ptg-timeline-revised.png" alt="Project Teams Gathering vs Design Summit">
+                    <a href="{$Top.CloudUrl('assets/Uploads/summit-ptg-timeline-revised.png')}" target="_blank">
+                        <img class="ptg-release-timeline" src="{$Top.CloudUrl('assets/Uploads/summit-ptg-timeline-revised.png')}" alt="Project Teams Gathering vs Design Summit">
                     </a></p>
 
 				<p>

@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <img class="osdays-logo" src="/assets/openstack-logo/openstackdays/days-hero-mark.svg" alt="OpenStack Days">
+                <img class="osdays-logo" src="{$Top.CloudUrl('assets/openstack-logo/openstackdays/days-hero-mark.svg')}" alt="OpenStack Days">
                 <h1>$Title</h1>
             </div>
         </div>

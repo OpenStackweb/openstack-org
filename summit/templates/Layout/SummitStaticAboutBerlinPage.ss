@@ -98,28 +98,28 @@
     <div class="row">
       <div class="col-sm-3 featured">
         <div class="summit-user-section">
-          <img src="/assets/sydney-summit/speakers/Anni-Lai.jpg" alt="Anni Lai" class="summit-user-image">
+          <img src="{$Top.CloudUrl('assets/sydney-summit/speakers/Anni-Lai.jpg')}" alt="Anni Lai" class="summit-user-image">
           <div class="name">Anni Lai</div>
           <div class="title">Head of Global Business Development, Huawei</div>
         </div>
       </div>
       <div class="col-sm-3 featured">
         <div class="summit-user-section">
-          <img src="/assets/sydney-summit/speakers/allison-randall.jpg" alt="Allison Randall" class="summit-user-image">
+          <img src="{$Top.CloudUrl('assets/sydney-summit/speakers/allison-randall.jpg')}" alt="Allison Randall" class="summit-user-image">
           <div class="name">Allison Randal</div>
           <div class="title">PhD, University of Cambridge | OpenStack Board Member</div>
         </div>
       </div>
       <div class="col-sm-3 featured">
         <div class="summit-user-section">
-          <img src="/assets/sydney-summit/speakers/Manuel-Sopena-Ballesteros.PNG" alt="Manuel Sopena Ballesteros" class="summit-user-image">
+          <img src="{$Top.CloudUrl('assets/sydney-summit/speakers/Manuel-Sopena-Ballesteros.PNG')}" alt="Manuel Sopena Ballesteros" class="summit-user-image">
           <div class="name">Manuel Sopena Ballesteros</div>
           <div class="title">Big Data Engineer, The Garvan Institute</div>
         </div>
       </div>
       <div class="col-sm-3">
         <div class="summit-user-section">
-          <img src="/assets/sydney-summit/speakers/Quinton-Anderson.jpg" alt="Quinton Anderson" class="summit-user-image">
+          <img src="{$Top.CloudUrl('assets/sydney-summit/speakers/Quinton-Anderson.jpg')}" alt="Quinton Anderson" class="summit-user-image">
           <div class="name">Quinton Anderson</div>
           <div class="title">Head of Systems Engineering, Analytics and Information, Commonwealth Bank</div>
         </div>
@@ -128,28 +128,28 @@
     <div class="row">
       <div class="col-sm-3 featured">
         <div class="summit-user-section">
-          <img src="/assets/sydney-summit/speakers/Sorabh-Saxena.jpg" alt="Sorabh Saxena" class="summit-user-image">
+          <img src="{$Top.CloudUrl('assets/sydney-summit/speakers/Sorabh-Saxena.jpg')}" alt="Sorabh Saxena" class="summit-user-image">
           <div class="name">Sorabh Saxena</div>
           <div class="title">CIO of Network and Shared Services, AT&T</div>
         </div>
       </div>
       <div class="col-sm-3">
         <div class="summit-user-section">
-          <img src="/assets/sydney-summit/speakers/Jessica-Field.jpg" alt="Jessica Field" class="summit-user-image">
+          <img src="{$Top.CloudUrl('assets/sydney-summit/speakers/Jessica-Field.jpg')}" alt="Jessica Field" class="summit-user-image">
           <div class="name">Jessica Field</div>
           <div class="title">Marketing Director, Aptira</div>
         </div>
       </div>
       <div class="col-sm-3">
         <div class="summit-user-section">
-          <img src="/assets/sydney-summit/speakers/Talal-AlBakr.jpg" alt="Talal AlBakr" class="summit-user-image">
+          <img src="{$Top.CloudUrl('assets/sydney-summit/speakers/Talal-AlBakr.jpg')}" alt="Talal AlBakr" class="summit-user-image">
           <div class="name">Talal AlBakr</div>
           <div class="title">Vice President of Cloud Services, STC Solutions</div>
         </div>
       </div>
       <div class="col-sm-3">
         <div class="summit-user-section">
-          <img src="/assets/sydney-summit/speakers/14efec9.jpg" alt="Lauren Sell" class="summit-user-image">
+          <img src="{$Top.CloudUrl('assets/sydney-summit/speakers/14efec9.jpg')}" alt="Lauren Sell" class="summit-user-image">
           <div class="name">Lauren Sell</div>
           <div class="title">Vice President, Marketing and Community Services</div>
         </div>
@@ -158,28 +158,28 @@
     <div class="row">
       <div class="col-sm-3 featured">
         <div class="summit-user-section">
-          <img src="/assets/sydney-summit/speakers/Joseph-Sandoval.jpg" alt="Joseph Sandoval" class="summit-user-image">
+          <img src="{$Top.CloudUrl('assets/sydney-summit/speakers/Joseph-Sandoval.jpg')}" alt="Joseph Sandoval" class="summit-user-image">
           <div class="name">Joseph Sandoval</div>
           <div class="title">Cloud Platform Manager, Adobe Marketing Cloud</div>
         </div>
       </div>
       <div class="col-sm-3">
         <div class="summit-user-section">
-          <img src="/assets/boston-summit/speakers/Mark-Collier2.jpg" alt="Mark Collier" class="summit-user-image">
+          <img src="{$Top.CloudUrl('assets/boston-summit/speakers/Mark-Collier2.jpg')}" alt="Mark Collier" class="summit-user-image">
           <div class="name">Mark Collier</div>
           <div class="title">COO, OpenStack Foundation</div>
         </div>
       </div>
       <div class="col-sm-3">
         <div class="summit-user-section">
-          <img src="/assets/sydney-summit/speakers/ecatarinagamanji.jpg" alt="Lauren Sell" class="summit-user-image">
+          <img src="{$Top.CloudUrl('assets/sydney-summit/speakers/ecatarinagamanji.jpg')}" alt="Lauren Sell" class="summit-user-image">
           <div class="name">Ecatarina Gamanji</div>
           <div class="title">Infrastructure Automation Engineer, Paddy Power Betfair</div>
         </div>
       </div>
       <div class="col-sm-3">
         <div class="summit-user-section">
-          <img src="/assets/boston-summit/speakers/Jonathan-Bryce2.jpg" alt="Jonathan Bryce" class="summit-user-image">
+          <img src="{$Top.CloudUrl('assets/boston-summit/speakers/Jonathan-Bryce2.jpg')}" alt="Jonathan Bryce" class="summit-user-image">
           <div class="name">Jonathan Bryce</div>
           <div class="title">Executive Director, OpenStack Foundation</div>
         </div>
@@ -337,7 +337,7 @@
                     </p>
                 </div>
                 <div class="growth-map-wrapper">
-                    <img class="growth-map tokyo" src="/assets/sydney-summit/images/map-about-summit-sydney.svg" alt="OpenStack Summit Growth Chart"> 
+                    <img class="growth-map tokyo" src="{$Top.CloudUrl('assets/sydney-summit/images/map-about-summit-sydney.svg')}" alt="OpenStack Summit Growth Chart">
                     <img class="growth-chart-legend map" src="/themes/openstack/static/images/tokyo/map-legend.svg" alt="OpenStack Summit Map Legend"> 
                 </div>
                 <div class="growth-text-bottom map">

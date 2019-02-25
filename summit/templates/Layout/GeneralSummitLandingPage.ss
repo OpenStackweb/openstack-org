@@ -188,32 +188,32 @@
                         <div class="col-lg-1 col-md-1 col-sm-2 centered-column space"></div>
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
                             <a rel="nofollow" href="https://www.canonical.com/">
-                                <img alt="Canonical_big_logo" src="/assets/companies/main_logo/ubuntu-lg.jpg" class="big-logo-company company-logo">
+                                <img alt="Canonical_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/ubuntu-lg.jpg'}" class="big-logo-company company-logo">
                             </a>
                         </div>
 
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
                             <a rel="nofollow" href="https://www.telekom.com/">
-                                <img alt="Deutsche Telekom_big_logo" src="/assets/companies/main_logo/deutschetelekom-lg.jpg"
+                                <img alt="Deutsche Telekom_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/deutschetelekom-lg.jpg')}"
                                     class="big-logo-company company-logo">
                             </a>
                         </div>
 
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
                             <a rel="nofollow" href="http://www.huawei.com/en/">
-                                <img alt="Huawei_big_logo" src="/assets/companies/main_logo/huawei-new-lg.jpg" class="big-logo-company company-logo">
+                                <img alt="Huawei_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/huawei-new-lg.jpg')}" class="big-logo-company company-logo">
                             </a>
                         </div>
 
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
                             <a rel="nofollow" href="http://www.intel.com/">
-                                <img alt="Intel_big_logo" src="/assets/companies/main_logo/intel-xlg.jpg" class="big-logo-company company-logo">
+                                <img alt="Intel_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/intel-xlg.jpg')}" class="big-logo-company company-logo">
                             </a>
                         </div>
 
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
                             <a rel="nofollow" href="https://www.redhat.com/openstack/?sc_cid=70160000000bEKkAAM&amp;offer_id=701600000006R7KAAU">
-                                <img alt="Red Hat, Inc._big_logo" src="/assets/companies/main_logo/redhat-sp-lg.jpg"
+                                <img alt="Red Hat, Inc._big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/redhat-sp-lg.jpg')}"
                                     class="big-logo-company company-logo">
                             </a>
                         </div>
@@ -223,50 +223,50 @@
                     <div class="item" id="sponsorsCarousel-1">
                         <div class="col-lg-1 col-md-1 col-sm-2 centered-column space"></div>
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
-                            <a rel="nofollow" href="http://www.cisco.com/"><img alt="Cisco_big_logo" src="/assets/companies/main_logo/cisco-new-lg.png"
+                            <a rel="nofollow" href="http://www.cisco.com/"><img alt="Cisco_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/cisco-new-lg.png')}"
                                     class="big-logo-company company-logo"></a>
                         </div>
 
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
-                            <a rel="nofollow" href="https://www.suse.com/"><img alt="SUSE_big_logo" src="/assets/companies/main_logo/suse-sp-lg.jpg"
+                            <a rel="nofollow" href="https://www.suse.com/"><img alt="SUSE_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/suse-sp-lg.jpg')}"
                                 class="big-logo-company company-logo"></a>
                             </a>
                         </div>
 
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
-                            <a rel="nofollow" href="https://www.vmware.com/"><img alt="VMware_big_logo" src="/assets/companies/main_logo/vmware-sp-lg.jpg"
+                            <a rel="nofollow" href="https://www.vmware.com/"><img alt="VMware_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/vmware-sp-lg.jpg')}"
                                 class="big-logo-company company-logo"></a>
                         </div>
 
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
-                            <a rel="nofollow" href="http://www.emc.com"><img alt="Dell EMC_big_logo" src="/assets/companies/main_logo/EMC-lg.jpg" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="http://www.emc.com"><img alt="Dell EMC_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/EMC-lg.jpg')}" class="big-logo-company company-logo"></a>
                         </div>
 
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
-                            <a rel="nofollow" href="http://www.symkloud.com"><img alt="Kontron_big_logo" src="/assets/companies/main_logo/kontron-lg.jpg" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="http://www.symkloud.com"><img alt="Kontron_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/kontron-lg.jpg')}" class="big-logo-company company-logo"></a>
                         </div>
                         <div class="col-lg-1 col-md-1 col-sm-2 centered-column space"></div>
                     </div>
                     <div class="item" id="sponsorsCarousel-2">
                         <div class="col-lg-1 col-md-1 col-sm-2 centered-column space"></div>
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
-                            <a rel="nofollow" href="https://www.mirantis.com/"><img alt="Mirantis_big_logo" src="/assets/companies/main_logo/mirantis-lg-van.jpg" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="https://www.mirantis.com/"><img alt="Mirantis_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/mirantis-lg-van.jpg')}" class="big-logo-company company-logo"></a>
                         </div>
 
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
-                            <a rel="nofollow" href="https://www.nokia.com/en_int"><img alt="Nokia_big_logo" src="/assets/companies/main_logo/nokia-lg.jpg" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="https://www.nokia.com/en_int"><img alt="Nokia_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/nokia-lg.jpg')}" class="big-logo-company company-logo"></a>
                         </div>
 
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
-                            <a rel="nofollow" href="https://www.rackspace.com/cloud/openstack"><img alt="Rackspace_big_logo" src="/assets/companies/main_logo/rackspace-lg-2016.jpg" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="https://www.rackspace.com/cloud/openstack"><img alt="Rackspace_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/rackspace-lg-2016.jpg')}" class="big-logo-company company-logo"></a>
                         </div>
 
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
-                            <a rel="nofollow" href="https://intl.cloud.tencent.com/"><img alt="Tencent Cloud_big_logo" src="/assets/companies/main_logo/Tencent-vert-lg.jpg" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="https://intl.cloud.tencent.com/"><img alt="Tencent Cloud_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/Tencent-vert-lg.jpg')}" class="big-logo-company company-logo"></a>
                         </div>
 
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
-                            <a rel="nofollow" href="http://wwwen.zte.com.cn/en/"><img alt="ZTE Corporation_big_logo" src="/assets/companies/main_logo/zte-lg.jpg" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="http://wwwen.zte.com.cn/en/"><img alt="ZTE Corporation_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/zte-lg.jpg')}" class="big-logo-company company-logo"></a>
                             </a>
                         </div>
                         <div class="col-lg-1 col-md-1 col-sm-2 centered-column space"></div>
@@ -274,49 +274,49 @@
                     <div class="item" id="sponsorsCarousel-3">
                         <div class="col-lg-1 col-md-1 col-sm-2 centered-column space"></div>
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
-                            <a rel="nofollow" href="http://www.ambedded.com/"><img alt="Ambedded_big_logo" src="/assets/companies/main_logo/ambedded-lg.jpg" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="http://www.ambedded.com/"><img alt="Ambedded_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/ambedded-lg.jpg')}" class="big-logo-company company-logo"></a>
                         </div>
 
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
                             <a rel="nofollow" href="https://www.telekom.com/">
-                                <img alt="Deutsche Telekom_big_logo" src="/assets/companies/main_logo/deutschetelekom-lg.jpg"
+                                <img alt="Deutsche Telekom_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/deutschetelekom-lg.jpg')}"
                                     class="big-logo-company company-logo">
                             </a>
                         </div>
 
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
-                            <a rel="nofollow" href="http://www.arm.com/"><img alt="ARM_big_logo" src="/assets/companies/main_logo/arm-lg2.jpg" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="http://www.arm.com/"><img alt="ARM_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/arm-lg2.jpg')}" class="big-logo-company company-logo"></a>
                         </div>
 
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
-                            <a rel="nofollow" href="https://www.avinetworks.com/"><img alt="Avi Networks_big_logo" src="/assets/companies/main_logo/avi-lg.jpg" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="https://www.avinetworks.com/"><img alt="Avi Networks_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/avi-lg.jpg')}" class="big-logo-company company-logo"></a>
                         </div>
 
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
-                            <a rel="nofollow" href="http://www.b1-systems.de/"><img alt="B1 Systems_big_logo" src="/assets/companies/main_logo/BSystems.jpg" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="http://www.b1-systems.de/"><img alt="B1 Systems_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/BSystems.jpg')}" class="big-logo-company company-logo"></a>
                         </div>
                         <div class="col-lg-1 col-md-1 col-sm-2 centered-column space"></div>
                     </div>
                     <div class="item" id="sponsorsCarousel-4">
                         <div class="col-lg-1 col-md-1 col-sm-2 centered-column space"></div>
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
-                            <a rel="nofollow" href="https://www.citynetworkhosting.com"><img alt="City Network_big_logo" src="/assets/companies/main_logo/_resampled/SetWidth300-CityNetwork-Logo-Regular-500px-RGB.png" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="https://www.citynetworkhosting.com"><img alt="City Network_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/_resampled/SetWidth300-CityNetwork-Logo-Regular-500px-RGB.png')}" class="big-logo-company company-logo"></a>
                         </div>
 
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
-                            <a rel="nofollow" href="http://www.cloudbase.it"><img alt="Cloudbase Solutions_big_logo" src="/assets/companies/main_logo/cloudbase-lg.jpg" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="http://www.cloudbase.it"><img alt="Cloudbase Solutions_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/cloudbase-lg.jpg'}" class="big-logo-company company-logo"></a>
                         </div>
 
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
-                            <a rel="nofollow" href="http://www.componentsoft.eu"><img alt="Component Soft_big_logo" src="/assets/companies/main_logo/componentsoft-lg-09-04.jpg" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="http://www.componentsoft.eu"><img alt="Component Soft_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/componentsoft-lg-09-04.jpg')}" class="big-logo-company company-logo"></a>
                         </div>
 
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
-                            <a rel="nofollow" href="https://www.cumulusnetworks.com"><img alt="Cumulus Networks_big_logo" src="/assets/companies/main_logo/cumulus-networks-lg.jpg" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="https://www.cumulusnetworks.com"><img alt="Cumulus Networks_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/cumulus-networks-lg.jpg')}" class="big-logo-company company-logo"></a>
                         </div>
 
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
-                            <a rel="nofollow" href="https://www.datadoghq.com"><img alt="Datadog Inc_big_logo" src="/assets/companies/main_logo/datadog-lg.jpg" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="https://www.datadoghq.com"><img alt="Datadog Inc_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/datadog-lg.jpg')}" class="big-logo-company company-logo"></a>
                         </div>
                         <div class="col-lg-1 col-md-1 col-sm-2 centered-column space"></div>
                     </div>

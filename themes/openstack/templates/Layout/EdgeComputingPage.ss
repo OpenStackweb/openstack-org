@@ -27,7 +27,7 @@
                         <div class="edge-download-text">
                             边缘计算：跨越传统数据中心
                         </div>
-                        <a href="https://www.openstack.org/assets/edge/EdgeWhitepaper-Chinese.pdf " class="edge-download-btn" target="_blank">
+                        <a href="{$Top.CloudUrl('assets/edge/EdgeWhitepaper-Chinese.pdf')}" class="edge-download-btn" target="_blank">
                             <div><i class="fa fa-arrow-circle-down"></i> 阅读白皮书</div>
                         </a>
                     </div>
@@ -46,15 +46,15 @@
             </div>
             <div class="row">
                 <div class="col-sm-4 col-sm-offset-1">
-                  <div class="earth"><img src="https://www.openstack.org/assets/edge/lilearth.png"></div>
+                  <div class="earth"><img src="{$Top.CloudUrl('assets/edge/lilearth.png')}"></div>
                   <p>Catch us on IRC, or see the schedule and agenda for Edge Computing Group calls.</p>
                   <a href="https://wiki.openstack.org/wiki/Edge_Computing_Group" target="_blank" class="download-btn"><em>Learn more about Edge Computing Group</em></a>
                 </div>
                 <div class="col-sm-4 col-sm-offset-2">
-                  <div class="plane"><img src="/assets/summits/logos/red-circle.png"></div>
+                  <div class="plane"><img src="{$Top.CloudUrl('assets/summits/logos/red-circle.png')}"></div>
                   <p>Add the <strong>Weekly Edge Computing Group Meetings</strong> to your calendar.</p>
-                  <a href="https://www.openstack.org/assets/edge/OSF-Edge-Computing-Group-Weekly-Calls.ics" class="download-ml1"><em>WG Weekly Calls</em>&nbsp;<i class="fa fa-calendar"></i></a>
-                  <a href="https://www.openstack.org/assets/edge/OSF-Edge-WG-Use-Cases-Weekly-Calls.ics" class="download-ml2"><em>Use Cases Weekly Calls</em>&nbsp;<i class="fa fa-calendar"></i></a>
+                  <a href="{$Top.CloudUrl('assets/edge/OSF-Edge-Computing-Group-Weekly-Calls.ics')}" class="download-ml1"><em>WG Weekly Calls</em>&nbsp;<i class="fa fa-calendar"></i></a>
+                  <a href="{$Top.CloudUrl('assets/edge/OSF-Edge-WG-Use-Cases-Weekly-Calls.ics')}" class="download-ml2"><em>Use Cases Weekly Calls</em>&nbsp;<i class="fa fa-calendar"></i></a>
                 </div>
             </div>
         </div>
@@ -112,7 +112,7 @@
                     </a>
                     <p class="speaker">Imad Sousou</p>
                     <p class="company">Intel</p>
-                    <p><a href="https://www.openstack.org/assets/edge/slides/Opendev-Imad-Sousou-Keynote.pdf">Download Slides <i class="fa fa-file-pdf-o fa-3" aria-hidden="true"></i></a></p>
+                    <p><a href="{$Top.CloudUrl('assets/edge/slides/Opendev-Imad-Sousou-Keynote.pdf')}">Download Slides <i class="fa fa-file-pdf-o fa-3" aria-hidden="true"></i></a></p>
                 </div>
             </div>
             <div class="row video-wall-row">
@@ -139,7 +139,7 @@
                     </a>
                     <p class="speaker">Kandan Kathirvel & Rodolfo Pacheco</p>
                     <p class="company">AT&T</p>
-                    <p><a href="https://www.openstack.org/assets/edge/slides/Kandan-AT-T-Edge-Talk-Opendev.pdf">Download Slides <i class="fa fa-file-pdf-o fa-3" aria-hidden="true"></i></a></p>
+                    <p><a href="{$Top.CloudUrl('assets/edge/slides/Kandan-AT-T-Edge-Talk-Opendev.pdf')}">Download Slides <i class="fa fa-file-pdf-o fa-3" aria-hidden="true"></i></a></p>
                 </div>
                 <div class="col-md-3 col-sm-6 video-wall-item">
                     <a href="https://youtu.be/MlojvyJM71I" target="_blank">
@@ -152,7 +152,7 @@
                     </a>
                     <p class="speaker">Mahadev Satyanarayanan</p>
                     <p class="company">Carnegie Mellon University</p>
-                    <p><a href="https://www.openstack.org/assets/edge/slides/2017-09-07-a-satya-opendev-keynote.pdf">Download Slides <i class="fa fa-file-pdf-o fa-3" aria-hidden="true"></i></a></p>
+                    <p><a href="{$Top.CloudUrl('assets/edge/slides/2017-09-07-a-satya-opendev-keynote.pdf')}">Download Slides <i class="fa fa-file-pdf-o fa-3" aria-hidden="true"></i></a></p>
                 </div>
             </div>
             <div class="row more-videos-button-container">
@@ -370,7 +370,7 @@
                         <div class="play-button">
                             <img src="https://d33wubrfki0l68.cloudfront.net/90ed7324cc5f065ddfbd41aeade1f7e4b3cab2ac/4d6ef/images/read.png">
                         </div>
-                        <img class="video-image" src="https://www.openstack.org/assets/edge/openinfraedge.jpg" alt="image">
+                        <img class="video-image" src="{$Top.CloudUrl('assets/edge/openinfraedge.jpg')}" alt="image">
                     </div>
                     </a>
                     <p class="video-title">
@@ -383,7 +383,7 @@
                             <div class="play-button">
                                 <img src="https://d33wubrfki0l68.cloudfront.net/90ed7324cc5f065ddfbd41aeade1f7e4b3cab2ac/4d6ef/images/read.png">
                             </div>
-                            <img class="video-image" src="https://www.openstack.org/assets/edge/opensourcecollaboration.jpg" alt="image">
+                            <img class="video-image" src="{$Top.CloudUrl('assets/edge/opensourcecollaboration.jpg')}" alt="image">
                         </div>
                     </a>
                     <p class="video-title">
@@ -452,7 +452,7 @@
                 </div>
                   <div class="col-sm-4">
                       <div class="nfv-summit-right">
-                          <img class="nfv-summit-logo" src="/assets/Uploads/arrows.svg" alt="Open Infrastructure Summit">
+                          <img class="nfv-summit-logo" src="{$Top.CloudUrl('assets/Uploads/arrows.svg')}" alt="Open Infrastructure Summit">
                           <div class="nfv-summit-dates containers"><strong>Open Infrastructure Summit</strong>
                               April 29 - May 1
                           </div>

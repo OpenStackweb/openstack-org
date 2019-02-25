@@ -19,7 +19,8 @@
                        Hynes Convention Center & Surrounding Hotels
                     </div>
                 <div> 
-                    <a href="//openstack.org/assets/boston-summit/Boston-Sponsorship-Prospectus.pdf" class="btn register-btn-lrg" style="margin: 10px;">
+                    <a href="{$Top.CloudUrl('assets/boston-summit/Boston-Sponsorship-Prospectus.pdf')}"
+                       class="btn register-btn-lrg" style="margin: 10px;">
                         Sponsorship Prospectus
                         <i class="fa fa-cloud-download"></i>
                     </a>

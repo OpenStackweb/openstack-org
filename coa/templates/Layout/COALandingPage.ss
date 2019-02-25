@@ -146,7 +146,7 @@
                             <div class="title">
                                 OpenStack release being tested
                             </div>
-                            <img src="assets/software/pike/openstack-pike-logo.png" alt="OpenStack Pike Release" class="logo">
+                            <img src="{$Top.CloudUrl('assets/software/pike/openstack-pike-logo.png')}" alt="OpenStack Pike Release" class="logo">
                         </div>
                     </div>
                 </div>

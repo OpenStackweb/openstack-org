@@ -17,6 +17,7 @@
                 <a class="btn btn-default" href="/summit/denver-2019/sponsors/">Sponsor the Summit <i class="fal fa-arrow-right"></i></a>
 
                 <% include EventbriteRegisterLink Position='m',ExtraClass='btn-primary' %>
+
             </div>
             <div class="col-md-12 session-box">
                 <h3>Over 300 Presentations, Workshops, and Collaborative Sesssions</h3>
@@ -74,7 +75,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="https://www.openstack.org/assets/summits/denver-2019/programming-commitee/ArmstrongFoundjem2.png" alt="Armstrong Foundjem" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/ArmstrongFoundjem2.png')}" alt="Armstrong Foundjem" class="summit-user-image">
                         </div>
                         <div class="info">
                             <div class="name">Armstrong Foundjem</div>
@@ -86,7 +87,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="https://www.openstack.org/assets/summits/denver-2019/programming-commitee/blairbethwaite.jpeg" alt="Blair Bethwaite"
+                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/blairbethwaite.jpeg')}" alt="Blair Bethwaite"
                                  class="summit-user-image">
                         </div>
                         <div class="info">
@@ -99,7 +100,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="https://www.openstack.org/assets/summits/denver-2019/programming-commitee/howardzhipeng.jpeg" alt="Howard Zhipeng" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/howardzhipeng.jpeg')}" alt="Howard Zhipeng" class="summit-user-image">
                         </div>
                         <div class="info">
                             <div class="name">Howard Zhipeng</div>
@@ -111,7 +112,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="https://www.openstack.org/assets/summits/denver-2019/programming-commitee/JaredBaker.jpg" alt="Jared Baker" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/JaredBaker.jpg')}" alt="Jared Baker" class="summit-user-image">
                         </div>
                         <div class="info">
                             <div class="name">Jared Baker</div>
@@ -123,7 +124,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="https://www.openstack.org/assets/summits/denver-2019/programming-commitee/FatihDegirmenci.jpg" alt="Fatih Degirmenci"
+                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/FatihDegirmenci.jpg')}" alt="Fatih Degirmenci"
                                  class="summit-user-image">
                         </div>
                         <div class="info">
@@ -136,7 +137,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="https://www.openstack.org/assets/summits/denver-2019/programming-commitee/EricGuo.JPG" alt="ChangBo Guo" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/EricGuo.JPG')}" alt="ChangBo Guo" class="summit-user-image">
                         </div>
                         <div class="info">
                             <div class="name">ChangBo Guo</div>
@@ -148,7 +149,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="https://www.openstack.org/assets/summits/denver-2019/programming-commitee/jimblair.jpg" alt="James E. Blair"
+                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/jimblair.jpg')}" alt="James E. Blair"
                                  class="summit-user-image">
                         </div>
                         <div class="info">
@@ -161,7 +162,8 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="https://www.openstack.org/assets/1px.png" height="174" alt="Doina Cristina Duma" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/1px.png')}" height="174"
+                                 alt="Doina Cristina Duma" class="summit-user-image">
                         </div>
                         <div class="info">
                             <div class="name">Doina Cristina Duma</div>
@@ -173,7 +175,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="https://www.openstack.org/assets/summits/denver-2019/programming-commitee/EricEarnst.jpg" alt="Eric Ernst" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/EricEarnst.jpg')}" alt="Eric Ernst" class="summit-user-image">
                         </div>
                         <div class="info">
                             <div class="name">Eric Ernst</div>
@@ -185,7 +187,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="https://www.openstack.org/assets/summits/denver-2019/programming-commitee/HongbinLu.JPG" alt="Hongbin Lu" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/HongbinLu.JPG')}" alt="Hongbin Lu" class="summit-user-image">
                         </div>
                         <div class="info">
                             <div class="name">Hongbin Lu</div>
@@ -197,7 +199,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="https://www.openstack.org/assets/summits/denver-2019/programming-commitee/MattJarvis.jpg"
+                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/MattJarvis.jpg')}"
                                  alt="Matt Jarvis" class="summit-user-image">
                         </div>
                         <div class="info">
@@ -210,7 +212,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="https://www.openstack.org/assets/summits/denver-2019/programming-commitee/noahmeyerhans.jpeg" alt="Noah Meyerhans" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/noahmeyerhans.jpeg')}" alt="Noah Meyerhans" class="summit-user-image">
                         </div>
                         <div class="info">
                             <div class="name">Noah Meyerhans</div>
@@ -222,7 +224,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="https://www.openstack.org/assets/summits/denver-2019/programming-commitee/BethCohen.jpg" alt="Beth Cohen" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/BethCohen.jpg')}" alt="Beth Cohen" class="summit-user-image">
                         </div>
                         <div class="info">
                             <div class="name">Beth Cohen</div>
@@ -234,7 +236,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="https://www.openstack.org/assets/Uploads/ianjolliffe.jpeg" alt="Ian Jolliffe" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/Uploads/ianjolliffe.jpeg')}" alt="Ian Jolliffe" class="summit-user-image">
                         </div>
                         <div class="info">
                             <div class="name">Ian Jolliffe</div>
@@ -246,7 +248,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="https://www.openstack.org/assets/summits/denver-2019/programming-commitee/IldikoVancsa.png"
+                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/IldikoVancsa.png')}"
                                  alt="Ildiko Vansca" class="summit-user-image">
                         </div>
                         <div class="info">
@@ -259,7 +261,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="https://www.openstack.org/assets/summits/denver-2019/programming-commitee/StefanoCanepa.jpg" alt="Stefano Canepa" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/StefanoCanepa.jpg')}" alt="Stefano Canepa" class="summit-user-image">
                         </div>
                         <div class="info">
                             <div class="name">Stefano Canepa</div>
@@ -271,7 +273,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="https://www.openstack.org/assets/profile-images/egle-square.png" alt="Egle Sigler" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/profile-images/egle-square.png')}" alt="Egle Sigler" class="summit-user-image">
                         </div>
                         <div class="info">
                             <div class="name">Egle Sigler</div>
@@ -283,7 +285,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="https://www.openstack.org/assets/profile-images/image1a.jpg" alt="Keith Berger" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/profile-images/image1a.jpg')}" alt="Keith Berger" class="summit-user-image">
                         </div>
                         <div class="info">
                             <div class="name">Keith Berger</div>
@@ -295,7 +297,8 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="https://www.openstack.org/assets/Uploads/thierry.jpeg" alt="Thierry Carrez" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/Uploads/thierry.jpeg')}"
+                                 alt="Thierry Carrez" class="summit-user-image">
                         </div>
                         <div class="info">
                             <div class="name">Thierry Carrez</div>
@@ -307,7 +310,8 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="https://www.openstack.org/assets/summits/denver-2019/programming-commitee/Ivan.jpeg" alt="Ivan Kolodyazhny" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/Ivan.jpeg')}"
+                                 alt="Ivan Kolodyazhny" class="summit-user-image">
                         </div>
                         <div class="info">
                             <div class="name">Ivan Kolodyazhny</div>
@@ -319,7 +323,8 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="https://www.openstack.org/assets/profile-images/allisonicon128x128.png" alt="Allison Randal" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/profile-images/allisonicon128x128.png')}"
+                                 alt="Allison Randal" class="summit-user-image">
                         </div>
                         <div class="info">
                             <div class="name">Allison Randal</div>
@@ -331,7 +336,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="https://www.openstack.org/assets/summits/denver-2019/programming-commitee/SofiaEnriquez.JPG" alt="Laura Sofia Enriquez" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/SofiaEnriquez.JPG')}" alt="Laura Sofia Enriquez" class="summit-user-image">
                         </div>
                         <div class="info">
                             <div class="name">Laura Sofia Enriquez</div>
@@ -343,7 +348,8 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="https://www.openstack.org/assets/profile-images/ricolin.jpg" alt="Rico Lin" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/profile-images/ricolin.jpg')}"
+                                 alt="Rico Lin" class="summit-user-image">
                         </div>
                         <div class="info">
                             <div class="name">Rico Lin</div>
@@ -355,7 +361,8 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="https://www.openstack.org/assets/profile-images/bio2.jpg" alt="Yih Leong Sun" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/profile-images/bio2.jpg')}"
+                                 alt="Yih Leong Sun" class="summit-user-image">
                         </div>
                         <div class="info">
                             <div class="name">Dr. Yih Leong Sun</div>
@@ -367,7 +374,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="https://www.openstack.org/assets/summits/denver-2019/programming-commitee/BelmiroMoreira.JPG" alt="Belmiro Moreira" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/BelmiroMoreira.JPG')}" alt="Belmiro Moreira" class="summit-user-image">
                         </div>
                         <div class="info">
                             <div class="name">Belmiro Moreira</div>
@@ -379,7 +386,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="https://www.openstack.org/assets/summits/denver-2019/programming-commitee/tobiasrydberg.jpg" alt="Tobias Rydberg" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/tobiasrydberg.jpg')}" alt="Tobias Rydberg" class="summit-user-image">
                         </div>
                         <div class="info">
                             <div class="name">Tobias Rydberg</div>
@@ -391,7 +398,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="https://www.openstack.org/assets/summits/denver-2019/programming-commitee/kennethpeeples.jpeg" alt="Kenneth Peeples" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/kennethpeeples.jpeg')}" alt="Kenneth Peeples" class="summit-user-image">
                         </div>
                         <div class="info">
                             <div class="name">Kenneth Peeples</div>
@@ -403,7 +410,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="https://www.openstack.org/assets/summits/denver-2019/programming-commitee/JosephineSeifert.png" alt="Josephine Seifert" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/JosephineSeifert.png')}" alt="Josephine Seifert" class="summit-user-image">
                         </div>
                         <div class="info">
                             <div class="name">Josephine Seifert</div>
@@ -415,7 +422,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="https://www.openstack.org/assets/summits/denver-2019/programming-commitee/GageHugo.jpg" alt="Gage Hugo" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/GageHugo.jpg')}" alt="Gage Hugo" class="summit-user-image">
                         </div>
                         <div class="info">
                             <div class="name">Gage Hugo</div>
@@ -427,7 +434,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="https://www.openstack.org/assets/Uploads/qiao-fu.jpg" alt="Fu Qiao" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/Uploads/qiao-fu.jpg')}" alt="Fu Qiao" class="summit-user-image">
                         </div>
                         <div class="info">
                             <div class="name">Fu Qiao</div>
@@ -439,7 +446,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="https://www.openstack.org/assets/summits/denver-2019/programming-commitee/NateJohnston.jpg" alt="Nate Johnston" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/NateJohnston.jpg')}" alt="Nate Johnston" class="summit-user-image">
                         </div>
                         <div class="info">
                             <div class="name">Nate Johnston</div>
@@ -451,7 +458,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="https://www.openstack.org/assets/summits/denver-2019/programming-commitee/arkadyk-2.jpeg" alt="Arkady Kanevsky" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/arkadyk-2.jpeg')}" alt="Arkady Kanevsky" class="summit-user-image">
                         </div>
                         <div class="info">
                             <div class="name">Arkady Kanevsky</div>
@@ -522,15 +529,24 @@
                         <h3>Headline</h3>
                             
                         <div class="col-lg-3 col-md-4 col-sm-6 centered-column">
-                            <a rel="nofollow" href="https://www.canonical.com/"><img alt="Canonical_big_logo" src="/assets/companies/main_logo/ubuntu-lg.jpg" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="https://www.canonical.com/">
+                                <img alt="Canonical_big_logo"
+                                     src="{$Top.CloudUrl('assets/companies/main_logo/ubuntu-lg.jpg')}"
+                                     class="big-logo-company company-logo"></a>
                         </div>
                     
                         <div class="col-lg-3 col-md-4 col-sm-6 centered-column">
-                            <a rel="nofollow" href="https://www.telekom.com/"><img alt="Deutsche Telekom_big_logo" src="/assets/companies/main_logo/deutschetelekom-lg.jpg" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="https://www.telekom.com/">
+                                <img alt="Deutsche Telekom_big_logo"
+                                     src="{$Top.CloudUrl('assets/companies/main_logo/deutschetelekom-lg.jpg')}"
+                                     class="big-logo-company company-logo"></a>
                         </div>
                     
                         <div class="col-lg-3 col-md-4 col-sm-6 centered-column">
-                            <a rel="nofollow" href="http://www.intel.com/"><img alt="Intel_big_logo" src="/assets/companies/main_logo/intel-xlg.jpg" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="http://www.intel.com/">
+                                <img alt="Intel_big_logo"
+                                     src="{$Top.CloudUrl('assets/companies/main_logo/intel-xlg.jpg')}"
+                                     class="big-logo-company company-logo"></a>
                         </div>
 
                     </div>
@@ -538,11 +554,16 @@
                         <h3>Premier Sponsors</h3>
                             
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="http://www.cisco.com/"><img alt="Cisco_big_logo" src="/assets/companies/main_logo/cisco-new-lg.png" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="http://www.cisco.com/">
+                                <img alt="Cisco_big_logo"
+                                     src="{$Top.CloudUrl('assets/companies/main_logo/cisco-new-lg.png')}"
+                                     class="big-logo-company company-logo"></a>
                         </div>
                     
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="https://www.redhat.com/openstack/?sc_cid=70160000000bEKkAAM&amp;offer_id=701600000006R7KAAU"><img alt="Red Hat, Inc._big_logo" src="/assets/companies/main_logo/redhat-sp-lg.jpg" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="https://www.redhat.com/openstack/?sc_cid=70160000000bEKkAAM&amp;offer_id=701600000006R7KAAU">
+                                <img alt="Red Hat, Inc._big_logo"
+                                     src="{$Top.CloudUrl('assets/companies/main_logo/redhat-sp-lg.jpg')}" class="big-logo-company company-logo"></a>
                         </div>
 
                     </div>
@@ -550,82 +571,127 @@
                         <h3>Spotlight Sponsors</h3>
                             
                             <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                                <a rel="nofollow" href="http://www.emc.com"><img alt="Dell EMC_big_logo" src="/assets/companies/main_logo/EMC-lg.jpg" class="big-logo-company company-logo"></a>
+                                <a rel="nofollow" href="http://www.emc.com">
+                                    <img alt="Dell EMC_big_logo"
+                                         src="{$Top.CloudUrl('assets/companies/main_logo/EMC-lg.jpg')}"
+                                         class="big-logo-company company-logo"></a>
                             </div>
                         
                             <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                                <a rel="nofollow" href="https://www.juniper.net"><img alt="Juniper Networks_big_logo" src="/assets/companies/main_logo/juniper-sp-lg.jpg" class="big-logo-company company-logo"></a>
+                                <a rel="nofollow" href="https://www.juniper.net">
+                                    <img alt="Juniper Networks_big_logo"
+                                         src="{$Top.CloudUrl('assets/companies/main_logo/juniper-sp-lg.jpg')}"
+                                         class="big-logo-company company-logo"></a>
                             </div>
                         
                             <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                                <a rel="nofollow" href="https://www.mirantis.com/"><img alt="Mirantis_big_logo" src="/assets/companies/main_logo/mirantis-lg-van.jpg" class="big-logo-company company-logo"></a>
+                                <a rel="nofollow" href="https://www.mirantis.com/">
+                                    <img alt="Mirantis_big_logo"
+                                         src="{$Top.CloudUrl('assets/companies/main_logo/mirantis-lg-van.jpg')}"
+                                         class="big-logo-company company-logo"></a>
                             </div>
                         
                             <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                                <a rel="nofollow" href="http://www.purestorage.com/"><img alt="Pure Storage_big_logo" src="/assets/companies/main_logo/pure-lg.jpg" class="big-logo-company company-logo"></a>
+                                <a rel="nofollow" href="http://www.purestorage.com/">
+                                    <img alt="Pure Storage_big_logo"
+                                         src="{$Top.CloudUrl('assets/companies/main_logo/pure-lg.jpg')}"
+                                         class="big-logo-company company-logo"></a>
                             </div>
                     </div>
                     <div class="item">
                         <h3>Exhibitor Sponsors</h3>
                             
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="https://www.avinetworks.com/"><img alt="Avi Networks_big_logo" src="/assets/companies/main_logo/avi-lg.jpg" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="https://www.avinetworks.com/">
+                                <img alt="Avi Networks_big_logo"
+                                     src="{$Top.CloudUrl('assets/companies/main_logo/avi-lg.jpg')}" class="big-logo-company company-logo"></a>
                         </div>
                     
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="http://www.cloudbase.it"><img alt="Cloudbase Solutions_big_logo" src="/assets/companies/main_logo/cloudbase-lg.jpg" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="http://www.cloudbase.it">
+                                <img alt="Cloudbase Solutions_big_logo"
+                                     src="{$Top.CloudUrl('assets/companies/main_logo/cloudbase-lg.jpg')}" class="big-logo-company company-logo"></a>
                         </div>
                     
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="https://www.cumulusnetworks.com"><img alt="Cumulus Networks_big_logo" src="/assets/companies/main_logo/cumulus-networks-lg.jpg" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="https://www.cumulusnetworks.com">
+                                <img alt="Cumulus Networks_big_logo"
+                                     src="{$Top.CloudUrl('assets/companies/main_logo/cumulus-networks-lg.jpg')}" class="big-logo-company company-logo"></a>
                         </div>
                     
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="https://www.datadoghq.com"><img alt="Datadog Inc_big_logo" src="/assets/companies/main_logo/datadog-lg.jpg" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="https://www.datadoghq.com">
+                                <img alt="Datadog Inc_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/datadog-lg.jpg')}" class="big-logo-company company-logo"></a>
                         </div>
                     
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="http://www.easystack.io"><img alt="EasyStack_big_logo" src="/assets/companies/main_logo/easystack-lg2.jpg" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="http://www.easystack.io">
+                                <img alt="EasyStack_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/easystack-lg2.jpg')}"
+                                     class="big-logo-company company-logo"></a>
                         </div>
                     
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="https://www.lenovo.com/"><img alt="Lenovo_big_logo" src="/assets/companies/main_logo/lenovo-lg.jpg" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="https://www.lenovo.com/">
+                                <img alt="Lenovo_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/lenovo-lg.jpg')}"
+                                     class="big-logo-company company-logo"></a>
                         </div>
                     
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="https://logdna.com/"><img alt="LogDNA_big_logo" src="/assets/companies/main_logo/logdna-lg.jpg" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="https://logdna.com/">
+                                <img alt="LogDNA_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/logdna-lg.jpg')}"
+                                     class="big-logo-company company-logo"></a>
                         </div>
                     
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="https://www.snia.org/"><img alt="SNIA_big_logo" src="/assets/companies/main_logo/SNIA-R-logo-lg.jpg" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="https://www.snia.org/">
+                                <img alt="SNIA_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/SNIA-R-logo-lg.jpg')}"
+                                     class="big-logo-company company-logo"></a>
                         </div>
                     
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="https://softiron.com/"><img alt="SoftIron_big_logo" src="/assets/companies/main_logo/SoftIron-lg.jpg" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="https://softiron.com/">
+                                <img alt="SoftIron_big_logo"
+                                     src="{$Top.CloudUrl('assets/companies/main_logo/SoftIron-lg.jpg')}"
+                                     class="big-logo-company company-logo"></a>
                         </div>
                     
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="http://storagemadeeasy.com"><img alt="Storage Made Easy_big_logo" src="/assets/companies/main_logo/sme-large.jpg" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="http://storagemadeeasy.com">
+                                <img alt="Storage Made Easy_big_logo"
+                                     src="{$Top.CloudUrl('assets/companies/main_logo/sme-large.jpg')}"
+                                     class="big-logo-company company-logo"></a>
                         </div>
                     
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="http://www.triliodata.com"><img alt="TrilioData_big_logo" src="/assets/companies/main_logo/trilionew-lg2.jpg" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="http://www.triliodata.com">
+                                <img alt="TrilioData_big_logo"
+                                     src="{$Top.CloudUrl('assets/companies/main_logo/trilionew-lg2.jpg')}"
+                                     class="big-logo-company company-logo"></a>
                         </div>
                     
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="http://vexxhost.com"><img alt="VEXXHOST, Inc._big_logo" src="/assets/companies/main_logo/vexxhost-new-lg.png" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="http://vexxhost.com">
+                                <img alt="VEXXHOST, Inc._big_logo"
+                                     src="{$Top.CloudUrl('assets/companies/main_logo/vexxhost-new-lg.png')}"
+                                     class="big-logo-company company-logo"></a>
                         </div>
                     </div>
                     <div class="item">
                         <h3>Media Partners</h3>
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="www.superuser.openstack.org"><img alt="Superuser Long Logo_big_logo"
-                                                                                      src="/assets/companies/main_logo/superuser-lg.jpg" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="www.superuser.openstack.org">
+                                <img alt="Superuser Long Logo_big_logo"
+
+                                     src="{$Top.CloudUrl('assets/companies/main_logo/superuser-lg.jpg')}"
+                                     class="big-logo-company company-logo">
+                            </a>
                         </div>
 
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="http://www.decisive-media.com"><img alt="TelecomTV_big_logo" src="/assets/companies/main_logo/ttv-lg.jpg"
-                                                                                        class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="http://www.decisive-media.com">
+                                <img alt="TelecomTV_big_logo"
+                                     src="{$Top.CloudUrl('assets/companies/main_logo/ttv-lg.jpg')}"
+                                     class="big-logo-company company-logo"></a>
                         </div>
 
                     </div>

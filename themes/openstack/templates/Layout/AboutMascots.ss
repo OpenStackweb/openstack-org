@@ -61,7 +61,7 @@
 		</div>
 		<div class="col-lg-10 col-sm-12 center">
 			<p>&nbsp;</p>
-			<p><a href="//www.openstack.org/assets/software/mascots/OS-Mascot-Key.pdf" target="_blank">View Project Mascot Key</a></p>
+			<p><a href="{$Top.CloudUrl('assets/software/mascots/OS-Mascot-Key.pdf')}" target="_blank">View Project Mascot Key</a></p>
 		</div>
     	<div class="col-sm-12">
 			<h5 class="section-title">FAQs - Using Your Mascot Logo</h5>
