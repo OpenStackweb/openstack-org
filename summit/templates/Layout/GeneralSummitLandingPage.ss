@@ -91,7 +91,7 @@
             <div class="text-container col-md-6 col-sm-12">
                 <h4 class="title-section">Get Inspired by the Keynotes</h4>
                 <p>Kick off the Summit by joining thousands of community members to witness open infrastructure in action: hear project updates from technical leaders, learn how operators are running open infrastructure in production, and brace yourself for the live demos. The keynotes will set you up to understand the open infrastructure vision, trends and latest news, so you can be prepared to have a successful Summit week.</p>
-                <p><a class="btn btn-link" href="https://www.openstack.org/videos/summits/berlin-2018/tracks/keynotes">Watch keynotes from the OpenStack Summit Berlin <i class="fa fa-chevron-right"></i></a></p>
+                <p><a class="btn btn-link" href="https://www.openstack.org/videos/summits/berlin-2018/tracks/keynotes">Watch keynotes from the Berlin Summit <i class="fa fa-chevron-right"></i></a></p>
             </div>
         </div>
         <div class="row row-eq-height">
@@ -439,7 +439,6 @@
                                 communities and users.”
                             </h5>
                             <div class="signature">
-                                <span class="photo"></span>
                                 <div class="info">
                                     <h5 class="name">Hellen Hao</h5>
                                     <div class="company">Inspur</div>
@@ -451,10 +450,10 @@
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         <div class="pink box item community">
-                            <h4>What to expect from your first OpenStack Summit</h4>
+                            <h4>What to expect from your first Summit</h4>
                             <p>Community leaders share tips and need-to-knows for the Summit-curious.</p>
 
-                            <a class="btn" href="http://superuser.openstack.org/articles/first-openstack-summit-vancouver-2/"
+                            <a class="btn" href="http://superuser.openstack.org/articles/first-open-infrastructure-summit-schedule-launch/"
                                target="_blank">Read the article<i class="fa fa-arrow-right"></i></a>
                         </div>
                     </div>
@@ -477,7 +476,7 @@
             </div>
             <div class="col-lg-4 col-md-4 col-sm-12">
                 <div class="box light item  spec">
-                    <h4>How are OpenStack Summit sessions selected?</h4>
+                    <h4>How are Summit sessions selected?</h4>
                     <p>What’s new and time-tested tips for the July 17 deadline</p>
                     <a class="btn" href="{$CurrentSummit.Link}call-for-presentations">
                         Learn More <i class="fa fa-arrow-right"></i>

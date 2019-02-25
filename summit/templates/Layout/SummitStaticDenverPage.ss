@@ -720,17 +720,17 @@
                     <h4>Get involved with the Forum</h4>
                     <p>Operators and developers attend the Forum to share feedback and collaboratively brainstorm requirements for the next release.</p>
 
-                    <!-- <a class="btn" href="https://www.openstack.org/summit/denver-2019/call-for-presentations">Get involved <i class="fa fa-arrow-right"></i></a> -->
+                    <a class="btn" href="https://wiki.openstack.org/forum/">Get involved <i class="fa fa-arrow-right"></i></a>
                 </div>
             </div>
 
             <div class="col-lg-4 col-md-4 col-sm-12">
                 <div class="box light item">
-                    <h4>Denver Travel Guide</h4>
-                    <p>You're going to Denver! Where should you go? Take a look at this handy travel guide.
+                    <h4>Denver Travel</h4>
+                    <p>Book a Room at the Official Summit Hotel
                     </p>
 
-                    <!-- <a class="btn" href="https://www.openstack.org/assets/berlin-summit/Berlin18-Summit-City-Guide-112.pdf">Download <i class="fa fa-download"></i></a> -->
+                    <a class="btn" href="https://www.openstack.org/summit/denver-2019/travel">Book Now <i class="fa fa-arrow-right"></i></a>
                 </div>
 
 
@@ -739,7 +739,7 @@
                     <p>Community leaders share tips and need-to-knows for the Summit-curious.
                     </p>
 
-                    <a class="btn" href="http://superuser.openstack.org/articles/first-openstack-summit-vancouver-2/" target="_blank">Read the article<i class="fa fa-arrow-right"></i></a>
+                    <a class="btn" href="http://superuser.openstack.org/articles/first-open-infrastructure-summit-schedule-launch/" target="_blank">Read the article<i class="fa fa-arrow-right"></i></a>
                 </div>
 
                 <div class="box light item">
