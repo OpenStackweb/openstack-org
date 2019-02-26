@@ -300,7 +300,7 @@
                     <div class="item" id="sponsorsCarousel-4">
                         <div class="col-lg-1 col-md-1 col-sm-2 centered-column space"></div>
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
-                            <a rel="nofollow" href="https://www.citynetworkhosting.com"><img alt="City Network_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/_resampled/SetWidth300-CityNetwork-Logo-Regular-500px-RGB.png')}" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="https://www.citynetworkhosting.com"><img alt="City Network_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/CityNetwork-Logo-Regular-500px-RGB.png')}" class="big-logo-company company-logo"></a>
                         </div>
 
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
