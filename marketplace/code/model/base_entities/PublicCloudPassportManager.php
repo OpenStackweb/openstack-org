@@ -31,7 +31,7 @@ final class PublicCloudPassportManager implements IPublicCloudPassportManager
      */
     public function __construct
     (
-        IOpenStackPoweredServiceRepository $repository,
+        IPublicCloudPassportRepository $repository,
         ITransactionManager $tx_manager
     )
     {
