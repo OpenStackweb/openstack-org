@@ -554,7 +554,7 @@
 
 
                 <div class="pink box item">
-                    <h4>What to expect from your first OpenStack Summit</h4>
+                    <h4>What to expect from your first Open Infrastructure Summit</h4>
                     <p>Community leaders share tips and need-to-knows for the Summit-curious.
                     </p>
 
