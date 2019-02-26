@@ -265,9 +265,9 @@ class EditSpeakerProfileForm extends SafeXSSForm {
 
             // Expertise
             if (isset($data['Expertise'])) {
-                $expertise = explode(',', $data['Expertise']);
+                $expertises = explode(',', $data['Expertise']);
 
-                foreach ($expertise as $exp) {
+                foreach ($expertises as $exp) {
                     if (trim($exp) != '') {
                         if(!$expertise = $speaker->AreasOfExpertise()->find('Expertise', $exp)) {
                             $expertise = SpeakerExpertise::create(['Expertise' => $exp]);
@@ -277,7 +277,7 @@ class EditSpeakerProfileForm extends SafeXSSForm {
                 }
                 // remove missing
                 foreach($speaker->AreasOfExpertise() as $exp){
-                    if (!in_array($exp->Expertise, $expertise)) {
+                    if (!in_array($exp->Expertise, $expertises)) {
                         if(!$exp->exists()) continue;
                         $exp->delete();
                     }
