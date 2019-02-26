@@ -9,7 +9,7 @@
                         </div>
                     </div>
                     <h4>Berlin, Germany</h4>
-                    <hp>Nov 13-15, 2018</p>
+                    <p>Nov 13-15, 2018</p>
                         <p>
                             <a class="btn register-btn-lrg" href="/summit/berlin-2018">See Highlights <i class="fa fa-arrow-right"></i></a>
                         </p>
@@ -30,7 +30,7 @@
                             Learn More
                             <i class="fa fa-arrow-right"></i>
                         </a>
-                        <!-- <% include EventbriteRegisterLink Summit=$CurrentSummit(),Position='m-1' %> -->
+
                     </p>
 
                 </div>
@@ -40,7 +40,7 @@
                     <div class="video">
                     </div>
                     <h4>Shanghai, China</h4>
-                    <hp>Nov 2019</p>
+                    <p>Nov 2019</p>
                         <p>
                             <a class="btn register-btn-lrg" href="/summit/shanghai-2019">Learn More <i class="fa fa-arrow-right"></i></a>
                         </p>
@@ -188,14 +188,14 @@
                         <div class="col-lg-1 col-md-1 col-sm-2 centered-column space"></div>
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
                             <a rel="nofollow" href="https://www.canonical.com/">
-                                <img alt="Canonical_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/ubuntu-lg.jpg'}" class="big-logo-company company-logo">
+                                <img alt="Canonical_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/ubuntu-lg.jpg')}" class="big-logo-company company-logo">
                             </a>
                         </div>
 
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
                             <a rel="nofollow" href="https://www.telekom.com/">
                                 <img alt="Deutsche Telekom_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/deutschetelekom-lg.jpg')}"
-                                    class="big-logo-company company-logo">
+                                     class="big-logo-company company-logo">
                             </a>
                         </div>
 
@@ -214,7 +214,7 @@
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
                             <a rel="nofollow" href="https://www.redhat.com/openstack/?sc_cid=70160000000bEKkAAM&amp;offer_id=701600000006R7KAAU">
                                 <img alt="Red Hat, Inc._big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/redhat-sp-lg.jpg')}"
-                                    class="big-logo-company company-logo">
+                                     class="big-logo-company company-logo">
                             </a>
                         </div>
 
@@ -224,18 +224,18 @@
                         <div class="col-lg-1 col-md-1 col-sm-2 centered-column space"></div>
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
                             <a rel="nofollow" href="http://www.cisco.com/"><img alt="Cisco_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/cisco-new-lg.png')}"
-                                    class="big-logo-company company-logo"></a>
+                                                                                class="big-logo-company company-logo"></a>
                         </div>
 
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
                             <a rel="nofollow" href="https://www.suse.com/"><img alt="SUSE_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/suse-sp-lg.jpg')}"
-                                class="big-logo-company company-logo"></a>
+                                                                                class="big-logo-company company-logo"></a>
                             </a>
                         </div>
 
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
                             <a rel="nofollow" href="https://www.vmware.com/"><img alt="VMware_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/vmware-sp-lg.jpg')}"
-                                class="big-logo-company company-logo"></a>
+                                                                                  class="big-logo-company company-logo"></a>
                         </div>
 
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
@@ -280,7 +280,7 @@
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
                             <a rel="nofollow" href="https://www.telekom.com/">
                                 <img alt="Deutsche Telekom_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/deutschetelekom-lg.jpg')}"
-                                    class="big-logo-company company-logo">
+                                     class="big-logo-company company-logo">
                             </a>
                         </div>
 
@@ -304,7 +304,7 @@
                         </div>
 
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
-                            <a rel="nofollow" href="http://www.cloudbase.it"><img alt="Cloudbase Solutions_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/cloudbase-lg.jpg'}" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="http://www.cloudbase.it"><img alt="Cloudbase Solutions_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/cloudbase-lg.jpg'})" class="big-logo-company company-logo"></a>
                         </div>
 
                         <div class="col-lg-2 col-md-2 col-sm-4 centered-column">
