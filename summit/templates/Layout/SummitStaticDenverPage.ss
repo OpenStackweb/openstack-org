@@ -71,399 +71,152 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-lg-8 col-md-6">
-                <h3 class="title-section">Denver 2019 Open Infrastructure Summit Programming Committee</h3>
+                <h3 class="title-section">Denver 2019 Open Infrastructure Summit Featured Speakers</h3>
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/ArmstrongFoundjem2.png')}" alt="Armstrong Foundjem" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/Uploads/baidu.jpg')}" alt="yu bai" class="summit-user-image">
                         </div>
                         <div class="info">
-                            <div class="name">Armstrong Foundjem</div>
-                            <div class="title">ÉCOLE POLYTECHNIQUE DE MONTRÉAL</div>
-                            <div class="topic">AI/ML/HPC</div>
+                            <div class="name">Yu Bai</div>
+                            <div class="title">Baidu</div>
+                            <div class="topic">Kata Containers</div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/blairbethwaite.jpeg')}" alt="Blair Bethwaite"
+                            <img src="{$Top.CloudUrl('assets/profile-images/duc-new-me.jpg')}" alt="Duc Truong"
                                  class="summit-user-image">
                         </div>
                         <div class="info">
-                            <div class="name">Blair Bethwaite</div>
-                            <div class="title">New Zealand eScience Infrastructure (NeSI)</div>
-                            <div class="topic">AI/ML/HPC</div>
+                            <div class="name">Duc Truong</div>
+                            <div class="title">Blizzard Entertainment, Cloud Engineer</div>
+                            <div class="topic">Autoscaling with OpenStack for Overwatch</div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/howardzhipeng.jpeg')}" alt="Howard Zhipeng" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/Uploads/chsmall.jpg')}" alt="Chris Small" class="summit-user-image">
                         </div>
                         <div class="info">
-                            <div class="name">Howard Zhipeng</div>
-                            <div class="title">Huawei</div>
-                            <div class="topic">AI/ML/HPC</div>
+                            <div class="name">Chris Small</div>
+                            <div class="title">Boeing, Tech Lead, Private Cloud</div>
+                            <div class="topic">OpenStack Upgrades</div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/JaredBaker.jpg')}" alt="Jared Baker" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/Uploads/JenniferCloer.jpg')}" alt="Jennifer Cloer" class="summit-user-image">
                         </div>
                         <div class="info">
-                            <div class="name">Jared Baker</div>
-                            <div class="title">Ontario Institute for Cancer Research</div>
-                            <div class="topic">AI/ML/HPC</div>
+                            <div class="name">Jennifer Cloer</div>
+                            <div class="title">Executive Producer/Director, Chasing Grace Project </div>
+                            <div class="topic">Diversity in Tech</div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/FatihDegirmenci.jpg')}" alt="Fatih Degirmenci"
+                            <img src="{$Top.CloudUrl('assets/Uploads/+.jpg')}" alt="Xiaoguang Zhang"
                                  class="summit-user-image">
                         </div>
                         <div class="info">
-                            <div class="name">Fatih Degirmenci</div>
-                            <div class="title">Ericsson Software Technology</div>
-                            <div class="topic">CI/CD</div>
+                            <div class="name">Xiaoguang Zhang</div>
+                            <div class="title">Senior Cloud Architect</div>
+                            <div class="topic">5G</div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/EricGuo.JPG')}" alt="ChangBo Guo" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/Uploads/Maestropandy.jpg')}" alt="Pandiyan Muthuraman" class="summit-user-image">
                         </div>
                         <div class="info">
-                            <div class="name">ChangBo Guo</div>
-                            <div class="title">EasyStack</div>
-                            <div class="topic">CI/CD</div>
+                            <div class="name">Pandiyan Muthuraman</div>
+                            <div class="title">Reliance Jio Infocomm</div>
+                            <div class="topic">Cognitive Computing at the Edge with AI </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/jimblair.jpg')}" alt="James E. Blair"
+                            <img src="{$Top.CloudUrl('assets/profile-images/neelima1.jpg')}" alt="Neelima Mukiri"
                                  class="summit-user-image">
                         </div>
                         <div class="info">
-                            <div class="name">James E. Blair</div>
-                            <div class="title">Red Hat</div>
-                            <div class="topic">CI/CD</div>
+                            <div class="name">Neelima Mukiri</div>
+                            <div class="title">Cisco Systems Inc</div>
+                            <div class="topic">Machine Learning with a Hybrid Cloud</div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/1px.png')}" height="174"
-                                 alt="Doina Cristina Duma" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/profile-images/5ae358d7c4723.jpg')}" height="174"
+                                 alt="Joseph Sandoval" class="summit-user-image">
                         </div>
                         <div class="info">
-                            <div class="name">Doina Cristina Duma</div>
-                            <div class="title">INFN National Center (CNAF)</div>
-                            <div class="topic">CI/CD</div>
+                            <div class="name">Joseph Sandoval</div>
+                            <div class="title">Adobe Systems, Manager, Cloud Platform</div>
+                            <div class="topic">Kubernetes Lessons Learned</div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/EricEarnst.jpg')}" alt="Eric Ernst" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/profile-images/20170707172318.jpg')}" alt="Jinghua Gao" class="summit-user-image">
                         </div>
                         <div class="info">
-                            <div class="name">Eric Ernst</div>
-                            <div class="title">Intel’s Open Source Technology Center</div>
-                            <div class="topic">Container Infrastructure</div>
+                            <div class="name">Jinghua Gao</div>
+                            <div class="title">Lenovo</div>
+                            <div class="topic">Deep Learning for Heart Disease Diagnosis </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/HongbinLu.JPG')}" alt="Hongbin Lu" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/Uploads/headshot2.png')}" alt="Paul Belanger" class="summit-user-image">
                         </div>
                         <div class="info">
-                            <div class="name">Hongbin Lu</div>
-                            <div class="title">Software Engineer</div>
-                            <div class="topic">Container Infrastructure</div>
+                            <div class="name">Paul Belanger</div>
+                            <div class="title">Red Hat Inc.</div>
+                            <div class="topic">Moving from Jenkins to Zuul </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/MattJarvis.jpg')}"
-                                 alt="Matt Jarvis" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/Uploads/profile-pic2.png')}" alt="Michael Beaver" class="summit-user-image">
                         </div>
                         <div class="info">
-                            <div class="name">Matt Jarvis</div>
-                            <div class="title">Mesosphere</div>
-                            <div class="topic">Container Infrastructure</div>
+                            <div class="name">Michael Beaver</div>
+                            <div class="title">AT&amp;T Integrated Cloud</div>
+                            <div class="topic">Bare metal provisioning with Airship</div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/noahmeyerhans.jpeg')}" alt="Noah Meyerhans" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/Uploads/penick-profile-pic2.png')}" alt="James Penick" class="summit-user-image">
                         </div>
                         <div class="info">
-                            <div class="name">Noah Meyerhans</div>
-                            <div class="title">Amazon</div>
-                            <div class="topic">Container Infrastructure</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
-                    <div class="summit-user-section">
-                        <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/BethCohen.jpg')}" alt="Beth Cohen" class="summit-user-image">
-                        </div>
-                        <div class="info">
-                            <div class="name">Beth Cohen</div>
-                            <div class="title">Verizon</div>
-                            <div class="topic">Edge Computing</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
-                    <div class="summit-user-section">
-                        <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/Uploads/ianjolliffe.jpeg')}" alt="Ian Jolliffe" class="summit-user-image">
-                        </div>
-                        <div class="info">
-                            <div class="name">Ian Jolliffe</div>
-                            <div class="title">Wind River</div>
-                            <div class="topic">Edge Computing</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
-                    <div class="summit-user-section">
-                        <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/IldikoVancsa.png')}"
-                                 alt="Ildiko Vansca" class="summit-user-image">
-                        </div>
-                        <div class="info">
-                            <div class="name">Ildiko Vansca</div>
-                            <div class="title">OpenStack Foundation</div>
-                            <div class="topic">Edge Computing</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
-                    <div class="summit-user-section">
-                        <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/StefanoCanepa.jpg')}" alt="Stefano Canepa" class="summit-user-image">
-                        </div>
-                        <div class="info">
-                            <div class="name">Stefano Canepa</div>
-                            <div class="title">Hewlett Packard Enterprise</div>
-                            <div class="topic">Hands-On Workshops</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
-                    <div class="summit-user-section">
-                        <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/profile-images/egle-square.png')}" alt="Egle Sigler" class="summit-user-image">
-                        </div>
-                        <div class="info">
-                            <div class="name">Egle Sigler</div>
-                            <div class="title"></div>
-                            <div class="topic">Hands-On Workshops</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
-                    <div class="summit-user-section">
-                        <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/profile-images/image1a.jpg')}" alt="Keith Berger" class="summit-user-image">
-                        </div>
-                        <div class="info">
-                            <div class="name">Keith Berger</div>
-                            <div class="title">SUSE</div>
-                            <div class="topic">Hands-On Workshops</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
-                    <div class="summit-user-section">
-                        <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/Uploads/thierry.jpeg')}"
-                                 alt="Thierry Carrez" class="summit-user-image">
-                        </div>
-                        <div class="info">
-                            <div class="name">Thierry Carrez</div>
-                            <div class="title">OpenStack Foundation</div>
-                            <div class="topic">Open Development</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
-                    <div class="summit-user-section">
-                        <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/Ivan.jpeg')}"
-                                 alt="Ivan Kolodyazhny" class="summit-user-image">
-                        </div>
-                        <div class="info">
-                            <div class="name">Ivan Kolodyazhny</div>
-                            <div class="title">OpenStack Horizon PTL</div>
-                            <div class="topic">Open Development</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
-                    <div class="summit-user-section">
-                        <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/profile-images/allisonicon128x128.png')}"
-                                 alt="Allison Randal" class="summit-user-image">
-                        </div>
-                        <div class="info">
-                            <div class="name">Allison Randal</div>
-                            <div class="title"></div>
-                            <div class="topic">Open Development</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
-                    <div class="summit-user-section">
-                        <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/SofiaEnriquez.JPG')}" alt="Laura Sofia Enriquez" class="summit-user-image">
-                        </div>
-                        <div class="info">
-                            <div class="name">Laura Sofia Enriquez</div>
-                            <div class="title">Red Hat</div>
-                            <div class="topic">Open Development</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
-                    <div class="summit-user-section">
-                        <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/profile-images/ricolin.jpg')}"
-                                 alt="Rico Lin" class="summit-user-image">
-                        </div>
-                        <div class="info">
-                            <div class="name">Rico Lin</div>
-                            <div class="title">EasyStack</div>
-                            <div class="topic">Private & Hybrid Cloud</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
-                    <div class="summit-user-section">
-                        <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/profile-images/bio2.jpg')}"
-                                 alt="Yih Leong Sun" class="summit-user-image">
-                        </div>
-                        <div class="info">
-                            <div class="name">Dr. Yih Leong Sun</div>
-                            <div class="title">Intel</div>
-                            <div class="topic">Private & Hybrid Cloud</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
-                    <div class="summit-user-section">
-                        <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/BelmiroMoreira.JPG')}" alt="Belmiro Moreira" class="summit-user-image">
-                        </div>
-                        <div class="info">
-                            <div class="name">Belmiro Moreira</div>
-                            <div class="title">CERN</div>
-                            <div class="topic">Private & Hybrid Cloud</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
-                    <div class="summit-user-section">
-                        <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/tobiasrydberg.jpg')}" alt="Tobias Rydberg" class="summit-user-image">
-                        </div>
-                        <div class="info">
-                            <div class="name">Tobias Rydberg</div>
-                            <div class="title">City Network</div>
-                            <div class="topic">Public Cloud</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
-                    <div class="summit-user-section">
-                        <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/kennethpeeples.jpeg')}" alt="Kenneth Peeples" class="summit-user-image">
-                        </div>
-                        <div class="info">
-                            <div class="name">Kenneth Peeples</div>
-                            <div class="title">Red Hat</div>
-                            <div class="topic">Security</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
-                    <div class="summit-user-section">
-                        <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/JosephineSeifert.png')}" alt="Josephine Seifert" class="summit-user-image">
-                        </div>
-                        <div class="info">
-                            <div class="name">Josephine Seifert</div>
-                            <div class="title">SecuStack</div>
-                            <div class="topic">Security</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
-                    <div class="summit-user-section">
-                        <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/GageHugo.jpg')}" alt="Gage Hugo" class="summit-user-image">
-                        </div>
-                        <div class="info">
-                            <div class="name">Gage Hugo</div>
-                            <div class="title">AT&T</div>
-                            <div class="topic">Security</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
-                    <div class="summit-user-section">
-                        <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/Uploads/qiao-fu.jpg')}" alt="Fu Qiao" class="summit-user-image">
-                        </div>
-                        <div class="info">
-                            <div class="name">Fu Qiao</div>
-                            <div class="title">China Mobile</div>
-                            <div class="topic">Telecom & NFV</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
-                    <div class="summit-user-section">
-                        <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/NateJohnston.jpg')}" alt="Nate Johnston" class="summit-user-image">
-                        </div>
-                        <div class="info">
-                            <div class="name">Nate Johnston</div>
-                            <div class="title">Red Hat</div>
-                            <div class="topic">Telecom & NFV</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
-                    <div class="summit-user-section">
-                        <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/summits/denver-2019/programming-commitee/arkadyk-2.jpeg')}" alt="Arkady Kanevsky" class="summit-user-image">
-                        </div>
-                        <div class="info">
-                            <div class="name">Arkady Kanevsky</div>
-                            <div class="title">Dell</div>
-                            <div class="topic">Telecom & NFV</div>
+                            <div class="name">James Penick</div>
+                            <div class="title">Verizon Media</div>
+                            <div class="topic">Edge Computing with StarlingX</div>
                         </div>
                     </div>
                 </div>
