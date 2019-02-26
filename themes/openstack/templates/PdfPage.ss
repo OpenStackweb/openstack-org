@@ -48,7 +48,7 @@
 <div class="container">
 	<div id="footer">
 		<hr>
-		<p>The OpenStack project is provided under the Apache 2.0 license. Openstack.org is powered by <a href="http://www.rackspacecloud.com/">Rackspace Cloud Computing</a>.</p>
+		<p>The OpenStack project is provided under the Apache 2.0 license. Openstack.org is powered by <a href="https://vexxhost.com" target="_blank">VEXXHOST</a>.</p>
 	</div>
 </div>
 

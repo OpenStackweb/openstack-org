@@ -54,7 +54,7 @@
                     </div>
                 </form> -->
                 <p class="fine-print">
-                    The OpenStack project is provided under the Apache 2.0 license. Openstack.org is powered by <a href="http://rackspace.com" target="_blank">Rackspace Cloud Computing</a>.
+                    The OpenStack project is provided under the Apache 2.0 license. Openstack.org is powered by <a href="https://vexxhost.com" target="_blank">VEXXHOST</a>.
                 </p>
             </div>
         </div>
