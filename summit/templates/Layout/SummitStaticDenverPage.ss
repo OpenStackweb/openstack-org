@@ -92,7 +92,7 @@
                         </div>
                         <div class="info">
                             <div class="name">Duc Truong</div>
-                            <div class="title">Blizzard Entertainment, Cloud Engineer</div>
+                            <div class="title">Blizzard Entertainment</div>
                             <div class="topic">Autoscaling with OpenStack for Overwatch</div>
                         </div>
                     </div>
@@ -104,7 +104,7 @@
                         </div>
                         <div class="info">
                             <div class="name">Chris Small</div>
-                            <div class="title">Boeing, Tech Lead, Private Cloud</div>
+                            <div class="title">Boeing</div>
                             <div class="topic">OpenStack Upgrades</div>
                         </div>
                     </div>
@@ -116,7 +116,7 @@
                         </div>
                         <div class="info">
                             <div class="name">Jennifer Cloer</div>
-                            <div class="title">Executive Producer/Director, Chasing Grace Project </div>
+                            <div class="title">Chasing Grace Project </div>
                             <div class="topic">Diversity in Tech</div>
                         </div>
                     </div>
@@ -129,7 +129,7 @@
                         </div>
                         <div class="info">
                             <div class="name">Xiaoguang Zhang</div>
-                            <div class="title">Senior Cloud Architect</div>
+                            <div class="title">China Mobile</div>
                             <div class="topic">5G</div>
                         </div>
                     </div>
@@ -141,7 +141,7 @@
                         </div>
                         <div class="info">
                             <div class="name">Pandiyan Muthuraman</div>
-                            <div class="title">Reliance Jio Infocomm</div>
+                            <div class="title">Reliance Jio</div>
                             <div class="topic">Cognitive Computing at the Edge with AI </div>
                         </div>
                     </div>
@@ -167,7 +167,7 @@
                         </div>
                         <div class="info">
                             <div class="name">Joseph Sandoval</div>
-                            <div class="title">Adobe Systems, Manager, Cloud Platform</div>
+                            <div class="title">Adobe Systems</div>
                             <div class="topic">Kubernetes Lessons Learned</div>
                         </div>
                     </div>
