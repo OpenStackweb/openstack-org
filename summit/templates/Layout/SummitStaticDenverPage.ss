@@ -80,7 +80,7 @@
                         <div class="info">
                             <div class="name">Yu Bai</div>
                             <div class="title">Baidu</div>
-                            <div class="topic">Kata Containers</div>
+                            <div class="topic">Deploying Kata Containers on the Edge</div>
                         </div>
                     </div>
                 </div>
@@ -130,7 +130,7 @@
                         <div class="info">
                             <div class="name">Xiaoguang Zhang</div>
                             <div class="title">China Mobile</div>
-                            <div class="topic">5G</div>
+                            <div class="topic">5G based on OpenStack</div>
                         </div>
                     </div>
                 </div>
