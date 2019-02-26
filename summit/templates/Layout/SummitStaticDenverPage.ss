@@ -149,7 +149,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/profile-images/neelima1.jpg')}" alt="Neelima Mukiri"
+                            <img src="{$Top.CloudUrl('assets/Uploads/neelima.jpg')}" alt="Neelima Mukiri"
                                  class="summit-user-image">
                         </div>
                         <div class="info">
