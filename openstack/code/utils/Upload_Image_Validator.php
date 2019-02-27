@@ -21,7 +21,7 @@ class Upload_Image_Validator extends  Upload_Validator {
      *
      * @param int $width
      */
-    public function setAllowedMaxImageWidth(number $width){
+    public function setAllowedMaxImageWidth($width){
         $this->allowedMaxImageWidth = $width;
     }
     /**
