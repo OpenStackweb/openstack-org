@@ -74,7 +74,7 @@ class SummitAppReportsExportApi extends AbstractRestfulJsonApi {
         ISummitEventRepository $event_repository,
         IPresentationCategoryRepository $category_repository,
         ISummitPresentationRepository $presentation_repository,
-        ISummitEventFeedBack $feedback_repository,
+        IEventFeedbackRepository $feedback_repository,
         ITagRepository $tag_repository,
         ISummitEventManager $summit_manager
     )
