@@ -47,7 +47,7 @@ class RSVPCheckboxSetField extends CustomCheckboxSetField {
     }
 
 
-    public function __construct($name, $title=null, $source=array(), $value='', $form=null, $emptyString=null, IRSVPMultiValueQuestionTemplate $question) {
+    public function __construct($name, $title=null, $source=array(), $value='', $form=null, $emptyString=null, IRSVPMultiValueQuestionTemplate $question=null) {
         parent::__construct($name, $title, $source, $value, $form, $emptyString);
         $this->visible  = true;
         $this->question = (isset($question)) ? $question : null;

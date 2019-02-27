@@ -19,18 +19,17 @@ class RSVPTextBoxQuestionTemplateUIBuilder
     extends AbstractRSVPQuestionTemplateUIBuilder {
 
     /**
-     * @param IRSVP $rsvp
      * @param IRSVPQuestionTemplate $question
-     * @param IRSVPAnswer $answer
+     * @param ?IRSVPAnswer $answer
+     * @param ?IRSVP $rsvp
      * @return FormField
      */
-    public function build(IRSVP $rsvp, IRSVPQuestionTemplate $question, IRSVPAnswer $answer)
+    public function build(IRSVPQuestionTemplate $question, ?IRSVPAnswer $answer, ?IRSVP $rsvp)
     {
         $field = new TextField($question->name(), $question->label());
-        if ($rsvp) {
+        $field->setValue($question->initialValue());
+        if (!is_null($rsvp)) {
             $field->setValue($rsvp->findAnswerByQuestion($question)->Value);
-        } else {
-            $field->setValue($question->initialValue());
         }
 
         if($question->isReadOnly()) $field->setDisabled(true);
@@ -42,6 +41,6 @@ class RSVPTextBoxQuestionTemplateUIBuilder
             $field->setValue($answer->value());
         }
 
-        return $this->buildDependantRules($rsvp, $question, $field);
+        return $this->buildDependantRules($question, $field, $rsvp);
     }
 }

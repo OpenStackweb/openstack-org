@@ -16,12 +16,12 @@ class RSVPDropDownQuestionTemplateUIBuilder  extends AbstractRSVPQuestionTemplat
 {
 
     /**
-     * @param IRSVP $rsvp
      * @param IRSVPQuestionTemplate $question
-     * @param IRSVPAnswer $answer
+     * @param ?IRSVPAnswer $answer
+     * @param ?IRSVP $rsvp
      * @return FormField
      */
-    public function build(IRSVP $rsvp, IRSVPQuestionTemplate $question, IRSVPAnswer $answer)
+    public function build(IRSVPQuestionTemplate $question, ?IRSVPAnswer $answer, ?IRSVP $rsvp)
     {
         $options = array();
 
@@ -76,7 +76,7 @@ class RSVPDropDownQuestionTemplateUIBuilder  extends AbstractRSVPQuestionTemplat
                 $field->setEmptyString($empty_string);
         }
 
-        $field = $this->buildDependantRules($rsvp, $question, $field);
+        $field = $this->buildDependantRules($question, $field, $rsvp);
 
         if($question->UseChosenPlugin){
 

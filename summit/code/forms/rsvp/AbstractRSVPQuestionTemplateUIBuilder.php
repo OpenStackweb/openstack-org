@@ -19,11 +19,12 @@ abstract class AbstractRSVPQuestionTemplateUIBuilder
     implements IRSVPQuestionTemplateUIBuilder {
 
     /**
-     * @param IRSVP $rsvp
      * @param IRSVPQuestionTemplate $question
      * @param FormField $field
+     * @param IRSVP|null $rsvp
+     * @return FormField
      */
-    protected function buildDependantRules(IRSVP $rsvp, IRSVPQuestionTemplate $question, FormField $field){
+    protected function buildDependantRules(IRSVPQuestionTemplate $question, FormField $field, ?IRSVP $rsvp){
         //depends : check visibility
         $depends = $question->getDependsOn();
 

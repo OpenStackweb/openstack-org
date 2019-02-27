@@ -19,12 +19,12 @@ class RSVPCheckBoxQuestionTemplateUIBuilder
     extends AbstractRSVPQuestionTemplateUIBuilder {
 
     /**
-     * @param IRSVP $rsvp
      * @param IRSVPQuestionTemplate $question
-     * @param IRSVPAnswer $answer
+     * @param ?IRSVPAnswer $answer
+     * @param ?IRSVP $rsvp
      * @return FormField
      */
-    public function build(IRSVP $rsvp, IRSVPQuestionTemplate $question, IRSVPAnswer $answer)
+    public function build(IRSVPQuestionTemplate $question, ?IRSVPAnswer $answer, ?IRSVP $rsvp)
     {
         $field = new CheckboxField($question->name(), $question->label());
         $field->setValue($question->initialValue());

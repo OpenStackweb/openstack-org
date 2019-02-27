@@ -19,12 +19,12 @@ class RSVPCheckBoxListQuestionTemplateUIBuilder
     extends AbstractRSVPQuestionTemplateUIBuilder {
 
     /**
-     * @param IRSVP $rsvp
      * @param IRSVPQuestionTemplate $question
-     * @param IRSVPAnswer $answer
+     * @param ?IRSVPAnswer $answer
+     * @param ?IRSVP $rsvp
      * @return FormField
      */
-    public function build(IRSVP $rsvp, IRSVPQuestionTemplate $question, IRSVPAnswer $answer)
+    public function build(IRSVPQuestionTemplate $question, ?IRSVPAnswer $answer, ?IRSVP $rsvp)
     {
         $options = array();
         foreach($question->Values()->sort('Order') as $val)
@@ -44,6 +44,6 @@ class RSVPCheckBoxListQuestionTemplateUIBuilder
 
         $field->setTemplate('RSVPCheckboxSetField');
 
-        return $this->buildDependantRules($rsvp, $question, $field);
+        return $this->buildDependantRules($question, $field, $rsvp);
     }
 }

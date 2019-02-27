@@ -19,12 +19,12 @@ class RSVPTemplateUIBuilder implements IRSVPUIBuilder
 {
     /**
      * @param IRSVPTemplate $template
+     * @param ISummitEvent $event
      * @param ?IRSVP $rsvp
-     * @param ?ISummitEvent $event
      * @param string $form_name
      * @return BootstrapForm|PresentationSpeaker
      */
-    public function build(IRSVPTemplate $template, ?IRSVP $rsvp, ?ISummitEvent $event, $form_name ='RSVPForm')
+    public function build(IRSVPTemplate $template, ISummitEvent $event, ?IRSVP $rsvp, $form_name ='RSVPForm')
     {
 
         $fields = new FieldList();
@@ -37,7 +37,7 @@ class RSVPTemplateUIBuilder implements IRSVPUIBuilder
             // @IRSVPQuestionTemplateUIBuilder
             $builder = Injector::inst()->create($builder_class);
             $answer = ($rsvp) ? $rsvp->findAnswerByQuestion($q) : null;
-            $field   = $builder->build($rsvp, $q, $answer);
+            $field   = $builder->build($q, $answer, $rsvp);
             $fields->add($field);
         }
 
