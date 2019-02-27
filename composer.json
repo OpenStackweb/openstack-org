@@ -56,7 +56,6 @@
     "tractorcow/silverstripe-autocomplete": "3.5.2",
     "ezyang/htmlpurifier": "4.9.3",
     "knplabs/github-api": "1.4.4",
-    "rackspace/php-opencloud": "1.16.0",
     "nnnick/chartjs": "dev-master",
     "openid/php-openid": "dev-master",
     "sendgrid/sendgrid": "~5.5",
