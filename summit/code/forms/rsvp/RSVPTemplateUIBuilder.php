@@ -19,12 +19,12 @@ class RSVPTemplateUIBuilder implements IRSVPUIBuilder
 {
     /**
      * @param IRSVPTemplate $template
-     * @param IRSVP $rsvp
-     * @param ISummitEvent $event
+     * @param ?IRSVP $rsvp
+     * @param ?ISummitEvent $event
      * @param string $form_name
      * @return BootstrapForm|PresentationSpeaker
      */
-    public function build(IRSVPTemplate $template, IRSVP $rsvp, ISummitEvent $event, $form_name ='RSVPForm')
+    public function build(IRSVPTemplate $template, ?IRSVP $rsvp, ?ISummitEvent $event, $form_name ='RSVPForm')
     {
 
         $fields = new FieldList();

@@ -20,10 +20,10 @@ interface IRSVPUIBuilder
 {
     /**
      * @param IRSVPTemplate $template
-     * @param IRSVP $rsvp
-     * @param ISummitEvent $event_id
+     * @param ?IRSVP $rsvp
+     * @param ?ISummitEvent $event_id
      * @param string $form_name
      * @return Form
      */
-    public function build(IRSVPTemplate $template, IRSVP $rsvp, ISummitEvent $event, $form_name ='RSVPForm');
+    public function build(IRSVPTemplate $template, ?IRSVP $rsvp, ?ISummitEvent $event, $form_name ='RSVPForm');
 }
