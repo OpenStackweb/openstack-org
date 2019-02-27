@@ -18,16 +18,16 @@ final class ConsultantFactory
 	extends RegionalSupportedCompanyServiceFactory
 	implements IConsultantFactory {
 
-	/**
-	 * @param string           $name
-	 * @param string           $overview
-	 * @param ICompany         $company
-	 * @param bool             $active
-	 * @param IMarketPlaceType $marketplace_type
-	 * @param null|string      $call_2_action_url
-	 * @return ICompanyService
-	 */
-	public function buildCompanyService($name, $overview, ICompany $company, $active, IMarketPlaceType $marketplace_type, $call_2_action_url = null,  $live_id = null, $published = null)
+    /**
+     * @param string           $name
+     * @param string           $overview
+     * @param Company          $company
+     * @param bool             $active
+     * @param IMarketPlaceType $marketplace_type
+     * @param null|string      $call_2_action_url
+     * @return ICompanyService
+     */
+    public function buildCompanyService($name, $overview, Company $company, $active, IMarketPlaceType $marketplace_type,$call_2_action_url=null,$live_id=null,$published=null)
 	{
 		$consultant = new Consultant;
 		$consultant->setName($name);
