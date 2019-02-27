@@ -3,6 +3,8 @@ Name: openstack_ioc
 After: 'framework/*'
 ---
 Injector:
+  LogFacade:
+    class: LogFacade
   ManyManyList:
     class: ObservableManyManyList
   ForeignKey:

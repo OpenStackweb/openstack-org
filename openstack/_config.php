@@ -43,14 +43,17 @@ if(Director::isLive()) Director::forceSSL(array('/^Security/','/^profile/',
 
 global $email_log;
 
+$error_log_priority = (defined('SS_LOG_PRIORITY')) ? SS_LOG_PRIORITY : SS_Log::ERR;
+
 if(Director::isDev()) {
-    SS_Log::add_writer(new SS_LogFileWriter(Director::baseFolder() . '/logs/site.log'), SS_Log::DEBUG);
+    SS_Log::add_writer(new SS_LogFileWriter(Director::baseFolder() . '/logs/site..dev.log'), $error_log_priority);
     //Force cache to flush on page load if in Dev mode (prevents needing ?flush=1 on the end of a URL)
     SSViewer::flush_template_cache();
 } else {
-    $error_log_path = (defined('SS_ERROR_LOG')) ? SS_ERROR_LOG : '/logs/silvertripe.log';
+    $error_log_path     = (defined('SS_ERROR_LOG')) ? SS_ERROR_LOG : '/logs/site.live.log';
+
     SS_Log::clear_writers();
-    SS_Log::add_writer(new SS_LogFileWriter(BASE_PATH . '/' . $error_log_path), SS_Log::ERR);
+    SS_Log::add_writer(new SS_LogFileWriter(BASE_PATH . '/' . $error_log_path), $error_log_priority);
 }
 
 $email_log_writer = new Custom_SS_LogEmailWriter($email_log);
