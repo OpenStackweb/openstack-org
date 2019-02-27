@@ -136,7 +136,8 @@ class TrainingDirectoryPage_Controller extends MarketPlaceDirectoryPage_Controll
                 'MarketPlacePage'
             ));
 
-        } catch (Exception $ex) {
+        }
+        catch (Exception $ex) {
             return $this->httpError(404, 'Sorry that Training could not be found!-');
         }
     }

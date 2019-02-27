@@ -138,6 +138,7 @@ final class TrainingFacade
      * @param int $training_id
      * @param string $company_url_segment
      * @return array
+     * @throws ValidationException
      * @throws Exception
      */
     public function getCompanyTraining($training_id, $company_url_segment)
@@ -171,7 +172,7 @@ final class TrainingFacade
         }
 
         if (!$this->training_manager->isActive($training->getIdentifier())) {
-            return Security::permissionFailure($this->controller, "non active training!.");
+            throw new ValidationException("non active training!");
         }
 
         $courses = $this->training_manager->getCoursesByDate($training->getIdentifier(),
