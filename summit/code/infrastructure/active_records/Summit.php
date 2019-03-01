@@ -519,7 +519,11 @@ class Summit extends DataObject implements ISummit
         return false;
     }
 
-    public function getOpenSelectionPlanForStage($stage)
+    /**
+     * @param string $stage
+     * @return mixed|null
+     */
+    public function getOpenSelectionPlanForStage(string $stage = 'Selection')
     {
         foreach ($this->getActiveSelectionPlans() as $plan) {
             if ($plan->getStageStatus($stage) === self::STAGE_OPEN) {
