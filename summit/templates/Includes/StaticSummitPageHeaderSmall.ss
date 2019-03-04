@@ -43,7 +43,7 @@
     <div class="row text-wrapper">
         <div class="col-md-12  title-box">
             <div class="summit-banner">
-                $getSummitPageText(HeaderText)
+                $Top.getSummitPageText("HeaderText")
                 <!-- <span class="arrow left"></span><span class="arrow right"></span> -->
             </div>
         </div>

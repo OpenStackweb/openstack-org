@@ -26,7 +26,9 @@ function onScroll(event){
 }
 
 window.onload = function(){
+    /*
     var helpers = Chart.helpers;
+
     var attendeesRegion = new Chart(document.getElementById("attendeesRegion").getContext("2d")).Doughnut(pieDataRegion, {
         tooltipTemplate: "<%if (label){%><%=label%>: <%}%><%= value %>%",
         animateRotate: true
@@ -70,4 +72,5 @@ window.onload = function(){
 
     attendeesRegion.chart.canvas.parentNode.parentNode.appendChild(legendHolderRegion.firstChild);
     attendeesRole.chart.canvas.parentNode.parentNode.appendChild(legendHolderRole.firstChild);
+    */
 };
