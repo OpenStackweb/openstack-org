@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "3990ec25d6cbf1ab85496f1cc980b0e2",
+    "content-hash": "4775efac6ee47e9e9b7535044f3e87c8",
     "packages": [
         {
             "name": "composer/installers",
@@ -929,16 +929,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.87",
+            "version": "v0.88",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "26e0bf604e0b6e253f5217ef7e7fe39d976a69f7"
+                "reference": "1ad0a77dc28f658cf65b7146ee5342bd12cfff3f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/26e0bf604e0b6e253f5217ef7e7fe39d976a69f7",
-                "reference": "26e0bf604e0b6e253f5217ef7e7fe39d976a69f7",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/1ad0a77dc28f658cf65b7146ee5342bd12cfff3f",
+                "reference": "1ad0a77dc28f658cf65b7146ee5342bd12cfff3f",
                 "shasum": ""
             },
             "require": {
@@ -962,7 +962,7 @@
             "keywords": [
                 "google"
             ],
-            "time": "2019-02-25T00:22:55+00:00"
+            "time": "2019-03-04T00:22:51+00:00"
         },
         {
             "name": "google/auth",
@@ -1868,12 +1868,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/chartjs/Chart.js.git",
-                "reference": "58d7891ba23f154d3d799445c7ccb6dda2926468"
+                "reference": "35273ee9488b9764485e6a0adfe92390fa01b130"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/chartjs/Chart.js/zipball/58d7891ba23f154d3d799445c7ccb6dda2926468",
-                "reference": "58d7891ba23f154d3d799445c7ccb6dda2926468",
+                "url": "https://api.github.com/repos/chartjs/Chart.js/zipball/35273ee9488b9764485e6a0adfe92390fa01b130",
+                "reference": "35273ee9488b9764485e6a0adfe92390fa01b130",
                 "shasum": ""
             },
             "require": {
@@ -1901,7 +1901,7 @@
                 "JS",
                 "chart"
             ],
-            "time": "2019-02-14T02:12:52+00:00"
+            "time": "2019-03-03T14:19:11+00:00"
         },
         {
             "name": "openid/php-openid",
@@ -2244,12 +2244,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "926e43af9d12cbd2510889ca370dd2c5d1e26726"
+                "reference": "ed975a270d7c5dca9d9be73f3b66beca0407eded"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/926e43af9d12cbd2510889ca370dd2c5d1e26726",
-                "reference": "926e43af9d12cbd2510889ca370dd2c5d1e26726",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/ed975a270d7c5dca9d9be73f3b66beca0407eded",
+                "reference": "ed975a270d7c5dca9d9be73f3b66beca0407eded",
                 "shasum": ""
             },
             "require": {
@@ -2328,7 +2328,7 @@
                 "x.509",
                 "x509"
             ],
-            "time": "2019-02-25T03:36:40+00:00"
+            "time": "2019-03-04T14:15:45+00:00"
         },
         {
             "name": "psr/cache",
@@ -3527,12 +3527,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "bc4bd12aed793415e62986943f0d9c21f7597ff5"
+                "reference": "57f1ce82c997f5a8701b89ef970e36bb657fd09c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/bc4bd12aed793415e62986943f0d9c21f7597ff5",
-                "reference": "bc4bd12aed793415e62986943f0d9c21f7597ff5",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/57f1ce82c997f5a8701b89ef970e36bb657fd09c",
+                "reference": "57f1ce82c997f5a8701b89ef970e36bb657fd09c",
                 "shasum": ""
             },
             "require": {
@@ -3578,7 +3578,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2019-02-27T08:20:51+00:00"
+            "time": "2019-02-23T15:06:07+00:00"
         },
         {
             "name": "tractorcow/silverstripe-autocomplete",
@@ -3817,16 +3817,16 @@
         },
         {
             "name": "unclecheese/display-logic",
-            "version": "1.7.1",
+            "version": "1.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/OpenStackweb/silverstripe-display-logic.git",
-                "reference": "7442f31c6ecb6d9b867c6651bd93cf59b1a926ff"
+                "reference": "f7368c31b3f6456d6ec4be2b0901ce0e8e53f416"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OpenStackweb/silverstripe-display-logic/zipball/7442f31c6ecb6d9b867c6651bd93cf59b1a926ff",
-                "reference": "7442f31c6ecb6d9b867c6651bd93cf59b1a926ff",
+                "url": "https://api.github.com/repos/OpenStackweb/silverstripe-display-logic/zipball/f7368c31b3f6456d6ec4be2b0901ce0e8e53f416",
+                "reference": "f7368c31b3f6456d6ec4be2b0901ce0e8e53f416",
                 "shasum": ""
             },
             "require": {
@@ -3857,9 +3857,9 @@
                 "silverstripe"
             ],
             "support": {
-                "source": "https://github.com/OpenStackweb/silverstripe-display-logic/tree/hotfix/pre_ss32_ids"
+                "source": "https://github.com/OpenStackweb/silverstripe-display-logic/tree/1.7.2"
             },
-            "time": "2019-01-07T20:05:44+00:00"
+            "time": "2019-03-04T14:52:57+00:00"
         },
         {
             "name": "unclecheese/dropzone",
@@ -6471,12 +6471,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dependency-injection.git",
-                "reference": "660b0d595bff666c6ae70e03081770cb854c65bf"
+                "reference": "35cafad671aaf85da229e6139f493763a66f04fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/660b0d595bff666c6ae70e03081770cb854c65bf",
-                "reference": "660b0d595bff666c6ae70e03081770cb854c65bf",
+                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/35cafad671aaf85da229e6139f493763a66f04fd",
+                "reference": "35cafad671aaf85da229e6139f493763a66f04fd",
                 "shasum": ""
             },
             "require": {
@@ -6536,7 +6536,7 @@
             ],
             "description": "Symfony DependencyInjection Component",
             "homepage": "https://symfony.com",
-            "time": "2019-02-23T15:22:31+00:00"
+            "time": "2019-03-04T10:38:54+00:00"
         },
         {
             "name": "symfony/dom-crawler",
@@ -6601,12 +6601,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "13f7596671e3bf6cb293ee20e72083740382077c"
+                "reference": "fc2eed9862f01faa64ee93aa2655467b184bfe4f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/13f7596671e3bf6cb293ee20e72083740382077c",
-                "reference": "13f7596671e3bf6cb293ee20e72083740382077c",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/fc2eed9862f01faa64ee93aa2655467b184bfe4f",
+                "reference": "fc2eed9862f01faa64ee93aa2655467b184bfe4f",
                 "shasum": ""
             },
             "require": {
@@ -6643,7 +6643,7 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
-            "time": "2019-02-07T18:43:24+00:00"
+            "time": "2019-03-04T09:20:13+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -6768,12 +6768,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "6c0f965a7a4225962563f86f013bd53dae7ff3bc"
+                "reference": "4a4a41fdff7a2d9daaab8adb40410561b2df42fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/6c0f965a7a4225962563f86f013bd53dae7ff3bc",
-                "reference": "6c0f965a7a4225962563f86f013bd53dae7ff3bc",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/4a4a41fdff7a2d9daaab8adb40410561b2df42fa",
+                "reference": "4a4a41fdff7a2d9daaab8adb40410561b2df42fa",
                 "shasum": ""
             },
             "require": {
@@ -6833,7 +6833,7 @@
             ],
             "description": "Symfony Translation Component",
             "homepage": "https://symfony.com",
-            "time": "2019-02-23T15:22:31+00:00"
+            "time": "2019-03-03T18:12:18+00:00"
         },
         {
             "name": "theseer/tokenizer",
