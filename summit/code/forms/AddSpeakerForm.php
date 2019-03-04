@@ -45,10 +45,14 @@ final class AddSpeakerForm extends BootstrapForm
         $presentation_type      = $this->presentation->getTypeName();
         $max_speakers_reached   = $this->presentation->maxSpeakersReached();
         $use_speakers           = $this->presentation->Type()->UseSpeakers;
-        $speakers_exists        = $this->presentation->Speakers()->exists();
+        $min_speakers           = intval($this->presentation->Type()->MinSpeakers);
+        $min_moderators         = intval($this->presentation->Type()->MinModerators);
+        $moderator_count        = $this->presentation->Moderator()->exists() ? 1 : 0;
+        $speaker_mandatory      = $this->presentation->Type()->AreSpeakersMandatory || $min_speakers > 0;
+        $moderator_mandatory    = $this->presentation->Type()->IsModeratorMandatory || $min_moderators > 0;
+        $speakers_count         = $this->presentation->Speakers()->count();
         $max_moderators_reached = $this->presentation->maxModeratorsReached();
         $use_moderator          = $this->presentation->Type()->UseModerator;
-        $moderator_exists       = $this->presentation->Moderator()->exists();
         $speaker_type           = ($use_moderator && (!$max_moderators_reached || !$use_speakers)) ? 'moderator' : 'speaker';
 
         $fields = FieldList::create(
@@ -86,14 +90,11 @@ final class AddSpeakerForm extends BootstrapForm
             $fields->replaceField('EmailAddress', TextField::create('EmailAddress', 'Enter the first name, last name or email address of your '.$speaker_type.' (*)'));
         }
 
-        if ( (!$use_speakers || $speakers_exists) && (!$use_moderator || $moderator_exists) ) {
-            if ( ($use_speakers && !$max_speakers_reached) || ($use_moderator && !$max_moderators_reached) ) {
-                $fields->insertBefore(
-                    LiteralField::create('MoreSpeakers', '<h3 class="more-speakers">Any more '.$speaker_type.' to add?</h3>'),
-                    'SpeakerNote'
-                );
-                $fields->removeField('SpeakerNote');
-            } else {
+        $exists_speakers = $speaker_type == 'speaker' ? $speakers_count > 0 : $moderator_count > 0;
+        $reached_max = $speaker_type == 'speaker' ? $max_speakers_reached : $max_moderators_reached;
+
+        if ($exists_speakers) {
+            if ($reached_max) {
                 $fields->insertBefore(
                     LiteralField::create('LimitSpeakers', '<h3 class="limit-speakers">You have reached the maximum of '.$speaker_type.'s.</h3>'),
                     'SpeakerNote'
@@ -101,6 +102,15 @@ final class AddSpeakerForm extends BootstrapForm
                 $fields->removeField('SpeakerNote');
                 $fields->removeField('EmailAddress');
                 $fields->removeField('SpeakerType');
+
+            }
+            else // can add more ...
+            {
+                $fields->insertBefore(
+                    LiteralField::create('MoreSpeakers', '<h3 class="more-speakers">Any more '.$speaker_type.' to add?</h3>'),
+                    'SpeakerNote'
+                );
+                $fields->removeField('SpeakerNote');
             }
         }
 
@@ -111,26 +121,36 @@ final class AddSpeakerForm extends BootstrapForm
     }
 
     protected function getFormActions($controller) {
+
         $max_speakers_reached   = $this->presentation->maxSpeakersReached();
         $use_speakers           = $this->presentation->Type()->UseSpeakers;
-        $speakers_exists        = $this->presentation->Speakers()->exists();
+        $min_speakers           = intval($this->presentation->Type()->MinSpeakers);
+        $min_moderators         = intval($this->presentation->Type()->MinModerators);
+        $moderator_count        = $this->presentation->Moderator()->exists() ? 1 : 0;
+        $speaker_mandatory      = $this->presentation->Type()->AreSpeakersMandatory || $min_speakers > 0;
+        $moderator_mandatory    = $this->presentation->Type()->IsModeratorMandatory || $min_moderators > 0;
+        $speakers_count         = $this->presentation->Speakers()->count();
         $max_moderators_reached = $this->presentation->maxModeratorsReached();
         $use_moderator          = $this->presentation->Type()->UseModerator;
-        $moderator_exists       = $this->presentation->Moderator()->exists();
         $speaker_type           = ($use_moderator && (!$max_moderators_reached || !$use_speakers)) ? 'moderator' : 'speaker';
-        $actions = array();
+        $actions                = [];
 
-        if ( (!$use_speakers || $speakers_exists) && (!$use_moderator || $moderator_exists) ) {
+        $should_add = $speaker_type == 'speaker' ? $speaker_mandatory : $moderator_mandatory;
+        $reached_minimun = $speaker_type == 'speaker' ? $min_speakers <= $speakers_count : $min_moderators <= $moderator_count;
+        $exists_speakers = $speaker_type == 'speaker' ? $speakers_count > 0 : $moderator_count > 0;
+
+        if($should_add && !$reached_minimun){
+            $action_text = 'Add '.(($speaker_type == 'speaker') ? 'first ' : 'a ').$speaker_type;
+            $actions[] = $exists_speakers ?
+                FormAction::create('doAddSpeaker', '<i class="fa fa-plus fa-start"></i> Add another '.$speaker_type):
+                FormAction::create('doAddSpeaker', '<i class="fa fa-plus fa-start"></i> '.$action_text);
+        }
+        else{
             if (($use_speakers && !$max_speakers_reached) || ($use_moderator && !$max_moderators_reached)) {
                 $actions[] = FormAction::create('doAddSpeaker', '<i class="fa fa-plus fa-start"></i> Add another '.$speaker_type);
             }
-
             $default_actions = $controller->createSaveActions('doFinishSpeaker', 3);
             $actions = array_merge($actions,$default_actions);
-
-        } else {
-            $action_text = 'Add '.(($speaker_type == 'speaker') ? 'first ' : 'a ').$speaker_type;
-            $actions[] = FormAction::create('doAddSpeaker', '<i class="fa fa-plus fa-start"></i> '.$action_text);
         }
 
         return new FieldList($actions);
