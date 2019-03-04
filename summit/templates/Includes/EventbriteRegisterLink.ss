@@ -1,4 +1,4 @@
-<a href="{$Summit.RegistrationLink}/?aff={$Summit.Name}-{$Position}" target="_blank" class="btn register-btn-lrg eventbrite-register-link {$ExtraClass}">
+<a href="{$Summit.RegistrationLink}/?aff={$Summit.Name}{$Position}" target="_blank" class="btn register-btn-lrg eventbrite-register-link {$ExtraClass}">
     <% if $RegisterLabel %>
         {$RegisterLabel}
     <% else %>
