@@ -12,7 +12,7 @@
             </div>
             <div class="col-lg-5 col-md-6 col-sm-12 about-buttons">
 
-                <p>Join the people building and operating open infrastructure, with over 300 sessions and workshops on Container Infrastructure, CI/CD, Telecom + NFV, Public Cloud, Private & Hybrid Cloud, Security and members of open source communities like Airship, Ansible, Ceph, Docker, Kata Containers, Kubernetes, ONAP, OpenStack, Open vSwitch, OPNFV, StarlingX, Zuul and more.</p>
+                <p>Join the people building and operating open infrastructure, with hundreds of sessions and workshops on Container Infrastructure, CI/CD, Telecom + NFV, Public Cloud, Private & Hybrid Cloud, Security and members of open source communities like Airship, Ansible, Ceph, Docker, Kata Containers, Kubernetes, ONAP, OpenStack, Open vSwitch, OPNFV, StarlingX, Zuul and more.</p>
 
                 <a class="btn btn-default" href="/summit/shangai-2019/sponsors/">Sponsor the Summit <i class="fal fa-arrow-right"></i></a>
 
@@ -68,7 +68,7 @@
         </div>
     </div>
 </div>
-<div class="light about-summit-users-wrapper" id="{$Name}">
+<!-- <div class="light about-summit-users-wrapper" id="{$Name}">
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-lg-8 col-md-6">
@@ -259,12 +259,12 @@
         </div>
     </div>
 </div>
-
+-->
 <div class="academy-wrapper" id="Sponsors">
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <h3 class="recap-title script">Our Shangai 2019 Sponsors!
+                <h3 class="recap-title script">Thank you to our Denver 2019 Sponsors!
                 </h3>
             </div>
 
