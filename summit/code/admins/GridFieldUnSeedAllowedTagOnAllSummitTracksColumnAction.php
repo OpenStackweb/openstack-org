@@ -74,10 +74,27 @@ class GridFieldUnSeedAllowedTagOnAllSummitTracksColumnAction
             $code = 200;
             $msg  = 'tag removed sucessfull from all summit tracks';
 
-            try {
+            // delete from list
 
-            } catch (Exception $ex) {
-                throw new ValidationException($ex->getMessage(), 0);
+            $item = $gridField->getList()->byID($arguments['RecordID']);
+            if(!$item) {
+                return;
+            }
+
+            if($actionName == 'deleterecord') {
+                if(!$item->canDelete()) {
+                    throw new ValidationException(
+                        _t('GridFieldAction_Delete.DeletePermissionsFailure',"No delete permissions"),0);
+                }
+
+                $item->delete();
+            } else {
+                if(!$item->canEdit()) {
+                    throw new ValidationException(
+                        _t('GridFieldAction_Delete.EditPermissionsFailure',"No permission to unlink record"),0);
+                }
+
+                $gridField->getList()->remove($item);
             }
 
             Controller::curr()->getResponse()->setStatusCode($code, $msg);

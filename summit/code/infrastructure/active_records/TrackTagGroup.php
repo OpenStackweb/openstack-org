@@ -59,10 +59,10 @@ final class TrackTagGroup extends DataObject implements ITagGroup
             $config->removeComponentsByType('GridFieldDataColumns');
             $config->removeComponentsByType('GridFieldDetailForm');
             $config->removeComponentsByType('GridFieldDeleteAction');
-            $config->removeComponentsByType('GridFieldAddNewButton');
+            $config->removeComponentsByType('GridFieldAddExistingAutocompleter');
             $config->addComponent(new GridFieldUnSeedAllowedTagOnAllSummitTracksColumnAction);
-            $config->addComponent(new GridFieldSeedAllowedTagOnAllSummitTracksColumnAction);
-            $completer = $config->getComponentByType('GridFieldAddExistingAutocompleter');
+            //$config->addComponent(new GridFieldSeedAllowedTagOnAllSummitTracksColumnAction);
+            $config->addComponent($completer = new GridFieldAddExistingTag, 'GridFieldAddNewButton');
             $completer->setResultsFormat('$Tag');
             $completer->setSearchFields(['Tag']);
             // only can assign tags that arent already assigned to another group or itself
@@ -71,10 +71,12 @@ final class TrackTagGroup extends DataObject implements ITagGroup
 INNER JOIN TrackTagGroup ON TrackTagGroup.ID = TrackTagGroup_AllowedTags.TrackTagGroupID
 WHERE TrackTagGroup.SummitID = %s
             )', $this->SummitID)));
-            $editconf = new GridFieldDetailForm();
+
+            $editconf = new GridFieldDetailTagForm();
             $editconf->setFields(FieldList::create(
-                ReadonlyField::create('Tag','Tag'),
-                CheckboxField::create('ManyMany[IsDefault]', 'Is Default')
+                TextField::create('Tag','Tag'),
+                CheckboxField::create('ManyMany[IsDefault]', 'Is Default'),
+                HiddenField::create('SummitID', 'SummitID', $this->Summit()->ID)
             ));
 
             $summaryfieldsconf = new GridFieldDataColumns();
@@ -82,6 +84,7 @@ WHERE TrackTagGroup.SummitID = %s
 
             $config->addComponent($editconf);
             $config->addComponent($summaryfieldsconf, new GridFieldFilterHeader());
+
             $allowed_tags = new GridField('AllowedTags', 'Allowed Tags', $this->AllowedTags(), $config);
             $fields->add($allowed_tags);
         }
