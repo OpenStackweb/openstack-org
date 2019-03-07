@@ -37,7 +37,7 @@ server {
     }
 
     #php-fcgi
-    include /etc/nginx/php5-fpm.conf;
+    include /etc/nginx/php-fpm.conf;
     include /etc/nginx/silverstripe.conf;
 
     error_page 404 =200 /404_page/index.html;

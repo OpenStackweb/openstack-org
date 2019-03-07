@@ -41,8 +41,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
      vb.memory           = "8192"
      vb.name             = SERVER_NAME
 	 vb.cpus             = 1
-	 override.vm.box     = "ubuntu/trusty64"
-     override.vm.box_url = "https://atlas.hashicorp.com/ubuntu/trusty64"
+	 config.vm.box       = "ubuntu/bionic64"
+     #override.vm.box_url = "https://atlas.hashicorp.com/ubuntu/trusty64"
      override.vm.network "forwarded_port", guest: 3306, host: 3306
      override.vm.network "private_network", ip: "192.168.33.10"
   end

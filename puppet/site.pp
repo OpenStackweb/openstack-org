@@ -13,12 +13,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # global variables
-$os_db_user          = hiera('os_db_user')
-$os_db_password      = hiera('os_db_password')
-$mysql_root_password = hiera('mysql_root_password')
-$os_db               = hiera('os_db_name')
-$developer_email     = hiera('developer_email')
-$db_dump_url         = hiera('db_dump_url')
+$os_db_user                         = hiera('os_db_user')
+$os_db_password                     = hiera('os_db_password')
+$mysql_root_password                = hiera('mysql_root_password')
+$os_db                              = hiera('os_db_name')
+$developer_email                    = hiera('developer_email')
+$db_dump_url                        = hiera('db_dump_url')
+$cloud_assets_base_url              = hiera('cloud_assets_base_url')
+$cloud_assets_auth_url              = hiera('cloud_assets_auth_url')
+$cloud_assets_container_name        = hiera('cloud_assets_container_name')
+$cloud_assets_region                = hiera('cloud_assets_region')
+$cloud_assets_app_credential_id     = hiera('cloud_assets_app_credential_id')
+$cloud_assets_app_credential_secret = hiera('cloud_assets_app_credential_secret')
+$cloud_assets_project_name          = hiera('cloud_assets_project_name')
+
 # fact
 notice("server_name ${server_name}")
 
@@ -32,7 +40,7 @@ $main_packages = [
   'zip',
   'unzip',
   'nginx',
-  'mysql-client-core-5.6',
+  'mysql-client-core-5.7',
   'python-dev',
   'python-software-properties',
   'python-pip',
@@ -42,18 +50,20 @@ $main_packages = [
 ]
 
 # php packages needed for server
-$php5_packages = [
-  'php5.6-fpm',
-  'php5.6-mcrypt',
-  'php5.6-cli',
-  'php5.6-curl',
-  'php5.6-gd',
-  'php5.6-json',
-  'php5.6-gmp',
-  'php5.6-mysqlnd',
-  'php5.6-mbstring',
-  'php5.6-xml',
-  'php5.6-xdebug',
+$php_packages = [
+    'php7.2-fpm',
+    'php7.2-curl',
+    'php7.2-mysqlnd',
+    'php7.2-xml',
+    'php7.2-mbstring',
+    'php7.2',
+    'php7.2-curl',
+    'php7.2-json',
+    'php7.2-gd',
+    'php7.2-gmp',
+    'php7.2-ssh2',
+    'php7.2-intl',
+    'php7.2-xdebug',
 ]
 
 exec { 'apt-get update':
@@ -68,19 +78,11 @@ package { $main_packages:
   ],
 }
 
-exec{ 'add-php-5.6-repository':
-  cwd       => '/',
-  path      => '/usr/bin:/bin:/usr/local/bin:/usr/lib/node_modules/npm/bin',
-  logoutput => on_failure,
-  command   => "add-apt-repository -y ppa:ondrej/php && apt-get update",
-  require   => Package[$main_packages]
-}
 
-package { $php5_packages:
+package { $php_packages:
   ensure  => present,
   require => [
     Package[$main_packages],
-    Exec['add-php-5.6-repository'],
   ],
 }
 
@@ -94,7 +96,7 @@ $override_options = {
 notice("mysql_service_provider ${mysql_service_provider}")
 
 class { '::mysql::server':
-  package_name            => 'mysql-server-5.6',
+  package_name            => 'mysql-server-5.7',
   # came from facter
   service_provider        => $mysql_service_provider,
   root_password           => $mysql_root_password,
@@ -103,7 +105,7 @@ class { '::mysql::server':
 }
 
 class { '::mysql::client':
-  package_name => 'mysql-client-5.6',
+  package_name => 'mysql-client-5.7',
   require => [
     Package[$main_packages],
     Class['::mysql::server']
@@ -176,6 +178,17 @@ file { '/var/www/www.openstack.org/_ss_environment.php':
   mode    => '0640',
 }
 
+file { '/etc/php/7.2/fpm/pool.d/www.conf':
+  ensure  => present,
+  content => template('site/www.conf.erb'),
+  owner   => 'vagrant',
+  group   => 'www-data',
+  mode    => '0640',
+  require   => [
+    Package[$php_packages] ,
+  ],
+}
+
 file { '/var/www/www.openstack.org/db.ini':
   ensure  => present,
   content => template('site/db.ini.erb'),
@@ -184,10 +197,10 @@ file { '/var/www/www.openstack.org/db.ini':
   mode    => '0640',
 }
 
-service { 'php5.6-fpm':
+service { 'php7.2-fpm':
   ensure    => running,
   require   => [
-    Package[$php5_packages] ,
+    Package[$php_packages] ,
   ],
 }
 
@@ -195,9 +208,9 @@ service { 'nginx':
   ensure    => running,
   require   => [
     Package[$main_packages] ,		
-    Package[$php5_packages] ,
+    Package[$php_packages] ,
     Service['mysql'],
-    Service['php5.6-fpm'],
+    Service['php7.2-fpm'],
     File['/var/www/www.openstack.org/_ss_environment.php'],
   ],
 }
@@ -217,9 +230,9 @@ file { '/etc/nginx/silverstripe.conf':
   require => Service['nginx'],
 }
 
-file { '/etc/nginx/php5-fpm.conf':
+file { '/etc/nginx/php-fpm.conf':
   ensure  => present,
-  content => template('site/php5-fpm.conf.erb'),
+  content => template('site/php-fpm.conf.erb'),
   owner   => 'vagrant',
   group   => 'www-data',
   mode    => '0640',
@@ -234,18 +247,18 @@ file { '/etc/nginx/sites-available/www.openstack.org':
   mode    => '0640',
   require =>  [
     File['/etc/nginx/silverstripe.conf'],
-    File['/etc/nginx/php5-fpm.conf'],
+    File['/etc/nginx/php-fpm.conf'],
   ]
 }
 
-file { '/etc/php/5.6/mods-available/xdebug.ini':
+file { '/etc/php/7.2/mods-available/xdebug.ini':
   ensure  => present,
   content => template('site/xdebug.ini.erb'),
   owner   => 'vagrant',
   group   => 'www-data',
   mode    => '0640',
   require =>  [
-    Package[$php5_packages],
+    Package[$php_packages],
   ]
 }
 

@@ -1,0 +1,21 @@
+---
+name: assetsconfig
+---
+
+CloudAssets:
+  wrappers:
+    File : CloudFile
+    BetterImage: CloudImage
+    Image: CloudImage
+    Image_Cached: CloudImageCached
+  map:
+    'assets':
+      Type: SwiftBucket
+      BaseURL: '<%= @cloud_assets_base_url %>'
+      AuthURL: '<%= @cloud_assets_auth_url %>'
+      Container: '<%= @cloud_assets_container_name %>'
+      Region: '<%= @cloud_assets_region %>'
+      ApplicationCredentialId: '<%= @cloud_assets_app_credential_id %>'
+      ApplicationCredentialSecret:  '<%= @cloud_assets_app_credential_secret %>'
+      ProjectName: '<%= @cloud_assets_project_name %>'
+      LocalCopy: true
