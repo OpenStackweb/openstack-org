@@ -2,7 +2,7 @@
 echo “running update deployment …”;
 cd /var/www/www.openstack.org;
 ./clear_ss_cache.sh;
-composer update --ignore-platform-reqs;
+composer install --ignore-platform-reqs --prefer-dist;
 #run ss tasks
 sake dev/build;
 sake dev/tasks/DBMigrateTask;

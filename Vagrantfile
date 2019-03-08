@@ -7,7 +7,7 @@ VAGRANTFILE_API_VERSION = "2"
 MYSQL_SERVICE_PROVIDER = ENV["MYSQL_SERVICE_PROVIDER"] || ""
 USE_SWAP               = ENV["USE_SWAP"] || 0
 SERVER_NAME            = ENV["SERVER_NAME"] || "local.openstack.org"
-GITHUB_OAUTH_TOKEN     = ENV["GITHUB_OAUTH_TOKEN"] || "790ca38ec474813397eb8b658a9716a290c8af54"
+GITHUB_OAUTH_TOKEN     = ENV["GITHUB_OAUTH_TOKEN"] || ""
 
 required_plugins = %w( vagrant-vbguest vagrant-hosts vagrant-hostsupdater )
 require File.dirname(__FILE__)+"/scripts/dependency_manager"

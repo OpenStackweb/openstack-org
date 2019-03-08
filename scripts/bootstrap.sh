@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright (c) 2017 OpenStack Foundation
+# Copyright (c) 2019 OpenStack Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,12 +16,16 @@
 
 GITHUB_OAUTH_TOKEN=$1
 
-echo "GITHUB_OAUTH_TOKEN $GITHUB_OAUTH_TOKEN";
+echo "GITHUB_OAUTH_TOKEN is $GITHUB_OAUTH_TOKEN";
 
 sudo apt-get update;
 sudo apt-get --yes upgrade;
 sudo apt-get --yes install puppet composer;
-composer config -g github-oauth.github.com $GITHUB_OAUTH_TOKEN;
+if [[ -n "$GITHUB_OAUTH_TOKEN" ]]; then
+    echo "running composer config -g github-oauth.github.com $GITHUB_OAUTH_TOKEN";
+    composer config -g github-oauth.github.com $GITHUB_OAUTH_TOKEN;
+fi
+
 puppet --version;
 mkdir -p /etc/puppet/modules;
 
