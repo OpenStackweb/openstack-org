@@ -13,12 +13,9 @@
 # implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 # install virtual env for python
 sudo pip install virtualenv;
-# https://github.com/OpenStackweb/openstack-org/blob/master/scripts/postdeployment.sh
-curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-sudo apt-get install -y nodejs;
-sudo npm install -g npm;
 
 # update php.ini settings
 upload_max_filesize=240M
@@ -31,10 +28,10 @@ memory_limit=512M
 
 for key in memory_limit upload_max_filesize post_max_size max_execution_time max_input_time display_errors error_reporting
 do
- sed -i "s/^\($key\).*/\1 $(eval echo \=\${$key})/" /etc/php/5.6/fpm/php.ini
+ sed -i "s/^\($key\).*/\1 $(eval echo \=\${$key})/" /etc/php/7.2/fpm/php.ini
 done
-sudo service php5.6-fpm start;
-sudo service php5.6-fpm restart;
+sudo service php7.2-fpm start;
+sudo service php7.2-fpm restart;
 
 su vagrant;
 # install local nodejs modules on VM
@@ -43,13 +40,9 @@ chown vagrant:www-data -R /home/vagrant/node_modules;
 ln -sf /home/vagrant/node_modules /var/www/www.openstack.org/node_modules;
 
 cd /var/www/www.openstack.org;
-#composer installation from https://getcomposer.org/download/
-php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-php composer-setup.php
-php -r "unlink('composer-setup.php');"
 # create local folder for ss cache
 mkdir -p /var/www/www.openstack.org/silverstripe-cache;
-php composer.phar install --ignore-platform-reqs --prefer-dist;
+composer install --ignore-platform-reqs --prefer-dist;
 sudo ./framework/sake installsake;
 
 if [[ -f scripts/setup_python_env.sh ]]; then

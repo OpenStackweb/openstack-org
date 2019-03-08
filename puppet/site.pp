@@ -1,4 +1,4 @@
-# Copyright (c) 2017 OpenStack Foundation
+# Copyright (c) 2019 OpenStack Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,20 +12,21 @@
 # implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 # global variables
-$os_db_user                         = hiera('os_db_user')
-$os_db_password                     = hiera('os_db_password')
-$mysql_root_password                = hiera('mysql_root_password')
-$os_db                              = hiera('os_db_name')
-$developer_email                    = hiera('developer_email')
-$db_dump_url                        = hiera('db_dump_url')
-$cloud_assets_base_url              = hiera('cloud_assets_base_url')
-$cloud_assets_auth_url              = hiera('cloud_assets_auth_url')
-$cloud_assets_container_name        = hiera('cloud_assets_container_name')
-$cloud_assets_region                = hiera('cloud_assets_region')
-$cloud_assets_app_credential_id     = hiera('cloud_assets_app_credential_id')
-$cloud_assets_app_credential_secret = hiera('cloud_assets_app_credential_secret')
-$cloud_assets_project_name          = hiera('cloud_assets_project_name')
+$os_db_user                         = lookup('os_db_user')
+$os_db_password                     = lookup('os_db_password')
+$mysql_root_password                = lookup('mysql_root_password')
+$os_db                              = lookup('os_db_name')
+$developer_email                    = lookup('developer_email')
+$db_dump_url                        = lookup('db_dump_url')
+$cloud_assets_base_url              = lookup('cloud_assets_base_url')
+$cloud_assets_auth_url              = lookup('cloud_assets_auth_url')
+$cloud_assets_container_name        = lookup('cloud_assets_container_name')
+$cloud_assets_region                = lookup('cloud_assets_region')
+$cloud_assets_app_credential_id     = lookup('cloud_assets_app_credential_id')
+$cloud_assets_app_credential_secret = lookup('cloud_assets_app_credential_secret')
+$cloud_assets_project_name          = lookup('cloud_assets_project_name')
 
 # fact
 notice("server_name ${server_name}")
@@ -42,11 +43,15 @@ $main_packages = [
   'nginx',
   'mysql-client-core-5.7',
   'python-dev',
-  'python-software-properties',
   'python-pip',
   'libmysqlclient-dev',
   'software-properties-common',
   'nano',
+  'apt-transport-https',
+  'htop',
+  'net-tools',
+  'iputils-ping',
+  'lsof'
 ]
 
 # php packages needed for server
@@ -57,7 +62,6 @@ $php_packages = [
     'php7.2-xml',
     'php7.2-mbstring',
     'php7.2',
-    'php7.2-curl',
     'php7.2-json',
     'php7.2-gd',
     'php7.2-gmp',
@@ -78,7 +82,6 @@ package { $main_packages:
   ],
 }
 
-
 package { $php_packages:
   ensure  => present,
   require => [
@@ -92,13 +95,8 @@ $override_options = {
   }
 }
 
-#database server
-notice("mysql_service_provider ${mysql_service_provider}")
-
 class { '::mysql::server':
   package_name            => 'mysql-server-5.7',
-  # came from facter
-  service_provider        => $mysql_service_provider,
   root_password           => $mysql_root_password,
   remove_default_accounts => true,
   override_options        => $override_options
@@ -112,12 +110,17 @@ class { '::mysql::client':
   ],
 }
 
+# force 10.x version
+class { '::nodejs':
+	repo_url_suffix => '10.x',
+}
+
 # process db from cdn
 exec { 'download-db':
   cwd       => '/',
   path      => '/usr/bin:/bin:/usr/local/bin:/usr/lib/node_modules/npm/bin',
   logoutput => on_failure,
-  command   => "wget $db_dump_url",
+  command   => "wget $db_dump_url -O /dbdump-current.zip",
   require   => Package[$main_packages]
 }
 
@@ -125,7 +128,7 @@ exec { 'unzip-db':
   cwd       => '/',
   path      => '/usr/bin:/bin:/usr/local/bin:/usr/lib/node_modules/npm/bin',
   logoutput => on_failure,
-  command   => 'unzip -o dbdump-current.zip',
+  command   => 'unzip dbdump-current.zip',
   require   => Exec['download-db'],
 }
 
@@ -172,7 +175,7 @@ mysql::db { $os_db :
 
 file { '/var/www/www.openstack.org/_ss_environment.php':
   ensure  => present,
-  content => template('site/_ss_environment.php.erb'),
+  content => template("site/_ss_environment.php.erb"),
   owner   => 'vagrant',
   group   => 'www-data',
   mode    => '0640',
@@ -209,7 +212,6 @@ service { 'nginx':
   require   => [
     Package[$main_packages] ,		
     Package[$php_packages] ,
-    Service['mysql'],
     Service['php7.2-fpm'],
     File['/var/www/www.openstack.org/_ss_environment.php'],
   ],

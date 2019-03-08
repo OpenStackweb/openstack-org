@@ -4,9 +4,10 @@
 VAGRANTFILE_API_VERSION = "2"
 
 #configuration constants
-MYSQL_SERVICE_PROVIDER = ENV["MYSQL_SERVICE_PROVIDER"] || "init"
+MYSQL_SERVICE_PROVIDER = ENV["MYSQL_SERVICE_PROVIDER"] || ""
 USE_SWAP               = ENV["USE_SWAP"] || 0
 SERVER_NAME            = ENV["SERVER_NAME"] || "local.openstack.org"
+GITHUB_OAUTH_TOKEN     = ENV["GITHUB_OAUTH_TOKEN"] || "790ca38ec474813397eb8b658a9716a290c8af54"
 
 required_plugins = %w( vagrant-vbguest vagrant-hosts vagrant-hostsupdater )
 require File.dirname(__FILE__)+"/scripts/dependency_manager"
@@ -31,10 +32,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
-    config.vm.synced_folder("puppet/hiera", "/etc/puppet/data")
-    config.vm.synced_folder("puppet/certs", "/etc/ssl_certs")	
-    config.vm.synced_folder("puppet", "/etc/puppet/modules/site")
-    config.vm.synced_folder ".", "/var/www/www.openstack.org", create: true, owner: "vagrant", group: "www-data", mount_options: ["dmode=777,fmode=777"]
+  config.vm.synced_folder("puppet/hiera", "/etc/puppet/data")
+  config.vm.synced_folder("puppet/certs", "/etc/ssl_certs")	
+  config.vm.synced_folder("puppet", "/etc/puppet/code/modules/site")
+  config.vm.synced_folder ".", "/var/www/www.openstack.org", create: true, owner: "vagrant", group: "www-data", mount_options: ["dmode=777,fmode=777"]
 
   # virtualbox provider
   config.vm.provider "virtualbox" do |vb, override|
@@ -64,9 +65,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provision "bootstrap", type:"shell" do |s|
       s.path = "scripts/bootstrap.sh"
+      s.args = [GITHUB_OAUTH_TOKEN]
   end
 
   config.vm.provision "puppetbuild", type: "puppet" do |puppet|
+      #puppet.module_path = "/etc/puppet/modules/site"
       puppet.manifests_path = "puppet"
       puppet.manifest_file = "site.pp"
       puppet.hiera_config_path = "puppet/hiera/hiera.yaml"
@@ -76,7 +79,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
                             "use_swap"               => USE_SWAP,
                             "server_name"            => SERVER_NAME
                         }
-      #puppet.options = "--verbose --debug"
+      puppet.options = "--verbose --debug"
   end
   
   config.vm.provision "postbuild", type:"shell" do |s|
