@@ -221,7 +221,8 @@ class OpenStackMember
             }
 
             $img = $img->SetWidth($width);
-
+            if(is_null($img))
+                return "<img src='themes/openstack/images/generic-profile-photo.png'/>";
             return "<img alt='{$this->owner->ID}_profile_photo' src='{$img->getURL()}' class='member-profile-photo'/>";
         } elseif (!empty($twitter_name)) {
             if ($width < 100) {

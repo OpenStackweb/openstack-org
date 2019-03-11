@@ -15,9 +15,9 @@ jQuery(document).ready(function($){
 
     if ($(window).width() > 767) {
         $('ul.navbar-main li ul.dropdown-menu').addClass('dropdown-hover');
-        $('ul.navbar-main li').hover(function() {
+        $("ul.navbar-main li").on("mouseenter",function() {
           $(this).find('.dropdown-hover').stop(true, true).delay(400).fadeIn(100);
-      }, function() {
+      }).on("mouseleave", function() {
           $(this).find('.dropdown-hover').stop(true, true).delay(100).fadeOut(200);
       });
     } else {
@@ -25,21 +25,21 @@ jQuery(document).ready(function($){
     }
 
     // Close header search bar
-    $("body").on('click', ".ossw-search-bar-close", function() {
+    $("body").on("click", ".ossw-search-bar-close", function() {
         $(".navbar-main").toggleClass("show");
         $(".search-container").removeClass("show")
         $(".search-icon").toggleClass("show");
     });
 
     // Open header search bar
-    $(".search-icon").click(function() {
+    $(".search-icon").on("click", function() {
         $(".navbar-main").toggleClass("show");
         $(".search-container").toggleClass("show");
         $("input", '.openstack-search-bar').first().focus();
         $(".search-icon").toggleClass("show");
     });
 
-    $(window).resize(function () {
+    $(window).on("resize", function () {
         if ($(window).width() > 767) {
             $('ul.navbar-main li ul.dropdown-menu').addClass('dropdown-hover');
             $('ul.navbar-main li').hover(function() {
@@ -65,8 +65,7 @@ jQuery(document).ready(function($){
     }
 	
     // Toggle mobile header nav dropdowns
-    $("i.mobile-expand").click(function (event) {
-        console.log('js is here');
+    $("i.mobile-expand").on("click", function (event) {
         if ($(this).closest('li').hasClass("open")) {
             $('li').removeClass('open');
         } else {
@@ -78,10 +77,8 @@ jQuery(document).ready(function($){
 });
 
 // Remove open class when window is resized
-jQuery(window).resize(function () {
+jQuery(window).on("resize",function () {
     if (jQuery(window).width() > 767) {
-        $('li').removeClass('open');
-    } else {
-        
+        $("li").removeClass("open");
     }
 });

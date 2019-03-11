@@ -20,7 +20,7 @@ jQuery(document).ready(function($) {
 
 	$('.addTip[title]').tooltip();
 	
-	$('#toggleButton').click(function() {
+	$('#toggleButton').on("click", function() {
            if ($('#toggleSection').is(":hidden"))
            {
                 $('#toggleSection').slideDown("slow");
