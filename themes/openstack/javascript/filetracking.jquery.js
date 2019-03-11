@@ -22,7 +22,7 @@
                 $('a').each(function() {
                     var href = $(this).attr('href');
                     if (href && href.match(filetypes)) {
-                            $(this).click(function() {
+                            $(this).on("click",function() {
                             var extension = (/[\./]/.exec(href)) ? /[^\./]+$/.exec(href) : undefined;
                             var filePath = href;
 
