@@ -49,7 +49,7 @@ interface ISurvey extends IEntity {
      * @param ISurveyStep $current_step
      * @return void
      */
-    public function registerCurrentStep(ISurveyStep $current_step);
+    public function registerCurrentStep(?ISurveyStep $current_step);
 
     /**
      * @return ISurveyStep[]

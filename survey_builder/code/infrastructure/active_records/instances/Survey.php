@@ -186,8 +186,9 @@ class Survey extends DataObject implements ISurvey
      * @param ISurveyStep $current_step
      * @return void
      */
-    public function registerCurrentStep(ISurveyStep $current_step)
+    public function registerCurrentStep(?ISurveyStep $current_step)
     {
+        if(is_null($current_step)) return;
         SS_Log::log(sprintf("registering current step %s", $current_step->Template()->Name), SS_Log::DEBUG);
         $this->CurrentStepID = $current_step->ID;
         $this->write();
