@@ -19,11 +19,11 @@ final class DupeMemberDeleteRequestFactory
     implements IDupeMemberActionAccountRequestFactory {
 
     /**
-     * @param ICommunityMember $primary_account
-     * @param ICommunityMember $dupe_account
+     * @param Member $primary_account
+     * @param Member $dupe_account
      * @return IDupeMemberActionAccountRequest
      */
-    public function build(ICommunityMember $primary_account, ICommunityMember $dupe_account)
+    public function build(Member $primary_account, Member $dupe_account)
     {
         $request = new DupeMemberDeleteRequest();
         $request->registerPrimaryAccount($primary_account);

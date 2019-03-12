@@ -60,19 +60,19 @@ class DupeMemberActionRequest
     }
 
     /**
-     * @param ICommunityMember $member
+     * @param Member $member
      * @return void
      */
-    public function registerPrimaryAccount(ICommunityMember $member)
+    public function registerPrimaryAccount(Member $member)
     {
         AssociationFactory::getInstance()->getMany2OneAssociation($this, 'PrimaryAccount')->setTarget($member);
     }
 
     /**
-     * @param ICommunityMember $member
+     * @param Member $member
      * @return void
      */
-    public function registerDupeAccount(ICommunityMember $member)
+    public function registerDupeAccount(Member $member)
     {
         AssociationFactory::getInstance()->getMany2OneAssociation($this, 'DupeAccount')->setTarget($member);
     }

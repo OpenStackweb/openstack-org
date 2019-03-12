@@ -19,7 +19,7 @@ final class NotMyAccountActionFactory implements INotMyAccountActionFactory{
      * @param ICommunityMember $foreign_account
      * @return INotMyAccountAction
      */
-    public function build(ICommunityMember $primary_account, ICommunityMember $foreign_account)
+    public function build(Member $primary_account, Member $foreign_account)
     {
         $action = new NotMyAccountAction;
         $action->PrimaryAccountID = $primary_account->getIdentifier();

@@ -31,13 +31,13 @@ interface IDupeMemberActionAccountRequest extends IEntity {
      * @param ICommunityMember $member
      * @return void
      */
-    public function registerDupeAccount(ICommunityMember $member);
+    public function registerDupeAccount(Member $member);
 
     /**
      * @param ICommunityMember $member
      * @return void
      */
-    public function registerPrimaryAccount(ICommunityMember $member);
+    public function registerPrimaryAccount(Member $member);
 
     /**
      * @return ICommunityMember $member

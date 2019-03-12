@@ -23,7 +23,7 @@ final class DupeMemberMergeRequestFactory
      * @param ICommunityMember $dupe_account
      * @return IDupeMemberActionAccountRequest
      */
-    public function build(ICommunityMember $primary_account, ICommunityMember $dupe_account)
+    public function build(Member $primary_account, Member $dupe_account)
     {
         $request = new DupeMemberMergeRequest();
         $request->registerPrimaryAccount($primary_account);

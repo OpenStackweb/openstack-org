@@ -15,9 +15,9 @@
 interface INotMyAccountActionFactory {
 
     /**
-     * @param ICommunityMember $primary_account
-     * @param ICommunityMember $foreign_account
+     * @param Member $primary_account
+     * @param Member $foreign_account
      * @return INotMyAccountAction
      */
-    public function build(ICommunityMember $primary_account, ICommunityMember $foreign_account);
+    public function build(Member $primary_account, Member $foreign_account);
 }
