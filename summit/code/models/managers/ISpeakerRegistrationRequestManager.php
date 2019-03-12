@@ -15,17 +15,17 @@
 interface ISpeakerRegistrationRequestManager {
 
     /**
-     * @param IPresentationSpeaker $speaker
+     * @param PresentationSpeaker $speaker
      * @param string $email
      * @return ISpeakerRegistrationRequest
      * @throws EntityAlreadyExistsException
      */
-    public function register(IPresentationSpeaker $speaker, $email);
+    public function register(PresentationSpeaker $speaker, $email);
 
     /**
      * @param string $token
      * @param ICommunityMember $member
      * @return void
      */
-    public function confirm($token, ICommunityMember $member);
+    public function confirm($token, Member $member);
 }

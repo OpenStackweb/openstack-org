@@ -48,12 +48,12 @@ final class SpeakerRegistrationRequestManager
     }
 
     /**
-     * @param IPresentationSpeaker $speaker
+     * @param PresentationSpeaker $speaker
      * @param string $email
      * @return ISpeakerRegistrationRequest
      * @throws EntityAlreadyExistsException
      */
-    public function register(IPresentationSpeaker $speaker, $email)
+    public function register(PresentationSpeaker $speaker, $email)
     {
         $repository = $this->repository;
         $factory    = $this->factory;
@@ -73,10 +73,10 @@ final class SpeakerRegistrationRequestManager
 
     /**
      * @param string $token
-     * @param ICommunityMember $member
+     * @param Member $member
      * @return void
      */
-    public function confirm($token, ICommunityMember $member)
+    public function confirm($token, Member $member)
     {
         $repository = $this->repository;
 
