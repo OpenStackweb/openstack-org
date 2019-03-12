@@ -80,15 +80,15 @@ interface ICourse extends IEntity {
 	public function Offline();
 
 	/**
-	 * @return ICourseRelatedProject[]
+	 * @return Project[]
 	 */
 	public function getRelatedProjects();
 
 	/**
-	 * @param ICourseRelatedProject $new_project
+	 * @param Project $new_project
 	 * @return void
 	 */
-	public function addRelatedProject(ICourseRelatedProject $new_project);
+	public function addRelatedProject(Project $new_project);
 
 	/**
 	 * @return void

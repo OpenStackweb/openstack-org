@@ -153,7 +153,7 @@ class TrainingCourse
 
 
 	/**
-	 * @return ICourseRelatedProject[]
+	 * @return Project[]
 	 */
 	public function getRelatedProjects()
 	{
@@ -161,10 +161,10 @@ class TrainingCourse
 	}
 
 	/**
-	 * @param ICourseRelatedProject $new_project
+	 * @param Project $new_project
 	 * @return void
 	 */
-	public function addRelatedProject(ICourseRelatedProject $new_project)
+	public function addRelatedProject(Project $new_project)
 	{
 		AssociationFactory::getInstance()->getMany2ManyAssociation($this,'Projects')->add($new_project);
 	}
