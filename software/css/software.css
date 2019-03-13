@@ -1272,60 +1272,6 @@ a.projects-stats-tip i {
 .project-details-other .right {
   border-left: 1px solid #eee; }
 
-.project-timeline ul {
-  padding: 0;
-  margin: 20px 0 0 0; }
-
-.project-timeline ul li {
-  line-height: 1;
-  margin-left: 24px;
-  position: relative;
-  border-left: 3px solid #D4DCE5;
-  padding: 15px 0 15px 35px;
-  z-index: 500; }
-
-.project-timeline ul li a {
-  font-size: 0.9em;
-  color: #248EC7; }
-
-.project-timeline ul li:before {
-  position: absolute;
-  left: -14px;
-  top: 8px;
-  content: '';
-  border-radius: 100%;
-  border: 3px solid #248EC7;
-  height: 25px;
-  width: 25px;
-  background: #248EC7;
-  z-index: 600; }
-
-.project-timeline ul li.timeline-future a {
-  font-size: 0.9em;
-  color: #2A4E68; }
-
-.project-timeline ul li.timeline-future:before {
-  background: white;
-  border: 3px solid #D4DCE5; }
-
-.project-timeline ul li.timeline-current a {
-  font-size: 1.1em;
-  color: #248EC7; }
-
-.project-timeline ul li.timeline-current:before {
-  width: 35px;
-  height: 35px;
-  left: -19px;
-  top: 5px; }
-
-.project-timeline ul li.timeline-past {
-  font-size: 0.9em;
-  color: #2A4E68; }
-
-.project-timeline ul li.timeline-past:before {
-  background: #D4DCE5;
-  border: 3px solid #D4DCE5; }
-
 @media (max-width: 767px) {
   .project-details-other .right {
     border-left: 0; } }

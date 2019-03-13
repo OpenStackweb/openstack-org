@@ -59,7 +59,6 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                 echo sprintf('processing release %s ...', $release->Name).PHP_EOL;
                 $this->processApiVersionsPerRelease($release);
                 $this->processProjectPerRelease($release);
-                $this->getStackAnalytics($release);
             }
         });
         $delta = time() - $start;
@@ -366,7 +365,7 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
 
                             $comp->Name = (isset($component['title'])) ? $component['title'] : '';
                             $comp->CodeName = (isset($component['name'])) ? ucfirst($component['name']) : '';
-                            $comp->ProjectTeam = (isset($component['project-team'])) ? ucfirst($component['project-team']) : '';
+                            $comp->ProjectTeam = (isset($component['project-team'])) ? $component['project-team'] : '';
                             $comp->Description = (isset($component['desc'])) ? $component['desc'] : '';
                             $comp->Since = (isset($component['since'])) ? $component['since'] : '';
                             $comp->CategoryID = $subcat2->ID;

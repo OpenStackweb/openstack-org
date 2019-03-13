@@ -203,14 +203,6 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-12 project-details-chart-section">
-                <h4 data-toggle="tooltip" title="http://stackalytics.com/api/1.0/stats/timeline">Contributions to OpenStack-Charms</h4>
-                <div style="width: 100%; height: 120px; margin-top: 15px; position: relative;" id="timeline">
-                    TIMELINE
-                </div>
-            </div>
-        </div>
         <div class="row project-details-ptl" data-toggle="tooltip" title="projects.yaml -> ptl">
             <div class="col-sm-12">
                 <h4>PTL for Latest Release</h4>

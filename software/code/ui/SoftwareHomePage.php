@@ -182,8 +182,6 @@ class SoftwareHomePage_Controller extends Page_Controller
 
         JQPlotDependencies::renderRequirements();
 
-        Requirements::javascript('software/js/openstack-component-details.js');
-
         $release_id   = Convert::raw2sql($request->param('RELEASE_ID'));
         $component_id = Convert::raw2sql($request->param('ID'));
 
@@ -233,13 +231,6 @@ class SoftwareHomePage_Controller extends Page_Controller
                     if($i === self::MaxContributionsEntries) break;
                 }
             }
-        }
-
-        $json = $component->ContributionsJson;
-
-        if(!empty($json))
-        {
-            Requirements::customScript(" timeline_data = {$json};  renderTimeline();");
         }
 
         $has_maturity_indicators = ($component->Adoption > 75)

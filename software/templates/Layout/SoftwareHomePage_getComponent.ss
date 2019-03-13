@@ -64,19 +64,6 @@
                     </div>
                 <% end_if %>
 
-                <% if $Component.SupportTeamsLinks().Count %>
-                    <hr style="margin: 40px 0;">
-                    <h4><%t Software.SUPPORTING_TEAMS 'Suporting Teams' %></h4>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <% loop $Component.SupportTeamsLinks() %>
-                                <a class="component-link" href="{$URL}">{$Label}</a>
-                                <% if not $Last %><span style="margin-right:10px">|</span><% end_if %>
-                            <% end_loop %>
-                        </div>
-                    </div>
-                <% end_if %>
-
                 <% if $Component.Dependencies().Count %>
                     <hr style="margin: 40px 0;">
                     <h4><%t Software.DEPENDS_ON 'Depends on' %></h4>
@@ -246,14 +233,25 @@
                 <% end_if %>
             </div>
         </div>
-        <% if $Component.ContributionsJson %>
         <div class="row">
-            <div class="col-sm-12 project-details-chart-section">
-                <h4><%t Software.CONTRIBUTIONS_TO 'Contributions to {codename}' codename=$Component.CodeName %></h4>
-                <div style="width: 100%; height: 120px; margin-top: 15px; position: relative;" id="timeline">
+            <div class="col-sm-12">
+                <h4><%t Software.DEPLOYMENT_TEAM 'Deployment Team' %></h4>
+                <div>
+                    <a href="https://governance.openstack.org/tc/reference/projects/{$Component.ProjectTeam.LowerCase}.html">{$Component.ProjectTeam}</a>
                 </div>
             </div>
         </div>
+        <% if $Component.SupportTeamsLinks().Count %>
+            <hr style="margin: 40px 0;">
+            <h4><%t Software.SUPPORTING_TEAMS 'Suporting Teams' %></h4>
+            <div class="row">
+                <div class="col-sm-12">
+                    <% loop $Component.SupportTeamsLinks() %>
+                        <a class="component-link" href="{$URL}">{$Label}</a>
+                        <% if not $Last %><span style="margin-right:10px">|</span><% end_if %>
+                    <% end_loop %>
+                </div>
+            </div>
         <% end_if %>
         <% if $Component.LatestReleasePTL %>
         <div class="row project-details-ptl">
@@ -296,39 +294,10 @@
             </div>
         </div>
         <% end_if %>
-        <div class="row project-details-other">
-            <div class="col-sm-6">
-                <% if $MostActiveCompanyContributors %>
-                <h4><%t Software.MOST_ACTIVE_CONTRIBUTORS 'Most Active Contributors by Company' %></h4>
-                <ul>
-                    <% loop $MostActiveCompanyContributors %>
-                        <li>$Name</li>
-                    <% end_loop %>
-                </ul>
-                <% end_if %>
-                <% if $Component.RelatedContent %>
-                <h4><%t Software.RELATED_CONTENT 'Related Content' %></h4>
-                <ul>
-                    <% loop $Component.RelatedContent %>
-                    <li><a href="{$Url}" target="_blank">{$Title}</a></li>
-                    <% end_loop %>
-                </ul>
-                <% end_if %>
-            </div>
-            <div class="col-sm-6 right">
-                <% if $MostActiveIndividualContributors %>
-                    <h4>Most Active Individual Contributors</h4>
-                    <ul>
-                        <% loop $MostActiveIndividualContributors %>
-                            <li>$Name</li>
-                        <% end_loop %>
-                    </ul>
-                <% end_if %>
-            </div>
-        </div>
+
         <div class="row">
             <div class="col-sm-12 project-details-footnotes">
-                <a href="https://git.openstack.org/cgit/openstack/openstack-map" target="_blank">Propose changes to this page</a> | <a target="_blank" href="http://stackalytics.com"><%t Software.CHARTS_ATTR 'Statistics and charts provided by stackalytics.com' %></a>
+                <a href="https://git.openstack.org/cgit/openstack/openstack-map" target="_blank">Propose changes to this page</a>
             </div>
         </div>
         <!-- Stats 'what does this mean?' Modal -->
