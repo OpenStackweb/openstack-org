@@ -385,12 +385,13 @@ jQuery(document).ready(function($) {
         }
     });
 
-    $('.edit-job').click(function(event){
+    $(document).on('click', '.edit-job', function(event) {
         event.preventDefault();
         event.stopPropagation();
         var id  = $(this).attr('data-request-id');
         var row = $(this).parent().parent();
         var url = 'api/v1/job-registration-requests/'+id;
+
         $.ajax({
             type: 'GET',
             url: url,
@@ -413,6 +414,7 @@ jQuery(document).ready(function($) {
                 $('#'+form_id+'_expiration_date',form).val(data.expiration_date);
                 $('#'+form_id+'_location_type',form).val(data.location_type);
                 $('#'+form_id+'_expiration_date',form).prop('disabled',true);
+
                 form.find('textarea').each(function() {
                     var text_area = $(this);
                     var text_editor = tinyMCE.get(text_area.attr('id'));
@@ -432,7 +434,10 @@ jQuery(document).ready(function($) {
                 else
                     $('#locations_table',form).hide();
 
+
                 edit_dialog.data('id',id).data('row',row).dialog( "open");
+
+
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 ajaxError(jqXHR, textStatus, errorThrown);

@@ -49,6 +49,17 @@ jQuery(document).ready(function($) {
     if(form.length > 0){
         var form_id = form.attr('id');
 
+        tinymce.init({
+            selector: "textarea",
+            width:      '100%',
+            height:     270,
+            theme_advanced_buttons1:    "formatselect, fontselect, fontsizeselect, bold, italic, underline, alignleft, aligncenter, alignright, alignjustify, bullist, numlist, outdent, indent, blockquote, undo, redo, link, spellchecker",
+            theme_advanced_buttons2: "",
+            theme_advanced_buttons2: "",
+            statusbar:  false,
+            menubar:    false,
+        });
+
         jQuery.validator.addMethod("locations_min_count", function (value, element, arg) {
             var location_type = $('#'+form_id+'_location_type',form).val();
             if(location_type!=='Various') return true;
