@@ -110,7 +110,6 @@ final class NewsRequestPage_Controller extends Page_Controller {
             $messages = $ex1->getMessages();
             $msg = $messages[0];
             $form->addErrorMessage('Headline',$msg['message'] ,'bad');
-            SS_Log::log($msg['message'] ,SS_Log::ERR);
             // Load errors into session and post back
             Session::set("FormInfo.Form_NewsRequestForm.data", $data);
             return $this->redirectBack();
