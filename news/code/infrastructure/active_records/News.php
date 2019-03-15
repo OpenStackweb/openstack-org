@@ -43,6 +43,7 @@ final class News extends DataObject implements INews
         'Archived' => 'Boolean',
         'Restored' => 'Boolean',
         'Deleted' => 'Boolean',
+        'EmailSent' => 'Boolean(0)',
     );
 
     private static $defaults = array
@@ -75,6 +76,32 @@ final class News extends DataObject implements INews
     public function getIdentifier()
     {
         return (int)$this->getField('ID');
+    }
+
+    public function onBeforeWrite() {
+        parent::onBeforeWrite();
+
+        if (!$this->EmailSent && $this->Approved) {
+            $this->EmailSent = 1;
+
+            $submitter = $this->getSubmitter();
+
+            $email = EmailFactory::getInstance()->buildEmail(
+                NEWS_SUBMISSION_EMAIL_FROM,
+                $submitter->Email,
+                "Your news article was approved!"
+            );
+
+            $articleLink = Director::absoluteBaseURL().'news/view/'.$this->getIdentifier().'/'.$this->getHeadlineForUrl();
+
+            $email->setTemplate('NewsApprovedEmail');
+            $email->populateTemplate(array(
+                'SubmitterName'  => $submitter->getFullName(),
+                'ArticleLink'    => $articleLink,
+            ));
+
+            $email->send();
+        }
     }
 
     /**

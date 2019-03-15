@@ -188,7 +188,7 @@ final class NewsRequestForm extends HoneyPotForm {
 
 		// Create action
 		$actions = new FieldList();
-	    $actions->push(new FormAction('saveNewsArticle', 'Save'));
+	    $actions->push(new FormAction('saveNewsArticle', 'Submit for Approval'));
 
 	    $this->addExtraClass('news-registration-form');
 		parent::__construct($controller, $name, $fields, $actions, $validator = null);

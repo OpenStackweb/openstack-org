@@ -38,4 +38,8 @@ final class Submitter extends DataObject implements ISubmitter {
 	{
 		return (int)$this->getField('ID');
 	}
+
+	public function getFullName() {
+	    return $this->FirstName.' '.$this->LastName;
+    }
 }

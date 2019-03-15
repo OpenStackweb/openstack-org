@@ -17,7 +17,9 @@
 
 <% if Saved %>
     <div class="siteMessage" id="SuccessMessage" style="padding: 10px;">
-        <p style="float:left;">Your news article has been saved!</p>
+        <p style="float:left;">
+            Thank you for your submission. Our editorial team will review your submission and, if appropriate, publish to our News page. If you have questions or concerns, please email marketing@openstack.org
+        </p>
         <input type="button" title="Add New Article" value="Add New Article" data-url="/news-add/" class="action link_button">
         Or
         <% if CurrentMember %>
