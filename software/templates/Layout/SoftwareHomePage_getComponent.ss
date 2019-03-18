@@ -1,5 +1,5 @@
 <% include SoftwareHomePage_MainNavMenu Active=$ParentCategory.ID %>
-<div class="software-main-wrapper">
+<div class="software-main-wrapper project-details-wrapper">
     <div class="container">
         <div class="outer-project-back">
             <a href="$Top.Link(project-navigator)/{$ParentCategory.Slug}"><i class="fa fa-chevron-left"></i> <%t Software.BACK_TO_NAVIGATOR 'Back to Project Navigator' %></a>
@@ -23,6 +23,12 @@
                         </a>
                     </p>
                     <% end_if %>
+                    <p>
+                        <a href="{$Component.getCodeLink()}" target="_blank">
+                            <%-- do not separate icon from label --%>
+                            <i class="fa fa-code" aria-hidden="true" style="margin-right: 8px"></i><span>Latest code source release</span>
+                        </a>
+                    </p>
                     <% if $Component.DownloadLink().Exists() %>
                         <p>
                             <a href="{$Component.DownloadLink().URL}" target="_blank">
@@ -70,8 +76,10 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <% loop $Component.Dependencies() %>
-                                <a class="component-link" href="{$getLink}">{$CodeName}</a>
-                                <% if not $Last %><span style="margin-right:10px">|</span><% end_if %>
+                                <a class="btn btn-default team-button" href="{$getLink}">
+                                    <img src="/software/images/mascots/{$MascotRef}.png" width="50px" /><br/>
+                                    {$CodeName}
+                                </a>
                             <% end_loop %>
                         </div>
                     </div>
@@ -83,8 +91,10 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <% loop $Component.RelatedComponents() %>
-                                <a class="component-link" href="{$getLink}">{$CodeName}</a>
-                                <% if not $Last %><span style="margin-right:10px">|</span><% end_if %>
+                                <a class="btn btn-default team-button" href="{$getLink}">
+                                    <img src="/software/images/mascots/{$MascotRef}.png" width="50px" /><br/>
+                                    {$CodeName}
+                                </a>
                             <% end_loop %>
                         </div>
                     </div>
@@ -233,60 +243,34 @@
                 <% end_if %>
             </div>
         </div>
-        <div class="row">
+
+        <div class="row box">
             <div class="col-sm-12">
-                <h4><%t Software.DEPLOYMENT_TEAM 'Deployment Team' %></h4>
-                <div>
-                    <a href="https://governance.openstack.org/tc/reference/projects/{$Component.ProjectTeam.LowerCase}.html">{$Component.ProjectTeam}</a>
-                </div>
+                <h4><%t Software.DEVELOPMENT_TEAM 'Development Team' %></h4>
+
+                <a class="btn btn-default team-button" href="{$Component.getProjectLink()}">
+                    <img src="/software/images/mascots/{$Component.MascotRef}.png" width="50px" /><br/>
+                    {$Component.CodeName}
+                </a>
             </div>
         </div>
-        <% if $Component.SupportTeamsLinks().Count %>
-            <hr style="margin: 40px 0;">
-            <h4><%t Software.SUPPORTING_TEAMS 'Suporting Teams' %></h4>
-            <div class="row">
+
+        <% if $Component.SupportTeams().Count %>
+            <h4><%t Software.SUPPORTING_TEAMS 'Supporting Teams' %></h4>
+            <div class="row box">
                 <div class="col-sm-12">
-                    <% loop $Component.SupportTeamsLinks() %>
-                        <a class="component-link" href="{$URL}">{$Label}</a>
-                        <% if not $Last %><span style="margin-right:10px">|</span><% end_if %>
+                    <% loop $Component.SupportTeams() %>
+                        <a class="btn btn-default team-button" href="{$getProjectLink()}">
+                            <img src="/software/images/mascots/{$MascotRef}.png" width="50px" /><br/>
+                            {$CodeName}
+                        </a>
                     <% end_loop %>
                 </div>
             </div>
         <% end_if %>
-        <% if $Component.LatestReleasePTL %>
-        <div class="row project-details-ptl">
-            <div class="col-sm-12">
-                <h4><%t Software.PTL_FOR_RELEASE 'PTL for Latest Release' %></h4>
-            </div>
-            <div class="row">
-                <div class="ptl-left">
-                    <img alt="" src="{$Component.LatestReleasePTL.ProfilePhotoUrl}" class="ptl-bio-pic">
-                    <div class="ptl-details">
-                        <h4>$Component.LatestReleasePTL.FullName</h4>
-                        <p>
-                            $Component.LatestReleasePTL.CurrentPosition
-                        </p>
-                        <p>
-                            <a target="_blank" href="community/members/profile/{$Component.LatestReleasePTL.ID}">
-                                <img alt="OpenStack Profile" src="themes/openstack/images/foundation-staff/icon_openstack.png"></a>
-                            <% if $Component.LatestReleasePTL.TwitterName %>
-                            <a target="_blank" href="https://twitter.com/{$Component.LatestReleasePTL.TwitterName}">
-                                <img alt="Twitter Profile" src="themes/openstack/images/foundation-staff/icon_twitter.png">
-                            </a>
-                            <% end_if %>
-                        </p>
-                    </div>
-                </div>
-                <div class="project-details-ptl-bio">
-                    <p>
-                        $Component.LatestReleasePTL.Bio
-                    </p>
-                </div>
-            </div>
-        </div>
-        <% end_if %>
+
         <% if $Component.YouTubeID %>
-        <div class="row project-details-ptl">
+        <div class="row project-details-ptl box">
             <div class="col-sm-12">
                 <h4>$Component.VideoTitle</h4>
                 <p>$Component.VideoDescription</p>
@@ -300,6 +284,7 @@
                 <a href="https://git.openstack.org/cgit/openstack/openstack-map" target="_blank">Propose changes to this page</a>
             </div>
         </div>
+
         <!-- Stats 'what does this mean?' Modal -->
         <div id="statsInfoModal" class="modal fade">
             <div class="modal-dialog">

@@ -87,4 +87,12 @@ class Mascot extends DataObject implements IMascot
             return null;
     }
 
+    public function getImageLink()
+    {
+        if ($this->getCodeName())
+            return self::$mascots_dir . $this->getCodeName();
+        else
+            return null;
+    }
+
 }

@@ -425,19 +425,14 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                             }
 
                             // SUPPORT TEAMS
-                            $comp->SupportTeamsLinks()->removeAll();
+                            $comp->SupportTeams()->removeAll();
                             if (isset($component['support-teams'])) {
                                 foreach ($component['support-teams'] as $label) {
-                                    $linkObj = OpenStackComponentLink::get()->filter(['Label' => $label, 'ComponentID' => $comp->ID])->First();
 
-                                    if (!$linkObj) {
-                                        $linkObj = new OpenStackComponentLink();
-                                        $linkObj->Label = $label;
-                                        $linkObj->URL = 'https://governance.openstack.org/tc/reference/projects/'.$label.'.html';
-                                        $linkObj->write();
-                                    }
+                                    $supportTeam = OpenStackComponent::get()->filter('Slug', $label)->First();
+                                    if(!$supportTeam) continue;
 
-                                    $comp->SupportTeamsLinks()->add($linkObj);
+                                    $comp->SupportTeams()->add($supportTeam);
                                 }
                             }
 

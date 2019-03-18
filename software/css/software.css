@@ -1277,9 +1277,10 @@ a.projects-stats-tip i {
     border-left: 0; } }
 
 .project-details-footnotes {
-  border-top: 1px solid #eee;
+  /*margin-top: 40px;*/
   padding-top: 30px;
-  padding-bottom: 30px; }
+  /*padding-bottom: 30px; */
+}
 
 .projects-overview {
   margin-top: 20px;
@@ -1650,4 +1651,24 @@ a.software-link-button {
   left: 1px;
  }
 
+.team-button {
+  margin: 20px 5px 0px 5px;
+  height: 90px;
+  min-width: 125px;
+  color: #333 !important;
+  text-decoration: none !important;
+}
 
+.team-button img {
+  margin-bottom: 10px;
+}
+
+.project-details-wrapper h4 {
+  color: #2A4E68;
+}
+
+.project-details-wrapper .box {
+  border-bottom: 1px solid #eee;
+  margin-bottom: 20px;
+  padding: 25px 0px;
+}

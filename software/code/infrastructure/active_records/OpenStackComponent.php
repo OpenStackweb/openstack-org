@@ -53,15 +53,15 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
         'Versions'          => 'OpenStackApiVersion',
         'RelatedContent'    => 'OpenStackComponentRelatedContent',
         'Caveats'           => 'OpenStackComponentReleaseCaveat',
-        'Links'             => 'OpenStackComponentLink.Links',
-        'SupportTeamsLinks' => 'OpenStackComponentLink.Teams'
+        'Links'             => 'OpenStackComponentLink.Links'
     );
 
     static $many_many = array
     (
-        'Tags'  => 'OpenStackComponentTag',
-        'Dependencies' => 'OpenStackComponent',
-        'RelatedComponents' => 'OpenStackComponent'
+        'Tags'              => 'OpenStackComponentTag',
+        'Dependencies'      => 'OpenStackComponent',
+        'RelatedComponents' => 'OpenStackComponent',
+        'SupportTeams'      => 'OpenStackComponent'
     );
 
     private static $many_many_extraFields = array
@@ -145,7 +145,8 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
 
     public function getMascotRef()
     {
-        return str_replace(' ', '-', strtolower($this->getCodeName()));
+        $mascotName = $this->Mascot()->Exists() ? strtolower($this->Mascot()->CodeName) : 'barbican';
+        return str_replace(' ', '-', $mascotName);
     }
 
     public function setCodeName($codename)
@@ -334,5 +335,16 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
         $software_page = SoftwareHomePage::get()->first();
 
         return $software_page->Link().'releases/'.strtolower($default_release->Name).'/components/'.$this->Slug;
+    }
+
+    public function getCodeLink() {
+        $release = strtolower(OpenStackRelease::getDefaultRelease()->Name);
+        return 'https://releases.openstack.org/teams/'.$this->ProjectTeam.'.html#team-'.$release.'-'.$this->ProjectTeam;
+    }
+
+    public function getProjectLink() {
+        $slug = ($this->ProjectTeam) ? $this->generateSlug($this->ProjectTeam) : $this->Slug;
+
+        return 'https://governance.openstack.org/tc/reference/projects/'.$slug.'.html';
     }
 }
