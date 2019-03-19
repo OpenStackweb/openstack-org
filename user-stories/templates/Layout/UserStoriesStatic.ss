@@ -16,7 +16,7 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
-      <div id="user-stories-video-trigger" class="user-story-main-bkgd" style="background-image: url('/themes/openstack/images/user-stories/slider-images/video.png')" alt="image02" />
+      <div id="user-stories-video-trigger" class="user-story-main-bkgd" style="background-image: url('{$Top.CloudUrl("images/user-stories/slider-images/video.png")}')" alt="image02" />
         <span class="text-wrapper">
           <h3>From automotive to healthcare and finance to e-commerce, <strong>OpenStack is running critical workloads around the world</strong>.</h3>
           <span class="user-story-main-btn">Watch The Video <i class="fa fa-play-circle"></i></span>
@@ -38,7 +38,9 @@
     <div class="row">
 
       <div class="col-lg-4 col-md-6"> <!--Start User Story tile-->
-        <a href="https://www.openstack.org/summit/tokyo-2015/videos/presentation/unveiling-cern-cloud-architecture" class="user-story-square" style="background-image: url('/themes/openstack/images/user-stories/cern.jpg')">
+        <a href="https://www.openstack.org/summit/tokyo-2015/videos/presentation/unveiling-cern-cloud-architecture"
+           class="user-story-square"
+           style="background-image: url('{$Top.CloudUrl("images/user-stories/cern.jpg")}')">
           <span class="company">
             CERN
             <span class="stat">
@@ -55,7 +57,8 @@
       </div> <!--End User Story tile-->
 
       <div class="col-lg-4 col-md-6"> <!--Start User Story tile-->
-        <a href="https://www.youtube.com/watch?v=HL_pzkDnal4" class="user-story-square" style="background-image: url('/themes/openstack/images/user-stories/vw.jpg')">
+        <a href="https://www.youtube.com/watch?v=HL_pzkDnal4" class="user-story-square"
+           style="background-image: url('{$Top.CloudUrl("images/user-stories/vw.jpg")}')">
           <span class="company">
             Volkswagen Group
             <span class="stat">The largest car manufacturer uses OpenStack and Cloud Foundry for big data and website delivery</span>
@@ -70,7 +73,8 @@
       </div> <!--End User Story tile-->
 
       <div class="col-lg-4 col-md-6"> <!--Start User Story tile-->
-        <a href="http://superuser.openstack.org/articles/leading-india-e-commerce-site-launches-openstack-hybrid-cloud/" class="user-story-square" style="background-image: url('/themes/openstack/images/user-stories/snapdeal.jpg')">
+        <a href="http://superuser.openstack.org/articles/leading-india-e-commerce-site-launches-openstack-hybrid-cloud/"
+           class="user-story-square" style="background-image: url('{$Top.CloudUrl("images/user-stories/snapdeal.jpg")}')">
           <span class="company">
             Snapdeal
             <span class="stat">India's largest online marketplace has 100,000+ cores across 3 data center regions</span>
@@ -85,7 +89,8 @@
       </div> <!--End User Story tile-->
 
       <div class="col-lg-4 col-md-6"> <!--Start User Story tile-->
-        <a href="https://01.org/sites/default/files/performance_analysis_and_tuning_in_china_mobiles_openstack_production_cloud_2.pdf" class="user-story-square" style="background-image: url('/themes/openstack/images/user-stories/china-mobile.jpg')">
+        <a href="https://01.org/sites/default/files/performance_analysis_and_tuning_in_china_mobiles_openstack_production_cloud_2.pdf"
+           class="user-story-square" style="background-image: url('{$Top.CloudUrl("images/user-stories/china-mobile.jpg")}')">
           <span class="company">
             China Mobile
             <span class="stat">
@@ -102,7 +107,8 @@
       </div> <!--End User Story tile-->
 
       <div class="col-lg-4 col-md-6"> <!--Start User Story tile-->
-        <a href="http://superuser.openstack.org/articles/how-state-grid-corporation-of-china-cuts-it-costs-eludes-vendor-lock-in-with-openstack/" class="user-story-square" style="background-image: url('/themes/openstack/images/user-stories/state-grid.jpg')">
+        <a href="http://superuser.openstack.org/articles/how-state-grid-corporation-of-china-cuts-it-costs-eludes-vendor-lock-in-with-openstack/"
+           class="user-story-square" style="background-image: url('{$Top.CloudUrl("images/user-stories/state-grid.jpg")}')">
           <span class="company">
             State Grid Corporation of China (SGCC)
             <span class="stat">
@@ -119,7 +125,8 @@
       </div> <!--End User Story tile-->
 
       <div class="col-lg-4 col-md-6"> <!--Start User Story tile-->
-        <a href="http://superuser.openstack.org/articles/how-jfe-steel-corporation-forged-an-integrated-data-center-with-help-from-ibm-japan-and-openstack/" class="user-story-square" style="background-image: url('/themes/openstack/images/user-stories/jfe.jpg')">
+        <a href="http://superuser.openstack.org/articles/how-jfe-steel-corporation-forged-an-integrated-data-center-with-help-from-ibm-japan-and-openstack/"
+           class="user-story-square" style="background-image: url('{$Top.CloudUrl("images/user-stories/jfe.jpg")}')">
           <span class="company">
             JFE Steel
             <span class="stat">The ninth largest steel producer expects 28 percent reduction in overall IT costs with OpenStack</span>
@@ -134,7 +141,8 @@
       </div> <!--End User Story tile-->
 
       <div class="col-lg-4 col-md-6"> <!--Start User Story tile-->
-        <a href="{$Top.CloudUrl('assets/containers/LivePerson.pdf')}" class="user-story-square" style="background-image: url('/themes/openstack/images/user-stories/liveperson.jpg')">
+        <a href="{$Top.CloudUrl('assets/containers/LivePerson.pdf')}" class="user-story-square"
+           style="background-image: url('{$Top.CloudUrl("images/user-stories/liveperson.jpg")}')">
           <span class="company">
             LivePerson
             <span class="stat">The most popular website chat service is using OpenStack as a path to production for Kubernetes</span>
@@ -149,7 +157,9 @@
       </div> <!--End User Story tile-->
 
       <div class="col-lg-4 col-md-6"> <!--Start User Story tile-->
-        <a href="http://www.openstack.org/videos/video/at-and-ts-openstack-journey-driving-enterprise-workloads-using-openstack-as-the-unified-control-plane" class="user-story-square" style="background-image: url('/themes/openstack/images/user-stories/att.jpg')">
+        <a href="http://www.openstack.org/videos/video/at-and-ts-openstack-journey-driving-enterprise-workloads-using-openstack-as-the-unified-control-plane"
+           class="user-story-square"
+           style="background-image: url('{$Top.CloudUrl("images/user-stories/att.jpg")}')">
           <span class="company">
             AT&T
             <span class="stat">The largest integrated carrier has deployed OpenStack in more than 74 data centers globally</span>
@@ -164,7 +174,9 @@
       </div> <!--End User Story tile-->
 
       <div class="col-lg-4 col-md-6"> <!--Start User Story tile-->
-        <a href="http://superuser.openstack.org/articles/inside-walmartlabs-and-its-openstack-core/" class="user-story-square" style="background-image: url('/themes/openstack/images/user-stories/walmart.jpg')">
+        <a href="http://superuser.openstack.org/articles/inside-walmartlabs-and-its-openstack-core/"
+           class="user-story-square"
+           style="background-image: url('{$Top.CloudUrl("images/user-stories/walmart.jpg")}')">
           <span class="company">
             Walmart
             <span class="stat">
@@ -181,7 +193,9 @@
       </div> <!--End User Story tile-->
 
       <div class="col-lg-4 col-md-6"> <!--Start User Story tile-->
-        <a href="http://superuser.openstack.org/articles/hate-the-taxes-not-the-online-platform-hmrc-s-journey-with-openstack" class="user-story-square" style="background-image: url('/themes/openstack/images/user-stories/her-majesty.jpg')">
+        <a href="http://superuser.openstack.org/articles/hate-the-taxes-not-the-online-platform-hmrc-s-journey-with-openstack"
+           class="user-story-square"
+           style="background-image: url('{$Top.CloudUrl("images/user-stories/her-majesty.jpg")}')">
           <span class="company">
             Her Majesty's Revenue and Customs
             <span class="stat">
@@ -198,7 +212,9 @@
       </div> <!--End User Story tile-->
 
       <div class="col-lg-4 col-md-6"> <!--Start User Story tile-->
-        <a href="https://www.youtube.com/watch?v=pAXCPtxiOrE" class="user-story-square" style="background-image: url('/themes/openstack/images/user-stories/comcast.jpg')">
+        <a href="https://www.youtube.com/watch?v=pAXCPtxiOrE"
+           class="user-story-square"
+           style="background-image: url('{$Top.CloudUrl("images/user-stories/comcast.jpg")}')">
           <span class="company">
             Comcast
             <span class="stat">
@@ -215,7 +231,9 @@
       </div> <!--End User Story tile-->
 
       <div class="col-lg-4 col-md-6"> <!--Start User Story tile-->
-        <a href="https://www.openstack.org/summit/barcelona-2016/summit-schedule/events/15884/postal-savings-bank-of-china-with-the-most-of-outlets-embraces-mobile-internet-by-using-openstack" class="user-story-square" style="background-image: url('/themes/openstack/images/user-stories/bank-china.jpg')">
+        <a href="https://www.openstack.org/summit/barcelona-2016/summit-schedule/events/15884/postal-savings-bank-of-china-with-the-most-of-outlets-embraces-mobile-internet-by-using-openstack"
+           class="user-story-square"
+           style="background-image: url('{$Top.CloudUrl("images/user-stories/bank-china.jpg")}')">
           <span class="company">
             Postal Savings Bank of China
             <span class="stat">
@@ -232,7 +250,9 @@
       </div> <!--End User Story tile-->
 
       <div class="col-lg-4 col-md-6"> <!--Start User Story tile-->
-        <a href="https://betsandbits.files.wordpress.com/2016/10/openstackreferencearchitecturewhitepaper.pdf" class="user-story-square" style="background-image: url('/themes/openstack/images/user-stories/betfair.jpg')">
+        <a href="https://betsandbits.files.wordpress.com/2016/10/openstackreferencearchitecturewhitepaper.pdf"
+           class="user-story-square"
+           style="background-image: url('{$Top.CloudUrl("images/user-stories/betfair.jpg")}')">
           <span class="company">
             Betfair
             <span class="stat">
@@ -249,7 +269,9 @@
       </div> <!--End User Story tile-->
 
       <div class="col-lg-4 col-md-6"> <!--Start User Story tile-->
-        <a href="http://eod.gartner.com/session-video/CATUS7/SPS5" class="user-story-square" style="background-image: url('/themes/openstack/images/user-stories/fico.jpg')">
+        <a href="http://eod.gartner.com/session-video/CATUS7/SPS5"
+           class="user-story-square"
+           style="background-image: url('{$Top.CloudUrl("images/user-stories/fico.jpg")}')">
           <span class="company">
             FICO
             <span class="stat">
@@ -266,7 +288,9 @@
       </div> <!--End User Story tile-->
 
       <div class="col-lg-4 col-md-6"> <!--Start User Story tile--> 
-        <a href="https://www.youtube.com/watch?v=zA6TxlJKjwU&list=PLAdAdMXKqNvYnFDKJBBaabPloKTPpAX5s&index=7" class="user-story-square" style="background-image: url('/themes/openstack/images/user-stories/bloomberg.png')">
+        <a href="https://www.youtube.com/watch?v=zA6TxlJKjwU&list=PLAdAdMXKqNvYnFDKJBBaabPloKTPpAX5s&index=7"
+           class="user-story-square"
+           style="background-image: url('{$Top.CloudUrl("images/user-stories/bloomberg.png")}')">
           <span class="company">
             Bloomberg
             <span class="stat">
@@ -283,7 +307,9 @@
       </div> <!--End User Story tile-->
 
       <div class="col-lg-4 col-md-6"> <!--Start User Story tile-->
-        <a href="https://www.openstack.org/videos/video/the-eu-runs-on-openstack" class="user-story-square" style="background-image: url('/themes/openstack/images/user-stories/cloudsuite.jpg')">
+        <a href="https://www.openstack.org/videos/video/the-eu-runs-on-openstack"
+           class="user-story-square"
+           style="background-image: url('{$Top.CloudUrl("images/user-stories/cloudsuite.jpg")}')">
           <span class="company">
             Enter CloudSuite
             <span class="stat">

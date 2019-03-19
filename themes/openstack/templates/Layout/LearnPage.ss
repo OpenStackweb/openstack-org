@@ -58,7 +58,7 @@
                     <!-- Single Learn Element -->
                     <div class="col-sm-6">
                         <div class="learn-single">
-                        <img class="learn-superuser-icon" src="/themes/openstack/images/learn/superuser-icon.svg" onerror="this.onerror=null; this.src=/themes/openstack/images/learn/superuser-icon.svg" alt="OpenStack Superuser Magazine">
+                        <img class="learn-superuser-icon" src="{$Top.CloudUrl("images/learn/superuser-icon.svg")}" onerror="{$Top.CloudUrl("images/learn/superuser-icon.jpg")}" alt="OpenStack Superuser Magazine">
                             <h2>Superuser Magazine</h2>
                             <p>
                                 With topics ranging from how-tos, case studies, organizational culture and more, this publication will give you the tools needed to become a Superuser.

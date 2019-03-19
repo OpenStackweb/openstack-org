@@ -17,8 +17,6 @@
 		static $has_one = array(
 	     );
 
-        static $logos_dir = 'themes/openstack/images/openstack-logos/';
-	     
 		function getCMSFields() {
 			$fields = parent::getCMSFields();
 			

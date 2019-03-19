@@ -51,4 +51,8 @@ class RestrictedDownloadPage_Controller extends Page_Controller
 		return TRUE;
 	}
 
+	public function getGuidelinesLogoLinkUrl(){
+	    return CloudAssetTemplateHelpers::cloud_url("images/sizing-guides/".$this->GuidelinesLogoLink);
+    }
+
 }

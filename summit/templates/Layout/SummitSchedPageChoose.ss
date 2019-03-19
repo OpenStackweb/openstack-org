@@ -25,10 +25,15 @@
 		</div>
 		<div class="row center">
 			<div class="col-sm-6">
-				<a href="/summit/tokyo-2015/schedule/main-conference" class="schedule-btn"><img src="/themes/openstack/images/summit/tokyo/schedule/mainconference-lrg.png" alt="Main Conference Schedule"></a>
+				<a href="/summit/tokyo-2015/schedule/main-conference" class="schedule-btn">
+					<img src="{$Top.CloudUrl("images/summit/tokyo/schedule/mainconference-lrg.png")}"
+						 alt="Main Conference Schedule"></a>
 			</div>
 			<div class="col-sm-6">
-				<a href="/summit/tokyo-2015/schedule/design-summit" class="schedule-btn"><img src="/themes/openstack/images/summit/tokyo/schedule/designconference-lrg.png" alt="Design Summit Schedule"></a>
+				<a href="/summit/tokyo-2015/schedule/design-summit"
+				   class="schedule-btn">
+					<img src="{$Top.CloudUrl("images/summit/tokyo/schedule/designconference-lrg.png")}"
+						 alt="Design Summit Schedule"></a>
 			</div>
 		</div> 
 	</div>

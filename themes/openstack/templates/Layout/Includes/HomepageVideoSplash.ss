@@ -2,9 +2,9 @@
 
 
  	<% if VideoCurrentlyPlaying=Yes %>
- 		<a href="/home/Video/"><img src="/themes/openstack/images/homepage/openstack-summit-live-video.gif" width="720" height="425"/></a>
+ 		<a href="/home/Video/"><img src="{$Top.CloudUrl("images/homepage/openstack-summit-live-video.gif")}" width="720" height="425"/></a>
  	<% else %>
- 	 	<img src="/themes/openstack/images/homepage/openstack-summit-no-video.gif" width="720" height="425"/>
+ 	 	<img src="{$Top.CloudUrl("images/homepage/openstack-summit-no-video.gif")}" width="720" height="425"/>
  	 <% end_if %>
 
  </div>

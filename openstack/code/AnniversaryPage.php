@@ -56,6 +56,13 @@ class AnniversaryPage_Controller extends ContentController
         Requirements::css($this->ThemeDir() . '/css/anniversary/3/styles.css');
         Requirements::javascript(Director::protocol() . "platform.twitter.com/widgets.js");
         Requirements::javascript(Director::protocol() . "cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js");
+        $closeArrowImage = CloudAssetTemplateHelpers::cloud_url("images/anniversary/3/section_map-arrow-close.png");
+        $openArrowImage = CloudAssetTemplateHelpers::cloud_url("images/anniversary/3/section_map-arrow.png");
+        Requirements::customScript(<<<JS
+var closeArrowImage = '{$closeArrowImage}';
+var openArrowImage = '{$openArrowImage}';
+JS
+);
         Requirements::javascript($this->ThemeDir() . '/javascript/anniversary.3.js');
         //FB page properties
         $this->Title = 'The OpenStack Third Anniversary';
@@ -75,10 +82,29 @@ class AnniversaryPage_Controller extends ContentController
         Requirements::css($this->ThemeDir() . '/css/anniversary/4/styles.css');
         Requirements::javascript(Director::protocol() . "platform.twitter.com/widgets.js");
         Requirements::javascript(Director::protocol() . "cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js");
+
+        $closeArrowImage = CloudAssetTemplateHelpers::cloud_url("images/anniversary/4/section_map-arrow-close.png");
+        $openArrowImage = CloudAssetTemplateHelpers::cloud_url("images/anniversary/4/section_map-arrow.png");
+        $robot2Image = CloudAssetTemplateHelpers::cloud_url("images/anniversary/4/robot-2.png");
+        $robot2bImage = CloudAssetTemplateHelpers::cloud_url("images/anniversary/4/robot-2-b.png");
+        $robot24Image = CloudAssetTemplateHelpers::cloud_url("images/anniversary/4/robot-4.png");
+        $robot3Image = CloudAssetTemplateHelpers::cloud_url("images/anniversary/4/robot-3.png");
+
+        Requirements::customScript(<<<JS
+var closeArrowImage = '{$closeArrowImage}';
+var openArrowImage = '{$openArrowImage}';
+var robot2Image= '{$robot2Image};'
+var robot2bImage = '{$robot2bImage}';
+var robot24Image = '{$robot24Image}';
+var robot3Image = '{$robot3Image};'
+
+JS
+        );
+
         Requirements::javascript($this->ThemeDir() . '/javascript/anniversary.4.js');
         //FB page properties
         $this->Title = 'The OpenStack Fourth Anniversary';
-        $this->FBImage = Director::protocolAndHost() . '/themes/openstack/images/anniversary/4/bot-big.png';
+        $this->FBImage = Director::protocolAndHost() . CloudAssetTemplateHelpers::cloud_url('images/anniversary/4/bot-big.png');
         $this->FBImageW = '200';
         $this->FBImageH = '284';
         $this->FBDesc = 'Happy 4th OpenStack! Come celebrate at one of 51 global events.';
@@ -91,7 +117,7 @@ class AnniversaryPage_Controller extends ContentController
     public function fifth()
     {
         $this->Title = 'The OpenStack Fifth Anniversary';
-        $this->FBImage = 'http://www.openstack.org/themes/openstack/images/anniversary/5/img/bot-facebook.jpg';
+        $this->FBImage = CloudAssetTemplateHelpers::cloud_url('images/anniversary/5/img/bot-facebook.jpg');
         $this->FBImageW = '200';
         $this->FBImageH = '284';
         $this->FBDesc = 'Happy 5th OpenStack! Come celebrate at one of 40 global events.';
@@ -115,13 +141,13 @@ class AnniversaryPage_Controller extends ContentController
 
         return $this->getViewer('fifth')->process($this, array
         (
-            'ImgPath' => '/themes/openstack/images/anniversary/5/img',
+            'ImgPath' => CloudAssetTemplateHelpers::cloud_url('images/anniversary/5/img'),
             'BadgeImgUrl' => 'http://841038e5aa7ad2e38487-650bfe6158d7143a3437ef4c83572bc4.r48.cf1.rackcdn.com/5/openstack-5th-anniversary.png',
             'SlideDeckUrl' => '//www.dropbox.com/s/8bvbo2dzp9jd61o/OpenStack%205th%20Birthday%20slide%20deck.pptx?dl=0',
             'LocalEventUrl' => '//www.openstack.org/blog/2015/06/openstack-turns-5-its-time-to-celebrate-the-community/',
             'SummitUrl' => '//www.openstack.org/summit/tokyo-2015/',
             'FBSharerUrl' => 'http://www.openstack.org/birthday/fifth',
-            'FBSharerImg' => 'http://www.openstack.org/themes/openstack/images/anniversary/5/img/bot-facebook.jpg',
+            'FBSharerImg' => CloudAssetTemplateHelpers::cloud_url('images/anniversary/5/img/bot-facebook.jpg'),
         ));
 
     }

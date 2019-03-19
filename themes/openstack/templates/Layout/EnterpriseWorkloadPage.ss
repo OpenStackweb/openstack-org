@@ -66,7 +66,7 @@
                     </p>
                 </div>
                 <div class="col-sm-6">
-                    <img class="production-funnel" src="/themes/openstack/images/enterprise/digital-workflow/production-funnel.svg" onerror="/themes/openstack/images/enterprise/digital-workflow/production-funnel.jpg" alt="Digital FilmTree OpenStack workflow"/>
+                    <img class="production-funnel" src="{$Top.CloudUrl("images/enterprise/digital-workflow/production-funnel.svg")}" onerror="{$Top.CloudUrl("images/enterprise/digital-workflow/production-funnel.jpg")}" alt="Digital FilmTree OpenStack workflow"/>
                 </div>
             </div>
         </div>
@@ -213,8 +213,8 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="thumbnails" data-toggle="lightbox">
-                        <a href="/themes/openstack/images/enterprise/digital-workflow/federation-workflow.svg" class="thumbnail">
-                            <img src="/themes/openstack/images/enterprise/digital-workflow/federation-workflow.svg" onerror="/themes/openstack/images/enterprise/digital-workflow/federation-workflow.jpg" alt="Digital FilmTree OpenStack Federated Identity"/>
+                        <a href="{$Top.CloudUrl("images/enterprise/digital-workflow/federation-workflow.svg")}" class="thumbnail">
+                            <img src="{$Top.CloudUrl("images/enterprise/digital-workflow/federation-workflow.svg")}" onerror="{$Top.CloudUrl("images/enterprise/digital-workflow/federation-workflow.jpg")}" alt="Digital FilmTree OpenStack Federated Identity"/>
                         </a>
                     </div>
                 </div>

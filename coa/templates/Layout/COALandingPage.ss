@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-4 center">
-                <img src="/themes/openstack/images/coa/coa-badge.svg" class="coa-badge-top" alt="{$Top.BannerTitle}">
+                <img src="{$Top.CloudUrl("images/coa/coa-badge.svg")}" class="coa-badge-top" alt="{$Top.BannerTitle}">
             </div>
             <div class="col-sm-8">
                 <h1>$Top.BannerTitle</h1>
@@ -205,7 +205,7 @@
             </div>
             <div class="modal-body">
                 <div class="coa-badge-modal">
-                    <img src="/themes/openstack/images/coa/coa-badge.svg" alt="{$Top.BannerTitle}">
+                    <img src="{$Top.CloudUrl("images/coa/coa-badge.svg")}" alt="{$Top.BannerTitle}">
                 </div>
                 <p>
                     Select the operating system you would like to use to take the Certified <br>

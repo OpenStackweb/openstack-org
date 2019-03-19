@@ -217,9 +217,10 @@
                         </p>
                         <p>
                             <a target="_blank" href="community/members/profile">
-                                <img alt="OpenStack Profile" src="themes/openstack/images/foundation-staff/icon_openstack.png"></a>
+                                <img alt="OpenStack Profile"
+                                     src="{$Top.CloudUrl("images/foundation-staff/icon_openstack.png")}"></a>
                             <a target="_blank" href="https://twitter.com/">
-                                <img alt="Twitter Profile" src="themes/openstack/images/foundation-staff/icon_twitter.png">
+                                <img alt="Twitter Profile" src="{$Top.CloudUrl("images/foundation-staff/icon_twitter.png")}">
                             </a>
                         </p>
                     </div>

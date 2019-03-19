@@ -123,7 +123,7 @@
                 <div class="col-lg-4 col-sm-4">
                     <div class="row">
                         <div class="col-lg-12 story-img">
-                            <img class="img-responsive" src="/themes/openstack/images/landing-pages/auto/story-car-2x.png" alt="A Huge Need">
+                            <img class="img-responsive" src="{$Top.CloudUrl("images/landing-pages/auto/story-car-2x.png" alt="A Huge Need")}">
                         </div>
                         <div class="col-lg-10">
                             <h2>A Huge Need</h2>
@@ -136,7 +136,7 @@
                 <div class="col-lg-4 col-sm-4 ">
                     <div class="row">
                         <div class="col-lg-12 story-img">
-                            <img class="img-responsive" src="/themes/openstack/images/landing-pages/auto/story-appliance-2x.png" alt="A First Attempt">
+                            <img class="img-responsive" src="{$Top.CloudUrl("images/landing-pages/auto/story-appliance-2x.png" alt="A First Attempt")}">
                         </div>
                         <div class="col-lg-10">
                             <h2>A First Attempt</h2>
@@ -149,7 +149,7 @@
                 <div class="col-lg-4 col-sm-4 ">
                     <div class="row">
                         <div class="col-lg-12 story-img">
-                            <img class="img-responsive" src="/themes/openstack/images/landing-pages/auto/story-solution-2x.png" alt="The Solution">
+                            <img class="img-responsive" src="{$Top.CloudUrl("images/landing-pages/auto/story-solution-2x.png" alt="The Solution")}">
                         </div>
                         <div class="col-lg-10">
                             <h2>The Solution</h2>
@@ -208,7 +208,7 @@
                     </p>
                 </div>
                 <div class="col-lg-5 col-sm-5">
-                    <img class="img-responsive cost-savings-img" src="/themes/openstack/images/landing-pages/auto/cost-savings.svg" onerror="this.onerror=null; this.src=img/cost-savings.png" alt="OpenStack Cost Savings">
+                    <img class="img-responsive cost-savings-img" src="{$Top.CloudUrl("images/landing-pages/auto/cost-savings.svg" onerror="this.onerror=null; this.src=img/cost-savings.png" alt="OpenStack Cost Savings")}">
                 </div>
             </div>
             <!-- End POC Section -->
@@ -225,7 +225,7 @@
                     </p>
                 </div>
                 <div class="col-lg-5 col-sm-5 bake-off-img-wrapper">
-                    <img class="img-responsive bake-off-img" src="/themes/openstack/images/landing-pages/auto/bake-off.svg" onerror="this.onerror=null; this.src=img/bake-off.png" alt="OpenStack vs Legacy Appliance">
+                    <img class="img-responsive bake-off-img" src="{$Top.CloudUrl("images/landing-pages/auto/bake-off.svg" onerror="this.onerror=null; this.src=img/bake-off.png" alt="OpenStack vs Legacy Appliance")}">
                 </div>
             </div>
             <!-- End Bake Off Section -->
@@ -248,7 +248,7 @@
                     </p>
                 </div>
                 <div class="col-lg-5 col-sm-5">
-                    <img class="img-responsive phases-img" src="/themes/openstack/images/landing-pages/auto/three-phases.svg" onerror="this.onerror=null; this.src=img/three-phases.png" alt="OpenStack Deployment">
+                    <img class="img-responsive phases-img" src="{$Top.CloudUrl("images/landing-pages/auto/three-phases.svg" onerror="this.onerror=null; this.src=img/three-phases.png" alt="OpenStack Deployment")}">
                 </div>
             </div>
             <!-- End Final Deployment Section -->
@@ -270,8 +270,8 @@
                     <h4 class="above">The Resulting Platform</h4>
                     <h1>Car Cloud Turns Big Data Into Smart Insights</h1>
                     <p>
-                        <img class="platform img-responsive" src="/themes/openstack/images/landing-pages/auto/platform.svg" onerror="this.onerror=null; this.src=img/platform.png" alt="OpenStack Car Cloud Platform">
-                        <img class="platform-vertical img-responsive" src="/themes/openstack/images/landing-pages/auto/platform-vertical.svg" onerror="this.onerror=null; this.src=img/platform-vertical.png" alt="OpenStack Car Cloud Platform">
+                        <img class="platform img-responsive" src="{$Top.CloudUrl("images/landing-pages/auto/platform.svg" onerror="this.onerror=null; this.src=img/platform.png" alt="OpenStack Car Cloud Platform")}">
+                        <img class="platform-vertical img-responsive" src="{$Top.CloudUrl("images/landing-pages/auto/platform-vertical.svg" onerror="this.onerror=null; this.src=img/platform-vertical.png" alt="OpenStack Car Cloud Platform")}">
                     </p>
                 </div>
             </div>
@@ -294,7 +294,7 @@
                         <div class="row">
                             <div class="col-lg-3 col-sm-3">
                                 <a href="//www.openstack.org/software/openstack-compute/" class="component-icon">
-                                    <img src="/themes/openstack/images/landing-pages/auto/compute-icon.svg" onerror="this.onerror=null; this.src=img/compute-icon.png" alt="OpenStack Compute"/>
+                                    <img src="{$Top.CloudUrl("images/landing-pages/auto/compute-icon.svg" onerror="this.onerror=null; this.src=img/compute-icon.png" alt="OpenStack Compute")}"/>
                                 </a>
                             </div>
                             <div class="col-lg-9 col-sm-9">
@@ -312,7 +312,7 @@
                         <div class="row">
                             <div class="col-lg-3 col-sm-3">
                                 <a href="//www.openstack.org/software/openstack-storage/" class="component-icon">
-                                    <img src="/themes/openstack/images/landing-pages/auto/object-storage-icon.svg" onerror="this.onerror=null; this.src=img/object-storage-icon.png" alt="OpenStack Object Storage">
+                                    <img src="{$Top.CloudUrl("images/landing-pages/auto/object-storage-icon.svg" onerror="this.onerror=null; this.src=img/object-storage-icon.png" alt="OpenStack Object Storage")}">
                                 </a>
                             </div>
                             <div class="col-lg-9 col-sm-9">
@@ -332,7 +332,7 @@
                         <div class="row">
                             <div class="col-lg-3 col-sm-3">
                                 <a href="//www.openstack.org/software/openstack-shared-services/" class="component-icon">
-                                    <img src="/themes/openstack/images/landing-pages/auto/shared-services-icon.svg" onerror="this.onerror=null; this.src=img/shared-services-icon.png" alt="OpenStack Shared Services">
+                                    <img src="{$Top.CloudUrl("images/landing-pages/auto/shared-services-icon.svg" onerror="this.onerror=null; this.src=img/shared-services-icon.png" alt="OpenStack Shared Services")}">
                                 </a>
                             </div>
                             <div class="col-lg-9 col-sm-9">
@@ -350,7 +350,7 @@
                         <div class="row">
                             <div class="col-lg-3 col-sm-3">
                                 <a href="//www.openstack.org/software/openstack-storage/" class="component-icon">
-                                    <img src="/themes/openstack/images/landing-pages/auto/block-storage-icon.svg" onerror="this.onerror=null; this.src=img/block-storage-icon.png" alt="OpenStack Block Storage">
+                                    <img src="{$Top.CloudUrl("images/landing-pages/auto/block-storage-icon.svg" onerror="this.onerror=null; this.src=img/block-storage-icon.png" alt="OpenStack Block Storage")}">
                                 </a>
                             </div>
                             <div class="col-lg-9 col-sm-9">
@@ -443,17 +443,17 @@
                     <a href="#" data-toggle="modal" data-target="#VideoModalDisney">
                     <div class="video-wrapper">
                         <div class="play-button">
-                            <img src="/themes/openstack/images/landing-pages/auto/play-button.png">
+                            <img src="{$Top.CloudUrl("images/landing-pages/auto/play-button.png")}">
                         </div>
                         <div class="video-overlay">
                             <div class="small-play-button">
-                                <img src="/themes/openstack/images/landing-pages/auto/play-button.png">
+                                <img src="{$Top.CloudUrl("images/landing-pages/auto/play-button.png")}">
                             </div>
                             <p>
                                 Chris Launey of Walt Disney speaks with Jonathan about how he is using OpenStack to help empower technology in the workplace. 
                             </p>
                         </div>
-                        <img class="video-image" src="/themes/openstack/images/landing-pages/auto/video-disney.jpg" alt="Disney Talking About OpenStack">
+                        <img class="video-image" src="{$Top.CloudUrl("images/landing-pages/auto/video-disney.jpg" alt="Disney Talking About OpenStack")}">
                     </div>
                     </a>
                 </div>
@@ -461,17 +461,17 @@
                     <a href="#" data-toggle="modal" data-target="#VideoModalWellsFargo">
                     <div class="video-wrapper">
                         <div class="play-button">
-                            <img src="/themes/openstack/images/landing-pages/auto/play-button.png">
+                            <img src="{$Top.CloudUrl("images/landing-pages/auto/play-button.png")}">
                         </div>
                         <div class="video-overlay">
                             <div class="small-play-button">
-                                <img src="/themes/openstack/images/landing-pages/auto/play-button.png">
+                                <img src="{$Top.CloudUrl("images/landing-pages/auto/play-button.png")}">
                             </div>
                             <p>
                                 Glenn Ferguson of Wells Fargo joins Jonathan to discuss their relationship with OpenStack.
                             </p>
                         </div>
-                        <img class="video-image" src="/themes/openstack/images/landing-pages/auto/video-wellsfargo.jpg" alt="Wells Fargo Talking About OpenStack">
+                        <img class="video-image" src="{$Top.CloudUrl("images/landing-pages/auto/video-wellsfargo.jpg" alt="Wells Fargo Talking About OpenStack")}">
                     </div>
                     </a>
                 </div>
@@ -479,17 +479,17 @@
                     <a href="#" data-toggle="modal" data-target="#VideoModalBloomberg">
                     <div class="video-wrapper">
                         <div class="play-button">
-                            <img src="/themes/openstack/images/landing-pages/auto/play-button.png">
+                            <img src="{$Top.CloudUrl("images/landing-pages/auto/play-button.png")}">
                         </div>
                         <div class="video-overlay">
                             <div class="small-play-button">
-                                <img src="/themes/openstack/images/landing-pages/auto/play-button.png">
+                                <img src="{$Top.CloudUrl("images/landing-pages/auto/play-button.png")}">
                             </div>
                             <p>
                                 We review how Bloomberg designed our stack to be fully active-active highly available and share some of our experiences operating our clouds.
                             </p>
                         </div>
-                        <img class="video-image" src="/themes/openstack/images/landing-pages/auto/video-bloomberg.jpg" alt="Bloomberg Talking About OpenStack">
+                        <img class="video-image" src="{$Top.CloudUrl("images/landing-pages/auto/video-bloomberg.jpg" alt="Bloomberg Talking About OpenStack")}">
                     </div>
                     </a>
                 </div>
@@ -530,7 +530,7 @@
                         <div class="row events">
                             <div class="col-lg-6">
                                 <a href="http://www.interop.com/newyork/scheduler/session/introduction-to-openstack-enterprise-boot-camp">
-                                <img class="event-logo" src="/themes/openstack/images/landing-pages/auto/cloud-connect-logo.png" alt="OpenStack at Cloud Connect">
+                                <img class="event-logo" src="{$Top.CloudUrl("images/landing-pages/auto/cloud-connect-logo.png" alt="OpenStack at Cloud Connect")}">
                                 <span>OpenStack: Enterprise Boot Camp</span>
                                 <span>September 30, 2014 in New York</span>
                                 </a>
@@ -538,7 +538,7 @@
                             <div class="vert-line"></div>
                             <div class="col-lg-6">
                                 <a href="/summit/">
-                                <img class="event-logo paris" src="/themes/openstack/images/landing-pages/auto/paris-logo.png" alt="OpenStack Summit in Paris">
+                                <img class="event-logo paris" src="{$Top.CloudUrl("images/landing-pages/auto/paris-logo.png" alt="OpenStack Summit in Paris")}">
                                 <span>OpenStack Summit</span>
                                 <span>November 3 - 7, 2014 in Paris</span>
                                 </a>
@@ -573,7 +573,7 @@
         <div class="container">
             <div class="row footer-links">
                 <div class="col-lg-12 col-sm-12 footer-logo-wrapper-small">
-                    <img class="footer-logo" src="/themes/openstack/images/landing-pages/auto/footer-logo.png" alt="OpenStack">
+                    <img class="footer-logo" src="{$Top.CloudUrl("images/landing-pages/auto/footer-logo.png" alt="OpenStack")}">
                 </div>
             </div>
             <div class="row footer-links">
@@ -594,7 +594,7 @@
                     </ul>
                 </div>
                 <div class="col-lg-2 col-sm-2 footer-logo-wrapper">
-                    <img class="footer-logo" src="/themes/openstack/images/landing-pages/auto/footer-logo.png" alt="OpenStack">
+                    <img class="footer-logo" src="{$Top.CloudUrl("images/landing-pages/auto/footer-logo.png" alt="OpenStack")}">
                 </div>
                 <div class="col-lg-5 col-sm-12">
                     <ul class="list-inline left">

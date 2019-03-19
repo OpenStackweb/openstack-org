@@ -72,7 +72,7 @@ class DynamicStepForm extends AbstractStepForm {
     public function EntityIconUrl()
     {
         $icon     = $this->step->template()->EntityIcon();
-        $icon_url = '/themes/openstack/images/user-survey/cloud.png';
+        $icon_url = CloudAssetTemplateHelpers::cloud_url('images/user-survey/cloud.png');
         if($icon->ID > 0){
             $icon_url = $icon->Link();
         }

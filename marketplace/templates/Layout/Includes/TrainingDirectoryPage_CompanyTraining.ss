@@ -42,7 +42,7 @@
                     </tbody></table>
                 <a style="background-color: #{$Company.CompanyColor}" href="{$TrainingLink}{$Company.URLSegment}/{$ID}" class="details-button">Details</a>
                 <% if $Company.isCOAPartner %>
-                    <img class="coa-partner-badge" src="/themes/openstack/images/coa/coa-badge.jpg" title="COA Training Partner" alt="COA Training Partner">
+                    <img class="coa-partner-badge" src="{$Top.CloudUrl("images/coa/coa-badge.jpg")}" title="COA Training Partner" alt="COA Training Partner">
                 <% end_if %>
             </div>
         </div>

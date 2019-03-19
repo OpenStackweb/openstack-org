@@ -58,7 +58,7 @@
                     </p>
                 </div>
                 <div class="col-sm-4">
-                    <img class="img-responsive server-row" src="//openstack.org/themes/openstack/images/enterprise/server-row.svg" onerror="this.onerror=null; this.src=/themes/openstack/images/enterprise/server-row.png" alt="">
+                    <img class="img-responsive server-row" src="{$Top.CloudUrl("images/enterprise/server-row.svg")}" onerror="{$Top.CloudUrl("images/enterprise/server-row.png")}" alt="">
                 </div>
             </div>
         </div>
@@ -106,8 +106,8 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="thumbnails" data-toggle="lightbox">
-                        <a href="//openstack.org/themes/openstack/images/enterprise//legacy/multi-hypervisor.svg" class="thumbnail" data-title="Multi-Hypervisor">
-                            <img class="img-responsive" src="//openstack.org/themes/openstack/images/enterprise//legacy/multi-hypervisor.svg" onerror="this.onerror=null; this.src=img/multi-hypervisor.png" alt="">
+                        <a href="{$Top.CloudUrl("images/enterprise//legacy/multi-hypervisor.svg")}" class="thumbnail" data-title="Multi-Hypervisor">
+                            <img class="img-responsive" src="{$Top.CloudUrl("images/enterprise//legacy/multi-hypervisor.svg")}" onerror="this.onerror=null; this.src=img/multi-hypervisor.png" alt="">
                         </a>
                     </div>
                 </div>
@@ -127,8 +127,8 @@
                 </div>
                 <div class="col-sm-6 col-sm-pull-6">
                     <div class="thumbnails" data-toggle="lightbox">
-                        <a href="//openstack.org/themes/openstack/images/enterprise//legacy/commercial-distributions.svg" class="thumbnail" data-title="Commercial Distributions">
-                            <img class="img-responsive" src="//openstack.org/themes/openstack/images/enterprise//legacy/commercial-distributions.svg" onerror="this.onerror=null; this.src=img/commercial-distributions.png" alt="">
+                        <a href="{$Top.CloudUrl("images/enterprise//legacy/commercial-distributions.svg")}" class="thumbnail" data-title="Commercial Distributions">
+                            <img class="img-responsive" src="{$Top.CloudUrl("images/enterprise//legacy/commercial-distributions.svg")}" onerror="this.onerror=null; this.src=img/commercial-distributions.png" alt="">
                         </a>
                     </div>
                 </div>
@@ -151,8 +151,8 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="thumbnails" data-toggle="lightbox">
-                        <a href="//openstack.org/themes/openstack/images/enterprise//legacy/vio-diagram.svg" class="thumbnail" data-title="VMWare Integrated OpenStack">
-                            <img class="img-responsive" src="//openstack.org/themes/openstack/images/enterprise//legacy/vio-diagram.svg" onerror="this.onerror=null; this.src=img/commercial-distributions.png" alt="">
+                        <a href="{$Top.CloudUrl("images/enterprise//legacy/vio-diagram.svg")}" class="thumbnail" data-title="VMWare Integrated OpenStack">
+                            <img class="img-responsive" src="{$Top.CloudUrl("images/enterprise//legacy/vio-diagram.svg")}" onerror="this.onerror=null; this.src=img/commercial-distributions.png" alt="">
                         </a>
                     </div>
                 </div>
@@ -230,17 +230,17 @@
                     <a href="#" data-toggle="modal" data-target="#VideoModalVMWare2">
                     <div class="video-wrapper">
                         <div class="play-button">
-                            <img src="//openstack.org/themes/openstack/images/enterprise//play-button.png">
+                            <img src="{$Top.CloudUrl("images/enterprise//play-button.png")}">
                         </div>
                         <div class="video-overlay">
                             <div class="small-play-button">
-                                <img src="//openstack.org/themes/openstack/images/enterprise//play-button.png">
+                                <img src="{$Top.CloudUrl("images/enterprise//play-button.png")}">
                             </div>
                             <p>
                                 VMware Community Contribution to OpenStack. Examples of how VMware Contributes to the OpenStack Project.
                             </p>
                         </div>
-                        <img class="video-image" src="//openstack.org/themes/openstack/images/enterprise//video-vmware.jpg" alt="VMware Community Contribution to OpenStack">
+                        <img class="video-image" src="{$Top.CloudUrl("images/enterprise//video-vmware.jpg")}" alt="VMware Community Contribution to OpenStack">
                     </div>
                     </a>
                 </div>
@@ -248,17 +248,17 @@
                     <a href="#" data-toggle="modal" data-target="#VideoModalVMWare1">
                     <div class="video-wrapper">
                         <div class="play-button">
-                            <img src="//openstack.org/themes/openstack/images/enterprise//play-button-dark.png">
+                            <img src="{$Top.CloudUrl("images/enterprise//play-button-dark.png")}">
                         </div>
                         <div class="video-overlay">
                             <div class="small-play-button">
-                                <img src="//openstack.org/themes/openstack/images/enterprise//play-button.png">
+                                <img src="{$Top.CloudUrl("images/enterprise//play-button.png")}">
                             </div>
                             <p>
                                 Dan Wendlandt of VMware presents VMware + OpenStack: Accelerating OpenStack in the Enterprise at Paris Summit.
                             </p>
                         </div>
-                        <img class="video-image" src="//openstack.org/themes/openstack/images/enterprise//legacy/video-vmware1.jpg" alt="Disney Talking About OpenStack">
+                        <img class="video-image" src="{$Top.CloudUrl("images/enterprise//legacy/video-vmware1.jpg")}" alt="Disney Talking About OpenStack">
                     </div>
                     </a>
                 </div>
@@ -266,17 +266,17 @@
                     <a href="#" data-toggle="modal" data-target="#VideoModalVMWare">
                     <div class="video-wrapper">
                         <div class="play-button">
-                            <img src="//openstack.org/themes/openstack/images/enterprise//play-button-dark.png">
+                            <img src="{$Top.CloudUrl("images/enterprise//play-button-dark.png")}">
                         </div>
                         <div class="video-overlay">
                             <div class="small-play-button">
-                                <img src="//openstack.org/themes/openstack/images/enterprise//play-button.png">
+                                <img src="{$Top.CloudUrl("images/enterprise//play-button.png")}">
                             </div>
                             <p>
                                 Dan Florea presents an OpenStack primer for VMware adminstrators.
                             </p>
                         </div>
-                        <img class="video-image" src="//openstack.org/themes/openstack/images/enterprise//legacy/video-vmware.jpg" alt="VmWare Working with OpenStack">
+                        <img class="video-image" src="{$Top.CloudUrl("images/enterprise//legacy/video-vmware.jpg")}" alt="VmWare Working with OpenStack">
                     </div>
                     </a>
                 </div>

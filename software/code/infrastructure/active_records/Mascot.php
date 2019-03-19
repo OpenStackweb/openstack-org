@@ -40,7 +40,7 @@ class Mascot extends DataObject implements IMascot
         'Hide' => 'Hide',
     );
 
-    static $mascots_dir = 'themes/openstack/images/project-mascots/';
+    static $mascots_dir = 'images/project-mascots';
 
     /**
      * @return int
@@ -82,7 +82,7 @@ class Mascot extends DataObject implements IMascot
     public function getImageDir()
     {
         if ($this->getCodeName())
-            return Director::baseFolder() .'/'. self::$mascots_dir . $this->getCodeName();
+            return CloudAssetTemplateHelpers::cloud_url(self::$mascots_dir). $this->getCodeName();
         else
             return null;
     }
@@ -90,7 +90,7 @@ class Mascot extends DataObject implements IMascot
     public function getImageLink()
     {
         if ($this->getCodeName())
-            return self::$mascots_dir . $this->getCodeName();
+            return CloudAssetTemplateHelpers::cloud_url(self::$mascots_dir). $this->getCodeName();
         else
             return null;
     }

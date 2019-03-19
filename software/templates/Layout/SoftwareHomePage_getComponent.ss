@@ -16,12 +16,12 @@
                 <h4>$Component.Name</h4>
                 <div class="project-intro-links">
                     <% if $Component.DocsLink().Exists() %>
-                    <p>
-                        <a href="{$Component.DocsLink().URL}" target="_blank">
-                            <%-- do not separate icon from label --%>
-                            <i class="fa fa-book" aria-hidden="true" style="margin-right: 8px"></i><span>{$Component.DocsLink().Label}</span>
-                        </a>
-                    </p>
+                        <p>
+                            <a href="{$Component.DocsLink().URL}" target="_blank">
+                                <%-- do not separate icon from label --%>
+                                <i class="fa fa-book" aria-hidden="true" style="margin-right: 8px"></i><span>{$Component.DocsLink().Label}</span>
+                            </a>
+                        </p>
                     <% end_if %>
                     <p>
                         <a href="{$Component.getCodeLink()}" target="_blank">
@@ -38,16 +38,16 @@
                         </p>
                     <% end_if %>
                     <% if $Component.HasInstallationGuide %>
-                    <p>
-                        <a href="http://docs.openstack.org/project-install-guide/{$Top.CurrentRelease.Slug}/" target="_blank">
-                            <%t Software.VIEW_INSTALL_GUIDE 'View the install guide' %>
-                        </a>
-                    </p>
+                        <p>
+                            <a href="http://docs.openstack.org/project-install-guide/{$Top.CurrentRelease.Slug}/" target="_blank">
+                                <%t Software.VIEW_INSTALL_GUIDE 'View the install guide' %>
+                            </a>
+                        </p>
                     <% end_if %>
                     <% if $Component.Since %>
-                    <p>
-                        <%t Software.FIRST_APPEARANCE 'First appeared in OpenStack' %> '$Component.Since' release
-                    </p>
+                        <p>
+                            <%t Software.FIRST_APPEARANCE 'First appeared in OpenStack' %> '$Component.Since' release
+                        </p>
                     <% end_if %>
                 </div>
             </div>
@@ -104,89 +104,89 @@
                     <hr style="margin: 40px 0;">
                     <h4><%t Software.PROJECT_DETAILS 'Project details' %></h4>
                     <% if $HasMaturityIndicators %>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="table-responsive project-tags-table table-hover">
-                                <table class="table maturity-table">
-                                    <thead>
-                                    <tr>
-                                        <th colspan="2"><%t Software.MATURITY_INDICATORS 'Maturity Indicators' %></th>
-                                        <th><%t Software.TAG_DETAILS 'Tag Details' %></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-
-                                    <% if $Component.Adoption > 75 %>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="table-responsive project-tags-table table-hover">
+                                    <table class="table maturity-table">
+                                        <thead>
                                         <tr>
-                                            <td class="maturity">{$Component.Adoption}%</td>
-                                            <td>
-                                                <%t Software.PERCENTAGE_OF_DEPLOYMENTS 'of deployments using this project in production environments.' %>
-                                                <a href="#" onclick="return false;" data-html="true" data-trigger="focus" data-content="<%t Software.ADOPTION_DATA_CONTENT "Adoption data is derived from the latest <a href='//www.openstack.org/user-survey'>user survey</a>." %>" title="" data-placement="right" data-toggle="popover" data-original-title="<%t Software.HOW_CALCULATED 'How is this calculated?' %>"><i class="fa fa-question-circle tag-tooltip"></i></a>
-                                            </td>
-                                            <td><a href="https://github.com/openstack/ops-tags-team/blob/master/descriptions/ops-production-use.rst"><%t Openstack.VIEW_DETAILS 'View Details' %></a></td>
+                                            <th colspan="2"><%t Software.MATURITY_INDICATORS 'Maturity Indicators' %></th>
+                                            <th><%t Software.TAG_DETAILS 'Tag Details' %></th>
                                         </tr>
-                                    <% end_if %>
+                                        </thead>
+                                        <tbody>
 
-                                    <% if $Component.SDKSupport > 7 %>
-                                        <tr>
-                                            <td class="maturity">$Component.SDKSupport</td>
-                                            <td><%t Software.NUMBER_OF_SDK 'software development kits (SDKs) support' %>  $Component.CodeName </td>
-                                            <td>
-                                                <a href="https://github.com/openstack/ops-tags-team/blob/master/descriptions/ops-sdk-support.rst">
-                                                    <%t Openstack.VIEW_DETAILS 'View Details' %>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    <% end_if %>
+                                            <% if $Component.Adoption > 75 %>
+                                            <tr>
+                                                <td class="maturity">{$Component.Adoption}%</td>
+                                                <td>
+                                                    <%t Software.PERCENTAGE_OF_DEPLOYMENTS 'of deployments using this project in production environments.' %>
+                                                    <a href="#" onclick="return false;" data-html="true" data-trigger="focus" data-content="<%t Software.ADOPTION_DATA_CONTENT "Adoption data is derived from the latest <a href='//www.openstack.org/user-survey'>user survey</a>." %>" title="" data-placement="right" data-toggle="popover" data-original-title="<%t Software.HOW_CALCULATED 'How is this calculated?' %>"><i class="fa fa-question-circle tag-tooltip"></i></a>
+                                                </td>
+                                                <td><a href="https://github.com/openstack/ops-tags-team/blob/master/descriptions/ops-production-use.rst"><%t Openstack.VIEW_DETAILS 'View Details' %></a></td>
+                                            </tr>
+                                            <% end_if %>
+
+                                            <% if $Component.SDKSupport > 7 %>
+                                            <tr>
+                                                <td class="maturity">$Component.SDKSupport</td>
+                                                <td><%t Software.NUMBER_OF_SDK 'software development kits (SDKs) support' %>  $Component.CodeName </td>
+                                                <td>
+                                                    <a href="https://github.com/openstack/ops-tags-team/blob/master/descriptions/ops-sdk-support.rst">
+                                                        <%t Openstack.VIEW_DETAILS 'View Details' %>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <% end_if %>
 
 
-                                    <% if $Component.HasInstallationGuide %>
-                                        <tr>
-                                            <td class="maturity"><i class="fa fa-check" aria-hidden="true"></i></td>
-                                            <td> $Component.CodeName <%t Software.IS_THERE_INSTALL 'is included in the install guide.' %></td>
-                                            <td>
-                                                <a href="http://docs.openstack.org/project-install-guide/{$Top.CurrentRelease.Slug}/" target="_blank">
-                                                    <%t Software.VIEW_INSTALL_GUIDE 'View the install guide' %>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    <% end_if %>
+                                            <% if $Component.HasInstallationGuide %>
+                                            <tr>
+                                                <td class="maturity"><i class="fa fa-check" aria-hidden="true"></i></td>
+                                                <td> $Component.CodeName <%t Software.IS_THERE_INSTALL 'is included in the install guide.' %></td>
+                                                <td>
+                                                    <a href="http://docs.openstack.org/project-install-guide/{$Top.CurrentRelease.Slug}/" target="_blank">
+                                                        <%t Software.VIEW_INSTALL_GUIDE 'View the install guide' %>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <% end_if %>
 
-                                    <% loop $Component.getMaturityTags() %>
-                                        <tr>
-                                            <td class="maturity"><i class="fa fa-check" aria-hidden="true"></i></td>
-                                            <td>
-                                                {$Top.Component.CodeName} {$getTranslatedLabel()}
-                                                <a href="#" onclick="return false;" data-trigger="focus" data-content="{$getTranslatedDescription()}" title="" data-placement="right" data-toggle="popover" data-original-title="<%t Software.WHAT_DOES_MEAN 'What does this mean?' %>">
-                                                    <i class="fa fa-question-circle tag-tooltip"></i>
-                                                </a>
-                                            </td>
-                                             <td>
-                                                 <a href="{$Link}"><%t Openstack.VIEW_DETAILS 'View details' %></a>
-                                             </td>
-                                        </tr>
-                                    <% end_loop %>
+                                            <% loop $Component.getMaturityTags() %>
+                                            <tr>
+                                                <td class="maturity"><i class="fa fa-check" aria-hidden="true"></i></td>
+                                                <td>
+                                                    {$Top.Component.CodeName} {$getTranslatedLabel()}
+                                                    <a href="#" onclick="return false;" data-trigger="focus" data-content="{$getTranslatedDescription()}" title="" data-placement="right" data-toggle="popover" data-original-title="<%t Software.WHAT_DOES_MEAN 'What does this mean?' %>">
+                                                        <i class="fa fa-question-circle tag-tooltip"></i>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a href="{$Link}"><%t Openstack.VIEW_DETAILS 'View details' %></a>
+                                                </td>
+                                            </tr>
+                                            <% end_loop %>
 
-                                    </tbody>
-                                </table>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     <% end_if %>
                     <% if $HasAdditionalInfo %>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="table-responsive project-tags-table table-hover">
-                                <table class="table">
-                                    <thead>
-                                    <tr>
-                                        <th><%t Software.PROJECT_INFO 'Project Info' %></th>
-                                        <th></th>
-                                        <th><%t Software.TAG_DETAILS 'Tag Details' %></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                        <% if $HasReleaseDesc %>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="table-responsive project-tags-table table-hover">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th><%t Software.PROJECT_INFO 'Project Info' %></th>
+                                            <th></th>
+                                            <th><%t Software.TAG_DETAILS 'Tag Details' %></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% if $HasReleaseDesc %>
                                             <tr>
                                                 <td>
                                                     <%t Software.HOW_RELEASED 'How is this project released?' %>
@@ -218,8 +218,8 @@
                                                 </td>
                                                 <td><a target="_blank" href="https://releases.openstack.org/reference/release_models.html"><%t Openstack.VIEW_DETAILS 'View details' %></a></td>
                                             </tr>
-                                        <% end_if %>
-                                        <% loop $Component.getInfoTags() %>
+                                            <% end_if %>
+                                            <% loop $Component.getInfoTags() %>
                                             <tr>
                                                 <td>{$getTranslatedLabel()}</td>
                                                 <td>
@@ -233,12 +233,12 @@
                                                     <a href="{$Link}"><%t Openstack.VIEW_DETAILS 'View details' %></a>
                                                 </td>
                                             </tr>
-                                        <% end_loop %>
-                                    </tbody>
-                                </table>
+                                            <% end_loop %>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     <% end_if %>
                 <% end_if %>
             </div>
@@ -270,13 +270,13 @@
         <% end_if %>
 
         <% if $Component.YouTubeID %>
-        <div class="row project-details-ptl box">
-            <div class="col-sm-12">
-                <h4>$Component.VideoTitle</h4>
-                <p>$Component.VideoDescription</p>
-                <iframe width="356" height="200" src="//www.youtube.com/embed/{$Component.YouTubeID}" frameborder="0" allowfullscreen=""></iframe>
+            <div class="row project-details-ptl box">
+                <div class="col-sm-12">
+                    <h4>$Component.VideoTitle</h4>
+                    <p>$Component.VideoDescription</p>
+                    <iframe width="356" height="200" src="//www.youtube.com/embed/{$Component.YouTubeID}" frameborder="0" allowfullscreen=""></iframe>
+                </div>
             </div>
-        </div>
         <% end_if %>
 
         <div class="row">

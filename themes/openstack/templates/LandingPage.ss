@@ -79,7 +79,7 @@
           See The Summit Experience
         </p>
         <a href='http://youtube.googleapis.com/v/U-juwXo-2wY' rel='shadowbox'>
-          <img src="/themes/openstack/images/landing/video-thumbnail.jpg" />
+          <img src="{$Top.CloudUrl("images/landing/video-thumbnail.jpg")}" />
         </a>
       </div>
       <h3>What is the OpenStack Summit?</h3>
@@ -91,19 +91,19 @@
       <div class='gallery'>
         <h3>Amazing Content:</h3>
         <div class='gallery-item'>
-          <img src="/themes/openstack/images/landing/bloomberg.jpg" />
+          <img src="{$Top.CloudUrl("images/landing/bloomberg.jpg")}" />
           <h4>Case Studies</h4>
         </div>
         <div class='gallery-item'>
-          <img src="/themes/openstack/images/landing/visionary.jpg" />
+          <img src="{$Top.CloudUrl("images/landing/visionary.jpg")}" />
           <h4>Visionary Keynotes</h4>
         </div>
         <div class='gallery-item'>
-          <img src="/themes/openstack/images/landing/workshops.jpg" />
+          <img src="{$Top.CloudUrl("images/landing/workshops.jpg")}" />
           <h4>Hands-on Workshops</h4>
         </div>
         <div class='gallery-item'>
-          <img src="/themes/openstack/images/landing/working-sessions.jpg" />
+          <img src="{$Top.CloudUrl("images/landing/working-sessions.jpg")}" />
           <h4>Developer Working Sessions</h4>
         </div>
       </div>
@@ -115,7 +115,7 @@
           <div class='speaker-box'>
             <div class='media'>
               <div class='pull-left'>
-                <img src="/themes/openstack/images/landing/portraits/shuttleworth.jpg" />
+                <img src="{$Top.CloudUrl("images/landing/portraits/shuttleworth.jpg")}" />
               </div>
               <div class='media-body'>
                 <h4>Mark Shuttleworth</h4>
@@ -124,7 +124,7 @@
             </div>
             <div class='media'>
               <div class='pull-left'>
-                <img src="/themes/openstack/images/landing/portraits/tucker.jpg" />
+                <img src="{$Top.CloudUrl("images/landing/portraits/tucker.jpg")}" />
               </div>
               <div class='media-body'>
                 <h4>Lew Tucker</h4>
@@ -133,7 +133,7 @@
             </div>
             <div class='media'>
               <div class='pull-left'>
-                <img src="/themes/openstack/images/landing/portraits/mcLoughlin.jpg" />
+                <img src="{$Top.CloudUrl("images/landing/portraits/mcLoughlin.jpg")}" />
               </div>
               <div class='media-body'>
                 <h4>Mark McLoughlin</h4>
@@ -142,7 +142,7 @@
             </div>
             <div class='media'>
               <div class='pull-left'>
-                <img src="/themes/openstack/images/landing/portraits/casado.jpg" />
+                <img src="{$Top.CloudUrl("images/landing/portraits/casado.jpg")}" />
               </div>
               <div class='media-body'>
                 <h4>Martin Casado</h4>
@@ -151,7 +151,7 @@
             </div>
             <div class='media'>
               <div class='pull-left'>
-                <img src="/themes/openstack/images/landing/portraits/potts.jpg" />
+                <img src="{$Top.CloudUrl("images/landing/portraits/potts.jpg")}" />
               </div>
               <div class='media-body'>
                 <h4>Mark Potts</h4>
@@ -160,7 +160,7 @@
             </div>
             <div class='media'>
               <div class='pull-left'>
-                <img src="/themes/openstack/images/landing/portraits/curry.jpg" />
+                <img src="{$Top.CloudUrl("images/landing/portraits/curry.jpg")}" />
               </div>
               <div class='media-body'>
                 <h4>Jim Curry</h4>
@@ -169,7 +169,7 @@
             </div>
             <div class='media'>
               <div class='pull-left'>
-                <img src="/themes/openstack/images/landing/portraits/sabbah.jpg" />
+                <img src="{$Top.CloudUrl("images/landing/portraits/sabbah.jpg")}" />
               </div>
               <div class='media-body'>
                 <h4>Daniel Sabbah</h4>
@@ -178,7 +178,7 @@
             </div>
             <div class='media'>
               <div class='pull-left'>
-                <img src="/themes/openstack/images/landing/portraits/wang.jpg" />
+                <img src="{$Top.CloudUrl("images/landing/portraits/wang.jpg")}" />
               </div>
               <div class='media-body'>
                 <h4>Haiying Wang</h4>
@@ -187,7 +187,7 @@
             </div>
             <div class='media'>
               <div class='pull-left'>
-                <img src="/themes/openstack/images/landing/portraits/shao.jpg" />
+                <img src="{$Top.CloudUrl("images/landing/portraits/shao.jpg")}" />
               </div>
               <div class='media-body'>
                 <h4>Ling Shao</h4>

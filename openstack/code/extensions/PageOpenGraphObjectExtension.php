@@ -24,7 +24,7 @@ final class TwitterCardMetadataBuilder
 
 class PageOpenGraphObjectExtension extends OpenGraphObjectExtension
 {
-    public static $default_image = '/themes/openstack/images/openstack-logo-full.png';
+    public static $default_image = 'images/openstack-logo-full.png';
 
     public function MetaTags(&$tags)
     {
@@ -71,7 +71,7 @@ class PageOpenGraphObjectExtension extends OpenGraphObjectExtension
         if ($meta_image && $meta_image->Exists())
             return Director::absoluteURL($meta_image->getURL());
 
-        return Director::absoluteURL(self::$default_image);
+        return Director::absoluteURL(CloudAssetTemplateHelpers::cloud_url(self::$default_image));
     }
 
     public function getOGTitle()

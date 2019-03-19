@@ -25,7 +25,7 @@
             </div> 
             <div class="col-sm-4">
                 <div class="download-container">
-                  <!-- <img src="/themes/openstack/images/containers-r/summit-logo-white.svg" class="summit-cta-logo" alt=""> -->
+                  <!-- <img src="{$Top.CloudUrl("images/containers-r/summit-logo-white.svg")}" class="summit-cta-logo" alt=""> -->
                     <div class="download-text"><strong>Leveraging OpenStack and Containers: A Comprehensive Review</strong><br/>Now available in multiple languages!</div>
                     <a href="//www.openstack.org/containers/whitepaper" class="download-btn"><i class="fa fa-arrow-circle-right"></i> Read the Whitepaper</a>
                 </div>
@@ -118,7 +118,7 @@
           <div class="col-sm-5ths col-xs-4">
             <a href="http://blog.kubernetes.io/2016/10/kubernetes-and-openstack-at-yahoo-japan.html" target="_blank">
             <div class="video-wrapper small">
-              <img class="video-image" src="/themes/openstack/images/containers-r/users/yahoo-japan.jpg" alt="How We Architected and Run Kubernetes on OpenStack at Scale at Yahoo! JAPAN">
+              <img class="video-image" src="{$Top.CloudUrl("images/containers-r/users/yahoo-japan.jpg")}" alt="How We Architected and Run Kubernetes on OpenStack at Scale at Yahoo! JAPAN">
             </div>
             </a>
             <p class="video-title containers">
@@ -138,7 +138,7 @@
           <div class="col-sm-5ths col-xs-4">
             <a href="{$Top.CloudUrl('assets/containers/openstack-containers-12.4.pdf')}" target="_blank">
             <div class="video-wrapper small">
-              <img class="video-image" src="/themes/openstack/images/containers-r/users/liveperson.jpg" alt="Containers and Cloud: Exploring the OpenStack Opportunity with LivePerson">
+              <img class="video-image" src="{$Top.CloudUrl("images/containers-r/users/liveperson.jpg")}" alt="Containers and Cloud: Exploring the OpenStack Opportunity with LivePerson">
             </div>
             </a>
             <p class="video-title containers">
@@ -187,7 +187,7 @@
             <div class="single-service-wrapper">
               <div class="single-service-top">
                 <div class="content">
-                  <img src="/themes/openstack/images/containers-r/icons/networking.svg" alt="" class="single-service-icon">
+                  <img src="{$Top.CloudUrl("images/containers-r/icons/networking.svg")}" alt="" class="single-service-icon">
                   <div class="single-service-title"> 
                     Networking
                   </div>
@@ -202,7 +202,7 @@
             <div class="single-service-wrapper">
               <div class="single-service-top">
                 <div class="content">
-                  <img src="/themes/openstack/images/containers-r/icons/storage.svg" alt="" class="single-service-icon">
+                  <img src="{$Top.CloudUrl("images/containers-r/icons/storage.svg")}" alt="" class="single-service-icon">
                   <div class="single-service-title"> 
                     Storage
                   </div>
@@ -217,7 +217,7 @@
             <div class="single-service-wrapper">
               <div class="single-service-top">
                 <div class="content">
-                  <img src="/themes/openstack/images/containers-r/icons/compute.svg" alt="" class="single-service-icon">
+                  <img src="{$Top.CloudUrl("images/containers-r/icons/compute.svg")}" alt="" class="single-service-icon">
                   <div class="single-service-title"> 
                     Compute
                   </div>
@@ -234,7 +234,7 @@
             <div class="single-service-wrapper">
               <div class="single-service-top">
                 <div class="content">
-                  <img src="/themes/openstack/images/containers-r/icons/identity.svg" alt="" class="single-service-icon">
+                  <img src="{$Top.CloudUrl("images/containers-r/icons/identity.svg")}" alt="" class="single-service-icon">
                   <div class="single-service-title"> 
                     Identity
                   </div>
@@ -249,7 +249,7 @@
             <div class="single-service-wrapper">
               <div class="single-service-top">
                 <div class="content">
-                  <img src="/themes/openstack/images/containers-r/icons/container.svg" alt="" class="single-service-icon">
+                  <img src="{$Top.CloudUrl("images/containers-r/icons/container.svg")}" alt="" class="single-service-icon">
                   <div class="single-service-title"> 
                     Container provisioning
                   </div>
@@ -264,7 +264,7 @@
             <div class="single-service-wrapper">
               <div class="single-service-top">
                 <div class="content">
-                  <img src="/themes/openstack/images/containers-r/icons/deployment.svg" alt="" class="single-service-icon">
+                  <img src="{$Top.CloudUrl("images/containers-r/icons/deployment.svg")}" alt="" class="single-service-icon">
                   <div class="single-service-title"> 
                     Deployment
                   </div>

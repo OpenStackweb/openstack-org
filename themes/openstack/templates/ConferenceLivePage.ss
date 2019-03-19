@@ -30,7 +30,7 @@
             <td class="center-orange">&nbsp;</td>
             <td class="right-red">&nbsp;</td>
         </table>
-        <img src='/themes/openstack/images/landing/osdslogo-white.png'/>
+        <img src="{$Top.CloudUrl("images/landing/osdslogo-white.png")}"/>
     </div>
     <div class='container'>
         <div class="twitter-hash">
@@ -42,11 +42,11 @@
         <h2>Get The Mobile App</h2>
         <div class="mobile-buttons">
             <p><a href="https://itunes.apple.com/us/app/openstack-summit/id859699528?mt=8"><img
-                    src="/themes/openstack/images/landing/app-button-iphone.png"></a></p>
+                    src="{$Top.CloudUrl("images/landing/app-button-iphone.png")}"></a></p>
             <p><a href="https://play.google.com/store/apps/details?id=com.guidebook.apps.OpenStack.android"><img
-                    src="/themes/openstack/images/landing/app-button-andriod.png"></a></p>
+                    src="{$Top.CloudUrl("images/landing/app-button-andriod.png")}"></a></p>
             <p><a href="http://openstacksummitmay2014atlanta.sched.org/"><img
-                    src="/themes/openstack/images/landing/app-button-web.png"></a></p>
+                    src="{$Top.CloudUrl("images/landing/app-button-web.png")}"></a></p>
         </div>
 
         <hr/>

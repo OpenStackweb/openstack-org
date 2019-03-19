@@ -1,0 +1,5 @@
+$static_images_base_url: "https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea";
+$assets_container : "www-assets-prod";
+$static_images_container : "www-images-prod";
+$static_images_base_url: "#{$static_images_base_url}/#{$static_images_container}";
+$assets_images_base_url: "#{$static_images_base_url}/#{$assets_container}";

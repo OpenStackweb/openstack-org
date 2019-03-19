@@ -84,6 +84,9 @@ class GetTextTemplateHelpers implements TemplateGlobalProvider
         if(strlen($msgid) > self::MAX_MSG_ID_LEN)
             throw new InvalidArgumentException(sprintf("msgid is too large (%s)!", self::MAX_MSG_ID_LEN));
 
+        if(empty($domain))
+            throw new InvalidArgumentException("domain is empty!");
+
         $args = [];
         if(func_num_args() > 2)
         {
@@ -117,7 +120,18 @@ class GetTextTemplateHelpers implements TemplateGlobalProvider
         $msgid = preg_replace('[%(?!(\d\$[s]))]', '%%', $msgid);
         //$msgid  = str_replace("%", "%%", $msgid);
         $msgstr = call_user_func_array("__", array_merge([$msgid], $args));
+        return self::mapImages($msgstr);
+    }
 
-        return $msgstr;
+    private static function mapImages(string $msg): string {
+        $results = [];
+        if(preg_match("/https:\/\/www.openstack.org\/themes\/openstack\/images\/([\d\w\/\._-]*)/", $msg, $results) != false){
+            $capture = $results[1];
+            $msg = preg_replace(
+                "/https:\/\/www.openstack.org\/themes\/openstack\/images\/([\d\w\/\._-]*)/",
+                 CloudAssetTemplateHelpers::cloud_url("images/".$capture)
+                 , $msg);
+        }
+        return $msg;
     }
 }

@@ -110,7 +110,7 @@
         </div>
             <div class="row">
                 <div class="col-sm-5 col-sm-push-7 center">
-                    <img class="global-figures-chart" src="/themes/openstack/images/enterprise/forrester/global-figures.svg" onerror="this.onerror=null; this.src=/themes/openstack/images/enterprise/forrester/global-figures" alt="OpenStack Total Economic Impact">
+                    <img class="global-figures-chart" src="{$Top.CloudUrl("images/enterprise/forrester/global-figures.svg")}" onerror="{$Top.CloudUrl("images/enterprise/forrester/global-figures.jpg")}" alt="OpenStack Total Economic Impact">
                 </div>
                 <div class="col-sm-7 col-sm-pull-5">
                     <p>

@@ -7,6 +7,7 @@ composer install --ignore-platform-reqs --prefer-dist;
 sake dev/build;
 sake dev/tasks/DBMigrateTask;
 sudo rm -Rf node_modules;
+./sass.sh;
 sudo npm install;
 sudo npm run build-all;
 chown vagrant:www-data -R /home/vagrant/node_modules;
@@ -14,3 +15,11 @@ chown vagrant:www-data -R /var/www/www.openstack.org/vendor;
 sudo service nginx restart;
 sudo service php7.2-fpm restart;
 sudo php /var/www/www.openstack.org/framework/cli-script.php /UpdateFeedTask;
+
+echo "compiling *.po files...";
+sudo sake dev/tasks/ZanataServerPOFilesDownloaderTask;
+sudo sake dev/tasks/ZanataServerPOFilesDownloaderTask module=papers;
+sudo sake dev/tasks/CompilePO2MOTask;
+sudo sake dev/tasks/CompilePO2MOTask module=papers;
+sudo sake dev/tasks/PaperParseTranslatorsPOFiles;
+
