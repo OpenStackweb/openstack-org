@@ -23,7 +23,7 @@
         </div>
         <div class="col-sm-1">
             <% if IsCOANeeded %>
-                <img id="coa" src="themes/openstack/images/coa/coa-badge.svg">
+                <img id="coa" src="{$Top.CloudUrl("images/coa/coa-badge.svg")}">
             <% end_if %>            
         </div>
     </div>

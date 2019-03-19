@@ -1,4 +1,4 @@
-<p><a href="/home/Video/"><img src="/themes/openstack/images/homepage/openstack-summit-logo.gif" /></a></p>
+<p><a href="/home/Video/"><img src="{$Top.CloudUrl("images/homepage/openstack-summit-logo.gif")}" /></a></p>
 
  	<h2>Live Video Stream</h2>
  	<p><strong>Mon May 12 &amp; Tues May 13<br/>9:00 am-10:45 am EDT</strong><br/>

@@ -150,9 +150,9 @@
                     <a href="http://superuser.openstack.org/articles/superuser-roundtable-benefits-and-use-cases-for-network-functions-virtualization-nfv-ca4ba4be-6e20-4a91-a9a8-82eeffcf85f4" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="/themes/openstack/images/read.png">
+                            <img src="{$Top.CloudUrl("images/read.png")}">
                         </div>
-                        <img class="video-image" src="/themes/openstack/images/nfv/featured-1.jpg" alt="Superuser roundtable: benefits and use cases for Network Functions Virtualization (NFV)">
+                        <img class="video-image" src="{$Top.CloudUrl("images/nfv/featured-1.jpg")}" alt="Superuser roundtable: benefits and use cases for Network Functions Virtualization (NFV)">
                     </div>
                     </a>
                     <p class="video-title">
@@ -163,9 +163,9 @@
                     <a href="https://www.openstack.org/summit/tokyo-2015/videos/presentation/ntt-communications-nfv-service-federation-across-heterogeneous-sites " target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="/themes/openstack/images/play-button.png">
+                            <img src="{$Top.CloudUrl("images/play-button.png")}">
                         </div>
-                        <img class="video-image" src="/themes/openstack/images/nfv/featured-2.jpg" alt="NTT Communications talks about their carrier-grade OpenStack NFV PoC ">
+                        <img class="video-image" src="{$Top.CloudUrl("images/nfv/featured-2.jpg")}" alt="NTT Communications talks about their carrier-grade OpenStack NFV PoC ">
                     </div>
                     </a>
                     <p class="video-title">
@@ -176,9 +176,9 @@
                     <a href="https://www.openstack.org/summit/tokyo-2015/videos/presentation/telco-openstack-roadmap-panel" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="/themes/openstack/images/play-button.png">
+                            <img src="{$Top.CloudUrl("images/play-button.png")}">
                         </div>
-                        <img class="video-image" src="/themes/openstack/images/nfv/featured-3.jpg" alt="Join OpenStack telecom users for a look into the future with the Telco Roadmap Panel">
+                        <img class="video-image" src="{$Top.CloudUrl("images/nfv/featured-3.jpg")}" alt="Join OpenStack telecom users for a look into the future with the Telco Roadmap Panel">
                     </div>
                     </a> 
                     <p class="video-title">
@@ -189,9 +189,9 @@
                     <a href="http://superuser.openstack.org/articles/creating-the-perfect-match-openstack-and-network-functions-virtualization" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="/themes/openstack/images/play-button.png">
+                            <img src="{$Top.CloudUrl("images/play-button.png")}">
                         </div>
-                        <img class="video-image" src="/themes/openstack/images/nfv/featured-4.jpg" alt="Superuser TV interviews Kyle Mestery about how OpenStack and NFV work together">
+                        <img class="video-image" src="{$Top.CloudUrl("images/nfv/featured-4.jpg")}" alt="Superuser TV interviews Kyle Mestery about how OpenStack and NFV work together">
                     </div>
                     </a>
                     <p class="video-title">
@@ -202,9 +202,9 @@
                     <a href="http://superuser.openstack.org/articles/openstack-and-network-function-virtualization-the-backstory" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="/themes/openstack/images/read.png">
+                            <img src="{$Top.CloudUrl("images/read.png")}">
                         </div>
-                        <img class="video-image" src="/themes/openstack/images/nfv/featured-5.jpg" alt="Get the backstory on OpenStack and NFV from the OPNFV Summit">
+                        <img class="video-image" src="{$Top.CloudUrl("images/nfv/featured-5.jpg")}" alt="Get the backstory on OpenStack and NFV from the OPNFV Summit">
                     </div>
                     </a>
                     <p class="video-title">

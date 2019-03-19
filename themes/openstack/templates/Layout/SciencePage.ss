@@ -117,9 +117,9 @@
                     <a href="https://www.openstack.org/videos/video/smashing-particles-revolutionizing-medicine-and-exploring-origins-of-the-galaxy-tim-bell" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="/themes/openstack/images/play-button.png">
+                            <img src="{$Top.CloudUrl("images/play-button.png")}">
                         </div>
-                        <img class="video-image" src="/themes/openstack/images/science/featured1.jpg" alt="OpenStack at CERN">
+                        <img class="video-image" src="{$Top.CloudUrl("images/science/featured1.jpg")}" alt="OpenStack at CERN">
                     </div>
                     </a>
                     <p class="video-title" style="width: 100%;">
@@ -130,9 +130,9 @@
                     <a href="http://superuser.openstack.org/articles/cambridge-openstack/" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="/themes/openstack/images/read.png">
+                            <img src="{$Top.CloudUrl("images/read.png")}">
                         </div>
-                        <img class="video-image" src="/themes/openstack/images/science/featured2.jpg" alt="University of Cambridge opens new horizons with OpenStack">
+                        <img class="video-image" src="{$Top.CloudUrl("images/science/featured2.jpg")}" alt="University of Cambridge opens new horizons with OpenStack">
                     </div>
                     </a>
                     <p class="video-title">
@@ -143,9 +143,9 @@
                     <a href="https://www.youtube.com/watch?v=8WaeZLaYux4" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="/themes/openstack/images/play-button.png">
+                            <img src="{$Top.CloudUrl("images/play-button.png")}">
                         </div>
-                        <img class="video-image" src="/themes/openstack/images/science/featured3.jpg" alt="NASA JPL talks OpenStack">
+                        <img class="video-image" src="{$Top.CloudUrl("images/science/featured3.jpg")}" alt="NASA JPL talks OpenStack">
                     </div>
                     </a>
                     <p class="video-title">
@@ -156,9 +156,9 @@
                     <a href="http://superuser.openstack.org/articles/openstack-user-story-the-italian-institute-for-nuclear-physics-infn/" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="/themes/openstack/images/read.png">
+                            <img src="{$Top.CloudUrl("images/read.png")}">
                         </div>
-                        <img class="video-image" src="/themes/openstack/images/science/featured4.jpg" alt="Italian Institute for Nuclear Physics">
+                        <img class="video-image" src="{$Top.CloudUrl("images/science/featured4.jpg")}" alt="Italian Institute for Nuclear Physics">
                     </div>
                     </a>
                     <p class="video-title">

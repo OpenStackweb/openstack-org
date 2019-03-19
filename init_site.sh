@@ -20,10 +20,10 @@ mkdir -p assets
 sudo chmod 775 assets;
 mkdir -p silverstripe-cache
 sudo chmod 775 silverstripe-cache;
-ln -sfn $PWD/private-assets/themes/openstack/images $PWD/themes/openstack/images;
-sudo npm install;
+\sudo npm install;
 bower install --allow-root --config.interactive=false;
 npm run build-all;
 sudo ./framework/sake installsake;
 sake dev/build;
 sake dev/tasks/DBMigrateTask;
+./sass.sh;

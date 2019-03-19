@@ -11,7 +11,7 @@
         <div class="details span-10 last">
             <div class="last name-and-title">
                 <h3>$FirstName $Surname <% if hasAvailableCertifications %>
-                    <img height="65px" src="/themes/openstack/images/coa/coa-badge.jpg" title="COA Certified" alt="COA Certified">
+                    <img height="65px" src="{$Top.CloudUrl("images/coa/coa-badge.jpg")}" title="COA Certified" alt="COA Certified">
                 <% end_if %></h3>
 
             </div>

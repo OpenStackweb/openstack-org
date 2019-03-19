@@ -9,7 +9,7 @@
     <!-- GoogleAdWords Start -->
     $GATrackingCode
     <!-- GoogleAdWords End -->
-    <link rel="stylesheet" type="text/css" href="/themes/openstack/static/css/tooltipster.css" />
+    <link rel="stylesheet" type="text/css" href="/themes/openstack/css/tooltipster.css" />
 </head>
 
 <body>
@@ -82,7 +82,7 @@
     </div>
 </body>
 
-<script type="text/javascript" src="/themes/openstack/static/js/jquery.tooltipster.min.js"></script>
+<script type="text/javascript" src="/themes/openstack/javascript/jquery.tooltipster.min.js"></script>
 <script>
     var order_complete = false;
     <% if getOrder() %>

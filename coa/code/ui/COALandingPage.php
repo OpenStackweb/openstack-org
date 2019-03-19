@@ -235,7 +235,7 @@ HTML;
     }
 
     public function getHeroImageUrl(){
-        $default_url = '/themes/openstack/images/coa/coa-bkgd2.jpg';
+        $default_url = CloudAssetTemplateHelpers::cloud_url('images/coa/coa-bkgd2.jpg');
         if($this->HeroImage()->exists()){
             return $this->HeroImage()->Link();
         }

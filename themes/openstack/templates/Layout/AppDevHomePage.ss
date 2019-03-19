@@ -87,7 +87,7 @@
                         Start with the first app guide<br/>to learn how to program OpenStack clouds.
                     </p>
                     <a href="http://developer.openstack.org/firstapp-libcloud/getting_started.html" class="appdev-build-cover">
-                        <img src="/themes/openstack/images/appdev/guide-cover.png" alt="">
+                        <img src="{$Top.CloudUrl("images/appdev/guide-cover.png")}" alt="">
                     </a>
                 </div>
                 <div class="col-sm-6 appdev-build-row">
@@ -96,9 +96,9 @@
                     </p>
                     <a href="https://www.openstack.org/summit/vancouver-2015/summit-videos/presentation/build-and-operate-your-first-openstack-application" class="appdev-build-video">
                         <div class="play-button">
-                            <img src="/themes/openstack/images/play-button.png">
+                            <img src="{$Top.CloudUrl("images/play-button.png")}">
                         </div>
-                        <img src="/themes/openstack/images/appdev/video1.png" alt="">
+                        <img src="{$Top.CloudUrl("images/appdev/video1.png")}" alt="">
                     </a>
                 </div>
             </div>
@@ -140,17 +140,17 @@
                     <div class="row appdev-quotes">
                         <div class="col-sm-4">
                             <a href="http://superuser.openstack.org/articles/overstock-com-s-pet-adoption-site-gets-tails-wagging">
-                                <img class="appdev-quote-logo" src="/themes/openstack/images/appdev/overstock.png" alt="Overstock">
+                                <img class="appdev-quote-logo" src="{$Top.CloudUrl("images/appdev/overstock.png")}" alt="Overstock">
                             </a>
                         </div>
                         <div class="col-sm-4">
                             <a href="http://superuser.openstack.org/articles/vancouver-superuser-awards-finalist-comcast">
-                                <img class="appdev-quote-logo" src="/themes/openstack/images/appdev/comcast.png" alt="Comcast">
+                                <img class="appdev-quote-logo" src="{$Top.CloudUrl("images/appdev/comcast.png")}" alt="Comcast">
                             </a>
                         </div>
                         <div class="col-sm-4">
                             <a href="http://superuser.openstack.org/articles/vancouver-superuser-awards-finalist-ebay-inc">
-                                <img class="appdev-quote-logo" src="/themes/openstack/images/appdev/ebay.png" alt="Ebay">
+                                <img class="appdev-quote-logo" src="{$Top.CloudUrl("images/appdev/ebay.png")}" alt="Ebay">
                             </a>
                         </div>
                     </div>  
@@ -225,17 +225,17 @@
                     <a href="#" data-toggle="modal" data-target="#VideoModal1">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="/themes/openstack/images/play-button.png">
+                            <img src="{$Top.CloudUrl("images/play-button.png")}">
                         </div>
                         <div class="video-overlay">
                             <div class="small-play-button">
-                                <img src="/themes/openstack/images/play-button.png">
+                                <img src="{$Top.CloudUrl("images/play-button.png")}">
                             </div>
                             <p>
                                 Learn how to how to get started--sucessfully build, bootstrap, and operate your first cloud application on OpenStack.
                             </p>
                         </div>
-                        <img class="video-image" src="/themes/openstack/images/appdev/video1.png" alt="Build and operate your first OpenStack application">
+                        <img class="video-image" src="{$Top.CloudUrl("images/appdev/video1.png")}" alt="Build and operate your first OpenStack application">
                     </div>
                     </a>
                     <p class="video-title">
@@ -246,17 +246,17 @@
                     <a href="#" data-toggle="modal" data-target="#VideoModal2">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="/themes/openstack/images/play-button.png">
+                            <img src="{$Top.CloudUrl("images/play-button.png")}">
                         </div>
                         <div class="video-overlay">
                             <div class="small-play-button">
-                                <img src="/themes/openstack/images/play-button.png">
+                                <img src="{$Top.CloudUrl("images/play-button.png")}">
                             </div>
                             <p>
                                  If you're looking for a private cloud solution, find out how to run containers at scale and manage a cluster of containers.
                             </p>
                         </div>
-                        <img class="video-image" src="/themes/openstack/images/appdev/video2.png" alt="Private Cloud Dream Stack - OpenStack + CoreOS + Kubernetes">
+                        <img class="video-image" src="{$Top.CloudUrl("images/appdev/video2.png")}" alt="Private Cloud Dream Stack - OpenStack + CoreOS + Kubernetes">
                     </div>
                     </a>
                     <p class="video-title">
@@ -267,17 +267,17 @@
                     <a href="#" data-toggle="modal" data-target="#VideoModal3">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="/themes/openstack/images/play-button.png">
+                            <img src="{$Top.CloudUrl("images/play-button.png")}">
                         </div>
                         <div class="video-overlay">
                             <div class="small-play-button">
-                                <img src="/themes/openstack/images/play-button.png">
+                                <img src="{$Top.CloudUrl("images/play-button.png")}">
                             </div>
                             <p>
                                 Thinking of switching from AWS to OpenStack? Learn how to transition existing apps and workloads to OpenStack.
                             </p>
                         </div>
-                        <img class="video-image" src="/themes/openstack/images/appdev/video3.png" alt="Moving an AWS Workload to OpenStack">
+                        <img class="video-image" src="{$Top.CloudUrl("images/appdev/video3.png")}" alt="Moving an AWS Workload to OpenStack">
                     </div>
                     </a>
                     <p class="video-title">
@@ -288,17 +288,17 @@
                     <a href="#" data-toggle="modal" data-target="#VideoModal4">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="/themes/openstack/images/play-button.png">
+                            <img src="{$Top.CloudUrl("images/play-button.png")}">
                         </div>
                         <div class="video-overlay">
                             <div class="small-play-button">
-                                <img src="/themes/openstack/images/play-button.png">
+                                <img src="{$Top.CloudUrl("images/play-button.png")}">
                             </div>
                             <p>
                                 No sugar coating: See a critical analysis of OpenStack APIs, and how the community is working to continuously improve.
                             </p>
                         </div>
-                        <img class="video-image" src="/themes/openstack/images/appdev/video4.png" alt="The Good and the Bad of the OpenStack REST APIs">
+                        <img class="video-image" src="{$Top.CloudUrl("images/appdev/video4.png")}" alt="The Good and the Bad of the OpenStack REST APIs">
                     </div>
                     </a>
                     <p class="video-title">
@@ -317,7 +317,7 @@
                         Previously, requests for a full end-to-end environment have taken up to three months to fulfill … [now] the team is able to spin up their own environment with a few clicks. Within 15 minutes, everything has been stood up, it’s all been validated, passed health checks, and they’re able to get to work.
                     </blockquote>
                     <div class="testimonial-attribute">
-                        <img src="/themes/openstack/images/appdev/overstock.png">
+                        <img src="{$Top.CloudUrl("images/appdev/overstock.png")}">
                         <div class="testimonial-name">—Mike Smith</div>
                     </div>
                 </div>

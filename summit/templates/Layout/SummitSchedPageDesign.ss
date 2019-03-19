@@ -3,7 +3,8 @@
 <div class="container">
 	<div class="row center">
 		<h1 style="margin-bottom: 10px;">Schedule</h1>
-		<img class="schedule-selected" src="/themes/openstack/images/summit/tokyo/schedule/designconference-btn.png" alt="Design Summit Schedule">
+		<img class="schedule-selected"
+			 src="{$Top.CloudUrl("images/summit/tokyo/schedule/designconference-btn.png")}" alt="Design Summit Schedule">
 	</div>
 	<div class="row">
 		<div class="col-sm-12 schedule-subnav">

@@ -447,10 +447,9 @@ SQL;
         $img = $img->exists() ? $img : $this->Logo();
         if (isset($img) && Director::fileExists($img->Filename) && $img->exists()) {
             $img = $img->SetWidth(210);
-
+            if(is_null($img)) return '#';
             return $img->getURL();
         }
-
         return '#';
     }
 
@@ -460,7 +459,7 @@ SQL;
         $img = $img->exists() ? $img : $this->Logo();
         if (isset($img) && Director::fileExists($img->Filename) && $img->exists()) {
             $img = $img->SetWidth(300);
-
+            if(is_null($img)) return 'missing';
             return "<img alt='{$this->Name}_large_logo' src='{$img->getURL()}' class='large-logo-company company-logo'/>";
         }
 

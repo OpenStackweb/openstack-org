@@ -99,13 +99,13 @@ function openMap(){
 	$('.map iframe').animate({height: '400px'});
 	$('.map .cover').css({height: '0px'});
 	$('.map a').removeClass('open-map').addClass('close-map');
-	$('.map a img').attr('src','/themes/openstack/images/anniversary/3/section_map-arrow-close.png');
+	$('.map a img').attr('src', closeArrowImage);
 }
 function closeMap(){
 	$('.map iframe').animate({height: '150px'});
 	$('.map .cover').css({height: '150px'});
 	$('.map a').removeClass('close-map').addClass('open-map');       
-	$('.map a img').attr('src','/themes/openstack/images/anniversary/3/section_map-arrow.png');
+	$('.map a img').attr('src', openArrowImage);
 }
 
 function scrollStartPix(div){

@@ -69,7 +69,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-3 center">
-                    <img class="security-badge" src="//openstack.org/themes/openstack/images/security/badge.png" alt="">
+                    <img class="security-badge" src="{$Top.CloudUrl("images/security/badge.png")}" alt="">
                 </div>
                 <div class="col-sm-9">
                     <h2>OpenStack security experts answer your questions</h2>
@@ -150,7 +150,7 @@
                </div>
                <div class="col-sm-4">
                     <a href="/enterprise/virtualization-integration/">
-                        <img src="//openstack.org/themes/openstack/images/enterprise/legacy-thumb.jpg" alt="">
+                        <img src="{$Top.CloudUrl("images/enterprise/legacy-thumb.jpg")}" alt="">
                     </a>
                    <h3>Modernizing Virtualized Infrastructure</h3>
                    <p>
@@ -162,7 +162,7 @@
                </div>
                <div class="col-sm-4">
                     <a href="/enterprise/big-data/">
-                        <img src="//openstack.org/themes/openstack/images/enterprise/bigdata-thumb.jpg" alt="">
+                        <img src="{$Top.CloudUrl("images/enterprise/bigdata-thumb.jpg")}" alt="">
                     </a>
                    <h3>Big Data Analytics</h3>
                    <p>
@@ -208,7 +208,7 @@
                     <div class="row single-use-case">
                         <div class="col-sm-3">
                            <a href="http://superuser.openstack.org/articles/overstock-com-s-pet-adoption-site-gets-tails-wagging" class="rounded-wrapper">
-                               <img src="//openstack.org/themes/openstack/images/enterprise/use-cases/overstock.jpg" alt="">
+                               <img src="{$Top.CloudUrl("images/enterprise/use-cases/overstock.jpg")}" alt="">
                            </a>
                         </div>
                         <div class="col-sm-9">
@@ -225,7 +225,7 @@
                     <div class="row single-use-case">
                         <div class="col-sm-3">
                            <a href="http://superuser.openstack.org/articles/case-study-paypal-agility-with-stability" class="rounded-wrapper">
-                               <img src="//openstack.org/themes/openstack/images/enterprise/use-cases/paypal.jpg" alt="">
+                               <img src="{$Top.CloudUrl("images/enterprise/use-cases/paypal.jpg")}" alt="">
                            </a>
                         </div>
                         <div class="col-sm-9">
@@ -242,7 +242,7 @@
                     <div class="row single-use-case">
                         <div class="col-sm-3">
                            <a href="http://superuser.openstack.org/articles/pass-the-mic-user-spotlight-doug-soltesz-budd-van-lines" class="rounded-wrapper">
-                               <img src="//openstack.org/themes/openstack/images/enterprise/use-cases/budd-van.jpg" alt="">
+                               <img src="{$Top.CloudUrl("images/enterprise/use-cases/budd-van.jpg")}" alt="">
                            </a>
                         </div>
                         <div class="col-sm-9">
@@ -259,7 +259,7 @@
                     <div class="row single-use-case">
                         <div class="col-sm-3">
                            <a href="https://www.openstack.org/summit/openstack-paris-summit-2014/session-videos/presentation/standing-up-openstack-at-time-warner-cable" class="rounded-wrapper">
-                               <img src="//openstack.org/themes/openstack/images/enterprise/use-cases/time-warner.jpg" alt="">
+                               <img src="{$Top.CloudUrl("images/enterprise/use-cases/time-warner.jpg")}" alt="">
                            </a>
                         </div>
                         <div class="col-sm-9">
@@ -283,12 +283,12 @@
         <div class="container"> 
             <div class="row">
                 <div class="col-lg-8 col-lg-push-2">
-                    <img class="testimonial-author-img" src="//openstack.org/themes/openstack/images/enterprise/sri-paypal.jpg">
+                    <img class="testimonial-author-img" src="{$Top.CloudUrl("images/enterprise/sri-paypal.jpg")}">
                     <blockquote>
                         Our private cloud [based on OpenStack,] provides us with the agility, availability, manageability, efficiency and the foundation for innovation necessary to deliver the best products and services.
                     </blockquote>
                     <div class="testimonial-attribute">
-                        <img src="//openstack.org/themes/openstack/images/enterprise/paypal.png">
+                        <img src="{$Top.CloudUrl("images/enterprise/paypal.png")}">
                         <div class="testimonial-name">Sri Shivananda</div>
                         <div class="testimonial-title">Vice President, Global Platform and Infrastructure, PayPal</div>
                     </div>
@@ -314,17 +314,17 @@
                     <a href="#" data-toggle="modal" data-target="#VideoModalDisney">
                     <div class="video-wrapper">
                         <div class="play-button">
-                            <img src="//openstack.org/themes/openstack/images/enterprise/play-button.png">
+                            <img src="{$Top.CloudUrl("images/enterprise/play-button.png")}">
                         </div>
                         <div class="video-overlay">
                             <div class="small-play-button">
-                                <img src="//openstack.org/themes/openstack/images/enterprise/play-button.png">
+                                <img src="{$Top.CloudUrl("images/enterprise/play-button.png")}">
                             </div>
                             <p>
                                 Chris Launey of Walt Disney speaks with Jonathan about how he is using OpenStack to help empower technology in the workplace. 
                             </p>
                         </div>
-                        <img class="video-image" src="//openstack.org/themes/openstack/images/enterprise/video-disney.jpg" alt="Disney Talking About OpenStack">
+                        <img class="video-image" src="{$Top.CloudUrl("images/enterprise/video-disney.jpg")}" alt="Disney Talking About OpenStack">
                     </div>
                     </a>
                 </div>
@@ -332,17 +332,17 @@
                     <a href="#" data-toggle="modal" data-target="#VideoModalYearThree">
                     <div class="video-wrapper">
                         <div class="play-button">
-                            <img src="//openstack.org/themes/openstack/images/enterprise/play-button.png">
+                            <img src="{$Top.CloudUrl("images/enterprise/play-button.png")}">
                         </div>
                         <div class="video-overlay">
                             <div class="small-play-button">
-                                <img src="//openstack.org/themes/openstack/images/enterprise/play-button.png">
+                                <img src="{$Top.CloudUrl("images/enterprise/play-button.png")}">
                             </div>
                             <p>
                                 Das Kamhout of Intel discusses their 3rd year of OpenStack in a Large Scale Enterprise. 
                             </p>
                         </div>
-                        <img class="video-image" src="//openstack.org/themes/openstack/images/enterprise/video-year3.jpg" alt="Year 3 of OpenStack">
+                        <img class="video-image" src="{$Top.CloudUrl("images/enterprise/video-year3.jpg")}" alt="Year 3 of OpenStack">
                     </div>
                     </a>
                 </div>
@@ -350,17 +350,17 @@
                     <a href="#" data-toggle="modal" data-target="#VideoModalBloomberg">
                     <div class="video-wrapper">
                         <div class="play-button">
-                            <img src="//openstack.org/themes/openstack/images/enterprise/play-button.png">
+                            <img src="{$Top.CloudUrl("images/enterprise/play-button.png")}">
                         </div>
                         <div class="video-overlay">
                             <div class="small-play-button">
-                                <img src="//openstack.org/themes/openstack/images/enterprise/play-button.png">
+                                <img src="{$Top.CloudUrl("images/enterprise/play-button.png")}">
                             </div>
                             <p>
                                 We review how Bloomberg designed our stack to be fully active-active highly available and share some of our experiences operating our clouds.
                             </p>
                         </div>
-                        <img class="video-image" src="//openstack.org/themes/openstack/images/enterprise/video-bloomberg.jpg" alt="Bloomberg Talking About OpenStack">
+                        <img class="video-image" src="{$Top.CloudUrl("images/enterprise/video-bloomberg.jpg")}" alt="Bloomberg Talking About OpenStack">
                     </div>
                     </a>
                 </div>

@@ -35,7 +35,7 @@
                     <a href="{$Top.Link}presentation/{$URLSegment}">
                       <div class="video-thumb">
                         <div class="thumb-play"></div>
-                        <img class="video-thumb-img" src="/themes/openstack/images/no-video.jpg">
+                        <img class="video-thumb-img" src="{$Top.CloudUrl("images/no-video.jpg")}">
                       </div>
                       <div class="video-details">
                         <p class="video-thumb-title">

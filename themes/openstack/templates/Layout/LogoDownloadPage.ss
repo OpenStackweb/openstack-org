@@ -41,7 +41,7 @@ function SelectAll(id)
 
 <div class="prepend-2 span-9 last">
 	<h2>Logo Size &amp; Clear Space</h2>
-	<img src="/themes/openstack/images/downloadpage/openstack-logo-size-graphic-learn-more.png" />
+	<img src="{$Top.CloudUrl("images/downloadpage/openstack-logo-size-graphic-learn-more.png")}" />
 	<h2>Usage Guidelines</h2>
 	<ul>
 		<li>Avoid using Brand Assets in a way that suggests approval, sponsorship, or endorsement by OpenStack.</li>

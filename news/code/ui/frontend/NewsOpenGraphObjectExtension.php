@@ -28,7 +28,7 @@ class NewsOpenGraphObjectExtension extends OpenGraphObjectExtension
     public function getOGImage()
     {
         $image = $this->owner->Image();
-        $default_image = Director::absoluteURL('/themes/openstack/images/summit/openstacklogo-fb.png');
+        $default_image = Director::absoluteURL(CloudAssetTemplateHelpers::cloud_url('images/summit/openstacklogo-fb.png'));
 
         $og_image = new OGImage();
         $og_image->Width = 200;

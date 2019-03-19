@@ -214,6 +214,7 @@ class OpenStackMember
     {
         $img = $this->owner->Photo();
         $twitter_name = $this->owner->TwitterName;
+
         if (!is_null($img) && $img->exists() && Director::fileExists($img->Filename)) {
             if ($force_square && $img->getOrientation() == Image::ORIENTATION_LANDSCAPE) {
                 $img_width = $img->getWidth();
@@ -222,7 +223,7 @@ class OpenStackMember
 
             $img = $img->SetWidth($width);
             if(is_null($img))
-                return "<img src='themes/openstack/images/generic-profile-photo.png'/>";
+                return "<img src='".CloudAssetTemplateHelpers::cloud_url('images/generic-profile-photo.png')."'/>";
             return "<img alt='{$this->owner->ID}_profile_photo' src='{$img->getURL()}' class='member-profile-photo'/>";
         } elseif (!empty($twitter_name)) {
             if ($width < 100) {
@@ -232,9 +233,9 @@ class OpenStackMember
             }
         } else {
             if ($width < 100) {
-                return "<img src='themes/openstack/images/generic-profile-photo-small.png'/>";
+                return "<img src='".CloudAssetTemplateHelpers::cloud_url("images/generic-profile-photo-small.png")."'/>";
             } else {
-                return "<img src='themes/openstack/images/generic-profile-photo.png'/>";
+                return "<img src='".CloudAssetTemplateHelpers::cloud_url("images/generic-profile-photo.png")."'/>";
             }
         }
     }
@@ -255,7 +256,7 @@ class OpenStackMember
         } elseif ($generic_photo_type == 'speaker') {
             return Director::absoluteBaseURL().'summit/images/generic-speaker-icon.png';
         } else {
-            return Director::absoluteBaseURL().'themes/openstack/images/generic-profile-photo.png';
+            return CloudAssetTemplateHelpers::cloud_url('images/generic-profile-photo.png');
         }
     }
 

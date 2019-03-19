@@ -59,7 +59,7 @@
                         OpenStack is not a cloud. It is not a project or a product. It is not a virtualization system or an API or a user interface or a set of standards. OpenStack is all of these things and more: it is a framework for doing IT infrastructure—all IT infrastructure—in as interchangeable and interoperable a way as we are ever likely to know how.
                     </blockquote>
                     <div class="testimonial-attribute">
-                        <img src="/themes/openstack/images/isv/the-register.png">
+                        <img src="{$Top.CloudUrl("images/isv/the-register.png")}">
                         <div class="testimonial-name">—Trevor Pott</div>
                     </div>
                 </div>
@@ -98,7 +98,7 @@
             <div class="row isv-growth-wrapper">
                 <div class="col-sm-12">
                     <a href="/images/isv/survey-chart.png" target="_blank">
-                        <img src="/themes/openstack/images/isv/survey-chart.png" class="isv-growth-chart" alt="">
+                        <img src="{$Top.CloudUrl("images/isv/survey-chart.png")}" class="isv-growth-chart" alt="">
                     </a>
                     <div class="isv-growth-right">
                         <div class="isv-sml">
@@ -154,7 +154,7 @@
                                 Your company can display the <a href="" target="_blank">OpenStack Compatible</a> mark to your customers and prospects. The program is designed to recognize software solutions that are tested to interact with OpenStack Powered systems.
                             </p>
                             <p>
-                                <img src="/themes/openstack/images/isv/openstack-compatible.png" alt="">
+                                <img src="{$Top.CloudUrl("images/isv/openstack-compatible.png")}" alt="">
                             </p>
                         </div>
                         <div class="col-sm-6">
@@ -167,13 +167,13 @@
                                 Access to an OpenStack Powered public cloud for development and testing
                             </p>
                             <p>
-                                <img src="/themes/openstack/images/isv/openstack-powered.png" alt="">
+                                <img src="{$Top.CloudUrl("images/isv/openstack-powered.png")}" alt="">
                             </p>
                             <p>
                                 Testing on an OpenStack Powered cloud will help ensure your solutions will run well on other OpenStack clouds.  Visit the <a href="" target="_blank">OpenStack Marketplace Public Clouds</a> section and look for the green TESTED checkbox
                             </p>
                             <p>
-                                <img src="/themes/openstack/images/isv/tested-check.png" style="max-width: 310px;" alt="">
+                                <img src="{$Top.CloudUrl("images/isv/tested-check.png")}" style="max-width: 310px;" alt="">
                             </p>
                             <p>
                                 The <a href="https://osic.org/" target="_blank">OpenStack Innovation Center (OSIC)</a> is also a resource for testing your applications. We have a special arrangement with OSIC, and you may request cluster time and resources by contacting <a href="mailto:isv@openstack.org" target="_blank">isv@openstack.org</a>.
@@ -267,9 +267,9 @@
                     <a href="{$Top.CloudUrl('assets/survey/April-2016-User-Survey-Report.pdf')}" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="/themes/openstack/images/read.png">
+                            <img src="{$Top.CloudUrl("images/read.png")}">
                         </div>
-                        <img class="video-image" src="/themes/openstack/images/isv/featured1.jpg" alt="User success stories">
+                        <img class="video-image" src="{$Top.CloudUrl("images/isv/featured1.jpg")}" alt="User success stories">
                     </div>
                     </a> 
                     <p class="video-title" style="width: 100%;">
@@ -280,9 +280,9 @@
                     <a href="http://superuser.openstack.org/articles/section/user-stories" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="/themes/openstack/images/read.png">
+                            <img src="{$Top.CloudUrl("images/read.png")}">
                         </div>
-                        <img class="video-image" src="/themes/openstack/images/isv/featured2.jpg" alt="Analyst reports">
+                        <img class="video-image" src="{$Top.CloudUrl("images/isv/featured2.jpg")}" alt="Analyst reports">
                     </div>
                     </a>
                     <p class="video-title">
@@ -293,9 +293,9 @@
                     <a href="http://www.openstack.org/enterprise/forrester-report/" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="/themes/openstack/images/read.png">
+                            <img src="{$Top.CloudUrl("images/read.png")}">
                         </div>
-                        <img class="video-image" src="/themes/openstack/images/isv/featured3.jpg" alt="Forrester Report Brief: OpenStack Is Now Ready For Business">
+                        <img class="video-image" src="{$Top.CloudUrl("images/isv/featured3.jpg")}" alt="Forrester Report Brief: OpenStack Is Now Ready For Business">
                     </div>
                     </a>
                     <p class="video-title">

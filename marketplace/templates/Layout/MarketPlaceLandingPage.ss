@@ -111,7 +111,7 @@
 	<div class="row">
 		<div class="col-sm-8 col-sm-push-2 center">
 			<hr class="marketplace-hr">
-			<img src="/themes/openstack/images/marketplace/new/drivers.svg" class="marketplace-single-icon" alt="">
+			<img src="{$Top.CloudUrl("images/marketplace/new/drivers.svg")}" class="marketplace-single-icon" alt="">
 			<h2 class="marketplace-title">Software Drivers for all your Devices</h2>
 			<p>
 				A growing collection of software drivers are available to plug all kinds of storage, networking and compute devices into your OpenStack infrastructure.

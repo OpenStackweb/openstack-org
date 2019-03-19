@@ -103,40 +103,39 @@ function openMap(){
     $('.map iframe').animate({height: '400px'});
     $('.map .cover').css({height: '0px'});
     $('.map a').removeClass('open-map').addClass('close-map');
-    $('.map a img').attr('src','/themes/openstack/images/anniversary/4/section_map-arrow-close.png');
+    $('.map a img').attr('src', closeArrowImage);
 }
 function closeMap(){
     $('.map iframe').animate({height: '150px'});
     $('.map .cover').css({height: '150px'});
     $('.map a').removeClass('close-map').addClass('open-map');
-    $('.map a img').attr('src','/themes/openstack/images/anniversary/4/section_map-arrow.png');
+    $('.map a img').attr('src', openArrowImage);
 }
 
 function scrollStartPix(div){
     return parseInt($(div).offset().top - ($(window).height()/2));
-
 }
 
 function robot(){
 $("#robot").animate({right: '+=860', top: '+=250'}, 900, 'swing', function(){
-    $("#robot img").attr("src", "/themes/openstack/images/anniversary/4/robot-2.png");
+    $("#robot img").attr("src", robot2Image);
     $('.second').fadeIn(1000);
     $('.header-title:first').fadeOut(1600, function(){
         $( ".header-title:first" ).remove();
     });
 
     $("#robot").delay(2000).animate({right: '-=60', top: '-=210'}, 900, function(){
-        $("#robot img").attr("src", "/themes/openstack/images/anniversary/4/robot-2-b.png");
+        $("#robot img").attr("src", robot2bImage);
         $('.third').fadeIn(1000);
         $('.header-title:first').fadeOut(1600, function(){
             $(".header-title:first").remove();
             var moveTo = ($(window).width()/2)+300;
-            $("#robot img").attr("src", "/themes/openstack/images/anniversary/4/robot-4.png");
+            $("#robot img").attr("src", robot24Image);
             $("#robot").animate({ right: '-='+moveTo+'', top: '-=0'}, 900, function(){
                 $('.fourth').fadeIn(1000);
                 $('.header-title:first').fadeOut(1600, function(){
                     $(".header-title:first" ).remove();
-                    $("#robot img").attr("src", "/themes/openstack/images/anniversary/4/robot-3.png");
+                    $("#robot img").attr("src", robot3Image);
                     $("#robot").css({
                         "height": "298",
                         "width": "222",

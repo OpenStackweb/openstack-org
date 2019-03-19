@@ -1,7 +1,7 @@
 <style>
     .hero-survey {
         background-color: transparent;
-        background-image: url('themes/openstack/images/user-survey/report_cover_image.jpg');
+        background-image: url('{$Top.CloudUrl("/images/user-survey/report_cover_image.jpg")}');
         background-repeat: no-repeat;
         background-position: left center;
         background-attachment: scroll;

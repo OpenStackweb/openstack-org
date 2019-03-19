@@ -66,14 +66,6 @@ Next, within your VM, navigate to the appropriate folder to create the symbolic 
 
 	$ cd /var/www/local.openstack.org
 
-Create the symlink:
-
-	$ ln -s /var/www/local.openstack.org/private-assets/themes/openstack/images /var/www/local.openstack.org/themes/openstack/images
-
-Then, you will add your images, not on the VM, but on your local development environment here:
-
-	private-assets/themes/openstack/images
-
 When you are finished, you will need to save, commit, and push your commit to the private assets repo.  Remember that this is a separate repository from your OpenStackweb development environment and will require separate Git actions.
 
 ### **Push your work to the OpenStackweb Github repository.**

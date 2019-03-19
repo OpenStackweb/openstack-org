@@ -98,7 +98,7 @@
                     <a href="https://www.coreinfrastructure.org/">The Core Infrastructure Initiative</a> is a Linux Foundation project that develops criteria and validates open source projects meeting best practices for security, quality and stability. OpenStack is now validated by a trusted third party and is 100% compliant.
                     </p>
                     <p>
-                        <img class="security-badge" src="/themes/openstack/images/security/badge.png" alt="">
+                        <img class="security-badge" src="{$Top.CloudUrl("images/security/badge.png")}" alt="">
                     </p>
                     <p>
                         <a href="http://www.openstack.org/news/view/243/openstack-earns-core-infrastructure-initiative-best-practices-badge-for-security,-quality-and-stability">Read the press release for more information.</a>
@@ -209,9 +209,9 @@
                     <a href="http://superuser.openstack.org/articles/an-openstack-security-primer" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="/themes/openstack/images/read.png">
+                            <img src="{$Top.CloudUrl("images/read.png")}">
                         </div>
-                        <img class="video-image" src="/themes/openstack/images/security/featured1.jpg" alt="User success stories">
+                        <img class="video-image" src="{$Top.CloudUrl("images/security/featured1.jpg")}" alt="User success stories">
                     </div> 
                     </a> 
                     <p class="video-title" style="width: 100%;">
@@ -222,9 +222,9 @@
                     <a href="http://superuser.openstack.org/articles/get-to-know-the-openstack-security-project" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="/themes/openstack/images/play-button.png">
+                            <img src="{$Top.CloudUrl("images/play-button.png")}">
                         </div>
-                        <img class="video-image" src="/themes/openstack/images/security/featured2.jpg" alt="Superuser TV interview with Travis McPeak, OpenStack Security Architect: Getting to Know the OpenStack Security Project">
+                        <img class="video-image" src="{$Top.CloudUrl("images/security/featured2.jpg")}" alt="Superuser TV interview with Travis McPeak, OpenStack Security Architect: Getting to Know the OpenStack Security Project">
                     </div>
                     </a>
                     <p class="video-title">
@@ -235,9 +235,9 @@
                     <a href="http://www.openstack.org/analysts" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="/themes/openstack/images/read.png">
+                            <img src="{$Top.CloudUrl("images/read.png")}">
                         </div>
-                        <img class="video-image" src="/themes/openstack/images/security/featured3.jpg" alt="Analysts report OpenStack is Ready for Business">
+                        <img class="video-image" src="{$Top.CloudUrl("images/security/featured3.jpg")}" alt="Analysts report OpenStack is Ready for Business">
                     </div>
                     </a>
                     <p class="video-title">

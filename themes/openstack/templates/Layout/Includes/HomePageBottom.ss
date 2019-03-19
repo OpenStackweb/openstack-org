@@ -21,7 +21,7 @@
                     <div class="release-text">Latest Release: <a href="/software/rocky/">Rocky</a> (August 2018)</div>
                 </div>
                 <div class="col-lg-6 col-sm-12 overview-right">
-                    <img class="img-responsive control-cloud-graphic" src="/themes/openstack/images/control-your-cloud.svg" onerror="this.onerror=null; this.src=/images/control-your-cloud.png" alt="OpenStack Cloud Software">
+                    <img class="img-responsive control-cloud-graphic" src="{$Top.CloudUrl("images/control-your-cloud.svg")}" onerror="this.onerror=null; this.src=/images/control-your-cloud.png" alt="OpenStack Cloud Software">
                     <a href="http://www.youtube.com/watch?v=z6ftW7fUdp4?autoplay=1" target="_blank" class="demo-link">Watch a Demo of the Dashboard <i class="fa fa-play-circle-o"></i></a>
                 </div>
             </div>
@@ -41,12 +41,12 @@
                     </h2>
                 </div>
                 <div class="col-lg-12 col-sm-12 customer-logos-wrapper">
-                    <div class="customer-logos" id="bloomberg-logo"><img src="/themes/openstack/images/customer-bloomberg.png" alt="Bloomberg Uses OpenStack"></div>
-                    <div class="customer-logos" id="bestbuy-logo"><img src="/themes/openstack/images/customer-bestbuy.png" alt="Best Buy Uses OpenStack"></div>
-                    <!-- <div class="col-md-2 customer-logos"id="sony-logo"><img src="/themes/openstack/images/customer-sony.png" alt="Sony Uses OpenStack"></div> -->
-                    <div class="customer-logos logo-hover"id="comcast-logo"><img src="/themes/openstack/images/customer-comcast.png" alt="Comcast Uses OpenStack">
+                    <div class="customer-logos" id="bloomberg-logo"><img src="{$Top.CloudUrl("images/customer-bloomberg.png")}" alt="Bloomberg Uses OpenStack"></div>
+                    <div class="customer-logos" id="bestbuy-logo"><img src="{$Top.CloudUrl("images/customer-bestbuy.png")}" alt="Best Buy Uses OpenStack"></div>
+                    <!-- <div class="col-md-2 customer-logos"id="sony-logo"><img src="{$Top.CloudUrl("images/customer-sony.png")}" alt="Sony Uses OpenStack"></div> -->
+                    <div class="customer-logos logo-hover"id="comcast-logo"><img src="{$Top.CloudUrl("images/customer-comcast.png")}" alt="Comcast Uses OpenStack">
                     </div>
-                      <div class="customer-logos"id="paypal-logo"><img src="/themes/openstack/images/customer-paypal.png" alt="PayPal Uses OpenStack"></div>
+                      <div class="customer-logos"id="paypal-logo"><img src="{$Top.CloudUrl("images/customer-paypal.png")}" alt="PayPal Uses OpenStack"></div>
                     </div>
                 </div>
                 <div class="col-lg-12 col-sm-12">
@@ -69,7 +69,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <object type="image/svg+xml" class="img-responsive community-graphic" data="/themes/openstack/images/community-graphic.svg?people=$MembersCount&countries=$CountryCount&organizations=$OrganizationCount&codelines=20M+" onerror="this.onerror=null; this.src=/images/community-graphic.png" alt="OpenStack Community">
+                    <object type="image/svg+xml" class="img-responsive community-graphic"
+                            data="{$Top.CloudUrl("images/community-graphic.svg?people=$MembersCount&countries=$CountryCount&organizations=$OrganizationCount&codelines=20M+")}" onerror="this.onerror=null; this.src={$Top.CloudUrl("/images/community-graphic.png")}" alt="OpenStack Community">
                     </object>
                 </div>
                 <div class="col-md-6">

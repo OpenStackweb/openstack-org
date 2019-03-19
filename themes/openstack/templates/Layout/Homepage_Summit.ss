@@ -14,7 +14,7 @@
                     </div>
                     <div class="livestream-sponsor">
                         <a href="/summit">
-                            <img src="/themes/openstack/images/summit-event-logo.png" alt="">
+                            <img src="{$Top.CloudUrl("images/summit-event-logo.png")}" alt="">
                         </a>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
                     </div>
                     <div class="livestream-sponsor">
                         <a href="/summit">
-                            <img src="/themes/openstack/images/summit-event-logo.png" alt="">
+                            <img src="{$Top.CloudUrl("images/summit-event-logo.png")}" alt="">
                         </a>
                     </div>
                 </div>

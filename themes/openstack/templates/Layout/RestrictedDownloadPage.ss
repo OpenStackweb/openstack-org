@@ -2,7 +2,6 @@
 	<h1>Download The $Parent.Title</h1>
 	<p>Look carefully to make sure you chose the right badge for your needs. The badge is provided as a PNG graphic and an Adobe Illustrator file.</p>
 </div>
-
 <div class="span-13 assestsArea">
 	
 	<div class="assestBox">
@@ -10,11 +9,9 @@
 	</div>
 					
 </div>
-
-
 <div class="prepend-2 span-9 last">
 	<h2>Logo Size &amp; Clear Space</h2>
-	<img src="/themes/openstack/images/sizing-guides/{$GuidelinesLogoLink}" />
+	<img src="{$GuidelinesLogoLinkUrl}" />
 	<h2>Usage Guidelines</h2>
 	<ul>
 		<li>Avoid using Brand Assets in a way that suggests approval, sponsorship, or endorsement by OpenStack.</li>

@@ -32,7 +32,7 @@
           </div>
         </div>-->
         <a href="http://www.cafepress.com/openstack.2008707988" class="swag-image-wrapper">
-          <img src="/themes/openstack/images/swag-store/items/free_as_in_tshirt.png" alt="" class="swag-photo">
+          <img src="{$Top.CloudUrl("images/swag-store/items/free_as_in_tshirt.png")}" alt="" class="swag-photo">
         </a>
         <div class="div">
           <div class="swag-price">
@@ -55,7 +55,7 @@
           </div>
         </div>-->
         <a href="http://www.cafepress.com/openstack.2008707987" class="swag-image-wrapper">
-          <img src="/themes/openstack/images/swag-store/items/we-are-os-red.png" alt="" class="swag-photo">
+          <img src="{$Top.CloudUrl("images/swag-store/items/we-are-os-red.png")}" alt="" class="swag-photo">
         </a>
         <div class="div">
           <div class="swag-price">
@@ -78,7 +78,7 @@
           </div>
         </div>-->
         <a href="https://www.stickermule.com/marketplace/15757-i-heart-openstack" target="_blank" class="swag-image-wrapper">
-          <img src="/themes/openstack/images/swag-store/items/i_heart_o-sticker.png" alt="" class="swag-photo">
+          <img src="{$Top.CloudUrl("images/swag-store/items/i_heart_o-sticker.png")}" alt="" class="swag-photo">
         </a>
         <div class="div">
           <div class="swag-price">
@@ -101,7 +101,7 @@
           </div>
         </div>-->
         <!--<a href="#" target="_blank" class="swag-image-wrapper">
-          <img src="/themes/openstack/images/swag-store/items/woo-red-shirt.png" alt="" class="swag-photo">
+          <img src="{$Top.CloudUrl("images/swag-store/items/woo-red-shirt.png")}" alt="" class="swag-photo">
         </a>
         <div class="div">
           <div class="swag-price">
@@ -124,7 +124,7 @@
           </div>
         </div>-->
         <a href="http://www.cafepress.com/openstack.2008716337" target="_blank" class="swag-image-wrapper">
-          <img src="/themes/openstack/images/swag-store/items/we-are-women-hoodie.png" alt="" class="swag-photo">
+          <img src="{$Top.CloudUrl("images/swag-store/items/we-are-women-hoodie.png")}" alt="" class="swag-photo">
         </a>
         <div class="div">
           <div class="swag-price">
@@ -147,7 +147,7 @@
           </div>
         </div>-->
         <a href="http://www.cafepress.com/openstack.2008715613" target="_blank" class="swag-image-wrapper">
-          <img src="/themes/openstack/images/swag-store/items/we-are-men-hoodie.png" alt="" class="swag-photo">
+          <img src="{$Top.CloudUrl("images/swag-store/items/we-are-men-hoodie.png")" alt="" class="swag-photo">
         </a>
         <div class="div">
           <div class="swag-price">
@@ -170,7 +170,7 @@
           </div>
         </div>-->
         <!--<a href="#" target="_blank" class="swag-image-wrapper">
-          <img src="/themes/openstack/images/swag-store/items/trucker-hat.png" alt="" class="swag-photo">
+          <img src="{$Top.CloudUrl("images/swag-store/items/trucker-hat.png")}" alt="" class="swag-photo">
         </a>
         <div class="div">
           <div class="swag-price">
@@ -193,7 +193,7 @@
           </div>
         </div>-->
         <!--<a href="#" target="_blank" class="swag-image-wrapper">
-          <img src="/themes/openstack/images/swag-store/items/coozie.png" alt="" class="swag-photo">
+          <img src="{$Top.CloudUrl("images/swag-store/items/coozie.png")}" alt="" class="swag-photo">
         </a>
         <div class="div">
           <div class="swag-price">
@@ -216,7 +216,7 @@
           </div>
         </div>-->
         <a href="http://www.cafepress.com/openstack.2008693203" target="_blank" class="swag-image-wrapper">
-          <img src="/themes/openstack/images/swag-store/items/i-heart-o.png" alt="" class="swag-photo">
+          <img src="{$Top.CloudUrl("images/swag-store/items/i-heart-o.png")}" alt="" class="swag-photo">
         </a>
         <div class="div">
           <div class="swag-price">
@@ -239,7 +239,7 @@
           </div>
         </div>-->
         <a href="http://www.cafepress.com/openstack.2008690124" target="_blank" class="swag-image-wrapper">
-          <img src="/themes/openstack/images/swag-store/items/stacker-tshirt.png" alt="" class="swag-photo">
+          <img src="{$Top.CloudUrl("images/swag-store/items/stacker-tshirt.png")}" alt="" class="swag-photo">
         </a>
         <div class="div">
           <div class="swag-price">

@@ -43,9 +43,9 @@
 	<div class="headline-sponsors">
 		<hr />
 		<h3>Our Headline Sponsors</h3>
-		<a href="http://www.hpcloud.com"><img src="/themes/openstack/images/conferences/hp-sponsor-logo.jpg" width="182" height="87" /></a>
-		<a href="http://nebula.com/"><img src="/themes/openstack/images/conferences/nebula-sponsor-logo.jpg" width="182" height="58" /></a>
-		<a href="http://cloud.ubuntu.com/"><img src="/themes/openstack/images/conferences/ubuntu-sponsor-logo.png" width="182" height="66" /></a>
+		<a href="http://www.hpcloud.com"><img src="{$Top.CloudUrl("images/conferences/hp-sponsor-logo.jpg")}" width="182" height="87" /></a>
+		<a href="http://nebula.com/"><img src="{$Top.CloudUrl("images/conferences/nebula-sponsor-logo.jpg")}" width="182" height="58" /></a>
+		<a href="http://cloud.ubuntu.com/"><img src="{$Top.CloudUrl("images/conferences/ubuntu-sponsor-logo.png")}" width="182" height="66" /></a>
 	</div>
 
 </div>

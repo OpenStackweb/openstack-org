@@ -68,7 +68,7 @@
 		    	</p>
 		    	<hr>
 		    	<p class="center">
-		    		<img src="/themes/openstack/images/summit/tokyo/hotel-promo-pic.png" alt="">
+		    		<img src="{$Top.CloudUrl("images/summit/tokyo/hotel-promo-pic.png")}" alt="">
 		    	</p>
 		    </div>
     	</div>
