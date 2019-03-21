@@ -20,3 +20,7 @@ ul.columned-list {
     -webkit-columns: 200px 3;
     -moz-columns: 200px 3;
 }
+
+ul.optionset{
+    height: auto !important;
+}

@@ -7,3 +7,7 @@ form {
   margin-bottom: 1em; }
 
 /*# sourceMappingURL=registration.page.css.map */
+
+ul.optionset{
+  height: auto !important;
+}
