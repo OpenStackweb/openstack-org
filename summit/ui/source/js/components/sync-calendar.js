@@ -22,7 +22,6 @@ class SyncCal extends React.Component {
     }
 
     handleCalChange(event, cal_type) {
-
         this.setState({cal_type: cal_type, ios_user: '', ios_pass: ''});
     }
 
@@ -56,7 +55,7 @@ class SyncCal extends React.Component {
                 </h4>
                 <form onSubmit={e => this.handleSubmit(e)}>
                     <div className="row">
-                        <div className="form-group col-md-4">
+                        <div className="form-group col-md-5">
                             <label>Please select your calendar type:</label>
                             <br/>
                             <div className="cal_box">

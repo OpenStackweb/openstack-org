@@ -678,10 +678,21 @@ a.profile-pic-wrapper {
     }
 }
 
+.sync_modal{
+    .modal-dialog{
+        top: 55px !important;
+    }
+}
 
 .col-switch-schedule, .col-switch-watchlist, .col-toggle-sync {
     float: right;
     margin-right: 20px;
+}
+
+.col-calendar-share-link {
+    float: left;
+    margin-left: 75px;
+    margin-top: 10px;
 }
 
 .switch_schedule, .switch_favorites, .toggle_sync {
@@ -1133,10 +1144,12 @@ span.caret-event-actions {
 .google{background-image:url(/summit/images/google.jpg);}
 .apple{background-image:url(/summit/images/apple.jpg);}
 .outlook{background-image:url(/summit/images/outlook.jpg);}
+.ics_feed{background-image:url(/summit/images/ics.png);}
 
 .cal_box {
     margin-top: 10px;
 }
+
 .selected.cal_image{
     -webkit-filter: none;
     -moz-filter: none;

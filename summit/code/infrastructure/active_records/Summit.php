@@ -646,6 +646,18 @@ class Summit extends DataObject implements ISummit
         ])->first();
     }
 
+    /**
+     * @return DateTimeZone|null
+     */
+    public function getTimeZone()
+    {
+        try {
+            return new DateTimeZone($this->TimeZoneIdentifier);
+        } catch (\Exception $ex) {
+            return null;
+        }
+    }
+
     public static function CurrentSummitID()
     {
         $current = self::CurrentSummit();

@@ -9,12 +9,12 @@ import {
     UNSYNC_CALENDAR,
     CALENDAR_SYNCD,
     REQUESTING_EVENTS,
-    RECEIVE_EVENTS_FULL
-} from '../actions'
+    RECEIVE_EVENTS_FULL,
+} from '../actions';
 
-import Filter from './tools/filter'
+import Filter from './tools/filter';
 
-const FILTER_URL_EXCLUDE = ['going', 'favorites']
+const FILTER_URL_EXCLUDE = ['going', 'favorites'];
 
 const DEFAULT_STATE = {
     view: {
@@ -35,7 +35,7 @@ const DEFAULT_STATE = {
 }
 
 const ScheduleReducer = (state = DEFAULT_STATE, action) => {
-    const { type, payload } = action
+    const { type, payload } = action;
     switch (type) {
         case REQUESTING_EVENTS:
             return {
@@ -144,7 +144,7 @@ const ScheduleReducer = (state = DEFAULT_STATE, action) => {
 
         case CALENDAR_SYNCD:
             window.location = ScheduleProps.summit.schedule_link;
-
+        break;
     }
 
     return state

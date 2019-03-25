@@ -9,6 +9,9 @@ PresentationPage_Controller:
     SpeakerManager: '%$SpeakerManager'
     SpeakerRepository: '%$SpeakerRepository'
     MemberRepository: '%$MemberRepository'
+CalendarSyncController:
+  dependencies:
+    ICSFeedManager: '%$ICalendarSyncICSFeedManager'
 SummitSpeakersPage_Controller:
   dependencies:
     SpeakerRepository: '%$SpeakerRepository'
@@ -296,3 +299,5 @@ Injector:
   EventbriteSummitOrderConciliation:
     constructor:
       0: '%$EventbriteEventManager'
+  ICalendarSyncICSFeedManager:
+    class: CalendarSyncICSFeedManager

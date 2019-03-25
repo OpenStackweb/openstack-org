@@ -158,4 +158,24 @@ interface IAttendeeMember extends IEntity
      */
     public function getCalendarSyncInfoBy($summit_id);
 
+    /**
+     * @param Summit $summit
+     * @return PersonalCalendarShareInfo
+     * @throws EntityValidationException
+     */
+    public function createCalendarShareableLink(Summit $summit);
+
+    /**
+     * @param string $provider
+     * @param int $summit_id
+     * @return bool
+     */
+    public function existCalendarShareableLinkForSummit(int $summit_id):bool;
+
+    /**
+     * @param int $summit_id
+     * @return mixed
+     */
+    public function getCalendarShareableLinkForSummit(int $summit_id);
+
 }

@@ -14,19 +14,143 @@ final class CalendarSyncController extends AbstractRestfulJsonApi
     const OUTLOOK_AUTHORIZE_ENDPOINT = '/oauth2/v2.0/authorize';
     const OUTLOOK_TOKEN_ENDPOINT = '/oauth2/v2.0/token';
 
+    /**
+     * @var ICalendarSyncICSFeedManager
+     */
+    private $ics_feed_manager;
+
+    /**
+     * @param ICalendarSyncICSFeedManager $ics_feed_manager
+     */
+    public function setICSFeedManager(ICalendarSyncICSFeedManager $ics_feed_manager){
+        $this->ics_feed_manager = $ics_feed_manager;
+    }
+
     private static $allowed_actions = [
         'loginGoogle',
         'loginOutlook',
         'unSyncCalendar',
         'syncAppleCalendar',
+        'createCalendarShareableLink',
+        'getCalendarFeed',
+        'deleteCalendarShareableLink',
     ];
 
     private static $url_handlers = [
-        'GET login-google'  => 'loginGoogle',
-        'GET login-outlook' => 'loginOutlook',
-        'DELETE unsync'     => 'unSyncCalendar',
-        'PUT login-apple'   => 'syncAppleCalendar',
+        'GET calendar/$CID!'                      => 'getCalendarFeed',
+        'GET login-google'                        => 'loginGoogle',
+        'GET login-outlook'                       => 'loginOutlook',
+        'DELETE unsync'                           => 'unSyncCalendar',
+        'PUT login-apple'                         => 'syncAppleCalendar',
+        'POST calendar-shareable-link'            => 'createCalendarShareableLink',
+        'DELETE calendar-shareable-link/current'  => 'deleteCalendarShareableLink'
     ];
+
+    public function getCalendarFeed(SS_HTTPRequest $request){
+        $response = new SS_HTTPResponse();
+
+        try
+        {
+            $cid  = strval($request->param('CID'));
+            $response->setStatusCode(200);
+            $response->setBody($this->ics_feed_manager->buildFeed($cid));
+        }
+        catch(NotFoundEntityException $ex1)
+        {
+            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
+            $response->setStatusCode(404);
+        }
+        catch(ValidationException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            $response->setStatusCode(412);
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            $response->setStatusCode(500);
+        }
+        return $response;
+    }
+
+    /**
+     * @param SS_HTTPRequest $request
+     * @return SS_HTTPResponse
+     */
+    public function createCalendarShareableLink(SS_HTTPRequest $request){
+        $response = new SS_HTTPResponse();
+        try
+        {
+            $json        = $this->getJsonRequest();
+            $summit_id   = isset($apple_cred['summit_id']) ? Convert::raw2sql(trim($json['summit_id'])) : 0;
+            $summit       = ($summit_id) ? Summit::get()->byID($summit_id) : Summit::get_active();
+            $member = Member::currentUser();
+            if ($member) {
+                $share_info = $member->createCalendarShareableLink($summit);
+                return $this->ok(
+                    [
+                        'calendar_shareable_link' =>
+                        sprintf("%ssummit-calendar-sync/calendar/%s", Director::absoluteBaseURL(),$share_info->Hash )
+                    ]
+                );
+            }
+            return $this->notFound();
+        }
+        catch(NotFoundEntityException $ex1)
+        {
+            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
+            $response->setStatusCode(404);
+        }
+        catch(EntityValidationException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            $response->setStatusCode(412);
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            $response->setStatusCode(500);
+        }
+        return $response;
+    }
+
+    /**
+     * @param SS_HTTPRequest $request
+     * @return SS_HTTPResponse
+     */
+    public function deleteCalendarShareableLink(SS_HTTPRequest $request){
+        $response = new SS_HTTPResponse();
+        try
+        {
+            $json        = $this->getJsonRequest();
+            $summit_id   = isset($apple_cred['summit_id']) ? Convert::raw2sql(trim($json['summit_id'])) : 0;
+            $summit      = ($summit_id) ? Summit::get()->byID($summit_id) : Summit::get_active();
+            $member = Member::currentUser();
+            if ($member) {
+                $share_info = $member->getCalendarShareableLinkForSummit($summit->ID);
+                if(is_null($share_info)) return $this->notFound();
+                $share_info->revoke();
+                return $this->deleted();
+            }
+            return $this->notFound();
+        }
+        catch(NotFoundEntityException $ex1)
+        {
+            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
+            $response->setStatusCode(404);
+        }
+        catch(EntityValidationException $ex2)
+        {
+            SS_Log::log($ex2->getMessage(), SS_Log::WARN);
+            $response->setStatusCode(412);
+        }
+        catch(Exception $ex)
+        {
+            SS_Log::log($ex->getMessage(), SS_Log::ERR);
+            $response->setStatusCode(500);
+        }
+        return $response;
+    }
 
     /**
      * @param int $summit_id
@@ -105,7 +229,6 @@ final class CalendarSyncController extends AbstractRestfulJsonApi
      */
     public function loginOutlook(SS_HTTPRequest $request)
     {
-
         $query_string = $request->getVars();
         $summit_id    = isset($query_string['state']) ? $query_string['state'] : false;
         $summit       = ($summit_id) ? Summit::get()->byID($summit_id) : Summit::get_active();
@@ -241,11 +364,27 @@ final class CalendarSyncController extends AbstractRestfulJsonApi
         return true;
     }
 
+    protected function authenticate(){
+        $current_url = $this->request->getURL();
+        if(strstr($current_url, "summit-calendar-sync/feed/") !== false)
+            return true;
+
+        $this->current_user = Member::currentUser();
+        if ($this->current_user) {
+            return $this->current_user;
+        }
+
+        return false;
+    }
+
     /**
      * @return bool
      */
     protected function authorize()
     {
+        $current_url = $this->request->getURL();
+        if(strstr($current_url, "summit-calendar-sync/calendar/") !== false)
+            return true;
         return Member::currentUserID() > 0;
     }
 }

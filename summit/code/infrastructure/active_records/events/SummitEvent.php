@@ -847,4 +847,87 @@ SQL;
     public function hasEnded(){
         return $this->getSummit()->getLocalTime() > $this->getEndDate();
     }
+
+    /**
+     * @return string|null
+     */
+    public function getLocalStartDate()
+    {
+        if(!empty($this->StartDate)) {
+            $value  = $this->StartDate;
+            $summit = $this->getSummit();
+            if(!is_null($summit))
+            {
+                $res = $summit->convertDateFromUTC2TimeZone($value, 'Y-m-d H:i:s');
+            }
+            return $res;
+        }
+        return null;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getLocalEndDate()
+    {
+        if(!empty($this->EndDate)) {
+            $value  = $this->EndDate;
+            $summit = $this->getSummit();
+            if(!is_null($summit))
+            {
+                $res = $summit->convertDateFromUTC2TimeZone($value, 'Y-m-d H:i:s');
+            }
+            return $res;
+        }
+        return null;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLocationTitle(){
+        if($this->Location()->exists()){
+            $venue       = $this->Location();
+            $room        = null;
+            if($venue instanceof SummitVenueRoom){
+                $room  = $venue;
+                $venue = $venue->getVenue();
+            }
+            $location_full_name = $venue->getFullName();
+            if(!is_null($room)){
+                if($room->Floor()->exists()){
+                    $location_full_name .= ' - '.$room->Floor()->getFullName();
+                }
+                $location_full_name .= ' - '.$room->Name;
+            }
+
+            return $location_full_name;
+        }
+    }
+
+    /**
+     * @return int
+     */
+    public function getLocationLng(){
+        if($this->Location()->exists()){
+            $venue       = $this->Location();
+            if($venue instanceof SummitGeoLocatedLocation) {
+                return $venue->getLng();
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLocationLat(){
+        if($this->Location()->exists()){
+            $venue       = $this->Location();
+            if($venue instanceof SummitGeoLocatedLocation) {
+                return $venue->getLat();
+            }
+        }
+        return 0;
+    }
 }
