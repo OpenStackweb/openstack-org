@@ -4,11 +4,14 @@ import {
     setFilters,
     clearFilters,
     toggleFilters,
+    createCalendarShareableLink,
+    deleteCalendarShareableLink
 } from '../../actions';
 
 import MainFilterFields from './main-filter/fields';
 import MainFilterActions from './main-filter/actions';
 import SyncModal from './main-filter/sync_modal';
+import ShareableLinkModal from './main-filter/shareable_link_modal';
 
 const CALENDAR_NO_EVENTS_MSG = 'You must select at least one event!';
 
@@ -25,26 +28,48 @@ class MainFilter extends Component {
 
         this.state = {
             showSyncModal: false,
+            showShareLinkModal: false,
+            shareableLink: null,
         }
 
         this.toggleCalSyncClick = this.toggleCalSyncClick.bind(this);
         this.hideSyncModal = this.hideSyncModal.bind(this);
+        this.getShareableLink = this.getShareableLink.bind(this);
+        this.hideShareLinkModal = this.hideShareLinkModal.bind(this);
     }
 
     toggleCalSyncClick(e) {
-        if (this.props.filters.calSync) {
-            this.setState({
+        if (this.props.filters.calSync){
+            this.setState({ ...this.state,
                 showSyncModal: true
             });
-        } else {
-            // go to sync page
-            window.location = this.props.ScheduleProps.base_url + 'sync-cal';
+            return;
         }
+        // go to sync page
+        window.location = this.props.ScheduleProps.base_url + 'sync-cal';
+    }
+
+    getShareableLink(e) {
+
+        this.props.createCalendarShareableLink().then((response) => {
+            this.setState({ ...this.state,
+                showShareLinkModal: true,
+                shareableLink: response.response.calendar_shareable_link
+            });
+        });
+
     }
 
     hideSyncModal(e) {
-        this.setState({
+        this.setState({ ...this.state,
             showSyncModal: false
+        });
+    }
+
+    hideShareLinkModal(e) {
+        this.setState({
+            ...this.state,
+            showShareLinkModal: false
         });
     }
 
@@ -68,6 +93,7 @@ class MainFilter extends Component {
                 toggleFilters={toggleFilters}
                 toggleCalSyncClick={this.toggleCalSyncClick}
                 ScheduleProps={ScheduleProps}
+                getShareableLink={this.getShareableLink}
                />
 
                 {current_user &&
@@ -79,8 +105,12 @@ class MainFilter extends Component {
                 setFilters={setFilters}
                 ScheduleProps={ScheduleProps} />
 
-                <SyncModal showModal={this.state.showSyncModal} hideModal={this.hideSyncModal} />
+                <SyncModal showModal={this.state.showSyncModal}
+                           hideModal={this.hideSyncModal} />
 
+                <ShareableLinkModal showModal={this.state.showShareLinkModal}
+                                    shareableLink={this.state.shareableLink}
+                                    hideModal={this.hideShareLinkModal}/>
             </div>
         )
     }
@@ -101,5 +131,7 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, {
     setFilters,
     clearFilters,
-    toggleFilters
+    toggleFilters,
+    createCalendarShareableLink,
+    deleteCalendarShareableLink
 })(MainFilter)

@@ -27,8 +27,6 @@ final class AttendeeMember extends DataExtension implements IAttendeeMember
         'Schedule'              => 'SummitEvent',
     ];
 
-
-
     /**
      * @param int|null $summit_id
      * @return bool
@@ -459,6 +457,35 @@ SQL;
     }
 
     /**
+     * @param string $provider
+     * @param int $summit_id
+     * @return bool
+     */
+    public function existCalendarShareableLinkForSummit(int $summit_id):bool{
+        return PersonalCalendarShareInfo::get()->filter(
+                [
+                    'SummitID' => $summit_id,
+                    'OwnerID'  => $this->owner->ID,
+                    'Revoked'  => false,
+                ]
+            )->count() > 0;
+    }
+
+    /**
+     * @param int $summit_id
+     * @return mixed
+     */
+    public function getCalendarShareableLinkForSummit(int $summit_id){
+        return PersonalCalendarShareInfo::get()->filter(
+                [
+                    'SummitID' => $summit_id,
+                    'OwnerID'  => $this->owner->ID,
+                    'Revoked'  => false,
+                ]
+            )->first();
+    }
+
+    /**
      * @param int $summit_id
      * @return bool
      */
@@ -535,5 +562,27 @@ SQL;
         $calendar_sync_info->write();
         return true;
     }
+
+    /**
+     * @param Summit $summit
+     * @return PersonalCalendarShareInfo
+     * @throws EntityValidationException
+     * @throws ValidationException
+     */
+    public function createCalendarShareableLink(Summit $summit){
+        $former_share_info = $this->getCalendarShareableLinkForSummit($summit->getIdentifier());
+        if(!is_null($former_share_info)){
+            return $former_share_info;
+        }
+
+        $share_info                   = new PersonalCalendarShareInfo();
+        $share_info->Revoked          = false;
+        $share_info->OwnerID          = $this->owner->ID;
+        $share_info->SummitID         = $summit->ID;
+        $share_info->Hash             = md5(strval($share_info->OwnerID).strval($share_info->SummitID).random_bytes(8));
+        $share_info->write();
+        return $share_info;
+    }
+
 
 }

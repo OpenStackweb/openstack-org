@@ -65,7 +65,7 @@
     "phpoffice/phpexcel": "1.8.1",
     "google/apiclient": "^2.2",
     "symfony/process": "^3.1",
-    "eluceo/ical": "^0.11.3",
+    "eluceo/ical": "^0.15.0",
     "mustangostang/spyc": "^0.6.2",
     "simplepie/simplepie": "1.4.2",
     "symfony/yaml": "~2.1|~3.0",
@@ -78,7 +78,7 @@
     "peppeocchi/php-cron-scheduler": "2.*",
     "paragonie/random_compat": "^2.0",
     "league/oauth2-client": "^2.2",
-    "smarcet/caldavclient": "1.1.2",
+    "smarcet/caldavclient": "1.1.7",
     "smarcet/silverstripe-cloudassets-swift": "dev-master",
     "markguinn/silverstripe-cloudassets": "dev-master",
     "php-opencloud/openstack": "dev-master"

@@ -8,6 +8,7 @@ const MainFilterActions = ({
     clearFilters,
     toggleFilters,
     toggleCalSyncClick,
+    getShareableLink,
     ScheduleProps
 }) => {
     const { summit: { current_user }, base_url } = ScheduleProps;
@@ -16,7 +17,7 @@ const MainFilterActions = ({
 
     return (
     <div className="row all-events-filter-row">
-        <div className="col-md-4 col-xs-12 all-events-filter-link">
+        <div className="col-md-3 col-xs-12 all-events-filter-link">
             <div className="col-filter-btn">
                 <i title="" id="toggle-all-events-filters" className={`fa fa-filter ${expanded ? 'active' : ''}`}
                 onClick={e => { e.preventDefault(); toggleFilters() }} />
@@ -74,6 +75,15 @@ const MainFilterActions = ({
                         active={calSync}
                     />
                 </div>
+            }
+            {summit.should_show_venues && current_user &&
+            <div className="col-calendar-share-link filter-button-col-right">
+                <a
+                    onClick={ () => getShareableLink() }
+                    className="shareable-link">
+                    GET&nbsp;CALENDAR&nbsp;SHAREABLE&nbsp;LINK
+                </a>
+            </div>
             }
         </div>
     </div>

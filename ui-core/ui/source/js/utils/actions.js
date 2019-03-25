@@ -270,3 +270,51 @@ export const responseHandler = (dispatch, success, errorHandler) => {
         }
     };
 };
+
+export const postRequestPromise = (
+    requestActionCreator,
+    receiveActionCreator,
+    endpoint,
+    payload,
+    errorHandler = defaultErrorHandler,
+    requestActionPayload = {}
+) => (params = {}) => dispatch => {
+
+    let url = URI(endpoint);
+
+    if(!isObjectEmpty(params))
+        url = url.query(params);
+
+    if(requestActionCreator && typeof requestActionCreator === 'function')
+        dispatch(requestActionCreator(requestActionPayload));
+
+    return new Promise((resolve, reject) => {
+
+        let request = http.post(url);
+
+        if(payload != null)
+            request.send(payload);
+        else // to be a simple CORS request
+            request.set('Content-Type', 'text/plain');
+
+        request.end(responseHandlerPromise(dispatch, receiveActionCreator, errorHandler, resolve, reject));
+    });
+};
+
+export const responseHandlerPromise =
+    ( dispatch, receiveActionCreator, errorHandler, resolve, reject ) =>
+        (err, res) => {
+            if (err || !res.ok) {
+                if(errorHandler) {
+                    errorHandler(err, res)(dispatch);
+                }
+                return reject({ err, res, dispatch })
+            }
+            let json = res.body;
+            if(typeof receiveActionCreator === 'function') {
+                dispatch(receiveActionCreator({response: json}));
+                return resolve({response: json});
+            }
+            dispatch(receiveActionCreator);
+            return resolve({response: json});
+        }

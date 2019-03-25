@@ -1,4 +1,4 @@
-import { getRequest, putRequest, createAction, deleteRequest, postRequest } from "~core-utils/actions";
+import { getRequest, putRequest, createAction, deleteRequest, postRequest, postRequestPromise } from "~core-utils/actions";
 import URI from "urijs";
 
 export const ScheduleProps = {
@@ -20,6 +20,8 @@ export const UNSYNC_CALENDAR = 'UNSYNC_CALENDAR';
 export const CALENDAR_SYNCD = 'CALENDAR_SYNCD';
 export const SUBMITING_NEW_COMMENT = 'SUBMITING_NEW_COMMENT';
 export const SUBMITTED_NEW_COMMENT = 'SUBMITTED_NEW_COMMENT';
+export const CALENDAR_SHARE_LINK_CREATED = 'CALENDAR_SHARE_LINK_CREATED';
+export const CALENDAR_SHARE_LINK_DELETED = 'CALENDAR_SHARE_LINK_DELETED';
 
 // Application constants.
 export const DEFAULT_FILTERS = {
@@ -476,6 +478,28 @@ export const syncCalendar = (cal_type, ios_user, ios_pass ) => (dispatch) => {
             window.location = `summit-calendar-sync/login-outlook?state=${summit_id}`;
             break;
     }
+}
+
+export const createCalendarShareableLink = () => (dispatch) => {
+    let summit_id = ScheduleProps.summit.id;
+    return postRequestPromise(
+        createAction(''),
+        createAction(CALENDAR_SHARE_LINK_CREATED),
+        'summit-calendar-sync/calendar-shareable-link',
+        {summit_id: summit_id},
+        errorHandler
+    )()(dispatch);
+}
+
+export const deleteSCalendarShareableLink = () => (dispatch) => {
+    let summit_id = ScheduleProps.summit.id;
+    deleteRequest(
+        createAction(''),
+        createAction(CALENDAR_SHARE_LINK_DELETED),
+        'summit-calendar-sync/calendar-shareable-link/current',
+        {summit_id: summit_id},
+        errorHandler
+    )()(dispatch);
 }
 
 export const pullScheduleByViewType = (viewType, summitId) => (dispatch) => {
