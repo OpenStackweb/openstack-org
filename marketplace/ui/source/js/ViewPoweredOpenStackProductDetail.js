@@ -25,6 +25,8 @@ jQuery(document).ready(function($) {
         var payload = {
             required_for_compute : $('#required_for_compute').is(':checked'),
             required_for_storage : $('#required_for_storage').is(':checked'),
+            federated_identity   : $('#federated_identity').is(':checked'),
+            uses_ironic          : $('#uses_ironic').is(':checked'),
             expiry_date          : $('#expiry_date').val(),
             program_version_id   : $('#program_version_id').val(),
             reported_release_id  : $('#reported_release_id').val(),

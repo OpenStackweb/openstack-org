@@ -88,6 +88,22 @@
             </div>
         </div>
         <% end_if %>
+        <% if UsesIronic %>
+            <div class="row powered-wrapper">
+                <div class="col-sm-12">
+                    <div class="powered-image">
+                        <img src="/marketplace/code/ui/frontend/images/baremetal-logo-program.svg" alt="Ironic" width="168">
+                    </div>
+                    <div class="powered-description ironic">
+                        <p>
+                            This product uses <a href="{$BaseHref}bare-metal">OpenStack's Ironic Bare Metal</a> service. Ironic allows users to manage bare metal
+                            infrastructure like they would virtual machines and provides ideal infrastructure to run container orchestration
+                            frameworks like Kubernetes to optimize performance.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        <% end_if %>
         <% if isCompatibleWithFederatedIdentity %>
             <div class="row powered-wrapper">
                 <div class="col-sm-12">

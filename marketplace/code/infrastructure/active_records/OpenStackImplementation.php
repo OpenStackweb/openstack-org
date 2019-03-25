@@ -25,6 +25,7 @@ class OpenStackImplementation
         'CompatibleWithCompute'             => 'Boolean',
         'CompatibleWithStorage'             => 'Boolean',
         'CompatibleWithFederatedIdentity'   => 'Boolean',
+        'UsesIronic'                        => 'Boolean',
         'ExpiryDate'                        => 'SS_Datetime',
         'Notes'                             => 'Text',
     ];
@@ -52,6 +53,7 @@ class OpenStackImplementation
         'CompatibleWithCompute'           => false,
         'CompatibleWithStorage'           => false,
         'CompatibleWithFederatedIdentity' => false,
+        'UsesIronic'                      => false,
     ];
 
     /**
@@ -178,6 +180,23 @@ class OpenStackImplementation
     public function setCompatibleWithFederatedIdentity($compatible)
     {
         $this->setField('CompatibleWithFederatedIdentity', $compatible);
+    }
+
+    /***
+     * @return bool
+     */
+    public function getUsesIronic()
+    {
+        return (bool)$this->getField('UsesIronic');
+    }
+
+    /**
+     * @param bool $compatible
+     * @return void
+     */
+    public function setUsesIronic($compatible)
+    {
+        $this->setField('UsesIronic', $compatible);
     }
 
     /***

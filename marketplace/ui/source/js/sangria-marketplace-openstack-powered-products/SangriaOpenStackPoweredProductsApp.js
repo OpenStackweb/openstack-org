@@ -153,6 +153,7 @@ class SangriaOpenStackPoweredProductsApp extends BaseReport {
         switch(col.name){
             case 'name':
                 return (<a href={`sangria/ViewPoweredOpenStackProductDetail/${item.id}`} target="_blank">{item.name}</a>);
+            case 'uses_ironic':
             case 'federated_identity':
             case 'required_for_storage':
             case 'required_for_compute':

@@ -10,7 +10,7 @@
     <div class="col-lg-8 col-md-7 col-sm-6">
         <div class="company-details-area">
             <h4>
-                <a style="color: #{$Company.CompanyColor}" href="<% with $MarketPlace  %><% if Name == "Appliance"  %>$ApplianceLink<% end_if %><% if Name == "Distribution"  %>$DistroLink<% end_if %><% end_with %>/{$Company.URLSegment}/{$Slug}">
+                <a style="color: #{$Company.CompanyColor}" href="<% with $MarketPlace  %><% if Name == "Appliance"  %>$Top.ApplianceLink<% end_if %><% if Name == "Distribution"  %>$Top.DistroLink<% end_if %><% end_with %>/{$Company.URLSegment}/{$Slug}">
                     $Name
                 </a>
             </h4>

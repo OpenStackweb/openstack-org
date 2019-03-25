@@ -21,6 +21,7 @@
             { shouldSort: false, label: 'Required for Compute', name: 'required_for_compute'},
             { shouldSort: false, label: 'Required for Storage', name: 'required_for_storage'},
             { shouldSort: false, label: 'Federated Identity', name: 'federated_identity'},
+            { shouldSort: false, label: 'Uses Ironic', name: 'uses_ironic'},
             { shouldSort: false, label: 'Program Version Compatibility', name: 'program_version_id'},
             { shouldSort: true, title: 'Sort by Expiry Date',label: 'Expiry Date (CDT)', name: 'expiry_date'},
             { shouldSort: false, label: 'Last Edited By', name: 'edited_by'},

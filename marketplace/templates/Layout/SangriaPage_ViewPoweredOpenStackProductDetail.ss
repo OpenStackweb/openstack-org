@@ -23,6 +23,16 @@
             <input type="checkbox" id="required_for_storage" <% if $Product.CompatibleWithStorage %>checked<% end_if %> name="required_for_storage"> Compatible with Storage
         </label>
     </div>
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" id="federated_identity" <% if $Product.CompatibleWithFederatedIdentity %>checked<% end_if %> name="federated_identity"> Compatible with Federated Identity
+        </label>
+    </div>
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" id="uses_ironic" <% if $Product.UsesIronic %>checked<% end_if %> name="uses_ironic"> Uses Ironic
+        </label>
+    </div>
     <div class="form-group">
         <label for="expiry_date">Expiry Date</label>
         <input type="text" class="form-control" value="{$Product.ExpiryDate}" id="expiry_date" name="expiry_date">
