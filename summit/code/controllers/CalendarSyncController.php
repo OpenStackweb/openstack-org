@@ -366,7 +366,7 @@ final class CalendarSyncController extends AbstractRestfulJsonApi
 
     protected function authenticate(){
         $current_url = $this->request->getURL();
-        if(strstr($current_url, "summit-calendar-sync/feed/") !== false)
+        if(strstr($current_url, "summit-calendar-sync/calendar/") !== false)
             return true;
 
         $this->current_user = Member::currentUser();
@@ -382,6 +382,7 @@ final class CalendarSyncController extends AbstractRestfulJsonApi
      */
     protected function authorize()
     {
+        return true;
         $current_url = $this->request->getURL();
         if(strstr($current_url, "summit-calendar-sync/calendar/") !== false)
             return true;
