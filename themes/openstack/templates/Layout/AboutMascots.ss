@@ -49,7 +49,12 @@
 			    <% loop $Mascots() %>
 			        <li class="col-lg-6 col-md-6 col-sm-6">
 			            <% if $Name && $MascotFiles %>
-                            <a href="#" data-toggle="modal" data-target="#mascots_modal" data-component="{$CodeNameString}" data-images="{$MascotFiles}">
+                            <a href="#" data-toggle="modal"
+							   			data-target="#mascots_modal"
+							   			data-component="{$CodeNameString}"
+							   			data-images="{$MascotFiles}"
+							   			data-eps-thumb="{$EPSThumbFileUrl}"
+								>
                                 <strong>$CodeNameString:</strong> $Name
                             </a>
                         <% else %>

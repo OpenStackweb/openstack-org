@@ -40,8 +40,9 @@ class Mascot extends DataObject implements IMascot
         'Hide' => 'Hide',
     );
 
-    static $mascots_dir = 'images/project-mascots';
 
+    static $mascots_folder = 'project-mascots';
+    static $mascots_dir = "images/project-mascots";
     /**
      * @return int
      */
@@ -79,20 +80,24 @@ class Mascot extends DataObject implements IMascot
             return null;
     }
 
+    /**
+     * @return null|string
+     */
     public function getImageDir()
     {
         if ($this->getCodeName())
-            return CloudAssetTemplateHelpers::cloud_url(self::$mascots_dir). $this->getCodeName();
-        else
-            return null;
+            return CloudAssetTemplateHelpers::cloud_url(self::$mascots_dir).'/'. $this->getCodeName();
+        return null;
     }
 
-    public function getImageLink()
+    /**
+     * @return null|string
+     */
+    public function getRelativeImageDir()
     {
         if ($this->getCodeName())
-            return CloudAssetTemplateHelpers::cloud_url(self::$mascots_dir). $this->getCodeName();
-        else
-            return null;
+            return self::$mascots_dir.'/'. $this->getCodeName();
+        return null;
     }
 
 }

@@ -44,20 +44,19 @@ jQuery(document).ready(function($) {
         var button = $(event.relatedTarget);
         var component = button.data('component');
         var mascot_images = button.data('images').split(',');
+        var eps_thumb = button.data('eps-thumb');
         var modal = $(this);
         var body_html = '<div class="row mascot_row">';
 
         for (var i = 0; i < mascot_images.length; i++) {
-            var filename = mascot_images[i];
-            var extension = filename.split('.')[1];
-            var image_file = mascots_dir + component + '/' + filename;
-            var thumb = (extension == 'eps') ? mascots_dir + 'eps_thumb.png' : image_file;
+            var file_url  = mascot_images[i];
+            var thumb = (file_url.endsWith('.eps')) ? eps_thumb : file_url;
 
             body_html += '<div class="col-md-4"><div class="row mascot_box">';
-            body_html += '<div class="col-md-12 mascot_image_box"><img class="mascot_image" src="'+thumb+'" title="'+filename+'" /></div>';
+            body_html += '<div class="col-md-12 mascot_image_box"><img class="mascot_image" src="'+thumb+'" title="'+file_url+'" /></div>';
             body_html += '<div class="col-md-12">';
-            body_html += '<a href="'+image_file+'" class="btn btn-primary btn-xs download_link" target="_blank">Download</a>';
-            body_html += '<button type="button" class="btn btn-default btn-xs" onclick="copyToClipboard(\''+image_file+'\')">Copy Code</button>';
+            body_html += '<a href="'+file_url+'" class="btn btn-primary btn-xs download_link" target="_blank">Download</a>';
+            body_html += '<button type="button" class="btn btn-default btn-xs" onclick="copyToClipboard(\''+file_url+'\')">Copy Code</button>';
             body_html += '</div></div></div>';
 
             if ( (i+1) % 3 == 0) {

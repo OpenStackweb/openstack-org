@@ -35,23 +35,52 @@ class AboutMascots_Controller extends Page_Controller {
 
     }
 
+    private function getCache(){
+        return SS_Cache::factory(strtolower(get_class($this)) . '_mascots_cache');
+    }
+
     function getMascots() {
         $mascots = Mascot::get();
 
         $mascotsAL = new ArrayList();
+        $client = new \GuzzleHttp\Client();
         foreach ($mascots as $mascot) {
-            $mascot_folder = $mascot->getImageDir();
-            $mascot->MascotFiles = '';
+            $mascot_folder = $mascot->getRelativeImageDir();
+            $mascot->MascotFiles     = '';
             $mascot->CodeNameString = $mascot->CodeName;
 
             if ($mascot_folder) {
-                $image_array = array();
-                foreach (glob($mascot_folder.'/*.*') as $image) {
-                    $image_array[] = basename($image);
+                // ask if we have cached values
+                if($value = $this->getCache()->load(md5($mascot->CodeName))) {
+                    $value                    = unserialize($value);
+                    $mascot->MascotFiles      = $value['MascotFiles'];
+                    $mascot->EPSThumbFileUrl  = $value['EPSThumbFileUrl'];
                 }
-                $mascot->MascotFiles = implode(',', $image_array);
+                else {
+                    $bucket = CloudAssets::inst()->map($mascot_folder);
+                    $query = sprintf("%s?delimiter=/&prefix=%s/%s/", $bucket->getBaseURL(), Mascot::$mascots_folder, $mascot->CodeName);
+                    $response = $client->request('GET', $query);
+                    $image_array = [];
+                    $body = (string)$response->getBody();
+                    foreach (explode("\n", $body) as $file_url) {
+                        $image_array[] = sprintf("%s%s", $bucket->getBaseURL(), $file_url);
+                    }
+                    $mascot->MascotFiles      = implode(',', $image_array);
+                    $mascot->EPSThumbFileUrl  = sprintf("%s%s/eps_thumb.png", $bucket->getBaseURL(), Mascot::$mascots_folder );
+                    $data = [
+                            'MascotFiles'     => $mascot->MascotFiles,
+                            'EPSThumbFileUrl' => $mascot->EPSThumbFileUrl
+                    ];
+                    // store on cache
+                    $this->getCache()->save
+                    (
+                        serialize($data),
+                        md5($mascot->CodeName),
+                        $tags             = [],
+                        $specificLifetime = 120
+                    );
+                }
             }
-
             $mascotsAL->push($mascot);
         }
 
