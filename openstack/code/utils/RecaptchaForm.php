@@ -14,6 +14,7 @@
  **/
 class RecaptchaForm extends HoneyPotForm
 {
+    const RecaptchaUrl = "https://www.recaptcha.net";
     const RecaptchaFieldName = "recaptcha-div";
     const RecaptchaFieldNameResponse = 'g-recaptcha-response';
     const RecaptchaFieldContent = <<< HTML
@@ -27,7 +28,7 @@ HTML;
         // that is supposed to stay blank (and is hidden from most humans).
         $fields->push($recaptcha = new LiteralField(self::FieldName, sprintf(self::RecaptchaFieldContent, RECAPTCHA_SITE_KEY)));
 
-        Requirements::javascript(sprintf('https://www.google.com/recaptcha/api.js?hl=%s',$this->getReCaptchaLocale() ));
+        Requirements::javascript(sprintf(self::RecaptchaUrl.'/recaptcha/api.js?hl=%s',$this->getReCaptchaLocale() ));
         Requirements::customScript("var verifyCallback = function(response) {
             $('#g_recaptcha_hidden').val(response);
             $('#g_recaptcha_hidden').valid();
@@ -92,7 +93,7 @@ HTML;
                 'remoteip'  =>  $_SERVER['REMOTE_ADDR']
             ];
 
-            $ch = curl_init("https://www.google.com/recaptcha/api/siteverify");
+            $ch = curl_init(self::RecaptchaUrl."/recaptcha/api/siteverify");
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_TIMEOUT, 15);
             curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($fields));
