@@ -22,10 +22,7 @@
 				<div class="col-sm-2 col-xs-6">
 		                <a <% if IsExternalUrl %>rel="nofollow"<% end_if %> href="$ShowLink">
 		                	<div class="img-wrapper">
-								<% loop Logo %>
-									<img src="{$SetWidth(138).URL}" alt="$Name">
-									<!-- <span style="background-image: url({$SetWidth(138).URL});"></span> -->
-								<% end_loop %>
+								<img src="{$getLogo(138)}" alt="$Name">
 							</div>
 							<p class="center">$Name</p>
 						</a>
@@ -50,9 +47,7 @@
 					<div class="col-sm-2 col-xs-6">
 		                <a <% if IsExternalUrl %>rel="nofollow"<% end_if %> href="$ShowLink">
 		                	<div class="img-wrapper">
-								<% loop Logo %>
-									<img src="{$SetWidth(138).URL}" alt="$Name">
-								<% end_loop %>
+                                <img src="{$getLogo(138)}" alt="$Name">
 							</div>
 							<p class="center">$Name</p>
 						</a>
@@ -77,9 +72,7 @@
                 <div class="col-sm-2 col-xs-6">
                     <a <% if IsExternalUrl %>rel="nofollow"<% end_if %> href="$ShowLink">
                         <div class="img-wrapper">
-							<% loop Logo %>
-                                <img src="{$SetWidth(138).URL}" alt="$Name">
-							<% end_loop %>
+                            <img src="{$getLogo(138)}" alt="$Name">
                         </div>
                         <p class="center">$Name</p>
                     </a>
@@ -104,9 +97,7 @@
 					<div class="col-sm-2 col-xs-6">
 	                <a <% if IsExternalUrl %>rel="nofollow"<% end_if %> href="$ShowLink">
 	                	<div class="img-wrapper">
-							<% loop Logo %>
-								<img src="{$SetWidth(138).URL}" alt="$Name">
-							<% end_loop %>
+                            <img src="{$getLogo(138)}" alt="$Name">
 						</div>
 						<p class="center">$Name</p>
 					</a>
@@ -134,9 +125,7 @@
 					<div class="col-sm-2 col-xs-4">
 	            		<a <% if IsExternalUrl %>rel="nofollow"<% end_if %> href="$ShowLink">
 	            			<div class="img-wrapper">
-								<% loop Logo %>
-									<img src="{$SetWidth(70).URL}" alt="$Name">
-								<% end_loop %>
+                                <img src="{$getLogo(138)}" alt="$Name">
 							</div>
 						</a>
 					</div>

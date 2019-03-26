@@ -20,7 +20,7 @@
             <div class="col-md-5ths col-xs-6 nav-button-box">
                 <a class="nav-button" data-toggle="collapse" data-target="#code" data-parent="#accordion-parent">
                     <div class="nav-button-icon">
-                        <img src="themes/openstack/images/community/pencil.png" />
+                        <img src="{$Top.CloudUrl("images/community/pencil.png")}" />
                     </div>
                     <div>Code & Documentation</div>
                 </a>
@@ -28,7 +28,7 @@
             <div class="col-md-5ths col-xs-6 nav-button-box">
                 <a class="nav-button" data-toggle="collapse" data-target="#events" data-parent="#accordion-parent">
                     <div class="nav-button-icon">
-                        <img src="themes/openstack/images/community/globe.png" />
+                        <img src="{$Top.CloudUrl("images/community/globe.png")}" />
                     </div>
                     <div>Events</div>
                 </a>
@@ -36,7 +36,7 @@
             <div class="col-md-5ths col-xs-6 nav-button-box">
                 <a href="https://groups.openstack.org/" class="nav-button" target="_blank">
                     <div class="nav-button-icon">
-                        <img src="themes/openstack/images/community/pin.png" />
+                        <img src="{$Top.CloudUrl("images/community/pin.png")}" />
                     </div>
                     <div>User Groups</div>
                 </a>
@@ -44,7 +44,7 @@
             <div class="col-md-5ths col-xs-6 nav-button-box">
                 <a class="nav-button" data-toggle="collapse" data-target="#users" data-parent="#accordion-parent">
                     <div class="nav-button-icon">
-                        <img src="themes/openstack/images/community/bulb.png" />
+                        <img src="{$Top.CloudUrl("images/community/bulb.png")}" />
                     </div>
                     <div>Users</div>
                 </a>
@@ -52,7 +52,7 @@
             <div class="col-md-5ths col-xs-6 nav-button-box">
                 <a class="nav-button" data-toggle="collapse" data-target="#sponsorship" data-parent="#accordion-parent">
                     <div class="nav-button-icon">
-                        <img src="themes/openstack/images/community/book.png">
+                        <img src="{$Top.CloudUrl("images/community/book.png")}">
                     </div>
                     <div>Operators</div>
                 </a>
@@ -263,14 +263,14 @@
     </div>
 </div>
 <div class="quick-links-banner">
-    <img src="themes/openstack/images/community/quicklinks.png" />
+    <img src="{$Top.CloudUrl("images/community/quicklinks.png")}" />
 </div>
 <div class="communicate">
     <div class="container">
         <div class="row">
             <div class="col-md-12 communicate-header">
                 <div class="communicate-title">
-                    <img class="communicate-icon" src="themes/openstack/images/community/message.png">
+                    <img class="communicate-icon" src="{$Top.CloudUrl("images/community/message.png")}">
                     How to communicate
                 </div>
                 <p>

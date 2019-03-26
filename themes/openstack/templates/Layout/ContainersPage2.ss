@@ -70,7 +70,7 @@
 
                 </p>
                 <p class="text-center">
-                    <img src="themes/openstack/images/containers2/intro-diagram.svg" alt="Table 1" class="hover-shadow clickable-image">
+                    <img src="{$Top.CloudUrl("images/containers2/intro-diagram.svg")}" alt="Table 1" class="hover-shadow clickable-image">
                 </p>
             </div>
         </div>
@@ -100,7 +100,7 @@
 
                 <p>In building an OpenStack cluster, there are several dimensions for choosing deployment technologies. An operator could choose <a href="https://linuxcontainers.org" target="_blank">Linux Containers</a> (LXC) or Docker for their base containers, use pre-built or custom-built application containers, and select either traditional configuration-management systems for orchestration or a more modern approach like Kubernetes. Table 1 summarizes the existing OpenStack deployment projects and their underlying technologies.</p>
                 <p class="text-center">
-                    <img src="themes/openstack/images/containers2/table.svg" alt="Table 1" >
+                    <img src="{$Top.CloudUrl("images/containers2/table.svg")}" alt="Table 1" >
                 </p>
                 <p>Underlying each of these deployment systems are different approaches to building a set of containers for the OpenStack code and supporting services. The OpenStack Ansible (OSA) and Kolla projects provide their own project-hosted build systems, while LOCI focuses on building project application containers, without a specific orchestration system in mind. At a high level, the differences are: </p>
                 <ol>
@@ -144,7 +144,7 @@
                 <p>Kata Containers is an excellent fit for both on-demand, event-based deployments such as continuous integration/continuous delivery, as well as longer running web server applications. Kata also enables an easier transition to containers from traditional virtualized environments, as it supports legacy guest kernels and device pass through capabilities. Kata Containers deliver enhanced security, scalability and higher resource utilization, while at the same time leading to an overall simplified stack.
                 </p>
                 <p class="text-center">
-                    <img src="themes/openstack/images/containers2/kata-diagram5-r2.svg" alt="Intro" class="hover-shadow clickable-image">
+                    <img src="{$Top.CloudUrl("images/containers2/kata-diagram5-r2.svg")}" alt="Intro" class="hover-shadow clickable-image">
                 </p>
                 <h4 class="subtitle">Side-by-Side OpenStack and Kubernetes Integrations</h4>
                 <p>One of the primary benefits of choosing open source platforms is in the stability of interfaces across standard deployments of those platforms. Both the OpenStack Foundation and the Cloud Native Computing Foundation (CNCF) maintain interoperability standards for OpenStack clouds and Kubernetes clusters, guaranteeing that libraries, applications, and drivers will work across all platforms regardless of where they are deployed. This creates opportunities for side-by-side integrations, allowing both OpenStack and Kubernetes to take advantage of the resources provided by the other.
@@ -169,22 +169,22 @@
                 <ul class="nav nav-tabs">
                     <li class="active col-lg-3 col-sm-6 col-xs-12">
                         <a data-toggle="tab" href="#att">
-                            <img class="logo" src="themes/openstack/images/containers2/att.jpg" alt="AT&#38;T">
+                            <img class="logo" src="{$Top.CloudUrl("images/containers2/att.jpg")}" alt="AT&#38;T">
                         </a>
                     </li>
                     <li class="col-lg-3 col-sm-6 col-xs-12">
                         <a data-toggle="tab" href="#cern">
-                            <img class="logo" src="themes/openstack/images/containers2/cern.jpg" alt="cern">
+                            <img class="logo" src="{$Top.CloudUrl("images/containers2/cern.jpg")}" alt="cern">
                         </a>
                     </li>
                     <li class="col-lg-3 col-sm-6 col-xs-12">
                         <a data-toggle="tab" href="#sk">
-                            <img class="logo" src="themes/openstack/images/containers2/sk.jpg" alt="SK Telecom">
+                            <img class="logo" src="{$Top.CloudUrl("images/containers2/sk.jpg")}" alt="SK Telecom">
                         </a>
                     </li>
                     <li class="col-lg-3 col-sm-6 col-xs-12">
                         <a data-toggle="tab" href="#super">
-                            <img class="logo" src="themes/openstack/images/containers2/super.jpg" alt="Superfluidity">
+                            <img class="logo" src="{$Top.CloudUrl("images/containers2/super.jpg")}" alt="Superfluidity">
                         </a>
                     </li>
                 </ul>
@@ -197,7 +197,7 @@
                         <p>To accomplish their goals, AT&T is using the OpenStack-Helm project to orchestrate LOCI-based OpenStack images across a Kubernetes cluster, also leveraging Kubernetes, Docker, and the core OpenStack services. They’re also using Bandit, Tempest, Patrole, and many other OpenStack projects. AT&T is also collaborating in the community to introduce a collection of undercloud projects called <a href="http://www.airshipit.org" target="_blank">Airship</a>, which will provision clouds from bare-metal to production-grade Kubernetes running OpenStack workloads.
                         </p>
                         <p class="text-center">
-                            <img class="medium-img" src="themes/openstack/images/containers2/att-diagram.jpg" alt="AT&#38;T">
+                            <img class="medium-img" src="{$Top.CloudUrl("images/containers2/att-diagram.jpg")}" alt="AT&#38;T">
                         </p>
                         <p>AT&T is finding that containerization allows them to shift traditional deployment-type activities far to the left, and to validate them using CI/CD. Kubernetes additionally provides massive scalability and resiliency, as well as hooks to allow OpenStack-Helm to declaratively configure operational behavior, inject configuration, and accomplish rolling upgrades and updates without impacting tenant workloads.
                         </p> 
@@ -217,7 +217,7 @@
                         <p>CERN is currently running 250 container clusters provisioned through Magnum on top of OpenStack.
                         </p>
                         <p class="text-center">
-                            <img class="medium-img" src="themes/openstack/images/containers2/cern-diagram.jpg" alt="Cern">
+                            <img class="medium-img" src="{$Top.CloudUrl("images/containers2/cern-diagram.jpg")}" alt="Cern">
                         </p>
                         <p>CERN’s OpenStack cloud gives users self-service access to request a configured container engine with a couple of commands or via a web GUI. This allows rapid utilization of the technologies and can scale to 1000s of nodes if needed. Best practice configurations are available with built in monitoring and integration into CERN storage and authentication services.
                         </p> 
@@ -226,7 +226,7 @@
                         <p>As a publicly funded laboratory, open source solutions such as Kubernetes and OpenStack provide a framework to collaborate with other organisations and give back to the communities. CERN has worked with a number of vendors through the <a href="https://openlab.cern/">CERN openlab framework</a>, such as Rackspace and Huawei, to provide clouds at scale with functionalities like Magnum and federation. These experiences are also shared through OpenStack Special Interest Groups, with other sciences such as the Square Kilometer Array (SKA), public presentations such as Kubecon Europe and blogs such as the <a href="http://openstack-in-production.blogspot.fr">OpenStack in Production</a>.
                         </p>
                         <p class="text-center">
-                            <img class="medium-img" src="themes/openstack/images/containers2/cern-diagram2.jpg" alt="Cern">
+                            <img class="medium-img" src="{$Top.CloudUrl("images/containers2/cern-diagram2.jpg")}" alt="Cern">
                         </p>
                         <p>At CERN, several workloads run within containers provisioned by Magnum, these include:
                         </p>
@@ -290,14 +290,14 @@
                         <p>SKT has also incorporated other tools into their OpenStack on Kubernetes efforts. For logging, monitoring, and alarms, they are using <a href="https://prometheus.io">Prometheus</a> and <a href="https://www.elastic.co/">Elasticsearch</a>, <a href="https://fluentbit.io/">Fluent-bit</a>, and <a href="https://www.elastic.co/products/kibana">Kibana</a>, all of which are default reference tools in the OpenStack-Helm community. SKT combines all of these into a single closed-integrated solution called TACO: SKT All Container OpenStack.
                         </p>
                         <p class="text-center">
-                            <img class="medium-img" src="themes/openstack/images/containers2/sk-diagram.jpg" alt="SK Telecom">
+                            <img class="medium-img" src="{$Top.CloudUrl("images/containers2/sk-diagram.jpg")}" alt="SK Telecom">
                         </p>
                         <p>SKT specifically emphasizes an automated continuous integration/continuous delivery (CI/CD) pipeline around containerized Openstack on Kubernetes. SKT’s CI system consists of <a href="https://jenkins.io/">Jenkins<a/>, <a href="https://docs.openstack.org/developer/rally/">Rally</a>, <a href="https://docs.openstack.org/tempest/latest/">Tempest</a>, Docker Registry, as well as Jira and Bitbucket. SKT also developed an open source tool called <a href="https://github.com/sktelecom-oslab/cookiemonster">Cookiemonster</a>, a chaos-monkey like resiliency test tool for Kubernetes deployment that performs resiliency tests for their CI pipeline. 
                         </p>
                         <p>With every change, SKT automatically builds and tests both the OpenStack containers and Helm charts. Daily, they automatically install a highly available OpenStack deployment with three control nodes and two compute-nodes, run 400 test cases from Tempest against it to validate the services, and finally run resiliency testing with Cookiemonster and Rally. The complete CI system is illustrated in the following diagram:
                         </p>
                         <p class="text-center">
-                            <img class="medium-img" src="themes/openstack/images/containers2/sk-diagram2.jpg" alt="SK Telecom">
+                            <img class="medium-img" src="{$Top.CloudUrl("images/containers2/sk-diagram2.jpg")}" alt="SK Telecom">
                         </p>
                         <p>SKT automates its deployments with <a href="https://github.com/att-comdev/armada">Armada</a>, a sub-project of <a href="http://www.airshipit.org" target="_blank">Airship</a>, which was introduced in the community as a new open infrastructure project by AT&T. SKT is collaborating in community to provide enhancements to the project based on their production uses.
                         </p>
@@ -354,7 +354,7 @@
                         <p>To pursue these goals, the project consortium is shifting away from legacy, VM-based applications to Cloud Native containerized applications. Kuryr serves as a bridge between OpenStack virtual machines, and Kubernetes and OpenShift containerized services.</p>
                         <p>The project makes use of <a href="http://manageiq.org" target="_blank">ManageIQ</a> as a central networks function virtualization orchestrator (NFVO), Ansible for Application deployment and lifecycle management, OpenStack services including Heat, Neutron, and Octavia, and Kubernetes through <a href="https://www.openshift.com/" target="_blank">OpenShift</a> for VMs and containers integration.</p>
                         <p class="text-center">
-                            <img class="medium-img" src="themes/openstack/images/containers2/super-table.jpg" alt="Superfluidity">
+                            <img class="medium-img" src="{$Top.CloudUrl("images/containers2/super-table.jpg")}" alt="Superfluidity">
                         </p>
                         <p>By leveraging Ansible playbooks executed from the ManageIQ appliance, SUPERFLUIDITY offers a common way to deploy applications. These applications in turn use the cloud orchestration functionality provided by OpenStack Heat templates and OpenShift templates.</p>
                         <p>The consortium deploys 5G cloud radio access networks (CRAN) and mobile edge computing (MEC) components within containers. It also deploys high throughput applications like video streaming on top of the distributed infrastructure.</p>
