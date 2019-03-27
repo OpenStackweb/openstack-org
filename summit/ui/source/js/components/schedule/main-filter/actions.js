@@ -32,57 +32,61 @@ const MainFilterActions = ({
             </div>
         </div>
         <div className="col-md-7 col-xs-12">
-            <div className="col-view-all-schedule filter-button-col-left">
-                <form action={full_view_url} method="POST">
-                    <input type="hidden" name="goback" value="1" />
-                    <button type="submit" className="btn btn-default view-all-schedule">
-                    Full&nbsp;/&nbsp;Print&nbsp;View
-                    </button>
-                </form>
-            </div>
-            {current_user && ! values.favorites &&
-                <div className="col-switch-schedule filter-button-col-right">
-                    <button type="button" className="btn btn-primary pull-right switch_schedule"
-                    onClick={() => setFilters({ going: ! values.going })}>
-                        <span className="glyphicon glyphicon-calendar"></span>
-                        &nbsp;
-                        <span className="content">
-                            {values.going ? 'Full Schedule' : 'My Schedule' }
-                        </span>
-                    </button>
-                </div>
-            }
-            {current_user && ! values.going &&
-                <div className="col-switch-watchlist filter-button-col-left">
-                    <button type="button" className="btn btn-primary pull-right switch_favorites"
-                    onClick={() => setFilters({ favorites: ! values.favorites })}>
-                        <span className="glyphicon glyphicon-bookmark"></span>
-                        &nbsp;
-                        <span className="content">
-                            {values.favorites ? 'Full Schedule' : 'Watch Later'}
-                        </span>
-                    </button>
-                </div>
-            }
-            {summit.should_show_venues && current_user &&
-                <div className="col-toggle-sync filter-button-col-right">
+            <div className="row">
+                {summit.should_show_venues && current_user &&
+                <div className="col-md-3 col-xs-12 col-button">
                     <ToggleButton
                         onClick={ () => toggleCalSyncClick() }
-                        className="toggle_sync"
+                        className="toggle_sync calendar_button"
                         on={<span><span className="glyphicon glyphicon-calendar"></span>Synced</span>}
                         off={<span>Not Synced</span>}
                         offstyle="danger"
                         active={calSync}
                     />
                 </div>
-            }
+                }
+                {current_user && ! values.favorites &&
+                <div className="col-md-3 col-xs-12 col-button">
+                    <button type="button" className="btn btn-primary calendar_button switch_schedule"
+                            onClick={() => setFilters({ going: ! values.going })}>
+                        <span className="glyphicon glyphicon-calendar"></span>
+                        &nbsp;
+                        <span className="content">
+                                {values.going ? 'Full Schedule' : 'My Schedule' }
+                            </span>
+                    </button>
+                </div>
+                }
+                {current_user && ! values.going &&
+                <div className="col-md-3 col-xs-12 col-button">
+                    <button type="button" className="btn btn-primary calendar_button switch_favorites"
+                            onClick={() => setFilters({ favorites: ! values.favorites })}>
+                        <span className="glyphicon glyphicon-bookmark"></span>
+                        &nbsp;
+                        <span className="content">
+                                {values.favorites ? 'Full Schedule' : 'Watch Later'}
+                            </span>
+                    </button>
+                </div>
+                }
+                <div className="col-md-3 col-xs-12 col-button">
+                    <form action={full_view_url} method="POST">
+                        <input type="hidden" name="goback" value="1" />
+                        <button type="submit" className="btn btn-default view-all-schedule calendar_button">
+                        Full&nbsp;/&nbsp;Print&nbsp;View
+                        </button>
+                    </form>
+                </div>
+            </div>
             {summit.should_show_venues && current_user &&
-            <div className="col-calendar-share-link filter-button-col-right">
-                <a
-                    onClick={ () => getShareableLink() }
-                    className="shareable-link">
-                    GET&nbsp;CALENDAR&nbsp;SHAREABLE&nbsp;LINK
-                </a>
+            <div className="row">
+                <div className="col-md-12 col-xs-12 col-button col-link">
+                    <a
+                        onClick={ () => getShareableLink() }
+                        className="shareable-link">
+                        GET&nbsp;CALENDAR&nbsp;SHAREABLE&nbsp;LINK
+                    </a>
+                </div>
             </div>
             }
         </div>

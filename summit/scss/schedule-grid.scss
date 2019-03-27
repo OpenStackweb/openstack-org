@@ -684,24 +684,46 @@ a.profile-pic-wrapper {
     }
 }
 
-.col-switch-schedule, .col-switch-watchlist, .col-toggle-sync {
-    float: right;
-    margin-right: 20px;
-}
-
-.col-calendar-share-link {
-    float: left;
-    margin-left: 75px;
-    margin-top: 10px;
-}
-
 .switch_schedule, .switch_favorites, .toggle_sync {
     padding: 8px 14px;
 }
 
 .toggle_sync {
     height: 38px !important;
+}
 
+.no-margin-top {
+    margin-top: 0px !important;
+}
+
+.calendar_button{
+    float: left;
+    width: 100% !important;
+    margin-top: 0px;
+}
+
+.toggle_sync{
+    span.btn{
+        span{
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+}
+
+.col-button{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.col-link{
+    margin-top: 5px;
+}
+
+@media (max-width : 991px) {
+    .calendar_button{
+        margin-top: 5px;
+    }
 }
 
 .switch_schedule > .glyphicon, .switch_favorites > .glyphicon, .toggle_sync .glyphicon{
