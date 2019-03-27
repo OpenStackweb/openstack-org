@@ -84,7 +84,7 @@ const MainFilterActions = ({
                     <a
                         onClick={ () => getShareableLink() }
                         className="shareable-link">
-                        GET&nbsp;SHAREABLE&nbsp;CALENDAR;&nbsp;LINK
+                        GET&nbsp;SHAREABLE&nbsp;CALENDAR&nbsp;LINK
                     </a>
                 </div>
             </div>
