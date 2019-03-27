@@ -6,7 +6,7 @@
                     <h1 style="text-align:left;">Search Result</h1>
                 </div>
                 <div class="col-xs-6">
-                    <div id="os-schedule-global-search" data-search-url="{$Top.Link(global-search)}" data-schedule-url="{$Summit.getScheduleLink.JS}" data-search-value="{$SearchTerm}"></div>
+                    <div id="os-schedule-global-search" class="os-schedule-global-search" data-search-url="{$Top.Link(global-search)}" data-schedule-url="{$Summit.getScheduleLink.JS}" data-search-value="{$SearchTerm}"></div>
                 </div>
             </div>
         </div>

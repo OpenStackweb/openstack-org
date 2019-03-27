@@ -64,5 +64,5 @@ class GlobalSearch extends React.Component {
 
 ReactDOM.render(
     <GlobalSearch {...props} />,
-    element
+    document.querySelector('.os-schedule-global-search')
 );

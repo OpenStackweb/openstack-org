@@ -182,7 +182,7 @@
             <h1 style="text-align:left;">Schedule</h1>
         </div>
         <div class="col-sm-6">
-            <div id="os-schedule-global-search" data-search-url="{$Top.Link(global-search)}" data-schedule-url="" data-search-value=""></div>
+            <div id="os-schedule-global-search" class="os-schedule-global-search" data-search-url="{$Top.Link(global-search)}" data-schedule-url="" data-search-value=""></div>
         </div>
     </div>
     <% if CurrentMember %>
