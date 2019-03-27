@@ -59,8 +59,9 @@ class ShareableLinkModal extends Component {
                         <ModalTitle>Shareable link to your calendar</ModalTitle>
                     </ModalHeader>
                     <ModalBody>
-                        With this link, anyone will be able to see any of your events<br/>
-                        <a href={shareableLink}>{shareableLink}</a>
+                        <p>With this link, anyone will be able to see any of your events.</p>
+                        <p><a href={shareableLink}>{shareableLink}</a></p>
+                        <p>Learn more about <a href="#">sharing your calendar</a>.</p>
                     </ModalBody>
                     <ModalFooter>
                         <button className='btn btn-default' onClick={hideModal}> Close </button>
