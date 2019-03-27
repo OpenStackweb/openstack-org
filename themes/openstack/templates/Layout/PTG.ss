@@ -42,9 +42,9 @@
                     You can see how this plays out in the timeline below.
                 </p>
                 <p>
-                    <a href="{$Top.CloudUrl("images/summit-ptg-timeline-revised.png")}" target="_blank">
+                    <a href="{$Top.CloudUrl("images/static/summit-ptg-timeline-revised.png")}" target="_blank">
                         <img class="ptg-release-timeline"
-                             src="{$Top.CloudUrl("images/summit-ptg-timeline-revised.png")}"
+                             src="{$Top.CloudUrl("images/static/summit-ptg-timeline-revised.png")}"
                              alt="Project Teams Gathering vs Design Summit">
                     </a>
                 </p>

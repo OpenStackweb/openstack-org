@@ -12,7 +12,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <a href="/">
                         <img alt="OpenStack Summit"
-                             src="/themes/openstack/static/images/summit-logo-small-white.svg" class="summit-hero-logo">
+                             src="{$Top.CloudUrl("images/static/summit-logo-small-white.svg")}" class="summit-hero-logo">
                     </a>
                     <h2>
                         $Summit.DateLabel

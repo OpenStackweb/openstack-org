@@ -4,7 +4,7 @@
             <% with $Summit %>
             <div class="col-md-2 col-sm-3 logo-box">
                 <a href="/summit">
-                    <img class="summit-hero-logo" src="/themes/openstack/static/images/summit-logo-small-white.svg" alt="OpenStack Summit">
+                    <img class="summit-hero-logo" src="{$Top.CloudUrl("images/static/summit-logo-small-white.svg")}" alt="OpenStack Summit">
                 </a>
             </div>
             <div class="col-md-6 col-sm-5 title-box">

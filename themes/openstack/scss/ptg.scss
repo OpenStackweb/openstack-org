@@ -1,8 +1,10 @@
 /*PTG landing*/
+@import "_cdn.scss";
+
 .ptg-hero {
   text-align: center;
   padding: 20px 20px 100px;
-  background: #248EC7 url("/themes/openstack/static/images/ptg/ptg-bkgd.jpg") center center no-repeat;
+  background: #248EC7 url("#{$static_images_base_url}/static/ptg/ptg-bkgd.jpg") center center no-repeat;
   background-size: cover;
   color: white; }
   .ptg-hero h4 {

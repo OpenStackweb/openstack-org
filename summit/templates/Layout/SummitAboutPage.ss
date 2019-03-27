@@ -115,7 +115,7 @@
                     </div>
                     <div class="growth-map-wrapper">
                         <img class="growth-map tokyo" src="{$Picture.getURL()}" alt="OpenStack Summit Growth Chart">
-                        <img class="growth-chart-legend map" src="/themes/openstack/static/images/tokyo/map-legend.svg" alt="OpenStack Summit Map Legend">
+                        <img class="growth-chart-legend map" src="{$Top.CloudUrl("images/static/tokyo/map-legend.svg")}" alt="OpenStack Summit Map Legend">
                     </div>
                     <div class="growth-text-bottom map">
                         {$TextBottom}

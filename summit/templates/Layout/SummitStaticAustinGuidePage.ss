@@ -48,7 +48,7 @@
 	<div class="row">
 		<div class="featured-guide-row">
 			<div class="featured">
-				<div class="image-wrapper" style="background-image: url('/themes/openstack/static/images/austin/guide/continental-club.jpg')">
+				<div class="image-wrapper" style="background-image: url('{$Top.CloudUrl("images/static/austin/guide/continental-club.jpg")}')">
 				</div>
 				<div class="featured-content">
 					<h5>Continental Club</h5>
@@ -66,7 +66,7 @@
 				</div>
 			</div>
 			<div class="featured">
-				<div class="image-wrapper" style="background-image: url('/themes/openstack/static/images/austin/guide/elephant-room.jpg')">
+				<div class="image-wrapper" style="background-image: url('{$Top.CloudUrl("images/static/austin/guide/elephant-room.jpg")}')">
 				</div>
 				<div class="featured-content">
 					<h5>Elephant Room</h5>
@@ -84,7 +84,7 @@
 				</div>
 			</div>
 			<div class="featured">
-				<div class="image-wrapper" style="background-image: url('/themes/openstack/static/images/austin/guide/white-horse.jpg')">
+				<div class="image-wrapper" style="background-image: url('{$Top.CloudUrl("images/static/austin/guide/white-horse.jpg")}')">
 				</div>
 				<div class="featured-content">
 					<h5>White Horse</h5>
@@ -231,7 +231,7 @@
 	<div class="row">
 		<div class="featured-guide-row">
 			<div class="featured">
-				<div class="image-wrapper" style="background-image: url('/themes/openstack/static/images/austin/guide/franklins.jpg')">
+				<div class="image-wrapper" style="background-image: url('{$Top.CloudUrl("images/static/austin/guide/franklins.jpg")}')">
 				</div>
 				<div class="featured-content">
 					<h5>Franklin's</h5>
@@ -249,7 +249,7 @@
 				</div>
 			</div>
 			<div class="featured">
-				<div class="image-wrapper" style="background-image: url('/themes/openstack/static/images/austin/guide/terry-blacks.jpg'); background-position: top center;">
+				<div class="image-wrapper" style="background-image: url('{$Top.CloudUrl("images/static/austin/guide/terry-blacks.jpg")}'); background-position: top center;">
 				</div>
 				<div class="featured-content">
 					<h5>Terry Blacks</h5>
@@ -267,7 +267,7 @@
 				</div>
 			</div>
 			<div class="featured">
-				<div class="image-wrapper" style="background-image: url('/themes/openstack/static/images/austin/guide/la-bbq.jpg')">
+				<div class="image-wrapper" style="background-image: url('{$Top.CloudUrl("images/static/austin/guide/la-bbq.jpg")}')">
 				</div>
 				<div class="featured-content">
 					<h5>LA BBQ</h5>
@@ -330,7 +330,7 @@
 	<div class="row">
 		<div class="featured-guide-row">
 			<div class="featured">
-				<div class="image-wrapper" style="background-image: url('/themes/openstack/static/images/austin/guide/torchys-tacos.jpg')">
+				<div class="image-wrapper" style="background-image: url('{$Top.CloudUrl("images/static/austin/guide/torchys-tacos.jpg")}')">
 				</div>
 				<div class="featured-content">
 					<h5>Torchy's Tacos (the original)</h5>
@@ -348,7 +348,7 @@
 				</div>
 			</div>
 			<div class="featured">
-				<div class="image-wrapper" style="background-image: url('/themes/openstack/static/images/austin/guide/veracruz.jpg')">
+				<div class="image-wrapper" style="background-image: url('{$Top.CloudUrl("images/static/austin/guide/veracruz.jpg")}')">
 				</div>
 				<div class="featured-content">
 					<h5>Veracruz All Natural</h5>
@@ -581,7 +581,7 @@
 	<div class="row">
 		<div class="featured-guide-row">
 			<div class="featured">
-				<div class="image-wrapper" style="background-image: url('/themes/openstack/static/images/austin/guide/garage-bar.jpg')">
+				<div class="image-wrapper" style="background-image: url('{$Top.CloudUrl("images/static/austin/guide/garage-bar.jpg")}')">
 				</div>
 				<div class="featured-content">
 					<h5>Garage Bar</h5>
@@ -599,7 +599,7 @@
 				</div>
 			</div>
 			<div class="featured">
-				<div class="image-wrapper" style="background-image: url('/themes/openstack/static/images/austin/guide/midnight-cowboy.jpg')">
+				<div class="image-wrapper" style="background-image: url('{$Top.CloudUrl("images/static/austin/guide/midnight-cowboy.jpg")}')">
 				</div>
 				<div class="featured-content">
 					<h5>Midnight Cowboy</h5>
@@ -617,7 +617,7 @@
 				</div>
 			</div>
 			<div class="featured">
-				<div class="image-wrapper" style="background-image: url('/themes/openstack/static/images/austin/guide/peche.jpg')">
+				<div class="image-wrapper" style="background-image: url('{$Top.CloudUrl("images/static/austin/guide/peche.jpg")}')">
 				</div>
 				<div class="featured-content">
 					<h5>Péché</h5>
@@ -733,7 +733,7 @@
 	<div class="row">
 		<div class="featured-guide-row">
 			<div class="featured">
-				<div class="image-wrapper" style="background-image: url('/themes/openstack/static/images/austin/guide/bat-bridge.jpg')">
+				<div class="image-wrapper" style="background-image: url('{$Top.CloudUrl("images/static/austin/guide/bat-bridge.jpg")}')">
 				</div>
 				<div class="featured-content">
 					<h5>Bat Bridge</h5>
@@ -750,7 +750,7 @@
 				</div>
 			</div>
 			<div class="featured">
-				<div class="image-wrapper" style="background-image: url('/themes/openstack/static/images/austin/guide/peter-pan.jpg')">
+				<div class="image-wrapper" style="background-image: url('{$Top.CloudUrl("images/static/austin/guide/peter-pan.jpg")}')">
 				</div>
 				<div class="featured-content">
 					<h5>Peter Pan Mini Golf</h5>
@@ -891,7 +891,7 @@
 	<div class="row">
 		<div class="featured-guide-row">
 			<div class="featured">
-				<div class="image-wrapper" style="background-image: url('/themes/openstack/static/images/austin/guide/museum-weird.jpg')">
+				<div class="image-wrapper" style="background-image: url('{$Top.CloudUrl("images/static/austin/guide/museum-weird.jpg")}')">
 				</div>
 				<div class="featured-content">
 					<h5>Museum of the Weird</h5>
@@ -909,7 +909,7 @@
 				</div>
 			</div>
 			<div class="featured">
-				<div class="image-wrapper" style="background-image: url('/themes/openstack/static/images/austin/guide/hope-outdoor.jpg')">
+				<div class="image-wrapper" style="background-image: url('{$Top.CloudUrl("images/static/austin/guide/hope-outdoor.jpg")}')">
 				</div>
 				<div class="featured-content">
 					<h5>HOPE Outdoor Gallery</h5>
@@ -926,7 +926,7 @@
 				</div>
 			</div>
 			<div class="featured">
-				<div class="image-wrapper" style="background-image: url('/themes/openstack/static/images/austin/guide/contemporary.jpg')">
+				<div class="image-wrapper" style="background-image: url('{$Top.CloudUrl("images/static/austin/guide/contemporary.jpg")}')">
 				</div>
 				<div class="featured-content">
 					<h5>The Contemporary Austin - Jones Center</h5>
@@ -1012,7 +1012,7 @@
 	<div class="row">
 		<div class="featured-guide-row">
 			<div class="featured">
-				<div class="image-wrapper" style="background-image: url('/themes/openstack/static/images/austin/guide/willie.jpg')">
+				<div class="image-wrapper" style="background-image: url('{$Top.CloudUrl("images/static/austin/guide/willie.jpg")}')">
 				</div>
 				<div class="featured-content">
 					<h5>Willie Nelson Statue</h5>
@@ -1029,7 +1029,7 @@
 				</div>
 			</div>
 			<div class="featured">
-				<div class="image-wrapper" style="background-image: url('/themes/openstack/static/images/austin/guide/greetings-austin.jpg')">
+				<div class="image-wrapper" style="background-image: url('{$Top.CloudUrl("images/static/austin/guide/greetings-austin.jpg")}')">
 				</div>
 				<div class="featured-content">
 					<h5>Greetings From Austin</h5>
@@ -1046,7 +1046,7 @@
 				</div>
 			</div>
 			<div class="featured">
-				<div class="image-wrapper" style="background-image: url('/themes/openstack/static/images/austin/guide/hi-frog.jpg')">
+				<div class="image-wrapper" style="background-image: url('{$Top.CloudUrl("images/static/austin/guide/hi-frog.jpg")}')">
 				</div>
 				<div class="featured-content">
 					<h5>Jeremiah The Innocent</h5>
@@ -1105,7 +1105,7 @@
 	<div class="row">
 		<div class="featured-guide-row">
 			<div class="featured">
-				<div class="image-wrapper" style="background-image: url('/themes/openstack/static/images/austin/guide/broken-spoke.jpg')">
+				<div class="image-wrapper" style="background-image: url('{$Top.CloudUrl("images/static/austin/guide/broken-spoke.jpg")}')">
 				</div>
 				<div class="featured-content">
 					<h5>Broken Spoke</h5>
@@ -1123,7 +1123,7 @@
 				</div>
 			</div>
 			<div class="featured">
-				<div class="image-wrapper" style="background-image: url('/themes/openstack/static/images/austin/guide/mean-eyed-cat.jpg')">
+				<div class="image-wrapper" style="background-image: url('{$Top.CloudUrl("images/static/austin/guide/mean-eyed-cat.jpg")}')">
 				</div>
 				<div class="featured-content">
 					<h5>Mean Eyed Cat</h5>

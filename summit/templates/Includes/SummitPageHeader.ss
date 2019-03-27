@@ -4,7 +4,7 @@
             <% with $Summit %>
             <div class="col-sm-12">
                 <a href="/summit">
-                    <img class="summit-hero-logo" src="/themes/openstack/static/images/summit-logo-small-white.svg" alt="OpenStack Summit">
+                    <img class="summit-hero-logo" src="{$Top.CloudUrl("images/static/summit-logo-small-white.svg")}" alt="OpenStack Summit">
                 </a>
 
                 <% if IsUpComing %>

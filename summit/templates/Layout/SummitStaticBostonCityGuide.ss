@@ -38,7 +38,7 @@
     <div class="row">
         <div class="featured-guide-row">
             <div class="featured">
-                <div class="image-wrapper" style="background-image: url('/themes/openstack/static/images/boston/guide/blunch.jpg')">
+                <div class="image-wrapper" style="background-image: url('{$Top.CloudUrl("images/static/boston/guide/blunch.jpg")}')">
                 </div>
                 <div class="featured-content">
                     <h5>Blunch</h5>
@@ -73,7 +73,7 @@
                 </div>
             </div>
             <div class="featured">
-                <div class="image-wrapper" style="background-image: url('/themes/openstack/static/images/boston/guide/wheelhousebar.jpg')">
+                <div class="image-wrapper" style="background-image: url('{$Top.CloudUrl("images/static/boston/guide/wheelhousebar.jpg")}')">
                 </div>
                 <div class="featured-content">
                     <h5>Wheelhouse</h5>
@@ -947,7 +947,7 @@
     <div class="row">
         <div class="featured-guide-row">
             <div class="featured">
-                <div class="image-wrapper" style="background-image: url('/themes/openstack/static/images/barcelona/guide/bosc.jpg')">
+                <div class="image-wrapper" style="background-image: url('{$Top.CloudUrl("images/static/barcelona/guide/bosc.jpg")}')">
                 </div>
                 <div class="featured-content">
                     <h5>BARCELONA BOSC URBÀ</h5>
@@ -964,7 +964,7 @@
                 </div>
             </div>
             <div class="featured">
-                <div class="image-wrapper" style="background-image: url('/themes/openstack/static/images/barcelona/guide/bogatel.jpg')">
+                <div class="image-wrapper" style="background-image: url('{$Top.CloudUrl("images/static/barcelona/guide/bogatel.jpg")}')">
                 </div>
                 <div class="featured-content">
                     <h5>Bogatell Beach</h5>

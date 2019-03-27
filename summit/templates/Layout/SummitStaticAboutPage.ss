@@ -19,7 +19,7 @@
                         <img src="/summit/images/barcelona/stats-austin.svg" onerror="this.onerror=null; this.src=/summit/images/barcelona/stats-austin.png" alt="Austin Summit Attendees">
                     </div>
                     <div class="about-summit-legend-wrapper">
-                        <img class="about-summit-legend" src="/themes/openstack/static/images/tokyo/about-stats-legend.svg" onerror="this.onerror=null; this.src=/themes/openstack/static/images/tokyo/about-stats-legend.png" alt="Vancouver Summit Attendees">
+                        <img class="about-summit-legend" src="{$Top.CloudUrl("images/static/tokyo/about-stats-legend.svg")}" onerror="this.onerror=null; this.src={$Top.CloudUrl("images/static/tokyo/about-stats-legend.png")}" alt="Vancouver Summit Attendees">
                     </div>
                 </div>
                 <hr>
@@ -69,7 +69,7 @@
         </div>
         <div class="row summit-types">
             <div class="col-lg-5 col-md-5 col-sm-6">
-                <img class="summit-type-icon" src="/themes/openstack/static/images/grey-conference-logo.svg" onerror="this.onerror=null; this.src=/themes/openstack/static/images/grey-conference-logo.png" alt="The OpenStack Conference" style="max-width: 150px;">
+                <img class="summit-type-icon" src="{$Top.CloudUrl("images/static/grey-conference-logo.svg")}" onerror="this.onerror=null; this.src={$Top.CloudUrl("images/static/grey-conference-logo.png")}" alt="The OpenStack Conference" style="max-width: 150px;">
                 <h3>The OpenStack Conference</h3>
                 <div class="sub-h3">
                     For Everyone
@@ -79,7 +79,7 @@
                 </p>
             </div>
             <div class="col-lg-5 col-lg-push-2 col-md-5 col-md-push-2 col-sm-6">
-                <img class="summit-type-icon" src="/themes/openstack/static/images/grey-summit-logo.svg" onerror="this.onerror=null; this.src=/themes/openstack/static/images/grey-summit-logo.png" alt="The OpenStack Conference" style="max-width: 150px;">
+                <img class="summit-type-icon" src="{$Top.CloudUrl("images/static/grey-summit-logo.svg")}" onerror="this.onerror=null; this.src={$Top.CloudUrl("images/static/grey-summit-logo.png")}" alt="The OpenStack Conference" style="max-width: 150px;">
                 <h3>The OpenStack Ops &amp; Design Summit</h3>
                 <div class="sub-h3">
                     For Contributors
@@ -137,12 +137,12 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-push-2">
-                <img class="testimonial-author-img" src="/themes/openstack/static/images/wjossey.jpg">
+                <img class="testimonial-author-img" src="{$Top.CloudUrl("images/static/wjossey.jpg")}">
                 <blockquote>
                     OpenStack is clearly the winner, and the reason for that is what you see in this room today. It’s all of you, it’s all of the community that have come together around this platform; it's people like CERN and Expedia pushing upstream to this platform.
                 </blockquote>
             <div class="testimonial-attribute">
-                <img src="/themes/openstack/static/images/tapjoy-logo.jpg">
+                <img src="{$Top.CloudUrl("images/static/tapjoy-logo.jpg")}">
             <div class="testimonial-name">Wes Jossey</div>
             <div class="testimonial-title">Head of Operations for Tapjoy</div>
             </div>
@@ -162,7 +162,7 @@
                 </div>
                 <div class="growth-map-wrapper">
                     <img class="growth-map tokyo" src="/summit/images/barcelona/map-about-summit.svg" onerror="this.onerror=null; this.src=/summit/images/barcelona/map-about-summit.png" alt="OpenStack Summit Growth Chart">
-                    <img class="growth-chart-legend map" src="/themes/openstack/static/images/tokyo/map-legend.svg" onerror="this.onerror=null; this.src=/themes/openstack/static/images/tokyo/map-legend.png" alt="OpenStack Summit Map Legend">
+                    <img class="growth-chart-legend map" src="{$Top.CloudUrl("images/static/tokyo/map-legend.svg")}" onerror="this.onerror=null; this.src={$Top.CloudUrl("images/static/tokyo/map-legend.png")}" alt="OpenStack Summit Map Legend">
                 </div>
                 <div class="growth-text-bottom map">
                     <p>
@@ -209,18 +209,18 @@
 <!-- Photo Row -->
 <div class="photo-row-wrapper">
     <div class="photo-container">
-           <img src="/themes/openstack/static/images/networking-photos/photo1.jpg" />
-           <img src="/themes/openstack/static/images/networking-photos/photo2.jpg" />
-           <img src="/themes/openstack/static/images/networking-photos/photo3.jpg" />
-           <img src="/themes/openstack/static/images/networking-photos/photo4.jpg" />
-           <img src="/themes/openstack/static/images/networking-photos/photo5.jpg" />
-           <img src="/themes/openstack/static/images/networking-photos/photo6.jpg" />
-           <img src="/themes/openstack/static/images/networking-photos/photo7.jpg" />
-           <img src="/themes/openstack/static/images/networking-photos/photo8.jpg" />
-           <img src="/themes/openstack/static/images/networking-photos/photo9.jpg" />
-           <img src="/themes/openstack/static/images/networking-photos/photo10.jpg" />
-           <img src="/themes/openstack/static/images/networking-photos/photo11.jpg" />
-           <img src="/themes/openstack/static/images/networking-photos/photo12.jpg" />
+           <img src="{$Top.CloudUrl("images/static/networking-photos/photo1.jpg")}" />
+           <img src="{$Top.CloudUrl("images/static/networking-photos/photo2.jpg")}" />
+           <img src="{$Top.CloudUrl("images/static/networking-photos/photo3.jpg")}" />
+           <img src="{$Top.CloudUrl("images/static/networking-photos/photo4.jpg")}" />
+           <img src="{$Top.CloudUrl("images/static/networking-photos/photo5.jpg")}" />
+           <img src="{$Top.CloudUrl("images/static/networking-photos/photo6.jpg")}" />
+           <img src="{$Top.CloudUrl("images/static/networking-photos/photo7.jpg")}" />
+           <img src="{$Top.CloudUrl("images/static/networking-photos/photo8.jpg")}" />
+           <img src="{$Top.CloudUrl("images/static/networking-photos/photo9.jpg")}" />
+           <img src="{$Top.CloudUrl("images/static/networking-photos/photo10.jpg")}" />
+           <img src="{$Top.CloudUrl("images/static/networking-photos/photo11.jpg")}" />
+           <img src="{$Top.CloudUrl("images/static/networking-photos/photo12.jpg")}" />
     </div>
 </div>
 <!-- End Photo Row -->

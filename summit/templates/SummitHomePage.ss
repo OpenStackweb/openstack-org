@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-md-6 col-md-push-6 col-sm-7 col-sm-push-5 col-xs-11 col-xs-push-1">
                 <div class="summit-landing-logo-bkgd">
-                    <img class="summit-landing-logo" src="/themes/openstack/static/images/summit-logo-small-white.svg" onerror="this.onerror=null; this.src=/themes/openstack/static/images/summit-logo-small-white.png" alt="OpenStack Summit">
+                    <img class="summit-landing-logo" src="{$Top.CloudUrl("images/static/summit-logo-small-white.svg")}" onerror="this.onerror=null; this.src='{$Top.CloudUrl("images/static/summit-logo-small-white.png")}'" alt="OpenStack Summit">
                 </div>
                 <div class="summit-headline">
                     <h1>The Must Attend<br/>Open Infrastructure Event</h1>
