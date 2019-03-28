@@ -41,21 +41,12 @@
                     </h2>
                 </div>
                 <div class="col-lg-12 col-sm-12 customer-logos-wrapper">
-<<<<<<< HEAD
-                    <div class="customer-logos" id="bloomberg-logo"><img src="{$Top.CloudUrl("images/customer-bloomberg.png")}" alt="Bloomberg Uses OpenStack"></div>
-                    <div class="customer-logos" id="bestbuy-logo"><img src="{$Top.CloudUrl("images/customer-bestbuy.png")}" alt="Best Buy Uses OpenStack"></div>
-                    <!-- <div class="col-md-2 customer-logos"id="sony-logo"><img src="{$Top.CloudUrl("images/customer-sony.png")}" alt="Sony Uses OpenStack"></div> -->
-                    <div class="customer-logos logo-hover"id="comcast-logo"><img src="{$Top.CloudUrl("images/customer-comcast.png")}" alt="Comcast Uses OpenStack">
-                    </div>
-                      <div class="customer-logos"id="paypal-logo"><img src="{$Top.CloudUrl("images/customer-paypal.png")}" alt="PayPal Uses OpenStack"></div>
-=======
                     <div class="customer-logos" id="chinamobile-logo"><img src="{$Top.CloudUrl('/assets/homepage/company-logos/chinamobile2.png')}" alt="China Mobile Uses OpenStack"></div>
                     <div class="customer-logos" id="target-logo"><img src="{$Top.CloudUrl('/assets/homepage/company-logos/target.png')}" alt="Target Uses OpenStack"></div>
                     <div class="col-md-2 customer-logos" id="progressive-logo"><img src="{$Top.CloudUrl('/assets/homepage/company-logos/progressive.png')}" alt="Progressive Uses OpenStack"></div>
                     <div class="customer-logos logo-hover" id="cathay-logo"><img src="{$Top.CloudUrl('/assets/homepage/company-logos/cathaypacific.png')}" alt="Comcast Uses OpenStack">
                     </div>
                     <div class="customer-logos"id="paypal-logo"><img src="{$Top.CloudUrl('/themes/openstack/images/customer-paypal.png')}" alt="PayPal Uses OpenStack"></div>
->>>>>>> Updates to homepage banner and logos
                     </div>
                 </div>
                 <div class="col-lg-12 col-sm-12">
