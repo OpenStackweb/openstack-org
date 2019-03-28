@@ -41,12 +41,12 @@
                     </h2>
                 </div>
                 <div class="col-lg-12 col-sm-12 customer-logos-wrapper">
-                    <div class="customer-logos" id="chinamobile-logo"><img src="{$Top.CloudUrl('/assets/homepage/company-logos/chinamobile2.png')}" alt="China Mobile Uses OpenStack"></div>
-                    <div class="customer-logos" id="target-logo"><img src="{$Top.CloudUrl('/assets/homepage/company-logos/target.png')}" alt="Target Uses OpenStack"></div>
-                    <div class="customer-logos" id="progressive-logo"><img src="{$Top.CloudUrl('/assets/homepage/company-logos/progressive.png')}" alt="Progressive Uses OpenStack"></div>
-                    <div class="customer-logos logo-hover" id="cathay-logo"><img src="{$Top.CloudUrl('/assets/homepage/company-logos/cathaypacific.png')}" alt="Comcast Uses OpenStack">
+                    <div class="customer-logos" id="chinamobile-logo"><img src="{$Top.CloudUrl('assets/homepage/company-logos/chinamobile2.png')}" alt="China Mobile Uses OpenStack"></div>
+                    <div class="customer-logos" id="target-logo"><img src="{$Top.CloudUrl('assets/homepage/company-logos/target.png')}" alt="Target Uses OpenStack"></div>
+                    <div class="customer-logos" id="progressive-logo"><img src="{$Top.CloudUrl('assets/homepage/company-logos/progressive.png')}" alt="Progressive Uses OpenStack"></div>
+                    <div class="customer-logos logo-hover" id="cathay-logo"><img src="{$Top.CloudUrl('assets/homepage/company-logos/cathaypacific.png')}" alt="Comcast Uses OpenStack">
                     </div>
-                    <div class="customer-logos"id="paypal-logo"><img src="{$Top.CloudUrl('/themes/openstack/images/customer-paypal.png')}" alt="PayPal Uses OpenStack"></div>
+                    <div class="customer-logos"id="paypal-logo"><img src="{$Top.CloudUrl('images/customer-paypal.png')}" alt="PayPal Uses OpenStack"></div>
                     </div>
                 </div>
                 <div class="col-lg-12 col-sm-12">
@@ -102,7 +102,7 @@
                 </div>
                 <div class="col-lg-6 col-sm-6 news-wrapper">
                     <h2>News <a href="/news">See More News <i class="fa fa-caret-right"></i></h2>
-                    <a href="/passport"><img class="news-ad" src="{$Top.CloudUrl('/assets/passport/passport-banner-homepage.png')}"></a>
+                    <a href="/passport"><img class="news-ad" src="{$Top.CloudUrl('assets/passport/passport-banner-homepage.png')}"></a>
                     
                        <% loop NewsItems %>
                             <!-- News Item -->
