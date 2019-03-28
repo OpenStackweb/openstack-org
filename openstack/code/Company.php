@@ -453,6 +453,18 @@ SQL;
         return '#';
     }
 
+    public function getLogoUrl($width=210)
+    {
+        $img = $this->BigLogo();
+        $img = $img->exists() ? $img : $this->Logo();
+        if (isset($img) && Director::fileExists($img->Filename) && $img->exists()) {
+            $img = $img->SetWidth($width);
+            if(is_null($img)) return '#';
+            return $img->getURL();
+        }
+        return '#';
+    }
+
     public function LargeLogoPreview()
     {
         $img = $this->BigLogo();
