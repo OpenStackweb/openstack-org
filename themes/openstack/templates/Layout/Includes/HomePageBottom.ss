@@ -10,9 +10,9 @@
                     </h2>
                     <p>OpenStack software controls large pools of compute, storage, and networking resources throughout a datacenter, managed through a <a href="/software/openstack-dashboard/">dashboard</a> or via the <a href="http://developer.openstack.org">OpenStack API</a>. OpenStack works with <a href="/marketplace/drivers/">popular enterprise and open source technologies</a> making it ideal for heterogeneous infrastructure.</p>
 
-					<p><a href="/user-stories/">Hundreds of the world’s largest brands</a> rely on OpenStack to run their businesses every day, reducing costs and helping them move faster. OpenStack has a strong <a href="/foundation/companies/">ecosystem</a>, and users seeking commercial support can choose from different OpenStack-powered products and services in the <a href="/marketplace/">Marketplace.</a></p>
+                    <p><a href="/user-stories/">Hundreds of the world’s largest brands</a> rely on OpenStack to run their businesses every day, reducing costs and helping them move faster. OpenStack has a strong <a href="/foundation/companies/">ecosystem</a>, and users seeking commercial support can choose from different OpenStack-powered products and services in the <a href="/marketplace/">Marketplace.</a></p>
 
-					<p>The software is built by a <a href="/community/">thriving community</a> of developers, in collaboration with users, and is designed in the open at our <a href="/summit/">Summits</a>.</p>
+                    <p>The software is built by a <a href="/community/">thriving community</a> of developers, in collaboration with users, and is designed in the open at our <a href="/summit/">Summits</a>.</p>
                     
                     <div class="btn-wrapper">
                         <a href="/software/" class="overview-btn left-btn">How It Works <i class="fa fa-arrow-circle-o-right"></i></a>
@@ -41,12 +41,21 @@
                     </h2>
                 </div>
                 <div class="col-lg-12 col-sm-12 customer-logos-wrapper">
+<<<<<<< HEAD
                     <div class="customer-logos" id="bloomberg-logo"><img src="{$Top.CloudUrl("images/customer-bloomberg.png")}" alt="Bloomberg Uses OpenStack"></div>
                     <div class="customer-logos" id="bestbuy-logo"><img src="{$Top.CloudUrl("images/customer-bestbuy.png")}" alt="Best Buy Uses OpenStack"></div>
                     <!-- <div class="col-md-2 customer-logos"id="sony-logo"><img src="{$Top.CloudUrl("images/customer-sony.png")}" alt="Sony Uses OpenStack"></div> -->
                     <div class="customer-logos logo-hover"id="comcast-logo"><img src="{$Top.CloudUrl("images/customer-comcast.png")}" alt="Comcast Uses OpenStack">
                     </div>
                       <div class="customer-logos"id="paypal-logo"><img src="{$Top.CloudUrl("images/customer-paypal.png")}" alt="PayPal Uses OpenStack"></div>
+=======
+                    <div class="customer-logos" id="chinamobile-logo"><img src="{$Top.CloudUrl('/assets/homepage/company-logos/chinamobile2.png')}" alt="China Mobile Uses OpenStack"></div>
+                    <div class="customer-logos" id="target-logo"><img src="{$Top.CloudUrl('/assets/homepage/company-logos/target.png')}" alt="Target Uses OpenStack"></div>
+                    <div class="col-md-2 customer-logos" id="progressive-logo"><img src="{$Top.CloudUrl('/assets/homepage/company-logos/progressive.png')}" alt="Progressive Uses OpenStack"></div>
+                    <div class="customer-logos logo-hover" id="cathay-logo"><img src="{$Top.CloudUrl('/assets/homepage/company-logos/cathaypacific.png')}" alt="Comcast Uses OpenStack">
+                    </div>
+                    <div class="customer-logos"id="paypal-logo"><img src="{$Top.CloudUrl('/themes/openstack/images/customer-paypal.png')}" alt="PayPal Uses OpenStack"></div>
+>>>>>>> Updates to homepage banner and logos
                     </div>
                 </div>
                 <div class="col-lg-12 col-sm-12">
@@ -102,7 +111,7 @@
                 </div>
                 <div class="col-lg-6 col-sm-6 news-wrapper">
                     <h2>News <a href="/news">See More News <i class="fa fa-caret-right"></i></h2>
-                    <a href="/passport"><img class="news-ad" src="{$Top.CloudUrl('assets/passport/passport-banner-homepage.png')}"></a>
+                    <a href="/shanghai"><img class="news-ad" src="{$Top.CloudUrl('assets/homepage/banners/D-300x250.gif')}"></a>
                     
                        <% loop NewsItems %>
                             <!-- News Item -->

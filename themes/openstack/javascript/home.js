@@ -18,7 +18,7 @@ $(function() {
 // Customer Stories, this should be improved
 $(function() {
     $("#bloomberg-logo").on("mouseenter", function() {
-        $(".change-description").text("The world relies on Bloomberg for billions of financial data points per day.");
+        $(".change-description").text("China Mobile’s telecom network has more than 800 million subscribers and 3 million base stations.");
         $(".customer-logos.logo-hover").removeClass("logo-hover");
         $(this).toggleClass("logo-hover");
     });
