@@ -17,29 +17,29 @@ $(function() {
 
 // Customer Stories, this should be improved
 $(function() {
-    $("#bloomberg-logo").on("mouseenter", function() {
+    $("#chinamobile-logo").on("mouseenter", function() {
         $(".change-description").text("China Mobile’s telecom network has more than 800 million subscribers and 3 million base stations.");
         $(".customer-logos.logo-hover").removeClass("logo-hover");
         $(this).toggleClass("logo-hover");
     });
 });
 $(function() {
-    $("#bestbuy-logo").on("mouseenter", function() {
-        $(".change-description").text("Development teams at BestBuy rely on OpenStack to continuously deploy new features.");
+    $("#target-logo").on("mouseenter", function() {
+        $(".change-description").text("One of the largest retailers in the US, Target customizes pieces of OpenStack to pull updates and backport patches more rapidly.");
         $(".customer-logos.logo-hover").removeClass("logo-hover");
         $(this).toggleClass("logo-hover");
     });
 });
 $(function() {
-    $("#sony-logo").on("mouseenter", function() {
-        $(".change-description").text("Sony relies on Openstack to deliver connected gaming experiences to millions of gamers.");
+    $("#progressive-logo").on("mouseenter", function() {
+        $(".change-description").text("Progressive Insurance leveraged OpenStack's open APIs to drastically improve data analytics to provide usage-based insurance to its customers.");
         $(".customer-logos.logo-hover").removeClass("logo-hover");
         $(this).toggleClass("logo-hover");
     });
 });
 $(function() {
-    $("#comcast-logo").on("mouseenter", function() {
-        $(".change-description").text("Comcast delivers interactive entertainment to millions of living rooms.");
+    $("#cathay-logo").on("mouseenter", function() {
+        $(".change-description").text("Leading airline Cathay Pacific transformed its legacy infrastructure into a modern hybrid cloud architecture using Red Hat OpenStack Platform.");
         $(".customer-logos.logo-hover").removeClass("logo-hover");
         $(this).toggleClass("logo-hover");
     });
