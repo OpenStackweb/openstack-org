@@ -666,7 +666,10 @@ SQL;
 
         list($offset, $sort, $where_having) = $this->buildSpeakersSearchParams($page, $page_size, $term, $sort_by, $sort_dir);
 
-        $where_having .= " OR Email LIKE '{$term}%'";
+        if(!empty($term)) {
+            $where_having .= " OR Email LIKE '{$term}%'";
+        }
+
         $query_count = $this->buildSearchSpeakersBaseCountSQLQuery($where_having);
         $query       = $this->buildSearchSpeakersBaseSQLQuery($where_having, $sort, $offset, $page_size);
 
