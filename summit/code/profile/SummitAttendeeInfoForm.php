@@ -28,15 +28,15 @@ final class SummitAttendeeInfoForm extends BootstrapForm
         $t1->addExtraClass('event-brite-order-number');
         $actions   = new FieldList();
         $validator = null;
-
-        if(count(Session::get('attendees')) > 0) // we have and order in process .. then select the attenders
+        $attendees = Session::get('attendees');
+        if(!is_null($attendees) && is_array($attendees) && count($attendees) > 0) // we have and order in process .. then select the attenders
         {
             $t1->setValue(Session::get('ExternalOrderId'));
             $t1->setReadonly(true);
 
             $fields->add(new LiteralField('ctrl1','Current Order has following registered attendees, please select one:'));
-            $options = array();
-            foreach(Session::get('attendees') as $attendee)
+            $options = [];
+            foreach($attendees as $attendee)
             {
                 $ticket_external_id = intval($attendee['ticket_class_id']);
                 $ticket_type = SummitTicketType::get()->filter('ExternalId', $ticket_external_id)->first();

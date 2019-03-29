@@ -423,7 +423,7 @@ final class EventbriteEventManager implements IEventbriteEventManager
 
                 if ($status !== 'placed') throw new InvalidEventbriteOrderStatusException($status);
 
-                $attendees = array();
+                $attendees = [];
                 foreach ($order['attendees'] as $a) {
                     $attendees[$a['id']] = $a;
                 }
