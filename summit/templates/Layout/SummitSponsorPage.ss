@@ -83,11 +83,15 @@
                         </h5>
                     </div>
                     <div class="col-lg-12">
-                        <div class="row">
+                        <div class="row" style="display: flex;justify-content: center;">
                             <% loop $Top.getSponsorsByType($Name) %>
                                 <div class="{$SponsorshipType.getSizeClass()} centered-column">
                                     <a rel="nofollow" href="{$SubmitPageUrl}">$Company.SubmitLogo</a>
                                 </div>
+                                <% if $Top.sponsorHasReachedRowLimit($SponsorshipType.getItemsPerRow(), $Pos) %>
+                                    </div>
+                                    <div class="row" style="display: flex;justify-content: center;">
+                                <% end_if %>
                             <% end_loop %>
                         </div>
                     </div>

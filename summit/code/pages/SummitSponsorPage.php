@@ -318,6 +318,10 @@ class SummitSponsorPage extends SummitPage
     public function getOrderedAttendeesByRoles(){
         return $this->AttendeesByRoles()->sort('Order');
     }
+
+    public function sponsorHasReachedRowLimit($items_limit, $pos) {
+        return ($pos % $items_limit) == 0;
+    }
 }
 
 /**

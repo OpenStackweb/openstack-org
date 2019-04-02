@@ -50,4 +50,22 @@ class SponsorshipType extends DataObject implements ISponsorshipType
                 break;
         }
     }
+
+    public function getItemsPerRow()
+    {
+        switch ($this->Size) {
+            case 'Small':
+                return 12;
+                break;
+            case 'Medium':
+                return 6;
+                break;
+            case 'Large':
+                return 4;
+                break;
+            case 'Big':
+                return 3;
+                break;
+        }
+    }
 }
