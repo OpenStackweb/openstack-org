@@ -408,9 +408,8 @@ SQL;
     {
         $img = $this->Logo();
         $img = $img->exists() ? $img : $this->Logo();
-        if (isset($img) && Director::fileExists($img->Filename) && $img->exists()) {
+        if (isset($img) && $img->exists()) {
             $img = $img->SetWidth(100);
-
             return "<img alt='{$this->Name}_sidebar_logo' src='{$img->getURL()}' class='sidebar-logo-company company-logo'/>";
         }
 
@@ -421,7 +420,7 @@ SQL;
     {
         $img = $this->Logo();
         $img = $img->SetWidth($width);
-        if (isset($img) && Director::fileExists($img->Filename) && $img->exists()) {
+        if (isset($img) && $img->exists()) {
             return "<img alt='{$this->Name}_small_logo' src='{$img->getURL()}' class='small-logo-company company-logo'/>";
         }
 
@@ -432,7 +431,7 @@ SQL;
     {
         $img = $this->BigLogo();
         $img = $img->exists() ? $img : $this->Logo();
-        if (isset($img) && Director::fileExists($img->Filename) && $img->exists()) {
+        if (isset($img) && $img->exists()) {
             $img = $img->SetWidth(210);
 
             return "<img alt='{$this->Name}_medium_logo' src='{$img->getURL()}' class='medium-logo-company company-logo'/>";
@@ -445,7 +444,7 @@ SQL;
     {
         $img = $this->BigLogo();
         $img = $img->exists() ? $img : $this->Logo();
-        if (isset($img) && Director::fileExists($img->Filename) && $img->exists()) {
+        if (isset($img) && $img->exists()) {
             $img = $img->SetWidth(210);
             if(is_null($img)) return '#';
             return $img->getURL();
@@ -457,7 +456,7 @@ SQL;
     {
         $img = $this->BigLogo();
         $img = $img->exists() ? $img : $this->Logo();
-        if (isset($img) && Director::fileExists($img->Filename) && $img->exists()) {
+        if (isset($img) && $img->exists()) {
             $img = $img->SetWidth($width);
             if(is_null($img)) return '#';
             return $img->getURL();
@@ -469,7 +468,7 @@ SQL;
     {
         $img = $this->BigLogo();
         $img = $img->exists() ? $img : $this->Logo();
-        if (isset($img) && Director::fileExists($img->Filename) && $img->exists()) {
+        if (isset($img) && $img->exists()) {
             $img = $img->SetWidth(300);
             if(is_null($img)) return 'missing';
             return "<img alt='{$this->Name}_large_logo' src='{$img->getURL()}' class='large-logo-company company-logo'/>";
@@ -502,7 +501,7 @@ SQL;
     public function BigLogoPreview()
     {
         $img = $this->BigLogo();
-        if (isset($img) && Director::fileExists($img->Filename) && $img->exists()) {
+        if (isset($img) && $img->exists()) {
             $img = $img->SetWidth(300);
 
             return "<img alt='{$this->Name}_big_logo' src='{$img->getURL()}' class='big-logo-company company-logo'/>";
