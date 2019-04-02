@@ -1,7 +1,7 @@
 /* fonts */
 
 @import url("//hello.myfonts.net/count/376f4a");
-
+@import "../../themes/openstack/scss/_cdn.scss";
 @font-face {
     font-family: 'GoldanaScript';
     src: url("../fonts/goldana/376F4A_0_0.eot");
@@ -415,7 +415,7 @@ button.btn i, a.btn i {
 }
 
 .about-summit-header {
-    background: #ed1944 url("/assets/summits/denver-2019/Denver-Mountain-BG.svg") center bottom no-repeat;
+    background: #ed1944 url("#{$assets_images_base_url}/summits/denver-2019/Denver-Mountain-BG.svg") center bottom no-repeat;
     color: #fff;
     min-height: 80vh;
     padding-top: 7em;
@@ -644,6 +644,12 @@ button.btn i, a.btn i {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+div.item{
+    h3{
+        text-align: center;
+    }
 }
 
 .what-to-expect .text-container .attends {
@@ -1324,7 +1330,7 @@ h3.recap-title {
 }
 
 .signature .brand.second {
-    background: url("/assets/summits/homepageimages/citynetwork-tiny.jpg") center no-repeat;
+    background: url("#{$assets_images_base_url}/summits/homepageimages/citynetwork-tiny.jpg") center no-repeat;
 }
 
 .static-summit-about-page #push {
