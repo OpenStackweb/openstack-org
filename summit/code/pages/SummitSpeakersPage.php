@@ -36,7 +36,7 @@ class SummitSpeakersPage_Controller extends SummitPage_Controller {
         $this->top_section = 'full';
         parent::init();
         Requirements::block('summit/css/combined.css');
-        Requirements::css('themes/openstack/static/css/combined.css');
+        Requirements::css('themes/openstack/css/static.combined.css');
         Requirements::css('themes/openstack/javascript/secondary-nav.jquery/secondary-nav.jquery.css');
         Requirements::css('summit/css/summit-speakers-page.css');
         Requirements::javascript('themes/openstack/javascript/secondary-nav.jquery/secondary-nav.jquery.js');

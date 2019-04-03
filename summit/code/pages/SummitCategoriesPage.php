@@ -35,7 +35,7 @@ class SummitCategoriesPage_Controller extends SummitPage_Controller {
 
   public function init() {
         parent::init();
-        Requirements::css("themes/openstack/static/css/combined.css");
+        Requirements::css("themes/openstack/css/static.combined.css");
   }
 
 }

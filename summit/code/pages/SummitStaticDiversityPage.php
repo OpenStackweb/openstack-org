@@ -15,7 +15,7 @@ class SummitStaticDiversityPage_Controller extends SummitPage_Controller {
     {
         parent::init();
         Requirements::block("summit/css/combined.css");
-        Requirements::css("themes/openstack/static/css/combined.css");
+        Requirements::css("themes/openstack/css/static.combined.css");
     }
 
 

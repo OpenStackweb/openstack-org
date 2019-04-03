@@ -6,7 +6,7 @@
     <% include Page_GoogleAnalytics %>
     $FBTrackingCode
     $TwitterTrackingCode
-    <link rel="stylesheet" type="text/css" href="/themes/openstack/static/tooltipster.css" />
+    <link rel="stylesheet" type="text/css" href="/themes/openstack/css/tooltipster.css" />
 </head>
 
 <body class="presentation-page">
