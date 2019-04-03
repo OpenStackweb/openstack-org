@@ -282,21 +282,21 @@
 
                         <h3>Headline</h3>
                             
-                        <div class="col-lg-4 col-md-4 col-sm-6 centered-column">
+                        <div class="col-lg-3 col-md-4 col-sm-6 centered-column">
                             <a rel="nofollow" href="https://www.canonical.com/">
                                 <img alt="Canonical_big_logo"
                                      src="{$Top.CloudUrl('assets/companies/main_logo/ubuntu-lg.jpg')}"
                                      class="big-logo-company company-logo"></a>
                         </div>
                     
-                        <div class="col-lg-4 col-md-4 col-sm-6 centered-column">
+                        <div class="col-lg-3 col-md-4 col-sm-6 centered-column">
                             <a rel="nofollow" href="https://www.telekom.com/">
                                 <img alt="Deutsche Telekom_big_logo"
                                      src="{$Top.CloudUrl('assets/companies/main_logo/deutschetelekom-lg.jpg')}"
                                      class="big-logo-company company-logo"></a>
                         </div>
                     
-                        <div class="col-lg-4 col-md-4 col-sm-6 centered-column">
+                        <div class="col-lg-3 col-md-4 col-sm-6 centered-column">
                             <a rel="nofollow" href="http://www.intel.com/">
                                 <img alt="Intel_big_logo"
                                      src="{$Top.CloudUrl('assets/companies/main_logo/intel-xlg.jpg')}"
@@ -307,14 +307,14 @@
                     <div id="sponsorsCarousel-1" class="item">
                         <h3>Premier Sponsors</h3>
                             
-                        <div class="col-lg-4 col-md-4 col-sm-6 centered-column">
+                        <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
                             <a rel="nofollow" href="http://www.cisco.com/">
                                 <img alt="Cisco_big_logo"
                                      src="{$Top.CloudUrl('assets/companies/main_logo/cisco-new-lg.png')}"
                                      class="big-logo-company company-logo"></a>
                         </div>
                     
-                        <div class="col-lg-4 col-md-4 col-sm-6 centered-column">
+                        <div class="col-lg-2 col-md-2 col-sm-2 centered-columnn">
                             <a rel="nofollow" href="https://www.redhat.com/openstack/?sc_cid=70160000000bEKkAAM&amp;offer_id=701600000006R7KAAU">
                                 <img alt="Red Hat, Inc._big_logo"
                                      src="{$Top.CloudUrl('assets/companies/main_logo/redhat-sp-lg.jpg')}" class="big-logo-company company-logo"></a>
@@ -324,28 +324,28 @@
                     <div id="sponsorsCarousel-2" class="item">
                         <h3>Spotlight Sponsors</h3>
                             
-                            <div class="col-lg-3 col-md-3 col-sm-6 centered-column">
+                            <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
                                 <a rel="nofollow" href="http://www.emc.com">
                                     <img alt="Dell EMC_big_logo"
                                          src="{$Top.CloudUrl('assets/companies/main_logo/EMC-lg.jpg')}"
                                          class="big-logo-company company-logo"></a>
                             </div>
                         
-                            <div class="col-lg-3 col-md-3 col-sm-6 centered-column">
+                            <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
                                 <a rel="nofollow" href="https://www.juniper.net">
                                     <img alt="Juniper Networks_big_logo"
                                          src="{$Top.CloudUrl('assets/companies/main_logo/juniper-sp-lg.jpg')}"
                                          class="big-logo-company company-logo"></a>
                             </div>
                         
-                            <div class="col-lg-3 col-md-3 col-sm-6 centered-column">
+                            <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
                                 <a rel="nofollow" href="https://www.mirantis.com/">
                                     <img alt="Mirantis_big_logo"
                                          src="{$Top.CloudUrl('assets/companies/main_logo/mirantis-lg-van.jpg')}"
                                          class="big-logo-company company-logo"></a>
                             </div>
                         
-                            <div class="col-lg-3 col-md-3 col-sm-6 centered-column">
+                            <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
                                 <a rel="nofollow" href="http://www.purestorage.com/">
                                     <img alt="Pure Storage_big_logo"
                                          src="{$Top.CloudUrl('assets/companies/main_logo/pure-lg.jpg')}"
@@ -354,75 +354,75 @@
                     </div>
                     <div id="sponsorsCarousel-3" class="item">
                         <h3>Exhibitor Sponsors</h3>
-                        <div class="col-lg-3 col-md-3 col-sm-6 centered-column">
+                        <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
                             <a rel="nofollow" href="https://www.avinetworks.com/">
                                 <img alt="Avi Networks_big_logo"
                                      src="{$Top.CloudUrl('assets/companies/main_logo/avi-lg.jpg')}" class="big-logo-company company-logo"></a>
                         </div>
                     
-                        <div class="col-lg-3 col-md-3 col-sm-6 centered-column">
+                        <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
                             <a rel="nofollow" href="http://www.cloudbase.it">
                                 <img alt="Cloudbase Solutions_big_logo"
                                      src="{$Top.CloudUrl('assets/companies/main_logo/cloudbase-lg.jpg')}" class="big-logo-company company-logo"></a>
                         </div>
                     
-                        <div class="col-lg-3 col-md-3 col-sm-6 centered-column">
+                        <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
                             <a rel="nofollow" href="https://www.cumulusnetworks.com">
                                 <img alt="Cumulus Networks_big_logo"
                                      src="{$Top.CloudUrl('assets/companies/main_logo/cumulus-networks-lg.jpg')}" class="big-logo-company company-logo"></a>
                         </div>
                     
-                        <div class="col-lg-3 col-md-3 col-sm-6 centered-column">
+                        <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
                             <a rel="nofollow" href="https://www.datadoghq.com">
                                 <img alt="Datadog Inc_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/datadog-lg.jpg')}" class="big-logo-company company-logo"></a>
                         </div>
                     
-                        <div class="col-lg-3 col-md-3 col-sm-6 centered-column">
+                        <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
                             <a rel="nofollow" href="http://www.easystack.io">
                                 <img alt="EasyStack_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/easystack-lg2.jpg')}"
                                      class="big-logo-company company-logo"></a>
                         </div>
                     
-                        <div class="col-lg-3 col-md-3 col-sm-6 centered-column">
+                        <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
                             <a rel="nofollow" href="https://www.lenovo.com/">
                                 <img alt="Lenovo_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/lenovo-lg.jpg')}"
                                      class="big-logo-company company-logo"></a>
                         </div>
                     
-                        <div class="col-lg-3 col-md-3 col-sm-6 centered-column">
+                        <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
                             <a rel="nofollow" href="https://logdna.com/">
                                 <img alt="LogDNA_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/logdna-lg.jpg')}"
                                      class="big-logo-company company-logo"></a>
                         </div>
                     
-                        <div class="col-lg-3 col-md-3 col-sm-6 centered-column">
+                        <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
                             <a rel="nofollow" href="https://www.snia.org/">
                                 <img alt="SNIA_big_logo" src="{$Top.CloudUrl('assets/companies/main_logo/SNIA-R-logo-lg.jpg')}"
                                      class="big-logo-company company-logo"></a>
                         </div>
                     
-                        <div class="col-lg-3 col-md-3 col-sm-6 centered-column">
+                        <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
                             <a rel="nofollow" href="https://softiron.com/">
                                 <img alt="SoftIron_big_logo"
                                      src="{$Top.CloudUrl('assets/companies/main_logo/SoftIron-lg.jpg')}"
                                      class="big-logo-company company-logo"></a>
                         </div>
                     
-                        <div class="col-lg-3 col-md-3 col-sm-6 centered-column">
+                        <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
                             <a rel="nofollow" href="http://storagemadeeasy.com">
                                 <img alt="Storage Made Easy_big_logo"
                                      src="{$Top.CloudUrl('assets/companies/main_logo/sme-large.jpg')}"
                                      class="big-logo-company company-logo"></a>
                         </div>
                     
-                        <div class="col-lg-3 col-md-3 col-sm-6 centered-column">
+                        <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
                             <a rel="nofollow" href="http://www.triliodata.com">
                                 <img alt="TrilioData_big_logo"
                                      src="{$Top.CloudUrl('assets/companies/main_logo/trilionew-lg2.jpg')}"
                                      class="big-logo-company company-logo"></a>
                         </div>
                     
-                        <div class="col-lg-3 col-md-3 col-sm-6 centered-column">
+                        <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
                             <a rel="nofollow" href="http://vexxhost.com">
                                 <img alt="VEXXHOST, Inc._big_logo"
                                      src="{$Top.CloudUrl('assets/companies/main_logo/vexxhost-new-lg.png')}"
@@ -431,7 +431,7 @@
                     </div>
                     <div id="sponsorsCarousel-4" class="item">
                         <h3>Media Partners</h3>
-                        <div class="col-lg-3 col-md-3 col-sm-6 centered-column">
+                        <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
                             <a rel="nofollow" href="www.superuser.openstack.org">
                                 <img alt="Superuser Long Logo_big_logo"
                                      src="{$Top.CloudUrl('assets/companies/main_logo/superuser-lg.jpg')}"
@@ -439,7 +439,7 @@
                             </a>
                         </div>
 
-                        <div class="col-lg-3 col-md-3 col-sm-6 centered-column">
+                        <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
                             <a rel="nofollow" href="http://www.decisive-media.com">
                                 <img alt="TelecomTV_big_logo"
                                      src="{$Top.CloudUrl('assets/companies/main_logo/ttv-lg.jpg')}"
