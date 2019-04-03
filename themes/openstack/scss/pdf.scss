@@ -4,6 +4,7 @@
 	http://staging.openstack.org/themes/openstack/css/main.css
 	http://localhost:8888/themes/openstack/css/pdf.css
 */
+@import "_cdn.scss";
 
 @page {
   size: 8.5in 11in;
@@ -23,7 +24,7 @@ body {
 	display: block;
 	margin-top: 8px;
 	text-indent: -1000em;
-	background: url(../images/open-stack-cloud-computing-logo-2.png) no-repeat left center;
+	background: url(#{$static_images_base_url}/open-stack-cloud-computing-logo-2.png) no-repeat left center;
 	height: 54px;
 	width: 177px;
 	margin-left: -10px;

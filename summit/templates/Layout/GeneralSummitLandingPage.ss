@@ -170,7 +170,6 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <br/>
                 <h3>These organizations are coming together at the Summit</h3>
             </div>
             <div id="sponsorsCarousel" class="carousel slide" data-ride="carousel">
@@ -348,11 +347,10 @@
                     <a class="carousel-control right" href="#sponsorsCarousel" data-slide="next">
                         <span> <i class="fal fa-chevron-right"></i></span>
                     </a>
-                    
                 </div>
 
             </div>
-            <br/><br/>
+
         </div>
     </div>
 </div>

@@ -383,9 +383,9 @@
     font-size: 20px;
 }
 
-a.staff-twitter{background:url(../images/foundation-staff/icon_twitter.png) center no-repeat;display:inline-block;width:25px;height:25px;margin-right:10px}
-a.staff-linkedin{background:url(../images/foundation-staff/icon_linkedin.png) center no-repeat;display:inline-block;width:25px;height:25px;margin-right:10px}
-a.staff-openstack{background:url(../images/foundation-staff/icon_openstack.png) center no-repeat;display:inline-block;width:25px;height:25px}
+a.staff-twitter{background:url(#{$static_images_base_url}/foundation-staff/icon_twitter.png) center no-repeat;display:inline-block;width:25px;height:25px;margin-right:10px}
+a.staff-linkedin{background:url(#{$static_images_base_url}/foundation-staff/icon_linkedin.png) center no-repeat;display:inline-block;width:25px;height:25px;margin-right:10px}
+a.staff-openstack{background:url(#{$static_images_base_url}/foundation-staff/icon_openstack.png) center no-repeat;display:inline-block;width:25px;height:25px}
 
 .communicate {
     background-color: #63bb5e;

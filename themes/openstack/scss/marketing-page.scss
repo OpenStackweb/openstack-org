@@ -1,3 +1,4 @@
+@import "_cdn.scss";
 
 @font-face{
     font-family:'FontAwesome';
@@ -311,7 +312,7 @@ span.soon{
 /* DAYS */
 
 .new-design .osdays-hero{
-    background: url('../images/osdays/days-hero-bkgd.jpg') no-repeat top center;
+    background: url('#{$static_images_base_url}/osdays/days-hero-bkgd.jpg') no-repeat top center;
     background-size: cover;
     text-align: center;
     border-bottom: 1px solid #DFE2E5
@@ -335,14 +336,14 @@ span.soon{
     text-decoration: underline;
 }
 .slick-prev{
-    background: url('../images/osdays/arrow-right.png') no-repeat center;
+    background: url('#{$static_images_base_url}/osdays/arrow-right.png') no-repeat center;
     opacity: 0.5;
     height: 18px;
     background-size: contain;
     left: -30px;
 }
 .slick-prev:hover{
-    background: url('../images/osdays/arrow-right.png') no-repeat center;
+    background: url('#{$static_images_base_url}/osdays/arrow-right.png') no-repeat center;
     opacity: 1;
     background-size: contain;
 }
@@ -350,14 +351,14 @@ span.soon{
     content: "";
 }
 .slick-next{
-    background: url('../images/osdays/arrow-left.png') no-repeat center;
+    background: url('#{$static_images_base_url}/osdays/arrow-left.png') no-repeat center;
     opacity: 0.5;
     height: 18px;
     background-size: contain;
     right: -30px;
 }
 .slick-next:hover{
-    background: url('../images/osdays/arrow-left.png') no-repeat center;
+    background: url('#{$static_images_base_url}/osdays/arrow-left.png') no-repeat center;
     opacity: 1;
     background-size: contain;
 }
@@ -377,7 +378,7 @@ span.soon{
     margin-bottom: 65px
 }
 .more-img{
-    background: url('../images/osdays/arrow-left.png') #EDF2F7 no-repeat left 13px center;
+    background: url('#{$static_images_base_url}/osdays/arrow-left.png') #EDF2F7 no-repeat left 13px center;
     padding: 8px 17px;
     border-radius: 50%;
     width: 15px !important;
@@ -459,7 +460,7 @@ span.soon{
     text-decoration: underline;
 }
 .dark-blue{
-    background: url('../images/osdays/arrow-white-left.png') #2b4e68 no-repeat right 15px center;
+    background: url('#{$static_images_base_url}/osdays/arrow-white-left.png') #2b4e68 no-repeat right 15px center;
     background-size: 8px auto;
     border-radius: 4px;
     color: #fff !important;

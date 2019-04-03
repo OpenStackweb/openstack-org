@@ -439,7 +439,7 @@ h2{
     margin-top: 25px;
 }
 .footer{
-    background: url(#{$static_images_base_url}/anniversary/3/section_footer-bg.png) no-repeat center center #bbe5f1;
+    background: url('#{$static_images_base_url}/anniversary/3/section_footer-bg.png') no-repeat center center #bbe5f1;
 }
 .footer img{
     display: block;
@@ -477,7 +477,7 @@ h2{
     right:0;
     bottom:0;
     z-index:99; /* makes sure it stays on top */
-    background: #bbe5f1 url('../../../images/anniversary/3/loader.gif') no-repeat center center;
+    background: #bbe5f1 url('#{$static_images_base_url}/anniversary/3/loader.gif') no-repeat center center;
 }
 
 .date {

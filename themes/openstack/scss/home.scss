@@ -42,7 +42,7 @@
 }
 
 .standardnav li.active, .projectsnav li.active {
-	background: url(../images/pointer-arrow.gif) no-repeat right center;
+	background: url(#{$static_images_base_url}/pointer-arrow.gif) no-repeat right center;
 }
 
 .projectsnav li a, .standardnav li a {
