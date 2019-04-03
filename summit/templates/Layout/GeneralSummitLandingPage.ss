@@ -348,11 +348,11 @@
                     <a class="carousel-control right" href="#sponsorsCarousel" data-slide="next">
                         <span> <i class="fal fa-chevron-right"></i></span>
                     </a>
-                    <br/><br/>
+                    
                 </div>
 
             </div>
-
+            <br/><br/>
         </div>
     </div>
 </div>
