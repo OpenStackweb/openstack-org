@@ -263,6 +263,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
+                <br/>
                 <h3 class="recap-title script">Our Denver 2019 Sponsors!
                 </h3>
             </div>
@@ -270,14 +271,14 @@
 
             <div id="sponsorsCarousel" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
-                    <li data-target="#sponsorsCarousel" data-slide-to="0" class="active"></li>
-                    <li data-target="#sponsorsCarousel" data-slide-to="1"></li>
-                    <li data-target="#sponsorsCarousel" data-slide-to="2"></li>
-                    <li data-target="#sponsorsCarousel" data-slide-to="3"></li>
-                    <li data-target="#sponsorsCarousel" data-slide-to="4"></li>
+                    <li data-target="#sponsorsCarousel-0" data-slide-to="0" class="active"></li>
+                    <li data-target="#sponsorsCarousel-1" data-slide-to="1"></li>
+                    <li data-target="#sponsorsCarousel-2" data-slide-to="2"></li>
+                    <li data-target="#sponsorsCarousel-3" data-slide-to="3"></li>
+                    <li data-target="#sponsorsCarousel-4" data-slide-to="4"></li>
                 </ol>
                 <div class="carousel-inner">
-                    <div class="item active">
+                    <div id="sponsorsCarousel-0" class="item active">
 
                         <h3>Headline</h3>
                             
@@ -303,7 +304,7 @@
                         </div>
 
                     </div>
-                    <div class="item">
+                    <div id="sponsorsCarousel-1" class="item">
                         <h3>Premier Sponsors</h3>
                             
                         <div class="col-lg-4 col-md-4 col-sm-6 centered-column">
@@ -320,7 +321,7 @@
                         </div>
 
                     </div>
-                    <div class="item">
+                    <div id="sponsorsCarousel-2" class="item">
                         <h3>Spotlight Sponsors</h3>
                             
                             <div class="col-lg-3 col-md-3 col-sm-6 centered-column">
@@ -351,7 +352,7 @@
                                          class="big-logo-company company-logo"></a>
                             </div>
                     </div>
-                    <div class="item">
+                    <div id="sponsorsCarousel-3" class="item">
                         <h3>Exhibitor Sponsors</h3>
                         <div class="col-lg-3 col-md-3 col-sm-6 centered-column">
                             <a rel="nofollow" href="https://www.avinetworks.com/">
@@ -428,7 +429,7 @@
                                      class="big-logo-company company-logo"></a>
                         </div>
                     </div>
-                    <div class="item">
+                    <div id="sponsorsCarousel-4" class="item">
                         <h3>Media Partners</h3>
                         <div class="col-lg-3 col-md-3 col-sm-6 centered-column">
                             <a rel="nofollow" href="www.superuser.openstack.org">
@@ -456,7 +457,7 @@
             </div>
             <div class="col-sm-12 sponsor">
                 <h4 class="title">Become a Summit Sponsor</h4>
-                <p class="text">
+                <p>
                     Meet the open source users, IT decision makers and passionate developers, administrators and operators building the modern
                     infrastructure stack. Content and attendees span more than 30 open source communities including Ceph,
                     Docker, Kata Containers, Kubernetes, OpenStack, OPNFV, Zuul and more.
@@ -464,6 +465,7 @@
                 <p style="text-align: center;">
                     <a class="btn register-btn-lrg" href="/summit/denver-2019/sponsors/">Sponsor the Summit <i class="fa fa-arrow-right"></i></a>
                 </p>
+                <p>&nbsp;</p>
             </div>
         </div>
     </div>
