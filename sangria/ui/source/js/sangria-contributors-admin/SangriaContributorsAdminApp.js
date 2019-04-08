@@ -84,7 +84,8 @@ class SangriaContributorsAdminApp extends React.Component
         let table_options = {
             className: "dataTable",
             sortCol: order,
-            sortDir: orderDir
+            sortDir: orderDir,
+            actions: {}
         }
 
         return (

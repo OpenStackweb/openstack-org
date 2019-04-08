@@ -48,7 +48,7 @@ final class IngestReleaseContributorsTask extends CronTask
             $files = DataObject::get("File", "ParentID = '{$folder->ID}'");
 
             foreach ($files as $file) {
-                $content = file_get_contents(BASE_PATH .'/'. $file->Filename);
+                $content = file_get_contents($file->getUrl());
                 $releaseName = ucfirst(explode('-', $file->Name)[0]);
 
                 $release = OpenStackRelease::get()->filter('Name', $releaseName)->first();
@@ -60,6 +60,8 @@ final class IngestReleaseContributorsTask extends CronTask
 
                 foreach($entries as $entryId => $contributor) {
                     if (!$contributor || count($contributor) == 0) continue;
+
+                    //echo print_r($contributor).PHP_EOL;
 
                     $email = (isset($contributor['preferred'])) ? $contributor['preferred'] : '';
                     $name = explode(' ', $contributor['name']);
