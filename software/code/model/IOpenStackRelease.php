@@ -58,10 +58,10 @@ interface IOpenStackRelease extends IEntity
     public function getReleaseDate($raw = true);
 
     /**
-     * @param DateTime $release_date
+     * @param $release_date
      * @return void
      */
-    public function setReleaseDate(DateTime $release_date);
+    public function setReleaseDate($release_date);
 
     /**
      * @return string

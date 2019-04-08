@@ -158,10 +158,10 @@ class OpenStackRelease
     }
 
     /**
-     * @param DateTime $release_date
+     * @param $release_date
      * @return void
      */
-    public function setReleaseDate(DateTime $release_date)
+    public function setReleaseDate($release_date)
     {
         if (is_string($release_date)) {
             $this->setField('ReleaseDate', $release_date);
