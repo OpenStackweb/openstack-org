@@ -218,7 +218,7 @@
                                             rsvp_external   : <%if isExternalRSVP() %>true<% else %>false<% end_if %>,
                                             rsvp_seat_type  : "{$CurrentRSVPSubmissionSeatType}",
                                             <% if ClassName == Presentation %>
-                                                moderator_id: {$ModeratorID},
+                                                moderator_id: <% if $hasModerators %>{$ModeratorID}<% else %>0<% end_if %>,
                                                 speakers_id : [<% loop Speakers %>{$ID},<% end_loop %>],
                                                 level       : '{$Level}',
                                                 to_record   : {$ToRecord},

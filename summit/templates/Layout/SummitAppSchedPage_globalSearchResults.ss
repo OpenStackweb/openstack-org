@@ -167,7 +167,7 @@
                             tags_id         : [<% loop Tags %>{$ID},<% end_loop %>],
                             track_id : {$CategoryID},
                             <% if ClassName == Presentation %>
-                                moderator_id: {$ModeratorID},
+                                moderator_id: <% if $hasModerators %>{$ModeratorID}<% else %>0<% end_if %>,
                                 speakers_id : [<% loop Speakers %>{$ID},<% end_loop %>],
                                 level : '{$Level}',
                                 to_record : <% if $ToRecord %>true<% else %>false<% end_if %>,

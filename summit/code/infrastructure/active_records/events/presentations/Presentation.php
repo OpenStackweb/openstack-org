@@ -886,4 +886,12 @@ SQL;
 
         return $cloud_array;
     }
+
+
+    /**
+     * @return bool
+     */
+    public function hasModerators():bool{
+        return $this->Moderator()->exists();
+    }
 }
