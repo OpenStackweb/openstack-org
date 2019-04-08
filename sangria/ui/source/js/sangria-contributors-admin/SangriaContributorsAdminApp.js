@@ -66,6 +66,8 @@ class SangriaContributorsAdminApp extends React.Component
     render() {
         let {items, order, orderDir, lastPage, page, selectedReleases, allReleases, totalItems} = this.props;
 
+        if (allReleases.length == 0) return(<div></div>);
+
         let releases_ddl = allReleases.map(r => ({label: r.Name, value: r.ID}));
 
         let columns = [
@@ -109,8 +111,11 @@ class SangriaContributorsAdminApp extends React.Component
                     <div className="col-md-2">
                         <button className="btn btn-default" onClick={this.handleExport}>Export</button>
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-md-2">
                         <button className="btn btn-primary" onClick={this.handleIngest}>Ingest</button>
+                    </div>
+                    <div className="col-md-4">
+                        <i>"Ingest" fires a cron, wait a few minutes to see the results. Files ingested must be uploaded to Files/atcs folder from the CMS. File names must have this format: *release_name*-cycle-contributors.yaml</i>
                     </div>
                 </div>
 
