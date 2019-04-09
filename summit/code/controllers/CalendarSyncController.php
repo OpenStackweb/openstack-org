@@ -332,11 +332,17 @@ final class CalendarSyncController extends AbstractRestfulJsonApi
                 $app_password
             );
 
-            $res = $client->getUserPrincipal();
+            $principals = $client->getUserPrincipal();
 
-            $user_ppal_url = $res->getPrincipalUrl();
+            $responses  = $principals->getResponses();
+
+            foreach ($responses as $res) {
+                $user_ppal_url = $res->getPrincipalUrl();
+                break;
+            }
 
             $member = Member::currentUser();
+
             if ($member) {
                 $member->registerICloudAuthGrant($summit, $user, $app_password, $user_ppal_url);
             }
