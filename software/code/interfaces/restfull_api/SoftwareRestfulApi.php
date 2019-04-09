@@ -165,7 +165,11 @@ class SoftwareRestfulApi extends AbstractRestfulJsonApi
             return $this->validationError('You need sangria access to ingest.');
         }
 
-        exec('php '.BASE_PATH.'/framework/cli-script.php /IngestReleaseContributorsTask >/dev/null 2>&1 &');
+        $requests = ContributorsIngestRequest::get();
+        if ($requests->count() == 0) {
+            $request = new ContributorsIngestRequest();
+            $request->write();
+        }
 
         return $this->ok();
     }

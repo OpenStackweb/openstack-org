@@ -39,6 +39,9 @@ final class IngestReleaseContributorsTask extends CronTask
      */
     public function run()
     {
+        $requests_on_queue = ContributorsIngestRequest::get();
+        if ($requests_on_queue->count() == 0) return;
+
         $start = time();
         $member_repository = new SapphireMemberRepository();
 
@@ -117,6 +120,8 @@ final class IngestReleaseContributorsTask extends CronTask
                     $contributorObj->write();
                 }
             }
+
+            DB::query("DELETE FROM ContributorsIngestRequest");
         });
 
         $delta = time() - $start;
