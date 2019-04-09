@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { fetchAll, fetchOrderedItems } from './actions';
 import Message from "~core-components/message";
 import { AjaxLoader } from '~core-components/ajaxloader';
+import { RawHTML } from '~core-components/rawhtml';
 
 const SortDirectionAsc  = 'ASC';
 const SortDirectionDesc = 'DESC';
@@ -163,7 +164,7 @@ class MarketplaceDriverApp extends React.Component
                                     </td>
                                     <td>
                                         <a href={driver.url}>{driver.name}</a>
-                                        <p>{driver.description}</p>
+                                        <RawHTML>{driver.description}</RawHTML>
                                     </td>
                                     <td>
                                         {driver.releases.map((r,i) =>
