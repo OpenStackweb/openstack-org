@@ -161,6 +161,8 @@ class SoftwareRestfulApi extends AbstractRestfulJsonApi
 
     public function ingestContributors()
     {
+        $ingesting = false;
+
         if (!Permission::check("SANGRIA_ACCESS")) {
             return $this->validationError('You need sangria access to ingest.');
         }
@@ -169,9 +171,11 @@ class SoftwareRestfulApi extends AbstractRestfulJsonApi
         if ($requests->count() == 0) {
             $request = new ContributorsIngestRequest();
             $request->write();
+        } else {
+            $ingesting = true;
         }
 
-        return $this->ok();
+        return $this->ok(['ingesting' => $ingesting]);
     }
 
 }

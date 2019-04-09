@@ -20,6 +20,8 @@ import {
     showMessage
 } from 'openstack-uicore-foundation/lib/methods';
 
+import swal from "sweetalert2";
+
 export const REQUEST_ITEMS = 'REQUEST_ITEMS';
 export const RECEIVE_ITEMS = 'RECEIVE_ITEMS';
 export const RECEIVE_META  = 'RECEIVE_META';
@@ -102,7 +104,7 @@ export const fetchReleases = () => (dispatch) => {
     )({})(dispatch).then(() => {
             dispatch(stopLoading());
         }
-    );;
+    );
 }
 
 export const ingestContributors = () => (dispatch) => {
@@ -116,8 +118,13 @@ export const ingestContributors = () => (dispatch) => {
         {},
         errorHandler
     )({})(dispatch)
-        .then(() => {
+        .then((payload) => {
             dispatch(stopLoading());
+            if (payload.response.ingesting) {
+                swal("Ingestion in process...", "ingestion is currently running, please try again later.", "warning");
+            } else {
+                swal("Ingestion triggered", "this process runs on the background and will take around 5 minutes to complete.", "success");
+            }
         });
 }
 
