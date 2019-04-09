@@ -853,8 +853,8 @@ SQL;
      */
     public function getLocalStartDate()
     {
-        if(!empty($this->StartDate)) {
-            $value  = $this->StartDate;
+        $value = $this->getField('StartDate');
+        if(!empty($value)) {
             $summit = $this->getSummit();
             if(!is_null($summit))
             {
@@ -870,8 +870,8 @@ SQL;
      */
     public function getLocalEndDate()
     {
-        if(!empty($this->EndDate)) {
-            $value  = $this->EndDate;
+        $value = $this->getField('EndDate');
+        if(!empty($value)) {
             $summit = $this->getSummit();
             if(!is_null($summit))
             {
