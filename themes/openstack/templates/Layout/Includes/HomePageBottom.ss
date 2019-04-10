@@ -70,7 +70,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <object type="image/svg+xml" class="img-responsive community-graphic"
-                            data="{$Top.CloudUrl("images/community-graphic.svg?people=$MembersCount&countries=$CountryCount&organizations=$OrganizationCount&codelines=20M+")}" onerror="this.onerror=null; this.src={$Top.CloudUrl("/images/community-graphic.png")}" alt="OpenStack Community">
+                            data="{$Top.CloudUrl("images/community-graphic.svg")}?people=$MembersCount&countries=$CountryCount&organizations=$OrganizationCount&codelines=20M+" onerror="this.onerror=null; this.src='{$Top.CloudUrl("/images/community-graphic.png")}'" alt="OpenStack Community">
                     </object>
                 </div>
                 <div class="col-md-6">
