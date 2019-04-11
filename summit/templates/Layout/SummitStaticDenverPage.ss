@@ -137,10 +137,10 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/Uploads/Maestropandy.jpg')}" alt="Pandiyan Muthuraman" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/profile-images/Screen-Shot-2017-04-24-at-2.47.57-PM.png')}" alt="Imad Sousou" class="summit-user-image">
                         </div>
                         <div class="info">
-                            <div class="name">Pandiyan Muthuraman</div>
+                            <div class="name">Imad Sousou</div>
                             <div class="title">Reliance Jio</div>
                             <div class="topic">Cognitive Computing at the Edge with AI </div>
                         </div>
