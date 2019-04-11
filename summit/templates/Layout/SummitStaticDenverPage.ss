@@ -141,8 +141,8 @@
                         </div>
                         <div class="info">
                             <div class="name">Imad Sousou</div>
-                            <div class="title">Reliance Jio</div>
-                            <div class="topic">Cognitive Computing at the Edge with AI </div>
+                            <div class="title">Intel</div>
+                            <div class="topic">Open Infrastructure</div>
                         </div>
                     </div>
                 </div>
