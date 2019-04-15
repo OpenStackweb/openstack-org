@@ -1,6 +1,7 @@
 /* fonts */
 
 @import url("//hello.myfonts.net/count/376f4a");
+@import "../../themes/openstack/scss/_cdn.scss";
 
 @font-face {
     font-family: 'GoldanaScript';
@@ -127,7 +128,7 @@ footer {
 }
 
 .summit-hero-landing .summit-hero-logo, .summit-hero-landing-short .summit-hero-logo {
-    background: url("/assets/Uploads/arrows.svg") center no-repeat;
+    background: url("#{$assets_images_base_url}/Uploads/arrows.svg") center no-repeat;
     background-size:100%;
     height: 2.5em;
     width: 2.5em;
@@ -457,7 +458,7 @@ footer {
 }
 
 .about-summit-header {
-    background: #ed1944 url("/assets/summits/denver-2019/Denver-Mountain-BG.svg") center bottom no-repeat;
+    background: #ed1944 url("#{$assets_images_base_url}/summits/denver-2019/Denver-Mountain-BG.svg") center bottom no-repeat;
     color: #fff;
     min-height: 80vh;
     padding-top: 7em;
@@ -1434,7 +1435,7 @@ footer {
 }
 
 .signature .brand.second {
-    background: url("/assets/summits/homepageimages/citynetwork-tiny.jpg") center no-repeat;
+    background: url("#{$assets_images_base_url}/summits/homepageimages/citynetwork-tiny.jpg") center no-repeat;
 }
 
 .static-summit-about-page #push {
@@ -1508,7 +1509,7 @@ footer .logo {
 }
 
 footer .logo a {
-    background: url("/assets/Uploads/arrows.svg") center no-repeat;
+    background: url("#{$assets_images_base_url}/Uploads/arrows.svg") center no-repeat;
     background-size:100%;
     height: 3.5em;
     width: 3.5em;

@@ -1,7 +1,9 @@
 /* fonts */
 
+
 @import url("//hello.myfonts.net/count/376f4a");
 @import "../../themes/openstack/scss/_cdn.scss";
+
 @font-face {
     font-family: 'GoldanaScript';
     src: url("../fonts/goldana/376F4A_0_0.eot");
@@ -88,7 +90,7 @@ button.btn i, a.btn i {
 }
 
 .summit-hero-landing .summit-hero-logo, .summit-hero-landing-short .summit-hero-logo  {
-    background: url(/assets/Uploads/arrows.svg) center no-repeat;
+    background: url('#{$assets_images_base_url}/Uploads/arrows.svg') center no-repeat;
     background-size:100%;
     height: 2.5em;
     width: 2.5em;
@@ -1422,7 +1424,7 @@ footer .logo {
 }
 
 footer .logo a {
-    background: url("/assets/Uploads/arrows.svg") center no-repeat;
+    background: url("#{$assets_images_base_url}/Uploads/arrows.svg") center no-repeat;
     background-size:100%;
     height: 3.5em;
     width: 3.5em;
