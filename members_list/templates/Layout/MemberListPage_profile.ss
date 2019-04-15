@@ -13,29 +13,12 @@
                 <h3>$FirstName $Surname <% if hasAvailableCertifications %>
                     <img height="65px" src="{$Top.CloudUrl("images/coa/coa-badge.jpg")}" title="COA Certified" alt="COA Certified">
                 <% end_if %></h3>
-
             </div>
             <hr>
             <div class="span-4">
                 <strong>Date Joined</strong>
             </div>
             <div class="span-6 last">$Created.Month $Created.format(d), $Created.Year <br><br></div>
-            <% if OrderedAffiliations %>
-                <div class="span-4">
-                    <strong>Affiliations</strong>
-                </div>
-                <div class="span-6 last">
-                    <% loop OrderedAffiliations %>
-                        <div>
-                            <b>$Organization.Name</b> $Duration
-                        </div>
-                    <% end_loop %>
-                </div>
-            <% end_if %>
-            <div class="span-4"><strong>Statement of Interest </strong></div>
-            <div class="span-6 last">
-                <p>$StatementOfInterest</p>
-            </div>
             <% if TwitterName || LinkedInProfile || IRCHandle || Bio %>
                 <hr>
             <% end_if %>
@@ -51,9 +34,51 @@
                 <div class="span-4"><strong>IRC</strong></div>
                 <div class="span-6 last">$IRCHandle<br><p>&nbsp;</p></div>
             <% end_if %>
+            <div class="span-4"><strong>Statement of Interest </strong></div>
+            <div class="span-6 last">
+                <p>$StatementOfInterest</p>
+            </div>
             <% if Bio %>
                 <div class="span-4"><strong>Bio</strong></div>
-                <div class="span-6 last">$Bio<br><p>&nbsp;</p> </div>
+                <div class="span-6 last">$Bio</div>
+            <% end_if %>
+            <% if OrderedAffiliations %>
+                <div class="span-4">
+                    <strong>Affiliations</strong>
+                </div>
+                <div class="span-6 last">
+                    <ul>
+                        <% loop OrderedAffiliations %>
+                            <li>
+                                $Organization.Name - $Duration
+                            </li>
+                        <% end_loop %>
+                    </ul>
+                </div>
+            <% end_if %>
+            <% if isUpstreamStudent %>
+                <div class="span-4">
+                    <strong>Courses Completed</strong>
+                </div>
+                <div class="span-6 last">
+                    <ul>
+                        <li>OpenStack Upstream Institute</li>
+                    </ul>
+                </div>
+            <% end_if %>
+            <% if getCommunityAwards %>
+                <div class="span-4">
+                    <strong>Community Contributor Awards</strong>
+                </div>
+                <div class="span-6 last">
+                    <ul>
+                        <% loop getCommunityAwards %>
+                            <li>
+                                $Name - $Summit.Title $Summit.getSummitYear
+                            </li>
+                        <% end_loop %>
+                    </ul>
+                </div>
             <% end_if %>
             <% if Projects %>
                 <hr><div class="span-4"><strong>Projects</strong></div>

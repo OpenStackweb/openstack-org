@@ -120,3 +120,4 @@ migrations:
   - LanguagesUpdateMigration
   - CleanupSpeakerEmptyRelations
   - NewsSentEmailMigration
+  - CCAUpstreamStudentMigration

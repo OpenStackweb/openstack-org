@@ -84,7 +84,9 @@ class OpenStackMember
     ];
 
     static $belongs_to = [
-        'Speaker' => 'PresentationSpeaker.Member'
+        'Speaker' => 'PresentationSpeaker.Member',
+        'OSUpstreamStudent' => 'OSUpstreamInstituteStudent.Member',
+        'CommunityContributor' => 'CommunityContributor.Member'
     ];
 
     static $belongs_many_many = [
@@ -709,6 +711,24 @@ class OpenStackMember
      */
     public function isActive(){
         return $this->owner->Active == true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isUpstreamStudent(){
+        return $this->owner->OSUpstreamStudent()->Exists();
+    }
+
+    /**
+     * @return bool
+     */
+    public function getCommunityAwards(){
+        if ($contributor = $this->owner->CommunityContributor()) {
+            return $contributor->Awards()->sort('SummitID', 'DESC');
+        }
+
+        return false;
     }
 }
 
