@@ -39,6 +39,7 @@
     <% include Footer %>
     <% include Quantcast %>
     <% include TwitterUniversalWebsiteTagCode %>
+    <% include OpenstackSearchWidget %>
   </body>
   <% include Page_LinkedinInsightTracker %>
 </html>

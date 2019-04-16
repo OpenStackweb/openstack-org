@@ -15,8 +15,6 @@
             <div class="search-icon show"><i class="fa fa-search"></i> <span class="header-search-text">Search</span></div>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <% include OpenstackSearchWidget %>
-
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <div class="search-container tiny">
                 <div class="openstack-search-bar" data-baseUrl="{$getEnv('SEARCH_WIDGET_BASE_URL')}" data-context="www-openstack"></div>

@@ -52,7 +52,8 @@
     <% include Footer %>
     $TrackingLinkScript
     <% include Quantcast %>
-      <% include TwitterUniversalWebsiteTagCode %>
+    <% include TwitterUniversalWebsiteTagCode %>
+    <% include OpenstackSearchWidget %>
   </body>
       <% include Page_LinkedinInsightTracker %>
 </html>

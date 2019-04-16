@@ -54,6 +54,7 @@
         });
     </script>
     <% include TwitterUniversalWebsiteTagCode %>
+    <% include OpenstackSearchWidget %>
 </body>
 <% include Page_LinkedinInsightTracker %>
 </html>
