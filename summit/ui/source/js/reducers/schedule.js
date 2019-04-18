@@ -22,7 +22,7 @@ const DEFAULT_STATE = {
         value: '',
     },
     filters: {
-        values: {},
+        values: {going: false, favorites: false},
         visible: true,
         expanded: false,
         allowedTracks: [],
@@ -43,22 +43,14 @@ const ScheduleReducer = (state = DEFAULT_STATE, action) => {
                 loading: true,
             }
         case CHANGE_VIEW:
-            var { view } = payload
-
-            // Reset favorites and going filters only.
-            var filters = { ...state.filters,
-                values: { ...state.filters.values,
-                    going: false,
-                    favorites: false,
-                }
-            }
+            var { view } = payload;
 
             // Write filter values to URL.
             setUrlParams({ ...DEFAULT_VIEWS,
                 [view.type]: view.value
             }, FILTER_URL_EXCLUDE)
 
-            return { ...state, view, filters, events: [], bulk: [] }
+            return { ...state, view, events: [], bulk: [] }
 
         case RECEIVE_EVENTS:
             var { events } = payload.response;
