@@ -104,3 +104,6 @@ INSERT INTO Member
 VALUES (1,'Member',NOW(),NOW(),'admin','admin','admin@admin.com','1qaz2wsx','none',1,1,NOW());
 
 INSERT INTO `Group_Members` (`ID`,`GroupID`,`MemberID`,`SortIndex`) VALUES (1,2,1,0);
+
+
+UPDATE `File` SET CloudStatus='Live';
