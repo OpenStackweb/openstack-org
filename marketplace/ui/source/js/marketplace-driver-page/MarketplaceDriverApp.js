@@ -4,6 +4,7 @@ import { fetchAll, fetchOrderedItems } from './actions';
 import Message from "~core-components/message";
 import { AjaxLoader } from '~core-components/ajaxloader';
 import { RawHTML } from '~core-components/rawhtml';
+import URI from "urijs";
 
 const SortDirectionAsc  = 'ASC';
 const SortDirectionDesc = 'DESC';
@@ -32,10 +33,11 @@ class MarketplaceDriverApp extends React.Component
     constructor(props) {
         super(props);
 
-        let hash = $(window).url_fragment('getParams');
+
         let project_filter = 'all', release_filter = 'all', vendor_filter = 'all';
 
-        if(!$.isEmptyObject(hash)) {
+        if(window.location.hash) {
+            let hash = URI.parseQuery(window.location.hash.substr(1));
             if (('project' in hash) && hash['project']) {
                 project_filter = hash['project'];
             }
