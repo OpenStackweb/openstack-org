@@ -12,8 +12,10 @@ sudo rm -Rf node_modules;
 sudo npm install;
 ./sass.sh;
 sudo npm run build-all;
-chown vagrant:www-data -R /home/vagrant/node_modules;
-chown vagrant:www-data -R /var/www/www.openstack.org/vendor;
+# permissions
+chown vagrant:www-data -R /var/www/www.openstack.org;
+#find /var/www/www.openstack.org -type f -print0 | xargs -0 chmod 644;
+#find /var/www/www.openstack.org -type d -print0 | xargs -0 chmod 775;
 sudo service nginx restart;
 sudo service php7.2-fpm restart;
 sudo php /var/www/www.openstack.org/framework/cli-script.php /UpdateFeedTask;
@@ -25,7 +27,4 @@ sudo sake dev/tasks/CompilePO2MOTask;
 sudo sake dev/tasks/CompilePO2MOTask module=papers;
 sudo sake dev/tasks/PaperParseTranslatorsPOFiles;
 
-# permissions
-chown vagrant:www-data -R /var/www/www.openstack.org;
-find /var/www/www.openstack.org -type f -print0 | xargs -0 chmod 644;
-find /var/www/www.openstack.org -type d -print0 | xargs -0 chmod 775;
+

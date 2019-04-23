@@ -181,6 +181,14 @@ file { '/var/www/www.openstack.org/_ss_environment.php':
   mode    => '0640',
 }
 
+file { '/var/www/www.openstack.org/openstack/_config/cloudassets.yml':
+  ensure  => present,
+  content => template("site/cloudassets.yml.erb"),
+  owner   => 'vagrant',
+  group   => 'www-data',
+  mode    => '0640',
+}
+
 file { '/etc/php/7.2/fpm/pool.d/www.conf':
   ensure  => present,
   content => template('site/www.conf.erb'),
