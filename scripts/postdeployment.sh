@@ -33,16 +33,10 @@ done
 sudo service php7.2-fpm start;
 sudo service php7.2-fpm restart;
 
-su vagrant;
-# install local nodejs modules on VM
-mkdir -p /home/vagrant/node_modules;
-chown vagrant:www-data -R /home/vagrant/node_modules;
-ln -sf /home/vagrant/node_modules /var/www/www.openstack.org/node_modules;
-
 cd /var/www/www.openstack.org;
 # create local folder for ss cache
 mkdir -p /var/www/www.openstack.org/silverstripe-cache;
-composer install --ignore-platform-reqs --prefer-dist;
+sudo -H -u vagrant bash -c "composer install --ignore-platform-reqs --prefer-dist";
 sudo ./framework/sake installsake;
 
 if [[ -f scripts/setup_python_env.sh ]]; then
