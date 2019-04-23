@@ -12,7 +12,17 @@
  * limitations under the License.
  **/
 
-class SpeakerEditPermissionRequest
+final class SpeakerEditPermissionRequest extends DataObject
 {
+    private static $db = [
+        'Approved'       => 'Boolean',
+        'ApprovedDate'   => 'SS_Datetime',
+        'CreatedDate'    => 'SS_Datetime',
+        'Hash'           => 'Text',
+    ];
 
+    private static $has_one = [
+        'Speaker' => 'PresentationSpeaker',
+        'RequestedBy' => 'Member',
+    ];
 }
