@@ -11,11 +11,21 @@ CloudAssets:
   map:
     'assets':
       Type: SwiftBucket
-      BaseURL: '<%= @cloud_assets_base_url %>'
+      BaseURL: '<%= @cloud_assets_base_url %>/<%= @cloud_assets_container_name %>/'
       AuthURL: '<%= @cloud_assets_auth_url %>'
       Container: '<%= @cloud_assets_container_name %>'
       Region: '<%= @cloud_assets_region %>'
       ApplicationCredentialId: '<%= @cloud_assets_app_credential_id %>'
-      ApplicationCredentialSecret:  '<%= @cloud_assets_app_credential_secret %>'
+      ApplicationCredentialSecret: '<%= @cloud_assets_app_credential_secret %>'
       ProjectName: '<%= @cloud_assets_project_name %>'
       LocalCopy: true
+    'images':
+      Type: SwiftBucket
+      BaseURL: '<%= @cloud_assets_base_url %>/<%= @cloud_images_container_name %>/'
+      AuthURL:  '<%= @cloud_assets_auth_url %>'
+      Container:'<%= @cloud_images_container_name %>'
+      Region: '<%= @cloud_images_region %>'
+      ApplicationCredentialId: '<%= @cloud_assets_app_credential_id %>'
+      ApplicationCredentialSecret: '<%= @cloud_assets_app_credential_secret %>'
+      ProjectName: '<%= @cloud_assets_project_name %>'
+      LocalCopy: false
