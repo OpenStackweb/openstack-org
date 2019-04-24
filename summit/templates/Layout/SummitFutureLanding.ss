@@ -8,9 +8,9 @@
                     <p><span class="join-us-text-yellow"><a href="/summit/shanghai-2019/sponsors/" style="margin: 10px;color: #ffd602;">Sponsor the Summit | 赞助峰会</a></span></p>
                     <p class="join-us-text">上海世博中心 Shanghai Expo Centre | 中国上海 Shanghai, China</p>
                     <p>&nbsp;</p>
-                    <p><a href="/summit/shanghai-2019/sponsors/" class="sponsors_button" style="margin: 10px;">
+                    <p><a href="https://app.eventxtra.link/registrations/6640a923-98d7-44c7-a623-1e2c9132b402?locale=en" class="sponsors_button" style="margin: 10px;">
                             REGISTER IN USD
-                        </a>&nbsp;&nbsp;<a href="/summit/shanghai-2019/sponsors/" class="sponsors_button" style="margin: 10px;">以人民币注册（可开发票）</a></p>
+                        </a>&nbsp;&nbsp;<a href="https://app.eventxtra.link/registrations/f564960c-74f6-452d-b0b2-484386d33eb6?locale=en" class="sponsors_button" style="margin: 10px;">以人民币注册（可开发票）</a></p>
                     <p>&nbsp;</p>
                     <p>&nbsp;</p>
                     <!-- <div class="save-the-date"> Save The Date! </div>
