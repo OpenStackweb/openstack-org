@@ -37,7 +37,7 @@
                     <div class="col-sm-12">
                         <div class="intro-message"> 
                             <img class="testimonial testimonial-logo" src="{$Top.CloudUrl("assets/bare-metal-logo-program/verizon-media.png")}">
-                            <p class="testimonial testimonial-quote">At Verizon Media, OpenStack manages hundreds of thousands of bare metal compute resources in our data centers. We have made significant changes to our supply chain process using OpenStack, fulfilling common bare metal quota requests within minutes.</p>
+                            <p class="testimonial testimonial-quote">At Verizon Media, OpenStack manages hundreds of thousands of bare metal compute resources with over 4 million cores in our data centers,” said James Penick, architect director at Verizon Media. “We have made significant changes to our supply chain process using OpenStack, fulfilling common bare metal quota requests within minutes.</p>
                             <div class="testimonial image-cropper">
                                 <img class="testimonial-avatar" src="{$Top.CloudUrl("images/baremetal/avatar-james-penick.jpg")}">
                             </div>
@@ -80,7 +80,6 @@
             </div> <!-- .container -->
         </section>
         <!-- More Info -->
-        <!--
         <section class="baremetal-blue more-info">
             <div class="container">
                 <div class="row info-block">
@@ -88,20 +87,20 @@
                     <div class="col-sm-8">
                         <div class="col-sm-5">
                             <h3>Find Help and Expertise</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ac purus augue.</p>
-                            <a class="red-button" href="https://www.openstack.org/marketplace/" target="_blank">Visit the Marketplace <i class="icon-arrow-right"></i></a>
+                            <p>Visit the OpenStack Marketplace and find a partner who supports OpenStack Ironic</p>
+                            <a class="red-button" href="https://www.openstack.org/marketplace" target="_blank">Visit the Marketplace <i class="icon-arrow-right"></i></a>
                         </div>
                         <div class="col-sm-2"></div>
                         <div class="col-sm-5">
                             <h3>How Ironic Works</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ac purus augue.</p>
-                            <a class="red-button" href="https://www.openstack.org#" target="_blank">Read on Github <i class="icon-arrow-right"></i></a>
+                            <p>Learn more about Ironic, including how it controls hardware and writes an operating system image to bare metal</p>
+                            <a class="red-button" href="https://github.com/metal3-io/metal3-docs/blob/master/design/how-ironic-works.md" target="_blank">Read on Github <i class="icon-arrow-right"></i></a>
                         </div>
                     </div>
                     <div class="col-sm-2"></div>
                 </div>
             </div> <!-- .container -->
-        </section> -->
+        </section>
     </div>
     <div class="resources baremetal">
 
