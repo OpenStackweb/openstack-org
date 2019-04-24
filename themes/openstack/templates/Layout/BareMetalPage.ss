@@ -54,7 +54,7 @@
                     <div class="col-sm-12 center">
                         <div class=""> 
                             <div>
-                                <h2>From the perspective of cloud architects and administrators running Ironic, the service serves a variety of use cases including:</h2>
+                                <h2>From the perspective of cloud architects and administrators running Ironic, the service delivers support for a variety of use cases including:</h2>
                             </div>
                             <div class="row">
                                 <div class="col-sm-4 single">
