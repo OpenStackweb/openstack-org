@@ -5,12 +5,12 @@
     		<div class="landingintro">
                     <img class="tokyo-landing-logo" src="{$Top.CloudUrl('assets/summits/shanghai/Shanghai2019-Summit-Logo-Web.svg')}"
                          onerror="this.onerror=null; this.src={$Top.CloudUrl('assets/summits/shanghai/Shanghai2019-Summit-Logo-Web.svg')}" alt="OpenStack Infrastructure Summit">
-                    <!-- <p><span class="join-us-text-yellow"></span></p> -->
+                    <p><span class="join-us-text-yellow"><a href="/summit/shanghai-2019/sponsors/" style="margin: 10px;color: #ffd602;">Sponsor the Summit | 赞助峰会</a></span></p>
                     <p class="join-us-text">上海世博中心 Shanghai Expo Centre | 中国上海 Shanghai, China</p>
                     <p>&nbsp;</p>
                     <p><a href="/summit/shanghai-2019/sponsors/" class="sponsors_button" style="margin: 10px;">
-                            SPONSOR THE SUMMIT
-                        </a></p>
+                            REGISTER IN USD
+                        </a>&nbsp;&nbsp;<a href="/summit/shanghai-2019/sponsors/" class="sponsors_button" style="margin: 10px;">以人民币注册（可开发票）</a></p>
                     <p>&nbsp;</p>
                     <p>&nbsp;</p>
                     <!-- <div class="save-the-date"> Save The Date! </div>
