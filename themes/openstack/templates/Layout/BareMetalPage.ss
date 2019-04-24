@@ -244,7 +244,7 @@
                 <!-- Video Row 1-->
                     <div class="row video-wall-row ">
                         <div class="col-md-4 col-sm-6 video-wall-item">
-                            <a href="https://www.youtube.com/" target="_blank">
+                            <a href="https://www.youtube.com/watch?v=tBNzXtgti7s" target="_blank">
                                 <div class="video-wrapper">
                                     <div class="play-button">
                                         <img src="{$Top.CloudUrl("images/baremetal/play-button.png")}">
@@ -255,7 +255,7 @@
                             <h4 class="video-caption">OpenStack Ironic: Enabling Bare Metal as a Service</h4>
                         </div>
                         <div class="col-md-4 col-sm-6 video-wall-item">
-                            <a href="https://www.youtube.com/" target="_blank">
+                            <a href="https://www.youtube.com/watch?v=d3qzHwhqd9o" target="_blank">
                                 <div class="video-wrapper">
                                     <div class="play-button">
                                         <img src="{$Top.CloudUrl("images/baremetal/play-button.png")}">
@@ -266,7 +266,7 @@
                             <h4 class="video-caption">Ironic - Project Update</h4>                       
                         </div>
                         <div class="col-md-4 col-sm-6 video-wall-item">
-                            <a href="https://www.youtube.com/" target="_blank">
+                            <a href="https://www.youtube.com/watch?v=Tbwwg3wERHY" target="_blank">
                                 <div class="video-wrapper">
                                     <div class="play-button">
                                         <img src="{$Top.CloudUrl("images/baremetal/play-button.png")}">
@@ -279,7 +279,7 @@
                 <!-- Video Row 2-->
                     <div class="row video-wall-row ">
                         <div class="col-md-4 col-sm-6 video-wall-item">
-                            <a href="https://www.youtube.com/" target="_blank">
+                            <a href="https://www.youtube.com/watch?v=kcARF2zhXkw" target="_blank">
                                 <div class="video-wrapper">
                                     <div class="play-button">
                                         <img src="{$Top.CloudUrl("images/baremetal/play-button.png")}">
@@ -290,7 +290,7 @@
                             <h4 class="video-caption">How Ironic fits into PayPal's full circle of Bare Metal Management</h4>
                         </div>
                         <div class="col-md-4 col-sm-6 video-wall-item">
-                            <a href="https://www.youtube.com/" target="_blank">
+                            <a href="https://www.youtube.com/watch?v=V_5UuVpviZc" target="_blank">
                                 <div class="video-wrapper">
                                     <div class="play-button">
                                         <img src="{$Top.CloudUrl("images/baremetal/play-button.png")}">
@@ -301,7 +301,7 @@
                             <h4 class="video-caption">“Our relation is ... complicated.” The most excellent and lamentable tragedy of Ironic and Nova</h4>                       
                         </div>
                         <div class="col-md-4 col-sm-6 video-wall-item">
-                            <a href="https://www.youtube.com/" target="_blank">
+                            <a href="https://www.youtube.com/watch?v=JxgjywVXFsY" target="_blank">
                                 <div class="video-wrapper">
                                     <div class="play-button">
                                         <img src="{$Top.CloudUrl("images/baremetal/play-button.png")}">
