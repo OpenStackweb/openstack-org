@@ -36,7 +36,7 @@
                 <div class="row ">
                     <div class="col-sm-12">
                         <div class="intro-message"> 
-                            <img class="testimonial testimonial-logo" src="{$Top.CloudUrl("www-assets-prod/bare-metal-logo-program/verizon-media.png")}">
+                            <img class="testimonial testimonial-logo" src="{$Top.CloudUrl("assets/bare-metal-logo-program/verizon-media.png")}">
                             <p class="testimonial testimonial-quote">At Verizon Media, OpenStack manages hundreds of thousands of bare metal compute resources in our data centers. We have made significant changes to our supply chain process using OpenStack, fulfilling common bare metal quota requests within minutes.</p>
                             <div class="testimonial image-cropper">
                                 <img class="testimonial-avatar" src="{$Top.CloudUrl("images/baremetal/avatar-james-penick.jpg")}">
@@ -221,7 +221,7 @@
                     <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/RedHat-logo.png")}" alt="RedHat logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("www-assets-prod/bare-metal-logo-program/verizon-media.png")}" alt="Verzion Media logo">
+                    <img class="ecosystem-logo" src="{$Top.CloudUrl("assets/bare-metal-logo-program/verizon-media.png")}" alt="Verzion Media logo">
                     </div>
 	            </div>
 
