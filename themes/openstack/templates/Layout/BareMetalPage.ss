@@ -36,12 +36,12 @@
                 <div class="row ">
                     <div class="col-sm-12">
                         <div class="intro-message"> 
-                            <img class="testimonial testimonial-logo" src="{$Top.CloudUrl("images/baremetal/Verizon_2015_logo_-vector.png")}">
+                            <img class="testimonial testimonial-logo" src="{$Top.CloudUrl("www-assets-prod/bare-metal-logo-program/verizon-media.png")}">
                             <p class="testimonial testimonial-quote">At Verizon Media, OpenStack manages hundreds of thousands of bare metal compute resources in our data centers. We have made significant changes to our supply chain process using OpenStack, fulfilling common bare metal quota requests within minutes.</p>
                             <div class="testimonial image-cropper">
                                 <img class="testimonial-avatar" src="{$Top.CloudUrl("images/baremetal/avatar-james-penick.jpg")}">
                             </div>
-                            <p class="testimonial testimonial-person">James Penick<br />IaaS Architect, Verizon Media</p>
+                            <p class="testimonial testimonial-person">James Penick<br/>Architect Director, Verizon Media</p>
                         </div>
                     </div>
                 </div>
@@ -54,7 +54,7 @@
                     <div class="col-sm-12 center">
                         <div class=""> 
                             <div>
-                                <h2>From the perspective of cloud architects and administrators running Ironic, the service serves a variety of use cases include:</h2>
+                                <h2>From the perspective of cloud architects and administrators running Ironic, the service serves a variety of use cases including:</h2>
                             </div>
                             <div class="row">
                                 <div class="col-sm-4 single">
@@ -221,7 +221,7 @@
                     <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/RedHat-logo.png")}" alt="RedHat logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-
+                    <img class="ecosystem-logo" src="{$Top.CloudUrl("www-assets-prod/bare-metal-logo-program/verizon-media.png")}" alt="Verzion Media logo">
                     </div>
 	            </div>
 
