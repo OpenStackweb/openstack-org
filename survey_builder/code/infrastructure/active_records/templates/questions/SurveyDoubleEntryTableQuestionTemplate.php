@@ -98,9 +98,8 @@ class SurveyDoubleEntryTableQuestionTemplate
     public function DDLValues(){
         $selected_values = array();
 
-        $owner = $_REQUEST["SurveyQuestionTemplateID"];
-
-        if(isset($owner)){
+        if(isset($_REQUEST["SurveyQuestionTemplateID"])){
+            $owner = $_REQUEST["SurveyQuestionTemplateID"];
             $sqlQuery = new SQLQuery();
             $sqlQuery->setSelect("ValueID");
             $sqlQuery->setFrom("SurveyQuestionTemplate_DependsOn");

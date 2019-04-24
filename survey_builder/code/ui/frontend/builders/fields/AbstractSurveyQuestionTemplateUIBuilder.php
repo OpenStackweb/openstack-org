@@ -118,29 +118,37 @@ final class StaticRulesStrategy implements IDependantRulesStrategy {
                 $initial_condition = $info['initial_condition'];
 
                 $answer = $current_step->survey()->findAnswerByQuestion($q);
-                if(is_null($answer)) continue;
-
-                //checks the condition
-                switch($operator){
-                    case 'Equal':{
-                        foreach($values as $vid) {
-                            if($boolean_operator === 'And')
-                                $initial_condition &= (strpos($answer->value(), $vid) !== false);
-                            else
-                                $initial_condition |= (strpos($answer->value(), $vid) !== false);
-                        }
+                if(is_null($answer)) {
+                    if ($operator == 'Equal') {
+                        $initial_condition = false;
+                    } else {
+                        $initial_condition = true;
                     }
-                    break;
-                    case 'Not-Equal':{
-                        foreach($values as $vid) {
-                            if($boolean_operator === 'And')
-                                $initial_condition &= (strpos($answer->value(), $vid) === false);
-                            else
-                                $initial_condition |= (strpos($answer->value(), $vid) === false);
+                } else {
+                    //checks the condition
+                    switch($operator){
+                        case 'Equal':{
+                            foreach($values as $vid) {
+                                if($boolean_operator === 'And')
+                                    $initial_condition &= (strpos($answer->value(), $vid) !== false);
+                                else
+                                    $initial_condition |= (strpos($answer->value(), $vid) !== false);
+                            }
                         }
+                            break;
+                        case 'Not-Equal':{
+                            foreach($values as $vid) {
+                                if($boolean_operator === 'And')
+                                    $initial_condition &= (strpos($answer->value(), $vid) === false);
+                                else
+                                    $initial_condition |= (strpos($answer->value(), $vid) === false);
+                            }
+                        }
+                            break;
                     }
-                    break;
                 }
+
+
                 //visibility
                 switch($visibility)
                 {
