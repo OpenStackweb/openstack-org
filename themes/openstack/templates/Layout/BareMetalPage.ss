@@ -229,7 +229,7 @@
                     <div class="col-sm-2"></div>
                     <div class="col-sm-8">
                         <h2>Interested in Highlighting Your Ironic Usage?</h2>
-                        <p><a class="red-button" href="https://www.openstack.org/marketplace/" target="_blank">Contact Us <i class="icon-arrow-right"></i></a></p>
+                        <p><a class="red-button" href="mailto:ecosystem@openstackk.org" target="_blank">Contact Us <i class="icon-arrow-right"></i></a></p>
                     </div>
                     <div class="col-sm-2"></div>
                 </div>
