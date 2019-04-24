@@ -54,7 +54,7 @@
                     <div class="col-sm-12 center">
                         <div class=""> 
                             <div>
-                                <h2>From the perspective of cloud architects and administrators running Ironic, the service has many benefits including XX and XX. The variety of use cases include:</h2>
+                                <h2>From the perspective of cloud architects and administrators running Ironic, the service serves a variety of use cases include:</h2>
                             </div>
                             <div class="row">
                                 <div class="col-sm-4 single">
@@ -69,6 +69,10 @@
                                     <img class="" src="{$Top.CloudUrl("images/baremetal/icon-api.png")}">
                                     <p>With a standard API and lightweight footprint, Ironic can serve as a driver for a variety of bare metal infrastructure.</p>
                                 </div>
+                             <!--   <div class="col-sm-4 single">
+                                   <img class="" src="{$Top.CloudUrl("images/baremetal/icon-api.png")}"> 
+                                    <p>Its lightweight architecture and broad driver support makes it appropriate for a wide range of use cases, from small edge deployments to large data centers.</p>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -76,6 +80,7 @@
             </div> <!-- .container -->
         </section>
         <!-- More Info -->
+        <!--
         <section class="baremetal-blue more-info">
             <div class="container">
                 <div class="row info-block">
@@ -96,91 +101,10 @@
                     <div class="col-sm-2"></div>
                 </div>
             </div> <!-- .container -->
-        </section>
+        </section> -->
     </div>
     <div class="resources baremetal">
-        <!-- Videos-->
-        <section class="baremetal-grayback baremetal-video-wall">
-            <div class="container">
-                <div class="row info-block">
-                    <h2>Check out these great bare metal demos and video resources</h2>
-                <!-- Video Row 1-->
-                    <div class="row video-wall-row ">
-                        <div class="col-md-4 col-sm-6 video-wall-item">
-                            <a href="https://www.youtube.com/" target="_blank">
-                                <div class="video-wrapper">
-                                    <div class="play-button">
-                                        <img src="{$Top.CloudUrl("images/baremetal/play-button.png")}">
-                                    </div>
-                                    <img class="video-image" src="{$Top.CloudUrl("images/baremetal/video-thumbnail-1.jpg")}" alt="OpenStack Ironic: Enabling Bare Metal as a Service">
-                                </div>
-                            </a>
-                            <h4 class="video-caption">OpenStack Ironic: Enabling Bare Metal as a Service</h4>
-                        </div>
-                        <div class="col-md-4 col-sm-6 video-wall-item">
-                            <a href="https://www.youtube.com/" target="_blank">
-                                <div class="video-wrapper">
-                                    <div class="play-button">
-                                        <img src="{$Top.CloudUrl("images/baremetal/play-button.png")}">
-                                    </div>
-                                    <img class="video-image" src="{$Top.CloudUrl("images/baremetal/video-thumbnail-2.jpg")}" alt="Ironic - Project Update">
-                                </div>
-                            </a>
-                            <h4 class="video-caption">Ironic - Project Update</h4>                       
-                        </div>
-                        <div class="col-md-4 col-sm-6 video-wall-item">
-                            <a href="https://www.youtube.com/" target="_blank">
-                                <div class="video-wrapper">
-                                    <div class="play-button">
-                                        <img src="{$Top.CloudUrl("images/baremetal/play-button.png")}">
-                                    </div>
-                                    <img class="video-image" src="{$Top.CloudUrl("images/baremetal/video-thumbnail-3.jpg")}" alt="To Complete, not to Compete: Integrating Ironic into CERN’s Private Cloud Service">
-                                </div>
-                            </a>
-                            <h4 class="video-caption">To Complete, not to Compete: Integrating Ironic into CERN’s Private Cloud Service</h4> 
-                         </div>
-                <!-- Video Row 2-->
-                    <div class="row video-wall-row ">
-                        <div class="col-md-4 col-sm-6 video-wall-item">
-                            <a href="https://www.youtube.com/" target="_blank">
-                                <div class="video-wrapper">
-                                    <div class="play-button">
-                                        <img src="{$Top.CloudUrl("images/baremetal/play-button.png")}">
-                                    </div>
-                                    <img class="video-image" src="{$Top.CloudUrl("images/baremetal/video-thumbnail-4.jpg")}" alt="How Ironic fits into PayPal's full circle of Bare Metal Management">
-                                </div>
-                            </a>
-                            <h4 class="video-caption">How Ironic fits into PayPal's full circle of Bare Metal Management</h4>
-                        </div>
-                        <div class="col-md-4 col-sm-6 video-wall-item">
-                            <a href="https://www.youtube.com/" target="_blank">
-                                <div class="video-wrapper">
-                                    <div class="play-button">
-                                        <img src="{$Top.CloudUrl("images/baremetal/play-button.png")}">
-                                    </div>
-                                    <img class="video-image" src="{$Top.CloudUrl("images/baremetal/video-thumbnail-5.jpg")}" alt="“Our relation is ... complicated.” The most excellent and lamentable tragedy of Ironic and Nova">
-                                </div>
-                            </a>
-                            <h4 class="video-caption">“Our relation is ... complicated.” The most excellent and lamentable tragedy of Ironic and Nova</h4>                       
-                        </div>
-                        <div class="col-md-4 col-sm-6 video-wall-item">
-                            <a href="https://www.youtube.com/" target="_blank">
-                                <div class="video-wrapper">
-                                    <div class="play-button">
-                                        <img src="{$Top.CloudUrl("images/baremetal/play-button.png")}">
-                                    </div>
-                                    <img class="video-image" src="{$Top.CloudUrl("images/baremetal/video-thumbnail-6.jpg")}" alt="Running Kubernetes on OpenStack and Bare Metal">
-                                </div>
-                            </a>
-                            <h4 class="video-caption">Running Kubernetes on OpenStack and Bare Metal</h4> 
-                         </div>
 
-
-
-                   
-                </div>
-            </div> <!-- .container -->
-        </section>
 
         <section class="baremetal baremetal-ecosystem">
             <div class="container">
@@ -311,6 +235,90 @@
                 </div>
             </div> <!-- .container -->
         </section>
+
+
+        <!-- Videos-->
+        <section class="baremetal-grayback baremetal-video-wall">
+            <div class="container">
+                <div class="row info-block">
+                    <h2>Check out these great bare metal demos and video resources</h2>
+                <!-- Video Row 1-->
+                    <div class="row video-wall-row ">
+                        <div class="col-md-4 col-sm-6 video-wall-item">
+                            <a href="https://www.youtube.com/" target="_blank">
+                                <div class="video-wrapper">
+                                    <div class="play-button">
+                                        <img src="{$Top.CloudUrl("images/baremetal/play-button.png")}">
+                                    </div>
+                                    <img class="video-image" src="{$Top.CloudUrl("images/baremetal/video-thumbnail-1.jpg")}" alt="OpenStack Ironic: Enabling Bare Metal as a Service">
+                                </div>
+                            </a>
+                            <h4 class="video-caption">OpenStack Ironic: Enabling Bare Metal as a Service</h4>
+                        </div>
+                        <div class="col-md-4 col-sm-6 video-wall-item">
+                            <a href="https://www.youtube.com/" target="_blank">
+                                <div class="video-wrapper">
+                                    <div class="play-button">
+                                        <img src="{$Top.CloudUrl("images/baremetal/play-button.png")}">
+                                    </div>
+                                    <img class="video-image" src="{$Top.CloudUrl("images/baremetal/video-thumbnail-2.jpg")}" alt="Ironic - Project Update">
+                                </div>
+                            </a>
+                            <h4 class="video-caption">Ironic - Project Update</h4>                       
+                        </div>
+                        <div class="col-md-4 col-sm-6 video-wall-item">
+                            <a href="https://www.youtube.com/" target="_blank">
+                                <div class="video-wrapper">
+                                    <div class="play-button">
+                                        <img src="{$Top.CloudUrl("images/baremetal/play-button.png")}">
+                                    </div>
+                                    <img class="video-image" src="{$Top.CloudUrl("images/baremetal/video-thumbnail-3.jpg")}" alt="To Complete, not to Compete: Integrating Ironic into CERN’s Private Cloud Service">
+                                </div>
+                            </a>
+                            <h4 class="video-caption">To Complete, not to Compete: Integrating Ironic into CERN’s Private Cloud Service</h4> 
+                         </div>
+                <!-- Video Row 2-->
+                    <div class="row video-wall-row ">
+                        <div class="col-md-4 col-sm-6 video-wall-item">
+                            <a href="https://www.youtube.com/" target="_blank">
+                                <div class="video-wrapper">
+                                    <div class="play-button">
+                                        <img src="{$Top.CloudUrl("images/baremetal/play-button.png")}">
+                                    </div>
+                                    <img class="video-image" src="{$Top.CloudUrl("images/baremetal/video-thumbnail-4.jpg")}" alt="How Ironic fits into PayPal's full circle of Bare Metal Management">
+                                </div>
+                            </a>
+                            <h4 class="video-caption">How Ironic fits into PayPal's full circle of Bare Metal Management</h4>
+                        </div>
+                        <div class="col-md-4 col-sm-6 video-wall-item">
+                            <a href="https://www.youtube.com/" target="_blank">
+                                <div class="video-wrapper">
+                                    <div class="play-button">
+                                        <img src="{$Top.CloudUrl("images/baremetal/play-button.png")}">
+                                    </div>
+                                    <img class="video-image" src="{$Top.CloudUrl("images/baremetal/video-thumbnail-5.jpg")}" alt="“Our relation is ... complicated.” The most excellent and lamentable tragedy of Ironic and Nova">
+                                </div>
+                            </a>
+                            <h4 class="video-caption">“Our relation is ... complicated.” The most excellent and lamentable tragedy of Ironic and Nova</h4>                       
+                        </div>
+                        <div class="col-md-4 col-sm-6 video-wall-item">
+                            <a href="https://www.youtube.com/" target="_blank">
+                                <div class="video-wrapper">
+                                    <div class="play-button">
+                                        <img src="{$Top.CloudUrl("images/baremetal/play-button.png")}">
+                                    </div>
+                                    <img class="video-image" src="{$Top.CloudUrl("images/baremetal/video-thumbnail-6.jpg")}" alt="Running Kubernetes on OpenStack and Bare Metal">
+                                </div>
+                            </a>
+                            <h4 class="video-caption">Running Kubernetes on OpenStack and Bare Metal</h4> 
+                         </div>
+
+
+
+                   
+                </div>
+            </div> <!-- .container -->
+        </section>        
     </div>
     <!-- More Info -->
     <section class="baremetal-blue get-involved">
