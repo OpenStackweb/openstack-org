@@ -279,9 +279,12 @@ a.red-button {
     margin-left: 0%;
   }
 
-    .col-md-5th-1 col-sm-4 {
-      text-align: center;
-    }
+  .col-md-5th-1 col-sm-4 {
+    text-align: center;
+  }
+  
+  .col-md-5th-1 {
+  text-align: center; }
   
   @media (min-width: 768px) {
     .col-sm-5th-1, .col-sm-5th-2, .col-sm-5th-3, .col-sm-5th-4 {
