@@ -145,7 +145,7 @@
                     <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/verneglobal-logo.png")}" alt="Verne Global logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/CERN-666-logo.png")}" alt="CERN 666 logo">
+                    <img class="ecosystem-logo" src="{$Top.CloudUrl("assets/bare-metal-logo-program/cern-sm.png")}" alt="CERN logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
                     <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/ovh-logo.png")}" alt="OVH logo">
