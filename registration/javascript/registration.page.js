@@ -39,12 +39,12 @@ jQuery(document).ready(function($) {
         });
 
         //custom validation
-        jQuery.validator.addMethod('checkAffiliations', function(value, element,params) {
+        $.validator.addMethod('checkAffiliations', function(value, element,params) {
             var count = $("#edit-affiliation-form").affiliations('count');
             return count > 0;
         },'You must add at least one Affiliation.');
 
-        jQuery.validator.addMethod('checkGender', function(value, element,params) {
+        $.validator.addMethod('checkGender', function(value, element,params) {
             var gender = $("input[name='Gender']:checked").val();
             if (gender) {
                 if (gender == 'Specify') {
@@ -57,7 +57,7 @@ jQuery(document).ready(function($) {
             }
         },'Please specify your gender.');
 
-        jQuery.validator.addMethod('regex',function(value, element, regexp) {
+        $.validator.addMethod('regex',function(value, element, regexp) {
                 var re = new RegExp(regexp,'g');
                 var res =  re.test(value);
                 return !res;

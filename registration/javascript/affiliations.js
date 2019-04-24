@@ -103,8 +103,6 @@
                 $("#add-affiliation").click(function(event){
                     event.preventDefault();
                     event.stopPropagation();
-                    var dlg = $('#affiliation-edition-dialog');
-                    var current = $('#Current',affiliation_form);
                     $('#modal-edit-affiliation').modal('show')
                     $('#editAffiliationLabel').text('Add Affiliation');
                     return false;
@@ -362,7 +360,7 @@
 
     function LoadLocalAffiliationList(){
         var array = [];
-        if(jQuery.isEmptyObject(local_storage))
+        if($.isEmptyObject(local_storage))
         {
             var val = $("#HiddenAffiliations").val();
             if(val != '')
