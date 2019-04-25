@@ -126,6 +126,33 @@ button.btn i, a.btn i {
     font-size: 0.9em;
 }
 
+.summit-hero-landing , .summit-hero-landing-short {
+    .register-dropdown {
+        button {
+            color: #fff;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            width: 200px;
+        }
+        .dropdown-menu {
+            background-color: #ed1944;
+            width: 200px;
+            text-align: center;
+            a {
+                display: block;
+                margin: 5px;
+                color: white;
+                text-transform: none;
+                &:hover {
+                    text-decoration: none;
+                    color: #ffd602;
+                }
+            }
+        }
+    }
+}
+
+
 .summit-banner {
     width: 100%;
     margin: 10em auto 0;
@@ -485,6 +512,27 @@ button.btn i, a.btn i {
     position: relative;
     margin-top: 1em;
     border: none;
+}
+
+.about-summit-header .about-buttons .register-dropdown {
+    .btn {
+        background-color: #ffd602 !important;
+    }
+    .dropdown-menu {
+        background-color: #ffd602;
+        width: 100%;
+        border: none;
+        text-align: center;
+        a {
+            display: block;
+            margin: 5px;
+            color: #00468b;
+            &:hover {
+                text-decoration: none;
+                color: white
+            }
+        }
+    }
 }
 
 @media (min-width: 500px) and (max-width: 1024px) {
@@ -1459,6 +1507,32 @@ footer .btn {
     background-color: #ed1944;
     margin-bottom: 1em;
     letter-spacing: 0.02em;
+}
+
+footer {
+    .register-dropdown {
+        button {
+            color: #fff;
+            text-transform: uppercase;
+            width: 215px;
+            margin-bottom: 0 !important;
+        }
+        .dropdown-menu {
+            background-color: #ed1944;
+            width: 215px;
+            text-align: center;
+            a {
+                display: block;
+                margin: 5px;
+                color: white;
+                text-transform: none;
+                &:hover {
+                    text-decoration: none;
+                    color: #ffd602;
+                }
+            }
+        }
+    }
 }
 
 ul.navbar-main{

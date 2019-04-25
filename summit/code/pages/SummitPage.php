@@ -302,4 +302,12 @@ class SummitPage_Controller extends Page_Controller
         return '';
     }
 
+    public function isMultiRegister() {
+        return false;
+    }
+
+    public function getRegisterButtonLabel() {
+        return 'Register Now';
+    }
+
 }

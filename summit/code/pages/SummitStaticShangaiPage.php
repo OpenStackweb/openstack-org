@@ -29,4 +29,12 @@ class SummitStaticShangaiPage_Controller extends SummitPage_Controller {
         Requirements::javascript('summit/javascript/in-view.min.js');
         Requirements::javascript('summit/javascript/static-summit-about-page.js');
     }
+
+    public function isMultiRegister() {
+        return true;
+    }
+
+    public function getRegisterButtonLabel() {
+        return 'Register in USD';
+    }
 }
