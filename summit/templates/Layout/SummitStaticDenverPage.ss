@@ -137,10 +137,10 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/profile-images/Screen-Shot-2017-04-24-at-2.47.57-PM.png')}" alt="Imad Sousou" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/profile-images/MelissaEversHoodOct2017-120-esthercrop.jpg')}" alt="Melissa Evers-Hood" class="summit-user-image">
                         </div>
                         <div class="info">
-                            <div class="name">Imad Sousou</div>
+                            <div class="name">Melissa Evers-Hood</div>
                             <div class="title">Intel</div>
                             <div class="topic">Open Infrastructure</div>
                         </div>
