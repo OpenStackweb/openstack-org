@@ -63,13 +63,33 @@ button.btn i, a.btn i {
 }
 
 .landingintro {
+    .join-us-text {
+        margin: 10px;
+        color: white;
+    }
+    .join-us-text-yellow {
+        a {
+            margin: 10px;
+            color: #ffd602;
+        }
+    }
     .register-box-us {
         text-align: right;
         height: 50px;
+        a {
+            margin: 10px;
+            top: 15px;
+            position: relative;
+        }
     }
     .register-box-ch {
         text-align: left;
         height: 50px;
+        a {
+            margin: 10px;
+            top: 15px;
+            position: relative;
+        }
     }
 }
 

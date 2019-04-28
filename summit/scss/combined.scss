@@ -1122,6 +1122,22 @@ footer {
   max-height: 500px;
   }
 
+.tokyo-landing-wrapper.shanghai {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding: 70px 0;
+  background-image: url('#{$static_images_base_url}/boston/boston-bkgd.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  height: 530px;
+}
+
 /*Tokyo Summit Landing Page*/
 .tokyo-landing-wrapper {
   position: relative;
@@ -1400,7 +1416,7 @@ a.sponsors_button, a:visited.sponsors_button  {
     }
   }
 .future-text-wrapper.yellow {
-    min-height:2px;
+    height:2px;
     width: 100%;
     background-color: #ffd602;
     text-align: center;

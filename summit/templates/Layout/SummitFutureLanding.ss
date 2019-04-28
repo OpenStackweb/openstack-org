@@ -1,27 +1,36 @@
 
-<div class="tokyo-landing-wrapper boston" style="background-image: url('{$SummitImage.Image.getURL()}')">
+<div class="tokyo-landing-wrapper shanghai" style="background-image: url('{$SummitImage.Image.getURL()}')">
     <div class="container">
-    	<div class="row">
-    		<div class="landingintro">
+        <div class="landingintro">
+    	    <div class="row">
+                <div class="col-md-12">
                     <img class="tokyo-landing-logo" src="{$Top.CloudUrl('assets/summits/shanghai/Shanghai2019-Summit-Logo-Web.svg')}"
-                         onerror="this.onerror=null; this.src={$Top.CloudUrl('assets/summits/shanghai/Shanghai2019-Summit-Logo-Web.svg')}" alt="OpenStack Infrastructure Summit">
-                    <p><span class="join-us-text-yellow"><a href="/summit/shanghai-2019/sponsors/" style="margin: 10px;color: #ffd602;">Sponsor the Summit | 赞助峰会</a></span></p>
-                    <p class="join-us-text">上海世博中心 Shanghai Expo Centre | 中国上海 Shanghai, China</p>
-                    <p>&nbsp;</p>
-                    <p>
-                        <div class="row">
-                            <div class="col-md-6 col-sm-12 register-box-us">
-                                <a href="https://app.eventxtra.link/registrations/6640a923-98d7-44c7-a623-1e2c9132b402?locale=en" class="sponsors_button" style="margin: 10px;">
-                                    REGISTER IN USD
-                                </a>
-                            </div>
-                            <div class="col-md-6 col-sm-12 register-box-ch">
-                                &nbsp;&nbsp;<a href="https://app.eventxtra.link/registrations/f564960c-74f6-452d-b0b2-484386d33eb6?locale=en" class="sponsors_button" style="margin: 10px;">以人民币注册（可开发票）</a>
-                            </div>
-                        </div>
-                    </p>
-                    <p>&nbsp;</p>
-                    <p>&nbsp;</p>
+                             onerror="this.onerror=null; this.src={$Top.CloudUrl('assets/summits/shanghai/Shanghai2019-Summit-Logo-Web.svg')}" alt="OpenStack Infrastructure Summit">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 join-us-text-yellow">
+                    <a href="/summit/shanghai-2019/sponsors/" style="margin: 10px;color: #ffd602;">
+                        Sponsor the Summit | 赞助峰会
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 join-us-text">
+                    上海世博中心 Shanghai Expo Centre | 中国上海 Shanghai, China
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-12 register-box-us">
+                    <a href="https://app.eventxtra.link/registrations/6640a923-98d7-44c7-a623-1e2c9132b402?locale=en" class="sponsors_button" style="margin: 10px;">
+                        REGISTER IN USD
+                    </a>
+                </div>
+                <div class="col-md-6 col-sm-12 register-box-ch">
+                    &nbsp;&nbsp;<a href="https://app.eventxtra.link/registrations/f564960c-74f6-452d-b0b2-484386d33eb6?locale=en" class="sponsors_button" style="margin: 10px;">以人民币注册（可开发票）</a>
+                </div>
+            </div>
+
                     <!-- <div class="save-the-date"> Save The Date! </div>
     			<h1> $IntroText </h1>
                 <div class="summit-location">$MainTitle</div>
