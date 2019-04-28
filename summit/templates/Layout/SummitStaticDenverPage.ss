@@ -16,7 +16,7 @@
 
                 <a class="btn btn-default" href="/summit/denver-2019/sponsors/">Sponsor the Summit <i class="fal fa-arrow-right"></i></a>
 
-                <% include EventbriteRegisterLink Position='m',ExtraClass='btn-primary' %>
+               <!--  <% include EventbriteRegisterLink Position='m',ExtraClass='btn-primary' %> -->
 
             </div>
             <div class="col-md-12 session-box">
