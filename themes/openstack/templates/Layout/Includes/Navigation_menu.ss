@@ -24,6 +24,7 @@
     <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuUsers">
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}user-stories/">Overview</a></li>
         <li role="presentation" class="divider"></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}bare-metal/">OpenStack Bare Metal</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}edge/">Edge Computing</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}telecoms-and-nfv/">Telecom & NFV</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}enterprise/">OpenStack in the Enterprise</a></li>
