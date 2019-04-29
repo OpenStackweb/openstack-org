@@ -65,6 +65,7 @@ final class SummitAdminUI extends DataExtension
 
         $f->addFieldToTab('Root.Main', new TextField('Title', 'Title'));
         $f->addFieldToTab('Root.Main', $link = new TextField('Link', 'Summit Page Link'));
+        $f->addFieldToTab('Root.Main', $link = new TextField('Slug', 'Summit Slug'));
 
         $f->addFieldsToTab('Root.Main', $ddl_type = new DropdownField('TypeID', 'Type', SummitType::get()->map('ID', 'FriendlyName')));
         $ddl_type->setEmptyString('--SELECT A SUMMIT TYPE --');
