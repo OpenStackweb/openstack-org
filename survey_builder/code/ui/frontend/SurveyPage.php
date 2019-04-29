@@ -80,6 +80,7 @@ class SurveyPage_Controller extends Page_Controller
         'RegisterForm',
         'StartSurvey',
         'NextStep',
+        'PrevStep',
         'SurveyDynamicEntityStepForm',
         'NextDynamicEntityStep',
         'AddEntity',
@@ -318,11 +319,6 @@ class SurveyPage_Controller extends Page_Controller
             }
 
             $this->survey_manager->registerCurrentStep($this->current_survey, $step_name);
-            $step = $current_survey->getStep($step_name);
-
-            if ($current_survey->isLastStep() && $step->template()->getType() == 'SurveyThankYouStepTemplate' && !$current_survey->isEmailSent()) {
-                $this->survey_manager->sendFinalStepEmail(new SurveyThankYouEmailSenderService, $current_survey);
-            }
 
             return $this->customise([
                 'Survey' => $current_survey,
@@ -475,6 +471,19 @@ class SurveyPage_Controller extends Page_Controller
         if(is_null($builder)) return '<p>There is no form for this step yet!</p>';
         return $builder->build($current_step, 'NextStep');
     }
+
+
+    public function PrevStep($data, $form){
+        $current_survey = $this->getCurrentSurveyInstance();
+        $current_step   = $current_survey->currentStep();
+        $previous_step = $current_survey->getPreviousStep($current_step->template()->title());
+        if(is_null($previous_step))
+        {
+            return $this->redirect($this->Link());
+        }
+        return $this->redirect($this->Link().$previous_step->template()->title());
+    }
+
 
     /**
      * @param $data

@@ -251,7 +251,6 @@ final class SurveyManager implements ISurveyManager {
             $survey_url = Director::absoluteBaseUrl().'sangria/SurveyDetails/'.$survey->ID;
             $body = 'Respondent: '.$survey->CreatedBy()->getName().'<br/>';
             $body .= 'Template: '.$survey->Template()->Title.'<br/>';
-            $body .= 'State: '.$survey->State.'<br/>';
             $body .= 'Lang: '.$survey->Lang.'<br/>';
             $body .= '<a href="'.$survey_url.'">Review</a>';
             $email = EmailFactory::getInstance()->buildEmail
