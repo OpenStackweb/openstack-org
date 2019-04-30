@@ -344,8 +344,9 @@ final class CalendarSyncController extends AbstractRestfulJsonApi
             $member = Member::currentUser();
 
             if ($member) {
-                $member->registerICloudAuthGrant($summit, $user, $app_password, $user_ppal_url);
+                $member->registerICloudAuthGrant($summit, $user, $app_password, sprintf("%s%s",CALDAV_BASE_SERVER_URL, $user_ppal_url));
             }
+
             return $this->ok();
         } catch (EntityValidationException $ex1) {
             SS_Log::log($ex1, SS_Log::WARN);
