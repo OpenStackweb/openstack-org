@@ -70,7 +70,15 @@ class RegistrationPage_Controller extends Page_Controller
         parent::init();
 
         Requirements::css(THIRDPARTY_DIR . '/jquery-ui-themes/smoothness/jquery-ui.css');
-        Requirements::javascript(THIRDPARTY_DIR . '/jquery-ui/jquery-ui.js');
+        Requirements::block(THIRDPARTY_DIR . '/jquery-ui/jquery-ui.js');
+
+        if(Director::isLive()) {
+            Requirements::javascript('node_modules/jquery-ui-dist/jquery-ui.min.js');
+        }
+        else{
+            Requirements::javascript('node_modules/jquery-ui-dist/jquery-ui.js');
+        }
+
         JSChosenDependencies::renderRequirements();
         JQueryValidateDependencies::renderRequirements();
 
