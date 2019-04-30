@@ -11,8 +11,8 @@
  * limitations under the License.
  **/
 
-
 import { getRequest, putRequest, createAction } from "~core-utils/actions";
+import URI from "urijs";
 
 export const REQUEST_ALL_STORIES = 'REQUEST_ALL_STORIES';
 export const RECEIVE_ALL_STORIES = 'RECEIVE_ALL_STORIES';
@@ -31,7 +31,12 @@ export const updateSearchText = createAction(UPDATE_SEARCH_TEXT);
 let hash_tags = ['date','name','tag','search','industry','location'];
 
 export const loadStories = () => (dispatch) => {
-    var url_hash = $(window).url_fragment('getParams');
+
+    if(!window.location.hash){
+        dispatch(fetchAllStories({start:0, view:'date'}));
+        return;
+    }
+    var url_hash = URI.parseQuery(window.location.hash.substr(1));
     var url_hash_view = '';
     var url_hash_value = '';
 

@@ -1,5 +1,4 @@
 </div> <!-- Killing the main site .container -->
-$ModuleCSS('main')
 <div class="user-stories-hero container">
     <div class="row">
         <div class="col-sm-10 col-sm-push-1">

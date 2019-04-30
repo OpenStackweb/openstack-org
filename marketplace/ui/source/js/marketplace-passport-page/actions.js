@@ -10,9 +10,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-
-
 import { getRequest, putRequest, createAction } from "~core-utils/actions";
+import URI from "urijs";
+import {fetchAllStories} from "../../../../../user-stories/ui/source/js/actions";
 
 export const REQUEST_ALL = 'REQUEST_ALL';
 export const RECEIVE_ALL = 'RECEIVE_ALL';
@@ -31,7 +31,13 @@ export const filterItemsMap = createAction(FILTER_ITEMS);
 let hash_tags = ['date','search'];
 
 export const loadItems = () => (dispatch) => {
-    var url_hash = $(window).url_fragment('getParams');
+
+    if(!window.location.hash){
+        dispatch(fetchAllItems({start:0, view:'date'}));
+        return;
+    }
+
+    var url_hash = URI.parseQuery(window.location.hash.substr(1));
     var url_hash_view = '';
     var url_hash_value = '';
 
