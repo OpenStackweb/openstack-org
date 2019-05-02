@@ -220,9 +220,9 @@
                     <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/RedHat-logo.png")}" alt="RedHat logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
+                    <img class="ecosystem-logo" src="{$Top.CloudUrl("assets/Uploads/0003supportedblack-orangehex.png")}" alt="RedHat logo">
                     </div>
 	            </div>
-
                 <div class="row info-block">
                     <div class="col-sm-2"></div>
                     <div class="col-sm-8">
