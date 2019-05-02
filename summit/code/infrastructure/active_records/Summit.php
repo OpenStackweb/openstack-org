@@ -707,7 +707,6 @@ class Summit extends DataObject implements ISummit
         return Summit::get()->filter([
             'SummitBeginDate:GreaterThanOrEqual' => $now->format('Y-m-d H:i:s'),
             'SummitEndDate:GreaterThanOrEqual' => $now->format('Y-m-d H:i:s'),
-            'Active' => 1
         ])->first();
     }
 

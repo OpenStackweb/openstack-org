@@ -43,9 +43,11 @@ class GeneralSummitLandingPage_Controller extends Page_Controller
 
     function getCurrentSummitPage() {
         $currentSummit = Summit::ActiveSummit();
+        if(is_null($currentSummit)) return null;
         $summitPage = SummitPage::get()->filter('SummitID', $currentSummit->ID)->first();
+        if(is_null($summitPage)) return null;
 
-        while($summitPage->Parent()->is_a('SummitPage')) {
+        while(!is_null($summitPage) && $summitPage->Parent()->exists() && $summitPage->Parent()->is_a('SummitPage')) {
             $summitPage = $summitPage->Parent();
         }
 
