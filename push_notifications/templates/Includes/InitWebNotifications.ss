@@ -3,10 +3,10 @@
 
 <script>
     // API key
-    var apiKey = "{$getEnv('FIREBASE_API_KEY')}";
+    var apiKey = "{$Top.GetEnv('FIREBASE_API_KEY')}";
     var topic_channel = '{$topicChannel}';
-    var project_id = "{$getEnv('FIREBASE_PROJECT_ID')}";
-    var sender_id = "{$getEnv('FIREBASE_MESSAGING_SENDER_ID')}";
+    var project_id = "{$Top.GetEnv('FIREBASE_PROJECT_ID')}";
+    var sender_id = "{$Top.GetEnv('FIREBASE_MESSAGING_SENDER_ID')}";
 
     // Initialize Firebase
     var config = {

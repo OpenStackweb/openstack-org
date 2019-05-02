@@ -50,19 +50,19 @@ class SapphireRepository extends AbstractEntityRepository
     }
 
     /**
-     * @param IEntity $entity
+     * @param  mixed $entity
      * @return int|void
      */
-    public function add(IEntity $entity)
+    public function add($entity)
     {
         UnitOfWork::getInstance()->scheduleForInsert($entity);
     }
 
     /**
-     * @param IEntity $entity
+     * @param mixed $entity
      * @return void
      */
-    public function delete(IEntity $entity)
+    public function delete($entity)
     {
         UnitOfWork::getInstance()->scheduleForDelete($entity);
     }

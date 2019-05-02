@@ -495,7 +495,7 @@ SQL;
      * @param IEntity $entity
      * @return void
      */
-    public function delete(IEntity $entity)
+    public function delete($entity)
     {
         $entity->clearLocations();
         $entity->clearCoursePreRequisites();

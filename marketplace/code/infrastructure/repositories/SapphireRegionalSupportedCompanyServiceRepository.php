@@ -30,7 +30,7 @@ abstract class SapphireRegionalSupportedCompanyServiceRepository
      * @param IEntity $entity
      * @return void
      */
-    public function delete(IEntity $entity)
+    public function delete($entity)
     {
         $entity->clearRegionalSupports();
         parent::delete($entity);

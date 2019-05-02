@@ -90,10 +90,14 @@ jQuery(document).ready(function ($) {
                         'You have been merged your duplicate account successfully. Thank you.',
                         'success'
                     );
-                    window.location = '/';
+                    window.setTimeout(function(){ window.location = '/';}, 2000);
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    ajaxError(jqXHR, textStatus, errorThrown);
+                    swal(
+                        'About your request',
+                        'There was an error.',
+                        'error'
+                    );
                 }
             });
         }).catch(swal.noop);

@@ -1,1 +1,1 @@
-<script src="//{$getEnv('SEARCH_WIDGET_BASE_URL')}/widget/embed.min.js"></script>
+<script src="//{$Top.GetEnv('SEARCH_WIDGET_BASE_URL')}/widget/embed.min.js"></script>

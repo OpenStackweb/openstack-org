@@ -19,59 +19,59 @@ interface IMergeAccountBulkQueryFactory {
 
 
     /**
-     * @param ICommunityMember $primary_account Primary Account
-     * @param ICommunityMember $dupe_account Account to merge with
+     * @param Member $primary_account Primary Account
+     * @param Member $dupe_account Account to merge with
      * @return IBulkQuery
      */
-    public function buildMergeCandidateBulkQuery(ICommunityMember $primary_account, ICommunityMember $dupe_account);
+    public function buildMergeCandidateBulkQuery(Member $primary_account, Member $dupe_account);
 
     /**
-     * @param ICommunityMember $primary_account Primary Account
-     * @param ICommunityMember $dupe_account Account to merge with
+     * @param Member $primary_account Primary Account
+     * @param Member $dupe_account Account to merge with
      * @return IBulkQuery
      */
-    public function buildMergeSpeakerBulkQuery(ICommunityMember $primary_account, ICommunityMember $dupe_account);
+    public function buildMergeSpeakerBulkQuery(Member $primary_account, Member $dupe_account);
 
     /**
-     * @param ICommunityMember $primary_account Primary Account
-     * @param ICommunityMember $dupe_account Account to merge with
+     * @param Member $primary_account Primary Account
+     * @param Member $dupe_account Account to merge with
      * @return IBulkQuery
      */
-    public function buildMergeMarketPlaceAdminBulkQuery(ICommunityMember $primary_account, ICommunityMember $dupe_account);
+    public function buildMergeMarketPlaceAdminBulkQuery(Member $primary_account, Member $dupe_account);
 
     /**
-     * @param ICommunityMember $primary_account Primary Account
-     * @param ICommunityMember $dupe_account Account to merge with
+     * @param Member $primary_account Primary Account
+     * @param Member $dupe_account Account to merge with
      * @return IBulkQuery
      */
-    public function buildMergeCompanyAdminBulkQuery(ICommunityMember $primary_account, ICommunityMember $dupe_account);
+    public function buildMergeCompanyAdminBulkQuery(Member $primary_account, Member $dupe_account);
 
      /**
-     * @param ICommunityMember $primary_account Primary Account
-     * @param ICommunityMember $dupe_account Account to merge with
+     * @param Member $primary_account Primary Account
+     * @param Member $dupe_account Account to merge with
      * @return IBulkQuery
      */
-    public function buildMergeSurveysBulkQuery(ICommunityMember $primary_account, ICommunityMember $dupe_account);
+    public function buildMergeSurveysBulkQuery(Member $primary_account, Member $dupe_account);
 
     /**
-     * @param ICommunityMember $primary_account Primary Account
-     * @param ICommunityMember $dupe_account Account to merge with
+     * @param Member $primary_account Primary Account
+     * @param Member $dupe_account Account to merge with
      * @return IBulkQuery
      */
-    public function buildMergeAttendeeBulkQuery(ICommunityMember $primary_account, ICommunityMember $dupe_account);
+    public function buildMergeAttendeeBulkQuery(Member $primary_account, Member $dupe_account);
 
     /**
-     * @param ICommunityMember $primary_account Primary Account
-     * @param ICommunityMember $dupe_account Account to merge with
+     * @param Member $primary_account Primary Account
+     * @param Member $dupe_account Account to merge with
      * @return IBulkQuery
      */
-    public function buildMergeProfileBulkQuery(ICommunityMember $primary_account, ICommunityMember $dupe_account);
+    public function buildMergeProfileBulkQuery(Member $primary_account, Member $dupe_account);
 
     /**
-     * @param ICommunityMember $primary_account
+     * @param Member $primary_account
      * @param  string      $newEmail
      * @return IBulkQuery
      */
-    public function buildMergeEmail(ICommunityMember $primary_account, $newEmail);
+    public function buildMergeEmail(Member $primary_account, $newEmail);
 
 } 

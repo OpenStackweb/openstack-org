@@ -18,8 +18,8 @@
 interface IDeletedDupeMemberFactory {
 
     /**
-     * @param ICommunityMember $member
+     * @param Member $member
      * @return IDeletedDupeMember
      */
-    public function build(ICommunityMember $member);
+    public function build(Member $member);
 } 

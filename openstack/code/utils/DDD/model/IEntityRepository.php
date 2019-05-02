@@ -22,16 +22,16 @@ interface IEntityRepository {
 	public function getBy(QueryObject $query);
 
 	/**
-	 * @param IEntity $entity
+	 * @param  mixed $entity
 	 * @return int
 	 */
-	public function add(IEntity $entity);
+	public function add($entity);
 
 	/**
-	 * @param IEntity $entity
+	 * @param  mixed $entity
 	 * @return void
 	 */
-	public function delete(IEntity $entity);
+	public function delete($entity);
 
 	/**
 	 * @param int $id

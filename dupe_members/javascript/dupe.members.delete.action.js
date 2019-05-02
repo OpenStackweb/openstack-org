@@ -39,7 +39,11 @@ jQuery(document).ready(function($) {
                     window.location = '/';
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    ajaxError( jqXHR, textStatus, errorThrown);
+                    swal(
+                        'About your request',
+                        'There was an error.',
+                        'error'
+                    );
                 }
             });
         }).catch(swal.noop);
@@ -75,7 +79,11 @@ jQuery(document).ready(function($) {
                     window.location = '/';
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    ajaxError( jqXHR, textStatus, errorThrown);
+                    swal(
+                        'About your request',
+                        'There was an error.',
+                        'error'
+                    );
                 }
             });
         }).catch(swal.noop);
@@ -111,7 +119,11 @@ jQuery(document).ready(function($) {
                     window.location = '/';
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    ajaxError( jqXHR, textStatus, errorThrown);
+                    swal(
+                        'About your request',
+                        'There was an error.',
+                        'error'
+                    );
                 }
             });
         }).catch(swal.noop);

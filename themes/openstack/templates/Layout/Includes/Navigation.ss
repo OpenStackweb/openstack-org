@@ -17,11 +17,11 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <div class="search-container tiny">
-                <div class="openstack-search-bar" data-baseUrl="{$getEnv('SEARCH_WIDGET_BASE_URL')}" data-context="www-openstack"></div>
+                <div class="openstack-search-bar" data-baseUrl="{$Top.GetEnv('SEARCH_WIDGET_BASE_URL')}" data-context="www-openstack"></div>
            </div>
            <ul class="nav navbar-nav navbar-main show">
             <li>
-                <div class="openstack-search-bar ossw-mobile" data-baseUrl="{$getEnv('SEARCH_WIDGET_BASE_URL')}" data-context="www-openstack"></div>
+                <div class="openstack-search-bar ossw-mobile" data-baseUrl="{$Top.GetEnv('SEARCH_WIDGET_BASE_URL')}" data-context="www-openstack"></div>
             </li>
 
             <% include Navigation_menu %>

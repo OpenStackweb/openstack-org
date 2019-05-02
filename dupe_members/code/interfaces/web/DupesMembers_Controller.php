@@ -83,7 +83,18 @@ final class DupesMembers_Controller extends AbstractController {
         parent::init();
         Page_Controller::AddRequirements();
         SweetAlert2Dependencies::renderRequirements();
-        Requirements::javascript("marketplace/code/ui/admin/js/utils.js");
+
+        $js_files = [
+            "themes/openstack/javascript/jquery.ticker.js",
+            "themes/openstack/javascript/jquery.tools.min.js",
+            "themes/openstack/javascript/jcarousellite.min.js",
+            "themes/openstack/javascript/navigation.js",
+            "themes/openstack/javascript/filetracking.jquery.js",
+        ];
+
+        foreach($js_files as $js_file)
+            Requirements::javascript($js_file);
+
     }
     /**
      * @return string|void

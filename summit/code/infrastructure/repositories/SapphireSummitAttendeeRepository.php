@@ -78,7 +78,7 @@ final class SapphireSummitAttendeeRepository extends SapphireRepository implemen
      * @param IEntity $entity
      * @return int|void
      */
-    public function add(IEntity $entity)
+    public function add($entity)
     {
         parent::add($entity);
         $this->cache[sprintf('%s_%s', $entity->MemberID, $entity->SummitID)] = $entity;

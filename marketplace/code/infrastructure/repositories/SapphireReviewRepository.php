@@ -20,11 +20,11 @@ final class SapphireReviewRepository extends SapphireRepository {
 		parent::__construct(new MarketPlaceReview);
 	}
 
-    public function add(IEntity $entity) {
+    public function add($entity) {
         parent::add($entity);
     }
 
-	public function delete(IEntity $entity){
+	public function delete($entity){
 		parent::delete($entity);
 	}
 

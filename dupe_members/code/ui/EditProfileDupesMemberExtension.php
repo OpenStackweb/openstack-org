@@ -51,7 +51,7 @@ final class EditProfileDupesMemberExtension extends Extension {
 
         $current_user = Member::currentUser();
 
-        if(!$current_user->shouldShowDupesOnProfile()) return;
+        //if(!$current_user->shouldShowDupesOnProfile()) return;
 
         $dupe_members = $this->manager->getDupes($current_user);
 
