@@ -263,7 +263,14 @@ final class DupesMembersManager {
         });
     }
 
-    public function mergeAccount(ICommunityMember $current_member, $token, array $merge_data, IMergeAccountBulkQueryFactory $query_factory){
+    /**
+     * @param Member $current_member
+     * @param $token
+     * @param array $merge_data
+     * @param IMergeAccountBulkQueryFactory $query_factory
+     * @return mixed
+     */
+    public function mergeAccount(Member $current_member, $token, array $merge_data, IMergeAccountBulkQueryFactory $query_factory){
 
         $member_repository             = $this->member_repository;
         $merge_request_repository      = $this->merge_request_repository;
