@@ -26,10 +26,10 @@ abstract class SapphireCompanyServiceRepository
 	}
 
 	/**
-	 * @param IEntity $entity
+	 * @param mixed $entity
 	 * @return void
 	 */
-	public function delete(IEntity $entity)
+	public function delete($entity)
 	{
 		$entity->clearVideos();
 		$entity->clearResources();
