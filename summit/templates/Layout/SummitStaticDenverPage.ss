@@ -216,7 +216,7 @@
                         <div class="info">
                             <div class="name">James Penick</div>
                             <div class="title">Verizon Media</div>
-                            <div class="topic">Edge Computing with StarlingX</div>
+                            <div class="topic">Edge Computing</div>
                         </div>
                     </div>
                 </div>
