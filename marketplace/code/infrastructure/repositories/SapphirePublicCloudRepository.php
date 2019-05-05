@@ -22,7 +22,7 @@ class SapphirePublicCloudRepository
         parent::__construct($entity);
     }
 
-	public function delete(IEntity $entity){
+	public function delete($entity){
         if($entity instanceof ICloudService) {
             $entity->clearDataCenterRegions();
             $entity->clearDataCentersLocations();

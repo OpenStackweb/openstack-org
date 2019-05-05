@@ -12,7 +12,7 @@
  * limitations under the License.
  **/
 class SapphireOpenStackReleaseRepository
-	extends SapphireRepository
+extends SapphireRepository
 implements  IOpenStackReleaseRepository
 {
 
@@ -24,7 +24,7 @@ implements  IOpenStackReleaseRepository
 	 * @param IEntity $entity
 	 * @return int
 	 */
-	public function add(IEntity $entity)
+	public function add($entity)
 	{
 		//supported components
 		foreach($entity->getOpenStackComponents(true) as $component){

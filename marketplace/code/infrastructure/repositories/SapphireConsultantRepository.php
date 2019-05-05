@@ -22,7 +22,7 @@ final class SapphireConsultantRepository
         parent::__construct($entity);
     }
 
-	public function delete(IEntity $entity){
+	public function delete($entity){
 		$entity->clearClients();
 		$entity->clearOffices();
 		$entity->clearSpokenLanguages();

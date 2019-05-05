@@ -27,7 +27,7 @@ abstract class SapphireOpenStackImplementationRepository
 		return array($res, (int) $do->count());
 	}
 
-	public function delete(IEntity $entity){
+	public function delete($entity){
 	    if($entity instanceof IOpenStackImplementation) {
             $entity->clearCapabilities();
             $entity->clearHypervisors();

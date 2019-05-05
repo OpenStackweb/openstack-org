@@ -22,7 +22,7 @@ final class SapphirePrivateCloudRepository
         parent::__construct($entity);
     }
 
-	public function delete(IEntity $entity){
+	public function delete($entity){
 
 		parent::delete($entity);
 	}
