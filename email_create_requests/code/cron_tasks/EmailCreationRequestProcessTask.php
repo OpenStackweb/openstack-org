@@ -39,8 +39,8 @@ final class EmailCreationRequestProcessTask extends CronTask
     {
         try
         {
-            $init_time   = time();
-            $processed   = $this->tx_manager->transaction(function(){
+            $init_time     = time();
+            $processed     = $this->tx_manager->transaction(function(){
                 $processed = 0;
                 $requests  = EmailCreationRequest::get()->filter([
                     'Processed' => 0
@@ -53,6 +53,22 @@ final class EmailCreationRequestProcessTask extends CronTask
                                 $sender = new PresentationSpeakerCreationEmailMessageSender;
                                 $speaker = $email_request->Speaker();
                                 $sender->send(['Speaker' => $speaker]);
+                            }
+                            break;
+                            case "PresentationCreatorNotificationEmailRequest": {
+                                $sender = new PresentationCreatorNotificationEmailMessageSender;
+                                $presentation = $email_request->Presentation();
+                                $sender->send(['Presentation' => $presentation]);
+                            }
+                            break;
+                            case "PresentationSpeakerNotificationEmailRequest": {
+                                $sender = new PresentationSpeakerNotificationEmailSender;
+                                $presentation = $email_request->Presentation();
+                                $speaker = $email_request->Speaker();
+                                $sender->send([
+                                    'Presentation' => $presentation,
+                                    'Speaker' => $speaker
+                                ]);
                             }
                             break;
                             case "MemberPromoCodeEmailCreationRequest": {
