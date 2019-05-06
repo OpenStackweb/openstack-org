@@ -20,7 +20,7 @@ final class SapphireJobRepository extends SapphireRepository implements IJobRepo
 		parent::__construct(new Job);
 	}
 
-	public function delete(IEntity $entity){
+	public function delete($entity){
 		$entity->clearLocations();
 		parent::delete($entity);
 	}
