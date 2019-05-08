@@ -111,4 +111,27 @@ final class OpenStackIdCommon {
         Session::set("Security.Message.type", "bad");
         return Controller::curr()->redirect("Security/error?BackURL={$back_url}");
     }
+
+    public static $AllowedHostNames = [
+        CFP_APP_BASE_URL
+    ];
+
+    /**
+     * @param string $backUrl
+     * @return bool
+     */
+    public static function isAllowedBackUrl(string $backUrl):bool {
+        if(!Director::is_site_url($backUrl)){
+           // check host name
+            $res = parse_url($backUrl);
+            if(!$res)
+                return false;
+            if(!isset($res['host'])) return false;
+            if(!isset($res['scheme'])) return false;
+
+            return in_array(sprintf("%s://%s", $res['host'], $res['scheme']), self::$AllowedHostNames);
+        }
+
+        return true;
+    }
 }

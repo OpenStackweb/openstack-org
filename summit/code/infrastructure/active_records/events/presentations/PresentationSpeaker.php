@@ -261,11 +261,12 @@ class PresentationSpeaker extends DataObject
      */
     public function EditLink($presentationID)
     {
-        $action = 'edit';
+        if(!defined(CFP_APP_BASE_URL)) throw new InvalidArgumentException("CFP_APP_BASE_URL is not defined!");
+        $url = sprintf("%s/app/presentations/{%s}/summary", CFP_APP_BASE_URL,$presentationID);
         if ($this->isPendingOfRegistration()) {
-            $action .= '?' . SpeakerRegistrationRequest::ConfirmationTokenParamName . '=' . $this->RegistrationRequest()->getToken();
+            return sprintf("%s/summit-login/registration?%s=%s&BackUrl=%s", Director::absoluteBaseURL(), SpeakerRegistrationRequest::ConfirmationTokenParamName, $this->RegistrationRequest()->getToken(), urlencode($url));
         }
-        return $this->linkTo($presentationID, $action);
+        return $url;
     }
 
     /**
@@ -285,11 +286,13 @@ class PresentationSpeaker extends DataObject
      */
     public function ReviewLink($presentationID)
     {
-        $action = 'review';
+        if(!defined(CFP_APP_BASE_URL)) throw new InvalidArgumentException("CFP_APP_BASE_URL is not defined!");
+        $url = sprintf("%s/app/presentations/{%s}/review", CFP_APP_BASE_URL, $presentationID);
+
         if ($this->isPendingOfRegistration()) {
-            $action .= '?' . SpeakerRegistrationRequest::ConfirmationTokenParamName . '=' . $this->RegistrationRequest()->getToken();
+            return sprintf("%s/summit-login/registration?%s=%s&BackUrl=%s", Director::absoluteBaseURL(), SpeakerRegistrationRequest::ConfirmationTokenParamName, $this->RegistrationRequest()->getToken(), urlencode($url));
         }
-        return $this->linkTo($presentationID, $action);
+        return $url;
     }
 
     /**
@@ -299,17 +302,13 @@ class PresentationSpeaker extends DataObject
      */
     public function BioLink()
     {
-        $action = 'bio';
-        if ($this->isPendingOfRegistration()) {
-            $action .= '?' . SpeakerRegistrationRequest::ConfirmationTokenParamName . '=' . $this->RegistrationRequest()->getToken();
-        }
+        if(!defined(CFP_APP_BASE_URL)) throw new InvalidArgumentException("CFP_APP_BASE_URL is not defined!");
+        $url = sprintf("%s/app/profile", CFP_APP_BASE_URL);
 
-        if ($page = PresentationPage::get()->filter('SummitID', Summit::get_active()->getIdentifier())->first()) {
-            return Controller::join_links(
-                $page->Link(),
-                $action
-            );
+        if ($this->isPendingOfRegistration()) {
+            return sprintf("%s/summit-login/registration?%s=%s&BackUrl=%s", Director::absoluteBaseURL(), SpeakerRegistrationRequest::ConfirmationTokenParamName, $this->RegistrationRequest()->getToken(), urlencode($url));
         }
+        return $url;
     }
 
 

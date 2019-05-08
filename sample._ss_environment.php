@@ -192,6 +192,8 @@ define('SUMMIT_CALENDAR_SYNC_ERROR_EMAIL_FROM', '');
 
 define('SEARCH_WIDGET_BASE_URL', '');
 
+define('CFP_APP_BASE_URL', '');
+
 global $_FILE_TO_URL_MAPPING;
 $_FILE_TO_URL_MAPPING[''] = '';
 
