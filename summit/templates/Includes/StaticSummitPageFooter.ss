@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-6 col-sm-12">
                 <div class="button-wrapper">
-                    <!-- <% include EventbriteRegisterLink Position='f' %> -->
+                    <% include EventbriteRegisterLink Position='f' %>
 
                     <div class="links">
                         $getSummitPageText(FooterLinksLeft)

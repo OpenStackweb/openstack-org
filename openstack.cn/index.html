@@ -262,15 +262,23 @@ body, h1, h2, h3, h4, h5, h6, p, .script {
                     <li class="link">
                         <a href="/sponsors">赞助商</a>
                     </li>
-                    
                     <li class="link other-summits">
                         <a href="https://www.openstack.org/summit" class="link">其他峰会</a>
                     </li>
                     <li class="link button-box">
-                        <a href="https://openinfrasummitandptgdenver.eventbrite.com/?aff=Shanghaih" target="_blank" class="btn register-btn-lrg eventbrite-register-link ">
-                                立即注册
-                            <i class="fa fa-arrow-right"></i>
-                        </a>
+                        <div class="dropdown register-dropdown">
+                          <button class="btn btn-secondary dropdown-toggle register-btn-lrg eventbrite-register-link" type="button" id="dropdownRegister" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              立即注册 <i class="fa fa-caret-down"></i>
+                          </button>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a role="dropdown-item" href="https://app.eventxtra.link/registrations/f564960c-74f6-452d-b0b2-484386d33eb6?locale=en/?aff=Shanghaim" target="_blank">
+                                    以人民币注册（可开发票）
+                                </a>
+                                <a role="dropdown-item" href="https://app.eventxtra.link/registrations/6640a923-98d7-44c7-a623-1e2c9132b402?locale=en/?aff=Shanghaim" target="_blank">
+                                     Register in USD 
+                                </a>
+                          </div>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -375,7 +383,7 @@ jQuery(document).ready(function($) {
                 <p>加入我们，一起构建和运营开源基础设施！ 300多场会议和研讨会涵盖容器基础设施，持续集成/持续交付，电信+网络功能虚拟化，公有云，私有及混合云，安全以及包括Airship、Ansible、Ceph、Docker、Kata Containers、Kubernetes、ONAP、OpenStack、Open vSwitch、OPNFV、StarlingX、Zuul等在内的多项开源社区项目。</p>
 
                 <a class="btn btn-default" href="/summit/denver-2019/sponsors/">赞助峰会 <i class="fal fa-arrow-right"></i></a>
-                <div class="dropdown register-dropdown open">
+                <div class="dropdown register-dropdown">
                   <button class="btn btn-secondary dropdown-toggle register-btn-lrg eventbrite-register-link btn-primary" type="button" id="dropdownRegister" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                       立即注册 <i class="fa fa-caret-down"></i>
                   </button>
@@ -624,9 +632,19 @@ jQuery(document).ready(function($) {
         <div class="row">
             <div class="col-md-6 col-sm-12">
                 <div class="button-wrapper">
-                    <a href="https://openinfrasummitandptgdenver.eventbrite.com/?aff=Shanghaif" target="_blank" class="btn register-btn-lrg eventbrite-register-link ">立即注册
-                        <i class="fa fa-arrow-right"></i>
-                    </a>
+                      <div class="dropdown register-dropdown">
+                        <button class="btn btn-secondary dropdown-toggle register-btn-lrg eventbrite-register-link" type="button" id="dropdownRegister" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            立即注册 <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                              <a role="dropdown-item" href="https://app.eventxtra.link/registrations/f564960c-74f6-452d-b0b2-484386d33eb6?locale=en/?aff=Shanghaim" target="_blank">
+                                  以人民币注册（可开发票）
+                              </a>
+                              <a role="dropdown-item" href="https://app.eventxtra.link/registrations/6640a923-98d7-44c7-a623-1e2c9132b402?locale=en/?aff=Shanghaim" target="_blank">
+                                   Register in USD 
+                              </a>
+                        </div>
+                      </div>
                     <div class="links">
                         
                     </div>
@@ -691,7 +709,6 @@ qacct:"p-fM0cfazHHeyRH"
                         <h4 class="modal-title">Thanks for Registering! What's Next?</h4>
                     </div>
                     <div class="modal-body">
-                        <p><b><a href="https://www.openstack.org/summit/denver-2019/travel/">Book your hotel room now</a></b> through one of our recommended hotels.</p>
                         <p>An email receipt with details of your Summit registration and purchase will be sent to the address that you registered with.</p>
                     </div>
                 </div>
