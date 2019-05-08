@@ -108,7 +108,6 @@ final class StaticRulesStrategy implements IDependantRulesStrategy {
 
             foreach ($static_rules as $id => $info)
             {
-
                 $q                 = $info['question'];
                 $values            = $info['values'];
                 $operator          = $info['operator'];
@@ -116,6 +115,8 @@ final class StaticRulesStrategy implements IDependantRulesStrategy {
                 $default           = $info['default'];
                 $boolean_operator  = $info['boolean_operator'];
                 $initial_condition = $info['initial_condition'];
+
+                if(!$current_step->survey()->isVisibleQuestion($q)) continue;
 
                 $answer = $current_step->survey()->findAnswerByQuestion($q);
                 if(is_null($answer)) {
@@ -229,6 +230,8 @@ final class JSRulesStrategy implements IDependantRulesStrategy {
                 $values     = $info['values'];
                 $operator   = $info['operator'];
                 $visibility = $info['visibility'];
+
+                if(!$current_step->survey()->isVisibleQuestion($d)) continue;
 
                 if
                 (

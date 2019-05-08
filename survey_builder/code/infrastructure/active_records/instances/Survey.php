@@ -606,4 +606,97 @@ class Survey extends DataObject implements ISurvey
         return $fields;
     }
 
+    /**
+     * @param ISurveyQuestionTemplate $question
+     * @return bool
+     */
+    public function isVisibleQuestion(ISurveyQuestionTemplate $question)
+    {
+        $depends = $question->getDependsOn();
+        if(count($depends) == 0) return true;
+
+        $rules = array();
+        foreach($depends as $d) {
+            if(!isset( $rules[$d->getIdentifier()])) {
+                $rules[$d->getIdentifier()] = array (
+                    'question'          => $d,
+                    'values'            => array(),
+                    'operator'          => $d->Operator,
+                    'visibility'        => $d->Visibility,
+                    'default'           => $d->DependantDefaultValue,
+                    'boolean_operator'  => $d->BooleanOperatorOnValues,
+                    'initial_condition' => ($d->BooleanOperatorOnValues === 'And') ? true:false
+                );
+            }
+            array_push($rules[$d->getIdentifier()]['values'], $d->ValueID);
+        }
+
+        foreach ($rules as $id => $info) {
+            $q                 = $info['question'];
+            $values            = $info['values'];
+            $operator          = $info['operator'];
+            $visibility        = $info['visibility'];
+            $boolean_operator  = $info['boolean_operator'];
+            $initial_condition = $info['initial_condition'];
+
+            $answer = $this->findAnswerByQuestion($q);
+            if(is_null($answer)) {
+                if ($operator == 'Equal') {
+                    $initial_condition = false;
+                } else {
+                    $initial_condition = true;
+                }
+            } else {
+                //checks the condition
+                switch($operator){
+                    case 'Equal':{
+                        foreach($values as $vid) {
+                            if($boolean_operator === 'And')
+                                $initial_condition &= (strpos($answer->value(), $vid) !== false);
+                            else
+                                $initial_condition |= (strpos($answer->value(), $vid) !== false);
+                        }
+                    }
+                        break;
+                    case 'Not-Equal':{
+                        foreach($values as $vid) {
+                            if($boolean_operator === 'And')
+                                $initial_condition &= (strpos($answer->value(), $vid) === false);
+                            else
+                                $initial_condition |= (strpos($answer->value(), $vid) === false);
+                        }
+                    }
+                        break;
+                }
+            }
+
+
+            //visibility
+            switch($visibility)
+            {
+                case 'Visible':
+                {
+                    if(!$initial_condition){
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+                    break;
+                case 'Not-Visible':{
+                    if($initial_condition) {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+                    break;
+            }
+        }
+    }
+
 }

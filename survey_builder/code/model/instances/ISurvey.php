@@ -145,4 +145,10 @@ interface ISurvey extends IEntity {
      */
     function isComplete();
 
+    /**
+     * @param ISurveyQuestionTemplate $question
+     * @return bool
+     */
+    public function isVisibleQuestion(ISurveyQuestionTemplate $question);
+
 }
