@@ -309,7 +309,7 @@ class Presentation extends SummitEvent implements IPresentation
      */
     public function EditLink()
     {
-        return sprintf("%s/app/presentations/{%s}/summary", CFP_APP_BASE_URL, $this->ID);
+        return sprintf("%s/app/presentations/%s/summary", CFP_APP_BASE_URL, $this->ID);
     }
 
     /**

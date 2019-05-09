@@ -261,7 +261,7 @@ class PresentationSpeaker extends DataObject
      */
     public function EditLink($presentationID)
     {
-        $url = sprintf("%s/app/presentations/{%s}/summary", CFP_APP_BASE_URL, $presentationID);
+        $url = sprintf("%s/app/presentations/%s/summary", CFP_APP_BASE_URL, $presentationID);
         if ($this->isPendingOfRegistration()) {
             return sprintf("%s/summit-login/registration?%s=%s&BackUrl=%s", Director::absoluteBaseURL(), SpeakerRegistrationRequest::ConfirmationTokenParamName, $this->RegistrationRequest()->getToken(), urlencode($url));
         }
@@ -285,7 +285,7 @@ class PresentationSpeaker extends DataObject
      */
     public function ReviewLink($presentationID)
     {
-        $url = sprintf("%s/app/presentations/{%s}/review", CFP_APP_BASE_URL, $presentationID);
+        $url = sprintf("%s/app/presentations/%s/review", CFP_APP_BASE_URL, $presentationID);
 
         if ($this->isPendingOfRegistration()) {
             return sprintf("%s/summit-login/registration?%s=%s&BackUrl=%s", Director::absoluteBaseURL(), SpeakerRegistrationRequest::ConfirmationTokenParamName, $this->RegistrationRequest()->getToken(), urlencode($url));
