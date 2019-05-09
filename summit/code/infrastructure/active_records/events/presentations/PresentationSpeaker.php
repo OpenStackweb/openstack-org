@@ -261,8 +261,7 @@ class PresentationSpeaker extends DataObject
      */
     public function EditLink($presentationID)
     {
-        if(!defined(CFP_APP_BASE_URL)) throw new InvalidArgumentException("CFP_APP_BASE_URL is not defined!");
-        $url = sprintf("%s/app/presentations/{%s}/summary", CFP_APP_BASE_URL,$presentationID);
+        $url = sprintf("%s/app/presentations/{%s}/summary", CFP_APP_BASE_URL, $presentationID);
         if ($this->isPendingOfRegistration()) {
             return sprintf("%s/summit-login/registration?%s=%s&BackUrl=%s", Director::absoluteBaseURL(), SpeakerRegistrationRequest::ConfirmationTokenParamName, $this->RegistrationRequest()->getToken(), urlencode($url));
         }
@@ -286,7 +285,6 @@ class PresentationSpeaker extends DataObject
      */
     public function ReviewLink($presentationID)
     {
-        if(!defined(CFP_APP_BASE_URL)) throw new InvalidArgumentException("CFP_APP_BASE_URL is not defined!");
         $url = sprintf("%s/app/presentations/{%s}/review", CFP_APP_BASE_URL, $presentationID);
 
         if ($this->isPendingOfRegistration()) {
@@ -302,7 +300,6 @@ class PresentationSpeaker extends DataObject
      */
     public function BioLink()
     {
-        if(!defined(CFP_APP_BASE_URL)) throw new InvalidArgumentException("CFP_APP_BASE_URL is not defined!");
         $url = sprintf("%s/app/profile", CFP_APP_BASE_URL);
 
         if ($this->isPendingOfRegistration()) {
