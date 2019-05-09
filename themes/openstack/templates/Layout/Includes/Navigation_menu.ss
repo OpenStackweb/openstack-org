@@ -1,7 +1,6 @@
 <li>
     <a href="{$BaseHref}summit/" class="drop" id="dropdownMenuEvents">The Summit <i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
     <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuEvents">
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}other-summits/">Other Summits</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}ptg/">Project Teams Gathering</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/events/">Community Events</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/events/openstackdays">OpenStack Days</a></li>
