@@ -263,7 +263,12 @@ class PresentationSpeaker extends DataObject
     {
         $url = sprintf("%s/app/presentations/%s/summary", CFP_APP_BASE_URL, $presentationID);
         if ($this->isPendingOfRegistration()) {
-            return sprintf("%s/summit-login/registration?%s=%s&BackUrl=%s", Director::absoluteBaseURL(), SpeakerRegistrationRequest::ConfirmationTokenParamName, $this->RegistrationRequest()->getToken(), urlencode($url));
+            return sprintf("%s/summit-login/registration?%s=%s&BackURL=%s",
+                Director::absoluteBaseURL(),
+                SpeakerRegistrationRequest::ConfirmationTokenParamName,
+                $this->RegistrationRequest()->getToken(),
+                urlencode($url)
+            );
         }
         return $url;
     }
@@ -288,7 +293,7 @@ class PresentationSpeaker extends DataObject
         $url = sprintf("%s/app/presentations/%s/review", CFP_APP_BASE_URL, $presentationID);
 
         if ($this->isPendingOfRegistration()) {
-            return sprintf("%s/summit-login/registration?%s=%s&BackUrl=%s", Director::absoluteBaseURL(), SpeakerRegistrationRequest::ConfirmationTokenParamName, $this->RegistrationRequest()->getToken(), urlencode($url));
+            return sprintf("%s/summit-login/registration?%s=%s&BackURL=%s", Director::absoluteBaseURL(), SpeakerRegistrationRequest::ConfirmationTokenParamName, $this->RegistrationRequest()->getToken(), urlencode($url));
         }
         return $url;
     }
@@ -303,7 +308,11 @@ class PresentationSpeaker extends DataObject
         $url = sprintf("%s/app/profile", CFP_APP_BASE_URL);
 
         if ($this->isPendingOfRegistration()) {
-            return sprintf("%s/summit-login/registration?%s=%s&BackUrl=%s", Director::absoluteBaseURL(), SpeakerRegistrationRequest::ConfirmationTokenParamName, $this->RegistrationRequest()->getToken(), urlencode($url));
+            return sprintf("%s/summit-login/registration?%s=%s&BackURL=%s",
+                Director::absoluteBaseURL(),
+                SpeakerRegistrationRequest::ConfirmationTokenParamName,
+                $this->RegistrationRequest()->getToken(),
+                urlencode($url));
         }
         return $url;
     }

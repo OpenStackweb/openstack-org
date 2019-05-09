@@ -125,6 +125,10 @@ class SpeakerRegistrationRequest
         if(empty($this->token)){
             $this->token = Session::get(self::ConfirmationTokenParamName.'_'. $this->Speaker()->ID);
         }
+        if(empty($this->token)){
+            $this->token = $this->generateConfirmationToken();
+            $this->write();
+        }
         return $this->token;
     }
 

@@ -47,7 +47,7 @@ final class PresentationSpeakerCreationEmailMessageSender implements IMessageSen
             array
             (
                 'Speaker'         => $speaker,
-                'BioLink'         => Director::makeRelative($speaker->BioLink()),
+                'BioLink'         => $speaker->BioLink(),
             )
         );
 
