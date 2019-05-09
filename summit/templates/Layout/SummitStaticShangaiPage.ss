@@ -14,7 +14,7 @@
 
                 <p>Join the people building and operating open infrastructure, with hundreds of sessions and workshops on Container Infrastructure, CI/CD, Telecom + NFV, Public Cloud, Private & Hybrid Cloud, Security and members of open source communities like Airship, Ansible, Ceph, Docker, Kata Containers, Kubernetes, ONAP, OpenStack, Open vSwitch, OPNFV, StarlingX, Zuul and more.</p>
 
-                <a class="btn btn-default" href="/summit/shangai-2019/sponsors/">Sponsor the Summit <i class="fal fa-arrow-right"></i></a>
+                <a class="btn btn-default" href="/summit/shanghai-2019/sponsors/">Sponsor the Summit <i class="fal fa-arrow-right"></i></a>
 
                 <% include EventbriteRegisterLink Position='m',ExtraClass='btn-primary',Dropdown=1 %>
 
@@ -221,25 +221,25 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12">
-                    <a class="btn" href="/summit/shangai-2019/speakers">See all summit speakers <i class="fa fa-arrow-right"></i></a>
-                </div>
+                <!-- <div class="col-xs-12">
+                    <a class="btn" href="/summit/shanghai-2019/speakers">See all summit speakers <i class="fa fa-arrow-right"></i></a>
+                </div> -->
             </div>
             <div class="col-sm-12 col-lg-4 col-md-6 col-xs-12">
                 <h3 class="title-section">Summit Overview</h3>
                 <div class="col-12 col-md-12 col-sm-6 col-xs-12 featured">
                     <ul class="overview">
-                        <li><a href="https://www.openstack.org/summit/shangai-2019/summit-schedule/events/22721/openstack-upstream-institute-sponsored-by-lenovo-day-1-rsvp-required"><h5>OpenStack Upstream Institute</h5>
+                        <li><a href="https://www.openstack.org/summit/shanghai-2019/summit-schedule/events/22721/openstack-upstream-institute-sponsored-by-lenovo-day-1-rsvp-required"><h5>OpenStack Upstream Institute</h5>
                             <p><small>Sunday - Monday</small></p> <i class="fal fa-info-circle"></i></a></li>
-                        <li><a href="https://www.openstack.org/summit/shangai-2019/summit-schedule/global-search?t=Keynotes"><h5>Keynotes</h5>
+                        <li><a href="https://www.openstack.org/summit/shanghai-2019/summit-schedule/global-search?t=Keynotes"><h5>Keynotes</h5>
                             <p><small>Monday-Wednesday</small></p> <i class="fal fa-info-circle"></i></a></li>
-                        <li><a href="https://www.openstack.org/summit/shangai-2019/summit-schedule"><h5>Breakout Sessions</h5>
+                        <li><a href="https://www.openstack.org/summit/shanghai-2019/summit-schedule"><h5>Breakout Sessions</h5>
                             <p><small>Monday-Wednesday</small></p> <i class="fal fa-info-circle"></i></a></li>
                         <li><a href="https://wiki.openstack.org/wiki/Forum"><h5>The Forum</h5>
                             <p><small>Monday-Wednesday</small></p> <i class="fal fa-info-circle"></i></a></li>
-                        <li><a href="https://www.openstack.org/summit/shangai-2019/summit-schedule/"><h5>Workshops and Trainings</h5>
+                        <li><a href="https://www.openstack.org/summit/shanghai-2019/summit-schedule/"><h5>Workshops and Trainings</h5>
                             <p><small>Monday-Wednesday</small></p> <i class="fal fa-info-circle"></i></a></li>
-                        <li><a href="https://www.openstack.org/summit/shangai-2019/summit-schedule/global-search?t=Marketplace"><h5>Open Infrastructure Marketplace</h5>
+                        <li><a href="https://www.openstack.org/summit/shanghai-2019/summit-schedule/global-search?t=Marketplace"><h5>Open Infrastructure Marketplace</h5>
                             <p><small>Monday-Wednesday</small></p> <i class="fal fa-info-circle"></i></a></li>
                         <li><a href="https://www.openstack.org/ptg"><h5>Project Teams Gathering (PTG)</h5>
                             <p><small>Thursday-Saturday</small></p> <i class="fal fa-info-circle"></i></a></li>
@@ -248,7 +248,7 @@
                 </div>
 
                 <div class="col-xs-12">
-                    <a class="btn" href="/summit/shangai-2019/summit-schedule/">Full Summit Schedule<i class="fa fa-arrow-right"></i></a>
+                    <a class="btn" href="/summit/shanghai-2019/summit-schedule/">Full Summit Schedule<i class="fa fa-arrow-right"></i></a>
                 </div>
             </div>
         </div>
@@ -333,7 +333,7 @@
                     Docker, Kata Containers, Kubernetes, OpenStack, OPNFV, Zuul and more.
                 </p>
                 <p style="text-align: center;">
-                    <a class="btn register-btn-lrg" href="/summit/shangai-2019/sponsors/">Sponsor the Summit <i class="fa fa-arrow-right"></i></a>
+                    <a class="btn register-btn-lrg" href="/summit/shanghai-2019/sponsors/">Sponsor the Summit <i class="fa fa-arrow-right"></i></a>
                 </p>
             </div>
         </div>
@@ -349,7 +349,7 @@
                 <span></span>
                 <h2>Inclusive.<br>Diverse.<br>Open.</h2>
                 <p>We are a diverse community of professionals, and the OpenStack Foundation is dedicated to providing an
-                    inclusive and safe Summit experience for everyone. View the <a href="https://www.openstack.org/summit/shangai-2019/code-of-conduct/" target="_blank">Summit Code of Conduct</a> for more information.</p>
+                    inclusive and safe Summit experience for everyone. View the <a href="https://www.openstack.org/summit/shanghai-2019/code-of-conduct/" target="_blank">Summit Code of Conduct</a> for more information.</p>
 
                 <p>Want to support community members who don’t have the resources to attend the Summit?  <a href="https://www.eventbrite.com/e/open-infrastructure-summit-project-teams-gathering-tickets-52606153421" target="_blank">Donate to the travel support program.</a>
                 </p>
@@ -370,7 +370,7 @@
                     <p>To make it even easier, here’s a sample letter filled with info on who you can expect to meet, information on hands-on training opportunities, collaborative sessions, networking events and more that is bound to send you and your coworkers to the home of open infrastructure.
                     </p>
 
-                    <a class="btn" href="/summit/shangai-2019/sample-letter/">Sample Letter <i class="fa fa-arrow-right"></i></a>
+                    <a class="btn" href="/summit/shanghai-2019/sample-letter/">Sample Letter <i class="fa fa-arrow-right"></i></a>
                 </div>
                 <div class="video item">
                     <div class="embed-video"><iframe src="//www.youtube.com/embed/xZwqtldjJRQ?rel=0&showinfo=0" frameborder="0"
@@ -418,7 +418,7 @@
                     <p>Book a Room at the Official Summit Hotel
                     </p>
 
-                    <a class="btn" href="https://www.openstack.org/summit/shangai-2019/travel">Book Now <i class="fa fa-arrow-right"></i></a>
+                    <a class="btn" href="https://www.openstack.org/summit/shanghai-2019/travel">Book Now <i class="fa fa-arrow-right"></i></a>
                 </div>
 
 
