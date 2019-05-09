@@ -14,7 +14,7 @@
             <div class="col-md-3 col-sm-3 button-box">
                 <% if IsUpComing %>
                     <div class="button-wrapper">
-                        <a href="{$RegistrationLink}" class="btn register-btn-lrg">Register Now</a>
+                        <% include EventbriteRegisterLink Position='h' %>
                     </div>
                 <% else_if IsCurrent %>
                     <div class="inner-countdown-wrapper">

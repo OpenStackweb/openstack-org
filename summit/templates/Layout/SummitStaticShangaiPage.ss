@@ -264,7 +264,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <h3 class="recap-title script">Thank you to our Denver 2019 Sponsors!
+                <h3 class="recap-title script">Thank you to our Shanghai 2019 Sponsors!
                 </h3>
             </div>
 
