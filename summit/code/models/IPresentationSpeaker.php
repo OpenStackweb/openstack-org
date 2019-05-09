@@ -135,10 +135,10 @@ interface IPresentationSpeaker extends IEntity
     public function getEmail();
 
     /**
-     * @param ICommunityMember $member
+     * @param Member $member
      * @return void
      */
-    public function associateMember(ICommunityMember $member);
+    public function associateMember(Member $member);
 
     /**
      * @param int $summit_id

@@ -683,10 +683,10 @@ class PresentationSpeaker extends DataObject
     }
 
     /**
-     * @param ICommunityMember $member
+     * @param Member $member
      * @return void
      */
-    public function associateMember(ICommunityMember $member)
+    public function associateMember(Member $member)
     {
         $this->MemberID = $member->getIdentifier();
     }
