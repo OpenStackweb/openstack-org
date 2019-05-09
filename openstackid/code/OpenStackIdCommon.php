@@ -129,7 +129,7 @@ final class OpenStackIdCommon {
             if(!isset($res['host'])) return false;
             if(!isset($res['scheme'])) return false;
 
-            return in_array(sprintf("%s://%s", $res['host'], $res['scheme']), self::$AllowedHostNames);
+            return in_array(sprintf("%s://%s", $res['scheme'], $res['host']), self::$AllowedHostNames);
         }
 
         return true;
