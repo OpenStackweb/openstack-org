@@ -43,13 +43,12 @@ final class PresentationCreatorNotificationEmailMessageSender implements IMessag
 
         $email->populateTemplate
         (
-            array
-            (
+            [
                 'Creator'      => $presentation->Creator(),
                 'Summit'       => $presentation->Summit(),
-                'Link'         => $presentation->EditLink(),
+                'EditLink'     => $presentation->EditLink(),
                 'PasswordLink' => Director::absoluteBaseURL() . '/lostpassword'
-            )
+            ]
         );
 
         $email->send();
