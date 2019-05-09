@@ -62,7 +62,7 @@ final class EmailCreationRequestProcessTask extends CronTask
                             }
                             break;
                             case "PresentationSpeakerNotificationEmailRequest": {
-                                $sender = new PresentationSpeakerNotificationEmailSender;
+                                $sender = new PresentationSpeakerNotificationEmailMessageSender;
                                 $presentation = $email_request->Presentation();
                                 $speaker = $email_request->Speaker();
                                 $sender->send([
