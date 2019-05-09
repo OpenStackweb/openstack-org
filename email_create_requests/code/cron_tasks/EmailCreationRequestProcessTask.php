@@ -109,17 +109,17 @@ final class EmailCreationRequestProcessTask extends CronTask
                             }
                             break;
                         }
+                        $email_request->markAsProcessed();
+                        $email_request->write();
                     }
                     catch(Exception $ex)
                     {
                         SS_Log::log($ex->getMessage(), SS_Log::ERR);
                         echo sprintf("error %s", $ex->getMessage()).PHP_EOL;
                     }
-                    $email_request->markAsProcessed();
-                    $email_request->write();
+
                     $processed++;
                 }
-
                 return $processed;
             });
             $finish_time = time() - $init_time;
