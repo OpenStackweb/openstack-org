@@ -309,9 +309,7 @@ class Presentation extends SummitEvent implements IPresentation
      */
     public function EditLink()
     {
-        if ($page = PresentationPage::get()->filter('SummitID', $this->SummitID)->first()) {
-            return Controller::join_links($page->Link(), 'manage', $this->ID, 'summary');
-        }
+        return sprintf("%s/app/presentations/{%s}/summary", CFP_APP_BASE_URL, $this->ID);
     }
 
     /**

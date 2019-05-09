@@ -51,10 +51,10 @@ final class PresentationSpeakerNotificationEmailMessageSender implements IMessag
                 'Presentation'    => $presentation,
                 'Speaker'         => $speaker,
                 'Creator'         => $presentation->Creator(),
-                'EditLink'        => Director::makeRelative($speaker->EditLink($presentation->ID)),
-                'ReviewLink'      => Director::makeRelative($speaker->ReviewLink($presentation->ID)),
+                'EditLink'        => $speaker->EditLink($presentation->ID),
+                'BioLink'         => $speaker->BioLink(),
+                'ReviewLink'      => $speaker->ReviewLink($presentation->ID),
                 'PasswordLink'    => Director::absoluteBaseURL() . '/lostpassword',
-                'Link'            => Director::absoluteBaseURL() . Director::makeRelative($presentation->EditLink()),
             )
         );
 

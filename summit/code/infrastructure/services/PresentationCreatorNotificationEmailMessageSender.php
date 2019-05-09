@@ -47,7 +47,7 @@ final class PresentationCreatorNotificationEmailMessageSender implements IMessag
             (
                 'Creator'      => $presentation->Creator(),
                 'Summit'       => $presentation->Summit(),
-                'Link'         => Director::absoluteBaseURL() . Director::makeRelative($presentation->EditLink()),
+                'Link'         => $presentation->EditLink(),
                 'PasswordLink' => Director::absoluteBaseURL() . '/lostpassword'
             )
         );

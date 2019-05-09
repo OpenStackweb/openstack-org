@@ -308,7 +308,6 @@ class PresentationSpeaker extends DataObject
         return $url;
     }
 
-
     public function getCMSFields()
     {
         $fields = FieldList::create(TabSet::create("Root"))
