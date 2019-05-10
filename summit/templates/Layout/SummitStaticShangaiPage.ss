@@ -221,9 +221,9 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="col-xs-12">
+                <div class="col-xs-12">
                     <a class="btn" href="/summit/shanghai-2019/speakers">See all summit speakers <i class="fa fa-arrow-right"></i></a>
-                </div> -->
+                </div>
             </div>
             <div class="col-sm-12 col-lg-4 col-md-6 col-xs-12">
                 <h3 class="title-section">Summit Overview</h3>
