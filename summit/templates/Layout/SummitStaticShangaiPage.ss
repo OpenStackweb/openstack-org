@@ -4,9 +4,9 @@
             <div class="col-lg-7 col-md-6 col-sm-12">
                 <h4 class="summit-title script">The Open Infrastructure Summit</h4>
                 <h2>Home of Open Development</h2>
-                <div class="bird">
-                    <h5>Join the conversation <br><strong><a href="http://twitter.com/openstack" target="_blank"><i class="fab fa-twitter" style="font-size: 24px;color:#ffd602;"></a></i>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<a href="https://www.facebook.com/openstack/" target="_blank"><i class="fab fa-facebook-f" style="font-size: 24px;color:#ffd602;"></i></a></strong>
+                <div class="bird"> 
+                    <h5><strong><a href="https://twitter.com/openstack" target="_blank"><i class="fab fa-twitter" style="font-size: 24px;color:#ffd602;"></i></a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<a href="https://www.facebook.com/openstack/" target="_blank"><i class="fab fa-facebook-f" style="font-size: 24px;color:#ffd602;"></i></a><br /><br /><img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/summits/shanghai/qrcode-for-gh-5cc38c749efd-1280.jpg" height="100"></strong>
                     </h5>
                 </div>
             </div>
@@ -20,7 +20,7 @@
 
             </div>
             <div class="col-md-12 session-box">
-                <h3>Over 300 Presentations, Workshops, and Collaborative Sesssions</h3>
+                <h3>Presentations, Workshops, and Collaborative Sesssions</h3>
                 <ul class="sessions">
                     <li class="session"> <span class="ai"></span> AI</li>
                     <li class="session"> <span class="cicd"></span> CI/CD</li>
@@ -53,7 +53,7 @@
             </div>
             <div class="text-container col-md-5 col-sm-12">
                 <h3 class="title-section">Who Attends the Summit</h3>
-                <p>Thousands of IT decision makers, operators and the developers will gather at the Summit to collaborate
+                <p>Thousands of IT decision makers, operators and developers will gather at the Summit to collaborate
                     across common use cases and solve real problems. In Shangai, you can meet people from over 50 countries
                     and 600 companies using and contributing to over 35 open source projects.
                 </p>
@@ -350,8 +350,6 @@
                 <h2>Inclusive.<br>Diverse.<br>Open.</h2>
                 <p>We are a diverse community of professionals, and the OpenStack Foundation is dedicated to providing an
                     inclusive and safe Summit experience for everyone. View the <a href="https://www.openstack.org/summit/shanghai-2019/code-of-conduct/" target="_blank">Summit Code of Conduct</a> for more information.</p>
-
-                <p>Want to support community members who don’t have the resources to attend the Summit?  <a href="https://www.eventbrite.com/e/open-infrastructure-summit-project-teams-gathering-tickets-52606153421" target="_blank">Donate to the travel support program.</a>
                 </p>
             </div>
         </div>
@@ -408,17 +406,15 @@
                     <h4>Get involved with the Forum</h4>
                     <p>Operators and developers attend the Forum to share feedback and collaboratively brainstorm requirements for the next release.</p>
 
-                    <a class="btn" href="https://wiki.openstack.org/forum/">Get involved <i class="fa fa-arrow-right"></i></a>
+                    <a class="btn" href="https://wiki.openstack.org/wiki/Forum">Get involved <i class="fa fa-arrow-right"></i></a>
                 </div>
             </div>
 
             <div class="col-lg-4 col-md-4 col-sm-12">
                 <div class="box light item">
                     <h4>Shangai Travel</h4>
-                    <p>Book a Room at the Official Summit Hotel
+                    <p>Stay tuned for more info!
                     </p>
-
-                    <a class="btn" href="https://www.openstack.org/summit/shanghai-2019/travel">Book Now <i class="fa fa-arrow-right"></i></a>
                 </div>
 
 
