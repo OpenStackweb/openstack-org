@@ -236,6 +236,20 @@ body, h1, h2, h3, h4, h5, h6, p, .script {
     max-width: 50%;
     min-width: 50%; } }
 
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap; }
+
+.row-eq-height > [class*='col-'] {
+  display: flex;
+  flex-direction: column;
+  -webkit-flex: 1 1 15em; }
+
+.row-eq-height .item {
+  height: 100%; }
 
     </style>
 </head>
