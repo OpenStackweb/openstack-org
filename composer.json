@@ -33,12 +33,16 @@
     {
       "type": "vcs",
       "url": "https://github.com/smarcet/silverstripe-cloudassets-swift"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/OpenStackweb/silverstripe-framework"
     }
   ],
   "require": {
     "php": "^7.1.3",
-    "silverstripe/cms": "3.7.2",
-    "silverstripe/framework": "^3.7.1",
+    "silverstripe/cms": "3.7.3",
+    "silverstripe/framework": "3.7.5",
     "unclecheese/silverstripe-permamail": "1.3.2",
     "unclecheese/display-logic": "1.7.2",
     "unclecheese/zen-fields": "1.0.*",
