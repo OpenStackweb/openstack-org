@@ -10,11 +10,13 @@
             <div class="col-sm-6">
                 <img class="header-bullet" width="100%" src="/software/images/bullets/bullet-1.svg" onerror="this.onerror=null; this.src=/software/images/bullets/bullet-1.png" alt="Bullet 1">
                 <h3 class="has-bullet is-upprcs strong">What is OpenStack?</h3>
-<p>OpenStack is a cloud operating system that controls large pools of compute, storage, and networking resources throughout a datacenter, all managed through a dashboard that gives administrators control while empowering their users to provision resources through a web interface.</p>
+                <p>OpenStack is a cloud operating system that controls large pools of compute, storage, and networking resources throughout a datacenter, all managed and provisioned through APIs with common authentication mechanisms.</p>
 
-<p>Learn more about OpenStack's compute, storage, networking, take a tour of the dashboard, or dive in and learn how to get started with OpenStack today.</p>
+                <p>A dashboard is also available, giving administrators control while empowering their users to provision resources through a web interface.</p>
 
-<p>Based on five generations of production software, this seed code will be the base for future fully open source implementations that can be productized. In addition to standard cloud functionality, the project components provide fault management and service management amongst others to ensure high availability of user applications.</p>
+                <p>Beyond standard infrastructure-as-a-service functionality, additional components provide orchestration, fault management and service management amongst other services to ensure high availability of user applications.</p>
+
+                <p><a href="https://governance.openstack.org/tc/reference/technical-vision.html" target="_blank">Read more about our vision</a> for OpenStack clouds.</p>
             </div>
             <div class="col-sm-6">
                 <p>
@@ -29,7 +31,7 @@
             <div class="col-sm-12">
                 <img class="header-bullet" width="100%" src="/software/images/bullets/bullet-2.svg" onerror="this.onerror=null; this.src=/software/images/bullets/bullet-2.png" alt="Bullet 2">
                 <h3 class="has-bullet is-upprcs strong">The OpenStack Landscape</h3>
-                <p>OpenStack is broken up into projects to allow you to plug and play components depending on your needs. the openstack map gives you an “at a glance” view of the openstack landscpace to see where projects fit and how they can work together.</p>
+                <p>OpenStack is broken up into services to allow you to plug and play components depending on your needs. The openstack map gives you an “at a glance” view of the openstack landscape to see where those services fit and how they can work together.</p>
                 <p><a href="{$Top.CloudUrl('assets/software/projectmap/openstack-map.pdf')}">Download the map <i class="fa fa-chevron-right"></i></a></p>
                 <p>&nbsp; </p>
                 <p>
