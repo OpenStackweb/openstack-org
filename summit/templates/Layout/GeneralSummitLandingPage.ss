@@ -11,27 +11,8 @@
                     <h4>Berlin, Germany</h4>
                     <p>Nov 13-15, 2018</p>
                         <p>
-                            <a class="btn register-btn-lrg" href="/summit/berlin-2018">See Highlights <i class="fa fa-arrow-right"></i></a>
+                            <a class="btn register-btn-lrg" href="/videos/summits/berlin-2018">See Highlights <i class="fa fa-arrow-right"></i></a>
                         </p>
-
-                </div>
-            </div>
-            <div class="video-container second col-md-4 col-sm-12 col-xs-12">
-                <div class="item">
-                    <div class="video">
-                        <a href="https://www.flickr.com/photos/sgerner/22636377307" target="_blank" class="photo-credit" title="Steven Gerner">
-                            <i class="fa fa-info-circle"></i>
-                        </a>
-                    </div>
-                    <h4>Denver, Colorado</h4>
-                    <p>Apr 29-May 4, 2019</p>
-                    <p>
-                        <a href="/summit/denver-2019" target="_blank" class="btn register-btn-lrg eventbrite-register-link ">
-                            Learn More
-                            <i class="fa fa-arrow-right"></i>
-                        </a>
-
-                    </p>
 
                 </div>
             </div>
@@ -40,10 +21,32 @@
                     <div class="video">
                     </div>
                     <h4>Shanghai, China</h4>
-                    <p>Nov 2019</p>
+                    <p>Nov 4-6, 2019</p>
                         <p>
                             <a class="btn register-btn-lrg" href="/summit/shanghai-2019">Learn More <i class="fa fa-arrow-right"></i></a>
                         </p>
+
+                </div>
+            </div>
+            <div class="video-container second col-md-4 col-sm-12 col-xs-12">
+                <div class="item">
+                    <div class="video">
+                        <div class="triangle">
+                            <p>Complete!<p>
+                        </div>
+                        <a href="https://www.flickr.com/photos/sgerner/22636377307" target="_blank" class="photo-credit" title="Steven Gerner">
+                            <i class="fa fa-info-circle"></i>
+                        </a>
+                    </div>
+                    <h4>Denver, Colorado</h4>
+                    <p>Apr 29-May 4, 2019</p>
+                    <p>
+                        <a href="/videos/summits/denver-2019" target="_blank" class="btn register-btn-lrg eventbrite-register-link ">
+                            See Highlights 
+                            <i class="fa fa-arrow-right"></i>
+                        </a>
+
+                    </p>
 
                 </div>
             </div>
@@ -534,8 +537,8 @@
             <div class="col-sm-12 sponsor">
                 <h3 class="title">Ready to go?</h3>
                 <p>
-                    <a href="/summit/denver-2019" class="btn register-btn-lrg eventbrite-register-link ">
-                        LEARN MORE ABOUT THE DENVER SUMMIT
+                    <a href="/summit/shanghai-2019" class="btn register-btn-lrg eventbrite-register-link ">
+                        LEARN MORE ABOUT THE SHANGHAI SUMMIT
                         <i class="fa fa-arrow-right"></i>
                     </a>                
                     <!-- <% include EventbriteRegisterLink Summit=$CurrentSummit(),Position='m-2',RegisterLabel='REGISTER FOR THE DENVER SUMMIT' %> -->
