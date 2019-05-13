@@ -16,7 +16,7 @@
 
                 <p>Beyond standard infrastructure-as-a-service functionality, additional components provide orchestration, fault management and service management amongst other services to ensure high availability of user applications.</p>
 
-                <p><a href="https://governance.openstack.org/tc/reference/technical-vision.html" target="_blank">Read more about our vision</a> for OpenStack clouds.</p>
+                <p><a href="https://governance.openstack.org/tc/reference/technical-vision.html" target="_blank">Read more about our vision for OpenStack clouds <i class="fa fa-chevron-right"></i></a></p>
             </div>
             <div class="col-sm-6">
                 <p>
