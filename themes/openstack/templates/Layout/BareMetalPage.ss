@@ -265,28 +265,22 @@
                             <h4 class="video-caption">Ironic - Project Update</h4>                       
                         </div>
                         <div class="col-md-4 col-sm-6 video-wall-item">
-                            <a href="https://www.youtube.com/watch?v=Tbwwg3wERHY" target="_blank">
+                            <a href="https://superuser.openstack.org/articles/ironic-bare-metal-case-study-cern/" target="_blank">
                                 <div class="video-wrapper">
-                                    <div class="play-button">
-                                        <img src="{$Top.CloudUrl("images/baremetal/play-button.png")}">
-                                    </div>
-                                    <img class="video-image" src="{$Top.CloudUrl("images/baremetal/video-thumbnail-3.jpg")}" alt="To Complete, not to Compete: Integrating Ironic into CERN’s Private Cloud Service">
+                                    <img class="video-image" src="{$Top.CloudUrl("assets/baremetal/cern2.jpg")}" alt="Managing 2,000 nodes with 10,000 servers using OpenStack Ironic">
                                 </div>
                             </a>
-                            <h4 class="video-caption">To Complete, not to Compete: Integrating Ironic into CERN’s Private Cloud Service</h4> 
+                            <h4 class="video-caption">Managing 2,000 nodes with 10,000 servers using OpenStack Ironic</h4> 
                          </div>
                 <!-- Video Row 2-->
                     <div class="row video-wall-row ">
                         <div class="col-md-4 col-sm-6 video-wall-item">
-                            <a href="https://www.youtube.com/watch?v=kcARF2zhXkw" target="_blank">
+                            <a href="https://superuser.openstack.org/articles/ironic-bare-metal-case-study-platform9/" target="_blank">
                                 <div class="video-wrapper">
-                                    <div class="play-button">
-                                        <img src="{$Top.CloudUrl("images/baremetal/play-button.png")}">
-                                    </div>
-                                    <img class="video-image" src="{$Top.CloudUrl("images/baremetal/video-thumbnail-4.jpg")}" alt="How Ironic fits into PayPal's full circle of Bare Metal Management">
+                                    <img class="video-image" src="{$Top.CloudUrl("assets/baremetal/platform9-baremetal.jpeg")}" alt="Provisioning Bare Metal Servers in Under 20 Minutes ">
                                 </div>
                             </a>
-                            <h4 class="video-caption">How Ironic fits into PayPal's full circle of Bare Metal Management</h4>
+                            <h4 class="video-caption">Provisioning Bare Metal Servers in Under 20 Minutes </h4>
                         </div>
                         <div class="col-md-4 col-sm-6 video-wall-item">
                             <a href="https://www.youtube.com/watch?v=V_5UuVpviZc" target="_blank">
