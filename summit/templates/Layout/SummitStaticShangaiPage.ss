@@ -4,12 +4,31 @@
             <div class="col-lg-7 col-md-6 col-sm-12">
                 <h4 class="summit-title script">The Open Infrastructure Summit</h4>
                 <h2>Home of Open Development</h2>
-                <div class="bird"> 
-                    <h5><strong><a href="https://twitter.com/openstack" target="_blank"><i class="fab fa-twitter" style="font-size: 24px;color:#ffd602;"></i></a>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<a href="https://www.facebook.com/openstack/" target="_blank"><i class="fab fa-facebook-f" style="font-size: 24px;color:#ffd602;"></i></a><br /><br /><img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/summits/shanghai/qrcode-for-gh-5cc38c749efd-1280.jpg" height="100"></strong>
+                <div class="bird">
+                    <h5>
+                        <strong>
+                            <a href="http://twitter.com/openstack" target="_blank">
+                                <i class="fab fa-twitter" style="font-size: 24px;color:#ffd602;"></i>
+                            </a>
+                            <a href="https://www.facebook.com/openstack/" target="_blank">
+                                <i class="fab fa-facebook-f" style="margin-left:15px;font-size: 24px;color:#ffd602;"></i>
+                            </a>
+                            <a href="" data-toggle="modal" data-target="#wechat-modal">
+                                <i class="fab fa-weixin" style="margin-left:15px;font-size: 24px;color:#ffd602;"></i>
+                            </a>
+                        </strong>
                     </h5>
                 </div>
             </div>
+
+            <div id="wechat-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <img width="150" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/summits/shanghai/qrcode-for-gh-5cc38c749efd-1280.jpg" />
+                    </div>
+                </div>
+            </div>
+
             <div class="col-lg-5 col-md-6 col-sm-12 about-buttons">
 
                 <p>Join the people building and operating open infrastructure, with hundreds of sessions and workshops on Container Infrastructure, CI/CD, Telecom + NFV, Public Cloud, Private & Hybrid Cloud, Security and members of open source communities like Airship, Ansible, Ceph, Docker, Kata Containers, Kubernetes, ONAP, OpenStack, Open vSwitch, OPNFV, StarlingX, Zuul and more.</p>
