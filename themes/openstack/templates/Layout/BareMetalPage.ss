@@ -270,7 +270,7 @@
                                     <img class="video-image" src="{$Top.CloudUrl("assets/baremetal/cern2.jpg")}" alt="Managing 2,000 nodes with 10,000 servers using OpenStack Ironic">
                                 </div>
                             </a>
-                            <h4 class="video-caption">Managing 2,000 nodes with 10,000 servers using OpenStack Ironic</h4> 
+                            <h4 class="video-caption">Managing 2,000 nodes with 10,000 servers using OpenStack Ironic at CERN</h4> 
                          </div>
                 <!-- Video Row 2-->
                     <div class="row video-wall-row ">
@@ -280,7 +280,7 @@
                                     <img class="video-image" src="{$Top.CloudUrl("assets/baremetal/platform9-baremetal.jpeg")}" alt="Provisioning Bare Metal Servers in Under 20 Minutes ">
                                 </div>
                             </a>
-                            <h4 class="video-caption">Provisioning Bare Metal Servers in Under 20 Minutes </h4>
+                            <h4 class="video-caption">Provisioning Bare Metal Servers in Under 20 Minutes at Platform9</h4>
                         </div>
                         <div class="col-md-4 col-sm-6 video-wall-item">
                             <a href="https://www.youtube.com/watch?v=V_5UuVpviZc" target="_blank">
