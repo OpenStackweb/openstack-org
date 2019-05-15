@@ -120,7 +120,7 @@ final class PresentationSpeakerAdminController extends Controller
         JQueryValidateDependencies::renderRequirements(true, false);
         BootstrapTagsInputDependencies::renderRequirements();
         Requirements::javascript('summit/javascript/simple-sidebar.js');
-        Requirements::javascript('//tinymce.cachefly.net/4.3/tinymce.min.js');
+        TinyMceDependencies::renderRequirements();
         Requirements::javascript('summit/javascript/summitapp-editspeaker.js');
 
         return $this->parent->getViewer('EditSpeaker')->process
