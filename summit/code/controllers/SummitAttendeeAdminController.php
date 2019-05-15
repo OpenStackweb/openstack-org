@@ -134,7 +134,7 @@ final class SummitAttendeeAdminController extends Controller
         JSChosenDependencies::renderRequirements();
         Requirements::javascript('node_modules/bootstrap-3-typeahead/bootstrap3-typeahead.min.js');
         Requirements::javascript('summit/javascript/simple-sidebar.js');
-        Requirements::javascript('//tinymce.cachefly.net/4.3/tinymce.min.js');
+        TinyMceDependencies::renderRequirements();
         Requirements::javascript('summit/javascript/summitapp-editattendee.js');
 
         return $this->parent->getViewer('EditAttendee')->process

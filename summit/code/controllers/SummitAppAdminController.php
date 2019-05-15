@@ -196,7 +196,7 @@ final class SummitAppAdminController extends Controller implements PermissionPro
         Requirements::javascript('themes/openstack/javascript/bootstrap-paginator/src/bootstrap-paginator.js');
         Requirements::javascript('themes/openstack/javascript/jquery-ajax-loader.js');
         Requirements::javascript('summit/javascript/jquery.tabletoCSV.js');
-        Requirements::javascript('//tinymce.cachefly.net/4.3/tinymce.min.js');
+        TinyMceDependencies::renderRequirements();
 
         //JS libraries for feedback form and list
         Requirements::javascript('marketplace/code/ui/frontend/js/star-rating.min.js');

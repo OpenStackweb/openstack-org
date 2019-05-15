@@ -197,7 +197,7 @@ final class SummitEventAdminController extends Controller
         JQueryValidateDependencies::renderRequirements(true, false);
         Requirements::css('summit/css/summit-admin-edit-event.css');
         Requirements::javascript('summit/javascript/simple-sidebar.js');
-        Requirements::javascript('//tinymce.cachefly.net/4.3/tinymce.min.js');
+        TinyMceDependencies::renderRequirements();
         Requirements::javascript('summit/javascript/summitapp-editevent.js');
 
         return $this->parent->getViewer('EditEvent')->process

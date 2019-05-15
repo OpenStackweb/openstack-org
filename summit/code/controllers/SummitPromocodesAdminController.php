@@ -107,7 +107,7 @@ final class SummitPromocodesAdminController extends Controller
         Requirements::css('node_modules/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
         // tag input
         Requirements::javascript('summit/javascript/simple-sidebar.js');
-        Requirements::javascript('//tinymce.cachefly.net/4.3/tinymce.min.js');
+        TinyMceDependencies::renderRequirements();
         Requirements::javascript('summit/javascript/summitapp-editpromocode.js');
 
         return $this->parent->getViewer('editPromoCode')->process
@@ -171,7 +171,7 @@ final class SummitPromocodesAdminController extends Controller
         Requirements::css('summit/css/summit-admin-edit-promocode.css');
         Requirements::css('node_modules/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
         Requirements::javascript('summit/javascript/simple-sidebar.js');
-        Requirements::javascript('//tinymce.cachefly.net/4.3/tinymce.min.js');
+        TinyMceDependencies::renderRequirements();
         Requirements::javascript('summit/javascript/summitapp-editpromocode-sponsor.js');
 
         return $this->parent->getViewer('editPromoCodeSponsor')->process
@@ -202,7 +202,7 @@ final class SummitPromocodesAdminController extends Controller
         JQueryValidateDependencies::renderRequirements(true, false);
         Requirements::css('node_modules/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css');
         Requirements::javascript('summit/javascript/simple-sidebar.js');
-        Requirements::javascript('//tinymce.cachefly.net/4.3/tinymce.min.js');
+        TinyMceDependencies::renderRequirements();
         Requirements::javascript('summit/javascript/summitapp-promocodes-bulk.js');
 
         return $this->parent->getViewer('promocodes_bulk')->process

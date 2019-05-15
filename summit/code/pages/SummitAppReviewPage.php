@@ -31,7 +31,7 @@ class SummitAppReviewPage_Controller extends SummitPage_Controller
             return OpenStackIdCommon::doLogin();
 
         SweetAlert2Dependencies::renderRequirements();
-        //Requirements::javascript('//tinymce.cachefly.net/4.3/tinymce.min.js');
+        //TinyMceDependencies::renderRequirements();
         Requirements::javascript('summit/javascript/summitapp-review.js');
         Requirements::javascript('marketplace/code/ui/frontend/js/star-rating.min.js');
         Requirements::css("marketplace/code/ui/frontend/css/star-rating.min.css");

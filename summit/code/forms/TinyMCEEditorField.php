@@ -64,7 +64,7 @@ class TinyMCEEditorField extends TextareaField
 
     public function FieldHolder($attributes = array ()) {
 
-        Requirements::javascript('//tinymce.cachefly.net/4.3/tinymce.min.js');
+        TinyMceDependencies::renderRequirements();
 
         $script = '';
         $plugins = "'paste'";
