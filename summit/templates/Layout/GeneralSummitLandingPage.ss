@@ -16,18 +16,6 @@
 
                 </div>
             </div>
-            <div class="video-container last col-md-4 col-sm-12 col-xs-12">
-                <div class="item">
-                    <div class="video">
-                    </div>
-                    <h4>Shanghai, China</h4>
-                    <p>Nov 4-6, 2019</p>
-                        <p>
-                            <a class="btn register-btn-lrg" href="/summit/shanghai-2019">Learn More <i class="fa fa-arrow-right"></i></a>
-                        </p>
-
-                </div>
-            </div>
             <div class="video-container second col-md-4 col-sm-12 col-xs-12">
                 <div class="item">
                     <div class="video">
@@ -41,8 +29,8 @@
                     <h4>Denver, Colorado</h4>
                     <p>Apr 29-May 4, 2019</p>
                     <p>
-                        <a href="/videos/summits/denver-2019" target="_blank" class="btn register-btn-lrg eventbrite-register-link ">
-                            See Highlights 
+                        <a href="/videos/summits/denver-2019" target="_blank" class="btn register-btn-lrg ">
+                            See Highlights
                             <i class="fa fa-arrow-right"></i>
                         </a>
 
@@ -50,6 +38,21 @@
 
                 </div>
             </div>
+            <div class="video-container last col-md-4 col-sm-12 col-xs-12">
+                <div class="item">
+                    <div class="video">
+                    </div>
+                    <h4>Shanghai, China</h4>
+                    <p>Nov 4-6, 2019</p>
+                    <p>
+                        <a class="btn register-btn-lrg red eventbrite-register-link" href="/summit/shanghai-2019">
+                            Learn More <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </p>
+
+                </div>
+            </div>
+
 
         </div>
     </div>
