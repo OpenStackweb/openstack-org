@@ -53,6 +53,7 @@ final class EventCrudApi
             ),
             new SapphireEventPublishingService,
             new EventValidatorFactory,
+            null,
             SapphireTransactionManager::getInstance()
         );
     }

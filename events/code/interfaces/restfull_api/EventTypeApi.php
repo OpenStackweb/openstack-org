@@ -28,6 +28,7 @@ class EventTypeApi
             null,
             new SapphireEventPublishingService,
             new EventValidatorFactory,
+            null,
             SapphireTransactionManager::getInstance()
         );
     }
