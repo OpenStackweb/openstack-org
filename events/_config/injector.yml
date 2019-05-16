@@ -1,0 +1,37 @@
+---
+Name: 'events-injection'
+---
+Injector:
+  ExternalEventsApi:
+    class: MeetupApi
+  PageEventRepository:
+    class: SapphireEventRepository
+  EventRegistrationRequestFactory:
+    class: EventRegistrationRequestFactory
+  EventPublishingService:
+    class: SapphireEventPublishingService
+  EventValidatorFactory:
+    class: EventValidatorFactory
+  GeoCodingQueryRepository:
+    class: SapphireGeoCodingQueryRepository
+  UtilFactory:
+    class: UtilFactory
+  GeoCodingService:
+    class: GoogleGeoCodingService
+    constructor:
+      0: '%$GeoCodingQueryRepository'
+      1: '%$UtilFactory'
+      2: '%$TransactionManager'
+  EventManager:
+    class: EventManager
+    constructor:
+      0: '%$PageEventRepository'
+      1: '%$EventRegistrationRequestFactory'
+      2: '%$GeoCodingService'
+      3: '%$EventPublishingService'
+      4: '%$EventValidatorFactory'
+      5: '%$ExternalEventsApi'
+      6: '%$TransactionManager'
+  RssEventsDigestTask:
+    constructor:
+      0: '%$EventManager'

@@ -14,7 +14,7 @@
 /**
  * Class EventManager
  */
-final class EventManager {
+final class EventManager implements IEventManager {
 
 	/**
 	 * @var IEntityRepository
@@ -49,6 +49,7 @@ final class EventManager {
 	 * @param IGeoCodingService                $geo_coding_service
 	 * @param IEventPublishingService          $event_publishing_service
 	 * @param IEventValidatorFactory           $validator_factory
+     * @param IExternalEventsApi               $external_event_api
 	 * @param ITransactionManager              $tx_manager
 	 */
 	public function __construct(?IEntityRepository $event_repository,
@@ -56,21 +57,19 @@ final class EventManager {
 								?IGeoCodingService $geo_coding_service,
 								?IEventPublishingService $event_publishing_service,
 								?IEventValidatorFactory $validator_factory,
+                                ?IExternalEventsApi $external_event_api,
 	                            ITransactionManager $tx_manager){
-		$this->event_repository                      = $event_repository;
-		$this->tx_manager                            = $tx_manager;
-		$this->factory                               = $factory;
-		$this->geo_coding_service                    = $geo_coding_service;
-		$this->event_publishing_service              = $event_publishing_service;
-		$this->validator_factory                     = $validator_factory;
+
+		$this->event_repository            = $event_repository;
+		$this->tx_manager                  = $tx_manager;
+		$this->factory                     = $factory;
+		$this->geo_coding_service          = $geo_coding_service;
+		$this->event_publishing_service    = $event_publishing_service;
+		$this->validator_factory           = $validator_factory;
+		$this->external_event_api          = $external_event_api;
+        $this->external_event_api->setApiKey(MEETUP_API_KEY);
 	}
 
-    /**
-     * @param $id.event-type-link {
-
-}
-     * @return IEvent
-     */
     public function toggleSummitEvent($id){
         $event_repository          = $this->event_repository;
 
@@ -191,71 +190,42 @@ final class EventManager {
     }
 
     /**
-     * @param int $limit
-     * @return ArrayList
+     * @param int $pageSize
+     * @return array
      */
-    function rssEvents($limit = 7)
+    function rssEvents(int $pageSize = 20):array
     {
         try {
-            $feed = new RestfulService('https://groups.openstack.org/events-upcoming.xml', 7200);
+            return $this->external_event_api->getAllUpcomingEvents($pageSize);
         }
         catch(Exception $ex){
             SS_Log::log("It wasn't possible to get rss content from source. Isolated occurrences of this error can be ignored since temporary glitches accessing url could be the cause. Information will be ingested on next run if that's the case",SS_Log::ERR);
             echo $ex->getMessage();
+            return [];
         }
-
-        $result = new ArrayList();
-
-        try {
-            $feedXML = $feed->request()->getBody();
-            // Extract items from feed
-            $result = $feed->getValues($feedXML, 'channel', 'item');
-        }
-        catch(Exception $ex){
-            SS_Log::log($ex->getMessage(), SS_Log::ERR);
-            //echo $ex->getMessage();
-        }
-
-        foreach ($result as $item) {
-            $item->pubDate = date("D, M jS Y", strtotime($item->pubDate));
-            $DOM = new DOMDocument;
-            $DOM->loadHTML(html_entity_decode($item->description));
-            $span_tags = $DOM->getElementsByTagName('span');
-            foreach ($span_tags as $tag) {
-                if ($tag->getAttribute('property') == 'schema:startDate') {
-                    $item->startDate = $tag->getAttribute('content');
-                } else if ($tag->getAttribute('property') == 'schema:endDate') {
-                    $item->endDate = $tag->getAttribute('content');
-                }
-            }
-            $div_tags = $DOM->getElementsByTagName('div');
-            foreach ($div_tags as $tag) {
-                if ($tag->getAttribute('property') == 'schema:location') {
-                    $item->location = $tag->nodeValue;
-                }
-            }
-        }
-
-        return $result->limit($limit, 0);
     }
 
     /**
-     * @param array $rss_events
+     * @param $rss_events
+     * @return ArrayList
      */
     function rss2events($rss_events) {
         $events_array = new ArrayList();
         foreach ($rss_events as $item) {
-            $event_main_info = new EventMainInfo(html_entity_decode($item->title),$item->link,'Details','Meetups');
-            $event_start_date = DateTime::createFromFormat(DateTime::ISO8601, $item->startDate);
-            $event_end_date = DateTime::createFromFormat(DateTime::ISO8601, $item->endDate);
-            $event_duration = new EventDuration($event_start_date,$event_end_date);
-            $continent = $this->getContinentFromLocation($item->location);
+            $event_main_info = new EventMainInfo(html_entity_decode($item['name']),$item['link'],'Details','Meetups');
+            $event_start_date = DateTime::createFromFormat('Y-m-d H:i', $item['local_date'].' '.$item['local_time']);
+            $event_end_date = DateTime::createFromFormat('Y-m-d H:i', $item['local_date'].' '.$item['local_time']);
+            // default is 3 hours
+            $duration = isset($item['duration']) ? $item['duration']/1000: 3600 * 3;
+            $event_end_date = $event_end_date->add(new DateInterval(sprintf('PT%sS',$duration)));
+            $event_duration = new EventDuration($event_start_date, $event_end_date);
+            $continent = $this->getContinentFromLocation($item['venue']['country']);
 
             $event = new EventPage();
             $event->registerMainInfo($event_main_info);
             $event->registerDuration($event_duration);
-            $event->registerLocation($item->location, $continent);
-            $event->ExternalSourceId = explode(' ', $item->guid)[0];
+            $event->registerLocation(sprintf("%s, %s, %s, %s", $item['venue']['address_1'], $item['venue']['city'], $item['venue']['state'], $item['venue']['localized_country_name']), $continent);
+            $event->ExternalSourceId = $item['id'];
             $events_array->push($event);
         }
 
@@ -265,7 +235,7 @@ final class EventManager {
     function saveRssEvents($events_array) {
         foreach ($events_array as $event) {
 
-            $filter_array = array();
+            $filter_array = [];
             $filter_array["EventEndDate"] = $event->EventEndDate;
             $filter_array["ExternalSourceId"] = $event->ExternalSourceId;
 
@@ -312,6 +282,19 @@ final class EventManager {
             }
         }
         return '';
+    }
+
+    /**
+     * @param ArrayList $events_array
+     */
+    public function purgeRssEvents(ArrayList $events_array):void{
+        $this->tx_manager->transaction(function() use($events_array){
+            $events_to_purge = $this->event_repository->getRssForPurge($events_array);
+
+            foreach($events_to_purge as $event) {
+                $this->deleteEvent($event->ID);
+            }
+        });
     }
 
 } 
