@@ -224,7 +224,27 @@ final class EventManager implements IEventManager {
             $event = new EventPage();
             $event->registerMainInfo($event_main_info);
             $event->registerDuration($event_duration);
-            $event->registerLocation(sprintf("%s, %s, %s, %s", $item['venue']['address_1'], $item['venue']['city'], $item['venue']['state'], $item['venue']['localized_country_name']), $continent);
+            if(isset($item['venue'])) {
+                $venue = $item['venue'];
+                $location = '';
+                if(isset($venue['address_1'])) {
+                    if (!empty($location)) $location .= ', ';
+                    $location .= $venue['address_1'];
+                }
+                if(isset($venue['city'])) {
+                    if(!empty($location)) $location .= ', ';
+                    $location .= $venue['city'];
+                }
+                if(isset($venue['state'])){
+                    if(!empty($location)) $location .= ', ';
+                    $location .= $venue['state'];
+                }
+                if(isset($venue['localized_country_name'])) {
+                    if (!empty($location)) $location .= ', ';
+                    $location .= $venue['localized_country_name'];
+                }
+                $event->registerLocation($location, $continent);
+            }
             $event->ExternalSourceId = $item['id'];
             $events_array->push($event);
         }
