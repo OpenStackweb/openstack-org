@@ -23,6 +23,7 @@ final class EventRegistrationRequestForm extends SafeXSSForm {
             null,
             new SapphireEventPublishingService,
             new EventValidatorFactory,
+            null,
             SapphireTransactionManager::getInstance()
         );
 

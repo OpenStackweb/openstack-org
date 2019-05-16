@@ -113,6 +113,7 @@ class EventHolder_Controller extends Page_Controller {
             null,
             new SapphireEventPublishingService,
             new EventValidatorFactory,
+            null,
             SapphireTransactionManager::getInstance()
         );
     }
