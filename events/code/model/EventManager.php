@@ -67,7 +67,8 @@ final class EventManager implements IEventManager {
 		$this->event_publishing_service    = $event_publishing_service;
 		$this->validator_factory           = $validator_factory;
 		$this->external_event_api          = $external_event_api;
-        $this->external_event_api->setApiKey(MEETUP_API_KEY);
+		if(!is_null($this->external_event_api))
+            $this->external_event_api->setApiKey(MEETUP_API_KEY);
 	}
 
     public function toggleSummitEvent($id){
