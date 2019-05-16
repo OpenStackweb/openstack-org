@@ -31,13 +31,13 @@ final class SapphireEventRepository extends SapphireRepository {
     }
 
     public function getRssForPurge($pulled_events) {
-        $external_ids = array();
+        $external_ids = [];
         foreach ($pulled_events as $event) {
             $external_ids[] = $event->ExternalSourceId;
         }
 
-        $in_external_ids = implode(',',$external_ids);
+        $in_external_ids = implode("','",$external_ids);
 
-        return EventPage::get()->where("ExternalSourceId IS NOT NULL AND ExternalSourceId NOT IN (".$in_external_ids.")")->toArray();
+        return EventPage::get()->where("ExternalSourceId IS NOT NULL AND ExternalSourceId NOT IN ('".$in_external_ids."')")->toArray();
     }
 }

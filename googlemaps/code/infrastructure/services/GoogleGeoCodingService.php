@@ -51,9 +51,9 @@ final class GoogleGeoCodingService implements IGeoCodingService
      */
     private $factory;
 
-    public function __construct(IGeoCodingQueryRepository $repository,
-                                IUtilFactory $factory,
-                                ITransactionManager $tx_manager,
+    public function __construct(?IGeoCodingQueryRepository $repository,
+                                ?IUtilFactory $factory,
+                                ?ITransactionManager $tx_manager,
                                 $api_key = null,
                                 $client_id = null,
                                 $private_key = null)

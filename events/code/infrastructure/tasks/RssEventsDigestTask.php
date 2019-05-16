@@ -16,32 +16,33 @@
  */
 
 final class RssEventsDigestTask extends CronTask {
+
+    /**
+     * @var IEventManager
+     */
+    private $manager;
+
+    /**
+     * RssEventsDigestTask constructor.
+     * @param IEventManager $manager
+     */
+    public function __construct(IEventManager $manager)
+    {
+        parent::__construct();
+        $this->manager = $manager;
+    }
+
     function run(){
 
         try{
 
-            $repository = new SapphireEventRepository();
-            $tx_manager = SapphireTransactionManager::getInstance();
-            $event_manager = new EventManager(
-                $repository,
-                new EventRegistrationRequestFactory,
-                null,
-                new SapphireEventPublishingService,
-                new EventValidatorFactory,
-                $tx_manager
-            );
-
-            $rss_events = $event_manager->rssEvents(10000);
-            $events_array = $event_manager->rss2events($rss_events);
-            $event_manager->saveRssEvents($events_array);
+            $rss_events   = $this->manager->rssEvents(PHP_INT_MAX);
+            $events_array = $this->manager->rss2events($rss_events);
+            $this->manager->saveRssEvents($events_array);
 
             // purge events that no longer come in the xml
             if (count($events_array) > 0) {
-                $events_to_purge = $repository->getRssForPurge($events_array);
-
-                foreach($events_to_purge as $event) {
-                    $event_manager->deleteEvent($event->ID);
-                }
+                $this->manager->purgeRssEvents($events_array);
             }
 
             return 'OK';
