@@ -58,27 +58,29 @@ class AboutMascots_Controller extends Page_Controller {
                 }
                 else {
                     $bucket = CloudAssets::inst()->map($mascot_folder);
-                    $query = sprintf("%s?delimiter=/&prefix=%s/%s/", $bucket->getBaseURL(), Mascot::$mascots_folder, $mascot->CodeName);
-                    $response = $client->request('GET', $query);
-                    $image_array = [];
-                    $body = (string)$response->getBody();
-                    foreach (explode("\n", $body) as $file_url) {
-                        $image_array[] = sprintf("%s%s", $bucket->getBaseURL(), $file_url);
-                    }
-                    $mascot->MascotFiles      = implode(',', $image_array);
-                    $mascot->EPSThumbFileUrl  = sprintf("%s%s/eps_thumb.png", $bucket->getBaseURL(), Mascot::$mascots_folder );
-                    $data = [
-                            'MascotFiles'     => $mascot->MascotFiles,
+                    if ($bucket) {
+                        $query = sprintf("%s?delimiter=/&prefix=%s/%s/", $bucket->getBaseURL(), Mascot::$mascots_folder, $mascot->CodeName);
+                        $response = $client->request('GET', $query);
+                        $image_array = [];
+                        $body = (string)$response->getBody();
+                        foreach (explode("\n", $body) as $file_url) {
+                            $image_array[] = sprintf("%s%s", $bucket->getBaseURL(), $file_url);
+                        }
+                        $mascot->MascotFiles = implode(',', $image_array);
+                        $mascot->EPSThumbFileUrl = sprintf("%s%s/eps_thumb.png", $bucket->getBaseURL(), Mascot::$mascots_folder);
+                        $data = [
+                            'MascotFiles' => $mascot->MascotFiles,
                             'EPSThumbFileUrl' => $mascot->EPSThumbFileUrl
-                    ];
-                    // store on cache
-                    $this->getCache()->save
-                    (
-                        serialize($data),
-                        md5($mascot->CodeName),
-                        $tags             = [],
-                        $specificLifetime = 120
-                    );
+                        ];
+                        // store on cache
+                        $this->getCache()->save
+                        (
+                            serialize($data),
+                            md5($mascot->CodeName),
+                            $tags = [],
+                            $specificLifetime = 120
+                        );
+                    }
                 }
             }
             $mascotsAL->push($mascot);
