@@ -187,6 +187,8 @@ final class JobRegistrationRequestManager implements IJobRegistrationRequestMana
 			if(!$request) throw new NotFoundEntityException('JobRegistrationRequest',sprintf('id %s',$id ));
 
 			$job = $factory->buildJob($request);
+
+			//die(print_r($job));
             // force write we need the id
             $job->write();
 			//$job_id = $jobs_repository->add($job);

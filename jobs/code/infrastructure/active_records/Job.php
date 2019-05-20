@@ -81,7 +81,7 @@ final class Job	extends DataObject implements IJob {
 			switch($this->LocationType){
                 case self::LocationTypeVarious:{
 					$res = '';
-					foreach($this->locations() as $location){
+					foreach($this->Locations() as $location){
 						$str_location = $location->city();
 						$state = $location->state();
 						if(!empty($state))
@@ -135,14 +135,6 @@ final class Job	extends DataObject implements IJob {
     public function toggleFoundation() {
         $this->IsFoundationJob = !$this->IsFoundationJob;
     }
-
-	/**
-	 * @return IJobLocation[]
-	 */
-	public function locations()
-	{
-		return AssociationFactory::getInstance()->getOne2ManyAssociation($this,'Locations')->toArray();
-	}
 
 	public function addLocation(IJobLocation $location)
 	{

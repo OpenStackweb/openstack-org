@@ -125,7 +125,7 @@ final class JobFactory implements IJobFactory {
         $job->IsCOANeeded            = $request->IsCOANeeded;
         $job->TypeID                 = $request->TypeID;
         $job->RegistrationRequestID  = $request->ID;
-        
+
         //locations
 		foreach($request->getLocations() as $location)
 			$job->addLocation($location);
