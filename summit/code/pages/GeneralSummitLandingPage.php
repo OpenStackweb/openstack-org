@@ -59,6 +59,13 @@ class GeneralSummitLandingPage_Controller extends Page_Controller
         return ModelAsController::controller_for($summitPage);
     }
 
+    public function isMultiRegister() {
+        $summitPage = $this->getCurrentSummitPage();
+        if ($summitPage->Summit()->ID == 27) return true;
+        return false;
+
+    }
+
     function getMenuItems() {
         $summitPage = $this->getCurrentSummitPage();
 
