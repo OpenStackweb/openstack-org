@@ -20,11 +20,6 @@ interface IJob extends IEntity {
 	 */
 	public function deactivate();
 
-	/**
-	 * @return IJobLocation[]
-	 */
-	public function locations();
-
     /**
      * @param IJobLocation $location
      * @return mixed

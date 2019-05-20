@@ -78,7 +78,7 @@ final class JobsAssembler {
         if(!is_null($expiration_date))
             $res['expiration_date']    = $expiration_date->format('Y-m-d');
         $locations = array();
-        foreach($job->locations() as $location){
+        foreach($job->Locations() as $location){
             $l            = array();
             $l['city']    = $location->city();
             $l['state']   = $location->state();
