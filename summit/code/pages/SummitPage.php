@@ -303,7 +303,9 @@ class SummitPage_Controller extends Page_Controller
     }
 
     public function isMultiRegister() {
+        if ($this->Summit()->ID == 27) return true;
         return false;
+
     }
 
     public function getRegisterButtonLabel() {
