@@ -35,7 +35,7 @@
             <div class="col-sm-12">
                 <h1>$HeaderTitle</h1>
                 <h3>The Summit</h3>
-                <p>The OpenStack Summit is a four-day event covering everything Open Infrastructure. Content includes keynotes, presentations, panels, hands-on workshops, and collaborative working sessions. Expect to hear about the intersection of many open source infrastructure projects, including Ansible, Ceph, Kata Containers, Kubernetes, ONAP, OpenStack and more.</p>
+                <p>The Open Infrastructure Summit includes keynotes, presentations, panels, hands-on workshops, and collaborative working sessions covering over 30 open source projects. Expect to hear about the intersection of many open source infrastructure projects, including Ansible, Ceph, Kata Containers, Kubernetes, ONAP, OpenStack and more.</p>
             </div>
         </div>
     </div>
