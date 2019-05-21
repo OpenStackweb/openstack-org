@@ -1643,17 +1643,21 @@ footer {
   color: #fff; }
 
 .footer-bottom {
-  background: #222;
-  padding: 15px 0;
+  background: #ec1944;
+  padding: 50px 0;
   text-align: center;
-  width: 100%; }
+  width: 100%;
+  min-height: 200px;
+  margin-bottom: -50px;
+  vertical-align: middle;
+  }
 
 .feedback-input {
   display: inline-block;
-  background: #222;
-  border: 2px solid #444;
+  background: #ec1944;
+  border: 2px solid #fff;
   border-radius: 4px;
-  color: #777;
+  color: #fff;
   font-size: 12px;
   font-weight: 400;
   padding: 10px 20px;
@@ -1661,54 +1665,63 @@ footer {
 
 @media (max-width: 767px) {
   .feedback-input {
-    width: 70%; } }
+    width: 50%; } }
 
 .feedback-input::-webkit-input-placeholder {
-  color: #555;
+  color: #fff;
   font-size: 12px;
   font-weight: 400; }
 
 .feedback-input:-moz-placeholder {
   /* Firefox 18- */
-  color: #555;
+  color: #fff;
   font-size: 12px;
   font-weight: 400; }
 
 .feedback-input::-moz-placeholder {
   /* Firefox 19+ */
-  color: #555;
+  color: #fff;
   font-size: 12px;
   font-weight: 400; }
 
 .feedback-input:-ms-input-placeholder {
-  color: #555;
+  color: #fff;
   font-size: 12px;
   font-weight: 400; }
 
 .feedback-input:focus {
   outline: none;
-  border: 2px solid #666; }
+  border: 2px solid #fff; }
 
 .feedback-btn {
   margin-left: 11px;
   display: inline-block;
-  background: #222;
-  border: 2px solid #666;
+  background: #ec1944;
+  border: 2px solid #fff;
   border-radius: 4px;
-  color: #777;
+  color: #fff;
   font-size: 12px;
   font-weight: 400;
   padding: 10px 30px; }
 
+.footer-bottom h3 {
+  #fff;
+}
+
+.footer-bottom p {
+  color:#fff;
+  padding-bottom:15px;
+}
+
 @media (max-width: 767px) {
   .feedback-btn {
-    width: 18%;
+    width: 30%;
     margin-left: 2%;
     padding: 10px; } }
 
 .feedback-btn:hover {
-  border: 2px solid #888;
-  color: #999; }
+  border: 2px solid #ec1944;
+  color: #fff; }
 
 /*End Footer*/
 /* Line below navigation */
