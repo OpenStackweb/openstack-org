@@ -780,13 +780,14 @@ class Summit extends DataObject implements ISummit
                 if($day === false)
                     $day = DateTime::createFromFormat("Y-m-d H:i:s", $this->ScheduleDefaultStartDate);
             }
+            if($day instanceof DateTime) {
+                $start = $day->setTime(0, 0, 0)->format("Y-m-d H:i:s");
+                $end = $day->add(new DateInterval('PT23H59M59S'))->format("Y-m-d H:i:s");
 
-            $start = $day->setTime(0, 0, 0)->format("Y-m-d H:i:s");
-            $end = $day->add(new DateInterval('PT23H59M59S'))->format("Y-m-d H:i:s");
-
-            $query->addAndCondition(QueryCriteria::greaterOrEqual('StartDate',
-                $this->convertDateFromTimeZone2UTC($start)));
-            $query->addAndCondition(QueryCriteria::lowerOrEqual('EndDate', $this->convertDateFromTimeZone2UTC($end)));
+                $query->addAndCondition(QueryCriteria::greaterOrEqual('StartDate',
+                    $this->convertDateFromTimeZone2UTC($start)));
+                $query->addAndCondition(QueryCriteria::lowerOrEqual('EndDate', $this->convertDateFromTimeZone2UTC($end)));
+            }
         }
         if (!is_null($location)) {
             $query->addAndCondition(QueryCriteria::equal('LocationID', intval($location)));
