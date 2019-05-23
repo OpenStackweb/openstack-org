@@ -116,53 +116,53 @@
         </div>
         <div class="row">
           <div class="col-sm-5ths col-xs-4">
-            <a href="http://blog.kubernetes.io/2016/10/kubernetes-and-openstack-at-yahoo-japan.html" target="_blank">
+            <a href="https://www.openstack.org/videos/summits/denver-2019/kubernetes-7-lessons-learned-from-7-data-centers-in-7-months" target="_blank">
             <div class="video-wrapper small">
-              <img class="video-image" src="{$Top.CloudUrl("images/containers-r/users/yahoo-japan.jpg")}" alt="How We Architected and Run Kubernetes on OpenStack at Scale at Yahoo! JAPAN">
+              <img class="video-image" src="{$Top.CloudUrl('assets/containers/containers1.jpg')}" alt="Kubernetes - 7 lessons learned from 7 data centers in 7 months">
             </div>
             </a>
             <p class="video-title containers">
-                How We Architected and Run Kubernetes on OpenStack at Scale at Yahoo! JAPAN
+                Kubernetes - 7 lessons learned from 7 data centers in 7 months
             </p>
           </div>
           <div class="col-sm-5ths col-xs-4">
-            <a href="https://www.openstack.org/videos/sydney-2017/kubernetes-on-openstack-the-technical-details" target="_blank">
+            <a href="https://www.openstack.org/videos/summits/denver-2019/running-ipv6-enabled-containers-in-the-cloud" target="_blank">
             <div class="video-wrapper small">
-              <img class="video-image" src="{$Top.CloudUrl('assets/containers/sydney-video.jpg')}" alt="Kubernetes on OpenStack - the Technical Details">
+              <img class="video-image" src="{$Top.CloudUrl('assets/containers/containers2.jpg')}" alt="Running IPv6-enabled Containers in the cloud">
             </div>
             </a>
             <p class="video-title containers">
-                Kubernetes on OpenStack - the Technical Details
+                Running IPv6-enabled Containers in the cloud
             </p>
           </div>
           <div class="col-sm-5ths col-xs-4">
-            <a href="{$Top.CloudUrl('assets/containers/openstack-containers-12.4.pdf')}" target="_blank">
+            <a href="https://www.openstack.org/videos/summits/denver-2019/deploy-and-manage-kubernetes-clusters-in-a-multicloud-world" target="_blank">
             <div class="video-wrapper small">
-              <img class="video-image" src="{$Top.CloudUrl("images/containers-r/users/liveperson.jpg")}" alt="Containers and Cloud: Exploring the OpenStack Opportunity with LivePerson">
+              <img class="video-image" src="{$Top.CloudUrl('assets/containers/containers3.jpg)}" alt="Deploy and Manage Kubernetes Clusters in a Multicloud World">
             </div>
             </a>
             <p class="video-title containers">
-                Containers and Cloud: Exploring the OpenStack Opportunity with LivePerson
+                Deploy and Manage Kubernetes Clusters in a Multicloud World
             </p>
           </div>
           <div class="col-sm-5ths col-xs-4">
-            <a href="https://www.openstack.org/videos/sydney-2017/which-is-the-best-way-to-install-kubernetes-on-openstack " target="_blank">
+            <a href="https://www.openstack.org/videos/summits/denver-2019/container-use-cases-and-developments-at-the-cern-cloud" target="_blank">
             <div class="video-wrapper small">
-              <img class="video-image" src="{$Top.CloudUrl('assets/containers/sydney-video.jpg')}" alt="Which is the best way to install Kubernetes on OpenStack?">
+              <img class="video-image" src="{$Top.CloudUrl('assets/containers/containers4.jpg')}" alt="Deploy and Manage Kubernetes Clusters in a Multicloud World">
             </div>
             </a>
             <p class="video-title containers">
-                Which is the best way to install Kubernetes on OpenStack?
+                Deploy and Manage Kubernetes Clusters in a Multicloud World
             </p>
           </div>
           <div class="col-sm-5ths col-xs-4">
-            <a href="https://www.openstack.org/videos/sydney-2017/building-openstack-on-kubernetes-for-zero-downtime-large-scale-production-saas" target="_blank">
+            <a href="https://www.openstack.org/videos/summits/denver-2019/choosing-the-containerized-cloud-provisioning-tool-that-best-suits-your-need" target="_blank">
             <div class="video-wrapper small">
-              <img class="video-image" src="{$Top.CloudUrl('assets/containers/containers-workday.jpg')}" alt="Building OpenStack on Kubernetes for Zero Downtime Large Scale Production SaaS">
+              <img class="video-image" src="{$Top.CloudUrl('assets/containers/containers5.jpg')}" alt="Container use-cases and developments at the CERN cloud">
             </div>
             </a>
             <p class="video-title containers">
-                Building OpenStack on Kubernetes for Zero Downtime Large Scale Production SaaS
+                Container use-cases and developments at the CERN cloud
             </p>
           </div>
         </div>
