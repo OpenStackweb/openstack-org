@@ -138,7 +138,7 @@
           <div class="col-sm-5ths col-xs-4">
             <a href="https://www.openstack.org/videos/summits/denver-2019/deploy-and-manage-kubernetes-clusters-in-a-multicloud-world" target="_blank">
             <div class="video-wrapper small">
-              <img class="video-image" src="{$Top.CloudUrl('assets/containers/containers3.jpg)}" alt="Deploy and Manage Kubernetes Clusters in a Multicloud World">
+              <img class="video-image" src="{$Top.CloudUrl('assets/containers/containers3.jpg')}" alt="Deploy and Manage Kubernetes Clusters in a Multicloud World">
             </div>
             </a>
             <p class="video-title containers">
