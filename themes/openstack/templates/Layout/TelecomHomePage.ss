@@ -147,68 +147,68 @@
             </div>
             <div class="row">
                 <div class="col-sm-5ths">
-                    <a href="http://superuser.openstack.org/articles/superuser-roundtable-benefits-and-use-cases-for-network-functions-virtualization-nfv-ca4ba4be-6e20-4a91-a9a8-82eeffcf85f4" target="_blank">
-                    <div class="video-wrapper small">
-                        <div class="play-button">
-                            <img src="{$Top.CloudUrl("images/read.png")}">
-                        </div>
-                        <img class="video-image" src="{$Top.CloudUrl("images/nfv/featured-1.jpg")}" alt="Superuser roundtable: benefits and use cases for Network Functions Virtualization (NFV)">
-                    </div>
-                    </a>
-                    <p class="video-title">
-                        Superuser roundtable: benefits and use cases for Network Functions Virtualization (NFV)
-                    </p>
-                </div>
-                <div class="col-sm-5ths">
-                    <a href="https://www.openstack.org/summit/tokyo-2015/videos/presentation/ntt-communications-nfv-service-federation-across-heterogeneous-sites " target="_blank">
+                    <a href="https://www.openstack.org/videos/summits/denver-2019/demonstrating-nfv-is-possible-1st-open-multi-vendor-nfv-showcase" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
                             <img src="{$Top.CloudUrl("images/play-button.png")}">
                         </div>
-                        <img class="video-image" src="{$Top.CloudUrl("images/nfv/featured-2.jpg")}" alt="NTT Communications talks about their carrier-grade OpenStack NFV PoC ">
+                        <img class="video-image" src="{$Top.CloudUrl("assets/nfv/nfv1.jpg")}" alt="Demonstrating NFV is possible: 1st Open Multi-Vendor NFV Showcase">
                     </div>
                     </a>
                     <p class="video-title">
-                        NTT Communications talks about their carrier-grade OpenStack NFV PoC
+                        Demonstrating NFV is possible: 1st Open Multi-Vendor NFV Showcase
                     </p>
                 </div>
                 <div class="col-sm-5ths">
-                    <a href="https://www.openstack.org/summit/tokyo-2015/videos/presentation/telco-openstack-roadmap-panel" target="_blank">
+                    <a href="https://www.openstack.org/videos/summits/denver-2019/building-blocks-of-rakuten-mobile-telco-cloud" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
                             <img src="{$Top.CloudUrl("images/play-button.png")}">
                         </div>
-                        <img class="video-image" src="{$Top.CloudUrl("images/nfv/featured-3.jpg")}" alt="Join OpenStack telecom users for a look into the future with the Telco Roadmap Panel">
+                        <img class="video-image" src="{$Top.CloudUrl("assets/nfv/nfv2.jpg")}" alt="Building Blocks of Rakuten Mobile Telco Cloud">
+                    </div>
+                    </a>
+                    <p class="video-title">
+                        Building Blocks of Rakuten Mobile Telco Cloud
+                    </p>
+                </div>
+                <div class="col-sm-5ths">
+                    <a href="https://www.openstack.org/videos/summits/denver-2019/verizon-cloud-platform-operating-and-evolving-openstack-at-scale" target="_blank">
+                    <div class="video-wrapper small">
+                        <div class="play-button">
+                            <img src="{$Top.CloudUrl("images/play-button.png")}">
+                        </div>
+                        <img class="video-image" src="{$Top.CloudUrl("assets/nfv/nfv3.jpg")}" alt="Verizon Cloud Platform - Operating and Evolving OpenStack at Scale">
                     </div>
                     </a> 
                     <p class="video-title">
-                        Join OpenStack telecom users for a look into the future with the Telco Roadmap Panel
+                        Verizon Cloud Platform - Operating and Evolving OpenStack at Scale
                     </p>
                 </div>
                 <div class="col-sm-5ths">
-                    <a href="http://superuser.openstack.org/articles/creating-the-perfect-match-openstack-and-network-functions-virtualization" target="_blank">
+                    <a href="https://www.openstack.org/videos/summits/denver-2019/highly-efficient-edge-cloud-data-center-for-5g" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
                             <img src="{$Top.CloudUrl("images/play-button.png")}">
                         </div>
-                        <img class="video-image" src="{$Top.CloudUrl("images/nfv/featured-4.jpg")}" alt="Superuser TV interviews Kyle Mestery about how OpenStack and NFV work together">
+                        <img class="video-image" src="{$Top.CloudUrl("assets/nfv/nfv4.jpg")}" alt="Highly Efficient Edge Cloud Data Center for 5G">
                     </div>
                     </a>
                     <p class="video-title">
-                        Superuser TV interviews Kyle Mestery about how OpenStack and NFV work together
+                        Highly Efficient Edge Cloud Data Center for 5G
                     </p>
                 </div>
                <div class="col-sm-5ths">
-                    <a href="http://superuser.openstack.org/articles/openstack-and-network-function-virtualization-the-backstory" target="_blank">
+                    <a href="https://www.openstack.org/videos/summits/denver-2019/successfully-deploying-massive-applications-on-openstack" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="{$Top.CloudUrl("images/read.png")}">
+                            <img src="{$Top.CloudUrl("images/play-button.png")}">
                         </div>
-                        <img class="video-image" src="{$Top.CloudUrl("images/nfv/featured-5.jpg")}" alt="Get the backstory on OpenStack and NFV from the OPNFV Summit">
+                        <img class="video-image" src="{$Top.CloudUrl("assets/nfv/nfv5.jpg")}" alt="Successfully Deploying Massive Applications on OpenStack">
                     </div>
                     </a>
                     <p class="video-title">
-                        Get the backstory on OpenStack and NFV from the OPNFV Summit
+                        Successfully Deploying Massive Applications on OpenStack
                     </p>
                 </div>
             </div>
