@@ -222,66 +222,66 @@
             </div>
             <div class="row">
                 <div class="col-md-3 col-sm-6">
-                    <a href="http://superuser.openstack.org/articles/a-quick-take-on-edge-computing/" target="_blank">
+                    <a href="https://www.openstack.org/videos/summits/denver-2019/container-networking-at-the-edge-with-kuryr" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="https://d33wubrfki0l68.cloudfront.net/ae6ec7ae079aebf50ba0432743f680ce40c26624/3c5ba/images/play-button.png">
+                            <img src="{$Top.CloudUrl("images/play-button.png")}">
                         </div>
-                        <img class="video-image" src="https://d33wubrfki0l68.cloudfront.net/15e8e24f3b14faec256398644b9d371d6e90bd01/b7fd0/images/edge/videos/video1.jpg" alt="A quick take on edge computing">
+                        <img class="video-image" src="{$Top.CloudUrl('assets/edge/edge1.jpg')}" alt="Container Networking at the Edge with Kuryr">
                     </div>
                     </a>
                     <p class="video-title">
-                        A quick take on edge computing
+                        Container Networking at the Edge with Kuryr
                     </p>
                 </div>
                 <div class="col-md-3 col-sm-6">
-                    <a href="https://www.openstack.org/videos/boston-2017/taking-openstack-out-to-the-network-edges" target="_blank">
+                    <a href="https://www.openstack.org/videos/summits/denver-2019/far-edge-with-vms-and-containers-1" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="https://d33wubrfki0l68.cloudfront.net/ae6ec7ae079aebf50ba0432743f680ce40c26624/3c5ba/images/play-button.png">
+                            <img src="{$Top.CloudUrl("images/play-button.png")}">
                         </div>
-                        <img class="video-image" src="https://d33wubrfki0l68.cloudfront.net/831232936116ea26d247d4fc192f1c99d09591d1/c2aa6/images/edge/videos/video2.jpg" alt="Pushing the edges with OpenStack">
+                        <img class="video-image" src="{$Top.CloudUrl('assets/edge/edge2.jpg')}" alt="Far Edge with VMs and Containers">
                     </div>
                     </a>
                     <p class="video-title">
-                        Taking OpenStack Out to the Network Edges
+                        Far Edge with VMs and Containers
                     </p>
                 </div>
                 <div class="col-md-3 col-sm-6">
-                    <a href="https://www.openstack.org/videos/boston-2017/implications-of-5g-and-edge-computing-on-openstack" target="_blank">
+                    <a href="https://www.openstack.org/videos/summits/denver-2019/implementing-localization-into-openstack-cli-for-a-free-collaboration-of-edge-openstack-clouds" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="https://d33wubrfki0l68.cloudfront.net/ae6ec7ae079aebf50ba0432743f680ce40c26624/3c5ba/images/play-button.png">
+                            <img src="{$Top.CloudUrl("images/play-button.png")}">
                         </div>
-                        <img class="video-image" src="https://d33wubrfki0l68.cloudfront.net/59cc2672114c26e4f811058d9fe97016a16ccde9/7527c/images/edge/videos/video3.jpg" alt="Implications of 5G and Edge Computing on OpenStack">
+                        <img class="video-image" src="{$Top.CloudUrl('assets/edge/edge3.jpg')}" alt="Implementing Localization into OpenStack CLI for a Free Collaboration of Edge OpenStack Clouds">
                     </div>
                     </a>
                     <p class="video-title">
-                        Implications of 5G and Edge Computing on OpenStack
+                        Implementing Localization into OpenStack CLI for a Free Collaboration of Edge OpenStack Clouds
                     </p>
                 </div>
                 <div class="col-md-3 col-sm-6">
-                    <a href="https://www.openstack.org/videos/boston-2017/toward-fog-edge-and-nfv-deployments-evaluating-openstack-wanwide" target="_blank">
+                    <a href="https://www.openstack.org/videos/summits/berlin-2018/5g-oriented-distributed-cloud-solution" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="https://d33wubrfki0l68.cloudfront.net/ae6ec7ae079aebf50ba0432743f680ce40c26624/3c5ba/images/play-button.png">
+                            <img src="{$Top.CloudUrl("images/play-button.png")}">
                         </div>
-                        <img class="video-image" src="https://d33wubrfki0l68.cloudfront.net/ad33e0f914ddb971b299380eabb53d0e578b1211/f7270/images/edge/videos/video4.jpg" alt="Toward fog, edge and nfv deployments: evaluating OpenStack WANwide">
+                        <img class="video-image" src="{$Top.CloudUrl('assets/edge/edge4.jpg')}" alt="5G-Oriented Distributed Cloud Solution">
                     </div>
                     </a>
                     <p class="video-title">
-                        Toward fog, edge and nfv deployments: evaluating OpenStack WANwide
+                        5G-Oriented Distributed Cloud Solution
                     </p>
                 </div>
             </div>
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-md-3 col-sm-6">
                     <a href="https://www.openstack.org/videos/boston-2017/telco-edge-cloud-use-cases-and-container-networking" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="https://d33wubrfki0l68.cloudfront.net/ae6ec7ae079aebf50ba0432743f680ce40c26624/3c5ba/images/play-button.png">
+                            <img src="{$Top.CloudUrl("images/play-button.png")}">
                         </div>
-                        <img class="video-image" src="https://d33wubrfki0l68.cloudfront.net/d15ba48c5d90dc85847b76a0796a5bc21c168e89/5c3c4/images/edge/videos/video5.jpg" alt="Telco edge cloud use cases and container networking">
+                        <img class="video-image" src="{$Top.CloudUrl('assets/edge/edge5.jpg')}" alt="Telco edge cloud use cases and container networking">
                     </div>
                     </a>
                     <p class="video-title">
@@ -292,9 +292,9 @@
                     <a href="https://www.openstack.org/videos/boston-2017/when-one-cloud-is-not-enough-an-overview-of-sites-regions-edges-distributed-clouds-and-more" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="https://d33wubrfki0l68.cloudfront.net/ae6ec7ae079aebf50ba0432743f680ce40c26624/3c5ba/images/play-button.png">
+                            <img src="{$Top.CloudUrl("images/play-button.png")}">
                         </div>
-                        <img class="video-image" src="https://d33wubrfki0l68.cloudfront.net/7a014e48c2a4e8ca4abd4a2df59f0c645128542c/b0954/images/edge/videos/video6.jpg" alt="When one cloud is not enough: an overview of sites, regions, edges, distributed clouds, and more">
+                        <img class="video-image" src="{$Top.CloudUrl('assets/edge/edge6.jpg')}" alt="When one cloud is not enough: an overview of sites, regions, edges, distributed clouds, and more">
                     </div>
                     </a>
                     <p class="video-title">
@@ -305,9 +305,9 @@
                     <a href="https://www.openstack.org/videos/barcelona-2016/delivering-composable-nfv-services-for-business-residential-and-mobile-edge" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="https://d33wubrfki0l68.cloudfront.net/ae6ec7ae079aebf50ba0432743f680ce40c26624/3c5ba/images/play-button.png">
+                            <img src="{$Top.CloudUrl("images/play-button.png")}">
                         </div>
-                        <img class="video-image" src="https://d33wubrfki0l68.cloudfront.net/aece8bc959eded7b629bb7a78b69c1a44d108b21/aa89e/images/edge/videos/video7.jpg" alt="Delivering composable nfv services for business, residential, and mobile edge">
+                        <img class="video-image" src="{$Top.CloudUrl('assets/edge/edge7.jpg')}" alt="Delivering composable nfv services for business, residential, and mobile edge">
                     </div>
                     </a>
                     <p class="video-title">
@@ -318,15 +318,15 @@
                     <a href="https://www.openstack.org/videos/barcelona-2016/red-hat-mobile-edge-computing-in-support-of-iot" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="https://d33wubrfki0l68.cloudfront.net/ae6ec7ae079aebf50ba0432743f680ce40c26624/3c5ba/images/play-button.png">
+                            <img src="{$Top.CloudUrl("images/play-button.png")}">
                         </div>
-                        <img class="video-image" src="https://d33wubrfki0l68.cloudfront.net/9e8d5460e80efe6f525bc70b297463d0da5dd50e/e0f30/images/edge/videos/video8.jpg" alt="Red Hat: mobile edge computing in support of IOT">
+                        <img class="video-image" src="{$Top.CloudUrl('assets/edge/edge8.jpg')}" alt="Red Hat: mobile edge computing in support of IOT">
                     </div>
                     </a>
                     <p class="video-title">
                         Red Hat: mobile edge computing in support of IOT
                     </p>
-                </div>
+                </div> -->
             </div>
             <div class="row">
                 <div class="col-sm-12">
@@ -342,7 +342,7 @@
                     <a href="http://www.futureofbusinessandtech.com/business-solutions/why-edge-computing-is-the-clouds-next-frontier" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="https://d33wubrfki0l68.cloudfront.net/90ed7324cc5f065ddfbd41aeade1f7e4b3cab2ac/4d6ef/images/read.png">
+                            <img src="{$Top.CloudUrl("images/play-read.png")}">
                         </div>
                         <img class="video-image" src="https://d33wubrfki0l68.cloudfront.net/f8e4ecf1b4a0efe56e6adaa961985e94d7b8efde/47f6e/images/edge/articles/article1.jpg" alt="image">
                     </div>
@@ -355,7 +355,8 @@
                     <a href="https://opensource.com/article/17/5/openstack-summit-news" target="_blank">
                         <div class="video-wrapper small">
                             <div class="play-button">
-                                <img src="https://d33wubrfki0l68.cloudfront.net/90ed7324cc5f065ddfbd41aeade1f7e4b3cab2ac/4d6ef/images/read.png">
+                                <img src="{$Top.CloudUrl("images/play-read.png")}">
+
                             </div>
                             <img class="video-image" src="https://d33wubrfki0l68.cloudfront.net/b19180f1123bf709a5333b58ffd5c859f5ef2adc/c7805/images/edge/articles/article3.jpg" alt="image">
                         </div>
@@ -368,7 +369,8 @@
                     <a href="https://thenewstack.io/open-infrastructure-operators-rally-around-edge-computing/" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="https://d33wubrfki0l68.cloudfront.net/90ed7324cc5f065ddfbd41aeade1f7e4b3cab2ac/4d6ef/images/read.png">
+                            <img src="{$Top.CloudUrl("images/play-read.png")}">
+
                         </div>
                         <img class="video-image" src="{$Top.CloudUrl('assets/edge/openinfraedge.jpg')}" alt="image">
                     </div>
@@ -381,7 +383,8 @@
                     <a href="http://www.computerweekly.com/news/252435050/OpenStack-Overcoming-edge-computing-adoption-barriers-demands-open-source-community-collaboration" target="_blank">
                         <div class="video-wrapper small">
                             <div class="play-button">
-                                <img src="https://d33wubrfki0l68.cloudfront.net/90ed7324cc5f065ddfbd41aeade1f7e4b3cab2ac/4d6ef/images/read.png">
+                                <img src="{$Top.CloudUrl("images/play-read.png")}">
+
                             </div>
                             <img class="video-image" src="{$Top.CloudUrl('assets/edge/opensourcecollaboration.jpg')}" alt="image">
                         </div>
@@ -441,16 +444,16 @@
     <div class="summit-promo containers">
         <div class="container">
             <div class="row">
-                <div class="col-sm-8">
+                <div class="col-sm-10">
                     <h3>Everything you need to know about Open Infrastructure + Edge Computing</h3>
                     <p>Open infrastructure operators and developers shared architectures, technology requirements and the open source components required for edge computing.
                     </p>
                     <p>&nbsp;</p>
                     <div class="nfv-summit-register-btn">
-                        <a href="/videos/summits/berlin-2018/tracks/edge-infra" class="nfv-summit-btn" target="_blank">Watch the Session Videos <i class="fa fa-chevron-right"></i></a>
+                        <a href="/videos/summits/denver-2019/tracks/edge-infra" class="nfv-summit-btn" target="_blank">Watch the Session Videos <i class="fa fa-chevron-right"></i></a>
                     </div>
                 </div>
-                  <div class="col-sm-4">
+                <!-- <div class="col-sm-4">
                       <div class="nfv-summit-right">
                           <img class="nfv-summit-logo" src="{$Top.CloudUrl('assets/Uploads/arrows.svg')}" alt="Open Infrastructure Summit">
                           <div class="nfv-summit-dates containers"><strong>Open Infrastructure Summit</strong>
@@ -460,7 +463,7 @@
                               <a href="https://www.openstack.org/summit/denver-2018/" class="nfv-summit-btn red" target="_blank">Join Us in Denver <i class="fa fa-chevron-right"></i></a>
                           </div>
                       </div>
-                  </div>
+                  </div> -->
             </div>
         </div>
     </div>

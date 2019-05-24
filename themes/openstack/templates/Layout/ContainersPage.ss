@@ -290,16 +290,16 @@
     <div class="summit-promo containers">
       <div class="container">
           <div class="row">
-              <div class="col-sm-8">
+              <div class="col-sm-10">
                   <h3>Everything you need to know about Containers and Open Infrastructure</h3>
                   <p>From container security to use cases combining Kubernetes or Kata Containers with other technologies, over 100 sessions share how organizations are achieving results with container technologies.  
                   </p>
                   <p>&nbsp;</p>
                   <div class="nfv-summit-register-btn">
-                      <a href="/videos/summits/berlin-2018/tracks/container-infrastructure" class="nfv-summit-btn" target="_blank">Watch the Session Videos <i class="fa fa-chevron-right"></i></a>
+                      <a href="/videos/summits/denver-2019/tracks/container-infrastructure" class="nfv-summit-btn" target="_blank">Watch the Session Videos <i class="fa fa-chevron-right"></i></a>
                   </div>
               </div>
-              <div class="col-sm-4">
+              <!-- <div class="col-sm-4">
                   <div class="nfv-summit-right">
                       <img class="nfv-summit-logo" src="{$Top.CloudUrl('assets/Uploads/arrows.svg')}" alt="Open Infrastructure Summit">
                       <div class="nfv-summit-dates containers"><strong>Open Infrastructure Summit</strong>
@@ -309,7 +309,7 @@
                           <a href="https://www.openstack.org/summit/denver-2018/" class="nfv-summit-btn red" target="_blank">Join Us in Denver <i class="fa fa-chevron-right"></i></a>
                       </div>
                   </div>
-              </div>
+              </div> -->
           </div>
       </div>
     </div>
