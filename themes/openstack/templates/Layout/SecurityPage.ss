@@ -206,42 +206,42 @@
             </div>
             <div class="row">
                 <div class="col-md-4">
-                    <a href="http://superuser.openstack.org/articles/an-openstack-security-primer" target="_blank">
-                    <div class="video-wrapper small">
-                        <div class="play-button">
-                            <img src="{$Top.CloudUrl("images/read.png")}">
-                        </div>
-                        <img class="video-image" src="{$Top.CloudUrl("images/security/featured1.jpg")}" alt="User success stories">
-                    </div> 
-                    </a> 
-                    <p class="video-title" style="width: 100%;">
-                        An OpenStack Security primer
-                    </p>
-                </div> 
-                <div class="col-md-4">
-                    <a href="http://superuser.openstack.org/articles/get-to-know-the-openstack-security-project" target="_blank">
+                    <a href="https://www.openstack.org/videos/summits/denver-2019/secure-data-analysis-with-openstack-and-asperathos" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
                             <img src="{$Top.CloudUrl("images/play-button.png")}">
                         </div>
-                        <img class="video-image" src="{$Top.CloudUrl("images/security/featured2.jpg")}" alt="Superuser TV interview with Travis McPeak, OpenStack Security Architect: Getting to Know the OpenStack Security Project">
+                        <img class="video-image" src="{$Top.CloudUrl("assets/security/security1.jpg")}" alt="Secure Data Analysis with OpenStack and Asperathos">
+                    </div> 
+                    </a> 
+                    <p class="video-title" style="width: 100%;">
+                        Secure Data Analysis with OpenStack and Asperathos
+                    </p>
+                </div> 
+                <div class="col-md-4">
+                    <a href="https://www.openstack.org/videos/summits/denver-2019/the-cloud-security-journey-audit-compliance-and-governance-for-your-openstack-and-hybrid-cloud" target="_blank">
+                    <div class="video-wrapper small">
+                        <div class="play-button">
+                            <img src="{$Top.CloudUrl("images/play-button.png")}">
+                        </div>
+                        <img class="video-image" src="{$Top.CloudUrl("assets/security/security2.jpg")}" alt="The Cloud Security Journey: Audit, Compliance, and Governance for your OpenStack and Hybrid Cloud">
                     </div>
                     </a>
                     <p class="video-title">
-                        Superuser TV interview with Travis McPeak, OpenStack Security Architect: Getting to Know the OpenStack Security Project
+                        The Cloud Security Journey: Audit, Compliance, and Governance for your OpenStack and Hybrid Cloud
                     </p>
                 </div>
                 <div class="col-md-4">
-                    <a href="http://www.openstack.org/analysts" target="_blank">
+                    <a href="https://www.openstack.org/videos/summits/denver-2019/evaluating-resiliency-security-and-chaos-testing-tools-for-containerized-openstack-deployment" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="{$Top.CloudUrl("images/read.png")}">
+                            <img src="{$Top.CloudUrl("images/play-button.png")}">
                         </div>
-                        <img class="video-image" src="{$Top.CloudUrl("images/security/featured3.jpg")}" alt="Analysts report OpenStack is Ready for Business">
+                        <img class="video-image" src="{$Top.CloudUrl("assets/security/security3.jpg")}" alt="Evaluating resiliency, security & chaos testing tools for containerized OpenStack deployment">
                     </div>
                     </a>
                     <p class="video-title">
-                        Analysts report OpenStack is Ready for Business
+                        Evaluating resiliency, security & chaos testing tools for containerized OpenStack deployment
                     </p>
                 </div>
             </div>
