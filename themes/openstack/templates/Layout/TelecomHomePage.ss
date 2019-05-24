@@ -220,7 +220,7 @@
     <div class="summit-promo containers">
         <div class="container">
             <div class="row">
-                <div class="col-sm-8">
+                <div class="col-sm-10">
                     <h3>Hear how the world’s leading telecoms are using Open Infrastructure for NFV and Edge Computing</h3>
                     <p>
                         Telecoms including AT&T, Verizon, Orange, China Mobile and T-Mobile shared how they’re integrating open source technologies to power their infrastructure for use cases ranging from edge computing and NFV to 5G. 
@@ -228,10 +228,10 @@
                     <p>&nbsp;</p>
 
                     <div class="nfv-summit-register-btn">
-                        <a href="/videos/berlin-2018/tracks/telecom-nfv" class="nfv-summit-btn" target="_blank">Learn More <i class="fa fa-chevron-right"></i></a>
+                        <a href="/videos/summits/denver-2019/tracks/telecom-nfv" class="nfv-summit-btn" target="_blank">Learn More <i class="fa fa-chevron-right"></i></a>
                     </div>
                 </div>
-                  <div class="col-sm-4">
+                <!-- <div class="col-sm-4">
                       <div class="nfv-summit-right">
                           <img class="nfv-summit-logo" src="{$Top.CloudUrl('assets/Uploads/arrows.svg')}" alt="Open Infrastructure Summit">
                           <div class="nfv-summit-dates containers"><strong>Open Infrastructure Summit</strong>
@@ -241,7 +241,7 @@
                               <a href="https://www.openstack.org/summit/denver-2018/" class="nfv-summit-btn red" target="_blank">Join Us in Denver <i class="fa fa-chevron-right"></i></a>
                           </div>
                       </div>
-                  </div>
+                  </div> -->
             </div>
         </div>
     </div>
