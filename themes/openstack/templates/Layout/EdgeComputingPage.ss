@@ -274,7 +274,7 @@
                     </p>
                 </div>
             </div>
-            <!-- <div class="row">
+            <div class="row">
                 <div class="col-md-3 col-sm-6">
                     <a href="https://www.openstack.org/videos/summits/berlin-2018/whats-behind-8k-video-streaming-on-edge-cloud" target="_blank">
                     <div class="video-wrapper small">
@@ -326,7 +326,7 @@
                     <p class="video-title">
                         Living on the Edge – combining OpenStack, Kubernetes, and Tungsten Fabric to make Edge Computing a reality.
                     </p>
-                </div> -->
+                </div>
             </div>
             <div class="row">
                 <div class="col-sm-12">
@@ -342,7 +342,7 @@
                     <a href="http://www.futureofbusinessandtech.com/business-solutions/why-edge-computing-is-the-clouds-next-frontier" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="{$Top.CloudUrl("images/play-read.png")}">
+                            <img src="{$Top.CloudUrl("images/read.png")}">
                         </div>
                         <img class="video-image" src="https://d33wubrfki0l68.cloudfront.net/f8e4ecf1b4a0efe56e6adaa961985e94d7b8efde/47f6e/images/edge/articles/article1.jpg" alt="image">
                     </div>
@@ -355,7 +355,7 @@
                     <a href="https://opensource.com/article/17/5/openstack-summit-news" target="_blank">
                         <div class="video-wrapper small">
                             <div class="play-button">
-                                <img src="{$Top.CloudUrl("images/play-read.png")}">
+                                <img src="{$Top.CloudUrl("images/read.png")}">
 
                             </div>
                             <img class="video-image" src="https://d33wubrfki0l68.cloudfront.net/b19180f1123bf709a5333b58ffd5c859f5ef2adc/c7805/images/edge/articles/article3.jpg" alt="image">
@@ -369,7 +369,7 @@
                     <a href="https://thenewstack.io/open-infrastructure-operators-rally-around-edge-computing/" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
-                            <img src="{$Top.CloudUrl("images/play-read.png")}">
+                            <img src="{$Top.CloudUrl("images/read.png")}">
 
                         </div>
                         <img class="video-image" src="{$Top.CloudUrl('assets/edge/openinfraedge.jpg')}" alt="image">
@@ -383,7 +383,7 @@
                     <a href="http://www.computerweekly.com/news/252435050/OpenStack-Overcoming-edge-computing-adoption-barriers-demands-open-source-community-collaboration" target="_blank">
                         <div class="video-wrapper small">
                             <div class="play-button">
-                                <img src="{$Top.CloudUrl("images/play-read.png")}">
+                                <img src="{$Top.CloudUrl("images/read.png")}">
 
                             </div>
                             <img class="video-image" src="{$Top.CloudUrl('assets/edge/opensourcecollaboration.jpg')}" alt="image">
@@ -406,17 +406,17 @@
             <div class="row">
                 <div class="col-sm-4">
                     <a href="http://openedgecomputing.org/" target="_blank">
-                        <img src="https://d33wubrfki0l68.cloudfront.net/f395f3eb9e4ad700057f797aebc7cef8b7327a11/19d05/images/edge/open-edge.png" class="open-edge" alt="Open Edge Computing">
+                        <img src="{$Top.CloudUrl('images/edge/open-edge.png')}" class="open-edge" alt="Open Edge Computing">
                     </a>
                 </div>
                 <div class="col-sm-4">
                     <a href="http://www.etsi.org/technologies-clusters/technologies/multi-access-edge-computing" target="_blank">
-                        <img src="https://d33wubrfki0l68.cloudfront.net/d50408e3cdce034835af79f645ea4ff563956b09/92b88/images/edge/etsi.png" class="etsi" alt="ETSI">
+                        <img src="{$Top.CloudUrl('images/edge/etsi.png')}" class="etsi" alt="ETSI">
                     </a>
                 </div>
                 <div class="col-sm-4">
                         <a href="http://beyondtheclouds.github.io" target="_blank">
-                            <img src="{$Top.CloudUrl("images/edge-computing/discovery-sticker.png")}" class="discover" alt="beyondtheclouds">
+                            <img src="{$Top.CloudUrl('images/edge-computing/discovery-sticker.png')}" class="discover" alt="beyondtheclouds">
                         </a>
                 </div>
             </div>
