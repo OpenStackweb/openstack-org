@@ -276,55 +276,55 @@
             </div>
             <!-- <div class="row">
                 <div class="col-md-3 col-sm-6">
-                    <a href="https://www.openstack.org/videos/boston-2017/telco-edge-cloud-use-cases-and-container-networking" target="_blank">
+                    <a href="https://www.openstack.org/videos/summits/berlin-2018/whats-behind-8k-video-streaming-on-edge-cloud" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
                             <img src="{$Top.CloudUrl("images/play-button.png")}">
                         </div>
-                        <img class="video-image" src="{$Top.CloudUrl('assets/edge/edge5.jpg')}" alt="Telco edge cloud use cases and container networking">
+                        <img class="video-image" src="{$Top.CloudUrl('assets/edge/edge5.jpg')}" alt="What's behind 8K Video Streaming on Edge Cloud?">
                     </div>
                     </a>
                     <p class="video-title">
-                        Telco edge cloud use cases and container networking
+                        What's behind 8K Video Streaming on Edge Cloud?
                     </p>
                 </div>
                 <div class="col-md-3 col-sm-6">
-                    <a href="https://www.openstack.org/videos/boston-2017/when-one-cloud-is-not-enough-an-overview-of-sites-regions-edges-distributed-clouds-and-more" target="_blank">
+                    <a href="https://www.openstack.org/videos/summits/berlin-2018/edge-resource-management-systems-from-today-to-tomorrow" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
                             <img src="{$Top.CloudUrl("images/play-button.png")}">
                         </div>
-                        <img class="video-image" src="{$Top.CloudUrl('assets/edge/edge6.jpg')}" alt="When one cloud is not enough: an overview of sites, regions, edges, distributed clouds, and more">
+                        <img class="video-image" src="{$Top.CloudUrl('assets/edge/edge6.jpg')}" alt="Edge Resource Management Systems: From Today to Tomorrow">
                     </div>
                     </a>
                     <p class="video-title">
-                        When one cloud is not enough: an overview of sites, regions, edges, distributed clouds, and more
+                        Edge Resource Management Systems: From Today to Tomorrow
                     </p>
                 </div>
                 <div class="col-md-3 col-sm-6">
-                    <a href="https://www.openstack.org/videos/barcelona-2016/delivering-composable-nfv-services-for-business-residential-and-mobile-edge" target="_blank">
+                    <a href="https://www.openstack.org/videos/summits/berlin-2018/realization-of-infrastructure-and-network-apis-at-the-edge" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
                             <img src="{$Top.CloudUrl("images/play-button.png")}">
                         </div>
-                        <img class="video-image" src="{$Top.CloudUrl('assets/edge/edge7.jpg')}" alt="Delivering composable nfv services for business, residential, and mobile edge">
+                        <img class="video-image" src="{$Top.CloudUrl('assets/edge/edge7.jpg')}" alt="Realization of Infrastructure and Network APIs at the Edge">
                     </div>
                     </a>
                     <p class="video-title">
-                        Delivering composable nfv services for business, residential, and mobile edge
+                        Realization of Infrastructure and Network APIs at the Edge
                     </p>
                 </div>
                 <div class="col-md-3 col-sm-6">
-                    <a href="https://www.openstack.org/videos/barcelona-2016/red-hat-mobile-edge-computing-in-support-of-iot" target="_blank">
+                    <a href="https://www.openstack.org/videos/summits/berlin-2018/living-on-the-edge-combining-openstack-kubernetes-and-tungsten-fabric-to-make-edge-computing-a-reality" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
                             <img src="{$Top.CloudUrl("images/play-button.png")}">
                         </div>
-                        <img class="video-image" src="{$Top.CloudUrl('assets/edge/edge8.jpg')}" alt="Red Hat: mobile edge computing in support of IOT">
+                        <img class="video-image" src="{$Top.CloudUrl('assets/edge/edge8.jpg')}" alt="Living on the Edge – combining OpenStack, Kubernetes, and Tungsten Fabric to make Edge Computing a reality.">
                     </div>
                     </a>
                     <p class="video-title">
-                        Red Hat: mobile edge computing in support of IOT
+                        Living on the Edge – combining OpenStack, Kubernetes, and Tungsten Fabric to make Edge Computing a reality.
                     </p>
                 </div> -->
             </div>
