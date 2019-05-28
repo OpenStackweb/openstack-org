@@ -87,164 +87,387 @@
         </div>
     </div>
 </div>
-<!-- <div class="light about-summit-users-wrapper" id="{$Name}">
+<div class="light about-summit-users-wrapper" id="{$Name}">
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-lg-8 col-md-6">
-                <h3 class="title-section">Shangai 2019 Open Infrastructure Summit Featured Speakers</h3>
+                <h3 class="title-section">Shangai 2019 Open Infrastructure Summit Programming Committee</h3>
+                <!-- AI, ML, HPC -->
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/Uploads/baidu.jpg')}" alt="yu bai" class="summit-user-image">
-                        </div>
-                        <div class="info">
-                            <div class="name">Yu Bai</div>
-                            <div class="title">Baidu</div>
-                            <div class="topic">Deploying Kata Containers on the Edge</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
-                    <div class="summit-user-section">
-                        <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/profile-images/duc-new-me.jpg')}" alt="Duc Truong"
+                            <img src="{$Top.CloudUrl('assets/MohamedElsakhawy.jpg')}" alt="Mohamed Elsakhawy"
                                  class="summit-user-image">
                         </div>
                         <div class="info">
-                            <div class="name">Duc Truong</div>
-                            <div class="title">Blizzard Entertainment</div>
-                            <div class="topic">Autoscaling with OpenStack for Overwatch</div>
+                            <div class="name">Mohamed Elsakhawy</div>
+                            <div class="title">Compute Canada / SHARCNET</div>
+                            <div class="topic">AI, Machine Learning, HPC</div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/Uploads/chsmall.jpg')}" alt="Chris Small" class="summit-user-image">
-                        </div>
-                        <div class="info">
-                            <div class="name">Chris Small</div>
-                            <div class="title">Boeing</div>
-                            <div class="topic">OpenStack Upgrades</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
-                    <div class="summit-user-section">
-                        <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/Uploads/JenniferCloer.jpg')}" alt="Jennifer Cloer" class="summit-user-image">
-                        </div>
-                        <div class="info">
-                            <div class="name">Jennifer Cloer</div>
-                            <div class="title">Chasing Grace Project </div>
-                            <div class="topic">Diversity in Tech</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
-                    <div class="summit-user-section">
-                        <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/Uploads/+.jpg')}" alt="Xiaoguang Zhang"
+                            <img src="{$Top.CloudUrl('assets/FredLi.jpg')}" alt="Fred Li"
                                  class="summit-user-image">
                         </div>
                         <div class="info">
-                            <div class="name">Xiaoguang Zhang</div>
+                            <div class="name">Fred Li</div>
+                            <div class="title">Huawei</div>
+                            <div class="topic">AI, Machine Learning, HPC</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/SundarNadathur.jpg')}" alt="Sundar Nadathur" class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Sundar Nadathur</div>
+                            <div class="title">Intel</div>
+                            <div class="topic">AI, Machine Learning, HPC</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/LiexiangYue.jpg')}" alt="Liexiang Yue"
+                                 class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Liexiang Yue</div>
                             <div class="title">China Mobile</div>
-                            <div class="topic">5G based on OpenStack</div>
+                            <div class="topic">AI, Machine Learning, HPC</div>
                         </div>
                     </div>
                 </div>
+                <!-- CI/CD -->
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/Uploads/Maestropandy.jpg')}" alt="Pandiyan Muthuraman" class="summit-user-image">
-                        </div>
-                        <div class="info">
-                            <div class="name">Pandiyan Muthuraman</div>
-                            <div class="title">Reliance Jio</div>
-                            <div class="topic">Cognitive Computing at the Edge with AI </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
-                    <div class="summit-user-section">
-                        <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/Uploads/neelima.jpg')}" alt="Neelima Mukiri"
+                            <img src="{$Top.CloudUrl('assets/QiaoFu.jpg')}" alt="Qiao Fu"
                                  class="summit-user-image">
                         </div>
                         <div class="info">
-                            <div class="name">Neelima Mukiri</div>
-                            <div class="title">Cisco Systems Inc</div>
-                            <div class="topic">Machine Learning with a Hybrid Cloud</div>
+                            <div class="name">Qiao Fu</div>
+                            <div class="title">China Mobile</div>
+                            <div class="topic">CI/CD</div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/profile-images/5ae358d7c4723.jpg')}" height="174"
-                                 alt="Joseph Sandoval" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/ChangBoGuo.jpg')}" alt="ChangBo Guo"
+                                 class="summit-user-image">
                         </div>
                         <div class="info">
-                            <div class="name">Joseph Sandoval</div>
-                            <div class="title">Adobe Systems</div>
-                            <div class="topic">Kubernetes Lessons Learned</div>
+                            <div class="name">ChangBo Guo</div>
+                            <div class="title">Easy Stack</div>
+                            <div class="topic">CI/CD</div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/profile-images/20170707172318.jpg')}" alt="Jinghua Gao" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/ChrisMacNaughton.jpg')}" alt="Chris MacNaughton"
+                                 class="summit-user-image">
                         </div>
                         <div class="info">
-                            <div class="name">Jinghua Gao</div>
-                            <div class="title">Lenovo</div>
-                            <div class="topic">Deep Learning for Heart Disease Diagnosis </div>
+                            <div class="name">Chris MacNaughton</div>
+                            <div class="title">Canonical</div>
+                            <div class="topic">CI/CD</div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/Uploads/headshot2.png')}" alt="Paul Belanger" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/RicardoAravena.jpg')}" alt="Ricardo Aravena"
+                                 class="summit-user-image">
                         </div>
                         <div class="info">
-                            <div class="name">Paul Belanger</div>
-                            <div class="title">Red Hat Inc.</div>
-                            <div class="topic">Moving from Jenkins to Zuul </div>
+                            <div class="name">Ricardo Aravena</div>
+                            <div class="title">Rakuten Rewards</div>
+                            <div class="topic">Containers</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Containers -->
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/LingxianKong.jpg')}" alt="Lingxian Kong"
+                                 class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Lingxian Kong</div>
+                            <div class="title">Catalyst Cloud</div>
+                            <div class="topic">Containers</div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/Uploads/profile-pic2.png')}" alt="Michael Beaver" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/HongbinLu.jpg')}" alt="Hongbin Lu"
+                                 class="summit-user-image">
                         </div>
                         <div class="info">
-                            <div class="name">Michael Beaver</div>
-                            <div class="title">AT&amp;T Integrated Cloud</div>
-                            <div class="topic">Bare metal provisioning with Airship</div>
+                            <div class="name">Hongbin Lu</div>
+                            <div class="title">Huawei</div>
+                            <div class="topic">Containers</div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/Uploads/penick-profile-pic2.png')}" alt="James Penick" class="summit-user-image">
+                            <img src="{$Top.CloudUrl('assets/XuWang.jpg')}" alt="Xu Wang"
+                                 class="summit-user-image">
                         </div>
                         <div class="info">
-                            <div class="name">James Penick</div>
-                            <div class="title">Verizon Media</div>
-                            <div class="topic">Edge Computing</div>
+                            <div class="name">Xu Wang</div>
+                            <div class="title">Ant Financial</div>
+                            <div class="topic">Containers</div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12">
+                <!-- HOW -->
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/KeithBerger.jpg')}" alt="Keith Berger"
+                                 class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Keith Berger</div>
+                            <div class="title">SUSE</div>
+                            <div class="topic">Hands-On Workshops</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/FlorianHaas.jpg')}" alt="Florian Haas"
+                                 class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Florian Haas</div>
+                            <div class="title">City Network</div>
+                            <div class="topic">Hands-On Workshops</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/YujunZhang.jpg')}" alt="Yujun Zhang"
+                                 class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Yujun Zhang</div>
+                            <div class="title">Easystack Inc.</div>
+                            <div class="topic">Hands-On Workshops</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Open Dev -->
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/TonyBreeds.jpg')}" alt="Tony Breeds"
+                                 class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Tony Breeds</div>
+                            <div class="title">Red Hat</div>
+                            <div class="topic">Hands-On Workshops</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/LiJiansheng.jpg')}" alt="Li Jiansheng"
+                                 class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Li Jiansheng</div>
+                            <div class="title">X-lab, TongJi university</div>
+                            <div class="topic">Hands-On Workshops</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/SeanMcGinnis.jpg')}" alt="Sean McGinnis"
+                                 class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Sean McGinnis</div>
+                            <div class="title">Huawei</div>
+                            <div class="topic">Hands-On Workshops</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Private / Hybrid -->
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/RuanHE.jpg')}" alt="Ruan HE"
+                                 class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Ruan HE</div>
+                            <div class="title"></div>
+                            <div class="topic">Private & Hybrid Cloud</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/RicoLin.jpg')}" alt="Rico Lin"
+                                 class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Rico Lin</div>
+                            <div class="title"></div>
+                            <div class="topic">Private & Hybrid Cloud</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/BelmiroMoreira.jpg')}" alt="Belmiro Moreira"
+                                 class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Belmiro Moreira</div>
+                            <div class="title"></div>
+                            <div class="topic">Private & Hybrid Cloud</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/YihLeongSun.jpg')}" alt="Yih Leong Sun"
+                                 class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Yih Leong Sun</div>
+                            <div class="title"></div>
+                            <div class="topic">Private & Hybrid Cloud</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Public Cloud -->
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/NilsMagnus.jpg')}" alt="Nils Magnus"
+                                 class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Nils Magnus</div>
+                            <div class="title">T-Systems International GmbH</div>
+                            <div class="topic">Public Cloud</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/FrankKloeker.jpg')}" alt="Frank Kloeker"
+                                 class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Frank Kloeker</div>
+                            <div class="title">Deutsche Telekom AG</div>
+                            <div class="topic">Public Cloud</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/ZhipengHuang.jpg')}" alt="Zhipeng Huang"
+                                 class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Zhipeng Huang</div>
+                            <div class="title">Huawei</div>
+                            <div class="topic">Public Cloud</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Security -->
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/LiangChen.jpg')}" alt="Liang Chen"
+                                 class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Liang Chen</div>
+                            <div class="title">EasyStack</div>
+                            <div class="topic">Security</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/AshishKurmi.jpg')}" alt="Ashish Kurmi"
+                                 class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Ashish Kurmi</div>
+                            <div class="title">Uber Technologies</div>
+                            <div class="topic">Security</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/ColleenMurphy.jpg')}" alt="Colleen Murphy"
+                                 class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Colleen Murphy</div>
+                            <div class="title">SUSE</div>
+                            <div class="topic">Security</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/JosephineSeifert.jpg')}" alt="Josephine Seifert"
+                                 class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Josephine Seifert</div>
+                            <div class="title">SecuStack GmbH</div>
+                            <div class="topic">Security</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="col-xs-12">
                     <a class="btn" href="/summit/shanghai-2019/speakers">See all summit speakers <i class="fa fa-arrow-right"></i></a>
-                </div>
+                </div> -->
             </div>
-            <div class="col-sm-12 col-lg-4 col-md-6 col-xs-12">
+            <!-- <div class="col-sm-12 col-lg-4 col-md-6 col-xs-12">
                 <h3 class="title-section">Summit Overview</h3>
                 <div class="col-12 col-md-12 col-sm-6 col-xs-12 featured">
                     <ul class="overview">
@@ -269,7 +492,7 @@
                 <div class="col-xs-12">
                     <a class="btn" href="/summit/shanghai-2019/summit-schedule/">Full Summit Schedule<i class="fa fa-arrow-right"></i></a>
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="row">
             <div class="col-sm-12">
@@ -278,7 +501,6 @@
         </div>
     </div>
 </div>
--->
 <div class="academy-wrapper" id="Sponsors">
     <div class="container">
         <div class="row">
