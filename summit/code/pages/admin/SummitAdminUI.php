@@ -84,6 +84,14 @@ final class SummitAdminUI extends DataExtension
         $f->addFieldToTab('Root.Main', $secondary_registration_btn_txt = new TextField('SecondaryRegistrationBtnText', 'Secondary Registration Label'));
         $secondary_registration_link->setDescription('Link to the site where you book a hotel.');
 
+        // room booking
+
+        $f->addFieldsToTab('Root.Room Booking', $time1 = new TimeField('MeetingRoomBookingStartTime', "When does the booking room begins?"));
+        $f->addFieldsToTab('Root.Room Booking', $time2 = new TimeField('MeetingRoomBookingEndTime', "When does the booking room ends?"));
+        $f->addFieldsToTab('Root.Room Booking', new NumericField('MeetingRoomBookingSlotLength', "Booking Room Slot Length (Minutes)"));
+        $f->addFieldsToTab('Root.Room Booking', new NumericField('MeetingRoomBookingMaxAllowed', "Booking Room Max. Qty"));
+
+        // dates
         $f->addFieldsToTab('Root.Dates',
         $ddl_timezone = new DropdownField('TimeZoneIdentifier', 'Time Zone', $this->owner->getTimezones()));
         $ddl_timezone->setEmptyString('-- Select a Timezone --');
@@ -95,6 +103,7 @@ final class SummitAdminUI extends DataExtension
             $f->addFieldToTab('Root.Dates', new HeaderField("All dates below in the timezone of the summit's venue."));
         }
 
+        // dates
         $f->addFieldToTab('Root.Dates', $date = new DatetimeField('SummitBeginDate', "When does the summit begin?"));
         $date->getDateField()->setConfig('showcalendar', true);
         $date->getDateField()->setConfig('dateformat', 'dd/MM/yyyy');

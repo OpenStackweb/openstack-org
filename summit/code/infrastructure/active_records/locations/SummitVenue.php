@@ -93,6 +93,17 @@ class SummitVenue extends SummitGeoLocatedLocation implements ISummitVenue
         $f->addFieldsToTab('Root.Main', new CheckboxField('IsMain', 'Is Main?'));
 
         $config = GridFieldConfig_RecordEditor::create();
+        $config->removeComponentsByType('GridFieldAddNewButton');
+        $multi_class_selector = new GridFieldAddNewMultiClass();
+        $multi_class_selector->setClasses
+        (
+            [
+                'SummitBookableVenueRoom' => 'Bookable Room',
+                'SummitVenueRoom'         => 'Room',
+            ]
+        );
+
+        $config->addComponent($multi_class_selector);
         $gridField = new GridField('Rooms', 'Rooms', $this->Rooms(), $config);
         $f->addFieldToTab('Root.Rooms', $gridField);
 

@@ -42,6 +42,10 @@ class Summit extends DataObject implements ISummit
         'AvailableOnApi' => 'Boolean',
         'CalendarSyncName'        => 'Varchar(255)',
         'CalendarSyncDescription' => 'Text',
+        'MeetingRoomBookingStartTime' => 'Time',
+        'MeetingRoomBookingEndTime' => 'Time',
+        'MeetingRoomBookingSlotLength' => 'Int',
+        'MeetingRoomBookingMaxAllowed' => 'Int'
     ];
 
     private static $defaults =
@@ -756,8 +760,6 @@ class Summit extends DataObject implements ISummit
         $page = PresentationPage::get()->filter('SummitID', $this->getIdentifier())->first();
         return ($page) ? $page->getAbsoluteLiveLink(false) : '#';
     }
-
-
 
     // SCHEDULE HELPERS
 
