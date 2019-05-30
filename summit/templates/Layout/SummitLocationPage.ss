@@ -2,22 +2,22 @@
 <div class="light secondary-nav" id="nav-bar">
     <div class="container">
         <ul class="secondary-nav-list">
-            <li>
+            <!-- <li>
                 <a href="#hotels">
                     <i class="fa fa-h-square"></i>
                     Hotels &amp; Airport
+                </a>
+            </li> -->
+            <li>
+                <a href="#travel-support">
+                    <i class="fa fa-plane"></i>
+                    Travel Support &amp; Visa Info
                 </a>
             </li>
             <li>
                 <a href="#venue">
                     <i class="fa fa-map-marker"></i>
                     Venue
-                </a>
-            </li>
-            <li>
-                <a href="#travel-support">
-                    <i class="fa fa-plane"></i>
-                    Travel Support &amp; Visa Info
                 </a>
             </li>
             <% if Locals  %>
@@ -32,7 +32,7 @@
     </div>
 </div>
 
-<div class="white hotels-row" id="hotels">
+<!-- <div class="white hotels-row" id="hotels">
     <div class="container">
         <% if AlternateHotels %>
             <div class="row">
@@ -147,7 +147,29 @@
 <% if not $Top.CampusGraphic %>
     <div class="venue-map" id="map-canvas"></div>
 <% end_if %>
+</div> -->
+<% if TravelSupport  %>
+    <div class="light" id="travel-support">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-push-2">
+                    $TravelSupport
+                </div>
+            </div>
+        </div>
+    </div>
+<% end_if %>
+<% if VisaInformation  %>
+<div class="white visa-row" id="visa">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-push-2">
+                $VisaInformation
+            </div>
+        </div>
+    </div>
 </div>
+<% end_if %>
 <% if $Venue %>
     <div id="venue">
         <div class="venue-row tokyo" style="background: rgba(0, 0, 0, 0) url('{$Top.VenueBackgroundImageUrl}') no-repeat scroll left top / cover ;">
@@ -212,28 +234,6 @@
     </div>
 </div>
 -->
-<% if TravelSupport  %>
-    <div class="light" id="travel-support">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-push-2">
-                    $TravelSupport
-                </div>
-            </div>
-        </div>
-    </div>
-<% end_if %>
-<% if VisaInformation  %>
-<div class="white visa-row" id="visa">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-push-2">
-                $VisaInformation
-            </div>
-        </div>
-    </div>
-</div>
-<% end_if %>
 <% if Locals %>
 <div class="about-city-row austin" style="background: rgba(0, 0, 0, 0) url('{$AboutTheCityBackgroundImageUrl}') no-repeat scroll left top / cover ">
     <p>
