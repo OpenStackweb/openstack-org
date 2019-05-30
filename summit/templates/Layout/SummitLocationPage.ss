@@ -144,10 +144,10 @@
         </div>
         <% end_if %>
     </div>
-<% if not $Top.CampusGraphic %>
-    <div class="venue-map" id="map-canvas"></div>
-<% end_if %>
 </div> -->
+<% if not $Top.CampusGraphic %>
+    <!-- <div class="venue-map" id="map-canvas"></div> -->
+<% end_if %>
 <% if TravelSupport  %>
     <div class="light" id="travel-support">
         <div class="container">
