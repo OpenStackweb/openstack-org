@@ -96,11 +96,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-<<<<<<< HEAD
                             <img src="{$Top.CloudUrl('assets/summits/shanghai/programming-committee/MohamedElsakhawy.jpg')}" alt="Mohamed Elsakhawy"
-=======
-                            <img src="{$Top.CloudUrl('assets/MohamedElsakhawy.jpg')}" alt="Mohamed Elsakhawy"
->>>>>>> b5a99f95b... Programming Commitee Headshots
                                  class="summit-user-image">
                         </div>
                         <div class="info">
@@ -113,11 +109,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-<<<<<<< HEAD
                             <img src="{$Top.CloudUrl('assets/summits/shanghai/programming-committee/FredLi.jpg')}" alt="Fred Li"
-=======
-                            <img src="{$Top.CloudUrl('assets/FredLi.jpg')}" alt="Fred Li"
->>>>>>> b5a99f95b... Programming Commitee Headshots
                                  class="summit-user-image">
                         </div>
                         <div class="info">
@@ -130,11 +122,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-<<<<<<< HEAD
                             <img src="{$Top.CloudUrl('assets/summits/shanghai/programming-committee/SundarNadathur.jpg')}" alt="Sundar Nadathur" class="summit-user-image">
-=======
-                            <img src="{$Top.CloudUrl('assets/SundarNadathur.jpg')}" alt="Sundar Nadathur" class="summit-user-image">
->>>>>>> b5a99f95b... Programming Commitee Headshots
                         </div>
                         <div class="info">
                             <div class="name">Sundar Nadathur</div>
@@ -146,11 +134,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-<<<<<<< HEAD
                             <img src="{$Top.CloudUrl('assets/summits/shanghai/programming-committee/LiexiangYue.jpg')}" alt="Liexiang Yue"
-=======
-                            <img src="{$Top.CloudUrl('assets/LiexiangYue.jpg')}" alt="Liexiang Yue"
->>>>>>> b5a99f95b... Programming Commitee Headshots
                                  class="summit-user-image">
                         </div>
                         <div class="info">
@@ -164,11 +148,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-<<<<<<< HEAD
                             <img src="{$Top.CloudUrl('assets/summits/shanghai/programming-committee/QiaoFu.jpg')}" alt="Qiao Fu"
-=======
-                            <img src="{$Top.CloudUrl('assets/QiaoFu.jpg')}" alt="Qiao Fu"
->>>>>>> b5a99f95b... Programming Commitee Headshots
                                  class="summit-user-image">
                         </div>
                         <div class="info">
@@ -181,11 +161,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-<<<<<<< HEAD
                             <img src="{$Top.CloudUrl('assets/summits/shanghai/programming-committee/ChangBoGuo.jpg')}" alt="ChangBo Guo"
-=======
-                            <img src="{$Top.CloudUrl('assets/ChangBoGuo.jpg')}" alt="ChangBo Guo"
->>>>>>> b5a99f95b... Programming Commitee Headshots
                                  class="summit-user-image">
                         </div>
                         <div class="info">
@@ -198,11 +174,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-<<<<<<< HEAD
                             <img src="{$Top.CloudUrl('assets/summits/shanghai/programming-committee/ChrisMacNaughton.jpg')}" alt="Chris MacNaughton"
-=======
-                            <img src="{$Top.CloudUrl('assets/ChrisMacNaughton.jpg')}" alt="Chris MacNaughton"
->>>>>>> b5a99f95b... Programming Commitee Headshots
                                  class="summit-user-image">
                         </div>
                         <div class="info">
@@ -215,11 +187,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-<<<<<<< HEAD
                             <img src="{$Top.CloudUrl('assets/summits/shanghai/programming-committee/RicardoAravena.jpg')}" alt="Ricardo Aravena"
-=======
-                            <img src="{$Top.CloudUrl('assets/RicardoAravena.jpg')}" alt="Ricardo Aravena"
->>>>>>> b5a99f95b... Programming Commitee Headshots
                                  class="summit-user-image">
                         </div>
                         <div class="info">
@@ -233,11 +201,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-<<<<<<< HEAD
                             <img src="{$Top.CloudUrl('assets/summits/shanghai/programming-committee/LingxianKong.jpg')}" alt="Lingxian Kong"
-=======
-                            <img src="{$Top.CloudUrl('assets/LingxianKong.jpg')}" alt="Lingxian Kong"
->>>>>>> b5a99f95b... Programming Commitee Headshots
                                  class="summit-user-image">
                         </div>
                         <div class="info">
@@ -250,11 +214,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-<<<<<<< HEAD
                             <img src="{$Top.CloudUrl('assets/summits/shanghai/programming-committee/HongbinLu.jpg')}" alt="Hongbin Lu"
-=======
-                            <img src="{$Top.CloudUrl('assets/HongbinLu.jpg')}" alt="Hongbin Lu"
->>>>>>> b5a99f95b... Programming Commitee Headshots
                                  class="summit-user-image">
                         </div>
                         <div class="info">
@@ -267,11 +227,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-<<<<<<< HEAD
                             <img src="{$Top.CloudUrl('assets/summits/shanghai/programming-committee/XuWang.jpg')}" alt="Xu Wang"
-=======
-                            <img src="{$Top.CloudUrl('assets/XuWang.jpg')}" alt="Xu Wang"
->>>>>>> b5a99f95b... Programming Commitee Headshots
                                  class="summit-user-image">
                         </div>
                         <div class="info">
@@ -285,11 +241,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-<<<<<<< HEAD
                             <img src="{$Top.CloudUrl('assets/summits/shanghai/programming-committee/KeithBerger.jpg')}" alt="Keith Berger"
-=======
-                            <img src="{$Top.CloudUrl('assets/KeithBerger.jpg')}" alt="Keith Berger"
->>>>>>> b5a99f95b... Programming Commitee Headshots
                                  class="summit-user-image">
                         </div>
                         <div class="info">
@@ -302,11 +254,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-<<<<<<< HEAD
                             <img src="{$Top.CloudUrl('assets/summits/shanghai/programming-committee/FlorianHaas.jpg')}" alt="Florian Haas"
-=======
-                            <img src="{$Top.CloudUrl('assets/FlorianHaas.jpg')}" alt="Florian Haas"
->>>>>>> b5a99f95b... Programming Commitee Headshots
                                  class="summit-user-image">
                         </div>
                         <div class="info">
@@ -319,11 +267,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-<<<<<<< HEAD
                             <img src="{$Top.CloudUrl('assets/summits/shanghai/programming-committee/YujunZhang.jpg')}" alt="Yujun Zhang"
-=======
-                            <img src="{$Top.CloudUrl('assets/YujunZhang.jpg')}" alt="Yujun Zhang"
->>>>>>> b5a99f95b... Programming Commitee Headshots
                                  class="summit-user-image">
                         </div>
                         <div class="info">
@@ -337,11 +281,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-<<<<<<< HEAD
                             <img src="{$Top.CloudUrl('assets/summits/shanghai/programming-committee/TonyBreeds.jpg')}" alt="Tony Breeds"
-=======
-                            <img src="{$Top.CloudUrl('assets/TonyBreeds.jpg')}" alt="Tony Breeds"
->>>>>>> b5a99f95b... Programming Commitee Headshots
                                  class="summit-user-image">
                         </div>
                         <div class="info">
@@ -354,11 +294,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-<<<<<<< HEAD
                             <img src="{$Top.CloudUrl('assets/summits/shanghai/programming-committee/LiJiansheng.jpg')}" alt="Li Jiansheng"
-=======
-                            <img src="{$Top.CloudUrl('assets/LiJiansheng.jpg')}" alt="Li Jiansheng"
->>>>>>> b5a99f95b... Programming Commitee Headshots
                                  class="summit-user-image">
                         </div>
                         <div class="info">
@@ -371,11 +307,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-<<<<<<< HEAD
                             <img src="{$Top.CloudUrl('assets/summits/shanghai/programming-committee/SeanMcGinnis.jpg')}" alt="Sean McGinnis"
-=======
-                            <img src="{$Top.CloudUrl('assets/SeanMcGinnis.jpg')}" alt="Sean McGinnis"
->>>>>>> b5a99f95b... Programming Commitee Headshots
                                  class="summit-user-image">
                         </div>
                         <div class="info">
@@ -389,11 +321,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-<<<<<<< HEAD
                             <img src="{$Top.CloudUrl('assets/summits/shanghai/programming-committee/RuanHE.jpg')}" alt="Ruan HE"
-=======
-                            <img src="{$Top.CloudUrl('assets/RuanHE.jpg')}" alt="Ruan HE"
->>>>>>> b5a99f95b... Programming Commitee Headshots
                                  class="summit-user-image">
                         </div>
                         <div class="info">
@@ -406,11 +334,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-<<<<<<< HEAD
                             <img src="{$Top.CloudUrl('assets/summits/shanghai/programming-committee/RicoLin.jpg')}" alt="Rico Lin"
-=======
-                            <img src="{$Top.CloudUrl('assets/RicoLin.jpg')}" alt="Rico Lin"
->>>>>>> b5a99f95b... Programming Commitee Headshots
                                  class="summit-user-image">
                         </div>
                         <div class="info">
@@ -423,11 +347,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-<<<<<<< HEAD
                             <img src="{$Top.CloudUrl('assets/summits/shanghai/programming-committee/BelmiroMoreira.jpg')}" alt="Belmiro Moreira"
-=======
-                            <img src="{$Top.CloudUrl('assets/BelmiroMoreira.jpg')}" alt="Belmiro Moreira"
->>>>>>> b5a99f95b... Programming Commitee Headshots
                                  class="summit-user-image">
                         </div>
                         <div class="info">
@@ -440,11 +360,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-<<<<<<< HEAD
                             <img src="{$Top.CloudUrl('assets/summits/shanghai/programming-committee/YihLeongSun.jpg')}" alt="Yih Leong Sun"
-=======
-                            <img src="{$Top.CloudUrl('assets/YihLeongSun.jpg')}" alt="Yih Leong Sun"
->>>>>>> b5a99f95b... Programming Commitee Headshots
                                  class="summit-user-image">
                         </div>
                         <div class="info">
@@ -458,11 +374,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-<<<<<<< HEAD
                             <img src="{$Top.CloudUrl('assets/summits/shanghai/programming-committee/NilsMagnus.jpg')}" alt="Nils Magnus"
-=======
-                            <img src="{$Top.CloudUrl('assets/NilsMagnus.jpg')}" alt="Nils Magnus"
->>>>>>> b5a99f95b... Programming Commitee Headshots
                                  class="summit-user-image">
                         </div>
                         <div class="info">
@@ -475,11 +387,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-<<<<<<< HEAD
                             <img src="{$Top.CloudUrl('assets/summits/shanghai/programming-committee/FrankKloeker.jpg')}" alt="Frank Kloeker"
-=======
-                            <img src="{$Top.CloudUrl('assets/FrankKloeker.jpg')}" alt="Frank Kloeker"
->>>>>>> b5a99f95b... Programming Commitee Headshots
                                  class="summit-user-image">
                         </div>
                         <div class="info">
@@ -492,11 +400,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-<<<<<<< HEAD
                             <img src="{$Top.CloudUrl('assets/summits/shanghai/programming-committee/ZhipengHuang.jpg')}" alt="Zhipeng Huang"
-=======
-                            <img src="{$Top.CloudUrl('assets/ZhipengHuang.jpg')}" alt="Zhipeng Huang"
->>>>>>> b5a99f95b... Programming Commitee Headshots
                                  class="summit-user-image">
                         </div>
                         <div class="info">
@@ -510,11 +414,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-<<<<<<< HEAD
                             <img src="{$Top.CloudUrl('assets/summits/shanghai/programming-committee/LiangChen.jpg')}" alt="Liang Chen"
-=======
-                            <img src="{$Top.CloudUrl('assets/LiangChen.jpg')}" alt="Liang Chen"
->>>>>>> b5a99f95b... Programming Commitee Headshots
                                  class="summit-user-image">
                         </div>
                         <div class="info">
@@ -527,11 +427,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-<<<<<<< HEAD
                             <img src="{$Top.CloudUrl('assets/summits/shanghai/programming-committee/AshishKurmi.jpg')}" alt="Ashish Kurmi"
-=======
-                            <img src="{$Top.CloudUrl('assets/AshishKurmi.jpg')}" alt="Ashish Kurmi"
->>>>>>> b5a99f95b... Programming Commitee Headshots
                                  class="summit-user-image">
                         </div>
                         <div class="info">
@@ -544,11 +440,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-<<<<<<< HEAD
                             <img src="{$Top.CloudUrl('assets/summits/shanghai/programming-committee/ColleenMurphy.jpg')}" alt="Colleen Murphy"
-=======
-                            <img src="{$Top.CloudUrl('assets/ColleenMurphy.jpg')}" alt="Colleen Murphy"
->>>>>>> b5a99f95b... Programming Commitee Headshots
                                  class="summit-user-image">
                         </div>
                         <div class="info">
@@ -561,11 +453,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-<<<<<<< HEAD
                             <img src="{$Top.CloudUrl('assets/summits/shanghai/programming-committee/JosephineSeifert.jpg')}" alt="Josephine Seifert"
-=======
-                            <img src="{$Top.CloudUrl('assets/JosephineSeifert.jpg')}" alt="Josephine Seifert"
->>>>>>> b5a99f95b... Programming Commitee Headshots
                                  class="summit-user-image">
                         </div>
                         <div class="info">
