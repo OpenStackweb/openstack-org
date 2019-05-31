@@ -14,21 +14,43 @@
 
 class SummitBookableVenueRoom extends SummitVenueRoom
 {
-    private static $db = array
-    (
+    private static $db = [
+
         'TimeSlotCost'  => 'Currency',
-    );
+        'Currency'      => 'VarChar(3)',
+    ];
 
-    private static $has_many = array
-    (
+    private static $has_many = [
         'Reservations' => 'SummitRoomReservation'
-    );
+    ];
 
+    /**
+     * @var array
+     */
+    private static $many_many = [
+        'Attributes' => 'SummitBookableVenueRoomAttributeValue',
+    ];
 
     public function getCMSFields()
     {
         $f = parent::getCMSFields();
         $f->addFieldToTab('Root.Main', new CurrencyField('TimeSlotCost','Time Slot Cost'));
+
+        $f->addFieldToTab('Root.Main', $ddl_currency = new DropdownField('Currency','Currency (ISO 4217)', [
+            "USD" => "USD",
+            "EUR" => "EUR",
+            "GBP" => "GBP",
+        ]));
+
+        $ddl_currency->setEmptyString("-- SELECT A CURRENCY --");
+
+        $config = GridFieldConfig_RecordEditor::create();
+        $gridField = new GridField('Reservations', 'Reservations', $this->Reservations(), $config);
+        $f->addFieldToTab('Root.Reservations', $gridField);
+
+        $config = GridFieldConfig_RelationEditor::create();
+        $gridField = new GridField('Attributes', 'Attributes', $this->Attributes(), $config);
+        $f->addFieldToTab('Root.Attributes', $gridField);
         return $f;
     }
 

@@ -91,10 +91,19 @@ final class SummitAdminUI extends DataExtension
         $f->addFieldsToTab('Root.Room Booking', new NumericField('MeetingRoomBookingSlotLength', "Booking Room Slot Length (Minutes)"));
         $f->addFieldsToTab('Root.Room Booking', new NumericField('MeetingRoomBookingMaxAllowed', "Booking Room Max. Qty"));
 
+        if ($this->owner->ID > 0) {
+            $config = GridFieldConfig_RecordEditor::create(50);
+            $gridField = new GridField('MeetingRoomBookingAllowedAttributes', 'Meeting Room Booking Allowed Attributes', $this->owner->MeetingRoomBookingAllowedAttributes(), $config);
+            $f->addFieldToTab('Root.Room Booking', $gridField);
+
+        }
+
         // dates
         $f->addFieldsToTab('Root.Dates',
         $ddl_timezone = new DropdownField('TimeZoneIdentifier', 'Time Zone', $this->owner->getTimezones()));
         $ddl_timezone->setEmptyString('-- Select a Timezone --');
+
+
 
         if($summit_time_zone) {
             $f->addFieldToTab('Root.Dates', new HeaderField("All dates below are in <span style='color:red;'>$summit_time_zone</span> time."));
@@ -124,7 +133,7 @@ final class SummitAdminUI extends DataExtension
         $date->setConfig('showcalendar', true);
         $date->setConfig('dateformat', 'dd/MM/yyyy');
 
-        $f->addFieldsToTab('Root.Main', new NumericField('MaxSubmissionAllowedPerUser', 'Max. Submission Allowed Per User'));
+        $f->addFieldToTab('Root.Main', new TextField('MaxSubmissionAllowedPerUser', 'Max. Submission Allowed Per User'));
 
         $logo_field = UploadField::create('Logo', 'Logo');
         $logo_field->setAllowedMaxFileNumber(1);
@@ -190,7 +199,7 @@ final class SummitAdminUI extends DataExtension
             $config->addComponent($multi_class_selector);
             $config->addComponent($sort = new GridFieldSortableRows('Order'));
             $gridField = new GridField('Locations', 'Locations',
-                $this->owner->Locations()->where("ClassName <> 'SummitVenueRoom' "), $config);
+                $this->owner->Locations()->where("ClassName <> 'SummitVenueRoom' AND ClassName <> 'SummitBookableVenueRoom'"), $config);
             $f->addFieldToTab('Root.Locations', $gridField);
 
             // event types

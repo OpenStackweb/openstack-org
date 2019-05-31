@@ -81,7 +81,8 @@ class Summit extends DataObject implements ISummit
         'WIFIConnections'              => 'SummitWIFIConnection',
         'Sponsors'                     => 'Sponsor',
         'TrackTagGroups'               => 'TrackTagGroup',
-        'SelectionPlans'               => 'SelectionPlan'
+        'SelectionPlans'               => 'SelectionPlan',
+        'MeetingRoomBookingAllowedAttributes' => 'SummitBookableVenueRoomAttributeType',
     ];
 
     /**
