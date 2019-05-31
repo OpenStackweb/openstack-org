@@ -92,6 +92,59 @@
         <div class="row">
             <div class="col-sm-12 col-lg-8 col-md-6">
                 <h3 class="title-section">Shangai 2019 Open Infrastructure Summit Programming Committee</h3>
+                <!-- 5G, NFV, Edge -->
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/summits/shanghai/programming-committee/ShaneWang.jpg')}" alt="Shane Wang"
+                                 class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Shane Wang</div>
+                            <div class="title">Intel</div>
+                            <div class="topic">5G, NFV, Edge</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/summits/shanghai/programming-committee/BenSilverman.jpg')}" alt="Ben Silverman"
+                                 class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Ben Silverman</div>
+                            <div class="title">Cincinnati Bell Technology Services</div>
+                            <div class="topic">5G, NFV, Edge</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/summits/shanghai/programming-committee/IanJolliffe.jpg')}" alt="Ian Jolliffe"
+                                 class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Ian Jolliffe</div>
+                            <div class="title">Wind River</div>
+                            <div class="topic">5G, NFV, Edge</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/summits/shanghai/programming-committee/QihuiZhao.jpg')}" alt="Qihui Zhao"
+                                 class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Qihui Zhao</div>
+                            <div class="title">China Mobile</div>
+                            <div class="topic">5G, NFV, Edge</div>
+                        </div>
+                    </div>
+                </div>
                 <!-- AI, ML, HPC -->
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
@@ -287,7 +340,7 @@
                         <div class="info">
                             <div class="name">Tony Breeds</div>
                             <div class="title">Red Hat</div>
-                            <div class="topic">Hands-On Workshops</div>
+                            <div class="topic">Open Development</div>
                         </div>
                     </div>
                 </div>
@@ -300,7 +353,7 @@
                         <div class="info">
                             <div class="name">Li Jiansheng</div>
                             <div class="title">X-lab, TongJi university</div>
-                            <div class="topic">Hands-On Workshops</div>
+                            <div class="topic">Open Development</div>
                         </div>
                     </div>
                 </div>
@@ -313,7 +366,7 @@
                         <div class="info">
                             <div class="name">Sean McGinnis</div>
                             <div class="title">Huawei</div>
-                            <div class="topic">Hands-On Workshops</div>
+                            <div class="topic">Open Development</div>
                         </div>
                     </div>
                 </div>
