@@ -25,6 +25,7 @@ class SummitRoomReservation extends DataObject
         'Currency'             => 'VarChar(3)',
         'Amount'               => 'Currency',
         'ApprovedPaymentDate'  => 'SS_Datetime',
+        'LastError'            => 'Text',
     ];
 
     private static $has_one = [
