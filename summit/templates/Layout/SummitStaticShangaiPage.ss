@@ -707,7 +707,7 @@
             <div class="col-lg-4 col-md-4 col-sm-12">
                 <div class="box light item">
                     <h4>Shangai Travel</h4>
-                    <p>Stay tuned for more info!
+                    <p><a href="/summit/shanghai-2019/travel/">Apply for Travel Support</a> before August 8, 2019!
                     </p>
                 </div>
 
