@@ -529,15 +529,28 @@ a.staff-openstack{background:url(#{$static_images_base_url}/foundation-staff/ico
   width: 15%;
   float: left; }
 
+.nav {
+    padding-left: 50px;
+}
+
 @media (min-width: 768px) {
   .col-sm-5ths {
     width: 15%;
-    float: left; } }
+    float: left; } 
+
+.nav {
+    padding-left: 0px;
+}
+}
 
 @media (min-width: 992px) {
   .col-md-5ths {
     width: 15%;
-    float: left; } }
+    float: left; }
+
+.nav {
+    padding-left: 0px;
+} }
 
 @media (min-width: 1200px) {
   .col-lg-5ths {
