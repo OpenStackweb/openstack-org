@@ -34,7 +34,7 @@
                 </a>
             </div>
             <div class="col-md-5ths col-xs-6 nav-button-box">
-                <a href="https://groups.openstack.org/" class="nav-button" target="_blank">
+                <a href="https://www.meetup.com/pro/osf" class="nav-button" target="_blank">
                     <div class="nav-button-icon">
                         <img src="{$Top.CloudUrl("images/community/pin.png")}" />
                     </div>
@@ -44,7 +44,7 @@
             <div class="col-md-5ths col-xs-6 nav-button-box">
                 <a class="nav-button" data-toggle="collapse" data-target="#users" data-parent="#accordion-parent">
                     <div class="nav-button-icon">
-                        <img src="{$Top.CloudUrl("images/community/bulb.png")}" />
+                        <i class="fas fa-users"></i>
                     </div>
                     <div>Users</div>
                 </a>
@@ -55,6 +55,14 @@
                         <img src="{$Top.CloudUrl("images/community/book.png")}">
                     </div>
                     <div>Operators</div>
+                </a>
+            </div>
+            <div class="col-md-5ths col-xs-6 nav-button-box">
+                <a href="https://docs.openstack.org/contributors/common/mentoring.html" class="nav-button" target="_blank">
+                    <div class="nav-button-icon">
+                        <img src="{$Top.CloudUrl("images/community/bulb.png")}" />
+                    </div>
+                    <div>Mentoring</div>
                 </a>
             </div>
         </div>
