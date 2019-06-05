@@ -443,27 +443,16 @@
     <!-- Summit Promo -->
     <div class="summit-promo containers">
         <div class="container">
-            <div class="row">
-                <div class="col-sm-10">
+            <div class="row row-center">
+                <div class="col-sm-7 col-center">
+                    <p><img src="assets/ads/Shangahi-Logo-with-dates.svg" class="promo-logo"></p>
                     <h3>Everything you need to know about Open Infrastructure + Edge Computing</h3>
                     <p>Open infrastructure operators and developers shared architectures, technology requirements and the open source components required for edge computing.
                     </p>
-                    <p>&nbsp;</p>
                     <div class="nfv-summit-register-btn">
-                        <a href="/videos/summits/denver-2019/tracks/edge-infra" class="nfv-summit-btn" target="_blank">Watch the Session Videos <i class="fa fa-chevron-right"></i></a>
+                        <a href="/videos/summits/denver-2019/tracks/edge-infra" class="nfv-summit-btn" target="_blank">Watch the Session Videos&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a> <a href="/summit/shanghai-2019/" class="nfv-summit-btn" target="_blank">Join us in Shanghai&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
                     </div>
                 </div>
-                <!-- <div class="col-sm-4">
-                      <div class="nfv-summit-right">
-                          <img class="nfv-summit-logo" src="{$Top.CloudUrl('assets/Uploads/arrows.svg')}" alt="Open Infrastructure Summit">
-                          <div class="nfv-summit-dates containers"><strong>Open Infrastructure Summit</strong>
-                              April 29 - May 1
-                          </div>
-                          <div class="nfv-summit-register-btn">
-                              <a href="https://www.openstack.org/summit/denver-2018/" class="nfv-summit-btn red" target="_blank">Join Us in Denver <i class="fa fa-chevron-right"></i></a>
-                          </div>
-                      </div>
-                  </div> -->
             </div>
         </div>
     </div>

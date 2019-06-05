@@ -249,34 +249,22 @@
     </div>
     <!-- End Featured Content -->
 
-    <div class="summit-promo barcelona">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-10">
-                        <h3>Learn more about OpenStack security</h3>
+    <div class="summit-promo containers">
+        <div class="container">
+            <div class="row row-center">
+                <div class="col-sm-7 col-center">
+                    <p><img src="assets/ads/Shangahi-Logo-with-dates.svg" class="promo-logo"></p>
+                    <h3>Learn more about OpenStack security</h3>
                         <p>
                             Hear from enterprise and government users on how they secure their OpenStack clouds as well as from the upstream community on their security updates.
                         </p>
-                        <p>&nbsp;</p>
-
-                        <div class="nfv-summit-register-btn">
-                            <a href="/videos/summits/denver-2019/tracks/security" class="nfv-summit-btn" target="_blank">Learn More <i class="fa fa-chevron-right"></i></a>
-                        </div>
+                    <div class="nfv-summit-register-btn">
+                        <a href="/videos/summits/denver-2019/tracks/security" class="nfv-summit-btn" target="_blank">Watch the Session Videos&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a> <a href="/summit/shanghai-2019/" class="nfv-summit-btn" target="_blank">Join us in Shanghai&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
                     </div>
-                    <!--<div class="col-sm-4">
-                        <div class="nfv-summit-right">
-                            <img class="nfv-summit-logo" src="{$Top.CloudUrl('assets/Uploads/arrows.svg')}" alt="Open Infrastructure Summit">
-                            <div class="nfv-summit-dates containers"><strong>Open Infrastructure Summit</strong><br/>
-                              April 29 - May 1
-                            </div>
-                            <div class="nfv-summit-register-btn">
-                              <a href="https://www.openstack.org/summit/denver-2018/" class="nfv-summit-btn red" target="_blank">Join Us in Denver <i class="fa fa-chevron-right"></i></a>
-                          </div>
-                        </div>
-                    </div> -->
                 </div>
             </div>
         </div>
+    </div>
    
     <!-- Download Modal -->
     <div class="modal fade" id="downloadModal">

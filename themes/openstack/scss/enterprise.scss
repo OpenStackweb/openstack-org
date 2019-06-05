@@ -1615,12 +1615,11 @@ img.global-figures-chart {
     color: white; }
   .summit-promo p {
     color: white; }
-  .summit-promo.barcelona {
-    background: url(#{$assets_images_base_url}/Uploads/Denver-Hero-1440x600.jpg);
-    padding: 60px 0 90px;
-    margin-bottom: -52px;
-    background-size: cover;
-    background-position: center bottom;
+  .summit-promo.containers {
+  background: url(/assets/ads/SummitBanner-1140x500.png);
+  padding: 60px 0 90px;
+  background-size: cover;
+  background-position: center bottom;
 }
 .summit-promo .nfv-summit-right {
     margin-top: 10px;
