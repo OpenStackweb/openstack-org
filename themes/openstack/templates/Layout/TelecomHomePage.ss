@@ -199,7 +199,7 @@
                     </p>
                 </div>
                <div class="col-sm-5ths">
-                    <a href="https://www.openstack.org/videos/summits/denver-2019/successfully-deploying-massive-applications-on-openstack" target="_blank">
+                    <a href="/videos/summits/denver-2019/successfully-deploying-massive-applications-on-openstack" target="_blank">
                     <div class="video-wrapper small">
                         <div class="play-button">
                             <img src="{$Top.CloudUrl("images/play-button.png")}">
@@ -219,29 +219,17 @@
     <!-- Summit Promo -->
     <div class="summit-promo containers">
         <div class="container">
-            <div class="row">
-                <div class="col-sm-10">
+            <div class="row row-center">
+                <div class="col-sm-7 col-center">
+                    <p><img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/ads/Shangahi-Logo-with-dates.svg" class="promo-logo"></p>
                     <h3>Hear how the world’s leading telecoms are using Open Infrastructure for NFV and Edge Computing</h3>
                     <p>
-                        Telecoms including AT&T, Verizon, Orange, China Mobile and T-Mobile shared how they’re integrating open source technologies to power their infrastructure for use cases ranging from edge computing and NFV to 5G. 
+                        Telecoms including AT&amp;T, Verizon, Orange, China Mobile and T-Mobile shared how they’re integrating open source technologies to power their infrastructure for use cases ranging from edge computing and NFV to 5G. 
                     </p>
-                    <p>&nbsp;</p>
-
                     <div class="nfv-summit-register-btn">
-                        <a href="/videos/summits/denver-2019/tracks/telecom-nfv" class="nfv-summit-btn" target="_blank">Learn More <i class="fa fa-chevron-right"></i></a>
+                        <a href="/videos/summits/denver-2019/tracks/telecom-nfv" class="nfv-summit-btn" target="_blank">Watch the Session Videos&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a> <a href="/summit/shanghai-2019/" class="nfv-summit-btn" target="_blank">Join us in Shanghai&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
                     </div>
                 </div>
-                <!-- <div class="col-sm-4">
-                      <div class="nfv-summit-right">
-                          <img class="nfv-summit-logo" src="{$Top.CloudUrl('assets/Uploads/arrows.svg')}" alt="Open Infrastructure Summit">
-                          <div class="nfv-summit-dates containers"><strong>Open Infrastructure Summit</strong>
-                              April 29 - May 1
-                          </div>
-                          <div class="nfv-summit-register-btn">
-                              <a href="https://www.openstack.org/summit/denver-2018/" class="nfv-summit-btn red" target="_blank">Join Us in Denver <i class="fa fa-chevron-right"></i></a>
-                          </div>
-                      </div>
-                  </div> -->
             </div>
         </div>
     </div>
