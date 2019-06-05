@@ -221,7 +221,7 @@
         <div class="container">
             <div class="row row-center">
                 <div class="col-sm-7 col-center">
-                    <p><img src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/ads/Shangahi-Logo-with-dates.svg" class="promo-logo"></p>
+                    <p><img src="assets/ads/Shangahi-Logo-with-dates.svg" class="promo-logo"></p>
                     <h3>Hear how the world’s leading telecoms are using Open Infrastructure for NFV and Edge Computing</h3>
                     <p>
                         Telecoms including AT&amp;T, Verizon, Orange, China Mobile and T-Mobile shared how they’re integrating open source technologies to power their infrastructure for use cases ranging from edge computing and NFV to 5G. 
