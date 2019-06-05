@@ -296,17 +296,7 @@
                     <p>From container security to use cases combining Kubernetes or Kata Containers with other technologies, over 100 sessions share how organizations are achieving results with container technologies.  
                     </p>
                     <div class="nfv-summit-register-btn">
-                        <a href="/videos/summits/denver-2019/tracks/container-infrastructure" class="nfv-summit-btn" target="_blank">Watch the Session Videos <i class="fa fa-chevron-right"></i></a>
-                  </div>
-              </div>
-              <!-- <div class="col-sm-4">
-                  <div class="nfv-summit-right">
-                      <img class="nfv-summit-logo" src="{$Top.CloudUrl('assets/Uploads/arrows.svg')}" alt="Open Infrastructure Summit">
-                      <div class="nfv-summit-dates containers"><strong>Open Infrastructure Summit</strong>
-                          April 29 - May 1
-                      </div>
-                      <div class="nfv-summit-register-btn">
-                          <a href="/videos/summits/denver-2019/tracks/containers" class="nfv-summit-btn red" target="_blank">Watch the Session Videos&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a> <a href="/summit/shanghai-2019/" class="nfv-summit-btn" target="_blank">Join us in Shanghai&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
+                        <a href="/videos/summits/denver-2019/tracks/container-infrastructure" class="nfv-summit-btn" target="_blank">Watch the Session Videos&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a> <a href="/summit/shanghai-2019/" class="nfv-summit-btn" target="_blank">Join us in Shanghai&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
                     </div>
                 </div>
             </div>
