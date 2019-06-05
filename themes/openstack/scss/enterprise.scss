@@ -568,7 +568,6 @@ p.file-info a:hover {
   background: url('#{$assets_images_base_url}/enterprise/banner-bg.jpg') no-repeat center center;
   background-size: cover;
   min-height: 350px; 
-  margin-bottom: -50px;
 }
 
 .marketplace-column {
@@ -694,7 +693,7 @@ li.remote-cloud {
 
 img.event-logo {
   margin: 50px 0 20px; 
-  width: 150px;
+  width: 100px;
 }
 
 img.event-logo.lrg {
@@ -1637,11 +1636,18 @@ img.global-figures-chart {
 .summit-promo .nfv-summit-register-btn a {
     text-align: center;
     min-width: 200px;
-    margin: 10px auto;
+    margin: 10px 8px;
     background: #ec1944;
     color: white;
     padding: 10px 20px;
     border-radius: 4px; 
+}
+.summit-promo .promo-logo {
+  margin-bottom:40px;
+  width:60%;
+}
+.nfv-summit-register-btn {
+  margin-top: 40px;
 }
 .summit-promo.nfv .nfv-summit-right .nfv-summit-register-btn a i {
   margin-left: 5px; }
