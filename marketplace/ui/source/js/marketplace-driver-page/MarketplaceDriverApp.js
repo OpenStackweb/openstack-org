@@ -165,7 +165,7 @@ class MarketplaceDriverApp extends React.Component
                                         {driver.vendor}
                                     </td>
                                     <td>
-                                        <a href={driver.url}>{driver.name}</a>
+                                        <a href={driver.url}>{driver.name}</a><br/>
                                         <RawHTML>{driver.description}</RawHTML>
                                     </td>
                                     <td>

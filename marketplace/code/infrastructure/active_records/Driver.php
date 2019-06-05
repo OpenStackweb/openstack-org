@@ -44,7 +44,8 @@ class Driver extends DataObject implements IDriver
         'Description' => 'Description',
         'Project' => 'Project',
         'Vendor' => 'Vendor',
-        'Tested' => 'Tested'
+        'Tested' => 'Tested',
+        'Active' => 'Active'
     );
 
     /**
