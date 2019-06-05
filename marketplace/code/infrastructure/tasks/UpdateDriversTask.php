@@ -27,19 +27,33 @@ final class UpdateDriversTask extends CronTask
             DB::query("UPDATE Driver SET Active = 0");
             DB::query("UPDATE DriverRelease SET Active = 0");
 
-            $url = 'http://stackalytics.com/driverlog/api/1.0/drivers';
+            $url = 'https://opendev.org/x/driverlog/raw/branch/master/etc/default_data.json';
             $jsonResponse = @file_get_contents($url);
 
-            $driverArray = json_decode($jsonResponse, true);
-            $array = $driverArray['drivers'];
+            $driverLog = json_decode($jsonResponse, true);
+            $drivers = $driverLog['drivers'];
+            $projectsRaw = $driverLog['projects'];
+            $projectArray = [];
+            $releasesRaw = $driverLog['releases'];
+            $releaseArray = [];
 
-            foreach ($array as $contents) {
-                if(!isset($contents['project_name']) || !isset($contents['name'])) continue;
+            foreach ($projectsRaw as $project) {
+                $projectArray[$project['id']] = $project['name'];
+            }
+
+            foreach ($releasesRaw as $release) {
+                $releaseArray[$release['id']] = $release;
+            }
+
+            foreach ($drivers as $contents) {
+                if(!isset($contents['project_id']) || !isset($contents['name'])) continue;
+
+                $projectName = trim($projectArray[$contents['project_id']]);
 
                 $driver = Driver::get()->filter(
                     array(
                         "Name" => trim($contents['name']),
-                        "Project" => trim($contents['project_name'])
+                        "Project" => $projectName
                     )
                 )->first();
 
@@ -48,23 +62,26 @@ final class UpdateDriversTask extends CronTask
                 }
 
                 $driver->Name = trim($contents['name']);
-                $driver->Description = isset($contents['description'])?$contents['description']: null;
-                $driver->Project = $contents['project_name'];
+                $driver->Description = isset($contents['description']) ? $contents['description']: null;
+                $driver->Project = $projectName;
                 $driver->Vendor = isset($contents['vendor'])?$contents['vendor']: null;
                 $driver->Url = isset($contents['wiki'])?$contents['wiki']: null;
                 $driver->Active = 1;
 
-                if (isset($contents['releases_info'])) {
-                    $releases = $contents['releases_info'];
+                $driver->Releases()->removeAll();
+                if (isset($contents['releases'])) {
+                    $releases = $contents['releases'];
                     foreach ($releases as $release) {
-                        $driver_release = DriverRelease::get()->filter("Name", trim($release['name']))->first();
+                        $driver_release = DriverRelease::get()->filter("Name", trim($release))->first();
 
                         if (!$driver_release) {
                             $driver_release = new DriverRelease();
                         }
 
-                        $driver_release->Name = trim($release['name']);
-                        $driver_release->Url = $release['wiki'];
+                        $driver_release->Name = trim($release);
+                        $driver_release->Url = $releaseArray[$release]['wiki'];
+                        $startDate = $releaseArray[$release]['start'];
+                        $driver_release->Start = date('Y-m-d',strtotime($startDate));
                         $driver_release->Active = 1;
 
                         $driver_release->write();
