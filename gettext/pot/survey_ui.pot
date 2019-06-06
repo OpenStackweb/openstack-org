@@ -140,7 +140,7 @@ msgstr ""
 
 #: survey_builder/templates/SurveyRankingField.ss:2
 #, php-format
-msgid "Please rank up to %s"
+msgid "Please rank up to %1$s"
 msgstr ""
 
 #: survey_builder/templates/SurveyRankingField.ss:4
@@ -269,7 +269,7 @@ msgstr ""
 #, php-format
 msgid ""
 "Uncover your own findings by digging into the User Survey data from the past "
-"year with a <a href=\"%s\">new analysis tool</a> available to the OpenStack "
+"year with a <a href=\"%1$s\">new analysis tool</a> available to the OpenStack "
 "community. Apply multiple filters to virtually every quantitative question "
 "from the user survey."
 msgstr ""
@@ -322,11 +322,10 @@ msgstr ""
 #, php-format
 msgid ""
 "This survey provides users an opportunity to influence the community and software direction. "
-"By sharing information about your configuration and requirements, the OpenStack Foundation "
-"User Committee will be able to advocate on your behalf. The %1$s survey results will be presented at "
-"the %2$s Summit, November %3$s. Take the OpenStack User Survey by %4$s to be included in this round "
-"of analysis. requirements, the OpenStack Foundation User Committee will be able to "
-"advocate on your behalf."
+"By sharing information about your configuration and requirements, the OpenStack Foundation User Committee "
+"will be able to advocate on your behalf. "
+"The %1$s survey results will be presented at the %2$s Summit, %3$s. Take the OpenStack User Survey by %4$s "
+"to be included in this round of analysis."
 msgstr ""
 
 #: survey_builder/templates/Layout/UserSurveyPage_LandingPage.ss:48
@@ -335,21 +334,17 @@ msgstr ""
 
 #: survey_builder/templates/Layout/Includes/DynamicEntityStepForm.ss:16
 #, php-format
-msgid ""
-"If you do not wish to answer these questions, you may <a href=\"%s\">skip to "
-"the next section.</a>"
+msgid "If you do not wish to answer these questions, you may <a href=\"%1$s\">skip to the next section.</a>"
 msgstr ""
 
 #: survey_builder/templates/Layout/Includes/DynamicEntityStepForm.ss:18
 #, php-format
-msgid "Your deployments (%s)"
+msgid "Your deployments (%1$s)"
 msgstr ""
 
 #: survey_builder/templates/Layout/Includes/DynamicEntityStepForm.ss:21
 #, php-format
-msgid ""
-"You do not have any OpenStack deployment yet. <a href=\"%s\">Want to add "
-"one?</a>"
+msgid "You do not have any OpenStack deployment yet. <a href=\"%1$s\">Want to add one?</a>"
 msgstr ""
 
 #: survey_builder/templates/Layout/Includes/ReviewStepForm.ss:10
@@ -382,7 +377,7 @@ msgstr ""
 #, php-format
 msgid ""
 "<p><strong>If you do not wish to answer these questions, you may <a href="
-"\"%s\">skip to the next section</a>.</strong></p>"
+"\"%1$s\">skip to the next section</a>.</strong></p>"
 msgstr ""
 
 #: survey_builder/code/ui/frontend/builders/SurveyReviewStepTemplateUIBuilder.php:23
@@ -404,13 +399,13 @@ msgstr ""
 
 #: survey_builder/code/ui/frontend/builders/EntitySurveyRegularStepTemplateUIBuilder.php:27
 #, php-format
-msgid "STEP %s"
+msgid "STEP %1$s"
 msgstr ""
 
 #: survey_builder/code/ui/frontend/builders/fields/SurveyRadioButtonMatrixTemplateQuestionUIBuilder.php:34
 #:  survey_builder/code/ui/frontend/builders/fields/SurveyRankingQuestionTemplateUIBuilder.php:37
 #, php-format
-msgid "you must select at least one item (%s)"
+msgid "you must select at least one item (%1$s)"
 msgstr ""
 
 #: survey_builder/code/ui/frontend/SurveyPage.php:411
@@ -581,3 +576,4 @@ msgstr ""
 #: survey_builder/templates/Layout/UserSurveyPage_ThankYou.ss:18
 msgid "Back to Home"
 msgstr ""
+
