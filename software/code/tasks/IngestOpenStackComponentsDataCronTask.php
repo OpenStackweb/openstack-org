@@ -268,7 +268,7 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
 
         try {
             // iterate between files in repo
-            $fileUrl = 'https://raw.githubusercontent.com/openstack/openstack-map/master/';
+            $fileUrl = 'https://opendev.org/osf/openstack-map/raw/branch/master/';
             $files = ['deployment_tools.yaml','openstack_components.yaml','sdks.yaml'];
 
             foreach ($files as $file) {
