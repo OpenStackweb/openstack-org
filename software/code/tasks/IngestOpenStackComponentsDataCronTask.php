@@ -137,7 +137,7 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
 
     private function processProjects()
     {
-        $url      = "https://raw.githubusercontent.com/openstack/governance/master/reference/projects.yaml";
+        $url      = "https://opendev.org/openstack/governance/raw/branch/master/reference/projects.yaml";
         $response = null;
         try
         {
