@@ -145,3 +145,7 @@ jobs:
   - name: "IngestReleaseContributorsTask"
     cron_expression: "* * * * *" # run every minute
     enabled: 1
+
+  - name: "UpdateTechnicalCommitteeTask"
+    cron_expression: "00 23 * * *" # run every day at 2300
+    enabled: 1
