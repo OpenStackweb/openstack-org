@@ -5,11 +5,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 
-# survey template 12 title
-msgid "OpenStack User Survey 2018"
+# survey template 14 title
+msgid "OpenStack User Survey 2019"
 msgstr ""
 
-# survey template 12 - survey step about-you friendly name
+# survey template 14 - survey step about-you friendly name
 msgid "About You"
 msgstr ""
 
@@ -25,12 +25,12 @@ msgstr ""
 msgid "What are the ways you work with OpenStack?*<br/><font size=\"-2\"><em>Select all that apply</em></font>"
 msgstr ""
 
-# question OpenStackActivitySydney empty string, question IndustrySydney empty string, question ITActivitySydney empty string, question PrimaryCountrySydney empty string, question OrgSizeSydney empty string, question BusinessDrivers empty string, question NetPromoter empty string, question EmergingTechnologies empty string, question DocsFeedback empty string, question IsPublic empty string, question DeploymentStage empty string, question DeploymentAge empty string, question CountriesPhysicalLocation empty string, question DeploymentType empty string, question CurrentReleases empty string, question WorkloadsCategories empty string, question RefStackTest empty string, question NumCloudUsers empty string, question ComputeNodes empty string, question ComputeCores empty string, question ComputeInstances empty string, question NetworkNumIPs empty string, question BlockStorageTotalSize empty string, question ObjectStorageSize empty string, question ObjectStorageNumObjects empty string, question NovaNumCells empty string, question UsedPackages empty string, question CustomPackagesReason empty string, question DeploymentTools empty string, question ContainerFormat empty string, question PaasTools empty string, question Hypervisors empty string, question DatabaseUsed empty string, question Toolkits empty string, question InteractingClouds empty string, question ITPercentageonOpenStack empty string, question NetworkDrivers empty string, question IdentityDrivers empty string, question BlockStorageDrivers empty string, question VendorProductsSoftware empty string, question VendorProductsHardware empty string, question OperatingSystems empty string, question SupportedFeatures empty string, question TCOpenStackVersion empty string, question TCStableBranches empty string, question HeatFeedback empty string, question InteropFeedbackChallenges empty string, question KeystoneFeedback empty string, question KollaFeedback empty string, question ManilaFeedback empty string, question NeutronFeedback empty string, question NovaFeedback empty string, question RefStackFeedback empty string, question SwiftFeedback empty string, question TelemetryFeedback empty string, question TripleOFeedback empty string, question TroveFeedback empty string
+# question OpenStackActivitySydney empty string, question IndustrySydney empty string, question ITActivitySydney empty string, question PrimaryCountrySydney empty string, question OrgSizeSydney empty string, question BusinessDrivers empty string, question NetPromoter empty string, question EmergingTechnologies empty string, question DocsFeedback empty string, question IsPublic empty string, question DeploymentStage empty string, question DeploymentAge empty string, question CountriesPhysicalLocation empty string, question DeploymentType empty string, question CurrentReleases empty string, question WorkloadsCategories empty string, question NumCloudUsers empty string, question ComputeNodes empty string, question ComputeCores empty string, question ComputeInstances empty string, question NetworkNumIPs empty string, question BlockStorageTotalSize empty string, question ObjectStorageSize empty string, question ObjectStorageNumObjects empty string, question NovaNumCells empty string, question UsedPackages empty string, question CustomPackagesReason empty string, question DeploymentTools empty string, question ContainerFormat empty string, question PaasTools empty string, question Hypervisors empty string, question DatabaseUsed empty string, question Toolkits empty string, question InteractingClouds empty string, question ITPercentageonOpenStack empty string, question NetworkDrivers empty string, question IdentityDrivers empty string, question BlockStorageDrivers empty string, question VendorProductsSoftware empty string, question VendorProductsHardware empty string, question OperatingSystems empty string, question SupportedFeatures empty string, question TCOpenStackVersion empty string, question TCStableBranches empty string, question TCProjectsContributedTo empty string, question TCHowContribute empty string, question HeatFeedback empty string, question HeatQuestion empty string, question InteropFeedbackChallenges empty string, question KeystoneFeedback empty string, question Keystone2 empty string, question KollaFeedback empty string, question ManilaFeedback empty string, question NeutronFeedback empty string, question NovaFeedback empty string, question OctaviaDriversList empty string, question OctaviaFeaturesList empty string, question RefStackFeedback empty string, question SwiftFeedback empty string, question TelemetryFeedback empty string, question TripleOFeedback empty string, question TroveFeedback empty string
 msgid "-- Select One --"
 msgstr ""
 
-# question OpenStackActivitySydney default group label, question IndustrySydney default group label, question ITActivitySydney default group label, question PrimaryCountrySydney default group label, question OrgSizeSydney default group label, question BusinessDrivers default group label, question NetPromoter default group label, question EmergingTechnologies default group label, question DocsFeedback default group label, question IsPublic default group label, question DeploymentStage default group label, question DeploymentAge default group label, question CountriesPhysicalLocation default group label, question DeploymentType default group label, question CurrentReleases default group label, question WorkloadsCategories default group label, question RefStackTest default group label, question NumCloudUsers default group label, question ComputeNodes default group label, question ComputeCores default group label, question ComputeInstances default group label, question NetworkNumIPs default group label, question BlockStorageTotalSize default group label, question ObjectStorageSize default group label, question ObjectStorageNumObjects default group label, question NovaNumCells default group label, question UsedPackages default group label, question CustomPackagesReason default group label, question DeploymentTools default group label, question ContainerFormat default group label, question PaasTools default group label, question Hypervisors default group label, question DatabaseUsed default group label, question Toolkits default group label, question InteractingClouds default group label, question ITPercentageonOpenStack default group label, question NetworkDrivers default group label, question IdentityDrivers default group label, question BlockStorageDrivers default group label, question VendorProductsSoftware default group label, question VendorProductsHardware default group label, question OperatingSystems default group label, question SupportedFeatures default group label, question TCOpenStackVersion default group label, question TCStableBranches default group label, question HeatFeedback default group label, question InteropFeedbackChallenges default group label, question KeystoneFeedback default group label, question KollaFeedback default group label, question ManilaFeedback default group label, question NeutronFeedback default group label, question NovaFeedback default group label, question RefStackFeedback default group label, question SwiftFeedback default group label, question TelemetryFeedback default group label, question TripleOFeedback default group label, question TroveFeedback default group label
-msgid "<p>Others</p>"
+# question OpenStackActivitySydney default group label, question OpenStackActivitySydney value Other label, question IndustrySydney value Other label, question ITActivitySydney default group label, question ITActivitySydney value Other label, question EmergingTechnologies value Other label, question WorkloadsCategories default group label, question WorkloadsCategories value Other label, question UsedPackages default group label, question CustomPackagesReason default group label, question CustomPackagesReason value Other label, question ContainerFormat default group label, question ContainerFormat value Other label, question PaasTools default group label, question PaasTools value Other label, question Hypervisors default group label, question DatabaseUsed default group label, question Toolkits default group label, question Toolkits value Other label, question InteractingClouds default group label, question InteractingClouds value Other label, question NetworkDrivers default group label, question IdentityDrivers default group label, question BlockStorageDrivers default group label, question VendorProductsSoftware default group label, question VendorProductsHardware value Other label, question OperatingSystems value Other label, question SupportedFeatures default group label, question TCProjectsContributedTo default group label, question TCHowContribute default group label, question TCHowContribute value Other label, question InteropFeedbackChallenges default group label, question InteropFeedbackChallenges value Other label, question KeystoneFeedback default group label, question KeystoneFeedback value Other label, question ManilaFeedback default group label, question ManilaFeedback value Other label, question OctaviaDriversList value Other label, question OctaviaFeaturesList value Other label, question RefStackFeedback default group label, question TelemetryFeedback default group label, question TelemetryFeedback value Other label, question TroveFeedback default group label
+msgid "Other"
 msgstr ""
 
 # question OpenStackActivitySydney value App developer-deployer label
@@ -53,10 +53,6 @@ msgstr ""
 msgid "OpenStack upstream developer"
 msgstr ""
 
-# question OpenStackActivitySydney value Other label, question IndustrySydney value Other label, question ITActivitySydney value Other label, question EmergingTechnologies value Other label, question WorkloadsCategories value Other label, question CustomPackagesReason value Other label, question ContainerFormat value Other label, question PaasTools value Other label, question Toolkits value Other label, question InteractingClouds value Other label, question VendorProductsHardware value Other label, question OperatingSystems value Other label, question InteropFeedbackChallenges value Other label, question KeystoneFeedback value Other label, question ManilaFeedback value Other label, question SwiftFeedback value Other label, question TelemetryFeedback value Other label
-msgid "Other"
-msgstr ""
-
 # step about-you - question OpenStackActivityOther label
 msgid "Please describe your relationship with OpenStack"
 msgstr ""
@@ -73,7 +69,7 @@ msgstr ""
 msgid "The OpenStack Foundation and User Committee may communicate with me in the future about my usage.*"
 msgstr ""
 
-# survey template 12 - survey step your-organization friendly name
+# survey template 14 - survey step your-organization friendly name
 msgid "Your Organization"
 msgstr ""
 
@@ -83,6 +79,10 @@ msgstr ""
 
 # step your-organization - question IndustrySydney label
 msgid "Your Organization’s Primary Industry*"
+msgstr ""
+
+# question IndustrySydney default group label, question PrimaryCountrySydney default group label, question OrgSizeSydney default group label, question BusinessDrivers default group label, question NetPromoter default group label, question DocsFeedback default group label, question IsPublic default group label, question DeploymentStage default group label, question DeploymentAge default group label, question CountriesPhysicalLocation default group label, question DeploymentType default group label, question ProjectsUsed default group label, question ProjectsUsedPoC default group label, question NumCloudUsers default group label, question ComputeNodes default group label, question ComputeCores default group label, question ComputeInstances default group label, question NetworkNumIPs default group label, question BlockStorageTotalSize default group label, question ObjectStorageSize default group label, question ObjectStorageNumObjects default group label, question NovaNumCells default group label, question ITPercentageonOpenStack default group label, question OperatingSystems default group label, question TCOpenStackVersion default group label, question TCStableBranches default group label, question HeatFeedback default group label, question HeatQuestion default group label, question Keystone2 default group label, question NovaFeedback default group label, question TripleOFeedback default group label
+msgid "<p>Others</p>"
 msgstr ""
 
 # question IndustrySydney value Academic / Research label
@@ -261,7 +261,7 @@ msgstr ""
 msgid "Don’t know / not sure"
 msgstr ""
 
-# survey template 12 - survey step your-thoughts friendly name
+# survey template 14 - survey step your-thoughts friendly name
 msgid "Your Thoughts"
 msgstr ""
 
@@ -377,6 +377,18 @@ msgstr ""
 msgid "Which new/emerging technologies are you interested in using or seeing integrated with OpenStack?<br/><font size=\"-2\"><em>Select all that apply</em></font>"
 msgstr ""
 
+# question EmergingTechnologies default group label, question CurrentReleases default group label, question DeploymentTools default group label, question VendorProductsHardware default group label, question KollaFeedback default group label, question NeutronFeedback default group label, question OctaviaDriversList default group label, question OctaviaFeaturesList default group label, question SwiftFeedback default group label
+msgid "<p>Other</p>"
+msgstr ""
+
+# question EmergingTechnologies value 5G label
+msgid "5G"
+msgstr ""
+
+# question EmergingTechnologies value AI/ML label
+msgid "AI/ML"
+msgstr ""
+
 # question EmergingTechnologies value Bare metal label
 msgid "Bare metal"
 msgstr ""
@@ -441,7 +453,7 @@ msgstr ""
 msgid "Never"
 msgstr ""
 
-# survey template 12 - survey step your-openstack-deployments content
+# survey template 14 - survey step your-openstack-deployments content
 msgid ""
 "<p>A deployment profile tracks information about an individual OpenStack deployment.</p>"
 "<ul><li>An organization may have multiple deployment profiles for each OpenStack deployment they have.</li>"
@@ -450,7 +462,7 @@ msgid ""
 "</ul><p>As always, the information you provide is confidential and will only be presented in aggregate unless you consent to making it public.</p>"
 msgstr ""
 
-# survey template 12 - survey step your-openstack-deployments friendly name, survey template 13 - survey step your-openstack-deployments friendly name
+# survey template 14 - survey step your-openstack-deployments friendly name, survey template 15 - survey step your-openstack-deployments friendly name
 msgid "Your OpenStack Deployments"
 msgstr ""
 
@@ -466,11 +478,11 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-# survey template 12 - survey step thank-you friendly name
+# survey template 14 - survey step thank-you friendly name
 msgid "Thank You"
 msgstr ""
 
-# survey template 13 title
+# survey template 15 title
 msgid "Deployment"
 msgstr ""
 
@@ -508,6 +520,14 @@ msgstr ""
 
 # step your-openstack-deployments - question DeploymentAge label
 msgid "When was this deployment created?"
+msgstr ""
+
+# question DeploymentAge value 2019 label
+msgid "2019"
+msgstr ""
+
+# question DeploymentAge value 2018 label
+msgid "2018"
 msgstr ""
 
 # question DeploymentAge value 2017 label
@@ -580,6 +600,14 @@ msgstr ""
 
 # question CurrentReleases value Trunk label
 msgid "Trunk / continuous deployment"
+msgstr ""
+
+# question CurrentReleases value Stein label
+msgid "Stein"
+msgstr ""
+
+# question CurrentReleases value Rocky label
+msgid "Rocky"
 msgstr ""
 
 # question CurrentReleases value Queens label
@@ -698,10 +726,6 @@ msgstr ""
 msgid "Which projects does this deployment currently use, or are you interested in using in the future?"
 msgstr ""
 
-# question ProjectsUsed default group label, question ProjectsUsedPoC default group label
-msgid "<p>Additional Projects</p>"
-msgstr ""
-
 # question ProjectsUsed col Production label
 msgid "Production"
 msgstr ""
@@ -714,256 +738,200 @@ msgstr ""
 msgid "Interested"
 msgstr ""
 
-# question ProjectsUsed row AODH (Alarming Service) label
+# question ProjectsUsed row AODH (Alarming Service) label, question TCProjectsContributedTo value AODH (Alarming Service) label
 msgid "AODH (Alarming Service)"
 msgstr ""
 
-# question ProjectsUsed row Barbican (Key Management) label, question ProjectsUsedPoC row Barbican (Key Management) label
+# question ProjectsUsed row Barbican (Key Management) label, question ProjectsUsedPoC row Barbican (Key Management) label, question TCProjectsContributedTo value Barbican (Key Management) label
 msgid "Barbican (Key Management)"
 msgstr ""
 
-# question ProjectsUsed row Ceilometer (Metering & Monitoring) label, question ProjectsUsedPoC row Ceilometer (Metering & Monitoring) label
+# question ProjectsUsed row Ceilometer (Metering & Monitoring) label, question ProjectsUsedPoC row Ceilometer (Metering & Monitoring) label, question TCProjectsContributedTo value Ceilometer (Metering & Monitoring) label
 msgid "Ceilometer (Metering & Monitoring)"
 msgstr ""
 
-# question ProjectsUsed row Cinder (Block Storage) label, question ProjectsUsedPoC row Cinder (Block Storage) label
+# question ProjectsUsed row Cinder (Block Storage) label, question ProjectsUsedPoC row Cinder (Block Storage) label, question TCProjectsContributedTo value Cinder (Block Storage) label
 msgid "Cinder (Block Storage)"
 msgstr ""
 
-# question ProjectsUsed row Cloudkitty (Billing and chargebacks) label, question ProjectsUsedPoC row Cloudkitty (Billing and chargebacks) label
+# question ProjectsUsed row Cloudkitty (Billing and chargebacks) label, question ProjectsUsedPoC row Cloudkitty (Billing and chargebacks) label, question TCProjectsContributedTo value Cloudkitty (Billing and chargebacks) label
 msgid "Cloudkitty (Billing and chargebacks)"
 msgstr ""
 
-# question ProjectsUsed row Congress (Governance Service) label, question ProjectsUsedPoC row Congress (Governance Service) label
+# question ProjectsUsed row Congress (Governance Service) label, question ProjectsUsedPoC row Congress (Governance Service) label, question TCProjectsContributedTo value Congress (Governance Service) label
 msgid "Congress (Governance Service)"
 msgstr ""
 
-# question ProjectsUsed row Designate (DNS Service) label, question ProjectsUsedPoC row Designate (DNS Service) label
+# question ProjectsUsed row Designate (DNS Service) label, question ProjectsUsedPoC row Designate (DNS Service) label, question TCProjectsContributedTo value Designate (DNS Service) label
 msgid "Designate (DNS Service)"
 msgstr ""
 
-# question ProjectsUsed row Dragonflow (Neutron Plugin) label, question ProjectsUsedPoC row Dragonflow (Neutron Plugin) label
+# question ProjectsUsed row Dragonflow (Neutron Plugin) label, question ProjectsUsedPoC row Dragonflow (Neutron Plugin) label, question TCProjectsContributedTo value Dragonflow (Neutron Plugin) label
 msgid "Dragonflow (Neutron Plugin)"
 msgstr ""
 
-# question ProjectsUsed row Freezer (Backup, Restore, and Disaster Recovery) label, question ProjectsUsedPoC row Freezer (Backup, Restore, and Disaster Recovery) label
+# question ProjectsUsed row Freezer (Backup, Restore, and Disaster Recovery) label, question ProjectsUsedPoC row Freezer (Backup, Restore, and Disaster Recovery) label, question TCProjectsContributedTo value Freezer (Backup, Restore, and Disaster Recovery) label
 msgid "Freezer (Backup, Restore, and Disaster Recovery)"
 msgstr ""
 
-# question ProjectsUsed row Glance (Image Service) label, question ProjectsUsedPoC row Glance (Image Service) label
+# question ProjectsUsed row Glance (Image Service) label, question ProjectsUsedPoC row Glance (Image Service) label, question TCProjectsContributedTo value Glance (Image Service) label
 msgid "Glance (Image Service)"
 msgstr ""
 
-# question ProjectsUsed row Heat (Orchestration) label, question ProjectsUsedPoC row Heat (Orchestration) label
+# question ProjectsUsed row Heat (Orchestration) label, question ProjectsUsedPoC row Heat (Orchestration) label, question TCProjectsContributedTo value Heat (Orchestration) label
 msgid "Heat (Orchestration)"
 msgstr ""
 
-# question ProjectsUsed row Horizon (Dashboard) label, question ProjectsUsedPoC row Horizon (Dashboard) label
+# question ProjectsUsed row Horizon (Dashboard) label, question ProjectsUsedPoC row Horizon (Dashboard) label, question TCProjectsContributedTo value Horizon (Dashboard) label
 msgid "Horizon (Dashboard)"
 msgstr ""
 
-# question ProjectsUsed row Ironic (Bare Metal) label, question ProjectsUsedPoC row Ironic (Bare Metal) label
+# question ProjectsUsed row Ironic (Bare Metal) label, question ProjectsUsedPoC row Ironic (Bare Metal) label, question TCProjectsContributedTo value Ironic (Bare Metal) label
 msgid "Ironic (Bare Metal)"
 msgstr ""
 
-# question ProjectsUsed row Karbor (Application Data Protection as a Service) label, question ProjectsUsedPoC row Karbor (Application Data Protection as a Service) label
+# question ProjectsUsed row Karbor (Application Data Protection as a Service) label, question ProjectsUsedPoC row Karbor (Application Data Protection as a Service) label, question TCProjectsContributedTo value Karbor (Application Data Protection as a Service) label
 msgid "Karbor (Application Data Protection as a Service)"
 msgstr ""
 
-# question ProjectsUsed row Keystone (Identity Service) label, question ProjectsUsedPoC row Keystone (Identity Service) label
+# question ProjectsUsed row Keystone (Identity Service) label, question ProjectsUsedPoC row Keystone (Identity Service) label, question TCProjectsContributedTo value Keystone (Identity Service) label
 msgid "Keystone (Identity Service)"
 msgstr ""
 
-# question ProjectsUsed row Kuryr (Container plugin) label, question ProjectsUsedPoC row Kuryr (Container plugin) label
+# question ProjectsUsed row Kuryr (Container plugin) label, question ProjectsUsedPoC row Kuryr (Container plugin) label, question TCProjectsContributedTo value Kuryr (Container plugin) label
 msgid "Kuryr (Container plugin)"
 msgstr ""
 
-# question ProjectsUsed row Magnum(Containers Service) label, question ProjectsUsedPoC row Magnum(Containers Service) label
+# question ProjectsUsed row Magnum(Containers Service) label, question ProjectsUsedPoC row Magnum(Containers Service) label, question TCProjectsContributedTo value Magnum(Containers Service) label
 msgid "Magnum(Containers Service)"
 msgstr ""
 
-# question ProjectsUsed row Manila (Shared File Systems) label, question ProjectsUsedPoC row Manila (Shared File Systems) label
+# question ProjectsUsed row Manila (Shared File Systems) label, question ProjectsUsedPoC row Manila (Shared File Systems) label, question TCProjectsContributedTo value Manila (Shared File Systems) label
 msgid "Manila (Shared File Systems)"
 msgstr ""
 
-# question ProjectsUsed row Mistral (Workflow Service) label, question ProjectsUsedPoC row Mistral (Workflow Service) label
+# question ProjectsUsed row Mistral (Workflow Service) label, question ProjectsUsedPoC row Mistral (Workflow Service) label, question TCProjectsContributedTo value Mistral (Workflow Service) label
 msgid "Mistral (Workflow Service)"
 msgstr ""
 
-# question ProjectsUsed row Monasca (Monitoring) label, question ProjectsUsedPoC row Monasca (Monitoring) label
+# question ProjectsUsed row Monasca (Monitoring) label, question ProjectsUsedPoC row Monasca (Monitoring) label, question TCProjectsContributedTo value Monasca (Monitoring) label
 msgid "Monasca (Monitoring)"
 msgstr ""
 
-# question ProjectsUsed row Murano (Application Catalog) label, question ProjectsUsedPoC row Murano (Application Catalog) label
+# question ProjectsUsed row Murano (Application Catalog) label, question ProjectsUsedPoC row Murano (Application Catalog) label, question TCProjectsContributedTo value Murano (Application Catalog) label
 msgid "Murano (Application Catalog)"
 msgstr ""
 
-# question ProjectsUsed row Neutron (Networking) label, question ProjectsUsedPoC row Neutron (Networking) label
+# question ProjectsUsed row Neutron (Networking) label, question ProjectsUsedPoC row Neutron (Networking) label, question TCProjectsContributedTo value Neutron (Networking) label
 msgid "Neutron (Networking)"
 msgstr ""
 
-# question ProjectsUsed row Nova (Compute) label, question ProjectsUsedPoC row Nova (Compute) label
+# question ProjectsUsed row Nova (Compute) label, question ProjectsUsedPoC row Nova (Compute) label, question TCProjectsContributedTo value Nova (Compute) label
 msgid "Nova (Compute)"
 msgstr ""
 
-# question ProjectsUsed row Octavia (Load Balancer) label, question ProjectsUsedPoC row Octavia (Load Balancer) label
+# question ProjectsUsed row Octavia (Load Balancer) label, question ProjectsUsedPoC row Octavia (Load Balancer) label, question TCProjectsContributedTo value Octavia (Load Balancer) label
 msgid "Octavia (Load Balancer)"
 msgstr ""
 
-# question ProjectsUsed row OpenStack-Ansible label, question ProjectsUsedPoC row OpenStack-Ansible label
+# question ProjectsUsed row OpenStack-Ansible label, question ProjectsUsedPoC row OpenStack-Ansible label, question TCProjectsContributedTo value OpenStack-Ansible (Ansible Playbooks for OpenStack) label
 msgid "OpenStack-Ansible (Ansible Playbooks for OpenStack)"
 msgstr ""
 
-# question ProjectsUsed row OpenStack Client (Command-line client) label, question ProjectsUsedPoC row OpenStack Client (Command-line client) label
+# question ProjectsUsed row OpenStack Client (Command-line client) label, question ProjectsUsedPoC row OpenStack Client (Command-line client) label, question TCProjectsContributedTo value OpenStack Client (Command-line client) label
 msgid "OpenStack Client (Command-line client)"
 msgstr ""
 
-# question ProjectsUsed row Panko (Event, Metadata Indexing Service) label, question ProjectsUsedPoC row Panko (Event, Metadata Indexing Service) label
+# question ProjectsUsed row Panko (Event, Metadata Indexing Service) label, question ProjectsUsedPoC row Panko (Event, Metadata Indexing Service) label, question TCProjectsContributedTo value Panko (Event, Metadata Indexing Service) label
 msgid "Panko (Event, Metadata Indexing Service)"
 msgstr ""
 
-# question ProjectsUsed row Rally (Benchmark Service) label, question ProjectsUsedPoC row Rally (Benchmark Service) label
+# question ProjectsUsed row Rally (Benchmark Service) label, question ProjectsUsedPoC row Rally (Benchmark Service) label, question TCProjectsContributedTo value Rally (Benchmark Service) label
 msgid "Rally (Benchmark Service)"
 msgstr ""
 
-# question ProjectsUsed row Sahara (Data Processing) label, question ProjectsUsedPoC row Sahara (Data Processing) label
+# question ProjectsUsed row Sahara (Data Processing) label, question ProjectsUsedPoC row Sahara (Data Processing) label, question TCProjectsContributedTo value Sahara (Data Processing) label
 msgid "Sahara (Data Processing)"
 msgstr ""
 
-# question ProjectsUsed row Searchlight (Indexing and Search) label, question ProjectsUsedPoC row Searchlight (Indexing and Search) label
+# question ProjectsUsed row Searchlight (Indexing and Search) label, question ProjectsUsedPoC row Searchlight (Indexing and Search) label, question TCProjectsContributedTo value Searchlight (Indexing and Search) label
 msgid "Searchlight (Indexing and Search)"
 msgstr ""
 
-# question ProjectsUsed row Senlin (Clustering service) label, question ProjectsUsedPoC row Senlin (Clustering service) label
+# question ProjectsUsed row Senlin (Clustering service) label, question ProjectsUsedPoC row Senlin (Clustering service) label, question TCProjectsContributedTo value Senlin (Clustering service) label
 msgid "Senlin (Clustering service)"
 msgstr ""
 
-# question ProjectsUsed row Solum (Software Dev Lifecycle Mgmt) label, question ProjectsUsedPoC row Solum (Software Dev Lifecycle Mgmt) label
+# question ProjectsUsed row Solum (Software Dev Lifecycle Mgmt) label, question ProjectsUsedPoC row Solum (Software Dev Lifecycle Mgmt) label, question TCProjectsContributedTo value Solum (Software Dev Lifecycle Mgmt) label
 msgid "Solum (Software Dev Lifecycle Mgmt)"
 msgstr ""
 
-# question ProjectsUsed row Storlets (Computable Object Storage) label, question ProjectsUsedPoC row Storlets (Computable Object Storage) label
+# question ProjectsUsed row Storlets (Computable Object Storage) label, question ProjectsUsedPoC row Storlets (Computable Object Storage) label, question TCProjectsContributedTo value Storlets (Computable Object Storage) label
 msgid "Storlets (Computable Object Storage)"
 msgstr ""
 
-# question ProjectsUsed row Swift (Object Storage) label, question ProjectsUsedPoC row Swift (Object Storage) label
+# question ProjectsUsed row Swift (Object Storage) label, question ProjectsUsedPoC row Swift (Object Storage) label, question TCProjectsContributedTo value Swift (Object Storage) label
 msgid "Swift (Object Storage)"
 msgstr ""
 
-# question ProjectsUsed row Tacker (NFV Orchestration) label, question ProjectsUsedPoC row Tacker (NFV Orchestration) label
+# question ProjectsUsed row Tacker (NFV Orchestration) label, question ProjectsUsedPoC row Tacker (NFV Orchestration) label, question TCProjectsContributedTo value Tacker (NFV Orchestration) label
 msgid "Tacker (NFV Orchestration)"
 msgstr ""
 
-# question ProjectsUsed row Tricircle (Networking Automation for Multi-Region Deployments) label, question ProjectsUsedPoC row Tricircle (Networking Automation for Multi-Region Deployments) label
+# question ProjectsUsed row Tricircle (Networking Automation for Multi-Region Deployments) label, question ProjectsUsedPoC row Tricircle (Networking Automation for Multi-Region Deployments) label, question TCProjectsContributedTo value Tricircle (Networking Automation for Multi-Region Deployments) label
 msgid "Tricircle (Networking Automation for Multi-Region Deployments)"
 msgstr ""
 
-# question ProjectsUsed row TripleO (Deployment) label, question ProjectsUsedPoC row TripleO (Deployment) label
+# question ProjectsUsed row TripleO (Deployment) label, question ProjectsUsedPoC row TripleO (Deployment) label, question TCProjectsContributedTo value TripleO (Deployment) label
 msgid "TripleO (Deployment)"
 msgstr ""
 
-# question ProjectsUsed row Trove (Database Service) label, question ProjectsUsedPoC row Trove (Database Service) label
+# question ProjectsUsed row Trove (Database Service) label, question ProjectsUsedPoC row Trove (Database Service) label, question TCProjectsContributedTo value Trove (Database Service) label
 msgid "Trove (Database Service)"
 msgstr ""
 
-# question ProjectsUsed row Vitrage (Root Cause Analysis service) label, question ProjectsUsedPoC row Vitrage (Root Cause Analysis service) label
+# question ProjectsUsed row Vitrage (Root Cause Analysis service) label, question ProjectsUsedPoC row Vitrage (Root Cause Analysis service) label, question TCProjectsContributedTo value Vitrage (Root Cause Analysis service) label
 msgid "Vitrage (Root Cause Analysis service)"
 msgstr ""
 
-# question ProjectsUsed row Watcher (Optimization Service) label, question ProjectsUsedPoC row Watcher (Optimization Service) label
+# question ProjectsUsed row Watcher (Optimization Service) label, question ProjectsUsedPoC row Watcher (Optimization Service) label, question TCProjectsContributedTo value Watcher (Optimization Service) label
 msgid "Watcher (Optimization Service)"
 msgstr ""
 
-# question ProjectsUsed row Zaqar (Message Service) label, question ProjectsUsedPoC row Zaqar (Message Service) label
+# question ProjectsUsed row Zaqar (Message Service) label, question ProjectsUsedPoC row Zaqar (Message Service) label, question TCProjectsContributedTo value Zaqar (Message Service) label
 msgid "Zaqar (Message Service)"
 msgstr ""
 
-# question ProjectsUsed row Zun (Container Management Service) label, question ProjectsUsedPoC row Zun (Container Management Service) label
+# question ProjectsUsed row Zun (Container Management Service) label, question ProjectsUsedPoC row Zun (Container Management Service) label, question TCProjectsContributedTo value Zun (Container Management Service) label
 msgid "Zun (Container Management Service)"
 msgstr ""
 
-# question ProjectsUsed row LOCI label
+# question ProjectsUsed row LOCI label, question ProjectsUsedPoC row LOCI label, question TCProjectsContributedTo value LOCI (Lightweight OCI compatible images) label
 msgid "LOCI (Lightweight OCI compatible images)"
 msgstr ""
 
-# question ProjectsUsed row OpenStack-Helm label
+# question ProjectsUsed row OpenStack-Helm label, question ProjectsUsedPoC row OpenStack-Helm label, question TCProjectsContributedTo value OpenStack-Helm (Charts for deploying OpenStack on K8s) label
 msgid "OpenStack-Helm (Charts for deploying OpenStack on K8s)"
 msgstr ""
 
-# question ProjectsUsed row Masakari label
+# question ProjectsUsed row Masakari label, question ProjectsUsedPoC row Masakari label, question TCProjectsContributedTo value Masakari (Virtual Machine High Availability (VMHA) service) label
 msgid "Masakari (Virtual Machine High Availability (VMHA) service)"
 msgstr ""
 
-# question ProjectsUsed row Cyborg label
+# question ProjectsUsed row Cyborg label, question ProjectsUsedPoC row Cyborg label, question TCProjectsContributedTo value Cyborg (Acceleration Management) label
 msgid "Cyborg (Acceleration Management)"
 msgstr ""
 
-# question ProjectsUsed row Qinling label
+# question ProjectsUsed row Qinling label, question ProjectsUsedPoC row Qinling label, question TCProjectsContributedTo value Qinling (Function as a Service) label
 msgid "Qinling (Function as a Service)"
 msgstr ""
 
-# question ProjectsUsed row Kolla label, question ProjectsUsedPoC row Kolla label
+# question ProjectsUsed row Kolla label, question ProjectsUsedPoC row Kolla label, question TCProjectsContributedTo value Kolla (Container deployment) label
 msgid "Kolla (Container deployment)"
 msgstr ""
 
-# question ProjectsUsed group Web frontend label, question ProjectsUsedPoC group Web frontend label
-msgid "<p>Web frontend</p>"
-msgstr ""
-
-# question ProjectsUsed group Workload provisioning label, question ProjectsUsedPoC group Workload provisioning label
-msgid "<p>Workload provisioning</p>"
-msgstr ""
-
-# question ProjectsUsed group Application lifecycle label, question ProjectsUsedPoC group Application lifecycle label
-msgid "<p>Application lifecycle</p>"
-msgstr ""
-
-# question ProjectsUsed group Orchestration label, question ProjectsUsedPoC group Orchestration label
-msgid "<p>Orchestration</p>"
-msgstr ""
-
-# question ProjectsUsed group Compute label, question ProjectsUsedPoC group Compute label
-msgid "<p>Compute</p>"
-msgstr ""
-
-# question ProjectsUsed group Networking label, question ProjectsUsedPoC group Networking label
-msgid "<p>Networking</p>"
-msgstr ""
-
-# question ProjectsUsed group Storage label, question ProjectsUsedPoC group Storage label
-msgid "<p>Storage</p>"
-msgstr ""
-
-# question ProjectsUsed group Shared services label, question ProjectsUsedPoC group Shared services label
-msgid "<p>Shared services</p>"
-msgstr ""
-
-# question ProjectsUsed group Monitoring tools label, question ProjectsUsedPoC group Monitoring tools label
-msgid "<p>Monitoring tools</p>"
-msgstr ""
-
-# question ProjectsUsed group Optimization / Policy tools label, question ProjectsUsedPoC group Optimization / Policy tools label
-msgid "<p>Optimization / Policy tools</p>"
-msgstr ""
-
-# question ProjectsUsed group Billing / Business logic label, question ProjectsUsedPoC group Billing / Business logic label
-msgid "<p>Billing / Business logic</p>"
-msgstr ""
-
-# question ProjectsUsed group Multi-region tools label, question ProjectsUsedPoC group Multi-region tools label
-msgid "<p>Multi-region tools</p>"
-msgstr ""
-
-# question ProjectsUsed group Deployment/Lifecycle tools label, question ProjectsUsedPoC group Deployment/Lifecycle tools label
-msgid "<p>Deployment/Lifecycle tools</p>"
-msgstr ""
-
-# question ProjectsUsed group Container infrastructure label, question ProjectsUsedPoC group Container infrastructure label
-msgid "<p>Container infrastructure</p>"
-msgstr ""
-
-# question ProjectsUsed group NFV label, question ProjectsUsedPoC group NFV label
-msgid "<p>NFV</p>"
+# question ProjectsUsed row Blazar label, question ProjectsUsedPoC row Blazar label, question TCProjectsContributedTo value Blazar (Resource Reservation Service) label
+msgid "Blazar (Resource Reservation Service)"
 msgstr ""
 
 # step your-openstack-deployments - question ProjectsUsedPoC label
@@ -974,23 +942,7 @@ msgstr ""
 msgid "aodh (Alarming Service)"
 msgstr ""
 
-# step your-openstack-deployments - question RefStackTest label
-msgid "Are you interested in helping our interoperability efforts by using RefStack to test your cloud capabilities?"
-msgstr ""
-
-# question RefStackTest value Yes label
-msgid "Yes"
-msgstr ""
-
-# question RefStackTest value No, but I am interested in helping label
-msgid "No, but I am interested in helping"
-msgstr ""
-
-# question RefStackTest value No, and not interested in helping label
-msgid "No, and not interested in helping"
-msgstr ""
-
-# survey template 13 - survey step deployment-decisions friendly name
+# survey template 15 - survey step deployment-decisions friendly name
 msgid "Deployment Decisions"
 msgstr ""
 
@@ -1241,8 +1193,8 @@ msgstr ""
 msgid "1 million to 9 million objects"
 msgstr ""
 
-# question ObjectStorageNumObjects value 10 million to 999 million objects label
-msgid "10 million to 999 million objects"
+# question ObjectStorageNumObjects value 10 million to 99 million objects label
+msgid "10 million to 99 million objects"
 msgstr ""
 
 # question ObjectStorageNumObjects value 100 million to 999 million objects label
@@ -1430,6 +1382,10 @@ msgstr ""
 
 # question DeploymentTools value SaltStack label
 msgid "SaltStack"
+msgstr ""
+
+# question DeploymentTools value TripleO label
+msgid "TripleO"
 msgstr ""
 
 # question DeploymentTools value Other Tool label
@@ -1700,7 +1656,7 @@ msgstr ""
 msgid "Which <b>OpenStack Network (Neutron)</b> drivers are you using?<BR><font size=\"-2\"><em>Select all that apply. Please note we now distinguish between ML2 drivers and non-ML2 drivers.</em></font>"
 msgstr ""
 
-# question NetworkDrivers value A10 Networks label
+# question NetworkDrivers value A10 Networks label, question OctaviaDriversList value A10 Networks label
 msgid "A10 Networks"
 msgstr ""
 
@@ -1712,8 +1668,12 @@ msgstr ""
 msgid "Big Switch"
 msgstr ""
 
-# question NetworkDrivers value Brocade label
+# question NetworkDrivers value Brocade label, question OctaviaDriversList value Brocade label
 msgid "Brocade"
+msgstr ""
+
+# question NetworkDrivers value Calico label
+msgid "Calico"
 msgstr ""
 
 # question NetworkDrivers value Cisco UCS / Nexus label
@@ -1782,6 +1742,10 @@ msgstr ""
 
 # question NetworkDrivers value Open vSwitch label
 msgid "Open vSwitch"
+msgstr ""
+
+# question NetworkDrivers value OVN label, question OctaviaDriversList value OVN label
+msgid "OVN"
 msgstr ""
 
 # question NetworkDrivers value PLUMgrid label
@@ -2016,6 +1980,10 @@ msgstr ""
 msgid "ProphetStor"
 msgstr ""
 
+# question BlockStorageDrivers value Pure Storage label
+msgid "Pure Storage"
+msgstr ""
+
 # question BlockStorageDrivers value SAN / Solaris label
 msgid "SAN / Solaris"
 msgstr ""
@@ -2106,10 +2074,6 @@ msgstr ""
 
 # question VendorProductsSoftware value China Telecom label
 msgid "China Telecom"
-msgstr ""
-
-# question VendorProductsSoftware value Cisco label, question VendorProductsHardware value Cisco label
-msgid "Cisco"
 msgstr ""
 
 # question VendorProductsSoftware value Cloudbase Solutions label
@@ -2232,7 +2196,7 @@ msgstr ""
 msgid "UnitedStack Inc."
 msgstr ""
 
-# question VendorProductsSoftware value VMware label
+# question VendorProductsSoftware value VMware label, question OctaviaDriversList value VMware label
 msgid "VMware"
 msgstr ""
 
@@ -2260,11 +2224,15 @@ msgstr ""
 msgid "Broadcom"
 msgstr ""
 
+# question VendorProductsHardware value Cisco label
+msgid "Cisco"
+msgstr ""
+
 # question VendorProductsHardware value Cray label
 msgid "Cray"
 msgstr ""
 
-# question VendorProductsHardware value HPE label, question VendorProductsHardware value HPE label
+# question VendorProductsHardware value HPE label
 msgid "HPE"
 msgstr ""
 
@@ -2282,6 +2250,10 @@ msgstr ""
 
 # question VendorProductsHardware value Nokia label
 msgid "Nokia"
+msgstr ""
+
+# question VendorProductsHardware value Open Compute Project label
+msgid "Open Compute Project (OCP)"
 msgstr ""
 
 # question VendorProductsHardware value Pure label
@@ -2372,8 +2344,8 @@ msgstr ""
 msgid "Deploy all intermediary releases and all coordinated releases"
 msgstr ""
 
-# question TCOpenStackVersion value Upgrade all coordinated releases (once every 6 month) label
-msgid "Upgrade all coordinated releases (once every 6 month)"
+# question TCOpenStackVersion value Upgrade all coordinated releases (once every 6 months) label
+msgid "Upgrade all coordinated releases (once every 6 months)"
 msgstr ""
 
 # question TCOpenStackVersion value Skip/fast-forward releases label
@@ -2408,6 +2380,78 @@ msgstr ""
 msgid "I do not do bugfix upgrades"
 msgstr ""
 
+# step deployment-decisions - question TCProjectsContributedTo label
+msgid "To which projects does your organization contribute maintenance resources, such as patches for bug fixes and code reviews on master or stable branches?"
+msgstr ""
+
+# step deployment-decisions - question TCContributions label
+msgid "What prevents you or your organization from contributing more maintenance resources, or makes contributing difficult?"
+msgstr ""
+
+# step deployment-decisions - question TCHowContribute label
+msgid "How do members of your organization contribute to OpenStack?"
+msgstr ""
+
+# question TCHowContribute value Bug reports label
+msgid "Bug reports"
+msgstr ""
+
+# question TCHowContribute value Bug fixes on master label
+msgid "Bug fixes on master"
+msgstr ""
+
+# question TCHowContribute value Backporting bug fixes to stable branches label
+msgid "Backporting bug fixes to stable branches"
+msgstr ""
+
+# question TCHowContribute value Feature design review label
+msgid "Feature design review"
+msgstr ""
+
+# question TCHowContribute value Feature development label
+msgid "Feature development"
+msgstr ""
+
+# question TCHowContribute value Documentation improvement label
+msgid "Documentation improvement"
+msgstr ""
+
+# question TCHowContribute value Code review on master label
+msgid "Code review on master"
+msgstr ""
+
+# question TCHowContribute value Code review on stable branches label
+msgid "Code review on stable branches"
+msgstr ""
+
+# question TCHowContribute value Participate in Forum sessions at the Summit label
+msgid "Participate in Forum sessions at the Summit"
+msgstr ""
+
+# question TCHowContribute value Participate in PTG sessions label
+msgid "Participate in PTG sessions"
+msgstr ""
+
+# question TCHowContribute value Participate in Ops meetups label
+msgid "Participate in Ops meetups"
+msgstr ""
+
+# question TCHowContribute value Sponsor in-person events label
+msgid "Sponsor in-person events (meetups, OpenStack Days, Open Infrastructure Summit, PTG, travel assistance, other)"
+msgstr ""
+
+# question TCHowContribute value Contribute resources to run CI jobs upstream label
+msgid "Contribute resources to run CI jobs upstream"
+msgstr ""
+
+# question TCHowContribute value Host third-party CI jobs downstream label
+msgid "Host third-party CI jobs downstream"
+msgstr ""
+
+# step deployment-decisions - question TCHowtoContributeOther label, step deployment-decisions - question InteropFeedbackChallengesOther label
+msgid "Please explain"
+msgstr ""
+
 # question Break9 literal content
 msgid "<hr><h3>Project Feedback</h3>"
 msgstr ""
@@ -2425,7 +2469,7 @@ msgid "Designate: What (if any) features or issues are preventing you from using
 msgstr ""
 
 # step deployment-decisions - question GlanceFeedback label
-msgid "Glance: As you're aware, the Images API v1 supplied by OpenStack Glance is currently deprecated. If you haven't yet moved to the Images API v2, what is preventing you? Please be specific."
+msgid "Glance: Multi back-ends feature will stay Experimental in Stein release. How badly this affect your deployment plans? Any details how you’re planning to use it would be helpful."
 msgstr ""
 
 # step deployment-decisions - question HeatFeedback label
@@ -2446,6 +2490,30 @@ msgstr ""
 
 # question HeatFeedback value Lots of big stacks (>100 resources each) label
 msgid "Lots of big stacks (>100 resources each)"
+msgstr ""
+
+# step deployment-decisions - question HeatQuestion label
+msgid "Are you still using legacy mode of Heat service? (after the Newton release, newly-created stacks will use convergence mode instead of legacy mode unless you explicitly set the convergence_engine option to False in the config)"
+msgstr ""
+
+# question HeatQuestion value Yes, I’m using a version of Heat older than Newton release label
+msgid "Yes, I’m using a version of Heat older than Newton release"
+msgstr ""
+
+# question HeatQuestion value Yes, I have disabled convergence in the confg in order to keep using legacy mode label
+msgid "Yes, I have disabled convergence in the confg in order to keep using legacy mode"
+msgstr ""
+
+# question HeatQuestion value I have convergence turned on for new stacks but there are still pre-existing stacks that haven't been updated to convergence using the heat-manage command label
+msgid "I have convergence turned on for new stacks but there are still pre-existing stacks that haven't been updated to convergence using the heat-manage command"
+msgstr ""
+
+# question HeatQuestion value No, I’m using convergence mode label
+msgid "No, I’m using convergence mode"
+msgstr ""
+
+# question HeatQuestion value I don't use the Heat service at all label
+msgid "I don't use the Heat service at all"
 msgstr ""
 
 # step deployment-decisions - question InteropFeedback label
@@ -2476,12 +2544,8 @@ msgstr ""
 msgid "Lack of familiarity with how I can determine whether different products are actually interoperable, such as the OpenStack Powered logo or using RefStack to test."
 msgstr ""
 
-# step deployment-decisions - question InteropFeedbackChallengesOther label
-msgid "Please explain"
-msgstr ""
-
 # step deployment-decisions - question IronicFeedback label
-msgid "Ironic: What's been your most frustrating or difficult experience with Ironic?"
+msgid "Ironic: What would you find most useful if it was part of Ironic?"
 msgstr ""
 
 # step deployment-decisions - question KeystoneFeedback label
@@ -2510,6 +2574,38 @@ msgstr ""
 
 # step deployment-decisions - question KeystoneFeedbackOther label, step deployment-decisions - question ManilaFeedbackOther label, step deployment-decisions - question TelemetryFeedbackOther label
 msgid "Other - please specify"
+msgstr ""
+
+# step deployment-decisions - question Keystone2 label
+msgid "Keystone: Which of the following initiatives would be most beneficial for your deployment? You can rank items by priority with items 1 being most important and 7 being least important."
+msgstr ""
+
+# question Keystone2 value Improved performance label
+msgid "Improved performance"
+msgstr ""
+
+# question Keystone2 value Better support for synchronizing multiple keystone regions label
+msgid "Better support for synchronizing multiple keystone regions"
+msgstr ""
+
+# question Keystone2 value Read-only RBAC roles label
+msgid "Read-only RBAC roles"
+msgstr ""
+
+# question Keystone2 value More flexible federated mappings label
+msgid "More flexible federated mappings"
+msgstr ""
+
+# question Keystone2 value Improved fine-grained access control label
+msgid "Improved fine-grained access control"
+msgstr ""
+
+# question Keystone2 value Better support for domain administrators label
+msgid "Better support for domain administrators"
+msgstr ""
+
+# question Keystone2 value Improved usability of keystone outside of an OpenStack environment label
+msgid "Improved usability of keystone outside of an OpenStack environment"
 msgstr ""
 
 # step deployment-decisions - question KollaFeedback label
@@ -2664,6 +2760,90 @@ msgstr ""
 msgid "Very important; my Nova deployment is heavily customized and hooks/plugins/custom APIs are a major part of my operation."
 msgstr ""
 
+# step deployment-decisions - question OctaviaDriversList label
+msgid "Which OpenStack load balancing (Octavia) provider drivers would youlike to see supported?"
+msgstr ""
+
+# question OctaviaDriversList value AVI Networks label
+msgid "AVI Networks"
+msgstr ""
+
+# question OctaviaDriversList value Amphora label
+msgid "Amphora"
+msgstr ""
+
+# question OctaviaDriversList value F5 label
+msgid "F5"
+msgstr ""
+
+# question OctaviaDriversList value HAProxy Technologies label
+msgid "HAProxy Technologies"
+msgstr ""
+
+# question OctaviaDriversList value Kemp label
+msgid "Kemp"
+msgstr ""
+
+# question OctaviaDriversList value Netscaler label
+msgid "Netscaler"
+msgstr ""
+
+# question OctaviaDriversList value Radware label
+msgid "Radware"
+msgstr ""
+
+# step deployment-decisions - question OctaviaDriversListOther label
+msgid "Which other driver(s)?"
+msgstr ""
+
+# step deployment-decisions - question OctaviaFeaturesList label
+msgid "Which new features would you like to see supported in OpenStack load balancing (Octavia)?"
+msgstr ""
+
+# question OctaviaFeaturesList value Active-active label
+msgid "Active-active"
+msgstr ""
+
+# question OctaviaFeaturesList value Container-based amphora driver label
+msgid "Container-based amphora driver"
+msgstr ""
+
+# question OctaviaFeaturesList value Event notifications label
+msgid "Event notifications"
+msgstr ""
+
+# question OctaviaFeaturesList value gRPC protocol label
+msgid "gRPC protocol"
+msgstr ""
+
+# question OctaviaFeaturesList value HTTP/2 protocol label
+msgid "HTTP/2 protocol"
+msgstr ""
+
+# question OctaviaFeaturesList value Log offloading label
+msgid "Log offloading"
+msgstr ""
+
+# question OctaviaFeaturesList value MySQL protocol label
+msgid "MySQL protocol"
+msgstr ""
+
+# question OctaviaFeaturesList value Simultaneous IPv4 and IPv6 VIP label
+msgid "Simultaneous IPv4 and IPv6 VIP"
+msgstr ""
+
+# question OctaviaFeaturesList value Statistics (more metrics) label
+msgid "Statistics (more metrics)"
+msgstr ""
+
+# question OctaviaFeaturesList value VIP ACL API label
+msgid "VIP ACL API"
+msgstr ""
+
+# step deployment-decisions - question OctaviaFeaturesListOther label
+msgid "Which other features?"
+msgstr ""
+
 # step deployment-decisions - question RefStackFeedback label
 msgid "RefStack: Which of the following features in RefStack are important to you?<br/><font size=\"-2\"><em>Select all that apply</em></font>"
 msgstr ""
@@ -2693,31 +2873,59 @@ msgid "Sahara: What else can be improved in the Sahara project?"
 msgstr ""
 
 # step deployment-decisions - question SwiftFeedback label
-msgid "Swift: What kinds of data are you planning to store in object storage in the next 12 months?<br/><font size=\"-2\"><em>Select all that apply</em></font>"
+msgid "Swift: What features of Swift are you currently using (or have plans to use in the next 12 months)?<br/><font size=\"-2\"><em>Select all that apply</em></font>"
 msgstr ""
 
-# question SwiftFeedback value Application data label
-msgid "Application data"
+# question SwiftFeedback value S3 compatibility label
+msgid "S3 compatibility"
 msgstr ""
 
-# question SwiftFeedback value Backups label
-msgid "Backups"
+# question SwiftFeedback value Dynamic Large Objects label
+msgid "Dynamic Large Objects"
 msgstr ""
 
-# question SwiftFeedback value Documents label
-msgid "Documents"
+# question SwiftFeedback value Static Large Objects label
+msgid "Static Large Objects"
 msgstr ""
 
-# question SwiftFeedback value Static web content label
-msgid "Static web content"
+# question SwiftFeedback value Temporary URLs label
+msgid "Temporary URLs"
 msgstr ""
 
-# question SwiftFeedback value Research data label
-msgid "Research data"
+# question SwiftFeedback value Data-at-rest encryption label
+msgid "Data-at-rest encryption"
 msgstr ""
 
-# question SwiftFeedback value Video label
-msgid "Video"
+# question SwiftFeedback value Multiple storage policies label
+msgid "Multiple storage policies"
+msgstr ""
+
+# question SwiftFeedback value Multi-region clusters label
+msgid "Multi-region clusters"
+msgstr ""
+
+# question SwiftFeedback value Explicit data placement label
+msgid "Explicit data placement (composite rings)"
+msgstr ""
+
+# question SwiftFeedback value Container sync label
+msgid "Container sync"
+msgstr ""
+
+# question SwiftFeedback value Static websites or CORS label
+msgid "Static websites or CORS"
+msgstr ""
+
+# question SwiftFeedback value Symlinks label
+msgid "Symlinks"
+msgstr ""
+
+# question SwiftFeedback value Quotas label
+msgid "Quotas"
+msgstr ""
+
+# question SwiftFeedback value Object versioning label
+msgid "Object versioning"
 msgstr ""
 
 # step deployment-decisions - question SwiftFeedbackOther label
@@ -2797,11 +3005,15 @@ msgid "Planned to begin within the next 180 days"
 msgstr ""
 
 # question TroveFeedback value Planned to begin this year (2017) label
-msgid "Planned to begin this year (2017)"
+msgid "Began in 2017"
 msgstr ""
 
-# question TroveFeedback value Planned for next year (2018) label
-msgid "Planned for next year (2018)"
+# question TroveFeedback value Planned for 2018 label
+msgid "Planned for 2018"
+msgstr ""
+
+# question TroveFeedback value Planned for 2019 label
+msgid "Planned for 2019"
 msgstr ""
 
 # question TroveFeedback value No current plans label
