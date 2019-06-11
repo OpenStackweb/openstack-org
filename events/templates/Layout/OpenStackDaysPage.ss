@@ -12,14 +12,6 @@
 
 <div class="days-pretext">$EventsYearlyCountText() - <a href="#tab=events_tab" class="deep-link" data-tab="events_tab">find an upcoming OpenStack Day in your region!</a></div>
 
-<div class="container slider-container">
-    <section class="regular slider">
-        <% loop $HeaderPics.Sort(SortOrder) %>
-            <div> <img src="$getUrl()" width="260" /> </div>
-        <% end_loop %>
-    </section>
-</div>
-
 <div class="software-tab-wrapper">
     <div class="container">
         <ul class="nav nav-tabs project-tabs" id="osdays-tabs" role="tablist">
