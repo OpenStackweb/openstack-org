@@ -36,7 +36,10 @@ class Driver extends DataObject implements IDriver
 
 
     static $indexes = array(
-        'Name_Project' => array('type' => 'unique', 'value' => 'Name, Project')
+        'Name_Project' => array(
+            'type' => 'unique',
+            'value' => 'Name,Project,Vendor'
+        )
     );
 
     static $summary_fields = array(

@@ -49,22 +49,29 @@ final class UpdateDriversTask extends CronTask
                 if(!isset($contents['project_id']) || !isset($contents['name'])) continue;
 
                 $projectName = trim($projectArray[$contents['project_id']]);
+                $name = trim($contents['name']);
+                $vendor = null;
 
-                $driver = Driver::get()->filter(
-                    array(
-                        "Name" => trim($contents['name']),
-                        "Project" => $projectName
-                    )
-                )->first();
+                $filters = [
+                    "Name" => $name,
+                    "Project" => $projectName
+                ];
+
+                if(isset($contents['vendor'])) {
+                    $vendor = trim($contents['vendor']);
+                    $filters["Vendor"] = $vendor;
+                }
+
+                $driver = Driver::get()->filter($filters)->first();
 
                 if (!$driver) {
                     $driver = new Driver();
                 }
 
-                $driver->Name = trim($contents['name']);
+                $driver->Name = $name;
                 $driver->Description = isset($contents['description']) ? $contents['description']: null;
                 $driver->Project = $projectName;
-                $driver->Vendor = isset($contents['vendor'])?$contents['vendor']: null;
+                $driver->Vendor = $vendor;
                 $driver->Url = isset($contents['wiki'])?$contents['wiki']: null;
                 $driver->Active = 1;
 
