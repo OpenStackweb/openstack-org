@@ -10,7 +10,7 @@
     </div>
 </div>
 
-<div class="days-pretext">$EventsYearlyCountText() - <a href="#" class="deep-link" data-tab="events_tab">find an upcoming OpenStack Day in your region!</a></div>
+<div class="days-pretext">$EventsYearlyCountText() - <a href="#tab=events_tab" class="deep-link" data-tab="events_tab">find an upcoming OpenStack Day in your region!</a></div>
 
 <div class="container slider-container">
     <section class="regular slider">
@@ -43,9 +43,6 @@
             <div role="tabpanel" class="tab-pane fade in active" id="about_tab">
                 <div class="row">
                     <div class="col-sm-12"> $AboutDescription </div>
-                    <div class="col-sm-12">
-                        <p class="mr5-30">$EventsYearlyCountText() - <a href="/community/events/openstackdays#tab=events_tab">find an upcoming OpenStack Day in your region!</a> </p>
-                    </div>
                 </div>
                 <h2 class="tab-title">Highlights From Recent OpenStack Days</h2>
                 <div class="row">
