@@ -11,7 +11,7 @@ class SummitQuestionsPage extends SummitPage {
         $fields = parent::getCMSFields();
         if($this->ID) {
 
-
+            $_REQUEST['PageID'] = $this->ID;
 
             // Summit Questions
             $questionFields = singleton('SummitQuestion')->getCMSFields();
@@ -24,7 +24,8 @@ class SummitQuestionsPage extends SummitPage {
             
             // Summit Question Categories
             $categoryFields = singleton('SummitQuestionCategory')->getCMSFields();
-            $config = GridFieldConfig_RelationEditor::create();
+            $config = GridFieldConfig_RecordEditor::create();
+            $config->addComponent($sort = new GridFieldSortableRows('Order'));
             $config->getComponentByType('GridFieldDetailForm')->setFields($categoryFields);
             $gridField = new GridField('Categories', 'Categories', $this->Categories(), $config);
             $fields->addFieldToTab('Root.QuestionCategories',$gridField);        
@@ -36,8 +37,19 @@ class SummitQuestionsPage extends SummitPage {
     
     public function getGroupedQuestions() {
         return GroupedList::create($this->Questions()->sort('Order'));
-    }    
-    
+    }
+
+    public function getQuestionsCategories() {
+        $categories = new ArrayList();
+        foreach ($this->Categories()->sort('Order') as $cat) {
+            if ($cat->Questions()->Exists()) {
+                $categories->push($cat);
+            }
+        }
+
+        return $categories;
+    }
+
 
 }
 

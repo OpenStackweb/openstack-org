@@ -24,7 +24,35 @@ class SummitQuestion extends DataObject
         'Question',
         'Answer',
         'Category.Name'
-    ); 
+    );
+
+    /**
+     * @return int
+     */
+    public function getIdentifier()
+    {
+        return (int)$this->getField('ID');
+    }
+
+    public function getCMSFields() {
+        $fields = parent::getCMSFields();
+        $fields->removeByName('CategoryID');
+
+        $pageID = isset($_REQUEST['PageID']) ? $_REQUEST['PageID'] : null;
+
+        if ($pageID) {
+            $dropdown = DropdownField::create(
+                'CategoryID',
+                'Choose a question category',
+                SummitQuestionCategory::get()->filter('SummitQuestionsPageID', $pageID)->map("ID", "Name")
+            );
+
+            $fields->add($dropdown);
+
+        }
+
+        return $fields;
+    }
     
     public function getCategoryName() {
         return $this->Category()->Name;

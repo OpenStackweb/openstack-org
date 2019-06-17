@@ -30,6 +30,7 @@ class SummitQuestionCategory extends DataObject
 
         if ($this->ID > 0) {
             $config = GridFieldConfig_RecordEditor::create(10);
+            $config->addComponent($sort = new GridFieldSortableRows('Order'));
             $gridField = new GridField('Questions', 'Questions', $this->Questions(), $config);
             $f->add($gridField);
         }
@@ -51,5 +52,9 @@ class SummitQuestionCategory extends DataObject
 
     public function canView($member = null) {
         return Permission::check('ADMIN') || Permission::check('CMS_ACCESS_CMSMain');
+    }
+
+    public function getQuestions() {
+        return $this->Questions()->sort('Order');
     }
 }

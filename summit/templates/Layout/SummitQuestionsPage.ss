@@ -17,8 +17,12 @@
                 <div class="sidebar-wrapper">
                     <div class="sub-h3">Topics</div>
                     <ul>
-                        <% loop $GroupedQuestions.GroupedBy(CategoryName) %>
-                        <li><a class="faq-link" data-target="#{$Top.getCategorySlug($CategoryName)}">$CategoryName</a></li>
+                        <% loop $QuestionsCategories %>
+                        <li>
+                            <a class="faq-link" data-target="#{$Top.getCategorySlug($Name)}">
+                                $Name
+                            </a>
+                        </li>
                         <% end_loop %>                        
                     </ul>
                 </div>
@@ -41,10 +45,10 @@
                 <div class="answer" id="none">No results were found.</div>
             </div>
 
-            <% loop $GroupedQuestions.GroupedBy(CategoryName) %>
+            <% loop $QuestionsCategories %>
             <div class="section">
-            <h5 class="section-title" id="{$Top.getCategorySlug($CategoryName)}">$CategoryName</h5>
-                <% loop $Children %>
+            <h5 class="section-title" id="{$Top.getCategorySlug($Name)}">$Name</h5>
+                <% loop $Questions() %>
                     <div class="section-item">
                             <p class="question">
                                 $Question
