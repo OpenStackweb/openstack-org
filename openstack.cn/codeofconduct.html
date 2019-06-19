@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:website="http://ogp.me/ns/website#">
+
+<head>
+    <title>开源基础设施峰会 | 常见问题</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="title" content="开源基础设施峰会 | 常见问题" />
+<meta name="generator" content="SilverStripe - http://silverstripe.org" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta name="description" content="与那些采用OpenStack、Kubernetes以及30多种其他技术构建和运行开源基础设施的业内人士直接合作，11月上海见！
+" />
+<meta name="x-page-id" content="3102" />
+<meta name="x-cms-edit-link" content="admin/pages/edit/show/3102" />
+<meta property="og:title" content="Frequently Asked Questions - OpenStack Open Source Cloud Computing Software" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://www.openstack.cn/sponsors/" />
+<link rel="image_src" href="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/Uploads/arrows-padded-200.png" type="image/png" />
+<meta property="og:image" content="http://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/Uploads/arrows-padded-200.png" />
+<meta property="og:image:secure_url" content="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/Uploads/arrows-padded-200.png" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:height" content="135" />
+<meta property="og:image:width" content="240" />
+<meta property="og:description" content="与构建现代基础设施软件栈的开源用户、IT决策者和充满热情的开发者、管理者和运维人员面对面，与会者遍及30多个开源社区，议题包括Ceph、Docker、Kata Containers、Kubernetes、OpenStack、OPNFV、Zuul等。" />
+<meta property="og:site_name" content="OpenStack" />
+<meta property="og:locale" content="en_US" />
+<meta property="fb:app_id" content="209869746011654" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@openstack" />
+
+
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Page-specific CSS -->
+    
+
+    <script type="text/javascript">
+
+// Used to record outbound links before the browser resets to the new site
+
+function recordOutboundLink(link, category, action) {
+  try {
+      ga('send', 'event', {
+          eventCategory: category,
+          eventAction: 'click',
+          eventLabel: link.href
+      });
+      setTimeout('document.location = "' + link.href + '"', 100)
+  }
+  catch(err){}
+}
+</script>
+
+<style>.async-hide { opacity: 0 !important} </style>
+<script>
+// Used to minimize flickering during GA A/B testing
+  (function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
+  h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
+  (a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
+  })(window,document.documentElement,'async-hide','dataLayer',4000,
+  {'GTM-5F7R6N4':true});
+</script>
+
+<script>
+// Google Analytics tracking script
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-17511903-1', 'auto');
+    ga('require', 'linker');
+    ga('linker:autoLink', ['openstack.org', 'eventbrite.com'] );
+    ga('require', 'GTM-5F7R6N4');
+    ga('send', 'pageview');
+
+    ga(function(tracker) {
+        var googleClientID = tracker.get('clientId');
+
+        $("a.eventbrite-register-link").each(function() {
+            var href = $(this).attr("href");
+            $(this).attr("href", href + '&_eboga=' + googleClientID);
+        });
+    });
+
+</script>
+
+    
+    
+    <!-- GoogleAdWords Start -->
+    
+    <!-- GoogleAdWords End -->
+<link rel="stylesheet" type="text/css" href="/themes/openstack/css/tooltipster.css" />
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,700" />
+<link href="//db.onlinewebfonts.com/c/3b2646a48566403a55f62ceddbecbe18?family=Hiragino+Sans+GB" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" type="text/css" href="/node_modules/font-awesome/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/themes/openstack/css/navigation_menu.css" />
+<link rel="stylesheet" type="text/css" href="/themes/openstack/css/dropdown.css" />
+<link rel="stylesheet" type="text/css" href="/node_modules/sweetalert2/dist/sweetalert2.min.css" />
+<link rel="stylesheet" type="text/css" href="/summit/css/combined.css" />
+<link rel="stylesheet" type="text/css" href="/themes/openstack/css/static.combined.css" />
+<link rel="stylesheet" type="text/css" href="/summit/css/static-summit-about-page.css" />
+<link rel="stylesheet" type="text/css" href="/node_modules/@fortawesome/fontawesome-pro/css/all.css" />
+<link rel="stylesheet" type="text/css" href="/summit/css/faq.css" />
+<style>
+body, h1, h2, h3, h4, h5, h6, p, .script {
+  font-family:Hiragino Sans GB W3, Open Sans;
+}
+</style>
+</head>
+
+<body>
+<div class="main-body">
+    <div class="summit-hero-landing-short container-fluid" style="background-image: url('https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/Uploads/Shanghai-WithOverlay.jpg')">
+
+    <nav class="navbar navbar-default navbar-fixed-top" id="summit-main-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                        aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand summit-hero-logo" href="/summit"></a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-main show">
+                    <li class="link">
+                        <a href="/" class="drop">关于</a>
+                    </li>
+                    <li class="link">
+                        <a href="https://cfp.openstack.org">征集演讲</a>
+                    </li>
+                    <li class="link">
+                        <a href="/faq">常见问题</a>
+                    </li>
+                    <li class="current">
+                        <a href="/sponsors">赞助商</a>
+                    </li>
+                    
+                    <li class="link other-summits">
+                        <a href="https://www.openstack.org/summit" class="link">其他峰会</a>
+                    </li>
+                    <li class="link button-box">
+                        <div class="dropdown register-dropdown">
+                          <button class="btn btn-secondary dropdown-toggle register-btn-lrg eventbrite-register-link" type="button" id="dropdownRegister" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              立即注册 <i class="fa fa-caret-down"></i>
+                          </button>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a role="dropdown-item" href="https://app.eventxtra.link/registrations/f564960c-74f6-452d-b0b2-484386d33eb6?locale=en/?aff=Shanghaim" target="_blank">
+                                    以人民币注册（可开发票）
+                                </a>
+                                <a role="dropdown-item" href="https://app.eventxtra.link/registrations/6640a923-98d7-44c7-a623-1e2c9132b402?locale=en/?aff=Shanghaim" target="_blank">
+                                     Register in USD 
+                                </a>
+                          </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="row text-wrapper">
+        <div class="col-md-12  title-box">
+            <div class="summit-banner">
+                <p> </p><p><img style="width: 95%; margin-bottom: 70px; max-width: 700px;margin-top:90px;" title="开源基础设施峰会 Shanghai 2019" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/summits/shanghai/Shanghai2019-Summit-Logo-Web-Translated-B.svg" alt=""></p>
+                <!-- <span class="arrow left"></span><span class="arrow right"></span> -->
+            </div>
+        </div>
+    </div>
+
+    <a href="" target="_blank" class="photo-credit" title="">
+        <i class="fa fa-info-circle"></i>
+    </a>
+
+    <div class="row text-wrapper blue">
+        <div class="highlight">
+            <span class="megaphone"></span>
+            <h5><strong><span style="color: #ffff00;">上海世博中心 Shanghai Expo Centre | 中国上海 Shanghai, China</span></strong></h5>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js?m=1465497172"></script>
+<script type="text/javascript" src="/node_modules/jquery-migrate/dist/jquery-migrate.min.js?m=1463707066"></script>
+<script type="text/javascript" src="/node_modules/bootstrap/dist/js/bootstrap.min.js?m=499162500"></script>
+<script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js?m=1509169675"></script>
+<script type="text/javascript" src="/themes/openstack/javascript/querystring.jquery.js?m=1555002027"></script>
+<script type="text/javascript" src="/themes/openstack/javascript/shadowbox/shadowbox.js?m=1555002027"></script>
+<script type="text/javascript" src="/themes/openstack/javascript/jquery.ticker.js?m=1555002027"></script>
+<script type="text/javascript" src="/themes/openstack/javascript/jquery.tools.min.js?m=1555002027"></script>
+<script type="text/javascript" src="/themes/openstack/javascript/jcarousellite.min.js?m=1555002027"></script>
+<script type="text/javascript" src="/themes/openstack/javascript/navigation.js?m=1555002027"></script>
+<script type="text/javascript" src="/themes/openstack/javascript/filetracking.jquery.js?m=1555002027"></script>
+<script type="text/javascript" src="/themes/openstack/javascript/updateProfileModal.js?m=1555002027"></script>
+<script type="text/javascript" src="/node_modules/sweetalert2/dist/sweetalert2.min.js?m=1510161159"></script>
+<script type="text/javascript" src="/summit/javascript/summit.js?m=1555002027"></script>
+<script type="text/javascript" src="/summit/javascript/jquery-livesearch.js?m=1555002027"></script>
+<script type="text/javascript" src="/summit/javascript/faq.js?m=1555002027"></script>
+<script type="text/javascript">//<![CDATA[
+jQuery(document).ready(function($) {
+
+    var d         = new Date();
+    var user_date = d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
+    Cookies.set('user_date', user_date, { expires: 360, path: '/' });
+
+    $('body').filetracking();
+
+    $(document).on("click", ".outbound-link", function(event){
+        var href = $(this).attr('href');
+        recordOutboundLink(this,'Outbound Links',href);
+        event.preventDefault();
+        event.stopPropagation()
+        return false;
+    });
+
+    var use_shadow_box = false;
+    if(use_shadow_box)
+        Shadowbox.init();
+});
+
+//]]></script><script>
+    $(document).ready(function () {
+        var scrollTop = 0;
+        $(window).scroll(function () {
+            scrollTop = $(window).scrollTop();
+            $('.counter').html(scrollTop);
+
+            if (scrollTop >= 50) {
+                $('#summit-main-nav').addClass('scrolled-nav');
+            } else if (scrollTop < 100) {
+                $('#summit-main-nav').removeClass('scrolled-nav');
+            }
+
+        });
+
+    });
+</script>
+<div id="wrap">
+
+<div class="container">
+    <div class="col-lg-12">
+        <h1>开源基础设施峰会行为准则</h1>
+    </div>
+
+    <p>OpenStack基金会致力于为所有与会者提供包容且安全的峰会体验，不论性别、性取向、残疾、外貌、体型、种族、国籍或宗教。我们绝不容忍以任何形式骚扰峰会与会者的行为。</p>
+    <p>我们是由专业人士组成的多元化社区，我们以专业的方式处理各项事务。请务必注意您的言行举止，请勿侮辱或贬低其他与会者。</p>
+    <p>请参阅 <a href="https://www.openstack.org/legal/community-code-of-conduct/">OpenStack社区行为准则</a>，该准则适用于OpenStack基金会所有的活动和社区论坛，包括开源基础设施峰会。</p>
+    <p>峰会特别提醒，展览大厅的参展商，派对主办方和相关峰会活动的组织者也应遵守该行为准则，请悉知。尤其注意，参展商和派对主持人不应该宣传具有色情或冒犯性质的图片或活动。展位及派对工作人员(包括志愿者)不得着性感衣服/制服/服装，或以其他方式营造色情氛围。</p>
+    <p>与会者如被要求停止任何骚扰行为，应立即遵照要求执行。如若有与会者或赞助商违反社区行为准则，OpenStack基金会工作人员可能会采取适当行动，包括警告违规者或将其驱逐出峰会，不予退款。</p>
+    <h2>何种行为将构成骚扰？</h2>
+    <ul><li> 针对他人的暴力威胁、恐吓或人身侮辱</li>
+    <li>与性别、性取向、残疾、外貌、体型、种族或宗教有关的口头、图片或书面评论</li>
+    <li>发布色情或暴力内容</li>
+    <li>跟踪或尾随，包括骚扰摄影或录音</li>
+    <li>持续打断讲话或其他演讲</li>
+    <li>不恰当的身体接触或性骚扰</li>
+    <li>发布（或威胁发布）其他人的个人身份信息</li>
+    <li>倡导或鼓励上述任何行为</li>
+    <li>反复骚扰他人。通常一旦被要求停止某行为，则应立即停止</li>
+    </ul>
+    <h2>报告骚扰情况</h2>
+    <p>如果您正在被骚扰，或注意到其他人正在被骚扰，或有其他任何疑虑，请向登记处或穿着员工T恤的峰会工作人员寻求帮助，或通过电话或邮件立即与OpenStack基金会工作人员联系。</p>
+    <h2>OpenStack基金会工作人员联系方式：</h2>
+    <ul><li><strong>Allison Price</strong>,&nbsp;<a href="mailto:allison@openstack.org">allison@openstack.org</a>, cell # <a href="tel:+1-214-686-6821">+1-214-686-6821</a></li>
+    <li><strong>Jonathan Bryce</strong>, <a href="mailto:jonathan@openstack.org">jonathan@openstack.org</a>, cell # <a href="tel:+1-210-317-2438">+1-210-317-2438</a></li>
+    </ul><p>峰会工作人员将帮助与会者联系会场安全部门或当地执法部门，提供护送或以其他方式保障那些受到骚扰的与会者在活动期间的人身安全。OpenStack基金会重视您的出席。</p>
+    <h2>投诉流程：</h2>
+    <ul><li>请立即向活动工作人员或基金会工作人员报告冒犯行为或事件
+    <ul><li>可现场直接找登记处、咨询台或穿着员工T恤的活动工作人员</li>
+    <li>可通过上述电话或邮件与基金会工作人员取得联系</li>
+    </ul></li>
+    <li>请就相关行为或事件，尽可能多的提供以下信息：
+    <ul><li>是否存在紧急危险或人身危险</li>
+    <li>确认骚扰者的身份/联系方式</li>
+    <li>被侵犯者的联系方式</li>
+    <li>违反规定的具体行为，大致时间和情况</li>
+    <li>其他涉事人员</li>
+    <li>在此情形下，您是否希望保持匿名投诉</li>
+    <li>工作人员将告知违规者已被投诉，确定适当的处罚方案，并及时传达决议</li>
+    </ul></li>
+    <li>最佳实践：
+    <ul><li>投诉人无需直接或进一步接触冒犯者，工作人员会为您提供支持或采用其它资源</li>
+    <li> 如果您感觉自己的安全受到威胁，请立即与当地执法部门联系。</li>
+    <li>在向工作人员报告事件时，尽量收集尽可能多的信息，但不要就该事件采访他人。</li>
+    工作人员将协助您撰写报告/收集信息</ul></li>
+    </ul><h2>OpenStack基金会工作人员应急程序：</h2>
+    <ul><li>OpenStack基金会和活动现场工作人员熟悉社区行为准则和相关应急程序</li>
+    <li>工作人员将收集投诉的详细信息，进行初步报告，内容包括：
+    <ul><li>是否存在紧急危险或人身危险，在何种情况下，工作人员应与当地政府部门联系</li>
+    <li>确认实施骚扰人员的身份信息</li>
+    <li>违反规定的具体行为，大致时间和情况</li>
+    <li>其他涉事人员</li>
+    <li>投诉方是否希望保持匿名投诉</li>
+    <li>工作人员将尝试从投诉人那里获得尽可能多地相关事件的书面材料，或根据所了解的情况，转录事件</li>
+    </ul></li>
+    <li>工作人员将对投诉人做出初步回应：
+    <ul><li>他们需要帮助吗？</li>
+    <li>他们是否需要与一位处境安全的人，朋友或家人联系？</li>
+    <li>他们需要一个安全的空间吗？</li>
+    </ul></li>
+    <li>工作人员将告知投诉人具体的应急程序以及下一步的措施，让投诉人知道基金会已采取有力的行动，但请避免以下行为：
+    <ul><li>不要公然建议他们撤回投诉或提及可以撤回投诉。这表明你希望他们这样做，是带有强制性的。"如果你同意(追究投诉)"表明你是在默认情况下进行追究，而不是强制执行</li>
+    <li>不要征求投诉人对投诉的处理意见，这是工作人员的职责所在</li>
+    <li>不要让投诉人参与处罚决议，这是员工的职责所在</li>
+    </ul></li>
+    <li>在初步采取任何必要的行动安抚投诉人后，工作人员应上报给基金会执行董事，由执行董事决定：
+    <ul><li>是否需要聘请法律顾问，联系执法部门或动用其他资源</li>
+    <li>如果发生公共事件，是否需要进行公共沟通</li>
+    <li> 是否需要从证人、工作人员或第三方收集额外信息</li>
+    <li>在执行任何处罚前，工作人员或执行董事将通知被控告者，并允许被控告者进行回应。同时，被控告者不得与投诉人有任何接触</li>
+    </ul></li>
+    <li>谈话结束后，工作人员将开会审议以采取适当的行动，其中可能包括：
+    <ul><li>警告骚扰者立即停止其行为，任何进一步的报告都将导致制裁</li>
+    <li>要求骚扰者避免与受害者进行任何互动，并避免与受害者有任何身体上的接触</li>
+    <li>提前结束违反规范的演讲，或选择不发布违反规范的演讲视频或幻灯片</li>
+    <li>违反规范的演讲者将禁止在本次活动或基金会未来的活动中作进一步的发言</li>
+    <li> 终止骚扰者在OpenStack基金会或社区所履行的任何义务或特权(无限期或在特定时间内)</li>
+    <li>要求骚扰者立即离开活动现场，不得返回</li>
+    <li>禁止骚扰者参加基金会未来的活动（无限期或在特定时间内）</li>
+    <li>撤销骚扰者在OpenStack基金会和社区的一切身份及责任</li>
+    </ul></li>
+    <li>如需采取行动，工作人员将告知被控告者将对其所采取的行动</li>
+    <li>工作人员将通知投诉人相关决议(在适当情况下，亦会通知所有证人)，并记录结果。</li>
+    </ul><p>OpenStack峰会行为准则源自 <a href="https://us.pycon.org/2013/about/code-of-conduct/" target="_blank">PyCon会议行为准则</a>, 在<a href="https://creativecommons.org/licenses/by/3.0/" target="_blank">Creative Commons Attribution 3.0 Unported License</a>下授予许可。</p>
+</div>
+
+<!-- sponsorship packages -->
+
+<!-- end sponsorship packages -->
+
+        <!-- End Page Content -->
+    <div id="push"></div>
+</div>
+
+    
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="button-wrapper">
+                      <div class="dropdown register-dropdown">
+                        <button class="btn btn-secondary dropdown-toggle register-btn-lrg eventbrite-register-link" type="button" id="dropdownRegister" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            立即注册 <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                              <a role="dropdown-item" href="https://app.eventxtra.link/registrations/f564960c-74f6-452d-b0b2-484386d33eb6?locale=en/?aff=Shanghaim" target="_blank">
+                                  以人民币注册（可开发票）
+                              </a>
+                              <a role="dropdown-item" href="https://app.eventxtra.link/registrations/6640a923-98d7-44c7-a623-1e2c9132b402?locale=en/?aff=Shanghaim" target="_blank">
+                                   Register in USD 
+                              </a>
+                        </div>
+                      </div>
+
+                    <div class="links">
+                        
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12 openstack">
+                <div class="logo">
+                    <a href="https://www.openstack.org"></a>
+                    <h5>Organized by the OpenStack Foundation</h5>
+                </div>
+
+                <div class="links">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+    <!-- Hidden Sidebar Nav -->
+    <div class="sidebar-nav">
+        <nav>
+            <a href="#" class="close-panel"><i class="icon-remove-sign icon-large"></i></a>
+            <ul class="sidebar-menu">
+                <!-- Microsite Navigation -->
+                <div id="summit-main-nav" class="navbar">
+                    <button type="button" aria-expanded="false" data-toggle="collapse"
+                            class="navbar-toggle collapsed" data-target="#header-navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <div className="collapse navbar-collapse" id="header-navbar-collapse">
+                        <ul class="nav nav-tabs" >
+                            <li class="link">
+                                <a href="/" class="drop">关于</a>
+                            </li>
+                            <li class="link">
+                                <a href="/faq">常见问题</a>
+                            </li>
+                            <li class="current">
+                                <a href="/sponsors">赞助商</a>
+                            </li>
+                            <li class="link other-summits">
+                                <a href="https://www.openstack.org/summit" class="link">其他峰会</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- End Microsite Navigation -->
+            </ul>
+            <a href="https://openinfrasummitandptgshanghai.eventbrite.com" class="btn register-btn-lrg">立即注册</a>
+        </nav>
+    </div>
+</div>
+    <!-- Quantcast Tag -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/javascript">
+var _qevents = _qevents || [];
+
+(function() {
+var elem = document.createElement('script');
+elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
+elem.async = true;
+elem.type = "text/javascript";
+var scpt = document.getElementsByTagName('script')[0];
+scpt.parentNode.insertBefore(elem, scpt);
+})();
+
+_qevents.push({
+qacct:"p-fM0cfazHHeyRH"
+});
+</script>
+
+<noscript>
+<div style="display:none;">
+<img src="//pixel.quantserve.com/pixel/p-fM0cfazHHeyRH.gif" border="0" height="1" width="1" alt="Quantcast"/>
+</div>
+</noscript>
+<!-- End Quantcast tag -->
+    <!-- Twitter universal website tag code -->
+<script>
+    !function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
+    },s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='//static.ads-twitter.com/uwt.js',
+            a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+    // Insert Twitter Pixel ID and Standard Event data below
+    twq('init','nxuu6');
+    twq('track','PageView');
+</script>
+<!-- End Twitter universal website tag code -->
+
+    <div id="orderModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Thanks for Registering! What's Next?</h4>
+                </div>
+                <div class="modal-body">
+                    <p><b><a href="https://www.openstack.org/summit/berlin-2018/travel/">Book your hotel room now</a></b> through one of our recommended hotels.</p>
+                    <p>An email receipt with details of your Summit registration and purchase will be sent to the address that you registered with.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript" src="/themes/openstack/javascript/jquery.tooltipster.min.js"></script>
+<script>
+    var order_complete = false;
+    
+
+    $(document).ready(function() {
+        $('.tracks-tooltip').tooltipster({
+            maxWidth: '300'
+        });
+
+        if (order_complete) {
+            $('#orderModal').modal('show');
+        }
+    });
+</script>
+    <script type="text/javascript">
+    _linkedin_data_partner_id = "36268";
+</script><script type="text/javascript">
+    (function(){var s = document.getElementsByTagName("script")[0];
+        var b = document.createElement("script");
+        b.type = "text/javascript";b.async = true;
+        b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
+        s.parentNode.insertBefore(b, s);})();
+</script>
+</html>
