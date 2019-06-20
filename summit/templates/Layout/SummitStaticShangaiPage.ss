@@ -91,7 +91,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-lg-8 col-md-6">
-                <h3 class="title-section">Shangai 2019 Open Infrastructure Summit Programming Committee</h3>
+                <h3 class="title-section">Shanghai 2019 Open Infrastructure Summit Programming Committee</h3>
                 <!-- 5G, NFV, Edge -->
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
