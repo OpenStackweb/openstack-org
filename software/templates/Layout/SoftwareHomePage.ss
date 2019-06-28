@@ -56,7 +56,7 @@
                     <div class="software-card-body card-body">
                         <h5 class="software-card-title card-title"><img class="card-header-icon" width="100%" src="/software/images/icons/sdk-icon.svg" onerror="this.onerror=null; this.src=/software/images/icons/sdk-icon.png" alt="SDK icon"> SDKs</h5>
                         <p class="software-card-text card-text">SDKs (software development kits) that extend Openstack through user centric services.<br>&nbsp; </p>
-                        <p><a href="https://www.openstack.org/software/project-navigator/sdks-1/" class="software-card-link card-link">View these projects <i class="fa fa-chevron-right"></i></a></p>
+                        <p><a href="https://www.openstack.org/software/project-navigator/sdks/" class="software-card-link card-link">View these projects <i class="fa fa-chevron-right"></i></a></p>
                     </div>
                 </div>
             </div>
