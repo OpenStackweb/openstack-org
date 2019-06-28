@@ -73,7 +73,7 @@
             <div class="text-container col-md-5 col-sm-12">
                 <h3 class="title-section">Who Attends the Summit</h3>
                 <p>Thousands of IT decision makers, operators and developers will gather at the Summit to collaborate
-                    across common use cases and solve real problems. In Shangai, you can meet people from over 50 countries
+                    across common use cases and solve real problems. In Shanghai, you can meet people from over 50 countries
                     and 600 companies using and contributing to over 35 open source projects.
                 </p>
 
@@ -657,7 +657,7 @@
 
                 <div class="pink box item big">
                     <h4>Get buy in from your boss</h4>
-                    <p>Justifying your trip to Shangai this November is easier when armed with the right information.</p>
+                    <p>Justifying your trip to Shanghai this November is easier when armed with the right information.</p>
                     <p>Get budget info and event details to help convince your boss that you need to attend the Summit.</p>
                     <p>To make it even easier, here’s a sample letter filled with info on who you can expect to meet, information on hands-on training opportunities, collaborative sessions, networking events and more that is bound to send you and your coworkers to the home of open infrastructure.
                     </p>
@@ -706,7 +706,7 @@
 
             <div class="col-lg-4 col-md-4 col-sm-12">
                 <div class="box light item">
-                    <h4>Shangai Travel</h4>
+                    <h4>Shanghai Travel</h4>
                     <p><a href="/summit/shanghai-2019/travel/">Apply for Travel Support</a> before August 8, 2019!
                     </p>
                     <p>Interested in <a href="https://tspdonationsshanghai.eventbrite.com/?_ga=2.251394758.173996117.1560786615-152524952.1558369050" target="_blank">donating to the Travel Support Program fund</a>?</p>
