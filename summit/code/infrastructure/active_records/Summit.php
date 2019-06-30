@@ -45,7 +45,11 @@ class Summit extends DataObject implements ISummit
         'MeetingRoomBookingStartTime' => 'Time',
         'MeetingRoomBookingEndTime' => 'Time',
         'MeetingRoomBookingSlotLength' => 'Int',
-        'MeetingRoomBookingMaxAllowed' => 'Int'
+        'MeetingRoomBookingMaxAllowed' => 'Int',
+        // external feeds
+        'ApiFeedType' => 'Text',
+        'ApiFeedUrl'  => 'Text',
+        'ApiFeedKey'  => 'Text',
     ];
 
     private static $defaults =
@@ -145,17 +149,17 @@ class Summit extends DataObject implements ISummit
         if (empty($time_zone)) {
             return $valid->error('Time Zone is required!');
         }
-
-        $start_date = $this->SummitBeginDate;
-        $end_date = $this->SummitEndDate;
+        $local_time_zone           = new \DateTimeZone($time_zone);
+        $start_date                = $this->SummitBeginDate;
+        $end_date                  = $this->SummitEndDate;
         $start_showing_venues_date = $this->StartShowingVenuesDate;
-        $default_schedule_date = $this->ScheduleDefaultStartDate;
+        $default_schedule_date     = $this->ScheduleDefaultStartDate;
 
         if (!is_null($start_date) && !is_null($end_date)) {
-            $start_date = new DateTime($start_date);
-            $end_date = new DateTime($end_date);
-            $start_showing_venues_date = new DateTime($start_showing_venues_date);
-            $default_schedule_date = new DateTime($default_schedule_date);
+            $start_date = new DateTime($start_date, $local_time_zone);
+            $end_date = new DateTime($end_date, $local_time_zone);
+            $start_showing_venues_date = new DateTime($start_showing_venues_date, $local_time_zone);
+            $default_schedule_date = new DateTime($default_schedule_date, $local_time_zone);
 
             if ($start_date > $end_date) {
                 return $valid->error('End Date must be greather than Start Date');
@@ -168,18 +172,22 @@ class Summit extends DataObject implements ISummit
             }
 
             if (!is_null($default_schedule_date)) {
-                if ($default_schedule_date < $start_date || $default_schedule_date > $end_date) {
+                $start_date_without_time =  clone $start_date;
+                $start_date_without_time->setTime(0,0,0);
+                $end_date_without_time =  clone $end_date;
+                $end_date_without_time->setTime(0,0,0);
+                if ($default_schedule_date < $start_date_without_time || $default_schedule_date > $end_date_without_time) {
                     return $valid->error('ScheduleDefaultStartDate should be between Summit Start/End Date');
                 }
             }
         }
 
         $start_date = $this->RegistrationBeginDate;
-        $end_date = $this->RegistrationEndDate;
+        $end_date   = $this->RegistrationEndDate;
 
         if (!is_null($start_date) && !is_null($end_date)) {
-            $start_date = new DateTime($start_date);
-            $end_date = new DateTime($end_date);
+            $start_date = new DateTime($start_date, $time_zone);
+            $end_date = new DateTime($end_date, $time_zone);
             if ($start_date > $end_date) {
                 return $valid->error('Registration End Date must be greather than Registration Start Date');
             }

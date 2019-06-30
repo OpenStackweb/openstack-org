@@ -32,6 +32,7 @@ class SummitEvent extends DataObject implements ISummitEvent
         'RSVPMaxUserNumber'         => 'Int',
         'RSVPMaxUserWaitListNumber' => 'Int',
         'Occupancy'                 => 'Enum(array("EMPTY","25%","50%", "75%","FULL"), "EMPTY")',
+        'ExternalId'                => 'Text',
     );
 
     private static $has_many = array

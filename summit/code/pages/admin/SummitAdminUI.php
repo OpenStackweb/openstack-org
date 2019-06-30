@@ -86,10 +86,10 @@ final class SummitAdminUI extends DataExtension
 
         // room booking
 
-        $f->addFieldsToTab('Root.Room Booking', $time1 = new TimeField('MeetingRoomBookingStartTime', "When does the booking room begins?"));
-        $f->addFieldsToTab('Root.Room Booking', $time2 = new TimeField('MeetingRoomBookingEndTime', "When does the booking room ends?"));
-        $f->addFieldsToTab('Root.Room Booking', new NumericField('MeetingRoomBookingSlotLength', "Booking Room Slot Length (Minutes)"));
-        $f->addFieldsToTab('Root.Room Booking', new NumericField('MeetingRoomBookingMaxAllowed', "Booking Room Max. Qty"));
+        $f->addFieldToTab('Root.Room Booking', $time1 = new TimeField('MeetingRoomBookingStartTime', "When does the booking room begins?"));
+        $f->addFieldToTab('Root.Room Booking', $time2 = new TimeField('MeetingRoomBookingEndTime', "When does the booking room ends?"));
+        $f->addFieldToTab('Root.Room Booking', new NumericField('MeetingRoomBookingSlotLength', "Booking Room Slot Length (Minutes)"));
+        $f->addFieldToTab('Root.Room Booking', new NumericField('MeetingRoomBookingMaxAllowed', "Booking Room Max. Qty"));
 
         if ($this->owner->ID > 0) {
             $config = GridFieldConfig_RecordEditor::create(50);
@@ -98,12 +98,22 @@ final class SummitAdminUI extends DataExtension
 
         }
 
+        // external feeds
+
+        $f->addFieldToTab('Root.External Feed', $ddl_source = new DropdownField("ApiFeedType",'ApiFeedType', [
+            'Vanderpoel' => 'Vanderpoel',
+            'Sched'      => 'Sched',
+        ]));
+
+        $ddl_source->setEmptyString('--SELECT AN EXTERNAL FEED --');
+
+        $f->addFieldToTab('Root.External Feed',  new TextField("ApiFeedUrl",'ApiFeedUrl'));
+        $f->addFieldToTab('Root.External Feed',  new TextField("ApiFeedKey",'ApiFeedKey'));
+
         // dates
         $f->addFieldsToTab('Root.Dates',
         $ddl_timezone = new DropdownField('TimeZoneIdentifier', 'Time Zone', $this->owner->getTimezones()));
         $ddl_timezone->setEmptyString('-- Select a Timezone --');
-
-
 
         if($summit_time_zone) {
             $f->addFieldToTab('Root.Dates', new HeaderField("All dates below are in <span style='color:red;'>$summit_time_zone</span> time."));
