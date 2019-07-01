@@ -117,7 +117,8 @@ class SummitRoomReservation extends DataObject
             "Reserved"        => "Reserved",
             "Payed"           => "Payed",
             "RequestedRefund" => "RequestedRefund",
-            "Refunded"        => "Refunded"
+            "Refunded"        => "Refunded",
+            "Canceled"        => "Canceled"
         ]));
 
         $ddl_status->setEmptyString("-- SELECT A STATUS --");
