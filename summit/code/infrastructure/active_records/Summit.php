@@ -186,8 +186,8 @@ class Summit extends DataObject implements ISummit
         $end_date   = $this->RegistrationEndDate;
 
         if (!is_null($start_date) && !is_null($end_date)) {
-            $start_date = new DateTime($start_date, $time_zone);
-            $end_date = new DateTime($end_date, $time_zone);
+            $start_date = new DateTime($start_date, $local_time_zone);
+            $end_date = new DateTime($end_date, $local_time_zone);
             if ($start_date > $end_date) {
                 return $valid->error('Registration End Date must be greather than Registration Start Date');
             }
