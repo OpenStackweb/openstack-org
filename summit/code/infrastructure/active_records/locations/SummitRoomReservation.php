@@ -18,14 +18,16 @@
 class SummitRoomReservation extends DataObject
 {
     private static $db = [
-        'StartDateTime'        => 'SS_Datetime',
-        'EndDateTime'          => 'SS_Datetime',
-        'Status'               => 'Text',
-        'PaymentGatewayCartId' => 'VarChar(512)',
-        'Currency'             => 'VarChar(3)',
-        'Amount'               => 'Currency',
-        'ApprovedPaymentDate'  => 'SS_Datetime',
-        'LastError'            => 'Text',
+        'StartDateTime'             => 'SS_Datetime',
+        'EndDateTime'               => 'SS_Datetime',
+        'Status'                    => 'Text',
+        'PaymentGatewayCartId'      => 'VarChar(512)',
+        'PaymentGatewayClientToken' => 'Text',
+        'Currency'                  => 'VarChar(3)',
+        'Amount'                    => 'Int',
+        'RefundedAmount'            => 'Int',
+        'ApprovedPaymentDate'       => 'SS_Datetime',
+        'LastError'                 => 'Text',
     ];
 
     private static $has_one = [
@@ -122,7 +124,8 @@ class SummitRoomReservation extends DataObject
 
         $f->addFieldToTab('Root.Main', new HiddenField('RoomID','RoomID'));
         $f->addFieldToTab('Root.Main', new TextField('OwnerID', 'Owner ID'));
-        $f->addFieldToTab('Root.Main', new TextField('Amount', 'Amount'));
+        $f->addFieldToTab('Root.Main', new NumericField('Amount', 'Amount'));
+        $f->addFieldToTab('Root.Main', new NumericField('RefundedAmount', 'RefundedAmount'));
         $f->addFieldToTab('Root.Main', $ddl_currency = new DropdownField('Currency','Currency (ISO 4217)', [
             "USD" => "USD",
             "EUR" => "EUR",

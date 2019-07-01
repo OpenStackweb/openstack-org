@@ -16,7 +16,7 @@ class SummitBookableVenueRoom extends SummitVenueRoom
 {
     private static $db = [
 
-        'TimeSlotCost'  => 'Currency',
+        'TimeSlotCost'  => 'Int',
         'Currency'      => 'VarChar(3)',
     ];
 
@@ -34,7 +34,7 @@ class SummitBookableVenueRoom extends SummitVenueRoom
     public function getCMSFields()
     {
         $f = parent::getCMSFields();
-        $f->addFieldToTab('Root.Main', new CurrencyField('TimeSlotCost','Time Slot Cost'));
+        $f->addFieldToTab('Root.Main', new NumericField('TimeSlotCost','Time Slot Cost'));
 
         $f->addFieldToTab('Root.Main', $ddl_currency = new DropdownField('Currency','Currency (ISO 4217)', [
             "USD" => "USD",
