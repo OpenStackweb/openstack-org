@@ -365,7 +365,7 @@
                         </div>
                         <div class="info">
                             <div class="name">Sean McGinnis</div>
-                            <div class="title">Huawei</div>
+                            <div class="title">Dell EMC</div>
                             <div class="topic">Open Development</div>
                         </div>
                     </div>
