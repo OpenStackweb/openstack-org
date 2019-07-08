@@ -39,7 +39,7 @@
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/">Welcome! Start Here</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}foundation/">OpenStack Foundation</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="http://wiki.openstack.org">OpenStack Wiki</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="http://groups.openstack.org">User Groups</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="https://www.meetup.com/pro/osf/">User Groups</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}community/speakers/">Speakers Bureau</a></li>
         <li role="presentation" class="divider"></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}foundation/companies/">Supporting Companies</a></li>
@@ -73,7 +73,7 @@
     <a href="#" id="dropdownMenuJoin">Join <i class="fa fa-caret-down"></i></a>
     <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuJoin" style="display: none;">
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}join/register/?membership-type=foundation">Sign up for Foundation Membership</a></li>
-        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}summit/vancouver-2018/">Join us at the Summit</a></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}summit/shanghai-2019/">Join us at the Summit</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}join/#sponsor">Sponsor the Foundation</a></li>
         <li role="presentation"><a role="menuitem" tabindex="-1" href="{$BaseHref}foundation">More about the Foundation</a></li>
     </ul>
