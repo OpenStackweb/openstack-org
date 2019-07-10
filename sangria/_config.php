@@ -22,3 +22,4 @@ SS_Object::add_extension('SangriaPage_Controller', 'SangriaPageViewSpeakingSubmi
 SS_Object::add_extension('SangriaPage_Controller', 'SangriaSetCategorySponsorsExtension');
 SS_Object::add_extension('SangriaPage_Controller', 'SangriaPageInvolvementTypeExtension');
 SS_Object::add_extension('SangriaPage_Controller', 'SangriaPageSurveyBuilderStatisticsExtension');
+SS_Object::add_extension('SangriaPage_Controller', 'SangriaPageMemberBadgesExtension');
