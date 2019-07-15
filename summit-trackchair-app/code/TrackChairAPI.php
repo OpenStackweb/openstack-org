@@ -1105,6 +1105,7 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
                 $comment['name'] = $c->Commenter()->FirstName . ' ' . $c->Commenter()->Surname;
                 $comment['ago'] = $c->obj('Created')->Ago(false);
                 $comment['is_activity'] = (boolean)$c->IsActivity;
+                $comment['is_public'] = (boolean)$c->IsPublic;
                 $comments[] = $comment;
             }
 
@@ -1164,9 +1165,10 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
         }
 
         $comment = $r->postVar('comment');
+        $isPublic = $r->postVar('is_public') ? true : false;
 
         if ($comment != null) {
-            $commentObj = $this->presentation->addComment($comment, Member::currentUserID());
+            $commentObj = $this->presentation->addComment($comment, Member::currentUserID(), $isPublic);
 
             // send push notification
             PublisherSubscriberManager::getInstance()->publish(ISummitEntityEvent::UpdatedEntity, [$this->presentation]);

@@ -14,7 +14,7 @@ export default ({
           <div className="panel-body">
              <div className="feed-activity-list">
                 {activity.map(c => (
-                    <div key={c.id} className={`feed-element ${c.is_activity ? 'activity' : 'comment'}`}>
+                    <div key={c.id} className={`feed-element ${c.is_activity ? 'activity' : 'comment'} ${c.is_public ? 'public' : ''}`}>
                     	<span className="pull-left">
                     	{c.is_activity &&
 							<span className="initials activity"><i className="fa fa-exclamation" /></span>
@@ -26,7 +26,7 @@ export default ({
                        <div className="media-body">
                           <small className="pull-right">{c.ago}</small>
                           {!c.is_activity &&
-							<span><strong>{c.name}</strong> posted a comment</span>
+							<span><strong>{c.name}</strong> posted a comment {c.is_public ? 'to the presenter' : ''}</span>
                           }                          
                           <br />
                           <small className="text-muted">{c.created}</small>
