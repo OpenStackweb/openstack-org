@@ -69,7 +69,7 @@ class PresentationMeta extends React.Component {
 			</Tooltip>
 		);
 		return (
-		<div className="presntation-meta">
+			<div className="presntation-meta">
 		        <div className="row">
 		            <div className="col-md-5">
 		               <dl className="dl-horizontal">
@@ -178,6 +178,26 @@ class PresentationMeta extends React.Component {
 		    	<RichTextSection title="Description" body={presentation.description} />
 		    	<RichTextSection title="Social Description" body={presentation.social_desc} />
 		    	<RichTextSection title="What Should Attendees Expect to Learn?" body={presentation.attendees_expected_learnt} />
+
+                {presentation.links && presentation.links.length > 0 &&
+				<div className="row">
+					<div className="col-lg-12">
+						<div className="ibox">
+							<div className="ibox-content">
+								<h3>Related Links</h3>
+								<ul>
+                                    {presentation.links.map(l =>
+										<li key={`pres_link_${l.ID}`}>
+											<a href={l.Link} target="_blank">{l.Link}</a>
+										</li>
+                                    )}
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+                }
+
 		</div>
 		);		
 	}	
