@@ -7,10 +7,12 @@ class PresentationCommentForm extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			value: null
+			value: null,
+            is_public: false
 		}
 
 		this.updateValue = this.updateValue.bind(this);
+		this.changePublic = this.changePublic.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
@@ -19,6 +21,12 @@ class PresentationCommentForm extends React.Component {
 			value: e.target.value
 		});
 	}
+
+    changePublic(e) {
+        this.setState({
+            is_public: e.target.checked
+        });
+    }
 
 	handleSubmit(e) {
 		e.preventDefault();
@@ -31,6 +39,7 @@ class PresentationCommentForm extends React.Component {
 			this.props.presentation.id, 
 			{
 				body: this.state.value,
+				is_public: this.state.is_public,
 				name: window.TrackChairAppConfig.userinfo.name			
 			}
 		);
@@ -43,6 +52,14 @@ class PresentationCommentForm extends React.Component {
 		return (
 	        <div className="chat-form">
 	           <form role="form" onSubmit={this.handleSubmit}>
+				   <div className="text-right">
+					   <div className="form-check checkbox">
+						   <input type="checkbox" id="is_public" checked={this.state.is_public} onChange={this.changePublic} />
+						   <label htmlFor="is_public">
+                               Show to Presenter
+						   </label>
+					   </div>
+				   </div>
 	              <div className="form-group">
 	                 <textarea value={this.state.value} onChange={this.updateValue} className="form-control" placeholder="Write a comment..."></textarea>
 	              </div>

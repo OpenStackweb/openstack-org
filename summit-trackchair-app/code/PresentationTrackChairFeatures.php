@@ -15,13 +15,14 @@ class PresentationTrackChairFeatures extends DataExtension
      *
      * @return  SummitPresentationComment
      **/
-    public function addComment($commentBody, $MemberID)
+    public function addComment($commentBody, $MemberID, $isPublic = false)
     {
         $comment = new SummitPresentationComment();
         $comment->Body = $commentBody;
         $comment->CommenterID = $MemberID;
         $comment->PresentationID = $this->owner->ID;
         $comment->IsActivity = false;
+        $comment->IsPublic = $isPublic;
         $comment->write();
         return $comment;
     }

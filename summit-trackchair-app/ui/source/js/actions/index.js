@@ -184,7 +184,7 @@ export const postComment = (presentationID, commentData) => {
 		);
 		
 		const req = http.post(url)
-			.send({comment: commentData.body})
+			.send({comment: commentData.body, is_public: commentData.is_public})
 			.type('form')
 			.end(responseHandler(dispatch, json => {
 				dispatch(syncComment({

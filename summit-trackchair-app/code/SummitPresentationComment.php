@@ -21,6 +21,7 @@ class SummitPresentationComment extends DataObject
     private static $db = [
         'Body' => 'Text',
         'IsActivity' => 'Boolean',
+        'IsPublic' => 'Boolean',
     ];
 
     /**
