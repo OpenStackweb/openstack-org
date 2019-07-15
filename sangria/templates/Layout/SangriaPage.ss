@@ -116,6 +116,7 @@
             <ul>
                 <li><a href="/sangria/ViewSurveysStatisticsSurveyBuilder">Full Survey Stats</a></li>
                 <li><a href="/sangria/ViewDeploymentStatisticsSurveyBuilder">Deployment Only Stats</a></li>
+                <li><a href="{$Top.GetEnv('SURVEY_ANALYTICS_URL')}" target="_blank">Survey Analytics</a></li>
             </ul>
         <li>Export Data</li>
             <ul>
