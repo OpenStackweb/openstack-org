@@ -1144,6 +1144,7 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
             ])->count();
             $data['tags'] = $p->getTags()->toNestedArray();
             $data['type'] = $p->Type()->Type;
+            $data['links'] = $p->Materials()->filter('ClassName', 'PresentationLink')->sort('Order')->toNestedArray();
         }
 
 
