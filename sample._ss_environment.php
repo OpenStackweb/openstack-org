@@ -194,6 +194,8 @@ define('SEARCH_WIDGET_BASE_URL', '');
 
 define('CFP_APP_BASE_URL', '');
 
+define('SURVEY_ANALYTICS_URL', '');
+
 global $_FILE_TO_URL_MAPPING;
 $_FILE_TO_URL_MAPPING[''] = '';
 
