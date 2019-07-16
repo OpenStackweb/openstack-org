@@ -295,12 +295,17 @@ class CountryCodes {
 
     public static function getContinent($code)
     {
-        $continent = DB::query("SELECT C.Name FROM Continent_Countries CC
+        $countryCode = isset(CountryCodes::$iso_3166_countryCodes[$code]) ? $code : array_search($code, CountryCodes::$iso_3166_countryCodes);
+
+        if ($countryCode) {
+            $continent = DB::query("SELECT C.Name FROM Continent_Countries CC
                                 LEFT JOIN Continent C ON C.ID = CC.ContinentID
-                                WHERE CC.CountryCode = '$code'")->value();
+                                WHERE CC.CountryCode = '$countryCode'")->value();
 
-        return $continent;
+            return $continent;
+        }
 
+        return 'N/a';
     }
 
 }
