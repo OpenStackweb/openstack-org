@@ -15,54 +15,13 @@
 interface IMemberManager
 {
     /**
-     * @param array $data
-     * @param IMessageSenderService $sender_service
-     * @return Member
-     * @throws EntityValidationException
-     */
-    public function register(array $data, IMessageSenderService $sender_service);
-
-    /**
-     * @param string $token
-     * @param IMessageSenderService $sender_service
-     * @throws NotFoundEntityException
-     * @return Member
-     */
-    public function verify($token, IMessageSenderService $sender_service);
-
-    /**
-     * @param array $data
-     * @param IMessageSenderService $sender_service
-     * @return Member
-     * @throws EntityValidationException
-     */
-    public function registerMobile(array $data, IMessageSenderService $sender_service);
-
-
-    /**
-     * Register an speaker and confirm the registration request if exists
-     * @param array $data
-     * @param IMessageSenderService $sender_service
-     * @return Member
-     * @throws EntityValidationException
-     */
-    public function registerSpeaker(array $data, IMessageSenderService $sender_service);
-
-    /**
-     * @param $email
-     * @param IMessageSenderService $sender_service
-     * @throws NotFoundEntityException
-     * @throws EntityValidationException
-     * @return Member
-     */
-    public function resendEmailVerification($email, IMessageSenderService $sender_service);
-
-    /**
      * @param Member $member
+     * @param array $data
      * @param IMessageSenderService $sender_service
      * @return Member
+     * @throws EntityValidationException
      */
-    public function resetEmailVerification(Member $member, IMessageSenderService $sender_service);
+    public function register(Member $member, array $data):Member;
 
     /**
      * @param Member $member
@@ -75,5 +34,11 @@ interface IMemberManager
      * @return void
      */
     public function deactivate(Member $member);
+
+    /**
+     * @param mixed $claims
+     * @return Member
+     */
+    public function registerByClaims($claims):Member;
 
 }

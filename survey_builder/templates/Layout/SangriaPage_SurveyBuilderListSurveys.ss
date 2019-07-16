@@ -33,7 +33,7 @@
             <td><% if isComplete %>true<% else %>false<% end_if %></td>
             <td>$EntitySurveysCount</td>
             <td>$Lang</td>
-            <td><a href="$Top.Link(SurveyDetails)/$ID?BackUrl=$Top.Link(SurveyBuilderListSurveys)">view</a></td>
+            <td><a href="$Top.Link(SurveyDetails)/$ID?BackURL=$Top.Link(SurveyBuilderListSurveys)">view</a></td>
         </tr>
     <% end_loop %>
     </tbody>

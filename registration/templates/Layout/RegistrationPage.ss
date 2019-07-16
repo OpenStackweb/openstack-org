@@ -11,5 +11,5 @@ $Content
 </div>
 <p style="margin-top:40px;"></p>
 <h2 id="member-application-title">2. Complete The Individual Member Application.</h2>
-<p id="foundation-disclaimer">By completing the application and creating an account, you agree to the terms of the Individual Member Agreement above.</p>
+<p id="foundation-disclaimer">By completing the application, you agree to the terms of the Individual Member Agreement above.</p>
 $RegistrationForm

@@ -4,11 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "00c60f0bfbfc7e4192b6e6fcb46c97d4",
+    "content-hash": "80bdc29d89796068c244235eabf07572",
     "packages": [
         {
             "name": "composer/installers",
-            "version": "dev-master",
+            "version": "v1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/installers.git",
@@ -701,12 +701,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "300a564096ce5ce90dfd12a27fc8bc7ecbec523d"
+                "reference": "674d89ac0dd42a03cca42523a0f72bdea90b2725"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/300a564096ce5ce90dfd12a27fc8bc7ecbec523d",
-                "reference": "300a564096ce5ce90dfd12a27fc8bc7ecbec523d",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/674d89ac0dd42a03cca42523a0f72bdea90b2725",
+                "reference": "674d89ac0dd42a03cca42523a0f72bdea90b2725",
                 "shasum": ""
             },
             "require": {
@@ -743,7 +743,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2019-10-09T14:06:15+00:00"
+            "time": "2019-10-17T13:03:13+00:00"
         },
         {
             "name": "gettext/gettext",
@@ -931,16 +931,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.118",
+            "version": "v0.119",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "3db3c3097dcfb2e2cd578053f28be20fe4ad8e01"
+                "reference": "580beda87338639b18fc2135b8945d4f898fefae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/3db3c3097dcfb2e2cd578053f28be20fe4ad8e01",
-                "reference": "3db3c3097dcfb2e2cd578053f28be20fe4ad8e01",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/580beda87338639b18fc2135b8945d4f898fefae",
+                "reference": "580beda87338639b18fc2135b8945d4f898fefae",
                 "shasum": ""
             },
             "require": {
@@ -964,7 +964,7 @@
             "keywords": [
                 "google"
             ],
-            "time": "2019-10-14T00:24:06+00:00"
+            "time": "2019-10-18T00:23:50+00:00"
         },
         {
             "name": "google/auth",
@@ -1163,18 +1163,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "bcbb52f6f8b28de44b7515519e3d2d9c640d40ab"
+                "reference": "2b1dfedd8d59a521832c0837be045b83cd746fa0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/bcbb52f6f8b28de44b7515519e3d2d9c640d40ab",
-                "reference": "bcbb52f6f8b28de44b7515519e3d2d9c640d40ab",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/2b1dfedd8d59a521832c0837be045b83cd746fa0",
+                "reference": "2b1dfedd8d59a521832c0837be045b83cd746fa0",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "guzzlehttp/promises": "^1.0",
-                "guzzlehttp/psr7": "^1.4",
+                "guzzlehttp/psr7": "^1.6.1",
                 "php": ">=5.5"
             },
             "require-dev": {
@@ -1221,7 +1221,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2019-10-14T09:23:25+00:00"
+            "time": "2019-10-18T12:00:04+00:00"
         },
         {
             "name": "guzzlehttp/promises",
@@ -1396,6 +1396,46 @@
                 "underscore"
             ],
             "time": "2019-05-21T19:05:31+00:00"
+        },
+        {
+            "name": "jumbojett/openid-connect-php",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/OpenStackweb/OpenID-Connect-PHP.git",
+                "reference": "38654be8419d4abb59114ff6b9982fb094406bff"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/OpenStackweb/OpenID-Connect-PHP/zipball/38654be8419d4abb59114ff6b9982fb094406bff",
+                "reference": "38654be8419d4abb59114ff6b9982fb094406bff",
+                "shasum": ""
+            },
+            "archive": {
+                "exclude": [
+                    ".*"
+                ]
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "php": ">=5.4",
+                "phpseclib/phpseclib": "~2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "Bare-bones OpenID Connect client",
+            "support": {
+                "source": "https://github.com/OpenStackweb/OpenID-Connect-PHP/tree/master"
+            },
+            "time": "2019-07-10T18:51:07+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -2253,12 +2293,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "cf8a7ef7159c5d06d986e082000ac35fb8b57280"
+                "reference": "0e9b752f56b8e584a94394075852a51d34a6ef82"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/cf8a7ef7159c5d06d986e082000ac35fb8b57280",
-                "reference": "cf8a7ef7159c5d06d986e082000ac35fb8b57280",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/0e9b752f56b8e584a94394075852a51d34a6ef82",
+                "reference": "0e9b752f56b8e584a94394075852a51d34a6ef82",
                 "shasum": ""
             },
             "require": {
@@ -2337,7 +2377,7 @@
                 "x.509",
                 "x509"
             ],
-            "time": "2019-10-06T00:56:28+00:00"
+            "time": "2019-10-20T19:00:41+00:00"
         },
         {
             "name": "psr/cache",
@@ -6353,12 +6393,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "8749c76af2c319185b4eab2d89520b12fc454a58"
+                "reference": "aa43e86fe32b03a4518096240a35f8f52c6cac8f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/8749c76af2c319185b4eab2d89520b12fc454a58",
-                "reference": "8749c76af2c319185b4eab2d89520b12fc454a58",
+                "url": "https://api.github.com/repos/symfony/console/zipball/aa43e86fe32b03a4518096240a35f8f52c6cac8f",
+                "reference": "aa43e86fe32b03a4518096240a35f8f52c6cac8f",
                 "shasum": ""
             },
             "require": {
@@ -6421,7 +6461,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2019-10-11T14:10:55+00:00"
+            "time": "2019-10-17T12:23:42+00:00"
         },
         {
             "name": "symfony/css-selector",
@@ -6482,12 +6522,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dependency-injection.git",
-                "reference": "556a6b31f294491e6db624f2d5c0fa935cbeb2b3"
+                "reference": "bcd93d0638603d3d451555506bed8752d2e11e03"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/556a6b31f294491e6db624f2d5c0fa935cbeb2b3",
-                "reference": "556a6b31f294491e6db624f2d5c0fa935cbeb2b3",
+                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/bcd93d0638603d3d451555506bed8752d2e11e03",
+                "reference": "bcd93d0638603d3d451555506bed8752d2e11e03",
                 "shasum": ""
             },
             "require": {
@@ -6507,6 +6547,7 @@
             },
             "require-dev": {
                 "symfony/config": "^4.3|^5.0",
+                "symfony/error-handler": "^4.4|^5.0",
                 "symfony/expression-language": "^3.4|^4.0|^5.0",
                 "symfony/yaml": "^3.4|^4.0|^5.0"
             },
@@ -6547,7 +6588,7 @@
             ],
             "description": "Symfony DependencyInjection Component",
             "homepage": "https://symfony.com",
-            "time": "2019-10-14T12:27:06+00:00"
+            "time": "2019-10-18T12:17:42+00:00"
         },
         {
             "name": "symfony/dom-crawler",
@@ -6841,12 +6882,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "303707623ca2368ea8c47c3f43daf21879e922a7"
+                "reference": "01a25cb05214a272addbdb5fe5b724b9a4b578ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/303707623ca2368ea8c47c3f43daf21879e922a7",
-                "reference": "303707623ca2368ea8c47c3f43daf21879e922a7",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/01a25cb05214a272addbdb5fe5b724b9a4b578ab",
+                "reference": "01a25cb05214a272addbdb5fe5b724b9a4b578ab",
                 "shasum": ""
             },
             "require": {
@@ -6909,7 +6950,7 @@
             ],
             "description": "Symfony Translation Component",
             "homepage": "https://symfony.com",
-            "time": "2019-10-03T11:24:03+00:00"
+            "time": "2019-10-17T12:23:42+00:00"
         },
         {
             "name": "symfony/translation-contracts",
@@ -7073,6 +7114,7 @@
         "smarcet/silverstripe-cloudassets-swift": 20,
         "markguinn/silverstripe-cloudassets": 20,
         "php-opencloud/openstack": 20,
+        "jumbojett/openid-connect-php": 20,
         "behat/behat": 0,
         "behat/mink": 0,
         "behat/mink-extension": 0,

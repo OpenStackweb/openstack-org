@@ -124,3 +124,5 @@ migrations:
   - ShanghaiPresentationSlugMigration
   - Election2018Migration
   - JobCompanyMigrationTask
+  - DeleteNullEmailMigration
+  - UpdateMemberShipTypeMigration

@@ -18,6 +18,10 @@ interface ISecurityGroupFactory
 
     const SpeakersGroupCode = 'speakers';
 
+    const SuperAdmins = 'super-admins';
+
+    const Administrators = "administrators";
+
     /**
      * @param string$code
      * @param null|string $title

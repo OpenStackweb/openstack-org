@@ -103,6 +103,12 @@ define('IDP_OPENSTACKID_URL','https://dev.openstackid.com');
 define('Auth_OpenID_VERIFY_HOST',false);
 define('Auth_OpenID_Realm','https://devbranch.openstack.org');
 define('OPENSTACKID_ENABLED',true);
+// OIDC
+define('OIDC_CLIENT', '');
+define('OIDC_CLIENT_SECRET', '');
+//set true on production mode, otherwise false
+define('OIDC_VERIFY_HOST',false);
+
 
 //summit purchase orders settings
 

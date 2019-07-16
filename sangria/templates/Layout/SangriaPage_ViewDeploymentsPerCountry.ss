@@ -17,9 +17,9 @@
                             if(!countries_with_deployment.hasOwnProperty("{$Country}") )
                                 countries_with_deployment["{$Country}"] = new Array();
                             var deployments = countries_with_deployment["{$Country}"];
-                            deployments.push({code:"{$Country}" , name : "{$Label}", url: "{$Top.Link(DeploymentDetails)}/{$ID}?BackUrl={$Top.Link(ViewDeploymentsPerRegion)}%3Fcountry%3D{$Top.country}" });
+                            deployments.push({code:"{$Country}" , name : "{$Label}", url: "{$Top.Link(DeploymentDetails)}/{$ID}?BackURL={$Top.Link(ViewDeploymentsPerRegion)}%3Fcountry%3D{$Top.country}" });
                         </script>
-                        <a href="{$Top.Link(DeploymentDetails)}/{$ID}?BackUrl={$Top.Link(ViewDeploymentsPerRegion)}%3Fcountry%3D{$Top.country}">$Label</a>
+                        <a href="{$Top.Link(DeploymentDetails)}/{$ID}?BackURL={$Top.Link(ViewDeploymentsPerRegion)}%3Fcountry%3D{$Top.country}">$Label</a>
                     </li>
                 <% end_loop %>
             </ul>

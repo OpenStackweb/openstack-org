@@ -78,11 +78,10 @@ final class SpeakerRegistrationRequestManager
      */
     public function confirm($token, Member $member)
     {
-        $repository = $this->repository;
 
-        return $this->tx_manager->transaction(function () use($token, $member, $repository){
+        return $this->tx_manager->transaction(function () use($token, $member){
 
-            $old_request = $repository->getByConfirmationToken($token);
+            $old_request = $this->repository->getByConfirmationToken($token);
             if(is_null($old_request)) throw new NotFoundEntityException('ISpeakerRegistrationRequest', sprintf("token %s", $token));
 
             $old_request->confirm($token);

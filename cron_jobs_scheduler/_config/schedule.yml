@@ -113,10 +113,6 @@ jobs:
     cron_expression: "59 11 * * *"
     enabled: 1
 
-  - name: "OpenStackIdCleanInvalidNoncesAssocsTask"
-    cron_expression: "00 03 * * *" # run at 0300 AM every day
-    enabled: 1
-
   - name: "MemberSpammerProcessorTask"
     cron_expression: "00 03 * * *" # run at 0300 AM every day
     enabled: 1

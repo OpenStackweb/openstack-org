@@ -81,7 +81,6 @@ final class SummitAttendeeTicket extends DataObject implements ISummitAttendeeTi
 
     static $indexes = array
     (
-        'Order_Attendee' =>  array('type'=>'unique', 'value'=>'ExternalOrderId,ExternalAttendeeId')
     );
 
     private static $has_many = array

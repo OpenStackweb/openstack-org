@@ -377,12 +377,12 @@ HTML;
             return $this->owner->httpError(404, 'Sorry that Survey could not be found!.');
         }
 
-        $back_url = $request->getVar('BackUrl');
+        $back_url = $request->getVar('BackURL');
         $data = [
 
             "Name" => 'Survey',
             "Survey" => $survey,
-            "BackUrl" => $back_url
+            "BackURL" => $back_url
         ];
 
         return $this->owner->Customise
@@ -406,7 +406,7 @@ HTML;
             return $this->owner->httpError(404, 'Sorry that Deployment could not be found!.');
         }
 
-        $back_url = $request->getVar('BackUrl');
+        $back_url = $request->getVar('BackURL');
         if (empty($back_url)) {
             $back_url = $this->owner->Link("ViewDeploymentDetails");
         }
@@ -414,7 +414,7 @@ HTML;
         $data = [
             "Name" => 'Deployment',
             "Survey" => $deployment,
-            "BackUrl" => $back_url
+            "BackURL" => $back_url
         ];
 
         return $this->owner->Customise

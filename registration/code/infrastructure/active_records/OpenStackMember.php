@@ -17,11 +17,11 @@ class OpenStackMember
     implements IOpenStackMember
 {
     static $db = [
-
         'SecondEmail'            => 'Varchar(254)', // See RFC 5321, Section 4.5.3.1.3. (256 minus the < and > character)
         'ThirdEmail'             => 'Varchar(254)', // See RFC 5321, Section 4.5.3.1.3. (256 minus the < and > character)
         'HasBeenEmailed'         => 'Boolean',
         'ShirtSize'              => "Enum('Extra Small, Small, Medium, Large, XL, XXL')",
+        'MembershipType'         => "Enum('Foundation,Community,None', 'None')",
         'StatementOfInterest'    => 'Text',
         'Bio'                    => 'HTMLText',
         'FoodPreference'         => 'Text',
@@ -64,7 +64,6 @@ class OpenStackMember
     ];
 
     static $indexes = [
-
         'SecondEmail'       => array('type' => 'index', 'value' => 'SecondEmail'),
         'ThirdEmail'        => array('type' => 'index', 'value' => 'ThirdEmail'),
         'FirstName'         => array('type' => 'index', 'value' => 'FirstName'),
@@ -93,9 +92,19 @@ class OpenStackMember
         'ManagedCompanies' => 'Company'
     ];
 
+    /**
+     * @return bool
+     */
+    public function hasMembershipTypeSet():bool {
+        return $this->owner->MembershipType != IOpenStackMember::MembershipTypeNone;
+    }
+
     public function onBeforeWrite()
     {
         parent::onBeforeWrite();
+
+        if(empty($this->owner->MembershipType))
+            $this->owner->MembershipType = IOpenStackMember::MembershipTypeNone;
 
         $this->owner->FirstName           = trim($this->owner->FirstName);
         $this->owner->Surname             = trim($this->owner->Surname);
@@ -125,15 +134,6 @@ class OpenStackMember
             $log->PerformedByID = Member::currentUserID();
             $log->write();
         }
-        if(isset($fields['Password']))
-        {
-            $log                = new MemberPasswordChange();
-            $log->OldValue      = trim($fields['Password']['before']);
-            $log->NewValue      = trim($fields['Password']['after']);
-            $log->MemberID      = $this->owner->ID;
-            $log->PerformedByID = Member::currentUserID();
-            $log->write();
-        }
 
         // reset spam check
 
@@ -151,11 +151,12 @@ class OpenStackMember
     {
         $current_id = $this->owner->ID;
         // stored a track of deleted users ...
-        $deleted              = MemberDeleted::create();
-        $deleted->OriginalID  = $current_id;
-        $deleted->FirstName   = $this->owner->FirstName;
-        $deleted->Surname     = $this->owner->Surname;
-        $deleted->Email       = $this->owner->Email;
+        $deleted                 = MemberDeleted::create();
+        $deleted->OriginalID     = $current_id;
+        $deleted->FirstName      = $this->owner->FirstName;
+        $deleted->Surname        = $this->owner->Surname;
+        $deleted->Email          = $this->owner->Email;
+        $deleted->MembershipType = $this->owner->MembershipType;
 
         if(Controller::has_curr())
             $deleted->FromUrl = Controller::curr()->getRequest()->getURL(true);
@@ -556,59 +557,6 @@ class OpenStackMember
             ->exists();
     }
 
-    /**
-     * @return String
-     */
-    public function generateEmailVerificationToken()
-    {
-        $generator = new RandomGenerator();
-        do
-        {
-            $token     = $generator->randomToken();
-            $hash      = self::HashConfirmationToken($token);
-        }
-        while(intval(Member::get()->filter('EmailVerifiedTokenHash', $hash)->count()) > 0);
-        $this->owner->setField('EmailVerifiedTokenHash', $hash);
-        return $token;
-    }
-
-    /**
-     * @param string $token
-     * @return string
-     */
-    public static function HashConfirmationToken($token)
-    {
-        return md5($token);
-    }
-
-    /**
-     * @param string $token
-     * @return bool
-     * @throws EntityValidationException
-     */
-    public function doEmailConfirmation($token)
-    {
-        $original_hash = $this->owner->getField('EmailVerifiedTokenHash');
-        if($this->owner->EmailVerified) throw new EntityValidationException('email already verified');
-        if(self::HashConfirmationToken($token) === $original_hash){
-            $this->owner->EmailVerified           = true;
-            $this->owner->EmailVerifiedDate       = SS_Datetime::now()->Rfc2822();
-            return true;
-        }
-        throw new EntityValidationException('invalid hash');
-    }
-
-    /**
-     * @return $this
-     */
-    public function resetConfirmation()
-    {
-        $this->owner->EmailVerified           = false;
-        $this->owner->EmailVerifiedDate       = null;
-        $this->owner->EmailVerifiedTokenHash  = null;
-        return $this->owner;
-    }
-
 
     public function validate(ValidationResult $validationResult) {
         if(empty($this->owner->FirstName))
@@ -617,8 +565,6 @@ class OpenStackMember
             return $validationResult->error('Surname is required');
         if(empty($this->owner->Email))
             return $validationResult->error('Email is required');
-        if(empty($this->owner->Password))
-            return $validationResult->error('Password is required');
     }
 
     /**

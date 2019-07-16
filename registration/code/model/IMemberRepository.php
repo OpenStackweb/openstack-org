@@ -19,7 +19,7 @@ interface IMemberRepository extends IEntityRepository
 {
     /**
      * @param string $email
-     * @return ICLAMember
+     * @return Member|null
      */
     public function findByEmail($email);
 
@@ -35,4 +35,10 @@ interface IMemberRepository extends IEntityRepository
      * @return Member|null
      */
     public function getByEmailVerificationToken($email_verification_token);
+
+    /**
+     * @param string $external_id
+     * @return Member|null
+     */
+    public function findByExternalId(string $external_id):?Member;
 } 

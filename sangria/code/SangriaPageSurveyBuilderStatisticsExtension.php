@@ -450,7 +450,7 @@ SQL;
         foreach (DB::query($query) as $company_row) {
             $link = '';
             if ($company_row['SurveyCount'] == 1) {
-                $link = 'sangria/SurveyDetails/' . $company_row['ID'] . '?BackUrl=' . $back_url;
+                $link = 'sangria/SurveyDetails/' . $company_row['ID'] . '?BackURL=' . $back_url;
             } else if ($company_row['SurveyCount'] > 1) {
                 $link = 'sangria/SurveyBuilderListSurveys?survey_template_id=' . $template_id . '&question_id=' . $question->ID . '&question_value=' . $company_row['Company'];
             }

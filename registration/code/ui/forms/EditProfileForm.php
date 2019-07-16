@@ -23,13 +23,13 @@ class EditProfileForm extends SafeXSSForm
         // Name Set
         $MemberIDField = new TextField('MemberID', "Member ID");
         $MemberIDField->setDisabled(true);
-        $FirstNameField = new TextField('FirstName', "First Name");
-        $LastNameField = new TextField('Surname', "Last Name");
+        $FirstNameField = new ReadonlyField('FirstName', "First Name");
+        $LastNameField = new ReadonlyField('Surname', "Last Name");
 
         // Email Addresses
-        $PrimaryEmailField = new TextField('Email', "Primary Email Address");
-        $SecondEmailField = new TextField('SecondEmail', "Second Email Address");
-        $ThirdEmailField = new TextField('ThirdEmail', "Third Email Address");
+        $PrimaryEmailField = new ReadonlyField('Email', "Primary Email Address");
+        $SecondEmailField = new ReadonlyField('SecondEmail', "Second Email Address");
+        $ThirdEmailField = new ReadonlyField('ThirdEmail', "Third Email Address");
 
         // Replace Fields
         $ReplaceBioField = new HiddenField('ReplaceBio', 'ReplaceBio', 0);
@@ -54,7 +54,7 @@ class EditProfileForm extends SafeXSSForm
             ));
 
 
-        $StatementOfInterestField = new TextField('StatementOfInterest', 'Statement of Interest');
+        $StatementOfInterestField = new ReadonlyField('StatementOfInterest', 'Statement of Interest');
         $StatementOfInterestField->addExtraClass('autocompleteoff');
 
         // Photo
@@ -70,7 +70,7 @@ class EditProfileForm extends SafeXSSForm
         $PhotoField->setCanPreviewFolder(false); // Don't show target filesystem folder on upload field
 
         // Biography
-        $BioField = new TextAreaField('Bio', 'Bio: A Little Bit About You <em>(Optional)</em>', 10, 15);
+        $BioField = new LiteralField('Bio', Member::currentUser()->Bio);
 
         // Food Preference
         $FoodPreferenceField = new CheckboxSetField('FoodPreference',
@@ -87,14 +87,12 @@ class EditProfileForm extends SafeXSSForm
         $OtherFoodField->addExtraClass('other-field');
 
         // Github, IRC and Twitter
-        $GitHubUserField = new GitHubUserField('GitHubUser', 'GitHub User <em>(Optional)</em>');
-        $IRCHandleField = new TextField('IRCHandle', 'IRC Handle <em>(Optional)</em>');
-        $TwitterNameField = new TextField('TwitterName', 'Twitter Name <em>(Optional)</em>');
-        $LinkedInProfileField = new TextField('LinkedInProfile', 'LinkedIn Profile - full URL <em>(Optional)</em>');
-        $LinkedInProfileField->setAttribute('type', 'url')->setAttribute('pattern', 'https?://.+');
+        $GitHubUserField = new ReadonlyField('GitHubUser', 'GitHub User');
+        $IRCHandleField = new ReadonlyField('IRCHandle', 'IRC Handle');
+        $TwitterNameField = new ReadonlyField('TwitterName', 'Twitter Name');
+        $LinkedInProfileField = new ReadonlyField('LinkedInProfile', 'LinkedIn Profile');
+        $WeChatUserField = new ReadonlyField('WeChatUser', 'WeChat ID');
         $ContactEmailField = new TextField('ContactEmail', 'Contact Email <em>(Optional)</em>');
-        $WeChatUserField = new TextField('WeChatUser', 'WeChat ID <em>(Optional)</em>');
-
 
         // Associated Projects
         $release = OpenStackRelease::get()->filter('Status', 'Current')->sort('ReleaseDate','DESC')->first();
@@ -104,29 +102,6 @@ class EditProfileForm extends SafeXSSForm
             $new_key = $value.' ('.$key.')';
             $component_list[$new_key] = $new_key;
         });
-
-        /*$component_list = array(
-            'Nova' => 'Compute (Nova)',
-            'Swift' => 'Object Storage (Swift)',
-            'Glance' => 'Image Service (Glance)',
-            'Keystone' => 'Identity Service (Keystone)',
-            'Horizon' => 'Dashboard (Horizon)',
-            'Quantum' => 'Networking (Quantum)',
-            'Cinder' => 'Block Storage (Cinder)',
-            'Ceilometer' => 'Metering/Monitoring (Ceilometer)',
-            'Heat' => 'Orchestration (Heat)',
-            'Trove' => 'Database Service (Trove)',
-            'Ironic' => 'Bare Metal (Ironic)',
-            'Queue' => 'Queue Service (Queue)',
-            'DataProcessing' => 'Data Processing (DataProcessing)',
-            'Oslo' => 'Common Libraries (Oslo)',
-            'Openstack-ci' => 'Infrastructure (Openstack-ci)',
-            'Openstack-manuals' => 'Documentation (Openstack-manuals)',
-            'QA' => 'Quality Assurance (QA)',
-            'Deployment' => 'Deployment (Deployment)',
-            'DevStack' => 'DevStack (DevStack)',
-            'Release' => 'Release Cycle Management (Release)'
-        );*/
 
         $ProjectsField = new CheckboxSetField('Projects', 'What programs are you involved with? <em>(Optional)</em>',$component_list);
         $ProjectsField->setTemplate('BootstrapAwesomeCheckboxsetField');
@@ -162,13 +137,13 @@ class EditProfileForm extends SafeXSSForm
             new LiteralField('instructions',
                 '<p class="info"><strong>If you\'re an active developer on the OpenStack project, please list any email addresses you use to commit code.</strong> (This will really help us avoid duplicates!) If you contributed code ONLY using gerrit, all email addresses you used will be listed on the <a href="https://review.openstack.org/#/settings/web-identities" target="_blank">web identities page</a>. If you have contributed also <em>before</em> gerrit was put in place, please make an effort to remember other email addresses you may have used. Interested in how to <a href="http://wiki.openstack.org/HowToContribute" target="_blank">become a contributor</a>?</p>'),
             $PrimaryEmailField,
+            new LiteralField('instructions', sprintf('<p>** edit your email field at <a href="%s/accounts/user/profile" target="_top">%s/accounts/user/profile</a></p>',IDP_OPENSTACKID_URL,IDP_OPENSTACKID_URL)),
             new LiteralField('instructions',
                 '<p class="info username_warning">This email address is also the account name you use to login.</p>'),
             $SecondEmailField,
             $ThirdEmailField,
             new LiteralField('header', '<h3 class="section-divider">Public Information</h3>'),
             $MemberIDField,
-            new HeaderField("First & Last Name"),
             $FirstNameField,
             $LastNameField,
             $ReplaceBioField,
@@ -187,7 +162,9 @@ class EditProfileForm extends SafeXSSForm
             $TwitterNameField,
             $LinkedInProfileField,
             $WeChatUserField,
+            new LiteralField("bio_label", "<label class=\"left\">Bio</label>"),
             $BioField,
+            new LiteralField('instructions', sprintf('<p>** edit your bio field at <a href="%s/accounts/user/profile" target="_top">%s/accounts/user/profile</a></p>',IDP_OPENSTACKID_URL,IDP_OPENSTACKID_URL)),
             $PhotoField,
 
             new LiteralField('break', '<hr/>'),
@@ -210,41 +187,16 @@ class EditProfileForm extends SafeXSSForm
             $subscribedToNewsletterField,
             $DisplayOnSiteField,
             new LiteralField('break', '<hr/>'),
-            new TextField('Address', _t('Addressable.ADDRESS', 'Street Address (Line1)')),
-            new TextField('Suburb', _t('Addressable.SUBURB', 'Street Address (Line2)')),
-            new TextField('City', _t('Addressable.CITY', 'City'))
-
+            new ReadonlyField('Address', _t('Addressable.ADDRESS', 'Street Address (Line1)')),
+            new ReadonlyField('Suburb', _t('Addressable.SUBURB', 'Street Address (Line2)')),
+            new ReadonlyField('City', _t('Addressable.CITY', 'City')),
+            new ReadonlyField('State', "State"),
+            new ReadonlyField('Postcode', 'Postcode'),
+            new ReadonlyField('Country', 'Country'),
+            new LiteralField('instructions', sprintf('<p>** all readonly fields are editable from <a href="%s/accounts/user/profile" target="_top">%s/accounts/user/profile</a></p>',IDP_OPENSTACKID_URL,IDP_OPENSTACKID_URL))
         );
 
-        // Address Continued
-        $label = _t('Addressable.STATE', 'State');
-        if (is_array($this->allowedStates)) {
-            $fields->push(new DropdownField('State', $label, $this->allowedStates));
-        } elseif (!is_string($this->allowedStates)) {
-            $fields->push(new TextField('State', $label));
-        }
-
-        $fields->push(new TextField(
-            'Postcode', _t('Addressable.POSTCODE', 'Postcode')
-        ));
-
-        $label = _t('Addressable.COUNTRY', 'Country');
-        if (is_array($this->allowedCountries)) {
-            $countryField = new DropdownField('Country', $label, $this->allowedCountries);
-            $countryField->setEmptyString('-- Select One --');
-            $fields->push($countryField);
-        } elseif (!is_string($this->allowedCountries)) {
-            $countryField = new CountryDropdownField('Country', $label);
-            $countryField->setEmptyString('-- Select One --');
-            $fields->push($countryField);
-        }
-
         $fields->push(new LiteralField('break', '<hr/>'));
-
-
-        $fields->push(new LiteralField('changepassword',
-            '<a href="/Security/changepassword">Click here to change your password</a>'));
-
 
         // Create action
         $actions = new FieldList(
@@ -253,21 +205,19 @@ class EditProfileForm extends SafeXSSForm
 
         // Create validators
 
-        $validator = new ConditionalAndValidationRule(array(
-            new HtmlPurifierRequiredValidator('FirstName', 'Surname', 'StatementOfInterest', 'Address', 'City'),
-            new RequiredFields('Email', 'Country')
-        ));
-
-        parent::__construct($controller, $name, $fields, $actions, $validator);
+        parent::__construct($controller, $name, $fields, $actions);
     }
 
     public function loadDataFrom($data, $mergeStrategy = 0, $fieldList = null)
     {
+
+        parent::loadDataFrom($data, $mergeStrategy, $fieldList);
+
         if (count($_POST) == 0) {
             $Gender = is_array($data) ? @$data['Gender'] : $data->Gender;
-
             if ($Gender != 'Male' && $Gender != 'Female' && $Gender != 'Prefer not to say') {
                 $this->fields->dataFieldByName('GenderSpecify')->setValue($Gender);
+                $this->fields->dataFieldByName('Gender')->setValue('Specify');
                 $this->fields->dataFieldByName('GenderSpecify')->removeExtraClass('hide');
             }
 
@@ -275,8 +225,6 @@ class EditProfileForm extends SafeXSSForm
 
         $MemberID = is_array($data) ? @$data['ID'] : $data->ID;
         $this->fields->dataFieldByName('MemberID')->setValue($MemberID);
-
-        parent::loadDataFrom($data, $mergeStrategy, $fieldList);
     }
 
 }

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2015 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,11 +13,12 @@
  **/
 class MemberDeleted extends DataObject
 {
-    private static $db = array(
-        'FirstName'  => 'Varchar',
-        'Surname'    => 'Varchar',
-        'Email'      => 'Varchar(254)',
-        'OriginalID' => 'Int',
-        'FromUrl'    => 'Text',
-    );
+    private static $db = [
+        'FirstName'      => 'Varchar',
+        'Surname'        => 'Varchar',
+        'Email'          => 'Varchar(254)',
+        'OriginalID'     => 'Int',
+        'FromUrl'        => 'Text',
+        'MembershipType' => "Enum('Foundation,Community,None', 'None')",
+    ];
 }
