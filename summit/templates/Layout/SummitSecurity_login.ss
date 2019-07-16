@@ -45,12 +45,10 @@
                     <div class="col-lg-6 col-md-12 col-sm-12">
                         <div class="presentation-app-login-panel">
                             <h3>New to OpenStack? Register now.</h3>
-                            $RegistrationForm
+                            <a class="btn btn-default" href="/join/register/signup?BackURL=$Top.Link" role="button">Sign up</a>
                         </div>
                     </div>
-
                 </div>
-
             </div>
         </div>
         <hr>

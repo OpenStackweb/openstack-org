@@ -3,7 +3,7 @@
 <h1>Deployment # {$ID}</h1>
 <h2>$Label</h2>
 <hr>
-<b>Survey:</b>&nbsp;<a href="$Top.Link(SurveyDetails)/{$DeploymentSurvey.ID}?BackUrl={$Top.Link(DeploymentDetails)}/{$ID}" title="view associated survey"># $DeploymentSurvey.ID</a><br>
+<b>Survey:</b>&nbsp;<a href="$Top.Link(SurveyDetails)/{$DeploymentSurvey.ID}?BackURL={$Top.Link(DeploymentDetails)}/{$ID}" title="view associated survey"># $DeploymentSurvey.ID</a><br>
 <b>Last Updated:</b>&nbsp;$UpdateDate<br>
 <br>
 <b>Would you like to keep this information confidential or allow the Foundation to share information about this deployment publicly?</b>&nbsp;<% if IsPublic %>Willing to share<% else %>Confidential<% end_if %><br>

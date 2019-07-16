@@ -71,7 +71,7 @@
                 <div class="col-lg-6">
                     <h3>$_T("survey_ui", "Don't have a login? Start here.")</h3>
                     <div class="survey-login-wrapper">
-                        $RegisterForm
+                        <a class="btn btn-default" href="/join/register/signup?BackURL=$Top.Link" role="button">$_T("survey_ui", "Sign up")</a>
                     </div>
                 </div>
             </div>

@@ -121,7 +121,7 @@
             <h3>Don't have a login? Start here.</h3>
 
             <div class="survey-login-wrapper">
-                $RegisterForm
+                <a class="btn btn-default" href="/join/register/signup?BackURL=$Top.Link" role="button">Sign up</a>
             </div>
         </div>
     </div>

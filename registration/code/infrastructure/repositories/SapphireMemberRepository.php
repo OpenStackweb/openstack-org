@@ -84,4 +84,17 @@ class SapphireMemberRepository extends SapphireRepository implements IMemberRepo
             UnitOfWork::getInstance()->scheduleForUpdate($member);
         return $member;
     }
+
+    /**
+     * @param string $external_id
+     * @return Member|null
+     */
+    public function findByExternalId(string $external_id): ?Member
+    {
+        $member = Member::get()->filter(['ExternalUserId' => $external_id])->first();
+
+        if(!is_null($member))
+            UnitOfWork::getInstance()->scheduleForUpdate($member);
+        return $member;
+    }
 }

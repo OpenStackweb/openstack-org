@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2014 Openstack Foundation
+ * Copyright 2020 OpenStack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,20 +13,25 @@
  **/
 
 /**
- * Class OpenStackIdMember
+ * Class DeleteNullEmailMigration
  */
-class OpenStackIdMember extends DataExtension {
+final class DeleteNullEmailMigration extends AbstractDBMigrationTask
+{
 
-    private static $db = [
-        'IdentityURL'        => 'Varchar(255)',
-        'ExternalUserId'     => 'Int',
-    ];
+    protected $title = "DeleteNullEmailMigration";
 
-    public function setIdentityUrl($url){
-        $this->owner->setField('IdentityURL',$url);
+    protected $description = "DeleteNullEmailMigration";
+
+    function doUp()
+    {
+        global $database;
+
+        DB::query("DELETE FROM Member where Email IS NULL");
+
     }
 
-    public function getIdentityUrl(){
-        return $this->owner->getField('IdentityURL');
+    function doDown()
+    {
+        // TODO: Implement doDown() method.
     }
 }

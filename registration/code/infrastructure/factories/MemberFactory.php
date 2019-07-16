@@ -19,40 +19,40 @@ final class MemberFactory implements IMemberFactory
      * @param array $data
      * @return Member
      */
-    public function build(array $data)
+    public function build(array $data):Member
     {
-        $member = $this->buildReduced($data);
+        return $this->populate(new Member, $data);
+    }
+
+    /**
+     * @param Member $member
+     * @param array $data
+     * @return Member
+     */
+    public function populate(Member $member, array $data):Member{
+        if(isset($data['Country']))
+            $member->Country   = trim($data['Country']);
+
         $gender = $data['Gender'];
         if ($gender != 'Male' && $gender != 'Female' && $gender != 'Prefer not to say') {
             $member->Gender = $data['GenderSpecify'];
         }
         else
-        $member->Gender = trim($gender);
-        $member->StatementOfInterest = trim($data['StatementOfInterest']);
-        $member->Address = trim($data['Address']);
-        $member->Suburb = trim($data['Suburb']);
-        $member->City = trim($data['City']);
-        $member->State = trim($data['State']);
-        $member->Postcode = trim($data['Postcode']);
+            $member->Gender = trim($gender);
 
-        return $member;
-    }
+        if(isset($data['StatementOfInterest']))
+            $member->StatementOfInterest = trim($data['StatementOfInterest']);
+        if(isset($data['Address']))
+            $member->Address = trim($data['Address']);
+        if(isset($data['Suburb']))
+            $member->Suburb = trim($data['Suburb']);
+        if(isset($data['City']))
+            $member->City = trim($data['City']);
+        if(isset($data['State']))
+            $member->State = trim($data['State']);
+        if(isset($data['Postcode']))
+            $member->Postcode = trim($data['Postcode']);
 
-    /**
-     * @param array $data
-     * @return Member
-     */
-    public function buildReduced(array $data)
-    {
-        $member            = Member::create();
-        $member->FirstName = trim($data['FirstName']);
-        $member->Surname   = trim($data['Surname']);
-        $member->Email     = trim($data['Email']);
-
-        if(isset($data['Country']))
-            $member->Country   = trim($data['Country']);
-
-        $member->Password  = trim($data['Password']['_Password']);
         return $member;
     }
 }

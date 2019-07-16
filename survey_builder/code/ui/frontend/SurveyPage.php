@@ -46,7 +46,6 @@ class SurveyPage_Controller extends Page_Controller
 {
     static $allowed_actions_without_auth = [
         'LandingPage',
-        'RegisterForm',
         'MemberStart',
         'StartSurvey'
     ];
@@ -77,7 +76,6 @@ class SurveyPage_Controller extends Page_Controller
         'RenderSurvey',
         'SurveyStepForm',
         'SkipStep',
-        'RegisterForm',
         'StartSurvey',
         'NextStep',
         'PrevStep',
@@ -936,15 +934,6 @@ class SurveyPage_Controller extends Page_Controller
         $dyn_step_holder_title = $this->current_survey->currentStep()->template()->title();
         $next_step_title       = $next_step->template()->title();
         return $this->redirect(sprintf('%s%s/edit/%s/%s', $this->Link(), $dyn_step_holder_title, $entity->getIdentifier(),$next_step_title));
-    }
-
-    // landing page
-
-    public function RegisterForm()
-    {
-        $form =  new SurveyRegistrationForm($this, 'RegisterForm', $this->member_manager);
-        $data = Session::get("FormInfo.{$form->getName()}.data");
-        return $form->loadDataFrom($data ?: array ());
     }
 
 }

@@ -65,7 +65,7 @@
                 $('#modal-edit-affiliation').on('hidden.bs.modal', function (e) {
                     affiliation_form.cleanForm();
                     affiliation_form_validator.resetForm();
-                })
+                });
 
                 // set modal controls
                 var org_name = $('#OrgName', affiliation_form);
@@ -78,7 +78,6 @@
                             org_name.autocomplete("widget").css('z-index',5000);
                         }
                     });
-
                 }
 
                 var date_picker_start = $('#StartDate', affiliation_form);
@@ -111,8 +110,6 @@
                 $('#btn-save-affiliation').click(function(event){
                     event.preventDefault();
                     event.stopPropagation();
-
-
                     var is_valid = affiliation_form.valid();
                     if (!is_valid) return;
                     var affiliation     = affiliation_form.serializeForm();

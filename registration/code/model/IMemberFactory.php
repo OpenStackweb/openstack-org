@@ -18,11 +18,13 @@ interface IMemberFactory
      * @param array $data
      * @return Member
      */
-    public function build(array $data);
+    public function build(array $data):Member;
 
     /**
+     * @param Member $member
      * @param array $data
      * @return Member
      */
-    public function buildReduced(array $data);
+    public function populate(Member $member, array $data):Member;
+
 }

@@ -37,6 +37,10 @@
     {
       "type": "vcs",
       "url": "https://github.com/OpenStackweb/silverstripe-framework"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/OpenStackweb/OpenID-Connect-PHP"
     }
   ],
   "require": {
@@ -85,7 +89,8 @@
     "smarcet/caldavclient": "1.1.7",
     "smarcet/silverstripe-cloudassets-swift": "dev-master",
     "markguinn/silverstripe-cloudassets": "dev-master",
-    "php-opencloud/openstack": "dev-master"
+    "php-opencloud/openstack": "dev-master",
+    "jumbojett/openid-connect-php": "dev-master"
   },
   "require-dev": {
     "behat/behat": "@stable",

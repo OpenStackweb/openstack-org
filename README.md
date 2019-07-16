@@ -65,3 +65,27 @@ CloudAssets:
       AuthURL: keystone base url 
       LocalCopy: false     
 ````
+
+## OIDC
+
+settings for oidc configuration on _ss_environment.php file
+
+````PHP
+// OIDC
+define('OIDC_CLIENT', '');
+
+define('OIDC_CLIENT_SECRET', '');
+
+
+//set true on production mode, otherwise false
+define('OIDC_VERIFY_HOST',false);
+````
+
+on idp under allowed URIs you need to register following one
+
+* https://hostname/openstackidauthenticator
+
+under security settings you need to set Id Token Signed Response Algorithm 
+
+
+

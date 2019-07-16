@@ -41,6 +41,7 @@ final class FoundationMember
     {
         $this->resign();
         $this->owner->addToGroupByCode(IFoundationMember::CommunityMemberGroupSlug);
+        $this->owner->write();
     }
 
     /**
@@ -63,8 +64,8 @@ final class FoundationMember
                 $document->delete();
             }
         }
-
-        $this->owner->ResignDate = CustomMySQLDatabase::nowRfc2822();
+        $this->owner->MembershipType = IOpenStackMember::MembershipTypeCommunity;
+        $this->owner->ResignDate     = CustomMySQLDatabase::nowRfc2822();
     }
 
     public function onBeforeDelete()
@@ -94,6 +95,9 @@ final class FoundationMember
             $legalAgreement->MemberID = $this->owner->ID;
             $legalAgreement->LegalDocumentPageID = 422;
             $legalAgreement->write();
+            $this->owner->MembershipType = IOpenStackMember::MembershipTypeFoundation;
+            $this->owner->ResignDate  = null;
+            $this->owner->write();
             return true;
         }
         return false;
@@ -102,7 +106,7 @@ final class FoundationMember
     public function isFoundationMember()
     {
         $res = $this->owner->inGroup(IFoundationMember::FoundationMemberGroupSlug);
-        $legal_agreements = DataObject::get("LegalAgreement", " LegalDocumentPageID=422 AND MemberID =" . $this->owner->ID);
+        $legal_agreements = DataObject::get("LegalAgreement", " LegalDocumentPageID = 422 AND MemberID =" . $this->owner->ID);
         $res = $res && $legal_agreements->count() > 0;
         return $res;
     }

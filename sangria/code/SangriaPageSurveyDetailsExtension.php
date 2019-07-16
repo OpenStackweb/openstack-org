@@ -34,13 +34,13 @@ final class SangriaPageSurveyDetailsExtension  extends Extension {
 		$survey_id  = intval(Convert::raw2sql($params["ID"]));;
 		$survey = DeploymentSurvey::get()->byID($survey_id);
 		if($survey) {
-			$back_url = $this->owner->request->getVar('BackUrl');
+			$back_url = $this->owner->request->getVar('BackURL');
 			if(empty($back_url))
 				$back_url = '#';
 			$details_template = $survey->getSurveyType() == SurveyType::OLD ? "SangriaPage_SurveyDetailsOld":"SangriaPage_SurveyDetails";
 			return $this->owner->Customise(
 				array("Survey" => $survey,
-					"BackUrl" => $back_url
+					"BackURL" => $back_url
 				)
 			)->renderWith(array($details_template, 'SangriaPage', 'SangriaPage'));
 		}

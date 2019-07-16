@@ -173,54 +173,18 @@ class EditProfilePage_Controller extends Page_Controller
         if (!$CurrentMember)
             return Security::PermissionFailure($this->controller, 'You must be <a href="/join">registered</a> and logged in to edit your profile:');
 
-        //Check for another member with the same email address
-        if (Member::get()->filter(array('Email' => Convert::raw2sql($data['Email']), 'ID:not' => $CurrentMember->ID))->count() > 0) {
-            $form->addErrorMessage("Email", 'Sorry, that email address already exists.', "bad");
-            Session::set("FormInfo.{$form->FormName()}.data", $data);
-            return $this->redirect($this->Link('?error=1'));
-        }
-        //Otherwise save profile
-        // Clean up bio
-        if ($data["Bio"]) {
-            $config = HTMLPurifier_Config::createDefault();
-            // Remove any CSS or inline styles
-            $config->set('CSS.AllowedProperties', array());
-            $purifier = new HTMLPurifier($config);
-            $cleanedBio = $purifier->purify($data["Bio"]);
-        }
+
         $form->saveInto($CurrentMember);
         if (isset($cleanedBio)) $CurrentMember->Bio = $cleanedBio;
         if ($data['Gender'] == 'Specify') {
             $CurrentMember->Gender = $data['GenderSpecify'];
         }
-        $email_updated = $CurrentMember->isChanged('Email');
         $CurrentMember->ProfileUpdated();
         Session::set("Member.showUpdateProfileModal", false);
         $CurrentMember->write();
-
-        $speaker = PresentationSpeaker::get()->filter('MemberID', $CurrentMember->ID)->first();
-
-        if ($speaker) {
-            if ($data['ReplaceName'] == 1) {
-                $speaker->FirstName = $data['FirstName'];
-            }
-            if ($data['ReplaceSurname'] == 1) {
-                $speaker->Surname = $data['Surname'];
-            }
-            if ($data['ReplaceBio'] == 1) {
-                $speaker->Bio = $data['Bio'];
-            }
-
-            $speaker->write();
-        }
-
         // If they do not have a photo uploaded, but they have provided a twitter URL, attempt to grab a photo from twitter
         if ($CurrentMember->TwitterName && !$CurrentMember->Photo()->Exists()) {
             $this->ProfilePhotoFromTwitter($CurrentMember);
-        }
-
-        if ($email_updated) {
-            $this->member_manager->resetEmailVerification($CurrentMember, new MemberRegistrationSenderService());
         }
 
         return $this->redirect($this->Link('?saved=1'));

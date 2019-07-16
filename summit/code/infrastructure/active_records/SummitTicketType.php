@@ -38,7 +38,6 @@ class SummitTicketType extends DataObject implements ISummitTicketType
 
     static $indexes = array
     (
-       'ExternalId' => array('type' => 'unique', 'value' => 'ExternalId'),
        'Summit_ExternalId' => array('type' => 'unique', 'value' => 'SummitID,ExternalId')
     );
 

@@ -133,7 +133,7 @@ jQuery(document).ready(function($) {
             }
         });
 
-        $( "#HiddenAffiliations" ).on( "affiliation:saved", function( event ) {
+        $( "#HiddenAffiliations" ).on("affiliation:saved", function( event ) {
             registration_form_validator.resetForm();
         });
 

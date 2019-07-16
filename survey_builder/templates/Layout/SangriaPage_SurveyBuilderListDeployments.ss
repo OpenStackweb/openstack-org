@@ -32,7 +32,7 @@
             <td>$CurrentStep.Template.Name</td>
             <td><% if isComplete %>true<% else %>false<% end_if %></td>
             <td>$Lang</td>
-            <td><a href="$Top.Link(DeploymentDetails)/$ID?BackUrl=$Top.Link(SurveyBuilderListDeployments)">view</a></td>
+            <td><a href="$Top.Link(DeploymentDetails)/$ID?BackURL=$Top.Link(SurveyBuilderListDeployments)">view</a></td>
         </tr>
         <% end_loop %>
     </tbody>

@@ -12,8 +12,16 @@
  * limitations under the License.
  **/
 
+/**
+ * Interface IOpenStackMember
+ */
 interface IOpenStackMember
 {
+    const MembershipTypeFoundation = 'Foundation';
+
+    const MembershipTypeCommunity  = 'Community';
+
+    const MembershipTypeNone       = 'None';
     /**
      * @return string
      */
@@ -55,22 +63,6 @@ interface IOpenStackMember
      */
     public function isTrackChair();
 
-    /**
-     * @param string $token
-     * @return bool
-     * @throws EntityValidationException
-     */
-    public function doEmailConfirmation($token);
-
-    /**
-     * @return String
-     */
-    public function generateEmailVerificationToken();
-
-    /**
-     * @return $this
-     */
-    public function resetConfirmation();
 
     /**
      * @return string

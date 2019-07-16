@@ -26,11 +26,13 @@ class RegistrationPage_Controller extends Page_Controller
         'MobileRegistrationForm',
         'MobileRegistrationPage',
         'results',
-        'CheckEmail'
+        'CheckEmail',
+        'signUp',
     );
 
     private static $url_handlers = array (
-        'mobile/$MEMBERSHIP!' => 'MobileRegistrationPage'
+        'mobile/$MEMBERSHIP!' => 'MobileRegistrationPage',
+        'signup' => 'signUp'
     );
 
     /**
@@ -68,6 +70,21 @@ class RegistrationPage_Controller extends Page_Controller
     function init()
     {
         parent::init();
+        $request = $this->getRequest();
+        $params  = $request->params();
+        $action  = $params['Action']??null;
+        if($action == 'signup') return;
+        $currentMember = Member::currentUser();
+        if(is_null($currentMember)) {
+            if($request->getURL() == "join/register"){
+                return $this->signUp($request);
+            }
+            return $this->redirect(Director::absoluteBaseURL());
+        }
+
+        if($currentMember->hasMembershipTypeSet()){
+            return $this->redirect(Director::absoluteURL("/profile"));
+        }
 
         Requirements::css(THIRDPARTY_DIR . '/jquery-ui-themes/smoothness/jquery-ui.css');
         Requirements::block(THIRDPARTY_DIR . '/jquery-ui/jquery-ui.js');
@@ -101,28 +118,45 @@ class RegistrationPage_Controller extends Page_Controller
 
     }
 
+    function signUp($request){
+        $type = $request->getVar("membership-type");
+        if(empty($type)) $type = "foundation";
+        $url = OpenStackIdCommon::getRegistrationUrl(Director::absoluteURL('/Security/login?BackURL='.urlencode('join/register/?membership-type='.$type)));
+        return $this->redirect($url);
+    }
+
     //Generate the registration form
     function RegistrationForm()
     {
+        $currentMember = Member::currentUser();
+        if(is_null($currentMember))
+            throw new InvalidArgumentException();
 
         // Name Set
-        $FirstNameField = new TextField('FirstName', "First Name");
-        $LastNameField  = new TextField('Surname', "Last Name");
+        $FirstNameField = new ReadonlyField('FirstName', "First Name", $currentMember->FirstName);
+        $LastNameField  = new ReadonlyField('Surname', "Last Name", $currentMember->Surname);
 
         // Email Addresses
-        $PrimaryEmailField = new TextField('Email', "Primary Email Address");
+        $PrimaryEmailField = new ReadonlyField('Email', "Primary Email Address",  $currentMember->Email);
         // New Gender Field
-        $GenderField = new OptionSetField('Gender', 'I identify my gender as:', array(
-            'Male' => 'Male',
-            'Female' => 'Female',
-            'Specify' => 'Let me specify',
+        $GenderField = new OptionSetField('Gender', 'I identify my gender as:', [
+            'Male'              => 'Male',
+            'Female'            => 'Female',
+            'Specify'           => 'Let me specify',
             'Prefer not to say' => 'Prefer not to say'
-        ));
+        ]);
+
         $GenderSpecifyField = new TextField('GenderSpecify', 'Specify your gender');
         $GenderSpecifyField->addExtraClass('hide');
+        $gender = $currentMember->Gender;
+        if ($gender != 'Male' && $gender != 'Female' && $gender != 'Prefer not to say') {
+            $GenderSpecifyField->setValue($gender);
+            $GenderSpecifyField->removeExtraClass('hide');
+        }
+        else{
+            $GenderField->setValue($gender);
+        }
 
-        $StatementOfInterestField = new TextField('StatementOfInterest', 'Statement of Interest');
-        $StatementOfInterestField->addExtraClass('autocompleteoff');
 
         $affiliations = new AffiliationField('Affiliations', 'Affiliations');
         $affiliations->setMode('local');
@@ -132,57 +166,28 @@ class RegistrationPage_Controller extends Page_Controller
             $LastNameField,
             new LiteralField('break', '<hr/>'),
             $PrimaryEmailField,
-            new LiteralField('instructions', '<p>This will also be your login name.</p>'),
             new LiteralField('break', '<hr/>'),
             $GenderField,
             $GenderSpecifyField,
             new LiteralField('instructions', '<p>It\'s perfectly acceptable if you choose not to tell us: we appreciate you becoming a member of OpenStack Foundation. The information will remain private and only used to monitor our effort to improve gender diversity in our community.</p>'),
             new LiteralField('break', '<hr/>'),
             $affiliations,
-            $StatementOfInterestField,
-            new LiteralField('instructions', '<p>Your statement of interest should be a few words describing your objectives or plans for OpenStack.</p>'),
+            new ReadonlyField('StatementOfInterest', 'Statement of Interest', $currentMember->StatementOfInterest),
             new LiteralField('break', '<hr/>'),
-            new TextField('Address', _t('Addressable.ADDRESS', 'Street Address (Line1)')),
-            new TextField('Suburb', _t('Addressable.SUBURB', 'Street Address (Line2)')),
-            new TextField('City', _t('Addressable.CITY', 'City'))
+            new ReadonlyField('Address', _t('Addressable.ADDRESS', 'Street Address (Line1)'), $currentMember->Address),
+            new ReadonlyField('Suburb', _t('Addressable.SUBURB', 'Street Address (Line2)'), $currentMember->Suburb),
+            new ReadonlyField('City', _t('Addressable.CITY', 'City'), $currentMember->City),
+            new ReadonlyField('State', "State", $currentMember->State),
+            new ReadonlyField('Postcode', 'Postcode', $currentMember->Postcode),
+            new ReadonlyField('Country', 'Country', $currentMember->Country),
+            new LiteralField('instructions', sprintf('<p>** all readonly fields are editable from <a href="%s/accounts/user/profile" target="_top">%s/accounts/user/profile</a></p>',IDP_OPENSTACKID_URL,IDP_OPENSTACKID_URL))
         );
-
-        $label = _t('Addressable.STATE', 'State');
-        if (is_array($this->allowedStates)) {
-            $fields->push($states = new DropdownField('State', $label, $this->allowedStates));
-        } elseif (!is_string($this->allowedStates)) {
-            $fields->push($states = new TextField('State', $label));
-        }
-
-        $states->addExtraClass('state-form-control');
-
-        $AdressField = new TextField(
-            'Postcode', _t('Addressable.POSTCODE', 'Postcode')
-        );
-
-        $fields->push($AdressField);
-
-        $label = _t('Addressable.COUNTRY', 'Country');
-        if (is_array($this->allowedCountries)) {
-            $countryField = new DropdownField('Country', $label, $this->allowedCountries);
-            $countryField->addExtraClass('chzn-select');
-            $countryField->setEmptyString('-- Select One --');
-            $fields->push($countryField);
-        } elseif (!is_string($this->allowedCountries)) {
-            $countryField = new CountryDropdownField('Country', $label);
-            $countryField->setEmptyString('-- Select One --');
-            $countryField->addExtraClass('chzn-select');
-            $fields->push($countryField);
-        }
 
         $fields->push(new LiteralField('break', '<hr/>'));
-
-        $fields->push(new ConfirmedPasswordField('Password', 'Password'));
-
         $fields->push(new HiddenField('MembershipType', 'MembershipType', 'foundation'));
 
         $request  = Controller::curr()->getRequest();
-        $back_url = $request->getVar('BackURL');
+        $back_url = $request->requestVar('BackURL');
         if(!empty($back_url))
         {
             $fields->push(new HiddenField('BackURL', 'BackURL', $back_url));
@@ -192,18 +197,7 @@ class RegistrationPage_Controller extends Page_Controller
             new FormAction('doRegister', 'Submit My Application')
         );
 
-        $validator = new Member_Validator(
-            'FirstName',
-            'Surname',
-            'Email',
-            'StatementOfInterest',
-            'Address',
-            'City',
-            'Country',
-            'Password'
-        );
-
-        $form =  new RecaptchaForm($this, 'RegistrationForm', $fields, $actions, $validator);
+        $form =  new HoneyPotForm($this, 'RegistrationForm', $fields, $actions);
 
         if ($data = Session::get("FormInfo.{$form->FormName()}.data")) {
             if(isset($data['HiddenAffiliations']))
@@ -219,17 +213,22 @@ class RegistrationPage_Controller extends Page_Controller
     function doRegister($data, $form)
     {
         try {
+            // member must be logged already
+            $currentMember = Member::currentUser();
+            if(is_null($currentMember))
+                throw new InvalidArgumentException();
+
             $data = SQLDataCleaner::clean($data, $non_check_keys = array('HiddenAffiliations'));
 
             Session::set("FormInfo.{$form->FormName()}.data", $data);
             $profile_page = EditProfilePage::get()->first();
-            $member = $this->member_manager->register($data, new MemberRegistrationSenderService);
+            $member = $this->member_manager->register($currentMember, $data);
             //Get profile page
             if (!is_null($profile_page)) {
                 //Redirect to profile page with success message
                 Session::clear("FormInfo.{$form->FormName()}.data");
                 $request         = Controller::curr()->getRequest();
-                $former_back_url = $request->postVar('BackURL');
+                $former_back_url = $request->requestVar('BackURL');
                 $back_url        = $profile_page->Link('?success=1');
                 if(!empty($former_back_url)) $back_url .= "&BackURL=".$former_back_url;
 
@@ -250,103 +249,12 @@ class RegistrationPage_Controller extends Page_Controller
         }
     }
 
+
     function MobileRegistrationPage()
     {
         $membership = $this->request->param('MEMBERSHIP');
-        Requirements::block("registration/javascript/affiliations.js");
-        Requirements::block("registration/javascript/registration.page.js");
-        Requirements::css('registration/css/mobile.registration.page.css');
-        Requirements::javascript("registration/javascript/mobile.registration.page.js");
-
-        echo $this->renderWith(array('MobileRegistrationPage','RegistrationPage','Page'), array('Membership' => $membership));
-    }
-
-    //Generate the registration form for mobile
-    function MobileRegistrationForm($membership)
-    {
-        //Membership
-        $membershipField = new HiddenField('MembershipType',null,$membership);
-        // Name Set
-        $FirstNameField = new TextField('FirstName', "First Name");
-        $LastNameField = new TextField('Surname', "Last Name");
-        // Country
-        $label = _t('Addressable.COUNTRY', 'Country');
-        $countryField = new CountryDropdownField('Country', $label);
-        $countryField->setEmptyString('-- Select One --');
-        $countryField->addExtraClass('chzn-select');
-        // Email Addresses
-        $PrimaryEmailField = new TextField('Email', "Primary Email Address");
-
-        $fields = new FieldList(
-            $membershipField,
-            $FirstNameField,
-            $LastNameField,
-            $countryField,
-            new LiteralField('break', '<hr/>'),
-            $PrimaryEmailField,
-            new LiteralField('login_text','<div class="login_lit"> You will use this to login. </div>')
-        );
-
-        $fields->push(new ConfirmedPasswordField('Password', 'Password'));
-
-        $actions = new FieldList(
-            new FormAction('doRegisterMobile', 'Complete Registration')
-        );
-
-        $validator = new Member_Validator(
-            'FirstName',
-            'Surname',
-            'Email',
-            'Country',
-            'Password'
-        );
-
-        $form =  new RecaptchaForm($this, 'MobileRegistrationForm', $fields, $actions, $validator);
-
-        if ($data = Session::get("FormInfo.{$form->FormName()}.data")) {
-            return $form->loadDataFrom($data);
-        }
-
-        $form->addExtraClass('mobile-registration-form');
-
-        return $form;
-    }
-
-    //Submit the registration form
-    function doRegisterMobile($data, $form)
-    {
-        try {
-            $data = SQLDataCleaner::clean($data);
-
-            Session::set("FormInfo.{$form->FormName()}.data", $data);
-            $profile_page = EditProfilePage::get()->first();
-            $member = $this->member_manager->registerMobile($data, new MemberRegistrationSenderService);
-            //Get profile page
-            if (!is_null($profile_page)) {
-                //Redirect to profile page with success message
-                Session::clear("FormInfo.{$form->FormName()}.data");
-
-                $request         = Controller::curr()->getRequest();
-                $former_back_url = $request->postVar('BackURL');
-                $back_url        = $profile_page->Link('?success=1');
-
-                if(!empty($former_back_url)) $back_url .= "&BackURL=".$former_back_url;
-
-                return OpenStackIdCommon::loginMember($member, $back_url);
-            }
-        }
-        catch(EntityValidationException $ex1){
-            Form::messageForForm($form->FormName(),$ex1->getMessage(), 'bad');
-            //Return back to form
-            SS_Log::log($ex1->getMessage(), SS_Log::WARN);
-            return $this->redirectBack();
-        }
-        catch(Exception $ex){
-            Form::messageForForm($form->FormName(), "There was an error with your request, please contact your admin.", 'bad');
-            //Return back to form
-            SS_Log::log($ex->getMessage(), SS_Log::ERR);
-            return $this->redirectBack();
-        }
+        $url = OpenStackIdCommon::getRegistrationUrl(Director::absoluteURL('/Security/login?BackURL=join/register/?membership-type='.$membership));
+        return $this->redirect($url);
     }
 
     function LegalTerms()

@@ -60,7 +60,7 @@
 <ul>
 <% loop Deployments %>
     <li>
-        <a href="$Top.Link(DeploymentDetails)/{$ID}?BackUrl={$Top.CurrentUrl}" title="click to see deployment details">$Label</a>
+        <a href="$Top.Link(DeploymentDetails)/{$ID}?BackURL={$Top.CurrentUrl}" title="click to see deployment details">$Label</a>
     </li>
 <% end_loop %>
 </ul>

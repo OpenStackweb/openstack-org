@@ -21,6 +21,15 @@ final class OpenStackIdCommon {
         die("<h1>Your browser is not accepting header redirects</h1><p>Please <a href=\"$dest\">click here</a>");
     }
 
+    public static function getRegistrationUrl(string $redirect_uri, bool $append_back_url = true):string{
+        $back_url = urlencode(self::getRedirectBackUrl());
+        if($append_back_url && !empty($back_url)){
+            $append_char = strstr($redirect_uri, '?') == false ? '?' : '&';
+            $redirect_uri .= $append_char.'BackURL='.$back_url;
+        }
+        return sprintf("%s/auth/register?client_id=%s&redirect_uri=%s",IDP_OPENSTACKID_URL,OIDC_CLIENT, urlencode($redirect_uri));
+    }
+
     /**
      * @return string
      */
@@ -45,12 +54,14 @@ final class OpenStackIdCommon {
 
         if(empty($back_url))
             $back_url = Director::baseURL();
+
         if(!empty($fragment))
             $back_url .= $fragment;
 
-        $back_url = Director::absoluteURL($back_url, true);
+        if(!self::isAllowedBackUrl($back_url))
+            $back_url = Director::baseURL();
 
-        return $back_url;
+        return Director::absoluteURL($back_url, true);
     }
 
     public static function getTrustRoot()
@@ -74,7 +85,7 @@ final class OpenStackIdCommon {
         return
             Controller::curr()->customise(
             [
-                    'LoginUrl' => '/Security/login?BackURL='.$back_url,
+                    'BackURL' => $back_url,
                     'Member'   => $member
             ])->renderWith(['RegistrationPage_success', 'Page']);
     }
@@ -92,9 +103,12 @@ final class OpenStackIdCommon {
     }
 
     public static function cleanBackUrl($back_url){
-        if(empty($back_url) || (!empty($back_url) && !Director::is_site_url($back_url))){
-            $back_url = Director::baseURL();
+        if(empty($back_url)){
+            return Director::baseURL();
         }
+
+        if(!self::isAllowedBackUrl($back_url))
+            $back_url = Director::baseURL();
 
         if($back_url == Director::baseURL()."Security/")
             $back_url = Director::baseURL();

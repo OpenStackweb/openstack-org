@@ -7,7 +7,7 @@
 <b>Email:</b>&nbsp;$CreatedBy.Email<br>
 <b>Completed?: </b>&nbsp;<% if isComplete %>true<% else %>false<% end_if %><br>
 <% if Parent %>
-    <b>Survey:</b>&nbsp;<a href="$Top.Link(SurveyDetails)/{$Parent.ID}?BackUrl={$Top.Link(DeploymentDetails)}/{$ID}" title="view associated survey"># $Parent.ID</a><br>
+    <b>Survey:</b>&nbsp;<a href="$Top.Link(SurveyDetails)/{$Parent.ID}?BackURL={$Top.Link(DeploymentDetails)}/{$ID}" title="view associated survey"># $Parent.ID</a><br>
 <% end_if %>
 <% loop Steps %>
         <% if hasAnswers %>
@@ -30,7 +30,7 @@
     <h2>Deployments</h2>
     <ul>
     <% loop EntitiesSurveys %>
-        <li><a href="$Top.Link(DeploymentDetails)/{$ID}?BackUrl={$Top.Link(SurveyDetails)}/{$Top.ID}&BackUrl=$Top.BackUrl" title="view associated deployment"># $getFriendlyName</a></li>
+        <li><a href="$Top.Link(DeploymentDetails)/{$ID}?BackURL={$Top.Link(SurveyDetails)}/{$Top.ID}&BackURL=$Top.BackUrl" title="view associated deployment"># $getFriendlyName</a></li>
     <% end_loop %>
     </ul>
 <% end_if %>
