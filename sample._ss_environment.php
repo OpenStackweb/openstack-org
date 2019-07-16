@@ -108,8 +108,13 @@ define('OIDC_CLIENT', '');
 define('OIDC_CLIENT_SECRET', '');
 //set true on production mode, otherwise false
 define('OIDC_VERIFY_HOST',false);
+<<<<<<< HEAD
 // scopes
 define('OIDC_SCOPES', 'openid profile email address');
+=======
+
+
+>>>>>>> OIDC migration
 //summit purchase orders settings
 
 define('APPROVED_PURCHASE_ORDER_EMAIL_FROM','');

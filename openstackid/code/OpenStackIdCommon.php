@@ -24,6 +24,15 @@ final class OpenStackIdCommon {
         die("<h1>Your browser is not accepting header redirects</h1><p>Please <a href=\"$dest\">click here</a>");
     }
 
+    public static function getRegistrationUrl(string $redirect_uri, bool $append_back_url = true):string{
+        $back_url = urlencode(self::getRedirectBackUrl());
+        if($append_back_url && !empty($back_url)){
+            $append_char = strstr($redirect_uri, '?') == false ? '?' : '&';
+            $redirect_uri .= $append_char.'BackURL='.$back_url;
+        }
+        return sprintf("%s/auth/register?client_id=%s&redirect_uri=%s",IDP_OPENSTACKID_URL,OIDC_CLIENT, urlencode($redirect_uri));
+    }
+
     /**
      * @param string $redirect_uri
      * @param bool $append_back_url

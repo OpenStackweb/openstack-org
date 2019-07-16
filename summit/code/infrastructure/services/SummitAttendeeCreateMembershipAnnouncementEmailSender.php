@@ -42,6 +42,6 @@ final class SummitAttendeeCreateMembershipAnnouncementEmailSender implements IMe
                 'Summit' => $summit
             ]
         )
-        ->send();
+            ->send();
     }
 }

@@ -112,7 +112,7 @@ final class OpenStackIdSecurityController extends Security
             $url = Director::protocolAndHost();
 
         $idp= IDP_OPENSTACKID_URL . "/accounts/user/logout";
- $script =       <<<SCRIPT
+        $script =       <<<SCRIPT
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <img alt="logout" width="0" height="0" src="{$idp}" id="logout_image" />
   <p>Performing logout...</p>
@@ -133,16 +133,16 @@ SCRIPT;
     {
         return $this->customise
         (
-           [
+            [
                 "LoginErrorMessage" => Session::get("Security.Message.message"),
                 "OpenStackIdUrl"    => IDP_OPENSTACKID_URL,
                 "ReloginUrl"        => OpenStackIdCommon::getRedirectBackUrl()
-           ]
+            ]
         )
-        ->renderWith
-        (
-            array('OpenStackIdSecurityController_error', 'Page')
-        );
+            ->renderWith
+            (
+                array('OpenStackIdSecurityController_error', 'Page')
+            );
     }
 
     public function BackUrl()

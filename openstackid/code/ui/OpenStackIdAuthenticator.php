@@ -44,7 +44,7 @@ final class OpenStackIdAuthenticator extends Controller
         try {
 
             $member = Member::currentUser();
-            
+
             if ($member){
                 // user is already logged in
                 return $this->redirect(OpenStackIdCommon::getRedirectBackUrl());

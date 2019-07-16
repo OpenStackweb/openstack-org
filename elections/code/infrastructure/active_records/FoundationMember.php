@@ -180,15 +180,15 @@ final class FoundationMember
         $current_election = Election::getCurrent();
 
         if ($current_election) {
-                $candidate = Candidate::get()->filter(array(
-                    'MemberID' => $this->getIdentifier(),
-                    'ElectionID' => $current_election->ID))->first();
+            $candidate = Candidate::get()->filter(array(
+                'MemberID' => $this->getIdentifier(),
+                'ElectionID' => $current_election->ID))->first();
 
-                $res = $candidate;
-                if (!is_null($candidate)) {
-                    UnitOfWork::getInstance()->setToCache($candidate);
-                    UnitOfWork::getInstance()->scheduleForUpdate($candidate);
-                }
+            $res = $candidate;
+            if (!is_null($candidate)) {
+                UnitOfWork::getInstance()->setToCache($candidate);
+                UnitOfWork::getInstance()->scheduleForUpdate($candidate);
+            }
 
         }
         return $res;

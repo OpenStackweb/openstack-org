@@ -743,7 +743,7 @@ class Summit extends DataObject implements ISummit
 
     public static function get_not_finished(){
         return Summit::get()
-            ->where(' SummitEndDate > UTC_TIMESTAMP() ')
+            //->where(' SummitEndDate > UTC_TIMESTAMP() ')
             ->sort('SummitEndDate ASC');
     }
 
