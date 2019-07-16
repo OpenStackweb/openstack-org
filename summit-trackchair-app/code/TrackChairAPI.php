@@ -1166,7 +1166,7 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
         }
 
         $comment = $r->postVar('comment');
-        $isPublic = $r->postVar('is_public') ? true : false;
+        $isPublic = ($r->postVar('is_public') == 'true');
 
         if ($comment != null) {
             $commentObj = $this->presentation->addComment($comment, Member::currentUserID(), $isPublic);
