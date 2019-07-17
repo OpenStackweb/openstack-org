@@ -196,6 +196,12 @@ define('CFP_APP_BASE_URL', '');
 
 define('SURVEY_ANALYTICS_URL', '');
 
+define('MEETUP_OAUTH_CLIENT_ID' ,'');
+define('MEETUP_OAUTH_REDIRECT_URL' ,'');
+define('MEETUP_OAUTH_CLIENT_SECRET' ,'');
+define('MEETUP_USER' ,'');
+define('MEETUP_PASSWORD' ,'');
+
 global $_FILE_TO_URL_MAPPING;
 $_FILE_TO_URL_MAPPING[''] = '';
 

@@ -23,8 +23,4 @@ interface IExternalEventsApi
      */
     public function getAllUpcomingEvents(int $pageSize):array;
 
-    /**
-     * @param string $apiKey
-     */
-    public function setApiKey(string $apiKey);
 }
