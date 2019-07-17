@@ -19,11 +19,7 @@ final class MeetupApi implements IExternalEventsApi
 {
 
     const BaseUrl = 'https://api.meetup.com';
-
-    /**
-     * @var string
-     */
-    private $apiKey;
+    const BaseAuthUrl = 'https://secure.meetup.com';
 
     /**
      * @var Client
@@ -31,11 +27,126 @@ final class MeetupApi implements IExternalEventsApi
     private $client;
 
     /**
-     * @param string $apiKey
+     * @param string $key
+     * @return CacheProxy|Zend_Cache_Core
      */
-    public function setApiKey(string $apiKey)
+    private function getCache($key = 'all')
     {
-        $this->apiKey = $apiKey;
+        return SS_Cache::factory(strtolower(get_class($this)) . '_MeetupApi_'.strtolower($key));
+    }
+
+    /**
+     * @param $key
+     * @return mixed|null
+     */
+    private function loadRAWFromCache($key)
+    {
+        if ($result = $this->getCache()->load(md5($key))) {
+            return unserialize($result);
+        }
+        return null;
+    }
+
+    /**
+     * @param $key
+     * @param $data
+     * @param $lifetime
+     * @throws Zend_Cache_Exception
+     */
+    private function saveRAW2Cache($key, $data, $lifetime)
+    {
+        $this->getCache()->save(serialize($data), md5($key), [], $lifetime);
+    }
+
+    /**
+     * @return string
+     * @throws Exception
+     */
+    private function getAccessToken():string {
+
+        $access_token = $this->loadRAWFromCache("access_token");
+        if(!empty($access_token)) return $access_token;
+        $response = $this->client->get(self::BaseAuthUrl."/oauth2/authorize" , [
+            'headers' => [
+                'Accept' => 'application/json'
+            ],
+            'query' => [
+                'client_id'     => MEETUP_OAUTH_CLIENT_ID,
+                'redirect_uri'  => MEETUP_OAUTH_REDIRECT_URL,
+                'response_type' => 'anonymous_code',
+            ]
+        ]);
+
+        if($response->getStatusCode() !== 200)
+            throw new Exception('invalid status code!');
+        $content_type = $response->getHeaderLine('content-type');
+        if(empty($content_type))
+            throw new Exception('invalid content type!');
+        if(!strstr($content_type,'application/json'))
+            throw new Exception('invalid content type!');
+
+        $json_content  = $response->getBody()->getContents();
+        $json_response = json_decode($json_content, true);
+        if(!key_exists('code', $json_response))
+            throw new InvalidArgumentException();
+
+        $code = $json_response['code'];
+
+
+        $response = $this->client->post(self::BaseAuthUrl."/oauth2/access" , [
+            'headers' => [
+                'Accept' => 'application/json'
+            ],
+            'query' => [
+                'client_id'     => MEETUP_OAUTH_CLIENT_ID,
+                'client_secret' => MEETUP_OAUTH_CLIENT_SECRET,
+                'redirect_uri'  => MEETUP_OAUTH_REDIRECT_URL,
+                'grant_type'    => 'anonymous_code',
+                'code'          => $code,
+            ]
+        ]);
+
+        if($response->getStatusCode() !== 200)
+            throw new Exception('invalid status code!');
+        $content_type = $response->getHeaderLine('content-type');
+        if(empty($content_type))
+            throw new Exception('invalid content type!');
+        if(!strstr($content_type,'application/json'))
+            throw new Exception('invalid content type!');
+
+        $json_content  = $response->getBody()->getContents();
+        $json_response = json_decode($json_content, true);
+        if(!key_exists('access_token', $json_response))
+            throw new InvalidArgumentException();
+
+        $access_token  = $json_response['access_token'];
+
+        $response = $this->client->post(self::BaseUrl."/sessions" , [
+            'headers' => [
+                'Accept' => 'application/json',
+                'Authorization' => sprintf("Bearer %s", $access_token)
+            ],
+            'query' => [
+                'email'    => MEETUP_USER,
+                'password' => MEETUP_PASSWORD,
+            ]
+        ]);
+
+        if($response->getStatusCode() !== 200)
+            throw new Exception('invalid status code!');
+        $content_type = $response->getHeaderLine('content-type');
+        if(empty($content_type))
+            throw new Exception('invalid content type!');
+        if(!strstr($content_type,'application/json'))
+            throw new Exception('invalid content type!');
+
+        $json_content  = $response->getBody()->getContents();
+        $json_response = json_decode($json_content, true);
+        if(!key_exists('oauth_token', $json_response))
+            throw new InvalidArgumentException();
+        $access_token  = $json_response['oauth_token'];
+        $this->saveRAW2Cache('access_token', $access_token, intval($json_response['expires_in']) * 0.9);
+        return $access_token;
     }
 
     public function __construct()
@@ -73,8 +184,9 @@ final class MeetupApi implements IExternalEventsApi
 
         $query = [
             'page' => $page,
-            'key' => $this->apiKey
+            'access_token' => $this->getAccessToken()
         ];
+
         $api_url = sprintf("%s/self/groups", self::BaseUrl);
         $response = $this->client->get($api_url, array
             (
@@ -104,9 +216,9 @@ final class MeetupApi implements IExternalEventsApi
     public function getGroupIncomingEvents(string $groupSlug, int $page = 20):array {
 
         $query = [
-            'page' => $page,
-            'key' => $this->apiKey,
-            'status' => 'upcoming'
+            'page'         => $page,
+            'access_token' => $this->getAccessToken(),
+            'status'       => 'upcoming'
         ];
         $api_url = sprintf("%s/%s/events", self::BaseUrl, $groupSlug);
         $response = $this->client->get($api_url, array
