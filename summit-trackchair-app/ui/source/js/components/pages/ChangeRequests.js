@@ -6,7 +6,7 @@ import TableColumn from '../ui/table/TableColumn';
 import Bounce from '../ui/loaders/Bounce';
 import RouterLink from '../containers/RouterLink';
 import RequestResolutionButtons from '../containers/RequestResolutionButtons';
-import {Modal, Button, OverlayTrigger, Tooltip} from 'react-bootstrap'
+import {Modal, Button, OverlayTrigger, Tooltip} from 'react-bootstrap';
 
 class ChangeRequests extends React.Component {
 
@@ -83,6 +83,9 @@ class ChangeRequests extends React.Component {
     	if(!this.props.changeRequests) {
     		return <Bounce />
     	}
+
+    	console.log(this.props.changeRequests)
+
         return (
 			<div className="col-lg-12">
 			  <div className="ibox float-e-margins">
@@ -110,6 +113,7 @@ class ChangeRequests extends React.Component {
                         className="table table-striped table-bordered table-hover dataTable"
                         role="grid"
                       >
+					  	<TableColumn columnKey='id'>Id</TableColumn>
                         <TableColumn width='40%' columnKey='presentation'
                             cell={(data) => {
                                 return <RouterLink link={`browse/${data.id}`}>{data.title}</RouterLink>
@@ -134,13 +138,13 @@ class ChangeRequests extends React.Component {
                             >
                             Status
                         </TableColumn>
-                        <TableColumn width='12%'columnKey='oldcat'>Old Category</TableColumn>
+                        <TableColumn width='12%' columnKey='oldcat'>Old Category</TableColumn>
                         <TableColumn width='12%' columnKey='newcat'>New Category</TableColumn>
                         <TableColumn width='12%' columnKey='requester'>Requester</TableColumn>
                         {this.props.isAdmin &&
                             <TableColumn width='15%' columnKey='admin'
                                 cell={(data, row) => {
-                                    if(row[1].status === 'Pending') {
+                                    if(row[2].status === 'Pending') {
                                         if(data == 'has_selections') {
                                             return <small>Presentation already has selections.</small>
                                         } else if (data == 'not_admin') {
@@ -149,7 +153,7 @@ class ChangeRequests extends React.Component {
                                             return <RequestResolutionButtons request={data} onReject={this.openModal} />
                                         }
                                     } else {
-                                        return <small>{row[1].status} by {row[1].approver}</small>
+                                        return <small>{row[2].status} by {row[2].approver}</small>
                                     }
                                     return <span />
                                 }}
@@ -193,7 +197,7 @@ export default connect(
 		search: state.changeRequests.search,
 		isAdmin: state.changeRequests.results && 
 				 state.changeRequests.results.length && 
-				 state.changeRequests.results[0].length === 6
+				 state.changeRequests.results[0].length === 7
 	}),
 	dispatch => ({
 		fetch(params) {			

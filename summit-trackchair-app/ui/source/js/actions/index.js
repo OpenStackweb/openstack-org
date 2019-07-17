@@ -261,7 +261,9 @@ export const postResolveRequest = (requestID, approved, rejectReason) => {
 
 		const req = http.put(`/trackchairs/api/v1/categorychange/resolve/${requestID}`)
 			.send({approved: approved, reason: rejectReason})
-			.end(responseHandler(dispatch));
+			.end(responseHandler(dispatch, json => {
+                dispatch(fetchChangeRequests());
+            }));
 
 		schedule(key, req);
 	}
