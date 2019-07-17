@@ -611,8 +611,6 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         ];
 
         foreach ($changeRequests as $request) {
-            $old_category = ($request->Status == SummitCategoryChange::STATUS_PENDING) ? $request->Presentation()->Category() : $request->OldCategory();
-
             $row = [];
             $row['id'] = $request->ID;
             $row['presentation_id'] = $request->PresentationID;
@@ -624,8 +622,8 @@ class TrackChairAPI extends AbstractRestfulJsonApi
             $row['chair_of_new'] = $request->NewCategory()->isTrackChair($memID);
             $row['new_category']['title'] = $request->NewCategory()->Title;
             $row['new_category']['id'] = $request->NewCategory()->ID;
-            $row['old_category']['title'] = $old_category->Title;
-            $row['old_category']['id'] = $old_category->ID;
+            $row['old_category']['title'] = $request->OldCategory()->Title;
+            $row['old_category']['id'] = $request->OldCategory()->ID;
             $row['requester'] = $request->Reqester()->getName();
             $row['has_selections'] = $request->Presentation()->isSelectedByAnyone();
             $row['approver'] = $request->AdminApprover()->getName();
@@ -700,8 +698,9 @@ class TrackChairAPI extends AbstractRestfulJsonApi
      */
     public function handleResolveCategoryChange(SS_HTTPRequest $r)
     {
+        $requestId = $r->param('ID');
 
-        if (!is_numeric($r->param('ID'))) {
+        if (!is_numeric($requestId)) {
             return $this->httpError(500, "Invalid category change id");
         }
 
@@ -712,9 +711,9 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         $approved = (boolean) $vars['approved'];
         $reason = (isset($vars['reason'])) ? $vars['reason'] : 'No reason.';
 
-        $request = SummitCategoryChange::get()->byID($r->param('ID'));
+        $request = SummitCategoryChange::get()->byID($requestId);
         if(!$request) {
-        	return $this->httpError(500, "Request " . $r->param('ID') . " does not exist");
+        	return $this->httpError(500, "Request " . $requestId . " does not exist");
         }
 
         $new_category = PresentationCategory::get()->byID($request->NewCategoryID);
@@ -756,6 +755,21 @@ class TrackChairAPI extends AbstractRestfulJsonApi
 	        	$oldCat->Title . ' to ' .
 	        	$category->Title
 	        );
+
+	        // reject all other change requests for this presentation
+            $other_requests = SummitCategoryChange::get()
+                ->filter('PresentationID', $request->Presentation()->ID)
+                ->filter('Status', SummitCategoryChange::STATUS_PENDING)
+                ->exclude('ID', $requestId);
+
+            foreach ($other_requests as $requestTmp) {
+                $requestTmp->AdminApproverID = Member::currentUserID();
+                $requestTmp->Status = SummitCategoryChange::STATUS_REJECTED;
+                $requestTmp->ApprovalDate = SS_Datetime::now();
+                $requestTmp->Reason = "Request ID {$requestId} was approved instead.";
+                $requestTmp->write();
+            }
+
     	} else {
     		$request->Presentation()->addNotification(
 	        	'{member} rejected ' .
@@ -765,29 +779,11 @@ class TrackChairAPI extends AbstractRestfulJsonApi
     		);
     	}
 
-        $request->OldCategoryID = $oldCat->ID;
         $request->AdminApproverID = Member::currentUserID();
         $request->Status = $status;
         $request->ApprovalDate = SS_Datetime::now();
         $request->Reason = $reason;
         $request->write();
-
-        $peers = SummitCategoryChange::get()
-        	->filter([
-        		'PresentationID' => $request->PresentationID,
-        		'NewCategoryID' => $request->NewCategoryID
-        	])
-        	->exclude([
-        		'ID' => $request->ID
-        	]);
-
-        foreach($peers as $p) {
-            $p->AdminApproverID = Member::currentUserID();
-            $p->Status = $status;
-            $p->ApprovalDate = SS_Datetime::now();
-            $p->Reason = $reason;
-            $p->write();
-        }
 
         //send email to chairs from both categories
         $new_cat_chairs = $new_category->TrackChairs();
@@ -1373,6 +1369,7 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
         if ($c) {
             $request = SummitCategoryChange::create();
             $request->PresentationID = $this->presentation->ID;
+            $request->OldCategoryID = $this->presentation->CategoryID;
             $request->NewCategoryID = $newCat;
             $request->ReqesterID = Member::currentUserID();
             $request->write();

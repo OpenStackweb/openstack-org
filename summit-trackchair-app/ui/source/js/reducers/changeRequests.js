@@ -2,6 +2,7 @@
 const map = (results) => {
 	return results.map(data => {
 		const r = [
+			data.id,
 			{title: data.presentation_title, id: data.presentation_id},
             {status: data.status, reason: data.reject_reason, approver: data.approver},
 			data.old_category.title,
@@ -66,11 +67,11 @@ export const changeRequests = function (
         	return {
         		...state,
         		results: state.results.map(r => {        			
-        			if(+r[5] === action.payload.requestID) {        				
+        			if(+r[6] === action.payload.requestID) {
         				const newRow = [...r];
-        				newRow[1].status = action.payload.approved ? 'Approved' : 'Rejected';
-        				newRow[1].reason = action.payload.rejectReason;
-                        newRow[1].approver = window.TrackChairAppConfig.userinfo.name;
+        				newRow[2].status = action.payload.approved ? 'Approved' : 'Rejected';
+        				newRow[2].reason = action.payload.rejectReason;
+                        newRow[2].approver = window.TrackChairAppConfig.userinfo.name;
         				return newRow;
         			}
 
