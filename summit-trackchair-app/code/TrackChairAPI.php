@@ -563,6 +563,9 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         $search = $r->getVar('search');
 
         switch($sortCol) {
+            case 'id':
+                $sortClause = "ID";
+                break;
         	case 'presentation':
         		$sortClause = "SummitEvent.Title";
         		break;
@@ -582,7 +585,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
         		$sortClause = "Status";
         }
 
-        $changeRequests = $changeRequests->sort($sortClause . $sortDir . ", LastEdited DESC");
+        $changeRequests = $changeRequests->sort($sortClause . $sortDir . ", PresentationID DESC, LastEdited DESC");
 
         if($search) {
         	$changeRequests = $changeRequests->filterAny([
