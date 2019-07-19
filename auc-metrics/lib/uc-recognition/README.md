@@ -8,3 +8,7 @@ Uses IRC logs to attempt to determine active working group members:
 * get_meeting_data.sh
 * get_active_wg_members.py 
 
+# tasks need folliwing python dependencies
+
+pip install paramiko
+pip install requests
