@@ -3,7 +3,7 @@
 namespace OpenStack\AUC;
 
 use \Member;
-
+use \SS_Object;
 /**
  * Class Result
  * @package OpenStack\AUC
