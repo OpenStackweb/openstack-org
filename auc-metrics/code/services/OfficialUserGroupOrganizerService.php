@@ -33,79 +33,49 @@ class OfficialUserGroupOrganizerService extends BaseService implements MetricSer
                 'Constant GROUP_CONTACT_REPORT_TOKEN not defined'
             );
         }
-
-        $csvPath = "https://groups.openstack.org/reports/group-contact-report/csv?token=" . GROUP_CONTACT_REPORT_TOKEN . "&status=official";
-
-        $client = $this->getHTTPClient();
-        $response = $client->get($csvPath);
-        if (200 !== $response->getStatusCode()) {
-            throw new Exception(
-                "URL $csvPath returned status code: " . $response->getStatusCode()
-            );
-        }
-
-        $csvDir = Controller::join_links(
-            TEMP_FOLDER,
-            'auc-metrics'
-        );
-        $csvPath = $csvDir.'/group-contacts.csv';
-
-        @mkdir($csvDir);
-
-        $body = $response->getBody();
-
-        // The first line of the CSV is written erroneously. Fix it.
-        $fileData = explode(PHP_EOL, $body);
-        $fileData[0] = "'User group','Full name','Email','Type'";
-        file_put_contents($csvPath, implode(PHP_EOL, $fileData));
-
-        $parser = $this->getParser($csvPath);
-        $parser->mapColumns([
-            'User group' => 'UserGroup',
-            'Full name' => 'FullName',
-            'Email' => 'Email',
-            'Type' => 'Type'
-        ]);
-
         $this->results = ResultList::create();
-        foreach ($parser as $row) {
-
-            $email  = $row['Email'];
-            $member = Member::get()->filterAny([
-                'Email'       => $email,
-                'SecondEmail' => $email,
-                'ThirdEmail'  => $email
-            ])->first();
-
-
-            if(!$member){
-                // check translation table
-                $trans = \AUCMetricTranslation::get()->filter(['UserIdentifier' => $email])->first();
-                $member = $trans ? $trans->MappedFoundationMember() : null;
-            }
-
-            if(!$member){
-                if(\AUCMetricMissMatchError::get()->filter
-                    (
-                        [
-                            "ServiceIdentifier" => $this->getMetricIdentifier(),
-                            "UserIdentifier"    => $email
-                        ]
-                    )->count() == 0 ) {
-                    $error = new \AUCMetricMissMatchError();
-                    $error->ServiceIdentifier = $this->getMetricIdentifier();
-                    $error->UserIdentifier = $email;
-                    $error->write();
+        $api = new \MeetupApi();
+        $groups = $api->getGroups(PHP_INT_MAX);
+        foreach($groups as $group){
+            $members = $api->getGroupMembers($group['urlname'], PHP_INT_MAX);
+            foreach($members as $member) {
+                $fullName  = $member['name'];
+                $nameParts = explode(' ', $fullName);
+                $firstName = count($nameParts) >= 1 ? $nameParts[0]: null;
+                $lastName  = count($nameParts) >= 2 ? $nameParts[1]: null;
+                if(Member::get()->filterAny([
+                    'FirstName' => $firstName,
+                    'Surname'   => $lastName,
+                ])->count() > 1){
+                    $this->logError("Member with name " . $fullName . " has more than once instance on DB");
+                    continue;
                 }
-                $this->logError("Member with email " . $row['Email'] . " not found");
-                continue;
+
+                $dbMember = Member::get()->filterAny([
+                    'FirstName' => $firstName,
+                    'Surname'   => $lastName,
+                ])->first();
+
+                if(!$dbMember){
+                    if(\AUCMetricMissMatchError::get()->filter
+                        (
+                            [
+                                "ServiceIdentifier" => $this->getMetricIdentifier(),
+                                "UserIdentifier"    => $fullName
+                            ]
+                        )->count() == 0 ) {
+                        $error = new \AUCMetricMissMatchError();
+                        $error->ServiceIdentifier = $this->getMetricIdentifier();
+                        $error->UserIdentifier = $fullName;
+                        $error->write();
+                    }
+                    $this->logError("Member with name " . $fullName . " not found");
+                    continue;
+                }
+
+                $this->results->push(Result::create($dbMember));
             }
-
-            $this->results->push(Result::create($member));
-
         }
-
-        unlink($csvPath);
     }
 
     protected function getHTTPClient()

@@ -237,4 +237,33 @@ final class MeetupApi implements IExternalEventsApi
         $json = $response->getBody()->getContents();
         return json_decode($json, true);
     }
+
+    /**
+     * @param string $groupSlug
+     * @param int $page
+     * @return array
+     * @throws Exception
+     */
+    public function getGroupMembers(string $groupSlug, int $page = 20): array {
+        $query = [
+            'page'         => $page,
+            'access_token' => $this->getAccessToken(),
+        ];
+        $api_url = sprintf("%s/%s/members", self::BaseUrl, $groupSlug);
+        $response = $this->client->get($api_url, array
+            (
+                'query' => $query
+            )
+        );
+
+        if($response->getStatusCode() !== 200)
+            throw new Exception('invalid status code!');
+        $content_type = $response->getHeaderLine('content-type');
+        if(empty($content_type))
+            throw new Exception('invalid content type!');
+        if(!strstr($content_type,'application/json'))
+            throw new Exception('invalid content type!');
+        $json = $response->getBody()->getContents();
+        return json_decode($json, true);
+    }
 }
