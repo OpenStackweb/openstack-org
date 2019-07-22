@@ -440,7 +440,7 @@ class TrackChairAPI extends AbstractRestfulJsonApi
                 return $this->validationError('You cannot edit this list');
             }
 
-            if (count($idList) > $max_limit) {
+            if (count($idList) > $max_limit && $collection != SummitSelectedPresentation::COLLECTION_MAYBE) {
                 $msg = "Can't add this presentation, limit is ".$max_limit;
                 throw new EntityValidationException($msg);
             }

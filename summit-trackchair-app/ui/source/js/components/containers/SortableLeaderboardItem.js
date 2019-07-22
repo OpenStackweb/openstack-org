@@ -30,11 +30,11 @@ const cardSource = {
                     props.listHash
                 );
             } else {
-                props.dropSelection(
-                    monitor.getItem().targetListID,
-                    monitor.getItem().column,
-                    monitor.getItem().targetListHash
-                );
+                var monitorItem = monitor.getItem();
+                if (monitorItem.targetListID && monitorItem.column) {
+                    props.dropSelection(monitorItem.targetListID, monitorItem.column, monitorItem.targetListHash);
+                }
+
             }
 
         }
