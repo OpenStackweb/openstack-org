@@ -22,14 +22,6 @@ class SelectionButtonBar extends React.Component {
 	}
 
 	handleSelect(key) {
-        const {myList} = this.props;
-        let canAdd;
-
-        if(myList) {
-            canAdd = (myList.slots > myList.selections.length);
-        }
-
-		if((key === this.props.presentation.selected || !canAdd) ) return;
 
 		this.select(key);
 	}
@@ -50,12 +42,21 @@ class SelectionButtonBar extends React.Component {
 			case 73: 
 				key = 'maybe'
 				break;
+            case 67:
+                key = 'clear'
+                break;
 		}
 
 		key && this.select(key);
 	}
 
 	select(key) {
+        const {myList} = this.props;
+
+        if(myList) {
+            if (key === 'selected' && myList.slots <= myList.selections.length) return;
+        }
+
 		this.props.onSelect(
 			this.props.presentation.id,
 			key,
