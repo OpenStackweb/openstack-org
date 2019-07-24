@@ -25,6 +25,8 @@ class AbstractDBMigrationTask extends MigrationTask
 
     public function run($request)
     {
+        if(!$this->title) throw new exception("Migration needs a title.");
+
         if ($request->getVar('Direction') == 'down') {
             $this->down();
         } else {
