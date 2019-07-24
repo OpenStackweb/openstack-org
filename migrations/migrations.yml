@@ -33,7 +33,6 @@ migrations:
   - SummitMaxAllowedSubmissionTaskMigration
   - SummitPresentationTypeMigration
   - PopulateOrganizationalRoleAndActiveInvolvement
-  - TrackChairMigration
   - UninstallTranslatableMigration
   - FixSummitEventTypesMigration
   - SetEmailedFlagForSpeakerPromoCodesMigration
