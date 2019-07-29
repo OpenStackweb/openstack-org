@@ -42,7 +42,7 @@ class SelectionButtonBar extends React.Component {
 			case 73: 
 				key = 'maybe'
 				break;
-            case 67:
+            case 81:
                 key = 'clear'
                 break;
 		}

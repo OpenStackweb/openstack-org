@@ -91,7 +91,7 @@ class BrowseDetail extends React.Component {
 									<li><span className="keyboard-key">[Y]</span>es</li>
 									<li><span className="keyboard-key">[I]</span>nterested</li>
 									<li><span className="keyboard-key">[N]</span>o thanks</li>
-									<li><span className="keyboard-key">[C]</span>lear</li>
+									<li><span className="keyboard-key">[Q]</span>Clear</li>
 								</ul>
 							</small>
 						</div>
