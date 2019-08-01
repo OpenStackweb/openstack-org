@@ -35,7 +35,7 @@
     <div class="container">
         <% if AlternateHotels %>
             <div class="row">
-                <div class="col-sm-8 col-sm-push-2">
+                <div class="col-sm-4">
                     <h5 class="section-title">Hotels</h5>
                     <p style="margin-bottom:30px;">
                         <i class="fa fa-hotel fa-4x"></i>
@@ -49,8 +49,8 @@
             </div>
         <% end_if %>
         <div class="row">
-            <div class="col-lg-8 col-lg-push-2">
-                <h5 class="section-title">Official Summit Hotel</h5>
+            <div class="col-lg-4">
+                <h5 class="section-title">Recommended Hotels</h5>
                 <% if not $Top.AlternateHotels %>
                     <p>
                         <i class="fa fa-hotel fa-4x"></i>
