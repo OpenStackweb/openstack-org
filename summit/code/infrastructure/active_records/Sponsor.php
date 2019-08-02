@@ -28,9 +28,27 @@ class Sponsor extends DataObject implements ISponsor
         'Summit'          => 'Summit'
     );
 
+    private static $many_many = [
+        'Users' => 'Member',
+    ];
+
+    private static $has_many = [
+        'BadgeScans' => 'SponsorBadgeScan'
+    ];
+
     private static $searchable_fields = array
     (
         'Company.Name'
+    );
+
+    /**
+     * @var array
+     */
+    private static $summary_fields = array
+    (
+        'ID'                      => 'ID',
+        'Company.Name'            => 'Company',
+        'SponsorshipType.Name'    => 'SponsorshipType',
     );
 
     /**

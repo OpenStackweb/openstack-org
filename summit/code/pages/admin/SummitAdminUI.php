@@ -98,17 +98,29 @@ final class SummitAdminUI extends DataExtension
 
         }
 
+        // external registration feed
+
+        $f->addFieldToTab('Root.External Registration Feed', new TextField('ExternalEventId', 'External Event Id'));
+
+        $f->addFieldToTab('Root.External Registration Feed', $ddl_source = new DropdownField("ExternalRegistrationFeedType",'FeedT ype', [
+            'Eventbrite' => 'Eventbrite',
+        ]));
+
+        $ddl_source->setEmptyString('--SELECT AN EXTERNAL FEED --');
+
+        $f->addFieldToTab('Root.External Registration Feed', new TextField('ExternalRegistrationFeedApiKey', 'Api Key'));
+
         // external feeds
 
-        $f->addFieldToTab('Root.External Feed', $ddl_source = new DropdownField("ApiFeedType",'ApiFeedType', [
+        $f->addFieldToTab('Root.External Schedule Feed', $ddl_source = new DropdownField("ApiFeedType",'ApiFeedType', [
             'Vanderpoel' => 'Vanderpoel',
             'Sched'      => 'Sched',
         ]));
 
         $ddl_source->setEmptyString('--SELECT AN EXTERNAL FEED --');
 
-        $f->addFieldToTab('Root.External Feed',  new TextField("ApiFeedUrl",'ApiFeedUrl'));
-        $f->addFieldToTab('Root.External Feed',  new TextField("ApiFeedKey",'ApiFeedKey'));
+        $f->addFieldToTab('Root.External Schedule Feed',  new TextField("ApiFeedUrl",'ApiFeedUrl'));
+        $f->addFieldToTab('Root.External Schedule Feed',  new TextField("ApiFeedKey",'ApiFeedKey'));
 
         // dates
         $f->addFieldsToTab('Root.Dates',
@@ -153,7 +165,7 @@ final class SummitAdminUI extends DataExtension
         $f->addFieldToTab('Root.Main', $logo_field);
 
         $f->addFieldToTab('Root.Main', new TextField('ComingSoonBtnText', 'Coming Soon Btn Text'));
-        $f->addFieldToTab('Root.Main', new TextField('ExternalEventId', 'Eventbrite Event Id'));
+
 
 
         if ($this->owner->ID > 0) {
@@ -347,7 +359,6 @@ final class SummitAdminUI extends DataExtension
             // tickets types
 
             $config = GridFieldConfig_RecordEditor::create(100);
-            $config->removeComponentsByType('GridFieldAddNewButton');
             $config->addComponent(new GridFieldAddTicketTypesFromEventbrite);
             $gridField = new GridField('SummitTicketTypes', 'Ticket Types', $this->owner->SummitTicketTypes(), $config);
             $f->addFieldToTab('Root.TicketTypes', $gridField);
@@ -361,10 +372,16 @@ final class SummitAdminUI extends DataExtension
 
             $multi_class_selector->setClasses
             (
-                array
-                (
+                [
+                    'SummitRegistrationPromoCode' => 'Generic Promo Code',
+                    'SummitRegistrationDiscountCode' => 'Generic Discount Code',
+                    'MemberSummitRegistrationPromoCode' => 'Member Promo Code',
                     'SpeakerSummitRegistrationPromoCode' => 'Speaker Promo Code',
-                )
+                    'SponsorSummitRegistrationPromoCode' => 'Sponsor Promo Code',
+                    'MemberSummitRegistrationDiscountCode' => 'Member Discount Code',
+                    'SpeakerSummitRegistrationDiscountCode' => 'Speaker Discount Code',
+                    'SponsorSummitRegistrationDiscountCode' => 'Sponsor Discotun Code',
+                ]
             );
 
             $config->addComponent($multi_class_selector);
@@ -499,9 +516,66 @@ final class SummitAdminUI extends DataExtension
 
             $f->addFieldsToTab("Root.ExternalCalendarSync", new TextField("CalendarSyncName", "External Calendar Display Name"));
             $f->addFieldsToTab("Root.ExternalCalendarSync", new TextareaField("CalendarSyncDescription", "External Calendar Description"));
+
+
+            // TaxTypes
+
+            $config = GridFieldConfig_RecordEditor::create(50);
+
+            $gridField = new GridField('TaxTypes', 'Tax Types', $this->owner->TaxTypes(), $config);
+            $f->addFieldToTab('Root.Tax Types', $gridField);
+
+            // Badge Access Levels
+
+            $config = GridFieldConfig_RecordEditor::create(50);
+
+            $gridField = new GridField('BadgeAccessLevels', 'Badge Access Levels', $this->owner->BadgeAccessLevels(), $config);
+            $f->addFieldToTab('Root.Badge Access Levels', $gridField);
+
+            // BadgeFeatureTypes
+
+            $config = GridFieldConfig_RecordEditor::create(50);
+
+            $gridField = new GridField('BadgeFeatureTypes', 'Badge Feature Types', $this->owner->BadgeFeatureTypes(), $config);
+            $f->addFieldToTab('Root.Badge Feature Types', $gridField);
+
+
+            // BadgeTypes
+
+            $config = GridFieldConfig_RecordEditor::create(50);
+
+            $gridField = new GridField('BadgeTypes', 'Badge Types', $this->owner->BadgeTypes(), $config);
+            $f->addFieldToTab('Root.Badge Types', $gridField);
+
+            // OrderExtraQuestions
+
+            $config = GridFieldConfig_RecordEditor::create(50);
+
+            $gridField = new GridField('OrderExtraQuestions', 'Order Extra Questions', $this->owner->OrderExtraQuestions(), $config);
+            $f->addFieldToTab('Root.Order Extra Questions', $gridField);
+
+            // RefundPolicies
+
+            $config = GridFieldConfig_RecordEditor::create(50);
+
+            $gridField = new GridField('RefundPolicies', 'Refund Policies', $this->owner->RefundPolicies(), $config);
+            $f->addFieldToTab('Root.Refund Policies', $gridField);
+
+            // Sponsors
+
+            $config = GridFieldConfig_RecordEditor::create(50);
+
+            $gridField = new GridField('Sponsors', 'Sponsors', $this->owner->Sponsors(), $config);
+            $f->addFieldToTab('Root.Sponsors', $gridField);
+
+            // Orders
+
+            $config = GridFieldConfig_RecordEditor::create(50);
+
+            $gridField = new GridField('Orders', 'Orders', $this->owner->Orders(), $config);
+            $f->addFieldToTab('Root.Orders', $gridField);
         }
     }
-
 
     public function getBetterButtonsActions()
     {

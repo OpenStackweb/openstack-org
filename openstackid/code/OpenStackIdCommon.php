@@ -84,7 +84,7 @@ final class OpenStackIdCommon {
             Session::set("access_token", $oidc->getAccessToken());
             $newRefreshToken =  $oidc->getRefreshToken();
             if(!empty($newRefreshToken))
-            Session::set("refresh_token", $newRefreshToken);
+                Session::set("refresh_token", $newRefreshToken);
             Session::save();
             $access_token = Session::get("access_token");
         }
@@ -144,10 +144,10 @@ final class OpenStackIdCommon {
 
         return
             Controller::curr()->customise(
-            [
+                [
                     'BackURL' => $back_url,
                     'Member'   => $member
-            ])->renderWith(['RegistrationPage_success', 'Page']);
+                ])->renderWith(['RegistrationPage_success', 'Page']);
     }
 
     public static function doLogin($back_url = ''){
@@ -196,7 +196,7 @@ final class OpenStackIdCommon {
      */
     public static function isAllowedBackUrl(string $backUrl):bool {
         if(!Director::is_site_url($backUrl)){
-           // check host name
+            // check host name
             $res = parse_url($backUrl);
             if(!$res)
                 return false;

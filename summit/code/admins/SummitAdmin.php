@@ -25,6 +25,7 @@ final class SummitAdmin extends ModelAdmin implements PermissionProvider
     [
         'Summit',
         'SummitType',
+        'SponsorshipType',
         'DefaultSummitEventType'  => ['title' => "Default Event Types"],
         'DefaultTrackTagGroup'    => ['title' => "Default Track Tag Groups"],
     ];

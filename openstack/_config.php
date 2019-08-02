@@ -46,7 +46,7 @@ global $email_log;
 $error_log_priority = (defined('SS_LOG_PRIORITY')) ? SS_LOG_PRIORITY : SS_Log::ERR;
 
 if(Director::isDev()) {
-    SS_Log::add_writer(new SS_LogFileWriter(Director::baseFolder() . '/logs/site..dev.log'), $error_log_priority);
+    SS_Log::add_writer(new SS_LogFileWriter(Director::baseFolder() . '/logs/site.dev.log'), $error_log_priority);
     //Force cache to flush on page load if in Dev mode (prevents needing ?flush=1 on the end of a URL)
     SSViewer::flush_template_cache();
 } else {
