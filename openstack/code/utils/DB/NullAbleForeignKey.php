@@ -15,11 +15,11 @@ class NullAbleForeignKey extends ForeignKey
 {
     public function __construct($name, $object = null) {
         parent::__construct($name, $object);
-        $this->defaultVal = 0 ;
+        $this->defaultVal = null ;
     }
 
     public function nullValue() {
-        return "0";
+        return null;
     }
 
     public function requireField() {

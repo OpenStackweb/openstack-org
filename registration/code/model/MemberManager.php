@@ -146,7 +146,9 @@ final class MemberManager implements IMemberManager
                     $users_group = $this->group_factory->build(ISecurityGroupFactory::UsersGroupCode);
                     $users_group->write();
                 }
+
                 $member->addToGroupByCode(ISecurityGroupFactory::UsersGroupCode);
+
                 foreach ($affiliations_data as $key => $d)
                 {
                     $org_name = trim($d->OrgName);

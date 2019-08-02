@@ -15,16 +15,22 @@
 final class SummitAttendee extends DataObject implements ISummitAttendee
 {
 
-    private static $db = array
-    (
+    private static $db = [
         'SharedContactInfo'       => 'Boolean',
         'SummitHallCheckedIn'     => 'Boolean',
         'SummitHallCheckedInDate' => 'SS_Datetime',
-    );
+        'FirstName'               => 'Varchar(255)',
+        'Surname'                 => 'Varchar(255)',
+        'Company'                 => 'Varchar(255)',
+        'ExternalId'              => 'Varchar(255)',
+        'Email'                   => 'Varchar(100)',
+        'DisclaimerAcceptedDate'  => 'SS_Datetime',
+    ];
 
     private static $has_many = array
     (
         'Tickets' => 'SummitAttendeeTicket',
+        'Answers' => 'SummitOrderExtraQuestionAnswer',
     );
 
     private static $defaults = array
@@ -41,15 +47,15 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
 
     );
 
-    private static $has_one = array
-    (
+    private static $has_one = [
         'Member'     => 'Member',
         'Summit'     => 'Summit',
-    );
+
+    ];
 
     private static $summary_fields = [
 
-        "Member.Email"        => 'Member',
+        "FullName"            => 'FullName',
         'SummitHallCheckedIn' => "Is Checked In",
         'TicketsCount'        => '# Tickets'
     ];
@@ -91,6 +97,13 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
         return AssociationFactory::getInstance()->getMany2OneAssociation($this, 'Member')->getTarget();
     }
 
+    public function getFullName():string{
+        if($this->MemberID > 0 ){
+            return $this->getMemberFullName();
+        }
+        return sprintf("%s, %s", $this->FirstName, $this->Surname);
+
+    }
     /**
      * @return string
      */
@@ -149,11 +162,18 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
         );
 
         $f->addFieldToTab('Root.Main',  new DropdownField('SummitID','Summit', Summit::get()->map('ID', 'Title')));
-        $f->addFieldsToTab('Root.Main', new CheckboxField('SharedContactInfo', 'Allow Shared Contact Info?'));
-        $f->addFieldsToTab('Root.Main', new CheckboxField('SummitHallCheckedIn', 'Is SummitHall checked In?'));
-        $f->addFieldsToTab('Root.Main', $checked_in_date = new DatetimeField('SummitHallCheckedInDate', 'SummitHall checked In Date'));
+        $f->addFieldToTab('Root.Main',  new TextField('FirstName','First Name'));
+        $f->addFieldToTab('Root.Main',  new TextField('Surname','Surname'));
+        $f->addFieldToTab('Root.Main',  new TextField('Email','Email'));
+        $f->addFieldToTab('Root.Main',  new TextField('Company','Company'));
+        $f->addFieldToTab('Root.Main',  new TextField('ExternalId','ExternalId'));
+        $f->addFieldToTab('Root.Main', new CheckboxField('SharedContactInfo', 'Allow Shared Contact Info?'));
+        $f->addFieldToTab('Root.Main', new CheckboxField('SummitHallCheckedIn', 'Is SummitHall checked In?'));
+        $f->addFieldToTab('Root.Main', $checked_in_date = new DatetimeField('SummitHallCheckedInDate', 'SummitHall checked In Date'));
+        $f->addFieldToTab('Root.Main', $disclamer_date = new DatetimeField('DisclaimerAcceptedDate', 'Disclaimer Accepted Date'));
         $checked_in_date->getDateField()->setConfig('showcalendar', true);
-        $f->addFieldsToTab('Root.Main', new MemberAutoCompleteField('Member', 'Member'));
+        $disclamer_date->getDateField()->setConfig('showcalendar', true);
+        $f->addFieldToTab('Root.Main', new MemberAutoCompleteField('Member', 'Member'));
 
         if($this->ID > 0)
         {
@@ -162,6 +182,11 @@ final class SummitAttendee extends DataObject implements ISummitAttendee
             $config = GridFieldConfig_RecordEditor::create(10);
             $gridField = new GridField('Tickets', 'Tickets', $this->Tickets(), $config);
             $f->addFieldToTab('Root.Tickets', $gridField);
+
+            // answers
+            $config = GridFieldConfig_RecordEditor::create(10);
+            $gridField = new GridField('A', 'Answers', $this->Answers(), $config);
+            $f->addFieldToTab('Root.Answers', $gridField);
         }
         return $f;
     }

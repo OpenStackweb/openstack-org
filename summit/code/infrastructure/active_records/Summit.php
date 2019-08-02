@@ -32,8 +32,6 @@ class Summit extends DataObject implements ISummit
         'ComingSoonBtnText' => 'Text',
         'SecondaryRegistrationLink' => 'Text',
         'SecondaryRegistrationBtnText' => 'Text',
-        // https://www.eventbrite.com
-        'ExternalEventId' => 'Text',
         // @see http://php.net/manual/en/timezones.php
         'TimeZoneIdentifier'    => 'VarChar(255)',
         'StartShowingVenuesDate' => 'SS_Datetime',
@@ -50,6 +48,14 @@ class Summit extends DataObject implements ISummit
         'ApiFeedType' => 'Text',
         'ApiFeedUrl'  => 'Text',
         'ApiFeedKey'  => 'Text',
+        // registration
+        'ReAssignTicketTillDate' => 'SS_Datetime',
+        'RegistrationDisclaimerContent' => 'HTMLText',
+        'RegistrationDisclaimerMandatory' => 'Boolean',
+        // external registratio feed
+        'ExternalRegistrationFeedType'   => 'Text',
+        'ExternalRegistrationFeedApiKey' => 'Text',
+        'ExternalEventId'                => 'Text',
     ];
 
     private static $defaults =
@@ -70,9 +76,6 @@ class Summit extends DataObject implements ISummit
         'Locations'                    => 'SummitAbstractLocation',
         'EventTypes'                   => 'SummitEventType',
         'Events'                       => 'SummitEvent',
-        'Attendees'                    => 'SummitAttendee',
-        'SummitTicketTypes'            => 'SummitTicketType',
-        'SummitRegistrationPromoCodes' => 'SummitRegistrationPromoCode',
         'Notifications'                => 'SummitPushNotification',
         'EntityEvents'                 => 'SummitEntityEvent',
         'TrackChairs'                  => 'SummitTrackChair',
@@ -87,6 +90,18 @@ class Summit extends DataObject implements ISummit
         'TrackTagGroups'               => 'TrackTagGroup',
         'SelectionPlans'               => 'SelectionPlan',
         'MeetingRoomBookingAllowedAttributes' => 'SummitBookableVenueRoomAttributeType',
+        'SummitAccessLevelTypes'              => 'SummitAccessLevelType',
+        // Registration
+        'TaxTypes'                          => 'SummitTaxType',
+        'OrderExtraQuestions'               => 'SummitOrderExtraQuestionType',
+        'RefundPolicies'                    => 'SummitRefundPolicyType',
+        'BadgeAccessLevels'                 => 'SummitAccessLevelType',
+        'BadgeFeatureTypes'                 => 'SummitBadgeFeatureType',
+        'BadgeTypes'                        => 'SummitBadgeType',
+        'Attendees'                         => 'SummitAttendee',
+        'SummitTicketTypes'                 => 'SummitTicketType',
+        'SummitRegistrationPromoCodes'      => 'SummitRegistrationPromoCode',
+        'Orders'                            => 'SummitOrder',
     ];
 
     /**
