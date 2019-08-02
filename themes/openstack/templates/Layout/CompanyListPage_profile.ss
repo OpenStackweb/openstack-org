@@ -7,7 +7,7 @@
 
 <hr/>
 <div class="span-4 logo">
-  <div class="logo">$Logo.SetWidth(100)</div>
+  <div class="logo">$BigLogo.SetWidth(300)</div>
   <p></p>
   <p><a href="$URL" class="roundedButton">Website</a></p>
 
