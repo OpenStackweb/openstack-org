@@ -4,10 +4,10 @@
             Register Now <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a role="dropdown-item" href="{$Summit.RegistrationLink}/?aff={$Summit.Name}{$Position}" target="_blank">
+            <a role="dropdown-item" class="outbound-link" href="{$Summit.RegistrationLink}/?aff={$Summit.Name}{$Position}" target="_blank">
                 <% if $RegisterLabel %> {$RegisterLabel} <% else %> {$Top.RegisterButtonLabel} <% end_if %>
             </a>
-            <a role="dropdown-item" href="{$Summit.SecondaryRegistrationLink}/?aff={$Summit.Name}{$Position}" target="_blank">
+            <a role="dropdown-item" class="outbound-link" href="{$Summit.SecondaryRegistrationLink}/?aff={$Summit.Name}{$Position}" target="_blank">
                 {$Summit.SecondaryRegistrationBtnText}
             </a>
         </div>
