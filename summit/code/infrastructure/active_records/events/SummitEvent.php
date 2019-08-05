@@ -646,7 +646,7 @@ class SummitEvent extends DataObject implements ISummitEvent
                 return $valid->error('start datetime must be greather or equal than end datetime!');
 
             if(!$summit->isEventInsideSummitDuration($this))
-                return $valid->error(sprintf('start/end datetime must be between summit start/end datetime! (%s - %s)', $summit->getBeginDate(), $summit->getEndDate()));
+                return $valid->error(sprintf('start/end datetime must be between summit start/end datetime! (%s - %s)', $summit->getSummitBeginDate(), $summit->getSummitEndDate()));
 
             // validate start time/end time and location
             if(!empty($this->LocationID))
