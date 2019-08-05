@@ -113,9 +113,9 @@ class MainFilterFields extends Component {
                 <label className="filter-label">Tags</label>
                 <select ref="ddl_tags" multiple="multiple" data-placeholder="Tags"
                 value={values.tags || []} onChange={() => false}>
-                    {summit.tag_ids.map(tagId => (
-                    <option key={tagId} value={tagId}>
-                        {summit.tags[tagId].name}
+                    {summit.used_tags.map(tag => (
+                    <option key={tag.id} value={tag.id}>
+                        {tag.name}
                     </option>
                     ))}
                 </select>

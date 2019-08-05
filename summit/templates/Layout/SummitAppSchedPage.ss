@@ -20,7 +20,7 @@
             event_type_ids: [],
             locations : {},
             tags: {},
-            tag_ids:[],
+            used_tags:[],
             tracks : {},
             track_ids : [],
             category_groups: {},
@@ -56,12 +56,22 @@
 
         <% loop $Summit.Tags.Sort("Tag", "ASC") %>
         summit.tags[{$ID}] =
-        {
-            id: {$ID},
-            name : "{$Tag.JS}",
-        };
-        summit.tag_ids.push($ID);
+                {
+                    id: {$ID},
+                    name : "{$Tag.JS}",
+                };
         <% end_loop %>
+
+        <% loop $Summit.Events().filter('Published', 1) %>
+            <% loop $Tags() %>
+                <% if $Tag != '' %>
+                    summit.used_tags[{$ID}] = {id: {$ID}, name: "{$Tag.JS}"};
+                <% end_if %>
+            <% end_loop %>
+        <% end_loop %>
+
+        summit.used_tags = summit.used_tags.filter(t => t);
+        summit.used_tags.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : (a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 0)));
 
         <% loop $Summit.getCategories().Sort("Title", "ASC") %>
             <% if hasEventsPublished %>
