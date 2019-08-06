@@ -709,7 +709,7 @@
                     <h4>Shanghai Travel, Hotel, & Visa</h4>
                     <p><a href="/summit/shanghai-2019/travel/#travel-support">Apply for Travel Support</a> before August 8, 2019!
                     </p>
-                    <p>Looking for <a href="/summit/shanghai-2019/travel/#visa">Visa application</a> or <a href="/summit/shanghai-2019/travel/#hotels">Hotel accommodations</a>?
+                    <p>Looking for <a href="/summit/shanghai-2019/travel/#visa">Visa application</a> or <a href="/summit/shanghai-2019/travel/#hotels">Hotel accommodations</a>?</p>
                     <p>Interested in <a href="https://tspdonationsshanghai.eventbrite.com/?_ga=2.251394758.173996117.1560786615-152524952.1558369050" target="_blank">donating to the Travel Support Program fund</a>?</p>
                 </div>
 
