@@ -337,9 +337,17 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
         return $software_page->Link().'releases/'.strtolower($default_release->Name).'/components/'.$this->Slug;
     }
 
+    public function hasCodeLink() {
+        $url = $this->getCodeLink();
+        $headers = @get_headers($url);
+        return (strpos($headers[0],'404') === false);
+    }
+
     public function getCodeLink() {
         $release = strtolower(OpenStackRelease::getDefaultRelease()->Name);
-        return 'https://releases.openstack.org/teams/'.$this->ProjectTeam.'.html#team-'.$release.'-'.$this->ProjectTeam;
+        $slug = ($this->ProjectTeam) ? $this->generateSlug($this->ProjectTeam) : $this->Slug;
+        $slug = str_replace('-','_', $slug);
+        return 'https://releases.openstack.org/teams/'.$slug.'.html#team-'.$release.'-'.$slug;
     }
 
     public function getProjectLink() {

@@ -23,12 +23,14 @@
                             </a>
                         </p>
                     <% end_if %>
+                    <% if $Component.hasCodeLink() %>
                     <p>
                         <a href="{$Component.getCodeLink()}" target="_blank">
                             <%-- do not separate icon from label --%>
                             <i class="fa fa-code" aria-hidden="true" style="margin-right: 8px"></i><span>Latest code source release</span>
                         </a>
                     </p>
+                    <% end_if %>
                     <% if $Component.DownloadLink().Exists() %>
                         <p>
                             <a href="{$Component.DownloadLink().URL}" target="_blank">
@@ -281,7 +283,7 @@
 
         <div class="row">
             <div class="col-sm-12 project-details-footnotes">
-                <a href="https://git.openstack.org/cgit/openstack/openstack-map" target="_blank">Propose changes to this page</a>
+                <a href="https://opendev.org/osf/openstack-map/" target="_blank">Propose changes to this page</a>
             </div>
         </div>
 
