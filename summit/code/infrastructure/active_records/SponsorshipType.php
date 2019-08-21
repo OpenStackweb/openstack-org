@@ -15,8 +15,6 @@
 class SponsorshipType extends DataObject implements ISponsorshipType
 {
 
-    private static $create_table_options = array('MySQLDatabase' => 'ENGINE=MyISAM');
-
     static $db = array
     (
         'Name'  => 'Varchar',

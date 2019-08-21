@@ -15,8 +15,6 @@
 class SummitBanner extends DataObject implements ISummitBanner
 {
 
-    private static $create_table_options = array('MySQLDatabase' => 'ENGINE=MyISAM');
-
     static $db = array
     (
         'Name'              => 'Varchar(255)',
