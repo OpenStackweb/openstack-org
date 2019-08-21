@@ -604,27 +604,23 @@
                     </div>
                     <div class="item">
                         <h3>Spotlight Sponsors</h3>
-                            
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
                             <a rel="nofollow" href="https://www.delltechnologies.com"><img alt="Dell Technologies _big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/dell-lg.jpg" class="big-logo-company company-logo"></a>
                         </div>
-                        
-                    
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
                             <a rel="nofollow" href="https://www.mirantis.com/"><img alt="Mirantis_big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/mirantis-lg-van.jpg" class="big-logo-company company-logo"></a>
                         </div>
-
                     </div>
                     <div class="item">
                         <h3>Exhibitor Sponsors</h3>
-
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
                             <a rel="nofollow" href="http://www.cloudbase.it"><img alt="Cloudbase Solutions_big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/cloudbase-lg.jpg" class="big-logo-company company-logo"></a>
                         </div>
-                        
-                    
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
                             <a rel="nofollow" href="https://www.huayun.com/about"><img alt="Huayun_big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/huayun-lg.jpg" class="big-logo-company company-logo"></a>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
+                            <a rel="nofollow" href="https://www.nipa.cloud/"><img alt="NIPA Technology_big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/Nipa-lg.jpg" class="big-logo-company company-logo"></a>
                         </div>
                     </div>
                 </div>
