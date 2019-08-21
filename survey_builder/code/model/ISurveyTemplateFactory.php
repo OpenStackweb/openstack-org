@@ -24,10 +24,10 @@ interface ISurveyTemplateFactory
     public function  build($title, $start_date = null, $end_date = null, $enabled = false);
 
     /**
-     * @param ISurveyStep $original_step
-     * @return ISurveyStep
+     * @param ISurveyStepTemplate $original_step
+     * @return ISurveyStepTemplate
      */
-    public function  cloneStep(ISurveyStep $original_step);
+    public function  cloneStep(ISurveyStepTemplate $original_step);
 
     /**
      * @param ISurveyTemplate $original_template

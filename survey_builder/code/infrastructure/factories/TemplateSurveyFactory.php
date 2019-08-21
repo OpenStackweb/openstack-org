@@ -30,10 +30,10 @@ class TemplateSurveyFactory implements ISurveyTemplateFactory
     }
 
     /**
-     * @param ISurveyStep $original_step
-     * @return ISurveyStep
+     * @param ISurveyStepTemplate $original_step
+     * @return ISurveyStepTemplate
      */
-    public function  cloneStep(ISurveyStep $original_step)
+    public function  cloneStep(ISurveyStepTemplate $original_step)
     {
         $class_name            = $original_step->ClassName;
         $clone                 = new $class_name;
