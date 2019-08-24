@@ -20,7 +20,7 @@ class SummitRoomReservation extends DataObject
     private static $db = [
         'StartDateTime'             => 'SS_Datetime',
         'EndDateTime'               => 'SS_Datetime',
-        'Status'                    => 'Text',
+        'Status'                    => 'Enum(array("Reserved","Error","Paid","RequestedRefund","Refunded","Canceled"), "Reserved")',
         'PaymentGatewayCartId'      => 'VarChar(512)',
         'PaymentGatewayClientToken' => 'Text',
         'Currency'                  => 'VarChar(3)',
@@ -115,7 +115,8 @@ class SummitRoomReservation extends DataObject
 
         $f->addFieldToTab('Root.Main', $ddl_status = new DropdownField('Status','Status', [
             "Reserved"        => "Reserved",
-            "Payed"           => "Payed",
+            "Error"           => "Error",
+            "Paid"            => "Paid",
             "RequestedRefund" => "RequestedRefund",
             "Refunded"        => "Refunded",
             "Canceled"        => "Canceled"
