@@ -1,11 +1,10 @@
-<div class="row">
-	<div class="center jumbotron">
-		<div class="jobHeader">
-			<h1>OpenStack Job Board</h1>
-			<h5>Join the best OpenStack-related jobs board for free!</h5>
-			<div class="postButton">
-				<a href="$PostJobLink">Post job Now</a>
-			</div>
+</div>
+<div class="center jumbotron">
+	<div class="jobHeader">
+		<h1>OpenStack Job Board</h1>
+		<h5>Join the best OpenStack-related jobs board for free!</h5>
+		<div class="postButton">
+			<a href="$PostJobLink">Post job Now</a>
 		</div>
 	</div>
 </div>
@@ -55,9 +54,6 @@
 		</div>
 	</div>
 </div>
-	<div>
-		<div class="job_list">
-		    $getDateSortedJobs
-		</div>
-	</div>
+<div class="job_list">
+    $getDateSortedJobs
 </div>
