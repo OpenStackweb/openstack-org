@@ -74,10 +74,12 @@ class NewDataModelSurveyMigrationMapping extends AbstractSurveyMigrationMapping 
             $allowed_templates[$template->ID] = $text;
         }
 
+        $all_questions = SurveyQuestionTemplate::get()->map('ID', 'ID');
+
 
         $fields->addFieldToTab('Root.Main',  $ddl_template = new DropdownField('OriginSurveyID', 'Origin Survey', $allowed_templates));
         $ddl_template->setEmptyString('-- select a survey template --');
-        $fields->addFieldToTab('Root.Main',  $ddl_fields = new DropdownField('OriginFieldID'  , 'Origin Field'));
+        $fields->addFieldToTab('Root.Main',  $ddl_fields = new DropdownField('OriginFieldID'  , 'Origin Field', $all_questions));
         if(intval($this->OriginFieldID) > 0)
         {
             $ddl_fields->setAttribute('data-value', $this->OriginFieldID);
