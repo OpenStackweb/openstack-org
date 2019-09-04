@@ -334,18 +334,20 @@
                 </ol>
                 <div class="carousel-inner">
                     <div class="item active">
-
                         <h3>Diamond</h3>
-                            
                         <div class="col-lg-4 col-md-4 col-sm-4 centered-column">
                             <a rel="nofollow" href="http://www.intel.com/"><img alt="Intel_big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/intel-xlg.jpg" class="big-logo-company company-logo"></a>
                         </div>
-                        
-                    
                         <div class="col-lg-4 col-md-4 col-sm-4 centered-column">
                             <a rel="nofollow" href="https://intl.cloud.tencent.com/"><img alt="Tencent Cloud_big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/Tencent-vert-lg.jpg" class="big-logo-company company-logo"></a>
                         </div>
 
+                    </div>
+                    <div class="item">
+                        <h3>Headline</h3>
+                        <div class="col-lg-4 col-md-4 col-sm-4 centered-column">
+                            <a rel="nofollow" href="http://www.huwawei.com/"><img alt="Intel_big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/huawei-new-lg.jpg" class="big-logo-company company-logo"></a>
+                        </div>
                     </div>
                     <div class="item">
                         <h3>Premier Sponsors</h3>
