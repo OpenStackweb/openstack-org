@@ -286,9 +286,9 @@
                 <div class="col-12 col-md-12 col-sm-6 col-xs-12 featured">
                     <ul class="overview">
                         <li><a href="https://www.openstack.org/summit/shanghai-2019/summit-schedule/events/22721/openstack-upstream-institute-sponsored-by-lenovo-day-1-rsvp-required"><h5>OpenStack Upstream Institute</h5>
-                            <p><small>Sunday - Monday</small></p> <i class="fal fa-info-circle"></i></a></li>
+                            <p><small>Saturday-Sunday</small></p> <i class="fal fa-info-circle"></i></a></li>
                         <li><a href="https://www.openstack.org/summit/shanghai-2019/summit-schedule/global-search?t=Keynotes"><h5>Keynotes</h5>
-                            <p><small>Monday-Wednesday</small></p> <i class="fal fa-info-circle"></i></a></li>
+                            <p><small>Monday</small></p> <i class="fal fa-info-circle"></i></a></li>
                         <li><a href="https://www.openstack.org/summit/shanghai-2019/summit-schedule"><h5>Breakout Sessions</h5>
                             <p><small>Monday-Wednesday</small></p> <i class="fal fa-info-circle"></i></a></li>
                         <li><a href="https://wiki.openstack.org/wiki/Forum"><h5>The Forum</h5>
@@ -298,7 +298,7 @@
                         <li><a href="https://www.openstack.org/summit/shanghai-2019/summit-schedule/global-search?t=Marketplace"><h5>Open Infrastructure Marketplace</h5>
                             <p><small>Monday-Wednesday</small></p> <i class="fal fa-info-circle"></i></a></li>
                         <li><a href="https://www.openstack.org/ptg"><h5>Project Teams Gathering (PTG)</h5>
-                            <p><small>Thursday-Saturday</small></p> <i class="fal fa-info-circle"></i></a></li>
+                            <p><small>Wednesday-Friday</small></p> <i class="fal fa-info-circle"></i></a></li>
                     </ul>
 
                 </div>
