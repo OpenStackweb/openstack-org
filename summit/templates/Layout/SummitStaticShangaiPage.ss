@@ -285,7 +285,7 @@
                 <h3 class="title-section">Summit Overview</h3>
                 <div class="col-12 col-md-12 col-sm-6 col-xs-12 featured">
                     <ul class="overview">
-                        <li><a href="https://www.openstack.org/summit/shanghai-2019/summit-schedule/events/22721/openstack-upstream-institute-sponsored-by-lenovo-day-1-rsvp-required"><h5>OpenStack Upstream Institute</h5>
+                        <li><a href="https://www.openstack.org/summit/shanghai-2019/summit-schedule/events/24344/openstack-upstream-institute-day-1-sponsored-by-lenovo-rsvp-required"><h5>OpenStack Upstream Institute</h5>
                             <p><small>Saturday-Sunday</small></p> <i class="fal fa-info-circle"></i></a></li>
                         <li><a href="https://www.openstack.org/summit/shanghai-2019/summit-schedule/global-search?t=Keynotes"><h5>Keynotes</h5>
                             <p><small>Monday</small></p> <i class="fal fa-info-circle"></i></a></li>
