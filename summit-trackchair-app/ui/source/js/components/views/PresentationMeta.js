@@ -179,6 +179,25 @@ class PresentationMeta extends React.Component {
 		    	<RichTextSection title="Social Description" body={presentation.social_desc} />
 		    	<RichTextSection title="What Should Attendees Expect to Learn?" body={presentation.attendees_expected_learnt} />
 
+				{presentation.slides && presentation.slides.length > 0 &&
+				<div className="row">
+					<div className="col-lg-12">
+					  <div className="ibox">
+						  <div className="ibox-content">
+							  <h3>Presentation Material</h3>
+							  <ul>
+								{presentation.slides.map(f =>
+									<li key={`pres_slide_${f.id}`}>
+										<a href={f.url} target="_blank">{f.name}</a>
+									</li>
+								)}
+							  </ul>
+						  </div>
+					  </div>
+					</div>
+				</div>
+				}
+
                 {presentation.links && presentation.links.length > 0 &&
 				<div className="row">
 					<div className="col-lg-12">

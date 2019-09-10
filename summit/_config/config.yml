@@ -73,6 +73,7 @@ SummitEventType:
 PresentationMaterial:
   extensions:
     - SummitEntity
+    - JSONable
 SummitAbstractLocation:
   extensions:
     - SummitEntity

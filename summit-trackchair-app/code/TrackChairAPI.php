@@ -1108,6 +1108,15 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
                 $comments[] = $comment;
             }
 
+            $slides = [];
+
+            foreach (PresentationSlide::get()->filter('PresentationID', $p->ID) as $s) {
+                $slide = $s->toJSON();
+                $slide['url'] = $s->getSlideUrl();
+                $slide['name'] = $s->Name;
+                $slides[] = $slide;
+            }
+
             // remove unsafe character for JSON
             $p->Abstract = ($p->Abstract != null) ? str_replace(array("\r", "\n"), "",
                 $p->Abstract) : '(no description provided)';
@@ -1144,6 +1153,7 @@ class TrackChairAPI_PresentationRequest extends RequestHandler
             $data['tags'] = $p->getTags()->toNestedArray();
             $data['type'] = $p->Type()->Type;
             $data['links'] = $p->Materials()->filter('ClassName', 'PresentationLink')->sort('Order')->toNestedArray();
+            $data['slides'] = $slides;
         }
 
 
