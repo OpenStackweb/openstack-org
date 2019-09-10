@@ -27,10 +27,6 @@ const MainNav = ({
         	<i className="fa fa-edit"></i>
         	<span className="nav-label">Change Requests</span>
         </LinkButton>
-		<LinkButton link="change-requests">
-			<i className="fa fa-edit"></i>
-			<span className="nav-label">Change Requests</span>
-		</LinkButton>
 		<li>
 			<a href="/Security/logout?BackURL=/Security/login">
 				<i className="fa fa-sign-out"></i>
