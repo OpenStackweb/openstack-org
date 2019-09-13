@@ -215,7 +215,7 @@
 
             <div role="tabpanel" class="tab-pane fade in" id="events_tab">
                 <div class="inner-osdays">
-                    <h2 class="tab-title">Highlights From Recent OpenStack Days</h2>
+                    <h2 class="tab-title">Upcoming OpenStack and OpenStack and OpenInfra days</h2>
                     <div class="osdays-events">
                         <% if $FutureOpenstackDaysEvents(22) %>
                             <% loop $FutureOpenstackDaysEvents(22) %>
