@@ -27,7 +27,8 @@ final class EmailCreationRequestProcessTask extends CronTask
      * AssetsSyncRequestProcessorTask constructor.
      * @param ITransactionManager $tx_manager
      */
-    public function __construct(ITransactionManager $tx_manager){
+    public function __construct(ITransactionManager $tx_manager)
+    {
         parent::__construct();
         $this->tx_manager = $tx_manager;
     }
@@ -37,42 +38,44 @@ final class EmailCreationRequestProcessTask extends CronTask
      */
     public function run()
     {
-        try
-        {
-            $init_time     = time();
-            $processed     = $this->tx_manager->transaction(function(){
+        try {
+            $init_time = time();
+            $processed = $this->tx_manager->transaction(function () {
                 $processed = 0;
-                $requests  = EmailCreationRequest::get()->filter([
+                $requests = EmailCreationRequest::get()->filter([
                     'Processed' => 0
                 ])->sort('ID', 'ASC');
 
-                foreach($requests as $email_request){
+                foreach ($requests as $email_request) {
                     try {
                         switch ($email_request->ClassName) {
-                            case "SpeakerCreationEmailCreationRequest": {
-                                $sender = new PresentationSpeakerCreationEmailMessageSender;
-                                $speaker = $email_request->Speaker();
-                                $sender->send(['Speaker' => $speaker]);
-                            }
-                            break;
-                            case "PresentationCreatorNotificationEmailRequest": {
-                                $sender = new PresentationCreatorNotificationEmailMessageSender;
-                                $presentation = $email_request->Presentation();
-                                $sender->send(['Presentation' => $presentation]);
-                            }
-                            break;
-                            case "PresentationSpeakerNotificationEmailRequest": {
-                                $sender = new PresentationSpeakerNotificationEmailMessageSender;
-                                $presentation = $email_request->Presentation();
-                                $speaker = $email_request->Speaker();
-                                $sender->send([
-                                    'Presentation' => $presentation,
-                                    'Speaker' => $speaker
-                                ]);
-                            }
-                            break;
-                            case "MemberPromoCodeEmailCreationRequest": {
-                                if (!$email_request->PromoCode()->isEmailSent()) {
+                            case "SpeakerCreationEmailCreationRequest":
+                                {
+                                    $sender = new PresentationSpeakerCreationEmailMessageSender;
+                                    $speaker = $email_request->Speaker();
+                                    $sender->send(['Speaker' => $speaker]);
+                                }
+                                break;
+                            case "PresentationCreatorNotificationEmailRequest":
+                                {
+                                    $sender = new PresentationCreatorNotificationEmailMessageSender;
+                                    $presentation = $email_request->Presentation();
+                                    $sender->send(['Presentation' => $presentation]);
+                                }
+                                break;
+                            case "PresentationSpeakerNotificationEmailRequest":
+                                {
+                                    $sender = new PresentationSpeakerNotificationEmailMessageSender;
+                                    $presentation = $email_request->Presentation();
+                                    $speaker = $email_request->Speaker();
+                                    $sender->send([
+                                        'Presentation' => $presentation,
+                                        'Speaker' => $speaker
+                                    ]);
+                                }
+                                break;
+                            case "MemberPromoCodeEmailCreationRequest":
+                                {
                                     $sender = new MemberPromoCodeEmailSender;
                                     $sender->send([
                                         "Name" => $email_request->Name,
@@ -83,39 +86,39 @@ final class EmailCreationRequestProcessTask extends CronTask
                                     $email_request->PromoCode()->markAsSent();
                                     $email_request->PromoCode()->write();
                                 }
-                            }
-                            break;
-                            case 'SpeakerSelectionAnnouncementEmailCreationRequest': {
-                                $sender = SpeakerSelectionAnnouncementEmailCreationRequestSenderServiceFactory::build($email_request);
-                                if (is_null($sender)) continue;
-                                $sender->send([
-                                    "Role"               => $email_request->SpeakerRole,
-                                    "Speaker"            => $email_request->Speaker(),
-                                    "Summit"             => $email_request->Summit(),
-                                    'PromoCode'          => $email_request->PromoCode(),
-                                    'CheckMailExistance' => false
-                                ]);
-                                $email_request->PromoCode()->markAsSent();
-                                $email_request->PromoCode()->write();
-                            }
-                            break;
-                            case "CalendarSyncErrorEmailRequest": {
-                                $sender = new CalendarSyncErrorEmailMessageSender;
-                                $sender->send(['CalendarSyncInfo' => $email_request->CalendarSyncInfo()]);
-                            }
-                            break;
-                            default: {
-                                continue;
-                            }
-                            break;
+                                break;
+                            case 'SpeakerSelectionAnnouncementEmailCreationRequest':
+                                {
+                                    $sender = SpeakerSelectionAnnouncementEmailCreationRequestSenderServiceFactory::build($email_request);
+                                    if (is_null($sender)) continue;
+                                    $sender->send([
+                                        "Role" => $email_request->SpeakerRole,
+                                        "Speaker" => $email_request->Speaker(),
+                                        "Summit" => $email_request->Summit(),
+                                        'PromoCode' => $email_request->PromoCode(),
+                                        'CheckMailExistance' => false
+                                    ]);
+                                    $email_request->PromoCode()->markAsSent();
+                                    $email_request->PromoCode()->write();
+                                }
+                                break;
+                            case "CalendarSyncErrorEmailRequest":
+                                {
+                                    $sender = new CalendarSyncErrorEmailMessageSender;
+                                    $sender->send(['CalendarSyncInfo' => $email_request->CalendarSyncInfo()]);
+                                }
+                                break;
+                            default:
+                                {
+                                    continue;
+                                }
+                                break;
                         }
                         $email_request->markAsProcessed();
                         $email_request->write();
-                    }
-                    catch(Exception $ex)
-                    {
+                    } catch (Exception $ex) {
                         SS_Log::log($ex->getMessage(), SS_Log::ERR);
-                        echo sprintf("error %s", $ex->getMessage()).PHP_EOL;
+                        echo sprintf("error %s", $ex->getMessage()) . PHP_EOL;
                     }
 
                     $processed++;
@@ -123,10 +126,8 @@ final class EmailCreationRequestProcessTask extends CronTask
                 return $processed;
             });
             $finish_time = time() - $init_time;
-            echo 'processed records ' . $processed. ' - time elapsed : '.$finish_time. ' seconds.';
-        }
-        catch(Exception $ex)
-        {
+            echo 'processed records ' . $processed . ' - time elapsed : ' . $finish_time . ' seconds.';
+        } catch (Exception $ex) {
             SS_Log::log($ex->getMessage(), SS_Log::ERR);
         }
     }
