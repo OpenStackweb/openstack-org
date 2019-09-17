@@ -20,7 +20,7 @@
     <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#5bbad5">
 
     <!-- Cookie Bot -->
-    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="e11e4375-71b9-426d-a76d-61eae3ddc08f" type="text/javascript" data-blockingmode="auto"></script>
+    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="e11e4375-71b9-426d-a76d-61eae3ddc08f" type="text/javascript" async></script>
     <!-- End Cookie Bot -->
 
       <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
