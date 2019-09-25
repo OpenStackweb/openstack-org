@@ -1212,7 +1212,7 @@ class PresentationSpeaker extends DataObject
         $member = $this->Member();
         $img2 = !is_null($member) && $member->ID > 0 ? $member->Photo() : null;
         $twitter_name = $this->TwitterName;
-        if (!is_null($img1) && $img1->exists() && Director::fileExists($img1->Filename)) {
+        if (!is_null($img1) && $img1->exists()) {
             // make it square
             $size = ($img1->getWidth() < $img1->getHeight()) ? $img1->getWidth() : $img1->getHeight();
             $img1 = $img1->CroppedImage($size, $size);
@@ -1220,7 +1220,7 @@ class PresentationSpeaker extends DataObject
             $img1 = (($size - $width) < 200) ? $img1 : $img1->SetRatioSize($width, $width);
             return is_null($img1) ? $generic_url : $img1->getAbsoluteURL();
         }
-        if (!is_null($img2) && $img2->exists() && Director::fileExists($img2->Filename)) {
+        if (!is_null($img2) && $img2->exists()) {
             // make it square
             $size = ($img2->getWidth() < $img2->getHeight()) ? $img2->getWidth() : $img2->getHeight();
             $img2 = $img2->CroppedImage($size, $size);
