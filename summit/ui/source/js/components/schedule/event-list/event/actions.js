@@ -116,6 +116,18 @@ const shareTwitter = ({ event, ScheduleProps: { summit } }) => {
     window.open(url, 'mywin', dim)
 }
 
+const unRsvpConfirm = (doUnRsvp, event) => {
+    swal({
+        title: "Are you sure you want to delete this RSVP?",
+        type:"warning",
+        showCloseButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, delete RSVP"
+    }).then(function () {
+        doUnRsvp(event);
+    });
+}
+
 const ActionList = [
     {
         type: 'rsvp',
@@ -136,7 +148,7 @@ const ActionList = [
         type: 'unrsvp',
         icon: 'fa-times-circle',
         title: 'unRSVP',
-        click: ({ removeEventFromRsvp, event }) => removeEventFromRsvp(event),
+        click: ({ removeEventFromRsvp, event }) => unRsvpConfirm(removeEventFromRsvp, event),
         enabled: () => true,
         visible: (event, user) => (
             event.going

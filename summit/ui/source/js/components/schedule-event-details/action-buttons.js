@@ -46,7 +46,7 @@ class ActionButtons extends React.Component {
     }
 
     toggleRSVPState(e){
-        const { event, currentUser } = this.props;
+        const { event, currentUser, toggleRSVPState, removeEventFromRsvp } = this.props;
         var former_state = event.going;
         if(currentUser == null){
           return this.requireLogin();
@@ -54,14 +54,25 @@ class ActionButtons extends React.Component {
         if(!former_state && event.rsvp_seat_type == 'FULL'){
             return false;
         }
-        this.props.toggleRSVPState(event);
+
         if(former_state){
             //unRSVP
-            this.props.removeEventFromRsvp(event);
+            swal({
+                title: "Are you sure you want to delete this RSVP?",
+                type:"warning",
+                showCloseButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, delete RSVP"
+            }).then(function () {
+                toggleRSVPState(event);
+                removeEventFromRsvp(event);
+            });
+
             return false;
         }
         // RSVP
         // open modal
+        this.props.toggleRSVPState(event);
         var modal       = $('#rsvpModal');
         var uri         = new URI( window.location);
         $('#rsvpModalBody').load(uri.segment('rsvp').toString(),function(result){
@@ -92,13 +103,13 @@ class ActionButtons extends React.Component {
         if(!event.going && event.rsvp_seat_type == 'FULL') return 'RSVP FULL';
         if(!event.going && event.rsvp_seat_type == 'Regular') return 'RSVP';
         if(!event.going && event.rsvp_seat_type == 'WaitList') return 'RSVP (waitlist)';
-        return 'RSVP';
+        return (event.going) ? 'Delete RSVP' : 'RSVP';
     }
 
     getRSVPIcon(){
         const { event } = this.props;
         if(!event.going && event.rsvp_seat_type == 'FULL' ) return 'glyphicon-warning-sign';
-        if(event.going) return 'glyphicon-ok-sign';
+        if(event.going) return 'glyphicon-remove-sign';
         // default (not going)
         return 'glyphicon-ok-circle';
     }
@@ -137,7 +148,7 @@ class ActionButtons extends React.Component {
                             title={ ( event.going ? 'unRSVP': 'RSVP') }
                             type="button"
                             onClick={ (e) => this.toggleRSVPState(e) }
-                            className={"btn btn-primary btn-md active btn-rsvp-own-event btn-action" + (event.going ? ' btn-action-pressed': ' btn-action-normal') + (!event.going && event.rsvp_seat_type == 'FULL' ? ' btn-full-rsvp': '') }>
+                            className={`btn btn-md btn-rsvp-own-event btn-action btn-primary ${(!event.going && event.rsvp_seat_type == 'FULL' ? ' btn-full-rsvp': '')}` }>
                         <span className={"glyphicon " + this.getRSVPIcon() }></span>&nbsp;<span
                         className="content">{this.getOwnRSVPText()}</span>
                     </button>
