@@ -156,8 +156,14 @@ jQuery(document).ready(function($) {
         });
 
         registration_form.submit(function(event){
+            if(!registration_form.valid()) {
+                event.preventDefault();
+                event.stopPropagation();
+                return false;
+            }
             var data_source = $("#edit-affiliation-form").affiliations('local_datasource');
             $("#HiddenAffiliations").val(JSON.stringify(data_source));
+            return true;
         })
     }
 
