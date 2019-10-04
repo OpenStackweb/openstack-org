@@ -20,7 +20,7 @@ final class MeetupApi implements IExternalEventsApi
 
     const BaseUrl = 'https://api.meetup.com';
     const BaseAuthUrl = 'https://secure.meetup.com';
-
+    const Throttle = 500; // ms
     /**
      * @var Client
      */
@@ -188,6 +188,9 @@ final class MeetupApi implements IExternalEventsApi
         ];
 
         $api_url = sprintf("%s/self/groups", self::BaseUrl);
+        // to avoid error http 429 Credentials have been throttled
+        usleep(self::Throttle);
+
         $response = $this->client->get($api_url, array
             (
                 'query' => $query
@@ -201,7 +204,6 @@ final class MeetupApi implements IExternalEventsApi
             throw new Exception('invalid content type!');
         if(!strstr($content_type,'application/json'))
             throw new Exception('invalid content type!');
-
         $json = $response->getBody()->getContents();
         return json_decode($json, true);
     }
@@ -221,6 +223,9 @@ final class MeetupApi implements IExternalEventsApi
             'status'       => 'upcoming'
         ];
         $api_url = sprintf("%s/%s/events", self::BaseUrl, $groupSlug);
+        // to avoid error http 429 Credentials have been throttled
+        usleep(self::Throttle);
+
         $response = $this->client->get($api_url, array
             (
                 'query' => $query
@@ -250,6 +255,8 @@ final class MeetupApi implements IExternalEventsApi
             'access_token' => $this->getAccessToken(),
         ];
         $api_url = sprintf("%s/%s/members", self::BaseUrl, $groupSlug);
+        // to avoid error http 429 Credentials have been throttled
+        usleep(self::Throttle);
         $response = $this->client->get($api_url, array
             (
                 'query' => $query
