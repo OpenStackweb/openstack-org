@@ -144,12 +144,9 @@ class PublicCloudsDirectoryPage_Controller extends CloudsDirectoryPage_Controlle
 			$params              = $this->request->allParams();
 			$company_url_segment = Convert::raw2sql($params["Company"]);
 			$slug                = Convert::raw2sql($params["Slug"]);
-			$query               = new QueryObject();
-			$query->addAndCondition(QueryCriteria::equal('Slug',$slug));
-			$this->current_cloud = $this->cloud_repository->getBy($query);
+			$this->current_cloud = $this->cloud_repository->getBySlugAndCompanySlug($slug, $company_url_segment);
 			if(!$this->current_cloud || !$this->current_cloud->Active) throw new NotFoundEntityException('','');
-			if($this->current_cloud->getCompany()->URLSegment != $company_url_segment) throw new NotFoundEntityException('','');
-            // we need this for reviews.
+		    // we need this for reviews.
             $this->company_service_ID = $this->current_cloud->getIdentifier();
 			$render             = new PublicCloudSapphireRender($this->current_cloud);
 			return $render->draw();

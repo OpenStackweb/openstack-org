@@ -126,15 +126,12 @@ class RemoteCloudsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Cont
             $params = $this->request->allParams();
             $company_url_segment = Convert::raw2sql($params["Company"]);
             $slug = Convert::raw2sql($params["Slug"]);
-            $query = new QueryObject();
-            $query->addAndCondition(QueryCriteria::equal('Slug', $slug));
-            $remote_cloud = $this->remote_cloud_repository->getBy($query);
+            $remote_cloud = $this->cloud_repository->getBySlugAndCompanySlug($slug, $company_url_segment);
+
             if (!$remote_cloud || !$remote_cloud->Active) {
                 throw new NotFoundEntityException('', '');
             }
-            if ($remote_cloud->getCompany()->URLSegment != $company_url_segment) {
-                throw new NotFoundEntityException('', '');
-            }
+
             // we need this for reviews.
             $this->company_service_ID = $remote_cloud->getIdentifier();
             $render = new RemoteCloudSapphireRender($remote_cloud);

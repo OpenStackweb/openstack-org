@@ -241,11 +241,8 @@ abstract class CloudsDirectoryPage_Controller extends MarketPlaceDirectoryPage_C
 		$params              = $this->request->allParams();
 		$company_url_segment = Convert::raw2sql($params["Company"]);
 		$slug                = Convert::raw2sql($params["Slug"]);
-		$query               = new QueryObject();
-		$query->addAndCondition(QueryCriteria::equal('Slug',$slug));
-		$cloud       = $this->cloud_repository->getBy($query);
-		if(!$cloud) throw new NotFoundEntityException('','');
-		if($cloud->getCompany()->URLSegment != $company_url_segment) throw new NotFoundEntityException('','');
+        $cloud               = $this->cloud_repository->getBySlugAndCompanySlug($slug, $company_url_segment);
+        if(!$cloud) throw new NotFoundEntityException('','');
 		return CloudViewModel::getDataCenterLocationsJson($cloud);
 	}
 
@@ -257,11 +254,8 @@ abstract class CloudsDirectoryPage_Controller extends MarketPlaceDirectoryPage_C
 		$params              = $this->request->allParams();
 		$company_url_segment = Convert::raw2sql($params["Company"]);
 		$slug                = Convert::raw2sql($params["Slug"]);
-		$query               = new QueryObject();
-		$query->addAndCondition(QueryCriteria::equal('Slug',$slug));
-		$cloud       = $this->cloud_repository->getBy($query);
+		$cloud               = $this->cloud_repository->getBySlugAndCompanySlug($slug, $company_url_segment);
 		if(!$cloud) throw new NotFoundEntityException('','');
-		if($cloud->getCompany()->URLSegment != $company_url_segment) throw new NotFoundEntityException('','');
 		return CloudViewModel::getEnabledPricingSchemas($cloud);
 	}
 
