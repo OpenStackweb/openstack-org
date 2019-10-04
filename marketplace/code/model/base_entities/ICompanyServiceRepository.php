@@ -36,4 +36,11 @@ interface ICompanyServiceRepository extends IEntityRepository {
 	 * @return int
 	 */
 	public function countActives();
+
+    /**
+     * @param string $slug
+     * @param string $companySlug
+     * @return ICompanyService
+     */
+    public function getBySlugAndCompanySlug(string $slug, string $companySlug);
 }

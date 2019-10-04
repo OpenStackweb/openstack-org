@@ -1,4 +1,4 @@
-<div class="product-box row" style="border-left-color: #{$Company.CompanyColor}">
+<div class="product-box row" id="{$ID}" style="border-left-color: #{$Company.CompanyColor}">
     <div class="col-lg-3 col-md-5 col-sm-6">
         <div class="logo-area">
             <span style="background-color: #{$Company.CompanyColor}" class="color-bar"></span>

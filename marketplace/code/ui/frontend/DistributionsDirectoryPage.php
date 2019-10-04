@@ -164,13 +164,8 @@ class DistributionsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Con
             $params = $this->request->allParams();
             $company_url_segment = Convert::raw2sql($params["Company"]);
             $slug = Convert::raw2sql($params["Slug"]);
-            $query = new QueryObject();
-            $query->addAndCondition(QueryCriteria::equal('Slug', $slug));
-            $distribution = $this->distribution_repository->getBy($query);
+            $distribution = $this->distribution_repository->getBySlugAndCompanySlug($slug, $company_url_segment);
             if (!$distribution || !$distribution->Active) {
-                throw new NotFoundEntityException('', '');
-            }
-            if ($distribution->getCompany()->URLSegment != $company_url_segment) {
                 throw new NotFoundEntityException('', '');
             }
             // we need this for reviews.

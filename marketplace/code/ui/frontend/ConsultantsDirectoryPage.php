@@ -142,12 +142,10 @@ class ConsultantsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Contr
 			$params              = $this->request->allParams();
 			$company_url_segment = Convert::raw2sql($params["Company"]);
 			$slug                = Convert::raw2sql($params["Slug"]);
-			$query               = new QueryObject();
-			$query->addAndCondition(QueryCriteria::equal('Slug',$slug));
-			$consultant          = $this->consultant_repository->getBy($query);
+			$consultant          = $this->consultant_repository->getBySlugAndCompanySlug($slug, $company_url_segment);
 			if(!$consultant || !$consultant->Active) throw new NotFoundEntityException('Consultant','by slug');
-			if($consultant->getCompany()->URLSegment != $company_url_segment) throw new NotFoundEntityException('','');
-            // we need this for reviews.
+
+			// we need this for reviews.
             $this->company_service_ID = $consultant->getIdentifier();
 			$render = new ConsultantSapphireRender($consultant);
 			return $render->draw();
@@ -194,11 +192,9 @@ class ConsultantsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Contr
 		$params              = $this->request->allParams();
 		$company_url_segment = Convert::raw2sql($params["Company"]);
 		$slug                = Convert::raw2sql($params["Slug"]);
-		$query               = new QueryObject();
-		$query->addAndCondition(QueryCriteria::equal('Slug',$slug));
-		$consultant       = $this->consultant_repository->getBy($query);
+		$consultant          = $this->consultant_repository->getBySlugAndCompanySlug($slug, $company_url_segment);
 		if(!$consultant) throw new NotFoundEntityException('Consultant','by slug');
-		if($consultant->getCompany()->URLSegment != $company_url_segment) throw new NotFoundEntityException('','');
+
 		$color = strtoupper(dechex(rand(0,10000000)));
 		$office_index = 1;
 		foreach($consultant->getOffices() as $office){
@@ -231,11 +227,8 @@ class ConsultantsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Contr
         $params              = $this->request->allParams();
         $company_url_segment = Convert::raw2sql($params["Company"]);
         $slug                = Convert::raw2sql($params["Slug"]);
-        $query               = new QueryObject();
-        $query->addAndCondition(QueryCriteria::equal('Slug',$slug));
-        $consultant       = $this->consultant_repository->getBy($query);
+        $consultant          = $this->consultant_repository->getBySlugAndCompanySlug($slug, $company_url_segment);
         if(!$consultant) throw new NotFoundEntityException('Consultant','by slug');
-        if($consultant->getCompany()->URLSegment != $company_url_segment) throw new NotFoundEntityException('','');
 
         foreach($consultant->getOffices() as $office){
             $static_map_url .= "&markers=".$office->getLat().",".$office->getLng();

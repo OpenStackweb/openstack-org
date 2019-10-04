@@ -36,6 +36,20 @@ abstract class SapphireCompanyServiceRepository
 		parent::delete($entity);
 	}
 
+    /**
+     * @param string $slug
+     * @param string $companySlug
+     * @return ICompanyService|void
+     */
+	public function getBySlugAndCompanySlug(string $slug, string $companySlug){
+        $companySlug = Convert::raw2sql(trim($companySlug));
+        $slug        = Convert::raw2sql(trim($slug));
+        $class       = $this->entity_class;
+        return $class::get()->filter('Slug', $slug)
+            ->leftJoin("Company", "Company.ID = CompanyService.CompanyID")
+            ->where("Company.URLSegment = '${companySlug}'")->first();
+    }
+
 	/**
 	 * @param int $company_id
 	 * @return int
