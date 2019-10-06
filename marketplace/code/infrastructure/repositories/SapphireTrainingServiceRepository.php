@@ -86,4 +86,14 @@ class SapphireTrainingServiceRepository
     {
         // TODO: Implement countByCompany() method.
     }
+
+    /**
+     * @param string $slug
+     * @param string $companySlug
+     * @return ICompanyService
+     */
+    public function getBySlugAndCompanySlug(string $slug, string $companySlug)
+    {
+        // TODO: Implement getBySlugAndCompanySlug() method.
+    }
 }
