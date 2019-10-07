@@ -65,7 +65,17 @@ final class MeetupApi implements IExternalEventsApi
     private function getAccessToken():string {
 
         $access_token = $this->loadRAWFromCache("access_token");
-        if(!empty($access_token)) return $access_token;
+        if(!empty($access_token)) {
+            if(Director::is_cli()){
+                fwrite(STDOUT, sprintf("got access token %s from cache", $access_token).PHP_EOL);
+            }
+            return $access_token;
+        }
+
+        if(Director::is_cli()){
+            fwrite(STDOUT, "access token not present on cache".PHP_EOL);
+        }
+
         $response = $this->client->get(self::BaseAuthUrl."/oauth2/authorize" , [
             'headers' => [
                 'Accept' => 'application/json'
@@ -145,7 +155,12 @@ final class MeetupApi implements IExternalEventsApi
         if(!key_exists('oauth_token', $json_response))
             throw new InvalidArgumentException();
         $access_token  = $json_response['oauth_token'];
-        $this->saveRAW2Cache('access_token', $access_token, intval($json_response['expires_in']) * 0.9);
+        $lifetime = intval($json_response['expires_in']) * 0.9;
+        if(Director::is_cli()){
+            fwrite(STDOUT, sprintf("saving access token %s to cache with lifetime %s", $access_token, $lifetime).PHP_EOL);
+        }
+
+        $this->saveRAW2Cache('access_token', $access_token, $lifetime);
         return $access_token;
     }
 
