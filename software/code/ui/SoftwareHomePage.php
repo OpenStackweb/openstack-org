@@ -323,6 +323,24 @@ class SoftwareHomePage_Controller extends Page_Controller
         return json_encode($components);
     }
 
+    public function getComponentCapabilitiesJSON()
+    {
+        $capabilities = [];
+        $categories = OpenStackComponentCapabilityCategory::get()->filter('Enabled', 1);
+
+        foreach($categories as $cat) {
+            $tmpcat = ['id' => $cat->ID, 'name' => $cat->Name, 'tags' => []];
+            foreach ($cat->Tags() as $tag) {
+                $tmpcat['tags'][] = ['id' => $tag->ID, 'name' => $tag->Name];
+            }
+
+            $capabilities[] = $tmpcat;
+        }
+
+
+        return json_encode($capabilities);
+    }
+
     public function getComponentCategories()
     {
         $categories = $this->manager->getComponentsGroupedByCategory($this->getDefaultRelease());

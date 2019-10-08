@@ -52,14 +52,15 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
         $this->tx_manager->transaction(function(){
             $releases = OpenStackRelease::get()->where(" Name <> 'Trunk' ")->sort('ReleaseDate', 'DESC');
             DB::query('DELETE FROM OpenStackComponentReleaseCaveat;');
-            $this->processProjects();
-            $this->processComponentsAndCategories();
-            foreach($releases as $release)
+            //$this->processProjects();
+            //$this->processComponentsAndCategories();
+            $this->processCapabilityList();
+            /*foreach($releases as $release)
             {
                 echo sprintf('processing release %s ...', $release->Name).PHP_EOL;
                 $this->processApiVersionsPerRelease($release);
                 $this->processProjectPerRelease($release);
-            }
+            }*/
         });
         $delta = time() - $start;
         echo sprintf('task took %s seconds to run.',$delta).PHP_EOL;
@@ -374,6 +375,20 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                             $comp->VideoDescription = '';
                             $comp->VideoTitle = '';
 
+                            $comp->CapabilityTags()->removeAll();
+                            if (isset($component['capabilities'])) {
+                                foreach ($component['capabilities'] as $cap) {
+                                    if (isset($cap['tags'])) {
+                                        foreach ($cap['tags'] as $tagName) {
+                                            $tag = OpenStackComponentCapabilityTag::get()->filter('Name', $tagName)->first();
+                                            if ($tag) {
+                                                $comp->CapabilityTags()->add($tag);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
                             if (isset($component['video'])) {
                                 $comp->YouTubeID = (isset($component['video']['id'])) ? $component['video']['id'] : '';
                                 $comp->VideoDescription = (isset($component['video']['desc'])) ? $component['video']['desc'] : '';
@@ -456,23 +471,17 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                                 }
                             }
 
-
                             $comp->write();
-
                             $compOrder++;
                         }
                     }
                 }
             }
-
         } catch (Exception $ex) {
             echo 'NOT FOUND'.PHP_EOL;
             // echo $ex->getMessage() . PHP_EOL;
             // SS_Log::log($ex->getMessage(), SS_Log::WARN);
         }
-
-
-
     }
 
     private function processProjectPerRelease($release)
@@ -544,6 +553,62 @@ final class IngestOpenStackComponentsDataCronTask extends CronTask
                 // echo $ex->getMessage() . PHP_EOL;
                 // SS_Log::log($ex->getMessage(), SS_Log::WARN);
             }
+        }
+    }
+
+    private function processCapabilityList()
+    {
+        DB::query("UPDATE `OpenStackComponentCapabilityCategory` SET `Enabled` = 0 ");
+        DB::query("UPDATE `OpenStackComponentCapabilityTag` SET `Enabled` = 0 ");
+
+        try {
+            $file = 'https://opendev.org/osf/openstack-map/raw/branch/master/deployment_tools_capabilities.yaml';
+
+            echo "processing capability list ".PHP_EOL;
+            $yamlResponse = $this->client->get($file);
+
+            if (is_null($yamlResponse)) return;
+            if ($yamlResponse->getStatusCode() != 200) return;
+            $body = $yamlResponse->getBody();
+            if (is_null($body)) return;
+            $content = $body->getContents();
+            if (empty($content)) return;
+
+            $contentYaml = Spyc::YAMLLoadString($content);
+
+            foreach($contentYaml['capabilities'] as $capCategory) {
+
+                $catName = $capCategory['category'];
+                $capCat = OpenStackComponentCapabilityCategory::get()->filter('Name', $catName)->first();
+                if (!$capCat) {
+                    $capCat = new OpenStackComponentCapabilityCategory();
+                }
+
+                $capCat->Name = $catName;
+                $capCat->Description = $capCategory['description'];
+                $capCat->Enabled = 1;
+                $capCat->Tags()->removeAll();
+                $capCat->write();
+
+                foreach($capCategory['tags'] as $tag) {
+                    $tagName = $tag['name'];
+                    $capTag = OpenStackComponentCapabilityTag::get()->filter('Name', $tagName)->first();
+                    if (!$capTag) {
+                        $capTag = new OpenStackComponentCapabilityTag();
+                    }
+
+                    $capTag->Name = $tagName;
+                    $capTag->Description = isset($tag['desc']) ? $tag['desc'] : '';
+                    $capTag->Enabled = 1;
+                    $capTag->write();
+
+                    $capCat->Tags()->add($capTag);
+                }
+
+                $capCat->write();
+            }
+        } catch (Exception $ex) {
+            echo 'NOT FOUND'.PHP_EOL;
         }
     }
 

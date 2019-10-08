@@ -53,7 +53,7 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
         'Versions'          => 'OpenStackApiVersion',
         'RelatedContent'    => 'OpenStackComponentRelatedContent',
         'Caveats'           => 'OpenStackComponentReleaseCaveat',
-        'Links'             => 'OpenStackComponentLink.Links'
+        'Links'             => 'OpenStackComponentLink.Links',
     );
 
     static $many_many = array
@@ -61,7 +61,8 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
         'Tags'              => 'OpenStackComponentTag',
         'Dependencies'      => 'OpenStackComponent',
         'RelatedComponents' => 'OpenStackComponent',
-        'SupportTeams'      => 'OpenStackComponent'
+        'SupportTeams'      => 'OpenStackComponent',
+        'CapabilityTags'    => 'OpenStackComponentCapabilityTag'
     );
 
     private static $many_many_extraFields = array
