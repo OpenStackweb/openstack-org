@@ -60,7 +60,7 @@ final class SchedulerCronTask extends CronTask
                     $raw        = sprintf('cd %s && sake %s %s', $base_folder, $name, $params);
 
                     echo sprintf('running %s at %s', $raw, $expression) . PHP_EOL;
-                    $scheduler->raw($raw)->at($expression)->onlyOne()->output(sprintf("/tmp/%s.log", strtolower($name)));
+                    $scheduler->raw($raw)->at($expression)->onlyOne()->output(sprintf("/tmp/%s.log", strtolower($name)),true);
                 }
                 $scheduler->run();
             }
