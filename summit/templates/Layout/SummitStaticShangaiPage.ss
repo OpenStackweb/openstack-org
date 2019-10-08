@@ -351,22 +351,24 @@
                     </div>
                     <div class="item">
                         <h3>Premier Sponsors</h3>
-
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="http://www.99cloud.net/"><img alt="99Cloud Inc._big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/99cloud-lg.jpg" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="http://www.99cloud.net/"><img alt="99Cloud Inc._big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/logo-99cloud-lg2.jpg" class="big-logo-company company-logo"></a>
                         </div>
-                        
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="http://www.cisco.com/"><img alt="Cisco_big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/cisco-new-lg.png" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="https://www.cisco.com/"><img alt="Cisco_big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/cisco-new-lg.png" class="big-logo-company company-logo"></a>
                         </div>
-
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
                             <a rel="nofollow" href="http://en.inspur.com/"><img alt="Jinan Inspur Data Technology Co. LTD_big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/inspur-lg.jpg" class="big-logo-company company-logo"></a>
                         </div>
-
+                        <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
+                            <a rel="nofollow" href="http://www.kunluncloud.com"><img alt="Troila_big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/troila-lg.jpg" class="big-logo-company company-logo"></a>
+                        </div>
                     </div>
                     <div class="item">
                         <h3>Spotlight Sponsors</h3>
+                        <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
+                            <a rel="nofollow" href="https://amperecomputing.com/"><img alt="Ampere_big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/ampere-lg.jpg" class="big-logo-company company-logo"></a>
+                        </div>
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
                             <a rel="nofollow" href="https://www.canonical.com/"><img alt="Canonical_big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/ubuntu-lg.jpg" class="big-logo-company company-logo"></a>
                         </div>
@@ -398,10 +400,7 @@
                             <a rel="nofollow" href="https://www.nipa.cloud/"><img alt="NIPA Technology_big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/Nipa-lg.jpg" class="big-logo-company company-logo"></a>
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="https://www.redhat.com/en"><img alt="Red Hat COPY_big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/Redhat-newlogo-lg2.jpg" class="big-logo-company company-logo"></a>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="http://storpool.com"><img alt="StorPool Storage_big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/storpool.jpg" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="https://www.ovh.com"><img alt="OVH_big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/ovh-lg.jpg" class="big-logo-company company-logo"></a>
                         </div>
                     </div>
                     <div class="item" id="PTG Sponsor">
