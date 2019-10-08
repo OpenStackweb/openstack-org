@@ -14,7 +14,7 @@
 /**
  * Class MarketPlaceCompany
  */
-class MarketPlaceCompany extends DataExtension implements ICompany {
+class MarketPlaceCompany extends DataExtension implements IMarketPlaceCompany {
 
 	static $has_many =  array(
 	'MarketPlaceTypeAllowedInstances' => 'MarketPlaceAllowedInstance',

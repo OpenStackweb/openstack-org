@@ -99,6 +99,8 @@ jQuery(document).ready(function($){
                 }
 
                 finishEventSaveOrUpdate();
+
+
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 ajaxIndicatorStop();
@@ -116,7 +118,7 @@ jQuery(document).ready(function($){
 function finishEventSaveOrUpdate()
 {
     $('.save-book').prop('disabled',false);
-    //window.location = listing_url;
+    window.location = listing_url;
     ajaxIndicatorStop();
 }
 
