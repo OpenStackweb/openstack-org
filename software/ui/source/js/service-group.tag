@@ -1,3 +1,4 @@
+require('./component-capabilities-ddl.tag')
 require('./service-box.tag')
 require('./service-row.tag')
 require('./t.tag');
@@ -10,7 +11,10 @@ require('./t.tag');
             <p></p>
         </div>
     </div>
-    <div class="row" id={ "cat_" + category.ID }>
+
+    <component-capabilities-ddl api={api} show={category.ID == 36}></component-capabilities-ddl>
+
+    <div class="row" id={ "cat_" + category.ID } show={Object.keys(subcategories).length > 0}>
         <div class="col-md-12">
             <div class="row" each="{ subcatId, subcategory in subcategories }" >
                 <div class="col-sm-12">
@@ -24,17 +28,21 @@ require('./t.tag');
                     <service-box each="{ subcategory.components }" ></service-box>
                 </div>
                 <div class="col-sm-12" show="{ !opts.tiles }">
-                    <service-row each="{ subcategory.components }" base_url="{base_url}" release_id="{release_id}" ></service-row>
+                    <service-row api={api} each="{ subcategory.components }" base_url="{base_url}" release_id="{release_id}" ></service-row>
                 </div>
             </div>
         </div>
 
     </div>
 
+    <div show={ Object.keys(subcategories).length == 0 }> No Components for this search </div>
+
     <script>
 
         this.base_url       = this.parent.base_url;
         this.release_id     = this.parent.release_id;
+        this.filter_tag     = null;
+        this.api            = opts.api;
         this.category       = opts.category;
         this.subcategories  = opts.subcategories;
         var self = this;

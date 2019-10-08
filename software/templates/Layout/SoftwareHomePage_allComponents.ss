@@ -1,5 +1,6 @@
 <script>
     var components = $getComponentsByCategoryJSON($CategorySlug);
+    var capabilities = $getComponentCapabilitiesJSON();
     var releases   = $getReleases;
     var releaseId  = '{$getDefaultRelease().getSlug().JS}';
     components.max_maturity_points = $Top.getMaxAllowedMaturityPoints;

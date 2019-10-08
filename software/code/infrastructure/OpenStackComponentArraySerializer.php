@@ -23,16 +23,27 @@ final class OpenStackComponentArraySerializer implements IEntitySerializer
     {
        if(!$entity instanceof OpenStackComponent) throw new InvalidArgumentException;
 
+       $capability_tags = [];
+       $grouped_capability_tags = [];
+       foreach ($entity->CapabilityTags() as $tag) {
+           $cat_name = $tag->Category()->Name;
+           if (!array_key_exists($cat_name, $grouped_capability_tags)) $grouped_capability_tags[$cat_name] = [];
+           $grouped_capability_tags[$cat_name][] = $tag->Name;
+           $capability_tags[] = $tag->Name;
+       }
+
        $res = array
        (
-           'id'              => $entity->ID,
-           'name'            => $entity->Name,
-           'description'     => $entity->Description,
-           'code_name'       => $entity->CodeName,
-           'slug'            => $entity->getSlug(),
-           'adoption'        => $entity->Adoption,
-           'age'             => $entity->Age,
-           'maturity_points' => $entity->MaturityPoints,
+           'id'                         => $entity->ID,
+           'name'                       => $entity->Name,
+           'description'                => $entity->Description,
+           'code_name'                  => $entity->CodeName,
+           'slug'                       => $entity->getSlug(),
+           'adoption'                   => $entity->Adoption,
+           'age'                        => $entity->Age,
+           'maturity_points'            => $entity->MaturityPoints,
+           'grouped_capability_tags'    => $grouped_capability_tags,
+           'capability_tags'            => $capability_tags
        );
        return $res;
     }

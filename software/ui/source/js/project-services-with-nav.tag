@@ -17,8 +17,6 @@ require('./service-group.tag')
 
         var self = this;
 
-        console.log(opts);
-
         opts.api.on('loaded-components-by-release',function(data) {            
             self.groups =  data;
             self.update();
