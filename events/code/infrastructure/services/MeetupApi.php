@@ -20,7 +20,7 @@ final class MeetupApi implements IExternalEventsApi
 
     const BaseUrl = 'https://api.meetup.com';
     const BaseAuthUrl = 'https://secure.meetup.com';
-    const Throttle = 500; // ms
+    const Throttle = 1000; // ms
     /**
      * @var Client
      */
