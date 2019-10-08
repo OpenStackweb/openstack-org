@@ -15,7 +15,7 @@
 /**
  * Class Company
  */
-class Company extends DataObject implements PermissionProvider,IEntity
+class Company extends DataObject implements PermissionProvider,ICompany
 {
 
     private static $db = array(
