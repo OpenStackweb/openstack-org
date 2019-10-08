@@ -24,8 +24,9 @@ File:
     - mobi
     - epub
     - ics
-    - yaml
     - html
     - xml
     - eps
     - json
+    - yml
+    - yaml

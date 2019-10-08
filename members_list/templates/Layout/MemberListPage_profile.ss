@@ -10,9 +10,18 @@
         <a name="profile-$ID"></a>
         <div class="details span-10 last">
             <div class="last name-and-title">
-                <h3>$FirstName $Surname <% if hasAvailableCertifications %>
-                    <img height="65px" src="{$Top.CloudUrl("images/coa/coa-badge.jpg")}" title="COA Certified" alt="COA Certified">
-                <% end_if %></h3>
+                <h3>
+                    $FirstName $Surname
+                    <% if hasAvailableCertifications %>
+                        <img height="65px" src="{$Top.CloudUrl("images/coa/coa-badge.jpg")}" title="COA Certified" alt="COA Certified">
+                    <% end_if %>
+                    <% if isUpstreamStudent %>
+                        <img width="65px" src="{$Top.CloudUrl("images/osupstreaminstitute.jpg")}" title="OpenStack Upstream Institute" alt="OpenStack Upstream Institute">
+                    <% end_if %>
+                    <% if getCommunityAwards %>
+                        <img width="65px" src="{$Top.CloudUrl("images/osupstreaminstitute.jpg")}" title="Community Constributor Award" alt="Community Constributor Award">
+                    <% end_if %>
+                </h3>
             </div>
             <hr>
             <div class="span-4">
@@ -53,16 +62,6 @@
                                 $Organization.Name - $Duration
                             </li>
                         <% end_loop %>
-                    </ul>
-                </div>
-            <% end_if %>
-            <% if isUpstreamStudent %>
-                <div class="span-4">
-                    <strong>Courses Completed</strong>
-                </div>
-                <div class="span-6 last">
-                    <ul>
-                        <li>OpenStack Upstream Institute</li>
                     </ul>
                 </div>
             <% end_if %>
