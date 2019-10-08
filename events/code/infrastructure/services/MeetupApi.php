@@ -67,13 +67,13 @@ final class MeetupApi implements IExternalEventsApi
         $access_token = $this->loadRAWFromCache("access_token");
         if(!empty($access_token)) {
             if(Director::is_cli()){
-                fwrite(STDOUT, sprintf("got access token %s from cache", $access_token).PHP_EOL);
+                fwrite(STDOUT, sprintf("%s - [MeetupApi::getAccessToken] got access token %s from cache", gmdate('Y-m-d h:i:s \G\M\T', time()), $access_token).PHP_EOL);
             }
             return $access_token;
         }
 
         if(Director::is_cli()){
-            fwrite(STDOUT, "access token not present on cache".PHP_EOL);
+            fwrite(STDOUT, sprintf("%s - [MeetupApi::getAccessToken] access token not present on cache", gmdate('Y-m-d h:i:s \G\M\T', time()) ).PHP_EOL);
         }
 
         $response = $this->client->get(self::BaseAuthUrl."/oauth2/authorize" , [
@@ -157,7 +157,7 @@ final class MeetupApi implements IExternalEventsApi
         $access_token  = $json_response['oauth_token'];
         $lifetime = intval($json_response['expires_in']) * 0.9;
         if(Director::is_cli()){
-            fwrite(STDOUT, sprintf("saving access token %s to cache with lifetime %s", $access_token, $lifetime).PHP_EOL);
+            fwrite(STDOUT, sprintf("%s - [MeetupApi::getAccessToken] saving access token %s to cache with lifetime %s", gmdate('Y-m-d h:i:s \G\M\T', time()), $access_token, $lifetime).PHP_EOL);
         }
 
         $this->saveRAW2Cache('access_token', $access_token, $lifetime);
