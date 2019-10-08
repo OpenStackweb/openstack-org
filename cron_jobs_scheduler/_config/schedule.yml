@@ -54,7 +54,7 @@ jobs:
     enabled: 1
 
   - name: "RssEventsDigestTask"
-    cron_expression: "*/5 * * * *" # run every 5 minutes
+    cron_expression: "*/20 * * * *" # run every 20 minutes
     enabled: 1
 
   - name: "RssNewsDigestTask"
