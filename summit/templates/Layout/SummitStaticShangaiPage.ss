@@ -404,9 +404,15 @@
                         </div>
                     </div>
                     <div class="item" id="PTG Sponsor">
-                        <h3>PTG Sponsor</h3>
+                        <h3>PTG Headline Sponsor</h3>
                         <div class="col-lg-4 col-md-4 col-sm-4 centered-column">
                             <a rel="nofollow" href="https://www.redhat.com/openstack/?sc_cid=70160000000bEKkAAM&amp;offer_id=701600000006R7KAAU"><img alt="Red Hat, Inc._big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/Redhat-newlogo-lg.jpg" class="big-logo-company company-logo"></a>
+                        </div>
+                    </div>
+                    <div class="item" id="PTG Supporting Sponsor">
+                        <h3>PTG Supporting Sponsor</h3>
+                        <div class="col-lg-4 col-md-4 col-sm-4 centered-column">
+                          <a rel="nofollow" href="www.kunluncloud.com"><img alt="Troila - COPY_big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/troila-lg2.jpg" class="big-logo-company company-logo"></a>
                         </div>
                     </div>
                 </div>
