@@ -217,10 +217,10 @@
                     <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/99cloud-sm-logo.png")}" alt="99cloud logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("images/baremetal/ecosystem/RedHat-logo.png")}" alt="RedHat logo">
+                    <img class="ecosystem-logo" src="{$Top.CloudUrl("assets/Uploads/baremetal/red-hat-sm.png")}" alt="RedHat logo">
                     </div>
                     <div class="col-md-5th-1 col-sm-4">
-                    <img class="ecosystem-logo" src="{$Top.CloudUrl("assets/Uploads/0003supportedblack-orangehex.png")}" alt="RedHat logo">
+                    <img class="ecosystem-logo" src="{$Top.CloudUrl("assets/Uploads/0003supportedblack-orangehex.png")}" alt="Ubuntu logo">
                     </div>
 	            </div>
                 <div class="row info-block">
