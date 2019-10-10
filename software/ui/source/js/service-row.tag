@@ -26,7 +26,11 @@ require('./t.tag');
                     </button>
                 </div>
                 <div class="collapse capability-tags-box" each="{ cat, tags in grouped_capability_tags }" id="{ id }_{ cat }_tags">
-                    <a href="" class="capability-tag" style="color: {getCatColor(cat)}" onclick={ selectCapability } each="{ tag in tags }">{tag}</a>
+                    <div class="capability-tag-wrapper">
+                        <a href="" class="capability-tag" style="color: {getCatColor(cat)}" onclick={ selectCapability } each="{ tag in tags }">
+                            {tag}
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
