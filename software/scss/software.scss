@@ -711,33 +711,78 @@ p.service-section-title {
   font-size: 1.1em;
   line-height: 1.5em;
   color: #207ABA;
-  min-height: 3em; }
+  min-height: 3em;
+}
   
-  .project-table-code-name {
-  	font-weight: bold;
-  	text-transform: uppercase;
-    vertical-align: middle;
+.project-table-code-name {
+  font-weight: bold;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+.project-table-code-name span {
+      margin-top: -3px;
+      display: inline-block;
+      width: 25px;
+      height: 25px;
+      background-size: 110%;
+      margin-right: 10px;
   }
-  
-  .project-table-code-name span {
-	    margin-top: -3px;
-		display: inline-block;
-		width: 25px;
-		height: 25px;
-		background-size: 110%;
-		margin-right: 10px;
-	}
-  
-  .project-table-description {
-  	color: grey;	
-  	cursor: pointer;
-  }
-  
-	div.project-table-row {
-		border-top: 1px solid #EAEAEA;
-		min-height: 40px;
+
+.project-table-description {
+  color: grey;
+  cursor: pointer;
+}
+
+div.project-table-row {
+    border-top: 1px solid #EAEAEA;
+    min-height: 40px;
     padding-top: 10px;
-	}  
+}
+
+.component-capability-filter {
+  margin-top: 10px;
+}
+
+.component-capability-filter optgroup[label="starts-from"] {
+  color: red;
+}
+
+.component-capability-filter optgroup[label="technology"] {
+  color: green;
+}
+
+.component-capability-filter optgroup[label="components"] {
+  color: lightseagreen;
+}
+
+.component-capability-filter optgroup[label="upgrade"] {
+  color: black;
+}
+
+.component-capability-filter optgroup[label="features"] {
+  color: darkviolet;
+}
+
+.capability-tags-box {
+  margin: 5px 0;
+}
+
+.component-capability {
+  margin: 5px 5px 5px 0;
+  display: inline-block;
+}
+
+a.capability-tag {
+  color: grey;
+  margin-right: 5px;
+  padding-right: 5px;
+  border-right: 1px solid grey;
+}
+
+a.capability-tag:last-child {
+  border: none !important;
+}
 
 @media (max-width: 767px) {
 
