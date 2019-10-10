@@ -171,9 +171,14 @@ class SummitAppSchedPage_Controller extends SummitPage_Controller
      */
     public function ViewEvent(SS_HTTPRequest $request)
     {
-        $event              = $this->getSummitEntity($request);
+
+        $event = $this->getSummitEntity($request);
         if (is_null($event) || !$event->isPublished() || !ScheduleManager::allowToSee($event) || !$event->SummitID) {
             return $this->httpError(404, 'Sorry that event could not be found');
+        }
+        $title = $request->param('EVENT_TITLE');
+        if(empty($title)){
+            return $this->redirect($event->getLink('show'));
         }
 
         $main_schedule_page = SummitAppSchedPage::getBy($event->getSummit());
