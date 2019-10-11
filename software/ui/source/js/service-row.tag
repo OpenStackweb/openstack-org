@@ -19,6 +19,8 @@ require('./t.tag');
             <div class="col-md-12">
                 <a href="{coreServiceDetailsURL()}" >{ name }</a>
             </div>
+
+            <!--
             <div class="col-md-12 form-inline">
                 <div class="component-capability" each="{ cat, tags in grouped_capability_tags }" >
                     <button class="btn btn-default btn-xs capability-cat-button" type="button" style="background-color: {getCatColor(cat)}" data-toggle="collapse" data-target="#{ id }_{ cat }_tags">
@@ -33,6 +35,7 @@ require('./t.tag');
                     </div>
                 </div>
             </div>
+            -->
         </div>
         </div>
     </div>    

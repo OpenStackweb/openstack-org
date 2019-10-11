@@ -38,7 +38,15 @@ class OpenStackComponentCapabilityCategory extends DataObject implements IOpenSt
         return (int)$this->getField('ID');
     }
 
-
+    public function getColor() {
+        switch ($this->Name) {
+            case 'starts-from': return 'red'; //red
+            case 'technology': return 'green'; // green
+            case 'components': return 'lightseagreen'; // lightseagreen
+            case 'upgrades': return 'black'; // black
+            case 'features': return 'violet'; // violet
+        }
+    }
 
 
 

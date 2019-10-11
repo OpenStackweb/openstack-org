@@ -281,6 +281,21 @@
             </div>
         <% end_if %>
 
+        <% if $Component.CapabilityTags().Count %>
+            <div class="row project-capabilities box">
+                <div class="col-sm-12">
+                    <h4><%t Software.CAPABILITIES 'Capabilities' %></h4>
+
+                    <% loop $Component.getSortedCapabilityTags() %>
+                        <a href="$Top.Link(project-navigator)/{$Top.ParentCategory.Slug}#{$Name}" style="color:$getColor()">
+                            $Name
+                        </a>
+                        &nbsp;
+                    <% end_loop %>
+                </div>
+            </div>
+        <% end_if %>
+
         <div class="row">
             <div class="col-sm-12 project-details-footnotes">
                 <a href="https://opendev.org/osf/openstack-map/" target="_blank">Propose changes to this page</a>

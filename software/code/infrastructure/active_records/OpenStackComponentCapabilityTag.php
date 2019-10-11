@@ -39,7 +39,9 @@ class OpenStackComponentCapabilityTag extends DataObject implements IOpenStackCo
     }
 
 
-
+    public function getColor() {
+        return $this->Category()->getColor();
+    }
 
 
 }

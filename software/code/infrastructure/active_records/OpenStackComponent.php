@@ -356,4 +356,8 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
 
         return 'https://governance.openstack.org/tc/reference/projects/'.$slug.'.html';
     }
+
+    public function getSortedCapabilityTags() {
+        return $this->CapabilityTags()->sort(array('Category.Name' => 'ASC', 'Name' => 'ASC'));
+    }
 }
