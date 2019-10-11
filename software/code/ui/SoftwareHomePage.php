@@ -326,11 +326,11 @@ class SoftwareHomePage_Controller extends Page_Controller
     public function getComponentCapabilitiesJSON()
     {
         $capabilities = [];
-        $categories = OpenStackComponentCapabilityCategory::get()->filter('Enabled', 1);
+        $categories = OpenStackComponentCapabilityCategory::get()->filter('Enabled', 1)->sort('Name');
 
         foreach($categories as $cat) {
             $tmpcat = ['id' => $cat->ID, 'name' => $cat->Name, 'tags' => []];
-            foreach ($cat->Tags() as $tag) {
+            foreach ($cat->Tags()->sort('Name') as $tag) {
                 $tmpcat['tags'][] = ['id' => $tag->ID, 'name' => $tag->Name];
             }
 
