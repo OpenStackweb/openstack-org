@@ -239,19 +239,6 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
-                            <img src="{$Top.CloudUrl('assets/summits/shanghai/featured-speakers/Imad-Sousou-Intel.jpg')}" alt="Imad Sousou"
-                                 class="summit-user-image">
-                        </div>
-                        <div class="info">
-                            <div class="name">Imad Sousou</div>
-                            <div class="title">Intel</div>
-                            <div class="topic">Cross Community Collaboration</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
-                    <div class="summit-user-section">
-                        <div class="summit-user-image-box">
                             <img src="{$Top.CloudUrl('assets/Uploads/P60517-225612-001.jpg')}" alt="Yan Chen"
                                  class="summit-user-image">
                         </div>
@@ -352,7 +339,7 @@
                     <div class="item">
                         <h3>Premier Sponsors</h3>
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
-                            <a rel="nofollow" href="http://www.99cloud.net/"><img alt="99Cloud Inc._big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/logo-99cloud-lg2.jpg" class="big-logo-company company-logo"></a>
+                            <a rel="nofollow" href="http://www.99cloud.net/"><img alt="99Cloud Inc._big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/99cloud-new-lg.jpg" class="big-logo-company company-logo"></a>
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-2 centered-column">
                             <a rel="nofollow" href="https://www.cisco.com/"><img alt="Cisco_big_logo" src="https://object-storage-ca-ymq-1.vexxhost.net/swift/v1/6e4619c416ff4bd19e1c087f27a43eea/www-assets-prod/companies/main_logo/cisco-new-lg.png" class="big-logo-company company-logo"></a>
