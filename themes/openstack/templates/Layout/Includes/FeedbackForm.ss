@@ -7,7 +7,7 @@
         <input placeholder="Email Address" id="id_email" name="email" type="email" required class="feedback-input" size="is-large">
         </input>
           <!-- <button class="search-container-submit">Search</button> -->
-          <a href="#" class="feedback-btn" onclick="document.getElementById('e2ma_signup').submit();">
+          <a href="#" class="feedback-btn" onclick="document.getElementById('e2ma_signup').submit();" data-sitekey="6LeKvr0UAAAAAItxLgobGpatgngglauCXrZw2Yw4" data-callback='onSubmit'>
             <span>SUBMIT</span>
             <i class="fa fa-chevron-right"></i>
           </a>
