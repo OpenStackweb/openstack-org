@@ -285,12 +285,19 @@
             <div class="row project-capabilities box">
                 <div class="col-sm-12">
                     <h4><%t Software.CAPABILITIES 'Capabilities' %></h4>
-
-                    <% loop $Component.getSortedCapabilityTags() %>
-                        <a href="$Top.Link(project-navigator)/{$Top.ParentCategory.Slug}#{$Name}" style="color:$getColor()">
-                            $Name
-                        </a>
-                        &nbsp;
+                    <br>
+                    <% loop $Component.getSortedCapabilityTags().GroupedBy(CategoryName) %>
+                        <div>
+                            <strong>$CategoryName:</strong>
+                            <br/>
+                            <% loop $Children %>
+                                <a href="$Top.Link(project-navigator)/{$Top.ParentCategory.Slug}#{$Name}" style="color:$getColor()">
+                                    $Name
+                                </a>
+                                &nbsp;
+                            <% end_loop %>
+                        </div>
+                        <br/>
                     <% end_loop %>
                 </div>
             </div>
