@@ -271,7 +271,7 @@ PublisherSubscriberManager::getInstance()->subscribe(ISummitEntityEvent::Removed
     $event->EntityClassName = 'MySchedule';
     $event->EntityID        = $summit_event->ID;
     $event->Type            = 'DELETE';
-    $event->OwnerID         = $member->I;
+    $event->OwnerID         = $member->ID;
     $event->SummitID        = $summit_id;
     $event->Metadata        = $metadata;
     $event->write();
