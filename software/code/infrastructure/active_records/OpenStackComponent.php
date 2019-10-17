@@ -361,18 +361,5 @@ class OpenStackComponent extends DataObject implements IOpenStackComponent
         $tags = $this->CapabilityTags()->sort(array('Category.Name' => 'ASC', 'Name' => 'ASC'));
 
         return GroupedList::create($tags);
-        /*$grouped_tags = [];
-        $result = new ArrayList();
-
-        foreach ($tags as $tag) {
-            if (!$grouped_tags[$tag->Category()->Name]) $grouped_tags[$tag->Category()->Name] = [];
-            $grouped_tags[$tag->Category()->Name][] = new ArrayData(['tag' => $tag->Name]);
-        }
-
-        foreach($grouped_tags as $cat => $gtags) {
-            $result->push(new ArrayData(['cat' => $cat, 'tags' => new ArrayList($gtags)]));
-        }
-
-        return $result;*/
     }
 }
