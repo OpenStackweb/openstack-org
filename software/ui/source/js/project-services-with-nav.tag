@@ -3,7 +3,7 @@ require('./service-group.tag')
 <project-services-with-nav>
 
     <div if={ Object.keys(groups).length > 0 }>
-        <service-group category={activeCat.category} subcategories={activeCat.subcategories} tiles="{ false }" ></service-group>
+        <service-group api={api} category={activeCat.category} subcategories={activeCat.subcategories} tiles="{ false }" ></service-group>
     </div>
 
     <div if={ Object.keys(groups).length == 0 }> No Components for this search </div>
@@ -13,6 +13,7 @@ require('./service-group.tag')
         this.release_id    = opts.release_id;
         this.base_url      = opts.base_url;
         this.groups        = opts.groups;
+        this.api           = opts.api;
         this.activeCat     = this.groups[Object.keys(this.groups)[0]];
 
         var self = this;

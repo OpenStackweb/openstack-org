@@ -3,7 +3,7 @@ require('./service-row.tag')
 <governance-list>
 
     <div if={ Object.keys(components).length > 0 }>
-        <service-row each="{ components }" base_url="{ base_url }" release_id="{ release_id }" ></service-group>
+        <service-row each="{ components }" base_url="{ base_url }" release_id="{ release_id }" ></service-row>
     </div>
 
     <div if={ Object.keys(components).length == 0 }> No Components found </div>
