@@ -288,10 +288,24 @@
                     <br>
                     <% loop $Component.getSortedCapabilityTags().GroupedBy(CategoryName) %>
                         <div>
-                            <strong>$CategoryName:</strong>
+                            <% with $Children.First %>
+                                <strong
+                                        data-toggle="tooltip"
+                                        title="{$Category.Description}"
+                                        style="cursor: help"
+                                >
+                                    $Category.Name:
+                                </strong>
+                            <% end_with %>
+
                             <br/>
                             <% loop $Children %>
-                                <a href="$Top.Link(project-navigator)/{$Top.ParentCategory.Slug}#{$Name}" style="color:$getColor()">
+                                <a
+                                    href="$Top.Link(project-navigator)/{$Top.ParentCategory.Slug}#{$Name}"
+                                    style="color:$getColor()"
+                                    data-toggle="tooltip"
+                                    title="{$Description}"
+                                >
                                     $Name
                                 </a>
                                 &nbsp;
