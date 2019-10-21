@@ -300,14 +300,20 @@
 
                             <br/>
                             <% loop $Children %>
-                                <a
-                                    href="$Top.Link(project-navigator)/{$Top.ParentCategory.Slug}#{$Name}"
-                                    style="color:$getColor()"
-                                    data-toggle="tooltip"
-                                    title="{$Description}"
-                                >
-                                    $Name
-                                </a>
+                                <% if $Description %>
+                                    <a
+                                            href="$Top.Link(project-navigator)/{$Top.ParentCategory.Slug}#{$Name}"
+                                            style="color:$getColor()"
+                                            data-toggle="tooltip"
+                                            title="{$Description}"
+                                    >
+                                        $Name
+                                    </a>
+                                <% else %>
+                                    <a href="$Top.Link(project-navigator)/{$Top.ParentCategory.Slug}#{$Name}" style="color:$getColor()">
+                                        $Name
+                                    </a>
+                                <% end_if %>
                                 &nbsp;
                             <% end_loop %>
                         </div>
