@@ -96,6 +96,19 @@
                 <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
                     <div class="summit-user-section">
                         <div class="summit-user-image-box">
+                            <img src="{$Top.CloudUrl('assets/summits/shanghai/featured-speakers/MrXi.jpg')}" alt="Guohua Xi"
+                                 class="summit-user-image">
+                        </div>
+                        <div class="info">
+                            <div class="name">Guohua Xi</div>
+                            <div class="title">President of the China Communications Standards Association</div>
+                            <div class="topic">Keynote Opening Remarks</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-4 col-xs-4 featured">
+                    <div class="summit-user-section">
+                        <div class="summit-user-image-box">
                             <img src="{$Top.CloudUrl('assets/summits/shanghai/featured-speakers/DanChen-CNUnicom.jpg')}" alt="Dan Chen"
                                  class="summit-user-image">
                         </div>
