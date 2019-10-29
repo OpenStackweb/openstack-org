@@ -322,7 +322,8 @@ class EditSpeakerProfileForm extends SafeXSSForm {
             // Travel Preferences
             $current_items = $speaker->TravelPreferences()->column('Country');
             if(isset($data['CountriesToTravel'])) {
-                $countries = explode(',', $data['CountriesToTravel']);
+                //$countries = explode(',', $data['CountriesToTravel']);
+                $countries = $data['CountriesToTravel'];
                 foreach ($countries as $travel_country) {
                     if (!in_array($travel_country, $current_items)) {
                         $travel_pref = SpeakerTravelPreference::create(array(
