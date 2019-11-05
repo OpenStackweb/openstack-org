@@ -41,7 +41,7 @@ jobs:
     enabled: 1
 
   - name: "SummitEventSetAvgRateTask"
-    params: "summit_id=26"
+    params: "summit_id=27"
     cron_expression: "*/10 * * * *" # run every 10 minutes
     enabled: 1
 
