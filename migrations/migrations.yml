@@ -121,3 +121,4 @@ migrations:
   - NewsSentEmailMigration
   - CCAUpstreamStudentMigration
   - FixFileNamesMigration
+  - ShanghaiPresentationSlugMigration
