@@ -76,4 +76,6 @@
 <div class="row future-text-wrapper blue">
     <script type="text/javascript" src="https://signup.e2ma.net/tts_signup/1910468/dc3896463a1fcdd2f57f993be48d29f6/1771360/"></script><div id="load_check" class="signup_form_message" >This form needs Javascript to display, which your browser doesn't support. <a href="https://signup.e2ma.net/signup/1910468/1771360/"> Sign up here</a> instead </div><script type="text/javascript">signupFormObj.drawForm();</script>
     <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <img src="{$Top.CloudUrl('assets/summits/Vancouver2020/OSF-logo.png')}" class="osf-logo">
 </div>
