@@ -7,21 +7,6 @@
                         <div class="triangle">
                             <p>Complete!<p>
                         </div>
-                    </div>
-                    <h4>Berlin, Germany</h4>
-                    <p>Nov 13-15, 2018</p>
-                        <p>
-                            <a class="btn register-btn-lrg" href="/videos/summits/berlin-2018">See Highlights <i class="fa fa-arrow-right"></i></a>
-                        </p>
-
-                </div>
-            </div>
-            <div class="video-container second col-md-4 col-sm-12 col-xs-12">
-                <div class="item">
-                    <div class="video">
-                        <div class="triangle">
-                            <p>Complete!<p>
-                        </div>
                         <a href="https://www.flickr.com/photos/sgerner/22636377307" target="_blank" class="photo-credit" title="Steven Gerner">
                             <i class="fa fa-info-circle"></i>
                         </a>
@@ -38,14 +23,31 @@
 
                 </div>
             </div>
-            <div class="video-container last col-md-4 col-sm-12 col-xs-12">
+            <div class="video-container second col-md-4 col-sm-12 col-xs-12">
                 <div class="item">
                     <div class="video">
+                        <div class="triangle">
+                            <p>Complete!<p>
+                        </div>
                     </div>
                     <h4>Shanghai, China</h4>
                     <p>Nov 4-6, 2019</p>
                     <p>
-                        <a class="btn register-btn-lrg red eventbrite-register-link" href="/summit/shanghai-2019">
+                        <a class="btn register-btn-lrg" href="/videos/summits/shanghai-2019">
+                            See Highlights <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </p>
+
+                </div>
+            </div>
+            <div class="video-container last col-md-4 col-sm-12 col-xs-12">
+                <div class="item">
+                    <div class="video">
+                    </div>
+                    <h4>Vancouver, British Columbia</h4>
+                    <p>June 8-11, 2020</p>
+                    <p>
+                        <a class="btn register-btn-lrg red eventbrite-register-link" href="/summit/vancouver-2020">
                             Learn More <i class="fa fa-arrow-right"></i>
                         </a>
                     </p>
