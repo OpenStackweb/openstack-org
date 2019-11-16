@@ -61,6 +61,7 @@ class GeneralSummitLandingPage_Controller extends Page_Controller
 
     public function isMultiRegister() {
         $summitPage = $this->getCurrentSummitPage();
+        if(!$summitPage) return false;
         if ($summitPage->Summit()->ID == 27) return true;
         return false;
 
