@@ -4,7 +4,7 @@
     <div class="container">
         <div class="landingintro">
             <div class="row">
-                <div class="col-md-12 join-us-text-yellow">
+                <div class="col-md-12 join-us-text-black">
                     Don't miss OSF's next collaborative developer event
                 </div>
             </div>
