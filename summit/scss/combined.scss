@@ -1089,38 +1089,6 @@ footer {
 
 /*End Tokyo Specific Styles*/
 /*Austin Landing*/
-.tokyo-landing-wrapper.austin {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  padding: 70px 0;
-  background: url('#{$assets_images_base_url}/summits/overview/austin-bkgd-lrg.jpg') no-repeat right top;
-  background-size: cover; }
-.tokyo-landing-wrapper.barcelona {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  padding: 70px 0;
-  background: url('#{$static_images_base_url}/barcelona/barcelona-bkgd-lrg.jpg') no-repeat right top;
-  background-size: cover; 
-  overflow: scroll;}
-.tokyo-landing-wrapper.boston {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  padding: 70px 0;
-  background-image: url('#{$static_images_base_url}/boston/boston-bkgd.jpg');
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  max-height: 500px;
-  }
 
 .tokyo-landing-wrapper.shanghai {
   position: relative;
@@ -1130,7 +1098,7 @@ footer {
   padding: 70px 0;
   background-image: url('#{$static_images_base_url}/boston/boston-bkgd.jpg');
   background-size: cover;
-  background-position: center center;
+  background-position: center bottom;
   background-repeat: no-repeat;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -1325,14 +1293,15 @@ a.current-summit-link {
 .landingintro {
   margin-top: 3rem;
 }
-.join-us-text, .join-us-text-yellow {
-  color: #ffd602;
-  font-size: 1.5em;
+.join-us-text-black {
+  color: #000;
+  font-size: 1.7em;
   font-weight: bold;
 }
-
-.join-us-text-yellow {
-  color: #ffd602;
+.join-us-text-red a.join-us-text-red {
+  font-size: 2.4em;
+  color: #ed1944;
+  font-weight: 900;
 }
 
 a.sponsors_button, a:visited.sponsors_button  {
