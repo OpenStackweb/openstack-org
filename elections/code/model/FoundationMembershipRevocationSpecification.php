@@ -71,7 +71,7 @@ final class FoundationMembershipRevocationSpecification {
         $election_time_zone = $latest_election->getEntityTimeZone();
         $cut_date           = new DateTime('2014-01-13', $election_time_zone);
         $election_open_date = new DateTime($latest_election->getElectionsOpen(), $election_time_zone);
-
+        // @see https://chili.tipit.net/issues/7216#note-43
 		if($election_open_date <= $cut_date) { // until January 2014
 			$sql = <<<SQL
 					-- members that did not vote on any latest election
@@ -92,6 +92,10 @@ SQL;
 			return $sql;
 		}
 		else if($election_open_date > $cut_date){ // newer elections -- moving forward for all future elections after Jan. 2015
+
+		    // All members that joined on or before (180 days before the ElectionClose date of the earliest election
+            // that has occurred in the last 2 years) have voted in none of the last two elections
+            // (OUR PURGE LIST - GET AN EMAIL)
 			$early_election                   = $elections_repository->getEarliestElectionSince(2);
             $early_election_time_zone         = $latest_election->getEntityTimeZone();
             $early_election_local_close_date  = new DateTime($early_election->getElectionsClose(), $early_election_time_zone);

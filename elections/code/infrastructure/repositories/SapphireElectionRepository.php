@@ -27,10 +27,21 @@ final class SapphireElectionRepository extends SapphireRepository
 	 */
 	public function getLatestNElections($n)
 	{
-		$query = new QueryObject(new Election);
-		$query->addOrder(QueryOrder::desc('ElectionsOpen'));
-		list($list,$count) = $this->getAll($query,0,$n);
-		return $list;
+	    $sql = <<<SQL
+select * from Election
+WHERE ElectionsClose < UTC_DATE()
+ORDER BY ElectionsOpen DESC LIMIT 0,$n;
+SQL;
+
+        $result = DB::query($sql);
+
+        $elections = new ArrayList();
+        foreach($result as $rowArray) {
+            // concept: new Product($rowArray)
+            $elections->push(new $rowArray['ClassName']($rowArray));
+        }
+
+        return $elections;
 	}
 
 	/**
