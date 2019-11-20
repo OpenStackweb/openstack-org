@@ -223,6 +223,11 @@
                     <img class="ecosystem-logo" src="{$Top.CloudUrl("assets/Uploads/0003supportedblack-orangehex.png")}" alt="Ubuntu logo">
                     </div>
 	            </div>
+                <div class="row five-columns row06">
+                    <div class="col-md-5th-1 col-sm-4 col-md-offset-0 col-sm-offset-2">
+                    <img class="ecosystem-logo" src="{$Top.CloudUrl("assets/baremetal/dell-technologies.jpg")}" alt="Platform9 logo">
+                    </div>
+                </div>
                 <div class="row info-block">
                     <div class="col-sm-2"></div>
                     <div class="col-sm-8">
