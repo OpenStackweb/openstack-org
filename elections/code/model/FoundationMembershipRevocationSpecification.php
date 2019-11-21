@@ -104,7 +104,7 @@ SQL;
             $early_election_server_close_date = $early_election_local_close_date->setTimezone($serve_time_zone)->format("Y-m-d H:i:s");
 			$sql = <<<SQL
 					-- members that did not vote on any latest election
-			SELECT M.ID FROM Member M
+			SELECT DISTINCT M.ID FROM Member M
 			inner join Group_Members gm on gm.MemberID = M.ID
 			inner join `Group` g on g.ID = gm.GroupID and g.Code = 'foundation-members'
 			inner join LegalAgreement la on la.MemberID =  M.ID and la.LegalDocumentPageID = 422 and la.Created <= date_add('{$early_election_server_close_date}', interval -180 day)
