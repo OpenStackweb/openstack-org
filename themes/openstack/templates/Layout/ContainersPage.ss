@@ -291,12 +291,11 @@
         <div class="container">
             <div class="row row-center">
                 <div class="col-sm-7 col-center">
-                    <p><img src="assets/ads/Shangahi-Logo-with-dates.svg" class="promo-logo"></p>
-                    <h3>Everything you need to know about Containers and Open Infrastructure</h3>
+                    <h3>Learn everything you need to know about Containers and Open Infrastructure</h3>
                     <p>From container security to use cases combining Kubernetes or Kata Containers with other technologies, over 100 sessions share how organizations are achieving results with container technologies.  
                     </p>
                     <div class="nfv-summit-register-btn">
-                        <a href="/videos/summits/denver-2019/tracks/container-infrastructure" class="nfv-summit-btn" target="_blank">Watch the Session Videos&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a> <a href="/summit/shanghai-2019/" class="nfv-summit-btn" target="_blank">Join us in Shanghai&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
+                        <a href="/videos/search?search=Kubernetes (" class="nfv-summit-btn" target="_blank">Watch past Summit Videos&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
                     </div>
                 </div>
             </div>

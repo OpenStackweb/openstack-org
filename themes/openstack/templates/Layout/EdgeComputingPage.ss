@@ -445,12 +445,12 @@
         <div class="container">
             <div class="row row-center">
                 <div class="col-sm-7 col-center">
-                    <p><img src="assets/ads/Shangahi-Logo-with-dates.svg" class="promo-logo"></p>
+                    <!-- <p><img src="assets/ads/Shangahi-Logo-with-dates.svg" class="promo-logo"></p> -->
                     <h3>Everything you need to know about Open Infrastructure + Edge Computing</h3>
                     <p>Open infrastructure operators and developers shared architectures, technology requirements and the open source components required for edge computing.
                     </p>
                     <div class="nfv-summit-register-btn">
-                        <a href="/videos/summits/denver-2019/tracks/edge-infra" class="nfv-summit-btn" target="_blank">Watch the Session Videos&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a> <a href="/summit/shanghai-2019/" class="nfv-summit-btn" target="_blank">Join us in Shanghai&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
+                        <a href="/videos/search?search=edge" class="nfv-summit-btn" target="_blank">Watch past Summit Videos&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
                     </div>
                 </div>
             </div>

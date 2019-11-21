@@ -221,13 +221,13 @@
         <div class="container">
             <div class="row row-center">
                 <div class="col-sm-7 col-center">
-                    <p><img src="assets/ads/Shangahi-Logo-with-dates.svg" class="promo-logo"></p>
-                    <h3>Hear how the world’s leading telecoms are using Open Infrastructure for NFV and Edge Computing</h3>
+                    <!-- <p><img src="assets/ads/Shangahi-Logo-with-dates.svg" class="promo-logo"></p> -->
+                    <h3>Learn how the world’s leading telecoms are using Open Infrastructure for NFV and Edge Computing</h3>
                     <p>
                         Telecoms including AT&amp;T, Verizon, Orange, China Mobile and T-Mobile shared how they’re integrating open source technologies to power their infrastructure for use cases ranging from edge computing and NFV to 5G. 
                     </p>
                     <div class="nfv-summit-register-btn">
-                        <a href="/videos/summits/denver-2019/tracks/telecom-nfv" class="nfv-summit-btn" target="_blank">Watch the Session Videos&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a> <a href="/summit/shanghai-2019/" class="nfv-summit-btn" target="_blank">Join us in Shanghai&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
+                        <a href="/videos/search?search=telecom" class="nfv-summit-btn" target="_blank">Watch past Summit Videos&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
                     </div>
                 </div>
             </div>

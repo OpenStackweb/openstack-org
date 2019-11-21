@@ -1,5 +1,5 @@
     <!-- Marketplace and Events -->
-    <div class="banner">
+    <!-- <div class="banner">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-sm-6">
@@ -65,6 +65,4 @@
                 </div>
             </div>
         </div>
-        <!-- /.container -->
-    </div>
-    <!-- /.banner -->
+    </div> -->
