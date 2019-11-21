@@ -75,7 +75,7 @@ final class FoundationMembershipRevocationSpecification {
 		if($election_open_date <= $cut_date) { // until January 2014
 			$sql = <<<SQL
 					-- members that did not vote on any latest election
-			select M.ID from Member M
+			select DISTINCT M.ID from Member M
 			inner join Group_Members gm on gm.MemberID = M.ID
 			inner join `Group` g on g.ID = gm.GroupID and g.Code = 'foundation-members'
 			inner join LegalAgreement la on la.MemberID =  M.ID and la.LegalDocumentPageID = 422 and la.Created <= '2012-08-15 23:59:59'
@@ -88,6 +88,7 @@ final class FoundationMembershipRevocationSpecification {
 			and not exists(select id from FoundationMemberRevocationNotification rn where rn.RecipientID = M.ID and rn.Action = 'None') -- there is not any pending notification
 			and not exists(select id from FoundationMemberRevocationNotification rn where rn.RecipientID = M.ID and rn.Action = 'Renew' and rn.LastElectionID = {$latest_election_id}) -- there are not rewnews for the current election
  			limit {$offset},{$limit};
+
 SQL;
 			return $sql;
 		}
