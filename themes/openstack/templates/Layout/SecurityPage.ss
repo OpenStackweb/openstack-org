@@ -253,13 +253,12 @@
         <div class="container">
             <div class="row row-center">
                 <div class="col-sm-7 col-center">
-                    <p><img src="assets/ads/Shangahi-Logo-with-dates.svg" class="promo-logo"></p>
                     <h3>Learn more about OpenStack security</h3>
                         <p>
-                            Hear from enterprise and government users on how they secure their OpenStack clouds as well as from the upstream community on their security updates.
+                            Learn how enterprise and government users secure their OpenStack clouds, and hear security updates from the upstream community.
                         </p>
                     <div class="nfv-summit-register-btn">
-                        <a href="/videos/summits/denver-2019/tracks/security" class="nfv-summit-btn" target="_blank">Watch the Session Videos&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a> <a href="/summit/shanghai-2019/" class="nfv-summit-btn" target="_blank">Join us in Shanghai&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
+                        <a href="/videos/search?search=security" class="nfv-summit-btn" target="_blank">Watch past Summit Videos&nbsp;&nbsp;<i class="fa fa-chevron-right"></i></a>
                     </div>
                 </div>
             </div>

@@ -92,7 +92,7 @@
                 </div>
                 <div class="col-sm-6 appdev-build-row">
                     <p>
-                        Watch the presentation<br/>from our latest summit event.
+                        Watch the presentation<br/>from our Vancouver Summit 2015.
                     </p>
                     <a href="https://www.openstack.org/summit/vancouver-2015/summit-videos/presentation/build-and-operate-your-first-openstack-application" class="appdev-build-video">
                         <div class="play-button">
