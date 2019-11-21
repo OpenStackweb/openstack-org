@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2014 Openstack Foundation
+ * Copyright 2019 Openstack Foundation
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -11,15 +11,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
-/**
- * Interface IFoundationMemberRevocationNotificationFactory
- */
-interface IFoundationMemberRevocationNotificationFactory {
 
-	/**
-	 * @param Member            $foundation_member
-	 * @param IElection         $last_election
-	 * @return IFoundationMemberRevocationNotification
-	 */
-	public function build(Member $foundation_member, IElection $last_election);
-} 
+/**
+ * Class Election2018Migration
+ */
+final class Election2018Migration extends AbstractDBMigrationTask {
+
+    protected $title = "Election2018Migration";
+
+    protected $description = "Election2018Migration";
+
+    function doUp()
+    {
+
+        // insert 2019 voters data on 2018 election
+        $sql = <<<SQL
+insert into ElectionVote (VoterID, ElectionID)
+select VoterID,44595 from ElectionVote where ElectionID = 44596;
+SQL;
+
+        DB::query($sql);
+
+    }
+
+}
