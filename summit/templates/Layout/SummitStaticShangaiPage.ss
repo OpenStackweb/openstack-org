@@ -35,7 +35,7 @@
 
                 <a class="btn btn-default" href="/summit/shanghai-2019/sponsors/">Sponsor the Summit <i class="fal fa-arrow-right"></i></a>
 
-                <% include EventbriteRegisterLink Position='m',ExtraClass='btn-primary',Dropdown=1 %>
+                <!-- <% include EventbriteRegisterLink Position='m',ExtraClass='btn-primary',Dropdown=1 %> -->
 
             </div>
             <div class="col-md-12 session-box">

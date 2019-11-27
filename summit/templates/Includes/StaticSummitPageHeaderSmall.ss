@@ -26,6 +26,7 @@
                     <li class="link other-summits">
                         <a href="/summit" class="drop">Other Summits<i class="fa fa-caret-down"></i></a><i class="mobile-expand"></i>
                             <ul class="dropdown-menu dropdown-hover" role="menu" aria-labelledby="dropdownMenuEvents">
+                                <li><a href="/summit/vancouver-2020/">Vancouver 2020</a></li>
                                 <li><a href="/summit/shanghai-2019/">Shanghai 2019</a></li>
                                 <li><a href="/summit/denver-2019/">Denver 2019</a></li>
                                 <li><a href="/summit/berlin-2018/">Berlin 2018</a></li>
@@ -33,7 +34,7 @@
                             </ul>
                     </li>
                     <li class="link button-box">
-                        <% include EventbriteRegisterLink Position='h' %>
+                        <!-- <% include EventbriteRegisterLink Position='h' %> -->
                     </li>
                 </ul>
             </div>
