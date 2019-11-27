@@ -91,6 +91,11 @@ final class RevocationNotificationAction_Controller extends Page_Controller {
 					'UserName' => $notification->recipient()->Email));
 			}
 
+			if($notification->isActionTaken()){
+                $action = $notification->action() == 'Renew' ? 'Renewed': 'Resigned';
+                return $this->renderWith(array('RevocationNotificationActionPage_HasAction','Page'), ['Action' => $action]);
+            }
+
 			if(!$notification->isValid()){
 				return $this->renderWith(array('RevocationNotificationActionPage_error','Page'));
 			}
