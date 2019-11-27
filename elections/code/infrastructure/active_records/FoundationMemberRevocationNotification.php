@@ -210,4 +210,12 @@ final class FoundationMemberRevocationNotification
 		$action = $this->getField('Action');
 		return $action == 'None';
 	}
+
+    /**
+     * @return bool
+     */
+	public function isActionTaken():bool{
+        $action = $this->getField('Action');
+        return $action != 'None';
+    }
 }

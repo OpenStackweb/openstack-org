@@ -88,4 +88,9 @@ interface IFoundationMemberRevocationNotification extends IEntity {
 	 */
 	public function expirationDate();
 
+    /**
+     * @return bool
+     */
+    public function isActionTaken():bool;
+
 }
