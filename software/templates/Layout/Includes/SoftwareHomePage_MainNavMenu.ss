@@ -4,10 +4,10 @@
         <ul class="nav nav-tabs project-tabs">
             <li <% if Active == 'overview' %>class="active"<% end_if %>><a href="$Top.Link"><%t Software.OVERVIEW 'Overview' %></a></li>
             <% loop $Top.getParentComponentCategories() %>
-                <li <% if Active == $ID %>class="active"<% end_if %>><a href="$Top.Link('project-navigator')/{$Slug}">$Label</a></li>
+                <li <% if $Up.Active == $ID %>class="active"<% end_if %>><a href="$Top.Link('project-navigator')/{$Slug}">$Label</a></li>
             <% end_loop %>
             <% if $Top.HasAvailableSampleConfigTypes %>
-                <li <% if Active == 'sample-configs' %>class="active"<% end_if %>><a href="$Top.Link(sample-configs)"><%t Software.SAMPLE_CONFIGURATIONS 'Sample Configurations' %></a></li>
+                <li <% if $Active == 'sample-configs' %>class="active"<% end_if %>><a href="$Top.Link(sample-configs)"><%t Software.SAMPLE_CONFIGURATIONS 'Sample Configurations' %></a></li>
             <% end_if %>
 <%--
             <li <% if Active == 'governance' %>class="active"<% end_if %>><a href="$Top.Link(governance)"><%t Software.GOVERNANCE 'Governance' %></a></li>
