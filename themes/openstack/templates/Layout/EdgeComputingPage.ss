@@ -54,7 +54,6 @@
                   <div class="plane"><img src="{$Top.CloudUrl('assets/summits/logos/red-circle.png')}"></div>
                   <p>Add the <strong>Weekly Edge Computing Group Meetings</strong> to your calendar.</p>
                   <a href="{$Top.CloudUrl('assets/edge/OSF-Edge-Computing-Group-Weekly-Calls.ics')}" class="download-ml1"><em>WG Weekly Calls</em>&nbsp;<i class="fa fa-calendar"></i></a>
-                  <a href="{$Top.CloudUrl('assets/edge/OSF-Edge-WG-Use-Cases-Weekly-Calls.ics')}" class="download-ml2"><em>Use Cases Weekly Calls</em>&nbsp;<i class="fa fa-calendar"></i></a>
                 </div>
             </div>
         </div>
