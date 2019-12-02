@@ -22,6 +22,13 @@
     <% else %>
         <div class="container inner-software">
             <project-services base_url="{$Top.Link}" groups="{ components.subcategories }" category="{ components.category }" release_id="{ releaseId }" ></project-services>
+            <% if CategorySlug == 'deployment-tools' %>
+                <p class="deployment-tools-footnote">
+                    You can find 3rd-party distributions, appliances and
+                    deployment tools for OpenStack in the
+                    <a href="/marketplace"}>Marketplace</a>.
+                </p>
+            <% end_if %>
         </div>
     <% end_if %>
     <!-- End Page Content -->

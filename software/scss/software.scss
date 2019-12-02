@@ -47,21 +47,24 @@
 
 @media (max-width: 1200px) {
   .software-tab-wrapper ul.project-tabs li a {
-    padding: 15px 15px; } }
+    padding: 15px 15px; }
+}
 
 @media (max-width: 991px) {
   .software-tab-wrapper .container {
     width: 100%; }
   .software-tab-wrapper ul.project-tabs li a {
     padding: 15px 10px;
-    font-size: 12px; } }
+    font-size: 12px; }
+}
 
 @media (max-width: 840px) {
   .software-tab-wrapper .container {
     width: 100%; }
   .software-tab-wrapper ul.project-tabs li a {
     padding: 5px 5px;
-    font-size: 12px; } }
+    font-size: 12px; }
+}
 
 @media (max-width: 790px) {
   .software-tab-wrapper ul.project-tabs li {
@@ -74,7 +77,8 @@
     border-right: 1px solid transparent;
     border-top: 2px solid #248EC7;
     border-left: 1px solid transparent;
-    border-radius: 4px; } }
+    border-radius: 4px; }
+}
 
 .software-tab-dropdown, .software-category-dropdown {
   display: none; }
@@ -84,9 +88,13 @@
     display: block;
     width: 98%;
     margin: 0 1% 15px 1%;
-    padding-bottom: 15px; }
+    padding-bottom: 15px;
+  }
+
   .software-tab-dropdown .dropdown, .software-category-dropdown .dropdown {
-    width: 100%; }
+    width: 100%;
+  }
+
   .software-tab-dropdown .dropdown .projects-dropdown-btn, .software-category-dropdown .dropdown .category-dropdown-button {
     width: 100%;
     border-radius: 4px;
@@ -95,19 +103,32 @@
     border: 1px solid #D4DCE5;
     padding: 8px;
     color: #2A4E68;
-    text-transform: uppercase; }
+    text-transform: uppercase;
+  }
+
   .software-tab-dropdown .dropdown .projects-dropdown-btn i, .software-category-dropdown .dropdown i {
-    margin-left: 10px; }
+    margin-left: 10px;
+  }
+
   .software-tab-dropdown .dropdown ul.dropdown-menu, .software-category-dropdown .dropdown ul.dropdown-menu {
-    right: 0; }
+    right: 0;
+  }
+
   .software-tab-dropdown .dropdown ul.dropdown-menu > li > a, .software-category-dropdown .dropdown ul.dropdown-menu > li > a {
     padding: 5px 20px;
-    color: #2A4E68; }
+    color: #2A4E68;
+  }
+
   .software-tab-dropdown .dropdown ul.dropdown-menu > li.active > a, .software-category-dropdown .dropdown ul.dropdown-menu > li.active > a {
     background: #248EC7;
-    color: white; }
+    color: white;
+  }
+
   .software-tab-wrapper, .outer-project-subnav {
-    display: none; } }
+    display: none;
+  }
+
+}
 
 .software-main-wrapper {
   background: #edf2f7;
@@ -118,6 +139,11 @@
   background: white;
   border-radius: 4px;
   padding: 40px; }
+
+.deployment-tools-footnote {
+  margin-top: 60px;
+  text-align: center;
+}
 
 @media (max-width: 550px) {
   .software-main-wrapper .inner-software {
