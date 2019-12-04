@@ -17,6 +17,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-12">
+                    <p><strong>PLEASE NOTE - If you took the COA exam after October 1, 2019, you should <a href="https://coa.edu.mirantis.com/tool">go here to verify your certification</a>.  If you took it prior to October 1, 2019, proceed with the instructions below.</p>
                     <p>Individuals who become a Certified OpenStack Administrator represent the best OpenStack talent available and have the skills required to make an immediate impact.</p>
                     <p>This verification tool allows you to confirm the validity of a Certified OpenStack Administrator certification. Enter the last name and Certificate ID number in the boxes below.</p>
                     <p>Verification may take up to three business days after taking the exam to appear. If you believe these results are incorrect or to report a fraudulent certificate, please contact <a href="mailto:cert@openstack.org">cert@openstack.org</a>.</p>
