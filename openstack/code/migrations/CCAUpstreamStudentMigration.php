@@ -121,7 +121,7 @@ final class CCAUpstreamStudentMigration extends AbstractDBMigrationTask {
 
                     // AWARDS
 
-                    $contributorObj->Awards()->removeAll();
+                    //$contributorObj->Awards()->removeAll();
 
                     if ($contributor['awards']) {
                         $awardArray = explode(',', $contributor['awards']);

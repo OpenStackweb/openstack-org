@@ -1,0 +1,91 @@
+First Name,Last Name,Email ,Awards,Project
+Mehdi ,Abaakouk,sileht@redhat.com,The Duct Tape Medal [Boston 2017],OpenStack
+Miguel Angel ,Ajo,majopela@redhat.com,Bonsai Caretaker [Austin 2016],OpenStack
+Collette ,Alexander,colettealexander@gmail.com,Hero of the People [Barcelona 2016],OpenStack
+JJ,Ashgar,jjasghar@gmail.com,‘Does Anyone Actually Use This’ Trophy [Austin 2016],OpenStack
+Carol,Barrett,carol.l.barrett@intel.com ,The Nathanial Perez Prize for Behind-the-Scenes efforts [Austin 2016],OpenStack
+Kevin,Benton,kevin@benton.pub ,Bonsai Caretaker [Barcelona 2016],OpenStack
+Karim,Benzidane,k.benzidane@live.fr,The Don't Stop Believin' Cup [Boston 2017],OpenStack
+Christian,Berendt,berendt@betacloud-solutions.de ,The Duct Tape Medal [Austin 2016],OpenStack
+Marcela,Bonell,mbonell@techwo.org ,The Don't Stop Believin' Cup [Barcelona 2016],OpenStack
+Tony,Breeds,tony@bakeyournoodle.com ,The Nathanial Perez Prize for Behind-the-Scenes efforts [Austin 2016],OpenStack
+Gabriela ,Cervantes Tellez,gabriela.cervantes.tellez@intel.com,Bonsai Caretaker [Shanghai 2019],Kata Containers
+Ian,Choi,ianyrchoi@gmail.com,The 'When do you sleep?' Award [Boston 2017],OpenStack
+Vikram,Choudhary,vikram.choudhary@huawei.com,The Don’t Stop Believin’ Cup [Austin 2016],OpenStack
+Rob,Cresswell,robert.cresswell@outlook.com,The Most Reasonable Man in the World [Boston 2017],OpenStack
+Donny ,Davis,donny@fortnebula.com,‘When Do You Sleep’ Award [Shanghai 2019],"OpenStack, Zuul"
+Tristan,de Cacqueray,tdecacqu@redhat.com ,The Nathanial Perez Prize for Behind-the-Scenes efforts [Austin 2016],OpenStack
+Samuel ,de Medeiros Queiroz,samueldmq@gmail.com,Mentor of Mentors [Denver 2019],OpenStack
+Chris,Dent,cdent+os@anticdent.org ,Reality Check Prize [Barcelona 2016],OpenStack
+John,Dickinson,me@not.mn,The Key to Stack City [Denver 2019],OpenStack
+Tom,Fifield,tom@openstack.org,I Fight for the Users Cup [Boston 2017],OpenStack
+Matt,Fischer,matt@mattfischer.com ,‘Does Anyone Actually Use This’ Trophy [Austin 2016],OpenStack
+Eric,Fried,openstack@fried.cc ,Duct Tape Medal [Berlin 2018],OpenStack
+Salvador,Fuentes,"salvador.fuentes@intel.com,",Bonsai Caretaker [Shanghai 2019],Kata Containers
+Clay,Gerrard,clay.gerrard@gmail.com ,‘When Do You Sleep’ Award [Vancouver 2018],OpenStack
+Eoghan,Glynn,eglynn@redhat.com ,Reality Check Prize [Barcelona 2016],OpenStack
+Eduardo,Gonzalez,dabarren@gmail.com,Mentor of Mentors [Sydney 2017],OpenStack
+Rocky,Grober,rochelle.grober@huawei.com ,The Nathanial Perez Prize for Behind-the-Scenes efforts [Austin 2016],OpenStack
+Jens,Harbott,j.harbott@x-ion.de ,Bonsai Caretaker [Vancouver 2018],OpenStack
+Emmet,Hikory,persia@shipstone.jp,The Nathanial Perez Award for behind-the-scenes efforts [Boston 2017],OpenStack
+Melvin,Hillsman,mrhillsman@gmail.com,Key to Stack City [Boston 2017],OpenStack
+Ihar,Hrachyshka,ihrachys@redhat.com,Bonsai Caretaker [Austin 2016],OpenStack
+Nicole,Huesman,nicole.k.huesman@intel.com,Mentor of Mentors [Boston 2017],OpenStack
+Emily,Hugenbruch,ekhugenbruch@us.ibm.com ,Mentor of Mentors [Austin 2016],OpenStack
+James,Hunt,james.o.hunt@intel.com,The Giving Tree Award [Denver 2019],Kata Containers
+Andreas,Jaeger,aj@suse.com ,The Duct Tape Medal [Austin 2016]; Key to Stack City [Berlin 2018],OpenStack
+Matt,Jarvis,matt@mattjarvis.org.uk,‘Does Anyone Actually Use This’ Trophy [Austin 2016],OpenStack
+Ian ,Jolliffe,"Ian.Jolliffe@windriver.com,",Hero of the People [Denver 2019],StarlingX
+Slawek ,Kaplonski,skaplons@redhat.com ,Bug Czar Award [Denver 2019],OpenStack
+Matt,Kassawara,mkassawara@gmail.com,The “Does anyone actually use this?” trophy [Barcelona 2016],OpenStack
+Gary,Kevorkian,gkevorki@cisco.com ,Bonsai Caretaker [Sydney 2017],OpenStack
+Fatema,Khaled,fatemakhalid96@gmail.com ,The Don't Stop Believin' Cup [Berlin 2018],OpenStack
+Frank,Kloeker,eumel@arcor.de ,Open Infrastructure Shield [Berlin 2018],OpenStack
+Lingxian Kong,Kong,lingxiankong@catalyst.net.nz ,"""Does Anyone Actually Use This?"" Trophy [Berlin 2018]",OpenStack
+Pawel ,Koniszewski,pawel.koniszewski@gmail.com,The Don’t Stop Believin’ Cup [Austin 2016],OpenStack
+Jaivish,Kothari,janonymous.codevulture@gmail.com,The Don’t Stop Believin’ Cup [Austin 2016],OpenStack
+Julia,Kreger,juliaashleykreger@gmail.com ,I Fight for the Users Cup [Berlin 2018],OpenStack
+Swapnil,Kulkarni,me@coolsvap.net,Bonsai Caretaker [Berlin 2018],OpenStack
+Chandan,Kumar,chkumar@redhat.com,Don't Stop Believin' Cup [Sydney 2017],OpenStack
+Anita,Kuno,anteaya@anteaya.info,The Duct Tape Medal [Barcelona 2016],OpenStack
+Gene,Kuo,"gene@openstack.org,",The Giving Tree Award  [Sydney 2017],OpenStack
+Fupan,Li,lifupan@gmail.com,Duct Tape Medal [Shanghai 2019],Kata Containers
+Rico,Lin,rico.lin.guanyu@gmail.com,Hero of the People [Berlin 2018],OpenStack
+Kris,Lindgren,klindgren@godaddy.com,‘Does Anyone Actually Use This’ Trophy [Austin 2016],OpenStack
+Emilien,Macchi,emilien@redhat.com ,The Key to Stack City [Barcelona 2016],OpenStack
+Amy,Marrich,amy@demarco.com,Hero of the People [Boston 2017],OpenStack
+Victoria ,Martinez de la Cruz,vkmc@redhat.com ,Mentor of Mentors [Austin 2016]; Mentor of Mentors [Berlin 2018],OpenStack
+Vilobh ,Meshram,vilobhmm@yahoo-inc.com,Bonsai Caretaker [Austin 2016],OpenStack
+Belmiro,Moreira,Belmiro Moreira <moreira.belmiro.email.lists@gmail.com>,‘Does Anyone Actually Use This’ Trophy [Shanghai 2019],OpenStack
+Akihiro,Motoki,amotoki@gmail.com,The When-do-you-sleep? Trophy [Austin 2016],OpenStack
+Lisa Marie,Namphy,lnamphy@gmail.com,The ‘Does anyone actually use this?’ Trophy [Sydney 2017],OpenStack
+Mohammed,Naser,mnaser@vexxhost.com,Key to Stack City [Sydney 2017],OpenStack
+James Page,Page,james.page@canonical.com,The Giving Tree Award [Boston 2017],OpenStack
+James,Pennick,penick@verizonmedia.com,Key to Stack City [Shanghai 2019],OpenStack
+Allesandro,Pilotti,apilotti@cloudbasesolutions.com,Smiling in the Face of Adversity Cup [Boston 2017],OpenStack
+Jay,Pipes,jaypipes@gmail.com ,Key to Stack City [Vancouver 2018],OpenStack
+Gauvain ,Pocentek,gauvain.pocentek@objectif-libre.com,The Duct Tape Medal [Austin 2016],OpenStack
+Allison,Randal ,allison@lohutok.net,Open Infrastructure Shield [Denver 2019],OpenStack
+Matt ,Riedemann,mriedemos@gmail.com ,Smiling in the Face of Adversity Cup [Vancouver 2018],OpenStack
+Megan,Rosetti,rossetti.megan18@gmail.com ,The “Does anyone actually use this?” trophy [Barcelona 2016],OpenStack
+Tobias,Rydberg,tobias@citynetwork.se,Open Infrastructure Shield [Sydney 2017],OpenStack
+Atsushi,Sakai,sakaia@jp.fujitsu.com,The Duct Tape Medal [Austin 2016],OpenStack
+Alex,Settle,alexandra.settle@outlook.com,Bonsai Caretaker [Boston 2017],OpenStack
+Adam,Spiers,aspiers@suse.com ,Bonsai Caretaker [Vancouver 2018],OpenStack
+Victoria ,Stinner,vstinner@redhat.com,The Infinite Rebase Shield [Austin 2016],OpenStack
+Austin,Sun,austin.sun@intel.com,Mentor of Mentors [Shanghai 2019],StarlingX
+Marcoa,Sungaila,marcos@savant.com.br ,Mentor of Mentors [Vancouver 2018],OpenStack
+Shamail,Tahir,itzshamail@gmail.com,The Nathanial Perez Award for behind-the-scenes efforts [Barcelona 2016],OpenStack
+Stig,Telfer,stig@stackhpc.com ,The ‘Does anyone actually use this?’ Trophy [Denver 2019],OpenStack
+Kato,Tomoyuki,kato.tomoyuki@jp.fujitsu.com ,The Duct Tape Medal [Austin 2016],OpenStack
+Dean,Troyer,dtroyer@gmail.com ,The Simple-to-Implement Prize [Austin 2016],OpenStack
+Marco,Vedovati,mvedovati@suse.com,"Friends of Mike Rowe, Doers of the Dirty Jobs [Denver 2019]",Kata Containers
+Carlos ,Venegas Munoz,jose.carlos.venegas.munoz@intel.com,"Friends of Mike Rowe, Doers of the Dirty Jobs [Denver 2019]",Kata Containers
+Stacy,Veronneau,stacy.veronneau@gmail.com ,‘Does Anyone Actually Use This’ Trophy [Vancouver 2018],OpenStack
+Father,Vlasie,fv@spots.school ,The Don't Stop Believin' Cup [Vancouver 2018],OpenStack
+Mark,Voelker,mvoelker@vmware.com ,Open Infrastructure Shield [Vancouver 2018],OpenStack
+Ian,Weinand,iwienand@redhat.com,Smiling in the Face of Adversity Cup [Sydney 2017],OpenStack
+Melanie,Witt,melwittt@gmail.com ,The Giving Tree Award [Berlin 2018],OpenStack
+Jeffery,Zhang,jeffrey.zhang@99cloud.net,Mentor of Mentors [Sydney 2017],OpenStack
+Howard,Zhipeng,huangzhipeng@huawei.com,Open Infrastructure Shield [Sydney 2017],OpenStack
+Markus,Zoeller,mzoeller@linux.vnet.ibm.com,The Bug Czar Award [Austin 2016],OpenStack
