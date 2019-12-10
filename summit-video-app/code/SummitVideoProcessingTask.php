@@ -44,16 +44,24 @@ class SummitVideoProcessingTask extends CronTask
                 return;
             }
 
-            $summit = Summit::get_active();
-            $dateUTC = $summit->convertDateFromTimeZone2UTC(
-                SS_DateTime::now()->Rfc2822()
-            );
-            $dateUTCTimestamp = strtotime($dateUTC);
-            $maxAge = SummitVideoApp::config()->abandon_unprocessed_videos_after;
+            if (isset($_GET['force'])) {
+                $maxAge = 12*30*24*60*60; // 1 year
+            } else {
+                $maxAge = SummitVideoApp::config()->abandon_unprocessed_videos_after;
+            }
+
             $ids = [];
 
             foreach ($unprocessedVideos as $video) {
+                $summit = $video->Presentation()->Summit();
+                $dateUTC = $summit->convertDateFromTimeZone2UTC(
+                    SS_DateTime::now()->Rfc2822()
+                );
+                $dateUTCTimestamp = strtotime($dateUTC);
                 $age = $dateUTCTimestamp - strtotime($video->DateUploaded);
+
+                //echo $age.'-'.$video->Name.'-'.$video->ID.PHP_EOL;
+
                 if ($age > $maxAge) {
                     SS_Log::log("Video {$video->Title} has been unprocessed for a long time. ($age seconds). It should be deleted.",
                         SS_Log::WARN);
