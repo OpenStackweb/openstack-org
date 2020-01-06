@@ -126,7 +126,7 @@ class RemoteCloudsDirectoryPage_Controller extends MarketPlaceDirectoryPage_Cont
             $params = $this->request->allParams();
             $company_url_segment = Convert::raw2sql($params["Company"]);
             $slug = Convert::raw2sql($params["Slug"]);
-            $remote_cloud = $this->cloud_repository->getBySlugAndCompanySlug($slug, $company_url_segment);
+            $remote_cloud = $this->remote_cloud_repository->getBySlugAndCompanySlug($slug, $company_url_segment);
 
             if (!$remote_cloud || !$remote_cloud->Active) {
                 throw new NotFoundEntityException('', '');
