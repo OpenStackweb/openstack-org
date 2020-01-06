@@ -5,7 +5,6 @@
  */
 class SummitVideoProcessingTask extends CronTask
 {
-
     /**
      * @var
      */
@@ -27,12 +26,13 @@ class SummitVideoProcessingTask extends CronTask
         parent::__construct();
     }
 
-
     /**
      *
      */
     public function run()
     {
+        echo sprintf('%s - SummitVideoProcessingTask::run', date("Y-m-d H:i:s")).PHP_EOL;
+
         SapphireTransactionManager::getInstance()->transaction(function () {
             $unprocessedVideos = PresentationVideo::get()
                 ->filter([
@@ -41,7 +41,8 @@ class SummitVideoProcessingTask extends CronTask
                 ->limit(50);
 
             if (!$unprocessedVideos->exists()) {
-                return;
+                echo sprintf('%s - SummitVideoProcessingTask::run unprocessed videos not found', date("Y-m-d H:i:s")).PHP_EOL;
+                return 0;
             }
 
             if (isset($_GET['force'])) {
@@ -53,18 +54,20 @@ class SummitVideoProcessingTask extends CronTask
             $ids = [];
 
             foreach ($unprocessedVideos as $video) {
+
                 $summit = $video->Presentation()->Summit();
+
                 $dateUTC = $summit->convertDateFromTimeZone2UTC(
                     SS_DateTime::now()->Rfc2822()
                 );
+
                 $dateUTCTimestamp = strtotime($dateUTC);
                 $age = $dateUTCTimestamp - strtotime($video->DateUploaded);
 
-                //echo $age.'-'.$video->Name.'-'.$video->ID.PHP_EOL;
+                echo sprintf('%s - SummitVideoProcessingTask::run processing video id %s (%s) age %s from summit %s', date("Y-m-d H:i:s"), $video->ID , $video->Title,$age, $summit->ID ).PHP_EOL;
 
                 if ($age > $maxAge) {
-                    SS_Log::log("Video {$video->Title} has been unprocessed for a long time. ($age seconds). It should be deleted.",
-                        SS_Log::WARN);
+                    echo sprintf('%s - SummitVideoProcessingTask::run processing video id %s from summit %s has been unprocessed for a long time  (%s seconds). It should be deleted.', date("Y-m-d H:i:s"), $video->ID , $summit->ID, $age ).PHP_EOL;
                     continue;
                 }
 
@@ -81,8 +84,8 @@ class SummitVideoProcessingTask extends CronTask
                     $response = $this->api->getVideoStatusById($ids);
                 }
             } catch (\Exception $e) {
-                SS_Log::log("YouTube check for status failed" . $e->getMessage(), SS_Log::ERR);
-                return;
+                echo sprintf('%s - SummitVideoProcessingTask::run YouTube check for status failed %s', date("Y-m-d H:i:s"), $e->getMessage()).PHP_EOL;
+                return -1;
             }
 
             if (!$response) return false;
@@ -92,8 +95,8 @@ class SummitVideoProcessingTask extends CronTask
             $items = $data['items'];
 
             if (empty($items)) {
-                echo "No videos are marked as processing. Exiting.\n";
-                return;
+                echo sprintf('%s - SummitVideoProcessingTask::run No videos are marked as processing. Exiting.', date("Y-m-d H:i:s")).PHP_EOL;
+                return -1;
             }
 
             foreach ($items as $item) {
@@ -104,19 +107,22 @@ class SummitVideoProcessingTask extends CronTask
                     ])->first();
 
                     if (!$video) {
-                        SS_Log::log("Tried to update processing status for " . $item['id'] . " but no PresentationVideo with that YouTubeID was found.",
-                            SS_Log::WARN);
+                        echo sprintf('%s - SummitVideoProcessingTask::run Tried to update processing status for %s but no PresentationVideo with that YouTubeID was found.',
+                                date("Y-m-d H:i:s"),
+                                $item['id']).PHP_EOL;
                         continue;
                     }
 
                     $video->Processed = true;
                     $video->write();
+                    echo sprintf('%s - SummitVideoProcessingTask::run marking video %s as processed ', date("Y-m-d H:i:s"), $video->ID).PHP_EOL;
                     $this->videosUpdated++;
                 }
 
             }
 
-            echo "{$this->videosUpdated} videos updated.\n";
+            echo sprintf('%s - SummitVideoProcessingTask::run %s videos updated ', date("Y-m-d H:i:s"), $this->videosUpdated).PHP_EOL;
+            return 0;
         });
     }
 
