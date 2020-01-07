@@ -34,7 +34,7 @@
     "html2canvas": "^0.5.0-beta4",
     "jquery": "3.0.0",
     "jquery-datetimepicker": "^2.5.11",
-    "jquery-migrate": "^1.2.1",
+    "jquery-migrate": "^3.0.0",
     "jquery-ui-dist": "^1.12.1",
     "jquery-validation": "^1.17.0",
     "js-cookie": "^2.1.4",
